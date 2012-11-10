@@ -21,8 +21,8 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconSource: main.icon( "actions/go-previous-view", 48 );
-            onClicked: pageStack.pop()
+            iconSource: main.icon( "actions/go-home", 48 );
+            onClicked: main.navigationMenu.open()
         }
         ToolButton {
             id: searchButton

@@ -135,9 +135,20 @@ GeoSceneProperty* GeoSceneGroup::property( const QString& name )
         ( static_cast<GeoSceneGroup const *>( this )->property( name ));
 }
 
-QVector<GeoSceneProperty*> GeoSceneGroup::properties() const
+QVector<GeoSceneProperty*> GeoSceneGroup::properties()
 {
     return m_properties;
+}
+
+QVector<const GeoSceneProperty*> GeoSceneGroup::properties() const
+{
+    QVector<const GeoSceneProperty*> result;
+
+    foreach ( const GeoSceneProperty *property, m_properties ) {
+        result << property;
+    }
+
+    return result;
 }
 
 QString GeoSceneGroup::name() const

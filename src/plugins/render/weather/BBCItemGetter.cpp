@@ -49,6 +49,18 @@ void BBCItemGetter::setStationList( const QList<BBCStation>& items )
     ensureRunning();
 }
 
+BBCStation BBCItemGetter::station( const QString &id )
+{
+    QString const bbcIdTemplate = QString( "bbc%1" );
+    foreach( const BBCStation &station, m_items ) {
+        if ( bbcIdTemplate.arg( station.bbcId() ) == id ) {
+            return station;
+        }
+    }
+
+    return BBCStation();
+}
+
 bool BBCItemGetter::workAvailable()
 {
     return !m_scheduledBox.isNull()

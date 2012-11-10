@@ -35,6 +35,12 @@ class WeatherItemPrivate;
 class WeatherItem : public AbstractDataPluginItem
 {
     Q_OBJECT
+
+    Q_PROPERTY( QString station READ stationName WRITE setStationName NOTIFY stationNameChanged )
+    Q_PROPERTY( QString description READ description NOTIFY descriptionChanged )
+    Q_PROPERTY( QString image READ image NOTIFY imageChanged )
+    Q_PROPERTY( double temperature READ temperature NOTIFY temperatureChanged )
+
  public:
     WeatherItem( QObject *parent = 0 );
     ~WeatherItem();
@@ -82,9 +88,24 @@ class WeatherItem : public AbstractDataPluginItem
     void setSettings( const QHash<QString, QVariant>& settings );
 
     virtual QList<QAction*> actions();
-    
+
+    QString description() const;
+
+    QString image() const;
+
+    double temperature() const;
+
  public Q_SLOTS:
     void openBrowser();
+
+Q_SIGNALS:
+    void stationNameChanged();
+
+    void descriptionChanged();
+
+    void imageChanged();
+
+    void temperatureChanged();
 
  private:
     Q_DISABLE_COPY(WeatherItem)

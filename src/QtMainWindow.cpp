@@ -257,9 +257,17 @@ void MainWindow::createActions()
      connect( m_kineticScrollingAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleKineticScrolling( bool ) ) );
 
      m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
+     m_showAtmosphereAct->setVisible( false );
      m_showAtmosphereAct->setCheckable( true );
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
      connect(m_showAtmosphereAct, SIGNAL(triggered( bool )), this, SLOT( showAtmosphere( bool )));
+     foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+         if ( plugin->nameId() == "atmosphere" ) {
+             m_showAtmosphereAct->setVisible( plugin->enabled() );
+             connect( plugin, SIGNAL( enabledChanged( bool ) ),
+                      m_showAtmosphereAct, SLOT( setVisible( bool ) ) );
+         }
+     }
 
      m_controlTimeAct = new QAction( tr( "&Time Control..." ), this );
      m_controlTimeAct->setStatusTip( tr( "Configure Time Control " ) );
@@ -1021,7 +1029,7 @@ void MainWindow::createToolBar()
     SearchInputWidget *searchField = new SearchInputWidget( this );
     searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
     searchField->setMaximumWidth( 400 );
-    connect( searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
+    connect( searchField, SIGNAL( search( QString, SearchMode ) ), m_controlView, SLOT( search( QString, SearchMode ) ) );
     connect( searchField, SIGNAL( centerOn( const GeoDataCoordinates &) ),
              m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates & ) ) );
     connect( m_controlView, SIGNAL( searchFinished() ), searchField, SLOT( disableSearchAnimation() ) );
@@ -1113,7 +1121,18 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
                     settings.value("quitLongitude", 0.0).toDouble(),
                     settings.value("quitLatitude", 0.0).toDouble() );
                 if (! isDistanceOverwritten) {
-                    m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                    if ( settings.contains("quitRadius") ) {
+                        // provide a default value in case "quitRadius" contains garbage
+                        m_controlView->marbleWidget()->setRadius( settings.value("quitRadius", 1350).toInt() );
+                    }
+                    else if ( settings.contains("quitZoom") ) {
+                        // provide a default value in case "quitZoom" contains garbage
+                        m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                    }
+                    else {
+                        // set radius to 1350 (Atlas theme's "sharp" radius) if Marble starts with a clean config
+                        m_controlView->marbleWidget()->setRadius( 1350 );
+                    }
                 }
                 break;
             case Marble::ShowHomeLocation:
@@ -1296,11 +1315,11 @@ void MainWindow::writeSettings()
          // Get the 'quit' values from the widget and store them in the settings.
          qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
          qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
-         int    quitZoom = m_controlView->marbleWidget()->zoom();
+         const int quitRadius = m_controlView->marbleWidget()->radius();
 
          settings.setValue( "quitLongitude", quitLon );
          settings.setValue( "quitLatitude", quitLat );
-         settings.setValue( "quitZoom", quitZoom );
+         settings.setValue( "quitRadius", quitRadius );
 
          settings.setValue( "lockFloatItemPositions", m_lockFloatItemsAct->isChecked() );
          settings.setValue( "kineticScrolling", m_controlView->marbleWidget()->inputHandler()->kineticScrollingEnabled() );

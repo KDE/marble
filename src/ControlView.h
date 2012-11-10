@@ -108,7 +108,7 @@ class ControlView : public QWidget
       * Search for the given term and display the results in the search result lists,
       * which is brought to the front
       */
-    void search( const QString &searchTerm );
+    void search( const QString &searchTerm, SearchMode searchMode );
 
  signals:
      void showMapWizard();

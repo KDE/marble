@@ -15,13 +15,13 @@
 
 namespace Marble
 {
-class GeoSceneTexture;
+class GeoSceneTiled;
 class TileId;
 
 class ServerLayout
 {
 public:
-    ServerLayout( GeoSceneTexture *textureLayer );
+    ServerLayout( GeoSceneTiled *textureLayer );
     virtual ~ServerLayout();
 
     /**
@@ -45,13 +45,13 @@ protected:
     qint64 numTilesY( const Marble::TileId &tileId ) const;
 
 protected:
-    GeoSceneTexture *const m_textureLayer;
+    GeoSceneTiled *const m_textureLayer;
 };
 
 class MarbleServerLayout : public ServerLayout
 {
 public:
-    explicit MarbleServerLayout( GeoSceneTexture *textureLayer );
+    explicit MarbleServerLayout( GeoSceneTiled *textureLayer );
 
     /**
      * Completes the path of the @p prototypeUrl and returns it.
@@ -64,7 +64,7 @@ public:
 class OsmServerLayout : public ServerLayout
 {
 public:
-    explicit OsmServerLayout( GeoSceneTexture *textureLayer );
+    explicit OsmServerLayout( GeoSceneTiled *textureLayer );
 
     /**
      * Appends %zoomLevel/%x/%y.%suffix to the path of the @p prototypeUrl and returns
@@ -78,7 +78,7 @@ public:
 class CustomServerLayout : public ServerLayout
 {
 public:
-    CustomServerLayout( GeoSceneTexture *texture );
+    CustomServerLayout( GeoSceneTiled *texture );
 
     /**
      * Replaces escape sequences in the @p prototypeUrl by the values in @p id
@@ -94,7 +94,7 @@ public:
 class WmsServerLayout : public ServerLayout
 {
 public:
-    WmsServerLayout( GeoSceneTexture *texture );
+    WmsServerLayout( GeoSceneTiled *texture );
 
     /**
      * Adds WMS query items to the @p prototypeUrl and returns the result.
@@ -117,7 +117,7 @@ private:
 class QuadTreeServerLayout : public ServerLayout
 {
 public:
-    QuadTreeServerLayout( GeoSceneTexture* textureLayer );
+    QuadTreeServerLayout( GeoSceneTiled* textureLayer );
     virtual QUrl downloadUrl( const QUrl &, const Marble::TileId & ) const;
 
     virtual QString name() const;
@@ -129,7 +129,7 @@ private:
 class TmsServerLayout : public ServerLayout
 {
 public:
-    explicit TmsServerLayout( GeoSceneTexture *textureLayer );
+    explicit TmsServerLayout( GeoSceneTiled *textureLayer );
 
     /**
      * Appends %zoomLevel/%x/2^%zoomLevel-%y-1.%suffix to the path of the @p prototypeUrl and returns

@@ -223,6 +223,7 @@ set ( CMAKE_MODULE_PATH
      ${CMAKE_CURRENT_SOURCE_DIR}/src
      ${CMAKE_CURRENT_SOURCE_DIR}/cmake_find_rules
      ${CMAKE_CURRENT_SOURCE_DIR}/cmake_scripts
+     ${CMAKE_MODULE_PATH}
      )
 
 ####################################################
@@ -313,7 +314,6 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/writer
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/scene
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/graphicsview
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/graphicsview/screengraphicsitem
   ${CMAKE_CURRENT_BINARY_DIR}/src
   ${CMAKE_CURRENT_BINARY_DIR}/src/lib
 )

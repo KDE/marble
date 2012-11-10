@@ -67,13 +67,12 @@ class NavigationWidgetPrivate
     BranchFilterProxyModel  m_branchfilter;
     QSortFilterProxyModel  *m_sortproxy;
     QString                 m_searchTerm;
-    bool                    m_boundedSearch;
     MarbleRunnerManager    *m_runnerManager;
     GeoDataDocument        *m_document;
 };
 
 NavigationWidgetPrivate::NavigationWidgetPrivate()
-    : m_widget( 0 ), m_sortproxy( 0 ), m_boundedSearch( false ), m_runnerManager( 0 ),
+    : m_widget( 0 ), m_sortproxy( 0 ), m_runnerManager( 0 ),
       m_document( new GeoDataDocument ) {
     m_document->setDocumentRole( SearchResultDocument );
     m_document->setName( "Search Results" );
@@ -94,8 +93,6 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
 
     d->m_sortproxy = new QSortFilterProxyModel( this );
     d->m_navigationUi.locationListView->setModel( d->m_sortproxy );
-    connect( d->m_navigationUi.boundedCheckBox,  SIGNAL( toggled(bool) ),
-             this,                               SLOT( setBoundedSearchEnabled(bool) ) );
     connect( d->m_navigationUi.goHomeButton,     SIGNAL( clicked() ),
              this,                               SIGNAL( goHome() ) );
     connect( d->m_navigationUi.zoomSlider,       SIGNAL( valueChanged( int ) ),
@@ -173,29 +170,19 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
              this,        SLOT( selectTheme( QString ) ) );
 }
 
-void NavigationWidget::search(const QString &searchTerm)
+void NavigationWidget::search(const QString &searchTerm, SearchMode searchMode )
 {
     d->m_searchTerm = searchTerm;
-    d->m_navigationUi.locationListView->setVisible( !searchTerm.isEmpty() );
 
-    if ( !searchTerm.isEmpty() ) {
-        if ( d->m_boundedSearch ) {
-            d->m_runnerManager->findPlacemarks( d->m_searchTerm, d->m_widget->viewport()->viewLatLonAltBox() );
-        } else {
-            d->m_runnerManager->findPlacemarks( d->m_searchTerm );
-        }
+    if( searchTerm.isEmpty() ) {
+        clearSearch();
     } else {
-        d->m_widget->model()->placemarkSelectionModel()->clear();
-
-        // clear the local document
-        GeoDataTreeModel *treeModel = d->m_widget->model()->treeModel();
-        treeModel->removeDocument( d->m_document );
-        d->m_document->clear();
-        treeModel->addDocument( d->m_document );
-        d->m_branchfilter.setBranchIndex( treeModel, treeModel->index( d->m_document ) );
-        d->m_navigationUi.locationListView->setRootIndex(
-                    d->m_sortproxy->mapFromSource(
-                        d->m_branchfilter.mapFromSource( treeModel->index( d->m_document ) ) ) );
+        d->m_navigationUi.locationListView->setVisible( true );
+        //if ( searchMode == AreaSearch ) {
+        //    d->m_runnerManager->findPlacemarks( d->m_searchTerm, d->m_widget->viewport()->viewLatLonAltBox() );
+        //} else {
+            d->m_runnerManager->findPlacemarks( d->m_searchTerm );
+        //}
     }
 }
 
@@ -219,9 +206,25 @@ void NavigationWidget::changeZoom( int zoom )
     d->m_navigationUi.zoomSlider->blockSignals( false );
 }
 
-void NavigationWidget::setBoundedSearchEnabled( bool value )
+void NavigationWidget::clearSearch()
 {
-    d->m_boundedSearch = value;
+    d->m_searchTerm = QString();
+
+    d->m_navigationUi.locationListView->setVisible( false );
+    d->m_widget->model()->placemarkSelectionModel()->clear();
+
+    // clear the local document
+    GeoDataTreeModel *treeModel = d->m_widget->model()->treeModel();
+    treeModel->removeDocument( d->m_document );
+    d->m_document->clear();
+    treeModel->addDocument( d->m_document );
+    d->m_branchfilter.setBranchIndex( treeModel, treeModel->index( d->m_document ) );
+    d->m_navigationUi.locationListView->setRootIndex(
+            d->m_sortproxy->mapFromSource(
+                d->m_branchfilter.mapFromSource( treeModel->index( d->m_document ) ) ) );
+
+    // clear cached search results
+    d->m_runnerManager->findPlacemarks( QString() );
 }
 
 void NavigationWidgetPrivate::setSearchResult( QVector<GeoDataPlacemark*> locations )

@@ -42,7 +42,7 @@
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 #include "GeoScenePalette.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneXmlDataSource.h"
 
@@ -480,10 +480,10 @@ void MarbleModel::clearPersistentTileCache()
         // the name of the layer that has the same name as the theme ID
         QString themeID = d->m_mapTheme->head()->theme();
 
-        GeoSceneLayer *layer =
-            static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
-        GeoSceneTexture *texture =
-            static_cast<GeoSceneTexture*>( layer->groundDataset() );
+        const GeoSceneLayer *layer =
+            static_cast<const GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
+        const GeoSceneTiled *texture =
+            static_cast<const GeoSceneTiled*>( layer->groundDataset() );
 
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
@@ -543,12 +543,17 @@ const PluginManager* MarbleModel::pluginManager() const
     return &d->m_pluginManager;
 }
 
+PluginManager* MarbleModel::pluginManager()
+{
+    return &d->m_pluginManager;
+}
+
 const Planet *MarbleModel::planet() const
 {
     return d->m_planet;
 }
 
-void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
+void MarbleModel::addDownloadPolicies( const GeoSceneDocument *mapTheme )
 {
     if ( !mapTheme )
         return;
@@ -558,17 +563,17 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
     // As long as we don't have an Layer Management Class we just lookup
     // the name of the layer that has the same name as the theme ID
     const QString themeId = mapTheme->head()->theme();
-    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( mapTheme->map()->layer( themeId ));
+    const GeoSceneLayer * const layer = static_cast<const GeoSceneLayer*>( mapTheme->map()->layer( themeId ));
     if ( !layer )
         return;
 
-    GeoSceneTexture * const texture = static_cast<GeoSceneTexture*>( layer->groundDataset() );
+    const GeoSceneTiled * const texture = static_cast<const GeoSceneTiled*>( layer->groundDataset() );
     if ( !texture )
         return;
 
-    QList<DownloadPolicy *> policies = texture->downloadPolicies();
-    QList<DownloadPolicy *>::const_iterator pos = policies.constBegin();
-    QList<DownloadPolicy *>::const_iterator const end = policies.constEnd();
+    QList<const DownloadPolicy *> policies = texture->downloadPolicies();
+    QList<const DownloadPolicy *>::const_iterator pos = policies.constBegin();
+    QList<const DownloadPolicy *>::const_iterator const end = policies.constEnd();
     for (; pos != end; ++pos ) {
         d->m_downloadManager.addDownloadPolicy( **pos );
     }

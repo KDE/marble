@@ -255,7 +255,7 @@ void QtMarbleConfigDialog::showPluginAboutDialog( QString nameId )
             }
             QIcon pluginIcon = renderItem->icon();
             if ( !pluginIcon.isNull() ) {
-                aboutDialog->setPixmap( pluginIcon.pixmap( 64, 64 ) );
+                aboutDialog->setIcon( pluginIcon );
             }
             QString const copyrightText = tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
             aboutDialog->setAboutText( copyrightText.arg( renderItem->copyrightYears() ) );
@@ -614,7 +614,7 @@ int QtMarbleConfigDialog::volatileTileCacheLimit() const
 
 int QtMarbleConfigDialog::persistentTileCacheLimit() const
 {
-    return d->m_settings->value( "Cache/persistentTileCacheLimit", 300 ).toInt();
+    return d->m_settings->value( "Cache/persistentTileCacheLimit", 0 ).toInt(); // default to unlimited
 }
 
 QString QtMarbleConfigDialog::proxyUrl() const

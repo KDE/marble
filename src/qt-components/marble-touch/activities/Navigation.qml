@@ -22,8 +22,8 @@ Page {
 
     tools: ToolBarLayout {
         MarbleToolIcon {
-            iconSource: main.icon( "actions/go-previous-view", 48 );
-            onClicked: pageStack.pop()
+            iconSource: main.icon( "actions/go-home", 48 );
+            onClicked: main.showNavigation()
         }
         ToolButton {
             iconSource: main.icon( "actions/text-speak", 48 );

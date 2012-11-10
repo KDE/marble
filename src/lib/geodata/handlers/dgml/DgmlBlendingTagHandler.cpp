@@ -18,7 +18,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "MarbleDebug.h"
 
 namespace Marble
@@ -36,13 +36,13 @@ GeoNode* DgmlBlendingTagHandler::parse( GeoParser& parser ) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if ( !parentItem.represents( dgmlTag_Texture ))
+    if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile ))
         return 0;
 
     // Attribute name, default to ""
     const QString name = parser.attribute( dgmlAttr_name ).trimmed();
     mDebug() << "DgmlBlendingTagHandler::parse" << name;
-    parentItem.nodeAs<GeoSceneTexture>()->setBlending( name );
+    parentItem.nodeAs<GeoSceneTiled>()->setBlending( name );
     return 0;
 }
 

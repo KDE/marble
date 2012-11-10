@@ -96,7 +96,7 @@ class WikipediaItem : public AbstractDataPluginItem
 
     QPixmap m_thumbnail;
     QIcon m_wikiIcon;
-    QHash<QString, QVariant> m_settings;
+    bool m_showThumbnail;
 };
     
 }

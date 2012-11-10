@@ -26,7 +26,6 @@ OpenDesktopPlugin::OpenDesktopPlugin()
 
 OpenDesktopPlugin::OpenDesktopPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_isInitialized(false),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
@@ -38,12 +37,6 @@ void OpenDesktopPlugin::initialize()
 {
     setModel( new OpenDesktopModel( pluginManager(), this ) );
     setNumberOfItems( defaultItemsOnScreen ); // Setting the number of items on the screen.
-    m_isInitialized = true;
-}
-
-bool OpenDesktopPlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString OpenDesktopPlugin::name() const

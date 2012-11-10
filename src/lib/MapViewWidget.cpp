@@ -279,6 +279,7 @@ void MapViewWidget::Private::setCelestialBody( int comboIndex )
     bool foundMapTheme = false;
 
     QString currentMapThemeId = m_widget->mapThemeId();
+    QString oldPlanetId = m_widget->model()->planetId();
 
     int row = m_mapSortProxy.rowCount();
 
@@ -295,6 +296,10 @@ void MapViewWidget::Private::setCelestialBody( int comboIndex )
     if ( !foundMapTheme ) {
         QModelIndex index = m_mapSortProxy.index(0,1);
         emit q->mapThemeIdChanged( m_mapSortProxy.data( index ).toString() );
+    }
+
+    if( oldPlanetId != m_widget->model()->planetId() ) {
+        emit q->celestialBodyChanged( m_widget->model()->planetId() );
     }
 
     updateMapThemeView();

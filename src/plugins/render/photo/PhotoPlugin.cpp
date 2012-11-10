@@ -25,8 +25,7 @@ PhotoPlugin::PhotoPlugin()
 }
 
 PhotoPlugin::PhotoPlugin( const MarbleModel *marbleModel )
-    : AbstractDataPlugin( marbleModel ),
-      m_isInitialized( false )
+    : AbstractDataPlugin( marbleModel )
 {
     // Plugin is enabled by default
     setEnabled( true );
@@ -39,12 +38,6 @@ void PhotoPlugin::initialize()
     mDebug() << "PhotoPlugin: Initialize";
     setModel( new PhotoPluginModel( pluginManager(), this ) );
     setNumberOfItems( numberOfImagesPerFetch );
-    m_isInitialized = true;
-}
-
-bool PhotoPlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString PhotoPlugin::name() const

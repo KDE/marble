@@ -1,5 +1,4 @@
 set( layers_HDRS
-    AtmosphereLayer.h
     FogLayer.h
     FpsLayer.h
     GeometryLayer.h
@@ -12,7 +11,6 @@ set( layers_HDRS
 )
 
 set( layers_SRCS
-    layers/AtmosphereLayer.cpp
     layers/FogLayer.cpp
     layers/FpsLayer.cpp
     layers/GeometryLayer.cpp

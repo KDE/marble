@@ -1,9 +1,10 @@
-/**
+/*
  * This file is part of the Marble Virtual Globe.
  *
  * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>
  * Copyright 2007      Inge Wallin  <ingwa@kde.org>
  * Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jensmh@gmx.de>
+ * Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -23,7 +24,7 @@
 
 #include "StackedTileLoader.h"
 
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "MarbleDebug.h"
 #include "MergedLayerDecorator.h"
 #include "StackedTile.h"
@@ -32,7 +33,6 @@
 #include "MarbleGlobal.h"
 
 #include <QtCore/QCache>
-#include <QtCore/QDateTime>
 #include <QtCore/QHash>
 #include <QtCore/QReadWriteLock>
 #include <QtGui/QImage>
@@ -52,19 +52,20 @@ public:
     }
 
     void detectMaxTileLevel();
-    QVector<GeoSceneTexture const *>
+    QVector<GeoSceneTiled const *>
         findRelevantTextureLayers( TileId const & stackedTileId ) const;
 
     MergedLayerDecorator *const m_layerDecorator;
     int         m_maxTileLevel;
-    QVector<GeoSceneTexture const *> m_textureLayers;
+    QVector<GeoSceneTiled const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
     QReadWriteLock m_cacheLock;
 };
 
-StackedTileLoader::StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator )
-    : d( new StackedTileLoaderPrivate( mergedLayerDecorator ) )
+StackedTileLoader::StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent )
+    : QObject( parent ),
+      d( new StackedTileLoaderPrivate( mergedLayerDecorator ) )
 {
 }
 
@@ -74,7 +75,7 @@ StackedTileLoader::~StackedTileLoader()
     delete d;
 }
 
-void StackedTileLoader::setTextureLayers( QVector<GeoSceneTexture const *> & textureLayers )
+void StackedTileLoader::setTextureLayers( QVector<GeoSceneTiled const *> & textureLayers )
 {
     mDebug() << Q_FUNC_INFO;
 
@@ -103,7 +104,7 @@ int StackedTileLoader::tileRowCount( int level ) const
     return TileLoaderHelper::levelToRow( levelZeroRows, level );
 }
 
-GeoSceneTexture::Projection StackedTileLoader::tileProjection() const
+GeoSceneTiled::Projection StackedTileLoader::tileProjection() const
 {
     Q_ASSERT( !d->m_textureLayers.isEmpty() );
 
@@ -182,19 +183,22 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     // mDebug() << "load Tile from Disk: " << stackedTileId.toString();
 
-    QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
+    QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
 
     stackedTile = d->m_layerDecorator->loadTile( stackedTileId, textureLayers );
     stackedTile->setUsed( true );
 
     d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
     d->m_cacheLock.unlock();
+
+    emit tileLoaded( stackedTileId );
+
     return stackedTile;
 }
 
 void StackedTileLoader::downloadStackedTile( TileId const & stackedTileId )
 {
-    QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
+    QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
     d->m_layerDecorator->downloadStackedTile( stackedTileId, textureLayers, DownloadBulk );
 }
 
@@ -206,7 +210,7 @@ quint64 StackedTileLoader::volatileCacheLimit() const
 void StackedTileLoader::reloadVisibleTiles()
 {
     foreach ( const TileId &stackedTileId, d->m_tilesOnDisplay.keys() ) {
-        QVector<GeoSceneTexture const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
+        QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
         // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
         // but since "reload" or "refresh" seems to be a common action of a browser and it
         // allows for more connections (in our model), use "DownloadBrowse"
@@ -217,6 +221,11 @@ void StackedTileLoader::reloadVisibleTiles()
 int StackedTileLoader::maximumTileLevel() const
 {
     return d->m_maxTileLevel;
+}
+
+int StackedTileLoader::tileCount() const
+{
+    return d->m_tileCache.count() + d->m_tilesOnDisplay.count();
 }
 
 void StackedTileLoaderPrivate::detectMaxTileLevel()
@@ -253,6 +262,8 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
 
         delete displayedTile;
         displayedTile = 0;
+
+        emit tileLoaded( stackedTileId );
     } else {
         d->m_tileCache.remove( stackedTileId );
     }
@@ -260,21 +271,24 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
 
 void StackedTileLoader::clear()
 {
-    mDebug() << "StackedTileLoader::clear()";
+    mDebug() << Q_FUNC_INFO;
+
     qDeleteAll( d->m_tilesOnDisplay );
     d->m_tilesOnDisplay.clear();
     d->m_tileCache.clear(); // clear the tile cache in physical memory
+
+    emit cleared();
 }
 
 // 
-QVector<GeoSceneTexture const *>
+QVector<GeoSceneTiled const *>
 StackedTileLoaderPrivate::findRelevantTextureLayers( TileId const & stackedTileId ) const
 {
-    QVector<GeoSceneTexture const *> result;
-    QVector<GeoSceneTexture const *>::const_iterator pos = m_textureLayers.constBegin();
-    QVector<GeoSceneTexture const *>::const_iterator const end = m_textureLayers.constEnd();
+    QVector<GeoSceneTiled const *> result;
+    QVector<GeoSceneTiled const *>::const_iterator pos = m_textureLayers.constBegin();
+    QVector<GeoSceneTiled const *>::const_iterator const end = m_textureLayers.constEnd();
     for (; pos != end; ++pos ) {
-        GeoSceneTexture const * const candidate = dynamic_cast<GeoSceneTexture const *>( *pos );
+        GeoSceneTiled const * const candidate = dynamic_cast<GeoSceneTiled const *>( *pos );
         // check if layer is enabled. A layer is considered to be enabled if one of the
         // following conditions is true:
         // 1) it is the first layer
@@ -290,3 +304,5 @@ StackedTileLoaderPrivate::findRelevantTextureLayers( TileId const & stackedTileI
 }
 
 }
+
+#include "StackedTileLoader.moc"

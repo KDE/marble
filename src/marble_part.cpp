@@ -836,10 +836,18 @@ void MarblePart::setupActions()
     m_showAtmosphereAction = new KAction( this );
     actionCollection()->addAction( "show_atmosphere", m_showAtmosphereAction );
     m_showAtmosphereAction->setCheckable( true );
+    m_showAtmosphereAction->setVisible( false );
     m_showAtmosphereAction->setChecked( true );
     m_showAtmosphereAction->setText( i18nc( "Action for toggling the atmosphere", "&Atmosphere" ) );
     connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ),
              this,                   SLOT( setShowAtmosphere( bool ) ) );
+    foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+        if ( plugin->nameId() == "atmosphere" ) {
+            m_showAtmosphereAction->setVisible( plugin->enabled() );
+            connect( plugin, SIGNAL( enabledChanged( bool ) ),
+                     m_showAtmosphereAction, SLOT( setVisible( bool ) ) );
+        }
+    }
 
     // Action: Show Crosshairs option
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
@@ -1596,7 +1604,7 @@ void MarblePart::showPluginAboutDialog( const QString& nameId )
             }
             QIcon pluginIcon = renderItem->icon();
             if ( !pluginIcon.isNull() ) {
-                aboutDialog->setPixmap( pluginIcon.pixmap( 64, 64 ) );
+                aboutDialog->setIcon( pluginIcon );
             }
             QString const copyrightText = tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
             aboutDialog->setAboutText( copyrightText.arg( renderItem->copyrightYears() ) );
@@ -1796,7 +1804,7 @@ void MarblePart::setupToolBar( KToolBar *toolBar )
     m_searchField = new SearchInputWidget( toolBar );
     m_searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
     m_searchField->setMaximumWidth( 400 );
-    connect( m_searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
+    connect( m_searchField, SIGNAL( search( QString, SearchMode ) ), m_controlView, SLOT( search( QString, SearchMode ) ) );
     connect( m_searchField, SIGNAL( centerOn( const GeoDataCoordinates & ) ),
              m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates &) ) );
     connect( m_controlView, SIGNAL( searchFinished() ), m_searchField, SLOT( disableSearchAnimation() ) );

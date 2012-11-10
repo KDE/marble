@@ -38,7 +38,7 @@ WikipediaItem::WikipediaItem( QObject *parent )
       m_rank( 0.0 ),
       m_browser( 0 ),
       m_wikiIcon(),
-      m_settings()
+      m_showThumbnail( false )
 {
     m_action = new QAction( this );
     connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
@@ -188,8 +188,10 @@ void WikipediaItem::setIcon( const QIcon& icon )
 
 void WikipediaItem::setSettings( const QHash<QString, QVariant>& settings )
 {
-    if ( settings != m_settings ) {
-        m_settings = settings;
+    const bool showThumbnail = settings.value( "showThumbnails", false ).toBool();
+
+    if ( showThumbnail != m_showThumbnail ) {
+        m_showThumbnail = showThumbnail;
         updateSize();
         updateToolTip();
         update();
@@ -238,7 +240,7 @@ void WikipediaItem::updateToolTip()
 
 bool WikipediaItem::showThumbnail()
 {
-    return m_settings.value( "showThumbnails", false ).toBool() && !m_thumbnail.isNull();
+    return m_showThumbnail && !m_thumbnail.isNull();
 }
 
 #include "WikipediaItem.moc"

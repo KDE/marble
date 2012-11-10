@@ -35,11 +35,10 @@ WikipediaPlugin::WikipediaPlugin()
 
 WikipediaPlugin::WikipediaPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_isInitialized( false ),
-      m_icon(),
+      m_icon( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) ),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),
-      m_settings()
+      m_showThumbnails( true )
 {
     // Plugin is enabled by default
     setEnabled( true );
@@ -52,8 +51,6 @@ WikipediaPlugin::WikipediaPlugin( const MarbleModel *marbleModel )
              this, SLOT( checkNumberOfItems( quint32 ) ) );
      
     setSettings( QHash<QString,QVariant>() );
-
-    m_icon.addFile( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) );
 }
 
 WikipediaPlugin::~WikipediaPlugin()
@@ -68,12 +65,6 @@ void WikipediaPlugin::initialize()
     // Ensure that all settings get forwarded to the model.
     setModel( model );
     updateSettings();
-    m_isInitialized = true;
-}
-
-bool WikipediaPlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString WikipediaPlugin::name() const
@@ -144,24 +135,19 @@ QDialog *WikipediaPlugin::configDialog()
 
 QHash<QString,QVariant> WikipediaPlugin::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> settings;
+
+    settings.insert( "numberOfItems", numberOfItems() );
+    settings.insert( "showThumbnails", m_showThumbnails );
+
+    return settings;
 }
 
 void WikipediaPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    m_settings = settings;
+    setNumberOfItems( qMin<int>( maximumNumberOfItems, settings.value( "numberOfItems", 15 ).toInt() ) );
+    m_showThumbnails = settings.value( "showThumbnails", true ).toBool();
 
-    if ( !m_settings.contains( "numberOfItems" ) ) {
-        m_settings.insert( "numberOfItems", 15 );
-    }
-    else if ( m_settings.value( "numberOfItems" ).toUInt() > maximumNumberOfItems ) {
-        m_settings.insert( "numberOfItems", maximumNumberOfItems );
-    }
-    
-    if ( !m_settings.contains( "showThumbnails" ) ) {
-        m_settings.insert( "showThumbnails", true );
-    }
-    
     readSettings();
     emit settingsChanged( nameId() );
 }
@@ -170,44 +156,29 @@ void WikipediaPlugin::readSettings()
 {    
     if ( !m_configDialog )
         return;
-    
-    ui_configWidget->m_itemNumberSpinBox
-        ->setValue( (int) m_settings.value( "numberOfItems" ).toInt() );
-    
-    if ( m_settings.value( "showThumbnails" ).toBool() ) {
-        ui_configWidget->m_showThumbnailCheckBox->setCheckState( Qt::Checked );
-    }
-    else {
-        ui_configWidget->m_showThumbnailCheckBox->setCheckState( Qt::Unchecked );
-    }
+
+    ui_configWidget->m_itemNumberSpinBox->setValue( numberOfItems() );
+    ui_configWidget->m_showThumbnailCheckBox->setChecked( m_showThumbnails );
 }
 
 void WikipediaPlugin::writeSettings()
 {
     setNumberOfItems( ui_configWidget->m_itemNumberSpinBox->value() );
-    m_settings.insert( "numberOfItems", ui_configWidget->m_itemNumberSpinBox->value() );
-    if ( ui_configWidget->m_showThumbnailCheckBox->checkState() == Qt::Checked ) {
-        m_settings.insert( "showThumbnails", true );
-    }
-    else {
-        m_settings.insert( "showThumbnails", false );
-    }
+    m_showThumbnails = ui_configWidget->m_showThumbnailCheckBox->isChecked();
 
     emit settingsChanged( nameId() );
 }
 
 void WikipediaPlugin::updateSettings()
 {
-    setNumberOfItems( m_settings.value( "numberOfItems" ).toUInt() );
-    
     AbstractDataPluginModel *abstractModel = model();
     if ( abstractModel != 0 ) {
-        abstractModel->setItemSettings( m_settings );
+        abstractModel->setItemSettings( settings() );
     }
     
     WikipediaModel *wikipediaModel = qobject_cast<WikipediaModel*>( model() );
     if ( wikipediaModel ) {
-        wikipediaModel->setShowThumbnail( m_settings.value( "showThumbnails" ).toBool() );
+        wikipediaModel->setShowThumbnail( m_showThumbnails );
     }
 }
 
@@ -215,10 +186,7 @@ void WikipediaPlugin::checkNumberOfItems( quint32 number ) {
     if ( number > maximumNumberOfItems ) {
         setNumberOfItems( maximumNumberOfItems );
     }
-    else {
-        m_settings.insert( "numberOfItems", number );
-    }
-    
+
     readSettings();
 }
 

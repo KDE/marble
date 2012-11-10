@@ -41,15 +41,12 @@ WeatherPlugin::WeatherPlugin()
 
 WeatherPlugin::WeatherPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_isInitialized( false ),
       m_updateInterval( 0 ),
-      m_icon(),
+      m_icon( MarbleDirs::path( "weather/weather-clear.png" ) ),
       m_configDialog( 0 ),
       ui_configWidget( 0 ),
       m_settings()
 {
-    m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
-
     // Plugin is enabled by default
     setEnabled( true );
     // Plugin is not visible by default
@@ -76,13 +73,6 @@ void WeatherPlugin::initialize()
     setModel( model );
     updateSettings();
     updateItemSettings();
-
-    m_isInitialized = true;
-}
-
-bool WeatherPlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString WeatherPlugin::name() const

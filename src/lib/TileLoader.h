@@ -30,7 +30,7 @@ class QUrl;
 namespace Marble
 {
 class HttpDownloadManager;
-class GeoSceneTexture;
+class GeoSceneTiled;
 
 class TileLoader: public QObject
 {
@@ -45,16 +45,16 @@ class TileLoader: public QObject
 
     explicit TileLoader( HttpDownloadManager * const );
 
-    QImage loadTile( GeoSceneTexture const *textureLayer, TileId const & tileId, DownloadUsage const );
-    void downloadTile( GeoSceneTexture const *textureLayer, TileId const &tileId, DownloadUsage const );
+    QImage loadTile( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const );
+    void downloadTile( GeoSceneTiled const *textureLayer, TileId const &tileId, DownloadUsage const );
 
-    static int maximumTileLevel( GeoSceneTexture const & texture );
+    static int maximumTileLevel( GeoSceneTiled const & texture );
 
     /**
      * Returns whether the mandatory most basic tile level is fully available for
      * the given @p texture layer.
      */
-    static bool baseTilesAvailable( GeoSceneTexture const & texture );
+    static bool baseTilesAvailable( GeoSceneTiled const & texture );
 
     /**
       * Returns the status of the downloaded tile file:
@@ -62,7 +62,7 @@ class TileLoader: public QObject
       * - Expired when it has been downloaded, but is too old (as per .dgml expiration time)
       * - Available when it has been downloaded and is not expired
       */
-    static TileStatus tileStatus( GeoSceneTexture const *textureLayer, const TileId &tileId );
+    static TileStatus tileStatus( GeoSceneTiled const *textureLayer, const TileId &tileId );
 
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
@@ -74,9 +74,9 @@ class TileLoader: public QObject
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
  private:
-    static QString tileFileName( GeoSceneTexture const * textureLayer, TileId const & );
-    void triggerDownload( GeoSceneTexture const *textureLayer, TileId const &, DownloadUsage const );
-    QImage scaledLowerLevelTile( GeoSceneTexture const *textureLayer, TileId const & ) const;
+    static QString tileFileName( GeoSceneTiled const * textureLayer, TileId const & );
+    void triggerDownload( GeoSceneTiled const *textureLayer, TileId const &, DownloadUsage const );
+    QImage scaledLowerLevelTile( GeoSceneTiled const *textureLayer, TileId const & ) const;
 };
 
 }

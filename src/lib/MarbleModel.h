@@ -236,6 +236,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     const PluginManager* pluginManager() const;
 
+    PluginManager* pluginManager();
+
     /**
      * @brief Returns the planet object for the current map.
      * @return the planet object for the current map
@@ -323,7 +325,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
  private:
     Q_DISABLE_COPY( MarbleModel )
 
-    void addDownloadPolicies( GeoSceneDocument *mapTheme );
+    void addDownloadPolicies( const GeoSceneDocument *mapTheme );
     MarbleModelPrivate  * const d;
 };
 

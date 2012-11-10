@@ -17,8 +17,6 @@
 using namespace Marble;
 /* TRANSLATOR Marble::GpsdPositionProviderPlugin */
 
-using namespace std;
-
 QString GpsdPositionProviderPlugin::name() const
 {
     return tr( "Gpsd position provider Plugin" );

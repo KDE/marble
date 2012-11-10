@@ -8,13 +8,11 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
-// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>//
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>//
 
 #include "TextureLayer.h"
 
 #include <QtCore/qmath.h>
-#include <QtCore/QCache>
-#include <QtCore/QPointer>
 #include <QtCore/QTimer>
 
 #include "SphericalScanlineTextureMapper.h"
@@ -58,11 +56,10 @@ public:
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
-    QCache<TileId, const QPixmap> m_pixmapCache;
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
-    QVector<const GeoSceneTexture *> m_textures;
-    GeoSceneGroup *m_textureLayerSettings;
+    QVector<const GeoSceneTiled *> m_textures;
+    const GeoSceneGroup *m_textureLayerSettings;
 
     QString m_runtimeTrace;
     // For scheduling repaints
@@ -79,7 +76,6 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
     , m_loader( downloadManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
-    , m_pixmapCache( 100 )
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
     , m_textureLayerSettings( 0 )
@@ -100,9 +96,9 @@ void TextureLayer::Private::mapChanged()
 
 void TextureLayer::Private::updateTextureLayers()
 {
-    QVector<GeoSceneTexture const *> result;
+    QVector<GeoSceneTiled const *> result;
 
-    foreach ( const GeoSceneTexture *candidate, m_textures ) {
+    foreach ( const GeoSceneTiled *candidate, m_textures ) {
         bool enabled = true;
         if ( m_textureLayerSettings ) {
             const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
@@ -117,26 +113,18 @@ void TextureLayer::Private::updateTextureLayers()
     }
 
     if ( !result.isEmpty() ) {
-        const GeoSceneTexture *const firstTexture = result.at( 0 );
+        const GeoSceneTiled *const firstTexture = result.at( 0 );
         m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
     }
 
     m_tileLoader.setTextureLayers( result );
-    m_pixmapCache.clear();
 }
 
 void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )
 {
     if ( tileImage.isNull() )
         return; // keep tiles in cache to improve performance
-
-    const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
-    for ( int i = 0; i < 4; ++i ) {
-        const TileId id = TileId( i, stackedTileId.zoomLevel(), stackedTileId.x(), stackedTileId.y() );
-
-        m_pixmapCache.remove( id );
-    }
 
     m_tileLoader.updateTile( tileId, tileImage );
 
@@ -235,7 +223,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
     d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
-    d->m_runtimeTrace = QString("Cache: %1 ").arg(d->m_pixmapCache.size());
+    d->m_runtimeTrace = QString("Cache: %1 ").arg(d->m_tileLoader.tileCount());
     return true;
 }
 
@@ -296,8 +284,8 @@ void TextureLayer::setupTextureMapper( Projection projection )
             d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
             break;
         case Mercator:
-            if ( d->m_tileLoader.tileProjection() == GeoSceneTexture::Mercator ) {
-                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, &d->m_pixmapCache );
+            if ( d->m_tileLoader.tileProjection() == GeoSceneTiled::Mercator ) {
+                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader );
             } else {
                 d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
             }
@@ -325,7 +313,6 @@ void TextureLayer::reset()
     mDebug() << Q_FUNC_INFO;
 
     d->m_tileLoader.clear();
-    d->m_pixmapCache.clear();
     d->mapChanged();
 }
 
@@ -339,7 +326,7 @@ void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
     d->m_tileLoader.downloadStackedTile( stackedTileId );
 }
 
-void TextureLayer::setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
+void TextureLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
 {
     delete d->m_texcolorizer;
     d->m_texcolorizer = 0;
@@ -372,7 +359,7 @@ QSize TextureLayer::tileSize() const
     return d->m_tileLoader.tileSize();
 }
 
-GeoSceneTexture::Projection TextureLayer::tileProjection() const
+GeoSceneTiled::Projection TextureLayer::tileProjection() const
 {
     return d->m_tileLoader.tileProjection();
 }

@@ -56,6 +56,19 @@ void GeoNamesWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
     emit downloadDescriptionFileRequested( geonamesUrl );
 }
 
+void GeoNamesWeatherService::getItem( const QString &id, const MarbleModel *model )
+{
+    if( model->planetId() != "earth" ) {
+        return;
+    }
+
+    if ( id.startsWith("geonames_" ) ) {
+        QUrl geonamesUrl( "http://ws.geonames.org/weatherIcaoJSON" );
+        geonamesUrl.addQueryItem( "ICAO", id.mid( 9 ) );
+        emit downloadDescriptionFileRequested( geonamesUrl );
+    }
+}
+
 void GeoNamesWeatherService::parseFile( const QByteArray& file )
 {
     QScriptValue data;
@@ -65,90 +78,102 @@ void GeoNamesWeatherService::parseFile( const QByteArray& file )
     data = engine.evaluate( "(" + QString( file ) + ")" );
 
     // Parse if any result exists
+    QList<AbstractDataPluginItem*> items;
     if ( data.property( "weatherObservations" ).isArray() ) {
         QScriptValueIterator iterator( data.property( "weatherObservations" ) );
-        QStringList favorite = favoriteItems();
-
         // Add items to the list
         while ( iterator.hasNext() ) {
             iterator.next();
-
-            QString condition = iterator.value().property( "weatherCondition" ).toString();
-            QString clouds = iterator.value().property( "clouds" ).toString();
-            int windDirection = iterator.value().property( "windDirection" ).toInteger();
-            QString id = iterator.value().property( "ICAO" ).toString();
-            int temperature = iterator.value().property( "temperature" ).toInteger();
-            int windSpeed = iterator.value().property( "windSpeed" ).toInteger();
-            int humidity = iterator.value().property( "humidity" ).toInteger();
-            double pressure = iterator.value().property( "seaLevelPressure" ).toNumber();
-            QString name = iterator.value().property( "stationName" ).toString();
-            QDateTime date = QDateTime::fromString(
-                        iterator.value().property( "datetime" ).toString(), "yyyy-MM-dd hh:mm:ss" );
-            double longitude = iterator.value().property( "lng" ).toNumber();
-            double latitude = iterator.value().property( "lat" ).toNumber();
-
-            if ( !id.isEmpty() ) {
-                WeatherData data;
-
-                // Weather condition
-                if ( clouds != "n/a" && condition != "n/a" ) {
-                    if ( dayConditions.contains( condition ) ) {
-                        data.setCondition( dayConditions[condition] );
-                    } else {
-                        mDebug() << "UNHANDLED GEONAMES WEATHER CONDITION, PLEASE REPORT: " << condition;
-                    }
-                } else {
-                    if ( dayConditions.contains( clouds ) ) {
-                        data.setCondition( dayConditions[clouds] );
-                    } else {
-                        mDebug() << "UNHANDLED GEONAMES CLOUDS CONDITION, PLEASE REPORT: " << clouds;
-                    }
-                }
-
-                // Wind direction. Finds the closest direction from windDirections array.
-                if ( windDirection >= 0 ) {
-                    double tickSpacing = 360.0 / windDirections.size();
-                    data.setWindDirection( windDirections[int(( windDirection / tickSpacing ) + 0.5)
-                                           % windDirections.size()] );
-                }
-
-                // Wind speed
-                if ( windSpeed != 0 ) {
-                    data.setWindSpeed( windSpeed, WeatherData::knots );
-                }
-
-                // Temperature
-                data.setTemperature( temperature, WeatherData::Celsius );
-
-                // Humidity
-                data.setHumidity( humidity );
-
-                // Pressure
-                if ( pressure != 0.0 ) {
-                    data.setPressure( pressure, WeatherData::HectoPascal );
-                }
-
-                // Date
-                data.setDataDate( date.date() );
-                data.setPublishingTime( date );
-
-                // ID
-                id = "geonames_" + id;
-
-                if ( !isFavoriteItemsOnly() || favorite.contains( id ) ) {
-                    GeoDataCoordinates coordinates( longitude, latitude, 0.0, GeoDataCoordinates::Degree );
-                    GeoNamesWeatherItem *item = new GeoNamesWeatherItem( this );
-                    item->setId( id );
-                    item->setCoordinate( coordinates );
-                    item->setTarget( "earth" );
-                    item->setPriority( 0 );
-                    item->setStationName( name );
-                    item->setCurrentWeather( data );
-
-                    emit createdItem( item );
-                }
+            AbstractDataPluginItem* item = parse( iterator.value() );
+            if ( item ) {
+                items << item;
             }
         }
+    } else {
+        AbstractDataPluginItem* item = parse( data.property( "weatherObservation" ) );
+        if ( item ) {
+            items << item;
+        }
+    }
+
+    emit createdItems( items );
+}
+
+AbstractDataPluginItem *GeoNamesWeatherService::parse( const QScriptValue &value )
+{
+    QString condition = value.property( "weatherCondition" ).toString();
+    QString clouds = value.property( "clouds" ).toString();
+    int windDirection = value.property( "windDirection" ).toInteger();
+    QString id = value.property( "ICAO" ).toString();
+    int temperature = value.property( "temperature" ).toInteger();
+    int windSpeed = value.property( "windSpeed" ).toInteger();
+    int humidity = value.property( "humidity" ).toInteger();
+    double pressure = value.property( "seaLevelPressure" ).toNumber();
+    QString name = value.property( "stationName" ).toString();
+    QDateTime date = QDateTime::fromString(
+                value.property( "datetime" ).toString(), "yyyy-MM-dd hh:mm:ss" );
+    double longitude = value.property( "lng" ).toNumber();
+    double latitude = value.property( "lat" ).toNumber();
+
+    if ( !id.isEmpty() ) {
+        WeatherData data;
+
+        // Weather condition
+        if ( clouds != "n/a" && condition != "n/a" ) {
+            if ( dayConditions.contains( condition ) ) {
+                data.setCondition( dayConditions[condition] );
+            } else {
+                mDebug() << "UNHANDLED GEONAMES WEATHER CONDITION, PLEASE REPORT: " << condition;
+            }
+        } else {
+            if ( dayConditions.contains( clouds ) ) {
+                data.setCondition( dayConditions[clouds] );
+            } else {
+                mDebug() << "UNHANDLED GEONAMES CLOUDS CONDITION, PLEASE REPORT: " << clouds;
+            }
+        }
+
+        // Wind direction. Finds the closest direction from windDirections array.
+        if ( windDirection >= 0 ) {
+            double tickSpacing = 360.0 / windDirections.size();
+            data.setWindDirection( windDirections[int(( windDirection / tickSpacing ) + 0.5)
+                                   % windDirections.size()] );
+        }
+
+        // Wind speed
+        if ( windSpeed != 0 ) {
+            data.setWindSpeed( windSpeed, WeatherData::knots );
+        }
+
+        // Temperature
+        data.setTemperature( temperature, WeatherData::Celsius );
+
+        // Humidity
+        data.setHumidity( humidity );
+
+        // Pressure
+        if ( pressure != 0.0 ) {
+            data.setPressure( pressure, WeatherData::HectoPascal );
+        }
+
+        // Date
+        data.setDataDate( date.date() );
+        data.setPublishingTime( date );
+
+        // ID
+        id = "geonames_" + id;
+
+        GeoDataCoordinates coordinates( longitude, latitude, 0.0, GeoDataCoordinates::Degree );
+        GeoNamesWeatherItem *item = new GeoNamesWeatherItem( this );
+        item->setId( id );
+        item->setCoordinate( coordinates );
+        item->setTarget( "earth" );
+        item->setPriority( 0 );
+        item->setStationName( name );
+        item->setCurrentWeather( data );
+        return item;
+    } else {
+        return 0;
     }
 }
 

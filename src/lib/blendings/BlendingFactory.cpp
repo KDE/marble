@@ -15,9 +15,10 @@
 
 #include "BlendingFactory.h"
 
+#include <QtCore/QDebug>
+
 #include "blendings/SunLightBlending.h"
 #include "BlendingAlgorithms.h"
-#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -29,9 +30,12 @@ void BlendingFactory::setLevelZeroLayout( int levelZeroColumns, int levelZeroRow
 
 Blending const * BlendingFactory::findBlending( QString const & name ) const
 {
+    if ( name.isEmpty() )
+        return 0;
+
     Blending const * const result = m_blendings.value( name, 0 );
     if ( !result )
-        mDebug() << "BlendingFactory::findBlending: unknown blending:" << name;
+        qWarning() << "Unknown blending" << name << "specified in .dgml file. Please fix the .dgml file.";
     return result;
 }
 
