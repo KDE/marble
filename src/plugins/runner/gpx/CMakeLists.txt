@@ -37,9 +37,11 @@ set( gpx_SRCS GpxParser.cpp GpxPlugin.cpp GpxRunner.cpp )
 marble_add_plugin( GpxPlugin ${gpx_SRCS}  ${gpx_handlers_SRCS} )
 
 if(QTONLY)
-  if(not WIN32 and not APPLE)
+  if(WIN32 OR APPLE)
+    # nothing to do
+  else(WIN32 OR APPLE)
     install(FILES marble_gpx.desktop DESTINATION ${APPS_INSTALL_DIR})
-  endif(not WIN32 and not APPLE)
+  endif(WIN32 OR APPLE)
 else(QTONLY)
   install(PROGRAMS marble_gpx.desktop DESTINATION ${APPS_INSTALL_DIR})
   install(FILES marble_part_gpx.desktop DESTINATION ${SERVICES_INSTALL_DIR})

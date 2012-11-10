@@ -13,9 +13,11 @@ set( kml_SRCS KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp )
 marble_add_plugin( KmlPlugin ${kml_SRCS} )
 
 if(QTONLY)
-  if(not WIN32 and not APPLE)
+  if(WIN32 OR APPLE)
+    # nothing to do
+  else(WIN32 OR APPLE)
     install(FILES marble_kml.desktop DESTINATION ${APPS_INSTALL_DIR})
-  endif(not WIN32 and not APPLE)
+  endif(WIN32 OR APPLE)
 else(QTONLY)
   install(PROGRAMS marble_kml.desktop DESTINATION ${APPS_INSTALL_DIR})
   install(FILES marble_part_kml.desktop DESTINATION ${SERVICES_INSTALL_DIR})
