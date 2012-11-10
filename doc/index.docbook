@@ -38,18 +38,19 @@
 		 </copyright>
 		 <copyright>
 			 <year>2010</year>
+                         <year>2012</year>
 			 <holder>Dennis Nienhüser</holder>
 		 </copyright>
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2010-11-13</date>
-		 <releaseinfo>1.0</releaseinfo>
+		 <date>2012-11-10</date>
+		 <releaseinfo>1.4</releaseinfo>
 
 		 <abstract>
 			<para>&marble; is a geographical atlas and a virtual globe 
-                which lets you quickly explore other places on our home planet.
-                You can use &marble; to look up places, to easily create maps, 
+                which lets you quickly explore places on our home planet.
+                You can use &marble; to look up addresses, to easily create maps,
                 measure distances and to retrieve detail information about locations that you have just heard about in the news or on the Internet. The user interface is clean, simple and easy to use.
 			</para>
 		 </abstract>
@@ -83,8 +84,8 @@
              views: <guilabel>Atlas</guilabel>, <guilabel>OpenStreetMap</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Moon</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>.
          </para>
          <para>
-             &marble; comes with a small database of more than 12,000 locations (cities, mountains, volcanoes) which can be searched for and which are partially integrated with 
-             the popular Internet encyclopedia Wikipedia. Additionally you can measure distances using &marble; between multiple measure points which can be set freely.
+             &marble; comes with a small database of more than 12,000 locations (cities, mountains, volcanoes) which can be searched for and which are integrated with
+             Wikipedia. Additionally you can measure distances using &marble; between multiple measure points which can be set freely.
          </para>
          <para>
              &marble; is free software and licensed under the &GNU; Lesser General Public License.
@@ -95,7 +96,7 @@
 	 <chapter id="quick-start">
 		 <title>&marble; quick start guide: Navigation</title>
 
-		 <para>Here is &marble; the first time you run it, either with  <menuchoice><guimenu>Applications</guimenu><guisubmenu>Edutainment</guisubmenu><guisubmenu>Science</guisubmenu><guimenuitem>Desktop Globe Marble</guimenuitem></menuchoice> from the &kmenu; or with <keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo> and entering <command>marble</command> into the field.</para>
+		 <para>Here is &marble; the first time you run it, either with <menuchoice><guimenu>Applications</guimenu><guisubmenu>Education</guisubmenu><guimenuitem>Marble (Desktop Globe)</guimenuitem></menuchoice> from the &kmenu; or with <keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo> and entering <command>marble</command> into the field.</para>
 		 <screenshot>
 			 <screeninfo>&marble; main window</screeninfo>
 			 <mediaobject>
@@ -121,7 +122,7 @@
             Depending on the map's resolution zooming in will provide you with more detail. Smaller cities will appear and using the topographic map you might notice that coastlines are provided as vector graphics.
          </para>
          <para>
-            In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the <keycap>Home</keycap> button on your keyboard). To set a home location click with the &RMB; on a location in the maps and select <guimenuitem>Set Home Location</guimenuitem> in the context menu.
+            In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the <keycap>Home</keycap> button on your keyboard). To set the home location to the current position (center of the map) click on <guimenuitem>Set Home Location</guimenuitem> in the <guimenu>Bookmarks</guimenu> menu.
          </para>
 	 <para>A click onto the status bar using the &RMB; offers a menu which lets you customize the appearance of the status bar. 
 	 You can show the position, altitude, the current tile level and a progress indicator that displays the status of the map data download. 
@@ -207,8 +208,8 @@
             &marble; comes with a small database of more than 12,000 cities ( from http://www.worldgazetteer.com ) and a 
 	    few mountains and volcanoes. You can find a location by entering its name into the search line on the 
             top of the toolbox. If you're unsure about the spelling (&marble; always uses the 
-            native name in latin letters) you can choose the location browser below the search line
-            as well: A double click on the respective entry will instantly display the matching place on the map. 
+            native name in latin letters) you can choose the location from the list of suggestions below the search line
+            as well: A click on the respective entry will instantly display the matching place on the map.
          </para>
          <screenshot>
              <screeninfo>&marble; searching places</screeninfo>
@@ -306,14 +307,20 @@
              </mediaobject>
          </screenshot>         
          <para>
-             The left side lets you configure which routing backends are queried for routes. Up to five backends are supported by &marble;, two online routers and three offline routers. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
+             The left side lets you configure which routing backends are queried for routes. Seven or more backends are supported by &marble;, some working online and the other ones working offline. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
          </para>
          <itemizedlist>
              <listitem>
                <para>Gosmore: An offline router that also serves as the backend for the Yours online router</para>
              </listitem>
              <listitem>
+               <para>Mapquest: An online router which provides advanced turn-by-turn instructions</para>
+             </listitem>
+             <listitem>
                <para>Monav: An offline router that is very fast even when calculating very large routes</para>
+             </listitem>
+             <listitem>
+               <para>OSRM: An online router that is very fast even when calculating very large routes</para>
              </listitem>
              <listitem>
                <para>OpenRouteService: An online router that also generates driving instructions, limited to Europe</para>
@@ -361,12 +368,12 @@
          </para>
          </sect1>
          <sect1 id="routing-route-export">
-         <title>Exporting Routes</title>
+         <title>Loading, Saving and Exporting Routes</title>
          <para>
-             Routes planned in &marble; can be used in other applications or navigation devices which support <acronym>gpx</acronym> (GPS eXchange Format) or equivalent formats. If your navigation device does not support <acronym>gpx</acronym> directly, you can use a conversion utility like gpsbabel to convert a <acronym>gpx</acronym> file exported by &marble; to a suitable format.
+           You can save routes in <acronym>kml</acronym> (Keyhole Markup Language) format and load them again at a later point - on the same computer or a different device running Marble, or share them with your friends or other applications which are able to read kml files (like Google Earth). To save a route to a .kml file, click on the <guilabel>Save</guilabel> icon on the bottom of the routing tab. The upcoming save dialog allows you to choose a file name to save the route to. Similarly loading a route is initiated with the <guilabel>Open</guilabel> icon on the bottom of the routing tab. Select the .kml route file to open in the upcoming open dialog and Marble loads the route from it.
          </para>
-         <para>             
-             The export of a route in &marble; is initiated from the routing context menu in the map. Click with the &RMB; on any point of the route in the map. In the context menu that appears, choose <guilabel>Export route...</guilabel>:
+         <para>
+             Routes planned in &marble; can be used in other applications or navigation devices which support <acronym>gpx</acronym> (GPS eXchange Format) or equivalent formats. If your navigation device does not support <acronym>gpx</acronym> directly, you can use a conversion utility like gpsbabel to convert a <acronym>gpx</acronym> file exported by &marble; to a suitable format. The export of a route in &marble; is initiated from the routing context menu in the map. Click with the &RMB; on any point of the route in the map. In the context menu that appears, choose <guilabel>Export route...</guilabel>:
          </para>
          <screenshot>
              <screeninfo>&marble; route export</screeninfo>
@@ -376,7 +383,7 @@
              </mediaobject>
          </screenshot>
          <para>
-             Enter the desired filename in the upcoming save dialog. The filename extension should be <filename class="extension">gpx</filename> to store in <acronym>gpx</acronym> format or <filename class="extension">kml</filename> to store in <acronym>kml</acronym> (Keyhole Markup Language) format.
+             Enter the desired filename in the upcoming save dialog. The filename extension should be <filename class="extension">gpx</filename> to store in <acronym>gpx</acronym> format or <filename class="extension">kml</filename> to store in <acronym>kml</acronym> (Keyhole Markup Language) format. Note that the internal format of &marble; is <acronym>kml</acronym>; in doubt save routes as <acronym>kml</acronym> and only use <acronym>gpx</acronym> to share routes with other applications that are not capable of reading <acronym>kml</acronym> files.
          </para>
          </sect1>
      </chapter>
@@ -1072,8 +1079,8 @@ the system's graphics drivers. </para>
                  <answer>
                      <para>
                          &marble; is not only an application but also a Free Software project.
-                         As such it's easy to join: just contact us via the kde-edu mailing list
-                         (kde-edu@kde.org). 
+                         As such it's easy to join: just contact us via the marble-devel mailing list
+                         (marble-devel@kde.org).
                      </para>
                  </answer>
              </qandaentry>
@@ -1121,7 +1128,7 @@ the system's graphics drivers. </para>
 
 			 <para>
 				 &marble; itself can be found on the <ulink
-					 url="http://edu.kde.org/marble">&marble; home page</ulink> and
+					 url="http://marble.kde.org">&marble; website</ulink> and
 				 is part of the &kde;-Edu project</para>
 
 			 <para>You can find a list of changes in the file
@@ -1134,7 +1141,7 @@ the system's graphics drivers. </para>
 
              <para>
                  &marble; can be compiled as a &Qt; 4-only version as well as featuring &kde; 4 support.
-                 To compile &marble; with &Qt; 4-only support check out &marble; from &kde; SVN into ~/marble and just do: <command>cmake -DQTONLY=ON ~/marble</command> and <command>sudo make install</command>. To compile &marble; with &kde; support check instructions on how to compile &kde; applications at <ulink url="http://techbase.kde.org/">&kde;'s TechBase</ulink>.
+                 To compile &marble; with &Qt; 4-only support check out &marble; from &kde; Git into ~/marble and just do: <command>cmake -DQTONLY=ON ~/marble</command> and <command>sudo make install</command>. To compile &marble; with &kde; support check instructions on how to compile &kde; applications at <ulink url="http://techbase.kde.org/">&kde;'s TechBase</ulink>.
              </para> 
 		 </sect1>
 
