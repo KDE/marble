@@ -215,13 +215,13 @@ Item {
         }
         ListElement {
             name: "Info"
-            imagePath: "qrc:/icons/activity-empty.png"
+            imagePath: "qrc:/icons/information.png"
             path: "qrc:/AboutMarblePage.qml"
             previewPath: ""
         }
         ListElement {
             name: "Preferences"
-            imagePath: "qrc:/icons/activity-empty.png"
+            imagePath: "qrc:/icons/preferences.png"
             path: "qrc:/PreferencesPage.qml"
             previewPath: ""
         }
