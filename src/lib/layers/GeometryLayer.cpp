@@ -223,8 +223,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     int painted = 0;
     foreach( GeoGraphicsItem* item, items )
     {
-        if ( item->visible()
-             && item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
+        if ( item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
             item->paint( painter, viewport );
             ++painted;
         }

@@ -184,7 +184,7 @@ void GeoGraphicsScenePrivate::addItems( const TileId &tileId, QList<GeoGraphicsI
     while( currentItem != objects.end() ) {
         while( ( currentItem != objects.end() )
           && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) ) {
-            if( (*currentItem)->minZoomLevel() <= maxZoomLevel ) {
+            if( (*currentItem)->minZoomLevel() <= maxZoomLevel && (*currentItem)->visible() ) {
                 before = result.insert( before, *currentItem );
             }
             ++currentItem;
