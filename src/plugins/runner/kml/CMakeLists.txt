@@ -2,8 +2,8 @@ PROJECT( KmlPlugin )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${CMAKE_SOURCE_DIR}/src/lib/geodata/handlers/kml
- ${CMAKE_BINARY_DIR}/src/plugins/runner/kml
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})

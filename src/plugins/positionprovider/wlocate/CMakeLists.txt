@@ -1,8 +1,8 @@
 PROJECT( WlocatePositionProviderPlugin )
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/positionprovider/wlocate
- ${CMAKE_BINARY_DIR}/src/plugins/positionprovider/wlocate
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
  ${liblocation_INCLUDE_DIRS}
 )

@@ -3,8 +3,8 @@ PROJECT(RoutingPlugin)
 FIND_PACKAGE(Phonon)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/routing
- ${CMAKE_BINARY_DIR}/src/plugins/render/routing
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
  ${PHONON_INCLUDES}
 )
