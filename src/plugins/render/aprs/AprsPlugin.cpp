@@ -399,14 +399,11 @@ bool AprsPlugin::isInitialized () const
 
 bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
     int fadetime = m_settings.value( "fadeTime" ).toInt() * 60000;
     int hidetime = m_settings.value( "hideTime" ).toInt() * 60000;
-
-    if ( renderPos != "HOVERS_ABOVE_SURFACE") {
-        return true;
-    }
 
     painter->save();
 
