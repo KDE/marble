@@ -1,8 +1,8 @@
 PROJECT( FlightGearPositionProviderPlugin )
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/positionprovider/flightgear
- ${CMAKE_BINARY_DIR}/src/plugins/positionprovider/flightgear
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 set( QT_USE_QTNETWORK  ON )

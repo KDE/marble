@@ -52,7 +52,7 @@ Item {
         model: activityModel
         focus: true
         clip: true
-        spacing: 1
+        spacing: 3
         width: parent.width
         height: parent.height
 
@@ -63,11 +63,11 @@ Item {
             property bool mouseOver: mouseTracker.containsMouse
 
             width: activityView.width
-            height: 60
+            height: 47
 
             Rectangle {
-                color: "white"
-                radius: 15
+                color: delegateItem.mouseOver ? "#dddddd" : "white"
+                radius: 10
                 anchors.fill: parent
 
                 Row {
@@ -85,7 +85,7 @@ Item {
                     Image {
                         id: activityImage
                         anchors.verticalCenter: parent.verticalCenter
-                        height: 48
+                        height: 36
                         width: height
                         source: imagePath
                         smooth: true
@@ -97,12 +97,6 @@ Item {
                         text: name
                         width: 180
                         font.bold: true
-
-                        MouseArea {
-                            id: mouseTracker
-                            anchors.fill: parent
-                            hoverEnabled: true
-                        }
                     }
 
                     Loader {
@@ -119,6 +113,12 @@ Item {
                             }
                         }
                     }
+                }
+
+                MouseArea {
+                    id: mouseTracker
+                    anchors.fill: parent
+                    hoverEnabled: true
                 }
             }
 
@@ -215,13 +215,13 @@ Item {
         }
         ListElement {
             name: "Info"
-            imagePath: "qrc:/icons/activity-empty.png"
+            imagePath: "qrc:/icons/information.png"
             path: "qrc:/AboutMarblePage.qml"
             previewPath: ""
         }
         ListElement {
             name: "Preferences"
-            imagePath: "qrc:/icons/activity-empty.png"
+            imagePath: "qrc:/icons/preferences.png"
             path: "qrc:/PreferencesPage.qml"
             previewPath: ""
         }

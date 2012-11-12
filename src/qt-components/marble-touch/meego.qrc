@@ -33,6 +33,8 @@
         <file>icons/activity-tracking.png</file>
         <file>icons/activity-virtualglobe.png</file>
         <file>icons/activity-weather.png</file>
+        <file>icons/information.png</file>
+        <file>icons/preferences.png</file>
         <file>icons/bookmark.png</file>
         <file>icons/bookmark-disabled.png</file>
         <file>icons/routing-bike.svg</file>

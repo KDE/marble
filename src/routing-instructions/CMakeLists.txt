@@ -1,7 +1,7 @@
 project( RoutingInstructions )
 include_directories(
- ${CMAKE_SOURCE_DIR}/src/routing-instructions
- ${CMAKE_BINARY_DIR}/src/routing-instructions
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 include( ${QT_USE_FILE} )

@@ -22,7 +22,6 @@
 // Marble
 #include "MarbleDebug.h"
 #include "ViewportParams.h"
-#include "GeoSceneLayer.h"
 #include "TinyWebBrowser.h"
 
 using namespace Marble;

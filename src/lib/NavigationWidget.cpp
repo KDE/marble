@@ -178,11 +178,11 @@ void NavigationWidget::search(const QString &searchTerm, SearchMode searchMode )
         clearSearch();
     } else {
         d->m_navigationUi.locationListView->setVisible( true );
-        //if ( searchMode == AreaSearch ) {
-        //    d->m_runnerManager->findPlacemarks( d->m_searchTerm, d->m_widget->viewport()->viewLatLonAltBox() );
-        //} else {
+        if ( searchMode == AreaSearch ) {
+            d->m_runnerManager->findPlacemarks( d->m_searchTerm, d->m_widget->viewport()->viewLatLonAltBox() );
+        } else {
             d->m_runnerManager->findPlacemarks( d->m_searchTerm );
-        //}
+        }
     }
 }
 
