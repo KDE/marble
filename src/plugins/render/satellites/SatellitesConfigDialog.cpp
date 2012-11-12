@@ -149,6 +149,10 @@ void SatellitesConfigDialog::setDialogActive( bool active )
         m_configWidget->tabWidget->addTab( m_configWidget->tabDisabled,
                                            tr( "&Activate Plugin" ) );
     }
+
+    QDialogButtonBox *bBox = m_configWidget->buttonBox;
+    bBox->button( QDialogButtonBox::Ok )->setEnabled( active );
+    bBox->button( QDialogButtonBox::Reset )->setEnabled( active );
 }
 
 Ui::SatellitesConfigDialog* SatellitesConfigDialog::configWidget()
