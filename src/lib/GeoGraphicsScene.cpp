@@ -116,25 +116,11 @@ void GeoGraphicsScene::removeItem( GeoGraphicsItem* item )
             TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel ) )
             break;
     }
-    int tnorth, tsouth, teast, twest;
-    TileId key;
-    
-    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel );
-    twest = key.x();
-    tnorth = key.y();
 
-    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel );
-    teast = key.x();
-    tsouth = key.y();
-        
-    for( int i = twest; i <= teast; i++ )
-    {
-        for( int j = tsouth; j <= tnorth; j++ )
-        {
-            QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( "", zoomLevel, i, j )]; 
-            tileList.removeOne( item );
-        }
-    }
+    const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
+
+    QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( "", zoomLevel, key.x(), key.y() )];
+    tileList.removeOne( item );
 }
 
 void GeoGraphicsScene::clear()
@@ -154,26 +140,12 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
             TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel ) )
             break;
     }
-    int tnorth, tsouth, teast, twest;
-    TileId key;
-    
-    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel );
-    twest = key.x();
-    tnorth = key.y();
 
-    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel );
-    teast = key.x();
-    tsouth = key.y();
-        
-    for( int i = twest; i <= teast; i++ )
-    {
-        for( int j = tsouth; j <= tnorth; j++ )
-        {
-            QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( "", zoomLevel, i, j )]; 
-            QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, zValueLessThan );
-            tileList.insert( position, item );
-        }
-    }
+    const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
+
+    QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( "", zoomLevel, key.x(), key.y() )];
+    QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, zValueLessThan );
+    tileList.insert( position, item );
 }
 
 void GeoGraphicsScenePrivate::addItems( const TileId &tileId, QList<GeoGraphicsItem *> &result, int maxZoomLevel ) const
