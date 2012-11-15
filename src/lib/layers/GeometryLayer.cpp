@@ -46,11 +46,6 @@
 
 namespace Marble
 {
-int GeometryLayer::s_defaultZValues[GeoDataFeature::LastIndex];
-int GeometryLayer::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
-bool GeometryLayer::s_defaultValuesInitialized = false;
-int GeometryLayer::s_defaultZValue = 50;
-
 class GeometryLayerPrivate
 {
 public:
@@ -64,19 +59,29 @@ public:
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
 
+private:
+    static void initializeDefaultValues();
+
+    static int s_defaultZValues[GeoDataFeature::LastIndex];
+    static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
+    static bool s_defaultValuesInitialized;
+    static const int s_defaultZValue;
 };
+
+int GeometryLayerPrivate::s_defaultZValues[GeoDataFeature::LastIndex];
+int GeometryLayerPrivate::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
+bool GeometryLayerPrivate::s_defaultValuesInitialized = false;
+const int GeometryLayerPrivate::s_defaultZValue = 50;
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
     : m_model( model )
 {
+    initializeDefaultValues();
 }
 
 GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
         : d( new GeometryLayerPrivate( model ) )
 {
-    if ( !s_defaultValuesInitialized )
-        initializeDefaultValues();
-
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
@@ -101,8 +106,11 @@ QStringList GeometryLayer::renderPosition() const
     return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
-void GeometryLayer::initializeDefaultValues()
+void GeometryLayerPrivate::initializeDefaultValues()
 {
+    if ( s_defaultValuesInitialized )
+        return;
+
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultZValues[i] = s_defaultZValue;
     
@@ -307,8 +315,8 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
         return;
     item->setStyle( placemark->style() );
     item->setVisible( placemark->isGloballyVisible() );
-    item->setZValue( GeometryLayer::s_defaultZValues[placemark->visualCategory()] );
-    item->setMinZoomLevel( GeometryLayer::s_defaultMinZoomLevels[placemark->visualCategory()] );
+    item->setZValue( s_defaultZValues[placemark->visualCategory()] );
+    item->setMinZoomLevel( s_defaultMinZoomLevels[placemark->visualCategory()] );
     m_scene.addItem( item );
 }
 
