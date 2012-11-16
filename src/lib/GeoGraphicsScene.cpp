@@ -24,8 +24,6 @@ bool zValueLessThan( GeoGraphicsItem* i1, GeoGraphicsItem* i2 )
     return i1->zValue() < i2->zValue();
 }
 
-int GeoGraphicsScene::s_tileZoomLevel = 18;
-
 class GeoGraphicsScenePrivate
 {
 public:
@@ -55,7 +53,7 @@ void GeoGraphicsScene::eraseAll()
     d->m_items.clear();
 }
 
-QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel ) const
+QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAltBox& box, int zoomLevel ) const
 {
     if ( box.west() > box.east() ) {
         // Handle boxes crossing the IDL by splitting it into two separate boxes
@@ -71,7 +69,7 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
         right.setNorth( box.north() );
         right.setSouth( box.south() );
 
-        return items( left, maxZoomLevel ) + items( right, maxZoomLevel );
+        return items( left, zoomLevel ) + items( right, zoomLevel );
     }
 
     QList< GeoGraphicsItem* > result;
@@ -79,7 +77,6 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
     qreal north, south, east, west;
     box.boundaries( north, south, east, west );
     TileId key;
-    int zoomLevel = maxZoomLevel < s_tileZoomLevel ? maxZoomLevel : s_tileZoomLevel;
 
     key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel );
     rect.setLeft( key.x() );
@@ -98,7 +95,7 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
         coords.getCoords( &x1, &y1, &x2, &y2 );
         for ( int x = x1; x <= x2; ++x ) {
             for ( int y = y1; y <= y2; ++y ) {
-                d->addItems( TileId ( "", level, x, y ), result, maxZoomLevel );
+                d->addItems( TileId ( "", level, x, y ), result, zoomLevel );
             }
         }
     }

@@ -55,6 +55,8 @@ public:
     void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark );
     void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
 
+    static int maximumZoomLevel();
+
     const QAbstractItemModel *const m_model;
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
@@ -65,18 +67,25 @@ private:
     static int s_defaultZValues[GeoDataFeature::LastIndex];
     static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
     static bool s_defaultValuesInitialized;
+    static int s_maximumZoomLevel;
     static const int s_defaultZValue;
 };
 
 int GeometryLayerPrivate::s_defaultZValues[GeoDataFeature::LastIndex];
 int GeometryLayerPrivate::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
 bool GeometryLayerPrivate::s_defaultValuesInitialized = false;
+int GeometryLayerPrivate::s_maximumZoomLevel = 0;
 const int GeometryLayerPrivate::s_defaultZValue = 50;
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
     : m_model( model )
 {
     initializeDefaultValues();
+}
+
+int GeometryLayerPrivate::maximumZoomLevel()
+{
+    return s_maximumZoomLevel;
 }
 
 GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
@@ -212,6 +221,10 @@ void GeometryLayerPrivate::initializeDefaultValues()
 
     s_defaultMinZoomLevels[GeoDataFeature::Satellite]           = 0;
 
+    for ( int i = 0; i < GeoDataFeature::LastIndex; ++i ) {
+        s_maximumZoomLevel = qMax( s_maximumZoomLevel, s_defaultMinZoomLevels[i] );
+    }
+
     s_defaultValuesInitialized = true;
 }
 
@@ -225,7 +238,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     painter->save();
     painter->autoMapQuality();
 
-    int maxZoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
+    int maxZoomLevel = qMin<int>( qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 ), GeometryLayerPrivate::maximumZoomLevel() );
 
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
     int painted = 0;
