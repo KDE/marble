@@ -142,4 +142,6 @@ bool GEODATA_EXPORT operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAlt
 
 }
 
+Q_DECLARE_METATYPE( Marble::GeoDataLatLonAltBox )
+
 #endif
