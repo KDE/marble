@@ -37,6 +37,8 @@ private slots:
     void testContains();
     void testIntersects_data();
     void testIntersects();
+    void testCrossesDateline_data();
+    void testCrossesDateline();
     void testCenter_data();
     void testCenter();
     void testUnited_data();
@@ -243,6 +245,29 @@ void TestGeoDataLatLonAltBox::testIntersects()
     box2.setMaxAltitude( box2maxAltitude );
 
     QCOMPARE( box1.intersects( box2 ), intersects );
+}
+
+void TestGeoDataLatLonAltBox::testCrossesDateline_data()
+{
+    QTest::addColumn<GeoDataLatLonBox>("box");
+    QTest::addColumn<bool>("expected");
+
+    QTest::newRow("all") << GeoDataLatLonBox(90, -90, 179.999, -180, GeoDataCoordinates::Degree) << false;
+
+    QTest::newRow("left")  << GeoDataLatLonBox(90, -90,   0, -180, GeoDataCoordinates::Degree) << false;
+    QTest::newRow("front") << GeoDataLatLonBox(90, -90,  90,  -90, GeoDataCoordinates::Degree) << false;
+    QTest::newRow("right") << GeoDataLatLonBox(90, -90, 180,    0, GeoDataCoordinates::Degree) << false;
+    QTest::newRow("back")  << GeoDataLatLonBox(90, -90, -90,   90, GeoDataCoordinates::Degree) << true;
+}
+
+void TestGeoDataLatLonAltBox::testCrossesDateline()
+{
+    QFETCH(GeoDataLatLonBox, box);
+    QFETCH(bool, expected);
+
+    bool const result = box.crossesDateLine();
+
+    QCOMPARE(result, expected);
 }
 
 void TestGeoDataLatLonAltBox::testCenter_data()
