@@ -269,8 +269,8 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
         d->m_needsSorting =  false;
     }
 
-    QList<AbstractDataPluginItem*>::const_iterator i = candidates.begin();
-    QList<AbstractDataPluginItem*>::const_iterator end = candidates.end();
+    QList<AbstractDataPluginItem*>::const_iterator i = candidates.constBegin();
+    QList<AbstractDataPluginItem*>::const_iterator end = candidates.constEnd();
 
     // Items that are already shown have the highest priority
     for (; i != end && list.size() < number; ++i ) {

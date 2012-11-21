@@ -91,7 +91,7 @@ void WikipediaModel::parseFile( const QByteArray& file )
     QList<AbstractDataPluginItem*> items;
     QList<WikipediaItem*>::const_iterator it;
     
-    for ( it = list.begin(); it != list.end(); ++it ) {
+    for ( it = list.constBegin(); it != list.constEnd(); ++it ) {
         if ( itemExists( (*it)->id() ) ) {
             delete *it;
             continue;

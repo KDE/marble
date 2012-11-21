@@ -159,10 +159,10 @@ QVector<const GeoSceneProperty*> GeoSceneSettings::allProperties() const
 {
     QVector<const GeoSceneProperty*> allProperties;
 
-    QVector<const GeoSceneGroup*>::const_iterator itGroup = d->m_groups.constBegin();
-    QVector<const GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
+    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.constBegin();
+    QVector<GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
     for (; itGroup != groupEnd; ++itGroup) {
-        allProperties << (*itGroup)->properties();
+        allProperties << const_cast<const GeoSceneGroup*>(*itGroup)->properties();
     }
 
     foreach ( const GeoSceneProperty *property, d->m_properties ) {
