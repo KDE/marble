@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2007-2009 Torsten Rahn  <rahn@kde.org>
+// Copyright 2007-2012 Torsten Rahn  <rahn@kde.org>
 //
 
 
@@ -28,6 +28,7 @@ namespace Marble
 {
 
 class SphericalProjectionPrivate;
+class AbstractProjectionPrivate;
 
 /**
  * @short A class to implement the spherical projection used by the "Globe" view.
@@ -65,19 +66,25 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const qreal lon, const qreal lat,
+    virtual bool screenCoordinates( const qreal lon, const qreal lat,
                             const ViewportParams *params,
                             qreal& x, qreal& y ) const;
 
-    bool screenCoordinates( const GeoDataCoordinates &coordinates, 
+    virtual bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams *params,
                             qreal &x, qreal &y, bool &globeHidesPoint ) const;
 
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
+    virtual bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams * viewport,
                             qreal *x, qreal &y, int &pointRepeatNum,
                             const QSizeF& size,
                             bool &globeHidesPoint ) const;
+
+    virtual bool screenCoordinates( const GeoDataLineString &lineString,
+                            const ViewportParams *viewport,
+                            QVector<QPolygonF*> &polygons ) const;
+
+    using AbstractProjection::screenCoordinates;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -100,9 +107,12 @@ class SphericalProjection : public AbstractProjection
 
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
+ protected:
+    SphericalProjection( SphericalProjectionPrivate &dd );
+
  private:
+    Q_DECLARE_PRIVATE(SphericalProjection)
     Q_DISABLE_COPY( SphericalProjection )
-    SphericalProjectionPrivate  * d;
 };
 
 }

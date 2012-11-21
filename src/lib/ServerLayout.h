@@ -126,6 +126,22 @@ private:
     static QString encodeQuadTree( const Marble::TileId & );
 };
 
+class TmsServerLayout : public ServerLayout
+{
+public:
+    explicit TmsServerLayout( GeoSceneTiled *textureLayer );
+
+    /**
+     * Appends %zoomLevel/%x/2^%zoomLevel-%y-1.%suffix to the path of the @p prototypeUrl and returns
+     * the result.
+     * TMS (TileMapService) maps take the origin for y coordinate at the bottom of the map,
+     * as opposed to what Marble and OpenStreepMap (SlippyTiles) do.
+     */
+    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
+
+    virtual QString name() const;
+};
+
 }
 
 #endif

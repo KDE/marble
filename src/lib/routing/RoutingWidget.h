@@ -127,6 +127,9 @@ private Q_SLOTS:
     /** Change selected routing profile to the one set in the shared request */
     void updateActiveRoutingProfile();
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
 private:
     RoutingWidgetPrivate *const d;
 };

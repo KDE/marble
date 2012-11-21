@@ -1,9 +1,10 @@
-/**
+/*
  * This file is part of the Marble Virtual Globe.
  *
  * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>
  * Copyright 2007      Inge Wallin  <ingwa@kde.org>
  * Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jensmh@gmx.de>
+ * Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -32,7 +33,6 @@
 #include "MarbleGlobal.h"
 
 #include <QtCore/QCache>
-#include <QtCore/QDateTime>
 #include <QtCore/QHash>
 #include <QtCore/QReadWriteLock>
 #include <QtGui/QImage>
@@ -63,8 +63,9 @@ public:
     QReadWriteLock m_cacheLock;
 };
 
-StackedTileLoader::StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator )
-    : d( new StackedTileLoaderPrivate( mergedLayerDecorator ) )
+StackedTileLoader::StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent )
+    : QObject( parent ),
+      d( new StackedTileLoaderPrivate( mergedLayerDecorator ) )
 {
 }
 
@@ -196,6 +197,9 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
         d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
     }
     d->m_cacheLock.unlock();
+
+    emit tileLoaded( stackedTileId );
+
     return stackedTile;
 }
 
@@ -224,6 +228,11 @@ void StackedTileLoader::reloadVisibleTiles()
 int StackedTileLoader::maximumTileLevel() const
 {
     return d->m_maxTileLevel;
+}
+
+int StackedTileLoader::tileCount() const
+{
+    return d->m_tileCache.count() + d->m_tilesOnDisplay.count();
 }
 
 void StackedTileLoaderPrivate::detectMaxTileLevel()
@@ -259,6 +268,8 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
 
         delete displayedTile;
         displayedTile = 0;
+
+        emit tileLoaded( stackedTileId );
     } else {
         d->m_tileCache.remove( stackedTileId );
     }
@@ -266,10 +277,13 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
 
 void StackedTileLoader::clear()
 {
-    mDebug() << "StackedTileLoader::clear()";
+    mDebug() << Q_FUNC_INFO;
+
     qDeleteAll( d->m_tilesOnDisplay );
     d->m_tilesOnDisplay.clear();
     d->m_tileCache.clear(); // clear the tile cache in physical memory
+
+    emit cleared();
 }
 
 //
@@ -296,3 +310,5 @@ StackedTileLoaderPrivate::findRelevantTextureLayers( TileId const & stackedTileI
 }
 
 }
+
+#include "StackedTileLoader.moc"

@@ -8,8 +8,8 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#ifndef MARBLE_SATELLITESITEM_H
-#define MARBLE_SATELLITESITEM_H
+#ifndef MARBLE_SATELLITESTLEITEM_H
+#define MARBLE_SATELLITESTLEITEM_H
 
 #include "TrackerPluginItem.h"
 
@@ -23,11 +23,18 @@ namespace Marble {
 class GeoDataTrack;
 class MarbleClock;
 
-class SatellitesItem : public TrackerPluginItem
+/**
+ * An instance SatellitesTLEItem represents an item of a two-line-elements
+ * set catalog.
+ */
+class SatellitesTLEItem : public TrackerPluginItem
 {
+    Q_OBJECT
 
 public:
-    SatellitesItem( const QString &name, elsetrec satrec, const MarbleClock *clock );
+    SatellitesTLEItem( const QString &name,
+                       elsetrec satrec,
+                       const MarbleClock *clock );
 
     void update();
 
@@ -98,6 +105,6 @@ private:
     double square( double x );
 };
 
-}
+} // namespace Marble
 
-#endif // MARBLE_SATELLITESITEM_H
+#endif // MARBLE_SATELLITESTLEITEM_H

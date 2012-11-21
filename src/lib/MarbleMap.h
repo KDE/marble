@@ -625,7 +625,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void reload() const;
 
-    void downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & );
+    void downloadRegion( QVector<TileCoordsPyramid> const & );
 
  Q_SIGNALS:
     void tileLevelChanged( int level );

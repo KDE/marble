@@ -226,6 +226,14 @@ QString GeoSceneTiled::relativeTileFileName( const TileId &id ) const
             .arg( id.y() )
             .arg( suffix );
         break;
+    case GeoSceneTiled::TileMapService:
+        relFileName = QString( "%1/%2/%3/%4.%5" )
+            .arg( themeStr() )
+            .arg( id.zoomLevel() )
+            .arg( id.x() )
+            .arg( ( 1<<id.zoomLevel() ) - id.y() - 1 )  //Y coord in TMS runs from bottom to top
+            .arg( suffix );
+        break;
     }
 
     return relFileName;
@@ -237,7 +245,8 @@ QString GeoSceneTiled::themeStr() const
     return dirInfo.isAbsolute() ? sourceDir() : "maps/" + sourceDir();
 }
 
-QList<DownloadPolicy *> GeoSceneTiled::downloadPolicies() const
+
+QList<const DownloadPolicy *> GeoSceneTiled::downloadPolicies() const
 {
     return m_downloadPolicies;
 }

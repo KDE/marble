@@ -57,17 +57,17 @@ void GeoSceneFilter::setType( const QString& type )
     m_type = type;
 }
 
-QList<GeoScenePalette*> GeoSceneFilter::palette() const
+QList<const GeoScenePalette*> GeoSceneFilter::palette() const
 {
     return m_palette;
 }
 
-void GeoSceneFilter::addPalette( GeoScenePalette *palette )
+void GeoSceneFilter::addPalette( const GeoScenePalette *palette )
 {
     m_palette.append( palette );
 }
 
-int GeoSceneFilter::removePalette( GeoScenePalette *palette )
+int GeoSceneFilter::removePalette( const GeoScenePalette *palette )
 {
     return m_palette.removeAll( palette );
 }

@@ -5,6 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
+// Copyright 2007-2012   Torsten Rahn  <rahn@kde.org>
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
 //
 
@@ -21,8 +22,7 @@ using namespace Marble;
 
 
 EquirectProjection::EquirectProjection()
-    : AbstractProjection(),
-      d( 0 )
+    : CylindricalProjection()
 {
     setRepeatX( repeatableX() );
     setMinLat( minValidLat() );
@@ -31,11 +31,6 @@ EquirectProjection::EquirectProjection()
 
 EquirectProjection::~EquirectProjection()
 {
-}
-
-bool EquirectProjection::repeatableX() const
-{
-    return true;
 }
 
 qreal EquirectProjection::maxValidLat() const
@@ -62,7 +57,7 @@ bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
     const qreal centerLat = viewport->centerLatitude();
 
     qreal  rad2Pixel = 2.0 * viewport->radius() / M_PI;
- 
+
     // Let (x, y) be the position on the screen of the point.
     x = ( width  / 2.0 + ( lon - centerLon ) * rad2Pixel );
     y = ( height / 2.0 - ( lat - centerLat ) * rad2Pixel );
@@ -310,8 +305,6 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
         latLonAltBox.setWest( -M_PI );
     }
 
-//    mDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
-
     return latLonAltBox;
 }
 
@@ -339,34 +332,4 @@ bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) con
         return false;
 
     return true;
-}
-
-QPainterPath EquirectProjection::mapShape( const ViewportParams *viewport ) const
-{
-    // Convenience variables
-    int  radius = viewport->radius();
-    int  width  = viewport->width();
-    int  height = viewport->height();
-
-    // Calculate translation of center point
-    const qreal centerLat = viewport->centerLatitude();
-
-    int yCenterOffset = (int)( centerLat * (qreal)( 2 * radius ) / M_PI );
-    int yTop          = height / 2 - radius + yCenterOffset;
-    int yBottom       = yTop + 2 * radius;
-
-    // Don't let the map area be outside the image
-    if ( yTop < 0 )
-        yTop = 0;
-    if ( yBottom > height )
-        yBottom =  height;
-
-    QPainterPath mapShape;
-    mapShape.addRect(
-                    0,
-                    yTop,
-                    width,
-                    yBottom - yTop );
-
-    return mapShape;
 }

@@ -5,12 +5,12 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
 // local
-#include"TileScalingTextureMapper.h"
+#include "TileScalingTextureMapper.h"
 
 // posix
 #include <cmath>
@@ -32,14 +32,18 @@
 
 using namespace Marble;
 
-TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoader,
-                                                    QCache<TileId, const QPixmap> *cache )
-    : TextureMapperInterface(),
+TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoader, QObject *parent )
+    : QObject( parent ),
+      TextureMapperInterface(),
       m_tileLoader( tileLoader ),
-      m_cache( cache ),
+      m_cache( 100 ),
       m_repaintNeeded( true ),
       m_radius( 0 )
 {
+    connect( tileLoader, SIGNAL( tileLoaded( TileId ) ),
+             this,       SLOT( removePixmap( TileId ) ) );
+    connect( tileLoader, SIGNAL( cleared() ),
+             this,       SLOT( clearPixmaps() ) );
 }
 
 void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
@@ -117,7 +121,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
                                qreal( numTilesY - 1.0 ) );
 
     if ( m_radius != radius ) {
-        m_cache->clear();
+        m_cache.clear();
     }
 
     if ( texColorizer || m_radius != radius ) {
@@ -173,7 +177,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
                 const int cacheHash = 2 * ( size.width() % 2 ) + ( size.height() % 2 );
                 const TileId cacheId = TileId( cacheHash, stackedId.zoomLevel(), stackedId.x(), stackedId.y() );
 
-                const QPixmap *const im_cached = (*m_cache)[cacheId];
+                const QPixmap *const im_cached = m_cache[cacheId];
                 const QPixmap *im = im_cached;
                 if ( im == 0 ) {
                     const QImage *const toScale = tile->resultImage();
@@ -191,7 +195,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
                 painter->drawPixmap( rect.topLeft(), *im );
 
                 if (im != im_cached)
-                    m_cache->insert( cacheId, im );
+                    m_cache.insert( cacheId, im );
             }
         }
 
@@ -200,3 +204,20 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
 
     m_tileLoader->cleanupTilehash();
 }
+
+void TileScalingTextureMapper::removePixmap( const TileId &tileId )
+{
+    const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
+    for ( int i = 0; i < 4; ++i ) {
+        const TileId id = TileId( i, stackedTileId.zoomLevel(), stackedTileId.x(), stackedTileId.y() );
+
+        m_cache.remove( id );
+    }
+}
+
+void TileScalingTextureMapper::clearPixmaps()
+{
+    m_cache.clear();
+}
+
+#include "TileScalingTextureMapper.moc"

@@ -418,7 +418,7 @@ void BookmarkManagerDialog::importBookmarks()
         return;
     }
 
-    GeoDataDocument *import = d->m_manager->openFile( file );
+    GeoDataDocument *import = BookmarkManager::openFile( file );
     if ( !import ) {
         QString const text = tr( "The file %1 cannot be opened as a KML file." ).arg( file );
         QMessageBox::warning( this, tr( "Bookmark Import - Marble" ), text );
@@ -504,7 +504,7 @@ void BookmarkManagerDialog::importBookmarks()
 
 GeoDataDocument* BookmarkManagerDialog::bookmarkDocument()
 {
-    return d->m_manager->d->bookmarkDocument();
+    return d->m_manager->document();
 }
 
 void BookmarkManagerDialog::setButtonBoxVisible( bool visible )

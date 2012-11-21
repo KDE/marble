@@ -37,6 +37,7 @@ svg/coordinate.svg
 svg/wikipedia.svg
 svg/wikipedia_shadow.svg
 svg/sunshine.png
+svg/sun.png
 svg/track_turtle.svg
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/svg)
 
@@ -271,3 +272,11 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/audio)
 
 FILE (GLOB_RECURSE DGML_FILES maps/*.dgml)
 MARBLE_ADD_PROJECT_RESOURCES(${DGML_FILES})
+
+# shared-mime-info 0.40 is mandatory for generic-icon
+set( SHARED_MIME_INFO_MINIMUM_VERSION "0.40" )
+find_package( SharedMimeInfo QUIET )
+IF( SHAREDMIMEINFO_FOUND )
+  install( FILES mimetypes/geo.xml  DESTINATION ${XDG_MIME_INSTALL_DIR} )
+  update_xdg_mimetypes( ${XDG_MIME_INSTALL_DIR} )
+ENDIF()

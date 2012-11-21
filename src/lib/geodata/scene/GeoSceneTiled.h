@@ -43,7 +43,7 @@ class TileId;
 class GeoSceneTiled : public GeoSceneAbstractDataset
 {
  public:
-    enum StorageLayout { Marble, OpenStreetMap };
+    enum StorageLayout { Marble, OpenStreetMap, TileMapService };
     enum Projection { Equirectangular, Mercator };
 
     explicit GeoSceneTiled( const QString& name );
@@ -71,7 +71,7 @@ class GeoSceneTiled : public GeoSceneAbstractDataset
     bool hasMaximumTileLevel() const;
     int maximumTileLevel() const;
     void setMaximumTileLevel( const int );
-    
+
     QVector<QUrl> downloadUrls() const;
 
     const QSize tileSize() const;
@@ -96,7 +96,7 @@ class GeoSceneTiled : public GeoSceneAbstractDataset
 
     QString themeStr() const;
 
-    QList<DownloadPolicy *> downloadPolicies() const;
+    QList<const DownloadPolicy *> downloadPolicies() const;
     void addDownloadPolicy( const DownloadUsage usage, const int maximumConnections );
 
     virtual QString type();
@@ -121,7 +121,7 @@ class GeoSceneTiled : public GeoSceneAbstractDataset
 
     /// Points to next Url for the round robin algorithm
     mutable QVector<QUrl>::const_iterator m_nextUrl;
-    QList<DownloadPolicy *> m_downloadPolicies;
+    QList<const DownloadPolicy *> m_downloadPolicies;
 };
 
 inline bool GeoSceneTiled::hasMaximumTileLevel() const

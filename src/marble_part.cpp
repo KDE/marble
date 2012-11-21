@@ -837,10 +837,18 @@ void MarblePart::setupActions()
     m_showAtmosphereAction = new KAction( this );
     actionCollection()->addAction( "show_atmosphere", m_showAtmosphereAction );
     m_showAtmosphereAction->setCheckable( true );
+    m_showAtmosphereAction->setVisible( false );
     m_showAtmosphereAction->setChecked( true );
     m_showAtmosphereAction->setText( i18nc( "Action for toggling the atmosphere", "&Atmosphere" ) );
     connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ),
              this,                   SLOT( setShowAtmosphere( bool ) ) );
+    foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+        if ( plugin->nameId() == "atmosphere" ) {
+            m_showAtmosphereAction->setVisible( plugin->enabled() );
+            connect( plugin, SIGNAL( enabledChanged( bool ) ),
+                     m_showAtmosphereAction, SLOT( setVisible( bool ) ) );
+        }
+    }
 
     // Action: Show Crosshairs option
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
@@ -1295,12 +1303,9 @@ void MarblePart::showDownloadRegionDialog()
 void MarblePart::downloadRegion()
 {
     Q_ASSERT( m_downloadRegionDialog );
-    QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
-    QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
-    kDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     if ( !pyramid.isEmpty() ) {
-        m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
+        m_controlView->marbleWidget()->downloadRegion( pyramid );
     }
 }
 

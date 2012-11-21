@@ -26,7 +26,6 @@ class GeoDataLatLonAltBox;
 class GeoGraphicsItemPrivate;
 class GeoDataStyle;
 class GeoPainter;
-class GeoSceneLayer;
 class ViewportParams;
 
 class MARBLE_EXPORT GeoGraphicsItem
@@ -124,8 +123,7 @@ class MARBLE_EXPORT GeoGraphicsItem
      * Note that depending on the projection and zoom level, the item may be visible more than once.
      * GeoPainter will therefore automatically "repeat" primitives which have a geo position (GeoDataCoordinates).
      */
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
+    virtual void paint( GeoPainter *painter, const ViewportParams *viewport ) = 0;
 
  protected:
     GeoGraphicsItemPrivate *p() const;

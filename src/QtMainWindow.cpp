@@ -257,9 +257,17 @@ void MainWindow::createActions()
      connect( m_kineticScrollingAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleKineticScrolling( bool ) ) );
 
      m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
+     m_showAtmosphereAct->setVisible( false );
      m_showAtmosphereAct->setCheckable( true );
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
      connect(m_showAtmosphereAct, SIGNAL(triggered( bool )), this, SLOT( showAtmosphere( bool )));
+     foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+         if ( plugin->nameId() == "atmosphere" ) {
+             m_showAtmosphereAct->setVisible( plugin->enabled() );
+             connect( plugin, SIGNAL( enabledChanged( bool ) ),
+                      m_showAtmosphereAct, SLOT( setVisible( bool ) ) );
+         }
+     }
 
      m_controlTimeAct = new QAction( tr( "&Time Control..." ), this );
      m_controlTimeAct->setStatusTip( tr( "Configure Time Control " ) );
@@ -695,6 +703,34 @@ void MainWindow::showFullScreen( bool isChecked )
     m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
+#ifdef Q_WS_MAEMO_5
+void MainWindow::setOrientation( Orientation orientation )
+{
+    switch ( orientation ) {
+    case OrientationAutorotate:
+       setAttribute( Qt::WA_Maemo5AutoOrientation );
+       break;
+    case OrientationLandscape:
+       setAttribute( Qt::WA_Maemo5LandscapeOrientation );
+       break;
+    case OrientationPortrait:
+       setAttribute( Qt::WA_Maemo5PortraitOrientation );
+       break;
+    }
+}
+
+MainWindow::Orientation MainWindow::orientation() const
+{
+    if ( testAttribute( Qt::WA_Maemo5LandscapeOrientation ) )
+        return OrientationLandscape;
+
+    if ( testAttribute( Qt::WA_Maemo5PortraitOrientation ) )
+        return OrientationPortrait;
+
+    return OrientationAutorotate;
+}
+#endif // Q_WS_MAEMO_5
+
 void MainWindow::showSideBar( bool isChecked )
 {
     m_controlView->setSideBarShown( isChecked );
@@ -1024,6 +1060,10 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
+#ifdef Q_WS_MAEMO_5
+         const Orientation orientation = (Orientation)settings.value( "orientation", (int)OrientationLandscape ).toInt();
+         setOrientation( orientation );
+#endif // Q_WS_MAEMO_5
          QByteArray sideBarState = settings.value( "sideBarState", QByteArray() ).toByteArray();
          m_controlView->setSideBarState( sideBarState );
          if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
@@ -1081,7 +1121,18 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
                     settings.value("quitLongitude", 0.0).toDouble(),
                     settings.value("quitLatitude", 0.0).toDouble() );
                 if (! isDistanceOverwritten) {
-                    m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                    if ( settings.contains("quitRadius") ) {
+                        // provide a default value in case "quitRadius" contains garbage
+                        m_controlView->marbleWidget()->setRadius( settings.value("quitRadius", 1350).toInt() );
+                    }
+                    else if ( settings.contains("quitZoom") ) {
+                        // provide a default value in case "quitZoom" contains garbage
+                        m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                    }
+                    else {
+                        // set radius to 1350 (Atlas theme's "sharp" radius) if Marble starts with a clean config
+                        m_controlView->marbleWidget()->setRadius( 1350 );
+                    }
                 }
                 break;
             case Marble::ShowHomeLocation:
@@ -1232,6 +1283,9 @@ void MainWindow::writeSettings()
          settings.setValue( "size", size() );
          settings.setValue( "pos", pos() );
          settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
+#ifdef Q_WS_MAEMO_5
+         settings.setValue( "orientation", (int)orientation() );
+#endif // Q_WS_MAEMO_5
          settings.setValue( "sideBar", m_sideBarAct->isChecked() );
          settings.setValue( "sideBarState", m_controlView->sideBarState() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
@@ -1261,11 +1315,11 @@ void MainWindow::writeSettings()
          // Get the 'quit' values from the widget and store them in the settings.
          qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
          qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
-         int    quitZoom = m_controlView->marbleWidget()->zoom();
+         const int quitRadius = m_controlView->marbleWidget()->radius();
 
          settings.setValue( "quitLongitude", quitLon );
          settings.setValue( "quitLatitude", quitLat );
-         settings.setValue( "quitZoom", quitZoom );
+         settings.setValue( "quitRadius", quitRadius );
 
          settings.setValue( "lockFloatItemPositions", m_lockFloatItemsAct->isChecked() );
          settings.setValue( "kineticScrolling", m_controlView->marbleWidget()->inputHandler()->kineticScrollingEnabled() );
@@ -1450,12 +1504,9 @@ void MainWindow::disconnectDownloadRegionDialog()
 void MainWindow::downloadRegion()
 {
     Q_ASSERT( m_downloadRegionDialog );
-    QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
-    QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
-    mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     if ( !pyramid.isEmpty() ) {
-        m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
+        m_controlView->marbleWidget()->downloadRegion( pyramid );
     }
 }
 
@@ -1472,13 +1523,15 @@ void MainWindow::printMapScreenShot()
 void MainWindow::showMapViewDialog()
 {
     if( !m_mapViewWindow ) {
-        m_mapViewWindow = new StackableWindow( this );
+        m_mapViewWindow = new QDialog( this );
         m_mapViewWindow->setWindowTitle( tr( "Map View - Marble" ) );
+
+        QVBoxLayout *layout = new QVBoxLayout;
+        m_mapViewWindow->setLayout( layout );
 
         MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewWindow );
         mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
-
-        m_mapViewWindow->setCentralWidget( mapViewWidget );
+        layout->addWidget( mapViewWidget );
     }
 
     m_mapViewWindow->show();

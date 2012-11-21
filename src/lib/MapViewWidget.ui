@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>222</width>
-    <height>592</height>
+    <height>426</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -112,7 +112,7 @@
     </widget>
    </item>
    <item>
-    <widget class="MarbleThemeSelectView" name="marbleThemeSelectView">
+    <widget class="QListView" name="marbleThemeSelectView">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -136,15 +136,11 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="QComboBox" name="mapThemeComboBox"/>
+   </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>MarbleThemeSelectView</class>
-   <extends>QListView</extends>
-   <header>MarbleThemeSelectView.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../marble.qrc"/>
  </resources>

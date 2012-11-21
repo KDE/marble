@@ -54,7 +54,6 @@ public:
 
         m_textureLayer = dynamic_cast<GeoSceneTiled*>( sceneLayer->datasets().first() );
         Q_ASSERT( m_textureLayer );
-
         QVector<const GeoSceneTiled*> textureLayers;
         textureLayers << m_textureLayer;
 

@@ -8,8 +8,7 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-
-#include "SatellitesItem.h"
+#include "SatellitesTLEItem.h"
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
@@ -31,11 +30,13 @@
 #include <QDialog>
 #include <QCheckBox>
 
-using namespace Marble;
+namespace Marble {
 
 #include "GeoDataPoint.h"
 
-SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec, const MarbleClock *clock )
+SatellitesTLEItem::SatellitesTLEItem( const QString &name,
+                                      elsetrec satrec,
+                                      const MarbleClock *clock )
     : TrackerPluginItem( name ),
       m_showOrbit( false ),
       m_satrec( satrec ),
@@ -62,7 +63,7 @@ SatellitesItem::SatellitesItem( const QString &name, elsetrec satrec, const Marb
     update();
 }
 
-void SatellitesItem::setDescription()
+void SatellitesTLEItem::setDescription()
 {
     QString description =
       QObject::tr( "NORAD ID: %2 <br />"
@@ -73,12 +74,17 @@ void SatellitesItem::setDescription()
                    "Semi-major axis: %7 km" )
         .arg( QString::number( m_satrec.satnum ), QString::number( perigee() ),
               QString::number( apogee() ), QString::number( inclination() ),
-              QString::number( period() / 60.0 ), QString::number( semiMajorAxis() ) );
+              QString::number( period() / 60.0 ),
+              QString::number( semiMajorAxis() ) );
      placemark()->setDescription( description );
 }
 
-void SatellitesItem::update()
+void SatellitesTLEItem::update()
 {
+    if( !isEnabled() ) {
+        return;
+    }
+
     QDateTime startTime = m_clock->dateTime().addSecs( - 2 * 60 );
 
     QDateTime endTime = startTime.addSecs( period() );
@@ -101,15 +107,17 @@ void SatellitesItem::update()
     }
 }
 
-void SatellitesItem::addPointAt( const QDateTime &dateTime )
+void SatellitesTLEItem::addPointAt( const QDateTime &dateTime )
 {
     // in minutes
-    double timeSinceEpoch = (double)( dateTime.toTime_t() - timeAtEpoch().toTime_t() ) / 60.0;
+    double timeSinceEpoch = (double)( dateTime.toTime_t() -
+        timeAtEpoch().toTime_t() ) / 60.0;
 
     double r[3], v[3];
     sgp4( wgs84, m_satrec, timeSinceEpoch, r, v );
 
-    GeoDataCoordinates coordinates = fromTEME( r[0], r[1], r[2], gmst( timeSinceEpoch ) );
+    GeoDataCoordinates coordinates = fromTEME(
+        r[0], r[1], r[2], gmst( timeSinceEpoch ) );
     if ( m_satrec.error != 0 ) {
         return;
     }
@@ -117,7 +125,7 @@ void SatellitesItem::addPointAt( const QDateTime &dateTime )
     m_track->addPoint( dateTime, coordinates);
 }
 
-QDateTime SatellitesItem::timeAtEpoch()
+QDateTime SatellitesTLEItem::timeAtEpoch()
 {
     int year = m_satrec.epochyr + ( m_satrec.epochyr < 57 ? 2000 : 1900 );
 
@@ -132,37 +140,41 @@ QDateTime SatellitesItem::timeAtEpoch()
                       Qt::UTC );
 }
 
-double SatellitesItem::period()
+double SatellitesTLEItem::period()
 {
     // no := mean motion (rad / min)
     return 60 * (2 * M_PI / m_satrec.no);
 }
 
-double SatellitesItem::apogee()
+double SatellitesTLEItem::apogee()
 {
     return m_satrec.alta * m_earthSemiMajorAxis;
 }
 
-double SatellitesItem::perigee()
+double SatellitesTLEItem::perigee()
 {
     return m_satrec.altp * m_earthSemiMajorAxis;
 }
 
-double SatellitesItem::semiMajorAxis()
+double SatellitesTLEItem::semiMajorAxis()
 {
 
     return m_satrec.a * m_earthSemiMajorAxis;
 }
 
-double SatellitesItem::inclination()
+double SatellitesTLEItem::inclination()
 {
     return m_satrec.inclo / M_PI * 180;
 }
 
-GeoDataCoordinates SatellitesItem::fromTEME( double x, double y, double z, double gmst )
+GeoDataCoordinates SatellitesTLEItem::fromTEME( double x,
+                                                double y,
+                                                double z,
+                                                double gmst )
 {
     double lon = atan2( y, x );
-    // Rotate the angle by gmst (the origin goes from the vernal equinox point to the Greenwich Meridian)
+    // Rotate the angle by gmst (the origin goes from the vernal equinox
+    // point to the Greenwich Meridian)
     lon = GeoDataCoordinates::normalizeLon( fmod(lon - gmst, 2 * M_PI) );
 
     double lat = atan2( z, sqrt( x*x + y*y ) );
@@ -186,14 +198,19 @@ GeoDataCoordinates SatellitesItem::fromTEME( double x, double y, double z, doubl
     return GeoDataCoordinates( lon, lat, alt * 1000 );
 }
 
-double SatellitesItem::gmst( double minutesP )
+double SatellitesTLEItem::gmst( double minutesP )
 {
     // Earth rotation rate in rad/min, from sgp4io.cpp
     double rptim = 4.37526908801129966e-3;
     return fmod( m_satrec.gsto + rptim * minutesP, 2 * M_PI );
 }
 
-double SatellitesItem::square( double x )
+double SatellitesTLEItem::square( double x )
 {
     return x * x;
 }
+
+} // namespace Marble
+
+#include "SatellitesTLEItem.moc"
+

@@ -223,6 +223,7 @@ set ( CMAKE_MODULE_PATH
      ${CMAKE_CURRENT_SOURCE_DIR}/src
      ${CMAKE_CURRENT_SOURCE_DIR}/cmake_find_rules
      ${CMAKE_CURRENT_SOURCE_DIR}/cmake_scripts
+     ${CMAKE_MODULE_PATH}
      )
 
 ####################################################

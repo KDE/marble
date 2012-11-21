@@ -16,9 +16,7 @@
 #ifndef MARBLE_TILELOADER_H
 #define MARBLE_TILELOADER_H
 
-#include <QtCore/QHash>
 #include <QtCore/QObject>
-#include <QtCore/QSet>
 #include <QtCore/QString>
 #include <QtGui/QImage>
 

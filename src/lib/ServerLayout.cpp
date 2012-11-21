@@ -229,4 +229,34 @@ QString QuadTreeServerLayout::encodeQuadTree( const Marble::TileId &id )
     return tileNum;
 }
 
+
+TmsServerLayout::TmsServerLayout(GeoSceneTiled *textureLayer )
+    : ServerLayout( textureLayer )
+{
+}
+
+QUrl TmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
+{
+    const QString suffix = m_textureLayer->fileFormat().toLower();
+    // y coordinate in TMS start at the bottom of the map (South) and go upwards,
+    // opposed to OSM which start at the top.
+    //
+    // http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
+    int y_frombottom = ( 1<<id.zoomLevel() ) - id.y() - 1 ;
+
+    const QString path = QString( "%1/%2/%3.%4" ).arg( id.zoomLevel() )
+                                                 .arg( id.x() )
+                                                 .arg( y_frombottom )
+                                                 .arg( suffix );
+    QUrl url = prototypeUrl;
+    url.setPath( url.path() + path );
+
+    return url;
+}
+
+QString TmsServerLayout::name() const
+{
+    return "TileMapService";
+}
+
 }

@@ -603,7 +603,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 int deltay = event->y() - d->m_leftPressedY;
 
                 if ( abs( deltax ) > d->m_dragThreshold
-                     || abs( deltay ) > d->m_dragThreshold ) {
+                     || abs( deltay ) > d->m_dragThreshold
+                     || !d->m_lmbTimer.isActive() ) {
 
                     d->m_lmbTimer.stop();
 

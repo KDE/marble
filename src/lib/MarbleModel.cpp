@@ -548,7 +548,7 @@ const Planet *MarbleModel::planet() const
     return d->m_planet;
 }
 
-void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
+void MarbleModel::addDownloadPolicies( const GeoSceneDocument *mapTheme )
 {
     if ( !mapTheme )
         return;
@@ -558,17 +558,18 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
     // As long as we don't have an Layer Management Class we just lookup
     // the name of the layer that has the same name as the theme ID
     const QString themeId = mapTheme->head()->theme();
-    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( mapTheme->map()->layer( themeId ));
+    const GeoSceneLayer * const layer = static_cast<const GeoSceneLayer*>( mapTheme->map()->layer( themeId ));
     if ( !layer )
         return;
 
-    GeoSceneTiled * const texture = static_cast<GeoSceneTiled*>( layer->groundDataset() );
+    GeoSceneTiled const * texture = static_cast<GeoSceneTiled const *>( layer->groundDataset() );
+
     if ( !texture )
         return;
 
-    QList<DownloadPolicy *> policies = texture->downloadPolicies();
-    QList<DownloadPolicy *>::const_iterator pos = policies.constBegin();
-    QList<DownloadPolicy *>::const_iterator const end = policies.constEnd();
+    QList<const DownloadPolicy *> policies = texture->downloadPolicies();
+    QList<const DownloadPolicy *>::const_iterator pos = policies.constBegin();
+    QList<const DownloadPolicy *>::const_iterator const end = policies.constEnd();
     for (; pos != end; ++pos ) {
         d->m_downloadManager.addDownloadPolicy( **pos );
     }

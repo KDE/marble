@@ -614,7 +614,7 @@ int QtMarbleConfigDialog::volatileTileCacheLimit() const
 
 int QtMarbleConfigDialog::persistentTileCacheLimit() const
 {
-    return d->m_settings->value( "Cache/persistentTileCacheLimit", 300 ).toInt();
+    return d->m_settings->value( "Cache/persistentTileCacheLimit", 0 ).toInt(); // default to unlimited
 }
 
 QString QtMarbleConfigDialog::proxyUrl() const

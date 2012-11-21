@@ -35,8 +35,7 @@ public:
 
     QString imageFile() const;
 
-    virtual void paint( GeoPainter* painter, ViewportParams *viewport,
-                        const QString &renderPos, GeoSceneLayer *layer );
+    virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
 
 protected:
     QImage m_image;

@@ -19,28 +19,41 @@ namespace Marble {
 
 class SatellitesConfigModel : public QAbstractItemModel
 {
-
+    Q_OBJECT
 public:
     explicit SatellitesConfigModel( QObject *parent = 0 );
+    ~SatellitesConfigModel();
 
-    QStringList tleList();
     void loadSettings( QHash<QString, QVariant> settings );
 
     void appendChild( SatellitesConfigAbstractItem *child );
+    void clear();
 
-    QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const;
-    bool setData( const QModelIndex &index, const QVariant &value, int role = Qt::EditRole );
+    QStringList idList() const;
+    QStringList fullIdList() const;
+    QStringList urlList() const;
+
+    QVariant data( const QModelIndex &index,
+                   int role = Qt::DisplayRole ) const;
+    bool setData( const QModelIndex &index,
+                  const QVariant &value,
+                  int role = Qt::EditRole );
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
     QModelIndex parent( const QModelIndex &child ) const;
-    QModelIndex index( int row, int column, const QModelIndex &parent = QModelIndex() ) const;
-    QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
+    QModelIndex index( int row,
+                       int column,
+                       const QModelIndex &parent = QModelIndex() ) const;
+    QVariant headerData( int section, Qt::Orientation orientation,
+                         int role = Qt::DisplayRole ) const;
     Qt::ItemFlags flags( const QModelIndex &index ) const;
+    SatellitesConfigNodeItem* rootItem() const;
 
-private:
+protected:
     SatellitesConfigNodeItem *m_rootItem;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_SATELLITESCONFIGMODEL_H
+

@@ -413,7 +413,9 @@ void GeoDataFeature::initializeDefaultStyles()
                                                                                    true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
 
     //TODO
-    s_defaultStyle[Satellite] = s_defaultStyle[Default];
+    s_defaultStyle[Satellite]
+        = new GeoDataStyle( QImage( MarbleDirs::path( "bitmaps/satellite.png" ) ),
+              QFont( defaultFamily, defaultSize, 50, false ), s_defaultLabelColor );
 
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
