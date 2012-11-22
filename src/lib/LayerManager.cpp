@@ -126,6 +126,8 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
 
 void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
 {
+    const QTime totalTime = QTime::currentTime();
+
     QStringList renderPositions;
 
     if ( d->m_showBackground ) {
@@ -173,6 +175,10 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
 
 
     if ( d->m_showRuntimeTrace ) {
+        const int totalElapsed = totalTime.elapsed();
+        const int fps = 1000.0/totalElapsed;
+        traceList.append( QString( "Total: %1 ms (%2 fps)" ).arg( totalElapsed, 3 ).arg( fps ) );
+
         painter->save();
         painter->setBackgroundMode( Qt::OpaqueMode );
         painter->setBackground( Qt::gray );
