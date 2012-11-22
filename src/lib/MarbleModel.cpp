@@ -480,10 +480,10 @@ void MarbleModel::clearPersistentTileCache()
         // the name of the layer that has the same name as the theme ID
         QString themeID = d->m_mapTheme->head()->theme();
 
-        GeoSceneLayer *layer =
-            static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
-        GeoSceneTiled *texture =
-            static_cast<GeoSceneTiled*>( layer->groundDataset() );
+        const GeoSceneLayer *layer =
+            static_cast<const GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
+        const GeoSceneTiled *texture =
+            static_cast<const GeoSceneTiled*>( layer->groundDataset() );
 
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
@@ -543,6 +543,11 @@ const PluginManager* MarbleModel::pluginManager() const
     return &d->m_pluginManager;
 }
 
+PluginManager* MarbleModel::pluginManager()
+{
+    return &d->m_pluginManager;
+}
+
 const Planet *MarbleModel::planet() const
 {
     return d->m_planet;
@@ -562,8 +567,7 @@ void MarbleModel::addDownloadPolicies( const GeoSceneDocument *mapTheme )
     if ( !layer )
         return;
 
-    GeoSceneTiled const * texture = static_cast<GeoSceneTiled const *>( layer->groundDataset() );
-
+    const GeoSceneTiled * const texture = static_cast<const GeoSceneTiled*>( layer->groundDataset() );
     if ( !texture )
         return;
 

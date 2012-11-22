@@ -65,9 +65,9 @@ void PluginAboutDialog::setVersion( const QString& version )
     d->u_dialog.m_pMarbleVersionLabel->setText( tr( "Version %1" ).arg( version ) );
 }
 
-void PluginAboutDialog::setPixmap( const QPixmap& pixmap )
+void PluginAboutDialog::setIcon( const QIcon& icon )
 {
-    d->u_dialog.m_pMarbleLogoLabel->setPixmap( pixmap );
+    d->u_dialog.m_pMarbleLogoLabel->setPixmap( icon.pixmap( 64, 64 ) );
 }
 
 void PluginAboutDialog::setAboutText( const QString& about )

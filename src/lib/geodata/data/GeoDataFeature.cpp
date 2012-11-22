@@ -412,7 +412,6 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[Building]                 = GeoDataFeaturePrivate::createStyle( 1, 0, QColor( 0xBE, 0xAD, 0xAD ), QColor( 0xBE, 0xAD, 0xAD ).darker(), 
                                                                                    true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
 
-    //TODO
     s_defaultStyle[Satellite]
         = new GeoDataStyle( QImage( MarbleDirs::path( "bitmaps/satellite.png" ) ),
               QFont( defaultFamily, defaultSize, 50, false ), s_defaultLabelColor );

@@ -113,6 +113,8 @@ class LayerManager : public QObject
  private:
     Q_PRIVATE_SLOT( d, void updateVisibility( bool, const QString & ) )
 
+    Q_PRIVATE_SLOT( d, void addPlugins() )
+
  private:
     Q_DISABLE_COPY( LayerManager )
 

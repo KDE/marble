@@ -41,7 +41,9 @@ PlacemarkInfoDialog::PlacemarkInfoDialog(const GeoDataPlacemark *placemark, cons
     resize( 780, 580 );
 
     m_pBackButton->hide();
-    
+
+    description_val_browser->setOpenExternalLinks(true);
+
     connect( m_pPrintButton, SIGNAL( clicked() ),
              m_pWikipediaBrowser, SLOT( print() ) );
 
@@ -87,7 +89,7 @@ void PlacemarkInfoDialog::showContent()
     else if(role=="P" || role=="M" )
         rolestring = tr("Location");
     else if(role=="H")
-    {    
+    {
         if ( m_placemark->popularity() > 0 )
             rolestring = tr("Mountain");
         else
@@ -111,9 +113,11 @@ void PlacemarkInfoDialog::showContent()
         rolestring = tr("Crater");
     else if(role=="h" || role=="r" || role=="u" || role=="i")
         rolestring = tr("Landing Site");
-    else 
+    else if (role.isEmpty())
 	rolestring = tr("Other Place");
-	
+    else
+        rolestring = role;
+
     role_val_lbl->setText( rolestring );
 
     m_flagcreator = new DeferredFlag( this );
@@ -265,11 +269,11 @@ void PlacemarkInfoDialog::requestFlag( const QString& countrycode )
     m_flagcreator->setFlag( filename, flag_val_lbl->size() );
 
     if ( QFile::exists( filename ) ) {
-        connect( m_flagcreator, SIGNAL( flagDone() ), 
+        connect( m_flagcreator, SIGNAL( flagDone() ),
                  this,          SLOT( setFlagLabel() ) );
-        QTimer::singleShot(100, m_flagcreator, SLOT(slotDrawFlag()));	
+        QTimer::singleShot(100, m_flagcreator, SLOT(slotDrawFlag()));
     }
-} 
+}
 
 
 void PlacemarkInfoDialog::setFlagLabel()

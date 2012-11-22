@@ -39,7 +39,6 @@ class WeatherModel : public AbstractDataPluginModel
     void setUpdateInterval( quint32 hours );
 
     void setFavoriteItems( const QStringList& list );
-    void setFavoriteItemsOnly( bool favoriteOnly );
     
  public Q_SLOTS:
     /**
@@ -50,11 +49,6 @@ class WeatherModel : public AbstractDataPluginModel
      **/
     void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
     
-    /**
-     * Adds the @p item to the list of initialized items.
-     */
-    void addItemToList( AbstractDataPluginItem *item );
-
     void downloadDescriptionFileRequested( const QUrl& url );
 
  Q_SIGNALS:
@@ -71,6 +65,7 @@ class WeatherModel : public AbstractDataPluginModel
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              const MarbleModel *marbleModel,
                              qint32 number = 10 );
+    virtual void getItem( const QString &id, const MarbleModel *model );
     void parseFile( const QByteArray& file );
 
  private:

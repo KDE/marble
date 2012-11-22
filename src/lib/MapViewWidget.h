@@ -63,6 +63,7 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
     Q_PRIVATE_SLOT( d, void toggleFavorite() )
 
  Q_SIGNALS:
+    void celestialBodyChanged( const QString& );
     void mapThemeIdChanged( const QString& );
     void projectionChanged( Projection );
     void showMapWizard();

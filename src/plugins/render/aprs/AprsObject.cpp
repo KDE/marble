@@ -135,12 +135,9 @@ AprsObject::calculatePaintColor( GeoPainter *painter, int from, const QTime &tim
 
 void
 AprsObject::render( GeoPainter *painter, ViewportParams *viewport,
-                    const QString& renderPos, GeoSceneLayer * layer,
                     int fadeTime, int hideTime )
 {
     Q_UNUSED( viewport );
-    Q_UNUSED( layer );
-    Q_UNUSED( renderPos );
 
     if ( hideTime > 0 && m_history.last().timestamp().elapsed() > hideTime )
         return;

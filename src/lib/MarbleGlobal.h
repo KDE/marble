@@ -172,6 +172,14 @@ enum FlyToMode {
     Jump ///< Linear interpolation of lon and lat, distance increases towards the middle point, then decreases    
 };
 
+/**
+ * @brief Search mode: Global (worldwide) versus area (local, regional) search
+ */
+enum SearchMode {
+    GlobalSearch, ///< Search a whole planet
+    AreaSearch ///< Search a certain region of a planet (e.g. visible region)
+};
+
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 
@@ -223,14 +231,14 @@ QColor const oxygenForestGreen4 = QColor::fromRgb( 55, 164, 44 );
 
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.14.20 (PRE 0.15 GIT)" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.14.80 (0.15 Beta 1)" );
 
 // API Version id:
 // form : 0xMMmmpp
 //        MM = major revision.
 //        mm = minor revision.
 //        pp = patch revision.
-#define MARBLE_VERSION 0x000e00
+#define MARBLE_VERSION 0x000e50
 
 static const char NOT_AVAILABLE[] = QT_TR_NOOP("not available");
 

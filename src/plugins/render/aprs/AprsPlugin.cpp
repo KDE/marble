@@ -399,12 +399,11 @@ bool AprsPlugin::isInitialized () const
 
 bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     int fadetime = m_settings.value( "fadeTime" ).toInt() * 60000;
     int hidetime = m_settings.value( "hideTime" ).toInt() * 60000;
-
-    if ( renderPos != "HOVERS_ABOVE_SURFACE") {
-        return true;
-    }
 
     painter->save();
 
@@ -427,7 +426,7 @@ bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     QMutexLocker locker( m_mutex );
     QMap<QString, AprsObject *>::ConstIterator obj;
     for( obj = m_objects.constBegin(); obj != m_objects.constEnd(); ++obj ) {
-        ( *obj )->render( painter, viewport, renderPos, layer, fadetime, hidetime );
+        ( *obj )->render( painter, viewport, fadetime, hidetime );
     }
 
     painter->restore();

@@ -286,7 +286,7 @@ void StackedTileLoader::clear()
     emit cleared();
 }
 
-//
+// 
 QVector<GeoSceneTiled const *>
 StackedTileLoaderPrivate::findRelevantTextureLayers( TileId const & stackedTileId ) const
 {

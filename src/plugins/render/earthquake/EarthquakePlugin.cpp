@@ -28,7 +28,6 @@ EarthquakePlugin::EarthquakePlugin()
 
 EarthquakePlugin::EarthquakePlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_isInitialized( false ),
       m_ui( 0 ),
       m_configDialog( 0 ),
       m_minMagnitude( 0.0 ),
@@ -47,12 +46,6 @@ void EarthquakePlugin::initialize()
     EarthquakeModel *model = new EarthquakeModel( pluginManager(), this );
     setModel( model );
     setNumberOfItems( 20 );
-    m_isInitialized = true;
-}
-
-bool EarthquakePlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString EarthquakePlugin::name() const

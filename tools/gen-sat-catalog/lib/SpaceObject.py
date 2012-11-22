@@ -23,6 +23,7 @@ class SpaceObject(object):
 
     # object catagories 
     CATEGORY_SPACECRAFTS    = "Spacecrafts"
+    CATEGORY_SPACEPROBES    = "Spaceprobes"
     CATEGORY_MOONS          = "Moons"
 
     # body constants

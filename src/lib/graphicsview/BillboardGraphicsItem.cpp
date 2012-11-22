@@ -83,6 +83,16 @@ QList<QPointF> BillboardGraphicsItem::positions() const
     return p()->positions();
 }
 
+QList<QRectF> BillboardGraphicsItem::boundingRects() const
+{
+    QList<QRectF> rects;
+    QSizeF const size = p()->m_size;
+    foreach(const QPointF &point, p()->m_positions) {
+        rects << QRectF(point, size);
+    }
+    return rects;
+}
+
 BillboardGraphicsItem::Private *BillboardGraphicsItem::p() const
 {
     return static_cast<Private *>( d );

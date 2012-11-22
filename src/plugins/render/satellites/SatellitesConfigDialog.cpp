@@ -39,7 +39,7 @@ SatellitesConfigDialog::SatellitesConfigDialog( QWidget *parent )
     m_translations["Moons"]         = tr( "Moons", descCat );
     m_translations["Other"]         = tr( "Other", descCat );
     m_translations["Spacecrafts"]   = tr( "Spacecrafts", descCat );
-    m_translations["Space probes"]  = tr( "Space probes", descCat );
+    m_translations["Spaceprobes"]  = tr( "Spaceprobes", descCat );
     // + bodies
     const char *descBodies = "A planet or space body";
     m_translations["Moon"]          = tr( "Moon", descBodies );
@@ -277,6 +277,7 @@ void SatellitesConfigDialog::openDataSource()
     QListWidget *list = m_configWidget->listDataSources;
 
     const QString filter = QString("%1;;%2;;%3").arg(
+        tr( "All Supported Files (*.txt *.msc)" ),
         tr( "Marble Satellite Catalogue (*.msc)" ),
         tr( "Two Line Element Set (*.txt)" ),
         tr( "All Files (*.*)" ) );

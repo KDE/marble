@@ -49,11 +49,6 @@
 
 namespace Marble
 {
-int GeometryLayer::s_defaultZValues[GeoDataFeature::LastIndex];
-int GeometryLayer::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
-bool GeometryLayer::s_defaultValuesInitialized = false;
-int GeometryLayer::s_defaultZValue = 50;
-
 class GeometryLayerPrivate
 {
 public:
@@ -63,23 +58,42 @@ public:
     void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark );
     void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
 
+    static int maximumZoomLevel();
+
     const QAbstractItemModel *const m_model;
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
 
+private:
+    static void initializeDefaultValues();
+
+    static int s_defaultZValues[GeoDataFeature::LastIndex];
+    static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
+    static bool s_defaultValuesInitialized;
+    static int s_maximumZoomLevel;
+    static const int s_defaultZValue;
 };
+
+int GeometryLayerPrivate::s_defaultZValues[GeoDataFeature::LastIndex];
+int GeometryLayerPrivate::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
+bool GeometryLayerPrivate::s_defaultValuesInitialized = false;
+int GeometryLayerPrivate::s_maximumZoomLevel = 0;
+const int GeometryLayerPrivate::s_defaultZValue = 50;
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
     : m_model( model )
 {
+    initializeDefaultValues();
+}
+
+int GeometryLayerPrivate::maximumZoomLevel()
+{
+    return s_maximumZoomLevel;
 }
 
 GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
         : d( new GeometryLayerPrivate( model ) )
 {
-    if ( !s_defaultValuesInitialized )
-        initializeDefaultValues();
-
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
@@ -104,8 +118,11 @@ QStringList GeometryLayer::renderPosition() const
     return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
-void GeometryLayer::initializeDefaultValues()
+void GeometryLayerPrivate::initializeDefaultValues()
 {
+    if ( s_defaultValuesInitialized )
+        return;
+
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultZValues[i] = s_defaultZValue;
     
@@ -207,6 +224,10 @@ void GeometryLayer::initializeDefaultValues()
 
     s_defaultMinZoomLevels[GeoDataFeature::Satellite]           = 0;
 
+    for ( int i = 0; i < GeoDataFeature::LastIndex; ++i ) {
+        s_maximumZoomLevel = qMax( s_maximumZoomLevel, s_defaultMinZoomLevels[i] );
+    }
+
     s_defaultValuesInitialized = true;
 }
 
@@ -220,14 +241,13 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     painter->save();
     painter->autoMapQuality();
 
-    int maxZoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
+    int maxZoomLevel = qMin<int>( qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 ), GeometryLayerPrivate::maximumZoomLevel() );
 
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
     int painted = 0;
     foreach( GeoGraphicsItem* item, items )
     {
-        if ( item->visible()
-             && item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
+        if ( item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
             item->paint( painter, viewport );
             ++painted;
         }
@@ -311,8 +331,8 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
         return;
     item->setStyle( placemark->style() );
     item->setVisible( placemark->isGloballyVisible() );
-    item->setZValue( GeometryLayer::s_defaultZValues[placemark->visualCategory()] );
-    item->setMinZoomLevel( GeometryLayer::s_defaultMinZoomLevels[placemark->visualCategory()] );
+    item->setZValue( s_defaultZValues[placemark->visualCategory()] );
+    item->setMinZoomLevel( s_defaultMinZoomLevels[placemark->visualCategory()] );
     m_scene.addItem( item );
 }
 

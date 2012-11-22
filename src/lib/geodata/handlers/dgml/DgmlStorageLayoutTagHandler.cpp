@@ -82,8 +82,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         {
             storageLayout = GeoSceneTiled::TileMapService;
             serverLayout = new TmsServerLayout( texture );
-        }
-        else {
+        } else {
             storageLayout = GeoSceneTiled::Marble;
             serverLayout = new MarbleServerLayout( texture );
 

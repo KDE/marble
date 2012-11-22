@@ -38,9 +38,7 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
     explicit OpenDesktopPlugin( const MarbleModel *marbleModel );
 
     virtual void initialize();
-    
-    virtual bool isInitialized() const;
-    
+
     QString name() const;
     
     QString guiString() const;
@@ -69,8 +67,6 @@ private Q_SLOTS:
     void writeSettings();
  
  private:
-    bool m_isInitialized;
-
     QDialog * m_configDialog;
     Ui::OpenDesktopConfigWidget * m_uiConfigWidget;
 };

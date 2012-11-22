@@ -133,6 +133,8 @@ class MARBLE_EXPORT MarbleGraphicsItem
      */
     virtual void paint( QPainter *painter );
 
+    void setProjection( ViewportParams *viewport );
+
  protected:
     explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
 

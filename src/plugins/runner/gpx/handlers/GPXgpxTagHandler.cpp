@@ -70,25 +70,6 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     doc->addStyleMap(routeStyleMap);
     doc->addStyle(routestyle);
 
-    // routepoint style
-    GeoDataStyle routepointStyle;
-    routepointStyle.setStyleId("routepoint");
-
-    GeoDataIconStyle routepointIconStyle;
-    routepointIconStyle.setIconPath(MarbleDirs::path("bitmaps/city_4_white.png"));
-    routepointIconStyle.setHotSpot(QPointF(0.5,0.5), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
-    routepointStyle.setIconStyle(routepointIconStyle);
-
-    GeoDataLabelStyle routepointLabelStyle;
-    routepointLabelStyle.setAlignment(GeoDataLabelStyle::Corner);
-    routepointStyle.setLabelStyle(routepointLabelStyle);
-
-    GeoDataStyleMap routepointStyleMap;
-    routepointStyleMap.setStyleId("map-routepoint");
-    routepointStyleMap.insert("normal", QString("#").append(routepointStyle.styleId()));
-    doc->addStyleMap(routepointStyleMap);
-    doc->addStyle(routepointStyle);
-
     // create a default style for waypoint icons
     GeoDataStyle waypointStyle;
     waypointStyle.setStyleId("waypoint");

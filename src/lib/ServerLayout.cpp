@@ -229,7 +229,6 @@ QString QuadTreeServerLayout::encodeQuadTree( const Marble::TileId &id )
     return tileNum;
 }
 
-
 TmsServerLayout::TmsServerLayout(GeoSceneTiled *textureLayer )
     : ServerLayout( textureLayer )
 {

@@ -30,21 +30,18 @@ class AbstractWeatherService : public QObject
     virtual void setFavoriteItems( const QStringList& favorite );
     QStringList favoriteItems() const;
 
-    virtual void setFavoriteItemsOnly( bool favoriteOnly );
-    bool isFavoriteItemsOnly() const;
-
     virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
                                      const MarbleModel *model,
                                      qint32 number = 10 ) = 0;
+    virtual void getItem( const QString &id, const MarbleModel *model ) = 0;
     virtual void parseFile( const QByteArray& file );
     
  Q_SIGNALS:
     void requestedDownload( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
-    void createdItem( AbstractDataPluginItem *item );
+    void createdItems( QList<AbstractDataPluginItem*> items );
     void downloadDescriptionFileRequested( const QUrl& );
 
 private:
-    bool m_favoriteItemsOnly;
     QStringList m_favoriteItems;
 };
 

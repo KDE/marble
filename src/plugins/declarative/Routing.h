@@ -22,7 +22,8 @@ class RoutingPrivate;
 class Routing : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged)
+    Q_PROPERTY( QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged )
+    Q_PROPERTY( bool hasRoute READ hasRoute NOTIFY hasRouteChanged )
 
 public:
     enum RoutingProfile { Motorcar, Bicycle, Pedestrian };
@@ -36,6 +37,8 @@ public:
     QString routingProfile() const;
 
     void setRoutingProfile( const QString & profile );
+
+    bool hasRoute() const;
 
 public Q_SLOTS:
     void addVia( qreal lon, qreal lat );
@@ -60,6 +63,8 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void routingProfileChanged();
+
+    void hasRouteChanged();
 
 private:
     RoutingPrivate* const d;

@@ -57,6 +57,13 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
     placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
     placemark()->style()->labelStyle().setGlow( true );
 
+    // use special icon for moons
+    if( m_category == "Moons" ) {
+        placemark()->style()->iconStyle().setIcon(
+            QImage( ":/icons/moon.png" ) );
+    }
+
+
     m_planSat->getKeplerElements(
         m_perc, m_apoc, m_inc, m_ecc, m_ra, m_tano, m_m0, m_a, m_n0 );
 
@@ -113,14 +120,15 @@ void SatellitesMSCItem::setDescription()
 {
     QString description =
       QObject::tr( "Object name: %1 <br />"
-                   "Pericentre: %2 km<br />"
-                   "Apocentre: %3 km<br />"
-                   "Inclination: %4 Degree<br />"
-                   "Revolutions per day (24h): %5" )
-        .arg( name(), QString::number( m_perc, 'f', 2 ),
-                      QString::number( m_apoc, 'f', 2 ),
-                      QString::number( m_inc, 'f', 2 ),
-                      QString::number( m_n0, 'f', 2 ) );
+                   "Category: %2 <br />"
+                   "Pericentre: %3 km<br />"
+                   "Apocentre: %4 km<br />"
+                   "Inclination: %5 Degree<br />"
+                   "Revolutions per day (24h): %6" )
+        .arg( name(), category(), QString::number( m_perc, 'f', 2 ),
+                                  QString::number( m_apoc, 'f', 2 ),
+                                  QString::number( m_inc, 'f', 2 ),
+                                  QString::number( m_n0, 'f', 2 ) );
      placemark()->setDescription( description );
 }
 

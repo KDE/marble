@@ -15,6 +15,8 @@
 #include "marble_export.h"
 #include "RenderPlugin.h"
 
+class QDeclarativeComponent;
+class QGraphicsItem;
 
 namespace Marble
 {
@@ -40,11 +42,18 @@ class PluginManager;
 class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
 {
     Q_OBJECT
+
+    Q_PROPERTY( bool favoriteItemsOnly READ isFavoriteItemsOnly WRITE setFavoriteItemsOnly NOTIFY favoriteItemsOnlyChanged )
+    /** @todo FIXME Qt Quick segfaults if using the real class here instead of QObject */
+    Q_PROPERTY( QObject* favoritesModel READ favoritesModel NOTIFY favoritesModelChanged )
     
  public:    
     AbstractDataPlugin( const MarbleModel *marbleModel );
 
-    virtual ~AbstractDataPlugin();    
+    virtual ~AbstractDataPlugin();
+
+    bool isInitialized() const;
+
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
      */
@@ -104,12 +113,28 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      * @return: The type of render plugin this is.
      */
     virtual RenderType renderType() const;
+
+    void setDelegate( QDeclarativeComponent* delegate, QGraphicsItem* parent );
+
+    /** Convenience method to set the favorite item state on the current model */
+    void setFavoriteItemsOnly( bool favoriteOnly );
+
+    bool isFavoriteItemsOnly() const;
+
+    QObject* favoritesModel();
     
+public Q_SLOTS:
+    void handleViewportChange( ViewportParams* viewport );
+
  private Q_SLOTS:
     virtual void favoriteItemsChanged( const QStringList& favoriteItems );
 
  Q_SIGNALS:
     void changedNumberOfItems( quint32 number );
+
+    void favoriteItemsOnlyChanged();
+
+    void favoritesModelChanged();
     
  private:
     AbstractDataPluginPrivate * const d;

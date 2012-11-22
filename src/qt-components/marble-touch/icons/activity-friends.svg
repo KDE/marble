@@ -13,13 +13,13 @@
    id="Layer_1"
    x="0px"
    y="0px"
-   width="140"
-   height="140"
+   width="48"
+   height="48"
    viewBox="0 0 140 140"
    enable-background="new 0 0 100 85.416"
    xml:space="preserve"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="friends.svg"><metadata
+   sodipodi:docname="activity-friends.svg"><metadata
    id="metadata25"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
          rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
@@ -36,9 +36,9 @@
    inkscape:window-height="691"
    id="namedview21"
    showgrid="false"
-   inkscape:zoom="0.97684978"
-   inkscape:cx="72.538528"
-   inkscape:cy="140.80674"
+   inkscape:zoom="4.9895833"
+   inkscape:cx="-0.31200649"
+   inkscape:cy="29.685308"
    inkscape:window-x="708"
    inkscape:window-y="179"
    inkscape:window-maximized="0"
@@ -49,17 +49,9 @@
    fit-margin-bottom="0" />
 
 
-<rect
-   style="fill:#eeeeec;fill-opacity:1;stroke:#000000;stroke-width:0.99472988;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-   id="rect3934-6"
-   width="139.00526"
-   height="139.00526"
-   x="0.49736494"
-   y="0.49736494"
-   rx="31.889299"
-   ry="33.613216" /><g
+<g
    id="g3002"
-   transform="matrix(0.92892576,0,0,0.92892576,23.553712,-9.2304004)"
+   transform="matrix(1.0657957,0,0,1.0657957,16.710215,-20.90438)"
    style="fill:#0057ae"><g
      transform="translate(0,42.584)"
      id="g3"

@@ -35,6 +35,7 @@ class Tracking : public QObject
     Q_PROPERTY( bool hasLastKnownPosition READ hasLastKnownPosition NOTIFY hasLastKnownPositionChanged )
     Q_PROPERTY( Coordinate* lastKnownPosition READ lastKnownPosition WRITE setLastKnownPosition NOTIFY lastKnownPositionChanged )
     Q_PROPERTY( PositionMarkerType positionMarkerType READ positionMarkerType WRITE setPositionMarkerType NOTIFY positionMarkerTypeChanged )
+    Q_PROPERTY( double distance READ distance NOTIFY distanceChanged )
 
 public:
     enum PositionMarkerType {
@@ -77,6 +78,8 @@ public:
 
     void setPositionMarkerType( PositionMarkerType type );
 
+    double distance() const;
+
 public Q_SLOTS:
     void saveTrack( const QString &fileName );
 
@@ -100,6 +103,8 @@ Q_SIGNALS:
     void autoZoomChanged();
 
     void positionMarkerTypeChanged();
+
+    void distanceChanged();
 
 private Q_SLOTS:
     void updatePositionMarker();

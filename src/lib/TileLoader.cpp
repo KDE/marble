@@ -59,6 +59,7 @@ void TileLoader::setTextureLayers( const QVector<const GeoSceneTiled *> &texture
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
 
 QImage TileLoader::loadTileImage( TileId const & tileId, DownloadUsage const usage )
+
 {
     GeoSceneTiled const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );

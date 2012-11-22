@@ -22,6 +22,7 @@
 #include "MarbleMath.h"
 #include "MapThemeManager.h"
 #include "AbstractFloatItem.h"
+#include "AbstractDataPlugin.h"
 #include "RenderPlugin.h"
 #include "MarbleMap.h"
 #include "MarbleDirs.h"
@@ -31,6 +32,8 @@
 #include "BookmarkManager.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
+#include "DeclarativeDataPlugin.h"
+#include "PluginManager.h"
 
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ), m_marbleWidget( new Marble::MarbleWidget ),
@@ -38,6 +41,8 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     m_navigation( 0 ), m_search( 0 ), m_interceptor( new ZoomButtonInterceptor( this, this ) )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    QSettings settings( "kde.org", "Marble Desktop Globe" );
+    m_marbleWidget->readPluginSettings( settings );
     m_marbleWidget->model()->routingManager()->profilesModel()->loadDefaultProfiles();
     m_marbleWidget->model()->routingManager()->readSettings();
     m_marbleWidget->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
@@ -64,6 +69,8 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
 
 MarbleWidget::~MarbleWidget()
 {
+    QSettings settings( "kde.org", "Marble Desktop Globe" );
+    m_marbleWidget->writePluginSettings( settings );
     m_marbleWidget->model()->routingManager()->writeSettings();
 }
 
@@ -77,9 +84,14 @@ const Marble::ViewportParams *MarbleWidget::viewport() const
     return m_marbleWidget->viewport();
 }
 
-QList<Marble::RenderPlugin *> MarbleWidget::renderPlugins() const
+QList<QObject*> MarbleWidget::renderPlugins() const
 {
-    return m_marbleWidget->renderPlugins();
+    QList<QObject*> result;
+    foreach ( Marble::RenderPlugin* plugin, m_marbleWidget->renderPlugins() ) {
+        result << plugin;
+    }
+
+    return result;
 }
 
 QStringList MarbleWidget::activeFloatItems() const
@@ -110,6 +122,16 @@ QStringList MarbleWidget::activeRenderPlugins() const
         }
     }
     return result;
+}
+
+QDeclarativeListProperty<QObject> MarbleWidget::childList()
+{
+    return QDeclarativeListProperty<QObject>( this, m_children );
+}
+
+QDeclarativeListProperty<DeclarativeDataPlugin> MarbleWidget::dataLayers()
+{
+    return QDeclarativeListProperty<DeclarativeDataPlugin>( this, 0, &MarbleWidget::addLayer );
 }
 
 void MarbleWidget::setActiveRenderPlugins( const QStringList &items )
@@ -270,6 +292,16 @@ void MarbleWidget::forwardMouseClick(qreal lon, qreal lat, Marble::GeoDataCoordi
     }
 }
 
+void MarbleWidget::addLayer( QDeclarativeListProperty<DeclarativeDataPlugin> *list, DeclarativeDataPlugin *layer )
+{
+    MarbleWidget *object = qobject_cast<MarbleWidget *>( list->object );
+    if ( object ) {
+        object->m_marbleWidget->model()->pluginManager()->addRenderPlugin( layer );
+        object->setDataPluginDelegate( layer->nameId(), layer->delegate() );
+        object->m_dataLayers << layer;
+    }
+}
+
 Routing* MarbleWidget::routing()
 {
     if ( !m_routing ) {
@@ -335,6 +367,17 @@ void MarbleWidget::downloadArea(int topTileLevel, int bottomTileLevel)
     }
 }
 
+void MarbleWidget::setDataPluginDelegate( const QString &plugin, QDeclarativeComponent *delegate )
+{
+    QList<Marble::RenderPlugin*> renderPlugins = m_marbleWidget->renderPlugins();
+    foreach( Marble::RenderPlugin* renderPlugin, renderPlugins ) {
+        Marble::AbstractDataPlugin* dataPlugin = qobject_cast<Marble::AbstractDataPlugin*>( renderPlugin );
+        if ( dataPlugin && dataPlugin->nameId() == plugin ) {
+            dataPlugin->setDelegate( delegate, this );
+        }
+    }
+}
+
 bool MarbleWidget::workOffline() const
 {
     return m_marbleWidget->model()->workOffline();
@@ -372,6 +415,60 @@ bool MarbleWidget::sceneEvent( QEvent *event )
     }
 
     return QGraphicsProxyWidget::sceneEvent( event );
+}
+
+Marble::RenderPlugin *MarbleWidget::renderPlugin( const QString & name )
+{
+    foreach( Marble::RenderPlugin * plugin, m_marbleWidget->renderPlugins() )
+    {
+        if( plugin->nameId() == name ) {
+            return plugin;
+        }
+    }
+    return 0;
+}
+
+bool MarbleWidget::containsRenderPlugin( const QString & name )
+{
+    foreach( Marble::RenderPlugin * plugin, m_marbleWidget->renderPlugins() )
+    {
+        if( plugin->nameId() == name ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+QList<QObject*> MarbleWidget::floatItems() const
+{
+    QList<QObject*> result;
+    foreach ( Marble::AbstractFloatItem* plugin, m_marbleWidget->floatItems() ) {
+        result << plugin;
+    }
+
+    return result;
+}
+
+Marble::AbstractFloatItem* MarbleWidget::floatItem( const QString & name )
+{
+    foreach( Marble::AbstractFloatItem * plugin, m_marbleWidget->floatItems() )
+    {
+        if( plugin->nameId() == name ) {
+            return plugin ;
+        }
+    }
+    return 0;
+}
+
+bool MarbleWidget::containsFloatItem( const QString & name )
+{
+    foreach( Marble::AbstractFloatItem * plugin, m_marbleWidget->floatItems() )
+    {
+        if( plugin->nameId() == name ) {
+            return true;
+        }
+    }
+    return false;
 }
 
 #include "MarbleDeclarativeWidget.moc"

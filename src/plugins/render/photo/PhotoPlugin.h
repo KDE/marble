@@ -33,8 +33,6 @@ class PhotoPlugin : public AbstractDataPlugin
 
     void initialize();
 
-    bool isInitialized () const;
-    
     QString name() const;
     
     QString guiString() const;
@@ -50,8 +48,6 @@ class PhotoPlugin : public AbstractDataPlugin
     QList<PluginAuthor> pluginAuthors() const;
 
     QIcon icon() const;
- private:
-    bool m_isInitialized;
 };
 
 }

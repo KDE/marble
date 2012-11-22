@@ -102,6 +102,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     
     connect( d->m_mapViewWidget, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
     connect( d->m_mapViewWidget, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
+    connect( d->m_mapViewWidget, SIGNAL( celestialBodyChanged( const QString& ) ),
+             d->m_navigationWidget, SLOT( clearSearch() ) );
     connect( d->m_navigationWidget, SIGNAL( searchFinished() ), this, SIGNAL( searchFinished() ) );
 }
 
@@ -238,10 +240,10 @@ CurrentLocationWidget * MarbleControlBox::currentLocationWidget()
     return d->m_currentLocationWidget;
 }
 
-void MarbleControlBox::search(const QString &searchTerm)
+void MarbleControlBox::search(const QString &searchTerm, SearchMode searchMode )
 {
     setCurrentWidget( d->m_navigationWidget );
-    d->m_navigationWidget->search( searchTerm );
+    d->m_navigationWidget->search( searchTerm, searchMode );
 }
 
 }

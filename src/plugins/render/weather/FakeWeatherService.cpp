@@ -49,7 +49,12 @@ void FakeWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
     data.setTemperature( 14.0, WeatherData::Celsius );
     item->setCurrentWeather( data );
         
-    emit createdItem( item );
+    emit createdItems( QList<AbstractDataPluginItem*>() << item );
+}
+
+void FakeWeatherService::getItem( const QString &, const MarbleModel *model )
+{
+    getAdditionalItems( GeoDataLatLonBox(), model, 1 );
 }
 
 #include "FakeWeatherService.moc"

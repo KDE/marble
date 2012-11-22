@@ -14,7 +14,7 @@
     You should have received a copy of the GNU Library General Public License
     along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-    Copyright 2009 Thibaut GRIDEL <tgridel@free.fr>
+    Copyright 2011 Anders Lund <anders@alweb.dk>
 */
 
 #include "GPXrteptTagHandler.h"
@@ -42,8 +42,7 @@ GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_rte))
     {
-        GeoDataFolder* route = parentItem.nodeAs<GeoDataFolder>();
-        GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(route->child(0));
+        GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
         GeoDataLineString* linestring = static_cast<GeoDataLineString*>(placemark->geometry());
         GeoDataCoordinates coord;
 
@@ -63,20 +62,11 @@ GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
         }
         coord.set(lon, lat, 0, GeoDataCoordinates::Degree);
         linestring->append(coord);
-        
-        // create a placemark too...
-        GeoDataPlacemark* routepoint = new GeoDataPlacemark;
-        routepoint->setCoordinate(coord);
-        route->append(routepoint);
-        routepoint->setStyleUrl("#map-routepoint");
-        mDebug()<<routepoint->style()->styleId();
-        
 
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << gpxTag_rtept << "> waypoint: " << linestring->size()
                 << coord.toString(GeoDataCoordinates::Decimal);
 #endif
-        return static_cast<GeoDataPlacemark*>(routepoint);
     }
     mDebug() << "rtept parsing with parentitem" << parentItem.qualifiedName();
     return 0;

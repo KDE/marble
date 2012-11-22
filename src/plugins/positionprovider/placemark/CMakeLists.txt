@@ -1,8 +1,8 @@
 PROJECT( PlacemarkPositionProviderPlugin )
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/positionprovider/placemark
- ${CMAKE_BINARY_DIR}/src/plugins/positionprovider/placemark
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 

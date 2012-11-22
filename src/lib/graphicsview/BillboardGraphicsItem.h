@@ -47,6 +47,11 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
      */
     QList<QPointF> positions() const;
 
+    /**
+     * @brief Returns the absolute screen bounding boxes of the item.
+     */
+    QList<QRectF> boundingRects() const;
+
  private:
     class Private;
     Private *p() const;

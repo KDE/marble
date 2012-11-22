@@ -212,7 +212,6 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
             tiles.append( tile );
         }
-
     }
 
     ( !tiles.isEmpty() );

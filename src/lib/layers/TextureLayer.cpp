@@ -61,7 +61,7 @@ public:
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
     QVector<const GeoSceneTiled *> m_textures;
-    GeoSceneGroup *m_textureLayerSettings;
+    const GeoSceneGroup *m_textureLayerSettings;
     QString m_runtimeTrace;
     // For scheduling repaints
     QTimer           m_repaintTimer;
@@ -296,21 +296,21 @@ void TextureLayer::setupTextureMapper( Projection projection )
     delete d->m_texmapper;
 
     switch( projection ) {
-    case Spherical:
-        d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader );
-        break;
-    case Equirectangular:
-        d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
-        break;
-    case Mercator:
-        if ( d->m_tileLoader.tileProjection() == GeoSceneTiled::Mercator ) {
-            d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader );
-        } else {
-            d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
-        }
-        break;
-    default:
-        d->m_texmapper = 0;
+        case Spherical:
+            d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader );
+            break;
+        case Equirectangular:
+            d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
+            break;
+        case Mercator:
+            if ( d->m_tileLoader.tileProjection() == GeoSceneTiled::Mercator ) {
+                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader );
+            } else {
+                d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
+            }
+            break;
+        default:
+            d->m_texmapper = 0;
     }
     Q_ASSERT( d->m_texmapper );
 }
@@ -345,8 +345,7 @@ void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
     d->m_tileLoader.downloadStackedTile( stackedTileId );
 }
 
-void TextureLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
-
+void TextureLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
 {
     delete d->m_texcolorizer;
     d->m_texcolorizer = 0;

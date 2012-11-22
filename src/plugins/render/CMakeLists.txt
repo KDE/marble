@@ -26,6 +26,7 @@ add_subdirectory( sun )
 
 # Display online information
 add_subdirectory( earthquake )
+add_subdirectory(foursquare)
 # Disabled for now until legal issues wrt to the API
 # and terms of service of opencaching are cleared up.
 #add_subdirectory( opencaching )
@@ -45,4 +46,3 @@ add_subdirectory( inhibit-screensaver )
 if (NOT WIN32)
   add_subdirectory( aprs )
 endif (NOT WIN32)
-

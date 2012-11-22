@@ -245,7 +245,6 @@ QString GeoSceneTiled::themeStr() const
     return dirInfo.isAbsolute() ? sourceDir() : "maps/" + sourceDir();
 }
 
-
 QList<const DownloadPolicy *> GeoSceneTiled::downloadPolicies() const
 {
     return m_downloadPolicies;

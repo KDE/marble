@@ -86,7 +86,8 @@ void WikipediaModel::parseFile( const QByteArray& file )
     
     parser.read( file );
     
-    QList<WikipediaItem*>::iterator it;
+    QList<AbstractDataPluginItem*> items;
+    QList<WikipediaItem*>::const_iterator it;
     
     for ( it = list.begin(); it != list.end(); ++it ) {
         if ( itemExists( (*it)->id() ) ) {
@@ -102,11 +103,11 @@ void WikipediaModel::parseFile( const QByteArray& file )
             downloadItemData( thumbnailImageUrl, "thumbnail", *it );
         }
         else {
-            addItemToList( *it );
+            items << *it;
         }
     }
 
-    emit itemsUpdated();
+    addItemsToList( items );
 }
 
 #include "WikipediaModel.moc"

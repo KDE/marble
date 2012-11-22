@@ -165,6 +165,8 @@ class WeatherData
      * Get the icon showing the current condition.
      */
     QImage icon() const;
+
+    QString iconSource() const;
     
     WeatherData::WindDirection windDirection() const;
     void setWindDirection( WeatherData::WindDirection direction );

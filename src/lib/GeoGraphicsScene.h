@@ -75,11 +75,6 @@ public:
      * @return The list of items in the specified box in no specific order.
      */
     QList<GeoGraphicsItem *> items( const GeoDataLatLonAltBox& box, int maxZoomLevel ) const;
-    
-    /**
-     * @brief default zoom level used for tiling
-     */
-    static int s_tileZoomLevel;
 
 private:
     GeoGraphicsScenePrivate * const d;

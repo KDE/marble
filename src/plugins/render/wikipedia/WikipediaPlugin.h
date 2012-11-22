@@ -41,8 +41,6 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
      
     void initialize();
 
-    bool isInitialized() const;
-
     QString name() const;
     
     QString guiString() const;
@@ -81,12 +79,10 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
     void checkNumberOfItems( quint32 number );
 
  private:
-    bool m_isInitialized;
-
-    QIcon m_icon;
+    const QIcon m_icon;
     Ui::WikipediaConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
-    QHash<QString,QVariant> m_settings;
+    bool m_showThumbnails;
 };
 
 }

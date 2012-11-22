@@ -1,7 +1,7 @@
 project( TileCreator )
 include_directories(
- ${CMAKE_SOURCE_DIR}/src/tilecreator
- ${CMAKE_BINARY_DIR}/src/tilecreator
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 include( ${QT_USE_FILE} )
@@ -59,7 +59,7 @@ if( TILES_AT_COMPILETIME )
         #  DEM  "true" for srtm, "false" else
         #  TARGETDIR  the destination directory
         get_target_property( tilecreator_filename tilecreator LOCATION )
-        configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/../../data/maps/earth/${mapname}/${mapname}.jpg ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname}/${mapname}.jpg COPYONLY )
+        configure_file( ${CMAKE_SOURCE_DIR}/data/maps/earth/${mapname}/${mapname}.jpg ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname}/${mapname}.jpg COPYONLY )
         add_custom_command( TARGET tilecreator POST_BUILD
                             COMMAND ${tilecreator_filename} ARGS ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname} ${mapname}.jpg ${grayscale} ${CMAKE_CURRENT_BINARY_DIR}/tiles
                             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
