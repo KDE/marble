@@ -127,16 +127,16 @@ class MARBLE_EXPORT MarbleGraphicsItem
      */
     virtual QRectF contentRect() const;
 
+    void setProjection( ViewportParams *viewport );
+
+ protected:
+    explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
+
     /**
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
      * This function will be called by paintEvent().
      */
     virtual void paint( QPainter *painter );
-
-    void setProjection( ViewportParams *viewport );
-
- protected:
-    explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
 
     virtual bool eventFilter( QObject *object, QEvent *e );
 
