@@ -61,13 +61,8 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
     if ( ItemCoordinateCache == cacheMode()
          || DeviceCoordinateCache == cacheMode() )
     {
-        p()->ensureValidCacheKey();
         QPixmap cachePixmap;
-#if QT_VERSION < 0x040600
-        bool pixmapAvailable = QPixmapCache::find( p()->m_cacheKey, cachePixmap );
-#else
         bool pixmapAvailable = QPixmapCache::find( p()->m_cacheKey, &cachePixmap );
-#endif
         if ( !pixmapAvailable ) {
             QSize neededPixmapSize = size().toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
         
@@ -93,11 +88,7 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
                 item->paintEvent( &pixmapPainter, viewport );
             }
             // Update the pixmap in cache
-#if QT_VERSION < 0x040600
-            QPixmapCache::insert( p()->m_cacheKey, cachePixmap );
-#else
             p()->m_cacheKey = QPixmapCache::insert( cachePixmap );
-#endif
         }
         
         foreach( const QPointF& position, p()->positions() ) {

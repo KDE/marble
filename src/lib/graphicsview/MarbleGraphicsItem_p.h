@@ -78,17 +78,6 @@ class MarbleGraphicsItemPrivate
      */
     QList<QRectF> boundingRects() const;
 
-    void ensureValidCacheKey()
-    {
-#if QT_VERSION < 0x040600
-        if( m_cacheKey.isNull() ) {
-            static unsigned int key = 0;
-            m_cacheKey = QString( "MarbleGraphicsItem:" ) + QString::number( key );
-            key++;
-        }
-#endif
-    }
-
     virtual void setProjection( const ViewportParams *viewport ) = 0;
 
     void updateChildPositions()
@@ -110,11 +99,7 @@ class MarbleGraphicsItemPrivate
 
     MarbleGraphicsItem::CacheMode m_cacheMode;
 
-#if QT_VERSION < 0x040600
-    QString m_cacheKey;
-#else
     QPixmapCache::Key m_cacheKey;
-#endif
 
     bool m_visibility;
 
