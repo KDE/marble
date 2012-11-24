@@ -42,6 +42,8 @@ namespace kml
 {
 KML_DEFINE_TAG_HANDLER( coordinates )
 
+static const bool kmlStrictSpecs = false;
+
 // We can't use KML_DEFINE_TAG_HANDLER_GX22 because the name of the tag ("coord")
 // and the TagHandler ("KmlcoordinatesTagHandler") don't match
 static GeoTagHandlerRegistrar s_handlercoordkmlTag_nameSpaceGx22(GeoParser::QualifiedName(kmlTag_coord, kmlTag_nameSpaceGx22 ),
@@ -61,7 +63,29 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
      || parentItem.represents( kmlTag_LinearRing ) ) {
         QStringList  coordinatesLines;// = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
         // Splitting using the "\\s" regexp is slow, split manually instead.
-        QString const text = parser.readElementText().trimmed();
+        QString text = parser.readElementText().trimmed();
+
+        if ( !kmlStrictSpecs ) {
+            // Removing spaces before and after commas
+            for ( int i = 1; i < text.size() - 1; ++i ) {
+                if ( text[i] == ',' ) {
+                    // Before
+                    int l = i - 1;
+                    while ( l > 0 && text[l].isSpace() ) {
+                        --l;
+                    }
+
+                    // After
+                    int r = i + 1;
+                    while ( r < text.size() && text[r].isSpace() ) {
+                        ++r;
+                    }
+
+                    text.remove( l + 1, r - l - 1 ).insert( l + 1, ',' );
+                }
+            }
+        }
+
         int index = 0;
         bool inside = true;
         int const size = text.size();
@@ -135,7 +159,12 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
     }
 
     if( parentItem.represents( kmlTag_Track ) ) {
-        QStringList coordinates = parser.readElementText().trimmed().split( ' ' );
+        QString input = parser.readElementText().trimmed();
+        if ( !kmlStrictSpecs ) {
+            input = input.replace( QRegExp( "\\s*,\\s*" ), "," );
+        }
+        QStringList coordinates = input.split( ' ' );
+
         GeoDataCoordinates coord;
         if ( coordinates.size() == 2 ) {
             coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(),
