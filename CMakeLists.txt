@@ -253,6 +253,11 @@ if(QTONLY)
   set( QT_USE_QTTEST     ON )
   set( QT_USE_QTSCRIPT   ON )
   include( ${QT_USE_FILE} )
+  IF ( NOT QT_QTDECLARATIVE_LIBRARY )
+    # older cmake versions have a FindQt4.cmake without support for declarative,
+    # but the library may still be available
+    FIND_LIBRARY(QT_QTDECLARATIVE_LIBRARY NAMES QtDeclarative HINTS ${QT_LIBRARY_DIR})
+  ENDIF()
 
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources
