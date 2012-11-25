@@ -117,7 +117,7 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
 
 void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt ) const
 {
-    return coordinate().geoCoordinates( lon, lat, alt );
+    coordinate().geoCoordinates( lon, lat, alt );
 }
 
 void GeoDataPlacemark::setCoordinate( qreal lon, qreal lat, qreal alt, GeoDataPoint::Unit _unit)
