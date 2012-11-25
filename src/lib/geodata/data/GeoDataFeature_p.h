@@ -117,6 +117,9 @@ class GeoDataFeaturePrivate
         return GeoDataTypes::GeoDataFeatureType;
     }
 
+    static void initializeDefaultStyles();
+    static void initializeOsmVisualCategories();
+
     static GeoDataStyle* createOsmPOIStyle( const QFont &font, const QString &bitmap, 
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker())
@@ -198,6 +201,15 @@ class GeoDataFeaturePrivate
     GeoDataRegion m_region;
     
     QAtomicInt  ref;
+
+    // Static members
+    static QFont         s_defaultFont;
+    static QColor        s_defaultLabelColor;
+
+    static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
+    static bool          s_defaultStyleInitialized;
+
+    static QMap<QString, GeoDataFeature::GeoDataVisualCategory> s_visualCategories;
 };
 
 } // namespace Marble
