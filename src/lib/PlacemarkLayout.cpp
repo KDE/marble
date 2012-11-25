@@ -297,7 +297,7 @@ void PlacemarkLayout::setCacheData()
 }
 
 /// determine the set of placemarks that fit the viewport based on a pyramid of TileIds
-QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const ViewportParams *viewport )
+QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const ViewportParams *viewport ) const
 {
     int zoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 
@@ -422,11 +422,8 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
      */
     const QItemSelection selection = m_selectionModel->selection();
 
-    QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
-    const int rowCount = placemarkList.count();
-    for ( int i = 0; i != rowCount; ++i ) {
-        const GeoDataPlacemark *placemark = placemarkList.at(i);
-
+    const QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
+    foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
         bool ok;
         GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
         if ( !ok ) {
@@ -516,7 +513,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         }
     }
 
-    m_runtimeTrace = QString("Visible: %1 Drawn: %2").arg( rowCount ).arg( m_paintOrder.size() );
+    m_runtimeTrace = QString("Visible: %1 Drawn: %2").arg( placemarkList.count() ).arg( m_paintOrder.size() );
     return m_paintOrder;
 }
 
@@ -584,7 +581,7 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlace
 
 QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                                       const qreal x, const qreal y,
-                                      const QString &labelText )
+                                      const QString &labelText ) const
 {
     if ( labelText.isEmpty() )
         return QRectF();

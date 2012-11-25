@@ -110,7 +110,7 @@ class PlacemarkLayout : public QObject
 
     void styleReset();
 
-    QList<const GeoDataPlacemark*> visiblePlacemarks( const ViewportParams *viewport );
+    QList<const GeoDataPlacemark*> visiblePlacemarks( const ViewportParams *viewport ) const;
     bool layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected );
 
     /**
@@ -122,7 +122,7 @@ class PlacemarkLayout : public QObject
 
     QRectF  roomForLabel( const GeoDataStyle * style,
                          const qreal x, const qreal y,
-                         const QString &labelText );
+                         const QString &labelText ) const;
 
     bool    placemarksOnScreenLimit( const QSize &screenSize ) const;
 
