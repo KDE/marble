@@ -187,8 +187,8 @@ class GeoDataFeaturePrivate
 
     QString       m_role;
 
-    GeoDataStyle*    m_style;
-    GeoDataStyleMap* m_styleMap;
+    const GeoDataStyle* m_style;
+    const GeoDataStyleMap* m_styleMap;
 
     GeoDataExtendedData m_extendedData;
 

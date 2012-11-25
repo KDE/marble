@@ -614,7 +614,7 @@ void GeoDataFeature::setTimeStamp( GeoDataTimeStamp timeStamp )
     d->m_timeStamp = timeStamp;
 }
 
-GeoDataStyle* GeoDataFeature::style() const
+const GeoDataStyle* GeoDataFeature::style() const
 {
     if ( d->m_style != 0 ) {
         return d->m_style;
@@ -635,7 +635,7 @@ GeoDataStyle* GeoDataFeature::style() const
     }
 }
 
-void GeoDataFeature::setStyle( GeoDataStyle* style )
+void GeoDataFeature::setStyle( const GeoDataStyle* style )
 {
     detach();
     d->m_style = style;
@@ -685,12 +685,12 @@ void GeoDataFeature::setRole( const QString &role )
     d->m_role = role;
 }
 
-GeoDataStyleMap* GeoDataFeature::styleMap() const
+const GeoDataStyleMap* GeoDataFeature::styleMap() const
 {
     return d->m_styleMap;
 }
 
-void GeoDataFeature::setStyleMap( GeoDataStyleMap* styleMap )
+void GeoDataFeature::setStyleMap( const GeoDataStyleMap* styleMap )
 {
     d->m_styleMap = styleMap;
 }

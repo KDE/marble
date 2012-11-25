@@ -379,12 +379,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the style assigned to the placemark.
      */
-    GeoDataStyle* style() const;
+    const GeoDataStyle* style() const;
     /**
      * Sets the style of the placemark.
      * @param  style  the new style to be used.
      */
-    void setStyle( GeoDataStyle* style );
+    void setStyle( const GeoDataStyle* style );
 
     /**
      * Return the ExtendedData assigned to the feature.
@@ -461,11 +461,11 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * normal style.
      * @see GeoDataStyleMap
      */
-    GeoDataStyleMap* styleMap() const;
+    const GeoDataStyleMap* styleMap() const;
     /**
      * Sets the styleMap of the feature
      */
-    void setStyleMap( GeoDataStyleMap* map );
+    void setStyleMap( const GeoDataStyleMap* map );
 
 
     // ----------------------------------------------------------------

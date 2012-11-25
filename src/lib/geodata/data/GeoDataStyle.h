@@ -108,5 +108,6 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 }
 
 Q_DECLARE_METATYPE( Marble::GeoDataStyle* )
+Q_DECLARE_METATYPE( const Marble::GeoDataStyle* )
 
 #endif
