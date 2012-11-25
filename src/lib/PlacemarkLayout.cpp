@@ -282,10 +282,9 @@ void PlacemarkLayout::setCacheData()
 
         const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
 
-        bool ok;
-        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
 
-        if ( !ok ) {
+        if ( !coordinates.isValid() ) {
             continue;
         }
 
@@ -391,10 +390,9 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         const QModelIndex index = selectedIndexes.at( i );
         const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         Q_ASSERT(placemark);
-        bool ok;
-        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
 
-        if ( !ok ) {
+        if ( !coordinates.isValid() ) {
             continue;
         }
 
@@ -424,9 +422,8 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
 
     const QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
     foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
-        bool ok;
-        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
-        if ( !ok ) {
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
+        if ( !coordinates.isValid() ) {
             continue;
         }
 
@@ -568,15 +565,20 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     return true;
 }
 
-GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlacemark *placemark, bool *ok ) const
+GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlacemark *placemark ) const
 {
-    GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), ok );
-    if ( !*ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
+    bool ok;
+    GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), &ok );
+    if ( !ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
                 != m_acceptedVisualCategories.constEnd() ) {
-            *ok = true;
+        ok = true;
     }
 
-    return coordinates;
+    if ( ok ) {
+        return coordinates;
+    }
+
+    return GeoDataCoordinates();
 }
 
 QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
