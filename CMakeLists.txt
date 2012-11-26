@@ -84,8 +84,7 @@ if( QTONLY AND NOT WIN32 )
         INCLUDE(CTest)
     endif( BUILD_MARBLE_TESTS )
 else()
-    # for KDE builds this gets set in the kdeedu CMakeLists.txt
-    set( BUILD_MARBLE_TESTS OFF )
+    set( BUILD_MARBLE_TESTS ${KDE4_BUILD_TESTS} )
 endif()
 
 if( BUILD_MARBLE_TESTS )
