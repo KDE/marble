@@ -53,6 +53,8 @@ protected:
     QMenu*                  contextMenu ();
 public:
     explicit                AbstractFloatItem (const Marble::MarbleModel* marbleModel, const QPointF& point = QPointF(10.0,10.0), const QSizeF& size = QSizeF(150.0,50.0));
+protected:
+    virtual void            changeViewport (Marble::ViewportParams* viewport);
 };
 // AbstractFloatItem
 

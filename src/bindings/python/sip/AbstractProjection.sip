@@ -59,8 +59,6 @@ public:
     virtual Marble::AbstractProjection::SurfaceType  surfaceType () const=0;
     virtual Marble::AbstractProjection::PreservationType  preservationType () const;
     virtual bool            isOrientedNormal () const;
-    bool                    exceedsLatitudeRange (const Marble::GeoDataCoordinates& coords) const;
-    bool                    exceedsLatitudeRange (const Marble::GeoDataLineString& lineString) const;
     virtual bool            mapCoversViewport (const Marble::ViewportParams* viewport) const=0;
     virtual QPainterPath    mapShape (const Marble::ViewportParams* viewport) const=0;
     QRegion                 mapRegion (const Marble::ViewportParams* viewport) const;
@@ -73,7 +71,7 @@ public:
 //ig    bool                    screenCoordinates (const Marble::GeoDataLineString& lineString, const Marble::ViewportParams* viewport, QVector<QPolygonF*>& polygons) const;
     virtual bool            geoCoordinates (const int x, const int y, const Marble::ViewportParams* viewport, qreal& lon, qreal& lat, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree) const=0;
     virtual Marble::GeoDataLatLonAltBox  latLonAltBox (const QRect& screenRect, const Marble::ViewportParams* viewport) const;
-//ig    bool                    screenCoordinates (qreal lon, qreal lat, const Marble::ViewportParams* viewport, int& x, int& y) const;
-//ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, int& x, int& y, bool& globeHidesPoint) const;
+protected:
+//ig                            AbstractProjection (AbstractProjectionPrivate& dd);
 };
 };

@@ -90,6 +90,7 @@ signals:
     void                    trackedPlacemarkChanged (const Marble::GeoDataPlacemark* placemark);
 public:
     void                    setMapThemeId (const QString& mapThemeId);
+//ig    PluginManager*          pluginManager ();
 };
 // MarbleModel
 

@@ -43,11 +43,14 @@ signals:
 //ig    void                    positionProviderPluginChanged (PositionProviderPlugin* activePlugin);
 public:
     bool                    isTrackEmpty () const;
-    bool                    saveTrack (QString& fileName);
     explicit                PositionTracking (Marble::GeoDataTreeModel* model);
     QDateTime               timestamp () const;
     qreal                   length (qreal planetRadius) const;
 signals:
     void                    statusChanged (Marble::PositionProviderStatus status);
+public:
+    void                    readSettings ();
+    void                    writeSettings ();
+    bool                    saveTrack (const QString& fileName);
 };
 };

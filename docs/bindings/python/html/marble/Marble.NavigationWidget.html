@@ -67,8 +67,9 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#NavigationWidget">__init__</a> (self, QWidget parent=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::WindowFlags</a> f=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changeZoom">changeZoom</a> (self, int zoom)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearSearch">clearSearch</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resizeEvent">resizeEvent</a> (self, QResizeEvent a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#search">search</a> (self, QString searchTerm)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#search">search</a> (self, QString searchTerm, <a href="../marble/Marble.html#SearchMode">Marble.SearchMode</a> searchMode)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectTheme">selectTheme</a> (self, QString a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMarbleWidget">setMarbleWidget</a> (self, <a href="../marble/Marble.MarbleWidget.html">Marble.MarbleWidget</a> widget)</td></tr>
 </table>
@@ -259,6 +260,19 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 the widget itself, e.g. by using the scroll wheel. It sets the
 value of the slider, but nothing more. In particular it
 doesn't emit the zoomChanged signal.
+</p></div></div><a class="anchor" name="clearSearch"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearSearch</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Clear all previous search results
 </p></div></div><a class="anchor" name="resizeEvent"></a>
 <div class="memitem">
 <div class="memproto">
@@ -299,7 +313,13 @@ Zoom Down buttons.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>searchTerm</em></td>
+<td class="paramname"><em>searchTerm</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.html#SearchMode">Marble.SearchMode</a>&nbsp;</td>
+<td class="paramname"><em>searchMode</em></td>
 </tr>
 <tr>
 <td></td>

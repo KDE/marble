@@ -55,12 +55,11 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 
 <p>This is the home of all GeoGraphicsItems to be shown on the map.
 </p>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Attributes</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#vars_tileZoomLevel">s_tileZoomLevel</a></td></tr><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoGraphicsScene">__init__</a> (self, QObject parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addItem">addItem</a> (self, <a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem</a> item)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clear">clear</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#items">items</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eraseAll">eraseAll</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#items">items</a> (self, <a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> box, int maxZoomLevel)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeItem">removeItem</a> (self, <a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem</a> item)</td></tr>
 </table>
@@ -131,11 +130,11 @@ Adds the item <b>item</b> to the GeoGraphicsScene
 </div>
 <div class="memdoc"><p>Remove all items from the GeoGraphicsScene
 Removes all items from the GeoGraphicsScene
-</p></div></div><a class="anchor" name="items"></a>
+</p></div></div><a class="anchor" name="eraseAll"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[<a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem</a>] items</td>
+<td class="memname"> eraseAll</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -143,16 +142,12 @@ Removes all items from the GeoGraphicsScene
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Get the list of items in the specified Box
+<div class="memdoc"><p>Get all items in the GeoGraphicsScene
+Returns all items in the GeoGraphicsScene.
+The items will be returned in no specific order.
 </p>
 <p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>box</em>&nbsp;</td><td> The box around the items.
-
-<tr><td></td><td valign="top"><em>maxZoomLevel</em>&nbsp;</td><td> The max zoom level of tiling
-</td></tr> </table></dl>
-<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The list of items in the specified box in no specific order.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The list of all GeoGraphicsItems
 </dd></dl>
 </p></div></div><a class="anchor" name="items"></a>
 <div class="memitem">
@@ -217,15 +212,7 @@ Removes all items from the GeoGraphicsScene
 </div>
 <div class="memdoc"><p>Remove an item from the GeoGraphicsScene
 Removes the item <b>item</b> from the GeoGraphicsScene
-</p></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="vars_tileZoomLevel"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname">
-<tr><td class="memname">int s_tileZoomLevel</td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><p>
+</p></div></div>
 </div>
 </div>
 </div>

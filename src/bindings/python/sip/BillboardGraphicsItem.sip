@@ -19,20 +19,17 @@
 
 namespace Marble
 {
-class GeoGraphicsScene : QObject
+class BillboardGraphicsItem : Marble::MarbleGraphicsItem
 {
 %TypeHeaderCode
-#include <GeoGraphicsScene.h>
+#include <BillboardGraphicsItem.h>
 %End
 
 public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    removeItem (Marble::GeoGraphicsItem* item);
-    void                    clear ();
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel) const;
-//ig    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
-    void                    eraseAll ();
+                            BillboardGraphicsItem ();
+    Marble::GeoDataCoordinates  coordinate () const;
+    void                    setCoordinate (const Marble::GeoDataCoordinates& coordinates);
+    QList<QPointF>          positions () const;
+    QList<QRectF>           boundingRects () const;
 };
 };

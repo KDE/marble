@@ -27,8 +27,10 @@
 %Import QtGui/QtGuimod.sip
 %Import QtWebKit/QtWebKitmod.sip
 %Import QtXml/QtXmlmod.sip
+%Import QtDeclarative/QtDeclarativemod.sip
 
 %Include AbstractLayerInterface.sip
+%Include GeoDataGroundOverlay.sip
 %Include TileCreatorDialog.sip
 %Include AbstractDataPlugin.sip
 %Include AbstractDataPluginItem.sip
@@ -38,9 +40,11 @@
 %Include AbstractProjection.sip
 %Include AbstractWorkerThread.sip
 %Include AutoNavigation.sip
+%Include BillboardGraphicsItem.sip
 %Include BookmarkManager.sip
 %Include ClipPainter.sip
 %Include CurrentLocationWidget.sip
+%Include CylindricalProjection.sip
 %Include DialogConfigurationInterface.sip
 %Include DownloadRegion.sip
 %Include DownloadRegionDialog.sip
@@ -56,7 +60,6 @@
 %Include GeoDataFeature.sip
 %Include GeoDataFolder.sip
 %Include GeoDataGeometry.sip
-%Include GeoDataGroundOverlay.sip
 %Include GeoDataHotSpot.sip
 %Include GeoDataIconStyle.sip
 %Include GeoDataLabelStyle.sip

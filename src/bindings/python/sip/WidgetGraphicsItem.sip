@@ -30,8 +30,9 @@ public:
     virtual ~WidgetGraphicsItem ();
     void                    setWidget (QWidget* widget);
     QWidget*                widget () const;
-    virtual void            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0);
 protected:
     virtual bool            eventFilter (QObject*, QEvent*);
+public:
+    virtual void            paint (QPainter* painter);
 };
 };

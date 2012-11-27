@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-  <title>Marble.MapThemeManager</title>
+  <title>Marble.BillboardGraphicsItem</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
@@ -45,70 +45,97 @@
 <div id="main">
 <div class="clearer">&nbsp;</div>
 
-<h1>MapThemeManager Class Reference</h1>
+<h1>BillboardGraphicsItem Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: QObject<br />
+Inherits: <a href="../marble/Marble.MarbleGraphicsItem.html">Marble.MarbleGraphicsItem</a><br />
 
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
-<p>The class that handles map themes that are locally available .
+<p>Base class for all 2D labels (a.k.a. billboards) in 3D space.
 </p>
 <p>
-This class which is able to check for maps that are locally available.
-After parsing the data it only stores the name, description and path
-into a QStandardItemModel.
+A BillboardGraphicsItem represents a point of interest on a planet with a geo location.
+As a result, it may appear more than once on the map, depending on the projection and
+the zoom level.
 </p>
-<p>
-The MapThemeManager is not owned by the MarbleWidget/Map itself.
-Instead it is owned by the widget or application that contains
-MarbleWidget/Map ( usually: the ControlView convenience class )
-</p>
-<p>
-For convenience MarbleThemeManager provides a static helper class
-that loads the properties of a map theme into a GeoSceneDocument
-object.
-</p>
-<p>
-<dl class="see" compact><dt><b>See also:</b></dt><dd> GeoSceneDocument
-</dd></dl>
-</p>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#themesChanged">themesChanged</a> ()</td></tr>
-<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MapThemeManager">__init__</a> (self, QObject parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QStringList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeIds">mapThemeIds</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QStandardItemModel&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeModel">mapThemeModel</a> (self)</td></tr>
-<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deleteMapTheme">deleteMapTheme</a> (QString mapThemeId)</td></tr>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#BillboardGraphicsItem">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[QRectF]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#boundingRects">boundingRects</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#coordinate">coordinate</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[QPointF]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#positions">positions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates)</td></tr>
 </table>
-<hr><h2>Signal Documentation</h2><a class="anchor" name="themesChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> themesChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname">)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>This signal will be emitted, when the themes change.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("themesChanged()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="MapThemeManager"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="BillboardGraphicsItem"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
 <td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="boundingRects"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[QRectF] boundingRects</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the absolute screen bounding boxes of the item.
+</p></div></div><a class="anchor" name="coordinate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="positions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[QPointF] positions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the absolute screen positions of the item.
+</p>
+<p>
+All elements indicate the position of the topleft corner in screen coordinates and are
+based on the viewport of the last paintEvent(). Note that the result list may contain
+an unbound number of elements, including zero, depending on the item's visibility,
+the projection and zoom level.
+</p></div></div><a class="anchor" name="setCoordinate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCoordinate</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">QObject&nbsp;</td>
-<td class="paramname"><em>parent=0</em></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>coordinates</em></td>
 </tr>
 <tr>
 <td></td>
@@ -118,62 +145,7 @@ object.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="mapThemeIds"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QStringList mapThemeIds</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns a list of all locally available map theme IDs
-</p></div></div><a class="anchor" name="mapThemeModel"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QStandardItemModel mapThemeModel</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Provides a model of the locally existing themes.
-</p>
-<p>
-This method provides a QStandardItemModel of all themes
-that are available via MarbleDirs.
-</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="deleteMapTheme"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> deleteMapTheme</td>
-<td>(</td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>mapThemeId</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Deletes the map theme with the specified map theme ID.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>mapThemeId</em>&nbsp;</td><td> ID of the map theme to be deleted
-</td></tr>
-</table></dl>
-<p> Deletion will only succeed for local map themes, that is, if the map
-theme's directory structure resides in the user's home directory.
-</p></div></div>
+<div class="memdoc"></div></div>
 </div>
 </div>
 </div>

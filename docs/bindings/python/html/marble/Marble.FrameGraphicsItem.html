@@ -49,7 +49,7 @@
 <code>from PyKDE4.marble import *</code>
 <p>
 Inherits: <a href="../marble/Marble.ScreenGraphicsItem.html">Marble.ScreenGraphicsItem</a> &#x2192; <a href="../marble/Marble.MarbleGraphicsItem.html">Marble.MarbleGraphicsItem</a><br />
-Subclasses: <a href="../marble/Marble.LabelGraphicsItem.html">Marble.LabelGraphicsItem</a><br />
+
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
@@ -63,7 +63,6 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QBrush&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#borderBrush">borderBrush</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::PenStyle</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#borderStyle">borderStyle</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#borderWidth">borderWidth</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QRectF&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contentRect">contentRect</a> (self, QPointF position)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QRectF&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contentRect">contentRect</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QSizeF&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contentSize">contentSize</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.FrameGraphicsItem.html#FrameType">Marble.FrameGraphicsItem.FrameType</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#frame">frame</a> (self)</td></tr>
@@ -73,10 +72,10 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#marginRight">marginRight</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#marginTop">marginTop</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#padding">padding</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paint">paint</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QString renderPos, <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintBackground">paintBackground</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintContent">paintContent</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QString renderPos, <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QRectF&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintedRect">paintedRect</a> (self, QPointF position=QPointF(0.0,0.0))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paint">paint</a> (self, QPainter painter)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintBackground">paintBackground</a> (self, QPainter painter)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintContent">paintContent</a> (self, QPainter painter)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QRectF&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintedRect">paintedRect</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBackground">setBackground</a> (self, QBrush background)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBorderBrush">setBorderBrush</a> (self, QBrush brush)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBorderStyle">setBorderStyle</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::PenStyle</a> style)</td></tr>
@@ -176,29 +175,8 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="contentRect"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QRectF contentRect</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QPointF&nbsp;</td>
-<td class="paramname"><em>position</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="contentRect"></a>
+<div class="memdoc"><p>Returns the border width of the item.
+</p></div></div><a class="anchor" name="contentRect"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -326,26 +304,8 @@ The padding is the empty space inside the border.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a>&nbsp;</td>
-<td class="paramname"><em>painter</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>renderPos</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a>&nbsp;</td>
-<td class="paramname"><em>layer=0</em></td>
+<td class="paramtype">QPainter&nbsp;</td>
+<td class="paramname"><em>painter</em></td>
 </tr>
 <tr>
 <td></td>
@@ -367,7 +327,7 @@ The padding is the empty space inside the border.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a>&nbsp;</td>
+<td class="paramtype">QPainter&nbsp;</td>
 <td class="paramname"><em>painter</em></td>
 </tr>
 <tr>
@@ -390,26 +350,8 @@ The padding is the empty space inside the border.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a>&nbsp;</td>
-<td class="paramname"><em>painter</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>renderPos</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a>&nbsp;</td>
-<td class="paramname"><em>layer=0</em></td>
+<td class="paramtype">QPainter&nbsp;</td>
+<td class="paramname"><em>painter</em></td>
 </tr>
 <tr>
 <td></td>
@@ -426,21 +368,11 @@ The padding is the empty space inside the border.
 <table class="memname"><tr>
 <td class="memname">QRectF paintedRect</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QPointF&nbsp;</td>
-<td class="paramname"><em>position=QPointF(0.0,0.0)</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
 <td width="100%"> </td>
-</tr></table>
+</tr>
+</table>
 </div>
 <div class="memdoc"></div></div><a class="anchor" name="setBackground"></a>
 <div class="memitem">
@@ -533,7 +465,8 @@ The padding is the empty space inside the border.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setContentSize"></a>
+<div class="memdoc"><p>Set the border width of the item.
+</p></div></div><a class="anchor" name="setContentSize"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

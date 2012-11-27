@@ -28,7 +28,7 @@ class GeoDataIconStyle : Marble::GeoDataColorStyle
 public:
                             GeoDataIconStyle ();
                             GeoDataIconStyle (const Marble::GeoDataIconStyle& other);
-    QImage                 icon () const;
+    QImage                  icon () const;
     void                    setIconPath (const QString& filename);
     void                    setHotSpot (const QPointF& hotSpot, Marble::GeoDataHotSpot::Units xunits, Marble::GeoDataHotSpot::Units yunits);
     const QPointF&          hotSpot () const;

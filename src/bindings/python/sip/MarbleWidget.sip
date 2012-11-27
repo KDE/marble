@@ -155,7 +155,6 @@ signals:
 public:
     int                     tileZoomLevel () const;
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos) const;
-    void                    downloadRegion (const QString& sourceDir, const QVector<Marble::TileCoordsPyramid>&);
 signals:
     void                    tileLevelChanged (int level);
 public:
@@ -187,6 +186,8 @@ public:
     void                    resetFocusPoint ();
     Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still) const;
 //ig    const TextureLayer*     textureLayer () const;
+    void                    setShowRuntimeTrace (bool visible);
+    void                    downloadRegion (const QVector<Marble::TileCoordsPyramid>&);
 };
 // MarbleWidget
 

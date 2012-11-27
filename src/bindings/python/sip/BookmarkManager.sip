@@ -40,10 +40,10 @@ public:
     void                    updateBookmark (Marble::GeoDataPlacemark* bookmark);
     void                    removeBookmark (Marble::GeoDataPlacemark* bookmark);
     Marble::GeoDataDocument*  document () const;
-    bool                    showBookmarks ();
     void                    addNewBookmarkFolder (Marble::GeoDataContainer* folder, const QString& name);
     void                    renameBookmarkFolder (Marble::GeoDataFolder* folder, const QString& name);
     void                    removeBookmarkFolder (Marble::GeoDataFolder* folder);
     void                    setShowBookmarks (bool visible);
+    bool                    showBookmarks () const;
 };
 };
