@@ -37,10 +37,18 @@ bool KmlColorStyleTagWriter::write( const Marble::GeoNode *node, GeoWriter &writ
                              .arg( color.blue(), 2, 16, fill )
                              .arg( color.green(), 2, 16, fill )
                              .arg( color.red(), 2, 16, fill );
-    writer.writeElement( kml::kmlTag_color, colorString );
+    if ( colorString != "ffffffff" ) { // Only write non-default values
+        writer.writeElement( kml::kmlTag_color, colorString );
+    }
 
-    /** @todo: support random color mode */
-    writer.writeElement( kml::kmlTag_colorMode, "normal" );
+    switch( colorStyle->colorMode() ) {
+    case GeoDataColorStyle::Random:
+        writer.writeElement( kml::kmlTag_colorMode, "random" );
+        break;
+    case GeoDataColorStyle::Normal:
+        // default value, no need to write it
+        break;
+    }
 
     bool const result = writeMid( node, writer );
     writer.writeEndElement();

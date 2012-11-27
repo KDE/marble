@@ -44,6 +44,7 @@ public:
 protected:
     virtual bool            eventFilter (QObject* object, QEvent* e);
     void                    update ();
+    virtual void            paint (QPainter* painter);
 
 public:
     virtual ~MarbleGraphicsItem ();
@@ -85,7 +86,6 @@ private:
 %End
 public:
     bool                    paintEvent (QPainter* painter, const Marble::ViewportParams* viewport);
-    virtual void            paint (QPainter* painter);
     void                    setProjection (Marble::ViewportParams* viewport);
 };
 // MarbleGraphicsItem

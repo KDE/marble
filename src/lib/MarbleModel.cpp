@@ -353,12 +353,14 @@ void MarbleModel::setHome( qreal lon, qreal lat, int zoom )
 {
     d->m_homePoint = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
     d->m_homeZoom = zoom;
+    emit homeChanged( d->m_homePoint );
 }
 
 void MarbleModel::setHome( const GeoDataCoordinates& homePoint, int zoom )
 {
     d->m_homePoint = homePoint;
     d->m_homeZoom = zoom;
+    emit homeChanged( d->m_homePoint );
 }
 
 MapThemeManager *MarbleModel::mapThemeManager()

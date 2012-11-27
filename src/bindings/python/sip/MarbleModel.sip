@@ -91,6 +91,8 @@ signals:
 public:
     void                    setMapThemeId (const QString& mapThemeId);
 //ig    PluginManager*          pluginManager ();
+signals:
+    void                    homeChanged (const Marble::GeoDataCoordinates newHomePoint);
 };
 // MarbleModel
 

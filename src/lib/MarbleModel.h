@@ -322,6 +322,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void trackedPlacemarkChanged( const GeoDataPlacemark *placemark );
  
+    /** @brief Emitted when the home location is changed
+     * @see home(), setHome()
+     */
+    void homeChanged( const GeoDataCoordinates newHomePoint );
+    
  private:
     Q_DISABLE_COPY( MarbleModel )
 

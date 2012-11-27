@@ -32,7 +32,6 @@ public:
     QWidget*                widget () const;
 protected:
     virtual bool            eventFilter (QObject*, QEvent*);
-public:
     virtual void            paint (QPainter* painter);
 };
 };
