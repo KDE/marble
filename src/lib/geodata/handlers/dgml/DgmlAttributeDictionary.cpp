@@ -54,6 +54,7 @@ const char* dgmlAttr_pixmap           = "pixmap";
 const char* dgmlAttr_port             = "port";
 const char* dgmlAttr_protocol         = "protocol";
 const char* dgmlAttr_query            = "query";
+const char* dgmlAttr_radius           = "radius";
 const char* dgmlAttr_role             = "role";
 const char* dgmlAttr_spacing          = "spacing";
 const char* dgmlAttr_style            = "style";

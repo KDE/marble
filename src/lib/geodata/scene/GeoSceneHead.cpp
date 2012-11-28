@@ -40,6 +40,7 @@ class GeoSceneHeadPrivate
           m_target(),
           m_theme(),
           m_description(),
+          m_radius( 0.0 ),
           m_visible( true )
     {
     }
@@ -62,6 +63,7 @@ class GeoSceneHeadPrivate
     QString m_target;
     QString m_theme;
     QString m_description;
+    qreal m_radius;
 
     bool    m_visible;
 };
@@ -125,6 +127,16 @@ QString GeoSceneHead::description() const
 void GeoSceneHead::setDescription( const QString& description )
 {
     d->m_description = description;
+}
+
+qreal GeoSceneHead::radius() const
+{
+    return d->m_radius;
+}
+
+void GeoSceneHead::setRadius( qreal radius )
+{
+    d->m_radius = radius;
 }
 
 bool GeoSceneHead::visible() const

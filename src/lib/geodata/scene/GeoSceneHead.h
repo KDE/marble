@@ -53,6 +53,10 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode
     QString theme() const;
     void setTheme( const QString& theme );
 
+    /** Planet radius, 0.0 if unknown */
+    qreal radius() const;
+    void setRadius( qreal radius );
+
     QString mapThemeId() const;
 
     QString description() const;

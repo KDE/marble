@@ -56,6 +56,7 @@ namespace dgml
     extern const char* dgmlAttr_port;
     extern const char* dgmlAttr_protocol;
     extern const char *dgmlAttr_query;
+    extern const char* dgmlAttr_radius;
     extern const char* dgmlAttr_role;
     extern const char* dgmlAttr_spacing;
     extern const char* dgmlAttr_style;
