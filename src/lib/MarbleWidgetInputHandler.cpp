@@ -751,6 +751,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             qreal newDistance = marbleWidget->distanceFromZoom( zoom + steps );
             MarbleWidgetInputHandler::d->m_wheelZoomTargetDistance = newDistance;
             d->ZoomAt(MarbleWidgetInputHandler::d->m_widget, wheelevt->pos(), newDistance);
+            if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                d->m_kineticSpinning.jumpToPosition( MarbleWidgetInputHandler::d->m_widget->centerLongitude(),
+                                                     MarbleWidgetInputHandler::d->m_widget->centerLatitude() );
+            }
 
             MarbleWidgetInputHandler::d->m_mouseWheelTimer->start( 400 );
             return true;
