@@ -158,8 +158,8 @@ public:
 signals:
     void                    tileLevelChanged (int level);
 public:
-    void                    addLayer (Marble::LayerInterface* layer);
-    void                    removeLayer (Marble::LayerInterface* layer);
+    void                    addLayer (Marble::LayerInterface* layer /Transfer/);
+    void                    removeLayer (Marble::LayerInterface* layer /TransferBack/);
     qreal                   radiusFromDistance (qreal distance) const;
     qreal                   distanceFromRadius (qreal radius) const;
     qreal                   zoomFromDistance (qreal distance) const;
