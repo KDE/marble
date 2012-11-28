@@ -115,6 +115,17 @@ void KineticModel::setPosition(qreal posX, qreal posY)
     d_ptr->timestamp.start();
 }
 
+void KineticModel::jumpToPosition(QPointF position)
+{
+    jumpToPosition( position.x(), position.y() );
+}
+
+void KineticModel::jumpToPosition(qreal posX, qreal posY)
+{
+    d_ptr->position.setX( posX );
+    d_ptr->position.setY( posY );
+}
+
 int KineticModel::updateInterval() const
 {
     return d_ptr->ticker.interval();
