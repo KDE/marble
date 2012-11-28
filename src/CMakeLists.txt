@@ -1,4 +1,3 @@
-
 # before add_subdirectory() !
 if(MSVC)
   add_definitions(-D_USE_MATH_DEFINES=1)
