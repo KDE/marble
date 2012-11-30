@@ -1,0 +1,14 @@
+<RCC>
+    <qresource>
+        <file>traditional.png</file>
+        <file>traditional-m.png</file>
+        <file>multi-cache.png</file>
+        <file>multi-cache-m.png</file>
+        <file>puzzle.png</file>
+        <file>puzzle-m.png</file>
+        <file>virtual.png</file>
+        <file>virtual-m.png</file>
+        <file>unknown.png</file>
+        <file>unknown-m.png</file>
+    </qresource>
+</RCC>
