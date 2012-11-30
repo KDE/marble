@@ -343,6 +343,7 @@ else (APPLE AND QTONLY)
     TinyWebBrowser.h
     QtMarbleConfigDialog.h
     global.h
+    MarbleColors.h
     MarbleGlobal.h
     MarbleDirs.h
     GeoPainter.h

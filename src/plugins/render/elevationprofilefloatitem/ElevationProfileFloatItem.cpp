@@ -218,14 +218,14 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
     }
 
     // draw X and Y axis
-    painter->setPen( oxygenAluminumGray4 );
+    painter->setPen( Oxygen::aluminumGray4 );
     painter->drawLine( m_leftGraphMargin, m_eleGraphHeight, contentSize().width(), m_eleGraphHeight );
     painter->drawLine( m_leftGraphMargin, m_eleGraphHeight, m_leftGraphMargin, 0 );
 
     // draw Y grid and labels
     painter->setPen( QColor( Qt::black ) );
     QPen dashedPen( Qt::DashLine );
-    dashedPen.setColor( oxygenAluminumGray4 );
+    dashedPen.setColor( Oxygen::aluminumGray4 );
     QRect labelRect( 0, 0, m_leftGraphMargin - 1, m_fontHeight + 2 );
     lastStringEnds = m_eleGraphHeight + m_fontHeight;
 //     painter->drawText( m_leftGraphMargin + 1, m_fontHeight, "[" + m_axisY.unit() + "]" );
@@ -296,8 +296,8 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
     painter->setPen( pen );
 
     QLinearGradient fillGradient( 0, 0, 0, m_eleGraphHeight );
-    QColor startColor = oxygenForestGreen4;
-    QColor endColor = oxygenBrownOrange4;
+    QColor startColor = Oxygen::forestGreen4;
+    QColor endColor = Oxygen::hotOrange4;
     startColor.setAlpha( 200 );
     endColor.setAlpha( 32 );
     fillGradient.setColorAt( 0.0, startColor );

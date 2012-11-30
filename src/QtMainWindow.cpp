@@ -1184,15 +1184,15 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          routingManager->setLastSavePath( settings.value( "lastRouteSavePath", QDir::homePath() ).toString() );
 
          QColor tempColor;
-         tempColor = QColor( settings.value( "routeColorStandard", oxygenSkyBlue4.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorStandard", Oxygen::skyBlue4.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaStandard", 200 ).toInt() );
          routingManager->setRouteColorStandard( tempColor );
 
-         tempColor = QColor( settings.value( "routeColorHighlighted", oxygenSeaBlue2.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorHighlighted", Oxygen::seaBlue2.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaHighlighted", 200 ).toInt() );
          routingManager->setRouteColorHighlighted( tempColor );
 
-         tempColor = QColor( settings.value( "routeColorAlternative", oxygenAluminumGray4.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorAlternative", Oxygen::aluminumGray4.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaAlternative", 200 ).toInt() );
          routingManager->setRouteColorAlternative( tempColor );
      }

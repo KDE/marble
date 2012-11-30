@@ -169,7 +169,7 @@ QPixmap RouteRequest::pixmap(int position, int size, int margin ) const
     painter.setRenderHint( QPainter::Antialiasing, true );
     painter.setPen( QColor( Qt::black ) );
     bool const isVisited = visited( position );
-    QColor const backgroundColor = isVisited ? oxygenAluminumGray4 : oxygenForestGreen4;
+    QColor const backgroundColor = isVisited ? Oxygen::aluminumGray4 : Oxygen::forestGreen4;
     painter.setBrush( QBrush( backgroundColor ) );
     painter.setPen( Qt::black );
     int const iconSize = imageSize - 2 * margin;

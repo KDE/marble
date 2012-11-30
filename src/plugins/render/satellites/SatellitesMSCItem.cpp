@@ -53,7 +53,7 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
 
     GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
     placemark()->setStyle( style );
-    placemark()->style()->lineStyle().setColor( oxygenBrickRed4 );
+    placemark()->style()->lineStyle().setColor( Oxygen::brickRed4 );
     placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
     placemark()->style()->labelStyle().setGlow( true );
 

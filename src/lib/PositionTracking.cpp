@@ -154,7 +154,7 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
 
     GeoDataStyle style;
     GeoDataLineStyle lineStyle;
-    QColor transparentRed = oxygenBrickRed4;
+    QColor transparentRed = Oxygen::brickRed4;
     transparentRed.setAlpha( 200 );
     lineStyle.setColor( transparentRed );
     lineStyle.setWidth( 4 );
