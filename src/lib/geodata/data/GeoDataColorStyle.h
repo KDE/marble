@@ -6,7 +6,8 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
-// Copyright 2007      Inge Wallin   <ingwa@kde.org>
+// Copyright 2007      Inge Wallin <ingwa@kde.org>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 
@@ -78,12 +79,21 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
     enum ColorMode { Normal, Random };
 
     /**
+      * @brief Returns the color that should be painted: Either color() or a randomized
+      * version of it, depending on the colorMode() setting. Randomization happens once
+      * per setColor() call, i.e. repeated calls to paintedColor always return the same
+      * color unless setColor is called in between.
+      */
+    QColor paintedColor() const;
+
+    /**
      * @brief  Set a new color mode
      * @param  colorMode  the new color mode value
      */
     void setColorMode( const ColorMode &colorMode );
     /// Return the color mode
     ColorMode colorMode() const;
+
 
     /**
     * assignment operator

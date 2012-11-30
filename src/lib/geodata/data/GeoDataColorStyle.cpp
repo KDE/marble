@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 #include "GeoDataColorStyle.h"
@@ -31,6 +32,10 @@ class GeoDataColorStylePrivate
 
     /// stores the current color
     QColor     m_color;
+
+    /// stores random color
+    QColor     m_randomColor;
+
     /// stores the current color mode
     GeoDataColorStyle::ColorMode  m_colorMode;
 };
@@ -66,11 +71,25 @@ const char* GeoDataColorStyle::nodeType() const
 void GeoDataColorStyle::setColor( const QColor &value )
 {
     d->m_color = value;
+
+    qreal red = d->m_color.redF();
+    qreal green = d->m_color.greenF();
+    qreal blue = d->m_color.blueF();
+    d->m_randomColor = d->m_color;
+    qreal const randMax = RAND_MAX;
+    d->m_randomColor.setRedF(red*(qrand()/randMax));
+    d->m_randomColor.setGreenF(green*(qrand()/randMax));
+    d->m_randomColor.setBlueF(blue*(qrand()/randMax));
 }
 
 QColor GeoDataColorStyle::color() const
 {
     return d->m_color;
+}
+
+QColor GeoDataColorStyle::paintedColor() const
+{
+    return d->m_colorMode == Normal ? d->m_color : d->m_randomColor;
 }
 
 void GeoDataColorStyle::setColorMode( const ColorMode &colorMode )
