@@ -28,10 +28,14 @@
 #include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 #include "AprsGatherer.h"
-#include "qextserialport.h"
 #include "AprsTCPIP.h"
-#include "AprsTTY.h"
 #include "AprsFile.h"
+
+#include <aprsconfig.h>
+
+#ifdef HAVE_QEXTSERIALPORT
+#include "AprsTTY.h"
+#endif
 
 using namespace Marble;
 /* TRANSLATOR Marble::AprsPlugin */
@@ -164,8 +168,10 @@ void AprsPlugin::stopGatherers()
     if ( m_tcpipGatherer )
         m_tcpipGatherer->shutDown();
 
+#ifdef HAVE_QEXTSERIALPORT
     if ( m_ttyGatherer )
         m_ttyGatherer->shutDown();
+#endif
     
     if ( m_fileGatherer )
         m_fileGatherer->shutDown();
@@ -175,9 +181,11 @@ void AprsPlugin::stopGatherers()
         if ( m_tcpipGatherer->wait(2000) )
             delete m_tcpipGatherer;
 
+#ifdef HAVE_QEXTSERIALPORT
     if ( m_ttyGatherer )
         if ( m_ttyGatherer->wait(2000) )
             delete m_ttyGatherer;
+#endif
     
     if ( m_fileGatherer )
         if ( m_fileGatherer->wait(2000) )
@@ -206,6 +214,7 @@ void AprsPlugin::restartGatherers()
         mDebug() << "started TCPIP gatherer";
     }
 
+#ifdef HAVE_QEXTSERIALPORT
     if ( m_settings.value( "useTTY" ).toBool() ) {
 
         m_ttyGatherer =
@@ -218,6 +227,7 @@ void AprsPlugin::restartGatherers()
         m_ttyGatherer->start();
         mDebug() << "started TTY gatherer";
     }
+#endif
 
     
     if ( m_settings.value( "useFile" ).toBool() ) {
@@ -267,6 +277,11 @@ void AprsPlugin::readSettings()
     if ( !m_configDialog ) {
         return;
     }
+
+#ifndef HAVE_QEXTSERIALPORT
+    ui_configWidget->tabWidget->setTabEnabled( ui_configWidget->tabWidget->indexOf(
+                                                   ui_configWidget->Device ), false );
+#endif
 
     // Connect to the net?
     if ( m_settings.value( "useInternet" ).toBool() )

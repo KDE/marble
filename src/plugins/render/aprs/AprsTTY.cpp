@@ -9,7 +9,8 @@
 //
 
 #include "AprsTTY.h"
-#include "qextserialport.h"
+
+#include <qextserialport.h>
 
 #include "MarbleDebug.h"
 

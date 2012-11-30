@@ -43,6 +43,4 @@ add_subdirectory( weather )
 # It should be moved to a new plugin type later.
 add_subdirectory( inhibit-screensaver )
 
-if (NOT WIN32)
-  add_subdirectory( aprs )
-endif (NOT WIN32)
+add_subdirectory( aprs )

@@ -1,10 +1,9 @@
 PROJECT(AprsPlugin)
 
-INCLUDE (CheckFunctionExists)
-CHECK_FUNCTION_EXISTS(cfmakeraw HAVE_CFMAKERAW)
-
-INCLUDE (CheckIncludeFiles)
-CHECK_INCLUDE_FILES(sys/filio.h HAVE_SYS_FILIO_H)
+macro_optional_find_package(QextSerialPort)
+if (QEXTSERIALPORT_FOUND)
+  message( STATUS "Building APRS plugin with serial port input")
+endif (QEXTSERIALPORT_FOUND)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -13,12 +12,12 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-if (WIN32)
-  set (serial_src win_qextserialport.cpp)
-  ADD_DEFINITIONS(-DQEXTSERIALPORT_LIB)
-else (WIN32)
-  set (serial_src posix_qextserialport.cpp)
-endif (WIN32)
+if (QEXTSERIALPORT_FOUND)
+  include_directories (${QEXTSERIALPORT_INCLUDE_DIR})
+  set (serial_src AprsTTY.cpp)
+  list (APPEND AprsPlugin_LIBS ${QEXTSERIALPORT_LIBRARIES})
+  set (HAVE_QEXTSERIALPORT TRUE)
+endif ()
 
 set( aprs_SRCS AprsPlugin.cpp
                AprsObject.cpp
@@ -26,11 +25,9 @@ set( aprs_SRCS AprsPlugin.cpp
 	       GeoAprsCoordinates.cpp
 
 	       AprsSource.cpp
-	       AprsTTY.cpp
 	       AprsTCPIP.cpp
 	       AprsFile.cpp
 
-               qextserialport.cpp
 	       ${serial_src} )
 
 set( aprs_UI AprsConfigWidget.ui )
