@@ -30,6 +30,7 @@ add_subdirectory(foursquare)
 # Disabled for now until legal issues wrt to the API
 # and terms of service of opencaching are cleared up.
 #add_subdirectory( opencaching )
+add_subdirectory( opencachingcom )
 add_subdirectory( opendesktop )
 # add_subdirectory( panoramio )
 add_subdirectory( photo )

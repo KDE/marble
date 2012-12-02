@@ -66,6 +66,8 @@ private:
     const QString ratingNumberString(QVariant number) const; ///< "1" -> "1.0"
 
     QString formatDistance(qreal spheredistance) const; ///< nice string from a Marble::distanceSphere()
+    
+    void fillDialogTabs(); ///< loads description, hint and logs into the dialog tabs
 
     Ui::CacheDetailsDialog *m_ui; ///< 0 unless dialog exists
     OpenCachingComModel *m_model;

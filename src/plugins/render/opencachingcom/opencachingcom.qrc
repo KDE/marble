@@ -10,5 +10,15 @@
         <file>virtual-m.png</file>
         <file>unknown.png</file>
         <file>unknown-m.png</file>
+        <file>boat-required.png</file>
+        <file>chirp.png</file>
+        <file>diving.png</file>
+        <file>exclusive.png</file>
+        <file>historic-site.png</file>
+        <file>letterbox.png</file>
+        <file>night.png</file>
+        <file>tree-climbing.png</file>
+        <file>uv-light.png</file>
+        <file>verifiable.png</file>
     </qresource>
 </RCC>

@@ -86,17 +86,19 @@ void OpenCachingComItem::showInfoDialog()
     m_ui->labelIcon->setPixmap(QPixmap(":/" + iconName() + ".png"));
     m_ui->labelHeader->setText(QString("<big><strong>" + m_cache["name"].toString() + "</strong></big>"));
 
+    // basic details
     QString details = "<table><tr><td colspan=\"2\" valign=\"middle\">"
         + tr(m_cache["type"].toString().toUtf8())
         + "<br/>" + id() + "<br/>" + coordinate().toString() + "</td></tr>"
         + "<tr><td align=\"right\">" + tr("Size:") + " </td><td>" + ratingNumberString(m_cache["size"]) + "</td></tr>"
-        + "<tr><td align=\"right\">" + tr("Difficulty:") + "</td><td>" + ratingNumberString(m_cache["difficulty"]) + "</td></tr>"
+        + "<tr><td align=\"right\">" + tr("Difficulty:") + " </td><td>" + ratingNumberString(m_cache["difficulty"]) + "</td></tr>"
         + "<tr><td align=\"right\">" + tr("Terrain:") + " </td><td>" + ratingNumberString(m_cache["terrain"]) + "</td></tr>"
         + "<tr><td align=\"right\">" + tr("Awsomeness:") + " </td><td>" + ratingNumberString(m_cache["awsomeness"]) + "</td></tr>"
         + "<tr><td align=\"right\">" + tr("Hidden by:") + " </td><td>" + m_cache["hidden_by"].toMap()["name"].toString() + "</td></tr>"
         + "<tr><td align=\"right\">" + tr("Hidden:") + " </td><td>" + dateString(m_cache["hidden"]) + "</td></tr>"
         + "<tr><td align=\"right\">" + tr("Last found:") + " </td><td>" + dateString(m_cache["last_found"]) + "</td></tr>";
 
+    // list of tags
     // ### cache the translated cache string. Nessecary??
     if (m_cache["strTags"].toString().isEmpty() )
     {
@@ -118,12 +120,33 @@ void OpenCachingComItem::showInfoDialog()
         details += "<tr><td align=\"right\">" + tr("Tags:") + " </td><td>" + strTags + "</td></tr>";
     }
 
+    // "series" - name of a series that this cache belongs to
     QString series = m_cache["series"].toString();
     if (!series.isEmpty())
     {
         details += "<tr><td align=\"right\">" + tr("Series:") + " </td><td>" + series + "</td></tr>";
     }
 
+    // verification options translated
+    // these are ways to verify a visit to the cache
+    QVariantMap verifyOpts = m_cache["verification"].toMap();
+    if (verifyOpts.count())
+    {
+        QStringList verifyOptsStrings;
+        if (verifyOpts["number"].isValid())
+            verifyOptsStrings << tr("number");
+        if (verifyOpts["chirp"].isValid())
+            verifyOptsStrings << tr("chirp");
+        if (verifyOpts["qr"].isValid())
+            verifyOptsStrings << tr("qr code");
+        if (verifyOpts["code_phrase"].isValid())
+            verifyOptsStrings << tr("code phrase");
+
+        details += "<tr><td align=\"right\">" + tr("Verification:") + " </td><td>" + verifyOptsStrings.join(", ") + "</td></tr>";
+    }
+
+    // show a distance to the cache, either from current position if we know,
+    // or from the "home" position
     bool hasposition = false;
     PositionTracking *tracking = m_model->marbleModel()->positionTracking();
     if (tracking)
@@ -148,40 +171,34 @@ void OpenCachingComItem::showInfoDialog()
 
     ui.labelGeneral->setText(details.append("</table>"));
 
+    // tags represented as icons
+    int numtags = m_cache["tags"].toList().count();
+    if (numtags)
+    {
+        QStringList tags = m_cache["tags"].toStringList();
+        int tagrows = (numtags/6) + 1;
+        QString tagiconshtml;
+        for (int i=0; i<numtags;i++)
+        {
+            tagiconshtml += QString("<img src=\":/%1.png\" alt=\"%2\">")
+                .arg(tags.at(i).toLower().replace(" ","-")).arg(tags.at(i));
+            if (0 == (i+1)%tagrows)
+            {
+                tagiconshtml += "<br/>";
+            }
+        }
+        ui.labelTagIcons->setText(tagiconshtml);
+    }
+
+    // Description tab
     QString description = m_cache["description"].toString();
     if ( description.isEmpty() )
     {
         QString url("http://www.opencaching.com/api/geocache/" + id() + "?Authorization=" + AUTHKEY);
         m_model->fetchData( url, "description_and_logs", this );
     } else {
-        ui.textDescription->setText( description );
+        fillDialogTabs();
     }
-
-    if ( m_cache["logs"].toList().size() )
-    {
-        QVariantList logs = m_cache["logs"].toList();
-        QString logtext;
-        for (int i = 0; i < logs.size(); ++i)
-        {
-            QVariantMap log = logs.at(i).toMap();
-            if ( i )
-            {
-                logtext += "<hr>";
-            }
-            logtext += tr("User:") + " " + log["user"].toMap()["name"].toString() + "<br/>";
-            logtext += tr("Type:") + " " + log["type"].toString() + "<br/>";
-            logtext += tr("Date:") + " " + dateString(log["log_time"]) + "<br/><br/>";
-            logtext += log["comment"].toString() + "<br/>";
-        }
-        m_ui->textLogs->setText(logtext);
-    }
-
-    QString hint = m_cache["hint"].toString();
-    if (! hint.isEmpty())
-    {
-        m_ui->labelHint->setText(hint);
-    }
-    m_ui->tabWidget->setTabEnabled(2, !hint.isEmpty());
 
     connect( ui.buttonClose, SIGNAL(clicked()), &dialog, SLOT(close()) );
     connect( ui.buttonClose, SIGNAL(clicked()), this, SLOT(dialogCloseClicked()) );
@@ -267,57 +284,7 @@ void OpenCachingComItem::addDownloadedFile( const QString &url, const QString &t
         m_cache["logs"] = cache["logs"];
         m_cache["hint"] = cache["hint"];
 
-        if (m_ui)
-        {
-            m_ui->textDescription->setText(m_cache["description"].toString());
-
-            // images
-            // ### does not work at this point, talk to opencaching.com people!
-            QVariantList images = m_cache["images"].toList();
-            for (int i = 0; i < images.size(); i++)
-            {
-                if (m_images.size() > i)
-                {
-                    // ### what about spoiler images? (don't display, but then what?)
-                    m_ui->textDescription->append(
-                        "<p><img src=\"" + m_images.at(i) + " width=\"100%\" height=\"auto\"/><br/>"
-                        + m_cache["images"].toList().at(i).toMap()["name"].toString()
-                        + "</p>");
-                }
-                else
-                {
-                    QVariantMap image = images.at(i).toMap();
-                    QString url =  "http://www.opencaching.com/api/" + id() + "/" + image["caption"].toString();
-//                     qDebug()<<"Adding image: "<<url;
-                    m_model->fetchData(url, QString("image-%1").arg(i), this);
-                }
-            }
-
-            QString hint = m_cache["hint"].toString();
-            if (! hint.isEmpty())
-            {
-                m_ui->labelHint->setText(hint);
-            }
-            m_ui->tabWidget->setTabEnabled(2, !hint.isEmpty());
-
-            QVariantList logs = m_cache["logs"].toList();
-            QString logtext;
-            for (int i = 0; i < logs.size(); ++i)
-            {
-                QVariantMap log = logs.at(i).toMap();
-                if ( i )
-                {
-                    logtext += "<hr>";
-                }
-                logtext += tr("User: ") + log["user"].toMap()["name"].toString() + "<br/>";
-                logtext += tr("Type: ") + log["type"].toString() + "<br/>";
-                logtext += tr("Date: ") + dateString(log["log_time"]) + "<br/><br/>";
-                logtext += log["comment"].toString() + "<br/>";
-
-                // TODO images
-            }
-            m_ui->textLogs->setText(logtext);
-        }
+        fillDialogTabs();
     }
 
     // ### images does not work, opencaching.com redirects them to
@@ -394,6 +361,61 @@ QString OpenCachingComItem::formatDistance(qreal spheredistance) const
     }
 
     return distanceString;
+}
+
+void OpenCachingComItem::fillDialogTabs()
+{
+    if (m_ui)
+    {
+        m_ui->textDescription->setText(m_cache["description"].toString());
+
+        // images
+        // ### does not work at this point, talk to opencaching.com people!
+        QVariantList images = m_cache["images"].toList();
+        for (int i = 0; i < images.size(); i++)
+        {
+            if (m_images.size() > i)
+            {
+                // ### what about spoiler images? (don't display, but then what?)
+                m_ui->textDescription->append(
+                    "<p><img src=\"" + m_images.at(i) + " width=\"100%\" height=\"auto\"/><br/>"
+                    + m_cache["images"].toList().at(i).toMap()["name"].toString()
+                    + "</p>");
+            }
+            else
+            {
+                QVariantMap image = images.at(i).toMap();
+                QString url =  "http://www.opencaching.com/api/" + id() + "/" + image["caption"].toString();
+//                     qDebug()<<"Adding image: "<<url;
+                m_model->fetchData(url, QString("image-%1").arg(i), this);
+            }
+        }
+
+        QString hint = m_cache["hint"].toString().trimmed();
+        if (! hint.isEmpty())
+        {
+            m_ui->textHint->setText(hint);
+        }
+        m_ui->tabWidget->setTabEnabled(2, !hint.isEmpty());
+
+        QVariantList logs = m_cache["logs"].toList();
+        QString logtext;
+        for (int i = 0; i < logs.size(); ++i)
+        {
+            QVariantMap log = logs.at(i).toMap();
+            if ( i )
+            {
+                logtext += "<hr>";
+            }
+            logtext += tr("User: ") + log["user"].toMap()["name"].toString() + "<br/>";
+            logtext += tr("Type: ") + log["type"].toString() + "<br/>";
+            logtext += tr("Date: ") + dateString(log["log_time"]) + "<br/><br/>";
+            logtext += log["comment"].toString() + "<br/>";
+
+            // TODO images
+        }
+        m_ui->textLogs->setText(logtext);
+    }
 }
 
 } // namespace Marble
