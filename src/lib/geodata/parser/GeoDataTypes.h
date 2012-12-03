@@ -73,6 +73,7 @@ GEODATA_EXPORT extern const char* GeoDataTimePrimitiveType;
 GEODATA_EXPORT extern const char* GeoDataTimeStampType;
 GEODATA_EXPORT extern const char* GeoDataTimeSpanType;
 GEODATA_EXPORT extern const char* GeoDataTrackType;
+GEODATA_EXPORT extern const char* GeoDataScreenOverlayType;
 }
 
 }
