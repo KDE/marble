@@ -1,5 +1,6 @@
 //Copyright 2009 Henry de Valence <hdevalence@gmail.com>
 //Copyright 2009 David Roberts <dvdr18@gmail.com>
+//Copyright 2012 Mohammed Nafees <nafees.technocool@gmail.com>
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -15,6 +16,7 @@
 
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
+#include "MarbleColors.h"
 
 namespace Marble
 {
@@ -29,11 +31,13 @@ public:
     qreal theta_0, theta_1; // for calculating sidereal time
     qreal radius; //in metres
     QString name, id; //localized and nonlocalized names
+    bool atmosphere;
+    QColor atmosphereColor;
     //convenience function
     void setup(qreal M_0, qreal M_1, qreal C_1, qreal C_2, qreal C_3, qreal C_4,
                qreal C_5, qreal C_6, qreal Pi, qreal epsilon, qreal theta_0,
                qreal theta_1, qreal radius, const QString& name,
-               const QString& id )
+               const QString& id, bool atmosphere = false )
     {
         this->M_0 = M_0;
         this->M_1 = M_1;
@@ -50,6 +54,7 @@ public:
         this->radius = radius;
         this->name = name;
         this->id = id;
+        this->atmosphere = atmosphere;
     };
 };
 
@@ -73,56 +78,63 @@ Planet::Planet( const QString& id )
                 (0.1058*DEG2RAD), (0.0241*DEG2RAD), (0.0055*DEG2RAD),
                 (111.5943*DEG2RAD), (0.02*DEG2RAD), (13.5964*DEG2RAD),
                 (6.1385025*DEG2RAD), 2440000.0,
-                name( id ), id );
+                name( id ), id  );
     } else if ( id == "venus" ) {
         d->setup( (50.4161*DEG2RAD), (1.60213034*DEG2RAD),
                 (0.7758*DEG2RAD), (0.0033*DEG2RAD), (0.0000*DEG2RAD),
                 (0.0000*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
                 (73.9519*DEG2RAD), (2.64*DEG2RAD), (215.2995*DEG2RAD),
                 (-1.4813688*DEG2RAD), 6051800.0,
-                name( id ), id );
+                name( id ), id, true );
+        setAtmosphereColor(Oxygen::sunYellow4);
     } else if ( id == "earth" ) {
         d->setup( (357.5291*DEG2RAD), (0.98560028*DEG2RAD),
                 (1.9148*DEG2RAD), (0.0200*DEG2RAD), (0.0003*DEG2RAD),
                 (0.0000*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
                 (102.9372*DEG2RAD), (23.45*DEG2RAD), (280.1600*DEG2RAD),
                 (360.9856235*DEG2RAD), 6378000.0,
-                name( id ), id );
+                name( id ), id, true );
+        setAtmosphereColor(Qt::white);
     } else if ( id == "mars" ) {
         d->setup( (19.3730*DEG2RAD), (0.52402068*DEG2RAD),
                 (10.6912*DEG2RAD), (0.6228*DEG2RAD), (0.0503*DEG2RAD),
                 (0.0046*DEG2RAD), (0.0005*DEG2RAD), (0.0000*DEG2RAD),
                 (70.9812*DEG2RAD), (25.19*DEG2RAD), (313.4803*DEG2RAD),
                 (350.89198226*DEG2RAD), 3397000.0,
-                name( id ), id );
+                name( id ), id, true );
+        setAtmosphereColor(Oxygen::hotOrange2);
     } else if ( id == "jupiter" ) {
         d->setup( (20.0202*DEG2RAD), (0.08308529*DEG2RAD),
                 (5.5549*DEG2RAD), (0.1683*DEG2RAD), (0.0071*DEG2RAD),
                 (0.0003*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
                 (237.2074*DEG2RAD), (3.12*DEG2RAD), (146.0727*DEG2RAD),
                 (870.5366420*DEG2RAD), 71492000.0,
-                name( id ), id );
+                name( id ), id, true );
+        setAtmosphereColor(Oxygen::sunYellow2);
     } else if ( id == "saturn" ) {
         d->setup( (317.0207*DEG2RAD), (0.03344414*DEG2RAD),
                 (6.3585*DEG2RAD), (0.2204*DEG2RAD), (0.0106*DEG2RAD),
                 (0.0006*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
                 (99.4571*DEG2RAD), (26.74*DEG2RAD), (174.3479*DEG2RAD),
                 (810.7939024*DEG2RAD), 60268000.0,
-                name( id ), id );
+                name( id ), id, true );
+        setAtmosphereColor(Oxygen::sunYellow2);
     } else if ( id == "uranus" ) {
         d->setup( (141.0498*DEG2RAD), (0.01172834*DEG2RAD),
                 (5.3042*DEG2RAD), (0.1534*DEG2RAD), (0.0062*DEG2RAD),
                 (0.0003*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
                 (5.4639*DEG2RAD), (82.22*DEG2RAD), (17.9705*DEG2RAD),
                 (-501.1600928*DEG2RAD), 25559000.0,
-                name( id ), id );
+                name( id ), id, true );
+        setAtmosphereColor(Oxygen::seaBlue4);
     } else if ( id == "neptune" ) {
         d->setup( (256.2250*DEG2RAD), (0.00598103*DEG2RAD),
                 (1.0302*DEG2RAD), (0.0058*DEG2RAD), (0.0000*DEG2RAD),
                 (0.0000*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
                 (182.1957*DEG2RAD), (27.84*DEG2RAD), (52.3996*DEG2RAD),
                 (536.3128492*DEG2RAD), 24766000.0,
-                name( id ), id );
+                name( id ), id, true );
+        setAtmosphereColor(Oxygen::skyBlue2);
     // dwarf planets ... (everybody likes pluto)
     } else if ( id == "pluto" ) {
         d->setup( (14.882*DEG2RAD), (0.00396*DEG2RAD),
@@ -137,13 +149,15 @@ Planet::Planet( const QString& id )
         mDebug() << "creating \"sun\" which has invalid orbital elements";
         //FIXME: fill in with valid data
         d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 695000000.0,
-                name( id ), id );
+                name( id ), id, true );
+        setAtmosphereColor(Qt::white);
     } else if ( id == "moon" ) {
         mDebug() << "WARNING:";
         mDebug() << "creating \"moon\" which has invalid orbital elements";
         //FIXME: fill in with valid data
         d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1738000.0,
                 name( id ), id );
+        setHasAtmosphere(false);
       } else if ( id == "sky" ) {
           mDebug() << "WARNING:";
           mDebug() << "creating \"sky\" which has invalid orbital elements";
@@ -383,6 +397,26 @@ Planet& Planet::operator=(const Planet& rhs)
     // use its (compiler generated) assignment operator.
     *d = *rhs.d;
     return *this;
+}
+
+bool Planet::hasAtmosphere() const
+{
+    return d->atmosphere;
+}
+
+void Planet::setHasAtmosphere(bool enabled)
+{
+    d->atmosphere = enabled;
+}
+
+QColor Planet::atmosphereColor() const
+{
+    return d->atmosphereColor;
+}
+
+void Planet::setAtmosphereColor(const QColor &color)
+{
+    d->atmosphereColor = color;
 }
 
 } //namespace Marble

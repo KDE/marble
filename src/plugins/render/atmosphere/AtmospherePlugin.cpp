@@ -10,12 +10,15 @@
 // Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 // Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 #include "AtmospherePlugin.h"
+#include "Planet.h"
 
 #include "GeoPainter.h"
 #include "ViewportParams.h"
+#include "MarbleModel.h"
 
 namespace Marble
 {
@@ -87,7 +90,8 @@ QList<PluginAuthor> AtmospherePlugin::pluginAuthors() const
             << PluginAuthor( "Inge Wallin", "ingwa@kde.org" )
             << PluginAuthor( "Jens-Michael Hoffmann", "jmho@c-xx.com" )
             << PluginAuthor( "Patrick Spendrin", "ps_ml@gmx.de" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" )
+            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
 }
 
 qreal AtmospherePlugin::zValue() const
@@ -132,11 +136,13 @@ bool AtmospherePlugin::render( GeoPainter *painter,
     int  imageHalfWidth  = viewParams->width() / 2;
     int  imageHalfHeight = viewParams->height() / 2;
 
+    QColor color = marbleModel()->planet()->atmosphereColor();
+
     // Recalculate the atmosphere effect and paint it to canvasImage.
     QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
                            1.05 * viewParams->radius() );
-    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
+    grad1.setColorAt( 0.91, color );
+    grad1.setColorAt( 1.00, QColor(color.red(), color.green(), color.blue(), 0) );
 
     QBrush    brush1( grad1 );
     QPen      pen1( Qt::NoPen );
