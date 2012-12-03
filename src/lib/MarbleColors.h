@@ -11,6 +11,9 @@
 // Oxygen color definitions from
 // http://lists.kde.org/?l=kde-artists&m=116559781726568&q=p3
 
+#ifndef MARBLECOLORS_H
+#define MARBLECOLORS_H
+
 #include <QtGui/QColor>
 
 namespace Marble
@@ -94,3 +97,5 @@ QColor const aluminumGray1 = QColor::fromRgb( 238, 238, 236 );
 }
 
 }
+
+#endif
