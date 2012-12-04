@@ -45,6 +45,13 @@ OpenCachingComItem::OpenCachingComItem( QVariantMap cache, QObject *parent )
     setId( cache["oxcode"].toString() );
     setCoordinate( GeoDataCoordinates( cache["location"].toMap()["lon"].toReal(), cache["location"].toMap()["lat"].toReal(), 0.0, GeoDataCoordinates::Degree ) );
     setTarget( "earth" );
+
+    // Opencaching.Com does (in effect) this, so as do we..
+    if ( m_cache["type"].toString() == "Unknown Cache" )
+    {
+        m_cache["type"] = QString("Puzzle");
+    }
+
     updateTooltip();
     m_action->setText( m_cache["name"].toString() );
 
