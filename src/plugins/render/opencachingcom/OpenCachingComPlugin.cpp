@@ -84,7 +84,7 @@ QList<PluginAuthor> OpenCachingComPlugin::pluginAuthors() const
 
 QIcon OpenCachingComPlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/occlogo.png");
 }
 
 }
