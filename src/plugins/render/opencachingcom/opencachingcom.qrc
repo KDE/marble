@@ -21,5 +21,6 @@
         <file>uv-light.png</file>
         <file>verifiable.png</file>
         <file>occlogo.png</file>
+        <file>internet.png</file>
     </qresource>
 </RCC>

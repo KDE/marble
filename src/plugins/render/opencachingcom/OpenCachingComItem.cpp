@@ -28,6 +28,7 @@
 #include <QFile>
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptValue>
+#include <QDesktopServices>
 
 #include <QDebug>
 
@@ -85,6 +86,10 @@ void OpenCachingComItem::showInfoDialog()
 
     m_ui->labelIcon->setPixmap(QPixmap(":/" + iconName() + ".png"));
     m_ui->labelHeader->setText(QString("<big><strong>" + m_cache["name"].toString() + "</strong></big>"));
+
+    m_ui->buttonWww->setIcon( QIcon( ":/internet.png" ) );
+    m_ui->buttonWww->setToolTip( tr("Click to open this cache's page in a browser") );
+    connect( m_ui->buttonWww, SIGNAL( clicked() ), SLOT( openWww() ) );
 
     // basic details
     QString details = "<table><tr><td colspan=\"2\" valign=\"middle\">"
@@ -419,6 +424,11 @@ void OpenCachingComItem::fillDialogTabs()
         }
         m_ui->textLogs->setText(logtext);
     }
+}
+
+void OpenCachingComItem::openWww()
+{
+    QDesktopServices::openUrl( QUrl( "http://www.opencaching.com/#!geocache/" + m_cache["oxcode"].toString() ) );
 }
 
 } // namespace Marble
