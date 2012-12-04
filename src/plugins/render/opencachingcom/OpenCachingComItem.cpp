@@ -200,6 +200,9 @@ void OpenCachingComItem::showInfoDialog()
         fillDialogTabs();
     }
 
+    m_ui->textDescription->setOpenExternalLinks(true);
+    m_ui->textLogs->setOpenExternalLinks(true);
+
     connect( ui.buttonClose, SIGNAL(clicked()), &dialog, SLOT(close()) );
     connect( ui.buttonClose, SIGNAL(clicked()), this, SLOT(dialogCloseClicked()) );
 
