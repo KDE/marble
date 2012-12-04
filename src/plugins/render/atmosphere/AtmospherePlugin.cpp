@@ -117,7 +117,7 @@ bool AtmospherePlugin::render( GeoPainter *painter,
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
 
-    if ( !visible() )
+    if ( !visible()  || !marbleModel()->planet()->hasAtmosphere() )
         return true;
 
     // Only draw an atmosphere if projection is spherical
