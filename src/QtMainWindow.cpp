@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2010 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
 #include "QtMainWindow.h"
@@ -72,6 +73,7 @@
 #include "StackableWindow.h"
 #include "GoToDialog.h"
 #include "MarbleWidgetInputHandler.h"
+#include "Planet.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -141,6 +143,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     createActions();
     createMenus();
     createStatusBar();
+
+    connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateAtmosphereMenu()));
 
     connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
              this, SLOT( updateMapEditButtonVisibility( QString ) ) );
@@ -1647,6 +1651,12 @@ void MainWindow::showMapWizard()
     settings.endGroup();
 
     mapWizard->deleteLater();
+}
+
+void MainWindow::updateAtmosphereMenu()
+{
+    bool const hasAtmosphere = m_controlView->marbleModel()->planet()->hasAtmosphere();
+    m_showAtmosphereAct->setEnabled( hasAtmosphere );
 }
 
 void MainWindow::showGoToDialog()

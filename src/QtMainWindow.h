@@ -97,6 +97,8 @@ private Q_SLOTS:
     void  toggleKineticScrolling( bool );
     void  showMapWizard();
 
+    void  updateAtmosphereMenu();
+
     // Edit Menu
     void  copyMap();
     void  copyCoordinates();
