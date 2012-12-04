@@ -317,7 +317,7 @@ QString OpenCachingComItem::dateString(const QVariant& ms)
     qlonglong t = ms.toLongLong();
     if (t)
     {
-        result = QDateTime::fromMSecsSinceEpoch(t).toString(Qt::SystemLocaleShortDate);
+        result = QDateTime::fromMSecsSinceEpoch(t).date().toString(Qt::SystemLocaleShortDate);
     }
     else
     {
