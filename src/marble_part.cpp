@@ -93,6 +93,7 @@
 #include "PluginManager.h"
 #include "SearchInputWidget.h"
 #include "MarbleWidgetInputHandler.h"
+#include "Planet.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -302,6 +303,15 @@ void MarblePart::setShowAtmosphere( bool isChecked )
     m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
 
     m_showAtmosphereAction->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MarblePart::updateAtmosphereMenu()
+{
+    if( m_controlView->marbleModel()->planet()->hasAtmosphere() ) {
+        m_showAtmosphereAction->setEnabled( true );
+    } else {
+        m_showAtmosphereAction->setEnabled( false );
+    }
 }
 
 void MarblePart::showPositionLabel( bool isChecked )
@@ -848,6 +858,8 @@ void MarblePart::setupActions()
                      m_showAtmosphereAction, SLOT( setVisible( bool ) ) );
         }
     }
+    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
+            this, SLOT( updateAtmosphereMenu() ) );
 
     // Action: Show Crosshairs option
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
