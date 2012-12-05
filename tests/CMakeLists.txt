@@ -75,7 +75,7 @@ marble_add_test( MarbleRunnerManagerTest )  # Check RunnerManager signals
 marble_add_test( BookmarkManagerTest )
 marble_add_test( PlacemarkPositionProviderPluginTest )
 marble_add_test( PositionTrackingTest )
-marble_add_qtonly_test( MercatorProjectionTest )   # Check Screen coordinates
+marble_add_test( MercatorProjectionTest )   # Check Screen coordinates
 marble_add_test( MarbleMapTest )            # Check map theme and centering
 marble_add_test( MarbleWidgetTest )         # Check map theme, mouse move, repaint and multiple widgets
 marble_add_test( MapViewWidgetTest )        # Check mapview signals
