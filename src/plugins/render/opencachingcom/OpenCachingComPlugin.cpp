@@ -24,8 +24,6 @@ OpenCachingComPlugin::OpenCachingComPlugin(const MarbleModel *marbleModel)
 {
     setEnabled( true );  // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateSettings() ) );
 }
 
 void OpenCachingComPlugin::initialize()
