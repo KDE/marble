@@ -36,9 +36,12 @@
 #include "GeoTrackGraphicsItem.h"
 #include "GeoDataGroundOverlay.h"
 #include "GeoDataPhotoOverlay.h"
+#include "GeoDataScreenOverlay.h"
 #include "GeoImageGraphicsItem.h"
 #include "GeoPhotoGraphicsItem.h"
+#include "ScreenOverlayGraphicsItem.h"
 #include "TileId.h"
+#include "MarbleGraphicsItem.h"
 
 // Qt
 #include <QtCore/qmath.h>
@@ -60,6 +63,7 @@ public:
     const QAbstractItemModel *const m_model;
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
+    QList<MarbleGraphicsItem*> m_items;
 
 private:
     static void initializeDefaultValues();
@@ -122,24 +126,24 @@ void GeometryLayerPrivate::initializeDefaultValues()
 
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultZValues[i] = s_defaultZValue;
-    
+
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultMinZoomLevels[i] = 15;
 
     s_defaultZValues[GeoDataFeature::None]                = 0;
-    
+
     for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseRetail; i++ )
         s_defaultZValues[(GeoDataFeature::GeoDataVisualCategory)i] = s_defaultZValue - 16;
-    
+
     s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 16;
     s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 15;
-    
+
     //Landuse
-    
-    s_defaultZValues[GeoDataFeature::LeisurePark]         = s_defaultZValue - 14; 
-    
+
+    s_defaultZValues[GeoDataFeature::LeisurePark]         = s_defaultZValue - 14;
+
     s_defaultZValues[GeoDataFeature::TransportParking]    = s_defaultZValue - 13;
-    
+
     s_defaultZValues[GeoDataFeature::HighwayTertiaryLink] = s_defaultZValue - 12;
     s_defaultZValues[GeoDataFeature::HighwaySecondaryLink]= s_defaultZValue - 12;
     s_defaultZValues[GeoDataFeature::HighwayPrimaryLink]  = s_defaultZValue - 12;
@@ -159,7 +163,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::HighwayTrunk]        = s_defaultZValue - 2;
     s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
     s_defaultZValues[GeoDataFeature::RailwayRail]         = s_defaultZValue - 1;
-    
+
     s_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 8;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWood]         = 8;
@@ -178,12 +182,12 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondaryLink]= 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondary]    = 9;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimaryLink]  = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimary]      = 8; 
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimary]      = 8;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunkLink]    = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunk]        = 7;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 6;
-        
+
     //FIXME: Bad, better to expand this
     for(int i = GeoDataFeature::AccomodationCamping; i <= GeoDataFeature::ReligionSikh; i++)
         s_defaultMinZoomLevels[i] = 15;
@@ -248,6 +252,10 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
             item->paint( painter, viewport );
             ++painted;
         }
+    }
+
+    foreach( MarbleGraphicsItem* item, d->m_items ) {
+        item->paintEvent( painter, viewport );
     }
 
     painter->restore();
@@ -348,6 +356,10 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
         photoItem->setPhotoFile( photoOverlay->absoluteIconFile() );
         photoItem->setPoint( photoOverlay->point() );
         item = photoItem;
+    } else if ( overlay->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
+        GeoDataScreenOverlay const * screenOverlay = static_cast<GeoDataScreenOverlay const *>( overlay );
+        ScreenOverlayGraphicsItem *screenItem = new ScreenOverlayGraphicsItem ( screenOverlay );
+        m_items.push_back( screenItem );
     }
 
     if ( item ) {
@@ -360,6 +372,8 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
 void GeometryLayer::invalidateScene()
 {
     d->m_scene.eraseAll();
+    qDeleteAll( d->m_items );
+    d->m_items.clear();
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
