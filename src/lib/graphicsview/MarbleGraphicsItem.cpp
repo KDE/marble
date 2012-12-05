@@ -42,7 +42,7 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
         return true;
     }
 
-    p()->setProjection( viewport );
+    setProjection( viewport );
 
     if ( p()->positions().size() == 0 ) {
         return true;
@@ -278,7 +278,7 @@ MarbleGraphicsItemPrivate *MarbleGraphicsItem::p() const
     return d;
 }
 
-void MarbleGraphicsItem::setProjection( ViewportParams *viewport )
+void MarbleGraphicsItem::setProjection( const ViewportParams *viewport )
 {
     p()->setProjection( viewport );
 }

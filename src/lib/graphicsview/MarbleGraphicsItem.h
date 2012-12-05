@@ -127,7 +127,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
      */
     virtual QRectF contentRect() const;
 
-    void setProjection( ViewportParams *viewport );
+    virtual void setProjection(const ViewportParams *viewport );
 
  protected:
     explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
