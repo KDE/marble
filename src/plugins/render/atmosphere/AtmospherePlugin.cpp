@@ -7,10 +7,11 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
-// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+// Copyright 2008-2009 Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 // Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
+// Copyright 2012      Kovalevskyy Illya <illya.kovalevskyy@gmail.com>
 //
 
 #include "AtmospherePlugin.h"
@@ -24,12 +25,14 @@ namespace Marble
 {
 
 AtmospherePlugin::AtmospherePlugin() :
-    RenderPlugin( 0 )
+    RenderPlugin( 0 ),
+    m_renderRadius(-1)
 {
 }
 
 AtmospherePlugin::AtmospherePlugin( const MarbleModel *marbleModel ) :
-    RenderPlugin( marbleModel )
+    RenderPlugin( marbleModel ),
+    m_renderRadius(-1)
 {
 }
 
@@ -128,34 +131,46 @@ bool AtmospherePlugin::render( GeoPainter *painter,
     if ( viewParams->mapCoversViewport() )
         return true;
 
-    // Ok, now we know that at least a little of the atmosphere is
-    // visible, if nothing else in the corners.  Draw the atmosphere
-    // by using a circular gradient.  This is a pure visual effect and
-    // has nothing to do with real physics.
-
+    // Gradient should be recalculated only if planet color or size changed
+    if(viewParams->radius() != m_renderRadius || marbleModel()->planet()->atmosphereColor() != m_renderColor) {
+        m_renderRadius = viewParams->radius();
+        m_renderColor = marbleModel()->planet()->atmosphereColor();
+        repaintPixmap(viewParams);
+    }
     int  imageHalfWidth  = viewParams->width() / 2;
     int  imageHalfHeight = viewParams->height() / 2;
+    painter->drawPixmap(imageHalfWidth  - (int) ( (qreal) ( viewParams->radius() ) * 1.05 ),
+                        imageHalfHeight - (int) ( (qreal) ( viewParams->radius() ) * 1.05 ),
+                        m_renderPixmap);
+    return true;
+}
+
+void AtmospherePlugin::repaintPixmap(const ViewportParams *viewParams)
+{
+    int  imageHalfWidth  = 1.05 * viewParams->radius();
+    int  imageHalfHeight = 1.05 * viewParams->radius();
+
+    int diameter = (int) ( 2.1 * (qreal) ( viewParams->radius()));
+    m_renderPixmap = QPixmap(diameter, diameter);
+    m_renderPixmap.fill(QColor(Qt::transparent));
+
+    QPainter renderPainter(&m_renderPixmap);
 
     QColor color = marbleModel()->planet()->atmosphereColor();
 
     // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
+    QRadialGradient grad( QPointF( imageHalfWidth, imageHalfHeight ),
                            1.05 * viewParams->radius() );
-    grad1.setColorAt( 0.91, color );
-    grad1.setColorAt( 1.00, QColor(color.red(), color.green(), color.blue(), 0) );
+    grad.setColorAt( 0.91, color );
+    grad.setColorAt( 1.00, QColor(color.red(), color.green(), color.blue(), 0) );
 
-    QBrush    brush1( grad1 );
-    QPen      pen1( Qt::NoPen );
+    QBrush brush(grad);
+    renderPainter.setBrush(brush);
+    renderPainter.setPen(Qt::NoPen);
+    renderPainter.setRenderHint(QPainter::Antialiasing, false);
 
-    painter->setBrush( brush1 );
-    painter->setPen( pen1 );
-    painter->setRenderHint( QPainter::Antialiasing, false );
-    painter->drawEllipse( imageHalfWidth  - (int) ( (qreal) ( viewParams->radius() ) * 1.05 ),
-                          imageHalfHeight - (int) ( (qreal) ( viewParams->radius() ) * 1.05 ),
-                          (int) ( 2.1 * (qreal) ( viewParams->radius()) ),
-                          (int) ( 2.1 * (qreal) ( viewParams->radius()) ) );
-
-    return true;
+    // Let's paint elipse we want in this::render(..) on pixmap from point (0;0)
+    renderPainter.drawEllipse(0, 0, diameter, diameter);
 }
 
 }
