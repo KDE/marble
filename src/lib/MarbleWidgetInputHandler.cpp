@@ -720,11 +720,13 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_arrowCur [1][1] = QCursor( Qt::PointingHandCursor );
         }
 
+#ifndef Q_WS_MAEMO_5
         if ( panViaArrowsEnabled() ) {
             MarbleWidgetInputHandler::d->m_widget->setCursor( d->m_arrowCur[dirX+1][dirY+1] );
         } else {
             MarbleWidgetInputHandler::d->m_widget->setCursor( d->m_arrowCur [1][1] );
         }
+#endif
 
         // let others, especially float items, still process the event
         // Mouse move events need to be eaten to avoid the default oxygen behavior of
