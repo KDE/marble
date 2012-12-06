@@ -57,6 +57,11 @@ public:
     bool isInitialized() const;
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void repaintPixmap(const ViewportParams *viewParams);
+
+private:
+    QPixmap m_renderPixmap;
+    int m_renderRadius;
 };
 
 }
