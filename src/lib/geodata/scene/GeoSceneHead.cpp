@@ -26,6 +26,7 @@
 #include "GeoSceneTypes.h"
 #include "GeoSceneIcon.h"
 #include "GeoSceneZoom.h"
+#include "GeoSceneLicense.h"
 
 namespace Marble
 {
@@ -36,6 +37,7 @@ class GeoSceneHeadPrivate
     GeoSceneHeadPrivate()
         : m_zoom(new GeoSceneZoom),
           m_icon(new GeoSceneIcon),
+          m_license(new GeoSceneLicense),
           m_name(),
           m_target(),
           m_theme(),
@@ -49,6 +51,7 @@ class GeoSceneHeadPrivate
     {
         delete m_icon;
         delete m_zoom;
+        delete m_license;
     }
     
     const char* nodeType() const
@@ -58,6 +61,7 @@ class GeoSceneHeadPrivate
 
     GeoSceneZoom* m_zoom;
     GeoSceneIcon* m_icon;
+    GeoSceneLicense* m_license;
 
     QString m_name;
     QString m_target;
@@ -169,5 +173,13 @@ GeoSceneZoom* GeoSceneHead::zoom()
     return d->m_zoom;
 }
 
+const GeoSceneLicense* GeoSceneHead::license() const {
+    return d->m_license;
+}
+
+GeoSceneLicense* GeoSceneHead::license()
+{
+    return d->m_license;
+}
 
 }

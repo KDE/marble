@@ -56,6 +56,7 @@ namespace dgml
     extern  const char* dgmlTag_Item;
     extern  const char* dgmlTag_Layer;
     extern  const char* dgmlTag_Legend;
+    extern  const char* dgmlTag_License;
     extern  const char* dgmlTag_Map;
     extern  const char* dgmlTag_Maximum;
     extern  const char* dgmlTag_Minimum;

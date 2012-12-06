@@ -32,6 +32,7 @@ namespace Marble
 
 class GeoSceneIcon;
 class GeoSceneZoom;
+class GeoSceneLicense;
 
 class GeoSceneHeadPrivate;
 
@@ -70,6 +71,10 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode
 
     const GeoSceneIcon* icon() const;
     GeoSceneIcon* icon();
+
+    const GeoSceneLicense* license() const;
+    GeoSceneLicense* license();
+
 
  private:
     Q_DISABLE_COPY( GeoSceneHead )
