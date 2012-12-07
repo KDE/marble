@@ -1412,7 +1412,8 @@ void MarblePart::editSettings()
     m_configDialog->addPage( w_routingSettings, tr( "Routing" ) );
 
     // plugin page
-    m_pluginModel = new RenderPluginModel( m_controlView->marbleWidget(), this );
+    m_pluginModel = new RenderPluginModel( this );
+    m_pluginModel->setRenderPlugins( m_controlView->marbleWidget()->renderPlugins() );
 
     MarblePluginSettingsWidget *w_pluginSettings = new MarblePluginSettingsWidget();
     w_pluginSettings->setModel( m_pluginModel );

@@ -12,13 +12,14 @@
 #define MARBLE_RENDERPLUGINMODEL_H
 
 #include "marble_export.h"
-
 #include <QtGui/QStandardItemModel>
+
+#include <QtCore/QList>
 
 namespace Marble
 {
 
-class MarbleWidget;
+class RenderPlugin;
 
 /**
  * @brief Provides common access to various kinds of plugins without having to know about their details.
@@ -37,9 +38,19 @@ public:
         BackendTypes                     // a QStringList
     };
 
-    explicit RenderPluginModel( MarbleWidget *marbleWidget, QObject *parent = 0 );
+    explicit RenderPluginModel( QObject *parent = 0 );
 
     ~RenderPluginModel();
+
+    /**
+     * @brief Set the RenderPlugins the model should manage.
+     *
+     * The given plugins must not be deleted as long as the model has a hold on them,
+     * i.e. until the model is deleted or a different set of plugins is assigned.
+     *
+     * @param renderPlugins the RenderPlugins to be managed
+     */
+    void setRenderPlugins( const QList<RenderPlugin *> &renderPlugins );
 
 public Q_SLOTS:
     /**

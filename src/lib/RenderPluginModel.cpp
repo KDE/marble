@@ -10,7 +10,6 @@
 
 #include "RenderPluginModel.h"
 
-#include "MarbleWidget.h"
 #include "RenderPlugin.h"
 
 namespace Marble
@@ -19,7 +18,7 @@ namespace Marble
 class RenderPluginModel::Private
 {
 public:
-    Private( MarbleWidget *marbleWidget );
+    Private();
 
     static bool renderPluginGuiStringLessThan( RenderPlugin* one, RenderPlugin* two )
     {
@@ -27,26 +26,18 @@ public:
         return one->guiString().replace( "&", "" ) < two->guiString().replace( "&", "" );
     }
 
-    MarbleWidget *const m_marbleWidget;
+    QList<RenderPlugin *> m_renderPlugins;
 };
 
-RenderPluginModel::Private::Private( MarbleWidget *marbleWidget ) :
-    m_marbleWidget( marbleWidget )
+RenderPluginModel::Private::Private() :
+    m_renderPlugins()
 {
 }
 
-RenderPluginModel::RenderPluginModel( MarbleWidget *marbleWidget, QObject *parent ) :
+RenderPluginModel::RenderPluginModel( QObject *parent ) :
     QStandardItemModel( parent ),
-    d( new Private( marbleWidget ) )
+    d( new Private )
 {
-    QList<RenderPlugin *> pluginList = marbleWidget->renderPlugins();
-    qSort( pluginList.begin(), pluginList.end(), Private::renderPluginGuiStringLessThan );
-
-    QStandardItem *parentItem = invisibleRootItem();
-    foreach ( RenderPlugin *plugin, pluginList ) {
-        parentItem->appendRow( plugin->item() );
-    }
-
 }
 
 RenderPluginModel::~RenderPluginModel()
@@ -59,16 +50,32 @@ RenderPluginModel::~RenderPluginModel()
     delete d;
 }
 
+void RenderPluginModel::setRenderPlugins( const QList<RenderPlugin *> &renderPlugins )
+{
+    // our model doesn't own the items, so take them away
+    while ( invisibleRootItem()->hasChildren() ) {
+        invisibleRootItem()->takeRow( 0 );
+    }
+
+    d->m_renderPlugins = renderPlugins;
+    qSort( d->m_renderPlugins.begin(), d->m_renderPlugins.end(), Private::renderPluginGuiStringLessThan );
+
+    QStandardItem *parentItem = invisibleRootItem();
+    foreach ( RenderPlugin *plugin, d->m_renderPlugins ) {
+        parentItem->appendRow( plugin->item() );
+    }
+}
+
 void RenderPluginModel::retrievePluginState()
 {
-    foreach ( RenderPlugin *plugin, d->m_marbleWidget->renderPlugins() ) {
+    foreach ( RenderPlugin *plugin, d->m_renderPlugins ) {
         plugin->retrieveItemState();
     }
 }
 
 void RenderPluginModel::applyPluginState()
 {
-    foreach ( RenderPlugin *plugin, d->m_marbleWidget->renderPlugins() ) {
+    foreach ( RenderPlugin *plugin, d->m_renderPlugins ) {
         plugin->applyItemState();
     }
 }
