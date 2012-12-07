@@ -10,14 +10,11 @@
 //
 
 #include "MarblePluginSettingsWidget.h"
-
-// Qt
-#include <QtGui/QStandardItemModel>
+#include "ui_MarblePluginSettingsWidget.h"
 
 // Marble
-#include "MarbleDebug.h"
 #include "PluginItemDelegate.h"
-#include "ui_MarblePluginSettingsWidget.h"
+#include "RenderPluginModel.h"
 
 namespace Marble
 {
@@ -57,16 +54,18 @@ void MarblePluginSettingsWidget::setConfigIcon( const QIcon& icon )
     d->m_itemDelegate->setConfigIcon( icon );
 }
 
-void MarblePluginSettingsWidget::setModel( QStandardItemModel* pluginModel )
+void MarblePluginSettingsWidget::setModel( RenderPluginModel* pluginModel )
 {
     if ( d->m_pluginListView->model() ) {
         disconnect( d->m_pluginListView->model(), 0, this, 0 );
     }
+
+    d->m_pluginListView->setModel( pluginModel );
+
     if ( pluginModel ) {
         connect( pluginModel, SIGNAL( itemChanged( QStandardItem * ) ),
                  this,        SIGNAL( pluginListViewClicked() ) );
     }
-    d->m_pluginListView->setModel ( pluginModel );
 }
 
 } // namespace Marble
