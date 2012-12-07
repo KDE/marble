@@ -161,8 +161,8 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
         {
             // If the mouse moves around and no left button is pressed, no pushbutton is pressed
             // and no other event will be successful.
-            m_aboutPressedPluginId.clear();
-            m_configPressedPluginId.clear();
+            m_aboutPressedIndex = QModelIndex();
+            m_configPressedIndex = QModelIndex();
             return true;
         }
 
@@ -195,8 +195,8 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
         if ( ( event->type() == QEvent::MouseMove )
              && !( me->buttons() & Qt::LeftButton ) )
         {
-            m_aboutPressedPluginId.clear();
-            m_configPressedPluginId.clear();
+            m_aboutPressedIndex = QModelIndex();
+            m_configPressedIndex = QModelIndex();
             return true;
         }
 
@@ -209,30 +209,30 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
                                             PluginItemDelegate::About,
                                             topRight.x(),
                                             Qt::AlignRight ).rect;
-            QString nameId = index.data( RenderPluginModel::NameId ).toString();
             if ( aboutRect.contains( mousePosition ) ) {
                 if ( event->type() == QEvent::MouseButtonDblClick )
                     return true;
                 if ( event->type() == QEvent::MouseButtonPress ) {
-                    m_aboutPressedPluginId = nameId;
-                    m_configPressedPluginId.clear();
+                    m_aboutPressedIndex = index;
+                    m_configPressedIndex = QModelIndex();
                     return true;
                 }
                 if ( event->type() == QEvent::MouseButtonRelease ) {
-                    m_aboutPressedPluginId.clear();
-                    m_configPressedPluginId.clear();
+                    m_aboutPressedIndex = QModelIndex();
+                    m_configPressedIndex = QModelIndex();
+                    const QString nameId = index.data( RenderPluginModel::NameId ).toString();
                     emit aboutPluginClicked( nameId );
                     return true;
                 }
                 if ( event->type() == QEvent::MouseMove ) {
                     if ( me->buttons() & Qt::LeftButton ) {
-                        m_aboutPressedPluginId = nameId;
-                        m_configPressedPluginId.clear();
+                        m_aboutPressedIndex = index;
+                        m_configPressedIndex = QModelIndex();
                         return true;
                     }
                     else {
-                        m_aboutPressedPluginId.clear();
-                        m_configPressedPluginId.clear();
+                        m_aboutPressedIndex = QModelIndex();
+                        m_configPressedIndex = QModelIndex();
                         return true;
                     }
                 }
@@ -240,7 +240,7 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
             else {
                 // If the mouse is on the item and the mouse isn't above the button.
                 // no about button is pressed.
-                m_aboutPressedPluginId.clear();
+                m_aboutPressedIndex = QModelIndex();
             }
             topRight -= QPoint( aboutRect.width(), 0 );
         }
@@ -253,31 +253,31 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
                                              PluginItemDelegate::Configure,
                                              topRight.x(),
                                              Qt::AlignRight ).rect;
-            QString nameId = index.data( RenderPluginModel::NameId ).toString();
             if( configRect.contains( mousePosition ) ) {
                 if ( event->type() == QEvent::MouseButtonDblClick )
                     return true;
 
                 if ( event->type() == QEvent::MouseButtonPress ) {
-                    m_aboutPressedPluginId.clear();
-                    m_configPressedPluginId = nameId;
+                    m_aboutPressedIndex = QModelIndex();
+                    m_configPressedIndex = index;
                     return true;
                 }
                 if ( event->type() == QEvent::MouseButtonRelease ) {
-                    m_aboutPressedPluginId.clear();
-                    m_configPressedPluginId.clear();
+                    m_aboutPressedIndex = QModelIndex();
+                    m_configPressedIndex = QModelIndex();
+                    const QString nameId = index.data( RenderPluginModel::NameId ).toString();
                     emit configPluginClicked( nameId );
                     return true;
                 }
                 if ( event->type() == QEvent::MouseMove ) {
                     if ( me->buttons() & Qt::LeftButton ) {
-                        m_aboutPressedPluginId.clear();
-                        m_configPressedPluginId = nameId;
+                        m_aboutPressedIndex = QModelIndex();
+                        m_configPressedIndex = index;
                         return true;
                     }
                     else {
-                        m_aboutPressedPluginId.clear();
-                        m_configPressedPluginId.clear();
+                        m_aboutPressedIndex = QModelIndex();
+                        m_configPressedIndex = QModelIndex();
                         return true;
                     }
                 }
@@ -285,7 +285,7 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
             else {
                 // If the mouse is on the item and the mouse isn't above the button.
                 // no config button is pressed.
-                m_configPressedPluginId.clear();
+                m_configPressedIndex = QModelIndex();
             }
 
             topRight -= QPoint( configRect.width(), 0 );
@@ -293,7 +293,7 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
         else {
             // If we don't have an config dialog shown and the mouse is over this item,
             // no config button is pressed.
-            m_configPressedPluginId.clear();
+            m_configPressedIndex = QModelIndex();
         }
     }
 
@@ -348,7 +348,7 @@ QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem&
             contentSize = iconSize;
         }
 
-        if ( m_aboutPressedPluginId == index.data( RenderPluginModel::NameId ).toString() ) {
+        if ( m_aboutPressedIndex == index ) {
             buttonOption.state |= QStyle::State_Sunken;
         }
     }
@@ -362,7 +362,7 @@ QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem&
             buttonOption.iconSize = iconSize;
             contentSize = iconSize;
         }
-        if ( m_configPressedPluginId == index.data( RenderPluginModel::NameId ).toString() ) {
+        if ( m_configPressedIndex == index ) {
             buttonOption.state |= QStyle::State_Sunken;
         }
     }
