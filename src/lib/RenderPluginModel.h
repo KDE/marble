@@ -16,9 +16,12 @@
 
 #include <QtCore/QList>
 
+#include "PluginInterface.h"
+
 namespace Marble
 {
 
+class DialogConfigurationInterface;
 class RenderPlugin;
 
 /**
@@ -33,9 +36,15 @@ public:
      * This enum contains the data roles for the QStandardItems.
      */
     enum ItemDataRole {
-        NameId = Qt::UserRole + 2,       // a QString
-        ConfigurationDialogAvailable,    // a bool
-        BackendTypes                     // a QStringList
+        Name = Qt::DisplayRole,          // QString
+        Icon = Qt::DecorationRole,       // QIcon
+        Description = Qt::ToolTipRole,   // QString
+        NameId = Qt::UserRole + 2,       // QString
+        ConfigurationDialogAvailable,    // bool
+        BackendTypes,                    // QStringList
+        Version,                         // QString
+        AboutDataText,                   // QString
+        CopyrightYears                   // QString
     };
 
     explicit RenderPluginModel( QObject *parent = 0 );
@@ -51,6 +60,10 @@ public:
      * @param renderPlugins the RenderPlugins to be managed
      */
     void setRenderPlugins( const QList<RenderPlugin *> &renderPlugins );
+
+    QList<PluginAuthor> pluginAuthors( const QModelIndex &index ) const;
+
+    DialogConfigurationInterface *pluginDialogConfigurationInterface( const QModelIndex &index );
 
 public Q_SLOTS:
     /**

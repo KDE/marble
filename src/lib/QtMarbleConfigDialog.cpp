@@ -38,7 +38,6 @@
 #include "MarbleLocale.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "PluginAboutDialog.h"
 #include "RenderPlugin.h"
 #include "RenderPluginModel.h"
 #include "MarbleClock.h"
@@ -165,10 +164,6 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     d->w_pluginSettings->setAboutIcon( QIcon(":/icons/help-about.png") );
     d->w_pluginSettings->setConfigIcon(  QIcon(":/icons/settings-configure.png") );
 
-    connect( d->w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
-                                  SLOT( showPluginAboutDialog( QString ) ) );
-    connect( d->w_pluginSettings, SIGNAL( configPluginClicked( QString ) ),
-                                  SLOT( showPluginConfigDialog( QString ) ) );
     connect( this, SIGNAL( rejected() ), &d->m_pluginModel, SLOT( retrievePluginState() ) );
     connect( this, SIGNAL( accepted() ), &d->m_pluginModel, SLOT( applyPluginState() ) );
 
@@ -225,46 +220,6 @@ void QtMarbleConfigDialog::syncSettings()
     }
     
     QNetworkProxy::setApplicationProxy(proxy);
-}
-
-void QtMarbleConfigDialog::showPluginAboutDialog( QString nameId )
-{
-    QList<RenderPlugin *> renderItemList = d->m_marbleWidget->renderPlugins();
-
-    foreach ( RenderPlugin *renderItem, renderItemList ) {
-        if( renderItem->nameId() == nameId ) {
-            QPointer<PluginAboutDialog> aboutDialog = new PluginAboutDialog( this );
-            aboutDialog->setName( renderItem->name() );
-            aboutDialog->setVersion( renderItem->version() );
-            if ( !renderItem->aboutDataText().isEmpty() ) {
-                aboutDialog->setDataText( renderItem->aboutDataText() );
-            }
-            QIcon pluginIcon = renderItem->icon();
-            if ( !pluginIcon.isNull() ) {
-                aboutDialog->setIcon( pluginIcon );
-            }
-            QString const copyrightText = tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
-            aboutDialog->setAboutText( copyrightText.arg( renderItem->copyrightYears() ) );
-            aboutDialog->setAuthors( renderItem->pluginAuthors() );
-            aboutDialog->exec();
-            delete aboutDialog;
-        }
-    }
-}
-
-void QtMarbleConfigDialog::showPluginConfigDialog( QString nameId )
-{
-    QList<RenderPlugin *> renderItemList = d->m_marbleWidget->renderPlugins();
-
-    foreach ( RenderPlugin *renderItem, renderItemList ) {
-        if( renderItem->nameId() == nameId ) {
-            DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( renderItem );
-            QDialog *configDialog = configInterface ? configInterface->configDialog() : 0;
-            if ( configDialog ) {
-                configDialog->show();
-            }
-        }
-    }
 }
 
 void QtMarbleConfigDialog::writePluginSettings()

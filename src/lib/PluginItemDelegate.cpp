@@ -220,8 +220,7 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
                 if ( event->type() == QEvent::MouseButtonRelease ) {
                     m_aboutPressedIndex = QModelIndex();
                     m_configPressedIndex = QModelIndex();
-                    const QString nameId = index.data( RenderPluginModel::NameId ).toString();
-                    emit aboutPluginClicked( nameId );
+                    emit aboutPluginClicked( index );
                     return true;
                 }
                 if ( event->type() == QEvent::MouseMove ) {
@@ -265,8 +264,7 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
                 if ( event->type() == QEvent::MouseButtonRelease ) {
                     m_aboutPressedIndex = QModelIndex();
                     m_configPressedIndex = QModelIndex();
-                    const QString nameId = index.data( RenderPluginModel::NameId ).toString();
-                    emit configPluginClicked( nameId );
+                    emit configPluginClicked( index );
                     return true;
                 }
                 if ( event->type() == QEvent::MouseMove ) {

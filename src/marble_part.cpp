@@ -77,7 +77,6 @@
 #include "MarblePluginSettingsWidget.h"
 #include "MapWizard.h"
 #include "NewBookmarkFolderDialog.h"
-#include "PluginAboutDialog.h"
 #include "RenderPluginModel.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
@@ -1422,10 +1421,6 @@ void MarblePart::editSettings()
                                SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( cancelClicked() ),
              m_pluginModel,    SLOT( retrievePluginState() ) );
-    connect( w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
-                               SLOT( showPluginAboutDialog( QString ) ) );
-    connect( w_pluginSettings, SIGNAL( configPluginClicked( QString ) ),
-                               SLOT( showPluginConfigDialog( QString ) ) );
 
     m_configDialog->show();
 }
@@ -1567,46 +1562,6 @@ void MarblePart::updateSettings()
 
     // External map editor
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
-}
-
-void MarblePart::showPluginAboutDialog( const QString& nameId )
-{
-    QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
-
-    foreach ( RenderPlugin *renderItem, renderItemList ) {
-        if( renderItem->nameId() == nameId ) {
-            QPointer<PluginAboutDialog> aboutDialog = new PluginAboutDialog( m_controlView );
-            aboutDialog->setName( renderItem->name() );
-            aboutDialog->setVersion( renderItem->version() );
-            if ( !renderItem->aboutDataText().isEmpty() ) {
-                aboutDialog->setDataText( renderItem->aboutDataText() );
-            }
-            QIcon pluginIcon = renderItem->icon();
-            if ( !pluginIcon.isNull() ) {
-                aboutDialog->setIcon( pluginIcon );
-            }
-            QString const copyrightText = tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
-            aboutDialog->setAboutText( copyrightText.arg( renderItem->copyrightYears() ) );
-            aboutDialog->setAuthors( renderItem->pluginAuthors() );
-            aboutDialog->exec();
-            delete aboutDialog;
-        }
-    }
-}
-
-void MarblePart::showPluginConfigDialog( const QString& nameId )
-{
-    QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
-
-    foreach ( RenderPlugin *renderItem, renderItemList ) {
-        if( renderItem->nameId() == nameId ) {
-            DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( renderItem );
-            QDialog *configDialog = configInterface ? configInterface->configDialog() : 0;
-            if ( configDialog ) {
-                configDialog->show();
-            }
-        }
-    }
 }
 
 void MarblePart::writePluginSettings()

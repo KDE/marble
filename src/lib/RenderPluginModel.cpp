@@ -10,6 +10,7 @@
 
 #include "RenderPluginModel.h"
 
+#include "DialogConfigurationInterface.h"
 #include "RenderPlugin.h"
 
 namespace Marble
@@ -64,6 +65,29 @@ void RenderPluginModel::setRenderPlugins( const QList<RenderPlugin *> &renderPlu
     foreach ( RenderPlugin *plugin, d->m_renderPlugins ) {
         parentItem->appendRow( plugin->item() );
     }
+}
+
+QList<PluginAuthor> RenderPluginModel::pluginAuthors( const QModelIndex &index ) const
+{
+    if ( !index.isValid() )
+        return QList<PluginAuthor>();
+
+    if ( index.row() < 0 || index.row() >= d->m_renderPlugins.count() )
+        return QList<PluginAuthor>();
+
+    return d->m_renderPlugins.at( index.row() )->pluginAuthors();
+}
+
+DialogConfigurationInterface *RenderPluginModel::pluginDialogConfigurationInterface( const QModelIndex &index )
+{
+    if ( !index.isValid() )
+        return 0;
+
+    if ( index.row() < 0 || index.row() >= d->m_renderPlugins.count() )
+        return 0;
+
+    RenderPlugin *plugin = d->m_renderPlugins.at( index.row() );
+    return qobject_cast<DialogConfigurationInterface *>( plugin );
 }
 
 void RenderPluginModel::retrievePluginState()
