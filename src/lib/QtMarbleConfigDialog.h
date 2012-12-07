@@ -130,16 +130,6 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     void syncSettings();
 
     /**
-     * Shows the about dialog for the plugin with the corresponding @p nameId.
-     */
-    void showPluginAboutDialog( QString nameId );
-
-    /**
-     * Shows the configuration dialog for the plugin with the corresponding @p nameId.
-     */
-    void showPluginConfigDialog( QString nameId );
-
-    /**
      * Saves the settings of all plugins.
      */
     void writePluginSettings();

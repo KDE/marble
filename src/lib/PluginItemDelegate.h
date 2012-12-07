@@ -45,13 +45,13 @@ class PluginItemDelegate : public QAbstractItemDelegate
      * This signal is emitted if the user clicks on a "about"-button of an item in the view
      * passed to the constructor.
      */
-    void aboutPluginClicked( QString nameId );
+    void aboutPluginClicked( const QModelIndex &index );
 
     /**
      * This signal is emitted if the user clicks on a "configure"-button of an item in the view
      * passed to the constructor.
      */
-    void configPluginClicked( QString nameId );
+    void configPluginClicked( const QModelIndex &index );
 
  protected:
     bool editorEvent( QEvent *event,
