@@ -11,7 +11,7 @@
 #include <QtTest/QtTest>
 
 #include "RenderPluginModel.h"
-#include "MarbleWidget.h"
+#include "MarbleMap.h"
 
 #define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
 
@@ -24,24 +24,33 @@ class RenderPluginModelTest : public QObject
 
  public:
     RenderPluginModelTest() :
-        m_widget( 0 )
+        m_map( 0 )
     {}
 
  private slots:
-    void initTestCase() { m_widget = new MarbleWidget(); }
-    void cleanupTestCase() { delete m_widget; }
+    void initTestCase() { m_map = new MarbleMap(); }
+    void cleanupTestCase() { delete m_map; }
 
     void construct();
+    void setRenderPlugins();
 
  private:
-    MarbleWidget *m_widget;
+    MarbleMap *m_map;
 };
 
 void RenderPluginModelTest::construct()
 {
-    const RenderPluginModel model( m_widget );
+    const RenderPluginModel model;
 
-    QCOMPARE( model.rowCount(), m_widget->renderPlugins().count() );
+    QCOMPARE( model.rowCount(), 0 );
+}
+
+void RenderPluginModelTest::setRenderPlugins()
+{
+    RenderPluginModel model;
+    model.setRenderPlugins( m_map->renderPlugins() );
+
+    QCOMPARE( model.rowCount(), m_map->renderPlugins().count() );
 }
 
 }

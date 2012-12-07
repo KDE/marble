@@ -55,7 +55,7 @@ class QtMarbleConfigDialogPrivate
           ui_navigationSettings(),
           ui_timeSettings(),
           m_marbleWidget( marbleWidget ),
-          m_pluginModel( marbleWidget )
+          m_pluginModel()
     {
     }
 
@@ -155,6 +155,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     tabWidget->addTab( w_routingSettings, tr( "Routing" ) );
 
     // plugin page
+    d->m_pluginModel.setRenderPlugins( d->m_marbleWidget->renderPlugins() );
     d->w_pluginSettings = new MarblePluginSettingsWidget( this );
     d->w_pluginSettings->setModel( &d->m_pluginModel );
     d->w_pluginSettings->setObjectName( "plugin_page" );
