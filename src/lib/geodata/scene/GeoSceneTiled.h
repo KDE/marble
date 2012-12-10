@@ -29,11 +29,7 @@
  */
 
 /* In order to make Marble able to manage vector tiles,
-<<<<<<< HEAD:src/lib/geodata/scene/GeoSceneTiled.h
- * now there is GeoSceneTiled and then GeoSceneTexture
-=======
  * now there is GeoSceneTiled and then GeoSceneTiled
->>>>>>> master:src/lib/geodata/scene/GeoSceneTiled.h
  * (for the tag <texture> in dgml) or GeoSceneVectorTile
  * (for <vectortile>) are created, which inherit from this class */
 
