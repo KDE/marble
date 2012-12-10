@@ -49,6 +49,6 @@ signals:
     void                    deviatedFromRoute (bool deviated);
     void                    currentRouteChanged ();
 public:
-    int                     rightNeighbor (const Marble::GeoDataCoordinates& position, const Marble::RouteRequest* route) const;
+    int                     rightNeighbor (const Marble::GeoDataCoordinates& position, const Marble::RouteRequest * route) const;
 };
 };

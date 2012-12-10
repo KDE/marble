@@ -74,6 +74,11 @@ public:
     virtual void            setSettings (const QHash<QString,QVariant>& settings);
 signals:
     void                    visibilityChanged (bool visible, const QString& nameId);
+public:
+    virtual QString         runtimeTrace () const;
+    QStringList             settingKeys ();
+    bool                    setSetting (const QString& key, const QVariant& value);
+    QVariant                setting (const QString& key);
 };
 // RenderPlugin
 

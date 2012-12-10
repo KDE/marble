@@ -17,6 +17,7 @@
 #include "DialogConfigurationInterface.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
+#include "RenderPluginModel.h"
 
 // Qt
 #include <QtGui/QAction>
@@ -110,9 +111,12 @@ QStandardItem* RenderPlugin::item()
     d->m_item.setFlags( d->m_item.flags() & ~Qt::ItemIsSelectable );
 
     // Custom data
-    d->m_item.setData( nameId(), RenderPlugin::NameId );
-    d->m_item.setData( (bool) qobject_cast<DialogConfigurationInterface *>( this ), RenderPlugin::ConfigurationDialogAvailable );
-    d->m_item.setData( backendTypes(), RenderPlugin::BackendTypes );
+    d->m_item.setData( nameId(), RenderPluginModel::NameId );
+    d->m_item.setData( (bool) qobject_cast<DialogConfigurationInterface *>( this ), RenderPluginModel::ConfigurationDialogAvailable );
+    d->m_item.setData( backendTypes(), RenderPluginModel::BackendTypes );
+    d->m_item.setData( version(), RenderPluginModel::Version );
+    d->m_item.setData( aboutDataText(), RenderPluginModel::AboutDataText );
+    d->m_item.setData( copyrightYears(), RenderPluginModel::CopyrightYears );
 
     return &d->m_item;
 }

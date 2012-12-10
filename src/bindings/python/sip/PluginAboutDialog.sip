@@ -34,12 +34,12 @@ public:
     virtual ~PluginAboutDialog ();
     void                    setName (const QString& name);
     void                    setVersion (const QString& version);
-    void                    setPixmap (const QPixmap& pixmap);
     void                    setAboutText (const QString& about);
     void                    setAuthorsText (const QString& authors);
     void                    setDataText (const QString& data);
     void                    setLicense (Marble::PluginAboutDialog::LicenseKey license);
     void                    setLicenseAgreementText (const QString& license);
     void                    setAuthors (const QList<Marble::PluginAuthor>& authors);
+    void                    setIcon (const QIcon& icon);
 };
 };

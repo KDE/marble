@@ -86,6 +86,7 @@ square or round.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#creatingTilesStart">creatingTilesStart</a> (<a href="../marble/Marble.TileCreator.html">Marble.TileCreator</a> a0, QString name, QString description)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#homeChanged">homeChanged</a> (<a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> newHomePoint)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#themeChanged">themeChanged</a> (QString mapTheme)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#trackedPlacemarkChanged">trackedPlacemarkChanged</a> (<a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a> placemark)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#workOfflineChanged">workOfflineChanged</a> ()</td></tr>
@@ -163,7 +164,27 @@ square or round.
 @param
 <dl class="see" compact><dt><b>See also:</b></dt><dd> zoomView()
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("creatingTilesStart(Marble::TileCreator*, const QString&, const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="themeChanged"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("creatingTilesStart(Marble::TileCreator*, const QString&, const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="homeChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> homeChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>newHomePoint</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when the home location is changed
+<dl class="see" compact><dt><b>See also:</b></dt><dd> home(), setHome()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("homeChanged(const Marble::GeoDataCoordinates)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="themeChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

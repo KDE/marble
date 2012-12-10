@@ -84,8 +84,7 @@ if( QTONLY AND NOT WIN32 )
         INCLUDE(CTest)
     endif( BUILD_MARBLE_TESTS )
 else()
-    # for KDE builds this gets set in the kdeedu CMakeLists.txt
-    set( BUILD_MARBLE_TESTS OFF )
+    set( BUILD_MARBLE_TESTS ${KDE4_BUILD_TESTS} )
 endif()
 
 if( BUILD_MARBLE_TESTS )
@@ -253,6 +252,11 @@ if(QTONLY)
   set( QT_USE_QTTEST     ON )
   set( QT_USE_QTSCRIPT   ON )
   include( ${QT_USE_FILE} )
+  IF ( NOT QT_QTDECLARATIVE_LIBRARY )
+    # older cmake versions have a FindQt4.cmake without support for declarative,
+    # but the library may still be available
+    FIND_LIBRARY(QT_QTDECLARATIVE_LIBRARY NAMES QtDeclarative HINTS ${QT_LIBRARY_DIR})
+  ENDIF()
 
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources

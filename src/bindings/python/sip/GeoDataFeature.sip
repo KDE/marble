@@ -29,7 +29,7 @@ public:
                             GeoDataFeature (const QString& name);
                             GeoDataFeature (const Marble::GeoDataFeature& other);
     bool                    operator == (const Marble::GeoDataFeature&) const;
-    Marble::EnumFeatureId           featureId () const;
+    Marble::EnumFeatureId   featureId () const;
 
     enum GeoDataVisualCategory
     {
@@ -195,17 +195,13 @@ public:
     void                    setStyleUrl (const QString& value);
     bool                    isVisible () const;
     void                    setVisible (bool value);
-    Marble::GeoDataStyle*   style () const;
-    void                    setStyle (Marble::GeoDataStyle* style);
+    const Marble::GeoDataStyle*   style () const;
     Marble::GeoDataFeature::GeoDataVisualCategory  visualCategory () const;
     void                    setVisualCategory (Marble::GeoDataFeature::GeoDataVisualCategory category);
 //ig    const QChar             role () const;
-    int                     popularityIndex () const;
-    void                    setPopularityIndex (int index);
     qint64                  popularity () const;
     void                    setPopularity (qint64 popularity);
-    Marble::GeoDataStyleMap*  styleMap () const;
-    void                    setStyleMap (Marble::GeoDataStyleMap* map);
+    const Marble::GeoDataStyleMap*  styleMap () const;
     const QSize             symbolSize () const;
     static void             resetDefaultStyles ();
     virtual void            pack (QDataStream& stream) const;
@@ -235,6 +231,12 @@ public:
     static Marble::GeoDataFeature::GeoDataVisualCategory  OsmVisualCategory (const QString& keyValue);
     bool                    isGloballyVisible () const;
     const QImage            symbol () const;
+    int                     zoomLevel () const;
+    void                    setZoomLevel (int index);
+    static QColor           defaultLabelColor ();
+    static void             setDefaultLabelColor (const QColor& color);
+    void                    setStyle (const Marble::GeoDataStyle* style);
+    void                    setStyleMap (const Marble::GeoDataStyleMap* map);
 };
 // GeoDataFeature
 

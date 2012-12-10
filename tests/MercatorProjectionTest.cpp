@@ -51,6 +51,9 @@ class MercatorProjectionTest : public QObject
 
 void MercatorProjectionTest::screenCoordinatesValidLat_data()
 {
+    ViewportParams mercator;
+    mercator.setProjection( Mercator );
+
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
     QTest::addColumn<bool>( "validLat" );
@@ -60,23 +63,23 @@ void MercatorProjectionTest::screenCoordinatesValidLat_data()
     addRow() << -180.0 << 0.0 << true;
     addRow() <<  180.0 << 0.0 << true;
 
-    addRow() << 0.0 << MercatorProjection().minValidLat() * RAD2DEG << true;
-    addRow() << 0.0 << MercatorProjection().maxValidLat() * RAD2DEG << true;
+    addRow() << 0.0 << mercator.currentProjection()->minValidLat() * RAD2DEG << true;
+    addRow() << 0.0 << mercator.currentProjection()->maxValidLat() * RAD2DEG << true;
 
-    addRow() << 0.0 << MercatorProjection().minValidLat() * RAD2DEG - 0.0001 << false;
-    addRow() << 0.0 << MercatorProjection().maxValidLat() * RAD2DEG + 0.0001 << false;
+    addRow() << 0.0 << mercator.currentProjection()->minValidLat() * RAD2DEG - 0.0001 << false;
+    addRow() << 0.0 << mercator.currentProjection()->maxValidLat() * RAD2DEG + 0.0001 << false;
 
-    addRow() << -180.0 << MercatorProjection().minValidLat() * RAD2DEG << true;
-    addRow() <<  180.0 << MercatorProjection().minValidLat() * RAD2DEG << true;
+    addRow() << -180.0 << mercator.currentProjection()->minValidLat() * RAD2DEG << true;
+    addRow() <<  180.0 << mercator.currentProjection()->minValidLat() * RAD2DEG << true;
 
-    addRow() << -180.0 << MercatorProjection().maxValidLat() * RAD2DEG << true;
-    addRow() <<  180.0 << MercatorProjection().maxValidLat() * RAD2DEG << true;
+    addRow() << -180.0 << mercator.currentProjection()->maxValidLat() * RAD2DEG << true;
+    addRow() <<  180.0 << mercator.currentProjection()->maxValidLat() * RAD2DEG << true;
 
-    addRow() << -180.0 << MercatorProjection().minValidLat() * RAD2DEG - 0.0001 << false;
-    addRow() <<  180.0 << MercatorProjection().minValidLat() * RAD2DEG - 0.0001 << false;
+    addRow() << -180.0 << mercator.currentProjection()->minValidLat() * RAD2DEG - 0.0001 << false;
+    addRow() <<  180.0 << mercator.currentProjection()->minValidLat() * RAD2DEG - 0.0001 << false;
 
-    addRow() << -180.0 << MercatorProjection().maxValidLat() * RAD2DEG + 0.0001 << false;
-    addRow() <<  180.0 << MercatorProjection().maxValidLat() * RAD2DEG + 0.0001 << false;
+    addRow() << -180.0 << mercator.currentProjection()->maxValidLat() * RAD2DEG + 0.0001 << false;
+    addRow() <<  180.0 << mercator.currentProjection()->maxValidLat() * RAD2DEG + 0.0001 << false;
 }
 
 void MercatorProjectionTest::screenCoordinatesValidLat()
@@ -131,6 +134,9 @@ void MercatorProjectionTest::screenCoordinatesValidLat()
 
 void MercatorProjectionTest::screenCoordinatesOfCenter_data()
 {
+    ViewportParams mercator;
+    mercator.setProjection( Mercator );
+
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
@@ -145,14 +151,14 @@ void MercatorProjectionTest::screenCoordinatesOfCenter_data()
     addRow() << -540.0 << 0.0;
     addRow() <<  540.0 << 0.0;
 
-    addRow() << 0.0 << MercatorProjection().minValidLat() * RAD2DEG;
-    addRow() << 0.0 << MercatorProjection().maxValidLat() * RAD2DEG;
+    addRow() << 0.0 << mercator.currentProjection()->minValidLat() * RAD2DEG;
+    addRow() << 0.0 << mercator.currentProjection()->maxValidLat() * RAD2DEG;
 
-    addRow() << -180.0 << MercatorProjection().minValidLat() * RAD2DEG;
-    addRow() << -180.0 << MercatorProjection().maxValidLat() * RAD2DEG;
+    addRow() << -180.0 << mercator.currentProjection()->minValidLat() * RAD2DEG;
+    addRow() << -180.0 << mercator.currentProjection()->maxValidLat() * RAD2DEG;
 
-    addRow() <<  180.0 << MercatorProjection().minValidLat() * RAD2DEG;
-    addRow() <<  180.0 << MercatorProjection().maxValidLat() * RAD2DEG;
+    addRow() <<  180.0 << mercator.currentProjection()->minValidLat() * RAD2DEG;
+    addRow() <<  180.0 << mercator.currentProjection()->maxValidLat() * RAD2DEG;
 
     // FIXME: the following tests should succeed
 #if 0

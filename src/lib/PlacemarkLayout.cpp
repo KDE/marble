@@ -282,10 +282,9 @@ void PlacemarkLayout::setCacheData()
 
         const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
 
-        bool ok;
-        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
 
-        if ( !ok ) {
+        if ( !coordinates.isValid() ) {
             continue;
         }
 
@@ -297,7 +296,7 @@ void PlacemarkLayout::setCacheData()
 }
 
 /// determine the set of placemarks that fit the viewport based on a pyramid of TileIds
-QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const ViewportParams *viewport )
+QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const ViewportParams *viewport ) const
 {
     int zoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 
@@ -391,10 +390,9 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         const QModelIndex index = selectedIndexes.at( i );
         const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         Q_ASSERT(placemark);
-        bool ok;
-        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
 
-        if ( !ok ) {
+        if ( !coordinates.isValid() ) {
             continue;
         }
 
@@ -422,14 +420,10 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
      */
     const QItemSelection selection = m_selectionModel->selection();
 
-    QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
-    const int rowCount = placemarkList.count();
-    for ( int i = 0; i != rowCount; ++i ) {
-        const GeoDataPlacemark *placemark = placemarkList.at(i);
-
-        bool ok;
-        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
-        if ( !ok ) {
+    const QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
+    foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
+        if ( !coordinates.isValid() ) {
             continue;
         }
 
@@ -516,7 +510,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         }
     }
 
-    m_runtimeTrace = QString("Visible: %1 Drawn: %2").arg( rowCount ).arg( m_paintOrder.size() );
+    m_runtimeTrace = QString("Visible: %1 Drawn: %2").arg( placemarkList.count() ).arg( m_paintOrder.size() );
     return m_paintOrder;
 }
 
@@ -571,20 +565,25 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     return true;
 }
 
-GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlacemark *placemark, bool *ok ) const
+GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlacemark *placemark ) const
 {
-    GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), ok );
-    if ( !*ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
+    bool ok;
+    GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), &ok );
+    if ( !ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
                 != m_acceptedVisualCategories.constEnd() ) {
-            *ok = true;
+        ok = true;
     }
 
-    return coordinates;
+    if ( ok ) {
+        return coordinates;
+    }
+
+    return GeoDataCoordinates();
 }
 
 QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                                       const qreal x, const qreal y,
-                                      const QString &labelText )
+                                      const QString &labelText ) const
 {
     if ( labelText.isEmpty() )
         return QRectF();

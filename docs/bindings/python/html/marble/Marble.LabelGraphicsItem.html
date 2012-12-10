@@ -64,7 +64,8 @@ The item also provides frames.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QIcon&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#icon">icon</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QImage&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#image">image</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QSizeF&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#minimumSize">minimumSize</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintContent">paintContent</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QString renderPos, <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintContent">paintContent</a> (self, QPainter painter)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setContentSize">setContentSize</a> (self, QSizeF contentSize)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIcon">setIcon</a> (self, QIcon icon, QSize size)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setImage">setImage</a> (self, QImage image, QSize size=QSize())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMinimumSize">setMinimumSize</a> (self, QSizeF size)</td></tr>
@@ -174,26 +175,30 @@ The item also provides frames.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a>&nbsp;</td>
-<td class="paramname"><em>painter</em>, </td>
+<td class="paramtype">QPainter&nbsp;</td>
+<td class="paramname"><em>painter</em></td>
 </tr>
 <tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setContentSize"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setContentSize</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>renderPos</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a>&nbsp;</td>
-<td class="paramname"><em>layer</em></td>
+<td class="paramtype">QSizeF&nbsp;</td>
+<td class="paramname"><em>contentSize</em></td>
 </tr>
 <tr>
 <td></td>

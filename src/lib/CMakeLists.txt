@@ -165,6 +165,7 @@ set(marblewidget_SRCS
     PositionProviderPlugin.cpp
     PositionProviderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp
+    RenderPluginModel.cpp
     PluginAboutDialog.cpp
     PluginItemDelegate.cpp
 

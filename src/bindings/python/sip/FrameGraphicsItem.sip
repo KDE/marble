@@ -34,7 +34,6 @@ public:
     };
     explicit                FrameGraphicsItem (Marble::MarbleGraphicsItem* parent = 0);
     virtual ~FrameGraphicsItem ();
-    Marble::FrameGraphicsItem::FrameType  frame ();
     void                    setFrame (Marble::FrameGraphicsItem::FrameType type);
     qreal                   margin () const;
     void                    setMargin (qreal margin);
@@ -50,23 +49,23 @@ public:
     void                    setBorderWidth (qreal width);
     qreal                   padding () const;
     void                    setPadding (qreal width);
-//ig    qreal                   border () const;
-//ig    void                    setBorder (qreal width);
     QBrush                  borderBrush () const;
     void                    setBorderBrush (const QBrush& brush);
     Qt::PenStyle            borderStyle () const;
     void                    setBorderStyle (Qt::PenStyle style);
     QBrush                  background () const;
     void                    setBackground (const QBrush& background);
-    QRectF                  contentRect (const QPointF& position) const;
-    QRectF                  paintedRect (const QPointF& position = QPointF(0.0,0.0)) const;
+    QRectF                  paintedRect () const;
     QRectF                  contentRect () const;
     QSizeF                  contentSize () const;
     void                    setContentSize (const QSizeF& size);
 protected:
     virtual QPainterPath    backgroundShape () const;
-    virtual void            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0);
-    virtual void            paintContent (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0);
-    virtual void            paintBackground (Marble::GeoPainter* painter);
+public:
+    Marble::FrameGraphicsItem::FrameType  frame () const;
+protected:
+    virtual void            paint (QPainter* painter);
+    virtual void            paintContent (QPainter* painter);
+    virtual void            paintBackground (QPainter* painter);
 };
 };

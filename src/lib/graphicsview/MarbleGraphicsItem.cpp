@@ -43,7 +43,11 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
     }
 
     p()->setProjection( viewport );
-    
+
+    if ( p()->positions().size() == 0 ) {
+        return true;
+    }
+
     // Remove the pixmap if it has been requested. This prevents QPixmapCache from being used
     // outside the ui thread.
     if ( p()->m_repaintNeeded ) {
@@ -51,23 +55,14 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
         p()->m_repaintNeeded = false;
         QPixmapCache::remove( p()->m_cacheKey );
     }
-    
-    if ( p()->positions().size() == 0 ) {
-        return true;
-    }
 
     // At the moment, as GraphicsItems can't be zoomed or rotated ItemCoordinateCache
     // and DeviceCoordianteCache is exactly the same
     if ( ItemCoordinateCache == cacheMode()
          || DeviceCoordinateCache == cacheMode() )
     {
-        p()->ensureValidCacheKey();
         QPixmap cachePixmap;
-#if QT_VERSION < 0x040600
-        bool pixmapAvailable = QPixmapCache::find( p()->m_cacheKey, cachePixmap );
-#else
         bool pixmapAvailable = QPixmapCache::find( p()->m_cacheKey, &cachePixmap );
-#endif
         if ( !pixmapAvailable ) {
             QSize neededPixmapSize = size().toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
         
@@ -93,11 +88,7 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
                 item->paintEvent( &pixmapPainter, viewport );
             }
             // Update the pixmap in cache
-#if QT_VERSION < 0x040600
-            QPixmapCache::insert( p()->m_cacheKey, cachePixmap );
-#else
             p()->m_cacheKey = QPixmapCache::insert( cachePixmap );
-#endif
         }
         
         foreach( const QPointF& position, p()->positions() ) {

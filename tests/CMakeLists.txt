@@ -21,11 +21,23 @@ ENDIF (APPLE)
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 #############################################################
+# includes
+
+if (NOT QTONLY)
+  include_directories(
+    ${KDE4_INCLUDES}
+  )
+endif ()
+
+#############################################################
 # Make the current test source directory available in #define TESTSRCDIR
 # use this for accessing TESTSRCDIR/data
 #############################################################
 
 add_definitions( -DTESTSRCDIR=\\"${CMAKE_CURRENT_SOURCE_DIR}\\" )
+if (NOT QTONLY)
+  add_definitions( -DQT_GUI_LIB )
+endif ()
 
 #############################################################
 
@@ -54,7 +66,7 @@ endif( CMAKE_COMMAND AND CMAKE_CTEST_COMMAND )
 ############################
 marble_add_test( MarbleWidgetSpeedTest )
 add_definitions( -DDGML_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../data/maps/earth\\\"" )
-marble_add_test( TestGeoSceneWriter )
+marble_add_qtonly_test( TestGeoSceneWriter )
 
 marble_add_test( QuaternionTest )           # Check Quaternion arithmetic
 marble_add_test( ProjectionTest )           # Check LineString projection
@@ -71,6 +83,7 @@ marble_add_test( TestGeoPainter )           # no tests!
 marble_add_test( GeoPolygonTest )           # Loads an empty pnt file
 marble_add_test( RenderPluginTest )
 marble_add_test( AbstractDataPluginTest )
+marble_add_test( RenderPluginModelTest )
 
 ## GeoData Classes tests
 marble_add_test( TestGeoData )                  # Check parent, nodetype

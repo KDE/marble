@@ -28,7 +28,7 @@ class MarbleRunnerManager : QObject /NoDefaultCtors/
 public:
     ~MarbleRunnerManager ();
     void                    setModel (Marble::MarbleModel* model);
-    void                    findPlacemarks (const QString& searchTerm);
+    void                    findPlacemarks (const QString& searchTerm, const Marble::GeoDataLatLonAltBox& preferred = Marble::GeoDataLatLonAltBox());
     void                    reverseGeocoding (const Marble::GeoDataCoordinates& coordinates);
 signals:
     void                    searchResultChanged (QAbstractItemModel* model);
@@ -44,7 +44,7 @@ signals:
 public:
     void                    retrieveRoute (const Marble::RouteRequest* request);
 // FIXME
-//ig    QVector<Marble::GeoDataPlacemark*>  searchPlacemarks (const QString& searchTerm);
+//ig    QVector<Marble::GeoDataPlacemark*>  searchPlacemarks (const QString& searchTerm, const Marble::GeoDataLatLonAltBox& preferred = Marble::GeoDataLatLonAltBox());
     QString                 searchReverseGeocoding (const Marble::GeoDataCoordinates& coordinates);
 //ig    QVector<Marble::GeoDataDocument*>  searchRoute (const Marble::RouteRequest* request);
     void                    parseFile (const QString& fileName, Marble::DocumentRole role = Marble::UserDocument);

@@ -24,17 +24,17 @@
 
 #include "marble_export.h"
 
+class QModelIndex;
+
 /**
  * @short A public class that adds methods to the UI Plugins Settings Widget.
  *
  */
-
-class QStandardItemModel;
-
 namespace Marble
 {
 
 class MarblePluginSettingsWidgetPrivate;
+class RenderPluginModel;
 
 class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget
 {
@@ -43,15 +43,18 @@ class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget
  public:
     MarblePluginSettingsWidget( QWidget *parent = 0 );
     ~MarblePluginSettingsWidget();
-    void setModel( QStandardItemModel* );
+
+    void setModel( RenderPluginModel* pluginModel );
 
     void setAboutIcon( const QIcon& icon );
     void setConfigIcon( const QIcon& icon );
 
  Q_SIGNALS:
     void pluginListViewClicked();
-    void aboutPluginClicked( QString nameId );
-    void configPluginClicked( QString nameId );
+
+ private:
+    Q_PRIVATE_SLOT( d, void showPluginAboutDialog( const QModelIndex & ) )
+    Q_PRIVATE_SLOT( d, void showPluginConfigDialog( const QModelIndex & ) )
 
  private:
     MarblePluginSettingsWidgetPrivate *d;

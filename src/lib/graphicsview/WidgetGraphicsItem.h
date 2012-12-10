@@ -35,12 +35,12 @@ class MARBLE_EXPORT WidgetGraphicsItem : public ScreenGraphicsItem
     void setWidget( QWidget *widget );
     QWidget *widget() const;
 
+ protected:
     /**
      * Paints the item in item coordinates.
      */
     virtual void paint( QPainter *painter );
 
- protected:
     virtual bool eventFilter( QObject *, QEvent * );
 
  private:

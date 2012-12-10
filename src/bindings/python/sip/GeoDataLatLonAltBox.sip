@@ -47,6 +47,7 @@ public:
     virtual ~GeoDataLatLonAltBox ();
     virtual const char*     nodeType () const;
     virtual Marble::GeoDataCoordinates  center () const;
+    virtual void            clear ();
 };
 // GeoDataLatLonAltBox
 

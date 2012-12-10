@@ -61,8 +61,6 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SurfaceType">SurfaceType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Cylindrical, Pseudocylindrical, Hybrid, Conical, Pseudoconical, Azimuthal&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractProjection">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#exceedsLatitudeRange">exceedsLatitudeRange</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coords)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#exceedsLatitudeRange">exceedsLatitudeRange</a> (self, <a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> lineString)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#geoCoordinates">geoCoordinates</a> (self, int x, int y, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float lon, float lat, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Degree)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isOrientedNormal">isOrientedNormal</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latLonAltBox">latLonAltBox</a> (self, QRect screenRect, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
@@ -100,51 +98,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </table>
 </div>
 <div class="memdoc"><p>Construct a new AbstractProjection.
-</p></div></div><a class="anchor" name="exceedsLatitudeRange"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool exceedsLatitudeRange</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
-<td class="paramname"><em>coords</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="exceedsLatitudeRange"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool exceedsLatitudeRange</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a>&nbsp;</td>
-<td class="paramname"><em>lineString</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="geoCoordinates"></a>
+</p></div></div><a class="anchor" name="geoCoordinates"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -449,8 +403,30 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd>
-use <dl class="see" compact><dt><b>See also:</b></dt><dd> screenCoordinates(qreal,qreal,const ViewportParams*,qreal&amp;,qreal&amp;)
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>viewport</em>&nbsp;</td><td> the viewport parameters
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
 </dd></dl>
 </p></div></div><a class="anchor" name="screenCoordinates"></a>
 <div class="memitem">
@@ -498,8 +474,30 @@ use <dl class="see" compact><dt><b>See also:</b></dt><dd> screenCoordinates(qrea
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd>
-use <dl class="see" compact><dt><b>See also:</b></dt><dd> screenCoordinates(qreal,qreal,const ViewportParams*,qreal&amp;,qreal&amp;)
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>viewport</em>&nbsp;</td><td> the viewport parameters
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
 </dd></dl>
 </p></div></div><a class="anchor" name="screenCoordinates"></a>
 <div class="memitem">
@@ -535,8 +533,30 @@ use <dl class="see" compact><dt><b>See also:</b></dt><dd> screenCoordinates(qrea
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd>
-use <dl class="see" compact><dt><b>See also:</b></dt><dd> screenCoordinates(qreal,qreal,const ViewportParams*,qreal&amp;,qreal&amp;)
+<div class="memdoc"><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>viewport</em>&nbsp;</td><td> the viewport parameters
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
 </dd></dl>
 </p></div></div><a class="anchor" name="screenCoordinates"></a>
 <div class="memitem">
@@ -596,8 +616,30 @@ use <dl class="see" compact><dt><b>See also:</b></dt><dd> screenCoordinates(qrea
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd>
-use <dl class="see" compact><dt><b>See also:</b></dt><dd> screenCoordinates(qreal,qreal,const ViewportParams*,qreal&amp;,qreal&amp;)
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the coordinates of screen points for geographical coordinates in the map.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+
+<tr><td></td><td valign="top"><em>viewport</em>&nbsp;</td><td> the viewport parameters
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>pointRepeatNum</em>&nbsp;</td><td> the amount of times that a single geographical
+point gets represented on the map
+
+<tr><td></td><td valign="top"><em>globeHidesPoint</em>&nbsp;</td><td> whether the point gets hidden on the far side of the earth
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
 </dd></dl>
 </p></div></div><a class="anchor" name="setMaxLat"></a>
 <div class="memitem">

@@ -44,9 +44,10 @@ public:
 protected:
     void                    resizeEvent (QResizeEvent*);
 //FIXME
-public:
-    void                    search (const QString& searchTerm);
 signals:
     void                    searchFinished ();
+public:
+    void                    search (const QString& searchTerm, Marble::SearchMode searchMode);
+    void                    clearSearch ();
 };
 };

@@ -722,11 +722,13 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_arrowCur [1][1] = QCursor( Qt::PointingHandCursor );
         }
 
+#ifndef Q_WS_MAEMO_5
         if ( panViaArrowsEnabled() ) {
             MarbleWidgetInputHandler::d->m_widget->setCursor( d->m_arrowCur[dirX+1][dirY+1] );
         } else {
             MarbleWidgetInputHandler::d->m_widget->setCursor( d->m_arrowCur [1][1] );
         }
+#endif
 
         // let others, especially float items, still process the event
         // Mouse move events need to be eaten to avoid the default oxygen behavior of
@@ -751,6 +753,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             qreal newDistance = marbleWidget->distanceFromZoom( zoom + steps );
             MarbleWidgetInputHandler::d->m_wheelZoomTargetDistance = newDistance;
             d->ZoomAt(MarbleWidgetInputHandler::d->m_widget, wheelevt->pos(), newDistance);
+            if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                d->m_kineticSpinning.jumpToPosition( MarbleWidgetInputHandler::d->m_widget->centerLongitude(),
+                                                     MarbleWidgetInputHandler::d->m_widget->centerLatitude() );
+            }
 
             MarbleWidgetInputHandler::d->m_mouseWheelTimer->start( 400 );
             return true;

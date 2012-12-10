@@ -36,7 +36,6 @@ public:
         DeviceCoordinateCache
     };
 
-                            MarbleGraphicsItem (Marble::MarbleGraphicsItem* parent = 0);
 //ig                            MarbleGraphicsItem (MarbleGraphicsItemPrivate* d_ptr);
     QSizeF                  size () const;
     Marble::MarbleGraphicsItem::CacheMode  cacheMode () const;
@@ -44,27 +43,23 @@ public:
 
 protected:
     virtual bool            eventFilter (QObject* object, QEvent* e);
+    void                    update ();
+    virtual void            paint (QPainter* painter);
 
 public:
     virtual ~MarbleGraphicsItem ();
-    bool                    paintEvent (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0);
     bool                    contains (const QPointF& point) const;
     QRectF                  containsRect (const QPointF& point) const;
-    QList<QRectF>           boundingRects () const;
     Marble::AbstractMarbleGraphicsLayout*  layout () const;
     void                    setLayout (Marble::AbstractMarbleGraphicsLayout* layout);
-    void                    update ();
     bool                    visible () const;
     void                    setVisible (bool visible);
     void                    hide ();
     void                    show ();
-    QString                 toolTip () const;
-    void                    setToolTip (const QString& toolTip);
     void                    setSize (const QSizeF& size);
     virtual QSizeF          contentSize () const;
     virtual void            setContentSize (const QSizeF& size);
     virtual QRectF          contentRect () const;
-    virtual void            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0);
 private:
 //force
                             MarbleGraphicsItem (const Marble::MarbleGraphicsItem& other);
@@ -74,8 +69,8 @@ private:
     // CTSCC for subclasses of 'MarbleGraphicsItem'
     sipType = NULL;
 
-    if (dynamic_cast<Marble::GeoGraphicsItem*>(sipCpp))
-        sipType = sipType_Marble_GeoGraphicsItem;
+    if (dynamic_cast<Marble::BillboardGraphicsItem*>(sipCpp))
+        sipType = sipType_Marble_BillboardGraphicsItem;
     else if (dynamic_cast<Marble::ScreenGraphicsItem*>(sipCpp))
         {
         sipType = sipType_Marble_ScreenGraphicsItem;
@@ -90,8 +85,8 @@ private:
         }
 %End
 public:
-    qreal                   zValue () const;
-    void                    setZValue (qreal z);
+    bool                    paintEvent (QPainter* painter, const Marble::ViewportParams* viewport);
+    void                    setProjection (Marble::ViewportParams* viewport);
 };
 // MarbleGraphicsItem
 
@@ -101,8 +96,8 @@ public:
 
 %ModuleHeaderCode
 //ctscc
+#include <BillboardGraphicsItem.h>
 #include <FrameGraphicsItem.h>
-#include <GeoGraphicsItem.h>
 #include <LabelGraphicsItem.h>
 #include <MarbleGraphicsItem.h>
 #include <ScreenGraphicsItem.h>
