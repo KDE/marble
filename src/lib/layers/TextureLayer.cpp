@@ -41,15 +41,15 @@ const int REPAINT_SCHEDULING_INTERVAL = 1000;
 class TextureLayer::Private
 {
 public:
-    Private(HttpDownloadManager *downloadManager,
-            const SunLocator *sunLocator,
-            VectorComposer *veccomposer,
-            const PluginManager *pluginManager,
-            TextureLayer *parent );
+    Private( HttpDownloadManager *downloadManager,
+             const SunLocator *sunLocator,
+             VectorComposer *veccomposer,
+             const PluginManager *pluginManager,
+             TextureLayer *parent );
 
     void mapChanged();
     void updateTextureLayers();
-    void updateTile(const TileId &tileId, const QImage &tileImage );
+    void updateTile( const TileId &tileId, const QImage &tileImage );
 
 public:
     TextureLayer  *const m_parent;
@@ -68,7 +68,7 @@ public:
 
 };
 
-TextureLayer::Private::Private(HttpDownloadManager *downloadManager,
+TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
                                 const SunLocator *sunLocator,
                                 VectorComposer *veccomposer,
                                 const PluginManager *pluginManager,
@@ -148,10 +148,10 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
 
 
-TextureLayer::TextureLayer(HttpDownloadManager *downloadManager,
-                           const SunLocator *sunLocator,
-                           VectorComposer *veccomposer ,
-                           const PluginManager *pluginManager)
+TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
+                            const SunLocator *sunLocator,
+                            VectorComposer *veccomposer ,
+                            const PluginManager *pluginManager )
     : QObject()
     , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this ) )
 {

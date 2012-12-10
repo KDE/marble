@@ -74,7 +74,7 @@ public:
     QCache<TileId, const QImage> m_cache;
 };
 
-ElevationModel::ElevationModel(MarbleModel *const model )
+ElevationModel::ElevationModel( MarbleModel *const model )
     : QObject( 0 ),
       d( new ElevationModelPrivate( this, model ) )
 {
