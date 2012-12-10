@@ -1,24 +1,23 @@
-//
-// This file is part of the Marble Virtual Globe.
-//
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
-//
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
-// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>//
+/*
+ This file is part of the Marble Virtual Globe.
 
-#include "TextureLayer.h"
+ This program is free software licensed under the GNU LGPL. You can
+ find a copy of this license in LICENSE.txt in the top directory of
+ the source code.
+
+ Copyright 2008-2009      Patrick Spendrin  <ps_ml@gmx.de>
+ Copyright 2010           Thibaut Gridel <tgridel@free.fr>
+ Copyright 2012           Ander Pijoan <ander.pijoan@deusto.es>
+*/
+
+#include "VectorTileLayer.h"
 
 #include <QtCore/qmath.h>
+#include <QtCore/QCache>
+#include <QtCore/QPointer>
 #include <QtCore/QTimer>
 
-#include "SphericalScanlineTextureMapper.h"
-#include "EquirectScanlineTextureMapper.h"
-#include "MercatorScanlineTextureMapper.h"
-#include "TileScalingTextureMapper.h"
+#include "VectorTileMapper.h"
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
 #include "GeoSceneTypes.h"
@@ -32,47 +31,89 @@
 #include "TileLoader.h"
 #include "VectorComposer.h"
 #include "ViewportParams.h"
+#include "GeoDataTreeModel.h"
+#include "GeoDataLatLonAltBox.h"
 
 namespace Marble
 {
 
 const int REPAINT_SCHEDULING_INTERVAL = 1000;
 
-class TextureLayer::Private
+struct CacheDocument
+{
+    /** The CacheDocument takes ownership of doc */
+    CacheDocument( GeoDataDocument* doc, GeoDataTreeModel* model );
+
+    /** Remove the document from the tree and delete the document */
+    ~CacheDocument();
+
+    GeoDataDocument* document;
+    GeoDataTreeModel* owner;
+
+private:
+    Q_DISABLE_COPY( CacheDocument )
+};
+
+class VectorTileLayer::Private
 {
 public:
-    Private( HttpDownloadManager *downloadManager,
-             const SunLocator *sunLocator,
-             VectorComposer *veccomposer,
-             const PluginManager *pluginManager,
-             TextureLayer *parent );
+    Private(HttpDownloadManager *downloadManager,
+            const SunLocator *sunLocator,
+            VectorComposer *veccomposer,
+            const PluginManager *pluginManager,
+            VectorTileLayer *parent,
+            GeoDataTreeModel *treeModel);
 
-    void mapChanged();
     void updateTextureLayers();
-    void updateTile( const TileId &tileId, const QImage &tileImage );
 
 public:
-    TextureLayer  *const m_parent;
+    VectorTileLayer  *const m_parent;
     const SunLocator *const m_sunLocator;
     VectorComposer *const m_veccomposer;
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
-    TextureMapperInterface *m_texmapper;
+    VectorTileMapper *m_texmapper;
     TextureColorizer *m_texcolorizer;
     QVector<const GeoSceneTiled *> m_textures;
-    const GeoSceneGroup *m_textureLayerSettings;
-    QString m_runtimeTrace;
+    GeoSceneGroup *m_textureLayerSettings;
+
     // For scheduling repaints
     QTimer           m_repaintTimer;
 
+    // Vector tile managing
+
+    // TreeModel for displaying GeoDataDocuments
+    GeoDataTreeModel *m_treeModel;
+
+    // GeoDataDocuments cache. GeoDataDocuments being displayed
+    // will be here. When map changes, if we remove one GeoDataDocument
+    // from the TreeModel and the cache, the GeoDataDocument can't be deleted
+    // because a StackedTile in TileLoader will be pointing to it not to have it
+    // already parsed if necessary. In order to delete GeoDataDocuments, we will have
+    // to notify the TileLoader.
+    QCache< GeoDataLatLonAltBox, CacheDocument> m_documents;
+
 };
 
-TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
-                                const SunLocator *sunLocator,
-                                VectorComposer *veccomposer,
-                                const PluginManager *pluginManager,
-                                TextureLayer *parent )
+CacheDocument::CacheDocument( GeoDataDocument* doc, GeoDataTreeModel* model ) :
+    document( doc ), owner( model )
+{
+    // nothing to do
+}
+
+CacheDocument::~CacheDocument()
+{
+    Q_ASSERT( owner );
+    owner->removeDocument( document );
+}
+
+VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
+                                  const SunLocator *sunLocator,
+                                  VectorComposer *veccomposer,
+                                  const PluginManager *pluginManager,
+                                  VectorTileLayer *parent,
+                                  GeoDataTreeModel *treeModel)
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_veccomposer( veccomposer )
@@ -83,29 +124,20 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
     , m_texcolorizer( 0 )
     , m_textureLayerSettings( 0 )
     , m_repaintTimer()
+    , m_treeModel( treeModel )
 {
 }
 
-void TextureLayer::Private::mapChanged()
-{
-    if ( m_texmapper ) {
-        m_texmapper->setRepaintNeeded();
-    }
-
-    if ( !m_repaintTimer.isActive() ) {
-        m_repaintTimer.start();
-    }
-}
-
-void TextureLayer::Private::updateTextureLayers()
+void VectorTileLayer::Private::updateTextureLayers()
 {
     QVector<GeoSceneTiled const *> result;
 
     foreach ( const GeoSceneTiled *candidate, m_textures ) {
 
         // Check if the GeoSceneTiled is a TextureTile or VectorTile.
-        // Only TextureTiles have to be used.
-        if ( candidate->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ){
+        // Only VectorTiles have to be used.
+        if ( candidate->nodeType() == GeoSceneTypes::GeoSceneVectorTileType ){
+
             bool enabled = true;
             if ( m_textureLayerSettings ) {
                 const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
@@ -124,74 +156,67 @@ void TextureLayer::Private::updateTextureLayers()
         const GeoSceneTiled *const firstTexture = result.at( 0 );
         m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
-        m_tileLoader.setTextureLayers( result );
-        m_loader.setTextureLayers( result );
-    }
-}
-
-void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )
-{
-    if ( tileImage.isNull() )
-        return; // keep tiles in cache to improve performance
-
-    const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
-    for ( int i = 0; i < 4; ++i ) {
-        const TileId id = TileId( i, stackedTileId.zoomLevel(), stackedTileId.x(), stackedTileId.y() );
     }
 
-    // updateTile needs to know if its an image or another type of file,
-    // so we indicate its format
-    m_tileLoader.updateTile( tileId, tileImage, 0 );
-
-    mapChanged();
+    m_tileLoader.setTextureLayers( result );
+    m_loader.setTextureLayers( result );
 }
 
-
-
-TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
-                            const SunLocator *sunLocator,
-                            VectorComposer *veccomposer ,
-                            const PluginManager *pluginManager )
+VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
+                                 const SunLocator *sunLocator,
+                                 VectorComposer *veccomposer ,
+                                 const PluginManager *pluginManager,
+                                 GeoDataTreeModel *treeModel )
     : QObject()
-    , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this ) )
+    , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this, treeModel ) )
 {
-    connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
-             this, SLOT( updateTile( const TileId &, const QImage & ) ) );
+    qRegisterMetaType<TileId>( "TileId" );
+    qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
 
-    // Repaint timer
-    d->m_repaintTimer.setSingleShot( true );
-    d->m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
-    connect( &d->m_repaintTimer, SIGNAL( timeout() ),
-             this, SIGNAL( repaintNeeded() ) );
-
-    connect( d->m_veccomposer, SIGNAL( datasetLoaded() ),
-             this, SLOT( mapChanged() ) );
 }
 
-TextureLayer::~TextureLayer()
+VectorTileLayer::~VectorTileLayer()
 {
+    foreach( GeoDataLatLonAltBox box , d->m_documents.keys() ){
+            CacheDocument * document = d->m_documents.take( box );
+            d->m_treeModel->removeDocument( document->document );
+            d->m_documents.remove( box );
+            delete document;
+        }
+    d->m_documents.clear();
     delete d->m_texmapper;
     delete d->m_texcolorizer;
     delete d;
 }
 
-QStringList TextureLayer::renderPosition() const
+QStringList VectorTileLayer::renderPosition() const
 {
     return QStringList() << "SURFACE";
 }
 
-bool TextureLayer::showSunShading() const
+bool VectorTileLayer::showSunShading() const
 {
     return d->m_layerDecorator.showSunShading();
 }
 
-bool TextureLayer::showCityLights() const
+bool VectorTileLayer::showCityLights() const
 {
     return d->m_layerDecorator.showCityLights();
 }
 
-bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
-                           const QString &renderPos, GeoSceneLayer *layer )
+void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
+{
+    Q_UNUSED( format );
+    Q_UNUSED( tileId );
+
+    if ( !d->m_documents.contains( document->latLonAltBox() ) ){
+        d->m_treeModel->addDocument( document );
+        d->m_documents.insert( document->latLonAltBox(), new CacheDocument( document, d->m_treeModel ) );
+    }
+}
+
+bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
+                              const QString &renderPos, GeoSceneLayer *layer )
 {
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
@@ -200,9 +225,6 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     d->m_repaintTimer.stop();
 
     if ( d->m_textures.isEmpty() )
-        return false;
-
-    if ( d->m_tileLoader.textureLayersSize() == 0 )
         return false;
 
     if ( !d->m_texmapper )
@@ -222,43 +244,50 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // the tile level from tilesize and the globe radius via log(2)
 
     qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
-    int tileLevel = (int)( tileLevelF * 1.00001 ); // snap to the sharper tile level a tiny bit earlier
+    int tileLevel = (int)( tileLevelF * 1.00001 );
+    // snap to the sharper tile level a tiny bit earlier
     // to work around rounding errors when the radius
     // roughly equals the global texture width
 
-    //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
     if ( tileLevel > d->m_tileLoader.maximumTileLevel() )
         tileLevel = d->m_tileLoader.maximumTileLevel();
 
     const bool changedTileLevel = tileLevel != d->m_texmapper->tileZoomLevel();
 
-    //    mDebug() << "Texture Level was set to: " << tileLevel;
     d->m_texmapper->setTileLevel( tileLevel );
 
+    // if zoom level has changed, empty vectortile cache
     if ( changedTileLevel ) {
-        emit tileLevelChanged( tileLevel );
+        d->m_documents.clear();
+        d->m_tileLoader.cleanupTilehash();
+        d->m_texmapper->initTileRangeCoords();
+    }
+    // else remove only tiles that are not shown on the screen
+    else{
+        foreach( GeoDataLatLonAltBox box , d->m_documents.keys() )
+            if ( !box.intersects( viewport->viewLatLonAltBox() ) ){
+                CacheDocument * document = d->m_documents.take( box );
+                d->m_documents.remove( box );
+                delete document;
+            }
     }
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
+
     d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
-    d->m_runtimeTrace = QString("Cache: %1 ").arg(d->m_tileLoader.tileCount());
+
     return true;
 }
 
-QString TextureLayer::runtimeTrace() const
-{
-    return d->m_runtimeTrace;
-}
-
-void TextureLayer::setShowRelief( bool show )
+void VectorTileLayer::setShowRelief( bool show )
 {
     if ( d->m_texcolorizer ) {
         d->m_texcolorizer->setShowRelief( show );
     }
 }
 
-void TextureLayer::setShowSunShading( bool show )
+void VectorTileLayer::setShowSunShading( bool show )
 {
     disconnect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
                 this, SLOT( reset() ) );
@@ -273,21 +302,21 @@ void TextureLayer::setShowSunShading( bool show )
     reset();
 }
 
-void TextureLayer::setShowCityLights( bool show )
+void VectorTileLayer::setShowCityLights( bool show )
 {
     d->m_layerDecorator.setShowCityLights( show );
 
     reset();
 }
 
-void TextureLayer::setShowTileId( bool show )
+void VectorTileLayer::setShowTileId( bool show )
 {
     d->m_layerDecorator.setShowTileId( show );
 
     reset();
 }
 
-void TextureLayer::setupTextureMapper( Projection projection )
+void VectorTileLayer::setupTextureMapper( )
 {
     if ( d->m_textures.isEmpty() )
         return;
@@ -295,57 +324,49 @@ void TextureLayer::setupTextureMapper( Projection projection )
     // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
 
-    switch( projection ) {
-        case Spherical:
-            d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader );
-            break;
-        case Equirectangular:
-            d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
-            break;
-        case Mercator:
-            if ( d->m_tileLoader.tileProjection() == GeoSceneTiled::Mercator ) {
-                d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader );
-            } else {
-                d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
-            }
-            break;
-        default:
-            d->m_texmapper = 0;
-    }
+    d->m_texmapper = new VectorTileMapper( &d->m_tileLoader );
+
     Q_ASSERT( d->m_texmapper );
+
+    connect( d->m_texmapper, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
+             this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
 }
 
-void TextureLayer::setNeedsUpdate()
+void VectorTileLayer::setNeedsUpdate()
 {
     if ( d->m_texmapper ) {
         d->m_texmapper->setRepaintNeeded();
     }
 }
 
-void TextureLayer::setVolatileCacheLimit( quint64 kilobytes )
+void VectorTileLayer::setVolatileCacheLimit( quint64 kilobytes )
 {
     d->m_tileLoader.setVolatileCacheLimit( kilobytes );
 }
 
-void TextureLayer::reset()
+void VectorTileLayer::reset()
 {
-    mDebug() << Q_FUNC_INFO;
-
+    foreach( GeoDataLatLonAltBox box , d->m_documents.keys() ){
+            CacheDocument * document = d->m_documents.take( box );
+            d->m_treeModel->removeDocument( document->document );
+            d->m_documents.remove( box );
+            delete document;
+        }
+    d->m_documents.clear();
     d->m_tileLoader.clear();
-    d->mapChanged();
 }
 
-void TextureLayer::reload()
+void VectorTileLayer::reload()
 {
     d->m_tileLoader.reloadVisibleTiles();
 }
 
-void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
+void VectorTileLayer::downloadTile( const TileId &tileId )
 {
-    d->m_tileLoader.downloadStackedTile( stackedTileId );
+    d->m_tileLoader.downloadStackedTile( tileId );
 }
 
-void TextureLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
+void VectorTileLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
 {
     delete d->m_texcolorizer;
     d->m_texcolorizer = 0;
@@ -365,7 +386,7 @@ void TextureLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, 
     d->updateTextureLayers();
 }
 
-int TextureLayer::tileZoomLevel() const
+int VectorTileLayer::tileZoomLevel() const
 {
     if (!d->m_texmapper)
         return -1;
@@ -373,32 +394,32 @@ int TextureLayer::tileZoomLevel() const
     return d->m_texmapper->tileZoomLevel();
 }
 
-QSize TextureLayer::tileSize() const
+QSize VectorTileLayer::tileSize() const
 {
     return d->m_tileLoader.tileSize();
 }
 
-GeoSceneTiled::Projection TextureLayer::tileProjection() const
+GeoSceneTiled::Projection VectorTileLayer::tileProjection() const
 {
     return d->m_tileLoader.tileProjection();
 }
 
-int TextureLayer::tileColumnCount( int level ) const
+int VectorTileLayer::tileColumnCount( int level ) const
 {
     return d->m_tileLoader.tileColumnCount( level );
 }
 
-int TextureLayer::tileRowCount( int level ) const
+int VectorTileLayer::tileRowCount( int level ) const
 {
     return d->m_tileLoader.tileRowCount( level );
 }
 
-qint64 TextureLayer::volatileCacheLimit() const
+qint64 VectorTileLayer::volatileCacheLimit() const
 {
     return d->m_tileLoader.volatileCacheLimit();
 }
 
-int TextureLayer::preferredRadiusCeil( int radius ) const
+int VectorTileLayer::preferredRadiusCeil( int radius ) const
 {
     const int tileWidth = d->m_tileLoader.tileSize().width();
     const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
@@ -412,7 +433,7 @@ int TextureLayer::preferredRadiusCeil( int radius ) const
     return ( tileWidth * levelZeroColumns / 4 ) << tileLevel;
 }
 
-int TextureLayer::preferredRadiusFloor( int radius ) const
+int VectorTileLayer::preferredRadiusFloor( int radius ) const
 {
     const int tileWidth = d->m_tileLoader.tileSize().width();
     const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
@@ -428,4 +449,4 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
 
 }
 
-#include "TextureLayer.moc"
+#include "VectorTileLayer.moc"

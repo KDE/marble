@@ -19,6 +19,8 @@
 #include "TileId.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "GeoDataDocument.h"
+#include "GeoDataTreeModel.h"
 
 using namespace Marble;
 
@@ -520,4 +522,8 @@ void ScanlineTextureMapperContext::nextTile( qreal &posX, qreal &posY )
     m_vTileStartY = ( tileRow - ( ( tileRow >> m_deltaLevel ) << m_deltaLevel ) ) * m_tileSize.height();
     m_toTileCoordinatesLat = (qreal)(0.5 * m_globalHeight - m_tilePosY);
     posY = lat - m_tilePosY;
+}
+
+const StackedTile & ScanlineTextureMapperContext::Tile(){
+     return *m_tile;
 }

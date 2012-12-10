@@ -1,21 +1,25 @@
-//
-// This file is part of the Marble Virtual Globe.
-//
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
-//
-// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
-//
+/*
+ This file is part of the Marble Virtual Globe.
 
-#ifndef MARBLE_MARBLETEXTURELAYER_H
-#define MARBLE_MARBLETEXTURELAYER_H
+ This program is free software licensed under the GNU LGPL. You can
+ find a copy of this license in LICENSE.txt in the top directory of
+ the source code.
+
+ Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
+ Copyright 2010      Thibaut Gridel  <tgridel@free.fr>
+ Copyright 2012      Ander Pijoan <ander.pijoan@deusto.es>
+*/
+
+#ifndef MARBLE_VECTORTILELAYER_H
+#define MARBLE_VECTORTILELAYER_H
 
 #include "LayerInterface.h"
 #include <QtCore/QObject>
 
 #include "MarbleGlobal.h"
 #include "MarbleModel.h"
+#include "GeoDataDocument.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoSceneTiled.h"
 
 #include <QtCore/QSize>
@@ -34,17 +38,18 @@ class SunLocator;
 class VectorComposer;
 class ViewportParams;
 
-class TextureLayer : public QObject, public LayerInterface
+class VectorTileLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 
  public:
-    TextureLayer( HttpDownloadManager *downloadManager,
+    VectorTileLayer( HttpDownloadManager *downloadManager,
                   const SunLocator *sunLocator,
                   VectorComposer *veccomposer,
-                  const PluginManager *pluginManager );
+                  const PluginManager *pluginManager,
+                  GeoDataTreeModel *treeModel);
 
-    ~TextureLayer();
+    ~VectorTileLayer();
 
     QStringList renderPosition() const;
 
@@ -69,12 +74,10 @@ class TextureLayer : public QObject, public LayerInterface
     int preferredRadiusCeil( int radius ) const;
     int preferredRadiusFloor( int radius ) const;
 
-    virtual QString runtimeTrace() const;
-
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+ public Q_SLOTS:
+    bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
-public Q_SLOTS:
     void setShowRelief( bool show );
 
     void setShowSunShading( bool show );
@@ -87,11 +90,11 @@ public Q_SLOTS:
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void setupTextureMapper( Projection projection );
+    void setupTextureMapper();
 
     void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTiled *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
+    void setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
 
     void setVolatileCacheLimit( quint64 kilobytes );
 
@@ -99,22 +102,24 @@ public Q_SLOTS:
 
     void reload();
 
-    void downloadStackedTile( const TileId &stackedTileId );
+    void downloadTile( const TileId &tileId );
+
+    void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );
 
  Q_SIGNALS:
     void tileLevelChanged( int );
     void repaintNeeded();
 
  private:
-    Q_PRIVATE_SLOT( d, void mapChanged() )
     Q_PRIVATE_SLOT( d, void updateTextureLayers() )
-    Q_PRIVATE_SLOT( d, void updateTile( const TileId &tileId, const QImage &tileImage ) )
+
 
  private:
     class Private;
     Private *const d;
+
 };
 
 }
 
-#endif
+#endif // MARBLE_VECTORTILELAYER_H

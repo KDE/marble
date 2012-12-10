@@ -21,6 +21,8 @@
 #include <QtGui/QImage>
 
 #include "TileId.h"
+#include "GeoDataContainer.h"
+#include "PluginManager.h"
 #include "MarbleGlobal.h"
 
 class QByteArray;
@@ -31,6 +33,7 @@ namespace Marble
 {
 class HttpDownloadManager;
 class GeoSceneTiled;
+class GeoSceneTexture;
 
 class TileLoader: public QObject
 {
@@ -43,10 +46,13 @@ class TileLoader: public QObject
         Available
     };
 
-    explicit TileLoader( HttpDownloadManager * const );
+    explicit TileLoader(HttpDownloadManager * const, const PluginManager * );
 
-    QImage loadTile( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const );
-    void downloadTile( GeoSceneTiled const *textureLayer, TileId const &tileId, DownloadUsage const );
+    void setTextureLayers( const QVector<GeoSceneTiled const *> &textureLayers );
+
+    QImage loadTileImage( TileId const & tileId, DownloadUsage const );
+    GeoDataDocument* loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format );
+    void downloadTile( TileId const &, DownloadUsage const );
 
     static int maximumTileLevel( GeoSceneTiled const & texture );
 
@@ -73,10 +79,19 @@ class TileLoader: public QObject
 
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
+    void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
+
  private:
+    GeoSceneTiled const * findTextureLayer( TileId const & ) const;
     static QString tileFileName( GeoSceneTiled const * textureLayer, TileId const & );
-    void triggerDownload( GeoSceneTiled const *textureLayer, TileId const &, DownloadUsage const );
-    QImage scaledLowerLevelTile( GeoSceneTiled const *textureLayer, TileId const & ) const;
+    void triggerDownload( TileId const &, DownloadUsage const );
+    QImage scaledLowerLevelTile( TileId const & ) const;
+
+    // TODO: comment about uint hash key
+    QHash<uint, GeoSceneTiled const *> m_textureLayers;
+
+    // For vectorTile parsing
+    const PluginManager * m_pluginManager;
 };
 
 }

@@ -83,7 +83,9 @@ set(marblewidget_SRCS
     kdescendantsproxymodel.cpp
     BranchFilterProxyModel.cpp
     MarbleDebug.cpp
+    Tile.cpp
     TextureTile.cpp
+    VectorTile.cpp
     TileCoordsPyramid.cpp
     TileLevelRangeWidget.cpp
     TileLoader.cpp
@@ -127,6 +129,7 @@ set(marblewidget_SRCS
     EquirectScanlineTextureMapper.cpp
     MercatorScanlineTextureMapper.cpp
     TileScalingTextureMapper.cpp
+    VectorTileMapper.cpp
     DiscCache.cpp
     ServerLayout.cpp
     StoragePolicy.cpp

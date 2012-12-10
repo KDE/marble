@@ -232,6 +232,7 @@ bool MarblePart::openFile()
         const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
         const QString filter = QString( "%1|%2" ).arg( fileExtensions.join( " " ) ).arg( plugin->fileFormatDescription() );
         filters << filter;
+
         allFileExtensions << fileExtensions;
     }
 

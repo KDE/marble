@@ -375,6 +375,12 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
 
         GeoDataObject *greatParentObject = parentObject->parent();
 
+        // Avoid crashing when there is no grandparent
+        if ( greatParentObject == 0 )
+        {
+            return QModelIndex();
+        }
+
         // greatParent can be a container
         if ( greatParentObject->nodeType() == GeoDataTypes::GeoDataFolderType
              || greatParentObject->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
@@ -401,7 +407,6 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
 //                        << parentObject->nodeType() << "[" << greatParentItem->childPosition( parentGeometry ) << "](" << parentObject << ")";
             return createIndex( greatparentMultiGeo->childPosition( parentGeometry ), 0, parentObject );
         }
-
     }
 
 //    mDebug() << "parent unknown index";
@@ -579,8 +584,11 @@ bool GeoDataTreeModel::removeFeature( GeoDataContainer *parent, int row )
 
 bool GeoDataTreeModel::removeFeature( GeoDataFeature *feature )
 {
-    if ( feature && ( feature!=d->m_rootDocument ) )  {//We check to see we are not removing the
-                                                      //top level element m_rootDocument
+    if ( feature && ( feature!=d->m_rootDocument ) )  {
+
+        //We check to see we are not removing the
+        //top level element m_rootDocument
+
         GeoDataObject *parent = static_cast< GeoDataObject* >( feature->parent() );
 
         if ( ( parent->nodeType() == GeoDataTypes::GeoDataFolderType )

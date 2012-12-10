@@ -346,6 +346,7 @@ void DownloadRegionDialog::setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const &
 void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & region )
 {
     d->m_visibleRegion = region;
+
     // update lat/lon widget only if not active to prevent that users unintentionally loose
     // entered values
     if ( d->m_selectionMethod == VisibleRegionMethod ) {

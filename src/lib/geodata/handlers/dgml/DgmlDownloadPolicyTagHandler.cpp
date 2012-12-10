@@ -23,6 +23,7 @@ Copyright 2009, 2010  Jens-Michael Hoffmann <jmho@c-xx.com>
 #include "GeoSceneTiled.h"
 
 #include "MarbleGlobal.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {

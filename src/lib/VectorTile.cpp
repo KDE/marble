@@ -17,37 +17,32 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "TextureTile.h"
-#include "MarbleDebug.h"
-
-#include <limits>
-
-#include <QtCore/QString>
+#include "VectorTile.h"
+#include "GeoDataDocument.h"
 
 namespace Marble
 {
 
-TextureTile::TextureTile( TileId const & tileId, QImage const & image, const Blending * blending )
+VectorTile::VectorTile(TileId const & tileId, GeoDataDocument * vectordata )
     : Tile( tileId ),
-      m_image( image ),
-      m_blending( blending )
+    m_vectordata( vectordata )
 {
-    Q_ASSERT( !image.isNull() );
+    Q_ASSERT( vectordata );
 }
 
-TextureTile::~TextureTile()
+VectorTile::~VectorTile()
 {
+    delete m_vectordata;
 }
 
-const char* TextureTile::nodeType() const
+const char* VectorTile::nodeType() const
 {
-    return "TextureTile";
+    return "VectorTile";
 }
 
-QString TextureTile::type()
+QString VectorTile::type()
 {
-    return "textureTile";
+    return "vectorTile";
 }
 
 }
-
