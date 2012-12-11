@@ -300,7 +300,7 @@ void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) con
     centerLat = d->m_centerLatitude;
 }
 
-GeoDataLatLonAltBox& ViewportParams::viewLatLonAltBox() const
+const GeoDataLatLonAltBox& ViewportParams::viewLatLonAltBox() const
 {
     if (d->m_dirtyBox) {
         d->m_viewLatLonAltBox = d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), 

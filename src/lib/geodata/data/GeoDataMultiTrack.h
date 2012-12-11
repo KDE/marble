@@ -30,7 +30,7 @@ public:
 
     virtual ~GeoDataMultiTrack();
 
-    virtual GeoDataLatLonAltBox& latLonAltBox() const;
+    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
     int size() const;
     GeoDataTrack& at( int pos );

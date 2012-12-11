@@ -42,7 +42,7 @@ GeoDataMultiTrackPrivate* GeoDataMultiTrack::p() const
 }
 
 
-GeoDataLatLonAltBox& GeoDataMultiTrack::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoDataMultiTrack::latLonAltBox() const
 {
     QVector<GeoDataTrack*>::const_iterator it = p()->m_vector.constBegin();
     QVector<GeoDataTrack*>::const_iterator end = p()->m_vector.constEnd();

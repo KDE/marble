@@ -115,7 +115,7 @@ void GeoDataGeometry::setAltitudeMode( const AltitudeMode altitudeMode )
     d->m_altitudeMode = altitudeMode;
 }
 
-GeoDataLatLonAltBox& GeoDataGeometry::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoDataGeometry::latLonAltBox() const
 {
     return d->m_latLonAltBox;
 }

@@ -277,7 +277,7 @@ EnumGeometryId GeoDataTrack::geometryId() const
     return GeoDataTrackId;
 }
 
-GeoDataLatLonAltBox& GeoDataTrack::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoDataTrack::latLonAltBox() const
 {
     return lineString()->latLonAltBox();
 }

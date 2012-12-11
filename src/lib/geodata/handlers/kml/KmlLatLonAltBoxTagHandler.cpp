@@ -38,7 +38,7 @@ GeoNode* KmlLatLonAltBoxTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_Region ) )
     {
         parentItem.nodeAs<GeoDataRegion>()->setLatLonAltBox( box );
-        return &parentItem.nodeAs<GeoDataRegion>()->latLonAltBox();
+        return const_cast<GeoDataLatLonAltBox *>( &parentItem.nodeAs<GeoDataRegion>()->latLonAltBox() );
     } else {
         return 0;
     }
