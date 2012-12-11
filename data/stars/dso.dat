@@ -1,0 +1,11 @@
+#
+#  Deep Sky Object Catalog
+#
+#  By: Timothy Lanzi
+#
+#  Format:
+#     DSO id, RA(hr, min, sec), DEC(deg, min, sec), Long name
+#
+# 
+M31, 00, 42, 44.3,  +41, 16, 9, Andromeda Galaxy
+M42, 05, 35, 17.3,  -05, 23, 28, Orion Nebula

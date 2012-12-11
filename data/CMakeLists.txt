@@ -214,8 +214,7 @@ mwdbii/RIVER.PNT
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
 
 FILE (GLOB STAR_FILES stars/*.dat)
-install (FILES
-  ${STAR_FILES}
+install (FILES ${STAR_FILES} stars/deepsky.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/stars)
 
 install (FILES
