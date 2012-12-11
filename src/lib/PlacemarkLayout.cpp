@@ -596,9 +596,6 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                                       const qreal x, const qreal y,
                                       const QString &labelText ) const
 {
-    if ( labelText.isEmpty() )
-        return QRectF();
-
     bool  isRoom      = false;
 
     int symbolwidth = style->iconStyle().icon().width();
