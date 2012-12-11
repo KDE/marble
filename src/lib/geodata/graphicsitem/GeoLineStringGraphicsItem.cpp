@@ -30,11 +30,6 @@ void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString* lineStri
     m_lineString = lineString;
 }
 
-GeoDataCoordinates GeoLineStringGraphicsItem::coordinate() const
-{
-    return m_lineString->latLonAltBox().center();
-}
-
 GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 {
     return m_lineString->latLonAltBox();

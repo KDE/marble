@@ -35,7 +35,6 @@ class GeoGraphicsItemPrivate
     {
     }
 
-    GeoDataCoordinates m_coordinate;
     qreal m_zValue;
     GeoGraphicsItem::GeoGraphicsItemFlags m_flags;
 

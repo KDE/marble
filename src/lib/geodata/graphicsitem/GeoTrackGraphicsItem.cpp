@@ -38,5 +38,4 @@ void GeoTrackGraphicsItem::paint( GeoPainter *painter, const ViewportParams *vie
 void GeoTrackGraphicsItem::update()
 {
     setLineString( m_track->lineString() );
-    setCoordinate( GeoDataCoordinates(0, 0) );
 }

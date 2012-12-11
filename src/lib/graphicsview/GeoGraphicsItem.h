@@ -20,7 +20,6 @@ class QString;
 namespace Marble
 {
 
-class GeoDataCoordinates;
 class GeoDataLatLonAltBox;
 
 class GeoGraphicsItemPrivate;
@@ -46,16 +45,6 @@ class MARBLE_EXPORT GeoGraphicsItem
     bool visible() const;
 
     void setVisible( bool visible );
-
-    /**
-     * Return the coordinate of the item as a GeoDataCoordinates
-     */
-    virtual GeoDataCoordinates coordinate() const;
-
-    /**
-     * Set the coordinate of the item with an @p GeoDataPoint.
-     */
-    void setCoordinate( const GeoDataCoordinates &point );
 
     /**
      * Get the GeoGraphicItemFlags value that describes which flags are set on
@@ -120,8 +109,8 @@ class MARBLE_EXPORT GeoGraphicsItem
     /**
      * Paints the item using the given GeoPainter.
      *
-     * Note that depending on the projection and zoom level, the item may be visible more than once.
-     * GeoPainter will therefore automatically "repeat" primitives which have a geo position (GeoDataCoordinates).
+     * Note that depending on the projection and zoom level, the item may be visible more than once,
+     * which is taken care of by GeoPainter.
      */
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport ) = 0;
 

@@ -12,9 +12,6 @@
 #include "GeoGraphicsItem.h"
 #include "GeoGraphicsItem_p.h"
 
-//Marble
-#include "GeoDataCoordinates.h"
-
 // Qt
 #include "MarbleDebug.h"
 
@@ -39,16 +36,6 @@ bool GeoGraphicsItem::visible() const
 void GeoGraphicsItem::setVisible( bool visible )
 {
     setFlag( ItemIsVisible, visible );
-}
-
-GeoDataCoordinates GeoGraphicsItem::coordinate() const
-{
-    return p()->m_coordinate;
-}
-
-void GeoGraphicsItem::setCoordinate( const GeoDataCoordinates &point )
-{
-    p()->m_coordinate = point;
 }
 
 GeoGraphicsItem::GeoGraphicsItemFlags GeoGraphicsItem::flags() const

@@ -27,8 +27,6 @@ public:
 
     void setLineString( const GeoDataLineString* lineString );
 
-    virtual GeoDataCoordinates coordinate() const;
-
     virtual GeoDataLatLonAltBox& latLonAltBox() const;
 
     virtual void paint( GeoPainter* painter, const ViewportParams *viewport );

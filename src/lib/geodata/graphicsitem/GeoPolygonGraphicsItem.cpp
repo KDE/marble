@@ -33,17 +33,6 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
 {
 }
 
-GeoDataCoordinates GeoPolygonGraphicsItem::coordinate() const
-{
-    if( m_polygon ) {
-        return m_polygon->latLonAltBox().center();
-    } else if ( m_ring ) {
-        return m_ring->latLonAltBox().center();
-    } else {
-        return GeoDataCoordinates();
-    }
-}
-
 GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
 {
     if( m_polygon ) {
