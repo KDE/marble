@@ -323,16 +323,21 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
     TileCoordsPyramid pyramid(0, zoomLevel );
     pyramid.setBottomLevelCoords( rect );
 
+    QSet<TileId> tileIdSet;
     QList<const GeoDataPlacemark*> placemarkList;
+    bool crossesDateLine = viewport->viewLatLonAltBox().crossesDateLine();
     for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {
         QRect const coords = pyramid.coords( level );
         int x1, y1, x2, y2;
         coords.getCoords( &x1, &y1, &x2, &y2 );
-        if ( x1 <= x2 ) { // normal case, rect does not cross dateline
+        if ( !crossesDateLine ) { // normal case, rect does not cross dateline
             for ( int x = x1; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
                     TileId const tileId( "", level, x, y );
-                    placemarkList += m_placemarkCache.value(tileId);
+                    if ( !tileIdSet.contains( tileId ) ) {
+                        tileIdSet.insert(tileId);
+                        placemarkList += m_placemarkCache.value(tileId);
+                    }
                 }
             }
         } else { // as we cross dateline, we first get west part, then east part
@@ -340,14 +345,20 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
             for ( int x = x1; x <= ((2 << (level-1))-1); ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
                     TileId const tileId( "", level, x, y );
-                    placemarkList += m_placemarkCache.value(tileId);
+                    if ( !tileIdSet.contains( tileId ) ) {
+                        tileIdSet.insert(tileId);
+                        placemarkList += m_placemarkCache.value(tileId);
+                    }
                 }
             }
             // start from min tile
             for ( int x = 0; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
                     TileId const tileId( "", level, x, y );
-                    placemarkList += m_placemarkCache.value(tileId);
+                    if ( !tileIdSet.contains( tileId ) ) {
+                        tileIdSet.insert(tileId);
+                        placemarkList += m_placemarkCache.value(tileId);
+                    }
                 }
             }
         }
