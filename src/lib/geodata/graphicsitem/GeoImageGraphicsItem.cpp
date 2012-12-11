@@ -22,7 +22,7 @@ void GeoImageGraphicsItem::setLatLonBox( const GeoDataLatLonBox &box )
     p()->m_latLonAltBox = box;
 }
 
-GeoDataLatLonBox& GeoImageGraphicsItem::latLonBox() const
+const GeoDataLatLonBox& GeoImageGraphicsItem::latLonBox() const
 {
     return p()->m_latLonAltBox;
 }

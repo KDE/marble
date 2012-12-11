@@ -57,7 +57,7 @@ void GeoGraphicsItem::setFlags( GeoGraphicsItemFlags flags )
     p()->m_flags = flags;
 }
 
-GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
 {
     return p()->m_latLonAltBox;
 }

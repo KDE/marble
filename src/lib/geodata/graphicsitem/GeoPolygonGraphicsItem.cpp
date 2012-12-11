@@ -33,7 +33,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
 {
 }
 
-GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
 {
     if( m_polygon ) {
         return m_polygon->latLonAltBox();

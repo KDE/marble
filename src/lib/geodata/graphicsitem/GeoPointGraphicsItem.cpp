@@ -36,7 +36,7 @@ void GeoPointGraphicsItem::paint( GeoPainter* painter, const ViewportParams* vie
     painter->drawPoint( m_point );
 }
 
-GeoDataLatLonAltBox& GeoPointGraphicsItem::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoPointGraphicsItem::latLonAltBox() const
 {
     return m_point.latLonAltBox();
 }

@@ -25,7 +25,7 @@ class MARBLE_EXPORT GeoImageGraphicsItem : public GeoGraphicsItem
 public:
     void setLatLonBox( const GeoDataLatLonBox& box );
 
-    GeoDataLatLonBox& latLonBox() const;
+    const GeoDataLatLonBox& latLonBox() const;
 
     void setImage( const QImage &image );
 

@@ -26,7 +26,7 @@ public:
     GeoPolygonGraphicsItem( const GeoDataPolygon* polygon );
     GeoPolygonGraphicsItem( const GeoDataLinearRing* ring );
 
-    virtual GeoDataLatLonAltBox& latLonAltBox() const;
+    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
     virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
 

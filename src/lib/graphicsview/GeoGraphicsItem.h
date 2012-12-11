@@ -75,9 +75,9 @@ class MARBLE_EXPORT GeoGraphicsItem
     void setMinZoomLevel( int zoomLevel );
 
     /**
-     * Returns the box that is used to determine if an item is active or inactive.
+     * Returns the bounding box covered by the item.
      */
-    virtual GeoDataLatLonAltBox& latLonAltBox() const;
+    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
     /**
      * Set the box used to determine if an item is active or inactive. If an empty box is passed
@@ -91,8 +91,7 @@ class MARBLE_EXPORT GeoGraphicsItem
     const GeoDataStyle* style() const;
 
     /**
-     * Set the box used to determine if an item is active or inactive. If an empty box is passed
-     * the item will be shown in every case.
+     * Set the style for the item.
      */
     void setStyle( const GeoDataStyle* style );
 
