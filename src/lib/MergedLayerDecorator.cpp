@@ -167,9 +167,8 @@ StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, c
 void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<GeoSceneTiled const *> &textureLayers, DownloadUsage usage )
 {
     foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
-        const TileId tileId( textureLayer->sourceDir(), id.zoomLevel(), id.x(), id.y() );
-        if ( TileLoader::tileStatus( textureLayer, tileId ) != TileLoader::Available ) {
-            d->m_tileLoader->downloadTile( textureLayer, tileId, usage );
+        if ( TileLoader::tileStatus( textureLayer, id ) != TileLoader::Available ) {
+            d->m_tileLoader->downloadTile( textureLayer, id, usage );
         }
     }
 }

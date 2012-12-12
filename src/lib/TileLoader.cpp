@@ -128,7 +128,7 @@ bool TileLoader::baseTilesAvailable( GeoSceneTiled const & texture )
     //
     for ( int column = 0; result && column < levelZeroColumns; ++column ) {
         for ( int row = 0; result && row < levelZeroRows; ++row ) {
-            const TileId id( texture.sourceDir(), 0, column, row );
+            const TileId id( 0, 0, column, row );
             const QString tilepath = tileFileName( &texture, id );
             result &= QFile::exists( tilepath );
             if (!result) {

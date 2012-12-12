@@ -113,7 +113,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
         //mDebug() << "x" << x << ( x / width );
         //mDebug() << "y" << y << ( y / height );
 
-        const TileId id( "earth/srtm2", tileZoomLevel, ( x % ( numTilesX * width ) ) / width, ( y % ( numTilesY * height ) ) / height );
+        const TileId id( 0, tileZoomLevel, ( x % ( numTilesX * width ) ) / width, ( y % ( numTilesY * height ) ) / height );
         //mDebug() << "LAT" << lat << "LON" << lon << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
 
         const QImage *image = d->m_cache[id];
