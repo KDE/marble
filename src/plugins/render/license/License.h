@@ -13,6 +13,7 @@
 #define MARBLELICENSE_H
 
 #include <QtCore/QObject>
+#include <QtCore/QTimer>
 
 #include "AbstractFloatItem.h"
 
@@ -53,6 +54,7 @@ public:
 
 public slots:
     void updateLicenseText();
+    void showShortLicense();
 
 protected:
     bool eventFilter(QObject *, QEvent *e);
@@ -60,6 +62,8 @@ protected:
 private:
     WidgetGraphicsItem* m_widgetItem;
     QLabel* m_label;
+    bool m_showFullLicense;
+    QTimer m_collapseTimer;
 };
 
 }
