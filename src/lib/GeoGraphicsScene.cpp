@@ -95,7 +95,7 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
         coords.getCoords( &x1, &y1, &x2, &y2 );
         for ( int x = x1; x <= x2; ++x ) {
             for ( int y = y1; y <= y2; ++y ) {
-                d->addItems( TileId ( "", level, x, y ), result, zoomLevel );
+                d->addItems( TileId ( 0, level, x, y ), result, zoomLevel );
             }
         }
     }
@@ -116,7 +116,7 @@ void GeoGraphicsScene::removeItem( GeoGraphicsItem* item )
 
     const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
 
-    QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( "", zoomLevel, key.x(), key.y() )];
+    QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( 0, zoomLevel, key.x(), key.y() )];
     tileList.removeOne( item );
 }
 
@@ -140,7 +140,7 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
 
     const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
 
-    QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( "", zoomLevel, key.x(), key.y() )];
+    QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( 0, zoomLevel, key.x(), key.y() )];
     QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, zValueLessThan );
     tileList.insert( position, item );
 }

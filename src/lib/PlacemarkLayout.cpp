@@ -333,7 +333,7 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
         if ( !crossesDateLine ) { // normal case, rect does not cross dateline
             for ( int x = x1; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "", level, x, y );
+                    TileId const tileId( 0, level, x, y );
                     if ( !tileIdSet.contains( tileId ) ) {
                         tileIdSet.insert(tileId);
                         placemarkList += m_placemarkCache.value(tileId);
@@ -344,7 +344,7 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
             // go till max tile
             for ( int x = x1; x <= ((2 << (level-1))-1); ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "", level, x, y );
+                    TileId const tileId( 0, level, x, y );
                     if ( !tileIdSet.contains( tileId ) ) {
                         tileIdSet.insert(tileId);
                         placemarkList += m_placemarkCache.value(tileId);
@@ -354,7 +354,7 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
             // start from min tile
             for ( int x = 0; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "", level, x, y );
+                    TileId const tileId( 0, level, x, y );
                     if ( !tileIdSet.contains( tileId ) ) {
                         tileIdSet.insert(tileId);
                         placemarkList += m_placemarkCache.value(tileId);

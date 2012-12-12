@@ -75,7 +75,7 @@ TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
             lon += deltaLon;
         }
     }
-    return TileId("", zoomLevel, x, y);
+    return TileId(0, zoomLevel, x, y);
 }
 
 }
