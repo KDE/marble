@@ -31,7 +31,14 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
 {
     Q_OBJECT
 
- public:
+public:
+    enum Tab {
+        About,
+        Authors,
+        Data,
+        License
+    };
+
     explicit MarbleAboutDialog(QWidget *parent = 0);
     ~MarbleAboutDialog();
 
@@ -40,6 +47,12 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
       * The default application title is 'Marble Virtual Globe'
       */
     void setApplicationTitle( const QString &title );
+
+    /**
+     * @brief setInitialTab Change the tab shown when executing the dialog
+     * @param tab The tab to show
+     */
+    void setInitialTab( Tab tab );
 
  private:
     Q_PRIVATE_SLOT( d, void loadPageContents( int idx ) )
