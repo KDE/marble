@@ -295,8 +295,7 @@ void PlacemarkLayout::setCacheData()
     emit repaintNeeded();
 }
 
-/// determine the set of placemarks that fit the viewport based on a pyramid of TileIds
-QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const ViewportParams *viewport ) const
+QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport ) const
 {
     int zoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 
@@ -324,7 +323,6 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
     pyramid.setBottomLevelCoords( rect );
 
     QSet<TileId> tileIdSet;
-    QList<const GeoDataPlacemark*> placemarkList;
     bool crossesDateLine = viewport->viewLatLonAltBox().crossesDateLine();
     for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {
         QRect const coords = pyramid.coords( level );
@@ -334,10 +332,7 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
             for ( int x = x1; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
                     TileId const tileId( 0, level, x, y );
-                    if ( !tileIdSet.contains( tileId ) ) {
-                        tileIdSet.insert(tileId);
-                        placemarkList += m_placemarkCache.value(tileId);
-                    }
+                    tileIdSet.insert(tileId);
                 }
             }
         } else { // as we cross dateline, we first get west part, then east part
@@ -345,25 +340,20 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
             for ( int x = x1; x <= ((2 << (level-1))-1); ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
                     TileId const tileId( 0, level, x, y );
-                    if ( !tileIdSet.contains( tileId ) ) {
-                        tileIdSet.insert(tileId);
-                        placemarkList += m_placemarkCache.value(tileId);
-                    }
+                    tileIdSet.insert(tileId);
                 }
             }
             // start from min tile
             for ( int x = 0; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
                     TileId const tileId( 0, level, x, y );
-                    if ( !tileIdSet.contains( tileId ) ) {
-                        tileIdSet.insert(tileId);
-                        placemarkList += m_placemarkCache.value(tileId);
-                    }
+                    tileIdSet.insert(tileId);
                 }
             }
         }
     }
-    return placemarkList;
+
+    return tileIdSet;
 }
 
 QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport )
@@ -431,7 +421,12 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
      */
     const QItemSelection selection = m_selectionModel->selection();
 
-    const QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
+    const QSet<TileId> tileIdSet = visibleTiles( viewport );
+    QList<const GeoDataPlacemark*> placemarkList;
+    foreach ( const TileId &tileId, tileIdSet ) {
+        placemarkList += m_placemarkCache.value( tileId );
+    }
+
     foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
         const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
         if ( !coordinates.isValid() ) {

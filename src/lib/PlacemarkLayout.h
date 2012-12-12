@@ -21,6 +21,7 @@
 #include <QtCore/QHash>
 #include <QtCore/QModelIndex>
 #include <QtCore/QRect>
+#include <QtCore/QSet>
 #include <QtCore/QVector>
 #include <QtGui/QSortFilterProxyModel>
 
@@ -110,7 +111,7 @@ class PlacemarkLayout : public QObject
 
     void styleReset();
 
-    QList<const GeoDataPlacemark*> visiblePlacemarks( const ViewportParams *viewport ) const;
+    QSet<TileId> visibleTiles( const ViewportParams *viewport ) const;
     bool layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected );
 
     /**
