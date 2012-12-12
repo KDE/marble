@@ -1,6 +1,7 @@
 # Example
 # add_subdirectory( test )
 
+add_subdirectory( license )
 # Display a control or a screen box
 add_subdirectory( compass )
 add_subdirectory( elevationprofilefloatitem )

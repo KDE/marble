@@ -23,15 +23,27 @@ namespace Marble
 class GEODATA_EXPORT GeoSceneLicense : public GeoNode
 {
  public:
+    enum Attribution {
+        Never,
+        OptOut,
+        OptIn,
+        Always
+    };
+
+    GeoSceneLicense();
+
     QString license() const;
     QString shortLicense() const;
+    Attribution attribution() const;
 
     void setLicense( const QString &license );
     void setShortLicense( const QString &license );
+    void setAttribution(Attribution attr );
 
  private:
     QString m_fullLicense;
     QString m_shortLicense;
+    Attribution m_attribution;
 
 };
 

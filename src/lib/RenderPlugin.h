@@ -8,6 +8,7 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 // Copyright 2008 Inge Wallin  <inge@lysator.liu.se>
 // Copyright 2011,2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #ifndef MARBLE_RENDERPLUGIN_H
@@ -47,6 +48,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     Q_PROPERTY ( QString description READ description CONSTANT )
     Q_PROPERTY ( bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged )
     Q_PROPERTY ( bool visible READ visible WRITE setVisible NOTIFY visibilityChanged )
+    Q_PROPERTY ( bool userCheckable READ isUserCheckable WRITE setUserCheckable NOTIFY userCheckableChanged )
 
  public:
     enum RenderType {
@@ -93,6 +95,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
     bool    enabled() const;
     bool    visible() const;
+    bool    isUserCheckable() const;
 
     /**
      * @return: The settings of the item.
@@ -117,6 +120,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
  public Q_SLOTS:
     void    setEnabled( bool enabled );
     void    setVisible( bool visible );
+    void    setUserCheckable(bool isUserCheckable);
     void    restoreDefaultSettings();
 
     QStringList settingKeys();
@@ -134,6 +138,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     void visibilityChanged( bool visible, const QString &nameId );
     
     void enabledChanged( bool enable );
+    void userCheckableChanged(bool isUserCheckable);
 
     /**
      * This signal is emitted if the settings of the RenderPlugin changed.

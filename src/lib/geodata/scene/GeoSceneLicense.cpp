@@ -13,6 +13,12 @@
 namespace Marble
 {
 
+GeoSceneLicense::GeoSceneLicense() :
+    m_attribution( OptOut )
+{
+    // nothing to do
+}
+
 QString GeoSceneLicense::license() const
 {
     return m_fullLicense;
@@ -23,7 +29,12 @@ QString GeoSceneLicense::shortLicense() const
     return m_shortLicense;
 }
 
-void GeoSceneLicense::setLicense( const QString &license )
+GeoSceneLicense::Attribution GeoSceneLicense::attribution() const
+{
+    return m_attribution;
+}
+
+void GeoSceneLicense::setLicense(const QString &license )
 {
     m_fullLicense = license;
 }
@@ -31,6 +42,11 @@ void GeoSceneLicense::setLicense( const QString &license )
 void GeoSceneLicense::setShortLicense( const QString &license )
 {
     m_shortLicense = license;
+}
+
+void GeoSceneLicense::setAttribution(Attribution attr )
+{
+    m_attribution = attr;
 }
 
 }

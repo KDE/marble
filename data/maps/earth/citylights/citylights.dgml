@@ -2,6 +2,7 @@
 <dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
     <document>
         <head>
+            <license short="NOAA NGDC, NASA / Public Domain">Source: Marc Imhoff of NASA GSFC; Christopher Elvidge of NOAA NGDC; Craig Mayhew and Robert Simmon, NASA GSFC, License: Public Domain</license>
             <name>Earth at Night</name>
             <target>earth</target>
             <theme>citylights</theme>
