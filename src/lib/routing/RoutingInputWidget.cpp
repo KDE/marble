@@ -32,8 +32,6 @@
 #include <QtGui/QMenu>
 #include <QtGui/QToolButton>
 #include <QtGui/QKeyEvent>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
 
 namespace Marble
@@ -72,8 +70,6 @@ public:
     RouteRequest *m_route;
 
     int m_index;
-
-    QNetworkAccessManager *m_manager;
 
     QTimer m_nominatimTimer;
 
@@ -124,7 +120,7 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int 
         m_marbleModel( widget->model() ), m_marbleWidget( widget ), m_lineEdit( 0 ),
         m_runnerManager( new MarbleRunnerManager( m_marbleModel->pluginManager(), parent ) ),
         m_placemarkModel( 0 ), m_route( m_marbleModel->routingManager()->routeRequest() ), m_index( index ),
-        m_manager( new QNetworkAccessManager( parent ) ), m_currentFrame( 0 ),
+        m_currentFrame( 0 ),
         m_bookmarkAction( 0 ), m_mapInput( 0 ), m_currentLocationAction( 0 ),
         m_centerAction( 0 )
 {
