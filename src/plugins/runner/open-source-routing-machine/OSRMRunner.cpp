@@ -86,16 +86,16 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
     m_cachedHints = newChecksums;
     m_hintChecksum = invalidEntry;
 
-    QNetworkRequest request = QNetworkRequest( QUrl( url ) );
-    request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "OSRMRunner" ) );
-    QNetworkReply *reply = m_networkAccessManager->get( request );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
+    m_request = QNetworkRequest( QUrl( url ) );
+    m_request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "OSRMRunner" ) );
 
     QEventLoop eventLoop;
 
     connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
              &eventLoop, SLOT( quit() ) );
+
+    // @todo FIXME Must currently be done in the main thread, see bug 257376
+    QTimer::singleShot( 0, this, SLOT( get() ) );
 
     eventLoop.exec();
 }
@@ -118,6 +118,13 @@ void OSRMRunner::retrieveData( QNetworkReply *reply )
 void OSRMRunner::handleError( QNetworkReply::NetworkError error )
 {
     mDebug() << " Error when retrieving OSRM route: " << error;
+}
+
+void OSRMRunner::get()
+{
+    QNetworkReply *reply = m_networkAccessManager->get( m_request );
+    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
+             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
 }
 
 void OSRMRunner::append(QString *input, const QString &key, const QString &value) const

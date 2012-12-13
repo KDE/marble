@@ -46,6 +46,8 @@ private Q_SLOTS:
     /** A network error occurred */
     void handleError( QNetworkReply::NetworkError );
 
+    void get();
+
 private:
     void append( QString* input, const QString &key, const QString &value ) const;
 
@@ -56,6 +58,8 @@ private:
     GeoDataDocument* parse( const QByteArray &input );
 
     QNetworkAccessManager *m_networkAccessManager;
+
+    QNetworkRequest m_request;
 
     static QVector<QPair<GeoDataCoordinates,QString> > m_cachedHints;
 
