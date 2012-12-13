@@ -154,9 +154,17 @@ TileLoader::TileStatus TileLoader::tileStatus( GeoSceneTiled const *textureLayer
     return isExpired ? Expired : Available;
 }
 
-void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
+void TileLoader::updateTile( QByteArray const & data, QString const & idStr )
 {
-    TileId const id = TileId::fromString( tileId );
+    QStringList const components = idStr.split( ':', QString::SkipEmptyParts );
+    Q_ASSERT( components.size() == 4 );
+
+    QString const sourceDir = components[ 0 ];
+    int const zoomLevel = components[ 1 ].toInt();
+    int const tileX = components[ 2 ].toInt();
+    int const tileY = components[ 3 ].toInt();
+
+    TileId const id = TileId( sourceDir, zoomLevel, tileX, tileY );
 
     QImage const tileImage = QImage::fromData( data );
     if ( tileImage.isNull() )
@@ -176,7 +184,8 @@ void TileLoader::triggerDownload( GeoSceneTiled const *textureLayer, TileId cons
 {
     QUrl const sourceUrl = textureLayer->downloadUrl( id );
     QString const destFileName = textureLayer->relativeTileFileName( id );
-    emit downloadTile( sourceUrl, destFileName, id.toString(), usage );
+    QString const idStr = QString( "%1:%2:%3:%4" ).arg( textureLayer->sourceDir() ).arg( id.zoomLevel() ).arg( id.x() ).arg( id.y() );
+    emit downloadTile( sourceUrl, destFileName, idStr, usage );
 }
 
 QImage TileLoader::scaledLowerLevelTile( GeoSceneTiled const *textureLayer, TileId const & id ) const

@@ -36,8 +36,6 @@ class MARBLE_EXPORT TileId
     bool operator==( TileId const& rhs ) const;
     bool operator<( TileId const& rhs ) const;
 
-    QString toString() const;
-    static TileId fromString( QString const& );
     static TileId fromCoordinates( const GeoDataCoordinates& coords, int popularity );
 
  private:

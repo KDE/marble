@@ -34,23 +34,6 @@ TileId::TileId()
 {
 }
 
-QString TileId::toString() const
-{
-    return QString( "%1:%2:%3:%4" ).arg( m_mapThemeIdHash ).arg( m_zoomLevel ).arg( m_tileX ).arg( m_tileY );
-}
-
-TileId TileId::fromString( QString const& idStr )
-{
-    QStringList const components = idStr.split( ':', QString::SkipEmptyParts );
-    Q_ASSERT( components.size() == 4 );
-
-    uint const mapThemeIdHash = components[ 0 ].toUInt();
-    int const zoomLevel = components[ 1 ].toInt();
-    int const tileX = components[ 2 ].toInt();
-    int const tileY = components[ 3 ].toInt();
-    return TileId( mapThemeIdHash, zoomLevel, tileX, tileY );
-}
-
 TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
 {
     if ( zoomLevel < 0 ) {
