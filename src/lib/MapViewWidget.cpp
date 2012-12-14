@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin   <ingwa@kde.org>
 // Copyright 2007      Thomas Zander <zander@kde.org>
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
 // Self
