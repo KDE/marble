@@ -24,6 +24,7 @@
 #include <QtGui/QCommonStyle>
 #include <QtGui/QPainter>
 #include <QtGui/QLabel>
+#include <QtGui/QMenu>
 
 namespace Marble
 {
@@ -69,16 +70,13 @@ License::License( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( -10.0, -5.0 ), QSizeF( 150.0, 20.0 ) ),
       m_widgetItem( 0 ),
       m_label( 0 ),
-      m_showFullLicense( false )
+      m_showFullLicense( false ),
+      m_contextMenu( 0 )
 {
     setEnabled( true );
     setVisible( true );
     setBackground( QBrush( QColor( Qt::transparent ) ) );
     setFrame( NoFrame );
-
-    m_collapseTimer.setInterval( 1000 );
-    m_collapseTimer.setSingleShot( true );
-    connect( &m_collapseTimer, SIGNAL( timeout() ), this, SLOT( showShortLicense() ) );
 }
 
 License::~License()
@@ -178,10 +176,18 @@ void License::updateLicenseText()
     emit repaintNeeded();
 }
 
-void License::showShortLicense()
+void License::toggleLicenseSize()
 {
-    m_showFullLicense = false;
+    m_showFullLicense = !m_showFullLicense;
     updateLicenseText();
+}
+
+void License::showAboutDialog()
+{
+    QPointer<MarbleAboutDialog> aboutDialog = new MarbleAboutDialog;
+    aboutDialog->setInitialTab( MarbleAboutDialog::Data );
+    aboutDialog->exec();
+    delete aboutDialog;
 }
 
 bool License::isInitialized () const
@@ -203,34 +209,29 @@ bool License::eventFilter( QObject *object, QEvent *event )
         QMouseEvent *mouseEvent = static_cast<QMouseEvent*>( event );
         QRectF floatItemRect = QRectF( positivePosition(), size() );
         if ( floatItemRect.contains( mouseEvent->pos() ) ) {
-            if ( !m_showFullLicense ) {
-                m_collapseTimer.stop();
-                m_showFullLicense = true;
-                updateLicenseText();
-            }
             widget->setCursor( QCursor( Qt::ArrowCursor ) );
             return true;
-        }
-        else if ( m_showFullLicense && !m_collapseTimer.isActive() ) {
-            m_collapseTimer.start();
-        }
-    }
-
-    if( event->type() == QEvent::MouseButtonPress ) {
-        QMouseEvent *mouseEvent = static_cast<QMouseEvent*>( event );
-        QRectF floatItemRect = QRectF( positivePosition(), size() );
-        if ( mouseEvent->button() == Qt::LeftButton ) {
-            if ( floatItemRect.contains( mouseEvent->pos() ) ) {
-                QPointer<MarbleAboutDialog> aboutDialog = new MarbleAboutDialog;
-                aboutDialog->setInitialTab( MarbleAboutDialog::Data );
-                aboutDialog->exec();
-                delete aboutDialog;
-                return true;
-            }
         }
     }
 
     return AbstractFloatItem::eventFilter( object, event );
+}
+
+void License::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
+{
+    if ( !m_contextMenu ) {
+        m_contextMenu = contextMenu();
+
+        QAction *toggleAction = m_contextMenu->addAction( tr("&Full License"), this,
+                                                SLOT( toggleLicenseSize() ) );
+        toggleAction->setCheckable( true );
+        toggleAction->setChecked( m_showFullLicense );
+
+        m_contextMenu->addAction( tr("&Show Details"), this, SLOT( showAboutDialog() ) );
+    }
+
+    Q_ASSERT( m_contextMenu );
+    m_contextMenu->exec( w->mapToGlobal( e->pos() ) );
 }
 
 }
