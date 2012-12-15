@@ -100,7 +100,8 @@ class MapViewWidget::Private {
     void updateMapFilter()
     {
         int currentIndex = m_mapViewUi.celestialBodyComboBox->currentIndex();
-        QStandardItem * selectedItem = m_celestialList.item( currentIndex, 1 );
+        int const row = m_celestialListProxy.mapToSource( m_celestialListProxy.index( currentIndex, 0 ) ).row();
+        QStandardItem * selectedItem = m_celestialList.item( row, 1 );
 
         if ( selectedItem ) {
             QString selectedId;
@@ -301,8 +302,9 @@ void MapViewWidget::setMapThemeId( const QString &theme )
             QStandardItem * selectedItem = itemList.first();
 
             if ( selectedItem ) {
-                int selectedIndex = selectedItem->row();
-                d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( selectedIndex );
+                QModelIndex const selectedIndex = d->m_celestialList.index( selectedItem->row(), 0 );
+                int const proxyIndex = d->m_celestialListProxy.mapFromSource( selectedIndex ).row();
+                d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( proxyIndex );
                 d->m_mapSortProxy.setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
             }
 
