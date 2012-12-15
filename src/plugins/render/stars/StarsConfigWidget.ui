@@ -17,7 +17,7 @@
    <item>
     <widget class="QCheckBox" name="m_viewConstellationsCheckBox">
      <property name="text">
-      <string>View Constellations</string>
+      <string>Show Constellations</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -27,7 +27,7 @@
    <item>
     <widget class="QCheckBox" name="m_viewSunCheckBox">
      <property name="text">
-      <string>View Sun</string>
+      <string>Show Sun</string>
      </property>
      <property name="checked">
       <bool>true</bool>
