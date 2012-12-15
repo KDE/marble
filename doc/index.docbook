@@ -205,11 +205,11 @@
      <chapter id="search-places">
          <title>Searching places using &marble;</title>
          <para>
-            &marble; comes with a small database of more than 12,000 cities ( from http://www.worldgazetteer.com ) and a 
-	    few mountains and volcanoes. You can find a location by entering its name into the search line on the 
-            top of the toolbox. If you're unsure about the spelling (&marble; always uses the 
-            native name in latin letters) you can choose the location from the list of suggestions below the search line
-            as well: A click on the respective entry will instantly display the matching place on the map.
+            &marble; comes with a small database of more than 12,000 cities ( from
+            http://www.worldgazetteer.com ) and a few mountains and volcanoes.
+            You can find a location by entering its name into the search line on the
+            top of the toolbox (&marble; always uses the native name in latin letters). As you start
+            typing, suggestions below the search line will appear like this:
          </para>
          <screenshot>
              <screeninfo>&marble; searching places</screeninfo>
@@ -219,10 +219,39 @@
              </mediaobject>
          </screenshot>
          <para>
-            Once you found your city on the map you can click on its label or its symbol using the 
+             As you hit return, &marble; runners will also query both online and offline searches
+             to return you even more useful data.
+        </para>
+        <para>The following online search runners are available:</para>
+        <itemizedlist>
+          <listitem>
+            <para>Nominatim: An online search and reverse geocoding service, using data from
+            http://www.openstreetmap.org</para>
+          </listitem>
+          <listitem>
+            <para>HostIP: A reverse geocoding based on IP adress, using data from
+            http://www.hostip.info</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>The following offline search runners are also available, depending on extra software and data you have installed:</para>
+        <itemizedlist>
+          <listitem>
+            <para>Local Database: All placemarks in all open documents will be searched for.
+            This includes your Bookmarks of course.</para>
+          </listitem>
+          <listitem>
+            <para>Monav: An offline search service using the data from Monav offline routing
+            information, based on OSM data</para>
+          </listitem>
+          <listitem>
+            <para>Gosmore: An offline reverse geocoding service using data from gosmore setup</para>
+          </listitem>
+        </itemizedlist>
+         <para>
+            Once you have found your search on the map you can click on its label or its symbol using the
             &LMB;. A popup menu will appear which allows you to retrieve more information
-            about the city. This popup menu can also be used to find out the coordinates for any point
-            on the globe as the coordinates always get displayed at the bottom of the popup menu.
+            about the placemark.
             After clicking the name of the location on the popup menu a data sheet dialog will appear, like this:
          </para>
          <screenshot>
@@ -234,7 +263,7 @@
          </screenshot>
          <para>
             On the first tab of the dialog some very basic data is provided, like the name, coordinates and flag of the country the place belongs to. In addition, population numbers for cities get shown, as well as the elevation for mountains. 
-            If your computer is connected to the Internet and if you're online &marble; will try to connect to the popular Internet encyclopedia <quote>Wikipedia</quote>. If a matching Wikipedia article is available &marble; will display it on the second tab of the dialog.
+            If your computer is connected to the Internet and if you're online, &marble; will try to connect to the popular Internet encyclopedia <quote>Wikipedia</quote>. If a matching Wikipedia article is available &marble; will display it on the second tab of the dialog.
          </para>
      </chapter>
 
