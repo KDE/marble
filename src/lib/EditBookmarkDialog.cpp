@@ -251,6 +251,13 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
 
     bookmark.extendedData().addValue( GeoDataData( "isBookmark", true ) );
 
+    if(d->m_widget != 0) {
+        const QString celestialName = d->m_widget->model()->planetId();
+        if(celestialName != "earth") {
+            bookmark.extendedData().addValue( GeoDataData( "celestialBody", celestialName ) );
+        }
+    }
+
     return bookmark;
 }
 
