@@ -173,9 +173,14 @@ public:
 
     QDialog *configDialog();
 
+protected:
+    bool eventFilter( QObject *object, QEvent *e );
+
 private Q_SLOTS:
     void requestRepaint();
-    
+    void toggleSun();
+    void toggleConstellations();
+
 public Q_SLOTS:
     void readSettings();
     void writeSettings();

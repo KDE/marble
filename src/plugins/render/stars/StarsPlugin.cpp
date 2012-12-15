@@ -15,11 +15,15 @@
 #include <QtCore/QSize>
 #include <QtCore/QDateTime>
 #include <QtGui/QRegion>
+#include <QtGui/QContextMenuEvent>
+#include <QtGui/QMenu>
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
+#include "MarbleWidget.h"
+#include "AbstractFloatItem.h"
 #include "GeoPainter.h"
 #include "SunLocator.h"
 #include "ViewportParams.h"
@@ -618,6 +622,63 @@ qreal StarsPlugin::siderealTime( const QDateTime& localDateTime )
 void StarsPlugin::requestRepaint()
 {
     emit repaintNeeded( QRegion() );
+}
+
+void StarsPlugin::toggleSun()
+{
+    m_renderSun = !m_renderSun;
+    emit settingsChanged( nameId() );
+    requestRepaint();
+}
+
+void StarsPlugin::toggleConstellations()
+{
+    m_renderConstellations = !m_renderConstellations;
+    emit settingsChanged( nameId() );
+    requestRepaint();
+}
+
+bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
+{
+    if ( !enabled() || !visible() ) {
+        return false;
+    }
+
+    if( e->type() == QEvent::ContextMenu )
+    {
+        MarbleWidget *widget = dynamic_cast<MarbleWidget *>( object );
+        QContextMenuEvent *menuEvent = dynamic_cast<QContextMenuEvent *> ( e );
+        if( widget && menuEvent )
+        {
+            qreal mouseLon, mouseLat;
+            const bool aboveMap = widget->geoCoordinates( menuEvent->x(), menuEvent->y(),
+                                                     mouseLon, mouseLat, GeoDataCoordinates::Radian );
+            if ( aboveMap ) {
+                return false;
+            }
+
+            foreach ( AbstractFloatItem *floatItem, widget->floatItems() ) {
+                if ( floatItem->enabled() && floatItem->visible()
+                     && floatItem->contains( menuEvent->pos() ) )
+                {
+                    return false;
+                }
+            }
+
+            QMenu menu;
+            QAction *constellationsAction = menu.addAction( tr("Show &Constellations"), this, SLOT( toggleConstellations() ) );
+            constellationsAction->setCheckable( true );
+            constellationsAction->setChecked( m_renderConstellations );
+            QAction *sunAction = menu.addAction( tr("Show &Sun"), this, SLOT( toggleSun() ) );
+            sunAction->setCheckable( true );
+            sunAction->setChecked( m_renderSun );
+            menu.exec(widget->mapToGlobal(menuEvent->pos()));
+            return true;
+        }
+        return false;
+    } else {
+        return RenderPlugin::eventFilter( object, e );
+    }
 }
 
 }
