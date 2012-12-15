@@ -40,6 +40,7 @@ add_subdirectory( satellites )
 # add_subdirectory ( twitter )
 add_subdirectory( wikipedia )
 add_subdirectory( weather )
+add_subdirectory( webpopup )
 
 # FIXME: The inhibit-screensaver plugin stresses the term render plugin a bit far.
 # It should be moved to a new plugin type later.
