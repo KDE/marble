@@ -190,6 +190,7 @@ private:
     Ui::StarsConfigWidget *ui_configWidget;
     bool m_renderStars;
     bool m_renderConstellations;
+    bool m_renderSun;
     bool m_starsLoaded;
     bool m_constellationsLoaded;
     bool m_dsosLoaded;
