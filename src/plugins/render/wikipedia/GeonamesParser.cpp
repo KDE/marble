@@ -181,7 +181,13 @@ void GeonamesParser::readUrl( WikipediaItem *item )
             break;
         
         if ( isCharacters() ) {
-            item->setUrl( QUrl::fromEncoded( text().toString().toUtf8() ) );
+            // Try to switch to the mobile version, geonames
+            // lacks API for that unfortunately
+            QString url = text().toString();
+            if ( !url.contains( "m.wikipedia.org" ) ) {
+                url.replace( "wikipedia.org", "m.wikipedia.org" );
+            }
+            item->setUrl( QUrl::fromEncoded( url.toUtf8() ) );
         }
     }
 }
