@@ -93,7 +93,8 @@ marble_add_test( TestGeoDataCoordinates )       # Check coordinates specifics
 marble_add_test( TestGeoDataLatLonAltBox )      # Check boxen specifics
 marble_add_test( TestGeoDataGeometry )          # Check geometry specifics
 marble_add_test( TestGeoDataTrack )             # Check track specifics
-marble_add_qtonly_test( TestScreenOverlay )            # Check ScreenOverlay specifics
+marble_add_qtonly_test( TestScreenOverlay )     # Check ScreenOverlay specifics
+marble_add_qtonly_test( TestGroundOverlay )     # Check GroundOverlay specifics
 
 qt4_add_resources(TestGeoDataCopy_SRCS TestGeoDataCopy.qrc) # Check copy operations on CoW classes
 marble_add_test( TestGeoDataCopy ${TestGeoDataCopy_SRCS} )

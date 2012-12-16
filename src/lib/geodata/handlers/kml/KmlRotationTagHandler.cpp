@@ -14,6 +14,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataScreenOverlay.h"
+#include "GeoDataLatLonBox.h"
 #include "GeoDataParser.h"
 
 namespace Marble
@@ -33,6 +34,12 @@ GeoNode* KmlrotationTagHandler::parse( GeoParser& parser ) const
         qreal rotation = parser.readElementText().toFloat();
 
         parentItem.nodeAs<GeoDataScreenOverlay>()->setRotation( rotation );
+    }
+    else if (parentItem.represents( kmlTag_LatLonBox ))
+    {
+        qreal rotation = parser.readElementText().toFloat();
+
+        parentItem.nodeAs<GeoDataLatLonBox>()->setRotation( rotation * DEG2RAD );
     }
     return 0;
 }
