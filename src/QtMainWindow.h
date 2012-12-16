@@ -115,6 +115,7 @@ private Q_SLOTS:
     void  controlTime();
     void  showSun( bool );
     void  reload();
+    void  showFileView(bool toggle);
 
     // Settings Menu
     void  showFullScreen( bool );
@@ -193,6 +194,7 @@ private:
     QAction *m_osmEditAction;
 
     // View Menu
+    QAction *m_showFileView;
     QAction *m_showCloudsAct;
     QAction *m_showAtmosphereAct;
     QAction *m_controlSunAct;
