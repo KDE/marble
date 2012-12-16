@@ -241,7 +241,7 @@ void MainWindow::createActions()
      m_fullScreenAct->setStatusTip(tr("Full Screen Mode"));
      connect(m_fullScreenAct, SIGNAL(triggered( bool )), this, SLOT( showFullScreen( bool )));
 
-     m_statusBarAct = new QAction( tr("&Status Bar"), this);
+     m_statusBarAct = new QAction( tr("&Show Status Bar"), this);
      m_statusBarAct->setCheckable( true );
      m_statusBarAct->setStatusTip(tr("Show Status Bar"));
      connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
