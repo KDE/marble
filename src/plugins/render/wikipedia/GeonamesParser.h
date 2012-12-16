@@ -19,13 +19,15 @@ class QObject;
 
 namespace Marble
 {
-    
+
+class MarbleWidget;
 class WikipediaItem;
 
 class GeonamesParser : public QXmlStreamReader
 {
 public:
-    GeonamesParser( QList<WikipediaItem *> *list,
+    GeonamesParser( MarbleWidget* widget,
+                    QList<WikipediaItem *> *list,
                     QObject *parent );
 
     bool read( const QByteArray& data );
@@ -42,6 +44,7 @@ private:
     void readThumbnailImage( WikipediaItem *item );
     void readRank( WikipediaItem *item );
 
+    MarbleWidget* m_marbleWidget;
     QList<WikipediaItem *> *m_list;
     QObject *m_parent;
 };

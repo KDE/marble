@@ -16,6 +16,7 @@
 #include "WikipediaModel.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
 
 // Qt
 #include <QtGui/QPushButton>
@@ -29,7 +30,8 @@ const quint32 maximumNumberOfItems = 99;
 WikipediaPlugin::WikipediaPlugin()
     : AbstractDataPlugin( 0 ),
       ui_configWidget( 0 ),
-      m_configDialog( 0 )
+      m_configDialog( 0 ),
+      m_marbleWidget( 0 )
 {
 }
 
@@ -38,7 +40,8 @@ WikipediaPlugin::WikipediaPlugin( const MarbleModel *marbleModel )
       m_icon( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) ),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),
-      m_showThumbnails( true )
+      m_showThumbnails( true ),
+      m_marbleWidget( 0 )
 {
     // Plugin is enabled by default
     setEnabled( true );
@@ -150,6 +153,20 @@ void WikipediaPlugin::setSettings( const QHash<QString,QVariant> &settings )
 
     readSettings();
     emit settingsChanged( nameId() );
+}
+
+bool WikipediaPlugin::eventFilter(QObject *object, QEvent *event)
+{
+    if ( isInitialized() ) {
+        WikipediaModel *wikipediaModel = dynamic_cast<WikipediaModel*>( model() );
+        Q_ASSERT( wikipediaModel );
+        MarbleWidget* widget = dynamic_cast<MarbleWidget*>( object );
+        if ( widget ) {
+            wikipediaModel->setMarbleWidget( widget );
+        }
+    }
+
+    return AbstractDataPlugin::eventFilter( object, event );
 }
 
 void WikipediaPlugin::readSettings()

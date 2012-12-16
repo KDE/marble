@@ -17,6 +17,7 @@
 // Marble
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleGlobal.h"
+#include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "WikipediaItem.h"
@@ -34,9 +35,10 @@
 
 using namespace Marble;
 
-WikipediaModel::WikipediaModel( const PluginManager *pluginManager,
+WikipediaModel::WikipediaModel(const PluginManager *pluginManager,
                                 QObject *parent )
     : AbstractDataPluginModel( "wikipedia", pluginManager, parent ),
+      m_marbleWidget( 0 ),
       m_showThumbnail( true )
 {
     m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) );
@@ -82,7 +84,7 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
 void WikipediaModel::parseFile( const QByteArray& file )
 {
     QList<WikipediaItem*> list;
-    GeonamesParser parser( &list, this );
+    GeonamesParser parser( m_marbleWidget, &list, this );
     
     parser.read( file );
     
@@ -108,6 +110,11 @@ void WikipediaModel::parseFile( const QByteArray& file )
     }
 
     addItemsToList( items );
+}
+
+void WikipediaModel::setMarbleWidget(MarbleWidget *widget)
+{
+    m_marbleWidget = widget;
 }
 
 #include "WikipediaModel.moc"
