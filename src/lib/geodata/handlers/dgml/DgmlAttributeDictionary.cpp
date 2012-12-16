@@ -31,6 +31,7 @@ namespace dgml
 
 const char* dgmlAttr_nameSpace20 = "http://edu.kde.org/marble/dgml/2.0";
 
+const char* dgmlAttr_attribution      = "attribution";
 const char* dgmlAttr_backend          = "backend";
 const char* dgmlAttr_bgcolor          = "bgcolor";
 const char* dgmlAttr_color            = "color";
@@ -54,7 +55,9 @@ const char* dgmlAttr_pixmap           = "pixmap";
 const char* dgmlAttr_port             = "port";
 const char* dgmlAttr_protocol         = "protocol";
 const char* dgmlAttr_query            = "query";
+const char* dgmlAttr_radius           = "radius";
 const char* dgmlAttr_role             = "role";
+const char* dgmlAttr_short            = "short";
 const char* dgmlAttr_spacing          = "spacing";
 const char* dgmlAttr_style            = "style";
 const char* dgmlAttr_text             = "text";

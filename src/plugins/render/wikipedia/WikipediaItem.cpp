@@ -23,6 +23,11 @@
 #include "MarbleDebug.h"
 #include "ViewportParams.h"
 #include "TinyWebBrowser.h"
+#include "MarbleWidget.h"
+#include "MarbleModel.h"
+#include "RenderPlugin.h"
+#include "AbstractInfoDialog.h"
+#include "PluginManager.h"
 
 using namespace Marble;
 /* TRANSLATOR Marble::WikipediaItem */
@@ -32,8 +37,9 @@ const QRect wikiIconRect( 0, 0, 32, 27 );
 const QSize miniWikiIconSize( 22, 19 );
 const int miniWikiIconBorder = 3;
 
-WikipediaItem::WikipediaItem( QObject *parent )
+WikipediaItem::WikipediaItem( MarbleWidget* widget, QObject *parent )
     : AbstractDataPluginItem( parent ),
+      m_marbleWidget( widget ),
       m_rank( 0.0 ),
       m_browser( 0 ),
       m_wikiIcon(),
@@ -170,6 +176,24 @@ QAction *WikipediaItem::action()
 
 void WikipediaItem::openBrowser( )
 {
+    if ( m_marbleWidget ) {
+        QList<RenderPlugin*> plugins = m_marbleWidget->renderPlugins();
+        foreach( RenderPlugin* renderPlugin, plugins) {
+            AbstractInfoDialog* infoDialog = dynamic_cast<AbstractInfoDialog*>( renderPlugin );
+            if ( infoDialog ) {
+                renderPlugin->setEnabled( true );
+                renderPlugin->setVisible( true );
+                Q_ASSERT( renderPlugin->isInitialized() );
+                infoDialog->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
+                infoDialog->setSize( QSizeF( 500, 800 ) );
+                infoDialog->setUrl( url() );
+                return;
+            }
+        }
+
+        mDebug() << "Unable to find a suitable render plugin for creating an info dialog";
+    }
+
     if ( !m_browser ) {
         m_browser = new TinyWebBrowser();
     }

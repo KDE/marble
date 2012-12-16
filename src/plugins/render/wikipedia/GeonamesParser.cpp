@@ -21,9 +21,11 @@
 
 using namespace Marble;
 
-GeonamesParser::GeonamesParser( QList<WikipediaItem *> *list,
+GeonamesParser::GeonamesParser( MarbleWidget * widget,
+                                QList<WikipediaItem *> *list,
                                 QObject *parent )
-    : m_list( list ),
+    : m_marbleWidget( widget ),
+      m_list( list ),
       m_parent( parent )
 {
 }
@@ -86,7 +88,7 @@ void GeonamesParser::readEntry()
     Q_ASSERT( isStartElement()
               && name() == "entry" );
               
-    WikipediaItem *item = new WikipediaItem( m_parent );
+    WikipediaItem *item = new WikipediaItem( m_marbleWidget, m_parent );
     m_list->append( item );
     
     while ( !atEnd() ) {
@@ -179,7 +181,13 @@ void GeonamesParser::readUrl( WikipediaItem *item )
             break;
         
         if ( isCharacters() ) {
-            item->setUrl( QUrl::fromEncoded( text().toString().toUtf8() ) );
+            // Try to switch to the mobile version, geonames
+            // lacks API for that unfortunately
+            QString url = text().toString();
+            if ( !url.contains( "m.wikipedia.org" ) ) {
+                url.replace( "wikipedia.org", "m.wikipedia.org" );
+            }
+            item->setUrl( QUrl::fromEncoded( url.toUtf8() ) );
         }
     }
 }

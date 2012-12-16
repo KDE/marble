@@ -15,6 +15,7 @@
 #include <QtCore/QObject>
 
 #include "MarbleGlobal.h"
+#include "MarbleModel.h"
 #include "GeoSceneTiled.h"
 
 #include <QtCore/QSize>
@@ -40,7 +41,8 @@ class TextureLayer : public QObject, public LayerInterface
  public:
     TextureLayer( HttpDownloadManager *downloadManager,
                   const SunLocator *sunLocator,
-                  VectorComposer *veccomposer );
+                  VectorComposer *veccomposer,
+                  const PluginManager *pluginManager );
 
     ~TextureLayer();
 

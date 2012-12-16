@@ -8,6 +8,7 @@ set( layers_HDRS
     TextureLayer.h
     VectorMapBaseLayer.h
     VectorMapLayer.h
+    VectorTileLayer.h
 )
 
 set( layers_SRCS
@@ -20,4 +21,5 @@ set( layers_SRCS
     layers/TextureLayer.cpp
     layers/VectorMapBaseLayer.cpp
     layers/VectorMapLayer.cpp
+    layers/VectorTileLayer.cpp
 )

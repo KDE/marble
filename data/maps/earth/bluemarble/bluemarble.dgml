@@ -2,6 +2,7 @@
 <dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
     <document>
         <head>
+            <license short="NASA / Public Domain">Source: NASA Goddard Space Flight Center Earth Observatory http://earthobservatory.nasa.gov/Newsroom/BlueMarble, License: Public Domain</license>
             <name>Satellite View</name>
             <target>earth</target>
             <theme>bluemarble</theme>

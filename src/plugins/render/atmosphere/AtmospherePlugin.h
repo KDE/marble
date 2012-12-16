@@ -61,6 +61,7 @@ public:
 
 private:
     QPixmap m_renderPixmap;
+    QColor m_renderColor;
     int m_renderRadius;
 };
 

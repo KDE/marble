@@ -274,6 +274,8 @@ void FileStorageWatcherThread::ensureSizePerTheme( const QString &themeDirectory
 	
 	    // We try to be very careful and just delete images
 	    // Do not delete files younger than two minutes.
+        // FIXME, when vectortiling I suppose also vector tiles will have
+        // to be deleted
 	    if (   (    lowerCase.endsWith( ".jpg" ) 
 	             || lowerCase.endsWith( ".png" )
 	             || lowerCase.endsWith( ".gif" )

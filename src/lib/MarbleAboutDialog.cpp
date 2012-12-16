@@ -322,6 +322,11 @@ void MarbleAboutDialog::setApplicationTitle( const QString &title )
     browser->document()->rootFrame()->setFrameFormat( format );
 }
 
+void MarbleAboutDialog::setInitialTab( MarbleAboutDialog::Tab tab )
+{
+    d->uiWidget.tabWidget->setCurrentIndex( tab );
+}
+
 }
 
 #include "MarbleAboutDialog.moc"

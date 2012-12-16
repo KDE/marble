@@ -43,9 +43,9 @@ int usage()
 
 QColor randomColor()
 {
-    QVector<QColor> colors = QVector<QColor>() << oxygenAluminumGray4 << oxygenBrickRed4;
-    colors << oxygenBrownOrange4 << oxygenForestGreen4 << oxygenHotOrange4;
-    colors << oxygenSeaBlue2 << oxygenSkyBlue4 << oxygenSunYellow6;
+    QVector<QColor> colors = QVector<QColor>() << Oxygen::aluminumGray4 << Oxygen::brickRed4;
+    colors << Oxygen::hotOrange4 << Oxygen::forestGreen4 << Oxygen::hotOrange4;
+    colors << Oxygen::seaBlue2 << Oxygen::skyBlue4 << Oxygen::sunYellow6;
     return colors.at( qrand() % colors.size() );
 }
 

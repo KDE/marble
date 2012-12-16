@@ -8,6 +8,7 @@
 // Copyright 2008      Torsten Rahn   <rahn@kde.org>
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 // Copyright 2011,2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 // Self
@@ -35,7 +36,8 @@ class RenderPlugin::Private
           m_action(0),
           m_item(),
           m_enabled(true),
-          m_visible(true)
+          m_visible(true),
+          m_userCheckable(true)
     {
     }
 
@@ -51,6 +53,7 @@ class RenderPlugin::Private
 
     bool                m_enabled;
     bool                m_visible;
+    bool                m_userCheckable;
 };
 
 
@@ -153,6 +156,15 @@ void RenderPlugin::setVisible( bool visible )
     emit visibilityChanged( visible, nameId() );
 }
 
+void RenderPlugin::setUserCheckable( bool checkable )
+{
+    if ( checkable != d->m_userCheckable ) {
+        d->m_action.setEnabled( checkable );
+        d->m_userCheckable = checkable;
+        emit userCheckableChanged( checkable );
+    }
+}
+
 bool RenderPlugin::enabled() const
 {
     return d->m_enabled;
@@ -161,6 +173,11 @@ bool RenderPlugin::enabled() const
 bool RenderPlugin::visible() const
 {
     return d->m_visible;
+}
+
+bool RenderPlugin::isUserCheckable() const
+{
+    return d->m_userCheckable;
 }
 
 QHash<QString,QVariant> RenderPlugin::settings() const

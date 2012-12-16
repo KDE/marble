@@ -2,6 +2,7 @@
 <dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
     <document>
         <head>
+            <license short="CIA / Public Domain" attribution="always">Source: Micro World Data Bank in Polygons („MWDB-POLY / MWDBII“), CIA; Global Associates, Ltd.; Fred Pospeschil und Antonio Rivera, License: Public Domain</license>
             <name>Plain Map</name>
             <target>earth</target>
             <theme>plain</theme>

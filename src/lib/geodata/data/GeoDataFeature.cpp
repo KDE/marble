@@ -795,6 +795,15 @@ GeoDataFeature::GeoDataVisualCategory GeoDataFeature::OsmVisualCategory(const QS
 
 void GeoDataFeaturePrivate::initializeOsmVisualCategories()
 {
+    s_visualCategories["admin_level=1"]              = GeoDataFeature::OtherTerrain;
+    s_visualCategories["admin_level=2"]              = GeoDataFeature::OtherTerrain;
+    s_visualCategories["admin_level=3"]              = GeoDataFeature::OtherTerrain;
+    s_visualCategories["admin_level=4"]              = GeoDataFeature::OtherTerrain;
+    s_visualCategories["admin_level=5"]              = GeoDataFeature::OtherTerrain;
+    s_visualCategories["admin_level=6"]              = GeoDataFeature::OtherTerrain;
+    s_visualCategories["admin_level=7"]              = GeoDataFeature::OtherTerrain;
+    s_visualCategories["admin_level=8"]              = GeoDataFeature::OtherTerrain;
+
     s_visualCategories["amenity=restaurant"]         = GeoDataFeature::FoodRestaurant;
     s_visualCategories["amenity=fast_food"]          = GeoDataFeature::FoodFastFood;
     s_visualCategories["amenity=pub"]                = GeoDataFeature::FoodPub;
@@ -936,6 +945,9 @@ void GeoDataFeaturePrivate::initializeOsmVisualCategories()
     s_visualCategories["place=locality"]            = GeoDataFeature::SmallCity;
     s_visualCategories["place=town"]                = GeoDataFeature::BigCity;
     s_visualCategories["place=village"]             = GeoDataFeature::MediumCity;
+
+    // Default for buildings
+    s_visualCategories["building=yes"]              = GeoDataFeature::Building;
 
 }
 

@@ -21,6 +21,7 @@
 #include "TileScalingTextureMapper.h"
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
+#include "GeoSceneTypes.h"
 #include "MergedLayerDecorator.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -43,6 +44,7 @@ public:
     Private( HttpDownloadManager *downloadManager,
              const SunLocator *sunLocator,
              VectorComposer *veccomposer,
+             const PluginManager *pluginManager,
              TextureLayer *parent );
 
     void mapChanged();
@@ -60,20 +62,21 @@ public:
     TextureColorizer *m_texcolorizer;
     QVector<const GeoSceneTiled *> m_textures;
     const GeoSceneGroup *m_textureLayerSettings;
-
     QString m_runtimeTrace;
     // For scheduling repaints
     QTimer           m_repaintTimer;
+
 };
 
 TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
                                 const SunLocator *sunLocator,
                                 VectorComposer *veccomposer,
+                                const PluginManager *pluginManager,
                                 TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_veccomposer( veccomposer )
-    , m_loader( downloadManager )
+    , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
     , m_texmapper( 0 )
@@ -99,16 +102,21 @@ void TextureLayer::Private::updateTextureLayers()
     QVector<GeoSceneTiled const *> result;
 
     foreach ( const GeoSceneTiled *candidate, m_textures ) {
-        bool enabled = true;
-        if ( m_textureLayerSettings ) {
-            const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
-            enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
-        }
-        if ( enabled ) {
-            result.append( candidate );
-            mDebug() << "enabling texture" << candidate->name();
-        } else {
-            mDebug() << "disabling texture" << candidate->name();
+
+        // Check if the GeoSceneTiled is a TextureTile or VectorTile.
+        // Only TextureTiles have to be used.
+        if ( candidate->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ){
+            bool enabled = true;
+            if ( m_textureLayerSettings ) {
+                const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
+                enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
+            }
+            if ( enabled ) {
+                result.append( candidate );
+                mDebug() << "enabling texture" << candidate->name();
+            } else {
+                mDebug() << "disabling texture" << candidate->name();
+            }
         }
     }
 
@@ -116,9 +124,9 @@ void TextureLayer::Private::updateTextureLayers()
         const GeoSceneTiled *const firstTexture = result.at( 0 );
         m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
+        m_tileLoader.setTextureLayers( result );
+        m_loader.setTextureLayers( result );
     }
-
-    m_tileLoader.setTextureLayers( result );
 }
 
 void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )
@@ -126,7 +134,14 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
     if ( tileImage.isNull() )
         return; // keep tiles in cache to improve performance
 
-    m_tileLoader.updateTile( tileId, tileImage );
+    const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
+    for ( int i = 0; i < 4; ++i ) {
+        const TileId id = TileId( i, stackedTileId.zoomLevel(), stackedTileId.x(), stackedTileId.y() );
+    }
+
+    // updateTile needs to know if its an image or another type of file,
+    // so we indicate its format
+    m_tileLoader.updateTile( tileId, tileImage, 0 );
 
     mapChanged();
 }
@@ -135,9 +150,10 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
 TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
                             const SunLocator *sunLocator,
-                            VectorComposer *veccomposer )
+                            VectorComposer *veccomposer ,
+                            const PluginManager *pluginManager )
     : QObject()
-    , d( new Private( downloadManager, sunLocator, veccomposer, this ) )
+    , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this ) )
 {
     connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
              this, SLOT( updateTile( const TileId &, const QImage & ) ) );
@@ -186,6 +202,9 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     if ( d->m_textures.isEmpty() )
         return false;
 
+    if ( d->m_tileLoader.textureLayersSize() == 0 )
+        return false;
+
     if ( !d->m_texmapper )
         return false;
 
@@ -204,10 +223,10 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
     int tileLevel = (int)( tileLevelF * 1.00001 ); // snap to the sharper tile level a tiny bit earlier
-                                                   // to work around rounding errors when the radius
-                                                   // roughly equals the global texture width
+    // to work around rounding errors when the radius
+    // roughly equals the global texture width
 
-//    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
+    //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
     if ( tileLevel > d->m_tileLoader.maximumTileLevel() )
         tileLevel = d->m_tileLoader.maximumTileLevel();
@@ -273,7 +292,7 @@ void TextureLayer::setupTextureMapper( Projection projection )
     if ( d->m_textures.isEmpty() )
         return;
 
-  // FIXME: replace this with an approach based on the factory method pattern.
+    // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
 
     switch( projection ) {

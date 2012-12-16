@@ -83,7 +83,9 @@ set(marblewidget_SRCS
     kdescendantsproxymodel.cpp
     BranchFilterProxyModel.cpp
     MarbleDebug.cpp
+    Tile.cpp
     TextureTile.cpp
+    VectorTile.cpp
     TileCoordsPyramid.cpp
     TileLevelRangeWidget.cpp
     TileLoader.cpp
@@ -101,6 +103,7 @@ set(marblewidget_SRCS
     MarbleCacheSettingsWidget.cpp
     TimeControlWidget.cpp
     AbstractFloatItem.cpp
+    AbstractInfoDialog.cpp
     MarbleGlobal.cpp
     MarbleDirs.cpp
     MarbleLocale.cpp
@@ -127,6 +130,7 @@ set(marblewidget_SRCS
     EquirectScanlineTextureMapper.cpp
     MercatorScanlineTextureMapper.cpp
     TileScalingTextureMapper.cpp
+    VectorTileMapper.cpp
     DiscCache.cpp
     ServerLayout.cpp
     StoragePolicy.cpp
@@ -345,6 +349,7 @@ else (APPLE AND QTONLY)
     TinyWebBrowser.h
     QtMarbleConfigDialog.h
     global.h
+    MarbleColors.h
     MarbleGlobal.h
     MarbleDirs.h
     GeoPainter.h

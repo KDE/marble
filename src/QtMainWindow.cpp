@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2010 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
 #include "QtMainWindow.h"
@@ -72,6 +73,7 @@
 #include "StackableWindow.h"
 #include "GoToDialog.h"
 #include "MarbleWidgetInputHandler.h"
+#include "Planet.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -142,6 +144,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     createMenus();
     createStatusBar();
 
+    connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateAtmosphereMenu()));
+
     connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
              this, SLOT( updateMapEditButtonVisibility( QString ) ) );
     connect( m_controlView, SIGNAL( showMapWizard() ), this, SLOT( showMapWizard() ) );
@@ -172,6 +176,11 @@ void MainWindow::createActions()
      m_openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
      connect( m_openAct, SIGNAL( triggered() ),
               this, SLOT( openFile() ) );
+
+     m_showFileView = new QAction(tr("&Show File View"), this);
+     m_showFileView->setCheckable(true);
+     m_showFileView->setChecked(false);
+     connect(m_showFileView, SIGNAL(toggled(bool)), this, SLOT(showFileView(bool)));
 
      m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("&Download Maps..."), this);
      connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapSite()));
@@ -232,7 +241,7 @@ void MainWindow::createActions()
      m_fullScreenAct->setStatusTip(tr("Full Screen Mode"));
      connect(m_fullScreenAct, SIGNAL(triggered( bool )), this, SLOT( showFullScreen( bool )));
 
-     m_statusBarAct = new QAction( tr("&Status Bar"), this);
+     m_statusBarAct = new QAction( tr("&Show Status Bar"), this);
      m_statusBarAct->setCheckable( true );
      m_statusBarAct->setStatusTip(tr("Show Status Bar"));
      connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
@@ -386,6 +395,7 @@ void MainWindow::createMenus()
     m_fileMenu->addAction( m_osmEditAction );
 
     m_fileMenu = menuBar()->addMenu(tr("&View"));
+    m_fileMenu->addAction(m_showFileView);
 
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
@@ -855,6 +865,11 @@ void MainWindow::reload()
     m_controlView->marbleWidget()->reloadMap();
 }
 
+void MainWindow::showFileView(bool toggle)
+{
+    m_controlView->setFileViewTabShown(toggle);
+}
+
 void MainWindow::enterWhatsThis()
 {
     QWhatsThis::enterWhatsThisMode();
@@ -1184,15 +1199,15 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          routingManager->setLastSavePath( settings.value( "lastRouteSavePath", QDir::homePath() ).toString() );
 
          QColor tempColor;
-         tempColor = QColor( settings.value( "routeColorStandard", oxygenSkyBlue4.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorStandard", Oxygen::skyBlue4.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaStandard", 200 ).toInt() );
          routingManager->setRouteColorStandard( tempColor );
 
-         tempColor = QColor( settings.value( "routeColorHighlighted", oxygenSeaBlue2.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorHighlighted", Oxygen::seaBlue2.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaHighlighted", 200 ).toInt() );
          routingManager->setRouteColorHighlighted( tempColor );
 
-         tempColor = QColor( settings.value( "routeColorAlternative", oxygenAluminumGray4.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorAlternative", Oxygen::aluminumGray4.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaAlternative", 200 ).toInt() );
          routingManager->setRouteColorAlternative( tempColor );
      }
@@ -1647,6 +1662,12 @@ void MainWindow::showMapWizard()
     settings.endGroup();
 
     mapWizard->deleteLater();
+}
+
+void MainWindow::updateAtmosphereMenu()
+{
+    bool const hasAtmosphere = m_controlView->marbleModel()->planet()->hasAtmosphere();
+    m_showAtmosphereAct->setEnabled( hasAtmosphere );
 }
 
 void MainWindow::showGoToDialog()

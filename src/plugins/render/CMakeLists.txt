@@ -1,6 +1,7 @@
 # Example
 # add_subdirectory( test )
 
+add_subdirectory( license )
 # Display a control or a screen box
 add_subdirectory( compass )
 add_subdirectory( elevationprofilefloatitem )
@@ -30,6 +31,7 @@ add_subdirectory(foursquare)
 # Disabled for now until legal issues wrt to the API
 # and terms of service of opencaching are cleared up.
 #add_subdirectory( opencaching )
+add_subdirectory( opencachingcom )
 add_subdirectory( opendesktop )
 # add_subdirectory( panoramio )
 add_subdirectory( photo )
@@ -38,6 +40,7 @@ add_subdirectory( satellites )
 # add_subdirectory ( twitter )
 add_subdirectory( wikipedia )
 add_subdirectory( weather )
+add_subdirectory( webpopup )
 
 # FIXME: The inhibit-screensaver plugin stresses the term render plugin a bit far.
 # It should be moved to a new plugin type later.

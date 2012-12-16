@@ -53,6 +53,7 @@ const char* dgmlTag_InstallMap = "installmap";
 const char* dgmlTag_Item = "item";
 const char* dgmlTag_Layer = "layer";
 const char* dgmlTag_Legend = "legend";
+const char* dgmlTag_License = "license";
 const char* dgmlTag_Map = "map";
 const char* dgmlTag_Maximum = "maximum";
 const char* dgmlTag_Minimum = "minimum";

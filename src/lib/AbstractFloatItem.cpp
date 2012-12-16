@@ -215,8 +215,12 @@ QMenu* AbstractFloatItem::contextMenu()
         lockAction->setCheckable( true );
         lockAction->setChecked( positionLocked() );
         connect( lockAction, SIGNAL( triggered( bool ) ), this, SLOT( setPositionLocked( bool ) ) );
-        QAction *hideAction = d->m_contextMenu->addAction( tr( "&Hide" ) );
-        connect( hideAction, SIGNAL( triggered() ), this, SLOT( hide() ) );
+
+        if(!(flags() & ItemIsHideable)) {
+            QAction *hideAction = d->m_contextMenu->addAction( tr( "&Hide" ) );
+            connect( hideAction, SIGNAL( triggered() ), this, SLOT( hide() ) );
+        }
+
         DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( this );
         QDialog *dialog = configInterface ? configInterface->configDialog() : 0;
         if( dialog )

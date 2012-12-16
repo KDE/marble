@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin   <ingwa@kde.org>
 // Copyright 2007      Thomas Zander <zander@kde.org>
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
 // Self
@@ -40,6 +41,48 @@ using namespace Marble;
 namespace Marble
 {
 
+class CelestialSortFilterProxyModel : public QSortFilterProxyModel
+{
+public:
+    CelestialSortFilterProxyModel()
+    {
+        // here we will set m_priority for default order
+        const int prefix = 100;
+        m_priority["Mercury"] = prefix-1;
+        m_priority["Venus"] = prefix-2;
+        m_priority["Earth"] = prefix-3;
+        m_priority["Mars"] = prefix-4;
+        m_priority["Jupiter"] = prefix-5;
+        m_priority["Saturn"] = prefix-6;
+        m_priority["Uranus"] = prefix-7;
+        m_priority["Neptune"] = prefix-8;
+        m_priority["Pluto"] = prefix-9;
+    }
+    ~CelestialSortFilterProxyModel() {}
+
+protected:
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const {
+        QString first = sourceModel()->data(left).toString();
+        QString second = sourceModel()->data(right).toString();
+        // both are in the list
+        if (m_priority.contains(first) && m_priority.contains(second)) {
+            return m_priority[first] > m_priority[second];
+        }
+        // only left in the list
+        if (m_priority.contains(first) && !m_priority.contains(second)) {
+            return true;
+        }
+        // only right in the list
+        if (!m_priority.contains(first) && m_priority.contains(second)) {
+            return false;
+        }
+        return QSortFilterProxyModel::lessThan(left, right);
+    }
+
+private:
+    QMap<QString, int> m_priority;
+};
+
 class MapViewWidget::Private {
  public:
     Private( MapViewWidget *parent )
@@ -48,14 +91,17 @@ class MapViewWidget::Private {
           m_mapThemeModel( 0 ),
           m_mapSortProxy(),
           m_celestialList(),
+          m_celestialListProxy(),
           m_settings( "kde.org", "Marble Desktop Globe" )
     {
+        m_celestialListProxy.setSourceModel(&m_celestialList);
     }
 
     void updateMapFilter()
     {
         int currentIndex = m_mapViewUi.celestialBodyComboBox->currentIndex();
-        QStandardItem * selectedItem = m_celestialList.item( currentIndex, 1 );
+        int const row = m_celestialListProxy.mapToSource( m_celestialListProxy.index( currentIndex, 0 ) ).row();
+        QStandardItem * selectedItem = m_celestialList.item( row, 1 );
 
         if ( selectedItem ) {
             QString selectedId;
@@ -93,6 +139,7 @@ class MapViewWidget::Private {
     MapThemeSortFilterProxyModel m_mapSortProxy;
 
     QStandardItemModel m_celestialList;
+    CelestialSortFilterProxyModel m_celestialListProxy;
     QSettings m_settings;
 };
 
@@ -142,7 +189,7 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
              this,                                 SLOT( projectionSelected( int ) ) );
 
     d->m_mapViewUi.projectionComboBox->setEnabled( true );
-    d->m_mapViewUi.celestialBodyComboBox->setModel( &d->m_celestialList );
+    d->m_mapViewUi.celestialBodyComboBox->setModel( &d->m_celestialListProxy );
 
     connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( int ) ),
              this,                                 SLOT( setCelestialBody( int ) ) );
@@ -208,6 +255,7 @@ void MapViewWidget::Private::updateMapThemeView()
         if ( !mapThemeId.isEmpty() )
             q->setMapThemeId( mapThemeId );
     }
+    m_celestialListProxy.sort(0);
 }
 
 void MapViewWidget::setMapThemeId( const QString &theme )
@@ -254,8 +302,9 @@ void MapViewWidget::setMapThemeId( const QString &theme )
             QStandardItem * selectedItem = itemList.first();
 
             if ( selectedItem ) {
-                int selectedIndex = selectedItem->row();
-                d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( selectedIndex );
+                QModelIndex const selectedIndex = d->m_celestialList.index( selectedItem->row(), 0 );
+                int const proxyIndex = d->m_celestialListProxy.mapFromSource( selectedIndex ).row();
+                d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( proxyIndex );
                 d->m_mapSortProxy.setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
             }
 

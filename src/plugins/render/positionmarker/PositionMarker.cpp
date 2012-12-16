@@ -55,7 +55,7 @@ PositionMarker::PositionMarker( const MarbleModel *marbleModel )
       m_configDialog( 0 ),
       m_cursorPath( m_defaultCursorPath ),
       m_cursorSize( 1.0 ),
-      m_accuracyColor( oxygenBrickRed4 ),
+      m_accuracyColor( Oxygen::brickRed4 ),
       m_trailColor( 0, 0, 255 ),
       m_heading( 0.0 ),
       m_showTrail ( false )
@@ -303,7 +303,7 @@ QHash<QString,QVariant> PositionMarker::settings() const
 void PositionMarker::setSettings( const QHash<QString, QVariant> &settings )
 {
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    QColor defaultColor = oxygenBrickRed4;
+    QColor defaultColor = Oxygen::brickRed4;
     defaultColor.setAlpha( smallScreen ? 80 : 40 );
 
     m_useCustomCursor = settings.value( "useCustomCursor", false ).toBool();

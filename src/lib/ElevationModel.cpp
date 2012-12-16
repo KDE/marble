@@ -13,7 +13,7 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneTiled.h"
-#include "TextureTile.h"
+#include "Tile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
 #include "MarbleModel.h"
@@ -32,7 +32,7 @@ class ElevationModelPrivate
 public:
     ElevationModelPrivate( ElevationModel *_q, MarbleModel *const model )
         : q( _q ),
-          m_tileLoader( model->downloadManager() ),
+          m_tileLoader( model->downloadManager(), model->pluginManager() ),
           m_textureLayer( 0 )
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
@@ -54,6 +54,10 @@ public:
 
         m_textureLayer = dynamic_cast<GeoSceneTiled*>( sceneLayer->datasets().first() );
         Q_ASSERT( m_textureLayer );
+        QVector<const GeoSceneTiled*> textureLayers;
+        textureLayers << m_textureLayer;
+
+        m_tileLoader.setTextureLayers( textureLayers );
     }
 
     void tileCompleted( const TileId & tileId, const QImage &image )
@@ -118,7 +122,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
 
         const QImage *image = d->m_cache[id];
         if ( image == 0 ) {
-            image = new QImage( d->m_tileLoader.loadTile( d->m_textureLayer, id, DownloadBrowse ) );
+            image = new QImage( d->m_tileLoader.loadTileImage( id, DownloadBrowse ) );
             d->m_cache.insert( id, image );
         }
         Q_ASSERT( image );

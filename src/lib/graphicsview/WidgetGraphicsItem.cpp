@@ -102,7 +102,7 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
         QPoint shiftedPos;
         QList<QPointF>::iterator it = widgetPositions.begin();
         bool foundRightPosition = false;
-        while( it != widgetPositions.end() && !foundRightPosition ) {
+        for(; !foundRightPosition && it != widgetPositions.end(); ++it ) {
             widgetItemRect = QRectF( *it, size() );
 
             if ( widgetItemRect.contains( event->pos() ) ) {
@@ -115,12 +115,12 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
             QWidget *child = d->m_widget->childAt( shiftedPos );
             
             if ( child ) {
-                d->m_marbleWidget->setCursor( Qt::ArrowCursor );
                 shiftedPos -= child->pos(); // transform to children's coordinates
                 QMouseEvent shiftedEvent = QMouseEvent( e->type(), shiftedPos,
                         event->globalPos(), event->button(), event->buttons(),
                         event->modifiers() );
                 if ( QApplication::sendEvent( child, &shiftedEvent ) ) {
+                    d->m_marbleWidget->setCursor( d->m_widget->cursor() );
                     return true;
                 }
             }

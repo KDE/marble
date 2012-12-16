@@ -86,6 +86,11 @@ void StackedTileLoader::setTextureLayers( QVector<GeoSceneTiled const *> & textu
     d->detectMaxTileLevel();
 }
 
+int StackedTileLoader::textureLayersSize()
+{
+    return d->m_textureLayers.size();
+}
+
 int StackedTileLoader::tileColumnCount( int level ) const
 {
     Q_ASSERT( !d->m_textureLayers.isEmpty() );
@@ -186,9 +191,11 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
 
     stackedTile = d->m_layerDecorator->loadTile( stackedTileId, textureLayers );
-    stackedTile->setUsed( true );
+    if ( stackedTile ){
+        stackedTile->setUsed( true );
 
-    d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
+        d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
+    }
     d->m_cacheLock.unlock();
 
     emit tileLoaded( stackedTileId );
@@ -245,9 +252,8 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
-void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage )
+void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage, GeoDataDocument * tileData )
 {
-    Q_ASSERT( !tileImage.isNull() );
 
     d->detectMaxTileLevel();
 
@@ -257,7 +263,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
     if ( displayedTile ) {
         Q_ASSERT( !d->m_tileCache.contains( stackedTileId ) );
 
-        StackedTile *const stackedTile = d->m_layerDecorator->createTile( *displayedTile, tileId, tileImage );
+        StackedTile *const stackedTile = d->m_layerDecorator->createTile( *displayedTile, tileId, tileImage, tileData );
         d->m_tilesOnDisplay.insert( stackedTileId, stackedTile );
 
         delete displayedTile;

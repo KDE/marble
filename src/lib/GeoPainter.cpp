@@ -761,10 +761,12 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
         setPen( QPen( Qt::NoPen ) );
     }
 
+
     QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries(); 
     foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
         QVector<QPolygonF*> innerPolygons;
         d->createPolygonsFromLinearRing( itInnerBoundary, innerPolygons );
+
         if ( needOutlineWorkaround ) {
             foreach( QPolygonF* polygon, innerPolygons ) {
                 outline << *polygon;

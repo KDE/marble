@@ -309,9 +309,13 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
         mDebug() << "Does not contain any vector layers! ";
 */
     //Don't change the planet unless we have to...
-    if( d->m_mapTheme->head()->target().toLower() != d->m_planet->id() ) {
+    qreal const radiusAttributeValue = d->m_mapTheme->head()->radius();
+    if( d->m_mapTheme->head()->target().toLower() != d->m_planet->id() || radiusAttributeValue != d->m_planet->radius() ) {
         mDebug() << "Changing Planet";
         *(d->m_planet) = Planet( d->m_mapTheme->head()->target().toLower() );
+        if ( radiusAttributeValue > 0.0 ) {
+		    d->m_planet->setRadius( radiusAttributeValue );
+        }
         sunLocator()->setPlanet(d->m_planet);
     }
 
@@ -474,7 +478,7 @@ void MarbleModel::clearPersistentTileCache()
     d->m_storagePolicy.clearCache();
 
     // Now create base tiles again if needed
-    if ( d->m_mapTheme->map()->hasTextureLayers() ) {
+    if ( d->m_mapTheme->map()->hasTextureLayers() || d->m_mapTheme->map()->hasVectorLayers() ) {
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
 
@@ -559,7 +563,7 @@ void MarbleModel::addDownloadPolicies( const GeoSceneDocument *mapTheme )
 {
     if ( !mapTheme )
         return;
-    if ( !mapTheme->map()->hasTextureLayers() )
+    if ( !mapTheme->map()->hasTextureLayers() && !mapTheme->map()->hasVectorLayers() )
         return;
 
     // As long as we don't have an Layer Management Class we just lookup

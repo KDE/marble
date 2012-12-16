@@ -286,7 +286,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     painter->setPen( standardRoutePen );
 
     // Map matched position
-    //painter->setBrush( QBrush( oxygenBrickRed4) );
+    //painter->setBrush( QBrush( Oxygen::brickRed4) );
     //painter->drawEllipse( m_routingModel->route().positionOnRoute(), 8, 8 );
 
     painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
@@ -347,7 +347,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                         painter->drawPolyline( currentRoutePoints );
 
                         painter->setPen( standardRoutePen );
-                        painter->setBrush( QBrush( alphaAdjusted( oxygenHotOrange4, 200 ) ) );
+                        painter->setBrush( QBrush( alphaAdjusted( Oxygen::hotOrange4, 200 ) ) );
                     }
                 }
             }
@@ -362,7 +362,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             GeoDataCoordinates location = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().position();
             QString nextInstruction = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
             if( !nextInstruction.isEmpty() ) {
-                painter->setBrush( QBrush( oxygenBrownOrange4 ) );
+                painter->setBrush( QBrush( Oxygen::hotOrange4 ) );
                 painter->drawEllipse( location, 20, 20 );
             }
         }
@@ -384,7 +384,7 @@ void RoutingLayerPrivate::renderAnnotations( GeoPainter *painter )
                 bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
                 GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
                 painter->setPen( QColor( Qt::black ) );
-                painter->setBrush( QBrush( oxygenSunYellow6 ) );
+                painter->setBrush( QBrush( Oxygen::sunYellow6 ) );
                 painter->drawAnnotation( pos, index.data().toString(), QSize( smallScreen ? 240 : 120, 0 ), 10, 30, 5, 5 );
             }
         }

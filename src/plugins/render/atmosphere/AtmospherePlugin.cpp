@@ -10,13 +10,16 @@
 // Copyright 2008-2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 // Copyright 2008-2009 Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 // Copyright 2012      Kovalevskyy Illya <illya.kovalevskyy@gmail.com>
 //
 
 #include "AtmospherePlugin.h"
+#include "Planet.h"
 
 #include "GeoPainter.h"
 #include "ViewportParams.h"
+#include "MarbleModel.h"
 
 namespace Marble
 {
@@ -90,7 +93,8 @@ QList<PluginAuthor> AtmospherePlugin::pluginAuthors() const
             << PluginAuthor( "Inge Wallin", "ingwa@kde.org" )
             << PluginAuthor( "Jens-Michael Hoffmann", "jmho@c-xx.com" )
             << PluginAuthor( "Patrick Spendrin", "ps_ml@gmx.de" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" )
+            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
 }
 
 qreal AtmospherePlugin::zValue() const
@@ -116,7 +120,7 @@ bool AtmospherePlugin::render( GeoPainter *painter,
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
 
-    if ( !visible() )
+    if ( !visible()  || !marbleModel()->planet()->hasAtmosphere() )
         return true;
 
     // Only draw an atmosphere if projection is spherical
@@ -127,9 +131,10 @@ bool AtmospherePlugin::render( GeoPainter *painter,
     if ( viewParams->mapCoversViewport() )
         return true;
 
-    // Gradient should be recalculated only if planet size changed
-    if(viewParams->radius() != m_renderRadius) {
+    // Gradient should be recalculated only if planet color or size changed
+    if(viewParams->radius() != m_renderRadius || marbleModel()->planet()->atmosphereColor() != m_renderColor) {
         m_renderRadius = viewParams->radius();
+        m_renderColor = marbleModel()->planet()->atmosphereColor();
         repaintPixmap(viewParams);
     }
     int  imageHalfWidth  = viewParams->width() / 2;
@@ -142,20 +147,24 @@ bool AtmospherePlugin::render( GeoPainter *painter,
 
 void AtmospherePlugin::repaintPixmap(const ViewportParams *viewParams)
 {
-    const int radius = 1.05 * viewParams->radius();
-    const int diameter = 2.1 * viewParams->radius();
+    int  imageHalfWidth  = 1.05 * viewParams->radius();
+    int  imageHalfHeight = 1.05 * viewParams->radius();
 
+    int diameter = (int) ( 2.1 * (qreal) ( viewParams->radius()));
     m_renderPixmap = QPixmap(diameter, diameter);
     m_renderPixmap.fill(QColor(Qt::transparent));
 
     QPainter renderPainter(&m_renderPixmap);
 
-    // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient gradient( radius, radius, 1.05 * viewParams->radius() );
-    gradient.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-    gradient.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
+    QColor color = marbleModel()->planet()->atmosphereColor();
 
-    QBrush brush(gradient);
+    // Recalculate the atmosphere effect and paint it to canvasImage.
+    QRadialGradient grad( QPointF( imageHalfWidth, imageHalfHeight ),
+                           1.05 * viewParams->radius() );
+    grad.setColorAt( 0.91, color );
+    grad.setColorAt( 1.00, QColor(color.red(), color.green(), color.blue(), 0) );
+
+    QBrush brush(grad);
     renderPainter.setBrush(brush);
     renderPainter.setPen(Qt::NoPen);
     renderPainter.setRenderHint(QPainter::Antialiasing, false);

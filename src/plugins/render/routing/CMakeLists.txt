@@ -1,6 +1,9 @@
 PROJECT(RoutingPlugin)
 
 FIND_PACKAGE(Phonon)
+marble_set_package_properties( Phonon PROPERTIES DESCRIPTION "cross-platform multimedia framework that enables the use of audio and video content" )
+marble_set_package_properties( Phonon PROPERTIES URL "http://qt.digia.com/" )
+marble_set_package_properties( Phonon PROPERTIES TYPE OPTIONAL PURPOSE "Voice navigation (sound or human speakers)" )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}

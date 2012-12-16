@@ -1,3 +1,14 @@
+include(FeatureSummary)
+if( COMMAND set_package_properties )
+  macro( marble_set_package_properties )
+  set_package_properties( ${ARGN} )
+  endmacro()
+else()
+  macro( marble_set_package_properties )
+  # Just ignore it
+  endmacro()
+endif()
+
 # the place to put in common cmake macros
 # this is needed to minimize the amount of errors to do
 macro( marble_add_plugin _target_name )

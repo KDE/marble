@@ -46,14 +46,14 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
         return;
     }
     
-    if(style()->lineStyle().color() == Qt::transparent)
+    if(style()->lineStyle().paintedColor() == Qt::transparent)
         return;
 
     painter->save();
     QPen currentPen = painter->pen();
 
-    if ( currentPen.color() != style()->lineStyle().color() )
-        currentPen.setColor( style()->lineStyle().color() );
+    if ( currentPen.color() != style()->lineStyle().paintedColor() )
+        currentPen.setColor( style()->lineStyle().paintedColor() );
 
     if ( currentPen.widthF() != style()->lineStyle().width() ||
             style()->lineStyle().physicalWidth() != 0.0 )
@@ -85,7 +85,7 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
     if ( style()->lineStyle().background() )
     {
         QBrush brush = painter->background();
-        brush.setColor( style()->polyStyle().color() );
+        brush.setColor( style()->polyStyle().paintedColor() );
         painter->setBackground( brush );
 
         painter->setBackgroundMode( Qt::OpaqueMode );

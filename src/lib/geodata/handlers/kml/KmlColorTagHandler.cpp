@@ -26,6 +26,7 @@
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataColorStyle.h"
+#include "GeoDataOverlay.h"
 #include "GeoParser.h"
 
 namespace Marble
@@ -40,7 +41,7 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if ( parentItem.is<GeoDataColorStyle>() ) {
+    if ( parentItem.is<GeoDataColorStyle>() || parentItem.is<GeoDataOverlay>() ) {
         bool ok;
         QRgb abgr = parser.readElementText().trimmed().toUInt( &ok, 16 );
         unsigned a = abgr >> 24; abgr = abgr << 8; //"rgb0"
@@ -52,8 +53,12 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
         // color tag uses AABBGGRR whereas QColor uses AARRGGBB - use some shifts for that
         // be aware that QRgb needs to be a typedef for 32 bit UInt for this to work properly
         if( ok ) {
-            parentItem.nodeAs<GeoDataColorStyle>()->setColor( 
-            QColor::fromRgba( rgba ) );
+            QColor const color = QColor::fromRgba( rgba );
+            if ( parentItem.is<GeoDataColorStyle>() ) {
+                parentItem.nodeAs<GeoDataColorStyle>()->setColor( color );
+            } else if ( parentItem.is<GeoDataOverlay>() ) {
+                parentItem.nodeAs<GeoDataOverlay>()->setColor( color );
+            }
         }
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << kmlTag_color << "> containing: " << rgba

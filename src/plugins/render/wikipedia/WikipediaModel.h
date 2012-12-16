@@ -18,7 +18,7 @@
 namespace Marble
 {
 
-class MarbleModel;
+class MarbleWidget;
 
 const quint32 numberOfArticlesPerFetch = 7;
   
@@ -31,7 +31,9 @@ class WikipediaModel : public AbstractDataPluginModel
     ~WikipediaModel();
 
     void setShowThumbnail( bool show );
- 
+
+    void setMarbleWidget( MarbleWidget* widget );
+
  protected:
     /**
      * Generates the download url for the description file from the web service depending on
@@ -49,6 +51,7 @@ class WikipediaModel : public AbstractDataPluginModel
     void parseFile( const QByteArray& file );
     
  private:
+    MarbleWidget* m_marbleWidget;
     QIcon m_wikipediaIcon;
     QString m_languageCode;
 

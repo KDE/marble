@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
     // Write a header with a "magic number" and a version
     out << (quint32)0x73746172;
-    out << (qint32)001;
+    out << (qint32)002;
 
     out.setVersion(QDataStream::Qt_4_3);
 
@@ -38,6 +38,9 @@ int main(int argc, char *argv[])
         QString line;
         do {
             line = stream.readLine();
+
+            QString idString = line.mid(0,4);
+            int idValue = idString.toInt();
 
             QString recString = line.mid( 75, 6 );
 
@@ -61,7 +64,8 @@ int main(int argc, char *argv[])
 
 //            qDebug() << "Rec:" << recString << "Dec.:" << decString << "Mag.:" << magString;
             if ( !line.isNull() && magValue < 6.0 ) {
-                qDebug() << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue;
+                qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue;
+                out << idValue;
                 out << raValue;
                 out << deValue;
                 out << magValue;
@@ -82,19 +86,21 @@ int main(int argc, char *argv[])
     // Read the version
     qint32 version;
     in >> version;
-    if (version > 001) {
+    if (version > 002) {
         qDebug() << "stars.dat: file too new.";
      return -1;
     }
+    int id;
     double ra;
     double de;
     double mag;
 
     while ( !in.atEnd() ) {
+        in >> id;
         in >> ra;
         in >> de;
         in >> mag;
-        qDebug() << "RA:" << ra << "DE:" << de << "MAG:" << mag;
+        qDebug() << "ID:" << id << "RA:" << ra << "DE:" << de << "MAG:" << mag;
     }
 
     app.exit();

@@ -27,6 +27,7 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataGeometry.h"
+#include "GeoDataGroundOverlay.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTrack.h"
@@ -72,6 +73,9 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     }
     else if ( parentItem.is<GeoDataTrack>() ) {
         parentItem.nodeAs<GeoDataTrack>()->setAltitudeMode( mode );
+    }
+    else if ( parentItem.is<GeoDataGroundOverlay>() ) {
+        parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitudeMode( mode );
     }
 
 #ifdef DEBUG_TAGS

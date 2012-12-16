@@ -32,6 +32,7 @@
 #include "GeoSceneTiled.h"
 #include "TileId.h"
 #include "MarbleGlobal.h"
+#include "GeoDataDocument.h"
 
 class QImage;
 class QString;
@@ -72,6 +73,8 @@ class StackedTileLoader : public QObject
         virtual ~StackedTileLoader();
 
         void setTextureLayers( QVector<GeoSceneTiled const *> & );
+
+        int textureLayersSize();
 
         int tileColumnCount( int level ) const;
 
@@ -139,7 +142,7 @@ class StackedTileLoader : public QObject
 
         /**
          */
-        void updateTile( TileId const & tileId, QImage const &tileImage );
+        void updateTile(TileId const & tileId, QImage const &tileImage , GeoDataDocument *tileData);
 
     Q_SIGNALS:
         void tileLoaded( TileId const &tileId );

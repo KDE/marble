@@ -1,5 +1,6 @@
 // Copyright 2009 Henry de Valence <hdevalence@gmail.com>
 // Copyright 2009 David Roberts <dvdr18@gmail.com>
+// Copyright 2012 Mohammed Nafees <nafees.technocool@gmail.com>
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -14,6 +15,7 @@
 #include "marble_export.h"
 
 #include <QtCore/QStringList>
+#include <QtGui/QColor>
 
 namespace Marble
 {
@@ -96,6 +98,12 @@ public:
 
     static QString name( const QString& id );
     static QStringList planetList();
+
+    bool hasAtmosphere() const;
+    void setHasAtmosphere( bool enabled );
+
+    QColor atmosphereColor() const;
+    void setAtmosphereColor( const QColor& color );
 
 private:
     PlanetPrivate * const d;
