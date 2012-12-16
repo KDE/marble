@@ -44,6 +44,8 @@ private:
     QWebView *m_webView;
 
     QString m_content;
+
+    bool m_needMouseRelease;
 };
 
 }

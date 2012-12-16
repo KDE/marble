@@ -21,9 +21,10 @@ namespace Marble
 
 PopupItem::PopupItem( QObject* parent ) :
     QObject( parent ),
-    BillboardGraphicsItem()
+    BillboardGraphicsItem(),
+    m_webView( new QWebView ),
+    m_needMouseRelease(false)
 {
-    m_webView = new QWebView;
     m_webView->setMaximumSize( 600, 800 );
     setSize( QSizeF( 600, 800 ) );
     setVisible( false );
@@ -71,7 +72,13 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
         // Mouse events are forwarded to the underlying widget
         QMouseEvent *event = static_cast<QMouseEvent*> ( e );
         QPoint const shiftedPos = transform( event->pos() );
-        if ( !shiftedPos.isNull() ) {
+        bool const forcedMouseRelease = m_needMouseRelease && e->type() == QEvent::MouseButtonRelease;
+        if ( !shiftedPos.isNull() || forcedMouseRelease ) {
+            if ( !m_needMouseRelease && e->type() == QEvent::MouseButtonPress ) {
+                m_needMouseRelease = true;
+            } else if ( forcedMouseRelease ) {
+                m_needMouseRelease = false;
+            }
             widget->setCursor( Qt::ArrowCursor );
             // transform to children's coordinates
             QMouseEvent shiftedEvent = QMouseEvent( e->type(), shiftedPos,
