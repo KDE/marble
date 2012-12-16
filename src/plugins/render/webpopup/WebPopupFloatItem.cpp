@@ -23,6 +23,7 @@ WebPopupFloatItem::WebPopupFloatItem( const MarbleModel *marbleModel ) :
     RenderPlugin( marbleModel ),
     m_popupItem( 0 )
 {
+    setEnabled( false );
     setVisible( false );
 }
 
@@ -90,7 +91,7 @@ bool WebPopupFloatItem::isInitialized() const
 
 QStringList WebPopupFloatItem::renderPosition() const
 {
-    return QStringList( "HOVERS_ABOVE_SURFACE" );
+    return QStringList( "ALWAYS_ON_TOP" );
 }
 
 QString WebPopupFloatItem::renderPolicy() const
@@ -101,7 +102,7 @@ QString WebPopupFloatItem::renderPolicy() const
 bool WebPopupFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
                                 const QString&, GeoSceneLayer* )
 {
-    if ( m_popupItem && visible() ) {
+    if ( m_popupItem && visible() && m_popupItem->visible() ) {
         m_popupItem->paintEvent( painter, viewport );
     }
     return true;
@@ -112,19 +113,46 @@ bool WebPopupFloatItem::eventFilter( QObject *object, QEvent *e )
     return m_popupItem && visible() && m_popupItem->eventFilter( object, e );
 }
 
-void WebPopupFloatItem::setCoordinates( const GeoDataCoordinates &coordinates )
+qreal WebPopupFloatItem::zValue() const
 {
-    m_coordinates = coordinates;
+    return 4711.23;
+}
+
+void WebPopupFloatItem::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)
+{
+    /** @todo respect alignment */
+    Q_UNUSED( alignment );
+
+    if ( m_popupItem ) {
+        m_popupItem->setCoordinate( coordinates );
+    }
 }
 
 void WebPopupFloatItem::setUrl( const QUrl &url )
 {
-    m_url = url;
+    if ( m_popupItem ) {
+        m_popupItem->setUrl( url );
+    }
 }
 
 void WebPopupFloatItem::setContent( const QString &html )
 {
-    m_content = html;
+    if ( m_popupItem ) {
+        m_popupItem->setContent( html );
+    }
+}
+
+void WebPopupFloatItem::setSize( const QSizeF &size )
+{
+    if ( m_popupItem ) {
+        m_popupItem->setSize( size );
+    }
+}
+
+void WebPopupFloatItem::setPosition( const QPointF &position )
+{
+    /** @todo Implement */
+    Q_UNUSED( position );
 }
 
 }

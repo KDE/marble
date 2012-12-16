@@ -29,7 +29,6 @@ public:
     explicit PopupItem( QObject* parent = 0 );
     ~PopupItem();
 
-    void setCoordinates( const GeoDataCoordinates &coordinates );
     void setUrl( const QUrl &url );
     void setContent( const QString &html );
     QPoint transform( const QPoint &point ) const;
@@ -44,8 +43,6 @@ Q_SIGNALS:
 private:
     QWebView *m_webView;
 
-    GeoDataCoordinates m_coordinates;
-    QUrl m_url;
     QString m_content;
 };
 

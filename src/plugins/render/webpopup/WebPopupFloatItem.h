@@ -14,6 +14,7 @@
 #include "RenderPlugin.h"
 #include "ViewportParams.h"
 #include "GeoPainter.h"
+#include "AbstractInfoDialog.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
@@ -23,7 +24,7 @@ namespace Marble
 
 class PopupItem;
 
-class WebPopupFloatItem : public RenderPlugin
+class WebPopupFloatItem : public RenderPlugin, public AbstractInfoDialog
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
@@ -48,16 +49,16 @@ public:
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &, GeoSceneLayer * );
     virtual bool eventFilter( QObject *, QEvent * );
+    qreal zValue() const;
 
-    void setCoordinates( const GeoDataCoordinates &coordinates );
+    void setCoordinates( const GeoDataCoordinates &coordinates, Qt::Alignment alignment );
     void setUrl( const QUrl &url );
     void setContent( const QString &html );
+    void setSize( const QSizeF &size );
+    void setPosition( const QPointF &position );
 
 private:
     PopupItem *m_popupItem;
-    GeoDataCoordinates m_coordinates;
-    QUrl m_url;
-    QString m_content;
 };
 
 }

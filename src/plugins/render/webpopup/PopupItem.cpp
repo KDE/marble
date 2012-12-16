@@ -24,8 +24,9 @@ PopupItem::PopupItem( QObject* parent ) :
     BillboardGraphicsItem()
 {
     m_webView = new QWebView;
-    m_webView->setMaximumSize( 300, 300 );
-    setSize( QSizeF( 300, 300 ) );
+    m_webView->setMaximumSize( 600, 800 );
+    setSize( QSizeF( 600, 800 ) );
+    setVisible( false );
 }
 
 PopupItem::~PopupItem()
@@ -33,27 +34,24 @@ PopupItem::~PopupItem()
     delete m_webView;
 }
 
-void PopupItem::setCoordinates( const GeoDataCoordinates &coordinates )
-{
-    m_coordinates = coordinates;
-}
-
 void PopupItem::setUrl( const QUrl &url )
 {
-    m_url = url;
-    if ( m_webView )
-    {
+    if ( m_webView ) {
         m_webView->setUrl( url );
+        setVisible( true );
+        emit dirty();
     }
 }
 
 void PopupItem::setContent( const QString &html )
 {
+    /** @todo Pass to web view */
     m_content = html;
 }
 
 void PopupItem::paint( QPainter *painter )
 {
+    m_webView->setMaximumSize( size().toSize() );
     m_webView->render( painter, QPoint( 0, 0 ), QRegion(),
                        QWidget::RenderFlag( QWidget::DrawChildren ) );
 }
