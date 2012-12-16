@@ -27,8 +27,8 @@ INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 
-set(GENERIC_LIB_VERSION "0.15.0")
-set(GENERIC_LIB_SOVERSION "15")
+set(GENERIC_LIB_VERSION "0.15.20")
+set(GENERIC_LIB_SOVERSION "16")
 
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
