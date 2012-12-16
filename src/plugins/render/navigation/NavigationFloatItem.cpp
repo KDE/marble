@@ -38,7 +38,7 @@ NavigationFloatItem::NavigationFloatItem()
 }
 
 NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
-    : AbstractFloatItem( marbleModel, QPointF( -10, -10 ) ),
+    : AbstractFloatItem( marbleModel, QPointF( -10, -30 ) ),
       m_marbleWidget( 0 ),
       m_widgetItem( 0 ),
       m_navigationWidgetSmall( 0 ),
