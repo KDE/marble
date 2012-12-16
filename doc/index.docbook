@@ -206,9 +206,9 @@
          <title>Searching places using &marble;</title>
          <para>
             &marble; comes with a small database of more than 12,000 cities ( from
-            http://www.worldgazetteer.com ) and a few mountains and volcanoes.
+            <ulink url="http://www.worldgazetteer.com"/> ) and a few mountains and volcanoes.
             You can find a location by entering its name into the search line on the
-            top of the toolbox (&marble; always uses the native name in latin letters). As you start
+            top of the toolbox (&marble; always uses the native name in Latin letters). As you start
             typing, suggestions below the search line will appear like this:
          </para>
          <screenshot>
@@ -219,18 +219,18 @@
              </mediaobject>
          </screenshot>
          <para>
-             As you hit return, &marble; runners will also query both online and offline searches
+             As you hit <keycap>Return</keycap>, &marble; runners will also query both online and offline searches
              to return you even more useful data.
         </para>
         <para>The following online search runners are available:</para>
         <itemizedlist>
           <listitem>
             <para>Nominatim: An online search and reverse geocoding service, using data from
-            http://www.openstreetmap.org</para>
+            <ulink url="http://www.openstreetmap.org"/></para>
           </listitem>
           <listitem>
-            <para>HostIP: A reverse geocoding based on IP adress, using data from
-            http://www.hostip.info</para>
+            <para>HostIP: A reverse geocoding based on IP address, using data from
+            <ulink url="http://www.hostip.info"/></para>
           </listitem>
         </itemizedlist>
 
