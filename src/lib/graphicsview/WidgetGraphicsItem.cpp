@@ -102,7 +102,7 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
         QPoint shiftedPos;
         QList<QPointF>::iterator it = widgetPositions.begin();
         bool foundRightPosition = false;
-        while( it != widgetPositions.end() && !foundRightPosition ) {
+        for(; !foundRightPosition && it != widgetPositions.end(); ++it ) {
             widgetItemRect = QRectF( *it, size() );
 
             if ( widgetItemRect.contains( event->pos() ) ) {
