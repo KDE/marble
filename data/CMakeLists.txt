@@ -33,6 +33,7 @@ svg/application-x-marble.png
 svg/application-x-marble-gray.png
 svg/worldmap.svg
 svg/lunarmap.svg
+svg/marsmap.svg
 svg/coordinate.svg
 svg/wikipedia.svg
 svg/wikipedia_shadow.svg
