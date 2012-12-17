@@ -133,11 +133,6 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
     if ( tileImage.isNull() )
         return; // keep tiles in cache to improve performance
 
-    const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
-    for ( int i = 0; i < 4; ++i ) {
-        const TileId id = TileId( i, stackedTileId.zoomLevel(), stackedTileId.x(), stackedTileId.y() );
-    }
-
     // updateTile needs to know if its an image or another type of file,
     // so we indicate its format
     m_tileLoader.updateTile( tileId, tileImage, 0 );
