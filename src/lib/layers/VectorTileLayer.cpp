@@ -159,7 +159,6 @@ void VectorTileLayer::Private::updateTextureLayers()
     }
 
     m_tileLoader.setTextureLayers( result );
-    m_loader.setTextureLayers( result );
 }
 
 VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,

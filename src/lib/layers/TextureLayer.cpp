@@ -125,7 +125,6 @@ void TextureLayer::Private::updateTextureLayers()
         m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
         m_tileLoader.setTextureLayers( result );
-        m_loader.setTextureLayers( result );
     }
 }
 

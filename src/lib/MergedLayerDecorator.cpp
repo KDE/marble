@@ -197,7 +197,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 
         // ImageTile
         if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ){
-            const QImage tileImage = d->m_tileLoader->loadTileImage( tileId, DownloadBrowse );
+            const QImage tileImage = d->m_tileLoader->loadTileImage( textureLayer, tileId, DownloadBrowse );
 
             QSharedPointer<Tile> tile(new TextureTile( tileId, tileImage, blending ) );
             tiles.append( tile );
@@ -206,7 +206,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         // VectorTile
         if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneVectorTileType ){
 
-            GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( tileId, DownloadBrowse, textureLayer->fileFormat() );
+            GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( textureLayer, tileId, DownloadBrowse, textureLayer->fileFormat() );
 
             QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata ) );
 
@@ -245,7 +245,7 @@ void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<
 {
     foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
         if ( TileLoader::tileStatus( textureLayer, id ) != TileLoader::Available ) {
-            d->m_tileLoader->downloadTile( id, usage );
+            d->m_tileLoader->downloadTile( textureLayer, id, usage );
         }
     }
 }

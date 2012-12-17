@@ -1,4 +1,8 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
 // Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -48,11 +52,9 @@ class TileLoader: public QObject
 
     explicit TileLoader(HttpDownloadManager * const, const PluginManager * );
 
-    void setTextureLayers( const QVector<GeoSceneTiled const *> &textureLayers );
-
-    QImage loadTileImage( TileId const & tileId, DownloadUsage const );
-    GeoDataDocument* loadTileVectorData( TileId const & tileId, DownloadUsage const usage, QString const &format );
-    void downloadTile( TileId const &, DownloadUsage const );
+    QImage loadTileImage( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const );
+    GeoDataDocument* loadTileVectorData( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const usage, QString const &format );
+    void downloadTile( GeoSceneTiled const *textureLayer, TileId const &, DownloadUsage const );
 
     static int maximumTileLevel( GeoSceneTiled const & texture );
 
@@ -82,13 +84,9 @@ class TileLoader: public QObject
     void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
 
  private:
-    GeoSceneTiled const * findTextureLayer( TileId const & ) const;
     static QString tileFileName( GeoSceneTiled const * textureLayer, TileId const & );
-    void triggerDownload( TileId const &, DownloadUsage const );
-    QImage scaledLowerLevelTile( TileId const & ) const;
-
-    // TODO: comment about uint hash key
-    QHash<uint, GeoSceneTiled const *> m_textureLayers;
+    void triggerDownload( GeoSceneTiled const *textureLayer, TileId const &, DownloadUsage const );
+    QImage scaledLowerLevelTile( GeoSceneTiled const * textureLayer, TileId const & ) const;
 
     // For vectorTile parsing
     const PluginManager * m_pluginManager;
