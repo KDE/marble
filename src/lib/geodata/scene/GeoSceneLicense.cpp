@@ -21,12 +21,12 @@ GeoSceneLicense::GeoSceneLicense() :
 
 QString GeoSceneLicense::license() const
 {
-    return m_fullLicense;
+    return m_fullLicense.isEmpty() ? m_shortLicense : m_fullLicense;
 }
 
 QString GeoSceneLicense::shortLicense() const
 {
-    return m_shortLicense;
+    return m_shortLicense.isEmpty() ? m_fullLicense : m_shortLicense;
 }
 
 GeoSceneLicense::Attribution GeoSceneLicense::attribution() const
