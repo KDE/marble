@@ -173,19 +173,36 @@ public:
 
     QDialog *configDialog();
 
+    QHash<QString,QVariant> settings() const;
+
+    void setSettings( const QHash<QString,QVariant> &settings );
+
 protected:
     bool eventFilter( QObject *object, QEvent *e );
 
 private Q_SLOTS:
     void requestRepaint();
     void toggleSun();
-    void toggleConstellations();
+    void toggleDsos();
+    void toggleConstellationLines();
+    void toggleConstellationLabels();
 
 public Q_SLOTS:
     void readSettings();
     void writeSettings();
+    void constellationGetColor();
 
 private:
+    template<class T>
+    T readSetting( const QHash<QString, QVariant> &settings, const QString &key, const T &defaultValue )
+    {
+        if ( !settings.contains( key ) ) {
+            return defaultValue;
+        }
+
+        return qVariantValue<T>( settings[key] );
+    }
+
     // sidereal time in hours:
     qreal siderealTime( const QDateTime& );
     void loadStars();
@@ -194,7 +211,9 @@ private:
     QDialog *m_configDialog;
     Ui::StarsConfigWidget *ui_configWidget;
     bool m_renderStars;
-    bool m_renderConstellations;
+    bool m_renderConstellationLines;
+    bool m_renderConstellationLabels;
+    bool m_renderDsos;
     bool m_renderSun;
     bool m_starsLoaded;
     bool m_constellationsLoaded;
@@ -205,6 +224,8 @@ private:
     QVector<DsoPoint> m_dsos;
     QHash<int,int> m_idHash;
     QImage m_dsoImage;
+    int m_magnitudeLimit;
+    QBrush m_constellationBrush;
 };
 
 }

@@ -17,6 +17,7 @@
 #include <QtGui/QRegion>
 #include <QtGui/QContextMenuEvent>
 #include <QtGui/QMenu>
+#include <QtGui/QColorDialog>
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
@@ -36,11 +37,15 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_configDialog( 0 ),
       ui_configWidget( 0 ),
       m_renderStars( false ),
-      m_renderConstellations( true ),
+      m_renderConstellationLines( true ),
+      m_renderConstellationLabels( true ),
+      m_renderDsos( true ),
       m_renderSun( true ),
       m_starsLoaded( false ),
       m_constellationsLoaded( false ),
-      m_dsosLoaded( false )
+      m_dsosLoaded( false ),
+      m_magnitudeLimit( 100 ),
+      m_constellationBrush( Marble::Oxygen::aluminumGray4 )
 {
 }
 
@@ -123,11 +128,42 @@ QDialog *StarsPlugin::configDialog()
 
         connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ), SLOT( writeSettings() ) );
         connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ), SLOT( readSettings() ) );
+        
+        connect( ui_configWidget->constellationColorButton, SIGNAL( clicked() ), this,
+                SLOT( constellationGetColor() ) );
+
+
+
 // FIXME: Could Not Make Apply Button Work.
 //        QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
 //        connect( applyButton, SIGNAL( clicked() ), this, SLOT( writeSettings() ) );
     }
     return m_configDialog;
+}
+
+QHash<QString, QVariant> StarsPlugin::settings() const
+{
+    QHash<QString, QVariant> settings;
+    settings["renderStars"] = m_renderStars;
+    settings["renderConstellationLines"] = m_renderConstellationLines;
+    settings["renderConstellationLabels"] = m_renderConstellationLabels;
+    settings["renderDsos"] = m_renderDsos;
+    settings["renderSun"] = m_renderSun;
+    settings["magnitudeLimit"] = m_magnitudeLimit;
+    settings["constellationBrush"] = m_constellationBrush.color().rgb();
+    return settings;
+}
+
+void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
+{
+    m_renderStars = readSetting<bool>( settings, "renderStars", true );
+    m_renderConstellationLines = readSetting<bool>( settings, "renderConstellationLines", true );
+    m_renderConstellationLabels = readSetting<bool>( settings, "renderConstellationLabels", true );
+    m_renderDsos = readSetting<bool>( settings, "renderDsos", true );
+    m_renderSun = readSetting<bool>( settings, "renderSun", true );
+    m_magnitudeLimit = readSetting<int>( settings, "magnitudeLimit", true );
+    QColor const defaultColor = Marble::Oxygen::aluminumGray4;
+    m_constellationBrush = QColor( readSetting<QRgb>( settings, "constellationBrush", defaultColor.rgb() ) );
 }
 
 void StarsPlugin::readSettings()
@@ -136,18 +172,55 @@ void StarsPlugin::readSettings()
         return;
     }
 
-    Qt::CheckState const constellationState = m_renderConstellations ? Qt::Checked : Qt::Unchecked;
-    ui_configWidget->m_viewConstellationsCheckBox->setCheckState( constellationState );
+    Qt::CheckState const constellationLineState = m_renderConstellationLines ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_viewConstellationLinesCheckbox->setCheckState( constellationLineState );
+
+    Qt::CheckState const constellationLabelState = m_renderConstellationLabels ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_viewConstellationLabelsCheckbox->setCheckState( constellationLabelState );
+
+    Qt::CheckState const dsoState = m_renderDsos ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_viewDsosCheckbox->setCheckState( dsoState );
+
 
     Qt::CheckState const sunState = m_renderSun ? Qt::Checked : Qt::Unchecked;
-    ui_configWidget->m_viewSunCheckBox->setCheckState( sunState );
+    ui_configWidget->m_viewSunCheckbox->setCheckState( sunState );
+    
+    int magState = m_magnitudeLimit;
+    if ( magState < ui_configWidget->m_magnitudeSlider->minimum() ) { 
+        magState = ui_configWidget->m_magnitudeSlider->minimum();
+    }
+    else if ( magState > ui_configWidget->m_magnitudeSlider->maximum() ) {
+        magState = ui_configWidget->m_magnitudeSlider->maximum();    
+    }
+    
+    ui_configWidget->m_magnitudeSlider->setValue(magState);
+    
+    QPalette constellationPalette;
+    constellationPalette.setColor( QPalette::Button, m_constellationBrush.color() );
+    ui_configWidget->constellationColorButton->setPalette( constellationPalette );
+    
 }
 
 void StarsPlugin::writeSettings()
 {
-    m_renderConstellations = ui_configWidget->m_viewConstellationsCheckBox->checkState() == Qt::Checked;
-    m_renderSun = ui_configWidget->m_viewSunCheckBox->checkState() == Qt::Checked;
+    m_renderConstellationLines = ui_configWidget->m_viewConstellationLinesCheckbox->checkState() == Qt::Checked;
+    m_renderConstellationLabels = ui_configWidget->m_viewConstellationLabelsCheckbox->checkState() == Qt::Checked;
+    m_renderDsos = ui_configWidget->m_viewDsosCheckbox->checkState() == Qt::Checked;
+    m_renderSun = ui_configWidget->m_viewSunCheckbox->checkState() == Qt::Checked;
+    m_magnitudeLimit = ui_configWidget->m_magnitudeSlider->value();
+    m_constellationBrush = QBrush( ui_configWidget->constellationColorButton->palette().color( QPalette::Button) );
     emit settingsChanged( nameId() );
+}
+
+void StarsPlugin::constellationGetColor()
+{
+    const QColor c = QColorDialog::getColor( m_constellationBrush.color(), 0, tr("Please choose the color for the constellation lines.") );
+
+    if ( c.isValid() ) {
+        QPalette palette = ui_configWidget->constellationColorButton->palette();
+        palette.setColor( QPalette::Button, c );
+        ui_configWidget->constellationColorButton->setPalette( palette );
+    }
 }
 
 void StarsPlugin::loadStars()
@@ -322,8 +395,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     painter->autoMapQuality();
 
     QPen starPen( Qt::NoPen );
-    QPen constellationPenSolid( Marble::Oxygen::aluminumGray4, 1, Qt::SolidLine );
-    QPen constellationPenDash( Marble::Oxygen::aluminumGray4, 1, Qt::DashLine );
+    QPen constellationPenSolid( m_constellationBrush, 1, Qt::SolidLine );
+    QPen constellationPenDash(  m_constellationBrush, 1, Qt::DashLine );
     QBrush starBrush( Qt::white );
 
     painter->setPen( starPen );
@@ -352,7 +425,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             m_starsLoaded = true;
         }
 
-        if ( !m_constellationsLoaded && m_renderConstellations ) {
+        if ( !m_constellationsLoaded ) {
             loadConstellations();
             m_constellationsLoaded = true;
         }
@@ -368,46 +441,47 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         const qreal  skyRadius      = 0.6 * sqrt( ( qreal )viewport->width() * viewport->width() + viewport->height() * viewport->height() );
         const qreal  earthRadius    = viewport->radius();
 
-        // Render Deep Space Objects
-        for ( int d = 0; d < m_dsos.size(); ++d ) {
-            qpos = m_dsos.at( d ).quaternion();
+        if ( m_renderDsos ) {
+            // Render Deep Space Objects
+            for ( int d = 0; d < m_dsos.size(); ++d ) {
+                qpos = m_dsos.at( d ).quaternion();
 
-            qpos.rotateAroundAxis( skyAxisMatrix );
+                qpos.rotateAroundAxis( skyAxisMatrix );
 
-            if ( qpos.v[Q_Z] > 0 ) {
-                continue;
+                if ( qpos.v[Q_Z] > 0 ) {
+                    continue;
+                }
+
+                qreal earthCenteredX = qpos.v[Q_X] * skyRadius;
+                qreal earthCenteredY = qpos.v[Q_Y] * skyRadius;
+
+                // Don't draw high placemarks (e.g. satellites) that aren't visible.
+                if ( qpos.v[Q_Z] < 0
+                        && ( ( earthCenteredX * earthCenteredX
+                               + earthCenteredY * earthCenteredY )
+                             < earthRadius * earthRadius ) ) {
+                    continue;
+                }
+
+                // Let (x, y) be the position on the screen of the placemark..
+                x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
+                y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
+
+                // Skip placemarks that are outside the screen area
+                if ( x < 0 || x >= viewport->width() ||
+                     y < 0 || y >= viewport->height() ) {
+                    continue;
+                }
+
+                // Hard Code DSO Size for now
+                qreal size = 20;
+
+                // Center Image on x,y location
+                painter->drawImage( QRectF( x-size/2, y-size/2, size, size ),m_dsoImage );
             }
-
-            qreal earthCenteredX = qpos.v[Q_X] * skyRadius;
-            qreal earthCenteredY = qpos.v[Q_Y] * skyRadius;
-
-            // Don't draw high placemarks (e.g. satellites) that aren't visible.
-            if ( qpos.v[Q_Z] < 0
-                    && ( ( earthCenteredX * earthCenteredX
-                           + earthCenteredY * earthCenteredY )
-                         < earthRadius * earthRadius ) ) {
-                continue;
-            }
-
-            // Let (x, y) be the position on the screen of the placemark..
-            x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
-            y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
-
-            // Skip placemarks that are outside the screen area
-            if ( x < 0 || x >= viewport->width() ||
-                 y < 0 || y >= viewport->height() ) {
-                continue;
-            }
-
-            // Hard Code DSO Size for now
-            qreal size = 20;
-
-            // Center Image on x,y location
-            painter->drawImage( QRectF( x-size/2, y-size/2, size, size ),m_dsoImage );
         }
 
-
-        if ( m_renderConstellations )
+        if ( m_renderConstellationLines ||  m_renderConstellationLabels )
         {
             painter->setPen( constellationPenSolid );
             // Render Constellations
@@ -457,27 +531,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                         continue;
                     }
 
-// Commented to avoid clipping lines
-/*
-                    qreal  earthCenteredX1 = q1.v[Q_X] * skyRadius;
-                    qreal  earthCenteredY1 = q1.v[Q_Y] * skyRadius;
-                    qreal  earthCenteredX2 = q2.v[Q_X] * skyRadius;
-                    qreal  earthCenteredY2 = q2.v[Q_Y] * skyRadius;
-
-                    // Don't draw high placemarks (e.g. satellites) that aren't visible.
-                    if ( q1.v[Q_Z] < 0
-                            && ( ( earthCenteredX1 * earthCenteredX1
-                                   + earthCenteredY1 * earthCenteredY1 )
-                                 < earthRadius * earthRadius ) ) {
-                        continue;
-                    }
-                    if ( q2.v[Q_Z] < 0
-                            && ( ( earthCenteredX2 * earthCenteredX2
-                                   + earthCenteredY2 * earthCenteredY2 )
-                                 < earthRadius * earthRadius ) ) {
-                        continue;
-                    }
-*/
 
                     // Let (x, y) be the position on the screen of the placemark..
                     int x1 = ( int )( viewport->width()  / 2 + skyRadius * q1.v[Q_X] );
@@ -485,21 +538,14 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                     int x2 = ( int )( viewport->width()  / 2 + skyRadius * q2.v[Q_X] );
                     int y2 = ( int )( viewport->height() / 2 - skyRadius * q2.v[Q_Y] );
 
-// Commented to avoid clipping lines
-/*
-                    // Skip placemarks that are outside the screen area
-                    if ( x1 < 0 || x1 >= viewport->width()
-                            || y1 < 0 || y1 >= viewport->height() )
-                        continue;
-                    if ( x2 < 0 || x2 >= viewport->width()
-                            || y2 < 0 || y2 >= viewport->height() )
-                        continue;
-*/
+
                     xMean = xMean + x1 + x2;
                     yMean = yMean + y1 + y2;
                     endptCount = endptCount + 2;
 
-                    painter->drawLine( x1, y1, x2, y2 );
+                    if ( m_renderConstellationLines ) {
+                        painter->drawLine( x1, y1, x2, y2 );
+                    }
 
                 }
 
@@ -513,8 +559,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                         || yMean < 0 || yMean >= viewport->height() )
                     continue;
 
-                painter->drawText( xMean, yMean, m_constellations.at( c ).name() );
-
+                if ( m_renderConstellationLabels ) {
+                    painter->drawText( xMean, yMean, m_constellations.at( c ).name() );
+                }
 
             }
         }
@@ -562,7 +609,10 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             else if ( ( *i ).magnitude() < 4 ) size = 2.0;
             else if ( ( *i ).magnitude() < 5 ) size = 1.0;
             else size = 0.5;
-            painter->drawEllipse( QRectF( x-size/2.0, y-size/2.0, size, size ) );
+            
+            if ( ( *i ).magnitude() < m_magnitudeLimit ) {
+                painter->drawEllipse( QRectF( x-size/2.0, y-size/2.0, size, size ) );
+            }
         }
 
         
@@ -627,13 +677,40 @@ void StarsPlugin::requestRepaint()
 void StarsPlugin::toggleSun()
 {
     m_renderSun = !m_renderSun;
+    if ( m_configDialog ) {
+        ui_configWidget->m_viewSunCheckbox->setChecked( m_renderSun );
+    }
     emit settingsChanged( nameId() );
     requestRepaint();
 }
 
-void StarsPlugin::toggleConstellations()
+void StarsPlugin::toggleDsos()
 {
-    m_renderConstellations = !m_renderConstellations;
+    m_renderDsos = !m_renderDsos;
+    if ( m_configDialog ) {
+        ui_configWidget->m_viewDsosCheckbox->setChecked( m_renderDsos );
+    }
+    emit settingsChanged( nameId() );
+    requestRepaint();
+}
+
+
+void StarsPlugin::toggleConstellationLines()
+{
+    m_renderConstellationLines = !m_renderConstellationLines;
+    if ( m_configDialog ) {
+        ui_configWidget->m_viewConstellationLinesCheckbox->setChecked( m_renderConstellationLines );
+    }
+    emit settingsChanged( nameId() );
+    requestRepaint();
+}
+
+void StarsPlugin::toggleConstellationLabels()
+{
+    m_renderConstellationLabels = !m_renderConstellationLabels;
+    if ( m_configDialog ) {
+        ui_configWidget->m_viewConstellationLabelsCheckbox->setChecked( m_renderConstellationLabels );
+    }
     emit settingsChanged( nameId() );
     requestRepaint();
 }
@@ -666,12 +743,28 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
             }
 
             QMenu menu;
-            QAction *constellationsAction = menu.addAction( tr("Show &Constellations"), this, SLOT( toggleConstellations() ) );
-            constellationsAction->setCheckable( true );
-            constellationsAction->setChecked( m_renderConstellations );
+            QAction *constellationLinesAction = menu.addAction( tr("Show &Constellation Lines"), this, SLOT( toggleConstellationLines() ) );
+            constellationLinesAction->setCheckable( true );
+            constellationLinesAction->setChecked( m_renderConstellationLines );
+
+            QAction *constellationLabelsAction = menu.addAction( tr("Show Constellation &Labels"), this, SLOT( toggleConstellationLabels() ) );
+            constellationLabelsAction->setCheckable( true );
+            constellationLabelsAction->setChecked( m_renderConstellationLabels );
+
+            QAction *dsoAction = menu.addAction( tr("Show &Deep Sky Objects"), this, SLOT( toggleDsos() ) );
+            dsoAction->setCheckable( true );
+            dsoAction->setChecked( m_renderDsos );
+
             QAction *sunAction = menu.addAction( tr("Show &Sun"), this, SLOT( toggleSun() ) );
             sunAction->setCheckable( true );
             sunAction->setChecked( m_renderSun );
+
+            QDialog *dialog = configDialog();
+            Q_ASSERT( dialog );
+            menu.addSeparator();
+            QAction *configAction = menu.addAction( tr( "&Configure..." ) );
+            connect( configAction, SIGNAL( triggered() ), dialog, SLOT( exec() ) );
+
             menu.exec(widget->mapToGlobal(menuEvent->pos()));
             return true;
         }

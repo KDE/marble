@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>328</width>
-    <height>267</height>
+    <width>344</width>
+    <height>282</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,9 +15,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QCheckBox" name="m_viewConstellationsCheckBox">
+    <widget class="QCheckBox" name="m_viewConstellationLinesCheckbox">
      <property name="text">
-      <string>Show Constellations</string>
+      <string>Show Constellation Lines</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -25,12 +25,75 @@
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="m_viewSunCheckBox">
+    <widget class="QCheckBox" name="m_viewConstellationLabelsCheckbox">
+     <property name="text">
+      <string>Show Constellation Labels</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_viewDsosCheckbox">
+     <property name="text">
+      <string>Show Deep Sky Objects</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_viewSunCheckbox">
      <property name="text">
       <string>Show Sun</string>
      </property>
      <property name="checked">
       <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="magLimitLabel">
+     <property name="text">
+      <string>Magnitude Limit:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSlider" name="m_magnitudeSlider">
+     <property name="inputMethodHints">
+      <set>Qt::ImhNone</set>
+     </property>
+     <property name="maximum">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>10</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksBelow</enum>
+     </property>
+     <property name="tickInterval">
+      <number>1</number>
+     </property>
+    </widget>
+   </item>
+   <item alignment="Qt::AlignRight">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>10</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="constellationColorButton">
+     <property name="text">
+      <string>Constellation Color</string>
      </property>
     </widget>
    </item>
