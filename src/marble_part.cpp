@@ -1419,6 +1419,10 @@ void MarblePart::editSettings()
                                SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( okClicked() ),
                                SLOT( applyPluginState() ) );
+    connect( m_configDialog,   SIGNAL( applyClicked() ),
+             m_pluginModel,    SLOT( applyPluginState() ) );
+    connect( m_configDialog,   SIGNAL( okClicked() ),
+             m_pluginModel,    SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( cancelClicked() ),
              m_pluginModel,    SLOT( retrievePluginState() ) );
 
@@ -1432,8 +1436,6 @@ void MarblePart::enableApplyButton()
 
 void MarblePart::applyPluginState()
 {
-    m_pluginModel->applyPluginState();
-
     QList<RoutingProfile>  profiles = m_controlView->marbleWidget()
                         ->model()->routingManager()->profilesModel()->profiles();
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
