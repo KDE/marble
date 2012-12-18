@@ -161,7 +161,7 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderConstellationLabels = readSetting<bool>( settings, "renderConstellationLabels", true );
     m_renderDsos = readSetting<bool>( settings, "renderDsos", true );
     m_renderSun = readSetting<bool>( settings, "renderSun", true );
-    m_magnitudeLimit = readSetting<int>( settings, "magnitudeLimit", true );
+    m_magnitudeLimit = readSetting<int>( settings, "magnitudeLimit", 100 );
     QColor const defaultColor = Marble::Oxygen::aluminumGray5;
     m_constellationBrush = QColor( readSetting<QRgb>( settings, "constellationBrush", defaultColor.rgb() ) );
 }
