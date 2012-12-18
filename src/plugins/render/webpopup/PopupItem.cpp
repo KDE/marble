@@ -113,8 +113,8 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
 QPoint PopupItem::transform( const QPoint &point ) const
 {
     QList<QPointF> widgetPositions = positions();
-    QList<QPointF>::const_iterator it = widgetPositions.begin();
-    for( ; it != widgetPositions.end(); ++it ) {
+    QList<QPointF>::const_iterator it = widgetPositions.constBegin();
+    for( ; it != widgetPositions.constEnd(); ++it ) {
         if ( QRectF( *it, size() ).contains( point ) ) {
             return point - it->toPoint();
         }
