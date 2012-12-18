@@ -183,7 +183,9 @@ void WikipediaItem::openBrowser( )
             if ( infoDialog ) {
                 renderPlugin->setEnabled( true );
                 renderPlugin->setVisible( true );
-                Q_ASSERT( renderPlugin->isInitialized() );
+                if( !renderPlugin->isInitialized() ) {
+                    renderPlugin->initialize();
+                }
                 infoDialog->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
                 infoDialog->setSize( QSizeF( 500, 800 ) );
                 infoDialog->setUrl( url() );
