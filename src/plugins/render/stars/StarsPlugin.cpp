@@ -45,7 +45,7 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_constellationsLoaded( false ),
       m_dsosLoaded( false ),
       m_magnitudeLimit( 100 ),
-      m_constellationBrush( Marble::Oxygen::aluminumGray4 )
+      m_constellationBrush( Marble::Oxygen::aluminumGray5 )
 {
 }
 
@@ -162,7 +162,7 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderDsos = readSetting<bool>( settings, "renderDsos", true );
     m_renderSun = readSetting<bool>( settings, "renderSun", true );
     m_magnitudeLimit = readSetting<int>( settings, "magnitudeLimit", true );
-    QColor const defaultColor = Marble::Oxygen::aluminumGray4;
+    QColor const defaultColor = Marble::Oxygen::aluminumGray5;
     m_constellationBrush = QColor( readSetting<QRgb>( settings, "constellationBrush", defaultColor.rgb() ) );
 }
 
