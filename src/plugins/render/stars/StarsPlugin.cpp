@@ -128,7 +128,7 @@ QDialog *StarsPlugin::configDialog()
 
         connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ), SLOT( writeSettings() ) );
         connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ), SLOT( readSettings() ) );
-        
+
         connect( ui_configWidget->constellationColorButton, SIGNAL( clicked() ), this,
                 SLOT( constellationGetColor() ) );
 
@@ -184,21 +184,21 @@ void StarsPlugin::readSettings()
 
     Qt::CheckState const sunState = m_renderSun ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewSunCheckbox->setCheckState( sunState );
-    
+
     int magState = m_magnitudeLimit;
-    if ( magState < ui_configWidget->m_magnitudeSlider->minimum() ) { 
+    if ( magState < ui_configWidget->m_magnitudeSlider->minimum() ) {
         magState = ui_configWidget->m_magnitudeSlider->minimum();
     }
     else if ( magState > ui_configWidget->m_magnitudeSlider->maximum() ) {
-        magState = ui_configWidget->m_magnitudeSlider->maximum();    
+        magState = ui_configWidget->m_magnitudeSlider->maximum();
     }
-    
+
     ui_configWidget->m_magnitudeSlider->setValue(magState);
-    
+
     QPalette constellationPalette;
     constellationPalette.setColor( QPalette::Button, m_constellationBrush.color() );
     ui_configWidget->constellationColorButton->setPalette( constellationPalette );
-    
+
 }
 
 void StarsPlugin::writeSettings()
@@ -601,21 +601,22 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 continue;
 
             qreal size;
-            if ( ( *i ).magnitude() < -1 ) size = 6.5;
-            else if ( ( *i ).magnitude() < 0 ) size = 5.5;
-            else if ( ( *i ).magnitude() < 1 ) size = 4.5;
-            else if ( ( *i ).magnitude() < 2 ) size = 4.0;
-            else if ( ( *i ).magnitude() < 3 ) size = 3.0;
-            else if ( ( *i ).magnitude() < 4 ) size = 2.0;
-            else if ( ( *i ).magnitude() < 5 ) size = 1.0;
+            if ( ( *i ).magnitude() < -1 ) size = 8.5;
+            else if ( ( *i ).magnitude() < 0 ) size = 7.5;
+            else if ( ( *i ).magnitude() < 1 ) size = 6.5;
+            else if ( ( *i ).magnitude() < 2 ) size = 5.5;
+            else if ( ( *i ).magnitude() < 3 ) size = 4.5;
+            else if ( ( *i ).magnitude() < 4 ) size = 3.5;
+            else if ( ( *i ).magnitude() < 5 ) size = 2.5;
+            else if ( ( *i ).magnitude() < 6 ) size = 1.5;
             else size = 0.5;
-            
+
             if ( ( *i ).magnitude() < m_magnitudeLimit ) {
                 painter->drawEllipse( QRectF( x-size/2.0, y-size/2.0, size, size ) );
             }
         }
 
-        
+
         if ( m_renderSun ) {
             // sun
             const SunLocator *sun = marbleModel()->sunLocator();

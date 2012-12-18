@@ -8,12 +8,8 @@ INCLUDE_DIRECTORIES(
 INCLUDE(${QT_USE_FILE})
 
 set( stars_SRCS StarsPlugin.cpp )
+set( stars_UI StarsConfigWidget.ui )
 
-if (QTONLY)
-  qt4_wrap_ui(stars_SRCS StarsConfigWidget.ui)
-else (QTONLY)
-  include_directories (${KDE4_INCLUDES})
-  kde4_add_ui_files(stars_SRCS StarsConfigWidget.ui)
-endif (QTONLY)
+qt4_wrap_ui(stars_SRCS  ${stars_UI})
 
 marble_add_plugin( StarsPlugin ${stars_SRCS} )
