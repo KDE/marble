@@ -17,6 +17,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QList>
 #include <QtGui/QPixmap>
+#include <QtGui/QItemSelectionModel>
 
 // Marble
 #include "GeoDataObject.h"
@@ -34,18 +35,20 @@ using namespace Marble;
 
 class GeoDataTreeModel::Private {
  public:
-    Private();
+    Private( QAbstractItemModel* model );
     ~Private();
 
     void checkParenting( GeoDataObject *object );
 
     GeoDataDocument* m_rootDocument;
     bool             m_ownsRootDocument;
+    QItemSelectionModel m_selectionModel;
 };
 
-GeoDataTreeModel::Private::Private() :
+GeoDataTreeModel::Private::Private( QAbstractItemModel *model ) :
     m_rootDocument( new GeoDataDocument ),
-    m_ownsRootDocument( true )
+    m_ownsRootDocument( true ),
+    m_selectionModel( model )
 {
     // nothing to do
 }
@@ -74,7 +77,7 @@ void GeoDataTreeModel::Private::checkParenting( GeoDataObject *object )
 
 GeoDataTreeModel::GeoDataTreeModel( QObject *parent )
     : QAbstractItemModel( parent ),
-    d( new Private )
+      d( new Private( this ) )
 {
 }
 
@@ -534,6 +537,11 @@ QModelIndex GeoDataTreeModel::index( GeoDataObject *object )
         }
     }
     return itdown;
+}
+
+QItemSelectionModel *GeoDataTreeModel::selectionModel()
+{
+    return &d->m_selectionModel;
 }
 
 int GeoDataTreeModel::addFeature( GeoDataContainer *parent, GeoDataFeature *feature )
