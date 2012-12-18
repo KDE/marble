@@ -125,7 +125,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_timeControlDialog( 0 ),
     m_downloadRegionDialog( 0 ),
     m_externalMapEditorAction( 0 ),
-    m_pluginModel( 0 ),
     m_configDialog( 0 ),
     m_position( i18n( NOT_AVAILABLE ) ),
     m_tileZoomLevel( i18n( NOT_AVAILABLE ) ),
@@ -1412,11 +1411,10 @@ void MarblePart::editSettings()
     m_configDialog->addPage( w_routingSettings, tr( "Routing" ) );
 
     // plugin page
-    m_pluginModel = new RenderPluginModel( this );
-    m_pluginModel->setRenderPlugins( m_controlView->marbleWidget()->renderPlugins() );
-
     MarblePluginSettingsWidget *w_pluginSettings = new MarblePluginSettingsWidget();
-    w_pluginSettings->setModel( m_pluginModel );
+    RenderPluginModel *const pluginModel = new RenderPluginModel( w_pluginSettings );
+    pluginModel->setRenderPlugins( m_controlView->marbleWidget()->renderPlugins() );
+    w_pluginSettings->setModel( pluginModel );
     w_pluginSettings->setObjectName( "plugin_page" );
     m_configDialog->addPage( w_pluginSettings, i18n( "Plugins" ),
                              "preferences-plugin" );
@@ -1433,11 +1431,11 @@ void MarblePart::editSettings()
     connect( m_configDialog,   SIGNAL( okClicked() ),
                                SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( applyClicked() ),
-             m_pluginModel,    SLOT( applyPluginState() ) );
+             pluginModel,      SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( okClicked() ),
-             m_pluginModel,    SLOT( applyPluginState() ) );
+             pluginModel,      SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( cancelClicked() ),
-             m_pluginModel,    SLOT( retrievePluginState() ) );
+             pluginModel,      SLOT( retrievePluginState() ) );
 
     m_configDialog->show();
 }

@@ -46,7 +46,6 @@ class RoutingProfilesWidget;
 class SunControlWidget;
 class TimeControlWidget;
 class GeoDataFolder;
-class RenderPluginModel;
 class SearchInputWidget;
 
 class MarblePart: public KParts::ReadOnlyPart
@@ -233,8 +232,6 @@ class MarblePart: public KParts::ReadOnlyPart
     // Action for the tool bar
     KToggleAction *m_showShadow;
     KToggleAction *m_showSunInZenith;
-
-    RenderPluginModel *m_pluginModel;
 
     KConfigDialog *m_configDialog;
 
