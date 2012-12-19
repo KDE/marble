@@ -150,6 +150,21 @@ void FileManager::closeFile( int index )
     }
 }
 
+void FileManager::saveFile( GeoDataDocument *document )
+{
+    Q_UNUSED(document)
+}
+
+void FileManager::closeFile( GeoDataDocument *document )
+{
+    for ( int i = 0; i < d->m_fileItemList.size(); ++i ) {
+        if ( document == d->m_fileItemList.at(i) ) {
+            closeFile( i );
+            return;
+        }
+    }
+}
+
 int FileManager::size() const
 {
     return d->m_fileItemList.size();

@@ -75,6 +75,9 @@ class FileManager : public QObject
     void saveFile( int index );
     void closeFile( int index );
 
+    void saveFile( GeoDataDocument *document );
+    void closeFile( GeoDataDocument *document );
+
     int size() const;
     GeoDataDocument *at( int index );
 
