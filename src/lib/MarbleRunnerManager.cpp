@@ -378,18 +378,24 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
     QFileInfo const fileInfo( fileName );
     QString const suffix = fileInfo.suffix();
     QString const completeSuffix = fileInfo.completeSuffix();
+
+    QList<RunnerTask *> parsingTasks;
     foreach( const ParseRunnerPlugin *plugin, plugins ) {
         QStringList const extensions = plugin->fileExtensions();
         if ( extensions.isEmpty() || extensions.contains( suffix ) || extensions.contains( completeSuffix ) ) {
             ParsingTask *task = new ParsingTask( plugin, this, fileName, role );
             connect( task, SIGNAL( finished( RunnerTask* ) ), this, SLOT( cleanupParsingTask(RunnerTask*) ) );
             mDebug() << "parse task " << plugin->nameId() << " " << (long)task;
-            d->m_parsingTasks << task;
-            QThreadPool::globalInstance()->start( task );
+            parsingTasks << task;
         }
     }
 
-    if ( plugins.isEmpty() ) {
+    foreach ( RunnerTask *task, parsingTasks ) {
+        d->m_parsingTasks << task;
+        QThreadPool::globalInstance()->start( task );
+    }
+
+    if ( parsingTasks.isEmpty() ) {
         emit parsingFinished( 0 );
         d->cleanupParsingTask( 0 );
     }

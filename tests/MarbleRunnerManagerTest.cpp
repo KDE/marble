@@ -314,7 +314,7 @@ void MarbleRunnerManagerTest::testAsyncParsing()
 
     QEventLoop loop;
     connect( &m_runnerManager, SIGNAL( parsingFinished() ),
-             &loop, SLOT( quit() ) );
+             &loop, SLOT( quit() ), Qt::QueuedConnection );
 
     QFETCH( QString, fileName );
 
