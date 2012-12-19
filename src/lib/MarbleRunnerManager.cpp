@@ -396,7 +396,7 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
     }
 
     if ( parsingTasks.isEmpty() ) {
-        emit parsingFinished( 0 );
+        emit parsingFinished();
         d->cleanupParsingTask( 0 );
     }
 }
