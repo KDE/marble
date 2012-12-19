@@ -237,9 +237,12 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
            "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
            "Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>")+
         QObject::tr( "<p><i>Icons</i><br />"
-            "Some icons are taken from <a href=\"http://www.sjjb.co.uk/mapicons\">SJJB Management</a> and <a href=\"http://http://thenounproject.com\">NounProject</a>."
+            "Some icons are taken from <a href=\"http://www.sjjb.co.uk/mapicons\">SJJB Management</a> and <a href=\"http://http://thenounproject.com\">NounProject</a>. "
             "These icons can be used freely under the terms of the "
             "<a href=\"http://creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0 Universal</a> license.</p>") +
+        QObject::tr( "<p>Some icons are taken from <a href=\"http://fortawesome.github.com/Font-Awesome\">Font Awesome</a>. "
+            "These icons can be used freely under the terms of the "
+            "<a href=\"http://creativecommons.org/licenses/by/3.0/\">CC BY 3.0</a> license.</p>") +
         QObject::tr("<p><i>OpenRouteService</i><br />"
            "Some of the routes used in Marble via download are provided by the <a href=\""
            "http://www.openrouteservice.org\">OpenRouteService</a> Project (\"ORS\"). <br />"
