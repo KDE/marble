@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include <QtTest/QtTest>
@@ -291,18 +292,21 @@ void MarbleRunnerManagerTest::testSyncParsing()
 void MarbleRunnerManagerTest::testAsyncParsing_data()
 {
     QTest::addColumn<QString>( "fileName" );
+    QTest::addColumn<int>( "resultCount" );
 
-    addRow() << MarbleDirs::path( "placemarks/otherplacemarks.cache" );
+    addRow() << MarbleDirs::path( "placemarks/otherplacemarks.cache" ) << 1;
 
-    addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PGLACIER.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PLAKE.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" )    << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" )      << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PGLACIER.PNT" )    << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" )     << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PLAKE.PNT" )       << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" )       << 1;
+
+    addRow() << MarbleDirs::path( "flags/flag_tv.svg" ) << 0;
 }
 
 void MarbleRunnerManagerTest::testAsyncParsing()
@@ -317,13 +321,14 @@ void MarbleRunnerManagerTest::testAsyncParsing()
              &loop, SLOT( quit() ), Qt::QueuedConnection );
 
     QFETCH( QString, fileName );
+    QFETCH( int, resultCount );
 
     m_runnerManager.parseFile( fileName );
 
     loop.exec();
 
 
-    QCOMPARE( resultSpy.count(), 1 );
+    QCOMPARE( resultSpy.count(), resultCount );
     QCOMPARE( finishSpy.count(), 1 );
 
     QThreadPool::globalInstance()->waitForDone();
