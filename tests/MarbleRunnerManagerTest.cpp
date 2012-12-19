@@ -52,6 +52,7 @@ private slots:
     void testAsyncRouting_data();
     void testAsyncRouting();
 
+    void testSyncParsing_data();
     void testSyncParsing();
 
     void testAsyncParsing_data();
@@ -64,7 +65,6 @@ public:
     GeoDataCoordinates m_coords;
     GeoDataCoordinates m_coords2;
     RouteRequest m_request;
-    QString m_fileName;
 };
 
 void MarbleRunnerManagerTest::initTestCase()
@@ -85,8 +85,6 @@ void MarbleRunnerManagerTest::initTestCase()
 
     m_request.append( m_coords );
     m_request.append( m_coords2 );
-
-    m_fileName = MarbleDirs::path( "placemarks/otherplacemarks.cache" );
 }
 
 void MarbleRunnerManagerTest::cleanupTestCase()
@@ -269,6 +267,26 @@ void MarbleRunnerManagerTest::testAsyncRouting()
     QThreadPool::globalInstance()->waitForDone();
 }
 
+void MarbleRunnerManagerTest::testSyncParsing_data()
+{
+    QTest::addColumn<QString>( "fileName" );
+    QTest::addColumn<int>( "resultCount" );
+
+    addRow() << MarbleDirs::path( "placemarks/otherplacemarks.cache" ) << 1;
+
+    addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" )    << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" )      << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PGLACIER.PNT" )    << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" )     << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PLAKE.PNT" )       << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" )       << 1;
+
+    addRow() << MarbleDirs::path( "flags/flag_tv.svg" ) << 0;
+}
+
 void MarbleRunnerManagerTest::testSyncParsing()
 {
     MarbleRunnerManager m_runnerManager(&m_pluginManager, this);
@@ -276,16 +294,13 @@ void MarbleRunnerManagerTest::testSyncParsing()
     QSignalSpy finishSpy( &m_runnerManager, SIGNAL( parsingFinished()) );
     QSignalSpy resultSpy( &m_runnerManager, SIGNAL( parsingFinished(GeoDataDocument*,QString)) );
 
-    QCOMPARE( finishSpy.count(), 0 );
-    QCOMPARE( resultSpy.count(), 0 );
+    QFETCH( QString, fileName );
+    QFETCH( int, resultCount );
 
-    QTime timer;
-    timer.start();
-    GeoDataDocument* file = m_runnerManager.openFile( m_fileName );
+    GeoDataDocument* file = m_runnerManager.openFile( fileName );
 
-    QVERIFY( timer.elapsed() < m_time );
-    QVERIFY( resultSpy.count() > 0 );
-    QVERIFY( file != 0 );
+    QCOMPARE( resultSpy.count(), resultCount );
+    QCOMPARE( file != 0, resultCount > 0 );
     QCOMPARE( finishSpy.count(), 1 );
 }
 
