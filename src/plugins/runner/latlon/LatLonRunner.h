@@ -23,7 +23,6 @@ class LatLonRunner : public MarbleAbstractRunner
 public:
     LatLonRunner(QObject *parent = 0);
     ~LatLonRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
 };

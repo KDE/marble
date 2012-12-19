@@ -29,11 +29,6 @@ CacheRunner::~CacheRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory CacheRunner::category() const
-{
-    return GeoDataFeature::Folder;
-}
-
 void CacheRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
     QFile file( fileName );

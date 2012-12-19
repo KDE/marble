@@ -34,9 +34,6 @@ public:
     ~OsmNominatimRunner();
 
     // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
-    // Overriding MarbleAbstractRunner
     virtual void reverseGeocoding( const GeoDataCoordinates &coordinates );
 
 private Q_SLOTS:

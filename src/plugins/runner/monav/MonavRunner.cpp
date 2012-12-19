@@ -238,11 +238,6 @@ MonavRunner::~MonavRunner()
     delete d;
 }
 
-GeoDataFeature::GeoDataVisualCategory MonavRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
-
 void MonavRunner::retrieveRoute( const RouteRequest *route )
 {
     QVector<GeoDataPlacemark*> instructions;

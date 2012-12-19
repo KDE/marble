@@ -24,7 +24,6 @@ class LocalDatabaseRunner : public MarbleAbstractRunner
 public:
     LocalDatabaseRunner(QObject *parent = 0);
     ~LocalDatabaseRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
 };

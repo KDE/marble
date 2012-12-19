@@ -28,9 +28,6 @@ public:
     ~MonavRunner();
 
     // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
-    // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );
 
     // Overriding MarbleAbstractRunner

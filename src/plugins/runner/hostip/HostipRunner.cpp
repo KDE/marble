@@ -12,6 +12,7 @@
 #include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
+#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 
 #include <QtCore/QString>
@@ -34,11 +35,6 @@ HostipRunner::HostipRunner( QObject *parent ) :
 
 HostipRunner::~HostipRunner()
 {
-}
-
-GeoDataFeature::GeoDataVisualCategory HostipRunner::category() const
-{
-    return GeoDataFeature::Coordinate;
 }
 
 void HostipRunner::slotNoResults()
@@ -116,7 +112,7 @@ void HostipRunner::slotRequestFinished( QNetworkReply* reply )
                                  arg( m_hostInfo.addresses().first().toString() ) );
 
         placemark->setCoordinate( lon * DEG2RAD, lat * DEG2RAD );
-        placemark->setVisualCategory( category() );
+        placemark->setVisualCategory( GeoDataFeature::Coordinate );
         placemarks << placemark;
     }
     

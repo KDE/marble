@@ -41,11 +41,6 @@ OsmNominatimRunner::~OsmNominatimRunner()
     // nothing to do
 }
 
-GeoDataFeature::GeoDataVisualCategory OsmNominatimRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
-
 void OsmNominatimRunner::returnNoResults()
 {
     emit searchFinished( QVector<GeoDataPlacemark*>() );

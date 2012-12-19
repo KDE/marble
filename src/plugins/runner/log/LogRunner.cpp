@@ -29,11 +29,6 @@ LogRunner::~LogRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory LogRunner::category() const
-{
-    return GeoDataFeature::Folder;
-}
-
 void LogRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
     QFile file( fileName );

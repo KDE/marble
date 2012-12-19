@@ -223,11 +223,6 @@ RoutinoRunner::~RoutinoRunner()
     delete d;
 }
 
-GeoDataFeature::GeoDataVisualCategory RoutinoRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
-
 void RoutinoRunner::retrieveRoute( const RouteRequest *route )
 {
     mDebug();

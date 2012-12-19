@@ -26,11 +26,6 @@ KmlRunner::~KmlRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory KmlRunner::category() const
-{
-    return GeoDataFeature::Folder;
-}
-
 void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
     QFile  file( fileName );

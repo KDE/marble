@@ -83,11 +83,6 @@ GosmoreRunner::~GosmoreRunner()
     delete d;
 }
 
-GeoDataFeature::GeoDataVisualCategory GosmoreRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
-
 void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
 {
     if ( !d->m_gosmoreMapFile.exists() )

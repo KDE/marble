@@ -21,13 +21,7 @@ class OsmRunner : public MarbleAbstractRunner
 public:
     explicit OsmRunner(QObject *parent = 0);
     ~OsmRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void parseFile( const QString &fileName, DocumentRole role );
-
-signals:
-
-public slots:
-
 };
 
 }

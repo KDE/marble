@@ -23,8 +23,6 @@ public:
     explicit LogRunner( QObject *parent = 0 );
     ~LogRunner();
 
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
     virtual void parseFile( const QString &fileName, DocumentRole role );
 };
 

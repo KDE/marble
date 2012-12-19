@@ -31,11 +31,6 @@ LocalDatabaseRunner::LocalDatabaseRunner(QObject *parent) : MarbleAbstractRunner
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory LocalDatabaseRunner::category() const
-{
-    return GeoDataFeature::Coordinate;
-}
-
 LocalDatabaseRunner::~LocalDatabaseRunner()
 {
 

@@ -30,11 +30,6 @@ ShpRunner::~ShpRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory ShpRunner::category() const
-{
-    return GeoDataFeature::Folder;
-}
-
 void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
     QFileInfo fileinfo( fileName );

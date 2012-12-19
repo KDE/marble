@@ -94,11 +94,6 @@ LocalOsmSearchRunner::~LocalOsmSearchRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory LocalOsmSearchRunner::category() const
-{
-    return GeoDataFeature::Coordinate;
-}
-
 
 void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {

@@ -46,11 +46,6 @@ MapQuestRunner::~MapQuestRunner()
     // nothing to do
 }
 
-GeoDataFeature::GeoDataVisualCategory MapQuestRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
-
 void MapQuestRunner::retrieveRoute( const RouteRequest *route )
 {
     if ( route->size() < 2 ) {

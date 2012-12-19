@@ -28,9 +28,6 @@ public:
     ~GosmoreRunner();
 
     // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
-    // Overriding MarbleAbstractRunner
     virtual void reverseGeocoding( const GeoDataCoordinates &coordinates );
 
 private:

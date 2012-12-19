@@ -26,11 +26,6 @@ OsmRunner::~OsmRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory OsmRunner::category() const
-{
-    return GeoDataFeature::Folder;
-}
-
 void OsmRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
     QFile  file( fileName );

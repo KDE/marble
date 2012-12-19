@@ -51,11 +51,6 @@ OSRMRunner::~OSRMRunner()
     // nothing to do
 }
 
-GeoDataFeature::GeoDataVisualCategory OSRMRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
-
 void OSRMRunner::retrieveRoute( const RouteRequest *route )
 {
     if ( route->size() < 2 ) {

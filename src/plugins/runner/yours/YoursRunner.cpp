@@ -46,11 +46,6 @@ YoursRunner::~YoursRunner()
     // nothing to do
 }
 
-GeoDataFeature::GeoDataVisualCategory YoursRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
-
 void YoursRunner::retrieveRoute( const RouteRequest *route )
 {
     if ( route->size() != 2 ) {

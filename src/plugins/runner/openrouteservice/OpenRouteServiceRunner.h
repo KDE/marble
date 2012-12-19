@@ -37,10 +37,6 @@ public:
     explicit OpenRouteServiceRunner(QObject *parent = 0);
 
     ~OpenRouteServiceRunner();
-
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
     // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );
 

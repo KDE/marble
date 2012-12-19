@@ -29,11 +29,6 @@ JsonRunner::~JsonRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory JsonRunner::category() const
-{
-    return GeoDataFeature::Folder;
-}
-
 void JsonRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
     // Check file exists

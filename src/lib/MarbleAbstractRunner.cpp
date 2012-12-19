@@ -24,11 +24,6 @@ MarbleAbstractRunner::MarbleAbstractRunner( QObject *parent )
     // nothing to do
 }
 
-GeoDataFeature::GeoDataVisualCategory MarbleAbstractRunner::category() const
-{
-    return GeoDataFeature::Default;
-}
-
 void MarbleAbstractRunner::setModel( MarbleModel* model )
 {
     m_model = model;

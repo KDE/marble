@@ -26,11 +26,6 @@ GpxRunner::~GpxRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory GpxRunner::category() const
-{
-    return GeoDataFeature::Folder;
-}
-
 void GpxRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
     QFile  file( fileName );

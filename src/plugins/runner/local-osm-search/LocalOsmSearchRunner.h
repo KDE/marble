@@ -29,9 +29,6 @@ public:
 
     ~LocalOsmSearchRunner();
 
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
     virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
 private:

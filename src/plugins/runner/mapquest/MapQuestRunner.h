@@ -32,9 +32,6 @@ public:
     ~MapQuestRunner();
 
     // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
-    // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );
 
 private Q_SLOTS:

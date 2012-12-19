@@ -33,9 +33,6 @@ public:
 
     ~OsmNominatimRunner();
 
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
     virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
 private Q_SLOTS:

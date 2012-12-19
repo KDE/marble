@@ -44,11 +44,6 @@ OpenRouteServiceRunner::~OpenRouteServiceRunner()
     // nothing to do
 }
 
-GeoDataFeature::GeoDataVisualCategory OpenRouteServiceRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
-
 void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 {
     if ( route->size() < 2 ) {

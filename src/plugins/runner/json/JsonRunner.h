@@ -22,7 +22,6 @@ class JsonRunner : public MarbleAbstractRunner
 public:
     explicit JsonRunner(QObject *parent = 0);
     ~JsonRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void parseFile( const QString &fileName, DocumentRole role );
 };
 

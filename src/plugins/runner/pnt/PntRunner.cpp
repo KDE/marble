@@ -35,11 +35,6 @@ PntRunner::~PntRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory PntRunner::category() const
-{
-    return GeoDataFeature::Folder;
-}
-
 void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
     QFileInfo fileinfo( fileName );

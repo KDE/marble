@@ -13,7 +13,6 @@
 #define MARBLE_MARBLEABSTRACTRUNNER_H
 
 #include "marble_export.h"
-#include "GeoDataFeature.h"
 #include "GeoDataDocument.h"
 
 #include <QtCore/QVector>
@@ -45,12 +44,6 @@ public:
       * Stores a pointer to the currently used map
       */
     void setModel( MarbleModel * model );
-
-    /**
-     * This function gives the  icon for this runner
-     * @return the icon of the runner
-     */
-    virtual GeoDataFeature::GeoDataVisualCategory category() const;
 
     /**
       * Start a reverse geocoding request. Called by MarbleRunnerManager, runners

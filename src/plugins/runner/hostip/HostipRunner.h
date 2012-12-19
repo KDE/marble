@@ -30,9 +30,6 @@ public:
 
     ~HostipRunner();
 
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
 private Q_SLOTS:
     void get();
 

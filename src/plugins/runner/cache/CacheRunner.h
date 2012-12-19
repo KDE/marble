@@ -21,7 +21,6 @@ class CacheRunner : public MarbleAbstractRunner
 public:
     explicit CacheRunner(QObject *parent = 0);
     ~CacheRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void parseFile( const QString &fileName, DocumentRole role );
 
 };

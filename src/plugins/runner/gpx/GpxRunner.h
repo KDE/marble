@@ -21,12 +21,7 @@ class GpxRunner : public MarbleAbstractRunner
 public:
     explicit GpxRunner(QObject *parent = 0);
     ~GpxRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void parseFile( const QString &fileName, DocumentRole role );
-
-signals:
-
-public slots:
 
 };
 
