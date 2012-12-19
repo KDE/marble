@@ -376,8 +376,8 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
 {
     QList<const ParseRunnerPlugin*> plugins = d->m_pluginManager->parsingRunnerPlugins();
     QFileInfo const fileInfo( fileName );
-    QString const suffix = fileInfo.suffix();
-    QString const completeSuffix = fileInfo.completeSuffix();
+    const QString suffix = fileInfo.suffix().toLower();
+    const QString completeSuffix = fileInfo.completeSuffix().toLower();
 
     QList<RunnerTask *> parsingTasks;
     foreach( const ParseRunnerPlugin *plugin, plugins ) {

@@ -323,7 +323,7 @@ void MarbleRunnerManagerTest::testAsyncParsing()
     loop.exec();
 
 
-    QVERIFY( resultSpy.count() > 0 );
+    QCOMPARE( resultSpy.count(), 1 );
     QCOMPARE( finishSpy.count(), 1 );
 
     QThreadPool::globalInstance()->waitForDone();
