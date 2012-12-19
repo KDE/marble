@@ -342,8 +342,8 @@ void MarbleRunnerManager::retrieveRoute( const RouteRequest *request )
         QThreadPool::globalInstance()->start( task );
     }
 
-    if ( plugins.isEmpty() ) {
-        mDebug() << "No routing plugins found, cannot retrieve a route";
+    if ( d->m_routingTasks.isEmpty() ) {
+        mDebug() << "No suitable routing plugins found, cannot retrieve a route";
         d->cleanupRoutingTask( 0 );
     }
 }
