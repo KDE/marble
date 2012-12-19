@@ -1,8 +1,8 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software WebPopupFloatItemd under the GNU LGPL. You can
-// find a copy of this WebPopupFloatItem in WebPopupFloatItem.txt in the top directory of
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
 // Copyright 2012   Mohammed Nafees   <nafees.technocool@gmail.com>
@@ -15,6 +15,7 @@
 
 #include <QtGui/QMouseEvent>
 #include <QtGui/QApplication>
+#include <QtGui/QAction>
 
 namespace Marble
 {
@@ -23,8 +24,8 @@ WebPopupFloatItem::WebPopupFloatItem( const MarbleModel *marbleModel ) :
     RenderPlugin( marbleModel ),
     m_popupItem( 0 )
 {
-    setEnabled( false );
-    setVisible( false );
+    setVisible( true );
+    setEnabled( true );
 }
 
 WebPopupFloatItem::~WebPopupFloatItem()
@@ -73,15 +74,16 @@ QList<PluginAuthor> WebPopupFloatItem::pluginAuthors() const
            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "<earthwings@gentoo.org>" );
 }
 
-QIcon WebPopupFloatItem::icon () const
+QIcon WebPopupFloatItem::icon() const
 {
     return QIcon();
 }
 
-void WebPopupFloatItem::initialize ()
+void WebPopupFloatItem::initialize()
 {
     m_popupItem = new PopupItem;
-    connect( m_popupItem, SIGNAL( dirty() ), this, SIGNAL( repaintNeeded() ) );
+    connect( m_popupItem, SIGNAL(dirty()), this, SIGNAL(repaintNeeded()) );
+    connect( m_popupItem, SIGNAL(hide()), this, SLOT(hidePopupItem()) );
 }
 
 bool WebPopupFloatItem::isInitialized() const
@@ -153,6 +155,11 @@ void WebPopupFloatItem::setPosition( const QPointF &position )
 {
     /** @todo Implement */
     Q_UNUSED( position );
+}
+
+void WebPopupFloatItem::hidePopupItem()
+{
+    setVisible( false );
 }
 
 }

@@ -18,6 +18,7 @@
 
 class QWebView;
 class QPainter;
+class QPushButton;
 
 namespace Marble
 {
@@ -31,7 +32,7 @@ public:
 
     void setUrl( const QUrl &url );
     void setContent( const QString &html );
-    QPoint transform( const QPoint &point ) const;
+    QWidget* transform( QPoint &point ) const;
     virtual bool eventFilter( QObject *, QEvent *e );
 
 protected:
@@ -39,8 +40,10 @@ protected:
 
 Q_SIGNALS:
     void dirty();
+    void hide();
 
 private:
+    QWidget *m_widget;
     QWebView *m_webView;
 
     QString m_content;

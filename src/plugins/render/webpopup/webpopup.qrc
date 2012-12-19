@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="marble/webpopup/placemark-indicator-left.png">arrow.png</file>
+        <file alias="marble/webpopup/drop-shadow.png">drop-shadow.png</file>
+        <file alias="marble/webpopup/icon-remove.svg">font-awesome-icon-remove.svg</file>
+        <file alias="marble/webpopup/icon-remove.png">font-awesome-icon-remove-16x16.png</file>
+    </qresource>
+</RCC>

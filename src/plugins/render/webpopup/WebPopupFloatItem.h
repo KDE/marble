@@ -57,6 +57,9 @@ public:
     void setSize( const QSizeF &size );
     void setPosition( const QPointF &position );
 
+public slots:
+    void hidePopupItem();
+
 private:
     PopupItem *m_popupItem;
 };
