@@ -75,9 +75,13 @@ void PopupItem::paint( QPainter *painter )
 {
     QRect popupRect( -10, -10, size().width(), size().height() );
     qDrawBorderPixmap( painter, popupRect, QMargins( 20, 20, 20, 20 ),
-                       QPixmap::fromImage( QImage( ":/marble/webpopup/drop-shadow.png" ) ) );
-    QImage arrowImage( ":/marble/webpopup/placemark-indicator-left.png" );
-    QImage placemarkImage = arrowImage.scaledToWidth( arrowImage.width()/2 );
+                       QPixmap::fromImage( QImage( ":/marble/webpopup/webpopup2_shadow.png" ) ) );
+    qDrawBorderPixmap( painter, popupRect, QMargins( 20, 20, 20, 20 ),
+                       QPixmap::fromImage( QImage( ":/marble/webpopup/webpopup2.png" ) ) );
+    QImage placemarkShadowImage( ":/marble/webpopup/arrow2_topleft_shadow.png" );
+    painter->drawImage( -(placemarkShadowImage.width()-3),
+                        popupRect.height()/2-placemarkShadowImage.height()/2, placemarkShadowImage );
+    QImage placemarkImage( ":/marble/webpopup/arrow2_topleft.png" );
     painter->drawImage( -(placemarkImage.width()-3),
                         popupRect.height()/2-placemarkImage.height()/2, placemarkImage );
     m_widget->setFixedSize(size().toSize()-QSize(20,20));
