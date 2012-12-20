@@ -39,6 +39,8 @@ public:
     virtual void retrieveRoute( const RouteRequest *request );
 
 private Q_SLOTS:
+    void get();
+
     /** Route data was retrieved via http */
     void retrieveData( QNetworkReply *reply );
 
@@ -53,6 +55,8 @@ private:
     GeoDataDocument* parse( const QByteArray &input ) const;
 
     QNetworkAccessManager *m_networkAccessManager;
+
+    QNetworkRequest m_request;
 };
 
 }
