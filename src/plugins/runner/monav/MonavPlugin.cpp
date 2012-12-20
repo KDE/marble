@@ -22,6 +22,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "routing/RouteRequest.h"
 
 #include <QtCore/QProcess>
 #include <QtCore/QDirIterator>

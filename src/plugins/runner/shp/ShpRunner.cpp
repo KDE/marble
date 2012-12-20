@@ -10,6 +10,7 @@
 #include "ShpRunner.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
 #include "MarbleDebug.h"
 

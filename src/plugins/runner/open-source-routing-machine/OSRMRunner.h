@@ -13,7 +13,6 @@
 #define MARBLE_OSMOSRMRUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
 #include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QString>
@@ -23,6 +22,8 @@ class QNetworkAccessManager;
 
 namespace Marble
 {
+
+class GeoDataLineString;
 
 class OSRMRunner : public MarbleAbstractRunner
 {

@@ -13,7 +13,6 @@
 #define MARBLE_YOURSRUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
 
 #include <QtNetwork/QNetworkReply>
 

@@ -13,7 +13,6 @@
 #define MARBLE_ROUTINORUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
 
 namespace Marble
 {
@@ -22,7 +21,7 @@ class RoutinoRunnerPrivate;
 
 class RoutinoRunner : public MarbleAbstractRunner
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
     explicit RoutinoRunner(QObject *parent = 0);
 

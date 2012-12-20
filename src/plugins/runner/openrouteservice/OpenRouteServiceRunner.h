@@ -13,12 +13,10 @@
 #define MARBLE_OSMOPENROUTESERVICERUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
 #include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QHostInfo>
 
 class QNetworkAccessManager;
 

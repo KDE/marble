@@ -17,6 +17,7 @@
 #include "TinyWebBrowser.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "routing/RouteRequest.h"
 
 #include <QtCore/QString>
 #include <QtCore/QVector>

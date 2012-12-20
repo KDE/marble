@@ -17,6 +17,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
 #include "routing/Maneuver.h"
+#include "routing/RouteRequest.h"
 #include "TinyWebBrowser.h"
 
 #include <QtCore/QString>

@@ -11,8 +11,12 @@
 #include "PntRunner.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataLineString.h"
+#include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
+#include "MarbleGlobal.h"
 
+#include <QtCore/qmath.h>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 

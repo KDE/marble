@@ -10,6 +10,8 @@
 #include "LogRunner.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataLineString.h"
+#include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 
 #include <QtCore/QFile>

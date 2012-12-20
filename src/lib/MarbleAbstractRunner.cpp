@@ -9,6 +9,8 @@
 
 #include "MarbleAbstractRunner.h"
 
+#include "GeoDataPlacemark.h"
+
 #include <QtCore/QThread>
 #include <QtCore/QString>
 

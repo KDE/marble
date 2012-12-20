@@ -13,7 +13,6 @@
 #define MARBLE_OSMMAPQUESTRUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
 
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>

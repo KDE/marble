@@ -12,9 +12,6 @@
 #define MARBLE_MONAVRUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
-
-class QProcess;
 
 namespace Marble
 {

@@ -10,6 +10,7 @@
 
 #include "HostipPlugin.h"
 #include "HostipRunner.h"
+#include "MarbleGlobal.h"
 
 namespace Marble
 {

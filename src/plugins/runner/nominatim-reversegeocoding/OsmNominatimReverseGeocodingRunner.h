@@ -13,9 +13,9 @@
 #define MARBLE_OSMNOMINATIMRUNNER_H
 
 #include "MarbleAbstractRunner.h"
+#include "GeoDataCoordinates.h"
 
 #include <QtCore/QString>
-#include <QtNetwork/QHostInfo>
 #include <QtNetwork/QNetworkRequest>
 
 class QNetworkReply;

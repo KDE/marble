@@ -14,15 +14,16 @@
 
 #include "marble_export.h"
 #include "GeoDataFeature.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
 
-#include <QtCore/QThread>
 #include <QtCore/QVector>
 
 namespace Marble
 {
 
+class GeoDataCoordinates;
+class GeoDataLatLonAltBox;
+class GeoDataPlacemark;
 class MarbleModel;
 class RouteRequest;
 
