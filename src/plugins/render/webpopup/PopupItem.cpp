@@ -46,6 +46,11 @@ PopupItem::PopupItem( QObject* parent ) :
     m_widget->setAttribute( Qt::WA_NoSystemBackground, true );
     setSize( QSizeF( 300, 350 ) );
     //setVisible( true );
+    QPalette palette = m_webView->palette();
+    palette.setBrush(QPalette::Base, Qt::transparent);
+    m_webView->setPalette(palette);
+    m_webView->page()->setPalette(palette);
+    m_webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
 
     connect( m_webView, SIGNAL(titleChanged(QString)), titleText, SLOT(setText(QString)) );
     connect( hideButton, SIGNAL(clicked()), this, SIGNAL(hide()) );
@@ -61,6 +66,13 @@ void PopupItem::setUrl( const QUrl &url )
     if ( m_webView ) {
         m_webView->setUrl( url );
         setVisible( true );
+
+	QPalette palette = m_webView->palette();
+	palette.setBrush(QPalette::Base, Qt::transparent);
+	m_webView->setPalette(palette);
+	m_webView->page()->setPalette(palette);
+	m_webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
+
         emit dirty();
     }
 }
