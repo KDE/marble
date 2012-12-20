@@ -23,10 +23,6 @@ namespace Marble
 
 class MarbleModel;
 class RouteRequest;
-class SearchRunnerPlugin;
-class ReverseGeocodingRunnerPlugin;
-class RoutingRunnerPlugin;
-class ParseRunnerPlugin;
 class MarbleAbstractRunner;
 class MarbleRunnerManager;
 
@@ -65,13 +61,12 @@ class SearchTask : public RunnerTask
     Q_OBJECT
 
 public:
-    SearchTask( const SearchRunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
+    SearchTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
     virtual void runTask();
 
 private:
-    const SearchRunnerPlugin *const m_factory;
-    MarbleModel *const m_model;
+    MarbleAbstractRunner *const m_runner;
     QString m_searchTerm;
     GeoDataLatLonAltBox m_preferredBbox;
 };
@@ -82,13 +77,12 @@ class ReverseGeocodingTask : public RunnerTask
     Q_OBJECT
 
 public:
-    ReverseGeocodingTask( const ReverseGeocodingRunnerPlugin*factory, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates );
+    ReverseGeocodingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates );
 
     virtual void runTask();
 
 private:
-    const ReverseGeocodingRunnerPlugin *const m_factory;
-    MarbleModel *const m_model;
+    MarbleAbstractRunner *const m_runner;
     GeoDataCoordinates m_coordinates;
 };
 
@@ -99,13 +93,12 @@ class RoutingTask : public RunnerTask
     Q_OBJECT
 
 public:
-    RoutingTask( RoutingRunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest );
+    RoutingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest );
 
     virtual void runTask();
 
 private:
-    RoutingRunnerPlugin *const m_factory;
-    MarbleModel *const m_model;
+    MarbleAbstractRunner *const m_runner;
     const RouteRequest *const m_routeRequest;
 };
 
@@ -115,12 +108,12 @@ class ParsingTask : public RunnerTask
     Q_OBJECT
 
 public:
-    ParsingTask( const ParseRunnerPlugin* factory, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role );
+    ParsingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role );
 
     virtual void runTask();
 
 private:
-    const ParseRunnerPlugin *const m_factory;
+    MarbleAbstractRunner *const m_runner;
     QString m_fileName;
     DocumentRole m_role;
 };
