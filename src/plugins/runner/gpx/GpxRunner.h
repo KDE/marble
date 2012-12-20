@@ -10,12 +10,12 @@
 #ifndef MARBLEGPXRUNNER_H
 #define MARBLEGPXRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class GpxRunner : public MarbleAbstractRunner
+class GpxRunner : public ParsingRunner
 {
     Q_OBJECT
 public:

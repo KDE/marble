@@ -212,7 +212,10 @@ set(marblewidget_SRCS
     ReverseGeocodingRunnerPlugin.cpp
     RoutingRunnerPlugin.cpp
     ParseRunnerPlugin.cpp
-    MarbleAbstractRunner.cpp
+    SearchRunner.cpp
+    ReverseGeocodingRunner.cpp
+    RoutingRunner.cpp
+    ParsingRunner.cpp
     RunnerTask.cpp
 
     BookmarkManager.cpp
@@ -411,7 +414,10 @@ else (APPLE AND QTONLY)
     RenderPlugin.h
     RenderPluginInterface.h
     MarbleRunnerManager.h
-    MarbleAbstractRunner.h
+    ParsingRunner.h
+    SearchRunner.h
+    ReverseGeocodingRunner.h
+    RoutingRunner.h
     SearchRunnerPlugin.h
     ReverseGeocodingRunnerPlugin.h
     RoutingRunnerPlugin.h

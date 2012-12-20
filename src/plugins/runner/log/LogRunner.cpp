@@ -21,7 +21,7 @@ namespace Marble
 {
 
 LogRunner::LogRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent )
+    ParsingRunner( parent )
 {
 }
 

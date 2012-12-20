@@ -18,7 +18,7 @@ namespace Marble
 {
 
 KmlRunner::KmlRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 

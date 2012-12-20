@@ -70,7 +70,7 @@ QByteArray GosmoreRunnerPrivate::retrieveWaypoints( const QString &query ) const
 }
 
 GosmoreRunner::GosmoreRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        ReverseGeocodingRunner( parent ),
         d( new GosmoreRunnerPrivate )
 {
     // Check installation

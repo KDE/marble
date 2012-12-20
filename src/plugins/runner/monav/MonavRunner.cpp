@@ -227,7 +227,7 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString *geometry
 }
 
 MonavRunner::MonavRunner( const MonavPlugin* plugin, QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        RoutingRunner( parent ),
         d( new MonavRunnerPrivate( plugin ) )
 {
     // nothing to do
@@ -246,6 +246,7 @@ void MonavRunner::retrieveRoute( const RouteRequest *route )
     emit routeCalculated( result );
 }
 
+#if 0
 void MonavRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
 {
     GeoDataPlacemark placemark;
@@ -266,6 +267,7 @@ void MonavRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
 
     emit reverseGeocodingFinished( coordinates, placemark );
 }
+#endif
 
 } // namespace Marble
 

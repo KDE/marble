@@ -188,7 +188,7 @@ GeoDataDocument* GosmoreRunnerPrivate::createDocument( GeoDataLineString* routeW
 }
 
 GosmoreRunner::GosmoreRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        RoutingRunner( parent ),
         d( new GosmoreRunnerPrivate )
 {
     // Check installation

@@ -10,7 +10,6 @@
 
 #include "OSRMRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "GeoDataDocument.h"
@@ -39,7 +38,7 @@ QVector<QPair<GeoDataCoordinates,QString> > OSRMRunner:: m_cachedHints;
 QString OSRMRunner:: m_hintChecksum;
 
 OSRMRunner::OSRMRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent ),
+    RoutingRunner( parent ),
     m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
     connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),

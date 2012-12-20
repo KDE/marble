@@ -10,7 +10,6 @@
 
 #include "YoursRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "GeoDataDocument.h"
@@ -34,7 +33,7 @@ namespace Marble
 {
 
 YoursRunner::YoursRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        RoutingRunner( parent ),
         m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
     connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),

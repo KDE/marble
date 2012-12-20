@@ -22,7 +22,7 @@ namespace Marble
 {
 
 ShpRunner::ShpRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 

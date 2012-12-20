@@ -60,7 +60,7 @@ QList<PluginAuthor> RoutinoPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* RoutinoPlugin::newRunner() const
+RoutingRunner *RoutinoPlugin::newRunner() const
 {
     return new RoutinoRunner;
 }

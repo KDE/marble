@@ -21,7 +21,7 @@ namespace Marble
 const quint32 MarbleMagicNumber = 0x31415926;
 
 CacheRunner::CacheRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 

@@ -21,7 +21,7 @@ namespace Marble
 {
 
 JsonRunner::JsonRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 

@@ -9,7 +9,6 @@
 
 #include "LatLonRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
@@ -24,7 +23,8 @@
 namespace Marble
 {
 
-LatLonRunner::LatLonRunner(QObject *parent) : MarbleAbstractRunner(parent)
+LatLonRunner::LatLonRunner(QObject *parent) :
+    SearchRunner(parent)
 {
 }
 

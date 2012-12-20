@@ -11,12 +11,12 @@
 #ifndef MARBLE_JSONRUNNER_H
 #define MARBLE_JSONRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class JsonRunner : public MarbleAbstractRunner
+class JsonRunner : public ParsingRunner
 {
     Q_OBJECT
 public:

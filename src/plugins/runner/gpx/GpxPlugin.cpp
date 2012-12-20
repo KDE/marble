@@ -59,7 +59,7 @@ QStringList GpxPlugin::fileExtensions() const
     return QStringList() << "gpx";
 }
 
-MarbleAbstractRunner* GpxPlugin::newRunner() const
+ParsingRunner* GpxPlugin::newRunner() const
 {
     return new GpxRunner;
 }

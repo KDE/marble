@@ -12,7 +12,7 @@
 #ifndef MARBLE_YOURSRUNNER_H
 #define MARBLE_YOURSRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "RoutingRunner.h"
 
 #include <QtNetwork/QNetworkReply>
 
@@ -21,7 +21,7 @@ class QNetworkAccessManager;
 namespace Marble
 {
 
-class YoursRunner : public MarbleAbstractRunner
+class YoursRunner : public RoutingRunner
 {
     Q_OBJECT
 

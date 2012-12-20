@@ -10,12 +10,12 @@
 #ifndef MARBLE_LOGFILE_RUNNER_H
 #define MARBLE_LOGFILE_RUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class LogRunner : public MarbleAbstractRunner
+class LogRunner : public ParsingRunner
 {
     Q_OBJECT
 

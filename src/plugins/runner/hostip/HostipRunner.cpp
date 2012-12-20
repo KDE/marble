@@ -9,7 +9,6 @@
 
 #include "HostipRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
@@ -26,7 +25,7 @@ namespace Marble
 {
 
 HostipRunner::HostipRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        SearchRunner( parent ),
         m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
     connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),

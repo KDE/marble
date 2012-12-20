@@ -10,9 +10,12 @@
 
 #include "RunnerTask.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "MarbleRunnerManager.h"
+#include "ParsingRunner.h"
+#include "SearchRunner.h"
+#include "ReverseGeocodingRunner.h"
+#include "RoutingRunner.h"
 #include "routing/RouteRequest.h"
 
 #include <QtCore/QTimer>
@@ -20,7 +23,7 @@
 namespace Marble
 {
 
-SearchTask::SearchTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
+SearchTask::SearchTask( SearchRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
     QObject(),
     m_runner( runner ),
     m_searchTerm( searchTerm ),
@@ -39,7 +42,7 @@ void SearchTask::run()
     emit finished( this );
 }
 
-ReverseGeocodingTask::ReverseGeocodingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates ) :
+ReverseGeocodingTask::ReverseGeocodingTask( ReverseGeocodingRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates ) :
     QObject(),
     m_runner( runner ),
     m_coordinates( coordinates )
@@ -57,7 +60,7 @@ void ReverseGeocodingTask::run()
     emit finished( this );
 }
 
-RoutingTask::RoutingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest ) :
+RoutingTask::RoutingTask( RoutingRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest ) :
     QObject(),
     m_runner( runner ),
     m_routeRequest( routeRequest )
@@ -75,7 +78,7 @@ void RoutingTask::run()
     emit finished( this );
 }
 
-ParsingTask::ParsingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role ) :
+ParsingTask::ParsingTask( ParsingRunner *runner, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role ) :
     QObject(),
     m_runner( runner ),
     m_fileName( fileName ),

@@ -12,7 +12,7 @@
 #ifndef MARBLE_OSMOPENROUTESERVICERUNNER_H
 #define MARBLE_OSMOPENROUTESERVICERUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "RoutingRunner.h"
 #include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QString>
@@ -23,7 +23,9 @@ class QNetworkAccessManager;
 namespace Marble
 {
 
-class OpenRouteServiceRunner : public MarbleAbstractRunner
+class GeoDataCoordinates;
+
+class OpenRouteServiceRunner : public RoutingRunner
 {
     Q_OBJECT
 

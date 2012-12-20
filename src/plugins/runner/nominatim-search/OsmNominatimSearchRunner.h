@@ -12,7 +12,7 @@
 #ifndef MARBLE_OSMNOMINATIMRUNNER_H
 #define MARBLE_OSMNOMINATIMRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "SearchRunner.h"
 
 #include <QtCore/QString>
 #include <QtNetwork/QHostInfo>
@@ -25,7 +25,7 @@ class QDomNodeList;
 namespace Marble
 {
 
-class OsmNominatimRunner : public MarbleAbstractRunner
+class OsmNominatimRunner : public SearchRunner
 {
     Q_OBJECT
 public:

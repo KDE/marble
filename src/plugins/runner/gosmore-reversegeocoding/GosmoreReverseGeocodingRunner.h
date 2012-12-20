@@ -13,14 +13,14 @@
 #ifndef MARBLE_GOSMOREREVERSEGEOCODINGRUNNER_H
 #define MARBLE_GOSMOREREVERSEGEOCODINGRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ReverseGeocodingRunner.h"
 
 namespace Marble
 {
 
 class GosmoreRunnerPrivate;
 
-class GosmoreRunner : public MarbleAbstractRunner
+class GosmoreRunner : public ReverseGeocodingRunner
 {
 public:
     explicit GosmoreRunner(QObject *parent = 0);

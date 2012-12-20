@@ -65,7 +65,7 @@ QList<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* LocalOsmSearchPlugin::newRunner() const
+SearchRunner* LocalOsmSearchPlugin::newRunner() const
 {
     if ( !m_databaseLoaded ) {
         m_databaseLoaded = true;

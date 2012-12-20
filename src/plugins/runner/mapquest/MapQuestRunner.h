@@ -12,7 +12,7 @@
 #ifndef MARBLE_OSMMAPQUESTRUNNER_H
 #define MARBLE_OSMMAPQUESTRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "RoutingRunner.h"
 
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>
@@ -22,7 +22,7 @@ class QNetworkAccessManager;
 namespace Marble
 {
 
-class MapQuestRunner : public MarbleAbstractRunner
+class MapQuestRunner : public RoutingRunner
 {
     Q_OBJECT
 

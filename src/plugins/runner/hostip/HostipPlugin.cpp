@@ -58,7 +58,7 @@ QList<PluginAuthor> HostipPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* HostipPlugin::newRunner() const
+SearchRunner* HostipPlugin::newRunner() const
 {
     return new HostipRunner;
 }

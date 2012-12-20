@@ -60,7 +60,7 @@ QList<PluginAuthor> MapQuestPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* MapQuestPlugin::newRunner() const
+RoutingRunner *MapQuestPlugin::newRunner() const
 {
     return new MapQuestRunner;
 }

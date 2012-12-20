@@ -10,12 +10,12 @@
 #ifndef MARBLEKMLRUNNER_H
 #define MARBLEKMLRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class KmlRunner : public MarbleAbstractRunner
+class KmlRunner : public ParsingRunner
 {
     Q_OBJECT
 public:

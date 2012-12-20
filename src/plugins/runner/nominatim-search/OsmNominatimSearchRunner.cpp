@@ -10,7 +10,6 @@
 
 #include "OsmNominatimSearchRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "GeoDataDocument.h"
@@ -30,7 +29,8 @@ namespace Marble
 {
 
 OsmNominatimRunner::OsmNominatimRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent ), m_manager( new QNetworkAccessManager (this ) )
+    SearchRunner( parent ),
+    m_manager( new QNetworkAccessManager (this ) )
 {
     connect(m_manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(handleResult(QNetworkReply*)));

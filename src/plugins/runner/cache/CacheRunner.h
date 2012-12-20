@@ -10,12 +10,12 @@
 #ifndef MARBLECACHERUNNER_H
 #define MARBLECACHERUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class CacheRunner : public MarbleAbstractRunner
+class CacheRunner : public ParsingRunner
 {
     Q_OBJECT
 public:

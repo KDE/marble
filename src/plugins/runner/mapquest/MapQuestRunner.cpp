@@ -10,7 +10,6 @@
 
 #include "MapQuestRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "GeoDataDocument.h"
@@ -33,7 +32,7 @@ namespace Marble
 {
 
 MapQuestRunner::MapQuestRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent ),
+    RoutingRunner( parent ),
     m_networkAccessManager( new QNetworkAccessManager( this ) ),
     m_request()
 {

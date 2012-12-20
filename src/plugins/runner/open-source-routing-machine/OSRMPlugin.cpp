@@ -58,7 +58,7 @@ QList<PluginAuthor> OSRMPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* OSRMPlugin::newRunner() const
+RoutingRunner *OSRMPlugin::newRunner() const
 {
     return new OSRMRunner;
 }

@@ -18,7 +18,7 @@ namespace Marble
 {
 
 GpxRunner::GpxRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 

@@ -17,7 +17,7 @@
 namespace Marble
 {
 
-class MarbleAbstractRunner;
+class SearchRunner;
 
 /**
   * A plugin for Marble to execute a placemark search.
@@ -43,7 +43,7 @@ public:
     /** Plugin factory method to create a new runner instance.
       * Method caller gets ownership of the returned object
       */
-    virtual MarbleAbstractRunner* newRunner() const = 0;
+    virtual SearchRunner *newRunner() const = 0;
 
     /** True if the plugin supports its tasks on the given planet */
     bool supportsCelestialBody( const QString &celestialBodyId ) const;
@@ -75,6 +75,6 @@ private:
 
 }
 
-Q_DECLARE_INTERFACE( Marble::SearchRunnerPlugin, "org.kde.Marble.SearchRunnerPlugin/1.0" )
+Q_DECLARE_INTERFACE( Marble::SearchRunnerPlugin, "org.kde.Marble.SearchRunnerPlugin/1.01" )
 
 #endif // MARBLE_SEARCHRUNNERPLUGIN_H

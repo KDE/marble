@@ -10,7 +10,6 @@
 
 #include "LocalDatabaseRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
 #include "GeoDataFeature.h"
@@ -27,7 +26,8 @@
 namespace Marble
 {
 
-LocalDatabaseRunner::LocalDatabaseRunner(QObject *parent) : MarbleAbstractRunner(parent)
+LocalDatabaseRunner::LocalDatabaseRunner(QObject *parent) :
+    SearchRunner(parent)
 {
 }
 

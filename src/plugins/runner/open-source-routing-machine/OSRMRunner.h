@@ -12,7 +12,8 @@
 #ifndef MARBLE_OSMOSRMRUNNER_H
 #define MARBLE_OSMOSRMRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "RoutingRunner.h"
+#include "GeoDataCoordinates.h"
 #include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QString>
@@ -25,7 +26,7 @@ namespace Marble
 
 class GeoDataLineString;
 
-class OSRMRunner : public MarbleAbstractRunner
+class OSRMRunner : public RoutingRunner
 {
     Q_OBJECT
 

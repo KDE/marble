@@ -40,7 +40,7 @@ public:
 
     QStringList fileExtensions() const;
 
-    virtual MarbleAbstractRunner* newRunner() const;
+    virtual ParsingRunner* newRunner() const;
 };
 
 }

@@ -10,7 +10,6 @@
 #include "LocalOsmSearchRunner.h"
 
 #include "OsmDatabase.h"
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -25,7 +24,7 @@ namespace Marble
 QMap<OsmPlacemark::OsmCategory, GeoDataFeature::GeoDataVisualCategory> LocalOsmSearchRunner::m_categoryMap;
 
 LocalOsmSearchRunner::LocalOsmSearchRunner( OsmDatabase *database, QObject *parent ) :
-    MarbleAbstractRunner( parent ),
+    SearchRunner( parent ),
     m_database( database )
 {
     if ( m_categoryMap.isEmpty() ) {

@@ -10,14 +10,14 @@
 #ifndef MARBLE_LATLONRUNNER_H
 #define MARBLE_LATLONRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "SearchRunner.h"
 
 #include <QtCore/QString>
 
 namespace Marble
 {
 
-class LatLonRunner : public MarbleAbstractRunner
+class LatLonRunner : public SearchRunner
 {
     Q_OBJECT
 public:

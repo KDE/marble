@@ -55,7 +55,7 @@ QList<PluginAuthor> LatLonPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* LatLonPlugin::newRunner() const
+SearchRunner* LatLonPlugin::newRunner() const
 {
     return new LatLonRunner;
 }

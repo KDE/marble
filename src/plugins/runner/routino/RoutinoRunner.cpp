@@ -211,7 +211,7 @@ GeoDataDocument* RoutinoRunnerPrivate::createDocument( GeoDataLineString* routeW
 }
 
 RoutinoRunner::RoutinoRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        RoutingRunner( parent ),
         d( new RoutinoRunnerPrivate )
 {
     // Check installation

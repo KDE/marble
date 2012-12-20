@@ -10,7 +10,7 @@
 #ifndef MARBLE_LOCALOSMSEARCHRUNNER_H
 #define MARBLE_LOCALOSMSEARCHRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "SearchRunner.h"
 #include "OsmPlacemark.h"
 #include "GeoDataFeature.h"
 
@@ -21,7 +21,7 @@ namespace Marble
 
 class OsmDatabase;
 
-class LocalOsmSearchRunner : public MarbleAbstractRunner
+class LocalOsmSearchRunner : public SearchRunner
 {
     Q_OBJECT
 public:

@@ -12,14 +12,14 @@
 #ifndef MARBLE_ROUTINORUNNER_H
 #define MARBLE_ROUTINORUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "RoutingRunner.h"
 
 namespace Marble
 {
 
 class RoutinoRunnerPrivate;
 
-class RoutinoRunner : public MarbleAbstractRunner
+class RoutinoRunner : public RoutingRunner
 {
     Q_OBJECT
 public:

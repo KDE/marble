@@ -10,7 +10,6 @@
 
 #include "OpenRouteServiceRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -32,7 +31,7 @@ namespace Marble
 {
 
 OpenRouteServiceRunner::OpenRouteServiceRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        RoutingRunner( parent ),
         m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
     connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),

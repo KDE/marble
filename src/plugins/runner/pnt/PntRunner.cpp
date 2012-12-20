@@ -27,7 +27,7 @@ namespace Marble
 const qreal INT2RAD = M_PI / 10800.0;
 
 PntRunner::PntRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 

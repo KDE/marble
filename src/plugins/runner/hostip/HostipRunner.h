@@ -10,7 +10,7 @@
 #ifndef MARBLE_HOSTIPRUNNER_H
 #define MARBLE_HOSTIPRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "SearchRunner.h"
 
 #include <QtCore/QString>
 #include <QtNetwork/QHostInfo>
@@ -22,7 +22,7 @@ class QNetworkReply;
 namespace Marble
 {
 
-class HostipRunner : public MarbleAbstractRunner
+class HostipRunner : public SearchRunner
 {
     Q_OBJECT
 public:

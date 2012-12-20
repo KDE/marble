@@ -60,7 +60,7 @@ QStringList JsonPlugin::fileExtensions() const
     return QStringList() << "js";
 }
 
-MarbleAbstractRunner* JsonPlugin::newRunner() const
+ParsingRunner* JsonPlugin::newRunner() const
 {
     return new JsonRunner;
 }

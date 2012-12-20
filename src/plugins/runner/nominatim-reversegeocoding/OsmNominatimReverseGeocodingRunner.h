@@ -12,7 +12,7 @@
 #ifndef MARBLE_OSMNOMINATIMRUNNER_H
 #define MARBLE_OSMNOMINATIMRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ReverseGeocodingRunner.h"
 #include "GeoDataCoordinates.h"
 
 #include <QtCore/QString>
@@ -25,7 +25,9 @@ class QDomNodeList;
 namespace Marble
 {
 
-class OsmNominatimRunner : public MarbleAbstractRunner
+class GeoDataExtendedData;
+
+class OsmNominatimRunner : public ReverseGeocodingRunner
 {
     Q_OBJECT
 public:

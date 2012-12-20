@@ -278,7 +278,7 @@ QList<PluginAuthor> MonavPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* MonavPlugin::newRunner() const
+RoutingRunner *MonavPlugin::newRunner() const
 {
     d->initialize();
     if ( !d->startDaemon() ) {

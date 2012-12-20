@@ -18,7 +18,7 @@ namespace Marble
 {
 
 OsmRunner::OsmRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 
