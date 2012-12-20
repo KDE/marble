@@ -13,10 +13,6 @@
 #include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "MarbleRunnerManager.h"
-#include "ParseRunnerPlugin.h"
-#include "ReverseGeocodingRunnerPlugin.h"
-#include "RoutingRunnerPlugin.h"
-#include "SearchRunnerPlugin.h"
 #include "routing/RouteRequest.h"
 
 #include <QtCore/QTimer>
@@ -42,80 +38,69 @@ MarbleRunnerManager *RunnerTask::manager()
     return m_manager;
 }
 
-SearchTask::SearchTask( const SearchRunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
+SearchTask::SearchTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
     RunnerTask( manager ),
-    m_factory( factory ),
-    m_model( model ),
+    m_runner( runner ),
     m_searchTerm( searchTerm ),
     m_preferredBbox( preferred )
 {
-    // nothing to do
+    connect( m_runner, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
+             manager, SLOT( addSearchResult( QVector<GeoDataPlacemark*> ) ) );
+    m_runner->setModel( model );
 }
 
 void SearchTask::runTask()
 {
-    MarbleAbstractRunner *runner = m_factory->newRunner();
-    connect( runner, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
-             manager(), SLOT( addSearchResult( QVector<GeoDataPlacemark*> ) ) );
-    runner->setModel( m_model );
-    runner->search( m_searchTerm, m_preferredBbox );
-    runner->deleteLater();
+    m_runner->search( m_searchTerm, m_preferredBbox );
+    m_runner->deleteLater();
 }
 
-ReverseGeocodingTask::ReverseGeocodingTask( const ReverseGeocodingRunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates ) :
+ReverseGeocodingTask::ReverseGeocodingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates ) :
     RunnerTask( manager ),
-    m_factory( factory ),
-    m_model( model ),
+    m_runner( runner ),
     m_coordinates( coordinates )
 {
-    // nothing to do
+    connect( m_runner, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
+             manager, SLOT( addReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
+    m_runner->setModel( model );
 }
 
 void ReverseGeocodingTask::runTask()
 {
-    MarbleAbstractRunner *runner = m_factory->newRunner();
-    connect( runner, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-             manager(), SLOT( addReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
-    runner->setModel( m_model );
-    runner->reverseGeocoding( m_coordinates );
-    runner->deleteLater();
+    m_runner->reverseGeocoding( m_coordinates );
+    m_runner->deleteLater();
 }
 
-RoutingTask::RoutingTask( RoutingRunnerPlugin* factory, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest ) :
+RoutingTask::RoutingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest ) :
     RunnerTask( manager ),
-    m_factory( factory ),
-    m_model( model ),
+    m_runner( runner ),
     m_routeRequest( routeRequest )
 {
-    // nothing to do
+    connect( m_runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
+             manager, SLOT( addRoutingResult( GeoDataDocument* ) ) );
+    m_runner->setModel( model );
 }
 
 void RoutingTask::runTask()
 {
-    MarbleAbstractRunner *runner = m_factory->newRunner();
-    connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
-             manager(), SLOT( addRoutingResult( GeoDataDocument* ) ) );
-    runner->setModel( m_model );
-    runner->retrieveRoute( m_routeRequest );
-    runner->deleteLater();
+    m_runner->retrieveRoute( m_routeRequest );
+    m_runner->deleteLater();
 }
 
-ParsingTask::ParsingTask( const ParseRunnerPlugin *factory, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role ) :
+ParsingTask::ParsingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role ) :
     RunnerTask( manager ),
-    m_factory( factory ),
+    m_runner( runner ),
     m_fileName( fileName ),
     m_role( role )
 {
-    // nothing to do
+    connect( m_runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
+             manager, SLOT( addParsingResult( GeoDataDocument*, QString ) ) );
 }
 
 void ParsingTask::runTask()
 {
-    MarbleAbstractRunner *runner = m_factory->newRunner();
-    connect( runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
-             manager(), SLOT( addParsingResult( GeoDataDocument*, QString ) ) );
-    runner->parseFile( m_fileName, m_role );
-    runner->deleteLater();
+    m_runner->parseFile( m_fileName, m_role );
+    m_runner->deleteLater();
 }
 
 }
