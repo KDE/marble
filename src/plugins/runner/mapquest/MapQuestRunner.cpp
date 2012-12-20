@@ -33,7 +33,8 @@ namespace Marble
 
 MapQuestRunner::MapQuestRunner( QObject *parent ) :
     MarbleAbstractRunner( parent ),
-    m_networkAccessManager( new QNetworkAccessManager( this ) )
+    m_networkAccessManager( new QNetworkAccessManager( this ) ),
+    m_request()
 {
     connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
              this, SLOT( retrieveData( QNetworkReply * ) ) );
@@ -81,16 +82,25 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
         append( &url, "routeType", settings["preference"].toString() );
     }
 
-    QNetworkReply *reply = m_networkAccessManager->get( QNetworkRequest( QUrl( url ) ) );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
+    m_request.setUrl( QUrl( url ) );
+    m_request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "MapQuestRunner" ) );
 
     QEventLoop eventLoop;
 
     connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
              &eventLoop, SLOT( quit() ) );
 
+    // @todo FIXME Must currently be done in the main thread, see bug 257376
+    QTimer::singleShot( 0, this, SLOT( get() ) );
+
     eventLoop.exec();
+}
+
+void MapQuestRunner::get()
+{
+    QNetworkReply *reply = m_networkAccessManager->get( m_request );
+    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
+             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
 }
 
 void MapQuestRunner::retrieveData( QNetworkReply *reply )
