@@ -60,6 +60,7 @@
 #include "MarbleClock.h"
 #include "BookmarkManager.h"
 #include "NewBookmarkFolderDialog.h"
+#include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
@@ -499,21 +500,19 @@ void MainWindow::createOnlineServicesMenu()
     }
 }
 
-void MainWindow::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoDataFolder &folder )
+void MainWindow::createBookmarksListMenu( QMenu *bookmarksListMenu, const GeoDataContainer *container )
 {
     //m_bookmarksListMenu->clear();
 
-    QVector<GeoDataPlacemark*> bookmarks = folder.placemarkList();
-    QVector<GeoDataPlacemark*>::const_iterator i = bookmarks.constBegin();
-    QVector<GeoDataPlacemark*>::const_iterator end = bookmarks.constEnd();
+    QVector<GeoDataPlacemark*> bookmarks = container->placemarkList();
 
-    for (; i != end; ++i ) {
-        QAction *bookmarkAct = new QAction( (*i)->name(), this );
+    foreach ( const GeoDataPlacemark *placemark, bookmarks ) {
+        QAction *bookmarkAct = new QAction( placemark->name(), this );
         QVariant var;
 
-        GeoDataLookAt* lookAt = (*i)->lookAt();
+        GeoDataLookAt* lookAt = placemark->lookAt();
         if ( !lookAt ) {
-            GeoDataCoordinates coordinates = (*i)->coordinate( m_controlView->marbleModel()->clockDateTime() );
+            GeoDataCoordinates coordinates = placemark->coordinate( m_controlView->marbleModel()->clockDateTime() );
             GeoDataLookAt coordinateToLookAt;
             coordinateToLookAt.setCoordinates( coordinates );
             coordinateToLookAt.setRange( marbleWidget()->lookAt().range() );
@@ -522,8 +521,7 @@ void MainWindow::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoD
             var.setValue( *lookAt );
         }
         bookmarkAct->setData( var );
-        m_bookmarksListMenu->addAction( bookmarkAct );
-
+        bookmarksListMenu->addAction( bookmarkAct );
     }
 
 }
@@ -532,6 +530,7 @@ void MainWindow::createBookmarkMenu()
     m_bookmarkMenu->clear();
     m_bookmarkMenu->addAction( m_addBookmarkAct );
     m_bookmarkMenu->addAction( m_toggleBookmarkDisplayAct );
+    m_toggleBookmarkDisplayAct->setChecked( m_controlView->marbleModel()->bookmarkManager()->document()->isVisible() );
     m_bookmarkMenu->addAction( m_setHomeAct );
     m_bookmarkMenu->addAction( m_manageBookmarksAct );
 
@@ -539,30 +538,28 @@ void MainWindow::createBookmarkMenu()
 
     m_bookmarkMenu->addAction( QIcon( ":/icons/go-home.png" ), "&Home",
                                m_controlView->marbleWidget(), SLOT( goHome() ) );
-    createFolderList();
+    createFolderList( m_bookmarkMenu, m_controlView->marbleModel()->bookmarkManager()->document() );
 }
 
-void MainWindow::createFolderList()
+void MainWindow::createFolderList( QMenu *bookmarksListMenu, const GeoDataContainer *container )
 {
-    QVector<GeoDataFolder*> folders = m_controlView->marbleModel()->bookmarkManager()->folders();
-
-    QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
-    QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
+    QVector<GeoDataFolder*> folders = container->folderList();
 
     if ( folders.size() == 1 ) {
-        createBookmarksListMenu( m_bookmarkMenu, *folders.first() );
-        connect( m_bookmarkMenu, SIGNAL( triggered ( QAction *) ),
-                                  this, SLOT( lookAtBookmark( QAction *) ) );
+        createBookmarksListMenu( bookmarksListMenu, folders.first() );
     }
     else {
-        for (; i != end; ++i ) {
-            QMenu *m_bookmarksListMenu = m_bookmarkMenu->addMenu( QIcon( ":/icons/folder-bookmark.png" ), (*i)->name() );
-
-            createBookmarksListMenu( m_bookmarksListMenu, *(*i) );
-            connect( m_bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
+        foreach ( const GeoDataFolder *folder, folders ) {
+            QMenu *subMenu = bookmarksListMenu->addMenu( QIcon( ":/icons/folder-bookmark.png" ), folder->name() );
+            createFolderList( subMenu, folder );
+            connect( subMenu, SIGNAL( triggered ( QAction *) ),
                                       this, SLOT( lookAtBookmark( QAction *) ) );
         }
     }
+
+    createBookmarksListMenu( bookmarksListMenu, container );
+    connect( bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
+                              this, SLOT( lookAtBookmark( QAction *) ) );
 }
 
 

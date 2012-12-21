@@ -134,11 +134,11 @@ private Q_SLOTS:
     //Bookmark Menu
     void  openEditBookmarkDialog();
     void  setHome();
-    void  createBookmarksListMenu(QMenu *m_bookmarksListMenu, const GeoDataFolder &folder);
+    void  createBookmarksListMenu( QMenu *bookmarksListMenu, const GeoDataContainer *container );
     void  lookAtBookmark( QAction * action );
     void  manageBookmarks();
     void  createBookmarkMenu();
-    void  createFolderList();
+    void  createFolderList( QMenu *bookmarksListMenu, const GeoDataContainer *container );
     void  showBookmarks( bool show );
 
     // Download region dialog
