@@ -395,26 +395,6 @@ PositionTracking *MarbleModel::positionTracking() const
     return &d->m_positionTracking;
 }
 
-void MarbleModel::openGpxFile( const QString& filename )
-{
-    addGeoDataFile( filename );
-}
-
-void MarbleModel::addPlacemarkFile( const QString& filename )
-{
-    addGeoDataFile( filename );
-}
-
-void MarbleModel::addPlacemarkData( const QString& data, const QString& key )
-{
-    addGeoDataString( data, key );
-}
-
-void MarbleModel::removePlacemarkKey( const QString& key )
-{
-    removeGeoData( key );
-}
-
 FileManager *MarbleModel::fileManager()
 {
     return d->m_fileManager;

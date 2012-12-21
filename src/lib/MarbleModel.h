@@ -182,29 +182,26 @@ class MARBLE_EXPORT MarbleModel : public QObject
     HttpDownloadManager *downloadManager();
     const HttpDownloadManager *downloadManager() const;
 
-    /**
-      * @deprecated Please use addGeoDataFile instead
-      */
-    MARBLE_DEPRECATED( void openGpxFile( const QString& filename ) );
 
     /**
-      * @deprecated Please use addGeoDataFile instead
-      */
-    MARBLE_DEPRECATED( void addPlacemarkFile( const QString& filename ) );
-
-    /**
-      * @deprecated Please use addGeoDataString instead
-      */
-    MARBLE_DEPRECATED( void addPlacemarkData( const QString& data, const QString& key = "data" ) );
-
-    /**
-      * @deprecated Please use removeGeoData instead
-      */
-    MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
-
+     * @brief Handle file loading into the treeModel
+     * @param filename the file to load
+     */
     void addGeoDataFile( const QString& filename );
+
+    /**
+     * @brief Handle raw data loading into the treeModel
+     * @param data the raw data to load
+     * @param key the name to remove this raw data later
+     */
     void addGeoDataString( const QString& data, const QString& key = "data" );
+
+    /**
+     * @brief Remove the file or raw data from the treeModel
+     * @param key either the file name or the key for raw data
+     */
     void removeGeoData( const QString& key );
+
     FileManager       *fileManager();
 
     PositionTracking   *positionTracking() const;
