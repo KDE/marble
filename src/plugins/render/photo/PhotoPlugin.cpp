@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 // Self
@@ -15,12 +16,15 @@
 
 // Marble
 #include "MarbleDebug.h"
+#include "MarbleModel.h"
+#include "MarbleWidget.h"
 
 using namespace Marble;
 /* TRANSLATOR Marble::PhotoPlugin */
 
 PhotoPlugin::PhotoPlugin()
-    : AbstractDataPlugin( 0 )
+    : AbstractDataPlugin( 0 ),
+      m_marbleWidget( 0 )
 {
 }
 
@@ -73,13 +77,29 @@ QString PhotoPlugin::copyrightYears() const
 QList<PluginAuthor> PhotoPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
+            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
 }
 
 QIcon PhotoPlugin::icon() const
 {
     return QIcon();
 }
+
+bool PhotoPlugin::eventFilter(QObject *object, QEvent *event)
+{
+    if ( isInitialized() ) {
+        PhotoPluginModel *photoPluginModel = dynamic_cast<PhotoPluginModel*>( model() );
+        Q_ASSERT( photoPluginModel );
+        MarbleWidget* widget = dynamic_cast<MarbleWidget*>( object );
+        if ( widget ) {
+            photoPluginModel->setMarbleWidget( widget );
+        }
+    }
+
+    return AbstractDataPlugin::eventFilter( object, event );
+}
+
 Q_EXPORT_PLUGIN2(PhotoPlugin, Marble::PhotoPlugin)
 
 #include "PhotoPlugin.moc"

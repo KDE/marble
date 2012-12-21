@@ -23,13 +23,14 @@ class QUrl;
 namespace Marble
 {
 
+class MarbleWidget;
 class TinyWebBrowser;
  
 class PhotoPluginItem : public AbstractDataPluginItem
 {
     Q_OBJECT
  public:
-    explicit PhotoPluginItem( QObject *parent );
+    explicit PhotoPluginItem( MarbleWidget *widget, QObject *parent );
     ~PhotoPluginItem();
     
     QString name() const;
@@ -72,6 +73,8 @@ class PhotoPluginItem : public AbstractDataPluginItem
     void openBrowser();
     
  private:
+    MarbleWidget *m_marbleWidget;
+
     LabelGraphicsItem m_image;
     QImage m_smallImage;
     QImage m_microImage;

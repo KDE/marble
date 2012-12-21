@@ -20,9 +20,11 @@
 
 using namespace Marble;
 
-FlickrParser::FlickrParser( QList<PhotoPluginItem *> *list,
+FlickrParser::FlickrParser( MarbleWidget *widget,
+                            QList<PhotoPluginItem *> *list,
                             QObject *parent )
-    : m_list( list ),
+    : m_marbleWidget( widget ),
+      m_list( list ),
       m_parent( parent )
 {
 }
@@ -109,7 +111,7 @@ void FlickrParser::readPhoto()
               && name() == "photo" );
 
     if( attributes().hasAttribute( "id" ) ) {
-        PhotoPluginItem *item = new PhotoPluginItem( m_parent );
+        PhotoPluginItem *item = new PhotoPluginItem( m_marbleWidget, m_parent );
         item->setId( attributes().value( "id" ).toString() );
         item->setServer( attributes().value( "server" ).toString() );
         item->setFarm( attributes().value( "farm" ).toString() );

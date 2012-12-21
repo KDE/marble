@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 // Self
@@ -20,6 +21,7 @@
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
 
 // Qt
 #include <QtCore/QHash>
@@ -32,7 +34,8 @@ const QString flickrApiKey( "620131a1b82b000c9582b94effcdc636" );
 
 PhotoPluginModel::PhotoPluginModel( const PluginManager *pluginManager,
                                     QObject *parent )
-    : AbstractDataPluginModel( "photo", pluginManager, parent )
+    : AbstractDataPluginModel( "photo", pluginManager, parent ),
+      m_marbleWidget( 0 )
 {
 }
 
@@ -122,7 +125,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
 void PhotoPluginModel::parseFile( const QByteArray& file )
 {
     QList<PhotoPluginItem*> list;
-    FlickrParser parser( &list, this );
+    FlickrParser parser( m_marbleWidget, &list, this );
     
     parser.read( file );
     
@@ -139,6 +142,11 @@ void PhotoPluginModel::parseFile( const QByteArray& file )
         downloadItemData( (*it)->photoUrl(), "thumbnail", (*it) );
         downloadItemData( (*it)->infoUrl(),  "info",      (*it) );
     }
+}
+
+void PhotoPluginModel::setMarbleWidget( MarbleWidget *widget )
+{
+    m_marbleWidget = widget;
 }
 
 #include "PhotoPluginModel.moc"

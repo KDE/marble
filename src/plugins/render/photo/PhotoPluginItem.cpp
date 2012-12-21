@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 
@@ -25,6 +26,11 @@
 #include "TinyWebBrowser.h"
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
+#include "MarbleModel.h"
+#include "RenderPlugin.h"
+#include "AbstractInfoDialog.h"
+#include "PluginManager.h"
 
 // Qt
 #include <QtGui/QAction>
@@ -37,8 +43,9 @@
 
 using namespace Marble;
 
-PhotoPluginItem::PhotoPluginItem( QObject *parent )
+PhotoPluginItem::PhotoPluginItem( MarbleWidget *widget, QObject *parent )
     : AbstractDataPluginItem( parent ),
+      m_marbleWidget( widget ),
       m_image( this ),
       m_browser( 0 )
 {
@@ -179,9 +186,32 @@ QAction *PhotoPluginItem::action()
 
 void PhotoPluginItem::openBrowser()
 {
+    if ( m_marbleWidget ) {
+         QList<RenderPlugin*> plugins = m_marbleWidget->renderPlugins();
+         foreach( RenderPlugin* renderPlugin, plugins) {
+
+            AbstractInfoDialog* infoDialog = dynamic_cast<AbstractInfoDialog*>( renderPlugin );
+            if ( infoDialog ) {
+                renderPlugin->setEnabled( true );
+                renderPlugin->setVisible( true );
+                Q_ASSERT( renderPlugin->isInitialized() );
+                if( !renderPlugin->isInitialized() ) {
+                    renderPlugin->initialize();
+                }
+                infoDialog->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
+                infoDialog->setSize( QSizeF( 400, 450 ) );
+                infoDialog->setUrl( QUrl( QString( "http://m.flickr.com/photos/%1/%2/" )
+                                          .arg( owner() ).arg( id() ) ) );
+                return;
+            }
+         }
+         mDebug() << "Unable to find a suitable render plugin for creating an info dialog";
+    }
+
     if( !m_browser ) {
         m_browser = new TinyWebBrowser();
     }
+
     QString url = "http://www.flickr.com/photos/%1/%2/";
     m_browser->load( QUrl( url.arg( owner() ).arg( id() ) ) );
     m_browser->show();

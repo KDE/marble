@@ -18,6 +18,8 @@ class QIcon;
 namespace Marble
 {
 
+class MarbleWidget;
+
 class PhotoPlugin : public AbstractDataPlugin
 {
     Q_OBJECT
@@ -48,6 +50,12 @@ class PhotoPlugin : public AbstractDataPlugin
     QList<PluginAuthor> pluginAuthors() const;
 
     QIcon icon() const;
+
+ protected:
+    bool eventFilter( QObject *object, QEvent *event );
+
+ private:
+    MarbleWidget *m_marbleWidget;
 };
 
 }
