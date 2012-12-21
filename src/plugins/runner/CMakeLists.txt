@@ -1,6 +1,5 @@
 # Search and/or reverse geocoding
 add_subdirectory( hostip )
-add_subdirectory( json )
 add_subdirectory( latlon )
 add_subdirectory( local-osm-search )
 add_subdirectory( localdatabase )
@@ -22,6 +21,7 @@ add_subdirectory( yours )
 #Parsing
 add_subdirectory( cache )
 add_subdirectory( gpx )
+add_subdirectory( json )
 add_subdirectory( kml )
 add_subdirectory( osm )
 add_subdirectory( pnt )

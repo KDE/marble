@@ -138,8 +138,6 @@ void License::initialize ()
 
 void License::updateLicenseText()
 {
-    setEnabled( true );
-    setVisible( true );
     const bool firstRun = ( m_label == 0 );
     if( firstRun ) {
         m_widgetItem = new WidgetGraphicsItem( this );
