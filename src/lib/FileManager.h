@@ -72,9 +72,6 @@ class FileManager : public QObject
     */
     void addData( const QString &name, const QString &data, DocumentRole role );
 
-    void saveFile( int index );
-    void closeFile( int index );
-
     void saveFile( GeoDataDocument *document );
     void closeFile( GeoDataDocument *document );
 
@@ -87,18 +84,14 @@ class FileManager : public QObject
     void fileRemoved( int index );
     void centeredDocument( const GeoDataLatLonBox& );
 
- public Q_SLOTS:
-    void addGeoDataDocument( GeoDataDocument *document );
-
- private Q_SLOTS:
-    void cleanupLoader( FileLoader *loader );
-
  private:
 
-    void appendLoader( FileLoader *loader );
+    Q_PRIVATE_SLOT( d, void addGeoDataDocument( GeoDataDocument *document ) )
+    Q_PRIVATE_SLOT( d, void cleanupLoader( FileLoader *loader ) )
 
     Q_DISABLE_COPY( FileManager )
 
+    friend class FileManagerPrivate;
     FileManagerPrivate *const d;
 };
 
