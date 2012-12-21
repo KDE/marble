@@ -50,7 +50,6 @@ class GeoDataPlacemark;
 class GeoPainter;
 class MeasureTool;
 class MapThemeManager;
-class FileViewModel;
 class PositionTracking;
 class HttpDownloadManager;
 class MarbleModelPrivate;
@@ -207,8 +206,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void addGeoDataString( const QString& data, const QString& key = "data" );
     void removeGeoData( const QString& key );
     FileManager       *fileManager();
-
-    FileViewModel      *fileViewModel();
 
     PositionTracking   *positionTracking() const;
 

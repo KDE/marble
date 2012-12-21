@@ -148,7 +148,6 @@ set(marblewidget_SRCS
     VectorMap.cpp
     FileLoader.cpp
     FileManager.cpp
-    FileViewModel.cpp
     PositionTracking.cpp
     DataMigration.cpp
 

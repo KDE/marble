@@ -54,7 +54,6 @@
 #include "MarbleClock.h"
 #include "FileStoragePolicy.h"
 #include "FileStorageWatcher.h"
-#include "FileViewModel.h"
 #include "PositionTracking.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDirs.h"
@@ -90,7 +89,6 @@ class MarbleModelPrivate
           m_downloadManager( &m_storagePolicy, &m_pluginManager ),
           m_storageWatcher( MarbleDirs::localPath() ),
           m_fileManager( 0 ),
-          m_fileviewmodel(),
           m_treemodel(),
           m_descendantproxy(),
           m_sortproxy(),
@@ -136,7 +134,6 @@ class MarbleModelPrivate
     // Places on the map
     FileManager             *m_fileManager;
 
-    FileViewModel            m_fileviewmodel;
     GeoDataTreeModel         m_treemodel;
     KDescendantsProxyModel   m_descendantproxy;
     QSortFilterProxyModel    m_sortproxy;
@@ -184,11 +181,6 @@ MarbleModel::MarbleModel( QObject *parent )
              &d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
 
     d->m_fileManager = new FileManager( this );
-    d->m_fileviewmodel.setFileManager( d->m_fileManager );
-    connect( d->m_fileManager,    SIGNAL( fileAdded(int)),
-             &d->m_fileviewmodel, SLOT( append(int)) );
-    connect( d->m_fileManager,    SIGNAL( fileRemoved(int)),
-             &d->m_fileviewmodel, SLOT(remove(int)) );
 
     d->m_routingManager = new RoutingManager( this, this );
 
@@ -401,11 +393,6 @@ QItemSelectionModel *MarbleModel::placemarkSelectionModel()
 PositionTracking *MarbleModel::positionTracking() const
 {
     return &d->m_positionTracking;
-}
-
-FileViewModel *MarbleModel::fileViewModel()
-{
-    return &d->m_fileviewmodel;
 }
 
 void MarbleModel::openGpxFile( const QString& filename )
