@@ -15,6 +15,7 @@
 // Marble
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
+#include "AbstractInfoDialog.h"
 #include "MarbleAboutDialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
@@ -226,11 +227,27 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
 
     if ( actionidx > 0 ) {
         const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
-
-        QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget->model()->clock(),  m_widget );
-        dialog->setWindowModality( Qt::WindowModal );
-        dialog->exec();
-        delete dialog;
+        if (!index->role().isEmpty()) {
+            QList<RenderPlugin*> list = m_widget->renderPlugins();
+            foreach(RenderPlugin *plug, list) {
+                AbstractInfoDialog* popup = dynamic_cast<AbstractInfoDialog*>(plug);
+                if(popup) {
+                    plug->setEnabled(true);
+                    plug->setVisible(true);
+                    if(!plug->isInitialized())
+                        plug->initialize();
+                    popup->setCoordinates(index->coordinate(), Qt::AlignRight | Qt::AlignVCenter);
+                    popup->setSize(QSizeF(500, 800));
+                    popup->setContent(index->description());
+                    return;
+                }
+            }
+        } else {
+            QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget->model()->clock(),  m_widget );
+            dialog->setWindowModality( Qt::WindowModal );
+            dialog->exec();
+            delete dialog;
+        }
     }
 }
 

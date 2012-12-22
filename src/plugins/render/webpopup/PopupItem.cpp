@@ -80,8 +80,8 @@ void PopupItem::setUrl( const QUrl &url )
 
 void PopupItem::setContent( const QString &html )
 {
-    /** @todo Pass to web view */
     m_content = html;
+    m_webView->setHtml(html);
 }
 
 void PopupItem::paint( QPainter *painter )

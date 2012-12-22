@@ -53,9 +53,9 @@ public:
 
     void setCoordinates( const GeoDataCoordinates &coordinates, Qt::Alignment alignment );
     void setUrl( const QUrl &url );
-    void setContent( const QString &html );
     void setSize( const QSizeF &size );
     void setPosition( const QPointF &position );
+    void setContent( const QString &html );
 
 public slots:
     void hidePopupItem();
