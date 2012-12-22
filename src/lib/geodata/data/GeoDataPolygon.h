@@ -151,7 +151,14 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
 
     \see GeoDataLinearRing
 */
-    GeoDataLinearRing& outerBoundary() const;
+    GeoDataLinearRing &outerBoundary();
+
+/*!
+    \brief Returns the outer boundary that is represented as a LinearRing.
+
+    \see GeoDataLinearRing
+*/
+    const GeoDataLinearRing &outerBoundary() const;
 
 /*!
     \brief Sets the given LinearRing as an outer boundary of the Polygon.
@@ -165,8 +172,14 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
 
     \see GeoDataLinearRing
 */
-    QVector<GeoDataLinearRing>& innerBoundaries() const;
+    QVector<GeoDataLinearRing>& innerBoundaries();
 
+/*!
+    \brief Returns a set of inner boundaries which are represented as LinearRings.
+
+    \see GeoDataLinearRing
+*/
+    const QVector<GeoDataLinearRing>& innerBoundaries() const;
 
 /*!
     \brief Appends a given LinearRing as an inner boundary of the Polygon.
