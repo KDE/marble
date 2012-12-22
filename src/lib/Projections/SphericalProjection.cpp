@@ -141,6 +141,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
                                              const QSizeF& size,
                                              bool &globeHidesPoint ) const
 {
+    pointRepeatNum = 0;
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = coordinates.quaternion();
 

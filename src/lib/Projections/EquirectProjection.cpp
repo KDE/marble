@@ -109,7 +109,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                                             const QSizeF& size,
                                             bool &globeHidesPoint ) const
 {
-    // On flat projections the observer's view onto the point won't be 
+    pointRepeatNum = 0;
+    // On flat projections the observer's view onto the point won't be
     // obscured by the target planet itself.
     globeHidesPoint = false;
 

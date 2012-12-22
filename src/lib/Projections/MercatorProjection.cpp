@@ -135,6 +135,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
                                             const QSizeF& size,
                                             bool &globeHidesPoint ) const
 {
+    pointRepeatNum = 0;
     // On flat projections the observer's view onto the point won't be 
     // obscured by the target planet itself.
     globeHidesPoint = false;
