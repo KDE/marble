@@ -291,7 +291,8 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
             continue;
         }
         
-        if( !currentBox.contains( (*i)->coordinate() ) ) {
+        (*i)->setProjection( viewport );
+        if( (*i)->positions().isEmpty() ) {
             continue;
         }
         
