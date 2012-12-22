@@ -62,6 +62,7 @@ void OpenDesktopModel::parseFile( const QByteArray& file )
     {  
     QScriptValueIterator iterator( data.property( "data" ) );
         // Add items to the list
+        QList<AbstractDataPluginItem*> items;
         while ( iterator.hasNext() )
         {
             iterator.next();
@@ -87,9 +88,12 @@ void OpenDesktopModel::parseFile( const QByteArray& file )
                 item->setFullName( QString( "%1 %2" ).arg( firstName ).arg( lastName ) );
                 item->setLocation( QString( "%1, %2" ).arg( city ).arg( country ) );
                 item->setRole( !role.isEmpty() ? role : QString( "nothing" ) );
-                downloadItemData( avatarUrl, "avatar", item );
+                downloadItem( avatarUrl, "avatar", item );
+                items << item;
             }
         }
+
+        addItemsToList( items );
     }
 }
  

@@ -102,7 +102,7 @@ void WikipediaModel::parseFile( const QByteArray& file )
         (*it)->setTarget( "earth" );
         QUrl thumbnailImageUrl = (*it)->thumbnailImageUrl();
         if ( m_showThumbnail && !thumbnailImageUrl.isEmpty() ) {
-            downloadItemData( thumbnailImageUrl, "thumbnail", *it );
+            downloadItem( thumbnailImageUrl, "thumbnail", *it );
         }
         else {
             items << *it;

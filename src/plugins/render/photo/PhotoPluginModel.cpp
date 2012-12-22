@@ -130,6 +130,7 @@ void PhotoPluginModel::parseFile( const QByteArray& file )
     parser.read( file );
     
     QList<PhotoPluginItem*>::iterator it;
+    QList<AbstractDataPluginItem*> items;
     
     for( it = list.begin(); it != list.end(); ++it ) {
         if( itemExists( (*it)->id() ) ) {
@@ -139,9 +140,11 @@ void PhotoPluginModel::parseFile( const QByteArray& file )
         
         // Currently all Flickr images with geotags are on earth
         (*it)->setTarget( "earth" );
-        downloadItemData( (*it)->photoUrl(), "thumbnail", (*it) );
-        downloadItemData( (*it)->infoUrl(),  "info",      (*it) );
+        downloadItem( (*it)->photoUrl(), "thumbnail", (*it) );
+        downloadItem( (*it)->infoUrl(),  "info",      (*it) );
+        items << *it;
     }
+    addItemsToList( items );
 }
 
 void PhotoPluginModel::setMarbleWidget( MarbleWidget *widget )

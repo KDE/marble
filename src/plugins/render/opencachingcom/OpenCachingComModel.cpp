@@ -115,7 +115,7 @@ void OpenCachingComModel::parseFile( const QByteArray& file )
 
 void OpenCachingComModel::fetchData(const QString& url, const QString &type, OpenCachingComItem *item)
 {
-    downloadItemData(url, type, item);
+    downloadItem(url, type, item);
 }
 
 const MarbleModel* OpenCachingComModel::marbleModel()
