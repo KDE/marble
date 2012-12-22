@@ -17,6 +17,7 @@
 #include <QtCore/QString>
 
 #include "marble_export.h"
+#include "MarbleGlobal.h"
 
 class QPoint;
 class QUrl;
@@ -119,12 +120,20 @@ public Q_SLOTS:
         
     /**
      * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
+     * download is finished.
+     * @param: The type of the download (to be specified by the subclasser)
+     **/
+    void downloadItem( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
+
+    /**
+     * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
      * download is finished. Additionally initialized() items will be added to the item list
      * after the download. It checks if a item with the same id is already in the list and
      * ignores and deletes the item in this case.
      * @param: The type of the download (to be specified by the subclasser)
+     * @deprecated Please use downloadItem() and addItemsToList() for efficiency
      **/
-    void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
+    MARBLE_DEPRECATED( void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item ) );
     
     /**
      * Download the description file from the @p url.

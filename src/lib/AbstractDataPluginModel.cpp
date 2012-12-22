@@ -355,18 +355,23 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
                                                 const QString& type,
                                                 AbstractDataPluginItem *item )
 {
+    downloadItem( url, type, item );
+    connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
+    addItemToList( item );
+}
+
+void AbstractDataPluginModel::downloadItem( const QUrl& url,
+                                                const QString& type,
+                                                AbstractDataPluginItem *item )
+{
     if( !item ) {
         return;
     }
 
     QString id = generateFilename( item->id(), type );
-    
+
     d->m_downloadManager.addJob( url, id, id, DownloadBrowse );
     d->m_downloadingItems.insert( id, item );
-    
-    connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
-
-    addItemToList( item );
 }
 
 void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url )
