@@ -24,8 +24,6 @@ WebPopupFloatItem::WebPopupFloatItem( const MarbleModel *marbleModel ) :
     RenderPlugin( marbleModel ),
     m_popupItem( 0 )
 {
-    setVisible( true );
-    setEnabled( true );
 }
 
 WebPopupFloatItem::~WebPopupFloatItem()
@@ -122,11 +120,9 @@ qreal WebPopupFloatItem::zValue() const
 
 void WebPopupFloatItem::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)
 {
-    /** @todo respect alignment */
-    Q_UNUSED( alignment );
-
     if ( m_popupItem ) {
         m_popupItem->setCoordinate( coordinates );
+        m_popupItem->setAlignment( alignment );
     }
 }
 

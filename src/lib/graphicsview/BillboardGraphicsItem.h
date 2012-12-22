@@ -37,6 +37,9 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
     GeoDataCoordinates coordinate() const;
     void setCoordinate( const GeoDataCoordinates &coordinates );
 
+    Qt::Alignment alignment() const;
+    void setAlignment( Qt::Alignment alignment );
+
     /**
      * @brief Returns the absolute screen positions of the item.
      *

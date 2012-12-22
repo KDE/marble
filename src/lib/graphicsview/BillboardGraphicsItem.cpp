@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 // self
@@ -22,7 +23,8 @@ class BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
 {
  public:
     Private( BillboardGraphicsItem *parent ) :
-        MarbleGraphicsItemPrivate( parent )
+        MarbleGraphicsItemPrivate( parent ),
+        m_alignment( Qt::AlignHCenter | Qt::AlignVCenter )
     {
     }
 
@@ -35,6 +37,8 @@ class BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
     {
         return m_positions;
     }
+
+    Qt::Alignment m_alignment;
 
     void setProjection( const ViewportParams *viewport )
     {
@@ -49,8 +53,26 @@ class BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
                                          m_size, globeHidesPoint );
         if ( !globeHidesPoint ) {
             for( int i = 0; i < pointRepeatNumber; ++i ) {
-                qint32 leftX = x[i] - ( m_size.width() / 2 );
-                qint32 topY = y    - ( m_size.height() / 2 );
+                // Handle vertical alignment
+                qint32 topY =  ( viewport->height() -  m_size.height() ) / 2;
+                if ( m_alignment & Qt::AlignTop ) {
+                  topY = y - m_size.height();
+                } else if ( m_alignment & Qt::AlignVCenter ) {
+                  topY = y - ( m_size.height() / 2 );
+                } else if ( m_alignment & Qt::AlignBottom ) {
+                  topY = y;
+                }
+
+                // Handle horizontal alignment
+                qint32 leftX = ( viewport->width() - m_size.width() ) / 2;
+                if ( m_alignment & Qt::AlignLeft ) {
+                  leftX =  x[i] - m_size.width();
+                } else if ( m_alignment & Qt::AlignHCenter ) {
+                  leftX = x[i] - ( m_size.width() / 2 );
+                } else if ( m_alignment & Qt::AlignRight ) {
+                  leftX = x[i];
+                }
+
                 QRect const position = QRect( QPoint ( leftX, topY ), m_size.toSize() );
                 if ( position.intersects( viewportRect ) ) {
                   m_positions.append( QPoint( leftX, topY ) );
@@ -91,6 +113,16 @@ QList<QRectF> BillboardGraphicsItem::boundingRects() const
         rects << QRectF(point, size);
     }
     return rects;
+}
+
+Qt::Alignment BillboardGraphicsItem::alignment() const
+{
+    return p()->m_alignment;
+}
+
+void BillboardGraphicsItem::setAlignment(Qt::Alignment alignment)
+{
+    p()->m_alignment = alignment;
 }
 
 BillboardGraphicsItem::Private *BillboardGraphicsItem::p() const
