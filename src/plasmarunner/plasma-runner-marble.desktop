@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=OpenStreetMap with Marble
+Name[bs]=OpenStreetMap sa Marble
 Name[ca]=OpenStreetMap amb el Marble
 Name[ca@valencia]=OpenStreetMap amb el Marble
 Name[cs]=OpenStreetMap v Marble
@@ -30,6 +31,7 @@ Name[x-test]=xxOpenStreetMap with Marblexx
 Name[zh_CN]=Marble 的 OpenStreetMap
 Name[zh_TW]=Marble 的 OpenStreetMap 支援
 Comment=Lookup places in OpenStreetMap with Marble
+Comment[bs]=Traženje mjesta u OpenStreetMap sa Marble
 Comment[ca]=Cerca llocs de l'OpenStreetMaps amb el Marble
 Comment[ca@valencia]=Cerca llocs de l'OpenStreetMaps amb el Marble
 Comment[cs]=Vyhledávat místa v OpenStreetMap pomocí Marble
