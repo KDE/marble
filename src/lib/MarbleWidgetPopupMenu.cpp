@@ -85,13 +85,11 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     m_rmbMenu->addAction( fromHere );
     m_rmbMenu->addAction( toHere );
     m_rmbMenu->addSeparator();
-    m_rmbMenu->addAction( tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
-    if ( smallScreen ) {
-        m_rmbMenu->addAction( addBookmark );
-    }
-    else {
+    m_rmbMenu->addAction( addBookmark );
+    if ( !smallScreen ) {
         m_rmbMenu->addAction( m_copyCoordinateAction );
     }
+    m_rmbMenu->addAction( tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
     m_rmbMenu->addSeparator();
     m_rmbMenu->addMenu( infoBoxMenu );
 
