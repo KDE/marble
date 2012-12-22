@@ -29,8 +29,6 @@ class RenderPlugin : QObject, Marble::RenderPluginInterface /Abstract/
 
 public:
     QAction*                action () const;
-    void                    applyItemState ();
-    void                    retrieveItemState ();
     bool                    enabled () const;
     bool                    visible () const;
     void                    setEnabled (bool enabled);
@@ -41,12 +39,6 @@ protected:
     bool                    eventFilter (QObject*, QEvent*);
 
 public:
-    enum ItemDataRole
-    {
-        NameId,
-        ConfigurationDialogAvailable,
-        BackendTypes
-    };
     virtual ~RenderPlugin ();
     virtual QList<QActionGroup*>*  actionGroups () const;
     virtual QList<QActionGroup*>*  toolbarActionGroups () const;
@@ -62,7 +54,6 @@ public:
     };
     virtual Marble::RenderPlugin::RenderType  renderType () const;
     const Marble::MarbleModel*  marbleModel () const;
-    QStandardItem*          item ();
     void                    restoreDefaultSettings ();
 signals:
     void                    repaintNeeded (QRegion dirtyRegion = QRegion());
