@@ -48,22 +48,23 @@ public:
     {
         // here we will set m_priority for default order
         const int prefix = 100;
-        m_priority["Mercury"] = prefix-1;
-        m_priority["Venus"] = prefix-2;
-        m_priority["Earth"] = prefix-3;
-        m_priority["Mars"] = prefix-4;
-        m_priority["Jupiter"] = prefix-5;
-        m_priority["Saturn"] = prefix-6;
-        m_priority["Uranus"] = prefix-7;
-        m_priority["Neptune"] = prefix-8;
-        m_priority["Pluto"] = prefix-9;
+        m_priority["mercury"] = prefix-1;
+        m_priority["venus"] = prefix-2;
+        m_priority["earth"] = prefix-3;
+        m_priority["mars"] = prefix-4;
+        m_priority["jupiter"] = prefix-5;
+        m_priority["saturn"] = prefix-6;
+        m_priority["uranus"] = prefix-7;
+        m_priority["neptune"] = prefix-8;
+        m_priority["pluto"] = prefix-9;
     }
     ~CelestialSortFilterProxyModel() {}
 
 protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const {
-        QString first = sourceModel()->data(left).toString();
-        QString second = sourceModel()->data(right).toString();
+        // get planetids for left and right planets
+        QString first = sourceModel()->index(left.row(), 1).data().toString();
+        QString second = sourceModel()->index(right.row(), 1).data().toString();
         // both are in the list
         if (m_priority.contains(first) && m_priority.contains(second)) {
             return m_priority[first] > m_priority[second];
