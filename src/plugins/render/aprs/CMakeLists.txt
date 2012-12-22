@@ -1,9 +1,9 @@
 PROJECT(AprsPlugin)
 
 macro_optional_find_package(QextSerialPort)
-if (QEXTSERIALPORT_FOUND)
-  message( STATUS "Building APRS plugin with serial port input")
-endif (QEXTSERIALPORT_FOUND)
+marble_set_package_properties( QextSerialPort PROPERTIES DESCRIPTION "access to serial ports" )
+marble_set_package_properties( QextSerialPort PROPERTIES URL "http://code.google.com/p/qextserialport/" )
+marble_set_package_properties( QextSerialPort PROPERTIES TYPE OPTIONAL PURPOSE "Reading from serial port in APRS plugin" )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
