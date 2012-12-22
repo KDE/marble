@@ -41,20 +41,20 @@ class BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
         m_positions.clear();
 
         qreal x[100], y;
-        int pointRepeatNumber;
+        int pointRepeatNumber = 0;
         bool globeHidesPoint;
 
-        if( viewport->screenCoordinates( m_coordinates,
-                                         x, y,
-                                         pointRepeatNumber,
-                                         m_size,
-                                         globeHidesPoint ) )
-        {
+        QRect const viewportRect = viewport->mapRegion().boundingRect();
+        viewport->screenCoordinates( m_coordinates, x, y, pointRepeatNumber,
+                                         m_size, globeHidesPoint );
+        if ( !globeHidesPoint ) {
             for( int i = 0; i < pointRepeatNumber; ++i ) {
                 qint32 leftX = x[i] - ( m_size.width() / 2 );
                 qint32 topY = y    - ( m_size.height() / 2 );
-
-                m_positions.append( QPoint( leftX, topY ) );
+                QRect const position = QRect( QPoint ( leftX, topY ), m_size.toSize() );
+                if ( position.intersects( viewportRect ) ) {
+                  m_positions.append( QPoint( leftX, topY ) );
+                }
             }
         }
     }
