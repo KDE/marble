@@ -129,6 +129,8 @@ public Q_SLOTS:
  private Q_SLOTS:
     virtual void favoriteItemsChanged( const QStringList& favoriteItems );
 
+    void delayedUpdate();
+
  Q_SIGNALS:
     void changedNumberOfItems( quint32 number );
 

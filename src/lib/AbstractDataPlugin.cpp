@@ -22,6 +22,7 @@
 
 // Qt
 #include <QtCore/QEvent>
+#include <QtCore/QTimer>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QRegion>
 #include <QtDeclarative/QDeclarativeComponent>
@@ -40,6 +41,7 @@ class AbstractDataPluginPrivate
           m_delegate( 0 ),
           m_delegateParent( 0 )
     {
+      m_updateTimer.setSingleShot( true );
     }
     
     ~AbstractDataPluginPrivate() {
@@ -51,12 +53,14 @@ class AbstractDataPluginPrivate
     QDeclarativeComponent* m_delegate;
     QGraphicsItem* m_delegateParent;
     QMap<AbstractDataPluginItem*,QDeclarativeItem*> m_delegateInstances;
+    QTimer m_updateTimer;
 };
 
 AbstractDataPlugin::AbstractDataPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
       d( new AbstractDataPluginPrivate )
 {
+  connect( &d->m_updateTimer, SIGNAL( timeout() ), this, SIGNAL( repaintNeeded() ) );
 }
 
 AbstractDataPlugin::~AbstractDataPlugin()
@@ -121,12 +125,12 @@ AbstractDataPluginModel *AbstractDataPlugin::model() const
 void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
 {
     if ( d->m_model ) {
-        disconnect( d->m_model, SIGNAL( itemsUpdated() ), this, SIGNAL( repaintNeeded() ) );
+        disconnect( d->m_model, SIGNAL( itemsUpdated() ), this, SLOT( delayedUpdate() ) );
         delete d->m_model;
     }
     d->m_model = model;
 
-    connect( d->m_model, SIGNAL( itemsUpdated() ), this, SIGNAL( repaintNeeded() ) );
+    connect( d->m_model, SIGNAL( itemsUpdated() ), this, SLOT( delayedUpdate() ) );
     connect( d->m_model, SIGNAL( favoriteItemsChanged( const QStringList& ) ), this,
              SLOT( favoriteItemsChanged( const QStringList& ) ) );
     connect( d->m_model, SIGNAL( favoriteItemsOnlyChanged() ), this,
@@ -296,7 +300,15 @@ void AbstractDataPlugin::handleViewportChange( ViewportParams* viewport )
 
 void AbstractDataPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
 {
-    Q_UNUSED( favoriteItems )
+  Q_UNUSED( favoriteItems )
+}
+
+void AbstractDataPlugin::delayedUpdate()
+{
+  if ( !d->m_updateTimer.isActive() )
+  {
+    d->m_updateTimer.start( 500 );
+  }
 }
 
 } // namespace Marble
