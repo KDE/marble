@@ -29,9 +29,6 @@ class GeoGraphicsItem
 
 public:
                             GeoGraphicsItem ();
-    Marble::GeoDataCoordinates  coordinate () const;
-    void                    setCoordinate (const Marble::GeoDataCoordinates& point);
-
 
     virtual ~GeoGraphicsItem ();
     enum GeoGraphicsItemFlag

@@ -49,7 +49,7 @@ public:
 //ig    void                    setExtendedData (const GeoDataExtendedData& extendedData);
     virtual const char*     nodeType () const;
     virtual Marble::EnumGeometryId  geometryId () const;
-    virtual Marble::GeoDataLatLonAltBox&  latLonAltBox () const;
+    virtual const Marble::GeoDataLatLonAltBox&  latLonAltBox () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
 };

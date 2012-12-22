@@ -42,7 +42,7 @@ public:
 private:
 //ig                            GeoDataGeometry (GeoDataGeometryPrivate* priv);
 public:
-    virtual Marble::GeoDataLatLonAltBox&  latLonAltBox () const;
+    virtual const Marble::GeoDataLatLonAltBox&  latLonAltBox () const;
 };
 // GeoDataGeometry
 

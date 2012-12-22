@@ -31,7 +31,7 @@ public:
     explicit                GeoDataRegion (Marble::GeoDataFeature* feature);
     virtual ~GeoDataRegion ();
     virtual const char*     nodeType () const;
-    Marble::GeoDataLatLonAltBox&  latLonAltBox () const;
+    const Marble::GeoDataLatLonAltBox&  latLonAltBox () const;
     void                    setLatLonAltBox (const Marble::GeoDataLatLonAltBox& latLonAltBox);
     Marble::GeoDataLod&     lod () const;
     void                    setLod (const Marble::GeoDataLod& lod);

@@ -49,7 +49,7 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     virtual ~GeoDataMultiGeometry ();
-    virtual Marble::GeoDataLatLonAltBox&  latLonAltBox () const;
+    virtual const Marble::GeoDataLatLonAltBox&  latLonAltBox () const;
     Marble::GeoDataGeometry*  child (int);
     int                     childPosition (Marble::GeoDataGeometry* child);
     void                    append (Marble::GeoDataGeometry* other);
