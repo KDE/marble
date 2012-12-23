@@ -123,7 +123,7 @@ void PopupItem::colorize( QImage &img, const QColor &col )
 
 void PopupItem::paint( QPainter *painter )
 {
-    QRect popupRect( -10, -10, size().width(), size().height() );
+    QRect popupRect( -10, -10, size().width()+20, size().height()+20 );
     qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
                       pixmap("marble/webpopup/webpopup2"));
 
@@ -155,7 +155,7 @@ void PopupItem::paint( QPainter *painter )
         }
     }
 
-    m_widget->setFixedSize( size().toSize() - QSize( 20, 20 ) );
+    m_widget->setFixedSize( size().toSize() );
     m_widget->render( painter, QPoint( 0, 0 ), QRegion() );
 }
 
