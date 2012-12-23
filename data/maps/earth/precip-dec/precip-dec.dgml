@@ -135,16 +135,16 @@
                     <value>true</value>
                 </property>
                 <property name="waterbodies">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
                 <property name="lakes">
                     <available>false</available>
                     <value>false</value>
                 </property>
                 <property name="rivers">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
             </group>
             <group name="Surface">
