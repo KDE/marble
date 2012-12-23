@@ -56,7 +56,7 @@
                     <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
                     <pen color="#ffffff" />
                 </vector>
-                <vector name="rivers" feature="river" connect="waterbodies">
+                <vector name="rivers" feature="river">
                     <sourcefile> mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#ffffff" />
                 </vector>
