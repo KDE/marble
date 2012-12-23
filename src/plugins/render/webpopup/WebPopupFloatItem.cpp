@@ -7,6 +7,7 @@
 //
 // Copyright 2012   Mohammed Nafees   <nafees.technocool@gmail.com>
 // Copyright 2012   Dennis Nienhüser  <earthwings@gentoo.org>
+// Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #include "WebPopupFloatItem.h"
@@ -69,6 +70,7 @@ QList<PluginAuthor> WebPopupFloatItem::pluginAuthors() const
 {
     return QList<PluginAuthor>()
            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" )
+           << PluginAuthor( "Illya Kovalevskyy", "illya.kovalevskyy@gmail.com" )
            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "<earthwings@gentoo.org>" );
 }
 
@@ -137,6 +139,20 @@ void WebPopupFloatItem::setContent( const QString &html )
 {
     if ( m_popupItem ) {
         m_popupItem->setContent( html );
+    }
+}
+
+void WebPopupFloatItem::setBackgroundColor(const QColor &color)
+{
+    if(color.isValid()) {
+        m_popupItem->setBackgroundColor(color);
+    }
+}
+
+void WebPopupFloatItem::setTextColor(const QColor &color)
+{
+    if(color.isValid()) {
+        m_popupItem->setTextColor(color);
     }
 }
 

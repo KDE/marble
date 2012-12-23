@@ -5,8 +5,10 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
+// Copyright 2012   Torsten Rahn      <tackat@kde.org>
 // Copyright 2012   Mohammed Nafees   <nafees.technocool@gmail.com>
 // Copyright 2012   Dennis Nienhüser  <earthwings@gentoo.org>
+// Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #include "PopupItem.h"
@@ -28,13 +30,15 @@ PopupItem::PopupItem( QObject* parent ) :
     BillboardGraphicsItem(),
     m_widget( new QWidget ),
     m_webView( new QWebView ( m_widget ) ),
+    m_textColor( QColor(Qt::black) ),
+    m_backColor( QColor(Qt::white) ),
     m_needMouseRelease(false)
 {
     setVisible( false );
 
     QGridLayout *childLayout = new QGridLayout;
-    QLabel *titleText = new QLabel( m_widget );
-    childLayout->addWidget( titleText, 0, 0 );
+    m_titleText = new QLabel( m_widget );
+    childLayout->addWidget( m_titleText, 0, 0 );
     QPushButton *hideButton = new QPushButton( m_widget );
     hideButton->setIcon( QIcon( ":/marble/webpopup/icon-remove.png" ) );
     hideButton->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
@@ -53,8 +57,10 @@ PopupItem::PopupItem( QObject* parent ) :
     m_webView->page()->setPalette(palette);
     m_webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
 
-    connect( m_webView, SIGNAL(titleChanged(QString)), titleText, SLOT(setText(QString)) );
+    connect( m_webView, SIGNAL(titleChanged(QString)), m_titleText, SLOT(setText(QString)) );
     connect( hideButton, SIGNAL(clicked()), this, SIGNAL(hide()) );
+
+    generateGraphics();
 }
 
 PopupItem::~PopupItem()
@@ -84,75 +90,123 @@ void PopupItem::setContent( const QString &html )
     m_webView->setHtml(html);
 }
 
+void PopupItem::setTextColor(const QColor &color)
+{
+    if(color.isValid() && m_titleText != 0) {
+        m_textColor = color;
+        QPalette palette(m_titleText->palette());
+        palette.setColor(QPalette::WindowText, m_textColor);
+        m_titleText->setPalette(palette);
+    }
+}
+void PopupItem::setBackgroundColor(const QColor &color)
+{
+    if(color.isValid()) {
+        m_backColor = color;
+        generateGraphics();
+    }
+}
+
+void PopupItem::colorize(QImage &img, const QColor &col)
+{
+    if (img.depth() <= 8) return;
+    int pixels = img.width()*img.height();
+    unsigned int *data = (unsigned int *) img.bits();
+    for (int i=0; i < pixels; ++i) {
+        int val = qGray(data[i]);
+        data[i] = qRgba(col.red()*val/255,col.green()*val/255, col.blue()*val/255, qAlpha(data[i]));
+    }
+}
+
+void PopupItem::generateGraphics()
+{
+    m_cache.popup = QImage(":/marble/webpopup/webpopup2.png");
+    colorize(m_cache.popup, m_backColor);
+
+    m_cache.topLeft = QImage(":/marble/webpopup/arrow2_topleft.png");
+    colorize(m_cache.topLeft, m_backColor);
+
+    m_cache.bottomLeft = QImage(":/marble/webpopup/arrow2_bottomleft.png");
+    colorize(m_cache.bottomLeft, m_backColor);
+
+    m_cache.topRight = QImage(":/marble/webpopup/arrow2_topright.png");
+    colorize(m_cache.topRight, m_backColor);
+
+    m_cache.bottomRight = QImage(":/marble/webpopup/arrow2_bottomright.png");
+    colorize(m_cache.bottomRight, m_backColor);
+}
+
 void PopupItem::paint( QPainter *painter )
 {
     QRect popupRect( -10, -10, size().width(), size().height() );
+
     qDrawBorderPixmap( painter, popupRect, QMargins( 20, 20, 20, 20 ),
                        QPixmap::fromImage( QImage( ":/marble/webpopup/webpopup2_shadow.png" ) ) );
-    qDrawBorderPixmap( painter, popupRect, QMargins( 20, 20, 20, 20 ),
-                       QPixmap::fromImage( QImage( ":/marble/webpopup/webpopup2.png" ) ) );
+
+    qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
+                      QPixmap::fromImage(m_cache.popup));
 
     if ( alignment() & Qt::AlignRight )
     {
         if ( alignment() & Qt::AlignTop )
         {
             QImage placemarkShadowImage( ":/marble/webpopup/arrow2_topleft_shadow.png" );
-            QImage placemarkImage( ":/marble/webpopup/arrow2_topleft.png" );
             painter->drawImage( - ( placemarkShadowImage.width() - 3 ), 0,
                                 placemarkShadowImage );
-            painter->drawImage( - ( placemarkImage.width() - 3 ), 0,
-                                placemarkImage );
+
+            painter->drawImage( - ( m_cache.topLeft.width() - 3 ), 0,
+                                m_cache.topLeft );
         } else if ( alignment() & Qt::AlignBottom )
         {
             QImage placemarkShadowImage( ":/marble/webpopup/arrow2_bottomleft_shadow.png" );
-            QImage placemarkImage( ":/marble/webpopup/arrow2_bottomleft.png" );
             painter->drawImage( - ( placemarkShadowImage.width() - 3 ),
                                 size().height() - placemarkShadowImage.height(),
                                 placemarkShadowImage );
-            painter->drawImage( - ( placemarkImage.width() - 3 ),
-                                size().height() - placemarkImage.height(),
-                                placemarkImage );
+
+            painter->drawImage( - ( m_cache.bottomLeft.width() - 3 ),
+                                size().height() - m_cache.bottomLeft.height(),
+                                m_cache.bottomLeft );
         } else // for no horizontal align value and Qt::AlignVCenter
         {
             QImage placemarkShadowImage( ":/marble/webpopup/arrow2_topleft_shadow.png" );
-            QImage placemarkImage( ":/marble/webpopup/arrow2_topleft.png" );
             painter->drawImage( - ( placemarkShadowImage.width() - 3 ),
                                 size().height() / 2 - placemarkShadowImage.height() / 2,
                                 placemarkShadowImage );
-            painter->drawImage( - ( placemarkImage.width() - 3 ),
-                                size().height() / 2 - placemarkImage.height() / 2,
-                                placemarkImage );
+
+            painter->drawImage( - ( m_cache.topLeft.width() - 3 ),
+                                size().height() / 2 - m_cache.topLeft.height() / 2,
+                                m_cache.topLeft );
         }
     } else if ( alignment() & Qt::AlignLeft )
     {
         if ( alignment() & Qt::AlignTop )
         {
             QImage placemarkShadowImage( ":/marble/webpopup/arrow2_topright_shadow.png" );
-            QImage placemarkImage( ":/marble/webpopup/arrow2_topright.png" );
             painter->drawImage( size().width() - 23, 0,
                                 placemarkShadowImage );
+
             painter->drawImage( size().width() - 23, 0,
-                                placemarkImage );
+                                m_cache.topRight );
         } else if ( alignment() & Qt::AlignBottom )
         {
             QImage placemarkShadowImage( ":/marble/webpopup/arrow2_bottomright_shadow.png" );
-            QImage placemarkImage( ":/marble/webpopup/arrow2_bottomright.png" );
             painter->drawImage( size().width() - 23,
                                 size().height() - placemarkShadowImage.height(),
                                 placemarkShadowImage );
+
             painter->drawImage( size().width() - 23,
-                                size().height() - placemarkImage.height(),
-                                placemarkImage );
+                                size().height() - m_cache.bottomRight.height(),
+                                m_cache.bottomRight );
         } else // for no horizontal align value and Qt::AlignVCenter
         {
             QImage placemarkShadowImage( ":/marble/webpopup/arrow2_topright_shadow.png" );
-            QImage placemarkImage( ":/marble/webpopup/arrow2_topright.png" );
             painter->drawImage( size().width() - 23,
                                 size().height() / 2 - placemarkShadowImage.height() / 2,
                                 placemarkShadowImage );
+
             painter->drawImage( size().width() - 23,
-                                size().height() / 2 - placemarkImage.height() / 2,
-                                placemarkImage );
+                                size().height() / 2 - m_cache.topRight.height() / 2,
+                                m_cache.topRight );
         }
     }
 

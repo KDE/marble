@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012   Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #ifndef MARBLE_ABSTRACTINFODIALOG_H
@@ -60,6 +61,18 @@ public:
      * of the geo position
      */
     virtual void setCoordinates( const GeoDataCoordinates &coordinates, Qt::Alignment alignment ) = 0;
+
+    /**
+     * @brief setBackgroundColor Set background color to @p color
+     * @param color background color in Qt format
+     */
+    virtual void setBackgroundColor( const QColor &color ) = 0;
+
+    /**
+     * @brief setTextColor Set text color to @p color
+     * @param color text color in Qt format
+     */
+    virtual void setTextColor( const QColor &color ) = 0;
 
     /**
      * @brief Change the content to display by loading from an URL

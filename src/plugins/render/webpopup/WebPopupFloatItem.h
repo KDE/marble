@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012   Mohammed Nafees   <nafees.technocool@gmail.com>
+// Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #ifndef WEBPOPUPFLOATITEM_H
@@ -56,6 +57,8 @@ public:
     void setSize( const QSizeF &size );
     void setPosition( const QPointF &position );
     void setContent( const QString &html );
+    void setBackgroundColor( const QColor &color );
+    void setTextColor( const QColor &color );
 
 public slots:
     void hidePopupItem();
