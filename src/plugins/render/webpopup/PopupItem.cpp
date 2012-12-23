@@ -120,93 +120,49 @@ void PopupItem::colorize(QImage &img, const QColor &col)
 
 void PopupItem::generateGraphics()
 {
-    m_cache.popup = QImage(":/marble/webpopup/webpopup2.png");
-    colorize(m_cache.popup, m_backColor);
+    m_cache.popup = merge( "webpopup2" );
+    m_cache.topLeft = merge( "arrow2_topleft" );
+    m_cache.bottomLeft = merge( "arrow2_bottomleft" );
+    m_cache.topRight = merge( "arrow2_topright" );
+    m_cache.bottomRight = merge( "arrow2_bottomright" );
+}
 
-    m_cache.topLeft = QImage(":/marble/webpopup/arrow2_topleft.png");
-    colorize(m_cache.topLeft, m_backColor);
-
-    m_cache.bottomLeft = QImage(":/marble/webpopup/arrow2_bottomleft.png");
-    colorize(m_cache.bottomLeft, m_backColor);
-
-    m_cache.topRight = QImage(":/marble/webpopup/arrow2_topright.png");
-    colorize(m_cache.topRight, m_backColor);
-
-    m_cache.bottomRight = QImage(":/marble/webpopup/arrow2_bottomright.png");
-    colorize(m_cache.bottomRight, m_backColor);
+QImage PopupItem::merge( const QString &imageId )
+{
+  QImage bottom = QImage( QString( ":/marble/webpopup/%1_shadow.png" ).arg( imageId) );
+  QImage top = QImage( QString( ":/marble/webpopup/%1.png" ).arg( imageId) );
+  colorize( top, m_backColor );
+  QPainter painter( &bottom );
+  painter.drawImage( QPoint(0,0), top );
+  return bottom;
 }
 
 void PopupItem::paint( QPainter *painter )
 {
     QRect popupRect( -10, -10, size().width(), size().height() );
-
-    qDrawBorderPixmap( painter, popupRect, QMargins( 20, 20, 20, 20 ),
-                       QPixmap::fromImage( QImage( ":/marble/webpopup/webpopup2_shadow.png" ) ) );
-
     qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
                       QPixmap::fromImage(m_cache.popup));
 
-    if ( alignment() & Qt::AlignRight )
-    {
-        if ( alignment() & Qt::AlignTop )
-        {
-            QImage placemarkShadowImage( ":/marble/webpopup/arrow2_topleft_shadow.png" );
-            painter->drawImage( - ( placemarkShadowImage.width() - 3 ), 0,
-                                placemarkShadowImage );
-
+    if ( alignment() & Qt::AlignRight ) {
+        if ( alignment() & Qt::AlignTop ) {
             painter->drawImage( - ( m_cache.topLeft.width() - 3 ), 0,
                                 m_cache.topLeft );
-        } else if ( alignment() & Qt::AlignBottom )
-        {
-            QImage placemarkShadowImage( ":/marble/webpopup/arrow2_bottomleft_shadow.png" );
-            painter->drawImage( - ( placemarkShadowImage.width() - 3 ),
-                                size().height() - placemarkShadowImage.height(),
-                                placemarkShadowImage );
-
+        } else if ( alignment() & Qt::AlignBottom ) {
             painter->drawImage( - ( m_cache.bottomLeft.width() - 3 ),
                                 size().height() - m_cache.bottomLeft.height(),
                                 m_cache.bottomLeft );
-        } else // for no horizontal align value and Qt::AlignVCenter
-        {
-            QImage placemarkShadowImage( ":/marble/webpopup/arrow2_topleft_shadow.png" );
-            painter->drawImage( - ( placemarkShadowImage.width() - 3 ),
-                                size().height() / 2 - placemarkShadowImage.height() / 2,
-                                placemarkShadowImage );
-
+        } else { // for no horizontal align value and Qt::AlignVCenter
             painter->drawImage( - ( m_cache.topLeft.width() - 3 ),
                                 size().height() / 2 - m_cache.topLeft.height() / 2,
                                 m_cache.topLeft );
         }
-    } else if ( alignment() & Qt::AlignLeft )
-    {
-        if ( alignment() & Qt::AlignTop )
-        {
-            QImage placemarkShadowImage( ":/marble/webpopup/arrow2_topright_shadow.png" );
-            painter->drawImage( size().width() - 23, 0,
-                                placemarkShadowImage );
-
-            painter->drawImage( size().width() - 23, 0,
-                                m_cache.topRight );
-        } else if ( alignment() & Qt::AlignBottom )
-        {
-            QImage placemarkShadowImage( ":/marble/webpopup/arrow2_bottomright_shadow.png" );
-            painter->drawImage( size().width() - 23,
-                                size().height() - placemarkShadowImage.height(),
-                                placemarkShadowImage );
-
-            painter->drawImage( size().width() - 23,
-                                size().height() - m_cache.bottomRight.height(),
-                                m_cache.bottomRight );
-        } else // for no horizontal align value and Qt::AlignVCenter
-        {
-            QImage placemarkShadowImage( ":/marble/webpopup/arrow2_topright_shadow.png" );
-            painter->drawImage( size().width() - 23,
-                                size().height() / 2 - placemarkShadowImage.height() / 2,
-                                placemarkShadowImage );
-
-            painter->drawImage( size().width() - 23,
-                                size().height() / 2 - m_cache.topRight.height() / 2,
-                                m_cache.topRight );
+    } else if ( alignment() & Qt::AlignLeft ) {
+        if ( alignment() & Qt::AlignTop ) {
+            painter->drawImage( size().width() - 23, 0, m_cache.topRight );
+        } else if ( alignment() & Qt::AlignBottom ) {
+            painter->drawImage( size().width() - 23, size().height() - m_cache.bottomRight.height(), m_cache.bottomRight );
+        } else { // for no horizontal align value and Qt::AlignVCenter
+            painter->drawImage( size().width() - 23, size().height() / 2 - m_cache.topRight.height() / 2, m_cache.topRight );
         }
     }
 

@@ -42,14 +42,16 @@ public:
 
 protected:
     void paint( QPainter *painter );
-    void colorize(QImage &img, const QColor &col);
-    void generateGraphics();
 
 Q_SIGNALS:
     void dirty();
     void hide();
 
 private:
+    void colorize(QImage &img, const QColor &col);
+    void generateGraphics();
+    QImage merge( const QString &imageId );
+
     struct RenderImageCache
     {
         QImage popup;
