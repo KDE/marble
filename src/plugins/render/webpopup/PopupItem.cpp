@@ -20,6 +20,7 @@
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
+#include <QtGui/QPixmapCache>
 #include <qdrawutil.h>
 
 namespace Marble
@@ -59,8 +60,6 @@ PopupItem::PopupItem( QObject* parent ) :
 
     connect( m_webView, SIGNAL(titleChanged(QString)), m_titleText, SLOT(setText(QString)) );
     connect( hideButton, SIGNAL(clicked()), this, SIGNAL(hide()) );
-
-    generateGraphics();
 }
 
 PopupItem::~PopupItem()
@@ -103,11 +102,15 @@ void PopupItem::setBackgroundColor(const QColor &color)
 {
     if(color.isValid()) {
         m_backColor = color;
-        generateGraphics();
+        QPixmapCache::remove( "marble/webpopup/webpopup2" );
+        QPixmapCache::remove( "marble/webpopup/arrow2_topleft" );
+        QPixmapCache::remove( "marble/webpopup/arrow2_bottomleft" );
+        QPixmapCache::remove( "marble/webpopup/arrow2_topright" );
+        QPixmapCache::remove( "marble/webpopup/arrow2_bottomright" );
     }
 }
 
-void PopupItem::colorize(QImage &img, const QColor &col)
+void PopupItem::colorize( QImage &img, const QColor &col )
 {
     if (img.depth() <= 8) return;
     int pixels = img.width()*img.height();
@@ -118,51 +121,37 @@ void PopupItem::colorize(QImage &img, const QColor &col)
     }
 }
 
-void PopupItem::generateGraphics()
-{
-    m_cache.popup = merge( "webpopup2" );
-    m_cache.topLeft = merge( "arrow2_topleft" );
-    m_cache.bottomLeft = merge( "arrow2_bottomleft" );
-    m_cache.topRight = merge( "arrow2_topright" );
-    m_cache.bottomRight = merge( "arrow2_bottomright" );
-}
-
-QImage PopupItem::merge( const QString &imageId )
-{
-  QImage bottom = QImage( QString( ":/marble/webpopup/%1_shadow.png" ).arg( imageId) );
-  QImage top = QImage( QString( ":/marble/webpopup/%1.png" ).arg( imageId) );
-  colorize( top, m_backColor );
-  QPainter painter( &bottom );
-  painter.drawImage( QPoint(0,0), top );
-  return bottom;
-}
-
 void PopupItem::paint( QPainter *painter )
 {
     QRect popupRect( -10, -10, size().width(), size().height() );
     qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
-                      QPixmap::fromImage(m_cache.popup));
+                      pixmap("marble/webpopup/webpopup2"));
 
     if ( alignment() & Qt::AlignRight ) {
         if ( alignment() & Qt::AlignTop ) {
-            painter->drawImage( - ( m_cache.topLeft.width() - 3 ), 0,
-                                m_cache.topLeft );
+            QPixmap const image = pixmap("marble/webpopup/arrow2_topleft");
+            painter->drawPixmap( - ( image.width() - 3 ), 0, image );
         } else if ( alignment() & Qt::AlignBottom ) {
-            painter->drawImage( - ( m_cache.bottomLeft.width() - 3 ),
-                                size().height() - m_cache.bottomLeft.height(),
-                                m_cache.bottomLeft );
+            QPixmap const image = pixmap("marble/webpopup/arrow2_bottomleft");
+            painter->drawPixmap( - ( image.width() - 3 ),
+                                size().height() - image.height(),
+                                image );
         } else { // for no horizontal align value and Qt::AlignVCenter
-            painter->drawImage( - ( m_cache.topLeft.width() - 3 ),
-                                size().height() / 2 - m_cache.topLeft.height() / 2,
-                                m_cache.topLeft );
+            QPixmap const image = pixmap("marble/webpopup/arrow2_topleft");
+            painter->drawPixmap( - ( image.width() - 3 ),
+                                size().height() / 2 - image.height() / 2,
+                                image );
         }
     } else if ( alignment() & Qt::AlignLeft ) {
         if ( alignment() & Qt::AlignTop ) {
-            painter->drawImage( size().width() - 23, 0, m_cache.topRight );
+            QPixmap const image = pixmap("marble/webpopup/arrow2_topright");
+            painter->drawPixmap( size().width() - 23, 0, image );
         } else if ( alignment() & Qt::AlignBottom ) {
-            painter->drawImage( size().width() - 23, size().height() - m_cache.bottomRight.height(), m_cache.bottomRight );
+            QPixmap const image = pixmap("marble/webpopup/arrow2_bottomright");
+            painter->drawPixmap( size().width() - 23, size().height() - image.height(), image );
         } else { // for no horizontal align value and Qt::AlignVCenter
-            painter->drawImage( size().width() - 23, size().height() / 2 - m_cache.topRight.height() / 2, m_cache.topRight );
+            QPixmap const image = pixmap("marble/webpopup/arrow2_topright");
+            painter->drawPixmap( size().width() - 23, size().height() / 2 - image.height() / 2, image );
         }
     }
 
@@ -242,6 +231,23 @@ QWidget* PopupItem::transform( QPoint &point ) const
         }
     }
     return 0;
+}
+
+QPixmap PopupItem::pixmap( const QString &imageId )
+{
+  QPixmap result;
+  if ( !QPixmapCache::find( imageId, result ) ) {
+    QImage bottom = QImage( QString( ":/%1_shadow.png" ).arg( imageId) );
+    QImage top = QImage( QString( ":/%1.png" ).arg( imageId) );
+    colorize( top, m_backColor );
+    QPainter painter( &bottom );
+    painter.drawImage( QPoint(0,0), top );
+
+    result = QPixmap::fromImage( bottom );
+    QPixmapCache::insert( imageId, result );
+  }
+
+  return result;
 }
 
 }

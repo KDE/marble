@@ -48,20 +48,9 @@ Q_SIGNALS:
     void hide();
 
 private:
-    void colorize(QImage &img, const QColor &col);
-    void generateGraphics();
-    QImage merge( const QString &imageId );
+    QPixmap pixmap( const QString &imageid );
+    void colorize( QImage &img, const QColor &col );
 
-    struct RenderImageCache
-    {
-        QImage popup;
-        QImage topLeft;
-        QImage bottomLeft;
-        QImage topRight;
-        QImage bottomRight;
-    };
-
-    RenderImageCache m_cache;
     QWidget *m_widget;
     QLabel *m_titleText;
     QWebView *m_webView;
