@@ -52,10 +52,10 @@
                 <vector name="pisland" feature="land">
                     <sourcefile> mwdbii/PISLAND.PNT </sourcefile>
                 </vector>
-                <vector name="plakeisland" feature="land" connect="waterbodies">
+                <vector name="plakeisland" feature="land">
                     <sourcefile> mwdbii/PLAKEISLAND.PNT </sourcefile>
                 </vector>
-                <vector name="plake" feature="sea" connect="waterbodies">
+                <vector name="plake" feature="sea">
                     <sourcefile> mwdbii/PLAKE.PNT </sourcefile>
                 </vector>
                 <vector name="pglacier" feature="sea">
@@ -76,11 +76,11 @@
             </layer>
         
             <layer name="mwdbii" backend="vector" role="polyline">
-                <vector name="pdiffborder" feature="border" connect="borders">
+                <vector name="pdiffborder" feature="border">
                     <sourcefile> mwdbii/PDIFFBORDER.PNT </sourcefile>
                     <pen color="#f86649" />
                 </vector>
-                <vector name="pusa48" feature="border" connect="borders">
+                <vector name="pusa48" feature="border">
                     <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
                     <pen color="#f86649" />
                 </vector>
@@ -88,7 +88,7 @@
                     <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
                     <pen color="#000000" />
                 </vector>
-                <vector name="rivers" feature="river" connect="waterbodies">
+                <vector name="rivers" feature="river">
                     <sourcefile> mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#637bff" />
                 </vector>
