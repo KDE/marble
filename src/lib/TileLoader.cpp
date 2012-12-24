@@ -109,8 +109,8 @@ GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneTiled const *textureLay
         if ( file.exists() ) {
 
             // File is ready, so parse and return the vector data in any case
-            MarbleRunnerManager* man = new MarbleRunnerManager( m_pluginManager );
-            GeoDataDocument* document = man->openFile( fileName );
+            MarbleRunnerManager man( m_pluginManager );
+            GeoDataDocument* document = man.openFile( fileName );
 
             if (document){
                 return document;
