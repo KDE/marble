@@ -194,7 +194,6 @@ void PhotoPluginItem::openBrowser()
             if ( infoDialog ) {
                 renderPlugin->setEnabled( true );
                 renderPlugin->setVisible( true );
-                Q_ASSERT( renderPlugin->isInitialized() );
                 if( !renderPlugin->isInitialized() ) {
                     renderPlugin->initialize();
                 }
