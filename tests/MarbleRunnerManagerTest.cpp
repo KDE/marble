@@ -140,7 +140,7 @@ void MarbleRunnerManagerTest::testAsyncPlacemarks()
 
     QEventLoop loop;
     connect( &m_runnerManager, SIGNAL( searchFinished( QString ) ),
-             &loop, SLOT( quit() ) );
+             &loop, SLOT( quit() ), Qt::QueuedConnection );
 
     QFETCH( QString, name );
     m_runnerManager.findPlacemarks( name );
@@ -200,7 +200,7 @@ void MarbleRunnerManagerTest::testAsyncReverse()
 
     QEventLoop loop;
     connect( &m_runnerManager, SIGNAL( reverseGeocodingFinished() ),
-             &loop, SLOT( quit() ) );
+             &loop, SLOT( quit() ), Qt::QueuedConnection );
 
     QFETCH( GeoDataCoordinates, coordinates );
     m_runnerManager.reverseGeocoding( coordinates );
@@ -249,7 +249,7 @@ void MarbleRunnerManagerTest::testAsyncRouting()
 
     QEventLoop loop;
     connect( &m_runnerManager, SIGNAL( routingFinished() ),
-             &loop, SLOT( quit() ) );
+             &loop, SLOT( quit() ), Qt::QueuedConnection );
 
     QFETCH( QList<GeoDataCoordinates>, coordinatesList );
     RouteRequest request;
