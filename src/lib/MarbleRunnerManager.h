@@ -30,7 +30,10 @@ class GeoDataPlacemark;
 class MarbleModel;
 class PluginManager;
 class RouteRequest;
-class RunnerTask;
+class ParsingTask;
+class ReverseGeocodingTask;
+class RoutingTask;
+class SearchTask;
 
 class MarbleRunnerManagerPrivate;
 class MARBLE_EXPORT MarbleRunnerManager : public QObject
@@ -151,10 +154,10 @@ private:
     Q_PRIVATE_SLOT( d, void addRoutingResult( GeoDataDocument* route ) )
     Q_PRIVATE_SLOT( d, void addParsingResult( GeoDataDocument* document, const QString& error = QString() ) )
 
-    Q_PRIVATE_SLOT( d, void cleanupSearchTask( RunnerTask* task ) )
-    Q_PRIVATE_SLOT( d, void cleanupReverseGeocodingTask( RunnerTask* task ) )
-    Q_PRIVATE_SLOT( d, void cleanupRoutingTask( RunnerTask* task ) )
-    Q_PRIVATE_SLOT( d, void cleanupParsingTask( RunnerTask* task ) )
+    Q_PRIVATE_SLOT( d, void cleanupSearchTask( SearchTask* task ) )
+    Q_PRIVATE_SLOT( d, void cleanupReverseGeocodingTask( ReverseGeocodingTask* task ) )
+    Q_PRIVATE_SLOT( d, void cleanupRoutingTask( RoutingTask* task ) )
+    Q_PRIVATE_SLOT( d, void cleanupParsingTask( ParsingTask* task ) )
 
     friend class MarbleRunnerManagerPrivate;
 

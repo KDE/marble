@@ -20,26 +20,8 @@
 namespace Marble
 {
 
-RunnerTask::RunnerTask( MarbleRunnerManager *manager ) :
-    m_manager( manager )
-{
-    // nothing to do
-}
-
-void RunnerTask::run()
-{
-    runTask();
-
-    emit finished( this );
-}
-
-MarbleRunnerManager *RunnerTask::manager()
-{
-    return m_manager;
-}
-
 SearchTask::SearchTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
-    RunnerTask( manager ),
+    QObject(),
     m_runner( runner ),
     m_searchTerm( searchTerm ),
     m_preferredBbox( preferred )
@@ -49,14 +31,16 @@ SearchTask::SearchTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manag
     m_runner->setModel( model );
 }
 
-void SearchTask::runTask()
+void SearchTask::run()
 {
     m_runner->search( m_searchTerm, m_preferredBbox );
     m_runner->deleteLater();
+
+    emit finished( this );
 }
 
 ReverseGeocodingTask::ReverseGeocodingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates ) :
-    RunnerTask( manager ),
+    QObject(),
     m_runner( runner ),
     m_coordinates( coordinates )
 {
@@ -65,14 +49,16 @@ ReverseGeocodingTask::ReverseGeocodingTask( MarbleAbstractRunner *runner, Marble
     m_runner->setModel( model );
 }
 
-void ReverseGeocodingTask::runTask()
+void ReverseGeocodingTask::run()
 {
     m_runner->reverseGeocoding( m_coordinates );
     m_runner->deleteLater();
+
+    emit finished( this );
 }
 
 RoutingTask::RoutingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest ) :
-    RunnerTask( manager ),
+    QObject(),
     m_runner( runner ),
     m_routeRequest( routeRequest )
 {
@@ -81,14 +67,16 @@ RoutingTask::RoutingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *man
     m_runner->setModel( model );
 }
 
-void RoutingTask::runTask()
+void RoutingTask::run()
 {
     m_runner->retrieveRoute( m_routeRequest );
     m_runner->deleteLater();
+
+    emit finished( this );
 }
 
 ParsingTask::ParsingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role ) :
-    RunnerTask( manager ),
+    QObject(),
     m_runner( runner ),
     m_fileName( fileName ),
     m_role( role )
@@ -97,10 +85,12 @@ ParsingTask::ParsingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *man
              manager, SLOT( addParsingResult( GeoDataDocument*, QString ) ) );
 }
 
-void ParsingTask::runTask()
+void ParsingTask::run()
 {
     m_runner->parseFile( m_fileName, m_role );
     m_runner->deleteLater();
+
+    emit finished( this );
 }
 
 }

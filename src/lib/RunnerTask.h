@@ -26,44 +26,21 @@ class RouteRequest;
 class MarbleAbstractRunner;
 class MarbleRunnerManager;
 
-/**
-  * An abstract QRunnable that executes one of the MarbleAbstractRunner tasks -- placemark
-  * search, reverse geocoding or routing -- in the run() function and waits for the
-  * result in a local event loop.
-  */
-class RunnerTask : public QObject, public QRunnable
-{
-    Q_OBJECT
-
-public:
-    /** Constructor. The runner instance given will be used to execute the actual task */
-    explicit RunnerTask( MarbleRunnerManager *manager );
-
-    /** Overriding QRunnable to execute the runner task in a local event loop */
-    virtual void run();
-
-Q_SIGNALS:
-    void finished( RunnerTask* task );
-
-protected:
-    /** Derived classes should execute their task and quit the provided event loop when done */
-    virtual void runTask() = 0;
-
-    MarbleRunnerManager *manager();
-
-private:
-    MarbleRunnerManager *const m_manager;
-};
-
 /** A RunnerTask that executes a placemark search */
-class SearchTask : public RunnerTask
+class SearchTask : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
     SearchTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
-    virtual void runTask();
+    /**
+     * @reimp
+     */
+    void run();
+
+Q_SIGNALS:
+    void finished( SearchTask *task );
 
 private:
     MarbleAbstractRunner *const m_runner;
@@ -72,14 +49,20 @@ private:
 };
 
 /** A RunnerTask that executes reverse geocoding */
-class ReverseGeocodingTask : public RunnerTask
+class ReverseGeocodingTask : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
     ReverseGeocodingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates );
 
-    virtual void runTask();
+    /**
+     * @reimp
+     */
+    void run();
+
+Q_SIGNALS:
+    void finished( ReverseGeocodingTask *task );
 
 private:
     MarbleAbstractRunner *const m_runner;
@@ -88,14 +71,20 @@ private:
 
 
 /** A RunnerTask that executes a route calculation */
-class RoutingTask : public RunnerTask
+class RoutingTask : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
     RoutingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest );
 
-    virtual void runTask();
+    /**
+     * @reimp
+     */
+    void run();
+
+Q_SIGNALS:
+    void finished( RoutingTask *task );
 
 private:
     MarbleAbstractRunner *const m_runner;
@@ -103,14 +92,20 @@ private:
 };
 
 /** A RunnerTask that executes a file Parsing */
-class ParsingTask : public RunnerTask
+class ParsingTask : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
     ParsingTask( MarbleAbstractRunner *runner, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role );
 
-    virtual void runTask();
+    /**
+     * @reimp
+     */
+    void run();
+
+Q_SIGNALS:
+    void finished( ParsingTask *task );
 
 private:
     MarbleAbstractRunner *const m_runner;
