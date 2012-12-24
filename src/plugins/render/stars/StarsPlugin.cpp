@@ -394,14 +394,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->autoMapQuality();
 
-    QPen starPen( Qt::NoPen );
-    QPen constellationPenSolid( m_constellationBrush, 1, Qt::SolidLine );
-    QPen constellationPenDash(  m_constellationBrush, 1, Qt::DashLine );
-    QBrush starBrush( Qt::white );
-
-    painter->setPen( starPen );
-    painter->setBrush( starBrush );
-
     QDateTime currentDateTime = marbleModel()->clockDateTime();
 
     qreal gmst = siderealTime( currentDateTime );
@@ -414,6 +406,33 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     matrix skyAxisMatrix;
     skyAxis.inverse().toMatrix( skyAxisMatrix );
+
+    const qreal  skyRadius = 0.6 * sqrt( ( qreal )viewport->width() * viewport->width() + viewport->height() * viewport->height() );
+
+    QPen polesPen( QColor( Marble::Oxygen::aluminumGray6 ) );
+    polesPen.setWidth( 2 );
+    painter->setPen( polesPen );
+    Quaternion qpos = Quaternion::fromEuler( 0.0, M_PI/2, 0.0 );
+    qpos.rotateAroundAxis( skyAxisMatrix );
+    int x1, y1;
+    x1 = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
+    y1 = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
+    painter->drawLine( x1, y1, x1+10, y1 );
+    painter->drawLine( x1+5, y1-5, x1+5, y1+5 );
+    painter->drawText( x1+8, y1+12, "NP" );
+    x1 = ( int )( viewport->width()  / 2 - skyRadius * qpos.v[Q_X] );
+    y1 = ( int )( viewport->height() / 2 + skyRadius * qpos.v[Q_Y] );
+    painter->drawLine( x1, y1, x1+10, y1 );
+    painter->drawLine( x1+5, y1-5, x1+5, y1+5 );
+    painter->drawText( x1+8, y1+12, "SP" );
+
+    QPen starPen( Qt::NoPen );
+    QPen constellationPenSolid( m_constellationBrush, 1, Qt::SolidLine );
+    QPen constellationPenDash(  m_constellationBrush, 1, Qt::DashLine );
+    QBrush starBrush( Qt::white );
+
+    painter->setPen( starPen );
+    painter->setBrush( starBrush );
 
     const bool renderStars = !viewport->mapCoversViewport() && viewport->projection() == Spherical;
 
