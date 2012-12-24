@@ -51,7 +51,6 @@ PopupItem::PopupItem( QObject* parent ) :
     layout->addWidget( m_webView );
     m_widget->setLayout( layout );
     m_widget->setAttribute( Qt::WA_NoSystemBackground, true );
-    setSize( QSizeF( 300, 350 ) );
     QPalette palette = m_webView->palette();
     palette.setBrush(QPalette::Base, Qt::transparent);
     m_webView->setPalette(palette);
@@ -123,40 +122,76 @@ void PopupItem::colorize( QImage &img, const QColor &col )
 
 void PopupItem::paint( QPainter *painter )
 {
-    QRect popupRect( -10, -10, size().width()+20, size().height()+20 );
-    qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
-                      pixmap("marble/webpopup/webpopup2"));
+    QRect popupRect;
+    QPixmap image = pixmap("marble/webpopup/arrow2_vertical_topright");
 
     if ( alignment() & Qt::AlignRight ) {
+        popupRect.setRect( image.width() - 13, -10,
+                           size().width() - ( image.width() - 23 ),
+                           size().height() + 20 );
+        qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
+                          pixmap("marble/webpopup/webpopup2"));
         if ( alignment() & Qt::AlignTop ) {
-            QPixmap const image = pixmap("marble/webpopup/arrow2_topleft");
-            painter->drawPixmap( - ( image.width() - 3 ), 0, image );
+            image = pixmap("marble/webpopup/arrow2_bottomleft");
+            painter->drawPixmap( 0, size().height() - image.height(), image );
         } else if ( alignment() & Qt::AlignBottom ) {
-            QPixmap const image = pixmap("marble/webpopup/arrow2_bottomleft");
-            painter->drawPixmap( - ( image.width() - 3 ),
-                                size().height() - image.height(),
-                                image );
+            image = pixmap("marble/webpopup/arrow2_topleft");
+            painter->drawPixmap( 0, 0, image );
         } else { // for no horizontal align value and Qt::AlignVCenter
-            QPixmap const image = pixmap("marble/webpopup/arrow2_topleft");
-            painter->drawPixmap( - ( image.width() - 3 ),
-                                size().height() / 2 - image.height() / 2,
-                                image );
+            image = pixmap("marble/webpopup/arrow2_topleft");
+            painter->drawPixmap( 0, size().height() / 2, image );
         }
+        m_widget->render( painter, QPoint( image.width() - 3, 0 ), QRegion() );
     } else if ( alignment() & Qt::AlignLeft ) {
+        popupRect.setRect( -10, -10,
+                           size().width() - ( image.width() - 23 ),
+                           size().height() + 20 );
+        qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
+                          pixmap("marble/webpopup/webpopup2"));
         if ( alignment() & Qt::AlignTop ) {
-            QPixmap const image = pixmap("marble/webpopup/arrow2_topright");
-            painter->drawPixmap( size().width() - 23, 0, image );
+            image = pixmap("marble/webpopup/arrow2_bottomright");
+            painter->drawPixmap( size().width() - image.width(),
+                                 size().height() - image.height(), image );
         } else if ( alignment() & Qt::AlignBottom ) {
-            QPixmap const image = pixmap("marble/webpopup/arrow2_bottomright");
-            painter->drawPixmap( size().width() - 23, size().height() - image.height(), image );
+            image = pixmap("marble/webpopup/arrow2_topright");
+            painter->drawPixmap( size().width() - image.width(),
+                                 0, image );
         } else { // for no horizontal align value and Qt::AlignVCenter
-            QPixmap const image = pixmap("marble/webpopup/arrow2_topright");
-            painter->drawPixmap( size().width() - 23, size().height() / 2 - image.height() / 2, image );
+            image = pixmap("marble/webpopup/arrow2_topright");
+            painter->drawPixmap( size().width() - image.width(),
+                                 size().height() / 2 - image.height() / 2 + 23, image );
+        }
+        m_widget->render( painter, QPoint( 5, 0 ), QRegion() );
+    } else if ( alignment() & Qt::AlignHCenter )
+    {
+        if ( alignment() & Qt::AlignTop )
+        {
+            image = pixmap("marble/webpopup/arrow2_vertical_bottomright");
+            popupRect.setRect( -10, -10, size().width() + 20,
+                               size().height() - image.height() + 23 );
+            qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
+                              pixmap("marble/webpopup/webpopup2"));
+            painter->drawPixmap( size().width() / 2 - image.width(),
+                                 size().height() - image.height(), image );
+            m_widget->render( painter, QPoint( 0, 0 ), QRegion() );
+        } else if ( alignment() & Qt::AlignBottom ) {
+            image = pixmap("marble/webpopup/arrow2_vertical_topleft");
+            popupRect.setRect( -10, image.height() - 13, size().width() + 20,
+                               size().height() - image.height() + 23 );
+            qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
+                              pixmap("marble/webpopup/webpopup2"));
+            painter->drawPixmap( size().width() / 2, 0, image );
+            m_widget->render( painter, QPoint( 5, image.height() - 7 ), QRegion() );
+        } else { // for no horizontal align value and Qt::AlignVCenter
+            popupRect.setRect( -10, -10, size().width() + 20,
+                               size().height() + 20 );
+            qDrawBorderPixmap(painter, popupRect, QMargins( 20, 20, 20, 20 ),
+                              pixmap("marble/webpopup/webpopup2"));
+            m_widget->render( painter, QPoint( 0, 0 ), QRegion() );
         }
     }
-
-    m_widget->setFixedSize( size().toSize() );
-    m_widget->render( painter, QPoint( 0, 0 ), QRegion() );
+    m_widget->setFixedSize( popupRect.width() - 20,
+                            popupRect.height() - 20 );
 }
 
 bool PopupItem::eventFilter( QObject *object, QEvent *e )
@@ -218,6 +253,27 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
 
 QWidget* PopupItem::transform( QPoint &point ) const
 {
+    /*
+     * Fixes for mouse events to trigger when the web popup
+     * is shifted in accordance with the horizontal alignment
+     */
+    if ( alignment() & Qt::AlignRight )
+        point -= QPoint( 117, 0 );
+    else if ( alignment() & Qt::AlignLeft )
+        point -= QPoint( 5, 0 );
+    else if ( alignment() & Qt::AlignHCenter )
+    {
+        if ( alignment() & Qt::AlignTop )
+        {
+            point -= QPoint( 0, 0 );
+        } else if ( alignment() & Qt::AlignBottom )
+        {
+            point-= QPoint( 5, 57 );
+        } else {
+            point -= QPoint( 0, 0 );
+        }
+    }
+
     QList<QPointF> widgetPositions = positions();
     QList<QPointF>::const_iterator it = widgetPositions.constBegin();
     for( ; it != widgetPositions.constEnd(); ++it ) {
