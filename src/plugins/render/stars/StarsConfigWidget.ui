@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>293</width>
-    <height>320</height>
+    <height>342</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -98,6 +98,9 @@
         </property>
         <property name="prefix">
          <string/>
+        </property>
+        <property name="maximum">
+         <number>7</number>
         </property>
         <property name="value">
          <number>7</number>
