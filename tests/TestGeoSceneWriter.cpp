@@ -226,7 +226,6 @@ void TestGeoSceneWriter::writeHeadTag()
     
     GeoSceneGeodata* geodata = new GeoSceneGeodata( "cityplacemarks" );
     geodata->setSourceFile( "baseplacemarks.kml" );
-    geodata->setSourceFileFormat( "KML" );
     
     GeoSceneLayer* layer = new GeoSceneLayer( "testmap" );
     layer->setBackend( "texture" );

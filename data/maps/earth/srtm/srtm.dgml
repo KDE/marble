@@ -47,19 +47,19 @@
                 colorize the elevation model properly -->
             <layer name="mwdbii-canvas" backend="vector" role="filterhelper">
                 <vector name="pcoast" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
+                    <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
                 </vector>
                 <vector name="pisland" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PISLAND.PNT </sourcefile>
+                    <sourcefile> mwdbii/PISLAND.PNT </sourcefile>
                 </vector>
                 <vector name="plakeisland" feature="land" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKEISLAND.PNT </sourcefile>
+                    <sourcefile> mwdbii/PLAKEISLAND.PNT </sourcefile>
                 </vector>
                 <vector name="plake" feature="sea" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
+                    <sourcefile> mwdbii/PLAKE.PNT </sourcefile>
                 </vector>
                 <vector name="pglacier" feature="sea">
-                    <sourcefile format="PNT"> earth/mwdbii/PGLACIER.PNT </sourcefile>
+                    <sourcefile> mwdbii/PGLACIER.PNT </sourcefile>
                 </vector>
             </layer>
         
@@ -77,39 +77,38 @@
         
             <layer name="mwdbii" backend="vector" role="polyline">
                 <vector name="pdiffborder" feature="border" connect="borders">
-                    <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
+                    <sourcefile> mwdbii/PDIFFBORDER.PNT </sourcefile>
                     <pen color="#f86649" />
                 </vector>
                 <vector name="pusa48" feature="border" connect="borders">
-                    <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                    <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
                     <pen color="#f86649" />
                 </vector>
                 <vector name="international dateline" feature="border">
-                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
+                    <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
                     <pen color="#000000" />
                 </vector>
                 <vector name="rivers" feature="river" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
+                    <sourcefile> mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#637bff" />
                 </vector>
             </layer>
         
             <layer name="standardplaces" backend="geodata">
                 <geodata name="cityplacemarks">
-                    <sourcefile format="KML">cityplacemarks.kml</sourcefile>
+                    <sourcefile>cityplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="baseplacemarks">
-                    <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                    <sourcefile>baseplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="elevplacemarks">
-                    <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                    <sourcefile>elevplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="otherplacemarks">
-                    <sourcefile
-                    format="KML">otherplacemarks.kml</sourcefile>
+                    <sourcefile>otherplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="boundaryplacemarks">
-                    <sourcefile format="KML">boundaryplacemarks.kml</sourcefile>
+                    <sourcefile>boundaryplacemarks.kml</sourcefile>
                 </geodata>
             </layer>
         </map>

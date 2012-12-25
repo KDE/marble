@@ -33,9 +33,6 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     QString sourceFile() const;
     void setSourceFile( QString sourceFile );
      
-    QString sourceFileFormat() const;
-    void setSourceFileFormat( QString format );
-
     QPen pen() const;
     void setPen( const QPen& pen );
 
@@ -47,7 +44,6 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
  private:
     QString m_name;
     QString m_sourceFile;
-    QString m_sourceFileFormat;
     QPen    m_pen;
     QBrush  m_brush;
 };

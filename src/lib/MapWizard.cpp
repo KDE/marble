@@ -829,32 +829,26 @@ GeoSceneDocument* MapWizard::createDocument()
   
     GeoSceneGeodata* cityplacemarks = new GeoSceneGeodata( "cityplacemarks" );
     cityplacemarks->setSourceFile( "cityplacemarks.kml" );
-    cityplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( cityplacemarks );
     
     GeoSceneGeodata* baseplacemarks = new GeoSceneGeodata( "baseplacemarks" );
     baseplacemarks->setSourceFile( "baseplacemarks.kml" );
-    baseplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( baseplacemarks );
     
     GeoSceneGeodata* elevplacemarks = new GeoSceneGeodata( "elevplacemarks" );
     elevplacemarks->setSourceFile( "elevplacemarks.kml" );
-    elevplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( elevplacemarks );
     
     GeoSceneGeodata* observatoryplacemarks = new GeoSceneGeodata( "observatoryplacemarks" );
     observatoryplacemarks->setSourceFile( "observatoryplacemarks.kml" );
-    observatoryplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( observatoryplacemarks );
     
     GeoSceneGeodata* otherplacemarks = new GeoSceneGeodata( "otherplacemarks" );
     otherplacemarks->setSourceFile( "otherplacemarks.kml" );
-    otherplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( otherplacemarks );
     
     GeoSceneGeodata* boundaryplacemarks = new GeoSceneGeodata( "boundaryplacemarks" );
     boundaryplacemarks->setSourceFile( "boundaryplacemarks.kml" );
-    boundaryplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( boundaryplacemarks );
     
     GeoSceneMap *map = document->map();
