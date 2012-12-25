@@ -26,7 +26,6 @@
 #include "GeoParser.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneGeodata.h"
-#include "GeoSceneFilter.h"
 
 namespace Marble
 {
