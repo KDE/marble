@@ -25,6 +25,7 @@
 #include "GeoDataLabelStyle.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataBalloonStyle.h"
 
 #include "geodata_export.h"
 
@@ -47,6 +48,7 @@ class GeoDataStylePrivate;
  * @see GeoDataLabelStyle
  * @see GeoDataLineStyle
  * @see GeoDataPolyStyle
+ * @see GeoDataBalloonStyle
  */
 class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 {
@@ -83,6 +85,11 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     void setPolyStyle( const GeoDataPolyStyle& style );
     /// Return the label style of this style
     GeoDataPolyStyle& polyStyle() const;
+    /// set the balloon style
+    void setBalloonStyle( const GeoDataBalloonStyle& style );
+    /// Return the balloon style of this style
+    GeoDataBalloonStyle& balloonStyle();
+    const GeoDataBalloonStyle& balloonStyle() const;
 
     /**
     * @brief assignment operator

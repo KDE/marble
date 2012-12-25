@@ -42,30 +42,32 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     if ( parentItem.is<GeoDataColorStyle>() || parentItem.is<GeoDataOverlay>() ) {
-        bool ok;
-        QRgb abgr = parser.readElementText().trimmed().toUInt( &ok, 16 );
-        unsigned a = abgr >> 24; abgr = abgr << 8; //"rgb0"
-        unsigned b = abgr >> 24; abgr = abgr << 8; //"gb00"
-        unsigned g = abgr >> 24; abgr = abgr << 8; //"b000"
-        unsigned r = abgr >> 24;
-        QRgb rgba = (a << 24)|(r << 16)|(g << 8)|(b);
-        //
-        // color tag uses AABBGGRR whereas QColor uses AARRGGBB - use some shifts for that
-        // be aware that QRgb needs to be a typedef for 32 bit UInt for this to work properly
-        if( ok ) {
-            QColor const color = QColor::fromRgba( rgba );
-            if ( parentItem.is<GeoDataColorStyle>() ) {
-                parentItem.nodeAs<GeoDataColorStyle>()->setColor( color );
-            } else if ( parentItem.is<GeoDataOverlay>() ) {
-                parentItem.nodeAs<GeoDataOverlay>()->setColor( color );
-            }
+        QColor const color = parseColor( parser.readElementText().trimmed() );
+        if ( parentItem.is<GeoDataColorStyle>() ) {
+            parentItem.nodeAs<GeoDataColorStyle>()->setColor( color );
+        } else if ( parentItem.is<GeoDataOverlay>() ) {
+            parentItem.nodeAs<GeoDataOverlay>()->setColor( color );
         }
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_color << "> containing: " << rgba
+        mDebug() << "Parsed <" << kmlTag_color << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }
     return 0;
+}
+
+QColor KmlcolorTagHandler::parseColor( const QString &colorString )
+{
+    // color tag uses AABBGGRR whereas QColor uses AARRGGBB - use some shifts for that
+    // be aware that QRgb needs to be a typedef for 32 bit UInt for this to work properly
+    bool ok;
+    QRgb abgr = colorString.toUInt( &ok, 16 );
+    unsigned a = abgr >> 24; abgr = abgr << 8; //"rgb0"
+    unsigned b = abgr >> 24; abgr = abgr << 8; //"gb00"
+    unsigned g = abgr >> 24; abgr = abgr << 8; //"b000"
+    unsigned r = abgr >> 24;
+    QRgb rgba = (a << 24)|(r << 16)|(g << 8)|(b);
+    return ok ? QColor::fromRgba( rgba ) : QColor();
 }
 
 }
