@@ -66,10 +66,6 @@
             <!-- This layer provides the colorization -->
             <layer name="colorme" backend="filter">
                 <filter name="texturecolorizer" type="colorize">
-                    <dem>srtm</dem>
-                    <coastline>mwdbii</coastline>
-                    <!-- If these don't get defined the default palettes get
-                    used -->
                     <palette type="sea">seacolors.leg</palette>
                     <palette type="land">landcolors.leg</palette>
                 </filter>
