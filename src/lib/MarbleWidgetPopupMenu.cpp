@@ -193,8 +193,10 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         }
     }
 
-    if ( !m_lmbMenu->isEmpty() ) {
-        m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
+    switch ( m_lmbMenu->actions().size() ) {
+    case 0: break; // nothing to do, ignore
+    case 1: m_lmbMenu->actions().first()->activate( QAction::Trigger ); break; // one action? perform immediately
+    default: m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
     }
 }
 
