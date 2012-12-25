@@ -37,7 +37,6 @@
 #include "MarbleDebug.h"
 
 #include "GeoSceneDocument.h"
-#include "GeoSceneFilter.h"
 #include "GeoSceneGeodata.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneLayer.h"
