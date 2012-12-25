@@ -19,7 +19,6 @@ GeoSceneGeodata::GeoSceneGeodata( QString name )
     : GeoSceneAbstractDataset( name ),
       m_name( name ),
       m_sourceFile( QString() ),
-      m_sourceFileFormat( QString() ),
       m_pen( QPen( Qt::NoPen ) ),
       m_brush( QBrush( Qt::transparent ) )
 {
@@ -47,16 +46,6 @@ QString GeoSceneGeodata::sourceFile() const
 void GeoSceneGeodata::setSourceFile(QString sourceFile)
 {
     m_sourceFile = sourceFile;
-}
-
-QString GeoSceneGeodata::sourceFileFormat() const
-{
-    return m_sourceFileFormat;
-}
-
-void GeoSceneGeodata::setSourceFileFormat(QString format)
-{
-    m_sourceFileFormat = format;
 }
 
 QPen GeoSceneGeodata::pen() const

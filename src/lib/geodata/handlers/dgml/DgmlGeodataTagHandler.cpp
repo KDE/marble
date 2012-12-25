@@ -31,7 +31,6 @@
 #include "GeoParser.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
-#include "GeoSceneXmlDataSource.h"
 #include "GeoSceneGeodata.h"
 
 namespace Marble

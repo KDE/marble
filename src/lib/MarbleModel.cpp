@@ -45,7 +45,6 @@
 #include "GeoScenePalette.h"
 #include "GeoSceneTiled.h"
 #include "GeoSceneVector.h"
-#include "GeoSceneXmlDataSource.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataStyle.h"

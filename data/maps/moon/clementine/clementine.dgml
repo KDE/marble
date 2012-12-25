@@ -42,10 +42,10 @@
                             
             <layer name="lunarplaces" backend="geodata">
                 <geodata name="moonlandingsites">
-                    <sourcefile format="KML">moonlandingsites.kml</sourcefile>
+                    <sourcefile>moonlandingsites.kml</sourcefile>
                 </geodata>
                 <geodata name="moonterrain">
-                    <sourcefile format="KML">moonterrain.kml</sourcefile>
+                    <sourcefile>moonterrain.kml</sourcefile>
                 </geodata>
             </layer>
         </map>

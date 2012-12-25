@@ -45,39 +45,38 @@
 <!--
             <layer name="mwdbii" backend="vector" role="polyline">
                 <vector name="pdiffborder" feature="border">
-                    <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
+                    <sourcefile> mwdbii/PDIFFBORDER.PNT </sourcefile>
                     <pen color="#f29b68" />
                 </vector>
                 <vector name="pusa48" feature="border">
-                    <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                    <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
                     <pen color="#f29b68" />
                 </vector>
                 <vector name="international dateline" feature="border">
-                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
+                    <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
                     <pen color="#000000" />
                 </vector>
                 <vector name="rivers" feature="river">
-                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
+                    <sourcefile> mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#637bff" />
                 </vector>
             </layer>
 -->
             <layer name="standardplaces" backend="geodata">
                 <geodata name="cityplacemarks">
-                    <sourcefile format="KML">cityplacemarks.kml</sourcefile>
+                    <sourcefile>cityplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="baseplacemarks">
-                    <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                    <sourcefile>baseplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="elevplacemarks">
-                    <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                    <sourcefile>elevplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="otherplacemarks">
-                    <sourcefile
-                    format="KML">otherplacemarks.kml</sourcefile>
+                    <sourcefile>otherplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="boundaryplacemarks">
-                    <sourcefile format="KML">boundaryplacemarks.kml</sourcefile>
+                    <sourcefile>boundaryplacemarks.kml</sourcefile>
                 </geodata>
             </layer>
         </map>
