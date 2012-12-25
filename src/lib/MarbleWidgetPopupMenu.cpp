@@ -227,7 +227,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
 
     if ( actionidx > 0 ) {
         const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
-        if (!index->role().isEmpty()) {
+        if (index->role().isEmpty()) {
             QList<RenderPlugin*> list = m_widget->renderPlugins();
             foreach(RenderPlugin *plug, list) {
                 AbstractInfoDialog* popup = dynamic_cast<AbstractInfoDialog*>(plug);
@@ -242,12 +242,12 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
                     return;
                 }
             }
-        } else {
-            QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget->model()->clock(),  m_widget );
-            dialog->setWindowModality( Qt::WindowModal );
-            dialog->exec();
-            delete dialog;
         }
+
+        QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget->model()->clock(),  m_widget );
+        dialog->setWindowModality( Qt::WindowModal );
+        dialog->exec();
+        delete dialog;
     }
 }
 
