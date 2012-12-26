@@ -110,8 +110,6 @@ const AbstractProjection *ViewportParams::currentProjection() const
 
 void ViewportParams::setProjection(Projection newProjection)
 {
-    d->m_dirtyBox = true;
-
     d->m_projection = newProjection;
 
     // Set the pointer to the current projection class.
@@ -251,16 +249,12 @@ QSize ViewportParams::size() const
 
 void ViewportParams::setWidth(int newWidth)
 {
-    d->m_dirtyBox = true;
-
-    d->m_size.setWidth( newWidth );
+    setSize( QSize( newWidth, height() ) );
 }
 
 void ViewportParams::setHeight(int newHeight)
 {
-    d->m_dirtyBox = true;
-
-    d->m_size.setHeight( newHeight );
+    setSize( QSize( width(), newHeight ) );
 }
 
 void ViewportParams::setSize(QSize newSize)
