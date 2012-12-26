@@ -45,7 +45,6 @@ public:
           m_document( 0 ),
           m_clock( model->clock() )
     {
-        m_runner.setModel( model );
     }
 
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
@@ -58,7 +57,6 @@ public:
           m_document( 0 ),
           m_clock( model->clock() )
     {
-        m_runner.setModel( model );
     }
 
     ~FileLoaderPrivate()
