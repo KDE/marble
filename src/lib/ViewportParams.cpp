@@ -32,8 +32,6 @@ class ViewportParamsPrivate
 public:
     ViewportParamsPrivate();
 
-    void setPlanetAxis( const Quaternion &newAxis );
-
     // These two go together.  m_currentProjection points to one of
     // the static Projection classes at the bottom.
     Projection           m_projection;
@@ -43,7 +41,7 @@ public:
     qreal                m_centerLongitude;
     qreal                m_centerLatitude;
     Quaternion           m_planetAxis;   // Position, coded in a quaternion
-    mutable matrix       m_planetAxisMatrix;
+    matrix               m_planetAxisMatrix;
     int                  m_radius;       // Zoom level (pixels / globe radius)
     qreal                m_angularResolution;
 
@@ -218,22 +216,16 @@ void ViewportParams::centerOn( qreal lon, qreal lat )
     d->m_centerLongitude = lon;
     d->m_centerLatitude = lat;
 
-    Quaternion axis = Quaternion::fromEuler( -lat, lon, 0.0 );
-    axis.normalize();
+    d->m_planetAxis = Quaternion::fromEuler( -lat, lon, 0.0 );
+    d->m_planetAxis.normalize();
 
-    d->setPlanetAxis( axis );
+    d->m_dirtyBox = true;
+    d->m_planetAxis.inverse().toMatrix( d->m_planetAxisMatrix );
 }
 
 Quaternion ViewportParams::planetAxis() const
 {
     return d->m_planetAxis;
-}
-
-void ViewportParamsPrivate::setPlanetAxis(const Quaternion &newAxis)
-{
-    m_dirtyBox = true;
-    m_planetAxis = newAxis;
-    m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 }
 
 const matrix * ViewportParams::planetAxisMatrix() const
