@@ -51,9 +51,9 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_rmbMenu( new QMenu( m_widget ) ),
       m_copyCoordinateAction( new QAction( tr("Copy Coordinates"), this ) ),
       m_rmbExtensionPoint( 0 ),
-      m_runnerManager( 0 )
+      m_runnerManager( new MarbleRunnerManager( model->pluginManager(), this ) )
 {
-    //	Property actions (Left mouse button)
+    // Property actions (Left mouse button)
     m_infoDialogAction = new QAction( this );
     m_infoDialogAction->setData( 0 );
 
@@ -110,6 +110,9 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     connect( m_showOrbitAction, SIGNAL( triggered(bool) ), SLOT( slotShowOrbit(bool) ) );
     connect( m_trackPlacemarkAction, SIGNAL( triggered(bool) ), SLOT( slotTrackPlacemark() ) );
     connect( fullscreenAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleFullscreen( bool ) ) );
+
+    connect( m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
+             this, SLOT( showAddressInformation( GeoDataCoordinates, GeoDataPlacemark ) ) );
 }
 
 QMenu* MarbleWidgetPopupMenu::createInfoBoxMenu()
@@ -414,12 +417,6 @@ bool MarbleWidgetPopupMenu::mouseCoordinates( GeoDataCoordinates* coordinates, Q
 
 void MarbleWidgetPopupMenu::startReverseGeocoding()
 {
-    if ( !m_runnerManager ) {
-        m_runnerManager = new MarbleRunnerManager( m_model->pluginManager(), this );
-        connect( m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-                 this, SLOT(showAddressInformation( GeoDataCoordinates, GeoDataPlacemark) ) );
-    }
-
     GeoDataCoordinates coordinates;
     if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
         m_runnerManager->reverseGeocoding( coordinates );

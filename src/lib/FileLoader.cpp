@@ -39,31 +39,30 @@ public:
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
                        const QString& file, DocumentRole role )
         : q( parent),
-          m_runner( new MarbleRunnerManager( model->pluginManager(), q ) ),
+          m_runner( model->pluginManager() ),
           m_filepath ( file ),
           m_documentRole ( role ),
           m_document( 0 ),
           m_clock( model->clock() )
     {
-        m_runner->setModel( model );
-    };
+        m_runner.setModel( model );
+    }
 
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
                        const QString& contents, const QString& file, DocumentRole role )
         : q( parent ),
-          m_runner( new MarbleRunnerManager( model->pluginManager(), q ) ),
+          m_runner( model->pluginManager() ),
           m_filepath ( file ),
           m_contents ( contents ),
           m_documentRole ( role ),
           m_document( 0 ),
           m_clock( model->clock() )
     {
-        m_runner->setModel( model );
-    };
+        m_runner.setModel( model );
+    }
 
     ~FileLoaderPrivate()
     {
-        delete m_runner;
     }
 
     void saveFile(const QString& filename );
@@ -77,7 +76,7 @@ public:
     void documentParsed( GeoDataDocument *doc, const QString& error);
 
     FileLoader *q;
-    MarbleRunnerManager *m_runner;
+    MarbleRunnerManager m_runner;
     QString m_filepath;
     QString m_contents;
     QString m_nonExistentLocalCacheFile;
@@ -171,9 +170,9 @@ void FileLoader::run()
             const QDateTime cacheLastModified  = QFileInfo( cacheFile ).lastModified();
 
             if ( sourceLastModified < cacheLastModified ) {
-                connect( d->m_runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
+                connect( &d->m_runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
                          this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
-                d->m_runner->parseFile( cacheFile, d->m_documentRole );
+                d->m_runner.parseFile( cacheFile, d->m_documentRole );
             }
         }
         // we load source file, multiple cases
@@ -181,9 +180,9 @@ void FileLoader::run()
             mDebug() << "No recent Default Placemark Cache File available!";
 
             // use runners: pnt, gpx, osm
-            connect( d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
+            connect( &d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
                     this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
-            d->m_runner->parseFile( defaultSourceName, d->m_documentRole );
+            d->m_runner.parseFile( defaultSourceName, d->m_documentRole );
         }
         else {
             mDebug() << "No Default Placemark Source File for " << name;

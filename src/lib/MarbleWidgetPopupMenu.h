@@ -103,7 +103,7 @@ private Q_SLOTS:
 
     QAction  *m_rmbExtensionPoint;
 
-    MarbleRunnerManager* m_runnerManager;
+    MarbleRunnerManager *const m_runnerManager;
 
     QPoint m_mousePosition;
 };

@@ -74,7 +74,7 @@ public:
 
     TargetModel m_targetModel;
 
-    MarbleRunnerManager* m_runnerManager;
+    MarbleRunnerManager m_runnerManager;
 
     GeoDataDocument *m_searchResult;
 
@@ -291,8 +291,12 @@ void GoToDialogPrivate::createProgressAnimation()
 }
 
 GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget ) :
-    m_parent( parent), m_marbleWidget( marbleWidget ), m_targetModel( marbleWidget ),
-    m_runnerManager( 0 ), m_searchResult( new GeoDataDocument ), m_currentFrame( 0 )
+    m_parent( parent),
+    m_marbleWidget( marbleWidget ),
+    m_targetModel( marbleWidget ),
+    m_runnerManager( marbleWidget->model()->pluginManager() ),
+    m_searchResult( new GeoDataDocument ),
+    m_currentFrame( 0 )
 {
     setupUi( parent );
 
@@ -318,16 +322,7 @@ void GoToDialogPrivate::startSearch()
         return;
     }
 
-    if ( !m_runnerManager ) {
-        m_runnerManager = new MarbleRunnerManager( m_marbleWidget->model()->pluginManager(), m_parent );
-        m_runnerManager->setModel( m_marbleWidget->model() );
-        QObject::connect( m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
-                          m_parent, SLOT( updateSearchResult( QVector<GeoDataPlacemark*> ) ) );
-        QObject::connect( m_runnerManager, SIGNAL( searchFinished( QString ) ),
-                          m_parent, SLOT( stopProgressAnimation() ) );
-    }
-
-    m_runnerManager->findPlacemarks( searchTerm );
+    m_runnerManager.findPlacemarks( searchTerm );
     if ( m_progressAnimation.isEmpty() ) {
         createProgressAnimation();
     }
@@ -378,6 +373,12 @@ GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::Window
              this, SLOT( stopProgressAnimation() ) );
     d->updateSearchMode();
     d->progressButton->setVisible( false );
+
+    d->m_runnerManager.setModel( marbleWidget->model() );
+    connect( &d->m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
+             this, SLOT( updateSearchResult( QVector<GeoDataPlacemark*> ) ) );
+    connect( &d->m_runnerManager, SIGNAL( searchFinished( QString ) ),
+             this, SLOT( stopProgressAnimation() ) );
 }
 
 GoToDialog::~GoToDialog()
