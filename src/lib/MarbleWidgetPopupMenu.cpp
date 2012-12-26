@@ -42,7 +42,7 @@
 using namespace Marble;
 /* TRANSLATOR Marble::MarbleWidgetPopupMenu */
 
-MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget, 
+MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
                                          const MarbleModel *model)
     : QObject(widget),
       m_model(model),
@@ -149,6 +149,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     m_featurelist = m_widget->whichFeatureAt( curpos );
 
     int  actionidx = 1;
+    bool hasSatellites = false;
 
     QVector<const GeoDataPlacemark*>::const_iterator it = m_featurelist.constBegin();
     QVector<const GeoDataPlacemark*>::const_iterator const itEnd = m_featurelist.constEnd();
@@ -165,6 +166,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
             m_lmbMenu->addAction( m_infoDialogAction );
         } else {
+	    hasSatellites = true;
             QMenu *subMenu = new QMenu( name, m_lmbMenu );
             subMenu->setIcon( icon );
             m_infoDialogAction->setText( tr( "Satellite information" ) );
@@ -195,7 +197,10 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     switch ( m_lmbMenu->actions().size() ) {
     case 0: break; // nothing to do, ignore
-    case 1: m_lmbMenu->actions().first()->activate( QAction::Trigger ); break; // one action? perform immediately
+    case 1: if ( ! hasSatellites ) {
+	      m_lmbMenu->actions().first()->activate( QAction::Trigger );
+	      break; // one action? perform immediately
+	    }
     default: m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
     }
 }
