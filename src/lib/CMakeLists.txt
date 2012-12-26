@@ -97,7 +97,6 @@ set(marblewidget_SRCS
     GeoPolygon.cpp
     HttpDownloadManager.cpp
     HttpJob.cpp
-    NetworkPlugin.cpp
     LayerManager.cpp
     PluginManager.cpp
     MarbleCacheSettingsWidget.cpp
@@ -158,7 +157,6 @@ set(marblewidget_SRCS
     AbstractWorkerThread.cpp
 
     PluginInterface.cpp
-    NetworkPluginInterface.cpp
     DialogConfigurationInterface.cpp
     LayerInterface.cpp
     RenderPlugin.cpp

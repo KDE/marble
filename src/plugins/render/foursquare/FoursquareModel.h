@@ -22,7 +22,7 @@ class FoursquareModel : public AbstractDataPluginModel
     Q_OBJECT
     
 public:
-    explicit FoursquareModel( const PluginManager *pluginManager, QObject *parent = 0 );
+    explicit FoursquareModel( QObject *parent = 0 );
     ~FoursquareModel();
 
 protected:

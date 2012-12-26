@@ -139,7 +139,6 @@ void SatellitesPlugin::initialize()
     // RenderPlugins do not require that
     m_satModel = new SatellitesModel(
         const_cast<MarbleModel *>( marbleModel() )->treeModel(),
-        marbleModel()->pluginManager(),
         marbleModel()->clock() );
 
     m_configModel = new SatellitesConfigModel( this );

@@ -139,11 +139,6 @@ void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
     emit favoritesModelChanged();
 }
 
-const PluginManager* AbstractDataPlugin::pluginManager() const
-{
-    return marbleModel()->pluginManager();
-}
-
 quint32 AbstractDataPlugin::numberOfItems() const
 {
     return d->m_numberOfItems;

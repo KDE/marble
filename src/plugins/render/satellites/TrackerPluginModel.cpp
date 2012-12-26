@@ -18,7 +18,6 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
-#include "PluginManager.h"
 #include "TrackerPluginItem.h"
 
 #include <QtCore/QTimer>
@@ -83,7 +82,7 @@ public:
     QVector<TrackerPluginItem *> m_itemVector;
 };
 
-TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager )
+TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel )
     : d( new TrackerPluginModelPrivate( this, treeModel ) )
 {
     d->m_document->setDocumentRole( TrackingDocument );
@@ -92,7 +91,7 @@ TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const Plugi
         d->m_treeModel->addDocument( d->m_document );
     }
 
-    d->m_downloadManager = new HttpDownloadManager( &d->m_storagePolicy, pluginManager );
+    d->m_downloadManager = new HttpDownloadManager( &d->m_storagePolicy );
     connect( d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),
              this, SLOT(downloaded(QString,QString)) );
 }

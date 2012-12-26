@@ -164,7 +164,7 @@ Marble::RenderPlugin *DeclarativeDataPlugin::newInstance(const Marble::MarbleMod
     instance->d->m_model = d->m_model;
     instance->d->m_counter = d->m_counter;
 
-    DeclarativeDataPluginModel* dataModel = new DeclarativeDataPluginModel( marbleModel->pluginManager() );
+    DeclarativeDataPluginModel* dataModel = new DeclarativeDataPluginModel();
     dataModel->addItemsToList( d->m_items );
     instance->setModel( dataModel );
     connect( dataModel, SIGNAL( dataRequest( qreal, qreal, qreal, qreal ) ), this, SIGNAL( dataRequest( qreal, qreal, qreal, qreal ) ) );
@@ -336,7 +336,7 @@ void DeclarativeDataPlugin::setDelegate( QDeclarativeComponent *delegate )
 void DeclarativeDataPlugin::initialize()
 {
     if( !model() ) {
-        setModel( new DeclarativeDataPluginModel( pluginManager(), this ) );
+        setModel( new DeclarativeDataPluginModel( this ) );
     }
     d->m_isInitialized = true;
 }

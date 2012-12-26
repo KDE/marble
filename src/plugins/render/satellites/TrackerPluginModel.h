@@ -20,7 +20,6 @@ namespace Marble
 {
 
 class GeoDataTreeModel;
-class PluginManager;
 class TrackerPluginItem;
 class TrackerPluginModelPrivate;
 
@@ -38,7 +37,7 @@ public:
      * These parameters can be obtained by calling treeModel() and
      * pluginManager() on an instance of MarbleModel.
      */
-    TrackerPluginModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager  );
+    TrackerPluginModel( GeoDataTreeModel *treeModel );
 
     virtual ~TrackerPluginModel();
 

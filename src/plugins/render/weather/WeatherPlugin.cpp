@@ -68,7 +68,7 @@ void WeatherPlugin::initialize()
 {
     readSettings();
 
-    WeatherModel *model = new WeatherModel( pluginManager(), this );
+    WeatherModel *model = new WeatherModel( this );
 
     setModel( model );
     updateSettings();

@@ -36,7 +36,7 @@ class OpenCachingComModel : public AbstractDataPluginModel
     Q_OBJECT
 
 public:
-    explicit OpenCachingComModel( const MarbleModel *marbleModel, const PluginManager *pluginManager, QObject *parent = 0 );
+    explicit OpenCachingComModel( const MarbleModel *marbleModel, QObject *parent = 0 );
     ~OpenCachingComModel();
 
 

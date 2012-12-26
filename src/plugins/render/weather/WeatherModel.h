@@ -34,7 +34,7 @@ class WeatherModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    explicit WeatherModel( const PluginManager *pluginManager, QObject *parent );
+    explicit WeatherModel( QObject *parent );
     ~WeatherModel();
 
     void setUpdateInterval( quint32 hours );

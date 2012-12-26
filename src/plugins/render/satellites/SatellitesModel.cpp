@@ -25,9 +25,8 @@
 namespace Marble {
 
 SatellitesModel::SatellitesModel( GeoDataTreeModel *treeModel,
-                                  const PluginManager *pluginManager,
                                   const MarbleClock *clock )
-    : TrackerPluginModel( treeModel, pluginManager ),
+    : TrackerPluginModel( treeModel ),
       m_clock( clock )
 {
     connect(m_clock, SIGNAL(timeChanged()), this, SLOT(update()));

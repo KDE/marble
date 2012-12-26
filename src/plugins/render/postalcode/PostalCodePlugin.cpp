@@ -27,7 +27,7 @@ PostalCodePlugin::PostalCodePlugin( const MarbleModel *marbleModel )
 
 void PostalCodePlugin::initialize()
 {
-    setModel( new PostalCodeModel( pluginManager(), this ) );
+    setModel( new PostalCodeModel( this ) );
     setNumberOfItems( 20 );
 }
 

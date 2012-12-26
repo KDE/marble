@@ -31,9 +31,8 @@
 
 using namespace Marble;
 
-PostalCodeModel::PostalCodeModel( const PluginManager *pluginManager,
-                              QObject *parent  )
-    : AbstractDataPluginModel( "postalCode", pluginManager, parent )
+PostalCodeModel::PostalCodeModel( QObject *parent  )
+    : AbstractDataPluginModel( "postalCode", parent )
 {
 }
 

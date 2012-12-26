@@ -27,8 +27,8 @@
 
 namespace Marble {
 
-EarthquakeModel::EarthquakeModel( const PluginManager *pluginManager, QObject *parent )
-    : AbstractDataPluginModel( "earthquake", pluginManager, parent ),
+EarthquakeModel::EarthquakeModel( QObject *parent )
+    : AbstractDataPluginModel( "earthquake", parent ),
       m_minMagnitude( 0.0 ),
       m_startDate( QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ),
       m_endDate( QDateTime::currentDateTime() )

@@ -35,9 +35,8 @@
 
 using namespace Marble;
 
-WikipediaModel::WikipediaModel(const PluginManager *pluginManager,
-                                QObject *parent )
-    : AbstractDataPluginModel( "wikipedia", pluginManager, parent ),
+WikipediaModel::WikipediaModel( QObject *parent )
+    : AbstractDataPluginModel( "wikipedia", parent ),
       m_marbleWidget( 0 ),
       m_showThumbnail( true )
 {

@@ -33,9 +33,8 @@ using namespace Marble;
 
 const QString flickrApiKey( "620131a1b82b000c9582b94effcdc636" );
 
-PhotoPluginModel::PhotoPluginModel( const PluginManager *pluginManager,
-                                    QObject *parent )
-    : AbstractDataPluginModel( "photo", pluginManager, parent ),
+PhotoPluginModel::PhotoPluginModel( QObject *parent )
+    : AbstractDataPluginModel( "photo", parent ),
       m_marbleWidget( 0 )
 {
 }

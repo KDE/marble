@@ -56,7 +56,6 @@ class AbstractDataPluginModelPrivate
 {
 public:
     AbstractDataPluginModelPrivate( const QString& name,
-                                    const PluginManager *pluginManager,
                                     AbstractDataPluginModel * parent );
     
     ~AbstractDataPluginModelPrivate();
@@ -103,7 +102,6 @@ public:
 };
 
 AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& name,
-                                const PluginManager *pluginManager,
                                 AbstractDataPluginModel * parent )
     : m_parent( parent ),
       m_name( name ),
@@ -117,7 +115,7 @@ AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& n
       m_itemSettings(),
       m_favoriteItemsOnly( false ),
       m_storagePolicy( MarbleDirs::localPath() + "/cache/" + m_name + '/' ),
-      m_downloadManager( &m_storagePolicy, pluginManager ),
+      m_downloadManager( &m_storagePolicy ),
       m_favoritesModel( 0 ),
       m_hasMetaObject( false ),
       m_needsSorting( false )
@@ -225,11 +223,9 @@ void FavoritesModel::reset()
     QAbstractListModel::reset();
 }
 
-AbstractDataPluginModel::AbstractDataPluginModel( const QString& name,
-                                                  const PluginManager *pluginManager,
-                                                  QObject *parent )
+AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *parent )
     : QObject(  parent ),
-      d( new AbstractDataPluginModelPrivate( name, pluginManager, this ) )
+      d( new AbstractDataPluginModelPrivate( name, this ) )
 {
     // Initializing file and download System
     connect( &d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),

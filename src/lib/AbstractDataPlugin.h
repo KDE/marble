@@ -26,7 +26,6 @@ class GeoSceneLayer;
 class AbstractDataPluginItem;
 class AbstractDataPluginModel;
 class AbstractDataPluginPrivate;
-class PluginManager;
 
 /**
  * @short An abstract class for plugins that show data that has a geo coordinate
@@ -85,8 +84,6 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      * Set the model of the plugin.
      */
     void setModel( AbstractDataPluginModel* model );
-    
-    const PluginManager *pluginManager() const;
 
     /**
      * Set the number of items to be shown at the same time.

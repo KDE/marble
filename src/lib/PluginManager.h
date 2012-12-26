@@ -21,7 +21,6 @@ namespace Marble
 {
 
 class RenderPlugin;
-class NetworkPlugin;
 class PositionProviderPlugin;
 class AbstractFloatItem;
 class PluginManagerPrivate;
@@ -67,22 +66,6 @@ class MARBLE_EXPORT PluginManager : public QObject
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
     void addRenderPlugin( RenderPlugin * plugin );
-
-    /**
-     * @brief Returns all available NetworkPlugins.
-     *
-     * Ownership of the items remains in PluginManager.
-     * In order to use the NetworkPlugins, first create new instances using
-     * NetworkPlugin::newInstance().
-     */
-    QList<const NetworkPlugin *> networkPlugins() const;
-
-    /**
-     * @brief Add a NetworkPlugin manually to the list of known plugins. Normally you
-     * don't need to call this method since all plugins are loaded automatically.
-     * @param plugin The plugin to add. Ownership retains with the caller.
-     */
-    void addNetworkPlugin( NetworkPlugin * plugin );
 
     /**
      * @brief Returns all available PositionProviderPlugins.
@@ -154,8 +137,6 @@ class MARBLE_EXPORT PluginManager : public QObject
 
 Q_SIGNALS:
     void renderPluginsChanged();
-
-    void networkPluginsChanged();
 
     void positionProviderPluginsChanged();
 

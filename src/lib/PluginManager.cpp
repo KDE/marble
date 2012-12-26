@@ -22,7 +22,6 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "RenderPlugin.h"
-#include "NetworkPlugin.h"
 #include "PositionProviderPlugin.h"
 #include "AbstractFloatItem.h"
 #include "ParseRunnerPlugin.h"
@@ -47,7 +46,6 @@ class PluginManagerPrivate
 
     bool m_pluginsLoaded;
     QList<const RenderPlugin *> m_renderPluginTemplates;
-    QList<const NetworkPlugin *> m_networkPluginTemplates;
     QList<const PositionProviderPlugin *> m_positionProviderPluginTemplates;
     QList<const SearchRunnerPlugin *> m_searchRunnerPlugins;
     QList<const ReverseGeocodingRunnerPlugin *> m_reverseGeocodingRunnerPlugins;
@@ -81,19 +79,6 @@ void PluginManager::addRenderPlugin( RenderPlugin *plugin )
     d->loadPlugins();
     d->m_renderPluginTemplates << plugin;
     emit renderPluginsChanged();
-}
-
-QList<const NetworkPlugin *> PluginManager::networkPlugins() const
-{
-    d->loadPlugins();
-    return d->m_networkPluginTemplates;
-}
-
-void PluginManager::addNetworkPlugin( NetworkPlugin *plugin )
-{
-    d->loadPlugins();
-    d->m_networkPluginTemplates << plugin;
-    emit networkPluginsChanged();
 }
 
 QList<const PositionProviderPlugin *> PluginManager::positionProviderPlugins() const
@@ -211,7 +196,6 @@ void PluginManagerPrivate::loadPlugins()
     MarbleDirs::debug();
 
     Q_ASSERT( m_renderPluginTemplates.isEmpty() );
-    Q_ASSERT( m_networkPluginTemplates.isEmpty() );
     Q_ASSERT( m_positionProviderPluginTemplates.isEmpty() );
     Q_ASSERT( m_searchRunnerPlugins.isEmpty() );
     Q_ASSERT( m_reverseGeocodingRunnerPlugins.isEmpty() );
@@ -228,8 +212,6 @@ void PluginManagerPrivate::loadPlugins()
         if ( obj ) {
             bool isPlugin = appendPlugin<RenderPlugin, RenderPluginInterface>
                        ( obj, loader, m_renderPluginTemplates );
-            isPlugin = isPlugin || appendPlugin<NetworkPlugin, NetworkPluginInterface>
-                       ( obj, loader, m_networkPluginTemplates );
             isPlugin = isPlugin || appendPlugin<PositionProviderPlugin, PositionProviderPluginInterface>
                        ( obj, loader, m_positionProviderPluginTemplates );
             isPlugin = isPlugin || appendPlugin<SearchRunnerPlugin, SearchRunnerPlugin>

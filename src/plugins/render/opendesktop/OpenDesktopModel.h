@@ -23,7 +23,7 @@ class OpenDesktopModel : public AbstractDataPluginModel
     Q_OBJECT
  
 public:
-    explicit OpenDesktopModel( const PluginManager *pluginManager, QObject *parent = 0 );
+    explicit OpenDesktopModel( QObject *parent = 0 );
     ~OpenDesktopModel();
 
 protected:

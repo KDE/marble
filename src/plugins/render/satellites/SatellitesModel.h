@@ -28,7 +28,6 @@ class SatellitesModel : public TrackerPluginModel
     Q_OBJECT
 public:
     SatellitesModel( GeoDataTreeModel *treeModel,
-                     const PluginManager *pluginManager,
                      const MarbleClock *clock );
 
     void loadSettings( const QHash<QString, QVariant> &settings );

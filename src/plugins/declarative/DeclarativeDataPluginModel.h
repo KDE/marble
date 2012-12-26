@@ -23,7 +23,7 @@ class DeclarativeDataPluginModel: public AbstractDataPluginModel
     Q_OBJECT
 public:
 
-    explicit DeclarativeDataPluginModel ( const PluginManager *pluginManager, QObject *parent=0 );
+    explicit DeclarativeDataPluginModel( QObject *parent=0 );
 
     virtual ~DeclarativeDataPluginModel();
 

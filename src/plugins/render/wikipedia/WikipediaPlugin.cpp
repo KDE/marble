@@ -64,7 +64,7 @@ WikipediaPlugin::~WikipediaPlugin()
      
 void WikipediaPlugin::initialize()
 {
-    WikipediaModel *model = new WikipediaModel( pluginManager(), this );
+    WikipediaModel *model = new WikipediaModel( this );
     // Ensure that all settings get forwarded to the model.
     setModel( model );
     updateSettings();

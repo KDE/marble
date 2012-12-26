@@ -28,7 +28,7 @@ OpenCachingComPlugin::OpenCachingComPlugin(const MarbleModel *marbleModel)
 
 void OpenCachingComPlugin::initialize()
 {
-    OpenCachingComModel *model = new OpenCachingComModel( marbleModel(), pluginManager(), this );
+    OpenCachingComModel *model = new OpenCachingComModel( marbleModel(), this );
     setModel( model );
     setNumberOfItems( numberOfItemsOnScreen );
     m_isInitialized = true;

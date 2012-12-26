@@ -43,7 +43,7 @@ EarthquakePlugin::EarthquakePlugin( const MarbleModel *marbleModel )
 
 void EarthquakePlugin::initialize()
 {
-    EarthquakeModel *model = new EarthquakeModel( pluginManager(), this );
+    EarthquakeModel *model = new EarthquakeModel( this );
     setModel( model );
     setNumberOfItems( 20 );
 }
@@ -166,7 +166,7 @@ void EarthquakePlugin::writeSettings()
 void EarthquakePlugin::updateModel()
 {
     if( model() ) {
-        EarthquakeModel *const earthquakeModel = new EarthquakeModel( pluginManager(), this );
+        EarthquakeModel *const earthquakeModel = new EarthquakeModel( this );
         earthquakeModel->setMinMagnitude( m_minMagnitude );
         earthquakeModel->setStartDate( m_startDate );
         earthquakeModel->setEndDate( m_endDate );

@@ -26,8 +26,8 @@
 
 using namespace Marble;
 
-WeatherModel::WeatherModel( const PluginManager *pluginManager, QObject *parent )
-    : AbstractDataPluginModel( "weather", pluginManager, parent ),
+WeatherModel::WeatherModel( QObject *parent )
+    : AbstractDataPluginModel( "weather", parent ),
       m_initialized( false )
 {
     registerItemProperties( WeatherItem::staticMetaObject );

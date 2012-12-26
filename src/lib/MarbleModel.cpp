@@ -85,7 +85,7 @@ class MarbleModelPrivate
           m_homeZoom( 1050 ),
           m_mapTheme( 0 ),
           m_storagePolicy( MarbleDirs::localPath() ),
-          m_downloadManager( &m_storagePolicy, &m_pluginManager ),
+          m_downloadManager( &m_storagePolicy ),
           m_storageWatcher( MarbleDirs::localPath() ),
           m_fileManager( 0 ),
           m_treemodel(),

@@ -35,7 +35,7 @@ OpenDesktopPlugin::OpenDesktopPlugin( const MarbleModel *marbleModel )
 
 void OpenDesktopPlugin::initialize()
 {
-    setModel( new OpenDesktopModel( pluginManager(), this ) );
+    setModel( new OpenDesktopModel( this ) );
     setNumberOfItems( defaultItemsOnScreen ); // Setting the number of items on the screen.
 }
 

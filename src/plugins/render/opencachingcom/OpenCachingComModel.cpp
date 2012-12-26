@@ -24,8 +24,8 @@
 
 namespace Marble {
 
-OpenCachingComModel::OpenCachingComModel( const MarbleModel *marbleModel, const PluginManager *pluginManager, QObject *parent )
-    : AbstractDataPluginModel( "opencachingcom", pluginManager, parent )
+OpenCachingComModel::OpenCachingComModel( const MarbleModel *marbleModel, QObject *parent )
+    : AbstractDataPluginModel( "opencachingcom", parent )
     , m_marbleModel( marbleModel )
 {
     updateHome();
