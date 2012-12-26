@@ -231,13 +231,13 @@ void TextureColorizer::drawTextureMap( GeoPainter *painter )
         drawIndividualDocument( painter, m_coastDocument );
     }
 
-    if ( m_glacierDocument ) {
+    if ( m_glacierDocument && m_glacierDocument->isVisible() ) {
         painter->setPen( Qt::NoPen );
         painter->setBrush( m_textureGlacierBrush );
         drawIndividualDocument( painter, m_glacierDocument );
     }
 
-    if ( m_lakeDocument ) {
+    if ( m_lakeDocument && m_lakeDocument->isVisible() ) {
         painter->setPen( Qt::NoPen );
         painter->setBrush( m_textureLakeBrush );
         drawIndividualDocument( painter, m_lakeDocument );
@@ -272,8 +272,11 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     GeoPainter painter( &m_coastImage, viewport, mapQuality, doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    m_veccomposer->drawTextureMap( &painter, viewport );
-    drawTextureMap( &painter );
+    if ( m_coastDocument ) {
+        drawTextureMap( &painter );
+    } else {
+        m_veccomposer->drawTextureMap( &painter, viewport );
+    }
 
     const qint64   radius   = viewport->radius();
 
