@@ -14,9 +14,9 @@
 
 #include <QtCore/QString>
 #include <QtNetwork/QHostInfo>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 
-class QNetworkAccessManager;
 class QNetworkReply;
 
 namespace Marble
@@ -47,7 +47,7 @@ private Q_SLOTS:
 private:
     QHostInfo m_hostInfo;
 
-    QNetworkAccessManager *const m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
 
     QNetworkRequest m_request;
 };

@@ -14,6 +14,7 @@
 
 #include "RoutingRunner.h"
 
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
 class QNetworkAccessManager;
@@ -47,7 +48,7 @@ private:
 
     qreal distance( const GeoDataDocument* document ) const;
 
-    QNetworkAccessManager *m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
 
     QNetworkRequest m_request;
 };

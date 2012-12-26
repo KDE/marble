@@ -16,10 +16,10 @@
 
 #include <QtCore/QString>
 #include <QtNetwork/QHostInfo>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 
 class QNetworkReply;
-class QNetworkAccessManager;
 class QDomNodeList;
 
 namespace Marble
@@ -45,7 +45,7 @@ private Q_SLOTS:
     void startSearch();
 
 private:
-    QNetworkAccessManager* m_manager;
+    QNetworkAccessManager m_manager;
 
     QNetworkRequest m_request;
 };

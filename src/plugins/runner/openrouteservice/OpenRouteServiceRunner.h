@@ -16,9 +16,8 @@
 #include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QString>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
-
-class QNetworkAccessManager;
 
 namespace Marble
 {
@@ -71,7 +70,7 @@ private:
 
     RoutingInstruction::TurnType parseTurnType( const QString &text, QString* road ) const;
 
-    QNetworkAccessManager *m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
 
     QNetworkRequest m_request;
 

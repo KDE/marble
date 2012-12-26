@@ -16,10 +16,10 @@
 #include "GeoDataCoordinates.h"
 
 #include <QtCore/QString>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 
 class QNetworkReply;
-class QNetworkAccessManager;
 class QDomNodeList;
 
 namespace Marble
@@ -49,7 +49,7 @@ private Q_SLOTS:
 private:
     void addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData );
 
-    QNetworkAccessManager* m_manager;
+    QNetworkAccessManager m_manager;
 
     QNetworkRequest m_request;
 

@@ -34,9 +34,9 @@ namespace Marble
 
 YoursRunner::YoursRunner( QObject *parent ) :
         RoutingRunner( parent ),
-        m_networkAccessManager( new QNetworkAccessManager( this ) )
+        m_networkAccessManager()
 {
-    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
+    connect( &m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
              this, SLOT( retrieveData( QNetworkReply* ) ) );
 }
 
@@ -83,7 +83,7 @@ void YoursRunner::retrieveRoute( const RouteRequest *route )
 
 void YoursRunner::get()
 {
-    QNetworkReply *reply = m_networkAccessManager->get( m_request );
+    QNetworkReply *reply = m_networkAccessManager.get( m_request );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
              this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 }

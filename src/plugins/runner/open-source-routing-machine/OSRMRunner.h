@@ -17,9 +17,8 @@
 #include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QString>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
-
-class QNetworkAccessManager;
 
 namespace Marble
 {
@@ -56,7 +55,7 @@ private:
 
     GeoDataDocument* parse( const QByteArray &input );
 
-    QNetworkAccessManager *m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
 
     QNetworkRequest m_request;
 

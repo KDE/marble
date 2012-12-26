@@ -24,7 +24,6 @@
 #include <QtCore/QUrl>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
-#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
 
@@ -33,10 +32,10 @@ namespace Marble
 
 MapQuestRunner::MapQuestRunner( QObject *parent ) :
     RoutingRunner( parent ),
-    m_networkAccessManager( new QNetworkAccessManager( this ) ),
+    m_networkAccessManager(),
     m_request()
 {
-    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+    connect( &m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
              this, SLOT( retrieveData( QNetworkReply * ) ) );
 }
 
@@ -93,7 +92,7 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
 
 void MapQuestRunner::get()
 {
-    QNetworkReply *reply = m_networkAccessManager->get( m_request );
+    QNetworkReply *reply = m_networkAccessManager.get( m_request );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
              this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
 }

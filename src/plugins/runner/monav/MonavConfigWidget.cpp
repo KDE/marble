@@ -73,7 +73,7 @@ public:
 
     MonavPlugin* m_plugin;
 
-    QNetworkAccessManager* m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
 
     QNetworkReply* m_currentReply;
 
@@ -342,6 +342,8 @@ MonavConfigWidget::MonavConfigWidget( MonavPlugin* plugin ) :
              this, SLOT( removeMap( int ) ) );
     connect( &d->m_upgradeMapSignalMapper, SIGNAL( mapped( int ) ),
              this, SLOT( upgradeMap( int ) ) );
+    connect( &d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+             this, SLOT( retrieveMapList( QNetworkReply * ) ) );
 }
 
 MonavConfigWidget::~MonavConfigWidget()
@@ -392,9 +394,9 @@ void MonavConfigWidget::retrieveMapList( QNetworkReply *reply )
         // check if we are redirected
         QVariant const redirectionAttribute = reply->attribute( QNetworkRequest::RedirectionTargetAttribute );
         if ( !redirectionAttribute.isNull() ) {
-            d->m_networkAccessManager->get( QNetworkRequest( redirectionAttribute.toUrl() ) );
+            d->m_networkAccessManager.get( QNetworkRequest( redirectionAttribute.toUrl() ) );
         } else {
-            disconnect( d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+            disconnect( &d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
                          this, SLOT( retrieveMapList( QNetworkReply * ) ) );
             d->parseNewStuff( reply->readAll() );
             updateComboBoxes();
@@ -408,7 +410,7 @@ void MonavConfigWidget::retrieveData()
         // check if we are redirected
         QVariant const redirectionAttribute = d->m_currentReply->attribute( QNetworkRequest::RedirectionTargetAttribute );
         if ( !redirectionAttribute.isNull() ) {
-            d->m_currentReply = d->m_networkAccessManager->get( QNetworkRequest( redirectionAttribute.toUrl() ) );
+            d->m_currentReply = d->m_networkAccessManager.get( QNetworkRequest( redirectionAttribute.toUrl() ) );
             connect( d->m_currentReply, SIGNAL( readyRead() ),
                          this, SLOT( retrieveData() ) );
             connect( d->m_currentReply, SIGNAL( readChannelFinished() ),
@@ -491,7 +493,7 @@ void MonavConfigWidgetPrivate::install()
             QFileInfo file( m_currentFile );
             QString message = QObject::tr( "Downloading %1" ).arg( file.fileName() );
             setBusy( true, message );
-            m_currentReply = m_networkAccessManager->get( QNetworkRequest( m_currentDownload ) );
+            m_currentReply = m_networkAccessManager.get( QNetworkRequest( m_currentDownload ) );
             QObject::connect( m_currentReply, SIGNAL( readyRead() ),
                          m_parent, SLOT( retrieveData() ) );
             QObject::connect( m_currentReply, SIGNAL( readChannelFinished() ),
@@ -578,11 +580,8 @@ void MonavConfigWidget::showEvent ( QShowEvent * event )
     if ( !event->spontaneous() && !d->m_initialized ) {
         d->m_initialized = true;
         d->updateInstalledMapsView();
-        d->m_networkAccessManager = new QNetworkAccessManager( this );
-        connect( d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-                     this, SLOT( retrieveMapList( QNetworkReply * ) ) );
         QUrl url = QUrl( "http://files.kde.org/marble/newstuff/maps-monav.xml" );
-        d->m_networkAccessManager->get( QNetworkRequest( url ) );
+        d->m_networkAccessManager.get( QNetworkRequest( url ) );
     }
 }
 

@@ -39,9 +39,9 @@ QString OSRMRunner:: m_hintChecksum;
 
 OSRMRunner::OSRMRunner( QObject *parent ) :
     RoutingRunner( parent ),
-    m_networkAccessManager( new QNetworkAccessManager( this ) )
+    m_networkAccessManager()
 {
-    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+    connect( &m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
              this, SLOT( retrieveData( QNetworkReply * ) ) );
 }
 
@@ -117,7 +117,7 @@ void OSRMRunner::handleError( QNetworkReply::NetworkError error )
 
 void OSRMRunner::get()
 {
-    QNetworkReply *reply = m_networkAccessManager->get( m_request );
+    QNetworkReply *reply = m_networkAccessManager.get( m_request );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
              this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
 }

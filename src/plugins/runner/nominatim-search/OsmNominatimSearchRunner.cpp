@@ -30,9 +30,9 @@ namespace Marble
 
 OsmNominatimRunner::OsmNominatimRunner( QObject *parent ) :
     SearchRunner( parent ),
-    m_manager( new QNetworkAccessManager (this ) )
+    m_manager()
 {
-    connect(m_manager, SIGNAL(finished(QNetworkReply*)),
+    connect(&m_manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(handleResult(QNetworkReply*)));
 }
 
@@ -76,7 +76,7 @@ void OsmNominatimRunner::search( const QString &searchTerm, const GeoDataLatLonA
 
 void OsmNominatimRunner::startSearch()
 {
-    QNetworkReply *reply = m_manager->get( m_request );
+    QNetworkReply *reply = m_manager.get( m_request );
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
             this, SLOT(returnNoResults()));
 }

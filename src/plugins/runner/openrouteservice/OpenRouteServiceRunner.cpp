@@ -23,7 +23,6 @@
 #include <QtCore/QUrl>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
-#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
 
@@ -32,9 +31,9 @@ namespace Marble
 
 OpenRouteServiceRunner::OpenRouteServiceRunner( QObject *parent ) :
         RoutingRunner( parent ),
-        m_networkAccessManager( new QNetworkAccessManager( this ) )
+        m_networkAccessManager()
 {
-    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+    connect( &m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
              this, SLOT( retrieveData( QNetworkReply * ) ) );
 }
 
@@ -98,7 +97,7 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 
 void OpenRouteServiceRunner::get()
 {
-    QNetworkReply *reply = m_networkAccessManager->post( m_request, m_requestData );
+    QNetworkReply *reply = m_networkAccessManager.post( m_request, m_requestData );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
              this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
 }

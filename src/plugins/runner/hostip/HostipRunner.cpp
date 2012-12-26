@@ -18,7 +18,6 @@
 #include <QtCore/QTimer>
 #include <QtCore/QVector>
 #include <QtCore/QUrl>
-#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
 namespace Marble
@@ -26,9 +25,9 @@ namespace Marble
 
 HostipRunner::HostipRunner( QObject *parent ) :
         SearchRunner( parent ),
-        m_networkAccessManager( new QNetworkAccessManager( this ) )
+        m_networkAccessManager()
 {
-    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
+    connect( &m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
             this, SLOT( slotRequestFinished( QNetworkReply* ) ), Qt::DirectConnection );
 }
 
@@ -78,7 +77,7 @@ void HostipRunner::slotLookupFinished(const QHostInfo &info)
 
 void HostipRunner::get()
 {
-    QNetworkReply *reply = m_networkAccessManager->get( m_request );
+    QNetworkReply *reply = m_networkAccessManager.get( m_request );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
              this, SLOT( slotNoResults() ), Qt::DirectConnection );
 }

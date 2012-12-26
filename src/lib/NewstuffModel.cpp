@@ -74,7 +74,7 @@ public:
 
     QVector<NewstuffItem> m_items;
 
-    QNetworkAccessManager* m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
 
     QString m_provider;
 
@@ -204,7 +204,7 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
     // check if we are redirected
     const QVariant redirectionAttribute = reply->attribute( QNetworkRequest::RedirectionTargetAttribute );
     if ( !redirectionAttribute.isNull() ) {
-        m_networkAccessManager->get( QNetworkRequest( QUrl( redirectionAttribute.toUrl() ) ) );
+        m_networkAccessManager.get( QNetworkRequest( QUrl( redirectionAttribute.toUrl() ) ) );
         return;
     }
 
@@ -371,6 +371,9 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     setTargetDirectory( MarbleDirs::localPath() + "/maps" );
     // no default registry file
 
+    connect( &d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+             this, SLOT( handleProviderData( QNetworkReply * ) ) );
+
     QHash<int,QByteArray> roles = roleNames();
     roles[Name] = "name";
     roles[Author] = "author";
@@ -428,7 +431,7 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
             QUrl const url = d->m_items.at( index.row() ).m_payload;
             if ( size < -1 && !url.isEmpty() ) {
                 d->m_items[index.row()].m_payloadSize = -1; // prevent several head requests for the same item
-                d->m_networkAccessManager->head( QNetworkRequest( url ) );
+                d->m_networkAccessManager.head( QNetworkRequest( url ) );
             }
 
             return qMax<qint64>( -1, size );
@@ -450,15 +453,9 @@ void NewstuffModel::setProvider( const QString &downloadUrl )
         return;
     }
 
-    if ( !d->m_networkAccessManager) {
-        d->m_networkAccessManager = new QNetworkAccessManager( this );
-        connect( d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-                 this, SLOT( handleProviderData( QNetworkReply * ) ) );
-    }
-
     d->m_provider = downloadUrl;
     emit providerChanged();
-    d->m_networkAccessManager->get( QNetworkRequest( QUrl( downloadUrl ) ) );
+    d->m_networkAccessManager.get( QNetworkRequest( QUrl( downloadUrl ) ) );
 }
 
 QString NewstuffModel::provider() const
@@ -630,7 +627,7 @@ void NewstuffModel::retrieveData()
         // check if we are redirected
         const QVariant redirectionAttribute = d->m_currentReply->attribute( QNetworkRequest::RedirectionTargetAttribute );
         if ( !redirectionAttribute.isNull() ) {
-            d->m_currentReply = d->m_networkAccessManager->get( QNetworkRequest( redirectionAttribute.toUrl() ) );
+            d->m_currentReply = d->m_networkAccessManager.get( QNetworkRequest( redirectionAttribute.toUrl() ) );
             QObject::connect( d->m_currentReply, SIGNAL( readyRead() ), this, SLOT( retrieveData() ) );
             QObject::connect( d->m_currentReply, SIGNAL( readChannelFinished() ), this, SLOT( retrieveData() ) );
             QObject::connect( d->m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
@@ -774,7 +771,7 @@ void NewstuffModelPrivate::processQueue()
 
         if ( m_currentFile->open() ) {
             QUrl const payload = m_items.at( m_currentAction.first ).m_payload;
-            m_currentReply = m_networkAccessManager->get( QNetworkRequest( payload ) );
+            m_currentReply = m_networkAccessManager.get( QNetworkRequest( payload ) );
             QObject::connect( m_currentReply, SIGNAL( readyRead() ), m_parent, SLOT( retrieveData() ) );
             QObject::connect( m_currentReply, SIGNAL( readChannelFinished() ), m_parent, SLOT( retrieveData() ) );
             QObject::connect( m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
