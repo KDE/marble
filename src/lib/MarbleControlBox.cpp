@@ -122,8 +122,8 @@ void MarbleControlBox::setMarbleWidget(MarbleWidget *widget)
         addItem( d->m_routingWidget, tr( "Routing" ) );
     }
 
-    d->m_fileViewWidget->setFileViewModel( widget->model()->fileViewModel() );
     d->m_fileViewWidget->setTreeModel( widget->model()->treeModel() );
+    d->m_fileViewWidget->setFileManager( widget->model()->fileManager() );
     d->m_legendWidget->setMarbleModel( widget->model() );
     d->m_navigationWidget->setMarbleWidget( widget );
     d->m_mapViewWidget->setMarbleWidget( widget );

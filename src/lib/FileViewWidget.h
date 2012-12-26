@@ -22,7 +22,7 @@ class QModelIndex;
 namespace Marble
 {
 
-class FileViewModel;
+class FileManager;
 class GeoDataPlacemark;
 class GeoDataLatLonBox;
 class GeoDataTreeModel;
@@ -37,12 +37,10 @@ class MARBLE_EXPORT FileViewWidget : public QWidget
     explicit FileViewWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     ~FileViewWidget();
 
-    void setFileViewModel( FileViewModel *model );
 
     void setTreeModel( GeoDataTreeModel *model );
+    void setFileManager( FileManager *manager );
 
- public Q_SLOTS:
-    void enableFileViewActions();
 
  Q_SIGNALS:
     void centerOn( const GeoDataPlacemark &, bool animated );
@@ -52,6 +50,9 @@ class MARBLE_EXPORT FileViewWidget : public QWidget
     void mapCenterOnTreeViewModel( const QModelIndex & );
 
  private:
+    Q_PRIVATE_SLOT( d, void enableFileViewActions() )
+    Q_PRIVATE_SLOT( d, void saveFile() )
+    Q_PRIVATE_SLOT( d, void closeFile() )
     Q_DISABLE_COPY( FileViewWidget )
 
     FileViewWidgetPrivate * const d;
