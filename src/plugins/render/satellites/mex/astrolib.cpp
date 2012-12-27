@@ -588,13 +588,13 @@ Mat3 nutmat (double t, double& ep2, bool hpr)
 
      dpsi = 0.0;
      deps = 0.0;
-     for(j=0; j<ntb1; j++)
+     for(j=0; j<ntb1; ++j)
       {
        ep0 =  tb1[j][0]*lm + tb1[j][1]*ls + tb1[j][2]*f + tb1[j][3]*d + tb1[j][4]*n;
        dpsi = dpsi + (tb3[j][0]+tb3[j][1]*t) * sin(ep0);
        deps = deps + (tb3[j][2]+tb3[j][3]*t) * cos(ep0);
       };
-     for(j=0; j<ntb2; j++)
+     for(j=0; j<ntb2; ++j)
       {
        ep0 =  tb2[j][0]*lm + tb2[j][1]*ls + tb2[j][2]*f + tb2[j][3]*d + tb2[j][4]*n;
        dpsi = dpsi + tb4[j][0] * sin(ep0);
@@ -1425,7 +1425,7 @@ void Sun200::state (double t, Vec3& rs, Vec3& vs)
 	 c3[2] = cos(m3); s3[2] = sin(m3);
 	 c3[0] = c3[2]; s3[0] = -s3[2];
 
-	 for (i=3; i<9; i++)
+	 for (i=3; i<9; ++i)
 		addthe(c3[i-1],s3[i-1],c3[2],s3[2],c3[i],s3[i]);
 	 pertven(); pertmar(); pertjup(); pertsat(); pertmoo();
 
@@ -1677,7 +1677,7 @@ void Moon200::minit(double t)
   ls = pi2*frac(0.99312619+99.99735956*t-0.00000044*t2)   + dls/arc;
   f = pi2*frac(0.25909118+1342.22782980*t-0.00000892*t2)  + df/arc;
   d = pi2*frac(0.82736186+1236.85308708*t-0.00000397*t2)  + dd/arc;
-  for (i=0; i<4; i++)
+  for (i=0; i<4; ++i)
    {
     switch (i)
      {
@@ -1688,9 +1688,9 @@ void Moon200::minit(double t)
      }
     co[6][i] = 1.0; co[7][i] = cos (arg) * fac;
     si[6][i] = 0.0; si[7][i] = sin (arg) * fac;
-    for (j = 2; j <= max; j++)
+    for (j = 2; j <= max; ++j)
            addthe(co[j+5][i],si[j+5][i],co[7][i],si[7][i],co[j+6][i],si[j+6][i]);
-    for (j = 1; j <= max; j++)
+    for (j = 1; j <= max; ++j)
      {
       co[6-j][i]=co[j+6][i];
       si[6-j][i]=-si[j+6][i];

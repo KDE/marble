@@ -40,7 +40,7 @@ double atan20 (double y, double x)
 
  Vec3::Vec3 (const Vec3& c)
   {
-   for (int j = 0; j<3; j++) v[j] = c.v[j];
+   for (int j = 0; j<3; ++j) v[j] = c.v[j];
   }
 
 
@@ -56,19 +56,19 @@ double atan20 (double y, double x)
 
  Vec3& Vec3::operator = (const Vec3& c)
   {
-   for (int j = 0; j<3; j++) v[j] = c.v[j];
+   for (int j = 0; j<3; ++j) v[j] = c.v[j];
    return *this;
   }
 
  Vec3& Vec3::operator += (const Vec3& c)
   {
-   for (int j = 0; j<3; j++) v[j] = v[j] + c.v[j];
+   for (int j = 0; j<3; ++j) v[j] = v[j] + c.v[j];
    return *this;
   }
 
  Vec3& Vec3::operator -= (const Vec3& c)
   {
-   for (int j = 0; j<3; j++) v[j] = v[j] - c.v[j];
+   for (int j = 0; j<3; ++j) v[j] = v[j] - c.v[j];
    return *this;
   }
 
@@ -78,13 +78,13 @@ double atan20 (double y, double x)
    result.v[0] = v[1] * c.v[2] - v[2] * c.v[1];
    result.v[1] = v[2] * c.v[0] - v[0] * c.v[2];
    result.v[2] = v[0] * c.v[1] - v[1] * c.v[0];
-   for (int j = 0; j<3; j++) v[j] = result.v[j];
+   for (int j = 0; j<3; ++j) v[j] = result.v[j];
    return *this;
   }
 
  Vec3& Vec3::operator *= (double r)
   {
-   for (int j = 0; j<3; j++) v[j] = r * v[j];
+   for (int j = 0; j<3; ++j) v[j] = r * v[j];
    return *this;
   }
 
@@ -94,7 +94,7 @@ double atan20 (double y, double x)
 
    if (r < 1E-100) q = 0.0;
    else q = 1.0 / r;
-   for (int j = 0; j<3; j++) v[j] = q * v[j];
+   for (int j = 0; j<3; ++j) v[j] = q * v[j];
    return *this;
   }
 
@@ -102,7 +102,7 @@ double atan20 (double y, double x)
   {
    double result=0;
 
-   for (int j=0; j<3; j++) result += c.v[j]*c.v[j];
+   for (int j=0; j<3; ++j) result += c.v[j]*c.v[j];
    return sqrt(result);
   }
 
@@ -110,7 +110,7 @@ double atan20 (double y, double x)
   {
    double result=0;
 
-   for (int j = 0; j<3; j++) result += c1.v[j]*c2.v[j];
+   for (int j = 0; j<3; ++j) result += c1.v[j]*c2.v[j];
    return result;
   }
 
@@ -118,7 +118,7 @@ double atan20 (double y, double x)
   {
    Vec3 result;
 
-   for (int j = 0; j<3; j++) result.v[j] = c1.v[j] + c2.v[j];
+   for (int j = 0; j<3; ++j) result.v[j] = c1.v[j] + c2.v[j];
    return result;
   }
 
@@ -126,7 +126,7 @@ double atan20 (double y, double x)
   {
    Vec3 result;
 
-   for (int j = 0; j<3; j++) result.v[j] = c1.v[j] - c2.v[j];
+   for (int j = 0; j<3; ++j) result.v[j] = c1.v[j] - c2.v[j];
 
    return result;
   }
@@ -135,7 +135,7 @@ double atan20 (double y, double x)
   {
    Vec3 result;
 
-   for (int j = 0; j<3; j++) result.v[j] = r * c1.v[j];
+   for (int j = 0; j<3; ++j) result.v[j] = r * c1.v[j];
    return result;
   }
 
@@ -143,7 +143,7 @@ double atan20 (double y, double x)
   {
    Vec3 result;
 
-   for (int j = 0; j<3; j++) result.v[j] = c1.v[j] * r;
+   for (int j = 0; j<3; ++j) result.v[j] = c1.v[j] * r;
    return result;
   }
 
@@ -164,7 +164,7 @@ double atan20 (double y, double x)
 
    if (r < 1E-100) q = 0.0;
    else q = 1.0 / r;
-   for (int j = 0; j<3; j++) result.v[j] = q * c1.v[j];
+   for (int j = 0; j<3; ++j) result.v[j] = q * c1.v[j];
    return result;
   }
 
@@ -174,11 +174,11 @@ double atan20 (double y, double x)
    double q=0;
    Vec3 result;
 
-   for (j=0; j<3; j++) q += c.v[j]*c.v[j];
+   for (j=0; j<3; ++j) q += c.v[j]*c.v[j];
    q =  sqrt(q);
    if (q < 1E-100) q = 0.0;
    else q = 1.0 / q;
-   for (j=0; j<3; j++) result.v[j] = c.v[j]*q;
+   for (j=0; j<3; ++j) result.v[j] = c.v[j]*q;
    return result;
   }
 
@@ -235,16 +235,16 @@ Mat3::Mat3 (double x)
  {
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) m[i][j] = x;
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) m[i][j] = x;
  }
 
 Mat3::Mat3 (const Mat3& c)
  {
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) m[i][j] = c.m[i][j];
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) m[i][j] = c.m[i][j];
  }
 
 void Mat3::assign (double x11, double x12, double x13,
@@ -266,8 +266,8 @@ void Mat3::assign (double x[3][3])
  {
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) m[i][j] = x[i][j];
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) m[i][j] = x[i][j];
  }
 
 void Mat3::PutMij (double x, int i, int j)
@@ -289,8 +289,8 @@ Mat3& Mat3::operator = (const Mat3& c)
  {
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) m[i][j] = c.m[i][j];
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) m[i][j] = c.m[i][j];
 
   return (*this);
  }
@@ -299,8 +299,8 @@ Mat3& Mat3::operator += (const Mat3& c)
  {
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) m[i][j] = m[i][j] + c.m[i][j];
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) m[i][j] = m[i][j] + c.m[i][j];
   return *this;
  }
 
@@ -308,8 +308,8 @@ Mat3& Mat3::operator -= (const Mat3& c)
  {
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) m[i][j] = m[i][j] - c.m[i][j];
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) m[i][j] = m[i][j] - c.m[i][j];
   return *this;
  }
 
@@ -319,16 +319,16 @@ Mat3& Mat3::operator *= (const Mat3& c)
   double r;
   Mat3 b;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++)
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j)
     {
      r = 0;
-     for (k=0; k<3; k++) r = r + c.m[i][k] * m[k][j];
+     for (k=0; k<3; ++k) r = r + c.m[i][k] * m[k][j];
      b.m[i][j] = r;
     }
 
-   for (i=0; i<3; i++)
-    for (j=0; j<3; j++) m[i][j] = b.m[i][j];
+   for (i=0; i<3; ++i)
+    for (j=0; j<3; ++j) m[i][j] = b.m[i][j];
 
    return *this;
  }
@@ -337,8 +337,8 @@ Mat3& Mat3::operator *= (double r)
  {
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) m[i][j] = r*m[i][j];
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) m[i][j] = r*m[i][j];
   return *this;
  }
 
@@ -350,8 +350,8 @@ Mat3& Mat3::operator /= (double r)
   if (r < 1E-100) q = 0.0;
   else q = 1.0 / r;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) m[i][j] = m[i][j] * q;
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) m[i][j] = m[i][j] * q;
   return *this;
  }
 
@@ -360,8 +360,8 @@ Mat3 mxcon (double r)  // constant matrix with all elements of value r
   Mat3 result;
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) result.m[i][j] = r;
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) result.m[i][j] = r;
 
   return result;
  }
@@ -372,7 +372,7 @@ Mat3 mxidn ()          // identity matrix
   int i;
 
   result = mxcon (0);
-  for (i=0; i<3; i++) result.m[i][i] = 1.0;
+  for (i=0; i<3; ++i) result.m[i][i] = 1.0;
 
   return result;
  }
@@ -382,8 +382,8 @@ Mat3 mxtrn (const Mat3& m1)  // returns transposed of matrix m1
   Mat3 result;
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) result.m[i][j] = m1.m[j][i];
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) result.m[i][j] = m1.m[j][i];
 
   return result;
  }
@@ -404,8 +404,8 @@ Mat3 operator + (const Mat3& c1, const Mat3& c2)
   Mat3 result;
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) result.m[i][j] = c1.m[i][j] + c2.m[i][j];
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) result.m[i][j] = c1.m[i][j] + c2.m[i][j];
   return result;
  }
 
@@ -414,8 +414,8 @@ Mat3 operator - (const Mat3& c1, const Mat3& c2)
   Mat3 result;
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) result.m[i][j] = c1.m[i][j] - c2.m[i][j];
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) result.m[i][j] = c1.m[i][j] - c2.m[i][j];
   return result;
  }
 
@@ -424,8 +424,8 @@ Mat3 operator * (double r, const Mat3& c1)
   Mat3 result;
   int i, j;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) result.m[i][j] = c1.m[i][j] * r;
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) result.m[i][j] = c1.m[i][j] * r;
   return result;
  }
 
@@ -435,8 +435,8 @@ Mat3 operator * (const Mat3& c1, double r)
   int i, j;
   Mat3 result;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) result.m[i][j] = c1.m[i][j] * r;
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) result.m[i][j] = c1.m[i][j] * r;
   return result;
  }
 
@@ -446,8 +446,8 @@ Mat3 operator * (const Mat3& c1, const Mat3& c2)
   double r;
   Mat3 result;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++)
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j)
     {
      r = 0;
      for (k=0; k<3; k++) r = r + c1.m[i][k] * c2.m[k][j];
@@ -466,8 +466,8 @@ Mat3 operator / (const Mat3& c1, double r)
   if (r < 1E-100) q = 0.0;
   else q = 1.0 / r;
 
-  for (i=0; i<3; i++)
-   for (j=0; j<3; j++) result.m[i][j] = c1.m[i][j] * q;
+  for (i=0; i<3; ++i)
+   for (j=0; j<3; ++j) result.m[i][j] = c1.m[i][j] * q;
   return result;
  }
 
@@ -477,10 +477,10 @@ Vec3 mxvct (const Mat3& m1, Vec3& v1)
   double r;
   Vec3 result;
 
-  for (i=0; i<3; i++)
+  for (i=0; i<3; ++i)
    {
     r = 0;
-    for (j=0; j<3; j++) r = r + m1.m[i][j] * v1[j];
+    for (j=0; j<3; ++j) r = r + m1.m[i][j] * v1[j];
     result[i] = r;
    };
   return result;

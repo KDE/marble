@@ -208,7 +208,7 @@ void NavigationWidget::changeZoom( int zoom )
 
 void NavigationWidget::clearSearch()
 {
-    d->m_searchTerm = QString();
+    d->m_searchTerm.clear();
 
     d->m_navigationUi.locationListView->setVisible( false );
     d->m_widget->model()->placemarkSelectionModel()->clear();

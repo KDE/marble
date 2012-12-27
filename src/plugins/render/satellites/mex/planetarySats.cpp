@@ -228,7 +228,7 @@ int PlanetarySats::getStateVector(int nsat)
      k = strlen(satname);
      if ((k>1) && (satname[0] == '#'))
      {
-      for (j=1; j<k; j++)
+      for (j=1; j<k; ++j)
       {
        pls_satname[j-1] = satname[j]; 
        if(pls_satname[j-1] == '\n') pls_satname[j-1] = '\0';
@@ -586,7 +586,7 @@ void PlanetarySats::getSatPos (double tutc)
     s = r1[0]*r1[0] + r1[1]*r1[1];
     sh = c*r1[2];
 
-    for (j=0; j<4; j++)
+    for (j=0; j<4; ++j)
      {
       b1 = r1[2] + sh;
       b3 = sqrt(s+b1*b1);
