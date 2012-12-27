@@ -44,10 +44,11 @@ public:
      * @param  mag magnitude
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    StarPoint(int id, qreal rect, qreal decl, qreal mag) {
+    StarPoint(int id, qreal rect, qreal decl, qreal mag, QColor color) {
         m_id = id;
         m_q = Quaternion::fromSpherical( rect, decl );
         m_mag = mag;
+        m_color = color;
     }
 
     ~StarPoint() {}
@@ -63,11 +64,16 @@ public:
     int id() const {
         return m_id;
     }
+    
+    QColor color() const {
+        return m_color;
+    }
 
 private:
     int         m_id;
     qreal       m_mag;
     Quaternion  m_q;
+    QColor      m_color;
 };
 
 

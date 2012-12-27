@@ -243,7 +243,7 @@ void StarsPlugin::loadStars()
     // Read the version
     qint32 version;
     in >> version;
-    if ( version > 002 ) {
+    if ( version > 003 ) {
         mDebug() << "stars.dat: file too new.";
         return;
     }
@@ -253,6 +253,9 @@ void StarsPlugin::loadStars()
     double ra;
     double de;
     double mag;
+    int red = 255;
+    int green = 255;
+    int blue = 255;
 
     mDebug() << "Star Catalog Version " << version;
 
@@ -266,7 +269,21 @@ void StarsPlugin::loadStars()
         in >> ra;
         in >> de;
         in >> mag;
-        StarPoint star( id, ( qreal )( ra ), ( qreal )( de ), ( qreal )( mag ) );
+        
+        if ( version >= 3 ) {
+            in >> red;
+            in >> green;
+            in >> blue;
+        }
+        
+        if( red < 0)
+        {
+            red = 255;
+            green = 255;
+            blue = 255;
+        }
+        
+        StarPoint star( id, ( qreal )( ra ), ( qreal )( de ), ( qreal )( mag ), QColor( red,green,blue ) );
         // Create entry in stars database
         m_stars << star;
         // Create key,value pair in idHash table to map from star id to
@@ -274,7 +291,7 @@ void StarsPlugin::loadStars()
         m_idHash[id] = starIndex;
         // Increment Index for use in hash
         ++starIndex;
-        //mDebug() << "id" << id << "RA:" << ra << "DE:" << de << "MAG:" << mag;
+        //mDebug() << "id" << id << "RA:" << ra << "DE:" << de << "MAG:" << mag ;
     }
 
     // load the Sun pixmap
@@ -688,6 +705,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             else size = 0.5;
 
             if ( ( *i ).magnitude() < m_magnitudeLimit ) {
+                painter->setBrush( ( *i ).color() );
                 painter->drawEllipse( QRectF( x-size/2.0, y-size/2.0, size, size ) );
             }
         }
