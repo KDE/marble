@@ -170,7 +170,7 @@ void MeasureToolPlugin::writeSettings()
     emit repaintNeeded();
 }
 
-bool MeasureToolPlugin::render( GeoPainter *painter, 
+bool MeasureToolPlugin::render( GeoPainter *painter,
                           ViewportParams *viewport,
                           const QString& renderPos,
                           GeoSceneLayer * layer )
@@ -178,7 +178,7 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
 
-    // FIXME: Add this stuff into the Layermanager as something to be 
+    // FIXME: Add this stuff into the Layermanager as something to be
     // called before the float items.
 
     // No way to paint anything if the list is empty.
@@ -224,6 +224,13 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         QLocale::MeasurementSystem measurementSystem;
         measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
+	QPen shadowPen( QColor( Oxygen::aluminumGray5 ) );
+	shadowPen.setWidthF(4.0);
+        painter->setPen( shadowPen );
+        painter->drawPolyline( segment, distanceString, LineCenter );
+
+	QPen linePen;
+
         if ( measurementSystem == QLocale::MetricSystem ) {
             if ( segmentLength >= 1000.0 ) {
                 distanceString = tr("%1 km").arg( segmentLength / 1000.0, 0, 'f', 2 );
@@ -237,18 +244,19 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         }
 
         if ( i == r ) {
-            painter->setPen( Oxygen::brickRed4 );
+            linePen.setColor( Oxygen::brickRed4 );
             r+=3;
         }
         else if ( i == g ) {
-            painter->setPen( Oxygen::forestGreen4 );
+            linePen.setColor( Oxygen::forestGreen4 );
             g+=3;
         }
         else if ( i == b ) {
-            painter->setPen( Oxygen::skyBlue4 );
+            linePen.setColor( Oxygen::skyBlue4 );
             b+=3;
         }
-        painter->setBrush( QBrush( QColor( 192, 192, 192, 192 ) ) );
+	linePen.setWidthF(2.0);
+	painter->setPen( linePen );
         painter->drawPolyline( segment, distanceString, LineCenter );
 
         segment.clear();
@@ -296,7 +304,10 @@ void MeasureToolPlugin::drawMark( GeoPainter* painter, int x, int y )
     // Paint the mark, and repeat it if the projection allows it.
     painter->setRenderHint( QPainter::Antialiasing, false );
 
-    painter->setBrush( QBrush( QColor( 192, 192, 192, 128 ) ) );
+    QColor backgroundCircleColor( Oxygen::aluminumGray6 );
+    backgroundCircleColor.setAlpha( 128 );
+
+    painter->setBrush( backgroundCircleColor );
     painter->setPen( Qt::NoPen );
     painter->drawEllipse( x-8, y-8, 16, 16 );
 
@@ -305,7 +316,7 @@ void MeasureToolPlugin::drawMark( GeoPainter* painter, int x, int y )
     painter->drawLine( x, y - markRadius, x, y + markRadius );
 }
 
-void MeasureToolPlugin::drawTotalDistanceLabel( GeoPainter *painter, 
+void MeasureToolPlugin::drawTotalDistanceLabel( GeoPainter *painter,
                                           qreal totalDistance )
 {
     QString  distanceString;
