@@ -42,7 +42,7 @@ PopupItem::PopupItem( QObject* parent ) :
     childLayout->addWidget( m_titleText, 0, 0 );
     QPushButton *hideButton = new QPushButton( m_widget );
     hideButton->setIcon( QIcon( ":/marble/webpopup/icon-remove.png" ) );
-    hideButton->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
+    hideButton->setMaximumWidth( 24 );
     hideButton->setCursor( QCursor( Qt::PointingHandCursor ) );
     hideButton->setFlat( true );
     childLayout->addWidget( hideButton, 0, 1 );
