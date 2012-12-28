@@ -1,7 +1,7 @@
 #
 # Template for Float Items.
 #
-# Change all occurances of 'FITemplate' below to the name of your new
+# Change all occurrences of 'FITemplate' below to the name of your new
 # template.  (Also remove this comment.)
 #
 

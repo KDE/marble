@@ -322,7 +322,7 @@ endif(WIN32 AND QTONLY)
 ########### install files ###############
 
 if (APPLE AND QTONLY)
-  # do nothing because we dont put .h files in the bundle
+  # do nothing because we don't put .h files in the bundle
 else (APPLE AND QTONLY)
   install( FILES
     ${graphicsview_HDRS}
