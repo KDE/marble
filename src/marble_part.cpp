@@ -291,6 +291,11 @@ void MarblePart::setShowBookmarks( bool show )
     m_toggleBookmarkDisplayAction->setChecked( show ); // Sync state with the GUI
 }
 
+void MarblePart::setShowFileView( bool isChecked )
+{
+    m_controlView->setFileViewTabShown( isChecked );
+}
+
 void MarblePart::setShowClouds( bool isChecked )
 {
     m_controlView->marbleWidget()->setShowClouds( isChecked );
@@ -871,6 +876,15 @@ void MarblePart::setupActions()
         }
     }
 
+    // Action: Show File View
+    m_showFileViewAction = new KAction( this );
+    actionCollection()->addAction( "show_file_view", m_showFileViewAction );
+    m_showFileViewAction->setChecked( false );
+    m_showFileViewAction->setCheckable( true );
+    m_showFileViewAction->setText( i18nc( "Action for showing the File View",
+                                   "&Show File View" ) );
+    connect( m_showFileViewAction, SIGNAL( triggered( bool ) ),
+             this,                 SLOT( setShowFileView( bool ) ) );
 
     // Action: Show Clouds option
     m_showCloudsAction = new KAction( this );

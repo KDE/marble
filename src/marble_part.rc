@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="marble_part" version="14">
+<kpartgui name="marble_part" version="15">
 
 <MenuBar>
   <Menu name="file" noMerge="1">
@@ -41,6 +41,7 @@
       <ActionList name="onlineservices_actionlist" />
     </Menu>
     <Separator/>
+    <Action name="show_file_view"/>
     <Action name="show_clouds"/>
     <Action name="show_atmosphere"/>
     <Separator/>

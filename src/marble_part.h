@@ -80,6 +80,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  printMapScreenShot();
     void  copyMap();
     void  copyCoordinates();
+    void  setShowFileView( bool );
     void  setShowClouds( bool );
     void  setShowAtmosphere( bool );
     void  updateAtmosphereMenu();
@@ -204,6 +205,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_copyMapAction;
     KAction      *m_copyCoordinatesAction;
     KAction      *m_currentLocationAction;
+    KAction      *m_showFileViewAction;
     KAction      *m_showCloudsAction;
     KAction      *m_showAtmosphereAction;
     KAction      *m_sideBarAct;

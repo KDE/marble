@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<gui name="marble" version="8">
+<gui name="marble" version="9">
 
 <MenuBar>
   <Menu name="file" noMerge="1"><text>&amp;File</text>
@@ -19,6 +19,7 @@
     <Merge name="StandardToolBarMenuHandler" />
     <Action name="options_show_sidebar" group="show_merge"/>
     <Separator/>
+    <Action name="show_file_view"/>
     <Action name="show_clouds"/>
     <Action name="show_atmosphere"/>
     <Separator/>
