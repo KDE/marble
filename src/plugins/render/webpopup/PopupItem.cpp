@@ -14,7 +14,10 @@
 #include "PopupItem.h"
 #include "MarbleWidget.h"
 
+#include <QtCore/QPointer>
 #include <QtWebKit/QWebView>
+#include <QtGui/QPrinter>
+#include <QtGui/QPrintDialog>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QApplication>
 #include <QtGui/QVBoxLayout>
@@ -37,15 +40,35 @@ PopupItem::PopupItem( QObject* parent ) :
 {
     setVisible( false );
 
+#ifndef QT_NO_PRINTER
+    m_isPrintButtonVisible = true;
+#else
+    m_isPrintButtonVisible = false;
+#endif
+
     QGridLayout *childLayout = new QGridLayout;
     m_titleText = new QLabel( m_widget );
     childLayout->addWidget( m_titleText, 0, 0 );
+
+    m_printButton = new QPushButton( m_widget );
+    m_printButton->setIcon( QIcon( ":/marble/webpopup/icon-print.png" ) );
+    m_printButton->setMaximumWidth( 24 );
+    m_printButton->setCursor( QCursor( Qt::PointingHandCursor ) );
+    m_printButton->setFlat( true );
+    childLayout->addWidget( m_printButton, 0, 1 );
+    connect(m_printButton, SIGNAL(clicked()), this, SLOT(printContent()));
+
+#ifdef QT_NO_PRINTER
+    m_printButton->hide();
+#endif
+
     QPushButton *hideButton = new QPushButton( m_widget );
     hideButton->setIcon( QIcon( ":/marble/webpopup/icon-remove.png" ) );
     hideButton->setMaximumWidth( 24 );
     hideButton->setCursor( QCursor( Qt::PointingHandCursor ) );
     hideButton->setFlat( true );
-    childLayout->addWidget( hideButton, 0, 1 );
+    childLayout->addWidget( hideButton, 0, 2 );
+
     QVBoxLayout *layout = new QVBoxLayout( m_widget );
     layout->addLayout( childLayout );
     layout->addWidget( m_webView );
@@ -64,6 +87,19 @@ PopupItem::PopupItem( QObject* parent ) :
 PopupItem::~PopupItem()
 {
     delete m_widget;
+}
+
+bool PopupItem::isPrintButtonVisible() const
+{
+    return m_isPrintButtonVisible;
+}
+
+void PopupItem::setPrintButtonVisible(bool display)
+{
+#ifndef QT_NO_PRINTER
+    m_isPrintButtonVisible = display;
+    m_printButton->setVisible(display);
+#endif
 }
 
 void PopupItem::setUrl( const QUrl &url )
@@ -287,6 +323,18 @@ QWidget* PopupItem::transform( QPoint &point ) const
         }
     }
     return 0;
+}
+
+void PopupItem::printContent()
+{
+#ifndef QT_NO_PRINTER
+    QPrinter printer;
+    QPointer<QPrintDialog> dialog = new QPrintDialog(&printer);
+    if (dialog->exec() == QPrintDialog::Accepted) {
+        m_webView->print(&printer);
+    }
+    delete dialog;
+#endif
 }
 
 QPixmap PopupItem::pixmap( const QString &imageId )

@@ -33,12 +33,18 @@ public:
     explicit PopupItem( QObject* parent = 0 );
     ~PopupItem();
 
+    bool isPrintButtonVisible() const;
+    void setPrintButtonVisible(bool);
+
     void setUrl( const QUrl &url );
     void setContent( const QString &html );
     void setTextColor( const QColor &color );
     void setBackgroundColor( const QColor &color );
     QWidget* transform( QPoint &point ) const;
     virtual bool eventFilter( QObject *, QEvent *e );
+
+private slots:
+    void printContent();
 
 protected:
     void paint( QPainter *painter );
@@ -52,12 +58,14 @@ private:
     void colorize( QImage &img, const QColor &col );
 
     QWidget *m_widget;
+    QPushButton *m_printButton;
     QLabel *m_titleText;
     QWebView *m_webView;
     QString m_content;
     QColor m_textColor;
     QColor m_backColor;
     bool m_needMouseRelease;
+    bool m_isPrintButtonVisible;
 };
 
 }
