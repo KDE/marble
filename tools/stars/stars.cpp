@@ -96,12 +96,14 @@ int main(int argc, char *argv[])
 //            qDebug() << "Rec:" << recString << "Dec.:" << decString << "Mag.:" << magString;
             if ( !line.isNull() && magValue < 6.0 ) {
 	        if (raValue != 0 && deValue != 0) { // Filter out Novae and DSOs
-		    qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "idx:" << colorIdx;
-		    out << idValue;
-		    out << raValue;
-		    out << deValue;
-		    out << magValue;
-		    out << colorIdx;
+		    if (idValue != 5958) { // Filter out special cases, like novae ( T CrB, ... )
+			qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "idx:" << colorIdx;
+			out << idValue;
+			out << raValue;
+			out << deValue;
+			out << magValue;
+			out << colorIdx;
+		    }
 		}
             }
         } while ( !line.isNull() );
