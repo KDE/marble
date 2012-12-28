@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 
             QString decString = line.mid( 83, 7 );
 
-            double deSign = ( decString.mid( 0, 1 ) == "-" ) ? -1.0 : 1.0; 
+            double deSign = ( decString.mid( 0, 1 ) == "-" ) ? -1.0 : 1.0;
             double deHH = decString.mid( 1, 2 ).toDouble();
             double deMM = decString.mid( 3, 2 ).toDouble();
             double deSS = decString.mid( 5, 2 ).toDouble();
@@ -95,12 +95,14 @@ int main(int argc, char *argv[])
 
 //            qDebug() << "Rec:" << recString << "Dec.:" << decString << "Mag.:" << magString;
             if ( !line.isNull() && magValue < 6.0 ) {
-                qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "idx:" << colorIdx;
-                out << idValue;
-                out << raValue;
-                out << deValue;
-                out << magValue;
-                out << colorIdx;
+	        if (raValue != 0 && deValue != 0) { // Filter out Novae and DSOs
+		    qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "idx:" << colorIdx;
+		    out << idValue;
+		    out << raValue;
+		    out << deValue;
+		    out << magValue;
+		    out << colorIdx;
+		}
             }
         } while ( !line.isNull() );
     }
