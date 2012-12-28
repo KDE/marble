@@ -44,11 +44,11 @@ public:
      * @param  mag magnitude
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    StarPoint(int id, qreal rect, qreal decl, qreal mag, QColor color) {
+    StarPoint(int id, qreal rect, qreal decl, qreal mag, int colorId) {
         m_id = id;
         m_q = Quaternion::fromSpherical( rect, decl );
         m_mag = mag;
-        m_color = color;
+        m_colorId = colorId;
     }
 
     ~StarPoint() {}
@@ -65,15 +65,15 @@ public:
         return m_id;
     }
     
-    QColor color() const {
-        return m_color;
-    }
+    int colorId() const {
+        return m_colorId;
+    } 
 
 private:
     int         m_id;
     qreal       m_mag;
     Quaternion  m_q;
-    QColor      m_color;
+    int         m_colorId;
 };
 
 
@@ -232,6 +232,16 @@ private:
     QImage m_dsoImage;
     int m_magnitudeLimit;
     QBrush m_constellationBrush;
+    QVector<QPixmap> m_pixN1Stars;
+    QVector<QPixmap> m_pixP0Stars;
+    QVector<QPixmap> m_pixP1Stars;
+    QVector<QPixmap> m_pixP2Stars;
+    QVector<QPixmap> m_pixP3Stars;
+    QVector<QPixmap> m_pixP4Stars;
+    QVector<QPixmap> m_pixP5Stars;
+    QVector<QPixmap> m_pixP6Stars;
+    QVector<QPixmap> m_pixP7Stars;
+
 };
 
 }

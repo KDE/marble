@@ -19,40 +19,21 @@
 
 #define ENABLEGUI
 
-class SimpleRgb
-{
-public:
-    SimpleRgb(double d_bv=0.09, unsigned char d_red=0xff, unsigned char d_green=0xff, unsigned char d_blue=0xff) :
-        bv(d_bv), red(0x000000ff&d_red), green(0x000000ff&d_green), blue(0x000000ff&d_blue)
-        {};
-    SimpleRgb(const SimpleRgb &rgb) {
-        bv = rgb.bv;
-        red = rgb.red;
-        green = rgb.green;
-        blue = rgb.blue;
-    };
-
-    double bv;
-    int red;
-    int green;
-    int blue;
-};
 
 int main(int argc, char *argv[])
 {
     QCoreApplication  app(argc, argv);
 
     // Set up Color Table Per B-V Color indices from some Reference Stars
-    QVector<SimpleRgb> colorTable( 0 );
+    QVector<double> colorTable( 0 );
 
-    colorTable.append(SimpleRgb(-1000.0, 0xff, 0xff, 0xff)); //Default White
-    colorTable.append(SimpleRgb(-0.23, 0xa0, 0xb8, 0xf9)); // Spica
-    colorTable.append(SimpleRgb(0.0, 0xb9, 0xcb, 0xf9)); //Rigel
-    colorTable.append(SimpleRgb(0.09, 0xff, 0xff, 0xff)); //Deneb
-    colorTable.append(SimpleRgb(0.80, 0xf8, 0xf9, 0xcc)); //Capella
-    colorTable.append(SimpleRgb(1.23, 0xf8, 0xf0, 0xcc)); //Arcturus
-    colorTable.append(SimpleRgb(1.85, 0xff, 0xe5, 0xd3)); //Betelgeuse
-    colorTable.append(SimpleRgb(2.35, 0xe8, 0xbc, 0x95)); //Mu Cep
+    colorTable.append(double(-0.23)); // Spica blue
+    colorTable.append(double(0.0)); //Rigel blue-white
+    colorTable.append(double(0.09)); //Deneb white
+    colorTable.append(double(0.80)); //Capella yellow
+    colorTable.append(double(1.23)); //Arcturus orange
+    colorTable.append(double(1.85)); //Betelgeuse red
+    colorTable.append(double(2.35)); //Mu Cep garnet red
 
 
     QFile file("stars.dat");
@@ -61,7 +42,7 @@ int main(int argc, char *argv[])
 
     // Write a header with a "magic number" and a version
     out << (quint32)0x73746172;
-    out << (qint32)003;
+    out << (qint32)004;
 
     out.setVersion(QDataStream::Qt_4_3);
 
@@ -96,14 +77,14 @@ int main(int argc, char *argv[])
             double magValue = magString.toDouble();
 
             QString bvString = line.mid( 108, 6);
-            int     colorIdx = 0; // Default White
+            int     colorIdx = 2; // Default White
 
             // Find Index of Table Entry with Closest B-V value (Smallest Difference)
             if(bvString != QString("      ")) {
                 double bvValue = bvString.toDouble();
-                double bvMinDifference = fabs(colorTable.at(0).bv-bvValue);
+                double bvMinDifference = fabs(colorTable.at(0)-bvValue);
                 for (int i = 1; i < colorTable.size(); ++i) {
-                    double bvDifference = fabs(colorTable.at(i).bv-bvValue);
+                    double bvDifference = fabs(colorTable.at(i)-bvValue);
                     if (bvDifference < bvMinDifference) {
                         colorIdx = i;
                         bvMinDifference = bvDifference;
@@ -111,18 +92,15 @@ int main(int argc, char *argv[])
                 }
             }
 
-            SimpleRgb rgb = colorTable.at(colorIdx);
 
 //            qDebug() << "Rec:" << recString << "Dec.:" << decString << "Mag.:" << magString;
             if ( !line.isNull() && magValue < 6.0 ) {
-                qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "rgb:" << rgb.red << rgb.green << rgb.blue;
+                qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "idx:" << colorIdx;
                 out << idValue;
                 out << raValue;
                 out << deValue;
                 out << magValue;
-                out << rgb.red;
-                out << rgb.green;
-                out << rgb.blue;
+                out << colorIdx;
             }
         } while ( !line.isNull() );
     }
@@ -140,7 +118,7 @@ int main(int argc, char *argv[])
     // Read the version
     qint32 version;
     in >> version;
-    if (version > 003) {
+    if (version > 004) {
         qDebug() << "stars.dat: file too new.";
      return -1;
     }
@@ -148,19 +126,15 @@ int main(int argc, char *argv[])
     double ra;
     double de;
     double mag;
-    int red;
-    int green;
-    int blue;
+    int colorIdx;
 
     while ( !in.atEnd() ) {
         in >> id;
         in >> ra;
         in >> de;
         in >> mag;
-        in >> red;
-        in >> green;
-        in >> blue;
-        qDebug() << "ID:" << id << "RA:" << ra << "DE:" << de << "MAG:" << mag << "rgb:" << red << green << blue;
+        in >> colorIdx;
+        qDebug() << "ID:" << id << "RA:" << ra << "DE:" << de << "MAG:" << mag << "idx:" << colorIdx;
     }
 
     app.exit();

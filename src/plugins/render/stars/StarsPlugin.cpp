@@ -243,19 +243,23 @@ void StarsPlugin::loadStars()
     // Read the version
     qint32 version;
     in >> version;
-    if ( version > 003 ) {
+    if ( version > 004 ) {
         mDebug() << "stars.dat: file too new.";
         return;
     }
+
+    if ( version == 003 ) {
+        mDebug() << "stars.dat: file version no longer supported.";
+        return;
+    }
+
     int maxid = 0;
     int id = 0;
     int starIndex = 0;
     double ra;
     double de;
     double mag;
-    int red = 255;
-    int green = 255;
-    int blue = 255;
+    int colorId = 2;
 
     mDebug() << "Star Catalog Version " << version;
 
@@ -269,21 +273,12 @@ void StarsPlugin::loadStars()
         in >> ra;
         in >> de;
         in >> mag;
-        
-        if ( version >= 3 ) {
-            in >> red;
-            in >> green;
-            in >> blue;
+
+        if ( version >= 4 ) {
+            in >> colorId;
         }
-        
-        if( red < 0)
-        {
-            red = 255;
-            green = 255;
-            blue = 255;
-        }
-        
-        StarPoint star( id, ( qreal )( ra ), ( qreal )( de ), ( qreal )( mag ), QColor( red,green,blue ) );
+
+        StarPoint star( id, ( qreal )( ra ), ( qreal )( de ), ( qreal )( mag ), colorId );
         // Create entry in stars database
         m_stars << star;
         // Create key,value pair in idHash table to map from star id to
@@ -291,12 +286,89 @@ void StarsPlugin::loadStars()
         m_idHash[id] = starIndex;
         // Increment Index for use in hash
         ++starIndex;
-        //mDebug() << "id" << id << "RA:" << ra << "DE:" << de << "MAG:" << mag ;
+        mDebug() << "id" << id << "RA:" << ra << "DE:" << de << "MAG:" << mag << "Color Id:" << colorId;
     }
 
     // load the Sun pixmap
     // TODO: adjust pixmap size according to distance
     m_pixmapSun.load( MarbleDirs::path( "svg/sun.png" ) );
+
+    // Load star pixmaps
+    QVector<QPixmap> m_pixBigStars;
+    m_pixBigStars.clear();
+    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_blue.png")));
+    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_bluewhite.png")));
+    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_white.png")));
+    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_yellow.png")));
+    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_orange.png")));
+    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_red.png")));
+    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_garnetred.png")));
+
+    QVector<QPixmap> m_pixSmallStars;
+    m_pixSmallStars.clear();
+    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_blue.png")));
+    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_bluewhite.png")));
+    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_white.png")));
+    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_yellow.png")));
+    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_orange.png")));
+    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_red.png")));
+    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_garnetred.png")));
+
+
+    // Pre-Scale Star Pixmaps
+    m_pixN1Stars.clear();
+    for ( int p=0; p < m_pixBigStars.size(); ++p) {
+        int width = 1.0*m_pixBigStars.at(p).width();
+        m_pixN1Stars.append(m_pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    }
+
+    m_pixP0Stars.clear();
+    for ( int p=0; p < m_pixBigStars.size(); ++p) {
+        int width = 0.90*m_pixBigStars.at(p).width();
+        m_pixP0Stars.append(m_pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    }
+
+    m_pixP1Stars.clear();
+    for ( int p=0; p < m_pixBigStars.size(); ++p) {
+        int width = 0.80*m_pixBigStars.at(p).width();
+        m_pixP1Stars.append(m_pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    }
+
+    m_pixP2Stars.clear();
+    for ( int p=0; p < m_pixBigStars.size(); ++p) {
+        int width = 0.70*m_pixBigStars.at(p).width();
+        m_pixP2Stars.append(m_pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    }
+
+    m_pixP3Stars.clear();
+    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+        int width = 14;
+        m_pixP3Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    }
+
+    m_pixP4Stars.clear();
+    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+        int width = 10;
+        m_pixP4Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    }
+
+    m_pixP5Stars.clear();
+    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+        int width = 6;
+        m_pixP5Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    }
+
+    m_pixP6Stars.clear();
+    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+        int width = 4;
+        m_pixP6Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    }
+
+    m_pixP7Stars.clear();
+    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+        int width = 1;
+        m_pixP7Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    }
 
     m_starsLoaded = true;
 }
@@ -429,25 +501,25 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     if ( renderPoles ) {
 
-	QPen polesPen( QColor( Marble::Oxygen::aluminumGray6 ) );
-	polesPen.setWidth( 2 );
-	painter->setPen( polesPen );
+        QPen polesPen( QColor( Marble::Oxygen::aluminumGray6 ) );
+        polesPen.setWidth( 2 );
+        painter->setPen( polesPen );
 
-	Quaternion qpos;
-	qpos = Quaternion::fromSpherical( 0, 90 * DEG2RAD );
-	qpos.rotateAroundAxis( skyAxisMatrix );
+        Quaternion qpos;
+        qpos = Quaternion::fromSpherical( 0, 90 * DEG2RAD );
+        qpos.rotateAroundAxis( skyAxisMatrix );
 
-	int x1, y1;
-	x1 = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
-	y1 = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
-	painter->drawLine( x1, y1, x1+10, y1 );
-	painter->drawLine( x1+5, y1-5, x1+5, y1+5 );
-	painter->drawText( x1+8, y1+12, "NP" );
-	x1 = ( int )( viewport->width()  / 2 - skyRadius * qpos.v[Q_X] );
-	y1 = ( int )( viewport->height() / 2 + skyRadius * qpos.v[Q_Y] );
-	painter->drawLine( x1, y1, x1+10, y1 );
-	painter->drawLine( x1+5, y1-5, x1+5, y1+5 );
-	painter->drawText( x1+8, y1+12, "SP" );
+        int x1, y1;
+        x1 = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
+        y1 = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
+        painter->drawLine( x1, y1, x1+10, y1 );
+        painter->drawLine( x1+5, y1-5, x1+5, y1+5 );
+        painter->drawText( x1+8, y1+12, "NP" );
+        x1 = ( int )( viewport->width()  / 2 - skyRadius * qpos.v[Q_X] );
+        y1 = ( int )( viewport->height() / 2 + skyRadius * qpos.v[Q_Y] );
+        painter->drawLine( x1, y1, x1+10, y1 );
+        painter->drawLine( x1+5, y1-5, x1+5, y1+5 );
+        painter->drawText( x1+8, y1+12, "SP" );
     }
 
     QPen eclipticPen( QBrush(Marble::Oxygen::aluminumGray6), 1, Qt::DotLine );
@@ -662,10 +734,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         // Render Stars
         painter->setPen( starPen );
         painter->setBrush( starBrush );
-        QVector<StarPoint>::const_iterator i = m_stars.constBegin();
-        QVector<StarPoint>::const_iterator itEnd = m_stars.constEnd();
-        for ( ; i != itEnd; ++i ) {
-            Quaternion  qpos = ( *i ).quaternion();
+
+        for ( int s = 0; s < m_stars.size(); ++s  ) {
+            Quaternion  qpos = m_stars.at(s).quaternion();
 
             qpos.rotateAroundAxis( skyAxisMatrix );
 
@@ -693,20 +764,45 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                     || y < 0 || y >= viewport->height() )
                 continue;
 
-            qreal size;
-            if ( ( *i ).magnitude() < -1 ) size = 8.5;
-            else if ( ( *i ).magnitude() < 0 ) size = 7.5;
-            else if ( ( *i ).magnitude() < 1 ) size = 6.5;
-            else if ( ( *i ).magnitude() < 2 ) size = 5.5;
-            else if ( ( *i ).magnitude() < 3 ) size = 4.5;
-            else if ( ( *i ).magnitude() < 4 ) size = 3.5;
-            else if ( ( *i ).magnitude() < 5 ) size = 2.5;
-            else if ( ( *i ).magnitude() < 6 ) size = 1.5;
-            else size = 0.5;
+            // Show star if it is brighter than magnitude threshold
+            if ( m_stars.at(s).magnitude() < m_magnitudeLimit ) {
 
-            if ( ( *i ).magnitude() < m_magnitudeLimit ) {
-                painter->setBrush( ( *i ).color() );
-                painter->drawEllipse( QRectF( x-size/2.0, y-size/2.0, size, size ) );
+                // colorId is used to select which pixmap in vector to display
+                int colorId = m_stars.at(s).colorId();
+                QPixmap s_pixmap;
+
+                // Magnitude is used to select which pixmap vector (size) to use
+                if ( m_stars.at(s).magnitude() < -1 ) {
+                    s_pixmap = m_pixN1Stars.at(colorId);
+                }
+                else if ( m_stars.at(s).magnitude() < 0 ) {
+                    s_pixmap = m_pixP0Stars.at(colorId);
+                }
+                else if ( m_stars.at(s).magnitude() < 1 ) {
+                    s_pixmap = m_pixP1Stars.at(colorId);
+                }
+                else if ( m_stars.at(s).magnitude() < 2 ) {
+                    s_pixmap = m_pixP2Stars.at(colorId);
+                }
+                else if ( m_stars.at(s).magnitude() < 3 ) {
+                    s_pixmap = m_pixP3Stars.at(colorId);
+                }
+                else if ( m_stars.at(s).magnitude() < 4 ) {
+                    s_pixmap = m_pixP4Stars.at(colorId);
+                }
+                else if ( m_stars.at(s).magnitude() < 5 ) {
+                    s_pixmap = m_pixP5Stars.at(colorId);
+                }
+                else if ( m_stars.at(s).magnitude() < 6 ) {
+                    s_pixmap = m_pixP6Stars.at(colorId);
+                }
+                else {
+                    s_pixmap = m_pixP7Stars.at(colorId);
+                }
+
+                int sizeX = s_pixmap.width();
+                int sizeY = s_pixmap.height();
+                painter->drawPixmap( x-sizeX/2, y-sizeY/2 ,s_pixmap );
             }
         }
 
