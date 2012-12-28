@@ -244,7 +244,7 @@ void NewstuffModelPrivate::installMap()
         m_unpackProcess->close();
         delete m_unpackProcess;
         m_unpackProcess = 0;
-    } else if ( m_currentFile->fileName().endsWith( "tar.gz" ) && canExecute( "tar" ) ) {
+    } else if ( m_currentFile->fileName().endsWith( QLatin1String( "tar.gz" ) ) && canExecute( "tar" ) ) {
         m_unpackProcess = new QProcess;
         QObject::connect( m_unpackProcess, SIGNAL( finished( int ) ),
                           m_parent, SLOT( contentsListed( int ) ) );
@@ -252,7 +252,7 @@ void NewstuffModelPrivate::installMap()
         m_unpackProcess->setWorkingDirectory( m_targetDirectory );
         m_unpackProcess->start( "tar", arguments );
     } else {
-        if ( !m_currentFile->fileName().endsWith( "tar.gz" ) ) {
+        if ( !m_currentFile->fileName().endsWith( QLatin1String( "tar.gz" ) ) ) {
             mDebug() << "Can only handle tar.gz files";
         } else {
             mDebug() << "Cannot extract archive: tar executable not found in PATH.";

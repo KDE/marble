@@ -298,7 +298,7 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
     QString  newName;
 
     if ( type == QTextDocument::ImageResource
-         && name.toString().startsWith("checkbox:", Qt::CaseInsensitive) )
+         && name.toString().startsWith(QLatin1String( "checkbox:" ), Qt::CaseInsensitive) )
     {
         QStyleOptionButton option;
         option.initFrom(this);
@@ -327,7 +327,7 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
     }
 
     if ( type == QTextDocument::ImageResource
-         && name.toString().startsWith("pixmap:", Qt::CaseInsensitive) )
+         && name.toString().startsWith(QLatin1String( "pixmap:" ), Qt::CaseInsensitive) )
     {
         QString pixmapName = name.toString().section(':', 1, -1);
         if ( d->m_symbolMap.contains( pixmapName ) ) {

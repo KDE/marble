@@ -49,11 +49,11 @@ int main( int argc, char** argv )
     bool ignore = false;
     while( !poStream.atEnd() ) {
         QString line = poStream.readLine();
-        if ( line.startsWith( "#, fuzzy" ) ) {
+        if ( line.startsWith( QLatin1String( "#, fuzzy" ) ) ) {
             ignore = true;
-        } else if ( line.startsWith( "msgid " ) ) {
+        } else if ( line.startsWith( QLatin1String( "msgid " ) ) ) {
             source = line.mid( 7, line.size() - 8 );
-        } else if ( !source.isEmpty() && line.startsWith( "msgstr " ) ) {
+        } else if ( !source.isEmpty() && line.startsWith( QLatin1String( "msgstr " ) ) ) {
             if ( ignore ) {
                 ignore = false;
             } else {
@@ -84,7 +84,7 @@ int main( int argc, char** argv )
     source.clear();
     while( !tsStream.atEnd() ) {
         QString line = tsStream.readLine().trimmed();
-        if ( line.startsWith( "<source>" ) ) {
+        if ( line.startsWith( QLatin1String( "<source>" ) ) ) {
             source = line.mid( 8, line.size() - 17 );
             console << line << "\n";
         } else if ( !source.isEmpty() &&

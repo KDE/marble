@@ -77,7 +77,7 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
                     }
                 } else if ( entries.first() == "END" && !inside ) {
                     qDebug() << "END not expected here";
-                } else if ( entries.first().startsWith( "!" ) ) {
+                } else if ( entries.first().startsWith( QLatin1String( "!" ) ) ) {
                     skip = true;
                     qDebug() << "Warning: Negative polygons not supported, skipping";
                 } else {

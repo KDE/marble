@@ -134,7 +134,7 @@ void FileStorageWatcherThread::ensureCacheSize()
 	
 	// Make sure that we are in the right directory
 	if ( m_dataDirectory.isEmpty() ||
-	    !m_dataDirectory.endsWith("data") )
+	    !m_dataDirectory.endsWith(QLatin1String( "data" )) )
 	{
 	    mDebug()
 	     << "Error: Refusing to erase files under"
@@ -276,10 +276,10 @@ void FileStorageWatcherThread::ensureSizePerTheme( const QString &themeDirectory
 	    // Do not delete files younger than two minutes.
         // FIXME, when vectortiling I suppose also vector tiles will have
         // to be deleted
-	    if (   (    lowerCase.endsWith( ".jpg" ) 
-	             || lowerCase.endsWith( ".png" )
-	             || lowerCase.endsWith( ".gif" )
-	             || lowerCase.endsWith( ".svg" ) )
+	    if (   (    lowerCase.endsWith( QLatin1String( ".jpg" ) ) 
+	             || lowerCase.endsWith( QLatin1String( ".png" ) )
+	             || lowerCase.endsWith( QLatin1String( ".gif" ) )
+	             || lowerCase.endsWith( QLatin1String( ".svg" ) ) )
 		&& ( info.lastModified().secsTo( QDateTime::currentDateTime() )
 		     > deleteOnlyFilesOlderThan ) )
 	    {

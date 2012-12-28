@@ -304,7 +304,7 @@ void OpenCachingComItem::addDownloadedFile( const QString &url, const QString &t
 
     // ### images does not work, opencaching.com redirects them to
     // a localized location and can not return them.
-    else if (type.startsWith("image"))
+    else if (type.startsWith(QLatin1String("image")))
     {
         int index = type.mid(6).toInt();
         m_images << url;

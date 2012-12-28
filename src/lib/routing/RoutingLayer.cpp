@@ -819,7 +819,7 @@ void RoutingLayer::exportRoute()
                        tr( "GPX and KML files (*.gpx *.kml)" ) );
 
     if ( d->m_routingModel && !fileName.isEmpty() ) {
-        if ( fileName.endsWith( ".gpx", Qt::CaseInsensitive ) ) {
+        if ( fileName.endsWith( QLatin1String( ".gpx" ), Qt::CaseInsensitive ) ) {
             QFile gpx( fileName );
             if ( gpx.open( QFile::WriteOnly) ) {
                 d->m_routingModel->exportGpx( &gpx );

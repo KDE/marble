@@ -366,7 +366,7 @@ void CurrentLocationWidgetPrivate::saveTrack()
     if ( fileName.isEmpty() ) {
         return;
     }
-    if ( !fileName.endsWith(".kml", Qt::CaseInsensitive) ) {
+    if ( !fileName.endsWith(QLatin1String( ".kml" ), Qt::CaseInsensitive) ) {
         fileName.append( ".kml" );
     }
     QFileInfo file( fileName );

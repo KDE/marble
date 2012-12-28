@@ -72,7 +72,7 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
 
 void BBCWeatherService::getItem( const QString &id, const MarbleModel * )
 {
-    if ( id.startsWith( "bbc" ) ) {
+    if ( id.startsWith( QLatin1String( "bbc" ) ) ) {
         BBCStation const station = m_itemGetter->station( id );
         if ( station.bbcId() > 0 ) {
             createItem( station );

@@ -234,7 +234,7 @@ bool Upload::deleteRemoteFile(const QString &filename)
         return true;
     }
 
-    if (!filename.startsWith("/home/marble/")) {
+    if (!filename.startsWith(QLatin1String( "/home/marble/" ))) {
         return false;
     }
 

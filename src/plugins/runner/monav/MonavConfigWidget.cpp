@@ -193,7 +193,7 @@ QString MonavStuffEntry::transport() const
 
 bool MonavStuffEntry::isValid() const
 {
-    return !m_continent.isEmpty() && !m_state.isEmpty() && m_payload.startsWith( "http://" );
+    return !m_continent.isEmpty() && !m_state.isEmpty() && m_payload.startsWith( QLatin1String( "http://" ) );
 }
 
 MonavConfigWidgetPrivate::MonavConfigWidgetPrivate( MonavConfigWidget* parent, MonavPlugin* plugin ) :
@@ -513,7 +513,7 @@ void MonavConfigWidgetPrivate::installMap()
         delete m_unpackProcess;
         m_unpackProcess = 0;
         m_parent->m_installButton->setEnabled( true );
-    } else if ( m_currentFile.fileName().endsWith( "tar.gz" ) && canExecute( "tar" ) ) {
+    } else if ( m_currentFile.fileName().endsWith( QLatin1String( "tar.gz" ) ) && canExecute( "tar" ) ) {
         QFileInfo file( m_currentFile );
         QString message = QObject::tr( "Installing %1" ).arg( file.fileName() );
         setBusy( true, message );
@@ -527,7 +527,7 @@ void MonavConfigWidgetPrivate::installMap()
             m_unpackProcess->start( "tar", arguments );
         }
     } else {
-        if ( !m_currentFile.fileName().endsWith( "tar.gz" ) ) {
+        if ( !m_currentFile.fileName().endsWith( QLatin1String( "tar.gz" ) ) ) {
             mDebug() << "Can only handle tar.gz files";
         } else {
             mDebug() << "Cannot extract archive: tar executable not found in PATH.";

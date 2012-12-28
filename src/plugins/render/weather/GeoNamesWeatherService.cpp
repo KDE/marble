@@ -62,7 +62,7 @@ void GeoNamesWeatherService::getItem( const QString &id, const MarbleModel *mode
         return;
     }
 
-    if ( id.startsWith("geonames_" ) ) {
+    if ( id.startsWith(QLatin1String("geonames_") ) ) {
         QUrl geonamesUrl( "http://ws.geonames.org/weatherIcaoJSON" );
         geonamesUrl.addQueryItem( "ICAO", id.mid( 9 ) );
         emit downloadDescriptionFileRequested( geonamesUrl );

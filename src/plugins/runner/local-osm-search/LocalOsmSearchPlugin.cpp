@@ -91,7 +91,7 @@ void LocalOsmSearchPlugin::updateDirectory( const QString & ) const
 
 void LocalOsmSearchPlugin::updateFile( const QString &file ) const
 {
-    if ( file.endsWith( ".sqlite" ) ) {
+    if ( file.endsWith( QLatin1String( ".sqlite" ) ) ) {
         m_databaseLoaded = false;
     }
 }

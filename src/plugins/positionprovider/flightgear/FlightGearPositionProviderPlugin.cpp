@@ -132,7 +132,7 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence( const QString &sentenc
     PositionProviderStatus oldStatus = m_status;
     GeoDataCoordinates oldPosition = m_position;
 
-    if ( sentence.startsWith( "$GPRMC" ) ) {
+    if ( sentence.startsWith( QLatin1String( "$GPRMC" ) ) ) {
         QStringList const values = sentence.split( ',' );
         if ( values.size() > 9 ) {
             if ( values[2] == "A" ) {
@@ -147,7 +147,7 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence( const QString &sentenc
             // Flightgear submits geoposition twice in one datagram, once
             // in GPRMC and once in GPGGA. Parsing one is sufficient
         }
-    } else if ( sentence.startsWith( "$GPGGA" ) ) {
+    } else if ( sentence.startsWith( QLatin1String( "$GPGGA" ) ) ) {
         QStringList const values = sentence.split( ',' );
         if ( values.size() > 10 ) {
             if ( values[6] == 0 ) {
