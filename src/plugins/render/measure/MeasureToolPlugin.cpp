@@ -10,6 +10,7 @@
 // Copyright 2007-2008 Carlos Licea     <carlos.licea@kdemail.net>
 // Copyright 2011      Michael Henning  <mikehenning@eclipse.net>
 // Copyright 2011      Valery Kharitonov  <kharvd@gmail.com>
+// Copyright 2012      Mohammed Nafees  <nafees.technocool@gmail.com>
 //
 
 #include "MeasureToolPlugin.h"
@@ -111,7 +112,8 @@ QList<PluginAuthor> MeasureToolPlugin::pluginAuthors() const
             << PluginAuthor( "Inge Wallin", "ingwa@kde.org" )
             << PluginAuthor( "Carlos Licea", "carlos.licea@kdemail.net" )
             << PluginAuthor( "Michael Henning", "mikehenning@eclipse.net" )
-            << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
+            << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" )
+            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
 }
 
 QIcon MeasureToolPlugin::icon () const
@@ -210,6 +212,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
     // Temporary container for each segment of the line string
     GeoDataLineString segment( Tessellate );
 
+    int r = 0, g = 1, b = 2;
     for ( int i = 0; i < m_measureLineString.size() - 1; i++ ) {
         segment << m_measureLineString[i] ;
         segment << m_measureLineString[i + 1];
@@ -233,6 +236,19 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             distanceString = QString("%1 mi").arg( segmentLength / 1000.0 * KM2MI, 0, 'f', 2 );
         }
 
+        if ( i == r ) {
+            painter->setPen( Oxygen::brickRed4 );
+            r+=3;
+        }
+        else if ( i == g ) {
+            painter->setPen( Oxygen::forestGreen4 );
+            g+=3;
+        }
+        else if ( i == b ) {
+            painter->setPen( Oxygen::skyBlue4 );
+            b+=3;
+        }
+        painter->setBrush( QBrush( QColor( 192, 192, 192, 192 ) ) );
         painter->drawPolyline( segment, distanceString, LineCenter );
 
         segment.clear();
@@ -279,8 +295,12 @@ void MeasureToolPlugin::drawMark( GeoPainter* painter, int x, int y )
 
     // Paint the mark, and repeat it if the projection allows it.
     painter->setRenderHint( QPainter::Antialiasing, false );
-    painter->setPen( QColor( Qt::white ) );
 
+    painter->setBrush( QBrush( QColor( 192, 192, 192, 128 ) ) );
+    painter->setPen( Qt::NoPen );
+    painter->drawEllipse( x-8, y-8, 16, 16 );
+
+    painter->setPen( QColor( Qt::white ) );
     painter->drawLine( x - markRadius, y, x + markRadius, y );
     painter->drawLine( x, y - markRadius, x, y + markRadius );
 }
