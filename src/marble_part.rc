@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="marble_part" version="15">
+<kpartgui name="marble_part" version="16">
 
 <MenuBar>
   <Menu name="file" noMerge="1">
@@ -26,6 +26,7 @@
   <Menu name="view" noMerge="1">
     <text>&amp;View</text>
     <Action name="show_currentlocation" group="show_merge"/>
+    <Action name="show_file_view"/>
     <Separator/>
     <Action name="show_crosshairs" group="show_merge"/>
     <Action name="view_redisplay"/>
@@ -41,7 +42,6 @@
       <ActionList name="onlineservices_actionlist" />
     </Menu>
     <Separator/>
-    <Action name="show_file_view"/>
     <Action name="show_clouds"/>
     <Action name="show_atmosphere"/>
     <Separator/>
