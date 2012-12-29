@@ -421,9 +421,10 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
      */
     const QItemSelection selection = m_selectionModel->selection();
 
-    const QSet<TileId> tileIdSet = visibleTiles( viewport );
+    QList<TileId> tileIdList = visibleTiles( viewport ).toList();
+    qSort( tileIdList );
     QList<const GeoDataPlacemark*> placemarkList;
-    foreach ( const TileId &tileId, tileIdSet ) {
+    foreach ( const TileId &tileId, tileIdList ) {
         placemarkList += m_placemarkCache.value( tileId );
     }
 
