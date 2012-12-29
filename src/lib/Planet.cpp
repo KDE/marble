@@ -361,7 +361,7 @@ QString Planet::name( const QString& id )
     } else if ( id == "moon" ) {
         return QObject::tr("Moon", "the earth's moon");
     } else if ( id == "sky" ) {
-          return "Sky"; // FIXME: Make translatable
+        return QObject::tr("Sky");
     } else if ( id.isEmpty() ) {
         mDebug() << "Warning: empty id";
         return QObject::tr("Unknown Planet", "a planet without data");
@@ -369,8 +369,8 @@ QString Planet::name( const QString& id )
 
     return id;
 }
-	
-QStringList Planet::planetList()  
+
+QStringList Planet::planetList()
 {
 
 	QStringList planets;
@@ -390,7 +390,7 @@ QStringList Planet::planetList()
 
 	return planets;
 }
-	
+
 Planet& Planet::operator=(const Planet& rhs)
 {
     // PlanetPrivate does not have pointer members, so we can just
