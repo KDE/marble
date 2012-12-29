@@ -76,7 +76,7 @@
 #include "GoToDialog.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
-#include "MarbleLegendBrowser.h"
+#include "LegendWidget.h"
 #include "SearchWidget.h"
 #include "FileViewWidget.h"
 
@@ -700,8 +700,10 @@ void MainWindow::createDockWidgets()
     QDockWidget *legendDock = new QDockWidget( tr( "Legend" ), this );
     legendDock->setObjectName( "legendDock" );
     legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    MarbleLegendBrowser* legendWidget = new MarbleLegendBrowser( this );
+    LegendWidget* legendWidget = new LegendWidget( this );
     legendWidget->setMarbleModel( m_controlView->marbleModel() );
+    connect( legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
+             m_controlView->marbleWidget(), SLOT( setPropertyValue( const QString &, bool ) ) );
     legendDock->setWidget( legendWidget );
     m_panelMenu->addAction( legendDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, legendDock );
