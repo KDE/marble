@@ -35,7 +35,6 @@ class GeoPainter;
 class GeoSceneGroup;
 class HttpDownloadManager;
 class SunLocator;
-class VectorComposer;
 class ViewportParams;
 
 class VectorTileLayer : public QObject, public LayerInterface
@@ -45,7 +44,6 @@ class VectorTileLayer : public QObject, public LayerInterface
  public:
     VectorTileLayer( HttpDownloadManager *downloadManager,
                   const SunLocator *sunLocator,
-                  VectorComposer *veccomposer,
                   const PluginManager *pluginManager,
                   GeoDataTreeModel *treeModel);
 
@@ -78,8 +76,6 @@ class VectorTileLayer : public QObject, public LayerInterface
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
-    void setShowRelief( bool show );
-
     void setShowSunShading( bool show );
 
     void setShowCityLights( bool show );
@@ -94,7 +90,7 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
+    void setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings );
 
     void setVolatileCacheLimit( quint64 kilobytes );
 

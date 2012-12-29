@@ -192,7 +192,8 @@ bool GeoSceneMap::hasTextureLayers() const
     QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
     QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
     for (; it != end; ++it) {
-        if ( (*it)->backend() == dgml::dgmlValue_texture && (*it)->datasets().count() > 0 )
+        if ( ( (*it)->backend() == dgml::dgmlValue_texture
+               || (*it)->backend() == dgml::dgmlValue_vectortile ) && (*it)->datasets().count() > 0 )
             return true;
     }
 
@@ -204,7 +205,7 @@ bool GeoSceneMap::hasVectorLayers() const
     QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
     QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
     for (; it != end; ++it) {
-        if ( ( (*it)->backend() == dgml::dgmlValue_vector || (*it)->backend() == dgml::dgmlValue_vectortile ) && (*it)->datasets().count() > 0 )
+        if ( ( (*it)->backend() == dgml::dgmlValue_vector ) && (*it)->datasets().count() > 0 )
             return true;
     }
 

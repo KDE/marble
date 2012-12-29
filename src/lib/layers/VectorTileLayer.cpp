@@ -27,9 +27,7 @@
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
 #include "SunLocator.h"
-#include "TextureColorizer.h"
 #include "TileLoader.h"
-#include "VectorComposer.h"
 #include "ViewportParams.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataLatLonAltBox.h"
@@ -59,7 +57,6 @@ class VectorTileLayer::Private
 public:
     Private(HttpDownloadManager *downloadManager,
             const SunLocator *sunLocator,
-            VectorComposer *veccomposer,
             const PluginManager *pluginManager,
             VectorTileLayer *parent,
             GeoDataTreeModel *treeModel);
@@ -69,12 +66,10 @@ public:
 public:
     VectorTileLayer  *const m_parent;
     const SunLocator *const m_sunLocator;
-    VectorComposer *const m_veccomposer;
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
     VectorTileMapper *m_texmapper;
-    TextureColorizer *m_texcolorizer;
     QVector<const GeoSceneTiled *> m_textures;
     GeoSceneGroup *m_textureLayerSettings;
 
@@ -110,18 +105,15 @@ CacheDocument::~CacheDocument()
 
 VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
                                   const SunLocator *sunLocator,
-                                  VectorComposer *veccomposer,
                                   const PluginManager *pluginManager,
                                   VectorTileLayer *parent,
                                   GeoDataTreeModel *treeModel)
     : m_parent( parent )
     , m_sunLocator( sunLocator )
-    , m_veccomposer( veccomposer )
     , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
     , m_texmapper( 0 )
-    , m_texcolorizer( 0 )
     , m_textureLayerSettings( 0 )
     , m_repaintTimer()
     , m_treeModel( treeModel )
@@ -163,11 +155,10 @@ void VectorTileLayer::Private::updateTextureLayers()
 
 VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
                                  const SunLocator *sunLocator,
-                                 VectorComposer *veccomposer ,
                                  const PluginManager *pluginManager,
                                  GeoDataTreeModel *treeModel )
     : QObject()
-    , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this, treeModel ) )
+    , d( new Private( downloadManager, sunLocator, pluginManager, this, treeModel ) )
 {
     qRegisterMetaType<TileId>( "TileId" );
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
@@ -184,7 +175,6 @@ VectorTileLayer::~VectorTileLayer()
         }
     d->m_documents.clear();
     delete d->m_texmapper;
-    delete d->m_texcolorizer;
     delete d;
 }
 
@@ -274,16 +264,9 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
 
-    d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
+    d->m_texmapper->mapTexture( painter, viewport, dirtyRect, 0 );
 
     return true;
-}
-
-void VectorTileLayer::setShowRelief( bool show )
-{
-    if ( d->m_texcolorizer ) {
-        d->m_texcolorizer->setShowRelief( show );
-    }
 }
 
 void VectorTileLayer::setShowSunShading( bool show )
@@ -365,15 +348,8 @@ void VectorTileLayer::downloadTile( const TileId &tileId )
     d->m_tileLoader.downloadStackedTile( tileId );
 }
 
-void VectorTileLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
+void VectorTileLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings )
 {
-    delete d->m_texcolorizer;
-    d->m_texcolorizer = 0;
-
-    if ( QFileInfo( seaFile ).isReadable() || QFileInfo( landFile ).isReadable() ) {
-        d->m_texcolorizer = new TextureColorizer( seaFile, landFile, d->m_veccomposer );
-    }
-
     d->m_textures = textures;
     d->m_textureLayerSettings = textureLayerSettings;
 
