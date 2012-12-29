@@ -78,6 +78,7 @@
 #include "Planet.h"
 #include "MarbleLegendBrowser.h"
 #include "NavigationWidget.h"
+#include "FileViewWidget.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -182,11 +183,6 @@ void MainWindow::createActions()
      m_openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
      connect( m_openAct, SIGNAL( triggered() ),
               this, SLOT( openFile() ) );
-
-     m_showFileView = new QAction(tr("&Show File View"), this);
-     m_showFileView->setCheckable(true);
-     m_showFileView->setChecked(false);
-     connect(m_showFileView, SIGNAL(toggled(bool)), this, SLOT(showFileView(bool)));
 
      m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("&Download Maps..."), this);
      connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapSite()));
@@ -392,7 +388,6 @@ void MainWindow::createMenus()
     m_fileMenu->addAction( m_osmEditAction );
 
     m_fileMenu = menuBar()->addMenu(tr("&View"));
-    m_fileMenu->addAction(m_showFileView);
 
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
@@ -682,6 +677,17 @@ void MainWindow::createDockWidgets()
     m_panelMenu->addAction( mapViewDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
 
+    QDockWidget *fileViewDock = new QDockWidget( tr( "Files" ), this );
+    fileViewDock->setObjectName( "fileViewDock" );
+    fileViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    FileViewWidget* fileViewWidget = new FileViewWidget( this );
+    fileViewWidget->setTreeModel( m_controlView->marbleModel()->treeModel() );
+    fileViewWidget->setFileManager( m_controlView->marbleModel()->fileManager() );
+    fileViewDock->setWidget( fileViewWidget );
+    m_panelMenu->addAction( fileViewDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, fileViewDock );
+    fileViewDock->hide();
+
     QDockWidget *legendDock = new QDockWidget( tr( "Legend" ), this );
     legendDock->setObjectName( "legendDock" );
     legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
@@ -903,11 +909,6 @@ void MainWindow::showSun( bool active )
 void MainWindow::reload()
 {
     m_controlView->marbleWidget()->reloadMap();
-}
-
-void MainWindow::showFileView(bool toggle)
-{
-    m_controlView->setFileViewTabShown(toggle);
 }
 
 void MainWindow::enterWhatsThis()
