@@ -72,6 +72,7 @@ private:
     void  createActions();
     void  createMenus();
     void  createStatusBar();
+    void  createDockWidgets();
 
     QString  readMarbleDataPath();
     void  readSettings(const QVariantMap& overrideSettings = QVariantMap());
@@ -173,6 +174,7 @@ private:
     QMenu *m_fileMenu;
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;
+    QMenu *m_panelMenu;
     QMenu *m_infoBoxesMenu;
     QMenu *m_onlineServicesMenu;
     QMenu *m_bookmarkMenu;

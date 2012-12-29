@@ -39,6 +39,7 @@
 #include <QtGui/QScrollArea>
 #include <QtGui/QClipboard>
 #include <QtGui/QShortcut>
+#include <QtGui/QDockWidget>
 #include <QtNetwork/QNetworkProxy>
 
 #include "SearchInputWidget.h"
@@ -75,6 +76,8 @@
 #include "GoToDialog.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
+#include "MarbleLegendBrowser.h"
+#include "NavigationWidget.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -99,6 +102,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_sunControlDialog( 0 ),
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
+        m_panelMenu( 0 ),
         m_downloadRegionAction( 0 ),
         m_kineticScrollingAction( 0 ),
         m_osmEditAction( 0 ),
@@ -144,6 +148,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     createActions();
     createMenus();
     createStatusBar();
+    createDockWidgets();
 
     connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateAtmosphereMenu()));
 
@@ -409,6 +414,7 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_reloadAct);
 
     m_fileMenu->addSeparator();
+    m_panelMenu = m_fileMenu->addMenu( "&Panels" );
     m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
     createInfoBoxesMenu();
 
@@ -662,6 +668,60 @@ void MainWindow::createStatusBar()
 {
     statusBar()->showMessage(tr("Ready"));
     statusBar()->hide();
+}
+
+void MainWindow::createDockWidgets()
+{
+    Q_ASSERT( m_panelMenu && "Please create menus before creating dock widgets" );
+
+    QDockWidget *navigationDock = new QDockWidget( tr( "Navigation" ), this );
+    navigationDock->setObjectName( "navigationDock" );
+    navigationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    NavigationWidget* navigationWidget = new NavigationWidget( this );
+    navigationWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    navigationDock->setWidget( navigationWidget );
+    m_panelMenu->addAction( navigationDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, navigationDock );
+
+    QDockWidget *mapViewDock = new QDockWidget( tr( "Map View" ), this );
+    mapViewDock->setObjectName( "mapViewDock" );
+    mapViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    MapViewWidget* mapViewWidget = new MapViewWidget( this );
+    mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    mapViewDock->setWidget( mapViewWidget );
+    m_panelMenu->addAction( mapViewDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
+
+    QDockWidget *legendDock = new QDockWidget( tr( "Legend" ), this );
+    legendDock->setObjectName( "legendDock" );
+    legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    MarbleLegendBrowser* legendWidget = new MarbleLegendBrowser( this );
+    legendWidget->setMarbleModel( m_controlView->marbleModel() );
+    legendDock->setWidget( legendWidget );
+    m_panelMenu->addAction( legendDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, legendDock );
+
+    tabifyDockWidget( mapViewDock, navigationDock );
+    tabifyDockWidget( mapViewDock, legendDock );
+
+    QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), this );
+    routingDock->setObjectName( "routingDock" );
+    routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    RoutingWidget* routingWidget = new RoutingWidget( m_controlView->marbleWidget(), this );
+    routingDock->setWidget( routingWidget );
+    m_panelMenu->addAction( routingDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, routingDock );
+
+    QDockWidget *locationDock = new QDockWidget( tr( "Location" ), this );
+    locationDock->setObjectName( "locationDock" );
+    locationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    CurrentLocationWidget* locationWidget = new CurrentLocationWidget( this );
+    locationWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    locationDock->setWidget( locationWidget );
+    m_panelMenu->addAction( locationDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, locationDock );
+
+    tabifyDockWidget( locationDock, routingDock );
 }
 
 void MainWindow::openMapSite()
@@ -1038,6 +1098,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::createToolBar()
 {
     QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
+    toolBar->setObjectName( "mainToolBar" );
     SearchInputWidget *searchField = new SearchInputWidget( this );
     searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
     searchField->setMaximumWidth( 400 );
@@ -1091,6 +1152,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          showAtmosphere(settings.value("showAtmosphere", true ).toBool());
          m_lastFileOpenPath = settings.value("lastFileOpenDir", QDir::homePath()).toString();
          showBookmarks( settings.value( "showBookmarks", true ).toBool() );
+         restoreState( settings.value("windowState").toByteArray() );
      settings.endGroup();
 
      setUpdatesEnabled(false);
@@ -1306,6 +1368,7 @@ void MainWindow::writeSettings()
          settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
          settings.setValue( "lastFileOpenDir", m_lastFileOpenPath );
          settings.setValue( "showBookmarks", m_toggleBookmarkDisplayAct->isChecked() );
+         settings.setValue( "windowState", saveState() );
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );
