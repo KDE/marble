@@ -77,7 +77,7 @@
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
 #include "MarbleLegendBrowser.h"
-#include "NavigationWidget.h"
+#include "SearchWidget.h"
 #include "FileViewWidget.h"
 
 // For zoom buttons on Maemo
@@ -659,14 +659,14 @@ void MainWindow::createDockWidgets()
 {
     Q_ASSERT( m_panelMenu && "Please create menus before creating dock widgets" );
 
-    QDockWidget *navigationDock = new QDockWidget( tr( "Navigation" ), this );
-    navigationDock->setObjectName( "navigationDock" );
-    navigationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    NavigationWidget* navigationWidget = new NavigationWidget( this );
-    navigationWidget->setMarbleWidget( m_controlView->marbleWidget() );
-    navigationDock->setWidget( navigationWidget );
-    m_panelMenu->addAction( navigationDock->toggleViewAction() );
-    addDockWidget( Qt::LeftDockWidgetArea, navigationDock );
+    QDockWidget *searchDock = new QDockWidget( tr( "Search" ), this );
+    searchDock->setObjectName( "searchDock" );
+    searchDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    SearchWidget* searchWidget = new SearchWidget( this );
+    searchWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    searchDock->setWidget( searchWidget );
+    m_panelMenu->addAction( searchDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, searchDock );
 
     QDockWidget *mapViewDock = new QDockWidget( tr( "Map View" ), this );
     mapViewDock->setObjectName( "mapViewDock" );
@@ -697,7 +697,7 @@ void MainWindow::createDockWidgets()
     m_panelMenu->addAction( legendDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, legendDock );
 
-    tabifyDockWidget( mapViewDock, navigationDock );
+    tabifyDockWidget( mapViewDock, searchDock );
     tabifyDockWidget( mapViewDock, legendDock );
 
     QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), this );
