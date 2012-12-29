@@ -65,7 +65,6 @@ private:
     QColor m_textColor;
     QColor m_backColor;
     bool m_needMouseRelease;
-    bool m_isPrintButtonVisible;
 };
 
 }

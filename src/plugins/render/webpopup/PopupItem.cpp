@@ -33,6 +33,7 @@ PopupItem::PopupItem( QObject* parent ) :
     QObject( parent ),
     BillboardGraphicsItem(),
     m_widget( new QWidget ),
+    m_printButton( 0 ),
     m_webView( new QWebView ( m_widget ) ),
     m_textColor( QColor(Qt::black) ),
     m_backColor( QColor(Qt::white) ),
@@ -40,34 +41,25 @@ PopupItem::PopupItem( QObject* parent ) :
 {
     setVisible( false );
 
-#ifndef QT_NO_PRINTER
-    m_isPrintButtonVisible = true;
-#else
-    m_isPrintButtonVisible = false;
-#endif
-
     QGridLayout *childLayout = new QGridLayout;
     m_titleText = new QLabel( m_widget );
-    childLayout->addWidget( m_titleText, 0, 0 );
+    int position = 0;
+    childLayout->addWidget( m_titleText, 0, position++ );
 
+#ifndef QT_NO_PRINTER
     m_printButton = new QPushButton( m_widget );
     m_printButton->setIcon( QIcon( ":/marble/webpopup/icon-print.png" ) );
     m_printButton->setMaximumWidth( 24 );
-    m_printButton->setCursor( QCursor( Qt::PointingHandCursor ) );
     m_printButton->setFlat( true );
-    childLayout->addWidget( m_printButton, 0, 1 );
+    childLayout->addWidget( m_printButton, 0, position++ );
     connect(m_printButton, SIGNAL(clicked()), this, SLOT(printContent()));
-
-#ifdef QT_NO_PRINTER
-    m_printButton->hide();
 #endif
 
     QPushButton *hideButton = new QPushButton( m_widget );
     hideButton->setIcon( QIcon( ":/marble/webpopup/icon-remove.png" ) );
     hideButton->setMaximumWidth( 24 );
-    hideButton->setCursor( QCursor( Qt::PointingHandCursor ) );
     hideButton->setFlat( true );
-    childLayout->addWidget( hideButton, 0, 2 );
+    childLayout->addWidget( hideButton, 0, position++ );
 
     QVBoxLayout *layout = new QVBoxLayout( m_widget );
     layout->addLayout( childLayout );
@@ -91,15 +83,14 @@ PopupItem::~PopupItem()
 
 bool PopupItem::isPrintButtonVisible() const
 {
-    return m_isPrintButtonVisible;
+    return m_printButton && m_printButton->isVisible();
 }
 
-void PopupItem::setPrintButtonVisible(bool display)
+void PopupItem::setPrintButtonVisible( bool display )
 {
-#ifndef QT_NO_PRINTER
-    m_isPrintButtonVisible = display;
-    m_printButton->setVisible(display);
-#endif
+    if ( m_printButton ) {
+        m_printButton->setVisible( display );
+    }
 }
 
 void PopupItem::setUrl( const QUrl &url )
@@ -256,7 +247,6 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
             if ( !child ) {
                 child = m_webView;
             }
-            widget->setCursor( Qt::ArrowCursor );
             QMouseEvent shiftedEvent = QMouseEvent( e->type(), shiftedPos,
                                                     event->globalPos(), event->button(), event->buttons(),
                                                     event->modifiers() );
@@ -272,7 +262,6 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
         QPoint shiftedPos = event->pos();
         QWidget* child = transform( shiftedPos );
         if ( child ) {
-            widget->setCursor( Qt::ArrowCursor );
             QWheelEvent shiftedEvent = QWheelEvent( shiftedPos,
                                                     event->globalPos(), event->delta(), event->buttons(),
                                                     event->modifiers() );
