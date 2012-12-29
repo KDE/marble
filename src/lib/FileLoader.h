@@ -11,6 +11,7 @@
 #define MARBLE_FILELOADER_H
 
 #include "GeoDataDocument.h"
+#include "GeoDataStyle.h"
 
 #include <QtCore/QThread>
 #include <QtCore/QString>
@@ -26,7 +27,7 @@ class FileLoader : public QThread
     Q_OBJECT
     public:
         FileLoader( QObject* parent, MarbleModel *model,
-                    const QString& file, DocumentRole role );
+                    const QString& file, DocumentRole role, GeoDataStyle* style );
         FileLoader( QObject* parent, MarbleModel *model,
                     const QString& contents, const QString& name, DocumentRole role );
         virtual ~FileLoader();

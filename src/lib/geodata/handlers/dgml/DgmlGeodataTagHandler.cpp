@@ -32,6 +32,7 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneXmlDataSource.h"
+#include "GeoSceneGeodata.h"
 
 namespace Marble
 {
@@ -52,7 +53,7 @@ GeoNode* DgmlGeodataTagHandler::parse(GeoParser& parser) const
     if ( !expireStr.isEmpty() )
         expire = expireStr.toInt();
 
-    GeoSceneXmlDataSource *dataSource = 0;
+    GeoSceneGeodata *dataSource = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
@@ -61,7 +62,7 @@ GeoNode* DgmlGeodataTagHandler::parse(GeoParser& parser) const
     // matches the backend of the parent layer
     if (parentItem.represents(dgmlTag_Layer)
     && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_geodata) {
-        dataSource = new GeoSceneXmlDataSource( name );
+        dataSource = new GeoSceneGeodata( name );
         dataSource->setExpire( expire );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( dataSource );
     }

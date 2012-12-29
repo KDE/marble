@@ -23,6 +23,7 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataStyle.h"
 
 
 using namespace Marble;
@@ -76,7 +77,7 @@ FileManager::~FileManager()
     delete d;
 }
 
-void FileManager::addFile( const QString& filepath, DocumentRole role, bool recenter )
+void FileManager::addFile( const QString& filepath, GeoDataStyle* style, DocumentRole role, bool recenter )
 {
     foreach ( const GeoDataDocument *document, d->m_fileItemList ) {
         if ( document->fileName() == filepath )
@@ -92,14 +93,20 @@ void FileManager::addFile( const QString& filepath, DocumentRole role, bool rece
     mDebug() << "Starting placemark loading timer";
     d->m_timer.start();
     d->m_recenter = recenter;
-    FileLoader* loader = new FileLoader( this, d->m_model, filepath, role );
+    FileLoader* loader = new FileLoader( this, d->m_model, filepath, role, style );
     d->appendLoader( loader );
 }
 
-void FileManager::addFile( const QStringList& filepaths, DocumentRole role )
+void FileManager::addFile( const QStringList& filepaths, const QList<GeoDataStyle*>& styles, DocumentRole role )
 {
-    foreach(const QString& file, filepaths) {
-        addFile( file, role );
+    QStringList::const_iterator it = filepaths.constBegin();
+    QStringList::const_iterator begin = filepaths.constBegin();
+    QStringList::const_iterator end = filepaths.constEnd();
+
+    for ( ; it != end; ++it ) {
+        QString file = (*it);
+        GeoDataStyle *style = styles[ it - begin ];
+        addFile( file, style, role );
     }
 }
 

@@ -8,6 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
+// Copyright 2012      Cezar Mocan  <mocancezar@gmail.com>
 //
 
 #include "TextureColorizer.h"
@@ -16,6 +17,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QString>
+#include <QtCore/QVector>
 #include <QtCore/QTime>
 #include <QtGui/QColor>
 #include <QtGui/QImage>
@@ -28,6 +30,10 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
+#include "GeoDataFeature.h"
+#include "GeoDataTypes.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataDocument.h"
 
 namespace Marble
 {
@@ -65,7 +71,14 @@ private:
 TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
                                     VectorComposer *veccomposer )
-    : m_veccomposer( veccomposer )
+    : m_veccomposer( veccomposer ),
+      m_coastDocument( 0 ),
+      m_glacierDocument( 0 ),
+      m_lakeDocument( 0 ),
+      m_textureLandPen( QPen( Qt::NoPen ) ),
+      m_textureLandBrush( QBrush( QColor( 255, 0, 0 ) ) ),
+      m_textureGlacierBrush( QBrush( QColor( 0, 255, 0 ) ) ),
+      m_textureLakeBrush( QBrush( QColor( 0, 0, 0 ) ) )
 {
     QTime t;
     t.start();
@@ -144,6 +157,21 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
 
+void TextureColorizer::setCoastDocument( GeoDataDocument* coastDocument )
+{
+    m_coastDocument = coastDocument;
+}
+
+void TextureColorizer::setGlacierDocument( GeoDataDocument* glacierDocument )
+{
+    m_glacierDocument = glacierDocument;
+}
+
+void TextureColorizer::setLakeDocument( GeoDataDocument* lakeDocument )
+{
+    m_lakeDocument = lakeDocument;
+}
+
 void TextureColorizer::setShowRelief( bool show )
 {
     m_showRelief = show;
@@ -165,6 +193,56 @@ void TextureColorizer::setShowRelief( bool show )
 // increase the illusion of height differences (see the variable
 // showRelief).
 // 
+
+void TextureColorizer::drawIndividualDocument( GeoPainter *painter, GeoDataDocument *document )
+{
+    QVector<GeoDataFeature*>::Iterator i = document->begin();
+    QVector<GeoDataFeature*>::Iterator end = document->end();
+
+    for ( ; i != end; ++i ) {
+        if ( (*i)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( *i );
+
+            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+                GeoDataLineString *child = static_cast<GeoDataLineString*>( placemark->geometry() );
+                GeoDataLinearRing ring( *child );
+                painter->drawPolygon( ring );
+            }
+
+            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+                GeoDataPolygon *child = static_cast<GeoDataPolygon*>( placemark->geometry() );
+                painter->drawPolygon( *child );
+            }
+
+            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
+                GeoDataLinearRing *child = static_cast<GeoDataLinearRing*>( placemark->geometry() );
+                painter->drawPolygon( *child );
+            }
+        }
+    }
+}
+
+void TextureColorizer::drawTextureMap( GeoPainter *painter )
+{
+    if ( m_coastDocument ) {
+        painter->setPen( m_textureLandPen );
+        painter->setBrush( m_textureLandBrush );
+        drawIndividualDocument( painter, m_coastDocument );
+    }
+
+    if ( m_glacierDocument ) {
+        painter->setPen( Qt::NoPen );
+        painter->setBrush( m_textureGlacierBrush );
+        drawIndividualDocument( painter, m_glacierDocument );
+    }
+
+    if ( m_lakeDocument ) {
+        painter->setPen( Qt::NoPen );
+        painter->setBrush( m_textureLakeBrush );
+        drawIndividualDocument( painter, m_lakeDocument );
+    }
+}
 
 void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality )
 {
@@ -195,6 +273,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
     m_veccomposer->drawTextureMap( &painter, viewport );
+    drawTextureMap( &painter );
 
     const qint64   radius   = viewport->radius();
 
