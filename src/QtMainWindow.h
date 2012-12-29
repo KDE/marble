@@ -153,6 +153,7 @@ private Q_SLOTS:
     void showGoToDialog();
 
     void showZoomLevel( bool show );
+    void showSearch();
 
 private:
     void setupZoomButtons();
@@ -243,6 +244,7 @@ private:
     RoutingWidget *m_routingWidget;
 
     QString m_lastFileOpenPath;
+    QDockWidget* m_searchDock;
 };
 
 } // namespace Marble

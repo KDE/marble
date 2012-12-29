@@ -99,6 +99,7 @@ void SearchWidget::setMarbleWidget( MarbleWidget* widget )
     d->m_widget = widget;
 
     SearchInputWidget* searchField = new SearchInputWidget;
+    setFocusProxy( searchField );
     searchField->setCompletionModel( widget->model()->placemarkModel() );
     connect( searchField, SIGNAL( search( QString, SearchMode ) ), this, SLOT( search( QString, SearchMode ) ) );
     connect( searchField, SIGNAL( centerOn( const GeoDataCoordinates &) ),

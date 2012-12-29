@@ -112,7 +112,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_routingWindow( 0 ),
         m_trackingWindow( 0 ),
         m_gotoDialog( 0 ),
-        m_routingWidget( 0 )
+        m_routingWidget( 0 ),
+        m_searchDock( 0 )
 {
 #ifdef Q_WS_MAEMO_5
     setAttribute( Qt::WA_Maemo5StackedWindow );
@@ -658,15 +659,23 @@ void MainWindow::createStatusBar()
 void MainWindow::createDockWidgets()
 {
     Q_ASSERT( m_panelMenu && "Please create menus before creating dock widgets" );
+    Q_ASSERT( !m_searchDock && "Please create dock widgets just once" );
 
-    QDockWidget *searchDock = new QDockWidget( tr( "Search" ), this );
-    searchDock->setObjectName( "searchDock" );
-    searchDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    setTabPosition( Qt::LeftDockWidgetArea, QTabWidget::North );
+    setTabPosition( Qt::RightDockWidgetArea, QTabWidget::North );
+
+    m_searchDock = new QDockWidget( tr( "Search" ), this );
+    m_searchDock->setObjectName( "searchDock" );
+    m_searchDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
     SearchWidget* searchWidget = new SearchWidget( this );
     searchWidget->setMarbleWidget( m_controlView->marbleWidget() );
-    searchDock->setWidget( searchWidget );
-    m_panelMenu->addAction( searchDock->toggleViewAction() );
-    addDockWidget( Qt::LeftDockWidgetArea, searchDock );
+    m_searchDock->setWidget( searchWidget );
+    m_panelMenu->addAction( m_searchDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, m_searchDock );
+
+    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
+    searchWidget->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
+    new QShortcut( searchShortcut, this, SLOT( showSearch() ) );
 
     QDockWidget *mapViewDock = new QDockWidget( tr( "Map View" ), this );
     mapViewDock->setObjectName( "mapViewDock" );
@@ -697,7 +706,6 @@ void MainWindow::createDockWidgets()
     m_panelMenu->addAction( legendDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, legendDock );
 
-    tabifyDockWidget( mapViewDock, searchDock );
     tabifyDockWidget( mapViewDock, legendDock );
 
     QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), this );
@@ -717,7 +725,8 @@ void MainWindow::createDockWidgets()
     m_panelMenu->addAction( locationDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, locationDock );
 
-    tabifyDockWidget( locationDock, routingDock );
+    tabifyDockWidget( locationDock, m_searchDock );
+    tabifyDockWidget( m_searchDock, routingDock );
 }
 
 void MainWindow::openMapSite()
@@ -1081,20 +1090,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::createToolBar()
 {
-    QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
-    toolBar->setObjectName( "mainToolBar" );
-    SearchInputWidget *searchField = new SearchInputWidget( this );
-    searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
-    searchField->setMaximumWidth( 400 );
-    connect( searchField, SIGNAL( search( QString, SearchMode ) ), m_controlView, SLOT( search( QString, SearchMode ) ) );
-    connect( searchField, SIGNAL( centerOn( const GeoDataCoordinates &) ),
-             m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates & ) ) );
-    connect( m_controlView, SIGNAL( searchFinished() ), searchField, SLOT( disableSearchAnimation() ) );
-
-    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
-    searchField->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
-    new QShortcut( searchShortcut, searchField, SLOT( setFocus() ) );
-    toolBar->addWidget( searchField );
+//    QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
+//    toolBar->setObjectName( "mainToolBar" );
+//    toolBar->addWidget( ... );
 }
 
 QString MainWindow::readMarbleDataPath()
@@ -1725,6 +1723,13 @@ void MainWindow::showZoomLevel(bool show)
     } else {
         statusBar()->removeWidget( m_zoomLabel );
     }
+}
+
+void MainWindow::showSearch()
+{
+    m_searchDock->show();
+    m_searchDock->raise();
+    m_searchDock->widget()->setFocus();
 }
 
 #include "QtMainWindow.moc"
