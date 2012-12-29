@@ -6,11 +6,12 @@
 // the source code.
 //
 // Copyright 2012   Mohammed Nafees   <nafees.technocool@gmail.com>
+// Copyright 2012   Dennis Nienhüser  <earthwings@gentoo.org>
 // Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-#ifndef WEBPOPUPFLOATITEM_H
-#define WEBPOPUPFLOATITEM_H
+#ifndef MAPINFODIALOG_H
+#define MAPINFODIALOG_H
 
 #include "LayerInterface.h"
 #include "ViewportParams.h"
