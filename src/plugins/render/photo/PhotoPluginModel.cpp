@@ -77,6 +77,9 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         return;
     }
     
+    /** @todo make configurable */
+    QString licenses = "1,2,3,4,5,6,7";
+
     if( box.west() <= box.east() ) {
         QString bbox( "" );
         bbox += QString::number( box.west()  * RAD2DEG ) + ',';
@@ -88,6 +91,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         options.insert( "per_page", QString::number( number ) );
         options.insert( "bbox",     bbox );
         options.insert( "sort",     "interestingness-desc" );
+        options.insert( "license", licenses );
     
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", options ) );
     }
@@ -103,7 +107,8 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         optionsWest.insert( "per_page", QString::number( number/2 ) );
         optionsWest.insert( "bbox",     bboxWest );
         optionsWest.insert( "sort",     "interestingness-desc" );
-        
+        optionsWest.insert( "license", licenses );
+
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsWest ) );
         
         
@@ -117,7 +122,8 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         optionsEast.insert( "per_page", QString::number( number/2 ) );
         optionsEast.insert( "bbox",     bboxEast );
         optionsEast.insert( "sort",     "interestingness-desc" );
-        
+        optionsEast.insert( "license", licenses );
+
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsEast ) );
     }
 }
