@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>293</width>
-    <height>308</height>
+    <height>330</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,6 +44,16 @@
        <widget class="QCheckBox" name="m_viewDsosCheckbox">
         <property name="text">
          <string>Deep Sky Objects</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_viewDsoLabelCheckbox">
+        <property name="text">
+         <string>Deep Sky Object Labels</string>
         </property>
         <property name="checked">
          <bool>true</bool>

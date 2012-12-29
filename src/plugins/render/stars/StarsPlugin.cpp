@@ -40,6 +40,7 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_renderConstellationLines( true ),
       m_renderConstellationLabels( true ),
       m_renderDsos( true ),
+      m_renderDsoLabels( true ),
       m_renderSun( true ),
       m_starsLoaded( false ),
       m_constellationsLoaded( false ),
@@ -148,6 +149,7 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     settings["renderConstellationLines"] = m_renderConstellationLines;
     settings["renderConstellationLabels"] = m_renderConstellationLabels;
     settings["renderDsos"] = m_renderDsos;
+    settings["renderDsoLabels"] = m_renderDsoLabels;
     settings["renderSun"] = m_renderSun;
     settings["magnitudeLimit"] = m_magnitudeLimit;
     settings["constellationBrush"] = m_constellationBrush.color().rgb();
@@ -160,6 +162,7 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderConstellationLines = readSetting<bool>( settings, "renderConstellationLines", true );
     m_renderConstellationLabels = readSetting<bool>( settings, "renderConstellationLabels", true );
     m_renderDsos = readSetting<bool>( settings, "renderDsos", true );
+    m_renderDsoLabels = readSetting<bool>( settings, "renderDsoLabels", true);
     m_renderSun = readSetting<bool>( settings, "renderSun", true );
     m_magnitudeLimit = readSetting<int>( settings, "magnitudeLimit", 100 );
     QColor const defaultColor = Marble::Oxygen::aluminumGray5;
@@ -181,6 +184,8 @@ void StarsPlugin::readSettings()
     Qt::CheckState const dsoState = m_renderDsos ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewDsosCheckbox->setCheckState( dsoState );
 
+    Qt::CheckState const dsoLabelState = m_renderDsoLabels ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_viewDsoLabelCheckbox->setCheckState( dsoLabelState );
 
     Qt::CheckState const sunState = m_renderSun ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewSunCheckbox->setCheckState( sunState );
@@ -206,6 +211,7 @@ void StarsPlugin::writeSettings()
     m_renderConstellationLines = ui_configWidget->m_viewConstellationLinesCheckbox->checkState() == Qt::Checked;
     m_renderConstellationLabels = ui_configWidget->m_viewConstellationLabelsCheckbox->checkState() == Qt::Checked;
     m_renderDsos = ui_configWidget->m_viewDsosCheckbox->checkState() == Qt::Checked;
+    m_renderDsoLabels = ui_configWidget->m_viewDsoLabelCheckbox->checkState() == Qt::Checked;
     m_renderSun = ui_configWidget->m_viewSunCheckbox->checkState() == Qt::Checked;
     m_magnitudeLimit = ui_configWidget->m_magnitudeSlider->value();
     m_constellationBrush = QBrush( ui_configWidget->constellationColorButton->palette().color( QPalette::Button) );
@@ -439,7 +445,9 @@ void StarsPlugin::loadDsos()
         }
 
         QStringList entries = line.split( "," );
-
+    
+        QString id = entries.at( 0 ); 
+        
         double raH = entries.at( 1 ).toDouble();
         double raM = entries.at( 2 ).toDouble();
         double raS = entries.at( 3 ).toDouble();
@@ -457,7 +465,7 @@ void StarsPlugin::loadDsos()
             decRad = ( decD-decM/60.0-decS/3600.0 )*M_PI/180.0;
         }
 
-        DsoPoint dso( ( qreal )( raRad ), ( qreal )( decRad ) );
+        DsoPoint dso( id, ( qreal )( raRad ), ( qreal )( decRad ) );
         // Create entry in stars database
         m_dsos << dso;
     }
@@ -607,6 +615,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         const qreal  earthRadius    = viewport->radius();
 
         if ( m_renderDsos ) {
+            // aluminumgray6
+            painter->setPen(eclipticPen);
             // Render Deep Space Objects
             for ( int d = 0; d < m_dsos.size(); ++d ) {
                 qpos = m_dsos.at( d ).quaternion();
@@ -643,6 +653,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
                 // Center Image on x,y location
                 painter->drawImage( QRectF( x-size/2, y-size/2, size, size ),m_dsoImage );
+                if (m_renderDsoLabels) {
+                    painter->drawText( x+8, y+12, m_dsos.at( d ).id() );
+                }
             }
         }
 
@@ -885,6 +898,16 @@ void StarsPlugin::toggleDsos()
     requestRepaint();
 }
 
+void StarsPlugin::toggleDsoLabels()
+{
+    m_renderDsoLabels = !m_renderDsoLabels;
+    if ( m_configDialog ) {
+        ui_configWidget->m_viewDsoLabelCheckbox->setChecked( m_renderDsoLabels );
+    }
+    emit settingsChanged( nameId() );
+    requestRepaint();
+}
+
 
 void StarsPlugin::toggleConstellationLines()
 {
@@ -945,6 +968,11 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
             QAction *dsoAction = menu.addAction( tr("Show &Deep Sky Objects"), this, SLOT( toggleDsos() ) );
             dsoAction->setCheckable( true );
             dsoAction->setChecked( m_renderDsos );
+
+            QAction *dsoLabelAction = menu.addAction( tr("Show Deep Sky Object Labels"), this, SLOT( toggleDsoLabels() ) );
+            dsoLabelAction->setCheckable( true );
+            dsoLabelAction->setChecked( m_renderDsoLabels );
+
 
             QAction *sunAction = menu.addAction( tr("Show &Sun"), this, SLOT( toggleSun() ) );
             sunAction->setCheckable( true );

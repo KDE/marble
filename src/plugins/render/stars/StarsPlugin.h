@@ -121,17 +121,23 @@ public:
      * @param  mag
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    DsoPoint(qreal rect, qreal decl) {
+    DsoPoint(QString id, qreal rect, qreal decl) {
+        m_id = id;
         m_q = Quaternion::fromSpherical( rect, decl );
     }
 
     ~DsoPoint() {}
+
+    QString id() const {
+        return m_id;
+    }  
 
     const Quaternion &quaternion() const {
         return m_q;
     }
 
 private:
+    QString    m_id;
     Quaternion  m_q;
 };
 
@@ -190,6 +196,7 @@ private Q_SLOTS:
     void requestRepaint();
     void toggleSun();
     void toggleDsos();
+    void toggleDsoLabels();
     void toggleConstellationLines();
     void toggleConstellationLabels();
 
@@ -220,6 +227,7 @@ private:
     bool m_renderConstellationLines;
     bool m_renderConstellationLabels;
     bool m_renderDsos;
+    bool m_renderDsoLabels;
     bool m_renderSun;
     bool m_starsLoaded;
     bool m_constellationsLoaded;
