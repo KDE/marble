@@ -29,7 +29,7 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "RenderPlugin.h"
-#include "AbstractInfoDialog.h"
+#include "MapInfoDialog.h"
 #include "PluginManager.h"
 
 // Qt
@@ -187,33 +187,21 @@ QAction *PhotoPluginItem::action()
 void PhotoPluginItem::openBrowser()
 {
     if ( m_marbleWidget ) {
-         QList<RenderPlugin*> plugins = m_marbleWidget->renderPlugins();
-         foreach( RenderPlugin* renderPlugin, plugins) {
+        MapInfoDialog* popup = m_marbleWidget->mapInfoDialog();
+        popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
+        popup->setSize( QSizeF( 400, 450 ) );
+        popup->setUrl( QUrl( QString( "http://m.flickr.com/photos/%1/%2/" )
+                                  .arg( owner() ).arg( id() ) ) );
+        popup->setVisible( true );
+    } else {
+        if( !m_browser ) {
+            m_browser = new TinyWebBrowser();
+        }
 
-            AbstractInfoDialog* infoDialog = dynamic_cast<AbstractInfoDialog*>( renderPlugin );
-            if ( infoDialog ) {
-                renderPlugin->setEnabled( true );
-                renderPlugin->setVisible( true );
-                if( !renderPlugin->isInitialized() ) {
-                    renderPlugin->initialize();
-                }
-                infoDialog->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
-                infoDialog->setSize( QSizeF( 400, 450 ) );
-                infoDialog->setUrl( QUrl( QString( "http://m.flickr.com/photos/%1/%2/" )
-                                          .arg( owner() ).arg( id() ) ) );
-                return;
-            }
-         }
-         mDebug() << "Unable to find a suitable render plugin for creating an info dialog";
+        QString url = "http://www.flickr.com/photos/%1/%2/";
+        m_browser->load( QUrl( url.arg( owner() ).arg( id() ) ) );
+        m_browser->show();
     }
-
-    if( !m_browser ) {
-        m_browser = new TinyWebBrowser();
-    }
-
-    QString url = "http://www.flickr.com/photos/%1/%2/";
-    m_browser->load( QUrl( url.arg( owner() ).arg( id() ) ) );
-    m_browser->show();
 }
 
 #include "PhotoPluginItem.moc"

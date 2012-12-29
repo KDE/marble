@@ -26,7 +26,7 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "RenderPlugin.h"
-#include "AbstractInfoDialog.h"
+#include "MapInfoDialog.h"
 #include "PluginManager.h"
 
 using namespace Marble;
@@ -177,30 +177,18 @@ QAction *WikipediaItem::action()
 void WikipediaItem::openBrowser( )
 {
     if ( m_marbleWidget ) {
-        QList<RenderPlugin*> plugins = m_marbleWidget->renderPlugins();
-        foreach( RenderPlugin* renderPlugin, plugins) {
-            AbstractInfoDialog* infoDialog = dynamic_cast<AbstractInfoDialog*>( renderPlugin );
-            if ( infoDialog ) {
-                renderPlugin->setEnabled( true );
-                renderPlugin->setVisible( true );
-                if( !renderPlugin->isInitialized() ) {
-                    renderPlugin->initialize();
-                }
-                infoDialog->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
-                infoDialog->setSize( QSizeF( 500, 550 ) );
-                infoDialog->setUrl( url() );
-                return;
-            }
+        MapInfoDialog* popup = m_marbleWidget->mapInfoDialog();
+        popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
+        popup->setSize( QSizeF( 500, 550 ) );
+        popup->setUrl( url() );
+        popup->setVisible( true );
+    } else {
+        if ( !m_browser ) {
+            m_browser = new TinyWebBrowser();
         }
-
-        mDebug() << "Unable to find a suitable render plugin for creating an info dialog";
+        m_browser->load( url() );
+        m_browser->show();
     }
-
-    if ( !m_browser ) {
-        m_browser = new TinyWebBrowser();
-    }
-    m_browser->load( url() );
-    m_browser->show();
 }
     
 void WikipediaItem::setIcon( const QIcon& icon )

@@ -50,6 +50,7 @@
 #include "routing/RoutingLayer.h"
 #include "routing/RoutingManager.h"
 #include "routing/AlternativeRoutesModel.h"
+#include "MapInfoDialog.h"
 
 namespace Marble
 {
@@ -96,6 +97,7 @@ class MarbleWidgetPrivate
           m_inputhandler( 0 ),
           m_physics( parent ),
           m_routingLayer( 0 ),
+          m_mapInfoDialog( 0 ),
           m_customPaintLayer( parent ),
           m_popupmenu( 0 ),
           m_showFrameRate( false ),
@@ -147,6 +149,7 @@ class MarbleWidgetPrivate
     MarblePhysics    m_physics;
 
     RoutingLayer     *m_routingLayer;
+    MapInfoDialog    *m_mapInfoDialog;
     MarbleWidget::CustomPaintLayer m_customPaintLayer;
 
     MarbleWidgetPopupMenu *m_popupmenu;
@@ -248,6 +251,12 @@ void MarbleWidgetPrivate::construct()
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setPlacemarkModel( 0 );
+
+    m_mapInfoDialog = new MapInfoDialog( m_widget );
+    m_mapInfoDialog->setVisible( false );
+    m_widget->connect( m_mapInfoDialog, SIGNAL( repaintNeeded() ), m_widget, SLOT( update() ) );
+    m_widget->installEventFilter( m_mapInfoDialog );
+    m_map.addLayer( m_mapInfoDialog );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
                        m_model.routingManager(), SLOT( retrieveRoute() ) );
@@ -1384,6 +1393,11 @@ qreal MarbleWidget::distanceFromZoom( qreal zoom ) const
 RoutingLayer* MarbleWidget::routingLayer()
 {
     return d->m_routingLayer;
+}
+
+MapInfoDialog *MarbleWidget::mapInfoDialog()
+{
+    return d->m_mapInfoDialog;
 }
 
 }

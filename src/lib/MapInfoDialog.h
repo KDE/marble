@@ -12,10 +12,9 @@
 #ifndef WEBPOPUPFLOATITEM_H
 #define WEBPOPUPFLOATITEM_H
 
-#include "RenderPlugin.h"
+#include "LayerInterface.h"
 #include "ViewportParams.h"
 #include "GeoPainter.h"
-#include "AbstractInfoDialog.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
@@ -24,33 +23,24 @@ namespace Marble
 {
 
 class PopupItem;
+class MarbleModel;
 
-class WebPopupFloatItem : public RenderPlugin, public AbstractInfoDialog
+class MARBLE_EXPORT MapInfoDialog : public QObject, public LayerInterface
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( WebPopupFloatItem )
 public:
-    explicit WebPopupFloatItem( const MarbleModel *marbleModel = 0 );
-    ~WebPopupFloatItem();
+    explicit MapInfoDialog( QObject* parent = 0 );
+    ~MapInfoDialog();
 
-    QStringList backendTypes() const;
-    QString name() const;
-    QString guiString() const;
-    QString nameId() const;
-    QString version() const;
-    QString description() const;
-    QString copyrightYears() const;
-    QList<PluginAuthor> pluginAuthors() const;
-    QIcon icon () const;
-    void initialize ();
-    bool isInitialized () const;
     QStringList renderPosition() const;
     QString renderPolicy() const;
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &, GeoSceneLayer * );
     virtual bool eventFilter( QObject *, QEvent * );
     qreal zValue() const;
+
+    bool visible() const;
+    void setVisible( bool visible );
 
     void setCoordinates( const GeoDataCoordinates &coordinates, Qt::Alignment alignment );
     void setUrl( const QUrl &url );
@@ -59,6 +49,9 @@ public:
     void setContent( const QString &html );
     void setBackgroundColor( const QColor &color );
     void setTextColor( const QColor &color );
+
+Q_SIGNALS:
+    void repaintNeeded();
 
 public slots:
     void hidePopupItem();

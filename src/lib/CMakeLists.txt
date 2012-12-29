@@ -103,7 +103,8 @@ set(marblewidget_SRCS
     MarbleCacheSettingsWidget.cpp
     TimeControlWidget.cpp
     AbstractFloatItem.cpp
-    AbstractInfoDialog.cpp
+    MapInfoDialog.cpp
+    PopupItem.cpp
     MarbleGlobal.cpp
     MarbleDirs.cpp
     MarbleLocale.cpp

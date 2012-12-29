@@ -46,5 +46,25 @@
     <file alias="marble/edit-clear.png">../icons/22x22/edit-clear.png</file>
     <file alias="marble/list-add.png">../icons/22x22/list-add.png</file>
     <file alias="marble/reverse.png">../icons/22x22/reverse.png</file>
+    <file alias="marble/webpopup/arrow2_topleft.png">../../data/bitmaps/webpopup/arrow2_topleft.png</file>
+    <file alias="marble/webpopup/arrow2_topleft_shadow.png">../../data/bitmaps/webpopup/arrow2_topleft_shadow.png</file>
+    <file alias="marble/webpopup/webpopup2.png">../../data/bitmaps/webpopup/webpopup2.png</file>
+    <file alias="marble/webpopup/webpopup2_shadow.png">../../data/bitmaps/webpopup/webpopup2_shadow.png</file>
+    <file alias="marble/webpopup/icon-print.png">../../data/bitmaps/webpopup/font-awesome-icon-print-16x16.png</file>
+    <file alias="marble/webpopup/icon-remove.png">../../data/bitmaps/webpopup/font-awesome-icon-remove-16x16.png</file>
+    <file alias="marble/webpopup/arrow2_bottomleft.png">../../data/bitmaps/webpopup/arrow2_bottomleft.png</file>
+    <file alias="marble/webpopup/arrow2_bottomleft_shadow.png">../../data/bitmaps/webpopup/arrow2_bottomleft_shadow.png</file>
+    <file alias="marble/webpopup/arrow2_bottomright.png">../../data/bitmaps/webpopup/arrow2_bottomright.png</file>
+    <file alias="marble/webpopup/arrow2_bottomright_shadow.png">../../data/bitmaps/webpopup/arrow2_bottomright_shadow.png</file>
+    <file alias="marble/webpopup/arrow2_topright.png">../../data/bitmaps/webpopup/arrow2_topright.png</file>
+    <file alias="marble/webpopup/arrow2_topright_shadow.png">../../data/bitmaps/webpopup/arrow2_topright_shadow.png</file>
+    <file alias="marble/webpopup/arrow2_vertical_bottomleft.png">../../data/bitmaps/webpopup/arrow_vertical_bottomleft.png</file>
+    <file alias="marble/webpopup/arrow2_vertical_bottomleft_shadow.png">../../data/bitmaps/webpopup/arrow_vertical_bottomleft_shadow.png</file>
+    <file alias="marble/webpopup/arrow2_vertical_bottomright.png">../../data/bitmaps/webpopup/arrow_vertical_bottomright.png</file>
+    <file alias="marble/webpopup/arrow2_vertical_bottomright_shadow.png">../../data/bitmaps/webpopup/arrow_vertical_bottomright_shadow.png</file>
+    <file alias="marble/webpopup/arrow2_vertical_topleft.png">../../data/bitmaps/webpopup/arrow_vertical_topleft.png</file>
+    <file alias="marble/webpopup/arrow2_vertical_topleft_shadow.png">../../data/bitmaps/webpopup/arrow_vertical_topleft_shadow.png</file>
+    <file alias="marble/webpopup/arrow2_vertical_topright.png">../../data/bitmaps/webpopup/arrow_vertical_topright.png</file>
+    <file alias="marble/webpopup/arrow2_vertical_topright_shadow.png">../../data/bitmaps/webpopup/arrow_vertical_topright_shadow.png</file>
   </qresource>
 </RCC>
