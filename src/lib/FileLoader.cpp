@@ -23,6 +23,9 @@
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataPolyStyle.h"
+#include "GeoDataLineStyle.h"
+#include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "MarbleClock.h"
 #include "MarbleDirs.h"
@@ -37,14 +40,18 @@ class FileLoaderPrivate
 {
 public:
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
-                       const QString& file, DocumentRole role )
+                       const QString& file, DocumentRole role, GeoDataStyle* style )
         : q( parent),
           m_runner( model->pluginManager() ),
           m_filepath ( file ),
           m_documentRole ( role ),
+          m_style( style ),
+          m_styleMap( new GeoDataStyleMap ),
           m_document( 0 ),
           m_clock( model->clock() )
     {
+        m_styleMap->setStyleId("default-map");
+        m_styleMap->insert("normal", QString("#").append(m_style->styleId()));
     }
 
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
@@ -79,6 +86,8 @@ public:
     QString m_contents;
     QString m_nonExistentLocalCacheFile;
     DocumentRole m_documentRole;
+    GeoDataStyle* m_style;
+    GeoDataStyleMap* m_styleMap;
     GeoDataDocument *m_document;
     QString m_error;
 
@@ -86,9 +95,9 @@ public:
 };
 
 FileLoader::FileLoader( QObject* parent, MarbleModel *model,
-                       const QString& file, DocumentRole role = UnknownDocument )
+                       const QString& file, DocumentRole role = UnknownDocument, GeoDataStyle* style = new GeoDataStyle() )
     : QThread( parent ),
-      d( new FileLoaderPrivate( this, model, file, role ) )
+      d( new FileLoaderPrivate( this, model, file, role, style ) )
 {
 }
 
@@ -284,6 +293,9 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
     if ( doc ) {
         m_document = doc;
         doc->setFileName( m_filepath );
+        doc->addStyleMap( *m_styleMap );
+        doc->addStyle( *m_style );
+
         createFilterProperties( doc );
         emit q->newGeoDataDocumentAdded( m_document );
         if ( !m_nonExistentLocalCacheFile.isEmpty() ) {
@@ -310,6 +322,12 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( *i );
 
             bool hasPopularity = false;
+
+            if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
+                placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType && m_documentRole == MapDocument ) {
+
+                placemark->setStyleUrl( QString("#").append( m_styleMap->styleId() ) );
+            }
 
             // Mountain (H), Volcano (V), Shipwreck (W)
             if ( placemark->role() == "H" || placemark->role() == "V" || placemark->role() == "W" )

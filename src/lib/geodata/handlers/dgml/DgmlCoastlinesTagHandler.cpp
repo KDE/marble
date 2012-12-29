@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2008 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2012      Cezar Mocan  <mocancezar@gmail.com>
 
     This file is part of the KDE project
 
@@ -19,47 +19,33 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "DgmlBrushTagHandler.h"
-
-#include <QtGui/QBrush>
-#include <QtGui/QColor>
-#include <QtCore/QString>
+#include "DgmlCoastlinesTagHandler.h"
 
 #include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneVector.h"
-#include "GeoSceneGeodata.h"
+#include "GeoSceneFilter.h"
 
 namespace Marble
 {
 namespace dgml
 {
-DGML_DEFINE_TAG_HANDLER(Brush)
+DGML_DEFINE_TAG_HANDLER(Coastlines)
 
-GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
+GeoNode* DgmlCoastlinesTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Brush));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Coastlines));
 
-    QString color = parser.attribute(dgmlAttr_color).trimmed();
-
-    GeoSceneVector *vector = 0;
-    GeoSceneGeodata *geodata = 0;
-    QBrush brush;
-
-    if ( !color.isEmpty() && QColor( color ).isValid() ) {
-        brush.setColor( QColor( color ) ); 
-    }
+    QString format = parser.attribute(dgmlAttr_format).trimmed();
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.represents( dgmlTag_Vector ) ) {
-        vector = parentItem.nodeAs<GeoSceneVector>();
-        vector->setBrush( brush );
-    } else if ( parentItem.represents( dgmlTag_Geodata ) ) {
-        geodata = parentItem.nodeAs<GeoSceneGeodata>();
-        geodata->setBrush( brush );
+    if ( parentItem.represents( dgmlTag_Filter ) ) {
+        GeoSceneFilter *filter = 0;
+        filter = parentItem.nodeAs<GeoSceneFilter>();
+        filter->setCoastlines( parser.readElementText().trimmed() );
+        filter->setFileFormat( format );
     }
 
     return 0;

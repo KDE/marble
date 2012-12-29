@@ -43,16 +43,20 @@
 #include "layers/VectorMapLayer.h"
 #include "layers/VectorTileLayer.h"
 #include "AbstractFloatItem.h"
+#include "DgmlAuxillaryDictionary.h"
+#include "FileManager.h"
 #include "GeoDataTreeModel.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneFilter.h"
+#include "GeoSceneGeodata.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
 #include "GeoScenePalette.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneZoom.h"
+#include "GeoDataDocument.h"
 #include "LayerManager.h"
 #include "MapThemeManager.h"
 #include "MarbleDebug.h"
@@ -112,6 +116,8 @@ public:
     void updateMapTheme();
 
     void updateProperty( const QString &, bool );
+
+    void setColorizerDocument( int index );
 
     MarbleMap *const q;
 
@@ -695,6 +701,30 @@ bool MarbleMap::geoCoordinates( int x, int y,
     return d->m_viewport.geoCoordinates( x, y, lon, lat, unit );
 }
 
+void MarbleMapPrivate::setColorizerDocument( int index ) {
+    if ( m_model->mapTheme()->map()->filters().isEmpty() )
+        return;
+
+    QString currentName = m_model->fileManager()->at( index )->fileName();
+    QString coastName = m_model->mapTheme()->map()->filters().at( 0 )->coastlines();
+    QString lakeName = m_model->mapTheme()->map()->filters().at( 0 )->lakes();
+    QString glacierName = m_model->mapTheme()->map()->filters().at( 0 )->glaciers();
+
+    GeoDataDocument* filterDocument = m_model->fileManager()->at( index );
+
+    if ( currentName == coastName ) {
+        m_textureLayer.setCoastDocument( filterDocument );
+    }
+
+    if ( currentName == lakeName ) {
+        m_textureLayer.setLakeDocument( filterDocument );
+    }
+
+    if ( currentName == glacierName ) {
+        m_textureLayer.setGlacierDocument( filterDocument );
+    }
+}
+
 // Used to be paintEvent()
 void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
 {
@@ -747,6 +777,9 @@ void MarbleMapPrivate::updateMapTheme()
 
     QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
                       q, SLOT( updateProperty( const QString &, bool ) ) );
+
+    QObject::connect( m_model->fileManager(), SIGNAL( fileAdded( int ) ),
+                      q, SLOT( setColorizerDocument( int ) ) );
 
     q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
 

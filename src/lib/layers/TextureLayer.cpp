@@ -174,6 +174,24 @@ QStringList TextureLayer::renderPosition() const
     return QStringList() << "SURFACE";
 }
 
+void TextureLayer::setCoastDocument( GeoDataDocument* coastDocument )
+{
+    d->m_texcolorizer->setCoastDocument( coastDocument );
+    reset();
+}
+
+void TextureLayer::setGlacierDocument( GeoDataDocument* glacierDocument )
+{
+    d->m_texcolorizer->setGlacierDocument( glacierDocument );
+    reset();
+}
+
+void TextureLayer::setLakeDocument( GeoDataDocument* lakeDocument )
+{
+    d->m_texcolorizer->setLakeDocument( lakeDocument );
+    reset();
+}
+
 bool TextureLayer::showSunShading() const
 {
     return d->m_layerDecorator.showSunShading();

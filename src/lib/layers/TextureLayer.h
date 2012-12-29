@@ -17,6 +17,7 @@
 #include "MarbleGlobal.h"
 #include "MarbleModel.h"
 #include "GeoSceneTiled.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QSize>
 
@@ -47,6 +48,13 @@ class TextureLayer : public QObject, public LayerInterface
     ~TextureLayer();
 
     QStringList renderPosition() const;
+
+    void setCoastDocument( GeoDataDocument* coastDocument );
+
+    void setGlacierDocument( GeoDataDocument* glacierDocument );
+
+    void setLakeDocument( GeoDataDocument* lakeDocument );
+
 
     bool showSunShading() const;
     bool showCityLights() const;
