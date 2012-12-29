@@ -234,13 +234,6 @@ void MainWindow::createActions()
      m_copyCoordinatesAct->setStatusTip(tr("Copy the center coordinates as text"));
      connect(m_copyCoordinatesAct, SIGNAL(triggered()), this, SLOT(copyCoordinates()));
 
-     m_sideBarAct = new QAction( QIcon(":/icons/view-sidetree.png"), tr("Show &Navigation Panel"), this);
-     m_sideBarAct->setShortcut(tr("F9"));
-     m_sideBarAct->setCheckable( true );
-     m_sideBarAct->setChecked( true );
-     m_sideBarAct->setStatusTip(tr("Show Navigation Panel"));
-     connect(m_sideBarAct, SIGNAL(triggered( bool )), this, SLOT( showSideBar( bool )));
-
      m_fullScreenAct = new QAction( QIcon(":/icons/view-fullscreen.png"), tr("&Full Screen Mode"), this);
      m_fullScreenAct->setShortcut(tr("Ctrl+Shift+F"));
      m_fullScreenAct->setCheckable( true );
@@ -346,7 +339,6 @@ void MainWindow::createMenus()
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         menuBar()->addAction( m_workOfflineAct );
         menuBar()->addAction( m_kineticScrollingAction );
-        //menuBar()->addAction( m_sideBarAct );
         /** @todo: Full screen cannot be left on Maemo currently (shortcuts not working) */
         //menuBar()->addAction( m_fullScreenAct );
         menuBar()->addAction( m_downloadRegionAction );
@@ -378,7 +370,6 @@ void MainWindow::createMenus()
 
         menuBar()->addAction( m_manageBookmarksAct );
         menuBar()->addAction( m_aboutMarbleAct );
-        m_controlView->setSideBarShown( false );
         return;
     }
 
@@ -434,7 +425,6 @@ void MainWindow::createMenus()
 
     m_fileMenu = menuBar()->addMenu(tr("&Settings"));
     m_fileMenu->addAction(m_statusBarAct);
-    m_fileMenu->addAction(m_sideBarAct);
     m_fileMenu->addAction(m_fullScreenAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_configDialogAct);
@@ -798,13 +788,6 @@ MainWindow::Orientation MainWindow::orientation() const
 }
 #endif // Q_WS_MAEMO_5
 
-void MainWindow::showSideBar( bool isChecked )
-{
-    m_controlView->setSideBarShown( isChecked );
-
-    m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
-}
-
 void MainWindow::copyCoordinates()
 {
     qreal lon = m_controlView->marbleWidget()->centerLongitude();
@@ -1137,14 +1120,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          const Orientation orientation = (Orientation)settings.value( "orientation", (int)OrientationLandscape ).toInt();
          setOrientation( orientation );
 #endif // Q_WS_MAEMO_5
-         QByteArray sideBarState = settings.value( "sideBarState", QByteArray() ).toByteArray();
-         m_controlView->setSideBarState( sideBarState );
-         if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-             showSideBar(settings.value("sideBar", false ).toBool());
-         }
-         else {
-             showSideBar(settings.value("sideBar", true ).toBool());
-         }
+         m_controlView->setSideBarShown( false );
          showStatusBar(settings.value("statusBar", false ).toBool());
          show();
          showClouds(settings.value("showClouds", true ).toBool());
@@ -1360,8 +1336,6 @@ void MainWindow::writeSettings()
 #ifdef Q_WS_MAEMO_5
          settings.setValue( "orientation", (int)orientation() );
 #endif // Q_WS_MAEMO_5
-         settings.setValue( "sideBar", m_sideBarAct->isChecked() );
-         settings.setValue( "sideBarState", m_controlView->sideBarState() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
@@ -1622,7 +1596,6 @@ void MainWindow::showLegendTab( bool enabled )
     m_controlView->marbleControl()->setMapViewTabShown( false );
     m_controlView->marbleControl()->setCurrentLocationTabShown( false );
     m_controlView->marbleControl()->setRoutingTabShown( false );
-    m_controlView->setSideBarShown( enabled );
 }
 
 void MainWindow::showRoutingDialog()

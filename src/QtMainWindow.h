@@ -123,7 +123,6 @@ private Q_SLOTS:
 #ifdef Q_WS_MAEMO_5
     void  setOrientation( Orientation orientation );
 #endif
-    void  showSideBar( bool );
     void  showStatusBar( bool );
     void  setupStatusBar();
 
@@ -204,7 +203,6 @@ private:
     QAction *m_reloadAct;
 
     // Settings Menu
-    QAction *m_sideBarAct;
     QAction *m_fullScreenAct;
     QAction *m_statusBarAct;
     QAction *m_configDialogAct;
