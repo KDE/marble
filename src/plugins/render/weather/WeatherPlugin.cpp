@@ -304,7 +304,7 @@ void WeatherPlugin::updateSettings()
     if ( model() ) {
         bool favoritesOnly = m_settings.value( "onlyFavorites", false ).toBool();
         QList<QString> favoriteItems = m_settings.value( "favoriteItems" ).toString()
-                .split(",", QString::SkipEmptyParts);
+                .split(QLatin1Char(','), QString::SkipEmptyParts);
 
         model()->setFavoriteItems( favoriteItems );
         setNumberOfItems( favoritesOnly ? favoriteItems.size() : numberOfStationsPerFetch );

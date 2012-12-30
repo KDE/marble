@@ -131,7 +131,7 @@ QString RoutingPluginPrivate::richText( const QString &source ) const
 QString RoutingPluginPrivate::fuzzyDistance( qreal length ) const
 {
     int precision = 0;
-    QString distanceUnit = "m";
+    QString distanceUnit = QLatin1String( "m" );
 
     if ( MarbleGlobal::getInstance()->locale()->measurementSystem() == QLocale::ImperialSystem ) {
         precision = 1;

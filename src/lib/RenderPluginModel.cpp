@@ -24,7 +24,7 @@ public:
     static bool renderPluginGuiStringLessThan( RenderPlugin* one, RenderPlugin* two )
     {
         // Sort by gui string ignoring keyboard accelerators
-        return one->guiString().replace( "&", "" ) < two->guiString().replace( "&", "" );
+        return one->guiString().remove( QLatin1Char( '&' ) ) < two->guiString().remove( QLatin1Char( '&' ) );
     }
 
     QList<RenderPlugin *> m_renderPlugins;

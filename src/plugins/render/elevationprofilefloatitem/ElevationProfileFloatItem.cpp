@@ -260,7 +260,7 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
 
         intervalStr.setNum( tick.value * m_axisX.scale() );
         if ( tick.position == m_axisX.ticks().last().position ) {
-            intervalStr += " " + m_axisX.unit();
+            intervalStr += ' ' + m_axisX.unit();
         }
         labelRect.setWidth( QFontMetricsF( font() ).width( intervalStr ) * 1.5 );
         labelRect.moveCenter( QPoint( posX, labelRect.center().y() ) );
@@ -362,13 +362,13 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
         intervalStr.setNum( xpos * m_axisX.scale(), 'f', 2 );
-        intervalStr += " " + m_axisX.unit();
+        intervalStr += ' ' + m_axisX.unit();
         int currentStringBegin = m_leftGraphMargin + m_cursorPositionX
                              - QFontMetricsF( font() ).width( intervalStr ) / 2;
         painter->drawText( currentStringBegin, contentSize().height() - 1.5 * m_fontHeight, intervalStr );
 
         intervalStr.setNum( currentPoint.altitude(), 'f', 1 );
-        intervalStr += " " + m_axisY.unit();
+        intervalStr += ' ' + m_axisY.unit();
         if ( m_cursorPositionX + QFontMetricsF( font() ).width( intervalStr ) + m_leftGraphMargin
                 < m_eleGraphWidth ) {
             currentStringBegin = ( m_leftGraphMargin + m_cursorPositionX + 5 + 2 );

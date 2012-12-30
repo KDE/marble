@@ -553,7 +553,7 @@ void MapWizard::queryLegendImage()
 
 QString MapWizard::createArchive( QWidget *parent, QString mapId )
 {
-    QStringList splitMapId( mapId.split("/") );
+    QStringList splitMapId( mapId.split(QLatin1Char('/')) );
     QString body = splitMapId[0];
     QString theme = splitMapId[1];
     QDir themeDir;
@@ -630,7 +630,7 @@ QString MapWizard::createArchive( QWidget *parent, QString mapId )
 
 void MapWizard::deleteArchive( QString mapId )
 {
-    QStringList splitMapId( mapId.split("/") );
+    QStringList splitMapId( mapId.split(QLatin1Char('/')) );
     QString theme = splitMapId[1];
     QFile::remove( QString( "%1/%2.tar.gz" ).arg( QDir::tempPath() ).arg( theme ) );
 }
@@ -804,7 +804,7 @@ GeoSceneDocument* MapWizard::createDocument()
         QString image = d->uiWidget.lineEditSource->text();
         d->format = image.right( image.length() - image.lastIndexOf( '.' ) - 1 ).toLower();
         texture->setFileFormat( d->format.toUpper() );
-        texture->setInstallMap( document->head()->theme() + "." + d->format );
+        texture->setInstallMap( document->head()->theme() + '.' + d->format );
         texture->setServerLayout( new MarbleServerLayout( texture ) );
         texture->setProjection( GeoSceneTiled::Equirectangular );
         int imageWidth = QImage( image ).width();

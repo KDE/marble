@@ -49,9 +49,9 @@ QVariant OfflineDataModel::data(const QModelIndex &index, int role) const
             for ( int i=2; i<data.size(); ++i ) {
                 result += " / " + data.at( i );
             }
-            result.replace( " (Motorcar)", "" );
-            result.replace( " (Pedestrian)", "" );
-            result.replace( " (Bicycle)", "" );
+            result.remove( QLatin1String( " (Motorcar)" ) );
+            result.remove( QLatin1String( " (Pedestrian)" ) );
+            result.remove( QLatin1String( " (Bicycle)" ) );
             return result.trimmed();
         }
     }

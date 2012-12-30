@@ -75,7 +75,7 @@ void GeoNamesWeatherService::parseFile( const QByteArray& file )
     QScriptEngine engine;
 
     // Qt requires parentheses around json code
-    data = engine.evaluate( "(" + QString( file ) + ")" );
+    data = engine.evaluate( '(' + QString( file ) + ')' );
 
     // Parse if any result exists
     QList<AbstractDataPluginItem*> items;

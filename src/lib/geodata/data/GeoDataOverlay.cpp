@@ -44,7 +44,7 @@ QString GeoDataOverlayPrivate::resolve( const GeoDataObject* object, const QStri
         GeoDataDocument const * document = dynamic_cast<GeoDataDocument const*>( object );
         if ( document ) {
             QFileInfo documentFile = document->fileName();
-            QFileInfo absoluteImage( documentFile.absolutePath() + "/" + filename );
+            QFileInfo absoluteImage( documentFile.absolutePath() + '/' + filename );
             return absoluteImage.absoluteFilePath();
         } else {
             return resolve( object->parent(), filename );

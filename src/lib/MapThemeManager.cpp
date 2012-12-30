@@ -180,8 +180,8 @@ void MapThemeManager::deleteMapTheme( const QString &mapThemeId )
 {
     QDir mapThemeDir( QFileInfo( MarbleDirs::localPath() + "/maps/" + mapThemeId ).path() );
     Private::deleteDirectory( mapThemeDir.path() + "/legend/" );
-    Private::deleteDataDirectories( mapThemeDir.path() + "/" );
-    Private::deletePreview( mapThemeDir.path() + "/" );
+    Private::deleteDataDirectories( mapThemeDir.path() + '/' );
+    Private::deletePreview( mapThemeDir.path() + '/' );
     QFile( MarbleDirs::localPath() + "/maps/" + mapThemeId ).remove();
     QFile( mapThemeDir.path() + "/legend.html" ).remove();
     QDir().rmdir( mapThemeDir.path() );
@@ -492,7 +492,7 @@ void MapThemeManager::Private::deleteDataDirectories( const QString& path )
     QDir directoryv( path );
     foreach( const QString &filename, directoryv.entryList( QDir::AllEntries | QDir::NoDotAndDotDot ) )
     {
-        QString filepath = path + "/" + filename;
+        QString filepath = path + '/' + filename;
         QFile file( filepath );
         if( QFileInfo( filepath ).isDir() && filename.contains( QRegExp( "^[0-9]+$" ) ) )
         {
@@ -508,7 +508,7 @@ void MapThemeManager::Private::deletePreview( const QString& path )
 {
     QDir directoryv( path, "preview.*" );
     foreach( const QString &filename, directoryv.entryList() )
-        QFile( path + "/" + filename ).remove();
+        QFile( path + '/' + filename ).remove();
 }
 
 }

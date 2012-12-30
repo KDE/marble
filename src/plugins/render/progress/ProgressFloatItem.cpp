@@ -204,7 +204,7 @@ void ProgressFloatItem::paintContent( QPainter *painter )
 
     // Paint progress label
     myFont.setPointSize( m_fontSize );
-    QString done = QString::number( (int) ( completed * 100 ) ) + "%";
+    QString done = QString::number( (int) ( completed * 100 ) ) + '%';
     int fontWidth = QFontMetrics( myFont ).boundingRect( done ).width();
     QPointF baseline( padding() + 0.5 * ( rect.width() - fontWidth ), 0.75 * rect.height() );
     QPainterPath path;

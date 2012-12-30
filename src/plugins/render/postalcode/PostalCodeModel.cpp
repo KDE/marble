@@ -67,7 +67,7 @@ void PostalCodeModel::parseFile( const QByteArray& file )
     QScriptEngine engine;
 
     // Qt requires parentheses around json code
-    data = engine.evaluate( "(" + QString::fromUtf8( file ) + ")" );
+    data = engine.evaluate( '(' + QString::fromUtf8( file ) + ')' );
 
     // Parse if any result exists
     if ( data.property( "postalCodes" ).isArray() ) {
@@ -93,7 +93,7 @@ void PostalCodeModel::parseFile( const QByteArray& file )
                 QString tooltip;
 
                 if ( !placeName.isEmpty() ) {
-                    tooltip += placeName + " ";
+                    tooltip += placeName + ' ';
                 }
 
                 addLine( &tooltip, postalCode );
@@ -126,7 +126,7 @@ void PostalCodeModel::addLine(QString *string, const QString &line)
 {
     Q_ASSERT( string );
     if ( !line.isEmpty() ) {
-        *string += line + "\n";
+        *string += line + '\n';
     }
 }
 

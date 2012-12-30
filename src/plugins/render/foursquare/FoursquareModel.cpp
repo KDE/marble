@@ -53,13 +53,13 @@ void FoursquareModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const 
     if ( area > 10 * 1000 * KM2METER * KM2METER ) {
         // Large area (> 10.000 km^2) => too large for bbox queries
         apiUrl += "?ll=" + QString::number( box.center().latitude(Marble::GeoDataCoordinates::Degree) );
-        apiUrl += "," + QString::number( box.center().longitude(Marble::GeoDataCoordinates::Degree) );
+        apiUrl += ',' + QString::number( box.center().longitude(Marble::GeoDataCoordinates::Degree) );
         apiUrl += "&intent=checkin";
     } else {
         apiUrl += "?ne=" + QString::number( box.north(Marble::GeoDataCoordinates::Degree) );
-        apiUrl += "," + QString::number( box.east(Marble::GeoDataCoordinates::Degree) );
+        apiUrl += ',' + QString::number( box.east(Marble::GeoDataCoordinates::Degree) );
         apiUrl += "&sw=" + QString::number( box.south(Marble::GeoDataCoordinates::Degree) );
-        apiUrl += "," + QString::number( box.west(Marble::GeoDataCoordinates::Degree) );
+        apiUrl += ',' + QString::number( box.west(Marble::GeoDataCoordinates::Degree) );
         apiUrl += "&intent=browse";
     }
     apiUrl += "&limit=" + QString::number( number );
@@ -74,7 +74,7 @@ void FoursquareModel::parseFile( const QByteArray& file )
     QScriptValue data;
     QScriptEngine engine;
     // Qt requires parentheses around JSON
-    data = engine.evaluate( "(" + QString::fromUtf8( file ) + ")" );
+    data = engine.evaluate( '(' + QString::fromUtf8( file ) + ')' );
     data = data.property("response");
     
     // Parse if any result exists
