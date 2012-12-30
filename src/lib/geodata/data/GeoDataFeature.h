@@ -74,7 +74,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     virtual ~GeoDataFeature();
 
     GeoDataFeature& operator=( const GeoDataFeature& other );
-    bool operator==( const GeoDataFeature& ) const { return false; };
 
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;
