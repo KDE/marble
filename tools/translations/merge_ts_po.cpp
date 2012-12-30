@@ -58,12 +58,12 @@ int main( int argc, char** argv )
                 ignore = false;
             } else {
                 QString translation = line.mid( 8, line.size() - 9 );
-                source.replace( "&", "&amp;" );
-                translation.replace( "&", "&amp;" );
-                source.replace( "<", "&lt;" );
-                translation.replace( "<", "&lt;" );
-                source.replace( ">", "&gt;" );
-                translation.replace( ">", "&gt;" );
+                source.replace( QLatin1Char( '&' ), QLatin1String( "&amp;" ) );
+                translation.replace( QLatin1Char( '&' ), QLatin1String( "&amp; ") );
+                source.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
+                translation.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
+                source.replace( QLatin1Char( '>' ), QLatin1String( "&gt;" ) );
+                translation.replace( QLatin1Char( '>' ), QLatin1String( "&gt;" ) );
                 if ( !translation.isEmpty() ) {
                     translations[source] = translation;
                 }

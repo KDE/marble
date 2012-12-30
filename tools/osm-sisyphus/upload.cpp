@@ -28,8 +28,8 @@ Upload::Upload(QObject *parent) :
 
 void Upload::changeStatus(const Package &package, const QString &status, const QString &message)
 {
-    Logger::instance().setStatus( package.region.id() + "_" + package.transport,
-                                  package.region.name() + " (" + package.transport + ")", status, message);
+    Logger::instance().setStatus( package.region.id() + '_' + package.transport,
+                                  package.region.name() + QLatin1String( " (" ) + package.transport + ')', status, message);
 }
 
 void Upload::processQueue()
@@ -72,8 +72,8 @@ bool Upload::upload(const Package &package)
     QProcess scp;
     arguments.clear();
     arguments << package.file.absoluteFilePath();
-    QString target = remoteDir + "/" + package.file.fileName();
-    arguments << auth + ":" + target;
+    QString target = remoteDir + '/' + package.file.fileName();
+    arguments << auth + ':' + target;
     scp.start("scp", arguments);
     scp.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for upload to complete
     if (scp.exitStatus() != QProcess::NormalExit || scp.exitCode() != 0) {

@@ -33,8 +33,8 @@ OpenRouteServiceRunner::OpenRouteServiceRunner( QObject *parent ) :
         RoutingRunner( parent ),
         m_networkAccessManager()
 {
-    connect( &m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-             this, SLOT( retrieveData( QNetworkReply * ) ) );
+    connect( &m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
+             this, SLOT(retrieveData(QNetworkReply*)));
 }
 
 OpenRouteServiceRunner::~OpenRouteServiceRunner()
@@ -86,11 +86,11 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 
     QEventLoop eventLoop;
 
-    connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
-             &eventLoop, SLOT( quit() ) );
+    connect( this, SIGNAL(routeCalculated(GeoDataDocument*)),
+             &eventLoop, SLOT(quit()));
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( get() ) );
+    QTimer::singleShot( 0, this, SLOT(get()));
 
     eventLoop.exec();
 }
@@ -98,8 +98,8 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 void OpenRouteServiceRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.post( m_request, m_requestData );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
+    connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
+             this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
 }
 
 void OpenRouteServiceRunner::retrieveData( QNetworkReply *reply )

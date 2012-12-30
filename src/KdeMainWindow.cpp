@@ -58,8 +58,8 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     setAutoSaveSettings();
 
-    connect( marbleWidget(), SIGNAL( themeChanged( QString ) ), 
-            this, SLOT( setMapTitle() ) );
+    connect( marbleWidget(), SIGNAL(themeChanged(QString)), 
+            this, SLOT(setMapTitle()));
 }
 
 MainWindow::~MainWindow()

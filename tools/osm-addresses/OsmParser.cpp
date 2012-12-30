@@ -616,7 +616,7 @@ bool OsmParser::shouldSave( ElementType /*type*/, const QString &key, const QStr
 
 void OsmParser::setCategory( Element &element, const QString &key, const QString &value )
 {
-    QString const term = key + "/" + value;
+    QString const term = key + '/' + value;
     if ( m_categoryMap.contains( term ) ) {
         if ( element.category != OsmPlacemark::UnknownCategory ) {
             qDebug() << "Overwriting category " << element.category << " with " << m_categoryMap[term] << " for " << element.name;

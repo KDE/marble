@@ -228,7 +228,7 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
 bool NewstuffModelPrivate::canExecute( const QString &executable ) const
 {
     QString path = QProcessEnvironment::systemEnvironment().value( "PATH", "/usr/local/bin:/usr/bin:/bin" );
-    foreach( const QString &dir, path.split( ":" ) ) {
+    foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {
         QFileInfo application( QDir( dir ), executable );
         if ( application.exists() ) {
             return true;
@@ -729,7 +729,7 @@ void NewstuffModel::contentsListed( int exitStatus )
             QStringList const files = QString( d->m_unpackProcess->readAllStandardOutput() ).split( '\n', QString::SkipEmptyParts );
             foreach( const QString &file, files ) {
                 QDomNode fileNode = node.appendChild( d->m_registryDocument.createElement( "installedfile" ) );
-                fileNode.appendChild( d->m_registryDocument.createTextNode( d->m_targetDirectory + "/" + file ) );
+                fileNode.appendChild( d->m_registryDocument.createTextNode( d->m_targetDirectory + '/' + file ) );
             }
 
             d->saveRegistry();

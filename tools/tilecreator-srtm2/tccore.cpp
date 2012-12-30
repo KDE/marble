@@ -130,7 +130,7 @@ private:
         QStringList dirs;
         dirs << "Africa" << "Australia" << "Eurasia" << "Silands" << "North_America" << "South_America";
         foreach( const QString &dir, dirs) {
-            QString fileName = m_sourceDir + "/" + dir + "/";
+            QString fileName = m_sourceDir + '/' + dir + '/';
             if ( lat < 0 ) lat *= -1;
             fileName += QString( "%1%2%3%4.hgt" ).arg( NS ).arg( lat<0 ? lat*-1 : lat, 2, 10, QLatin1Char('0') )
                                         .arg( EW ).arg( lng<0 ? lng*-1 : lng, 3, 10, QLatin1Char('0' ) );
@@ -141,7 +141,7 @@ private:
                 QProcess p;
                 p.execute("unzip", QStringList() << fileName + ".zip" );
                 p.waitForFinished();
-                QFile( QDir::currentPath() + "/" + QFileInfo( fileName ).fileName()).rename(fileName);
+                QFile( QDir::currentPath() + '/' + QFileInfo( fileName ).fileName()).rename(fileName);
             }
             if ( QFile::exists( fileName ) ) {
                 return fileName;

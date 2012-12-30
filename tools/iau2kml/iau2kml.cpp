@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
 
             // if ( roleString == "SF" ) continue;
 
-            QString marbleRoleString = "o";
+            QString marbleRoleString = QLatin1String( "o" );
 
             if ( roleString == "AA" || roleString == "SF" ) marbleRoleString = "c";
             if (    roleString == "ME" || roleString == "OC" 
