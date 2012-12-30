@@ -64,7 +64,7 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
     QString const invalidEntry = "invalid";
     for ( int i=0; i<route->size(); ++i ) {
         GeoDataCoordinates const coordinates = route->at( i );
-        append( &url, "loc", QString::number( coordinates.latitude( degree ), 'f', 6 ) + "," + QString::number( coordinates.longitude( degree ), 'f', 6 ) );
+        append( &url, "loc", QString::number( coordinates.latitude( degree ), 'f', 6 ) + ',' + QString::number( coordinates.longitude( degree ), 'f', 6 ) );
         foreach( const CachePair &hint, m_cachedHints ) {
             if ( hint.first == coordinates && hint.second != invalidEntry && m_hintChecksum != invalidEntry ) {
                 append( &url, "hint", hint.second );
@@ -124,7 +124,7 @@ void OSRMRunner::get()
 
 void OSRMRunner::append(QString *input, const QString &key, const QString &value) const
 {
-    *input += "&" + key + "=" + value;
+    *input += '&' + key + '=' + value;
 }
 
 GeoDataLineString *OSRMRunner::decodePolyline( const QString &geometry ) const
@@ -194,7 +194,7 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input )
 {
     QScriptEngine engine;
     // Qt requires parentheses around json code
-    QScriptValue const data = engine.evaluate( "(" + QString::fromUtf8( input ) + ")" );
+    QScriptValue const data = engine.evaluate( '(' + QString::fromUtf8( input ) + ')' );
 
     GeoDataDocument* result = 0;
     GeoDataLineString* routeWaypoints = 0;
@@ -207,7 +207,7 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input )
         routePlacemark->setGeometry( routeWaypoints );
 
         QString name = "%1 %2 (OSRM)";
-        QString unit = "m";
+        QString unit = QLatin1String( "m" );
         qreal length = routeWaypoints->length( EARTH_RADIUS );
         if (length >= 1000) {
             length /= 1000.0;

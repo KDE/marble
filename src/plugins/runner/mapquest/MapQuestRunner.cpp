@@ -54,9 +54,9 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
 
     QString url = "http://open.mapquestapi.com/directions/v0/route?callback=renderAdvancedNarrative&outFormat=xml&narrativeType=text&shapeFormat=raw&generalize=0";
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
-    append( &url, "from", QString::number( route->source().latitude( degree ), 'f', 6 ) + "," + QString::number( route->source().longitude( degree ), 'f', 6 ) );
+    append( &url, "from", QString::number( route->source().latitude( degree ), 'f', 6 ) + ',' + QString::number( route->source().longitude( degree ), 'f', 6 ) );
     for ( int i=1; i<route->size(); ++i ) {
-        append( &url, "to", QString::number( route->at( i ).latitude( degree ), 'f', 6 ) + "," + QString::number( route->at( i ).longitude( degree ), 'f', 6 ) );
+        append( &url, "to", QString::number( route->at( i ).latitude( degree ), 'f', 6 ) + ',' + QString::number( route->at( i ).longitude( degree ), 'f', 6 ) );
     }
 
     QString const unit = MarbleGlobal::getInstance()->locale()->measurementSystem() == QLocale::MetricSystem ? "k" : "m";
@@ -120,7 +120,7 @@ void MapQuestRunner::handleError( QNetworkReply::NetworkError error )
 
 void MapQuestRunner::append(QString *input, const QString &key, const QString &value)
 {
-    *input += "&" + key + "=" + value;
+    *input += '&' + key + '=' + value;
 }
 
 int MapQuestRunner::maneuverType( int mapQuestId ) const
@@ -181,7 +181,7 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     routePlacemark->setGeometry( routeWaypoints );
 
     QString name = "%1 %2 (MapQuest)";
-    QString unit = "m";
+    QString unit = QLatin1String( "m" );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
     if (length >= 1000) {
         length /= 1000.0;

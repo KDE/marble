@@ -97,7 +97,7 @@ void OpenCachingComModel::parseFile( const QByteArray& file )
     QScriptEngine engine;
 
     // Qt requires parentheses around json code
-    QScriptValue data = engine.evaluate( "(" + QString::fromUtf8( file ) + ")" );
+    QScriptValue data = engine.evaluate( '(' + QString::fromUtf8( file ) + ')' );
     QVariantList caches = data.toVariant().toList();
 
 //     qDebug()<<"parsing "<<caches.size()<<" items";

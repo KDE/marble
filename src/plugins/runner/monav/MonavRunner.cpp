@@ -211,7 +211,7 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString *geometry
     result->append( routePlacemark );
 
     QString name = "%1 %2 (Monav)";
-    QString unit = "m";
+    QString unit = QLatin1String( "m" );
     qreal length = geometry->length( EARTH_RADIUS );
     if ( length >= 1000 ) {
         length /= 1000.0;

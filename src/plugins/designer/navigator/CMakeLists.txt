@@ -11,3 +11,4 @@ INCLUDE(${QT_USE_FILE})
 set( marblenavigator_SRCS MarbleNavigatorPlugin.cpp )
 
 marble_add_designer_plugin( MarbleNavigatorPlugin ${marblenavigator_SRCS} )
+

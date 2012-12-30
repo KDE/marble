@@ -97,7 +97,7 @@ void YoursRunner::retrieveData( QNetworkReply *reply )
         GeoDataDocument* result = parse( data );
         if ( result ) {
             QString name = "%1 %2 (Yours)";
-            QString unit = "m";
+            QString unit = QLatin1String( "m" );
             qreal length = distance( result );
             if ( length == 0.0 ) {
                 delete result;

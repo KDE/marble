@@ -89,7 +89,7 @@ void OpenCachingComItem::showInfoDialog()
 
     m_ui = &ui;
 
-    dialog.setWindowTitle( tr("Cache Details for") + " " + id() );
+    dialog.setWindowTitle( tr("Cache Details for %1").arg(id() ));
 
     m_ui->labelIcon->setPixmap(QPixmap(":/" + iconName() + ".png"));
     m_ui->labelHeader->setText(QString("<big><strong>" + m_cache["name"].toString() + "</strong></big>"));
@@ -193,7 +193,7 @@ void OpenCachingComItem::showInfoDialog()
         for (int i=0; i<numtags;i++)
         {
             tagiconshtml += QString("<img src=\":/%1.png\" alt=\"%2\">")
-                .arg(tags.at(i).toLower().replace(" ","-")).arg(tags.at(i));
+                .arg(tags.at(i).toLower().replace(QLatin1Char(' '),QLatin1Char('-'))).arg(tags.at(i));
             if (0 == (i+1)%tagrows)
             {
                 tagiconshtml += "<br/>";
@@ -292,7 +292,7 @@ void OpenCachingComItem::addDownloadedFile( const QString &url, const QString &t
         QScriptEngine engine;
 
         // Qt requires parentheses around json code
-        QScriptValue data = engine.evaluate( "(" + QString::fromUtf8( file.readAll() ) + ")" );
+        QScriptValue data = engine.evaluate( '(' + QString::fromUtf8( file.readAll() ) + ')' );
         QVariantMap cache = data.toVariant().toMap();
 
         m_cache["description"] = cache["description"];
@@ -333,7 +333,7 @@ QString OpenCachingComItem::dateString(const QVariant& ms)
     }
     else
     {
-        result = "-";
+        result = '-';
     }
     return result;
 }

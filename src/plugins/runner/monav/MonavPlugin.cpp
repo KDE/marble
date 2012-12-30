@@ -107,7 +107,7 @@ bool MonavPluginPrivate::isDaemonInstalled() const
 {
     QString path = QProcessEnvironment::systemEnvironment().value( "PATH", "/usr/local/bin:/usr/bin:/bin" );
     foreach( const QString &application, QStringList() << "monav-daemon" << "MoNavD" ) {
-        foreach( const QString &dir, path.split( ":" ) ) {
+        foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {
             QFileInfo executable( QDir( dir ), application );
             if ( executable.exists() ) {
                 return true;

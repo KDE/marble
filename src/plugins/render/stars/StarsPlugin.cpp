@@ -444,7 +444,7 @@ void StarsPlugin::loadDsos()
             continue;
         }
 
-        QStringList entries = line.split( "," );
+        QStringList entries = line.split( QLatin1Char( ',' ) );
     
         QString id = entries.at( 0 ); 
         

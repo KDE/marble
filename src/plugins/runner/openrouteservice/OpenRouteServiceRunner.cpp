@@ -298,7 +298,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     routePlacemark->setGeometry( routeWaypoints );
 
     QString name = "%1 %2 (OpenRouteService)";
-    QString unit = "m";
+    QString unit = QLatin1String( "m" );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
     if (length >= 1000) {
         length /= 1000.0;
@@ -368,7 +368,7 @@ RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QStrin
         if ( syntax.captureCount() > 1 ) {
             instruction = syntax.cap( 2 );
             if ( syntax.captureCount() == 4 ) {
-                *road = syntax.cap( 4 ).replace( " - Arrived at destination!", "" );
+                *road = syntax.cap( 4 ).remove(QLatin1String( " - Arrived at destination!"));
             }
         }
     }

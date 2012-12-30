@@ -209,11 +209,11 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
         // return a one element list
         if( m_settings.value( "dataSources" ).type() == QVariant::String ) {
             m_settings.insert( "dataSources",
-                m_settings.value( "dataSources" ).toString().split( "," ) );
+                m_settings.value( "dataSources" ).toString().split(QLatin1Char( ',' ) ) );
         }
         if( m_settings.value( "idList" ).type() == QVariant::String ) {
             m_settings.insert( "idList",
-                m_settings.value( "idList" ).toString().split( "," ) );
+                m_settings.value( "idList" ).toString().split(QLatin1Char( ',' ) ) );
         }
     }
 
@@ -226,7 +226,7 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
     } else if( m_settings.value( "userDataSources" ).type() == QVariant::String ) {
         // same HACK as above
         m_settings.insert( "userDataSources",
-            m_settings.value( "userDataSources" ).toString().split( "," ) );
+            m_settings.value( "userDataSources" ).toString().split(QLatin1Char( ',' ) ) );
     }
 
     emit settingsChanged( nameId() );

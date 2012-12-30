@@ -129,9 +129,9 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         QString description;
         for (int i=0; i<place.childNodes().size(); ++i) {
             QDomElement item = place.childNodes().at(i).toElement();
-            description += item.nodeName() + ": " + item.text() + "\n";
+            description += item.nodeName() + ':' + item.text() + '\n';
         }
-        description += "Category: " + key + "/" + value;
+        description += "Category: " + key + '/' + value;
 
         if (!lon.isEmpty() && !lat.isEmpty() && !desc.isEmpty()) {
             QString placemarkName;
@@ -170,7 +170,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             placemark->setName( placemarkName );
             placemark->setDescription(description);
             placemark->setCoordinate(lon.toDouble(), lat.toDouble(), 0, GeoDataPoint::Degree );
-            GeoDataFeature::GeoDataVisualCategory category = GeoDataFeature::OsmVisualCategory( key + "=" + value );
+            GeoDataFeature::GeoDataVisualCategory category = GeoDataFeature::OsmVisualCategory( key + '=' + value );
             placemark->setVisualCategory( category );
             placemarks << placemark;
         }

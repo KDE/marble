@@ -142,7 +142,7 @@ QString MonavStuffEntry::payload() const
 void MonavStuffEntry::setName( const QString &name )
 {
     m_name = name;
-    QStringList parsed = name.split( "/" );
+    QStringList parsed = name.split( QLatin1Char( '/' ) );
     int size = parsed.size();
     m_continent = size > 0 ? parsed.at( 0 ).trimmed() : QString();
     m_state = size > 1 ? parsed.at( 1 ).trimmed() : QString();
@@ -548,7 +548,7 @@ void MonavConfigWidget::updateProgressBar( qint64 bytesReceived, qint64 bytesTot
 bool MonavConfigWidgetPrivate::canExecute( const QString &executable ) const
 {
     QString path = QProcessEnvironment::systemEnvironment().value( "PATH", "/usr/local/bin:/usr/bin:/bin" );
-    foreach( const QString &dir, path.split( ":" ) ) {
+    foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {
         QFileInfo application( QDir( dir ), executable );
         if ( application.exists() ) {
             return true;
