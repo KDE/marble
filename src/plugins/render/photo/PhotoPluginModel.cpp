@@ -15,6 +15,7 @@
 // Photo Plugin
 #include "FlickrParser.h"
 #include "PhotoPluginItem.h"
+#include "PhotoPlugin.h"
 
 // Marble
 #include "AbstractDataPluginItem.h"
@@ -76,9 +77,6 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     if( model->planetId() != "earth" ) {
         return;
     }
-    
-    /** @todo make configurable */
-    QString licenses = "1,2,3,4,5,6,7";
 
     if( box.west() <= box.east() ) {
         QString bbox( "" );
@@ -91,7 +89,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         options.insert( "per_page", QString::number( number ) );
         options.insert( "bbox",     bbox );
         options.insert( "sort",     "interestingness-desc" );
-        options.insert( "license", licenses );
+        options.insert( "license", m_licenses );
     
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", options ) );
     }
@@ -107,7 +105,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         optionsWest.insert( "per_page", QString::number( number/2 ) );
         optionsWest.insert( "bbox",     bboxWest );
         optionsWest.insert( "sort",     "interestingness-desc" );
-        optionsWest.insert( "license", licenses );
+        optionsWest.insert( "license", m_licenses );
 
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsWest ) );
         
@@ -122,7 +120,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         optionsEast.insert( "per_page", QString::number( number/2 ) );
         optionsEast.insert( "bbox",     bboxEast );
         optionsEast.insert( "sort",     "interestingness-desc" );
-        optionsEast.insert( "license", licenses );
+        optionsEast.insert( "license", m_licenses );
 
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsEast ) );
     }
@@ -156,6 +154,11 @@ void PhotoPluginModel::parseFile( const QByteArray& file )
 void PhotoPluginModel::setMarbleWidget( MarbleWidget *widget )
 {
     m_marbleWidget = widget;
+}
+
+void PhotoPluginModel::setLicenseValues( const QString &licenses )
+{
+    m_licenses = licenses;
 }
 
 #include "PhotoPluginModel.moc"

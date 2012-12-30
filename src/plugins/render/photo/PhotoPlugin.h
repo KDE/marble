@@ -12,26 +12,37 @@
 #define PHOTOPLUGIN_H
 
 #include "AbstractDataPlugin.h"
+#include "DialogConfigurationInterface.h"
+#include "RenderPlugin.h"
+#include "RenderPluginInterface.h"
+
+#include <QtCore/QHash>
 
 class QIcon;
+
+namespace Ui
+{
+    class PhotoConfigWidget;
+}
 
 namespace Marble
 {
 
 class MarbleWidget;
 
-class PhotoPlugin : public AbstractDataPlugin
+class PhotoPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
-
     Q_INTERFACES( Marble::RenderPluginInterface )
-
+    Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( PhotoPlugin )
     
  public:
     PhotoPlugin();
 
     explicit PhotoPlugin( const MarbleModel *marbleModel );
+
+    ~PhotoPlugin();
 
     void initialize();
 
@@ -51,11 +62,38 @@ class PhotoPlugin : public AbstractDataPlugin
 
     QIcon icon() const;
 
+    QDialog *configDialog();
+
+    /**
+     * @return: The settings of the item.
+     */
+    virtual QHash<QString,QVariant> settings() const;
+
+    /**
+     * Set the settings of the item.
+     */
+    virtual void setSettings( const QHash<QString,QVariant> &settings );
+
+    QStringList checkState() const;
+    void setCheckState();
+
  protected:
     bool eventFilter( QObject *object, QEvent *event );
 
+ private Q_SLOTS:
+   void readSettings();
+   void writeSettings();
+
+   void updateSettings();
+   void checkNumberOfItems( quint32 number );
+
  private:
+    Ui::PhotoConfigWidget *ui_configWidget;
+    QDialog *m_configDialog;
+
     MarbleWidget *m_marbleWidget;
+
+    QStringList m_checkStateList;
 };
 
 }

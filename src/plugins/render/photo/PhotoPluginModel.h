@@ -34,6 +34,8 @@ class PhotoPluginModel : public AbstractDataPluginModel
                              const QHash<QString,QString>& options );
 
     void setMarbleWidget( MarbleWidget* widget );
+
+    void setLicenseValues( const QString &licenses );
  
  protected:
     /**
@@ -53,6 +55,8 @@ class PhotoPluginModel : public AbstractDataPluginModel
 
  private:
     MarbleWidget *m_marbleWidget;
+
+    QString m_licenses;
 };
 
 }
