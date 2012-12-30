@@ -45,21 +45,6 @@ class GeoSceneFilter : public GeoNode
     QString name() const;
     void setName( const QString& name );
 
-    QString sourceFile() const;
-    void setSourceFile( const QString& sourceFile );
-
-    QString coastlines() const;
-    void setCoastlines( const QString& coastlines );
-
-    QString lakes() const;
-    void setLakes( const QString& lakes );
-
-    QString glaciers() const;
-    void setGlaciers( const QString& glaciers );
-
-    QString fileFormat() const;
-    void setFileFormat( const QString& fileFormat );
-
     QString type() const;
     void setType( const QString& type );
 
@@ -68,11 +53,6 @@ class GeoSceneFilter : public GeoNode
     int removePalette( const GeoScenePalette *palette ); //returns # of items removed
 
  private:
-    QString m_sourceFile;
-    QString m_coastlines;
-    QString m_lakes;
-    QString m_glaciers;
-    QString m_fileFormat;
     QString m_name;
     QString m_type;
     QList<const GeoScenePalette*> m_palette;
