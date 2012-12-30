@@ -165,6 +165,7 @@ AbstractDataPluginItem *GeoNamesWeatherService::parse( const QScriptValue &value
 
         GeoDataCoordinates coordinates( longitude, latitude, 0.0, GeoDataCoordinates::Degree );
         GeoNamesWeatherItem *item = new GeoNamesWeatherItem( this );
+        item->setMarbleWidget( marbleWidget() );
         item->setId( id );
         item->setCoordinate( coordinates );
         item->setTarget( "earth" );

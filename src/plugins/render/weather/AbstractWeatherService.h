@@ -17,6 +17,7 @@
 namespace Marble
 {
 
+class MarbleWidget;
 
 class AbstractWeatherService : public QObject
 {
@@ -25,6 +26,7 @@ class AbstractWeatherService : public QObject
  public:
     explicit AbstractWeatherService( QObject *parent );
     virtual ~AbstractWeatherService();
+    void setMarbleWidget( MarbleWidget* widget );
     
  public Q_SLOTS:
     virtual void setFavoriteItems( const QStringList& favorite );
@@ -41,8 +43,12 @@ class AbstractWeatherService : public QObject
     void createdItems( QList<AbstractDataPluginItem*> items );
     void downloadDescriptionFileRequested( const QUrl& );
 
+protected:
+    MarbleWidget* marbleWidget();
+
 private:
     QStringList m_favoriteItems;
+    MarbleWidget* m_marbleWidget;
 };
 
 } // namespace Marble

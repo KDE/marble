@@ -15,12 +15,23 @@ namespace Marble
 {
 
 AbstractWeatherService::AbstractWeatherService( QObject *parent )
-    : QObject( parent )
+    : QObject( parent ),
+      m_marbleWidget(0)
 {
 }
 
 AbstractWeatherService::~AbstractWeatherService()
 {
+}
+
+void AbstractWeatherService::setMarbleWidget( MarbleWidget *widget )
+{
+    m_marbleWidget = widget;
+}
+
+MarbleWidget* AbstractWeatherService::marbleWidget()
+{
+    return m_marbleWidget;
 }
 
 void AbstractWeatherService::setFavoriteItems( const QStringList& favorite )

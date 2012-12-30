@@ -134,6 +134,13 @@ void WeatherModel::downloadDescriptionFileRequested( const QUrl& url )
     downloadDescriptionFile( url );
 }
 
+void WeatherModel::setMarbleWidget(MarbleWidget *widget)
+{
+    foreach ( AbstractWeatherService* service, m_services ) {
+        service->setMarbleWidget( widget );
+    }
+}
+
 void WeatherModel::addService( AbstractWeatherService *service )
 {
     service->setFavoriteItems( favoriteItems() );

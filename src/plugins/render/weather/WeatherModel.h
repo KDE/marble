@@ -15,6 +15,7 @@
 
 #include "WeatherData.h"
 #include "GeoDataLatLonAltBox.h"
+#include "MarbleWidget.h"
 
 #include <QtCore/QStringList>
 
@@ -50,6 +51,8 @@ class WeatherModel : public AbstractDataPluginModel
     void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
     
     void downloadDescriptionFileRequested( const QUrl& url );
+
+    void setMarbleWidget(MarbleWidget *widget);
 
  Q_SIGNALS:
     void additionalItemsRequested( const GeoDataLatLonAltBox &,

@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
 #ifndef WEATHERITEM_H
@@ -13,6 +14,7 @@
 
 // Marble
 #include "AbstractDataPluginItem.h"
+#include "MarbleWidget.h"
 
 // Qt
 #include <QtCore/QMap>
@@ -43,6 +45,7 @@ class WeatherItem : public AbstractDataPluginItem
 
  public:
     WeatherItem( QObject *parent = 0 );
+    WeatherItem( MarbleWidget* widget, QObject *parent = 0 );
     ~WeatherItem();
     
     QAction *action();
@@ -83,9 +86,9 @@ class WeatherItem : public AbstractDataPluginItem
     quint8 priority() const;
     void setPriority( quint8 priority );
 
-    virtual QString creditHtml() const;
-
     void setSettings( const QHash<QString, QVariant>& settings );
+
+    void setMarbleWidget( MarbleWidget *widget );
 
     virtual QList<QAction*> actions();
 
@@ -111,6 +114,7 @@ Q_SIGNALS:
     Q_DISABLE_COPY(WeatherItem)
     WeatherItemPrivate * const d;
     friend class WeatherItemPrivate;
+    QString createFromTemplate(const QString &templateHtml);
 };
 
 } // namespace Marble

@@ -210,6 +210,20 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
     updateSettings();
 }
 
+bool WeatherPlugin::eventFilter(QObject *object, QEvent *event)
+{
+    if ( isInitialized() ) {
+        WeatherModel *weatherModel = dynamic_cast<WeatherModel*>( model() );
+        Q_ASSERT(weatherModel);
+        MarbleWidget* widget = dynamic_cast<MarbleWidget*>( object );
+        if ( widget ) {
+            weatherModel->setMarbleWidget(widget);
+        }
+    }
+
+    return AbstractDataPlugin::eventFilter( object, event );
+}
+
 void WeatherPlugin::readSettings()
 {
     if ( !m_configDialog ) {

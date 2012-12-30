@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
 // Self
@@ -22,6 +23,8 @@
 #include "WidgetGraphicsItem.h"
 #include "TinyWebBrowser.h"
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
+#include "MapInfoDialog.h"
 
 // Qt
 #include <QtCore/QCoreApplication>
@@ -51,7 +54,8 @@ class WeatherItemPrivate
     
  public:
     WeatherItemPrivate( WeatherItem *parent )
-        : m_priority( 0 ),
+        : m_marbleWidget( 0 ),
+          m_priority( 0 ),
           m_browserAction( tr( "Weather" ), parent ),
           m_favoriteAction( parent ),
           m_browser( 0 ),
@@ -290,6 +294,8 @@ class WeatherItemPrivate
                                                              WeatherData::HectoPascal ).toInt();
     }
 
+    MarbleWidget *m_marbleWidget;
+
     WeatherData m_currentWeather;
     QMap<QDate, WeatherData> m_forecastWeather;
 
@@ -320,11 +326,19 @@ class WeatherItemPrivate
     QFont WeatherItemPrivate::s_font = QFont( "Sans Serif", 8 );
 #endif
 
-WeatherItem::WeatherItem( QObject *parent )
+WeatherItem::WeatherItem(QObject *parent )
     : AbstractDataPluginItem( parent ),
     d( new WeatherItemPrivate( this ) )
 {
     setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+}
+
+WeatherItem::WeatherItem(MarbleWidget* widget, QObject *parent )
+    : AbstractDataPluginItem( parent ),
+    d( new WeatherItemPrivate( this ) )
+{
+    setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+    d->m_marbleWidget = widget;
 }
 
 WeatherItem::~WeatherItem()
@@ -458,11 +472,6 @@ void WeatherItem::setPriority( quint8 priority )
     d->m_priority = priority;
 }
 
-QString WeatherItem::creditHtml() const
-{
-    return QString();
-}
-
 void WeatherItem::setSettings( const QHash<QString, QVariant>& settings )
 {
     if ( d->m_settings == settings ) {
@@ -476,43 +485,68 @@ void WeatherItem::setSettings( const QHash<QString, QVariant>& settings )
     d->updateFavorite();
 }
 
+void WeatherItem::setMarbleWidget(MarbleWidget *widget)
+{
+    d->m_marbleWidget = widget;
+}
+
 void WeatherItem::openBrowser()
 {
-    QLocale locale = QLocale::system();
-    if( !d->m_browser ) {
-        d->m_browser = new TinyWebBrowser();
-    }
-    QString html;
-    html += "<html>";
-    html += "<body>";
-    html += "<h1>" + tr( "Weather for %1" ).arg( stationName() ) + "</h1>";
-    if ( d->m_currentWeather.isValid() ) {
-        html += "<h2>" + tr( "Current Observation" ) + "</h2>";
-        html += d->m_currentWeather.toHtml( d->temperatureUnit(),
-                                            d->speedUnit(),
-                                            d->pressureUnit() );
-    }
-    if ( !d->m_forecastWeather.isEmpty() ) {
-        html += "<h2>" + tr( "Forecasts" ) + "</h2>";
-    }
-    foreach ( const WeatherData& data, d->m_forecastWeather ) {
-        QDate date = data.dataDate();
-        html += "<h3>" + locale.standaloneDayName( date.dayOfWeek() ) + "</h3>";
-        html += data.toHtml( d->temperatureUnit(),
-                             d->speedUnit(),
-                             d->pressureUnit() );
-    }
-    QString credit = creditHtml();
-    if ( !credit.isEmpty() ) {
-        html += "<p>";
-        html += creditHtml();
-        html += "</p>";
-    }
-    html += "</body>";
-    html += "</html>";
+    if (d->m_marbleWidget) {
+        MapInfoDialog *popup = d->m_marbleWidget->mapInfoDialog();
+        popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
+        popup->setSize( QSizeF( 610, 550 ) ); // +10 pixels for the width
+        popup->setVisible( true );
 
-    d->m_browser->setHtml( html );
-    d->m_browser->show();
+        QFile weatherHtmlFile(":/marble/weather/weather.html");
+        if ( !weatherHtmlFile.open(QIODevice::ReadOnly) ) {
+            return;
+        }
+
+        QString templateHtml = weatherHtmlFile.readAll();
+        popup->setContent( createFromTemplate(templateHtml) );
+    }
+}
+
+QString WeatherItem::createFromTemplate(const QString &templateHtml)
+{
+    QString html = templateHtml;
+    QLocale locale = QLocale::system();
+    html.replace("%city_name%", stationName());
+    html.replace("%weather_situation%", "file://"+d->m_currentWeather.iconSource());
+    html.replace("%current_temp%", d->temperatureString());
+    html.replace("%current_condition%", d->m_currentWeather.conditionString());
+    html.replace("%wind_direction%", d->m_currentWeather.windDirectionString());
+    html.replace("%wind_speed%", d->m_currentWeather.windSpeedString());
+    html.replace("%humidity_level%", d->m_currentWeather.humidityString());
+    html.replace("%publish_time%", d->m_currentWeather.publishingTime().toString());
+
+    if(d->m_forecastWeather.size() < 1) {
+        html.replace("%forecast_available%", "none");
+    } else {
+        html.replace("%forecast_available%", "block");
+    }
+
+    int forecastNumber = 0;
+
+    foreach ( const WeatherData &forecast, d->m_forecastWeather ) {
+        forecastNumber++;
+        const QString suffix = QString::number(forecastNumber);
+        QDate date = forecast.dataDate();
+        html.replace("%day_f"+suffix+"%", locale.standaloneDayName(date.dayOfWeek()));
+        html.replace("%weather_situation_f"+suffix+"%", "file://"+forecast.iconSource());
+        qDebug() << "%weather_situation_"+suffix+"%" << "file://"+forecast.iconSource();
+        html.replace("%max_temp_f"+suffix+"%",
+                      forecast.maxTemperatureString(WeatherData::Celsius));
+        html.replace("%min_temp_f"+suffix+"%",
+                      forecast.minTemperatureString(WeatherData::Celsius));
+        html.replace("%condition_f"+suffix+"%", forecast.conditionString());
+        html.replace("%wind_direction_f"+suffix+"%", forecast.windDirectionString());
+        html.replace("%wind_speed_f"+suffix+"%", forecast.windSpeedString());
+        html.replace("%publish_time_f"+suffix+"%", forecast.publishingTime().toString());
+    }
+
+    return html;
 }
 
 QList<QAction*> WeatherItem::actions()

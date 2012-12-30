@@ -67,6 +67,9 @@ class WeatherPlugin : public AbstractDataPlugin, public DialogConfigurationInter
 
     void setSettings( const QHash<QString,QVariant> &settings );
 
+protected:
+    bool eventFilter(QObject *object, QEvent *event);
+
  private Q_SLOTS:
     void readSettings();
     void writeSettings();

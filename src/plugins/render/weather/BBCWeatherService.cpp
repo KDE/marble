@@ -101,6 +101,7 @@ void BBCWeatherService::fetchStationList()
 void BBCWeatherService::createItem( BBCStation station )
 {
     BBCWeatherItem *item = new BBCWeatherItem( this );
+    item->setMarbleWidget( marbleWidget() );
     item->setBbcId( station.bbcId() );
     item->setCoordinate( station.coordinate() );
     item->setPriority( station.priority() );
