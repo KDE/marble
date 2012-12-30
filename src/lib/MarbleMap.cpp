@@ -714,15 +714,15 @@ void MarbleMapPrivate::setDocument( QString key ) {
       glacierName = m_model->mapTheme()->map()->filters().at( 0 )->glaciers();
     }
     if ( key == coastName ) {
-        m_textureLayer.setCoastDocument( doc );
+        m_textureLayer.addLandDocument( doc );
     }
 
     if ( key == lakeName ) {
-        m_textureLayer.setLakeDocument( doc );
+        m_textureLayer.addSeaDocument( doc );
     }
 
     if ( key == glacierName ) {
-        m_textureLayer.setGlacierDocument( doc );
+        m_textureLayer.addSeaDocument( doc );
     }
 
     foreach ( GeoSceneLayer *layer, m_model->mapTheme()->map()->layers() ) {

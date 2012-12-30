@@ -40,11 +40,9 @@ class TextureColorizer
 
     virtual ~TextureColorizer(){}
 
-    void setCoastDocument( GeoDataDocument* coastDocument );
+    void addSeaDocument( GeoDataDocument* seaDocument );
 
-    void setGlacierDocument( GeoDataDocument* glacierDocument );
-
-    void setLakeDocument( GeoDataDocument* lakeDocument );
+    void addLandDocument( GeoDataDocument* landDocument );
 
     void setShowRelief( bool show );
 
@@ -58,9 +56,8 @@ class TextureColorizer
     VectorComposer *const m_veccomposer;
     QString m_seafile;
     QString m_landfile;
-    GeoDataDocument* m_coastDocument;
-    GeoDataDocument* m_glacierDocument;
-    GeoDataDocument* m_lakeDocument;
+    QList<GeoDataDocument*> m_seaDocuments;
+    QList<GeoDataDocument*> m_landDocuments;
     QImage m_coastImage;
     uint texturepalette[16][512];
     bool m_showRelief;

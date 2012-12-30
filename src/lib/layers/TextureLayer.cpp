@@ -174,21 +174,15 @@ QStringList TextureLayer::renderPosition() const
     return QStringList() << "SURFACE";
 }
 
-void TextureLayer::setCoastDocument( GeoDataDocument* coastDocument )
+void TextureLayer::addSeaDocument( GeoDataDocument* seaDocument )
 {
-    d->m_texcolorizer->setCoastDocument( coastDocument );
+    d->m_texcolorizer->addSeaDocument( seaDocument );
     reset();
 }
 
-void TextureLayer::setGlacierDocument( GeoDataDocument* glacierDocument )
+void TextureLayer::addLandDocument( GeoDataDocument* landDocument )
 {
-    d->m_texcolorizer->setGlacierDocument( glacierDocument );
-    reset();
-}
-
-void TextureLayer::setLakeDocument( GeoDataDocument* lakeDocument )
-{
-    d->m_texcolorizer->setLakeDocument( lakeDocument );
+    d->m_texcolorizer->addLandDocument( landDocument );
     reset();
 }
 

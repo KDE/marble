@@ -72,9 +72,6 @@ TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
                                     VectorComposer *veccomposer )
     : m_veccomposer( veccomposer ),
-      m_coastDocument( 0 ),
-      m_glacierDocument( 0 ),
-      m_lakeDocument( 0 ),
       m_textureLandPen( QPen( Qt::NoPen ) ),
       m_textureLandBrush( QBrush( QColor( 255, 0, 0 ) ) ),
       m_textureGlacierBrush( QBrush( QColor( 0, 255, 0 ) ) ),
@@ -157,19 +154,14 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
 
-void TextureColorizer::setCoastDocument( GeoDataDocument* coastDocument )
+void TextureColorizer::addSeaDocument( GeoDataDocument* seaDocument )
 {
-    m_coastDocument = coastDocument;
+    m_seaDocuments.append( seaDocument );
 }
 
-void TextureColorizer::setGlacierDocument( GeoDataDocument* glacierDocument )
+void TextureColorizer::addLandDocument( GeoDataDocument* landDocument )
 {
-    m_glacierDocument = glacierDocument;
-}
-
-void TextureColorizer::setLakeDocument( GeoDataDocument* lakeDocument )
-{
-    m_lakeDocument = lakeDocument;
+    m_landDocuments.append( landDocument );
 }
 
 void TextureColorizer::setShowRelief( bool show )
@@ -225,22 +217,18 @@ void TextureColorizer::drawIndividualDocument( GeoPainter *painter, GeoDataDocum
 
 void TextureColorizer::drawTextureMap( GeoPainter *painter )
 {
-    if ( m_coastDocument ) {
+    foreach( GeoDataDocument* doc, m_landDocuments ) {
         painter->setPen( m_textureLandPen );
         painter->setBrush( m_textureLandBrush );
-        drawIndividualDocument( painter, m_coastDocument );
+        drawIndividualDocument( painter, doc );
     }
 
-    if ( m_glacierDocument && m_glacierDocument->isVisible() ) {
-        painter->setPen( Qt::NoPen );
-        painter->setBrush( m_textureGlacierBrush );
-        drawIndividualDocument( painter, m_glacierDocument );
-    }
-
-    if ( m_lakeDocument && m_lakeDocument->isVisible() ) {
-        painter->setPen( Qt::NoPen );
-        painter->setBrush( m_textureLakeBrush );
-        drawIndividualDocument( painter, m_lakeDocument );
+    foreach( GeoDataDocument* doc, m_seaDocuments ) {
+        if ( doc->isVisible() ) {
+            painter->setPen( Qt::NoPen );
+            painter->setBrush( m_textureGlacierBrush );
+            drawIndividualDocument( painter, doc );
+        }
     }
 }
 
@@ -272,10 +260,10 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     GeoPainter painter( &m_coastImage, viewport, mapQuality, doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    if ( m_coastDocument ) {
-        drawTextureMap( &painter );
-    } else {
+    if ( m_landDocuments.isEmpty() ) {
         m_veccomposer->drawTextureMap( &painter, viewport );
+    } else {
+        drawTextureMap( &painter );
     }
 
     const qint64   radius   = viewport->radius();
