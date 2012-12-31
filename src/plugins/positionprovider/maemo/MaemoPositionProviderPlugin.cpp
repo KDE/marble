@@ -159,7 +159,7 @@ QDateTime MaemoPositionProviderPlugin::timestamp() const
 MaemoPositionProviderPlugin::MaemoPositionProviderPlugin() :
         d( new MaemoPositionProviderPluginPrivate )
 {
-    connect( &d->m_timer, SIGNAL( timeout() ), this, SLOT( update() ) );
+    connect( &d->m_timer, SIGNAL(timeout()), this, SLOT(update()) );
 }
 
 MaemoPositionProviderPlugin::~MaemoPositionProviderPlugin()

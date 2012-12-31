@@ -43,8 +43,8 @@ void QHttpHttpJob::execute()
         m_buffer = new QBuffer( &m_data );
         m_buffer->open( QIODevice::WriteOnly );
 
-        connect( m_http, SIGNAL( requestFinished( int, bool ) ),
-                 this, SLOT( httpRequestFinished( int, bool ) ) );
+        connect( m_http, SIGNAL(requestFinished(int,bool)),
+                 this, SLOT(httpRequestFinished(int,bool)) );
     }
 
     m_http->setHost( sourceUrl().host(),

@@ -174,7 +174,7 @@ void WlocatePositionProviderPlugin::update()
 {
     if ( !d->m_futureWatcher ) {
         d->m_futureWatcher = new QFutureWatcher<int>( this );
-        connect( d->m_futureWatcher, SIGNAL( finished() ), this, SLOT( handleWlocateResult() ) );
+        connect( d->m_futureWatcher, SIGNAL(finished()), this, SLOT(handleWlocateResult()) );
     }
 
     QFuture<int> future = QtConcurrent::run( &wloc_get_location, &d->m_latitude, &d->m_longitude, &d->m_quality, &d->m_ccode );

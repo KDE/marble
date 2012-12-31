@@ -29,14 +29,14 @@ void KIOHttpJob::execute()
     m_job = KIO::storedGet( KUrl( sourceUrl() ), KIO::Reload,
                             KIO::HideProgressInfo | KIO::Overwrite );
 
-    connect( m_job, SIGNAL( canceled( KJob * ) ),
-             this, SLOT( slotCanceled( KJob * ) ) );
-    connect( m_job, SIGNAL( finished( KJob * ) ),
-             this, SLOT( slotFinished( KJob * ) ) );
-    connect( m_job, SIGNAL( infoMessage( KJob *, QString, QString ) ),
-             this, SLOT( slotInfoMessage( KJob *, QString, QString ) ) );
-    connect( m_job, SIGNAL( warning( KJob *, QString, QString ) ),
-             this, SLOT( slotWarning( KJob *, QString, QString ) ) );
+    connect( m_job, SIGNAL(canceled(KJob*)),
+             this, SLOT(slotCanceled(KJob*)) );
+    connect( m_job, SIGNAL(finished(KJob*)),
+             this, SLOT(slotFinished(KJob*)) );
+    connect( m_job, SIGNAL(infoMessage(KJob*,QString,QString)),
+             this, SLOT(slotInfoMessage(KJob*,QString,QString)) );
+    connect( m_job, SIGNAL(warning(KJob*,QString,QString)),
+             this, SLOT(slotWarning(KJob*,QString,QString)) );
 }
 
 void KIOHttpJob::slotCanceled( KJob *job )

@@ -76,8 +76,8 @@ void PlacemarkPositionProviderPlugin::initialize()
 {
     if ( marbleModel() ) {
         setPlacemark( marbleModel()->trackedPlacemark() );
-        connect( marbleModel(), SIGNAL( trackedPlacemarkChanged( const GeoDataPlacemark* ) ),
-                 this, SLOT( setPlacemark( const GeoDataPlacemark * ) ) );
+        connect( marbleModel(), SIGNAL(trackedPlacemarkChanged(GeoDataPlacemark*)),
+                 this, SLOT(setPlacemark(GeoDataPlacemark*)) );
     } else {
         mDebug() << "PlacemarkPositionProviderPlugin: MarbleModel not set, cannot track placemarks.";
     }
@@ -142,9 +142,9 @@ void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *plac
     m_status      = placemark ? PositionProviderStatusAvailable : PositionProviderStatusUnavailable;
     m_speed       = 0.0;
 
-    disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );
+    disconnect( marbleModel()->clock(), SIGNAL(timeChanged()), this, SLOT(updatePosition()) );
     if ( placemark ) {
-        connect( marbleModel()->clock(), SIGNAL( timeChanged() ), this, SLOT( updatePosition() ) );
+        connect( marbleModel()->clock(), SIGNAL(timeChanged()), this, SLOT(updatePosition()) );
     }
 
     if ( oldPlacemark != m_placemark && m_placemark != 0 ) {
