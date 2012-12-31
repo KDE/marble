@@ -26,6 +26,7 @@
 #include "ViewportParams.h"
 
 #include <QtGui/QColor>
+#include <QtGui/QPen>
 #include <QtGui/QPixmap>
 #include <QtGui/QRadialGradient>
 #include <QtGui/QPushButton>
@@ -224,12 +225,12 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         QLocale::MeasurementSystem measurementSystem;
         measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-	QPen shadowPen( QColor( Oxygen::aluminumGray5 ) );
-	shadowPen.setWidthF(4.0);
+        QPen shadowPen( Oxygen::aluminumGray5 );
+        shadowPen.setWidthF(4.0);
         painter->setPen( shadowPen );
         painter->drawPolyline( segment, distanceString, LineCenter );
 
-	QPen linePen;
+        QPen linePen;
 
         if ( measurementSystem == QLocale::MetricSystem ) {
             if ( segmentLength >= 1000.0 ) {
