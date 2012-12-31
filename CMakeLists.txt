@@ -366,4 +366,4 @@ endif(QTONLY)
 
 include(MarbleCPackOptions)
 
-feature_summary(WHAT ALL)
+marble_feature_summary(WHAT ALL)

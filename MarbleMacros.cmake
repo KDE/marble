@@ -9,6 +9,16 @@ else()
   endmacro()
 endif()
 
+if ( COMMAND feature_summary )
+  macro( marble_feature_summary )
+  feature_summary( ${ARGN} )
+  endmacro()
+else()
+  macro( marble_feature_summary )
+  # Just ignore it
+  endmacro()
+endif()
+
 # the place to put in common cmake macros
 # this is needed to minimize the amount of errors to do
 macro( marble_add_plugin _target_name )
