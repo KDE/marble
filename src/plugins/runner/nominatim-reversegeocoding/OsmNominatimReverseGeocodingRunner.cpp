@@ -62,11 +62,11 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
 
     QEventLoop eventLoop;
 
-    connect( this, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-             &eventLoop, SLOT( quit() ) );
+    connect( this, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates, GeoDataPlacemark)),
+             &eventLoop, SLOT(quit()) );
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( startReverseGeocoding() ) );
+    QTimer::singleShot( 0, this, SLOT(startReverseGeocoding()) );
 
     eventLoop.exec();
 }

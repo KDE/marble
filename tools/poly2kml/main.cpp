@@ -67,7 +67,7 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
             bool inside = true;
             bool skip = false;
             QString line = stream.readLine().trimmed();
-            QStringList entries = line.split( " ", QString::SkipEmptyParts );
+            QStringList entries = line.split( QLatin1Char( ' ' ), QString::SkipEmptyParts );
             if ( entries.size() == 1 ) {
                 if ( entries.first() == "END" && inside ) {
                     inside = false;

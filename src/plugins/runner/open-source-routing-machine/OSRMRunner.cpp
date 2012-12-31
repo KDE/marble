@@ -41,8 +41,8 @@ OSRMRunner::OSRMRunner( QObject *parent ) :
     RoutingRunner( parent ),
     m_networkAccessManager()
 {
-    connect( &m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-             this, SLOT( retrieveData( QNetworkReply * ) ) );
+    connect( &m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
+             this, SLOT(retrieveData(QNetworkReply*)) );
 }
 
 OSRMRunner::~OSRMRunner()
@@ -86,11 +86,11 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
 
     QEventLoop eventLoop;
 
-    connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
-             &eventLoop, SLOT( quit() ) );
+    connect( this, SIGNAL(routeCalculated(GeoDataDocument*)),
+             &eventLoop, SLOT(quit()) );
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( get() ) );
+    QTimer::singleShot( 0, this, SLOT(get()) );
 
     eventLoop.exec();
 }
@@ -118,8 +118,8 @@ void OSRMRunner::handleError( QNetworkReply::NetworkError error )
 void OSRMRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get( m_request );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
+    connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
+             this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection );
 }
 
 void OSRMRunner::append(QString *input, const QString &key, const QString &value) const

@@ -91,7 +91,7 @@ bool JsonParser::read( QIODevice* device )
     // it is posible to read it now)
 
     if ( m_data.property( "bbox" ).isArray() ){
-        QStringList coors = m_data.property( "bbox" ).toString().split(",");
+        QStringList coors = m_data.property( "bbox" ).toString().split( QLatin1Char( ',' ) );
 
         // Load the bounding box coordinates
         west  = coors.at(0).toFloat();
@@ -138,7 +138,7 @@ bool JsonParser::read( QIODevice* device )
                 if ( it.name() == "name" ){
                     placemark->setName( it.value().toString() );
                 }else if ( !propertiesCorrect ){
-                    category = GeoDataFeature::OsmVisualCategory( it.name() + "=" + it.value().toString() );
+                    category = GeoDataFeature::OsmVisualCategory( it.name() + '=' + it.value().toString() );
 
                     if (category != 0){
                         placemark->setVisualCategory( category );
@@ -157,7 +157,7 @@ bool JsonParser::read( QIODevice* device )
                 while ( it.hasNext() ) {
                     it.next();
 
-                    QStringList coors = it.value().toString().split(",");
+                    QStringList coors = it.value().toString().split( QLatin1Char( ',' ) );
                     for (int x = 0; x < coors.size()-1 && coors.size()>1 ;){
 
                         float auxX = ( coors.at(x++).toFloat() / granularity)*(east-west)   + west;

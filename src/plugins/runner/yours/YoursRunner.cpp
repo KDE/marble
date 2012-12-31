@@ -37,7 +37,7 @@ YoursRunner::YoursRunner( QObject *parent ) :
         m_networkAccessManager()
 {
     connect( &m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
-             this, SLOT(retrieveData(QNetworkReply*)));
+             this, SLOT(retrieveData(QNetworkReply*)) );
 }
 
 YoursRunner::~YoursRunner()
@@ -73,10 +73,10 @@ void YoursRunner::retrieveRoute( const RouteRequest *route )
     QEventLoop eventLoop;
 
     connect( this, SIGNAL(routeCalculated(GeoDataDocument*)),
-             &eventLoop, SLOT(quit()));
+             &eventLoop, SLOT(quit()) );
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT(get()));
+    QTimer::singleShot( 0, this, SLOT(get()) );
 
     eventLoop.exec();
 }
@@ -85,7 +85,7 @@ void YoursRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get( m_request );
     connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
-             this, SLOT(handleError(QNetworkReply::NetworkError)));
+             this, SLOT(handleError(QNetworkReply::NetworkError)) );
 }
 
 void YoursRunner::retrieveData( QNetworkReply *reply )
