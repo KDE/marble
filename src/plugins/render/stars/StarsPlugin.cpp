@@ -135,26 +135,26 @@ QDialog *StarsPlugin::configDialog()
 
         readSettings();
 
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ), SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ), SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()) );
 
-        connect( ui_configWidget->m_constellationColorButton, SIGNAL( clicked() ), this,
-                SLOT( constellationGetColor() ) );
+        connect( ui_configWidget->m_constellationColorButton, SIGNAL(clicked()), this,
+                SLOT(constellationGetColor()) );
 
-        connect( ui_configWidget->m_constellationLabelColorButton, SIGNAL( clicked() ), this,
-                SLOT( constellationLabelGetColor() ) );
+        connect( ui_configWidget->m_constellationLabelColorButton, SIGNAL(clicked()), this,
+                SLOT(constellationLabelGetColor()) );
 
-        connect( ui_configWidget->m_dsoLabelColorButton, SIGNAL( clicked() ), this,
-                SLOT( dsoLabelGetColor() ) );
+        connect( ui_configWidget->m_dsoLabelColorButton, SIGNAL(clicked()), this,
+                SLOT(dsoLabelGetColor()) );
 
-        connect( ui_configWidget->m_eclipticColorButton, SIGNAL( clicked() ), this,
-                SLOT( eclipticGetColor() ) );
+        connect( ui_configWidget->m_eclipticColorButton, SIGNAL(clicked()), this,
+                SLOT(eclipticGetColor()) );
                 
-        connect( ui_configWidget->m_celestialEquatorColorButton, SIGNAL( clicked() ), this,
-                SLOT( celestialEquatorGetColor() ) );
+        connect( ui_configWidget->m_celestialEquatorColorButton, SIGNAL(clicked()), this,
+                SLOT(celestialEquatorGetColor()) );
 
-        connect( ui_configWidget->m_celestialPoleColorButton, SIGNAL( clicked() ), this,
-                SLOT( celestialPoleGetColor() ) );
+        connect( ui_configWidget->m_celestialPoleColorButton, SIGNAL(clicked()), this,
+                SLOT(celestialPoleGetColor()) );
 
 
 // FIXME: Could Not Make Apply Button Work.
@@ -979,11 +979,11 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     if ( renderStars != m_renderStars ) {
         if ( renderStars ) {
-            connect( marbleModel()->clock(), SIGNAL( timeChanged() ),
-                     this, SLOT( requestRepaint() ) );
+            connect( marbleModel()->clock(), SIGNAL(timeChanged()),
+                     this, SLOT(requestRepaint()) );
         } else {
-            disconnect( marbleModel()->clock(), SIGNAL( timeChanged() ),
-                        this, SLOT( requestRepaint() ) );
+            disconnect( marbleModel()->clock(), SIGNAL(timeChanged()),
+                        this, SLOT(requestRepaint()) );
         }
 
         m_renderStars = renderStars;
@@ -1096,24 +1096,24 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
             }
 
             QMenu menu;
-            QAction *constellationLinesAction = menu.addAction( tr("Show &Constellation Lines"), this, SLOT( toggleConstellationLines() ) );
+            QAction *constellationLinesAction = menu.addAction( tr("Show &Constellation Lines"), this, SLOT(toggleConstellationLines()) );
             constellationLinesAction->setCheckable( true );
             constellationLinesAction->setChecked( m_renderConstellationLines );
 
-            QAction *constellationLabelsAction = menu.addAction( tr("Show Constellation &Labels"), this, SLOT( toggleConstellationLabels() ) );
+            QAction *constellationLabelsAction = menu.addAction( tr("Show Constellation &Labels"), this, SLOT(toggleConstellationLabels()) );
             constellationLabelsAction->setCheckable( true );
             constellationLabelsAction->setChecked( m_renderConstellationLabels );
 
-            QAction *dsoAction = menu.addAction( tr("Show &Deep Sky Objects"), this, SLOT( toggleDsos() ) );
+            QAction *dsoAction = menu.addAction( tr("Show &Deep Sky Objects"), this, SLOT(toggleDsos()) );
             dsoAction->setCheckable( true );
             dsoAction->setChecked( m_renderDsos );
 
-            QAction *dsoLabelAction = menu.addAction( tr("Show Deep Sky Object Labels"), this, SLOT( toggleDsoLabels() ) );
+            QAction *dsoLabelAction = menu.addAction( tr("Show Deep Sky Object Labels"), this, SLOT(toggleDsoLabels()) );
             dsoLabelAction->setCheckable( true );
             dsoLabelAction->setChecked( m_renderDsoLabels );
 
 
-            QAction *sunAction = menu.addAction( tr("Show &Sun"), this, SLOT( toggleSun() ) );
+            QAction *sunAction = menu.addAction( tr("Show &Sun"), this, SLOT(toggleSun()) );
             sunAction->setCheckable( true );
             sunAction->setChecked( m_renderSun );
 
@@ -1121,7 +1121,7 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
             Q_ASSERT( dialog );
             menu.addSeparator();
             QAction *configAction = menu.addAction( tr( "&Configure..." ) );
-            connect( configAction, SIGNAL( triggered() ), dialog, SLOT( exec() ) );
+            connect( configAction, SIGNAL(triggered()), dialog, SLOT(exec()) );
 
             menu.exec(widget->mapToGlobal(menuEvent->pos()));
             return true;

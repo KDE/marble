@@ -344,13 +344,13 @@ QDialog *MapScaleFloatItem::configDialog()
 
         readSettings();
 
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
-                                            SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
-                                            SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
+                                            SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
+                                            SLOT(readSettings()) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked()) ,
-                this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()) ,
+                this,        SLOT(writeSettings()) );
     }
     return m_configDialog;
 }
@@ -368,7 +368,7 @@ void MapScaleFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
         }
 
         QAction *toggleAction = m_contextMenu->addAction( tr("&Ratio Scale"), this,
-                                                SLOT( toggleRatioScaleVisibility() ) );
+                                                SLOT(toggleRatioScaleVisibility()) );
         toggleAction->setCheckable( true );
         toggleAction->setChecked( m_showRatioScale );
     }

@@ -101,8 +101,8 @@ void GpsInfo::initialize ()
         setPadding( 0 );
 
         m_locale = MarbleGlobal::getInstance()->locale();
-        connect( marbleModel()->positionTracking(), SIGNAL( gpsLocation(GeoDataCoordinates,qreal) ),
-                this, SLOT( updateLocation(GeoDataCoordinates,qreal) ) );
+        connect( marbleModel()->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+                this, SLOT(updateLocation(GeoDataCoordinates,qreal)) );
     }
 }
 

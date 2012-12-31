@@ -85,8 +85,8 @@ void FileViewFloatItem::initialize()
     m_fileView->resize(100, 240);
     m_fileView->setResizeMode(QListView::Adjust);
     m_fileView->setContextMenuPolicy( Qt::CustomContextMenu );
-    connect(m_fileView, SIGNAL(customContextMenuRequested ( const QPoint & )),
-            this,       SLOT(contextMenu(const QPoint& )));
+    connect(m_fileView, SIGNAL(customContextMenuRequested(QPoint)),
+            this,       SLOT(contextMenu(QPoint)));
 }
 
 bool FileViewFloatItem::isInitialized() const
@@ -216,10 +216,10 @@ void FileViewFloatItem::contextMenu( const QPoint& pos )
     // We need the global position to move the menu.
     // pos contains the relative position.
     test->move( m_itemPosition );
-    connect( test->addAction( tr( "Open file..." ) ), SIGNAL( triggered() ),
-             this, SLOT( addFile() ) );
-    connect( test->addAction( tr( "Close this file" ) ), SIGNAL( triggered() ),
-             this, SLOT( removeFile() ) );
+    connect( test->addAction( tr( "Open file..." ) ), SIGNAL(triggered()),
+             this, SLOT(addFile()) );
+    connect( test->addAction( tr( "Close this file" ) ), SIGNAL(triggered()),
+             this, SLOT(removeFile()) );
     m_persIndex = new QPersistentModelIndex( m_fileView->indexAt( pos ) );
     test->exec();
 }
