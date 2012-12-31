@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Shou Ya <shouyatf@gmail.com>
+// Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
 #include "KmlPhotoOverlayWriter.h"
@@ -23,19 +24,18 @@ static GeoTagWriterRegistrar s_writerLookAt(
 				 kml::kmlTag_nameSpace22 ),
     new KmlPhotoOverlayWriter );
 
-bool KmlPhotoOverlayWriter::write( const GeoNode *node, GeoWriter& writer ) const
+KmlPhotoOverlayWriter::KmlPhotoOverlayWriter() : KmlOverlayTagWriter( kml::kmlTag_PhotoOverlay )
+{
+    // nothing to do
+}
+
+bool KmlPhotoOverlayWriter::writeMid( const GeoNode *node, GeoWriter &writer ) const
 {
     const GeoDataPhotoOverlay *photo_overlay =
-	static_cast<const GeoDataPhotoOverlay*>( node );
-
-    writer.writeStartElement( kml::kmlTag_PhotoOverlay );
+        static_cast<const GeoDataPhotoOverlay*>( node );
 
     writeElement( &photo_overlay->point(), writer );
-
-    writer.writeEndElement();
-
     return true;
 }
 
 }
-

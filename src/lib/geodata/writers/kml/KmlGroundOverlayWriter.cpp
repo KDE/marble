@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Shou Ya <shouyatf@gmail.com>
+// Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
 #include "KmlGroundOverlayWriter.h"
@@ -23,6 +24,26 @@ static GeoTagWriterRegistrar s_writerLookAt(
 				 kml::kmlTag_nameSpace22 ),
     new KmlGroundOverlayWriter );
 
+KmlGroundOverlayWriter::KmlGroundOverlayWriter() : KmlOverlayTagWriter( kml::kmlTag_GroundOverlay )
+{
+    // nothing to do
+}
+
+bool KmlGroundOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
+{
+    const GeoDataGroundOverlay *ground_overlay =
+        static_cast<const GeoDataGroundOverlay*>( node );
+
+    writer.writeTextElement( kml::kmlTag_altitude,
+                             QString::number(ground_overlay->altitude()) );
+    writer.writeTextElement( kml::kmlTag_altitudeMode,
+                             altitudeModeToString(ground_overlay->altitudeMode()) );
+
+    writeElement( &ground_overlay->latLonBox(), writer );
+
+    return true;
+}
+
 QString KmlGroundOverlayWriter::altitudeModeToString(AltitudeMode mode)
 {
     switch (mode) {
@@ -34,29 +55,6 @@ QString KmlGroundOverlayWriter::altitudeModeToString(AltitudeMode mode)
 	return "Absolute";
     }
     return "";
-}
-
-bool KmlGroundOverlayWriter::write( const GeoNode *node,
-				    GeoWriter& writer ) const
-{
-    const GeoDataGroundOverlay *ground_overlay =
-	static_cast<const GeoDataGroundOverlay*>( node );
-
-    writer.writeStartElement( kml::kmlTag_GroundOverlay );
-
-    writer.writeTextElement( "altitude",
-			     QString::number(ground_overlay->altitude()) );
-    writer.writeTextElement( "altitudeMode",
-			     altitudeModeToString(ground_overlay->altitudeMode()) );
-
-    writer.writeStartElement( "LatLonBox" );
-    writeElement( &ground_overlay->latLonBox(), writer );
-    writer.writeEndElement();
-
-
-    writer.writeEndElement();
-
-    return true;
 }
 
 }

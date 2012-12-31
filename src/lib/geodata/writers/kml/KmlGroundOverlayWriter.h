@@ -12,16 +12,19 @@
 #define MARBLE_KMLGROUNDOVERLAYWRITER_H
 
 #include "GeoTagWriter.h"
+#include "KmlOverlayTagWriter.h"
 
 #include "MarbleGlobal.h"
 
 namespace Marble
 {
 
-class KmlGroundOverlayWriter : public GeoTagWriter
+class KmlGroundOverlayWriter : public KmlOverlayTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    KmlGroundOverlayWriter();
+
+    bool writeMid( const GeoNode *node, GeoWriter &writer ) const;
 
 private:
     static QString altitudeModeToString(AltitudeMode mode);

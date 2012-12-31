@@ -11,18 +11,19 @@
 #ifndef MARBLE_KMLPHOTOOVERLAYWRITER_H
 #define MARBLE_KMLPHOTOOVERLAYWRITER_H
 
-#include "GeoTagWriter.h"
+#include "KmlOverlayTagWriter.h"
 
 namespace Marble
 {
 
-class KmlPhotoOverlayWriter : public GeoTagWriter
+class KmlPhotoOverlayWriter : public KmlOverlayTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    KmlPhotoOverlayWriter();
+
+    bool writeMid( const GeoNode *node, GeoWriter &writer ) const;
 };
 
 }
 
 #endif
-
