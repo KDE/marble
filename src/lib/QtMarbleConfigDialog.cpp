@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 // Own
@@ -247,10 +248,16 @@ void QtMarbleConfigDialog::readSettings()
     // Navigation
     d->ui_navigationSettings.kcfg_dragLocation->setCurrentIndex( dragLocation() );
     d->ui_navigationSettings.kcfg_onStartup->setCurrentIndex( onStartup() );
-    if( animateTargetVoyage() )
-    d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
-    else
-    d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
+    if( inertialEarthRotation() ) {
+        d->ui_navigationSettings.kcfg_inertialEarthRotation->setCheckState( Qt::Checked );
+    } else {
+        d->ui_navigationSettings.kcfg_inertialEarthRotation->setCheckState( Qt::Unchecked );
+    }
+    if( animateTargetVoyage() ) {
+        d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
+    } else {
+        d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
+    }
     int editorIndex = 0;
     if ( externalMapEditor() == "potlatch") {
         editorIndex = 1;
@@ -383,10 +390,16 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_settings->beginGroup( "Navigation" );
     d->m_settings->setValue( "dragLocation", d->ui_navigationSettings.kcfg_dragLocation->currentIndex() );
     d->m_settings->setValue( "onStartup", d->ui_navigationSettings.kcfg_onStartup->currentIndex() );
-    if( d->ui_navigationSettings.kcfg_animateTargetVoyage->checkState() == Qt::Checked )
+    if( d->ui_navigationSettings.kcfg_inertialEarthRotation->checkState() == Qt::Checked ) {
+        d->m_settings->setValue( "inertialEarthRotation", true );
+    } else {
+        d->m_settings->setValue( "inertialEarthRotation", false );
+    }
+    if( d->ui_navigationSettings.kcfg_animateTargetVoyage->checkState() == Qt::Checked ) {
         d->m_settings->setValue( "animateTargetVoyage", true );
-    else
+    } else {
         d->m_settings->setValue( "animateTargetVoyage", false );
+    }
     if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 0 ) {
         d->m_settings->setValue( "externalMapEditor", "" );
     } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 1 ) {
@@ -525,6 +538,11 @@ QString QtMarbleConfigDialog::externalMapEditor() const
 bool QtMarbleConfigDialog::animateTargetVoyage() const
 {
     return d->m_settings->value( "Navigation/animateTargetVoyage", false ).toBool();
+}
+
+bool QtMarbleConfigDialog::inertialEarthRotation() const
+{
+    return d->m_settings->value( "Navigation/inertialEarthRotation", true ).toBool();
 }
 
 int QtMarbleConfigDialog::volatileTileCacheLimit() const

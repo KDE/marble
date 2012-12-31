@@ -5,9 +5,10 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2010 Torsten Rahn <tackat@kde.org>
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
+// Copyright 2006-2010 Torsten Rahn        <tackat@kde.org>
+// Copyright 2007      Inge Wallin         <ingwa@kde.org>
+// Copyright 2012      Illya Kovalevskyy   <illya.kovalevskyy@gmail.com>
+// Copyright 2012      Mohammed Nafees     <nafees.technocool@gmail.com>
 //
 
 #include "QtMainWindow.h"
@@ -100,7 +101,6 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
         m_downloadRegionAction( 0 ),
-        m_kineticScrollingAction( 0 ),
         m_osmEditAction( 0 ),
         m_zoomLabel( 0 ),
         m_mapViewWindow( 0 ),
@@ -262,10 +262,6 @@ void MainWindow::createActions()
      m_workOfflineAct->setCheckable( true );
      connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
 
-     m_kineticScrollingAction = new QAction( tr( "&Kinetic Scrolling" ), this);
-     m_kineticScrollingAction->setCheckable( true );
-     connect( m_kineticScrollingAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleKineticScrolling( bool ) ) );
-
      m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
      m_showAtmosphereAct->setVisible( false );
      m_showAtmosphereAct->setCheckable( true );
@@ -340,7 +336,6 @@ void MainWindow::createMenus()
     // Do not create too many menu entries on a MID
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         menuBar()->addAction( m_workOfflineAct );
-        menuBar()->addAction( m_kineticScrollingAction );
         //menuBar()->addAction( m_sideBarAct );
         /** @todo: Full screen cannot be left on Maemo currently (shortcuts not working) */
         //menuBar()->addAction( m_fullScreenAct );
@@ -799,12 +794,6 @@ void MainWindow::workOffline( bool offline )
     m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
 }
 
-void MainWindow::toggleKineticScrolling( bool enabled )
-{
-    m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( enabled );
-    m_kineticScrollingAction->setChecked( enabled ); // Sync state with the GUI
-}
-
 void MainWindow::showAtmosphere( bool isChecked )
 {
     m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
@@ -1161,8 +1150,6 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();
          m_lockFloatItemsAct->setChecked( isLocked );
          lockPosition(isLocked);
-
-         toggleKineticScrolling( settings.value( "kineticScrolling", !smallScreen ).toBool() );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
@@ -1334,7 +1321,6 @@ void MainWindow::writeSettings()
          settings.setValue( "quitRadius", quitRadius );
 
          settings.setValue( "lockFloatItemPositions", m_lockFloatItemsAct->isChecked() );
-         settings.setValue( "kineticScrolling", m_controlView->marbleWidget()->inputHandler()->kineticScrollingEnabled() );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
@@ -1454,6 +1440,7 @@ void MainWindow::updateSettings()
     updateStatusBar();
 
     m_controlView->marbleWidget()->setAnimationsEnabled( m_configDialog->animateTargetVoyage() );
+    m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( m_configDialog->inertialEarthRotation() );
     if ( !m_configDialog->externalMapEditor().isEmpty() ) {
         m_controlView->setExternalMapEditor( m_configDialog->externalMapEditor() );
     }

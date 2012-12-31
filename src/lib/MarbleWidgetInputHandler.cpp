@@ -60,7 +60,7 @@ public:
     Qt::MouseButtons m_disabledMouseButtons;
     qreal m_wheelZoomTargetDistance;
     bool m_panViaArrowsEnabled;
-    bool m_kineticScrollingEnabled;
+    bool m_inertialEarthRotation;
 };
 
 MarbleWidgetInputHandler::Protected::Protected( MarbleWidget *widget )
@@ -71,7 +71,7 @@ MarbleWidgetInputHandler::Protected::Protected( MarbleWidget *widget )
       m_disabledMouseButtons( Qt::NoButton ),
       m_wheelZoomTargetDistance( 0.0 ),
       m_panViaArrowsEnabled( true ),
-      m_kineticScrollingEnabled( true )
+      m_inertialEarthRotation( true )
 {
 }
 
@@ -133,14 +133,14 @@ bool MarbleWidgetInputHandler::panViaArrowsEnabled() const
     return d->m_panViaArrowsEnabled;
 }
 
-void MarbleWidgetInputHandler::setKineticScrollingEnabled( bool enabled )
+void MarbleWidgetInputHandler::setInertialEarthRotationEnabled( bool enabled )
 {
-    d->m_kineticScrollingEnabled = enabled;
+    d->m_inertialEarthRotation = enabled;
 }
 
-bool MarbleWidgetInputHandler::kineticScrollingEnabled() const
+bool MarbleWidgetInputHandler::inertialEarthRotationEnabled() const
 {
-    return d->m_kineticScrollingEnabled;
+    return d->m_inertialEarthRotation;
 }
 
 class MarbleWidgetDefaultInputHandler::Private
@@ -428,7 +428,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( d->m_leftPressed ) {
                 d->m_leftPressed = false;
 
-                if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                if ( MarbleWidgetInputHandler::d->m_inertialEarthRotation ) {
                     d->m_kineticSpinning.start();
                 } else {
                     MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
@@ -502,7 +502,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 d->m_leftPressedDirection = 1;
 
-                if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                if ( MarbleWidgetInputHandler::d->m_inertialEarthRotation ) {
                     d->m_kineticSpinning.stop();
                 }
 
@@ -535,7 +535,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_startingRadius = MarbleWidgetInputHandler::d->m_widget->radius();
                 d->m_midPressedY = event->y();
 
-                if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                if ( MarbleWidgetInputHandler::d->m_inertialEarthRotation ) {
                     d->m_kineticSpinning.start();
                 }
 
@@ -569,7 +569,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 emit mouseClickScreenPosition( d->m_leftPressedX, d->m_leftPressedY );
 
                 d->m_leftPressed = false;
-                if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                if ( MarbleWidgetInputHandler::d->m_inertialEarthRotation ) {
                     d->m_kineticSpinning.start();
                 } else {
                     MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
@@ -611,7 +611,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     const qreal posLon = d->m_leftPressedLon - 90.0 * d->m_leftPressedDirection * deltax / radius;
                     const qreal posLat = d->m_leftPressedLat + 90.0 * deltay / radius;
                     MarbleWidgetInputHandler::d->m_widget->centerOn( posLon, posLat );
-                    if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+                    if ( MarbleWidgetInputHandler::d->m_inertialEarthRotation ) {
                         d->m_kineticSpinning.setPosition( posLon, posLat );
                     }
                 }
@@ -633,7 +633,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         else {
             d->m_leftPressed = false;
 
-            if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+            if ( MarbleWidgetInputHandler::d->m_inertialEarthRotation ) {
                 d->m_kineticSpinning.start();
             }
 
@@ -669,7 +669,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                                                                      MarbleWidgetInputHandler::d->m_widget->moveStep() * (qreal)(+dirY) );
             }
 
-            if ( !MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+            if ( !MarbleWidgetInputHandler::d->m_inertialEarthRotation ) {
                 MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
             }
         }
@@ -753,7 +753,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             qreal newDistance = marbleWidget->distanceFromZoom( zoom + steps );
             MarbleWidgetInputHandler::d->m_wheelZoomTargetDistance = newDistance;
             d->ZoomAt(MarbleWidgetInputHandler::d->m_widget, wheelevt->pos(), newDistance);
-            if ( MarbleWidgetInputHandler::d->m_kineticScrollingEnabled ) {
+            if ( MarbleWidgetInputHandler::d->m_inertialEarthRotation ) {
                 d->m_kineticSpinning.jumpToPosition( MarbleWidgetInputHandler::d->m_widget->centerLongitude(),
                                                      MarbleWidgetInputHandler::d->m_widget->centerLatitude() );
             }

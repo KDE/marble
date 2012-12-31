@@ -469,7 +469,6 @@ void MarblePart::readSettings()
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
     m_lockFloatItemsAct->setChecked(MarbleSettings::lockFloatItemPositions());
     lockFloatItemPosition(MarbleSettings::lockFloatItemPositions());
-    m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( MarbleSettings::kineticScrolling() );
 
     setShowBookmarks( MarbleSettings::showBookmarks() );
 
@@ -1589,6 +1588,7 @@ void MarblePart::updateSettings()
 
     // External map editor
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
+    m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( MarbleSettings::inertialEarthRotation() );
 }
 
 void MarblePart::writePluginSettings()

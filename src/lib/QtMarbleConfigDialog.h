@@ -50,6 +50,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     int onStartup() const;
     bool animateTargetVoyage() const;
     QString externalMapEditor() const;
+    bool inertialEarthRotation() const;
 
     // Cache Settings
     int volatileTileCacheLimit() const;

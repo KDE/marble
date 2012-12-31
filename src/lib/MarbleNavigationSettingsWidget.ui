@@ -6,63 +6,118 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>347</width>
-    <height>196</height>
+    <width>333</width>
+    <height>257</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Marble Cache Settings</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_dragLocation">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>118</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>&amp;Drag location:</string>
-       </property>
-       <property name="buddy">
-        <cstring>kcfg_dragLocation</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QComboBox" name="kcfg_dragLocation">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Dragging and  Animation</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_dragLocation">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>118</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>&amp;Drag location:</string>
+          </property>
+          <property name="buddy">
+           <cstring>kcfg_dragLocation</cstring>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="kcfg_dragLocation">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;While dragging the mouse there are two standard behaviours when dealing with a virtual globe:&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The location below mouse pointer will follow the cursor exactly: As a result e.g. the north pole will not stay at the top which can lead to confusion. By default Marble makes sure that north is always up which results in a dragging behaviour where the location below the mouse pointer slightly &quot;detaches&quot; from the cursor. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <item>
-        <property name="text">
-         <string>Keep Planet Axis Vertically</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Keep Planet Axis Vertically</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Follow Mouse Pointer</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="kcfg_inertialEarthRotation">
+        <property name="toolTip">
+         <string>Use kinetic spinning when dragging the map</string>
         </property>
-       </item>
-       <item>
         <property name="text">
-         <string>Follow Mouse Pointer</string>
+         <string>&amp;Inertial Earth Rotation</string>
         </property>
-       </item>
-      </widget>
-     </item>
-     <item row="1" column="0">
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="kcfg_animateTargetVoyage">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;When searching for a location Marble can either move instantly to the new location or it can show a travel animation from the previous place to the new place.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>&amp;Animate voyage to the target</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="spacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
+     </property>
+     <item row="0" column="0">
       <widget class="QLabel" name="label_onStartup">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -84,7 +139,7 @@ p, li { white-space: pre-wrap; }
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="0" column="1">
       <widget class="QComboBox" name="kcfg_onStartup">
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -104,7 +159,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="1" column="0">
       <widget class="QLabel" name="label_externalEditor">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -126,7 +181,7 @@ p, li { white-space: pre-wrap; }
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="1" column="1">
       <widget class="QComboBox" name="kcfg_externalMapEditor">
        <property name="toolTip">
         <string>&lt;p&gt;The application that is launched to edit maps. Potlatch (default) requires a web browser with flash support to be installed. When selecting josm or merkaartor, make sure that the respective application is installed.&lt;/p&gt;</string>
@@ -156,19 +211,6 @@ p, li { white-space: pre-wrap; }
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_animateTargetVoyage">
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;When searching for a location Marble can either move instantly to the new location or it can show a travel animation from the previous place to the new place.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string>&amp;Animate voyage to the target</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <spacer>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -176,7 +218,7 @@ p, li { white-space: pre-wrap; }
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>221</height>
+       <height>20</height>
       </size>
      </property>
     </spacer>
