@@ -111,7 +111,7 @@ void DeclarativeDataPluginPrivate::parseListModel( QAbstractListModel *listModel
 
 void DeclarativeDataPluginPrivate::parseObject( QObject *object )
 {
-    int count;
+    int count = 0;
     QMetaObject const * meta = object->metaObject();
     for( int i = 0; i < meta->propertyCount(); ++i ) {
         if( qstrcmp( meta->property(i).name(), "count" ) == 0 ) {
