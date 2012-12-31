@@ -127,7 +127,7 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
 
     QString target = marbleModel()->planetId();
 
-    if ( !(    m_radius == viewport->radius() 
+    if ( !(    m_radius == viewport->radius()
             && viewportWidth == m_viewportWidth
             && m_target == target
             && m_scaleInitDone ) )
@@ -210,17 +210,27 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
     painter->drawRect( m_leftBarMargin, fontHeight + 3,
                        m_bestDivisor * m_pixelInterval, m_scaleBarHeight );
 
+    painter->setPen(   QColor( Oxygen::aluminumGray4 ) );
+    painter->drawLine( m_leftBarMargin + 1, fontHeight + 2 + m_scaleBarHeight,
+                       m_leftBarMargin + m_bestDivisor * m_pixelInterval - 1, fontHeight + 2 + m_scaleBarHeight );
+    painter->setPen(   QColor( Qt::black ) );
+
     painter->setBrush( QColor( Qt::black ) );
 
     QString  intervalStr;
     int      lastStringEnds     = 0;
     int      currentStringBegin = 0;
- 
+
     for ( int j = 0; j <= m_bestDivisor; j += 2 ) {
-        if ( j < m_bestDivisor )
+        if ( j < m_bestDivisor ) {
             painter->drawRect( m_leftBarMargin + j * m_pixelInterval,
                                fontHeight + 3, m_pixelInterval - 1,
                                m_scaleBarHeight );
+
+	    painter->setPen(   QColor( Oxygen::aluminumGray5 ) );
+	    painter->drawLine( m_leftBarMargin + j * m_pixelInterval + 1, fontHeight + 4,
+			       m_leftBarMargin + (j + 1) * m_pixelInterval - 1, fontHeight + 4 );
+	    painter->setPen(   QColor( Qt::black ) );
 
             QLocale::MeasurementSystem distanceUnit;
             distanceUnit = MarbleGlobal::getInstance()->locale()->measurementSystem();
@@ -239,8 +249,8 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
 
             case QLocale::ImperialSystem:
                 m_unit = tr("mi");
-                intervalStr.setNum( j * m_valueInterval / 1000 );                
-                
+                intervalStr.setNum( j * m_valueInterval / 1000 );
+
                 if ( m_bestDivisor * m_valueInterval > 3800 ) {
                     intervalStr.setNum( j * m_valueInterval / 1000 );
                 }
@@ -249,6 +259,7 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
                 }
                 break;
             }
+	}
 
         painter->setFont( font() );
 
@@ -259,14 +270,14 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
         }
 
         if( j == m_bestDivisor ) {
-            currentStringBegin = ( j * m_pixelInterval 
+            currentStringBegin = ( j * m_pixelInterval
                                    - QFontMetrics( font() ).boundingRect( intervalStr ).width() );
         }
         else {
-            currentStringBegin = ( j * m_pixelInterval 
+            currentStringBegin = ( j * m_pixelInterval
                                    - QFontMetrics( font() ).width( intervalStr ) / 2 );
         }
-        
+
         if ( lastStringEnds < currentStringBegin ) {
             painter->drawText( currentStringBegin, fontHeight, intervalStr );
             lastStringEnds = currentStringBegin + QFontMetrics( font() ).width( intervalStr );
@@ -283,7 +294,7 @@ void MapScaleFloatItem::calcScaleBar()
 {
     qreal  magnitude = 1;
 
-    // First we calculate the exact length of the whole area that is possibly 
+    // First we calculate the exact length of the whole area that is possibly
     // available to the scalebar in kilometers
     int  magValue = (int)( m_scaleBarDistance );
 
@@ -291,7 +302,7 @@ void MapScaleFloatItem::calcScaleBar()
     // and store them in magValue.
     while ( magValue >= 100 ) {
         magValue  /= 10;
-        magnitude *= 10; 
+        magnitude *= 10;
     }
 
     m_bestDivisor = 4;
@@ -299,7 +310,7 @@ void MapScaleFloatItem::calcScaleBar()
 
     for ( int i = 0; i < magValue; i++ ) {
         // We try to find the lowest divisor between 4 and 8 that
-        // divides magValue without remainder. 
+        // divides magValue without remainder.
         for ( int j = 4; j < 9; j++ ) {
             if ( ( magValue - i ) % j == 0 ) {
                 // We store the very first result we find and store
@@ -308,7 +319,7 @@ void MapScaleFloatItem::calcScaleBar()
                 bestMagValue  = magValue - i;
 
                 // Stop all for loops and end search
-                i = magValue; 
+                i = magValue;
                 j = 9;
             }
         }
@@ -330,7 +341,7 @@ QDialog *MapScaleFloatItem::configDialog()
         m_configDialog = new QDialog();
         ui_configWidget = new Ui::MapScaleConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
-    
+
         readSettings();
 
         connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
@@ -372,10 +383,10 @@ void MapScaleFloatItem::toolTipEvent( QHelpEvent *e )
 }
 
 void MapScaleFloatItem::readSettings()
-{    
+{
     if ( !m_configDialog )
         return;
-    
+
     if ( m_showRatioScale ) {
         ui_configWidget->m_showRatioScaleCheckBox->setCheckState( Qt::Checked );
     }
