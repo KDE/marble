@@ -132,7 +132,8 @@ class MarblePart: public KParts::ReadOnlyPart
     void  controlSun();
     void  controlTime();
     void  showSun( bool );
-    void  showSunInZenith( bool );
+    void  lockToSubSolarPoint( bool );
+    void  setSubSolarPointIconVisible( bool );
     void  workOffline( bool );
 
     void  setupStatusBar();
@@ -233,7 +234,8 @@ class MarblePart: public KParts::ReadOnlyPart
 
     // Action for the tool bar
     KToggleAction *m_showShadow;
-    KToggleAction *m_showSunInZenith;
+    KToggleAction *m_lockToSubSolarPoint;
+    KToggleAction *m_setSubSolarPointIconVisible;
 
     KConfigDialog *m_configDialog;
 

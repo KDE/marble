@@ -377,8 +377,10 @@ void MarblePart::controlSun()
                  this,               SLOT ( showSun( bool ) ) );
         connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
                  m_showShadow,               SLOT ( setChecked( bool ) ) );
-        connect( m_sunControlDialog, SIGNAL( showSunInZenith( bool ) ),
-                 m_showSunInZenith,               SLOT ( setChecked( bool ) ) );
+        connect( m_sunControlDialog,    SIGNAL( isLockedToSubSolarPoint(bool) ),
+                 m_lockToSubSolarPoint, SLOT ( setChecked( bool ) ) );
+        connect( m_sunControlDialog,         SIGNAL( isSubSolarPointIconVisible(bool) ),
+                 m_setSubSolarPointIconVisible, SLOT ( setChecked( bool ) ) );
     }
 
     m_sunControlDialog->show();
@@ -404,9 +406,14 @@ void MarblePart::showSun( bool active )
     m_sunControlDialog->setSunShading( active );
 }
 
-void MarblePart::showSunInZenith( bool active )
+void MarblePart::lockToSubSolarPoint( bool lock )
 {
-    m_controlView->marbleWidget()->setShowSunInZenith( active );
+    m_controlView->marbleWidget()->setLockToSubSolarPoint( lock );
+}
+
+void MarblePart::setSubSolarPointIconVisible( bool show )
+{
+    m_controlView->marbleWidget()->setSubSolarPointIconVisible( show );
 }
 
 void MarblePart::workOffline( bool offline )
@@ -476,8 +483,10 @@ void MarblePart::readSettings()
     m_controlView->marbleWidget()->setShowSunShading( MarbleSettings::showSun() );
     m_showShadow->setChecked( MarbleSettings::showSun() );
     m_controlView->marbleWidget()->setShowCityLights( MarbleSettings::showCitylights() );
-    m_controlView->marbleWidget()->setShowSunInZenith( MarbleSettings::centerOnSun() );
-    m_showSunInZenith->setChecked( MarbleSettings::centerOnSun() );
+    m_controlView->marbleWidget()->setSubSolarPointIconVisible( MarbleSettings::subSolarPointIconVisible() );
+    m_controlView->marbleWidget()->setLockToSubSolarPoint( MarbleSettings::lockToSubSolarPoint() );
+    m_setSubSolarPointIconVisible->setChecked( MarbleSettings::subSolarPointIconVisible() );
+    m_lockToSubSolarPoint->setChecked( MarbleSettings::lockToSubSolarPoint() );
 
     // View
     m_initialGraphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
@@ -676,7 +685,8 @@ void MarblePart::writeSettings()
     // Sun
     MarbleSettings::setShowSun( m_controlView->marbleWidget()->showSunShading() );
     MarbleSettings::setShowCitylights( m_controlView->marbleWidget()->showCityLights() );
-    MarbleSettings::setCenterOnSun( m_controlView->marbleWidget()->showSunInZenith() );
+    MarbleSettings::setLockToSubSolarPoint( m_controlView->marbleWidget()->isLockedToSubSolarPoint() );
+    MarbleSettings::setSubSolarPointIconVisible( m_controlView->marbleWidget()->isSubSolarPointIconVisible() );
 
     // Caches
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->
@@ -932,13 +942,20 @@ void MarblePart::setupActions()
     m_showShadow->setToolTip(i18n("Shows and hides the shadow of the sun"));
     connect( m_showShadow, SIGNAL( triggered( bool ) ), this, SLOT( showSun( bool ) ));
 
-    //Toggle Action: Show sun zenith
-    m_showSunInZenith = new KToggleAction( i18n( "Show Zenith" ), this );
-    m_showSunInZenith->setIcon( KIcon( MarbleDirs::path( "svg/sunshine.png" ) ) );
-    actionCollection()->addAction( "sun_zenith", m_showSunInZenith );
-    m_showSunInZenith->setCheckedState( KGuiItem( i18n( "Hide Zenith" ) ) );
-    m_showSunInZenith->setToolTip( i18n( "Shows and hides the zenith location of the sun" ) );
-    connect( m_showSunInZenith, SIGNAL( triggered( bool ) ), this, SLOT( showSunInZenith( bool ) ));
+    //Toggle Action: Show Sun icon on the Sub-Solar Point
+    m_setSubSolarPointIconVisible = new KToggleAction( i18n( "Show sun icon on the Sub-Solar Point" ), this );
+    actionCollection()->addAction( "show_icon_on_subsolarpoint", m_setSubSolarPointIconVisible );
+    m_setSubSolarPointIconVisible->setCheckedState( KGuiItem( i18n( "Hide sun icon on the Sub-Solar Point" ) ) );
+    m_setSubSolarPointIconVisible->setToolTip( i18n( "Show sun icon on the sub-solar point" ) );
+    connect( m_setSubSolarPointIconVisible, SIGNAL( triggered( bool ) ), this, SLOT( subSolarPointIconVisible( bool ) ));
+
+
+    //Toggle Action: Lock globe to the Sub-Solar Point
+    m_lockToSubSolarPoint = new KToggleAction( i18n( "Lock Globe to the Sub-Solar Point" ), this );
+    actionCollection()->addAction( "lock_to_subsolarpoint", m_lockToSubSolarPoint );
+    m_lockToSubSolarPoint->setCheckedState( KGuiItem( i18n( "Unlock Globe to the Sub-Solar Point" ) ) );
+    m_lockToSubSolarPoint->setToolTip( i18n( "Lock globe to the sub-solar point" ) );
+    connect( m_lockToSubSolarPoint, SIGNAL( triggered( bool ) ), this, SLOT( lockToSubSolarPoint( bool ) ));
 
     //    FIXME: Discuss if this is the best place to put this
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();

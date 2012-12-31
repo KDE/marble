@@ -158,7 +158,10 @@
   <entry name="showCitylights" type="Bool" >
    <default>false</default>
   </entry>
-  <entry name="centerOnSun" type="Bool" >
+  <entry name="subSolarPointIconVisible" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry name="lockToSubSolarPoint" type="Bool" >
    <default>false</default>
   </entry>
  </group>

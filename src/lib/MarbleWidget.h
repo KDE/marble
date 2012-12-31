@@ -122,7 +122,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showClouds   READ showClouds      WRITE setShowClouds)
     Q_PROPERTY(bool showSunShading READ showSunShading WRITE setShowSunShading)
     Q_PROPERTY(bool showCityLights READ showCityLights WRITE setShowCityLights)
-    Q_PROPERTY(bool showSunInZenith READ showSunInZenith WRITE setShowSunInZenith)
+    Q_PROPERTY(bool isLockedToSubSolarPoint READ isLockedToSubSolarPoint WRITE setLockToSubSolarPoint)
+    Q_PROPERTY(bool isSubSolarPointIconVisible READ isSubSolarPointIconVisible WRITE setSubSolarPointIconVisible)
     Q_PROPERTY(bool showAtmosphere READ showAtmosphere WRITE setShowAtmosphere)
     Q_PROPERTY(bool showCrosshairs READ showCrosshairs WRITE setShowCrosshairs)
 
@@ -447,10 +448,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool showCityLights() const;
 
     /**
-     * @brief  Return whether the sun is shown in the zenith.
-     * @return visibility of sun in the zenith
+     * @brief  Return whether the globe is locked to the sub solar point
+     * @return if globe is locked to sub solar point
      */
-    bool showSunInZenith() const;
+    bool isLockedToSubSolarPoint() const;
+
+    /**
+     * @brief  Return whether the sun icon is shown in the sub solar point.
+     * @return visibility of the sun icon in the sub solar point
+     */
+    bool isSubSolarPointIconVisible() const;
 
     /**
      * @brief  Return whether the atmospheric glow is visible.
@@ -788,10 +795,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowCityLights( bool visible );
 
     /**
-     * @brief Set whether the sun is visible in the zenith.
-     * @param visible  visibility of the sun in the zenith
+     * @brief  Set the globe locked to the sub solar point
+     * @param  vsible if globe is locked to the sub solar point
      */
-    void setShowSunInZenith( bool visible );
+    void setLockToSubSolarPoint( bool visible );
+
+    /**
+     * @brief  Set whether the sun icon is shown in the sub solar point
+     * @param  visible if the sun icon is shown in the sub solar point
+     */
+    void setSubSolarPointIconVisible( bool visible );
 
     /**
      * @brief  Set whether the atmospheric glow is visible

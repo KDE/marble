@@ -144,6 +144,8 @@ public:
     PlacemarkLayer   m_placemarkLayer;
     VectorTileLayer  m_vectorTileLayer;
 
+    bool m_isLockedToSubSolarPoint;
+    bool m_isSubSolarPointIconVisible;
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
@@ -548,20 +550,14 @@ bool MarbleMap::showCityLights() const
     return d->m_textureLayer.showCityLights();
 }
 
-bool MarbleMap::showSunInZenith() const
+bool MarbleMap::isLockedToSubSolarPoint() const
 {
-    bool visible = false;
+    return d->m_isLockedToSubSolarPoint;
+}
 
-    QList<RenderPlugin *> pluginList = renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        if ( (*i)->nameId() == "sun" ) {
-            visible = (*i)->visible();
-        }
-    }
-
-    return visible;
+bool MarbleMap::isSubSolarPointIconVisible() const
+{
+    return d->m_isSubSolarPointIconVisible;
 }
 
 bool MarbleMap::showAtmosphere() const
@@ -1080,27 +1076,29 @@ void MarbleMap::setShowCityLights( bool visible )
     setPropertyValue( "citylights", visible );
 }
 
-void MarbleMap::setShowSunInZenith( bool visible )
+void MarbleMap::setLockToSubSolarPoint( bool visible )
 {
     disconnect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
                 this,                     SLOT( centerOn( qreal, qreal ) ) );
 
-    QList<RenderPlugin *> pluginList = renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        if ( (*i)->nameId() == "sun" ) {
-            (*i)->setVisible( visible );
-        }
+    if( isLockedToSubSolarPoint() != visible ) {
+        d->m_isLockedToSubSolarPoint = visible;
     }
 
-    if ( showSunInZenith() ) {
+    if ( isLockedToSubSolarPoint() ) {
         connect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
                  this,                     SLOT( centerOn( qreal, qreal ) ) );
 
         centerOn( d->m_model->sunLocator()->getLon(), d->m_model->sunLocator()->getLat() );
     } else if ( visible ) {
         mDebug() << "Ignoring centering on sun, since the sun plugin is not loaded.";
+    }
+}
+
+void MarbleMap::setSubSolarPointIconVisible( bool visible )
+{
+    if ( isSubSolarPointIconVisible() != visible ) {
+        d->m_isSubSolarPointIconVisible = visible;
     }
 }
 

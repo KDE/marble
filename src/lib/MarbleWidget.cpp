@@ -8,6 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 #include "MarbleWidget.h"
@@ -450,9 +451,14 @@ bool MarbleWidget::showCityLights() const
     return d->m_map.showCityLights();
 }
 
-bool MarbleWidget::showSunInZenith() const
+bool MarbleWidget::isLockedToSubSolarPoint() const
 {
-    return d->m_map.showSunInZenith();
+    return d->m_map.isLockedToSubSolarPoint();
+}
+
+bool MarbleWidget::isSubSolarPointIconVisible() const
+{
+    return d->m_map.isSubSolarPointIconVisible();
 }
 
 bool MarbleWidget::showAtmosphere() const
@@ -938,19 +944,35 @@ void MarbleWidget::setShowCityLights( bool visible )
     update();
 }
 
-void MarbleWidget::setShowSunInZenith( bool visible )
+void MarbleWidget::setLockToSubSolarPoint( bool visible )
 {
     disconnect( d->m_model.sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
                 this,                    SLOT( centerOn( qreal, qreal ) ) );
 
-    if ( d->m_map.showSunInZenith() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
-        d->m_map.setShowSunInZenith( visible );
-        setInputEnabled( !d->m_map.showSunInZenith() );
+    if ( d->m_map.isLockedToSubSolarPoint() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
+        d->m_map.setLockToSubSolarPoint( visible );
+        setInputEnabled( !d->m_map.isLockedToSubSolarPoint() );
     }
 
-    if ( d->m_map.showSunInZenith() ) {
+    if ( d->m_map.isLockedToSubSolarPoint() ) {
         connect( d->m_model.sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
                  this,                    SLOT( centerOn( qreal, qreal ) ) );
+    }
+}
+
+void MarbleWidget::setSubSolarPointIconVisible( bool visible )
+{
+    if ( d->m_map.isSubSolarPointIconVisible() != visible ) {
+        d->m_map.setSubSolarPointIconVisible( visible );
+    }
+
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
+        if ( (*i)->nameId() == "sun" ) {
+            (*i)->setVisible( visible );
+        }
     }
 }
 

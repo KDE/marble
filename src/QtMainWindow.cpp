@@ -1155,7 +1155,8 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
      settings.beginGroup( "Sun" );
          m_controlView->marbleWidget()->setShowSunShading( settings.value( "showSun", false ).toBool() );
          m_controlView->marbleWidget()->setShowCityLights( settings.value( "showCitylights", false ).toBool() );
-         m_controlView->marbleWidget()->setShowSunInZenith( settings.value( "centerOnSun", false ).toBool() );
+         m_controlView->marbleWidget()->setLockToSubSolarPoint( settings.value( "lockToSubSolarPoint", false ).toBool() );
+         m_controlView->marbleWidget()->setSubSolarPointIconVisible( settings.value( "subSolarPointIconVisible", false ).toBool() );
      settings.endGroup();
 
      settings.beginGroup( "Time" );
@@ -1324,9 +1325,10 @@ void MainWindow::writeSettings()
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
-         settings.setValue( "showSun",        m_controlView->marbleWidget()->showSunShading() );
+         settings.setValue( "showSun", m_controlView->marbleWidget()->showSunShading() );
          settings.setValue( "showCitylights", m_controlView->marbleWidget()->showCityLights() );
-         settings.setValue( "centerOnSun",    m_controlView->marbleWidget()->showSunInZenith() );
+         settings.setValue( "lockToSubSolarPoint", m_controlView->marbleWidget()->isLockedToSubSolarPoint() );
+         settings.setValue( "subSolarPointIconVisible", m_controlView->marbleWidget()->isSubSolarPointIconVisible() );
      settings.endGroup();
 
       settings.beginGroup( "Time" );
