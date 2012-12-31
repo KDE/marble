@@ -947,7 +947,7 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "show_icon_on_subsolarpoint", m_setSubSolarPointIconVisible );
     m_setSubSolarPointIconVisible->setCheckedState( KGuiItem( i18n( "Hide sun icon on the Sub-Solar Point" ) ) );
     m_setSubSolarPointIconVisible->setToolTip( i18n( "Show sun icon on the sub-solar point" ) );
-    connect( m_setSubSolarPointIconVisible, SIGNAL( triggered( bool ) ), this, SLOT( subSolarPointIconVisible( bool ) ));
+    connect( m_setSubSolarPointIconVisible, SIGNAL( triggered( bool ) ), this, SLOT( setSubSolarPointIconVisible( bool ) ));
 
 
     //Toggle Action: Lock globe to the Sub-Solar Point
