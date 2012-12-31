@@ -17,7 +17,6 @@
 #include <QtCore/QRect>
 #include <QtCore/qmath.h>
 #include <QtGui/QFileDialog>
-#include <QtGui/QMessageBox>
 #include <QtGui/QPushButton>
 #include <QtGui/QColorDialog>
 #include <QtGui/QTransform>
@@ -410,8 +409,8 @@ void PositionMarker::loadCustomCursor( const QString& filename, bool useCursor )
     }
     else
     {
-        QMessageBox::warning( NULL, tr( "Position Marker Plugin" ), tr( "Unable to load custom cursor, default cursor will be used. "
-                                                       "Make sure this is a valid image file." ), QMessageBox::Ok );
+        mDebug() << "Unable to load custom cursor from " << filename << ". "
+                 << "The default cursor will be used instead";
         if ( m_configDialog )
             ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_defaultCursor ) );
         m_customCursor = m_defaultCursor;
