@@ -42,11 +42,19 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_renderDsos( true ),
       m_renderDsoLabels( true ),
       m_renderSun( true ),
+      m_renderEcliptic( true ),
+      m_renderCelestialEquator( true ),
+      m_renderCelestialPole( true ),
       m_starsLoaded( false ),
       m_constellationsLoaded( false ),
       m_dsosLoaded( false ),
       m_magnitudeLimit( 100 ),
-      m_constellationBrush( Marble::Oxygen::aluminumGray5 )
+      m_constellationBrush( Marble::Oxygen::aluminumGray5 ),
+      m_constellationLabelBrush( Marble::Oxygen::aluminumGray5 ),
+      m_dsoLabelBrush( Marble::Oxygen::aluminumGray6 ),
+      m_eclipticBrush( Marble::Oxygen::aluminumGray6 ),
+      m_celestialEquatorBrush( Marble::Oxygen::aluminumGray6 ),
+      m_celestialPoleBrush( Marble::Oxygen::aluminumGray6 )      
 {
 }
 
@@ -130,9 +138,23 @@ QDialog *StarsPlugin::configDialog()
         connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ), SLOT( writeSettings() ) );
         connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ), SLOT( readSettings() ) );
 
-        connect( ui_configWidget->constellationColorButton, SIGNAL( clicked() ), this,
+        connect( ui_configWidget->m_constellationColorButton, SIGNAL( clicked() ), this,
                 SLOT( constellationGetColor() ) );
 
+        connect( ui_configWidget->m_constellationLabelColorButton, SIGNAL( clicked() ), this,
+                SLOT( constellationLabelGetColor() ) );
+
+        connect( ui_configWidget->m_dsoLabelColorButton, SIGNAL( clicked() ), this,
+                SLOT( dsoLabelGetColor() ) );
+
+        connect( ui_configWidget->m_eclipticColorButton, SIGNAL( clicked() ), this,
+                SLOT( eclipticGetColor() ) );
+                
+        connect( ui_configWidget->m_celestialEquatorColorButton, SIGNAL( clicked() ), this,
+                SLOT( celestialEquatorGetColor() ) );
+
+        connect( ui_configWidget->m_celestialPoleColorButton, SIGNAL( clicked() ), this,
+                SLOT( celestialPoleGetColor() ) );
 
 
 // FIXME: Could Not Make Apply Button Work.
@@ -151,8 +173,16 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     settings["renderDsos"] = m_renderDsos;
     settings["renderDsoLabels"] = m_renderDsoLabels;
     settings["renderSun"] = m_renderSun;
+    settings["renderEcliptic"] = m_renderEcliptic;
+    settings["renderCelestialEquator"] = m_renderCelestialEquator;
+    settings["renderCelestialPole"] = m_renderCelestialPole;
     settings["magnitudeLimit"] = m_magnitudeLimit;
     settings["constellationBrush"] = m_constellationBrush.color().rgb();
+    settings["constellationLabelBrush"] = m_constellationLabelBrush.color().rgb();
+    settings["dsoLabelBrush"] = m_dsoLabelBrush.color().rgb();
+    settings["eclipticBrush"] = m_eclipticBrush.color().rgb();
+    settings["celestialEaquatorBrush"] = m_celestialEquatorBrush.color().rgb();
+    settings["celestialPoleBrush"] = m_celestialPoleBrush.color().rgb();
     return settings;
 }
 
@@ -164,9 +194,17 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderDsos = readSetting<bool>( settings, "renderDsos", true );
     m_renderDsoLabels = readSetting<bool>( settings, "renderDsoLabels", true);
     m_renderSun = readSetting<bool>( settings, "renderSun", true );
+    m_renderEcliptic = readSetting<bool>( settings, "renderEcliptic", true );
+    m_renderCelestialEquator = readSetting<bool>( settings, "renderCelestialEquator", true );
+    m_renderCelestialPole = readSetting<bool>( settings, "renderCelestialPole", true );
     m_magnitudeLimit = readSetting<int>( settings, "magnitudeLimit", 100 );
     QColor const defaultColor = Marble::Oxygen::aluminumGray5;
     m_constellationBrush = QColor( readSetting<QRgb>( settings, "constellationBrush", defaultColor.rgb() ) );
+    m_constellationLabelBrush = QColor( readSetting<QRgb>( settings, "constellationLabelBrush", defaultColor.rgb()) );
+    m_dsoLabelBrush = QColor( readSetting<QRgb>( settings, "dsoLabelBrush", defaultColor.rgb() ) );
+    m_eclipticBrush = QColor( readSetting<QRgb>( settings, "eclipticBrush", defaultColor.rgb() ) );
+    m_celestialEquatorBrush = QColor( readSetting<QRgb>( settings, "celestialEquatorBrush", defaultColor.rgb() ) );
+    m_celestialPoleBrush = QColor( readSetting<QRgb>( settings, "celestialPoleBrush", defaultColor.rgb() ) );
 }
 
 void StarsPlugin::readSettings()
@@ -190,6 +228,16 @@ void StarsPlugin::readSettings()
     Qt::CheckState const sunState = m_renderSun ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewSunCheckbox->setCheckState( sunState );
 
+    Qt::CheckState const eclipticState = m_renderEcliptic ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_viewEclipticCheckbox->setCheckState( eclipticState );
+
+    Qt::CheckState const celestialEquatorState = m_renderCelestialEquator ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_viewCelestialEquatorCheckbox->setCheckState( celestialEquatorState );
+
+    Qt::CheckState const celestialPoleState = m_renderCelestialPole ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_viewCelestialPoleCheckbox->setCheckState( celestialPoleState );
+
+
     int magState = m_magnitudeLimit;
     if ( magState < ui_configWidget->m_magnitudeSlider->minimum() ) {
         magState = ui_configWidget->m_magnitudeSlider->minimum();
@@ -202,7 +250,28 @@ void StarsPlugin::readSettings()
 
     QPalette constellationPalette;
     constellationPalette.setColor( QPalette::Button, m_constellationBrush.color() );
-    ui_configWidget->constellationColorButton->setPalette( constellationPalette );
+    ui_configWidget->m_constellationColorButton->setPalette( constellationPalette );
+
+    QPalette constellationLabelPalette;
+    constellationLabelPalette.setColor( QPalette::Button, m_constellationLabelBrush.color() );
+    ui_configWidget->m_constellationLabelColorButton->setPalette( constellationLabelPalette );
+
+    QPalette dsoLabelPalette;
+    dsoLabelPalette.setColor( QPalette::Button, m_dsoLabelBrush.color() );
+    ui_configWidget->m_dsoLabelColorButton->setPalette( dsoLabelPalette );
+
+    QPalette eclipticPalette;
+    eclipticPalette.setColor( QPalette::Button, m_eclipticBrush.color() );
+    ui_configWidget->m_eclipticColorButton->setPalette( eclipticPalette );
+
+    QPalette celestialEquatorPalette;
+    celestialEquatorPalette.setColor( QPalette::Button, m_celestialEquatorBrush.color() );
+    ui_configWidget->m_celestialEquatorColorButton->setPalette( celestialEquatorPalette );
+
+    QPalette celestialPolePalette;
+    celestialPolePalette.setColor( QPalette::Button, m_celestialPoleBrush.color() );
+    ui_configWidget->m_celestialPoleColorButton->setPalette( celestialPolePalette );
+
 
 }
 
@@ -213,8 +282,16 @@ void StarsPlugin::writeSettings()
     m_renderDsos = ui_configWidget->m_viewDsosCheckbox->checkState() == Qt::Checked;
     m_renderDsoLabels = ui_configWidget->m_viewDsoLabelCheckbox->checkState() == Qt::Checked;
     m_renderSun = ui_configWidget->m_viewSunCheckbox->checkState() == Qt::Checked;
+    m_renderEcliptic = ui_configWidget->m_viewEclipticCheckbox->checkState() == Qt::Checked;
+    m_renderCelestialEquator = ui_configWidget->m_viewCelestialEquatorCheckbox->checkState() == Qt::Checked;
+    m_renderCelestialPole = ui_configWidget->m_viewCelestialPoleCheckbox->checkState() == Qt::Checked;
     m_magnitudeLimit = ui_configWidget->m_magnitudeSlider->value();
-    m_constellationBrush = QBrush( ui_configWidget->constellationColorButton->palette().color( QPalette::Button) );
+    m_constellationBrush = QBrush( ui_configWidget->m_constellationColorButton->palette().color( QPalette::Button) );
+    m_constellationLabelBrush = QBrush( ui_configWidget->m_constellationLabelColorButton->palette().color( QPalette::Button) );
+    m_dsoLabelBrush = QBrush( ui_configWidget->m_dsoLabelColorButton->palette().color( QPalette::Button) );
+    m_eclipticBrush = QBrush( ui_configWidget->m_eclipticColorButton->palette().color( QPalette::Button) );
+    m_celestialEquatorBrush = QBrush( ui_configWidget->m_celestialEquatorColorButton->palette().color( QPalette::Button) );
+    m_celestialPoleBrush = QBrush( ui_configWidget->m_celestialPoleColorButton->palette().color( QPalette::Button) );
     emit settingsChanged( nameId() );
 }
 
@@ -223,9 +300,64 @@ void StarsPlugin::constellationGetColor()
     const QColor c = QColorDialog::getColor( m_constellationBrush.color(), 0, tr("Please choose the color for the constellation lines.") );
 
     if ( c.isValid() ) {
-        QPalette palette = ui_configWidget->constellationColorButton->palette();
+        QPalette palette = ui_configWidget->m_constellationColorButton->palette();
         palette.setColor( QPalette::Button, c );
-        ui_configWidget->constellationColorButton->setPalette( palette );
+        ui_configWidget->m_constellationColorButton->setPalette( palette );
+    }
+}
+
+void StarsPlugin::constellationLabelGetColor()
+{
+    const QColor c = QColorDialog::getColor( m_constellationLabelBrush.color(), 0, tr("Please choose the color for the constellation labels.") );
+
+    if ( c.isValid() ) {
+        QPalette palette = ui_configWidget->m_constellationLabelColorButton->palette();
+        palette.setColor( QPalette::Button, c );
+        ui_configWidget->m_constellationLabelColorButton->setPalette( palette );
+    }
+}
+
+void StarsPlugin::dsoLabelGetColor()
+{
+    const QColor c = QColorDialog::getColor( m_dsoLabelBrush.color(), 0, tr("Please choose the color for the dso labels.") );
+
+    if ( c.isValid() ) {
+        QPalette palette = ui_configWidget->m_dsoLabelColorButton->palette();
+        palette.setColor( QPalette::Button, c );
+        ui_configWidget->m_dsoLabelColorButton->setPalette( palette );
+    }
+}
+
+void StarsPlugin::eclipticGetColor()
+{
+    const QColor c = QColorDialog::getColor( m_eclipticBrush.color(), 0, tr("Please choose the color for the ecliptic.") );
+
+    if ( c.isValid() ) {
+        QPalette palette = ui_configWidget->m_eclipticColorButton->palette();
+        palette.setColor( QPalette::Button, c );
+        ui_configWidget->m_eclipticColorButton->setPalette( palette );
+    }
+}
+
+void StarsPlugin::celestialEquatorGetColor()
+{
+    const QColor c = QColorDialog::getColor( m_celestialEquatorBrush.color(), 0, tr("Please choose the color for the celestial equator.") );
+
+    if ( c.isValid() ) {
+        QPalette palette = ui_configWidget->m_celestialEquatorColorButton->palette();
+        palette.setColor( QPalette::Button, c );
+        ui_configWidget->m_celestialEquatorColorButton->setPalette( palette );
+    }
+}
+
+void StarsPlugin::celestialPoleGetColor()
+{
+    const QColor c = QColorDialog::getColor( m_celestialPoleBrush.color(), 0, tr("Please choose the color for the celestial equator.") );
+
+    if ( c.isValid() ) {
+        QPalette palette = ui_configWidget->m_celestialPoleColorButton->palette();
+        palette.setColor( QPalette::Button, c );
+        ui_configWidget->m_celestialPoleColorButton->setPalette( palette );
     }
 }
 
@@ -487,6 +619,17 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         return true;
     }
 
+    // List of Pens used to draw the sky
+    QPen polesPen( m_celestialPoleBrush, 2, Qt::SolidLine );
+    QPen constellationPenSolid( m_constellationBrush, 1, Qt::SolidLine );
+    QPen constellationPenDash(  m_constellationBrush, 1, Qt::DashLine );
+    QPen constellationLabelPen( m_constellationLabelBrush, 1, Qt::SolidLine );
+    QPen eclipticPen( m_eclipticBrush, 1, Qt::DotLine );
+    QPen equatorPen( m_celestialEquatorBrush, 1, Qt::DotLine );
+    QPen dsoLabelPen (m_dsoLabelBrush, 1, Qt::SolidLine);
+    QBrush starBrush( Qt::white );
+
+
     painter->save();
 
     painter->autoMapQuality();
@@ -505,11 +648,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     const qreal  skyRadius = 0.6 * sqrt( ( qreal )viewport->width() * viewport->width() + viewport->height() * viewport->height() );
 
-    const bool renderPoles = true;
 
-    if ( renderPoles ) {
+    if ( m_renderCelestialPole ) {
 
-        QPen polesPen( QColor( Marble::Oxygen::aluminumGray6 ) );
         polesPen.setWidth( 2 );
         painter->setPen( polesPen );
 
@@ -530,11 +671,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         painter->drawText( x1+8, y1+12, "SP" );
     }
 
-    QPen eclipticPen( QBrush(Marble::Oxygen::aluminumGray6), 1, Qt::DotLine );
 
-    const bool renderEcliptic = true;
 
-    if ( renderEcliptic ) {
+    if ( m_renderEcliptic || m_renderCelestialEquator) {
 
         const qreal  skyRadius      = 0.6 * sqrt( ( qreal )viewport->width() * viewport->width() + viewport->height() * viewport->height() );
 
@@ -546,47 +685,48 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         matrix eclipticAxisMatrix;
         (eclipticAxis * skyAxis).inverse().toMatrix( eclipticAxisMatrix );
 
-        painter->setPen(eclipticPen);
 
         int previousX = -1;
         int previousY = -1;
 
-        for ( int i = 0; i <= 36; ++i) {
-            Quaternion qpos;
-            qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
-            qpos.rotateAroundAxis( eclipticAxisMatrix );
+        if( m_renderEcliptic ) {
+            painter->setPen(eclipticPen);
+            for ( int i = 0; i <= 36; ++i) {
+                Quaternion qpos;
+                qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
+                qpos.rotateAroundAxis( eclipticAxisMatrix );
 
-            int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
-            int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
+                int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
+                int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
 
-            if ( qpos.v[Q_Z] < 0 && previousX >= 0 ) painter->drawLine(previousX, previousY, x, y);
+                if ( qpos.v[Q_Z] < 0 && previousX >= 0 ) painter->drawLine(previousX, previousY, x, y);
 
-            previousX = x;
-            previousY = y;
+                previousX = x;
+                previousY = y;
+            }
         }
 
         previousX = -1;
         previousY = -1;
 
-        for ( int i = 0; i <= 36; ++i) {
-            Quaternion qpos;
-            qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
-            qpos.rotateAroundAxis( skyAxisMatrix );
+        if( m_renderCelestialEquator ) {
+            painter->setPen(equatorPen);
+            for ( int i = 0; i <= 36; ++i) {
+                Quaternion qpos;
+                qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
+                qpos.rotateAroundAxis( skyAxisMatrix );
 
-            int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
-            int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
+                int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
+                int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
 
-            if ( qpos.v[Q_Z] < 0 && previousX > 0 ) painter->drawLine(previousX, previousY, x, y);
+                if ( qpos.v[Q_Z] < 0 && previousX > 0 ) painter->drawLine(previousX, previousY, x, y);
 
-            previousX = x;
-            previousY = y;
+                previousX = x;
+                previousY = y;
+            }
         }
     }
 
-    QPen starPen( Qt::NoPen );
-    QPen constellationPenSolid( m_constellationBrush, 1, Qt::SolidLine );
-    QPen constellationPenDash(  m_constellationBrush, 1, Qt::DashLine );
-    QBrush starBrush( Qt::white );
 
     const bool renderStars = !viewport->mapCoversViewport() && viewport->projection() == Spherical;
 
@@ -615,8 +755,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         const qreal  earthRadius    = viewport->radius();
 
         if ( m_renderDsos ) {
-            // aluminumgray6
-            painter->setPen(eclipticPen);
+            painter->setPen(dsoLabelPen);
             // Render Deep Space Objects
             for ( int d = 0; d < m_dsos.size(); ++d ) {
                 qpos = m_dsos.at( d ).quaternion();
@@ -661,12 +800,12 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         if ( m_renderConstellationLines ||  m_renderConstellationLabels )
         {
-            painter->setPen( constellationPenSolid );
             // Render Constellations
             for ( int c = 0; c < m_constellations.size(); ++c ) {
                 int xMean = 0;
                 int yMean = 0;
                 int endptCount = 0;
+                painter->setPen( constellationPenSolid );
 
                 for ( int s = 0; s < ( m_constellations.at( c ).size() - 1 ); ++s ) {
                     int starId1 = m_constellations.at( c ).at( s );
@@ -684,6 +823,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                     int idx1 = m_idHash.value( starId1,-1 );
                     int idx2 = m_idHash.value( starId2,-1 );
 
+                   
                     if ( idx1 < 0 ) {
                         mDebug() << "unknown star, "
                                  << starId1 <<  ", in constellation "
@@ -737,6 +877,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                         || yMean < 0 || yMean >= viewport->height() )
                     continue;
 
+                painter->setPen( constellationLabelPen );
                 if ( m_renderConstellationLabels ) {
                     painter->drawText( xMean, yMean, m_constellations.at( c ).name() );
                 }
@@ -745,8 +886,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         }
 
         // Render Stars
-        painter->setPen( starPen );
-        painter->setBrush( starBrush );
 
         for ( int s = 0; s < m_stars.size(); ++s  ) {
             Quaternion  qpos = m_stars.at(s).quaternion();

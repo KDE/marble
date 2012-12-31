@@ -200,10 +200,16 @@ private Q_SLOTS:
     void toggleConstellationLines();
     void toggleConstellationLabels();
 
+
 public Q_SLOTS:
     void readSettings();
     void writeSettings();
     void constellationGetColor();
+    void constellationLabelGetColor();
+    void dsoLabelGetColor();
+    void eclipticGetColor();
+    void celestialEquatorGetColor();
+    void celestialPoleGetColor();
 
 private:
     template<class T>
@@ -229,6 +235,9 @@ private:
     bool m_renderDsos;
     bool m_renderDsoLabels;
     bool m_renderSun;
+    bool m_renderEcliptic;
+    bool m_renderCelestialEquator;
+    bool m_renderCelestialPole;
     bool m_starsLoaded;
     bool m_constellationsLoaded;
     bool m_dsosLoaded;
@@ -240,6 +249,11 @@ private:
     QImage m_dsoImage;
     int m_magnitudeLimit;
     QBrush m_constellationBrush;
+    QBrush m_constellationLabelBrush;
+    QBrush m_dsoLabelBrush;
+    QBrush m_eclipticBrush;
+    QBrush m_celestialEquatorBrush;
+    QBrush m_celestialPoleBrush;
     QVector<QPixmap> m_pixN1Stars;
     QVector<QPixmap> m_pixP0Stars;
     QVector<QPixmap> m_pixP1Stars;
