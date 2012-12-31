@@ -10,8 +10,6 @@
 
 #include "VectorTileMapper.h"
 
-#include <cmath>
-
 #include <QtCore/QRunnable>
 
 #include "MarbleGlobal.h"
@@ -60,21 +58,21 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
     // Sometimes the formula returns wrong huge values, x and y have to be between 0 and 2^ZoomLevel
-    unsigned int minX = qMin( (unsigned int) pow( 2, tileZoomLevel() ),
-                              qMax( (unsigned int) lon2tilex( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                                    (unsigned int) 0) );
+    unsigned int minX = qMin<unsigned int>( 2 << tileZoomLevel(),
+                              qMax<unsigned int>( lon2tilex( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                                    0 ) );
 
-    unsigned int minY = qMin( (unsigned int) pow( 2, tileZoomLevel() ),
-                              qMax( (unsigned int) lat2tiley( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                                    (unsigned int) 0) );
+    unsigned int minY = qMin<unsigned int>( 2 << tileZoomLevel(),
+                              qMax<unsigned int>( lat2tiley( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                                    0 ) );
 
-    unsigned int maxX = qMax( (unsigned int) 0,
-                              qMin( (unsigned int) lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                                    (unsigned int) pow( 2, tileZoomLevel() )) );
+    unsigned int maxX = qMax<unsigned int>( 0,
+                              qMin<unsigned int>( lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                                    2 << tileZoomLevel() ) );
 
-    unsigned int maxY = qMax( (unsigned int) 0,
-                              qMin( (unsigned int) lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                                    (unsigned int) pow( 2, tileZoomLevel() )) );
+    unsigned int maxY = qMax<unsigned int>( 0,
+                              qMin<unsigned int>( lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel() ),
+                                    2 << tileZoomLevel() ) );
 
     bool left  = minX < m_minTileX;
     bool right = maxX > m_maxTileX;
@@ -119,8 +117,8 @@ void VectorTileMapper::initTileRangeCoords(){
 
     // Set tile X and Y to the biggest possible values, but inverted so the
     // left/up/right/down variables can be calculated
-    m_minTileX = pow( 2, tileZoomLevel() );
-    m_minTileY = pow( 2, tileZoomLevel() );
+    m_minTileX = 2 << tileZoomLevel();
+    m_minTileY = 2 << tileZoomLevel();
     m_maxTileX = 0;
     m_maxTileY = 0;
 }
@@ -160,12 +158,12 @@ void VectorTileMapper::updateTile(TileId const & tileId, GeoDataDocument * docum
 
 unsigned int VectorTileMapper::lon2tilex(double lon, int z)
 {
-    return (unsigned int)(floor((lon + 180.0) / 360.0 * pow(2.0, z)));
+    return (unsigned int)(floor((lon + 180.0) / 360.0 * (2 << z)));
 }
 
 unsigned int VectorTileMapper::lat2tiley(double lat, int z)
 {
-    return (unsigned int)(floor((1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * pow(2.0, z)));
+    return (unsigned int)(floor((1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * (2 << z)));
 }
 
 VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport,
