@@ -32,7 +32,7 @@ public:
     QString resolve( const GeoDataObject *object, const QString &filename ) const;
 };
 
-GeoDataOverlayPrivate::GeoDataOverlayPrivate() : m_drawOrder( 0 )
+GeoDataOverlayPrivate::GeoDataOverlayPrivate() : m_color( Qt::white ), m_drawOrder( 0 )
 {
     // nothing to do
 }
