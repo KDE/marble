@@ -72,10 +72,8 @@ TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
                                     VectorComposer *veccomposer )
     : m_veccomposer( veccomposer ),
-      m_textureLandPen( QPen( Qt::NoPen ) ),
-      m_textureLandBrush( QBrush( QColor( 255, 0, 0 ) ) ),
-      m_textureGlacierBrush( QBrush( QColor( 0, 255, 0 ) ) ),
-      m_textureLakeBrush( QBrush( QColor( 0, 0, 0 ) ) )
+      m_landColor(qRgb( 255, 0, 0 ) ),
+      m_seaColor( qRgb( 0, 255, 0 ) )
 {
     QTime t;
     t.start();
@@ -218,15 +216,15 @@ void TextureColorizer::drawIndividualDocument( GeoPainter *painter, GeoDataDocum
 void TextureColorizer::drawTextureMap( GeoPainter *painter )
 {
     foreach( GeoDataDocument* doc, m_landDocuments ) {
-        painter->setPen( m_textureLandPen );
-        painter->setBrush( m_textureLandBrush );
+        painter->setPen( QPen( Qt::NoPen ) );
+        painter->setBrush( QBrush( m_landColor ) );
         drawIndividualDocument( painter, doc );
     }
 
     foreach( GeoDataDocument* doc, m_seaDocuments ) {
         if ( doc->isVisible() ) {
             painter->setPen( Qt::NoPen );
-            painter->setBrush( m_textureGlacierBrush );
+            painter->setBrush( QBrush( m_seaColor ) );
             drawIndividualDocument( painter, doc );
         }
     }
@@ -274,11 +272,6 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     const int  imgry     = imgheight / 2;
     // This variable is not used anywhere..
     const int  imgradius = imgrx * imgrx + imgry * imgry;
-
-    const uint landoffscreen = qRgb(255,0,0);
-    // const uint seaoffscreen = qRgb(0,0,0);
-    const uint lakeoffscreen = qRgb(0,0,0);
-    // const uint glaciercolor = qRgb(200,200,200);
 
     int     bump = 8;
 
@@ -334,54 +327,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
                     if ( bump  < 0 )  bump = 0;
                     if ( bump  > 15 ) bump = 15;
                 }
-
-                int alpha = qRed( *coastData );
-                if ( alpha == 255 || alpha == 0 ) {
-                    if ( *coastData == landoffscreen )
-                        *writeData = texturepalette[bump][grey + 0x100]; 
-                    else {
-                        if (*coastData == lakeoffscreen)
-                            *writeData = texturepalette[bump][0x055];
-                        else {
-                            *writeData = texturepalette[bump][grey];
-                        }
-                    }
-                }
-                else {
-                    qreal c = 1.0 / 255.0;
-
-                    if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
-
-                        QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
-                        QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
-
-                        *writeData = qRgb( 
-                            (int) ( c * ( alpha * qRed( landcolor )
-                            + ( 255 - alpha ) * qRed( watercolor ) ) ),
-                            (int) ( c * ( alpha * qGreen( landcolor )
-                            + ( 255 - alpha ) * qGreen( watercolor ) ) ),
-                            (int) ( c * ( alpha * qBlue( landcolor )
-                            + ( 255 - alpha ) * qBlue( watercolor ) ) )
-                        );
-                    }
-                    else {
-
-                        if ( qGreen( *coastData ) != 0 ) {
-
-                            QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
-                            QRgb glaciercolor = (QRgb)(texturepalette[bump][grey]);
-    
-                            *writeData = qRgb( 
-                                (int) ( c * ( alpha * qRed( glaciercolor )
-                                + ( 255 - alpha ) * qRed( landcolor ) ) ),
-                                (int) ( c * ( alpha * qGreen( glaciercolor )
-                                + ( 255 - alpha ) * qGreen( landcolor ) ) ),
-                                (int) ( c * ( alpha * qBlue( glaciercolor )
-                                + ( 255 - alpha ) * qBlue( landcolor ) ) )
-                            ); 
-                        }
-                    }
-                }
+                setPixel( coastData, writeData, bump, grey );
             }
         }
     }
@@ -423,57 +369,34 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
                     if ( bump > 15 ) bump = 15;
                     if ( bump < 0 )  bump = 0;
                 }
-
-                int alpha = qRed( *coastData );
-                if ( alpha == 255 || alpha == 0 ) {
-                    if ( *coastData == landoffscreen )
-                        *writeData = texturepalette[bump][grey + 0x100]; 
-                    else {
-                        if (*coastData == lakeoffscreen)
-                            *writeData = texturepalette[bump][0x055];
-                        else {
-                            *writeData = texturepalette[bump][grey];
-                        }
-                    }
-                }
-                else {
-                    qreal c = 1.0 / 255.0;
-
-                    if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
-
-                        QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
-                        QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
-
-                        *writeData = qRgb( 
-                            (int) ( c * ( alpha * qRed( landcolor )
-                            + ( 255 - alpha ) * qRed( watercolor ) ) ),
-                            (int) ( c * ( alpha * qGreen( landcolor )
-                            + ( 255 - alpha ) * qGreen( watercolor ) ) ),
-                            (int) ( c * ( alpha * qBlue( landcolor )
-                            + ( 255 - alpha ) * qBlue( watercolor ) ) )
-                        );
-                    }
-                    else {
-
-                        if ( qGreen( *coastData ) != 0 ) {
-
-                            QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
-                            QRgb glaciercolor = (QRgb)(texturepalette[bump][grey]);
-
-                            *writeData = qRgb( 
-                                (int) ( c * ( alpha * qRed( glaciercolor )
-                                + ( 255 - alpha ) * qRed( landcolor ) ) ),
-                                (int) ( c * ( alpha * qGreen( glaciercolor )
-                                + ( 255 - alpha ) * qGreen( landcolor ) ) ),
-                                (int) ( c * ( alpha * qBlue( glaciercolor )
-                                + ( 255 - alpha ) * qBlue( landcolor ) ) )
-                            ); 
-                        }
-                    }
-                }
+                setPixel( coastData, writeData, bump, grey );
             }
         }
     }
 }
 
+void TextureColorizer::setPixel( const QRgb *coastData, QRgb *writeData, int bump, uchar grey )
+{
+    int alpha = qRed( *coastData );
+    if ( alpha == 255 )
+        *writeData = texturepalette[bump][grey + 0x100];
+    else if( alpha == 0 ){
+        *writeData = texturepalette[bump][grey];
+    }
+    else {
+        qreal c = 1.0 / 255.0;
+
+        QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
+        QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
+
+        *writeData = qRgb(
+                    (int) ( c * ( alpha * qRed( landcolor )
+                                  + ( 255 - alpha ) * qRed( watercolor ) ) ),
+                    (int) ( c * ( alpha * qGreen( landcolor )
+                                  + ( 255 - alpha ) * qGreen( watercolor ) ) ),
+                    (int) ( c * ( alpha * qBlue( landcolor )
+                                  + ( 255 - alpha ) * qBlue( watercolor ) ) )
+                    );
+    }
+}
 }

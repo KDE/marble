@@ -52,6 +52,8 @@ class TextureColorizer
 
     void colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality );
 
+    void setPixel( const QRgb *coastData, QRgb *writeData, int bump, uchar grey );
+
  private:
     VectorComposer *const m_veccomposer;
     QString m_seafile;
@@ -61,10 +63,8 @@ class TextureColorizer
     QImage m_coastImage;
     uint texturepalette[16][512];
     bool m_showRelief;
-    QPen        m_textureLandPen;
-    QBrush      m_textureLandBrush;
-    QBrush      m_textureGlacierBrush;
-    QBrush      m_textureLakeBrush;
+    QRgb      m_landColor;
+    QRgb      m_seaColor;
 };
 
 }
