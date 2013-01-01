@@ -159,16 +159,16 @@ void SatellitesConfigDialog::setupSatellitesTab()
 void SatellitesConfigDialog::setupDataSourcesTab()
 {
     connect( m_configWidget->buttonAddDataSource,
-        SIGNAL( clicked() ), SLOT( addDataSource() ) );
+        SIGNAL(clicked()), SLOT(addDataSource()) );
     connect( m_configWidget->buttonOpenDataSource,
-        SIGNAL( clicked() ), SLOT( openDataSource() ) );
+        SIGNAL(clicked()), SLOT(openDataSource()) );
     connect( m_configWidget->buttonRemoveDataSource,
-        SIGNAL( clicked() ), SLOT( removeSelectedDataSource() ) );
+        SIGNAL(clicked()), SLOT(removeSelectedDataSource()) );
     connect( m_configWidget->buttonReloadDataSources,
-        SIGNAL( clicked() ), SLOT( reloadDataSources() ) );
+        SIGNAL(clicked()), SLOT(reloadDataSources()) );
 
     connect( m_configWidget->listDataSources,
-        SIGNAL( itemSelectionChanged() ), SLOT( updateButtonState() ) );
+        SIGNAL(itemSelectionChanged()), SLOT(updateButtonState()) );
 }
 
 SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesCategoryItem(

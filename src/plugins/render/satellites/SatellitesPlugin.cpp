@@ -145,21 +145,21 @@ void SatellitesPlugin::initialize()
     m_configModel = new SatellitesConfigModel( this );
     m_configDialog->configWidget()->treeView->setModel( m_configModel );
 
-    connect( m_satModel, SIGNAL( fileParsed( const QString& ) ),
-        SLOT( dataSourceParsed( const QString& ) ) );
-    connect( m_satModel, SIGNAL( fileParsed( const QString&) ),
-        SLOT( updateDataSourceConfig( const QString& ) ) );
-    connect( m_configDialog, SIGNAL( dataSourcesReloadRequested() ),
-        SLOT( updateSettings() ) );
-    connect( m_configDialog, SIGNAL( accepted() ), SLOT( writeSettings() ) );
-    connect( m_configDialog, SIGNAL( rejected() ), SLOT( readSettings() ) );
+    connect( m_satModel, SIGNAL(fileParsed(QString)),
+        SLOT(dataSourceParsed(QString)) );
+    connect( m_satModel, SIGNAL(fileParsed(QString)),
+        SLOT(updateDataSourceConfig(QString)) );
+    connect( m_configDialog, SIGNAL(dataSourcesReloadRequested()),
+        SLOT(updateSettings()) );
+    connect( m_configDialog, SIGNAL(accepted()), SLOT(writeSettings()) );
+    connect( m_configDialog, SIGNAL(rejected()), SLOT(readSettings()) );
     connect( m_configDialog->configWidget()->buttonBox->button(
         QDialogButtonBox::Reset ),
-        SIGNAL( clicked() ), SLOT( restoreDefaultSettings() ) );
-    connect( m_configDialog, SIGNAL( userDataSourcesChanged() ),
-        SLOT( writeSettings() ) );
-    connect( m_configDialog, SIGNAL( userDataSourceAdded( const QString& ) ),
-        SLOT( userDataSourceAdded( const QString& ) ) );
+        SIGNAL(clicked()), SLOT(restoreDefaultSettings()) );
+    connect( m_configDialog, SIGNAL(userDataSourcesChanged()),
+        SLOT(writeSettings()) );
+    connect( m_configDialog, SIGNAL(userDataSourceAdded(QString)),
+        SLOT(userDataSourceAdded(QString)) );
 
     m_isInitialized = true;
     readSettings();
