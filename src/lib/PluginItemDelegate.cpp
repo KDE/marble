@@ -92,6 +92,19 @@ void PluginItemDelegate::paint( QPainter *painter,
         nameRect.setRight( button.rect.left() -1 );
     }
 
+    // Painting the Icon
+    const QIcon icon = index.data( Qt::DecorationRole ).value<QIcon>();
+    const QPixmap iconPixmap = icon.pixmap(16, 16);
+
+    nameRect.moveBottom( nameRect.bottom()+5 );
+    style->drawItemPixmap( painter,
+                           nameRect,
+                           Qt::AlignLeft,
+                           iconPixmap );
+
+    nameRect.setLeft( nameRect.left() + 16 + 5 );
+    nameRect.moveBottom( nameRect.bottom()-5 );
+
     // Painting the Name string
     QString name = index.data( Qt::DisplayRole ).toString();
     
