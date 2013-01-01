@@ -108,26 +108,22 @@ void TestGeoDataCopy::initTestCase()
     coord1.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
     coord1.setDetail(2);
     testCoordinate(coord1, 123.4, 2, coordString[0]);
-    
-    coord2.set(14.7107,52.0235, 133.4, GeoDataCoordinates::Degree);
-    coord2.setDetail(3);
+
+    coord2 = GeoDataCoordinates(14.7107, 52.0235, 133.4, GeoDataCoordinates::Degree, 3);
     testCoordinate(coord2, 133.4, 3, coordString[1]);
 
     coord3.set(15.7107,53.0235, 143.4, GeoDataCoordinates::Degree);
     coord3.setDetail(4);
     testCoordinate(coord3, 143.4, 4, coordString[2]);
     
-    point1.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
-    point1.setDetail(2);
-    testCoordinate(point1, 123.4, 2, coordString[0]);
+    point1.setCoordinates( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 2) );
+    testCoordinate(point1.coordinates(), 123.4, 2, coordString[0]);
     
-    point2.set(14.7107,52.0235, 133.4, GeoDataCoordinates::Degree);
-    point2.setDetail(3);
-    testCoordinate(point2, 133.4, 3, coordString[1]);
+    point2.setCoordinates( GeoDataCoordinates(14.7107, 52.0235, 133.4, GeoDataCoordinates::Degree, 3) );
+    testCoordinate(point2.coordinates(), 133.4, 3, coordString[1]);
 
-    point3.set(15.7107,53.0235, 143.4, GeoDataCoordinates::Degree);
-    point3.setDetail(4);
-    testCoordinate(point3, 143.4, 4, coordString[2]);
+    point3.setCoordinates( GeoDataCoordinates(15.7107, 53.0235, 143.4, GeoDataCoordinates::Degree, 4) );
+    testCoordinate(point3.coordinates(), 143.4, 4, coordString[2]);
 }
 
 void TestGeoDataCopy::copyCoordinates()
@@ -144,26 +140,25 @@ void TestGeoDataCopy::copyPoint()
 {
     GeoDataPoint point;
 
-    point.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
-    point.setDetail(2);
+    point.setCoordinates( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 2) );
     point.setExtrude( true );
 
     // make sure that the coordinate contains the right values
-    testCoordinate(point, 123.4, 2, coordString[0]);
+    testCoordinate(point.coordinates(), 123.4, 2, coordString[0]);
     QCOMPARE(point.extrude(), true);
 
     GeoDataPoint other = point;
     
     // make sure that the coordinate contains the right values
-    testCoordinate(other, 123.4, 2, coordString[0]);
+    testCoordinate(other.coordinates(), 123.4, 2, coordString[0]);
     QCOMPARE(other.extrude(), true);
     
-    QVERIFY(point == other);
+    QVERIFY(point.coordinates() == other.coordinates());
     
-    point.setDetail(17);
+    point = GeoDataPoint( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 17) );
     point.setExtrude(false);
-    QCOMPARE(other.detail(), 2);
-    QCOMPARE(point.detail(), 17);
+    QCOMPARE(other.coordinates().detail(), 2);
+    QCOMPARE(point.coordinates().detail(), 17);
     QCOMPARE(other.extrude(), true);
     QCOMPARE(point.extrude(), false);
 }
@@ -343,9 +338,9 @@ void TestGeoDataCopy::copyDocument()
     GeoDataPlacemark pl2;
     GeoDataPlacemark pl3;
 
-    pl1.setCoordinate(point1);
-    pl2.setCoordinate(point2);
-    pl3.setCoordinate(point3);
+    pl1.setCoordinate(point1.coordinates());
+    pl2.setCoordinate(point2.coordinates());
+    pl3.setCoordinate(point3.coordinates());
 
     GeoDataFolder *folder = new GeoDataFolder;
     folder->append(new GeoDataPlacemark(pl1));
@@ -380,9 +375,9 @@ void TestGeoDataCopy::copyDocument()
 void TestGeoDataCopy::copyFolder()
 {
     GeoDataPlacemark pl1, pl2, pl3;
-    pl1.setCoordinate(point1);
-    pl2.setCoordinate(point2);
-    pl3.setCoordinate(point3);
+    pl1.setCoordinate(point1.coordinates());
+    pl2.setCoordinate(point2.coordinates());
+    pl3.setCoordinate(point3.coordinates());
 
     GeoDataFolder folder;
     folder.append(new GeoDataPlacemark(pl1));
@@ -406,13 +401,11 @@ void TestGeoDataCopy::copyFolder()
 
 void TestGeoDataCopy::copyPlacemark()
 {
-    GeoDataPoint *point = new GeoDataPoint;
-    point->set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
-    point->setDetail(2);
+    GeoDataPoint *point = new GeoDataPoint( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 2) );
     point->setExtrude( true );
 
     // make sure that the coordinate contains the right values
-    testCoordinate(*point, 123.4, 2, coordString[0]);
+    testCoordinate(point->coordinates(), 123.4, 2, coordString[0]);
     QCOMPARE(point->extrude(), true);
 
     GeoDataPlacemark placemark;
@@ -423,7 +416,7 @@ void TestGeoDataCopy::copyPlacemark()
     placemark.setId(281012);
 
     testCoordinate(placemark.coordinate(), 123.4, 2, coordString[0]);
-    testCoordinate(*static_cast<GeoDataPoint*>(placemark.geometry()), 123.4, 2, coordString[0]);
+    testCoordinate(static_cast<GeoDataPoint*>(placemark.geometry())->coordinates(), 123.4, 2, coordString[0]);
     QCOMPARE(placemark.area(), 12345678.0);
     QCOMPARE(placemark.population(), (qint64)123456789);
     QCOMPARE(placemark.id(), 281012);
@@ -432,7 +425,7 @@ void TestGeoDataCopy::copyPlacemark()
     GeoDataPlacemark other = placemark;
     
     testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-    testCoordinate(*static_cast<GeoDataPoint*>(other.geometry()), 123.4, 2, coordString[0]);
+    testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
     QCOMPARE(other.area(), 12345678.0);
     QCOMPARE(other.population(), (qint64)123456789);
     QCOMPARE(other.id(), 281012);
@@ -441,7 +434,7 @@ void TestGeoDataCopy::copyPlacemark()
     other.setPopulation(987654321);
 
     testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-    testCoordinate(*static_cast<GeoDataPoint*>(other.geometry()), 123.4, 2, coordString[0]);
+    testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
     QCOMPARE(other.area(), 12345678.0);
     QCOMPARE(other.population(), (qint64)987654321);
     QCOMPARE(placemark.population(), (qint64)123456789);

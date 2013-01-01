@@ -33,10 +33,7 @@ void TestGeoDataGeometry::downcastPointTest_data()
     QTest::addColumn<GeoDataPoint>("point");
 
     GeoDataPoint point1;
-    point1.setLongitude( .5 );
-    point1.setLatitude( .2 );
-    point1.setAltitude( 100 );
-
+    point1.setCoordinates( GeoDataCoordinates(.5, .2, 100) );
     QTest::newRow("First") << point1;
 }
 
@@ -44,12 +41,12 @@ void TestGeoDataGeometry::downcastPointTest()
 {
     QFETCH(GeoDataPoint, point);
 
-    QVERIFY( ! point.toString().isEmpty() );
+    QVERIFY( ! point.coordinates().toString().isEmpty() );
 
-    GeoDataCoordinates tmp( point );
+    GeoDataCoordinates tmp( point.coordinates() );
     GeoDataPoint newPoint( tmp );
 
-    QCOMPARE( newPoint.toString() , point.toString());
+    QCOMPARE( newPoint.coordinates().toString(), point.coordinates().toString() );
 }
 
 /**
