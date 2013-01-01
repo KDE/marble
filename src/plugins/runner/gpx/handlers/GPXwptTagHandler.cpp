@@ -57,7 +57,7 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         {
             lon = tmp.toString().toFloat();
         }
-        placemark->setCoordinate( lon, lat, 0, GeoDataPoint::Degree );
+        placemark->setCoordinate( lon, lat, 0, GeoDataCoordinates::Degree );
         placemark->setRole("Waypoint");
 
         placemark->setStyle(&doc->style("waypoint"));

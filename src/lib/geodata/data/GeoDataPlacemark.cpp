@@ -86,7 +86,7 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
         // Beware: comparison between pointers, not strings.
         if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType ) {
             hasIcon = true;
-            coord = GeoDataCoordinates( *static_cast<GeoDataPoint *>( p()->m_geometry ) );
+            coord = static_cast<GeoDataPoint *>( p()->m_geometry )->coordinates();
         } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
             GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry *>( p()->m_geometry );
 
@@ -125,7 +125,7 @@ void GeoDataPlacemark::setCoordinate( qreal lon, qreal lat, qreal alt, GeoDataPo
     setGeometry( new GeoDataPoint(lon, lat, alt, _unit ) );
 }
 
-void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
+void GeoDataPlacemark::setCoordinate( const GeoDataCoordinates &point )
 {
     setGeometry ( new GeoDataPoint( point ) );
 }

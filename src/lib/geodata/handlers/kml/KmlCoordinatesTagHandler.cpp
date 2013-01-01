@@ -104,14 +104,15 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
             if ( parentItem.represents( kmlTag_Point ) && parentItem.is<GeoDataFeature>() ) {
-                GeoDataPoint coord;
+                GeoDataCoordinates coord;
                 if ( coordinates.size() == 2 ) {
-                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(),
-                              DEG2RAD * coordinates.at( 1 ).toDouble() );
+                    coord.set( coordinates.at( 0 ).toDouble(),
+                              coordinates.at( 1 ).toDouble(), 0.0, GeoDataCoordinates::Degree );
                 } else if( coordinates.size() == 3 ) {
-                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(),
-                              DEG2RAD * coordinates.at( 1 ).toDouble(),
-                              coordinates.at( 2 ).toDouble() );
+                    coord.set( coordinates.at( 0 ).toDouble(),
+                               coordinates.at( 1 ).toDouble(),
+                               coordinates.at( 2 ).toDouble(),
+                               GeoDataCoordinates::Degree );
                 }
                 parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( coord );
             } else {
@@ -130,21 +131,11 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                 } else if ( parentItem.represents( kmlTag_LinearRing ) ) {
                     parentItem.nodeAs<GeoDataLinearRing>()->append( coord );
                 } else if ( parentItem.represents( kmlTag_MultiGeometry ) ) {
-                    GeoDataPoint *point = new GeoDataPoint;
-                    if ( coordinates.size() == 2 ) {
-                        point->set( DEG2RAD * coordinates.at( 0 ).toDouble(),
-                                   DEG2RAD * coordinates.at( 1 ).toDouble() );
-                    } else if ( coordinates.size() == 3 ) {
-                        point->set( DEG2RAD * coordinates.at( 0 ).toDouble(),
-                                   DEG2RAD * coordinates.at( 1 ).toDouble(),
-                                   coordinates.at( 2 ).toDouble() );
-                    }
+                    GeoDataPoint *point = new GeoDataPoint( coord );
                     parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
                 } else if ( parentItem.represents( kmlTag_Point ) ) {
                     // photo overlay
-                    qreal lon, lat;
-                    coord.geoCoordinates(lon, lat);
-                    parentItem.nodeAs<GeoDataPoint>()->set(lon, lat, coord.altitude());
+                    parentItem.nodeAs<GeoDataPoint>()->setCoordinates( coord );
                 } else {
                     // raise warning as coordinates out of valid parents found
                 }

@@ -178,7 +178,7 @@ bool JsonParser::read( QIODevice* device )
                                 if (typeProperty == "LineString"){
                                     ((GeoDataLineString*) geom)->append( GeoDataCoordinates(auxX, auxY,0, GeoDataCoordinates::Degree ) );
                            } else if (typeProperty == "Point"){
-                                    ((GeoDataPoint*) geom)->set( auxX,auxY,0, GeoDataCoordinates::Degree );
+                                    ((GeoDataPoint*) geom)->setCoordinates( GeoDataCoordinates(auxX,auxY,0, GeoDataCoordinates::Degree ) );
                            }
 
                     }

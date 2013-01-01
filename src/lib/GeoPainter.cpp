@@ -260,14 +260,14 @@ QRegion GeoPainter::regionFromPoint ( const GeoDataCoordinates & position,
 
 void GeoPainter::drawPoint( const GeoDataPoint & point )
 {
-    drawPoint( GeoDataCoordinates( point ) );
+    drawPoint( point.coordinates() );
 }
 
 
 QRegion GeoPainter::regionFromPoint ( const GeoDataPoint & point,
                                       qreal width ) const
 {
-    return regionFromRect( GeoDataCoordinates( point ), width, width, false, 3 );
+    return regionFromRect( point.coordinates(), width, width, false, 3 );
 }
 
 

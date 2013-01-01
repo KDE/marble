@@ -98,7 +98,7 @@ void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
     QByteArray output = d->retrieveWaypoints( queryString );
 
     GeoDataPlacemark placemark;
-    placemark.setCoordinate( GeoDataPoint( coordinates ) );
+    placemark.setCoordinate( coordinates );
 
     QStringList lines = QString::fromUtf8( output ).split( '\r' );
     if ( lines.size() > 2 ) {

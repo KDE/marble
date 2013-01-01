@@ -113,12 +113,12 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * @p latitude.
      */
     void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0,
-                        GeoDataPoint::Unit _unit = GeoDataPoint::Radian );
+                        GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
 
     /**
     * Set the coordinate of the placemark with an @p GeoDataPoint.
     */
-    void setCoordinate( const GeoDataPoint &point );
+    void setCoordinate( const GeoDataCoordinates &point );
 
     /**
      * Sets the current Geometry of this Placemark. @see geometry() and the class 

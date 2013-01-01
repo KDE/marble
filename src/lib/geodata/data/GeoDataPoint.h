@@ -44,15 +44,14 @@ class GeoDataPointPrivate;
  * @see GeoDataGeometry
 */
 
-class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
-                                    public GeoDataGeometry
+class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
 {
  public:
     typedef GeoDataCoordinates::Notation Notation;
     typedef GeoDataCoordinates::Unit Unit;
 
     GeoDataPoint( const GeoDataPoint& other );
-    GeoDataPoint( const GeoDataCoordinates& other );
+    explicit GeoDataPoint( const GeoDataCoordinates& other );
     GeoDataPoint( const GeoDataGeometry& other );
     GeoDataPoint();
 
@@ -64,10 +63,14 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    GeoDataPoint( qreal _lon, qreal _lat, qreal alt = 0,
-                  GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0 );
+    GeoDataPoint( qreal lon, qreal lat, qreal alt = 0,
+                  GeoDataPoint::Unit _unit = GeoDataCoordinates::Radian );
 
     ~GeoDataPoint();
+
+    void setCoordinates( const GeoDataCoordinates &coordinates );
+
+    const GeoDataCoordinates& coordinates() const;
 
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;

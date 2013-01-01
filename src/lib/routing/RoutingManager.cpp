@@ -121,7 +121,7 @@ GeoDataFolder* RoutingManagerPrivate::routeRequest() const
     for ( int i=0; i<m_routeRequest.size(); ++i ) {
         GeoDataPlacemark* placemark = new GeoDataPlacemark;
         placemark->setName( m_routeRequest.name( i ) );
-        placemark->setCoordinate( GeoDataPoint( m_routeRequest.at( i ) ) );
+        placemark->setCoordinate( m_routeRequest.at( i ) );
         result->append( placemark );
     }
 

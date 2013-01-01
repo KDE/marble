@@ -246,7 +246,7 @@ void OverviewMap::paintContent( QPainter *painter )
 
     qreal lon = m_centerLon;
     qreal lat = m_centerLat;
-    GeoDataPoint::normalizeLonLat( lon, lat );
+    GeoDataCoordinates::normalizeLonLat( lon, lat );
     qreal x = mapRect.width() / 2.0 + mapRect.width() / ( 2.0 * M_PI ) * lon;
     qreal y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;
 

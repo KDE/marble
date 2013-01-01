@@ -220,7 +220,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
                     GeoDataCoordinates position;
                     position.setLongitude( regexp.capturedTexts().at( 2 ).toDouble(), GeoDataCoordinates::Degree );
                     position.setLatitude( regexp.capturedTexts().at( 3 ).toDouble(), GeoDataCoordinates::Degree );
-                    placemark->setCoordinate( GeoDataPoint(position) );
+                    placemark->setCoordinate( position );
                     result->append( placemark );
                 }
             } else {

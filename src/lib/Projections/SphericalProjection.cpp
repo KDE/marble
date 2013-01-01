@@ -229,7 +229,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
 
     // If the whole globe is visible we can easily calculate
     // analytically the lon-/lat- range.
-    qreal pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
+    qreal pitch = GeoDataCoordinates::normalizeLat( viewport->planetAxis().pitch() );
 
     if ( 2.0 * viewport->radius() <= viewport->height()
          &&  2.0 * viewport->radius() <= viewport->width() )
@@ -252,8 +252,8 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
         // pitch = +M_PI
         if ( pitch == 0.0 || pitch == -M_PI || pitch == +M_PI ) {
             qreal yaw = viewport->planetAxis().yaw();
-            latLonAltBox.setWest( GeoDataPoint::normalizeLon( yaw - M_PI / 2.0 ) );
-            latLonAltBox.setEast( GeoDataPoint::normalizeLon( yaw + M_PI / 2.0 ) );
+            latLonAltBox.setWest( GeoDataCoordinates::normalizeLon( yaw - M_PI / 2.0 ) );
+            latLonAltBox.setEast( GeoDataCoordinates::normalizeLon( yaw + M_PI / 2.0 ) );
             latLonAltBox.setNorth( +M_PI / 2.0 );
             latLonAltBox.setSouth( -M_PI / 2.0 );
         }

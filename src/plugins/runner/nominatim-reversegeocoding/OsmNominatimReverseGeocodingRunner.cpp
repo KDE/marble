@@ -98,7 +98,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         QString address = places.item( 0 ).toElement().text();
         GeoDataPlacemark placemark;
         placemark.setAddress( address );
-        placemark.setCoordinate( GeoDataPoint( m_coordinates ) );
+        placemark.setCoordinate( m_coordinates );
 
         QDomNodeList details = root.elementsByTagName( "addressparts" );
         if ( details.size() == 1 ) {

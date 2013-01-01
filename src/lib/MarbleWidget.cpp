@@ -1192,8 +1192,8 @@ void MarbleWidget::setSelection( const QRect& region )
     // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)
     // as left/top, right/bottom rectangle.
     QList<double> coordinates;
-    coordinates << box.west( GeoDataPoint::Degree ) << box.north( GeoDataPoint::Degree )
-                << box.east( GeoDataPoint::Degree ) << box.south( GeoDataPoint::Degree );
+    coordinates << box.west( GeoDataCoordinates::Degree ) << box.north( GeoDataCoordinates::Degree )
+                << box.east( GeoDataCoordinates::Degree ) << box.south( GeoDataCoordinates::Degree );
 
     mDebug() << "West: " << coordinates[0] << " North: " <<  coordinates[1]
              << " East: " << coordinates[2] << " South: " << coordinates[3] << endl;
