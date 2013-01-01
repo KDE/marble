@@ -38,9 +38,12 @@ public:
 
     void update();
 
+    QString name();
+
     void showOrbit( bool show );
 
 private:
+    QString m_name;
     bool m_showOrbit;
     double m_earthSemiMajorAxis; // in km
     elsetrec m_satrec;

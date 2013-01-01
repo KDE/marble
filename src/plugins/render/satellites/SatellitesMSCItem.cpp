@@ -118,7 +118,7 @@ const QDateTime& SatellitesMSCItem::missionEnd() const
 
 void SatellitesMSCItem::setDescription()
 {
-    QString description =
+    /*QString description =
       QObject::tr( "Object name: %1 <br />"
                    "Category: %2 <br />"
                    "Pericentre: %3 km<br />"
@@ -128,8 +128,24 @@ void SatellitesMSCItem::setDescription()
         .arg( name(), category(), QString::number( m_perc, 'f', 2 ),
                                   QString::number( m_apoc, 'f', 2 ),
                                   QString::number( m_inc, 'f', 2 ),
-                                  QString::number( m_n0, 'f', 2 ) );
-     placemark()->setDescription( description );
+                                  QString::number( m_n0, 'f', 2 ) );*/
+
+    QFile templateFile(":/marble/satellites/satellite.html");
+    if (!templateFile.open(QIODevice::ReadOnly)) {
+        placemark()->setDescription(tr("No info available."));
+        return;
+    }
+    QString html = templateFile.readAll();
+
+    html.replace("%name%", name());
+    html.replace("%noradId%", QString::number(catalogIndex()));
+    html.replace("%perigee%", QString::number(m_perc, 'f', 2));
+    html.replace("%apogee%", QString::number(m_apoc, 'f', 2));
+    html.replace("%inclination%", QString::number(m_inc, 'f', 2));
+    html.replace("%period%", "?");
+    html.replace("%semiMajorAxis%", "?");
+
+    placemark()->setDescription( html );
 }
 
 void SatellitesMSCItem::update()

@@ -235,11 +235,23 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
 
     if ( actionidx > 0 ) {
         const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
-        if (index->role().isEmpty()) {
+        if (index->role().isEmpty() || index->visualCategory() == GeoDataFeature::Satellite) {
             MapInfoDialog* popup = m_widget->mapInfoDialog();
-            popup->setCoordinates(index->coordinate(), Qt::AlignRight | Qt::AlignVCenter);
-            popup->setSize(QSizeF(500, 800));
-            popup->setContent(index->description());
+            popup->setSize(QSizeF(600, 600));
+
+            if (index->visualCategory() == GeoDataFeature::Satellite) {
+                QString description = index->description();
+                GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+                popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+                description.replace("%altitude%", QString::number(location.altitude(), 'f', 2));
+                description.replace("%latitude%", location.latToString());
+                description.replace("%longitude%", location.lonToString());
+                popup->setContent(description);
+            } else {
+                popup->setContent(index->description());
+                popup->setCoordinates(index->coordinate(), Qt::AlignRight | Qt::AlignVCenter);
+            }
+
             popup->setVisible(true);
         } else {
             QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget->model()->clock(),  m_widget );

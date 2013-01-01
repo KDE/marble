@@ -21,6 +21,7 @@
 
 #include "sgp4/sgp4ext.h"
 
+#include <QtCore/QFile>
 #include <QtCore/QDateTime>
 #include <QtGui/QAction>
 #include <QtGui/QLabel>
@@ -38,6 +39,7 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
                                       elsetrec satrec,
                                       const MarbleClock *clock )
     : TrackerPluginItem( name ),
+      m_name(name),
       m_showOrbit( false ),
       m_satrec( satrec ),
       m_track( new GeoDataTrack() ),
@@ -65,7 +67,7 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
 
 void SatellitesTLEItem::setDescription()
 {
-    QString description =
+    /*QString description =
       QObject::tr( "NORAD ID: %2 <br />"
                    "Perigee: %3 km <br />"
                    "Apogee: %4 km <br />"
@@ -75,8 +77,24 @@ void SatellitesTLEItem::setDescription()
         .arg( QString::number( m_satrec.satnum ), QString::number( perigee() ),
               QString::number( apogee() ), QString::number( inclination() ),
               QString::number( period() / 60.0 ),
-              QString::number( semiMajorAxis() ) );
-     placemark()->setDescription( description );
+              QString::number( semiMajorAxis() ) );*/
+
+    QFile templateFile(":/marble/satellites/satellite.html");
+    if (!templateFile.open(QIODevice::ReadOnly)) {
+        placemark()->setDescription(tr("No info available."));
+        return;
+    }
+    QString html = templateFile.readAll();
+
+    html.replace("%name%", name());
+    html.replace("%noradId%", QString::number(m_satrec.satnum));
+    html.replace("%perigee%", QString::number(perigee(), 'f', 2));
+    html.replace("%apogee%", QString::number(apogee(), 'f', 2));
+    html.replace("%inclination%", QString::number(inclination(), 'f', 2));
+    html.replace("%period%", QString::number(period(), 'f', 2));
+    html.replace("%semiMajorAxis%", QString::number(semiMajorAxis(), 'f', 2));
+
+    placemark()->setDescription( html );
 }
 
 void SatellitesTLEItem::update()
@@ -105,6 +123,11 @@ void SatellitesTLEItem::update()
 
         addPointAt( QDateTime::fromTime_t( i ) );
     }
+}
+
+QString SatellitesTLEItem::name()
+{
+    return m_name;
 }
 
 void SatellitesTLEItem::addPointAt( const QDateTime &dateTime )

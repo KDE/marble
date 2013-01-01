@@ -42,6 +42,11 @@ public:
     virtual ~TrackerPluginItem();
 
     /**
+     * Satellite's name
+     */
+    QString name();
+
+    /**
      * Returns the wrapped placemark which will be displayed if this item is in a TrackerPluginModel
      */
     GeoDataPlacemark *placemark();

@@ -9,9 +9,7 @@
 //
 
 #include "TrackerPluginItem.h"
-
 #include "GeoDataPlacemark.h"
-
 #include "MarbleDebug.h"
 
 namespace Marble {
