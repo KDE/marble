@@ -77,7 +77,7 @@ QList<PluginAuthor> OpenDesktopPlugin::pluginAuthors() const
 
 QIcon OpenDesktopPlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/social.png");
 }
 
 QDialog *OpenDesktopPlugin::configDialog()

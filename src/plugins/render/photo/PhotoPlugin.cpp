@@ -109,7 +109,7 @@ QList<PluginAuthor> PhotoPlugin::pluginAuthors() const
 
 QIcon PhotoPlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/photo.png");
 }
 
 QDialog *PhotoPlugin::configDialog()

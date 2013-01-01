@@ -87,7 +87,7 @@ QList<PluginAuthor> EarthquakePlugin::pluginAuthors() const
 
 QIcon EarthquakePlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/earthquake.png");
 }
 
 QDialog *EarthquakePlugin::configDialog()

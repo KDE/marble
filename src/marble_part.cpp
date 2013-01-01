@@ -808,6 +808,7 @@ void MarblePart::setupActions()
                                    m_copyCoordinatesAction );
     m_copyCoordinatesAction->setText( i18nc( "Action for copying the coordinates to the clipboard",
                                              "C&opy Coordinates" ) );
+    m_copyCoordinatesAction->setIcon( KIcon( ":/icons/copy-coordinates.png" ) );
     connect( m_copyCoordinatesAction, SIGNAL( triggered( bool ) ),
              this,                    SLOT( copyCoordinates() ) );
 
@@ -833,6 +834,7 @@ void MarblePart::setupActions()
     m_mapWizardAct = new KAction( i18nc( "Action for creating new maps",
                                          "&Create a New Map..." ),
                                   this );
+    m_mapWizardAct->setIcon( KIcon( ":/icons/create-new-map.png" ) );
     actionCollection()->addAction( "createMap", m_mapWizardAct );
     m_mapWizardAct->setStatusTip( i18nc( "Status tip",
                                          "A wizard guides you through the creation of your own map theme." ) );
@@ -926,6 +928,7 @@ void MarblePart::setupActions()
                                    m_lockFloatItemsAct );
     m_lockFloatItemsAct->setText( i18nc( "Action for locking float items on the map",
                                          "Lock Position" ) );
+    m_lockFloatItemsAct->setIcon( KIcon( ":/icons/unlock.png" ) );
     m_lockFloatItemsAct->setCheckable( true );
     m_lockFloatItemsAct->setChecked( false );
     connect( m_lockFloatItemsAct, SIGNAL( triggered( bool ) ),
@@ -1004,6 +1007,7 @@ void MarblePart::setupActions()
     m_externalMapEditorAction = new KAction( this );
     actionCollection()->addAction( "external_editor", m_externalMapEditorAction );
     m_externalMapEditorAction->setText( i18nc( "Edit the map in an external application", "&Edit Map" ) );
+    m_externalMapEditorAction->setIcon( KIcon( ":/icons/edit-map.png" ) );
     m_externalMapEditorAction->setShortcut( Qt::CTRL + Qt::Key_E );
     connect( m_externalMapEditorAction, SIGNAL( triggered( ) ),
              m_controlView, SLOT( launchExternalMapEditor() ) );
@@ -1438,7 +1442,7 @@ void MarblePart::editSettings()
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );
     w_routingSettings->setObjectName( "routing_page" );
-    m_configDialog->addPage( w_routingSettings, tr( "Routing" ) );
+    m_configDialog->addPage( w_routingSettings, i18n( "Routing" ), "flag");
 
     // plugin page
     MarblePluginSettingsWidget *w_pluginSettings = new MarblePluginSettingsWidget();

@@ -59,7 +59,7 @@ AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
       m_configDialog( 0 ),
       ui_configWidget( 0 )
 {
-    setEnabled( false );
+    setEnabled( true );
     setVisible( true );
     
     setSettings( QHash<QString,QVariant>() );
@@ -158,7 +158,7 @@ QList<PluginAuthor> AprsPlugin::pluginAuthors() const
 
 QIcon AprsPlugin::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/aprs.png");
 }
 
 void AprsPlugin::stopGatherers()

@@ -72,7 +72,7 @@ QList<PluginAuthor> FoursquarePlugin::pluginAuthors() const
 
 QIcon FoursquarePlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/places.png");
 }
 
 bool FoursquarePlugin::isAuthenticated()

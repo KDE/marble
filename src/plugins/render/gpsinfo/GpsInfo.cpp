@@ -83,7 +83,7 @@ QList<PluginAuthor> GpsInfo::pluginAuthors() const
 
 QIcon GpsInfo::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/gps.png");
 }
 
 void GpsInfo::initialize ()

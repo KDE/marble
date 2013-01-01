@@ -211,7 +211,7 @@ QMenu* AbstractFloatItem::contextMenu()
     {
         d->m_contextMenu = new QMenu;
 
-        QAction *lockAction = d->m_contextMenu->addAction( tr( "&Lock" ) );
+        QAction *lockAction = d->m_contextMenu->addAction( QIcon(":/icons/unlock.png"), tr( "&Lock" ) );
         lockAction->setCheckable( true );
         lockAction->setChecked( positionLocked() );
         connect( lockAction, SIGNAL( triggered( bool ) ), this, SLOT( setPositionLocked( bool ) ) );
@@ -226,7 +226,7 @@ QMenu* AbstractFloatItem::contextMenu()
         if( dialog )
         {
             d->m_contextMenu->addSeparator();
-            QAction *configAction = d->m_contextMenu->addAction( tr( "&Configure..." ) );
+            QAction *configAction = d->m_contextMenu->addAction( QIcon(":/icons/settings-configure.png"), tr( "&Configure..." ) );
             connect( configAction, SIGNAL( triggered() ), dialog, SLOT( exec() ) );
         }
     }

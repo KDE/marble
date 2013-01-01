@@ -69,7 +69,7 @@ QString PostalCodePlugin::description() const
 
 QIcon PostalCodePlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/postalcode.png");
 }
 
 Q_EXPORT_PLUGIN2( PostalCodePlugin, Marble::PostalCodePlugin )

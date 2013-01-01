@@ -201,7 +201,7 @@ void MainWindow::createActions()
      m_printAct->setStatusTip(tr("Print a screenshot of the map"));
      connect(m_printAct, SIGNAL(triggered()), this, SLOT(printMapScreenShot()));
 
-     m_printPreviewAct = new QAction( QIcon(":/icons/document-printpreview.png"), tr("Print Previe&w ..."), this);
+     m_printPreviewAct = new QAction( QIcon(":/icons/document-print-preview.png"), tr("Print Previe&w ..."), this);
      m_printPreviewAct->setStatusTip(tr("Print a screenshot of the map"));
      connect(m_printPreviewAct, SIGNAL(triggered()), m_controlView, SLOT(printPreview()));
 
@@ -215,7 +215,7 @@ void MainWindow::createActions()
      m_copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
 
-     m_osmEditAction = new QAction( tr( "&Edit Map" ), this );
+     m_osmEditAction = new QAction( QIcon(":/icons/edit-map.png"), tr( "&Edit Map" ), this );
      m_osmEditAction->setShortcut(tr( "Ctrl+E" ) );
      m_osmEditAction->setStatusTip(tr( "Edit the current map region in an external editor" ) );
      updateMapEditButtonVisibility( m_controlView->marbleWidget()->mapThemeId() );
@@ -225,7 +225,7 @@ void MainWindow::createActions()
      m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
      connect(m_configDialogAct, SIGNAL(triggered()), this, SLOT(editSettings()));
 
-     m_copyCoordinatesAct = new QAction( QIcon(":/icons/edit-copy.png"), tr("C&opy Coordinates"), this);
+     m_copyCoordinatesAct = new QAction( QIcon(":/icons/copy-coordinates.png"), tr("C&opy Coordinates"), this);
      m_copyCoordinatesAct->setStatusTip(tr("Copy the center coordinates as text"));
      connect(m_copyCoordinatesAct, SIGNAL(triggered()), this, SLOT(copyCoordinates()));
 
@@ -248,7 +248,7 @@ void MainWindow::createActions()
      connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
 
 
-     m_lockFloatItemsAct = new QAction( tr("Lock Position"),this);
+     m_lockFloatItemsAct = new QAction( QIcon(":/icons/unlock.png"), tr("Lock Position"),this);
      m_lockFloatItemsAct->setCheckable( true );
      m_lockFloatItemsAct->setStatusTip(tr("Lock Position of Floating Items"));
      connect(m_lockFloatItemsAct, SIGNAL(triggered( bool )), this, SLOT( lockPosition( bool )));
@@ -326,7 +326,7 @@ void MainWindow::createActions()
      connect( m_manageBookmarksAct, SIGNAL( triggered() ), this, SLOT( manageBookmarks() ) );
      
      // Map Wizard action
-     m_mapWizardAct = new QAction( tr("&Create a New Map..."), this );
+     m_mapWizardAct = new QAction( QIcon( ":/icons/create-new-map.png" ), tr("&Create a New Map..."), this );
      m_mapWizardAct->setStatusTip( tr( "A wizard guides you through the creation of your own map theme." ) );
      connect( m_mapWizardAct, SIGNAL( triggered() ), SLOT( showMapWizard() ) );
 }

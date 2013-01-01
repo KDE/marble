@@ -127,7 +127,7 @@ QList<PluginAuthor> License::pluginAuthors() const
 
 QIcon License::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/license.png");
 }
 
 void License::initialize ()

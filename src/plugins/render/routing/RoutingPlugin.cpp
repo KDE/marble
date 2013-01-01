@@ -493,7 +493,7 @@ QList<PluginAuthor> RoutingPlugin::pluginAuthors() const
 
 QIcon RoutingPlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/routeplanning.png");
 }
 
 void RoutingPlugin::initialize()

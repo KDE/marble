@@ -89,7 +89,7 @@ QList<PluginAuthor> Speedometer::pluginAuthors() const
 
 QIcon Speedometer::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/speedometer.png");
 }
 
 void Speedometer::initialize ()
