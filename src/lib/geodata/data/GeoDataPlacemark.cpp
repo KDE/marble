@@ -130,6 +130,11 @@ void GeoDataPlacemark::setCoordinate( const GeoDataCoordinates &point )
     setGeometry ( new GeoDataPoint( point ) );
 }
 
+void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
+{
+    setGeometry ( new GeoDataPoint( point ) );
+}
+
 void GeoDataPlacemark::setGeometry( GeoDataGeometry *entry )
 {
     detach();
