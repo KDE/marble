@@ -151,6 +151,9 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr("<b>Google Code-in</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in the Google Code-in for their successful work on Marble:</p>")+
+        QObject::tr( "<p><b>2012</b></p>" ) +
+        QObject::tr( "Illya Kovalevskyy <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya.kovalevskyy@gmail.com</a><br />" ) +
+        QObject::tr( "Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees.technocool@gmail.com</a></p>" ) +
         QObject::tr( "<p><b>2011</b></p>" ) +
         QObject::tr( "<p>Utku Ayd&#x131;n <a href=\"mailto:utkuaydin34@gmail.com\">utkuaydin34@gmail.com</a><br />" ) +
         QObject::tr( "Daniel Marth <a href=\"mailto:danielmarth@gmx.at\">danielmarth@gmx.at</a><br />" ) +
