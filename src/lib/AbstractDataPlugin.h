@@ -48,7 +48,7 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     Q_PROPERTY( QObject* favoritesModel READ favoritesModel NOTIFY favoritesModelChanged )
     
  public:    
-    AbstractDataPlugin( const MarbleModel *marbleModel );
+    explicit AbstractDataPlugin( const MarbleModel *marbleModel );
 
     virtual ~AbstractDataPlugin();
 

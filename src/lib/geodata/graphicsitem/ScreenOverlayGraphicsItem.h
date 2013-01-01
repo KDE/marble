@@ -25,7 +25,7 @@ namespace Marble {
 class MARBLE_EXPORT ScreenOverlayGraphicsItem : public ScreenGraphicsItem
 {
 public:
-    ScreenOverlayGraphicsItem( const GeoDataScreenOverlay *screenOverlay );
+    explicit ScreenOverlayGraphicsItem( const GeoDataScreenOverlay *screenOverlay );
 
     void setProjection( const ViewportParams *viewport );
 

@@ -22,7 +22,7 @@ namespace Marble
 class KmlColorStyleTagWriter: public GeoTagWriter
 {
 public:
-    KmlColorStyleTagWriter( const QString &elementName );
+    explicit KmlColorStyleTagWriter( const QString &elementName );
 
     bool write( const GeoNode *node, GeoWriter& writer ) const;
 

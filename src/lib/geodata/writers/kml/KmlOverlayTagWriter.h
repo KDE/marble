@@ -20,7 +20,7 @@ namespace Marble
 class KmlOverlayTagWriter: public GeoTagWriter
 {
 public:
-    KmlOverlayTagWriter( const QString &elementName );
+    explicit KmlOverlayTagWriter( const QString &elementName );
 
     bool write( const GeoNode *node, GeoWriter& writer ) const;
 

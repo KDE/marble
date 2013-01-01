@@ -23,8 +23,8 @@ class GeoDataPolygon;
 class MARBLE_EXPORT GeoPolygonGraphicsItem : public GeoGraphicsItem
 {
 public:
-    GeoPolygonGraphicsItem( const GeoDataPolygon* polygon );
-    GeoPolygonGraphicsItem( const GeoDataLinearRing* ring );
+    explicit GeoPolygonGraphicsItem( const GeoDataPolygon* polygon );
+    explicit GeoPolygonGraphicsItem( const GeoDataLinearRing* ring );
 
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 

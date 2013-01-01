@@ -24,7 +24,7 @@ namespace Marble
 class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
 {
  public:
-    GeoSceneGeodata( QString name );
+    explicit GeoSceneGeodata( QString name );
     virtual ~GeoSceneGeodata();
     virtual const char* nodeType() const;
      

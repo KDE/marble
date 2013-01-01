@@ -21,7 +21,7 @@ class TileId;
 class ServerLayout
 {
 public:
-    ServerLayout( GeoSceneTiled *textureLayer );
+    explicit ServerLayout( GeoSceneTiled *textureLayer );
     virtual ~ServerLayout();
 
     /**
@@ -78,7 +78,7 @@ public:
 class CustomServerLayout : public ServerLayout
 {
 public:
-    CustomServerLayout( GeoSceneTiled *texture );
+    explicit CustomServerLayout( GeoSceneTiled *texture );
 
     /**
      * Replaces escape sequences in the @p prototypeUrl by the values in @p id
@@ -94,7 +94,7 @@ public:
 class WmsServerLayout : public ServerLayout
 {
 public:
-    WmsServerLayout( GeoSceneTiled *texture );
+    explicit WmsServerLayout( GeoSceneTiled *texture );
 
     /**
      * Adds WMS query items to the @p prototypeUrl and returns the result.
@@ -117,7 +117,7 @@ private:
 class QuadTreeServerLayout : public ServerLayout
 {
 public:
-    QuadTreeServerLayout( GeoSceneTiled* textureLayer );
+    explicit QuadTreeServerLayout( GeoSceneTiled* textureLayer );
     virtual QUrl downloadUrl( const QUrl &, const Marble::TileId & ) const;
 
     virtual QString name() const;

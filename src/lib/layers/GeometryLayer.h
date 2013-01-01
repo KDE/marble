@@ -28,7 +28,7 @@ class GeometryLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 public:
-    GeometryLayer( const QAbstractItemModel *model );
+    explicit GeometryLayer( const QAbstractItemModel *model );
     ~GeometryLayer();
 
     virtual QStringList renderPosition() const;

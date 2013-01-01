@@ -37,7 +37,7 @@ public:
      * Creates a new instance of GeoGraphicsScene
      * @param parent the QObject parent of the Scene
      */
-    GeoGraphicsScene( QObject *parent = 0 );
+    explicit GeoGraphicsScene( QObject *parent = 0 );
     ~GeoGraphicsScene();
 
     /**

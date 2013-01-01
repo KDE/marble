@@ -26,7 +26,7 @@ class LabelGraphicsItem;
 class LabelGraphicsItemPrivate
 {
  public:
-    LabelGraphicsItemPrivate( LabelGraphicsItem *parent );
+    explicit LabelGraphicsItemPrivate( LabelGraphicsItem *parent );
 
     // TODO: This has to go up to MarbleGraphicsItem
     QFont font() const;

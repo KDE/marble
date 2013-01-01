@@ -22,7 +22,7 @@ class MARBLE_EXPORT GeoTrackGraphicsItem : public GeoLineStringGraphicsItem
 {
 
 public:
-    GeoTrackGraphicsItem( const GeoDataTrack *track );
+    explicit GeoTrackGraphicsItem( const GeoDataTrack *track );
 
     void setTrack( const GeoDataTrack *track );
 

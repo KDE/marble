@@ -61,7 +61,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
      * resulting in a Box that has a 0 Area. This is useful for building
      * LatLonAltBoxes from GeoDataCoordinates.
      */
-    GeoDataLatLonAltBox( const GeoDataCoordinates & coordinates );
+    explicit GeoDataLatLonAltBox( const GeoDataCoordinates & coordinates );
     
     virtual ~GeoDataLatLonAltBox();
 

@@ -67,7 +67,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
  public:
     GeoDataFeature();
     /// Create a new GeoDataFeature with @p name as its name.
-    GeoDataFeature( const QString& name );
+    explicit GeoDataFeature( const QString& name );
 
     GeoDataFeature( const GeoDataFeature& other );
 

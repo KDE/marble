@@ -78,7 +78,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
  private:
     GeoDataGeometryPrivate* p() const;
     GeoDataGeometryPrivate* d;
-    GeoDataGeometry( GeoDataGeometryPrivate* priv );
+    explicit GeoDataGeometry( GeoDataGeometryPrivate* priv );
 };
 
 }

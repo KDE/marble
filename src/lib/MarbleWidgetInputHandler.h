@@ -39,7 +39,7 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
     Q_OBJECT
 
  public:
-    MarbleWidgetInputHandler( MarbleWidget* );
+    explicit MarbleWidgetInputHandler( MarbleWidget* );
     virtual ~MarbleWidgetInputHandler();
 
     void setPositionSignalConnected( bool connected );
@@ -98,7 +98,7 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
     Q_OBJECT
 
  public:
-    MarbleWidgetDefaultInputHandler( MarbleWidget* );
+    explicit MarbleWidgetDefaultInputHandler( MarbleWidget* );
     ~MarbleWidgetDefaultInputHandler();
 
     static bool keyEvent( MarbleWidget * widget, QEvent* e );

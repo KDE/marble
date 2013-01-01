@@ -30,7 +30,7 @@ class MARBLE_EXPORT DownloadRegion : public QObject
     Q_OBJECT
 
  public:
-    DownloadRegion( QObject* parent=0 );
+    explicit DownloadRegion( QObject* parent=0 );
 
     void setMarbleModel( MarbleModel *model );
 

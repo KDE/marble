@@ -25,7 +25,7 @@ namespace Marble
 class FrameGraphicsItemPrivate
 {
  public:
-    FrameGraphicsItemPrivate( FrameGraphicsItem *parent )
+    explicit FrameGraphicsItemPrivate( FrameGraphicsItem *parent )
         : m_frame( FrameGraphicsItem::NoFrame ),
           m_contentSize( 0.0, 0.0 ),
           m_margin( 0.0 ),
