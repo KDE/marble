@@ -79,7 +79,7 @@ void SearchInputWidget::showDropDownMenu()
     QAction* areaSearch = menu.addAction( tr( "Area Search" ), this, SLOT( setAreaSearch() ) );
     areaSearch->setCheckable( true );
     areaSearch->setChecked( m_areaSearch );
-    menu.exec( mapToGlobal( pos() + QPoint( 0, size().height() ) ) );
+    menu.exec( mapToGlobal( QPoint( 0, size().height() ) ) );
 }
 
 void SearchInputWidget::setGlobalSearch()
