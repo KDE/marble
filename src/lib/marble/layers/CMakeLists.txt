@@ -7,8 +7,6 @@ set( layers_HDRS
     PlacemarkLayer.h
     PopupLayer.h
     TextureLayer.h
-    VectorMapBaseLayer.h
-    VectorMapLayer.h
     VectorTileLayer.h
 )
 
@@ -21,7 +19,5 @@ set( layers_SRCS
     layers/PlacemarkLayer.cpp
     layers/PopupLayer.cpp
     layers/TextureLayer.cpp
-    layers/VectorMapBaseLayer.cpp
-    layers/VectorMapLayer.cpp
     layers/VectorTileLayer.cpp
 )

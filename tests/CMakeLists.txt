@@ -82,7 +82,6 @@ marble_add_test( MarbleMapTest )            # Check map theme and centering
 marble_add_test( MarbleWidgetTest )         # Check map theme, mouse move, repaint and multiple widgets
 marble_add_test( MapViewWidgetTest )        # Check mapview signals
 marble_add_test( TestGeoPainter )           # no tests!
-marble_add_test( GeoPolygonTest )           # Loads an empty pnt file
 marble_add_test( GeoUriParserTest )
 marble_add_test( BillboardGraphicsItemTest )
 marble_add_test( ScreenGraphicsItemTest )
