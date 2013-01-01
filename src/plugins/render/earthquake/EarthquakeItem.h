@@ -25,7 +25,7 @@ class EarthquakeItem : public AbstractDataPluginItem
     Q_OBJECT
 
 public:
-    EarthquakeItem( QObject *parent );
+    explicit EarthquakeItem( QObject *parent );
 
     ~EarthquakeItem();
 

@@ -21,7 +21,7 @@ class GeoNamesWeatherItem : public WeatherItem
     Q_OBJECT
 
  public:
-    GeoNamesWeatherItem( QObject *parent = 0 );
+    explicit GeoNamesWeatherItem( QObject *parent = 0 );
     ~GeoNamesWeatherItem();
 
     void addDownloadedFile( const QString& url, const QString& type );

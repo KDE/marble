@@ -40,7 +40,7 @@ class MasterClient : public QObject
     Q_OBJECT
     
     public:
-        MasterClient(QObject* parent = 0);
+        explicit MasterClient(QObject* parent = 0);
         ~MasterClient();
         PositionProvider* positionProvider();
         void setRequirements(AccuracyLevel, int min_time, SignallingFlags,

@@ -23,7 +23,7 @@ class PostalCodeItem : public AbstractDataPluginItem
     Q_OBJECT
 
  public:
-    PostalCodeItem( QObject *parent );
+    explicit PostalCodeItem( QObject *parent );
 
     ~PostalCodeItem();
 

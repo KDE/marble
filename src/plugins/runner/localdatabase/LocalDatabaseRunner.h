@@ -22,7 +22,7 @@ class LocalDatabaseRunner : public SearchRunner
 {
     Q_OBJECT
 public:
-    LocalDatabaseRunner(QObject *parent = 0);
+    explicit LocalDatabaseRunner(QObject *parent = 0);
     ~LocalDatabaseRunner();
     virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 

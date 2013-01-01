@@ -44,8 +44,8 @@ class WeatherItem : public AbstractDataPluginItem
     Q_PROPERTY( double temperature READ temperature NOTIFY temperatureChanged )
 
  public:
-    WeatherItem( QObject *parent = 0 );
-    WeatherItem( MarbleWidget* widget, QObject *parent = 0 );
+    explicit WeatherItem( QObject *parent = 0 );
+    explicit WeatherItem( MarbleWidget* widget, QObject *parent = 0 );
     ~WeatherItem();
     
     QAction *action();

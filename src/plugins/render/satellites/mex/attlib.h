@@ -32,7 +32,7 @@ class Vec3
 
    friend class Mat3;
 
-   Vec3(double x=0, double y=0, double z=0);
+   explicit Vec3(double x=0, double y=0, double z=0);
    Vec3 (const Vec3& c);
    void assign (double x=0, double y=0, double z=0);
    double& operator [] (unsigned index);
@@ -64,7 +64,7 @@ class Mat3
  public:
    double m[3][3];
 
-   Mat3(double x=0);
+   explicit Mat3(double x=0);
    Mat3 (const Mat3& c);
    void assign (double x11, double x12, double x13,  double x21, double x22,
                 double x23, double x31, double x32, double x33);

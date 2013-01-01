@@ -27,7 +27,7 @@ class OpenDesktopItem : public AbstractDataPluginItem
     Q_OBJECT
 
     public:
-        OpenDesktopItem(QObject *parent);
+        explicit OpenDesktopItem(QObject *parent);
 
         ~OpenDesktopItem();
 

@@ -23,7 +23,7 @@ class GeoDataCoordinates;
 class CoordinatesParser : public QXmlStreamReader
 {
 public:
-    CoordinatesParser( GeoDataCoordinates *coordinates );
+    explicit CoordinatesParser( GeoDataCoordinates *coordinates );
 
     bool read( QIODevice *device );
 

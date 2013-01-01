@@ -21,7 +21,7 @@ class FakeWeatherService : public AbstractWeatherService
     Q_OBJECT
  
  public:
-    FakeWeatherService( QObject *parent );
+    explicit FakeWeatherService( QObject *parent );
     ~FakeWeatherService();
     
  public Q_SLOTS:

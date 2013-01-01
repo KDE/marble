@@ -29,7 +29,7 @@ class StationListParser : public QThread, public QXmlStreamReader
 {
     Q_OBJECT
 public:
-    StationListParser( QObject *parent );
+    explicit StationListParser( QObject *parent );
     ~StationListParser();
 
     void read();

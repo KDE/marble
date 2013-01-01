@@ -46,7 +46,7 @@ class CrosshairsPlugin : public RenderPlugin, public DialogConfigurationInterfac
  public:
     CrosshairsPlugin();
 
-    CrosshairsPlugin( const MarbleModel *marbleModel );
+    explicit CrosshairsPlugin( const MarbleModel *marbleModel );
 
     ~CrosshairsPlugin();
 

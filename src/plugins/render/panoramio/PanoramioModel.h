@@ -24,7 +24,7 @@ class PanoramioModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    PanoramioModel( QObject *parent = 0 );
+    explicit PanoramioModel( QObject *parent = 0 );
  
  protected:
     /**

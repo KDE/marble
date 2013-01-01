@@ -28,7 +28,7 @@ class BBCWeatherService : public AbstractWeatherService
     Q_OBJECT
  
  public:
-    BBCWeatherService( QObject *parent );
+    explicit BBCWeatherService( QObject *parent );
     ~BBCWeatherService();
 
     void setFavoriteItems( const QStringList& favorite );

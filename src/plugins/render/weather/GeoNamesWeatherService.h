@@ -23,7 +23,7 @@ class GeoNamesWeatherService : public AbstractWeatherService
     Q_OBJECT
 
  public:
-    GeoNamesWeatherService( QObject *parent );
+    explicit GeoNamesWeatherService( QObject *parent );
     ~GeoNamesWeatherService();
 
  public Q_SLOTS:

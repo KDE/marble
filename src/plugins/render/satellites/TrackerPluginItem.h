@@ -34,7 +34,7 @@ public:
     /**
      * Constructs an item and set the wrapped placemark name to @p name
      */
-    TrackerPluginItem( const QString &name );
+    explicit TrackerPluginItem( const QString &name );
 
     /**
      * Destroy the item.

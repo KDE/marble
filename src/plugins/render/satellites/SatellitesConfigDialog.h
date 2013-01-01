@@ -34,7 +34,7 @@ public:
         IsLoadedRole    = Qt::UserRole + 1
     };
 
-    SatellitesConfigDialog( QWidget *parent = 0 );
+    explicit SatellitesConfigDialog( QWidget *parent = 0 );
     ~SatellitesConfigDialog();
 
     void update();
