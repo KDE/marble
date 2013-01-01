@@ -26,7 +26,6 @@
 #include "MarbleGlobal.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
-#include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
@@ -69,10 +68,8 @@ private:
 
 
 TextureColorizer::TextureColorizer( const QString &seafile,
-                                    const QString &landfile,
-                                    VectorComposer *veccomposer )
-    : m_veccomposer( veccomposer ),
-      m_showRelief( false ),
+                                    const QString &landfile )
+    : m_showRelief( false ),
       m_landColor(qRgb( 255, 0, 0 ) ),
       m_seaColor( qRgb( 0, 255, 0 ) )
 {
@@ -242,11 +239,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     GeoPainter painter( &m_coastImage, viewport, mapQuality );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    if ( m_landDocuments.isEmpty() ) {
-        m_veccomposer->drawTextureMap( &painter, viewport );
-    } else {
-        drawTextureMap( &painter );
-    }
+    drawTextureMap( &painter );
 
     const qint64   radius   = viewport->radius();
 

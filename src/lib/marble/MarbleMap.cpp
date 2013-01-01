@@ -39,8 +39,6 @@
 #include "layers/MarbleSplashLayer.h"
 #include "layers/PlacemarkLayer.h"
 #include "layers/TextureLayer.h"
-#include "layers/VectorMapBaseLayer.h"
-#include "layers/VectorMapLayer.h"
 #include "layers/VectorTileLayer.h"
 #include "AbstractFloatItem.h"
 #include "DgmlAuxillaryDictionary.h"
@@ -70,7 +68,6 @@
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
-#include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
@@ -134,7 +131,6 @@ public:
     ViewportParams   m_viewport;
     bool             m_showFrameRate;
 
-    VectorComposer   m_veccomposer;
 
     LayerManager     m_layerManager;
     MarbleSplashLayer m_marbleSplashLayer;
@@ -142,8 +138,6 @@ public:
     GeometryLayer            m_geometryLayer;
     FogLayer                 m_fogLayer;
     GroundLayer              m_groundLayer;
-    VectorMapBaseLayer       m_vectorMapBaseLayer;
-    VectorMapLayer   m_vectorMapLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayer   m_placemarkLayer;
     VectorTileLayer  m_vectorTileLayer;
@@ -157,13 +151,10 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_model( model ),
     m_viewParams(),
     m_showFrameRate( false ),
-    m_veccomposer(),
     m_layerManager( model, parent ),
     m_customPaintLayer( parent ),
     m_geometryLayer( model->treeModel() ),
-    m_vectorMapBaseLayer( &m_veccomposer ),
-    m_vectorMapLayer( &m_veccomposer ),
-    m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->groundOverlayModel() ),
+    m_textureLayer( model->downloadManager(), model->sunLocator(), model->groundOverlayModel() ),
     m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock() ),
     m_vectorTileLayer( model->downloadManager(), model->pluginManager(), model->treeModel() ),
     m_isLockedToSubSolarPoint( false ),
@@ -180,8 +171,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     QObject::connect( m_model->fileManager(), SIGNAL(fileAdded(QString)),
                       parent, SLOT(setDocument(QString)) );
 
-    QObject::connect( &m_veccomposer, SIGNAL(datasetLoaded()),
-                      parent, SIGNAL(repaintNeeded()));
 
     QObject::connect( &m_placemarkLayer, SIGNAL(repaintNeeded()),
                       parent, SIGNAL(repaintNeeded()));
@@ -229,20 +218,6 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
         m_placemarkLayer.setShowMaria( show );
     }
 
-    else if ( name == "waterbodies" ) {
-        m_veccomposer.setShowWaterBodies( show );
-    } else if ( name == "lakes" ) {
-        m_veccomposer.setShowLakes( show );
-    } else if ( name == "ice" ) {
-        m_veccomposer.setShowIce( show );
-    } else if ( name == "coastlines" ) {
-        m_veccomposer.setShowCoastLines( show );
-    } else if ( name == "rivers" ) {
-        m_veccomposer.setShowRivers( show );
-    } else if ( name == "borders" ) {
-        m_veccomposer.setShowBorders( show );
-    }
-
     else if ( name == "relief" ) {
         m_textureLayer.setShowRelief( show );
     }
@@ -287,8 +262,6 @@ MarbleMap::~MarbleMap()
     d->m_layerManager.removeLayer( &d->m_placemarkLayer );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
     d->m_layerManager.removeLayer( &d->m_groundLayer );
-    d->m_layerManager.removeLayer( &d->m_vectorMapLayer );
-    d->m_layerManager.removeLayer( &d->m_vectorMapBaseLayer );
     delete d;
 
     delete model;  // delete the model after private data
@@ -720,7 +693,8 @@ void MarbleMapPrivate::setDocument( QString key )
     GeoDataDocument* doc = m_model->fileManager()->at( key );
 
     foreach ( const GeoSceneLayer *layer, m_model->mapTheme()->map()->layers() ) {
-        if ( layer->backend() != dgml::dgmlValue_geodata )
+        if ( layer->backend() != dgml::dgmlValue_geodata
+             && layer->backend() != dgml::dgmlValue_vector )
             continue;
 
         // look for documents
@@ -794,8 +768,6 @@ void MarbleMapPrivate::updateMapTheme()
     // FIXME Find a better way to do this reset. Maybe connect to themeChanged SIGNAL?
     m_vectorTileLayer.reset();
     m_layerManager.removeLayer( &m_vectorTileLayer );
-    m_layerManager.removeLayer( &m_vectorMapLayer );
-    m_layerManager.removeLayer( &m_vectorMapBaseLayer );
     m_layerManager.removeLayer( &m_groundLayer );
 
     QObject::connect( m_model->mapTheme()->settings(), SIGNAL(valueChanged(QString,bool)),
@@ -808,56 +780,6 @@ void MarbleMapPrivate::updateMapTheme()
     if ( !m_model->mapTheme()->map()->hasTextureLayers() ) {
         m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
         m_layerManager.addLayer( &m_groundLayer );
-    }
-
-    // Check whether there is a vector layer available:
-    if ( m_model->mapTheme()->map()->hasVectorLayers() ) {
-        m_veccomposer.setShowWaterBodies( q->propertyValue( "waterbodies" ) );
-        m_veccomposer.setShowLakes( q->propertyValue( "lakes" ) );
-        m_veccomposer.setShowIce( q->propertyValue( "ice" ) );
-        m_veccomposer.setShowCoastLines( q->propertyValue( "coastlines" ) );
-        m_veccomposer.setShowRivers( q->propertyValue( "rivers" ) );
-        m_veccomposer.setShowBorders( q->propertyValue( "borders" ) );
-
-        // Set all the colors for the vector layers
-        m_veccomposer.setOceanColor( m_model->mapTheme()->map()->backgroundColor() );
-
-        // Just as with textures, this is a workaround for DGML2 to
-        // emulate the old behaviour.
-
-        const GeoSceneLayer *layer = m_model->mapTheme()->map()->layer( "mwdbii" );
-        if ( layer ) {
-            const GeoSceneVector *vector = 0;
-
-            vector = static_cast<const GeoSceneVector*>( layer->dataset("pdiffborder") );
-            if ( vector )
-                m_veccomposer.setCountryBorderColor( vector->pen().color() );
-
-            vector = static_cast<const GeoSceneVector*>( layer->dataset("rivers") );
-            if ( vector )
-                m_veccomposer.setRiverColor( vector->pen().color() );
-
-            vector = static_cast<const GeoSceneVector*>( layer->dataset("pusa48") );
-            if ( vector )
-                m_veccomposer.setStateBorderColor( vector->pen().color() );
-
-            vector = static_cast<const GeoSceneVector*>( layer->dataset("plake") );
-            if ( vector )
-                m_veccomposer.setLakeColor( vector->pen().color() );
-
-            vector = static_cast<const GeoSceneVector*>( layer->dataset("pcoast") );
-            if ( vector )
-            {
-                m_veccomposer.setLandColor( vector->brush().color() );
-                m_veccomposer.setCoastColor( vector->pen().color() );
-            }
-        }
-
-        if ( !m_model->mapTheme()->map()->hasTextureLayers() ) {
-            m_layerManager.addLayer( &m_vectorMapBaseLayer );
-        }
-
-        m_layerManager.addLayer( &m_vectorMapLayer );
     }
 
     // Check whether there is a texture layer and vectortile layer available:

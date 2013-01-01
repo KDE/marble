@@ -34,7 +34,6 @@
 #include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "TileLoader.h"
-#include "VectorComposer.h"
 #include "ViewportParams.h"
 
 namespace Marble
@@ -47,7 +46,6 @@ class TextureLayer::Private
 public:
     Private( HttpDownloadManager *downloadManager,
              const SunLocator *sunLocator,
-             VectorComposer *veccomposer,
              QAbstractItemModel *groundOverlayModel,
              TextureLayer *parent );
 
@@ -66,7 +64,6 @@ public:
 public:
     TextureLayer  *const m_parent;
     const SunLocator *const m_sunLocator;
-    VectorComposer *const m_veccomposer;
     HttpDownloadManager *const m_downloadManager;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
@@ -85,12 +82,10 @@ public:
 
 TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
                                 const SunLocator *sunLocator,
-                                VectorComposer *veccomposer,
                                 QAbstractItemModel *groundOverlayModel,
                                 TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
-    , m_veccomposer( veccomposer )
     , m_downloadManager( downloadManager )
     , m_layerDecorator( sunLocator )
     , m_tileLoader( &m_layerDecorator )
@@ -231,19 +226,15 @@ void TextureLayer::Private::updateGroundOverlays()
 
 TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
                             const SunLocator *sunLocator,
-                            VectorComposer *veccomposer ,
                             QAbstractItemModel *groundOverlayModel )
     : QObject()
-    , d( new Private( downloadManager, sunLocator, veccomposer, groundOverlayModel, this ) )
+    , d( new Private( downloadManager, sunLocator, groundOverlayModel, this ) )
 {
     // Repaint timer
     d->m_repaintTimer.setSingleShot( true );
     d->m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
     connect( &d->m_repaintTimer, SIGNAL(timeout()),
              this, SIGNAL(repaintNeeded()) );
-
-    connect( d->m_veccomposer, SIGNAL(datasetLoaded()),
-             this, SLOT(requestDelayedRepaint()) );
 }
 
 TextureLayer::~TextureLayer()
@@ -453,7 +444,7 @@ void TextureLayer::setMapTheme( const QVector<const GeoSceneTextureTile *> &text
     d->m_textures.clear();
 
     if ( QFileInfo( seaFile ).isReadable() || QFileInfo( landFile ).isReadable() ) {
-        d->m_texcolorizer = new TextureColorizer( seaFile, landFile, d->m_veccomposer );
+        d->m_texcolorizer = new TextureColorizer( seaFile, landFile );
     }
 
     foreach ( const GeoSceneTextureTile *textureTile, textures ) {

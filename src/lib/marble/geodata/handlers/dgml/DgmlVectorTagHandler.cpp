@@ -28,7 +28,7 @@
 #include "DgmlAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneVector.h"
+#include "GeoSceneGeodata.h"
 
 namespace Marble
 {
@@ -44,7 +44,7 @@ GeoNode* DgmlVectorTagHandler::parse(GeoParser& parser) const
     QString name      = parser.attribute(dgmlAttr_name).trimmed();
     QString feature   = parser.attribute(dgmlAttr_feature).trimmed();
 
-    GeoSceneVector *vector = 0;
+    GeoSceneGeodata *vector = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
@@ -54,8 +54,8 @@ GeoNode* DgmlVectorTagHandler::parse(GeoParser& parser) const
     if ( parentItem.represents(dgmlTag_Layer)
         && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vector ) {
 
-        vector = new GeoSceneVector( name );
-        vector->setFeature( feature );
+        vector = new GeoSceneGeodata( name );
+        vector->setColorize( feature );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( vector );
     }
 

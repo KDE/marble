@@ -33,7 +33,6 @@ class GeoSceneGroup;
 class GeoSceneTextureTile;
 class HttpDownloadManager;
 class SunLocator;
-class VectorComposer;
 class ViewportParams;
 
 class TextureLayer : public QObject, public LayerInterface
@@ -43,7 +42,6 @@ class TextureLayer : public QObject, public LayerInterface
  public:
     TextureLayer( HttpDownloadManager *downloadManager,
                   const SunLocator *sunLocator,
-                  VectorComposer *veccomposer,
                   QAbstractItemModel *groundOverlayModel );
 
     ~TextureLayer();
