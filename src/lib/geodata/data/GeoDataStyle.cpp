@@ -82,6 +82,7 @@ const char* GeoDataStyle::nodeType() const
 void GeoDataStyle::setIconStyle( const GeoDataIconStyle& style )
 {
     d->m_iconStyle = style;
+    d->m_iconStyle.setParent( this );
 }
 
 void GeoDataStyle::setLineStyle( const GeoDataLineStyle& style )

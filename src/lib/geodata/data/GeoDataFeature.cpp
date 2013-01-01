@@ -564,7 +564,9 @@ void GeoDataFeature::setStyleUrl( const QString &value)
                 styleUrl = styleMap.value( QString( "normal" ) );
                 styleUrl.remove('#');
             }
-            setStyle( &doc->style( styleUrl ) );
+            // Not calling setStyle here because we don't want
+            // re-parenting of the style
+            d->m_style = &doc->style( styleUrl );
             found = true;
         }
         object = object->parent();
@@ -635,9 +637,10 @@ const GeoDataStyle* GeoDataFeature::style() const
     }
 }
 
-void GeoDataFeature::setStyle( const GeoDataStyle* style )
+void GeoDataFeature::setStyle( GeoDataStyle* style )
 {
     detach();
+    style->setParent( this );
     d->m_style = style;
 }
 

@@ -78,6 +78,7 @@ void GeoDataDocument::addStyle( const GeoDataStyle& style )
 {
     detach();
     p()->m_styleHash.insert( style.styleId(), style );
+    p()->m_styleHash[ style.styleId() ].setParent( this );
 }
 
 void GeoDataDocument::removeStyle( const QString& styleId )
@@ -104,6 +105,7 @@ void GeoDataDocument::addStyleMap( const GeoDataStyleMap& map )
 {
     detach();
     p()->m_styleMapHash.insert( map.styleId(), map );
+    p()->m_styleMapHash[ map.styleId() ].setParent( this );
 }
 
 void GeoDataDocument::removeStyleMap( const QString& mapId )

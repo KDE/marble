@@ -99,7 +99,7 @@ QImage GeoDataIconStyle::icon() const
     if(!d->m_icon.isNull())
         return d->m_icon;
     else if(!d->m_iconPath.isEmpty()) {
-        d->m_icon = QImage(d->m_iconPath);
+        d->m_icon = QImage( resolvePath( d->m_iconPath ) );
         return d->m_icon;
     }
     else

@@ -383,7 +383,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * Sets the style of the placemark.
      * @param  style  the new style to be used.
      */
-    void setStyle( const GeoDataStyle* style );
+    void setStyle( GeoDataStyle *style );
 
     /**
      * Return the ExtendedData assigned to the feature.

@@ -83,6 +83,8 @@ public:
      */
     void setTargetId( int value );
 
+    QString resolvePath( const QString &relativePath ) const;
+
     /// Reimplemented from Serializable
     virtual void pack( QDataStream& stream ) const;
     /// Reimplemented from Serializable

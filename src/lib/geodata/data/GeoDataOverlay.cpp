@@ -28,30 +28,11 @@ public:
     QString m_iconPath;
 
     GeoDataOverlayPrivate();
-
-    QString resolve( const GeoDataObject *object, const QString &filename ) const;
 };
 
 GeoDataOverlayPrivate::GeoDataOverlayPrivate() : m_color( Qt::white ), m_drawOrder( 0 )
 {
     // nothing to do
-}
-
-QString GeoDataOverlayPrivate::resolve( const GeoDataObject* object, const QString &filename ) const
-{
-    QFileInfo fileInfo( filename );
-    if ( fileInfo.isRelative() ) {
-        GeoDataDocument const * document = dynamic_cast<GeoDataDocument const*>( object );
-        if ( document ) {
-            QFileInfo documentFile = document->fileName();
-            QFileInfo absoluteImage( documentFile.absolutePath() + '/' + filename );
-            return absoluteImage.absoluteFilePath();
-        } else {
-            return resolve( object->parent(), filename );
-        }
-    }
-
-    return filename;
 }
 
 GeoDataOverlay::GeoDataOverlay() : d( new GeoDataOverlayPrivate )
@@ -121,7 +102,7 @@ QString GeoDataOverlay::iconFile() const
 
 QString GeoDataOverlay::absoluteIconFile() const
 {
-    return d->resolve( this, d->m_iconPath );
+    return resolvePath( d->m_iconPath );
 }
 
 }
