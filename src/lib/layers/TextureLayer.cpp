@@ -176,14 +176,18 @@ QStringList TextureLayer::renderPosition() const
 
 void TextureLayer::addSeaDocument( GeoDataDocument* seaDocument )
 {
-    d->m_texcolorizer->addSeaDocument( seaDocument );
-    reset();
+    if( d->m_texcolorizer ) {
+        d->m_texcolorizer->addSeaDocument( seaDocument );
+        reset();
+    }
 }
 
 void TextureLayer::addLandDocument( GeoDataDocument* landDocument )
 {
-    d->m_texcolorizer->addLandDocument( landDocument );
-    reset();
+    if( d->m_texcolorizer ) {
+        d->m_texcolorizer->addLandDocument( landDocument );
+        reset();
+    }
 }
 
 bool TextureLayer::showSunShading() const

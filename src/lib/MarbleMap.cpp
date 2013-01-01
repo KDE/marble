@@ -705,26 +705,6 @@ void MarbleMapPrivate::setDocument( QString key ) {
 
     GeoDataDocument* doc = m_model->fileManager()->at( key );
 
-    QString coastName;
-    QString lakeName;
-    QString glacierName;
-    if (m_model->mapTheme()->map()->filters().count()) {
-      coastName = m_model->mapTheme()->map()->filters().at( 0 )->coastlines();
-      lakeName = m_model->mapTheme()->map()->filters().at( 0 )->lakes();
-      glacierName = m_model->mapTheme()->map()->filters().at( 0 )->glaciers();
-    }
-    if ( key == coastName ) {
-        m_textureLayer.addLandDocument( doc );
-    }
-
-    if ( key == lakeName ) {
-        m_textureLayer.addSeaDocument( doc );
-    }
-
-    if ( key == glacierName ) {
-        m_textureLayer.addSeaDocument( doc );
-    }
-
     foreach ( GeoSceneLayer *layer, m_model->mapTheme()->map()->layers() ) {
         if ( layer->backend() != dgml::dgmlValue_geodata )
             continue;
@@ -733,7 +713,15 @@ void MarbleMapPrivate::setDocument( QString key ) {
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
             GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
             QString containername = data->sourceFile();
+            QString colorize = data->colorize();
             if( key == containername ) {
+                if( colorize == "land" ) {
+                    m_textureLayer.addLandDocument( doc );
+                }
+                if( colorize == "sea" ) {
+                    m_textureLayer.addSeaDocument( doc );
+                }
+
                 // set visibility according to theme property
                 if( !data->property().isEmpty() ) {
                     bool value;

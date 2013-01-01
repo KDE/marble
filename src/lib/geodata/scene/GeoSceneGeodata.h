@@ -30,10 +30,13 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
      
     QString property() const;
     void setProperty( QString property );
-     
+
     QString sourceFile() const;
     void setSourceFile( QString sourceFile );
      
+    QString colorize() const;
+    void setColorize( QString colorize );
+
     QPen pen() const;
     void setPen( const QPen& pen );
 
@@ -45,6 +48,7 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
  private:
     QString m_property;
     QString m_sourceFile;
+    QString m_colorize;
     QPen    m_pen;
     QBrush  m_brush;
 };

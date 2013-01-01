@@ -52,6 +52,16 @@ void GeoSceneGeodata::setSourceFile(QString sourceFile)
     m_sourceFile = sourceFile;
 }
 
+QString GeoSceneGeodata::colorize() const
+{
+    return m_colorize;
+}
+
+void GeoSceneGeodata::setColorize( QString colorize )
+{
+    m_colorize = colorize;
+}
+
 QPen GeoSceneGeodata::pen() const
 {
     return m_pen;
