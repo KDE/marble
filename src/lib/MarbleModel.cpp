@@ -311,19 +311,20 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
     }
 
     QStringList loadList;
+    QStringList propertyList;
     QList<GeoDataStyle*> styleList;
 
     foreach ( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
         if ( layer->backend() != dgml::dgmlValue_geodata )
             continue;
-        if ( layer->datasets().count() <= 0 )
-            continue;
 
         // look for documents
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-            QString containername = reinterpret_cast<GeoSceneGeodata*>( dataset )->sourceFile();
-            QPen pen = reinterpret_cast<GeoSceneGeodata*>( dataset )->pen();
-            QBrush brush = reinterpret_cast<GeoSceneGeodata*>( dataset )->brush();
+            GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
+            QString containername = data->sourceFile();
+            QString property = data->property();
+            QPen pen = data->pen();
+            QBrush brush = data->brush();
 
             GeoDataLineStyle* lineStyle = new GeoDataLineStyle( pen.color() );
             lineStyle->setPenStyle( pen.style() );
@@ -339,6 +340,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
             if ( !loadedContainers.removeOne( containername ) ) {
                 loadList << containername;
+                propertyList << property;
                 styleList << style;
             }
         }
@@ -349,7 +351,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
         d->m_fileManager->removeFile( container );
     }
     // load new standard Placemarks
-    d->m_fileManager->addFile( loadList, styleList, MapDocument );
+    d->m_fileManager->addFile( loadList, propertyList, styleList, MapDocument );
     loadList.clear();
     styleList.clear();
 
@@ -623,7 +625,7 @@ void MarbleModel::setLegend( QTextDocument * legend )
 void MarbleModel::addGeoDataFile( const QString& filename )
 {
     GeoDataStyle* dummyStyle = new GeoDataStyle;
-    d->m_fileManager->addFile( filename, dummyStyle, UserDocument, true );
+    d->m_fileManager->addFile( filename, filename, dummyStyle, UserDocument, true );
 }
 
 void MarbleModel::addGeoDataString( const QString& data, const QString& key )
@@ -634,6 +636,19 @@ void MarbleModel::addGeoDataString( const QString& data, const QString& key )
 void MarbleModel::removeGeoData( const QString& fileName )
 {
     d->m_fileManager->removeFile( fileName );
+}
+
+void MarbleModel::updateProperty( const QString &property, bool value )
+{
+    foreach( GeoDataFeature *feature, d->m_treemodel.rootDocument()->featureList()) {
+        if( feature->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataDocument *document = static_cast<GeoDataDocument*>( feature );
+            if( document->property() == property ){
+                document->setVisible( value );
+                d->m_treemodel.updateFeature( document );
+            }
+        }
+    }
 }
 
 bool MarbleModel::workOffline() const

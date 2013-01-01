@@ -53,13 +53,13 @@ class FileManager : public QObject
     /**
      * Loads a new file into the manager.
      */
-    void addFile( const QString &fileName, GeoDataStyle* style, DocumentRole role, bool recenter = false );
+    void addFile( const QString &fileName, const QString &property, GeoDataStyle* style, DocumentRole role, bool recenter = false );
 
 
     /**
      * Loads multiple files into the manager.
      */
-    void addFile( const QStringList &fileNames, const QList<GeoDataStyle*> &styles, DocumentRole role );
+    void addFile( const QStringList &fileNames, const QStringList &propertyList, const QList<GeoDataStyle*> &styles, DocumentRole role );
 
 
     /**

@@ -28,7 +28,8 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     virtual ~GeoSceneGeodata();
     virtual const char* nodeType() const;
      
-    QString name() const;
+    QString property() const;
+    void setProperty( QString property );
      
     QString sourceFile() const;
     void setSourceFile( QString sourceFile );
@@ -42,7 +43,7 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     virtual QString type();
     
  private:
-    QString m_name;
+    QString m_property;
     QString m_sourceFile;
     QPen    m_pen;
     QBrush  m_brush;

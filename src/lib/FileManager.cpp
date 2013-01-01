@@ -77,7 +77,7 @@ FileManager::~FileManager()
     delete d;
 }
 
-void FileManager::addFile( const QString& filepath, GeoDataStyle* style, DocumentRole role, bool recenter )
+void FileManager::addFile( const QString& filepath, const QString& property, GeoDataStyle* style, DocumentRole role, bool recenter )
 {
     foreach ( const GeoDataDocument *document, d->m_fileItemList ) {
         if ( document->fileName() == filepath )
@@ -93,20 +93,14 @@ void FileManager::addFile( const QString& filepath, GeoDataStyle* style, Documen
     mDebug() << "Starting placemark loading timer";
     d->m_timer.start();
     d->m_recenter = recenter;
-    FileLoader* loader = new FileLoader( this, d->m_model, filepath, role, style );
+    FileLoader* loader = new FileLoader( this, d->m_model, filepath, property, style, role );
     d->appendLoader( loader );
 }
 
-void FileManager::addFile( const QStringList& filepaths, const QList<GeoDataStyle*>& styles, DocumentRole role )
+void FileManager::addFile( const QStringList& filepaths, const QStringList& propertyList, const QList<GeoDataStyle*>& styles, DocumentRole role )
 {
-    QStringList::const_iterator it = filepaths.constBegin();
-    QStringList::const_iterator begin = filepaths.constBegin();
-    QStringList::const_iterator end = filepaths.constEnd();
-
-    for ( ; it != end; ++it ) {
-        QString file = (*it);
-        GeoDataStyle *style = styles[ it - begin ];
-        addFile( file, style, role );
+    for (int i = 0 ; i < filepaths.size(); ++i ) {
+        addFile( filepaths.at(i), propertyList.at(i), styles.at(i), role );
     }
 }
 

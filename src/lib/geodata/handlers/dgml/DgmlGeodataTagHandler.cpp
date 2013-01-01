@@ -47,6 +47,8 @@ GeoNode* DgmlGeodataTagHandler::parse(GeoParser& parser) const
 
     const QString name = parser.attribute(dgmlAttr_name).trimmed();
 
+    const QString property = parser.attribute( dgmlAttr_property ).trimmed();
+
     const QString expireStr = parser.attribute(dgmlAttr_expire).trimmed();
     int expire = std::numeric_limits<int>::max();
     if ( !expireStr.isEmpty() )
@@ -62,6 +64,7 @@ GeoNode* DgmlGeodataTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Layer)
     && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_geodata) {
         dataSource = new GeoSceneGeodata( name );
+        dataSource->setProperty( property );
         dataSource->setExpire( expire );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( dataSource );
     }

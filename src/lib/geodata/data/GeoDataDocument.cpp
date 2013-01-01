@@ -63,6 +63,16 @@ void GeoDataDocument::setDocumentRole( DocumentRole role )
     p()->m_documentRole = role;
 }
 
+QString GeoDataDocument::property() const
+{
+    return p()->m_property;
+}
+
+void GeoDataDocument::setProperty( QString property )
+{
+    p()->m_property = property;
+}
+
 QString GeoDataDocument::fileName() const
 {
     return p()->m_filename;

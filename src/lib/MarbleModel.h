@@ -291,6 +291,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void setTrackedPlacemark( const GeoDataPlacemark *placemark );
 
+    void updateProperty( const QString &property, bool value );
+
  Q_SIGNALS:
 
     /**

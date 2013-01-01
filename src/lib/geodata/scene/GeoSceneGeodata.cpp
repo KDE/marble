@@ -17,7 +17,6 @@ namespace Marble
 {
 GeoSceneGeodata::GeoSceneGeodata( QString name )
     : GeoSceneAbstractDataset( name ),
-      m_name( name ),
       m_sourceFile( QString() ),
       m_pen( QPen( Qt::NoPen ) ),
       m_brush( QBrush( Qt::transparent ) )
@@ -33,9 +32,14 @@ const char* GeoSceneGeodata::nodeType() const
     return GeoSceneTypes::GeoSceneGeodataType;
 }
 
-QString GeoSceneGeodata::name() const
+QString GeoSceneGeodata::property() const
 {
-    return m_name;
+    return m_property;
+}
+
+void GeoSceneGeodata::setProperty( QString property )
+{
+    m_property = property;
 }
 
 QString GeoSceneGeodata::sourceFile() const

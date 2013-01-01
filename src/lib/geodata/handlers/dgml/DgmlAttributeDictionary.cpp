@@ -53,6 +53,7 @@ const char* dgmlAttr_password         = "password";
 const char* dgmlAttr_path             = "path";
 const char* dgmlAttr_pixmap           = "pixmap";
 const char* dgmlAttr_port             = "port";
+const char* dgmlAttr_property         = "property";
 const char* dgmlAttr_protocol         = "protocol";
 const char* dgmlAttr_query            = "query";
 const char* dgmlAttr_radius           = "radius";

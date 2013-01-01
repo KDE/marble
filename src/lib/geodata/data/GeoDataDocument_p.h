@@ -48,6 +48,7 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
     QMap<QString, GeoDataStyle> m_styleHash;
     QMap<QString, GeoDataStyleMap> m_styleMapHash;
     QString m_filename;
+    QString m_property;
     DocumentRole m_documentRole;
 };
 

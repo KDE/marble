@@ -40,12 +40,13 @@ class FileLoaderPrivate
 {
 public:
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
-                       const QString& file, DocumentRole role, GeoDataStyle* style )
+                       const QString& file, const QString& property, GeoDataStyle* style, DocumentRole role )
         : q( parent),
           m_runner( model->pluginManager() ),
           m_filepath ( file ),
-          m_documentRole ( role ),
+          m_property( property ),
           m_style( style ),
+          m_documentRole ( role ),
           m_styleMap( new GeoDataStyleMap ),
           m_document( 0 ),
           m_clock( model->clock() )
@@ -85,8 +86,9 @@ public:
     QString m_filepath;
     QString m_contents;
     QString m_nonExistentLocalCacheFile;
-    DocumentRole m_documentRole;
+    QString m_property;
     GeoDataStyle* m_style;
+    DocumentRole m_documentRole;
     GeoDataStyleMap* m_styleMap;
     GeoDataDocument *m_document;
     QString m_error;
@@ -95,9 +97,9 @@ public:
 };
 
 FileLoader::FileLoader( QObject* parent, MarbleModel *model,
-                       const QString& file, DocumentRole role = UnknownDocument, GeoDataStyle* style = new GeoDataStyle() )
+                       const QString& file, const QString& property, GeoDataStyle* style = new GeoDataStyle(), DocumentRole role = UnknownDocument )
     : QThread( parent ),
-      d( new FileLoaderPrivate( this, model, file, role, style ) )
+      d( new FileLoaderPrivate( this, model, file, property, style, role ) )
 {
 }
 
@@ -213,6 +215,7 @@ void FileLoader::run()
         Q_ASSERT( document );
 
         d->m_document = static_cast<GeoDataDocument*>( document );
+        d->m_document->setProperty( d->m_property );
         d->m_document->setDocumentRole( d->m_documentRole );
         d->m_document->setFileName( d->m_filepath );
         d->createFilterProperties( d->m_document );
@@ -293,6 +296,8 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
     if ( doc ) {
         m_document = doc;
         doc->setFileName( m_filepath );
+        doc->setProperty( m_property );
+        doc->setDocumentRole( m_documentRole );
         doc->addStyleMap( *m_styleMap );
         doc->addStyle( *m_style );
 

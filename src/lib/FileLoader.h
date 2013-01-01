@@ -27,7 +27,7 @@ class FileLoader : public QThread
     Q_OBJECT
     public:
         FileLoader( QObject* parent, MarbleModel *model,
-                    const QString& file, DocumentRole role, GeoDataStyle* style );
+                    const QString& file, const QString& property, GeoDataStyle* style, DocumentRole role );
         FileLoader( QObject* parent, MarbleModel *model,
                     const QString& contents, const QString& name, DocumentRole role );
         virtual ~FileLoader();

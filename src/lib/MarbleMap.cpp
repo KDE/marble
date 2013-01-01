@@ -117,7 +117,7 @@ public:
 
     void updateProperty( const QString &, bool );
 
-    void setColorizerDocument( int index );
+    void setDocument( int index );
 
     MarbleMap *const q;
 
@@ -171,6 +171,8 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
 
     QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
                       parent, SLOT( updateMapTheme() ) );
+    QObject::connect( m_model->fileManager(), SIGNAL( fileAdded( int ) ),
+                      parent, SLOT( setDocument( int ) ) );
 
     QObject::connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
                       parent, SIGNAL( repaintNeeded() ));
@@ -697,27 +699,45 @@ bool MarbleMap::geoCoordinates( int x, int y,
     return d->m_viewport.geoCoordinates( x, y, lon, lat, unit );
 }
 
-void MarbleMapPrivate::setColorizerDocument( int index ) {
-    if ( m_model->mapTheme()->map()->filters().isEmpty() )
-        return;
+void MarbleMapPrivate::setDocument( int index ) {
 
-    QString currentName = m_model->fileManager()->at( index )->fileName();
+    GeoDataDocument* doc = m_model->fileManager()->at( index );
+    QString currentName = doc->fileName();
+
     QString coastName = m_model->mapTheme()->map()->filters().at( 0 )->coastlines();
     QString lakeName = m_model->mapTheme()->map()->filters().at( 0 )->lakes();
     QString glacierName = m_model->mapTheme()->map()->filters().at( 0 )->glaciers();
 
-    GeoDataDocument* filterDocument = m_model->fileManager()->at( index );
-
     if ( currentName == coastName ) {
-        m_textureLayer.setCoastDocument( filterDocument );
+        m_textureLayer.setCoastDocument( doc );
     }
 
     if ( currentName == lakeName ) {
-        m_textureLayer.setLakeDocument( filterDocument );
+        m_textureLayer.setLakeDocument( doc );
     }
 
     if ( currentName == glacierName ) {
-        m_textureLayer.setGlacierDocument( filterDocument );
+        m_textureLayer.setGlacierDocument( doc );
+    }
+
+    foreach ( GeoSceneLayer *layer, m_model->mapTheme()->map()->layers() ) {
+        if ( layer->backend() != dgml::dgmlValue_geodata )
+            continue;
+
+        // look for documents
+        foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+            GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
+            QString containername = data->sourceFile();
+            if( currentName == containername ) {
+                // set visibility according to theme property
+                if( !data->property().isEmpty() ) {
+                    bool value;
+                    m_model->mapTheme()->settings()->propertyValue( data->property(), value );
+                    doc->setVisible( value );
+                    m_model->treeModel()->updateFeature( doc );
+                }
+            }
+        }
     }
 }
 
@@ -773,9 +793,8 @@ void MarbleMapPrivate::updateMapTheme()
 
     QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
                       q, SLOT( updateProperty( const QString &, bool ) ) );
-
-    QObject::connect( m_model->fileManager(), SIGNAL( fileAdded( int ) ),
-                      q, SLOT( setColorizerDocument( int ) ) );
+    QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
+                      m_model, SLOT( updateProperty(QString,bool) ) );
 
     q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
 

@@ -232,7 +232,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
         QString checkBoxString; 
 
         if ( section->checkable() ) {
-            checkBoxString = "<a href=\"checkbox:" + section->connectTo() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + section->name() + "\">&nbsp;</span></a> ";
+            checkBoxString = "<a href=\"checkbox:" + section->connectTo() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + section->connectTo() + "\">&nbsp;</span></a> ";
         }
 
         customLegendString += "<h4>" + checkBoxString + section->heading() + "</h4>";
