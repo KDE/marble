@@ -9,5 +9,8 @@
         <file alias="marble/navigation/navigational_arrows_press_left.png">data/navigational_arrows_press_left.png</file>
         <file alias="marble/navigation/navigational_arrows_press_right.png">data/navigational_arrows_press_right.png</file>
         <file alias="marble/navigation/navigational_arrows_press_top.png">data/navigational_arrows_press_top.png</file>
+        <file alias="marble/navigation/navigational_homebutton.png">data/navigational_homebutton.png</file>
+        <file alias="marble/navigation/navigational_homebutton_hover.png">data/navigational_homebutton_hover.png</file>
+        <file alias="marble/navigation/navigational_homebutton_press.png">data/navigational_homebutton_press.png</file>
     </qresource>
 </RCC>

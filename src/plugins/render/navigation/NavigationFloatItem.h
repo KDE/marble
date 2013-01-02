@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013 Mohammed Nafees  <nafees.technocool@gmail.com>
 //
 
 #ifndef NAVIGATION_FLOAT_ITEM_H
@@ -20,7 +21,6 @@
 namespace Ui
 {
     class Navigation;
-    class NavigationSmall;
 }
 
 namespace Marble
@@ -28,7 +28,6 @@ namespace Marble
 
 class MarbleWidget;
 class WidgetGraphicsItem;
-class ArrowDiscWidget;
 
 /**
  * @short Provides a float item with zoom and move controls
@@ -101,7 +100,6 @@ MARBLE_PLUGIN( NavigationFloatItem )
     WidgetGraphicsItem *m_widgetItem;
 
     /** Navigation controls */
-    Ui::NavigationSmall *m_navigationWidgetSmall;
     Ui::Navigation *m_navigationWidget;
 
     /** Used Profile */

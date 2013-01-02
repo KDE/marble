@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Mohammed Nafees <nafees.technocool@gmail.com>
+// Copyright 2013 Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 #ifndef ARROWDISCWIDGET_H
