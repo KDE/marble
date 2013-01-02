@@ -37,8 +37,8 @@ EarthquakePlugin::EarthquakePlugin( const MarbleModel *marbleModel )
 {
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateModel() ) );
+    connect( this, SIGNAL(settingsChanged(QString)),
+             this, SLOT(updateModel()) );
 }
 
 void EarthquakePlugin::initialize()
@@ -99,19 +99,19 @@ QDialog *EarthquakePlugin::configDialog()
         m_ui->setupUi( m_configDialog );
         m_ui->m_numResults->setRange( 1, m_maximumNumberOfItems );
         readSettings();
-        connect( m_ui->m_buttonBox, SIGNAL( accepted() ),
-                 SLOT( writeSettings() ) );
-        connect( m_ui->m_buttonBox, SIGNAL( rejected() ),
-                 SLOT( readSettings() ) );
-        connect( m_ui->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
-                 SLOT( restoreDefaultSettings() ) );
+        connect( m_ui->m_buttonBox, SIGNAL(accepted()),
+                 SLOT(writeSettings()) );
+        connect( m_ui->m_buttonBox, SIGNAL(rejected()),
+                 SLOT(readSettings()) );
+        connect( m_ui->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL(clicked()),
+                 SLOT(restoreDefaultSettings()) );
         QPushButton *applyButton = m_ui->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 SLOT( writeSettings() ) );
-        connect( m_ui->m_endDate, SIGNAL( dateTimeChanged ( const QDateTime& ) ),
-                 SLOT( validateDateRange() ) );
-        connect( this, SIGNAL( settingsChanged( QString ) ),
-                 this, SLOT( readSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 SLOT(writeSettings()) );
+        connect( m_ui->m_endDate, SIGNAL(dateTimeChanged(QDateTime)),
+                 SLOT(validateDateRange()) );
+        connect( this, SIGNAL(settingsChanged(QString)),
+                 this, SLOT(readSettings()) );
     }
     return m_configDialog;
 }

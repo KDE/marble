@@ -237,11 +237,11 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
     updateButtonVisibility();
 
     if( enabled ) {
-        QObject::connect( m_routingModel, SIGNAL( positionChanged() ),
-                 m_parent, SLOT( updateDestinationInformation() ) );
+        QObject::connect( m_routingModel, SIGNAL(positionChanged()),
+                 m_parent, SLOT(updateDestinationInformation()) );
     } else {
-        QObject::disconnect( m_routingModel, SIGNAL( positionChanged() ),
-                    m_parent, SLOT( updateDestinationInformation() ) );
+        QObject::disconnect( m_routingModel, SIGNAL(positionChanged()),
+                    m_parent, SLOT(updateDestinationInformation()) );
     }
 
     if ( enabled ) {
@@ -506,12 +506,12 @@ void RoutingPlugin::initialize()
     PositionProviderPlugin* activePlugin = marbleModel()->positionTracking()->positionProviderPlugin();
     d->updateGpsButton( activePlugin );
     connect( marbleModel()->positionTracking(),
-             SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
-             this, SLOT( updateGpsButton( PositionProviderPlugin* ) ) );
+             SIGNAL(positionProviderPluginChanged(PositionProviderPlugin*)),
+             this, SLOT(updateGpsButton(PositionProviderPlugin*)) );
 
     d->m_widget.routingButton->setEnabled( false );
-    connect( d->m_widget.instructionLabel, SIGNAL( linkActivated( QString ) ),
-             this, SLOT( reverseRoute() ) );
+    connect( d->m_widget.instructionLabel, SIGNAL(linkActivated(QString)),
+             this, SLOT(reverseRoute()) );
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
@@ -546,20 +546,20 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
         d->m_marbleWidget = widget;
         d->m_routingModel = d->m_marbleWidget->model()->routingManager()->routingModel();
 
-        connect( d->m_widget.routingButton, SIGNAL( clicked( bool ) ),
-                 this, SLOT( toggleGuidanceMode( bool ) ) );
-        connect( d->m_widget.gpsButton, SIGNAL( clicked( bool ) ),
-                 this, SLOT( togglePositionTracking( bool ) ) );
-        connect( d->m_widget.zoomInButton, SIGNAL( clicked() ),
-                 d->m_marbleWidget, SLOT( zoomIn() ) );
-        connect( d->m_widget.zoomOutButton, SIGNAL( clicked() ),
-                 d->m_marbleWidget, SLOT( zoomOut() ) );
-        connect( d->m_marbleWidget, SIGNAL( themeChanged( QString ) ),
-                 this, SLOT( updateZoomButtons() ) );
-        connect( d->m_marbleWidget, SIGNAL( zoomChanged( int ) ),
-                 this, SLOT( updateZoomButtons( int ) ) );
-        connect( d->m_routingModel, SIGNAL( currentRouteChanged() ),
-                this, SLOT( updateGuidanceModeButton() ) );
+        connect( d->m_widget.routingButton, SIGNAL(clicked(bool)),
+                 this, SLOT(toggleGuidanceMode(bool)) );
+        connect( d->m_widget.gpsButton, SIGNAL(clicked(bool)),
+                 this, SLOT(togglePositionTracking(bool)) );
+        connect( d->m_widget.zoomInButton, SIGNAL(clicked()),
+                 d->m_marbleWidget, SLOT(zoomIn()) );
+        connect( d->m_widget.zoomOutButton, SIGNAL(clicked()),
+                 d->m_marbleWidget, SLOT(zoomOut()) );
+        connect( d->m_marbleWidget, SIGNAL(themeChanged(QString)),
+                 this, SLOT(updateZoomButtons()) );
+        connect( d->m_marbleWidget, SIGNAL(zoomChanged(int)),
+                 this, SLOT(updateZoomButtons(int)) );
+        connect( d->m_routingModel, SIGNAL(currentRouteChanged()),
+                this, SLOT(updateGuidanceModeButton()) );
         d->updateGuidanceModeButton();
     }
     return AbstractFloatItem::eventFilter( object, e );
@@ -589,10 +589,10 @@ QDialog *RoutingPlugin::configDialog()
         d->m_configUi.setupUi( d->m_configDialog );
         d->readSettings();
 
-        connect( d->m_configDialog, SIGNAL( accepted() ), this, SLOT( writeSettings() ) );
-        connect( d->m_configDialog, SIGNAL( rejected() ), this, SLOT( readSettings() ) );
-        connect( d->m_configUi.buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
-                 SLOT( restoreDefaultSettings() ) );
+        connect( d->m_configDialog, SIGNAL(accepted()), this, SLOT(writeSettings()) );
+        connect( d->m_configDialog, SIGNAL(rejected()), this, SLOT(readSettings()) );
+        connect( d->m_configUi.buttonBox->button( QDialogButtonBox::Reset ), SIGNAL(clicked()),
+                 SLOT(restoreDefaultSettings()) );
     }
 
     return d->m_configDialog;

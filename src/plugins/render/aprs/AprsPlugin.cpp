@@ -64,12 +64,12 @@ AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
     
     setSettings( QHash<QString,QVariant>() );
 
-    connect( this, SIGNAL( visibilityChanged( bool, const QString & ) ),
-             this, SLOT( updateVisibility( bool ) ) );
+    connect( this, SIGNAL(visibilityChanged(bool,QString)),
+             this, SLOT(updateVisibility(bool)) );
 
     m_action = new QAction( this );
-    connect( m_action,    SIGNAL( toggled( bool ) ),
-	     this,        SLOT( setVisible( bool ) ) );
+    connect( m_action,    SIGNAL(toggled(bool)),
+	     this,        SLOT(setVisible(bool)) );
 
 }
 
@@ -260,10 +260,10 @@ QDialog *AprsPlugin::configDialog()
         ui_configWidget = new Ui::AprsConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
         readSettings();
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
-                 SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
-                 SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
+                 SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
+                 SLOT(readSettings()) );
         //       QPushButton *applyButton =
 //             ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
 //         connect( applyButton, SIGNAL( clicked() ),

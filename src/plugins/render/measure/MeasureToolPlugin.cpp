@@ -137,11 +137,11 @@ QDialog *MeasureToolPlugin::configDialog()
         m_configDialog = new QDialog();
         m_uiConfigWidget = new Ui::MeasureConfigWidget;
         m_uiConfigWidget->setupUi( m_configDialog );
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( accepted() ),
-                SLOT( writeSettings() ) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()),
+                SLOT(writeSettings()) );
         QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 this,        SLOT(writeSettings()) );
     }
 
     m_uiConfigWidget->m_showSegLabelsCheckBox->setChecked( m_showSegmentLabels );
@@ -388,11 +388,11 @@ void MeasureToolPlugin::addContextItems()
         menu->addAction( Qt::RightButton, m_separator );
     }
 
-    connect( m_addMeasurePointAction, SIGNAL( triggered() ), SLOT( addMeasurePointEvent() ) );
-    connect( m_removeLastMeasurePointAction, SIGNAL(triggered() ), SLOT( removeLastMeasurePoint() ) );
-    connect( m_removeMeasurePointsAction, SIGNAL( triggered() ), SLOT( removeMeasurePoints() ) );
+    connect( m_addMeasurePointAction, SIGNAL(triggered()), SLOT(addMeasurePointEvent()) );
+    connect( m_removeLastMeasurePointAction, SIGNAL(triggered()), SLOT(removeLastMeasurePoint()) );
+    connect( m_removeMeasurePointsAction, SIGNAL(triggered()), SLOT(removeMeasurePoints()) );
 
-    connect( this, SIGNAL( numberOfMeasurePointsChanged( int ) ), SLOT( setNumberOfMeasurePoints( int ) ) );
+    connect( this, SIGNAL( numberOfMeasurePointsChanged(int)), SLOT(setNumberOfMeasurePoints(int)) );
 }
 
 void MeasureToolPlugin::removeContextItems()
