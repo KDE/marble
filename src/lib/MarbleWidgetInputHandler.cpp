@@ -44,6 +44,7 @@
 #include "Planet.h"
 #include "RenderPlugin.h"
 #include "MapInfoDialog.h"
+#include "RoutingLayer.h"
 
 namespace Marble {
 
@@ -391,6 +392,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
     Q_UNUSED( o );
 
     if ( MarbleWidgetInputHandler::d->m_widget->mapInfoDialog()->eventFilter( o, e ) ) {
+        return true;
+    }
+
+    if ( MarbleWidgetInputHandler::d->m_widget->routingLayer()->eventFilter( o, e ) ) {
         return true;
     }
 

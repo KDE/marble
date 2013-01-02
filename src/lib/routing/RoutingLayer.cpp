@@ -671,7 +671,6 @@ void RoutingLayerPrivate::clearStopOver()
 RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
         QObject( parent ), d( new RoutingLayerPrivate( this, widget ) )
 {
-    widget->installEventFilter( this );
     connect( widget->model()->routingManager(), SIGNAL( stateChanged( RoutingManager::State ) ),
              this, SLOT( updateRouteState( RoutingManager::State ) ) );
     connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
