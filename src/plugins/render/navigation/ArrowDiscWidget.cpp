@@ -17,17 +17,12 @@
 #include <QtGui/QPixmapCache>
 #include <QtGui/QPainterPath>
 
-#include <QDebug>
-
-const int min_radius = 5;
-const int max_radius = 28;
-
 namespace Marble
 {
 
 ArrowDiscWidget::ArrowDiscWidget( QWidget *parent ) :
     QWidget( parent ),
-    m_parentMarbleWidget( 0 ),
+    m_marbleWidget( 0 ),
     m_imagePath( "marble/navigation/navigational_arrows" )
 {
     setMouseTracking( true );
@@ -48,15 +43,15 @@ ArrowDiscWidget::~ArrowDiscWidget()
 
 void ArrowDiscWidget::setMarbleWidget( MarbleWidget *marbleWidget )
 {
-    m_parentMarbleWidget = marbleWidget;
+    m_marbleWidget = marbleWidget;
 }
 
-QPixmap ArrowDiscWidget::pixmap( const QString &Id )
+QPixmap ArrowDiscWidget::pixmap( const QString &id )
 {
     QPixmap result;
-    if ( !QPixmapCache::find( Id, result ) ) {
-        result = QPixmap::fromImage( QImage( QString( ":/%1.png" ).arg( Id ) ) );
-        QPixmapCache::insert( Id, result );
+    if ( !QPixmapCache::find( id, result ) ) {
+        result = QPixmap( QString( ":/%1.png" ).arg( id ) );
+        QPixmapCache::insert( id, result );
     }
     return result;
 }
@@ -64,40 +59,29 @@ QPixmap ArrowDiscWidget::pixmap( const QString &Id )
 void ArrowDiscWidget::mousePressEvent( QMouseEvent *mouseEvent )
 {
     if ( mouseEvent->button() == Qt::LeftButton ) {
-        QPointF mousePos = mouseEvent->pos();
-
-        // mouse coordinates relative to widget topleft
-        int mx = mousePos.x();
-        int my = mousePos.y();
-
-        // center coordinates relative to widget topleft
-        int cx = width()/2;
-        int cy = height()/2;
-
-        int px = mx - cx;
-        int py = my - cy;
-
-        qreal distance = sqrt( px*px + py*py );
-
-        if ( distance >= min_radius && distance <= max_radius ) {
-            if ( pathNorth.contains( mousePos ) ) {
-                m_imagePath = "marble/navigation/navigational_arrows_press_top";
-                m_parentMarbleWidget->moveUp();
-            } else if ( pathSouth.contains( mousePos ) ) {
-                m_imagePath = "marble/navigation/navigational_arrows_press_bottom";
-                m_parentMarbleWidget->moveDown();
-            } else if ( pathWest.contains( mousePos ) ) {
-                m_imagePath = "marble/navigation/navigational_arrows_press_left";
-                m_parentMarbleWidget->moveLeft();
-            } else if ( pathEast.contains( mousePos ) ) {
-                m_imagePath = "marble/navigation/navigational_arrows_press_right";
-                m_parentMarbleWidget->moveRight();
-            }
-        } else {
+        switch ( arrowUnderMouse( mouseEvent->pos() ) ) {
+        case Qt::NoArrow:
             m_imagePath = "marble/navigation/navigational_arrows";
+            break;
+        case Qt::UpArrow:
+            m_imagePath = "marble/navigation/navigational_arrows_press_top";
+            m_marbleWidget->moveUp();
+            break;
+        case Qt::DownArrow:
+            m_imagePath = "marble/navigation/navigational_arrows_press_bottom";
+            m_marbleWidget->moveDown();
+        case Qt::LeftArrow:
+            m_imagePath = "marble/navigation/navigational_arrows_press_left";
+            m_marbleWidget->moveLeft();
+            break;
+        case Qt::RightArrow:
+            m_imagePath = "marble/navigation/navigational_arrows_press_right";
+            m_marbleWidget->moveRight();
+            break;
         }
-        repaint();
     }
+
+    repaint();
 }
 
 void ArrowDiscWidget::mouseReleaseEvent( QMouseEvent *mouseEvent )
@@ -107,35 +91,28 @@ void ArrowDiscWidget::mouseReleaseEvent( QMouseEvent *mouseEvent )
 
 void ArrowDiscWidget::mouseMoveEvent( QMouseEvent *mouseEvent )
 {
-    QPointF mousePos = mouseEvent->pos();
-
-    // mouse coordinates relative to widget topleft
-    int mx = mousePos.x();
-    int my = mousePos.y();
-
-    // center coordinates relative to widget topleft
-    int cx = width()/2;
-    int cy = height()/2;
-
-    int px = mx - cx;
-    int py = my - cy;
-
-    qreal distance = sqrt( px*px + py*py );
-
-    if ( distance >= min_radius && distance <= max_radius ) {
-        if ( pathNorth.contains( mousePos ) ) {
-            m_imagePath = "marble/navigation/navigational_arrows_hover_top";
-        } else if ( pathSouth.contains( mousePos ) ) {
-            m_imagePath = "marble/navigation/navigational_arrows_hover_bottom";
-        } else if ( pathWest.contains( mousePos ) ) {
-            m_imagePath = "marble/navigation/navigational_arrows_hover_left";
-        } else if ( pathEast.contains( mousePos ) ) {
-            m_imagePath = "marble/navigation/navigational_arrows_hover_right";
-        }
-    } else {
+    QString const oldPath = m_imagePath;
+    switch ( arrowUnderMouse( mouseEvent->pos() ) ) {
+    case Qt::NoArrow:
         m_imagePath = "marble/navigation/navigational_arrows";
+        break;
+    case Qt::UpArrow:
+        m_imagePath = "marble/navigation/navigational_arrows_hover_top";
+        break;
+    case Qt::DownArrow:
+        m_imagePath = "marble/navigation/navigational_arrows_hover_bottom";
+        break;
+    case Qt::LeftArrow:
+        m_imagePath = "marble/navigation/navigational_arrows_hover_left";
+        break;
+    case Qt::RightArrow:
+        m_imagePath = "marble/navigation/navigational_arrows_hover_right";
+        break;
     }
-    repaint();
+
+    if ( m_imagePath != oldPath ) {
+        repaint();
+    }
 }
 
 void ArrowDiscWidget::resizeEvent( QResizeEvent *event )
@@ -159,6 +136,39 @@ void ArrowDiscWidget::resizeEvent( QResizeEvent *event )
 void ArrowDiscWidget::repaint()
 {
     emit repaintNeeded();
+}
+
+Qt::ArrowType ArrowDiscWidget::arrowUnderMouse(const QPoint &position) const
+{
+    const int min_radius = 5;
+    const int max_radius = 28;
+
+    // mouse coordinates relative to widget topleft
+    int mx = position.x();
+    int my = position.y();
+
+    // center coordinates relative to widget topleft
+    int cx = width()/2;
+    int cy = height()/2;
+
+    int px = mx - cx;
+    int py = my - cy;
+
+    qreal distance = sqrt( px*px + py*py );
+
+    if ( distance >= min_radius && distance <= max_radius ) {
+        if ( pathNorth.contains( position ) ) {
+            return Qt::UpArrow;
+        } else if ( pathSouth.contains( position ) ) {
+            return Qt::DownArrow;
+        } else if ( pathWest.contains( position ) ) {
+            return Qt::LeftArrow;
+        } else if ( pathEast.contains( position ) ) {
+            return Qt::RightArrow;
+        }
+    }
+
+    return Qt::NoArrow;
 }
 
 void ArrowDiscWidget::paintEvent( QPaintEvent * )

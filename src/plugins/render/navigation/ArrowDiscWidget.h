@@ -26,7 +26,7 @@ public:
     ArrowDiscWidget( QWidget *parent = 0 );
     ~ArrowDiscWidget();
 
-    QPixmap pixmap( const QString &Id );
+    QPixmap pixmap(const QString &id );
     void setMarbleWidget( MarbleWidget *marbleWidget );
 
 Q_SIGNALS:
@@ -41,7 +41,9 @@ protected:
     void repaint();
 
 private:
-    MarbleWidget *m_parentMarbleWidget;
+    Qt::ArrowType arrowUnderMouse( const QPoint &position ) const;
+
+    MarbleWidget *m_marbleWidget;
     QString m_imagePath;
 
     QPainterPath pathNorth;
