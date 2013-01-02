@@ -66,6 +66,8 @@ const char* GeoDataTimeStampType = "GeoDataTimeStamp";
 const char* GeoDataTrackType = "GeoDataTrack";
 const char* GeoDataScreenOverlayType = "GeoDataScreenOverlay";
 const char* GeoDataBalloonStyleType = "GeoDataBalloonStyle";
+const char* GeoDataListStyleType = "GeoDataListStyle";
+const char* GeoDataItemIconType = "GeoDataItemIcon";
 }
 
 }

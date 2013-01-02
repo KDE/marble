@@ -26,6 +26,7 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataBalloonStyle.h"
+#include "GeoDataListStyle.h"
 
 #include "geodata_export.h"
 
@@ -49,6 +50,7 @@ class GeoDataStylePrivate;
  * @see GeoDataLineStyle
  * @see GeoDataPolyStyle
  * @see GeoDataBalloonStyle
+ * @see GeoDataListStyle
  */
 class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 {
@@ -90,6 +92,11 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     /// Return the balloon style of this style
     GeoDataBalloonStyle& balloonStyle();
     const GeoDataBalloonStyle& balloonStyle() const;
+    /// set the list style
+    void setListStyle( const GeoDataListStyle& style );
+    /// Return the list style of this style
+    GeoDataListStyle& listStyle();
+    const GeoDataListStyle& listStyle() const;
 
     /**
     * @brief assignment operator

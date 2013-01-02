@@ -75,6 +75,8 @@ GEODATA_EXPORT extern const char* GeoDataTimeSpanType;
 GEODATA_EXPORT extern const char* GeoDataTrackType;
 GEODATA_EXPORT extern const char* GeoDataScreenOverlayType;
 GEODATA_EXPORT extern const char* GeoDataBalloonStyleType;
+GEODATA_EXPORT extern const char* GeoDataListStyleType;
+GEODATA_EXPORT extern const char* GeoDataItemIconType;
 }
 
 }

@@ -15,6 +15,7 @@
 #include "KmlElementDictionary.h"
 #include "KmlColorTagHandler.h"
 #include "GeoDataBalloonStyle.h"
+#include "GeoDataListStyle.h"
 #include "GeoDataParser.h"
 
 namespace Marble
@@ -29,16 +30,20 @@ GeoNode* KmlbgColorTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
+    QColor const color = KmlcolorTagHandler::parseColor( parser.readElementText().trimmed() );
+
     if ( parentItem.represents( kmlTag_BalloonStyle ) )
     {
-        QColor const color = KmlcolorTagHandler::parseColor( parser.readElementText().trimmed() );
         parentItem.nodeAs<GeoDataBalloonStyle>()->setBackgroundColor( color );
-
+    }
+    else if ( parentItem.represents( kmlTag_ListStyle ) )
+    {
+        parentItem.nodeAs<GeoDataListStyle>()->setBackgroundColor( color );
+    }
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << kmlTag_bgColor << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-    }
 
     return 0;
 }

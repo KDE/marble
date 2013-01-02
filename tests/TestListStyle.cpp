@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 #include <QtCore/QObject>
@@ -17,12 +17,12 @@
 #include <GeoDataFolder.h>
 #include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
-#include <GeoDataBalloonStyle.h>
+#include <GeoDataListStyle.h>
 
 using namespace Marble;
 
 
-class TestBalloonStyle : public QObject
+class TestListStyle : public QObject
 {
     Q_OBJECT
 private slots:
@@ -30,7 +30,7 @@ private slots:
     void simpleParseTest();
 };
 
-void TestBalloonStyle::initTestCase()
+void TestListStyle::initTestCase()
 {
     MarbleDebug::enable = true;
 }
@@ -51,7 +51,7 @@ GeoDataDocument *parseKml(const QString &content)
     return static_cast<GeoDataDocument*>( document );
 }
 
-void TestBalloonStyle::simpleParseTest()
+void TestListStyle::simpleParseTest()
 {
   QString const content (
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -59,18 +59,24 @@ void TestBalloonStyle::simpleParseTest()
         " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
         "<Document>"
         "  <name>The one and only BalloonStyle test case</name>"
-        "  <Style id=\"my-balloon-style\">"
-        "    <BalloonStyle>"
+        "  <Style id=\"my-list-style\">"
+        "    <ListStyle>"
+        "      <listItemType>checkOffOnly</listItemType>"
         "      <bgColor>aa112233</bgColor>"
-        "      <textColor>bb445566</textColor>"
-        "      <text>This is my balloon style. There are many like it, but this is mine.</text>"
-        "      <displayMode>hide</displayMode>"
-        "    </BalloonStyle>"
+        "      <ItemIcon>"
+        "        <state>open error</state>"
+        "        <href>https://developers.google.com/kml/documentation/images/itemicons.jpg</href>"
+        "      </ItemIcon>"
+        "      <ItemIcon>"
+        "        <state>closed</state>"
+        "        <href>https://developers.google.com/kml/documentation/images/itemicons1.jpg</href>"
+        "      </ItemIcon>"
+        "    </ListStyle>"
         "  </Style>"
         "  <Folder>"
         "  <Placemark>"
         "    <name>The first placemark</name>"
-        "    <styleUrl>#my-balloon-style</styleUrl>"
+        "    <styleUrl>#my-list-style</styleUrl>"
         "    <Point><coordinates>80.0,30.0</coordinates></Point>"
         "  </Placemark>"
         "  </Folder>"
@@ -85,15 +91,17 @@ void TestBalloonStyle::simpleParseTest()
     QVERIFY( placemark1 != 0 );
 
     QCOMPARE( placemark1->name(), QString( "The first placemark" ) );
-    QCOMPARE( placemark1->style()->balloonStyle().backgroundColor().red(), 51 );
-    QCOMPARE( placemark1->style()->balloonStyle().textColor().blue(), 68 );
-    QCOMPARE( placemark1->style()->balloonStyle().displayMode(), GeoDataBalloonStyle::Hide );
-    QString const text = "This is my balloon style. There are many like it, but this is mine.";
-    QCOMPARE( placemark1->style()->balloonStyle().text(), text );
+    QCOMPARE( placemark1->style()->listStyle().listItemType(), GeoDataListStyle::CheckOffOnly );
+    QCOMPARE( placemark1->style()->listStyle().backgroundColor().red(), 51 );
+    QCOMPARE( placemark1->style()->listStyle().itemIconList().at(0)->state(), GeoDataItemIcon::Open | GeoDataItemIcon::Error );
+    QCOMPARE( placemark1->style()->listStyle().itemIconList().at(0)->iconPath(), QString( "https://developers.google.com/kml/documentation/images/itemicons.jpg" ) );
+    QCOMPARE( placemark1->style()->listStyle().itemIconList().at(1)->state(), GeoDataItemIcon::Closed );
+    QCOMPARE( placemark1->style()->listStyle().itemIconList().at(1)->iconPath(), QString( "https://developers.google.com/kml/documentation/images/itemicons1.jpg" ) );
 
     delete dataDocument;
 }
 
-QTEST_MAIN( TestBalloonStyle )
+QTEST_MAIN( TestListStyle )
 
-#include "TestBalloonStyle.moc"
+#include "TestListStyle.moc"
+

@@ -43,7 +43,7 @@ class GeoDataStylePrivate
     GeoDataLineStyle   m_lineStyle;
     GeoDataPolyStyle   m_polyStyle;
     GeoDataBalloonStyle m_balloonStyle;
-    // ListStyle
+    GeoDataListStyle m_listStyle;
 };
 
 GeoDataStyle::GeoDataStyle()
@@ -105,6 +105,11 @@ void GeoDataStyle::setBalloonStyle( const GeoDataBalloonStyle& style )
     d->m_balloonStyle = style;
 }
 
+void GeoDataStyle::setListStyle( const GeoDataListStyle& style )
+{
+    d->m_listStyle = style;
+}
+
 GeoDataIconStyle& GeoDataStyle::iconStyle() const
 {
     return d->m_iconStyle;
@@ -135,6 +140,16 @@ const GeoDataBalloonStyle& GeoDataStyle::balloonStyle() const
     return d->m_balloonStyle;
 }
 
+GeoDataListStyle& GeoDataStyle::listStyle()
+{
+    return d->m_listStyle;
+}
+
+const GeoDataListStyle& GeoDataStyle::listStyle() const
+{
+    return d->m_listStyle;
+}
+
 void GeoDataStyle::pack( QDataStream& stream ) const
 {
     GeoDataStyleSelector::pack( stream );
@@ -144,6 +159,7 @@ void GeoDataStyle::pack( QDataStream& stream ) const
     d->m_polyStyle.pack( stream );
     d->m_lineStyle.pack( stream );
     d->m_balloonStyle.pack( stream );
+    d->m_listStyle.pack( stream );
 }
 
 void GeoDataStyle::unpack( QDataStream& stream )
@@ -155,6 +171,7 @@ void GeoDataStyle::unpack( QDataStream& stream )
     d->m_lineStyle.unpack( stream );
     d->m_polyStyle.unpack( stream );
     d->m_balloonStyle.unpack( stream );
+    d->m_listStyle.unpack( stream );
 }
 
 }
