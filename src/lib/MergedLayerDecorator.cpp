@@ -199,7 +199,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ){
             const QImage tileImage = d->m_tileLoader->loadTileImage( textureLayer, tileId, DownloadBrowse );
 
-            QSharedPointer<Tile> tile(new TextureTile( tileId, tileImage, blending ) );
+            QSharedPointer<Tile> tile( new TextureTile( tileId, tileImage, blending ) );
             tiles.append( tile );
         }
 
@@ -214,7 +214,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         }
     }
 
-    ( !tiles.isEmpty() );
+    Q_ASSERT( !tiles.isEmpty() );
 
     return d->createTile( tiles );
 }
