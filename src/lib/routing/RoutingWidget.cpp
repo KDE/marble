@@ -31,6 +31,8 @@
 #include <QtGui/QComboBox>
 #include <QtGui/QPainter>
 #include <QtGui/QFileDialog>
+#include <QtGui/QToolBar>
+#include <QtGui/QToolButton>
 
 #include "ui_RoutingWidget.h"
 
@@ -70,8 +72,17 @@ public:
 
     int m_collapse_width;
 
+    QToolBar *m_toolBar;
+
+    QToolButton *m_openRouteButton;
+    QToolButton *m_saveRouteButton;
+    QToolButton *m_addViaButton;
+    QToolButton *m_reverseRouteButton;
+    QToolButton *m_clearRouteButton;
+    QToolButton *m_configureButton;
+
     /** Constructor */
-    RoutingWidgetPrivate( MarbleWidget *marbleWidget );
+    RoutingWidgetPrivate(RoutingWidget *parent, MarbleWidget *marbleWidget );
 
     /**
       * @brief Toggle between simple search view and route view
@@ -89,11 +100,14 @@ public:
       */
     void setActiveInput( RoutingInputWidget* widget );
 
+    void setupToolBar();
+
 private:
     void createProgressAnimation();
+    RoutingWidget *m_parent;
 };
 
-RoutingWidgetPrivate::RoutingWidgetPrivate( MarbleWidget *marbleWidget ) :
+RoutingWidgetPrivate::RoutingWidgetPrivate( RoutingWidget *parent, MarbleWidget *marbleWidget ) :
         m_widget( marbleWidget ),
         m_routingManager( marbleWidget->model()->routingManager() ),
         m_routingLayer( marbleWidget->routingLayer() ),
@@ -104,7 +118,8 @@ RoutingWidgetPrivate::RoutingWidgetPrivate( MarbleWidget *marbleWidget ) :
         m_zoomRouteAfterDownload( false ),
         m_currentFrame( 0 ),
         m_iconSize( 16 ),
-        m_collapse_width( 0 )
+        m_collapse_width( 0 ),
+        m_parent( parent )
 {
     createProgressAnimation();
     m_progressTimer.setInterval( 100 );
@@ -154,6 +169,61 @@ void RoutingWidgetPrivate::setActiveInput( RoutingInputWidget *widget )
     m_routingLayer->synchronizeWith( m_ui.directionsListView->selectionModel() );
 }
 
+void RoutingWidgetPrivate::setupToolBar()
+{
+    m_toolBar = new QToolBar;
+
+    m_openRouteButton = new QToolButton;
+    m_openRouteButton->setToolTip( QObject::tr("Open Route") );
+    m_openRouteButton->setIcon( QIcon(":/icons/16x16/document-open.png") );
+    m_toolBar->addWidget(m_openRouteButton);
+
+    m_saveRouteButton = new QToolButton;
+    m_saveRouteButton->setToolTip( QObject::tr("Save Route") );
+    m_saveRouteButton->setIcon( QIcon(":/icons/16x16/document-save.png") );
+    m_toolBar->addWidget(m_saveRouteButton);
+
+    m_toolBar->addSeparator();
+
+    m_addViaButton = new QToolButton;
+    m_addViaButton->setToolTip( QObject::tr("Add Via") );
+    m_addViaButton->setIcon( QIcon(":/marble/list-add.png") );
+    m_toolBar->addWidget(m_addViaButton);
+
+    m_reverseRouteButton = new QToolButton;
+    m_reverseRouteButton->setToolTip( QObject::tr("Reverse Route") );
+    m_reverseRouteButton->setIcon( QIcon(":/marble/reverse.png") );
+    m_toolBar->addWidget(m_reverseRouteButton);
+
+    m_clearRouteButton = new QToolButton;
+    m_clearRouteButton->setToolTip( QObject::tr("Clear Route") );
+    m_clearRouteButton->setIcon( QIcon(":/marble/edit-clear.png") );
+    m_toolBar->addWidget(m_clearRouteButton);
+
+    m_toolBar->addSeparator();
+
+    m_configureButton = new QToolButton;
+    m_configureButton->setToolTip( QObject::tr("Settings") );
+    m_configureButton->setIcon( QIcon(":/icons/16x16/configure.png") );
+    m_toolBar->addWidget(m_configureButton);
+
+    QObject::connect( m_openRouteButton, SIGNAL( clicked() ),
+                      m_parent, SLOT( saveRoute() ) );
+    QObject::connect( m_saveRouteButton, SIGNAL( clicked() ),
+                      m_parent, SLOT( saveRoute() ) );
+    QObject::connect( m_addViaButton, SIGNAL( clicked() ),
+                      m_parent, SLOT( addInputWidget() ) );
+    QObject::connect( m_reverseRouteButton, SIGNAL( clicked() ),
+                      m_routingManager, SLOT( reverseRoute() ) );
+    QObject::connect( m_clearRouteButton, SIGNAL( clicked() ),
+                      m_routingManager, SLOT( clearRoute() ) );
+    QObject::connect( m_clearRouteButton, SIGNAL( clicked() ),
+                      m_parent,  SLOT( configureProfile() ) );
+
+    m_toolBar->setIconSize(QSize(16, 16));
+    m_ui.toolBarLayout->addWidget(m_toolBar, 0, Qt::AlignLeft);
+}
+
 void RoutingWidgetPrivate::createProgressAnimation()
 {
     // Size parameters
@@ -181,9 +251,10 @@ void RoutingWidgetPrivate::createProgressAnimation()
 }
 
 RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
-    QWidget( parent ), d( new RoutingWidgetPrivate( marbleWidget ) )
+    QWidget( parent ), d( new RoutingWidgetPrivate( this, marbleWidget ) )
 {
     d->m_ui.setupUi( this );
+    d->setupToolBar();
     d->m_ui.routeComboBox->setVisible( false );
     d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
 
@@ -229,21 +300,12 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     connect( d->m_ui.directionsListView, SIGNAL( activated ( QModelIndex ) ),
              this, SLOT( activateItem ( QModelIndex ) ) );
 
-    connect( d->m_ui.openRouteButton, SIGNAL( clicked() ),
-             this, SLOT( openRoute () ) );
-    connect( d->m_ui.saveRouteButton, SIGNAL( clicked() ),
-             this, SLOT( saveRoute () ) );
-    connect( d->m_ui.addViaButton, SIGNAL( clicked() ),
-             this, SLOT( addInputWidget() ) );
-    connect( d->m_ui.reverseRouteButton, SIGNAL( clicked() ),
-             d->m_routingManager, SLOT( reverseRoute () ) );
-    connect( d->m_ui.clearRouteButton, SIGNAL( clicked() ),
-             d->m_routingManager, SLOT( clearRoute () ) );
+    // FIXME: apply for this sector
     connect( d->m_ui.searchButton, SIGNAL( clicked() ),
              this, SLOT( retrieveRoute () ) );
     connect( d->m_ui.showInstructionsButton, SIGNAL( clicked( bool ) ),
              this, SLOT( showDirections() ) );
-    connect( d->m_ui.configureButton, SIGNAL( clicked() ),
+    connect( d->m_configureButton, SIGNAL( clicked() ),
              this, SLOT( configureProfile() ) );
 
     for( int i=0; i<d->m_routeRequest->size(); ++i ) {
@@ -261,8 +323,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         d->m_ui.directionsListView->setVisible( false );
-        d->m_ui.openRouteButton->setVisible( false );
-        d->m_ui.saveRouteButton->setVisible( false );
+        d->m_openRouteButton->setVisible( false );
+        d->m_saveRouteButton->setVisible( false );
 #ifdef Q_WS_MAEMO_5
         d->m_ui.directionsListView->setAttribute( Qt::WA_Maemo5StackedWindow );
         d->m_ui.directionsListView->setWindowFlags( Qt::Window );
@@ -452,7 +514,7 @@ void RoutingWidget::updateRouteState( RoutingManager::State state )
         d->m_progressTimer.start();
     }
 
-    d->m_ui.saveRouteButton->setEnabled( d->m_routingManager->routingModel()->rowCount() > 0 );
+    d->m_saveRouteButton->setEnabled( d->m_routingManager->routingModel()->rowCount() > 0 );
 }
 
 void RoutingWidget::requestMapPosition( RoutingInputWidget *widget, bool enabled )
@@ -544,7 +606,7 @@ void RoutingWidget::updateAlternativeRoutes()
     QString const results = tr( "%n routes found", "", d->m_ui.routeComboBox->count() );
     d->m_ui.resultLabel->setText( results );
     d->m_ui.resultLabel->setVisible( true );
-    d->m_ui.saveRouteButton->setEnabled( d->m_routingManager->routingModel()->rowCount() > 0 );
+    d->m_saveRouteButton->setEnabled( d->m_routingManager->routingModel()->rowCount() > 0 );
 }
 
 void RoutingWidget::setShowDirectionsButtonVisible( bool visible )
@@ -615,33 +677,9 @@ void RoutingWidget::updateActiveRoutingProfile()
     d->m_ui.routingProfileComboBox->setCurrentIndex( profiles.indexOf( profile ) );
 }
 
-void RoutingWidget::resizeEvent(QResizeEvent*)
+void RoutingWidget::resizeEvent(QResizeEvent *e)
 {
-  if ( d->m_collapse_width == 0 )
-  {
-      d->m_collapse_width = d->m_ui.addViaButton->sizeHint().width()
-                          + d->m_ui.reverseRouteButton->sizeHint().width()
-                          + d->m_ui.clearRouteButton->sizeHint().width()
-                          + 20;
-  }
-  if ( size().width() < d->m_collapse_width )
-  {
-    d->m_ui.addViaButton->setText("");
-    d->m_ui.addViaButton->setIcon(QIcon(":/marble/list-add.png"));
-    d->m_ui.reverseRouteButton->setText("");
-    d->m_ui.reverseRouteButton->setIcon(QIcon(":/marble/reverse.png"));
-    d->m_ui.clearRouteButton->setText("");
-    d->m_ui.clearRouteButton->setIcon(QIcon(":/marble/edit-clear.png"));
-  }
-  else if ( size().width() > d->m_collapse_width + 10 )
-  {
-    d->m_ui.addViaButton->setText(tr("Add Via"));
-    d->m_ui.addViaButton->setIcon(QIcon());
-    d->m_ui.reverseRouteButton->setText(tr("Reverse"));
-    d->m_ui.reverseRouteButton->setIcon(QIcon());
-    d->m_ui.clearRouteButton->setText(tr("Clear"));
-    d->m_ui.clearRouteButton->setIcon(QIcon());
-  }
+    QWidget::resizeEvent(e);
 }
 
 } // namespace Marble

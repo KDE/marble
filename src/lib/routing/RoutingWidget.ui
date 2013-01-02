@@ -6,45 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>245</width>
+    <width>284</width>
     <height>414</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="routingLayout">
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QPushButton" name="addViaButton">
-       <property name="text">
-        <string>Add Via</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="reverseRouteButton">
-       <property name="text">
-        <string>Reverse</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="clearRouteButton">
-       <property name="text">
-        <string>Clear</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -83,17 +49,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item>
-      <widget class="QToolButton" name="configureButton">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../../marble.qrc">
-         <normaloff>:/icons/16x16/configure.png</normaloff>:/icons/16x16/configure.png</iconset>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
@@ -166,34 +121,13 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QToolButton" name="openRouteButton">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../../marble.qrc">
-         <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="saveRouteButton">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../../marble.qrc">
-         <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
-       </property>
-      </widget>
-     </item>
     </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="toolBarLayout"/>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../marble.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
