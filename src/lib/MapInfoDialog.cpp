@@ -91,6 +91,7 @@ void MapInfoDialog::setContent( const QString &html )
 {
     if ( m_popupItem ) {
         m_popupItem->setContent( html );
+        emit repaintNeeded();
     }
 }
 
