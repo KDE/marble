@@ -217,7 +217,7 @@ void RoutingWidgetPrivate::setupToolBar()
                       m_routingManager, SLOT( reverseRoute() ) );
     QObject::connect( m_clearRouteButton, SIGNAL( clicked() ),
                       m_routingManager, SLOT( clearRoute() ) );
-    QObject::connect( m_clearRouteButton, SIGNAL( clicked() ),
+    QObject::connect( m_configureButton, SIGNAL( clicked() ),
                       m_parent,  SLOT( configureProfile() ) );
 
     m_toolBar->setIconSize(QSize(16, 16));
@@ -305,8 +305,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( retrieveRoute () ) );
     connect( d->m_ui.showInstructionsButton, SIGNAL( clicked( bool ) ),
              this, SLOT( showDirections() ) );
-    connect( d->m_configureButton, SIGNAL( clicked() ),
-             this, SLOT( configureProfile() ) );
 
     for( int i=0; i<d->m_routeRequest->size(); ++i ) {
         insertInputWidget( i );
