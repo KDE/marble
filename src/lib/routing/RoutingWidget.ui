@@ -94,6 +94,9 @@
     </layout>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="toolBarLayout"/>
+   </item>
+   <item>
     <widget class="QListView" name="directionsListView">
      <property name="minimumSize">
       <size>
@@ -122,9 +125,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="toolBarLayout"/>
    </item>
   </layout>
  </widget>
