@@ -7,7 +7,7 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( navigation_SRCS NavigationFloatItem.cpp )
+set( navigation_SRCS NavigationFloatItem.cpp ArrowDiscWidget.cpp )
 set (navigation_UI navigation.ui navigation_small.ui)
 
 qt4_add_resources(navigation_SRCS navigation.qrc)

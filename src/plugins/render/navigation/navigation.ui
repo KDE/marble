@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>Navigation</class>
- <widget class="QWidget" name="Navigation" >
-  <property name="geometry" >
+ <widget class="QWidget" name="Navigation">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,198 +10,122 @@
     <height>229</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Navigation</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <property name="margin" >
-    <number>0</number>
+  <widget class="Marble::ArrowDiscWidget" name="arrowDisc" native="true">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>10</y>
+     <width>70</width>
+     <height>70</height>
+    </rect>
    </property>
-   <property name="spacing" >
-    <number>0</number>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>29</x>
+     <y>85</y>
+     <width>36</width>
+     <height>152</height>
+    </rect>
    </property>
-   <item row="0" column="0" >
-    <layout class="QGridLayout" >
-     <property name="margin" >
-      <number>0</number>
-     </property>
-     <property name="spacing" >
-      <number>0</number>
-     </property>
-     <item row="5" column="1" >
-      <widget class="QToolButton" name="zoomOutButton" >
-       <property name="toolTip" >
-        <string>Zoom Out</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Zoom out by pressing this button to see less detail.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/zoom-out.png</normaloff>:/icons/zoom-out.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string>-</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" >
-      <widget class="QToolButton" name="goHomeButton" >
-       <property name="toolTip" >
-        <string>Navigate to your 'Home Location'</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Click this button to restore the original zoom level and view angle.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/go-home.png</normaloff>:/icons/go-home.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string>Home</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2" >
-      <widget class="QToolButton" name="moveRightButton" >
-       <property name="toolTip" >
-        <string>Right</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Rotates the earth clockwise around its axis.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/arrow-right.png</normaloff>:/icons/arrow-right.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" >
-      <widget class="QToolButton" name="moveUpButton" >
-       <property name="toolTip" >
-        <string>Up</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Tilts the earth's axis towards the user.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/arrow-up.png</normaloff>:/icons/arrow-up.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1" >
-      <widget class="QSlider" name="zoomSlider" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="MinimumExpanding" hsizetype="Fixed" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="toolTip" >
-        <string>Zoom Slider</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Use this slider to adjust the zoom level of the map.</string>
-       </property>
-       <property name="minimum" >
-        <number>900</number>
-       </property>
-       <property name="maximum" >
-        <number>2400</number>
-       </property>
-       <property name="value" >
-        <number>1050</number>
-       </property>
-       <property name="sliderPosition" >
-        <number>1050</number>
-       </property>
-       <property name="tracking" >
-        <bool>true</bool>
-       </property>
-       <property name="orientation" >
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="tickPosition" >
-        <enum>QSlider::TicksAbove</enum>
-       </property>
-       <property name="tickInterval" >
-        <number>100</number>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1" >
-      <widget class="QToolButton" name="zoomInButton" >
-       <property name="toolTip" >
-        <string>Zoom In</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Zoom in by pressing this button to see more detail.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/zoom-in.png</normaloff>:/icons/zoom-in.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string>+</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" >
-      <widget class="QToolButton" name="moveDownButton" >
-       <property name="toolTip" >
-        <string>Down</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Tilts the earth's axis away from the user.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/arrow-down.png</normaloff>:/icons/arrow-down.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" >
-      <widget class="QToolButton" name="moveLeftButton" >
-       <property name="toolTip" >
-        <string>Left</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Rotates the earth counterclockwise around its axis.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/arrow-left.png</normaloff>:/icons/arrow-left.png</iconset>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-  </layout>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QToolButton" name="zoomInButton">
+      <property name="toolTip">
+       <string>Zoom In</string>
+      </property>
+      <property name="whatsThis">
+       <string>Zoom in by pressing this button to see more detail.</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../../../marble.qrc">
+        <normaloff>:/icons/zoom-in.png</normaloff>:/icons/zoom-in.png</iconset>
+      </property>
+      <property name="shortcut">
+       <string>+</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSlider" name="zoomSlider">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="toolTip">
+       <string>Zoom Slider</string>
+      </property>
+      <property name="whatsThis">
+       <string>Use this slider to adjust the zoom level of the map.</string>
+      </property>
+      <property name="minimum">
+       <number>900</number>
+      </property>
+      <property name="maximum">
+       <number>2400</number>
+      </property>
+      <property name="value">
+       <number>1050</number>
+      </property>
+      <property name="sliderPosition">
+       <number>1050</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="tickPosition">
+       <enum>QSlider::TicksAbove</enum>
+      </property>
+      <property name="tickInterval">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QToolButton" name="zoomOutButton">
+      <property name="toolTip">
+       <string>Zoom Out</string>
+      </property>
+      <property name="whatsThis">
+       <string>Zoom out by pressing this button to see less detail.</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../../../marble.qrc">
+        <normaloff>:/icons/zoom-out.png</normaloff>:/icons/zoom-out.png</iconset>
+      </property>
+      <property name="shortcut">
+       <string>-</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Marble::ArrowDiscWidget</class>
+   <extends>QWidget</extends>
+   <header>ArrowDiscWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
-  <include location="../../../marble.qrc" />
+  <include location="../../../marble.qrc"/>
  </resources>
  <connections/>
 </ui>

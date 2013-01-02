@@ -28,6 +28,7 @@ namespace Marble
 
 class MarbleWidget;
 class WidgetGraphicsItem;
+class ArrowDiscWidget;
 
 /**
  * @short Provides a float item with zoom and move controls
@@ -107,7 +108,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
     MarbleGlobal::Profiles m_profiles;
 
     /** Radius of the viewport last time */
-    int m_oldViewportRadius;    
+    int m_oldViewportRadius;
 };
 
 }

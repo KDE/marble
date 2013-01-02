@@ -1,23 +1,13 @@
 <RCC>
-    <qresource>
-        <file>../../../icons/application-exit.png</file>
-        <file>../../../icons/arrow-down.png</file>
-        <file>../../../icons/arrow-left.png</file>
-        <file>../../../icons/arrow-right.png</file>
-        <file>../../../icons/arrow-up.png</file>
-        <file>../../../icons/document-open.png</file>
-        <file>../../../icons/document-print.png</file>
-        <file>../../../icons/document-save-as.png</file>
-        <file>../../../icons/edit-copy.png</file>
-        <file>../../../icons/go-home.png</file>
-        <file>../../../icons/help-contents.png</file>
-        <file>../../../icons/help-whatsthis.png</file>
-        <file>../../../icons/map-flat.png</file>
-        <file>../../../icons/map-globe.png</file>
-        <file>../../../icons/map-mercator.png</file>
-        <file>../../../icons/marble.png</file>
-        <file>../../../icons/wikipedia.png</file>
-        <file>../../../icons/zoom-in.png</file>
-        <file>../../../icons/zoom-out.png</file>
+    <qresource prefix="/">
+        <file alias="marble/navigation/navigational_arrows.png">data/navigational_arrows.png</file>
+        <file alias="marble/navigation/navigational_arrows_hover_bottom.png">data/navigational_arrows_hover_bottom.png</file>
+        <file alias="marble/navigation/navigational_arrows_hover_left.png">data/navigational_arrows_hover_left.png</file>
+        <file alias="marble/navigation/navigational_arrows_hover_right.png">data/navigational_arrows_hover_right.png</file>
+        <file alias="marble/navigation/navigational_arrows_hover_top.png">data/navigational_arrows_hover_top.png</file>
+        <file alias="marble/navigation/navigational_arrows_press_bottom.png">data/navigational_arrows_press_bottom.png</file>
+        <file alias="marble/navigation/navigational_arrows_press_left.png">data/navigational_arrows_press_left.png</file>
+        <file alias="marble/navigation/navigational_arrows_press_right.png">data/navigational_arrows_press_right.png</file>
+        <file alias="marble/navigation/navigational_arrows_press_top.png">data/navigational_arrows_press_top.png</file>
     </qresource>
 </RCC>
