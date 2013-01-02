@@ -865,6 +865,7 @@ void MarblePart::setupActions()
     m_showAtmosphereAction->setVisible( false );
     m_showAtmosphereAction->setChecked( true );
     m_showAtmosphereAction->setText( i18nc( "Action for toggling the atmosphere", "&Atmosphere" ) );
+    m_showAtmosphereAction->setIcon( KIcon( ":/icons/atmosphere.png" ) );
     connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ),
              this,                   SLOT( setShowAtmosphere( bool ) ) );
     foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
@@ -902,6 +903,7 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "show_clouds", m_showCloudsAction );
     m_showCloudsAction->setCheckable( true );
     m_showCloudsAction->setChecked( true );
+    m_showCloudsAction->setIcon( KIcon( ":/icons/clouds.png" ) );
     m_showCloudsAction->setText( i18nc( "Action for toggling clouds", "&Clouds" ) );
     connect( m_showCloudsAction, SIGNAL( triggered( bool ) ),
              this,               SLOT( setShowClouds( bool ) ) );
@@ -918,6 +920,7 @@ void MarblePart::setupActions()
     // Action: Show Time options
     m_controlTimeAction = new KAction( this );
     actionCollection()->addAction( "control_time", m_controlTimeAction );
+    m_controlTimeAction->setIcon( KIcon( ":/icons/clock.png" ) );
     m_controlTimeAction->setText( i18nc( "Action for time control dialog", "&Time Control..." ) );
     connect( m_controlTimeAction, SIGNAL( triggered( bool ) ),
          this,               SLOT( controlTime() ) );

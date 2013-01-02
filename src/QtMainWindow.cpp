@@ -253,7 +253,7 @@ void MainWindow::createActions()
      m_lockFloatItemsAct->setStatusTip(tr("Lock Position of Floating Items"));
      connect(m_lockFloatItemsAct, SIGNAL(triggered( bool )), this, SLOT( lockPosition( bool )));
 
-     m_showCloudsAct = new QAction( tr("&Clouds"), this);
+     m_showCloudsAct = new QAction( QIcon(":/icons/clouds.png"), tr("&Clouds"), this);
      m_showCloudsAct->setCheckable( true );
      m_showCloudsAct->setStatusTip(tr("Show Real Time Cloud Cover"));
      connect(m_showCloudsAct, SIGNAL(triggered( bool )), this, SLOT( showClouds( bool )));
@@ -262,7 +262,7 @@ void MainWindow::createActions()
      m_workOfflineAct->setCheckable( true );
      connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
 
-     m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
+     m_showAtmosphereAct = new QAction( QIcon(":/icons/atmosphere.png"), tr("&Atmosphere"), this);
      m_showAtmosphereAct->setVisible( false );
      m_showAtmosphereAct->setCheckable( true );
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
@@ -275,7 +275,7 @@ void MainWindow::createActions()
          }
      }
 
-     m_controlTimeAct = new QAction( tr( "&Time Control..." ), this );
+     m_controlTimeAct = new QAction( QIcon(":/icons/clock.png"), tr( "&Time Control..." ), this );
      m_controlTimeAct->setStatusTip( tr( "Configure Time Control " ) );
      connect( m_controlTimeAct, SIGNAL( triggered() ), this, SLOT( controlTime() ) );
 
