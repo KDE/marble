@@ -247,17 +247,16 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_popupmenu, SIGNAL( trackPlacemark( const GeoDataPlacemark* ) ),
                        &m_model, SLOT( setTrackedPlacemark( const GeoDataPlacemark* ) ) );
 
-    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
-    m_widget->setMouseTracking( true );
-
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setPlacemarkModel( 0 );
 
     m_mapInfoDialog = new MapInfoDialog( m_widget );
     m_mapInfoDialog->setVisible( false );
     m_widget->connect( m_mapInfoDialog, SIGNAL( repaintNeeded() ), m_widget, SLOT( update() ) );
-    m_widget->installEventFilter( m_mapInfoDialog );
     m_map.addLayer( m_mapInfoDialog );
+
+    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
+    m_widget->setMouseTracking( true );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
                        m_model.routingManager(), SLOT( retrieveRoute() ) );

@@ -43,6 +43,7 @@
 #include "MarbleWidgetPopupMenu.h"
 #include "Planet.h"
 #include "RenderPlugin.h"
+#include "MapInfoDialog.h"
 
 namespace Marble {
 
@@ -388,6 +389,10 @@ void MarbleWidgetDefaultInputHandler::openItemToolTip()
 bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 {
     Q_UNUSED( o );
+
+    if ( MarbleWidgetInputHandler::d->m_widget->mapInfoDialog()->eventFilter( o, e ) ) {
+        return true;
+    }
 
     if (d->m_selectionRubber.isVisible() && e->type() == QEvent::MouseMove)
     {
