@@ -50,8 +50,8 @@ NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
     setVisible( false );
 
     setCacheMode( NoCache );
-    setBackground( QBrush( Qt::transparent ) );
-    setBorderBrush( QBrush( Qt::transparent ) );
+    setBackground( QBrush( QColor( Qt::transparent ) ) );
+    setFrame( NoFrame );
 }
 
 NavigationFloatItem::~NavigationFloatItem()
@@ -110,6 +110,7 @@ QIcon NavigationFloatItem::icon() const
 void NavigationFloatItem::initialize()
 {
     QWidget *navigationParent = new QWidget( 0 );
+    navigationParent->setAttribute( Qt::WA_NoSystemBackground, true );
 
     m_navigationWidget = new Ui::Navigation;
     m_navigationWidget->setupUi( navigationParent );
