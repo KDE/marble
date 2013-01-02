@@ -55,8 +55,8 @@ OpenCachingComItem::OpenCachingComItem( QVariantMap cache, QObject *parent )
     updateTooltip();
     m_action->setText( m_cache["name"].toString() );
 
-    connect( action(), SIGNAL( triggered() ),
-             this, SLOT( showInfoDialog() ) );
+    connect( action(), SIGNAL(triggered()),
+             this, SLOT(showInfoDialog()) );
 
     setSize(QSizeF(24,24));
 }
@@ -96,7 +96,7 @@ void OpenCachingComItem::showInfoDialog()
 
     m_ui->buttonWww->setIcon( QIcon( ":/internet.png" ) );
     m_ui->buttonWww->setToolTip( tr("Click to open this cache's page in a browser") );
-    connect( m_ui->buttonWww, SIGNAL( clicked() ), SLOT( openWww() ) );
+    connect( m_ui->buttonWww, SIGNAL(clicked()), SLOT(openWww()) );
 
     // basic details
     QString details = "<table><tr><td colspan=\"2\" valign=\"middle\">"

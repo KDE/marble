@@ -133,7 +133,7 @@ QIcon License::icon () const
 void License::initialize ()
 {
     updateLicenseText();
-    connect( marbleModel(), SIGNAL( themeChanged( QString ) ), this, SLOT( updateLicenseText() ) );
+    connect( marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateLicenseText()) );
 }
 
 void License::updateLicenseText()
@@ -221,11 +221,11 @@ void License::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
         m_contextMenu = contextMenu();
 
         QAction *toggleAction = m_contextMenu->addAction( tr("&Full License"), this,
-                                                SLOT( toggleLicenseSize() ) );
+                                                SLOT(toggleLicenseSize()) );
         toggleAction->setCheckable( true );
         toggleAction->setChecked( m_showFullLicense );
 
-        m_contextMenu->addAction( tr("&Show Details"), this, SLOT( showAboutDialog() ) );
+        m_contextMenu->addAction( tr("&Show Details"), this, SLOT(showAboutDialog()) );
     }
 
     Q_ASSERT( m_contextMenu );

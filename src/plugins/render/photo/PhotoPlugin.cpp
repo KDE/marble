@@ -48,10 +48,10 @@ PhotoPlugin::PhotoPlugin( const MarbleModel *marbleModel )
     // Plugin is not visible by default
     setVisible( false );
 
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateSettings() ) );
-    connect( this, SIGNAL( changedNumberOfItems( quint32 ) ),
-             this, SLOT( checkNumberOfItems( quint32 ) ) );
+    connect( this, SIGNAL(settingsChanged(QString)),
+             this, SLOT(updateSettings()) );
+    connect( this, SIGNAL(changedNumberOfItems(quint32)),
+             this, SLOT(checkNumberOfItems(quint32)) );
 
     setSettings( QHash<QString,QVariant>() );
 }
@@ -173,13 +173,13 @@ QDialog *PhotoPlugin::configDialog()
 
         readSettings();
         ui_configWidget->m_itemNumberSpinBox->setRange( 0, maximumNumberOfItems );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
-                                            SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
-                                            SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
+                                            SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
+                                            SLOT(readSettings()) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                this,        SLOT(writeSettings())  );
     }
     return m_configDialog;
 }

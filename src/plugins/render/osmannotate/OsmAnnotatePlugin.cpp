@@ -553,7 +553,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     addPlacemark = new QAction(this);
     addPlacemark->setText( tr("Add Placemark") );
     addPlacemark->setCheckable( true );
-    connect( addPlacemark, SIGNAL( toggled(bool)),
+    connect( addPlacemark, SIGNAL(toggled(bool)),
              this, SLOT(setAddingPlacemark(bool)) );
     connect( this, SIGNAL(placemarkAdded()) ,
              addPlacemark, SLOT(toggle()) );
@@ -590,7 +590,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     enableInputAction->setChecked( true );
     enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
     connect( enableInputAction, SIGNAL(toggled(bool)),
-                       widget, SLOT( setInputEnabled(bool)) );
+                       widget, SLOT(setInputEnabled(bool)) );
 
     selectArea = new QAction( this );
     selectArea->setText( tr("Select Map Area") );

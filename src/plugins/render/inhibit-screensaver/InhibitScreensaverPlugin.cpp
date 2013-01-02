@@ -53,7 +53,7 @@ InhibitScreensaverPlugin::InhibitScreensaverPlugin( const MarbleModel *marbleMod
     RenderPlugin( marbleModel ),
     d ( new InhibitScreensaverPluginPrivate() )
 {
-    connect( &d->m_timer, SIGNAL( timeout() ), this, SLOT( inhibitScreenSaver() ) );
+    connect( &d->m_timer, SIGNAL(timeout()), this, SLOT(inhibitScreenSaver()) );
 
 #ifdef Q_WS_MAEMO_5
     setEnabled( true );
@@ -130,8 +130,8 @@ void InhibitScreensaverPlugin::initialize()
        "com.nokia.mce.request", QDBusConnection::systemBus() );
 
     PositionTracking *tracking = marbleModel()->positionTracking();
-    connect( tracking, SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
-             this, SLOT( updateScreenSaverState( PositionProviderPlugin* ) ) );
+    connect( tracking, SIGNAL(positionProviderPluginChanged(PositionProviderPlugin*)),
+             this, SLOT(updateScreenSaverState(PositionProviderPlugin*)) );
     updateScreenSaverState( tracking->positionProviderPlugin() );
 }
 
