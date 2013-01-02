@@ -18,6 +18,7 @@
 // Qt
 #include <QtCore/QSizeF>
 #include <QtGui/QPainter>
+#include <QtGui/QPixmapCache>
 
 using namespace Marble;
 
@@ -207,7 +208,7 @@ void FrameGraphicsItem::setContentSize( const QSizeF& size )
 QPainterPath FrameGraphicsItem::backgroundShape() const
 {
     QPainterPath path;
-    if ( d->m_frame == RectFrame ) {
+    if ( d->m_frame == RectFrame || d->m_frame == ShadowFrame ) {
         QRectF renderedRect = paintedRect();
         path.addRect( QRectF( 0.0, 0.0, renderedRect.size().width(), renderedRect.size().height() ) );
     }
@@ -216,14 +217,12 @@ QPainterPath FrameGraphicsItem::backgroundShape() const
         path.addRoundedRect( QRectF( 0.0, 0.0, paintedSize.width() - 1, paintedSize.height() - 1 ),
                              6, 6 );
     }
-
     return path;
 }
 
 void FrameGraphicsItem::paintBackground( QPainter *painter )
 {
     painter->save();
-
     painter->setPen( QPen( d->m_borderBrush, d->m_borderWidth, d->m_borderStyle ) );
     painter->setBrush( d->m_backgroundBrush );
     painter->drawPath( backgroundShape() );
@@ -234,6 +233,19 @@ void FrameGraphicsItem::paintBackground( QPainter *painter )
 void FrameGraphicsItem::paint( QPainter *painter )
 {
     painter->save();
+
+    // Needs to be done here cause we don't want the margin translation
+    if ( frame() == ShadowFrame )
+    {
+        QPixmap shadow;
+        if ( !QPixmapCache::find( "marble/frames/shadowframe.png", shadow ) ) {
+            shadow = QPixmap( ":/marble/frames/shadowframe.png" );
+            QPixmapCache::insert( "marble/frames/shadowframe.png", shadow );
+        }
+        qDrawBorderPixmap( painter, QRect( QPoint( 0, 0 ), size().toSize() ),
+                           QMargins( 10, 10, 10, 10 ), shadow );
+    }
+
     painter->translate( paintedRect().topLeft() );
     paintBackground( painter );
     painter->translate( d->m_padding, d->m_padding );

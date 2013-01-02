@@ -53,7 +53,10 @@ PhotoPluginItem::PhotoPluginItem( MarbleWidget *widget, QObject *parent )
     connect( m_action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
     setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 
-    m_image.setFrame( FrameGraphicsItem::RectFrame );
+    m_image.setFrame( FrameGraphicsItem::ShadowFrame );
+    m_image.setBorderBrush( QBrush( QColor( Qt::white ) ) );
+    m_image.setBorderWidth( 2.0 );
+    m_image.setMargin( 5 );
     MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
     layout->addItem( &m_image, 0, 0 );
     setLayout( layout );
@@ -83,7 +86,7 @@ void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type
 {
     if( type == "thumbnail" ) {
         m_smallImage.load( url );
-        m_image.setImage( m_smallImage );
+        m_image.setImage( m_smallImage.scaled( QSize( 50, 50 ) ) );
     }
     else if ( type == "info" ) {        
         QFile file( url );
@@ -111,7 +114,7 @@ bool PhotoPluginItem::operator<( const AbstractDataPluginItem *other ) const
 
 QUrl PhotoPluginItem::photoUrl() const
 {
-    QString url = "http://farm%1.static.flickr.com/%2/%3_%4_t.jpg";
+    QString url = "http://farm%1.static.flickr.com/%2/%3_%4_s.jpg";
     
     return QUrl( url.arg( farm() ).arg( server() ).arg( id() ).arg( secret() ) );
 }

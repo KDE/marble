@@ -66,6 +66,7 @@
         <file alias="marble/webpopup/arrow2_vertical_topleft_shadow.png">../../data/bitmaps/webpopup/arrow_vertical_topleft_shadow.png</file>
         <file alias="marble/webpopup/arrow2_vertical_topright.png">../../data/bitmaps/webpopup/arrow_vertical_topright.png</file>
         <file alias="marble/webpopup/arrow2_vertical_topright_shadow.png">../../data/bitmaps/webpopup/arrow_vertical_topright_shadow.png</file>
+        <file alias="marble/frames/shadowframe.png">../../data/bitmaps/shadowframe.png</file>
     </qresource>
     <qresource prefix="/marble/webpopup">
         <file alias="deco_places.png">webpopup/marble_deco_places.png</file>
