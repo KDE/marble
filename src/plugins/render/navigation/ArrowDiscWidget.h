@@ -37,7 +37,6 @@ protected:
     void mouseMoveEvent( QMouseEvent *mouseEvent );
     void mousePressEvent( QMouseEvent *mouseEvent );
     void mouseReleaseEvent( QMouseEvent *mouseEvent );
-    void resizeEvent( QResizeEvent *event );
     void repaint();
 
 private:
@@ -45,11 +44,6 @@ private:
 
     MarbleWidget *m_marbleWidget;
     QString m_imagePath;
-
-    QPainterPath pathNorth;
-    QPainterPath pathSouth;
-    QPainterPath pathEast;
-    QPainterPath pathWest;
 };
 
 }

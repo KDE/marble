@@ -70,6 +70,7 @@ void ArrowDiscWidget::mousePressEvent( QMouseEvent *mouseEvent )
         case Qt::DownArrow:
             m_imagePath = "marble/navigation/navigational_arrows_press_bottom";
             m_marbleWidget->moveDown();
+            break;
         case Qt::LeftArrow:
             m_imagePath = "marble/navigation/navigational_arrows_press_left";
             m_marbleWidget->moveLeft();
@@ -115,24 +116,6 @@ void ArrowDiscWidget::mouseMoveEvent( QMouseEvent *mouseEvent )
     }
 }
 
-void ArrowDiscWidget::resizeEvent( QResizeEvent *event )
-{
-    QWidget::resizeEvent( event );
-
-    pathNorth.moveTo( width()/2, height()/2 );
-    pathNorth.arcTo( 0.0, 0.0, 70.0, 70.0, 45.0, 90.0 );
-    pathNorth.closeSubpath();
-    pathSouth.moveTo( width()/2, height()/2 );
-    pathSouth.arcTo( 0.0, 0.0, 70.0, 70.0, 225.0, 90.0 );
-    pathSouth.closeSubpath();
-    pathWest.moveTo( width()/2, height()/2 );
-    pathWest.arcTo( 0.0, 0.0, 70.0, 70.0, 135.0, 90.0 );
-    pathWest.closeSubpath();
-    pathEast.moveTo( width()/2, height()/2 );
-    pathEast.arcTo( 0.0, 0.0, 70.0, 70.0, 315.0, 90.0 );
-    pathEast.closeSubpath();
-}
-
 void ArrowDiscWidget::repaint()
 {
     emit repaintNeeded();
@@ -140,8 +123,8 @@ void ArrowDiscWidget::repaint()
 
 Qt::ArrowType ArrowDiscWidget::arrowUnderMouse(const QPoint &position) const
 {
-    const int min_radius = 5;
-    const int max_radius = 28;
+    const int min_radius_pow2 = 5*5;
+    const int max_radius_pow2 = 28*28;
 
     // mouse coordinates relative to widget topleft
     int mx = position.x();
@@ -154,17 +137,20 @@ Qt::ArrowType ArrowDiscWidget::arrowUnderMouse(const QPoint &position) const
     int px = mx - cx;
     int py = my - cy;
 
-    qreal distance = sqrt( px*px + py*py );
+    int const distance_pow2 = px*px + py*py;
 
-    if ( distance >= min_radius && distance <= max_radius ) {
-        if ( pathNorth.contains( position ) ) {
-            return Qt::UpArrow;
-        } else if ( pathSouth.contains( position ) ) {
-            return Qt::DownArrow;
-        } else if ( pathWest.contains( position ) ) {
+    if ( distance_pow2 >= min_radius_pow2 && distance_pow2 <= max_radius_pow2 ) {
+        int const angle = int( atan2( py, px ) * RAD2DEG );
+        Q_ASSERT( -180 <= angle && angle <= 180 );
+
+        if ( angle >= 135 || angle < -135 ) {
             return Qt::LeftArrow;
-        } else if ( pathEast.contains( position ) ) {
+        } else if ( angle < -45 ) {
+            return Qt::UpArrow;
+        } else if ( angle < 45 ) {
             return Qt::RightArrow;
+        } else {
+            return Qt::DownArrow;
         }
     }
 
