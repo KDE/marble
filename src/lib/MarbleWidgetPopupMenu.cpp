@@ -21,6 +21,7 @@
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataExtendedData.h"
 #include "PlacemarkInfoDialog.h"
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
@@ -30,6 +31,7 @@
 #include "MarbleRunnerManager.h"
 #include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
+#include "MarbleDirs.h"
 
 // Qt
 #include <QtCore/QMimeData>
@@ -235,21 +237,19 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
 
     if ( actionidx > 0 ) {
         const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
-        if (index->role().isEmpty() || index->visualCategory() == GeoDataFeature::Satellite) {
-            MapInfoDialog* popup = m_widget->mapInfoDialog();
-            popup->setSize(QSizeF(600, 600));
+        bool isSatellite = (index->visualCategory() == GeoDataFeature::Satellite);
+        bool isCity (index->visualCategory() >= GeoDataFeature::SmallCity &&
+                         index->visualCategory() <= GeoDataFeature::LargeNationCapital);
 
-            if (index->visualCategory() == GeoDataFeature::Satellite) {
-                QString description = index->description();
-                GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
-                popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
-                description.replace("%altitude%", QString::number(location.altitude(), 'f', 2));
-                description.replace("%latitude%", location.latToString());
-                description.replace("%longitude%", location.lonToString());
-                popup->setContent(description);
+        if (index->role().isEmpty() || isSatellite | isCity) {
+            MapInfoDialog* popup = m_widget->mapInfoDialog();
+            popup->setSize(QSizeF(600, 620));
+            if (isSatellite) {
+                setupDialogSatellite(popup, index);
+            } else if (isCity) {
+                setupDialogCity(popup, index);
             } else {
                 popup->setContent(index->description());
-                popup->setCoordinates(index->coordinate(), Qt::AlignRight | Qt::AlignVCenter);
             }
 
             popup->setVisible(true);
@@ -260,6 +260,69 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
             delete dialog;
         }
     }
+}
+
+void MarbleWidgetPopupMenu::setupDialogSatellite(MapInfoDialog *popup, const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QString description = index->description();
+    description.replace("%altitude%", QString::number(location.altitude(), 'f', 2));
+    description.replace("%latitude%", location.latToString());
+    description.replace("%longitude%", location.lonToString());
+    popup->setContent(description);
+}
+
+void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/places.html");
+    if (!descriptionFile.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    QString description = descriptionFile.readAll();
+    description.replace("%name%", index->name());
+
+    QString  roleString;
+    const QString role = index->role();
+    if(role=="PPLC") {
+        roleString = tr("National Capital");
+    } else if(role=="PPL") {
+        roleString = tr("City");
+    } else if(role=="PPLA") {
+        roleString = tr("State Capital");
+    } else if(role=="PPLA2") {
+        roleString = tr("County Capital");
+    } else if(role=="PPLA3" || role=="PPLA4" ) {
+        roleString = tr("Capital");
+    } else if(role=="PPLF" || role=="PPLG" || role=="PPLL" || role=="PPLQ" ||
+              role=="PPLR" || role=="PPLS" || role=="PPLW" ) {
+        roleString = tr("Village");
+    }
+    description.replace("%category%", roleString);
+
+    description.replace("%shortDescription%", index->description());
+    description.replace("%latitude%", location.latToString());
+    description.replace("%longitude%", location.lonToString());
+    description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
+    description.replace("%population%", QString::number(index->population()));
+    description.replace("%country%", index->countryCode());
+    description.replace("%state%", index->state());
+    QString dst = QString( "%1" ).arg( ( index->extendedData().value("gmt").value().toInt() +
+                                         index->extendedData().value("dst").value().toInt() ) /
+                                       ( double ) 100, 0, 'f', 1 );
+
+    description.replace("%timezone%", dst);
+
+    const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg")
+                                              .arg(index->countryCode().toLower()) );
+    description.replace("%flag%", flagPath);
+
+    popup->setContent(description);
 }
 
 void MarbleWidgetPopupMenu::slotShowOrbit( bool show )

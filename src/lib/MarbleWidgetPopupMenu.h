@@ -35,6 +35,7 @@ class MarbleModel;
 class GeoDataCoordinates;
 class GeoDataPlacemark;
 class MarbleRunnerManager;
+class MapInfoDialog;
 
 
 class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
@@ -83,6 +84,9 @@ private Q_SLOTS:
       */
     bool mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer );
     QMenu* createInfoBoxMenu();
+
+    void setupDialogSatellite(MapInfoDialog *popup, const GeoDataPlacemark *index);
+    void setupDialogCity(MapInfoDialog *popup, const GeoDataPlacemark *index);
 
  private:
     Q_DISABLE_COPY( MarbleWidgetPopupMenu )
