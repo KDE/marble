@@ -25,7 +25,7 @@
 using namespace Marble;
 
 WidgetGraphicsItemPrivate::WidgetGraphicsItemPrivate() :
-        m_widget(0), m_marbleWidget(0)
+    m_widget(0), m_marbleWidget(0), m_activeWidget( 0 )
 {
     // nothing to do
 }
@@ -113,7 +113,18 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
         
         if ( foundRightPosition ) {
             QWidget *child = d->m_widget->childAt( shiftedPos );
-            
+
+            if ( d->m_activeWidget && d->m_activeWidget != child ) {
+                QEvent leaveEvent( QEvent::Leave );
+                QApplication::sendEvent( d->m_activeWidget, &leaveEvent );
+            }
+
+            if ( child && d->m_activeWidget != child ) {
+                QEvent enterEvent( QEvent::Enter );
+                QApplication::sendEvent( child, &enterEvent );
+            }
+            d->m_activeWidget = child;
+
             if ( child ) {
                 shiftedPos -= child->pos(); // transform to children's coordinates
                 QMouseEvent shiftedEvent = QMouseEvent( e->type(), shiftedPos,
@@ -123,6 +134,12 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
                     d->m_marbleWidget->setCursor( d->m_widget->cursor() );
                     return true;
                 }
+            }
+        } else {
+            if ( d->m_activeWidget ) {
+                QEvent leaveEvent( QEvent::Leave );
+                QApplication::sendEvent( d->m_activeWidget, &leaveEvent );
+                d->m_activeWidget = 0;
             }
         }
     }
