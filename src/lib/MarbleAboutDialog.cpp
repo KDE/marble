@@ -111,6 +111,8 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
            "<i>Satellites</i></p>")+
         QObject::tr("<p>Friedrich W. H. Kossebau, <a href=\"mailto:kossebau@kde.org\">kossebau@kde.org</a><br />"
            "<i>Plasma Integration, Bugfixes</i></p>")+
+        QObject::tr("<p>Rene Kuettner, <a href=\"mailto:rene@bitkanal.net\">rene@bitkanal.net</a><br />"
+           "<i>Planetary Satellites</i></p>")+
         QObject::tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:earthwings@gentoo.org\">earthwings@gentoo.org</a><br />"
            "<i>Routing, Navigation, Mobile</i></p>")+
         QObject::tr("<p>Niko Sams <a href=\"mailto:niko.sams@gmail.com\">niko.sams@gmail.com</a><br />"
@@ -145,6 +147,10 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr("<b>ESA - Summer of Code in Space 2011</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in ESA SoCiS for their successful work on Marble:</p>")+
+        QObject::tr("<p><b>2012</b></p>")+
+        QObject::tr("<p>Rene Kuettner, <a href=\"mailto:rene@bitkanal.net\">rene@bitkanal.net</a><br />"
+           "<i>Project: Visualization of planetary satellites</i></p>")+
+        QObject::tr("<p><b>2011</b></p>")+
         QObject::tr("<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu.com</a><br />"
            "<i>Project: Visualisation of Satellite Orbits</i></p>")+
 
