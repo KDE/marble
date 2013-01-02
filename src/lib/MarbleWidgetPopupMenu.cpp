@@ -49,7 +49,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_widget(widget),
       m_lmbMenu( new QMenu( m_widget ) ),
       m_rmbMenu( new QMenu( m_widget ) ),
-      m_copyCoordinateAction( new QAction( tr("Copy Coordinates"), this ) ),
+      m_copyCoordinateAction( new QAction( QIcon(":/icons/copy-coordinates.png"), tr("Copy Coordinates"), this ) ),
       m_rmbExtensionPoint( 0 ),
       m_runnerManager( new MarbleRunnerManager( model->pluginManager(), this ) )
 {
@@ -65,14 +65,14 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     m_trackPlacemarkAction->setData( 0 );
 
     //	Tool actions (Right mouse button)
-    QAction* fromHere = new QAction( tr( "Directions &from here" ), this );
+    QAction* fromHere = new QAction( QIcon(":/icons/directions-from.png"), tr( "Directions &from here" ), this );
     QAction* toHere = new QAction( tr( "Directions &to here" ), this );
     QAction* addBookmark = new QAction( QIcon(":/icons/bookmark-new.png"),
                                         tr( "Add &Bookmark" ), this );
     QAction* fullscreenAction = new QAction( tr( "&Full Screen Mode" ), this );
     fullscreenAction->setCheckable( true );
 
-    QAction* aboutDialogAction = new QAction( tr( "&About" ), this );
+    QAction* aboutDialogAction = new QAction( QIcon(":/icons/marble.png"), tr( "&About" ), this );
 
     QMenu* infoBoxMenu = createInfoBoxMenu();
 
@@ -89,7 +89,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     if ( !smallScreen ) {
         m_rmbMenu->addAction( m_copyCoordinateAction );
     }
-    m_rmbMenu->addAction( tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
+    m_rmbMenu->addAction( QIcon(":/icons/addressbook-details.png"), tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
     m_rmbMenu->addSeparator();
     m_rmbMenu->addMenu( infoBoxMenu );
 

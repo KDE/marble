@@ -78,7 +78,7 @@ QString AtmospherePlugin::description() const
 
 QIcon AtmospherePlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/atmosphere.png");
 }
 
 QString AtmospherePlugin::copyrightYears() const

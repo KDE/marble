@@ -109,7 +109,7 @@ QList<PluginAuthor> GraticulePlugin::pluginAuthors() const
 
 QIcon GraticulePlugin::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/coordinate.png");
 }
 
 void GraticulePlugin::initialize ()

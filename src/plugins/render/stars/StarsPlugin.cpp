@@ -113,7 +113,7 @@ QList<PluginAuthor> StarsPlugin::pluginAuthors() const
 
 QIcon StarsPlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/stars.png");
 }
 
 void StarsPlugin::initialize()

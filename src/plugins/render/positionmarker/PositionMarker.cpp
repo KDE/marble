@@ -125,7 +125,7 @@ QList<PluginAuthor> PositionMarker::pluginAuthors() const
 
 QIcon PositionMarker::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/positionmarker.png");
 }
 
 QDialog *PositionMarker::configDialog()
