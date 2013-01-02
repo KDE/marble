@@ -664,6 +664,23 @@ void MainWindow::createDockWidgets()
     setTabPosition( Qt::LeftDockWidgetArea, QTabWidget::North );
     setTabPosition( Qt::RightDockWidgetArea, QTabWidget::North );
 
+    QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), this );
+    routingDock->setObjectName( "routingDock" );
+    routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    RoutingWidget* routingWidget = new RoutingWidget( m_controlView->marbleWidget(), this );
+    routingDock->setWidget( routingWidget );
+    m_panelMenu->addAction( routingDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, routingDock );
+
+    QDockWidget *locationDock = new QDockWidget( tr( "Location" ), this );
+    locationDock->setObjectName( "locationDock" );
+    locationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    CurrentLocationWidget* locationWidget = new CurrentLocationWidget( this );
+    locationWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    locationDock->setWidget( locationWidget );
+    m_panelMenu->addAction( locationDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, locationDock );
+
     m_searchDock = new QDockWidget( tr( "Search" ), this );
     m_searchDock->setObjectName( "searchDock" );
     m_searchDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
@@ -672,6 +689,10 @@ void MainWindow::createDockWidgets()
     m_searchDock->setWidget( searchWidget );
     m_panelMenu->addAction( m_searchDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, m_searchDock );
+
+    tabifyDockWidget( locationDock, m_searchDock );
+    tabifyDockWidget( m_searchDock, routingDock );
+    m_searchDock->raise();
 
     QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
     searchWidget->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
@@ -709,26 +730,7 @@ void MainWindow::createDockWidgets()
     addDockWidget( Qt::LeftDockWidgetArea, legendDock );
 
     tabifyDockWidget( mapViewDock, legendDock );
-
-    QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), this );
-    routingDock->setObjectName( "routingDock" );
-    routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    RoutingWidget* routingWidget = new RoutingWidget( m_controlView->marbleWidget(), this );
-    routingDock->setWidget( routingWidget );
-    m_panelMenu->addAction( routingDock->toggleViewAction() );
-    addDockWidget( Qt::LeftDockWidgetArea, routingDock );
-
-    QDockWidget *locationDock = new QDockWidget( tr( "Location" ), this );
-    locationDock->setObjectName( "locationDock" );
-    locationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    CurrentLocationWidget* locationWidget = new CurrentLocationWidget( this );
-    locationWidget->setMarbleWidget( m_controlView->marbleWidget() );
-    locationDock->setWidget( locationWidget );
-    m_panelMenu->addAction( locationDock->toggleViewAction() );
-    addDockWidget( Qt::LeftDockWidgetArea, locationDock );
-
-    tabifyDockWidget( locationDock, m_searchDock );
-    tabifyDockWidget( m_searchDock, routingDock );
+    mapViewDock->raise();
 }
 
 void MainWindow::openMapSite()
