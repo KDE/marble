@@ -704,10 +704,14 @@ void MarbleMapPrivate::setDocument( int index ) {
     GeoDataDocument* doc = m_model->fileManager()->at( index );
     QString currentName = doc->fileName();
 
-    QString coastName = m_model->mapTheme()->map()->filters().at( 0 )->coastlines();
-    QString lakeName = m_model->mapTheme()->map()->filters().at( 0 )->lakes();
-    QString glacierName = m_model->mapTheme()->map()->filters().at( 0 )->glaciers();
-
+    QString coastName;
+    QString lakeName;
+    QString glacierName;
+    if (m_model->mapTheme()->map()->filters().count()) {
+      coastName = m_model->mapTheme()->map()->filters().at( 0 )->coastlines();
+      lakeName = m_model->mapTheme()->map()->filters().at( 0 )->lakes();
+      glacierName = m_model->mapTheme()->map()->filters().at( 0 )->glaciers();
+    }
     if ( currentName == coastName ) {
         m_textureLayer.setCoastDocument( doc );
     }
