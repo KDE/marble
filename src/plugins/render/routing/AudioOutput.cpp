@@ -47,8 +47,8 @@ public:
 AudioOutputPrivate::AudioOutputPrivate( AudioOutput* parent ) :
     q( parent ), m_output( 0 ), m_muted( false )
 {
-    QObject::connect( &m_voiceNavigation, SIGNAL( instructionChanged() ),
-                      q, SLOT( playInstructions() ) );
+    QObject::connect( &m_voiceNavigation, SIGNAL(instructionChanged()),
+                      q, SLOT(playInstructions()) );
 }
 
 void AudioOutputPrivate::audioOutputFinished()
@@ -64,7 +64,7 @@ void AudioOutputPrivate::setupAudio()
         Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput( Phonon::VideoCategory, q );
         Phonon::createPath( m_output, audioOutput );
 
-        q->connect( m_output, SIGNAL( finished() ), q, SLOT( audioOutputFinished() ) );
+        q->connect( m_output, SIGNAL(finished()), q, SLOT(audioOutputFinished()) );
     }
 }
 

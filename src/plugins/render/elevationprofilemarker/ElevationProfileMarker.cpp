@@ -41,10 +41,10 @@ ElevationProfileMarker::ElevationProfileMarker( const MarbleModel *marbleModel )
     setVisible( false );
     m_markerItem.setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 
-    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL( added( GeoDataObject * ) ),
-             this, SLOT( onGeoObjectAdded( GeoDataObject * ) ) );
-    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL( removed( GeoDataObject * ) ),
-             this, SLOT( onGeoObjectRemoved( GeoDataObject * ) ) );
+    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL(added(GeoDataObject*)),
+             this, SLOT(onGeoObjectAdded(GeoDataObject*)) );
+    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL(removed(GeoDataObject*)),
+             this, SLOT(onGeoObjectRemoved(GeoDataObject *)) );
 }
 
 ElevationProfileMarker::~ElevationProfileMarker()

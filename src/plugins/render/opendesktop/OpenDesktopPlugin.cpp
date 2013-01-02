@@ -88,14 +88,14 @@ QDialog *OpenDesktopPlugin::configDialog()
         m_uiConfigWidget->setupUi( m_configDialog );
         readSettings();
 
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( accepted() ),
-                SLOT( writeSettings() ) );
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( rejected() ),
-                SLOT( readSettings() ) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()),
+                SLOT(writeSettings()) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(rejected()),
+                SLOT(readSettings()) );
         QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( 
                                                          QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 this,        SLOT(writeSettings()) );
     }
 
     return m_configDialog;

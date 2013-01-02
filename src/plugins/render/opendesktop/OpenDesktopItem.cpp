@@ -21,7 +21,7 @@ OpenDesktopItem::OpenDesktopItem(QObject *parent):
             m_browser(0)
 {
     m_action = new QAction( this );
-    connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
+    connect( m_action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
     setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 }
  

@@ -46,17 +46,17 @@ ProgressFloatItem::ProgressFloatItem( const MarbleModel *marbleModel )
     // This timer is responsible to activate the automatic display with a small delay
     m_progressShowTimer.setInterval( 250 );
     m_progressShowTimer.setSingleShot( true );
-    connect( &m_progressShowTimer, SIGNAL( timeout() ), this, SLOT( show() ) );
+    connect( &m_progressShowTimer, SIGNAL(timeout()), this, SLOT(show()) );
 
     // This timer is responsible to hide the automatic display when downloads are finished
     m_progressHideTimer.setInterval( 750 );
     m_progressHideTimer.setSingleShot( true );
-    connect( &m_progressHideTimer, SIGNAL( timeout() ), this, SLOT( hideProgress() ) );
+    connect( &m_progressHideTimer, SIGNAL(timeout()), this, SLOT(hideProgress()) );
 
     // Repaint timer
     m_repaintTimer.setSingleShot( true );
     m_repaintTimer.setInterval( 1000 );
-    connect( &m_repaintTimer, SIGNAL( timeout() ), this, SIGNAL( repaintNeeded() ) );
+    connect( &m_repaintTimer, SIGNAL(timeout()), this, SIGNAL(repaintNeeded()) );
 
     // The icon resembles the pie chart
     QImage canvas( 16, 16, QImage::Format_ARGB32 );
@@ -133,8 +133,8 @@ void ProgressFloatItem::initialize()
 {
     const HttpDownloadManager* manager = marbleModel()->downloadManager();
     Q_ASSERT( manager );
-    connect( manager, SIGNAL( progressChanged( int, int ) ), this, SLOT( handleProgress( int, int ) ) , Qt::UniqueConnection );
-    connect( manager, SIGNAL( jobRemoved() ), this, SLOT( removeProgressItem() ), Qt::UniqueConnection );
+    connect( manager, SIGNAL(progressChanged(int,int)), this, SLOT(handleProgress(int,int)) , Qt::UniqueConnection );
+    connect( manager, SIGNAL(jobRemoved()), this, SLOT(removeProgressItem()), Qt::UniqueConnection );
 
     m_isInitialized = true;
 }
