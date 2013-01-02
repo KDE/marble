@@ -44,7 +44,7 @@ class KineticModel: public QObject
     Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval)
 
 public:
-    KineticModel(QObject *parent = 0);
+    explicit KineticModel(QObject *parent = 0);
     ~KineticModel();
 
     int duration() const;

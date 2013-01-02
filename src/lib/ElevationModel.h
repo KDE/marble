@@ -34,7 +34,7 @@ class MARBLE_EXPORT ElevationModel : public QObject
 {
     Q_OBJECT
 public:
-    ElevationModel( MarbleModel * const model );
+    explicit ElevationModel( MarbleModel * const model );
 
     qreal height( qreal lon, qreal lat ) const;
     QList<GeoDataCoordinates> heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const;

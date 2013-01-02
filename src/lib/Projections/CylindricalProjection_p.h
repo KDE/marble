@@ -23,7 +23,7 @@ class CylindricalProjection;
 class CylindricalProjectionPrivate : public AbstractProjectionPrivate
 {
   public:
-    CylindricalProjectionPrivate( CylindricalProjection * parent );
+    explicit CylindricalProjectionPrivate( CylindricalProjection * parent );
 
     bool lineStringToPolygon( const GeoDataLineString &lineString,
                               const ViewportParams *viewport,

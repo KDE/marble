@@ -23,7 +23,7 @@ class GeoDataTreeModel;
 class BookmarkManagerPrivate
 {
 public:
-    BookmarkManagerPrivate( GeoDataTreeModel *treeModel );
+    explicit BookmarkManagerPrivate( GeoDataTreeModel *treeModel );
 
     ~BookmarkManagerPrivate();
 

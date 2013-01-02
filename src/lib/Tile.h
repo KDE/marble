@@ -62,7 +62,7 @@ class Blending;
 class Tile
 {
  public:
-    Tile( TileId const & tileId );
+    explicit Tile( TileId const & tileId );
     virtual ~Tile();
 
 /*!

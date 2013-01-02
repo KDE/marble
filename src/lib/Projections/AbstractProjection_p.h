@@ -20,7 +20,7 @@ class AbstractProjection;
 class AbstractProjectionPrivate
 {
   public:
-    AbstractProjectionPrivate( AbstractProjection * parent );
+    explicit AbstractProjectionPrivate( AbstractProjection * parent );
 
     virtual ~AbstractProjectionPrivate() { };
 

@@ -29,7 +29,7 @@ class TileScalingTextureMapper : public QObject, public TextureMapperInterface
     Q_OBJECT
 
  public:
-    TileScalingTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
+    explicit TileScalingTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
 
     virtual void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,

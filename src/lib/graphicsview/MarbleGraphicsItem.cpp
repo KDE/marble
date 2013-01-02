@@ -136,7 +136,7 @@ QList<QRectF> MarbleGraphicsItemPrivate::boundingRects() const
 {
     QList<QRectF> list;
 
-    foreach( QPointF point, positions() ) {
+    foreach( const QPointF &point, positions() ) {
         QRectF rect( point, m_size );
         if( rect.x() < 0 )
             rect.setLeft( 0 );

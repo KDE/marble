@@ -56,7 +56,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
         Online
     };
 
-    RenderPlugin( const MarbleModel *marbleModel );
+    explicit RenderPlugin( const MarbleModel *marbleModel );
     virtual ~RenderPlugin();
 
     /**

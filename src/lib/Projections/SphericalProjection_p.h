@@ -24,7 +24,7 @@ class SphericalProjectionPrivate : public AbstractProjectionPrivate
 {
 
   public:
-    SphericalProjectionPrivate( SphericalProjection * parent );
+    explicit SphericalProjectionPrivate( SphericalProjection * parent );
 
     virtual bool lineStringToPolygon( const GeoDataLineString &lineString,
                               const ViewportParams *viewport,

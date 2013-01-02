@@ -23,7 +23,7 @@ class MapThemeSortFilterProxyModel : public QSortFilterProxyModel
     Q_OBJECT
 
 public:
-    MapThemeSortFilterProxyModel(QObject *parent = 0);
+    explicit MapThemeSortFilterProxyModel(QObject *parent = 0);
 
 protected:
     bool lessThan( const QModelIndex &left, const QModelIndex &right ) const;

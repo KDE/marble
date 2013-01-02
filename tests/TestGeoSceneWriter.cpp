@@ -64,8 +64,7 @@ void TestGeoSceneWriter::initTestCase()
     dgmlPath = QDir( DGML_PATH );
     dgmlPath.setFilter(QDir::AllDirs | QDir::NoDotAndDotDot);
 
-    QString dgmlDirname;
-    foreach( dgmlDirname, dgmlPath.entryList() ) {
+    foreach( const QString &dgmlDirname, dgmlPath.entryList() ) {
         qDebug() << dgmlDirname;
         QDir dataDir(dgmlPath.absoluteFilePath(dgmlDirname));
         dataDir.setNameFilters( dgmlFilters );
@@ -75,9 +74,8 @@ void TestGeoSceneWriter::initTestCase()
             continue;
         }
 
-        QString filename;
         //test the loading of each file in the data dir
-        foreach( filename, dataDir.entryList(dgmlFilters, QDir::Files) ){
+        foreach( const QString &filename, dataDir.entryList(dgmlFilters, QDir::Files) ){
 
             //Add example files
             QFile file( dataDir.filePath(filename));
@@ -108,7 +106,7 @@ void TestGeoSceneWriter::saveFile_data()
 {
     QTest::addColumn<QSharedPointer<GeoSceneParser> >( "parser" );
 
-    foreach( QString key, parsers.keys() ) {
+    foreach( const QString &key, parsers.keys() ) {
         QTest::newRow( key.toLocal8Bit() ) << parsers.value(key);
     }
 }
@@ -133,7 +131,7 @@ void TestGeoSceneWriter::saveAndLoad_data()
 {
     QTest::addColumn<QSharedPointer<GeoSceneParser> >( "parser" );
 
-    foreach( QString key, parsers.keys() ) {
+    foreach( const QString &key, parsers.keys() ) {
         QTest::newRow( key.toLocal8Bit() ) << parsers.value(key);
     }
 }
@@ -163,7 +161,7 @@ void TestGeoSceneWriter::saveAndCompare_data()
     QTest::addColumn<QSharedPointer<GeoSceneParser> >("parser");
     QTest::addColumn<QString>("original");
 
-    foreach( QString key, parsers.keys() ) {
+    foreach( const QString &key, parsers.keys() ) {
         QTest::newRow( key.toLocal8Bit() ) << parsers.value(key) << key;
     }
 }
