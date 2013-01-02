@@ -138,14 +138,14 @@ QIcon ElevationProfileFloatItem::icon () const
 
 void ElevationProfileFloatItem::initialize ()
 {
-    connect( marbleModel()->elevationModel(), SIGNAL( updateAvailable() ), SLOT( updateData() ) );
+    connect( marbleModel()->elevationModel(), SIGNAL(updateAvailable()), SLOT(updateData()) );
 
     m_routingModel = marbleModel()->routingManager()->routingModel();
-    connect( m_routingModel, SIGNAL( currentRouteChanged() ), this, SLOT( updateData() ) );
+    connect( m_routingModel, SIGNAL(currentRouteChanged()), this, SLOT(updateData()) );
 
     m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
     m_leftGraphMargin = QFontMetricsF( font() ).width( "0000 m" ); // TODO make this dynamic according to actual need
-    connect( this, SIGNAL( dataUpdated() ), SLOT( forceRepaint() ) );
+    connect( this, SIGNAL(dataUpdated()), SLOT(forceRepaint()) );
 
     updateData();
 
@@ -396,10 +396,10 @@ QDialog *ElevationProfileFloatItem::configDialog() //FIXME TODO Make a config di
 
         readSettings();
 
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ), SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ), SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ), this, SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()) );
     }
     return m_configDialog;
 }
@@ -417,7 +417,7 @@ void ElevationProfileFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent 
         }
 
         QAction *toggleAction = m_contextMenu->addAction( tr("&Zoom to viewport"), this,
-                                SLOT( toggleZoomToViewport() ) );
+                                SLOT(toggleZoomToViewport()) );
         toggleAction->setCheckable( true );
         toggleAction->setChecked( m_zoomToViewport );
     }
@@ -439,10 +439,10 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
 
     if ( widget && !m_marbleWidget ) {
         m_marbleWidget = widget;
-        connect( this, SIGNAL( dataUpdated() ), this, SLOT( updateVisiblePoints() ) );
-        connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
-                 this, SLOT( updateVisiblePoints() ) );
-        connect( this, SIGNAL( settingsChanged( QString ) ), this, SLOT( updateVisiblePoints() ) );
+        connect( this, SIGNAL(dataUpdated()), this, SLOT(updateVisiblePoints()) );
+        connect( m_marbleWidget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+                 this, SLOT(updateVisiblePoints()) );
+        connect( this, SIGNAL(settingsChanged(QString)), this, SLOT(updateVisiblePoints()) );
     }
 
     if ( e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove ) {

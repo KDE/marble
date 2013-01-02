@@ -52,8 +52,8 @@ WeatherPlugin::WeatherPlugin( const MarbleModel *marbleModel )
     // Plugin is not visible by default
     setVisible( false );
 
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateItemSettings() ) );
+    connect( this, SIGNAL(settingsChanged(QString)),
+             this, SLOT(updateItemSettings()) );
 
     setSettings( QHash<QString,QVariant>() );
 }
@@ -130,13 +130,13 @@ QDialog *WeatherPlugin::configDialog()
         ui_configWidget = new Ui::WeatherConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
         readSettings();
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
-                                              SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
-                                              SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
+                                              SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
+                                              SLOT(readSettings()) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 this,        SLOT(writeSettings()) );
     }
     return m_configDialog;
 }

@@ -87,9 +87,9 @@ void BBCWeatherService::fetchStationList()
     }
 
     connect( m_itemGetter,
-             SIGNAL( foundStation( BBCStation ) ),
+             SIGNAL(foundStation(BBCStation)),
              this,
-             SLOT( createItem( BBCStation ) ) );
+             SLOT(createItem(BBCStation)) );
 
     m_stationList = m_parser->stationList();
     m_itemGetter->setStationList( m_stationList );
@@ -118,8 +118,8 @@ void BBCWeatherService::setupList()
 
     m_parser = new StationListParser( this );
     m_parser->setPath( MarbleDirs::path( "weather/bbc-stations.xml" ) );
-    connect( m_parser, SIGNAL( finished() ),
-             this,     SLOT( fetchStationList() ) );
+    connect( m_parser, SIGNAL(finished()),
+             this,     SLOT(fetchStationList()) );
     if ( m_parser->wait( 100 ) ) {
         m_parser->start( QThread::IdlePriority );
     }

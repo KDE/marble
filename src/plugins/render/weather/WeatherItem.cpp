@@ -348,10 +348,10 @@ WeatherItem::~WeatherItem()
 
 QAction *WeatherItem::action()
 {
-    disconnect( &d->m_browserAction, SIGNAL( triggered() ),
-                this,        SLOT( openBrowser() ) );
-    connect(    &d->m_browserAction, SIGNAL( triggered() ),
-                this,        SLOT( openBrowser() ) );
+    disconnect( &d->m_browserAction, SIGNAL(triggered()),
+                this,        SLOT(openBrowser()) );
+    connect(    &d->m_browserAction, SIGNAL(triggered()),
+                this,        SLOT(openBrowser()) );
     return &d->m_browserAction;
 }
 
@@ -554,10 +554,10 @@ QList<QAction*> WeatherItem::actions()
     QList<QAction*> result;
     result << &d->m_browserAction;
 
-    disconnect( &d->m_favoriteAction, SIGNAL( triggered() ),
-                this,        SLOT( toggleFavorite() ) );
-    connect(    &d->m_favoriteAction, SIGNAL( triggered() ),
-                this,        SLOT( toggleFavorite() ) );
+    disconnect( &d->m_favoriteAction, SIGNAL(triggered()),
+                this,        SLOT(toggleFavorite()) );
+    connect(    &d->m_favoriteAction, SIGNAL(triggered()),
+                this,        SLOT(toggleFavorite()) );
 
     result << &d->m_favoriteAction;
 

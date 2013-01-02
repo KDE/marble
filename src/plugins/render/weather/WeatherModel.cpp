@@ -34,7 +34,7 @@ WeatherModel::WeatherModel( const PluginManager *pluginManager, QObject *parent 
     createServices();
 
     m_timer = new QTimer();
-    connect( m_timer, SIGNAL( timeout() ), SLOT( updateItems() ) );
+    connect( m_timer, SIGNAL(timeout()), SLOT(updateItems()) );
 
     // Default interval = 3 hours
     setUpdateInterval( 3 );
@@ -145,25 +145,25 @@ void WeatherModel::addService( AbstractWeatherService *service )
 {
     service->setFavoriteItems( favoriteItems() );
 
-    connect( service, SIGNAL( createdItems( QList<AbstractDataPluginItem*> ) ),
-             this, SLOT( addItemsToList( QList<AbstractDataPluginItem*> ) ) );
-    connect( service, SIGNAL( requestedDownload( const QUrl&,
-                                                 const QString&, 
-                                                 AbstractDataPluginItem * ) ),
-             this, SLOT( downloadItemData( const QUrl&,
-                                           const QString&,
-                                           AbstractDataPluginItem * ) ) );
-    connect( service, SIGNAL( downloadDescriptionFileRequested( const QUrl& ) ),
-             this, SLOT( downloadDescriptionFileRequested( const QUrl& ) ) );
+    connect( service, SIGNAL(createdItems(QList<AbstractDataPluginItem*>)),
+             this, SLOT(addItemsToList(QList<AbstractDataPluginItem*>)) );
+    connect( service, SIGNAL(requestedDownload(QUrl,
+                                               QString, 
+                                               AbstractDataPluginItem*)),
+             this, SLOT(downloadItemData(QUrl,
+                                         QString,
+                                         AbstractDataPluginItem*)) );
+    connect( service, SIGNAL(downloadDescriptionFileRequested(QUrl)),
+             this, SLOT(downloadDescriptionFileRequested(QUrl)) );
 
-    connect( this, SIGNAL( additionalItemsRequested( const GeoDataLatLonAltBox &,
-                                                     const MarbleModel *,
-                                                     qint32 ) ),
-             service, SLOT( getAdditionalItems( const GeoDataLatLonAltBox&,
-                                                const MarbleModel *,
-                                                qint32 ) ) );
-    connect( this, SIGNAL( parseFileRequested( const QByteArray& ) ),
-             service, SLOT( parseFile( const QByteArray& ) ) );
+    connect( this, SIGNAL(additionalItemsRequested(GeoDataLatLonAltBox,
+                                                   MarbleModel*,
+                                                   qint32)),
+             service, SLOT(getAdditionalItems(GeoDataLatLonAltBox,
+                                              MarbleModel*,
+                                              qint32)) );
+    connect( this, SIGNAL(parseFileRequested(QByteArray)),
+             service, SLOT(parseFile(QByteArray)) );
 
     m_services.append( service );
 }
