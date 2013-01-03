@@ -379,6 +379,7 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataGroundOverlay.h
     geodata/data/GeoDataHotSpot.h
     geodata/data/GeoDataIconStyle.h
+    geodata/data/GeoDataItemIcon.h
     geodata/data/GeoDataLabelStyle.h
     geodata/data/GeoDataLatLonAltBox.h
     geodata/data/GeoDataLatLonBox.h
