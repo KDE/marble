@@ -76,17 +76,16 @@ class FileManager : public QObject
     void closeFile( GeoDataDocument *document );
 
     int size() const;
-    GeoDataDocument *at( int index );
+    GeoDataDocument *at( const QString &key );
 
 
  Q_SIGNALS:
-    void fileAdded( int index );
-    void fileRemoved( int index );
+    void fileAdded( const QString &key );
+    void fileRemoved( const QString &key );
     void centeredDocument( const GeoDataLatLonBox& );
 
  private:
 
-    Q_PRIVATE_SLOT( d, void addGeoDataDocument( GeoDataDocument *document ) )
     Q_PRIVATE_SLOT( d, void cleanupLoader( FileLoader *loader ) )
 
     Q_DISABLE_COPY( FileManager )

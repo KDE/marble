@@ -117,7 +117,7 @@ public:
 
     void updateProperty( const QString &, bool );
 
-    void setDocument( int index );
+    void setDocument( QString key );
 
     MarbleMap *const q;
 
@@ -171,8 +171,8 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
 
     QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
                       parent, SLOT( updateMapTheme() ) );
-    QObject::connect( m_model->fileManager(), SIGNAL( fileAdded( int ) ),
-                      parent, SLOT( setDocument( int ) ) );
+    QObject::connect( m_model->fileManager(), SIGNAL( fileAdded( QString ) ),
+                      parent, SLOT( setDocument( QString ) ) );
 
     QObject::connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
                       parent, SIGNAL( repaintNeeded() ));
@@ -699,9 +699,9 @@ bool MarbleMap::geoCoordinates( int x, int y,
     return d->m_viewport.geoCoordinates( x, y, lon, lat, unit );
 }
 
-void MarbleMapPrivate::setDocument( int index ) {
+void MarbleMapPrivate::setDocument( QString key ) {
 
-    GeoDataDocument* doc = m_model->fileManager()->at( index );
+    GeoDataDocument* doc = m_model->fileManager()->at( key );
     QString currentName = doc->fileName();
 
     QString coastName;
