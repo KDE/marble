@@ -350,6 +350,7 @@ void RoutingInputWidget::setIndex( int index )
 {
     d->m_index = index;
     d->m_lineEdit->setBusy(false);
+    d->m_lineEdit->setDecorator( d->m_route->pixmap( index ) );
 }
 
 void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates & )
