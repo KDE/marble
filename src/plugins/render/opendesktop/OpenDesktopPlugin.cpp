@@ -5,11 +5,13 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Utku Aydın <utkuaydin34@gmail.com>
+// Copyright 2010 Utku Aydın        <utkuaydin34@gmail.com>
+// Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #include "OpenDesktopPlugin.h"
 #include "OpenDesktopModel.h"
+#include "MarbleWidget.h"
 
 #include "ui_OpenDesktopConfigWidget.h"
 
@@ -108,6 +110,20 @@ QHash<QString,QVariant> OpenDesktopPlugin::settings() const
     settings.insert( "itemsOnScreen", numberOfItems() );
 
     return settings;
+}
+
+bool OpenDesktopPlugin::eventFilter(QObject *object, QEvent *event)
+{
+    if ( isInitialized() ) {
+        OpenDesktopModel *odModel = qobject_cast<OpenDesktopModel*>( model() );
+        Q_ASSERT(odModel);
+        MarbleWidget* widget = qobject_cast<MarbleWidget*>( object );
+        if ( widget ) {
+            odModel->setMarbleWidget(widget);
+        }
+    }
+
+    return AbstractDataPlugin::eventFilter( object, event );
 }
 
 void OpenDesktopPlugin::setSettings( const QHash<QString,QVariant> &settings )

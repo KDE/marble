@@ -11,9 +11,10 @@
 #ifndef OPENDESKTOPITEM_H
 #define OPENDESKTOPITEM_H
  
+#include <QtGui/QAction>
 #include "AbstractDataPluginItem.h"
 #include "TinyWebBrowser.h"
-#include <QtGui/QAction>
+#include "MarbleWidget.h"
  
 class QFont;
  
@@ -62,12 +63,14 @@ class OpenDesktopItem : public AbstractDataPluginItem
         QString role() const;
 
         void setRole(const QString role );
+
+        void setMarbleWidget(MarbleWidget *widget);
     
     public slots:
         void openBrowser();
 
     private:
-        TinyWebBrowser *m_browser;
+        MarbleWidget *m_marbleWidget;
         QString m_fullName;
         QString m_location;
         QString m_role;

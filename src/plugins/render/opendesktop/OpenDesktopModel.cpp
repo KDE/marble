@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Utku Aydın <utkuaydin34@gmail.com>
+// Copyright 2010 Utku Aydın        <utkuaydin34@gmail.com>
+// Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 
@@ -32,6 +33,11 @@ OpenDesktopModel::OpenDesktopModel( QObject *parent )
 OpenDesktopModel::~OpenDesktopModel()
 {
     // Nothing to do...
+}
+
+void OpenDesktopModel::setMarbleWidget(MarbleWidget *widget)
+{
+    m_marbleWidget = widget;
 }
  
 void OpenDesktopModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *model, qint32 number )
@@ -82,6 +88,7 @@ void OpenDesktopModel::parseFile( const QByteArray& file )
                 // If it does not exists, create it
                 GeoDataCoordinates coor(longitude * DEG2RAD, latitude * DEG2RAD);
                 OpenDesktopItem *item = new OpenDesktopItem( this );
+                item->setMarbleWidget(m_marbleWidget);
                 item->setId( personid );
                 item->setCoordinate( coor );
                 item->setTarget( "earth" );

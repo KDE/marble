@@ -13,6 +13,7 @@
  
 #include "AbstractDataPluginModel.h"
 #include "GeoDataLatLonAltBox.h"
+#include "MarbleWidget.h"
  
 namespace Marble {
  
@@ -26,6 +27,8 @@ public:
     explicit OpenDesktopModel( QObject *parent = 0 );
     ~OpenDesktopModel();
 
+    void setMarbleWidget(MarbleWidget *widget);
+
 protected:
     /**
      * Generates the download url for the description file from the web service depending on
@@ -37,6 +40,9 @@ protected:
      * prepares the data for usage.
      **/
     void parseFile(const QByteArray& file);
+
+private:
+    MarbleWidget *m_marbleWidget;
 };
  
 }

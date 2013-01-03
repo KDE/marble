@@ -213,9 +213,9 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
 bool WeatherPlugin::eventFilter(QObject *object, QEvent *event)
 {
     if ( isInitialized() ) {
-        WeatherModel *weatherModel = dynamic_cast<WeatherModel*>( model() );
+        WeatherModel *weatherModel = qobject_cast<WeatherModel*>( model() );
         Q_ASSERT(weatherModel);
-        MarbleWidget* widget = dynamic_cast<MarbleWidget*>( object );
+        MarbleWidget* widget = qobject_cast<MarbleWidget*>( object );
         if ( widget ) {
             weatherModel->setMarbleWidget(widget);
         }

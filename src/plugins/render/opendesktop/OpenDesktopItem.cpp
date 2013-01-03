@@ -5,20 +5,19 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Utku Aydın <utkuaydin34@gmail.com>
+// Copyright 2010 Utku Aydın        <utkuaydin34@gmail.com>
+// Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-#include "OpenDesktopItem.h"
-
 #include <QtGui/QPainter>
-
+#include "OpenDesktopItem.h"
 #include "ViewportParams.h"
+#include "MapInfoDialog.h"
 
 using namespace Marble;
 
 OpenDesktopItem::OpenDesktopItem(QObject *parent):
-            AbstractDataPluginItem(parent),
-            m_browser(0)
+            AbstractDataPluginItem(parent)
 {
     m_action = new QAction( this );
     connect( m_action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
@@ -97,11 +96,11 @@ QAction *OpenDesktopItem::action()
 
 void OpenDesktopItem::openBrowser()
 {
-    if ( !m_browser ) {
-        m_browser = new TinyWebBrowser();
-    }
-    m_browser->load( profileUrl() );
-    m_browser->show();
+    MapInfoDialog *popup = m_marbleWidget->mapInfoDialog();
+    popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
+    popup->setUrl( profileUrl() );
+    popup->setSize( QSizeF( 900, 600 ) );
+    popup->setVisible( true );
 }
 
 QUrl OpenDesktopItem::profileUrl() const
@@ -150,6 +149,11 @@ void OpenDesktopItem::setRole( const QString role )
 {
     m_role = role;
     updateToolTip();
+}
+
+void OpenDesktopItem::setMarbleWidget(MarbleWidget *widget)
+{
+    m_marbleWidget = widget;
 }
 
 // This is needed for all QObjects (see MOC)
