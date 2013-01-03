@@ -87,6 +87,7 @@ private Q_SLOTS:
 
     void setupDialogSatellite(MapInfoDialog *popup, const GeoDataPlacemark *index);
     void setupDialogCity(MapInfoDialog *popup, const GeoDataPlacemark *index);
+    void setupDialogNation(MapInfoDialog *popup, const GeoDataPlacemark *index);
     void setupDialogGeoPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index);
 
  private:

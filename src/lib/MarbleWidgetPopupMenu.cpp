@@ -243,14 +243,17 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         bool isGeoPlace = (index->visualCategory() == GeoDataFeature::GeographicPole ||
                            index->visualCategory() == GeoDataFeature::MagneticPole ||
                            index->visualCategory() == GeoDataFeature::ShipWreck);
+        bool isNation = (index->visualCategory() == GeoDataFeature::Nation);
 
-        if (index->role().isEmpty() || isSatellite || isCity || isGeoPlace) {
+        if (index->role().isEmpty() || isSatellite || isCity || isGeoPlace || isNation) {
             MapInfoDialog* popup = m_widget->mapInfoDialog();
             popup->setSize(QSizeF(580, 620));
             if (isSatellite) {
                 setupDialogSatellite(popup, index);
             } else if (isCity) {
                 setupDialogCity(popup, index);
+            } else if (isNation) {
+                setupDialogNation(popup, index);
             } else if (isGeoPlace) {
                 setupDialogGeoPlaces(popup, index);
             } else {
@@ -329,6 +332,31 @@ void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataP
     } else {
         description.replace("%timezone%", "+"+dst);
     }
+
+    const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
+    description.replace("%flag%", flagPath);
+
+    popup->setContent(description);
+}
+
+void MarbleWidgetPopupMenu::setupDialogNation(MapInfoDialog *popup, const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/nation.html");
+    if (!descriptionFile.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    QString description = descriptionFile.readAll();
+    description.replace("%name%", index->name());
+    description.replace("%shortDescription%", index->description());
+    description.replace("%latitude%", location.latToString());
+    description.replace("%longitude%", location.lonToString());
+    description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
+    description.replace("%population%", QString::number(index->population()));
+    description.replace("%area%", QString::number(index->area(), 'f', 2));
 
     const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
     description.replace("%flag%", flagPath);
