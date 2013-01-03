@@ -8,11 +8,11 @@ body {
   background-position:0px 0px;
 }
 
-h1 { color:#b3925d; font:bold 36px "Linux Biolinum O", Verdana, Arial, Helvetica, sans-serif; margin-top:80px; }
+h1 { color:#b3925d; font:bold 24px "Linux Biolinum O", Verdana, Arial, Helvetica, sans-serif; margin-top:80px; }
 
-h2 { color:#888a85; font-size:24px; margin-top:20px; }
+h2 { color:#888a85; font-size:18px; margin-top:20px; }
 
-h3 { color:#b3925d; font-size:18px; margin-top:25px; }
+h3 { color:#b3925d; font-size:16px; margin-top:25px; }
 
 table {
 	  font: 11px/24px Verdana, Arial, Helvetica, sans-serif;
@@ -44,7 +44,7 @@ td+td {
 
 p.gray { color:#888a85; font-size:12px; margin-top:20px; }
 
-p { color:black; font-size:12px; margin-top:20px; width:400px}
+p { color:black; font-size:11px; margin-top:20px; width:400px}
 
 hr { margin-left:0px; width: 400px; margin-top:25px}
 

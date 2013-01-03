@@ -240,14 +240,19 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         bool isSatellite = (index->visualCategory() == GeoDataFeature::Satellite);
         bool isCity (index->visualCategory() >= GeoDataFeature::SmallCity &&
                          index->visualCategory() <= GeoDataFeature::LargeNationCapital);
+        bool isGeoPlace = (index->visualCategory() == GeoDataFeature::GeographicPole ||
+                           index->visualCategory() == GeoDataFeature::MagneticPole ||
+                           index->visualCategory() == GeoDataFeature::ShipWreck);
 
-        if (index->role().isEmpty() || isSatellite | isCity) {
+        if (index->role().isEmpty() || isSatellite || isCity || isGeoPlace) {
             MapInfoDialog* popup = m_widget->mapInfoDialog();
-            popup->setSize(QSizeF(600, 620));
+            popup->setSize(QSizeF(580, 620));
             if (isSatellite) {
                 setupDialogSatellite(popup, index);
             } else if (isCity) {
                 setupDialogCity(popup, index);
+            } else if (isGeoPlace) {
+                setupDialogGeoPlaces(popup, index);
             } else {
                 popup->setContent(index->description());
             }
@@ -279,7 +284,7 @@ void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataP
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
-    QFile descriptionFile(":/marble/webpopup/places.html");
+    QFile descriptionFile(":/marble/webpopup/city.html");
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
         return;
     }
@@ -312,15 +317,41 @@ void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataP
     description.replace("%population%", QString::number(index->population()));
     description.replace("%country%", index->countryCode());
     description.replace("%state%", index->state());
+
     QString dst = QString( "%1" ).arg( ( index->extendedData().value("gmt").value().toInt() +
                                          index->extendedData().value("dst").value().toInt() ) /
                                        ( double ) 100, 0, 'f', 1 );
+    // There is an issue about UTC.
+    // It's possible to variants (e.g.):
+    // +1.0 and -1.0, but dst does not have + an the start
+    if(dst.startsWith("-")) {
+        description.replace("%timezone%", dst);
+    } else {
+        description.replace("%timezone%", "+"+dst);
+    }
 
-    description.replace("%timezone%", dst);
-
-    const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg")
-                                              .arg(index->countryCode().toLower()) );
+    const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
     description.replace("%flag%", flagPath);
+
+    popup->setContent(description);
+}
+
+void MarbleWidgetPopupMenu::setupDialogGeoPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/geoplace.html");
+    if (!descriptionFile.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    QString description = descriptionFile.readAll();
+    description.replace("%name%", index->name());
+    description.replace("%latitude%", location.latToString());
+    description.replace("%longitude%", location.lonToString());
+    description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
+    description.replace("%shortDescription%", index->description());
 
     popup->setContent(description);
 }

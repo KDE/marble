@@ -2,12 +2,13 @@
 <head>
 <title>Place information</title>
 <link rel="stylesheet" media="screen" href="qrc:/marble/webpopup/placesscreen.css">
-<link rel="stylesheet" media="print, embossed" href="qrc:/marble/webpopup/satelliteprint.css"></head>
+<link rel="stylesheet" media="print, embossed" href="qrc:/marble/webpopup/placesprint.css"></head>
 <style>
 .flag {
-  width: 400px; height: 50px;
-  background-image:url('file://%flag%'); background-repeat:no-repeat;
-  /*background-image: url('qrc:/marble/webpopup/deco_places.png'); background-repeat:no-repeat;*/
+  width: 400px;
+  height: 50px;
+  background-image:url('file://%flag%');
+  background-repeat:no-repeat;
   background-size: contain;
   background-position:right center;
 }
@@ -50,10 +51,12 @@
   <td><a href="http://en.m.wikipedia.org/wiki/Federated_state">State</a></td>%state%<td></td>
 </tr>
 <tr>
-  <td><a href="http://en.m.wikipedia.org/wiki/Time_zone">Timezone</a></td><td><a href="http://en.wikipedia.org/wiki/Greenwich_Mean_Time">GMT</a>+%timezone%</td>
+  <td><a href="http://en.m.wikipedia.org/wiki/Time_zone">Timezone</a></td>
+  <td>
+    <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>%timezone%
+  </td>
 </tr>
 </table>
-
 <hr>
 
 <p>Data from <a href="http://www.geonames.org">http://www.geonames.org</a></p>

@@ -70,7 +70,8 @@
     </qresource>
     <qresource prefix="/marble/webpopup">
         <file alias="deco_places.png">webpopup/marble_deco_places.png</file>
-        <file alias="places.html">webpopup/places.html</file>
         <file alias="placesscreen.css">webpopup/placesscreen.css</file>
+        <file alias="geoplace.html">webpopup/geoplace.html</file>
+        <file alias="city.html">webpopup/city.html</file>
     </qresource>
 </RCC>
