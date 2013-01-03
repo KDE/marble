@@ -95,6 +95,8 @@ public:
     QMenu* createBookmarkMenu( RoutingInputWidget *parent );
 
     void createBookmarkActions( QMenu* menu, GeoDataFolder* bookmarksFolder, QObject *parent );
+
+    QPixmap addDropDownIndicator( const QPixmap &pixmap ) const;
 };
 
 RoutingInputLineEdit::RoutingInputLineEdit( QWidget *parent ) :
@@ -125,7 +127,7 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int 
     m_runnerManager.setModel( m_marbleModel );
 
     m_lineEdit = new RoutingInputLineEdit( parent );
-    m_lineEdit->setDecorator( m_route->pixmap( m_index ) );
+    m_lineEdit->setDecorator( addDropDownIndicator( m_route->pixmap( m_index ) ) );
 
     m_nominatimTimer.setInterval( 1000 );
     m_nominatimTimer.setSingleShot( true );
@@ -192,6 +194,22 @@ void RoutingInputWidgetPrivate::createBookmarkActions( QMenu* menu, GeoDataFolde
         menu->addAction( bookmarkAction );
         QObject::connect( menu, SIGNAL( triggered( QAction* ) ), parent, SLOT( setBookmarkPosition( QAction* ) ) );
     }
+}
+
+QPixmap RoutingInputWidgetPrivate::addDropDownIndicator(const QPixmap &pixmap) const
+{
+    QPixmap result( pixmap.size() + QSize( 8, pixmap.height() ) );
+    result.fill( QColor( Qt::transparent ) );
+    QPainter painter( &result );
+    painter.drawPixmap( 0, 0, pixmap );
+    QPoint const one( pixmap.width() + 1, pixmap.height() - 8 );
+    QPoint const two( one.x() + 6, one.y() );
+    QPoint const three( one.x() + 3, one.y() + 4 );
+    painter.setRenderHint( QPainter::Antialiasing, true );
+    painter.setPen( Qt::NoPen );
+    painter.setBrush( QColor( Oxygen::aluminumGray4 ) );
+    painter.drawConvexPolygon( QPolygon() << one << two << three );
+    return result;
 }
 
 RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget *parent ) :
@@ -350,7 +368,7 @@ void RoutingInputWidget::setIndex( int index )
 {
     d->m_index = index;
     d->m_lineEdit->setBusy(false);
-    d->m_lineEdit->setDecorator( d->m_route->pixmap( index ) );
+    d->m_lineEdit->setDecorator( d->addDropDownIndicator( d->m_route->pixmap( index ) ) );
 }
 
 void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates & )
