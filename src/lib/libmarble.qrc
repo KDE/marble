@@ -52,6 +52,7 @@
         <file alias="marble/webpopup/webpopup2_shadow.png">../../data/bitmaps/webpopup/webpopup2_shadow.png</file>
         <file alias="marble/webpopup/icon-print.png">../../data/bitmaps/webpopup/font-awesome-icon-print-16x16.png</file>
         <file alias="marble/webpopup/icon-remove.png">../../data/bitmaps/webpopup/font-awesome-icon-remove-16x16.png</file>
+        <file alias="marble/webpopup/icon-arrow-back.png">../../data/bitmaps/webpopup/font-awesome-icon-arrow-back-16x16.png</file>
         <file alias="marble/webpopup/arrow2_bottomleft.png">../../data/bitmaps/webpopup/arrow2_bottomleft.png</file>
         <file alias="marble/webpopup/arrow2_bottomleft_shadow.png">../../data/bitmaps/webpopup/arrow2_bottomleft_shadow.png</file>
         <file alias="marble/webpopup/arrow2_bottomright.png">../../data/bitmaps/webpopup/arrow2_bottomright.png</file>
