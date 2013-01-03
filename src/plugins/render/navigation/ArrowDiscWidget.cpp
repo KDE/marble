@@ -90,6 +90,14 @@ void ArrowDiscWidget::mouseReleaseEvent( QMouseEvent *mouseEvent )
     mouseMoveEvent( mouseEvent );
 }
 
+void ArrowDiscWidget::leaveEvent( QEvent* )
+{
+    if ( m_imagePath != "marble/navigation/navigational_arrows" ) {
+        m_imagePath = "marble/navigation/navigational_arrows";
+        repaint();
+    }
+}
+
 void ArrowDiscWidget::mouseMoveEvent( QMouseEvent *mouseEvent )
 {
     QString const oldPath = m_imagePath;

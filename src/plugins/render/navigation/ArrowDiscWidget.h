@@ -37,6 +37,7 @@ protected:
     void mouseMoveEvent( QMouseEvent *mouseEvent );
     void mousePressEvent( QMouseEvent *mouseEvent );
     void mouseReleaseEvent( QMouseEvent *mouseEvent );
+    void leaveEvent( QEvent *event );
     void repaint();
 
 private:
