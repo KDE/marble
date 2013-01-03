@@ -242,7 +242,10 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
                          index->visualCategory() <= GeoDataFeature::LargeNationCapital);
         bool isGeoPlace = (index->visualCategory() == GeoDataFeature::GeographicPole ||
                            index->visualCategory() == GeoDataFeature::MagneticPole ||
-                           index->visualCategory() == GeoDataFeature::ShipWreck);
+                           index->visualCategory() == GeoDataFeature::ShipWreck ||
+                           index->visualCategory() == GeoDataFeature::Crater ||
+                           index->visualCategory() == GeoDataFeature::Mare ||
+                           index->visualCategory() == GeoDataFeature::MannedLandingSite);
         bool isNation = (index->visualCategory() == GeoDataFeature::Nation);
 
         if (index->role().isEmpty() || isSatellite || isCity || isGeoPlace || isNation) {
