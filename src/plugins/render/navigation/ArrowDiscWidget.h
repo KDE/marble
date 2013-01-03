@@ -13,6 +13,7 @@
 
 #include <QtGui/QWidget>
 #include <QtGui/QPixmap>
+#include <QtCore/QTimer>
 
 namespace Marble
 {
@@ -40,8 +41,16 @@ protected:
     void leaveEvent( QEvent *event );
     void repaint();
 
+private slots:
+    void startPressRepeat();
+    void repeatPress();
+
 private:
     Qt::ArrowType arrowUnderMouse( const QPoint &position ) const;
+    QTimer m_initialPressTimer;
+    QTimer m_repeatPressTimer;
+    Qt::ArrowType m_arrowPressed;
+    int m_repetitions;
 
     MarbleWidget *m_marbleWidget;
     QString m_imagePath;

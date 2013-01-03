@@ -22,10 +22,16 @@ namespace Marble
 
 ArrowDiscWidget::ArrowDiscWidget( QWidget *parent ) :
     QWidget( parent ),
+    m_arrowPressed( Qt::NoArrow ),
+    m_repetitions( 0 ),
     m_marbleWidget( 0 ),
     m_imagePath( "marble/navigation/navigational_arrows" )
 {
     setMouseTracking( true );
+
+    m_initialPressTimer.setSingleShot( true );
+    connect( &m_initialPressTimer, SIGNAL(timeout()), SLOT(startPressRepeat()) );
+    connect( &m_repeatPressTimer, SIGNAL(timeout()), SLOT(repeatPress()) );
 }
 
 ArrowDiscWidget::~ArrowDiscWidget()
@@ -59,7 +65,14 @@ QPixmap ArrowDiscWidget::pixmap( const QString &id )
 void ArrowDiscWidget::mousePressEvent( QMouseEvent *mouseEvent )
 {
     if ( mouseEvent->button() == Qt::LeftButton ) {
-        switch ( arrowUnderMouse( mouseEvent->pos() ) ) {
+
+        if ( !m_initialPressTimer.isActive() && !m_repeatPressTimer.isActive() ) {
+            m_repetitions = 0;
+            m_initialPressTimer.start( 300 );
+        }
+
+        m_arrowPressed = arrowUnderMouse( mouseEvent->pos() );
+        switch ( m_arrowPressed ) {
         case Qt::NoArrow:
             m_imagePath = "marble/navigation/navigational_arrows";
             break;
@@ -87,6 +100,8 @@ void ArrowDiscWidget::mousePressEvent( QMouseEvent *mouseEvent )
 
 void ArrowDiscWidget::mouseReleaseEvent( QMouseEvent *mouseEvent )
 {
+    m_initialPressTimer.stop();
+    m_repeatPressTimer.stop();
     mouseMoveEvent( mouseEvent );
 }
 
@@ -95,6 +110,40 @@ void ArrowDiscWidget::leaveEvent( QEvent* )
     if ( m_imagePath != "marble/navigation/navigational_arrows" ) {
         m_imagePath = "marble/navigation/navigational_arrows";
         repaint();
+    }
+}
+
+void ArrowDiscWidget::startPressRepeat()
+{
+    repeatPress();
+
+    if ( m_arrowPressed != Qt::NoArrow ) {
+        m_repeatPressTimer.start( 100 );
+    }
+}
+
+void ArrowDiscWidget::repeatPress()
+{
+    if ( m_repetitions <= 200 ) {
+        ++m_repetitions;
+        switch ( m_arrowPressed ) {
+        case Qt::NoArrow:
+            break;
+        case Qt::UpArrow:
+            m_marbleWidget->moveUp();
+            break;
+        case Qt::DownArrow:
+            m_marbleWidget->moveDown();
+            break;
+        case Qt::LeftArrow:
+            m_marbleWidget->moveLeft();
+            break;
+        case Qt::RightArrow:
+            m_marbleWidget->moveRight();
+            break;
+        }
+    } else {
+        m_repeatPressTimer.stop();
     }
 }
 
@@ -107,15 +156,19 @@ void ArrowDiscWidget::mouseMoveEvent( QMouseEvent *mouseEvent )
         break;
     case Qt::UpArrow:
         m_imagePath = "marble/navigation/navigational_arrows_hover_top";
+        m_arrowPressed = Qt::UpArrow;
         break;
     case Qt::DownArrow:
         m_imagePath = "marble/navigation/navigational_arrows_hover_bottom";
+        m_arrowPressed = Qt::DownArrow;
         break;
     case Qt::LeftArrow:
         m_imagePath = "marble/navigation/navigational_arrows_hover_left";
+        m_arrowPressed = Qt::LeftArrow;
         break;
     case Qt::RightArrow:
         m_imagePath = "marble/navigation/navigational_arrows_hover_right";
+        m_arrowPressed = Qt::RightArrow;
         break;
     }
 
