@@ -120,7 +120,6 @@ set(marblewidget_SRCS
     Projections/MercatorProjection.cpp
     VisiblePlacemark.cpp
     PlacemarkLayout.cpp
-    PlacemarkInfoDialog.cpp
     Planet.cpp
     Quaternion.cpp
     TextureColorizer.cpp
@@ -250,7 +249,6 @@ set (marblewidget_UI
     MarblePluginSettingsWidget.ui
     TileCreatorDialog.ui
     TileLevelRangeWidget.ui
-    PlacemarkInfoDialog.ui
     MarbleAboutDialog.ui
     SunControlWidget.ui
     LatLonEdit.ui

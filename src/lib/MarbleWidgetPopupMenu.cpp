@@ -5,8 +5,9 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2006-2007 Torsten Rahn      <tackat@kde.org>
+// Copyright 2007      Inge Wallin       <ingwa@kde.org>
+// Copyright 2012      Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 // Self
@@ -22,7 +23,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataExtendedData.h"
-#include "PlacemarkInfoDialog.h"
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "Planet.h"
@@ -34,6 +34,7 @@
 #include "MarbleDirs.h"
 
 // Qt
+#include <QApplication>
 #include <QtCore/QMimeData>
 #include <QtCore/QPointer>
 #include <QtGui/QAction>
@@ -240,37 +241,32 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         bool isSatellite = (index->visualCategory() == GeoDataFeature::Satellite);
         bool isCity (index->visualCategory() >= GeoDataFeature::SmallCity &&
                          index->visualCategory() <= GeoDataFeature::LargeNationCapital);
-        bool isGeoPlace = (index->visualCategory() == GeoDataFeature::GeographicPole ||
-                           index->visualCategory() == GeoDataFeature::MagneticPole ||
-                           index->visualCategory() == GeoDataFeature::ShipWreck ||
-                           index->visualCategory() == GeoDataFeature::Crater ||
-                           index->visualCategory() == GeoDataFeature::Mare ||
-                           index->visualCategory() == GeoDataFeature::MannedLandingSite);
         bool isNation = (index->visualCategory() == GeoDataFeature::Nation);
 
-        if (index->role().isEmpty() || isSatellite || isCity || isGeoPlace || isNation) {
-            MapInfoDialog* popup = m_widget->mapInfoDialog();
-            popup->setSize(QSizeF(580, 620));
+        MapInfoDialog* popup = m_widget->mapInfoDialog();
+        popup->setSize(QSizeF(580, 620));
+        if (index->role().isEmpty() || isSatellite || isCity || isNation) {
             if (isSatellite) {
                 setupDialogSatellite(popup, index);
             } else if (isCity) {
                 setupDialogCity(popup, index);
             } else if (isNation) {
                 setupDialogNation(popup, index);
-            } else if (isGeoPlace) {
-                setupDialogGeoPlaces(popup, index);
             } else {
                 popup->setContent(index->description());
             }
-
-            popup->setVisible(true);
         } else {
-            QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget->model()->clock(),  m_widget );
-            dialog->setWindowModality( Qt::WindowModal );
-            dialog->exec();
-            delete dialog;
+            setupDialogGeoPlaces(popup, index);
         }
+        popup->setVisible(true);
     }
+}
+
+QString MarbleWidgetPopupMenu::filterEmptyShortDescription(const QString &description) const
+{
+    if(description.isEmpty())
+        return tr("No description available.");
+    return description;
 }
 
 void MarbleWidgetPopupMenu::setupDialogSatellite(MapInfoDialog *popup, const GeoDataPlacemark *index)
@@ -316,7 +312,7 @@ void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataP
     }
     description.replace("%category%", roleString);
 
-    description.replace("%shortDescription%", index->description());
+    description.replace("%shortDescription%", filterEmptyShortDescription(index->description()));
     description.replace("%latitude%", location.latToString());
     description.replace("%longitude%", location.lonToString());
     description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
@@ -354,7 +350,7 @@ void MarbleWidgetPopupMenu::setupDialogNation(MapInfoDialog *popup, const GeoDat
 
     QString description = descriptionFile.readAll();
     description.replace("%name%", index->name());
-    description.replace("%shortDescription%", index->description());
+    description.replace("%shortDescription%", filterEmptyShortDescription(index->description()));
     description.replace("%latitude%", location.latToString());
     description.replace("%longitude%", location.lonToString());
     description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
@@ -382,7 +378,7 @@ void MarbleWidgetPopupMenu::setupDialogGeoPlaces(MapInfoDialog *popup, const Geo
     description.replace("%latitude%", location.latToString());
     description.replace("%longitude%", location.lonToString());
     description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
-    description.replace("%shortDescription%", index->description());
+    description.replace("%shortDescription%", filterEmptyShortDescription(index->description()));
 
     popup->setContent(description);
 }

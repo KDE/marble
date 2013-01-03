@@ -85,6 +85,7 @@ private Q_SLOTS:
     bool mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer );
     QMenu* createInfoBoxMenu();
 
+    QString filterEmptyShortDescription(const QString &description) const;
     void setupDialogSatellite(MapInfoDialog *popup, const GeoDataPlacemark *index);
     void setupDialogCity(MapInfoDialog *popup, const GeoDataPlacemark *index);
     void setupDialogNation(MapInfoDialog *popup, const GeoDataPlacemark *index);
