@@ -105,6 +105,7 @@ void CacheRunner::parseFile( const QString &fileName, DocumentRole role = Unknow
 
         document->append( mark );
     }
+    document->setFileName( fileName );
 
     file.close();
     emit parsingFinished( document );

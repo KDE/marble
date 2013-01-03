@@ -48,6 +48,7 @@ void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     Q_ASSERT( document );
     GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
     doc->setDocumentRole( role );
+    doc->setFileName( fileName );
 
     file.close();
     emit parsingFinished( doc );

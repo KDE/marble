@@ -217,7 +217,6 @@ void FileLoader::run()
         d->m_document = static_cast<GeoDataDocument*>( document );
         d->m_document->setProperty( d->m_property );
         d->m_document->setDocumentRole( d->m_documentRole );
-        d->m_document->setFileName( d->m_filepath );
         d->createFilterProperties( d->m_document );
         buffer.close();
 
@@ -295,9 +294,7 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
     m_error = error;
     if ( doc ) {
         m_document = doc;
-        doc->setFileName( m_filepath );
         doc->setProperty( m_property );
-        doc->setDocumentRole( m_documentRole );
         doc->addStyleMap( *m_styleMap );
         doc->addStyle( *m_style );
 

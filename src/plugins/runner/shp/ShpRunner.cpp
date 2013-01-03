@@ -166,8 +166,10 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     DBFClose( dbfhandle );
 
     if ( document->size() ) {
+        document->setFileName( fileName );
         emit parsingFinished( document );
     } else {
+        delete document;
         emit parsingFinished( 0 );
     }
 }

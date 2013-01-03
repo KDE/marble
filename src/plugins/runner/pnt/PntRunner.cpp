@@ -198,8 +198,10 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     if ( document->size() == 0 || error ) {
         delete document;
         document = 0;
+        emit parsingFinished( 0 );
+        return;
     }
-
+    document->setFileName( fileName );
     emit parsingFinished( document );
 }
 

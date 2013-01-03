@@ -203,8 +203,10 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     if ( error ) {
         delete document;
         document = 0;
-        qDebug() << "Errors occured while parsing the .pn2 file!\n";
+        emit parsingFinished( 0, "Errors occured while parsing the .pn2 file!" );
+        return;
     }
+    document->setFileName( fileName );
 
     emit parsingFinished( document );
 }
