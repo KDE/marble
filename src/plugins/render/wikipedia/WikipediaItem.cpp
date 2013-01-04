@@ -33,7 +33,7 @@ using namespace Marble;
 /* TRANSLATOR Marble::WikipediaItem */
 
 // The Wikipedia icon is not a square
-const QRect wikiIconRect( 0, 0, 32, 27 );
+const QRect wikiIconRect( 0, 0, 22, 19 );
 const QSize miniWikiIconSize( 22, 19 );
 const int miniWikiIconBorder = 3;
 
