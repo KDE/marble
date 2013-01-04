@@ -138,7 +138,7 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence( const QString &sentenc
             if ( values[2] == "A" ) {
                 m_speed = values[7].toDouble() * 0.514444; // knots => m/s
                 m_track = values[8].toDouble();
-                QString const date = values[9] + " " + values[1];
+                QString const date = values[9] + ' ' + values[1];
                 m_timestamp = QDateTime::fromString( date, "ddMMyy HHmmss" );
                 if (m_timestamp.date().year() <= 1930 && m_timestamp.date().year() >= 1900 ) {
                     m_timestamp = m_timestamp.addYears( 100 ); // Qt range is 1900-1999 for two-digits

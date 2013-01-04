@@ -47,7 +47,7 @@ void BookmarkManagerTest::construct()
         QCOMPARE( manager.folders().first()->size(), 0 );
         QCOMPARE( manager.showBookmarks(), true );
 
-        // FIXME this method returns random results (depending on the username and the existance of the bookmarks file)
+        // FIXME this method returns random results (depending on the username and the existence of the bookmarks file)
         //    QCOMPARE( manager.bookmarkFile(), QString() );
 
         QCOMPARE( model.rowCount(), 1 );

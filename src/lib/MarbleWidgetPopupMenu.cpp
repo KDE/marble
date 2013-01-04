@@ -326,14 +326,14 @@ void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataP
     // There is an issue about UTC.
     // It's possible to variants (e.g.):
     // +1.0 and -1.0, but dst does not have + an the start
-    if(dst.startsWith("-")) {
+    if(dst.startsWith('-')) {
         description.replace("%timezone%", dst);
     } else {
         description.replace("%timezone%", "+"+dst);
     }
 
     const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
-    description.replace("%flag%", flagPath);
+    description.replace(QLatin1String("%flag%"), flagPath);
 
     popup->setContent(description);
 }

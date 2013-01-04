@@ -33,7 +33,7 @@ GeoNode* KmlstateTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.represents( kmlTag_ItemIcon ) )
     {
         QString value = parser.readElementText().trimmed();
-        QStringList iconStateTextList = value.split(" ");
+        QStringList iconStateTextList = value.split(QLatin1Char(' '));
 
         foreach( const QString &value, iconStateTextList ) {
             if ( value == "open" ) {

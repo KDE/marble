@@ -12,7 +12,7 @@
 //
 // Description of the file format
 //
-// In the fileformat initally a file header is provided that provides the file format version and the number 
+// In the fileformat initially a file header is provided that provides the file format version and the number 
 // of polygons stored inside the file. A Polygon starts with the Polygon Header which provides the feature id 
 // and the number of so called "absolute nodes" that are about to follow. Absolute nodes always contain 
 // absolute geodetic coordinates. The Polygon Header also provides a flag that allows to specify whether the 

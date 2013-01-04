@@ -95,9 +95,9 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
                     regionRestriction += " OR ";
                 }
                 regionRestriction += " (regions.lft >= " + regionsQuery.value( 0 ).toString();
-                regionRestriction += " AND regions.lft <= " + regionsQuery.value( 1 ).toString() + ")";
+                regionRestriction += " AND regions.lft <= " + regionsQuery.value( 1 ).toString() + ')';
             }
-            regionRestriction += ")";
+            regionRestriction += ')';
 
             if ( first ) {
                 continue;
@@ -210,7 +210,7 @@ QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataC
     qreal distance = EARTH_RADIUS * distanceSphere( a, b);
 
     int precision = 0;
-    QString distanceUnit = "m";
+    QString distanceUnit = QLatin1String( "m" );
 
     if ( MarbleGlobal::getInstance()->locale()->measurementSystem() == QLocale::ImperialSystem ) {
         precision = 1;
@@ -254,7 +254,7 @@ QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataC
         heading = QObject::tr( "north-east" );
     }
 
-    return fuzzyDistance + " " + heading;
+    return fuzzyDistance + ' ' + heading;
 }
 
 qreal OsmDatabase::bearing( const GeoDataCoordinates &a, const GeoDataCoordinates &b ) const
@@ -270,9 +270,9 @@ QString OsmDatabase::wildcardQuery( const QString &term ) const
 {
     QString result = term;
     if ( term.contains( '*' ) ) {
-        return " LIKE '" + result.replace( '*', '%' ) + "'";
+        return " LIKE '" + result.replace( '*', '%' ) + '\'';
     } else {
-        return " = '" + result + "'";
+        return " = '" + result + '\'';
     }
 }
 

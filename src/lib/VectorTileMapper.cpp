@@ -152,7 +152,7 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
 
 void VectorTileMapper::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
 {
-    // We recieved a vector tile, send it to the VectorTileLayer
+    // We received a vector tile, send it to the VectorTileLayer
     emit tileCompleted( tileId, document, format );
 }
 

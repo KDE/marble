@@ -111,7 +111,7 @@ void OpenCachingComItem::showInfoDialog()
         + "<tr><td align=\"right\">" + tr("Last found:") + " </td><td>" + dateString(m_cache["last_found"]) + "</td></tr>";
 
     // list of tags
-    // ### cache the translated cache string. Nessecary??
+    // ### cache the translated cache string. Necessary??
     if (m_cache["strTags"].toString().isEmpty() )
     {
         QStringList tags = m_cache["tags"].toStringList();
