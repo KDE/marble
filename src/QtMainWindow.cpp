@@ -40,6 +40,7 @@
 #include <QtGui/QScrollArea>
 #include <QtGui/QClipboard>
 #include <QtGui/QShortcut>
+#include <QtGui/QDockWidget>
 #include <QtNetwork/QNetworkProxy>
 
 #include "SearchInputWidget.h"
@@ -76,6 +77,9 @@
 #include "GoToDialog.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
+#include "LegendWidget.h"
+#include "SearchWidget.h"
+#include "FileViewWidget.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -100,6 +104,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_sunControlDialog( 0 ),
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
+        m_panelMenu( 0 ),
         m_downloadRegionAction( 0 ),
         m_osmEditAction( 0 ),
         m_zoomLabel( 0 ),
@@ -107,7 +112,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_routingWindow( 0 ),
         m_trackingWindow( 0 ),
         m_gotoDialog( 0 ),
-        m_routingWidget( 0 )
+        m_routingWidget( 0 ),
+        m_searchDock( 0 )
 {
 #ifdef Q_WS_MAEMO_5
     setAttribute( Qt::WA_Maemo5StackedWindow );
@@ -144,6 +150,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     createActions();
     createMenus();
     createStatusBar();
+    createDockWidgets();
 
     connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateAtmosphereMenu()));
 
@@ -177,11 +184,6 @@ void MainWindow::createActions()
      m_openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
      connect( m_openAct, SIGNAL( triggered() ),
               this, SLOT( openFile() ) );
-
-     m_showFileView = new QAction(tr("&Show File View"), this);
-     m_showFileView->setCheckable(true);
-     m_showFileView->setChecked(false);
-     connect(m_showFileView, SIGNAL(toggled(bool)), this, SLOT(showFileView(bool)));
 
      m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("&Download Maps..."), this);
      connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapSite()));
@@ -228,13 +230,6 @@ void MainWindow::createActions()
      m_copyCoordinatesAct = new QAction( QIcon(":/icons/copy-coordinates.png"), tr("C&opy Coordinates"), this);
      m_copyCoordinatesAct->setStatusTip(tr("Copy the center coordinates as text"));
      connect(m_copyCoordinatesAct, SIGNAL(triggered()), this, SLOT(copyCoordinates()));
-
-     m_sideBarAct = new QAction( QIcon(":/icons/view-sidetree.png"), tr("Show &Navigation Panel"), this);
-     m_sideBarAct->setShortcut(tr("F9"));
-     m_sideBarAct->setCheckable( true );
-     m_sideBarAct->setChecked( true );
-     m_sideBarAct->setStatusTip(tr("Show Navigation Panel"));
-     connect(m_sideBarAct, SIGNAL(triggered( bool )), this, SLOT( showSideBar( bool )));
 
      m_fullScreenAct = new QAction( QIcon(":/icons/view-fullscreen.png"), tr("&Full Screen Mode"), this);
      m_fullScreenAct->setShortcut(tr("Ctrl+Shift+F"));
@@ -368,7 +363,6 @@ void MainWindow::createMenus()
 
         menuBar()->addAction( m_manageBookmarksAct );
         menuBar()->addAction( m_aboutMarbleAct );
-        m_controlView->setSideBarShown( false );
         return;
     }
 
@@ -391,7 +385,6 @@ void MainWindow::createMenus()
     m_fileMenu->addAction( m_osmEditAction );
 
     m_fileMenu = menuBar()->addMenu(tr("&View"));
-    m_fileMenu->addAction(m_showFileView);
 
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
@@ -404,6 +397,7 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_reloadAct);
 
     m_fileMenu->addSeparator();
+    m_panelMenu = m_fileMenu->addMenu( "&Panels" );
     m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
     createInfoBoxesMenu();
 
@@ -423,7 +417,6 @@ void MainWindow::createMenus()
 
     m_fileMenu = menuBar()->addMenu(tr("&Settings"));
     m_fileMenu->addAction(m_statusBarAct);
-    m_fileMenu->addAction(m_sideBarAct);
     m_fileMenu->addAction(m_fullScreenAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_configDialogAct);
@@ -659,6 +652,83 @@ void MainWindow::createStatusBar()
     statusBar()->hide();
 }
 
+void MainWindow::createDockWidgets()
+{
+    Q_ASSERT( m_panelMenu && "Please create menus before creating dock widgets" );
+    Q_ASSERT( !m_searchDock && "Please create dock widgets just once" );
+
+    setTabPosition( Qt::LeftDockWidgetArea, QTabWidget::North );
+    setTabPosition( Qt::RightDockWidgetArea, QTabWidget::North );
+
+    QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), this );
+    routingDock->setObjectName( "routingDock" );
+    routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    RoutingWidget* routingWidget = new RoutingWidget( m_controlView->marbleWidget(), this );
+    routingDock->setWidget( routingWidget );
+    m_panelMenu->addAction( routingDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, routingDock );
+
+    QDockWidget *locationDock = new QDockWidget( tr( "Location" ), this );
+    locationDock->setObjectName( "locationDock" );
+    locationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    CurrentLocationWidget* locationWidget = new CurrentLocationWidget( this );
+    locationWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    locationDock->setWidget( locationWidget );
+    m_panelMenu->addAction( locationDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, locationDock );
+
+    m_searchDock = new QDockWidget( tr( "Search" ), this );
+    m_searchDock->setObjectName( "searchDock" );
+    m_searchDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    SearchWidget* searchWidget = new SearchWidget( this );
+    searchWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    m_searchDock->setWidget( searchWidget );
+    m_panelMenu->addAction( m_searchDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, m_searchDock );
+
+    tabifyDockWidget( locationDock, m_searchDock );
+    tabifyDockWidget( m_searchDock, routingDock );
+    m_searchDock->raise();
+
+    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
+    searchWidget->setToolTip( tr( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
+    new QShortcut( searchShortcut, this, SLOT( showSearch() ) );
+
+    QDockWidget *mapViewDock = new QDockWidget( tr( "Map View" ), this );
+    mapViewDock->setObjectName( "mapViewDock" );
+    mapViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    MapViewWidget* mapViewWidget = new MapViewWidget( this );
+    mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    mapViewDock->setWidget( mapViewWidget );
+    m_panelMenu->addAction( mapViewDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
+
+    QDockWidget *fileViewDock = new QDockWidget( tr( "Files" ), this );
+    fileViewDock->setObjectName( "fileViewDock" );
+    fileViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    FileViewWidget* fileViewWidget = new FileViewWidget( this );
+    fileViewWidget->setTreeModel( m_controlView->marbleModel()->treeModel() );
+    fileViewWidget->setFileManager( m_controlView->marbleModel()->fileManager() );
+    fileViewDock->setWidget( fileViewWidget );
+    m_panelMenu->addAction( fileViewDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, fileViewDock );
+    fileViewDock->hide();
+
+    QDockWidget *legendDock = new QDockWidget( tr( "Legend" ), this );
+    legendDock->setObjectName( "legendDock" );
+    legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    LegendWidget* legendWidget = new LegendWidget( this );
+    legendWidget->setMarbleModel( m_controlView->marbleModel() );
+    connect( legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
+             m_controlView->marbleWidget(), SLOT( setPropertyValue( const QString &, bool ) ) );
+    legendDock->setWidget( legendWidget );
+    m_panelMenu->addAction( legendDock->toggleViewAction() );
+    addDockWidget( Qt::LeftDockWidgetArea, legendDock );
+
+    tabifyDockWidget( mapViewDock, legendDock );
+    mapViewDock->raise();
+}
+
 void MainWindow::openMapSite()
 {
     if( !QDesktopServices::openUrl( QUrl( "http://edu.kde.org/marble/maps-4.5.php" ) ) )
@@ -732,13 +802,6 @@ MainWindow::Orientation MainWindow::orientation() const
     return OrientationAutorotate;
 }
 #endif // Q_WS_MAEMO_5
-
-void MainWindow::showSideBar( bool isChecked )
-{
-    m_controlView->setSideBarShown( isChecked );
-
-    m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
-}
 
 void MainWindow::copyCoordinates()
 {
@@ -849,11 +912,6 @@ void MainWindow::showSun( bool active )
 void MainWindow::reload()
 {
     m_controlView->marbleWidget()->reloadMap();
-}
-
-void MainWindow::showFileView(bool toggle)
-{
-    m_controlView->setFileViewTabShown(toggle);
 }
 
 void MainWindow::enterWhatsThis()
@@ -1026,19 +1084,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::createToolBar()
 {
-    QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
-    SearchInputWidget *searchField = new SearchInputWidget( this );
-    searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
-    searchField->setMaximumWidth( 400 );
-    connect( searchField, SIGNAL( search( QString, SearchMode ) ), m_controlView, SLOT( search( QString, SearchMode ) ) );
-    connect( searchField, SIGNAL( centerOn( const GeoDataCoordinates &) ),
-             m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates & ) ) );
-    connect( m_controlView, SIGNAL( searchFinished() ), searchField, SLOT( disableSearchAnimation() ) );
-
-    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
-    searchField->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
-    new QShortcut( searchShortcut, searchField, SLOT( setFocus() ) );
-    toolBar->addWidget( searchField );
+//    QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
+//    toolBar->setObjectName( "mainToolBar" );
+//    toolBar->addWidget( ... );
 }
 
 QString MainWindow::readMarbleDataPath()
@@ -1065,14 +1113,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          const Orientation orientation = (Orientation)settings.value( "orientation", (int)OrientationLandscape ).toInt();
          setOrientation( orientation );
 #endif // Q_WS_MAEMO_5
-         QByteArray sideBarState = settings.value( "sideBarState", QByteArray() ).toByteArray();
-         m_controlView->setSideBarState( sideBarState );
-         if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-             showSideBar(settings.value("sideBar", false ).toBool());
-         }
-         else {
-             showSideBar(settings.value("sideBar", true ).toBool());
-         }
+         m_controlView->setSideBarShown( false );
          showStatusBar(settings.value("statusBar", false ).toBool());
          show();
          showClouds(settings.value("showClouds", true ).toBool());
@@ -1080,6 +1121,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          showAtmosphere(settings.value("showAtmosphere", true ).toBool());
          m_lastFileOpenPath = settings.value("lastFileOpenDir", QDir::homePath()).toString();
          showBookmarks( settings.value( "showBookmarks", true ).toBool() );
+         restoreState( settings.value("windowState").toByteArray() );
      settings.endGroup();
 
      setUpdatesEnabled(false);
@@ -1286,14 +1328,13 @@ void MainWindow::writeSettings()
 #ifdef Q_WS_MAEMO_5
          settings.setValue( "orientation", (int)orientation() );
 #endif // Q_WS_MAEMO_5
-         settings.setValue( "sideBar", m_sideBarAct->isChecked() );
-         settings.setValue( "sideBarState", m_controlView->sideBarState() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
          settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
          settings.setValue( "lastFileOpenDir", m_lastFileOpenPath );
          settings.setValue( "showBookmarks", m_toggleBookmarkDisplayAct->isChecked() );
+         settings.setValue( "windowState", saveState() );
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );
@@ -1548,7 +1589,6 @@ void MainWindow::showLegendTab( bool enabled )
     m_controlView->marbleControl()->setMapViewTabShown( false );
     m_controlView->marbleControl()->setCurrentLocationTabShown( false );
     m_controlView->marbleControl()->setRoutingTabShown( false );
-    m_controlView->setSideBarShown( enabled );
 }
 
 void MainWindow::showRoutingDialog()
@@ -1677,6 +1717,13 @@ void MainWindow::showZoomLevel(bool show)
     } else {
         statusBar()->removeWidget( m_zoomLabel );
     }
+}
+
+void MainWindow::showSearch()
+{
+    m_searchDock->show();
+    m_searchDock->raise();
+    m_searchDock->widget()->setFocus();
 }
 
 #include "QtMainWindow.moc"

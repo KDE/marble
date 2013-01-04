@@ -231,6 +231,7 @@ set(marblewidget_SRCS
     ElevationModel.cpp
     MarbleLineEdit.cpp
     SearchInputWidget.cpp
+    SearchWidget.cpp
     kineticmodel.cpp
     NewstuffModel.cpp
 )

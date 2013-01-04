@@ -72,6 +72,7 @@ private:
     void  createActions();
     void  createMenus();
     void  createStatusBar();
+    void  createDockWidgets();
 
     QString  readMarbleDataPath();
     void  readSettings(const QVariantMap& overrideSettings = QVariantMap());
@@ -114,14 +115,12 @@ private Q_SLOTS:
     void  controlTime();
     void  showSun( bool );
     void  reload();
-    void  showFileView(bool toggle);
 
     // Settings Menu
     void  showFullScreen( bool );
 #ifdef Q_WS_MAEMO_5
     void  setOrientation( Orientation orientation );
 #endif
-    void  showSideBar( bool );
     void  showStatusBar( bool );
     void  setupStatusBar();
 
@@ -153,6 +152,7 @@ private Q_SLOTS:
     void showGoToDialog();
 
     void showZoomLevel( bool show );
+    void showSearch();
 
 private:
     void setupZoomButtons();
@@ -172,6 +172,7 @@ private:
     QMenu *m_fileMenu;
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;
+    QMenu *m_panelMenu;
     QMenu *m_infoBoxesMenu;
     QMenu *m_onlineServicesMenu;
     QMenu *m_bookmarkMenu;
@@ -192,7 +193,6 @@ private:
     QAction *m_osmEditAction;
 
     // View Menu
-    QAction *m_showFileView;
     QAction *m_showCloudsAct;
     QAction *m_showAtmosphereAct;
     QAction *m_controlSunAct;
@@ -200,7 +200,6 @@ private:
     QAction *m_reloadAct;
 
     // Settings Menu
-    QAction *m_sideBarAct;
     QAction *m_fullScreenAct;
     QAction *m_statusBarAct;
     QAction *m_configDialogAct;
@@ -243,6 +242,7 @@ private:
     RoutingWidget *m_routingWidget;
 
     QString m_lastFileOpenPath;
+    QDockWidget* m_searchDock;
 };
 
 } // namespace Marble
