@@ -205,6 +205,7 @@ class MapViewWidget::Private {
     void showContextMenu( const QPoint& pos );
     void deleteMap();
     void toggleFavorite();
+    void toggleIconSize();
 
     bool isCurrentFavorite();
     QString currentThemeName() const;
@@ -254,7 +255,8 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     }
     else {
         d->m_mapViewUi.marbleThemeSelectView->setViewMode( QListView::IconMode );
-        d->m_mapViewUi.marbleThemeSelectView->setIconSize( QSize( 136, 136 ) );
+        QSize const iconSize = d->m_settings.value( "MapView/iconSize", QSize( 136, 136 ) ).toSize();
+        d->m_mapViewUi.marbleThemeSelectView->setIconSize( iconSize );
         d->m_mapViewUi.marbleThemeSelectView->setFlow( QListView::LeftToRight );
         d->m_mapViewUi.marbleThemeSelectView->setWrapping( true );
         d->m_mapViewUi.marbleThemeSelectView->setResizeMode( QListView::Adjust );
@@ -539,16 +541,19 @@ QString MapViewWidget::Private::currentThemePath() const
 void MapViewWidget::Private::showContextMenu( const QPoint& pos )
 {
     QMenu menu;
+
+    QAction* iconSizeAction = menu.addAction( tr( "&Show Large Icons" ), q, SLOT( toggleIconSize() ) );
+    iconSizeAction->setCheckable( true );
+    iconSizeAction->setChecked( m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 136, 136 ) );
+    QAction *favAction = menu.addAction( tr( "&Favorite" ), q, SLOT( toggleFavorite() ) );
+    favAction->setCheckable( true );
+    favAction->setChecked( isCurrentFavorite() );
+    menu.addSeparator();
+
     menu.addAction( "&Create a New Map...", q, SIGNAL( showMapWizard() ) );
     if( QFileInfo( MarbleDirs::localPath() + "/maps/" + currentThemePath() ).exists() )
         menu.addAction( tr( "&Delete Map Theme" ), q, SLOT( deleteMap() ) );
     menu.addAction( tr( "&Upload Map..." ), q, SIGNAL( showUploadDialog() ) );
-    QAction *favAction = menu.addAction( tr( "&Favorite" ), q, SLOT( toggleFavorite() ) );
-    favAction->setCheckable( true );
-    if( isCurrentFavorite() )
-        favAction->setChecked( true );
-    else
-        favAction->setChecked( false );
     menu.exec( m_mapViewUi.marbleThemeSelectView->mapToGlobal( pos ) );
 }
 
@@ -579,6 +584,14 @@ void MapViewWidget::Private::toggleFavorite()
     m_settings.endGroup();
 
     m_mapSortProxy.sort( 0 );
+}
+
+void MapViewWidget::Private::toggleIconSize()
+{
+    bool const isLarge = m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 136, 136 );
+    int const size = isLarge ? 48 : 136;
+    m_mapViewUi.marbleThemeSelectView->setIconSize( QSize( size, size ) );
+    m_settings.setValue("MapView/iconSize", m_mapViewUi.marbleThemeSelectView->iconSize() );
 }
 
 bool MapViewWidget::Private::isCurrentFavorite()

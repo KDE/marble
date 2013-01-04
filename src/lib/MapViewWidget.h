@@ -67,6 +67,7 @@ private slots:
     Q_PRIVATE_SLOT( d, void showContextMenu( const QPoint& pos ) )
     Q_PRIVATE_SLOT( d, void deleteMap() )
     Q_PRIVATE_SLOT( d, void toggleFavorite() )
+    Q_PRIVATE_SLOT( d, void toggleIconSize() )
 
  Q_SIGNALS:
     void celestialBodyChanged( const QString& );
