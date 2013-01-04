@@ -67,7 +67,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Create a new placemark with the given @p name.
      */
-    GeoDataPlacemark( const QString &name );
+    explicit GeoDataPlacemark( const QString &name );
 
     /**
     * Delete the placemark

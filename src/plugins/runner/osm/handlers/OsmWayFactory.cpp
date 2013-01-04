@@ -19,7 +19,7 @@ namespace osm
 {
 QMap<quint64, GeoDataLineString *> OsmWayFactory::m_lines;
 
-// This is a class for keeping all the ways accesible
+// This is a class for keeping all the ways accessible
 // for when needed by relations. Relations have only the ids of
 // ways so with that id the GeoDataLineString is returned
 

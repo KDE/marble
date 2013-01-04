@@ -21,7 +21,7 @@ class GeoDataPoint;
 namespace osm
 {
 
-// This is a class for keeping all the nodes accesible
+// This is a class for keeping all the nodes accessible
 // for when needed by ways. Ways have only the ids of
 // nodes so with that id the GeoDataPoint is returned
 

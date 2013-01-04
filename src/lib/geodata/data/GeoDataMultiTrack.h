@@ -26,7 +26,7 @@ class GEODATA_EXPORT GeoDataMultiTrack : public GeoDataGeometry
 {
 public:
     GeoDataMultiTrack();
-    GeoDataMultiTrack( const GeoDataGeometry& other );
+    explicit GeoDataMultiTrack( const GeoDataGeometry& other );
 
     virtual ~GeoDataMultiTrack();
 

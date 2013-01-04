@@ -71,7 +71,7 @@
 #include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-#include "DgmlAuxillaryDictionary.h"
+
 
 namespace Marble
 {

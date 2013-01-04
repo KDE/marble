@@ -28,8 +28,8 @@ class GeoDataLatLonAltBox;
 class DatabaseQuery
 {
 public:
-    enum QueryType {
-        AddressSearch,  /// precise search for an adress
+    enum QueryType { 
+        AddressSearch,  /// precise search for an address
         CategorySearch, /// search which contains a poi category
         BroadSearch     /// any other non specific search
     };

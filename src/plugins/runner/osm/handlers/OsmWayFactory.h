@@ -23,7 +23,7 @@ class GeoDataLineString;
 namespace osm
 {
 
-// This is a class for keeping all the ways accesible
+// This is a class for keeping all the ways accessible
 // for when needed by relations. Relationss have only the ids of
 // ways so with that id the GeoDataLineString is returned
 

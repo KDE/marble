@@ -90,7 +90,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
 /*!
     \brief Creates a Polygon from an existing geometry object.
 */
-    GeoDataPolygon( const GeoDataGeometry &other );
+    explicit GeoDataPolygon( const GeoDataGeometry &other );
 
     
 /*!

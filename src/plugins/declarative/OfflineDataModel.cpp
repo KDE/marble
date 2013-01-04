@@ -29,10 +29,10 @@ OfflineDataModel::OfflineDataModel( QObject *parent ) : QSortFilterProxyModel( p
     sort( 0 );
     setDynamicSortFilter( true );
 
-    connect( &m_newstuffModel, SIGNAL( installationProgressed( int, qreal ) ), this, SLOT( handleInstallationProgress( int,qreal ) ) );
-    connect( &m_newstuffModel, SIGNAL( installationFinished( int ) ), this, SLOT( handleInstallationFinished( int ) ) );
-    connect( &m_newstuffModel, SIGNAL( installationFailed( int, QString ) ), this, SLOT( handleInstallationFailed( int, QString ) ) );
-    connect( &m_newstuffModel, SIGNAL( uninstallationFinished( int ) ), this, SLOT( handleUninstallationFinished( int ) ) );
+    connect( &m_newstuffModel, SIGNAL(installationProgressed(int,qreal)), this, SLOT(handleInstallationProgress(int,qreal)) );
+    connect( &m_newstuffModel, SIGNAL(installationFinished(int)), this, SLOT(handleInstallationFinished(int)) );
+    connect( &m_newstuffModel, SIGNAL(installationFailed(int,QString)), this, SLOT(handleInstallationFailed(int,QString)) );
+    connect( &m_newstuffModel, SIGNAL(uninstallationFinished(int)), this, SLOT(handleUninstallationFinished(int)) );
 }
 
 int OfflineDataModel::count()

@@ -88,7 +88,7 @@ bool JsonParser::read( QIODevice* device )
     float north;
 
     // Global data (even if it is at the end of the json response
-    // it is posible to read it now)
+    // it is possible to read it now)
 
     if ( m_data.property( "bbox" ).isArray() ){
         QStringList coors = m_data.property( "bbox" ).toString().split( QLatin1Char( ',' ) );

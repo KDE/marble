@@ -24,7 +24,7 @@ MapThemeModel::MapThemeModel( QObject *parent ) : QSortFilterProxyModel( parent 
 {
     setSourceModel( m_themeManager->mapThemeModel() );
     handleChangedThemes();
-    connect( m_themeManager, SIGNAL( themesChanged() ), this, SLOT( handleChangedThemes() ) );
+    connect( m_themeManager, SIGNAL(themesChanged()), this, SLOT(handleChangedThemes()) );
 }
 
 int MapThemeModel::count()

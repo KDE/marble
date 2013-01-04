@@ -167,7 +167,7 @@ Marble::RenderPlugin *DeclarativeDataPlugin::newInstance(const Marble::MarbleMod
     DeclarativeDataPluginModel* dataModel = new DeclarativeDataPluginModel();
     dataModel->addItemsToList( d->m_items );
     instance->setModel( dataModel );
-    connect( dataModel, SIGNAL( dataRequest( qreal, qreal, qreal, qreal ) ), this, SIGNAL( dataRequest( qreal, qreal, qreal, qreal ) ) );
+    connect( dataModel, SIGNAL(dataRequest(qreal,qreal,qreal,qreal)), this, SIGNAL(dataRequest(qreal,qreal,qreal,qreal)) );
     d->m_modelInstances << dataModel;
     return instance;
 }

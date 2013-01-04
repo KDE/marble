@@ -27,7 +27,7 @@ public:
 
     /**
      * @brief parse the json file
-     * @return true if the parsed has been succesful
+     * @return true if the parsed has been successful
      */
     bool read(QIODevice*);
 

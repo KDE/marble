@@ -11,7 +11,9 @@
 
 #include "SatellitesMSCItem.h"
 
-#include <QtCore>
+#include <QDateTime>
+#include <QFile>
+#include <QString>
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"

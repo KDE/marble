@@ -90,7 +90,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 /*!
     \brief Creates a LineString from an existing geometry object.
 */
-    GeoDataLineString( const GeoDataGeometry &other );
+    explicit GeoDataLineString( const GeoDataGeometry &other );
 
 
 /*!

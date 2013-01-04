@@ -12,7 +12,7 @@
 //
 // Description of the file format
 //
-// In the fileformat initally a file header is provided that provides the file format version and the number 
+// In the fileformat initially a file header is provided that provides the file format version and the number 
 // of polygons stored inside the file. A Polygon starts with the Polygon Header which provides the feature id 
 // and the number of so called "absolute nodes" that are about to follow. Absolute nodes always contain 
 // absolute geodetic coordinates. The Polygon Header also provides a flag that allows to specify whether the 
@@ -91,7 +91,7 @@ bool Pn2Runner::importPolygon( QDataStream &stream, GeoDataLineString* linestrin
         GeoDataCoordinates *coord = new GeoDataCoordinates( degLon / 180 * M_PI, degLat / 180 * M_PI );
         linestring->append( *coord );
 
-        for ( qint16 relativeNode = 1; relativeNode <= nrRelativeNodes; relativeNode++ ) {
+        for ( qint16 relativeNode = 1; relativeNode <= nrRelativeNodes; ++relativeNode ) {
             stream >> relativeLat >> relativeLon;
 
             qint16 currLat = relativeLat + lat; 
@@ -203,7 +203,7 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     if ( error ) {
         delete document;
         document = 0;
-        emit parsingFinished( 0, "Errors occured while parsing the .pn2 file!" );
+        emit parsingFinished( 0, "Errors occurred while parsing the .pn2 file!" );
         return;
     }
     document->setFileName( fileName );

@@ -19,7 +19,7 @@ namespace osm
 {
 QMap<quint64, GeoDataPolygon *> OsmRelationFactory::m_polygons;
 
-// This is a class for keeping all the relations accesible
+// This is a class for keeping all the relations accessible
 // for when needed by other relations. As OSM detail level
 // increases its getting more common to have relations as
 // members of other relations

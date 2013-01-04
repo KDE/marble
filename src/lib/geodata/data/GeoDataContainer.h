@@ -151,7 +151,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
 private:
     friend class GeoDataDocument;
     friend class GeoDataFolder;
-    GeoDataContainer( GeoDataContainerPrivate *priv );
+    explicit GeoDataContainer( GeoDataContainerPrivate *priv );
 };
 
 }

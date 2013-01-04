@@ -114,7 +114,7 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
         if ( userQuery.queryType() == DatabaseQuery::CategorySearch ) {
             queryString += " WHERE regions.id = places.region";
             if( userQuery.category() == OsmPlacemark::UnknownCategory ) {
-                // search for all pois which are not street nor adress
+                // search for all pois which are not street nor address
                 queryString += " AND places.category <> 0 AND places.category <> 6";
             } else {
                 // search for specific category

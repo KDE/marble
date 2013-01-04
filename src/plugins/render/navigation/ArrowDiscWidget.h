@@ -24,7 +24,7 @@ class ArrowDiscWidget : public QWidget
 {
     Q_OBJECT
 public:
-    ArrowDiscWidget( QWidget *parent = 0 );
+    explicit ArrowDiscWidget( QWidget *parent = 0 );
     ~ArrowDiscWidget();
 
     QPixmap pixmap(const QString &id );

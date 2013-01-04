@@ -52,7 +52,7 @@ public:
     GeoDataPlacemark *placemark();
 
     /**
-     * Returns wheter the item is enabled or disabled.
+     * Returns whether the item is enabled or disabled.
      */
     virtual bool isEnabled() const;
 
@@ -62,7 +62,7 @@ public:
     virtual void setEnabled( bool enabled );
 
     /**
-     * Return wheter the item is visible or invisible.
+     * Return whether the item is visible or invisible.
      */
     virtual bool isVisible() const;
 
