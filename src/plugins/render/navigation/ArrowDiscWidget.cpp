@@ -111,6 +111,9 @@ void ArrowDiscWidget::leaveEvent( QEvent* )
         m_imagePath = "marble/navigation/navigational_arrows";
         repaint();
     }
+
+    m_initialPressTimer.stop();
+    m_repeatPressTimer.stop();
 }
 
 void ArrowDiscWidget::startPressRepeat()
