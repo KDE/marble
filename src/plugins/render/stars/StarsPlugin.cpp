@@ -34,6 +34,7 @@ namespace Marble
 
 StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
+      m_nameIndex( 0 ),
       m_configDialog( 0 ),
       ui_configWidget( 0 ),
       m_renderStars( false ),
@@ -573,7 +574,6 @@ QString StarsPlugin::assembledConstellation(const QString &name)
     case 1:
         return m_nativeHash[name];
     case 2:
-        qDebug() << name << m_abbrHash[name];
         return m_abbrHash[name];
     default:
         return name;
