@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>374</width>
-    <height>436</height>
+    <width>412</width>
+    <height>432</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -373,6 +373,39 @@
       </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Constellation Names</string>
+       </property>
+       <property name="buddy">
+        <cstring>constellationNamesComboBox</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="constellationNamesComboBox">
+       <item>
+        <property name="text">
+         <string>Latin Name</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Native Translation</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Abbreviation</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <spacer name="verticalSpacer">

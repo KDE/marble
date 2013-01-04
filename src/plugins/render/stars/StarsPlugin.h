@@ -76,40 +76,6 @@ private:
     int         m_colorId;
 };
 
-
-class Constellation
-{
-public:
-    Constellation() {}
-    Constellation(QString &name, QString &stars) {
-        m_name = name;
-        QStringList starlist = stars.split(" ");
-        for (int i = 0; i < starlist.size(); i++) {
-            m_stars << starlist.at(i).toInt();
-        }
-
-    }
-
-    int size() const {
-        return m_stars.size();
-    }
-
-    int at(const int index) const {
-        if (index < 0) return -1;
-        if (index >= m_stars.size()) return -1;
-        return m_stars.at(index);
-    }
-
-    QString name() const {
-        return m_name;
-    }
-
-private:
-    QString m_name;
-    QVector<int> m_stars;
-
-};
-
 class DsoPoint
 {
 public:
@@ -145,6 +111,8 @@ private:
  * @short The class that specifies the Marble layer interface of a plugin.
  *
  */
+
+class Constellation;
 
 class StarsPlugin : public RenderPlugin, public DialogConfigurationInterface
 {
@@ -189,6 +157,8 @@ public:
 
     void setSettings( const QHash<QString,QVariant> &settings );
 
+    QString assembledConstellation(const QString &name);
+
 protected:
     bool eventFilter( QObject *object, QEvent *e );
 
@@ -221,6 +191,11 @@ private:
 
         return qVariantValue<T>( settings[key] );
     }
+
+    void prepareNames();
+    QHash<QString, QString> m_abbrHash;
+    QHash<QString, QString> m_nativeHash;
+    int m_nameIndex;
 
     // sidereal time in hours:
     qreal siderealTime( const QDateTime& );
@@ -263,6 +238,41 @@ private:
     QVector<QPixmap> m_pixP5Stars;
     QVector<QPixmap> m_pixP6Stars;
     QVector<QPixmap> m_pixP7Stars;
+
+};
+
+class Constellation
+{
+public:
+    Constellation() {}
+    Constellation(StarsPlugin *plug, QString &name, QString &stars) {
+        m_plugin = plug;
+        m_name = name;
+        QStringList starlist = stars.split(" ");
+        for (int i = 0; i < starlist.size(); ++i) {
+            m_stars << starlist.at(i).toInt();
+        }
+
+    }
+
+    int size() const {
+        return m_stars.size();
+    }
+
+    int at(const int index) const {
+        if (index < 0) return -1;
+        if (index >= m_stars.size()) return -1;
+        return m_stars.at(index);
+    }
+
+    QString name() const {
+        return m_plugin->assembledConstellation(m_name);
+    }
+
+private:
+    StarsPlugin *m_plugin;
+    QString m_name;
+    QVector<int> m_stars;
 
 };
 

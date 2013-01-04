@@ -56,6 +56,7 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_celestialEquatorBrush( Marble::Oxygen::aluminumGray6 ),
       m_celestialPoleBrush( Marble::Oxygen::aluminumGray6 )      
 {
+    prepareNames();
 }
 
 QStringList StarsPlugin::backendTypes() const
@@ -167,6 +168,7 @@ QDialog *StarsPlugin::configDialog()
 QHash<QString, QVariant> StarsPlugin::settings() const
 {
     QHash<QString, QVariant> settings;
+    settings["nameIndex"] = m_nameIndex;
     settings["renderStars"] = m_renderStars;
     settings["renderConstellationLines"] = m_renderConstellationLines;
     settings["renderConstellationLabels"] = m_renderConstellationLabels;
@@ -188,6 +190,7 @@ QHash<QString, QVariant> StarsPlugin::settings() const
 
 void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
 {
+    m_nameIndex = readSetting<int>( settings, "nameIndex", 0 );
     m_renderStars = readSetting<bool>( settings, "renderStars", true );
     m_renderConstellationLines = readSetting<bool>( settings, "renderConstellationLines", true );
     m_renderConstellationLabels = readSetting<bool>( settings, "renderConstellationLabels", true );
@@ -207,11 +210,383 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_celestialPoleBrush = QColor( readSetting<QRgb>( settings, "celestialPoleBrush", defaultColor.rgb() ) );
 }
 
+void StarsPlugin::prepareNames()
+{
+    // Andromeda
+    m_nativeHash["Andromeda"] = tr("Andromeda");
+    m_abbrHash["Andromeda"] = "And";
+
+    // Antlia
+    m_nativeHash["Antlia"] = tr("Antlia");
+    m_abbrHash["Antlia"] = "Ant";
+
+    // Apus
+    m_nativeHash["Apus"] = tr("Apus");
+    m_abbrHash["Apus"] = "Aps";
+
+    // Aquarius
+    m_nativeHash["Aquarius"] = tr("Aquarius");
+    m_abbrHash["Aquarius"] = "Aqr";
+
+    // Aquila
+    m_nativeHash["Aquila"] = tr("Aquila");
+    m_abbrHash["Aquila"] = "Aql";
+
+    // Ara
+    m_nativeHash["Ara"] = tr("Ara");
+    m_abbrHash["Ara"] = "Ara";
+
+    // Aries
+    m_nativeHash["Aries"] = tr("Aries");
+    m_abbrHash["Aries"] = "Ari";
+
+    // Auriga
+    m_nativeHash["Auriga"] = tr("Auriga");
+    m_abbrHash["Auriga"] = "Aur";
+
+    // Boötes
+    m_nativeHash["Boötes"] = tr("Boötes");
+    m_abbrHash["Boötes"] = "Boo";
+
+    // Caelum
+    m_nativeHash["Caelum"] = tr("Caelum");
+    m_abbrHash["Caelum"] = "Cae";
+
+    // Camelopardalis
+    m_nativeHash["Camelopardalis"] = tr("Camelopardalis");
+    m_abbrHash["Camelopardalis"] = "Cam";
+
+    // Cancer
+    m_nativeHash["Cancer"] = tr("Cancer");
+    m_abbrHash["Cancer"] = "Cnc";
+
+    // Canes Venatici
+    m_nativeHash["Canes Venatici"] = tr("Canes Venatici");
+    m_abbrHash["Canes Venatici"] = "CVn";
+
+    // Canis Major
+    m_nativeHash["Canis Major"] = tr("Canis Major");
+    m_abbrHash["Canis Major"] = "CMa";
+
+    // Canis Minor
+    m_nativeHash["Canis Minor"] = tr("Canis Minor");
+    m_abbrHash["Canis Minor"] = "CMi";
+
+    // Capricornus
+    m_nativeHash["Capricornus"] = tr("Capricornus");
+    m_abbrHash["Capricornus"] = "Cap";
+
+    // Carina
+    m_nativeHash["Carina"] = tr("Carina");
+    m_abbrHash["Carina"] = "Car";
+
+    // Cassiopeia
+    m_nativeHash["Cassiopeia"] = tr("Cassiopeia");
+    m_abbrHash["Cassiopeia"] = "Cas";
+
+    // Centaurus
+    m_nativeHash["Centaurus"] = tr("Centaurus");
+    m_abbrHash["Centaurus"] = "Cen";
+
+    // Cepheus
+    m_nativeHash["Cepheus"] = tr("Cepheus");
+    m_abbrHash["Cepheus"] = "Cep";
+
+    // Cetus
+    m_nativeHash["Cetus"] = tr("Cetus");
+    m_abbrHash["Cetus"] = "Cet";
+
+    // Chamaeleon
+    m_nativeHash["Chamaeleon"] = tr("Chamaeleon");
+    m_abbrHash["Chamaeleon"] = "Cha";
+
+    // Circinus
+    m_nativeHash["Circinus"] = tr("Circinus");
+    m_abbrHash["Circinus"] = "Cir";
+
+    // Columba
+    m_nativeHash["Columba"] = tr("Columba");
+    m_abbrHash["Columba"] = "Col";
+
+    // Coma Berenices
+    m_nativeHash["Coma Berenices"] = tr("Coma Berenices");
+    m_abbrHash["Coma Berenices"] = "Com";
+
+    // Corona Australis
+    m_nativeHash["Corona Australis"] = tr("Corona Australis");
+    m_abbrHash["Corona Australis"] = "CrA";
+
+    // Corona Borealis
+    m_nativeHash["Corona Borealis"] = tr("Corona Borealis");
+    m_abbrHash["Corona Borealis"] = "CrB";
+
+    // Corvus
+    m_nativeHash["Corvus"] = tr("Corvus");
+    m_abbrHash["Corvus"] = "Crv";
+
+    // Crater
+    m_nativeHash["Crater"] = tr("Crater");
+    m_abbrHash["Crater"] = "Crt";
+
+    // Crux
+    m_nativeHash["Crux"] = tr("Crux");
+    m_abbrHash["Crux"] = "Cru";
+
+    // Cygnus
+    m_nativeHash["Cygnus"] = tr("Cygnus");
+    m_abbrHash["Cygnus"] = "Cyg";
+
+    // Delphinus
+    m_nativeHash["Delphinus"] = tr("Delphinus");
+    m_abbrHash["Delphinus"] = "Del";
+
+    // Dorado
+    m_nativeHash["Dorado"] = tr("Dorado");
+    m_abbrHash["Dorado"] = "Dor";
+
+    // Draco
+    m_nativeHash["Draco"] = tr("Draco");
+    m_abbrHash["Draco"] = "Dra";
+
+    // Equuleus
+    m_nativeHash["Equuleus"] = tr("Equuleus");
+    m_abbrHash["Equuleus"] = "Equ";
+
+    // Eridanus
+    m_nativeHash["Eridanus"] = tr("Eridanus");
+    m_abbrHash["Eridanus"] = "Eri";
+
+    // Fornax
+    m_nativeHash["Fornax"] = tr("Fornax");
+    m_abbrHash["Fornax"] = "For";
+
+    // Gemini
+    m_nativeHash["Gemini"] = tr("Gemini");
+    m_abbrHash["Gemini"] = "Gem";
+
+    // Grus
+    m_nativeHash["Grus"] = tr("Grus");
+    m_abbrHash["Grus"] = "Gru";
+
+    // Hercules
+    m_nativeHash["Hercules"] = tr("Hercules");
+    m_abbrHash["Hercules"] = "Her";
+
+    // Horologium
+    m_nativeHash["Horologium"] = tr("Horologium");
+    m_abbrHash["Horologium"] = "Hor";
+
+    // Hydra
+    m_nativeHash["Hydra"] = tr("Hydra");
+    m_abbrHash["Hydra"] = "Hya";
+
+    // Hydrus
+    m_nativeHash["Hydrus"] = tr("Hydrus");
+    m_abbrHash["Hydrus"] = "Hyi";
+
+    // Indus
+    m_nativeHash["Indus"] = tr("Indus");
+    m_abbrHash["Indus"] = "Ind";
+
+    // Lacert
+    m_nativeHash["Lacert"] = tr("Lacert");
+    m_abbrHash["Lacert"] = "Lac";
+
+    // Leo
+    m_nativeHash["Leo"] = tr("Leo");
+    m_abbrHash["Leo"] = "Leo";
+
+    // Leo Minor
+    m_nativeHash["Leo Minor"] = tr("Leo Minor");
+    m_abbrHash["Leo Minor"] = "LMi";
+
+    // Lepus
+    m_nativeHash["Lepus"] = tr("Lepus");
+    m_abbrHash["Lepus"] = "Lep";
+
+    // Libra
+    m_nativeHash["Libra"] = tr("Libra");
+    m_abbrHash["Libra"] = "Lib";
+
+    // Lupus
+    m_nativeHash["Lupus"] = tr("Lupus");
+    m_abbrHash["Lupus"] = "Lup";
+
+    // Lynx
+    m_nativeHash["Lynx"] = tr("Lynx");
+    m_abbrHash["Lynx"] = "Lyn";
+
+    // Lyra
+    m_nativeHash["Lyra"] = tr("Lyra");
+    m_abbrHash["Lyra"] = "Lyr";
+
+    // Mensa
+    m_nativeHash["Mensa"] = tr("Mensa");
+    m_abbrHash["Mensa"] = "Men";
+
+    // Microscopium
+    m_nativeHash["Microscopium"] = tr("Microscopium");
+    m_abbrHash["Microscopium"] = "Mic";
+
+    // Monoceros
+    m_nativeHash["Monoceros"] = tr("Monoceros");
+    m_abbrHash["Monoceros"] = "Mon";
+
+    // Musca
+    m_nativeHash["Musca"] = tr("Musca");
+    m_abbrHash["Musca"] = "Mus";
+
+    // Norma
+    m_nativeHash["Norma"] = tr("Norma");
+    m_abbrHash["Norma"] = "Nor";
+
+    // Octans
+    m_nativeHash["Octans"] = tr("Octans");
+    m_abbrHash["Octans"] = "Oct";
+
+    // Ophiuchus
+    m_nativeHash["Ophiuchus"] = tr("Ophiuchus");
+    m_abbrHash["Ophiuchus"] = "Oph";
+
+    // Orion
+    m_nativeHash["Orion"] = tr("Orion");
+    m_abbrHash["Orion"] = "Ori";
+
+    // Pavo
+    m_nativeHash["Pavo"] = tr("Pavo");
+    m_abbrHash["Pavo"] = "Pav";
+
+    // Pegasus
+    m_nativeHash["Pegasus"] = tr("Pegasus");
+    m_abbrHash["Pegasus"] = "Peg";
+
+    // Perseus
+    m_nativeHash["Perseus"] = tr("Perseus");
+    m_abbrHash["Perseus"] = "Per";
+
+    // Phoenix
+    m_nativeHash["Phoenix"] = tr("Phoenix");
+    m_abbrHash["Phoenix"] = "Phe";
+
+    // Pictor
+    m_nativeHash["Pictor"] = tr("Pictor");
+    m_abbrHash["Pictor"] = "Pic";
+
+    // Pisces
+    m_nativeHash["Pisces"] = tr("Pisces");
+    m_abbrHash["Pisces"] = "Psc";
+
+    // Piscis Austrinus
+    m_nativeHash["Piscis Austrinus"] = tr("Piscis Austrinus");
+    m_abbrHash["Piscis Austrinus"] = "PsA";
+
+    // Puppis
+    m_nativeHash["Puppis"] = tr("Puppis");
+    m_abbrHash["Puppis"] = "Pup";
+
+    // Pyxis
+    m_nativeHash["Pyxis"] = tr("Pyxis");
+    m_abbrHash["Pyxis"] = "Pyx";
+
+    // Reticulum
+    m_nativeHash["Reticulum"] = tr("Reticulum");
+    m_abbrHash["Reticulum"] = "Ret";
+
+    // Sagitta
+    m_nativeHash["Sagitta"] = tr("Sagitta");
+    m_abbrHash["Sagitta"] = "Sge";
+
+    // Sagittarius
+    m_nativeHash["Sagittarius"] = tr("Sagittarius");
+    m_abbrHash["Sagittarius"] = "Sgr";
+
+    // Scorpius
+    m_nativeHash["Scorpius"] = tr("Scorpius");
+    m_abbrHash["Scorpius"] = "Sco";
+
+    // Sculptor
+    m_nativeHash["Sculptor"] = tr("Sculptor");
+    m_abbrHash["Sculptor"] = "Scl";
+
+    // Scutum
+    m_nativeHash["Scutum"] = tr("Scutum");
+    m_abbrHash["Scutum"] = "Sct";
+
+    // Serpens
+    m_nativeHash["Serpens"] = tr("Serpens");
+    m_abbrHash["Serpens"] = "Ser";
+
+    // Sextans
+    m_nativeHash["Sextans"] = tr("Sextans");
+    m_abbrHash["Sextans"] = "Sex";
+
+    // Taurus
+    m_nativeHash["Taurus"] = tr("Taurus");
+    m_abbrHash["Taurus"] = "Tau";
+
+    // elescopium
+    m_nativeHash["elescopium"] = tr("elescopium");
+    m_abbrHash["elescopium"] = "Tel";
+
+    // Triangulum
+    m_nativeHash["Triangulum"] = tr("Triangulum");
+    m_abbrHash["Triangulum"] = "Tri";
+
+    // Triangulum Australe
+    m_nativeHash["Triangulum Australe"] = tr("Triangulum Australe");
+    m_abbrHash["Triangulum Australe"] = "TrA";
+
+    // Tucana
+    m_nativeHash["Tucana"] = tr("Tucana");
+    m_abbrHash["Tucana"] = "Tuc";
+
+    // Ursa Major
+    m_nativeHash["Ursa Major"] = tr("Ursa Major");
+    m_abbrHash["Ursa Major"] = "UMa";
+
+    // Ursa Minor
+    m_nativeHash["Ursa Minor"] = tr("Ursa Minor");
+    m_abbrHash["Ursa Minor"] = "UMi";
+
+    // Vela
+    m_nativeHash["Vela"] = tr("Vela");
+    m_abbrHash["Vela"] = "Vel";
+
+    // Virgo
+    m_nativeHash["Virgo"] = tr("Virgo");
+    m_abbrHash["Virgo"] = "Vir";
+
+    // Volans
+    m_nativeHash["Volans"] = tr("Volans");
+    m_abbrHash["Volans"] = "Vol";
+
+    // Vulpecula
+    m_nativeHash["Vulpecula"] = tr("Vulpecula");
+    m_abbrHash["Vulpecula"] = "Vul";
+}
+
+QString StarsPlugin::assembledConstellation(const QString &name)
+{
+    switch (m_nameIndex) {
+    case 0:
+        return name;
+    case 1:
+        return m_nativeHash[name];
+    case 2:
+        qDebug() << name << m_abbrHash[name];
+        return m_abbrHash[name];
+    default:
+        return name;
+    }
+}
+
 void StarsPlugin::readSettings()
 {
     if ( !m_configDialog ) {
         return;
     }
+
+    ui_configWidget->constellationNamesComboBox->setCurrentIndex(m_nameIndex);
 
     Qt::CheckState const constellationLineState = m_renderConstellationLines ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewConstellationLinesCheckbox->setCheckState( constellationLineState );
@@ -277,6 +652,7 @@ void StarsPlugin::readSettings()
 
 void StarsPlugin::writeSettings()
 {
+    m_nameIndex = ui_configWidget->constellationNamesComboBox->currentIndex();
     m_renderConstellationLines = ui_configWidget->m_viewConstellationLinesCheckbox->checkState() == Qt::Checked;
     m_renderConstellationLabels = ui_configWidget->m_viewConstellationLabelsCheckbox->checkState() == Qt::Checked;
     m_renderDsos = ui_configWidget->m_viewDsosCheckbox->checkState() == Qt::Checked;
@@ -544,7 +920,7 @@ void StarsPlugin::loadConstellations()
             break;
         }
 
-        Constellation constellation( line, indexList );
+        Constellation constellation( this, line, indexList );
         m_constellations << constellation;
 
     }
