@@ -41,10 +41,13 @@ public:
     void setTextColor( const QColor &color );
     void setBackgroundColor( const QColor &color );
     QWidget* transform( QPoint &point ) const;
+    void clearHistory();
     virtual bool eventFilter( QObject *, QEvent *e );
 
 private slots:
     void printContent();
+    void updateBackButton();
+    void goBack();
 
 protected:
     void paint( QPainter *painter );
@@ -59,6 +62,7 @@ private:
 
     QWidget *m_widget;
     QPushButton *m_printButton;
+    QPushButton *m_goBackButton;
     QLabel *m_titleText;
     QWebView *m_webView;
     QString m_content;

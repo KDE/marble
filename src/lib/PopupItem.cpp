@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2012   Torsten Rahn      <tackat@kde.org>
-// Copyright 2012   Mohammed Nafees   <nafees.technocool@gmail.com>
+// Copyright 2013   Mohammed Nafees   <nafees.technocool@gmail.com>
 // Copyright 2012   Dennis Nienhüser  <earthwings@gentoo.org>
 // Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
@@ -16,6 +16,7 @@
 
 #include <QtCore/QPointer>
 #include <QtWebKit/QWebView>
+#include <QtWebKit/QWebHistory>
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QMouseEvent>
@@ -42,8 +43,17 @@ PopupItem::PopupItem( QObject* parent ) :
     setVisible( false );
 
     QGridLayout *childLayout = new QGridLayout;
-    m_titleText = new QLabel( m_widget );
     int position = 0;
+
+    m_goBackButton = new QPushButton( m_widget );
+    m_goBackButton->setVisible( false );
+    m_goBackButton->setIcon( QIcon( ":/marble/webpopup/icon-arrow-back.png" ) );
+    m_goBackButton->setFlat( true );
+    m_goBackButton->setMaximumWidth( 24 );
+    childLayout->addWidget( m_goBackButton, 0, position++ );
+    connect( m_goBackButton, SIGNAL(clicked()), this, SLOT(goBack()) );
+
+    m_titleText = new QLabel( m_widget );
     childLayout->addWidget( m_titleText, 0, position++ );
 
 #ifndef QT_NO_PRINTER
@@ -71,8 +81,10 @@ PopupItem::PopupItem( QObject* parent ) :
     m_webView->setPalette(palette);
     m_webView->page()->setPalette(palette);
     m_webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
+    m_webView->setUrl( QUrl( "about:blank" ) );
 
     connect( m_webView, SIGNAL(titleChanged(QString)), m_titleText, SLOT(setText(QString)) );
+    connect( m_webView, SIGNAL(urlChanged(QUrl)), this, SLOT(updateBackButton()) );
     connect( hideButton, SIGNAL(clicked()), this, SIGNAL(hide()) );
 }
 
@@ -112,7 +124,7 @@ void PopupItem::setUrl( const QUrl &url )
 void PopupItem::setContent( const QString &html )
 {
     m_content = html;
-    m_webView->setHtml(html);
+    m_webView->setHtml( html );
 }
 
 void PopupItem::setTextColor(const QColor &color)
@@ -314,6 +326,13 @@ QWidget* PopupItem::transform( QPoint &point ) const
     return 0;
 }
 
+void PopupItem::clearHistory()
+{
+    m_content.clear();
+    m_webView->setUrl( QUrl( "about:blank" ) );
+    m_webView->history()->clear();
+}
+
 void PopupItem::printContent()
 {
 #ifndef QT_NO_PRINTER
@@ -324,6 +343,25 @@ void PopupItem::printContent()
     }
     delete dialog;
 #endif
+}
+
+void PopupItem::updateBackButton()
+{
+    bool const hasHistory = m_webView->history()->count() > 1;
+    bool const previousIsHtml = !m_content.isEmpty() && m_webView->history()->currentItemIndex() == 1;
+    bool const atStart = m_webView->history()->currentItemIndex() <= 1;
+    bool const currentIsHtml = m_webView->url() == QUrl( "about:blank" );
+    m_goBackButton->setVisible( hasHistory && !currentIsHtml && ( previousIsHtml || !atStart ) );
+}
+
+void PopupItem::goBack()
+{
+    if ( m_webView->history()->currentItemIndex() == 1 && !m_content.isEmpty() ) {
+        m_webView->setHtml( m_content );
+    } else {
+        m_webView->back();
+    }
+    updateBackButton();
 }
 
 QPixmap PopupItem::pixmap( const QString &imageId )

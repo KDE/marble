@@ -70,6 +70,10 @@ bool MapInfoDialog::visible() const
 void MapInfoDialog::setVisible( bool visible )
 {
     m_popupItem->setVisible( visible );
+    if ( !visible ) {
+        m_popupItem->clearHistory();
+        emit repaintNeeded();
+    }
 }
 
 void MapInfoDialog::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)
