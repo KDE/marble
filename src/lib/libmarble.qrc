@@ -43,9 +43,9 @@
         <file alias="marble/turn-exit-left.svg">../../data/svg/turn-exit-left.svg</file>
         <file alias="marble/turn-exit-right.svg">../../data/svg/turn-exit-right.svg</file>
         <file alias="marble/flag-green.svg">../../data/svg/flag-green.svg</file>
-        <file alias="marble/edit-clear.png">../icons/22x22/edit-clear.png</file>
-        <file alias="marble/list-add.png">../icons/22x22/list-add.png</file>
-        <file alias="marble/reverse.png">../icons/22x22/reverse.png</file>
+        <file alias="marble/edit-clear.png">../icons/16x16/edit-clear.png</file>
+        <file alias="marble/list-add.png">../icons/16x16/list-add.png</file>
+        <file alias="marble/reverse.png">../icons/16x16/reverse.png</file>
         <file alias="marble/webpopup/arrow2_topleft.png">../../data/bitmaps/webpopup/arrow2_topleft.png</file>
         <file alias="marble/webpopup/arrow2_topleft_shadow.png">../../data/bitmaps/webpopup/arrow2_topleft_shadow.png</file>
         <file alias="marble/webpopup/webpopup2.png">../../data/bitmaps/webpopup/webpopup2.png</file>
