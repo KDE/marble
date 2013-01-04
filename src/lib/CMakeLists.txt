@@ -155,6 +155,8 @@ set(marblewidget_SRCS
     AbstractDataPluginItem.cpp
     AbstractWorkerThread.cpp
 
+    WikipediaService.cpp
+
     PluginInterface.cpp
     DialogConfigurationInterface.cpp
     LayerInterface.cpp
@@ -428,6 +430,8 @@ else (APPLE AND QTONLY)
     AbstractDataPluginModel.h
     AbstractDataPluginItem.h
     AbstractWorkerThread.h
+
+    WikipediaService.h
 
     LatLonEdit.h
     MapWizard.h
