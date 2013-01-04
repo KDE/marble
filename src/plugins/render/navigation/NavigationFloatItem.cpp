@@ -173,6 +173,8 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
 
         connect( m_marbleWidget, SIGNAL(zoomChanged(int)), SLOT(updateButtons(int)) );
         updateButtons( m_marbleWidget->zoom() );
+        connect( m_marbleWidget, SIGNAL(themeChanged(QString)), this, SLOT(selectTheme(QString)) );
+
      }
 
     return AbstractFloatItem::eventFilter(object, e);
@@ -201,9 +203,13 @@ void NavigationFloatItem::setMarbleZoomValue( int level )
                 this, SLOT(setZoomSliderValue(int)) );
 }
 
-void NavigationFloatItem::selectTheme( QString theme )
+void NavigationFloatItem::selectTheme( QString )
 {
-    Q_UNUSED(theme);
+    if ( m_marbleWidget ) {
+        m_maxZoom = m_marbleWidget->maximumZoom();
+        m_minZoom = m_marbleWidget->minimumZoom();
+        updateButtons( m_marbleWidget->zoom() );
+    }
 }
 
 void NavigationFloatItem::adjustForAnimation()
