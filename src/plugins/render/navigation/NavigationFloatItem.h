@@ -107,6 +107,9 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     /** Radius of the viewport last time */
     int m_oldViewportRadius;
+
+    int m_maxZoom;
+    int m_minZoom;
 };
 
 }

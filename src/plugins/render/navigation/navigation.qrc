@@ -12,5 +12,11 @@
         <file alias="marble/navigation/navigational_homebutton.png">data/navigational_homebutton.png</file>
         <file alias="marble/navigation/navigational_homebutton_hover.png">data/navigational_homebutton_hover.png</file>
         <file alias="marble/navigation/navigational_homebutton_press.png">data/navigational_homebutton_press.png</file>
+        <file alias="marble/navigation/navigational_zoom_hover_minus.png">data/navigational_zoom_hover_minus.png</file>
+        <file alias="marble/navigation/navigational_zoom_hover_plus.png">data/navigational_zoom_hover_plus.png</file>
+        <file alias="marble/navigation/navigational_zoom_minus.png">data/navigational_zoom_minus.png</file>
+        <file alias="marble/navigation/navigational_zoom_plus.png">data/navigational_zoom_plus.png</file>
+        <file alias="marble/navigation/navigational_zoom_press_minus.png">data/navigational_zoom_press_minus.png</file>
+        <file alias="marble/navigation/navigational_zoom_press_plus.png">data/navigational_zoom_press_plus.png</file>
     </qresource>
 </RCC>

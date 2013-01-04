@@ -25,28 +25,44 @@ NavigationButton::NavigationButton( QWidget *parent )
 
 void NavigationButton::mousePressEvent ( QMouseEvent *mouseEvent )
 {
-    if ( mouseEvent->button() == Qt::LeftButton ) {
-        m_iconMode = QIcon::Selected;
-        emit repaintNeeded();
+    if ( isEnabled() ) {
+        if ( mouseEvent->button() == Qt::LeftButton ) {
+            m_iconMode = QIcon::Selected;
+        }
     }
+    emit repaintNeeded();
 }
 
 void NavigationButton::mouseReleaseEvent ( QMouseEvent * )
 {
-    m_iconMode = QIcon::Normal;
+    if ( isEnabled() ) {
+        m_iconMode = QIcon::Normal;
+        emit clicked();
+    }
     emit repaintNeeded();
-    emit clicked();
 }
 
 void NavigationButton::enterEvent(QEvent *)
 {
-    m_iconMode = QIcon::Active;
+    if ( isEnabled() ) {
+        m_iconMode = QIcon::Active;
+    }
     emit repaintNeeded();
 }
 
 void NavigationButton::leaveEvent( QEvent * )
 {
-    m_iconMode = QIcon::Normal;
+    if ( isEnabled() ) {
+        m_iconMode = QIcon::Normal;
+    }
+    emit repaintNeeded();
+}
+
+void NavigationButton::changeEvent( QEvent *e )
+{
+    if ( e->type() == QEvent::EnabledChange ) {
+        m_iconMode = isEnabled() ? QIcon::Normal : QIcon::Disabled;
+    }
     emit repaintNeeded();
 }
 

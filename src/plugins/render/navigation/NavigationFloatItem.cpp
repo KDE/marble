@@ -30,9 +30,6 @@
 using namespace Marble;
 /* TRANSLATOR Marble::NavigationFloatItem */
 
-const int defaultMinZoom = 900;
-const int defaultMaxZoom = 2400;
-
 NavigationFloatItem::NavigationFloatItem()
     : AbstractFloatItem( 0 )
 {
@@ -156,12 +153,26 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
         // Delayed initialization
         m_marbleWidget = widget;
 
+        m_maxZoom = m_marbleWidget->maximumZoom();
+        m_minZoom = m_marbleWidget->minimumZoom();
+
         m_navigationWidget->arrowDisc->setMarbleWidget( m_marbleWidget );
         connect( m_navigationWidget->arrowDisc, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
 
         connect( m_navigationWidget->homeButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
         connect( m_navigationWidget->homeButton, SIGNAL(clicked()),
                  m_marbleWidget, SLOT(goHome()) );
+
+        connect( m_navigationWidget->zoomInButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
+        connect( m_navigationWidget->zoomInButton, SIGNAL(clicked()),
+                 m_marbleWidget, SLOT(zoomIn()) );
+
+        connect( m_navigationWidget->zoomOutButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
+        connect( m_navigationWidget->zoomOutButton, SIGNAL(clicked()),
+                 m_marbleWidget, SLOT(zoomOut()) );
+
+        connect( m_marbleWidget, SIGNAL(zoomChanged(int)), SLOT(updateButtons(int)) );
+        updateButtons( m_marbleWidget->zoom() );
      }
 
     return AbstractFloatItem::eventFilter(object, e);
@@ -215,6 +226,14 @@ void NavigationFloatItem::adjustForStill()
 
 void NavigationFloatItem::updateButtons( int zoomValue )
 {
+    bool const zoomInEnabled = m_navigationWidget->zoomInButton->isEnabled();
+    bool const zoomOutEnabled = m_navigationWidget->zoomOutButton->isEnabled();
+    m_navigationWidget->zoomInButton->setEnabled( zoomValue < m_maxZoom );
+    m_navigationWidget->zoomOutButton->setEnabled( zoomValue > m_minZoom );
+    if ( zoomInEnabled != m_navigationWidget->zoomInButton->isEnabled() ||
+         zoomOutEnabled != m_navigationWidget->zoomOutButton->isEnabled() ) {
+        update();
+    }
 }
 
 Q_EXPORT_PLUGIN2( NavigationFloatItem, Marble::NavigationFloatItem )
