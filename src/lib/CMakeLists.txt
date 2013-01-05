@@ -74,7 +74,6 @@ set(marblewidget_SRCS
     CurrentLocationWidget.cpp
     MarbleNavigator.cpp
     MarbleLegendBrowser.cpp
-    MarbleSearchListView.cpp
     MarbleAboutDialog.cpp
     MarbleWidgetInputHandler.cpp
     MarbleWidgetPopupMenu.cpp

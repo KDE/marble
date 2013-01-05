@@ -13,12 +13,12 @@
 #include "MarbleRunnerManager.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "MarbleSearchListView.h"
 #include "BranchFilterProxyModel.h"
 #include "MarblePlacemarkModel.h"
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
 
+#include <QtGui/QListView>
 #include <QtGui/QVBoxLayout>
 
 namespace Marble {
@@ -27,7 +27,7 @@ class SearchWidgetPrivate
 {
 public:
     MarbleRunnerManager* m_runnerManager;
-    MarbleSearchListView *m_searchResultView;
+    QListView *m_searchResultView;
     MarbleWidget *m_widget;
     BranchFilterProxyModel  m_branchfilter;
     QSortFilterProxyModel  *m_sortproxy;
@@ -115,7 +115,7 @@ void SearchWidget::setMarbleWidget( MarbleWidget* widget )
     treeModel->addDocument( d->m_document );
 
     d->m_sortproxy = new QSortFilterProxyModel( this );
-    d->m_searchResultView = new MarbleSearchListView( this );
+    d->m_searchResultView = new QListView( this );
     d->m_searchResultView->setModel( d->m_sortproxy );
     connect( d->m_searchResultView, SIGNAL( activated( const QModelIndex& ) ),
              this, SLOT( centerMapOn( const QModelIndex& ) ) );
