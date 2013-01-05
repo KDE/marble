@@ -117,6 +117,8 @@ public:
 
     virtual bool eventFilter( QObject *, QEvent *e );
 
+    void clearHistory();
+
 private slots:
     /**
      * @brief Print content of the web browser
@@ -164,7 +166,6 @@ private:
     QPixmap pixmap( const QString &imageid );
     void colorize( QImage &img, const QColor &col );
     QWidget* transform( QPoint &point ) const;
-    void clearHistory();
 
     QWidget *m_widget;
     QPushButton *m_printButton;
