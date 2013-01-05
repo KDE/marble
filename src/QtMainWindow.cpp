@@ -686,8 +686,8 @@ void MainWindow::createDockWidgets()
     m_panelMenu->addAction( m_searchDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, m_searchDock );
 
-    tabifyDockWidget( locationDock, m_searchDock );
     tabifyDockWidget( m_searchDock, routingDock );
+    tabifyDockWidget( routingDock, locationDock );
     m_searchDock->raise();
 
     QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
