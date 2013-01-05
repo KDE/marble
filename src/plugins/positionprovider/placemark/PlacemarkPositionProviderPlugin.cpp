@@ -76,8 +76,8 @@ void PlacemarkPositionProviderPlugin::initialize()
 {
     if ( marbleModel() ) {
         setPlacemark( marbleModel()->trackedPlacemark() );
-        connect( marbleModel(), SIGNAL(trackedPlacemarkChanged(GeoDataPlacemark*)),
-                 this, SLOT(setPlacemark(GeoDataPlacemark*)) );
+        connect( marbleModel(), SIGNAL(trackedPlacemarkChanged(const GeoDataPlacemark*)),
+                 this, SLOT(setPlacemark(const GeoDataPlacemark*)) );
     } else {
         mDebug() << "PlacemarkPositionProviderPlugin: MarbleModel not set, cannot track placemarks.";
     }
