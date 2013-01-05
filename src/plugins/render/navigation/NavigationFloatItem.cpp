@@ -216,16 +216,14 @@ void NavigationFloatItem::updateButtons( int zoomValue )
 {
     bool const zoomInEnabled = m_navigationWidget->zoomInButton->isEnabled();
     bool const zoomOutEnabled = m_navigationWidget->zoomOutButton->isEnabled();
+    int const oldZoomValue = m_navigationWidget->zoomSlider->value();
     m_navigationWidget->zoomInButton->setEnabled( zoomValue < m_maxZoom );
     m_navigationWidget->zoomOutButton->setEnabled( zoomValue > m_minZoom );
+    m_navigationWidget->zoomSlider->setValue( zoomValue );
     if ( zoomInEnabled != m_navigationWidget->zoomInButton->isEnabled() ||
-         zoomOutEnabled != m_navigationWidget->zoomOutButton->isEnabled() ) {
+         zoomOutEnabled != m_navigationWidget->zoomOutButton->isEnabled() ||
+         oldZoomValue != zoomValue ) {
         update();
-    }
-
-    if ( zoomValue > m_minZoom && zoomValue < m_maxZoom )
-    {
-        m_navigationWidget->zoomSlider->setValue( zoomValue );
     }
 }
 

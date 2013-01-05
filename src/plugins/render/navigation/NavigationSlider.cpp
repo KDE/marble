@@ -14,10 +14,12 @@
 #include <QMouseEvent>
 #include <QPixmapCache>
 
-const int handleImageHeight = 32;
-
 namespace Marble
 {
+
+namespace {
+    const int handleImageHeight = 32;
+}
 
 NavigationSlider::NavigationSlider(QWidget *parent) :
     QAbstractSlider( parent )
@@ -43,12 +45,15 @@ QPixmap NavigationSlider::pixmap( const QString &id )
 
 void NavigationSlider::mouseMoveEvent( QMouseEvent *mouseEvent )
 {
+    if ( !isSliderDown() && mouseEvent->buttons() & Qt::LeftButton ) {
+        setSliderDown( true );
+    }
     if ( isSliderDown() ) {
         qreal const fraction = ( mouseEvent->pos().y() - handleImageHeight/2 ) / qreal ( height() - handleImageHeight );
         int v = ( int ) minimum() + ( ( maximum() - minimum() ) ) * ( 1 - fraction );
         setValue( v );
+        repaint();
     }
-    repaint();
 }
 
 void NavigationSlider::mousePressEvent( QMouseEvent * )
@@ -74,14 +79,12 @@ void NavigationSlider::repaint()
 void NavigationSlider::paintEvent( QPaintEvent * )
 {
     QPainter painter( this );
-    int y;
-    for ( y = 0; y <= 160; y+=10 ) {
+    for ( int y = 0; y <= 160; y+=10 ) {
         painter.drawPixmap( 0, y, pixmap( "marble/navigation/navigational_slider_groove" ) );
 
     }
     qreal const fraction = ( value() - minimum() ) / qreal( maximum() - minimum() );
-
-    y = ( height() - handleImageHeight ) * ( 1 - fraction );
+    int const y = ( height() - handleImageHeight ) * ( 1 - fraction );
     painter.drawPixmap( 0, y, pixmap( "marble/navigation/navigational_slider_handle" ) );
     painter.end();
 }
