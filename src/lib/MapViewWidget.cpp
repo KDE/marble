@@ -27,12 +27,15 @@
 #include "GeoSceneHead.h"
 
 // Qt
+#include <QResizeEvent>
 #include <QtCore/QFileInfo>
 #include <QtCore/QSettings>
 #include <QtGui/QMenu>
 #include <QtGui/QMessageBox>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QGridLayout>
+#include <QToolBar>
+#include <QToolButton>
 
 using namespace Marble;
 // Ui
@@ -93,9 +96,85 @@ class MapViewWidget::Private {
           m_mapSortProxy(),
           m_celestialList(),
           m_celestialListProxy(),
-          m_settings( "kde.org", "Marble Desktop Globe" )
+          m_settings( "kde.org", "Marble Desktop Globe" ),
+          m_toolBar( 0 )
     {
         m_celestialListProxy.setSourceModel(&m_celestialList);
+    }
+
+    void applyExtendedLayout()
+    {
+        m_mapViewUi.projectionLabel_2->setVisible(true);
+        m_mapViewUi.celestialBodyLabel->setVisible(true);
+        m_mapViewUi.projectionComboBox->setVisible(true);
+        m_mapViewUi.mapThemeLabel->setVisible(true);
+        m_mapViewUi.line->setVisible(true);
+
+        m_toolBar->setVisible(false);
+        const int labelId = m_mapViewUi.verticalLayout->indexOf(m_mapViewUi.celestialBodyLabel);
+        m_mapViewUi.verticalLayout->insertWidget(labelId+1, m_mapViewUi.celestialBodyComboBox);
+        m_toolBar->removeAction(m_celestialBodyAction);
+        m_mapViewUi.celestialBodyComboBox->show();
+    }
+
+    void applyReducedLayout()
+    {
+        m_mapViewUi.projectionLabel_2->setVisible(false);
+        m_mapViewUi.celestialBodyLabel->setVisible(false);
+        m_mapViewUi.projectionComboBox->setVisible(false);
+        m_mapViewUi.mapThemeLabel->setVisible(false);
+        m_mapViewUi.line->setVisible(false);
+
+        m_toolBar->setVisible(true);
+        m_celestialBodyAction = m_toolBar->addWidget(m_mapViewUi.celestialBodyComboBox);
+        m_mapViewUi.verticalLayout->removeWidget(m_mapViewUi.celestialBodyComboBox);
+        m_mapViewUi.celestialBodyComboBox->show();
+    }
+
+    void setupToolBar()
+    {
+        m_toolBar = new QToolBar;
+
+        m_globeViewButton = new QToolButton;
+        m_globeViewButton->setIcon( QIcon(":/icons/map-globe.png") );
+        m_globeViewButton->setToolTip( tr("Globe View") );
+        m_globeViewButton->setCheckable(true);
+        m_globeViewButton->setChecked(false);
+
+        m_mercatorViewButton = new QToolButton;
+        m_mercatorViewButton->setIcon( QIcon(":/icons/map-mercator.png") );
+        m_mercatorViewButton->setToolTip( tr("Mercator View") );
+        m_mercatorViewButton->setCheckable(true);
+        m_mercatorViewButton->setChecked(false);
+        m_mercatorViewButton->setPopupMode(QToolButton::MenuButtonPopup);
+
+        m_popupMenu = new QMenu;
+
+        m_mercatorViewAction = new QAction( QIcon(":/icons/map-mercator.png"),
+                                              tr("Mercator View"),
+                                              m_popupMenu );
+        m_mercatorViewAction->setCheckable(true);
+        m_mercatorViewAction->setChecked(false);
+
+        m_flatViewAction = new QAction( QIcon(":/icons/map-flat.png"),
+                                        tr("Flat View"),
+                                        m_popupMenu );
+        m_flatViewAction->setCheckable(true);
+        m_flatViewAction->setChecked(false);
+
+        m_popupMenu->addAction(m_mercatorViewAction);
+        m_popupMenu->addAction(m_flatViewAction);
+        m_mercatorViewButton->setMenu(m_popupMenu);
+
+        m_toolBar->addWidget(m_globeViewButton);
+        m_toolBar->addWidget(m_mercatorViewButton);
+        m_toolBar->addSeparator();
+        m_toolBar->setContentsMargins(0,0,0,0);
+        m_toolBar->setIconSize(QSize(16, 16));
+        m_mapViewUi.toolBarLayout->insertWidget(0, m_toolBar);
+
+        applyReducedLayout();
+        q->setProjection(m_widget->projection());
     }
 
     void updateMapFilter()
@@ -142,6 +221,13 @@ class MapViewWidget::Private {
     QStandardItemModel m_celestialList;
     CelestialSortFilterProxyModel m_celestialListProxy;
     QSettings m_settings;
+    QToolBar *m_toolBar;
+    QToolButton *m_globeViewButton;
+    QToolButton *m_mercatorViewButton;
+    QMenu *m_popupMenu;
+    QAction *m_flatViewAction;
+    QAction *m_mercatorViewAction;
+    QAction *m_celestialBodyAction;
 };
 
 MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
@@ -235,6 +321,26 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 
     d->updateMapFilter();
     d->updateMapThemeView();
+
+    d->setupToolBar();
+
+    connect(d->m_globeViewButton, SIGNAL(clicked()),
+            this, SLOT(globeViewRequested()));
+    connect(d->m_mercatorViewButton, SIGNAL(clicked()),
+            this, SLOT(mercatorViewRequested()));
+    connect(d->m_mercatorViewAction, SIGNAL(triggered()),
+            this, SLOT(mercatorViewRequested()));
+    connect(d->m_flatViewAction, SIGNAL(triggered()),
+            this, SLOT(flatViewRequested()));
+}
+
+void MapViewWidget::resizeEvent(QResizeEvent *event)
+{
+    if (d->m_toolBar->isVisible() && event->size().height() > 400) {
+        d->applyExtendedLayout();
+    } else if (!d->m_toolBar->isVisible() && event->size().height() <= 400) {
+        d->applyReducedLayout();
+    }
 }
 
 void MapViewWidget::Private::updateMapThemeView()
@@ -318,6 +424,44 @@ void MapViewWidget::setProjection( Projection projection )
 {
     if ( (int)projection != d->m_mapViewUi.projectionComboBox->currentIndex() )
         d->m_mapViewUi.projectionComboBox->setCurrentIndex( (int) projection );
+
+    if (d->m_toolBar) {
+        switch (projection) {
+        case Marble::Spherical:
+            d->m_globeViewButton->setChecked(true);
+            d->m_mercatorViewButton->setChecked(false);
+            d->m_mercatorViewAction->setChecked(false);
+            d->m_flatViewAction->setChecked(false);
+            break;
+        case Marble::Mercator:
+            d->m_mercatorViewButton->setChecked(true);
+            d->m_mercatorViewAction->setChecked(true);
+            d->m_globeViewButton->setChecked(false);
+            d->m_flatViewAction->setChecked(false);
+            break;
+        case Marble::Equirectangular:
+            d->m_flatViewAction->setChecked(true);
+            d->m_mercatorViewButton->setChecked(true);
+            d->m_globeViewButton->setChecked(false);
+            d->m_mercatorViewAction->setChecked(false);
+            break;
+        }
+    }
+}
+
+void MapViewWidget::globeViewRequested()
+{
+    emit projectionChanged(Marble::Spherical);
+}
+
+void MapViewWidget::flatViewRequested()
+{
+    emit projectionChanged(Marble::Equirectangular);
+}
+
+void MapViewWidget::mercatorViewRequested()
+{
+    emit projectionChanged(Marble::Mercator);
 }
 
 void MapViewWidget::Private::setCelestialBody( int comboIndex )

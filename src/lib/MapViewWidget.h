@@ -31,7 +31,6 @@ class MarbleWidget;
 class MARBLE_EXPORT MapViewWidget : public QWidget
 {
     Q_OBJECT
-
  public:
     explicit MapViewWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     ~MapViewWidget();
@@ -42,10 +41,17 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
      */
     void setMarbleWidget( MarbleWidget *widget );
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
  public Q_SLOTS:
     void setMapThemeId( const QString & );
-
     void setProjection( Projection projection );
+
+private slots:
+    void globeViewRequested();
+    void mercatorViewRequested();
+    void flatViewRequested();
 
  private:
     Q_PRIVATE_SLOT( d, void setCelestialBody( int comboIndex ) )
