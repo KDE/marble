@@ -14,6 +14,7 @@
 #include <QDateTime>
 #include <QFile>
 #include <QString>
+#include <QColor>
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
@@ -55,7 +56,6 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
 
     GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
     placemark()->setStyle( style );
-    placemark()->style()->lineStyle().setColor( Oxygen::brickRed4 );
     placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
     placemark()->style()->labelStyle().setGlow( true );
 
@@ -184,6 +184,11 @@ void SatellitesMSCItem::update()
     }
 
     addTrackPointAt( m_clock->dateTime() );
+}
+
+void SatellitesMSCItem::setOrbitColor(const QColor &color)
+{
+    placemark()->style()->lineStyle().setColor(color);
 }
 
 void SatellitesMSCItem::addTrackPointAt( const QDateTime &dateTime )

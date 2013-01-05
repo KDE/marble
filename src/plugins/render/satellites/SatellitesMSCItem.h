@@ -18,6 +18,8 @@
 
 #include "mex/planetarySats.h"
 
+class QColor;
+
 namespace Marble {
 
 class GeoDataTrack;
@@ -56,6 +58,7 @@ public:
 
     void update();
     void showOrbit( bool show );
+    void setOrbitColor( const QColor &color );
 
 private:
     bool m_showOrbit;

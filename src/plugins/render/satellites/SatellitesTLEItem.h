@@ -18,6 +18,8 @@
 
 #include "sgp4/sgp4unit.h"
 
+class QColor;
+
 namespace Marble {
 
 class GeoDataTrack;
@@ -41,6 +43,7 @@ public:
     QString name();
 
     void showOrbit( bool show );
+    void setOrbitColor( const QColor &color );
 
 private:
     QString m_name;

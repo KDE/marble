@@ -16,6 +16,7 @@
 
 #include "MarbleClock.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
 
 #include "sgp4/sgp4io.h"
 #include "mex/planetarySats.h"
@@ -27,9 +28,42 @@ namespace Marble {
 SatellitesModel::SatellitesModel( GeoDataTreeModel *treeModel,
                                   const MarbleClock *clock )
     : TrackerPluginModel( treeModel ),
-      m_clock( clock )
+      m_clock( clock ),
+      m_currentColorIndex( 0 )
 {
+    setupColors();
     connect(m_clock, SIGNAL(timeChanged()), this, SLOT(update()));
+}
+
+void SatellitesModel::setupColors()
+{
+    m_colorList.push_back( Oxygen::brickRed4 );
+    m_colorList.push_back( Oxygen::raspberryPink4 );
+    m_colorList.push_back( Oxygen::burgundyPurple4 );
+    m_colorList.push_back( Oxygen::grapeViolet4 );
+    m_colorList.push_back( Oxygen::skyBlue4 );
+    m_colorList.push_back( Oxygen::seaBlue4 );
+    m_colorList.push_back( Oxygen::emeraldGreen4 );
+    m_colorList.push_back( Oxygen::forestGreen4 );
+    m_colorList.push_back( Oxygen::sunYellow4 );
+    m_colorList.push_back( Oxygen::hotOrange4 );
+    m_colorList.push_back( Oxygen::aluminumGray4 );
+    m_colorList.push_back( Oxygen::woodBrown4 );
+}
+
+QColor SatellitesModel::nextColor()
+{
+    if (m_colorList.isEmpty()) {
+        return Oxygen::brickRed4;
+    }
+    if (m_currentColorIndex < m_colorList.size()) {
+        m_currentColorIndex++;
+        return m_colorList[m_currentColorIndex-1];
+    } else {
+        m_currentColorIndex = 1;
+        return m_colorList[0];
+    }
+    return Oxygen::brickRed4;
 }
 
 void SatellitesModel::loadSettings( const QHash<QString, QVariant> &settings )
@@ -156,8 +190,8 @@ void SatellitesModel::parseCatalog( const QString &id,
         item = new SatellitesMSCItem( name, category, body, id,
                                       missionStart, missionEnd,
                                       index++, planSat, m_clock );
+        item->setOrbitColor( nextColor() );
         item->placemark()->setVisible( ( body.toLower() == m_lcPlanet ) );
-
         addItem( item );
     }
 
@@ -203,6 +237,7 @@ void SatellitesModel::parseTLE( const QString &id,
 
         SatellitesTLEItem *item = new SatellitesTLEItem( satelliteName,
                                                          satrec, m_clock );
+        item->setOrbitColor( nextColor() );
         addItem( item );
     }
 

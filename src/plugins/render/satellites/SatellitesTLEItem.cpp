@@ -26,6 +26,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QLabel>
 #include <QtGui/QVBoxLayout>
+#include <QColor>
 
 #include <cmath>
 #include <QDialog>
@@ -58,7 +59,6 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
 
     GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
     placemark()->setStyle( style );
-    placemark()->style()->lineStyle().setColor( Oxygen::brickRed4 );
     placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
     placemark()->style()->labelStyle().setGlow( true );
 
@@ -67,18 +67,6 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
 
 void SatellitesTLEItem::setDescription()
 {
-    /*QString description =
-      QObject::tr( "NORAD ID: %2 <br />"
-                   "Perigee: %3 km <br />"
-                   "Apogee: %4 km <br />"
-                   "Inclination: %5 degrees <br />"
-                   "Period: %6 minutes <br />"
-                   "Semi-major axis: %7 km" )
-        .arg( QString::number( m_satrec.satnum ), QString::number( perigee() ),
-              QString::number( apogee() ), QString::number( inclination() ),
-              QString::number( period() / 60.0 ),
-              QString::number( semiMajorAxis() ) );*/
-
     QFile templateFile(":/marble/satellites/satellite.html");
     if (!templateFile.open(QIODevice::ReadOnly)) {
         placemark()->setDescription(tr("No info available."));
@@ -128,6 +116,11 @@ void SatellitesTLEItem::update()
 QString SatellitesTLEItem::name()
 {
     return m_name;
+}
+
+void SatellitesTLEItem::setOrbitColor(const QColor &color)
+{
+    placemark()->style()->lineStyle().setColor(color);
 }
 
 void SatellitesTLEItem::addPointAt( const QDateTime &dateTime )

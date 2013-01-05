@@ -13,6 +13,7 @@
 
 #include <QVariant>
 #include <QStringList>
+#include <QVector>
 
 #include "TrackerPluginModel.h"
 
@@ -49,9 +50,15 @@ protected:
     void parseTLE( const QString &id, const QByteArray &data );
 
 private:
+    void setupColors();
+    QColor nextColor();
+
+private:
     const MarbleClock *m_clock;
     QStringList m_enabledIds;
     QString m_lcPlanet;
+    QVector<QColor> m_colorList;
+    int m_currentColorIndex;
 };
 
 } // namespace Marble
