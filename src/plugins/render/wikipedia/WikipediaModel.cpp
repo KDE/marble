@@ -38,10 +38,9 @@ using namespace Marble;
 WikipediaModel::WikipediaModel( QObject *parent )
     : AbstractDataPluginModel( "wikipedia", parent ),
       m_marbleWidget( 0 ),
+      m_wikipediaIcon( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) ),
       m_showThumbnail( true )
 {
-    m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) );
-
     m_languageCode = MarbleLocale::languageCode();
 }
 
@@ -63,21 +62,15 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         return;
     }
         
-    QString geonamesUrl( "http://ws.geonames.org/wikipediaBoundingBox" );
-    geonamesUrl += "?north=";
-    geonamesUrl += QString::number( box.north() * RAD2DEG );
-    geonamesUrl += "&south=";
-    geonamesUrl += QString::number( box.south() * RAD2DEG );
-    geonamesUrl += "&east=";
-    geonamesUrl += QString::number( box.east() * RAD2DEG );
-    geonamesUrl += "&west=";
-    geonamesUrl += QString::number( box.west() * RAD2DEG );
-    geonamesUrl += "&maxRows=";
-    geonamesUrl += QString::number( number );
-    geonamesUrl += "&lang=";
-    geonamesUrl += m_languageCode;
+    QUrl geonamesUrl( "http://ws.geonames.org/wikipediaBoundingBox" );
+    geonamesUrl.addQueryItem( "north", QString::number( box.north( GeoDataCoordinates::Degree ) ) );
+    geonamesUrl.addQueryItem( "south", QString::number( box.south( GeoDataCoordinates::Degree ) ) );
+    geonamesUrl.addQueryItem( "east", QString::number( box.east( GeoDataCoordinates::Degree ) ) );
+    geonamesUrl.addQueryItem( "west", QString::number( box.west( GeoDataCoordinates::Degree ) ) );
+    geonamesUrl.addQueryItem( "maxRows", QString::number( number ) );
+    geonamesUrl.addQueryItem( "lang", m_languageCode );
     
-    downloadDescriptionFile( QUrl( geonamesUrl ) );
+    downloadDescriptionFile( geonamesUrl );
 }
 
 void WikipediaModel::parseFile( const QByteArray& file )
