@@ -42,9 +42,9 @@ NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
       m_navigationWidget( 0 ),
       m_oldViewportRadius( 0 )
 {
-    // Plugin is enabled by default
+    // Plugin is visible by default
     setEnabled( true );
-    setVisible( false );
+    setVisible( true );
 
     setCacheMode( NoCache );
     setBackground( QBrush( QColor( Qt::transparent ) ) );
