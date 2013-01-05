@@ -32,6 +32,7 @@ LegendWidget::LegendWidget( QWidget *parent, Qt::WindowFlags f )
       d( new LegendWidgetPrivate() )
 {
     d->m_legendUi.setupUi( this );
+    layout()->setMargin( 0 );
 }
 
 LegendWidget::~LegendWidget()

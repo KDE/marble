@@ -236,6 +236,7 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
       d( new Private( this ) )
 {
     d->m_mapViewUi.setupUi( this );
+    layout()->setMargin( 0 );
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         QGridLayout* layout = new QGridLayout;

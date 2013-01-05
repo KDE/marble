@@ -83,6 +83,7 @@ CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f
       d( new CurrentLocationWidgetPrivate() )
 {
     d->m_currentLocationUi.setupUi( this );
+    layout()->setMargin( 0 );
 
     connect( d->m_currentLocationUi.recenterComboBox, SIGNAL ( currentIndexChanged( int ) ),
             this, SLOT( setRecenterMode( int ) ) );

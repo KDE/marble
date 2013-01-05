@@ -117,6 +117,7 @@ void SearchWidget::setMarbleWidget( MarbleWidget* widget )
     d->m_sortproxy = new QSortFilterProxyModel( this );
     d->m_searchResultView = new QListView( this );
     d->m_searchResultView->setModel( d->m_sortproxy );
+    d->m_searchResultView->setMinimumSize( 0, 0 );
     connect( d->m_searchResultView, SIGNAL( activated( const QModelIndex& ) ),
              this, SLOT( centerMapOn( const QModelIndex& ) ) );
 
@@ -134,6 +135,7 @@ void SearchWidget::setMarbleWidget( MarbleWidget* widget )
     QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget( searchField );
     layout->addWidget( d->m_searchResultView );
+    layout->setMargin( 0 );
     setLayout( layout );
 }
 

@@ -257,6 +257,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->setupToolBar();
     d->m_ui.routeComboBox->setVisible( false );
     d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
+    layout()->setMargin( 0 );
 
     d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_ui.routeComboBox );
 
