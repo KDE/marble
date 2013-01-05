@@ -53,6 +53,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_lmbMenu( new QMenu( m_widget ) ),
       m_rmbMenu( new QMenu( m_widget ) ),
       m_copyCoordinateAction( new QAction( QIcon(":/icons/copy-coordinates.png"), tr("Copy Coordinates"), this ) ),
+      m_directionsToHereAction( 0 ),
       m_rmbExtensionPoint( 0 ),
       m_runnerManager( new MarbleRunnerManager( model->pluginManager(), this ) )
 {
@@ -68,8 +69,14 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     m_trackPlacemarkAction->setData( 0 );
 
     //	Tool actions (Right mouse button)
-    QAction* fromHere = new QAction( QIcon(":/icons/directions-from.png"), tr( "Directions &from here" ), this );
-    QAction* toHere = new QAction( tr( "Directions &to here" ), this );
+    QAction* fromHere = new QAction( tr( "Directions &from here" ), this );
+    m_directionsToHereAction = new QAction( tr( "Directions &to here" ), this );
+    RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
+    if ( request ) {
+        fromHere->setIcon( QIcon( request->pixmap( 0, 16 ) ) );
+        int const lastIndex = qMax( 1, request->size()-1 );
+        m_directionsToHereAction->setIcon( QIcon( request->pixmap( lastIndex, 16 ) ) );
+    }
     QAction* addBookmark = new QAction( QIcon(":/icons/bookmark-new.png"),
                                         tr( "Add &Bookmark" ), this );
     QAction* fullscreenAction = new QAction( tr( "&Full Screen Mode" ), this );
@@ -86,7 +93,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     }
 
     m_rmbMenu->addAction( fromHere );
-    m_rmbMenu->addAction( toHere );
+    m_rmbMenu->addAction( m_directionsToHereAction );
     m_rmbMenu->addSeparator();
     m_rmbMenu->addAction( addBookmark );
     if ( !smallScreen ) {
@@ -103,7 +110,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     }
 
     connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
-    connect( toHere, SIGNAL( triggered( ) ), SLOT( directionsToHere() ) );
+    connect( m_directionsToHereAction, SIGNAL( triggered( ) ), SLOT( directionsToHere() ) );
     connect( addBookmark, SIGNAL( triggered( ) ), SLOT( addBookmark() ) );
     connect( aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction, SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
@@ -222,6 +229,11 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 
     QPoint curpos = QPoint( xpos, ypos );
     m_copyCoordinateAction->setData( curpos );
+    RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
+    if ( request ) {
+        int const lastIndex = qMax( 1, request->size()-1 );
+        m_directionsToHereAction->setIcon( QIcon( request->pixmap( lastIndex, 16 ) ) );
+    }
 
     m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }

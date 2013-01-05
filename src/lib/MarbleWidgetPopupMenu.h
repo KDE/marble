@@ -105,6 +105,7 @@ private Q_SLOTS:
     QAction *m_infoDialogAction;
     QAction *m_showOrbitAction;
     QAction *m_trackPlacemarkAction;
+    QAction *m_directionsToHereAction;
 
     QAction  *const m_copyCoordinateAction;
 
