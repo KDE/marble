@@ -34,8 +34,11 @@
 #include <QtGui/QMessageBox>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QGridLayout>
+#include <QtGui/QPainter>
 #include <QToolBar>
 #include <QToolButton>
+#include <QtGui/QTextDocument>
+#include <QtGui/QAbstractTextDocumentLayout>
 
 using namespace Marble;
 // Ui
@@ -43,6 +46,19 @@ using namespace Marble;
 
 namespace Marble
 {
+
+class MapViewItemDelegate : public QAbstractItemDelegate
+{
+public:
+    MapViewItemDelegate( QListView* view );
+    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+
+private:
+    QString text( const QModelIndex &index ) const;
+    QListView* m_view;
+    QIcon m_bookmarkIcon;
+};
 
 class CelestialSortFilterProxyModel : public QSortFilterProxyModel
 {
@@ -256,8 +272,10 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     }
     else {
         d->m_mapViewUi.marbleThemeSelectView->setViewMode( QListView::IconMode );
-        QSize const iconSize = d->m_settings.value( "MapView/iconSize", QSize( 136, 136 ) ).toSize();
+        QSize const iconSize = d->m_settings.value( "MapView/iconSize", QSize( 90, 90 ) ).toSize();
         d->m_mapViewUi.marbleThemeSelectView->setIconSize( iconSize );
+        d->m_mapViewUi.marbleThemeSelectView->setItemDelegate( new MapViewItemDelegate( d->m_mapViewUi.marbleThemeSelectView ) );
+        d->m_mapViewUi.marbleThemeSelectView->setAlternatingRowColors( true );
         d->m_mapViewUi.marbleThemeSelectView->setFlow( QListView::LeftToRight );
         d->m_mapViewUi.marbleThemeSelectView->setWrapping( true );
         d->m_mapViewUi.marbleThemeSelectView->setResizeMode( QListView::Adjust );
@@ -545,7 +563,7 @@ void MapViewWidget::Private::showContextMenu( const QPoint& pos )
 
     QAction* iconSizeAction = menu.addAction( tr( "&Show Large Icons" ), q, SLOT( toggleIconSize() ) );
     iconSizeAction->setCheckable( true );
-    iconSizeAction->setChecked( m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 136, 136 ) );
+    iconSizeAction->setChecked( m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 96, 96 ) );
     QAction *favAction = menu.addAction( tr( "&Favorite" ), q, SLOT( toggleFavorite() ) );
     favAction->setCheckable( true );
     favAction->setChecked( isCurrentFavorite() );
@@ -589,8 +607,8 @@ void MapViewWidget::Private::toggleFavorite()
 
 void MapViewWidget::Private::toggleIconSize()
 {
-    bool const isLarge = m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 136, 136 );
-    int const size = isLarge ? 48 : 136;
+    bool const isLarge = m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 96, 96 );
+    int const size = isLarge ? 52 : 96;
     m_mapViewUi.marbleThemeSelectView->setIconSize( QSize( size, size ) );
     m_settings.setValue("MapView/iconSize", m_mapViewUi.marbleThemeSelectView->iconSize() );
 }
@@ -605,6 +623,73 @@ bool MapViewWidget::Private::isCurrentFavorite()
     m_settings.endGroup();
 
     return isFavorite;
+}
+
+MapViewItemDelegate::MapViewItemDelegate( QListView *view ) :
+    m_view( view ), m_bookmarkIcon( ":/icons/bookmarks.png" )
+{
+    // nothing to do
+}
+
+void MapViewItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const
+{
+    QStyleOptionViewItemV4 styleOption = option;
+    styleOption.text = QString();
+    QApplication::style()->drawControl(QStyle::CE_ItemViewItem, &styleOption, painter);
+
+    QAbstractTextDocumentLayout::PaintContext paintContext;
+    if (styleOption.state & QStyle::State_Selected) {
+        paintContext.palette.setColor(QPalette::Text,
+            styleOption.palette.color(QPalette::Active, QPalette::HighlightedText));
+    }
+
+    QRect const rect = option.rect;
+    QSize const iconSize = option.decorationSize;
+    QRect const iconRect( rect.topLeft(), iconSize );
+    QIcon const icon = qVariantValue<QIcon>( index.data( Qt::DecorationRole ) );
+    painter->drawPixmap( iconRect, icon.pixmap( iconSize ) );
+
+    int const padding = 5;
+    QString const name = index.data().toString();
+    const bool isFavorite = QSettings( "kde.org", "Marble Desktop Globe" ).contains( "Favorites/" + name );
+    QSize const bookmarkSize( 16, 16 );
+    QRect bookmarkRect( iconRect.bottomRight(), bookmarkSize );
+    bookmarkRect.translate( QPoint( -bookmarkSize.width() - padding, -bookmarkSize.height() - padding ) );
+    QIcon::Mode mode = isFavorite ? QIcon::Normal : QIcon::Disabled;
+    painter->drawPixmap( bookmarkRect, m_bookmarkIcon.pixmap( bookmarkSize, mode ) );
+
+    QTextDocument document;
+    document.setTextWidth( rect.width() - iconSize.width() - padding );
+    document.setDefaultFont( option.font );
+    document.setHtml( text( index ) );
+
+    QRect textRect = QRect( iconRect.topRight(), QSize( document.textWidth() - padding, rect.height() - padding ) );
+    painter->save();
+    painter->translate( textRect.topLeft() );
+    painter->setClipRect( textRect.translated( -textRect.topLeft() ) );
+    document.documentLayout()->draw( painter, paintContext );
+    painter->restore();
+}
+
+QSize MapViewItemDelegate::sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const
+{
+    if ( index.column() == 0 ) {
+        QSize const iconSize = option.decorationSize;
+        QTextDocument doc;
+        doc.setDefaultFont( option.font );
+        doc.setTextWidth( m_view->width() - iconSize.width() - 10 );
+        doc.setHtml( text( index ) );
+        return QSize( iconSize.width() + doc.size().width(), iconSize.height() );
+    }
+
+    return QSize();
+}
+
+QString MapViewItemDelegate::text( const QModelIndex &index ) const
+{
+    QString const title = index.data().toString();
+    QString const description = index.data( Qt::UserRole+2 ).toString();
+    return QString("<p><b>%1</b></p>%2").arg( title ).arg( description );
 }
 
 }
