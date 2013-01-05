@@ -105,7 +105,7 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_shutdownPositionTracking( false ),
         m_guidanceModeWarning( true ),
         m_routeColorStandard   ( Oxygen::skyBlue4 ),
-        m_routeColorHighlighted( Oxygen::seaBlue2 ),
+        m_routeColorHighlighted( Oxygen::skyBlue1 ),
         m_routeColorAlternative( Oxygen::aluminumGray4 )
 {
     m_runnerManager.setModel( model );

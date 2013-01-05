@@ -1230,7 +1230,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          tempColor.setAlpha( settings.value( "routeAlphaStandard", 200 ).toInt() );
          routingManager->setRouteColorStandard( tempColor );
 
-         tempColor = QColor( settings.value( "routeColorHighlighted", Oxygen::seaBlue2.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorHighlighted", Oxygen::skyBlue1.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaHighlighted", 200 ).toInt() );
          routingManager->setRouteColorHighlighted( tempColor );
 

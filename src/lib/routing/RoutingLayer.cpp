@@ -354,7 +354,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
             QRegion region = painter->regionFromEllipse( pos, 12, 12 );
             m_instructionRegions.push_front( ModelRegion( index, region ) );
-            painter->drawEllipse( pos, 8, 8 );
+            painter->drawEllipse( pos, 6, 6 );
 
         }
 
@@ -363,7 +363,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             QString nextInstruction = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
             if( !nextInstruction.isEmpty() ) {
                 painter->setBrush( QBrush( Oxygen::hotOrange4 ) );
-                painter->drawEllipse( location, 20, 20 );
+                painter->drawEllipse( location, 6, 6 );
             }
         }
     }
