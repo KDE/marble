@@ -175,6 +175,7 @@ void MainWindow::initObject(const QVariantMap& cmdLineSettings)
     QCoreApplication::processEvents ();
     setupStatusBar();
     readSettings(cmdLineSettings);
+    showSearch();
 }
 
 void MainWindow::createActions()
