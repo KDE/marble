@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>92</width>
-    <height>229</height>
+    <height>360</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,7 +58,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>128</y>
+     <y>127</y>
      <width>34</width>
      <height>36</height>
     </rect>
@@ -88,7 +88,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>163</y>
+     <y>323</y>
      <width>34</width>
      <height>36</height>
     </rect>
@@ -114,6 +114,16 @@
     </size>
    </property>
   </widget>
+  <widget class="Marble::NavigationSlider" name="zoomSlider" native="true">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>163</y>
+     <width>34</width>
+     <height>160</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
@@ -126,6 +136,12 @@
    <class>Marble::NavigationButton</class>
    <extends>QWidget</extends>
    <header>NavigationButton.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Marble::NavigationSlider</class>
+   <extends>QWidget</extends>
+   <header>NavigationSlider.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

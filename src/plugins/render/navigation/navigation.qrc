@@ -18,5 +18,7 @@
         <file alias="marble/navigation/navigational_zoom_plus.png">data/navigational_zoom_plus.png</file>
         <file alias="marble/navigation/navigational_zoom_press_minus.png">data/navigational_zoom_press_minus.png</file>
         <file alias="marble/navigation/navigational_zoom_press_plus.png">data/navigational_zoom_press_plus.png</file>
+        <file alias="marble/navigation/navigational_slider_groove.png">data/navigational_slider_groove.png</file>
+        <file alias="marble/navigation/navigational_slider_handle.png">data/navigational_slider_handle.png</file>
     </qresource>
 </RCC>

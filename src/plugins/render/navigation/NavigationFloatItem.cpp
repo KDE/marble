@@ -129,9 +129,6 @@ bool NavigationFloatItem::isInitialized() const
 void NavigationFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( viewport->radius() != m_oldViewportRadius ) {
-        const qreal zoomValue = (200.0 * qLn( viewport->radius() ) ); // copied from MarbleWidgetPrivate::zoom()
-        setZoomSliderValue( zoomValue );
-
         m_oldViewportRadius = viewport->radius();
         // The slider depends on the map state (zoom factor)
         update();
@@ -167,6 +164,12 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
         connect( m_navigationWidget->zoomInButton, SIGNAL(clicked()),
                  m_marbleWidget, SLOT(zoomIn()) );
 
+        m_navigationWidget->zoomSlider->setMaximum( m_maxZoom );
+        m_navigationWidget->zoomSlider->setMinimum( m_minZoom );
+        connect( m_navigationWidget->zoomSlider, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
+        connect( m_navigationWidget->zoomSlider, SIGNAL(valueChanged(int)),
+                 m_marbleWidget, SLOT(zoomView(int)) );
+
         connect( m_navigationWidget->zoomOutButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
         connect( m_navigationWidget->zoomOutButton, SIGNAL(clicked()),
                  m_marbleWidget, SLOT(zoomOut()) );
@@ -180,34 +183,13 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
     return AbstractFloatItem::eventFilter(object, e);
 }
 
-void NavigationFloatItem::setZoomSliderValue( int level )
-{
-}
-
-void NavigationFloatItem::setMarbleZoomValue( int level )
-{
-    // There exists a circular signal/slot connection between MarbleWidget and this widget's
-    // zoom slider. MarbleWidget prevents recursion, but it still loops one time unless
-    // disconnected here.
-    // The circular signal/slot connection results into the Marble Globe flickering, when the
-    // zoom slider is used.
-
-    if( !m_marbleWidget ) {
-        return;
-    }
-
-    disconnect( m_marbleWidget, SIGNAL(zoomChanged(int)),
-                this, SLOT(setZoomSliderValue(int)) );
-    m_marbleWidget->zoomView( level );
-    connect( m_marbleWidget, SIGNAL(zoomChanged(int)),
-                this, SLOT(setZoomSliderValue(int)) );
-}
-
 void NavigationFloatItem::selectTheme( QString )
 {
     if ( m_marbleWidget ) {
         m_maxZoom = m_marbleWidget->maximumZoom();
         m_minZoom = m_marbleWidget->minimumZoom();
+        m_navigationWidget->zoomSlider->setMaximum( m_maxZoom );
+        m_navigationWidget->zoomSlider->setMinimum( m_minZoom );
         updateButtons( m_marbleWidget->zoom() );
     }
 }
@@ -239,6 +221,11 @@ void NavigationFloatItem::updateButtons( int zoomValue )
     if ( zoomInEnabled != m_navigationWidget->zoomInButton->isEnabled() ||
          zoomOutEnabled != m_navigationWidget->zoomOutButton->isEnabled() ) {
         update();
+    }
+
+    if ( zoomValue > m_minZoom && zoomValue < m_maxZoom )
+    {
+        m_navigationWidget->zoomSlider->setValue( zoomValue );
     }
 }
 
