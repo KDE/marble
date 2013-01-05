@@ -1171,7 +1171,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
                     }
                     else if ( settings.contains("quitZoom") ) {
                         // provide a default value in case "quitZoom" contains garbage
-                        m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                        m_controlView->marbleWidget()->setZoom( settings.value("quitZoom", 1000).toInt() );
                     }
                     else {
                         // set radius to 1350 (Atlas theme's "sharp" radius) if Marble starts with a clean config

@@ -168,7 +168,7 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
         m_navigationWidget->zoomSlider->setMinimum( m_minZoom );
         connect( m_navigationWidget->zoomSlider, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
         connect( m_navigationWidget->zoomSlider, SIGNAL(valueChanged(int)),
-                 m_marbleWidget, SLOT(zoomView(int)) );
+                 m_marbleWidget, SLOT(setZoom(int)) );
 
         connect( m_navigationWidget->zoomOutButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
         connect( m_navigationWidget->zoomOutButton, SIGNAL(clicked()),

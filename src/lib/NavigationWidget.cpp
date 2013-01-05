@@ -154,7 +154,7 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 
     // Connect necessary signals.
     connect( this, SIGNAL( goHome() ),         d->m_widget, SLOT( goHome() ) );
-    connect( this, SIGNAL( zoomChanged(int) ), d->m_widget, SLOT( zoomView( int ) ) );
+    connect( this, SIGNAL( zoomChanged(int) ), d->m_widget, SLOT( setZoom( int ) ) );
     connect( this, SIGNAL( zoomIn() ),         d->m_widget, SLOT( zoomIn() ) );
     connect( this, SIGNAL( zoomOut() ),        d->m_widget, SLOT( zoomOut() ) );
 

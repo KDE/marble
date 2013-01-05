@@ -536,7 +536,7 @@ quint64 MarbleWidget::volatileTileCacheLimit() const
 }
 
 
-void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
+void MarbleWidget::setZoom( int newZoom, FlyToMode mode )
 {
     // It won't fly anyway. So we should do everything to keep the zoom value.
     if ( !d->m_animationsEnabled || mode == Instant ) {
@@ -566,10 +566,15 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
     }
 }
 
+void MarbleWidget::zoomView( int zoom, FlyToMode mode )
+{
+    setZoom( zoom, mode );
+}
+
 
 void MarbleWidget::zoomViewBy( int zoomStep, FlyToMode mode )
 {
-    zoomView( zoom() + zoomStep, mode );
+    setZoom( zoom() + zoomStep, mode );
 }
 
 
@@ -590,7 +595,7 @@ void MarbleWidget::zoomIn( FlyToMode mode )
 
 void MarbleWidget::zoomOut( FlyToMode mode )
 {
-    if ( d->m_map.tileZoomLevel() < 0 ) {
+    if ( d->m_map.tileZoomLevel() <= 0 ) {
         zoomViewBy( -d->m_zoomStep, mode );
     } else {
         int radius = d->m_map.preferredRadiusFloor( d->m_map.radius() * 0.95 );

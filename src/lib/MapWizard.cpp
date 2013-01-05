@@ -122,10 +122,10 @@ PreviewDialog::PreviewDialog( QWidget* parent, QString mapThemeId ) : QDialog( p
     connect( navigator, SIGNAL( moveRight() ), widget, SLOT( moveRight() ) );
     connect( navigator, SIGNAL( zoomIn() ), widget, SLOT( zoomIn() ) );
     connect( navigator, SIGNAL( zoomOut() ), widget, SLOT( zoomOut() ) );
-    connect( navigator, SIGNAL( zoomChanged(int) ), widget, SLOT( zoomView(int) ) );
+    connect( navigator, SIGNAL( zoomChanged(int) ), widget, SLOT( setZoom(int) ) );
     
     widget->setMapThemeId( m_mapThemeId );
-    widget->zoomView( 1000 );
+    widget->setZoom( 1000 );
     
     layout->addWidget( navigator, 1, 1 );
     layout->addWidget( widget, 1, 2 );

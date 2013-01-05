@@ -106,7 +106,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleWidget")
 #endif
 
-    Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
+    Q_PROPERTY(int zoom          READ zoom            WRITE setZoom)
 
     Q_PROPERTY(QString mapThemeId  READ mapThemeId    WRITE setMapThemeId)
     Q_PROPERTY(int projection    READ projection      WRITE setProjection)
@@ -578,6 +578,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     //@}
 
+    /// @todo Enable this instead of the zoomView slot below for proper deprecation warnings
+    /// around Marble 1.8
+    // @deprecated Please use setZoom
+    //MARBLE_DEPRECATED( void zoomView( int zoom, FlyToMode mode = Instant ) );
+
  public Q_SLOTS:
 
     /// @name Position management slots
@@ -596,6 +601,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * The zoom level is an abstract value without physical
      * interpretation.  A zoom value around 1000 lets the viewer see
      * all of the earth in the default window.
+     */
+    void setZoom( int zoom, FlyToMode mode = Instant );
+
+    /**
+     * @deprecated To be removed soon. Please use setZoom instead. Same parameters.
      */
     void zoomView( int zoom, FlyToMode mode = Instant );
 
@@ -979,7 +989,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Signal that the zoom has changed, and to what.
      * @param zoom  The new zoom value.
-     * @see  zoomView()
+     * @see  setZoom()
      */
     void zoomChanged( int zoom );
     void distanceChanged( const QString& distanceString );
