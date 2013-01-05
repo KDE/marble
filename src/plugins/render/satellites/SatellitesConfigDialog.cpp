@@ -136,6 +136,25 @@ SatellitesConfigDialog::addTLESatelliteItem( const QString &category,
     return addSatelliteItem( "Earth", category, title, url, url );
 }
 
+void SatellitesConfigDialog::setDialogActive( bool active )
+{
+    m_configWidget->tabWidget->clear();
+
+    if( active ) {
+        m_configWidget->tabWidget->addTab( m_configWidget->tabSatellites,
+                                           tr( "&Satellites" ) );
+        m_configWidget->tabWidget->addTab( m_configWidget->tabDataSources,
+                                           tr( "&Data Sources" ) );
+    } else {
+        m_configWidget->tabWidget->addTab( m_configWidget->tabDisabled,
+                                           tr( "&Activate Plugin" ) );
+    }
+
+    QDialogButtonBox *bBox = m_configWidget->buttonBox;
+    bBox->button( QDialogButtonBox::Ok )->setEnabled( active );
+    bBox->button( QDialogButtonBox::Reset )->setEnabled( active );
+}
+
 Ui::SatellitesConfigDialog* SatellitesConfigDialog::configWidget()
 {
     return m_configWidget;
@@ -148,6 +167,10 @@ void SatellitesConfigDialog::initialize()
 
     setupSatellitesTab();
     setupDataSourcesTab();
+
+    setDialogActive( false );
+    connect( m_configWidget->buttonDisabled, SIGNAL(clicked()),
+             this, SIGNAL(activatePluginClicked()) );
 
     update();
 }

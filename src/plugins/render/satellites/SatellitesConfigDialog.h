@@ -59,6 +59,10 @@ Q_SIGNALS:
     void userDataSourceAdded( const QString &source );
     void userDataSourceRemoved( const QString &source );
     void userDataSourcesChanged();
+    void activatePluginClicked();
+
+public Q_SLOTS:
+    void setDialogActive( bool active );
 
 protected:
     void initialize();

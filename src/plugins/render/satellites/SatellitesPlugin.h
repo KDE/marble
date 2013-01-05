@@ -68,6 +68,7 @@ public:
     SatellitesConfigDialog *configDialog();
 
 private Q_SLOTS:
+    void activate();
     void enableModel( bool enabled );
     void visibleModel( bool visible );
     void readSettings();
