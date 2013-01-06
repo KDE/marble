@@ -702,7 +702,6 @@ bool MarbleMap::geoCoordinates( int x, int y,
 void MarbleMapPrivate::setDocument( QString key ) {
 
     GeoDataDocument* doc = m_model->fileManager()->at( key );
-    QString currentName = doc->fileName();
 
     QString coastName;
     QString lakeName;
@@ -712,15 +711,15 @@ void MarbleMapPrivate::setDocument( QString key ) {
       lakeName = m_model->mapTheme()->map()->filters().at( 0 )->lakes();
       glacierName = m_model->mapTheme()->map()->filters().at( 0 )->glaciers();
     }
-    if ( currentName == coastName ) {
+    if ( key == coastName ) {
         m_textureLayer.setCoastDocument( doc );
     }
 
-    if ( currentName == lakeName ) {
+    if ( key == lakeName ) {
         m_textureLayer.setLakeDocument( doc );
     }
 
-    if ( currentName == glacierName ) {
+    if ( key == glacierName ) {
         m_textureLayer.setGlacierDocument( doc );
     }
 
@@ -732,7 +731,7 @@ void MarbleMapPrivate::setDocument( QString key ) {
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
             GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
             QString containername = data->sourceFile();
-            if( currentName == containername ) {
+            if( key == containername ) {
                 // set visibility according to theme property
                 if( !data->property().isEmpty() ) {
                     bool value;
