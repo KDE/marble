@@ -19,6 +19,7 @@
 #include <QtGui/QSlider>
 #include <QtGui/QWidget>
 #include <QtGui/QPainter>
+#include <QPixmapCache>
 
 #include "ui_navigation.h"
 #include "ViewportParams.h"
@@ -53,6 +54,10 @@ NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
 
 NavigationFloatItem::~NavigationFloatItem()
 {
+    QPixmapCache::remove( "marble/navigation/navigational_backdrop_top" );
+    QPixmapCache::remove( "marble/navigation/navigational_backdrop_center" );
+    QPixmapCache::remove( "marble/navigation/navigational_backdrop_bottom" );
+
     delete m_navigationWidget;
 }
 
@@ -225,6 +230,23 @@ void NavigationFloatItem::updateButtons( int zoomValue )
          oldZoomValue != zoomValue ) {
         update();
     }
+}
+
+QPixmap NavigationFloatItem::pixmap( const QString &id )
+{
+    QPixmap result;
+    if ( !QPixmapCache::find( id, result ) ) {
+        result = QPixmap( QString( ":/%1.png" ).arg( id ) );
+        QPixmapCache::insert( id, result );
+    }
+    return result;
+}
+
+void NavigationFloatItem::paintContent( QPainter *painter )
+{
+    painter->drawPixmap( 0, 0, pixmap( "marble/navigation/navigational_backdrop_top" ) );
+    painter->drawPixmap( 0, 70, pixmap( "marble/navigation/navigational_backdrop_center" ) );
+    painter->drawPixmap( 0, 311, pixmap( "marble/navigation/navigational_backdrop_bottom" ) );
 }
 
 Q_EXPORT_PLUGIN2( NavigationFloatItem, Marble::NavigationFloatItem )

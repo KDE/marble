@@ -20,5 +20,8 @@
         <file alias="marble/navigation/navigational_zoom_press_plus.png">data/navigational_zoom_press_plus.png</file>
         <file alias="marble/navigation/navigational_slider_groove.png">data/navigational_slider_groove.png</file>
         <file alias="marble/navigation/navigational_slider_handle.png">data/navigational_slider_handle.png</file>
+        <file alias="marble/navigation/navigational_backdrop_bottom.png">data/navigational_backdrop_bottom.png</file>
+        <file alias="marble/navigation/navigational_backdrop_center.png">data/navigational_backdrop_center.png</file>
+        <file alias="marble/navigation/navigational_backdrop_top.png">data/navigational_backdrop_top.png</file>
     </qresource>
 </RCC>

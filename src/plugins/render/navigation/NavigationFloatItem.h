@@ -70,8 +70,11 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     void changeViewport( ViewportParams *viewport );
 
+    QPixmap pixmap( const QString &Id );
+
  protected:
     bool eventFilter( QObject *object, QEvent *e );
+    void paintContent( QPainter *painter );
 
  private Q_SLOTS:
     /** Map theme was changed, adjust controls */
