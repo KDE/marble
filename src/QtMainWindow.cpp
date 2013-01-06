@@ -708,8 +708,7 @@ void MainWindow::createDockWidgets()
     fileViewDock->setObjectName( "fileViewDock" );
     fileViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
     FileViewWidget* fileViewWidget = new FileViewWidget( this );
-    fileViewWidget->setTreeModel( m_controlView->marbleModel()->treeModel() );
-    fileViewWidget->setFileManager( m_controlView->marbleModel()->fileManager() );
+    fileViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
     fileViewDock->setWidget( fileViewWidget );
     m_panelMenu->addAction( fileViewDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, fileViewDock );

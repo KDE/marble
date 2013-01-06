@@ -26,6 +26,7 @@ class FileManager;
 class GeoDataPlacemark;
 class GeoDataLatLonBox;
 class GeoDataTreeModel;
+class MarbleWidget;
 
 class FileViewWidgetPrivate;
 
@@ -38,9 +39,7 @@ class MARBLE_EXPORT FileViewWidget : public QWidget
     ~FileViewWidget();
 
 
-    void setTreeModel( GeoDataTreeModel *model );
-    void setFileManager( FileManager *manager );
-
+    void setMarbleWidget( MarbleWidget *widget );
 
  Q_SIGNALS:
     void centerOn( const GeoDataPlacemark &, bool animated );

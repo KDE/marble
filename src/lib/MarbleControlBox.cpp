@@ -122,17 +122,11 @@ void MarbleControlBox::setMarbleWidget(MarbleWidget *widget)
         addItem( d->m_routingWidget, tr( "Routing" ) );
     }
 
-    d->m_fileViewWidget->setTreeModel( widget->model()->treeModel() );
-    d->m_fileViewWidget->setFileManager( widget->model()->fileManager() );
+    d->m_fileViewWidget->setMarbleWidget( widget );
     d->m_legendWidget->setMarbleModel( widget->model() );
     d->m_navigationWidget->setMarbleWidget( widget );
     d->m_mapViewWidget->setMarbleWidget( widget );
     d->m_currentLocationWidget->setMarbleWidget( widget );
-
-    connect( d->m_fileViewWidget, SIGNAL( centerOn( const GeoDataPlacemark &, bool ) ),
-             widget, SLOT( centerOn( const GeoDataPlacemark &, bool ) ) );
-    connect( d->m_fileViewWidget, SIGNAL( centerOn( const GeoDataLatLonBox &, bool ) ),
-             widget, SLOT( centerOn( const GeoDataLatLonBox &, bool ) ) );
 
     connect( d->m_legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
              widget,            SLOT( setPropertyValue( const QString &, bool ) ) );

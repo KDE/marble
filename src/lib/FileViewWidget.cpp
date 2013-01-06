@@ -20,6 +20,9 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
 #include "FileManager.h"
+#include "MarblePlacemarkModel.h"
+#include "MarbleModel.h"
+#include "MarbleWidget.h"
 
 using namespace Marble;
 // Ui
@@ -31,19 +34,32 @@ namespace Marble
 class FileViewWidgetPrivate
 {
 
+ public:
+    FileViewWidgetPrivate( FileViewWidget *parent );
+    void setTreeModel( GeoDataTreeModel *model );
+    void setFileManager( FileManager *manager );
+
+
  public Q_SLOTS:
     void saveFile();
     void closeFile();
     void enableFileViewActions();
 
  public:
+    FileViewWidget *q;
     Ui::FileViewWidget  m_fileViewUi;
+    MarbleWidget *m_widget;
+    QSortFilterProxyModel m_treeSortProxy;
     FileManager *m_fileManager;
 };
 
+FileViewWidgetPrivate::FileViewWidgetPrivate( FileViewWidget *parent )
+    :q( parent ) {
+}
+
 FileViewWidget::FileViewWidget( QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
-      d( new FileViewWidgetPrivate )
+      d( new FileViewWidgetPrivate( this ) )
 {
     d->m_fileViewUi.setupUi( this );
     layout()->setMargin( 0 );
@@ -54,35 +70,48 @@ FileViewWidget::~FileViewWidget()
     delete d;
 }
 
-void FileViewWidget::setTreeModel( GeoDataTreeModel *model )
+void FileViewWidget::setMarbleWidget( MarbleWidget *widget )
 {
-    d->m_fileViewUi.m_treeView->setModel( model );
-    d->m_fileViewUi.m_treeView->setSelectionModel( model->selectionModel() );
-    d->m_fileViewUi.m_treeView->setSortingEnabled( true );
-    d->m_fileViewUi.m_treeView->sortByColumn( 0, Qt::AscendingOrder );
-    d->m_fileViewUi.m_treeView->resizeColumnToContents( 0 );
-    d->m_fileViewUi.m_treeView->resizeColumnToContents( 1 );
-    connect( model->selectionModel(),
-             SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
-             this,
-             SLOT( enableFileViewActions() ) );
-    connect( d->m_fileViewUi.m_treeView, SIGNAL( activated( QModelIndex ) ),
-             this, SLOT( mapCenterOnTreeViewModel( QModelIndex ) ) );
+    d->m_widget = widget;
+    d->setTreeModel( d->m_widget->model()->treeModel() );
+    d->setFileManager( d->m_widget->model()->fileManager() );
+
+    connect( this, SIGNAL( centerOn( const GeoDataPlacemark &, bool ) ),
+             d->m_widget, SLOT( centerOn( const GeoDataPlacemark &, bool ) ) );
+    connect( this, SIGNAL( centerOn( const GeoDataLatLonBox &, bool ) ),
+             d->m_widget, SLOT( centerOn( const GeoDataLatLonBox &, bool ) ) );
 }
 
-void FileViewWidget::setFileManager( FileManager *manager )
+void FileViewWidgetPrivate::setTreeModel( GeoDataTreeModel *model )
 {
-    d->m_fileManager = manager;
-    connect( d->m_fileViewUi.m_saveButton,  SIGNAL( clicked() ) ,
-             this,       SLOT( saveFile() ) );
-    connect( d->m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
-             this,    SLOT( closeFile() ) );
+    m_treeSortProxy.setSourceModel( model );
+    m_treeSortProxy.setDynamicSortFilter( true );
+    m_fileViewUi.m_treeView->setModel( &m_treeSortProxy );
+    m_fileViewUi.m_treeView->setSortingEnabled( true );
+    m_fileViewUi.m_treeView->sortByColumn( 0, Qt::AscendingOrder );
+    m_fileViewUi.m_treeView->resizeColumnToContents( 0 );
+    m_fileViewUi.m_treeView->resizeColumnToContents( 1 );
+    QObject::connect( m_fileViewUi.m_treeView->selectionModel(),
+             SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
+             q, SLOT( enableFileViewActions() ) );
+    QObject::connect( m_fileViewUi.m_treeView, SIGNAL( activated( QModelIndex ) ),
+             q, SLOT( mapCenterOnTreeViewModel( QModelIndex ) ) );
+}
+
+void FileViewWidgetPrivate::setFileManager( FileManager *manager )
+{
+    m_fileManager = manager;
+    QObject::connect( m_fileViewUi.m_saveButton,  SIGNAL( clicked() ) ,
+             q, SLOT( saveFile() ) );
+    QObject::connect( m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
+             q, SLOT( closeFile() ) );
 }
 
 void FileViewWidgetPrivate::saveFile()
 {
     QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
-    GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
+    GeoDataObject *object
+        = qVariantValue<GeoDataObject*>( index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ) );
     GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
     if ( document ) {
         m_fileManager->saveFile( document );
@@ -92,7 +121,8 @@ void FileViewWidgetPrivate::saveFile()
 void FileViewWidgetPrivate::closeFile()
 {
     QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
-    GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
+    GeoDataObject *object
+        = qVariantValue<GeoDataObject*>( index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ) );
     GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
     if ( document ) {
         m_fileManager->closeFile( document );
@@ -104,7 +134,8 @@ void FileViewWidgetPrivate::enableFileViewActions()
     bool tmp = false;
     if ( !m_fileViewUi.m_treeView->selectionModel()->selectedRows().isEmpty() ) {
         QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
-        GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
+        GeoDataObject *object
+            = qVariantValue<GeoDataObject*>( index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ) );
         GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
         if ( document ) {
             tmp = document->documentRole() == Marble::UserDocument;
@@ -120,10 +151,11 @@ void FileViewWidget::mapCenterOnTreeViewModel( const QModelIndex &index )
         return;
     }
     GeoDataObject *object
-        = static_cast<GeoDataObject*>( index.internalPointer() );
+        = qVariantValue<GeoDataObject*>( index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ) );
     if ( dynamic_cast<GeoDataPlacemark*>(object) )
     {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
+        d->m_widget->model()->placemarkSelectionModel()->select( d->m_treeSortProxy.mapToSource( index ), QItemSelectionModel::ClearAndSelect );
         emit centerOn( *placemark, true );
     }
     else if ( dynamic_cast<GeoDataContainer*>(object) ) {
