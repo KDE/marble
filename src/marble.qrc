@@ -87,5 +87,8 @@
         <file>icons/clouds.png</file>
         <file>icons/atmosphere.png</file>
         <file>icons/copy-coordinates.png</file>
+        <file>icons/cache.png</file>
+        <file>icons/plugin.png</file>
+        <file>icons/transform-move.png</file>
     </qresource>
 </RCC>

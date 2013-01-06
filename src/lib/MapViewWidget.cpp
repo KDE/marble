@@ -563,12 +563,12 @@ void MapViewWidget::Private::showContextMenu( const QPoint& pos )
     QAction* iconSizeAction = menu.addAction( tr( "&Show Large Icons" ), q, SLOT( toggleIconSize() ) );
     iconSizeAction->setCheckable( true );
     iconSizeAction->setChecked( m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 96, 96 ) );
-    QAction *favAction = menu.addAction( tr( "&Favorite" ), q, SLOT( toggleFavorite() ) );
+    QAction *favAction = menu.addAction( QIcon( ":/icons/bookmarks.png" ), tr( "&Favorite" ), q, SLOT( toggleFavorite() ) );
     favAction->setCheckable( true );
     favAction->setChecked( isCurrentFavorite() );
     menu.addSeparator();
 
-    menu.addAction( "&Create a New Map...", q, SIGNAL( showMapWizard() ) );
+    menu.addAction( QIcon( ":/icons/create-new-map.png" ), tr("&Create a New Map..."), q, SIGNAL( showMapWizard() ) );
     if( QFileInfo( MarbleDirs::localPath() + "/maps/" + currentThemePath() ).exists() )
         menu.addAction( tr( "&Delete Map Theme" ), q, SLOT( deleteMap() ) );
     menu.addAction( tr( "&Upload Map..." ), q, SIGNAL( showUploadDialog() ) );
