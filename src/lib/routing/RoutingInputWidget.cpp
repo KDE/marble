@@ -449,7 +449,7 @@ void RoutingInputWidget::setBookmarkPosition( QAction* bookmark )
 
 void RoutingInputWidget::openTargetSelectionDialog()
 {
-    QPointer<GoToDialog> dialog = new GoToDialog( d->m_marbleWidget, this );
+    QPointer<GoToDialog> dialog = new GoToDialog( d->m_marbleModel, this );
     dialog->setWindowTitle( tr( "Choose Placemark" ) );
     dialog->setShowRoutingItems( false );
     dialog->setSearchEnabled( false );

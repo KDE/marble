@@ -35,7 +35,7 @@ namespace Marble
 class TargetModel : public QAbstractListModel
 {
 public:
-    TargetModel( MarbleWidget* marbleWidget, QObject * parent = 0 );
+    TargetModel( MarbleModel* marbleModel, QObject * parent = 0 );
 
     virtual int rowCount ( const QModelIndex & parent = QModelIndex() ) const;
 
@@ -54,7 +54,7 @@ private:
 
     QVector<GeoDataPlacemark> viaPoints() const;
 
-    MarbleWidget* m_marbleWidget;
+    MarbleModel *const m_marbleModel;
 
     QVector<GeoDataPlacemark*> m_bookmarks;
 
@@ -68,9 +68,9 @@ class GoToDialogPrivate : public Ui::GoTo
 public:
     GoToDialog* m_parent;
 
-    MarbleWidget* m_marbleWidget;
-
     GeoDataCoordinates m_coordinates;
+
+    MarbleModel *const m_marbleModel;
 
     TargetModel m_targetModel;
 
@@ -86,7 +86,7 @@ public:
 
     QVector<QIcon> m_progressAnimation;
 
-    GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget );
+    GoToDialogPrivate( GoToDialog* parent, MarbleModel* marbleModel );
 
     void saveSelection( const QModelIndex &index );
 
@@ -105,12 +105,13 @@ public:
     void updateResultMessage( int results );
 };
 
-TargetModel::TargetModel( MarbleWidget* marbleWidget, QObject * parent ) :
+TargetModel::TargetModel( MarbleModel *marbleModel, QObject * parent ) :
     QAbstractListModel( parent ),
-    m_marbleWidget( marbleWidget ), m_hasCurrentLocation( false ),
+    m_marbleModel( marbleModel ),
+    m_hasCurrentLocation( false ),
     m_showRoutingItems( true )
 {
-    BookmarkManager* manager = marbleWidget->model()->bookmarkManager();
+    BookmarkManager* manager = m_marbleModel->bookmarkManager();
     foreach( GeoDataFolder * folder, manager->folders() ) {
         QVector<GeoDataPlacemark*> bookmarks = folder->placemarkList();
         QVector<GeoDataPlacemark*>::const_iterator iter = bookmarks.constBegin();
@@ -121,7 +122,7 @@ TargetModel::TargetModel( MarbleWidget* marbleWidget, QObject * parent ) :
         }
     }
 
-    PositionTracking* tracking = m_marbleWidget->model()->positionTracking();
+    PositionTracking* tracking = m_marbleModel->positionTracking();
     m_hasCurrentLocation = tracking && tracking->status() == PositionProviderStatusAvailable;
 }
 
@@ -131,7 +132,7 @@ QVector<GeoDataPlacemark> TargetModel::viaPoints() const
         return QVector<GeoDataPlacemark>();
     }
 
-    RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();
+    RouteRequest* request = m_marbleModel->routingManager()->routeRequest();
     QVector<GeoDataPlacemark> result;
     for ( int i = 0; i < request->size(); ++i ) {
         if ( request->at( i ).longitude() != 0.0 || request->at( i ).latitude() != 0.0 ) {
@@ -160,7 +161,7 @@ int TargetModel::rowCount ( const QModelIndex & parent ) const
 
 QVariant TargetModel::currentLocationData ( int role ) const
 {
-    PositionTracking* tracking = m_marbleWidget->model()->positionTracking();
+    PositionTracking* tracking = m_marbleModel->positionTracking();
     if ( tracking && tracking->status() == PositionProviderStatusAvailable ) {
         GeoDataCoordinates currentLocation = tracking->currentLocation();
         switch( role ) {
@@ -177,7 +178,7 @@ QVariant TargetModel::currentLocationData ( int role ) const
 
 QVariant TargetModel::routeData ( const QVector<GeoDataPlacemark> &via, int index, int role ) const
 {
-    RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();
+    RouteRequest* request = m_marbleModel->routingManager()->routeRequest();
     switch( role ) {
     case Qt::DisplayRole: return via.at( index ).name();
     case Qt::DecorationRole: return QIcon( request->pixmap( index ) );
@@ -198,7 +199,7 @@ QVariant TargetModel::homeData ( int role ) const
     case MarblePlacemarkModel::CoordinateRole: {
         qreal lon( 0.0 ), lat( 0.0 );
         int zoom( 0 );
-        m_marbleWidget->model()->home( lon, lat, zoom );
+        m_marbleModel->home( lon, lat, zoom );
         const GeoDataCoordinates coordinates = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
         return qVariantFromValue( coordinates );
     }
@@ -290,11 +291,11 @@ void GoToDialogPrivate::createProgressAnimation()
     }
 }
 
-GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget ) :
+GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleModel* marbleModel ) :
     m_parent( parent),
-    m_marbleWidget( marbleWidget ),
-    m_targetModel( marbleWidget ),
-    m_runnerManager( marbleWidget->model()->pluginManager() ),
+    m_marbleModel( marbleModel ),
+    m_targetModel( marbleModel ),
+    m_runnerManager( marbleModel->pluginManager() ),
     m_searchResult( new GeoDataDocument ),
     m_currentFrame( 0 )
 {
@@ -344,8 +345,9 @@ void GoToDialogPrivate::updateSearchResult( QVector<GeoDataPlacemark*> placemark
     updateResultMessage( m_searchResultModel.rowCount() );
 }
 
-GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::WindowFlags flags ) :
-    QDialog( parent, flags ), d( new GoToDialogPrivate( this, marbleWidget ) )
+GoToDialog::GoToDialog( MarbleModel* marbleModel, QWidget * parent, Qt::WindowFlags flags ) :
+    QDialog( parent, flags ),
+    d( new GoToDialogPrivate( this, marbleModel ) )
 {
 #ifdef Q_WS_MAEMO_5
         setAttribute( Qt::WA_Maemo5StackedWindow );
@@ -374,7 +376,7 @@ GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::Window
     d->updateSearchMode();
     d->progressButton->setVisible( false );
 
-    d->m_runnerManager.setModel( marbleWidget->model() );
+    d->m_runnerManager.setModel( marbleModel );
     connect( &d->m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
              this, SLOT( updateSearchResult( QVector<GeoDataPlacemark*> ) ) );
     connect( &d->m_runnerManager, SIGNAL( searchFinished( QString ) ),

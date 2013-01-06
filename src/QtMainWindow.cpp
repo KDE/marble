@@ -1699,7 +1699,7 @@ void MainWindow::updateAtmosphereMenu()
 void MainWindow::showGoToDialog()
 {
     if ( !m_gotoDialog ) {
-        m_gotoDialog = new GoToDialog( m_controlView->marbleWidget(), this );
+        m_gotoDialog = new GoToDialog( m_controlView->marbleModel(), this );
     }
 
     m_gotoDialog->show();
