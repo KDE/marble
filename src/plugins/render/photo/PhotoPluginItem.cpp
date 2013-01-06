@@ -192,7 +192,7 @@ void PhotoPluginItem::openBrowser()
     if ( m_marbleWidget ) {
         MapInfoDialog* popup = m_marbleWidget->mapInfoDialog();
         popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
-        popup->setSize( QSizeF( 400, 450 ) );
+        popup->setSize( QSizeF( 700, 450 ) );
         popup->setUrl( QUrl( QString( "http://m.flickr.com/photos/%1/%2/" )
                                   .arg( owner() ).arg( id() ) ) );
         popup->setVisible( true );
