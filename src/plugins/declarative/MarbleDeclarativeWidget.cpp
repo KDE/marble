@@ -41,7 +41,7 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     m_navigation( 0 ), m_search( 0 ), m_interceptor( new ZoomButtonInterceptor( this, this ) )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
-    QSettings settings( "kde.org", "Marble Desktop Globe" );
+    QSettings settings;
     m_marbleWidget->readPluginSettings( settings );
     m_marbleWidget->model()->routingManager()->profilesModel()->loadDefaultProfiles();
     m_marbleWidget->model()->routingManager()->readSettings();
@@ -69,7 +69,7 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
 
 MarbleWidget::~MarbleWidget()
 {
-    QSettings settings( "kde.org", "Marble Desktop Globe" );
+    QSettings settings;
     m_marbleWidget->writePluginSettings( settings );
     m_marbleWidget->model()->routingManager()->writeSettings();
 }

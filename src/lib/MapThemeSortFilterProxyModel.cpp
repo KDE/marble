@@ -57,7 +57,7 @@ bool MapThemeSortFilterProxyModel::isFavorite( const QModelIndex& index ) const
     const QAbstractItemModel *model = index.model();
     QModelIndex columnIndex = model->index( index.row(), 0, QModelIndex() );
     QString const key = "Favorites/" + model->data( columnIndex ).toString();
-    return QSettings( "kde.org", "Marble Desktop Globe" ).contains( key );
+    return QSettings().contains( key );
 }
 
 QDateTime MapThemeSortFilterProxyModel::favoriteDateTime( const QModelIndex& index ) const
@@ -65,7 +65,7 @@ QDateTime MapThemeSortFilterProxyModel::favoriteDateTime( const QModelIndex& ind
     const QAbstractItemModel *model = index.model();
     QModelIndex columnIndex = model->index( index.row(), 0, QModelIndex() );
     QString const key = "Favorites/" + model->data( columnIndex ).toString();
-    return QSettings( "kde.org", "Marble Desktop Globe" ).value( key ).toDateTime();
+    return QSettings().value( key ).toDateTime();
 }
 
 }

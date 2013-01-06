@@ -112,7 +112,6 @@ class MapViewWidget::Private {
           m_mapSortProxy(),
           m_celestialList(),
           m_celestialListProxy(),
-          m_settings( "kde.org", "Marble Desktop Globe" ),
           m_toolBar( 0 )
     {
         m_celestialListProxy.setSourceModel(&m_celestialList);
@@ -651,7 +650,7 @@ void MapViewItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &
 
     int const padding = 5;
     QString const name = index.data().toString();
-    const bool isFavorite = QSettings( "kde.org", "Marble Desktop Globe" ).contains( "Favorites/" + name );
+    const bool isFavorite = QSettings().contains( "Favorites/" + name );
     QSize const bookmarkSize( 16, 16 );
     QRect bookmarkRect( iconRect.bottomRight(), bookmarkSize );
     bookmarkRect.translate( QPoint( -bookmarkSize.width() - padding, -bookmarkSize.height() - padding ) );

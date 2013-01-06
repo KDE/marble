@@ -1092,7 +1092,7 @@ void MainWindow::createToolBar()
 
 QString MainWindow::readMarbleDataPath()
 {
-     QSettings settings("kde.org", "Marble Desktop Globe");
+     QSettings settings;
 
      settings.beginGroup("MarbleWidget");
          QString marbleDataPath;
@@ -1104,7 +1104,7 @@ QString MainWindow::readMarbleDataPath()
 
 void MainWindow::readSettings(const QVariantMap& overrideSettings)
 {
-     QSettings settings("kde.org", "Marble Desktop Globe");
+     QSettings settings;
 
      settings.beginGroup("MainWindow");
          resize(settings.value("size", QSize(640, 480)).toSize());
@@ -1320,7 +1320,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
 
 void MainWindow::writeSettings()
 {
-     QSettings settings("kde.org", "Marble Desktop Globe");
+     QSettings settings;
 
      settings.beginGroup( "MainWindow" );
          settings.setValue( "size", size() );
@@ -1674,7 +1674,7 @@ void MainWindow::setupZoomButtons()
 void MainWindow::showMapWizard()
 {
     QPointer<MapWizard> mapWizard = new MapWizard();
-    QSettings settings("kde.org", "Marble Desktop Globe");
+    QSettings settings;
 
     settings.beginGroup( "MapWizard" );
         mapWizard->setWmsServers( settings.value( "wmsServers" ).toStringList() );

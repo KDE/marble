@@ -59,23 +59,13 @@ class QtMarbleConfigDialogPrivate
     {
     }
 
-    ~QtMarbleConfigDialogPrivate()
-    {
-        delete m_settings;
-    }
-
-    void initSettings()
-    {
-        m_settings = new QSettings("kde.org", "Marble Desktop Globe");
-    }
-
     Ui::MarbleViewSettingsWidget       ui_viewSettings;
     Ui::MarbleNavigationSettingsWidget ui_navigationSettings;
     Ui::MarbleTimeSettingsWidget       ui_timeSettings;
     MarbleCacheSettingsWidget          *w_cacheSettings;
     MarblePluginSettingsWidget         *w_pluginSettings;
 
-    QSettings *m_settings;
+    QSettings m_settings;
 
     MarbleWidget *const m_marbleWidget;
 
@@ -181,7 +171,6 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     connect( d->m_marbleWidget, SIGNAL( pluginSettingsChanged() ),
              this,              SLOT( writePluginSettings() ) );
     
-    d->initSettings();
     initializeCustomTimezone();
 }
 
@@ -192,7 +181,7 @@ QtMarbleConfigDialog::~QtMarbleConfigDialog()
 
 void QtMarbleConfigDialog::syncSettings()
 {
-    d->m_settings->sync();
+    d->m_settings.sync();
     
     QNetworkProxy proxy;
     
@@ -225,7 +214,7 @@ void QtMarbleConfigDialog::syncSettings()
 
 void QtMarbleConfigDialog::writePluginSettings()
 {
-    d->m_marbleWidget->writePluginSettings( *d->m_settings );
+    d->m_marbleWidget->writePluginSettings( d->m_settings );
 }
 
 void QtMarbleConfigDialog::readSettings()
@@ -311,11 +300,11 @@ void QtMarbleConfigDialog::readSettings()
     QList<QVariant> pluginEnabledList;
     QList<QVariant> pluginVisibleList;
     
-    d->m_settings->beginGroup( "Plugins" );
-        pluginNameIdList = d->m_settings->value( "pluginNameId" ).toList();
-        pluginEnabledList = d->m_settings->value( "pluginEnabled" ).toList();
-        pluginVisibleList = d->m_settings->value( "pluginVisible" ).toList();
-    d->m_settings->endGroup();
+    d->m_settings.beginGroup( "Plugins" );
+        pluginNameIdList = d->m_settings.value( "pluginNameId" ).toList();
+        pluginEnabledList = d->m_settings.value( "pluginEnabled" ).toList();
+        pluginVisibleList = d->m_settings.value( "pluginVisible" ).toList();
+    d->m_settings.endGroup();
         
     QHash<QString, int> pluginEnabled;
     QHash<QString, int> pluginVisible;
@@ -351,7 +340,7 @@ void QtMarbleConfigDialog::readSettings()
     }
 
     // Read the settings of the plugins
-    d->m_marbleWidget->readPluginSettings( *d->m_settings );
+    d->m_marbleWidget->readPluginSettings( d->m_settings );
 
     // The settings loaded in the config dialog have been changed.
     emit settingsChanged();
@@ -377,65 +366,65 @@ void QtMarbleConfigDialog::writeSettings()
             break;
     }
     
-    d->m_settings->beginGroup( "View" );
-    d->m_settings->setValue( "distanceUnit", d->ui_viewSettings.kcfg_distanceUnit->currentIndex() );
-    d->m_settings->setValue( "angleUnit", d->ui_viewSettings.kcfg_angleUnit->currentIndex() );
-    d->m_settings->setValue( "stillQuality", d->ui_viewSettings.kcfg_stillQuality->currentIndex() );
-    d->m_settings->setValue( "animationQuality", d->ui_viewSettings.kcfg_animationQuality->currentIndex() );
-    d->m_settings->setValue( "labelLocalization", d->ui_viewSettings.kcfg_labelLocalization->currentIndex() );
-    d->m_settings->setValue( "mapFont", d->ui_viewSettings.kcfg_mapFont->currentFont() );
-    d->m_settings->setValue( "graphicsSystem", graphicsSystemString );
-    d->m_settings->endGroup();
+    d->m_settings.beginGroup( "View" );
+    d->m_settings.setValue( "distanceUnit", d->ui_viewSettings.kcfg_distanceUnit->currentIndex() );
+    d->m_settings.setValue( "angleUnit", d->ui_viewSettings.kcfg_angleUnit->currentIndex() );
+    d->m_settings.setValue( "stillQuality", d->ui_viewSettings.kcfg_stillQuality->currentIndex() );
+    d->m_settings.setValue( "animationQuality", d->ui_viewSettings.kcfg_animationQuality->currentIndex() );
+    d->m_settings.setValue( "labelLocalization", d->ui_viewSettings.kcfg_labelLocalization->currentIndex() );
+    d->m_settings.setValue( "mapFont", d->ui_viewSettings.kcfg_mapFont->currentFont() );
+    d->m_settings.setValue( "graphicsSystem", graphicsSystemString );
+    d->m_settings.endGroup();
     
-    d->m_settings->beginGroup( "Navigation" );
-    d->m_settings->setValue( "dragLocation", d->ui_navigationSettings.kcfg_dragLocation->currentIndex() );
-    d->m_settings->setValue( "onStartup", d->ui_navigationSettings.kcfg_onStartup->currentIndex() );
+    d->m_settings.beginGroup( "Navigation" );
+    d->m_settings.setValue( "dragLocation", d->ui_navigationSettings.kcfg_dragLocation->currentIndex() );
+    d->m_settings.setValue( "onStartup", d->ui_navigationSettings.kcfg_onStartup->currentIndex() );
     if( d->ui_navigationSettings.kcfg_inertialEarthRotation->checkState() == Qt::Checked ) {
-        d->m_settings->setValue( "inertialEarthRotation", true );
+        d->m_settings.setValue( "inertialEarthRotation", true );
     } else {
-        d->m_settings->setValue( "inertialEarthRotation", false );
+        d->m_settings.setValue( "inertialEarthRotation", false );
     }
     if( d->ui_navigationSettings.kcfg_animateTargetVoyage->checkState() == Qt::Checked ) {
-        d->m_settings->setValue( "animateTargetVoyage", true );
+        d->m_settings.setValue( "animateTargetVoyage", true );
     } else {
-        d->m_settings->setValue( "animateTargetVoyage", false );
+        d->m_settings.setValue( "animateTargetVoyage", false );
     }
     if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 0 ) {
-        d->m_settings->setValue( "externalMapEditor", "" );
+        d->m_settings.setValue( "externalMapEditor", "" );
     } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 1 ) {
-        d->m_settings->setValue( "externalMapEditor", "potlatch" );
+        d->m_settings.setValue( "externalMapEditor", "potlatch" );
     } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 2 ) {
-        d->m_settings->setValue( "externalMapEditor", "josm" );
+        d->m_settings.setValue( "externalMapEditor", "josm" );
     } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 3 ) {
-        d->m_settings->setValue( "externalMapEditor", "merkaartor" );
+        d->m_settings.setValue( "externalMapEditor", "merkaartor" );
     } else {
         Q_ASSERT( false && "Unexpected index of the external editor setting" );
     }
-    d->m_settings->endGroup();
+    d->m_settings.endGroup();
     
-    d->m_settings->beginGroup( "Cache" );
-    d->m_settings->setValue( "volatileTileCacheLimit", d->w_cacheSettings->kcfg_volatileTileCacheLimit->value() );
-    d->m_settings->setValue( "persistentTileCacheLimit", d->w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
-    d->m_settings->setValue( "proxyUrl", d->w_cacheSettings->kcfg_proxyUrl->text() );
-    d->m_settings->setValue( "proxyPort", d->w_cacheSettings->kcfg_proxyPort->value() );
-    d->m_settings->setValue( "proxyType", d->w_cacheSettings->kcfg_proxyType->currentIndex() );
+    d->m_settings.beginGroup( "Cache" );
+    d->m_settings.setValue( "volatileTileCacheLimit", d->w_cacheSettings->kcfg_volatileTileCacheLimit->value() );
+    d->m_settings.setValue( "persistentTileCacheLimit", d->w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
+    d->m_settings.setValue( "proxyUrl", d->w_cacheSettings->kcfg_proxyUrl->text() );
+    d->m_settings.setValue( "proxyPort", d->w_cacheSettings->kcfg_proxyPort->value() );
+    d->m_settings.setValue( "proxyType", d->w_cacheSettings->kcfg_proxyType->currentIndex() );
     if ( d->w_cacheSettings->kcfg_proxyAuth->isChecked() ) {
-        d->m_settings->setValue( "proxyAuth", true );
-        d->m_settings->setValue( "proxyUser", d->w_cacheSettings->kcfg_proxyUser->text() );
-        d->m_settings->setValue( "proxyPass", d->w_cacheSettings->kcfg_proxyPass->text() );
+        d->m_settings.setValue( "proxyAuth", true );
+        d->m_settings.setValue( "proxyUser", d->w_cacheSettings->kcfg_proxyUser->text() );
+        d->m_settings.setValue( "proxyPass", d->w_cacheSettings->kcfg_proxyPass->text() );
     } else {
-        d->m_settings->setValue( "proxyAuth", false );
+        d->m_settings.setValue( "proxyAuth", false );
     }
-    d->m_settings->endGroup();
+    d->m_settings.endGroup();
 
-    d->m_settings->beginGroup( "Time" );
-    d->m_settings->setValue( "systemTimezone", d->ui_timeSettings.kcfg_systemTimezone->isChecked() );
-    d->m_settings->setValue( "UTC", d->ui_timeSettings.kcfg_utc->isChecked() );
-    d->m_settings->setValue( "customTimezone", d->ui_timeSettings.kcfg_customTimezone->isChecked() );
-    d->m_settings->setValue( "systemTime", d->ui_timeSettings.kcfg_systemTime->isChecked() );
-    d->m_settings->setValue( "lastSessionTime", d->ui_timeSettings.kcfg_lastSessionTime->isChecked() );
-    d->m_settings->setValue( "chosenTimezone", d->ui_timeSettings.kcfg_chosenTimezone->currentIndex() );
-    d->m_settings->endGroup();
+    d->m_settings.beginGroup( "Time" );
+    d->m_settings.setValue( "systemTimezone", d->ui_timeSettings.kcfg_systemTimezone->isChecked() );
+    d->m_settings.setValue( "UTC", d->ui_timeSettings.kcfg_utc->isChecked() );
+    d->m_settings.setValue( "customTimezone", d->ui_timeSettings.kcfg_customTimezone->isChecked() );
+    d->m_settings.setValue( "systemTime", d->ui_timeSettings.kcfg_systemTime->isChecked() );
+    d->m_settings.setValue( "lastSessionTime", d->ui_timeSettings.kcfg_lastSessionTime->isChecked() );
+    d->m_settings.setValue( "chosenTimezone", d->ui_timeSettings.kcfg_chosenTimezone->currentIndex() );
+    d->m_settings.endGroup();
 
     // Plugins
     QList<QVariant>   pluginEnabled;
@@ -451,11 +440,11 @@ void QtMarbleConfigDialog::writeSettings()
         pluginNameId  << (*i)->nameId();
     }
     
-    d->m_settings->beginGroup( "Plugins" );
-        d->m_settings->setValue( "pluginNameId", pluginNameId );
-        d->m_settings->setValue( "pluginEnabled", pluginEnabled );
-        d->m_settings->setValue( "pluginVisible", pluginVisible );
-    d->m_settings->endGroup();
+    d->m_settings.beginGroup( "Plugins" );
+        d->m_settings.setValue( "pluginNameId", pluginNameId );
+        d->m_settings.setValue( "pluginEnabled", pluginEnabled );
+        d->m_settings.setValue( "pluginVisible", pluginVisible );
+    d->m_settings.endGroup();
     
     emit settingsChanged();
 
@@ -471,8 +460,8 @@ void QtMarbleConfigDialog::writeSettings()
 
 QLocale::MeasurementSystem QtMarbleConfigDialog::measurementSystem() const
 {
-    if( d->m_settings->contains( "View/distanceUnit" ) ) {
-        return (QLocale::MeasurementSystem) d->m_settings->value( "View/distanceUnit" ).toInt();
+    if( d->m_settings.contains( "View/distanceUnit" ) ) {
+        return (QLocale::MeasurementSystem) d->m_settings.value( "View/distanceUnit" ).toInt();
     }
 
     MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
@@ -482,34 +471,34 @@ QLocale::MeasurementSystem QtMarbleConfigDialog::measurementSystem() const
 
 Marble::AngleUnit QtMarbleConfigDialog::angleUnit() const
 {
-    return (Marble::AngleUnit) d->m_settings->value( "View/angleUnit", Marble::DMSDegree ).toInt();
+    return (Marble::AngleUnit) d->m_settings.value( "View/angleUnit", Marble::DMSDegree ).toInt();
 }
 
 Marble::MapQuality QtMarbleConfigDialog::stillQuality() const
 {
-    return (Marble::MapQuality) d->m_settings->value( "View/stillQuality",
+    return (Marble::MapQuality) d->m_settings.value( "View/stillQuality",
                                 Marble::HighQuality ).toInt();
 }
 
 Marble::MapQuality QtMarbleConfigDialog::animationQuality() const
 {
-    return (Marble::MapQuality) d->m_settings->value( "View/animationQuality",
+    return (Marble::MapQuality) d->m_settings.value( "View/animationQuality",
                                 Marble::LowQuality ).toInt();
 }
 
 int QtMarbleConfigDialog::labelLocalization() const
 {
-    return d->m_settings->value( "View/labelLocalization" , Marble::Native ).toInt();
+    return d->m_settings.value( "View/labelLocalization" , Marble::Native ).toInt();
 }
 
 QFont QtMarbleConfigDialog::mapFont() const
 {
-    return d->m_settings->value( "View/mapFont", QApplication::font() ).value<QFont>();
+    return d->m_settings.value( "View/mapFont", QApplication::font() ).value<QFont>();
 }
 
 Marble::GraphicsSystem QtMarbleConfigDialog::graphicsSystem() const
 {
-    QString graphicsSystemString = d->m_settings->value( "View/graphicsSystem", "raster" ).toString();
+    QString graphicsSystemString = d->m_settings.value( "View/graphicsSystem", "raster" ).toString();
 
     if ( graphicsSystemString == "raster" ) return Marble::RasterGraphics;
     if ( graphicsSystemString == "opengl" ) return Marble::OpenGLGraphics;
@@ -520,100 +509,100 @@ Marble::GraphicsSystem QtMarbleConfigDialog::graphicsSystem() const
 
 int QtMarbleConfigDialog::dragLocation() const
 {
-    return d->m_settings->value( "Navigation/dragLocation", Marble::KeepAxisVertically ).toInt();
+    return d->m_settings.value( "Navigation/dragLocation", Marble::KeepAxisVertically ).toInt();
 }
 
 int QtMarbleConfigDialog::onStartup() const
 {
     bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     int defaultValue = smallScreen ? Marble::LastLocationVisited : Marble::ShowHomeLocation;
-    return d->m_settings->value( "Navigation/onStartup", defaultValue ).toInt();
+    return d->m_settings.value( "Navigation/onStartup", defaultValue ).toInt();
 }
 
 QString QtMarbleConfigDialog::externalMapEditor() const
 {
-    return d->m_settings->value( "Navigation/externalMapEditor", "" ).toString();
+    return d->m_settings.value( "Navigation/externalMapEditor", "" ).toString();
 }
 
 bool QtMarbleConfigDialog::animateTargetVoyage() const
 {
-    return d->m_settings->value( "Navigation/animateTargetVoyage", false ).toBool();
+    return d->m_settings.value( "Navigation/animateTargetVoyage", false ).toBool();
 }
 
 bool QtMarbleConfigDialog::inertialEarthRotation() const
 {
-    return d->m_settings->value( "Navigation/inertialEarthRotation", true ).toBool();
+    return d->m_settings.value( "Navigation/inertialEarthRotation", true ).toBool();
 }
 
 int QtMarbleConfigDialog::volatileTileCacheLimit() const
 {
     int defaultValue = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 6 : 100;
-    return d->m_settings->value( "Cache/volatileTileCacheLimit", defaultValue ).toInt();
+    return d->m_settings.value( "Cache/volatileTileCacheLimit", defaultValue ).toInt();
 }
 
 int QtMarbleConfigDialog::persistentTileCacheLimit() const
 {
-    return d->m_settings->value( "Cache/persistentTileCacheLimit", 0 ).toInt(); // default to unlimited
+    return d->m_settings.value( "Cache/persistentTileCacheLimit", 0 ).toInt(); // default to unlimited
 }
 
 QString QtMarbleConfigDialog::proxyUrl() const
 {
-    return d->m_settings->value( "Cache/proxyUrl", "" ).toString();
+    return d->m_settings.value( "Cache/proxyUrl", "" ).toString();
 }
 
 int QtMarbleConfigDialog::proxyPort() const
 {
-    return d->m_settings->value( "Cache/proxyPort", 8080 ).toInt();
+    return d->m_settings.value( "Cache/proxyPort", 8080 ).toInt();
 }
 
 QString QtMarbleConfigDialog::proxyUser() const
 {
-    return d->m_settings->value( "Cache/proxyUser", "" ).toString();
+    return d->m_settings.value( "Cache/proxyUser", "" ).toString();
 }
 
 QString QtMarbleConfigDialog::proxyPass() const
 {
-    return d->m_settings->value( "Cache/proxyPass", "" ).toString();
+    return d->m_settings.value( "Cache/proxyPass", "" ).toString();
 }
 
 bool QtMarbleConfigDialog::proxyType() const
 {
-    return d->m_settings->value( "Cache/proxyType", Marble::HttpProxy ).toInt();
+    return d->m_settings.value( "Cache/proxyType", Marble::HttpProxy ).toInt();
 }
 
 bool QtMarbleConfigDialog::proxyAuth() const
 {
-    return d->m_settings->value( "Cache/proxyAuth", false ).toBool();
+    return d->m_settings.value( "Cache/proxyAuth", false ).toBool();
 }
 
 bool QtMarbleConfigDialog::systemTimezone() const
 {
-    return d->m_settings->value( "Time/systemTimezone", true ).toBool();
+    return d->m_settings.value( "Time/systemTimezone", true ).toBool();
 }
 
 bool QtMarbleConfigDialog::customTimezone() const
 {
-    return d->m_settings->value( "Time/customTimezone", false ).toBool();
+    return d->m_settings.value( "Time/customTimezone", false ).toBool();
 }
 
 bool QtMarbleConfigDialog::UTC() const
 {
-    return d->m_settings->value( "Time/UTC", false ).toBool();
+    return d->m_settings.value( "Time/UTC", false ).toBool();
 }
 
 bool QtMarbleConfigDialog::systemTime() const
 {
-    return d->m_settings->value( "Time/systemTime", true ).toBool();
+    return d->m_settings.value( "Time/systemTime", true ).toBool();
 }
 
 bool QtMarbleConfigDialog::lastSessionTime() const
 {
-    return d->m_settings->value( "Time/lastSessionTime", false ).toBool();
+    return d->m_settings.value( "Time/lastSessionTime", false ).toBool();
 }
     
 int QtMarbleConfigDialog::chosenTimezone() const
 {
-    return d->m_settings->value( "Time/chosenTimezone", 0 ).toInt();
+    return d->m_settings.value( "Time/chosenTimezone", 0 ).toInt();
 }
 
 void QtMarbleConfigDialog::initializeCustomTimezone()

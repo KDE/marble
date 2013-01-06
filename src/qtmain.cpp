@@ -42,12 +42,14 @@ int main(int argc, char *argv[])
     // The GraphicsSystem needs to be set before the instantiation of the
     // QApplication. Therefore we need to parse the current setting 
     // in this unusual place :-/
-    QSettings * graphicsSettings = new QSettings("kde.org", "Marble Desktop Globe");
-    QString graphicsString = graphicsSettings->value("View/graphicsSystem", "raster").toString();
-    delete graphicsSettings;
+    QSettings graphicsSettings("KDE", "Marble Virtual Globe"); // keep the parameters here
+    QString const graphicsString = graphicsSettings.value("View/graphicsSystem", "raster").toString();
     QApplication::setGraphicsSystem( graphicsString );
 
     QApplication app(argc, argv);
+    app.setApplicationName( "Marble Virtual Globe" );
+    app.setOrganizationName( "KDE" );
+    app.setOrganizationDomain( "kde.org" );
     // Widget translation
 
 #ifdef Q_WS_MAEMO_5
