@@ -535,7 +535,6 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
         QDate date = forecast.dataDate();
         html.replace(QLatin1String("%day_f")+suffix+'%', locale.standaloneDayName(date.dayOfWeek()));
         html.replace(QLatin1String("%weather_situation_f")+suffix+'%', "file://"+forecast.iconSource());
-        qDebug() << "%weather_situation_"+suffix+"%" << "file://"+forecast.iconSource();
         html.replace(QLatin1String("%max_temp_f")+suffix+'%',
                       forecast.maxTemperatureString(WeatherData::Celsius));
         html.replace(QLatin1String("%min_temp_f")+suffix+'%',
