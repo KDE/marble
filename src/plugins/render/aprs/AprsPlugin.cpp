@@ -60,7 +60,7 @@ AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
       ui_configWidget( 0 )
 {
     setEnabled( true );
-    setVisible( true );
+    setVisible( false );
     
     setSettings( QHash<QString,QVariant>() );
 
