@@ -231,35 +231,35 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
 	    painter->drawLine( m_leftBarMargin + j * m_pixelInterval + 1, fontHeight + 4,
 			       m_leftBarMargin + (j + 1) * m_pixelInterval - 1, fontHeight + 4 );
 	    painter->setPen(   QColor( Qt::black ) );
+        }
 
-            QLocale::MeasurementSystem distanceUnit;
-            distanceUnit = MarbleGlobal::getInstance()->locale()->measurementSystem();
+        QLocale::MeasurementSystem distanceUnit;
+        distanceUnit = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-            switch ( distanceUnit ) {
-            case QLocale::MetricSystem:
-                if ( m_bestDivisor * m_valueInterval > 10000 ) {
-                    m_unit = tr("km");
-                    intervalStr.setNum( j * m_valueInterval / 1000 );
-                }
-                else {
-                    m_unit = tr("m");
-                    intervalStr.setNum( j * m_valueInterval );
-                }
-                break;
-
-            case QLocale::ImperialSystem:
-                m_unit = tr("mi");
+        switch ( distanceUnit ) {
+        case QLocale::MetricSystem:
+            if ( m_bestDivisor * m_valueInterval > 10000 ) {
+                m_unit = tr("km");
                 intervalStr.setNum( j * m_valueInterval / 1000 );
-
-                if ( m_bestDivisor * m_valueInterval > 3800 ) {
-                    intervalStr.setNum( j * m_valueInterval / 1000 );
-                }
-                else {
-                    intervalStr.setNum( qreal(j * m_valueInterval ) / 1000.0, 'f', 2 );
-                }
-                break;
             }
-	}
+            else {
+                m_unit = tr("m");
+                intervalStr.setNum( j * m_valueInterval );
+            }
+            break;
+
+        case QLocale::ImperialSystem:
+            m_unit = tr("mi");
+            intervalStr.setNum( j * m_valueInterval / 1000 );
+
+            if ( m_bestDivisor * m_valueInterval > 3800 ) {
+                intervalStr.setNum( j * m_valueInterval / 1000 );
+            }
+            else {
+                intervalStr.setNum( qreal(j * m_valueInterval ) / 1000.0, 'f', 2 );
+            }
+            break;
+        }
 
         painter->setFont( font() );
 
