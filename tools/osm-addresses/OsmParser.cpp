@@ -236,11 +236,13 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
     qWarning() << "Step 2: " << m_coordinates.size() << "coordinates."
                << "Now extracting regions from" << m_relations.size() << "relations";
 
-    foreach( const Relation & relation, m_relations.values() ) {
-        if ( relation.isAdministrativeBoundary /*&& relation.isMultipolygon*/ ) {
-            importMultipolygon( relation );
-            if ( !relation.relations.isEmpty() ) {
-                qDebug() << "Ignoring relations inside the relation " << relation.name;
+    QHash<int, Relation>::iterator itpoint = m_relations.begin();
+    QHash<int, Relation>::iterator const endpoint = m_relations.end();
+    for(; itpoint != endpoint; ++itpoint ) {
+        if ( itpoint.value().isAdministrativeBoundary /*&& relation.isMultipolygon*/ ) {
+            importMultipolygon( itpoint.value() );
+            if ( !itpoint.value().relations.isEmpty() ) {
+                qDebug() << "Ignoring relations inside the relation " << itpoint.value().name;
             }
         }
     }

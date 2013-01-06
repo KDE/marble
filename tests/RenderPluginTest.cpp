@@ -68,9 +68,12 @@ void RenderPluginTest::restoreDefaultSettings_data()
         expected->initialize();
         expected->restoreDefaultSettings();
 
-        foreach ( const QString &key, expected->settings().keys() ) {
-            const QString testName = QString( "%1 %2" ).arg( plugin->nameId() ).arg( key );
-            QTest::newRow( testName.toAscii() ) << result->settings().value( key ) << expected->settings().value( key );
+        QHash<QString, QVariant> const & settings = expected->settings();
+        QHash<QString, QVariant>::const_iterator itpoint = settings.begin();
+        QHash<QString, QVariant>::const_iterator const endpoint = settings.end();
+        for (; itpoint != endpoint; ++itpoint ) {
+            const QString testName = QString( "%1 %2" ).arg( plugin->nameId() ).arg( itpoint.key() );
+            QTest::newRow( testName.toAscii() ) << result->settings().value( itpoint.key() ) << expected->settings().value( itpoint.key() );
         }
     }
 }

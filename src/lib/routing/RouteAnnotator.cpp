@@ -123,8 +123,10 @@ void RouteAnnotator::retrieveGeocodeResult( const GeoDataCoordinates &coordinate
             ++counter[extended.value("road").value().toString()];
         }
 
-        foreach( const QString &key, counter.keys() ) {
-            if ( counter[key] > 1 ) {
+        QMap<QString,int>::iterator itpoint = counter.begin();
+        QMap<QString,int>::iterator const endpoint = counter.end();
+        for (; itpoint != endpoint; ++itpoint ) {
+            if ( counter[itpoint.key()] > 1 ) {
                 GeoDataExtendedData extended = d->m_placemarks.first().extendedData();
                 QString name = "Via %1";
                 d->m_route->setName( name.arg( extended.value("road").value().toString() ) );

@@ -52,11 +52,9 @@ void TestGeoDataWriter::initTestCase()
     dataDir.cd( "data" );
     //check there are files in the data dir
     QVERIFY( dataDir.count() > 0 );
-    
-    QString filename;
 
     //test the loading of each file in the data dir
-    foreach( filename, dataDir.entryList(filters, QDir::Files) ){
+    foreach( const QString &filename, dataDir.entryList(filters, QDir::Files) ){
 
         //Add example files
         QFile file( dataDir.filePath(filename));
@@ -202,8 +200,10 @@ void TestGeoDataWriter::saveAndCompare()
 
 void TestGeoDataWriter::cleanupTestCase()
 {
-    foreach (const QSharedPointer<GeoDataParser> &parser, parsers.values()) {
-        delete parser->releaseDocument();
+    QMap<QString, QSharedPointer<GeoDataParser> >::iterator itpoint = parsers.begin();
+    QMap<QString, QSharedPointer<GeoDataParser> >::iterator const endpoint = parsers.end();
+    for (; itpoint != endpoint; ++itpoint ) {
+        delete itpoint.value()->releaseDocument();
     }
 }
 

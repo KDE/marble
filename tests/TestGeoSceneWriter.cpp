@@ -106,8 +106,10 @@ void TestGeoSceneWriter::saveFile_data()
 {
     QTest::addColumn<QSharedPointer<GeoSceneParser> >( "parser" );
 
-    foreach( const QString &key, parsers.keys() ) {
-        QTest::newRow( key.toLocal8Bit() ) << parsers.value(key);
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator itpoint = parsers.begin();
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator const endpoint = parsers.end();
+    for (; itpoint != endpoint; ++itpoint ) {
+        QTest::newRow( itpoint.key().toLocal8Bit() ) << itpoint.value();
     }
 }
 
@@ -131,8 +133,10 @@ void TestGeoSceneWriter::saveAndLoad_data()
 {
     QTest::addColumn<QSharedPointer<GeoSceneParser> >( "parser" );
 
-    foreach( const QString &key, parsers.keys() ) {
-        QTest::newRow( key.toLocal8Bit() ) << parsers.value(key);
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator itpoint = parsers.begin();
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator const endpoint = parsers.end();
+    for (; itpoint != endpoint; ++itpoint ) {
+        QTest::newRow( itpoint.key().toLocal8Bit() ) << itpoint.value();
     }
 }
 
@@ -161,8 +165,10 @@ void TestGeoSceneWriter::saveAndCompare_data()
     QTest::addColumn<QSharedPointer<GeoSceneParser> >("parser");
     QTest::addColumn<QString>("original");
 
-    foreach( const QString &key, parsers.keys() ) {
-        QTest::newRow( key.toLocal8Bit() ) << parsers.value(key) << key;
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator itpoint = parsers.begin();
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator const endpoint = parsers.end();
+    for (; itpoint != endpoint; ++itpoint ) {
+        QTest::newRow( itpoint.key().toLocal8Bit() ) << itpoint.value() << itpoint.key();
     }
 }
 

@@ -154,9 +154,11 @@ void FileManager::saveFile( GeoDataDocument *document )
 
 void FileManager::closeFile( GeoDataDocument *document )
 {
-    foreach( QString key, d->m_fileItemHash.keys() ) {
-        if( d->m_fileItemHash.value( key ) == document ) {
-            d->closeFile( key );
+    QHash < QString, GeoDataDocument* >::iterator itpoint = d->m_fileItemHash.begin();
+    QHash < QString, GeoDataDocument* >::iterator const endpoint = d->m_fileItemHash.end();
+    for (; itpoint != endpoint; ++itpoint ) {
+        if( d->m_fileItemHash.value( itpoint.key() ) == document ) {
+            d->closeFile( itpoint.key() );
             return;
         }
     }
