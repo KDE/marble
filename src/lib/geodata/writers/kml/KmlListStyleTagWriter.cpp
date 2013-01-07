@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Mayank Madan <maddiemadan@gmail.com>
+// Copyright 2013      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
 #include "KmlListStyleTagWriter.h"
@@ -30,69 +31,57 @@ bool KmlListStyleTagWriter::write( const GeoNode *node,
     const GeoDataListStyle *listStyle = static_cast<const GeoDataListStyle*>( node );
     writer.writeStartElement( kml::kmlTag_ListStyle );
 
-    QString listItemTypeString;
-    switch (listStyle->listItemType())
-    {
-    case GeoDataListStyle::CheckOffOnly:
-        listItemTypeString = "checkOffOnly";
-        break;
+    QString const itemType = itemTypeToString( listStyle->listItemType() );
+    writer.writeOptionalElement( kml::kmlTag_listItemType, itemType, "check" );
+    QString const color = KmlColorStyleTagWriter::formatColor( listStyle->backgroundColor() );
+    writer.writeOptionalElement( kml::kmlTag_bgColor, color, "ffffffff" );
 
-    case GeoDataListStyle::CheckHideChildren:
-        listItemTypeString = "checkHideChildren";
-        break;
-
-    case GeoDataListStyle::RadioFolder:
-        listItemTypeString = "radioFolder";
-        break;
-
-    default:
-        listItemTypeString = "check";
-    }
-    writer.writeStartElement(kml::kmlTag_listItemType);
-    writer.writeCharacters(listItemTypeString);
-    writer.writeEndElement();
-
-    writer.writeStartElement(kml::kmlTag_bgColor);
-    writer.writeCharacters( KmlColorStyleTagWriter::formatColor( listStyle->backgroundColor() ) );
-    writer.writeEndElement();
-
-    foreach( GeoDataItemIcon* icon, listStyle->itemIconList() )
-    {
+    foreach( GeoDataItemIcon* icon, listStyle->itemIconList() ) {
         writer.writeStartElement(kml::kmlTag_ItemIcon);
-
-        QStringList stateList;
-        if ( icon->state() & GeoDataItemIcon::Open ) {
-            stateList << "open";
-        }
-        if ( icon->state() & GeoDataItemIcon::Closed ) {
-            stateList << "closed";
-        }
-        if ( icon->state() & GeoDataItemIcon::Error ) {
-            stateList << "error";
-        }
-        if ( icon->state() & GeoDataItemIcon::Fetching0 ) {
-            stateList << "fetching0";
-        }
-        if ( icon->state() & GeoDataItemIcon::Fetching1 ) {
-            stateList << "fetching1";
-        }
-        if ( icon->state() & GeoDataItemIcon::Fetching2 ) {
-            stateList << "fetching2";
-        }
-        QString const states = stateList.join(" ");
-        writer.writeStartElement(kml::kmlTag_state);
-        writer.writeCharacters( states );
-        writer.writeEndElement();
-
-        writer.writeStartElement(kml::kmlTag_href);
-        writer.writeCharacters( icon->iconPath() );
-        writer.writeEndElement();
-
+        QString const state = iconStateToString( icon->state() );
+        writer.writeOptionalElement( kml::kmlTag_state, state, "open" );
+        writer.writeOptionalElement( kml::kmlTag_href, icon->iconPath() );
         writer.writeEndElement();
     }
 
     writer.writeEndElement();
     return true;
+}
+
+QString KmlListStyleTagWriter::itemTypeToString( GeoDataListStyle::ListItemType itemType ) const
+{
+    switch ( itemType )
+    {
+    case GeoDataListStyle::CheckOffOnly:      return "checkOffOnly";
+    case GeoDataListStyle::CheckHideChildren: return "checkHideChildren";
+    case GeoDataListStyle::RadioFolder:       return "radioFolder";
+    default:                                  return "check";
+    }
+}
+
+QString KmlListStyleTagWriter::iconStateToString( GeoDataItemIcon::ItemIconStates state ) const
+{
+    QStringList stateList;
+    if ( state & GeoDataItemIcon::Open ) {
+        stateList << "open";
+    }
+    if ( state & GeoDataItemIcon::Closed ) {
+        stateList << "closed";
+    }
+    if ( state & GeoDataItemIcon::Error ) {
+        stateList << "error";
+    }
+    if ( state & GeoDataItemIcon::Fetching0 ) {
+        stateList << "fetching0";
+    }
+    if ( state & GeoDataItemIcon::Fetching1 ) {
+        stateList << "fetching1";
+    }
+    if ( state & GeoDataItemIcon::Fetching2 ) {
+        stateList << "fetching2";
+    }
+
+    return stateList.join(" ");
 }
 
 }

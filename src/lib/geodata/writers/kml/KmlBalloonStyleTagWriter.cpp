@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Mayank Madan <maddiemadan@gmail.com>
+// Copyright 2013      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
 #include "KmlBalloonStyleTagWriter.h"
@@ -27,37 +28,24 @@ bool KmlBalloonStyleTagWriter::write( const GeoNode *node,
                                GeoWriter& writer ) const
 {
     const GeoDataBalloonStyle *balloonStyle = static_cast<const GeoDataBalloonStyle*>( node );
-
     writer.writeStartElement( kml::kmlTag_BalloonStyle );
 
-    writer.writeStartElement( kml::kmlTag_textColor );
-    writer.writeCharacters( KmlColorStyleTagWriter::formatColor( balloonStyle->textColor() ) );
-    writer.writeEndElement();
+    QString const textColor = KmlColorStyleTagWriter::formatColor( balloonStyle->textColor() );
+    writer.writeOptionalElement( kml::kmlTag_textColor, textColor, "ff000000" );
+    QString const backgroundColor = KmlColorStyleTagWriter::formatColor( balloonStyle->backgroundColor() );
+    writer.writeOptionalElement( kml::kmlTag_bgColor, backgroundColor, "ffffffff" );
 
-    writer.writeStartElement( kml::kmlTag_bgColor );
-    writer.writeCharacters( KmlColorStyleTagWriter::formatColor( balloonStyle->backgroundColor() ) );
-    writer.writeEndElement();
-
-    QString textString;
-    textString = balloonStyle->text();
-    writer.writeStartElement( kml::kmlTag_text );
-    writer.writeCharacters(textString);
-    writer.writeEndElement();
-
-    QString displayModeString;
-    switch ( balloonStyle->displayMode() )
-    {
-        case GeoDataBalloonStyle::Hide:
-        displayModeString = "hide";
-        break;
-
-        default:
-        displayModeString = "default";
+    QString const textString = balloonStyle->text();
+    if ( textString.contains( QRegExp( "[<>&]" ) ) ) {
+        writer.writeStartElement( kml::kmlTag_text );
+        writer.writeCDATA( textString );
+        writer.writeEndElement();
+    } else {
+        writer.writeOptionalElement( kml::kmlTag_text, textString );
     }
 
-    writer.writeStartElement( kml::kmlTag_displayMode );
-    writer.writeCharacters( displayModeString );
-    writer.writeEndElement();
+    QString const displayMode = balloonStyle->displayMode() == GeoDataBalloonStyle::Hide ? "hide" : "default";
+    writer.writeOptionalElement( kml::kmlTag_displayMode, displayMode );
 
     writer.writeEndElement();
     return true;

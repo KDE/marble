@@ -12,6 +12,7 @@
 #define MARBLE_KMLLISTSTYLETAGWRITER_H
 
 #include "GeoTagWriter.h"
+#include "GeoDataListStyle.h"
 
 namespace Marble
 {
@@ -20,6 +21,10 @@ class KmlListStyleTagWriter : public GeoTagWriter
 {
 public:
     virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+
+private:
+    QString itemTypeToString( GeoDataListStyle::ListItemType itemType ) const;
+    QString iconStateToString( GeoDataItemIcon::ItemIconStates state ) const;
 };
 
 }
