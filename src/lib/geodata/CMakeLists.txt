@@ -105,7 +105,8 @@ geodata/handlers/kml/KmlWhenTagHandler.cpp
 geodata/handlers/kml/KmlWidthTagHandler.cpp
 )
 
-SET ( geodata_writers_kml_SRCS 
+SET ( geodata_writers_kml_SRCS
+geodata/writers/kml/KmlBalloonStyleTagWriter.cpp
 geodata/writers/kml/KmlColorStyleTagWriter.cpp
 geodata/writers/kml/KmlDataTagWriter.cpp
 geodata/writers/kml/KmlDocumentTagWriter.cpp
@@ -117,6 +118,7 @@ geodata/writers/kml/KmlLatLonBoxWriter.cpp
 geodata/writers/kml/KmlLinearRingTagWriter.cpp
 geodata/writers/kml/KmlLineStringTagWriter.cpp
 geodata/writers/kml/KmlLineStyleTagWriter.cpp
+geodata/writers/kml/KmlListStyleTagWriter.cpp
 geodata/writers/kml/KmlLookAtTagWriter.cpp
 geodata/writers/kml/KmlMultiGeometryTagWriter.cpp
 geodata/writers/kml/KmlMultiTrackTagWriter.cpp
