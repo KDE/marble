@@ -950,17 +950,9 @@ void MarbleWidget::setShowCityLights( bool visible )
 
 void MarbleWidget::setLockToSubSolarPoint( bool visible )
 {
-    disconnect( d->m_model.sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
-                this,                    SLOT( centerOn( qreal, qreal ) ) );
-
     if ( d->m_map.isLockedToSubSolarPoint() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
         d->m_map.setLockToSubSolarPoint( visible );
         setInputEnabled( !d->m_map.isLockedToSubSolarPoint() );
-    }
-
-    if ( d->m_map.isLockedToSubSolarPoint() ) {
-        connect( d->m_model.sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
-                 this,                    SLOT( centerOn( qreal, qreal ) ) );
     }
 }
 
