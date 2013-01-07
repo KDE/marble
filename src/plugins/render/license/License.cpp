@@ -132,29 +132,34 @@ QIcon License::icon () const
 
 void License::initialize ()
 {
+    m_widgetItem = new WidgetGraphicsItem( this );
+    m_label = new QLabel;
+    m_label->setStyle( new OutlinedStyle );
+    m_label->setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed );
+    m_widgetItem->setWidget( m_label );
+
+    MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
+    layout->addItem( m_widgetItem, 0, 0 );
+    setLayout( layout );
+    setPadding( 0 );
+
     updateLicenseText();
     connect( marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateLicenseText()) );
 }
 
 void License::updateLicenseText()
 {
-    const bool firstRun = ( m_label == 0 );
-    if( firstRun ) {
-        m_widgetItem = new WidgetGraphicsItem( this );
-        m_label = new QLabel;
-        m_label->setStyle( new OutlinedStyle );
-        m_label->setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed );
-    }
+    const GeoSceneDocument *const mapTheme = marbleModel()->mapTheme();
+    if ( !mapTheme )
+        return;
+
+    const GeoSceneHead *const head = mapTheme->head();
+    if ( !head )
+        return;
+
     const GeoSceneLicense *license = marbleModel()->mapTheme()->head()->license();
     m_label->setText( m_showFullLicense ? license->license() : license->shortLicense() );
     m_label->setToolTip( license->license() );
-    m_widgetItem->setWidget( m_label );
-    if( firstRun ) {
-        MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
-        layout->addItem( m_widgetItem, 0, 0 );
-        setLayout( layout );
-        setPadding( 0 );
-    }
     if( license->attribution() == GeoSceneLicense::Always ) {
         setUserCheckable( false );
     } else if( license->attribution() == GeoSceneLicense::Never ) {
