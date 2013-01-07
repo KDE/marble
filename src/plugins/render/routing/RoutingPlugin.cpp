@@ -567,7 +567,13 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
 
 QHash<QString,QVariant> RoutingPlugin::settings() const
 {
-    return d->m_settings;
+    QHash<QString, QVariant> result = AbstractFloatItem::settings();
+
+    foreach ( const QString &key, d->m_settings.keys() ) {
+        result.insert( key, d->m_settings[key] );
+    }
+
+    return result;
 }
 
 void RoutingPlugin::setSettings( const QHash<QString,QVariant> &settings )

@@ -297,7 +297,13 @@ void OverviewMap::paintContent( QPainter *painter )
 
 QHash<QString,QVariant> OverviewMap::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> result = AbstractFloatItem::settings();
+
+    foreach ( const QString &key, m_settings.keys() ) {
+        result.insert( key, m_settings[key] );
+    }
+
+    return result;
 }
 
 void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
