@@ -67,6 +67,8 @@ public:
      */
     void updateMapThemeModel();
 
+    void watchPaths();
+
     /**
      * @brief Adds directory paths and .dgml file paths to the given QStringList.
      */
@@ -86,12 +88,6 @@ public:
     static GeoSceneDocument* loadMapThemeFile( const QString& mapThemeId );
 
     /**
-     * @brief Returns all directory paths and .dgml file paths below local and
-     *        system map directory.
-     */
-    static QStringList pathsToWatch();
-
-    /**
      * @brief Helper method for updateMapThemeModel().
      */
     QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
@@ -104,6 +100,13 @@ public:
     StandardItemModelWithRoleNames m_mapThemeModel;
     QFileSystemWatcher m_fileSystemWatcher;
     bool m_isInitialized;
+
+private:
+    /**
+     * @brief Returns all directory paths and .dgml file paths below local and
+     *        system map directory.
+     */
+    QStringList pathsToWatch();
 };
 
 StandardItemModelWithRoleNames::StandardItemModelWithRoleNames( int rows, int columns, QObject *parent ) :
@@ -138,8 +141,7 @@ MapThemeManager::MapThemeManager( QObject *parent )
     : QObject( parent ),
       d( new Private( this ) )
 {
-    const QStringList paths = d->pathsToWatch();
-    d->m_fileSystemWatcher.addPaths( paths );
+    d->watchPaths();
     connect( &d->m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
              this, SLOT( directoryChanged( const QString& )));
     connect( &d->m_fileSystemWatcher, SIGNAL( fileChanged( const QString& )),
@@ -391,12 +393,24 @@ void MapThemeManager::Private::updateMapThemeModel()
     }
 }
 
+void MapThemeManager::Private::watchPaths()
+{
+    QStringList const paths = pathsToWatch();
+    QStringList const files = m_fileSystemWatcher.files();
+    QStringList const directories = m_fileSystemWatcher.directories();
+    // Check each resource to add that it is not being watched already,
+    // otherwise some qWarning appears
+    foreach( const QString &resource, paths ) {
+        if ( !directories.contains( resource ) && !files.contains( resource ) ) {
+            m_fileSystemWatcher.addPath( resource );
+        }
+    }
+}
+
 void MapThemeManager::Private::directoryChanged( const QString& path )
 {
     mDebug() << "directoryChanged:" << path;
-
-    QStringList paths = Private::pathsToWatch();
-    m_fileSystemWatcher.addPaths( paths );
+    watchPaths();
 
     mDebug() << "Emitting themesChanged()";
     emit q->themesChanged();

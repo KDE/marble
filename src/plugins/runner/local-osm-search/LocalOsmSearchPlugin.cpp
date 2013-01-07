@@ -24,7 +24,10 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
 
-    m_watcher.addPath( MarbleDirs::localPath() + "/maps/earth/placemarks/" );
+    QString const path = MarbleDirs::localPath() + "/maps/earth/placemarks/";
+    if ( !m_watcher.directories().contains( path ) ) {
+        m_watcher.addPath( path );
+    }
     connect( &m_watcher, SIGNAL( directoryChanged( QString ) ), this, SLOT( updateDirectory( QString ) ) );
     connect( &m_watcher, SIGNAL( fileChanged( QString ) ), this, SLOT( updateFile( QString ) ) );
 }
