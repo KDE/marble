@@ -148,20 +148,22 @@ public:
     bool m_isSubSolarPointIconVisible;
 };
 
-MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model )
-    : q( parent ),
-      m_model( model ),
-      m_viewParams(),
-      m_showFrameRate( false ),
-      m_veccomposer(),
-      m_layerManager( model, parent ),
-      m_customPaintLayer( parent ),
-      m_geometryLayer( model->treeModel() ),
-      m_vectorMapBaseLayer( &m_veccomposer ),
-      m_vectorMapLayer( &m_veccomposer ),
-      m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->pluginManager() ),
-      m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock() ),
-      m_vectorTileLayer( model->downloadManager(), model->sunLocator(), model->pluginManager(), model->treeModel() )
+MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
+    q( parent ),
+    m_model( model ),
+    m_viewParams(),
+    m_showFrameRate( false ),
+    m_veccomposer(),
+    m_layerManager( model, parent ),
+    m_customPaintLayer( parent ),
+    m_geometryLayer( model->treeModel() ),
+    m_vectorMapBaseLayer( &m_veccomposer ),
+    m_vectorMapLayer( &m_veccomposer ),
+    m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->pluginManager() ),
+    m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock() ),
+    m_vectorTileLayer( model->downloadManager(), model->sunLocator(), model->pluginManager(), model->treeModel() ),
+    m_isLockedToSubSolarPoint( false ),
+    m_isSubSolarPointIconVisible( false )
 {
     m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_groundLayer );
