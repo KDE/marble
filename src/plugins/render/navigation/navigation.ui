@@ -41,11 +41,8 @@
    <property name="icon" stdset="0">
     <iconset resource="navigation.qrc">
      <normaloff>:/marble/navigation/navigational_homebutton.png</normaloff>
-     <normalon>:/marble/navigation/navigational_homebutton.png</normalon>
      <activeoff>:/marble/navigation/navigational_homebutton_hover.png</activeoff>
-     <activeon>:/marble/navigation/navigational_homebutton_hover.png</activeon>
-     <selectedoff>:/marble/navigation/navigational_homebutton_press.png</selectedoff>
-     <selectedon>:/marble/navigation/navigational_homebutton_press.png</selectedon>:/marble/navigation/navigational_homebutton.png</iconset>
+     <selectedoff>:/marble/navigation/navigational_homebutton_press.png</selectedoff>:/marble/navigation/navigational_homebutton.png</iconset>
    </property>
    <property name="iconSize" stdset="0">
     <size>
@@ -69,13 +66,9 @@
    <property name="icon" stdset="0">
     <iconset resource="navigation.qrc">
      <normaloff>:/marble/navigation/navigational_zoom_plus.png</normaloff>
-     <normalon>:/marble/navigation/navigational_zoom_plus.png</normalon>
      <disabledoff>:/marble/navigation/navigational_zoom_press_plus.png</disabledoff>
-     <disabledon>:/marble/navigation/navigational_zoom_press_plus.png</disabledon>
      <activeoff>:/marble/navigation/navigational_zoom_hover_plus.png</activeoff>
-     <activeon>:/marble/navigation/navigational_zoom_hover_plus.png</activeon>
-     <selectedoff>:/marble/navigation/navigational_zoom_press_plus.png</selectedoff>
-     <selectedon>:/marble/navigation/navigational_zoom_press_plus.png</selectedon>:/marble/navigation/navigational_zoom_plus.png</iconset>
+     <selectedoff>:/marble/navigation/navigational_zoom_press_plus.png</selectedoff>:/marble/navigation/navigational_zoom_plus.png</iconset>
    </property>
    <property name="iconSize" stdset="0">
     <size>
@@ -99,13 +92,9 @@
    <property name="icon" stdset="0">
     <iconset resource="navigation.qrc">
      <normaloff>:/marble/navigation/navigational_zoom_minus.png</normaloff>
-     <normalon>:/marble/navigation/navigational_zoom_minus.png</normalon>
      <disabledoff>:/marble/navigation/navigational_zoom_press_minus.png</disabledoff>
-     <disabledon>:/marble/navigation/navigational_zoom_press_minus.png</disabledon>
      <activeoff>:/marble/navigation/navigational_zoom_hover_minus.png</activeoff>
-     <activeon>:/marble/navigation/navigational_zoom_hover_minus.png</activeon>
-     <selectedoff>:/marble/navigation/navigational_zoom_press_minus.png</selectedoff>
-     <selectedon>:/marble/navigation/navigational_zoom_press_minus.png</selectedon>:/marble/navigation/navigational_zoom_minus.png</iconset>
+     <selectedoff>:/marble/navigation/navigational_zoom_press_minus.png</selectedoff>:/marble/navigation/navigational_zoom_minus.png</iconset>
    </property>
    <property name="iconSize" stdset="0">
     <size>

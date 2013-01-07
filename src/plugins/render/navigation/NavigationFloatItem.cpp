@@ -25,6 +25,8 @@
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
+#include "MarbleModel.h"
+#include "PositionTracking.h"
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 
@@ -41,7 +43,8 @@ NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
       m_marbleWidget( 0 ),
       m_widgetItem( 0 ),
       m_navigationWidget( 0 ),
-      m_oldViewportRadius( 0 )
+      m_oldViewportRadius( 0 ),
+      m_contextMenu( 0 )
 {
     // Plugin is visible by default
     setEnabled( true );
@@ -57,6 +60,9 @@ NavigationFloatItem::~NavigationFloatItem()
     QPixmapCache::remove( "marble/navigation/navigational_backdrop_top" );
     QPixmapCache::remove( "marble/navigation/navigational_backdrop_center" );
     QPixmapCache::remove( "marble/navigation/navigational_backdrop_bottom" );
+    QPixmapCache::remove( "marble/navigation/navigational_currentlocation" );
+    QPixmapCache::remove( "marble/navigation/navigational_currentlocation_hover" );
+    QPixmapCache::remove( "marble/navigation/navigational_currentlocation_pressed" );
 
     delete m_navigationWidget;
 }
@@ -182,7 +188,6 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
         connect( m_marbleWidget, SIGNAL(zoomChanged(int)), SLOT(updateButtons(int)) );
         updateButtons( m_marbleWidget->zoom() );
         connect( m_marbleWidget, SIGNAL(themeChanged(QString)), this, SLOT(selectTheme(QString)) );
-
      }
 
     return AbstractFloatItem::eventFilter(object, e);
@@ -229,6 +234,82 @@ void NavigationFloatItem::paintContent( QPainter *painter )
     painter->drawPixmap( 0, 0, pixmap( "marble/navigation/navigational_backdrop_top" ) );
     painter->drawPixmap( 0, 70, pixmap( "marble/navigation/navigational_backdrop_center" ) );
     painter->drawPixmap( 0, 311, pixmap( "marble/navigation/navigational_backdrop_bottom" ) );
+}
+
+void NavigationFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
+{
+    if ( !m_contextMenu ) {
+        m_contextMenu = contextMenu();
+
+        m_activateCurrentPositionButtonAction = new QAction( QIcon(),
+                                                             tr( "Current Location Button" ),
+                                                             m_contextMenu );
+        m_activateHomeButtonAction = new QAction( QIcon( ":/icons/go-home.png" ),
+                                                             tr( "Home Button" ),
+                                                             m_contextMenu );
+        m_activateHomeButtonAction->setVisible( false );
+        m_contextMenu->addSeparator();
+        m_contextMenu->addAction( m_activateCurrentPositionButtonAction );
+        m_contextMenu->addAction( m_activateHomeButtonAction );
+
+        connect( m_activateCurrentPositionButtonAction, SIGNAL(triggered()), SLOT(toggleToCurrentPositionButton()) );
+        connect( m_activateHomeButtonAction, SIGNAL(triggered()), SLOT(toggleToHomeButton()) );
+    }
+
+    Q_ASSERT( m_contextMenu );
+    m_contextMenu->exec( w->mapToGlobal( e->pos() ) );
+}
+
+void NavigationFloatItem::writeSettings()
+{
+    if ( m_activateCurrentPositionButtonAction->isVisible() ) {
+        m_activateCurrentPositionButtonAction->setVisible( false );
+        m_activateHomeButtonAction->setVisible( true );
+    } else {
+        m_activateCurrentPositionButtonAction->setVisible( true );
+        m_activateHomeButtonAction->setVisible( false );
+    }
+
+    emit settingsChanged( nameId() );
+}
+
+void NavigationFloatItem::toggleToCurrentPositionButton()
+{
+    writeSettings();
+
+    QIcon icon;
+    icon.addPixmap( pixmap("marble/navigation/navigational_currentlocation"), QIcon::Normal );
+    icon.addPixmap( pixmap("marble/navigation/navigational_currentlocation_hover"), QIcon::Active );
+    icon.addPixmap( pixmap("marble/navigation/navigational_currentlocation_pressed"), QIcon::Selected );
+    m_navigationWidget->homeButton->setProperty("icon", QVariant(icon));
+    disconnect( m_navigationWidget->homeButton, SIGNAL(clicked()), m_marbleWidget, SLOT(goHome()) );
+    connect( m_navigationWidget->homeButton, SIGNAL(clicked()), SLOT(centerOnCurrentLocation()) );
+
+    emit repaintNeeded();
+    emit settingsChanged( nameId() );
+}
+
+void NavigationFloatItem::toggleToHomeButton()
+{
+    writeSettings();
+
+    QIcon icon;
+    icon.addPixmap( pixmap("marble/navigation/navigational_homebutton"), QIcon::Normal );
+    icon.addPixmap( pixmap("marble/navigation/navigational_homebutton_hover"), QIcon::Active );
+    icon.addPixmap( pixmap("marble/navigation/navigational_homebutton_press"), QIcon::Selected );
+    m_navigationWidget->homeButton->setProperty("icon", QVariant(icon));
+    disconnect( m_navigationWidget->homeButton, SIGNAL(clicked()), this, SLOT(centerOnCurrentLocation()) );
+    connect( m_navigationWidget->homeButton, SIGNAL(clicked()), m_marbleWidget, SLOT(goHome()) );
+
+    emit repaintNeeded();
+    emit settingsChanged( nameId() );
+}
+
+void NavigationFloatItem::centerOnCurrentLocation()
+{
+    if ( m_marbleWidget->model()->positionTracking()->currentLocation().isValid() ) {
+        m_marbleWidget->centerOn( m_marbleWidget->model()->positionTracking()->currentLocation(), true );
+    }
 }
 
 Q_EXPORT_PLUGIN2( NavigationFloatItem, Marble::NavigationFloatItem )

@@ -23,5 +23,8 @@
         <file alias="marble/navigation/navigational_backdrop_bottom.png">data/navigational_backdrop_bottom.png</file>
         <file alias="marble/navigation/navigational_backdrop_center.png">data/navigational_backdrop_center.png</file>
         <file alias="marble/navigation/navigational_backdrop_top.png">data/navigational_backdrop_top.png</file>
+        <file alias="marble/navigation/navigational_currentlocation.png">data/navigational_currentlocation.png</file>
+        <file alias="marble/navigation/navigational_currentlocation_hover.png">data/navigational_currentlocation_hover.png</file>
+        <file alias="marble/navigation/navigational_currentlocation_pressed.png">data/navigational_currentlocation_pressed.png</file>
     </qresource>
 </RCC>

@@ -13,6 +13,7 @@
 #define NAVIGATION_FLOAT_ITEM_H
 
 #include <QtCore/QObject>
+#include <QMenu>
 
 #include "MarbleGlobal.h"
 
@@ -75,6 +76,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
  protected:
     bool eventFilter( QObject *object, QEvent *e );
     void paintContent( QPainter *painter );
+    void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
 
  private Q_SLOTS:
     /** Map theme was changed, adjust controls */
@@ -82,6 +84,11 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     /** Enable/disable zoom in/out buttons */
     void updateButtons( int zoomValue );
+
+    void writeSettings();
+    void toggleToCurrentPositionButton();
+    void toggleToHomeButton();
+    void centerOnCurrentLocation();
 
  private:
     /** MarbleWidget this float item is installed as event filter for */
@@ -102,6 +109,10 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     int m_maxZoom;
     int m_minZoom;
+
+    QMenu *m_contextMenu;
+    QAction *m_activateCurrentPositionButtonAction;
+    QAction *m_activateHomeButtonAction;
 };
 
 }
