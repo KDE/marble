@@ -80,12 +80,6 @@ MARBLE_PLUGIN( NavigationFloatItem )
     /** Map theme was changed, adjust controls */
     void selectTheme( QString theme );
 
-    /** Decrease quality during zooming */
-    void adjustForAnimation();
-
-    /** Normal quality when not zooming */
-    void adjustForStill();
-
     /** Enable/disable zoom in/out buttons */
     void updateButtons( int zoomValue );
 

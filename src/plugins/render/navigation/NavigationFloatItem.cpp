@@ -199,24 +199,6 @@ void NavigationFloatItem::selectTheme( QString )
     }
 }
 
-void NavigationFloatItem::adjustForAnimation()
-{
-    if ( !m_marbleWidget ) {
-        return;
-    }
-
-    m_marbleWidget->setViewContext( Animation );
-}
-
-void NavigationFloatItem::adjustForStill()
-{
-    if ( !m_marbleWidget ) {
-        return;
-    }
-
-    m_marbleWidget->setViewContext( Still );
-}
-
 void NavigationFloatItem::updateButtons( int zoomValue )
 {
     bool const zoomInEnabled = m_navigationWidget->zoomInButton->isEnabled();
