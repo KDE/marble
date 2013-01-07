@@ -26,5 +26,7 @@
         <file alias="marble/navigation/navigational_currentlocation.png">data/navigational_currentlocation.png</file>
         <file alias="marble/navigation/navigational_currentlocation_hover.png">data/navigational_currentlocation_hover.png</file>
         <file alias="marble/navigation/navigational_currentlocation_pressed.png">data/navigational_currentlocation_pressed.png</file>
+        <file alias="marble/navigation/navigational_slider_handle_hover.png">data/navigational_slider_handle_hover.png</file>
+        <file alias="marble/navigation/navigational_slider_handle_press.png">data/navigational_slider_handle_press.png</file>
     </qresource>
 </RCC>

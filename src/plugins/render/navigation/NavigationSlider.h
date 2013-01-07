@@ -30,12 +30,16 @@ Q_SIGNALS:
     void repaintNeeded();
 
 protected:
+    void enterEvent( QEvent * );
     void mouseMoveEvent( QMouseEvent * mouseEvent);
     void mousePressEvent( QMouseEvent * );
     void mouseReleaseEvent( QMouseEvent * );
     void leaveEvent( QEvent * );
     void paintEvent( QPaintEvent * );
     void repaint();
+
+private:
+    QString m_handleImagePath;
 };
 
 }

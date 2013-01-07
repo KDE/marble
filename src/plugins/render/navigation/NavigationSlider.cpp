@@ -22,7 +22,8 @@ namespace {
 }
 
 NavigationSlider::NavigationSlider(QWidget *parent) :
-    QAbstractSlider( parent )
+    QAbstractSlider( parent ),
+    m_handleImagePath( "marble/navigation/navigational_slider_handle" )
 {
     setMouseTracking( true );
 }
@@ -31,6 +32,8 @@ NavigationSlider::~NavigationSlider()
 {
     QPixmapCache::remove( "marble/navigation/navigational_slider_groove" );
     QPixmapCache::remove( "marble/navigation/navigational_slider_handle" );
+    QPixmapCache::remove( "marble/navigation/navigational_slider_handle_hover" );
+    QPixmapCache::remove( "marble/navigation/navigational_slider_handle_press" );
 }
 
 QPixmap NavigationSlider::pixmap( const QString &id )
@@ -41,6 +44,15 @@ QPixmap NavigationSlider::pixmap( const QString &id )
         QPixmapCache::insert( id, result );
     }
     return result;
+}
+
+void NavigationSlider::enterEvent( QEvent * )
+{
+    setSliderDown( false );
+    if ( m_handleImagePath != "marble/navigation/navigational_slider_handle_hover" ) {
+        m_handleImagePath = "marble/navigation/navigational_slider_handle_hover";
+        repaint();
+    }
 }
 
 void NavigationSlider::mouseMoveEvent( QMouseEvent *mouseEvent )
@@ -59,16 +71,28 @@ void NavigationSlider::mouseMoveEvent( QMouseEvent *mouseEvent )
 void NavigationSlider::mousePressEvent( QMouseEvent * )
 {
     setSliderDown( true );
+    if ( m_handleImagePath != "marble/navigation/navigational_slider_handle_press" ) {
+        m_handleImagePath = "marble/navigation/navigational_slider_handle_press";
+        repaint();
+    }
 }
 
 void NavigationSlider::mouseReleaseEvent( QMouseEvent * )
 {
     setSliderDown( false );
+    if ( m_handleImagePath != "marble/navigation/navigational_slider_handle_hover" ) {
+        m_handleImagePath = "marble/navigation/navigational_slider_handle_hover";
+        repaint();
+    }
 }
 
 void NavigationSlider::leaveEvent( QEvent * )
 {
     setSliderDown( false );
+    if ( m_handleImagePath != "marble/navigation/navigational_slider_handle" ) {
+        m_handleImagePath = "marble/navigation/navigational_slider_handle";
+        repaint();
+    }
 }
 
 void NavigationSlider::repaint()
@@ -85,7 +109,7 @@ void NavigationSlider::paintEvent( QPaintEvent * )
     }
     qreal const fraction = ( value() - minimum() ) / qreal( maximum() - minimum() );
     int const y = ( height() - handleImageHeight ) * ( 1 - fraction );
-    painter.drawPixmap( 0, y, pixmap( "marble/navigation/navigational_slider_handle" ) );
+    painter.drawPixmap( 0, y, pixmap( m_handleImagePath ) );
     painter.end();
 }
 
