@@ -25,7 +25,12 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
     setCanWorkOffline( true );
 
     QString const path = MarbleDirs::localPath() + "/maps/earth/placemarks/";
-    if ( !m_watcher.directories().contains( path ) ) {
+    QFileInfo pathInfo( path );
+    if ( !pathInfo.exists() ) {
+        QDir("/").mkpath( pathInfo.absolutePath() );
+        pathInfo.refresh();
+    }
+    if ( pathInfo.exists() ) {
         m_watcher.addPath( path );
     }
     connect( &m_watcher, SIGNAL( directoryChanged( QString ) ), this, SLOT( updateDirectory( QString ) ) );
