@@ -21,6 +21,7 @@
 #include "routing/RouteRequest.h"
 
 #define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
+#define addNamedRow(testName) QTest::newRow( QString("line %1: %2").arg( __LINE__ ).arg(testName).toAscii().data() )
 
 Q_DECLARE_METATYPE( QList<Marble::GeoDataCoordinates> )
 
@@ -272,11 +273,9 @@ void MarbleRunnerManagerTest::testSyncParsing_data()
     QTest::addColumn<QString>( "fileName" );
     QTest::addColumn<int>( "resultCount" );
 
-    addRow() << MarbleDirs::path( "placemarks/otherplacemarks.cache" ) << 1;
 
     addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" )    << 1;
     addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" )      << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PGLACIER.PNT" )    << 1;
     addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) << 1;
     addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) << 1;
     addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" )     << 1;
@@ -284,7 +283,17 @@ void MarbleRunnerManagerTest::testSyncParsing_data()
     addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) << 1;
     addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" )       << 1;
 
-    addRow() << MarbleDirs::path( "flags/flag_tv.svg" ) << 0;
+    addNamedRow("cache") << QString( MARBLE_SRC_DIR ).append( "/data/placemarks/otherplacemarks.cache" ) << 1;
+    addNamedRow("gpx") << QString( MARBLE_SRC_DIR ).append( "/examples/gpx/mjolby.gpx") << 1;
+    //json
+    addNamedRow("kml") << QString( MARBLE_SRC_DIR ).append( "/examples/kml/NewYork.kml") << 1;
+    //log
+    addNamedRow("osm") << QString( MARBLE_SRC_DIR ).append( "/examples/osm/map.osm") << 1;
+    addNamedRow("pn2") << QString( MARBLE_SRC_DIR ).append( "/data/naturalearth/50m_lakes.pn2") << 1;
+    addNamedRow("pnt") << QString( MARBLE_SRC_DIR ).append( "/data/mwdbii/PGLACIER.PNT" )    << 1;
+    //shp
+
+    addNamedRow("svg") << MarbleDirs::path( "flags/flag_tv.svg" ) << 0;
 }
 
 void MarbleRunnerManagerTest::testSyncParsing()

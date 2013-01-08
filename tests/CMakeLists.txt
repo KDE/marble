@@ -1,6 +1,7 @@
 #############################################################
 
 ADD_DEFINITIONS(-DTEST_DATA_DIR="\\"${TEST_DATA_DIR}\\"")
+ADD_DEFINITIONS(-DMARBLE_SRC_DIR="\\"${CMAKE_SOURCE_DIR}\\"")
 
 #############################################################
 # libraries
