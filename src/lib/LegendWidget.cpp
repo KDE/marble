@@ -18,20 +18,30 @@ using namespace Marble;
 // Ui
 #include "ui_LegendWidget.h"
 
+#include "MarbleLegendBrowser.h"
+
 namespace Marble
 {
 
 class LegendWidgetPrivate
 {
  public:
+    LegendWidgetPrivate(LegendWidget *myself);
     Ui::LegendWidget    m_legendUi;
+    MarbleLegendBrowser *m_marbleLegendBrowser;
 };
+
+LegendWidgetPrivate::LegendWidgetPrivate(LegendWidget *myself)
+{
+    m_legendUi.setupUi( myself );
+    m_marbleLegendBrowser = new MarbleLegendBrowser(myself);
+    m_legendUi.verticalLayout->addWidget(m_marbleLegendBrowser);
+}
 
 LegendWidget::LegendWidget( QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
-      d( new LegendWidgetPrivate() )
+      d( new LegendWidgetPrivate(this) )
 {
-    d->m_legendUi.setupUi( this );
     layout()->setMargin( 0 );
 }
 
@@ -43,10 +53,10 @@ LegendWidget::~LegendWidget()
 void LegendWidget::setMarbleModel( MarbleModel *model )
 {
     // Initialize the MarbleLegendBrowser
-    d->m_legendUi.marbleLegendBrowser->setMarbleModel( model );
+    d->m_marbleLegendBrowser->setMarbleModel( model );
 
     // connect signals for the Legend
-    connect( d->m_legendUi.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
+    connect( d->m_marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
              this,                            SIGNAL( propertyValueChanged( const QString &, bool ) ) );
 }
 

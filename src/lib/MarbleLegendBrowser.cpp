@@ -5,8 +5,9 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2006-2007 Torsten Rahn      <tackat@kde.org>
+// Copyright 2007      Inge Wallin       <ingwa@kde.org>
+// Copyright 2012      Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 
@@ -24,6 +25,9 @@
 #include <QtGui/QStyle>
 #include <QtGui/QStyleOptionButton>
 #include <QtCore/QRegExp>
+#include <QtWebKit/QWebFrame>
+#include <QtWebKit/QWebElement>
+#include <QTextDocument>
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -55,22 +59,15 @@ class MarbleLegendBrowserPrivate
 
 
 MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
-    : QTextBrowser( parent ),
+    : QWebView( parent ),
       d( new MarbleLegendBrowserPrivate )
 {
     d->m_isLegendLoaded = false;
     d->m_marbleModel = 0;
-    // Disable changing layout due to the ScrollBarPolicy:
-    setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
 
-    setTextInteractionFlags( Qt::LinksAccessibleByMouse
-                             | Qt::LinksAccessibleByKeyboard );
-
-    setOpenLinks( false );
-
-    connect ( this, SIGNAL( anchorClicked( QUrl ) ),
-              this, SLOT( toggleCheckBoxStatus( QUrl ) ) );
-
+    QWebFrame *frame = page()->mainFrame();
+    connect(frame, SIGNAL(javaScriptWindowObjectCleared()),
+            this, SLOT(injectCheckBoxChecker()));
 }
 
 MarbleLegendBrowser::~MarbleLegendBrowser()
@@ -121,9 +118,6 @@ void MarbleLegendBrowser::initTheme()
 
 void MarbleLegendBrowser::loadLegend()
 {
-    mDebug() << "loadLegend";
-    QTime t;
-    t.start();
 
     // Read the html string.
     QString legendPath;
@@ -138,11 +132,12 @@ void MarbleLegendBrowser::loadLegend()
         currentMapTheme->head()->theme() + "/legend.html" ); 
     }
     if ( legendPath.isEmpty() ) {
-	legendPath = MarbleDirs::path( "legend.html" ); 
+        legendPath = MarbleDirs::path( "legend.html" );
     }
 
     QString finalHtml = readHtml( QUrl::fromLocalFile( legendPath ) );
-    finalHtml.replace( QString( "./" ), legendPath.section( '/', 0, -2 ) + '/' );
+
+    reverseSupportCheckboxes(finalHtml);
 
     // Generate some parts of the html from the MapTheme <Legend> tag. 
     const QString sectionsHtml = generateSectionsHtml();
@@ -152,20 +147,21 @@ void MarbleLegendBrowser::loadLegend()
 
     translateHtml( finalHtml );
 
+    QUrl baseUrl = QUrl::fromLocalFile( legendPath );
+
     // Set the html string in the QTextBrowser.
-    setHtml( finalHtml );
-
-    QTextFrameFormat  format = document()->rootFrame()->frameFormat();
-    format.setMargin(6);
-    document()->rootFrame()->setFrameFormat( format );
-    viewport()->update();
-
-    d->m_isLegendLoaded = true;
-    qDebug("loadLegend: Time elapsed: %d ms", t.elapsed());
+    setHtml(finalHtml, baseUrl);
 
     if ( d->m_marbleModel ) {
-        d->m_marbleModel->setLegend( document() );
+        QTextDocument *document = new QTextDocument(page()->mainFrame()->toHtml());
+        d->m_marbleModel->setLegend( document );
     }
+}
+
+void MarbleLegendBrowser::injectCheckBoxChecker()
+{
+    QWebFrame *frame = page()->mainFrame();
+    frame->addToJavaScriptWindowObject( "Marble", this );
 }
 
 bool MarbleLegendBrowser::event( QEvent * event )
@@ -177,7 +173,8 @@ bool MarbleLegendBrowser::event( QEvent * event )
             return true;
         }
     }
-    return QTextBrowser::event( event );
+
+    return QWebView::event( event );
 }
 
 QString MarbleLegendBrowser::readHtml( const QUrl & name )
@@ -191,10 +188,6 @@ QString MarbleLegendBrowser::readHtml( const QUrl & name )
         data.close();
     }
 
-    // Tell QTextBrowser where to search for further document resources
-    QStringList paths = searchPaths();
-    paths.append( QFileInfo(data).absolutePath() );
-    setSearchPaths( paths );
     return html;
 }
 
@@ -214,6 +207,25 @@ void MarbleLegendBrowser::translateHtml( QString & html )
         html.replace( *i, tr( (*i).toUtf8() ) );
 }
 
+void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
+{
+    const QString findEntry = "<a href=\"checkbox:";
+    int ind = html.indexOf(findEntry, 0, Qt::CaseInsensitive);
+    while (ind > 0) {
+        QString id = "";
+        int xInd = ind + findEntry.length();
+        while (html[xInd].isLetterOrNumber() && xInd != html.length()) {
+            id += html[xInd];
+            xInd++;
+        }
+        int fin = html.indexOf("</a>", ind, Qt::CaseInsensitive)+4; // 4 = length "</a>";
+
+        html.remove(ind, fin-ind);
+
+        ind = html.indexOf(findEntry, 0, Qt::CaseInsensitive);
+    }
+}
+
 QString MarbleLegendBrowser::generateSectionsHtml()
 {
     // Generate HTML to include into legend.html here.
@@ -227,163 +239,103 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
     d->m_symbolMap.clear();
 
-    int sectionNum = 0;
+    QString bitStyle = "<style>"
+            "* {"
+            "   font: \"sans-serif\"!important;"
+            "}"
+            ".spec {"
+            "   display: block;"
+            "}"
+            ".spec h3 {"
+            "   height: 30px;"
+            "   margin: 0;"
+            "   font-weight: 500;"
+            "   font-size: 1em;"
+            "}"
+            "table {"
+            "   margin-bottom: 20px!important;"
+            "}"
+            "table td.icon {"
+            "   width: 24px;"
+            "   overflow: hidden;"
+            "   display: inline-block;"
+            "   white-space: nowrap;"
+            "}"
+            "table td.text {"
+            "   width: 200px;"
+            "   overflow: hidden;"
+            "   display: inline-block;"
+            "   white-space: nowrap;"
+            "}"
+            "</style>";
+
+    customLegendString += bitStyle;
+
     foreach ( const GeoSceneSection *section, currentMapTheme->legend()->sections() ) {
         QString checkBoxString; 
-
-        if ( section->checkable() ) {
-            checkBoxString = "<a href=\"checkbox:" + section->connectTo() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + section->connectTo() + "\">&nbsp;</span></a> ";
+        if (section->checkable()) {
+            QString checked = "";
+            if (d->m_checkBoxMap[section->connectTo()])
+                checked = "checked";
+            checkBoxString = "<div class=\"spec\"><h3><input type=\"checkbox\" "
+                    "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" " +
+                    checked + " name=\"" + section->connectTo() +
+                    "\" value=\"" + section->connectTo() + "Value\" />" +
+                    section->heading() + "</h3></div>\n";
+            customLegendString += checkBoxString;
         }
 
-        customLegendString += "<h4>" + checkBoxString + section->heading() + "</h4>";
-        customLegendString += "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">";
+        customLegendString += "<table border=\"0\" cellspacing=\"0\">\n";
 
-        int spacing = section->spacing();
-
-        int itemNum = 0;
-        foreach ( const GeoSceneItem *item, section->items() ) {
-
-            QPixmap itemPixmap;
-            QString pixmapRelativePath = item->icon()->pixmap();
-
-            if ( !pixmapRelativePath.isEmpty() ) {
-                QString pixmapPath = MarbleDirs::path( pixmapRelativePath );
-                itemPixmap = QPixmap( pixmapPath );
+        foreach (const GeoSceneItem *item, section->items()) {
+            QString path;
+            if (!item->icon()->pixmap().isEmpty()) {
+                path = MarbleDirs::path( item->icon()->pixmap() );
+            } else {
+                // Tiny hack ;)
+                // There is <img src="%path%" />
+                // We will have <img src="" style="display: none;" />
+                path = "\" style=\"display: none;";
             }
-            else
-                itemPixmap = QPixmap( 24, 12 );
-
-            QPixmap itemIcon = itemPixmap.copy();
-
-            QColor itemColor = item->icon()->color();
-            itemIcon.fill( itemColor );
-
-            QPainter painter( &itemIcon );
-
-            if ( !pixmapRelativePath.isEmpty() ) {
-                painter.drawPixmap( 0, 0, itemPixmap );
+            QColor color = item->icon()->color();
+            QString style = "";
+            if (color != Qt::transparent) {
+                style = "width: 24px; height: 12px; background-color: "
+                        + color.name() + ";";
+            } else {
+                style = "width: 24px; height: 12px;";
             }
+            QString src  =  "file://" + path;
 
-
-            QString itemIdString = QString("item%1-%2").arg(sectionNum).arg(itemNum);
-            d->m_symbolMap[itemIdString] = itemIcon;
-
-            customLegendString += "    <tr>";
-            customLegendString += QString( "        <td align=\"left\" valign=\"top\" width=\"%1\">" ).arg( itemIcon.width() + spacing ); 
-            customLegendString += "             <img src=\"pixmap:" + itemIdString + "\">";
-            customLegendString += "        </td>"; 
-            customLegendString += "        <td align=\"left\" valign=\"top}\">"; 
-            customLegendString += "             " + item->text();
-            customLegendString += "        </td>"; 
-            customLegendString += "    </tr>";
-
-            itemNum++;
+            QString html = ""
+                    "   <tr>\n"
+                    "       <td class=\"icon\" >\n"
+                    "           <div style=\"" + style + "\">\n"
+                    "               <img src=\"" + src + "\" />\n"
+                    "           </div>\n"
+                    "       </td>\n"
+                    "       <td class=\"text\" style=\"padding-left: 5px;\">\n"
+                    "           <p>" + item->text().trimmed() + "</p>\n"
+                    "       </td>\n"
+                    "   </tr>\n";
+            customLegendString += html;
         }
-        customLegendString += "</table>";
 
-        sectionNum++;
+        customLegendString += "</table>\n";
     }
 
     return customLegendString;
 }
 
-
-//
-// This function is reimplemented from QTextBrowser to handle the
-// checkboxes.  For all other resources, it reuses
-// QTextBrowser::loadResource.
-//    
-QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
-{
-    QString  newName;
-
-    if ( type == QTextDocument::ImageResource
-         && name.toString().startsWith(QLatin1String( "checkbox:" ), Qt::CaseInsensitive) )
-    {
-        QStyleOptionButton option;
-        option.initFrom(this);
-        int width = style()->pixelMetric(QStyle::PM_IndicatorWidth, &option, this );
-        int height = style()->pixelMetric(QStyle::PM_IndicatorHeight, &option, this );
-        option.rect = QRect( 0, 0, width, height );
-        
-        QString checkBoxName = name.toString().section(':', 1, -1);
-        if ( !d->m_checkBoxMap.contains( checkBoxName ) ) {
-            option.state = QStyle::State_None;
-        }
-        else if ( d->m_checkBoxMap.value( checkBoxName ) )
-            option.state |= QStyle::State_On;
-        else
-            option.state |= QStyle::State_Off;
-            
-        QPixmap pixmap( width, height );
-        pixmap.fill( Qt::transparent );
-
-        QPainter painter;
-        painter.begin(&pixmap);
-        style()->drawPrimitive(QStyle::PE_IndicatorCheckBox, &option, &painter, this);
-        painter.end();
-
-        return pixmap;
-    }
-
-    if ( type == QTextDocument::ImageResource
-         && name.toString().startsWith(QLatin1String( "pixmap:" ), Qt::CaseInsensitive) )
-    {
-        QString pixmapName = name.toString().section(':', 1, -1);
-        if ( d->m_symbolMap.contains( pixmapName ) ) {
-            return d->m_symbolMap.value( pixmapName );
-        }
-    }
-
-    return QTextBrowser::loadResource( type, name );
-}
-
-void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
-{
-    // If we got an HTTP Url, open a browser window 
-    if ( link.scheme() == "http" || link.scheme() == "https" ) {
-        QDesktopServices::openUrl( link );
-        return;
-    }
-
-    if ( link.scheme() == "checkbox" ) {
-        QString checkBoxName = link.toString().section(':', 1, -1);
-
-        if ( d->m_checkBoxMap.contains( checkBoxName ) ) {
-            d->m_checkBoxMap[ checkBoxName ] = !d->m_checkBoxMap.value( checkBoxName );
-            emit toggledShowProperty( checkBoxName, d->m_checkBoxMap.value( checkBoxName ) );
-        }
-    }
-
-    setUpdatesEnabled( false );
-    {
-        int scrollPosition = verticalScrollBar()->sliderPosition();
-
-        loadLegend();
-
-        verticalScrollBar()->setSliderPosition( scrollPosition );
-    }
-    setUpdatesEnabled( true );
-
-    update();
-}
-
 void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
 {
-    // If there is no change then leave immediately
-    if ( d->m_checkBoxMap[ name ] == checked )
-        return;
-    
-    d->m_checkBoxMap[ name ] = checked;
-
-    setUpdatesEnabled( false );
-    {
-        int scrollPosition = verticalScrollBar()->sliderPosition();
-        loadLegend();
-
-        verticalScrollBar()->setSliderPosition( scrollPosition );
+    QWebElement box = page()->mainFrame()->findFirstElement("input[name="+name+"]");
+    if (!box.isNull()) {
+        if (checked != d->m_checkBoxMap[name]) {
+            d->m_checkBoxMap[name] = checked;
+            emit toggledShowProperty( name, checked );
+        }
     }
-    setUpdatesEnabled( true );
 
     update();
 }
