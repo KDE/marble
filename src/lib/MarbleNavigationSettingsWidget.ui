@@ -76,7 +76,7 @@ p, li { white-space: pre-wrap; }
          <string>Use kinetic spinning when dragging the map</string>
         </property>
         <property name="text">
-         <string>&amp;Inertial Earth Rotation</string>
+         <string>&amp;Inertial Globe Rotation</string>
         </property>
        </widget>
       </item>

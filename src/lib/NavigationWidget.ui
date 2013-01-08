@@ -144,7 +144,7 @@
             <string>Right</string>
            </property>
            <property name="whatsThis">
-            <string>Rotates the earth clockwise around its axis.</string>
+            <string>Rotates the globe clockwise around its axis.</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -161,7 +161,7 @@
             <string>Up</string>
            </property>
            <property name="whatsThis">
-            <string>Tilts the earth's axis towards the user.</string>
+            <string>Tilts the globe's axis towards the user.</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -238,7 +238,7 @@
             <string>Down</string>
            </property>
            <property name="whatsThis">
-            <string>Tilts the earth's axis away from the user.</string>
+            <string>Tilts the globe's axis away from the user.</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -255,7 +255,7 @@
             <string>Left</string>
            </property>
            <property name="whatsThis">
-            <string>Rotates the earth counterclockwise around its axis.</string>
+            <string>Rotates the globe counterclockwise around its axis.</string>
            </property>
            <property name="text">
             <string>...</string>
