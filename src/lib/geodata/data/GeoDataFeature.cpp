@@ -640,7 +640,8 @@ const GeoDataStyle* GeoDataFeature::style() const
 void GeoDataFeature::setStyle( GeoDataStyle* style )
 {
     detach();
-    style->setParent( this );
+    if (style)
+        style->setParent( this );
     d->m_style = style;
 }
 
