@@ -35,8 +35,8 @@ class MarbleRunnerManagerTest : public QObject
 private slots:
     void initTestCase();// will be called before the first testfunction is executed.
     void cleanupTestCase();// will be called after the last testfunction was executed.
-    void init(){};// will be called before each testfunction is executed.
-    void cleanup(){};// will be called after every testfunction.
+    void init(){ qDebug() << "start: " << t.elapsed();}// will be called before each testfunction is executed.
+    void cleanup(){ qDebug() << "end: " << t.elapsed();}// will be called after every testfunction.
 
     void testSyncPlacemarks();
 
@@ -66,11 +66,12 @@ public:
     GeoDataCoordinates m_coords;
     GeoDataCoordinates m_coords2;
     RouteRequest m_request;
+    QTime t;
 };
 
 void MarbleRunnerManagerTest::initTestCase()
 {
-    // MarbleDebug::enable = true;
+     MarbleDebug::enable = true;
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
     m_time = 30000;
@@ -86,6 +87,7 @@ void MarbleRunnerManagerTest::initTestCase()
 
     m_request.append( m_coords );
     m_request.append( m_coords2 );
+    t.start();
 }
 
 void MarbleRunnerManagerTest::cleanupTestCase()
