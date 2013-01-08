@@ -390,8 +390,8 @@ void StarsPlugin::prepareNames()
     m_abbrHash["Indus"] = "Ind";
 
     // Lacert
-    m_nativeHash["Lacert"] = tr("Lacert");
-    m_abbrHash["Lacert"] = "Lac";
+    m_nativeHash["Lacerta"] = tr("Lacerta");
+    m_abbrHash["Lacerta"] = "Lac";
 
     // Leo
     m_nativeHash["Leo"] = tr("Leo");
@@ -525,9 +525,9 @@ void StarsPlugin::prepareNames()
     m_nativeHash["Taurus"] = tr("Taurus");
     m_abbrHash["Taurus"] = "Tau";
 
-    // elescopium
-    m_nativeHash["elescopium"] = tr("elescopium");
-    m_abbrHash["elescopium"] = "Tel";
+    // Telescopium
+    m_nativeHash["Telescopium"] = tr("Telescopium");
+    m_abbrHash["Telescopium"] = "Tel";
 
     // Triangulum
     m_nativeHash["Triangulum"] = tr("Triangulum");
