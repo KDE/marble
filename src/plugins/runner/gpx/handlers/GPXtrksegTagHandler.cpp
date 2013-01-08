@@ -51,7 +51,6 @@ GeoNode* GPXtrksegTagHandler::parse(GeoParser& parser) const
 #endif
         return track;
     }
-    mDebug() << "trkseg parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

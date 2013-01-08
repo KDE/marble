@@ -55,7 +55,6 @@ GeoNode* GPXrteTagHandler::parse(GeoParser& parser) const
 #endif
         return placemark;
     }
-    mDebug() << "rte parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

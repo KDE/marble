@@ -68,7 +68,6 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
 #endif
         return placemark;
     }
-    mDebug() << "wpt parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

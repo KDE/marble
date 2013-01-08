@@ -68,7 +68,6 @@ GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
                 << coord.toString(GeoDataCoordinates::Decimal);
 #endif
     }
-    mDebug() << "rtept parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 
