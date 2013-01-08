@@ -7,7 +7,7 @@ function po_for_file
 {
     case "$1" in
        geo.xml)
-           echo xml_mimetypes.po
+           echo marble_xml_mimetypes.po
        ;;
     esac
 }
