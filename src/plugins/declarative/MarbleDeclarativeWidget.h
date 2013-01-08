@@ -231,7 +231,7 @@ private:
     static void addLayer( QDeclarativeListProperty<DeclarativeDataPlugin> *list, DeclarativeDataPlugin *layer );
 
     /** Wrapped MarbleWidget */
-    Marble::MarbleWidget* m_marbleWidget;
+    Marble::MarbleWidget *const m_marbleWidget;
 
     bool m_inputEnabled;
 
@@ -247,7 +247,7 @@ private:
 
     Coordinate m_center;
 
-    ZoomButtonInterceptor* m_interceptor;
+    ZoomButtonInterceptor *const m_interceptor;
 
     QList<DeclarativeDataPlugin*> m_dataLayers;
 
