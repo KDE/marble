@@ -155,7 +155,7 @@ void FileViewWidget::mapCenterOnTreeViewModel( const QModelIndex &index )
     if ( dynamic_cast<GeoDataPlacemark*>(object) )
     {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
-        d->m_widget->model()->placemarkSelectionModel()->select( d->m_treeSortProxy.mapToSource( index ), QItemSelectionModel::ClearAndSelect );
+        d->m_widget->model()->placemarkSelectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
         emit centerOn( *placemark, true );
     }
     else if ( dynamic_cast<GeoDataContainer*>(object) ) {

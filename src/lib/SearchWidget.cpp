@@ -184,7 +184,7 @@ void SearchWidgetPrivate::centerMapOn( const QModelIndex &index )
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
     if ( placemark ) {
         m_widget->centerOn( *placemark, true );
-        m_widget->model()->placemarkSelectionModel()->select( m_sortproxy->mapToSource( index ), QItemSelectionModel::ClearAndSelect );
+        m_widget->model()->placemarkSelectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
     }
 }
 
