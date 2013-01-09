@@ -127,7 +127,7 @@ void AbstractFloatItem::setPositionLocked( bool lock )
     setFlags( flags );
 }
 
-bool AbstractFloatItem::positionLocked()
+bool AbstractFloatItem::positionLocked() const
 {
     return ( flags() & ScreenGraphicsItem::ItemIsMovable ) ? false : true;
 }

@@ -75,8 +75,15 @@ AbstractFloatItemTest::AbstractFloatItemTest()
 
 void AbstractFloatItemTest::defaultConstructor()
 {
-    NullFloatItem item;
+    const NullFloatItem item;
 
+    QCOMPARE( item.renderPolicy(), QString( "ALWAYS") );
+    QCOMPARE( item.renderPosition(), QStringList( "FLOAT_ITEM" ) );
+    QCOMPARE( item.cacheMode(), AbstractFloatItem::ItemCoordinateCache );
+    QCOMPARE( item.frame(), AbstractFloatItem::RectFrame );
+    QCOMPARE( item.padding(), 4. );
+    QCOMPARE( item.contentSize(), QSizeF( 150, 50 ) );
+    QCOMPARE( item.position(), QPointF( 10, 10 ) );
     QCOMPARE( item.visible(), true );
     QCOMPARE( item.positionLocked(), true );
 }
