@@ -458,6 +458,25 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
         return Qt::NoItemFlags;
 
     GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
+    if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+        GeoDataDocument *document = static_cast<GeoDataDocument*>( object );
+        if( document->documentRole() == UserDocument ) {
+            return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
+        }
+    }
+    if( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+     || object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
+        GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+        GeoDataObject *parent = feature->parent();
+        while( parent->nodeType() != GeoDataTypes::GeoDataDocumentType ) {
+            parent = parent->parent();
+        }
+        GeoDataDocument *document = static_cast<GeoDataDocument*>( parent );
+        if( document->documentRole() == UserDocument ) {
+            return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;;
+        }
+    }
+
     if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
          || object->nodeType() == GeoDataTypes::GeoDataFolderType
          || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
