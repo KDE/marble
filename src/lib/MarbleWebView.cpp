@@ -32,7 +32,7 @@ MarbleWebView::MarbleWebView(QWidget *parent) :
 
 void MarbleWebView::contextMenuEvent(QContextMenuEvent *event)
 {
-    m_copyAction->setEnabled(!selectedHtml().isEmpty());
+    m_copyAction->setEnabled(!selectedText().isEmpty());
     m_contextMenu->exec(event->globalPos());
 }
 
