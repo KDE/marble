@@ -655,7 +655,6 @@ void MainWindow::createStatusBar()
 
 void MainWindow::createDockWidgets()
 {
-    Q_ASSERT( m_panelMenu && "Please create menus before creating dock widgets" );
     Q_ASSERT( !m_searchDock && "Please create dock widgets just once" );
 
     setTabPosition( Qt::LeftDockWidgetArea, QTabWidget::North );
@@ -666,7 +665,6 @@ void MainWindow::createDockWidgets()
     routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
     RoutingWidget* routingWidget = new RoutingWidget( m_controlView->marbleWidget(), this );
     routingDock->setWidget( routingWidget );
-    m_panelMenu->addAction( routingDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, routingDock );
 
     QDockWidget *locationDock = new QDockWidget( tr( "Location" ), this );
@@ -675,7 +673,6 @@ void MainWindow::createDockWidgets()
     CurrentLocationWidget* locationWidget = new CurrentLocationWidget( this );
     locationWidget->setMarbleWidget( m_controlView->marbleWidget() );
     locationDock->setWidget( locationWidget );
-    m_panelMenu->addAction( locationDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, locationDock );
 
     m_searchDock = new QDockWidget( tr( "Search" ), this );
@@ -684,7 +681,6 @@ void MainWindow::createDockWidgets()
     SearchWidget* searchWidget = new SearchWidget( this );
     searchWidget->setMarbleWidget( m_controlView->marbleWidget() );
     m_searchDock->setWidget( searchWidget );
-    m_panelMenu->addAction( m_searchDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, m_searchDock );
 
     tabifyDockWidget( m_searchDock, routingDock );
@@ -701,7 +697,6 @@ void MainWindow::createDockWidgets()
     MapViewWidget* mapViewWidget = new MapViewWidget( this );
     mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
     mapViewDock->setWidget( mapViewWidget );
-    m_panelMenu->addAction( mapViewDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
 
     QDockWidget *fileViewDock = new QDockWidget( tr( "Files" ), this );
@@ -710,7 +705,6 @@ void MainWindow::createDockWidgets()
     FileViewWidget* fileViewWidget = new FileViewWidget( this );
     fileViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
     fileViewDock->setWidget( fileViewWidget );
-    m_panelMenu->addAction( fileViewDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, fileViewDock );
     fileViewDock->hide();
 
@@ -722,11 +716,20 @@ void MainWindow::createDockWidgets()
     connect( legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
              m_controlView->marbleWidget(), SLOT( setPropertyValue( const QString &, bool ) ) );
     legendDock->setWidget( legendWidget );
-    m_panelMenu->addAction( legendDock->toggleViewAction() );
     addDockWidget( Qt::LeftDockWidgetArea, legendDock );
 
     tabifyDockWidget( mapViewDock, legendDock );
     mapViewDock->raise();
+
+    if ( m_panelMenu ) {
+        m_panelMenu->addAction( routingDock->toggleViewAction() );
+        m_panelMenu->addAction( locationDock->toggleViewAction() );
+        m_panelMenu->addAction( m_searchDock->toggleViewAction() );
+        m_panelMenu->addAction( mapViewDock->toggleViewAction() );
+        m_panelMenu->addAction( fileViewDock->toggleViewAction() );
+        m_panelMenu->addAction( legendDock->toggleViewAction() );
+    }
+
 }
 
 void MainWindow::openMapSite()
