@@ -13,6 +13,7 @@
 
 #include "PopupItem.h"
 #include "MarbleWidget.h"
+#include "MarbleWebView.h"
 
 #include <QtCore/QPointer>
 #include <QtWebKit/QWebView>
@@ -25,6 +26,9 @@
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
 #include <QtGui/QPixmapCache>
+#include <QMenu>
+#include <QKeyEvent>
+#include <QClipboard>
 #include <qdrawutil.h>
 
 namespace Marble
@@ -35,7 +39,7 @@ PopupItem::PopupItem( QObject* parent ) :
     BillboardGraphicsItem(),
     m_widget( new QWidget ),
     m_printButton( 0 ),
-    m_webView( new QWebView ( m_widget ) ),
+    m_webView( new MarbleWebView ( m_widget ) ),
     m_textColor( QColor(Qt::black) ),
     m_backColor( QColor(Qt::white) ),
     m_needMouseRelease(false)
@@ -237,6 +241,11 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
 {
     MarbleWidget *widget = dynamic_cast<MarbleWidget*> ( object );
     if ( !widget ) {
+        return BillboardGraphicsItem::eventFilter( object, e );
+    }
+
+    if ( e->type() == QEvent::ContextMenu) {
+        QApplication::sendEvent( m_webView, e );
         return BillboardGraphicsItem::eventFilter( object, e );
     }
 

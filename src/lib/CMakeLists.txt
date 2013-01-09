@@ -64,6 +64,7 @@ set(marblewidget_SRCS
     DownloadRegionDialog.cpp
     LatLonBoxWidget.cpp
     MarbleWidget.cpp
+    MarbleWebView.cpp
     MarbleModel.cpp
     MarbleMap.cpp
     MarbleControlBox.cpp
@@ -331,6 +332,7 @@ else (APPLE AND QTONLY)
     DownloadRegionDialog.h
     LatLonBoxWidget.h
     MarbleWidget.h
+    MarbleWebView.h
     MarbleMap.h
     MarbleModel.h
     MarbleControlBox.h

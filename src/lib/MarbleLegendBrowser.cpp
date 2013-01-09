@@ -59,7 +59,7 @@ class MarbleLegendBrowserPrivate
 
 
 MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
-    : QWebView( parent ),
+    : MarbleWebView( parent ),
       d( new MarbleLegendBrowserPrivate )
 {
     d->m_isLegendLoaded = false;
@@ -174,7 +174,7 @@ bool MarbleLegendBrowser::event( QEvent * event )
         }
     }
 
-    return QWebView::event( event );
+    return MarbleWebView::event( event );
 }
 
 QString MarbleLegendBrowser::readHtml( const QUrl & name )
