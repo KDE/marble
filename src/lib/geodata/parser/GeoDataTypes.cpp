@@ -47,6 +47,7 @@ const char* GeoDataLineStyleType = "GeoDataLineStyle";
 const char* GeoDataLodType = "GeoDataLod";
 const char* GeoDataLookAtType = "GeoDataLoookAt";
 const char* GeoDataMultiGeometryType = "GeoDataMultiGeometry";
+const char* GeoDataMultiTrackType = "GeoDataMultiTrack";
 const char* GeoDataObjectType = "GeoDataObject";
 const char* GeoDataOuterBoundaryType = "GeoDataOuterBoundary";
 const char* GeoDataPhotoOverlayType = "GeoDataPhotoOverlay";
@@ -63,6 +64,10 @@ const char* GeoDataTimePrimitiveType = "GeoDataTimePrimitive";
 const char* GeoDataTimeSpanType = "GeoDataTimeSpan";
 const char* GeoDataTimeStampType = "GeoDataTimeStamp";
 const char* GeoDataTrackType = "GeoDataTrack";
+const char* GeoDataScreenOverlayType = "GeoDataScreenOverlay";
+const char* GeoDataBalloonStyleType = "GeoDataBalloonStyle";
+const char* GeoDataListStyleType = "GeoDataListStyle";
+const char* GeoDataItemIconType = "GeoDataItemIcon";
 }
 
 }

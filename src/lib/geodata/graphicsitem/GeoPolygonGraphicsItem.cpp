@@ -24,7 +24,6 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataPolygon* polygon )
           m_polygon( polygon ),
           m_ring( 0 )
 {
-    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 polygon ");
 }
 
 GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
@@ -32,35 +31,9 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
           m_polygon( 0 ),
           m_ring( ring )
 {
-    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 ring ");
 }
 
-void GeoPolygonGraphicsItem::setPolygon( const GeoDataPolygon* polygon )
-{
-    m_polygon = polygon;
-    m_ring = 0;
-    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 polygon ");
-}
-
-void GeoPolygonGraphicsItem::setLinearRing( const GeoDataLinearRing* ring )
-{
-    m_polygon = 0;
-    m_ring = ring;
-    Q_ASSERT( ( m_ring == 0 ) ^ ( m_polygon == 0 ) && "You must not pass a 0 ring ");
-}
-
-GeoDataCoordinates GeoPolygonGraphicsItem::coordinate() const
-{
-    if( m_polygon ) {
-        return m_polygon->latLonAltBox().center();
-    } else if ( m_ring ) {
-        return m_ring->latLonAltBox().center();
-    } else {
-        return GeoDataCoordinates();
-    }
-}
-
-GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
 {
     if( m_polygon ) {
         return m_polygon->latLonAltBox();
@@ -71,12 +44,9 @@ GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
     }
 }
 
-void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
-                                    const QString& renderPos, GeoSceneLayer* layer )
+void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
     Q_UNUSED( viewport );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
 
     if ( !style() )
     {
@@ -100,10 +70,10 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewpor
     }
     else
     {
-        if ( currentPen.color() != style()->lineStyle().color() ||
+        if ( currentPen.color() != style()->lineStyle().paintedColor() ||
                 currentPen.widthF() != style()->lineStyle().width() )
         {
-            currentPen.setColor( style()->lineStyle().color() );
+            currentPen.setColor( style()->lineStyle().paintedColor() );
             currentPen.setWidthF( style()->lineStyle().width() );
         }
 
@@ -130,9 +100,9 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewpor
     }
     else
     {
-        if ( painter->brush().color() != style()->polyStyle().color() )
+        if ( painter->brush().color() != style()->polyStyle().paintedColor() )
         {
-            painter->setBrush( style()->polyStyle().color() );
+            painter->setBrush( style()->polyStyle().paintedColor() );
         }
     }
 

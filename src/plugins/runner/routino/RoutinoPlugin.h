@@ -42,7 +42,7 @@ public:
 
     QList<PluginAuthor> pluginAuthors() const;
 
-    virtual MarbleAbstractRunner* newRunner() const;
+    virtual RoutingRunner *newRunner() const;
 
     ConfigWidget* configWidget();
 

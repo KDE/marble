@@ -59,7 +59,7 @@ const char* GeoDataRegion::nodeType() const
 }
 
 
-GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
 {
     // FIXME: This isn't exactly what a 'const' function should do, is it?
 

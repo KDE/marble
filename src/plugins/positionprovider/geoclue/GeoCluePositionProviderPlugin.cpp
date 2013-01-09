@@ -45,10 +45,10 @@ void GeoCluePositionProviderPlugin::initialize()
 {
     m_positionProvider = GeoCute::PositionProvider::detailed();
     if (m_positionProvider) {
-        connect( m_positionProvider, SIGNAL( positionChanged(GeoCute::Position) ),
-                 SLOT( updatePosition(GeoCute::Position) ) );
-        connect( m_positionProvider, SIGNAL( statusChanged(GeoCute::Status) ),
-                 SLOT( updateStatus(GeoCute::Status) ) );
+        connect( m_positionProvider, SIGNAL(positionChanged(GeoCute::Position)),
+                 SLOT(updatePosition(GeoCute::Position)) );
+        connect( m_positionProvider, SIGNAL(statusChanged(GeoCute::Status)),
+                 SLOT(updateStatus(GeoCute::Status)) );
     }
 }
 

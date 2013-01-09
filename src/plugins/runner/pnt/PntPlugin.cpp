@@ -59,7 +59,7 @@ QStringList PntPlugin::fileExtensions() const
     return QStringList() << "pnt";
 }
 
-MarbleAbstractRunner* PntPlugin::newRunner() const
+ParsingRunner* PntPlugin::newRunner() const
 {
     return new PntRunner;
 }

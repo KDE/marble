@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
+// Copyright 2007-2012   Torsten Rahn  <rahn@kde.org>
 //
 
 
@@ -23,8 +24,7 @@
 using namespace Marble;
 
 MercatorProjection::MercatorProjection()
-    : AbstractProjection(),
-      d( 0 )
+    : CylindricalProjection()
 {
     setRepeatX( repeatableX() );
     setMinLat( minValidLat() );
@@ -33,11 +33,6 @@ MercatorProjection::MercatorProjection()
 
 MercatorProjection::~MercatorProjection()
 {
-}
-
-bool MercatorProjection::repeatableX() const
-{
-    return true;
 }
 
 qreal MercatorProjection::maxValidLat() const
@@ -140,6 +135,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
                                             const QSizeF& size,
                                             bool &globeHidesPoint ) const
 {
+    pointRepeatNum = 0;
     // On flat projections the observer's view onto the point won't be 
     // obscured by the target planet itself.
     globeHidesPoint = false;
@@ -314,8 +310,7 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
         }
     }
     else {
-        // We need a point on the screen at maxLat that definitely
-        // gets displayed:
+        // We need a point on the screen at maxLat that definitely gets displayed:
         qreal averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
     
         GeoDataCoordinates maxLonPoint( +M_PI, averageLatitude, GeoDataCoordinates::Radian );
@@ -331,8 +326,6 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
             latLonAltBox.setWest( -M_PI );
         }
     }
-
-//    mDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
 
     return latLonAltBox;
 }
@@ -357,34 +350,4 @@ bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) con
         return false;
 
     return true;
-}
-
-QPainterPath MercatorProjection::mapShape( const ViewportParams *viewport ) const
-{
-    // Convenience variables
-    //int  radius = viewport->radius();
-    int  width  = viewport->width();
-    int  height = viewport->height();
-
-    qreal  yTop;
-    qreal  yBottom;
-    qreal  xDummy;
-
-    // Get the top and bottom y coordinates of the projected map.
-    screenCoordinates( 0.0, maxLat(), viewport, xDummy, yTop );
-    screenCoordinates( 0.0, minLat(), viewport, xDummy, yBottom );
-
-    if ( yTop < 0 )
-        yTop = 0;
-    if ( yBottom > height )
-        yBottom =  height;
-
-    QPainterPath mapShape;
-    mapShape.addRect(
-                    0,
-                    yTop,
-                    width,
-                    yBottom - yTop );
-
-    return mapShape;
 }

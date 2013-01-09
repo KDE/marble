@@ -80,6 +80,8 @@ object.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MapThemeManager">__init__</a> (self, QObject parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QStringList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeIds">mapThemeIds</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QStandardItemModel&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeModel">mapThemeModel</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deleteMapTheme">deleteMapTheme</a> (QString mapThemeId)</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="themesChanged"></a>
 <div class="memitem">
@@ -146,6 +148,31 @@ object.
 <p>
 This method provides a QStandardItemModel of all themes
 that are available via MarbleDirs.
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="deleteMapTheme"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> deleteMapTheme</td>
+<td>(</td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>mapThemeId</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Deletes the map theme with the specified map theme ID.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mapThemeId</em>&nbsp;</td><td> ID of the map theme to be deleted
+</td></tr>
+</table></dl>
+<p> Deletion will only succeed for local map themes, that is, if the map
+theme's directory structure resides in the user's home directory.
 </p></div></div>
 </div>
 </div>

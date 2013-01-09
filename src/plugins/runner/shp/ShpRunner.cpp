@@ -10,6 +10,7 @@
 #include "ShpRunner.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
 #include "MarbleDebug.h"
 
@@ -21,17 +22,12 @@ namespace Marble
 {
 
 ShpRunner::ShpRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 
 ShpRunner::~ShpRunner()
 {
-}
-
-GeoDataFeature::GeoDataVisualCategory ShpRunner::category() const
-{
-    return GeoDataFeature::Folder;
 }
 
 void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
@@ -170,8 +166,10 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     DBFClose( dbfhandle );
 
     if ( document->size() ) {
+        document->setFileName( fileName );
         emit parsingFinished( document );
     } else {
+        delete document;
         emit parsingFinished( 0 );
     }
 }

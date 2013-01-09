@@ -40,7 +40,6 @@ GeoNode* GPXextensionsTagHandler::parse( GeoParser& parser ) const
         return track;
     }
 
-    mDebug() << "extensions parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

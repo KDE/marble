@@ -27,7 +27,6 @@ bool DgmlGeodataTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     writer.writeAttribute( "name", geodata->name() );
     
     writer.writeStartElement( dgml::dgmlTag_SourceFile );
-    writer.writeAttribute( "format", geodata->sourceFileFormat() );
     writer.writeCharacters( geodata->sourceFile() );
     writer.writeEndElement();
     

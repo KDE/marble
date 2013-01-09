@@ -21,6 +21,10 @@ class GeoDataPoint;
 namespace osm
 {
 
+// This is a class for keeping all the nodes accessible
+// for when needed by ways. Ways have only the ids of
+// nodes so with that id the GeoDataPoint is returned
+
 class OsmNodeFactory
 {
 public:
@@ -32,7 +36,7 @@ public:
      * Removes all nodes from factory.
      * This function must be called only after file loaded.
      */
-    static void cleanUp();
+    static void clear();
 
 private:
     static QMap<quint64, GeoDataPoint *> m_points;

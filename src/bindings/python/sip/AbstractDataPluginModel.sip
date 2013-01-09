@@ -60,6 +60,14 @@ protected:
     void                    clear ();
 signals:
     void                    favoriteItemsChanged (const QStringList& favoriteItems);
+public:
+    QObject*                favoritesModel ();
+    void                    addItemsToList (const QList<Marble::AbstractDataPluginItem*>& items);
+protected:
+    virtual void            getItem (const QString& id, const Marble::MarbleModel* model);
+    void                    registerItemProperties (const QMetaObject& item);
+signals:
+    void                    favoriteItemsOnlyChanged ();
 };
 // AbstractDataPluginModel
 

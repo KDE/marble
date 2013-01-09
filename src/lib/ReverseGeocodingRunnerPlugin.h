@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-class MarbleAbstractRunner;
+class ReverseGeocodingRunner;
 
 /**
   * A plugin for Marble to execute a reverse geocoding task.
@@ -45,7 +45,7 @@ public:
     /** Plugin factory method to create a new runner instance.
       * Method caller gets ownership of the returned object
       */
-    virtual MarbleAbstractRunner* newRunner() const = 0;
+    virtual ReverseGeocodingRunner *newRunner() const = 0;
 
     /** True if the plugin supports its tasks on the given planet */
     bool supportsCelestialBody( const QString &celestialBodyId ) const;
@@ -77,6 +77,6 @@ private:
 
 }
 
-Q_DECLARE_INTERFACE( Marble::ReverseGeocodingRunnerPlugin, "org.kde.Marble.ReverseGeocodingRunnerPlugin/1.0" )
+Q_DECLARE_INTERFACE( Marble::ReverseGeocodingRunnerPlugin, "org.kde.Marble.ReverseGeocodingRunnerPlugin/1.01" )
 
 #endif // MARBLE_REVERSEGEOCODINGRUNNERPLUGIN_H

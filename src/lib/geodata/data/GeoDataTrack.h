@@ -56,7 +56,7 @@ class GEODATA_EXPORT GeoDataTrack : public GeoDataGeometry
 
 public:
     GeoDataTrack();
-    GeoDataTrack( const GeoDataGeometry &other );
+    explicit GeoDataTrack( const GeoDataGeometry &other );
 
     /**
      * Returns the number of points in the track
@@ -175,7 +175,7 @@ public:
 
     virtual const char* nodeType() const;
     virtual EnumGeometryId geometryId() const;
-    virtual GeoDataLatLonAltBox& latLonAltBox() const;
+    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
     virtual void pack( QDataStream& stream ) const;
     virtual void unpack( QDataStream& stream );
 
@@ -184,5 +184,7 @@ private:
 };
 
 }
+
+Q_DECLARE_METATYPE( Marble::GeoDataTrack* )
 
 #endif // MARBLE_GEODATAGXTRACK_H

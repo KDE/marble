@@ -80,8 +80,10 @@ class MarblePart: public KParts::ReadOnlyPart
     void  printMapScreenShot();
     void  copyMap();
     void  copyCoordinates();
+    void  setShowFileView( bool );
     void  setShowClouds( bool );
     void  setShowAtmosphere( bool );
+    void  updateAtmosphereMenu();
     void  setShowCurrentLocation( bool );
     void  setShowBookmarks( bool isChecked );
     void  showFullScreen( bool );
@@ -130,7 +132,8 @@ class MarblePart: public KParts::ReadOnlyPart
     void  controlSun();
     void  controlTime();
     void  showSun( bool );
-    void  showSunInZenith( bool );
+    void  lockToSubSolarPoint( bool );
+    void  setSubSolarPointIconVisible( bool );
     void  workOffline( bool );
 
     void  setupStatusBar();
@@ -147,21 +150,10 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  enableApplyButton();
     void  applyPluginState();
-    void  retrievePluginState();
 
     void  updateSettings();
 
     void  updateStatusBar();
-
-    /**
-     * Shows the about dialog for the plugin with the corresponding @p nameId.
-     */
-    void  showPluginAboutDialog( const QString& nameId );
-
-    /**
-     * Shows the configuration dialog for the plugin with the corresponding @p nameId.
-     */
-    void  showPluginConfigDialog( const QString& nameId );
 
     /**
      * Saves the settings of all plugins.
@@ -214,6 +206,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_copyMapAction;
     KAction      *m_copyCoordinatesAction;
     KAction      *m_currentLocationAction;
+    KAction      *m_showFileViewAction;
     KAction      *m_showCloudsAction;
     KAction      *m_showAtmosphereAction;
     KAction      *m_sideBarAct;
@@ -241,9 +234,8 @@ class MarblePart: public KParts::ReadOnlyPart
 
     // Action for the tool bar
     KToggleAction *m_showShadow;
-    KToggleAction *m_showSunInZenith;
-
-    QStandardItemModel* m_pluginModel;
+    KToggleAction *m_lockToSubSolarPoint;
+    KToggleAction *m_setSubSolarPointIconVisible;
 
     KConfigDialog *m_configDialog;
 

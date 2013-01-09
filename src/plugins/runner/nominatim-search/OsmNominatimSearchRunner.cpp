@@ -10,7 +10,6 @@
 
 #include "OsmNominatimSearchRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "GeoDataDocument.h"
@@ -30,20 +29,16 @@ namespace Marble
 {
 
 OsmNominatimRunner::OsmNominatimRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent ), m_manager( new QNetworkAccessManager (this ) )
+    SearchRunner( parent ),
+    m_manager()
 {
-    connect(m_manager, SIGNAL(finished(QNetworkReply*)),
+    connect(&m_manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(handleResult(QNetworkReply*)));
 }
 
 OsmNominatimRunner::~OsmNominatimRunner()
 {
     // nothing to do
-}
-
-GeoDataFeature::GeoDataVisualCategory OsmNominatimRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
 }
 
 void OsmNominatimRunner::returnNoResults()
@@ -81,7 +76,7 @@ void OsmNominatimRunner::search( const QString &searchTerm, const GeoDataLatLonA
 
 void OsmNominatimRunner::startSearch()
 {
-    QNetworkReply *reply = m_manager->get( m_request );
+    QNetworkReply *reply = m_manager.get( m_request );
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
             this, SLOT(returnNoResults()));
 }
@@ -134,9 +129,9 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         QString description;
         for (int i=0; i<place.childNodes().size(); ++i) {
             QDomElement item = place.childNodes().at(i).toElement();
-            description += item.nodeName() + ": " + item.text() + "\n";
+            description += item.nodeName() + ':' + item.text() + '\n';
         }
-        description += "Category: " + key + "/" + value;
+        description += "Category: " + key + '/' + value;
 
         if (!lon.isEmpty() && !lat.isEmpty() && !desc.isEmpty()) {
             QString placemarkName;
@@ -174,8 +169,8 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             }
             placemark->setName( placemarkName );
             placemark->setDescription(description);
-            placemark->setCoordinate(lon.toDouble(), lat.toDouble(), 0, GeoDataPoint::Degree );
-            GeoDataFeature::GeoDataVisualCategory category = GeoDataFeature::OsmVisualCategory( key + "=" + value );
+            placemark->setCoordinate( lon.toDouble(), lat.toDouble(), 0, GeoDataCoordinates::Degree );
+            GeoDataFeature::GeoDataVisualCategory category = GeoDataFeature::OsmVisualCategory( key + '=' + value );
             placemark->setVisualCategory( category );
             placemarks << placemark;
         }

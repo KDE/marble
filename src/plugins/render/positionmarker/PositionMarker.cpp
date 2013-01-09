@@ -17,7 +17,6 @@
 #include <QtCore/QRect>
 #include <QtCore/qmath.h>
 #include <QtGui/QFileDialog>
-#include <QtGui/QMessageBox>
 #include <QtGui/QPushButton>
 #include <QtGui/QColorDialog>
 #include <QtGui/QTransform>
@@ -55,7 +54,7 @@ PositionMarker::PositionMarker( const MarbleModel *marbleModel )
       m_configDialog( 0 ),
       m_cursorPath( m_defaultCursorPath ),
       m_cursorSize( 1.0 ),
-      m_accuracyColor( oxygenBrickRed4 ),
+      m_accuracyColor( Oxygen::brickRed4 ),
       m_trailColor( 0, 0, 255 ),
       m_heading( 0.0 ),
       m_showTrail ( false )
@@ -126,7 +125,7 @@ QList<PluginAuthor> PositionMarker::pluginAuthors() const
 
 QIcon PositionMarker::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/positionmarker.png");
 }
 
 QDialog *PositionMarker::configDialog()
@@ -138,23 +137,23 @@ QDialog *PositionMarker::configDialog()
         ui_configWidget->setupUi( m_configDialog );
         ui_configWidget->m_resizeSlider->setMaximum( sm_numResizeSteps - 1 );
         readSettings();
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
-                 SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
-                 SLOT( readSettings() ) );
-        connect( ui_configWidget->m_buttonBox->button( QDialogButtonBox::RestoreDefaults ), SIGNAL( clicked () ),
-                 SLOT( restoreDefaultSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
+                 SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
+                 SLOT(readSettings()) );
+        connect( ui_configWidget->m_buttonBox->button( QDialogButtonBox::RestoreDefaults ), SIGNAL(clicked()),
+                 SLOT(restoreDefaultSettings()) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_fileChooserButton, SIGNAL( clicked() ),
-                 SLOT( chooseCustomCursor() ) );
-        connect( ui_configWidget->m_resizeSlider, SIGNAL( valueChanged( int ) ),
-                 SLOT( resizeCursor( int ) ) );
-        connect( ui_configWidget->m_acColorChooserButton, SIGNAL( clicked() ),
-                 SLOT( chooseColor() ) );
-        connect( ui_configWidget->m_trailColorChooserButton, SIGNAL( clicked() ),
-                 SLOT( chooseColor() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 SLOT(writeSettings()) );
+        connect( ui_configWidget->m_fileChooserButton, SIGNAL(clicked()),
+                 SLOT(chooseCustomCursor()) );
+        connect( ui_configWidget->m_resizeSlider, SIGNAL(valueChanged(int)),
+                 SLOT(resizeCursor(int)) );
+        connect( ui_configWidget->m_acColorChooserButton, SIGNAL(clicked()),
+                 SLOT(chooseColor()) );
+        connect( ui_configWidget->m_trailColorChooserButton, SIGNAL(clicked()),
+                 SLOT(chooseColor()) );
     }
     return m_configDialog;
 }
@@ -162,8 +161,8 @@ QDialog *PositionMarker::configDialog()
 void PositionMarker::initialize()
 {
     if ( marbleModel() ) {
-        connect( marbleModel()->positionTracking(), SIGNAL( gpsLocation( GeoDataCoordinates,qreal ) ),
-                this, SLOT( setPosition( GeoDataCoordinates ) ) );
+        connect( marbleModel()->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+                this, SLOT(setPosition(GeoDataCoordinates)) );
         m_isInitialized = true;
     }
     loadDefaultCursor();
@@ -303,7 +302,7 @@ QHash<QString,QVariant> PositionMarker::settings() const
 void PositionMarker::setSettings( const QHash<QString, QVariant> &settings )
 {
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    QColor defaultColor = oxygenBrickRed4;
+    QColor defaultColor = Oxygen::brickRed4;
     defaultColor.setAlpha( smallScreen ? 80 : 40 );
 
     m_useCustomCursor = settings.value( "useCustomCursor", false ).toBool();
@@ -410,8 +409,8 @@ void PositionMarker::loadCustomCursor( const QString& filename, bool useCursor )
     }
     else
     {
-        QMessageBox::warning( NULL, tr( "Position Marker Plugin" ), tr( "Unable to load custom cursor, default cursor will be used. "
-                                                       "Make sure this is a valid image file." ), QMessageBox::Ok );
+        mDebug() << "Unable to load custom cursor from " << filename << ". "
+                 << "The default cursor will be used instead";
         if ( m_configDialog )
             ui_configWidget->m_fileChooserButton->setIcon( QIcon( m_defaultCursor ) );
         m_customCursor = m_defaultCursor;

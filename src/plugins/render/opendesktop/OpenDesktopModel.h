@@ -13,6 +13,7 @@
  
 #include "AbstractDataPluginModel.h"
 #include "GeoDataLatLonAltBox.h"
+#include "MarbleWidget.h"
  
 namespace Marble {
  
@@ -23,8 +24,10 @@ class OpenDesktopModel : public AbstractDataPluginModel
     Q_OBJECT
  
 public:
-    explicit OpenDesktopModel( const PluginManager *pluginManager, QObject *parent = 0 );
+    explicit OpenDesktopModel( QObject *parent = 0 );
     ~OpenDesktopModel();
+
+    void setMarbleWidget(MarbleWidget *widget);
 
 protected:
     /**
@@ -37,6 +40,9 @@ protected:
      * prepares the data for usage.
      **/
     void parseFile(const QByteArray& file);
+
+private:
+    MarbleWidget *m_marbleWidget;
 };
  
 }

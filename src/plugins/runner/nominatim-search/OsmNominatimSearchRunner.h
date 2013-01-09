@@ -12,29 +12,26 @@
 #ifndef MARBLE_OSMNOMINATIMRUNNER_H
 #define MARBLE_OSMNOMINATIMRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "SearchRunner.h"
 
 #include <QtCore/QString>
 #include <QtNetwork/QHostInfo>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 
 class QNetworkReply;
-class QNetworkAccessManager;
 class QDomNodeList;
 
 namespace Marble
 {
 
-class OsmNominatimRunner : public MarbleAbstractRunner
+class OsmNominatimRunner : public SearchRunner
 {
     Q_OBJECT
 public:
     explicit OsmNominatimRunner(QObject *parent = 0);
 
     ~OsmNominatimRunner();
-
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
 
     virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
@@ -48,7 +45,7 @@ private Q_SLOTS:
     void startSearch();
 
 private:
-    QNetworkAccessManager* m_manager;
+    QNetworkAccessManager m_manager;
 
     QNetworkRequest m_request;
 };

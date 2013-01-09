@@ -13,25 +13,21 @@
 #define MARBLE_GEOGRAPHICSITEM_H
 
 // Marble
-#include "MarbleGraphicsItem.h"
 #include "marble_export.h"
 
-// Qt
-#include <QtCore/QList>
-
-class QPoint;
 class QString;
 
 namespace Marble
 {
 
-class GeoDataCoordinates;
 class GeoDataLatLonAltBox;
 
 class GeoGraphicsItemPrivate;
 class GeoDataStyle;
+class GeoPainter;
+class ViewportParams;
 
-class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
+class MARBLE_EXPORT GeoGraphicsItem
 {
  public:
     GeoGraphicsItem();
@@ -46,15 +42,9 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
 
     Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)
 
-    /**
-     * Return the coordinate of the item as a GeoDataCoordinates
-     */
-    virtual GeoDataCoordinates coordinate() const;
+    bool visible() const;
 
-    /**
-     * Set the coordinate of the item with an @p GeoDataPoint.
-     */
-    void setCoordinate( const GeoDataCoordinates &point );
+    void setVisible( bool visible );
 
     /**
      * Get the GeoGraphicItemFlags value that describes which flags are set on
@@ -85,9 +75,9 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     void setMinZoomLevel( int zoomLevel );
 
     /**
-     * Returns the box that is used to determine if an item is active or inactive.
+     * Returns the bounding box covered by the item.
      */
-    virtual GeoDataLatLonAltBox& latLonAltBox() const;
+    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
     /**
      * Set the box used to determine if an item is active or inactive. If an empty box is passed
@@ -101,8 +91,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     const GeoDataStyle* style() const;
 
     /**
-     * Set the box used to determine if an item is active or inactive. If an empty box is passed
-     * the item will be shown in every case.
+     * Set the style for the item.
      */
     void setStyle( const GeoDataStyle* style );
 
@@ -117,12 +106,18 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     void setZValue( qreal z );
 
     /**
-     * Returns all coordinates of the item in view coordinates according to the given projection.
+     * Paints the item using the given GeoPainter.
+     *
+     * Note that depending on the projection and zoom level, the item may be visible more than once,
+     * which is taken care of by GeoPainter.
      */
-    QList<QPointF> positions() const;
+    virtual void paint( GeoPainter *painter, const ViewportParams *viewport ) = 0;
 
  protected:
     GeoGraphicsItemPrivate *p() const;
+
+ private:
+    GeoGraphicsItemPrivate *const d;
 };
 
 } // Namespace Marble

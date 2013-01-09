@@ -12,7 +12,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 
 namespace Marble
 {
@@ -27,14 +27,14 @@ GeoNode* DgmlTileSizeTagHandler::parse( GeoParser& parser ) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if ( !parentItem.represents( dgmlTag_Texture ))
+    if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile ))
         return 0;
 
     int width = parser.attribute(dgmlAttr_width).toInt();
     int height = parser.attribute(dgmlAttr_height).toInt();
     QSize const size( width, height );
     if ( !size.isEmpty() ) {
-        parentItem.nodeAs<GeoSceneTexture>()->setTileSize( size );
+        parentItem.nodeAs<GeoSceneTiled>()->setTileSize( size );
     }
 
     return 0;

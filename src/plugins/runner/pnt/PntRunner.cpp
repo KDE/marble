@@ -11,8 +11,12 @@
 #include "PntRunner.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataLineString.h"
+#include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
+#include "MarbleGlobal.h"
 
+#include <QtCore/qmath.h>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 
@@ -23,17 +27,12 @@ namespace Marble
 const qreal INT2RAD = M_PI / 10800.0;
 
 PntRunner::PntRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 
 PntRunner::~PntRunner()
 {
-}
-
-GeoDataFeature::GeoDataVisualCategory PntRunner::category() const
-{
-    return GeoDataFeature::Folder;
 }
 
 void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
@@ -199,8 +198,10 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     if ( document->size() == 0 || error ) {
         delete document;
         document = 0;
+        emit parsingFinished( 0 );
+        return;
     }
-
+    document->setFileName( fileName );
     emit parsingFinished( document );
 }
 

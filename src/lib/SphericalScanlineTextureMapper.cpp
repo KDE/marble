@@ -18,10 +18,13 @@
 
 #include "MarbleGlobal.h"
 #include "GeoPainter.h"
+#include "GeoDataPolygon.h"
+#include "GeoDataDocument.h"
 #include "MarbleDebug.h"
 #include "Quaternion.h"
 #include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
+#include "StackedTile.h"
 #include "TextureColorizer.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
@@ -166,16 +169,13 @@ void SphericalScanlineTextureMapper::RenderJob::run()
     matrix  planetAxisMatrix;
     m_viewport->planetAxis().toMatrix( planetAxisMatrix );
 
-
     // initialize needed variables that are modified during texture mapping:
 
     ScanlineTextureMapperContext context( m_tileLoader, m_tileLevel );
     qreal  lon = 0.0;
     qreal  lat = 0.0;
 
-
     // Scanline based algorithm to texture map a sphere
-
     for ( int y = m_yTop; y < m_yBottom ; ++y ) {
 
         // Evaluate coordinates for the 3D position vector of the current pixel

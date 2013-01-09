@@ -41,22 +41,19 @@ WeatherPlugin::WeatherPlugin()
 
 WeatherPlugin::WeatherPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_isInitialized( false ),
       m_updateInterval( 0 ),
-      m_icon(),
+      m_icon( MarbleDirs::path( "weather/weather-clear.png" ) ),
       m_configDialog( 0 ),
       ui_configWidget( 0 ),
       m_settings()
 {
-    m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
-
     // Plugin is enabled by default
     setEnabled( true );
     // Plugin is not visible by default
     setVisible( false );
 
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateItemSettings() ) );
+    connect( this, SIGNAL(settingsChanged(QString)),
+             this, SLOT(updateItemSettings()) );
 
     setSettings( QHash<QString,QVariant>() );
 }
@@ -71,18 +68,11 @@ void WeatherPlugin::initialize()
 {
     readSettings();
 
-    WeatherModel *model = new WeatherModel( pluginManager(), this );
+    WeatherModel *model = new WeatherModel( this );
 
     setModel( model );
     updateSettings();
     updateItemSettings();
-
-    m_isInitialized = true;
-}
-
-bool WeatherPlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString WeatherPlugin::name() const
@@ -140,13 +130,13 @@ QDialog *WeatherPlugin::configDialog()
         ui_configWidget = new Ui::WeatherConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
         readSettings();
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
-                                              SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
-                                              SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
+                                              SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
+                                              SLOT(readSettings()) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 this,        SLOT(writeSettings()) );
     }
     return m_configDialog;
 }
@@ -218,6 +208,20 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
 
     emit settingsChanged( nameId() );
     updateSettings();
+}
+
+bool WeatherPlugin::eventFilter(QObject *object, QEvent *event)
+{
+    if ( isInitialized() ) {
+        WeatherModel *weatherModel = qobject_cast<WeatherModel*>( model() );
+        Q_ASSERT(weatherModel);
+        MarbleWidget* widget = qobject_cast<MarbleWidget*>( object );
+        if ( widget ) {
+            weatherModel->setMarbleWidget(widget);
+        }
+    }
+
+    return AbstractDataPlugin::eventFilter( object, event );
 }
 
 void WeatherPlugin::readSettings()
@@ -300,7 +304,7 @@ void WeatherPlugin::updateSettings()
     if ( model() ) {
         bool favoritesOnly = m_settings.value( "onlyFavorites", false ).toBool();
         QList<QString> favoriteItems = m_settings.value( "favoriteItems" ).toString()
-                .split(",", QString::SkipEmptyParts);
+                .split(QLatin1Char(','), QString::SkipEmptyParts);
 
         model()->setFavoriteItems( favoriteItems );
         setNumberOfItems( favoritesOnly ? favoriteItems.size() : numberOfStationsPerFetch );

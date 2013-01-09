@@ -10,13 +10,13 @@
 
 #include "OSRMRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
 #include "routing/Maneuver.h"
+#include "routing/RouteRequest.h"
 #include "TinyWebBrowser.h"
 
 #include <QtCore/QString>
@@ -38,21 +38,16 @@ QVector<QPair<GeoDataCoordinates,QString> > OSRMRunner:: m_cachedHints;
 QString OSRMRunner:: m_hintChecksum;
 
 OSRMRunner::OSRMRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent ),
-    m_networkAccessManager( new QNetworkAccessManager( this ) )
+    RoutingRunner( parent ),
+    m_networkAccessManager()
 {
-    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-             this, SLOT( retrieveData( QNetworkReply * ) ) );
+    connect( &m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
+             this, SLOT(retrieveData(QNetworkReply*)) );
 }
 
 OSRMRunner::~OSRMRunner()
 {
     // nothing to do
-}
-
-GeoDataFeature::GeoDataVisualCategory OSRMRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
 }
 
 void OSRMRunner::retrieveRoute( const RouteRequest *route )
@@ -61,7 +56,7 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
         return;
     }
 
-    QString url = "http://router.project-osrm.org/viaroute?output=json&geomformat=cmp&instructions=true";
+    QString url = "http://router.project-osrm.org/viaroute?output=json&instructions=true";
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     bool appendChecksum = false;
     typedef QPair<GeoDataCoordinates,QString> CachePair;
@@ -69,7 +64,7 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
     QString const invalidEntry = "invalid";
     for ( int i=0; i<route->size(); ++i ) {
         GeoDataCoordinates const coordinates = route->at( i );
-        append( &url, "loc", QString::number( coordinates.latitude( degree ), 'f', 6 ) + "," + QString::number( coordinates.longitude( degree ), 'f', 6 ) );
+        append( &url, "loc", QString::number( coordinates.latitude( degree ), 'f', 6 ) + ',' + QString::number( coordinates.longitude( degree ), 'f', 6 ) );
         foreach( const CachePair &hint, m_cachedHints ) {
             if ( hint.first == coordinates && hint.second != invalidEntry && m_hintChecksum != invalidEntry ) {
                 append( &url, "hint", hint.second );
@@ -86,16 +81,16 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
     m_cachedHints = newChecksums;
     m_hintChecksum = invalidEntry;
 
-    QNetworkRequest request = QNetworkRequest( QUrl( url ) );
-    request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "OSRMRunner" ) );
-    QNetworkReply *reply = m_networkAccessManager->get( request );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
+    m_request = QNetworkRequest( QUrl( url ) );
+    m_request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "OSRMRunner" ) );
 
     QEventLoop eventLoop;
 
-    connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
-             &eventLoop, SLOT( quit() ) );
+    connect( this, SIGNAL(routeCalculated(GeoDataDocument*)),
+             &eventLoop, SLOT(quit()) );
+
+    // @todo FIXME Must currently be done in the main thread, see bug 257376
+    QTimer::singleShot( 0, this, SLOT(get()) );
 
     eventLoop.exec();
 }
@@ -120,9 +115,16 @@ void OSRMRunner::handleError( QNetworkReply::NetworkError error )
     mDebug() << " Error when retrieving OSRM route: " << error;
 }
 
+void OSRMRunner::get()
+{
+    QNetworkReply *reply = m_networkAccessManager.get( m_request );
+    connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
+             this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection );
+}
+
 void OSRMRunner::append(QString *input, const QString &key, const QString &value) const
 {
-    *input += "&" + key + "=" + value;
+    *input += '&' + key + '=' + value;
 }
 
 GeoDataLineString *OSRMRunner::decodePolyline( const QString &geometry ) const
@@ -168,7 +170,7 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instructi
         return RoutingInstruction::SlightLeft;
     } else if ( instruction == "10" ) {
         return RoutingInstruction::Continue;
-    } else if ( instruction.startsWith( "11-" ) ) {
+    } else if ( instruction.startsWith( QLatin1String( "11-" ) ) ) {
         int const exit = instruction.mid( 3 ).toInt();
         switch ( exit ) {
         case 1: return RoutingInstruction::RoundaboutFirstExit; break;
@@ -192,7 +194,7 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input )
 {
     QScriptEngine engine;
     // Qt requires parentheses around json code
-    QScriptValue const data = engine.evaluate( "(" + QString::fromUtf8( input ) + ")" );
+    QScriptValue const data = engine.evaluate( '(' + QString::fromUtf8( input ) + ')' );
 
     GeoDataDocument* result = 0;
     GeoDataLineString* routeWaypoints = 0;
@@ -205,7 +207,7 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input )
         routePlacemark->setGeometry( routeWaypoints );
 
         QString name = "%1 %2 (OSRM)";
-        QString unit = "m";
+        QString unit = QLatin1String( "m" );
         qreal length = routeWaypoints->length( EARTH_RADIUS );
         if (length >= 1000) {
             length /= 1000.0;

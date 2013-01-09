@@ -25,6 +25,7 @@ namespace Marble
 {
 
 class MarbleAbstractRunner;
+class RoutingRunner;
 
 /**
   * A plugin for Marble to execute a routing task.
@@ -50,7 +51,7 @@ public:
     /** Plugin factory method to create a new runner instance.
       * Method caller gets ownership of the returned object
       */
-    virtual MarbleAbstractRunner* newRunner() const = 0;
+    virtual RoutingRunner *newRunner() const = 0;
 
     /** True if the plugin supports its tasks on the given planet */
     bool supportsCelestialBody( const QString &celestialBodyId ) const;
@@ -106,6 +107,6 @@ private:
 
 }
 
-Q_DECLARE_INTERFACE( Marble::RoutingRunnerPlugin, "org.kde.Marble.RunnerRunnerPlugin/1.00" )
+Q_DECLARE_INTERFACE( Marble::RoutingRunnerPlugin, "org.kde.Marble.RunnerRunnerPlugin/1.01" )
 
 #endif // MARBLE_ROUTINGRUNNERPLUGIN_H

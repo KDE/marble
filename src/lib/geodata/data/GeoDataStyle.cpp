@@ -28,7 +28,8 @@ class GeoDataStylePrivate
         : m_iconStyle( icon ),
           m_labelStyle( font, color ),
           m_lineStyle( color ),
-          m_polyStyle( color )
+          m_polyStyle( color ),
+          m_balloonStyle()
     {
     }
 
@@ -41,8 +42,8 @@ class GeoDataStylePrivate
     GeoDataLabelStyle  m_labelStyle;
     GeoDataLineStyle   m_lineStyle;
     GeoDataPolyStyle   m_polyStyle;
-    // BalloonStyle
-    // ListStyle
+    GeoDataBalloonStyle m_balloonStyle;
+    GeoDataListStyle m_listStyle;
 };
 
 GeoDataStyle::GeoDataStyle()
@@ -81,6 +82,7 @@ const char* GeoDataStyle::nodeType() const
 void GeoDataStyle::setIconStyle( const GeoDataIconStyle& style )
 {
     d->m_iconStyle = style;
+    d->m_iconStyle.setParent( this );
 }
 
 void GeoDataStyle::setLineStyle( const GeoDataLineStyle& style )
@@ -96,6 +98,16 @@ void GeoDataStyle::setLabelStyle( const GeoDataLabelStyle& style )
 void GeoDataStyle::setPolyStyle( const GeoDataPolyStyle& style )
 {
     d->m_polyStyle = style;
+}
+
+void GeoDataStyle::setBalloonStyle( const GeoDataBalloonStyle& style )
+{
+    d->m_balloonStyle = style;
+}
+
+void GeoDataStyle::setListStyle( const GeoDataListStyle& style )
+{
+    d->m_listStyle = style;
 }
 
 GeoDataIconStyle& GeoDataStyle::iconStyle() const
@@ -118,6 +130,26 @@ GeoDataLabelStyle& GeoDataStyle::labelStyle() const
     return d->m_labelStyle;
 }
 
+GeoDataBalloonStyle& GeoDataStyle::balloonStyle()
+{
+    return d->m_balloonStyle;
+}
+
+const GeoDataBalloonStyle& GeoDataStyle::balloonStyle() const
+{
+    return d->m_balloonStyle;
+}
+
+GeoDataListStyle& GeoDataStyle::listStyle()
+{
+    return d->m_listStyle;
+}
+
+const GeoDataListStyle& GeoDataStyle::listStyle() const
+{
+    return d->m_listStyle;
+}
+
 void GeoDataStyle::pack( QDataStream& stream ) const
 {
     GeoDataStyleSelector::pack( stream );
@@ -126,6 +158,8 @@ void GeoDataStyle::pack( QDataStream& stream ) const
     d->m_labelStyle.pack( stream );
     d->m_polyStyle.pack( stream );
     d->m_lineStyle.pack( stream );
+    d->m_balloonStyle.pack( stream );
+    d->m_listStyle.pack( stream );
 }
 
 void GeoDataStyle::unpack( QDataStream& stream )
@@ -136,6 +170,8 @@ void GeoDataStyle::unpack( QDataStream& stream )
     d->m_labelStyle.unpack( stream );
     d->m_lineStyle.unpack( stream );
     d->m_polyStyle.unpack( stream );
+    d->m_balloonStyle.unpack( stream );
+    d->m_listStyle.unpack( stream );
 }
 
 }

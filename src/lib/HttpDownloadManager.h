@@ -29,7 +29,6 @@ namespace Marble
 
 class DownloadPolicy;
 class DownloadQueueSet;
-class PluginManager;
 class StoragePolicy;
 
 /**
@@ -54,8 +53,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
      *
      * @param policy The storage policy for this manager.
      */
-    explicit HttpDownloadManager( StoragePolicy *policy,
-                                  const PluginManager *pluginManager );
+    explicit HttpDownloadManager( StoragePolicy *policy );
 
     /**
      * Destroys the http download manager.

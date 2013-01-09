@@ -17,8 +17,6 @@
 using namespace Marble;
 /* TRANSLATOR Marble::GpsdPositionProviderPlugin */
 
-using namespace std;
-
 QString GpsdPositionProviderPlugin::name() const
 {
     return tr( "Gpsd position provider Plugin" );
@@ -67,10 +65,10 @@ void GpsdPositionProviderPlugin::initialize()
     emit statusChanged( m_status );
 
     m_thread = new GpsdThread;
-    connect( m_thread, SIGNAL( gpsdInfo( gps_data_t ) ),
-             this, SLOT( update( gps_data_t ) ) );
-    connect( m_thread, SIGNAL( statusChanged( PositionProviderStatus ) ),
-             this, SIGNAL( statusChanged( PositionProviderStatus ) ) );
+    connect( m_thread, SIGNAL(gpsdInfo(gps_data_t)),
+             this, SLOT(update(gps_data_t)) );
+    connect( m_thread, SIGNAL(statusChanged(PositionProviderStatus)),
+             this, SIGNAL(statusChanged(PositionProviderStatus)) );
     m_thread->start();
 }
 

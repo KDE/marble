@@ -17,9 +17,11 @@
 #include <QtCore/QString>
 
 #include "marble_export.h"
+#include "MarbleGlobal.h"
 
 class QPoint;
 class QUrl;
+class QAbstractItemModel;
 
 namespace Marble
 {
@@ -28,7 +30,6 @@ class AbstractDataPluginModelPrivate;
 class AbstractDataPluginItem;
 class GeoDataLatLonAltBox;
 class MarbleModel;
-class PluginManager;
 class ViewportParams;
 
 /**
@@ -44,11 +45,12 @@ class ViewportParams;
 class MARBLE_EXPORT AbstractDataPluginModel : public QObject
 {
     Q_OBJECT
+
+    /** @todo FIXME Qt Quick segfaults if using the real class here instead of QObject */
+    Q_PROPERTY( QObject* favoritesModel READ favoritesModel CONSTANT )
  
  public:
-    explicit AbstractDataPluginModel( const QString& name,
-                                      const PluginManager *pluginManager,
-                                      QObject *parent = 0 );
+    explicit AbstractDataPluginModel( const QString& name, QObject *parent = 0 );
     virtual ~AbstractDataPluginModel();
         
     /**
@@ -78,8 +80,17 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     virtual void setFavoriteItems( const QStringList& list );
     QStringList favoriteItems() const;
 
-    virtual void setFavoriteItemsOnly( bool favoriteOnly );
+    void setFavoriteItemsOnly( bool favoriteOnly );
     bool isFavoriteItemsOnly() const;
+
+    QObject* favoritesModel();
+
+public Q_SLOTS:
+    /**
+     * Adds the @p items to the list of initialized items. It checks if items with the same id are
+     * already in the list and ignores and deletes them in this case.
+     */
+    void addItemsToList( const QList<AbstractDataPluginItem*> &items );
 
  protected:
     /**
@@ -90,6 +101,12 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
                                      const MarbleModel *model,
                                      qint32 number = 10 ) = 0;
+
+    /**
+     * @brief Retrieve data for a specific item
+     * @param id Item id of the item to retrieve
+     */
+    virtual void getItem( const QString &id, const MarbleModel *model );
        
     /**
      * Parse the @p file and generate items. The items will be added to the list or the method
@@ -100,12 +117,20 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
         
     /**
      * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
+     * download is finished.
+     * @param: The type of the download (to be specified by the subclasser)
+     **/
+    void downloadItem( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
+
+    /**
+     * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
      * download is finished. Additionally initialized() items will be added to the item list
      * after the download. It checks if a item with the same id is already in the list and
      * ignores and deletes the item in this case.
      * @param: The type of the download (to be specified by the subclasser)
+     * @deprecated Please use downloadItem() and addItemsToList() for efficiency
      **/
-    void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
+    MARBLE_DEPRECATED( void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item ) );
     
     /**
      * Download the description file from the @p url.
@@ -113,8 +138,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     void downloadDescriptionFile( const QUrl& url );
     
     /**
-     * Adds the @p item to the list of initialized items. It checks if a item with the same id is
-     * already in the list and ignores and deletes the item in this case.
+     * Convenience method to add one item to the list. See addItemsToList
      */
     void addItemToList( AbstractDataPluginItem *item );
     
@@ -153,6 +177,8 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Removes all items
      */
     void clear();
+
+    void registerItemProperties( const QMetaObject& item );
     
  private Q_SLOTS:
     /**
@@ -175,12 +201,16 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
 
     void favoriteItemChanged( const QString& id, bool isFavorite );
 
+    void scheduleItemSort();
+
  Q_SIGNALS:
     void itemsUpdated();
     void favoriteItemsChanged( const QStringList& favoriteItems );
-    
+    void favoriteItemsOnlyChanged();
+
  private:
     AbstractDataPluginModelPrivate * const d;
+    friend class AbstractDataPluginModelPrivate;
 };
 
 }

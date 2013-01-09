@@ -36,7 +36,6 @@ public:
     bool                    resolves (const Marble::GeoDataCoordinates& coord1, const Marble::GeoDataCoordinates& coord2) const;
     int                     radius () const;
     void                    setRadius (int radius);
-    bool                    globeCoversViewport () const;
     Marble::Quaternion      planetAxis () const;
     int                     width () const;
     int                     height () const;

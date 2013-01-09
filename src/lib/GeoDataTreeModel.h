@@ -15,6 +15,8 @@
 
 #include <QtCore/QAbstractItemModel>
 
+class QItemSelectionModel;
+
 namespace Marble
 {
 class GeoDataObject;
@@ -71,6 +73,8 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
     bool setData ( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
 
     void reset() { QAbstractItemModel::reset(); }
+
+    QItemSelectionModel *selectionModel();
 
 public Q_SLOTS:
 

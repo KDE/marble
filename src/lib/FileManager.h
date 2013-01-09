@@ -53,13 +53,13 @@ class FileManager : public QObject
     /**
      * Loads a new file into the manager.
      */
-    void addFile( const QString &fileName, DocumentRole role, bool recenter = false );
+    void addFile( const QString &fileName, const QString &property, GeoDataStyle* style, DocumentRole role, bool recenter = false );
 
 
     /**
      * Loads multiple files into the manager.
      */
-    void addFile( const QStringList &fileNames, DocumentRole role );
+    void addFile( const QStringList &fileNames, const QStringList &propertyList, const QList<GeoDataStyle*> &styles, DocumentRole role );
 
 
     /**
@@ -72,30 +72,25 @@ class FileManager : public QObject
     */
     void addData( const QString &name, const QString &data, DocumentRole role );
 
-    void saveFile( int index );
-    void closeFile( int index );
+    void saveFile( GeoDataDocument *document );
+    void closeFile( GeoDataDocument *document );
 
     int size() const;
-    GeoDataDocument *at( int index );
+    GeoDataDocument *at( const QString &key );
 
 
  Q_SIGNALS:
-    void fileAdded( int index );
-    void fileRemoved( int index );
+    void fileAdded( const QString &key );
+    void fileRemoved( const QString &key );
     void centeredDocument( const GeoDataLatLonBox& );
-
- public Q_SLOTS:
-    void addGeoDataDocument( GeoDataDocument *document );
-
- private Q_SLOTS:
-    void cleanupLoader( FileLoader *loader );
 
  private:
 
-    void appendLoader( FileLoader *loader );
+    Q_PRIVATE_SLOT( d, void cleanupLoader( FileLoader *loader ) )
 
     Q_DISABLE_COPY( FileManager )
 
+    friend class FileManagerPrivate;
     FileManagerPrivate *const d;
 };
 

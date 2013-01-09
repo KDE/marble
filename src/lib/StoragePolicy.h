@@ -27,7 +27,7 @@ class StoragePolicy : public QObject
     Q_OBJECT
     
     public:
-	StoragePolicy( QObject *parent = 0 );
+        explicit StoragePolicy( QObject *parent = 0 );
 	
         virtual ~StoragePolicy() {}
 

@@ -70,7 +70,7 @@ QByteArray GosmoreRunnerPrivate::retrieveWaypoints( const QString &query ) const
 }
 
 GosmoreRunner::GosmoreRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        ReverseGeocodingRunner( parent ),
         d( new GosmoreRunnerPrivate )
 {
     // Check installation
@@ -81,11 +81,6 @@ GosmoreRunner::GosmoreRunner( QObject *parent ) :
 GosmoreRunner::~GosmoreRunner()
 {
     delete d;
-}
-
-GeoDataFeature::GeoDataVisualCategory GosmoreRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
 }
 
 void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
@@ -103,7 +98,7 @@ void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
     QByteArray output = d->retrieveWaypoints( queryString );
 
     GeoDataPlacemark placemark;
-    placemark.setCoordinate( GeoDataPoint( coordinates ) );
+    placemark.setCoordinate( coordinates );
 
     QStringList lines = QString::fromUtf8( output ).split( '\r' );
     if ( lines.size() > 2 ) {

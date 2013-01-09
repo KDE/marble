@@ -13,23 +13,8 @@
   <property name="windowTitle">
    <string>Legend</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="MarbleLegendBrowser" name="marbleLegendBrowser">
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-    </widget>
-   </item>
-  </layout>
+  <layout class="QVBoxLayout" name="verticalLayout"/>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>MarbleLegendBrowser</class>
-   <extends>QTextBrowser</extends>
-   <header>MarbleLegendBrowser.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

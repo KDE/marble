@@ -143,10 +143,10 @@ BookmarksModel::BookmarksModel( QObject *parent ) : QSortFilterProxyModel( paren
     roles[Qt::DisplayRole] = "name";
     setRoleNames( roles );
 
-    connect( this, SIGNAL( layoutChanged() ), this, SIGNAL( countChanged() ) );
-    connect( this, SIGNAL( modelReset() ), this, SIGNAL( countChanged() ) );
-    connect( this, SIGNAL( rowsInserted( QModelIndex, int, int ) ), this, SIGNAL( countChanged() ) );
-    connect( this, SIGNAL( rowsRemoved( QModelIndex, int, int ) ), this, SIGNAL( countChanged() ) );
+    connect( this, SIGNAL(layoutChanged()), this, SIGNAL(countChanged()) );
+    connect( this, SIGNAL(modelReset()), this, SIGNAL(countChanged()) );
+    connect( this, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SIGNAL(countChanged()) );
+    connect( this, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SIGNAL(countChanged()) );
 }
 
 int BookmarksModel::count() const

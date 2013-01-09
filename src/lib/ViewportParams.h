@@ -54,7 +54,7 @@ class MARBLE_EXPORT ViewportParams
 
     int polarity() const;
 
-    GeoDataLatLonAltBox& viewLatLonAltBox() const;
+    const GeoDataLatLonAltBox& viewLatLonAltBox() const;
 
     GeoDataLatLonAltBox latLonAltBox( const QRect &screenRect ) const;
 

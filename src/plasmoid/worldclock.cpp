@@ -100,7 +100,8 @@ void WorldClock::init()
     //Set up the Sun to draw night/day shadow
     m_map->setShowSunShading(true);
     m_map->setShowCityLights(true);
-    m_map->setShowSunInZenith(cg.readEntry("centersun", false ));
+    m_map->setLockToSubSolarPoint(cg.readEntry("centersun", false ));
+    m_map->setSubSolarPointIconVisible(true);
 
     m_customTz = cg.readEntry("customtz", false );
     m_locationkey = KSystemTimeZones::local().name();
@@ -443,7 +444,7 @@ void WorldClock::configAccepted()
     KConfigGroup cg = config();
 
     if( ui.daylightButton->isChecked() )
-        m_map->setShowSunInZenith(true);
+        m_map->setSubSolarPointIconVisible(true);
     else {
         m_map->centerOn(ui.longitudeEdit->value(), 0);
         update();

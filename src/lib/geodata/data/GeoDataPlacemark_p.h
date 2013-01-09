@@ -13,6 +13,8 @@
 
 #include "GeoDataFeature_p.h"
 
+#include "GeoDataMultiTrack.h"
+#include "GeoDataTrack.h"
 #include "GeoDataTypes.h"
 
 namespace Marble
@@ -58,6 +60,12 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
                 break;
             case GeoDataMultiGeometryId:
                 geometry = new GeoDataMultiGeometry( *static_cast<GeoDataMultiGeometry*>( other.m_geometry ) );
+                break;
+            case GeoDataTrackId:
+                geometry = new GeoDataTrack( *static_cast<GeoDataTrack*>( other.m_geometry ) );
+                break;
+            case GeoDataMultiTrackId:
+                geometry = new GeoDataMultiTrack( *static_cast<GeoDataMultiTrack*>( other.m_geometry ) );
                 break;
             case GeoDataModelId:
                 break;

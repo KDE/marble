@@ -37,7 +37,8 @@ public:
     enum Notation
     {
         Decimal,
-        DMS
+        DMS,
+        DM
     };
 
     typedef QVector<Marble::GeoDataCoordinates> Vector;
@@ -83,6 +84,7 @@ public:
     };
     bool                    isValid () const;
     qreal                   bearing (const Marble::GeoDataCoordinates& other, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian, Marble::GeoDataCoordinates::BearingType type = Marble::GeoDataCoordinates::InitialBearing) const;
+//ig    void                    geoCoordinates (qreal& lon, qreal& lat, qreal& alt, Marble::GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian) const;
 };
 // GeoDataCoordinates
 

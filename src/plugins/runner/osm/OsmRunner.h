@@ -10,24 +10,18 @@
 #ifndef MARBLEOSMRUNNER_H
 #define MARBLEOSMRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class OsmRunner : public MarbleAbstractRunner
+class OsmRunner : public ParsingRunner
 {
     Q_OBJECT
 public:
     explicit OsmRunner(QObject *parent = 0);
     ~OsmRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void parseFile( const QString &fileName, DocumentRole role );
-
-signals:
-
-public slots:
-
 };
 
 }

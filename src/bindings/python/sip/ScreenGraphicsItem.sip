@@ -41,11 +41,9 @@ public:
     virtual ~ScreenGraphicsItem ();
     void                    setPosition (const QPointF& position);
     QPointF                 positivePosition () const;
-    virtual void            changeViewport (Marble::ViewportParams* viewport);
     Marble::ScreenGraphicsItem::GraphicsItemFlags  flags () const;
     void                    setFlags (Marble::ScreenGraphicsItem::GraphicsItemFlags flags);
 protected:
-//ig                            ScreenGraphicsItem (const QPointF& position, const QSizeF& size, ScreenGraphicsItemPrivate* d_ptr);
     virtual bool            eventFilter (QObject*, QEvent*);
 public:
     QList<QPointF>          absolutePositions () const;

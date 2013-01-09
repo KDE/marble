@@ -12,18 +12,15 @@
 #ifndef MARBLE_OSMMAPQUESTRUNNER_H
 #define MARBLE_OSMMAPQUESTRUNNER_H
 
-#include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
+#include "RoutingRunner.h"
 
-#include <QtCore/QString>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
-
-class QNetworkAccessManager;
 
 namespace Marble
 {
 
-class MapQuestRunner : public MarbleAbstractRunner
+class MapQuestRunner : public RoutingRunner
 {
     Q_OBJECT
 
@@ -33,12 +30,11 @@ public:
     ~MapQuestRunner();
 
     // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
-    // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );
 
 private Q_SLOTS:
+    void get();
+
     /** Route data was retrieved via http */
     void retrieveData( QNetworkReply *reply );
 
@@ -52,7 +48,9 @@ private:
 
     GeoDataDocument* parse( const QByteArray &input ) const;
 
-    QNetworkAccessManager *m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
+
+    QNetworkRequest m_request;
 };
 
 }

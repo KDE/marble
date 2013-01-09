@@ -55,6 +55,7 @@ class TileCoordsPyramid;
 class TileCreator;
 class GeoDataPlacemark;
 class ViewportParams;
+class MapInfoDialog;
 
 /**
  * @short A widget class that displays a view of the earth.
@@ -105,7 +106,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleWidget")
 #endif
 
-    Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
+    Q_PROPERTY(int zoom          READ zoom            WRITE setZoom)
 
     Q_PROPERTY(QString mapThemeId  READ mapThemeId    WRITE setMapThemeId)
     Q_PROPERTY(int projection    READ projection      WRITE setProjection)
@@ -121,7 +122,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showClouds   READ showClouds      WRITE setShowClouds)
     Q_PROPERTY(bool showSunShading READ showSunShading WRITE setShowSunShading)
     Q_PROPERTY(bool showCityLights READ showCityLights WRITE setShowCityLights)
-    Q_PROPERTY(bool showSunInZenith READ showSunInZenith WRITE setShowSunInZenith)
+    Q_PROPERTY(bool isLockedToSubSolarPoint READ isLockedToSubSolarPoint WRITE setLockToSubSolarPoint)
+    Q_PROPERTY(bool isSubSolarPointIconVisible READ isSubSolarPointIconVisible WRITE setSubSolarPointIconVisible)
     Q_PROPERTY(bool showAtmosphere READ showAtmosphere WRITE setShowAtmosphere)
     Q_PROPERTY(bool showCrosshairs READ showCrosshairs WRITE setShowCrosshairs)
 
@@ -238,6 +240,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void removeLayer( LayerInterface *layer );
 
     RoutingLayer* routingLayer();
+
+    MapInfoDialog* mapInfoDialog();
 
     /**
      * @brief  Get the Projection used for the map
@@ -444,10 +448,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool showCityLights() const;
 
     /**
-     * @brief  Return whether the sun is shown in the zenith.
-     * @return visibility of sun in the zenith
+     * @brief  Return whether the globe is locked to the sub solar point
+     * @return if globe is locked to sub solar point
      */
-    bool showSunInZenith() const;
+    bool isLockedToSubSolarPoint() const;
+
+    /**
+     * @brief  Return whether the sun icon is shown in the sub solar point.
+     * @return visibility of the sun icon in the sub solar point
+     */
+    bool isSubSolarPointIconVisible() const;
 
     /**
      * @brief  Return whether the atmospheric glow is visible.
@@ -568,6 +578,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     //@}
 
+    /// @todo Enable this instead of the zoomView slot below for proper deprecation warnings
+    /// around Marble 1.8
+    // @deprecated Please use setZoom
+    //MARBLE_DEPRECATED( void zoomView( int zoom, FlyToMode mode = Instant ) );
+
  public Q_SLOTS:
 
     /// @name Position management slots
@@ -586,6 +601,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * The zoom level is an abstract value without physical
      * interpretation.  A zoom value around 1000 lets the viewer see
      * all of the earth in the default window.
+     */
+    void setZoom( int zoom, FlyToMode mode = Instant );
+
+    /**
+     * @deprecated To be removed soon. Please use setZoom instead. Same parameters.
      */
     void zoomView( int zoom, FlyToMode mode = Instant );
 
@@ -785,10 +805,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowCityLights( bool visible );
 
     /**
-     * @brief Set whether the sun is visible in the zenith.
-     * @param visible  visibility of the sun in the zenith
+     * @brief  Set the globe locked to the sub solar point
+     * @param  vsible if globe is locked to the sub solar point
      */
-    void setShowSunInZenith( bool visible );
+    void setLockToSubSolarPoint( bool visible );
+
+    /**
+     * @brief  Set whether the sun icon is shown in the sub solar point
+     * @param  visible if the sun icon is shown in the sub solar point
+     */
+    void setSubSolarPointIconVisible( bool visible );
 
     /**
      * @brief  Set whether the atmospheric glow is visible
@@ -939,7 +965,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void reloadMap();
 
-    void downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & );
+    void downloadRegion( QVector<TileCoordsPyramid> const & );
 
     //@}
 
@@ -963,7 +989,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Signal that the zoom has changed, and to what.
      * @param zoom  The new zoom value.
-     * @see  zoomView()
+     * @see  setZoom()
      */
     void zoomChanged( int zoom );
     void distanceChanged( const QString& distanceString );

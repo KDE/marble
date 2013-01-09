@@ -25,6 +25,8 @@
 #include "GeoDataLabelStyle.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataBalloonStyle.h"
+#include "GeoDataListStyle.h"
 
 #include "geodata_export.h"
 
@@ -47,6 +49,8 @@ class GeoDataStylePrivate;
  * @see GeoDataLabelStyle
  * @see GeoDataLineStyle
  * @see GeoDataPolyStyle
+ * @see GeoDataBalloonStyle
+ * @see GeoDataListStyle
  */
 class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 {
@@ -83,6 +87,16 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     void setPolyStyle( const GeoDataPolyStyle& style );
     /// Return the label style of this style
     GeoDataPolyStyle& polyStyle() const;
+    /// set the balloon style
+    void setBalloonStyle( const GeoDataBalloonStyle& style );
+    /// Return the balloon style of this style
+    GeoDataBalloonStyle& balloonStyle();
+    const GeoDataBalloonStyle& balloonStyle() const;
+    /// set the list style
+    void setListStyle( const GeoDataListStyle& style );
+    /// Return the list style of this style
+    GeoDataListStyle& listStyle();
+    const GeoDataListStyle& listStyle() const;
 
     /**
     * @brief assignment operator
@@ -108,5 +122,6 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 }
 
 Q_DECLARE_METATYPE( Marble::GeoDataStyle* )
+Q_DECLARE_METATYPE( const Marble::GeoDataStyle* )
 
 #endif

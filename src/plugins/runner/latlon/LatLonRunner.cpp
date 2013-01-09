@@ -9,7 +9,6 @@
 
 #include "LatLonRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
@@ -24,15 +23,11 @@
 namespace Marble
 {
 
-LatLonRunner::LatLonRunner(QObject *parent) : MarbleAbstractRunner(parent)
+LatLonRunner::LatLonRunner(QObject *parent) :
+    SearchRunner(parent)
 {
 }
 
-
-GeoDataFeature::GeoDataVisualCategory LatLonRunner::category() const
-{
-    return GeoDataFeature::Coordinate;
-}
 
 LatLonRunner::~LatLonRunner()
 {
@@ -51,7 +46,7 @@ void LatLonRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox 
         qreal lon, lat;
         coord.geoCoordinates( lon, lat );
         placemark->setCoordinate( lon, lat );
-        placemark->setVisualCategory( category() );
+        placemark->setVisualCategory( GeoDataFeature::Coordinate );
         placemark->setPopularity( 1000000000 );
         placemark->setZoomLevel( 1 );
         vector.append( placemark );

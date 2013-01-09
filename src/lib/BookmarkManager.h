@@ -67,7 +67,7 @@ class MARBLE_EXPORT BookmarkManager : public QObject
 
     GeoDataDocument * document() const;
 
-    bool showBookmarks();
+    bool showBookmarks() const;
 
     /**
       * @brief return Vector of folders
@@ -104,7 +104,7 @@ Q_SIGNALS:
     */
     bool updateBookmarkFile();
 
-    GeoDataDocument* openFile( const QString& fileName ) const;
+    static GeoDataDocument* openFile( const QString& fileName );
 
     BookmarkManagerPrivate* const d;
 

@@ -12,6 +12,8 @@
 #include "GeoDataDocument.h"
 
 #include "OsmNodeFactory.h"
+#include "OsmWayFactory.h"
+#include "OsmRelationFactory.h"
 #include "OsmGlobals.h"
 
 namespace Marble {
@@ -23,7 +25,9 @@ OsmParser::OsmParser()
 
 OsmParser::~OsmParser()
 {
-    osm::OsmNodeFactory::cleanUp();
+    osm::OsmRelationFactory::clear();
+    osm::OsmWayFactory::clear();
+    osm::OsmNodeFactory::clear();
     osm::OsmGlobals::cleanUpDummyPlacemarks();
 }
 

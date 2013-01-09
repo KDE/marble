@@ -111,6 +111,8 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
            "<i>Satellites</i></p>")+
         QObject::tr("<p>Friedrich W. H. Kossebau, <a href=\"mailto:kossebau@kde.org\">kossebau@kde.org</a><br />"
            "<i>Plasma Integration, Bugfixes</i></p>")+
+        QObject::tr("<p>Rene Kuettner, <a href=\"mailto:rene@bitkanal.net\">rene@bitkanal.net</a><br />"
+           "<i>Planetary Satellites</i></p>")+
         QObject::tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:earthwings@gentoo.org\">earthwings@gentoo.org</a><br />"
            "<i>Routing, Navigation, Mobile</i></p>")+
         QObject::tr("<p>Niko Sams <a href=\"mailto:niko.sams@gmail.com\">niko.sams@gmail.com</a><br />"
@@ -145,12 +147,20 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr("<b>ESA - Summer of Code in Space 2011</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in ESA SoCiS for their successful work on Marble:</p>")+
+        QObject::tr("<p><b>2012</b></p>")+
+        QObject::tr("<p>Rene Kuettner, <a href=\"mailto:rene@bitkanal.net\">rene@bitkanal.net</a><br />"
+           "<i>Project: Visualization of planetary satellites</i></p>")+
+        QObject::tr("<p><b>2011</b></p>")+
         QObject::tr("<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu.com</a><br />"
            "<i>Project: Visualisation of Satellite Orbits</i></p>")+
 
         QObject::tr("<b>Google Code-in</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in the Google Code-in for their successful work on Marble:</p>")+
+        QObject::tr( "<p><b>2012</b></p>" ) +
+        QObject::tr( "Illya Kovalevskyy <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya.kovalevskyy@gmail.com</a><br />" ) +
+        QObject::tr( "Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees.technocool@gmail.com</a></p><br />" ) +
+        QObject::tr( "Timothy Lanzi <a href=\"mailto:trlanzi@gmail.com\">trlanzi@gmail.com</a></p>" ) +
         QObject::tr( "<p><b>2011</b></p>" ) +
         QObject::tr( "<p>Utku Ayd&#x131;n <a href=\"mailto:utkuaydin34@gmail.com\">utkuaydin34@gmail.com</a><br />" ) +
         QObject::tr( "Daniel Marth <a href=\"mailto:danielmarth@gmx.at\">danielmarth@gmx.at</a><br />" ) +
@@ -237,9 +247,12 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
            "<a href=\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">"
            "Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>")+
         QObject::tr( "<p><i>Icons</i><br />"
-            "Some icons are taken from <a href=\"http://www.sjjb.co.uk/mapicons\">SJJB Management</a> and <a href=\"http://http://thenounproject.com\">NounProject</a>."
+            "Some icons are taken from <a href=\"http://www.sjjb.co.uk/mapicons\">SJJB Management</a> and <a href=\"http://http://thenounproject.com\">NounProject</a>. "
             "These icons can be used freely under the terms of the "
             "<a href=\"http://creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0 Universal</a> license.</p>") +
+        QObject::tr( "<p>Some icons are taken from <a href=\"http://fortawesome.github.com/Font-Awesome\">Font Awesome</a>. "
+            "These icons can be used freely under the terms of the "
+            "<a href=\"http://creativecommons.org/licenses/by/3.0/\">CC BY 3.0</a> license.</p>") +
         QObject::tr("<p><i>OpenRouteService</i><br />"
            "Some of the routes used in Marble via download are provided by the <a href=\""
            "http://www.openrouteservice.org\">OpenRouteService</a> Project (\"ORS\"). <br />"
@@ -320,6 +333,11 @@ void MarbleAboutDialog::setApplicationTitle( const QString &title )
     QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();
     format.setMargin(12);
     browser->document()->rootFrame()->setFrameFormat( format );
+}
+
+void MarbleAboutDialog::setInitialTab( MarbleAboutDialog::Tab tab )
+{
+    d->uiWidget.tabWidget->setCurrentIndex( tab );
 }
 
 }

@@ -9,10 +9,10 @@
 //
 
 #include "EarthquakeItem.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 
 #include <QtGui/QFontMetrics>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtSvg/QSvgRenderer>
 
@@ -65,13 +65,8 @@ void EarthquakeItem::setMagnitude( double magnitude )
     updateTooltip();
 }
 
-void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                            const QString& renderPos, GeoSceneLayer * layer )
+void EarthquakeItem::paint( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-
     // Save the old painter state.
     painter->save();
 
@@ -81,11 +76,11 @@ void EarthquakeItem::paint( GeoPainter *painter, ViewportParams *viewport,
 
     // Draws the circle with circles' center as rectangle's top-left corner.
     QRect arcRect( 0, 0, width, height );
-    QColor color = oxygenBrickRed4;
+    QColor color = Oxygen::brickRed4;
     if ( magnitude() < 5.0 ) {
-        color = oxygenSunYellow6;
+        color = Oxygen::sunYellow6;
     } else if ( magnitude() < 6.0 ) {
-        color = oxygenHotOrange4;
+        color = Oxygen::hotOrange4;
     }
     painter->setPen( QPen( Qt::NoPen ) );
     QBrush brush( color );

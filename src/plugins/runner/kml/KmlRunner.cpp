@@ -18,17 +18,12 @@ namespace Marble
 {
 
 KmlRunner::KmlRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 
 KmlRunner::~KmlRunner()
 {
-}
-
-GeoDataFeature::GeoDataVisualCategory KmlRunner::category() const
-{
-    return GeoDataFeature::Folder;
 }
 
 void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
@@ -53,6 +48,7 @@ void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     Q_ASSERT( document );
     GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
     doc->setDocumentRole( role );
+    doc->setFileName( fileName );
 
     file.close();
     emit parsingFinished( doc );

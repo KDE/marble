@@ -24,7 +24,7 @@ const QString standardImageSize = "mini_square";
 class PanoramioWidget : public AbstractDataPluginWidget
 {
  public:
-    PanoramioWidget( QObject *parent );
+    explicit PanoramioWidget( QObject *parent );
     
     QString widgetType() const;
      

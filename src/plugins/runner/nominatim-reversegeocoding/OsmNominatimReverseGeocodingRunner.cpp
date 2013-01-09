@@ -10,7 +10,6 @@
 
 #include "OsmNominatimReverseGeocodingRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "GeoDataDocument.h"
@@ -30,9 +29,10 @@ namespace Marble
 {
 
 OsmNominatimRunner::OsmNominatimRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent ), m_manager( new QNetworkAccessManager (this ) )
+    ReverseGeocodingRunner( parent ),
+    m_manager(this)
 {
-    connect(m_manager, SIGNAL(finished(QNetworkReply*)),
+    connect(&m_manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(handleResult(QNetworkReply*)));
 }
 
@@ -41,10 +41,6 @@ OsmNominatimRunner::~OsmNominatimRunner()
     // nothing to do
 }
 
-GeoDataFeature::GeoDataVisualCategory OsmNominatimRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
 
 void OsmNominatimRunner::returnNoReverseGeocodingResult()
 {
@@ -66,18 +62,18 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
 
     QEventLoop eventLoop;
 
-    connect( this, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-             &eventLoop, SLOT( quit() ) );
+    connect( this, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates, GeoDataPlacemark)),
+             &eventLoop, SLOT(quit()) );
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( startReverseGeocoding() ) );
+    QTimer::singleShot( 0, this, SLOT(startReverseGeocoding()) );
 
     eventLoop.exec();
 }
 
 void OsmNominatimRunner::startReverseGeocoding()
 {
-    QNetworkReply *reply = m_manager->get( m_request );
+    QNetworkReply *reply = m_manager.get( m_request );
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
             this, SLOT(returnNoReverseGeocodingResult()));
 }
@@ -102,7 +98,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         QString address = places.item( 0 ).toElement().text();
         GeoDataPlacemark placemark;
         placemark.setAddress( address );
-        placemark.setCoordinate( GeoDataPoint( m_coordinates ) );
+        placemark.setCoordinate( m_coordinates );
 
         QDomNodeList details = root.elementsByTagName( "addressparts" );
         if ( details.size() == 1 ) {

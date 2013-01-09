@@ -1,5 +1,5 @@
 //
-// This file is part of the Marble Desktop Globe.
+// This file is part of the Marble Virtual Globe.
 //
 // This program is free software licensed under the GNU LGPL. You can
 // find a copy of this license in LICENSE.txt in the top directory of
@@ -58,9 +58,9 @@ int DownloadRegionPrivate::rad2PixelY( qreal const lat, const TextureLayer *text
             * textureLayer->tileRowCount( m_visibleTileLevel );
     qreal const normGlobalHeight = globalHeight / M_PI;
     switch ( textureLayer->tileProjection() ) {
-    case GeoSceneTexture::Equirectangular:
+    case GeoSceneTiled::Equirectangular:
         return static_cast<int>( globalHeight * 0.5 - lat * normGlobalHeight );
-    case GeoSceneTexture::Mercator:
+    case GeoSceneTiled::Mercator:
         if ( fabs( lat ) < 1.4835 )
             return static_cast<int>( globalHeight * 0.5 - gdInv( lat ) * 0.5 * normGlobalHeight );
         if ( lat >= +1.4835 )

@@ -21,10 +21,28 @@ else( QTONLY OR WIN32 OR APPLE )
     option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
 endif( QTONLY OR WIN32 OR APPLE )
 
+####################################################
+# Where to look first for cmake modules,
+# before ${CMAKE_ROOT}/Modules/ is checked
+set ( CMAKE_MODULE_PATH
+     ${CMAKE_SOURCE_DIR}/cmake/modules
+     ${CMAKE_CURRENT_SOURCE_DIR}
+     ${CMAKE_CURRENT_SOURCE_DIR}/src
+     ${CMAKE_CURRENT_SOURCE_DIR}/cmake_find_rules
+     ${CMAKE_CURRENT_SOURCE_DIR}/cmake_scripts
+     ${CMAKE_MODULE_PATH}
+     )
+
+# add cmake macros
+include( MarbleMacros )
+
 ###################################################
 # Check if KDE4 is available
 if( NOT QTONLY AND NOT KDE4_FOUND )
     find_package(KDE4 REQUIRED)
+    marble_set_package_properties( KDE4 PROPERTIES DESCRIPTION "technological foundation for KDE applications" )
+    marble_set_package_properties( KDE4 PROPERTIES URL "http://kde.org/" )
+    marble_set_package_properties( KDE4 PROPERTIES TYPE REQUIRED PURPOSE "KDE version of Marble" )
     include (KDE4Defaults)
     include (MacroLibrary)
 endif( NOT QTONLY AND NOT KDE4_FOUND) 
@@ -84,8 +102,7 @@ if( QTONLY AND NOT WIN32 )
         INCLUDE(CTest)
     endif( BUILD_MARBLE_TESTS )
 else()
-    # for KDE builds this gets set in the kdeedu CMakeLists.txt
-    set( BUILD_MARBLE_TESTS OFF )
+    set( BUILD_MARBLE_TESTS ${KDE4_BUILD_TESTS} )
 endif()
 
 if( BUILD_MARBLE_TESTS )
@@ -215,17 +232,6 @@ endif(WIN32)
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 
 ####################################################
-# Where to look first for cmake modules, 
-# before ${CMAKE_ROOT}/Modules/ is checked
-set ( CMAKE_MODULE_PATH 
-     ${CMAKE_SOURCE_DIR}/cmake/modules
-     ${CMAKE_CURRENT_SOURCE_DIR}
-     ${CMAKE_CURRENT_SOURCE_DIR}/src
-     ${CMAKE_CURRENT_SOURCE_DIR}/cmake_find_rules
-     ${CMAKE_CURRENT_SOURCE_DIR}/cmake_scripts
-     )
-
-####################################################
 # Options for static build
 if(STATIC_BUILD)
   add_definitions(-DSTATIC_BUILD=1)
@@ -252,6 +258,14 @@ if(QTONLY)
   set( QT_USE_QTTEST     ON )
   set( QT_USE_QTSCRIPT   ON )
   include( ${QT_USE_FILE} )
+  marble_set_package_properties( Qt4 PROPERTIES DESCRIPTION "cross-platform application framework" )
+  marble_set_package_properties( Qt4 PROPERTIES URL "http://qt.digia.com/" )
+  marble_set_package_properties( Qt4 PROPERTIES TYPE REQUIRED PURPOSE "core framework" )
+  IF ( NOT QT_QTDECLARATIVE_LIBRARY )
+    # older cmake versions have a FindQt4.cmake without support for declarative,
+    # but the library may still be available
+    FIND_LIBRARY(QT_QTDECLARATIVE_LIBRARY NAMES QtDeclarative HINTS ${QT_LIBRARY_DIR})
+  ENDIF()
 
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources
@@ -295,8 +309,6 @@ endif(WIN32)
 # reenable this if you want to debug kml tags
 # add_definitions("-DDEBUG_TAGS")
 ####################################################
-# add cmake macros
-include( MarbleMacros )
 
 ####################################################
 # Add the include directories
@@ -313,7 +325,6 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/writer
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/scene
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/graphicsview
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/graphicsview/screengraphicsitem
   ${CMAKE_CURRENT_BINARY_DIR}/src
   ${CMAKE_CURRENT_BINARY_DIR}/src/lib
 )
@@ -354,3 +365,5 @@ if(QTONLY)
 endif(QTONLY)
 
 include(MarbleCPackOptions)
+
+marble_feature_summary(WHAT ALL)

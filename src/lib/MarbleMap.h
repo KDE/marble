@@ -264,10 +264,16 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool showCityLights() const;
 
     /**
-     * @brief  Return whether the sun is shown in the zenith.
-     * @return visibility of sun in the zenith
+     * @brief  Return whether the globe is locked to the sub solar point
+     * @return if globe is locked to sub solar point
      */
-    bool showSunInZenith() const;
+    bool isLockedToSubSolarPoint() const;
+
+    /**
+     * @brief  Return whether the sun icon is shown in the sub solar point.
+     * @return visibility of the sun icon in the sub solar point
+     */
+    bool isSubSolarPointIconVisible() const;
 
     /**
      * @brief  Return whether the atmospheric glow is visible.
@@ -507,10 +513,16 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setShowCityLights( bool visible );
 
     /**
-     * @brief Set whether the sun is visible in the zenith.
-     * @param visible  visibility of the sun in the zenith
+     * @brief  Set the globe locked to the sub solar point
+     * @param  vsible if globe is locked to the sub solar point
      */
-    void setShowSunInZenith( bool visible );
+    void setLockToSubSolarPoint( bool visible );
+
+    /**
+     * @brief  Set whether the sun icon is shown in the sub solar point
+     * @param  visible if the sun icon is shown in the sub solar point
+     */
+    void setSubSolarPointIconVisible( bool visible );
 
     /**
      * @brief Set whether the is tile is visible
@@ -625,7 +637,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void reload() const;
 
-    void downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & );
+    void downloadRegion( QVector<TileCoordsPyramid> const & );
 
  Q_SIGNALS:
     void tileLevelChanged( int level );
@@ -683,6 +695,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
  private:
     Q_PRIVATE_SLOT( d, void updateMapTheme() )
     Q_PRIVATE_SLOT( d, void updateProperty( const QString &, bool ) )
+    Q_PRIVATE_SLOT( d, void setDocument(QString) )
 
  private:
     Q_DISABLE_COPY( MarbleMap )

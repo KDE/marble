@@ -12,12 +12,18 @@ namespace Marble
 {
 namespace osm
 {
+
+// OSM data primitives and what do they represent
+// http://wiki.openstreetmap.org/wiki/Elements
+
 const char* osmTag_osm = "osm";
 const char* osmTag_bound = "bound";
 const char* osmTag_bounds = "bounds";
 const char* osmTag_nd = "nd";
 const char* osmTag_node = "node";
 const char* osmTag_way = "way";
+const char* osmTag_relation = "relation";
+const char* osmTag_member = "member";
 const char* osmTag_tag = "tag";
 }
 }

@@ -21,7 +21,7 @@
 #include "GeoSceneZoom.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneGeodata.h"
@@ -122,10 +122,10 @@ PreviewDialog::PreviewDialog( QWidget* parent, QString mapThemeId ) : QDialog( p
     connect( navigator, SIGNAL( moveRight() ), widget, SLOT( moveRight() ) );
     connect( navigator, SIGNAL( zoomIn() ), widget, SLOT( zoomIn() ) );
     connect( navigator, SIGNAL( zoomOut() ), widget, SLOT( zoomOut() ) );
-    connect( navigator, SIGNAL( zoomChanged(int) ), widget, SLOT( zoomView(int) ) );
+    connect( navigator, SIGNAL( zoomChanged(int) ), widget, SLOT( setZoom(int) ) );
     
     widget->setMapThemeId( m_mapThemeId );
-    widget->zoomView( 1000 );
+    widget->setZoom( 1000 );
     
     layout->addWidget( navigator, 1, 1 );
     layout->addWidget( widget, 1, 2 );
@@ -553,7 +553,7 @@ void MapWizard::queryLegendImage()
 
 QString MapWizard::createArchive( QWidget *parent, QString mapId )
 {
-    QStringList splitMapId( mapId.split("/") );
+    QStringList splitMapId( mapId.split(QLatin1Char('/')) );
     QString body = splitMapId[0];
     QString theme = splitMapId[1];
     QDir themeDir;
@@ -630,7 +630,7 @@ QString MapWizard::createArchive( QWidget *parent, QString mapId )
 
 void MapWizard::deleteArchive( QString mapId )
 {
-    QStringList splitMapId( mapId.split("/") );
+    QStringList splitMapId( mapId.split(QLatin1Char('/')) );
     QString theme = splitMapId[1];
     QFile::remove( QString( "%1/%2.tar.gz" ).arg( QDir::tempPath() ).arg( theme ) );
 }
@@ -768,7 +768,7 @@ GeoSceneDocument* MapWizard::createDocument()
     zoom->setMaximum( 3500 );
     zoom->setDiscrete( false );
     
-    GeoSceneTexture *texture = new GeoSceneTexture( "map" );
+    GeoSceneTiled *texture = new GeoSceneTiled( "map" );
     texture->setExpire( 31536000 );
     texture->setSourceDir( "earth/" + document->head()->theme() ); 
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
@@ -782,7 +782,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new WmsServerLayout( texture ) );
-        texture->setProjection( GeoSceneTexture::Equirectangular );
+        texture->setProjection( GeoSceneTiled::Equirectangular );
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
@@ -796,7 +796,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new CustomServerLayout( texture ) );
-        texture->setProjection( GeoSceneTexture::Mercator );
+        texture->setProjection( GeoSceneTiled::Mercator );
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
@@ -804,9 +804,9 @@ GeoSceneDocument* MapWizard::createDocument()
         QString image = d->uiWidget.lineEditSource->text();
         d->format = image.right( image.length() - image.lastIndexOf( '.' ) - 1 ).toLower();
         texture->setFileFormat( d->format.toUpper() );
-        texture->setInstallMap( document->head()->theme() + "." + d->format );
+        texture->setInstallMap( document->head()->theme() + '.' + d->format );
         texture->setServerLayout( new MarbleServerLayout( texture ) );
-        texture->setProjection( GeoSceneTexture::Equirectangular );
+        texture->setProjection( GeoSceneTiled::Equirectangular );
         int imageWidth = QImage( image ).width();
         int tileSize = c_defaultTileSize;
         
@@ -829,32 +829,26 @@ GeoSceneDocument* MapWizard::createDocument()
   
     GeoSceneGeodata* cityplacemarks = new GeoSceneGeodata( "cityplacemarks" );
     cityplacemarks->setSourceFile( "cityplacemarks.kml" );
-    cityplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( cityplacemarks );
     
     GeoSceneGeodata* baseplacemarks = new GeoSceneGeodata( "baseplacemarks" );
     baseplacemarks->setSourceFile( "baseplacemarks.kml" );
-    baseplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( baseplacemarks );
     
     GeoSceneGeodata* elevplacemarks = new GeoSceneGeodata( "elevplacemarks" );
     elevplacemarks->setSourceFile( "elevplacemarks.kml" );
-    elevplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( elevplacemarks );
     
     GeoSceneGeodata* observatoryplacemarks = new GeoSceneGeodata( "observatoryplacemarks" );
     observatoryplacemarks->setSourceFile( "observatoryplacemarks.kml" );
-    observatoryplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( observatoryplacemarks );
     
     GeoSceneGeodata* otherplacemarks = new GeoSceneGeodata( "otherplacemarks" );
     otherplacemarks->setSourceFile( "otherplacemarks.kml" );
-    otherplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( otherplacemarks );
     
     GeoSceneGeodata* boundaryplacemarks = new GeoSceneGeodata( "boundaryplacemarks" );
     boundaryplacemarks->setSourceFile( "boundaryplacemarks.kml" );
-    boundaryplacemarks->setSourceFileFormat( "KML" );
     secondLayer->addDataset( boundaryplacemarks );
     
     GeoSceneMap *map = document->map();

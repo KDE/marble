@@ -24,7 +24,7 @@ MapThemeModel::MapThemeModel( QObject *parent ) : QSortFilterProxyModel( parent 
 {
     setSourceModel( m_themeManager->mapThemeModel() );
     handleChangedThemes();
-    connect( m_themeManager, SIGNAL( themesChanged() ), this, SLOT( handleChangedThemes() ) );
+    connect( m_themeManager, SIGNAL(themesChanged()), this, SLOT(handleChangedThemes()) );
 }
 
 int MapThemeModel::count()
@@ -77,11 +77,11 @@ bool MapThemeModel::filterAcceptsRow( int sourceRow, const QModelIndex &sourcePa
         return false;
      }
 
-     if ( m_mapThemeFilters & MapThemeModel::Terrestrial && themeId.startsWith( "earth/" ) ) {
+     if ( m_mapThemeFilters & MapThemeModel::Terrestrial && themeId.startsWith( QLatin1String( "earth/" ) ) ) {
         return false;
      }
 
-     if ( m_mapThemeFilters & MapThemeModel::Extraterrestrial && !themeId.startsWith( "earth/" ) ) {
+     if ( m_mapThemeFilters & MapThemeModel::Extraterrestrial && !themeId.startsWith( QLatin1String( "earth/" ) ) ) {
         return false;
      }
 

@@ -44,7 +44,7 @@ class KineticModel: public QObject
     Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval)
 
 public:
-    KineticModel(QObject *parent = 0);
+    explicit KineticModel(QObject *parent = 0);
     ~KineticModel();
 
     int duration() const;
@@ -55,6 +55,8 @@ public slots:
     void setDuration(int ms);
     void setPosition(QPointF position);
     void setPosition(qreal posX, qreal posY);
+    void jumpToPosition(QPointF position);
+    void jumpToPosition(qreal posX, qreal posY);
     void setUpdateInterval(int ms);
     void stop();
     void start();

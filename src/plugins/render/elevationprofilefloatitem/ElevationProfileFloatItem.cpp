@@ -12,6 +12,7 @@
 #include "ElevationProfileFloatItem.h"
 
 #include <QtCore/QRect>
+#include <QtGui/QPainter>
 #include <QtGui/QPushButton>
 #include <QtGui/QMenu>
 
@@ -21,7 +22,6 @@
 #include "MarbleWidget.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "routing/RoutingModel.h"
 #include "routing/RoutingManager.h"
@@ -138,14 +138,14 @@ QIcon ElevationProfileFloatItem::icon () const
 
 void ElevationProfileFloatItem::initialize ()
 {
-    connect( marbleModel()->elevationModel(), SIGNAL( updateAvailable() ), SLOT( updateData() ) );
+    connect( marbleModel()->elevationModel(), SIGNAL(updateAvailable()), SLOT(updateData()) );
 
     m_routingModel = marbleModel()->routingManager()->routingModel();
-    connect( m_routingModel, SIGNAL( currentRouteChanged() ), this, SLOT( updateData() ) );
+    connect( m_routingModel, SIGNAL(currentRouteChanged()), this, SLOT(updateData()) );
 
     m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
     m_leftGraphMargin = QFontMetricsF( font() ).width( "0000 m" ); // TODO make this dynamic according to actual need
-    connect( this, SIGNAL( dataUpdated() ), SLOT( forceRepaint() ) );
+    connect( this, SIGNAL(dataUpdated()), SLOT(forceRepaint()) );
 
     updateData();
 
@@ -179,15 +179,8 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
     update();
 }
 
-void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
-        ViewportParams *viewport,
-        const QString& renderPos,
-        GeoSceneLayer * layer )
+void ElevationProfileFloatItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-
     painter->save();
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setFont( font() );
@@ -225,14 +218,14 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     }
 
     // draw X and Y axis
-    painter->setPen( oxygenAluminumGray4 );
+    painter->setPen( Oxygen::aluminumGray4 );
     painter->drawLine( m_leftGraphMargin, m_eleGraphHeight, contentSize().width(), m_eleGraphHeight );
     painter->drawLine( m_leftGraphMargin, m_eleGraphHeight, m_leftGraphMargin, 0 );
 
     // draw Y grid and labels
     painter->setPen( QColor( Qt::black ) );
     QPen dashedPen( Qt::DashLine );
-    dashedPen.setColor( oxygenAluminumGray4 );
+    dashedPen.setColor( Oxygen::aluminumGray4 );
     QRect labelRect( 0, 0, m_leftGraphMargin - 1, m_fontHeight + 2 );
     lastStringEnds = m_eleGraphHeight + m_fontHeight;
 //     painter->drawText( m_leftGraphMargin + 1, m_fontHeight, "[" + m_axisY.unit() + "]" );
@@ -267,7 +260,7 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
 
         intervalStr.setNum( tick.value * m_axisX.scale() );
         if ( tick.position == m_axisX.ticks().last().position ) {
-            intervalStr += " " + m_axisX.unit();
+            intervalStr += ' ' + m_axisX.unit();
         }
         labelRect.setWidth( QFontMetricsF( font() ).width( intervalStr ) * 1.5 );
         labelRect.moveCenter( QPoint( posX, labelRect.center().y() ) );
@@ -303,8 +296,8 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
     painter->setPen( pen );
 
     QLinearGradient fillGradient( 0, 0, 0, m_eleGraphHeight );
-    QColor startColor = oxygenForestGreen4;
-    QColor endColor = oxygenBrownOrange4;
+    QColor startColor = Oxygen::forestGreen4;
+    QColor endColor = Oxygen::hotOrange4;
     startColor.setAlpha( 200 );
     endColor.setAlpha( 32 );
     fillGradient.setColorAt( 0.0, startColor );
@@ -369,13 +362,13 @@ void ElevationProfileFloatItem::paintContent( GeoPainter *painter,
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
         intervalStr.setNum( xpos * m_axisX.scale(), 'f', 2 );
-        intervalStr += " " + m_axisX.unit();
+        intervalStr += ' ' + m_axisX.unit();
         int currentStringBegin = m_leftGraphMargin + m_cursorPositionX
                              - QFontMetricsF( font() ).width( intervalStr ) / 2;
         painter->drawText( currentStringBegin, contentSize().height() - 1.5 * m_fontHeight, intervalStr );
 
         intervalStr.setNum( currentPoint.altitude(), 'f', 1 );
-        intervalStr += " " + m_axisY.unit();
+        intervalStr += ' ' + m_axisY.unit();
         if ( m_cursorPositionX + QFontMetricsF( font() ).width( intervalStr ) + m_leftGraphMargin
                 < m_eleGraphWidth ) {
             currentStringBegin = ( m_leftGraphMargin + m_cursorPositionX + 5 + 2 );
@@ -403,10 +396,10 @@ QDialog *ElevationProfileFloatItem::configDialog() //FIXME TODO Make a config di
 
         readSettings();
 
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ), SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ), SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ), this, SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()) );
     }
     return m_configDialog;
 }
@@ -424,7 +417,7 @@ void ElevationProfileFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent 
         }
 
         QAction *toggleAction = m_contextMenu->addAction( tr("&Zoom to viewport"), this,
-                                SLOT( toggleZoomToViewport() ) );
+                                SLOT(toggleZoomToViewport()) );
         toggleAction->setCheckable( true );
         toggleAction->setChecked( m_zoomToViewport );
     }
@@ -446,10 +439,10 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
 
     if ( widget && !m_marbleWidget ) {
         m_marbleWidget = widget;
-        connect( this, SIGNAL( dataUpdated() ), this, SLOT( updateVisiblePoints() ) );
-        connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
-                 this, SLOT( updateVisiblePoints() ) );
-        connect( this, SIGNAL( settingsChanged( QString ) ), this, SLOT( updateVisiblePoints() ) );
+        connect( this, SIGNAL(dataUpdated()), this, SLOT(updateVisiblePoints()) );
+        connect( m_marbleWidget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+                 this, SLOT(updateVisiblePoints()) );
+        connect( this, SIGNAL(settingsChanged(QString)), this, SLOT(updateVisiblePoints()) );
     }
 
     if ( e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove ) {

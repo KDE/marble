@@ -26,13 +26,13 @@ namespace Marble
 class OverpaintBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+    virtual void blend( QImage * const bottom, Tile const * const top ) const;
 };
 
 class IndependentChannelBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+    virtual void blend( QImage * const bottom, Tile const * const top ) const;
  private:
     // bottomColorIntensity: intensity of one color channel (of one pixel) of the bottom image
     // topColorIntensity: intensity of one color channel (of one pixel) of the top image
@@ -244,7 +244,7 @@ class HalfDifferenceBlending: public IndependentChannelBlending
 class CloudsBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+    virtual void blend( QImage * const bottom, Tile const * const top ) const;
 };
 
 }

@@ -10,23 +10,18 @@
 #ifndef MARBLEGPXRUNNER_H
 #define MARBLEGPXRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class GpxRunner : public MarbleAbstractRunner
+class GpxRunner : public ParsingRunner
 {
     Q_OBJECT
 public:
     explicit GpxRunner(QObject *parent = 0);
     ~GpxRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void parseFile( const QString &fileName, DocumentRole role );
-
-signals:
-
-public slots:
 
 };
 

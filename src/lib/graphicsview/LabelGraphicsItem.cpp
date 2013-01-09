@@ -12,14 +12,11 @@
 #include "LabelGraphicsItem.h"
 #include "LabelGraphicsItem_p.h"
 
-// Marble
-#include "GeoPainter.h"
-
 // Qt
-#include <QtGui/QApplication>
-#include "MarbleDebug.h"
-#include <QtGui/QFont>
 #include <QtCore/QString>
+#include <QtGui/QApplication>
+#include <QtGui/QFont>
+#include <QtGui/QPainter>
 
 using namespace Marble;
 
@@ -129,13 +126,8 @@ void LabelGraphicsItem::clear()
     setContentSize( QSizeF( 0.0, 0.0 ) );
 }
 
-void LabelGraphicsItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
-                              const QString& renderPos, GeoSceneLayer * layer = 0 )
+void LabelGraphicsItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-
     painter->save();
 
     if ( !d->m_text.isNull() ) {

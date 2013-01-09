@@ -10,7 +10,6 @@
 #include "LocalOsmSearchRunner.h"
 
 #include "OsmDatabase.h"
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -25,7 +24,7 @@ namespace Marble
 QMap<OsmPlacemark::OsmCategory, GeoDataFeature::GeoDataVisualCategory> LocalOsmSearchRunner::m_categoryMap;
 
 LocalOsmSearchRunner::LocalOsmSearchRunner( OsmDatabase *database, QObject *parent ) :
-    MarbleAbstractRunner( parent ),
+    SearchRunner( parent ),
     m_database( database )
 {
     if ( m_categoryMap.isEmpty() ) {
@@ -94,11 +93,6 @@ LocalOsmSearchRunner::~LocalOsmSearchRunner()
 {
 }
 
-GeoDataFeature::GeoDataVisualCategory LocalOsmSearchRunner::category() const
-{
-    return GeoDataFeature::Coordinate;
-}
-
 
 void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {
@@ -109,10 +103,10 @@ void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLo
         GeoDataPlacemark* hit = new GeoDataPlacemark;
         hit->setName( placemark.name() );
         if ( placemark.category() == OsmPlacemark::Address && !placemark.houseNumber().isEmpty() ) {
-            hit->setName( hit->name() + " " + placemark.houseNumber() );
+            hit->setName( hit->name() + ' ' + placemark.houseNumber() );
         }
         if ( !placemark.additionalInformation().isEmpty() ) {
-            hit->setName( hit->name() + " (" + placemark.additionalInformation() + ")" );
+            hit->setName( hit->name() + '(' + placemark.additionalInformation() + ')' );
         }
         if ( placemark.category() != OsmPlacemark::UnknownCategory ) {
             hit->setVisualCategory( m_categoryMap[placemark.category()] );

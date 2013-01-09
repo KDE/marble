@@ -22,6 +22,8 @@ extern const char* osmTag_bounds;
 extern const char* osmTag_nd;
 extern const char* osmTag_node;
 extern const char* osmTag_way;
+extern const char* osmTag_relation;
+extern const char* osmTag_member;
 extern const char* osmTag_tag;
 }
 }

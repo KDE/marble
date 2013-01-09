@@ -12,11 +12,11 @@
 #include "PostalCodeItem.h"
 
 // Marble
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 
 // Qt
 #include <QtGui/QFontMetrics>
+#include <QtGui/QPainter>
 
 using namespace Marble;
 
@@ -61,13 +61,8 @@ void PostalCodeItem::setText( const QString& text )
     m_text = text;
 }
 
-void PostalCodeItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                          const QString& renderPos, GeoSceneLayer * layer )
+void PostalCodeItem::paint( QPainter *painter )
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-    Q_UNUSED( viewport )
-
     painter->save();
 
     const int fontAscent = QFontMetrics( s_font ).ascent();

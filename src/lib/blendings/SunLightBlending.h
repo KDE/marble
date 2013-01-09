@@ -31,7 +31,7 @@ class SunLightBlending: public Blending
  public:
     explicit SunLightBlending( const SunLocator * sunLocator );
     virtual ~SunLightBlending();
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+    virtual void blend( QImage * const bottom, Tile const * const top ) const;
 
     void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );
 

@@ -24,6 +24,8 @@
 
 #include "GeoTagHandler.h"
 
+#include <QtGui/QColor>
+
 namespace Marble
 {
 namespace kml
@@ -33,6 +35,8 @@ class KmlcolorTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse(GeoParser&) const;
+
+    static QColor parseColor( const QString &colorString );
 };
 
 }

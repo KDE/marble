@@ -29,10 +29,10 @@ OfflineDataModel::OfflineDataModel( QObject *parent ) : QSortFilterProxyModel( p
     sort( 0 );
     setDynamicSortFilter( true );
 
-    connect( &m_newstuffModel, SIGNAL( installationProgressed( int, qreal ) ), this, SLOT( handleInstallationProgress( int,qreal ) ) );
-    connect( &m_newstuffModel, SIGNAL( installationFinished( int ) ), this, SLOT( handleInstallationFinished( int ) ) );
-    connect( &m_newstuffModel, SIGNAL( installationFailed( int, QString ) ), this, SLOT( handleInstallationFailed( int, QString ) ) );
-    connect( &m_newstuffModel, SIGNAL( uninstallationFinished( int ) ), this, SLOT( handleUninstallationFinished( int ) ) );
+    connect( &m_newstuffModel, SIGNAL(installationProgressed(int,qreal)), this, SLOT(handleInstallationProgress(int,qreal)) );
+    connect( &m_newstuffModel, SIGNAL(installationFinished(int)), this, SLOT(handleInstallationFinished(int)) );
+    connect( &m_newstuffModel, SIGNAL(installationFailed(int,QString)), this, SLOT(handleInstallationFailed(int,QString)) );
+    connect( &m_newstuffModel, SIGNAL(uninstallationFinished(int)), this, SLOT(handleUninstallationFinished(int)) );
 }
 
 int OfflineDataModel::count()
@@ -49,9 +49,9 @@ QVariant OfflineDataModel::data(const QModelIndex &index, int role) const
             for ( int i=2; i<data.size(); ++i ) {
                 result += " / " + data.at( i );
             }
-            result.replace( " (Motorcar)", "" );
-            result.replace( " (Pedestrian)", "" );
-            result.replace( " (Bicycle)", "" );
+            result.remove( QLatin1String( " (Motorcar)" ) );
+            result.remove( QLatin1String( " (Pedestrian)" ) );
+            result.remove( QLatin1String( " (Bicycle)" ) );
             return result.trimmed();
         }
     }

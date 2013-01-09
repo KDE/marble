@@ -34,7 +34,7 @@ public:
 
     Q_DECLARE_FLAGS(VehicleTypes, VehicleType)
 
-    OfflineDataModel( QObject* parent = 0 );
+    explicit OfflineDataModel( QObject* parent = 0 );
 
     /** @todo FIXME https://bugreports.qt.nokia.com/browse/QTCOMPONENTS-1206 */
     int count();

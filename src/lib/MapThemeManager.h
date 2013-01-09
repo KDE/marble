@@ -75,6 +75,15 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      */
     GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID ) const;
 
+    /**
+     * @brief Deletes the map theme with the specified map theme ID.
+     * @param mapThemeId ID of the map theme to be deleted
+     *
+     * Deletion will only succeed for local map themes, that is, if the map
+     * theme's directory structure resides in the user's home directory.
+     */
+    static void deleteMapTheme( const QString &mapThemeId );
+
  Q_SIGNALS:
     /**
      * @brief This signal will be emitted, when the themes change.

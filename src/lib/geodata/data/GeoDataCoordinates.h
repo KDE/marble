@@ -77,8 +77,9 @@ class GEODATA_EXPORT GeoDataCoordinates
      * Degrees-(Arc)Minutes-(Arc)Seconds to describe parts of a degree.
      */
     enum Notation{
-        Decimal,
-        DMS
+        Decimal, ///< "Decimal" notation (base-10)
+        DMS,     ///< "Sexagesimal DMS" notation (base-60)
+        DM       ///< "Sexagesimal DM" notation (base-60)
     };
 
     /**

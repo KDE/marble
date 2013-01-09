@@ -22,7 +22,7 @@ void GeoImageGraphicsItem::setLatLonBox( const GeoDataLatLonBox &box )
     p()->m_latLonAltBox = box;
 }
 
-GeoDataLatLonBox& GeoImageGraphicsItem::latLonBox() const
+const GeoDataLatLonBox& GeoImageGraphicsItem::latLonBox() const
 {
     return p()->m_latLonAltBox;
 }
@@ -47,12 +47,8 @@ QString GeoImageGraphicsItem::imageFile() const
     return m_imageFile;
 }
 
-void GeoImageGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
-                                  const QString& renderPos, GeoSceneLayer* layer )
+void GeoImageGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
     bool unloadImage = true;
     if ( viewport->projection() != Spherical ) {
         qreal x1(0.0), x2(0.0), y1( 0.0 ), y2( 0.0 );

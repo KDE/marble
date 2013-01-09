@@ -26,7 +26,7 @@ class MarbleDeclarativeObject : public QObject
     Q_PROPERTY(QString version READ version CONSTANT)
 
 public:
-    MarbleDeclarativeObject( QObject* parent = 0 );
+    explicit MarbleDeclarativeObject( QObject* parent = 0 );
 
     ~MarbleDeclarativeObject();
 

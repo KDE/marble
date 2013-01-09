@@ -1,34 +1,17 @@
-project( Poly2KML )
-include_directories(
- ${CMAKE_SOURCE_DIR}/src/poly2kml
- ${CMAKE_BINARY_DIR}/src/poly2kml
- ${QT_INCLUDE_DIR}
-)
-include( ${QT_USE_FILE} )
+CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+SET (TARGET poly2kml)
+PROJECT (${TARGET})
 
-set( poly2kml_SRC
-        ../poly2kml/main.cpp
-)
+FIND_PACKAGE (Qt4 4.6.0 REQUIRED QtCore QtGui)
+FIND_PACKAGE (Marble REQUIRED)
+INCLUDE (${QT_USE_FILE})
+INCLUDE_DIRECTORIES (${MARBLE_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(../../src/lib)
+INCLUDE_DIRECTORIES(../../src/lib/geodata)
+INCLUDE_DIRECTORIES(../../src/lib/geodata/data)
+INCLUDE_DIRECTORIES(../../src/lib/geodata/parser)
+INCLUDE_DIRECTORIES(../../src/lib/geodata/writer)
+SET (LIBS ${LIBS} ${MARBLE_LIBRARIES} ${QT_LIBRARIES})
 
-qt4_automoc(${poly2kml_SRC})
-
-add_definitions( -DMAKE_MARBLE_LIB )
-add_executable( poly2kml ${poly2kml_SRC} )
-target_link_libraries( poly2kml ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget )
-if (APPLE)
-  target_link_libraries (poly2kml ${APP_SERVICES_LIBRARY})
-endif (APPLE)
-
-if(WIN32 AND QTONLY)
-    install( TARGETS poly2kml RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} )
-else(WIN32 AND QTONLY)
-    if (APPLE AND QTONLY)
-      # No need for this when installing to a bundle
-    else (APPLE AND QTONLY)
-      if( NOT QTONLY)
-        install( TARGETS poly2kml ${INSTALL_TARGETS_DEFAULT_ARGS} )
-      else( NOT QTONLY)
-        install( TARGETS poly2kml RUNTIME DESTINATION bin )
-      endif(NOT QTONLY)
-    endif (APPLE AND QTONLY)
-endif(WIN32 AND QTONLY)
+ADD_EXECUTABLE (${TARGET} main.cpp)
+TARGET_LINK_LIBRARIES (${TARGET} ${LIBS})

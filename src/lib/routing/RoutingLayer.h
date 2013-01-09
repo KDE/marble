@@ -115,7 +115,7 @@ Q_SIGNALS:
       */
     void routeDirty();
 
-protected:
+public:
     /** Overriding QWidget, used to make the layer interactive */
     bool eventFilter( QObject *obj, QEvent *event );
 

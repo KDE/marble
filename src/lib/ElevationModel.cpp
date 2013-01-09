@@ -1,5 +1,5 @@
 //
-// This file is part of the Marble Desktop Globe.
+// This file is part of the Marble Virtual Globe.
 //
 // This program is free software licensed under the GNU LGPL. You can
 // find a copy of this license in LICENSE.txt in the top directory of
@@ -12,8 +12,8 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneDocument.h"
-#include "GeoSceneTexture.h"
-#include "TextureTile.h"
+#include "GeoSceneTiled.h"
+#include "Tile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
 #include "MarbleModel.h"
@@ -32,7 +32,7 @@ class ElevationModelPrivate
 public:
     ElevationModelPrivate( ElevationModel *_q, MarbleModel *const model )
         : q( _q ),
-          m_tileLoader( model->downloadManager() ),
+          m_tileLoader( model->downloadManager(), model->pluginManager() ),
           m_textureLayer( 0 )
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
@@ -52,13 +52,8 @@ public:
         const GeoSceneLayer *sceneLayer = map->layer( head->theme() );
         Q_ASSERT( sceneLayer );
 
-        m_textureLayer = dynamic_cast<GeoSceneTexture*>( sceneLayer->datasets().first() );
+        m_textureLayer = dynamic_cast<GeoSceneTiled*>( sceneLayer->datasets().first() );
         Q_ASSERT( m_textureLayer );
-
-        QVector<const GeoSceneTexture*> textureLayers;
-        textureLayers << m_textureLayer;
-
-        m_tileLoader.setTextureLayers( textureLayers );
     }
 
     void tileCompleted( const TileId & tileId, const QImage &image )
@@ -71,7 +66,7 @@ public:
     ElevationModel *q;
 
     TileLoader m_tileLoader;
-    const GeoSceneTexture *m_textureLayer;
+    const GeoSceneTiled *m_textureLayer;
     QCache<TileId, const QImage> m_cache;
 };
 
@@ -118,12 +113,12 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
         //mDebug() << "x" << x << ( x / width );
         //mDebug() << "y" << y << ( y / height );
 
-        const TileId id( "earth/srtm2", tileZoomLevel, ( x % ( numTilesX * width ) ) / width, ( y % ( numTilesY * height ) ) / height );
+        const TileId id( 0, tileZoomLevel, ( x % ( numTilesX * width ) ) / width, ( y % ( numTilesY * height ) ) / height );
         //mDebug() << "LAT" << lat << "LON" << lon << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
 
         const QImage *image = d->m_cache[id];
         if ( image == 0 ) {
-            image = new QImage( d->m_tileLoader.loadTile( id, DownloadBrowse ) );
+            image = new QImage( d->m_tileLoader.loadTileImage( d->m_textureLayer, id, DownloadBrowse ) );
             d->m_cache.insert( id, image );
         }
         Q_ASSERT( image );

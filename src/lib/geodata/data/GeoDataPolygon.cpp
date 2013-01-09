@@ -77,12 +77,17 @@ void GeoDataPolygon::setTessellationFlags( TessellationFlags f )
     p()->m_tessellationFlags = f;
 }
 
-GeoDataLatLonAltBox& GeoDataPolygon::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoDataPolygon::latLonAltBox() const
 {
     return p()->outer.latLonAltBox();
 }
 
-GeoDataLinearRing& GeoDataPolygon::outerBoundary() const
+GeoDataLinearRing &GeoDataPolygon::outerBoundary()
+{
+    return (p()->outer);
+}
+
+const GeoDataLinearRing &GeoDataPolygon::outerBoundary() const
 {
     return (p()->outer);
 }
@@ -93,7 +98,12 @@ void GeoDataPolygon::setOuterBoundary( const GeoDataLinearRing& boundary )
     p()->outer = boundary;
 }
 
-QVector<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries() const
+QVector<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries()
+{
+    return p()->inner;
+}
+
+const QVector<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries() const
 {
     return p()->inner;
 }

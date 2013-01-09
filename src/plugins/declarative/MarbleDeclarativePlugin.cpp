@@ -21,8 +21,6 @@
 #include "Navigation.h"
 #include "Search.h"
 #include "RouteRequestModel.h"
-#include "ActivityModel.h"
-#include "Activity.h"
 #include "RelatedActivities.h"
 #include "Settings.h"
 #include "MapThemeModel.h"
@@ -31,6 +29,9 @@
 #include "Placemark.h"
 #include "routing/SpeakersModel.h"
 #include "routing/VoiceNavigationModel.h"
+#include "AbstractFloatItem.h"
+#include "RenderPlugin.h"
+#include "DeclarativeDataPlugin.h"
 
 #include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeEngine>
@@ -49,8 +50,6 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Navigation>( uri, 0, 11, "Navigation" );
     qmlRegisterType<Search>( uri, 0, 11, "Search" );
     qmlRegisterType<RouteRequestModel>( uri, 0, 11, "RouteRequestModel" );
-    qmlRegisterType<ActivityModel>( uri, 0, 11, "ActivityModel" );
-    qmlRegisterType<Activity>( uri, 0, 11, "Activity" );
     qmlRegisterType<RelatedActivities>( uri, 0, 11, "RelatedActivities" );
     qmlRegisterType<Settings>( uri, 0, 11, "Settings" );
 
@@ -61,8 +60,11 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Marble::NewstuffModel>( uri, 0, 11, "NewstuffModel" );
     qmlRegisterType<OfflineDataModel>( uri, 0, 11, "OfflineDataModel" );
     qmlRegisterType<MapThemeModel>( uri, 0, 11, "MapThemeModel" );
+    qmlRegisterType<DeclarativeDataPlugin>( uri, 0, 11, "DataLayer" );
 
     qmlRegisterUncreatableType<BookmarksModel>( uri, 0, 11, "BookmarksModel", "Do not create" );
+    qmlRegisterUncreatableType<Marble::AbstractFloatItem>( uri, 0, 11, "FloatItem", "Do not create" );
+    qmlRegisterUncreatableType<Marble::RenderPlugin>( uri, 0, 11, "RenderPlugin", "Do not create" );
 }
 
 void MarbleDeclarativePlugin::initializeEngine( QDeclarativeEngine *engine, const char *)

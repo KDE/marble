@@ -95,9 +95,9 @@ void GeoWriter::writeElement( const QString &key, const QString &value )
     writeEndElement();
 }
 
-void GeoWriter::writeOptionalElement( const QString &key, const QString &value )
+void GeoWriter::writeOptionalElement( const QString &key, const QString &value, const QString &defaultValue )
 {
-    if( !value.isEmpty() ) {
+    if( value != defaultValue ) {
         writeElement( key, value );
     }
 }

@@ -21,7 +21,7 @@
 namespace Marble
 {
  
-class GeoGraphicsItem : Marble::MarbleGraphicsItem
+class GeoGraphicsItem
 {
 %TypeHeaderCode
 #include <GeoGraphicsItem.h>
@@ -29,13 +29,6 @@ class GeoGraphicsItem : Marble::MarbleGraphicsItem
 
 public:
                             GeoGraphicsItem ();
-//ig                            GeoGraphicsItem (GeoGraphicsItemPrivate* d_ptr);
-    Marble::GeoDataCoordinates  coordinate () const;
-//ig    void                    coordinate (qreal& longitude /Out/, qreal& latitude /Out/, qreal& altitude /Out/) const;
-    void                    setCoordinate (qreal longitude, qreal latitude, qreal altitude = 0);
-    void                    setCoordinate (const Marble::GeoDataCoordinates& point);
-    void                    setTarget (const QString& target);
-
 
     virtual ~GeoGraphicsItem ();
     enum GeoGraphicsItemFlag
@@ -46,21 +39,22 @@ public:
         ItemIsVisible
     };
     typedef QFlags<Marble::GeoGraphicsItem::GeoGraphicsItemFlag> GeoGraphicsItemFlags;
-    QString                 target () const;
     Marble::GeoGraphicsItem::GeoGraphicsItemFlags  flags () const;
     void                    setFlag (Marble::GeoGraphicsItem::GeoGraphicsItemFlag flag, bool enabled = 1);
     void                    setFlags (Marble::GeoGraphicsItem::GeoGraphicsItemFlags flags);
-    int                     minLodPixels () const;
-    void                    setMinLodPixels (int pixels);
-    int                     maxLodPixels () const;
-    void                    setMaxLodPixels (int pixels);
     Marble::GeoDataLatLonAltBox  latLonAltBox () const;
     void                    setLatLonAltBox (const Marble::GeoDataLatLonAltBox& latLonAltBox);
-    QList<QPointF>          positions () const;
     int                     minZoomLevel () const;
     void                    setMinZoomLevel (int zoomLevel);
-    Marble::GeoDataStyle*   style () const;
-    void                    setStyle (Marble::GeoDataStyle* style);
+    const Marble::GeoDataStyle*  style () const;
+    bool                    visible () const;
+    void                    setVisible (bool visible);
+    void                    setStyle (const Marble::GeoDataStyle* style);
+    qreal                   zValue () const;
+    void                    setZValue (qreal z);
+    virtual void            paint (Marble::GeoPainter* painter, const Marble::ViewportParams* viewport)=0;
+protected:
+//ig    GeoGraphicsItemPrivate*  p () const;
 };
 // GeoGraphicsItem
 

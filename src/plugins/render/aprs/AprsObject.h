@@ -16,7 +16,6 @@
 
 #include "GeoAprsCoordinates.h"
 #include "GeoPainter.h"
-#include "GeoSceneLayer.h"
 
 namespace Marble
 {
@@ -42,7 +41,6 @@ namespace Marble
                                     const QTime &time,
                                     int fadetime = 10*60*1000 ) const;
         void render( GeoPainter *painter, ViewportParams *viewport,
-                     const QString& renderPos, GeoSceneLayer * layer,
                      int fadeTime = 10*60, int hideTime = 30*60 );
 
       private:

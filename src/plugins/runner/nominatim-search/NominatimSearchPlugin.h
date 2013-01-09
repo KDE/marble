@@ -40,7 +40,7 @@ public:
 
     QList<PluginAuthor> pluginAuthors() const;
 
-    virtual MarbleAbstractRunner* newRunner() const;
+    virtual SearchRunner* newRunner() const;
 };
 
 }

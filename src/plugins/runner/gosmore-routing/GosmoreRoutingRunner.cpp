@@ -171,7 +171,7 @@ GeoDataDocument* GosmoreRunnerPrivate::createDocument( GeoDataLineString* routeW
     result->append( routePlacemark );
 
     QString name = "%1 %2 (Gosmore)";
-    QString unit = "m";
+    QString unit = QLatin1String( "m" );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
     if (length >= 1000) {
         length /= 1000.0;
@@ -188,7 +188,7 @@ GeoDataDocument* GosmoreRunnerPrivate::createDocument( GeoDataLineString* routeW
 }
 
 GosmoreRunner::GosmoreRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        RoutingRunner( parent ),
         d( new GosmoreRunnerPrivate )
 {
     // Check installation
@@ -199,11 +199,6 @@ GosmoreRunner::GosmoreRunner( QObject *parent ) :
 GosmoreRunner::~GosmoreRunner()
 {
     delete d;
-}
-
-GeoDataFeature::GeoDataVisualCategory GosmoreRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
 }
 
 void GosmoreRunner::retrieveRoute( const RouteRequest *route )

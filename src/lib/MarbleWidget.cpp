@@ -8,6 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 #include "MarbleWidget.h"
@@ -50,6 +51,7 @@
 #include "routing/RoutingLayer.h"
 #include "routing/RoutingManager.h"
 #include "routing/AlternativeRoutesModel.h"
+#include "MapInfoDialog.h"
 
 namespace Marble
 {
@@ -96,6 +98,7 @@ class MarbleWidgetPrivate
           m_inputhandler( 0 ),
           m_physics( parent ),
           m_routingLayer( 0 ),
+          m_mapInfoDialog( 0 ),
           m_customPaintLayer( parent ),
           m_popupmenu( 0 ),
           m_showFrameRate( false ),
@@ -147,6 +150,7 @@ class MarbleWidgetPrivate
     MarblePhysics    m_physics;
 
     RoutingLayer     *m_routingLayer;
+    MapInfoDialog    *m_mapInfoDialog;
     MarbleWidget::CustomPaintLayer m_customPaintLayer;
 
     MarbleWidgetPopupMenu *m_popupmenu;
@@ -243,11 +247,16 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_popupmenu, SIGNAL( trackPlacemark( const GeoDataPlacemark* ) ),
                        &m_model, SLOT( setTrackedPlacemark( const GeoDataPlacemark* ) ) );
 
-    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
-    m_widget->setMouseTracking( true );
-
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setPlacemarkModel( 0 );
+
+    m_mapInfoDialog = new MapInfoDialog( m_widget );
+    m_mapInfoDialog->setVisible( false );
+    m_widget->connect( m_mapInfoDialog, SIGNAL( repaintNeeded() ), m_widget, SLOT( update() ) );
+    m_map.addLayer( m_mapInfoDialog );
+
+    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
+    m_widget->setMouseTracking( true );
 
     m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
                        m_model.routingManager(), SLOT( retrieveRoute() ) );
@@ -441,9 +450,14 @@ bool MarbleWidget::showCityLights() const
     return d->m_map.showCityLights();
 }
 
-bool MarbleWidget::showSunInZenith() const
+bool MarbleWidget::isLockedToSubSolarPoint() const
 {
-    return d->m_map.showSunInZenith();
+    return d->m_map.isLockedToSubSolarPoint();
+}
+
+bool MarbleWidget::isSubSolarPointIconVisible() const
+{
+    return d->m_map.isSubSolarPointIconVisible();
 }
 
 bool MarbleWidget::showAtmosphere() const
@@ -522,7 +536,7 @@ quint64 MarbleWidget::volatileTileCacheLimit() const
 }
 
 
-void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
+void MarbleWidget::setZoom( int newZoom, FlyToMode mode )
 {
     // It won't fly anyway. So we should do everything to keep the zoom value.
     if ( !d->m_animationsEnabled || mode == Instant ) {
@@ -552,10 +566,15 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
     }
 }
 
+void MarbleWidget::zoomView( int zoom, FlyToMode mode )
+{
+    setZoom( zoom, mode );
+}
+
 
 void MarbleWidget::zoomViewBy( int zoomStep, FlyToMode mode )
 {
-    zoomView( zoom() + zoomStep, mode );
+    setZoom( zoom() + zoomStep, mode );
 }
 
 
@@ -576,7 +595,7 @@ void MarbleWidget::zoomIn( FlyToMode mode )
 
 void MarbleWidget::zoomOut( FlyToMode mode )
 {
-    if ( d->m_map.tileZoomLevel() < 0 ) {
+    if ( d->m_map.tileZoomLevel() <= 0 ) {
         zoomViewBy( -d->m_zoomStep, mode );
     } else {
         int radius = d->m_map.preferredRadiusFloor( d->m_map.radius() * 0.95 );
@@ -929,19 +948,27 @@ void MarbleWidget::setShowCityLights( bool visible )
     update();
 }
 
-void MarbleWidget::setShowSunInZenith( bool visible )
+void MarbleWidget::setLockToSubSolarPoint( bool visible )
 {
-    disconnect( d->m_model.sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
-                this,                    SLOT( centerOn( qreal, qreal ) ) );
+    if ( d->m_map.isLockedToSubSolarPoint() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
+        d->m_map.setLockToSubSolarPoint( visible );
+        setInputEnabled( !d->m_map.isLockedToSubSolarPoint() );
+    }
+}
 
-    if ( d->m_map.showSunInZenith() != visible ) { // Toggling input modifies event filters, so avoid that if not needed
-        d->m_map.setShowSunInZenith( visible );
-        setInputEnabled( !d->m_map.showSunInZenith() );
+void MarbleWidget::setSubSolarPointIconVisible( bool visible )
+{
+    if ( d->m_map.isSubSolarPointIconVisible() != visible ) {
+        d->m_map.setSubSolarPointIconVisible( visible );
     }
 
-    if ( d->m_map.showSunInZenith() ) {
-        connect( d->m_model.sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
-                 this,                    SLOT( centerOn( qreal, qreal ) ) );
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
+        if ( (*i)->nameId() == "sun" ) {
+            (*i)->setVisible( visible );
+        }
     }
 }
 
@@ -1161,8 +1188,8 @@ void MarbleWidget::setSelection( const QRect& region )
     // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)
     // as left/top, right/bottom rectangle.
     QList<double> coordinates;
-    coordinates << box.west( GeoDataPoint::Degree ) << box.north( GeoDataPoint::Degree )
-                << box.east( GeoDataPoint::Degree ) << box.south( GeoDataPoint::Degree );
+    coordinates << box.west( GeoDataCoordinates::Degree ) << box.north( GeoDataCoordinates::Degree )
+                << box.east( GeoDataCoordinates::Degree ) << box.south( GeoDataCoordinates::Degree );
 
     mDebug() << "West: " << coordinates[0] << " North: " <<  coordinates[1]
              << " East: " << coordinates[2] << " South: " << coordinates[3] << endl;
@@ -1317,9 +1344,9 @@ void MarbleWidget::reloadMap()
     d->m_map.reload();
 }
 
-void MarbleWidget::downloadRegion( QString const & sourceDir, QVector<TileCoordsPyramid> const & pyramid )
+void MarbleWidget::downloadRegion( QVector<TileCoordsPyramid> const & pyramid )
 {
-    d->m_map.downloadRegion( sourceDir, pyramid );
+    d->m_map.downloadRegion( pyramid );
 }
 
 GeoDataLookAt MarbleWidget::lookAt() const
@@ -1384,6 +1411,11 @@ qreal MarbleWidget::distanceFromZoom( qreal zoom ) const
 RoutingLayer* MarbleWidget::routingLayer()
 {
     return d->m_routingLayer;
+}
+
+MapInfoDialog *MarbleWidget::mapInfoDialog()
+{
+    return d->m_mapInfoDialog;
 }
 
 }

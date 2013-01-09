@@ -20,13 +20,15 @@
 namespace Marble
 {
 
-GeoDataLookAt::GeoDataLookAt()
-    : d( new GeoDataLookAtPrivate )
+GeoDataLookAt::GeoDataLookAt() :
+    GeoDataAbstractView(),
+    d( new GeoDataLookAtPrivate )
 {
 }
 
-GeoDataLookAt::GeoDataLookAt( const GeoDataLookAt& other )
-    : d( other.d )
+GeoDataLookAt::GeoDataLookAt( const GeoDataLookAt& other ) :
+    GeoDataAbstractView(),
+    d( other.d )
 {
     d->ref.ref();
 }

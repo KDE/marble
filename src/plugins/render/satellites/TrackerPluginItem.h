@@ -11,6 +11,8 @@
 #ifndef MARBLE_TRACKERPLUGINITEM_H
 #define MARBLE_TRACKERPLUGINITEM_H
 
+#include <QtCore/QObject>
+
 class QString;
 
 namespace Marble {
@@ -24,13 +26,15 @@ class ViewportParams;
 /**
  * Subclass this to represent items in your TrackerPluginModel.
  */
-class TrackerPluginItem
+class TrackerPluginItem : public QObject
 {
+    Q_OBJECT
+
 public:
     /**
      * Constructs an item and set the wrapped placemark name to @p name
      */
-    TrackerPluginItem( const QString &name );
+    explicit TrackerPluginItem( const QString &name );
 
     /**
      * Destroy the item.
@@ -38,9 +42,34 @@ public:
     virtual ~TrackerPluginItem();
 
     /**
+     * Satellite's name
+     */
+    QString name();
+
+    /**
      * Returns the wrapped placemark which will be displayed if this item is in a TrackerPluginModel
      */
     GeoDataPlacemark *placemark();
+
+    /**
+     * Returns whether the item is enabled or disabled.
+     */
+    virtual bool isEnabled() const;
+
+    /**
+     * Enable/Disable the item according to @p enabled.
+     */
+    virtual void setEnabled( bool enabled );
+
+    /**
+     * Return whether the item is visible or invisible.
+     */
+    virtual bool isVisible() const;
+
+    /**
+     * Set item visible/invisible according to @p visible.
+     */
+    virtual void setVisible( bool visible );
 
     /**
      * Reimplement this method to update the placemark, for example to change its coordinates.
@@ -52,6 +81,6 @@ private:
     TrackerPluginItemPrivate *d;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_TRACKERPLUGINITEM_H

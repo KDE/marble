@@ -22,7 +22,6 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "RenderPlugin.h"
-#include "NetworkPlugin.h"
 #include "PositionProviderPlugin.h"
 #include "AbstractFloatItem.h"
 #include "ParseRunnerPlugin.h"
@@ -47,7 +46,6 @@ class PluginManagerPrivate
 
     bool m_pluginsLoaded;
     QList<const RenderPlugin *> m_renderPluginTemplates;
-    QList<const NetworkPlugin *> m_networkPluginTemplates;
     QList<const PositionProviderPlugin *> m_positionProviderPluginTemplates;
     QList<const SearchRunnerPlugin *> m_searchRunnerPlugins;
     QList<const ReverseGeocodingRunnerPlugin *> m_reverseGeocodingRunnerPlugins;
@@ -60,8 +58,8 @@ PluginManagerPrivate::~PluginManagerPrivate()
     // nothing to do
 }
 
-PluginManager::PluginManager()
-    : d( new PluginManagerPrivate() )
+PluginManager::PluginManager( QObject *parent ) : QObject( parent ),
+    d( new PluginManagerPrivate() )
 {
 }
 
@@ -76,10 +74,11 @@ QList<const RenderPlugin *> PluginManager::renderPlugins() const
     return d->m_renderPluginTemplates;
 }
 
-QList<const NetworkPlugin *> PluginManager::networkPlugins() const
+void PluginManager::addRenderPlugin( RenderPlugin *plugin )
 {
     d->loadPlugins();
-    return d->m_networkPluginTemplates;
+    d->m_renderPluginTemplates << plugin;
+    emit renderPluginsChanged();
 }
 
 QList<const PositionProviderPlugin *> PluginManager::positionProviderPlugins() const
@@ -88,10 +87,24 @@ QList<const PositionProviderPlugin *> PluginManager::positionProviderPlugins() c
     return d->m_positionProviderPluginTemplates;
 }
 
+void PluginManager::addPositionProviderPlugin( PositionProviderPlugin *plugin )
+{
+    d->loadPlugins();
+    d->m_positionProviderPluginTemplates << plugin;
+    emit positionProviderPluginsChanged();
+}
+
 QList<const SearchRunnerPlugin *> PluginManager::searchRunnerPlugins() const
 {
     d->loadPlugins();
     return d->m_searchRunnerPlugins;
+}
+
+void PluginManager::addSearchRunnerPlugin( SearchRunnerPlugin *plugin )
+{
+    d->loadPlugins();
+    d->m_searchRunnerPlugins << plugin;
+    emit searchRunnerPluginsChanged();
 }
 
 QList<const ReverseGeocodingRunnerPlugin *> PluginManager::reverseGeocodingRunnerPlugins() const
@@ -100,16 +113,37 @@ QList<const ReverseGeocodingRunnerPlugin *> PluginManager::reverseGeocodingRunne
     return d->m_reverseGeocodingRunnerPlugins;
 }
 
+void PluginManager::addReverseGeocodingRunnerPlugin( ReverseGeocodingRunnerPlugin *plugin )
+{
+    d->loadPlugins();
+    d->m_reverseGeocodingRunnerPlugins << plugin;
+    emit reverseGeocodingRunnerPluginsChanged();
+}
+
 QList<RoutingRunnerPlugin *> PluginManager::routingRunnerPlugins() const
 {
     d->loadPlugins();
     return d->m_routingRunnerPlugins;
 }
 
+void PluginManager::addRoutingRunnerPlugin( RoutingRunnerPlugin *plugin )
+{
+    d->loadPlugins();
+    d->m_routingRunnerPlugins << plugin;
+    emit routingRunnerPluginsChanged();
+}
+
 QList<const ParseRunnerPlugin *> PluginManager::parsingRunnerPlugins() const
 {
     d->loadPlugins();
     return d->m_parsingRunnerPlugins;
+}
+
+void PluginManager::addParseRunnerPlugin( ParseRunnerPlugin *plugin )
+{
+    d->loadPlugins();
+    d->m_parsingRunnerPlugins << plugin;
+    emit parseRunnerPluginsChanged();
 }
 
 /** Append obj to the given plugins list if it inherits both T and U */
@@ -162,7 +196,6 @@ void PluginManagerPrivate::loadPlugins()
     MarbleDirs::debug();
 
     Q_ASSERT( m_renderPluginTemplates.isEmpty() );
-    Q_ASSERT( m_networkPluginTemplates.isEmpty() );
     Q_ASSERT( m_positionProviderPluginTemplates.isEmpty() );
     Q_ASSERT( m_searchRunnerPlugins.isEmpty() );
     Q_ASSERT( m_reverseGeocodingRunnerPlugins.isEmpty() );
@@ -179,8 +212,6 @@ void PluginManagerPrivate::loadPlugins()
         if ( obj ) {
             bool isPlugin = appendPlugin<RenderPlugin, RenderPluginInterface>
                        ( obj, loader, m_renderPluginTemplates );
-            isPlugin = isPlugin || appendPlugin<NetworkPlugin, NetworkPluginInterface>
-                       ( obj, loader, m_networkPluginTemplates );
             isPlugin = isPlugin || appendPlugin<PositionProviderPlugin, PositionProviderPluginInterface>
                        ( obj, loader, m_positionProviderPluginTemplates );
             isPlugin = isPlugin || appendPlugin<SearchRunnerPlugin, SearchRunnerPlugin>
@@ -198,8 +229,8 @@ void PluginManagerPrivate::loadPlugins()
                 delete loader;
             }
         } else {
-            qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path;
-            mDebug() << Q_FUNC_INFO << "Plugin failure:" << loader->errorString();
+            qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path << endl
+                       << "Reason:" << loader->errorString();
             delete loader;
         }
     }
@@ -210,3 +241,5 @@ void PluginManagerPrivate::loadPlugins()
 }
 
 }
+
+#include "PluginManager.moc"

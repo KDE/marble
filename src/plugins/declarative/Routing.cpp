@@ -71,6 +71,8 @@ void Routing::setMarbleWidget( MarbleWidget* widget )
     d->m_marbleWidget = widget;
 
     if ( d->m_marbleWidget ) {
+        connect( d->m_marbleWidget->model()->routingManager(), SIGNAL(stateChanged(RoutingManager::State)),
+                 this, SIGNAL(hasRouteChanged()) );
         QList<Marble::RoutingProfile> profiles = d->m_marbleWidget->model()->routingManager()->profilesModel()->profiles();
         if ( profiles.size() == 4 ) {
             /** @todo FIXME: Restrictive assumptions on available plugins and certain profile loading implementation */
@@ -97,6 +99,11 @@ void Routing::setRoutingProfile( const QString & profile )
         }
         emit routingProfileChanged();
     }
+}
+
+bool Routing::hasRoute() const
+{
+    return d->m_marbleWidget && d->m_marbleWidget->model()->routingManager()->routingModel()->rowCount() > 0;
 }
 
 void Routing::addVia( qreal lon, qreal lat )
@@ -167,7 +174,7 @@ void Routing::openRoute( const QString &fileName )
         Marble::RoutingManager * const routingManager = d->m_marbleWidget->model()->routingManager();
         /** @todo FIXME: replace the file:// prefix on QML side */
         routingManager->clearRoute();
-        QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
+        QString target = fileName.startsWith( QLatin1String( "file://" ) ) ? fileName.mid( 7 ) : fileName;
         routingManager->loadRoute( target );
         Marble::GeoDataDocument* route = routingManager->alternativeRoutesModel()->currentRoute();
         if ( route ) {
@@ -183,7 +190,7 @@ void Routing::saveRoute( const QString &fileName )
 {
     if ( d->m_marbleWidget ) {
         /** @todo FIXME: replace the file:// prefix on QML side */
-        QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
+        QString target = fileName.startsWith( QLatin1String( "file://" ) ) ? fileName.mid( 7 ) : fileName;
         d->m_marbleWidget->model()->routingManager()->saveRoute( target );
     }
 }

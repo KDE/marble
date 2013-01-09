@@ -1,3 +1,24 @@
+include(FeatureSummary)
+if( COMMAND set_package_properties )
+  macro( marble_set_package_properties )
+  set_package_properties( ${ARGN} )
+  endmacro()
+else()
+  macro( marble_set_package_properties )
+  # Just ignore it
+  endmacro()
+endif()
+
+if ( COMMAND feature_summary )
+  macro( marble_feature_summary )
+  feature_summary( ${ARGN} )
+  endmacro()
+else()
+  macro( marble_feature_summary )
+  # Just ignore it
+  endmacro()
+endif()
+
 # the place to put in common cmake macros
 # this is needed to minimize the amount of errors to do
 macro( marble_add_plugin _target_name )
@@ -138,6 +159,12 @@ macro( marble_add_test TEST_NAME )
         add_test( ${TEST_NAME} ${TEST_NAME} )
     endif( BUILD_MARBLE_TESTS )
 endmacro( marble_add_test TEST_NAME )
+
+macro( marble_add_qtonly_test TEST_NAME )
+    if( QTONLY )
+        marble_add_test( ${TEST_NAME} ${ARGN} )
+    endif( QTONLY )
+endmacro( marble_add_qtonly_test TEST_NAME )
 
 macro( marble_add_project_resources resources )
   add_custom_target( ${PROJECT_NAME}_Resources ALL SOURCES ${ARGN} )

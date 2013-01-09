@@ -57,6 +57,9 @@ public Q_SLOTS:
     /** Ask the user for a kml file to save the current route to */
     void saveRoute();
 
+    /** Add another input field at the end */
+    void addInputWidget();
+
 private Q_SLOTS:
     /** Retrieve route directions */
     void retrieveRoute();
@@ -75,9 +78,6 @@ private Q_SLOTS:
 
     /** Insert another input field at the given position */
     void insertInputWidget( int index );
-
-    /** Add another input field at the end */
-    void addInputWidget();
 
     /** Remove an existing input field */
     void removeInputWidget( RoutingInputWidget *widget );
@@ -126,6 +126,9 @@ private Q_SLOTS:
 
     /** Change selected routing profile to the one set in the shared request */
     void updateActiveRoutingProfile();
+
+protected:
+    void resizeEvent(QResizeEvent *e);
 
 private:
     RoutingWidgetPrivate *const d;

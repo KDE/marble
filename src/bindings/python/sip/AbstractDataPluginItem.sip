@@ -191,7 +191,6 @@ public:
 %End
 
     virtual ~AbstractDataPluginItem ();
-    virtual bool            isGeoProjected ();
 signals:
     void                    updated ();
 public:
@@ -203,6 +202,13 @@ signals:
     void                    favoriteChanged (const QString& id, bool favorite);
 public:
     void                    toggleFavorite ();
+    QString                 toolTip () const;
+    void                    setToolTip (const QString& toolTip);
+    bool                    isSticky () const;
+    void                    setSticky (bool sticky);
+signals:
+    void                    idChanged ();
+    void                    stickyChanged ();
 };
 // AbstractDataPluginItem
 

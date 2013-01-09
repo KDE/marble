@@ -10,6 +10,7 @@
 // Copyright 2007-2008 Carlos Licea     <carlos.licea@kdemail.net>
 // Copyright 2011      Michael Henning  <mikehenning@eclipse.net>
 // Copyright 2011      Valery Kharitonov  <kharvd@gmail.com>
+// Copyright 2012      Mohammed Nafees  <nafees.technocool@gmail.com>
 //
 
 #include "MeasureToolPlugin.h"
@@ -25,6 +26,7 @@
 #include "ViewportParams.h"
 
 #include <QtGui/QColor>
+#include <QtGui/QPen>
 #include <QtGui/QPixmap>
 #include <QtGui/QRadialGradient>
 #include <QtGui/QPushButton>
@@ -111,12 +113,13 @@ QList<PluginAuthor> MeasureToolPlugin::pluginAuthors() const
             << PluginAuthor( "Inge Wallin", "ingwa@kde.org" )
             << PluginAuthor( "Carlos Licea", "carlos.licea@kdemail.net" )
             << PluginAuthor( "Michael Henning", "mikehenning@eclipse.net" )
-            << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
+            << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" )
+            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
 }
 
 QIcon MeasureToolPlugin::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/measure.png");
 }
 
 void MeasureToolPlugin::initialize ()
@@ -134,11 +137,11 @@ QDialog *MeasureToolPlugin::configDialog()
         m_configDialog = new QDialog();
         m_uiConfigWidget = new Ui::MeasureConfigWidget;
         m_uiConfigWidget->setupUi( m_configDialog );
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( accepted() ),
-                SLOT( writeSettings() ) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()),
+                SLOT(writeSettings()) );
         QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 this,        SLOT(writeSettings()) );
     }
 
     m_uiConfigWidget->m_showSegLabelsCheckBox->setChecked( m_showSegmentLabels );
@@ -168,7 +171,7 @@ void MeasureToolPlugin::writeSettings()
     emit repaintNeeded();
 }
 
-bool MeasureToolPlugin::render( GeoPainter *painter, 
+bool MeasureToolPlugin::render( GeoPainter *painter,
                           ViewportParams *viewport,
                           const QString& renderPos,
                           GeoSceneLayer * layer )
@@ -176,7 +179,7 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
 
-    // FIXME: Add this stuff into the Layermanager as something to be 
+    // FIXME: Add this stuff into the Layermanager as something to be
     // called before the float items.
 
     // No way to paint anything if the list is empty.
@@ -210,6 +213,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
     // Temporary container for each segment of the line string
     GeoDataLineString segment( Tessellate );
 
+    int r = 0, g = 1, b = 2;
     for ( int i = 0; i < m_measureLineString.size() - 1; i++ ) {
         segment << m_measureLineString[i] ;
         segment << m_measureLineString[i + 1];
@@ -220,6 +224,13 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
 
         QLocale::MeasurementSystem measurementSystem;
         measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
+
+        QPen shadowPen( Oxygen::aluminumGray5 );
+        shadowPen.setWidthF(4.0);
+        painter->setPen( shadowPen );
+        painter->drawPolyline( segment, distanceString, LineCenter );
+
+        QPen linePen;
 
         if ( measurementSystem == QLocale::MetricSystem ) {
             if ( segmentLength >= 1000.0 ) {
@@ -233,6 +244,20 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             distanceString = QString("%1 mi").arg( segmentLength / 1000.0 * KM2MI, 0, 'f', 2 );
         }
 
+        if ( i == r ) {
+            linePen.setColor( Oxygen::brickRed4 );
+            r+=3;
+        }
+        else if ( i == g ) {
+            linePen.setColor( Oxygen::forestGreen4 );
+            g+=3;
+        }
+        else if ( i == b ) {
+            linePen.setColor( Oxygen::skyBlue4 );
+            b+=3;
+        }
+	linePen.setWidthF(2.0);
+	painter->setPen( linePen );
         painter->drawPolyline( segment, distanceString, LineCenter );
 
         segment.clear();
@@ -279,13 +304,20 @@ void MeasureToolPlugin::drawMark( GeoPainter* painter, int x, int y )
 
     // Paint the mark, and repeat it if the projection allows it.
     painter->setRenderHint( QPainter::Antialiasing, false );
-    painter->setPen( QColor( Qt::white ) );
 
+    QColor backgroundCircleColor( Oxygen::aluminumGray6 );
+    backgroundCircleColor.setAlpha( 128 );
+
+    painter->setBrush( backgroundCircleColor );
+    painter->setPen( Qt::NoPen );
+    painter->drawEllipse( x-8, y-8, 16, 16 );
+
+    painter->setPen( QColor( Qt::white ) );
     painter->drawLine( x - markRadius, y, x + markRadius, y );
     painter->drawLine( x, y - markRadius, x, y + markRadius );
 }
 
-void MeasureToolPlugin::drawTotalDistanceLabel( GeoPainter *painter, 
+void MeasureToolPlugin::drawTotalDistanceLabel( GeoPainter *painter,
                                           qreal totalDistance )
 {
     QString  distanceString;
@@ -341,7 +373,7 @@ void MeasureToolPlugin::addContextItems()
     MarbleWidgetPopupMenu *menu = m_marbleWidget->popupMenu();
 
     // Connect the inputHandler and the measure tool to the popup menu
-    m_addMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this );
+    m_addMeasurePointAction = new QAction( QIcon(":/icons/measure.png"), tr( "Add &Measure Point" ), this );
     m_removeLastMeasurePointAction = new QAction( tr( "Remove &Last Measure Point" ), this );
     m_removeLastMeasurePointAction->setEnabled( false );
     m_removeMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ), this );
@@ -356,11 +388,11 @@ void MeasureToolPlugin::addContextItems()
         menu->addAction( Qt::RightButton, m_separator );
     }
 
-    connect( m_addMeasurePointAction, SIGNAL( triggered() ), SLOT( addMeasurePointEvent() ) );
-    connect( m_removeLastMeasurePointAction, SIGNAL(triggered() ), SLOT( removeLastMeasurePoint() ) );
-    connect( m_removeMeasurePointsAction, SIGNAL( triggered() ), SLOT( removeMeasurePoints() ) );
+    connect( m_addMeasurePointAction, SIGNAL(triggered()), SLOT(addMeasurePointEvent()) );
+    connect( m_removeLastMeasurePointAction, SIGNAL(triggered()), SLOT(removeLastMeasurePoint()) );
+    connect( m_removeMeasurePointsAction, SIGNAL(triggered()), SLOT(removeMeasurePoints()) );
 
-    connect( this, SIGNAL( numberOfMeasurePointsChanged( int ) ), SLOT( setNumberOfMeasurePoints( int ) ) );
+    connect( this, SIGNAL( numberOfMeasurePointsChanged(int)), SLOT(setNumberOfMeasurePoints(int)) );
 }
 
 void MeasureToolPlugin::removeContextItems()

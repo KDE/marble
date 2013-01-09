@@ -23,7 +23,7 @@ namespace Marble
 
 class GeoDataPlacemark;
 class GoToDialogPrivate;
-class MarbleWidget;
+class MarbleModel;
 
 /**
   * A dialog that provides a list of targets to go to: The current location,
@@ -35,7 +35,7 @@ class MARBLE_EXPORT GoToDialog: public QDialog
     Q_OBJECT
 
 public:
-    explicit GoToDialog( MarbleWidget* marbleWidget, QWidget * parent = 0, Qt::WindowFlags f = 0 );
+    explicit GoToDialog( MarbleModel* marbleModel, QWidget * parent = 0, Qt::WindowFlags f = 0 );
 
     ~GoToDialog();
 

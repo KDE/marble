@@ -20,35 +20,15 @@ class AbstractProjection;
 class AbstractProjectionPrivate
 {
   public:
-    AbstractProjectionPrivate( AbstractProjection * _q );
+    explicit AbstractProjectionPrivate( AbstractProjection * parent );
 
-    AbstractProjection * q;
+    virtual ~AbstractProjectionPrivate() { };
+
 
     bool   m_repeatX;              // Map repeated in X direction.
 
     qreal  m_maxLat;
     qreal  m_minLat;
-
-    GeoDataCoordinates findHorizon( const GeoDataCoordinates & previousCoords,
-                                    const GeoDataCoordinates & currentCoords,
-                                    const ViewportParams *viewport,
-                                    TessellationFlags f = 0,
-                                    int recursionCounter = 0 ) const;
-
-    bool globeHidesPoint( const GeoDataCoordinates &coordinates,
-                          const ViewportParams *viewport ) const;
-
-    void manageHorizonCrossing( bool globeHidesPoint,
-                                const GeoDataCoordinates& horizonCoords,
-                                bool& horizonPair,
-                                GeoDataCoordinates& horizonDisappearCoords,
-                                bool& horizonOrphan,
-                                GeoDataCoordinates& horizonOrphanCoords ) const;
-
-    void horizonToPolygon( const ViewportParams *viewport,
-                           const GeoDataCoordinates & disappearCoords,
-                           const GeoDataCoordinates & reappearCoords,
-                           QPolygonF* ) const;
 
     // This method tessellates a line segment in a way that the line segment
     // follows great circles. The count parameter specifies the
@@ -71,14 +51,8 @@ class AbstractProjectionPrivate
                                const ViewportParams *viewport,
                                TessellationFlags f = 0 ) const;
 
-    bool lineStringToPolygon( const GeoDataLineString &lineString,
-                              const ViewportParams *viewport,
-                              QVector<QPolygonF*> &polygons ) const;
-
     qreal mirrorPoint( const ViewportParams *viewport ) const;
 
-    void repeatPolygons( const ViewportParams *viewport,
-                         QVector<QPolygonF *> &polygons ) const;
 
     void translatePolygons( const QVector<QPolygonF *> &polygons,
                             QVector<QPolygonF *> &translatedPolygons,
@@ -89,6 +63,8 @@ class AbstractProjectionPrivate
                         QVector<QPolygonF*> &polygons,
                         const ViewportParams *viewport ) const;
 
+    AbstractProjection * const q_ptr;
+    Q_DECLARE_PUBLIC( AbstractProjection )
 };
 
 } // namespace Marble

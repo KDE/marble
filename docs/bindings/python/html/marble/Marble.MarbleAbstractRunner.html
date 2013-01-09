@@ -66,7 +66,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parseFile">parseFile</a> (self, QString fileName, <a href="../marble/Marble.html#DocumentRole">Marble.DocumentRole</a> role)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#retrieveRoute">retrieveRoute</a> (self, <a href="../marble/Marble.RouteRequest.html">Marble.RouteRequest</a> request)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reverseGeocoding">reverseGeocoding</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#search">search</a> (self, QString searchTerm)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#search">search</a> (self, QString searchTerm, <a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> preferred)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setModel">setModel</a> (self, <a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a> model)</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="parsingFinished"></a>
@@ -291,7 +291,13 @@ plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>searchTerm</em></td>
+<td class="paramname"><em>searchTerm</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td>
+<td class="paramname"><em>preferred</em></td>
 </tr>
 <tr>
 <td></td>

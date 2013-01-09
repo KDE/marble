@@ -41,7 +41,7 @@ class VectorComposer : public QObject
 {
     Q_OBJECT
  public:
-    VectorComposer( QObject * parent = 0 );
+    explicit VectorComposer( QObject * parent = 0 );
     virtual ~VectorComposer();
 
     void  drawTextureMap( GeoPainter *painter, const ViewportParams *viewport );

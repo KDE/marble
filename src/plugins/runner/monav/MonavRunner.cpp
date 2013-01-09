@@ -211,7 +211,7 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString *geometry
     result->append( routePlacemark );
 
     QString name = "%1 %2 (Monav)";
-    QString unit = "m";
+    QString unit = QLatin1String( "m" );
     qreal length = geometry->length( EARTH_RADIUS );
     if ( length >= 1000 ) {
         length /= 1000.0;
@@ -227,7 +227,7 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString *geometry
 }
 
 MonavRunner::MonavRunner( const MonavPlugin* plugin, QObject *parent ) :
-        MarbleAbstractRunner( parent ),
+        RoutingRunner( parent ),
         d( new MonavRunnerPrivate( plugin ) )
 {
     // nothing to do
@@ -238,11 +238,6 @@ MonavRunner::~MonavRunner()
     delete d;
 }
 
-GeoDataFeature::GeoDataVisualCategory MonavRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
-}
-
 void MonavRunner::retrieveRoute( const RouteRequest *route )
 {
     QVector<GeoDataPlacemark*> instructions;
@@ -251,6 +246,7 @@ void MonavRunner::retrieveRoute( const RouteRequest *route )
     emit routeCalculated( result );
 }
 
+#if 0
 void MonavRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
 {
     GeoDataPlacemark placemark;
@@ -271,6 +267,7 @@ void MonavRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
 
     emit reverseGeocodingFinished( coordinates, placemark );
 }
+#endif
 
 } // namespace Marble
 

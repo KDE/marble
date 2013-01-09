@@ -32,7 +32,7 @@ class MARBLE_EXPORT GeoDataAccuracy
         Detailed
     };
 
-    GeoDataAccuracy( Level level = none, qreal horizontal = 0.0, qreal vertical = 0.0 );
+    explicit GeoDataAccuracy( Level level = none, qreal horizontal = 0.0, qreal vertical = 0.0 );
 
     bool operator==( const GeoDataAccuracy &other ) const;
 

@@ -8,6 +8,7 @@
 // Copyright 2008      Torsten Rahn   <rahn@kde.org>
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 // Copyright 2011,2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 // Self
@@ -17,6 +18,7 @@
 #include "DialogConfigurationInterface.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
+#include "RenderPluginModel.h"
 
 // Qt
 #include <QtGui/QAction>
@@ -34,7 +36,8 @@ class RenderPlugin::Private
           m_action(0),
           m_item(),
           m_enabled(true),
-          m_visible(true)
+          m_visible(true),
+          m_userCheckable(true)
     {
     }
 
@@ -50,6 +53,7 @@ class RenderPlugin::Private
 
     bool                m_enabled;
     bool                m_visible;
+    bool                m_userCheckable;
 };
 
 
@@ -62,6 +66,8 @@ RenderPlugin::RenderPlugin( const MarbleModel *marbleModel )
              &d->m_action, SLOT( setChecked( bool ) ) );
     connect( this,         SIGNAL( enabledChanged( bool ) ),
              &d->m_action, SLOT( setVisible( bool ) ) );
+    connect( this,         SIGNAL( enabledChanged( bool ) ),
+                           SIGNAL( actionGroupsChanged() ) );
 
     connect( this, SIGNAL( visibilityChanged( bool, const QString & ) ),
              this, SIGNAL( repaintNeeded() ) );
@@ -110,9 +116,12 @@ QStandardItem* RenderPlugin::item()
     d->m_item.setFlags( d->m_item.flags() & ~Qt::ItemIsSelectable );
 
     // Custom data
-    d->m_item.setData( nameId(), RenderPlugin::NameId );
-    d->m_item.setData( (bool) qobject_cast<DialogConfigurationInterface *>( this ), RenderPlugin::ConfigurationDialogAvailable );
-    d->m_item.setData( backendTypes(), RenderPlugin::BackendTypes );
+    d->m_item.setData( nameId(), RenderPluginModel::NameId );
+    d->m_item.setData( (bool) qobject_cast<DialogConfigurationInterface *>( this ), RenderPluginModel::ConfigurationDialogAvailable );
+    d->m_item.setData( backendTypes(), RenderPluginModel::BackendTypes );
+    d->m_item.setData( version(), RenderPluginModel::Version );
+    d->m_item.setData( aboutDataText(), RenderPluginModel::AboutDataText );
+    d->m_item.setData( copyrightYears(), RenderPluginModel::CopyrightYears );
 
     return &d->m_item;
 }
@@ -149,6 +158,15 @@ void RenderPlugin::setVisible( bool visible )
     emit visibilityChanged( visible, nameId() );
 }
 
+void RenderPlugin::setUserCheckable( bool checkable )
+{
+    if ( checkable != d->m_userCheckable ) {
+        d->m_action.setEnabled( checkable );
+        d->m_userCheckable = checkable;
+        emit userCheckableChanged( checkable );
+    }
+}
+
 bool RenderPlugin::enabled() const
 {
     return d->m_enabled;
@@ -157,6 +175,11 @@ bool RenderPlugin::enabled() const
 bool RenderPlugin::visible() const
 {
     return d->m_visible;
+}
+
+bool RenderPlugin::isUserCheckable() const
+{
+    return d->m_userCheckable;
 }
 
 QHash<QString,QVariant> RenderPlugin::settings() const
@@ -187,6 +210,29 @@ bool RenderPlugin::eventFilter( QObject *, QEvent * )
 void RenderPlugin::restoreDefaultSettings()
 {
     setSettings( QHash<QString,QVariant>() );
+}
+
+QStringList RenderPlugin::settingKeys()
+{
+    return settings().keys();
+}
+
+bool RenderPlugin::setSetting( const QString & key, const QVariant & value )
+{
+    QHash< QString, QVariant> settings = this->settings();
+    if( settings.contains( key ) && settings.value( key ).type() == value.type() )
+    {
+        settings [ key ] = value;
+        setSettings( settings );
+        return true;
+    } else {
+        return false;
+    }
+}
+
+QVariant RenderPlugin::setting( const QString & name )
+{
+    return settings().value( name, QVariant() );
 }
 
 } // namespace Marble

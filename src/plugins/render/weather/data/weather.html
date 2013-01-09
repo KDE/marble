@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>Weather for %city_name%</title>
+<link rel="stylesheet" media="screen" href="qrc:/marble/weather/weatherscreen.css">
+<link rel="stylesheet" media="print, embossed" href="qrc:/marble/weather/weatherprint.css"></head>
+<body>
+<div id="Marblelogo">
+<h1>Current Observation</h1>
+<img src="%weather_situation%">
+<p>
+<table>
+<tr class="blue">
+  <td>Temperature</td><td>%current_temp%</td>
+</tr>
+<tr>
+  <td>Condition</td><td>%current_condition%</td>
+</tr>
+<tr>
+  <td>Wind direction</td><td>%wind_direction%</td>
+</tr>
+<tr>
+  <td>Wind speed</td><td>%wind_speed%</td>
+</tr>
+<tr>
+  <td>Humidity</td><td>%humidity_level%</td>
+</tr>
+</table>
+<p class="gray">Publishing time: %publish_time%
+
+<div style="display: %forecast_available%;">
+<h2>Forecasts</h2>
+
+<h3>%day_f1%</h3>
+
+<img src="%weather_situation_f1%">
+<p>
+<table>
+<tr class="blue">
+  <td>Max temperature</td><td>%max_temp_f1%</td>
+</tr>
+<tr>
+  <td>Min temperature</td><td>%min_temp_f1%</td>
+</tr>
+<tr>
+  <td>Condition</td><td>%condition_f1%</td>
+</tr>
+<tr>
+  <td>Wind direction</td><td>%wind_direction_f1%</td>
+</tr>
+<tr>
+  <td>Wind speed</td><td>%wind_speed_f1%</td>
+</tr>
+</table>
+<p class="gray">Publishing time: %publish_time_f1%
+
+<h3>%day_f2%</h3>
+
+<img src="%weather_situation_f2%">
+<p>
+<table>
+<tr class="blue">
+  <td>Max temperature</td><td>%max_temp_f2%</td>
+</tr>
+<tr>
+  <td>Min temperature</td><td>%min_temp_f2%</td>
+</tr>
+<tr>
+  <td>Condition</td><td>%condition_f2%</td>
+</tr>
+<tr>
+  <td>Wind direction</td><td>%wind_direction_f2%</td>
+</tr>
+<tr>
+  <td>Wind speed</td><td>%wind_speed_f2%</td>
+</tr>
+</table>
+<p class="gray">Publishing time: %publish_time_f2%
+
+<h3>%day_f3%</h3>
+
+<img src="%weather_situation_f3%">
+<p>
+<table>
+<tr class="blue">
+  <td>Max temperature</td><td>%max_temp_f3%</td>
+</tr>
+<tr>
+  <td>Min temperature</td><td>%min_temp_f3%</td>
+</tr>
+<tr>
+  <td>Condition</td><td>%condition_f3%</td>
+</tr>
+<tr>
+  <td>Wind direction</td><td>%wind_direction_f3%</td>
+</tr>
+<tr>
+  <td>Wind speed</td><td>%wind_speed_f3%</td>
+</tr>
+</table>
+<p class="gray">Publishing time: %publish_time_f3%
+</div>
+<hr>
+<p>Supported by <a href="http://backstage.bbc.co.uk">backstage.bbc.co.uk</a></p>
+<p>Weather data from <a href="http://www.metoffice.gov.uk/">UK MET Office</a></p>
+<p>Cloud image stripe by Soenke Rahn</p>
+</body>
+</html>

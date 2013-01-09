@@ -19,8 +19,7 @@ PostalCodePlugin::PostalCodePlugin()
 }
 
 PostalCodePlugin::PostalCodePlugin( const MarbleModel *marbleModel )
-    : AbstractDataPlugin( marbleModel ),
-      m_isInitialized( false )
+    : AbstractDataPlugin( marbleModel )
 {
     setEnabled( true );
     setVisible( false );
@@ -28,15 +27,8 @@ PostalCodePlugin::PostalCodePlugin( const MarbleModel *marbleModel )
 
 void PostalCodePlugin::initialize()
 {
-    setModel( new PostalCodeModel( pluginManager(), this ) );
+    setModel( new PostalCodeModel( this ) );
     setNumberOfItems( 20 );
-
-    m_isInitialized = true;
-}
-
-bool PostalCodePlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString PostalCodePlugin::name() const
@@ -77,7 +69,7 @@ QString PostalCodePlugin::description() const
 
 QIcon PostalCodePlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/postalcode.png");
 }
 
 Q_EXPORT_PLUGIN2( PostalCodePlugin, Marble::PostalCodePlugin )

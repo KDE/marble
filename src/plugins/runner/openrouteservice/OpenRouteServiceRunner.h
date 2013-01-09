@@ -12,20 +12,19 @@
 #ifndef MARBLE_OSMOPENROUTESERVICERUNNER_H
 #define MARBLE_OSMOPENROUTESERVICERUNNER_H
 
-#include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
+#include "RoutingRunner.h"
 #include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QString>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QHostInfo>
-
-class QNetworkAccessManager;
 
 namespace Marble
 {
 
-class OpenRouteServiceRunner : public MarbleAbstractRunner
+class GeoDataCoordinates;
+
+class OpenRouteServiceRunner : public RoutingRunner
 {
     Q_OBJECT
 
@@ -39,10 +38,6 @@ public:
     explicit OpenRouteServiceRunner(QObject *parent = 0);
 
     ~OpenRouteServiceRunner();
-
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
     // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );
 
@@ -75,7 +70,7 @@ private:
 
     RoutingInstruction::TurnType parseTurnType( const QString &text, QString* road ) const;
 
-    QNetworkAccessManager *m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
 
     QNetworkRequest m_request;
 

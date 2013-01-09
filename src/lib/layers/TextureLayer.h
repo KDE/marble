@@ -15,7 +15,9 @@
 #include <QtCore/QObject>
 
 #include "MarbleGlobal.h"
-#include "GeoSceneTexture.h"
+#include "MarbleModel.h"
+#include "GeoSceneTiled.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QSize>
 
@@ -40,11 +42,16 @@ class TextureLayer : public QObject, public LayerInterface
  public:
     TextureLayer( HttpDownloadManager *downloadManager,
                   const SunLocator *sunLocator,
-                  VectorComposer *veccomposer );
+                  VectorComposer *veccomposer,
+                  const PluginManager *pluginManager );
 
     ~TextureLayer();
 
     QStringList renderPosition() const;
+
+    void addSeaDocument( GeoDataDocument* seaDocument );
+
+    void addLandDocument( GeoDataDocument* landDocument );
 
     bool showSunShading() const;
     bool showCityLights() const;
@@ -57,7 +64,7 @@ class TextureLayer : public QObject, public LayerInterface
 
     QSize tileSize() const;
 
-    GeoSceneTexture::Projection tileProjection() const;
+    GeoSceneTiled::Projection tileProjection() const;
 
     int tileColumnCount( int level ) const;
     int tileRowCount( int level ) const;
@@ -89,7 +96,7 @@ public Q_SLOTS:
 
     void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTexture *> &textures, GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
+    void setMapTheme( const QVector<const GeoSceneTiled *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
 
     void setVolatileCacheLimit( quint64 kilobytes );
 

@@ -20,7 +20,7 @@
 #include "GeoSceneIcon.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "GeoSceneGeodata.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneProperty.h"
@@ -64,8 +64,7 @@ void TestGeoSceneWriter::initTestCase()
     dgmlPath = QDir( DGML_PATH );
     dgmlPath.setFilter(QDir::AllDirs | QDir::NoDotAndDotDot);
 
-    QString dgmlDirname;
-    foreach( dgmlDirname, dgmlPath.entryList() ) {
+    foreach( const QString &dgmlDirname, dgmlPath.entryList() ) {
         qDebug() << dgmlDirname;
         QDir dataDir(dgmlPath.absoluteFilePath(dgmlDirname));
         dataDir.setNameFilters( dgmlFilters );
@@ -75,9 +74,8 @@ void TestGeoSceneWriter::initTestCase()
             continue;
         }
 
-        QString filename;
         //test the loading of each file in the data dir
-        foreach( filename, dataDir.entryList(dgmlFilters, QDir::Files) ){
+        foreach( const QString &filename, dataDir.entryList(dgmlFilters, QDir::Files) ){
 
             //Add example files
             QFile file( dataDir.filePath(filename));
@@ -108,8 +106,10 @@ void TestGeoSceneWriter::saveFile_data()
 {
     QTest::addColumn<QSharedPointer<GeoSceneParser> >( "parser" );
 
-    foreach( QString key, parsers.keys() ) {
-        QTest::newRow( key.toLocal8Bit() ) << parsers.value(key);
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator itpoint = parsers.begin();
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator const endpoint = parsers.end();
+    for (; itpoint != endpoint; ++itpoint ) {
+        QTest::newRow( itpoint.key().toLocal8Bit() ) << itpoint.value();
     }
 }
 
@@ -133,8 +133,10 @@ void TestGeoSceneWriter::saveAndLoad_data()
 {
     QTest::addColumn<QSharedPointer<GeoSceneParser> >( "parser" );
 
-    foreach( QString key, parsers.keys() ) {
-        QTest::newRow( key.toLocal8Bit() ) << parsers.value(key);
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator itpoint = parsers.begin();
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator const endpoint = parsers.end();
+    for (; itpoint != endpoint; ++itpoint ) {
+        QTest::newRow( itpoint.key().toLocal8Bit() ) << itpoint.value();
     }
 }
 
@@ -163,8 +165,10 @@ void TestGeoSceneWriter::saveAndCompare_data()
     QTest::addColumn<QSharedPointer<GeoSceneParser> >("parser");
     QTest::addColumn<QString>("original");
 
-    foreach( QString key, parsers.keys() ) {
-        QTest::newRow( key.toLocal8Bit() ) << parsers.value(key) << key;
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator itpoint = parsers.begin();
+    QMap<QString, QSharedPointer<GeoSceneParser> >::iterator const endpoint = parsers.end();
+    for (; itpoint != endpoint; ++itpoint ) {
+        QTest::newRow( itpoint.key().toLocal8Bit() ) << itpoint.value() << itpoint.key();
     }
 }
 
@@ -212,10 +216,10 @@ void TestGeoSceneWriter::writeHeadTag()
     zoom->setMaximum( 500 );
     zoom->setDiscrete( true );
     
-    GeoSceneTexture* texture = new GeoSceneTexture( "map" );
+    GeoSceneTiled* texture = new GeoSceneTiled( "map" );
     texture->setSourceDir( "earth/testmap" );
     texture->setFileFormat( "png" );
-    texture->setProjection( GeoSceneTexture::Equirectangular );
+    texture->setProjection( GeoSceneTiled::Equirectangular );
     texture->addDownloadUrl( QUrl( "http://download.kde.org/marble/map/{x}/{y}/{zoomLevel}" ) );
     texture->addDownloadUrl( QUrl( "http://download.google.com/marble/map/{x}/{y}/{zoomLevel}" ) );
     texture->addDownloadPolicy( DownloadBrowse, 20 );
@@ -226,7 +230,6 @@ void TestGeoSceneWriter::writeHeadTag()
     
     GeoSceneGeodata* geodata = new GeoSceneGeodata( "cityplacemarks" );
     geodata->setSourceFile( "baseplacemarks.kml" );
-    geodata->setSourceFileFormat( "KML" );
     
     GeoSceneLayer* layer = new GeoSceneLayer( "testmap" );
     layer->setBackend( "texture" );

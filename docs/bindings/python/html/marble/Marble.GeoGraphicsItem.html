@@ -48,7 +48,7 @@
 <h1>GeoGraphicsItem Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: <a href="../marble/Marble.MarbleGraphicsItem.html">Marble.MarbleGraphicsItem</a><br />
+
 
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
@@ -61,22 +61,19 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#coordinate">coordinate</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem.GeoGraphicsItemFlags</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#flags">flags</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latLonAltBox">latLonAltBox</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#maxLodPixels">maxLodPixels</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#minLodPixels">minLodPixels</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#minZoomLevel">minZoomLevel</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[QPointF]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#positions">positions</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, float longitude, float latitude, float altitude=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paint">paint</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> point)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFlag">setFlag</a> (self, <a href="../marble/Marble.GeoGraphicsItem.html#GeoGraphicsItemFlag">Marble.GeoGraphicsItem.GeoGraphicsItemFlag</a> flag, bool enabled=1)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFlags">setFlags</a> (self, <a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem.GeoGraphicsItemFlags</a> flags)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLatLonAltBox">setLatLonAltBox</a> (self, <a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> latLonAltBox)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMaxLodPixels">setMaxLodPixels</a> (self, int pixels)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMinLodPixels">setMinLodPixels</a> (self, int pixels)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMinZoomLevel">setMinZoomLevel</a> (self, int zoomLevel)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStyle">setStyle</a> (self, <a href="../marble/Marble.GeoDataStyle.html">Marble.GeoDataStyle</a> style)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTarget">setTarget</a> (self, QString target)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVisible">setVisible</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setZValue">setZValue</a> (self, float z)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataStyle.html">Marble.GeoDataStyle</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#style">style</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#target">target</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visible">visible</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#zValue">zValue</a> (self)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="GeoGraphicsItem"></a>
 <div class="memitem">
@@ -102,8 +99,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Return the coordinate of the item as <b>longitude</b>
-and <b>latitude.</b>
+<div class="memdoc"><p>Return the coordinate of the item as a GeoDataCoordinates
 </p></div></div><a class="anchor" name="flags"></a>
 <div class="memitem">
 <div class="memproto">
@@ -132,36 +128,6 @@ this item. <dl class="see" compact><dt><b>See also:</b></dt><dd> QFlags
 </table>
 </div>
 <div class="memdoc"><p>Returns the box that is used to determine if an item is active or inactive.
-</p></div></div><a class="anchor" name="maxLodPixels"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">int maxLodPixels</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns the maximum number of pixels the GeoGraphicsItem has to be
-projected on for this item to be considered as active. -1 would mean no
-maximum number of pixels which is also the standard value.
-</p></div></div><a class="anchor" name="minLodPixels"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">int minLodPixels</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns the minimum number of pixels the GeoGraphicsItem has to be projected on for this item
-to be considered as active. 0 would mean no minimum number of pixels which is also the
-standard value.
 </p></div></div><a class="anchor" name="minZoomLevel"></a>
 <div class="memitem">
 <div class="memproto">
@@ -175,44 +141,25 @@ standard value.
 </table>
 </div>
 <div class="memdoc"><p>Returns the minim zoom level on which item will be active.
-</p></div></div><a class="anchor" name="positions"></a>
+</p></div></div><a class="anchor" name="paint"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[QPointF] positions</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns all coordinates of the item in view coordinates according to the given projection.
-</p></div></div><a class="anchor" name="setCoordinate"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setCoordinate</td>
+<td class="memname"> paint</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>longitude</em>, </td>
+<td class="paramtype"><a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a>&nbsp;</td>
+<td class="paramname"><em>painter</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>latitude</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>altitude=0</em></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em></td>
 </tr>
 <tr>
 <td></td>
@@ -222,7 +169,11 @@ standard value.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Set the coordinate of the item with an <b>GeoDataPoint.</b>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Paints the item using the given GeoPainter.
+</p>
+<p>
+Note that depending on the projection and zoom level, the item may be visible more than once.
+GeoPainter will therefore automatically "repeat" primitives which have a geo position (GeoDataCoordinates).
 </p></div></div><a class="anchor" name="setCoordinate"></a>
 <div class="memitem">
 <div class="memproto">
@@ -334,54 +285,6 @@ standard value.
 </div>
 <div class="memdoc"><p>Set the box used to determine if an item is active or inactive. If an empty box is passed
 the item will be shown in every case.
-</p></div></div><a class="anchor" name="setMaxLodPixels"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setMaxLodPixels</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>pixels</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Sets the maximum number of pixels the GeoGraphicsItem has to be projected on for this item to
-be considered as active.
-</p></div></div><a class="anchor" name="setMinLodPixels"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setMinLodPixels</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>pixels</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Sets the minimum number of pixels the GeoGraphicsItem has to be projected on for this item to
-be considered as active.
 </p></div></div><a class="anchor" name="setMinZoomLevel"></a>
 <div class="memitem">
 <div class="memproto">
@@ -429,19 +332,19 @@ be considered as active.
 </div>
 <div class="memdoc"><p>Set the box used to determine if an item is active or inactive. If an empty box is passed
 the item will be shown in every case.
-</p></div></div><a class="anchor" name="setTarget"></a>
+</p></div></div><a class="anchor" name="setVisible"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> setTarget</td>
+<td class="memname"> setVisible</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>target</em></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
 </tr>
 <tr>
 <td></td>
@@ -451,7 +354,29 @@ the item will be shown in every case.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Set the target of the item with <b>target.</b>
+<div class="memdoc"></div></div><a class="anchor" name="setZValue"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setZValue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>z</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the z value of the item
 </p></div></div><a class="anchor" name="style"></a>
 <div class="memitem">
 <div class="memproto">
@@ -465,11 +390,11 @@ the item will be shown in every case.
 </table>
 </div>
 <div class="memdoc"><p>Returns the style of item.
-</p></div></div><a class="anchor" name="target"></a>
+</p></div></div><a class="anchor" name="visible"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">QString target</td>
+<td class="memname">bool visible</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -477,7 +402,19 @@ the item will be shown in every case.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Get the target of the item. The target is the current planet string.s
+<div class="memdoc"></div></div><a class="anchor" name="zValue"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float zValue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the z value of the item
 </p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="GeoGraphicsItemFlag"></a>
 <div class="memitem">
 <div class="memproto">

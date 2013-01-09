@@ -83,7 +83,7 @@ QList<PluginAuthor> GpsInfo::pluginAuthors() const
 
 QIcon GpsInfo::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/gps.png");
 }
 
 void GpsInfo::initialize ()
@@ -101,8 +101,8 @@ void GpsInfo::initialize ()
         setPadding( 0 );
 
         m_locale = MarbleGlobal::getInstance()->locale();
-        connect( marbleModel()->positionTracking(), SIGNAL( gpsLocation(GeoDataCoordinates,qreal) ),
-                this, SLOT( updateLocation(GeoDataCoordinates,qreal) ) );
+        connect( marbleModel()->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+                this, SLOT(updateLocation(GeoDataCoordinates,qreal)) );
     }
 }
 

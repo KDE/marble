@@ -18,17 +18,12 @@ namespace Marble
 {
 
 OsmRunner::OsmRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 
 OsmRunner::~OsmRunner()
 {
-}
-
-GeoDataFeature::GeoDataVisualCategory OsmRunner::category() const
-{
-    return GeoDataFeature::Folder;
 }
 
 void OsmRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
@@ -53,6 +48,7 @@ void OsmRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     Q_ASSERT( document );
     GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
     doc->setDocumentRole( role );
+    doc->setFileName( fileName );
 
     file.close();
     emit parsingFinished( doc );

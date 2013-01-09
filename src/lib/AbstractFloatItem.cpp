@@ -18,6 +18,7 @@
 
 // Marble
 #include "DialogConfigurationInterface.h"
+#include "GeoPainter.h"
 #include "MarbleDebug.h"
 
 namespace Marble
@@ -180,13 +181,16 @@ void AbstractFloatItem::changeViewport( ViewportParams *viewport )
 bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
              const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     if ( !enabled() || !visible() ) {
         return true;
     }
 
     changeViewport( viewport ); // may invalidate graphics item's cache
 
-    paintEvent( painter, viewport, renderPos, layer );
+    paintEvent( painter, viewport );
 
     return true;
 }
@@ -207,18 +211,22 @@ QMenu* AbstractFloatItem::contextMenu()
     {
         d->m_contextMenu = new QMenu;
 
-        QAction *lockAction = d->m_contextMenu->addAction( tr( "&Lock" ) );
+        QAction *lockAction = d->m_contextMenu->addAction( QIcon(":/icons/unlock.png"), tr( "&Lock" ) );
         lockAction->setCheckable( true );
         lockAction->setChecked( positionLocked() );
         connect( lockAction, SIGNAL( triggered( bool ) ), this, SLOT( setPositionLocked( bool ) ) );
-        QAction *hideAction = d->m_contextMenu->addAction( tr( "&Hide" ) );
-        connect( hideAction, SIGNAL( triggered() ), this, SLOT( hide() ) );
+
+        if(!(flags() & ItemIsHideable)) {
+            QAction *hideAction = d->m_contextMenu->addAction( tr( "&Hide" ) );
+            connect( hideAction, SIGNAL( triggered() ), this, SLOT( hide() ) );
+        }
+
         DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( this );
         QDialog *dialog = configInterface ? configInterface->configDialog() : 0;
         if( dialog )
         {
             d->m_contextMenu->addSeparator();
-            QAction *configAction = d->m_contextMenu->addAction( tr( "&Configure..." ) );
+            QAction *configAction = d->m_contextMenu->addAction( QIcon(":/icons/settings-configure.png"), tr( "&Configure..." ) );
             connect( configAction, SIGNAL( triggered() ), dialog, SLOT( exec() ) );
         }
     }

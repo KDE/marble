@@ -13,9 +13,8 @@
 #ifndef MARBLE_GEOMETRYLAYER_H
 #define MARBLE_GEOMETRYLAYER_H
 
-// Marble
+#include <QtCore/QObject>
 #include "LayerInterface.h"
-#include "GeoDataFeature.h"
 
 class QAbstractItemModel;
 
@@ -29,7 +28,7 @@ class GeometryLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 public:
-    GeometryLayer( const QAbstractItemModel *model );
+    explicit GeometryLayer( const QAbstractItemModel *model );
     ~GeometryLayer();
 
     virtual QStringList renderPosition() const;
@@ -39,11 +38,6 @@ public:
     
     virtual QString runtimeTrace() const;
 
-    static int s_defaultZValues[GeoDataFeature::LastIndex];
-    static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
-    static bool s_defaultValuesInitialized;
-    static int s_defaultZValue;
-
 public Q_SLOTS:
     void invalidateScene();
 
@@ -52,8 +46,6 @@ Q_SIGNALS:
 
 private:
     GeometryLayerPrivate *d;
-    
-    static void initializeDefaultValues();
 };
 
 } // namespace Marble

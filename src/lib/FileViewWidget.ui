@@ -14,9 +14,9 @@
    <string>File View</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QListView" name="m_fileView"/>
-   </item>
+  <item>
+   <widget class="QTreeView" name="m_treeView"/>
+  </item>
    <item>
     <layout class="QHBoxLayout">
      <property name="spacing">
@@ -59,9 +59,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QTreeView" name="m_treeView"/>
    </item>
   </layout>
  </widget>

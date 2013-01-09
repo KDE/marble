@@ -14,6 +14,7 @@
 #include <QtCore/QStringList>
 #include <QtGui/QCursor>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QFileDialog>
 #include <QtGui/QHBoxLayout>
@@ -25,7 +26,6 @@
 #include "MarbleModel.h"
 #include "ui_OverviewMapConfigWidget.h"
 
-#include "GeoPainter.h"
 #include "GeoDataPoint.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
@@ -54,8 +54,8 @@ OverviewMap::OverviewMap( const MarbleModel *marbleModel )
     // (1) the SVG overview map is already rendered and stored in m_worldmap pixmap
     // (2) bounding box and location dot keep changing during navigation
     setCacheMode( NoCache );
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateSettings() ) );
+    connect( this, SIGNAL(settingsChanged(QString)),
+             this, SLOT(updateSettings()) );
 
     restoreDefaultSettings();
 }
@@ -123,27 +123,27 @@ QDialog *OverviewMap::configDialog()
         ui_configWidget->m_planetComboBox->setCurrentIndex( 2 );
         readSettings();
         loadMapSuggestions();
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
-                 SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
-                 SLOT( readSettings() ) );
-        connect( ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
-                 SLOT( restoreDefaultSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
+                 SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
+                 SLOT(readSettings()) );
+        connect( ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL(clicked()),
+                 SLOT(restoreDefaultSettings()) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_fileChooserButton, SIGNAL( clicked() ),
-                 SLOT( chooseCustomMap() ) );
-        connect( ui_configWidget->m_widthBox, SIGNAL( valueChanged( int ) ),
-                 SLOT( synchronizeSpinboxes() ) );
-        connect( ui_configWidget->m_heightBox, SIGNAL( valueChanged( int ) ),
-                 SLOT( synchronizeSpinboxes() ) );
-        connect( ui_configWidget->m_planetComboBox, SIGNAL( currentIndexChanged( int ) ),
-                 SLOT( showCurrentPlanetPreview() ) );
-        connect( ui_configWidget->m_colorChooserButton, SIGNAL( clicked() ),
-                 SLOT( choosePositionIndicatorColor() ) );
-        connect( ui_configWidget->m_tableWidget, SIGNAL( cellClicked ( int, int ) ),
-                 SLOT( useMapSuggestion( int ) ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 SLOT(writeSettings()) );
+        connect( ui_configWidget->m_fileChooserButton, SIGNAL(clicked()),
+                 SLOT(chooseCustomMap()) );
+        connect( ui_configWidget->m_widthBox, SIGNAL(valueChanged(int)),
+                 SLOT(synchronizeSpinboxes()) );
+        connect( ui_configWidget->m_heightBox, SIGNAL(valueChanged(int)),
+                 SLOT(synchronizeSpinboxes()) );
+        connect( ui_configWidget->m_planetComboBox, SIGNAL(currentIndexChanged(int)),
+                 SLOT(showCurrentPlanetPreview()) );
+        connect( ui_configWidget->m_colorChooserButton, SIGNAL(clicked()),
+                 SLOT(choosePositionIndicatorColor()) );
+        connect( ui_configWidget->m_tableWidget, SIGNAL(cellClicked(int,int)),
+                 SLOT(useMapSuggestion(int)) );
     }
     return m_configDialog;
 }
@@ -176,15 +176,9 @@ void OverviewMap::changeViewport( ViewportParams *viewport )
     }
 }
 
-void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPos, GeoSceneLayer * layer )
+void OverviewMap::paintContent( QPainter *painter )
 {
-    Q_UNUSED( layer );
-    Q_UNUSED( renderPos );
-
     painter->save();
-
-    painter->autoMapQuality();
 
     QRectF mapRect( contentRect() );
 
@@ -250,9 +244,9 @@ void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
     qreal xSouth = mapRect.height() / 2.0
                     - mapRect.height() / M_PI * m_latLonAltBox.south();
 
-    qreal lon = viewport->centerLongitude();
-    qreal lat = viewport->centerLatitude();
-    GeoDataPoint::normalizeLonLat( lon, lat );
+    qreal lon = m_centerLon;
+    qreal lat = m_centerLat;
+    GeoDataCoordinates::normalizeLonLat( lon, lat );
     qreal x = mapRect.width() / 2.0 + mapRect.width() / ( 2.0 * M_PI ) * lon;
     qreal y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;
 
@@ -303,7 +297,13 @@ void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
 
 QHash<QString,QVariant> OverviewMap::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> result = AbstractFloatItem::settings();
+
+    foreach ( const QString &key, m_settings.keys() ) {
+        result.insert( key, m_settings[key] );
+    }
+
+    return result;
 }
 
 void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
@@ -472,7 +472,7 @@ void OverviewMap::loadMapSuggestions()
 {
     QStringList paths = QDir( MarbleDirs::pluginPath( "" ) ).entryList( QStringList( "*.svg" ), QDir::Files | QDir::NoDotAndDotDot );
     for( int i = 0; i < paths.size(); ++i ) {
-        paths[i] = MarbleDirs::pluginPath( "" ) + "/" + paths[i];
+        paths[i] = MarbleDirs::pluginPath( QString() ) + '/' + paths[i];
     }
     paths << MarbleDirs::path( "svg/worldmap.svg" ) << MarbleDirs::path( "svg/lunarmap.svg" );
     ui_configWidget->m_tableWidget->setRowCount( paths.size() );

@@ -30,6 +30,8 @@ static GeoTagHandlerRegistrar osmNodeTagHandler( GeoParser::QualifiedName( osmTa
 
 GeoNode* OsmNodeTagHandler::parse( GeoParser& parser ) const
 {
+    // Osm Node http://wiki.openstreetmap.org/wiki/Data_Primitives#Node
+
     Q_ASSERT( parser.isStartElement() );
 
     qreal lon = parser.attribute( "lon" ).toDouble();

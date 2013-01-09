@@ -83,6 +83,7 @@ CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f
       d( new CurrentLocationWidgetPrivate() )
 {
     d->m_currentLocationUi.setupUi( this );
+    layout()->setMargin( 0 );
 
     connect( d->m_currentLocationUi.recenterComboBox, SIGNAL ( currentIndexChanged( int ) ),
             this, SLOT( setRecenterMode( int ) ) );
@@ -366,7 +367,7 @@ void CurrentLocationWidgetPrivate::saveTrack()
     if ( fileName.isEmpty() ) {
         return;
     }
-    if ( !fileName.endsWith(".kml", Qt::CaseInsensitive) ) {
+    if ( !fileName.endsWith(QLatin1String( ".kml" ), Qt::CaseInsensitive) ) {
         fileName.append( ".kml" );
     }
     QFileInfo file( fileName );

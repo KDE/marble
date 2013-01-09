@@ -12,29 +12,28 @@
 #ifndef MARBLE_OSMNOMINATIMRUNNER_H
 #define MARBLE_OSMNOMINATIMRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ReverseGeocodingRunner.h"
+#include "GeoDataCoordinates.h"
 
 #include <QtCore/QString>
-#include <QtNetwork/QHostInfo>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 
 class QNetworkReply;
-class QNetworkAccessManager;
 class QDomNodeList;
 
 namespace Marble
 {
 
-class OsmNominatimRunner : public MarbleAbstractRunner
+class GeoDataExtendedData;
+
+class OsmNominatimRunner : public ReverseGeocodingRunner
 {
     Q_OBJECT
 public:
     explicit OsmNominatimRunner(QObject *parent = 0);
 
     ~OsmNominatimRunner();
-
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
     virtual void reverseGeocoding( const GeoDataCoordinates &coordinates );
@@ -50,7 +49,7 @@ private Q_SLOTS:
 private:
     void addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData );
 
-    QNetworkAccessManager* m_manager;
+    QNetworkAccessManager m_manager;
 
     QNetworkRequest m_request;
 

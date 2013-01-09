@@ -169,7 +169,7 @@ QPixmap RouteRequest::pixmap(int position, int size, int margin ) const
     painter.setRenderHint( QPainter::Antialiasing, true );
     painter.setPen( QColor( Qt::black ) );
     bool const isVisited = visited( position );
-    QColor const backgroundColor = isVisited ? oxygenAluminumGray4 : oxygenForestGreen4;
+    QColor const backgroundColor = isVisited ? Oxygen::aluminumGray4 : Oxygen::forestGreen4;
     painter.setBrush( QBrush( backgroundColor ) );
     painter.setPen( Qt::black );
     int const iconSize = imageSize - 2 * margin;
@@ -209,7 +209,7 @@ void RouteRequest::clear()
 void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates, const QString &name )
 {
     GeoDataPlacemark placemark;
-    placemark.setCoordinate( GeoDataPoint( coordinates ) );
+    placemark.setCoordinate( coordinates );
     d->m_route.insert( index, placemark );
     setName( index, name );
     emit positionAdded( index );
@@ -218,7 +218,7 @@ void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates, con
 void RouteRequest::append( const GeoDataCoordinates &coordinates, const QString &name )
 {
     GeoDataPlacemark placemark;
-    placemark.setCoordinate( GeoDataPoint( coordinates ) );
+    placemark.setCoordinate( coordinates );
     d->m_route.append( placemark );
     setName( d->m_route.size()-1, name );
     emit positionAdded( d->m_route.size()-1 );
@@ -236,7 +236,7 @@ void RouteRequest::addVia( const GeoDataCoordinates &position )
 {
     int index = d->viaIndex( position );
     GeoDataPlacemark placemark;
-    placemark.setCoordinate( GeoDataPoint( position ) );
+    placemark.setCoordinate( position );
     d->m_route.insert( index, placemark );
     emit positionAdded( index );
 }
@@ -245,7 +245,7 @@ void RouteRequest::setPosition( int index, const GeoDataCoordinates &position, c
 {
     if ( index >= 0 && index < d->m_route.size() ) {
         GeoDataPlacemark placemark;
-        placemark.setCoordinate( GeoDataPoint( position ) );
+        placemark.setCoordinate( position );
         d->m_route[index] = placemark;
         setName( index, name );
         setVisited( index, false );

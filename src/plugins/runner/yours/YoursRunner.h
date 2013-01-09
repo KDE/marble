@@ -12,9 +12,9 @@
 #ifndef MARBLE_YOURSRUNNER_H
 #define MARBLE_YOURSRUNNER_H
 
-#include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
+#include "RoutingRunner.h"
 
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
 class QNetworkAccessManager;
@@ -22,7 +22,7 @@ class QNetworkAccessManager;
 namespace Marble
 {
 
-class YoursRunner : public MarbleAbstractRunner
+class YoursRunner : public RoutingRunner
 {
     Q_OBJECT
 
@@ -30,9 +30,6 @@ public:
     explicit YoursRunner( QObject *parent = 0 );
 
     ~YoursRunner();
-
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );
@@ -51,7 +48,7 @@ private:
 
     qreal distance( const GeoDataDocument* document ) const;
 
-    QNetworkAccessManager *m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
 
     QNetworkRequest m_request;
 };

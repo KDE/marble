@@ -77,7 +77,7 @@
 #include "MarblePluginSettingsWidget.h"
 #include "MapWizard.h"
 #include "NewBookmarkFolderDialog.h"
-#include "PluginAboutDialog.h"
+#include "RenderPluginModel.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingProfilesWidget.h"
@@ -93,6 +93,7 @@
 #include "PluginManager.h"
 #include "SearchInputWidget.h"
 #include "MarbleWidgetInputHandler.h"
+#include "Planet.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -124,7 +125,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_timeControlDialog( 0 ),
     m_downloadRegionDialog( 0 ),
     m_externalMapEditorAction( 0 ),
-    m_pluginModel( 0 ),
     m_configDialog( 0 ),
     m_position( i18n( NOT_AVAILABLE ) ),
     m_tileZoomLevel( i18n( NOT_AVAILABLE ) ),
@@ -231,6 +231,7 @@ bool MarblePart::openFile()
         const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
         const QString filter = QString( "%1|%2" ).arg( fileExtensions.join( " " ) ).arg( plugin->fileFormatDescription() );
         filters << filter;
+
         allFileExtensions << fileExtensions;
     }
 
@@ -267,8 +268,8 @@ void MarblePart::exportMapScreenShot()
     if ( !fileName.isEmpty() ) {
         // Take the case into account where no file format is indicated
         const char * format = 0;
-        if ( !fileName.endsWith("png", Qt::CaseInsensitive)
-           && !fileName.endsWith("jpg", Qt::CaseInsensitive) )
+        if ( !fileName.endsWith(QLatin1String( "png" ), Qt::CaseInsensitive)
+           && !fileName.endsWith(QLatin1String( "jpg" ), Qt::CaseInsensitive) )
         {
             format = "JPG";
         }
@@ -290,6 +291,11 @@ void MarblePart::setShowBookmarks( bool show )
     m_toggleBookmarkDisplayAction->setChecked( show ); // Sync state with the GUI
 }
 
+void MarblePart::setShowFileView( bool isChecked )
+{
+    m_controlView->setFileViewTabShown( isChecked );
+}
+
 void MarblePart::setShowClouds( bool isChecked )
 {
     m_controlView->marbleWidget()->setShowClouds( isChecked );
@@ -302,6 +308,15 @@ void MarblePart::setShowAtmosphere( bool isChecked )
     m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
 
     m_showAtmosphereAction->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MarblePart::updateAtmosphereMenu()
+{
+    if( m_controlView->marbleModel()->planet()->hasAtmosphere() ) {
+        m_showAtmosphereAction->setEnabled( true );
+    } else {
+        m_showAtmosphereAction->setEnabled( false );
+    }
 }
 
 void MarblePart::showPositionLabel( bool isChecked )
@@ -362,8 +377,10 @@ void MarblePart::controlSun()
                  this,               SLOT ( showSun( bool ) ) );
         connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
                  m_showShadow,               SLOT ( setChecked( bool ) ) );
-        connect( m_sunControlDialog, SIGNAL( showSunInZenith( bool ) ),
-                 m_showSunInZenith,               SLOT ( setChecked( bool ) ) );
+        connect( m_sunControlDialog,    SIGNAL( isLockedToSubSolarPoint(bool) ),
+                 m_lockToSubSolarPoint, SLOT ( setChecked( bool ) ) );
+        connect( m_sunControlDialog,         SIGNAL( isSubSolarPointIconVisible(bool) ),
+                 m_setSubSolarPointIconVisible, SLOT ( setChecked( bool ) ) );
     }
 
     m_sunControlDialog->show();
@@ -389,9 +406,14 @@ void MarblePart::showSun( bool active )
     m_sunControlDialog->setSunShading( active );
 }
 
-void MarblePart::showSunInZenith( bool active )
+void MarblePart::lockToSubSolarPoint( bool lock )
 {
-    m_controlView->marbleWidget()->setShowSunInZenith( active );
+    m_controlView->marbleWidget()->setLockToSubSolarPoint( lock );
+}
+
+void MarblePart::setSubSolarPointIconVisible( bool show )
+{
+    m_controlView->marbleWidget()->setSubSolarPointIconVisible( show );
 }
 
 void MarblePart::workOffline( bool offline )
@@ -454,7 +476,6 @@ void MarblePart::readSettings()
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
     m_lockFloatItemsAct->setChecked(MarbleSettings::lockFloatItemPositions());
     lockFloatItemPosition(MarbleSettings::lockFloatItemPositions());
-    m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( MarbleSettings::kineticScrolling() );
 
     setShowBookmarks( MarbleSettings::showBookmarks() );
 
@@ -462,8 +483,10 @@ void MarblePart::readSettings()
     m_controlView->marbleWidget()->setShowSunShading( MarbleSettings::showSun() );
     m_showShadow->setChecked( MarbleSettings::showSun() );
     m_controlView->marbleWidget()->setShowCityLights( MarbleSettings::showCitylights() );
-    m_controlView->marbleWidget()->setShowSunInZenith( MarbleSettings::centerOnSun() );
-    m_showSunInZenith->setChecked( MarbleSettings::centerOnSun() );
+    m_controlView->marbleWidget()->setSubSolarPointIconVisible( MarbleSettings::subSolarPointIconVisible() );
+    m_controlView->marbleWidget()->setLockToSubSolarPoint( MarbleSettings::lockToSubSolarPoint() );
+    m_setSubSolarPointIconVisible->setChecked( MarbleSettings::subSolarPointIconVisible() );
+    m_lockToSubSolarPoint->setChecked( MarbleSettings::lockToSubSolarPoint() );
 
     // View
     m_initialGraphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
@@ -662,7 +685,8 @@ void MarblePart::writeSettings()
     // Sun
     MarbleSettings::setShowSun( m_controlView->marbleWidget()->showSunShading() );
     MarbleSettings::setShowCitylights( m_controlView->marbleWidget()->showCityLights() );
-    MarbleSettings::setCenterOnSun( m_controlView->marbleWidget()->showSunInZenith() );
+    MarbleSettings::setLockToSubSolarPoint( m_controlView->marbleWidget()->isLockedToSubSolarPoint() );
+    MarbleSettings::setSubSolarPointIconVisible( m_controlView->marbleWidget()->isSubSolarPointIconVisible() );
 
     // Caches
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->
@@ -784,6 +808,7 @@ void MarblePart::setupActions()
                                    m_copyCoordinatesAction );
     m_copyCoordinatesAction->setText( i18nc( "Action for copying the coordinates to the clipboard",
                                              "C&opy Coordinates" ) );
+    m_copyCoordinatesAction->setIcon( KIcon( ":/icons/copy-coordinates.png" ) );
     connect( m_copyCoordinatesAction, SIGNAL( triggered( bool ) ),
              this,                    SLOT( copyCoordinates() ) );
 
@@ -809,6 +834,7 @@ void MarblePart::setupActions()
     m_mapWizardAct = new KAction( i18nc( "Action for creating new maps",
                                          "&Create a New Map..." ),
                                   this );
+    m_mapWizardAct->setIcon( KIcon( ":/icons/create-new-map.png" ) );
     actionCollection()->addAction( "createMap", m_mapWizardAct );
     m_mapWizardAct->setStatusTip( i18nc( "Status tip",
                                          "A wizard guides you through the creation of your own map theme." ) );
@@ -836,10 +862,21 @@ void MarblePart::setupActions()
     m_showAtmosphereAction = new KAction( this );
     actionCollection()->addAction( "show_atmosphere", m_showAtmosphereAction );
     m_showAtmosphereAction->setCheckable( true );
+    m_showAtmosphereAction->setVisible( false );
     m_showAtmosphereAction->setChecked( true );
     m_showAtmosphereAction->setText( i18nc( "Action for toggling the atmosphere", "&Atmosphere" ) );
+    m_showAtmosphereAction->setIcon( KIcon( ":/icons/atmosphere.png" ) );
     connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ),
              this,                   SLOT( setShowAtmosphere( bool ) ) );
+    foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+        if ( plugin->nameId() == "atmosphere" ) {
+            m_showAtmosphereAction->setVisible( plugin->enabled() );
+            connect( plugin, SIGNAL( enabledChanged( bool ) ),
+                     m_showAtmosphereAction, SLOT( setVisible( bool ) ) );
+        }
+    }
+    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
+            this, SLOT( updateAtmosphereMenu() ) );
 
     // Action: Show Crosshairs option
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
@@ -851,12 +888,22 @@ void MarblePart::setupActions()
         }
     }
 
+    // Action: Show File View
+    m_showFileViewAction = new KAction( this );
+    actionCollection()->addAction( "show_file_view", m_showFileViewAction );
+    m_showFileViewAction->setChecked( false );
+    m_showFileViewAction->setCheckable( true );
+    m_showFileViewAction->setText( i18nc( "Action for showing the File View",
+                                   "&Show File View" ) );
+    connect( m_showFileViewAction, SIGNAL( triggered( bool ) ),
+             this,                 SLOT( setShowFileView( bool ) ) );
 
     // Action: Show Clouds option
     m_showCloudsAction = new KAction( this );
     actionCollection()->addAction( "show_clouds", m_showCloudsAction );
     m_showCloudsAction->setCheckable( true );
     m_showCloudsAction->setChecked( true );
+    m_showCloudsAction->setIcon( KIcon( ":/icons/clouds.png" ) );
     m_showCloudsAction->setText( i18nc( "Action for toggling clouds", "&Clouds" ) );
     connect( m_showCloudsAction, SIGNAL( triggered( bool ) ),
              this,               SLOT( setShowClouds( bool ) ) );
@@ -873,6 +920,7 @@ void MarblePart::setupActions()
     // Action: Show Time options
     m_controlTimeAction = new KAction( this );
     actionCollection()->addAction( "control_time", m_controlTimeAction );
+    m_controlTimeAction->setIcon( KIcon( ":/icons/clock.png" ) );
     m_controlTimeAction->setText( i18nc( "Action for time control dialog", "&Time Control..." ) );
     connect( m_controlTimeAction, SIGNAL( triggered( bool ) ),
          this,               SLOT( controlTime() ) );
@@ -883,6 +931,7 @@ void MarblePart::setupActions()
                                    m_lockFloatItemsAct );
     m_lockFloatItemsAct->setText( i18nc( "Action for locking float items on the map",
                                          "Lock Position" ) );
+    m_lockFloatItemsAct->setIcon( KIcon( ":/icons/unlock.png" ) );
     m_lockFloatItemsAct->setCheckable( true );
     m_lockFloatItemsAct->setChecked( false );
     connect( m_lockFloatItemsAct, SIGNAL( triggered( bool ) ),
@@ -899,13 +948,20 @@ void MarblePart::setupActions()
     m_showShadow->setToolTip(i18n("Shows and hides the shadow of the sun"));
     connect( m_showShadow, SIGNAL( triggered( bool ) ), this, SLOT( showSun( bool ) ));
 
-    //Toggle Action: Show sun zenith
-    m_showSunInZenith = new KToggleAction( i18n( "Show Zenith" ), this );
-    m_showSunInZenith->setIcon( KIcon( MarbleDirs::path( "svg/sunshine.png" ) ) );
-    actionCollection()->addAction( "sun_zenith", m_showSunInZenith );
-    m_showSunInZenith->setCheckedState( KGuiItem( i18n( "Hide Zenith" ) ) );
-    m_showSunInZenith->setToolTip( i18n( "Shows and hides the zenith location of the sun" ) );
-    connect( m_showSunInZenith, SIGNAL( triggered( bool ) ), this, SLOT( showSunInZenith( bool ) ));
+    //Toggle Action: Show Sun icon on the Sub-Solar Point
+    m_setSubSolarPointIconVisible = new KToggleAction( i18n( "Show sun icon on the Sub-Solar Point" ), this );
+    actionCollection()->addAction( "show_icon_on_subsolarpoint", m_setSubSolarPointIconVisible );
+    m_setSubSolarPointIconVisible->setCheckedState( KGuiItem( i18n( "Hide sun icon on the Sub-Solar Point" ) ) );
+    m_setSubSolarPointIconVisible->setToolTip( i18n( "Show sun icon on the sub-solar point" ) );
+    connect( m_setSubSolarPointIconVisible, SIGNAL( triggered( bool ) ), this, SLOT( setSubSolarPointIconVisible( bool ) ));
+
+
+    //Toggle Action: Lock globe to the Sub-Solar Point
+    m_lockToSubSolarPoint = new KToggleAction( i18n( "Lock Globe to the Sub-Solar Point" ), this );
+    actionCollection()->addAction( "lock_to_subsolarpoint", m_lockToSubSolarPoint );
+    m_lockToSubSolarPoint->setCheckedState( KGuiItem( i18n( "Unlock Globe to the Sub-Solar Point" ) ) );
+    m_lockToSubSolarPoint->setToolTip( i18n( "Lock globe to the sub-solar point" ) );
+    connect( m_lockToSubSolarPoint, SIGNAL( triggered( bool ) ), this, SLOT( lockToSubSolarPoint( bool ) ));
 
     //    FIXME: Discuss if this is the best place to put this
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
@@ -954,6 +1010,7 @@ void MarblePart::setupActions()
     m_externalMapEditorAction = new KAction( this );
     actionCollection()->addAction( "external_editor", m_externalMapEditorAction );
     m_externalMapEditorAction->setText( i18nc( "Edit the map in an external application", "&Edit Map" ) );
+    m_externalMapEditorAction->setIcon( KIcon( ":/icons/edit-map.png" ) );
     m_externalMapEditorAction->setShortcut( Qt::CTRL + Qt::Key_E );
     connect( m_externalMapEditorAction, SIGNAL( triggered( ) ),
              m_controlView, SLOT( launchExternalMapEditor() ) );
@@ -1076,16 +1133,28 @@ void MarblePart::mapThemeChanged( const QString& newMapTheme )
 void MarblePart::createPluginMenus()
 {
     unplugActionList("plugins_actionlist");
-    QList<QActionGroup*> *tmp_toolbarActionGroups;
+    unplugActionList("plugins_menuactionlist");
+    QList<QActionGroup*> *tmp_actionGroups, *tmp_toolbarActionGroups;
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
 
-    //Load the toolbars
     for (; i != end; ++i ) {
-        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
 
-        if ( tmp_toolbarActionGroups ) {
+        // menus
+        tmp_actionGroups = (*i)->actionGroups();
+        if( (*i)->enabled() && tmp_actionGroups ) {
+            foreach( QActionGroup *ag, *tmp_actionGroups ) {
+                if( !ag->actions().isEmpty() ) {
+                    // add separator
+                }
+                plugActionList( "plugins_menuactionlist", ag->actions() );
+            }
+        }
+
+        // toolbars
+        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
+        if ( (*i)->enabled() && tmp_toolbarActionGroups ) {
 
             foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
                 plugActionList( "plugins_actionlist", ag->actions() );
@@ -1294,12 +1363,9 @@ void MarblePart::showDownloadRegionDialog()
 void MarblePart::downloadRegion()
 {
     Q_ASSERT( m_downloadRegionDialog );
-    QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
-    QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
-    kDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     if ( !pyramid.isEmpty() ) {
-        m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
+        m_controlView->marbleWidget()->downloadRegion( pyramid );
     }
 }
 
@@ -1391,21 +1457,13 @@ void MarblePart::editSettings()
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );
     w_routingSettings->setObjectName( "routing_page" );
-    m_configDialog->addPage( w_routingSettings, tr( "Routing" ) );
+    m_configDialog->addPage( w_routingSettings, i18n( "Routing" ), "flag");
 
     // plugin page
-    m_pluginModel = new QStandardItemModel( this );
-    QStandardItem  *parentItem = m_pluginModel->invisibleRootItem();
-
-    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        parentItem->appendRow( (*i)->item() );
-    }
-
     MarblePluginSettingsWidget *w_pluginSettings = new MarblePluginSettingsWidget();
-    w_pluginSettings->setModel( m_pluginModel );
+    RenderPluginModel *const pluginModel = new RenderPluginModel( w_pluginSettings );
+    pluginModel->setRenderPlugins( m_controlView->marbleWidget()->renderPlugins() );
+    w_pluginSettings->setModel( pluginModel );
     w_pluginSettings->setObjectName( "plugin_page" );
     m_configDialog->addPage( w_pluginSettings, i18n( "Plugins" ),
                              "preferences-plugin" );
@@ -1421,12 +1479,12 @@ void MarblePart::editSettings()
                                SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( okClicked() ),
                                SLOT( applyPluginState() ) );
+    connect( m_configDialog,   SIGNAL( applyClicked() ),
+             pluginModel,      SLOT( applyPluginState() ) );
+    connect( m_configDialog,   SIGNAL( okClicked() ),
+             pluginModel,      SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( cancelClicked() ),
-                               SLOT( retrievePluginState() ) );
-    connect( w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
-                               SLOT( showPluginAboutDialog( QString ) ) );
-    connect( w_pluginSettings, SIGNAL( configPluginClicked( QString ) ),
-                               SLOT( showPluginConfigDialog( QString ) ) );
+             pluginModel,      SLOT( retrievePluginState() ) );
 
     m_configDialog->show();
 }
@@ -1438,13 +1496,6 @@ void MarblePart::enableApplyButton()
 
 void MarblePart::applyPluginState()
 {
-    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        (*i)->applyItemState();
-    }
-
     QList<RoutingProfile>  profiles = m_controlView->marbleWidget()
                         ->model()->routingManager()->profilesModel()->profiles();
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
@@ -1465,16 +1516,6 @@ void MarblePart::applyPluginState()
                 pluginGroup.writeEntry( settingKey, profile.pluginSettings()[ key ][ settingKey ] );
             }
         }
-    }
-}
-
-void MarblePart::retrievePluginState()
-{
-    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        (*i)->retrieveItemState();
     }
 }
 
@@ -1583,46 +1624,7 @@ void MarblePart::updateSettings()
 
     // External map editor
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
-}
-
-void MarblePart::showPluginAboutDialog( const QString& nameId )
-{
-    QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
-
-    foreach ( RenderPlugin *renderItem, renderItemList ) {
-        if( renderItem->nameId() == nameId ) {
-            QPointer<PluginAboutDialog> aboutDialog = new PluginAboutDialog( m_controlView );
-            aboutDialog->setName( renderItem->name() );
-            aboutDialog->setVersion( renderItem->version() );
-            if ( !renderItem->aboutDataText().isEmpty() ) {
-                aboutDialog->setDataText( renderItem->aboutDataText() );
-            }
-            QIcon pluginIcon = renderItem->icon();
-            if ( !pluginIcon.isNull() ) {
-                aboutDialog->setPixmap( pluginIcon.pixmap( 64, 64 ) );
-            }
-            QString const copyrightText = tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
-            aboutDialog->setAboutText( copyrightText.arg( renderItem->copyrightYears() ) );
-            aboutDialog->setAuthors( renderItem->pluginAuthors() );
-            aboutDialog->exec();
-            delete aboutDialog;
-        }
-    }
-}
-
-void MarblePart::showPluginConfigDialog( const QString& nameId )
-{
-    QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
-
-    foreach ( RenderPlugin *renderItem, renderItemList ) {
-        if( renderItem->nameId() == nameId ) {
-            DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( renderItem );
-            QDialog *configDialog = configInterface ? configInterface->configDialog() : 0;
-            if ( configDialog ) {
-                configDialog->show();
-            }
-        }
-    }
+    m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( MarbleSettings::inertialEarthRotation() );
 }
 
 void MarblePart::writePluginSettings()
@@ -1712,7 +1714,10 @@ void MarblePart::openEditBookmarkDialog()
     dialog->setCoordinates( widget->lookAt().coordinates() );
     dialog->setRange( widget->lookAt().range() );
     dialog->setMarbleWidget( widget );
-    dialog->exec();
+    dialog->setReverseGeocodeName();
+    if ( dialog->exec() == QDialog::Accepted ) {
+        widget->model()->bookmarkManager()->addBookmark( dialog->folder(), dialog->bookmark() );
+    }
     delete dialog;
 }
 
@@ -1799,7 +1804,7 @@ void MarblePart::setupToolBar( KToolBar *toolBar )
     m_searchField = new SearchInputWidget( toolBar );
     m_searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
     m_searchField->setMaximumWidth( 400 );
-    connect( m_searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
+    connect( m_searchField, SIGNAL( search( QString, SearchMode ) ), m_controlView, SLOT( search( QString, SearchMode ) ) );
     connect( m_searchField, SIGNAL( centerOn( const GeoDataCoordinates & ) ),
              m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates &) ) );
     connect( m_controlView, SIGNAL( searchFinished() ), m_searchField, SLOT( disableSearchAnimation() ) );

@@ -10,7 +10,7 @@
 #ifndef MARBLE_LOCALOSMSEARCHRUNNER_H
 #define MARBLE_LOCALOSMSEARCHRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "SearchRunner.h"
 #include "OsmPlacemark.h"
 #include "GeoDataFeature.h"
 
@@ -21,16 +21,13 @@ namespace Marble
 
 class OsmDatabase;
 
-class LocalOsmSearchRunner : public MarbleAbstractRunner
+class LocalOsmSearchRunner : public SearchRunner
 {
     Q_OBJECT
 public:
     explicit LocalOsmSearchRunner( OsmDatabase *m_database, QObject *parent = 0 );
 
     ~LocalOsmSearchRunner();
-
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
 
     virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 

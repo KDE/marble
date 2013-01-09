@@ -63,6 +63,16 @@ void GeoDataDocument::setDocumentRole( DocumentRole role )
     p()->m_documentRole = role;
 }
 
+QString GeoDataDocument::property() const
+{
+    return p()->m_property;
+}
+
+void GeoDataDocument::setProperty( QString property )
+{
+    p()->m_property = property;
+}
+
 QString GeoDataDocument::fileName() const
 {
     return p()->m_filename;
@@ -78,6 +88,7 @@ void GeoDataDocument::addStyle( const GeoDataStyle& style )
 {
     detach();
     p()->m_styleHash.insert( style.styleId(), style );
+    p()->m_styleHash[ style.styleId() ].setParent( this );
 }
 
 void GeoDataDocument::removeStyle( const QString& styleId )
@@ -104,6 +115,7 @@ void GeoDataDocument::addStyleMap( const GeoDataStyleMap& map )
 {
     detach();
     p()->m_styleMapHash.insert( map.styleId(), map );
+    p()->m_styleMapHash[ map.styleId() ].setParent( this );
 }
 
 void GeoDataDocument::removeStyleMap( const QString& mapId )

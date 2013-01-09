@@ -32,6 +32,7 @@ namespace Marble
 
 class GeoSceneIcon;
 class GeoSceneZoom;
+class GeoSceneLicense;
 
 class GeoSceneHeadPrivate;
 
@@ -53,6 +54,10 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode
     QString theme() const;
     void setTheme( const QString& theme );
 
+    /** Planet radius, 0.0 if unknown */
+    qreal radius() const;
+    void setRadius( qreal radius );
+
     QString mapThemeId() const;
 
     QString description() const;
@@ -66,6 +71,10 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode
 
     const GeoSceneIcon* icon() const;
     GeoSceneIcon* icon();
+
+    const GeoSceneLicense* license() const;
+    GeoSceneLicense* license();
+
 
  private:
     Q_DISABLE_COPY( GeoSceneHead )

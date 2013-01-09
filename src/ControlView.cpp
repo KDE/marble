@@ -88,7 +88,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "1.4.20 (PRE 1.5 GIT)";
+    return "1.5.20 (development snapshot)";
 }
 
 void ControlView::zoomIn()
@@ -423,8 +423,8 @@ void ControlView::printDrivingInstructionsAdvice( QTextDocument &, QString &text
 #ifndef QT_NO_PRINTER
     text += "<p>" + tr( "The Marble development team wishes you a pleasant and safe journey." ) + "</p>";
     text += "<p>" + tr( "Caution: Driving instructions may be incomplete or inaccurate." );
-    text += " " + tr( "Road construction, weather and other unforeseen variables can result in this suggested route not to be the most expedient or safest route to your destination." );
-    text += " " + tr( "Please use common sense while navigating." ) + "</p>";
+    text += ' ' + tr( "Road construction, weather and other unforeseen variables can result in this suggested route not to be the most expedient or safest route to your destination." );
+    text += ' ' + tr( "Please use common sense while navigating." ) + "</p>";
 #endif
 }
 
@@ -516,9 +516,9 @@ void ControlView::setExternalMapEditor( const QString &editor )
     m_externalEditor = editor;
 }
 
-void ControlView::search(const QString &searchTerm)
+void ControlView::search(const QString &searchTerm, SearchMode searchMode )
 {
-    m_control->search( searchTerm );
+    m_control->search( searchTerm, searchMode );
 }
 
 QString ControlView::externalMapEditor() const

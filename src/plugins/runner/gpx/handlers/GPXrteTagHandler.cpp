@@ -14,7 +14,6 @@
     You should have received a copy of the GNU Library General Public License
     along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-    Copyright 2011 Thibaut GRIDEL <tgridel@free.fr>
     Copyright 2011 Anders Lund <anders@alweb.dk>
 */
 
@@ -43,13 +42,10 @@ GeoNode* GPXrteTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(gpxTag_gpx))
     {
         GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
-        
-        // route is a folder, containing a linestring and individual routepoints
-        GeoDataFolder *folder = new GeoDataFolder;
-        doc->append(folder);
+
         // placemark for the linestring
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
-        folder->append(placemark);
+        doc->append(placemark);
         GeoDataLineString *linestring = new GeoDataLineString;
         placemark->setGeometry(linestring);
         placemark->setStyleUrl("#map-route");
@@ -57,9 +53,8 @@ GeoNode* GPXrteTagHandler::parse(GeoParser& parser) const
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << gpxTag_rte << "> rte: " << doc->size();
 #endif
-        return folder;
+        return placemark;
     }
-    mDebug() << "rte parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

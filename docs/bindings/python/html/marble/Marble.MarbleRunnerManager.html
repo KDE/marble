@@ -65,7 +65,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchFinished">searchFinished</a> (QString searchTerm)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchResultChanged">searchResultChanged</a> (QAbstractItemModel model)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findPlacemarks">findPlacemarks</a> (self, QString searchTerm)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findPlacemarks">findPlacemarks</a> (self, QString searchTerm, <a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> preferred=Marble.GeoDataLatLonAltBox())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#openFile">openFile</a> (self, QString fileName, <a href="../marble/Marble.html#DocumentRole">Marble.DocumentRole</a> role=Marble.UserDocument)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parseFile">parseFile</a> (self, QString fileName, <a href="../marble/Marble.html#DocumentRole">Marble.DocumentRole</a> role=Marble.UserDocument)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#retrieveRoute">retrieveRoute</a> (self, <a href="../marble/Marble.RouteRequest.html">Marble.RouteRequest</a> request)</td></tr>
@@ -243,7 +243,13 @@ To do: FIXME: this sounds like a duplication of QAbstractItemModel signals
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>searchTerm</em></td>
+<td class="paramname"><em>searchTerm</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td>
+<td class="paramname"><em>preferred=Marble.GeoDataLatLonAltBox()</em></td>
 </tr>
 <tr>
 <td></td>
@@ -421,7 +427,8 @@ returned using the <dl class="see" compact><dt><b>See also:</b></dt><dd> reverse
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Set a pointer to the map instance to be passed to MarbleAbstractRunner instances
+<div class="memdoc"><p>Set a pointer to the model instance to be passed to MarbleAbstractRunner instances
+or to use model specific information like planet parameters
 </p></div></div>
 </div>
 </div>

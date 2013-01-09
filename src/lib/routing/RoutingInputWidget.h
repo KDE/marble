@@ -19,6 +19,7 @@
 
 class QNetworkReply;
 class QAbstractItemModel;
+class QMenu;
 
 namespace Marble
 {
@@ -134,9 +135,6 @@ private Q_SLOTS:
     /** Handle click on the map input button */
     void setMapInputModeEnabled( bool enabled );
 
-    /** Progress animation update */
-    void updateProgress();
-
     /** All runners have completed */
     void finishSearch();
 
@@ -161,6 +159,8 @@ private Q_SLOTS:
     void setBookmarkPosition( QAction* bookmark );
 
     void openTargetSelectionDialog();
+
+    void showMenu();
 
 private:
     RoutingInputWidgetPrivate *const d;

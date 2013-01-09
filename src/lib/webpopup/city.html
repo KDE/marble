@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Place information</title>
+<link rel="stylesheet" media="screen" href="qrc:/marble/webpopup/placesscreen.css">
+<link rel="stylesheet" media="print, embossed" href="qrc:/marble/webpopup/placesprint.css"></head>
+<style>
+.flag {
+  width: 400px;
+  height: 50px;
+  background-image:url('file://%flag%');
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:right center;
+}
+</style>
+<body>
+<div class="flag"><h1>%name%</h1></div>
+
+<h2>%category%</h2>
+<p>
+<table>
+<tr class="blue">
+  <td colspan="2">Coordinates</td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/Longitude">Longitude</a></td><td>%longitude%</td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/Latitude">Latitude</a></td><td>%latitude%</td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/Above_mean_sea_level">Elevation</a></td><td>%elevation% m</td>
+</tr>
+</table>
+<p>
+<h3>Short description:</h3>
+<div>
+%shortDescription%
+</div>
+<table>
+<tr class="blue">
+  <td colspan="2">Factsheet</td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/Population_size">Population</a></td><td>%population%</td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/State_%28polity%29">Country</a></td><td>%country%</td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/Federated_state">State</a></td>%state%<td></td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/Time_zone">Timezone</a></td>
+  <td>
+    <a href="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>%timezone%
+  </td>
+</tr>
+</table>
+<hr>
+
+<p>Data from <a href="http://www.geonames.org">http://www.geonames.org</a></p>
+</body>
+</html>

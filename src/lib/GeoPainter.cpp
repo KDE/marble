@@ -260,14 +260,14 @@ QRegion GeoPainter::regionFromPoint ( const GeoDataCoordinates & position,
 
 void GeoPainter::drawPoint( const GeoDataPoint & point )
 {
-    drawPoint( GeoDataCoordinates( point ) );
+    drawPoint( point.coordinates() );
 }
 
 
 QRegion GeoPainter::regionFromPoint ( const GeoDataPoint & point,
                                       qreal width ) const
 {
-    return regionFromRect( GeoDataCoordinates( point ), width, width, false, 3 );
+    return regionFromRect( point.coordinates(), width, width, false, 3 );
 }
 
 
@@ -761,10 +761,12 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
         setPen( QPen( Qt::NoPen ) );
     }
 
+
     QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries(); 
     foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
         QVector<QPolygonF*> innerPolygons;
         d->createPolygonsFromLinearRing( itInnerBoundary, innerPolygons );
+
         if ( needOutlineWorkaround ) {
             foreach( QPolygonF* polygon, innerPolygons ) {
                 outline << *polygon;

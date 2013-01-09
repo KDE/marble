@@ -1,8 +1,8 @@
 PROJECT(Weather)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/weather
- ${CMAKE_BINARY_DIR}/src/plugins/render/weather
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
@@ -25,6 +25,7 @@ set( weather_SRCS WeatherData.cpp
 set( weather_UI WeatherConfigWidget.ui )
 
 qt4_wrap_ui( weather_SRCS ${weather_UI} )
+qt4_add_resources( weather_SRCS weather.qrc )
 
 marble_add_plugin( Weather ${weather_SRCS} )
 target_link_libraries( Weather ${QT_QTWEBKIT_LIBRARY} )

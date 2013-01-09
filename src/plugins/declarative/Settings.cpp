@@ -11,7 +11,7 @@
 #include "Settings.h"
 
 Settings::Settings() :
-    m_organizationName( "kde.org" ), m_applicationName( "Marble Desktop Globe" )
+    m_organizationName( "KDE" ), m_applicationName( "Marble Virtual Globe" )
 {
     // nothing to do
 }

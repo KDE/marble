@@ -96,7 +96,7 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
     there is no geometry assigned to the feature or if the parent object of the
     region is a GeoDataLink).
 */
-    GeoDataLatLonAltBox& latLonAltBox() const;
+    const GeoDataLatLonAltBox& latLonAltBox() const;
 
     
 /*!

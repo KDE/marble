@@ -17,7 +17,7 @@
 
 #include "MarbleDebug.h"
 #include "SunLocator.h"
-#include "TextureTile.h"
+#include "Tile.h"
 #include "TileLoaderHelper.h"
 #include "MarbleGlobal.h"
 
@@ -40,7 +40,7 @@ SunLightBlending::~SunLightBlending()
 {
 }
 
-void SunLightBlending::blend( QImage * const tileImage, TextureTile const * const top ) const
+void SunLightBlending::blend( QImage * const tileImage, Tile const * const top ) const
 {
     if ( tileImage->depth() != 32 )
         return;

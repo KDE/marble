@@ -63,7 +63,7 @@ QList<PluginAuthor> GosmorePlugin::pluginAuthors() const
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
-MarbleAbstractRunner* GosmorePlugin::newRunner() const
+ReverseGeocodingRunner* GosmorePlugin::newRunner() const
 {
     return new GosmoreRunner;
 }

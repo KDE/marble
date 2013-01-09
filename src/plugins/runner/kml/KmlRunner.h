@@ -10,24 +10,18 @@
 #ifndef MARBLEKMLRUNNER_H
 #define MARBLEKMLRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class KmlRunner : public MarbleAbstractRunner
+class KmlRunner : public ParsingRunner
 {
     Q_OBJECT
 public:
     explicit KmlRunner(QObject *parent = 0);
     ~KmlRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void parseFile( const QString &fileName, DocumentRole role );
-
-signals:
-
-public slots:
-
 };
 
 }

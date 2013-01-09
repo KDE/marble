@@ -59,7 +59,7 @@ QStringList KmlPlugin::fileExtensions() const
     return QStringList() << "kml";
 }
 
-MarbleAbstractRunner* KmlPlugin::newRunner() const
+ParsingRunner* KmlPlugin::newRunner() const
 {
     return new KmlRunner;
 }

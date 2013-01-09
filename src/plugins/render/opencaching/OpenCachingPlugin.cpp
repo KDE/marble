@@ -28,8 +28,8 @@ OpenCachingPlugin::OpenCachingPlugin()
 
     setEnabled( true );  // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateSettings() ) );
+    connect( this, SIGNAL(settingsChanged(QString)),
+             this, SLOT(updateSettings()) );
 }
 
 void OpenCachingPlugin::initialize()
@@ -74,19 +74,19 @@ QDialog *OpenCachingPlugin::configDialog()
         m_ui = new Ui::OpenCachingConfigWidget;
         m_ui->setupUi( m_configDialog );
         readSettings();
-        connect( m_ui->m_buttonBox, SIGNAL( accepted() ),
-                 SLOT( writeSettings() ) );
-        connect( m_ui->m_buttonBox, SIGNAL( rejected() ),
-                 SLOT( readSettings() ) );
-        connect( m_ui->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
-                 SLOT( restoreDefaultSettings() ) );
+        connect( m_ui->m_buttonBox, SIGNAL(accepted()),
+                 SLOT(writeSettings()) );
+        connect( m_ui->m_buttonBox, SIGNAL(rejected()),
+                 SLOT(readSettings()) );
+        connect( m_ui->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL(clicked()),
+                 SLOT(restoreDefaultSettings()) );
         QPushButton *applyButton = m_ui->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 SLOT( writeSettings() ) );
-        connect( m_ui->m_endDate, SIGNAL( dateTimeChanged ( const QDateTime& ) ),
-                 SLOT( validateDateRange() ) );
-        connect( m_ui->m_maxDifficulty, SIGNAL( valueChanged( double) ),
-                 SLOT( validateDifficultyRange() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 SLOT(writeSettings()) );
+        connect( m_ui->m_endDate, SIGNAL(dateTimeChanged(QDateTime)),
+                 SLOT(validateDateRange()) );
+        connect( m_ui->m_maxDifficulty, SIGNAL(valueChanged(double)),
+                 SLOT(validateDifficultyRange()) );
     }
     return m_configDialog;
 }

@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-class MarbleAbstractRunner;
+class ParsingRunner;
 
 /**
   * A plugin for Marble to execute a parsing task.
@@ -52,7 +52,7 @@ public:
     /** Plugin factory method to create a new runner instance.
       * Method caller gets ownership of the returned object
       */
-    virtual MarbleAbstractRunner* newRunner() const = 0;
+    virtual ParsingRunner *newRunner() const = 0;
 
     // Overridden methods with default implementations
 
@@ -65,6 +65,6 @@ private:
 
 }
 
-Q_DECLARE_INTERFACE( Marble::ParseRunnerPlugin, "org.kde.Marble.ParseRunnerPlugin/1.00" )
+Q_DECLARE_INTERFACE( Marble::ParseRunnerPlugin, "org.kde.Marble.ParseRunnerPlugin/1.01" )
 
 #endif // MARBLE_PARSERUNNERPLUGIN_H

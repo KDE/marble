@@ -3,8 +3,8 @@ if( QT_QTDECLARATIVE_FOUND )
 PROJECT( MarbleDeclarativePlugin )
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/declarative
- ${CMAKE_BINARY_DIR}/src/plugins/declarative
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 INCLUDE( ${QT_USE_FILE} )
@@ -12,6 +12,9 @@ INCLUDE( ${QT_USE_FILE} )
 set( marbleplugin_SRCS
 Bookmarks.cpp
 Coordinate.cpp
+DeclarativeDataPluginModel.cpp
+DeclarativeDataPlugin.cpp
+DeclarativeDataPluginItem.cpp
 DeclarativeMapThemeManager.cpp
 MapTheme.cpp
 MarbleDeclarativeObject.cpp
@@ -27,8 +30,6 @@ Search.cpp
 RouteRequestModel.cpp
 Settings.cpp
 MapThemeModel.cpp
-Activity.cpp
-ActivityModel.cpp
 RelatedActivities.cpp
 ZoomButtonInterceptor.cpp
 )

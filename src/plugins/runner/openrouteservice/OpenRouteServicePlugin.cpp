@@ -60,7 +60,7 @@ QList<PluginAuthor> OpenRouteServicePlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* OpenRouteServicePlugin::newRunner() const
+RoutingRunner *OpenRouteServicePlugin::newRunner() const
 {
     return new OpenRouteServiceRunner;
 }

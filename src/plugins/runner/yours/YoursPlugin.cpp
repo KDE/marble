@@ -58,7 +58,7 @@ QList<PluginAuthor> YoursPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* YoursPlugin::newRunner() const
+RoutingRunner *YoursPlugin::newRunner() const
 {
     return new YoursRunner;
 }

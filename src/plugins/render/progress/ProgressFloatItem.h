@@ -61,8 +61,7 @@ class ProgressFloatItem  : public AbstractFloatItem
 
     QPainterPath backgroundShape() const;
 
-    void paintContent( GeoPainter *painter, ViewportParams *viewport,
-                       const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void paintContent( QPainter *painter );
 
     bool eventFilter(QObject *object, QEvent *e);
 

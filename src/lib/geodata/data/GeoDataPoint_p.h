@@ -20,6 +20,8 @@ namespace Marble
 class GeoDataPointPrivate : public GeoDataGeometryPrivate, public GeoDataCoordinatesPrivate
 {
   public:
+    GeoDataCoordinates m_coordinates;
+
      GeoDataPointPrivate()
     {
     }

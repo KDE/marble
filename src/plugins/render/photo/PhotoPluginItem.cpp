@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 
@@ -25,6 +26,11 @@
 #include "TinyWebBrowser.h"
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
+#include "MarbleModel.h"
+#include "RenderPlugin.h"
+#include "MapInfoDialog.h"
+#include "PluginManager.h"
 
 // Qt
 #include <QtGui/QAction>
@@ -37,16 +43,20 @@
 
 using namespace Marble;
 
-PhotoPluginItem::PhotoPluginItem( QObject *parent )
+PhotoPluginItem::PhotoPluginItem( MarbleWidget *widget, QObject *parent )
     : AbstractDataPluginItem( parent ),
+      m_marbleWidget( widget ),
       m_image( this ),
       m_browser( 0 )
 {
     m_action = new QAction( this );
-    connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
+    connect( m_action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
     setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 
-    m_image.setFrame( FrameGraphicsItem::RectFrame );
+    m_image.setFrame( FrameGraphicsItem::ShadowFrame );
+    m_image.setBorderBrush( QBrush( QColor( Qt::white ) ) );
+    m_image.setBorderWidth( 2.0 );
+    m_image.setMargin( 5 );
     MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
     layout->addItem( &m_image, 0, 0 );
     setLayout( layout );
@@ -76,7 +86,7 @@ void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type
 {
     if( type == "thumbnail" ) {
         m_smallImage.load( url );
-        m_image.setImage( m_smallImage );
+        m_image.setImage( m_smallImage.scaled( QSize( 50, 50 ) ) );
     }
     else if ( type == "info" ) {        
         QFile file( url );
@@ -104,7 +114,7 @@ bool PhotoPluginItem::operator<( const AbstractDataPluginItem *other ) const
 
 QUrl PhotoPluginItem::photoUrl() const
 {
-    QString url = "http://farm%1.static.flickr.com/%2/%3_%4_t.jpg";
+    QString url = "http://farm%1.static.flickr.com/%2/%3_%4_s.jpg";
     
     return QUrl( url.arg( farm() ).arg( server() ).arg( id() ).arg( secret() ) );
 }
@@ -179,12 +189,22 @@ QAction *PhotoPluginItem::action()
 
 void PhotoPluginItem::openBrowser()
 {
-    if( !m_browser ) {
-        m_browser = new TinyWebBrowser();
+    if ( m_marbleWidget ) {
+        MapInfoDialog* popup = m_marbleWidget->mapInfoDialog();
+        popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
+        popup->setSize( QSizeF( 700, 450 ) );
+        popup->setUrl( QUrl( QString( "http://m.flickr.com/photos/%1/%2/" )
+                                  .arg( owner() ).arg( id() ) ) );
+        popup->setVisible( true );
+    } else {
+        if( !m_browser ) {
+            m_browser = new TinyWebBrowser();
+        }
+
+        QString url = "http://www.flickr.com/photos/%1/%2/";
+        m_browser->load( QUrl( url.arg( owner() ).arg( id() ) ) );
+        m_browser->show();
     }
-    QString url = "http://www.flickr.com/photos/%1/%2/";
-    m_browser->load( QUrl( url.arg( owner() ).arg( id() ) ) );
-    m_browser->show();
 }
 
 #include "PhotoPluginItem.moc"

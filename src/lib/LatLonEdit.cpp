@@ -109,7 +109,7 @@ class LatLonEditPrivate : public Ui::LatLonEditPrivate
 public:
     Dimension m_dimension;
     qreal m_value;
-    LatLonEdit::Notation m_notation;
+    GeoDataCoordinates::Notation m_notation;
     AbstractInputHandler *m_inputHandler;
     // flag which indicates that the widgets are updated due to a change
     // in one of the other widgets. Q*SpinBox does not have a signal which is
@@ -449,7 +449,7 @@ qreal DMInputHandler::calculateValue() const
 
 LatLonEditPrivate::LatLonEditPrivate()
     : m_value(0.0)
-    , m_notation(LatLonEdit::DMS)
+    , m_notation(GeoDataCoordinates::DMS)
     , m_inputHandler(new DMSInputHandler(this))
     , m_updating(false)
 {}
@@ -466,7 +466,7 @@ void LatLonEditPrivate::init(QWidget* parent) { setupUi(parent); }
 
 using namespace Marble;
 
-LatLonEdit::LatLonEdit(QWidget *parent, Dimension dimension, Notation notation)
+LatLonEdit::LatLonEdit(QWidget *parent, Dimension dimension, GeoDataCoordinates::Notation notation)
     : QWidget( parent ), d(new LatLonEditPrivate())
 {
     d->init(this);
@@ -491,7 +491,7 @@ qreal LatLonEdit::value() const
     return d->m_value;
 }
 
-LatLonEdit::Notation LatLonEdit::notation() const
+GeoDataCoordinates::Notation LatLonEdit::notation() const
 {
     return d->m_notation;
 }
@@ -549,7 +549,7 @@ void LatLonEdit::setDimension( Dimension dimension )
     setValue( 0.0 );
 }
 
-void LatLonEdit::setNotation(LatLonEdit::Notation notation)
+void LatLonEdit::setNotation(GeoDataCoordinates::Notation notation)
 {
     if( d->m_notation == notation ) {
         return;
@@ -558,13 +558,13 @@ void LatLonEdit::setNotation(LatLonEdit::Notation notation)
     delete d->m_inputHandler;
 
     switch (notation) {
-    case LatLonEdit::Decimal:
+    case GeoDataCoordinates::Decimal:
         d->m_inputHandler = new DecimalInputHandler(d);
         break;
-    case LatLonEdit::DMS:
+    case GeoDataCoordinates::DMS:
         d->m_inputHandler = new DMSInputHandler(d);
         break;
-    case LatLonEdit::DM:
+    case GeoDataCoordinates::DM:
         d->m_inputHandler = new DMInputHandler(d);
         break;
     }

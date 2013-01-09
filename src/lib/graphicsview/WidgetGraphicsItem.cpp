@@ -13,19 +13,19 @@
 #include "WidgetGraphicsItem_p.h"
 
 // Marble
-#include "GeoPainter.h"
 #include "MarbleWidget.h"
 #include "MarbleDebug.h"
 
 // Qt
 #include <QtGui/QApplication>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QPainter>
 #include <QtGui/QWidget>
 
 using namespace Marble;
 
 WidgetGraphicsItemPrivate::WidgetGraphicsItemPrivate() :
-        m_widget(0), m_marbleWidget(0)
+    m_widget(0), m_marbleWidget(0), m_activeWidget( 0 )
 {
     // nothing to do
 }
@@ -59,13 +59,8 @@ QWidget *WidgetGraphicsItem::widget() const {
     return d->m_widget;
 }
 
-void WidgetGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPos, GeoSceneLayer * layer )
+void WidgetGraphicsItem::paint( QPainter *painter )
 {
-    Q_UNUSED( viewport );
-    Q_UNUSED( layer );
-    Q_UNUSED( renderPos );
-    
     if( d->m_widget == 0 )
         return;
 
@@ -107,7 +102,7 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
         QPoint shiftedPos;
         QList<QPointF>::iterator it = widgetPositions.begin();
         bool foundRightPosition = false;
-        while( it != widgetPositions.end() && !foundRightPosition ) {
+        for(; !foundRightPosition && it != widgetPositions.end(); ++it ) {
             widgetItemRect = QRectF( *it, size() );
 
             if ( widgetItemRect.contains( event->pos() ) ) {
@@ -118,16 +113,33 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
         
         if ( foundRightPosition ) {
             QWidget *child = d->m_widget->childAt( shiftedPos );
-            
+
+            if ( d->m_activeWidget && d->m_activeWidget != child ) {
+                QEvent leaveEvent( QEvent::Leave );
+                QApplication::sendEvent( d->m_activeWidget, &leaveEvent );
+            }
+
+            if ( child && d->m_activeWidget != child ) {
+                QEvent enterEvent( QEvent::Enter );
+                QApplication::sendEvent( child, &enterEvent );
+            }
+            d->m_activeWidget = child;
+
             if ( child ) {
-                d->m_marbleWidget->setCursor( Qt::ArrowCursor );
                 shiftedPos -= child->pos(); // transform to children's coordinates
                 QMouseEvent shiftedEvent = QMouseEvent( e->type(), shiftedPos,
                         event->globalPos(), event->button(), event->buttons(),
                         event->modifiers() );
                 if ( QApplication::sendEvent( child, &shiftedEvent ) ) {
+                    d->m_marbleWidget->setCursor( d->m_widget->cursor() );
                     return true;
                 }
+            }
+        } else {
+            if ( d->m_activeWidget ) {
+                QEvent leaveEvent( QEvent::Leave );
+                QApplication::sendEvent( d->m_activeWidget, &leaveEvent );
+                d->m_activeWidget = 0;
             }
         }
     }

@@ -187,13 +187,15 @@ void OpenCachingModel::parseFile( const QByteArray& file )
         }
     }
 
-    foreach( const int key, caches.keys() ) {
-        if( caches[key].difficulty() >= m_minDifficulty &&
-            caches[key].difficulty() <= m_maxDifficulty )
+    QHash<int, OpenCachingCache>::iterator itpoint = caches.begin();
+    QHash<int, OpenCachingCache>::iterator const endpoint = caches.end();
+    for (; itpoint != endpoint; ++itpoint ) {
+        if( caches[itpoint.key()].difficulty() >= m_minDifficulty &&
+            caches[itpoint.key()].difficulty() <= m_maxDifficulty )
         {
-            caches[key].setDescription( descriptions[key] );
-            caches[key].setLog( logs[key] );
-            addItemToList( new OpenCachingItem( caches[key], this ) );
+            caches[itpoint.key()].setDescription( descriptions[itpoint.key()] );
+            caches[itpoint.key()].setLog( logs[itpoint.key()] );
+            addItemToList( new OpenCachingItem( caches[itpoint.key()], this ) );
         }
     }
 }

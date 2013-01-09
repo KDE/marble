@@ -1,18 +1,18 @@
 // Copyright 2008 David Roberts <dvdr18@gmail.com>
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 // Copyright 2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
-// 
+//
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either 
+// License as published by the Free Software Foundation; either
 // version 2.1 of the License, or (at your option) any later version.
-// 
+//
 // This library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public 
+//
+// You should have received a copy of the GNU Lesser General Public
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -23,15 +23,18 @@
 #include "SunLocator.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
+#include "GeoDataDocument.h"
+#include "GeoSceneTypes.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "MapThemeManager.h"
 #include "StackedTile.h"
 #include "TileLoaderHelper.h"
 #include "Planet.h"
 #include "TextureTile.h"
+#include "VectorTile.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
@@ -50,7 +53,7 @@ public:
 
     static int maxDivisor( int maximum, int fullLength );
 
-    StackedTile *createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const;
+    StackedTile *createTile( const QVector<QSharedPointer<Tile> > &tiles ) const;
 
     void paintSunShading( QImage *tileImage, const TileId &id ) const;
     void paintTileId( QImage *tileImage, const TileId &id ) const;
@@ -90,22 +93,36 @@ MergedLayerDecorator::~MergedLayerDecorator()
     delete d;
 }
 
-StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const
+StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPointer<Tile> > &tiles ) const
 {
     Q_ASSERT( !tiles.isEmpty() );
 
     const TileId firstId = tiles.first()->id();
     const TileId id( 0, firstId.zoomLevel(), firstId.x(), firstId.y() );
 
+    // Image for blending all the texture tiles on it
     QImage resultImage;
+
+    // GeoDataDocument for appending all the vector data features to it
+    GeoDataDocument * resultVector = new GeoDataDocument;
 
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
     const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId;
-    foreach ( const QSharedPointer<TextureTile> &tile, tiles ) {
-            const Blending *const blending = tile->blending();
+    foreach ( const QSharedPointer<Tile> &tile, tiles ) {
+
+        // Image blending. If there are several images in the same tile (like clouds
+        // or hillshading images over the map) blend them all into only one image
+
+        if ( tile->nodeType() == QString("TextureTile") ){
+
+            const Blending *const blending =  tile->blending();
             if ( blending ) {
+
                 mDebug() << Q_FUNC_INFO << "blending";
+
+                Q_ASSERT( !resultImage.isNull());
+
                 blending->blend( &resultImage, tile.data() );
             }
             else {
@@ -116,36 +133,85 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
                     resultImage = tile->image()->copy();
                 }
             }
+
+            if ( m_showSunShading && !m_showCityLights ) {
+                paintSunShading( &resultImage, id );
+            }
+
+            if ( m_showTileId ) {
+                paintTileId( &resultImage, id );
+            }
+        }
+
+        // Geometry appending. If it is a VectorTile append all its geometries to the
+        // main GeoDataDocument
+        if ( tile->nodeType() == QString("VectorTile") ){
+
+            Q_ASSERT( resultVector );
+
+            // FIXME
+            // IF IN THE FUTURE MORE THAN ONE VECTORTILE LAYER ARE POSSIBLE,
+            // HERE ALL THE GEOMETRIES FROM THE DIFFERENT LAYERS SHOULD BE
+            // APPENDED TO THE SAME GEODATADOCUMENT
+            // EVERY SINGLE FEATURE FROM ALL VECTORTILES WOULD HAVE TO BE APPENDED
+            // ONE BY ONE FOR IT TO WORK AS IT IS RIGHT NOW.
+            // FOR EXAMPLE
+            //for (int x = 0; x < tile->vectorData()->size(); x++)
+            //resultVector->append( tile->vectorData()->featureList().at(x) );
+            // OTHER ALTERNATIVE COULD BE TO APPEND GEODATADOCUMENTS TO THE
+            // resultVector GEODATADOCUMENT, AND THEN MAKE THE CODE INSTEAD OF
+            // EXTRACTING THE FEATURES, FIRST EXTRACT GEODATADOCUMENTS AND THEN ITS FEATURES.
+            // WITH JUST ONE VECTORTILELAYER IT HAS NO SENSE (BECAUSE WE WOULD
+            // ALWAYS HAVE ONE GEODATADOCUMENT CONTAINING JUST ANOTHER ONE)
+            // BUT IF MORE THAN ONE WANT TO BE SUPPORTED IT IS BETTER.
+
+            if ( tile->vectorData() != 0 )
+            resultVector = tile->vectorData();
+        }
     }
 
-    if ( m_showSunShading && !m_showCityLights ) {
-        paintSunShading( &resultImage, id );
-    }
-
-    if ( m_showTileId ) {
-        paintTileId( &resultImage, id );
-    }
-
-    return new StackedTile( id, resultImage, tiles );
+    return new StackedTile( id, resultImage, resultVector, tiles );
 }
 
-StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const QVector<const GeoSceneTexture *> &textureLayers ) const
+StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const QVector<const GeoSceneTiled *> &textureLayers ) const
 {
-    QVector<QSharedPointer<TextureTile> > tiles;
+    QVector<QSharedPointer<Tile> > tiles;
 
-    foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
+    foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
         const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
 
-        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId << textureLayer->tileSize();
+        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId << textureLayer->tileSize() << textureLayer->fileFormat();
 
-        const QImage tileImage = d->m_tileLoader->loadTile( tileId, DownloadBrowse );
+        // Blending (how to merge the images into an only image)
         const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
         if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
             mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
         }
-        QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, blending ) );
-        tiles.append( tile );
+
+        /*
+        Here is where the TileLoader chooses between ImageTile and VectorTile
+        Format from VectorTile is available if it is needed to specify the parser
+        that should parse that tile file
+        */
+
+        // ImageTile
+        if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ){
+            const QImage tileImage = d->m_tileLoader->loadTileImage( textureLayer, tileId, DownloadBrowse );
+
+            QSharedPointer<Tile> tile( new TextureTile( tileId, tileImage, blending ) );
+            tiles.append( tile );
+        }
+
+        // VectorTile
+        if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneVectorTileType ){
+
+            GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( textureLayer, tileId, DownloadBrowse, textureLayer->fileFormat() );
+
+            QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata ) );
+
+            tiles.append( tile );
+        }
     }
 
     Q_ASSERT( !tiles.isEmpty() );
@@ -153,37 +219,34 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
     return d->createTile( tiles );
 }
 
-StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage ) const
+StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage, GeoDataDocument * tileData ) const
 {
-    QVector<QSharedPointer<TextureTile> > tiles = stackedTile.tiles();
+    QVector<QSharedPointer<Tile> > tiles = stackedTile.tiles();
 
     for ( int i = 0; i < tiles.count(); ++ i) {
         if ( tiles[i]->id() == tileId ) {
             const Blending *blending = tiles[i]->blending();
-            tiles[i] = QSharedPointer<TextureTile>( new TextureTile( tileId, tileImage, blending ) );
+
+            // VectorTile
+            if ( tileData != 0 ){
+                tiles[i] = QSharedPointer<Tile>( new VectorTile( tileId, tileData ) );
+            }
+            // TextureTile
+            else if ( !tileImage.isNull() ){
+                tiles[i] = QSharedPointer<Tile>( new TextureTile( tileId, tileImage, blending ) );
+            }
         }
     }
 
     return d->createTile( tiles );
 }
 
-void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<GeoSceneTexture const *> &textureLayers )
+void MergedLayerDecorator::downloadStackedTile( const TileId &id, const QVector<GeoSceneTiled const *> &textureLayers, DownloadUsage usage )
 {
-    foreach ( const GeoSceneTexture *textureLayer, textureLayers ) {
-        const TileId tileId( textureLayer->sourceDir(), id.zoomLevel(), id.x(), id.y() );
-        if ( d->m_tileLoader->tileStatus( tileId ) != TileLoader::Available ) {
-            d->m_tileLoader->downloadTile( tileId );
+    foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
+        if ( TileLoader::tileStatus( textureLayer, id ) != TileLoader::Available ) {
+            d->m_tileLoader->downloadTile( textureLayer, id, usage );
         }
-    }
-}
-
-void MergedLayerDecorator::reloadTile( const StackedTile &stackedTile )
-{
-    foreach ( QSharedPointer<TextureTile> const & tile, stackedTile.tiles() ) {
-        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
-        // but since "reload" or "refresh" seems to be a common action of a browser and it
-        // allows for more connections (in our model), use "DownloadBrowse"
-        d->m_tileLoader->reloadTile( tile->id(), DownloadBrowse );
     }
 }
 
@@ -233,9 +296,9 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
     // TODO add support for 8-bit maps?
     // add sun shading
     const qreal  global_width  = tileImage->width()
-        * TileLoaderHelper::levelToColumn( m_levelZeroColumns, id.zoomLevel() );
+            * TileLoaderHelper::levelToColumn( m_levelZeroColumns, id.zoomLevel() );
     const qreal  global_height = tileImage->height()
-        * TileLoaderHelper::levelToRow( m_levelZeroRows, id.zoomLevel() );
+            * TileLoaderHelper::levelToRow( m_levelZeroRows, id.zoomLevel() );
     const qreal lon_scale = 2*M_PI / global_width;
     const qreal lat_scale = -M_PI / global_height;
     const int tileHeight = tileImage->height();
@@ -309,17 +372,17 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
 void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId &id ) const
 {
     QString filename = QString( "%1_%2.jpg" )
-        .arg( id.x(), tileDigits, 10, QChar('0') )
-        .arg( id.y(), tileDigits, 10, QChar('0') );
+            .arg( id.x(), tileDigits, 10, QChar('0') )
+            .arg( id.y(), tileDigits, 10, QChar('0') );
 
     QPainter painter( tileImage );
 
     QColor foreground;
     QColor background;
 
-    if ( ( (qreal)(id.x())/2 == id.x()/2 && (qreal)(id.y())/2 == id.y()/2 ) 
-         || ( (qreal)(id.x())/2 != id.x()/2 && (qreal)(id.y())/2 != id.y()/2 ) 
-       )
+    if ( ( (qreal)(id.x())/2 == id.x()/2 && (qreal)(id.y())/2 == id.y()/2 )
+         || ( (qreal)(id.x())/2 != id.x()/2 && (qreal)(id.y())/2 != id.y()/2 )
+         )
     {
         foreground.setNamedColor( "#FFFFFF" );
         background.setNamedColor( "#000000" );
@@ -335,7 +398,7 @@ void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId
     testPen.setJoinStyle( Qt::MiterJoin );
 
     painter.setPen( testPen );
-    painter.drawRect( strokeWidth / 2, strokeWidth / 2, 
+    painter.drawRect( strokeWidth / 2, strokeWidth / 2,
                       tileImage->width()  - strokeWidth,
                       tileImage->height() - strokeWidth );
     QFont testFont( "Sans", 12 );
@@ -372,19 +435,19 @@ void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId
 
 int MergedLayerDecorator::Private::maxDivisor( int maximum, int fullLength )
 {
-    // Find the optimal interpolation interval n for the 
+    // Find the optimal interpolation interval n for the
     // current image canvas width
     int best = 2;
 
     int  nEvalMin = fullLength;
     for ( int it = 1; it <= maximum; ++it ) {
         // The optimum is the interval which results in the least amount
-        // supporting points taking into account the rest which can't 
+        // supporting points taking into account the rest which can't
         // get used for interpolation.
         int nEval = fullLength / it + fullLength % it;
         if ( nEval < nEvalMin ) {
             nEvalMin = nEval;
-            best = it; 
+            best = it;
         }
     }
     return best;

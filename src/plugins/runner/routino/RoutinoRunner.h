@@ -12,24 +12,20 @@
 #ifndef MARBLE_ROUTINORUNNER_H
 #define MARBLE_ROUTINORUNNER_H
 
-#include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
+#include "RoutingRunner.h"
 
 namespace Marble
 {
 
 class RoutinoRunnerPrivate;
 
-class RoutinoRunner : public MarbleAbstractRunner
+class RoutinoRunner : public RoutingRunner
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
     explicit RoutinoRunner(QObject *parent = 0);
 
     ~RoutinoRunner();
-
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );

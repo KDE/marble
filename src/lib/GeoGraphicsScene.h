@@ -1,5 +1,5 @@
 //
-// This file is part of the Marble Desktop Globe.
+// This file is part of the Marble Virtual Globe.
 //
 // This program is free software licensed under the GNU LGPL. You can
 // find a copy of this license in LICENSE.txt in the top directory of
@@ -37,7 +37,7 @@ public:
      * Creates a new instance of GeoGraphicsScene
      * @param parent the QObject parent of the Scene
      */
-    GeoGraphicsScene( QObject *parent = 0 );
+    explicit GeoGraphicsScene( QObject *parent = 0 );
     ~GeoGraphicsScene();
 
     /**
@@ -65,7 +65,7 @@ public:
      *
      * @return The list of all GeoGraphicsItems
      */
-    QList<GeoGraphicsItem *> items() const;
+    void eraseAll();
 
     /**
      * @brief Get the list of items in the specified Box
@@ -75,11 +75,6 @@ public:
      * @return The list of items in the specified box in no specific order.
      */
     QList<GeoGraphicsItem *> items( const GeoDataLatLonAltBox& box, int maxZoomLevel ) const;
-    
-    /**
-     * @brief default zoom level used for tiling
-     */
-    static int s_tileZoomLevel;
 
 private:
     GeoGraphicsScenePrivate * const d;

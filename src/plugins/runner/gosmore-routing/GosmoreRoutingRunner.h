@@ -13,7 +13,7 @@
 #ifndef MARBLE_GOSMOREROUTINGRUNNER_H
 #define MARBLE_GOSMOREROUTINGRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "RoutingRunner.h"
 
 namespace Marble
 {
@@ -21,15 +21,12 @@ namespace Marble
 class GosmoreRunnerPrivate;
 class RouteRequest;
 
-class GosmoreRunner : public MarbleAbstractRunner
+class GosmoreRunner : public RoutingRunner
 {
 public:
     explicit GosmoreRunner(QObject *parent = 0);
 
     ~GosmoreRunner();
-
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );

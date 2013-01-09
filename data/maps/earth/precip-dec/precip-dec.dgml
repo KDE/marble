@@ -44,10 +44,6 @@
             <!-- This layer provides the colorization -->
             <layer name="colorme" backend="filter">
                 <filter name="texturecolorizer" type="colorize">
-                    <dem>srtm</dem>
-                    <coastline>mwdbii-coastline</coastline>
-                    <!-- If these don't get defined the default palettes get
-                    used -->
                     <palette type="sea">precipcolors.leg</palette>
                     <palette type="land">precipcolors.leg</palette>
                 </filter>
@@ -55,43 +51,42 @@
         
             <layer name="mwdbii" backend="vector" role="polyline">
                 <vector name="pcoast" feature="coast">
-                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
+                    <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
                     <pen color="#555753" />
                 </vector>
-                <vector name="pdiffborder" feature="border" connect="borders">
-                    <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
+                <vector name="pdiffborder" feature="border">
+                    <sourcefile> mwdbii/PDIFFBORDER.PNT </sourcefile>
                     <pen color="#555753" />
                 </vector>
-                <vector name="pusa48" feature="border" connect="borders">
-                    <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                <vector name="pusa48" feature="border">
+                    <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
                     <pen color="#555753" />
                 </vector>
                 <vector name="international dateline" feature="border">
-                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
+                    <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
                     <pen color="#000000" />
                 </vector>
-                <vector name="rivers" feature="river" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
+                <vector name="rivers" feature="river">
+                    <sourcefile> mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#637bff" />
                 </vector>
             </layer>
         
             <layer name="standardplaces" backend="geodata">
                 <geodata name="cityplacemarks">
-                    <sourcefile format="KML">cityplacemarks.kml</sourcefile>
+                    <sourcefile>cityplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="baseplacemarks">
-                    <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                    <sourcefile>baseplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="elevplacemarks">
-                    <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                    <sourcefile>elevplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="otherplacemarks">
-                    <sourcefile
-                    format="KML">otherplacemarks.kml</sourcefile>
+                    <sourcefile>otherplacemarks.kml</sourcefile>
                 </geodata>
                 <geodata name="boundaryplacemarks">
-                    <sourcefile format="KML">boundaryplacemarks.kml</sourcefile>
+                    <sourcefile>boundaryplacemarks.kml</sourcefile>
                 </geodata>
             </layer>
         </map>
@@ -136,16 +131,16 @@
                     <value>true</value>
                 </property>
                 <property name="waterbodies">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
                 <property name="lakes">
                     <available>false</available>
                     <value>false</value>
                 </property>
                 <property name="rivers">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
             </group>
             <group name="Surface">

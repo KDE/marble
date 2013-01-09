@@ -26,7 +26,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTexture.h"
+#include "GeoSceneTiled.h"
 #include "ServerLayout.h"
 
 namespace Marble
@@ -63,11 +63,11 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Texture)) {
-        GeoSceneTexture *texture = parentItem.nodeAs<GeoSceneTexture>();
+    if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_Vectortile)) {
+        GeoSceneTiled *texture = parentItem.nodeAs<GeoSceneTiled>();
 
         // Attribute mode
-        GeoSceneTexture::StorageLayout storageLayout = GeoSceneTexture::OpenStreetMap;
+        GeoSceneTiled::StorageLayout storageLayout = GeoSceneTiled::OpenStreetMap;
         ServerLayout *serverLayout = 0;
         const QString modeStr = parser.attribute(dgmlAttr_mode).trimmed();
         if ( modeStr == "OpenStreetMap" )
@@ -78,9 +78,17 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
             serverLayout = new WmsServerLayout( texture );
         else if ( modeStr == "QuadTree" )
             serverLayout = new QuadTreeServerLayout( texture );
-        else {
-            storageLayout = GeoSceneTexture::Marble;
+        else if ( modeStr == "TileMapService" )
+        {
+            storageLayout = GeoSceneTiled::TileMapService;
+            serverLayout = new TmsServerLayout( texture );
+        } else {
+            storageLayout = GeoSceneTiled::Marble;
             serverLayout = new MarbleServerLayout( texture );
+
+            if ( !modeStr.isEmpty() ) {
+                mDebug() << "Unknown storage layout mode " << modeStr << ", falling back to default.";
+            }
         }
 
         texture->setLevelZeroColumns( levelZeroColumns );

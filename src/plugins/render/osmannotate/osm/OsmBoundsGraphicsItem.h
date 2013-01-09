@@ -28,7 +28,7 @@ class OsmBoundsGraphicsItem : public GeoGraphicsItem
 {
 public:
     OsmBoundsGraphicsItem();
-    OsmBoundsGraphicsItem( const GeoDataLineString& other );
+    explicit OsmBoundsGraphicsItem( const GeoDataLineString& other );
 
     void append ( const GeoDataCoordinates& value );
 

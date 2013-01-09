@@ -11,11 +11,12 @@
 #ifndef MARBLE_PLUGINITEMDELEGATE_H
 #define MARBLE_PLUGINITEMDELEGATE_H
 
-#include <QtGui/QStyledItemDelegate>
+#include <QtGui/QAbstractItemDelegate>
 
-class QIcon;
+#include <QtCore/QModelIndex>
+#include <QtGui/QIcon>
+
 class QPainter;
-class QModelIndex;
 class QRect;
 class QStyleOptionButton;
 class QStyleOptionViewItem;
@@ -44,13 +45,13 @@ class PluginItemDelegate : public QAbstractItemDelegate
      * This signal is emitted if the user clicks on a "about"-button of an item in the view
      * passed to the constructor.
      */
-    void aboutPluginClicked( QString nameId );
+    void aboutPluginClicked( const QModelIndex &index );
 
     /**
      * This signal is emitted if the user clicks on a "configure"-button of an item in the view
      * passed to the constructor.
      */
-    void configPluginClicked( QString nameId );
+    void configPluginClicked( const QModelIndex &index );
 
  protected:
     bool editorEvent( QEvent *event,
@@ -77,8 +78,8 @@ class PluginItemDelegate : public QAbstractItemDelegate
     
     QRect alignRect( QRect object, QRect frame, int position, Qt::AlignmentFlag alignment ) const;
 
-    QString m_configPressedPluginId;
-    QString m_aboutPressedPluginId;
+    QModelIndex m_configPressedIndex;
+    QModelIndex m_aboutPressedIndex;
 
     QIcon m_aboutIcon;
     QIcon m_configIcon;

@@ -32,7 +32,6 @@ void PluginManagerTest::loadPlugins()
 
     PluginManager pm;
     const int renderPlugins = pm.renderPlugins().size();
-    const int networkPlugins = pm.networkPlugins().size();
     const int positionPlugins = pm.positionProviderPlugins().size();
     const int searchRunnerPlugins = pm.searchRunnerPlugins().size();
     const int reverseGeocodingRunnerPlugins = pm.reverseGeocodingRunnerPlugins().size();
@@ -41,7 +40,7 @@ void PluginManagerTest::loadPlugins()
 
     const int runnerPlugins = searchRunnerPlugins + reverseGeocodingRunnerPlugins + routingRunnerPlugins + parsingRunnerPlugins;
 
-    QCOMPARE( renderPlugins + networkPlugins + positionPlugins + runnerPlugins, pluginNumber );
+    QCOMPARE( renderPlugins + positionPlugins + runnerPlugins, pluginNumber );
 }
 
 }

@@ -16,6 +16,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataMultiTrack.h"
 #include "GeoDataObject.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
@@ -35,9 +36,15 @@
 #include "GeoTrackGraphicsItem.h"
 #include "GeoDataGroundOverlay.h"
 #include "GeoDataPhotoOverlay.h"
+#include "GeoDataScreenOverlay.h"
 #include "GeoImageGraphicsItem.h"
 #include "GeoPhotoGraphicsItem.h"
+#include "ScreenOverlayGraphicsItem.h"
 #include "TileId.h"
+#include "MarbleGraphicsItem.h"
+
+#include "StackedTile.h"
+#include "StackedTileLoader.h"
 
 // Qt
 #include <QtCore/qmath.h>
@@ -45,11 +52,6 @@
 
 namespace Marble
 {
-int GeometryLayer::s_defaultZValues[GeoDataFeature::LastIndex];
-int GeometryLayer::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
-bool GeometryLayer::s_defaultValuesInitialized = false;
-int GeometryLayer::s_defaultZValue = 50;
-
 class GeometryLayerPrivate
 {
 public:
@@ -59,23 +61,43 @@ public:
     void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark );
     void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
 
+    static int maximumZoomLevel();
+
     const QAbstractItemModel *const m_model;
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
+    QList<MarbleGraphicsItem*> m_items;
 
+private:
+    static void initializeDefaultValues();
+
+    static int s_defaultZValues[GeoDataFeature::LastIndex];
+    static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
+    static bool s_defaultValuesInitialized;
+    static int s_maximumZoomLevel;
+    static const int s_defaultZValue;
 };
+
+int GeometryLayerPrivate::s_defaultZValues[GeoDataFeature::LastIndex];
+int GeometryLayerPrivate::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
+bool GeometryLayerPrivate::s_defaultValuesInitialized = false;
+int GeometryLayerPrivate::s_maximumZoomLevel = 0;
+const int GeometryLayerPrivate::s_defaultZValue = 50;
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
     : m_model( model )
 {
+    initializeDefaultValues();
+}
+
+int GeometryLayerPrivate::maximumZoomLevel()
+{
+    return s_maximumZoomLevel;
 }
 
 GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
         : d( new GeometryLayerPrivate( model ) )
 {
-    if ( !s_defaultValuesInitialized )
-        initializeDefaultValues();
-
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
@@ -100,28 +122,31 @@ QStringList GeometryLayer::renderPosition() const
     return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
-void GeometryLayer::initializeDefaultValues()
+void GeometryLayerPrivate::initializeDefaultValues()
 {
+    if ( s_defaultValuesInitialized )
+        return;
+
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultZValues[i] = s_defaultZValue;
-    
+
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultMinZoomLevels[i] = 15;
 
     s_defaultZValues[GeoDataFeature::None]                = 0;
-    
+
     for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseRetail; i++ )
         s_defaultZValues[(GeoDataFeature::GeoDataVisualCategory)i] = s_defaultZValue - 16;
-    
+
     s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 16;
     s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 15;
-    
+
     //Landuse
-    
-    s_defaultZValues[GeoDataFeature::LeisurePark]         = s_defaultZValue - 14; 
-    
+
+    s_defaultZValues[GeoDataFeature::LeisurePark]         = s_defaultZValue - 14;
+
     s_defaultZValues[GeoDataFeature::TransportParking]    = s_defaultZValue - 13;
-    
+
     s_defaultZValues[GeoDataFeature::HighwayTertiaryLink] = s_defaultZValue - 12;
     s_defaultZValues[GeoDataFeature::HighwaySecondaryLink]= s_defaultZValue - 12;
     s_defaultZValues[GeoDataFeature::HighwayPrimaryLink]  = s_defaultZValue - 12;
@@ -141,7 +166,7 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::HighwayTrunk]        = s_defaultZValue - 2;
     s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
     s_defaultZValues[GeoDataFeature::RailwayRail]         = s_defaultZValue - 1;
-    
+
     s_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 8;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWood]         = 8;
@@ -160,12 +185,12 @@ void GeometryLayer::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondaryLink]= 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwaySecondary]    = 9;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimaryLink]  = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimary]      = 8; 
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayPrimary]      = 8;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunkLink]    = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTrunk]        = 7;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 6;
-        
+
     //FIXME: Bad, better to expand this
     for(int i = GeoDataFeature::AccomodationCamping; i <= GeoDataFeature::ReligionSikh; i++)
         s_defaultMinZoomLevels[i] = 15;
@@ -203,6 +228,10 @@ void GeometryLayer::initializeDefaultValues()
 
     s_defaultMinZoomLevels[GeoDataFeature::Satellite]           = 0;
 
+    for ( int i = 0; i < GeoDataFeature::LastIndex; ++i ) {
+        s_maximumZoomLevel = qMax( s_maximumZoomLevel, s_defaultMinZoomLevels[i] );
+    }
+
     s_defaultValuesInitialized = true;
 }
 
@@ -210,20 +239,26 @@ void GeometryLayer::initializeDefaultValues()
 bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
                             const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     painter->save();
     painter->autoMapQuality();
 
-    int maxZoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
+    int maxZoomLevel = qMin<int>( qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 ), GeometryLayerPrivate::maximumZoomLevel() );
 
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
     int painted = 0;
     foreach( GeoGraphicsItem* item, items )
     {
-        if ( item->visible()
-             && item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
-            item->paint( painter, viewport, renderPos, layer );
+        if ( item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
+            item->paint( painter, viewport );
             ++painted;
         }
+    }
+
+    foreach( MarbleGraphicsItem* item, d->m_items ) {
+        item->paintEvent( painter, viewport );
     }
 
     painter->restore();
@@ -286,6 +321,15 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
             createGraphicsItemFromGeometry( multigeo->child( row ), placemark );
         }
     }
+    else if ( object->nodeType() == GeoDataTypes::GeoDataMultiTrackType  )
+    {
+        const GeoDataMultiTrack *multitrack = static_cast<const GeoDataMultiTrack*>( object );
+        int rowCount = multitrack->size();
+        for ( int row = 0; row < rowCount; ++row )
+        {
+            createGraphicsItemFromGeometry( multitrack->child( row ), placemark );
+        }
+    }
     else if ( object->nodeType() == GeoDataTypes::GeoDataTrackType )
     {
         const GeoDataTrack *track = static_cast<const GeoDataTrack*>( object );
@@ -295,8 +339,8 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
         return;
     item->setStyle( placemark->style() );
     item->setVisible( placemark->isGloballyVisible() );
-    item->setZValue( GeometryLayer::s_defaultZValues[placemark->visualCategory()] );
-    item->setMinZoomLevel( GeometryLayer::s_defaultMinZoomLevels[placemark->visualCategory()] );
+    item->setZValue( s_defaultZValues[placemark->visualCategory()] );
+    item->setMinZoomLevel( s_defaultMinZoomLevels[placemark->visualCategory()] );
     m_scene.addItem( item );
 }
 
@@ -315,6 +359,10 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
         photoItem->setPhotoFile( photoOverlay->absoluteIconFile() );
         photoItem->setPoint( photoOverlay->point() );
         item = photoItem;
+    } else if ( overlay->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
+        GeoDataScreenOverlay const * screenOverlay = static_cast<GeoDataScreenOverlay const *>( overlay );
+        ScreenOverlayGraphicsItem *screenItem = new ScreenOverlayGraphicsItem ( screenOverlay );
+        m_items.push_back( screenItem );
     }
 
     if ( item ) {
@@ -326,17 +374,9 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
 
 void GeometryLayer::invalidateScene()
 {
-    QList<GeoGraphicsItem*> items = d->m_scene.items();
-    QList<GeoGraphicsItem*> deletedItems;
-    foreach( GeoGraphicsItem* item, items )
-    {
-        if( qBinaryFind( deletedItems, item ) != deletedItems.constEnd() )
-        {
-            delete item;
-            deletedItems.insert( qLowerBound( deletedItems.begin(), deletedItems.end(), item ), item );
-        }
-    }
-    d->m_scene.clear();
+    d->m_scene.eraseAll();
+    qDeleteAll( d->m_items );
+    d->m_items.clear();
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );

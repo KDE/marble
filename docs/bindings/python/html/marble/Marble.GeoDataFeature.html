@@ -49,7 +49,7 @@
 <code>from PyKDE4.marble import *</code>
 <p>
 Inherits: <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
-Subclasses: <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a>, <a href="../marble/Marble.GeoDataOverlay.html">Marble.GeoDataOverlay</a>, <a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a><br />
+
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 
@@ -85,7 +85,6 @@ but is always used as part of a derived class.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, QDataStream stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#phoneNumber">phoneNumber</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#popularity">popularity</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#popularityIndex">popularityIndex</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataRegion.html">Marble.GeoDataRegion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#region">region</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAbstractView">setAbstractView</a> (self, <a href="../marble/Marble.GeoDataAbstractView.html">Marble.GeoDataAbstractView</a> abstractView)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAddress">setAddress</a> (self, QString value)</td></tr>
@@ -94,7 +93,6 @@ but is always used as part of a derived class.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, QString value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPhoneNumber">setPhoneNumber</a> (self, QString value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPopularity">setPopularity</a> (self, long popularity)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPopularityIndex">setPopularityIndex</a> (self, int index)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRegion">setRegion</a> (self, <a href="../marble/Marble.GeoDataRegion.html">Marble.GeoDataRegion</a> region)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRole">setRole</a> (self, QString role)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStyle">setStyle</a> (self, <a href="../marble/Marble.GeoDataStyle.html">Marble.GeoDataStyle</a> style)</td></tr>
@@ -102,6 +100,7 @@ but is always used as part of a derived class.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStyleUrl">setStyleUrl</a> (self, QString value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVisible">setVisible</a> (self, bool value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVisualCategory">setVisualCategory</a> (self, <a href="../marble/Marble.GeoDataFeature.html#GeoDataVisualCategory">Marble.GeoDataFeature.GeoDataVisualCategory</a> category)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setZoomLevel">setZoomLevel</a> (self, int index)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataStyle.html">Marble.GeoDataStyle</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#style">style</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataStyleMap.html">Marble.GeoDataStyleMap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#styleMap">styleMap</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#styleUrl">styleUrl</a> (self)</td></tr>
@@ -109,11 +108,14 @@ but is always used as part of a derived class.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QSize&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#symbolSize">symbolSize</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, QDataStream stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html#GeoDataVisualCategory">Marble.GeoDataFeature.GeoDataVisualCategory</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visualCategory">visualCategory</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#zoomLevel">zoomLevel</a> (self)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html#GeoDataVisualCategory">Marble.GeoDataFeature.GeoDataVisualCategory</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#OsmVisualCategory">OsmVisualCategory</a> (QString keyValue)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QFont&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaultFont">defaultFont</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QColor&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaultLabelColor">defaultLabelColor</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resetDefaultStyles">resetDefaultStyles</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultFont">setDefaultFont</a> (QFont font)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultLabelColor">setDefaultLabelColor</a> (QColor color)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="GeoDataFeature"></a>
 <div class="memitem">
@@ -376,23 +378,6 @@ space.
 </table>
 </div>
 <div class="memdoc"><p>Return the popularity of the feature.
-</p></div></div><a class="anchor" name="popularityIndex"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">int popularityIndex</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Return the popularity index of the placemark.
-</p>
-<p>
-The popularity index is a value which describes at which zoom
-level the placemark will be shown.
 </p></div></div><a class="anchor" name="region"></a>
 <div class="memitem">
 <div class="memproto">
@@ -571,35 +556,6 @@ level the placemark will be shown.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em></em>&nbsp;</td><td> popularity the new popularity value
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="setPopularityIndex"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setPopularityIndex</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>index</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Sets the popularity <b>index</b> of the placemark.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> index the new index to be used.
 </td></tr>
 </table></dl>
 <p>
@@ -795,6 +751,35 @@ or through some action of the program.
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setZoomLevel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setZoomLevel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the popularity <b>index</b> of the placemark.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> index the new index to be used.
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><a class="anchor" name="style"></a>
 <div class="memitem">
 <div class="memproto">
@@ -903,6 +888,23 @@ same visual category
 </table>
 </div>
 <div class="memdoc"><p>Return the symbol index of the placemark.
+</p></div></div><a class="anchor" name="zoomLevel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int zoomLevel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the popularity index of the placemark.
+</p>
+<p>
+The popularity index is a value which describes at which zoom
+level the placemark will be shown.
 </p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="OsmVisualCategory"></a>
 <div class="memitem">
 <div class="memproto">
@@ -933,6 +935,18 @@ same visual category
 </tr>
 </table>
 </div>
+<div class="memdoc"></div></div><a class="anchor" name="defaultLabelColor"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QColor defaultLabelColor</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
 <div class="memdoc"></div></div><a class="anchor" name="resetDefaultStyles"></a>
 <div class="memitem">
 <div class="memproto">
@@ -954,6 +968,23 @@ same visual category
 <td>(</td>
 <td class="paramtype">QFont&nbsp;</td>
 <td class="paramname"><em>font</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setDefaultLabelColor"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDefaultLabelColor</td>
+<td>(</td>
+<td class="paramtype">QColor&nbsp;</td>
+<td class="paramname"><em>color</em></td>
 </tr>
 <tr>
 <td></td>

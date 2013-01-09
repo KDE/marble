@@ -59,7 +59,7 @@ QStringList ShpPlugin::fileExtensions() const
     return QStringList() << "shp";
 }
 
-MarbleAbstractRunner* ShpPlugin::newRunner() const
+ParsingRunner* ShpPlugin::newRunner() const
 {
     return new ShpRunner;
 }

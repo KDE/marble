@@ -66,7 +66,6 @@ GeoNode* GPXtrkptTagHandler::parse(GeoParser& parser) const
 #endif
         return track;
     }
-    mDebug() << "trkpt parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

@@ -43,8 +43,6 @@ class WeatherPlugin : public AbstractDataPlugin, public DialogConfigurationInter
     
     void initialize();
 
-    bool isInitialized() const;
-    
     QString name() const;
     
     QString guiString() const;
@@ -69,6 +67,9 @@ class WeatherPlugin : public AbstractDataPlugin, public DialogConfigurationInter
 
     void setSettings( const QHash<QString,QVariant> &settings );
 
+protected:
+    bool eventFilter(QObject *object, QEvent *event);
+
  private Q_SLOTS:
     void readSettings();
     void writeSettings();
@@ -81,10 +82,8 @@ class WeatherPlugin : public AbstractDataPlugin, public DialogConfigurationInter
  private:
     void updateSettings();
 
-    bool m_isInitialized;
-
     quint32 m_updateInterval;
-    QIcon m_icon;
+    const QIcon m_icon;
     QDialog * m_configDialog;
     Ui::WeatherConfigWidget * ui_configWidget;
 

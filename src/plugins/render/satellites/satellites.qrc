@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../../../../data/bitmaps/satellite.png</file>
+        <file>icons/moon.png</file>
+        <file>../../../icons/document-open.png</file>
+        <file>../../../icons/bookmark-remove.png</file>
+        <file>../../../icons/bookmark-add-folder.png</file>
+        <file alias="marble/satellites/marble_deco.png">data/marble_deco_satellite.png</file>
+        <file alias="marble/satellites/elements.png">data/orbital_elements.png</file>
+        <file alias="marble/satellites/satellite.html">data/satellite.html</file>
+        <file alias="marble/satellites/satellitescreen.css">data/satellitescreen.css</file>
+    </qresource>
+</RCC>

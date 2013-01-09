@@ -31,7 +31,7 @@
 #include "GeoParser.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
-#include "GeoSceneXmlDataSource.h"
+#include "GeoSceneGeodata.h"
 
 namespace Marble
 {
@@ -47,12 +47,16 @@ GeoNode* DgmlGeodataTagHandler::parse(GeoParser& parser) const
 
     const QString name = parser.attribute(dgmlAttr_name).trimmed();
 
+    const QString property = parser.attribute( dgmlAttr_property ).trimmed();
+
+    const QString colorize = parser.attribute( dgmlAttr_colorize ).trimmed();
+
     const QString expireStr = parser.attribute(dgmlAttr_expire).trimmed();
     int expire = std::numeric_limits<int>::max();
     if ( !expireStr.isEmpty() )
         expire = expireStr.toInt();
 
-    GeoSceneXmlDataSource *dataSource = 0;
+    GeoSceneGeodata *dataSource = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
@@ -61,7 +65,9 @@ GeoNode* DgmlGeodataTagHandler::parse(GeoParser& parser) const
     // matches the backend of the parent layer
     if (parentItem.represents(dgmlTag_Layer)
     && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_geodata) {
-        dataSource = new GeoSceneXmlDataSource( name );
+        dataSource = new GeoSceneGeodata( name );
+        dataSource->setProperty( property );
+        dataSource->setColorize( colorize );
         dataSource->setExpire( expire );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( dataSource );
     }

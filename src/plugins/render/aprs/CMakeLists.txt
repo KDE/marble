@@ -1,24 +1,23 @@
 PROJECT(AprsPlugin)
 
-INCLUDE (CheckFunctionExists)
-CHECK_FUNCTION_EXISTS(cfmakeraw HAVE_CFMAKERAW)
-
-INCLUDE (CheckIncludeFiles)
-CHECK_INCLUDE_FILES(sys/filio.h HAVE_SYS_FILIO_H)
+macro_optional_find_package(QextSerialPort)
+marble_set_package_properties( QextSerialPort PROPERTIES DESCRIPTION "access to serial ports" )
+marble_set_package_properties( QextSerialPort PROPERTIES URL "http://code.google.com/p/qextserialport/" )
+marble_set_package_properties( QextSerialPort PROPERTIES TYPE OPTIONAL PURPOSE "Reading from serial port in APRS plugin" )
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/aprs
- ${CMAKE_BINARY_DIR}/src/plugins/render/aprs
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
 
-if (WIN32)
-  set (serial_src win_qextserialport.cpp)
-  ADD_DEFINITIONS(-DQEXTSERIALPORT_LIB)
-else (WIN32)
-  set (serial_src posix_qextserialport.cpp)
-endif (WIN32)
+if (QEXTSERIALPORT_FOUND)
+  include_directories (${QEXTSERIALPORT_INCLUDE_DIR})
+  set (serial_src AprsTTY.cpp)
+  list (APPEND AprsPlugin_LIBS ${QEXTSERIALPORT_LIBRARIES})
+  set (HAVE_QEXTSERIALPORT TRUE)
+endif ()
 
 set( aprs_SRCS AprsPlugin.cpp
                AprsObject.cpp
@@ -26,11 +25,9 @@ set( aprs_SRCS AprsPlugin.cpp
 	       GeoAprsCoordinates.cpp
 
 	       AprsSource.cpp
-	       AprsTTY.cpp
 	       AprsTCPIP.cpp
 	       AprsFile.cpp
 
-               qextserialport.cpp
 	       ${serial_src} )
 
 set( aprs_UI AprsConfigWidget.ui )

@@ -17,6 +17,8 @@
 #include <QtCore/QPointF>
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QVariant>
+#include <QtCore/QAbstractListModel>
+#include <QtCore/QMetaProperty>
 
 // Marble
 #include "MarbleDebug.h"
@@ -47,44 +49,18 @@ const qreal boxComparisonFactor = 16.0;
 
 // Separator to separate the id of the item from the file type
 const char fileIdSeparator = '_';
-    
+
+class FavoritesModel;
+
 class AbstractDataPluginModelPrivate
 {
- public:
+public:
     AbstractDataPluginModelPrivate( const QString& name,
-                                    const PluginManager *pluginManager,
-                                    AbstractDataPluginModel * parent )
-        : m_parent( parent ),
-          m_name( name ),
-          m_lastBox(),
-          m_downloadedBox(),
-          m_lastNumber( 0 ),
-          m_downloadedNumber( 0 ),
-          m_lastMarbleModel( 0 ),
-          m_downloadTimer( m_parent ),
-          m_descriptionFileNumber( 0 ),
-          m_itemSettings(),
-          m_favoriteItemsOnly( false ),
-          m_storagePolicy( MarbleDirs::localPath() + "/cache/" + m_name + '/' ),
-          m_downloadManager( &m_storagePolicy, pluginManager )
-    {
-    }
+                                    AbstractDataPluginModel * parent );
     
-    ~AbstractDataPluginModelPrivate() {
-        QList<AbstractDataPluginItem*>::iterator lIt = m_itemSet.begin();
-        QList<AbstractDataPluginItem*>::iterator const lItEnd = m_itemSet.end();
-        for (; lIt != lItEnd; ++lIt ) {
-            (*lIt)->deleteLater();
-        }
-        
-        QHash<QString,AbstractDataPluginItem*>::iterator hIt = m_downloadingItems.begin();
-        QHash<QString,AbstractDataPluginItem*>::iterator const hItEnd = m_downloadingItems.end();
-        for (; hIt != hItEnd; ++hIt ) {
-            (*hIt)->deleteLater();
-        }
-        
-        m_storagePolicy.clearCache();
-    }
+    ~AbstractDataPluginModelPrivate();
+
+    void updateFavoriteItems();
     
     AbstractDataPluginModel *m_parent;
     const QString m_name;
@@ -105,13 +81,151 @@ class AbstractDataPluginModelPrivate
 
     CacheStoragePolicy m_storagePolicy;
     HttpDownloadManager m_downloadManager;
+    FavoritesModel* m_favoritesModel;
+    QMetaObject m_metaObject;
+    bool m_hasMetaObject;
+    bool m_needsSorting;
 };
 
-AbstractDataPluginModel::AbstractDataPluginModel( const QString& name,
-                                                  const PluginManager *pluginManager,
-                                                  QObject *parent )
+class FavoritesModel : public QAbstractListModel
+{
+public:
+    AbstractDataPluginModelPrivate* d;
+
+    explicit FavoritesModel( AbstractDataPluginModelPrivate* d, QObject* parent = 0 );
+
+    virtual int rowCount ( const QModelIndex & parent = QModelIndex() ) const;
+
+    QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
+
+    void reset();
+};
+
+AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& name,
+                                AbstractDataPluginModel * parent )
+    : m_parent( parent ),
+      m_name( name ),
+      m_lastBox(),
+      m_downloadedBox(),
+      m_lastNumber( 0 ),
+      m_downloadedNumber( 0 ),
+      m_lastMarbleModel( 0 ),
+      m_downloadTimer( m_parent ),
+      m_descriptionFileNumber( 0 ),
+      m_itemSettings(),
+      m_favoriteItemsOnly( false ),
+      m_storagePolicy( MarbleDirs::localPath() + "/cache/" + m_name + '/' ),
+      m_downloadManager( &m_storagePolicy ),
+      m_favoritesModel( 0 ),
+      m_hasMetaObject( false ),
+      m_needsSorting( false )
+{
+}
+
+AbstractDataPluginModelPrivate::~AbstractDataPluginModelPrivate() {
+    QList<AbstractDataPluginItem*>::iterator lIt = m_itemSet.begin();
+    QList<AbstractDataPluginItem*>::iterator const lItEnd = m_itemSet.end();
+    for (; lIt != lItEnd; ++lIt ) {
+        (*lIt)->deleteLater();
+    }
+
+    QHash<QString,AbstractDataPluginItem*>::iterator hIt = m_downloadingItems.begin();
+    QHash<QString,AbstractDataPluginItem*>::iterator const hItEnd = m_downloadingItems.end();
+    for (; hIt != hItEnd; ++hIt ) {
+        (*hIt)->deleteLater();
+    }
+
+    m_storagePolicy.clearCache();
+}
+
+void AbstractDataPluginModelPrivate::updateFavoriteItems()
+{
+    if ( m_lastMarbleModel && m_favoriteItemsOnly ) {
+        foreach( const QString &id, m_favoriteItems ) {
+            if ( !m_parent->findItem( id ) ) {
+                m_parent->getItem( id, m_lastMarbleModel );
+            }
+        }
+    }
+}
+
+static bool lessThanByPointer( const AbstractDataPluginItem *item1,
+                               const AbstractDataPluginItem *item2 )
+{
+    if( item1 && item2 ) {
+        // Compare by sticky and favorite status (sticky first, then favorites), last by operator<
+        bool const sticky1 = item1->isSticky();
+        bool const favorite1 = item1->isFavorite();
+        if ( sticky1 != item2->isSticky() ) {
+            return sticky1;
+        } else if ( favorite1 != item2->isFavorite() ) {
+            return favorite1;
+        } else {
+            return item1->operator<( item2 );
+        }
+    }
+    else {
+        return false;
+    }
+}
+
+FavoritesModel::FavoritesModel( AbstractDataPluginModelPrivate *_d, QObject* parent ) :
+    QAbstractListModel( parent ), d(_d)
+{
+    QHash<int,QByteArray> roles = roleNames();
+    int const size = d->m_hasMetaObject ? d->m_metaObject.propertyCount() : 0;
+    for ( int i=0; i<size; ++i ) {
+        QMetaProperty property = d->m_metaObject.property( i );
+        roles[Qt::UserRole+i] = property.name();
+    }
+    roles[Qt::DisplayRole] = "display";
+    roles[Qt::DecorationRole] = "decoration";
+    setRoleNames( roles );
+}
+
+int FavoritesModel::rowCount ( const QModelIndex &parent ) const
+{
+    if ( parent.isValid() ) {
+        return 0;
+    }
+
+    int count = 0;
+    foreach( AbstractDataPluginItem* item, d->m_itemSet ) {
+        if ( item->initialized() && item->isFavorite() ) {
+            ++count;
+        }
+    }
+
+    return count;
+}
+
+QVariant FavoritesModel::data( const QModelIndex &index, int role ) const
+{
+    int const row = index.row();
+    if ( row >= 0 && row < rowCount() ) {
+        int count = 0;
+        foreach( AbstractDataPluginItem* item, d->m_itemSet ) {
+            if ( item->initialized() && item->isFavorite() ) {
+                if ( count == row ) {
+                    QString const roleName = roleNames().value( role, int( Qt::DisplayRole ) );
+                    return item->property( roleName.toAscii() );
+                }
+                ++count;
+            }
+        }
+    }
+
+    return QVariant();
+}
+
+void FavoritesModel::reset()
+{
+    QAbstractListModel::reset();
+}
+
+AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *parent )
     : QObject(  parent ),
-      d( new AbstractDataPluginModelPrivate( name, pluginManager, this ) )
+      d( new AbstractDataPluginModelPrivate( name, this ) )
 {
     // Initializing file and download System
     connect( &d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
@@ -137,18 +251,27 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
     QString target = model->planetId();
     QList<AbstractDataPluginItem*> list;
     
-    d->m_displayedItems.removeAll( 0 );
+    int const removed = d->m_displayedItems.removeAll( 0 ) + d->m_itemSet.removeAll( 0 );
+    // I don't see why the removeAll( 0 ) calls above should be needed. The assert below will trigger
+    // if I'm wrong.
+    Q_ASSERT( !removed && "Null item in item list. Please report a bug to marble-devel@kde.org" );
 
-    QList<AbstractDataPluginItem*>::iterator i = d->m_displayedItems.begin();
-    QList<AbstractDataPluginItem*>::iterator end = d->m_displayedItems.end();
+    QList<AbstractDataPluginItem*> candidates = d->m_displayedItems + d->m_itemSet;
+
+    if ( d->m_needsSorting ) {
+        // Both the candidates list and the list of all items need to be sorted
+        qSort( candidates.begin(), candidates.end(), lessThanByPointer );
+        qSort( d->m_itemSet.begin(), d->m_itemSet.end(), lessThanByPointer );
+        d->m_needsSorting =  false;
+    }
+
+    QList<AbstractDataPluginItem*>::const_iterator i = candidates.constBegin();
+    QList<AbstractDataPluginItem*>::const_iterator end = candidates.constEnd();
 
     // Items that are already shown have the highest priority
     for (; i != end && list.size() < number; ++i ) {
-        // Don't try to access an object that doesn't exist
-        if( !*i ) {
-            continue;
-        }
-    
+        Q_ASSERT( *i ); // checked when adding items, also removeAll(0) above
+
         // Only show items that are initialized
         if( !(*i)->initialized() ) {
             continue;
@@ -158,68 +281,51 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
         if( (*i)->target() != target ) {
             continue;
         }
+
+        // Hide non-favorite items if necessary
+        if( d->m_favoriteItemsOnly && !(*i)->isFavorite() ) {
+            continue;
+        }
         
-        if( !currentBox.contains( (*i)->coordinate() ) ) {
+        (*i)->setProjection( viewport );
+        if( (*i)->positions().isEmpty() ) {
             continue;
         }
         
         // If the item was added initially at a nearer position, they don't have priority,
         // because we zoomed out since then.
-        if( (*i)->addedAngularResolution() >= viewport->angularResolution() ) {
-            list.append( *i );
-            (*i)->setSettings( d->m_itemSettings );
-        }
-    }
-        
-    d->m_itemSet.removeAll( 0 );
-    
-    for ( i = d->m_itemSet.begin(), end = d->m_itemSet.end();
-          i != end && list.size() < number; ++i )
-    {
-        // Don't try to access an object that doesn't exist
-        if( !*i ) {
-            mDebug() << "Warning: Null pointer in m_itemSet";
-            continue;
-        }
-        
-        // Only show items that are initialized
-        if( !(*i)->initialized() ) {
-            continue;
-        }
-        
-        // Only show items that are on the current planet
-        if( (*i)->target() != target ) {
-            continue;
-        }
-        
-        // If the item is on the viewport, we want to return it
-        if( currentBox.contains( (*i)->coordinate() )
-            && !list.contains( *i ) )
-        {
-            list.append( *i );
-            (*i)->setSettings( d->m_itemSettings );
-            
-            // We want to save the angular resolution of the first time the item got added.
-            // If it is in the list of displayedItems, it was added before
-            if( !d->m_displayedItems.contains( *i ) ) {
-                (*i)->setAddedAngularResolution( viewport->angularResolution() );
+        bool const alreadyDisplayed = d->m_displayedItems.contains( *i );
+        if( !list.contains( *i ) && ( !alreadyDisplayed || (*i)->addedAngularResolution() >= viewport->angularResolution() ) ) {
+            bool collides = false;
+            int const length = list.length();
+            for ( int j=0; !collides && j<length; ++j ) {
+                foreach( const QRectF &rect, list[j]->boundingRects() ) {
+                    foreach( const QRectF &itemRect, (*i)->boundingRects() ) {
+                        if ( rect.intersects( itemRect ) )
+                            collides = true;
+                    }
+                }
+            }
+
+            if ( !collides ) {
+                list.append( *i );
+                (*i)->setSettings( d->m_itemSettings );
+
+                // We want to save the angular resolution of the first time the item got added.
+                if( !alreadyDisplayed ) {
+                    (*i)->setAddedAngularResolution( viewport->angularResolution() );
+                }
             }
         }
-        // FIXME: We have to do something if the item that is not on the viewport.
+        // TODO: Do we have to cleanup at some point? The list of all items keeps growing
     }
-    
-    d->m_lastMarbleModel = model;
-    
-    if( (!(currentBox == d->m_lastBox)
-          || number != d->m_lastNumber ) )
-    {
-        d->m_lastBox = currentBox;
-        d->m_lastNumber = number;
+
+    d->m_lastBox = currentBox;
+    d->m_lastNumber = number;
+    if ( d->m_lastMarbleModel != model ) {
         d->m_lastMarbleModel = model;
+        d->updateFavoriteItems();
     }
-    else {
-    }
-    
     d->m_displayedItems = list;
     return list;
 }
@@ -245,23 +351,28 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
                                                 const QString& type,
                                                 AbstractDataPluginItem *item )
 {
+    downloadItem( url, type, item );
+    connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
+    addItemToList( item );
+}
+
+void AbstractDataPluginModel::downloadItem( const QUrl& url,
+                                                const QString& type,
+                                                AbstractDataPluginItem *item )
+{
     if( !item ) {
         return;
     }
 
     QString id = generateFilename( item->id(), type );
-    
+
     d->m_downloadManager.addJob( url, id, id, DownloadBrowse );
     d->m_downloadingItems.insert( id, item );
-    
-    connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
-
-    addItemToList( item );
 }
 
 void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url )
 {
-    if( !url.isEmpty() ) {  
+    if( !url.isEmpty() ) {
         QString name( descriptionPrefix );
         name += QString::number( d->m_descriptionFileNumber );
         
@@ -270,58 +381,78 @@ void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url )
     }
 }
 
-static bool lessThanByPointer( const AbstractDataPluginItem *item1,
-                               const AbstractDataPluginItem *item2 )
+void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
 {
-    if( item1 != 0 && item2 != 0 ) {
-        return item1->operator<( item2 );
+    addItemsToList( QList<AbstractDataPluginItem*>() << item );
+}
+
+void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem *> &items )
+{
+    bool needsUpdate = false;
+    bool favoriteChanged = false;
+    foreach( AbstractDataPluginItem *item, items ) {
+        if( !item ) {
+            continue;
+        }
+
+        // If the item is already in our list, don't add it.
+        if( AbstractDataPluginItem *oldItem = findItem( item->id() ) ) {
+            if ( oldItem == item ) {
+                continue;
+            }
+            else {
+                item->deleteLater();
+                continue;
+            }
+        }
+
+        mDebug() << "New item " << item->id();
+
+        // This find the right position in the sorted to insert the new item
+        QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),
+                                                                  d->m_itemSet.end(),
+                                                                  item,
+                                                                  lessThanByPointer );
+        // Insert the item on the right position in the list
+        d->m_itemSet.insert( i, item );
+
+        connect( item, SIGNAL( stickyChanged() ), this, SLOT( scheduleItemSort() ) );
+        connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
+        connect( item, SIGNAL( updated() ), this, SIGNAL( itemsUpdated() ) );
+        connect( item, SIGNAL( favoriteChanged( const QString&, bool ) ), this,
+                 SLOT( favoriteItemChanged( const QString&, bool ) ) );
+
+        if ( !needsUpdate && item->initialized() ) {
+            needsUpdate = true;
+        }
+
+        if ( !favoriteChanged && item->initialized() && item->isFavorite() ) {
+            favoriteChanged = true;
+        }
     }
-    else {
-        return false;
+
+    if ( favoriteChanged && d->m_favoritesModel ) {
+        d->m_favoritesModel->reset();
+    }
+
+    if ( needsUpdate ) {
+        emit itemsUpdated();
     }
 }
 
-void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
+void AbstractDataPluginModel::getItem( const QString &, const MarbleModel * )
 {
-    if( !item ) {
-        return;
-    }
-
-    // If the item is already in our list, don't add it.
-    if( AbstractDataPluginItem *oldItem = findItem( item->id() ) ) {
-        if ( oldItem == item ) {
-            return;
-        }
-        else {
-            item->deleteLater();
-            return;
-        }
-    }
-    
-    mDebug() << "New item " << item->id();
-    
-    // This find the right position in the sorted to insert the new item 
-    QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),
-                                                                d->m_itemSet.end(),
-                                                                item,
-                                                                lessThanByPointer );
-    // Insert the item on the right position in the list
-    d->m_itemSet.insert( i, item );
-    
-    connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
-    connect( item, SIGNAL( updated() ), this, SIGNAL( itemsUpdated() ) );
-    connect( item, SIGNAL( favoriteChanged( const QString&, bool ) ), this,
-             SLOT( favoriteItemChanged( const QString&, bool ) ) );
-
-    if ( item->initialized() ) {
-        emit itemsUpdated();
-    }
+    qWarning() << "Retrieving items by identifier is not implemented by this plugin";
 }
 
 void AbstractDataPluginModel::setFavoriteItems( const QStringList& list )
 {
     if ( d->m_favoriteItems != list) {
         d->m_favoriteItems = list;
+        d->updateFavoriteItems();
+        if ( d->m_favoritesModel ) {
+            d->m_favoritesModel->reset();
+        }
         emit favoriteItemsChanged( d->m_favoriteItems );
     }
 }
@@ -335,12 +466,24 @@ void AbstractDataPluginModel::setFavoriteItemsOnly( bool favoriteOnly )
 {
     if ( isFavoriteItemsOnly() != favoriteOnly ) {
         d->m_favoriteItemsOnly = favoriteOnly;
+        d->updateFavoriteItems();
+        emit favoriteItemsOnlyChanged();
     }
 }
 
 bool AbstractDataPluginModel::isFavoriteItemsOnly() const
 {
     return d->m_favoriteItemsOnly;
+}
+
+QObject *AbstractDataPluginModel::favoritesModel()
+{
+    if ( !d->m_favoritesModel ) {
+        d->m_favoritesModel = new FavoritesModel( d, this );
+        d->updateFavoriteItems();
+    }
+
+    return d->m_favoritesModel;
 }
 
 void AbstractDataPluginModel::favoriteItemChanged( const QString& id, bool isFavorite )
@@ -355,6 +498,12 @@ void AbstractDataPluginModel::favoriteItemChanged( const QString& id, bool isFav
     }
 
     setFavoriteItems( favorites );
+    scheduleItemSort();
+}
+
+void AbstractDataPluginModel::scheduleItemSort()
+{
+    d->m_needsSorting = true;
 }
 
 QString AbstractDataPluginModel::generateFilename( const QString& id, const QString& type ) const
@@ -371,7 +520,7 @@ QString AbstractDataPluginModel::generateFilepath( const QString& id, const QStr
 {
     return MarbleDirs::localPath() + "/cache/" + d->m_name + '/' + generateFilename( id, type );
 }
-    
+
 bool AbstractDataPluginModel::fileExists( const QString& fileName ) const
 {
     return d->m_storagePolicy.fileExists( fileName );
@@ -408,25 +557,25 @@ void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSetti
 
 void AbstractDataPluginModel::handleChangedViewport()
 {
-    if( !d->m_lastMarbleModel ) {
+    if( !d->m_lastMarbleModel || d->m_favoriteItemsOnly ) {
         return;
     }
     
     // All this is to prevent to often downloads
     if( d->m_lastNumber != 0
-        // We don't need to download if nothing changed
-        && ( !( d->m_downloadedBox == d->m_lastBox )
-             || d->m_downloadedNumber != d->m_lastNumber
-             || d->m_downloadedTarget != d->m_lastMarbleModel->planetId() )
-        // We try to filter little changes of the bounding box
-        && ( fabs( d->m_downloadedBox.east() - d->m_lastBox.east() ) * boxComparisonFactor
-                                > d->m_lastBox.width()
-             || fabs( d->m_downloadedBox.south() - d->m_lastBox.south() ) * boxComparisonFactor
-                                > d->m_lastBox.height()
-             || fabs( d->m_downloadedBox.north() - d->m_lastBox.north() ) * boxComparisonFactor
-                                > d->m_lastBox.height()
-             || fabs( d->m_downloadedBox.west() - d->m_lastBox.west() ) * boxComparisonFactor
-                                > d->m_lastBox.width() ) )
+            // We don't need to download if nothing changed
+            && ( !( d->m_downloadedBox == d->m_lastBox )
+                 || d->m_downloadedNumber != d->m_lastNumber
+                 || d->m_downloadedTarget != d->m_lastMarbleModel->planetId() )
+            // We try to filter little changes of the bounding box
+            && ( fabs( d->m_downloadedBox.east() - d->m_lastBox.east() ) * boxComparisonFactor
+                 > d->m_lastBox.width()
+                 || fabs( d->m_downloadedBox.south() - d->m_lastBox.south() ) * boxComparisonFactor
+                 > d->m_lastBox.height()
+                 || fabs( d->m_downloadedBox.north() - d->m_lastBox.north() ) * boxComparisonFactor
+                 > d->m_lastBox.height()
+                 || fabs( d->m_downloadedBox.west() - d->m_lastBox.west() ) * boxComparisonFactor
+                 > d->m_lastBox.width() ) )
     {
         // We will wait a little bit longer to start the the
         // next download as we will really download something now.
@@ -476,7 +625,7 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
                 return;
             }
             
-            (*i)->addDownloadedFile( generateFilepath( itemId, fileType ), 
+            (*i)->addDownloadedFile( generateFilepath( itemId, fileType ),
                                      fileType );
 
             d->m_downloadingItems.erase( i );
@@ -506,7 +655,12 @@ void AbstractDataPluginModel::clear()
     d->m_itemSet.clear();
     emit itemsUpdated();
 }
-    
+
+void AbstractDataPluginModel::registerItemProperties( const QMetaObject &item )
+{
+    d->m_metaObject = item;
+    d->m_hasMetaObject = true;
+}
 
 } // namespace Marble
 

@@ -1,23 +1,32 @@
 <RCC>
-    <qresource>
-        <file>../../../icons/application-exit.png</file>
-        <file>../../../icons/arrow-down.png</file>
-        <file>../../../icons/arrow-left.png</file>
-        <file>../../../icons/arrow-right.png</file>
-        <file>../../../icons/arrow-up.png</file>
-        <file>../../../icons/document-open.png</file>
-        <file>../../../icons/document-print.png</file>
-        <file>../../../icons/document-save-as.png</file>
-        <file>../../../icons/edit-copy.png</file>
-        <file>../../../icons/go-home.png</file>
-        <file>../../../icons/help-contents.png</file>
-        <file>../../../icons/help-whatsthis.png</file>
-        <file>../../../icons/map-flat.png</file>
-        <file>../../../icons/map-globe.png</file>
-        <file>../../../icons/map-mercator.png</file>
-        <file>../../../icons/marble.png</file>
-        <file>../../../icons/wikipedia.png</file>
-        <file>../../../icons/zoom-in.png</file>
-        <file>../../../icons/zoom-out.png</file>
+    <qresource prefix="/">
+        <file alias="marble/navigation/navigational_arrows.png">data/navigational_arrows.png</file>
+        <file alias="marble/navigation/navigational_arrows_hover_bottom.png">data/navigational_arrows_hover_bottom.png</file>
+        <file alias="marble/navigation/navigational_arrows_hover_left.png">data/navigational_arrows_hover_left.png</file>
+        <file alias="marble/navigation/navigational_arrows_hover_right.png">data/navigational_arrows_hover_right.png</file>
+        <file alias="marble/navigation/navigational_arrows_hover_top.png">data/navigational_arrows_hover_top.png</file>
+        <file alias="marble/navigation/navigational_arrows_press_bottom.png">data/navigational_arrows_press_bottom.png</file>
+        <file alias="marble/navigation/navigational_arrows_press_left.png">data/navigational_arrows_press_left.png</file>
+        <file alias="marble/navigation/navigational_arrows_press_right.png">data/navigational_arrows_press_right.png</file>
+        <file alias="marble/navigation/navigational_arrows_press_top.png">data/navigational_arrows_press_top.png</file>
+        <file alias="marble/navigation/navigational_homebutton.png">data/navigational_homebutton.png</file>
+        <file alias="marble/navigation/navigational_homebutton_hover.png">data/navigational_homebutton_hover.png</file>
+        <file alias="marble/navigation/navigational_homebutton_press.png">data/navigational_homebutton_press.png</file>
+        <file alias="marble/navigation/navigational_zoom_hover_minus.png">data/navigational_zoom_hover_minus.png</file>
+        <file alias="marble/navigation/navigational_zoom_hover_plus.png">data/navigational_zoom_hover_plus.png</file>
+        <file alias="marble/navigation/navigational_zoom_minus.png">data/navigational_zoom_minus.png</file>
+        <file alias="marble/navigation/navigational_zoom_plus.png">data/navigational_zoom_plus.png</file>
+        <file alias="marble/navigation/navigational_zoom_press_minus.png">data/navigational_zoom_press_minus.png</file>
+        <file alias="marble/navigation/navigational_zoom_press_plus.png">data/navigational_zoom_press_plus.png</file>
+        <file alias="marble/navigation/navigational_slider_groove.png">data/navigational_slider_groove.png</file>
+        <file alias="marble/navigation/navigational_slider_handle.png">data/navigational_slider_handle.png</file>
+        <file alias="marble/navigation/navigational_backdrop_bottom.png">data/navigational_backdrop_bottom.png</file>
+        <file alias="marble/navigation/navigational_backdrop_center.png">data/navigational_backdrop_center.png</file>
+        <file alias="marble/navigation/navigational_backdrop_top.png">data/navigational_backdrop_top.png</file>
+        <file alias="marble/navigation/navigational_currentlocation.png">data/navigational_currentlocation.png</file>
+        <file alias="marble/navigation/navigational_currentlocation_hover.png">data/navigational_currentlocation_hover.png</file>
+        <file alias="marble/navigation/navigational_currentlocation_pressed.png">data/navigational_currentlocation_pressed.png</file>
+        <file alias="marble/navigation/navigational_slider_handle_hover.png">data/navigational_slider_handle_hover.png</file>
+        <file alias="marble/navigation/navigational_slider_handle_press.png">data/navigational_slider_handle_press.png</file>
     </qresource>
 </RCC>

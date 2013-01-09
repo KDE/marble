@@ -289,7 +289,7 @@ QString RoutingInstruction::nextDistanceInstruction() const
     QLocale::MeasurementSystem const measurement = QLocale::system().measurementSystem();
     int precision = 0;
     qreal length = distance();
-    QString distanceUnit = "m";
+    QString distanceUnit = QLatin1String( "m" );
 
     if ( measurement == QLocale::ImperialSystem ) {
         precision = 1;
@@ -330,7 +330,7 @@ QString RoutingInstruction::totalDurationRemaining() const
     }
     if ( duration >= 60.0 ) {
         duration /= 60.0;
-        durationUnit = "h";
+        durationUnit = 'h';
         precision = 1;
     }
 
@@ -341,9 +341,9 @@ QString RoutingInstruction::totalDurationRemaining() const
 QString RoutingInstruction::instructionText() const
 {
     QString text = nextRoadInstruction();
-    text += " " + nextDistanceInstruction();
+    text += ' ' + nextDistanceInstruction();
     if ( QCoreApplication::instance()->arguments().contains( "--remaining-duration" ) ) {
-        text += " " + totalDurationRemaining();
+        text += ' ' + totalDurationRemaining();
     }
     return text;
 }

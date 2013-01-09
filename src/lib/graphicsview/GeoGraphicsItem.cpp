@@ -12,32 +12,30 @@
 #include "GeoGraphicsItem.h"
 #include "GeoGraphicsItem_p.h"
 
-//Marble
-#include "GeoDataCoordinates.h"
-
 // Qt
 #include "MarbleDebug.h"
 
 using namespace Marble;
 
 GeoGraphicsItem::GeoGraphicsItem()
-    : MarbleGraphicsItem( new GeoGraphicsItemPrivate( this ) )
+    : d( new GeoGraphicsItemPrivate )
 {
     setFlag( ItemIsVisible, true );
 }
 
 GeoGraphicsItem::~GeoGraphicsItem()
 {
+    delete d;
 }
 
-GeoDataCoordinates GeoGraphicsItem::coordinate() const
+bool GeoGraphicsItem::visible() const
 {
-    return p()->m_coordinate;
+    return d->m_flags & ItemIsVisible;
 }
 
-void GeoGraphicsItem::setCoordinate( const GeoDataCoordinates &point )
+void GeoGraphicsItem::setVisible( bool visible )
 {
-    p()->m_coordinate = point;
+    setFlag( ItemIsVisible, visible );
 }
 
 GeoGraphicsItem::GeoGraphicsItemFlags GeoGraphicsItem::flags() const
@@ -59,7 +57,7 @@ void GeoGraphicsItem::setFlags( GeoGraphicsItemFlags flags )
     p()->m_flags = flags;
 }
 
-GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
 {
     return p()->m_latLonAltBox;
 }
@@ -87,12 +85,6 @@ qreal GeoGraphicsItem::zValue() const
 void GeoGraphicsItem::setZValue( qreal z )
 {
     p()->m_zValue = z;
-    update();
-}
-
-QList<QPointF> GeoGraphicsItem::positions() const
-{
-    return p()->positions();
 }
 
 GeoGraphicsItemPrivate *GeoGraphicsItem::p() const

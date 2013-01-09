@@ -5,11 +5,13 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Utku Aydın <utkuaydin34@gmail.com>
+// Copyright 2010 Utku Aydın        <utkuaydin34@gmail.com>
+// Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #include "OpenDesktopPlugin.h"
 #include "OpenDesktopModel.h"
+#include "MarbleWidget.h"
 
 #include "ui_OpenDesktopConfigWidget.h"
 
@@ -26,7 +28,6 @@ OpenDesktopPlugin::OpenDesktopPlugin()
 
 OpenDesktopPlugin::OpenDesktopPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_isInitialized(false),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
@@ -36,14 +37,8 @@ OpenDesktopPlugin::OpenDesktopPlugin( const MarbleModel *marbleModel )
 
 void OpenDesktopPlugin::initialize()
 {
-    setModel( new OpenDesktopModel( pluginManager(), this ) );
+    setModel( new OpenDesktopModel( this ) );
     setNumberOfItems( defaultItemsOnScreen ); // Setting the number of items on the screen.
-    m_isInitialized = true;
-}
-
-bool OpenDesktopPlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString OpenDesktopPlugin::name() const
@@ -84,7 +79,7 @@ QList<PluginAuthor> OpenDesktopPlugin::pluginAuthors() const
 
 QIcon OpenDesktopPlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/social.png");
 }
 
 QDialog *OpenDesktopPlugin::configDialog()
@@ -95,14 +90,14 @@ QDialog *OpenDesktopPlugin::configDialog()
         m_uiConfigWidget->setupUi( m_configDialog );
         readSettings();
 
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( accepted() ),
-                SLOT( writeSettings() ) );
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( rejected() ),
-                SLOT( readSettings() ) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()),
+                SLOT(writeSettings()) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(rejected()),
+                SLOT(readSettings()) );
         QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( 
                                                          QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 this,        SLOT(writeSettings()) );
     }
 
     return m_configDialog;
@@ -115,6 +110,20 @@ QHash<QString,QVariant> OpenDesktopPlugin::settings() const
     settings.insert( "itemsOnScreen", numberOfItems() );
 
     return settings;
+}
+
+bool OpenDesktopPlugin::eventFilter(QObject *object, QEvent *event)
+{
+    if ( isInitialized() ) {
+        OpenDesktopModel *odModel = qobject_cast<OpenDesktopModel*>( model() );
+        Q_ASSERT(odModel);
+        MarbleWidget* widget = qobject_cast<MarbleWidget*>( object );
+        if ( widget ) {
+            odModel->setMarbleWidget(widget);
+        }
+    }
+
+    return AbstractDataPlugin::eventFilter( object, event );
 }
 
 void OpenDesktopPlugin::setSettings( const QHash<QString,QVariant> &settings )

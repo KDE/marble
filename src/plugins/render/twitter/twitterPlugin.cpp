@@ -115,9 +115,9 @@ twitterStructure temp;
 //temp.twit = parsedData[counter].text ;
  parsedData = twitterJsonParser.parseAllObjects(QString::fromUtf8(m_storagePolicy->data(id)), 20);
 mDebug()<<"::::::::::::::::slot"<<parsedData[0].text;
-    disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
+    disconnect(m_downloadManager, SIGNAL(downloadComplete(QString,QString)), this, SLOT(slotJsonDownloadComplete(QString,QString)) );
 
-    connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotGeoCodingReplyRecieved(QString , QString)));
+    connect(m_downloadManager, SIGNAL(downloadComplete(QString,QString)), this, SLOT(slotGeoCodingReplyRecieved(QString,QString)) );
     for (int counter = 0;counter < 10;counter++) {
        if (parsedData[counter].location != "null") {
            parsedData[counter].location.replace(QRegExp("[?,:!/\\s]+"), "+");//remove whitespace and replace it with + for query api
@@ -134,7 +134,7 @@ mDebug()<<"::::::downloading"<<rangeFrom ;
     m_downloadManager->addJob(QUrl("http://twitter.com/statuses/public_timeline.json"), "twitter", "twitter");
 //    m_downloadManager->addJob(QUrl("http://identi.ca/api/statuses/public_timeline.json"), "identica", "identica");
 
-    connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
+    connect(m_downloadManager, SIGNAL(downloadComplete(QString,QString)), this, SLOT(slotJsonDownloadComplete(QString,QString)) );
 
 }
 
