@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+        <head>
+            <license short="CIA / Public Domain" attribution="always">Source: Yale Catalogue of Bright Stars, License: Public Domain</license>
+            <name>Night Sky</name>
+            <target>sky</target>
+            <theme>nightsky</theme>
+            <icon pixmap="nightsky-preview.png"/>
+
+            <!-- describes whether the map theme item will be hidden (e.g.
+                for a clouds layer): -->
+            <visible> true </visible>
+
+            <!-- The description allows for rich text of course: -->
+            <description><![CDATA[<p>The <i>night sky</i>.</p><p> displays the stars and constellations at night.</p>]]></description>
+
+            <zoom>
+                <minimum>   900  </minimum>
+                <maximum>  2100  </maximum>
+
+                <!-- describes whether you can zoom trough the levels
+                    continuously -->
+                <discrete> false </discrete>
+            </zoom>
+        </head>
+
+            <!-- Now we create the layer structure that gets handled by the
+    layer management class -->
+
+        <map bgcolor="#99b3cc">
+            <canvas/>
+            <!-- In this place one could e.g. insert a sky plugin -->
+            <target/>
+
+            <layer name="celestial places" backend="geodata">
+                <geodata name="ycbs">
+                    <sourcefile format="KML">maps/sky/nightsky/ybsc.kml</sourcefile>
+                </geodata>
+                <geodata name="marsterrain">
+                    <sourcefile format="KML">maps/sky/nightsky/constellations.kml</sourcefile>
+                </geodata>
+            </layer>
+        </map>
+
+        <settings>
+-            <group name="Places">
+                <property name="places">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="cities">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="terrain">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="otherplaces">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+            </group>
+
+-            <group name="Boundaries">
+                <property name="borders">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="international-boundaries">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="state-boundaries">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+            </group>
+            <group name="Water Bodies">
+                <property name="waterbodies">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="lakes">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="rivers">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+            </group>
+
+            <property name="coordinate-grid">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="overviewmap">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="compass">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="scalebar">
+                <value>true</value>
+                <available>true</available>
+            </property>
+        </settings>
+
+        <!-- At last we define some legend properties -->
+
+        <legend>
+            <section name="terrain" checkable="true" connect="terrain" spacing="12">
+                <heading>Terrain</heading>
+
+                <item name="mountain">
+                    <icon pixmap="bitmaps/mountain_1.png"/>
+                    <text>Mountain</text>
+                </item>
+                <item name="volcano">
+                    <icon pixmap="bitmaps/volcano_1.png"/>
+                    <text>Volcano</text>
+                </item>
+            </section>
+
+            <section name="otherplaces" checkable="true" connect="otherplaces" spacing="12">
+                <heading>Places of Interest</heading>
+
+                <item name="geographic-pole">
+                    <icon pixmap="bitmaps/pole_1.png"/>
+                    <text>Geographic Pole</text>
+                </item>
+                <item name="magnetic-pole">
+                    <icon pixmap="bitmaps/pole_2.png"/>
+                    <text>Magnetic Pole</text>
+                </item>
+                <item name="airport">
+                    <icon pixmap="bitmaps/airport.png"/>
+                    <text>Airport</text>
+                </item>
+                <item name="shipwreck">
+                    <icon pixmap="bitmaps/shipwreck.png"/>
+                    <text>Shipwreck</text>
+                </item>
+                <item name="observatory">
+                    <icon pixmap="bitmaps/observatory.png"/>
+                    <text>Astronomical Observatory</text>
+                </item>
+            </section>
+        </legend>
+    </document>
+</dgml>

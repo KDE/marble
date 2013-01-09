@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2013      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 
@@ -19,11 +20,8 @@
 
 #define ENABLEGUI
 
-
-int main(int argc, char *argv[])
+void exportToDat()
 {
-    QCoreApplication  app(argc, argv);
-
     // Set up Color Table Per B-V Color indices from some Reference Stars
     QVector<double> colorTable( 0 );
 
@@ -95,20 +93,166 @@ int main(int argc, char *argv[])
 
 //            qDebug() << "Rec:" << recString << "Dec.:" << decString << "Mag.:" << magString;
             if ( !line.isNull() && magValue < 6.0 ) {
-	        if (raValue != 0 && deValue != 0) { // Filter out Novae and DSOs
-		    if (idValue != 5958) { // Filter out special cases, like novae ( T CrB, ... )
-			qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "idx:" << colorIdx;
-			out << idValue;
-			out << raValue;
-			out << deValue;
-			out << magValue;
-			out << colorIdx;
-		    }
-		}
+            if (raValue != 0 && deValue != 0) { // Filter out Novae and DSOs
+            if (idValue != 5958) { // Filter out special cases, like novae ( T CrB, ... )
+            qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "idx:" << colorIdx;
+            out << idValue;
+            out << raValue;
+            out << deValue;
+            out << magValue;
+            out << colorIdx;
+            }
+        }
             }
         } while ( !line.isNull() );
     }
     file.flush();
+}
+
+void exportToKml()
+{
+    QFile file("kmlsky.kml");
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n"
+        << "<kml xmlns=\"http://earth.google.com/kml/2.2\" hint=\"target=sky\"> \n"
+        << "<Document> \n"
+        << "   <Style id=\"mag0\"> \n"
+        << "       <IconStyle> \n"
+        << "           <Icon> \n"
+        << "               <href>star_0_white.png</href> \n"
+        << "           </Icon> \n"
+        << "       </IconStyle> \n"
+        << "   </Style> \n"
+        << "   <Style id=\"mag1\"> \n"
+        << "       <IconStyle> \n"
+        << "           <Icon> \n"
+        << "               <href>star_1_white.png</href> \n"
+        << "           </Icon> \n"
+        << "       </IconStyle> \n"
+        << "   </Style> \n"
+        << "   <Style id=\"mag2\"> \n"
+        << "       <IconStyle> \n"
+        << "           <Icon> \n"
+        << "               <href>star_2_white.png</href> \n"
+        << "           </Icon> \n"
+        << "       </IconStyle> \n"
+        << "   </Style> \n"
+        << "   <Style id=\"mag3\"> \n"
+        << "       <IconStyle> \n"
+        << "           <Icon> \n"
+        << "               <href>star_3_white.png</href> \n"
+        << "           </Icon> \n"
+        << "       </IconStyle> \n"
+        << "   </Style> \n"
+        << "   <Style id=\"mag4\"> \n"
+        << "       <IconStyle> \n"
+        << "           <Icon> \n"
+        << "               <href>star_4_white.png</href> \n"
+        << "           </Icon> \n"
+        << "       </IconStyle> \n"
+        << "   </Style> \n"
+        << "   <Style id=\"mag5\"> \n"
+        << "       <IconStyle> \n"
+        << "           <Icon> \n"
+        << "               <href>star_5_white.png</href> \n"
+        << "           </Icon> \n"
+        << "       </IconStyle> \n"
+        << "   </Style> \n"
+        << "   <Style id=\"mag6\"> \n"
+        << "       <IconStyle> \n"
+        << "           <Icon> \n"
+        << "               <href>star_6_white.png</href> \n"
+        << "           </Icon> \n"
+        << "       </IconStyle> \n"
+        << "   </Style> \n"
+        << "   <Style id=\"mag7\"> \n"
+        << "       <IconStyle> \n"
+        << "           <Icon> \n"
+        << "               <href>star_7_white.png</href> \n"
+        << "           </Icon> \n"
+        << "       </IconStyle> \n"
+        << "   </Style> \n";
+
+    QFile data("catalog.dat");
+    if ( data.open( QFile::ReadOnly ) ) {
+        QTextStream stream(&data);
+        QString line;
+        do {
+            line = stream.readLine();
+
+            QString recString = line.mid( 75, 6 );
+            double raHH = recString.mid( 0, 2 ).toDouble();
+            double raMM = recString.mid( 2, 2 ).toDouble();
+            double raSS = recString.mid( 4, 2 ).toDouble();
+
+            qreal longitude = ( raHH + raMM / 60.0 + raSS / 3600.0 ) * 15.0 - 180.0;
+
+            QString decString = line.mid( 83, 7 );
+            double deSign = ( decString.mid( 0, 1 ) == "-" ) ? -1.0 : 1.0;
+            double deHH = decString.mid( 1, 2 ).toDouble();
+            double deMM = decString.mid( 3, 2 ).toDouble();
+            double deSS = decString.mid( 5, 2 ).toDouble();
+
+            double deValue = deSign * ( deHH + deMM / 60.0 + deSS / 3600.0 ) / 180.0 * M_PI;
+
+            qreal latitude = deValue * 180.0 / M_PI;
+
+            QString magString = line.mid( 102, 5 );
+            double magValue = magString.toDouble();
+
+            QString styleId;
+            if ( magValue < -1 ) {
+                styleId = "mag0";
+            }
+            else if ( magValue < 0 ) {
+                styleId = "mag1";
+            }
+            else if ( magValue < 1 ) {
+                styleId = "mag2";
+            }
+            else if ( magValue < 2 ) {
+                styleId = "mag3";
+            }
+            else if ( magValue < 3 ) {
+                styleId = "mag4";
+            }
+            else if ( magValue < 4 ) {
+                styleId = "mag5";
+            }
+            else if ( magValue < 5 ) {
+                styleId = "mag6";
+            }
+            else if ( magValue < 6 ) {
+                styleId = "mag7";
+            }
+            else {
+                styleId = "mag7";
+            }
+
+            out << "   <Placemark> \n"
+                << "       <styleUrl>#" << styleId << "</styleUrl> \n"
+                << "       <Point> \n"
+                << "           <coordinates>" << longitude << "," << latitude << ",0" << "</coordinates> \n"
+                << "       </Point> \n"
+                << "   </Placemark> \n";
+
+        } while ( !line.isNull() );
+    }
+
+    out << "</Document> \n"
+        << "</kml> \n";
+
+    file.close();
+}
+
+int main(int argc, char *argv[])
+{
+    QCoreApplication  app(argc, argv);
+
+    exportToDat();
+    exportToKml();
 
     QFile starFile("stars.dat");
     starFile.open(QIODevice::ReadOnly);
