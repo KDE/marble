@@ -360,7 +360,7 @@ void EclipsesPlugin::showEclipse( int index )
 
     if( item ) {
         Q_ASSERT( m_clock );
-        m_clock->stop();
+        //m_clock->stop();
         m_clock->setDateTime( item->dateTime() );
     }
 }
