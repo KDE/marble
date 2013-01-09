@@ -168,9 +168,6 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     // When the settings have been changed, write to disk.
     connect( this, SIGNAL( settingsChanged() ), this, SLOT( syncSettings() ) );
 
-    connect( d->m_marbleWidget, SIGNAL( pluginSettingsChanged() ),
-             this,              SLOT( writePluginSettings() ) );
-    
     initializeCustomTimezone();
 }
 
@@ -210,11 +207,6 @@ void QtMarbleConfigDialog::syncSettings()
     }
     
     QNetworkProxy::setApplicationProxy(proxy);
-}
-
-void QtMarbleConfigDialog::writePluginSettings()
-{
-    d->m_marbleWidget->writePluginSettings( d->m_settings );
 }
 
 void QtMarbleConfigDialog::readSettings()
@@ -445,7 +437,9 @@ void QtMarbleConfigDialog::writeSettings()
         d->m_settings.setValue( "pluginEnabled", pluginEnabled );
         d->m_settings.setValue( "pluginVisible", pluginVisible );
     d->m_settings.endGroup();
-    
+
+    d->m_marbleWidget->writePluginSettings( d->m_settings );
+
     emit settingsChanged();
 
     if (    d->m_initialGraphicsSystem != graphicsSystem()

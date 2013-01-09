@@ -130,11 +130,6 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
      */
     void syncSettings();
 
-    /**
-     * Saves the settings of all plugins.
-     */
-    void writePluginSettings();
-
     private:
     Q_DISABLE_COPY( QtMarbleConfigDialog )
 
