@@ -1263,9 +1263,6 @@ QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 
 void MarbleWidget::readPluginSettings( QSettings& settings )
 {
-    disconnect( &d->m_map, SIGNAL( pluginSettingsChanged() ),
-                this,      SIGNAL( pluginSettingsChanged() ) );
-
     foreach( RenderPlugin *plugin, renderPlugins() ) {
         settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
 
@@ -1279,9 +1276,6 @@ void MarbleWidget::readPluginSettings( QSettings& settings )
 
         settings.endGroup();
     }
-
-    connect( &d->m_map, SIGNAL( pluginSettingsChanged() ),
-             this,      SIGNAL( pluginSettingsChanged() ) );
 }
 
 void MarbleWidget::writePluginSettings( QSettings& settings ) const
