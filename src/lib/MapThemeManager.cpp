@@ -67,6 +67,8 @@ public:
      */
     void updateMapThemeModel();
 
+    void watchPaths();
+
     /**
      * @brief Adds directory paths and .dgml file paths to the given QStringList.
      */
@@ -86,20 +88,25 @@ public:
     static GeoSceneDocument* loadMapThemeFile( const QString& mapThemeId );
 
     /**
-     * @brief Returns all directory paths and .dgml file paths below local and
-     *        system map directory.
-     */
-    static QStringList pathsToWatch();
-
-    /**
      * @brief Helper method for updateMapThemeModel().
      */
     QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
+
+    static void deleteDirectory( const QString& path );
+    static void deleteDataDirectories( const QString& path );
+    static void deletePreview( const QString& path );
 
     MapThemeManager *const q;
     StandardItemModelWithRoleNames m_mapThemeModel;
     QFileSystemWatcher m_fileSystemWatcher;
     bool m_isInitialized;
+
+private:
+    /**
+     * @brief Returns all directory paths and .dgml file paths below local and
+     *        system map directory.
+     */
+    QStringList pathsToWatch();
 };
 
 StandardItemModelWithRoleNames::StandardItemModelWithRoleNames( int rows, int columns, QObject *parent ) :
@@ -134,8 +141,7 @@ MapThemeManager::MapThemeManager( QObject *parent )
     : QObject( parent ),
       d( new Private( this ) )
 {
-    const QStringList paths = d->pathsToWatch();
-    d->m_fileSystemWatcher.addPaths( paths );
+    d->watchPaths();
     connect( &d->m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
              this, SLOT( directoryChanged( const QString& )));
     connect( &d->m_fileSystemWatcher, SIGNAL( fileChanged( const QString& )),
@@ -170,6 +176,17 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
         return 0;
 
     return Private::loadMapThemeFile( mapThemeStringID );
+}
+
+void MapThemeManager::deleteMapTheme( const QString &mapThemeId )
+{
+    QDir mapThemeDir( QFileInfo( MarbleDirs::localPath() + "/maps/" + mapThemeId ).path() );
+    Private::deleteDirectory( mapThemeDir.path() + "/legend/" );
+    Private::deleteDataDirectories( mapThemeDir.path() + '/' );
+    Private::deletePreview( mapThemeDir.path() + '/' );
+    QFile( MarbleDirs::localPath() + "/maps/" + mapThemeId ).remove();
+    QFile( mapThemeDir.path() + "/legend.html" ).remove();
+    QDir().rmdir( mapThemeDir.path() );
 }
 
 GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& mapThemeStringID )
@@ -341,6 +358,7 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
     item->setData( QString( "<span style=\" max-width: 150 px;\"> "
                             + QObject::tr( description.toUtf8() ) + " </span>" ), Qt::ToolTipRole );
     item->setData( mapThemeID, Qt::UserRole + 1 );
+    item->setData( description, Qt::UserRole + 2 );
 
     itemList << item;
     itemList << new QStandardItem( mapTheme->head()->target() + '/'
@@ -375,12 +393,24 @@ void MapThemeManager::Private::updateMapThemeModel()
     }
 }
 
+void MapThemeManager::Private::watchPaths()
+{
+    QStringList const paths = pathsToWatch();
+    QStringList const files = m_fileSystemWatcher.files();
+    QStringList const directories = m_fileSystemWatcher.directories();
+    // Check each resource to add that it is not being watched already,
+    // otherwise some qWarning appears
+    foreach( const QString &resource, paths ) {
+        if ( !directories.contains( resource ) && !files.contains( resource ) ) {
+            m_fileSystemWatcher.addPath( resource );
+        }
+    }
+}
+
 void MapThemeManager::Private::directoryChanged( const QString& path )
 {
     mDebug() << "directoryChanged:" << path;
-
-    QStringList paths = Private::pathsToWatch();
-    m_fileSystemWatcher.addPaths( paths );
+    watchPaths();
 
     mDebug() << "Emitting themesChanged()";
     emit q->themesChanged();
@@ -462,6 +492,38 @@ void MapThemeManager::Private::addMapThemePaths( const QString& mapPathName, QSt
             }
         }
     }
+}
+
+void MapThemeManager::Private::deleteDirectory( const QString& path )
+{
+    QDir directory( path );
+    foreach( const QString &filename, directory.entryList( QDir::Files | QDir::NoDotAndDotDot ) )
+        QFile( path + filename ).remove();
+    QDir().rmdir( path );
+}
+
+void MapThemeManager::Private::deleteDataDirectories( const QString& path )
+{
+    QDir directoryv( path );
+    foreach( const QString &filename, directoryv.entryList( QDir::AllEntries | QDir::NoDotAndDotDot ) )
+    {
+        QString filepath = path + '/' + filename;
+        QFile file( filepath );
+        if( QFileInfo( filepath ).isDir() && filename.contains( QRegExp( "^[0-9]+$" ) ) )
+        {
+            deleteDataDirectories( filepath );
+            QDir().rmdir( filepath );
+        }
+        else if( filename.contains( QRegExp( "^[0-9]\\..+" ) ) )
+            file.remove();
+    }
+}
+
+void MapThemeManager::Private::deletePreview( const QString& path )
+{
+    QDir directoryv( path, "preview.*" );
+    foreach( const QString &filename, directoryv.entryList() )
+        QFile( path + '/' + filename ).remove();
 }
 
 }

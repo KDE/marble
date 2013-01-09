@@ -27,6 +27,8 @@ namespace Ui
 namespace Marble
 {
 
+class MarbleWidget;
+
 class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
@@ -40,8 +42,6 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
     ~WikipediaPlugin();
      
     void initialize();
-
-    bool isInitialized() const;
 
     QString name() const;
     
@@ -73,6 +73,9 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
      */
     virtual void setSettings( const QHash<QString,QVariant> &settings );
 
+ protected:
+    bool eventFilter( QObject *object, QEvent *event );
+
  private Q_SLOTS:
     void readSettings();
     void writeSettings();
@@ -81,12 +84,11 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
     void checkNumberOfItems( quint32 number );
 
  private:
-    bool m_isInitialized;
-
-    QIcon m_icon;
+    const QIcon m_icon;
     Ui::WikipediaConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
-    QHash<QString,QVariant> m_settings;
+    bool m_showThumbnails;
+    MarbleWidget* m_marbleWidget;
 };
 
 }

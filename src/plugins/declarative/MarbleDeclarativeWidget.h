@@ -22,18 +22,21 @@
 #include <QtGui/QGraphicsProxyWidget>
 #include <QtCore/QList>
 #include <QtCore/QPoint>
+#include <QtDeclarative/QtDeclarative>
 
 using Marble::GeoDataCoordinates; // Ouch. For signal/slot connection across different namespaces
 
 namespace Marble
 {
-// Forward declaration
+// Forward declarations
+class AbstractFloatItem;
 class MarbleModel;
 class MarbleWidget;
 class RenderPlugin;
 class ViewportParams;
 }
 
+class DeclarativeDataPlugin;
 class ZoomButtonInterceptor;
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
@@ -60,6 +63,12 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Navigation* navigation READ navigation NOTIFY navigationChanged )
     Q_PROPERTY( Search* search READ search NOTIFY searchChanged )
     Q_PROPERTY( QObject* mapThemeModel READ mapThemeModel NOTIFY mapThemeModelChanged )
+    Q_PROPERTY( QList<QObject*> renderPlugins READ renderPlugins CONSTANT )
+    Q_PROPERTY( QList<QObject*> floatItems READ floatItems CONSTANT )
+
+    Q_PROPERTY(QDeclarativeListProperty<DeclarativeDataPlugin> dataLayers READ dataLayers)
+    Q_PROPERTY(QDeclarativeListProperty<QObject> children READ childList)
+    Q_CLASSINFO("DefaultProperty", "children")
 
 public:
     /** Constructor */
@@ -70,8 +79,6 @@ public:
     Marble::MarbleModel *model();
 
     const Marble::ViewportParams *viewport() const;
-
-    QList<Marble::RenderPlugin *> renderPlugins() const;
 
     bool workOffline() const;
 
@@ -84,6 +91,10 @@ public:
     void setActiveRenderPlugins( const QStringList &items );
 
     QStringList activeRenderPlugins() const;
+
+    QDeclarativeListProperty<QObject> childList();
+
+    QDeclarativeListProperty<DeclarativeDataPlugin> dataLayers();
 
 Q_SIGNALS:
     /** Forwarded from MarbleWidget. Zoom value and/or center position have changed */
@@ -119,6 +130,18 @@ public Q_SLOTS:
     void centerOn( const Marble::GeoDataLatLonAltBox &bbox );
 
     void centerOn( const GeoDataCoordinates &coordinates );
+
+    QList<QObject*> renderPlugins() const;
+
+    Marble::RenderPlugin* renderPlugin( const QString & name );
+
+    bool containsRenderPlugin( const QString & name );
+
+    QList<QObject*> floatItems() const;
+
+    Marble::AbstractFloatItem* floatItem( const QString & name );
+
+    bool containsFloatItem( const QString & name );
 
     /** Returns a list of active (!) float items */
     QStringList activeFloatItems() const;
@@ -192,6 +215,8 @@ public Q_SLOTS:
 
     void downloadArea( int topTileLevel, int bottomTileLevel );
 
+    void setDataPluginDelegate( const QString &plugin, QDeclarativeComponent* delegate );
+
 protected:
     virtual bool event ( QEvent * event );
 
@@ -203,8 +228,10 @@ private Q_SLOTS:
     void forwardMouseClick( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
 private:
+    static void addLayer( QDeclarativeListProperty<DeclarativeDataPlugin> *list, DeclarativeDataPlugin *layer );
+
     /** Wrapped MarbleWidget */
-    Marble::MarbleWidget* m_marbleWidget;
+    Marble::MarbleWidget *const m_marbleWidget;
 
     bool m_inputEnabled;
 
@@ -220,7 +247,11 @@ private:
 
     Coordinate m_center;
 
-    ZoomButtonInterceptor* m_interceptor;
+    ZoomButtonInterceptor *const m_interceptor;
+
+    QList<DeclarativeDataPlugin*> m_dataLayers;
+
+    QList<QObject*> m_children;
 };
 
 #endif

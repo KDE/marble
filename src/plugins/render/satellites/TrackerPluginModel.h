@@ -12,6 +12,7 @@
 #define MARBLE_TRACKERPLUGINMODEL_H
 
 #include <QtCore/QObject>
+#include <QHash>
 
 class QUrl;
 
@@ -19,7 +20,6 @@ namespace Marble
 {
 
 class GeoDataTreeModel;
-class PluginManager;
 class TrackerPluginItem;
 class TrackerPluginModelPrivate;
 
@@ -29,6 +29,7 @@ class TrackerPluginModelPrivate;
 class TrackerPluginModel : public QObject
 {
     Q_OBJECT
+
 public:
     /**
      * Constructs a model with the given @p treeModel and @p pluginManager.
@@ -36,7 +37,7 @@ public:
      * These parameters can be obtained by calling treeModel() and
      * pluginManager() on an instance of MarbleModel.
      */
-    TrackerPluginModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager  );
+    TrackerPluginModel( GeoDataTreeModel *treeModel );
 
     virtual ~TrackerPluginModel();
 
@@ -48,6 +49,11 @@ public:
      * @see beginUpdateItems, endUpdateItems
      */
     void addItem( TrackerPluginItem *mark );
+
+    /**
+     * Return all available items.
+     */
+    QVector<TrackerPluginItem*> items() const;
 
     /**
      * Remove all items from the model.
@@ -73,6 +79,11 @@ public:
     void endUpdateItems();
 
     /**
+     * Load settings.
+     */
+    void loadSettings( const QHash<QString, QVariant> &settings );
+
+    /**
      * Adds @p url to the download queue.
      * Once the file is downloaded, parseFile() will be called with its first
      * parameter equals to @p id.
@@ -88,12 +99,17 @@ public:
      */
     virtual void parseFile( const QString &id, const QByteArray &file );
 
+Q_SIGNALS:
+    void itemUpdateStarted();
+    void itemUpdateEnded();
+    void fileParsed( const QString &id );
+
 private:
     TrackerPluginModelPrivate *d;
     Q_PRIVATE_SLOT( d, void downloaded( const QString &, const QString & ) );
     Q_PRIVATE_SLOT( d, void update() );
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_TRACKERPLUGINMODEL_H

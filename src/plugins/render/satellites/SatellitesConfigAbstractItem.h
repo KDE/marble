@@ -21,7 +21,9 @@ class SatellitesConfigAbstractItem
 {
 public:
     enum {
-        UrlListRole = Qt::UserRole
+        IdListRole      = Qt::UserRole + 0,
+        FullIdListRole  = Qt::UserRole + 1,
+        UrlListRole     = Qt::UserRole + 2
     };
 
     virtual ~SatellitesConfigAbstractItem();
@@ -43,16 +45,21 @@ public:
     virtual int indexOf( const SatellitesConfigAbstractItem *child ) const = 0;
     virtual int childrenCount() const = 0;
 
+    virtual Qt::ItemFlags flags() const;
+    virtual void setFlags( Qt::ItemFlags flags );
+
+    virtual void clear();
+
 protected:
     explicit SatellitesConfigAbstractItem( const QString &name );
 
 private:
     QString m_name;
     SatellitesConfigAbstractItem *m_parent;
-
+    Qt::ItemFlags m_flags;
     bool m_checked;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_SATELLITESCONFIGABSTRACTITEM_H

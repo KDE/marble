@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
+// Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
 #include "SatellitesConfigNodeItem.h"
@@ -13,7 +14,9 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
-using namespace Marble;
+#include "MarbleDebug.h"
+
+namespace Marble {
 
 SatellitesConfigNodeItem::SatellitesConfigNodeItem( const QString &name )
     : SatellitesConfigAbstractItem( name )
@@ -39,14 +42,22 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
     }
 
     switch ( role ) {
+    case IdListRole:
     case UrlListRole: {
-        QStringList urlList;
+        QStringList list;
         foreach( SatellitesConfigAbstractItem *item, m_children ) {
             if ( item->data( column, Qt::CheckStateRole ).toInt() != Qt::Unchecked ) {
-                urlList.append( item->data( column, role).toStringList() );
+                list.append( item->data( column, role).toStringList() );
             }
         }
-        return urlList;
+        return list;
+    }
+    case FullIdListRole: {
+        QStringList fullIdList;
+        foreach( SatellitesConfigAbstractItem *item, m_children ) {
+            fullIdList.append( item->data( column, role ).toStringList() );
+        }
+        return fullIdList;
     }
     case Qt::CheckStateRole: {
         bool oneChecked = false;
@@ -66,7 +77,6 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
                 if ( oneChecked ) {
                     return Qt::PartiallyChecked;
                 }
-                break;
             }
         }
 
@@ -124,3 +134,16 @@ void SatellitesConfigNodeItem::appendChild( SatellitesConfigAbstractItem *item )
     item->setParent( this );
     m_children.append( item );
 }
+
+void SatellitesConfigNodeItem::clear()
+{
+    for( int i = childrenCount(); i > 0; --i ) {
+        SatellitesConfigAbstractItem *item = m_children.at( i - 1 );
+        item->clear();
+        m_children.remove( i - 1 );
+        delete item;
+    }
+}
+
+} // namespace Marble
+

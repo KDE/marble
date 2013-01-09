@@ -57,7 +57,7 @@ GeoNode* GPXnameTagHandler::parse(GeoParser& parser) const
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << gpxTag_name << "> : " << route->name();
 #endif
-    }        
+    }
     return 0;
 }
 

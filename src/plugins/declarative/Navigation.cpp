@@ -95,7 +95,7 @@ Marble::RouteSegment NavigationPrivate::nextRouteSegment()
 Navigation::Navigation( QObject* parent) :
     QObject( parent ), d( new NavigationPrivate )
 {
-    connect( &d->m_voiceNavigation, SIGNAL( instructionChanged() ), this, SIGNAL( voiceNavigationAnnouncementChanged() ) );
+    connect( &d->m_voiceNavigation, SIGNAL(instructionChanged()), this, SIGNAL(voiceNavigationAnnouncementChanged()) );
 }
 
 Navigation::~Navigation()
@@ -110,20 +110,20 @@ void Navigation::setMarbleWidget( MarbleWidget* widget )
         // Avoid the QWidget based warning
         d->m_marbleWidget->model()->routingManager()->setShowGuidanceModeStartupWarning( false );
         connect( d->m_marbleWidget->model()->routingManager()->routingModel(),
-                SIGNAL( positionChanged() ), this, SLOT( update() ) );
+                SIGNAL(positionChanged()), this, SLOT(update()) );
 
         d->m_autoNavigation = new Marble::AutoNavigation( d->m_marbleWidget->model(), d->m_marbleWidget->viewport(), this );
-        connect( d->m_autoNavigation, SIGNAL( zoomIn( FlyToMode ) ),
-                 d->m_marbleWidget, SLOT( zoomIn() ) );
-        connect( d->m_autoNavigation, SIGNAL( zoomOut( FlyToMode ) ),
-                 d->m_marbleWidget, SLOT( zoomOut() ) );
-        connect( d->m_autoNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
-                 d->m_marbleWidget, SLOT( centerOn( const GeoDataCoordinates & ) ) );
+        connect( d->m_autoNavigation, SIGNAL(zoomIn(FlyToMode)),
+                 d->m_marbleWidget, SLOT(zoomIn()) );
+        connect( d->m_autoNavigation, SIGNAL(zoomOut(FlyToMode)),
+                 d->m_marbleWidget, SLOT(zoomOut()) );
+        connect( d->m_autoNavigation, SIGNAL(centerOn(GeoDataCoordinates,bool)),
+                 d->m_marbleWidget, SLOT(centerOn(GeoDataCoordinates)) );
 
-        connect( d->m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
-                 d->m_autoNavigation, SLOT( inhibitAutoAdjustments() ) );
-        connect( d->m_marbleWidget->model()->positionTracking(), SIGNAL( statusChanged( PositionProviderStatus ) ),
-                 &d->m_voiceNavigation, SLOT( handleTrackingStatusChange( PositionProviderStatus ) ) );
+        connect( d->m_marbleWidget, SIGNAL(visibleLatLonAltBoxChanged()),
+                 d->m_autoNavigation, SLOT(inhibitAutoAdjustments()) );
+        connect( d->m_marbleWidget->model()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
+                 &d->m_voiceNavigation, SLOT(handleTrackingStatusChange(PositionProviderStatus)) );
 
         d->m_marbleWidget->model()->routingManager()->setAutoNavigation( d->m_autoNavigation );
     }

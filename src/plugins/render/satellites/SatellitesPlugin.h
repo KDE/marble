@@ -6,25 +6,18 @@
 // the source code.
 //
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
+// Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
 #ifndef MARBLE_SATELLITESPLUGIN_H
 #define MARBLE_SATELLITESPLUGIN_H
 
 #include "RenderPlugin.h"
+#include "SatellitesConfigDialog.h"
 #include "DialogConfigurationInterface.h"
 #include "SatellitesModel.h"
 
-#include "sgp4/sgp4unit.h"
-
 #include <QtCore/QObject>
-
-class QCheckBox;
-
-namespace Ui
-{
-    class SatellitesConfigDialog;
-}
 
 namespace Marble
 {
@@ -35,7 +28,8 @@ class SatellitesConfigModel;
  * @brief This plugin displays satellites and their orbits.
  *
  */
-class SatellitesPlugin : public RenderPlugin, public DialogConfigurationInterface
+class SatellitesPlugin : public RenderPlugin,
+                         public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
@@ -63,34 +57,42 @@ public:
     void initialize();
     bool isInitialized() const;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
+    bool render( GeoPainter *painter,
+                 ViewportParams *viewport,
+                 const QString &renderPos,
+                 GeoSceneLayer *layer );
 
     QHash<QString, QVariant> settings() const;
     void setSettings( const QHash<QString, QVariant> &settings );
 
-    QDialog *configDialog();
+    SatellitesConfigDialog *configDialog();
 
 private Q_SLOTS:
+    void activate();
     void enableModel( bool enabled );
     void visibleModel( bool visible );
     void readSettings();
     void writeSettings();
     void updateSettings();
+    void updateDataSourceConfig( const QString &source );
+    void dataSourceParsed( const QString &source );
+    void userDataSourceAdded( const QString &source );
+
+protected:
+    void activateDataSource( const QString &source );
+    void addBuiltInDataSources();
 
 private:
-    void setupConfigModel();
-
-    SatellitesModel *m_model;
+    SatellitesModel *m_satModel;
+    SatellitesConfigModel *m_configModel;
 
     bool m_isInitialized;
     QHash<QString, QVariant> m_settings;
-    QHash<QString, QCheckBox *> m_boxHash;
+    QStringList m_newDataSources;
 
-    QDialog *m_configDialog;
-    SatellitesConfigModel *m_configModel;
-    Ui::SatellitesConfigDialog *ui_configWidget;
+    SatellitesConfigDialog *m_configDialog;
 };
 
-}
+} // namespace Marble
 
 #endif // MARBLE_SATELLITESPLUGIN_H

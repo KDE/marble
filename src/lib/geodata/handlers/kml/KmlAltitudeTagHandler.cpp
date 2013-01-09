@@ -15,6 +15,7 @@
 
 #include "MarbleGlobal.h"
 #include "GeoDataLookAt.h"
+#include "GeoDataGroundOverlay.h"
 #include "GeoParser.h"
 #include "GeoDataCoordinates.h"
 
@@ -31,15 +32,15 @@ KML_DEFINE_TAG_HANDLER( altitude )
 
         GeoStackItem parentItem = parser.parentElement();
 
+        qreal const altitude = parser.readElementText().trimmed().toDouble();
         if ( parentItem.is<GeoDataLookAt>() ){
-
-            QString altitudeTemp = parser.readElementText().trimmed ();
-            qreal altitude = altitudeTemp.toDouble();
             parentItem.nodeAs<GeoDataLookAt>()->setAltitude( altitude );
 #ifdef DEBUG_TAGS
             mDebug () << "Parsed <" << kmlTag_altitude << "> containing: " <<
             altitude << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
+        } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
+            parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitude( altitude );
         }
 
       return 0;

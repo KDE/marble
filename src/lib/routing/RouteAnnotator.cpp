@@ -33,7 +33,7 @@ public:
 
     const GeoDataDocument* m_base;
 
-    MarbleRunnerManager* m_manager;
+    MarbleRunnerManager m_manager;
 
     QVector<GeoDataPlacemark> m_placemarks;
 
@@ -43,7 +43,12 @@ public:
 };
 
 RouteAnnotatorPrivate::RouteAnnotatorPrivate( MarbleModel* marbleModel, AlternativeRoutesModel* model, GeoDataDocument* route, const GeoDataDocument* base ) :
-        m_marbleModel( marbleModel ), m_model( model ), m_route( route ), m_base( base ), m_manager( 0 ), m_requests( 0 )
+    m_marbleModel( marbleModel ),
+    m_model( model ),
+    m_route( route ),
+    m_base( base ),
+    m_manager( marbleModel->pluginManager() ),
+    m_requests( 0 )
 {
     // nothing to do
 }
@@ -51,7 +56,8 @@ RouteAnnotatorPrivate::RouteAnnotatorPrivate( MarbleModel* marbleModel, Alternat
 RouteAnnotator::RouteAnnotator( MarbleModel* marbleModel, AlternativeRoutesModel* model, GeoDataDocument* route, const GeoDataDocument* base ) :
         d( new RouteAnnotatorPrivate( marbleModel, model, route, base ) )
 {
-    // nothing to do
+    connect( &d->m_manager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
+             this, SLOT( retrieveGeocodeResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
 }
 
 RouteAnnotator::~RouteAnnotator()
@@ -61,19 +67,13 @@ RouteAnnotator::~RouteAnnotator()
 
 void RouteAnnotator::run()
 {
-    if ( !d->m_manager ) {
-        d->m_manager = new MarbleRunnerManager( d->m_marbleModel->pluginManager(), this );
-        connect( d->m_manager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-                 this, SLOT( retrieveGeocodeResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
-    }
-
     GeoDataLineString* points = AlternativeRoutesModel::waypoints( d->m_route );
     if (!d->m_base) {
         int half = points->size() / 2;
         for ( int i = points->size() / 4; i < points->size(); i += half )
         {
             ++d->m_requests;
-            d->m_manager->reverseGeocoding( points->at( i ) );
+            d->m_manager.reverseGeocoding( points->at( i ) );
         }
     } else {
         QVector<qreal> deviation = AlternativeRoutesModel::deviation( d->m_route, d->m_base );
@@ -106,7 +106,7 @@ void RouteAnnotator::run()
 
         int half = 1 + ( maxEndOffset-maxStartOffset ) / 2;
         for ( int i=maxStartOffset + ( maxEndOffset-maxStartOffset ) / 4; i<maxEndOffset; i += half ) {
-            d->m_manager->reverseGeocoding( points->at( i ) );
+            d->m_manager.reverseGeocoding( points->at( i ) );
             ++d->m_requests;
         }
     }
@@ -123,8 +123,10 @@ void RouteAnnotator::retrieveGeocodeResult( const GeoDataCoordinates &coordinate
             ++counter[extended.value("road").value().toString()];
         }
 
-        foreach( const QString &key, counter.keys() ) {
-            if ( counter[key] > 1 ) {
+        QMap<QString,int>::iterator itpoint = counter.begin();
+        QMap<QString,int>::iterator const endpoint = counter.end();
+        for (; itpoint != endpoint; ++itpoint ) {
+            if ( counter[itpoint.key()] > 1 ) {
                 GeoDataExtendedData extended = d->m_placemarks.first().extendedData();
                 QString name = "Via %1";
                 d->m_route->setName( name.arg( extended.value("road").value().toString() ) );

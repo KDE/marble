@@ -5,8 +5,10 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2010 Torsten Rahn <tackat@kde.org>
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2006-2010 Torsten Rahn        <tackat@kde.org>
+// Copyright 2007      Inge Wallin         <ingwa@kde.org>
+// Copyright 2012      Illya Kovalevskyy   <illya.kovalevskyy@gmail.com>
+// Copyright 2012      Mohammed Nafees     <nafees.technocool@gmail.com>
 //
 
 #include "QtMainWindow.h"
@@ -38,6 +40,7 @@
 #include <QtGui/QScrollArea>
 #include <QtGui/QClipboard>
 #include <QtGui/QShortcut>
+#include <QtGui/QDockWidget>
 #include <QtNetwork/QNetworkProxy>
 
 #include "SearchInputWidget.h"
@@ -59,6 +62,7 @@
 #include "MarbleClock.h"
 #include "BookmarkManager.h"
 #include "NewBookmarkFolderDialog.h"
+#include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
@@ -72,6 +76,10 @@
 #include "StackableWindow.h"
 #include "GoToDialog.h"
 #include "MarbleWidgetInputHandler.h"
+#include "Planet.h"
+#include "LegendWidget.h"
+#include "SearchWidget.h"
+#include "FileViewWidget.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -96,6 +104,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_sunControlDialog( 0 ),
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
+        m_panelMenu( 0 ),
         m_downloadRegionAction( 0 ),
         m_osmEditAction( 0 ),
         m_zoomLabel( 0 ),
@@ -103,7 +112,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_routingWindow( 0 ),
         m_trackingWindow( 0 ),
         m_gotoDialog( 0 ),
-        m_routingWidget( 0 )
+        m_routingWidget( 0 ),
+        m_searchDock( 0 )
 {
 #ifdef Q_WS_MAEMO_5
     setAttribute( Qt::WA_Maemo5StackedWindow );
@@ -140,6 +150,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     createActions();
     createMenus();
     createStatusBar();
+    createDockWidgets();
+
+    connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateAtmosphereMenu()));
 
     connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
              this, SLOT( updateMapEditButtonVisibility( QString ) ) );
@@ -162,6 +175,7 @@ void MainWindow::initObject(const QVariantMap& cmdLineSettings)
     QCoreApplication::processEvents ();
     setupStatusBar();
     readSettings(cmdLineSettings);
+    showSearch();
 }
 
 void MainWindow::createActions()
@@ -190,7 +204,7 @@ void MainWindow::createActions()
      m_printAct->setStatusTip(tr("Print a screenshot of the map"));
      connect(m_printAct, SIGNAL(triggered()), this, SLOT(printMapScreenShot()));
 
-     m_printPreviewAct = new QAction( QIcon(":/icons/document-printpreview.png"), tr("Print Previe&w ..."), this);
+     m_printPreviewAct = new QAction( QIcon(":/icons/document-print-preview.png"), tr("Print Previe&w ..."), this);
      m_printPreviewAct->setStatusTip(tr("Print a screenshot of the map"));
      connect(m_printPreviewAct, SIGNAL(triggered()), m_controlView, SLOT(printPreview()));
 
@@ -204,7 +218,7 @@ void MainWindow::createActions()
      m_copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
 
-     m_osmEditAction = new QAction( tr( "&Edit Map" ), this );
+     m_osmEditAction = new QAction( QIcon(":/icons/edit-map.png"), tr( "&Edit Map" ), this );
      m_osmEditAction->setShortcut(tr( "Ctrl+E" ) );
      m_osmEditAction->setStatusTip(tr( "Edit the current map region in an external editor" ) );
      updateMapEditButtonVisibility( m_controlView->marbleWidget()->mapThemeId() );
@@ -214,16 +228,9 @@ void MainWindow::createActions()
      m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
      connect(m_configDialogAct, SIGNAL(triggered()), this, SLOT(editSettings()));
 
-     m_copyCoordinatesAct = new QAction( QIcon(":/icons/edit-copy.png"), tr("C&opy Coordinates"), this);
+     m_copyCoordinatesAct = new QAction( QIcon(":/icons/copy-coordinates.png"), tr("C&opy Coordinates"), this);
      m_copyCoordinatesAct->setStatusTip(tr("Copy the center coordinates as text"));
      connect(m_copyCoordinatesAct, SIGNAL(triggered()), this, SLOT(copyCoordinates()));
-
-     m_sideBarAct = new QAction( QIcon(":/icons/view-sidetree.png"), tr("Show &Navigation Panel"), this);
-     m_sideBarAct->setShortcut(tr("F9"));
-     m_sideBarAct->setCheckable( true );
-     m_sideBarAct->setChecked( true );
-     m_sideBarAct->setStatusTip(tr("Show Navigation Panel"));
-     connect(m_sideBarAct, SIGNAL(triggered( bool )), this, SLOT( showSideBar( bool )));
 
      m_fullScreenAct = new QAction( QIcon(":/icons/view-fullscreen.png"), tr("&Full Screen Mode"), this);
      m_fullScreenAct->setShortcut(tr("Ctrl+Shift+F"));
@@ -231,18 +238,18 @@ void MainWindow::createActions()
      m_fullScreenAct->setStatusTip(tr("Full Screen Mode"));
      connect(m_fullScreenAct, SIGNAL(triggered( bool )), this, SLOT( showFullScreen( bool )));
 
-     m_statusBarAct = new QAction( tr("&Status Bar"), this);
+     m_statusBarAct = new QAction( tr("&Show Status Bar"), this);
      m_statusBarAct->setCheckable( true );
      m_statusBarAct->setStatusTip(tr("Show Status Bar"));
      connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
 
 
-     m_lockFloatItemsAct = new QAction( tr("Lock Position"),this);
+     m_lockFloatItemsAct = new QAction( QIcon(":/icons/unlock.png"), tr("Lock Position"),this);
      m_lockFloatItemsAct->setCheckable( true );
      m_lockFloatItemsAct->setStatusTip(tr("Lock Position of Floating Items"));
      connect(m_lockFloatItemsAct, SIGNAL(triggered( bool )), this, SLOT( lockPosition( bool )));
 
-     m_showCloudsAct = new QAction( tr("&Clouds"), this);
+     m_showCloudsAct = new QAction( QIcon(":/icons/clouds.png"), tr("&Clouds"), this);
      m_showCloudsAct->setCheckable( true );
      m_showCloudsAct->setStatusTip(tr("Show Real Time Cloud Cover"));
      connect(m_showCloudsAct, SIGNAL(triggered( bool )), this, SLOT( showClouds( bool )));
@@ -251,12 +258,20 @@ void MainWindow::createActions()
      m_workOfflineAct->setCheckable( true );
      connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
 
-     m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
+     m_showAtmosphereAct = new QAction( QIcon(":/icons/atmosphere.png"), tr("&Atmosphere"), this);
+     m_showAtmosphereAct->setVisible( false );
      m_showAtmosphereAct->setCheckable( true );
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
      connect(m_showAtmosphereAct, SIGNAL(triggered( bool )), this, SLOT( showAtmosphere( bool )));
+     foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+         if ( plugin->nameId() == "atmosphere" ) {
+             m_showAtmosphereAct->setVisible( plugin->enabled() );
+             connect( plugin, SIGNAL( enabledChanged( bool ) ),
+                      m_showAtmosphereAct, SLOT( setVisible( bool ) ) );
+         }
+     }
 
-     m_controlTimeAct = new QAction( tr( "&Time Control..." ), this );
+     m_controlTimeAct = new QAction( QIcon(":/icons/clock.png"), tr( "&Time Control..." ), this );
      m_controlTimeAct->setStatusTip( tr( "Configure Time Control " ) );
      connect( m_controlTimeAct, SIGNAL( triggered() ), this, SLOT( controlTime() ) );
 
@@ -307,7 +322,7 @@ void MainWindow::createActions()
      connect( m_manageBookmarksAct, SIGNAL( triggered() ), this, SLOT( manageBookmarks() ) );
      
      // Map Wizard action
-     m_mapWizardAct = new QAction( tr("&Create a New Map..."), this );
+     m_mapWizardAct = new QAction( QIcon( ":/icons/create-new-map.png" ), tr("&Create a New Map..."), this );
      m_mapWizardAct->setStatusTip( tr( "A wizard guides you through the creation of your own map theme." ) );
      connect( m_mapWizardAct, SIGNAL( triggered() ), SLOT( showMapWizard() ) );
 }
@@ -349,7 +364,6 @@ void MainWindow::createMenus()
 
         menuBar()->addAction( m_manageBookmarksAct );
         menuBar()->addAction( m_aboutMarbleAct );
-        m_controlView->setSideBarShown( false );
         return;
     }
 
@@ -384,6 +398,7 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_reloadAct);
 
     m_fileMenu->addSeparator();
+    m_panelMenu = m_fileMenu->addMenu( "&Panels" );
     m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
     createInfoBoxesMenu();
 
@@ -403,7 +418,6 @@ void MainWindow::createMenus()
 
     m_fileMenu = menuBar()->addMenu(tr("&Settings"));
     m_fileMenu->addAction(m_statusBarAct);
-    m_fileMenu->addAction(m_sideBarAct);
     m_fileMenu->addAction(m_fullScreenAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_configDialogAct);
@@ -475,21 +489,19 @@ void MainWindow::createOnlineServicesMenu()
     }
 }
 
-void MainWindow::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoDataFolder &folder )
+void MainWindow::createBookmarksListMenu( QMenu *bookmarksListMenu, const GeoDataContainer *container )
 {
     //m_bookmarksListMenu->clear();
 
-    QVector<GeoDataPlacemark*> bookmarks = folder.placemarkList();
-    QVector<GeoDataPlacemark*>::const_iterator i = bookmarks.constBegin();
-    QVector<GeoDataPlacemark*>::const_iterator end = bookmarks.constEnd();
+    QVector<GeoDataPlacemark*> bookmarks = container->placemarkList();
 
-    for (; i != end; ++i ) {
-        QAction *bookmarkAct = new QAction( (*i)->name(), this );
+    foreach ( const GeoDataPlacemark *placemark, bookmarks ) {
+        QAction *bookmarkAct = new QAction( placemark->name(), this );
         QVariant var;
 
-        GeoDataLookAt* lookAt = (*i)->lookAt();
+        GeoDataLookAt* lookAt = placemark->lookAt();
         if ( !lookAt ) {
-            GeoDataCoordinates coordinates = (*i)->coordinate( m_controlView->marbleModel()->clockDateTime() );
+            GeoDataCoordinates coordinates = placemark->coordinate( m_controlView->marbleModel()->clockDateTime() );
             GeoDataLookAt coordinateToLookAt;
             coordinateToLookAt.setCoordinates( coordinates );
             coordinateToLookAt.setRange( marbleWidget()->lookAt().range() );
@@ -498,8 +510,7 @@ void MainWindow::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoD
             var.setValue( *lookAt );
         }
         bookmarkAct->setData( var );
-        m_bookmarksListMenu->addAction( bookmarkAct );
-
+        bookmarksListMenu->addAction( bookmarkAct );
     }
 
 }
@@ -508,6 +519,7 @@ void MainWindow::createBookmarkMenu()
     m_bookmarkMenu->clear();
     m_bookmarkMenu->addAction( m_addBookmarkAct );
     m_bookmarkMenu->addAction( m_toggleBookmarkDisplayAct );
+    m_toggleBookmarkDisplayAct->setChecked( m_controlView->marbleModel()->bookmarkManager()->document()->isVisible() );
     m_bookmarkMenu->addAction( m_setHomeAct );
     m_bookmarkMenu->addAction( m_manageBookmarksAct );
 
@@ -515,30 +527,28 @@ void MainWindow::createBookmarkMenu()
 
     m_bookmarkMenu->addAction( QIcon( ":/icons/go-home.png" ), "&Home",
                                m_controlView->marbleWidget(), SLOT( goHome() ) );
-    createFolderList();
+    createFolderList( m_bookmarkMenu, m_controlView->marbleModel()->bookmarkManager()->document() );
 }
 
-void MainWindow::createFolderList()
+void MainWindow::createFolderList( QMenu *bookmarksListMenu, const GeoDataContainer *container )
 {
-    QVector<GeoDataFolder*> folders = m_controlView->marbleModel()->bookmarkManager()->folders();
-
-    QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
-    QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
+    QVector<GeoDataFolder*> folders = container->folderList();
 
     if ( folders.size() == 1 ) {
-        createBookmarksListMenu( m_bookmarkMenu, *folders.first() );
-        connect( m_bookmarkMenu, SIGNAL( triggered ( QAction *) ),
-                                  this, SLOT( lookAtBookmark( QAction *) ) );
+        createBookmarksListMenu( bookmarksListMenu, folders.first() );
     }
     else {
-        for (; i != end; ++i ) {
-            QMenu *m_bookmarksListMenu = m_bookmarkMenu->addMenu( QIcon( ":/icons/folder-bookmark.png" ), (*i)->name() );
-
-            createBookmarksListMenu( m_bookmarksListMenu, *(*i) );
-            connect( m_bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
+        foreach ( const GeoDataFolder *folder, folders ) {
+            QMenu *subMenu = bookmarksListMenu->addMenu( QIcon( ":/icons/folder-bookmark.png" ), folder->name() );
+            createFolderList( subMenu, folder );
+            connect( subMenu, SIGNAL( triggered ( QAction *) ),
                                       this, SLOT( lookAtBookmark( QAction *) ) );
         }
     }
+
+    createBookmarksListMenu( bookmarksListMenu, container );
+    connect( bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
+                              this, SLOT( lookAtBookmark( QAction *) ) );
 }
 
 
@@ -643,6 +653,85 @@ void MainWindow::createStatusBar()
     statusBar()->hide();
 }
 
+void MainWindow::createDockWidgets()
+{
+    Q_ASSERT( !m_searchDock && "Please create dock widgets just once" );
+
+    setTabPosition( Qt::LeftDockWidgetArea, QTabWidget::North );
+    setTabPosition( Qt::RightDockWidgetArea, QTabWidget::North );
+
+    QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), this );
+    routingDock->setObjectName( "routingDock" );
+    routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    RoutingWidget* routingWidget = new RoutingWidget( m_controlView->marbleWidget(), this );
+    routingDock->setWidget( routingWidget );
+    addDockWidget( Qt::LeftDockWidgetArea, routingDock );
+
+    QDockWidget *locationDock = new QDockWidget( tr( "Location" ), this );
+    locationDock->setObjectName( "locationDock" );
+    locationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    CurrentLocationWidget* locationWidget = new CurrentLocationWidget( this );
+    locationWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    locationDock->setWidget( locationWidget );
+    addDockWidget( Qt::LeftDockWidgetArea, locationDock );
+
+    m_searchDock = new QDockWidget( tr( "Search" ), this );
+    m_searchDock->setObjectName( "searchDock" );
+    m_searchDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    SearchWidget* searchWidget = new SearchWidget( this );
+    searchWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    m_searchDock->setWidget( searchWidget );
+    addDockWidget( Qt::LeftDockWidgetArea, m_searchDock );
+
+    tabifyDockWidget( m_searchDock, routingDock );
+    tabifyDockWidget( routingDock, locationDock );
+    m_searchDock->raise();
+
+    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
+    searchWidget->setToolTip( tr( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
+    new QShortcut( searchShortcut, this, SLOT( showSearch() ) );
+
+    QDockWidget *mapViewDock = new QDockWidget( tr( "Map View" ), this );
+    mapViewDock->setObjectName( "mapViewDock" );
+    mapViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    MapViewWidget* mapViewWidget = new MapViewWidget( this );
+    mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    mapViewDock->setWidget( mapViewWidget );
+    addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
+
+    QDockWidget *fileViewDock = new QDockWidget( tr( "Files" ), this );
+    fileViewDock->setObjectName( "fileViewDock" );
+    fileViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    FileViewWidget* fileViewWidget = new FileViewWidget( this );
+    fileViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    fileViewDock->setWidget( fileViewWidget );
+    addDockWidget( Qt::LeftDockWidgetArea, fileViewDock );
+    fileViewDock->hide();
+
+    QDockWidget *legendDock = new QDockWidget( tr( "Legend" ), this );
+    legendDock->setObjectName( "legendDock" );
+    legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    LegendWidget* legendWidget = new LegendWidget( this );
+    legendWidget->setMarbleModel( m_controlView->marbleModel() );
+    connect( legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
+             m_controlView->marbleWidget(), SLOT( setPropertyValue( const QString &, bool ) ) );
+    legendDock->setWidget( legendWidget );
+    addDockWidget( Qt::LeftDockWidgetArea, legendDock );
+
+    tabifyDockWidget( mapViewDock, legendDock );
+    mapViewDock->raise();
+
+    if ( m_panelMenu ) {
+        m_panelMenu->addAction( routingDock->toggleViewAction() );
+        m_panelMenu->addAction( locationDock->toggleViewAction() );
+        m_panelMenu->addAction( m_searchDock->toggleViewAction() );
+        m_panelMenu->addAction( mapViewDock->toggleViewAction() );
+        m_panelMenu->addAction( fileViewDock->toggleViewAction() );
+        m_panelMenu->addAction( legendDock->toggleViewAction() );
+    }
+
+}
+
 void MainWindow::openMapSite()
 {
     if( !QDesktopServices::openUrl( QUrl( "http://edu.kde.org/marble/maps-4.5.php" ) ) )
@@ -659,8 +748,8 @@ void MainWindow::exportMapScreenShot()
     {
         // Take the case into account where no file format is indicated
         const char * format = 0;
-        if ( !fileName.endsWith("png", Qt::CaseInsensitive)
-           | !fileName.endsWith("jpg", Qt::CaseInsensitive) )
+        if ( !fileName.endsWith(QLatin1String( "png" ), Qt::CaseInsensitive)
+           | !fileName.endsWith(QLatin1String( "jpg" ), Qt::CaseInsensitive) )
         {
             format = "JPG";
         }
@@ -689,12 +778,33 @@ void MainWindow::showFullScreen( bool isChecked )
     m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
-void MainWindow::showSideBar( bool isChecked )
+#ifdef Q_WS_MAEMO_5
+void MainWindow::setOrientation( Orientation orientation )
 {
-    m_controlView->setSideBarShown( isChecked );
-
-    m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
+    switch ( orientation ) {
+    case OrientationAutorotate:
+       setAttribute( Qt::WA_Maemo5AutoOrientation );
+       break;
+    case OrientationLandscape:
+       setAttribute( Qt::WA_Maemo5LandscapeOrientation );
+       break;
+    case OrientationPortrait:
+       setAttribute( Qt::WA_Maemo5PortraitOrientation );
+       break;
+    }
 }
+
+MainWindow::Orientation MainWindow::orientation() const
+{
+    if ( testAttribute( Qt::WA_Maemo5LandscapeOrientation ) )
+        return OrientationLandscape;
+
+    if ( testAttribute( Qt::WA_Maemo5PortraitOrientation ) )
+        return OrientationPortrait;
+
+    return OrientationAutorotate;
+}
+#endif // Q_WS_MAEMO_5
 
 void MainWindow::copyCoordinates()
 {
@@ -977,24 +1087,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::createToolBar()
 {
-    QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
-    SearchInputWidget *searchField = new SearchInputWidget( this );
-    searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
-    searchField->setMaximumWidth( 400 );
-    connect( searchField, SIGNAL( search( QString ) ), m_controlView, SLOT( search( QString ) ) );
-    connect( searchField, SIGNAL( centerOn( const GeoDataCoordinates &) ),
-             m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates & ) ) );
-    connect( m_controlView, SIGNAL( searchFinished() ), searchField, SLOT( disableSearchAnimation() ) );
-
-    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
-    searchField->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
-    new QShortcut( searchShortcut, searchField, SLOT( setFocus() ) );
-    toolBar->addWidget( searchField );
+//    QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
+//    toolBar->setObjectName( "mainToolBar" );
+//    toolBar->addWidget( ... );
 }
 
 QString MainWindow::readMarbleDataPath()
 {
-     QSettings settings("kde.org", "Marble Desktop Globe");
+     QSettings settings;
 
      settings.beginGroup("MarbleWidget");
          QString marbleDataPath;
@@ -1006,20 +1106,17 @@ QString MainWindow::readMarbleDataPath()
 
 void MainWindow::readSettings(const QVariantMap& overrideSettings)
 {
-     QSettings settings("kde.org", "Marble Desktop Globe");
+     QSettings settings;
 
      settings.beginGroup("MainWindow");
          resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
-         QByteArray sideBarState = settings.value( "sideBarState", QByteArray() ).toByteArray();
-         m_controlView->setSideBarState( sideBarState );
-         if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-             showSideBar(settings.value("sideBar", false ).toBool());
-         }
-         else {
-             showSideBar(settings.value("sideBar", true ).toBool());
-         }
+#ifdef Q_WS_MAEMO_5
+         const Orientation orientation = (Orientation)settings.value( "orientation", (int)OrientationLandscape ).toInt();
+         setOrientation( orientation );
+#endif // Q_WS_MAEMO_5
+         m_controlView->setSideBarShown( false );
          showStatusBar(settings.value("statusBar", false ).toBool());
          show();
          showClouds(settings.value("showClouds", true ).toBool());
@@ -1027,6 +1124,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          showAtmosphere(settings.value("showAtmosphere", true ).toBool());
          m_lastFileOpenPath = settings.value("lastFileOpenDir", QDir::homePath()).toString();
          showBookmarks( settings.value( "showBookmarks", true ).toBool() );
+         restoreState( settings.value("windowState").toByteArray() );
      settings.endGroup();
 
      setUpdatesEnabled(false);
@@ -1069,7 +1167,18 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
                     settings.value("quitLongitude", 0.0).toDouble(),
                     settings.value("quitLatitude", 0.0).toDouble() );
                 if (! isDistanceOverwritten) {
-                    m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+                    if ( settings.contains("quitRadius") ) {
+                        // provide a default value in case "quitRadius" contains garbage
+                        m_controlView->marbleWidget()->setRadius( settings.value("quitRadius", 1350).toInt() );
+                    }
+                    else if ( settings.contains("quitZoom") ) {
+                        // provide a default value in case "quitZoom" contains garbage
+                        m_controlView->marbleWidget()->setZoom( settings.value("quitZoom", 1000).toInt() );
+                    }
+                    else {
+                        // set radius to 1350 (Atlas theme's "sharp" radius) if Marble starts with a clean config
+                        m_controlView->marbleWidget()->setRadius( 1350 );
+                    }
                 }
                 break;
             case Marble::ShowHomeLocation:
@@ -1086,15 +1195,13 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();
          m_lockFloatItemsAct->setChecked( isLocked );
          lockPosition(isLocked);
-
-         bool const kineticScrolling = settings.value( "kineticScrolling", !smallScreen ).toBool();
-         m_controlView->marbleWidget()->inputHandler()->setKineticScrollingEnabled( kineticScrolling );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
          m_controlView->marbleWidget()->setShowSunShading( settings.value( "showSun", false ).toBool() );
          m_controlView->marbleWidget()->setShowCityLights( settings.value( "showCitylights", false ).toBool() );
-         m_controlView->marbleWidget()->setShowSunInZenith( settings.value( "centerOnSun", false ).toBool() );
+         m_controlView->marbleWidget()->setLockToSubSolarPoint( settings.value( "lockToSubSolarPoint", false ).toBool() );
+         m_controlView->marbleWidget()->setSubSolarPointIconVisible( settings.value( "subSolarPointIconVisible", false ).toBool() );
      settings.endGroup();
 
      settings.beginGroup( "Time" );
@@ -1122,15 +1229,15 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          routingManager->setLastSavePath( settings.value( "lastRouteSavePath", QDir::homePath() ).toString() );
 
          QColor tempColor;
-         tempColor = QColor( settings.value( "routeColorStandard", oxygenSkyBlue4.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorStandard", Oxygen::skyBlue4.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaStandard", 200 ).toInt() );
          routingManager->setRouteColorStandard( tempColor );
 
-         tempColor = QColor( settings.value( "routeColorHighlighted", oxygenSeaBlue2.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorHighlighted", Oxygen::skyBlue1.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaHighlighted", 200 ).toInt() );
          routingManager->setRouteColorHighlighted( tempColor );
 
-         tempColor = QColor( settings.value( "routeColorAlternative", oxygenAluminumGray4.name() ).toString() );
+         tempColor = QColor( settings.value( "routeColorAlternative", Oxygen::aluminumGray4.name() ).toString() );
          tempColor.setAlpha( settings.value( "routeAlphaAlternative", 200 ).toInt() );
          routingManager->setRouteColorAlternative( tempColor );
      }
@@ -1215,20 +1322,22 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
 
 void MainWindow::writeSettings()
 {
-     QSettings settings("kde.org", "Marble Desktop Globe");
+     QSettings settings;
 
      settings.beginGroup( "MainWindow" );
          settings.setValue( "size", size() );
          settings.setValue( "pos", pos() );
          settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
-         settings.setValue( "sideBar", m_sideBarAct->isChecked() );
-         settings.setValue( "sideBarState", m_controlView->sideBarState() );
+#ifdef Q_WS_MAEMO_5
+         settings.setValue( "orientation", (int)orientation() );
+#endif // Q_WS_MAEMO_5
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
          settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
          settings.setValue( "lastFileOpenDir", m_lastFileOpenPath );
          settings.setValue( "showBookmarks", m_toggleBookmarkDisplayAct->isChecked() );
+         settings.setValue( "windowState", saveState() );
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );
@@ -1250,20 +1359,20 @@ void MainWindow::writeSettings()
          // Get the 'quit' values from the widget and store them in the settings.
          qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
          qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
-         int    quitZoom = m_controlView->marbleWidget()->zoom();
+         const int quitRadius = m_controlView->marbleWidget()->radius();
 
          settings.setValue( "quitLongitude", quitLon );
          settings.setValue( "quitLatitude", quitLat );
-         settings.setValue( "quitZoom", quitZoom );
+         settings.setValue( "quitRadius", quitRadius );
 
          settings.setValue( "lockFloatItemPositions", m_lockFloatItemsAct->isChecked() );
-         settings.setValue( "kineticScrolling", m_controlView->marbleWidget()->inputHandler()->kineticScrollingEnabled() );
      settings.endGroup();
 
      settings.beginGroup( "Sun" );
-         settings.setValue( "showSun",        m_controlView->marbleWidget()->showSunShading() );
+         settings.setValue( "showSun", m_controlView->marbleWidget()->showSunShading() );
          settings.setValue( "showCitylights", m_controlView->marbleWidget()->showCityLights() );
-         settings.setValue( "centerOnSun",    m_controlView->marbleWidget()->showSunInZenith() );
+         settings.setValue( "lockToSubSolarPoint", m_controlView->marbleWidget()->isLockedToSubSolarPoint() );
+         settings.setValue( "subSolarPointIconVisible", m_controlView->marbleWidget()->isSubSolarPointIconVisible() );
      settings.endGroup();
 
       settings.beginGroup( "Time" );
@@ -1377,6 +1486,7 @@ void MainWindow::updateSettings()
     updateStatusBar();
 
     m_controlView->marbleWidget()->setAnimationsEnabled( m_configDialog->animateTargetVoyage() );
+    m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( m_configDialog->inertialEarthRotation() );
     if ( !m_configDialog->externalMapEditor().isEmpty() ) {
         m_controlView->setExternalMapEditor( m_configDialog->externalMapEditor() );
     }
@@ -1439,12 +1549,9 @@ void MainWindow::disconnectDownloadRegionDialog()
 void MainWindow::downloadRegion()
 {
     Q_ASSERT( m_downloadRegionDialog );
-    QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
-    QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
-    mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     if ( !pyramid.isEmpty() ) {
-        m_controlView->marbleWidget()->downloadRegion( sourceDir, pyramid );
+        m_controlView->marbleWidget()->downloadRegion( pyramid );
     }
 }
 
@@ -1461,13 +1568,15 @@ void MainWindow::printMapScreenShot()
 void MainWindow::showMapViewDialog()
 {
     if( !m_mapViewWindow ) {
-        m_mapViewWindow = new StackableWindow( this );
+        m_mapViewWindow = new QDialog( this );
         m_mapViewWindow->setWindowTitle( tr( "Map View - Marble" ) );
+
+        QVBoxLayout *layout = new QVBoxLayout;
+        m_mapViewWindow->setLayout( layout );
 
         MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewWindow );
         mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
-
-        m_mapViewWindow->setCentralWidget( mapViewWidget );
+        layout->addWidget( mapViewWidget );
     }
 
     m_mapViewWindow->show();
@@ -1483,7 +1592,6 @@ void MainWindow::showLegendTab( bool enabled )
     m_controlView->marbleControl()->setMapViewTabShown( false );
     m_controlView->marbleControl()->setCurrentLocationTabShown( false );
     m_controlView->marbleControl()->setRoutingTabShown( false );
-    m_controlView->setSideBarShown( enabled );
 }
 
 void MainWindow::showRoutingDialog()
@@ -1506,16 +1614,6 @@ void MainWindow::showRoutingDialog()
         QAction* saveAction = new QAction( tr( "Save Route..." ), this );
         connect( saveAction, SIGNAL( triggered() ), m_routingWidget, SLOT( saveRoute() ) );
         m_routingWindow->menuBar()->addAction( saveAction );
-
-        QAction* reverseAction = new QAction( tr( "Reverse Route" ), this );
-        RoutingManager * const manager = m_controlView->marbleModel()->routingManager();
-        connect( reverseAction, SIGNAL( triggered() ), manager, SLOT( reverseRoute() ) );
-        m_routingWindow->menuBar()->addAction( reverseAction );
-
-        /** @todo: Change 'Clear' to 'Clear Route' after string freeze */
-        QAction* clearAction = new QAction( tr( "Clear" ), this );
-        connect( clearAction, SIGNAL( triggered() ), manager, SLOT( clearRoute() ) );
-        m_routingWindow->menuBar()->addAction( clearAction );
 
         m_routingWindow->setCentralWidget( scrollArea );
     }
@@ -1578,7 +1676,7 @@ void MainWindow::setupZoomButtons()
 void MainWindow::showMapWizard()
 {
     QPointer<MapWizard> mapWizard = new MapWizard();
-    QSettings settings("kde.org", "Marble Desktop Globe");
+    QSettings settings;
 
     settings.beginGroup( "MapWizard" );
         mapWizard->setWmsServers( settings.value( "wmsServers" ).toStringList() );
@@ -1595,10 +1693,16 @@ void MainWindow::showMapWizard()
     mapWizard->deleteLater();
 }
 
+void MainWindow::updateAtmosphereMenu()
+{
+    bool const hasAtmosphere = m_controlView->marbleModel()->planet()->hasAtmosphere();
+    m_showAtmosphereAct->setEnabled( hasAtmosphere );
+}
+
 void MainWindow::showGoToDialog()
 {
     if ( !m_gotoDialog ) {
-        m_gotoDialog = new GoToDialog( m_controlView->marbleWidget(), this );
+        m_gotoDialog = new GoToDialog( m_controlView->marbleModel(), this );
     }
 
     m_gotoDialog->show();
@@ -1616,6 +1720,13 @@ void MainWindow::showZoomLevel(bool show)
     } else {
         statusBar()->removeWidget( m_zoomLabel );
     }
+}
+
+void MainWindow::showSearch()
+{
+    m_searchDock->show();
+    m_searchDock->raise();
+    m_searchDock->widget()->setFocus();
 }
 
 #include "QtMainWindow.moc"

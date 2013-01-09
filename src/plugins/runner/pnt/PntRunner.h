@@ -10,24 +10,18 @@
 #ifndef MARBLEPNTRUNNER_H
 #define MARBLEPNTRUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class PntRunner : public MarbleAbstractRunner
+class PntRunner : public ParsingRunner
 {
     Q_OBJECT
 public:
     explicit PntRunner(QObject *parent = 0);
     ~PntRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void parseFile( const QString &fileName, DocumentRole role );
-
-signals:
-
-public slots:
-
 };
 
 }

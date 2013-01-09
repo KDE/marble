@@ -15,30 +15,42 @@
 #include "GeoDocument.h"
 #include "GeoSceneLayer.h"
 
+#include <QtGui/QPen>
+#include <QtGui/QBrush>
+
 namespace Marble
 {
 
 class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
 {
  public:
-    GeoSceneGeodata( QString name );
+    explicit GeoSceneGeodata( QString name );
     virtual ~GeoSceneGeodata();
     virtual const char* nodeType() const;
      
-    QString name() const;
-     
+    QString property() const;
+    void setProperty( QString property );
+
     QString sourceFile() const;
     void setSourceFile( QString sourceFile );
      
-    QString sourceFileFormat() const;
-    void setSourceFileFormat( QString format );
+    QString colorize() const;
+    void setColorize( QString colorize );
+
+    QPen pen() const;
+    void setPen( const QPen& pen );
+
+    QBrush brush() const;
+    void setBrush( const QBrush& brush );
 
     virtual QString type();
     
  private:
-    QString m_name;
+    QString m_property;
     QString m_sourceFile;
-    QString m_sourceFileFormat;
+    QString m_colorize;
+    QPen    m_pen;
+    QBrush  m_brush;
 };
 
 }

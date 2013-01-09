@@ -12,11 +12,12 @@
 
 #include <QtCore/QVariant>
 
-using namespace Marble;
+namespace Marble {
 
-SatellitesConfigLeafItem::SatellitesConfigLeafItem( const QString &name, const QString &url )
+SatellitesConfigLeafItem::SatellitesConfigLeafItem( const QString &name, const QString &id )
     : SatellitesConfigAbstractItem( name ),
-      m_url( url ),
+      m_id( id ),
+      m_url( QString() ),
       m_isChecked( false ),
       m_isOrbitDisplayed( false )
 { 
@@ -28,8 +29,8 @@ SatellitesConfigLeafItem::~SatellitesConfigLeafItem()
 
 void SatellitesConfigLeafItem::loadSettings( QHash<QString, QVariant> settings )
 {
-    QStringList tleList = settings.value( "tleList" ).toStringList();
-    m_isChecked = tleList.contains( m_url );
+    QStringList idList = settings.value( "idList" ).toStringList();
+    m_isChecked = idList.contains( m_id );
 }
 
 QVariant SatellitesConfigLeafItem::data( int column, int role ) const
@@ -41,7 +42,13 @@ QVariant SatellitesConfigLeafItem::data( int column, int role ) const
 
     switch ( role ) {
     case UrlListRole:
-        return QVariant( QStringList() << m_url );
+        if( !m_url.isNull() && !m_url.isEmpty() ) {
+            return QVariant( QStringList() << m_url );
+        }
+        break;
+    case IdListRole:
+    case FullIdListRole:
+        return QVariant( QStringList() << m_id );
     case Qt::CheckStateRole:
         switch ( column ) {
         case 0:
@@ -56,7 +63,11 @@ QVariant SatellitesConfigLeafItem::data( int column, int role ) const
 
 bool SatellitesConfigLeafItem::setData( int column, int role, const QVariant& data )
 {
-    if ( role == Qt::CheckStateRole ) {
+    switch( role ) {
+    case UrlListRole:
+        m_url = data.toString();
+        return true;
+    case Qt::CheckStateRole:
         switch ( column ) {
         case 0:
             m_isChecked = data.toBool();
@@ -91,3 +102,16 @@ int SatellitesConfigLeafItem::childrenCount() const
 {
     return 0;
 }
+
+QString SatellitesConfigLeafItem::id() const
+{
+    return m_id;
+}
+
+QString SatellitesConfigLeafItem::url() const
+{
+    return m_url;
+}
+
+} // namespace Marble
+

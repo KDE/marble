@@ -265,6 +265,7 @@ int PlacemarkLayout::maxLabelHeight() const
 }
 
 /// feed an internal QMap of placemarks with TileId as key when model changes
+/// FIXME this method is too expensive on minor data change, e.g. when adding a point to a track (see bug 305195)
 void PlacemarkLayout::setCacheData()
 {
     const int rowCount = m_placemarkModel.rowCount();
@@ -281,10 +282,9 @@ void PlacemarkLayout::setCacheData()
 
         const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
 
-        bool ok;
-        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
 
-        if ( !ok ) {
+        if ( !coordinates.isValid() ) {
             continue;
         }
 
@@ -295,8 +295,7 @@ void PlacemarkLayout::setCacheData()
     emit repaintNeeded();
 }
 
-/// determine the set of placemarks that fit the viewport based on a pyramid of TileIds
-QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const ViewportParams *viewport )
+QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport ) const
 {
     int zoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 
@@ -323,36 +322,38 @@ QList<const GeoDataPlacemark*> PlacemarkLayout::visiblePlacemarks( const Viewpor
     TileCoordsPyramid pyramid(0, zoomLevel );
     pyramid.setBottomLevelCoords( rect );
 
-    QList<const GeoDataPlacemark*> placemarkList;
+    QSet<TileId> tileIdSet;
+    bool crossesDateLine = viewport->viewLatLonAltBox().crossesDateLine();
     for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {
         QRect const coords = pyramid.coords( level );
         int x1, y1, x2, y2;
         coords.getCoords( &x1, &y1, &x2, &y2 );
-        if ( x1 <= x2 ) { // normal case, rect does not cross dateline
+        if ( !crossesDateLine ) { // normal case, rect does not cross dateline
             for ( int x = x1; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "", level, x, y );
-                    placemarkList += m_placemarkCache.value(tileId);
+                    TileId const tileId( 0, level, x, y );
+                    tileIdSet.insert(tileId);
                 }
             }
         } else { // as we cross dateline, we first get west part, then east part
             // go till max tile
             for ( int x = x1; x <= ((2 << (level-1))-1); ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "", level, x, y );
-                    placemarkList += m_placemarkCache.value(tileId);
+                    TileId const tileId( 0, level, x, y );
+                    tileIdSet.insert(tileId);
                 }
             }
             // start from min tile
             for ( int x = 0; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( "", level, x, y );
-                    placemarkList += m_placemarkCache.value(tileId);
+                    TileId const tileId( 0, level, x, y );
+                    tileIdSet.insert(tileId);
                 }
             }
         }
     }
-    return placemarkList;
+
+    return tileIdSet;
 }
 
 QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport )
@@ -390,10 +391,9 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         const QModelIndex index = selectedIndexes.at( i );
         const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         Q_ASSERT(placemark);
-        bool ok;
-        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
 
-        if ( !ok ) {
+        if ( !coordinates.isValid() ) {
             continue;
         }
 
@@ -421,14 +421,16 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
      */
     const QItemSelection selection = m_selectionModel->selection();
 
-    QList<const GeoDataPlacemark*> placemarkList = visiblePlacemarks( viewport );
-    const int rowCount = placemarkList.count();
-    for ( int i = 0; i != rowCount; ++i ) {
-        const GeoDataPlacemark *placemark = placemarkList.at(i);
+    QList<TileId> tileIdList = visibleTiles( viewport ).toList();
+    qSort( tileIdList );
+    QList<const GeoDataPlacemark*> placemarkList;
+    foreach ( const TileId &tileId, tileIdList ) {
+        placemarkList += m_placemarkCache.value( tileId );
+    }
 
-        bool ok;
-        GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark, &ok );
-        if ( !ok ) {
+    foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
+        if ( !coordinates.isValid() ) {
             continue;
         }
 
@@ -515,7 +517,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         }
     }
 
-    m_runtimeTrace = QString("Visible: %1 Drawn: %2").arg( rowCount ).arg( m_paintOrder.size() );
+    m_runtimeTrace = QString("Visible: %1 Drawn: %2").arg( placemarkList.count() ).arg( m_paintOrder.size() );
     return m_paintOrder;
 }
 
@@ -570,20 +572,25 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     return true;
 }
 
-GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlacemark *placemark, bool *ok ) const
+GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlacemark *placemark ) const
 {
-    GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), ok );
-    if ( !*ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
+    bool ok;
+    GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), &ok );
+    if ( !ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
                 != m_acceptedVisualCategories.constEnd() ) {
-            *ok = true;
+        ok = true;
     }
 
-    return coordinates;
+    if ( ok ) {
+        return coordinates;
+    }
+
+    return GeoDataCoordinates();
 }
 
 QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                                       const qreal x, const qreal y,
-                                      const QString &labelText )
+                                      const QString &labelText ) const
 {
     bool  isRoom      = false;
 
@@ -663,8 +670,8 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
         }
     }
 
-    return QRect(); // At this point there is no space left 
-                    // for the rectangle anymore.
+    return QRectF(); // At this point there is no space left
+                     // for the rectangle anymore.
 }
 
 bool PlacemarkLayout::placemarksOnScreenLimit( const QSize &screenSize ) const

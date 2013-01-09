@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright      2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 // Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
 //
 
@@ -41,10 +41,10 @@ ElevationProfileMarker::ElevationProfileMarker( const MarbleModel *marbleModel )
     setVisible( false );
     m_markerItem.setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 
-    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL( added( GeoDataObject * ) ),
-             this, SLOT( onGeoObjectAdded( GeoDataObject * ) ) );
-    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL( removed( GeoDataObject * ) ),
-             this, SLOT( onGeoObjectRemoved( GeoDataObject * ) ) );
+    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL(added(GeoDataObject*)),
+             this, SLOT(onGeoObjectAdded(GeoDataObject*)) );
+    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL(removed(GeoDataObject*)),
+             this, SLOT(onGeoObjectRemoved(GeoDataObject *)) );
 }
 
 ElevationProfileMarker::~ElevationProfileMarker()
@@ -133,6 +133,9 @@ bool ElevationProfileMarker::isInitialized() const
 
 bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     if ( !m_markerPlacemark )
         return true;
 
@@ -155,7 +158,7 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
 
             QString intervalStr;
             intervalStr.setNum( m_currentPosition.altitude() * displayScale, 'f', 1 );
-            intervalStr += " " + unitString;
+            intervalStr += ' ' + unitString;
             m_markerText.setText( intervalStr );
         }
     }
@@ -177,7 +180,7 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
 
         painter->save();
 
-        m_markerItem.paintEvent( painter, viewport, renderPos, layer );
+        m_markerItem.paintEvent( painter, viewport );
 
         painter->restore();
     }

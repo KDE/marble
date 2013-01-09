@@ -34,6 +34,7 @@ signals:
 public:
     QStringList             mapThemeIds () const;
 //ig    GeoSceneDocument*       loadMapTheme (const QString& mapThemeStringID) const;
+    static void             deleteMapTheme (const QString& mapThemeId);
 };
 // MapThemeManager
 

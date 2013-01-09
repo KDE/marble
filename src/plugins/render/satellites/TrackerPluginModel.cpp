@@ -18,7 +18,6 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
-#include "PluginManager.h"
 #include "TrackerPluginItem.h"
 
 #include <QtCore/QTimer>
@@ -59,6 +58,21 @@ public:
         }
     }
 
+    void updateDocument()
+    {
+        // we cannot use ->clear() since its implementation
+        // will delete all items
+        foreach( TrackerPluginItem *item, m_itemVector ) {
+            int idx = m_document->childPosition( item->placemark() );
+            if( item->isEnabled() && idx == -1 ) {
+                m_document->append( item->placemark() );
+            }
+            if( !item->isEnabled() && idx > -1 ) {
+                m_document->remove( idx );
+            }
+        }
+    }
+
     TrackerPluginModel *m_parent;
     bool m_enabled;
     GeoDataTreeModel *m_treeModel;
@@ -68,7 +82,7 @@ public:
     QVector<TrackerPluginItem *> m_itemVector;
 };
 
-TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const PluginManager *pluginManager )
+TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel )
     : d( new TrackerPluginModelPrivate( this, treeModel ) )
 {
     d->m_document->setDocumentRole( TrackingDocument );
@@ -77,7 +91,7 @@ TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel, const Plugi
         d->m_treeModel->addDocument( d->m_document );
     }
 
-    d->m_downloadManager = new HttpDownloadManager( &d->m_storagePolicy, pluginManager );
+    d->m_downloadManager = new HttpDownloadManager( &d->m_storagePolicy );
     connect( d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),
              this, SLOT(downloaded(QString,QString)) );
 }
@@ -109,10 +123,17 @@ void TrackerPluginModel::addItem( TrackerPluginItem *mark )
     d->m_itemVector.append( mark );
 }
 
+QVector<TrackerPluginItem*> TrackerPluginModel::items() const
+{
+    return d->m_itemVector;
+}
+
 void TrackerPluginModel::clear()
 {
-    d->m_itemVector.clear();
     beginUpdateItems();
+    qDeleteAll( d->m_itemVector );
+    d->m_itemVector.clear();
+    d->m_itemVector.squeeze();
     d->m_document->clear();
     endUpdateItems();
 }
@@ -122,13 +143,23 @@ void TrackerPluginModel::beginUpdateItems()
     if( d->m_enabled ) {
         d->m_treeModel->removeDocument( d->m_document );
     }
+
+    emit itemUpdateStarted();
 }
 
 void TrackerPluginModel::endUpdateItems()
 {
     if( d->m_enabled ) {
+        d->updateDocument();
         d->m_treeModel->addDocument( d->m_document );
     }
+
+    emit itemUpdateEnded();
+}
+
+void TrackerPluginModel::loadSettings( const QHash<QString, QVariant> &settings )
+{
+    Q_UNUSED( settings );
 }
 
 void TrackerPluginModel::downloadFile(const QUrl &url, const QString &id)
@@ -142,6 +173,6 @@ void TrackerPluginModel::parseFile( const QString &id, const QByteArray &file )
     Q_UNUSED( file );
 }
 
-}
+} // namespace Marble
 
 #include "TrackerPluginModel.moc"

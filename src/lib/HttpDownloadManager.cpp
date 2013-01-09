@@ -15,14 +15,13 @@
 #include <QtCore/QList>
 #include <QtCore/QMap>
 #include <QtCore/QTimer>
+#include <QtNetwork/QNetworkAccessManager>
 
 #include "DownloadPolicy.h"
 #include "DownloadQueueSet.h"
 #include "HttpJob.h"
 #include "MarbleDebug.h"
 #include "StoragePolicy.h"
-#include "NetworkPlugin.h"
-#include "PluginManager.h"
 
 using namespace Marble;
 
@@ -32,8 +31,7 @@ const quint32 requeueTime = 60000;
 class HttpDownloadManager::Private
 {
   public:
-    explicit Private( StoragePolicy *policy,
-                      const PluginManager *pluginManager );
+    explicit Private( StoragePolicy *policy );
     ~Private();
 
     HttpJob *createJob( const QUrl& sourceUrl, const QString& destFileName,
@@ -50,18 +48,15 @@ class HttpDownloadManager::Private
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> > m_queueSets;
     QMap<DownloadUsage, DownloadQueueSet *> m_defaultQueueSets;
     StoragePolicy *const m_storagePolicy;
-    const PluginManager *const m_pluginManager;
-    NetworkPlugin *m_networkPlugin;
+    QNetworkAccessManager m_networkAccessManager;
 
 };
 
-HttpDownloadManager::Private::Private( StoragePolicy *policy,
-                                       const PluginManager *pluginManager )
+HttpDownloadManager::Private::Private( StoragePolicy *policy )
     : m_downloadEnabled( true ), //enabled for now
       m_requeueTimer( 0 ),
       m_storagePolicy( policy ),
-      m_pluginManager( pluginManager ),
-      m_networkPlugin( 0 )
+      m_networkAccessManager()
 {
     // setup default download policy and associated queue set
     DownloadPolicy defaultBrowsePolicy;
@@ -78,27 +73,15 @@ HttpDownloadManager::Private::~Private()
     QMap<DownloadUsage, DownloadQueueSet *>::iterator const end = m_defaultQueueSets.end();
     for (; pos != end; ++pos )
         delete pos.value();
-    delete m_networkPlugin;
 }
 
 HttpJob *HttpDownloadManager::Private::createJob( const QUrl& sourceUrl,
                                                   const QString& destFileName,
                                                   const QString &id )
 {
-    if ( !m_networkPlugin ) {
-        QList<const NetworkPlugin *> networkPlugins = m_pluginManager->networkPlugins();
-        if ( !networkPlugins.isEmpty() ) {
-            // FIXME: not just take the first plugin, but use some configuration setting
-            // take the first plugin
-            m_networkPlugin = networkPlugins.first()->newInstance();
-        }
-        else {
-            m_downloadEnabled = false;
-            return 0;
-        }
-    }
-    Q_ASSERT( m_networkPlugin );
-    return m_networkPlugin->createJob( sourceUrl, destFileName, id );
+    HttpJob * const job = new HttpJob( sourceUrl, destFileName, id, &m_networkAccessManager );
+    job->setUserAgentPluginId( "QNamNetworkPlugin" );
+    return job;
 }
 
 DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostName,
@@ -122,9 +105,8 @@ DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostN
 }
 
 
-HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy,
-                                          const PluginManager *pluginManager )
-    : d( new Private( policy, pluginManager ))
+HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
+    : d( new Private( policy ) )
 {
     d->m_requeueTimer = new QTimer( this );
     d->m_requeueTimer->setInterval( requeueTime );

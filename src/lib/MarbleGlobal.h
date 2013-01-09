@@ -19,6 +19,7 @@
 #include <QtGui/QColor>
 
 #include "marble_export.h"
+#include "MarbleColors.h"
 
 // #define QT_STRICT_ITERATORS
 
@@ -172,6 +173,14 @@ enum FlyToMode {
     Jump ///< Linear interpolation of lon and lat, distance increases towards the middle point, then decreases    
 };
 
+/**
+ * @brief Search mode: Global (worldwide) versus area (local, regional) search
+ */
+enum SearchMode {
+    GlobalSearch, ///< Search a whole planet
+    AreaSearch ///< Search a certain region of a planet (e.g. visible region)
+};
+
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 
@@ -207,30 +216,18 @@ const qreal SEC2MIN = 1.0 / MIN2SEC;
 const qreal HOUR2SEC = 3600.0;
 const qreal SEC2HOUR = 1.0 / HOUR2SEC;
 
-// Colors taken from the oxygen palette
-// When extending, please use the names and rgb values as defined in
-// http://websvn.kde.org/*checkout*/trunk/playground/artwork/Oxygen/utils/oxygen.gpl
-QColor const oxygenBrownOrange4 = QColor::fromRgb( 191, 94, 0 );
-QColor const oxygenAluminumGray4 = QColor::fromRgb( 136, 138, 133 );
-QColor const oxygenSkyBlue4 = QColor::fromRgb( 0, 87, 174 );
-QColor const oxygenSunYellow6 = QColor::fromRgb( 227, 173, 0 );
-QColor const oxygenSeaBlue2 = QColor::fromRgb( 0, 196, 204 );
-QColor const oxygenHotOrange4 = QColor::fromRgb( 236, 115, 49 );
-QColor const oxygenBrickRed4 = QColor::fromRgb( 226, 8, 0 );
-QColor const oxygenForestGreen4 = QColor::fromRgb( 55, 164, 44 );
-
 // Version definitions to use with an external application (as digiKam)
 
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.14.20 (PRE 0.15 GIT)" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.15.20 (development snapshot)" );
 
 // API Version id:
 // form : 0xMMmmpp
 //        MM = major revision.
 //        mm = minor revision.
 //        pp = patch revision.
-#define MARBLE_VERSION 0x000e00
+#define MARBLE_VERSION 0x000f14
 
 static const char NOT_AVAILABLE[] = QT_TR_NOOP("not available");
 

@@ -155,12 +155,11 @@ signals:
 public:
     int                     tileZoomLevel () const;
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos) const;
-    void                    downloadRegion (const QString& sourceDir, const QVector<Marble::TileCoordsPyramid>&);
 signals:
     void                    tileLevelChanged (int level);
 public:
-    void                    addLayer (Marble::LayerInterface* layer);
-    void                    removeLayer (Marble::LayerInterface* layer);
+    void                    addLayer (Marble::LayerInterface* layer /Transfer/);
+    void                    removeLayer (Marble::LayerInterface* layer /TransferBack/);
     qreal                   radiusFromDistance (qreal distance) const;
     qreal                   distanceFromRadius (qreal radius) const;
     qreal                   zoomFromDistance (qreal distance) const;
@@ -187,6 +186,8 @@ public:
     void                    resetFocusPoint ();
     Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still) const;
 //ig    const TextureLayer*     textureLayer () const;
+    void                    setShowRuntimeTrace (bool visible);
+    void                    downloadRegion (const QVector<Marble::TileCoordsPyramid>&);
 };
 // MarbleWidget
 

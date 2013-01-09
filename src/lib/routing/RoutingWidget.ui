@@ -6,49 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>245</width>
+    <width>284</width>
     <height>414</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="routingLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QPushButton" name="addViaButton">
-       <property name="text">
-        <string>Add Via</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="reverseRouteButton">
-       <property name="text">
-        <string>Reverse</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="clearRouteButton">
-       <property name="text">
-        <string>Clear</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QComboBox" name="routingProfileComboBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <item>
         <property name="text">
          <string>Car (fastest)</string>
@@ -83,17 +55,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item>
-      <widget class="QToolButton" name="configureButton">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../../marble.qrc">
-         <normaloff>:/icons/16x16/configure.png</normaloff>:/icons/16x16/configure.png</iconset>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
@@ -139,11 +100,14 @@
     </layout>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="toolBarLayout"/>
+   </item>
+   <item>
     <widget class="QListView" name="directionsListView">
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>200</height>
+       <height>0</height>
       </size>
      </property>
      <property name="alternatingRowColors">
@@ -166,34 +130,10 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QToolButton" name="openRouteButton">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../../marble.qrc">
-         <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="saveRouteButton">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../../marble.qrc">
-         <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../marble.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

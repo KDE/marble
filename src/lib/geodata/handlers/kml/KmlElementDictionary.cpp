@@ -53,6 +53,7 @@ const char* kmlTag_Create = "Create";
 const char* kmlTag_Data = "Data";
 const char* kmlTag_Delete = "Delete";
 const char* kmlTag_description = "description";
+const char* kmlTag_displayMode = "displayMode";
 const char* kmlTag_displayName = "displayName";
 const char* kmlTag_Document = "Document";
 const char* kmlTag_drawOrder = "drawOrder";
@@ -162,7 +163,7 @@ const char* kmlTag_styleUrl = "styleUrl";
 const char* kmlTag_targetHref = "targetHref";
 const char* kmlTag_tessellate = "tessellate";
 const char* kmlTag_text = "text";
-const char* kmlTag_textcolor = "textcolor";
+const char* kmlTag_textColor = "textColor";
 const char* kmlTag_tilt = "tilt";
 const char* kmlTag_TimeSpan = "TimeSpan";
 const char* kmlTag_TimeStamp = "TimeStamp";
@@ -181,6 +182,7 @@ const char* kmlTag_width = "width";
 const char* kmlTag_x = "x";
 const char* kmlTag_y = "y";
 
+const char* kmlTag_MultiTrack = "MultiTrack";
 const char* kmlTag_Track = "Track";
 const char* kmlTag_coord = "coord";
 

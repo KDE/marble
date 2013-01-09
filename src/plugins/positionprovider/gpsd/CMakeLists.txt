@@ -1,8 +1,8 @@
 PROJECT( GpsdPositionProviderPlugin )
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/positionprovider/gpsd
- ${CMAKE_BINARY_DIR}/src/plugins/positionprovider/gpsd
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
  ${LIBGPS_INCLUDE_DIR}
 )

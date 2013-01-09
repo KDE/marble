@@ -18,17 +18,12 @@ namespace Marble
 {
 
 GpxRunner::GpxRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 
 GpxRunner::~GpxRunner()
 {
-}
-
-GeoDataFeature::GeoDataVisualCategory GpxRunner::category() const
-{
-    return GeoDataFeature::Folder;
 }
 
 void GpxRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
@@ -53,6 +48,7 @@ void GpxRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     Q_ASSERT( document );
     GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
     doc->setDocumentRole( role );
+    doc->setFileName( fileName );
 
     file.close();
     emit parsingFinished( doc );

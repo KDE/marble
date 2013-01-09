@@ -35,10 +35,9 @@ public:
 
     QString photoPath() const;
 
-    virtual void paint( GeoPainter* painter, ViewportParams *viewport,
-                        const QString &renderPos, GeoSceneLayer *layer );
+    virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
 
-    virtual GeoDataLatLonAltBox& latLonAltBox() const;
+    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
 protected:
     GeoDataPoint m_point;

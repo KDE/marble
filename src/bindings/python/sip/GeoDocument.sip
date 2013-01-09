@@ -99,13 +99,7 @@ protected:
             else if (dynamic_cast<Marble::GeoDataPoint*>(sipCpp))
                 sipType = sipType_Marble_GeoDataPoint;
             else if (dynamic_cast<Marble::GeoDataPolygon*>(sipCpp))
-                {
                 sipType = sipType_Marble_GeoDataPolygon;
-                if (dynamic_cast<Marble::GeoDataInnerBoundary*>(sipCpp))
-                    sipType = sipType_Marble_GeoDataInnerBoundary;
-                else if (dynamic_cast<Marble::GeoDataOuterBoundary*>(sipCpp))
-                    sipType = sipType_Marble_GeoDataOuterBoundary;
-                }
             else if (dynamic_cast<Marble::GeoDataTrack*>(sipCpp))
                 sipType = sipType_Marble_GeoDataTrack;
             }

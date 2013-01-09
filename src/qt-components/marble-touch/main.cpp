@@ -18,6 +18,10 @@ using namespace Marble;
 int main( int argc, char *argv[] )
 {
     QApplication app( argc, argv );
+    app.setApplicationName( "Marble Virtual Globe" );
+    app.setOrganizationName( "KDE" );
+    app.setOrganizationDomain( "kde.org" );
+
     app.setProperty( "NoMStyle", true );
 
     //MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();

@@ -70,7 +70,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString lonStr = parser.attribute( attr_lon ).trimmed();
     if ( !lonStr.isEmpty() )
         lon = lonStr.toDouble();
-    named->setCoordinate( GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Degree, 0 ));
+    named->setCoordinate( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree, 0 ));
 
     // attribute name
     const QString name = parser.attribute( attr_name ).trimmed();

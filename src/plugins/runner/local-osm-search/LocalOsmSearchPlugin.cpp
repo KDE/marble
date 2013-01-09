@@ -24,7 +24,15 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
 
-    m_watcher.addPath( MarbleDirs::localPath() + "/maps/earth/placemarks/" );
+    QString const path = MarbleDirs::localPath() + "/maps/earth/placemarks/";
+    QFileInfo pathInfo( path );
+    if ( !pathInfo.exists() ) {
+        QDir("/").mkpath( pathInfo.absolutePath() );
+        pathInfo.refresh();
+    }
+    if ( pathInfo.exists() ) {
+        m_watcher.addPath( path );
+    }
     connect( &m_watcher, SIGNAL( directoryChanged( QString ) ), this, SLOT( updateDirectory( QString ) ) );
     connect( &m_watcher, SIGNAL( fileChanged( QString ) ), this, SLOT( updateFile( QString ) ) );
 }
@@ -65,7 +73,7 @@ QList<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* LocalOsmSearchPlugin::newRunner() const
+SearchRunner* LocalOsmSearchPlugin::newRunner() const
 {
     if ( !m_databaseLoaded ) {
         m_databaseLoaded = true;
@@ -91,7 +99,7 @@ void LocalOsmSearchPlugin::updateDirectory( const QString & ) const
 
 void LocalOsmSearchPlugin::updateFile( const QString &file ) const
 {
-    if ( file.endsWith( ".sqlite" ) ) {
+    if ( file.endsWith( QLatin1String( ".sqlite" ) ) ) {
         m_databaseLoaded = false;
     }
 }

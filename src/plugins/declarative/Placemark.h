@@ -30,7 +30,7 @@ class Placemark : public QObject
 
 public:
     /** Constructor */
-    Placemark( QObject *parent = 0 );
+    explicit Placemark( QObject *parent = 0 );
 
     void setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark );
 

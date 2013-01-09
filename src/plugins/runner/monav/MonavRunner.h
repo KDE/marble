@@ -11,10 +11,7 @@
 #ifndef MARBLE_MONAVRUNNER_H
 #define MARBLE_MONAVRUNNER_H
 
-#include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
-
-class QProcess;
+#include "RoutingRunner.h"
 
 namespace Marble
 {
@@ -22,7 +19,7 @@ namespace Marble
 class MonavRunnerPrivate;
 class MonavPlugin;
 
-class MonavRunner : public MarbleAbstractRunner
+class MonavRunner : public RoutingRunner
 {
     Q_OBJECT
 public:
@@ -31,13 +28,12 @@ public:
     ~MonavRunner();
 
     // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
-
-    // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );
 
+#if 0
     // Overriding MarbleAbstractRunner
     void reverseGeocoding( const GeoDataCoordinates &coordinates );
+#endif
 
 private:
     MonavRunnerPrivate* const d;

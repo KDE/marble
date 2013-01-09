@@ -286,7 +286,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     painter->setPen( standardRoutePen );
 
     // Map matched position
-    //painter->setBrush( QBrush( oxygenBrickRed4) );
+    //painter->setBrush( QBrush( Oxygen::brickRed4) );
     //painter->drawEllipse( m_routingModel->route().positionOnRoute(), 8, 8 );
 
     painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
@@ -347,14 +347,14 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                         painter->drawPolyline( currentRoutePoints );
 
                         painter->setPen( standardRoutePen );
-                        painter->setBrush( QBrush( alphaAdjusted( oxygenHotOrange4, 200 ) ) );
+                        painter->setBrush( QBrush( alphaAdjusted( Oxygen::hotOrange4, 200 ) ) );
                     }
                 }
             }
 
             QRegion region = painter->regionFromEllipse( pos, 12, 12 );
             m_instructionRegions.push_front( ModelRegion( index, region ) );
-            painter->drawEllipse( pos, 8, 8 );
+            painter->drawEllipse( pos, 6, 6 );
 
         }
 
@@ -362,8 +362,8 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             GeoDataCoordinates location = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().position();
             QString nextInstruction = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
             if( !nextInstruction.isEmpty() ) {
-                painter->setBrush( QBrush( oxygenBrownOrange4 ) );
-                painter->drawEllipse( location, 20, 20 );
+                painter->setBrush( QBrush( Oxygen::hotOrange4 ) );
+                painter->drawEllipse( location, 6, 6 );
             }
         }
     }
@@ -384,7 +384,7 @@ void RoutingLayerPrivate::renderAnnotations( GeoPainter *painter )
                 bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
                 GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
                 painter->setPen( QColor( Qt::black ) );
-                painter->setBrush( QBrush( oxygenSunYellow6 ) );
+                painter->setBrush( QBrush( Oxygen::sunYellow6 ) );
                 painter->drawAnnotation( pos, index.data().toString(), QSize( smallScreen ? 240 : 120, 0 ), 10, 30, 5, 5 );
             }
         }
@@ -671,7 +671,6 @@ void RoutingLayerPrivate::clearStopOver()
 RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
         QObject( parent ), d( new RoutingLayerPrivate( this, widget ) )
 {
-    widget->installEventFilter( this );
     connect( widget->model()->routingManager(), SIGNAL( stateChanged( RoutingManager::State ) ),
              this, SLOT( updateRouteState( RoutingManager::State ) ) );
     connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
@@ -819,7 +818,7 @@ void RoutingLayer::exportRoute()
                        tr( "GPX and KML files (*.gpx *.kml)" ) );
 
     if ( d->m_routingModel && !fileName.isEmpty() ) {
-        if ( fileName.endsWith( ".gpx", Qt::CaseInsensitive ) ) {
+        if ( fileName.endsWith( QLatin1String( ".gpx" ), Qt::CaseInsensitive ) ) {
             QFile gpx( fileName );
             if ( gpx.open( QFile::WriteOnly) ) {
                 d->m_routingModel->exportGpx( &gpx );

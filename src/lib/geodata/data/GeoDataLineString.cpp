@@ -533,7 +533,7 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
     lineStrings << dateLineCorrected;
 }
 
-GeoDataLatLonAltBox& GeoDataLineString::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoDataLineString::latLonAltBox() const
 {
     // GeoDataLatLonAltBox::fromLineString is very expensive
     // that's why we recreate it only if the m_dirtyBox

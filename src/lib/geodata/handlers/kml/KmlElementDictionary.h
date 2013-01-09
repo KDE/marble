@@ -55,6 +55,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_Data;
     GEODATA_EXPORT extern const char* kmlTag_Delete;
     GEODATA_EXPORT extern const char* kmlTag_description;
+    GEODATA_EXPORT extern const char* kmlTag_displayMode;
     GEODATA_EXPORT extern const char* kmlTag_displayName;
     GEODATA_EXPORT extern const char* kmlTag_Document;
     GEODATA_EXPORT extern const char* kmlTag_drawOrder;
@@ -164,7 +165,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_targetHref;
     GEODATA_EXPORT extern const char* kmlTag_tessellate;
     GEODATA_EXPORT extern const char* kmlTag_text;
-    GEODATA_EXPORT extern const char* kmlTag_textcolor;
+    GEODATA_EXPORT extern const char* kmlTag_textColor;
     GEODATA_EXPORT extern const char* kmlTag_tilt;
     GEODATA_EXPORT extern const char* kmlTag_TimeSpan;
     GEODATA_EXPORT extern const char* kmlTag_TimeStamp;
@@ -184,6 +185,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_y;
     
     // Google KML Extension Namespace (http://code.google.com/apis/kml/documentation/kmlreference.html#kmlextensions)
+    GEODATA_EXPORT extern const char* kmlTag_MultiTrack;
     GEODATA_EXPORT extern const char* kmlTag_Track;
     GEODATA_EXPORT extern const char* kmlTag_coord;
 

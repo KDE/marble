@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
 #ifndef WEATHERITEM_H
@@ -13,6 +14,7 @@
 
 // Marble
 #include "AbstractDataPluginItem.h"
+#include "MarbleWidget.h"
 
 // Qt
 #include <QtCore/QMap>
@@ -35,8 +37,15 @@ class WeatherItemPrivate;
 class WeatherItem : public AbstractDataPluginItem
 {
     Q_OBJECT
+
+    Q_PROPERTY( QString station READ stationName WRITE setStationName NOTIFY stationNameChanged )
+    Q_PROPERTY( QString description READ description NOTIFY descriptionChanged )
+    Q_PROPERTY( QString image READ image NOTIFY imageChanged )
+    Q_PROPERTY( double temperature READ temperature NOTIFY temperatureChanged )
+
  public:
-    WeatherItem( QObject *parent = 0 );
+    explicit WeatherItem( QObject *parent = 0 );
+    explicit WeatherItem( MarbleWidget* widget, QObject *parent = 0 );
     ~WeatherItem();
     
     QAction *action();
@@ -77,19 +86,35 @@ class WeatherItem : public AbstractDataPluginItem
     quint8 priority() const;
     void setPriority( quint8 priority );
 
-    virtual QString creditHtml() const;
-
     void setSettings( const QHash<QString, QVariant>& settings );
 
+    void setMarbleWidget( MarbleWidget *widget );
+
     virtual QList<QAction*> actions();
-    
+
+    QString description() const;
+
+    QString image() const;
+
+    double temperature() const;
+
  public Q_SLOTS:
     void openBrowser();
+
+Q_SIGNALS:
+    void stationNameChanged();
+
+    void descriptionChanged();
+
+    void imageChanged();
+
+    void temperatureChanged();
 
  private:
     Q_DISABLE_COPY(WeatherItem)
     WeatherItemPrivate * const d;
     friend class WeatherItemPrivate;
+    QString createFromTemplate(const QString &templateHtml);
 };
 
 } // namespace Marble

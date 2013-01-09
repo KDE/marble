@@ -10,20 +10,19 @@
 
 #include "OpenRouteServiceRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "TinyWebBrowser.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "routing/RouteRequest.h"
 
 #include <QtCore/QString>
 #include <QtCore/QVector>
 #include <QtCore/QUrl>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
-#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
 
@@ -31,21 +30,16 @@ namespace Marble
 {
 
 OpenRouteServiceRunner::OpenRouteServiceRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
-        m_networkAccessManager( new QNetworkAccessManager( this ) )
+        RoutingRunner( parent ),
+        m_networkAccessManager()
 {
-    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-             this, SLOT( retrieveData( QNetworkReply * ) ) );
+    connect( &m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
+             this, SLOT(retrieveData(QNetworkReply*)));
 }
 
 OpenRouteServiceRunner::~OpenRouteServiceRunner()
 {
     // nothing to do
-}
-
-GeoDataFeature::GeoDataVisualCategory OpenRouteServiceRunner::category() const
-{
-    return GeoDataFeature::OsmSite;
 }
 
 void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
@@ -92,20 +86,20 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 
     QEventLoop eventLoop;
 
-    connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
-             &eventLoop, SLOT( quit() ) );
+    connect( this, SIGNAL(routeCalculated(GeoDataDocument*)),
+             &eventLoop, SLOT(quit()));
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( get() ) );
+    QTimer::singleShot( 0, this, SLOT(get()));
 
     eventLoop.exec();
 }
 
 void OpenRouteServiceRunner::get()
 {
-    QNetworkReply *reply = m_networkAccessManager->post( m_request, m_requestData );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
+    QNetworkReply *reply = m_networkAccessManager.post( m_request, m_requestData );
+    connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
+             this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
 }
 
 void OpenRouteServiceRunner::retrieveData( QNetworkReply *reply )
@@ -226,7 +220,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
                     GeoDataCoordinates position;
                     position.setLongitude( regexp.capturedTexts().at( 2 ).toDouble(), GeoDataCoordinates::Degree );
                     position.setLatitude( regexp.capturedTexts().at( 3 ).toDouble(), GeoDataCoordinates::Degree );
-                    placemark->setCoordinate( GeoDataPoint(position) );
+                    placemark->setCoordinate( position );
                     result->append( placemark );
                 }
             } else {
@@ -304,7 +298,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     routePlacemark->setGeometry( routeWaypoints );
 
     QString name = "%1 %2 (OpenRouteService)";
-    QString unit = "m";
+    QString unit = QLatin1String( "m" );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
     if (length >= 1000) {
         length /= 1000.0;
@@ -374,7 +368,7 @@ RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QStrin
         if ( syntax.captureCount() > 1 ) {
             instruction = syntax.cap( 2 );
             if ( syntax.captureCount() == 4 ) {
-                *road = syntax.cap( 4 ).replace( " - Arrived at destination!", "" );
+                *road = syntax.cap( 4 ).remove(QLatin1String( " - Arrived at destination!"));
             }
         }
     }

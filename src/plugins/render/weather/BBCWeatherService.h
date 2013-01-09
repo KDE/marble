@@ -28,16 +28,16 @@ class BBCWeatherService : public AbstractWeatherService
     Q_OBJECT
  
  public:
-    BBCWeatherService( QObject *parent );
+    explicit BBCWeatherService( QObject *parent );
     ~BBCWeatherService();
 
     void setFavoriteItems( const QStringList& favorite );
-    void setFavoriteItemsOnly( bool favoriteOnly );
     
  public Q_SLOTS:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              const MarbleModel *model,
                              qint32 number = 10 );
+    virtual void getItem( const QString &id, const MarbleModel *model );
 
  private Q_SLOTS:
     void fetchStationList();
@@ -45,7 +45,6 @@ class BBCWeatherService : public AbstractWeatherService
 
  private:
     void setupList();
-    QList<BBCStation> filterStationsList( const QStringList& favorites );
 
     QList<BBCStation> m_stationList;
     bool m_parsingStarted;

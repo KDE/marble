@@ -17,6 +17,10 @@ FILE (GLOB BITMAP_POI_FILES bitmaps/poi/*.png)
 install (FILES ${BITMAP_POI_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps/poi)
 
+FILE (GLOB BITMAP_STAR_FILES bitmaps/stars/*.png)
+install (FILES ${BITMAP_STAR_FILES}
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps/stars)
+
 FILE (GLOB BITMAP_FILES bitmaps/*.jpg)
 install (FILES ${BITMAP_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps)
@@ -33,10 +37,12 @@ svg/application-x-marble.png
 svg/application-x-marble-gray.png
 svg/worldmap.svg
 svg/lunarmap.svg
+svg/marsmap.svg
 svg/coordinate.svg
 svg/wikipedia.svg
 svg/wikipedia_shadow.svg
 svg/sunshine.png
+svg/sun.png
 svg/track_turtle.svg
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/svg)
 
@@ -107,30 +113,10 @@ maps/earth/openstreetmap/openstreetmap-preview.png
 maps/earth/openstreetmap/legend.html
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap)
 
-install (FILES
-maps/earth/openstreetmap/legend/airportapron.png
-maps/earth/openstreetmap/legend/motorway.png
-maps/earth/openstreetmap/legend/track.png
-maps/earth/openstreetmap/legend/airportrunway.png
-maps/earth/openstreetmap/legend/primaryroad.png
-maps/earth/openstreetmap/legend/tram.png
-maps/earth/openstreetmap/legend/boundary.png
-maps/earth/openstreetmap/legend/railway.png
-maps/earth/openstreetmap/legend/trunkroad.png
-maps/earth/openstreetmap/legend/bridge.png
-maps/earth/openstreetmap/legend/railwaystation.png
-maps/earth/openstreetmap/legend/tunnel.png
-maps/earth/openstreetmap/legend/bridleway.png
-maps/earth/openstreetmap/legend/secondaryroad.png
-maps/earth/openstreetmap/legend/unclassifiedroad.png
-maps/earth/openstreetmap/legend/byway.png
-maps/earth/openstreetmap/legend/significantbuilding.png
-maps/earth/openstreetmap/legend/unsurfacedroad.png
-maps/earth/openstreetmap/legend/cycleway.png
-maps/earth/openstreetmap/legend/subway.png
-maps/earth/openstreetmap/legend/footway.png
-maps/earth/openstreetmap/legend/summitpeak.png
-DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/legend)
+FILE(GLOB OSM_LEGEND_ICONS maps/earth/openstreetmap/legend/*.png)
+install (FILES ${OSM_LEGEND_ICONS} DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/legend)
+FILE(GLOB OSM_LEGEND_ICONS maps/earth/openstreetmap/legend/mapicons/*.png)
+install (FILES ${OSM_LEGEND_ICONS} DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/legend/mapicons)
 
 install (FILES
 maps/earth/openstreetmap/0/0/0.png
@@ -232,9 +218,17 @@ mwdbii/PUSA48.DIFF.PNT
 mwdbii/RIVER.PNT
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
 
-FILE (GLOB STAR_FILES stars/*.dat)
 install (FILES
-  ${STAR_FILES}
+naturalearth/50m-urban-area.pn2
+naturalearth/50m_glaciated_areas.pn2
+naturalearth/50m_lakes.pn2
+naturalearth/50m_land.pn2
+naturalearth/ne_10m_admin_0_boundary_lines_land.pn2
+naturalearth/ne_10m_rivers_lake_centerlines.pn2
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/naturalearth)
+
+FILE (GLOB STAR_FILES stars/*.dat)
+install (FILES ${STAR_FILES} stars/deepsky.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/stars)
 
 install (FILES
@@ -268,3 +262,11 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/audio)
 
 FILE (GLOB_RECURSE DGML_FILES maps/*.dgml)
 MARBLE_ADD_PROJECT_RESOURCES(${DGML_FILES})
+
+# shared-mime-info 0.40 is mandatory for generic-icon
+set( SHARED_MIME_INFO_MINIMUM_VERSION "0.40" )
+find_package( SharedMimeInfo QUIET )
+IF( SHAREDMIMEINFO_FOUND )
+  install( FILES mimetypes/geo.xml  DESTINATION ${XDG_MIME_INSTALL_DIR} )
+  update_xdg_mimetypes( ${XDG_MIME_INSTALL_DIR} )
+ENDIF()

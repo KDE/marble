@@ -59,7 +59,7 @@ QStringList LogfilePlugin::fileExtensions() const
     return QStringList() << "log";
 }
 
-MarbleAbstractRunner* LogfilePlugin::newRunner() const
+ParsingRunner* LogfilePlugin::newRunner() const
 {
     return new LogRunner;
 }

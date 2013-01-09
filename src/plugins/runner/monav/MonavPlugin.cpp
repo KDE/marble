@@ -22,6 +22,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "routing/RouteRequest.h"
 
 #include <QtCore/QProcess>
 #include <QtCore/QDirIterator>
@@ -106,7 +107,7 @@ bool MonavPluginPrivate::isDaemonInstalled() const
 {
     QString path = QProcessEnvironment::systemEnvironment().value( "PATH", "/usr/local/bin:/usr/bin:/bin" );
     foreach( const QString &application, QStringList() << "monav-daemon" << "MoNavD" ) {
-        foreach( const QString &dir, path.split( ":" ) ) {
+        foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {
             QFileInfo executable( QDir( dir ), application );
             if ( executable.exists() ) {
                 return true;
@@ -233,7 +234,7 @@ MonavPlugin::MonavPlugin( QObject *parent ) :
         setStatusMessage( tr ( "The monav routing daemon does not seem to be installed on your system." ) );
     }
 
-    connect( qApp, SIGNAL( aboutToQuit() ), this, SLOT( stopDaemon() ) );
+    connect( qApp, SIGNAL(aboutToQuit()), this, SLOT(stopDaemon()) );
 }
 
 MonavPlugin::~MonavPlugin()
@@ -277,7 +278,7 @@ QList<PluginAuthor> MonavPlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* MonavPlugin::newRunner() const
+RoutingRunner *MonavPlugin::newRunner() const
 {
     d->initialize();
     if ( !d->startDaemon() ) {

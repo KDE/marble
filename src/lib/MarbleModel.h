@@ -50,7 +50,6 @@ class GeoDataPlacemark;
 class GeoPainter;
 class MeasureTool;
 class MapThemeManager;
-class FileViewModel;
 class PositionTracking;
 class HttpDownloadManager;
 class MarbleModelPrivate;
@@ -183,32 +182,27 @@ class MARBLE_EXPORT MarbleModel : public QObject
     HttpDownloadManager *downloadManager();
     const HttpDownloadManager *downloadManager() const;
 
-    /**
-      * @deprecated Please use addGeoDataFile instead
-      */
-    MARBLE_DEPRECATED( void openGpxFile( const QString& filename ) );
 
     /**
-      * @deprecated Please use addGeoDataFile instead
-      */
-    MARBLE_DEPRECATED( void addPlacemarkFile( const QString& filename ) );
-
-    /**
-      * @deprecated Please use addGeoDataString instead
-      */
-    MARBLE_DEPRECATED( void addPlacemarkData( const QString& data, const QString& key = "data" ) );
-
-    /**
-      * @deprecated Please use removeGeoData instead
-      */
-    MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
-
+     * @brief Handle file loading into the treeModel
+     * @param filename the file to load
+     */
     void addGeoDataFile( const QString& filename );
-    void addGeoDataString( const QString& data, const QString& key = "data" );
-    void removeGeoData( const QString& key );
-    FileManager       *fileManager();
 
-    FileViewModel      *fileViewModel();
+    /**
+     * @brief Handle raw data loading into the treeModel
+     * @param data the raw data to load
+     * @param key the name to remove this raw data later
+     */
+    void addGeoDataString( const QString& data, const QString& key = "data" );
+
+    /**
+     * @brief Remove the file or raw data from the treeModel
+     * @param key either the file name or the key for raw data
+     */
+    void removeGeoData( const QString& key );
+
+    FileManager       *fileManager();
 
     PositionTracking   *positionTracking() const;
 
@@ -235,6 +229,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
     quint64 volatileTileCacheLimit() const;
 
     const PluginManager* pluginManager() const;
+
+    PluginManager* pluginManager();
 
     /**
      * @brief Returns the planet object for the current map.
@@ -295,12 +291,13 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void setTrackedPlacemark( const GeoDataPlacemark *placemark );
 
+    void updateProperty( const QString &property, bool value );
+
  Q_SIGNALS:
 
     /**
      * @brief Signal that the MarbleModel has started to create a new set of tiles.
      * @param
-     * @see  zoomView()
      */
     void creatingTilesStart( TileCreator*, const QString& name, const QString& description );
 
@@ -320,10 +317,15 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void trackedPlacemarkChanged( const GeoDataPlacemark *placemark );
  
+    /** @brief Emitted when the home location is changed
+     * @see home(), setHome()
+     */
+    void homeChanged( const GeoDataCoordinates newHomePoint );
+    
  private:
     Q_DISABLE_COPY( MarbleModel )
 
-    void addDownloadPolicies( GeoSceneDocument *mapTheme );
+    void addDownloadPolicies( const GeoSceneDocument *mapTheme );
     MarbleModelPrivate  * const d;
 };
 

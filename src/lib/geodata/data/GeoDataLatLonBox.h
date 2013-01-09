@@ -191,4 +191,6 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
 
 }
 
+Q_DECLARE_METATYPE( Marble::GeoDataLatLonBox )
+
 #endif

@@ -5,9 +5,10 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      David Roberts  <dvdr18@gmail.com>
-// Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
-// Copyright 2010      Harshit Jain   <hjain.itbhu@gmail.com>
+// Copyright 2008      David Roberts   <dvdr18@gmail.com>
+// Copyright 2008      Inge Wallin     <inge@lysator.liu.se>
+// Copyright 2010      Harshit Jain    <hjain.itbhu@gmail.com>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 // Own
@@ -31,6 +32,8 @@ SunControlWidget::SunControlWidget( MarbleWidget* marbleWidget, QWidget* parent 
       m_shadow( "shadow" )
 {
     m_uiWidget->setupUi( this );
+
+    m_uiWidget->lockWarningLabel->hide();
 	
     connect( m_uiWidget->applyButton, SIGNAL( clicked() ), this, SLOT( apply() ) );
     connect( m_uiWidget->cancelButton, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -69,15 +72,26 @@ void SunControlWidget::apply()
         m_marbleWidget->setShowCityLights( false );
     }
 
-    if( m_uiWidget->showZenith->isChecked() )
+    if( m_uiWidget->lockToSubSolarPointCheckBox->isChecked() )
     {
-        m_marbleWidget->setShowSunInZenith( true );
-        emit showSunInZenith( true );
+        m_marbleWidget->setLockToSubSolarPoint( true );
+        emit isLockedToSubSolarPoint( true );
     }
-    else if( m_uiWidget->hideZenith->isChecked() )
+    else
     {
-        m_marbleWidget->setShowSunInZenith( false );
-        emit showSunInZenith( false );
+        m_marbleWidget->setLockToSubSolarPoint( false );
+        emit isLockedToSubSolarPoint( false );
+    }
+
+    if( m_uiWidget->subSolarIconCheckBox->isChecked() )
+    {
+        m_marbleWidget->setSubSolarPointIconVisible( true );
+        emit isSubSolarPointIconVisible( true );
+    }
+    else
+    {
+        m_marbleWidget->setSubSolarPointIconVisible( false );
+        emit isSubSolarPointIconVisible( false );
     }
 }
 
@@ -109,8 +123,8 @@ void SunControlWidget::showEvent( QShowEvent* event )
                 m_uiWidget->showNightMap->setChecked( true );
             }
         }
-        m_uiWidget->showZenith->setChecked( m_marbleWidget->showSunInZenith() );
-        m_uiWidget->hideZenith->setChecked( !m_marbleWidget->showSunInZenith() );
+        m_uiWidget->subSolarIconCheckBox->setChecked( m_marbleWidget->isSubSolarPointIconVisible() );
+        m_uiWidget->lockToSubSolarPointCheckBox->setChecked( m_marbleWidget->isLockedToSubSolarPoint() );
     }
 }
 

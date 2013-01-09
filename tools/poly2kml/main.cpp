@@ -43,9 +43,9 @@ int usage()
 
 QColor randomColor()
 {
-    QVector<QColor> colors = QVector<QColor>() << oxygenAluminumGray4 << oxygenBrickRed4;
-    colors << oxygenBrownOrange4 << oxygenForestGreen4 << oxygenHotOrange4;
-    colors << oxygenSeaBlue2 << oxygenSkyBlue4 << oxygenSunYellow6;
+    QVector<QColor> colors = QVector<QColor>() << Oxygen::aluminumGray4 << Oxygen::brickRed4;
+    colors << Oxygen::hotOrange4 << Oxygen::forestGreen4 << Oxygen::hotOrange4;
+    colors << Oxygen::seaBlue2 << Oxygen::skyBlue4 << Oxygen::sunYellow6;
     return colors.at( qrand() % colors.size() );
 }
 
@@ -67,7 +67,7 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
             bool inside = true;
             bool skip = false;
             QString line = stream.readLine().trimmed();
-            QStringList entries = line.split( " ", QString::SkipEmptyParts );
+            QStringList entries = line.split( QLatin1Char( ' ' ), QString::SkipEmptyParts );
             if ( entries.size() == 1 ) {
                 if ( entries.first() == "END" && inside ) {
                     inside = false;
@@ -77,7 +77,7 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
                     }
                 } else if ( entries.first() == "END" && !inside ) {
                     qDebug() << "END not expected here";
-                } else if ( entries.first().startsWith( "!" ) ) {
+                } else if ( entries.first().startsWith( QLatin1String( "!" ) ) ) {
                     skip = true;
                     qDebug() << "Warning: Negative polygons not supported, skipping";
                 } else {

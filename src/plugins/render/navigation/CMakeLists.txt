@@ -1,14 +1,14 @@
 PROJECT(NavigationFloatItem)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/navigation
- ${CMAKE_BINARY_DIR}/src/plugins/render/navigation
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
 
-set( navigation_SRCS NavigationFloatItem.cpp )
-set (navigation_UI navigation.ui navigation_small.ui)
+set( navigation_SRCS NavigationFloatItem.cpp ArrowDiscWidget.cpp NavigationButton.cpp NavigationSlider.cpp )
+set (navigation_UI navigation.ui)
 
 qt4_add_resources(navigation_SRCS navigation.qrc)
 

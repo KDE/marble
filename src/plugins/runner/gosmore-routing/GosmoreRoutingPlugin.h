@@ -39,7 +39,7 @@ public:
 
     QList<PluginAuthor> pluginAuthors() const;
 
-    virtual MarbleAbstractRunner* newRunner() const;
+    virtual RoutingRunner *newRunner() const;
 
     virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 

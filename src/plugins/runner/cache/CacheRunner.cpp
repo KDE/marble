@@ -11,6 +11,7 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataPlacemark.h"
 
 #include <QtCore/QFile>
 
@@ -20,17 +21,12 @@ namespace Marble
 const quint32 MarbleMagicNumber = 0x31415926;
 
 CacheRunner::CacheRunner(QObject *parent) :
-    MarbleAbstractRunner(parent)
+    ParsingRunner(parent)
 {
 }
 
 CacheRunner::~CacheRunner()
 {
-}
-
-GeoDataFeature::GeoDataVisualCategory CacheRunner::category() const
-{
-    return GeoDataFeature::Folder;
 }
 
 void CacheRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
@@ -109,6 +105,7 @@ void CacheRunner::parseFile( const QString &fileName, DocumentRole role = Unknow
 
         document->append( mark );
     }
+    document->setFileName( fileName );
 
     file.close();
     emit parsingFinished( document );

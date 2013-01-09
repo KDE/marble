@@ -106,10 +106,10 @@ void PositionSource::setMarbleModel( Marble::MarbleModel* model )
         m_marbleModel = model;
 
         if ( model ) {
-            connect( model->positionTracking(), SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                    this, SLOT( updatePosition() ) );
-            connect( model->positionTracking(), SIGNAL( statusChanged( PositionProviderStatus ) ),
-                    this, SLOT( updatePosition() ) );
+            connect( model->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+                    this, SLOT(updatePosition()) );
+            connect( model->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
+                    this, SLOT(updatePosition()) );
         }
 
         if ( active() ) {

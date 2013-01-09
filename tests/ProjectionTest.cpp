@@ -163,7 +163,7 @@ void ProjectionTest::drawLineString()
         QPointF oldCoord = poly->first();
         poly->pop_front();
 
-        foreach(QPointF coord, *poly) {
+        foreach(const QPointF &coord, *poly) {
             // no 2 same points
             QVERIFY( (coord-oldCoord) != QPointF() );
 

@@ -41,7 +41,9 @@ private:
 //force
                             LabelGraphicsItem (const Marble::LabelGraphicsItem& other);
 //end
+public:
+    void                    setContentSize (const QSizeF& contentSize);
 protected:
-    void                    paintContent (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer);
+    void                    paintContent (QPainter* painter);
 };
 };

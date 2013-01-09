@@ -47,21 +47,6 @@ BBCWeatherService::~BBCWeatherService()
 {
 }
 
-QList<BBCStation> BBCWeatherService::filterStationsList( const QStringList& favorites )
-{
-    QList<BBCStation> favoriteStations;
-
-    foreach ( const QString& id, favorites ) {
-        foreach ( const BBCStation& station, m_stationList ) {
-            if ( station.bbcId() == id.mid( 3 ).toUInt() ) {
-                favoriteStations.append( station );
-            }
-        }
-    }
-
-    return favoriteStations;
-}
-
 void BBCWeatherService::setFavoriteItems( const QStringList& favorite )
 {
     if ( favoriteItems() != favorite ) {
@@ -71,18 +56,6 @@ void BBCWeatherService::setFavoriteItems( const QStringList& favorite )
         m_itemGetter = new BBCItemGetter( this );
 
         AbstractWeatherService::setFavoriteItems( favorite );
-    }
-}
-
-void BBCWeatherService::setFavoriteItemsOnly( bool favoriteOnly )
-{
-    if ( isFavoriteItemsOnly() != favoriteOnly ) {
-        m_parsingStarted = false;
-
-        delete m_itemGetter;
-        m_itemGetter = new BBCItemGetter( this );
-
-        AbstractWeatherService::setFavoriteItemsOnly( favoriteOnly );
     }
 }
 
@@ -97,6 +70,16 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
     m_itemGetter->setSchedule( box, model, number );
 }
 
+void BBCWeatherService::getItem( const QString &id, const MarbleModel * )
+{
+    if ( id.startsWith( QLatin1String( "bbc" ) ) ) {
+        BBCStation const station = m_itemGetter->station( id );
+        if ( station.bbcId() > 0 ) {
+            createItem( station );
+        }
+    }
+}
+
 void BBCWeatherService::fetchStationList()
 {
     if ( !m_parser ) {
@@ -104,17 +87,12 @@ void BBCWeatherService::fetchStationList()
     }
 
     connect( m_itemGetter,
-             SIGNAL( foundStation( BBCStation ) ),
+             SIGNAL(foundStation(BBCStation)),
              this,
-             SLOT( createItem( BBCStation ) ) );
+             SLOT(createItem(BBCStation)) );
 
     m_stationList = m_parser->stationList();
-
-    if ( isFavoriteItemsOnly() ) {
-        m_itemGetter->setStationList( filterStationsList( favoriteItems() ) );
-    } else {
-        m_itemGetter->setStationList( m_stationList );
-    }
+    m_itemGetter->setStationList( m_stationList );
 
     delete m_parser;
     m_parser = 0;
@@ -123,6 +101,7 @@ void BBCWeatherService::fetchStationList()
 void BBCWeatherService::createItem( BBCStation station )
 {
     BBCWeatherItem *item = new BBCWeatherItem( this );
+    item->setMarbleWidget( marbleWidget() );
     item->setBbcId( station.bbcId() );
     item->setCoordinate( station.coordinate() );
     item->setPriority( station.priority() );
@@ -139,8 +118,8 @@ void BBCWeatherService::setupList()
 
     m_parser = new StationListParser( this );
     m_parser->setPath( MarbleDirs::path( "weather/bbc-stations.xml" ) );
-    connect( m_parser, SIGNAL( finished() ),
-             this,     SLOT( fetchStationList() ) );
+    connect( m_parser, SIGNAL(finished()),
+             this,     SLOT(fetchStationList()) );
     if ( m_parser->wait( 100 ) ) {
         m_parser->start( QThread::IdlePriority );
     }

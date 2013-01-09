@@ -29,7 +29,7 @@ bool DgmlLegendTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     writer.writeStartElement( dgml::dgmlTag_Legend );
     for( int i = 0; i < legend->sections().count(); ++i )
     {
-        GeoSceneSection *section = legend->sections().at( i );
+        const GeoSceneSection *section = legend->sections().at( i );
         writeElement( section, writer );
     }
     writer.writeEndElement();

@@ -28,10 +28,14 @@
 #include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 #include "AprsGatherer.h"
-#include "qextserialport.h"
 #include "AprsTCPIP.h"
-#include "AprsTTY.h"
 #include "AprsFile.h"
+
+#include <aprsconfig.h>
+
+#ifdef HAVE_QEXTSERIALPORT
+#include "AprsTTY.h"
+#endif
 
 using namespace Marble;
 /* TRANSLATOR Marble::AprsPlugin */
@@ -55,17 +59,17 @@ AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
       m_configDialog( 0 ),
       ui_configWidget( 0 )
 {
-    setEnabled( false );
-    setVisible( true );
+    setEnabled( true );
+    setVisible( false );
     
     setSettings( QHash<QString,QVariant>() );
 
-    connect( this, SIGNAL( visibilityChanged( bool, const QString & ) ),
-             this, SLOT( updateVisibility( bool ) ) );
+    connect( this, SIGNAL(visibilityChanged(bool,QString)),
+             this, SLOT(updateVisibility(bool)) );
 
     m_action = new QAction( this );
-    connect( m_action,    SIGNAL( toggled( bool ) ),
-	     this,        SLOT( setVisible( bool ) ) );
+    connect( m_action,    SIGNAL(toggled(bool)),
+	     this,        SLOT(setVisible(bool)) );
 
 }
 
@@ -154,7 +158,7 @@ QList<PluginAuthor> AprsPlugin::pluginAuthors() const
 
 QIcon AprsPlugin::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/aprs.png");
 }
 
 void AprsPlugin::stopGatherers()
@@ -164,8 +168,10 @@ void AprsPlugin::stopGatherers()
     if ( m_tcpipGatherer )
         m_tcpipGatherer->shutDown();
 
+#ifdef HAVE_QEXTSERIALPORT
     if ( m_ttyGatherer )
         m_ttyGatherer->shutDown();
+#endif
     
     if ( m_fileGatherer )
         m_fileGatherer->shutDown();
@@ -175,9 +181,11 @@ void AprsPlugin::stopGatherers()
         if ( m_tcpipGatherer->wait(2000) )
             delete m_tcpipGatherer;
 
+#ifdef HAVE_QEXTSERIALPORT
     if ( m_ttyGatherer )
         if ( m_ttyGatherer->wait(2000) )
             delete m_ttyGatherer;
+#endif
     
     if ( m_fileGatherer )
         if ( m_fileGatherer->wait(2000) )
@@ -206,6 +214,7 @@ void AprsPlugin::restartGatherers()
         mDebug() << "started TCPIP gatherer";
     }
 
+#ifdef HAVE_QEXTSERIALPORT
     if ( m_settings.value( "useTTY" ).toBool() ) {
 
         m_ttyGatherer =
@@ -218,6 +227,7 @@ void AprsPlugin::restartGatherers()
         m_ttyGatherer->start();
         mDebug() << "started TTY gatherer";
     }
+#endif
 
     
     if ( m_settings.value( "useFile" ).toBool() ) {
@@ -250,10 +260,10 @@ QDialog *AprsPlugin::configDialog()
         ui_configWidget = new Ui::AprsConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
         readSettings();
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
-                 SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
-                 SLOT( readSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
+                 SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
+                 SLOT(readSettings()) );
         //       QPushButton *applyButton =
 //             ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
 //         connect( applyButton, SIGNAL( clicked() ),
@@ -267,6 +277,11 @@ void AprsPlugin::readSettings()
     if ( !m_configDialog ) {
         return;
     }
+
+#ifndef HAVE_QEXTSERIALPORT
+    ui_configWidget->tabWidget->setTabEnabled( ui_configWidget->tabWidget->indexOf(
+                                                   ui_configWidget->Device ), false );
+#endif
 
     // Connect to the net?
     if ( m_settings.value( "useInternet" ).toBool() )
@@ -399,12 +414,11 @@ bool AprsPlugin::isInitialized () const
 
 bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     int fadetime = m_settings.value( "fadeTime" ).toInt() * 60000;
     int hidetime = m_settings.value( "hideTime" ).toInt() * 60000;
-
-    if ( renderPos != "HOVERS_ABOVE_SURFACE") {
-        return true;
-    }
 
     painter->save();
 
@@ -413,10 +427,10 @@ bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     if ( !( viewport->viewLatLonAltBox() == m_lastBox ) ) {
         m_lastBox = viewport->viewLatLonAltBox();
         QString towrite = "#filter a/" + 
-            QString().number( m_lastBox.north( GeoDataCoordinates::Degree ) ) +"/" +
-            QString().number( m_lastBox.west( GeoDataCoordinates::Degree ) )  +"/" +
-            QString().number( m_lastBox.south( GeoDataCoordinates::Degree ) ) +"/" +
-            QString().number( m_lastBox.east( GeoDataCoordinates::Degree ) )  +"\n";
+            QString().number( m_lastBox.north( GeoDataCoordinates::Degree ) ) +'/' +
+            QString().number( m_lastBox.west( GeoDataCoordinates::Degree ) )  +'/' +
+            QString().number( m_lastBox.south( GeoDataCoordinates::Degree ) ) +'/' +
+            QString().number( m_lastBox.east( GeoDataCoordinates::Degree ) )  +'\n';
         mDebug() << "upating filter: " << towrite.toLocal8Bit().data();
 
         QMutexLocker locker( m_mutex );
@@ -427,7 +441,7 @@ bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     QMutexLocker locker( m_mutex );
     QMap<QString, AprsObject *>::ConstIterator obj;
     for( obj = m_objects.constBegin(); obj != m_objects.constEnd(); ++obj ) {
-        ( *obj )->render( painter, viewport, renderPos, layer, fadetime, hidetime );
+        ( *obj )->render( painter, viewport, fadetime, hidetime );
     }
 
     painter->restore();

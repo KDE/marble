@@ -14,11 +14,11 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 
 #include <QtCore/QRect>
 #include <QtGui/QColor>
+#include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QPushButton>
 #include <QtSvg/QSvgRenderer>
@@ -123,24 +123,16 @@ void CompassFloatItem::changeViewport( ViewportParams *viewport )
 {
     // figure out the polarity ...
     if ( m_polarity != viewport->polarity() ) {
+        m_polarity = viewport->polarity();
         update();
     }
 }
 
-void CompassFloatItem::paintContent( GeoPainter *painter,
-                                     ViewportParams *viewport,
-                                     const QString& renderPos,
-                                     GeoSceneLayer * layer )
+void CompassFloatItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( layer )
-    Q_UNUSED( renderPos )
-
     painter->save();
 
-    painter->setRenderHint( QPainter::Antialiasing, true );
-
     QRectF compassRect( contentRect() );
-    m_polarity = viewport->polarity();
 
     QString dirstr = tr( "N" );
     if ( m_polarity == -1 )
@@ -168,8 +160,6 @@ void CompassFloatItem::paintContent( GeoPainter *painter,
     painter->setPen( Qt::NoPen );
     painter->drawPath( outlinepath );
 
-    painter->autoMapQuality();
-
     int compassLength = static_cast<int>( compassRect.height() ) - 5 - fontheight;
         
     QSize compassSize( compassLength, compassLength ); 
@@ -181,7 +171,6 @@ void CompassFloatItem::paintContent( GeoPainter *painter,
         QPainter mapPainter( &m_compass );
         mapPainter.setViewport( m_compass.rect() );
         m_svgobj->render( &mapPainter ); 
-        mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
     }
     painter->drawPixmap( QPoint( static_cast<int>( compassRect.width() - compassLength ) / 2, fontheight + 5 ), m_compass );
 
@@ -195,13 +184,13 @@ QDialog *CompassFloatItem::configDialog()
         m_uiConfigWidget = new Ui::CompassConfigWidget;
         m_uiConfigWidget->setupUi( m_configDialog );
         readSettings();
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( accepted() ),
-                SLOT( writeSettings() ) );
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL( rejected() ),
-                SLOT( readSettings() ) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()),
+                SLOT(writeSettings()) );
+        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(rejected()),
+                SLOT(readSettings()) );
         QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 this,        SLOT(writeSettings()) );
     }
 
     return m_configDialog;
@@ -209,7 +198,13 @@ QDialog *CompassFloatItem::configDialog()
 
 QHash<QString,QVariant> CompassFloatItem::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> result = AbstractFloatItem::settings();
+
+    foreach ( const QString &key, m_settings.keys() ) {
+        result.insert( key, m_settings[key] );
+    }
+
+    return result;
 }
 
 void CompassFloatItem::setSettings( const QHash<QString,QVariant> &settings )

@@ -16,6 +16,7 @@
 
 // Marble
 #include "marble_export.h"
+#include "MarbleGlobal.h"
 
 // Qt
 #include <QtGui/QWidget>
@@ -45,7 +46,7 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      */
     void setMarbleWidget( MarbleWidget *widget );
 
-    void search( const QString &searchTerm );
+    void search( const QString &searchTerm, SearchMode searchMode );
 
  Q_SIGNALS:
     /**
@@ -99,7 +100,10 @@ class MARBLE_EXPORT NavigationWidget : public QWidget
      */
     void changeZoom( int zoom );
 
-    void setBoundedSearchEnabled( bool value );
+    /**
+     * @brief Clear all previous search results
+     */
+    void clearSearch();
 
  protected:
     /**

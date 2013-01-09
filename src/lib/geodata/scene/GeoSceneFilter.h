@@ -48,14 +48,14 @@ class GeoSceneFilter : public GeoNode
     QString type() const;
     void setType( const QString& type );
 
-    QList<GeoScenePalette*> palette() const;
-    void addPalette( GeoScenePalette *palette );
-    int removePalette( GeoScenePalette *palette ); //returns # of items removed
+    QList<const GeoScenePalette*> palette() const;
+    void addPalette( const GeoScenePalette *palette );
+    int removePalette( const GeoScenePalette *palette ); //returns # of items removed
 
  private:
     QString m_name;
     QString m_type;
-    QList<GeoScenePalette*> m_palette;
+    QList<const GeoScenePalette*> m_palette;
 
 };
 

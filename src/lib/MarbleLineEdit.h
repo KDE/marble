@@ -35,7 +35,7 @@ class MARBLE_EXPORT MarbleLineEdit : public QLineEdit
 
 public:
     /** Constructor */
-    MarbleLineEdit( QWidget *parent = 0 );
+    explicit MarbleLineEdit( QWidget *parent = 0 );
 
     /** Destructor */
     ~MarbleLineEdit();

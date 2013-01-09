@@ -30,16 +30,13 @@ GeoDataPoint GeoPointGraphicsItem::point() const
     return m_point;
 }
 
-void GeoPointGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
-                                  const QString& renderPos, GeoSceneLayer* layer )
+void GeoPointGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
     Q_UNUSED( viewport );
     painter->drawPoint( m_point );
 }
 
-GeoDataLatLonAltBox& GeoPointGraphicsItem::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoPointGraphicsItem::latLonAltBox() const
 {
     return m_point.latLonAltBox();
 }

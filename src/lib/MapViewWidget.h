@@ -31,7 +31,6 @@ class MarbleWidget;
 class MARBLE_EXPORT MapViewWidget : public QWidget
 {
     Q_OBJECT
-
  public:
     explicit MapViewWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     ~MapViewWidget();
@@ -42,20 +41,36 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
      */
     void setMarbleWidget( MarbleWidget *widget );
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
  public Q_SLOTS:
     void setMapThemeId( const QString & );
-
     void setProjection( Projection projection );
 
+private slots:
+    void globeViewRequested();
+    void mercatorViewRequested();
+    void flatViewRequested();
+
  private:
-    Q_PRIVATE_SLOT( d, void selectCurrentMapTheme( const QString& ) )
+    Q_PRIVATE_SLOT( d, void setCelestialBody( int comboIndex ) )
 
     /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
     Q_PRIVATE_SLOT( d, void updateMapThemeView() )
 
     Q_PRIVATE_SLOT( d, void projectionSelected( int projectionIndex ) )
 
+    Q_PRIVATE_SLOT( d, void mapThemeSelected( QModelIndex index ) )
+    Q_PRIVATE_SLOT( d, void mapThemeSelected( int index ) )
+
+    Q_PRIVATE_SLOT( d, void showContextMenu( const QPoint& pos ) )
+    Q_PRIVATE_SLOT( d, void deleteMap() )
+    Q_PRIVATE_SLOT( d, void toggleFavorite() )
+    Q_PRIVATE_SLOT( d, void toggleIconSize() )
+
  Q_SIGNALS:
+    void celestialBodyChanged( const QString& );
     void mapThemeIdChanged( const QString& );
     void projectionChanged( Projection );
     void showMapWizard();

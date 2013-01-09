@@ -59,7 +59,7 @@ QList<PluginAuthor> NominatimPlugin::pluginAuthors() const
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
-MarbleAbstractRunner* NominatimPlugin::newRunner() const
+SearchRunner* NominatimPlugin::newRunner() const
 {
     return new OsmNominatimRunner;
 }

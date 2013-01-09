@@ -40,6 +40,14 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+#ifdef Q_WS_MAEMO_5
+    enum Orientation {
+        OrientationAutorotate,
+        OrientationLandscape,
+        OrientationPortrait
+    };
+#endif
+
 public:
     explicit MainWindow(const QString& marbleDataPath = QString(),
                         const QVariantMap& cmdLineSettings = QVariantMap(),
@@ -52,6 +60,10 @@ public:
         return m_controlView->marbleWidget();
     }
 
+#ifdef Q_WS_MAEMO_5
+    Orientation orientation() const;
+#endif
+
 protected:
     void  closeEvent(QCloseEvent *event);
 
@@ -60,6 +72,7 @@ private:
     void  createActions();
     void  createMenus();
     void  createStatusBar();
+    void  createDockWidgets();
 
     QString  readMarbleDataPath();
     void  readSettings(const QVariantMap& overrideSettings = QVariantMap());
@@ -84,6 +97,8 @@ private Q_SLOTS:
     void  workOffline( bool );
     void  showMapWizard();
 
+    void  updateAtmosphereMenu();
+
     // Edit Menu
     void  copyMap();
     void  copyCoordinates();
@@ -103,7 +118,9 @@ private Q_SLOTS:
 
     // Settings Menu
     void  showFullScreen( bool );
-    void  showSideBar( bool );
+#ifdef Q_WS_MAEMO_5
+    void  setOrientation( Orientation orientation );
+#endif
     void  showStatusBar( bool );
     void  setupStatusBar();
 
@@ -115,11 +132,11 @@ private Q_SLOTS:
     //Bookmark Menu
     void  openEditBookmarkDialog();
     void  setHome();
-    void  createBookmarksListMenu(QMenu *m_bookmarksListMenu, const GeoDataFolder &folder);
+    void  createBookmarksListMenu( QMenu *bookmarksListMenu, const GeoDataContainer *container );
     void  lookAtBookmark( QAction * action );
     void  manageBookmarks();
     void  createBookmarkMenu();
-    void  createFolderList();
+    void  createFolderList( QMenu *bookmarksListMenu, const GeoDataContainer *container );
     void  showBookmarks( bool show );
 
     // Download region dialog
@@ -135,6 +152,7 @@ private Q_SLOTS:
     void showGoToDialog();
 
     void showZoomLevel( bool show );
+    void showSearch();
 
 private:
     void setupZoomButtons();
@@ -154,6 +172,7 @@ private:
     QMenu *m_fileMenu;
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;
+    QMenu *m_panelMenu;
     QMenu *m_infoBoxesMenu;
     QMenu *m_onlineServicesMenu;
     QMenu *m_bookmarkMenu;
@@ -181,7 +200,6 @@ private:
     QAction *m_reloadAct;
 
     // Settings Menu
-    QAction *m_sideBarAct;
     QAction *m_fullScreenAct;
     QAction *m_statusBarAct;
     QAction *m_configDialogAct;
@@ -216,7 +234,7 @@ private:
     QAction *m_toggleRoutingTabAction;
     QAction *m_showTrackingDialogAction;
 
-    StackableWindow *m_mapViewWindow;
+    QDialog *m_mapViewWindow;
     StackableWindow *m_routingWindow;
     StackableWindow *m_trackingWindow;
     GoToDialog *m_gotoDialog;
@@ -224,6 +242,7 @@ private:
     RoutingWidget *m_routingWidget;
 
     QString m_lastFileOpenPath;
+    QDockWidget* m_searchDock;
 };
 
 } // namespace Marble

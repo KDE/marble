@@ -9,36 +9,30 @@
 
 #include "HostipRunner.h"
 
-#include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
+#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 
 #include <QtCore/QString>
 #include <QtCore/QTimer>
 #include <QtCore/QVector>
 #include <QtCore/QUrl>
-#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
 namespace Marble
 {
 
 HostipRunner::HostipRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ),
-        m_networkAccessManager( new QNetworkAccessManager( this ) )
+        SearchRunner( parent ),
+        m_networkAccessManager()
 {
-    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
-            this, SLOT( slotRequestFinished( QNetworkReply* ) ), Qt::DirectConnection );
+    connect( &m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(slotRequestFinished(QNetworkReply*)), Qt::DirectConnection );
 }
 
 HostipRunner::~HostipRunner()
 {
-}
-
-GeoDataFeature::GeoDataVisualCategory HostipRunner::category() const
-{
-    return GeoDataFeature::Coordinate;
 }
 
 void HostipRunner::slotNoResults()
@@ -56,8 +50,8 @@ void HostipRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox 
     else {
         QEventLoop eventLoop;
 
-        connect( this, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
-                 &eventLoop, SLOT( quit() ) );
+        connect( this, SIGNAL(searchFinished(QVector<GeoDataPlacemark*>)),
+                 &eventLoop, SLOT(quit()) );
 
         // Lookup the IP address for a hostname, or the hostname if an IP address was given
         QHostInfo ::lookupHost( searchTerm, this, SLOT(slotLookupFinished(QHostInfo)));
@@ -75,7 +69,7 @@ void HostipRunner::slotLookupFinished(const QHostInfo &info)
         m_request.setUrl( QUrl( query ) );
 
         // @todo FIXME Must currently be done in the main thread, see bug 257376
-        QTimer::singleShot( 0, this, SLOT( get() ) );
+        QTimer::singleShot( 0, this, SLOT(get()) );
     }
     else
       slotNoResults();
@@ -83,9 +77,9 @@ void HostipRunner::slotLookupFinished(const QHostInfo &info)
 
 void HostipRunner::get()
 {
-    QNetworkReply *reply = m_networkAccessManager->get( m_request );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( slotNoResults() ), Qt::DirectConnection );
+    QNetworkReply *reply = m_networkAccessManager.get( m_request );
+    connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
+             this, SLOT(slotNoResults()), Qt::DirectConnection );
 }
 
 void HostipRunner::slotRequestFinished( QNetworkReply* reply )
@@ -116,7 +110,7 @@ void HostipRunner::slotRequestFinished( QNetworkReply* reply )
                                  arg( m_hostInfo.addresses().first().toString() ) );
 
         placemark->setCoordinate( lon * DEG2RAD, lat * DEG2RAD );
-        placemark->setVisualCategory( category() );
+        placemark->setVisualCategory( GeoDataFeature::Coordinate );
         placemarks << placemark;
     }
     

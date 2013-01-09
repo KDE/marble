@@ -183,6 +183,11 @@ enum FlyToMode
     Linear,
     Jump
 };
+enum SearchMode
+{
+    GlobalSearch,
+    AreaSearch
+};
 };
 // Marble
 

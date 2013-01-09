@@ -90,7 +90,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 /*!
     \brief Creates a LineString from an existing geometry object.
 */
-    GeoDataLineString( const GeoDataGeometry &other );
+    explicit GeoDataLineString( const GeoDataGeometry &other );
 
 
 /*!
@@ -144,7 +144,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     \see GeoDataLatLonAltBox
 */
 
-   virtual GeoDataLatLonAltBox& latLonAltBox() const;
+   virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
 /**
   * @brief Returns the length of LineString across a sphere starting from a coordinate in LineString

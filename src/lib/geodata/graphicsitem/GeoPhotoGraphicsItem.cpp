@@ -40,12 +40,8 @@ QString GeoPhotoGraphicsItem::photoPath() const
     return m_photoPath;
 }
 
-void GeoPhotoGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
-                                  const QString& renderPos, GeoSceneLayer* layer )
-{   
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
+void GeoPhotoGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
+{
     /** @todo FIXME: need access to MarbleModel here ideally */
     qreal const planetRadius = EARTH_RADIUS;
     /** @todo: Taken from MarbleWidgetPrivate */
@@ -62,7 +58,7 @@ void GeoPhotoGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
      */
     bool unloadImage = true;
 
-    if ( cameraDistance > m_point.altitude() ) {
+    if ( cameraDistance > m_point.coordinates().altitude() ) {
         QSizeF size;
         if ( m_photo.isNull() && !m_photoPath.isEmpty() ) {
             QImageReader reader( m_photoPath );
@@ -70,11 +66,11 @@ void GeoPhotoGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
         } else {
             size = m_photo.size(); // Image loaded or invalid
         }
-        size *= (m_point.altitude() + near) / cameraDistance;
+        size *= (m_point.coordinates().altitude() + near) / cameraDistance;
         if ( size.width() * size.height() > 256 ) {
             // The image gets displayed if the observer is above it and if it covers a certain minimum area
             qreal x(0.0), y( 0.0 );
-            viewport->screenCoordinates( m_point, x, y );
+            viewport->screenCoordinates( m_point.coordinates(), x, y );
             QRectF position( QPointF( x, y ), size );
             position.moveCenter( QPointF( x, y ) );
 
@@ -96,7 +92,7 @@ void GeoPhotoGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
     }
 }
 
-GeoDataLatLonAltBox& GeoPhotoGraphicsItem::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoPhotoGraphicsItem::latLonAltBox() const
 {
     return m_point.latLonAltBox();
 }

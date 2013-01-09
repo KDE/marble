@@ -40,8 +40,6 @@ public:
 
     virtual void initialize();
 
-    virtual bool isInitialized() const;
-
     QString name() const;
 
     QString guiString() const;
@@ -76,7 +74,6 @@ public slots:
     void updateModel();
 
 private:
-    bool m_isInitialized;
     Ui::EarthquakeConfigWidget *m_ui;
     QDialog *m_configDialog;
     qreal m_minMagnitude;

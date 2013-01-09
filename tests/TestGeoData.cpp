@@ -17,6 +17,9 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataTypes.h"
+#include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataStyleMap.h"
 #include "MarbleDebug.h"
 
 namespace Marble
@@ -97,6 +100,36 @@ void TestGeoData::parentingTest()
 
     /// check retrieved placemark matches intended child
     QCOMPARE(folderPtr->childPosition(placemarkPtr), 0);
+
+    /// Set a style
+    GeoDataIconStyle iconStyle;
+    iconStyle.setIconPath( "myicon.png" );
+    GeoDataStyle* style = new GeoDataStyle;
+    style->setStyleId( "mystyle" );
+    style->setIconStyle( iconStyle );
+    GeoDataObject* noParent = 0;
+    QCOMPARE( style->parent(), noParent );
+    QCOMPARE( iconStyle.parent(), noParent );
+    document->setStyle( style );
+    QCOMPARE( style->parent(), document ); // Parent should be assigned now
+    QCOMPARE( style->iconStyle().parent(), style );
+    QCOMPARE( iconStyle.parent(), noParent ); // setIconStyle copies
+    QCOMPARE( placemark->style()->parent(), noParent );
+    placemark->setStyle( style );
+    QCOMPARE( placemark->style()->parent(), placemark ); // Parent should be assigned now
+
+    /// Set a style map
+    GeoDataStyleMap* styleMap = new GeoDataStyleMap;
+    styleMap->setStyleId( "mystylemap" );
+    styleMap->insert( "normal", "#mystyle" );
+    styleMap->insert( "highlight", "#mystyle" );
+    document->addStyle( *style );
+    document->setStyleMap( styleMap );
+    QCOMPARE( placemark2->style()->parent(), noParent );
+    placemark2->setStyleUrl( "#mystyle" );
+    QCOMPARE( placemark2->style()->parent(), document ); // Parent is document, not placemark2
+    QCOMPARE( iconStyle.iconPath(), QString( "myicon.png" ) );
+    QCOMPARE( placemark2->style()->iconStyle().iconPath(), QString( "myicon.png" ) );
 }
 
 }

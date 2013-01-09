@@ -1,17 +1,22 @@
-// Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library. If not, see <http://www.gnu.org/licenses/>.
+/*
+ * This file is part of the Marble Virtual Globe.
+ *
+ * Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+ * Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "TileLoader.h"
 
@@ -20,7 +25,10 @@
 #include <QtCore/QMetaType>
 #include <QtGui/QImage>
 
-#include "GeoSceneTexture.h"
+#include "MarbleRunnerManager.h"
+
+#include "GeoSceneTiled.h"
+#include "GeoDataContainer.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -31,7 +39,8 @@ Q_DECLARE_METATYPE( Marble::DownloadUsage )
 namespace Marble
 {
 
-TileLoader::TileLoader( HttpDownloadManager * const downloadManager )
+TileLoader::TileLoader(HttpDownloadManager * const downloadManager, const PluginManager *pluginManager) :
+      m_pluginManager( pluginManager )
 {
     qRegisterMetaType<DownloadUsage>( "DownloadUsage" );
     connect( this, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage )),
@@ -40,23 +49,14 @@ TileLoader::TileLoader( HttpDownloadManager * const downloadManager )
              SLOT( updateTile( QByteArray, QString )));
 }
 
-void TileLoader::setTextureLayers( const QVector<const GeoSceneTexture *> &textureLayers )
-{
-    foreach ( const GeoSceneTexture *texture, textureLayers ) {
-        const uint hash = qHash( texture->sourceDir() );
-        m_textureLayers.insert( hash, texture );
-    }
-}
-
-// If the tile is locally available:
-//     - if not expired: create TextureTile, set state to "uptodate", return it => done
+// If the tile image file is locally available:
+//     - if not expired: create ImageTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
-
-QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
+QImage TileLoader::loadTileImage( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const usage )
 {
-    GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
-    TileStatus status = tileStatus( tileId );
+
+    TileStatus status = tileStatus( textureLayer, tileId );
     if ( status != Missing ) {
         // check if an update should be triggered
 
@@ -65,7 +65,7 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
         } else {
             Q_ASSERT( status == Expired );
             mDebug() << Q_FUNC_INFO << tileId << "StateExpired";
-            triggerDownload( tileId, usage );
+            triggerDownload( textureLayer, tileId, usage );
         }
 
         QImage const image( fileName );
@@ -77,12 +77,51 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 
     // tile was not locally available => trigger download and look for tiles in other levels
     // for scaling
-    QImage replacementTile = scaledLowerLevelTile( tileId );
+    QImage replacementTile = scaledLowerLevelTile( textureLayer, tileId );
     Q_ASSERT( !replacementTile.isNull() );
 
-    triggerDownload( tileId, usage );
+    triggerDownload( textureLayer, tileId, usage );
 
     return replacementTile;
+}
+
+
+GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const usage, QString const &format )
+{
+    // Format could be used in the future for use just that parser, instead of all available parsers
+    Q_UNUSED( format );
+
+    QString const fileName = tileFileName( textureLayer, tileId );
+
+    TileStatus status = tileStatus( textureLayer, tileId );
+    if ( status != Missing ) {
+        // check if an update should be triggered
+
+        if ( status == Available ) {
+            mDebug() << Q_FUNC_INFO << tileId << "StateUptodate";
+        } else {
+            Q_ASSERT( status == Expired );
+            mDebug() << Q_FUNC_INFO << tileId << "StateExpired";
+            triggerDownload( textureLayer, tileId, usage );
+        }
+
+        QFile file ( fileName );
+        if ( file.exists() ) {
+
+            // File is ready, so parse and return the vector data in any case
+            MarbleRunnerManager man( m_pluginManager );
+            GeoDataDocument* document = man.openFile( fileName );
+
+            if (document){
+                return document;
+            }
+        }
+    }
+
+    // tile was not locally available => trigger download
+    triggerDownload( textureLayer, tileId, usage );
+
+    return new GeoDataDocument;
 }
 
 // This method triggers a download of the given tile (without checking
@@ -91,17 +130,12 @@ QImage TileLoader::loadTile( TileId const & tileId, DownloadUsage const usage )
 //
 // post condition
 //     - download is triggered
-void TileLoader::reloadTile( TileId const &tileId, DownloadUsage const usage )
+void TileLoader::downloadTile( GeoSceneTiled const *textureLayer, TileId const &tileId, DownloadUsage const usage )
 {
-    triggerDownload( tileId, usage );
+    triggerDownload( textureLayer, tileId, usage );
 }
 
-void TileLoader::downloadTile( TileId const & tileId )
-{
-    triggerDownload( tileId, DownloadBulk );
-}
-
-int TileLoader::maximumTileLevel( GeoSceneTexture const & texture )
+int TileLoader::maximumTileLevel( GeoSceneTiled const & texture )
 {
     // if maximum tile level is configured in the DGML files,
     // then use it, otherwise use old detection code.
@@ -131,7 +165,7 @@ int TileLoader::maximumTileLevel( GeoSceneTexture const & texture )
     return maximumTileLevel + 1;
 }
 
-bool TileLoader::baseTilesAvailable( GeoSceneTexture const & texture )
+bool TileLoader::baseTilesAvailable( GeoSceneTiled const & texture )
 {
     const int  levelZeroColumns = texture.levelZeroColumns();
     const int  levelZeroRows    = texture.levelZeroRows();
@@ -142,18 +176,20 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture const & texture )
     //
     for ( int column = 0; result && column < levelZeroColumns; ++column ) {
         for ( int row = 0; result && row < levelZeroRows; ++row ) {
-            const TileId id( texture.sourceDir(), 0, column, row );
+            const TileId id( 0, 0, column, row );
             const QString tilepath = tileFileName( &texture, id );
             result &= QFile::exists( tilepath );
+            if (!result) {
+                mDebug() << "Base tile " << texture.relativeTileFileName( id ) << " is missing for source dir " << texture.sourceDir();
+            }
         }
     }
 
     return result;
 }
 
-TileLoader::TileStatus TileLoader::tileStatus( const TileId &tileId ) const
+TileLoader::TileStatus TileLoader::tileStatus( GeoSceneTiled const *textureLayer, const TileId &tileId )
 {
-    GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
     QString const fileName = tileFileName( textureLayer, tileId );
     QFileInfo fileInfo( fileName );
     if ( !fileInfo.exists() ) {
@@ -166,9 +202,17 @@ TileLoader::TileStatus TileLoader::tileStatus( const TileId &tileId ) const
     return isExpired ? Expired : Available;
 }
 
-void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
+void TileLoader::updateTile( QByteArray const & data, QString const & idStr )
 {
-    TileId const id = TileId::fromString( tileId );
+    QStringList const components = idStr.split( ':', QString::SkipEmptyParts );
+    Q_ASSERT( components.size() == 4 );
+
+    QString const sourceDir = components[ 0 ];
+    int const zoomLevel = components[ 1 ].toInt();
+    int const tileX = components[ 2 ].toInt();
+    int const tileY = components[ 3 ].toInt();
+
+    TileId const id = TileId( sourceDir, zoomLevel, tileX, tileY );
 
     QImage const tileImage = QImage::fromData( data );
     if ( tileImage.isNull() )
@@ -177,32 +221,24 @@ void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
     emit tileCompleted( id, tileImage );
 }
 
-inline GeoSceneTexture const * TileLoader::findTextureLayer( TileId const & id ) const
-{
-    GeoSceneTexture const * const textureLayer = m_textureLayers.value( id.mapThemeIdHash(), 0 );
-    Q_ASSERT( textureLayer );
-    return textureLayer;
-}
-
-QString TileLoader::tileFileName( GeoSceneTexture const * textureLayer, TileId const & tileId )
+QString TileLoader::tileFileName( GeoSceneTiled const * textureLayer, TileId const & tileId )
 {
     QString const fileName = textureLayer->relativeTileFileName( tileId );
     QFileInfo const dirInfo( fileName );
     return dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );
 }
 
-void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
+void TileLoader::triggerDownload( GeoSceneTiled const *textureLayer, TileId const &id, DownloadUsage const usage )
 {
-    GeoSceneTexture const * const textureLayer = findTextureLayer( id );
     QUrl const sourceUrl = textureLayer->downloadUrl( id );
     QString const destFileName = textureLayer->relativeTileFileName( id );
-    emit downloadTile( sourceUrl, destFileName, id.toString(), usage );
+    QString const idStr = QString( "%1:%2:%3:%4" ).arg( textureLayer->sourceDir() ).arg( id.zoomLevel() ).arg( id.x() ).arg( id.y() );
+    emit downloadTile( sourceUrl, destFileName, idStr, usage );
 }
 
-QImage TileLoader::scaledLowerLevelTile( TileId const & id ) const
+QImage TileLoader::scaledLowerLevelTile( const GeoSceneTiled * textureLayer, TileId const & id ) const
 {
     mDebug() << Q_FUNC_INFO << id;
-    GeoSceneTexture const * const textureLayer = findTextureLayer( id );
 
     for ( int level = qMax<int>( 0, id.zoomLevel() - 1 ); level >= 0; --level ) {
         int const deltaLevel = id.zoomLevel() - level;
@@ -214,7 +250,6 @@ QImage TileLoader::scaledLowerLevelTile( TileId const & id ) const
 
         if ( level == 0 && toScale.isNull() ) {
             mDebug() << "No level zero tile installed in map theme dir. Falling back to a transparent image for now.";
-            GeoSceneTexture const * const textureLayer = findTextureLayer( replacementTileId );
             QSize tileSize = textureLayer->tileSize();
             Q_ASSERT( !tileSize.isEmpty() ); // assured by textureLayer
             toScale = QImage( tileSize, QImage::Format_ARGB32_Premultiplied );

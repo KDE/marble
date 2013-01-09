@@ -55,7 +55,7 @@ QList<PluginAuthor> LocalDatabasePlugin::pluginAuthors() const
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
 }
 
-MarbleAbstractRunner* LocalDatabasePlugin::newRunner() const
+SearchRunner* LocalDatabasePlugin::newRunner() const
 {
     return new LocalDatabaseRunner;
 }

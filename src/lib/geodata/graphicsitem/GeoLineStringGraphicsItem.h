@@ -23,16 +23,13 @@ class GeoDataLineStyle;
 class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
 {
 public:
-    GeoLineStringGraphicsItem( const GeoDataLineString *lineString );
+    explicit GeoLineStringGraphicsItem( const GeoDataLineString *lineString );
 
     void setLineString( const GeoDataLineString* lineString );
 
-    virtual GeoDataCoordinates coordinate() const;
+    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
-    virtual GeoDataLatLonAltBox& latLonAltBox() const;
-
-    virtual void paint( GeoPainter* painter, ViewportParams *viewport,
-                        const QString &renderPos, GeoSceneLayer *layer );
+    virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
 
 protected:
     const GeoDataLineString *m_lineString;

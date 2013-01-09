@@ -24,7 +24,7 @@ class EarthquakeModel : public AbstractDataPluginModel
     Q_OBJECT
 
 public:
-    explicit EarthquakeModel( const PluginManager *pluginManager, QObject *parent = 0 );
+    explicit EarthquakeModel( QObject *parent = 0 );
     ~EarthquakeModel();
 
     void setMinMagnitude( double minMagnitude );

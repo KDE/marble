@@ -30,5 +30,6 @@ public:
     virtual QStringList     renderPosition () const=0;
     virtual qreal           zValue () const;
     virtual bool            render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer)=0;
+    virtual QString         runtimeTrace () const;
 };
 };

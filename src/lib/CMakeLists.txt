@@ -6,8 +6,8 @@ endif (QTONLY)
 
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_SOURCE_DIR}/src/lib
- ${CMAKE_BINARY_DIR}/src/lib
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${CMAKE_CURRENT_SOURCE_DIR}/Projections
  ${CMAKE_CURRENT_SOURCE_DIR}/routing
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
@@ -27,8 +27,8 @@ INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 
-set(GENERIC_LIB_VERSION "0.15.0")
-set(GENERIC_LIB_SOVERSION "15")
+set(GENERIC_LIB_VERSION "0.15.20")
+set(GENERIC_LIB_SOVERSION "16")
 
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
@@ -74,8 +74,6 @@ set(marblewidget_SRCS
     CurrentLocationWidget.cpp
     MarbleNavigator.cpp
     MarbleLegendBrowser.cpp
-    MarbleThemeSelectView.cpp
-    MarbleSearchListView.cpp
     MarbleAboutDialog.cpp
     MarbleWidgetInputHandler.cpp
     MarbleWidgetPopupMenu.cpp
@@ -84,7 +82,9 @@ set(marblewidget_SRCS
     kdescendantsproxymodel.cpp
     BranchFilterProxyModel.cpp
     MarbleDebug.cpp
+    Tile.cpp
     TextureTile.cpp
+    VectorTile.cpp
     TileCoordsPyramid.cpp
     TileLevelRangeWidget.cpp
     TileLoader.cpp
@@ -96,12 +96,13 @@ set(marblewidget_SRCS
     GeoPolygon.cpp
     HttpDownloadManager.cpp
     HttpJob.cpp
-    NetworkPlugin.cpp
     LayerManager.cpp
     PluginManager.cpp
     MarbleCacheSettingsWidget.cpp
     TimeControlWidget.cpp
     AbstractFloatItem.cpp
+    MapInfoDialog.cpp
+    PopupItem.cpp
     MarbleGlobal.cpp
     MarbleDirs.cpp
     MarbleLocale.cpp
@@ -112,12 +113,12 @@ set(marblewidget_SRCS
     ViewportParams.cpp
     ViewParams.cpp
     Projections/AbstractProjection.cpp
+	Projections/CylindricalProjection.cpp
     Projections/SphericalProjection.cpp
     Projections/EquirectProjection.cpp
     Projections/MercatorProjection.cpp
     VisiblePlacemark.cpp
     PlacemarkLayout.cpp
-    PlacemarkInfoDialog.cpp
     Planet.cpp
     Quaternion.cpp
     TextureColorizer.cpp
@@ -127,6 +128,7 @@ set(marblewidget_SRCS
     EquirectScanlineTextureMapper.cpp
     MercatorScanlineTextureMapper.cpp
     TileScalingTextureMapper.cpp
+    VectorTileMapper.cpp
     DiscCache.cpp
     ServerLayout.cpp
     StoragePolicy.cpp
@@ -144,7 +146,6 @@ set(marblewidget_SRCS
     VectorMap.cpp
     FileLoader.cpp
     FileManager.cpp
-    FileViewModel.cpp
     PositionTracking.cpp
     DataMigration.cpp
 
@@ -153,8 +154,9 @@ set(marblewidget_SRCS
     AbstractDataPluginItem.cpp
     AbstractWorkerThread.cpp
 
+    WikipediaService.cpp
+
     PluginInterface.cpp
-    NetworkPluginInterface.cpp
     DialogConfigurationInterface.cpp
     LayerInterface.cpp
     RenderPlugin.cpp
@@ -162,6 +164,7 @@ set(marblewidget_SRCS
     PositionProviderPlugin.cpp
     PositionProviderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp
+    RenderPluginModel.cpp
     PluginAboutDialog.cpp
     PluginItemDelegate.cpp
 
@@ -207,7 +210,10 @@ set(marblewidget_SRCS
     ReverseGeocodingRunnerPlugin.cpp
     RoutingRunnerPlugin.cpp
     ParseRunnerPlugin.cpp
-    MarbleAbstractRunner.cpp
+    SearchRunner.cpp
+    ReverseGeocodingRunner.cpp
+    RoutingRunner.cpp
+    ParsingRunner.cpp
     RunnerTask.cpp
 
     BookmarkManager.cpp
@@ -224,6 +230,7 @@ set(marblewidget_SRCS
     ElevationModel.cpp
     MarbleLineEdit.cpp
     SearchInputWidget.cpp
+    SearchWidget.cpp
     kineticmodel.cpp
     NewstuffModel.cpp
 )
@@ -244,7 +251,6 @@ set (marblewidget_UI
     MarblePluginSettingsWidget.ui
     TileCreatorDialog.ui
     TileLevelRangeWidget.ui
-    PlacemarkInfoDialog.ui
     MarbleAboutDialog.ui
     SunControlWidget.ui
     LatLonEdit.ui
@@ -270,7 +276,7 @@ qt4_automoc(${marblewidget_SRCS})
 
 # link with release version of Qt libs
 ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
-TARGET_LINK_LIBRARIES (marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTMAIN_LIBRARY} ${QT_QTWEBKIT_LIBRARY} )
+TARGET_LINK_LIBRARIES (marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTMAIN_LIBRARY} ${QT_QTWEBKIT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} )
 
 if (APPLE)
   #defined in top level makefile
@@ -315,7 +321,7 @@ endif(WIN32 AND QTONLY)
 ########### install files ###############
 
 if (APPLE AND QTONLY)
-  # do nothing because we dont put .h files in the bundle
+  # do nothing because we don't put .h files in the bundle
 else (APPLE AND QTONLY)
   install( FILES
     ${graphicsview_HDRS}
@@ -338,17 +344,20 @@ else (APPLE AND QTONLY)
     MapThemeManager.h
     MarbleAboutDialog.h
     MarbleWidgetInputHandler.h
+    TileId.h
     TileCoordsPyramid.h
     TileLevelRangeWidget.h
     TinyWebBrowser.h
     QtMarbleConfigDialog.h
     global.h
+    MarbleColors.h
     MarbleGlobal.h
     MarbleDirs.h
     GeoPainter.h
     TileCreatorDialog.h
     ViewportParams.h
     Projections/AbstractProjection.h
+	Projections/CylindricalProjection.h
     Projections/SphericalProjection.h
     Projections/EquirectProjection.h
     Projections/MercatorProjection.h
@@ -370,6 +379,7 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataGroundOverlay.h
     geodata/data/GeoDataHotSpot.h
     geodata/data/GeoDataIconStyle.h
+    geodata/data/GeoDataItemIcon.h
     geodata/data/GeoDataLabelStyle.h
     geodata/data/GeoDataLatLonAltBox.h
     geodata/data/GeoDataLatLonBox.h
@@ -403,7 +413,10 @@ else (APPLE AND QTONLY)
     RenderPlugin.h
     RenderPluginInterface.h
     MarbleRunnerManager.h
-    MarbleAbstractRunner.h
+    ParsingRunner.h
+    SearchRunner.h
+    ReverseGeocodingRunner.h
+    RoutingRunner.h
     SearchRunnerPlugin.h
     ReverseGeocodingRunnerPlugin.h
     RoutingRunnerPlugin.h
@@ -417,6 +430,8 @@ else (APPLE AND QTONLY)
     AbstractDataPluginModel.h
     AbstractDataPluginItem.h
     AbstractWorkerThread.h
+
+    WikipediaService.h
 
     LatLonEdit.h
     MapWizard.h

@@ -8,6 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
+// Copyright 2012      Cezar Mocan  <mocancezar@gmail.com>
 //
 
 #include "TextureColorizer.h"
@@ -16,6 +17,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QString>
+#include <QtCore/QVector>
 #include <QtCore/QTime>
 #include <QtGui/QColor>
 #include <QtGui/QImage>
@@ -28,6 +30,10 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
+#include "GeoDataFeature.h"
+#include "GeoDataTypes.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataDocument.h"
 
 namespace Marble
 {
@@ -65,7 +71,9 @@ private:
 TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
                                     VectorComposer *veccomposer )
-    : m_veccomposer( veccomposer )
+    : m_veccomposer( veccomposer ),
+      m_landColor(qRgb( 255, 0, 0 ) ),
+      m_seaColor( qRgb( 0, 255, 0 ) )
 {
     QTime t;
     t.start();
@@ -144,6 +152,16 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
 
+void TextureColorizer::addSeaDocument( GeoDataDocument* seaDocument )
+{
+    m_seaDocuments.append( seaDocument );
+}
+
+void TextureColorizer::addLandDocument( GeoDataDocument* landDocument )
+{
+    m_landDocuments.append( landDocument );
+}
+
 void TextureColorizer::setShowRelief( bool show )
 {
     m_showRelief = show;
@@ -165,6 +183,52 @@ void TextureColorizer::setShowRelief( bool show )
 // increase the illusion of height differences (see the variable
 // showRelief).
 // 
+
+void TextureColorizer::drawIndividualDocument( GeoPainter *painter, GeoDataDocument *document )
+{
+    QVector<GeoDataFeature*>::Iterator i = document->begin();
+    QVector<GeoDataFeature*>::Iterator end = document->end();
+
+    for ( ; i != end; ++i ) {
+        if ( (*i)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( *i );
+
+            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+                GeoDataLineString *child = static_cast<GeoDataLineString*>( placemark->geometry() );
+                GeoDataLinearRing ring( *child );
+                painter->drawPolygon( ring );
+            }
+
+            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+                GeoDataPolygon *child = static_cast<GeoDataPolygon*>( placemark->geometry() );
+                painter->drawPolygon( *child );
+            }
+
+            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
+                GeoDataLinearRing *child = static_cast<GeoDataLinearRing*>( placemark->geometry() );
+                painter->drawPolygon( *child );
+            }
+        }
+    }
+}
+
+void TextureColorizer::drawTextureMap( GeoPainter *painter )
+{
+    foreach( GeoDataDocument* doc, m_landDocuments ) {
+        painter->setPen( QPen( Qt::NoPen ) );
+        painter->setBrush( QBrush( m_landColor ) );
+        drawIndividualDocument( painter, doc );
+    }
+
+    foreach( GeoDataDocument* doc, m_seaDocuments ) {
+        if ( doc->isVisible() ) {
+            painter->setPen( Qt::NoPen );
+            painter->setBrush( QBrush( m_seaColor ) );
+            drawIndividualDocument( painter, doc );
+        }
+    }
+}
 
 void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport, MapQuality mapQuality )
 {
@@ -194,7 +258,11 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     GeoPainter painter( &m_coastImage, viewport, mapQuality, doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
-    m_veccomposer->drawTextureMap( &painter, viewport );
+    if ( m_landDocuments.isEmpty() ) {
+        m_veccomposer->drawTextureMap( &painter, viewport );
+    } else {
+        drawTextureMap( &painter );
+    }
 
     const qint64   radius   = viewport->radius();
 
@@ -204,11 +272,6 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     const int  imgry     = imgheight / 2;
     // This variable is not used anywhere..
     const int  imgradius = imgrx * imgrx + imgry * imgry;
-
-    const uint landoffscreen = qRgb(255,0,0);
-    // const uint seaoffscreen = qRgb(0,0,0);
-    const uint lakeoffscreen = qRgb(0,0,0);
-    // const uint glaciercolor = qRgb(200,200,200);
 
     int     bump = 8;
 
@@ -264,54 +327,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
                     if ( bump  < 0 )  bump = 0;
                     if ( bump  > 15 ) bump = 15;
                 }
-
-                int alpha = qRed( *coastData );
-                if ( alpha == 255 || alpha == 0 ) {
-                    if ( *coastData == landoffscreen )
-                        *writeData = texturepalette[bump][grey + 0x100]; 
-                    else {
-                        if (*coastData == lakeoffscreen)
-                            *writeData = texturepalette[bump][0x055];
-                        else {
-                            *writeData = texturepalette[bump][grey];
-                        }
-                    }
-                }
-                else {
-                    qreal c = 1.0 / 255.0;
-
-                    if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
-
-                        QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
-                        QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
-
-                        *writeData = qRgb( 
-                            (int) ( c * ( alpha * qRed( landcolor )
-                            + ( 255 - alpha ) * qRed( watercolor ) ) ),
-                            (int) ( c * ( alpha * qGreen( landcolor )
-                            + ( 255 - alpha ) * qGreen( watercolor ) ) ),
-                            (int) ( c * ( alpha * qBlue( landcolor )
-                            + ( 255 - alpha ) * qBlue( watercolor ) ) )
-                        );
-                    }
-                    else {
-
-                        if ( qGreen( *coastData ) != 0 ) {
-
-                            QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
-                            QRgb glaciercolor = (QRgb)(texturepalette[bump][grey]);
-    
-                            *writeData = qRgb( 
-                                (int) ( c * ( alpha * qRed( glaciercolor )
-                                + ( 255 - alpha ) * qRed( landcolor ) ) ),
-                                (int) ( c * ( alpha * qGreen( glaciercolor )
-                                + ( 255 - alpha ) * qGreen( landcolor ) ) ),
-                                (int) ( c * ( alpha * qBlue( glaciercolor )
-                                + ( 255 - alpha ) * qBlue( landcolor ) ) )
-                            ); 
-                        }
-                    }
-                }
+                setPixel( coastData, writeData, bump, grey );
             }
         }
     }
@@ -353,57 +369,34 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
                     if ( bump > 15 ) bump = 15;
                     if ( bump < 0 )  bump = 0;
                 }
-
-                int alpha = qRed( *coastData );
-                if ( alpha == 255 || alpha == 0 ) {
-                    if ( *coastData == landoffscreen )
-                        *writeData = texturepalette[bump][grey + 0x100]; 
-                    else {
-                        if (*coastData == lakeoffscreen)
-                            *writeData = texturepalette[bump][0x055];
-                        else {
-                            *writeData = texturepalette[bump][grey];
-                        }
-                    }
-                }
-                else {
-                    qreal c = 1.0 / 255.0;
-
-                    if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
-
-                        QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
-                        QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
-
-                        *writeData = qRgb( 
-                            (int) ( c * ( alpha * qRed( landcolor )
-                            + ( 255 - alpha ) * qRed( watercolor ) ) ),
-                            (int) ( c * ( alpha * qGreen( landcolor )
-                            + ( 255 - alpha ) * qGreen( watercolor ) ) ),
-                            (int) ( c * ( alpha * qBlue( landcolor )
-                            + ( 255 - alpha ) * qBlue( watercolor ) ) )
-                        );
-                    }
-                    else {
-
-                        if ( qGreen( *coastData ) != 0 ) {
-
-                            QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
-                            QRgb glaciercolor = (QRgb)(texturepalette[bump][grey]);
-
-                            *writeData = qRgb( 
-                                (int) ( c * ( alpha * qRed( glaciercolor )
-                                + ( 255 - alpha ) * qRed( landcolor ) ) ),
-                                (int) ( c * ( alpha * qGreen( glaciercolor )
-                                + ( 255 - alpha ) * qGreen( landcolor ) ) ),
-                                (int) ( c * ( alpha * qBlue( glaciercolor )
-                                + ( 255 - alpha ) * qBlue( landcolor ) ) )
-                            ); 
-                        }
-                    }
-                }
+                setPixel( coastData, writeData, bump, grey );
             }
         }
     }
 }
 
+void TextureColorizer::setPixel( const QRgb *coastData, QRgb *writeData, int bump, uchar grey )
+{
+    int alpha = qRed( *coastData );
+    if ( alpha == 255 )
+        *writeData = texturepalette[bump][grey + 0x100];
+    else if( alpha == 0 ){
+        *writeData = texturepalette[bump][grey];
+    }
+    else {
+        qreal c = 1.0 / 255.0;
+
+        QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
+        QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
+
+        *writeData = qRgb(
+                    (int) ( c * ( alpha * qRed( landcolor )
+                                  + ( 255 - alpha ) * qRed( watercolor ) ) ),
+                    (int) ( c * ( alpha * qGreen( landcolor )
+                                  + ( 255 - alpha ) * qGreen( watercolor ) ) ),
+                    (int) ( c * ( alpha * qBlue( landcolor )
+                                  + ( 255 - alpha ) * qBlue( watercolor ) ) )
+                    );
+    }
+}
 }

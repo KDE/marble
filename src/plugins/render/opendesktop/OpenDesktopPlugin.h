@@ -38,9 +38,7 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
     explicit OpenDesktopPlugin( const MarbleModel *marbleModel );
 
     virtual void initialize();
-    
-    virtual bool isInitialized() const;
-    
+
     QString name() const;
     
     QString guiString() const;
@@ -63,14 +61,15 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
 
     void setSettings( const QHash<QString,QVariant> &settings );
 
+protected:
+    bool eventFilter(QObject *object, QEvent *event);
+
 private Q_SLOTS:
     void readSettings();
 
     void writeSettings();
  
  private:
-    bool m_isInitialized;
-
     QDialog * m_configDialog;
     Ui::OpenDesktopConfigWidget * m_uiConfigWidget;
 };

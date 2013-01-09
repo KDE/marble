@@ -1,5 +1,5 @@
 //
-// This file is part of the Marble Desktop Globe.
+// This file is part of the Marble Virtual Globe.
 //
 // This program is free software licensed under the GNU LGPL. You can
 // find a copy of this license in LICENSE.txt in the top directory of
@@ -34,7 +34,7 @@ class MARBLE_EXPORT ElevationModel : public QObject
 {
     Q_OBJECT
 public:
-    ElevationModel( MarbleModel * const model );
+    explicit ElevationModel( MarbleModel * const model );
 
     qreal height( qreal lon, qreal lat ) const;
     QList<GeoDataCoordinates> heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const;

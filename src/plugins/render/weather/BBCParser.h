@@ -41,7 +41,7 @@ class BBCParser : public AbstractWorkerThread, public QXmlStreamReader
 {
     Q_OBJECT
 public:
-    BBCParser( QObject *parent = 0 );
+    explicit BBCParser( QObject *parent = 0 );
     ~BBCParser();
 
     static BBCParser *instance();

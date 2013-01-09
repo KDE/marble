@@ -17,6 +17,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QList>
 #include <QtGui/QPixmap>
+#include <QtGui/QItemSelectionModel>
 
 // Marble
 #include "GeoDataObject.h"
@@ -34,18 +35,20 @@ using namespace Marble;
 
 class GeoDataTreeModel::Private {
  public:
-    Private();
+    Private( QAbstractItemModel* model );
     ~Private();
 
     void checkParenting( GeoDataObject *object );
 
     GeoDataDocument* m_rootDocument;
     bool             m_ownsRootDocument;
+    QItemSelectionModel m_selectionModel;
 };
 
-GeoDataTreeModel::Private::Private() :
+GeoDataTreeModel::Private::Private( QAbstractItemModel *model ) :
     m_rootDocument( new GeoDataDocument ),
-    m_ownsRootDocument( true )
+    m_ownsRootDocument( true ),
+    m_selectionModel( model )
 {
     // nothing to do
 }
@@ -74,7 +77,7 @@ void GeoDataTreeModel::Private::checkParenting( GeoDataObject *object )
 
 GeoDataTreeModel::GeoDataTreeModel( QObject *parent )
     : QAbstractItemModel( parent ),
-    d( new Private )
+      d( new Private( this ) )
 {
 }
 
@@ -375,6 +378,12 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
 
         GeoDataObject *greatParentObject = parentObject->parent();
 
+        // Avoid crashing when there is no grandparent
+        if ( greatParentObject == 0 )
+        {
+            return QModelIndex();
+        }
+
         // greatParent can be a container
         if ( greatParentObject->nodeType() == GeoDataTypes::GeoDataFolderType
              || greatParentObject->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
@@ -401,7 +410,6 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
 //                        << parentObject->nodeType() << "[" << greatParentItem->childPosition( parentGeometry ) << "](" << parentObject << ")";
             return createIndex( greatparentMultiGeo->childPosition( parentGeometry ), 0, parentObject );
         }
-
     }
 
 //    mDebug() << "parent unknown index";
@@ -453,7 +461,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
     if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
          || object->nodeType() == GeoDataTypes::GeoDataFolderType
          || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
     }
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
@@ -531,6 +539,11 @@ QModelIndex GeoDataTreeModel::index( GeoDataObject *object )
     return itdown;
 }
 
+QItemSelectionModel *GeoDataTreeModel::selectionModel()
+{
+    return &d->m_selectionModel;
+}
+
 int GeoDataTreeModel::addFeature( GeoDataContainer *parent, GeoDataFeature *feature )
 {
     int row = -1;
@@ -579,8 +592,11 @@ bool GeoDataTreeModel::removeFeature( GeoDataContainer *parent, int row )
 
 bool GeoDataTreeModel::removeFeature( GeoDataFeature *feature )
 {
-    if ( feature && ( feature!=d->m_rootDocument ) )  {//We check to see we are not removing the
-                                                      //top level element m_rootDocument
+    if ( feature && ( feature!=d->m_rootDocument ) )  {
+
+        //We check to see we are not removing the
+        //top level element m_rootDocument
+
         GeoDataObject *parent = static_cast< GeoDataObject* >( feature->parent() );
 
         if ( ( parent->nodeType() == GeoDataTypes::GeoDataFolderType )

@@ -10,20 +10,18 @@
 #ifndef MARBLE_LOGFILE_RUNNER_H
 #define MARBLE_LOGFILE_RUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "ParsingRunner.h"
 
 namespace Marble
 {
 
-class LogRunner : public MarbleAbstractRunner
+class LogRunner : public ParsingRunner
 {
     Q_OBJECT
 
 public:
     explicit LogRunner( QObject *parent = 0 );
     ~LogRunner();
-
-    GeoDataFeature::GeoDataVisualCategory category() const;
 
     virtual void parseFile( const QString &fileName, DocumentRole role );
 };

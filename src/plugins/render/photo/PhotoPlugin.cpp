@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 // Self
@@ -14,37 +15,59 @@
 #include "PhotoPluginModel.h"
 
 // Marble
+#include "ui_PhotoConfigWidget.h"
 #include "MarbleDebug.h"
+#include "MarbleModel.h"
+#include "MarbleWidget.h"
+
+// Qt
+#include <QtGui/QPushButton>
+#include <QtGui/QLabel>
+#include <QtCore/QStringList>
 
 using namespace Marble;
 /* TRANSLATOR Marble::PhotoPlugin */
 
+const quint32 maximumNumberOfItems = 99;
+
 PhotoPlugin::PhotoPlugin()
-    : AbstractDataPlugin( 0 )
-{
+    : AbstractDataPlugin( 0 ),
+      ui_configWidget( 0 ),
+      m_configDialog( 0 ),
+      m_marbleWidget( 0 )
+{    
 }
 
 PhotoPlugin::PhotoPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_isInitialized( false )
+      ui_configWidget( 0 ),
+      m_configDialog( 0 )
 {
     // Plugin is enabled by default
     setEnabled( true );
     // Plugin is not visible by default
     setVisible( false );
+
+    connect( this, SIGNAL(settingsChanged(QString)),
+             this, SLOT(updateSettings()) );
+    connect( this, SIGNAL(changedNumberOfItems(quint32)),
+             this, SLOT(checkNumberOfItems(quint32)) );
+
+    setSettings( QHash<QString,QVariant>() );
 }
-     
+
+PhotoPlugin::~PhotoPlugin()
+{
+    delete ui_configWidget;
+    delete m_configDialog;
+}
+
 void PhotoPlugin::initialize()
 {
     mDebug() << "PhotoPlugin: Initialize";
-    setModel( new PhotoPluginModel( pluginManager(), this ) );
-    setNumberOfItems( numberOfImagesPerFetch );
-    m_isInitialized = true;
-}
-
-bool PhotoPlugin::isInitialized() const
-{
-    return m_isInitialized;
+    PhotoPluginModel *model = new PhotoPluginModel( this );
+    setModel( model );
+    updateSettings();
 }
 
 QString PhotoPlugin::name() const
@@ -74,19 +97,201 @@ QString PhotoPlugin::description() const
 
 QString PhotoPlugin::copyrightYears() const
 {
-    return "2009";
+    return "2009, 2012";
 }
 
 QList<PluginAuthor> PhotoPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
+            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
 }
 
 QIcon PhotoPlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/photo.png");
 }
+
+QDialog *PhotoPlugin::configDialog()
+{
+    if ( !m_configDialog ) {
+        // Initializing configuration dialog
+        m_configDialog = new QDialog();
+        ui_configWidget = new Ui::PhotoConfigWidget;
+        ui_configWidget->setupUi( m_configDialog );
+
+        // add licenses to the list widget
+        QListWidgetItem *ccByNcSa2 = new QListWidgetItem( ui_configWidget->m_licenseListWidget );
+        ccByNcSa2->setText( tr("Attribution-NonCommercial-ShareAlike License") );
+        ccByNcSa2->setIcon( QIcon() );
+        ccByNcSa2->setCheckState( Qt::Checked );
+        ccByNcSa2->setData( Qt::UserRole+1, 1 );
+        ccByNcSa2->setData( Qt::UserRole+2, "http://creativecommons.org/licenses/by-nc-sa/2.0/" );
+        ui_configWidget->m_licenseListWidget->addItem( ccByNcSa2 );
+        QListWidgetItem *ccByNc2 = new QListWidgetItem( ui_configWidget->m_licenseListWidget );
+        ccByNc2->setText( tr("Attribution-NonCommercial License") );
+        ccByNc2->setIcon( QIcon() );
+        ccByNc2->setCheckState( Qt::Checked );
+        ccByNc2->setData( Qt::UserRole+1, 2 );
+        ccByNc2->setData( Qt::UserRole+2, "http://creativecommons.org/licenses/by-nc/2.0/" );
+        ui_configWidget->m_licenseListWidget->addItem( ccByNc2 );
+        QListWidgetItem *ccByNcNd2 = new QListWidgetItem( ui_configWidget->m_licenseListWidget );
+        ccByNcNd2->setText( tr("Attribution-NonCommercial-NoDerivs License") );
+        ccByNcNd2->setIcon( QIcon() );
+        ccByNcNd2->setCheckState( Qt::Checked );
+        ccByNcNd2->setData( Qt::UserRole+1, 3 );
+        ccByNcNd2->setData( Qt::UserRole+2, "http://creativecommons.org/licenses/by-nc-nd/2.0/" );
+        ui_configWidget->m_licenseListWidget->addItem( ccByNcNd2 );
+        QListWidgetItem *ccBy2 = new QListWidgetItem( ui_configWidget->m_licenseListWidget );
+        ccBy2->setText( tr("Attribution License") );
+        ccBy2->setIcon( QIcon() );
+        ccBy2->setCheckState( Qt::Checked );
+        ccBy2->setData( Qt::UserRole+1, 4 );
+        ccBy2->setData( Qt::UserRole+2, "http://creativecommons.org/licenses/by/2.0/" );
+        ui_configWidget->m_licenseListWidget->addItem( ccBy2 );
+        QListWidgetItem *ccBySa2 = new QListWidgetItem( ui_configWidget->m_licenseListWidget );
+        ccBySa2->setText( tr("Attribution-ShareAlike License") );
+        ccBySa2->setIcon( QIcon() );
+        ccBySa2->setCheckState( Qt::Checked );
+        ccBySa2->setData( Qt::UserRole+1, 5 );
+        ccBySa2->setData( Qt::UserRole+2, "http://creativecommons.org/licenses/by-sa/2.0/" );
+        ui_configWidget->m_licenseListWidget->addItem( ccBySa2 );
+        QListWidgetItem *ccByNd2 = new QListWidgetItem( ui_configWidget->m_licenseListWidget );
+        ccByNd2->setText( tr("Attribution-NoDerivs License") );
+        ccByNd2->setIcon( QIcon() );
+        ccByNd2->setCheckState( Qt::Checked );
+        ccByNd2->setData( Qt::UserRole+1, 6 );
+        ccByNd2->setData( Qt::UserRole+2, "http://creativecommons.org/licenses/by-nd/2.0/" );
+        ui_configWidget->m_licenseListWidget->addItem( ccByNd2 );
+        QListWidgetItem *noLicense = new QListWidgetItem( ui_configWidget->m_licenseListWidget );
+        noLicense->setText( tr("No known copyright restrictions") );
+        noLicense->setIcon( QIcon() );
+        noLicense->setCheckState( Qt::Checked );
+        noLicense->setData( Qt::UserRole+1, 7 );
+        noLicense->setData( Qt::UserRole+2, "http://flickr.com/commons/usage/" );
+        ui_configWidget->m_licenseListWidget->addItem( noLicense );
+
+        readSettings();
+        ui_configWidget->m_itemNumberSpinBox->setRange( 0, maximumNumberOfItems );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
+                                            SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
+                                            SLOT(readSettings()) );
+        QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
+        connect( applyButton, SIGNAL(clicked()),
+                this,        SLOT(writeSettings())  );
+    }
+    return m_configDialog;
+}
+
+QHash<QString,QVariant> PhotoPlugin::settings() const
+{
+    QHash<QString, QVariant> settings;
+
+    settings.insert( "numberOfItems", numberOfItems() );
+    settings.insert( "checkState", checkState() );
+
+    return settings;
+}
+
+void PhotoPlugin::setSettings( const QHash<QString,QVariant> &settings )
+{
+    setNumberOfItems( qMin<int>( maximumNumberOfItems, settings.value( "numberOfItems", 15 ).toInt() ) );
+    m_checkStateList = settings.value( "checkState" ).toStringList();
+
+    if ( !settings.contains( "checkState" ) ) {
+        m_checkStateList << "1" << "2" << "3" << "4" << "5" << "6" << "7";
+        updateSettings();
+    }
+
+    readSettings();
+}
+
+bool PhotoPlugin::eventFilter(QObject *object, QEvent *event)
+{
+    if ( isInitialized() ) {
+        PhotoPluginModel *photoPluginModel = dynamic_cast<PhotoPluginModel*>( model() );
+        Q_ASSERT( photoPluginModel );
+        MarbleWidget* widget = dynamic_cast<MarbleWidget*>( object );
+        if ( widget ) {
+            photoPluginModel->setMarbleWidget( widget );
+        }
+    }
+
+    return AbstractDataPlugin::eventFilter( object, event );
+}
+
+void PhotoPlugin::readSettings()
+{
+    if ( !m_configDialog )
+        return;
+
+    ui_configWidget->m_itemNumberSpinBox->setValue( numberOfItems() );
+    for ( int i = 0; i < ui_configWidget->m_licenseListWidget->count(); ++i ) {
+        ui_configWidget->m_licenseListWidget->item(i)->setCheckState( Qt::Unchecked );
+        for ( int j = 0; j < checkState().count(); ++j ) {
+            if ( ui_configWidget->m_licenseListWidget->item(i)->data( Qt::UserRole+1 ) ==
+                 checkState().at(j).toInt() ) {
+                ui_configWidget->m_licenseListWidget->item(i)->setCheckState( Qt::Checked );
+            }
+        }
+    }
+}
+
+void PhotoPlugin::writeSettings()
+{
+    setNumberOfItems( ui_configWidget->m_itemNumberSpinBox->value() );
+
+    QStringList licenseCheckStateList;
+    for ( int i = 0; i < ui_configWidget->m_licenseListWidget->count(); ++i ) {
+        if ( ui_configWidget->m_licenseListWidget->item(i)->checkState() == Qt::Checked )
+        {
+            licenseCheckStateList << ui_configWidget->m_licenseListWidget->item(i)->data( Qt::UserRole+1 ).toString();
+        }
+    }
+    m_checkStateList = licenseCheckStateList;
+    setCheckState();
+
+    emit settingsChanged( nameId() );
+}
+
+void PhotoPlugin::updateSettings()
+{
+    AbstractDataPluginModel *abstractModel = model();
+    if ( abstractModel != 0 ) {
+        abstractModel->setItemSettings( settings() );
+    }
+
+    if ( model() ) {
+        qobject_cast<PhotoPluginModel*>( model() )->setLicenseValues( m_checkStateList.join(",") );
+    }
+}
+
+void PhotoPlugin::checkNumberOfItems( quint32 number ) {
+    if ( number > maximumNumberOfItems ) {
+        setNumberOfItems( maximumNumberOfItems );
+    }
+
+    readSettings();
+}
+
+QStringList PhotoPlugin::checkState() const
+{
+    return m_checkStateList;
+}
+
+void PhotoPlugin::setCheckState()
+{
+    for( int i = 0; i < ui_configWidget->m_licenseListWidget->count(); ++i ) {
+        for ( int j = 0; j < checkState().count(); ++j ) {
+            if ( ui_configWidget->m_licenseListWidget->item(i)->data( Qt::UserRole+1 ) ==
+                checkState().at(j).toInt() ) {
+                ui_configWidget->m_licenseListWidget->item(i)->setCheckState( Qt::Checked );
+            }
+        }
+    }
+}
+
 Q_EXPORT_PLUGIN2(PhotoPlugin, Marble::PhotoPlugin)
 
 #include "PhotoPlugin.moc"

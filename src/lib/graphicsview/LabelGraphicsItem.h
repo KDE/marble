@@ -51,8 +51,7 @@ class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
     void clear();
 
  protected:
-    void paintContent( GeoPainter *painter, ViewportParams *viewport,
-                       const QString& renderPos, GeoSceneLayer * layer );
+    void paintContent( QPainter *painter );
 
  private:
     Q_DISABLE_COPY( LabelGraphicsItem )

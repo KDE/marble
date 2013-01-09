@@ -31,7 +31,7 @@ class BBCItemGetter : public AbstractWorkerThread
     Q_OBJECT
 
  public:
-    BBCItemGetter( QObject *parent = 0 );
+    explicit BBCItemGetter( QObject *parent = 0 );
     ~BBCItemGetter();
 
     void setSchedule( const GeoDataLatLonAltBox& box,
@@ -39,6 +39,8 @@ class BBCItemGetter : public AbstractWorkerThread
                       qint32 number );
 
     void setStationList( const QList<BBCStation>& items );
+
+    BBCStation station( const QString &id );
 
  protected:
     bool workAvailable();

@@ -121,7 +121,7 @@ void KDescendantsProxyModelPrivate::processPendingParents()
   const QVector<QPersistentModelIndex>::iterator begin = m_pendingParents.begin();
   QVector<QPersistentModelIndex>::iterator it = begin;
 
-  // Process chunkSize elements per invokation.
+  // Process chunkSize elements per invocation.
 //  static const int chunkSize = 30;
 
   const QVector<QPersistentModelIndex>::iterator end =

@@ -21,7 +21,7 @@ class VectorComposer;
 class VectorMapLayer : public LayerInterface
 {
 public:
-    VectorMapLayer( VectorComposer *vectorComposer );
+    explicit VectorMapLayer( VectorComposer *vectorComposer );
 
     /**
      * @reimp

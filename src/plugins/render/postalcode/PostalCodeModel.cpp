@@ -31,9 +31,8 @@
 
 using namespace Marble;
 
-PostalCodeModel::PostalCodeModel( const PluginManager *pluginManager,
-                              QObject *parent  )
-    : AbstractDataPluginModel( "postalCode", pluginManager, parent )
+PostalCodeModel::PostalCodeModel( QObject *parent  )
+    : AbstractDataPluginModel( "postalCode", parent )
 {
 }
 
@@ -67,13 +66,14 @@ void PostalCodeModel::parseFile( const QByteArray& file )
     QScriptEngine engine;
 
     // Qt requires parentheses around json code
-    data = engine.evaluate( "(" + QString::fromUtf8( file ) + ")" );
+    data = engine.evaluate( '(' + QString::fromUtf8( file ) + ')' );
 
     // Parse if any result exists
     if ( data.property( "postalCodes" ).isArray() ) {
         QScriptValueIterator iterator( data.property( "postalCodes" ) );
 
         // Add items to the list
+        QList<AbstractDataPluginItem*> items;
         while ( iterator.hasNext() ) {
             iterator.next();
 
@@ -92,7 +92,7 @@ void PostalCodeModel::parseFile( const QByteArray& file )
                 QString tooltip;
 
                 if ( !placeName.isEmpty() ) {
-                    tooltip += placeName + " ";
+                    tooltip += placeName + ' ';
                 }
 
                 addLine( &tooltip, postalCode );
@@ -113,10 +113,11 @@ void PostalCodeModel::parseFile( const QByteArray& file )
                     item->setToolTip( tooltip );
                     item->setText( postalCode );
 
-                    addItemToList( item );
+                    items << item;
                 }
             }
         }
+        addItemsToList( items );
     }
 }
 
@@ -124,7 +125,7 @@ void PostalCodeModel::addLine(QString *string, const QString &line)
 {
     Q_ASSERT( string );
     if ( !line.isEmpty() ) {
-        *string += line + "\n";
+        *string += line + '\n';
     }
 }
 

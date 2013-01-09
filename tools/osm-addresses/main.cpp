@@ -112,9 +112,9 @@ int main( int argc, char *argv[] )
     }
 
     OsmParser* parser = 0;
-    if ( file.fileName().endsWith( ".osm" ) ) {
+    if ( file.fileName().endsWith( QLatin1String( ".osm" ) ) ) {
         parser = new XmlParser;
-    } else if ( file.fileName().endsWith( ".pbf" ) ) {
+    } else if ( file.fileName().endsWith( QLatin1String( ".pbf" ) ) ) {
         parser = new PbfParser;
     } else {
         qDebug() << "Unsupported file format: " << file.fileName();

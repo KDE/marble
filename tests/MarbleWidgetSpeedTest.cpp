@@ -47,7 +47,7 @@ void MarbleWidgetSpeedTest::cleanupTestCase()
 void MarbleWidgetSpeedTest::timeTest()
 {
     m_marbleWidget->setMapThemeId( "plain/plain.dgml" );
-    m_marbleWidget->zoomView( 1500 );
+    m_marbleWidget->setZoom( 1500 );
 //    m_marbleWidget->resize( 800, 600 );
 
     QTime t;

@@ -34,7 +34,7 @@ DatabaseQuery::DatabaseQuery( MarbleModel* model, const QString &searchTerm, con
         m_resultFormat = AddressFormat;
     }
 
-    QStringList terms = m_searchTerm.split( ",", QString::SkipEmptyParts );
+    QStringList terms = m_searchTerm.split(QLatin1Char(','), QString::SkipEmptyParts );
 
     QRegExp streetAndHouse( "^(.*)\\s+(\\d+\\D?)$" );
     if ( streetAndHouse.indexIn( terms.first() ) != -1 ) {
@@ -64,6 +64,8 @@ bool DatabaseQuery::isPointOfInterest( const QString &category )
 {
     static QMap<QString, OsmPlacemark::OsmCategory> pois;
     if ( pois.isEmpty() ) {
+        pois[QObject::tr( "pois").toLower()] = OsmPlacemark::UnknownCategory;
+        pois["pois"] = OsmPlacemark::UnknownCategory;
         pois[QObject::tr( "camping" ).toLower()] = OsmPlacemark::AccomodationCamping;
         pois["camping"] = OsmPlacemark::AccomodationCamping;
         pois[QObject::tr( "hostel" ).toLower()] = OsmPlacemark::AccomodationHostel;

@@ -104,9 +104,9 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_guidanceModeEnabled( false ),
         m_shutdownPositionTracking( false ),
         m_guidanceModeWarning( true ),
-        m_routeColorStandard   ( oxygenSkyBlue4 ),
-        m_routeColorHighlighted( oxygenSeaBlue2 ),
-        m_routeColorAlternative( oxygenAluminumGray4 )
+        m_routeColorStandard   ( Oxygen::skyBlue4 ),
+        m_routeColorHighlighted( Oxygen::skyBlue1 ),
+        m_routeColorAlternative( Oxygen::aluminumGray4 )
 {
     m_runnerManager.setModel( model );
     m_routeColorStandard.setAlpha( 200 );
@@ -121,7 +121,7 @@ GeoDataFolder* RoutingManagerPrivate::routeRequest() const
     for ( int i=0; i<m_routeRequest.size(); ++i ) {
         GeoDataPlacemark* placemark = new GeoDataPlacemark;
         placemark->setName( m_routeRequest.name( i ) );
-        placemark->setCoordinate( GeoDataPoint( m_routeRequest.at( i ) ) );
+        placemark->setCoordinate( m_routeRequest.at( i ) );
         result->append( placemark );
     }
 
@@ -389,8 +389,8 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
 
         if ( d->m_guidanceModeWarning ) {
             QString text = "<p>" + tr( "Caution: Driving instructions may be incomplete or wrong." );
-            text += " " + tr( "Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route to your destination." );
-            text += " " + tr( "Please use common sense while navigating." ) + "</p>";
+            text += ' ' + tr( "Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route to your destination." );
+            text += ' ' + tr( "Please use common sense while navigating." ) + "</p>";
             text += "<p>" + tr( "The Marble development team wishes you a pleasant and safe journey." ) + "</p>";
             QMessageBox messageBox( QMessageBox::Information, tr( "Guidance Mode - Marble" ), text, QMessageBox::Ok );
             QCheckBox showAgain( tr( "Show again" ) );

@@ -17,6 +17,7 @@
 // Marble
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleGlobal.h"
+#include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "WikipediaItem.h"
@@ -34,13 +35,12 @@
 
 using namespace Marble;
 
-WikipediaModel::WikipediaModel( const PluginManager *pluginManager,
-                                QObject *parent )
-    : AbstractDataPluginModel( "wikipedia", pluginManager, parent ),
+WikipediaModel::WikipediaModel( QObject *parent )
+    : AbstractDataPluginModel( "wikipedia", parent ),
+      m_marbleWidget( 0 ),
+      m_wikipediaIcon( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) ),
       m_showThumbnail( true )
 {
-    m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) );
-
     m_languageCode = MarbleLocale::languageCode();
 }
 
@@ -62,33 +62,28 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         return;
     }
         
-    QString geonamesUrl( "http://ws.geonames.org/wikipediaBoundingBox" );
-    geonamesUrl += "?north=";
-    geonamesUrl += QString::number( box.north() * RAD2DEG );
-    geonamesUrl += "&south=";
-    geonamesUrl += QString::number( box.south() * RAD2DEG );
-    geonamesUrl += "&east=";
-    geonamesUrl += QString::number( box.east() * RAD2DEG );
-    geonamesUrl += "&west=";
-    geonamesUrl += QString::number( box.west() * RAD2DEG );
-    geonamesUrl += "&maxRows=";
-    geonamesUrl += QString::number( number );
-    geonamesUrl += "&lang=";
-    geonamesUrl += m_languageCode;
+    QUrl geonamesUrl( "http://ws.geonames.org/wikipediaBoundingBox" );
+    geonamesUrl.addQueryItem( "north", QString::number( box.north( GeoDataCoordinates::Degree ) ) );
+    geonamesUrl.addQueryItem( "south", QString::number( box.south( GeoDataCoordinates::Degree ) ) );
+    geonamesUrl.addQueryItem( "east", QString::number( box.east( GeoDataCoordinates::Degree ) ) );
+    geonamesUrl.addQueryItem( "west", QString::number( box.west( GeoDataCoordinates::Degree ) ) );
+    geonamesUrl.addQueryItem( "maxRows", QString::number( number ) );
+    geonamesUrl.addQueryItem( "lang", m_languageCode );
     
-    downloadDescriptionFile( QUrl( geonamesUrl ) );
+    downloadDescriptionFile( geonamesUrl );
 }
 
 void WikipediaModel::parseFile( const QByteArray& file )
 {
     QList<WikipediaItem*> list;
-    GeonamesParser parser( &list, this );
+    GeonamesParser parser( m_marbleWidget, &list, this );
     
     parser.read( file );
     
-    QList<WikipediaItem*>::iterator it;
+    QList<AbstractDataPluginItem*> items;
+    QList<WikipediaItem*>::const_iterator it;
     
-    for ( it = list.begin(); it != list.end(); ++it ) {
+    for ( it = list.constBegin(); it != list.constEnd(); ++it ) {
         if ( itemExists( (*it)->id() ) ) {
             delete *it;
             continue;
@@ -99,14 +94,19 @@ void WikipediaModel::parseFile( const QByteArray& file )
         (*it)->setTarget( "earth" );
         QUrl thumbnailImageUrl = (*it)->thumbnailImageUrl();
         if ( m_showThumbnail && !thumbnailImageUrl.isEmpty() ) {
-            downloadItemData( thumbnailImageUrl, "thumbnail", *it );
+            downloadItem( thumbnailImageUrl, "thumbnail", *it );
         }
         else {
-            addItemToList( *it );
+            items << *it;
         }
     }
 
-    emit itemsUpdated();
+    addItemsToList( items );
+}
+
+void WikipediaModel::setMarbleWidget(MarbleWidget *widget)
+{
+    m_marbleWidget = widget;
 }
 
 #include "WikipediaModel.moc"

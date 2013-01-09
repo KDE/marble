@@ -1,4 +1,3 @@
-
 # before add_subdirectory() !
 if(MSVC)
   add_definitions(-D_USE_MATH_DEFINES=1)
@@ -109,25 +108,12 @@ else (QTONLY)
 
 endif (QTONLY)
 
-set(marble_SRCS
-    ControlView.cpp
-    MarbleTest.cpp
-)
-
-set(marble_HDRS
-    ControlView.h
-    MarbleTest.h
-)
-
-if (QTONLY)
-  set(marble_SRCS ${marble_SRCS} qtmain.cpp QtMainWindow.cpp StackableWindow.cpp)
-  set(marble_HDRS ${marble_HDRS} QtMainWindow.h StackableWindow.h)
-else (QTONLY)
-  set(marble_SRCS ${marble_SRCS} kdemain.cpp KdeMainWindow.cpp marble_part.cpp)
-  set(marble_HDRS ${marble_HDRS} KdeMainWindow.h)
-endif (QTONLY)
+set(marble_SRCS ControlView.cpp MarbleTest.cpp qtmain.cpp QtMainWindow.cpp StackableWindow.cpp)
+set(marble_HDRS ControlView.h MarbleTest.h QtMainWindow.h StackableWindow.h)
 
 if (NOT QTONLY)
+  set(marble_kde_SRCS ControlView.cpp MarbleTest.cpp kdemain.cpp KdeMainWindow.cpp marble_part.cpp)
+  set(marble_kde_HDRS ControlView.h MarbleTest.h KdeMainWindow.h)
   set(marblepart_SRCS marble_part.cpp)
   kde4_add_kcfg_files(marblepart_SRCS settings.kcfgc)
   kde4_add_plugin(marble_part WITH_PREFIX ${marblepart_SRCS} ControlView.cpp)
@@ -148,54 +134,54 @@ endif(MINGW)
 
 qt4_add_resources(marble_SRCS marble.qrc)
 
-if (QTONLY)
-  qt4_wrap_ui(marble_SRCS ${marble_UI})
-  qt4_automoc(${marble_SRCS})
-else (QTONLY)
-  kde4_add_ui_files(marble_SRCS ${marble_UI})
-  kde4_add_kcfg_files(marble_SRCS settings.kcfgc)
-endif (QTONLY)
+qt4_wrap_ui(marble_SRCS ${marble_UI})
+qt4_automoc(${marble_SRCS})
+
+if (NOT QTONLY)
+  kde4_add_ui_files(marble_kde_SRCS ${marble_UI})
+  kde4_add_kcfg_files(marble_kde_SRCS settings.kcfgc)
+endif ()
 
 
-if (QTONLY)
-    if (WIN32)
-        add_executable (marble WIN32 ${marble_SRCS} ${marble_HDRS})
-    else (WIN32)
-        if (APPLE)
-            add_executable (marble MACOSX_BUNDLE ${marble_SRCS})
-            # For Mac OS X, the executable must be at the root of the bundle's executable folder
-            INSTALL(TARGETS marble RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
-        else (APPLE)
-            add_executable (marble ${marble_SRCS} ${marble_HDRS})
-        endif (APPLE)
-    endif (WIN32)
-else (QTONLY)
-  kde4_add_executable (marble ${marble_SRCS} ${marble_HDRS})
-endif (QTONLY)
+if (WIN32)
+    add_executable (marble-qt WIN32 ${marble_SRCS} ${marble_HDRS})
+else (WIN32)
+    if (APPLE)
+        add_executable (marble-qt MACOSX_BUNDLE ${marble_SRCS})
+        # For Mac OS X, the executable must be at the root of the bundle's executable folder
+        INSTALL(TARGETS marble-qt RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+    else (APPLE)
+        add_executable (marble-qt ${marble_SRCS} ${marble_HDRS})
+    endif (APPLE)
+endif (WIN32)
 
-if (QTONLY)
+if (NOT QTONLY)
+  kde4_add_executable (marble ${marble_kde_SRCS} ${marble_kde_HDRS})
+endif ()
+
+target_link_libraries (
+  marble-qt
+  ${QT_QTCORE_LIBRARY}
+  ${QT_QTDBUS_LIBRARY}
+  ${QT_QTGUI_LIBRARY}
+  ${QT_QTXML_LIBRARY}
+  ${QT_QTSVG_LIBRARY}
+  ${QT_QTNETWORK_LIBRARY}
+  ${QT_QTSCRIPT_LIBRARY}
+  ${QT_QTMAIN_LIBRARY}
+  marblewidget)
+
+if (NOT QTONLY)
     target_link_libraries (
-      marble 
-      ${QT_QTCORE_LIBRARY} 
-      ${QT_QTDBUS_LIBRARY} 
-      ${QT_QTGUI_LIBRARY} 
-      ${QT_QTXML_LIBRARY} 
-      ${QT_QTSVG_LIBRARY} 
-      ${QT_QTNETWORK_LIBRARY}
-      ${QT_QTSCRIPT_LIBRARY} 
-      ${QT_QTMAIN_LIBRARY} 
-      marblewidget)
-else (QTONLY)
-    target_link_libraries (
-      marble 
+      marble
       ${KDE4_KPARTS_LIBS} 
       ${KDE4_KNEWSTUFF3_LIBS}
       marblewidget
       )
-endif (QTONLY)
+endif ()
 if(WIN32)
   target_link_libraries(
-    marble 
+    marble-qt
     ws2_32 
     imm32 
     winmm
@@ -208,18 +194,18 @@ if(STATIC_BUILD)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
 endif(STATIC_BUILD)
 
-if(QTONLY)
-  if(WIN32)
-    install (TARGETS marble RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
-  else(WIN32)
-    if (APPLE)
-      # No need for this when installing to a bundle
-    else (APPLE)
-        install (TARGETS marble RUNTIME DESTINATION bin )
-        install( FILES marble.desktop DESTINATION ${APPS_INSTALL_DIR})
-    endif (APPLE)
-  endif(WIN32)
-else(QTONLY)
+if(WIN32)
+install (TARGETS marble-qt RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+else(WIN32)
+if (APPLE)
+  # No need for this when installing to a bundle
+else (APPLE)
+    install (TARGETS marble-qt RUNTIME DESTINATION bin )
+    install( FILES marble.desktop DESTINATION ${APPS_INSTALL_DIR})
+endif (APPLE)
+endif(WIN32)
+
+if(NOT QTONLY)
   install(TARGETS marble ${INSTALL_TARGETS_DEFAULT_ARGS})
   install(PROGRAMS marble.desktop DESTINATION ${APPS_INSTALL_DIR})
   install(FILES marble.kcfg DESTINATION ${KCFG_INSTALL_DIR})
@@ -227,7 +213,7 @@ else(QTONLY)
   # install the XML GUI file and the Hot New Stuff config
   install(FILES marbleui.rc DESTINATION ${DATA_INSTALL_DIR}/marble)
   install(FILES marble.knsrc DESTINATION ${DATA_INSTALL_DIR}/marble)
-endif(QTONLY)
+endif()
 
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/config-marble.h.cmake

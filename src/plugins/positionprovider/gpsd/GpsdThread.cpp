@@ -32,10 +32,10 @@ void GpsdThread::run()
     qRegisterMetaType<gps_data_t>( "gps_data_t" );
     qRegisterMetaType<PositionProviderStatus>("PositionProviderStatus");
     m_connection = new GpsdConnection;
-    connect( m_connection, SIGNAL( statusChanged( PositionProviderStatus) ),
-             this, SIGNAL( statusChanged( PositionProviderStatus) ) );
-    connect( m_connection, SIGNAL( gpsdInfo( gps_data_t ) ),
-             this, SIGNAL( gpsdInfo( gps_data_t ) ) );
+    connect( m_connection, SIGNAL(statusChanged(PositionProviderStatus)),
+             this, SIGNAL(statusChanged(PositionProviderStatus)) );
+    connect( m_connection, SIGNAL(gpsdInfo(gps_data_t)),
+             this, SIGNAL(gpsdInfo(gps_data_t)) );
     m_connection->initialize();
     exec();
 }

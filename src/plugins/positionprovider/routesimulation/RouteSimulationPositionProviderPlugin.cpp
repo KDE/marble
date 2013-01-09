@@ -132,7 +132,7 @@ void RouteSimulationPositionProviderPlugin::initialize()
     m_status = m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
 
     if ( !m_lineString.isEmpty() ) {
-        QTimer::singleShot( 1000.0 / c_frequency, this, SLOT( update() ) );
+        QTimer::singleShot( 1000.0 / c_frequency, this, SLOT(update()) );
     }
 }
 
@@ -183,7 +183,7 @@ void RouteSimulationPositionProviderPlugin::update()
         }
     }
 
-    QTimer::singleShot( 1000.0 / c_frequency, this, SLOT( update() ) );
+    QTimer::singleShot( 1000.0 / c_frequency, this, SLOT(update()) );
 }
 
 } // namespace Marble

@@ -3,7 +3,7 @@ PROJECT( GpxPlugin )
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_SOURCE_DIR}/handlers
- ${CMAKE_BINARY_DIR}/src/plugins/runner/gpx
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
@@ -12,6 +12,8 @@ set( gpx_handlers_SRCS
         handlers/GPXElementDictionary.cpp
         handlers/GPXgpxTagHandler.cpp
         handlers/GPXnameTagHandler.cpp
+        handlers/GPXdescTagHandler.cpp
+        handlers/GPXtypeTagHandler.cpp
         handlers/GPXtrkTagHandler.cpp
         handlers/GPXtrkptTagHandler.cpp
         handlers/GPXtrksegTagHandler.cpp
@@ -23,11 +25,27 @@ set( gpx_handlers_SRCS
         handlers/GPXhrTagHandler.cpp
         handlers/GPXrteTagHandler.cpp
         handlers/GPXrteptTagHandler.cpp
+        handlers/GPXeleTagHandler.cpp
+        handlers/GPXcmtTagHandler.cpp
+        handlers/GPXlinkTagHandler.cpp
+        handlers/GPXurlTagHandler.cpp
+        handlers/GPXurlnameTagHandler.cpp
    )
 
 set( gpx_SRCS GpxParser.cpp GpxPlugin.cpp GpxRunner.cpp )
 
 marble_add_plugin( GpxPlugin ${gpx_SRCS}  ${gpx_handlers_SRCS} )
+
+if(QTONLY)
+  if(WIN32 OR APPLE)
+    # nothing to do
+  else(WIN32 OR APPLE)
+    install(FILES marble_gpx.desktop DESTINATION ${APPS_INSTALL_DIR})
+  endif(WIN32 OR APPLE)
+else(QTONLY)
+  install(PROGRAMS marble_gpx.desktop DESTINATION ${APPS_INSTALL_DIR})
+  install(FILES marble_part_gpx.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+endif(QTONLY)
 
 
 if( BUILD_MARBLE_TESTS )

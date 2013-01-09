@@ -15,6 +15,7 @@
     along with this library. If not, see <http://www.gnu.org/licenses/>.
 
     Copyright 2010 Thibaut GRIDEL <tgridel@free.fr>
+    Copyright 2011 Anders Lund <anders@alweb.dk>
 */
 
 #ifndef MARBLE_GPX_RTEPTTAGHANDLER_H

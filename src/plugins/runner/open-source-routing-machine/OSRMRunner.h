@@ -12,19 +12,20 @@
 #ifndef MARBLE_OSMOSRMRUNNER_H
 #define MARBLE_OSMOSRMRUNNER_H
 
-#include "MarbleAbstractRunner.h"
-#include "routing/RouteRequest.h"
+#include "RoutingRunner.h"
+#include "GeoDataCoordinates.h"
 #include "routing/instructions/RoutingInstruction.h"
 
 #include <QtCore/QString>
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
-
-class QNetworkAccessManager;
 
 namespace Marble
 {
 
-class OSRMRunner : public MarbleAbstractRunner
+class GeoDataLineString;
+
+class OSRMRunner : public RoutingRunner
 {
     Q_OBJECT
 
@@ -32,9 +33,6 @@ public:
     explicit OSRMRunner(QObject *parent = 0);
 
     ~OSRMRunner();
-
-    // Overriding MarbleAbstractRunner
-    GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( const RouteRequest *request );
@@ -46,6 +44,8 @@ private Q_SLOTS:
     /** A network error occurred */
     void handleError( QNetworkReply::NetworkError );
 
+    void get();
+
 private:
     void append( QString* input, const QString &key, const QString &value ) const;
 
@@ -55,7 +55,9 @@ private:
 
     GeoDataDocument* parse( const QByteArray &input );
 
-    QNetworkAccessManager *m_networkAccessManager;
+    QNetworkAccessManager m_networkAccessManager;
+
+    QNetworkRequest m_request;
 
     static QVector<QPair<GeoDataCoordinates,QString> > m_cachedHints;
 

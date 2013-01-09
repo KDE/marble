@@ -86,8 +86,8 @@ void Job::changeStatus(Job::Status status, const QString &message)
     case Error: statusType = "error"; break;
     }
 
-    Logger::instance().setStatus(m_region.id() + "_" + m_transport,
-                                 m_region.name() + " (" + m_transport + ")", statusType, message);
+    Logger::instance().setStatus(m_region.id() + '_' + m_transport,
+                                 m_region.name() + QLatin1String( " (" ) + m_transport + ')', statusType, message);
     m_statusMessage = message;
     m_status = status;
 }
@@ -182,7 +182,7 @@ bool Job::monav()
     if (subdir.exists() && subdir.isDir()) {
         QFileInfoList files = QDir(subdir.absoluteFilePath()).entryInfoList(QDir::Files);
         foreach(const QFileInfo &file, files) {
-            if (!QFile::rename(file.absoluteFilePath(), monavDir().absoluteFilePath() + "/" + file.fileName())) {
+            if (!QFile::rename(file.absoluteFilePath(), monavDir().absoluteFilePath() + '/' + file.fileName())) {
                 changeStatus(Error, "Unable to move monav files to target directory.");
                 return false;
             }
@@ -297,7 +297,7 @@ QFileInfo Job::osmFile()
 
 QFileInfo Job::monavDir()
 {
-    QString const subdir = "data/" + m_region.id() + "/earth/monav/" + m_transport.toLower() + "/" + m_region.path();
+    QString const subdir = "data/" + m_region.id() + "/earth/monav/" + m_transport.toLower() + '/' + m_region.path();
     m_parameters.base().mkpath(subdir);
     QFileInfo result(m_parameters.base(), subdir);
     return result;
@@ -306,7 +306,7 @@ QFileInfo Job::monavDir()
 QFileInfo Job::targetFile()
 {
     m_parameters.base().mkdir("finished");
-    QFileInfo result(m_parameters.base(), "finished/" + m_region.id() + "_" + m_transport.toLower() + ".tar.gz");
+    QFileInfo result(m_parameters.base(), "finished/" + m_region.id() + '_' + m_transport.toLower() + ".tar.gz");
     return result;
 }
 
@@ -314,6 +314,6 @@ QFileInfo Job::searchFile()
 {
     QString const subdir = "data/" + m_region.id() + "/earth/placemarks/" + QFileInfo(m_region.path()).path();
     m_parameters.base().mkpath(subdir);
-    QFileInfo result(m_parameters.base(), subdir + "/" + m_region.id() + ".sqlite");
+    QFileInfo result(m_parameters.base(), subdir + '/' + m_region.id() + ".sqlite");
     return result;
 }

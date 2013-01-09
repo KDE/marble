@@ -109,7 +109,7 @@ QList<PluginAuthor> GraticulePlugin::pluginAuthors() const
 
 QIcon GraticulePlugin::icon () const
 {
-    return QIcon();
+    return QIcon(":/icons/coordinate.png");
 }
 
 void GraticulePlugin::initialize ()
@@ -133,21 +133,21 @@ QDialog *GraticulePlugin::configDialog()
         ui_configWidget = new Ui::GraticuleConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
 
-        connect( ui_configWidget->gridPushButton, SIGNAL( clicked() ), this,
-                SLOT( gridGetColor() ) );
-        connect( ui_configWidget->tropicsPushButton, SIGNAL( clicked() ), this,
-                SLOT( tropicsGetColor() ) );
-        connect( ui_configWidget->equatorPushButton, SIGNAL( clicked() ), this,
-                SLOT( equatorGetColor() ) );
+        connect( ui_configWidget->gridPushButton, SIGNAL(clicked()), this,
+                SLOT(gridGetColor()) );
+        connect( ui_configWidget->tropicsPushButton, SIGNAL(clicked()), this,
+                SLOT(tropicsGetColor()) );
+        connect( ui_configWidget->equatorPushButton, SIGNAL(clicked()), this,
+                SLOT(equatorGetColor()) );
 
 
-        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ), this, 
-                SLOT( writeSettings() ) );
-        connect( ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
-                 SLOT( restoreDefaultSettings() ) );
+        connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()), this, 
+                SLOT(writeSettings()) );
+        connect( ui_configWidget->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL(clicked()),
+                 SLOT(restoreDefaultSettings()) );
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 this,        SLOT( writeSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 this,        SLOT(writeSettings()) );
     }
 
     readSettings();

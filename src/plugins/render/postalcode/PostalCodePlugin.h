@@ -29,8 +29,6 @@ class PostalCodePlugin : public AbstractDataPlugin {
 
     virtual void initialize();
 
-    virtual bool isInitialized() const;
-
     QString name() const;
 
     QString guiString() const;
@@ -46,9 +44,6 @@ class PostalCodePlugin : public AbstractDataPlugin {
     QList<PluginAuthor> pluginAuthors() const;
 
     QIcon icon() const;
-
- private:
-    bool m_isInitialized;
 };
 
 }

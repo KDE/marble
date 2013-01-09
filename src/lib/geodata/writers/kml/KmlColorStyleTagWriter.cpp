@@ -29,22 +29,23 @@ bool KmlColorStyleTagWriter::write( const Marble::GeoNode *node, GeoWriter &writ
     writer.writeStartElement( m_elementName );
 
     GeoDataColorStyle const *colorStyle = static_cast<const GeoDataColorStyle*>(node);
-    QColor const color = colorStyle->color();
-
-    QChar const fill = QChar( '0' );
-    QString colorString = QString( "%1%2%3%4" )
-                             .arg( color.alpha(), 2, 16, fill )
-                             .arg( color.blue(), 2, 16, fill )
-                             .arg( color.green(), 2, 16, fill )
-                             .arg( color.red(), 2, 16, fill );
-    writer.writeElement( kml::kmlTag_color, colorString );
-
-    /** @todo: support random color mode */
-    writer.writeElement( kml::kmlTag_colorMode, "normal" );
+    writer.writeOptionalElement( kml::kmlTag_color, formatColor( colorStyle->color() ), "ffffffff" );
+    QString const colorMode = colorStyle->colorMode() == GeoDataColorStyle::Random ? "random" : "normal";
+    writer.writeOptionalElement( kml::kmlTag_colorMode, colorMode, "normal" );
 
     bool const result = writeMid( node, writer );
     writer.writeEndElement();
     return result;
+}
+
+QString KmlColorStyleTagWriter::formatColor( const QColor &color )
+{
+    QChar const fill = QChar( '0' );
+    return QString( "%1%2%3%4" )
+                 .arg( color.alpha(), 2, 16, fill )
+                 .arg( color.blue(), 2, 16, fill )
+                 .arg( color.green(), 2, 16, fill )
+                 .arg( color.red(), 2, 16, fill );
 }
 
 }

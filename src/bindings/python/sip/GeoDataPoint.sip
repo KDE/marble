@@ -42,7 +42,6 @@ public:
                             GeoDataPoint (const Marble::GeoDataCoordinates& other);
     ~GeoDataPoint ();
     virtual const char*     nodeType () const;
-    virtual Marble::GeoDataLatLonAltBox  latLonAltBox () const;
 };
 // GeoDataPoint
 

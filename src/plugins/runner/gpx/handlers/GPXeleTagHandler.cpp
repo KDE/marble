@@ -39,7 +39,6 @@ GeoNode* GPXeleTagHandler::parse(GeoParser& parser) const
 #endif
         return track;
     }
-    mDebug() << "ele parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

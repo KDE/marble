@@ -93,7 +93,7 @@ QIcon SunPlugin::icon () const
 
 void SunPlugin::initialize ()
 {
-    m_pixmap = QPixmap( MarbleDirs::path( "svg/sunshine.png" ) ).scaled( QSize( 30, 30 ) );
+    m_pixmap = QPixmap( MarbleDirs::path( "svg/sunshine.png" ) ).scaled( QSize(22,22) );
 }
 
 bool SunPlugin::isInitialized () const

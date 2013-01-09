@@ -10,6 +10,8 @@
 #include "LogRunner.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataLineString.h"
+#include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 
 #include <QtCore/QFile>
@@ -19,17 +21,12 @@ namespace Marble
 {
 
 LogRunner::LogRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent )
+    ParsingRunner( parent )
 {
 }
 
 LogRunner::~LogRunner()
 {
-}
-
-GeoDataFeature::GeoDataVisualCategory LogRunner::category() const
-{
-    return GeoDataFeature::Folder;
 }
 
 void LogRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
@@ -94,8 +91,11 @@ void LogRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     if ( track->size() == 0 || error ) {
         delete document;
         document = 0;
+        emit parsingFinished( 0 );
+        return;
     }
 
+    document->setFileName( fileName );
     emit parsingFinished( document );
 }
 

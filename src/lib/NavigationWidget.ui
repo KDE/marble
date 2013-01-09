@@ -22,14 +22,7 @@
      <widget class="QWidget" name="verticalLayoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QCheckBox" name="boundedCheckBox">
-         <property name="text">
-          <string>Around</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="MarbleSearchListView" name="locationListView">
+        <widget class="QListView" name="locationListView">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -151,7 +144,7 @@
             <string>Right</string>
            </property>
            <property name="whatsThis">
-            <string>Rotates the earth clockwise around its axis.</string>
+            <string>Rotates the globe clockwise around its axis.</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -168,7 +161,7 @@
             <string>Up</string>
            </property>
            <property name="whatsThis">
-            <string>Tilts the earth's axis towards the user.</string>
+            <string>Tilts the globe's axis towards the user.</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -245,7 +238,7 @@
             <string>Down</string>
            </property>
            <property name="whatsThis">
-            <string>Tilts the earth's axis away from the user.</string>
+            <string>Tilts the globe's axis away from the user.</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -262,7 +255,7 @@
             <string>Left</string>
            </property>
            <property name="whatsThis">
-            <string>Rotates the earth counterclockwise around its axis.</string>
+            <string>Rotates the globe counterclockwise around its axis.</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -325,13 +318,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>MarbleSearchListView</class>
-   <extends>QListView</extends>
-   <header>MarbleSearchListView.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../marble.qrc"/>
  </resources>

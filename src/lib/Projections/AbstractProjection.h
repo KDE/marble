@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
-// Copyright 2007-2009 Torsten Rahn  <rahn@kde.org>
+// Copyright 2007-2012 Torsten Rahn  <rahn@kde.org>
 //
 
 
@@ -172,10 +172,9 @@ class MARBLE_EXPORT AbstractProjection
                                     const QSizeF& size,
                                     bool &globeHidesPoint ) const = 0;
 
-
-    bool screenCoordinates( const GeoDataLineString &lineString,
+    virtual bool screenCoordinates( const GeoDataLineString &lineString,
                             const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const;
+                            QVector<QPolygonF*> &polygons ) const = 0;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -203,26 +202,13 @@ class MARBLE_EXPORT AbstractProjection
 
     QRegion mapRegion( const ViewportParams *viewport ) const;
 
-    // these methods will be removed in Marble 1.4:
-    MARBLE_DEPRECATED( bool exceedsLatitudeRange( const GeoDataCoordinates& coords ) const );
-
-    MARBLE_DEPRECATED( bool exceedsLatitudeRange( const GeoDataLineString& lineString ) const );
-
-    /**
-     * @deprecated
-     * use @see screenCoordinates(qreal,qreal,const ViewportParams*,qreal&,qreal&)
-     */
-    MARBLE_DEPRECATED( bool screenCoordinates( qreal lon, qreal lat,
-                                    const ViewportParams *viewport,
-                                    int& x, int& y ) const );
-
-    MARBLE_DEPRECATED( bool screenCoordinates( const GeoDataCoordinates &geopoint,
-                                    const ViewportParams *viewport,
-                                    int &x, int &y, bool &globeHidesPoint ) const );
+ protected:
+     const QScopedPointer<AbstractProjectionPrivate> d_ptr;
+     AbstractProjection( AbstractProjectionPrivate* dd );
 
  private:
-    Q_DISABLE_COPY( AbstractProjection )
-    AbstractProjectionPrivate * const d;
+     Q_DECLARE_PRIVATE(AbstractProjection)
+     Q_DISABLE_COPY( AbstractProjection )
 };
 
 }

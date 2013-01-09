@@ -11,13 +11,15 @@
 #include "GeoSceneGeodata.h"
 #include "GeoSceneTypes.h"
 
+#include <QtCore/QDebug>
+
 namespace Marble
 {
 GeoSceneGeodata::GeoSceneGeodata( QString name )
     : GeoSceneAbstractDataset( name ),
-      m_name( name ),
       m_sourceFile( QString() ),
-      m_sourceFileFormat( QString() )
+      m_pen( QPen( Qt::NoPen ) ),
+      m_brush( QBrush( Qt::transparent ) )
 {
 }
 
@@ -30,9 +32,14 @@ const char* GeoSceneGeodata::nodeType() const
     return GeoSceneTypes::GeoSceneGeodataType;
 }
 
-QString GeoSceneGeodata::name() const
+QString GeoSceneGeodata::property() const
 {
-    return m_name;
+    return m_property;
+}
+
+void GeoSceneGeodata::setProperty( QString property )
+{
+    m_property = property;
 }
 
 QString GeoSceneGeodata::sourceFile() const
@@ -45,16 +52,35 @@ void GeoSceneGeodata::setSourceFile(QString sourceFile)
     m_sourceFile = sourceFile;
 }
 
-QString GeoSceneGeodata::sourceFileFormat() const
+QString GeoSceneGeodata::colorize() const
 {
-    return m_sourceFileFormat;
+    return m_colorize;
 }
 
-void GeoSceneGeodata::setSourceFileFormat(QString format)
+void GeoSceneGeodata::setColorize( QString colorize )
 {
-    m_sourceFileFormat = format;
+    m_colorize = colorize;
 }
 
+QPen GeoSceneGeodata::pen() const
+{
+    return m_pen;
+}
+
+void GeoSceneGeodata::setPen( const QPen& pen )
+{
+    m_pen = pen;
+}
+
+QBrush GeoSceneGeodata::brush() const
+{
+    return m_brush;
+}
+
+void GeoSceneGeodata::setBrush( const QBrush& brush )
+{
+    m_brush = brush;
+}
 QString GeoSceneGeodata::type()
 {
     return "geodata";

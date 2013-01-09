@@ -42,12 +42,14 @@ int main(int argc, char *argv[])
     // The GraphicsSystem needs to be set before the instantiation of the
     // QApplication. Therefore we need to parse the current setting 
     // in this unusual place :-/
-    QSettings * graphicsSettings = new QSettings("kde.org", "Marble Desktop Globe");
-    QString graphicsString = graphicsSettings->value("View/graphicsSystem", "raster").toString();
-    delete graphicsSettings;
+    QSettings graphicsSettings("KDE", "Marble Virtual Globe"); // keep the parameters here
+    QString const graphicsString = graphicsSettings.value("View/graphicsSystem", "raster").toString();
     QApplication::setGraphicsSystem( graphicsString );
 
     QApplication app(argc, argv);
+    app.setApplicationName( "Marble Virtual Globe" );
+    app.setOrganizationName( "KDE" );
+    app.setOrganizationDomain( "kde.org" );
     // Widget translation
 
 #ifdef Q_WS_MAEMO_5
@@ -140,56 +142,56 @@ int main(int argc, char *argv[])
     for ( int i = 1; i < args.count(); ++i ) {
         const QString arg = args.at(i);
 
-        if ( arg == "--debug-info" )
+        if ( arg == QLatin1String( "--debug-info" ) )
         {
             MarbleDebug::enable = true;
         }
-        else if ( arg.startsWith( "--marbledatapath=", Qt::CaseInsensitive ) )
+        else if ( arg.startsWith( QLatin1String( "--marbledatapath=" ), Qt::CaseInsensitive ) )
         {
             marbleDataPath = args.at(i).mid(17);
         }
-        else if ( arg.compare( "--marbledatapath", Qt::CaseInsensitive ) == 0 ) {
+        else if ( arg.compare( QLatin1String( "--marbledatapath" ), Qt::CaseInsensitive ) == 0 ) {
             dataPathIndex = i + 1;
             marbleDataPath = args.value( dataPathIndex );
             ++i;
         }
-        else if ( arg == "--smallscreen" ) {
+        else if ( arg == QLatin1String( "--smallscreen" ) ) {
             profiles |= MarbleGlobal::SmallScreen;
         }
-        else if ( arg == "--nosmallscreen" ) {
+        else if ( arg == QLatin1String( "--nosmallscreen" ) ) {
             profiles &= ~MarbleGlobal::SmallScreen;
         }
-        else if ( arg == "--highresolution" ) {
+        else if ( arg == QLatin1String( "--highresolution" ) ) {
             profiles |= MarbleGlobal::HighResolution;
         }
-        else if ( arg == "--nohighresolution" ) {
+        else if ( arg == QLatin1String( "--nohighresolution" ) ) {
             profiles &= ~MarbleGlobal::HighResolution;
         }
-        else if ( arg.startsWith( "--latlon=", Qt::CaseInsensitive ) )
+        else if ( arg.startsWith( QLatin1String( "--latlon=" ), Qt::CaseInsensitive ) )
         {
             coordinatesString = arg.mid(9);
         }
-        else if ( arg.compare( "--latlon", Qt::CaseInsensitive ) == 0 ) {
+        else if ( arg.compare( QLatin1String( "--latlon" ), Qt::CaseInsensitive ) == 0 ) {
             ++i;
             // TODO: misses an error check if there is a value at all
             // and error reporting to user (problem also exists with marbledatapath)
             coordinatesString = args.value( i );
         }
-        else if ( arg.startsWith( "--distance=", Qt::CaseInsensitive ) )
+        else if ( arg.startsWith( QLatin1String( "--distance=" ), Qt::CaseInsensitive ) )
         {
             distanceString = arg.mid(11);
         }
-        else if ( arg.compare( "--distance", Qt::CaseInsensitive ) == 0 ) {
+        else if ( arg.compare( QLatin1String( "--distance" ), Qt::CaseInsensitive ) == 0 ) {
             ++i;
             // TODO: misses an error check if there is a value at all
             // and error reporting to user (problem also exists with marbledatapath)
             distanceString = args.value( i );
         }
-        else if ( arg.startsWith( "--map=", Qt::CaseInsensitive ) )
+        else if ( arg.startsWith( QLatin1String( "--map=" ), Qt::CaseInsensitive ) )
         {
             mapThemeId = arg.mid(6);
         }
-        else if ( arg.compare( "--map", Qt::CaseInsensitive ) == 0 ) {
+        else if ( arg.compare( QLatin1String( "--map" ), Qt::CaseInsensitive ) == 0 ) {
             ++i;
             // TODO: misses an error check if there is a value at all
             // and error reporting to user (problem also exists with marbledatapath)

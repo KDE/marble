@@ -102,6 +102,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     
     connect( d->m_mapViewWidget, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
     connect( d->m_mapViewWidget, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
+    connect( d->m_mapViewWidget, SIGNAL( celestialBodyChanged( const QString& ) ),
+             d->m_navigationWidget, SLOT( clearSearch() ) );
     connect( d->m_navigationWidget, SIGNAL( searchFinished() ), this, SIGNAL( searchFinished() ) );
 }
 
@@ -120,17 +122,11 @@ void MarbleControlBox::setMarbleWidget(MarbleWidget *widget)
         addItem( d->m_routingWidget, tr( "Routing" ) );
     }
 
-    d->m_fileViewWidget->setFileViewModel( widget->model()->fileViewModel() );
-    d->m_fileViewWidget->setTreeModel( widget->model()->treeModel() );
+    d->m_fileViewWidget->setMarbleWidget( widget );
     d->m_legendWidget->setMarbleModel( widget->model() );
     d->m_navigationWidget->setMarbleWidget( widget );
     d->m_mapViewWidget->setMarbleWidget( widget );
     d->m_currentLocationWidget->setMarbleWidget( widget );
-
-    connect( d->m_fileViewWidget, SIGNAL( centerOn( const GeoDataPlacemark &, bool ) ),
-             widget, SLOT( centerOn( const GeoDataPlacemark &, bool ) ) );
-    connect( d->m_fileViewWidget, SIGNAL( centerOn( const GeoDataLatLonBox &, bool ) ),
-             widget, SLOT( centerOn( const GeoDataLatLonBox &, bool ) ) );
 
     connect( d->m_legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
              widget,            SLOT( setPropertyValue( const QString &, bool ) ) );
@@ -238,10 +234,10 @@ CurrentLocationWidget * MarbleControlBox::currentLocationWidget()
     return d->m_currentLocationWidget;
 }
 
-void MarbleControlBox::search(const QString &searchTerm)
+void MarbleControlBox::search(const QString &searchTerm, SearchMode searchMode )
 {
     setCurrentWidget( d->m_navigationWidget );
-    d->m_navigationWidget->search( searchTerm );
+    d->m_navigationWidget->search( searchTerm, searchMode );
 }
 
 }

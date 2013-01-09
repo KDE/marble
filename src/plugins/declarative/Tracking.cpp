@@ -67,6 +67,8 @@ void Tracking::setPositionSource( PositionSource* source )
                     this, SLOT( updatePositionMarker() ) );
             connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
                     this, SLOT( updatePositionMarker() ) );
+            connect( source, SIGNAL( positionChanged() ),
+                     this, SIGNAL( distanceChanged() ) );
         }
         emit positionSourceChanged();
     }
@@ -153,8 +155,10 @@ void Tracking::setHasLastKnownPosition()
 void Tracking::setShowPositionMarkerPlugin( bool visible )
 {
     if ( m_marbleWidget ) {
-        QList<Marble::RenderPlugin *> const renderPlugins = m_marbleWidget->renderPlugins();
-        foreach( Marble::RenderPlugin* renderPlugin, renderPlugins ) {
+        QList<QObject*> const renderPlugins = m_marbleWidget->renderPlugins();
+        foreach( QObject* object, renderPlugins ) {
+            Marble::RenderPlugin* renderPlugin = qobject_cast<Marble::RenderPlugin*>( object );
+            Q_ASSERT( renderPlugin );
             if ( renderPlugin->nameId() == "positionMarker" ) {
                 renderPlugin->setEnabled( true );
                 renderPlugin->setVisible( visible );
@@ -261,11 +265,16 @@ void Tracking::setPositionMarkerType( Tracking::PositionMarkerType type )
     }
 }
 
+double Tracking::distance() const
+{
+    return m_marbleWidget ? m_marbleWidget->model()->positionTracking()->length( m_marbleWidget->model()->planetRadius() ) : 0.0;
+}
+
 void Tracking::saveTrack( const QString &fileName )
 {
     if ( m_marbleWidget ) {
         /** @todo FIXME: replace the file:// prefix on QML side */
-        QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
+        QString target = fileName.startsWith( QLatin1String( "file://" ) ) ? fileName.mid( 7 ) : fileName;
         m_marbleWidget->model()->positionTracking()->saveTrack( target );
     }
 }
@@ -274,7 +283,7 @@ void Tracking::openTrack(const QString &fileName)
 {
     if ( m_marbleWidget ) {
         /** @todo FIXME: replace the file:// prefix on QML side */
-        QString target = fileName.startsWith( "file://" ) ? fileName.mid( 7 ) : fileName;
+        QString target = fileName.startsWith( QLatin1String( "file://" ) ) ? fileName.mid( 7 ) : fileName;
         m_marbleWidget->model()->addGeoDataFile( target );
     }
 }

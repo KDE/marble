@@ -21,6 +21,7 @@
 #include <QtCore/QHash>
 #include <QtCore/QModelIndex>
 #include <QtCore/QRect>
+#include <QtCore/QSet>
 #include <QtCore/QVector>
 #include <QtGui/QSortFilterProxyModel>
 
@@ -110,7 +111,7 @@ class PlacemarkLayout : public QObject
 
     void styleReset();
 
-    QList<const GeoDataPlacemark*> visiblePlacemarks( const ViewportParams *viewport );
+    QSet<TileId> visibleTiles( const ViewportParams *viewport ) const;
     bool layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected );
 
     /**
@@ -118,11 +119,11 @@ class PlacemarkLayout : public QObject
      * @p ok is set to true if the coordinates are valid and should be used for drawing,
      * it it set to false otherwise.
      */
-    GeoDataCoordinates placemarkIconCoordinates( const GeoDataPlacemark *placemark, bool *ok ) const;
+    GeoDataCoordinates placemarkIconCoordinates( const GeoDataPlacemark *placemark ) const;
 
     QRectF  roomForLabel( const GeoDataStyle * style,
                          const qreal x, const qreal y,
-                         const QString &labelText );
+                         const QString &labelText ) const;
 
     bool    placemarksOnScreenLimit( const QSize &screenSize ) const;
 

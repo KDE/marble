@@ -22,11 +22,11 @@ class MARBLE_EXPORT GeoTrackGraphicsItem : public GeoLineStringGraphicsItem
 {
 
 public:
-    GeoTrackGraphicsItem( const GeoDataTrack *track );
+    explicit GeoTrackGraphicsItem( const GeoDataTrack *track );
 
     void setTrack( const GeoDataTrack *track );
 
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer );
+    virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
 
 private:
     const GeoDataTrack *m_track;

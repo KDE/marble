@@ -52,7 +52,6 @@ GeoNode* GPXtrkTagHandler::parse(GeoParser& parser) const
 #endif
         return placemark;
     }
-    mDebug() << "trk parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

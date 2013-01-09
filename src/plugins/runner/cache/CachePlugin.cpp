@@ -59,7 +59,7 @@ QStringList CachePlugin::fileExtensions() const
     return QStringList() << "cache";
 }
 
-MarbleAbstractRunner* CachePlugin::newRunner() const
+ParsingRunner* CachePlugin::newRunner() const
 {
     return new CacheRunner;
 }

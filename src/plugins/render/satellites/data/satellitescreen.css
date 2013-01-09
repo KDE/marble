@@ -1,0 +1,48 @@
+/*
+ * Style sheet for weather plugin
+ */
+
+body {
+  margin-top: 50px;
+  background-image:url('qrc:/marble/satellites/marble_deco.png'); background-repeat:no-repeat;
+  background-position:0px 0px;
+}
+
+h1 { color:#2c72c7; font:bold 36px "Linux Biolinum O", Verdana, Arial, Helvetica, sans-serif; margin-top:80px; }
+
+h2 { color:#888a85; font-size:24px; margin-top:20px; }
+
+h3 { color:#6193cf; font-size:18px; margin-top:25px; }
+
+table {
+	  font: 11px/24px Verdana, Arial, Helvetica, sans-serif;
+	  border-collapse: collapse;
+	  width: 400px;
+	}
+
+tr.blue td {
+	  border-top: 1px solid #00316e;
+	  border-bottom: 1px solid #00316e;
+	  background: #00438a;
+	  color:white;
+	  font:bold 12px/26px Verdana, Arial, Helvetica, sans-serif;
+	}
+
+td {
+	  border-bottom: 1px solid #CCC;
+	  padding: 0 0.5em;
+	}
+
+td+td {
+	border-left: 1px solid #CCC;
+	text-align: center;
+	}
+
+
+p.gray { color:#888a85; font-size:12px; margin-top:20px; }
+
+p { color:black; font-size:12px; margin-top:20px; }
+
+hr { margin-left:0px; width: 400px; margin-top:25px}
+
+a { color: #2c72c7 }

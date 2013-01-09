@@ -37,7 +37,7 @@ public:
     Q_PROPERTY( MapThemeFilters mapThemeFilter READ mapThemeFilter WRITE setMapThemeFilter NOTIFY mapThemeFilterChanged )
 
 public:
-    MapThemeModel( QObject* parent = 0 );
+    explicit MapThemeModel( QObject* parent = 0 );
 
     /** @todo FIXME https://bugreports.qt.nokia.com/browse/QTCOMPONENTS-1206 */
     int count();

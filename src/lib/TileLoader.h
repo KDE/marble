@@ -1,4 +1,8 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
 // Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+// Copyright 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -16,13 +20,13 @@
 #ifndef MARBLE_TILELOADER_H
 #define MARBLE_TILELOADER_H
 
-#include <QtCore/QHash>
 #include <QtCore/QObject>
-#include <QtCore/QSet>
 #include <QtCore/QString>
 #include <QtGui/QImage>
 
 #include "TileId.h"
+#include "GeoDataContainer.h"
+#include "PluginManager.h"
 #include "MarbleGlobal.h"
 
 class QByteArray;
@@ -32,6 +36,7 @@ class QUrl;
 namespace Marble
 {
 class HttpDownloadManager;
+class GeoSceneTiled;
 class GeoSceneTexture;
 
 class TileLoader: public QObject
@@ -45,21 +50,19 @@ class TileLoader: public QObject
         Available
     };
 
-    explicit TileLoader( HttpDownloadManager * const );
+    explicit TileLoader(HttpDownloadManager * const, const PluginManager * );
 
-    void setTextureLayers( const QVector<GeoSceneTexture const *> &textureLayers );
+    QImage loadTileImage( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const );
+    GeoDataDocument* loadTileVectorData( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const usage, QString const &format );
+    void downloadTile( GeoSceneTiled const *textureLayer, TileId const &, DownloadUsage const );
 
-    QImage loadTile( TileId const & tileId, DownloadUsage const );
-    void reloadTile( TileId const &tileId, DownloadUsage const );
-    void downloadTile( TileId const & tileId );
-
-    static int maximumTileLevel( GeoSceneTexture const & texture );
+    static int maximumTileLevel( GeoSceneTiled const & texture );
 
     /**
      * Returns whether the mandatory most basic tile level is fully available for
      * the given @p texture layer.
      */
-    static bool baseTilesAvailable( GeoSceneTexture const & texture );
+    static bool baseTilesAvailable( GeoSceneTiled const & texture );
 
     /**
       * Returns the status of the downloaded tile file:
@@ -67,7 +70,7 @@ class TileLoader: public QObject
       * - Expired when it has been downloaded, but is too old (as per .dgml expiration time)
       * - Available when it has been downloaded and is not expired
       */
-    TileStatus tileStatus( const TileId &tileId ) const;
+    static TileStatus tileStatus( GeoSceneTiled const *textureLayer, const TileId &tileId );
 
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
@@ -78,14 +81,15 @@ class TileLoader: public QObject
 
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
- private:
-    GeoSceneTexture const * findTextureLayer( TileId const & ) const;
-    static QString tileFileName( GeoSceneTexture const * textureLayer, TileId const & );
-    void triggerDownload( TileId const &, DownloadUsage const );
-    QImage scaledLowerLevelTile( TileId const & ) const;
+    void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
 
-    // TODO: comment about uint hash key
-    QHash<uint, GeoSceneTexture const *> m_textureLayers;
+ private:
+    static QString tileFileName( GeoSceneTiled const * textureLayer, TileId const & );
+    void triggerDownload( GeoSceneTiled const *textureLayer, TileId const &, DownloadUsage const );
+    QImage scaledLowerLevelTile( GeoSceneTiled const * textureLayer, TileId const & ) const;
+
+    // For vectorTile parsing
+    const PluginManager * m_pluginManager;
 };
 
 }

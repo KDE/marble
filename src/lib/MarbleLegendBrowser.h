@@ -17,8 +17,8 @@
 #define MARBLE_MARBLELEGENDBROWSER_H
 
 
-#include <QtCore/QString>
-#include <QtGui/QTextBrowser>
+#include <QString>
+#include <QtWebKit/QWebView>
 
 #include "marble_export.h"
 
@@ -31,7 +31,7 @@ namespace Marble
 class MarbleModel;
 class MarbleLegendBrowserPrivate;
 
-class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
+class MARBLE_EXPORT MarbleLegendBrowser : public QWebView
 {
     Q_OBJECT
 
@@ -39,33 +39,18 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     explicit MarbleLegendBrowser( QWidget* parent );
     ~MarbleLegendBrowser();
 
-    void  setMarbleModel( MarbleModel *marbleModel );
+    void setMarbleModel( MarbleModel *marbleModel );
 
- public Q_SLOTS:
+ public slots:
     void setCheckedProperty( const QString& name, bool checked );
 
- Q_SIGNALS:
-/*
-    void toggledLocations( bool );
-    void toggledCities( bool );
-    void toggledTerrain( bool );
-    void toggledBorders( bool );
-    void toggledWaterBodies( bool );
-    void toggledOtherPlaces( bool );
-    void toggledIceLayer( bool );
-    void toggledGrid( bool );
-    void toggledRelief( bool );
-    void toggledCompass( bool );
-    void toggledScaleBar( bool );
-*/
+ signals:
     void toggledShowProperty( QString, bool );
 
  private Q_SLOTS:
     void initTheme();
-
     void loadLegend();
-
-    void toggleCheckBoxStatus( const QUrl &);
+    void injectCheckBoxChecker();
 
  protected:
     bool event( QEvent * event );
@@ -73,7 +58,8 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     QString  generateSectionsHtml();
     void  translateHtml( QString & html );
 
-    QVariant loadResource ( int type, const QUrl & name );
+ private:
+    void reverseSupportCheckboxes( QString &html );
 
  private:
     Q_DISABLE_COPY( MarbleLegendBrowser )

@@ -23,6 +23,7 @@ class QAction;
 namespace Marble
 {
 
+class MarbleWidget;
 class TinyWebBrowser;
  
 class WikipediaItem : public AbstractDataPluginItem
@@ -30,7 +31,7 @@ class WikipediaItem : public AbstractDataPluginItem
     Q_OBJECT
     
  public:
-    WikipediaItem( QObject *parent );
+    WikipediaItem( MarbleWidget* widget, QObject *parent );
     
     ~WikipediaItem();
     
@@ -44,8 +45,7 @@ class WikipediaItem : public AbstractDataPluginItem
     
     void addDownloadedFile( const QString& url, const QString& type );
     
-    void paint( GeoPainter *painter, ViewportParams *viewport,
-                const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void paint( QPainter *painter );
                  
     bool operator<( const AbstractDataPluginItem *other ) const;
     
@@ -88,6 +88,7 @@ class WikipediaItem : public AbstractDataPluginItem
     void updateToolTip();
     bool showThumbnail();
 
+    MarbleWidget * m_marbleWidget;
     QUrl m_url;
     QUrl m_thumbnailImageUrl;
     QString m_summary;
@@ -97,7 +98,7 @@ class WikipediaItem : public AbstractDataPluginItem
 
     QPixmap m_thumbnail;
     QIcon m_wikiIcon;
-    QHash<QString, QVariant> m_settings;
+    bool m_showThumbnail;
 };
     
 }

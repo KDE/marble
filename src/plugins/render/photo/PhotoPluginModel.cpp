@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 // Self
@@ -14,12 +15,14 @@
 // Photo Plugin
 #include "FlickrParser.h"
 #include "PhotoPluginItem.h"
+#include "PhotoPlugin.h"
 
 // Marble
 #include "AbstractDataPluginItem.h"
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
 
 // Qt
 #include <QtCore/QHash>
@@ -30,9 +33,9 @@ using namespace Marble;
 
 const QString flickrApiKey( "620131a1b82b000c9582b94effcdc636" );
 
-PhotoPluginModel::PhotoPluginModel( const PluginManager *pluginManager,
-                                    QObject *parent )
-    : AbstractDataPluginModel( "photo", pluginManager, parent )
+PhotoPluginModel::PhotoPluginModel( QObject *parent )
+    : AbstractDataPluginModel( "photo", parent ),
+      m_marbleWidget( 0 )
 {
 }
 
@@ -73,7 +76,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     if( model->planetId() != "earth" ) {
         return;
     }
-    
+
     if( box.west() <= box.east() ) {
         QString bbox( "" );
         bbox += QString::number( box.west()  * RAD2DEG ) + ',';
@@ -85,6 +88,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         options.insert( "per_page", QString::number( number ) );
         options.insert( "bbox",     bbox );
         options.insert( "sort",     "interestingness-desc" );
+        options.insert( "license", m_licenses );
     
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", options ) );
     }
@@ -100,7 +104,8 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         optionsWest.insert( "per_page", QString::number( number/2 ) );
         optionsWest.insert( "bbox",     bboxWest );
         optionsWest.insert( "sort",     "interestingness-desc" );
-        
+        optionsWest.insert( "license", m_licenses );
+
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsWest ) );
         
         
@@ -114,7 +119,8 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         optionsEast.insert( "per_page", QString::number( number/2 ) );
         optionsEast.insert( "bbox",     bboxEast );
         optionsEast.insert( "sort",     "interestingness-desc" );
-        
+        optionsEast.insert( "license", m_licenses );
+
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsEast ) );
     }
 }
@@ -122,11 +128,12 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
 void PhotoPluginModel::parseFile( const QByteArray& file )
 {
     QList<PhotoPluginItem*> list;
-    FlickrParser parser( &list, this );
+    FlickrParser parser( m_marbleWidget, &list, this );
     
     parser.read( file );
     
     QList<PhotoPluginItem*>::iterator it;
+    QList<AbstractDataPluginItem*> items;
     
     for( it = list.begin(); it != list.end(); ++it ) {
         if( itemExists( (*it)->id() ) ) {
@@ -136,9 +143,21 @@ void PhotoPluginModel::parseFile( const QByteArray& file )
         
         // Currently all Flickr images with geotags are on earth
         (*it)->setTarget( "earth" );
-        downloadItemData( (*it)->photoUrl(), "thumbnail", (*it) );
-        downloadItemData( (*it)->infoUrl(),  "info",      (*it) );
+        downloadItem( (*it)->photoUrl(), "thumbnail", (*it) );
+        downloadItem( (*it)->infoUrl(),  "info",      (*it) );
+        items << *it;
     }
+    addItemsToList( items );
+}
+
+void PhotoPluginModel::setMarbleWidget( MarbleWidget *widget )
+{
+    m_marbleWidget = widget;
+}
+
+void PhotoPluginModel::setLicenseValues( const QString &licenses )
+{
+    m_licenses = licenses;
 }
 
 #include "PhotoPluginModel.moc"

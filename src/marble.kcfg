@@ -45,9 +45,6 @@
   <entry key="lockFloatItemPositions" type="Bool" >
    <default>false</default>
   </entry>
-  <entry key="kineticScrolling" type="Bool" >
-   <default>true</default>
-  </entry>
   <entry key="projection" type="Int" >
    <default>0</default>
   </entry>
@@ -161,7 +158,10 @@
   <entry name="showCitylights" type="Bool" >
    <default>false</default>
   </entry>
-  <entry name="centerOnSun" type="Bool" >
+  <entry name="subSolarPointIconVisible" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry name="lockToSubSolarPoint" type="Bool" >
    <default>false</default>
   </entry>
  </group>
@@ -182,6 +182,9 @@
    </choices>
    <default>Marble::ShowHomeLocation</default>
   </entry>
+  <entry key="inertialEarthRotation" type="Bool" >
+   <default>true</default>
+  </entry>
   <entry key="animateTargetVoyage" type="Bool" >
    <label>Display animation on voyage to target.</label>
    <default>false</default>
@@ -200,7 +203,7 @@
   </entry>
   <entry key="persistentTileCacheLimit" type="Int" >
    <label>Maximum space on the hard disk that can be used to store tiles.</label>
-   <default>300</default>
+   <default>0</default><!-- unlimited disk space -->
    <min>0</min>
    <max>999999</max>
   </entry>
@@ -287,19 +290,19 @@
    <default>0</default>
   </entry>
   <entry key="routeColorStandard" type="Color" >
-   <default code="true">Marble::oxygenSkyBlue4</default>
+   <default code="true">Marble::Oxygen::skyBlue4</default>
   </entry>
   <entry key="routeAlphaStandard" type="Int" >
    <default>200</default>
   </entry>
   <entry key="routeColorHighlighted" type="Color" >
-   <default code="true">Marble::oxygenSeaBlue2</default>
+   <default code="true">Marble::Oxygen::seaBlue2</default>
   </entry>
   <entry key="routeAlphaHighlighted" type="Int" >
    <default>200</default>
   </entry>
   <entry key="routeColorAlternative" type="Color" >
-   <default code="true">Marble::oxygenAluminumGray4</default>
+   <default code="true">Marble::Oxygen::aluminumGray4</default>
   </entry>
   <entry key="routeAlphaAlternative" type="Int" >
    <default>200</default>

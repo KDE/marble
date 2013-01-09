@@ -99,7 +99,7 @@ QImage GeoDataIconStyle::icon() const
     if(!d->m_icon.isNull())
         return d->m_icon;
     else if(!d->m_iconPath.isEmpty()) {
-        d->m_icon = QImage(d->m_iconPath);
+        d->m_icon = QImage( resolvePath( d->m_iconPath ) );
         return d->m_icon;
     }
     else
@@ -124,18 +124,28 @@ const QPointF& GeoDataIconStyle::hotSpot() const // always in pixels, Origin upp
     GeoDataHotSpot::Units yunits;
 
     d->m_pixelHotSpot = d->m_hotSpot.hotSpot( xunits, yunits );
-    if ( xunits == GeoDataHotSpot::Fraction )
-        d->m_pixelHotSpot.setX( d->m_icon.width()  * d->m_pixelHotSpot.x() );
-    else {
-        if ( xunits == GeoDataHotSpot::InsetPixels )
-            d->m_pixelHotSpot.setX( d->m_icon.width()  - d->m_pixelHotSpot.x() );
+    switch ( xunits ) {
+    case GeoDataHotSpot::Fraction:
+        d->m_pixelHotSpot.setX( d->m_icon.width() * d->m_pixelHotSpot.x() );
+        break;
+    case GeoDataHotSpot::Pixels:
+        /* nothing to do */
+        break;
+    case GeoDataHotSpot::InsetPixels:
+        d->m_pixelHotSpot.setX( d->m_icon.width() - d->m_pixelHotSpot.x() );
+        break;
     }
 
-    if ( yunits == GeoDataHotSpot::Fraction )
+    switch ( yunits ) {
+    case GeoDataHotSpot::Fraction:
         d->m_pixelHotSpot.setY( d->m_icon.height() * ( 1.0 - d->m_pixelHotSpot.y() ) );
-    else {
-        if ( yunits == GeoDataHotSpot::Pixels )
-            d->m_pixelHotSpot.setY( d->m_icon.height() - d->m_pixelHotSpot.y() );
+        break;
+    case GeoDataHotSpot::Pixels:
+        /* nothing to do */
+        break;
+    case GeoDataHotSpot::InsetPixels:
+        d->m_pixelHotSpot.setY( d->m_icon.height() - d->m_pixelHotSpot.y() );
+        break;
     }
 
     return d->m_pixelHotSpot;

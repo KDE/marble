@@ -34,8 +34,8 @@ OpenCachingItem::OpenCachingItem( const OpenCachingCache& cache, QObject *parent
     setId( QString( "opencache-%1" ).arg( cache.id() ) );
     setCoordinate( GeoDataCoordinates( cache.longitude(), cache.latitude(), 0.0, GeoDataCoordinates::Degree ) );
     setTarget( "earth" );
-    connect( m_action, SIGNAL( triggered() ),
-             this, SLOT( showInfoDialog() ) );
+    connect( m_action, SIGNAL(triggered()),
+             this, SLOT(showInfoDialog()) );
 }
 
 OpenCachingItem::~OpenCachingItem()
@@ -89,24 +89,24 @@ QDialog *OpenCachingItem::infoDialog()
         m_ui->m_languageBox->addItems( languages );
         if( descriptions.size() > 0 ) {
             updateDescriptionLanguage( languages.first() );
-            connect( m_ui->m_languageBox, SIGNAL( currentIndexChanged( QString ) ),
-                     this, SLOT( updateDescriptionLanguage( QString ) ));
+            connect( m_ui->m_languageBox, SIGNAL(currentIndexChanged(QString)),
+                     this, SLOT(updateDescriptionLanguage(QString)) );
         }
         OpenCachingCacheLog log = m_cache.log();
         if( log.size() > 0 ) {
             m_ui->m_logText->setHtml( log[m_logIndex].text() );
             m_ui->m_logCount->setText( "1 / " + QString::number( log.size() ) );
-            connect( m_ui->m_nextButton, SIGNAL( clicked() ),
-                     this, SLOT( nextLogEntry() ) );
-            connect( m_ui->m_previousButton, SIGNAL( clicked() ),
-                     this, SLOT( previousLogEntry() ) );
+            connect( m_ui->m_nextButton, SIGNAL(clicked()),
+                     this, SLOT(nextLogEntry()) );
+            connect( m_ui->m_previousButton, SIGNAL(clicked()),
+                     this, SLOT(previousLogEntry()) );
         }
         if( log.size() > 1 ) {
             m_ui->m_nextButton->setEnabled( true );
         }
         QPushButton *closeButton = m_ui->m_buttonBox->button( QDialogButtonBox::Close );
-        connect( closeButton, SIGNAL( clicked() ),
-                 m_infoDialog, SLOT( close() ) );
+        connect( closeButton, SIGNAL(clicked()),
+                 m_infoDialog, SLOT(close()) );
         m_infoDialog->setWindowTitle( m_cache.cacheName() );
     }
     return m_infoDialog;
@@ -149,11 +149,11 @@ void OpenCachingItem::paint( GeoPainter *painter, ViewportParams *viewport,
         height = m_cache.difficulty() * 10;
         // Draws the circle with circles' center as rectangle's top-left corner.
         QRect arcRect( 0, 0, width, height );
-        QColor color = oxygenBrickRed4;
+        QColor color = Oxygen::brickRed4;
         if ( m_cache.difficulty() < 2.0 ) {
-            color = oxygenSunYellow6;
+            color = Oxygen::sunYellow6;
         } else if ( m_cache.difficulty() < 4.0 ) {
-            color = oxygenHotOrange4;
+            color = Oxygen::hotOrange4;
         }
         painter->setPen( QPen( Qt::NoPen ) );
         QBrush brush( color );

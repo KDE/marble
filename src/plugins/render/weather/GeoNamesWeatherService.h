@@ -13,6 +13,8 @@
 
 #include "AbstractWeatherService.h"
 
+class QScriptValue;
+
 namespace Marble
 {
 
@@ -21,14 +23,16 @@ class GeoNamesWeatherService : public AbstractWeatherService
     Q_OBJECT
 
  public:
-    GeoNamesWeatherService( QObject *parent );
+    explicit GeoNamesWeatherService( QObject *parent );
     ~GeoNamesWeatherService();
 
  public Q_SLOTS:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              const MarbleModel *model,
                              qint32 number = 10 );
+    virtual void getItem( const QString &id, const MarbleModel *model );
     void parseFile( const QByteArray& file );
+    AbstractDataPluginItem* parse( const QScriptValue &value );
 
  private:
     void setupHashes();

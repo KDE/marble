@@ -38,7 +38,7 @@ static const qreal s_labelOutlineWidth = 2.5;
 class VisiblePlacemark
 {
  public:
-    VisiblePlacemark( const GeoDataPlacemark *placemark );
+    explicit VisiblePlacemark( const GeoDataPlacemark *placemark );
 
     /**
      * Returns the index of the place mark model which

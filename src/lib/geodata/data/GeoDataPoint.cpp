@@ -29,33 +29,31 @@
 namespace Marble
 {
 
-GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
-                            GeoDataPoint::Unit unit, int _detail )
-  : GeoDataCoordinates( _lon, _lat, _alt, 
-                        static_cast<GeoDataCoordinates::Unit>( unit ), _detail ),
-    GeoDataGeometry( new GeoDataPointPrivate )
+GeoDataPoint::GeoDataPoint( qreal lon, qreal lat, qreal alt,
+                            GeoDataCoordinates::Unit unit )
+  : GeoDataGeometry( new GeoDataPointPrivate )
 {
-    p()->m_latLonAltBox = *this;
+    p()->m_coordinates = GeoDataCoordinates( lon, lat, alt, unit );
+    p()->m_latLonAltBox = GeoDataLatLonAltBox( p()->m_coordinates );
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
-  : GeoDataCoordinates( other ),
-    GeoDataGeometry( other )
+  : GeoDataGeometry( other )
     
 {
-    p()->m_latLonAltBox = *this;
+    p()->m_coordinates = other.p()->m_coordinates;
+    p()->m_latLonAltBox = other.p()->m_latLonAltBox;
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataCoordinates& other )
-  : GeoDataCoordinates( other ),
-  GeoDataGeometry ( new GeoDataPointPrivate )
+  : GeoDataGeometry ( new GeoDataPointPrivate )
 {
-    p()->m_latLonAltBox = *this;
+    p()->m_coordinates = other;
+    p()->m_latLonAltBox = GeoDataLatLonAltBox( p()->m_coordinates );
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataGeometry& other )
   : GeoDataGeometry( other )
-
 {
 }
 
@@ -66,6 +64,17 @@ GeoDataPoint::GeoDataPoint()
 
 GeoDataPoint::~GeoDataPoint()
 {
+}
+
+void GeoDataPoint::setCoordinates( const GeoDataCoordinates &coordinates )
+{
+    p()->m_coordinates = coordinates;
+    p()->m_latLonAltBox = GeoDataLatLonAltBox( p()->m_coordinates );
+}
+
+const GeoDataCoordinates &GeoDataPoint::coordinates() const
+{
+    return p()->m_coordinates;
 }
 
 GeoDataPointPrivate* GeoDataPoint::p() const
@@ -80,18 +89,17 @@ const char* GeoDataPoint::nodeType() const
 
 void GeoDataPoint::detach()
 {
-    GeoDataCoordinates::detach();
     GeoDataGeometry::detach();
 }
 
 void GeoDataPoint::pack( QDataStream& stream ) const
 {
-    GeoDataCoordinates::pack( stream );
+    p()->m_coordinates.pack( stream );
 }
 
 void GeoDataPoint::unpack( QDataStream& stream )
 {
-    GeoDataCoordinates::unpack( stream );
+    p()->m_coordinates.unpack( stream );
 }
 
 }

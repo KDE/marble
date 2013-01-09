@@ -132,7 +132,7 @@ QtMobilityPositionProviderPlugin::~QtMobilityPositionProviderPlugin()
 void QtMobilityPositionProviderPlugin::initialize()
 {
     if( d->m_source ) {
-        connect( d->m_source, SIGNAL( positionUpdated ( const QGeoPositionInfo& ) ), this, SLOT( update() ) );
+        connect( d->m_source, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(update()) );
         d->m_source->setUpdateInterval( 1000 );
         d->m_source->startUpdates();
     }

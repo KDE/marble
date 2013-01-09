@@ -7,13 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>222</width>
-    <height>592</height>
+    <height>426</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Map View</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="toolBarLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
+   </item>
    <item>
     <widget class="QLabel" name="projectionLabel_2">
      <property name="text">
@@ -112,7 +119,7 @@
     </widget>
    </item>
    <item>
-    <widget class="MarbleThemeSelectView" name="marbleThemeSelectView">
+    <widget class="QListView" name="marbleThemeSelectView">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -136,15 +143,11 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="QComboBox" name="mapThemeComboBox"/>
+   </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>MarbleThemeSelectView</class>
-   <extends>QListView</extends>
-   <header>MarbleThemeSelectView.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../marble.qrc"/>
  </resources>

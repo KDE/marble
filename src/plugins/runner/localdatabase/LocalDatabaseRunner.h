@@ -11,20 +11,19 @@
 #ifndef MARBLE_LOCALDATABASERUNNER_H
 #define MARBLE_LOCALDATABASERUNNER_H
 
-#include "MarbleAbstractRunner.h"
+#include "SearchRunner.h"
 
 #include <QtCore/QString>
 
 namespace Marble
 {
 
-class LocalDatabaseRunner : public MarbleAbstractRunner
+class LocalDatabaseRunner : public SearchRunner
 {
     Q_OBJECT
 public:
-    LocalDatabaseRunner(QObject *parent = 0);
+    explicit LocalDatabaseRunner(QObject *parent = 0);
     ~LocalDatabaseRunner();
-    GeoDataFeature::GeoDataVisualCategory category() const;
     virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
 };

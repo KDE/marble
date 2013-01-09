@@ -59,7 +59,7 @@ QStringList OsmPlugin::fileExtensions() const
     return QStringList() << "osm";
 }
 
-MarbleAbstractRunner* OsmPlugin::newRunner() const
+ParsingRunner* OsmPlugin::newRunner() const
 {
     return new OsmRunner;
 }

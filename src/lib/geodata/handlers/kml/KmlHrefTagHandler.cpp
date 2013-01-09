@@ -28,6 +28,8 @@
 #include "GeoDataIconStyle.h"
 #include "GeoDataGroundOverlay.h"
 #include "GeoDataPhotoOverlay.h"
+#include "GeoDataScreenOverlay.h"
+#include "GeoDataItemIcon.h"
 #include "GeoParser.h"
 
 namespace Marble
@@ -42,22 +44,30 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
+    QString content = parser.readElementText().trimmed();
+
     if ( parentItem.represents( kmlTag_Icon ) ) {
         // we need a more elaborate version of this part
-        QString content = parser.readElementText().trimmed();
 
         if ( parentItem.is<GeoDataIconStyle>() ) {
             parentItem.nodeAs<GeoDataIconStyle>()->setIconPath( content );
         } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
             parentItem.nodeAs<GeoDataGroundOverlay>()->setIconFile( content );
-        }  else if ( parentItem.is<GeoDataPhotoOverlay>() ) {
+        } else if ( parentItem.is<GeoDataPhotoOverlay>() ) {
             parentItem.nodeAs<GeoDataPhotoOverlay>()->setIconFile( content );
+        } else if ( parentItem.is<GeoDataScreenOverlay>() ) {
+            parentItem.nodeAs<GeoDataScreenOverlay>()->setIconFile( content );
         }
+    }  else if ( parentItem.represents( kmlTag_ItemIcon ) )
+    {
+        parentItem.nodeAs<GeoDataItemIcon>()->setIconPath( content );
+    }
+
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << kmlTag_href << "> containing: " << content
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-    }
+
     return 0;
 }
 

@@ -18,10 +18,13 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QUrl>
+#include <QtNetwork/QNetworkReply>
 
 #include "MarbleGlobal.h"
 
 #include "marble_export.h"
+
+class QNetworkAccessManager;
 
 namespace Marble
 {
@@ -32,7 +35,7 @@ class MARBLE_EXPORT HttpJob: public QObject
     Q_OBJECT
 
  public:
-    HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id );
+    HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id, QNetworkAccessManager *networkAccessManager );
     ~HttpJob();
 
     QUrl sourceUrl() const;
@@ -67,7 +70,12 @@ class MARBLE_EXPORT HttpJob: public QObject
     void dataReceived( HttpJob * job, QByteArray data );
 
  public Q_SLOTS:
-    virtual void execute() = 0;
+    void execute();
+
+private Q_SLOTS:
+   void downloadProgress( qint64 bytesReceived, qint64 bytesTotal );
+   void error( QNetworkReply::NetworkError code );
+   void finished();
 
  private:
     Q_DISABLE_COPY( HttpJob )

@@ -22,105 +22,96 @@ namespace Marble
 {
 
 class MarbleModel;
+class ParsingRunner;
+class SearchRunner;
+class ReverseGeocodingRunner;
 class RouteRequest;
-class SearchRunnerPlugin;
-class ReverseGeocodingRunnerPlugin;
-class RoutingRunnerPlugin;
-class ParseRunnerPlugin;
-class MarbleAbstractRunner;
+class RoutingRunner;
 class MarbleRunnerManager;
 
-/**
-  * An abstract QRunnable that executes one of the MarbleAbstractRunner tasks -- placemark
-  * search, reverse geocoding or routing -- in the run() function and waits for the
-  * result in a local event loop.
-  */
-class RunnerTask : public QObject, public QRunnable
+/** A RunnerTask that executes a placemark search */
+class SearchTask : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
-    /** Constructor. The runner instance given will be used to execute the actual task */
-    explicit RunnerTask( MarbleRunnerManager *manager );
+    SearchTask( SearchRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
-    /** Overriding QRunnable to execute the runner task in a local event loop */
-    virtual void run();
+    /**
+     * @reimp
+     */
+    void run();
 
 Q_SIGNALS:
-    void finished( RunnerTask* task );
-
-protected:
-    /** Derived classes should execute their task and quit the provided event loop when done */
-    virtual void runTask() = 0;
-
-    MarbleRunnerManager *manager();
+    void finished( SearchTask *task );
 
 private:
-    MarbleRunnerManager *const m_manager;
-};
-
-/** A RunnerTask that executes a placemark search */
-class SearchTask : public RunnerTask
-{
-    Q_OBJECT
-
-public:
-    SearchTask( const SearchRunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
-
-    virtual void runTask();
-
-private:
-    const SearchRunnerPlugin *const m_factory;
-    MarbleModel *const m_model;
+    SearchRunner *const m_runner;
     QString m_searchTerm;
     GeoDataLatLonAltBox m_preferredBbox;
 };
 
 /** A RunnerTask that executes reverse geocoding */
-class ReverseGeocodingTask : public RunnerTask
+class ReverseGeocodingTask : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
-    ReverseGeocodingTask( const ReverseGeocodingRunnerPlugin*factory, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates );
+    ReverseGeocodingTask( ReverseGeocodingRunner*runner, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates );
 
-    virtual void runTask();
+    /**
+     * @reimp
+     */
+    void run();
+
+Q_SIGNALS:
+    void finished( ReverseGeocodingTask *task );
 
 private:
-    const ReverseGeocodingRunnerPlugin *const m_factory;
-    MarbleModel *const m_model;
+    ReverseGeocodingRunner *const m_runner;
     GeoDataCoordinates m_coordinates;
 };
 
 
 /** A RunnerTask that executes a route calculation */
-class RoutingTask : public RunnerTask
+class RoutingTask : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
-    RoutingTask( RoutingRunnerPlugin *factory, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest );
+    RoutingTask( RoutingRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest );
 
-    virtual void runTask();
+    /**
+     * @reimp
+     */
+    void run();
+
+Q_SIGNALS:
+    void finished( RoutingTask *task );
 
 private:
-    RoutingRunnerPlugin *const m_factory;
-    MarbleModel *const m_model;
+    RoutingRunner *const m_runner;
     const RouteRequest *const m_routeRequest;
 };
 
 /** A RunnerTask that executes a file Parsing */
-class ParsingTask : public RunnerTask
+class ParsingTask : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
-    ParsingTask( const ParseRunnerPlugin* factory, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role );
+    ParsingTask( ParsingRunner *runner, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role );
 
-    virtual void runTask();
+    /**
+     * @reimp
+     */
+    void run();
+
+Q_SIGNALS:
+    void finished( ParsingTask *task );
 
 private:
-    const ParseRunnerPlugin *const m_factory;
+    ParsingRunner *const m_runner;
     QString m_fileName;
     DocumentRole m_role;
 };

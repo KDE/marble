@@ -25,7 +25,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneVector.h"
-#include "GeoSceneXmlDataSource.h"
+#include "GeoSceneGeodata.h"
 
 namespace Marble
 {
@@ -38,21 +38,17 @@ GeoNode* DgmlSourceFileTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_SourceFile));
 
-    QString format = parser.attribute(dgmlAttr_format).trimmed();
-
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Vector)) {
+    if ( parentItem.represents( dgmlTag_Vector ) ) {
         GeoSceneVector *vector = 0;
 
         vector = parentItem.nodeAs<GeoSceneVector>();
         vector->setSourceFile( parser.readElementText().trimmed() );
-        vector->setFileFormat(format);
-    } else if(parentItem.represents(dgmlTag_Geodata)) {
-        GeoSceneXmlDataSource *dataSource = 0;
-        dataSource = parentItem.nodeAs<GeoSceneXmlDataSource>();
-        dataSource->setFilename( parser.readElementText().trimmed() );
-        dataSource->setFileFormat(format);
+    } else if( parentItem.represents( dgmlTag_Geodata ) ) {
+        GeoSceneGeodata *dataSource = 0;
+        dataSource = parentItem.nodeAs<GeoSceneGeodata>();
+        dataSource->setSourceFile( parser.readElementText().trimmed() );
     }
 
     return 0;

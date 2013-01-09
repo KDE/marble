@@ -42,7 +42,8 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
 	
  Q_SIGNALS:
     void showSun( bool show );
-    void showSunInZenith( bool show );
+    void isLockedToSubSolarPoint( bool show );
+    void isSubSolarPointIconVisible( bool show );
 
  protected:
     Q_DISABLE_COPY( SunControlWidget )

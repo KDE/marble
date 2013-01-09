@@ -38,5 +38,6 @@ public:
 signals:
     void                    mapThemeIdChanged (const QString&);
     void                    projectionChanged (Marble::Projection);
+    void                    celestialBodyChanged (const QString&);
 };
 };

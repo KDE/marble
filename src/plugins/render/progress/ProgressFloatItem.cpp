@@ -15,7 +15,6 @@
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
-#include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "HttpDownloadManager.h"
 
@@ -23,6 +22,7 @@
 #include <QtGui/QColor>
 #include <QtCore/QMutexLocker>
 #include <QtGui/QPaintDevice>
+#include <QtGui/QPainter>
 
 namespace Marble
 {
@@ -46,17 +46,17 @@ ProgressFloatItem::ProgressFloatItem( const MarbleModel *marbleModel )
     // This timer is responsible to activate the automatic display with a small delay
     m_progressShowTimer.setInterval( 250 );
     m_progressShowTimer.setSingleShot( true );
-    connect( &m_progressShowTimer, SIGNAL( timeout() ), this, SLOT( show() ) );
+    connect( &m_progressShowTimer, SIGNAL(timeout()), this, SLOT(show()) );
 
     // This timer is responsible to hide the automatic display when downloads are finished
     m_progressHideTimer.setInterval( 750 );
     m_progressHideTimer.setSingleShot( true );
-    connect( &m_progressHideTimer, SIGNAL( timeout() ), this, SLOT( hideProgress() ) );
+    connect( &m_progressHideTimer, SIGNAL(timeout()), this, SLOT(hideProgress()) );
 
     // Repaint timer
     m_repaintTimer.setSingleShot( true );
     m_repaintTimer.setInterval( 1000 );
-    connect( &m_repaintTimer, SIGNAL( timeout() ), this, SIGNAL( repaintNeeded() ) );
+    connect( &m_repaintTimer, SIGNAL(timeout()), this, SIGNAL(repaintNeeded()) );
 
     // The icon resembles the pie chart
     QImage canvas( 16, 16, QImage::Format_ARGB32 );
@@ -133,8 +133,8 @@ void ProgressFloatItem::initialize()
 {
     const HttpDownloadManager* manager = marbleModel()->downloadManager();
     Q_ASSERT( manager );
-    connect( manager, SIGNAL( progressChanged( int, int ) ), this, SLOT( handleProgress( int, int ) ) , Qt::UniqueConnection );
-    connect( manager, SIGNAL( jobRemoved() ), this, SLOT( removeProgressItem() ), Qt::UniqueConnection );
+    connect( manager, SIGNAL(progressChanged(int,int)), this, SLOT(handleProgress(int,int)) , Qt::UniqueConnection );
+    connect( manager, SIGNAL(jobRemoved()), this, SLOT(removeProgressItem()), Qt::UniqueConnection );
 
     m_isInitialized = true;
 }
@@ -159,13 +159,8 @@ QPainterPath ProgressFloatItem::backgroundShape() const
     return path;
 }
 
-void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
-                                     const QString& renderPos, GeoSceneLayer * layer )
+void ProgressFloatItem::paintContent( QPainter *painter )
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( layer )
-    Q_UNUSED( renderPos )
-
     // Stop repaint timer if it is already running
     m_repaintTimer.stop();
 
@@ -174,7 +169,6 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     }
 
     painter->save();
-    painter->setRenderHint( QPainter::Antialiasing, true );
 
     qreal completed = 1.0;
     if ( m_totalJobs && m_completedJobs <= m_totalJobs ) {
@@ -210,7 +204,7 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
 
     // Paint progress label
     myFont.setPointSize( m_fontSize );
-    QString done = QString::number( (int) ( completed * 100 ) ) + "%";
+    QString done = QString::number( (int) ( completed * 100 ) ) + '%';
     int fontWidth = QFontMetrics( myFont ).boundingRect( done ).width();
     QPointF baseline( padding() + 0.5 * ( rect.width() - fontWidth ), 0.75 * rect.height() );
     QPainterPath path;
@@ -221,7 +215,6 @@ void ProgressFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     painter->setPen( QPen() );
     painter->drawPath( path );
 
-    painter->autoMapQuality();
     painter->restore();
 }
 

@@ -11,6 +11,8 @@
 #ifndef MARBLE_KMLCOLORSTYLETAGWRITER_H
 #define MARBLE_KMLCOLORSTYLETAGWRITER_H
 
+#include <QtGui/QColor>
+
 #include "GeoTagWriter.h"
 
 namespace Marble
@@ -20,9 +22,11 @@ namespace Marble
 class KmlColorStyleTagWriter: public GeoTagWriter
 {
 public:
-    KmlColorStyleTagWriter( const QString &elementName );
+    explicit KmlColorStyleTagWriter( const QString &elementName );
 
     bool write( const GeoNode *node, GeoWriter& writer ) const;
+
+    static QString formatColor( const QColor &color );
 
 protected:
     virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const = 0;

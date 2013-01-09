@@ -30,9 +30,9 @@ public:
     ~GeoGraphicsScene ();
     void                    removeItem (Marble::GeoGraphicsItem* item);
     void                    clear ();
-    QList<Marble::GeoGraphicsItem*>  items () const;
     QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel) const;
-    static int s_tileZoomLevel;
+//ig    static int s_tileZoomLevel;
     void                    addItem (Marble::GeoGraphicsItem* item);
+    void                    eraseAll ();
 };
 };

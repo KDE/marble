@@ -18,7 +18,7 @@ namespace Marble {
 class AprsFile : public AprsSource
     {
       public:
-        AprsFile( const QString &fileName );
+        explicit AprsFile( const QString &fileName );
         ~AprsFile();
 
         QString    sourceName() const;

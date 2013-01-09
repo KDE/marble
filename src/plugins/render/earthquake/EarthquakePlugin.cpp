@@ -28,7 +28,6 @@ EarthquakePlugin::EarthquakePlugin()
 
 EarthquakePlugin::EarthquakePlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_isInitialized( false ),
       m_ui( 0 ),
       m_configDialog( 0 ),
       m_minMagnitude( 0.0 ),
@@ -38,21 +37,15 @@ EarthquakePlugin::EarthquakePlugin( const MarbleModel *marbleModel )
 {
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateModel() ) );
+    connect( this, SIGNAL(settingsChanged(QString)),
+             this, SLOT(updateModel()) );
 }
 
 void EarthquakePlugin::initialize()
 {
-    EarthquakeModel *model = new EarthquakeModel( pluginManager(), this );
+    EarthquakeModel *model = new EarthquakeModel( this );
     setModel( model );
     setNumberOfItems( 20 );
-    m_isInitialized = true;
-}
-
-bool EarthquakePlugin::isInitialized() const
-{
-    return m_isInitialized;
 }
 
 QString EarthquakePlugin::name() const
@@ -94,7 +87,7 @@ QList<PluginAuthor> EarthquakePlugin::pluginAuthors() const
 
 QIcon EarthquakePlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/earthquake.png");
 }
 
 QDialog *EarthquakePlugin::configDialog()
@@ -106,19 +99,19 @@ QDialog *EarthquakePlugin::configDialog()
         m_ui->setupUi( m_configDialog );
         m_ui->m_numResults->setRange( 1, m_maximumNumberOfItems );
         readSettings();
-        connect( m_ui->m_buttonBox, SIGNAL( accepted() ),
-                 SLOT( writeSettings() ) );
-        connect( m_ui->m_buttonBox, SIGNAL( rejected() ),
-                 SLOT( readSettings() ) );
-        connect( m_ui->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL( clicked () ),
-                 SLOT( restoreDefaultSettings() ) );
+        connect( m_ui->m_buttonBox, SIGNAL(accepted()),
+                 SLOT(writeSettings()) );
+        connect( m_ui->m_buttonBox, SIGNAL(rejected()),
+                 SLOT(readSettings()) );
+        connect( m_ui->m_buttonBox->button( QDialogButtonBox::Reset ), SIGNAL(clicked()),
+                 SLOT(restoreDefaultSettings()) );
         QPushButton *applyButton = m_ui->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL( clicked() ),
-                 SLOT( writeSettings() ) );
-        connect( m_ui->m_endDate, SIGNAL( dateTimeChanged ( const QDateTime& ) ),
-                 SLOT( validateDateRange() ) );
-        connect( this, SIGNAL( settingsChanged( QString ) ),
-                 this, SLOT( readSettings() ) );
+        connect( applyButton, SIGNAL(clicked()),
+                 SLOT(writeSettings()) );
+        connect( m_ui->m_endDate, SIGNAL(dateTimeChanged(QDateTime)),
+                 SLOT(validateDateRange()) );
+        connect( this, SIGNAL(settingsChanged(QString)),
+                 this, SLOT(readSettings()) );
     }
     return m_configDialog;
 }
@@ -173,7 +166,7 @@ void EarthquakePlugin::writeSettings()
 void EarthquakePlugin::updateModel()
 {
     if( model() ) {
-        EarthquakeModel *const earthquakeModel = new EarthquakeModel( pluginManager(), this );
+        EarthquakeModel *const earthquakeModel = new EarthquakeModel( this );
         earthquakeModel->setMinMagnitude( m_minMagnitude );
         earthquakeModel->setStartDate( m_startDate );
         earthquakeModel->setEndDate( m_endDate );

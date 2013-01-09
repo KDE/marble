@@ -21,7 +21,7 @@ namespace Marble
 class FakeWeatherItem : public WeatherItem
 {
  public:
-    FakeWeatherItem( QObject *parent = 0 );
+    explicit FakeWeatherItem( QObject *parent = 0 );
     ~FakeWeatherItem();
     
     QString service() const;

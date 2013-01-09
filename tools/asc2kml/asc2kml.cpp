@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
                 QStringList supportsplitline;
                 supportrawline = supportstream.readLine();
                 supportsplitline = supportrawline.split('\t');
-                if(supportsplitline[0] == (country + "." +statecode))
+                if(supportsplitline[0] == (country + '.' +statecode))
                 {
                     state = supportsplitline[1];
                     break;

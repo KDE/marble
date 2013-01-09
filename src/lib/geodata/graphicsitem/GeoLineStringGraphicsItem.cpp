@@ -30,22 +30,13 @@ void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString* lineStri
     m_lineString = lineString;
 }
 
-GeoDataCoordinates GeoLineStringGraphicsItem::coordinate() const
-{
-    return m_lineString->latLonAltBox().center();
-}
-
-GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
+const GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 {
     return m_lineString->latLonAltBox();
 }
 
-void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
-                                       const QString& renderPos, GeoSceneLayer* layer )
+void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-
     if ( !style() )
     {
         painter->save();
@@ -55,14 +46,14 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
         return;
     }
     
-    if(style()->lineStyle().color() == Qt::transparent)
+    if(style()->lineStyle().paintedColor() == Qt::transparent)
         return;
 
     painter->save();
     QPen currentPen = painter->pen();
 
-    if ( currentPen.color() != style()->lineStyle().color() )
-        currentPen.setColor( style()->lineStyle().color() );
+    if ( currentPen.color() != style()->lineStyle().paintedColor() )
+        currentPen.setColor( style()->lineStyle().paintedColor() );
 
     if ( currentPen.widthF() != style()->lineStyle().width() ||
             style()->lineStyle().physicalWidth() != 0.0 )
@@ -94,7 +85,7 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* view
     if ( style()->lineStyle().background() )
     {
         QBrush brush = painter->background();
-        brush.setColor( style()->polyStyle().color() );
+        brush.setColor( style()->polyStyle().paintedColor() );
         painter->setBackground( brush );
 
         painter->setBackgroundMode( Qt::OpaqueMode );

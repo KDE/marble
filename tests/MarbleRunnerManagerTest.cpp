@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include <QtTest/QtTest>
@@ -20,6 +21,7 @@
 #include "routing/RouteRequest.h"
 
 #define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
+#define addNamedRow(testName) QTest::newRow( QString("line %1: %2").arg( __LINE__ ).arg(testName).toAscii().data() )
 
 Q_DECLARE_METATYPE( QList<Marble::GeoDataCoordinates> )
 
@@ -33,8 +35,8 @@ class MarbleRunnerManagerTest : public QObject
 private slots:
     void initTestCase();// will be called before the first testfunction is executed.
     void cleanupTestCase();// will be called after the last testfunction was executed.
-    void init(){};// will be called before each testfunction is executed.
-    void cleanup(){};// will be called after every testfunction.
+    void init(){ qDebug() << "start: " << t.elapsed();}// will be called before each testfunction is executed.
+    void cleanup(){ qDebug() << "end: " << t.elapsed();}// will be called after every testfunction.
 
     void testSyncPlacemarks();
 
@@ -51,6 +53,7 @@ private slots:
     void testAsyncRouting_data();
     void testAsyncRouting();
 
+    void testSyncParsing_data();
     void testSyncParsing();
 
     void testAsyncParsing_data();
@@ -63,12 +66,12 @@ public:
     GeoDataCoordinates m_coords;
     GeoDataCoordinates m_coords2;
     RouteRequest m_request;
-    QString m_fileName;
+    QTime t;
 };
 
 void MarbleRunnerManagerTest::initTestCase()
 {
-    // MarbleDebug::enable = true;
+     MarbleDebug::enable = true;
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
     m_time = 30000;
@@ -84,8 +87,7 @@ void MarbleRunnerManagerTest::initTestCase()
 
     m_request.append( m_coords );
     m_request.append( m_coords2 );
-
-    m_fileName = MarbleDirs::path( "placemarks/otherplacemarks.cache" );
+    t.start();
 }
 
 void MarbleRunnerManagerTest::cleanupTestCase()
@@ -141,7 +143,7 @@ void MarbleRunnerManagerTest::testAsyncPlacemarks()
 
     QEventLoop loop;
     connect( &m_runnerManager, SIGNAL( searchFinished( QString ) ),
-             &loop, SLOT( quit() ) );
+             &loop, SLOT( quit() ), Qt::QueuedConnection );
 
     QFETCH( QString, name );
     m_runnerManager.findPlacemarks( name );
@@ -201,7 +203,7 @@ void MarbleRunnerManagerTest::testAsyncReverse()
 
     QEventLoop loop;
     connect( &m_runnerManager, SIGNAL( reverseGeocodingFinished() ),
-             &loop, SLOT( quit() ) );
+             &loop, SLOT( quit() ), Qt::QueuedConnection );
 
     QFETCH( GeoDataCoordinates, coordinates );
     m_runnerManager.reverseGeocoding( coordinates );
@@ -250,7 +252,7 @@ void MarbleRunnerManagerTest::testAsyncRouting()
 
     QEventLoop loop;
     connect( &m_runnerManager, SIGNAL( routingFinished() ),
-             &loop, SLOT( quit() ) );
+             &loop, SLOT( quit() ), Qt::QueuedConnection );
 
     QFETCH( QList<GeoDataCoordinates>, coordinatesList );
     RouteRequest request;
@@ -268,6 +270,34 @@ void MarbleRunnerManagerTest::testAsyncRouting()
     QThreadPool::globalInstance()->waitForDone();
 }
 
+void MarbleRunnerManagerTest::testSyncParsing_data()
+{
+    QTest::addColumn<QString>( "fileName" );
+    QTest::addColumn<int>( "resultCount" );
+
+
+    addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" )    << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" )      << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" )     << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PLAKE.PNT" )       << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" )       << 1;
+
+    addNamedRow("cache") << QString( MARBLE_SRC_DIR ).append( "/data/placemarks/otherplacemarks.cache" ) << 1;
+    addNamedRow("gpx") << QString( MARBLE_SRC_DIR ).append( "/examples/gpx/mjolby.gpx") << 1;
+    //json
+    addNamedRow("kml") << QString( MARBLE_SRC_DIR ).append( "/examples/kml/NewYork.kml") << 1;
+    //log
+    addNamedRow("osm") << QString( MARBLE_SRC_DIR ).append( "/examples/osm/map.osm") << 1;
+    addNamedRow("pn2") << QString( MARBLE_SRC_DIR ).append( "/data/naturalearth/50m_lakes.pn2") << 1;
+    addNamedRow("pnt") << QString( MARBLE_SRC_DIR ).append( "/data/mwdbii/PGLACIER.PNT" )    << 1;
+    //shp
+
+    addNamedRow("svg") << MarbleDirs::path( "flags/flag_tv.svg" ) << 0;
+}
+
 void MarbleRunnerManagerTest::testSyncParsing()
 {
     MarbleRunnerManager m_runnerManager(&m_pluginManager, this);
@@ -275,34 +305,34 @@ void MarbleRunnerManagerTest::testSyncParsing()
     QSignalSpy finishSpy( &m_runnerManager, SIGNAL( parsingFinished()) );
     QSignalSpy resultSpy( &m_runnerManager, SIGNAL( parsingFinished(GeoDataDocument*,QString)) );
 
-    QCOMPARE( finishSpy.count(), 0 );
-    QCOMPARE( resultSpy.count(), 0 );
+    QFETCH( QString, fileName );
+    QFETCH( int, resultCount );
 
-    QTime timer;
-    timer.start();
-    GeoDataDocument* file = m_runnerManager.openFile( m_fileName );
+    GeoDataDocument* file = m_runnerManager.openFile( fileName );
 
-    QVERIFY( timer.elapsed() < m_time );
-    QVERIFY( resultSpy.count() > 0 );
-    QVERIFY( file != 0 );
+    QCOMPARE( resultSpy.count(), resultCount );
+    QCOMPARE( file != 0, resultCount > 0 );
     QCOMPARE( finishSpy.count(), 1 );
 }
 
 void MarbleRunnerManagerTest::testAsyncParsing_data()
 {
     QTest::addColumn<QString>( "fileName" );
+    QTest::addColumn<int>( "resultCount" );
 
-    addRow() << MarbleDirs::path( "placemarks/otherplacemarks.cache" );
+    addRow() << MarbleDirs::path( "placemarks/otherplacemarks.cache" ) << 1;
 
-    addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PGLACIER.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PLAKE.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" );
-    addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" );
+    addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" )    << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" )      << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PGLACIER.PNT" )    << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" )     << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PLAKE.PNT" )       << 1;
+    addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) << 1;
+    addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" )       << 1;
+
+    addRow() << MarbleDirs::path( "flags/flag_tv.svg" ) << 0;
 }
 
 void MarbleRunnerManagerTest::testAsyncParsing()
@@ -314,16 +344,17 @@ void MarbleRunnerManagerTest::testAsyncParsing()
 
     QEventLoop loop;
     connect( &m_runnerManager, SIGNAL( parsingFinished() ),
-             &loop, SLOT( quit() ) );
+             &loop, SLOT( quit() ), Qt::QueuedConnection );
 
     QFETCH( QString, fileName );
+    QFETCH( int, resultCount );
 
     m_runnerManager.parseFile( fileName );
 
     loop.exec();
 
 
-    QVERIFY( resultSpy.count() > 0 );
+    QCOMPARE( resultSpy.count(), resultCount );
     QCOMPARE( finishSpy.count(), 1 );
 
     QThreadPool::globalInstance()->waitForDone();

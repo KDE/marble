@@ -1,206 +1,141 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>Navigation</class>
- <widget class="QWidget" name="Navigation" >
-  <property name="geometry" >
+ <widget class="QWidget" name="Navigation">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>92</width>
-    <height>229</height>
+    <width>70</width>
+    <height>360</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Navigation</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <property name="margin" >
-    <number>0</number>
+  <widget class="Marble::ArrowDiscWidget" name="arrowDisc" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>70</width>
+     <height>70</height>
+    </rect>
    </property>
-   <property name="spacing" >
-    <number>0</number>
+  </widget>
+  <widget class="Marble::NavigationButton" name="homeButton" native="true">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>70</y>
+     <width>34</width>
+     <height>40</height>
+    </rect>
    </property>
-   <item row="0" column="0" >
-    <layout class="QGridLayout" >
-     <property name="margin" >
-      <number>0</number>
-     </property>
-     <property name="spacing" >
-      <number>0</number>
-     </property>
-     <item row="5" column="1" >
-      <widget class="QToolButton" name="zoomOutButton" >
-       <property name="toolTip" >
-        <string>Zoom Out</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Zoom out by pressing this button to see less detail.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/zoom-out.png</normaloff>:/icons/zoom-out.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string>-</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" >
-      <widget class="QToolButton" name="goHomeButton" >
-       <property name="toolTip" >
-        <string>Navigate to your 'Home Location'</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Click this button to restore the original zoom level and view angle.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/go-home.png</normaloff>:/icons/go-home.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string>Home</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2" >
-      <widget class="QToolButton" name="moveRightButton" >
-       <property name="toolTip" >
-        <string>Right</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Rotates the earth clockwise around its axis.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/arrow-right.png</normaloff>:/icons/arrow-right.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" >
-      <widget class="QToolButton" name="moveUpButton" >
-       <property name="toolTip" >
-        <string>Up</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Tilts the earth's axis towards the user.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/arrow-up.png</normaloff>:/icons/arrow-up.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1" >
-      <widget class="QSlider" name="zoomSlider" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="MinimumExpanding" hsizetype="Fixed" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="toolTip" >
-        <string>Zoom Slider</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Use this slider to adjust the zoom level of the map.</string>
-       </property>
-       <property name="minimum" >
-        <number>900</number>
-       </property>
-       <property name="maximum" >
-        <number>2400</number>
-       </property>
-       <property name="value" >
-        <number>1050</number>
-       </property>
-       <property name="sliderPosition" >
-        <number>1050</number>
-       </property>
-       <property name="tracking" >
-        <bool>true</bool>
-       </property>
-       <property name="orientation" >
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="tickPosition" >
-        <enum>QSlider::TicksAbove</enum>
-       </property>
-       <property name="tickInterval" >
-        <number>100</number>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1" >
-      <widget class="QToolButton" name="zoomInButton" >
-       <property name="toolTip" >
-        <string>Zoom In</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Zoom in by pressing this button to see more detail.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/zoom-in.png</normaloff>:/icons/zoom-in.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string>+</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" >
-      <widget class="QToolButton" name="moveDownButton" >
-       <property name="toolTip" >
-        <string>Down</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Tilts the earth's axis away from the user.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/arrow-down.png</normaloff>:/icons/arrow-down.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" >
-      <widget class="QToolButton" name="moveLeftButton" >
-       <property name="toolTip" >
-        <string>Left</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Rotates the earth counterclockwise around its axis.</string>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-       <property name="icon" >
-        <iconset resource="../../../marble.qrc" >
-         <normaloff>:/icons/arrow-left.png</normaloff>:/icons/arrow-left.png</iconset>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-  </layout>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text" stdset="0">
+    <string/>
+   </property>
+   <property name="icon" stdset="0">
+    <iconset resource="navigation.qrc">
+     <normaloff>:/marble/navigation/navigational_homebutton.png</normaloff>
+     <activeoff>:/marble/navigation/navigational_homebutton_hover.png</activeoff>
+     <selectedoff>:/marble/navigation/navigational_homebutton_press.png</selectedoff>:/marble/navigation/navigational_homebutton.png</iconset>
+   </property>
+   <property name="iconSize" stdset="0">
+    <size>
+     <width>34</width>
+     <height>40</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="Marble::NavigationButton" name="zoomInButton" native="true">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>109</y>
+     <width>34</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="text" stdset="0">
+    <string/>
+   </property>
+   <property name="icon" stdset="0">
+    <iconset resource="navigation.qrc">
+     <normaloff>:/marble/navigation/navigational_zoom_plus.png</normaloff>
+     <disabledoff>:/marble/navigation/navigational_zoom_press_plus.png</disabledoff>
+     <activeoff>:/marble/navigation/navigational_zoom_hover_plus.png</activeoff>
+     <selectedoff>:/marble/navigation/navigational_zoom_press_plus.png</selectedoff>:/marble/navigation/navigational_zoom_plus.png</iconset>
+   </property>
+   <property name="iconSize" stdset="0">
+    <size>
+     <width>34</width>
+     <height>36</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="Marble::NavigationButton" name="zoomOutButton" native="true">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>305</y>
+     <width>34</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="text" stdset="0">
+    <string/>
+   </property>
+   <property name="icon" stdset="0">
+    <iconset resource="navigation.qrc">
+     <normaloff>:/marble/navigation/navigational_zoom_minus.png</normaloff>
+     <disabledoff>:/marble/navigation/navigational_zoom_press_minus.png</disabledoff>
+     <activeoff>:/marble/navigation/navigational_zoom_hover_minus.png</activeoff>
+     <selectedoff>:/marble/navigation/navigational_zoom_press_minus.png</selectedoff>:/marble/navigation/navigational_zoom_minus.png</iconset>
+   </property>
+   <property name="iconSize" stdset="0">
+    <size>
+     <width>34</width>
+     <height>36</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="Marble::NavigationSlider" name="zoomSlider" native="true">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>145</y>
+     <width>34</width>
+     <height>160</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Marble::ArrowDiscWidget</class>
+   <extends>QWidget</extends>
+   <header>ArrowDiscWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Marble::NavigationButton</class>
+   <extends>QWidget</extends>
+   <header>NavigationButton.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Marble::NavigationSlider</class>
+   <extends>QWidget</extends>
+   <header>NavigationSlider.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
-  <include location="../../../marble.qrc" />
+  <include location="navigation.qrc"/>
  </resources>
  <connections/>
 </ui>

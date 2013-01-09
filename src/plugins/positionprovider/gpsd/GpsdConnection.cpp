@@ -33,7 +33,7 @@ GpsdConnection::GpsdConnection( QObject* parent )
 {
     m_oldLocale = setlocale( LC_NUMERIC, NULL );
     setlocale( LC_NUMERIC, "C" );
-    connect( &m_timer, SIGNAL( timeout() ), this, SLOT( update() ) );
+    connect( &m_timer, SIGNAL(timeout()), this, SLOT(update()) );
 }
 
 GpsdConnection::~GpsdConnection()

@@ -47,7 +47,6 @@ GeoNode* GPXhrTagHandler::parse(GeoParser& parser) const
         return 0;
     }
 
-    mDebug() << "hr parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

@@ -15,7 +15,7 @@ set -e
 MERGE_TOOL="$(dirname ${0})/merge_ts_po"
 test -x "${MERGE_TOOL}" || {
   MERGE_TOOL="$(mktemp)"
-  g++ -o ${MERGE_TOOL} "$(dirname ${0})/merge_ts_po.cpp"
+  g++ -o ${MERGE_TOOL} -I/usr/include/qt4 -L/usr/lib/i386-linux-gnu "$(dirname ${0})/merge_ts_po.cpp" -lQtCore
 }
 
 test -x "${MERGE_TOOL}" || { 
@@ -31,7 +31,7 @@ workdir="$(mktemp -d)"
 prefix="svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4"
 
 echo "Generating translation template"
-lupdate $(find ../../ -name "*.cpp" -o -name "*.h" -o -name "*.ui" | xargs echo) -ts "${workdir}/template.ts"
+lupdate $(find "$(dirname ${0})"/../../ -name "*.cpp" -o -name "*.h" -o -name "*.ui" | xargs echo) -ts "${workdir}/template.ts"
 
 echo "Processing translations, please wait. This can take some time..."
 
@@ -56,8 +56,7 @@ do
             #cp "${workdir}/marble_qt.po" "marble_qt_${i}.po"
             #cp "${workdir}/marble.po" "marble_${i}.po"
 
-            mv "marble_qt_${i}.qm" "marble-${i}"
-            echo "marble-${i}"
+            mv "marble_qt_${i}.qm" "${1:=.}/marble-${i}"
           fi
         fi
 done

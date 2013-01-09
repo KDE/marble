@@ -123,7 +123,6 @@ public:
     void                    addLayer (Marble::LayerInterface* layer);
     void                    removeLayer (Marble::LayerInterface* layer);
     void                    setShowBackground (bool visible);
-    void                    downloadRegion (const QString& sourceDir, const QVector<Marble::TileCoordsPyramid>&);
 signals:
     void                    tileLevelChanged (int level);
     void                    repaintNeeded (const QRegion& dirtyRegion = QRegion());
@@ -150,6 +149,8 @@ signals:
     void                    radiusChanged (int radius);
 public:
 //ig    const TextureLayer*     textureLayer () const;
+    void                    setShowRuntimeTrace (bool visible);
+    void                    downloadRegion (const QVector<Marble::TileCoordsPyramid>&);
 };
 // MarbleMap
 

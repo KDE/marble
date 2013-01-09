@@ -13,6 +13,8 @@
 
 #include <QtCore/QtGlobal>
 #include <QtCore/QDataStream>
+#include <QtCore/QFileInfo>
+#include <QtCore/QUrl>
 
 #include "GeoDataDocument.h"
 
@@ -98,6 +100,24 @@ int GeoDataObject::targetId() const
 void GeoDataObject::setTargetId( int value )
 {
     d->m_targetId = value;
+}
+
+QString GeoDataObject::resolvePath( const QString &relativePath ) const
+{
+    QUrl const url( relativePath );
+    QFileInfo const fileInfo( url.path() );
+    if ( url.isRelative() && fileInfo.isRelative() ) {
+        GeoDataDocument const * document = dynamic_cast<GeoDataDocument const*>( this );
+        if ( document ) {
+            QFileInfo const documentFile = document->fileName();
+            QFileInfo const absoluteImage( documentFile.absolutePath() + '/' + url.path() );
+            return absoluteImage.absoluteFilePath();
+        } else if ( d->m_parent ) {
+            return d->m_parent->resolvePath( relativePath );
+        }
+    }
+
+    return relativePath;
 }
 
 void GeoDataObject::pack( QDataStream& stream ) const

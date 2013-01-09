@@ -40,7 +40,6 @@ GeoNode* GPXtimeTagHandler::parse(GeoParser& parser) const
         mDebug() << "Parsed <" << gpxTag_time << ">" << dateTime;
 #endif
     }
-    mDebug() << "time parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

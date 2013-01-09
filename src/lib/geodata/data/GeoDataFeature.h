@@ -67,14 +67,13 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
  public:
     GeoDataFeature();
     /// Create a new GeoDataFeature with @p name as its name.
-    GeoDataFeature( const QString& name );
+    explicit GeoDataFeature( const QString& name );
 
     GeoDataFeature( const GeoDataFeature& other );
 
     virtual ~GeoDataFeature();
 
     GeoDataFeature& operator=( const GeoDataFeature& other );
-    bool operator==( const GeoDataFeature& ) const { return false; };
 
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;
@@ -379,12 +378,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the style assigned to the placemark.
      */
-    GeoDataStyle* style() const;
+    const GeoDataStyle* style() const;
     /**
      * Sets the style of the placemark.
      * @param  style  the new style to be used.
      */
-    void setStyle( GeoDataStyle* style );
+    void setStyle( GeoDataStyle *style );
 
     /**
      * Return the ExtendedData assigned to the feature.
@@ -461,11 +460,11 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * normal style.
      * @see GeoDataStyleMap
      */
-    GeoDataStyleMap* styleMap() const;
+    const GeoDataStyleMap* styleMap() const;
     /**
      * Sets the styleMap of the feature
      */
-    void setStyleMap( GeoDataStyleMap* map );
+    void setStyleMap( const GeoDataStyleMap* map );
 
 
     // ----------------------------------------------------------------
@@ -501,9 +500,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static void setDefaultLabelColor( const QColor& color );
 
     virtual void detach();
- private:
-    static void initializeDefaultStyles();
-    static void initializeOsmVisualCategories();
 
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
@@ -513,14 +509,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
  private:
     // the private d pointer accessor - use it instead of the d pointer directly
     GeoDataFeaturePrivate* p() const;
-    // Static members
-    static QFont         s_defaultFont;
-    static QColor        s_defaultLabelColor;
-
-    static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
-    static bool          s_defaultStyleInitialized;
-
-    static QMap<QString, GeoDataVisualCategory> s_visualCategories;
 };
 
 }

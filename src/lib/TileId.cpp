@@ -34,49 +34,31 @@ TileId::TileId()
 {
 }
 
-QString TileId::toString() const
-{
-    return QString( "%1:%2:%3:%4" ).arg( m_mapThemeIdHash ).arg( m_zoomLevel ).arg( m_tileX ).arg( m_tileY );
-}
-
-TileId TileId::fromString( QString const& idStr )
-{
-    QStringList const components = idStr.split( ':', QString::SkipEmptyParts );
-    Q_ASSERT( components.size() == 4 );
-
-    uint const mapThemeIdHash = components[ 0 ].toUInt();
-    int const zoomLevel = components[ 1 ].toInt();
-    int const tileX = components[ 2 ].toInt();
-    int const tileY = components[ 3 ].toInt();
-    return TileId( mapThemeIdHash, zoomLevel, tileX, tileY );
-}
-
 TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
 {
     if ( zoomLevel < 0 ) {
         return TileId();
     }
-    int maxLat = 90000000;
-    int maxLon = 180000000;
-    int lat = coords.latitude( GeoDataCoordinates::Degree ) * 1000000;
-    int lon = coords.longitude( GeoDataCoordinates::Degree ) * 1000000;
-    int deltaLat, deltaLon;
+    const int maxLat = 90000000;
+    const int maxLon = 180000000;
+    int lat = GeoDataCoordinates::normalizeLat( coords.latitude(), GeoDataCoordinates::Degree ) * 1000000;
+    int lon = GeoDataCoordinates::normalizeLon( coords.longitude(), GeoDataCoordinates::Degree ) * 1000000;
     int x = 0;
     int y = 0;
     for( int i=0; i<zoomLevel; ++i ) {
-        deltaLat = maxLat >> i;
-        if( lat < ( maxLat - deltaLat )) {
+        const int deltaLat = maxLat >> i;
+        if( lat <= ( maxLat - deltaLat )) {
             y += 1<<(zoomLevel-i-1);
             lat += deltaLat;
         }
-        deltaLon = maxLon >> i;
+        const int deltaLon = maxLon >> i;
         if( lon >= ( maxLon - deltaLon )) {
             x += 1<<(zoomLevel-i-1);
         } else {
             lon += deltaLon;
         }
     }
-    return TileId("", zoomLevel, x, y);
+    return TileId(0, zoomLevel, x, y);
 }
 
 }

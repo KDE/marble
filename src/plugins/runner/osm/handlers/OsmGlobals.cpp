@@ -35,6 +35,9 @@ bool OsmGlobals::tagNeedArea(const QString& keyValue)
 
 void OsmGlobals::setupAreaTags()
 {
+    // All these tags can be found updated at
+    // http://wiki.openstreetmap.org/wiki/Map_Features#Landuse
+
     m_areaTags.append( "landuse=forest" );
     m_areaTags.append( "natural=wood" );
     m_areaTags.append( "area=yes" );

@@ -68,6 +68,10 @@ void EditBookmarkDialogPrivate::initialize()
     m_ui.setupUi( q );
     m_ui.m_longitude->setDimension( Longitude );
     m_ui.m_latitude->setDimension( Latitude );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    m_ui.position_lbl->setVisible( !smallScreen );
+    m_ui.m_latitude->setVisible( !smallScreen );
+    m_ui.m_longitude->setVisible( !smallScreen );
     QObject::connect( m_ui.m_newFolderButton, SIGNAL( clicked() ), q, SLOT( openNewFolderDialog() ) );
     QObject::connect( m_ui.m_longitude, SIGNAL( valueChanged(qreal) ), q, SLOT( updateCoordinates() ) );
     QObject::connect( m_ui.m_latitude, SIGNAL( valueChanged(qreal) ), q, SLOT( updateCoordinates() ) );
@@ -140,10 +144,10 @@ void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
 {
     d->m_widget = widget;
     const AngleUnit defaultAngleUnit = d->m_widget->defaultAngleUnit();
-    const LatLonEdit::Notation notation =
-        (defaultAngleUnit == DecimalDegree) ? LatLonEdit::Decimal :
-        (defaultAngleUnit == DMSDegree) ?     LatLonEdit::DMS :
-        /* else, UTM */                       LatLonEdit::DMS;
+    const GeoDataCoordinates::Notation notation =
+        (defaultAngleUnit == DecimalDegree) ? GeoDataCoordinates::Decimal :
+        (defaultAngleUnit == DMSDegree) ?     GeoDataCoordinates::DMS :
+        /* else, UTM */                       GeoDataCoordinates::DMS;
     d->m_ui.m_longitude->setNotation( notation );
     d->m_ui.m_latitude->setNotation( notation );
 
@@ -215,7 +219,8 @@ void EditBookmarkDialogPrivate::openNewFolderDialog()
 {
     QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( q );
     if ( dialog->exec() == QDialog::Accepted ) {
-        m_bookmarkManager->addNewBookmarkFolder( q->folder(), dialog->folderName() );
+        m_bookmarkManager->addNewBookmarkFolder( m_bookmarkManager->document(), dialog->folderName() );
+        m_ui.m_folders->clear();
         initComboBox( m_bookmarkManager->document() );
         setFolderName( dialog->folderName() );
     }
@@ -245,6 +250,13 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
     }
 
     bookmark.extendedData().addValue( GeoDataData( "isBookmark", true ) );
+
+    if(d->m_widget != 0) {
+        const QString celestialName = d->m_widget->model()->planetId();
+        if(celestialName != "earth") {
+            bookmark.extendedData().addValue( GeoDataData( "celestialBody", celestialName ) );
+        }
+    }
 
     return bookmark;
 }

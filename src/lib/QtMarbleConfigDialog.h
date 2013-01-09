@@ -50,6 +50,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     int onStartup() const;
     bool animateTargetVoyage() const;
     QString externalMapEditor() const;
+    bool inertialEarthRotation() const;
 
     // Cache Settings
     int volatileTileCacheLimit() const;
@@ -125,29 +126,9 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     
     private Q_SLOTS:
     /**
-     * Retrieve the current plugin state for the user interface.
-     */
-    void retrievePluginState();
-    
-    /**
-     * Apply the plugin state from the user interface.
-     */
-    void applyPluginState();
-    
-    /**
      * Synchronize the loaded settings with the file on hard disk.
      */
     void syncSettings();
-
-    /**
-     * Shows the about dialog for the plugin with the corresponding @p nameId.
-     */
-    void showPluginAboutDialog( QString nameId );
-
-    /**
-     * Shows the configuration dialog for the plugin with the corresponding @p nameId.
-     */
-    void showPluginConfigDialog( QString nameId );
 
     /**
      * Saves the settings of all plugins.

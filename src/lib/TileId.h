@@ -15,11 +15,13 @@
 #include <QtCore/QHash>
 #include <QtCore/QString>
 
+#include "marble_export.h"
+
 namespace Marble
 {
 class GeoDataCoordinates;
 
-class TileId
+class MARBLE_EXPORT TileId
 {
  public:
     TileId( QString const & mapThemeId, int zoomLevel, int tileX, int tileY );
@@ -34,8 +36,6 @@ class TileId
     bool operator==( TileId const& rhs ) const;
     bool operator<( TileId const& rhs ) const;
 
-    QString toString() const;
-    static TileId fromString( QString const& );
     static TileId fromCoordinates( const GeoDataCoordinates& coords, int popularity );
 
  private:

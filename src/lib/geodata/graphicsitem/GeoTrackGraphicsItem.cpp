@@ -28,15 +28,14 @@ void GeoTrackGraphicsItem::setTrack( const GeoDataTrack* track )
     update();
 }
 
-void GeoTrackGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
+void GeoTrackGraphicsItem::paint( GeoPainter *painter, const ViewportParams *viewport )
 {
     update();
 
-    GeoLineStringGraphicsItem::paint( painter, viewport, renderPos, layer );
+    GeoLineStringGraphicsItem::paint( painter, viewport );
 }
 
 void GeoTrackGraphicsItem::update()
 {
     setLineString( m_track->lineString() );
-    setCoordinate( GeoDataCoordinates(0, 0) );
 }

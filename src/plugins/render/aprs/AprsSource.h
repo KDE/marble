@@ -19,7 +19,7 @@ namespace Marble {
 
     class AprsSource {
       public:
-        AprsSource( QIODevice *insocket = NULL );
+        explicit AprsSource( QIODevice *insocket = NULL );
         virtual ~AprsSource();
 
         virtual QIODevice *openSocket() = 0;

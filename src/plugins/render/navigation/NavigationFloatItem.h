@@ -6,12 +6,14 @@
 // the source code.
 //
 // Copyright 2008 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013 Mohammed Nafees  <nafees.technocool@gmail.com>
 //
 
 #ifndef NAVIGATION_FLOAT_ITEM_H
 #define NAVIGATION_FLOAT_ITEM_H
 
 #include <QtCore/QObject>
+#include <QMenu>
 
 #include "MarbleGlobal.h"
 
@@ -20,7 +22,6 @@
 namespace Ui
 {
     class Navigation;
-    class NavigationSmall;
 }
 
 namespace Marble
@@ -70,26 +71,24 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     void changeViewport( ViewportParams *viewport );
 
+    QPixmap pixmap( const QString &Id );
+
  protected:
     bool eventFilter( QObject *object, QEvent *e );
+    void paintContent( QPainter *painter );
+    void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
 
  private Q_SLOTS:
-    /** Adjust slider value to zoom level provided */
-    void setZoomSliderValue( int level );
-
-    void setMarbleZoomValue( int level );
-
     /** Map theme was changed, adjust controls */
     void selectTheme( QString theme );
 
-    /** Decrease quality during zooming */
-    void adjustForAnimation();
-
-    /** Normal quality when not zooming */
-    void adjustForStill();
-
     /** Enable/disable zoom in/out buttons */
     void updateButtons( int zoomValue );
+
+    void writeSettings();
+    void toggleToCurrentPositionButton();
+    void toggleToHomeButton();
+    void centerOnCurrentLocation();
 
  private:
     /** MarbleWidget this float item is installed as event filter for */
@@ -100,14 +99,20 @@ MARBLE_PLUGIN( NavigationFloatItem )
     WidgetGraphicsItem *m_widgetItem;
 
     /** Navigation controls */
-    Ui::NavigationSmall *m_navigationWidgetSmall;
     Ui::Navigation *m_navigationWidget;
 
     /** Used Profile */
     MarbleGlobal::Profiles m_profiles;
 
     /** Radius of the viewport last time */
-    int m_oldViewportRadius;    
+    int m_oldViewportRadius;
+
+    int m_maxZoom;
+    int m_minZoom;
+
+    QMenu *m_contextMenu;
+    QAction *m_activateCurrentPositionButtonAction;
+    QAction *m_activateHomeButtonAction;
 };
 
 }

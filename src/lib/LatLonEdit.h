@@ -13,6 +13,7 @@
 
 #include <QtGui/QWidget>
 
+#include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"
 #include "marble_export.h"
 
@@ -29,25 +30,16 @@ class MARBLE_EXPORT  LatLonEdit : public QWidget
     //Q_PROPERTY( int dimension READ dimension WRITE setDimension )
 
 public:
-    /**
-     * @brief enum used to specify the notation / numerical system
-     */
-    enum Notation {
-        Decimal, ///< "Decimal" notation (base-10)
-        DMS,     ///< "Sexagesimal DMS" notation (base-60)
-        DM       ///< "Sexagesimal DM" notation (base-60)
-    };
-
-public:
-    explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude, Notation notation = DMS);
+    explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude,
+                        GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS);
     ~LatLonEdit();
     qreal value() const;
     Dimension dimension() const;
-    Notation notation() const;
+    GeoDataCoordinates::Notation notation() const;
 public Q_SLOTS:
     void setValue(qreal newvalue);
     void setDimension( Dimension dimension );
-    void setNotation(Notation notation);
+    void setNotation(GeoDataCoordinates::Notation notation);
 Q_SIGNALS:
     void valueChanged( qreal value );
 private Q_SLOTS:

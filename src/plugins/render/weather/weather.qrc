@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="marble/weather/marble_deco.png">data/marble_deco.png</file>
+        <file alias="marble/weather/weather.html">data/weather.html</file>
+        <file alias="marble/weather/weatherscreen.css">data/weatherscreen.css</file>
+    </qresource>
+</RCC>
