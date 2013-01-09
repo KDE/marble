@@ -17,8 +17,32 @@
 
 Q_DECLARE_METATYPE( const Marble::AbstractFloatItem * )
 
-namespace Marble
+using namespace Marble;
+
+class NullFloatItem : public AbstractFloatItem
 {
+ public:
+    NullFloatItem() :
+        AbstractFloatItem( 0 )
+    {}
+
+    NullFloatItem( const MarbleModel *model ) :
+        AbstractFloatItem( model )
+    {}
+
+    QString name() const { return "Null Float Item"; }
+    QString nameId() const { return "null"; }
+    QString version() const { return "0.0"; }
+    QString description() const { return "A null float item just for testing."; }
+    QIcon icon() const { return QIcon(); }
+    QString copyrightYears() const { return "2013"; }
+    QList<PluginAuthor> pluginAuthors() const { return QList<PluginAuthor>() << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" ); }
+    void initialize() {}
+    bool isInitialized() const { return true; }
+    QStringList backendTypes() const { return QStringList() << "null"; }
+    QString guiString() const { return "Null"; }
+    RenderPlugin *newInstance( const MarbleModel * ) const { return 0; }
+};
 
 class AbstractFloatItemTest : public QObject
 {
@@ -28,6 +52,8 @@ class AbstractFloatItemTest : public QObject
     AbstractFloatItemTest();
 
  private slots:
+    void defaultConstructor();
+
     void newInstance_data();
     void newInstance();
 
@@ -45,6 +71,14 @@ AbstractFloatItemTest::AbstractFloatItemTest()
 
         m_factories << factory;
     }
+}
+
+void AbstractFloatItemTest::defaultConstructor()
+{
+    NullFloatItem item;
+
+    QCOMPARE( item.visible(), true );
+    QCOMPARE( item.positionLocked(), true );
 }
 
 void AbstractFloatItemTest::newInstance_data()
@@ -67,8 +101,6 @@ void AbstractFloatItemTest::newInstance()
     delete instance;
 }
 
-}
-
-QTEST_MAIN( Marble::AbstractFloatItemTest )
+QTEST_MAIN( AbstractFloatItemTest )
 
 #include "AbstractFloatItemTest.moc"
