@@ -47,6 +47,7 @@
     <Separator/>
     <Action name="control_sun"/>
     <Action name="control_time"/>
+    <ActionList name="plugins_menuactionlist" />
   </Menu>
   <Menu name="settings" noMerge="1">
     <text>&amp;Settings</text>

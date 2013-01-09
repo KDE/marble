@@ -167,9 +167,11 @@ private:
     /// Store plugin toolbar pointers so that they can be removed/updated later
     QList<QToolBar*> m_pluginToolbars;
     /// Store plugin menus so that they can be removed/updated later
-    QList<QMenu*> m_pluginMenus;
+    QList<QAction*> m_pluginMenus;
 
     QMenu *m_fileMenu;
+    QMenu *m_editMenu;
+    QMenu *m_viewMenu;
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;
     QMenu *m_panelMenu;

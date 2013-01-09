@@ -66,6 +66,8 @@ RenderPlugin::RenderPlugin( const MarbleModel *marbleModel )
              &d->m_action, SLOT( setChecked( bool ) ) );
     connect( this,         SIGNAL( enabledChanged( bool ) ),
              &d->m_action, SLOT( setVisible( bool ) ) );
+    connect( this,         SIGNAL( enabledChanged( bool ) ),
+                           SIGNAL( actionGroupsChanged() ) );
 
     connect( this, SIGNAL( visibilityChanged( bool, const QString & ) ),
              this, SIGNAL( repaintNeeded() ) );

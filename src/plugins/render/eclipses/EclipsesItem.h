@@ -43,12 +43,16 @@ public:
     EclipsesItem::EclipsePhase phase() const;
     QString phaseText() const;
 
+    void setMagnitude( double magnitude );
+    double magnitude() const;
+
     bool takesPlaceAt( const QDateTime &dateTime ) const;
 
 private:
     int m_index;
     QDateTime m_dateTime;
     EclipsesItem::EclipsePhase m_phase;
+    double m_magnitude;
 };
 
 }

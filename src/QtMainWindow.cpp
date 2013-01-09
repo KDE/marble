@@ -380,37 +380,37 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_workOfflineAct);
     m_fileMenu->addAction(m_quitAct);
 
-    m_fileMenu = menuBar()->addMenu(tr("&Edit"));
-    m_fileMenu->addAction(m_copyMapAct);
-    m_fileMenu->addAction(m_copyCoordinatesAct);
-    m_fileMenu->addAction( m_osmEditAction );
+    m_editMenu = menuBar()->addMenu(tr("&Edit"));
+    m_editMenu->addAction(m_copyMapAct);
+    m_editMenu->addAction(m_copyCoordinatesAct);
+    m_editMenu->addAction( m_osmEditAction );
 
-    m_fileMenu = menuBar()->addMenu(tr("&View"));
+    m_viewMenu = menuBar()->addMenu(tr("&View"));
 
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
     for (; i != end; ++i ) {
         if ( (*i)->nameId() == "crosshairs" ) {
-            m_fileMenu->addAction( (*i)->action() );
+            m_viewMenu->addAction( (*i)->action() );
         }
     }
-    m_fileMenu->addAction(m_reloadAct);
+    m_viewMenu->addAction(m_reloadAct);
 
-    m_fileMenu->addSeparator();
-    m_panelMenu = m_fileMenu->addMenu( "&Panels" );
-    m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
+    m_viewMenu->addSeparator();
+    m_panelMenu = m_viewMenu->addMenu( "&Panels" );
+    m_infoBoxesMenu = m_viewMenu->addMenu("&Info Boxes");
     createInfoBoxesMenu();
 
-    m_onlineServicesMenu = m_fileMenu->addMenu("&Online Services");
+    m_onlineServicesMenu = m_viewMenu->addMenu("&Online Services");
     createOnlineServicesMenu();
 
-    m_fileMenu->addSeparator();
-    m_fileMenu->addAction(m_showCloudsAct);
-    m_fileMenu->addAction(m_showAtmosphereAct);
-    m_fileMenu->addSeparator();
-    m_fileMenu->addAction(m_controlSunAct);
-    m_fileMenu->addAction(m_controlTimeAct);
+    m_viewMenu->addSeparator();
+    m_viewMenu->addAction(m_showCloudsAct);
+    m_viewMenu->addAction(m_showAtmosphereAct);
+    m_viewMenu->addSeparator();
+    m_viewMenu->addAction(m_controlSunAct);
+    m_viewMenu->addAction(m_controlTimeAct);
 
     m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
     createBookmarkMenu();
@@ -617,26 +617,40 @@ void MainWindow::createPluginMenus()
 
     //remove and delete old menus if they exist
     while(  !m_pluginMenus.isEmpty() ) {
-        m_pluginMenus.takeFirst();
-//        FIXME: this does not provide an easy way to remove a menu.
-//        Make a workaround
-//        this->menuBar()->removeAction();
+        m_viewMenu->removeAction( m_pluginMenus.takeFirst() );
     }
 
-    QList<QActionGroup*> *tmp_toolbarActionGroups;
+    QList<QActionGroup*> *tmp_actionGroups, *tmp_toolbarActionGroups;
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
 
-    //Load the toolbars
     for (; i != end; ++i ) {
-        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
 
-        if ( tmp_toolbarActionGroups ) {
+        // menus
+        tmp_actionGroups = (*i)->actionGroups();
+        if( (*i)->enabled() && tmp_actionGroups ) {
+           foreach( QActionGroup *ag, *tmp_actionGroups ) {
+               if( !ag->actions().isEmpty() ) {
+                   m_pluginMenus.append( m_viewMenu->addSeparator() );
+               }
+               foreach( QAction *action, ag->actions() ) {
+                   m_viewMenu->addAction( action );
+                   m_pluginMenus.append( action );
+               }
+           }
+        }
+
+        // toolbars
+        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
+        if ( (*i)->enabled() && tmp_toolbarActionGroups ) {
             QToolBar* toolbar = new QToolBar(this);
 
             foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
                 toolbar->addActions( ag->actions() );
+                if ( tmp_toolbarActionGroups->last() != ag ) {
+                    toolbar->addSeparator();
+                }
             }
 
             m_pluginToolbars.append( toolbar );

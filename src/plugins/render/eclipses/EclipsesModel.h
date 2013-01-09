@@ -13,6 +13,9 @@
 
 #include <QtCore/QObject>
 #include <QDateTime>
+#include <QPixmap>
+
+#include "GeoDataCoordinates.h"
 
 class EclSolar;
 
@@ -22,6 +25,7 @@ namespace Marble
 class MarbleClock;
 class EclipsesItem;
 class GeoPainter;
+class GeoDataCoordinates;
 
 class EclipsesModel : public QObject
 {
@@ -30,10 +34,20 @@ public:
     EclipsesModel( const MarbleClock *clock, QObject *parent = 0 );
     ~EclipsesModel();
 
+    const GeoDataCoordinates& observationPoint() const;
+    void setObservationPoint( const GeoDataCoordinates &coords );
+
     void setYear( int year );
     int year() const;
 
-    void paint( const QDateTime &dateTime, GeoPainter *painter );
+    EclipsesItem* currentItem() const;
+    EclipsesItem* eclipseWithIndex( int index ) const;
+
+    void synchronize( const MarbleClock *clock );
+
+    QList<EclipsesItem*> items() const;
+
+    void paint( GeoPainter *painter );
 
 private:
     void paintItem( EclipsesItem *item, GeoPainter *painter );
@@ -45,7 +59,9 @@ private:
     const MarbleClock *m_clock;
     EclSolar *m_ecps;
     QList<EclipsesItem*> m_items;
+    EclipsesItem *m_currentItem;
     int m_currentYear;
+    GeoDataCoordinates m_observationPoint;
 };
 
 }

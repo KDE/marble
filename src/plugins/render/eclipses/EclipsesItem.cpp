@@ -18,7 +18,8 @@ namespace Marble
 EclipsesItem::EclipsesItem( int index, QObject *parent )
     : QObject( parent ),
       m_index( index ),
-      m_phase( TotalSun )
+      m_phase( TotalSun ),
+      m_magnitude( 0. )
 {
 }
 
@@ -63,6 +64,16 @@ QString EclipsesItem::phaseText() const
     }
 
     return QString();
+}
+
+double EclipsesItem::magnitude() const
+{
+    return m_magnitude;
+}
+
+void EclipsesItem::setMagnitude( double magnitude )
+{
+    m_magnitude = magnitude;
 }
 
 bool EclipsesItem::takesPlaceAt( const QDateTime &dateTime ) const
