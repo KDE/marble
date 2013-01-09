@@ -266,12 +266,11 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
             if ( layer->backend() != dgml::dgmlValue_geodata )
                 continue;
 
-            if ( layer->datasets().count() <= 0 )
-                continue;
-
             // look for documents
             foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-                QString containername = reinterpret_cast<GeoSceneGeodata*>( dataset )->sourceFile();
+                GeoSceneGeodata *data = dynamic_cast<GeoSceneGeodata*>( dataset );
+                Q_ASSERT( data );
+                QString containername = data->sourceFile();
                 loadedContainers <<  containername;
             }
         }
@@ -320,7 +319,8 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
         // look for documents
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-            GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
+            GeoSceneGeodata *data = dynamic_cast<GeoSceneGeodata*>( dataset );
+            Q_ASSERT( data );
             QString containername = data->sourceFile();
             QString property = data->property();
             QPen pen = data->pen();
