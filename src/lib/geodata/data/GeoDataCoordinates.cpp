@@ -1000,6 +1000,11 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
             lonString += QString(" %L3'").arg(lonMinF, precision + 1, 'f', precision - 2, QChar('0') );
         }
     }
+    else if ( notation == Astro ) {
+        lonString = QString::number( lon );
+        lonString += QString( "%1" ).arg( "h 0\' 0\"" );
+        return lonString;
+    }
     else // notation = GeoDataCoordinates::Decimal
     {
         lonString = QString::fromUtf8("%L1\xc2\xb0").arg(lonDegF, 4 + precision, format, precision, QChar(' ') );
@@ -1088,6 +1093,10 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
         else {
             latString += QString(" %L3'").arg(latMinF, precision + 1, 'f', precision - 2, QChar('0') );
         }
+    }
+    else if ( notation == Astro ) {
+        latString = QString::fromUtf8("%L1\xc2\xb0").arg(latDegF, 4 + precision, format, precision, QChar(' ') );
+        return latString;
     }
     else // notation = GeoDataCoordinates::Decimal
     {

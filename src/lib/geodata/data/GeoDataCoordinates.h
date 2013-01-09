@@ -79,9 +79,10 @@ class GEODATA_EXPORT GeoDataCoordinates
     enum Notation{
         Decimal, ///< "Decimal" notation (base-10)
         DMS,     ///< "Sexagesimal DMS" notation (base-60)
-        DM,       ///< "Sexagesimal DM" notation (base-60)
+        DM,      ///< "Sexagesimal DM" notation (base-60)
         UTM,
-        MGRS
+        MGRS,
+        Astro    /// < "RA and DEC" notation (used for astronomical sky coordinates)
     };
 
     /**

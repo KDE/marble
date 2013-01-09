@@ -328,6 +328,13 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
                              LineStart | IgnoreYMargin */ );
 
         return;
+    } else if ( m_currentNotation == GeoDataCoordinates::Astro ) {
+        renderLatitudeLines( painter, viewLatLonAltBox,
+                             10.0, LineStart | IgnoreYMargin );
+        renderLongitudeLines( painter, viewLatLonAltBox, 15.0,
+                              0.0, 0.0, LineCenter | IgnoreXMargin );
+
+        return;
     }
 
     // Render the normal grid
@@ -515,7 +522,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
         QString label;
         
         if ( notation == GeoDataCoordinates::UTM ) {
-           	int bandLetterIndex = static_cast<int>( itStep / 8.0 ) + 10;
+            int bandLetterIndex = static_cast<int>( itStep / 8.0 ) + 10;
             label = m_utmBandLetters.at( bandLetterIndex );
         } else {
             label = GeoDataCoordinates::latToString( itStep, notation,
@@ -546,14 +553,32 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         return;
     }
 
+    GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
+
+    if ( notation == GeoDataCoordinates::Astro ) {
+
+        qreal hrStep = step;
+        qreal hour;
+        QString label;
+
+        while ( hrStep <= 360.0 ) {
+            hour = hrStep / 360.0 * 24.0;
+            label = GeoDataCoordinates::lonToString( ( hour == 24 ) ? 0 : hour,
+                                                     notation,
+                                                     GeoDataCoordinates::Degree );
+            renderLongitudeLine( painter, hrStep, viewLatLonAltBox, northPolarGap,
+                                southPolarGap, label, labelPositionFlags );
+            hrStep += step;
+        }
+        return;
+    }
+
     // Longitude
     qreal westLon = viewLatLonAltBox.west( GeoDataCoordinates::Degree );
     qreal eastLon = viewLatLonAltBox.east( GeoDataCoordinates::Degree );
 
     qreal westLineLon = step * static_cast<int>( westLon / step );
-    qreal eastLineLon = step * ( static_cast<int>( eastLon / step ) + 1 ); 
-
-    GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
+    qreal eastLineLon = step * ( static_cast<int>( eastLon / step ) + 1 );
 
     if ( !viewLatLonAltBox.crossesDateLine() ||
          ( westLon == -180.0 && eastLon == +180.0 ) ) {
