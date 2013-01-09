@@ -249,6 +249,11 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
         return BillboardGraphicsItem::eventFilter( object, e );
     }
 
+    if ( e->type() == QEvent::KeyPress ) {
+        QApplication::sendEvent( m_webView, e );
+        return BillboardGraphicsItem::eventFilter( object, e );
+    }
+
     if ( e->type() == QEvent::MouseButtonDblClick
             || e->type() == QEvent::MouseMove
             || e->type() == QEvent::MouseButtonPress

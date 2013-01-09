@@ -8,6 +8,7 @@
 // Copyright 2012      Illya Kovalevskyy   <illya.kovalevskyy@gmail.com>
 //
 
+#include <QApplication>
 #include <QMenu>
 #include <QContextMenuEvent>
 #include <QKeyEvent>
@@ -23,13 +24,10 @@ MarbleWebView::MarbleWebView(QWidget *parent) :
     m_copyAction->setIcon(QIcon(":/icons/edit-copy.png"));
     m_copyAction->setIconVisibleInMenu(true);
     m_copyAction->setToolTip(tr("Copy selected content"));
+    connect(m_copyAction, SIGNAL(triggered()),
+            this, SLOT(copySelectedText()));
     m_contextMenu->addAction(m_copyAction);
     setContextMenuPolicy(Qt::DefaultContextMenu);
-
-#if !(QT_VERSION >= 0x040700 && QT_VERSION < 0x040800)
-    QAction *hotCopyAction = pageAction(QWebPage::Copy);
-    hotCopyAction->setShortcut(QKeySequence::Copy);
-#endif
 }
 
 void MarbleWebView::contextMenuEvent(QContextMenuEvent *event)
@@ -38,17 +36,23 @@ void MarbleWebView::contextMenuEvent(QContextMenuEvent *event)
     m_contextMenu->exec(event->globalPos());
 }
 
-#if (QT_VERSION >= 0x040700 && QT_VERSION < 0x040800)
+void MarbleWebView::copySelectedText()
+{
+    const QString text = selectedText();
+    if (!text.isEmpty()) {
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(text);
+    }
+}
+
 void MarbleWebView::keyPressEvent(QKeyEvent *event)
 {
     if(event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_C) {
-        const QString text = selectedText();
-        if (!text.isEmpty()) {
-            QClipboard *clipboard = qApp->clipboard();
-            clipboard->setText(text);
-        } else {
-            QWebView::keyPressEvent(event);
-        }
+        copySelectedText();
+        return;
     }
+
+    QWebView::keyPressEvent(event);
 }
-#endif
+
+#include "MarbleWebView.moc"

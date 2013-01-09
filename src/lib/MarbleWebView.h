@@ -15,15 +15,16 @@
 
 class MarbleWebView : public QWebView
 {
+    Q_OBJECT
 public:
     MarbleWebView(QWidget *parent = 0);
 
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
-
-#if (QT_VERSION >= 0x040700 && QT_VERSION < 0x040800)
     void keyPressEvent(QKeyEvent *event);
-#endif
+
+private slots:
+    void copySelectedText();
 
 private:
     QMenu *m_contextMenu;
