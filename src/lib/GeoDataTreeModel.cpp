@@ -461,7 +461,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
     if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
          || object->nodeType() == GeoDataTypes::GeoDataFolderType
          || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
     }
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
