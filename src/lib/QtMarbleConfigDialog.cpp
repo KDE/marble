@@ -520,7 +520,8 @@ QString QtMarbleConfigDialog::externalMapEditor() const
 
 bool QtMarbleConfigDialog::animateTargetVoyage() const
 {
-    return d->m_settings.value( "Navigation/animateTargetVoyage", false ).toBool();
+    const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    return d->m_settings.value( "Navigation/animateTargetVoyage", smallScreen ).toBool();
 }
 
 bool QtMarbleConfigDialog::inertialEarthRotation() const
