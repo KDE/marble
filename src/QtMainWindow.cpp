@@ -150,7 +150,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     createActions();
     createMenus();
     createStatusBar();
-    createDockWidgets();
+    if ( !smallscreen ) {
+        createDockWidgets();
+    }
 
     connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateAtmosphereMenu()));
 
@@ -1587,8 +1589,9 @@ void MainWindow::showMapViewDialog()
 void MainWindow::showLegendTab( bool enabled )
 {
     m_toggleRoutingTabAction->setChecked( false );
+    m_controlView->setSideBarShown( enabled );
     m_controlView->marbleControl()->setNavigationTabShown( false );
-    m_controlView->marbleControl()->setLegendTabShown( true );
+    m_controlView->marbleControl()->setLegendTabShown( enabled );
     m_controlView->marbleControl()->setMapViewTabShown( false );
     m_controlView->marbleControl()->setCurrentLocationTabShown( false );
     m_controlView->marbleControl()->setRoutingTabShown( false );
@@ -1724,6 +1727,9 @@ void MainWindow::showZoomLevel(bool show)
 
 void MainWindow::showSearch()
 {
+    if ( !m_searchDock )
+        return;
+
     m_searchDock->show();
     m_searchDock->raise();
     m_searchDock->widget()->setFocus();
