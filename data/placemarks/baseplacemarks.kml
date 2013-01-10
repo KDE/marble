@@ -22,21 +22,25 @@
     </Placemark> 
     <Placemark> 
         <name>North Magnetic Pole</name> 
-        <description><![CDATA[The physical magnetic south pole in 2005]]></description> 
+        <description><![CDATA[The physical magnetic south pole in 2012.
+
+            The North Magnetic Pole moves over time due to magnetic changes in the Earth's core. In 2001, it was determined by the Geological Survey of Canada to lie near Ellesmere Island in northern Canada at 81.3°N 110.8°W. It was situated at 83.1°N 117.8°W in 2005. In 2009, while still situated within the Canadian Arctic territorial claim at 84.9°N 131.0°W, it was moving toward Russia at between 34 and 37 miles (55 and 60 km) per year. As of 2012, the pole is projected to have moved beyond the Canadian Arctic territorial claim to 85.9°N 147.0°W.]]></description>
         <role>M</role> 
         <pop>1</pop>
         <Point>
-            <coordinates>-118.32,83.21</coordinates> 
+            <coordinates>-147,85.9</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>South Magnetic Pole</name> 
-        <description><![CDATA[The physical magnetic north pole in 2005]]></description> 
+        <description><![CDATA[The physical magnetic north pole in 2005.
+
+        The South Magnetic Pole is constantly shifting due to changes in the Earth's magnetic field. As of 2005 it was calculated to lie at 64°31′48″S 137°51′36″E, just off the coast of Adelie Land, French Antarctica. That point lies outside the Antarctic Circle. Due to polar drift, the pole is moving north west by about 10 to 15 kilometers per year.]]></description>
         <CountryNameCode>AQ</CountryNameCode>
         <role>M</role> 
         <pop>1</pop>
         <Point>
-            <coordinates>137.86,-64.53</coordinates> 
+            <coordinates>137.684,-64.497</coordinates>
         </Point> 
     </Placemark> 
 </Document>
