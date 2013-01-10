@@ -50,11 +50,18 @@ void HostipRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox 
     else {
         QEventLoop eventLoop;
 
+        QTimer timer;
+        timer.setSingleShot( true );
+        timer.setInterval( 15000 );
+
+        connect( &timer, SIGNAL(timeout()),
+                 &eventLoop, SLOT(quit()));
         connect( this, SIGNAL(searchFinished(QVector<GeoDataPlacemark*>)),
                  &eventLoop, SLOT(quit()) );
 
         // Lookup the IP address for a hostname, or the hostname if an IP address was given
         QHostInfo ::lookupHost( searchTerm, this, SLOT(slotLookupFinished(QHostInfo)));
+        timer.start();
 
         eventLoop.exec();
     }

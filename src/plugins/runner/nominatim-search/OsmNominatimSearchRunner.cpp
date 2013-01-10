@@ -65,11 +65,18 @@ void OsmNominatimRunner::search( const QString &searchTerm, const GeoDataLatLonA
 
     QEventLoop eventLoop;
 
+    QTimer timer;
+    timer.setSingleShot( true );
+    timer.setInterval( 15000 );
+
+    connect( &timer, SIGNAL(timeout()),
+             &eventLoop, SLOT(quit()));
     connect( this, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
              &eventLoop, SLOT( quit() ) );
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot( 0, this, SLOT( startSearch() ) );
+    timer.start();
 
     eventLoop.exec();
 }
