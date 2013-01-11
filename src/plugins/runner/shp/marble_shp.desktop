@@ -3,6 +3,7 @@ Type=Application
 TryExec=marble
 Exec=marble
 Name=Marble
+NoDisplay=true
 Name[ast]=Marble
 Name[bg]=Marble
 Name[bs]=Marble
