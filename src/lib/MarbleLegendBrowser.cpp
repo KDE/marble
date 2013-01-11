@@ -260,6 +260,8 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             "   overflow: hidden;"
             "   display: inline-block;"
             "   white-space: nowrap;"
+            "   text-align: center;"
+            "   vertical-align: middle;"
             "}"
             "table td.text {"
             "   width: 200px;"
@@ -289,8 +291,13 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
         foreach (const GeoSceneItem *item, section->items()) {
             QString path;
+            int pixmapWidth = 24;
+            int pixmapHeight = 12;
             if (!item->icon()->pixmap().isEmpty()) {
                 path = MarbleDirs::path( item->icon()->pixmap() );
+                const QPixmap oncePixmap(path);
+                pixmapWidth = oncePixmap.width();
+                pixmapHeight = oncePixmap.height();
             } else {
                 // Tiny hack ;)
                 // There is <img src="%path%" />
@@ -298,19 +305,26 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 path = "\" style=\"display: none;";
             }
             QColor color = item->icon()->color();
-            QString style = "";
+            QString styleDiv = "";
+            QString styleTd = "";
             if (color != Qt::transparent) {
-                style = "width: 24px; height: 12px; background-color: "
+                styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
+                                    QString::number(pixmapHeight) + "px; background-color: "
                         + color.name() + ";";
+                styleTd = "width: " + QString::number(pixmapWidth) + "px; height: " +
+                        QString::number(pixmapHeight) + "px;";
+
             } else {
-                style = "width: 24px; height: 12px;";
+                styleTd = "width: " + QString::number(pixmapWidth) + "px; height: " +
+                        QString::number(pixmapHeight) + "px;";
+                styleDiv = styleTd;
             }
             QString src  =  "file://" + path;
 
             QString html = ""
                     "   <tr>\n"
-                    "       <td class=\"icon\" >\n"
-                    "           <div style=\"" + style + "\">\n"
+                    "       <td class=\"icon\" style=\"" + styleTd + "\">\n"
+                    "           <div style=\"" + styleDiv + "\">\n"
                     "               <img src=\"" + src + "\" />\n"
                     "           </div>\n"
                     "       </td>\n"
