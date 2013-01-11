@@ -24,8 +24,17 @@ class RenderPluginTest : public QObject
     Q_OBJECT
 
  private slots:
+    void newInstance_data();
+    void newInstance();
+
     void initialize_data();
     void initialize();
+
+    void setVisible_data();
+    void setVisible();
+
+    void setEnabled_data();
+    void setEnabled();
 
     void restoreDefaultSettings_data();
     void restoreDefaultSettings();
@@ -33,6 +42,24 @@ class RenderPluginTest : public QObject
  private:
     MarbleModel m_model;
 };
+
+void RenderPluginTest::newInstance_data()
+{
+    QTest::addColumn<const RenderPlugin *>( "factory" );
+
+    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
+        QTest::newRow( factory->nameId().toAscii() ) << factory;
+    }
+}
+
+void RenderPluginTest::newInstance()
+{
+    QFETCH( const RenderPlugin *, factory );
+
+    RenderPlugin *const instance = factory->newInstance( &m_model );
+
+    delete instance;
+}
 
 void RenderPluginTest::initialize_data()
 {
@@ -53,6 +80,62 @@ void RenderPluginTest::initialize()
 
     // prevent infinite loops
     QVERIFY( instance->isInitialized() );
+}
+
+void RenderPluginTest::setVisible_data()
+{
+    QTest::addColumn<const RenderPlugin *>( "factory" );
+
+    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
+        QTest::newRow( factory->nameId().toAscii() ) << factory;
+    }
+}
+
+void RenderPluginTest::setVisible()
+{
+    QFETCH( const RenderPlugin *, factory );
+
+    RenderPlugin *const instance = factory->newInstance( &m_model );
+
+    const bool visibleByDefault = instance->visible();
+
+    instance->setVisible( !visibleByDefault );
+
+    QCOMPARE( instance->visible(), !visibleByDefault );
+
+    instance->setVisible( visibleByDefault );
+
+    QCOMPARE( instance->visible(), visibleByDefault );
+
+    delete instance;
+}
+
+void RenderPluginTest::setEnabled_data()
+{
+    QTest::addColumn<const RenderPlugin *>( "factory" );
+
+    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
+        QTest::newRow( factory->nameId().toAscii() ) << factory;
+    }
+}
+
+void RenderPluginTest::setEnabled()
+{
+    QFETCH( const RenderPlugin *, factory );
+
+    RenderPlugin *const instance = factory->newInstance( &m_model );
+
+    const bool enabledByDefault = instance->enabled();
+
+    instance->setEnabled( !enabledByDefault );
+
+    QCOMPARE( instance->enabled(), !enabledByDefault );
+
+    instance->setEnabled( enabledByDefault );
+
+    QCOMPARE( instance->enabled(), enabledByDefault );
+
+    delete instance;
 }
 
 void RenderPluginTest::restoreDefaultSettings_data()
