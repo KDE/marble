@@ -208,7 +208,7 @@ void RoutingWidgetPrivate::setupToolBar()
     m_toolBar->addWidget(m_configureButton);
 
     QObject::connect( m_openRouteButton, SIGNAL( clicked() ),
-                      m_parent, SLOT( saveRoute() ) );
+                      m_parent, SLOT( openRoute() ) );
     QObject::connect( m_saveRouteButton, SIGNAL( clicked() ),
                       m_parent, SLOT( saveRoute() ) );
     QObject::connect( m_addViaButton, SIGNAL( clicked() ),
