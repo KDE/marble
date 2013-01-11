@@ -22,7 +22,7 @@
 #ifndef MARBLE_DGML_ELEMENTDICTIONARY_H
 #define MARBLE_DGML_ELEMENTDICTIONARY_H
 
-#include <marble_export.h>
+#include <geodata_export.h>
 
 namespace Marble
 {
@@ -31,7 +31,7 @@ namespace Marble
 // http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
 namespace dgml
 {
-    extern const char* dgmlTag_nameSpace20;
+    GEODATA_EXPORT extern const char* dgmlTag_nameSpace20;
 
     extern  const char* dgmlTag_Available;
     extern  const char* dgmlTag_Blending;

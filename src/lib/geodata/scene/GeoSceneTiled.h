@@ -40,7 +40,7 @@ class DownloadPolicy;
 class ServerLayout;
 class TileId;
 
-class GeoSceneTiled : public GeoSceneAbstractDataset
+class GEODATA_EXPORT GeoSceneTiled : public GeoSceneAbstractDataset
 {
  public:
     enum StorageLayout { Marble, OpenStreetMap, TileMapService };

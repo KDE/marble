@@ -20,7 +20,7 @@ namespace Marble {
 
 class GeoDataGroundOverlayPrivate;
 
-class GeoDataGroundOverlay: public GeoDataOverlay
+class MARBLE_EXPORT GeoDataGroundOverlay: public GeoDataOverlay
 {
 public:
     GeoDataGroundOverlay();
