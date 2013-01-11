@@ -287,50 +287,6 @@ void QtMarbleConfigDialog::readSettings()
 
     // Routing
 
-    // Plugins
-    QList<QVariant> pluginNameIdList;
-    QList<QVariant> pluginEnabledList;
-    QList<QVariant> pluginVisibleList;
-    
-    d->m_settings.beginGroup( "Plugins" );
-        pluginNameIdList = d->m_settings.value( "pluginNameId" ).toList();
-        pluginEnabledList = d->m_settings.value( "pluginEnabled" ).toList();
-        pluginVisibleList = d->m_settings.value( "pluginVisible" ).toList();
-    d->m_settings.endGroup();
-        
-    QHash<QString, int> pluginEnabled;
-    QHash<QString, int> pluginVisible;
-    
-    int nameIdSize = pluginNameIdList.size();
-    int enabledSize = pluginEnabledList.size();
-    int visibleSize = pluginVisibleList.size();
-
-    if ( nameIdSize == enabledSize ) {
-        for ( int i = 0; i < enabledSize; ++i ) {
-            pluginEnabled[ pluginNameIdList[i].toString() ]
-                = pluginEnabledList[i].toInt();
-        }
-    }
-    
-    if ( nameIdSize == visibleSize ) {
-        for ( int i = 0; i < visibleSize; ++i ) {
-            pluginVisible[ pluginNameIdList[i].toString() ]
-                = pluginVisibleList[i].toInt();
-        }
-    }
-
-    QList<RenderPlugin *> pluginList = d->m_marbleWidget->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        if ( pluginEnabled.contains( (*i)->nameId() ) ) {
-            (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
-        }
-        if ( pluginVisible.contains( (*i)->nameId() ) ) {
-            (*i)->setVisible( pluginVisible[ (*i)->nameId() ] );
-        }
-    }
-
     // Read the settings of the plugins
     d->m_marbleWidget->readPluginSettings( d->m_settings );
 
@@ -419,25 +375,6 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_settings.endGroup();
 
     // Plugins
-    QList<QVariant>   pluginEnabled;
-    QList<QVariant>   pluginVisible;
-    QStringList  pluginNameId;
- 
-    QList<RenderPlugin *> pluginList = d->m_marbleWidget->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        pluginEnabled << static_cast<int>( (*i)->enabled() );
-        pluginVisible << static_cast<int>( (*i)->visible() );
-        pluginNameId  << (*i)->nameId();
-    }
-    
-    d->m_settings.beginGroup( "Plugins" );
-        d->m_settings.setValue( "pluginNameId", pluginNameId );
-        d->m_settings.setValue( "pluginEnabled", pluginEnabled );
-        d->m_settings.setValue( "pluginVisible", pluginVisible );
-    d->m_settings.endGroup();
-
     d->m_marbleWidget->writePluginSettings( d->m_settings );
 
     emit settingsChanged();

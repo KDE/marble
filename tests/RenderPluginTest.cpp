@@ -36,6 +36,9 @@ class RenderPluginTest : public QObject
     void setEnabled_data();
     void setEnabled();
 
+    void setSettings_data();
+    void setSettings();
+
     void restoreDefaultSettings_data();
     void restoreDefaultSettings();
 
@@ -57,6 +60,14 @@ void RenderPluginTest::newInstance()
     QFETCH( const RenderPlugin *, factory );
 
     RenderPlugin *const instance = factory->newInstance( &m_model );
+
+    const bool enabledByDefault = instance->enabled();
+    const bool visibleByDefault = instance->visible();
+
+    QVERIFY( instance->settings().contains( "enabled" ) );
+    QVERIFY( instance->settings().contains( "visible" ) );
+    QCOMPARE( instance->settings().value( "enabled", !enabledByDefault ).toBool(), enabledByDefault );
+    QCOMPARE( instance->settings().value( "visible", !visibleByDefault ).toBool(), visibleByDefault );
 
     delete instance;
 }
@@ -102,10 +113,12 @@ void RenderPluginTest::setVisible()
     instance->setVisible( !visibleByDefault );
 
     QCOMPARE( instance->visible(), !visibleByDefault );
+    QCOMPARE( instance->settings().value( "visible", visibleByDefault ).toBool(), !visibleByDefault );
 
     instance->setVisible( visibleByDefault );
 
     QCOMPARE( instance->visible(), visibleByDefault );
+    QCOMPARE( instance->settings().value( "visible", !visibleByDefault ).toBool(), visibleByDefault );
 
     delete instance;
 }
@@ -130,10 +143,73 @@ void RenderPluginTest::setEnabled()
     instance->setEnabled( !enabledByDefault );
 
     QCOMPARE( instance->enabled(), !enabledByDefault );
+    QCOMPARE( instance->settings().value( "enabled", enabledByDefault ).toBool(), !enabledByDefault );
 
     instance->setEnabled( enabledByDefault );
 
     QCOMPARE( instance->enabled(), enabledByDefault );
+    QCOMPARE( instance->settings().value( "enabled", !enabledByDefault ).toBool(), enabledByDefault );
+
+    delete instance;
+}
+
+void RenderPluginTest::setSettings_data()
+{
+    QTest::addColumn<const RenderPlugin *>( "factory" );
+
+    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
+        QTest::newRow( factory->nameId().toAscii() ) << factory;
+    }
+}
+
+void RenderPluginTest::setSettings()
+{
+    QFETCH( const RenderPlugin *, factory );
+
+    RenderPlugin *const instance = factory->newInstance( &m_model );
+
+    const bool visibleByDefault = instance->visible();
+    const bool enabledByDefault = instance->enabled();
+
+    QHash<QString, QVariant> settings = instance->settings();
+
+    // visibile property should follow setting
+    settings.insert( "visible", !visibleByDefault );
+    instance->setSettings( settings );
+
+    QCOMPARE( instance->settings().value( "visible", visibleByDefault ).toBool(), !visibleByDefault );
+    QCOMPARE( instance->visible(), !visibleByDefault );
+
+    settings.insert( "visible", visibleByDefault );
+    instance->setSettings( settings );
+
+    QCOMPARE( instance->settings().value( "visible", !visibleByDefault ).toBool(), visibleByDefault );
+    QCOMPARE( instance->visible(), visibleByDefault );
+
+    // enabled property should follow setting
+    settings.insert( "enabled", !enabledByDefault );
+    instance->setSettings( settings );
+
+    QCOMPARE( instance->settings().value( "enabled", enabledByDefault ).toBool(), !enabledByDefault );
+    QCOMPARE( instance->enabled(), !enabledByDefault );
+
+    settings.insert( "enabled", enabledByDefault );
+    instance->setSettings( settings );
+
+    QCOMPARE( instance->settings().value( "enabled", !enabledByDefault ).toBool(), enabledByDefault );
+    QCOMPARE( instance->enabled(), enabledByDefault );
+
+    // restoreDefaultSettings() is triggered by the config dialog, so it shouldn't touch visible property
+    instance->setVisible( !visibleByDefault );
+    instance->restoreDefaultSettings();
+
+    QCOMPARE( instance->visible(), !visibleByDefault );
+
+    // restoreDefaultSettings() is triggered by the config dialog, so it shouldn't touch enabled property
+    instance->setEnabled( !enabledByDefault );
+    instance->restoreDefaultSettings();
+
+    QCOMPARE( instance->enabled(), !enabledByDefault );
 
     delete instance;
 }

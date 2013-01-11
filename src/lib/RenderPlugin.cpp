@@ -182,12 +182,18 @@ bool RenderPlugin::isUserCheckable() const
 
 QHash<QString,QVariant> RenderPlugin::settings() const
 {
-    return QHash<QString,QVariant>();
+    QHash<QString,QVariant> result;
+
+    result.insert( "enabled", enabled() );
+    result.insert( "visible", visible() );
+
+    return result;
 }
 
 void RenderPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    Q_UNUSED( settings );
+    setEnabled( settings.value( "enabled", enabled() ).toBool() );
+    setVisible( settings.value( "visible", visible() ).toBool() );
 }
 
 RenderPlugin::RenderType RenderPlugin::renderType() const
