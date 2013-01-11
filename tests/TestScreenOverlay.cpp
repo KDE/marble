@@ -62,6 +62,7 @@ void TestScreenOverlay::simpleParseTest()
         "    <rotationXY x=\"1.5\" y=\"3.5\" xunits=\"fraction\" yunits=\"insetPixels\"/>"
         "    <size x=\"23\" y=\"0.5\" xunits=\"pixels\" yunits=\"insetPixels\"/>"
         "    <rotation>23</rotation>"
+        "    <drawOrder>9</drawOrder>"
         "  </ScreenOverlay>"
         "</Folder>"
         "</kml>" );
@@ -94,6 +95,7 @@ void TestScreenOverlay::simpleParseTest()
     QCOMPARE( overlay->size().y(), 0.5 );
 
     QCOMPARE( overlay->rotation(), 23.0 );
+    QCOMPARE( overlay->drawOrder(), 9 );
 
     delete dataDocument;
 }

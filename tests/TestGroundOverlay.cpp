@@ -86,6 +86,7 @@ void TestGroundOverlay::simpleParseTest()
              "</GroundOverlay>"
               "<GroundOverlay>"
                   "<altitude>233</altitude>"
+                  "<drawOrder>2</drawOrder>"
                   "<LatLonBox>"
                       "<north>23.3765376</north>"
                       "<south>1.5743867869</south>"
@@ -109,6 +110,7 @@ void TestGroundOverlay::simpleParseTest()
     QFUZZYCOMPARE( overlayFirst->altitude(), 0.0, 0.0001 );
 
     QFUZZYCOMPARE( overlayFirst->altitudeMode(), Absolute, 0.0001 );
+    QCOMPARE( overlayFirst->drawOrder(), 0 );
 
     QFUZZYCOMPARE( overlayFirst->latLonBox().north(), 37.91904192681665 * DEG2RAD, 0.0001 );
     QFUZZYCOMPARE( overlayFirst->latLonBox().south(), 37.46543388598137 * DEG2RAD, 0.0001 );
@@ -119,6 +121,7 @@ void TestGroundOverlay::simpleParseTest()
     QFUZZYCOMPARE( overlaySecond->altitude(), 233.0, 0.0001 );
 
     QCOMPARE( overlaySecond->altitudeMode(), ClampToGround );
+    QCOMPARE( overlaySecond->drawOrder(), 2 );
 
     QFUZZYCOMPARE( overlaySecond->latLonBox().north(), 23.3765376 * DEG2RAD, 0.0001 );
     QFUZZYCOMPARE( overlaySecond->latLonBox().south(), 1.5743867869 * DEG2RAD, 0.0001 );

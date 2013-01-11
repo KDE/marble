@@ -24,6 +24,7 @@ geodata/handlers/kml/KmlDescriptionTagHandler.cpp
 geodata/handlers/kml/KmlDisplayModeTagHandler.cpp
 geodata/handlers/kml/KmlDisplayNameTagHandler.cpp
 geodata/handlers/kml/KmlDocumentTagHandler.cpp
+geodata/handlers/kml/KmldrawOrderTagHandler.cpp
 geodata/handlers/kml/KmlEastTagHandler.cpp
 geodata/handlers/kml/KmlElementDictionary.cpp
 geodata/handlers/kml/KmlEndTagHandler.cpp
