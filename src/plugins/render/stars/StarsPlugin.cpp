@@ -37,7 +37,7 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_nameIndex( 0 ),
       m_configDialog( 0 ),
       ui_configWidget( 0 ),
-      m_renderStars( false ),
+      m_renderStars( true ),
       m_renderConstellationLines( true ),
       m_renderConstellationLabels( true ),
       m_renderDsos( true ),
@@ -52,10 +52,10 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_magnitudeLimit( 100 ),
       m_constellationBrush( Marble::Oxygen::aluminumGray5 ),
       m_constellationLabelBrush( Marble::Oxygen::aluminumGray5 ),
-      m_dsoLabelBrush( Marble::Oxygen::aluminumGray6 ),
-      m_eclipticBrush( Marble::Oxygen::aluminumGray6 ),
-      m_celestialEquatorBrush( Marble::Oxygen::aluminumGray6 ),
-      m_celestialPoleBrush( Marble::Oxygen::aluminumGray6 )      
+      m_dsoLabelBrush( Marble::Oxygen::aluminumGray5 ),
+      m_eclipticBrush( Marble::Oxygen::aluminumGray5 ),
+      m_celestialEquatorBrush( Marble::Oxygen::aluminumGray5 ),
+      m_celestialPoleBrush( Marble::Oxygen::aluminumGray5 )
 {
     prepareNames();
 }
