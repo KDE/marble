@@ -308,6 +308,8 @@ QHash<QString,QVariant> OverviewMap::settings() const
 
 void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
 {
+    AbstractFloatItem::setSettings( settings );
+
     m_settings = settings;
 
     if( !m_settings.contains( "width" ) ) {

@@ -190,11 +190,19 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
 QHash<QString, QVariant> SatellitesPlugin::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> result = RenderPlugin::settings();
+
+    foreach ( const QString &key, m_settings.keys() ) {
+        result.insert( key, m_settings[key] );
+    }
+
+    return result;
 }
 
 void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
 {
+    RenderPlugin::setSettings( settings );
+
     m_settings = settings;
 
     // add default data sources

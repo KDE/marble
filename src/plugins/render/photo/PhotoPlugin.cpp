@@ -186,7 +186,7 @@ QDialog *PhotoPlugin::configDialog()
 
 QHash<QString,QVariant> PhotoPlugin::settings() const
 {
-    QHash<QString, QVariant> settings;
+    QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
     settings.insert( "numberOfItems", numberOfItems() );
     settings.insert( "checkState", checkState() );
@@ -196,6 +196,8 @@ QHash<QString,QVariant> PhotoPlugin::settings() const
 
 void PhotoPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    AbstractDataPlugin::setSettings( settings );
+
     setNumberOfItems( qMin<int>( maximumNumberOfItems, settings.value( "numberOfItems", 15 ).toInt() ) );
     m_checkStateList = settings.value( "checkState" ).toStringList();
 

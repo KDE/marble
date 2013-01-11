@@ -209,7 +209,10 @@ QHash<QString,QVariant> CompassFloatItem::settings() const
 
 void CompassFloatItem::setSettings( const QHash<QString,QVariant> &settings )
 {
+    AbstractFloatItem::setSettings( settings );
+
     m_settings = settings;
+
     readSettings();
 }
 

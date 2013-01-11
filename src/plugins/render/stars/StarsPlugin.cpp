@@ -168,7 +168,8 @@ QDialog *StarsPlugin::configDialog()
 
 QHash<QString, QVariant> StarsPlugin::settings() const
 {
-    QHash<QString, QVariant> settings;
+    QHash<QString, QVariant> settings = RenderPlugin::settings();
+
     settings["nameIndex"] = m_nameIndex;
     settings["renderStars"] = m_renderStars;
     settings["renderConstellationLines"] = m_renderConstellationLines;
@@ -186,11 +187,14 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     settings["eclipticBrush"] = m_eclipticBrush.color().rgb();
     settings["celestialEaquatorBrush"] = m_celestialEquatorBrush.color().rgb();
     settings["celestialPoleBrush"] = m_celestialPoleBrush.color().rgb();
+
     return settings;
 }
 
 void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
 {
+    RenderPlugin::setSettings( settings );
+
     m_nameIndex = readSetting<int>( settings, "nameIndex", 0 );
     m_renderStars = readSetting<bool>( settings, "renderStars", true );
     m_renderConstellationLines = readSetting<bool>( settings, "renderConstellationLines", true );

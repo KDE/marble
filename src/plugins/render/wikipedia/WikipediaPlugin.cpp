@@ -138,7 +138,7 @@ QDialog *WikipediaPlugin::configDialog()
 
 QHash<QString,QVariant> WikipediaPlugin::settings() const
 {
-    QHash<QString, QVariant> settings;
+    QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
     settings.insert( "numberOfItems", numberOfItems() );
     settings.insert( "showThumbnails", m_showThumbnails );
@@ -148,6 +148,8 @@ QHash<QString,QVariant> WikipediaPlugin::settings() const
 
 void WikipediaPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    AbstractDataPlugin::setSettings( settings );
+
     setNumberOfItems( qMin<int>( maximumNumberOfItems, settings.value( "numberOfItems", 15 ).toInt() ) );
     m_showThumbnails = settings.value( "showThumbnails", true ).toBool();
 

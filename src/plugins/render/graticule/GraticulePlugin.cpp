@@ -158,7 +158,7 @@ QDialog *GraticulePlugin::configDialog()
 
 QHash<QString,QVariant> GraticulePlugin::settings() const
 {
-    QHash<QString, QVariant> settings;
+    QHash<QString, QVariant> settings = RenderPlugin::settings();
 
     settings.insert( "gridColor", m_gridCirclePen.color().name() );
     settings.insert( "tropicsColor", m_tropicsCirclePen.color().name() );
@@ -169,6 +169,8 @@ QHash<QString,QVariant> GraticulePlugin::settings() const
 
 void GraticulePlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    RenderPlugin::setSettings( settings );
+
     const QColor gridColor = settings.value( "gridColor", QColor( Qt::white ) ).value<QColor>();
     const QColor tropicsColor = settings.value( "tropicsColor", QColor( Qt::yellow ) ).value<QColor>();
     const QColor equatorColor = settings.value( "equatorColor", QColor( Qt::yellow ) ).value<QColor>();

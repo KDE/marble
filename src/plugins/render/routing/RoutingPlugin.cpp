@@ -578,6 +578,8 @@ QHash<QString,QVariant> RoutingPlugin::settings() const
 
 void RoutingPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    AbstractFloatItem::setSettings( settings );
+
     d->m_settings = settings;
     if (!d->m_settings.contains("muted")) {
         d->m_settings["muted"] = false;

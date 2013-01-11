@@ -362,11 +362,19 @@ void AprsPlugin::writeSettings()
 
 QHash<QString,QVariant> AprsPlugin::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> result = RenderPlugin::settings();
+
+    foreach ( const QString &key, m_settings.keys() ) {
+        result.insert( key, m_settings[key] );
+    }
+
+    return result;
 }
 
 void AprsPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    RenderPlugin::setSettings( settings );
+
     m_settings = settings;
 
     // Check if all fields are filled and fill them with default values.

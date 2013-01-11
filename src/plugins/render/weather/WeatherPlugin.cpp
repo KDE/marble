@@ -143,11 +143,19 @@ QDialog *WeatherPlugin::configDialog()
 
 QHash<QString,QVariant> WeatherPlugin::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> result = AbstractDataPlugin::settings();
+
+    foreach ( const QString &key, m_settings.keys() ) {
+        result.insert( key, m_settings[key] );
+    }
+
+    return result;
 }
 
 void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    AbstractDataPlugin::setSettings( settings );
+
     m_settings = settings;
 
     // Check if all fields are filled and fill them with default values.

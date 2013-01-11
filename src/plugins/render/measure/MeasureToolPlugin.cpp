@@ -151,7 +151,7 @@ QDialog *MeasureToolPlugin::configDialog()
 
 QHash<QString,QVariant> MeasureToolPlugin::settings() const
 {
-    QHash<QString, QVariant> settings;
+    QHash<QString, QVariant> settings = RenderPlugin::settings();
 
     settings.insert( "showSegmentLabels", m_showSegmentLabels );
 
@@ -160,6 +160,8 @@ QHash<QString,QVariant> MeasureToolPlugin::settings() const
 
 void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    RenderPlugin::setSettings( settings );
+
     m_showSegmentLabels = settings.value( "showSegmentLabels", 0 ).toBool();
 }
 

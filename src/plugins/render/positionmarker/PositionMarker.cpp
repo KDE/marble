@@ -287,7 +287,7 @@ bool PositionMarker::render( GeoPainter *painter,
 
 QHash<QString,QVariant> PositionMarker::settings() const
 {
-    QHash<QString, QVariant> settings;
+    QHash<QString, QVariant> settings = RenderPlugin::settings();
 
     settings.insert( "useCustomCursor", m_useCustomCursor );
     settings.insert( "cursorPath", m_cursorPath );
@@ -301,6 +301,8 @@ QHash<QString,QVariant> PositionMarker::settings() const
 
 void PositionMarker::setSettings( const QHash<QString, QVariant> &settings )
 {
+    RenderPlugin::setSettings( settings );
+
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     QColor defaultColor = Oxygen::brickRed4;
     defaultColor.setAlpha( smallScreen ? 80 : 40 );

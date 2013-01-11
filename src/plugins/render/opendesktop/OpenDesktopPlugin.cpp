@@ -105,7 +105,7 @@ QDialog *OpenDesktopPlugin::configDialog()
 
 QHash<QString,QVariant> OpenDesktopPlugin::settings() const
 {
-    QHash<QString, QVariant> settings;
+    QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
     settings.insert( "itemsOnScreen", numberOfItems() );
 
@@ -128,6 +128,8 @@ bool OpenDesktopPlugin::eventFilter(QObject *object, QEvent *event)
 
 void OpenDesktopPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    AbstractDataPlugin::setSettings( settings );
+
     setNumberOfItems( settings.value( "itemsOnScreen", defaultItemsOnScreen ).toInt() );
 
     emit settingsChanged( nameId() );
