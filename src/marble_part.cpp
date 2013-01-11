@@ -494,42 +494,6 @@ void MarblePart::readSettings()
 
     m_lastFileOpenPath = KUrl::fromLocalFile( MarbleSettings::lastFileOpenDir() );
 
-    // Plugins
-    QHash<QString, int> pluginEnabled;
-    QHash<QString, int> pluginVisible;
-
-    int nameIdSize = MarbleSettings::pluginNameId().size();
-    int enabledSize = MarbleSettings::pluginEnabled().size();
-    int visibleSize = MarbleSettings::pluginVisible().size();
-
-    if ( nameIdSize == enabledSize ) {
-        for ( int i = 0; i < enabledSize; ++i ) {
-            pluginEnabled[ MarbleSettings::pluginNameId()[i] ]
-                = MarbleSettings::pluginEnabled()[i];
-        }
-    }
-
-    if ( nameIdSize == visibleSize ) {
-        for ( int i = 0; i < visibleSize; ++i ) {
-            pluginVisible[ MarbleSettings::pluginNameId()[i] ]
-                = MarbleSettings::pluginVisible()[i];
-        }
-    }
-
-    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        if ( pluginEnabled.contains( (*i)->nameId() ) ) {
-            (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
-            // I think this isn't needed, as it is part of setEnabled()
-//             (*i)->item()->setCheckState( pluginEnabled[ (*i)->nameId() ]  ?  Qt::Checked : Qt::Unchecked );
-        }
-        if ( pluginVisible.contains( (*i)->nameId() ) ) {
-            (*i)->setVisible( pluginVisible[ (*i)->nameId() ] );
-        }
-    }
-
     // Load previous route settings
     m_controlView->marbleModel()->routingManager()->readSettings();
     bool const startupWarning = MarbleSettings::showGuidanceModeStartupWarning();
@@ -694,22 +658,6 @@ void MarblePart::writeSettings()
     MarbleSettings::setSpeedSlider( m_controlView->marbleModel()->clockSpeed() );
 
     // Plugins
-    QList<int>   pluginEnabled;
-    QList<int>   pluginVisible;
-    QStringList  pluginNameId;
-
-    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        pluginEnabled << static_cast<int>( (*i)->enabled() );
-        pluginVisible << static_cast<int>( (*i)->visible() );
-        pluginNameId  << (*i)->nameId();
-    }
-    MarbleSettings::setPluginEnabled( pluginEnabled );
-    MarbleSettings::setPluginVisible( pluginVisible );
-    MarbleSettings::setPluginNameId(  pluginNameId );
-
     writePluginSettings();
 
     QString positionProvider;
