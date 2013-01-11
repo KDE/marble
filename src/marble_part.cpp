@@ -596,11 +596,6 @@ void MarblePart::readSettings()
 
     readPluginSettings();
 
-    disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
-                this,                          SLOT( writePluginSettings() ) );
-    connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
-             this,                          SLOT( writePluginSettings() ) );
-
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 }
 
@@ -714,6 +709,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setPluginEnabled( pluginEnabled );
     MarbleSettings::setPluginVisible( pluginVisible );
     MarbleSettings::setPluginNameId(  pluginNameId );
+
+    writePluginSettings();
 
     QString positionProvider;
     PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
@@ -1635,6 +1632,9 @@ void MarblePart::writePluginSettings()
 
 void MarblePart::readPluginSettings()
 {
+    disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+                this,                          SLOT( writePluginSettings() ) );
+
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
 
     foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
@@ -1648,6 +1648,9 @@ void MarblePart::readPluginSettings()
 
         plugin->setSettings( hash );
     }
+
+    connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+             this,                          SLOT( writePluginSettings() ) );
 }
 
 void MarblePart::lockFloatItemPosition( bool enabled )
