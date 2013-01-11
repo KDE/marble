@@ -104,6 +104,19 @@ geodata/handlers/kml/KmlVisibilityTagHandler.cpp
 geodata/handlers/kml/KmlWestTagHandler.cpp
 geodata/handlers/kml/KmlWhenTagHandler.cpp
 geodata/handlers/kml/KmlWidthTagHandler.cpp
+geodata/handlers/kml/KmlViewVolumeTagHandler.cpp
+geodata/handlers/kml/KmlViewVolumeTagHandler.cpp
+geodata/handlers/kml/KmlLeftFovTagHandler.cpp
+geodata/handlers/kml/KmlRightFovTagHandler.cpp
+geodata/handlers/kml/KmlBottomFovTagHandler.cpp
+geodata/handlers/kml/KmlTopFovTagHandler.cpp
+geodata/handlers/kml/KmlNearTagHandler.cpp
+geodata/handlers/kml/KmlImagePyramidTagHandler.cpp
+geodata/handlers/kml/KmlTileSizeTagHandler.cpp
+geodata/handlers/kml/KmlMaxHeightTagHandler.cpp
+geodata/handlers/kml/KmlMaxWidthTagHandler.cpp
+geodata/handlers/kml/KmlGridOriginTagHandler.cpp
+geodata/handlers/kml/KmlShapeTagHandler.cpp
 )
 
 SET ( geodata_writers_kml_SRCS

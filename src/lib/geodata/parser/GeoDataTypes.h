@@ -77,6 +77,8 @@ GEODATA_EXPORT extern const char* GeoDataScreenOverlayType;
 GEODATA_EXPORT extern const char* GeoDataBalloonStyleType;
 GEODATA_EXPORT extern const char* GeoDataListStyleType;
 GEODATA_EXPORT extern const char* GeoDataItemIconType;
+GEODATA_EXPORT extern const char* GeoDataImagePyramidType;
+GEODATA_EXPORT extern const char* GeoDataViewVolumeType;
 }
 
 }

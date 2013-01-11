@@ -21,7 +21,7 @@ namespace Marble
 
 class GeoDataItemIconPrivate;
 
-class GEODATA_EXPORT GeoDataItemIcon : public GeoDataFeature
+class GEODATA_EXPORT GeoDataItemIcon : public GeoDataObject
 {
     Q_FLAGS( ItemIconState ItemIconStates )
 public:

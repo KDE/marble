@@ -96,9 +96,10 @@ marble_add_test( TestGeoDataLatLonAltBox )      # Check boxen specifics
 marble_add_test( TestGeoDataGeometry )          # Check geometry specifics
 marble_add_test( TestGeoDataTrack )             # Check track specifics
 marble_add_test( TestBalloonStyle )             # Check BalloonStyle
-marble_add_test( TestListStyle )             # Check ListStyle
+marble_add_test( TestListStyle )                # Check ListStyle
 marble_add_test( TestScreenOverlay )     # Check ScreenOverlay specifics
 marble_add_test( TestGroundOverlay )     # Check GroundOverlay specifics
+marble_add_test( TestPhotoOverlay )      # Check PhotoOverlay specifics
 
 qt4_add_resources(TestGeoDataCopy_SRCS TestGeoDataCopy.qrc) # Check copy operations on CoW classes
 marble_add_test( TestGeoDataCopy ${TestGeoDataCopy_SRCS} )

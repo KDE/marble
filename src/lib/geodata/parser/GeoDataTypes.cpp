@@ -68,6 +68,8 @@ const char* GeoDataScreenOverlayType = "GeoDataScreenOverlay";
 const char* GeoDataBalloonStyleType = "GeoDataBalloonStyle";
 const char* GeoDataListStyleType = "GeoDataListStyle";
 const char* GeoDataItemIconType = "GeoDataItemIcon";
+const char* GeoDataImagePyramidType = "GeoDataImagePyramid";
+const char* GeoDataViewVolumeType = "GeoDataViewVolume";
 }
 
 }

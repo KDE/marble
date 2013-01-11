@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
+// Copyright 2013      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 #include "KmlRotationTagHandler.h"
@@ -14,6 +14,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataScreenOverlay.h"
+#include "GeoDataPhotoOverlay.h"
 #include "GeoDataLatLonBox.h"
 #include "GeoDataParser.h"
 
@@ -40,6 +41,12 @@ GeoNode* KmlrotationTagHandler::parse( GeoParser& parser ) const
         qreal rotation = parser.readElementText().toFloat();
 
         parentItem.nodeAs<GeoDataLatLonBox>()->setRotation( rotation * DEG2RAD );
+    }
+    else if (parentItem.represents( kmlTag_PhotoOverlay ))
+    {
+        qreal rotation = parser.readElementText().toFloat();
+
+        parentItem.nodeAs<GeoDataPhotoOverlay>()->setRotation( rotation );
     }
     return 0;
 }

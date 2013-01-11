@@ -182,7 +182,6 @@ void GeoDataListStyle::pack( QDataStream& stream ) const
           ++iterator )
     {
         const GeoDataItemIcon *itemIcon = *iterator;
-        stream << itemIcon->featureId();
         itemIcon->pack( stream );
     }
 }
