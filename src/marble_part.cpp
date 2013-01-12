@@ -1622,9 +1622,9 @@ void MarblePart::writePluginSettings()
     foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
         KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
 
-        QHash<QString,QVariant> hash = plugin->settings();
+        const QHash<QString,QVariant> hash = plugin->settings();
 
-        QHash<QString,QVariant>::iterator it = hash.begin();
+        QHash<QString,QVariant>::const_iterator it = hash.begin();
         while( it != hash.end() ) {
             group.writeEntry( it.key(), it.value() );
             ++it;
@@ -1640,7 +1640,7 @@ void MarblePart::readPluginSettings()
     foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
         KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
 
-        QHash<QString,QVariant> hash = plugin->settings();
+        QHash<QString,QVariant> hash;
 
         foreach ( const QString& key, group.keyList() ) {
             hash.insert( key, group.readEntry( key ) );
