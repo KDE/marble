@@ -573,6 +573,9 @@ void LatLonEdit::setNotation(GeoDataCoordinates::Notation notation)
     case GeoDataCoordinates::MGRS:
         /** @todo implement */
         break;
+    case GeoDataCoordinates::Astro:
+        /** @todo implement */
+        break;
     }
 
     d->m_notation = notation;
