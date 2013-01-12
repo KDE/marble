@@ -18,12 +18,13 @@
 #include "GeoDataPoint.h"
 #include "GeoDataImagePyramid.h"
 #include "GeoDataViewVolume.h"
+#include "marble_export.h"
 
 namespace Marble {
 
 class GeoDataPhotoOverlayPrivate;
 
-class GeoDataPhotoOverlay: public GeoDataOverlay
+class MARBLE_EXPORT GeoDataPhotoOverlay: public GeoDataOverlay
 {
 public:
     GeoDataPhotoOverlay();
