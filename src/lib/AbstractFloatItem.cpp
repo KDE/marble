@@ -67,6 +67,19 @@ AbstractFloatItem::~AbstractFloatItem()
     delete d;
 }
 
+QHash<QString,QVariant> AbstractFloatItem::settings() const
+{
+    QHash<QString,QVariant> updated = RenderPlugin::settings();
+    updated["position"] = position();
+    return updated;
+}
+
+void AbstractFloatItem::setSettings(const QHash<QString, QVariant> &settings)
+{
+    setPosition( settings.value( "position", position() ).toPointF() );
+    RenderPlugin::setSettings(settings);
+}
+
 QPen AbstractFloatItem::pen() const
 {
     return d->s_pen;

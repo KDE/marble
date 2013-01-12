@@ -51,6 +51,7 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
                                    TextureColorizer *texColorizer )
 {
     Q_UNUSED( texColorizer );
+    Q_UNUSED( dirtyRect );
 
     /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
 
