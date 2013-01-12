@@ -71,6 +71,8 @@ const char* GeoDataListStyleType = "GeoDataListStyle";
 const char* GeoDataItemIconType = "GeoDataItemIcon";
 const char* GeoDataImagePyramidType = "GeoDataImagePyramid";
 const char* GeoDataViewVolumeType = "GeoDataViewVolume";
+const char* GeoDataNetworkLinkControlType = "GeoDataNetworkLinkControl";
+const char* GeoDataUpdateType = "GeoDataUpdate";
 }
 
 }

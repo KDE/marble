@@ -111,6 +111,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_maxFadeExtent;
     GEODATA_EXPORT extern const char* kmlTag_maxHeight;
     GEODATA_EXPORT extern const char* kmlTag_maxLodPixels;
+    GEODATA_EXPORT extern const char* kmlTag_maxSessionLength;
     GEODATA_EXPORT extern const char* kmlTag_maxWidth;
     GEODATA_EXPORT extern const char* kmlTag_message;
     GEODATA_EXPORT extern const char* kmlTag_Metadata;

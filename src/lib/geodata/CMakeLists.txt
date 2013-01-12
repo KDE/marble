@@ -121,6 +121,16 @@ geodata/handlers/kml/KmlMaxHeightTagHandler.cpp
 geodata/handlers/kml/KmlMaxWidthTagHandler.cpp
 geodata/handlers/kml/KmlGridOriginTagHandler.cpp
 geodata/handlers/kml/KmlShapeTagHandler.cpp
+geodata/handlers/kml/KmlMinRefreshPeriodTagHandler.cpp
+geodata/handlers/kml/KmlMaxSessionLengthTagHandler.cpp
+geodata/handlers/kml/KmlCookieTagHandler.cpp
+geodata/handlers/kml/KmlMessageTagHandler.cpp
+geodata/handlers/kml/KmlLinkNameTagHandler.cpp
+geodata/handlers/kml/KmlLinkDescriptionTagHandler.cpp
+geodata/handlers/kml/KmlLinkSnippetTagHandler.cpp
+geodata/handlers/kml/KmlExpiresTagHandler.cpp
+geodata/handlers/kml/KmlUpdateTagHandler.cpp
+geodata/handlers/kml/KmlNetworkLinkControlTagHandler.cpp
 )
 
 SET ( geodata_writers_kml_SRCS

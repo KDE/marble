@@ -12,6 +12,7 @@
 #define MARBLE_GEODATADOCUMENTPRIVATE_H
 
 #include "GeoDataStyle.h"
+#include "GeoDataNetworkLinkControl.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataContainer_p.h"
 
@@ -48,6 +49,7 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
     QMap<QString, GeoDataStyle> m_styleHash;
     QMap<QString, GeoDataStyleMap> m_styleMapHash;
     QString m_filename;
+    GeoDataNetworkLinkControl m_networkLinkControl;
     QString m_property;
     DocumentRole m_documentRole;
 };

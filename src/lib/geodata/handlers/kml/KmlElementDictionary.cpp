@@ -109,6 +109,7 @@ const char* kmlTag_maxAltitude = "maxAltitude";
 const char* kmlTag_maxFadeExtent = "maxFadeExtent";
 const char* kmlTag_maxHeight = "maxHeight";
 const char* kmlTag_maxLodPixels = "maxLodPixels";
+const char* kmlTag_maxSessionLength = "maxSessionLength";
 const char* kmlTag_maxWidth = "maxWidth";
 const char* kmlTag_message = "message";
 const char* kmlTag_Metadata = "Metadata";
