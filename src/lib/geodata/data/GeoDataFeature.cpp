@@ -532,12 +532,17 @@ void GeoDataFeature::setDescriptionCDATA( bool cdata )
     d->m_descriptionCDATA = cdata;
 }
 
-GeoDataAbstractView GeoDataFeature::abstractView() const
+const GeoDataAbstractView* GeoDataFeature::abstractView() const
 {
     return d->m_abstractView;
 }
 
-void GeoDataFeature::setAbstractView( const GeoDataAbstractView &abstractView )
+GeoDataAbstractView *GeoDataFeature::abstractView()
+{
+    return d->m_abstractView;
+}
+
+void GeoDataFeature::setAbstractView( GeoDataAbstractView *abstractView )
 {
     detach();
     d->m_abstractView = abstractView;
