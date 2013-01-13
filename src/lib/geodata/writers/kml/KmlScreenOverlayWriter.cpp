@@ -33,84 +33,35 @@ KmlScreenOverlayWriter::KmlScreenOverlayWriter() : KmlOverlayTagWriter( kml::kml
 bool KmlScreenOverlayWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataScreenOverlay *screenOverlay = static_cast<const GeoDataScreenOverlay*>( node );
-
-    QString overlayXString;
-    QString overlayXunitString;
-    QString overlayYString;
-    QString overlayYunitString;
-
-    overlayXString = QString::number(screenOverlay->overlayXY().x());
-    overlayXunitString = QString::number(screenOverlay->overlayXY().xunit());
-    overlayYString = QString::number(screenOverlay->overlayXY().y());
-    overlayYunitString = QString::number(screenOverlay->overlayXY().yunit());
-
-    writer.writeStartElement(kml::kmlTag_overlayXY);
-    writer.writeAttribute("x", overlayXString);
-    writer.writeAttribute("xunit", overlayXunitString);
-    writer.writeAttribute("y", overlayYString);
-    writer.writeAttribute("yunit", overlayYunitString);
-    writer.writeEndElement();
-
-    QString screenXString;
-    QString screenXunitString;
-    QString screenYString;
-    QString screenYunitString;
-
-    screenXString = QString::number(screenOverlay->screenXY().x());
-    screenXunitString = QString::number(screenOverlay->screenXY().xunit());
-    screenYString = QString::number(screenOverlay->screenXY().y());
-    screenYunitString = QString::number(screenOverlay->screenXY().yunit());
-
-    writer.writeStartElement(kml::kmlTag_screenXY);
-    writer.writeAttribute("x", screenXString);
-    writer.writeAttribute("xunit", screenXunitString);
-    writer.writeAttribute("y", screenYString);
-    writer.writeAttribute("yunit", screenYunitString);
-    writer.writeEndElement();
-
-    QString sizeXString;
-    QString sizeXunitString;
-    QString sizeYString;
-    QString sizeYunitString;
-
-    sizeXString = QString::number(screenOverlay->size().x());
-    sizeXunitString = QString::number(screenOverlay->size().xunit());
-    sizeYString = QString::number(screenOverlay->size().y());
-    sizeYunitString = QString::number(screenOverlay->size().yunit());
-
-    writer.writeStartElement(kml::kmlTag_size);
-    writer.writeAttribute("x", sizeXString);
-    writer.writeAttribute("xunit", sizeXunitString);
-    writer.writeAttribute("y", sizeYString);
-    writer.writeAttribute("yunit", sizeYunitString);
-    writer.writeEndElement();
-
-    QString rotationXString;
-    QString rotationXunitString;
-    QString rotationYString;
-    QString rotationYunitString;
-
-    rotationXString = QString::number(screenOverlay->rotationXY().x());
-    rotationXunitString = QString::number(screenOverlay->rotationXY().xunit());
-    rotationYString = QString::number(screenOverlay->rotationXY().y());
-    rotationYunitString = QString::number(screenOverlay->rotationXY().yunit());
-
-    writer.writeStartElement(kml::kmlTag_size);
-    writer.writeAttribute("x", rotationXString);
-    writer.writeAttribute("xunit", rotationXunitString);
-    writer.writeAttribute("y", rotationYString);
-    writer.writeAttribute("yunit", rotationYunitString);
-    writer.writeEndElement();
-
-    QString rotationString;
-    rotationString = QString::number(screenOverlay->rotation());
-    writer.writeStartElement(kml::kmlTag_rotation);
-    writer.writeCharacters(rotationString);
-    writer.writeEndElement();
-
+    writeVec2( kml::kmlTag_overlayXY, screenOverlay->overlayXY(), writer );
+    writeVec2( kml::kmlTag_rotationXY, screenOverlay->rotationXY(), writer );
+    writeVec2( kml::kmlTag_screenXY, screenOverlay->screenXY(), writer );
+    writeVec2( kml::kmlTag_size, screenOverlay->size(), writer );
+    QString const rotation = QString::number(screenOverlay->rotation());
+    writer.writeOptionalElement( kml::kmlTag_rotation, rotation, "0" );
     return true;
+}
 
+void KmlScreenOverlayWriter::writeVec2( const QString &element, const GeoDataVec2 &vec2, GeoWriter &writer ) const
+{
+    writer.writeStartElement( element );
+    writer.writeAttribute( "x", QString::number( vec2.x() ) );
+    writer.writeAttribute( "xunit", unitToString( vec2.xunit() ) );
+    writer.writeAttribute( "y", QString::number( vec2.y() ) );
+    writer.writeAttribute( "yunit", unitToString( vec2.yunit() ) );
+    writer.writeEndElement();
+}
+
+QString KmlScreenOverlayWriter::unitToString( GeoDataVec2::Unit unit ) const
+{
+    switch( unit ) {
+    case GeoDataVec2::Fraction:    return "fraction";
+    case GeoDataVec2::Pixels:      return "pixels";
+    case GeoDataVec2::InsetPixels: return "insetPixels";
+    }
+
+    Q_ASSERT(false);
+    return "fraction";
 }
 
 }
-
