@@ -5,13 +5,14 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012      Shou Ya <shouyalovelyx@gmail.com>
+// Copyright 2012      Mayank Madan <maddiemadan@gmail.com>
 //
 
-#ifndef MARBLE_KMLGROUNDOVERLAYWRITER_H
-#define MARBLE_KMLGROUNDOVERLAYWRITER_H
+#ifndef MARBLE_KMLSCREENOVERLAYWRITER_H
+#define MARBLE_KMLSCREENOVERLAYWRITER_H
 
 #include "GeoTagWriter.h"
+#include "GeoWriter.h"
 #include "KmlOverlayTagWriter.h"
 
 #include "MarbleGlobal.h"
@@ -19,17 +20,13 @@
 namespace Marble
 {
 
-class KmlGroundOverlayWriter : public KmlOverlayTagWriter
+class KmlScreenOverlayWriter : public KmlOverlayTagWriter
 {
 public:
-    KmlGroundOverlayWriter();
-
-    bool writeMid( const GeoNode *node, GeoWriter &writer ) const;
-
-    static QString altitudeModeToString(AltitudeMode mode);
+    KmlScreenOverlayWriter();
+    bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
 };
 
 }
 
 #endif
-
