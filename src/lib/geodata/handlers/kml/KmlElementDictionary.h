@@ -200,6 +200,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_MultiTrack;
     GEODATA_EXPORT extern const char* kmlTag_Track;
     GEODATA_EXPORT extern const char* kmlTag_coord;
+    GEODATA_EXPORT extern const char* kmlTag_Tour;
 
 #ifdef KML_LAZY_IMP
 // preliminary implementation for the extra defined Tags

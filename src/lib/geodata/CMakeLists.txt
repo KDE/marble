@@ -98,6 +98,7 @@ geodata/handlers/kml/KmlTextColorTagHandler.cpp
 geodata/handlers/kml/KmlTextTagHandler.cpp
 geodata/handlers/kml/KmlTimeSpanTagHandler.cpp
 geodata/handlers/kml/KmlTimeStampTagHandler.cpp
+geodata/handlers/kml/KmlTourTagHandler.cpp
 geodata/handlers/kml/KmlTrackTagHandler.cpp
 geodata/handlers/kml/KmlValueTagHandler.cpp
 geodata/handlers/kml/KmlVisibilityTagHandler.cpp
