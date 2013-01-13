@@ -121,7 +121,7 @@ QString License::copyrightYears() const
 QList<PluginAuthor> License::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-           << PluginAuthor( "Dennis Nienhüser", "earthwings@gentoo.org" )
+           << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
            << PluginAuthor( "Illya Kovalevskyy", "illya.kovalevskyy@gmail.com" );
 }
 
