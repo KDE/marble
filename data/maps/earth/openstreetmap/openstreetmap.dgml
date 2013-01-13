@@ -157,6 +157,10 @@
           <icon pixmap="maps/earth/openstreetmap/legend/footway.png"/>
           <text>Footway</text>
         </item>
+        <item name="railway_station">
+          <icon pixmap="maps/earth/openstreetmap/legend/railwaystation.png"/>
+          <text>Railway station</text>
+        </item>
         <item name="railway">
           <icon pixmap="maps/earth/openstreetmap/legend/railway.png"/>
           <text>Railway</text>
@@ -188,10 +192,6 @@
         <item name="tunnel">
           <icon pixmap="maps/earth/openstreetmap/legend/tunnel.png"/>
           <text>Tunnel</text>
-        </item>
-        <item name="railway_station">
-          <icon pixmap="maps/earth/openstreetmap/legend/railwaystation.png"/>
-          <text>Railway station</text>
         </item>
       </section>
       <section name="areas" checkable="false" spacing="12">
@@ -290,41 +290,6 @@
         <item name="summit_peak">
           <icon pixmap="maps/earth/openstreetmap/legend/summitpeak.png"/>
           <text>Summit, peak</text>
-        </item>
-      </section>
-      <section name="Food" checkable="false" connect="amenity" spacing="12">
-        <heading>Food</heading>
-        <item name="bar">
-          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_bar.p.12.png"/>
-          <text>Bar</text>
-        </item>
-        <item name="biergarten">
-          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_biergarten.p.12.png"/>
-          <text>Biergarten</text>
-        </item>
-        <item name="cafe">
-          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_cafe.p.12.png"/>
-          <text>Cafe</text>
-        </item>
-        <item name="drinkingwater">
-          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_drinkingtap.p.12.png"/>
-          <text>Drinking water</text>
-        </item>
-        <item name="Fastfood">
-          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_fastfood.p.12.png"/>
-          <text>Fast Food</text>
-        </item>
-        <item name="Icecream">
-          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_ice_cream.p.12.png"/>
-          <text>Ice Cream</text>
-        </item>
-        <item name="pub">
-          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_pub.p.12.png"/>
-          <text>Pub</text>
-        </item>
-        <item name="restaurant">
-          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_restaurant.p.12.png"/>
-          <text>Restaurant</text>
         </item>
       </section>
       <section name="education" checkable="false" connect="education" spacing="12">
@@ -461,6 +426,41 @@
         <item name="ruins">
           <icon pixmap="maps/earth/openstreetmap/legend/mapicons/tourist_ruin.p.12.png"/>
           <text>Ruins</text>
+        </item>
+      </section>
+      <section name="Food" checkable="false" connect="amenity" spacing="12">
+        <heading>Food</heading>
+        <item name="bar">
+          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_bar.p.12.png"/>
+          <text>Bar</text>
+        </item>
+        <item name="biergarten">
+          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_biergarten.p.12.png"/>
+          <text>Biergarten</text>
+        </item>
+        <item name="cafe">
+          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_cafe.p.12.png"/>
+          <text>Cafe</text>
+        </item>
+        <item name="drinkingwater">
+          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_drinkingtap.p.12.png"/>
+          <text>Drinking water</text>
+        </item>
+        <item name="Fastfood">
+          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_fastfood.p.12.png"/>
+          <text>Fast Food</text>
+        </item>
+        <item name="Icecream">
+          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_ice_cream.p.12.png"/>
+          <text>Ice Cream</text>
+        </item>
+        <item name="pub">
+          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_pub.p.12.png"/>
+          <text>Pub</text>
+        </item>
+        <item name="restaurant">
+          <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_restaurant.p.12.png"/>
+          <text>Restaurant</text>
         </item>
       </section>
       <section name="Shop" checkable="false" connect="shop" spacing="12">
