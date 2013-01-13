@@ -24,10 +24,10 @@ bool KmlLodTagWriter::write( const GeoNode *node,
 {
     const GeoDataLod *lod = static_cast<const GeoDataLod*>( node );
     writer.writeStartElement(kml::kmlTag_Lod);
-    writer.writeTextElement( "minLodPixels",  QString::number(lod->minLodPixels()) );
-    writer.writeTextElement( "maxLodPixels",  QString::number(lod->maxLodPixels()) );
-    writer.writeTextElement( "minFadeExtent", QString::number(lod->minFadeExtent()) );
-    writer.writeTextElement( "maxFadeExtent", QString::number(lod->maxFadeExtent()) );
+    writer.writeTextElement( kml::kmlTag_minLodPixels,  QString::number(lod->minLodPixels()) );
+    writer.writeTextElement( kml::kmlTag_maxLodPixels,  QString::number(lod->maxLodPixels()) );
+    writer.writeTextElement( kml::kmlTag_minFadeExtent, QString::number(lod->minFadeExtent()) );
+    writer.writeTextElement( kml::kmlTag_maxFadeExtent, QString::number(lod->maxFadeExtent()) );
     writer.writeEndElement();
     return true;
 }
