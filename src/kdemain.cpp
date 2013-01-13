@@ -203,6 +203,8 @@ int main ( int argc, char *argv[] )
                          ki18n( "Development & Patches" ));
     aboutData.addAuthor( ki18n( "Laurent Montel" ),
                          ki18n( "Development & Patches" ));
+    aboutData.addAuthor( ki18n( "Mayank Madan" ),
+                         ki18n( "Development & Patches" ));
     aboutData.addAuthor( ki18n( "Prashanth Udupa" ),
                          ki18n( "Development & Patches" ));
     aboutData.addAuthor( ki18n( "Anne-Marie Mahfouf" ),
