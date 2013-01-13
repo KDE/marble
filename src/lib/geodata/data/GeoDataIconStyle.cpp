@@ -23,14 +23,16 @@ class GeoDataIconStylePrivate
   public:
     GeoDataIconStylePrivate()
         : m_scale( 1.0 ),
-        m_iconPath( MarbleDirs::path( "bitmaps/default_location.png" ) )
+        m_iconPath( MarbleDirs::path( "bitmaps/default_location.png" ) ),
+        m_heading( 0 )
     {
     }
 
     GeoDataIconStylePrivate( const QImage& icon, const QPointF &hotSpot )
         : m_scale( 1.0 ),
           m_icon( icon ),
-          m_hotSpot( hotSpot )
+          m_hotSpot( hotSpot ),
+          m_heading( 0 )
     {
     }
 
@@ -45,6 +47,7 @@ class GeoDataIconStylePrivate
     QString          m_iconPath;
     GeoDataHotSpot   m_hotSpot;
     mutable QPointF  m_pixelHotSpot;
+    int              m_heading;
 };
 
 GeoDataIconStyle::GeoDataIconStyle() :
@@ -159,6 +162,16 @@ void GeoDataIconStyle::setScale( const float &scale )
 float GeoDataIconStyle::scale() const
 {
     return d->m_scale;
+}
+
+int GeoDataIconStyle::heading() const
+{
+    return d->m_heading;
+}
+
+void GeoDataIconStyle::setHeading( int heading )
+{
+    d->m_heading = heading;
 }
 
 void GeoDataIconStyle::pack( QDataStream& stream ) const

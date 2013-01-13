@@ -55,6 +55,9 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     void setScale( const float &scale );
     float scale() const;
 
+    int heading() const;
+    void setHeading( int heading );
+
     /*
      * Serializable methods
      */
