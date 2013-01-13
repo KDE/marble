@@ -44,6 +44,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_begin;
     GEODATA_EXPORT extern const char* kmlTag_bgColor;
     GEODATA_EXPORT extern const char* kmlTag_bottomFov;
+    GEODATA_EXPORT extern const char* kmlTag_Camera;
     GEODATA_EXPORT extern const char* kmlTag_Change;
     GEODATA_EXPORT extern const char* kmlTag_code;
     GEODATA_EXPORT extern const char* kmlTag_color;

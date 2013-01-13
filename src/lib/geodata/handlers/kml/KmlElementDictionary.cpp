@@ -42,6 +42,7 @@ const char* kmlTag_BalloonStyle = "BalloonStyle";
 const char* kmlTag_begin = "begin";
 const char* kmlTag_bgColor = "bgColor";
 const char* kmlTag_bottomFov = "bottomFov";
+const char* kmlTag_Camera = "Camera";
 const char* kmlTag_Change = "Change";
 const char* kmlTag_code = "code";
 const char* kmlTag_color = "color";

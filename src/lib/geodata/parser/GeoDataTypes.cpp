@@ -26,6 +26,7 @@ namespace Marble
 
 namespace GeoDataTypes
 {
+const char* GeoDataCameraType = "GeoDataCamera";
 const char* GeoDataColorStyleType = "GeoDataColorStyle";
 const char* GeoDataContainerType = "GeoDataContainer";
 const char* GeoDataDataType = "GeoDataData";

@@ -14,6 +14,7 @@ geodata/handlers/kml/KmlAreaTagHandler.cpp
 geodata/handlers/kml/KmlBalloonStyleTagHandler.cpp
 geodata/handlers/kml/KmlBeginTagHandler.cpp
 geodata/handlers/kml/KmlBgColorTagHandler.cpp
+geodata/handlers/kml/KmlCameraTagHandler.cpp
 geodata/handlers/kml/KmlColorModeTagHandler.cpp
 geodata/handlers/kml/KmlColorTagHandler.cpp
 geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
@@ -78,6 +79,7 @@ geodata/handlers/kml/KmlPopTagHandler.cpp
 geodata/handlers/kml/KmlRangeTagHandler.cpp
 geodata/handlers/kml/KmlRegionTagHandler.cpp
 geodata/handlers/kml/KmlRoleTagHandler.cpp
+geodata/handlers/kml/KmlRollTagHandler.cpp
 geodata/handlers/kml/KmlRotationTagHandler.cpp
 geodata/handlers/kml/KmlRotationXYTagHandler.cpp
 geodata/handlers/kml/Kml_scaleTagHandler.cpp
@@ -96,6 +98,7 @@ geodata/handlers/kml/KmlStyleUrlTagHandler.cpp
 geodata/handlers/kml/KmlTessellateTagHandler.cpp
 geodata/handlers/kml/KmlTextColorTagHandler.cpp
 geodata/handlers/kml/KmlTextTagHandler.cpp
+geodata/handlers/kml/KmlTiltTagHandler.cpp
 geodata/handlers/kml/KmlTimeSpanTagHandler.cpp
 geodata/handlers/kml/KmlTimeStampTagHandler.cpp
 geodata/handlers/kml/KmlTourTagHandler.cpp
@@ -122,6 +125,7 @@ geodata/handlers/kml/KmlShapeTagHandler.cpp
 
 SET ( geodata_writers_kml_SRCS
 geodata/writers/kml/KmlBalloonStyleTagWriter.cpp
+geodata/writers/kml/KmlCameraTagWriter.cpp
 geodata/writers/kml/KmlColorStyleTagWriter.cpp
 geodata/writers/kml/KmlDataTagWriter.cpp
 geodata/writers/kml/KmlDocumentTagWriter.cpp
