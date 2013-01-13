@@ -5,11 +5,13 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2008 Torsten Rahn      <tackat@kde.org>
+// Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #include "MapScaleFloatItem.h"
 
+#include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 #include <QtGui/QApplication>
@@ -53,11 +55,18 @@ MapScaleFloatItem::MapScaleFloatItem( const MarbleModel *marbleModel )
       m_unit(tr("km")),
       m_scaleInitDone( false ),
       m_showRatioScale( false ),
-      m_contextMenu( 0 )
+      m_contextMenu( 0 ),
+      m_minimized(false),
+      m_widthScaleFactor(2)
 {
 #ifdef Q_WS_MAEMO_5
         setPosition( QPointF( 220.0, 10.5 ) );
 #endif // Q_WS_MAEMO_5
+
+    m_minimizeAction = new QAction(tr("Minimize"), this);
+    m_minimizeAction->setCheckable(true);
+    m_minimizeAction->setChecked(m_minimized);
+    connect(m_minimizeAction, SIGNAL(triggered()), this, SLOT(toggleMinimized()));
 }
 
 MapScaleFloatItem::~MapScaleFloatItem()
@@ -96,14 +105,15 @@ QString MapScaleFloatItem::description() const
 
 QString MapScaleFloatItem::copyrightYears() const
 {
-    return "2008, 2010";
+    return "2008, 2010, 2012";
 }
 
 QList<PluginAuthor> MapScaleFloatItem::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Torsten Rahn", "tackat@kde.org", tr( "Original Developer" ) )
-            << PluginAuthor( "Khanh-Nhan Nguyen", "khanh.nhan@wpi.edu" );
+            << PluginAuthor( "Khanh-Nhan Nguyen", "khanh.nhan@wpi.edu" )
+            << PluginAuthor( "Illya Kovalevskyy", "illya.kovalevskyy@gmail.com" );
 }
 
 QIcon MapScaleFloatItem::icon () const
@@ -134,10 +144,10 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
     {
         int fontHeight     = QFontMetrics( font() ).ascent();
         if (m_showRatioScale) {
-            setContentSize( QSizeF( viewport->width() / 2,
+            setContentSize( QSizeF( viewport->width() / m_widthScaleFactor,
                                     fontHeight + 3 + m_scaleBarHeight + fontHeight + 7 ) );
         } else {
-            setContentSize( QSizeF( viewport->width() / 2,
+            setContentSize( QSizeF( viewport->width() / m_widthScaleFactor,
                                     fontHeight + 3 + m_scaleBarHeight ) );
         }
 
@@ -348,6 +358,7 @@ QDialog *MapScaleFloatItem::configDialog()
                                             SLOT(writeSettings()) );
         connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
                                             SLOT(readSettings()) );
+
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL(clicked()) ,
                 this,        SLOT(writeSettings()) );
@@ -371,6 +382,8 @@ void MapScaleFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
                                                 SLOT(toggleRatioScaleVisibility()) );
         toggleAction->setCheckable( true );
         toggleAction->setChecked( m_showRatioScale );
+
+        m_contextMenu->addAction(m_minimizeAction);
     }
 
     Q_ASSERT( m_contextMenu );
@@ -389,10 +402,11 @@ void MapScaleFloatItem::readSettings()
 
     if ( m_showRatioScale ) {
         ui_configWidget->m_showRatioScaleCheckBox->setCheckState( Qt::Checked );
-    }
-    else {
+    } else {
         ui_configWidget->m_showRatioScaleCheckBox->setCheckState( Qt::Unchecked );
     }
+
+    ui_configWidget->m_minimizeCheckBox->setChecked(m_minimized);
 }
 
 void MapScaleFloatItem::writeSettings()
@@ -403,6 +417,10 @@ void MapScaleFloatItem::writeSettings()
         m_showRatioScale = false;
     }
 
+    if (m_minimized != ui_configWidget->m_minimizeCheckBox->isChecked()) {
+        toggleMinimized();
+    }
+
     emit settingsChanged( nameId() );
 }
 
@@ -411,6 +429,21 @@ void MapScaleFloatItem::toggleRatioScaleVisibility()
     m_showRatioScale = !m_showRatioScale;
     readSettings();
     emit settingsChanged( nameId() );
+}
+
+void MapScaleFloatItem::toggleMinimized()
+{
+    m_minimized = !m_minimized;
+    ui_configWidget->m_minimizeCheckBox->setChecked(m_minimized);
+    m_minimizeAction->setChecked(m_minimized);
+    readSettings();
+    emit settingsChanged( nameId() );
+
+    if (m_minimized == true) {
+        m_widthScaleFactor = 4;
+    } else {
+        m_widthScaleFactor = 2;
+    }
 }
 
 }
