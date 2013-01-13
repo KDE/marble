@@ -15,6 +15,7 @@
 
 #include "MarbleGlobal.h"
 #include "GeoDataLookAt.h"
+#include "GeoDataCamera.h"
 #include "GeoDataGroundOverlay.h"
 #include "GeoParser.h"
 #include "GeoDataCoordinates.h"
@@ -35,10 +36,8 @@ KML_DEFINE_TAG_HANDLER( altitude )
         qreal const altitude = parser.readElementText().trimmed().toDouble();
         if ( parentItem.is<GeoDataLookAt>() ){
             parentItem.nodeAs<GeoDataLookAt>()->setAltitude( altitude );
-#ifdef DEBUG_TAGS
-            mDebug () << "Parsed <" << kmlTag_altitude << "> containing: " <<
-            altitude << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
+        } else if ( parentItem.is<GeoDataCamera>() ){
+            parentItem.nodeAs<GeoDataCamera>()->setAltitude( altitude );
         } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
             parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitude( altitude );
         }

@@ -90,6 +90,7 @@ marble_add_test( AbstractFloatItemTest )
 marble_add_test( RenderPluginModelTest )
 
 ## GeoData Classes tests
+marble_add_test( TestCamera )
 marble_add_test( TestGeoData )                  # Check parent, nodetype
 marble_add_test( TestGeoDataCoordinates )       # Check coordinates specifics
 marble_add_test( TestGeoDataLatLonAltBox )      # Check boxen specifics

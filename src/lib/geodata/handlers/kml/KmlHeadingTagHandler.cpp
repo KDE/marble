@@ -25,6 +25,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"
+#include "GeoDataCamera.h"
 #include "GeoParser.h"
 
 namespace Marble
@@ -39,12 +40,17 @@ GeoNode* KmlheadingTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if ( parentItem.represents( kmlTag_IconStyle ) ) {
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_heading << "> containing: " << parser.readElementText().trimmed().toFloat()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
+    int const heading = parser.readElementText().toInt();
+    if ( heading >= 0 && heading <= 360 ) {
+        if ( parentItem.represents( kmlTag_IconStyle ) ) {
+            parentItem.nodeAs<GeoDataIconStyle>()->setHeading( heading );
+        } else if ( parentItem.represents( kmlTag_Camera ) ) {
+            parentItem.nodeAs<GeoDataCamera>()->setHeading( heading );
+        }
+    } else {
+        mDebug() << "Invalid heading value " << heading << ", must be withing 0..360. Using 0 instead.";
     }
+
     return 0;
 }
 

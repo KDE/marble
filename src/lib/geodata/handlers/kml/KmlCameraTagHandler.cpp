@@ -31,9 +31,15 @@ GeoNode *KmlCameraTagHandler::parse( GeoParser & parser ) const
     Q_ASSERT (parser.isStartElement()
               && parser.isValidElement( kmlTag_Camera ) );
 
-    /** @todo check parent, set new camera as view and return it */
+    GeoDataCamera* camera = 0;
+    GeoStackItem parentItem = parser.parentElement();
 
-    return 0;
+    if ( parentItem.is<GeoDataFeature>() ) {
+        camera = new GeoDataCamera;
+        parentItem.nodeAs<GeoDataFeature>()->setAbstractView( camera );
+    }
+
+    return camera;
 }
 
 }

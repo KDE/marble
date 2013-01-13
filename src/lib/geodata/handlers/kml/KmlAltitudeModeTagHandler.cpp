@@ -31,6 +31,7 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTrack.h"
+#include "GeoDataCamera.h"
 
 #include "GeoParser.h"
 
@@ -49,33 +50,27 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     AltitudeMode mode;
     if( content == QString( "relativeToGround" ) ) {
         mode = RelativeToGround;
-    }
-    else if( content == QString( "absolute" ) ) {
+    } else if( content == QString( "absolute" ) ) {
         mode = Absolute;
-    }
-    else { // clampToGround is Standard
+    } else { // clampToGround is Standard
         mode = ClampToGround;
     }
 
     GeoStackItem parentItem = parser.parentElement();
 
     if ( parentItem.is<GeoDataPlacemark>()
-         && parentItem.represents( kmlTag_Point ) )
-    {
+         && parentItem.represents( kmlTag_Point ) ) {
          parentItem.nodeAs<GeoDataPlacemark>()->geometry()->setAltitudeMode( mode );
-    }
-    else if ( parentItem.is<GeoDataPoint>() )
-    {
+    } else if ( parentItem.is<GeoDataPoint>() ) {
         parentItem.nodeAs<GeoDataPoint>()->setAltitudeMode( mode );
-    }
-    else if ( parentItem.is<GeoDataLatLonAltBox>() ) {
+    } else if ( parentItem.is<GeoDataLatLonAltBox>() ) {
         parentItem.nodeAs<GeoDataLatLonAltBox>()->setAltitudeMode( mode );
-    }
-    else if ( parentItem.is<GeoDataTrack>() ) {
+    } else if ( parentItem.is<GeoDataTrack>() ) {
         parentItem.nodeAs<GeoDataTrack>()->setAltitudeMode( mode );
-    }
-    else if ( parentItem.is<GeoDataGroundOverlay>() ) {
+    } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
         parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitudeMode( mode );
+    } else if ( parentItem.is<GeoDataCamera>() ) {
+        parentItem.nodeAs<GeoDataCamera>()->setAltitudeMode( mode );
     }
 
 #ifdef DEBUG_TAGS
