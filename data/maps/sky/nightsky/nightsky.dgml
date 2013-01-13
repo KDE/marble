@@ -13,7 +13,7 @@
             <visible> true </visible>
 
             <!-- The description allows for rich text of course: -->
-            <description><![CDATA[<p>The <i>night sky</i>.</p><p> displays the stars and constellations at night.</p>]]></description>
+            <description><![CDATA[<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at night.</p>]]></description>
 
             <zoom>
                 <minimum>   900  </minimum>
