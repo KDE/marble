@@ -16,7 +16,11 @@
 #include <QHash>
 #include <QPair>
 
+#include "../../src/lib/MarbleGlobal.h"
+
 #include <cmath>
+
+using namespace Marble;
 
 int main(int argc, char *argv[])
 {
@@ -38,6 +42,13 @@ int main(int argc, char *argv[])
         << "        <LineStyle> \n"
         << "            <color>ffff0000</color> \n"
         << "        </LineStyle> \n"
+        << "    </Style> \n"
+        << "    <Style id=\"iconStyle\"> \n"
+        << "        <IconStyle> \n"
+        << "            <Icon> \n"
+        << "                <href></href> \n"
+        << "            </Icon> \n"
+        << "        </IconStyle> \n"
         << "    </Style> \n";
 
     QFile starsData( "catalog.dat" );
@@ -64,7 +75,7 @@ int main(int argc, char *argv[])
             double raMM = recString.mid( 2, 2 ).toDouble();
             double raSS = recString.mid( 4, 2 ).toDouble();
 
-            longitude = ( raHH + raMM / 60.0  +raSS / 3600.0 ) * 15.0 - 180.0;
+            longitude = ( raHH + raMM / 60.0 + raSS / 3600.0 ) * 15.0 - 180.0;
 
             QString decString = starsLine.mid( 83, 7 );
             double deSign = ( decString.mid( 0, 1 ) == "-" ) ? -1.0 : 1.0;
@@ -72,9 +83,9 @@ int main(int argc, char *argv[])
             double deMM = decString.mid( 3, 2 ).toDouble();
             double deSS = decString.mid( 5, 2 ).toDouble();
 
-            double deValue = deSign * ( deHH + deMM / 60.0 + deSS / 3600.0 ) / 180.0 * M_PI;
+            double deValue = deSign * ( deHH + deMM / 60.0 + deSS / 3600.0 );
 
-            latitude = deValue * 180.0 / M_PI;
+            latitude = deValue;
 
             pair.first = longitude;
             pair.second = latitude;
@@ -113,6 +124,10 @@ int main(int argc, char *argv[])
                 << "                <coordinates> \n";
 
             starIndexes = indexList.split( " " );
+            QList<qreal> x;
+            QList<qreal> y;
+            QList<qreal> z;
+            int numberOfStars = 0;
             for ( int i = 0; i < starIndexes.size(); ++i ) {
                 if ( starIndexes.at(i) == "-1" ) {
                     out << "                </coordinates> \n"
@@ -143,6 +158,10 @@ int main(int argc, char *argv[])
                 QHash<int, QPair<qreal, qreal> >::const_iterator j = hash.find( starIndexes.at(i).toInt() );
                 while( j != hash.end() && j.key() == starIndexes.at(i).toInt() ) {
                     out << "                " << j.value().first << "," << j.value().second << " \n";
+                    x.append( cos( j.value().first * DEG2RAD ) * cos( j.value().second * DEG2RAD ) );
+                    y.append( sin( j.value().first * DEG2RAD ) * cos( j.value().second * DEG2RAD ) );
+                    z.append( sin( j.value().second * DEG2RAD ) );
+                    ++numberOfStars;
                     ++j;
                 }
             }
@@ -150,6 +169,30 @@ int main(int argc, char *argv[])
             out << "                </coordinates> \n"
                 << "            </LineString> \n"
                 << "        </MultiGeometry> \n"
+                << "    </Placemark> \n";
+
+            qreal xMean = 0.0;
+            qreal yMean = 0.0;
+            qreal zMean = 0.0;
+            for ( int s = 0; s < numberOfStars; ++s ) {
+                xMean += x.at(s);
+                yMean += y.at(s);
+                zMean += z.at(s);
+            }
+
+            xMean = xMean / numberOfStars;
+            yMean = yMean / numberOfStars;
+            zMean = zMean / numberOfStars;
+
+            qreal labelLongitude = RAD2DEG * atan2( yMean, xMean );
+            qreal labelLatitude = RAD2DEG * atan2( zMean, sqrt( xMean * xMean + yMean * yMean ) );
+
+            out << "    <Placemark> \n"
+                << "        <styleUrl>#iconStyle</styleUrl> \n"
+                << "        <name>" << name << "</name> \n"
+                << "        <Point> \n"
+                << "            <coordinates>" << labelLongitude << "," << labelLatitude << "</coordinates> \n"
+                << "        </Point> \n"
                 << "    </Placemark> \n";
         }
     }
