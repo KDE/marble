@@ -118,6 +118,13 @@ void exportToKml()
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n"
         << "<kml xmlns=\"http://earth.google.com/kml/2.2\" hint=\"target=sky\"> \n"
         << "<Document> \n"
+        << "   <Style id=\"mag-1\"> \n"
+        << "       <IconStyle> \n"
+        << "           <Icon> \n"
+        << "               <href>star_-1_white.png</href> \n"
+        << "           </Icon> \n"
+        << "       </IconStyle> \n"
+        << "   </Style> \n"
         << "   <Style id=\"mag0\"> \n"
         << "       <IconStyle> \n"
         << "           <Icon> \n"
@@ -166,13 +173,6 @@ void exportToKml()
         << "               <href>star_6_white.png</href> \n"
         << "           </Icon> \n"
         << "       </IconStyle> \n"
-        << "   </Style> \n"
-        << "   <Style id=\"mag7\"> \n"
-        << "       <IconStyle> \n"
-        << "           <Icon> \n"
-        << "               <href>star_7_white.png</href> \n"
-        << "           </Icon> \n"
-        << "       </IconStyle> \n"
         << "   </Style> \n";
 
     QFile data("catalog.dat");
@@ -195,44 +195,58 @@ void exportToKml()
             double deMM = decString.mid( 3, 2 ).toDouble();
             double deSS = decString.mid( 5, 2 ).toDouble();
 
-            double deValue = deSign * ( deHH + deMM / 60.0 + deSS / 3600.0 ) / 180.0 * M_PI;
+            double deValue = deSign * ( deHH + deMM / 60.0 + deSS / 3600.0 );
 
-            qreal latitude = deValue * 180.0 / M_PI;
+            qreal latitude = deValue;
 
             QString magString = line.mid( 102, 5 );
             double magValue = magString.toDouble();
 
             QString styleId;
             if ( magValue < -1 ) {
-                styleId = "mag0";
+                styleId = "mag-1";
             }
             else if ( magValue < 0 ) {
-                styleId = "mag1";
+                styleId = "mag0";
             }
             else if ( magValue < 1 ) {
-                styleId = "mag2";
+                styleId = "mag1";
             }
             else if ( magValue < 2 ) {
-                styleId = "mag3";
+                styleId = "mag2";
             }
             else if ( magValue < 3 ) {
-                styleId = "mag4";
+                styleId = "mag3";
             }
             else if ( magValue < 4 ) {
-                styleId = "mag5";
+                styleId = "mag4";
             }
             else if ( magValue < 5 ) {
-                styleId = "mag6";
+                styleId = "mag5";
             }
             else if ( magValue < 6 ) {
-                styleId = "mag7";
+                styleId = "mag6";
             }
             else {
-                styleId = "mag7";
+                styleId = "mag6";
             }
 
-            out << "   <Placemark> \n"
-                << "       <styleUrl>#" << styleId << "</styleUrl> \n"
+            out << "   <Placemark> \n";
+
+            QString name = line.mid( 7, 3 );
+            if ( name == "Alp" ) {
+                out << "        <name>" << QString::fromUtf8( "α" ) << "</name> \n";
+            } else if ( name == "Bet" ) {
+                out << "        <name>" << QString::fromUtf8( "β" ) << "</name> \n";
+            } else if ( name == "Gam" ) {
+                out << "        <name>" << QString::fromUtf8( "γ" ) << "</name> \n";
+            } else if ( name == "Del" ) {
+                out << "        <name>" << QString::fromUtf8( "δ" ) << "</name> \n";
+            } else if ( name == "Eps" ) {
+                out << "        <name>" << QString::fromUtf8( "ε" ) << "</name> \n";
+            }
+
+            out << "       <styleUrl>#" << styleId << "</styleUrl> \n"
                 << "       <Point> \n"
                 << "           <coordinates>" << longitude << "," << latitude << ",0" << "</coordinates> \n"
                 << "       </Point> \n"
