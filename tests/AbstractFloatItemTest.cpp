@@ -57,6 +57,9 @@ class AbstractFloatItemTest : public QObject
     void newInstance_data();
     void newInstance();
 
+    void setSettings_data();
+    void setSettings();
+
  private:
     MarbleModel m_model;
     QList<const AbstractFloatItem *> m_factories;
@@ -86,6 +89,7 @@ void AbstractFloatItemTest::defaultConstructor()
     QCOMPARE( item.position(), QPointF( 10, 10 ) );
     QCOMPARE( item.visible(), true );
     QCOMPARE( item.positionLocked(), true );
+    QVERIFY( item.settings().contains( "position" ) );
 }
 
 void AbstractFloatItemTest::newInstance_data()
@@ -104,6 +108,38 @@ void AbstractFloatItemTest::newInstance()
     RenderPlugin *const instance = factory->newInstance( &m_model );
 
     QVERIFY( qobject_cast<AbstractFloatItem *>( instance ) != 0 );
+    QVERIFY( instance->settings().contains( "position" ) );
+
+    delete instance;
+}
+
+void AbstractFloatItemTest::setSettings_data()
+{
+    QTest::addColumn<const AbstractFloatItem *>( "factory" );
+
+    foreach ( const AbstractFloatItem *factory, m_factories ) {
+        QTest::newRow( factory->nameId().toAscii() ) << factory;
+    }
+}
+
+void AbstractFloatItemTest::setSettings()
+{
+    QFETCH( const AbstractFloatItem *, factory );
+
+    RenderPlugin *const instance = factory->newInstance( &m_model );
+
+    const QPointF position( 1.318, 4.005 );
+
+    instance->restoreDefaultSettings();
+
+    QVERIFY( instance->settings().value( "position", position ).toPointF() != position );
+
+    QHash<QString, QVariant> settings;
+    settings.insert( "position", position );
+
+    instance->setSettings( settings );
+
+    QCOMPARE( instance->settings().value( "position", QPointF( 0, 0 ) ).toPointF(), position );
 
     delete instance;
 }
