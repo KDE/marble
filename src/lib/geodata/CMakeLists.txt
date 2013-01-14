@@ -25,6 +25,7 @@ geodata/handlers/kml/KmlDescriptionTagHandler.cpp
 geodata/handlers/kml/KmlDisplayModeTagHandler.cpp
 geodata/handlers/kml/KmlDisplayNameTagHandler.cpp
 geodata/handlers/kml/KmlDocumentTagHandler.cpp
+geodata/handlers/kml/KmlDurationTagHandler.cpp
 geodata/handlers/kml/KmldrawOrderTagHandler.cpp
 geodata/handlers/kml/KmlEastTagHandler.cpp
 geodata/handlers/kml/KmlElementDictionary.cpp
@@ -32,6 +33,8 @@ geodata/handlers/kml/KmlEndTagHandler.cpp
 geodata/handlers/kml/KmlExtendedDataTagHandler.cpp
 geodata/handlers/kml/KmlExtrudeTagHandler.cpp
 geodata/handlers/kml/KmlFillTagHandler.cpp
+geodata/handlers/kml/KmlFlyToModeTagHandler.cpp
+geodata/handlers/kml/KmlFlyToTagHandler.cpp
 geodata/handlers/kml/KmlFolderTagHandler.cpp
 geodata/handlers/kml/KmlGroundOverlayTagHandler.cpp
 geodata/handlers/kml/KmlHeadingTagHandler.cpp
@@ -141,6 +144,7 @@ geodata/writers/kml/KmlDataTagWriter.cpp
 geodata/writers/kml/KmlDocumentTagWriter.cpp
 geodata/writers/kml/KmlExtendedDataTagWriter.cpp
 geodata/writers/kml/KmlFolderTagWriter.cpp
+geodata/writers/kml/KmlFlyToTagWriter.cpp
 geodata/writers/kml/KmlGroundOverlayWriter.cpp
 geodata/writers/kml/KmlIconStyleTagWriter.cpp
 geodata/writers/kml/KmlLatLonAltBoxWriter.cpp

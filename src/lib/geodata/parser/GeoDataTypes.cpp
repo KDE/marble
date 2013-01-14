@@ -33,6 +33,7 @@ const char* GeoDataDataType = "GeoDataData";
 const char* GeoDataDocumentType = "GeoDataDocument";
 const char* GeoDataExtendedDataType = "GeoDataExtendedData";
 const char* GeoDataFeatureType = "GeoDataFeature";
+const char* GeoDataFlyToType = "GeoDataFlyTo";
 const char* GeoDataFolderType = "GeoDataFolder";
 const char* GeoDataGeometryType = "GeoDataGeometry";
 const char* GeoDataGroundOverlayType = "GeoDataGroundOverlay";

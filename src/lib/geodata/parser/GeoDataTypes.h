@@ -42,6 +42,7 @@ GEODATA_EXPORT extern const char* GeoDataDataType;
 GEODATA_EXPORT extern const char* GeoDataDocumentType;
 GEODATA_EXPORT extern const char* GeoDataExtendedDataType;
 GEODATA_EXPORT extern const char* GeoDataFeatureType;
+GEODATA_EXPORT extern const char* GeoDataFlyToType;
 GEODATA_EXPORT extern const char* GeoDataFolderType;
 GEODATA_EXPORT extern const char* GeoDataGeometryType;
 GEODATA_EXPORT extern const char* GeoDataGroundOverlayType;
