@@ -136,7 +136,7 @@ QList<PluginAuthor> EclipsesPlugin::pluginAuthors() const
 
 QIcon EclipsesPlugin::icon() const
 {
-    return QIcon();
+    return QIcon( ":res/eclipses.png" );
 }
 
 RenderPlugin::RenderType EclipsesPlugin::renderType() const
