@@ -27,6 +27,8 @@ class MARBLE_EXPORT ScreenOverlayGraphicsItem : public ScreenGraphicsItem
 public:
     explicit ScreenOverlayGraphicsItem( const GeoDataScreenOverlay *screenOverlay );
 
+    const GeoDataScreenOverlay* screenOverlay() const;
+
     void setProjection( const ViewportParams *viewport );
 
 protected:
