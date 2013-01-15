@@ -11,8 +11,14 @@
 #ifndef MARBLE_ECLIPSESITEM_H
 #define MARBLE_ECLIPSESITEM_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QDateTime>
+
+#include "GeoDataLineString.h"
+#include "GeoDataCoordinates.h"
+#include "GeoDataLinearRing.h"
+
+#include "ecl/eclsolar.h"
 
 namespace Marble
 {
@@ -31,28 +37,54 @@ public:
         AnnularTotalSun         = 6
     };
 
-    EclipsesItem( int index, QObject *parent = 0 );
+    EclipsesItem( EclSolar *ecl, int index, QObject *parent = 0 );
     ~EclipsesItem();
 
     int index() const;
 
-    void setDateTime( const QDateTime dateTime );
+    bool takesPlaceAt( const QDateTime &dateTime ) const;
+
     QDateTime dateTime() const;
 
-    void setPhase( EclipsesItem::EclipsePhase phase );
     EclipsesItem::EclipsePhase phase() const;
     QString phaseText() const;
 
-    void setMagnitude( double magnitude );
     double magnitude() const;
 
-    bool takesPlaceAt( const QDateTime &dateTime ) const;
+    const GeoDataCoordinates maxLocation();
+
+    const GeoDataLineString centralLine();
+
+    const GeoDataLinearRing umbra();
+    const GeoDataLineString southernPenUmbra();
+    const GeoDataLineString northernPenUmbra();
+
+    const QList<GeoDataLinearRing> sunBoundaries();
+
+    const QList<GeoDataCoordinates> shadowConeUmbra();
+    const QList<GeoDataCoordinates> shadowConePenUmbra();
+    const QList<GeoDataCoordinates> shadowCone60MagPenUmbra();
 
 private:
+    void initialize();
+    void calculate();
+
+    EclSolar *m_ecl;
     int m_index;
+    bool m_calculationsNeedUpdate;
     QDateTime m_dateTime;
     EclipsesItem::EclipsePhase m_phase;
     double m_magnitude;
+
+    GeoDataCoordinates m_maxLocation;
+    GeoDataLineString m_centralLine;
+    GeoDataLinearRing m_umbra;
+    GeoDataLineString m_southernPenUmbra;
+    GeoDataLineString m_northernPenUmbra;
+    QList<GeoDataCoordinates> m_shadowConeUmbra;
+    QList<GeoDataCoordinates> m_shadowConePenUmbra;
+    QList<GeoDataCoordinates> m_shadowCone60MagPenUmbra;
+    QList<GeoDataLinearRing> m_sunBoundaries;
 };
 
 }
