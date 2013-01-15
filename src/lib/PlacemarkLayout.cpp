@@ -161,13 +161,13 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
              this,               SLOT( requestStyleReset() ) );
 
     connect( &m_placemarkModel, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-             this, SLOT( setCacheData() ) );
+             this, SLOT( resetCacheData() ) );
     connect( &m_placemarkModel, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
-             this, SLOT( setCacheData() ) );
-    connect( &m_placemarkModel, SIGNAL( rowsRemoved(const QModelIndex&, int, int) ),
-             this, SLOT( setCacheData() ) );
+             this, SLOT( addPlacemarks(QModelIndex,int,int)) );
+    connect( &m_placemarkModel, SIGNAL( rowsAboutToBeRemoved(const QModelIndex&, int, int) ),
+             this, SLOT( removePlacemarks(QModelIndex,int,int)) );
     connect( &m_placemarkModel, SIGNAL( modelReset() ),
-             this, SLOT( setCacheData() ) );
+             this, SLOT( resetCacheData() ) );
 }
 
 PlacemarkLayout::~PlacemarkLayout()
@@ -265,25 +265,16 @@ int PlacemarkLayout::maxLabelHeight() const
 }
 
 /// feed an internal QMap of placemarks with TileId as key when model changes
-/// FIXME this method is too expensive on minor data change, e.g. when adding a point to a track (see bug 305195)
-void PlacemarkLayout::setCacheData()
+void PlacemarkLayout::addPlacemarks( QModelIndex parent, int first, int last )
 {
-    const int rowCount = m_placemarkModel.rowCount();
-
-    m_placemarkCache.clear();
-    requestStyleReset();
-    for ( int i = 0; i != rowCount; ++i )
-    {
-        const QModelIndex& index = m_placemarkModel.index( i, 0 );
-        if( !index.isValid() ) {
-            mDebug() << "invalid index!!!";
-            continue;
-        }
-
+    int size = m_placemarkModel.rowCount();
+    Q_ASSERT( first < size );
+    Q_ASSERT( last < size );
+    for( int i=first; i<=last; ++i ) {
+        QModelIndex index = m_placemarkModel.index( i, 0, parent );
+        Q_ASSERT( index.isValid() );
         const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-
         const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
-
         if ( !coordinates.isValid() ) {
             continue;
         }
@@ -292,6 +283,38 @@ void PlacemarkLayout::setCacheData()
         TileId key = TileId::fromCoordinates( coordinates, zoomLevel );
         m_placemarkCache[key].append( placemark );
     }
+    requestStyleReset();
+    emit repaintNeeded();
+}
+
+void PlacemarkLayout::removePlacemarks( QModelIndex parent, int first, int last )
+{
+    int size = m_placemarkModel.rowCount();
+    Q_ASSERT( first < size );
+    Q_ASSERT( last < size );
+    for( int i=first; i<=last; ++i ) {
+        QModelIndex index = m_placemarkModel.index( i, 0, parent );
+        Q_ASSERT( index.isValid() );
+        const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
+        if ( !coordinates.isValid() ) {
+            continue;
+        }
+
+        int zoomLevel = placemark->zoomLevel();
+        TileId key = TileId::fromCoordinates( coordinates, zoomLevel );
+        m_placemarkCache[key].removeAll( placemark );
+    }
+    emit repaintNeeded();
+}
+
+void PlacemarkLayout::resetCacheData()
+{
+    const int rowCount = m_placemarkModel.rowCount();
+
+    m_placemarkCache.clear();
+    requestStyleReset();
+    addPlacemarks( m_placemarkModel.index( 0, 0 ), 0, rowCount );
     emit repaintNeeded();
 }
 
