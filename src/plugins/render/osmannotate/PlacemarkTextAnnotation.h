@@ -27,8 +27,7 @@ public:
 
     //GeoGraphicsItem
     virtual QRect screenBounding() const;
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
     virtual QVariant itemChange(GeoGraphicsItemChange c, QVariant v);
 
     //TextAnnotation

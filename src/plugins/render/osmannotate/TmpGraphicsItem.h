@@ -42,7 +42,7 @@ enum GeoGraphicsItemChange {
     // same as above
 //    virtual void geoBounding(qreal angularResolution) = 0;
 
-    virtual void paint(GeoPainter * painter, ViewportParams * viewport, const QString &renderPos, GeoSceneLayer *layer) =0 ;
+    virtual void paint(GeoPainter * painter, const ViewportParams * viewport) =0;
 
     //Designed to recreated the QGraphicsItem::itemChange()
     virtual QVariant itemChange( GeoGraphicsItemChange change, QVariant Value );

@@ -25,11 +25,8 @@ GeoWidgetBubble::GeoWidgetBubble()
     m_hidden = true;
 }
 
-void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* viewport,
-                             const QString &renderPos, GeoSceneLayer *layer )
+void GeoWidgetBubble::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
     Q_UNUSED( viewport );
 
     if( !marbleWidgetInitalised && ( m_widget!=0)  ) {

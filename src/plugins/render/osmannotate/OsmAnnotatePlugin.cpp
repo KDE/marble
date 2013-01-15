@@ -39,11 +39,20 @@ namespace Marble
 {
 
 OsmAnnotatePlugin::OsmAnnotatePlugin()
-        : RenderPlugin(),
+        : RenderPlugin( 0 ),
           m_itemModel( 0 ),
           m_networkAccessManager( 0 ),
           m_isInitialized( false )
 {
+}
+
+OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
+        : RenderPlugin(model),
+          m_itemModel( 0 ),
+          m_networkAccessManager( 0 ),
+          m_isInitialized( false )
+{
+    Q_UNUSED(model);
 }
 
 OsmAnnotatePlugin::~OsmAnnotatePlugin()
@@ -88,6 +97,22 @@ QString OsmAnnotatePlugin::nameId() const
 QString OsmAnnotatePlugin::description() const
 {
     return tr( "This is a render and interaction plugin used for annotating OSM data." );
+}
+
+QString OsmAnnotatePlugin::version() const
+{
+    return "1.0";
+}
+
+QString OsmAnnotatePlugin::copyrightYears() const
+{
+    return "2009";
+}
+
+QList<PluginAuthor> OsmAnnotatePlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>()
+            << PluginAuthor( "Andrew Manson", "<g.real.ate@gmail.com>" );
 }
 
 QIcon OsmAnnotatePlugin::icon () const
@@ -164,7 +189,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
             while( it.hasNext() ) {
                 GeoGraphicsItem* i = it.next();
                 if( i->flags() & GeoGraphicsItem::ItemIsVisible ) {
-                    i->paint( painter, viewport, renderPos, layer );
+                    i->paint( painter, viewport );
                 }
             }
         }
@@ -174,7 +199,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 
     while(i.hasNext()) {
         TmpGraphicsItem* tmp= i.next();
-        tmp->paint(painter, viewport, renderPos, layer);
+        tmp->paint(painter, viewport);
     }
 
     if( m_selectionBox.first->visible() ) {

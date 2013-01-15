@@ -27,8 +27,7 @@ class GeoWidgetBubble
 public:
     GeoWidgetBubble();
 
-    void paint(GeoPainter* p, ViewportParams* v, const QString& renderPos,
-               GeoSceneLayer* l);
+    void paint(GeoPainter* p, const ViewportParams* v);
 
     void setGeoWidget( QWidget* w );
     QWidget* getGeoWidget();

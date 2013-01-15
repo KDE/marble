@@ -24,8 +24,7 @@ public:
 
     void setGeometry( GeoDataPolygon g);
     
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 );
+    virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
     //FIXME Waiting to be removed
     virtual QRect screenBounding(){return QRect();}
 private:

@@ -47,9 +47,7 @@ QRect PlacemarkTextAnnotation::screenBounding() const
 }
 
 void PlacemarkTextAnnotation::paint( GeoPainter *painter,
-                            ViewportParams *viewport,
-                            const QString& renderPos,
-                            GeoSceneLayer * layer )
+                            const ViewportParams *viewport )
 {
 
 //    painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), true);
@@ -92,7 +90,7 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
 
     if( visable && !hidden ) {
         bubble->moveTo( QPoint( x, y ) );
-        bubble->paint( painter, viewport, renderPos, layer );
+        bubble->paint( painter, viewport );
     } else {
         bubble->setHidden(true );
     }
@@ -106,7 +104,7 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
 
     if( it.hasNext() ) {
         TmpGraphicsItem* p = it.next();
-        p->paint(painter, viewport, renderPos, layer );
+        p->paint(painter, viewport );
     }
 
 
