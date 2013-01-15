@@ -56,6 +56,18 @@ AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
       m_ttyGatherer( 0 ),
       m_fileGatherer( 0 ),
       m_action( 0 ),
+      m_useInternet( true ),
+      m_useTty( false ),
+      m_useFile( false ),
+      m_aprsHost( "rotate.aprs.net" ),
+      m_aprsPort( 10253 ),
+      m_tncTty( "/dev/ttyUSB0" ),
+      m_aprsFile(),
+      m_dumpTcpIp( false ),
+      m_dumpTty( false ),
+      m_dumpFile( false ),
+      m_fadeTime( 10 ),
+      m_hideTime( 45 ),
       m_configDialog( 0 ),
       ui_configWidget( 0 )
 {
@@ -199,30 +211,26 @@ void AprsPlugin::stopGatherers()
 void AprsPlugin::restartGatherers()
 {
     stopGatherers();
-    
-    if ( m_settings.value( "useInternet" ).toBool() ) {
 
+    if ( m_useInternet ) {
         m_tcpipGatherer =
-            new AprsGatherer( new AprsTCPIP( m_settings.value( "APRSHost" ).toString(),
-                                             m_settings.value( "APRSPort" ).toInt() ),
+            new AprsGatherer( new AprsTCPIP( m_aprsHost, m_aprsPort ),
                               &m_objects, m_mutex, &m_filter);
         m_tcpipGatherer->setSeenFrom( GeoAprsCoordinates::FromTCPIP );
-        m_tcpipGatherer->setDumpOutput( m_settings.value( "TCPIPDump" ).toBool() );
-
+        m_tcpipGatherer->setDumpOutput( m_dumpTcpIp );
 
         m_tcpipGatherer->start();
         mDebug() << "started TCPIP gatherer";
     }
 
 #ifdef HAVE_QEXTSERIALPORT
-    if ( m_settings.value( "useTTY" ).toBool() ) {
-
+    if ( m_useTty ) {
         m_ttyGatherer =
-            new AprsGatherer( new AprsTTY( m_settings.value( "TNCTTY" ).toString() ),
+            new AprsGatherer( new AprsTTY( m_tncTty ),
                               &m_objects, m_mutex, NULL);
 
         m_ttyGatherer->setSeenFrom( GeoAprsCoordinates::FromTTY );
-        m_ttyGatherer->setDumpOutput( m_settings.value( "TTYDump" ).toBool() );
+        m_ttyGatherer->setDumpOutput( m_dumpTty );
 
         m_ttyGatherer->start();
         mDebug() << "started TTY gatherer";
@@ -230,13 +238,13 @@ void AprsPlugin::restartGatherers()
 #endif
 
     
-    if ( m_settings.value( "useFile" ).toBool() ) {
+    if ( m_useFile ) {
         m_fileGatherer = 
-            new AprsGatherer( new AprsFile( m_settings.value( "File" ).toString() ),
+            new AprsGatherer( new AprsFile( m_aprsFile ),
                               &m_objects, m_mutex, NULL);
 
         m_fileGatherer->setSeenFrom( GeoAprsCoordinates::FromFile );
-        m_fileGatherer->setDumpOutput( m_settings.value( "FileDump" ).toBool() );
+        m_fileGatherer->setDumpOutput( m_dumpFile );
 
         m_fileGatherer->start();
         mDebug() << "started File gatherer";
@@ -284,77 +292,71 @@ void AprsPlugin::readSettings()
 #endif
 
     // Connect to the net?
-    if ( m_settings.value( "useInternet" ).toBool() )
+    if ( m_useInternet )
         ui_configWidget->m_internetBox->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_internetBox->setCheckState( Qt::Unchecked );
 
     // Connection Information
-    ui_configWidget->m_serverName->setText( m_settings.value( "APRSHost" ).toString() );
-    ui_configWidget->m_serverPort->setText( m_settings.value( "APRSPort" ).toString() );
+    ui_configWidget->m_serverName->setText( m_aprsHost );
+    ui_configWidget->m_serverPort->setText( QString::number( m_aprsPort ) );
 
     // Read from a TTY serial port?
-    if ( m_settings.value( "useTTY" ).toBool() )
+    if ( m_useTty )
         ui_configWidget->m_serialBox->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_serialBox->setCheckState( Qt::Unchecked );
 
     // Serial port to use
-    ui_configWidget->m_ttyName->setText( m_settings.value( "TNCTTY" ).toString() );
+    ui_configWidget->m_ttyName->setText( m_tncTty );
 
     // Read from a File?
-    if ( m_settings.value( "useFile" ).toBool() )
+    if ( m_useFile )
         ui_configWidget->m_useFile->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_useFile->setCheckState( Qt::Unchecked );
 
     // Serial port to use
-    ui_configWidget->m_fileName->setText( m_settings.value( "FileName" ).toString() );
+    ui_configWidget->m_fileName->setText( m_aprsFile );
 
     // Dumping settings
-    if ( m_settings.value( "TCPIPDump" ).toBool() )
+    if ( m_dumpTcpIp )
         ui_configWidget->m_tcpipdump->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_tcpipdump->setCheckState( Qt::Unchecked );
 
-    if ( m_settings.value( "TTYDump" ).toBool() )
+    if ( m_dumpTty )
         ui_configWidget->m_ttydump->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_ttydump->setCheckState( Qt::Unchecked );
 
-    if ( m_settings.value( "FileDump" ).toBool() )
+    if ( m_dumpFile )
         ui_configWidget->m_filedump->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_filedump->setCheckState( Qt::Unchecked );
 
     // display settings
-    ui_configWidget->m_fadetime->setText( m_settings.value( "fadeTime" ).toString() );
-    ui_configWidget->m_hidetime->setText( m_settings.value( "hideTime" ).toString() );
+    ui_configWidget->m_fadetime->setText( QString::number( m_fadeTime ) );
+    ui_configWidget->m_hidetime->setText( QString::number( m_hideTime ) );
 }
 
 
 void AprsPlugin::writeSettings()
 {
-    m_settings.insert( "useInternet", 
-                       ui_configWidget->m_internetBox->checkState() == Qt::Checked );
-    
-    m_settings.insert( "useTTY",
-                       ui_configWidget->m_serialBox->checkState() == Qt::Checked );
+    m_useInternet = ui_configWidget->m_internetBox->checkState() == Qt::Checked;
+    m_useTty = ui_configWidget->m_serialBox->checkState() == Qt::Checked;
+    m_useFile = ui_configWidget->m_useFile->checkState() == Qt::Checked;
 
-    m_settings.insert( "useFile",
-                       ui_configWidget->m_useFile->checkState() == Qt::Checked );
+    m_aprsHost = ui_configWidget->m_serverName->text();
+    m_aprsPort = ui_configWidget->m_serverPort->text().toInt();
+    m_tncTty = ui_configWidget->m_ttyName->text();
 
-    
-    m_settings.insert( "APRSHost",  ui_configWidget->m_serverName->text() );
-    m_settings.insert( "APRSPort",  ui_configWidget->m_serverPort->text() );
-    m_settings.insert( "TNCTTY",    ui_configWidget->m_ttyName->text() );
+    m_dumpTcpIp = ui_configWidget->m_tcpipdump->checkState() == Qt::Checked;
+    m_dumpTty = ui_configWidget->m_ttydump->checkState() == Qt::Checked;
+    m_dumpFile = ui_configWidget->m_filedump->checkState() == Qt::Checked;
 
-    m_settings.insert( "TCPIPDump", ui_configWidget->m_tcpipdump->checkState() == Qt::Checked );
-    m_settings.insert( "TTYDump",   ui_configWidget->m_ttydump->checkState() == Qt::Checked );
-    m_settings.insert( "FileDump",   ui_configWidget->m_filedump->checkState() == Qt::Checked );
-
-    m_settings.insert( "fadeTime",  ui_configWidget->m_fadetime->text() );
-    m_settings.insert( "hideTime",  ui_configWidget->m_hidetime->text() );
+    m_fadeTime = ui_configWidget->m_fadetime->text().toInt();
+    m_hideTime = ui_configWidget->m_hidetime->text().toInt();
 
     restartGatherers();
     emit settingsChanged( nameId() );
@@ -364,9 +366,18 @@ QHash<QString,QVariant> AprsPlugin::settings() const
 {
     QHash<QString, QVariant> result = RenderPlugin::settings();
 
-    foreach ( const QString &key, m_settings.keys() ) {
-        result.insert( key, m_settings[key] );
-    }
+    result.insert( "useInternet", true );
+    result.insert( "useTTY", false );
+    result.insert( "useFile", false );
+    result.insert( "APRSHost", "rotate.aprs.net" );
+    result.insert( "APRSPort", "10253" );
+    result.insert( "TNCTTY", "/dev/ttyUSB0" );
+    result.insert( "FileName", "" );
+    result.insert( "TCPIPDump", false );
+    result.insert( "TTYDump", false );
+    result.insert( "FileDump", false );
+    result.insert( "fadeTime", 10 );
+    result.insert( "hideTime", 45 );
 
     return result;
 }
@@ -375,41 +386,21 @@ void AprsPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
-    m_settings = settings;
+    m_useInternet =  settings.value( "useInternet", true ).toBool();
+    m_useTty = settings.value( "useTTY", false ).toBool();
+    m_useFile = settings.value( "useFile", false ).toBool();
 
-    // Check if all fields are filled and fill them with default values.
-    // Information
-    if ( !m_settings.contains( "useInternet" ) ) {
-        m_settings.insert( "useInternet", true );
-    }
-    if ( !m_settings.contains( "useTTY" ) ) {
-        m_settings.insert( "useTTY", false );
-    }
+    m_aprsHost = settings.value( "APRSHost", "rotate.aprs.net" ).toString();
+    m_aprsPort = settings.value( "APRSPort", 10253 ).toInt();
+    m_tncTty = settings.value( "TNCTTY", "/dev/ttyUSB0" ).toString();
+    m_aprsFile = settings.value( "FileName", "" ).toString();
 
-    if ( !m_settings.contains( "APRSHost" ) ) {
-        m_settings.insert( "APRSHost", "rotate.aprs.net" );
-    }
-    if ( !m_settings.contains( "APRSPort" ) ) {
-        m_settings.insert( "APRSPort", "10253" );
-    }
-    if ( !m_settings.contains( "TNCTTY" ) ) {
-        m_settings.insert( "TNCTTY", "/dev/ttyUSB0" );
-    }
+    m_dumpTcpIp = settings.value( "TCPIPDump", false ).toBool();
+    m_dumpTty = settings.value( "TTYDump", false ).toBool();
+    m_dumpFile = settings.value( "FileDump", false ).toBool();
 
-    if ( !m_settings.contains( "TCPIPDump" ) ) {
-        m_settings.insert( "TCPIPDump", false );
-    }
-    if ( !m_settings.contains( "TTYDump" ) ) {
-        m_settings.insert( "TTYDump", false );
-    }
-
-    if ( !m_settings.contains( "fadeTime" ) ) {
-        m_settings.insert( "fadeTime", 10 );
-    }
-
-    if ( !m_settings.contains( "hideTime" ) ) {
-        m_settings.insert( "hideTime", 45 );
-    }
+    m_fadeTime = settings.value( "fadeTime", 10 ).toInt();
+    m_hideTime = settings.value( "hideTime", 45 ).toInt();
 
     readSettings();
     emit settingsChanged( nameId() );
@@ -425,8 +416,8 @@ bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    int fadetime = m_settings.value( "fadeTime" ).toInt() * 60000;
-    int hidetime = m_settings.value( "hideTime" ).toInt() * 60000;
+    int fadetime = m_fadeTime * 60000;
+    int hidetime = m_hideTime * 60000;
 
     painter->save();
 

@@ -46,6 +46,8 @@ public:
     /** Toggle muting (neither sound nor voice output) */
     void setMuted( bool muted );
 
+    bool isMuted() const;
+
     /**
       * Change the speaker to use.
       * @param speaker A directory name in audio/speakers in Marble's data path. This directory
@@ -63,6 +65,8 @@ public:
       * @see setMuted
       */
     void setSoundEnabled( bool enabled );
+
+    bool isSoundEnabled() const;
 
 private:
     Q_PRIVATE_SLOT( d, void audioOutputFinished() )

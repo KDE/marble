@@ -115,7 +115,11 @@ void RenderPluginTest::setVisible()
     QCOMPARE( instance->visible(), !visibleByDefault );
     QCOMPARE( instance->settings().value( "visible", visibleByDefault ).toBool(), !visibleByDefault );
 
-    instance->setVisible( visibleByDefault );
+    QHash<QString, QVariant> settings;
+    settings.insert( "visible", !visibleByDefault );
+
+    instance->setSettings( settings );
+    instance->setVisible( visibleByDefault ); // should also overwrite setting "visible"
 
     QCOMPARE( instance->visible(), visibleByDefault );
     QCOMPARE( instance->settings().value( "visible", !visibleByDefault ).toBool(), visibleByDefault );
@@ -145,7 +149,11 @@ void RenderPluginTest::setEnabled()
     QCOMPARE( instance->enabled(), !enabledByDefault );
     QCOMPARE( instance->settings().value( "enabled", enabledByDefault ).toBool(), !enabledByDefault );
 
-    instance->setEnabled( enabledByDefault );
+    QHash<QString, QVariant> settings;
+    settings.insert( "enabled", !enabledByDefault );
+
+    instance->setSettings( settings );
+    instance->setEnabled( enabledByDefault ); // should also overwrite setting "enabled"
 
     QCOMPARE( instance->enabled(), enabledByDefault );
     QCOMPARE( instance->settings().value( "enabled", !enabledByDefault ).toBool(), enabledByDefault );

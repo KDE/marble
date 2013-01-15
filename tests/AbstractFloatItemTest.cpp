@@ -60,6 +60,9 @@ class AbstractFloatItemTest : public QObject
     void setSettings_data();
     void setSettings();
 
+    void setPosition_data();
+    void setPosition();
+
  private:
     MarbleModel m_model;
     QList<const AbstractFloatItem *> m_factories;
@@ -126,13 +129,16 @@ void AbstractFloatItemTest::setSettings()
 {
     QFETCH( const AbstractFloatItem *, factory );
 
-    RenderPlugin *const instance = factory->newInstance( &m_model );
+    AbstractFloatItem *const instance = qobject_cast<AbstractFloatItem *>( factory->newInstance( &m_model ) );
+
+    QVERIFY( instance != 0 );
 
     const QPointF position( 1.318, 4.005 );
 
     instance->restoreDefaultSettings();
 
     QVERIFY( instance->settings().value( "position", position ).toPointF() != position );
+    QVERIFY( instance->position() != position );
 
     QHash<QString, QVariant> settings;
     settings.insert( "position", position );
@@ -140,6 +146,41 @@ void AbstractFloatItemTest::setSettings()
     instance->setSettings( settings );
 
     QCOMPARE( instance->settings().value( "position", QPointF( 0, 0 ) ).toPointF(), position );
+    QCOMPARE( instance->position(), position );
+
+    delete instance;
+}
+
+void AbstractFloatItemTest::setPosition_data()
+{
+    QTest::addColumn<const AbstractFloatItem *>( "factory" );
+
+    foreach ( const AbstractFloatItem *factory, m_factories ) {
+        QTest::newRow( factory->nameId().toAscii() ) << factory;
+    }
+}
+
+void AbstractFloatItemTest::setPosition()
+{
+    QFETCH( const AbstractFloatItem *, factory );
+
+    AbstractFloatItem *const instance = qobject_cast<AbstractFloatItem *>( factory->newInstance( &m_model ) );
+
+    QVERIFY( instance != 0 );
+
+    const QPointF position( 1.318, 4.005 );
+
+    QVERIFY( instance->position() != position );
+    QVERIFY( instance->settings().value( "position", position ).toPointF() != position );
+
+    QHash<QString, QVariant> settings;
+    settings.insert( "position", QPointF( 0, 0 ) );
+
+    instance->setSettings( settings );
+    instance->setPosition( position ); // position of settings should be overwritten
+
+    QCOMPARE( instance->position(), position );
+    QCOMPARE( instance->settings().value( "position", QPointF( 1, 0 ) ).toPointF(), position );
 
     delete instance;
 }

@@ -37,6 +37,7 @@ CrosshairsPlugin::CrosshairsPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
       m_isInitialized( false ),
       m_svgobj( 0 ),
+      m_themeIndex( 0 ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
@@ -139,9 +140,7 @@ QHash<QString,QVariant> CrosshairsPlugin::settings() const
 {
     QHash<QString, QVariant> result = RenderPlugin::settings();
 
-    foreach ( const QString &key, m_settings.keys() ) {
-        result.insert( key, m_settings[key] );
-    }
+    result.insert( "theme", m_themeIndex );
 
     return result;
 }
@@ -150,7 +149,7 @@ void CrosshairsPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
-    m_settings = settings;
+    m_themeIndex = settings.value( "theme", 0 ).toInt();
 
     readSettings();
 }
@@ -158,13 +157,12 @@ void CrosshairsPlugin::setSettings( const QHash<QString,QVariant> &settings )
 
 void CrosshairsPlugin::readSettings()
 {
-    int index = m_settings.value( "theme", 0 ).toInt();
-    if ( m_uiConfigWidget && index >= 0 && index < m_uiConfigWidget->m_themeList->count() ) {
-        m_uiConfigWidget->m_themeList->setCurrentRow( index );
+    if ( m_uiConfigWidget && m_themeIndex >= 0 && m_themeIndex < m_uiConfigWidget->m_themeList->count() ) {
+        m_uiConfigWidget->m_themeList->setCurrentRow( m_themeIndex );
     }
 
     QString theme = ":/crosshairs-pointed.svg";
-    switch( index ) {
+    switch( m_themeIndex ) {
     case 1:
         theme = ":/crosshairs-gun1.svg";
         break;
@@ -188,7 +186,7 @@ void CrosshairsPlugin::readSettings()
 void CrosshairsPlugin::writeSettings()
 {
     if ( m_uiConfigWidget ) {
-        m_settings["theme"] = m_uiConfigWidget->m_themeList->currentRow();
+        m_themeIndex = m_uiConfigWidget->m_themeList->currentRow();
     }
     readSettings();
     emit settingsChanged( nameId() );

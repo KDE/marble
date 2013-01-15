@@ -310,33 +310,23 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
 {
     AbstractFloatItem::setSettings( settings );
 
-    m_settings = settings;
+    m_settings.insert( "width", settings.value( "width", m_defaultSize.toSize().width() ) );
+    m_settings.insert( "height", settings.value( "height", m_defaultSize.toSize().height() ) );
 
-    if( !m_settings.contains( "width" ) ) {
-        m_settings.insert( "width", m_defaultSize.toSize().width() );
-    }
-    if( !m_settings.contains( "height" ) ) {
-        m_settings.insert( "height", m_defaultSize.toSize().height() );
-    }
-    QString const worldmap = MarbleDirs::path( "svg/worldmap.svg" );
-    QStringList const planets = Planet::planetList();
-    if ( !m_settings.contains( "path_" + m_planetID[2] ) ) {
-        m_settings.insert( "path_" + m_planetID[2], worldmap );
-    }
-    if ( !m_settings.contains( "path_" + m_planetID[10] ) ) {
-        m_settings.insert( "path_" + m_planetID[10], MarbleDirs::path( "svg/lunarmap.svg" ) );
-    }
-    foreach( const QString& planet, planets ) {
-        if ( !m_settings.contains( "path_" + planet ) ) {
-            QString const planetMap = MarbleDirs::path( QString( "svg/%1map.svg" ).arg( planet ) );
-            QString const mapFile = planetMap.isEmpty() ? worldmap : planetMap;
-            m_settings.insert( "path_" + planet, mapFile );
+    foreach ( const QString& planet, Planet::planetList() ) {
+        QString mapFile = MarbleDirs::path( QString( "svg/%1map.svg" ).arg( planet ) );
+
+        if ( planet == "moon" ) {
+            mapFile = MarbleDirs::path( "svg/lunarmap.svg" );
         }
+        else if ( planet == "earth" || mapFile.isEmpty() ) {
+            mapFile = MarbleDirs::path( "svg/worldmap.svg" );
+        }
+
+        m_settings.insert( "path_" + planet, settings.value( "path_" + planet, mapFile ) );
     }
 
-    if( !m_settings.contains( "posColor" ) ) {
-        m_settings.insert( "posColor", QColor( Qt::white ).name() );
-    }
+    m_settings.insert( "posColor", settings.value( "posColor", QColor( Qt::white ).name() ) );
 
     m_target.clear(); // FIXME: forces execution of changeBackground() in paintContent()
 
