@@ -10,6 +10,7 @@
 
 #include "ElevationModel.h"
 #include "GeoSceneHead.h"
+#include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneTiled.h"

@@ -19,48 +19,43 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef MARBLE_GEOSCENEVECTOR_H
-#define MARBLE_GEOSCENEVECTOR_H
+#ifndef MARBLE_GEOSCENEABSTRACTDATASET_H
+#define MARBLE_GEOSCENEABSTRACTDATASET_H
 
 #include <QtCore/QString>
-#include <QtGui/QPen>
-#include <QtGui/QBrush>
 
-#include "GeoSceneAbstractDataset.h"
+#include <geodata_export.h>
+
+#include "GeoDocument.h"
 
 namespace Marble
 {
 
 /**
- * @short Vector dataset stored in a layer.
+ * @short Contents used inside a layer.
  */
-
-class GEODATA_EXPORT GeoSceneVector : public GeoSceneAbstractDataset
+class GEODATA_EXPORT GeoSceneAbstractDataset : public GeoNode
 {
  public:
-    explicit GeoSceneVector( const QString& name );
-    virtual const char* nodeType() const;
+    virtual ~GeoSceneAbstractDataset() {};
 
-    QString sourceFile() const;
-    void setSourceFile( const QString& sourceFile );
+    QString name() const;
 
-    QString feature() const;
-    void setFeature( const QString& feature );
+    QString fileFormat() const;
+    void setFileFormat( const QString& fileFormat );
 
-    QPen pen() const;
-    void setPen( const QPen& pen );
+    int expire() const;
+    void setExpire( int expire );
 
-    QBrush brush() const;
-    void setBrush( const QBrush& brush );
+    virtual QString type() = 0;
 
-    virtual QString type();
+ protected:
+    explicit GeoSceneAbstractDataset( const QString& name );
 
  private:
-    QString m_sourceFile;
-    QString m_feature;
-
-    QPen    m_pen;
-    QBrush  m_brush;
+    QString m_name;
+    QString m_fileFormat;
+    int     m_expire;
 };
 
 }

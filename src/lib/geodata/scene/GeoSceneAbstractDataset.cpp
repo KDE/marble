@@ -19,50 +19,45 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef MARBLE_GEOSCENEVECTOR_H
-#define MARBLE_GEOSCENEVECTOR_H
-
-#include <QtCore/QString>
-#include <QtGui/QPen>
-#include <QtGui/QBrush>
-
 #include "GeoSceneAbstractDataset.h"
+
+#include <limits>
 
 namespace Marble
 {
 
-/**
- * @short Vector dataset stored in a layer.
- */
+// FIXME: Filters are a Dataset.
 
-class GEODATA_EXPORT GeoSceneVector : public GeoSceneAbstractDataset
+GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
+    : m_name( name ),
+      m_fileFormat(),
+      m_expire( std::numeric_limits<int>::max() )
 {
- public:
-    explicit GeoSceneVector( const QString& name );
-    virtual const char* nodeType() const;
-
-    QString sourceFile() const;
-    void setSourceFile( const QString& sourceFile );
-
-    QString feature() const;
-    void setFeature( const QString& feature );
-
-    QPen pen() const;
-    void setPen( const QPen& pen );
-
-    QBrush brush() const;
-    void setBrush( const QBrush& brush );
-
-    virtual QString type();
-
- private:
-    QString m_sourceFile;
-    QString m_feature;
-
-    QPen    m_pen;
-    QBrush  m_brush;
-};
-
 }
 
-#endif
+QString GeoSceneAbstractDataset::name() const
+{
+    return m_name;
+}
+
+QString GeoSceneAbstractDataset::fileFormat() const
+{
+    return m_fileFormat;
+}
+
+void GeoSceneAbstractDataset::setFileFormat( const QString& fileFormat )
+{
+    m_fileFormat = fileFormat;
+}
+
+int GeoSceneAbstractDataset::expire() const
+{
+    return m_expire;
+}
+
+void GeoSceneAbstractDataset::setExpire( int expire )
+{
+    m_expire = expire;
+}
+
+}

@@ -21,46 +21,12 @@
 
 #include "GeoSceneLayer.h"
 
-#include <limits>
+#include "GeoSceneAbstractDataset.h"
 #include "GeoSceneFilter.h"
 #include "GeoSceneTypes.h"
 
 namespace Marble
 {
-
-// FIXME: Filters are a Dataset.
-
-GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
-    : m_name( name ),
-      m_fileFormat(),
-      m_expire( std::numeric_limits<int>::max() )
-{
-}
-
-QString GeoSceneAbstractDataset::name() const
-{
-    return m_name;
-}
-
-QString GeoSceneAbstractDataset::fileFormat() const
-{
-    return m_fileFormat;
-}
-
-void GeoSceneAbstractDataset::setFileFormat( const QString& fileFormat )
-{
-    m_fileFormat = fileFormat;
-}
-
-int GeoSceneAbstractDataset::expire() const
-{
-    return m_expire;
-}
-
-void GeoSceneAbstractDataset::setExpire( int expire )
-{
-    m_expire = expire;
-}
 
 class GeoSceneLayerPrivate
 {

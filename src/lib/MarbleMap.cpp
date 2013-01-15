@@ -51,6 +51,7 @@
 #include "GeoSceneFilter.h"
 #include "GeoSceneGeodata.h"
 #include "GeoSceneHead.h"
+#include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 #include "GeoScenePalette.h"
 #include "GeoSceneSettings.h"

@@ -21,7 +21,7 @@
 #include <QtCore/QVector>
 #include <QtCore/QSize>
 
-#include "GeoSceneLayer.h"
+#include "GeoSceneAbstractDataset.h"
 #include "MarbleGlobal.h"
 
 /**

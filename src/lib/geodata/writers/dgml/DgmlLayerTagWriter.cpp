@@ -12,6 +12,7 @@
 
 #include "GeoSceneTypes.h"
 #include "GeoWriter.h"
+#include "GeoSceneAbstractDataset.h"
 #include "GeoSceneLayer.h"
 #include "DgmlElementDictionary.h"
 
