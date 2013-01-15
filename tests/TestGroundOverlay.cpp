@@ -16,26 +16,9 @@
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
 #include <GeoDataGroundOverlay.h>
+#include <TestUtils.h>
 
 using namespace Marble;
-
-namespace QTest
-{
-
-bool qCompare(qreal val1, qreal val2, qreal epsilon, const char *actual, const char *expected, const char *file, int line)
-{
-    return ( qAbs( val1 - val2 ) < epsilon )
-        ? compare_helper( true, "COMPARE()", file, line )
-        : compare_helper( false, "Compared qreals are not the same", toString( val1 ), toString( val2 ), actual, expected, file, line );
-}
-
-}
-
-#define QFUZZYCOMPARE(actual, expected, epsilon) \
-do {\
-    if (!QTest::qCompare(actual, expected, epsilon, #actual, #expected, __FILE__, __LINE__))\
-        return;\
-} while (0)
 
 class TestGroundOverlay : public QObject
 {
@@ -48,22 +31,6 @@ private slots:
 void TestGroundOverlay::initTestCase()
 {
     MarbleDebug::enable = true;
-}
-
-GeoDataDocument *parseKml(const QString &content)
-{
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    //qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qFatal( "Could not parse data!" );
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-    return static_cast<GeoDataDocument*>( document );
 }
 
 void TestGroundOverlay::simpleParseTest()

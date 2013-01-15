@@ -14,8 +14,7 @@
 #include "BookmarkManager.h"
 #include "GeoDataFolder.h"
 #include "GeoDataTreeModel.h"
-
-#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
+#include <TestUtils.h>
 
 namespace Marble
 {

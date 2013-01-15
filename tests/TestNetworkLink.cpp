@@ -11,29 +11,12 @@
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
 
+#include <TestUtils.h>
 #include <GeoDataDocument.h>
 #include <GeoDataFolder.h>
 #include <GeoDataParser.h>
 #include <MarbleDebug.h>
 #include <GeoDataNetworkLink.h>
-
-namespace QTest
-{
-
-bool qCompare(qreal val1, qreal val2, qreal epsilon, const char *actual, const char *expected, const char *file, int line)
-{
-    return ( qAbs( val1 - val2 ) < epsilon )
-        ? compare_helper( true, "COMPARE()", file, line )
-        : compare_helper( false, "Compared qreals are not the same", toString( val1 ), toString( val2 ), actual, expected, file, line );
-}
-
-}
-
-#define QFUZZYCOMPARE(actual, expected, epsilon) \
-do {\
-    if (!QTest::qCompare(actual, expected, epsilon, #actual, #expected, __FILE__, __LINE__))\
-        return;\
-} while (0)
 
 using namespace Marble;
 
@@ -49,22 +32,6 @@ private slots:
 void TestNetworkLink::initTestCase()
 {
     MarbleDebug::enable = true;
-}
-
-GeoDataDocument *parseKml(const QString &content)
-{
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    //qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qFatal( "Could not parse data!" );
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-    return static_cast<GeoDataDocument*>( document );
 }
 
 void TestNetworkLink::simpleParseTest()

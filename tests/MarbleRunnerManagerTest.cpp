@@ -19,9 +19,7 @@
 #include "PluginManager.h"
 #include "GeoDataPlacemark.h"
 #include "routing/RouteRequest.h"
-
-#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
-#define addNamedRow(testName) QTest::newRow( QString("line %1: %2").arg( __LINE__ ).arg(testName).toAscii().data() )
+#include <TestUtils.h>
 
 Q_DECLARE_METATYPE( QList<Marble::GeoDataCoordinates> )
 

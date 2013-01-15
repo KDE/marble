@@ -13,8 +13,7 @@
 #include <QtTest/QTestEvent>
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
-
-#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
+#include <TestUtils.h>
 
 namespace Marble
 {
@@ -25,9 +24,9 @@ class MarbleWidgetTest: public QObject
 
 private slots:
     void initTestCase();// will be called before the first testfunction is executed.
-    void cleanupTestCase(){};// will be called after the last testfunction was executed.
-    void init(){};// will be called before each testfunction is executed.
-    void cleanup(){};// will be called after every testfunction.
+    void cleanupTestCase(){}// will be called after the last testfunction was executed.
+    void init(){}// will be called before each testfunction is executed.
+    void cleanup(){}// will be called after every testfunction.
 
     void mouseMove();
 

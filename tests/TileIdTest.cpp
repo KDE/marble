@@ -12,13 +12,7 @@
 #include <QtTest/QtTest>
 #include "TileId.h"
 #include "GeoDataCoordinates.h"
-
-namespace QTest
-{
-
-}
-
-#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
+#include <TestUtils.h>
 
 namespace Marble
 {

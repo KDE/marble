@@ -18,6 +18,7 @@
 #include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
 #include <GeoDataListStyle.h>
+#include <TestUtils.h>
 
 using namespace Marble;
 
@@ -33,22 +34,6 @@ private slots:
 void TestListStyle::initTestCase()
 {
     MarbleDebug::enable = true;
-}
-
-GeoDataDocument *parseKml(const QString &content)
-{
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    //qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qFatal( "Could not parse data!" );
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-    return static_cast<GeoDataDocument*>( document );
 }
 
 void TestListStyle::simpleParseTest()
