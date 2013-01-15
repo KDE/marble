@@ -23,6 +23,8 @@ namespace Marble
 class MARBLE_EXPORT GeoImageGraphicsItem : public GeoGraphicsItem
 {
 public:
+    explicit GeoImageGraphicsItem( const GeoDataFeature *feature );
+
     void setLatLonBox( const GeoDataLatLonBox& box );
 
     const GeoDataLatLonBox& latLonBox() const;

@@ -23,7 +23,7 @@ class GeoDataLineStyle;
 class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
 {
 public:
-    explicit GeoLineStringGraphicsItem( const GeoDataLineString *lineString );
+    explicit GeoLineStringGraphicsItem( const GeoDataFeature *feature, const GeoDataLineString *lineString );
 
     void setLineString( const GeoDataLineString* lineString );
 

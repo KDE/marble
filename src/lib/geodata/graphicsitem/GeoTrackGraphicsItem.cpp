@@ -16,8 +16,8 @@
 
 using namespace Marble;
 
-GeoTrackGraphicsItem::GeoTrackGraphicsItem( const GeoDataTrack *track )
-    : GeoLineStringGraphicsItem( new GeoDataLineString() )
+GeoTrackGraphicsItem::GeoTrackGraphicsItem( const GeoDataFeature *feature, const GeoDataTrack *track )
+    : GeoLineStringGraphicsItem( feature, new GeoDataLineString() )
 {
     setTrack( track );
 }

@@ -19,8 +19,8 @@
 namespace Marble
 {
 
-GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( const GeoDataLineString* lineString )
-        : GeoGraphicsItem(),
+GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( const GeoDataFeature *feature, const GeoDataLineString* lineString )
+        : GeoGraphicsItem( feature ),
           m_lineString( lineString )
 {
 }

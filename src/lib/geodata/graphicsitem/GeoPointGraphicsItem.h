@@ -22,7 +22,7 @@ namespace Marble
 class MARBLE_EXPORT GeoPointGraphicsItem : public GeoGraphicsItem
 {
 public:
-    GeoPointGraphicsItem();
+    explicit GeoPointGraphicsItem( const GeoDataFeature *feature );
 
     void setPoint( const GeoDataPoint& point );
     GeoDataPoint point() const;

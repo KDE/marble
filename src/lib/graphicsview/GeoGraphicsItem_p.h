@@ -23,9 +23,10 @@ namespace Marble
 class GeoGraphicsItemPrivate
 {
  public:
-    explicit GeoGraphicsItemPrivate()
+    explicit GeoGraphicsItemPrivate( const GeoDataFeature *feature )
         : m_zValue( 0 ),
           m_minZoomLevel( 0 ),
+          m_feature( feature ),
           m_latLonAltBox(),
           m_style( 0 )
     {
@@ -39,7 +40,7 @@ class GeoGraphicsItemPrivate
     GeoGraphicsItem::GeoGraphicsItemFlags m_flags;
 
     int m_minZoomLevel;
-    
+    const GeoDataFeature *m_feature;
     GeoDataLatLonAltBox m_latLonAltBox;
     const GeoDataStyle *m_style;
 };

@@ -20,8 +20,8 @@ class QString;
 namespace Marble
 {
 
+class GeoDataFeature;
 class GeoDataLatLonAltBox;
-
 class GeoGraphicsItemPrivate;
 class GeoDataStyle;
 class GeoPainter;
@@ -30,7 +30,7 @@ class ViewportParams;
 class MARBLE_EXPORT GeoGraphicsItem
 {
  public:
-    GeoGraphicsItem();
+    explicit GeoGraphicsItem( const GeoDataFeature *feature );
     virtual ~GeoGraphicsItem();
 
     enum GeoGraphicsItemFlag {
@@ -73,6 +73,11 @@ class MARBLE_EXPORT GeoGraphicsItem
      * Sets the minimum zoom level
      */
     void setMinZoomLevel( int zoomLevel );
+
+    /**
+     * Returns the placemark for that item.
+     */
+    const GeoDataFeature* feature() const;
 
     /**
      * Returns the bounding box covered by the item.

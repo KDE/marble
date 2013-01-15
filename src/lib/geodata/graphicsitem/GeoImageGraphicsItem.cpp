@@ -17,6 +17,11 @@
 namespace Marble
 {
 
+GeoImageGraphicsItem::GeoImageGraphicsItem( const GeoDataFeature *feature )
+    :GeoGraphicsItem( feature )
+{
+}
+
 void GeoImageGraphicsItem::setLatLonBox( const GeoDataLatLonBox &box )
 {
     p()->m_latLonAltBox = box;

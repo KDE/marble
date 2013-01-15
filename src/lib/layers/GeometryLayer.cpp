@@ -300,17 +300,17 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
     if ( object->nodeType() == GeoDataTypes::GeoDataLineStringType )
     {
         const GeoDataLineString* line = static_cast<const GeoDataLineString*>( object );
-        item = new GeoLineStringGraphicsItem( line );
+        item = new GeoLineStringGraphicsItem( placemark, line );
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataLinearRingType )
     {
         const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing*>( object );
-        item = new GeoPolygonGraphicsItem( ring );
+        item = new GeoPolygonGraphicsItem( placemark, ring );
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataPolygonType )
     {
         const GeoDataPolygon *poly = static_cast<const GeoDataPolygon*>( object );
-        item = new GeoPolygonGraphicsItem( poly );
+        item = new GeoPolygonGraphicsItem( placemark, poly );
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataMultiGeometryType  )
     {
@@ -333,7 +333,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
     else if ( object->nodeType() == GeoDataTypes::GeoDataTrackType )
     {
         const GeoDataTrack *track = static_cast<const GeoDataTrack*>( object );
-        item = new GeoTrackGraphicsItem( track );
+        item = new GeoTrackGraphicsItem( placemark, track );
     }
     if ( !item )
         return;
@@ -349,13 +349,13 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
     GeoGraphicsItem* item = 0;
     if ( overlay->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
         GeoDataGroundOverlay const * groundOverlay = static_cast<GeoDataGroundOverlay const *>( overlay );
-        GeoImageGraphicsItem *imageItem = new GeoImageGraphicsItem;
+        GeoImageGraphicsItem *imageItem = new GeoImageGraphicsItem( overlay );
         imageItem->setImageFile( groundOverlay->absoluteIconFile() );
         imageItem->setLatLonBox( groundOverlay->latLonBox() );
         item = imageItem;
     } else if ( overlay->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
         GeoDataPhotoOverlay const * photoOverlay = static_cast<GeoDataPhotoOverlay const *>( overlay );
-        GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem;
+        GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem( overlay );
         photoItem->setPhotoFile( photoOverlay->absoluteIconFile() );
         photoItem->setPoint( photoOverlay->point() );
         item = photoItem;
