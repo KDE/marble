@@ -371,6 +371,7 @@ else (APPLE AND QTONLY)
     GeoDataTreeModel.h
     geodata/data/GeoDataAbstractView.h
     geodata/data/GeoDataAccuracy.h
+    geodata/data/GeoDataBalloonStyle.h
     geodata/data/GeoDataColorStyle.h
     geodata/data/GeoDataContainer.h
     geodata/data/GeoDataCoordinates.h
@@ -388,6 +389,7 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataLinearRing.h
     geodata/data/GeoDataLineString.h
     geodata/data/GeoDataLineStyle.h
+    geodata/data/GeoDataListStyle.h
     geodata/data/GeoDataLod.h
     geodata/data/GeoDataLookAt.h
     geodata/data/GeoDataOverlay.h
