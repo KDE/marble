@@ -35,11 +35,13 @@ geodata/handlers/kml/KmlExtrudeTagHandler.cpp
 geodata/handlers/kml/KmlFillTagHandler.cpp
 geodata/handlers/kml/KmlFlyToModeTagHandler.cpp
 geodata/handlers/kml/KmlFlyToTagHandler.cpp
+geodata/handlers/kml/KmlFlyToViewTagHandler.cpp
 geodata/handlers/kml/KmlFolderTagHandler.cpp
 geodata/handlers/kml/KmlGroundOverlayTagHandler.cpp
 geodata/handlers/kml/KmlHeadingTagHandler.cpp
 geodata/handlers/kml/KmlHotSpotTagHandler.cpp
 geodata/handlers/kml/KmlHrefTagHandler.cpp
+geodata/handlers/kml/KmlHttpQueryTagHandler.cpp
 geodata/handlers/kml/KmlIconStyleTagHandler.cpp
 geodata/handlers/kml/KmlIconTagHandler.cpp
 geodata/handlers/kml/KmlInnerBoundaryIsTagHandler.cpp
@@ -52,6 +54,7 @@ geodata/handlers/kml/KmlLatLonBoxTagHandler.cpp
 geodata/handlers/kml/KmlLinearRingTagHandler.cpp
 geodata/handlers/kml/KmlLineStringTagHandler.cpp
 geodata/handlers/kml/KmlLineStyleTagHandler.cpp
+geodata/handlers/kml/KmlLinkTagHandler.cpp
 geodata/handlers/kml/KmlListItemTypeTagHandler.cpp
 geodata/handlers/kml/KmlListStyleTagHandler.cpp
 geodata/handlers/kml/KmlLodTagHandler.cpp
@@ -67,6 +70,7 @@ geodata/handlers/kml/KmlMinLodPixelsTagHandler.cpp
 geodata/handlers/kml/KmlMultiGeometryTagHandler.cpp
 geodata/handlers/kml/KmlMultiTrackTagHandler.cpp
 geodata/handlers/kml/KmlNameTagHandler.cpp
+geodata/handlers/kml/KmlNetworkLinkTagHandler.cpp
 geodata/handlers/kml/KmlNorthTagHandler.cpp
 geodata/handlers/kml/KmlOpenTagHandler.cpp
 geodata/handlers/kml/KmlOuterBoundaryIsTagHandler.cpp
@@ -80,6 +84,9 @@ geodata/handlers/kml/KmlPolygonTagHandler.cpp
 geodata/handlers/kml/KmlPolyStyleTagHandler.cpp
 geodata/handlers/kml/KmlPopTagHandler.cpp
 geodata/handlers/kml/KmlRangeTagHandler.cpp
+geodata/handlers/kml/KmlRefreshIntervalTagHandler.cpp
+geodata/handlers/kml/KmlRefreshModeTagHandler.cpp
+geodata/handlers/kml/KmlRefreshVisibilityTagHandler.cpp
 geodata/handlers/kml/KmlRegionTagHandler.cpp
 geodata/handlers/kml/KmlRoleTagHandler.cpp
 geodata/handlers/kml/KmlRollTagHandler.cpp
@@ -107,10 +114,14 @@ geodata/handlers/kml/KmlTimeStampTagHandler.cpp
 geodata/handlers/kml/KmlTourTagHandler.cpp
 geodata/handlers/kml/KmlTrackTagHandler.cpp
 geodata/handlers/kml/KmlValueTagHandler.cpp
+geodata/handlers/kml/KmlViewBoundScaleTagHandler.cpp
 geodata/handlers/kml/KmlVisibilityTagHandler.cpp
 geodata/handlers/kml/KmlWestTagHandler.cpp
 geodata/handlers/kml/KmlWhenTagHandler.cpp
 geodata/handlers/kml/KmlWidthTagHandler.cpp
+geodata/handlers/kml/KmlViewFormatTagHandler.cpp
+geodata/handlers/kml/KmlViewRefreshModeTagHandler.cpp
+geodata/handlers/kml/KmlViewRefreshTimeTagHandler.cpp
 geodata/handlers/kml/KmlViewVolumeTagHandler.cpp
 geodata/handlers/kml/KmlViewVolumeTagHandler.cpp
 geodata/handlers/kml/KmlLeftFovTagHandler.cpp

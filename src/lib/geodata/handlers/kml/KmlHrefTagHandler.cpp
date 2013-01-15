@@ -27,6 +27,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataGroundOverlay.h"
+#include "GeoDataLink.h"
 #include "GeoDataPhotoOverlay.h"
 #include "GeoDataScreenOverlay.h"
 #include "GeoDataItemIcon.h"
@@ -48,7 +49,6 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
 
     if ( parentItem.represents( kmlTag_Icon ) ) {
         // we need a more elaborate version of this part
-
         if ( parentItem.is<GeoDataIconStyle>() ) {
             parentItem.nodeAs<GeoDataIconStyle>()->setIconPath( content );
         } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
@@ -58,9 +58,10 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
         } else if ( parentItem.is<GeoDataScreenOverlay>() ) {
             parentItem.nodeAs<GeoDataScreenOverlay>()->setIconFile( content );
         }
-    }  else if ( parentItem.represents( kmlTag_ItemIcon ) )
-    {
+    } else if ( parentItem.represents( kmlTag_ItemIcon ) ) {
         parentItem.nodeAs<GeoDataItemIcon>()->setIconPath( content );
+    }  else if ( parentItem.represents( kmlTag_Link ) ) {
+        parentItem.nodeAs<GeoDataLink>()->setHref( content );
     }
 
 #ifdef DEBUG_TAGS
