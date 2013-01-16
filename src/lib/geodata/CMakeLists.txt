@@ -160,6 +160,7 @@ geodata/writers/kml/KmlGroundOverlayWriter.cpp
 geodata/writers/kml/KmlIconStyleTagWriter.cpp
 geodata/writers/kml/KmlLatLonAltBoxWriter.cpp
 geodata/writers/kml/KmlLatLonBoxWriter.cpp
+geodata/writers/kml/KmlLatLonQuadWriter.cpp
 geodata/writers/kml/KmlLinearRingTagWriter.cpp
 geodata/writers/kml/KmlLineStringTagWriter.cpp
 geodata/writers/kml/KmlLineStyleTagWriter.cpp

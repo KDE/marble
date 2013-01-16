@@ -43,6 +43,7 @@ const char* GeoDataInnerBoundaryType = "GeoDataInnerBoundary";
 const char* GeoDataLabelStyleType = "GeoDataLabelStyle";
 const char* GeoDataLatLonAltBoxType = "GeoDataLatLonAlt";
 const char* GeoDataLatLonBoxType = "GeoDataLatLonBox";
+const char* GeoDataLatLonQuadType = "GeoDataLatLonQuad";
 const char* GeoDataLinearRingType = "GeoDataLinearRing";
 const char* GeoDataLineStringType = "GeoDataLineString";
 const char* GeoDataLineStyleType = "GeoDataLineStyle";

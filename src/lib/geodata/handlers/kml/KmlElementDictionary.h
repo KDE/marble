@@ -95,6 +95,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_latitude;
     GEODATA_EXPORT extern const char* kmlTag_LatLonAltBox;
     GEODATA_EXPORT extern const char* kmlTag_LatLonBox;
+    GEODATA_EXPORT extern const char* kmlTag_LatLonQuad;
     GEODATA_EXPORT extern const char* kmlTag_leftFov;
     GEODATA_EXPORT extern const char* kmlTag_LinearRing;
     GEODATA_EXPORT extern const char* kmlTag_LineString;

@@ -52,6 +52,7 @@ GEODATA_EXPORT extern const char* GeoDataInnerBoundaryType;
 GEODATA_EXPORT extern const char* GeoDataLabelStyleType;
 GEODATA_EXPORT extern const char* GeoDataLatLonAltBoxType;
 GEODATA_EXPORT extern const char* GeoDataLatLonBoxType;
+GEODATA_EXPORT extern const char* GeoDataLatLonQuadType;
 GEODATA_EXPORT extern const char* GeoDataLinearRingType;
 GEODATA_EXPORT extern const char* GeoDataLineStringType;
 GEODATA_EXPORT extern const char* GeoDataLineStyleType;

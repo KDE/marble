@@ -93,6 +93,7 @@ const char* kmlTag_LabelStyle = "LabelStyle";
 const char* kmlTag_latitude = "latitude";
 const char* kmlTag_LatLonAltBox = "LatLonAltBox";
 const char* kmlTag_LatLonBox = "LatLonBox";
+const char* kmlTag_LatLonQuad = "LatLonQuad";
 const char* kmlTag_leftFov = "leftFov";
 const char* kmlTag_LinearRing = "LinearRing";
 const char* kmlTag_LineString = "LineString";
