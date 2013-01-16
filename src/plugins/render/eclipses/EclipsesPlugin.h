@@ -101,6 +101,7 @@ private:
     QHash<QString, QVariant> m_settings;
     QAction *m_eclipsesMenuAction;
     QMenu *m_eclipsesListMenu;
+    int m_menuYear;
 
     QDialog *m_configDialog;
     Ui::EclipsesConfigDialog *m_configWidget;

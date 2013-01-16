@@ -82,6 +82,12 @@ const QDateTime& EclipsesItem::endDatePartial() const
     return m_endDatePartial;
 }
 
+int EclipsesItem::partialDurationHours() const
+{
+    return (m_endDatePartial.toTime_t() - 
+            m_startDatePartial.toTime_t()) / 3600;
+}
+
 const QDateTime& EclipsesItem::startDateTotal() const
 {
     return m_startDateTotal;

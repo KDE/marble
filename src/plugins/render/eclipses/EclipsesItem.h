@@ -52,6 +52,7 @@ public:
     const QDateTime& dateMaximum() const;
     const QDateTime& startDatePartial() const;
     const QDateTime& endDatePartial() const;
+    int partialDurationHours() const;
     const QDateTime& startDateTotal() const;
     const QDateTime& endDateTotal() const;
 

@@ -39,6 +39,7 @@ EclipsesPlugin::EclipsesPlugin()
       m_eclipsesActionGroup( 0 ),
       m_eclipsesMenuAction( 0 ),
       m_eclipsesListMenu( 0 ),
+      m_menuYear( 0 ),
       m_configDialog( 0 ),
       m_configWidget( 0 ),
       m_listDialog( 0 ),
@@ -56,6 +57,7 @@ EclipsesPlugin::EclipsesPlugin( const MarbleModel *marbleModel )
      m_eclipsesActionGroup( 0 ),
      m_eclipsesMenuAction( 0 ),
      m_eclipsesListMenu( 0 ),
+     m_menuYear( 0 ),
      m_configDialog( 0 ),
      m_configWidget( 0 ),
      m_listDialog( 0 ),
@@ -187,10 +189,6 @@ void EclipsesPlugin::initialize()
     connect( m_eclipsesMenuAction, SIGNAL(triggered()),
              m_listDialog, SLOT(show()) );
 
-    // initialize clock
-    const MarbleClock *clock = marbleModel()->clock();
-    connect( clock, SIGNAL( timeChanged() ), SLOT( updateEclipses() ) );
-
     // initialize eclipses model
     m_model = new EclipsesModel( marbleModel() );
 
@@ -215,6 +213,8 @@ bool EclipsesPlugin::eventFilter( QObject *object, QEvent *e )
                  this, SLOT(updateMenuItems()) );
         m_marbleWidget = widget;
         m_clock = m_marbleWidget->model()->clock();
+        connect( m_clock, SIGNAL(timeChanged()),
+                 this, SLOT(updateEclipses()) );
     }
 
     return RenderPlugin::eventFilter(object, e);
@@ -345,7 +345,8 @@ void EclipsesPlugin::updateEclipses()
     mDebug() << "Updating eclipses....";
     const int year = marbleModel()->clock()->dateTime().date().year();
 
-    if( m_model->year() != year ) {
+    if( m_menuYear != year ) {
+
         // remove old menus
         foreach( QAction *action, m_eclipsesListMenu->actions() ) {
             m_eclipsesListMenu->removeAction( action );
@@ -353,7 +354,10 @@ void EclipsesPlugin::updateEclipses()
         }
 
         // update year and create menus for this year's eclipse events
-        m_model->setYear( year );
+        if( m_model->year() != year ) {
+            m_model->setYear( year );
+        }
+        m_menuYear = year;
 
         m_eclipsesListMenu->setTitle( tr("Eclipses in %1").arg( year ) );
 
