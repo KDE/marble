@@ -346,9 +346,13 @@ void EclipsesItem::calculate()
 
     if ( !lowerBoundary->isEmpty() ) {
         sunBoundaries.prepend(lowerBoundary);
+    } else {
+        delete lowerBoundary;
     }
     if ( !upperBoundary->isEmpty() ) {
         sunBoundaries.prepend(upperBoundary);
+    } else {
+        delete upperBoundary;
     }
 
     for ( int result = 0; result < 2; ++result ) {
