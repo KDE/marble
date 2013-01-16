@@ -94,22 +94,6 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
     } else {
         bubble->setHidden(true );
     }
-
-    //FIXME This shouldn't really be a part of this method at all as each item should
-    //be a part of the scene regardless if it has a parent or not!
-    //Parent - Child relationship should only be used in the paint function to decide
-    //if the coordinate of the object should be an offset of the parent or an actual
-    //coordinate.
-    QListIterator<TmpGraphicsItem*> it(children());
-
-    if( it.hasNext() ) {
-        TmpGraphicsItem* p = it.next();
-        p->paint(painter, viewport );
-    }
-
-
-
-
 }
 
 QVariant PlacemarkTextAnnotation::itemChange(GeoGraphicsItemChange change, QVariant v )

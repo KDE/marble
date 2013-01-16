@@ -17,47 +17,15 @@ namespace Marble
 
 TmpGraphicsItem::TmpGraphicsItem()
 {
-    m_parent = 0;
-
-    //sensible default?
-    geoOffset = false;
 }
 
 TmpGraphicsItem::~TmpGraphicsItem()
 {
-
-}
-
-QVariant TmpGraphicsItem::itemChange(GeoGraphicsItemChange change, QVariant v )
-{
-    Q_UNUSED(change);
-    Q_UNUSED(v);
-    return QVariant();
 }
 
 QList<QRegion> TmpGraphicsItem::regions() const
 {
     return m_regions;
-}
-
-QList<TmpGraphicsItem*> TmpGraphicsItem::children() const
-{
-    return m_children;
-}
-
-void TmpGraphicsItem::addChild(TmpGraphicsItem* c)
-{
-    m_children.append(c);
-}
-
-TmpGraphicsItem* TmpGraphicsItem::parent()
-{
-    return m_parent;
-}
-
-void TmpGraphicsItem::setParent( TmpGraphicsItem* p )
-{
-    m_parent = p;
 }
 
 bool TmpGraphicsItem::sceneEvent( QEvent* event )
@@ -75,11 +43,6 @@ bool TmpGraphicsItem::mousePressEvent( QMouseEvent* event )
     //FIXME re-implement the whole ItemIsSelectable and call an
     //Item Change
     return false;
-}
-
-void TmpGraphicsItem::setGeoOffset( bool g )
-{
-    geoOffset = g;
 }
 
 void TmpGraphicsItem::setRegions( const QList<QRegion>& regions )
