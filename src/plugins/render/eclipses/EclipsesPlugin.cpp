@@ -359,7 +359,7 @@ void EclipsesPlugin::updateEclipses()
 
         foreach( EclipsesItem *item, m_model->items() ) {
             QAction *action = m_eclipsesListMenu->addAction(
-                        item->dateTime().date().toString() );
+                        item->dateMaximum().date().toString() );
             action->setData( QVariant( item->index() ) );
             connect( m_eclipsesListMenu, SIGNAL(triggered(QAction*)),
                      this, SLOT(showEclipseFromMenu(QAction*)) );
@@ -391,7 +391,8 @@ void EclipsesPlugin::showEclipse( int year, int index )
 
     if( item ) {
         Q_ASSERT( m_clock );
-        m_clock->setDateTime( item->dateTime() );
+        m_clock->setDateTime( item->startDatePartial() );
+        m_marbleWidget->centerOn( item->maxLocation() );
     }
 }
 

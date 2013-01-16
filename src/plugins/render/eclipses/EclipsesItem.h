@@ -49,6 +49,12 @@ public:
     EclipsesItem::EclipsePhase phase() const;
     QString phaseText() const;
 
+    const QDateTime& dateMaximum() const;
+    const QDateTime& startDatePartial() const;
+    const QDateTime& endDatePartial() const;
+    const QDateTime& startDateTotal() const;
+    const QDateTime& endDateTotal() const;
+
     double magnitude() const;
 
     const GeoDataCoordinates& maxLocation();
@@ -72,7 +78,12 @@ private:
     EclSolar *m_ecl;
     int m_index;
     bool m_calculationsNeedUpdate;
-    QDateTime m_dateTime;
+    bool m_isTotal;
+    QDateTime m_dateMaximum;
+    QDateTime m_startDatePartial;
+    QDateTime m_endDatePartial;
+    QDateTime m_startDateTotal;
+    QDateTime m_endDateTotal;
     EclipsesItem::EclipsePhase m_phase;
     double m_magnitude;
 

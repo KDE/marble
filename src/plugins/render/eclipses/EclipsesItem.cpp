@@ -20,6 +20,7 @@ EclipsesItem::EclipsesItem( EclSolar *ecl, int index, QObject *parent )
       m_ecl( ecl ),
       m_index( index ),
       m_calculationsNeedUpdate( true ),
+      m_isTotal( false ),
       m_phase( TotalSun ),
       m_magnitude( 0. ),
       m_umbra( Tessellate )
@@ -36,15 +37,10 @@ int EclipsesItem::index() const
     return m_index;
 }
 
-QDateTime EclipsesItem::dateTime() const
-{
-    return m_dateTime;
-}
-
 bool EclipsesItem::takesPlaceAt( const QDateTime &dateTime ) const
 {
-    Q_UNUSED(dateTime);
-    return true;
+    return ( ( m_startDatePartial <= dateTime ) &&
+             ( m_endDatePartial >= dateTime ) );
 }
 
 EclipsesItem::EclipsePhase EclipsesItem::phase() const
@@ -69,6 +65,31 @@ QString EclipsesItem::phaseText() const
 double EclipsesItem::magnitude() const
 {
     return m_magnitude;
+}
+
+const QDateTime& EclipsesItem::dateMaximum() const
+{
+    return m_dateMaximum;
+}
+
+const QDateTime& EclipsesItem::startDatePartial() const
+{
+    return m_startDatePartial;
+}
+
+const QDateTime& EclipsesItem::endDatePartial() const
+{
+    return m_endDatePartial;
+}
+
+const QDateTime& EclipsesItem::startDateTotal() const
+{
+    return m_startDateTotal;
+}
+
+const QDateTime& EclipsesItem::endDateTotal() const
+{
+    return m_endDateTotal;
 }
 
 const GeoDataCoordinates& EclipsesItem::maxLocation()
@@ -174,10 +195,40 @@ void EclipsesItem::initialize()
                         day << "/" << month << "!";
     }
 
-    m_dateTime = QDateTime( QDate( year, month, day ),
-                            QTime( hour, min, secs ),
-                            Qt::UTC ).addSecs( - ( tz * 3600 ) );
+    m_dateMaximum = QDateTime( QDate( year, month, day ),
+                               QTime( hour, min, secs ),
+                               Qt::UTC ).addSecs( - ( tz * 3600 ) );
 
+    // get global start/end date of eclipse
+ 
+    double mjd_start, mjd_end;
+    m_ecl->putEclSelect( m_index );
+
+    if( m_ecl->getPartial( mjd_start, mjd_end ) != 0 ) {
+        m_ecl->getDatefromMJD( mjd_start, year, month, day, hour, min, secs );
+        m_startDatePartial = QDateTime( QDate( year, month, day ),
+                                        QTime( hour, min, secs ),
+                                        Qt::UTC ).addSecs( - ( tz * 3600 ) );
+        m_ecl->getDatefromMJD( mjd_end, year, month, day, hour, min, secs );
+        m_endDatePartial = QDateTime( QDate( year, month, day ),
+                                      QTime( hour, min, secs ),
+                                      Qt::UTC ).addSecs( - ( tz * 3600 ) );
+    }
+    else Q_ASSERT( false ); // means 'no eclipse' which should never happen
+
+    m_isTotal = ( m_ecl->getTotal( mjd_start, mjd_end ) != 0 );
+    if( m_isTotal ) {
+        m_ecl->getDatefromMJD( mjd_start, year, month, day, hour, min, secs );
+        m_startDateTotal = QDateTime( QDate( year, month, day ),
+                                      QTime( hour, min, secs ),
+                                      Qt::UTC ).addSecs( - ( tz * 3600 ) );
+        m_ecl->getDatefromMJD( mjd_end, year, month, day, hour, min, secs );
+        m_endDateTotal = QDateTime( QDate( year, month, day ),
+                                    QTime( hour, min, secs ),
+                                    Qt::UTC ).addSecs( - ( tz * 3600 ) );
+    }
+
+    // detailed calculations are done when required
     m_calculationsNeedUpdate = true;
 }
 

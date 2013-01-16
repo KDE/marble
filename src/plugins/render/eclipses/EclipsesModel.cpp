@@ -136,8 +136,8 @@ QVariant EclipsesModel::data( const QModelIndex &index, int role ) const
 
     EclipsesItem *item = static_cast<EclipsesItem*>( index.internalPointer() );
     switch( index.column() ) {
-        case 0: return QVariant( item->dateTime() );
-        case 1: return QVariant( item->dateTime() );
+        case 0: return QVariant( item->startDatePartial() );
+        case 1: return QVariant( item->endDatePartial() );
         case 2: return QVariant( item->phaseText() );
         case 3: return QVariant( item->magnitude() );
         default: break; // should never happen
@@ -189,7 +189,7 @@ void EclipsesModel::update()
     for( int i = 1; i <= num; ++i ) {
         EclipsesItem *item = new EclipsesItem( m_ecps, i );
         addItem( item );
-        mDebug() << "Eclipse" << i << "added:" << item->dateTime()
+        mDebug() << "Eclipse" << i << "added:" << item->dateMaximum()
             << "(" << item->phaseText() << ")";
     }
 
