@@ -19,9 +19,9 @@
 
 #include "EclipsesModel.h"
 #include "EclipsesItem.h"
+#include "EclipsesListDialog.h"
 
 #include "ui_EclipsesConfigDialog.h"
-#include "ui_EclipsesListDialog.h"
 #include "ui_EclipsesReminderDialog.h"
 
 #include <QTreeWidget>
@@ -42,7 +42,6 @@ EclipsesPlugin::EclipsesPlugin()
       m_configDialog( 0 ),
       m_configWidget( 0 ),
       m_listDialog( 0 ),
-      m_listWidget( 0 ),
       m_reminderDialog( 0 ),
       m_reminderWidget( 0 )
 {
@@ -60,7 +59,6 @@ EclipsesPlugin::EclipsesPlugin( const MarbleModel *marbleModel )
      m_configDialog( 0 ),
      m_configWidget( 0 ),
      m_listDialog( 0 ),
-     m_listWidget( 0 ),
      m_reminderDialog( 0 ),
      m_reminderWidget( 0 )
 {
@@ -167,19 +165,9 @@ void EclipsesPlugin::initialize()
     m_configWidget = new Ui::EclipsesConfigDialog();
     m_configWidget->setupUi( m_configDialog );
 
-    m_listDialog = new QDialog();
-    m_listWidget = new Ui::EclipsesListDialog();
-    m_listWidget->setupUi( m_listDialog );
-    connect( m_listWidget->buttonSettings, SIGNAL(clicked()),
+    m_listDialog = new EclipsesListDialog( marbleModel() );
+    connect( m_listDialog, SIGNAL(buttonSettingsClicked()),
              m_configDialog, SLOT(show()) );
-    connect( m_listWidget->spinBoxYear, SIGNAL(valueChanged(int)),
-             this, SLOT(updateListDialogForYear(int)) );
-    connect( m_listWidget->treeWidget, SIGNAL(itemSelectionChanged()),
-             this, SLOT(updateListDialogButtons()) );
-    connect( m_configDialog, SIGNAL(rejected()),
-             this, SLOT(updateEclipses()) );
-    connect( m_listDialog, SIGNAL(accepted()),
-             this, SLOT(showSelectedEclipse()) );
 
     m_reminderDialog = new QDialog();
     m_reminderWidget = new Ui::EclipsesReminderDialog();
@@ -201,14 +189,8 @@ void EclipsesPlugin::initialize()
     const MarbleClock *clock = marbleModel()->clock();
     connect( clock, SIGNAL( timeChanged() ), SLOT( updateEclipses() ) );
 
-    // initialize model
-    m_model = new EclipsesModel( clock );
-    // observation point defaults to home location
-    qreal lat, lon;
-    int zoom;
-    marbleModel()->home(lon, lat, zoom);
-    GeoDataCoordinates homeLocation( lon, lat, 0, GeoDataCoordinates::Degree );
-    m_model->setObservationPoint( homeLocation );
+    // initialize eclipses model
+    m_model = new EclipsesModel( marbleModel() );
 
     m_isInitialized = true;
 
@@ -370,7 +352,6 @@ void EclipsesPlugin::updateEclipses()
 
         // update year and create menus for this year's eclipse events
         m_model->setYear( year );
-        m_listWidget->spinBoxYear->setValue( year );
 
         m_eclipsesListMenu->setTitle( tr("Eclipses in %1").arg( year ) );
 
@@ -397,38 +378,6 @@ void EclipsesPlugin::updateMenuItems()
     m_eclipsesMenuAction->setEnabled( active );
 }
 
-void EclipsesPlugin::updateListDialogForYear( int year )
-{
-    m_model->setYear( year );
-
-    QTreeWidget *tree = m_listWidget->treeWidget;
-    tree->clear();
-    foreach( EclipsesItem *item, m_model->items() ) {
-        QTreeWidgetItem *treeItem = new QTreeWidgetItem( tree );
-        treeItem->setText( 0, item->dateTime().date().toString() );
-        treeItem->setText( 1, item->dateTime().time().toString() );
-        treeItem->setText( 2, QString( "%1" ).arg( item->magnitude() ) );
-        treeItem->setText( 3, item->phaseText() );
-        treeItem->setData( 0, Qt::UserRole, QVariant( item->dateTime().date().year() ) );
-        treeItem->setData( 0, Qt::UserRole + 1, QVariant( item->index() ) );
-    }
-}
-
-void EclipsesPlugin::updateListDialogButtons()
-{
-    QTreeWidget *tree = m_listWidget->treeWidget;
-    m_listWidget->buttonShow->setEnabled( ( tree->selectedItems().count() > 0 ) );
-}
-
-void EclipsesPlugin::showSelectedEclipse()
-{
-    QTreeWidgetItem *item = m_listWidget->treeWidget->currentItem();
-    if( item ) {
-        showEclipse( item->data( 0, Qt::UserRole     ).toInt(),
-                     item->data( 0, Qt::UserRole + 1 ).toInt() );
-    }
-}
-
 void EclipsesPlugin::showEclipse( int year, int index )
 {
     EclipsesItem *item = m_model->eclipseWithIndex( year, index );
@@ -436,7 +385,6 @@ void EclipsesPlugin::showEclipse( int year, int index )
 
     if( item ) {
         Q_ASSERT( m_clock );
-        //m_clock->stop();
         m_clock->setDateTime( item->dateTime() );
     }
 }

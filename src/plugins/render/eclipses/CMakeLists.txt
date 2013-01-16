@@ -15,7 +15,8 @@ set( ecl_SRCS
 set( eclipses_SRCS
     EclipsesModel.cpp
     EclipsesItem.cpp
-    EclipsesPlugin.cpp )
+    EclipsesPlugin.cpp
+    EclipsesListDialog.cpp )
 
 qt4_wrap_ui( eclipses_SRCS
     EclipsesConfigDialog.ui

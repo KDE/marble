@@ -100,42 +100,19 @@
     </widget>
    </item>
    <item>
-    <widget class="QTreeWidget" name="treeWidget">
+    <widget class="QTreeView" name="treeView">
      <property name="rootIsDecorated">
       <bool>false</bool>
      </property>
      <property name="headerHidden">
       <bool>false</bool>
      </property>
-     <attribute name="headerCascadingSectionResizes">
+     <attribute name="headerHighlightSections">
       <bool>false</bool>
      </attribute>
-     <attribute name="headerDefaultSectionSize">
+     <attribute name="headerMinimumSectionSize">
       <number>120</number>
      </attribute>
-     <attribute name="headerStretchLastSection">
-      <bool>true</bool>
-     </attribute>
-     <column>
-      <property name="text">
-       <string>Date</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Time</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Magnitude</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Type</string>
-      </property>
-     </column>
     </widget>
    </item>
    <item>
@@ -185,7 +162,7 @@
  <tabstops>
   <tabstop>buttonSettings</tabstop>
   <tabstop>spinBoxYear</tabstop>
-  <tabstop>treeWidget</tabstop>
+  <tabstop>treeView</tabstop>
  </tabstops>
  <resources/>
  <connections>

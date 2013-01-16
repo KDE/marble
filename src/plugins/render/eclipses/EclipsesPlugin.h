@@ -20,7 +20,6 @@
 
 namespace Ui {
     class EclipsesConfigDialog;
-    class EclipsesListDialog;
     class EclipsesReminderDialog;
 }
 
@@ -31,6 +30,7 @@ class MarbleWidget;
 class MarbleClock;
 class EclipsesModel;
 class EclipsesItem;
+class EclipsesListDialog;
 
 /**
  * @brief This plugin displays solar eclipses.
@@ -86,9 +86,6 @@ private Q_SLOTS:
     void updateEclipses();
     void updateMenuItems();
 
-    void updateListDialogForYear( int year );
-    void updateListDialogButtons();
-    void showSelectedEclipse();
     void showEclipse( int year, int index );
 
 private:
@@ -106,8 +103,7 @@ private:
 
     QDialog *m_configDialog;
     Ui::EclipsesConfigDialog *m_configWidget;
-    QDialog *m_listDialog;
-    Ui::EclipsesListDialog *m_listWidget;
+    EclipsesListDialog *m_listDialog;
     QDialog *m_reminderDialog;
     Ui::EclipsesReminderDialog *m_reminderWidget;
 };

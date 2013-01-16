@@ -11,27 +11,27 @@
 #ifndef MARBLE_ECLIPSESMODEL_H
 #define MARBLE_ECLIPSESMODEL_H
 
-#include <QtCore/QObject>
+#include <QAbstractItemModel>
 #include <QDateTime>
 #include <QPixmap>
 
 #include "GeoDataCoordinates.h"
+#include "MarbleModel.h"
 
 class EclSolar;
 
 namespace Marble
 {
 
-class MarbleClock;
 class EclipsesItem;
 class GeoPainter;
 class GeoDataCoordinates;
 
-class EclipsesModel : public QObject
+class EclipsesModel : public QAbstractItemModel 
 {
     Q_OBJECT
 public:
-    EclipsesModel( const MarbleClock *clock, QObject *parent = 0 );
+    EclipsesModel( const MarbleModel *model, QObject *parent = 0 );
     ~EclipsesModel();
 
     const GeoDataCoordinates& observationPoint() const;
@@ -44,14 +44,24 @@ public:
 
     QList<EclipsesItem*> items() const;
 
+    // QT model interface
+    QModelIndex index( int row, int column,
+                       const QModelIndex &parent = QModelIndex() ) const;
+    QModelIndex parent( const QModelIndex &index ) const;
+    int rowCount( const QModelIndex &parent = QModelIndex() ) const;
+    int columnCount( const QModelIndex &parent = QModelIndex() ) const;
+    QVariant data( const QModelIndex &index,
+                   int role = Qt::DisplayRole ) const;
+    QVariant headerData( int section, Qt::Orientation orientation,
+                         int role = Qt::DisplayRole ) const;
+
 private:
     void paintItem( EclipsesItem *item, GeoPainter *painter );
     void addItem( EclipsesItem *item );
     void clear();
-    void updateEclipses();
     void update();
 
-    const MarbleClock *m_clock;
+    const MarbleModel *m_marbleModel;
     EclSolar *m_ecps;
     QList<EclipsesItem*> m_items;
     int m_currentYear;
