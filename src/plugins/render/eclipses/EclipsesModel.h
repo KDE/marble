@@ -40,10 +40,7 @@ public:
     void setYear( int year );
     int year() const;
 
-    EclipsesItem* currentItem() const;
-    EclipsesItem* eclipseWithIndex( int index ) const;
-
-    void synchronize( const MarbleClock *clock );
+    EclipsesItem* eclipseWithIndex( int year, int index );
 
     QList<EclipsesItem*> items() const;
 
@@ -57,7 +54,6 @@ private:
     const MarbleClock *m_clock;
     EclSolar *m_ecps;
     QList<EclipsesItem*> m_items;
-    EclipsesItem *m_currentItem;
     int m_currentYear;
     GeoDataCoordinates m_observationPoint;
 };

@@ -27,7 +27,6 @@ namespace Marble
 EclipsesModel::EclipsesModel( const MarbleClock *clock, QObject *parent )
     : QObject( parent ),
       m_clock( clock ),
-      m_currentItem( 0 ),
       m_currentYear( 0 )
 {
     m_ecps = new EclSolar();
@@ -68,13 +67,10 @@ int EclipsesModel::year() const
     return m_currentYear;
 }
 
-EclipsesItem* EclipsesModel::currentItem() const
+EclipsesItem* EclipsesModel::eclipseWithIndex( int year, int index )
 {
-    return m_currentItem;
-}
+    setYear( year );
 
-EclipsesItem* EclipsesModel::eclipseWithIndex( int index ) const
-{
     foreach( EclipsesItem *item, m_items ) {
         if( item->index() == index ) {
             return item;
@@ -82,22 +78,6 @@ EclipsesItem* EclipsesModel::eclipseWithIndex( int index ) const
     }
 
     return 0;
-}
-
-void EclipsesModel::synchronize( const MarbleClock *clock )
-{
-    m_currentItem = 0;
-
-    foreach( EclipsesItem *item, m_items ) {
-        mDebug() << item->dateTime() << "==" << clock->dateTime();
-        if( item->dateTime() == clock->dateTime() ) {
-            mDebug() << "Found eclipse at current date";
-            m_currentItem = item;
-            return;
-        }
-    }
-
-    mDebug() << "No eclipse found for current date";
 }
 
 QList<EclipsesItem*> EclipsesModel::items() const
@@ -113,7 +93,6 @@ void EclipsesModel::addItem( EclipsesItem *item )
 void EclipsesModel::clear()
 {
     qDeleteAll( m_items );
-    m_currentItem = 0;
     m_items.clear();
 }
 

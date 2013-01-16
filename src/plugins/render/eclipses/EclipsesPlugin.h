@@ -89,7 +89,7 @@ private Q_SLOTS:
     void updateListDialogForYear( int year );
     void updateListDialogButtons();
     void showSelectedEclipse();
-    void showEclipse( int index );
+    void showEclipse( int year, int index );
 
 private:
     bool m_isInitialized;

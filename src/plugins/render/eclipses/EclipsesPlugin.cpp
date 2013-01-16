@@ -380,8 +380,6 @@ void EclipsesPlugin::updateEclipses()
 
         emit actionGroupsChanged();
     }
-
-    m_model->synchronize( marbleModel()->clock() );
 }
 
 void EclipsesPlugin::updateMenuItems()
@@ -411,7 +409,8 @@ void EclipsesPlugin::updateListDialogForYear( int year )
         treeItem->setText( 1, item->dateTime().time().toString() );
         treeItem->setText( 2, QString( "%1" ).arg( item->magnitude() ) );
         treeItem->setText( 3, item->phaseText() );
-        treeItem->setData( 0, Qt::UserRole, QVariant( item->index() ) );
+        treeItem->setData( 0, Qt::UserRole, QVariant( item->dateTime().date().year() ) );
+        treeItem->setData( 0, Qt::UserRole + 1, QVariant( item->index() ) );
     }
 }
 
@@ -425,13 +424,14 @@ void EclipsesPlugin::showSelectedEclipse()
 {
     QTreeWidgetItem *item = m_listWidget->treeWidget->currentItem();
     if( item ) {
-        showEclipse( item->data( 0, Qt::UserRole ).toInt() );
+        showEclipse( item->data( 0, Qt::UserRole     ).toInt(),
+                     item->data( 0, Qt::UserRole + 1 ).toInt() );
     }
 }
 
-void EclipsesPlugin::showEclipse( int index )
+void EclipsesPlugin::showEclipse( int year, int index )
 {
-    EclipsesItem *item = m_model->eclipseWithIndex( index );
+    EclipsesItem *item = m_model->eclipseWithIndex( year, index );
     Q_ASSERT( item );
 
     if( item ) {
