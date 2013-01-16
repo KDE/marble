@@ -71,7 +71,7 @@ double EclipsesItem::magnitude() const
     return m_magnitude;
 }
 
-const GeoDataCoordinates EclipsesItem::maxLocation()
+const GeoDataCoordinates& EclipsesItem::maxLocation()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -80,7 +80,7 @@ const GeoDataCoordinates EclipsesItem::maxLocation()
     return m_maxLocation;
 }
 
-const GeoDataLineString EclipsesItem::centralLine()
+const GeoDataLineString& EclipsesItem::centralLine()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -89,7 +89,7 @@ const GeoDataLineString EclipsesItem::centralLine()
     return m_centralLine;
 }
 
-const GeoDataLinearRing EclipsesItem::umbra()
+const GeoDataLinearRing& EclipsesItem::umbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -98,7 +98,7 @@ const GeoDataLinearRing EclipsesItem::umbra()
     return m_umbra;
 }
 
-const GeoDataLineString EclipsesItem::southernPenUmbra()
+const GeoDataLineString& EclipsesItem::southernPenUmbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -107,7 +107,7 @@ const GeoDataLineString EclipsesItem::southernPenUmbra()
     return m_southernPenUmbra;
 }
 
-const GeoDataLineString EclipsesItem::northernPenUmbra()
+const GeoDataLineString& EclipsesItem::northernPenUmbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -116,7 +116,7 @@ const GeoDataLineString EclipsesItem::northernPenUmbra()
     return m_northernPenUmbra;
 }
 
-const QList<GeoDataCoordinates> EclipsesItem::shadowConeUmbra()
+const QList<GeoDataCoordinates>& EclipsesItem::shadowConeUmbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -125,7 +125,7 @@ const QList<GeoDataCoordinates> EclipsesItem::shadowConeUmbra()
     return m_shadowConeUmbra;
 }
 
-const QList<GeoDataCoordinates> EclipsesItem::shadowConePenUmbra()
+const QList<GeoDataCoordinates>& EclipsesItem::shadowConePenUmbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -134,7 +134,7 @@ const QList<GeoDataCoordinates> EclipsesItem::shadowConePenUmbra()
     return m_shadowConePenUmbra;
 }
 
-const QList<GeoDataCoordinates> EclipsesItem::shadowCone60MagPenUmbra()
+const QList<GeoDataCoordinates>& EclipsesItem::shadowCone60MagPenUmbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -143,7 +143,7 @@ const QList<GeoDataCoordinates> EclipsesItem::shadowCone60MagPenUmbra()
     return m_shadowCone60MagPenUmbra;
 }
 
-const QList<GeoDataLinearRing> EclipsesItem::sunBoundaries()
+const QList<GeoDataLinearRing>& EclipsesItem::sunBoundaries()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();

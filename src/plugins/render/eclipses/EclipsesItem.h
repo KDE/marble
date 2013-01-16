@@ -51,19 +51,19 @@ public:
 
     double magnitude() const;
 
-    const GeoDataCoordinates maxLocation();
+    const GeoDataCoordinates& maxLocation();
 
-    const GeoDataLineString centralLine();
+    const GeoDataLineString& centralLine();
 
-    const GeoDataLinearRing umbra();
-    const GeoDataLineString southernPenUmbra();
-    const GeoDataLineString northernPenUmbra();
+    const GeoDataLinearRing& umbra();
+    const GeoDataLineString& southernPenUmbra();
+    const GeoDataLineString& northernPenUmbra();
 
-    const QList<GeoDataLinearRing> sunBoundaries();
+    const QList<GeoDataLinearRing>& sunBoundaries();
 
-    const QList<GeoDataCoordinates> shadowConeUmbra();
-    const QList<GeoDataCoordinates> shadowConePenUmbra();
-    const QList<GeoDataCoordinates> shadowCone60MagPenUmbra();
+    const QList<GeoDataCoordinates>& shadowConeUmbra();
+    const QList<GeoDataCoordinates>& shadowConePenUmbra();
+    const QList<GeoDataCoordinates>& shadowCone60MagPenUmbra();
 
 private:
     void initialize();
