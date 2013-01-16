@@ -38,12 +38,13 @@ public:
     int year() const;
 
 Q_SIGNALS:
-    void buttonShowEclipseClicked( int year, int index );
+    void buttonShowClicked( int year, int index );
     void buttonSettingsClicked();
 
 protected Q_SLOTS:
     void accept();
     void updateEclipsesListForYear( int year );
+    void updateButtonsState();
 
 protected:
     void initialize();

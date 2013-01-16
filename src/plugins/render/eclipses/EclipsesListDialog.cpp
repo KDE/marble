@@ -15,6 +15,7 @@
 #include "MarbleDebug.h"
 
 #include "EclipsesModel.h"
+#include "EclipsesItem.h"
 
 #include "ui_EclipsesListDialog.h"
 
@@ -47,12 +48,28 @@ int EclipsesListDialog::year() const
 
 void EclipsesListDialog::accept()
 {
+    QItemSelectionModel *s = m_listWidget->treeView->selectionModel();
+    QModelIndex selected = s->currentIndex();
+
+    if( selected.isValid() ) {
+        EclipsesItem *item = static_cast<EclipsesItem*>( selected.internalPointer() );
+        emit buttonShowClicked( m_eclModel->year(), item->index() );
+    }
+
+    QDialog::accept();
 }
 
 void EclipsesListDialog::updateEclipsesListForYear( int year )
 {
     Q_ASSERT( year >= 0 );
     m_eclModel->setYear( year );
+    updateButtonsState();
+}
+
+void EclipsesListDialog::updateButtonsState()
+{
+    QItemSelectionModel *s = m_listWidget->treeView->selectionModel();
+    m_listWidget->buttonShow->setEnabled( s->hasSelection() );
 }
 
 void EclipsesListDialog::initialize()
@@ -60,19 +77,21 @@ void EclipsesListDialog::initialize()
     m_listWidget = new Ui::EclipsesListDialog();
     m_listWidget->setupUi( this );
 
+    m_eclModel = new EclipsesModel( m_marbleModel );
+    m_listWidget->treeView->setModel( m_eclModel );
+
     connect( m_listWidget->buttonShow, SIGNAL(clicked()),
-             this, SIGNAL(accept()) );
+             this, SLOT(accept()) );
     connect( m_listWidget->buttonClose, SIGNAL(clicked()),
              this, SLOT(reject()) );
     connect( m_listWidget->buttonSettings, SIGNAL(clicked()),
              SIGNAL(buttonSettingsClicked()) );
     connect( m_listWidget->spinBoxYear, SIGNAL(valueChanged(int)),
              this, SLOT(updateEclipsesListForYear(int)) );
-    connect( m_listWidget->treeView, SIGNAL(itemSelectionChanged()),
-             this, SLOT(updateListDialogButtons) );
-
-    m_eclModel = new EclipsesModel( m_marbleModel );
-    m_listWidget->treeView->setModel( m_eclModel );
+    connect( m_listWidget->treeView->selectionModel(),
+             SIGNAL(selectionChanged(const QItemSelection&,
+                                     const QItemSelection&)),
+             this, SLOT(updateButtonsState()) );
 
     setYear( m_marbleModel->clock()->dateTime().date().year() );
 
