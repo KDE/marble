@@ -25,9 +25,10 @@ static GeoTagWriterRegistrar s_writerKml( GeoTagWriter::QualifiedName( "",
 bool KmlTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     Q_UNUSED(node);
+
+    writer.writeDefaultNamespace( kml::kmlTag_nameSpace22 );
+    writer.writeNamespace( kml::kmlTag_nameSpaceGx22, "gx" );
     writer.writeStartElement( "kml" );
-    writer.writeAttribute( "xmlns", kml::kmlTag_nameSpace22 );
-    writer.writeAttribute( "xmlns:gx", kml::kmlTag_nameSpaceGx22 );
 
     // Do not write an end element for document handlers
     return true;
