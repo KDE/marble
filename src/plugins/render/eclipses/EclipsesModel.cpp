@@ -165,7 +165,7 @@ void EclipsesModel::paintItem( EclipsesItem *item, GeoPainter *painter )
 
     painter->drawEllipse( item->maxLocation(), 15, 15 );
     painter->setPen( Oxygen::brickRed4 );
-    painter->drawText( item->maxLocation(), "Eclipse Maximum");
+    painter->drawText( item->maxLocation(), tr( "Maximum of Eclipse" ) );
 
     // southern boundary
     painter->setPen( Oxygen::brickRed4 );
