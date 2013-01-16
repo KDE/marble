@@ -11,7 +11,7 @@
 #include <QtTest/QtTest>
 #include "MercatorProjection.h"
 #include "ViewportParams.h"
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 namespace Marble
 {

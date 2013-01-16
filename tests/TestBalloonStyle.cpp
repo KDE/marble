@@ -18,7 +18,7 @@
 #include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
 #include <GeoDataBalloonStyle.h>
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 using namespace Marble;
 

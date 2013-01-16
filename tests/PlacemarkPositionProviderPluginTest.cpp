@@ -14,7 +14,7 @@
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
 #include "MarbleModel.h"
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 Q_DECLARE_METATYPE( Marble::GeoDataPlacemark * )
 

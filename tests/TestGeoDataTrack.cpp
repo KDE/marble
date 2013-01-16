@@ -21,7 +21,7 @@
 #include <GeoDataTrack.h>
 #include <GeoDataExtendedData.h>
 #include <GeoDataSimpleArrayData.h>
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 using namespace Marble;
 

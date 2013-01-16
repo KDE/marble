@@ -13,7 +13,7 @@
 #include <QtTest/QTestEvent>
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 namespace Marble
 {

@@ -12,7 +12,7 @@
 #include <QtTest/QtTest>
 #include "Quaternion.h"
 #include "MarbleGlobal.h"
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 Q_DECLARE_METATYPE( Marble::Quaternion )
 

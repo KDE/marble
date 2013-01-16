@@ -14,7 +14,7 @@
 #include "BookmarkManager.h"
 #include "GeoDataFolder.h"
 #include "GeoDataTreeModel.h"
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 namespace Marble
 {

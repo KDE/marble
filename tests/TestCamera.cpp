@@ -17,7 +17,7 @@
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
 #include <GeoDataCamera.h>
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 using namespace Marble;
 

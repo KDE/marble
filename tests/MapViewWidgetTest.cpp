@@ -12,7 +12,7 @@
 #include <QtTest/QSignalSpy>
 
 #include "MapViewWidget.h"
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 namespace Marble
 {

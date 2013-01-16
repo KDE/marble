@@ -19,7 +19,7 @@
 #include "PluginManager.h"
 #include "GeoDataPlacemark.h"
 #include "routing/RouteRequest.h"
-#include "TestUtils.h">
+#include "TestUtils.h"
 
 Q_DECLARE_METATYPE( QList<Marble::GeoDataCoordinates> )
 
