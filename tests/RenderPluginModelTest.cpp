@@ -12,7 +12,7 @@
 
 #include "RenderPluginModel.h"
 #include "MarbleMap.h"
-#include <TestUtils.h>
+#include "TestUtils.h">
 
 namespace Marble
 {

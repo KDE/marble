@@ -11,7 +11,7 @@
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
 
-#include <TestUtils.h>
+#include "TestUtils.h">
 #include <GeoDataDocument.h>
 #include <GeoDataFolder.h>
 #include <GeoDataParser.h>

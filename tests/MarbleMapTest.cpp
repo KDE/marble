@@ -12,7 +12,7 @@
 #include "GeoPainter.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
-#include <TestUtils.h>
+#include "TestUtils.h">
 
 namespace Marble
 {

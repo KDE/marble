@@ -12,7 +12,7 @@
 #include <QtTest/QtTest>
 #include "TileId.h"
 #include "GeoDataCoordinates.h"
-#include <TestUtils.h>
+#include "TestUtils.h">
 
 namespace Marble
 {

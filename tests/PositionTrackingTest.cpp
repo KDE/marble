@@ -13,7 +13,7 @@
 #include "GeoDataTreeModel.h"
 #include "PositionProviderPlugin.h"
 #include "PositionTracking.h"
-#include <TestUtils.h>
+#include "TestUtils.h">
 
 class FakeProvider : public Marble::PositionProviderPlugin
 {
