@@ -77,6 +77,8 @@ void EclipsesListDialog::initialize()
     m_listWidget = new Ui::EclipsesListDialog();
     m_listWidget->setupUi( this );
 
+    m_listWidget->treeView->setExpandsOnDoubleClick( false );
+
     m_eclModel = new EclipsesModel( m_marbleModel );
     m_listWidget->treeView->setModel( m_eclModel );
 
