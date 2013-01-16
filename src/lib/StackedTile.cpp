@@ -79,6 +79,20 @@ StackedTilePrivate::~StackedTilePrivate()
 
 uint StackedTilePrivate::pixel( int x, int y ) const
 {
+    // Range guard
+    if(x < 0) {
+        x=0;
+    }
+    else if(x > m_resultTile.width()) {
+        x=m_resultTile.width();
+    }
+    if(y < 0) {
+        y=0;
+    }
+    else if(y>m_resultTile.height()) {
+        y=m_resultTile.height();
+    }
+
     if ( m_depth == 8 ) {
         if ( m_isGrayscale )
             return (jumpTable8)[y][x];
@@ -96,7 +110,21 @@ uint StackedTilePrivate::pixel( int x, int y ) const
 
 uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
 {
-    // Bilinear interpolation to determine the color of a subpixel 
+    // Range guard
+    if(x < 0) {
+        x=0;
+    }
+    else if(x > m_resultTile.width()) {
+        x=m_resultTile.width();
+    }
+    if(y < 0) {
+        y=0;
+    }
+    else if(y>m_resultTile.height()) {
+        y=m_resultTile.height();
+    }
+
+    // Bilinear interpolation to determine the color of a subpixel
 
     int iX = (int)(x);
     int iY = (int)(y);
