@@ -36,8 +36,11 @@ class RenderPluginTest : public QObject
     void setEnabled_data();
     void setEnabled();
 
-    void setSettings_data();
-    void setSettings();
+    void setSettingsVisible_data();
+    void setSettingsVisible();
+
+    void setSettingsEnabled_data();
+    void setSettingsEnabled();
 
     void restoreDefaultSettings_data();
     void restoreDefaultSettings();
@@ -161,7 +164,7 @@ void RenderPluginTest::setEnabled()
     delete instance;
 }
 
-void RenderPluginTest::setSettings_data()
+void RenderPluginTest::setSettingsVisible_data()
 {
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
@@ -170,14 +173,13 @@ void RenderPluginTest::setSettings_data()
     }
 }
 
-void RenderPluginTest::setSettings()
+void RenderPluginTest::setSettingsVisible()
 {
     QFETCH( const RenderPlugin *, factory );
 
     RenderPlugin *const instance = factory->newInstance( &m_model );
 
     const bool visibleByDefault = instance->visible();
-    const bool enabledByDefault = instance->enabled();
 
     QHash<QString, QVariant> settings = instance->settings();
 
@@ -194,6 +196,34 @@ void RenderPluginTest::setSettings()
     QCOMPARE( instance->settings().value( "visible", !visibleByDefault ).toBool(), visibleByDefault );
     QCOMPARE( instance->visible(), visibleByDefault );
 
+    // restoreDefaultSettings() is triggered by the config dialog, but it shouldn't touch visible property
+    instance->setVisible( !visibleByDefault );
+    instance->restoreDefaultSettings();
+
+    QCOMPARE( instance->visible(), !visibleByDefault );
+
+    delete instance;
+}
+
+void RenderPluginTest::setSettingsEnabled_data()
+{
+    QTest::addColumn<const RenderPlugin *>( "factory" );
+
+    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
+        QTest::newRow( factory->nameId().toAscii() ) << factory;
+    }
+}
+
+void RenderPluginTest::setSettingsEnabled()
+{
+    QFETCH( const RenderPlugin *, factory );
+
+    RenderPlugin *const instance = factory->newInstance( &m_model );
+
+    const bool enabledByDefault = instance->enabled();
+
+    QHash<QString, QVariant> settings = instance->settings();
+
     // enabled property should follow setting
     settings.insert( "enabled", !enabledByDefault );
     instance->setSettings( settings );
@@ -207,13 +237,7 @@ void RenderPluginTest::setSettings()
     QCOMPARE( instance->settings().value( "enabled", !enabledByDefault ).toBool(), enabledByDefault );
     QCOMPARE( instance->enabled(), enabledByDefault );
 
-    // restoreDefaultSettings() is triggered by the config dialog, so it shouldn't touch visible property
-    instance->setVisible( !visibleByDefault );
-    instance->restoreDefaultSettings();
-
-    QCOMPARE( instance->visible(), !visibleByDefault );
-
-    // restoreDefaultSettings() is triggered by the config dialog, so it shouldn't touch enabled property
+    // restoreDefaultSettings() is triggered by the config dialog, but it shouldn't touch enabled property
     instance->setEnabled( !enabledByDefault );
     instance->restoreDefaultSettings();
 
