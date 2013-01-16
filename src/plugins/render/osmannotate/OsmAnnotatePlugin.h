@@ -116,7 +116,6 @@ private:
     //Intended to be replaced by an actual model system
     //FIXME: Merge the two models once TmpGraphicsItem is eliminated
     QList<TmpGraphicsItem*> model;
-    QList<GeoGraphicsItem*>* m_itemModel;
 
     QList<TextAnnotation*> annotations() const;
 

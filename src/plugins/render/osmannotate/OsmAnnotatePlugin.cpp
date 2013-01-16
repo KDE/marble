@@ -40,7 +40,6 @@ namespace Marble
 
 OsmAnnotatePlugin::OsmAnnotatePlugin()
         : RenderPlugin( 0 ),
-          m_itemModel( 0 ),
           m_networkAccessManager( 0 ),
           m_isInitialized( false )
 {
@@ -48,7 +47,6 @@ OsmAnnotatePlugin::OsmAnnotatePlugin()
 
 OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
         : RenderPlugin(model),
-          m_itemModel( 0 ),
           m_networkAccessManager( 0 ),
           m_isInitialized( false )
 {
@@ -57,7 +55,6 @@ OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
 
 OsmAnnotatePlugin::~OsmAnnotatePlugin()
 {
-    delete m_itemModel;
     delete m_networkAccessManager;
 }
 
@@ -125,7 +122,6 @@ void OsmAnnotatePlugin::initialize ()
 {
     widgetInitalised= false;
     m_tmp_lineString = 0;
-    m_itemModel = new QList<GeoGraphicsItem*>();
     m_addingPlacemark = false;
     m_drawingPolygon = false;
 
@@ -181,17 +177,6 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         //so the user can keep track of the current polygon drawing
         if( m_tmp_lineString ) {
             painter->drawPolyline( *m_tmp_lineString );
-        }
-
-        if( m_itemModel ) {
-            QListIterator<GeoGraphicsItem*> it( *m_itemModel );
-
-            while( it.hasNext() ) {
-                GeoGraphicsItem* i = it.next();
-                if( i->flags() & GeoGraphicsItem::ItemIsVisible ) {
-                    i->paint( painter, viewport );
-                }
-            }
         }
     }
 
@@ -664,32 +649,6 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
 
 void OsmAnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
 {
-    GeoDataParser parser( GeoData_OSM );
-
-    if ( !parser.read( device ) ) {
-        qDebug( "Could not parse file!" );
-        return;
-    }
-    QList<GeoGraphicsItem*>* model = parser.releaseModel();
-    Q_ASSERT( model );
-
-    m_itemModel->append(*model);
-
-    // now zoom to the newly added OSM file
-    if( flyToFile && m_itemModel->size() > 0 ) {
-        OsmBoundsGraphicsItem* item;
-        // mostly guaranteed that the first item will be a bounds item
-        // if not then don't centre on anything
-        item = dynamic_cast<OsmBoundsGraphicsItem*>( model->first() );
-        if( item ) {
-            m_marbleWidget->centerOn( item->latLonBox() );
-        }
-    }
-
-    model->clear();
-    delete model;
-
-    emit repaintNeeded(QRegion());
 }
 
 QList<TextAnnotation*> OsmAnnotatePlugin::annotations() const
