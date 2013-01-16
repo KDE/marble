@@ -1396,7 +1396,7 @@ void MarblePart::editSettings()
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );
     w_routingSettings->setObjectName( "routing_page" );
-    m_configDialog->addPage( w_routingSettings, tr( "Routing" ) );
+    m_configDialog->addPage( w_routingSettings, tr( "Routing" ), "flag" );
 
     // plugin page
     m_pluginModel = new RenderPluginModel( this );
