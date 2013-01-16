@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>511</width>
-    <height>389</height>
+    <width>527</width>
+    <height>329</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,25 +21,38 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="QTabWidget" name="tabWidgetView">
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tabEclipses">
+     <widget class="QWidget" name="tabView">
       <attribute name="title">
-       <string>&amp;Eclipses</string>
+       <string>&amp;View</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QGroupBox" name="groupBoxOptions">
          <property name="title">
-          <string>Op&amp;tions</string>
+          <string>View &amp;Options</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
            <widget class="QCheckBox" name="checkBoxEnableLunarEcl">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Enable &amp;Lunar Eclipses</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Show Eclipse Control &amp;Widget</string>
             </property>
            </widget>
           </item>
@@ -49,53 +62,83 @@
        <item>
         <widget class="QGroupBox" name="groupBoxVisualization">
          <property name="title">
-          <string>Visuali&amp;zation</string>
+          <string>&amp;Eclipse Elements</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QCheckBox" name="checkBoxDisplayUmbra">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="6" column="0">
+           <widget class="QCheckBox" name="checkBoxNorthernPenumbra">
             <property name="text">
-             <string>Display &amp;Umbra</string>
+             <string>&amp;Northern Penumbra</string>
             </property>
             <property name="checked">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QCheckBox" name="checkBoxDisplayFullPen">
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="checkBoxUmbra">
             <property name="text">
-             <string>Display Full &amp;Penumbra</string>
+             <string>&amp;Umbra</string>
             </property>
             <property name="checked">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QCheckBox" name="checkBoxDisplayHalfPen">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="checkBoxMaximum">
             <property name="text">
-             <string>Display &amp;Half Penumbra</string>
+             <string>Position of Eclipse &amp;Maximum</string>
             </property>
             <property name="checked">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QCheckBox" name="checkBoxDisplaySouthBounds">
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="checkBoxCentralLine">
             <property name="text">
-             <string>Display &amp;Southern Boundary of the Sun</string>
+             <string>Central &amp;Line</string>
             </property>
             <property name="checked">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QCheckBox" name="checkBoxDisplayBounds">
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="checkBoxFullPenUmbra">
             <property name="text">
-             <string>Display Sunrise and Sunset &amp;Boundaries of the Sun</string>
+             <string>Full &amp;Penumbra</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QCheckBox" name="checkBoxSunsetBoundaries">
+            <property name="text">
+             <string>Sunrise and Sunset &amp;Boundaries</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QCheckBox" name="checkBoxSouthernPenumbra">
+            <property name="text">
+             <string>&amp;Southern Penumbra</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="checkBox60MagPenUmbra">
+            <property name="text">
+             <string>Penumbra with 60% Ma&amp;gnitude</string>
             </property>
             <property name="checked">
              <bool>true</bool>
