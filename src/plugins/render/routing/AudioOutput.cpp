@@ -131,7 +131,7 @@ void AudioOutput::setSoundEnabled( bool enabled )
 
 bool AudioOutput::isSoundEnabled() const
 {
-    return d->m_voiceNavigation.isSpeakerEnabled();
+    return !d->m_voiceNavigation.isSpeakerEnabled();
 }
 
 }
