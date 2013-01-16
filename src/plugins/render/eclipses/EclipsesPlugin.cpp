@@ -15,6 +15,7 @@
 #include "MarbleModel.h"
 #include "MarbleClock.h"
 #include "ViewportParams.h"
+#include "GeoPainter.h"
 
 #include "EclipsesModel.h"
 #include "EclipsesItem.h"
@@ -245,7 +246,82 @@ bool EclipsesPlugin::render( GeoPainter *painter,
     Q_UNUSED( layer );
 
     if( marbleModel()->planetId() == "earth" ) {
-        m_model->paint( painter );
+        foreach( EclipsesItem *item, m_model->items() ) {
+            if( item->takesPlaceAt( marbleModel()->clock()->dateTime() ) ) {
+                return renderItem( painter, item );
+            }
+        }
+    }
+
+    return true;
+}
+
+bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item )
+{
+    int phase = item->phase();
+
+    // plot central line for central eclipses
+    painter->setPen( Qt::black );
+    painter->drawPolyline( item->centralLine() );
+
+    if( phase > 3 )  // total or annular eclipse
+    {
+        painter->setPen( Oxygen::aluminumGray4 );
+        QColor sunBoundingBrush ( Oxygen::aluminumGray4 );
+        sunBoundingBrush.setAlpha( 128 );
+        painter->setBrush( sunBoundingBrush );
+        painter->drawPolygon( item->umbra() );
+    }
+
+    //  draw shadow cones
+    QList<GeoDataCoordinates>::const_iterator ci;
+
+    painter->setPen( Qt::black );
+    ci = item->shadowConeUmbra().constBegin();
+    for ( ; ci != item->shadowConeUmbra().constEnd(); ++ci ) {
+        painter->drawEllipse( *ci, 2, 2 );
+    }
+
+    painter->setPen( Qt::blue );
+    ci = item->shadowConePenUmbra().constBegin();
+    for ( ; ci != item->shadowConePenUmbra().constEnd(); ++ci ) {
+        painter->drawEllipse( *ci, 2, 2 );
+    }
+
+    painter->setPen( Qt::magenta );
+    ci = item->shadowCone60MagPenUmbra().constBegin();
+    for ( ; ci != item->shadowCone60MagPenUmbra().constEnd(); ++ci ) {
+        painter->drawEllipse( *ci, 3, 3 );
+    }
+
+    // mark point of maximum eclipse
+
+    painter->setPen( Qt::white );
+    QColor sunBoundingBrush ( Qt::white );
+    sunBoundingBrush.setAlpha( 128 );
+    painter->setBrush( sunBoundingBrush );
+
+    painter->drawEllipse( item->maxLocation(), 15, 15 );
+    painter->setPen( Oxygen::brickRed4 );
+    painter->drawText( item->maxLocation(), tr( "Maximum of Eclipse" ) );
+
+    // southern boundary
+    painter->setPen( Oxygen::brickRed4 );
+    painter->drawPolyline( item->southernPenUmbra() );
+
+    // northern boundary
+    painter->setPen( Oxygen::brickRed4 );
+    painter->drawPolyline( item->northernPenUmbra() );
+
+    // Sunrise / Sunset Boundaries
+    painter->setPen( Oxygen::hotOrange5 );
+    const QList<GeoDataLinearRing> boundaries = item->sunBoundaries();
+    QList<GeoDataLinearRing>::const_iterator i = boundaries.constBegin();
+    for( ; i != boundaries.constEnd(); ++i ) {
+        QColor sunBoundingBrush ( Oxygen::hotOrange5 );
+        sunBoundingBrush.setAlpha( 64 );
+        painter->setBrush( sunBoundingBrush );
+        painter->drawPolygon( *i );
     }
 
     return true;

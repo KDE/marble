@@ -47,8 +47,6 @@ public:
 
     QList<EclipsesItem*> items() const;
 
-    void paint( GeoPainter *painter );
-
 private:
     void paintItem( EclipsesItem *item, GeoPainter *painter );
     void addItem( EclipsesItem *item );

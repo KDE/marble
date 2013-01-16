@@ -30,6 +30,7 @@ namespace Marble
 class MarbleWidget;
 class MarbleClock;
 class EclipsesModel;
+class EclipsesItem;
 
 /**
  * @brief This plugin displays solar eclipses.
@@ -78,6 +79,7 @@ protected:
     bool eventFilter( QObject *object, QEvent *e );
 
 private Q_SLOTS:
+    bool renderItem( GeoPainter *painter, EclipsesItem *item );
     void readSettings();
     void writeSettings();
     void updateSettings();
