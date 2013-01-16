@@ -42,6 +42,9 @@ class RenderPluginTest : public QObject
     void setSettingsEnabled_data();
     void setSettingsEnabled();
 
+    void setSettingsAllEqual_data();
+    void setSettingsAllEqual();
+
     void restoreDefaultSettings_data();
     void restoreDefaultSettings();
 
@@ -244,6 +247,35 @@ void RenderPluginTest::setSettingsEnabled()
     QCOMPARE( instance->enabled(), !enabledByDefault );
 
     delete instance;
+}
+
+void RenderPluginTest::setSettingsAllEqual_data()
+{
+    QTest::addColumn<QVariant>( "result" );
+    QTest::addColumn<QVariant>( "expected" );
+
+    foreach ( const RenderPlugin *plugin, m_model.pluginManager()->renderPlugins() ) {
+        const RenderPlugin *const expected = plugin->newInstance( &m_model );
+
+        RenderPlugin *const result = plugin->newInstance( &m_model );
+        result->setSettings( expected->settings() );
+
+        const QHash<QString, QVariant> settings = expected->settings();
+        QHash<QString, QVariant>::const_iterator itpoint = settings.begin();
+        QHash<QString, QVariant>::const_iterator const endpoint = settings.end();
+        for (; itpoint != endpoint; ++itpoint ) {
+            const QString testName = QString( "%1 %2" ).arg( plugin->nameId() ).arg( itpoint.key() );
+            QTest::newRow( testName.toAscii() ) << result->settings().value( itpoint.key() ) << expected->settings().value( itpoint.key() );
+        }
+    }
+}
+
+void RenderPluginTest::setSettingsAllEqual()
+{
+    QFETCH( QVariant, result );
+    QFETCH( QVariant, expected );
+
+    QCOMPARE( result, expected );
 }
 
 void RenderPluginTest::restoreDefaultSettings_data()
