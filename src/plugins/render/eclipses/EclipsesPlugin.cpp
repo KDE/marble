@@ -184,7 +184,7 @@ void EclipsesPlugin::initialize()
     m_eclipsesListMenu = new QMenu( "" );
     m_eclipsesActionGroup->addAction( m_eclipsesListMenu->menuAction() );
 
-    m_eclipsesMenuAction = new QAction( tr("More Ecli&pses..."), m_eclipsesActionGroup );
+    m_eclipsesMenuAction = new QAction( tr("Browse Ecli&pses..."), m_eclipsesActionGroup );
     m_eclipsesActionGroup->addAction( m_eclipsesMenuAction );
     connect( m_eclipsesMenuAction, SIGNAL(triggered()),
              m_listDialog, SLOT(show()) );
