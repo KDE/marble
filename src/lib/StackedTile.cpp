@@ -80,9 +80,6 @@ StackedTilePrivate::~StackedTilePrivate()
 
 uint StackedTilePrivate::pixel( int x, int y ) const
 {
-    if ( m_resultImage.isNull() )
-        return 0;
-
     if ( m_depth == 8 ) {
         if ( m_isGrayscale )
             return (jumpTable8)[y][x];

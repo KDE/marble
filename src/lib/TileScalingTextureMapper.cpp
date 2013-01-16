@@ -28,7 +28,6 @@
 #include "StackedTile.h"
 #include "MathHelper.h"
 #include "ViewportParams.h"
-#include "MarbleDebug.h"
 
 using namespace Marble;
 
@@ -138,7 +137,6 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
                 const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
                 const TileId stackedId = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
 
-                // load tile (it will be a TextureTile or VectorTile)
                 const StackedTile *const tile = m_tileLoader->loadTile( stackedId );
 
                 const QImage *const toScale = tile->resultImage();

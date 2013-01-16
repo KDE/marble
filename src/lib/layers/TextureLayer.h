@@ -15,7 +15,6 @@
 #include <QtCore/QObject>
 
 #include "MarbleGlobal.h"
-#include "MarbleModel.h"
 #include "GeoSceneTiled.h"
 #include "GeoDataDocument.h"
 
@@ -31,6 +30,7 @@ namespace Marble
 class GeoPainter;
 class GeoSceneGroup;
 class HttpDownloadManager;
+class PluginManager;
 class SunLocator;
 class VectorComposer;
 class ViewportParams;

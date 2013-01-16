@@ -49,8 +49,6 @@ public:
     int globalWidth() const;
     int globalHeight() const;
 
-    const StackedTile &Tile();
-
 private:
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );
