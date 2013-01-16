@@ -31,7 +31,7 @@ namespace Marble
 {
 
     class MarbleWidget;
-    class TextAnnotation;
+    class PlacemarkTextAnnotation;
     class PointScreenGraphicsItem;
 
 /**
@@ -117,7 +117,7 @@ private:
     //FIXME: Merge the two models once TmpGraphicsItem is eliminated
     QList<TmpGraphicsItem*> model;
 
-    QList<TextAnnotation*> annotations() const;
+    QList<PlacemarkTextAnnotation*> annotations() const;
 
     //used while creating new polygons
     GeoDataLineString* m_tmp_lineString;

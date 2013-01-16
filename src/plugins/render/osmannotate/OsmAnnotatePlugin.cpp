@@ -33,7 +33,6 @@
 #include "osm/OsmBoundsGraphicsItem.h"
 #include "PlacemarkTextAnnotation.h"
 #include "PointScreenGraphicsItem.h"
-#include "TextAnnotation.h"
 
 namespace Marble
 {
@@ -324,12 +323,12 @@ void OsmAnnotatePlugin::saveAnnotationFile()
 {
     GeoDataDocument document;
 
-    QList<TextAnnotation*> allAnnotations = annotations();
+    QList<PlacemarkTextAnnotation*> allAnnotations = annotations();
 
-    TextAnnotation* annotation;
-    foreach( annotation, allAnnotations ) {
-        document.append( annotation->toGeoData() );
-    }
+//    PlacemarkTextAnnotation* annotation;
+//    foreach( annotation, allAnnotations ) {
+//        document.append( annotation->toGeoData() );
+//    }
 
     QString filename;
     filename = QFileDialog::getSaveFileName( 0, tr("Save Annotation File"),
@@ -347,9 +346,9 @@ void OsmAnnotatePlugin::saveAnnotationFile()
         // Open file in right mode
         file.open( QIODevice::ReadWrite );
 
-        if ( !writer.write( &file, document ) ) {
-            qDebug( "Could not write the file." );
-        }
+//        if ( !writer.write( &file, document ) ) {
+//            qDebug( "Could not write the file." );
+//        }
     }
 }
 
@@ -651,12 +650,12 @@ void OsmAnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
 {
 }
 
-QList<TextAnnotation*> OsmAnnotatePlugin::annotations() const
+QList<PlacemarkTextAnnotation*> OsmAnnotatePlugin::annotations() const
 {
-    QList<TextAnnotation*> tmpAnnotations;
+    QList<PlacemarkTextAnnotation*> tmpAnnotations;
     TmpGraphicsItem* item;
     foreach( item, model ) {
-        TextAnnotation* annotation = dynamic_cast<TextAnnotation*>(item);
+        PlacemarkTextAnnotation* annotation = dynamic_cast<PlacemarkTextAnnotation*>(item);
         if( annotation ) {
             tmpAnnotations.append( annotation );
         }

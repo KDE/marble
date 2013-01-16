@@ -30,7 +30,7 @@ namespace Marble
 {
 
 PlacemarkTextAnnotation::PlacemarkTextAnnotation()
-        : TextAnnotation(), TmpGraphicsItem()
+        : TmpGraphicsItem()
 {
     bubble = new GeoWidgetBubble();
 
