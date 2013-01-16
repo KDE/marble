@@ -87,6 +87,7 @@ private Q_SLOTS:
     void updateMenuItems();
 
     void showEclipse( int year, int index );
+    void showEclipseFromMenu( QAction *action );
 
 private:
     bool m_isInitialized;

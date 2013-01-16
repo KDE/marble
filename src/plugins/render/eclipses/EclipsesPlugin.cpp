@@ -168,6 +168,8 @@ void EclipsesPlugin::initialize()
     m_listDialog = new EclipsesListDialog( marbleModel() );
     connect( m_listDialog, SIGNAL(buttonSettingsClicked()),
              m_configDialog, SLOT(show()) );
+    connect( m_listDialog, SIGNAL(buttonShowClicked(int, int)),
+             this, SLOT(showEclipse(int,int)) );
 
     m_reminderDialog = new QDialog();
     m_reminderWidget = new Ui::EclipsesReminderDialog();
@@ -356,7 +358,11 @@ void EclipsesPlugin::updateEclipses()
         m_eclipsesListMenu->setTitle( tr("Eclipses in %1").arg( year ) );
 
         foreach( EclipsesItem *item, m_model->items() ) {
-            m_eclipsesListMenu->addAction( item->dateTime().date().toString() );
+            QAction *action = m_eclipsesListMenu->addAction(
+                        item->dateTime().date().toString() );
+            action->setData( QVariant( item->index() ) );
+            connect( m_eclipsesListMenu, SIGNAL(triggered(QAction*)),
+                     this, SLOT(showEclipseFromMenu(QAction*)) );
         }
 
         emit actionGroupsChanged();
@@ -387,6 +393,18 @@ void EclipsesPlugin::showEclipse( int year, int index )
         Q_ASSERT( m_clock );
         m_clock->setDateTime( item->dateTime() );
     }
+}
+
+void EclipsesPlugin::showEclipseFromMenu( QAction *action )
+{
+    QDate date = QDate::fromString( action->text() );
+    Q_ASSERT( date.isValid() );
+    Q_ASSERT( action->data().isValid() );
+    int index = action->data().toInt();
+
+    mDebug() << "Eclipse from menu selected: year=" <<
+        date.year() << ", index=" << index;
+    showEclipse( date.year(), index );
 }
 
 }
