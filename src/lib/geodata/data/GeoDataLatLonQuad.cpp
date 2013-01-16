@@ -17,7 +17,6 @@ namespace Marble {
 class GeoDataLatLonQuadPrivate
 {
 public:
-
     GeoDataCoordinates m_bottomLeft;
     GeoDataCoordinates m_bottomRight;
     GeoDataCoordinates m_topRight;
@@ -32,9 +31,9 @@ GeoDataLatLonQuadPrivate::GeoDataLatLonQuadPrivate() :
     // nothing to do
 }
 
-GeoDataLatLonQuad::GeoDataLatLonQuad() : d( new GeoDataLatLonQuadPrivate ), GeoDataObject()
+GeoDataLatLonQuad::GeoDataLatLonQuad() : GeoDataObject(), d( new GeoDataLatLonQuadPrivate )
 {
-
+    // nothing to do
 }
 
 GeoDataLatLonQuad::GeoDataLatLonQuad( const Marble::GeoDataLatLonQuad &other ) :
@@ -177,6 +176,12 @@ GeoDataCoordinates &GeoDataLatLonQuad::topLeft() const
 void GeoDataLatLonQuad::setTopLeft(const GeoDataCoordinates &coordinates)
 {
     d->m_topLeft = coordinates;
+}
+
+bool GeoDataLatLonQuad::isValid() const
+{
+    return d->m_bottomLeft.isValid() && d->m_bottomRight.isValid()
+           && d->m_topLeft.isValid() && d->m_topRight.isValid();
 }
 
 }

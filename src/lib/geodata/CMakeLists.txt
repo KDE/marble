@@ -51,6 +51,7 @@ geodata/handlers/kml/KmlLabelStyleTagHandler.cpp
 geodata/handlers/kml/KmlLatitudeTagHandler.cpp
 geodata/handlers/kml/KmlLatLonAltBoxTagHandler.cpp
 geodata/handlers/kml/KmlLatLonBoxTagHandler.cpp
+geodata/handlers/kml/KmlLatLonQuadTagHandler.cpp
 geodata/handlers/kml/KmlLinearRingTagHandler.cpp
 geodata/handlers/kml/KmlLineStringTagHandler.cpp
 geodata/handlers/kml/KmlLineStyleTagHandler.cpp

@@ -33,6 +33,7 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataPhotoOverlay.h"
+#include "GeoDataLatLonQuad.h"
 #include "GeoParser.h"
 #include "MarbleGlobal.h"
 
@@ -60,7 +61,8 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_Point )
      || parentItem.represents( kmlTag_LineString )
      || parentItem.represents( kmlTag_MultiGeometry )
-     || parentItem.represents( kmlTag_LinearRing ) ) {
+     || parentItem.represents( kmlTag_LinearRing )
+     || parentItem.represents( kmlTag_LatLonQuad ) ) {
         QStringList  coordinatesLines;// = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
         // Splitting using the "\\s" regexp is slow, split manually instead.
         QString text = parser.readElementText().trimmed();
@@ -101,6 +103,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
             }
         }
         coordinatesLines.append( text.mid( index ) );
+        int coordinatesIndex = 0;
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
             if ( parentItem.represents( kmlTag_Point ) && parentItem.is<GeoDataFeature>() ) {
@@ -136,16 +139,33 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                 } else if ( parentItem.represents( kmlTag_Point ) ) {
                     // photo overlay
                     parentItem.nodeAs<GeoDataPoint>()->setCoordinates( coord );
+                } else if ( parentItem.represents( kmlTag_LatLonQuad ) ) {
+                    switch ( coordinatesIndex ) {
+                    case 0:
+                        parentItem.nodeAs<GeoDataLatLonQuad>()->setBottomLeft( coord );
+                        break;
+                    case 1:
+                        parentItem.nodeAs<GeoDataLatLonQuad>()->setBottomRight( coord );
+                        break;
+                    case 2:
+                        parentItem.nodeAs<GeoDataLatLonQuad>()->setTopRight( coord );
+                        break;
+                    case 3:
+                        parentItem.nodeAs<GeoDataLatLonQuad>()->setTopLeft( coord );
+                        break;
+                    case 4:
+                        mDebug() << "Ignoring excessive coordinates in LatLonQuad (must not have more than 4 pairs)";
+                        break;
+                    default:
+                        // Silently ignore any more coordinates
+                        break;
+                    }
                 } else {
                     // raise warning as coordinates out of valid parents found
                 }
             }
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << parser.name()
-                 << ">" << coordinatesLines
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
 
+            ++coordinatesIndex;
         }
     }
 

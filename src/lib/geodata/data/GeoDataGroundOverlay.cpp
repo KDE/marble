@@ -22,6 +22,8 @@ public:
 
     GeoDataLatLonBox m_latLonBox;
 
+    GeoDataLatLonQuad m_latLonQuad;
+
     GeoDataGroundOverlayPrivate();
 };
 
@@ -86,6 +88,16 @@ GeoDataLatLonBox &GeoDataGroundOverlay::latLonBox() const
 void GeoDataGroundOverlay::setLatLonBox( const GeoDataLatLonBox &box )
 {
     d->m_latLonBox = box;
+}
+
+GeoDataLatLonQuad &GeoDataGroundOverlay::latLonQuad()
+{
+    return d->m_latLonQuad;
+}
+
+const GeoDataLatLonQuad &GeoDataGroundOverlay::latLonQuad() const
+{
+    return d->m_latLonQuad;
 }
 
 }

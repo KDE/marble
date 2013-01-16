@@ -66,6 +66,8 @@ public:
     GeoDataCoordinates& topLeft() const;
     void setTopLeft( const GeoDataCoordinates &coordinates );
 
+    bool isValid() const;
+
 private:
     GeoDataLatLonQuadPrivate* const d;
 };

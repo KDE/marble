@@ -39,7 +39,13 @@ bool KmlGroundOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) co
     writer.writeTextElement( kml::kmlTag_altitudeMode,
                              altitudeModeToString(ground_overlay->altitudeMode()) );
 
-    writeElement( &ground_overlay->latLonBox(), writer );
+    if ( !ground_overlay->latLonBox().isEmpty() ) {
+        writeElement( &ground_overlay->latLonBox(), writer );
+    }
+
+    if ( ground_overlay->latLonQuad().isValid() ) {
+        writeElement( &ground_overlay->latLonQuad(), writer );
+    }
 
     return true;
 }
