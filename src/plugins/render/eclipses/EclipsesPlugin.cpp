@@ -173,6 +173,8 @@ void EclipsesPlugin::initialize()
              this, SLOT(readSettings()) );
     connect( m_configWidget->buttonBox->button( QDialogButtonBox::Reset ),
              SIGNAL(clicked()), this, SLOT(readSettings()) );
+    connect( m_configWidget->buttonBox->button( QDialogButtonBox::Apply ),
+             SIGNAL(clicked()), this, SLOT(writeSettings()) );
 
     m_listDialog = new EclipsesListDialog( marbleModel() );
     connect( m_listDialog, SIGNAL(buttonShowClicked(int, int)),
