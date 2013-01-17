@@ -103,6 +103,7 @@ private:
     QMenu *m_eclipsesListMenu;
     int m_menuYear;
 
+    // dialogs
     QDialog *m_configDialog;
     Ui::EclipsesConfigDialog *m_configWidget;
     EclipsesListDialog *m_listDialog;
