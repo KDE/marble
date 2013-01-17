@@ -22,7 +22,7 @@ class TextEditor;
 class PlacemarkTextAnnotation : public TmpGraphicsItem
 {
 public:
-    PlacemarkTextAnnotation();
+    PlacemarkTextAnnotation( GeoDataFeature *feature );
 
     //GeoGraphicsItem
     virtual QRect screenBounding() const;

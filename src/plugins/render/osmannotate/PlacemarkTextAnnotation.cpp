@@ -29,8 +29,8 @@
 namespace Marble
 {
 
-PlacemarkTextAnnotation::PlacemarkTextAnnotation()
-        : TmpGraphicsItem()
+PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataFeature *feature )
+        : TmpGraphicsItem( feature )
 {
     bubble = new GeoWidgetBubble();
 
@@ -69,16 +69,14 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
 
 
     painter->drawPoint( GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ) );
-
-    painter->drawPixmap( coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
+    const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( feature() );
+    painter->drawPixmap( placemark->coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
 
     qreal x, y;
     bool hidden;
     bool visable = viewport->currentProjection()->screenCoordinates( coordinate(), viewport, x, y, hidden );
 
     if( renderPos == "HOVERS_ABOVE_SURFACE" ) {
-        painter->drawPixmap( coordinate(),
-                             QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
          QList<QRegion> list;
         list.append( QRegion( x -10 , y-10 , 20 , 20 ) );
         setRegions( list );

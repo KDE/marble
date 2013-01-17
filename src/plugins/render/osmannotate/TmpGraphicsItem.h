@@ -28,7 +28,7 @@ namespace Marble
 class TmpGraphicsItem : public GeoGraphicsItem
 {
 public:
-    TmpGraphicsItem();
+    TmpGraphicsItem( GeoDataFeature *feature );
     ~TmpGraphicsItem();
 
     virtual void paint(GeoPainter * painter, const ViewportParams * viewport) =0;

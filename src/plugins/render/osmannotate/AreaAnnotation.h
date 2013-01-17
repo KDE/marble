@@ -20,7 +20,7 @@ namespace Marble
 class  AreaAnnotation : public TmpGraphicsItem
 {
 public:
-    AreaAnnotation();
+    AreaAnnotation( GeoDataFeature *feature );
 
     void setGeometry( GeoDataPolygon g);
     

@@ -16,7 +16,8 @@ namespace Marble
 
 
 
-AreaAnnotation::AreaAnnotation()
+AreaAnnotation::AreaAnnotation(GeoDataFeature *feature )
+    :TmpGraphicsItem( feature )
 {
 }
 

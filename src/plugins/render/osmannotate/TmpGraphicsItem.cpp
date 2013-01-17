@@ -15,7 +15,8 @@
 namespace Marble
 {
 
-TmpGraphicsItem::TmpGraphicsItem()
+TmpGraphicsItem::TmpGraphicsItem( GeoDataFeature *feature )
+    : GeoGraphicsItem( feature )
 {
 }
 

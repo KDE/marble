@@ -26,11 +26,11 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonBox.h"
 #include "GeoDataParser.h"
+#include "GeoDataPlacemark.h"
 #include "GeoPainter.h"
 #include "GeoWriter.h"
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
-#include "osm/OsmBoundsGraphicsItem.h"
 #include "PlacemarkTextAnnotation.h"
 #include "PointScreenGraphicsItem.h"
 
@@ -205,7 +205,7 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
     if( !b ) {
         //stopped drawing the polygon
         if ( m_tmp_lineString != 0 ) {
-            AreaAnnotation* area = new AreaAnnotation();
+            AreaAnnotation* area = new AreaAnnotation( new GeoDataPlacemark );
             GeoDataPolygon poly( Tessellate );
             poly.setOuterBoundary( GeoDataLinearRing(*m_tmp_lineString) );
             delete m_tmp_lineString;
@@ -385,16 +385,9 @@ void OsmAnnotatePlugin::loadAnnotationFile()
 
         QVector<GeoDataFeature*>::ConstIterator it = document->constBegin();
         for( ; it < document->constEnd(); ++it ) {
-            PlacemarkTextAnnotation* annotation = new PlacemarkTextAnnotation();
+            PlacemarkTextAnnotation* annotation = new PlacemarkTextAnnotation( *it );
             annotation->setName( (*it)->name() );
             annotation->setDescription( (*it)->description() );
-            // annotation->setCoordinate( GeoDataPlacemark((*it)).coordinate() );
-            /** @todo: line above replaced with the four below to have it compile.
-                Needs verification that behavior stays the same */
-            GeoDataPlacemark* placemark = dynamic_cast<GeoDataPlacemark*>(*it);
-            if ( placemark ) {
-                annotation->setCoordinate( placemark->coordinate() );
-            }
             model.append( annotation );
         }
 
@@ -484,50 +477,30 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
     // deal with adding a placemark
     if ( mouseEvent->button() == Qt::LeftButton
-         && m_addingPlacemark )
-    {
+         && m_addingPlacemark ) {
         //Add a placemark on the screen
-        qreal lon, lat;
+        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        placemark->setCoordinate( coordinates );
+        PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation( placemark );
+        model.append(t);
 
-        bool valid = ((MarbleWidget*)watched)->geoCoordinates(((QMouseEvent*)event)->pos().x(),
-                                                              ((QMouseEvent*)event)->pos().y(),
-                                                              lon, lat, GeoDataCoordinates::Radian);
-        if ( valid ) {
-            GeoDataCoordinates point( lon, lat );
-            PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation();
-            t->setCoordinate(point);
-            model.append(t);
-
-            //FIXME only repaint the new placemark
-            ( ( MarbleWidget* ) watched)->update();
-            emit placemarkAdded();
-
-            return true;
-        }
-
-
+        //FIXME only repaint the new placemark
+        ( ( MarbleWidget* ) watched)->update();
+        emit placemarkAdded();
+        return true;
     }
 
     // deal with drawing a polygon
     if ( mouseEvent->button() == Qt::LeftButton
-         && m_drawingPolygon )
-    {
-        qreal lon, lat;
-
-        bool valid = ((MarbleWidget*)watched)->geoCoordinates( mouseEvent->pos().x(),
-                                                               mouseEvent->pos().y(),
-                                                               lon, lat, GeoDataCoordinates::Radian);
-        if ( valid ) {
-            if ( m_tmp_lineString == 0 ) {
-                m_tmp_lineString = new GeoDataLineString( Tessellate );
-            }
-
-            m_tmp_lineString->append(GeoDataCoordinates(lon, lat));
-
-            //FIXME only repaint the line string so far
-            marbleWidget->update();
-
+         && m_drawingPolygon ) {
+        if ( m_tmp_lineString == 0 ) {
+            m_tmp_lineString = new GeoDataLineString( Tessellate );
         }
+
+        m_tmp_lineString->append(GeoDataCoordinates(lon, lat));
+
+        //FIXME only repaint the line string so far
+        marbleWidget->update();
         return true;
     }
 
