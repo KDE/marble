@@ -51,8 +51,10 @@ public:
           m_document( 0 ),
           m_clock( model->clock() )
     {
-        m_styleMap->setStyleId("default-map");
-        m_styleMap->insert("normal", QString("#").append(m_style->styleId()));
+        if( m_style ) {
+            m_styleMap->setStyleId("default-map");
+            m_styleMap->insert("normal", QString("#").append(m_style->styleId()));
+        }
     }
 
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
@@ -295,8 +297,10 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
     if ( doc ) {
         m_document = doc;
         doc->setProperty( m_property );
-        doc->addStyleMap( *m_styleMap );
-        doc->addStyle( *m_style );
+        if( m_style ) {
+            doc->addStyleMap( *m_styleMap );
+            doc->addStyle( *m_style );
+        }
 
         createFilterProperties( doc );
         emit q->newGeoDataDocumentAdded( m_document );
@@ -326,8 +330,9 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             bool hasPopularity = false;
 
             if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
-                placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType && m_documentRole == MapDocument ) {
-
+                placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType
+                 && m_documentRole == MapDocument
+                 && m_style ) {
                 placemark->setStyleUrl( QString("#").append( m_styleMap->styleId() ) );
             }
 
