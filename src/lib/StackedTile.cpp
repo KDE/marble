@@ -80,12 +80,6 @@ StackedTilePrivate::~StackedTilePrivate()
 uint StackedTilePrivate::pixel( int x, int y ) const
 {
     // Range guard
-    if(x < 0) {
-        x=0;
-    }
-    else if(x > m_resultTile.width()) {
-        x=m_resultTile.width();
-    }
     if(y < 0) {
         y=0;
     }
@@ -111,12 +105,6 @@ uint StackedTilePrivate::pixel( int x, int y ) const
 uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
 {
     // Range guard
-    if(x < 0) {
-        x=0;
-    }
-    else if(x > m_resultTile.width()) {
-        x=m_resultTile.width();
-    }
     if(y < 0) {
         y=0;
     }
