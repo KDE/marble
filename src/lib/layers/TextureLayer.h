@@ -49,9 +49,9 @@ class TextureLayer : public QObject, public LayerInterface
 
     QStringList renderPosition() const;
 
-    void addSeaDocument( GeoDataDocument* seaDocument );
+    void addSeaDocument( const GeoDataDocument *seaDocument );
 
-    void addLandDocument( GeoDataDocument* landDocument );
+    void addLandDocument( const GeoDataDocument *landDocument );
 
     bool showSunShading() const;
     bool showCityLights() const;

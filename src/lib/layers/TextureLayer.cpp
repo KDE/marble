@@ -174,7 +174,7 @@ QStringList TextureLayer::renderPosition() const
     return QStringList() << "SURFACE";
 }
 
-void TextureLayer::addSeaDocument( GeoDataDocument* seaDocument )
+void TextureLayer::addSeaDocument( const GeoDataDocument *seaDocument )
 {
     if( d->m_texcolorizer ) {
         d->m_texcolorizer->addSeaDocument( seaDocument );
@@ -182,7 +182,7 @@ void TextureLayer::addSeaDocument( GeoDataDocument* seaDocument )
     }
 }
 
-void TextureLayer::addLandDocument( GeoDataDocument* landDocument )
+void TextureLayer::addLandDocument( const GeoDataDocument *landDocument )
 {
     if( d->m_texcolorizer ) {
         d->m_texcolorizer->addLandDocument( landDocument );

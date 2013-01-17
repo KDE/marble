@@ -717,13 +717,13 @@ void MarbleMapPrivate::setDocument( QString key )
 
     GeoDataDocument* doc = m_model->fileManager()->at( key );
 
-    foreach ( GeoSceneLayer *layer, m_model->mapTheme()->map()->layers() ) {
+    foreach ( const GeoSceneLayer *layer, m_model->mapTheme()->map()->layers() ) {
         if ( layer->backend() != dgml::dgmlValue_geodata )
             continue;
 
         // look for documents
-        foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-            GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
+        foreach ( const GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+            const GeoSceneGeodata *data = static_cast<const GeoSceneGeodata*>( dataset );
             QString containername = data->sourceFile();
             QString colorize = data->colorize();
             if( key == containername ) {

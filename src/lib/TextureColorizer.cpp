@@ -152,12 +152,12 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
 
-void TextureColorizer::addSeaDocument( GeoDataDocument* seaDocument )
+void TextureColorizer::addSeaDocument( const GeoDataDocument *seaDocument )
 {
     m_seaDocuments.append( seaDocument );
 }
 
-void TextureColorizer::addLandDocument( GeoDataDocument* landDocument )
+void TextureColorizer::addLandDocument( const GeoDataDocument *landDocument )
 {
     m_landDocuments.append( landDocument );
 }
@@ -184,29 +184,29 @@ void TextureColorizer::setShowRelief( bool show )
 // showRelief).
 // 
 
-void TextureColorizer::drawIndividualDocument( GeoPainter *painter, GeoDataDocument *document )
+void TextureColorizer::drawIndividualDocument( GeoPainter *painter, const GeoDataDocument *document )
 {
-    QVector<GeoDataFeature*>::Iterator i = document->begin();
-    QVector<GeoDataFeature*>::Iterator end = document->end();
+    QVector<GeoDataFeature*>::ConstIterator i = document->constBegin();
+    QVector<GeoDataFeature*>::ConstIterator end = document->constEnd();
 
     for ( ; i != end; ++i ) {
         if ( (*i)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
 
-            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( *i );
+            const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( *i );
 
             if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-                GeoDataLineString *child = static_cast<GeoDataLineString*>( placemark->geometry() );
-                GeoDataLinearRing ring( *child );
+                const GeoDataLineString *child = static_cast<const GeoDataLineString*>( placemark->geometry() );
+                const GeoDataLinearRing ring( *child );
                 painter->drawPolygon( ring );
             }
 
             if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-                GeoDataPolygon *child = static_cast<GeoDataPolygon*>( placemark->geometry() );
+                const GeoDataPolygon *child = static_cast<const GeoDataPolygon*>( placemark->geometry() );
                 painter->drawPolygon( *child );
             }
 
             if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
-                GeoDataLinearRing *child = static_cast<GeoDataLinearRing*>( placemark->geometry() );
+                const GeoDataLinearRing *child = static_cast<const GeoDataLinearRing*>( placemark->geometry() );
                 painter->drawPolygon( *child );
             }
         }
@@ -215,13 +215,13 @@ void TextureColorizer::drawIndividualDocument( GeoPainter *painter, GeoDataDocum
 
 void TextureColorizer::drawTextureMap( GeoPainter *painter )
 {
-    foreach( GeoDataDocument* doc, m_landDocuments ) {
+    foreach( const GeoDataDocument *doc, m_landDocuments ) {
         painter->setPen( QPen( Qt::NoPen ) );
         painter->setBrush( QBrush( m_landColor ) );
         drawIndividualDocument( painter, doc );
     }
 
-    foreach( GeoDataDocument* doc, m_seaDocuments ) {
+    foreach( const GeoDataDocument *doc, m_seaDocuments ) {
         if ( doc->isVisible() ) {
             painter->setPen( Qt::NoPen );
             painter->setBrush( QBrush( m_seaColor ) );
