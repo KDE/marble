@@ -168,8 +168,6 @@ void EclipsesPlugin::initialize()
     m_configWidget->setupUi( m_configDialog );
 
     m_listDialog = new EclipsesListDialog( marbleModel() );
-    connect( m_listDialog, SIGNAL(buttonSettingsClicked()),
-             m_configDialog, SLOT(show()) );
     connect( m_listDialog, SIGNAL(buttonShowClicked(int, int)),
              this, SLOT(showEclipse(int,int)) );
 

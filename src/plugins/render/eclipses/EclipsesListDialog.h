@@ -39,7 +39,6 @@ public:
 
 Q_SIGNALS:
     void buttonShowClicked( int year, int index );
-    void buttonSettingsClicked();
 
 protected Q_SLOTS:
     void accept();

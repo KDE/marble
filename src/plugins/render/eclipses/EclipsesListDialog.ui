@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>555</width>
-    <height>213</height>
+    <width>591</width>
+    <height>183</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,7 +54,7 @@
          </font>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::PlusMinus</enum>
@@ -90,9 +90,19 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="buttonSettings">
+       <widget class="QPushButton" name="buttonClose">
         <property name="text">
-         <string>&amp;Settings...</string>
+         <string>&amp;Close</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="buttonShow">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>&amp;Go To Selected Eclipse</string>
         </property>
        </widget>
       </item>
@@ -107,11 +117,20 @@
      <property name="headerHidden">
       <bool>false</bool>
      </property>
+     <attribute name="headerCascadingSectionResizes">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="headerDefaultSectionSize">
+      <number>100</number>
+     </attribute>
      <attribute name="headerHighlightSections">
       <bool>false</bool>
      </attribute>
      <attribute name="headerMinimumSectionSize">
-      <number>120</number>
+      <number>100</number>
+     </attribute>
+     <attribute name="headerStretchLastSection">
+      <bool>true</bool>
      </attribute>
     </widget>
    </item>
@@ -124,44 +143,12 @@
       <property name="margin">
        <number>0</number>
       </property>
-      <item>
-       <spacer name="horizontalSpacer2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="buttonClose">
-        <property name="text">
-         <string>&amp;Close</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="buttonShow">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>&amp;Show Selected Eclipse</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>buttonSettings</tabstop>
-  <tabstop>spinBoxYear</tabstop>
   <tabstop>treeView</tabstop>
  </tabstops>
  <resources/>

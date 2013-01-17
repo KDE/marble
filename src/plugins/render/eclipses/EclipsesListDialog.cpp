@@ -86,8 +86,6 @@ void EclipsesListDialog::initialize()
              this, SLOT(accept()) );
     connect( m_listWidget->buttonClose, SIGNAL(clicked()),
              this, SLOT(reject()) );
-    connect( m_listWidget->buttonSettings, SIGNAL(clicked()),
-             SIGNAL(buttonSettingsClicked()) );
     connect( m_listWidget->spinBoxYear, SIGNAL(valueChanged(int)),
              this, SLOT(updateEclipsesListForYear(int)) );
     connect( m_listWidget->treeView->selectionModel(),
