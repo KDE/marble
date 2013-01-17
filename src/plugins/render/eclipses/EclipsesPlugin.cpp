@@ -393,7 +393,7 @@ void EclipsesPlugin::showEclipse( int year, int index )
 
     if( item ) {
         Q_ASSERT( m_clock );
-        m_clock->setDateTime( item->startDatePartial() );
+        m_clock->setDateTime( item->dateMaximum() );
         m_marbleWidget->centerOn( item->maxLocation() );
     }
 }
