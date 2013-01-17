@@ -63,7 +63,8 @@ int main ( int argc, char *argv[] )
                           ki18n( "Marble Virtual Globe" ),
                           ControlView::applicationVersion().toLatin1(),
                           ki18n( "A World Atlas." ),
-                          KAboutData::License_LGPL, ki18n( "(c) 2007-2012" ),
+                          KAboutData::License_LGPL,
+                          ki18n( "(c) 2007-2012" ), // FIXME: use subs() here and replace 2012 by %1
                           KLocalizedString(),
                           "http://edu.kde.org/marble" );
 
