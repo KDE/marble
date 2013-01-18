@@ -190,8 +190,11 @@ void EclipsesPlugin::initialize()
 
     m_eclipsesListMenu = new QMenu( "" );
     m_eclipsesActionGroup->addAction( m_eclipsesListMenu->menuAction() );
+    connect( m_eclipsesListMenu, SIGNAL(triggered(QAction*)),
+             this, SLOT(showEclipseFromMenu(QAction*)) );
 
-    m_eclipsesMenuAction = new QAction( tr("Browse Ecli&pses..."), m_eclipsesActionGroup );
+    m_eclipsesMenuAction = new QAction(
+            tr("Browse Ecli&pses..."), m_eclipsesActionGroup );
     m_eclipsesMenuAction->setIcon( QIcon( ":res/eclipses.png" ) );
     m_eclipsesActionGroup->addAction( m_eclipsesMenuAction );
     connect( m_eclipsesMenuAction, SIGNAL(triggered()),
@@ -438,8 +441,6 @@ void EclipsesPlugin::updateEclipses()
                     action->setIcon( QIcon( ":res/solar_total.png" ) );
                     break;
             }
-            connect( m_eclipsesListMenu, SIGNAL(triggered(QAction*)),
-                     this, SLOT(showEclipseFromMenu(QAction*)) );
         }
 
         emit actionGroupsChanged();
