@@ -94,24 +94,6 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
     }
 }
 
-QVariant PlacemarkTextAnnotation::itemChange(GeoGraphicsItemChange change, QVariant v )
-{
-    switch ( change ) {
-        case TmpGraphicsItem::ItemSelectChange :
-        if ( v.toBool() ) {
-            //make the bubble visable
-        } else {
-            //hide the bubble
-        }
-        break;
-
-        default:
-        //do nothing
-        break;
-    }
-    return TmpGraphicsItem::itemChange( change, v );
-}
-
 QString PlacemarkTextAnnotation::name() const
 {
     return m_textEditor->name();
@@ -131,21 +113,6 @@ void PlacemarkTextAnnotation::setDescription( const QString &description )
 {
     m_textEditor->setDescription( description );
 }
-
-GeoDataPoint PlacemarkTextAnnotation::geometry() const
-{
-    GeoDataPoint point( coordinate() );
-    return point;
-}
-
-void PlacemarkTextAnnotation::setGeometry( const GeoDataGeometry &geometry )
-{
-    //FIXME: undefined reference
-//    if( geometry.nodeType() == GeoDataTypes::GeoDataPointType ) {
-        static_cast<GeoDataPoint>(geometry);
-//    }
-}
-
 
 bool PlacemarkTextAnnotation::mousePressEvent( QMouseEvent* event )
 {

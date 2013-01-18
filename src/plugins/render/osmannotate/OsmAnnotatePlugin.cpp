@@ -12,9 +12,6 @@
 
 #include <QtGui/QFileDialog>
 
-//#include <Phonon/MediaObject>
-//#include <Phonon/VideoWidget>
-
 #include <QtGui/QAction>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -436,25 +433,14 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     QMouseEvent* mouseEvent = dynamic_cast<QMouseEvent*>(event);
     Q_ASSERT( mouseEvent );
 
-
     GeoDataCoordinates coordinates;
-
-    //Pass event on to Geo Graphics Items if there is one
-    // Only working in Geo Coordinates for hit tests
-
-//    FIXME: currently waiting for a decision on http://reviewboard.kde.org/r/1264/
-//    bool isOnGlobe = marbleWidget->geoCoordinates(mouseEvent->pos(), coordinates );
-
     qreal lon, lat;
     bool isOnGlobe = marbleWidget->geoCoordinates( mouseEvent->pos().x(),
                                                    mouseEvent->pos().y(),
                                                    lon, lat,
                                                    GeoDataCoordinates::Radian );
-
-    coordinates = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Radian );
-
+    coordinates = GeoDataCoordinates( lon, lat );
     if( !isOnGlobe ) {
-        //don't handle this event
         return false;
     }
 
