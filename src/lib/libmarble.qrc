@@ -75,5 +75,6 @@
         <file alias="geoplace.html">webpopup/geoplace.html</file>
         <file alias="city.html">webpopup/city.html</file>
         <file alias="nation.html">webpopup/nation.html</file>
+        <file alias="skyplace.html">webpopup/skyplace.html</file>
     </qresource>
 </RCC>

@@ -23,6 +23,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataExtendedData.h"
+#include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "Planet.h"
@@ -254,16 +256,21 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         bool isCity (index->visualCategory() >= GeoDataFeature::SmallCity &&
                          index->visualCategory() <= GeoDataFeature::LargeNationCapital);
         bool isNation = (index->visualCategory() == GeoDataFeature::Nation);
-
+        bool isSky = false;
+        if ( m_model->mapTheme() ) {
+            isSky = m_model->mapTheme()->head()->target() == "sky";
+        }
         MapInfoDialog* popup = m_widget->mapInfoDialog();
         popup->setSize(QSizeF(580, 620));
-        if (index->role().isEmpty() || isSatellite || isCity || isNation) {
+        if (index->role().isEmpty() || isSatellite || isCity || isNation || isSky) {
             if (isSatellite) {
                 setupDialogSatellite(popup, index);
             } else if (isCity) {
                 setupDialogCity(popup, index);
             } else if (isNation) {
                 setupDialogNation(popup, index);
+            } else if (isSky) {
+                setupDialogSkyPlaces(popup, index);
             } else {
                 popup->setContent(index->description());
             }
@@ -390,6 +397,27 @@ void MarbleWidgetPopupMenu::setupDialogGeoPlaces(MapInfoDialog *popup, const Geo
     description.replace("%latitude%", location.latToString());
     description.replace("%longitude%", location.lonToString());
     description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
+    description.replace("%shortDescription%", filterEmptyShortDescription(index->description()));
+
+    popup->setContent(description);
+}
+
+void MarbleWidgetPopupMenu::setupDialogSkyPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/skyplace.html");
+    if (!descriptionFile.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    QString description = descriptionFile.readAll();
+    description.replace("%name%", index->name());
+    description.replace("%latitude%", GeoDataCoordinates::latToString(
+                            location.latitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f'));
+    description.replace("%longitude%", GeoDataCoordinates::lonToString(
+                            location.longitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f'));
     description.replace("%shortDescription%", filterEmptyShortDescription(index->description()));
 
     popup->setContent(description);

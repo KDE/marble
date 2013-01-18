@@ -1006,7 +1006,9 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
     }
     else if ( notation == GeoDataCoordinates::Astro )
     {
-        lon = (lon >= 0) ? lon : lon + 360;
+        if (lon < 0) {
+            lon += ( unit == Degree ) ? 360 : 2 * M_PI;
+        }
 
         qreal lonHourF = ( unit == Degree ) ? fabs( lon/15.0  ) : fabs( (qreal)(lon/15.0) * RAD2DEG );
         int lonHour = (int) lonHourF;
@@ -1071,7 +1073,15 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
                                                     int precision,
                                                     char format )
 {
-    QString nsString = ( lat > 0 ) ? tr("N") : tr("S");
+    QString pmString;
+    QString nsString;
+
+    if (notation == GeoDataCoordinates::Astro){
+        pmString = ( lat > 0 ) ? "+" : "-";
+    }
+    else {
+        nsString = ( lat > 0 ) ? tr("N") : tr("S");
+    }
 
     QString latString;
 
@@ -1095,7 +1105,7 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
         } else if ( precision <= 4 && notation == DMS ) {
             latSec = qRound( latSecF );
         } else {
-            if ( notation == DMS ) {
+            if ( notation == DMS || notation == Astro ) {
                 latSec = latSecF = qRound( latSecF * qPow( 10, precision - 4 ) ) / qPow( 10, precision - 4 );
             }
             else {
@@ -1103,7 +1113,7 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
             }
         }
 
-        if (latSec > 59 && notation == DMS) {
+        if (latSec > 59 && ( notation == DMS || notation == Astro )) {
             latSecF = 0;
             latSec = latSecF;
             latMin = latMin + 1;
@@ -1118,18 +1128,18 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
         latString = QString::fromUtf8("%1\xc2\xb0").arg(latDeg, 3, 10, QChar(' ') );
 
         if ( precision == 0 ) {
-            return latString + nsString;
+            return pmString + latString + nsString;
         }
 
-        if ( notation == DMS || precision < 3 ) {
+        if ( notation == DMS || notation == Astro || precision < 3 ) {
             latString += QString(" %2\'").arg(latMin, 2, 10, QChar('0') );
         }
 
         if ( precision < 3 ) {
-            return latString + nsString;
+            return pmString + latString + nsString;
         }
 
-        if ( notation == DMS ) {
+        if ( notation == DMS || notation == Astro ) {
             // Includes -1 case!
             if ( precision < 5 ) {
                 latString += QString(" %3\"").arg(latSec, 2, 'f', 0, QChar('0') );
@@ -1146,7 +1156,7 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
     {
         latString = QString::fromUtf8("%L1\xc2\xb0").arg(latDegF, 4 + precision, format, precision, QChar(' ') );
     }
-    return latString + nsString;
+    return pmString + latString + nsString;
 }
 
 QString GeoDataCoordinates::latToString() const
