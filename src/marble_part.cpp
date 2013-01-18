@@ -1090,9 +1090,6 @@ void MarblePart::createPluginMenus()
         tmp_actionGroups = (*i)->actionGroups();
         if( (*i)->enabled() && tmp_actionGroups ) {
             foreach( QActionGroup *ag, *tmp_actionGroups ) {
-                if( !ag->actions().isEmpty() ) {
-                    // add separator
-                }
                 plugActionList( "plugins_menuactionlist", ag->actions() );
             }
         }
