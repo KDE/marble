@@ -22,6 +22,7 @@ namespace Marble
 {
 
 class GeoGraphicsItem;
+class GeoDataFeature;
 class GeoDataLatLonAltBox;
 class GeoGraphicsScenePrivate;
 
@@ -47,10 +48,10 @@ public:
     void addItem( GeoGraphicsItem *item );
 
     /**
-     * @brief Remove an item from the GeoGraphicsScene
-     * Removes the item @p item from the GeoGraphicsScene
+     * @brief Remove all concerned items from the GeoGraphicsScene
+     * Removes all items which are associated with @p object from the GeoGraphicsScene
      */
-    void removeItem( GeoGraphicsItem *item );
+    void removeItem( const GeoDataFeature *feature );
 
     /**
      * @brief Remove all items from the GeoGraphicsScene

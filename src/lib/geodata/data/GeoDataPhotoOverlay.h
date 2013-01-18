@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Mohammed Nafees  <nafees.technocool@gmail.com>
 //
 
 
@@ -15,12 +16,15 @@
 #include "GeoDataOverlay.h"
 #include "MarbleGlobal.h"
 #include "GeoDataPoint.h"
+#include "GeoDataImagePyramid.h"
+#include "GeoDataViewVolume.h"
+#include "marble_export.h"
 
 namespace Marble {
 
 class GeoDataPhotoOverlayPrivate;
 
-class GeoDataPhotoOverlay: public GeoDataOverlay
+class MARBLE_EXPORT GeoDataPhotoOverlay: public GeoDataOverlay
 {
 public:
     GeoDataPhotoOverlay();
@@ -34,9 +38,29 @@ public:
     /** Provides type information for downcasting a GeoNode */
     virtual const char* nodeType() const;
 
-    GeoDataPoint& point() const;
+    enum Shape {
+        Rectangle,
+        Cylinder,
+        Sphere
+    };
 
+    qreal rotation() const;
+    void setRotation( const qreal &rotation );
+
+    GeoDataViewVolume &viewVolume();
+    const GeoDataViewVolume& viewVolume() const;
+    void setViewVolume( const GeoDataViewVolume &viewVolume );
+
+    GeoDataImagePyramid& imagePyramid();
+    const GeoDataImagePyramid& imagePyramid() const;
+    void setImagePyramid( const GeoDataImagePyramid &imagePyramid );
+
+    GeoDataPoint& point() const;
     void setPoint( const GeoDataPoint &point );
+
+    Shape& shape();
+    const Shape& shape() const;
+    void setShape( const Shape &shape );
 
 private:
     GeoDataPhotoOverlayPrivate* const d;

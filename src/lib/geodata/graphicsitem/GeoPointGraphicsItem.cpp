@@ -15,8 +15,8 @@
 namespace Marble
 {
 
-GeoPointGraphicsItem::GeoPointGraphicsItem()
-        : GeoGraphicsItem()
+GeoPointGraphicsItem::GeoPointGraphicsItem( const GeoDataFeature *feature )
+        : GeoGraphicsItem( feature )
 {
 }
 

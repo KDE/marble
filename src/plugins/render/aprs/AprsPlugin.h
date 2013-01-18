@@ -95,9 +95,21 @@ namespace Marble
         QString                        m_filter;
         QAction                       *m_action;
 
+        bool m_useInternet;
+        bool m_useTty;
+        bool m_useFile;
+        QString m_aprsHost;
+        int m_aprsPort;
+        QString m_tncTty;
+        QString m_aprsFile;
+        bool m_dumpTcpIp;
+        bool m_dumpTty;
+        bool m_dumpFile;
+        int m_fadeTime;
+        int m_hideTime;
+
         QDialog               *m_configDialog;
         Ui::AprsConfigWidget  *ui_configWidget;
-        QHash<QString,QVariant>        m_settings;
 
     };
 

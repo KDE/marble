@@ -216,6 +216,9 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
         connect( task, SIGNAL( finished( SearchTask * ) ), this, SLOT( cleanupSearchTask( SearchTask * ) ) );
         d->m_searchTasks << task;
         mDebug() << "search task " << plugin->nameId() << " " << (long)task;
+    }
+
+    foreach( SearchTask* task, d->m_searchTasks ) {
         QThreadPool::globalInstance()->start( task );
     }
 
@@ -285,6 +288,9 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
         connect( task, SIGNAL( finished( ReverseGeocodingTask * ) ), this, SLOT( cleanupReverseGeocodingTask( ReverseGeocodingTask * ) ) );
         mDebug() << "reverse task " << plugin->nameId() << " " << (long)task;
         d->m_reverseTasks << task;
+    }
+
+    foreach( ReverseGeocodingTask* task, d->m_reverseTasks ) {
         QThreadPool::globalInstance()->start( task );
     }
 
@@ -339,6 +345,9 @@ void MarbleRunnerManager::retrieveRoute( const RouteRequest *request )
         connect( task, SIGNAL( finished( RoutingTask * ) ), this, SLOT( cleanupRoutingTask( RoutingTask * ) ) );
         mDebug() << "route task " << plugin->nameId() << " " << (long)task;
         d->m_routingTasks << task;
+    }
+
+    foreach( RoutingTask* task, d->m_routingTasks ) {
         QThreadPool::globalInstance()->start( task );
     }
 
@@ -379,23 +388,21 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
     const QString suffix = fileInfo.suffix().toLower();
     const QString completeSuffix = fileInfo.completeSuffix().toLower();
 
-    QList<ParsingTask *> parsingTasks;
     foreach( const ParseRunnerPlugin *plugin, plugins ) {
         QStringList const extensions = plugin->fileExtensions();
         if ( extensions.isEmpty() || extensions.contains( suffix ) || extensions.contains( completeSuffix ) ) {
             ParsingTask *task = new ParsingTask( plugin->newRunner(), this, fileName, role );
             connect( task, SIGNAL( finished( ParsingTask * ) ), this, SLOT( cleanupParsingTask( ParsingTask * ) ) );
             mDebug() << "parse task " << plugin->nameId() << " " << (long)task;
-            parsingTasks << task;
+            d->m_parsingTasks << task;
         }
     }
 
-    foreach ( ParsingTask *task, parsingTasks ) {
-        d->m_parsingTasks << task;
+    foreach ( ParsingTask *task, d->m_parsingTasks ) {
         QThreadPool::globalInstance()->start( task );
     }
 
-    if ( parsingTasks.isEmpty() ) {
+    if ( d->m_parsingTasks.isEmpty() ) {
         d->cleanupParsingTask( 0 );
     }
 }

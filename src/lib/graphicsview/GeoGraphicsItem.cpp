@@ -12,13 +12,15 @@
 #include "GeoGraphicsItem.h"
 #include "GeoGraphicsItem_p.h"
 
+#include "GeoDataPlacemark.h"
+
 // Qt
 #include "MarbleDebug.h"
 
 using namespace Marble;
 
-GeoGraphicsItem::GeoGraphicsItem()
-    : d( new GeoGraphicsItemPrivate )
+GeoGraphicsItem::GeoGraphicsItem( const GeoDataFeature *feature )
+    : d( new GeoGraphicsItemPrivate( feature ) )
 {
     setFlag( ItemIsVisible, true );
 }
@@ -55,6 +57,11 @@ void GeoGraphicsItem::setFlag( GeoGraphicsItemFlag flag, bool enabled )
 void GeoGraphicsItem::setFlags( GeoGraphicsItemFlags flags )
 {
     p()->m_flags = flags;
+}
+
+const GeoDataFeature* GeoGraphicsItem::feature() const
+{
+    return p()->m_feature;
 }
 
 const GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const

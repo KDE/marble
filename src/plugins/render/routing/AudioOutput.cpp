@@ -109,6 +109,11 @@ void AudioOutput::setMuted( bool muted )
     d->m_muted = muted;
 }
 
+bool AudioOutput::isMuted() const
+{
+    return d->m_muted;
+}
+
 void AudioOutput::setSpeaker( const QString &speaker )
 {
     d->m_voiceNavigation.setSpeaker( speaker );
@@ -122,6 +127,11 @@ QString AudioOutput::speaker() const
 void AudioOutput::setSoundEnabled( bool enabled )
 {
     d->m_voiceNavigation.setSpeakerEnabled( !enabled );
+}
+
+bool AudioOutput::isSoundEnabled() const
+{
+    return !d->m_voiceNavigation.isSpeakerEnabled();
 }
 
 }

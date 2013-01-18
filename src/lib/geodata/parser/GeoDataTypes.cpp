@@ -26,12 +26,14 @@ namespace Marble
 
 namespace GeoDataTypes
 {
+const char* GeoDataCameraType = "GeoDataCamera";
 const char* GeoDataColorStyleType = "GeoDataColorStyle";
 const char* GeoDataContainerType = "GeoDataContainer";
 const char* GeoDataDataType = "GeoDataData";
 const char* GeoDataDocumentType = "GeoDataDocument";
 const char* GeoDataExtendedDataType = "GeoDataExtendedData";
 const char* GeoDataFeatureType = "GeoDataFeature";
+const char* GeoDataFlyToType = "GeoDataFlyTo";
 const char* GeoDataFolderType = "GeoDataFolder";
 const char* GeoDataGeometryType = "GeoDataGeometry";
 const char* GeoDataGroundOverlayType = "GeoDataGroundOverlay";
@@ -41,13 +43,16 @@ const char* GeoDataInnerBoundaryType = "GeoDataInnerBoundary";
 const char* GeoDataLabelStyleType = "GeoDataLabelStyle";
 const char* GeoDataLatLonAltBoxType = "GeoDataLatLonAlt";
 const char* GeoDataLatLonBoxType = "GeoDataLatLonBox";
+const char* GeoDataLatLonQuadType = "GeoDataLatLonQuad";
 const char* GeoDataLinearRingType = "GeoDataLinearRing";
 const char* GeoDataLineStringType = "GeoDataLineString";
 const char* GeoDataLineStyleType = "GeoDataLineStyle";
+const char* GeoDataLinkType = "GeoDataLink";
 const char* GeoDataLodType = "GeoDataLod";
 const char* GeoDataLookAtType = "GeoDataLoookAt";
 const char* GeoDataMultiGeometryType = "GeoDataMultiGeometry";
 const char* GeoDataMultiTrackType = "GeoDataMultiTrack";
+const char* GeoDataNetworkLinkType = "GeoDataNetworkLink";
 const char* GeoDataObjectType = "GeoDataObject";
 const char* GeoDataOuterBoundaryType = "GeoDataOuterBoundary";
 const char* GeoDataPhotoOverlayType = "GeoDataPhotoOverlay";
@@ -68,6 +73,10 @@ const char* GeoDataScreenOverlayType = "GeoDataScreenOverlay";
 const char* GeoDataBalloonStyleType = "GeoDataBalloonStyle";
 const char* GeoDataListStyleType = "GeoDataListStyle";
 const char* GeoDataItemIconType = "GeoDataItemIcon";
+const char* GeoDataImagePyramidType = "GeoDataImagePyramid";
+const char* GeoDataViewVolumeType = "GeoDataViewVolume";
+const char* GeoDataNetworkLinkControlType = "GeoDataNetworkLinkControl";
+const char* GeoDataUpdateType = "GeoDataUpdate";
 }
 
 }

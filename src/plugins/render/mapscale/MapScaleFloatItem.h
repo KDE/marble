@@ -77,6 +77,10 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
     void readSettings();
     void writeSettings();
     void toggleRatioScaleVisibility();
+    void toggleMinimized();
+
+private:
+    void calcScaleBar();
 
  private:
     QDialog *m_configDialog;
@@ -107,7 +111,9 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
 
     QMenu*   m_contextMenu;
 
-    void calcScaleBar();
+    QAction  *m_minimizeAction;
+    bool m_minimized;
+    int m_widthScaleFactor;
 };
 
 }

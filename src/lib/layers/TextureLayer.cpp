@@ -124,8 +124,8 @@ void TextureLayer::Private::updateTextureLayers()
         const GeoSceneTiled *const firstTexture = result.at( 0 );
         m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
-        m_tileLoader.setTextureLayers( result );
     }
+    m_tileLoader.setTextureLayers( result );
 }
 
 void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )

@@ -145,7 +145,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      */
     void renderLongitudeLine( GeoPainter *painter, qreal longitude,                         
                               const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
-                              qreal polarGap = 0.0,
+                              qreal northPolarGap = 0.0, qreal southPolarGap = 0.0,
                               const QString& lineLabel = QString(),
                               LabelPositionFlags labelPositionFlags = LineCenter );
 
@@ -162,11 +162,15 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
                             );
 
     /**
-     * @brief Renders the latitude lines that are visible within the defined view bounding box.
+     * @brief Renders the longitude lines that are visible within the defined view bounding box.
      * @param painter the painter used to draw the latitude lines
      * @param viewLatLonAltBox the latitude longitude bounding box that is covered by the view.
      * @param step the angular distance between the lines measured in degrees .
-     * @param polarGap the area around the poles in which most longitude lines are not drawn
+     * @param northPolarGap the area around the north pole in which most longitude lines are not drawn
+     *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
+     *        concurring lines around the poles which obstruct the view onto the surface.
+     *        The radius of the polarGap area is measured in degrees.
+     * @param southPolarGap the area around the south pole in which most longitude lines are not drawn
      *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
      *        concurring lines around the poles which obstruct the view onto the surface.
      *        The radius of the polarGap area is measured in degrees. 
@@ -174,8 +178,30 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
     void renderLongitudeLines( GeoPainter *painter, 
                               const GeoDataLatLonAltBox& viewLatLonAltBox, 
                               qreal step, 
-                              qreal polarGap = 0.0,
+                              qreal northPolarGap = 0.0, qreal southPolarGap = 0.0,
                               LabelPositionFlags labelPositionFlags = LineCenter
+                             );
+
+    /**
+     * @brief Renders UTM exceptions that are visible within the defined view bounding box.
+     * @param painter the painter used to draw the latitude lines
+     * @param viewLatLonAltBox the latitude longitude bounding box that is covered by the view.
+     * @param step the angular distance between the lines measured in degrees .
+     * @param northPolarGap the area around the north pole in which most longitude lines are not drawn
+     *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
+     *        concurring lines around the poles which obstruct the view onto the surface.
+     *        The radius of the polarGap area is measured in degrees.
+     * @param southPolarGap the area around the south pole in which most longitude lines are not drawn
+     *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
+     *        concurring lines around the poles which obstruct the view onto the surface.
+     *        The radius of the polarGap area is measured in degrees.
+     */
+    void renderUtmExceptions( GeoPainter *painter,
+                              const GeoDataLatLonAltBox& viewLatLonAltBox,
+                              qreal step,
+                              qreal northPolarGap, qreal southPolarGap,
+                              const QString & label,
+                              LabelPositionFlags labelPositionFlags
                              );
 
     /**
@@ -201,6 +227,8 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
 
     Ui::GraticuleConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
+
+    QString m_utmBandLetters;
 };
 
 }

@@ -1,0 +1,158 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
+//
+
+#include "GeoDataLink.h"
+#include "GeoDataTypes.h"
+
+namespace Marble {
+
+class GeoDataLinkPrivate
+{
+public:
+    QString m_href;
+
+    GeoDataLink::RefreshMode m_refreshMode;
+
+    qreal m_refreshInterval;
+
+    GeoDataLink::ViewRefreshMode m_viewRefreshMode;
+
+    qreal m_viewRefreshTime;
+
+    qreal m_viewBoundScale;
+
+    QString m_viewFormat;
+
+    QString m_httpQuery;
+
+    GeoDataLinkPrivate();
+};
+
+GeoDataLinkPrivate::GeoDataLinkPrivate() :
+    m_href(),
+    m_refreshMode(GeoDataLink::OnChange),
+    m_refreshInterval(4.0),
+    m_viewRefreshMode(GeoDataLink::Never),
+    m_viewRefreshTime(4.0),
+    m_viewBoundScale(1.0),
+    m_viewFormat("BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]"),
+    m_httpQuery()
+{
+    // nothing to do
+}
+
+GeoDataLink::GeoDataLink() : d( new GeoDataLinkPrivate )
+{
+    // nothing to do
+}
+
+GeoDataLink::GeoDataLink( const Marble::GeoDataLink &other ) :
+   GeoDataObject( other ), d( new GeoDataLinkPrivate( *other.d ) )
+{
+    // nothing to do
+}
+
+GeoDataLink &GeoDataLink::operator=( const GeoDataLink &other )
+{
+    GeoDataObject::operator=( other );
+    *d = *other.d;
+    return *this;
+}
+
+GeoDataLink::~GeoDataLink()
+{
+    delete d;
+}
+
+const char *GeoDataLink::nodeType() const
+{
+    return GeoDataTypes::GeoDataLinkType;
+}
+
+QString GeoDataLink::href() const
+{
+    return d->m_href;
+}
+
+void GeoDataLink::setHref( QString href )
+{
+    d->m_href = href;
+}
+
+GeoDataLink::RefreshMode GeoDataLink::refreshMode() const
+{
+    return d->m_refreshMode;
+}
+
+void GeoDataLink::setRefreshMode(RefreshMode refreshMode )
+{
+    d->m_refreshMode = refreshMode;
+}
+
+qreal GeoDataLink::refreshInterval() const
+{
+    return d->m_refreshInterval;
+}
+
+void GeoDataLink::setRefreshInterval( qreal refreshInterval)
+{
+    d->m_refreshInterval = refreshInterval;
+}
+
+GeoDataLink::ViewRefreshMode GeoDataLink::viewRefreshMode() const
+{
+    return d->m_viewRefreshMode;
+}
+
+void GeoDataLink::setViewRefreshMode(ViewRefreshMode viewRefreshMode)
+{
+    d->m_viewRefreshMode = viewRefreshMode;
+}
+
+qreal GeoDataLink::viewRefreshTime() const
+{
+    return d->m_viewRefreshTime;
+}
+
+void GeoDataLink::setViewRefreshTime(qreal viewRefreshTime)
+{
+    d->m_viewRefreshTime = viewRefreshTime;
+}
+
+qreal GeoDataLink::viewBoundScale() const
+{
+    return d->m_viewBoundScale;
+}
+
+void GeoDataLink::setViewBoundScale(qreal viewBoundScale)
+{
+    d->m_viewBoundScale = viewBoundScale;
+}
+
+QString GeoDataLink::viewFormat() const
+{
+    return d->m_viewFormat;
+}
+
+void GeoDataLink::setViewFormat(const QString &viewFormat)
+{
+    d->m_viewFormat = viewFormat;
+}
+
+QString GeoDataLink::httpQuery() const
+{
+    return d->m_httpQuery;
+}
+void GeoDataLink::setHttpQuery(const QString &httpQuery)
+{
+    d->m_httpQuery = httpQuery;
+}
+
+}

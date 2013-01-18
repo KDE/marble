@@ -42,6 +42,7 @@
 #include "ScreenOverlayGraphicsItem.h"
 #include "TileId.h"
 #include "MarbleGraphicsItem.h"
+#include "MarblePlacemarkModel.h"
 
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
@@ -49,6 +50,7 @@
 // Qt
 #include <QtCore/qmath.h>
 #include <QtCore/QAbstractItemModel>
+#include <QtCore/QModelIndex>
 
 namespace Marble
 {
@@ -60,13 +62,14 @@ public:
     void createGraphicsItems( const GeoDataObject *object );
     void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark );
     void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
+    void removeGraphicsItems( const GeoDataFeature *feature );
 
     static int maximumZoomLevel();
 
     const QAbstractItemModel *const m_model;
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
-    QList<MarbleGraphicsItem*> m_items;
+    QList<ScreenOverlayGraphicsItem*> m_items;
 
 private:
     static void initializeDefaultValues();
@@ -103,13 +106,13 @@ GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
         d->createGraphicsItems( object->parent() );
 
     connect( model, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-             this, SLOT( invalidateScene() ) );
+             this, SLOT( resetCacheData() ) );
     connect( model, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
-             this, SLOT( invalidateScene() ) );
-    connect( model, SIGNAL( rowsRemoved(const QModelIndex&, int, int) ),
-             this, SLOT( invalidateScene() ) );
+             this, SLOT( addPlacemarks(QModelIndex,int,int) ) );
+    connect( model, SIGNAL( rowsAboutToBeRemoved(const QModelIndex&, int, int) ),
+             this, SLOT( removePlacemarks(QModelIndex,int,int) ) );
     connect( model, SIGNAL( modelReset() ),
-             this, SLOT( invalidateScene() ) );
+             this, SLOT( resetCacheData() ) );
 }
 
 GeometryLayer::~GeometryLayer()
@@ -257,7 +260,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         }
     }
 
-    foreach( MarbleGraphicsItem* item, d->m_items ) {
+    foreach( ScreenOverlayGraphicsItem* item, d->m_items ) {
         item->paintEvent( painter, viewport );
     }
 
@@ -300,17 +303,17 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
     if ( object->nodeType() == GeoDataTypes::GeoDataLineStringType )
     {
         const GeoDataLineString* line = static_cast<const GeoDataLineString*>( object );
-        item = new GeoLineStringGraphicsItem( line );
+        item = new GeoLineStringGraphicsItem( placemark, line );
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataLinearRingType )
     {
         const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing*>( object );
-        item = new GeoPolygonGraphicsItem( ring );
+        item = new GeoPolygonGraphicsItem( placemark, ring );
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataPolygonType )
     {
         const GeoDataPolygon *poly = static_cast<const GeoDataPolygon*>( object );
-        item = new GeoPolygonGraphicsItem( poly );
+        item = new GeoPolygonGraphicsItem( placemark, poly );
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataMultiGeometryType  )
     {
@@ -333,7 +336,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
     else if ( object->nodeType() == GeoDataTypes::GeoDataTrackType )
     {
         const GeoDataTrack *track = static_cast<const GeoDataTrack*>( object );
-        item = new GeoTrackGraphicsItem( track );
+        item = new GeoTrackGraphicsItem( placemark, track );
     }
     if ( !item )
         return;
@@ -349,13 +352,13 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
     GeoGraphicsItem* item = 0;
     if ( overlay->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
         GeoDataGroundOverlay const * groundOverlay = static_cast<GeoDataGroundOverlay const *>( overlay );
-        GeoImageGraphicsItem *imageItem = new GeoImageGraphicsItem;
+        GeoImageGraphicsItem *imageItem = new GeoImageGraphicsItem( overlay );
         imageItem->setImageFile( groundOverlay->absoluteIconFile() );
         imageItem->setLatLonBox( groundOverlay->latLonBox() );
         item = imageItem;
     } else if ( overlay->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
         GeoDataPhotoOverlay const * photoOverlay = static_cast<GeoDataPhotoOverlay const *>( overlay );
-        GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem;
+        GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem( overlay );
         photoItem->setPhotoFile( photoOverlay->absoluteIconFile() );
         photoItem->setPoint( photoOverlay->point() );
         item = photoItem;
@@ -372,7 +375,61 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
     }
 }
 
-void GeometryLayer::invalidateScene()
+void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
+{
+
+    if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        m_scene.removeItem( feature );
+    }
+    else if( feature->nodeType() == GeoDataTypes::GeoDataFolderType
+             || feature->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+        const GeoDataContainer *container = static_cast<const GeoDataContainer*>( feature );
+        foreach( const GeoDataFeature *child, container->featureList() ) {
+            removeGraphicsItems( child );
+        }
+    }
+    else if( feature->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
+        foreach( ScreenOverlayGraphicsItem  *item, m_items ) {
+            if( item->screenOverlay() == feature ) {
+                m_items.removeAll( item );
+            }
+        }
+    }
+}
+
+void GeometryLayer::addPlacemarks( QModelIndex parent, int first, int last )
+{
+    int size = d->m_model->rowCount( parent );
+    Q_ASSERT( first < size );
+    Q_ASSERT( last < size );
+    for( int i=first; i<=last; ++i ) {
+        QModelIndex index = d->m_model->index( i, 0, parent );
+        Q_ASSERT( index.isValid() );
+        const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
+        Q_ASSERT( object );
+        d->createGraphicsItems( object );
+    }
+    emit repaintNeeded();
+
+}
+
+void GeometryLayer::removePlacemarks( QModelIndex parent, int first, int last )
+{
+    int size = d->m_model->rowCount( parent );
+    Q_ASSERT( last < size );
+    for( int i=first; i<=last; ++i ) {
+        QModelIndex index = d->m_model->index( i, 0, parent );
+        Q_ASSERT( index.isValid() );
+        const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
+        const GeoDataFeature *feature = dynamic_cast<const GeoDataFeature*>( object );
+        Q_ASSERT( feature );
+        d->removeGraphicsItems( feature );
+    }
+    emit repaintNeeded();
+
+}
+
+void GeometryLayer::resetCacheData()
 {
     d->m_scene.eraseAll();
     qDeleteAll( d->m_items );

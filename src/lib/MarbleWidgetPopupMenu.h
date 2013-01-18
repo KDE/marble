@@ -90,6 +90,7 @@ private Q_SLOTS:
     void setupDialogCity(MapInfoDialog *popup, const GeoDataPlacemark *index);
     void setupDialogNation(MapInfoDialog *popup, const GeoDataPlacemark *index);
     void setupDialogGeoPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index);
+    void setupDialogSkyPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index);
 
  private:
     Q_DISABLE_COPY( MarbleWidgetPopupMenu )

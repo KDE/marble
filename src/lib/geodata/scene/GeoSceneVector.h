@@ -26,7 +26,7 @@
 #include <QtGui/QPen>
 #include <QtGui/QBrush>
 
-#include "GeoSceneLayer.h"
+#include "GeoSceneAbstractDataset.h"
 
 namespace Marble
 {
@@ -35,7 +35,7 @@ namespace Marble
  * @short Vector dataset stored in a layer.
  */
 
-class GeoSceneVector : public GeoSceneAbstractDataset
+class GEODATA_EXPORT GeoSceneVector : public GeoSceneAbstractDataset
 {
  public:
     explicit GeoSceneVector( const QString& name );

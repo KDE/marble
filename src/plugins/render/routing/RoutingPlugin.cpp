@@ -63,7 +63,6 @@ public:
     bool m_nearNextInstruction;
     bool m_guidanceModeEnabled;
     AudioOutput* m_audio;
-    QHash<QString,QVariant> m_settings;
     QDialog *m_configDialog;
     Ui::RoutingConfigDialog m_configUi;
     bool m_routeCompleted;
@@ -116,11 +115,9 @@ RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
     m_routeCompleted( false ),
     m_speakersModel( 0 ),
     m_parent( parent )
-
 {
-    m_settings["muted"] = false;
-    m_settings["sound"] = true;
-    m_settings["speaker"].clear();
+    m_audio->setMuted( false );
+    m_audio->setSoundEnabled( true );
 }
 
 QString RoutingPluginPrivate::richText( const QString &source ) const
@@ -356,23 +353,16 @@ void RoutingPluginPrivate::reverseRoute()
 
 void RoutingPluginPrivate::readSettings()
 {
-    bool const muted = m_settings["muted"].toBool();
-    m_audio->setMuted( muted );
-    bool const sound = m_settings["sound"].toBool();
-    m_audio->setSoundEnabled( sound );
-    QString const speaker = m_settings["speaker"].toString();
-    m_audio->setSpeaker( speaker );
-
     if ( m_configDialog ) {
         if ( !m_speakersModel ) {
             m_speakersModel = new SpeakersModel( m_parent );
         }
-        int const index = m_speakersModel->indexOf( speaker );
+        int const index = m_speakersModel->indexOf( m_audio->speaker() );
         m_configUi.speakerComboBox->setModel( m_speakersModel );
         m_configUi.speakerComboBox->setCurrentIndex( index );
-        m_configUi.voiceNavigationCheckBox->setChecked( !muted );
-        m_configUi.soundRadioButton->setChecked( sound );
-        m_configUi.speakerRadioButton->setChecked( !sound );
+        m_configUi.voiceNavigationCheckBox->setChecked( !m_audio->isMuted() );
+        m_configUi.soundRadioButton->setChecked( m_audio->isSoundEnabled() );
+        m_configUi.speakerRadioButton->setChecked( !m_audio->isSoundEnabled() );
     }
 }
 
@@ -414,13 +404,13 @@ void RoutingPlugin::writeSettings()
     int const index = d->m_configUi.speakerComboBox->currentIndex();
     if ( index >= 0 ) {
         QModelIndex const idx = d->m_speakersModel->index( index );
-        d->m_settings["speaker"] = d->m_speakersModel->data( idx, SpeakersModel::Path );
+        d->m_audio->setSpeaker( d->m_speakersModel->data( idx, SpeakersModel::Path ).toString() );
         if ( !d->m_speakersModel->data( idx, SpeakersModel::IsLocal ).toBool() ) {
             d->m_speakersModel->install( index );
         }
     }
-    d->m_settings["muted"] = !d->m_configUi.voiceNavigationCheckBox->isChecked();
-    d->m_settings["sound"] = d->m_configUi.soundRadioButton->isChecked();
+    d->m_audio->setMuted( !d->m_configUi.voiceNavigationCheckBox->isChecked() );
+    d->m_audio->setSoundEnabled( d->m_configUi.soundRadioButton->isChecked() );
     d->readSettings();
     emit settingsChanged( nameId() );
 }
@@ -569,22 +559,21 @@ QHash<QString,QVariant> RoutingPlugin::settings() const
 {
     QHash<QString, QVariant> result = AbstractFloatItem::settings();
 
-    foreach ( const QString &key, d->m_settings.keys() ) {
-        result.insert( key, d->m_settings[key] );
-    }
+    result.insert( "muted", d->m_audio->isMuted() );
+    result.insert( "sound", d->m_audio->isSoundEnabled() );
+    result.insert( "speaker", d->m_audio->speaker() );
 
     return result;
 }
 
 void RoutingPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    d->m_settings = settings;
-    if (!d->m_settings.contains("muted")) {
-        d->m_settings["muted"] = false;
-    }
-    if (!d->m_settings.contains("sound")) {
-        d->m_settings["sound"] = true;
-    }
+    AbstractFloatItem::setSettings( settings );
+
+    d->m_audio->setMuted( settings.value( "muted", false ).toBool() );
+    d->m_audio->setSoundEnabled( settings.value( "sound", true ).toBool() );
+    d->m_audio->setSpeaker( settings.value( "speaker" ).toString() );
+
     d->readSettings();
 }
 

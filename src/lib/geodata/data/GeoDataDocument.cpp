@@ -27,6 +27,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataNetworkLinkControl.h"
 
 #include "MarbleDebug.h"
 
@@ -82,6 +83,17 @@ void GeoDataDocument::setFileName( const QString &value )
 {
     detach();
     p()->m_filename = value;
+}
+
+GeoDataNetworkLinkControl GeoDataDocument::networkLinkControl() const
+{
+    return p()->m_networkLinkControl;
+}
+
+void GeoDataDocument::setNetworkLinkControl( const GeoDataNetworkLinkControl &networkLinkControl )
+{
+    detach();
+    p()->m_networkLinkControl = networkLinkControl;
 }
 
 void GeoDataDocument::addStyle( const GeoDataStyle& style )

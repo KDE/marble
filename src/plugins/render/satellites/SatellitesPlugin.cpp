@@ -190,46 +190,54 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
 QHash<QString, QVariant> SatellitesPlugin::settings() const
 {
-    return m_settings;
+    QHash<QString, QVariant> result = RenderPlugin::settings();
+
+    foreach ( const QString &key, m_settings.keys() ) {
+        result.insert( key, m_settings[key] );
+    }
+
+    return result;
 }
 
 void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
 {
-    m_settings = settings;
+    RenderPlugin::setSettings( settings );
 
     // add default data sources
-    if( !m_settings.contains( "dataSources" ) ) {
+    if( !settings.contains( "dataSources" ) ) {
         QStringList dsList;
         dsList << "http://www.celestrak.com/NORAD/elements/visual.txt";
         m_settings.insert( "dataSources", dsList );
         m_settings.insert( "idList", dsList );
-    } else {
+    }
+    else {
         // HACK: KConfig can't guess the type of the settings, when we use
         // KConfigGroup::readEntry() in marble_part it returns a QString which
         // is then wrapped into a QVariant when added to the settings hash.
         // QVariant can handle the conversion for some types, like toDateTime()
         // but when calling toStringList() on a QVariant::String, it will
         // return a one element list
-        if( m_settings.value( "dataSources" ).type() == QVariant::String ) {
+        if( settings.value( "dataSources" ).type() == QVariant::String ) {
             m_settings.insert( "dataSources",
-                m_settings.value( "dataSources" ).toString().split(QLatin1Char( ',' ) ) );
+                settings.value( "dataSources" ).toString().split(QLatin1Char( ',' ) ) );
         }
-        if( m_settings.value( "idList" ).type() == QVariant::String ) {
+        if( settings.value( "idList" ).type() == QVariant::String ) {
             m_settings.insert( "idList",
-                m_settings.value( "idList" ).toString().split(QLatin1Char( ',' ) ) );
+                settings.value( "idList" ).toString().split(QLatin1Char( ',' ) ) );
         }
     }
 
     // add default user data source
-    if( !m_settings.contains( "userDataSources" ) ) {
+    if( !settings.contains( "userDataSources" ) ) {
         QStringList udsList;
         udsList << "http://files.kde.org/marble/satellites/PlanetarySatellites.msc";
         m_settings.insert( "userDataSources", udsList );
         userDataSourceAdded( udsList[0] );
-    } else if( m_settings.value( "userDataSources" ).type() == QVariant::String ) {
+    }
+    else if( settings.value( "userDataSources" ).type() == QVariant::String ) {
         // same HACK as above
         m_settings.insert( "userDataSources",
-            m_settings.value( "userDataSources" ).toString().split(QLatin1Char( ',' ) ) );
+            settings.value( "userDataSources" ).toString().split(QLatin1Char( ',' ) ) );
     }
 
     emit settingsChanged( nameId() );

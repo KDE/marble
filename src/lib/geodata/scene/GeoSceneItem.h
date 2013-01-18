@@ -35,7 +35,7 @@ class GeoSceneIcon;
  * @short The section item in a legend of a GeoScene document.
  */
 
-class GeoSceneItem : public GeoNode
+class GEODATA_EXPORT GeoSceneItem : public GeoNode
 {
  public:
     explicit GeoSceneItem( const QString& name );

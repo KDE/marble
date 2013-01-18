@@ -67,6 +67,27 @@ AbstractFloatItem::~AbstractFloatItem()
     delete d;
 }
 
+QHash<QString,QVariant> AbstractFloatItem::settings() const
+{
+    QHash<QString,QVariant> updated = RenderPlugin::settings();
+    updated["position"] = position();
+    return updated;
+}
+
+void AbstractFloatItem::setSettings(const QHash<QString, QVariant> &settings)
+{
+    if ( settings.value( "position" ).type() == QVariant::String ) {
+        // work around KConfig turning QPointFs into QStrings
+        const QStringList coordinates = settings.value( "position" ).toString().split( QLatin1Char(',') );
+        setPosition( QPointF( coordinates.at( 0 ).toFloat(), coordinates.at( 1 ).toFloat() ) );
+    }
+    else {
+        setPosition( settings.value( "position", position() ).toPointF() );
+    }
+
+    RenderPlugin::setSettings(settings);
+}
+
 QPen AbstractFloatItem::pen() const
 {
     return d->s_pen;
@@ -127,7 +148,7 @@ void AbstractFloatItem::setPositionLocked( bool lock )
     setFlags( flags );
 }
 
-bool AbstractFloatItem::positionLocked()
+bool AbstractFloatItem::positionLocked() const
 {
     return ( flags() & ScreenGraphicsItem::ItemIsMovable ) ? false : true;
 }

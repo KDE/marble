@@ -35,12 +35,14 @@ namespace GeoDataTypes
  * downcasting to the good object
  * please keep alphabetic order to prevent mess
  */
+GEODATA_EXPORT extern const char* GeoDataCameraType;
 GEODATA_EXPORT extern const char* GeoDataColorStyleType;
 GEODATA_EXPORT extern const char* GeoDataContainerType;
 GEODATA_EXPORT extern const char* GeoDataDataType;
 GEODATA_EXPORT extern const char* GeoDataDocumentType;
 GEODATA_EXPORT extern const char* GeoDataExtendedDataType;
 GEODATA_EXPORT extern const char* GeoDataFeatureType;
+GEODATA_EXPORT extern const char* GeoDataFlyToType;
 GEODATA_EXPORT extern const char* GeoDataFolderType;
 GEODATA_EXPORT extern const char* GeoDataGeometryType;
 GEODATA_EXPORT extern const char* GeoDataGroundOverlayType;
@@ -50,13 +52,16 @@ GEODATA_EXPORT extern const char* GeoDataInnerBoundaryType;
 GEODATA_EXPORT extern const char* GeoDataLabelStyleType;
 GEODATA_EXPORT extern const char* GeoDataLatLonAltBoxType;
 GEODATA_EXPORT extern const char* GeoDataLatLonBoxType;
+GEODATA_EXPORT extern const char* GeoDataLatLonQuadType;
 GEODATA_EXPORT extern const char* GeoDataLinearRingType;
 GEODATA_EXPORT extern const char* GeoDataLineStringType;
 GEODATA_EXPORT extern const char* GeoDataLineStyleType;
+GEODATA_EXPORT extern const char* GeoDataLinkType;
 GEODATA_EXPORT extern const char* GeoDataLodType;
 GEODATA_EXPORT extern const char* GeoDataLookAtType;
 GEODATA_EXPORT extern const char* GeoDataMultiGeometryType;
 GEODATA_EXPORT extern const char* GeoDataMultiTrackType;
+GEODATA_EXPORT extern const char* GeoDataNetworkLinkType;
 GEODATA_EXPORT extern const char* GeoDataObjectType;
 GEODATA_EXPORT extern const char* GeoDataOuterBoundaryType;
 GEODATA_EXPORT extern const char* GeoDataPhotoOverlayType;
@@ -77,6 +82,10 @@ GEODATA_EXPORT extern const char* GeoDataScreenOverlayType;
 GEODATA_EXPORT extern const char* GeoDataBalloonStyleType;
 GEODATA_EXPORT extern const char* GeoDataListStyleType;
 GEODATA_EXPORT extern const char* GeoDataItemIconType;
+GEODATA_EXPORT extern const char* GeoDataImagePyramidType;
+GEODATA_EXPORT extern const char* GeoDataViewVolumeType;
+GEODATA_EXPORT extern const char* GeoDataNetworkLinkControlType;
+GEODATA_EXPORT extern const char* GeoDataUpdateType;
 }
 
 }

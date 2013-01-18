@@ -328,9 +328,10 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     void setDescriptionCDATA( bool cdata );
 
     /// Get the Abstract view of the feature
-    GeoDataAbstractView abstractView() const;
+    const GeoDataAbstractView *abstractView() const;
+    GeoDataAbstractView *abstractView();
     /// Set the abstract view of the feature
-    void setAbstractView( const GeoDataAbstractView &abstractView );
+    void setAbstractView( GeoDataAbstractView *abstractView );
 
     /// Return the styleUrl of the feature.
     QString styleUrl() const;

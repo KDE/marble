@@ -15,12 +15,13 @@
 #include "GeoDataOverlay.h"
 #include "MarbleGlobal.h"
 #include "GeoDataLatLonBox.h"
+#include "GeoDataLatLonQuad.h"
 
 namespace Marble {
 
 class GeoDataGroundOverlayPrivate;
 
-class GeoDataGroundOverlay: public GeoDataOverlay
+class MARBLE_EXPORT GeoDataGroundOverlay: public GeoDataOverlay
 {
 public:
     GeoDataGroundOverlay();
@@ -45,6 +46,12 @@ public:
     GeoDataLatLonBox& latLonBox() const;
 
     void setLatLonBox( const GeoDataLatLonBox &box );
+
+    const GeoDataLatLonQuad& latLonQuad() const;
+
+    GeoDataLatLonQuad& latLonQuad();
+
+    void setLatLonQuad( const GeoDataLatLonQuad &quad );
 
 private:
     GeoDataGroundOverlayPrivate* const d;

@@ -20,6 +20,11 @@
 namespace Marble
 {
 
+GeoPhotoGraphicsItem::GeoPhotoGraphicsItem( const GeoDataFeature *feature )
+    : GeoGraphicsItem( feature )
+{
+}
+
 void GeoPhotoGraphicsItem::setPhoto( const QImage &photo )
 {
     m_photo = photo;

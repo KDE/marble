@@ -434,7 +434,7 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             feature->setVisible( value.toBool() );
             mDebug() << "setData " << feature->name() << " " << value.toBool();
-            emit dataChanged( index, index );
+            updateFeature( feature );
             return true;
         }
     } else if ( role == Qt::EditRole ) {
@@ -444,7 +444,7 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             feature->setName( value.toString() );
             mDebug() << "setData " << feature->name() << " " << value.toString();
-            emit dataChanged( index, index );
+            updateFeature( feature );
             return true;
         }
     }
@@ -458,6 +458,25 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
         return Qt::NoItemFlags;
 
     GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
+    if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+        GeoDataDocument *document = static_cast<GeoDataDocument*>( object );
+        if( document->documentRole() == UserDocument ) {
+            return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
+        }
+    }
+    if( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+     || object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
+        GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+        GeoDataObject *parent = feature->parent();
+        while( parent->nodeType() != GeoDataTypes::GeoDataDocumentType ) {
+            parent = parent->parent();
+        }
+        GeoDataDocument *document = static_cast<GeoDataDocument*>( parent );
+        if( document->documentRole() == UserDocument ) {
+            return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;;
+        }
+    }
+
     if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
          || object->nodeType() == GeoDataTypes::GeoDataFolderType
          || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
@@ -615,10 +634,9 @@ bool GeoDataTreeModel::removeFeature( GeoDataFeature *feature )
 
 void GeoDataTreeModel::updateFeature( GeoDataFeature *feature )
 {
-    QModelIndex featureIndex = index( feature );
-    if ( featureIndex.isValid() ) {
-        emit dataChanged( featureIndex, featureIndex );
-    }
+    GeoDataContainer *container = static_cast<GeoDataContainer*>( feature->parent() );
+    removeFeature( feature );
+    addFeature( container, feature );
 }
 
 void GeoDataTreeModel::removeDocument( int index )

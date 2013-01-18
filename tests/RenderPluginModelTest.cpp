@@ -12,8 +12,7 @@
 
 #include "RenderPluginModel.h"
 #include "MarbleMap.h"
-
-#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
+#include "TestUtils.h"
 
 namespace Marble
 {

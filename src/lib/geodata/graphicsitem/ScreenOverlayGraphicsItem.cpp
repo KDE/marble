@@ -26,6 +26,11 @@ ScreenOverlayGraphicsItem::ScreenOverlayGraphicsItem( const GeoDataScreenOverlay
     }
 }
 
+const GeoDataScreenOverlay *ScreenOverlayGraphicsItem::screenOverlay() const
+{
+    return m_screenOverlay;
+}
+
 void ScreenOverlayGraphicsItem::setProjection( const ViewportParams *viewport )
 {
     ScreenGraphicsItem::setProjection( viewport );

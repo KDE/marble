@@ -26,7 +26,6 @@ public:
 
     bool writeMid( const GeoNode *node, GeoWriter &writer ) const;
 
-private:
     static QString altitudeModeToString(AltitudeMode mode);
 };
 

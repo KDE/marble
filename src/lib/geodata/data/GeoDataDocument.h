@@ -48,6 +48,7 @@ enum DocumentRole {
 
 class GeoDataStyle;
 class GeoDataStyleMap;
+class GeoDataNetworkLinkControl;
 
 class GeoDataDocumentPrivate;
 
@@ -91,6 +92,16 @@ public:
      * @param value  the new name
      */
     void setFileName( const QString &value );
+
+    /**
+     * @brief the NetworkLinkControl of the file
+     */
+    GeoDataNetworkLinkControl networkLinkControl() const;
+
+    /**
+     * @brief set the NetworkLinkControl of the file
+     */
+    void setNetworkLinkControl( const GeoDataNetworkLinkControl &networkLinkControl );
 
     /**
      * @brief Add a style to the style storage

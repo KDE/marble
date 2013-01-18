@@ -266,12 +266,11 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
             if ( layer->backend() != dgml::dgmlValue_geodata )
                 continue;
 
-            if ( layer->datasets().count() <= 0 )
-                continue;
-
             // look for documents
             foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-                QString containername = reinterpret_cast<GeoSceneGeodata*>( dataset )->sourceFile();
+                GeoSceneGeodata *data = dynamic_cast<GeoSceneGeodata*>( dataset );
+                Q_ASSERT( data );
+                QString containername = data->sourceFile();
                 loadedContainers <<  containername;
             }
         }
@@ -318,25 +317,40 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
         if ( layer->backend() != dgml::dgmlValue_geodata )
             continue;
 
+        GeoSceneGeodata emptyData("empty");
         // look for documents
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-            GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
+            GeoSceneGeodata *data = dynamic_cast<GeoSceneGeodata*>( dataset );
+            Q_ASSERT( data );
             QString containername = data->sourceFile();
             QString property = data->property();
             QPen pen = data->pen();
             QBrush brush = data->brush();
+            GeoDataLineStyle *lineStyle = 0;
+            GeoDataPolyStyle* polyStyle = 0;
+            GeoDataStyle* style = 0;
 
-            GeoDataLineStyle* lineStyle = new GeoDataLineStyle( pen.color() );
-            lineStyle->setPenStyle( pen.style() );
-            lineStyle->setWidth( pen.width() );
+            if( pen != emptyData.pen() ) {
+                lineStyle = new GeoDataLineStyle( pen.color() );
+                lineStyle->setPenStyle( pen.style() );
+                lineStyle->setWidth( pen.width() );
+            }
 
-            GeoDataPolyStyle* polyStyle = new GeoDataPolyStyle( brush.color() );
-            polyStyle->setFill( true );
+            if( brush != emptyData.brush() ) {
+                polyStyle = new GeoDataPolyStyle( brush.color() );
+                polyStyle->setFill( true );
+            }
 
-            GeoDataStyle* style = new GeoDataStyle;
-            style->setLineStyle( *lineStyle );
-            style->setPolyStyle( *polyStyle );
-            style->setStyleId( "default" );
+            if( lineStyle || polyStyle ) {
+                style = new GeoDataStyle;
+                if( lineStyle ) {
+                    style->setLineStyle( *lineStyle );
+                }
+                if( polyStyle ) {
+                    style->setPolyStyle( *polyStyle );
+                }
+                style->setStyleId( "default" );
+            }
 
             if ( !loadedContainers.removeOne( containername ) ) {
                 loadList << containername;

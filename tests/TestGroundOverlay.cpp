@@ -16,26 +16,9 @@
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
 #include <GeoDataGroundOverlay.h>
+#include "TestUtils.h"
 
 using namespace Marble;
-
-namespace QTest
-{
-
-bool qCompare(qreal val1, qreal val2, qreal epsilon, const char *actual, const char *expected, const char *file, int line)
-{
-    return ( qAbs( val1 - val2 ) < epsilon )
-        ? compare_helper( true, "COMPARE()", file, line )
-        : compare_helper( false, "Compared qreals are not the same", toString( val1 ), toString( val2 ), actual, expected, file, line );
-}
-
-}
-
-#define QFUZZYCOMPARE(actual, expected, epsilon) \
-do {\
-    if (!QTest::qCompare(actual, expected, epsilon, #actual, #expected, __FILE__, __LINE__))\
-        return;\
-} while (0)
 
 class TestGroundOverlay : public QObject
 {
@@ -48,22 +31,6 @@ private slots:
 void TestGroundOverlay::initTestCase()
 {
     MarbleDebug::enable = true;
-}
-
-GeoDataDocument *parseKml(const QString &content)
-{
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    //qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qFatal( "Could not parse data!" );
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-    return static_cast<GeoDataDocument*>( document );
 }
 
 void TestGroundOverlay::simpleParseTest()
@@ -86,6 +53,7 @@ void TestGroundOverlay::simpleParseTest()
              "</GroundOverlay>"
               "<GroundOverlay>"
                   "<altitude>233</altitude>"
+                  "<drawOrder>2</drawOrder>"
                   "<LatLonBox>"
                       "<north>23.3765376</north>"
                       "<south>1.5743867869</south>"
@@ -109,6 +77,7 @@ void TestGroundOverlay::simpleParseTest()
     QFUZZYCOMPARE( overlayFirst->altitude(), 0.0, 0.0001 );
 
     QFUZZYCOMPARE( overlayFirst->altitudeMode(), Absolute, 0.0001 );
+    QCOMPARE( overlayFirst->drawOrder(), 0 );
 
     QFUZZYCOMPARE( overlayFirst->latLonBox().north(), 37.91904192681665 * DEG2RAD, 0.0001 );
     QFUZZYCOMPARE( overlayFirst->latLonBox().south(), 37.46543388598137 * DEG2RAD, 0.0001 );
@@ -119,6 +88,7 @@ void TestGroundOverlay::simpleParseTest()
     QFUZZYCOMPARE( overlaySecond->altitude(), 233.0, 0.0001 );
 
     QCOMPARE( overlaySecond->altitudeMode(), ClampToGround );
+    QCOMPARE( overlaySecond->drawOrder(), 2 );
 
     QFUZZYCOMPARE( overlaySecond->latLonBox().north(), 23.3765376 * DEG2RAD, 0.0001 );
     QFUZZYCOMPARE( overlaySecond->latLonBox().south(), 1.5743867869 * DEG2RAD, 0.0001 );

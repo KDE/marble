@@ -19,7 +19,7 @@ namespace Marble {
 
 class GeoDataVec2Private;
 
-class GeoDataVec2 : public QPointF
+class MARBLE_EXPORT GeoDataVec2 : public QPointF
 {
 public:
     enum Unit {Fraction, Pixels, InsetPixels};

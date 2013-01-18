@@ -12,8 +12,8 @@
 #define MARBLE_GEOSCENEGEODATA_H
 
 #include <geodata_export.h>
+#include "GeoSceneAbstractDataset.h"
 #include "GeoDocument.h"
-#include "GeoSceneLayer.h"
 
 #include <QtGui/QPen>
 #include <QtGui/QBrush>

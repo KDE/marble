@@ -92,6 +92,9 @@ int main ( int argc, char *argv[] )
     aboutData.addAuthor( ki18n( "Guillaume Martres" ),
                          ki18n( " Satellites" ),
                          "smarter@ubuntu.com" );
+    aboutData.addAuthor( ki18n( "Rene Kuettner" ),
+                         ki18n( " Satellites, Eclipses" ),
+                         "rene@bitkanal.net" );
     aboutData.addAuthor( ki18n( "Friedrich W. H. Kossebau" ),
                          ki18n( "Plasma Integration, Bugfixes" ),
                          "kossebau@kde.org" );
@@ -133,6 +136,10 @@ int main ( int argc, char *argv[] )
                          "mboquien@free.fr" );
 
     // ESA Summer of Code in Space
+    aboutData.addAuthor( ki18n( "Rene Kuettner" ),
+                         ki18n( "ESA Summer of Code in Space  2012 Project:"
+                                " Visualization of planetary satellites" ),
+                         "rene@bitkanal.net" );
     aboutData.addAuthor( ki18n( "Guillaume Martres" ),
                          ki18n( "ESA Summer of Code in Space  2011 Project:"
                                 " Visualisation of Satellite Orbits" ),
@@ -202,6 +209,8 @@ int main ( int argc, char *argv[] )
     aboutData.addAuthor( ki18n( "Stefan Asserhäll" ),
                          ki18n( "Development & Patches" ));
     aboutData.addAuthor( ki18n( "Laurent Montel" ),
+                         ki18n( "Development & Patches" ));
+    aboutData.addAuthor( ki18n( "Mayank Madan" ),
                          ki18n( "Development & Patches" ));
     aboutData.addAuthor( ki18n( "Prashanth Udupa" ),
                          ki18n( "Development & Patches" ));

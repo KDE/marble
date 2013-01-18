@@ -188,6 +188,15 @@ class MapViewWidget::Private {
         m_toolBar->setIconSize(QSize(16, 16));
         m_mapViewUi.toolBarLayout->insertWidget(0, m_toolBar);
 
+        QObject::connect(m_globeViewButton, SIGNAL(clicked()),
+                         q, SLOT(globeViewRequested()));
+        QObject::connect(m_mercatorViewButton, SIGNAL(clicked()),
+                         q, SLOT(mercatorViewRequested()));
+        QObject::connect(m_mercatorViewAction, SIGNAL(triggered()),
+                         q, SLOT(mercatorViewRequested()));
+        QObject::connect(m_flatViewAction, SIGNAL(triggered()),
+                         q, SLOT(flatViewRequested()));
+
         applyReducedLayout();
     }
 
@@ -340,21 +349,18 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
     d->updateMapFilter();
     d->updateMapThemeView();
 
-    d->setupToolBar();
+    const bool smallscreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( !smallscreen ) {
+        d->setupToolBar();
+    }
     setProjection(widget->projection());
-
-    connect(d->m_globeViewButton, SIGNAL(clicked()),
-            this, SLOT(globeViewRequested()));
-    connect(d->m_mercatorViewButton, SIGNAL(clicked()),
-            this, SLOT(mercatorViewRequested()));
-    connect(d->m_mercatorViewAction, SIGNAL(triggered()),
-            this, SLOT(mercatorViewRequested()));
-    connect(d->m_flatViewAction, SIGNAL(triggered()),
-            this, SLOT(flatViewRequested()));
 }
 
 void MapViewWidget::resizeEvent(QResizeEvent *event)
 {
+    if (!d->m_toolBar)
+        return;
+
     if (d->m_toolBar->isVisible() && event->size().height() > 400) {
         d->applyExtendedLayout();
     } else if (!d->m_toolBar->isVisible() && event->size().height() <= 400) {

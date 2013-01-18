@@ -16,6 +16,7 @@ set( tilecreator_SRCS
             ../lib/geodata/data/GeoDataCoordinates.cpp
             ../lib/geodata/parser/GeoDocument.cpp
             ../lib/geodata/parser/GeoSceneTypes.cpp
+            ../lib/geodata/scene/GeoSceneAbstractDataset.cpp
             ../lib/geodata/scene/GeoSceneTiled.cpp
             ../lib/geodata/scene/GeoSceneLayer.cpp
             ../lib/MarbleDirs.cpp

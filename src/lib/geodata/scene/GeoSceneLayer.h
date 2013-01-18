@@ -32,35 +32,9 @@
 namespace Marble
 {
 
+class GeoSceneAbstractDataset;
 class GeoSceneFilter;
 class GeoSceneLayerPrivate;
-
-/**
- * @short Contents used inside a layer.
- */
-class GEODATA_EXPORT GeoSceneAbstractDataset : public GeoNode
-{
- public:
-    virtual ~GeoSceneAbstractDataset() {};
-
-    QString name() const;
-
-    QString fileFormat() const;
-    void setFileFormat( const QString& fileFormat );
-
-    int expire() const;
-    void setExpire( int expire );
-
-    virtual QString type() = 0;
-
- protected:
-    explicit GeoSceneAbstractDataset( const QString& name );
-
- private:
-    QString m_name;
-    QString m_fileFormat;
-    int     m_expire;
-};
 
 /**
  * @short Layer of a GeoScene document.

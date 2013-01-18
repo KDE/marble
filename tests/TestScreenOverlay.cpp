@@ -16,6 +16,7 @@
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
 #include <GeoDataScreenOverlay.h>
+#include "TestUtils.h"
 
 using namespace Marble;
 
@@ -33,22 +34,6 @@ void TestScreenOverlay::initTestCase()
     MarbleDebug::enable = true;
 }
 
-GeoDataDocument *parseKml(const QString &content)
-{
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    //qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qFatal( "Could not parse data!" );
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-    return static_cast<GeoDataDocument*>( document );
-}
-
 void TestScreenOverlay::simpleParseTest()
 {
   QString const centerContent (
@@ -62,6 +47,7 @@ void TestScreenOverlay::simpleParseTest()
         "    <rotationXY x=\"1.5\" y=\"3.5\" xunits=\"fraction\" yunits=\"insetPixels\"/>"
         "    <size x=\"23\" y=\"0.5\" xunits=\"pixels\" yunits=\"insetPixels\"/>"
         "    <rotation>23</rotation>"
+        "    <drawOrder>9</drawOrder>"
         "  </ScreenOverlay>"
         "</Folder>"
         "</kml>" );
@@ -94,6 +80,7 @@ void TestScreenOverlay::simpleParseTest()
     QCOMPARE( overlay->size().y(), 0.5 );
 
     QCOMPARE( overlay->rotation(), 23.0 );
+    QCOMPARE( overlay->drawOrder(), 9 );
 
     delete dataDocument;
 }

@@ -14,7 +14,7 @@
     Library General Public License for more details.
 
     You should have received a copy of the GNU Library General Public License
-    aint with this library see the file COPYING.LIB.  If not, write to
+    aint with this library see the file COPYING.LIB.  If not, write
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
@@ -43,6 +43,8 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_BalloonStyle;
     GEODATA_EXPORT extern const char* kmlTag_begin;
     GEODATA_EXPORT extern const char* kmlTag_bgColor;
+    GEODATA_EXPORT extern const char* kmlTag_bottomFov;
+    GEODATA_EXPORT extern const char* kmlTag_Camera;
     GEODATA_EXPORT extern const char* kmlTag_Change;
     GEODATA_EXPORT extern const char* kmlTag_code;
     GEODATA_EXPORT extern const char* kmlTag_color;
@@ -59,6 +61,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_displayName;
     GEODATA_EXPORT extern const char* kmlTag_Document;
     GEODATA_EXPORT extern const char* kmlTag_drawOrder;
+    GEODATA_EXPORT extern const char* kmlTag_duration;
     GEODATA_EXPORT extern const char* kmlTag_east;
     GEODATA_EXPORT extern const char* kmlTag_end;
     GEODATA_EXPORT extern const char* kmlTag_expires;
@@ -66,12 +69,14 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_extrude;
     GEODATA_EXPORT extern const char* kmlTag_Feature;
     GEODATA_EXPORT extern const char* kmlTag_fill;
+    GEODATA_EXPORT extern const char* kmlTag_flyToMode;
     GEODATA_EXPORT extern const char* kmlTag_flyToView;
     GEODATA_EXPORT extern const char* kmlTag_Folder;
     GEODATA_EXPORT extern const char* kmlTag_geomColor;
     GEODATA_EXPORT extern const char* kmlTag_Geometry;
     GEODATA_EXPORT extern const char* kmlTag_GeometryCollection;
     GEODATA_EXPORT extern const char* kmlTag_geomScale;
+    GEODATA_EXPORT extern const char* kmlTag_gridOrigin;
     GEODATA_EXPORT extern const char* kmlTag_GroundOverlay;
     GEODATA_EXPORT extern const char* kmlTag_h;
     GEODATA_EXPORT extern const char* kmlTag_heading;
@@ -80,6 +85,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_httpQuery;
     GEODATA_EXPORT extern const char* kmlTag_Icon;
     GEODATA_EXPORT extern const char* kmlTag_IconStyle;
+    GEODATA_EXPORT extern const char* kmlTag_ImagePyramid;
     GEODATA_EXPORT extern const char* kmlTag_innerBoundaryIs;
     GEODATA_EXPORT extern const char* kmlTag_ItemIcon;
     GEODATA_EXPORT extern const char* kmlTag_key;
@@ -89,6 +95,8 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_latitude;
     GEODATA_EXPORT extern const char* kmlTag_LatLonAltBox;
     GEODATA_EXPORT extern const char* kmlTag_LatLonBox;
+    GEODATA_EXPORT extern const char* kmlTag_LatLonQuad;
+    GEODATA_EXPORT extern const char* kmlTag_leftFov;
     GEODATA_EXPORT extern const char* kmlTag_LinearRing;
     GEODATA_EXPORT extern const char* kmlTag_LineString;
     GEODATA_EXPORT extern const char* kmlTag_LineStyle;
@@ -104,7 +112,10 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_LookAt;
     GEODATA_EXPORT extern const char* kmlTag_maxAltitude;
     GEODATA_EXPORT extern const char* kmlTag_maxFadeExtent;
+    GEODATA_EXPORT extern const char* kmlTag_maxHeight;
     GEODATA_EXPORT extern const char* kmlTag_maxLodPixels;
+    GEODATA_EXPORT extern const char* kmlTag_maxSessionLength;
+    GEODATA_EXPORT extern const char* kmlTag_maxWidth;
     GEODATA_EXPORT extern const char* kmlTag_message;
     GEODATA_EXPORT extern const char* kmlTag_Metadata;
     GEODATA_EXPORT extern const char* kmlTag_minAltitude;
@@ -114,6 +125,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_Model;
     GEODATA_EXPORT extern const char* kmlTag_MultiGeometry;
     GEODATA_EXPORT extern const char* kmlTag_name;
+    GEODATA_EXPORT extern const char* kmlTag_near;
     GEODATA_EXPORT extern const char* kmlTag_NetworkLink;
     GEODATA_EXPORT extern const char* kmlTag_NetworkLinkControl;
     GEODATA_EXPORT extern const char* kmlTag_north;
@@ -140,6 +152,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_Region;
     GEODATA_EXPORT extern const char* kmlTag_request;
     GEODATA_EXPORT extern const char* kmlTag_Response;
+    GEODATA_EXPORT extern const char* kmlTag_rightFov;
     GEODATA_EXPORT extern const char* kmlTag_roll;
     GEODATA_EXPORT extern const char* kmlTag_rotation;
     GEODATA_EXPORT extern const char* kmlTag_rotationXY;
@@ -150,6 +163,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_SchemaField;
     GEODATA_EXPORT extern const char* kmlTag_ScreenOverlay;
     GEODATA_EXPORT extern const char* kmlTag_screenXY;
+    GEODATA_EXPORT extern const char* kmlTag_shape;
     GEODATA_EXPORT extern const char* kmlTag_SimpleArrayData;
     GEODATA_EXPORT extern const char* kmlTag_SimpleArrayField;
     GEODATA_EXPORT extern const char* kmlTag_SimpleField;
@@ -166,9 +180,11 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_tessellate;
     GEODATA_EXPORT extern const char* kmlTag_text;
     GEODATA_EXPORT extern const char* kmlTag_textColor;
+    GEODATA_EXPORT extern const char* kmlTag_tileSize;
     GEODATA_EXPORT extern const char* kmlTag_tilt;
     GEODATA_EXPORT extern const char* kmlTag_TimeSpan;
     GEODATA_EXPORT extern const char* kmlTag_TimeStamp;
+    GEODATA_EXPORT extern const char* kmlTag_topFov;
     GEODATA_EXPORT extern const char* kmlTag_Update;
     GEODATA_EXPORT extern const char* kmlTag_Url;
     GEODATA_EXPORT extern const char* kmlTag_value;
@@ -176,6 +192,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_viewFormat;
     GEODATA_EXPORT extern const char* kmlTag_viewRefreshMode;
     GEODATA_EXPORT extern const char* kmlTag_viewRefreshTime;
+    GEODATA_EXPORT extern const char* kmlTag_ViewVolume;
     GEODATA_EXPORT extern const char* kmlTag_visibility;
     GEODATA_EXPORT extern const char* kmlTag_w;
     GEODATA_EXPORT extern const char* kmlTag_west;
@@ -185,9 +202,11 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_y;
     
     // Google KML Extension Namespace (http://code.google.com/apis/kml/documentation/kmlreference.html#kmlextensions)
+    GEODATA_EXPORT extern const char* kmlTag_FlyTo;
     GEODATA_EXPORT extern const char* kmlTag_MultiTrack;
     GEODATA_EXPORT extern const char* kmlTag_Track;
     GEODATA_EXPORT extern const char* kmlTag_coord;
+    GEODATA_EXPORT extern const char* kmlTag_Tour;
 
 #ifdef KML_LAZY_IMP
 // preliminary implementation for the extra defined Tags

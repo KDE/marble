@@ -17,6 +17,7 @@
 #include "LayerInterface.h"
 
 class QAbstractItemModel;
+class QModelIndex;
 
 namespace Marble
 {
@@ -39,7 +40,9 @@ public:
     virtual QString runtimeTrace() const;
 
 public Q_SLOTS:
-    void invalidateScene();
+    void addPlacemarks( QModelIndex index, int first, int last );
+    void removePlacemarks( QModelIndex index, int first, int last );
+    void resetCacheData();
 
 Q_SIGNALS:
     void repaintNeeded();

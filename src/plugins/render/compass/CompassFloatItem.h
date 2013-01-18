@@ -91,7 +91,7 @@ private Q_SLOTS:
     /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
     int            m_polarity;
 
-    QHash<QString,QVariant> m_settings;
+    int m_themeIndex;
     QDialog * m_configDialog;
     Ui::CompassConfigWidget * m_uiConfigWidget;
 };

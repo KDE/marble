@@ -51,6 +51,7 @@
 #include "GeoSceneFilter.h"
 #include "GeoSceneGeodata.h"
 #include "GeoSceneHead.h"
+#include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 #include "GeoScenePalette.h"
 #include "GeoSceneSettings.h"
@@ -701,7 +702,18 @@ bool MarbleMap::geoCoordinates( int x, int y,
     return d->m_viewport.geoCoordinates( x, y, lon, lat, unit );
 }
 
-void MarbleMapPrivate::setDocument( QString key ) {
+void MarbleMapPrivate::setDocument( QString key )
+{
+    if ( !m_model->mapTheme() ) {
+        // Happens if no valid map theme is set or at application startup
+        // if a file is passed via command line parameters and the last
+        // map theme has not been loaded yet
+        /**
+         * @todo Do we need to queue the document and process it once a map
+         * theme becomes available?
+         */
+        return;
+    }
 
     GeoDataDocument* doc = m_model->fileManager()->at( key );
 
@@ -1213,6 +1225,10 @@ AngleUnit MarbleMap::defaultAngleUnit() const
 {
     if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::Decimal ) {
         return DecimalDegree;
+    } else if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::UTM ) {
+    	return UTM;
+    } else if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::MGRS ) {
+    	return MGRS;
     }
 
     return DMSDegree;
@@ -1222,6 +1238,9 @@ void MarbleMap::setDefaultAngleUnit( AngleUnit angleUnit )
 {
     if ( angleUnit == DecimalDegree ) {
         GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::Decimal );
+        return;
+    } else if ( angleUnit == UTM ) {
+        GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::UTM );
         return;
     }
 

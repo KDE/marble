@@ -22,6 +22,7 @@
 class QWebView;
 class QPainter;
 class QPushButton;
+class MarbleWebView;
 
 namespace Marble
 {
@@ -171,7 +172,7 @@ private:
     QPushButton *m_printButton;
     QPushButton *m_goBackButton;
     QLabel *m_titleText;
-    QWebView *m_webView;
+    MarbleWebView *m_webView;
     QString m_content;
     QColor m_textColor;
     QColor m_backColor;

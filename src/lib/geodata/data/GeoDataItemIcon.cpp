@@ -37,13 +37,13 @@ GeoDataItemIcon::GeoDataItemIcon() :
 }
 
 GeoDataItemIcon::GeoDataItemIcon( const Marble::GeoDataItemIcon &other ) :
-    GeoDataFeature(), d( new GeoDataItemIconPrivate( *other.d ) )
+    GeoDataObject(), d( new GeoDataItemIconPrivate( *other.d ) )
 {
 }
 
 GeoDataItemIcon &GeoDataItemIcon::operator=( const GeoDataItemIcon &other )
 {
-    GeoDataFeature::operator=( other );
+    GeoDataObject::operator=( other );
     *d = *other.d;
     return *this;
 }

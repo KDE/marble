@@ -9,7 +9,13 @@
 //
 
 #include "GeoGraphicsScene.h"
+
+#include "GeoDataFeature.h"
+#include "GeoDataGroundOverlay.h"
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataPhotoOverlay.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataTypes.h"
 #include "GeoGraphicsItem.h"
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
@@ -102,12 +108,23 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
     return result;
 }
 
-void GeoGraphicsScene::removeItem( GeoGraphicsItem* item )
+void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 {
     int zoomLevel;
     qreal north, south, east, west;
-    item->latLonAltBox().boundaries( north, south, east, west );
-    for(zoomLevel = item->minZoomLevel(); zoomLevel >= 0; zoomLevel--)
+
+    if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( feature );
+        placemark->geometry()->latLonAltBox().boundaries( north, south, east, west );
+    } else if( feature->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
+        const GeoDataGroundOverlay *overlay = static_cast<const GeoDataGroundOverlay*>( feature );
+        overlay->latLonBox().boundaries( north, south, east, west );
+    } else if( feature->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
+        const GeoDataPhotoOverlay *overlay = static_cast<const GeoDataPhotoOverlay*>( feature );
+        GeoDataPoint point = overlay->point();
+        point.latLonAltBox().boundaries( north, south, east, west );
+    }
+    for(zoomLevel = feature->zoomLevel(); zoomLevel >= 0; zoomLevel--)
     {
         if( TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ) ==
             TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel ) )
@@ -117,7 +134,11 @@ void GeoGraphicsScene::removeItem( GeoGraphicsItem* item )
     const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
 
     QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( 0, zoomLevel, key.x(), key.y() )];
-    tileList.removeOne( item );
+    foreach( GeoGraphicsItem* item, tileList ) {
+        if( item->feature() == feature ) {
+            tileList.removeAll( item );
+        }
+    }
 }
 
 void GeoGraphicsScene::clear()

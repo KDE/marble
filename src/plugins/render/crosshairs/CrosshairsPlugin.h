@@ -96,8 +96,8 @@ private Q_SLOTS:
 
     QSvgRenderer *m_svgobj;
     QPixmap m_crosshairs;
+    int m_themeIndex;
 
-    QHash<QString,QVariant> m_settings;
     QDialog * m_configDialog;
     Ui::CrosshairsConfigWidget * m_uiConfigWidget;
 };

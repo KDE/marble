@@ -15,9 +15,9 @@
 #include "MarbleGlobal.h"
 
 #include "GeoDataLookAt.h"
+#include "GeoDataCamera.h"
 #include "GeoParser.h"
 #include "GeoDataCoordinates.h"
-
 
 namespace Marble
 {
@@ -31,17 +31,12 @@ namespace kml
 
         GeoStackItem parentItem = parser.parentElement();
 
-        if ( parentItem.is<GeoDataLookAt>() ){
-            QString latitudeTemp = parser.readElementText().trimmed ();
-            qreal latitude = latitudeTemp.toDouble();
-
-            parentItem.nodeAs<GeoDataLookAt>()->setLatitude(latitude,
-                                                            GeoDataCoordinates::Degree);
-#ifdef DEBUG_TAGS
-            mDebug () << "Parsed <" << kmlTag_latitude << "> containing: " <<
-            latitude << " parent item name: " << parentItem.qualifiedName ().
-            first;
-#endif				// DEBUG_TAGS
+        if ( parentItem.is<GeoDataLookAt>() ) {
+            qreal latitude = parser.readElementText().trimmed().toDouble();
+            parentItem.nodeAs<GeoDataLookAt>()->setLatitude(latitude, GeoDataCoordinates::Degree);
+        } else if ( parentItem.is<GeoDataCamera>() ) {
+            qreal latitude = parser.readElementText().trimmed().toDouble();
+            parentItem.nodeAs<GeoDataCamera>()->setLatitude(latitude, GeoDataCoordinates::Degree);
         }
 
         return 0;

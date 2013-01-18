@@ -13,8 +13,7 @@
 #include "GeoDataTreeModel.h"
 #include "PositionProviderPlugin.h"
 #include "PositionTracking.h"
-
-#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
+#include "TestUtils.h"
 
 class FakeProvider : public Marble::PositionProviderPlugin
 {

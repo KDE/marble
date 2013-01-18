@@ -494,42 +494,6 @@ void MarblePart::readSettings()
 
     m_lastFileOpenPath = KUrl::fromLocalFile( MarbleSettings::lastFileOpenDir() );
 
-    // Plugins
-    QHash<QString, int> pluginEnabled;
-    QHash<QString, int> pluginVisible;
-
-    int nameIdSize = MarbleSettings::pluginNameId().size();
-    int enabledSize = MarbleSettings::pluginEnabled().size();
-    int visibleSize = MarbleSettings::pluginVisible().size();
-
-    if ( nameIdSize == enabledSize ) {
-        for ( int i = 0; i < enabledSize; ++i ) {
-            pluginEnabled[ MarbleSettings::pluginNameId()[i] ]
-                = MarbleSettings::pluginEnabled()[i];
-        }
-    }
-
-    if ( nameIdSize == visibleSize ) {
-        for ( int i = 0; i < visibleSize; ++i ) {
-            pluginVisible[ MarbleSettings::pluginNameId()[i] ]
-                = MarbleSettings::pluginVisible()[i];
-        }
-    }
-
-    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        if ( pluginEnabled.contains( (*i)->nameId() ) ) {
-            (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
-            // I think this isn't needed, as it is part of setEnabled()
-//             (*i)->item()->setCheckState( pluginEnabled[ (*i)->nameId() ]  ?  Qt::Checked : Qt::Unchecked );
-        }
-        if ( pluginVisible.contains( (*i)->nameId() ) ) {
-            (*i)->setVisible( pluginVisible[ (*i)->nameId() ] );
-        }
-    }
-
     // Load previous route settings
     m_controlView->marbleModel()->routingManager()->readSettings();
     bool const startupWarning = MarbleSettings::showGuidanceModeStartupWarning();
@@ -595,11 +559,6 @@ void MarblePart::readSettings()
     }
 
     readPluginSettings();
-
-    disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
-                this,                          SLOT( writePluginSettings() ) );
-    connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
-             this,                          SLOT( writePluginSettings() ) );
 
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 }
@@ -699,21 +658,7 @@ void MarblePart::writeSettings()
     MarbleSettings::setSpeedSlider( m_controlView->marbleModel()->clockSpeed() );
 
     // Plugins
-    QList<int>   pluginEnabled;
-    QList<int>   pluginVisible;
-    QStringList  pluginNameId;
-
-    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        pluginEnabled << static_cast<int>( (*i)->enabled() );
-        pluginVisible << static_cast<int>( (*i)->visible() );
-        pluginNameId  << (*i)->nameId();
-    }
-    MarbleSettings::setPluginEnabled( pluginEnabled );
-    MarbleSettings::setPluginVisible( pluginVisible );
-    MarbleSettings::setPluginNameId(  pluginNameId );
+    writePluginSettings();
 
     QString positionProvider;
     PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
@@ -1634,9 +1579,9 @@ void MarblePart::writePluginSettings()
     foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
         KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
 
-        QHash<QString,QVariant> hash = plugin->settings();
+        const QHash<QString,QVariant> hash = plugin->settings();
 
-        QHash<QString,QVariant>::iterator it = hash.begin();
+        QHash<QString,QVariant>::const_iterator it = hash.begin();
         while( it != hash.end() ) {
             group.writeEntry( it.key(), it.value() );
             ++it;
@@ -1647,12 +1592,15 @@ void MarblePart::writePluginSettings()
 
 void MarblePart::readPluginSettings()
 {
+    disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+                this,                          SLOT( writePluginSettings() ) );
+
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
 
     foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
         KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
 
-        QHash<QString,QVariant> hash = plugin->settings();
+        QHash<QString,QVariant> hash;
 
         foreach ( const QString& key, group.keyList() ) {
             hash.insert( key, group.readEntry( key ) );
@@ -1660,6 +1608,9 @@ void MarblePart::readPluginSettings()
 
         plugin->setSettings( hash );
     }
+
+    connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+             this,                          SLOT( writePluginSettings() ) );
 }
 
 void MarblePart::lockFloatItemPosition( bool enabled )

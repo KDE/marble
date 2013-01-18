@@ -27,8 +27,8 @@
 #include "GeoDataContainer.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataParser.h"
 #include "GeoDataDocument.h"
+#include "GeoDataParser.h"
 
 namespace Marble
 {

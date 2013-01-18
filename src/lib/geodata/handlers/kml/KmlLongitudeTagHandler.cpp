@@ -14,6 +14,7 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataLookAt.h"
+#include "GeoDataCamera.h"
 #include "GeoParser.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"
@@ -29,16 +30,12 @@ namespace kml
         Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_longitude ) );
 
         GeoStackItem parentItem = parser.parentElement();
-        if ( parentItem.is<GeoDataLookAt>() ){
-            QString longitudeTemp = parser.readElementText().trimmed();
-            qreal longitude = longitudeTemp.toDouble();
-            parentItem.nodeAs<GeoDataLookAt>()->setLongitude(longitude,
-                                                             GeoDataCoordinates::Degree);
-#ifdef DEBUG_TAGS
-            mDebug () << "Parsed <" << kmlTag_longitude << "> containing: " <<
-            longitude << " parent item name: " << parentItem.qualifiedName ().
-            first;
-#endif // DEBUG_TAGS
+        if ( parentItem.is<GeoDataLookAt>() ) {
+            qreal longitude = parser.readElementText().trimmed().toDouble();
+            parentItem.nodeAs<GeoDataLookAt>()->setLongitude(longitude, GeoDataCoordinates::Degree);
+        } else if ( parentItem.is<GeoDataCamera>() ) {
+            qreal longitude = parser.readElementText().trimmed().toDouble();
+            parentItem.nodeAs<GeoDataCamera>()->setLongitude(longitude, GeoDataCoordinates::Degree);
         }
 
       return 0;

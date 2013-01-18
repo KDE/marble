@@ -118,7 +118,7 @@ QDialog *EarthquakePlugin::configDialog()
 
 QHash<QString,QVariant> EarthquakePlugin::settings() const
 {
-    QHash<QString, QVariant> settings;
+    QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
     settings.insert( "numResults", numberOfItems() );
     settings.insert( "minMagnitude", m_minMagnitude );
@@ -131,6 +131,8 @@ QHash<QString,QVariant> EarthquakePlugin::settings() const
 
 void EarthquakePlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
+    AbstractDataPlugin::setSettings( settings );
+
     setNumberOfItems( settings.value( "numResults", 20 ).toInt() );
     m_minMagnitude = settings.value( "minMagnitude", 0.0 ).toReal();
     m_startDate = settings.value( "startDate", QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ).toDateTime();

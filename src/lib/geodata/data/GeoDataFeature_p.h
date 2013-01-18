@@ -37,7 +37,7 @@ class GeoDataFeaturePrivate
         m_address(),
         m_phoneNumber(),
         m_styleUrl(),
-        m_abstractView(),
+        m_abstractView( 0 ),
         m_popularity( 0 ),
         m_zoomLevel( 1 ),
         m_visible( true ),
@@ -60,6 +60,7 @@ class GeoDataFeaturePrivate
         m_address( other.m_address ),
         m_phoneNumber( other.m_phoneNumber ),
         m_styleUrl( other.m_styleUrl ),
+        m_abstractView( other.m_abstractView ),
         m_popularity( other.m_popularity ),
         m_zoomLevel( other.m_zoomLevel ),
         m_visible( other.m_visible ),
@@ -83,6 +84,7 @@ class GeoDataFeaturePrivate
         m_address = other.m_address;
         m_phoneNumber = other.m_phoneNumber;
         m_styleUrl = other.m_styleUrl;
+        m_abstractView = other.m_abstractView;
         m_popularity = other.m_popularity;
         m_zoomLevel = other.m_zoomLevel;
         m_visible = other.m_visible;
@@ -180,7 +182,7 @@ class GeoDataFeaturePrivate
     QString             m_address;      // The address.  Optional
     QString             m_phoneNumber;  // Phone         Optional
     QString             m_styleUrl;     // styleUrl     Url#tag to a document wide style
-    GeoDataAbstractView m_abstractView; // AbstractView  Optional
+    GeoDataAbstractView* m_abstractView; // AbstractView  Optional
     qint64              m_popularity;   // Population/Area/Altitude depending on placemark(!)
     int                 m_zoomLevel;    // Zoom Level of the feature
 

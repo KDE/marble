@@ -21,7 +21,7 @@
 #include <QtCore/QVector>
 #include <QtCore/QSize>
 
-#include "GeoSceneLayer.h"
+#include "GeoSceneAbstractDataset.h"
 #include "MarbleGlobal.h"
 
 /**
@@ -40,7 +40,7 @@ class DownloadPolicy;
 class ServerLayout;
 class TileId;
 
-class GeoSceneTiled : public GeoSceneAbstractDataset
+class GEODATA_EXPORT GeoSceneTiled : public GeoSceneAbstractDataset
 {
  public:
     enum StorageLayout { Marble, OpenStreetMap, TileMapService };

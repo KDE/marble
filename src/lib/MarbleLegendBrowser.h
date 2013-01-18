@@ -18,7 +18,7 @@
 
 
 #include <QString>
-#include <QtWebKit/QWebView>
+#include "MarbleWebView.h"
 
 #include "marble_export.h"
 
@@ -31,7 +31,7 @@ namespace Marble
 class MarbleModel;
 class MarbleLegendBrowserPrivate;
 
-class MARBLE_EXPORT MarbleLegendBrowser : public QWebView
+class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
 {
     Q_OBJECT
 

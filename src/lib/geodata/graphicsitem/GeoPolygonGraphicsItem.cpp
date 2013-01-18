@@ -19,15 +19,15 @@
 namespace Marble
 {
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataPolygon* polygon )
-        : GeoGraphicsItem(),
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataPolygon* polygon )
+        : GeoGraphicsItem( feature ),
           m_polygon( polygon ),
           m_ring( 0 )
 {
 }
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataLinearRing* ring )
-        : GeoGraphicsItem(),
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataLinearRing* ring )
+        : GeoGraphicsItem( feature ),
           m_polygon( 0 ),
           m_ring( ring )
 {

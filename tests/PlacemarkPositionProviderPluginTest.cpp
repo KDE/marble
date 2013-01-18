@@ -14,8 +14,7 @@
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
 #include "MarbleModel.h"
-
-#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
+#include "TestUtils.h"
 
 Q_DECLARE_METATYPE( Marble::GeoDataPlacemark * )
 

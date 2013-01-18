@@ -30,6 +30,7 @@
 #include "DgmlAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneDocument.h"
+#include "GeoSceneLayer.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneGeodata.h"
 

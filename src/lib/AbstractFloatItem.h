@@ -55,6 +55,9 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
                                 const QSizeF &size = QSizeF( 150.0, 50.0 ) );
     virtual ~AbstractFloatItem();
 
+    virtual QHash<QString,QVariant> settings() const;
+    virtual void setSettings(const QHash<QString, QVariant> &settings);
+
     /**
      * @brief current pen for rendering
      * @return pen
@@ -114,7 +117,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      *
      * @return position locked or not
      */
-    bool positionLocked();
+    bool positionLocked() const;
 
  public Q_SLOTS:
     /**
