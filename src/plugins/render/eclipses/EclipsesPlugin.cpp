@@ -192,6 +192,7 @@ void EclipsesPlugin::initialize()
     m_eclipsesActionGroup->addAction( m_eclipsesListMenu->menuAction() );
 
     m_eclipsesMenuAction = new QAction( tr("Browse Ecli&pses..."), m_eclipsesActionGroup );
+    m_eclipsesMenuAction->setIcon( QIcon( ":res/eclipses.png" ) );
     m_eclipsesActionGroup->addAction( m_eclipsesMenuAction );
     connect( m_eclipsesMenuAction, SIGNAL(triggered()),
              m_listDialog, SLOT(show()) );
@@ -423,6 +424,20 @@ void EclipsesPlugin::updateEclipses()
             QAction *action = m_eclipsesListMenu->addAction(
                         item->dateMaximum().date().toString() );
             action->setData( QVariant( item->index() ) );
+            switch( item->phase() ) {
+                case EclipsesItem::PartialSun:
+                    action->setIcon( QIcon( ":res/solar_partial.png" ) );
+                    break;
+                case EclipsesItem::NonCentralAnnularSun:
+                case EclipsesItem::AnnularSun:
+                    action->setIcon( QIcon( ":res/solar_annular.png" ) );
+                    break;
+                case EclipsesItem::AnnularTotalSun:
+                case EclipsesItem::NonCentralTotalSun:
+                case EclipsesItem::TotalSun:
+                    action->setIcon( QIcon( ":res/solar_total.png" ) );
+                    break;
+            }
             connect( m_eclipsesListMenu, SIGNAL(triggered(QAction*)),
                      this, SLOT(showEclipseFromMenu(QAction*)) );
         }
