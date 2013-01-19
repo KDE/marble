@@ -65,6 +65,11 @@ Q_SIGNALS:
      */
     void buttonShowClicked( int year, int index );
 
+    /**
+     * @brief This signal is emitted when the 'Settings' button is clicked
+     */
+    void buttonSettingsClicked();
+
 protected Q_SLOTS:
     /**
      * @brief Accept the dialog
@@ -96,7 +101,7 @@ protected:
 
 private:
     const MarbleModel *m_marbleModel;
-    Ui::EclipsesBrowserDialog *m_listWidget;
+    Ui::EclipsesBrowserDialog *m_browserWidget;
     EclipsesModel *m_eclModel;
     int m_year;
 };

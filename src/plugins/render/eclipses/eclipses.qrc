@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>res/eclipses.png</file>
-        <file>res/eclipses.png</file>
         <file>res/lunar_penumbra.png</file>
         <file>res/solar_annular.png</file>
         <file>res/solar_total.png</file>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>591</width>
-    <height>183</height>
+    <height>218</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,6 +20,9 @@
    <item>
     <widget class="QWidget" name="widget" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>6</number>
+      </property>
       <property name="margin">
        <number>0</number>
       </property>
@@ -92,23 +95,6 @@
         </property>
        </spacer>
       </item>
-      <item>
-       <widget class="QPushButton" name="buttonClose">
-        <property name="text">
-         <string>&amp;Close</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="buttonShow">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>&amp;Go To Selected Eclipse</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
@@ -139,13 +125,50 @@
    </item>
    <item>
     <widget class="QWidget" name="widgetButtons" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <property name="spacing">
-       <number>6</number>
-      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
       <property name="margin">
        <number>0</number>
       </property>
+      <item>
+       <widget class="QPushButton" name="buttonSettings">
+        <property name="text">
+         <string>&amp;Settings...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="buttonClose">
+        <property name="text">
+         <string>&amp;Close</string>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="buttonShow">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>&amp;Go To Selected Eclipse</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -154,39 +177,8 @@
  <tabstops>
   <tabstop>treeView</tabstop>
  </tabstops>
- <resources/>
- <connections>
-  <connection>
-   <sender>buttonShow</sender>
-   <signal>clicked()</signal>
-   <receiver>EclipsesBrowserDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>377</x>
-     <y>252</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>380</x>
-     <y>280</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonClose</sender>
-   <signal>clicked()</signal>
-   <receiver>EclipsesBrowserDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>291</x>
-     <y>264</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>280</x>
-     <y>283</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <resources>
+  <include location="eclipses.qrc"/>
+ </resources>
+ <connections/>
 </ui>

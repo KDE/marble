@@ -144,7 +144,7 @@ private:
     // dialogs
     QDialog *m_configDialog;
     Ui::EclipsesConfigDialog *m_configWidget;
-    EclipsesBrowserDialog *m_listDialog;
+    EclipsesBrowserDialog *m_browserDialog;
     QDialog *m_reminderDialog;
     Ui::EclipsesReminderDialog *m_reminderWidget;
 };

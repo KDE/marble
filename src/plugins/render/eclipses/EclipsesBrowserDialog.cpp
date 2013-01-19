@@ -38,7 +38,7 @@ EclipsesBrowserDialog::~EclipsesBrowserDialog()
 void EclipsesBrowserDialog::setYear( int year )
 {
     m_year = year;
-    m_listWidget->spinBoxYear->setValue( year );
+    m_browserWidget->spinBoxYear->setValue( year );
 }
 
 int EclipsesBrowserDialog::year() const
@@ -48,7 +48,7 @@ int EclipsesBrowserDialog::year() const
 
 void EclipsesBrowserDialog::accept()
 {
-    QItemSelectionModel *s = m_listWidget->treeView->selectionModel();
+    QItemSelectionModel *s = m_browserWidget->treeView->selectionModel();
     QModelIndex selected = s->currentIndex();
 
     if( selected.isValid() ) {
@@ -73,30 +73,32 @@ void EclipsesBrowserDialog::updateEclipsesBrowserForYear( int year )
 
 void EclipsesBrowserDialog::updateButtonStates()
 {
-    QItemSelectionModel *s = m_listWidget->treeView->selectionModel();
-    m_listWidget->buttonShow->setEnabled( s->hasSelection() );
+    QItemSelectionModel *s = m_browserWidget->treeView->selectionModel();
+    m_browserWidget->buttonShow->setEnabled( s->hasSelection() );
 }
 
 void EclipsesBrowserDialog::initialize()
 {
-    m_listWidget = new Ui::EclipsesBrowserDialog();
-    m_listWidget->setupUi( this );
+    m_browserWidget = new Ui::EclipsesBrowserDialog();
+    m_browserWidget->setupUi( this );
 
-    m_listWidget->treeView->setExpandsOnDoubleClick( false );
+    m_browserWidget->treeView->setExpandsOnDoubleClick( false );
 
     m_eclModel = new EclipsesModel( m_marbleModel );
-    m_listWidget->treeView->setModel( m_eclModel );
+    m_browserWidget->treeView->setModel( m_eclModel );
 
-    connect( m_listWidget->buttonShow, SIGNAL(clicked()),
+    connect( m_browserWidget->buttonShow, SIGNAL(clicked()),
              this, SLOT(accept()) );
-    connect( m_listWidget->buttonClose, SIGNAL(clicked()),
+    connect( m_browserWidget->buttonClose, SIGNAL(clicked()),
              this, SLOT(reject()) );
-    connect( m_listWidget->spinBoxYear, SIGNAL(valueChanged(int)),
+    connect( m_browserWidget->spinBoxYear, SIGNAL(valueChanged(int)),
              this, SLOT(updateEclipsesBrowserForYear(int)) );
-    connect( m_listWidget->treeView->selectionModel(),
+    connect( m_browserWidget->treeView->selectionModel(),
              SIGNAL(selectionChanged(const QItemSelection&,
                                      const QItemSelection&)),
              this, SLOT(updateButtonStates()) );
+    connect( m_browserWidget->buttonSettings, SIGNAL(clicked()),
+             SIGNAL(buttonSettingsClicked()) );
 
     setYear( m_marbleModel->clock()->dateTime().date().year() );
 

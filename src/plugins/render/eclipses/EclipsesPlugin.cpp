@@ -43,7 +43,7 @@ EclipsesPlugin::EclipsesPlugin()
       m_menuYear( 0 ),
       m_configDialog( 0 ),
       m_configWidget( 0 ),
-      m_listDialog( 0 ),
+      m_browserDialog( 0 ),
       m_reminderDialog( 0 ),
       m_reminderWidget( 0 )
 {
@@ -61,7 +61,7 @@ EclipsesPlugin::EclipsesPlugin( const MarbleModel *marbleModel )
      m_menuYear( 0 ),
      m_configDialog( 0 ),
      m_configWidget( 0 ),
-     m_listDialog( 0 ),
+     m_browserDialog( 0 ),
      m_reminderDialog( 0 ),
      m_reminderWidget( 0 )
 {
@@ -78,7 +78,7 @@ EclipsesPlugin::~EclipsesPlugin()
         delete m_eclipsesActionGroup;
         delete m_eclipsesListMenu;
         delete m_configDialog;
-        delete m_listDialog;
+        delete m_browserDialog;
         delete m_reminderDialog;
     }
 }
@@ -176,9 +176,11 @@ void EclipsesPlugin::initialize()
     connect( m_configWidget->buttonBox->button( QDialogButtonBox::Apply ),
              SIGNAL(clicked()), this, SLOT(writeSettings()) );
 
-    m_listDialog = new EclipsesBrowserDialog( marbleModel() );
-    connect( m_listDialog, SIGNAL(buttonShowClicked(int, int)),
+    m_browserDialog = new EclipsesBrowserDialog( marbleModel() );
+    connect( m_browserDialog, SIGNAL(buttonShowClicked(int, int)),
              this, SLOT(showEclipse(int,int)) );
+    connect( m_browserDialog, SIGNAL(buttonSettingsClicked()),
+             m_configDialog, SLOT(show()) );
 
     m_reminderDialog = new QDialog();
     m_reminderWidget = new Ui::EclipsesReminderDialog();
@@ -198,7 +200,7 @@ void EclipsesPlugin::initialize()
     m_eclipsesMenuAction->setIcon( QIcon( ":res/eclipses.png" ) );
     m_eclipsesActionGroup->addAction( m_eclipsesMenuAction );
     connect( m_eclipsesMenuAction, SIGNAL(triggered()),
-             m_listDialog, SLOT(show()) );
+             m_browserDialog, SLOT(show()) );
 
     // initialize eclipses model
     m_model = new EclipsesModel( marbleModel() );
