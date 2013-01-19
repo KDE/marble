@@ -32,7 +32,7 @@ namespace Marble
 
     class MarbleWidget;
     class PlacemarkTextAnnotation;
-    class PointScreenGraphicsItem;
+//    class PointScreenGraphicsItem;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -95,7 +95,6 @@ public slots:
     void saveAnnotationFile();
     void loadAnnotationFile();
 
-    void selectArea( bool );
 
     void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );
@@ -121,8 +120,6 @@ private:
 
     //used while creating new polygons
     GeoDataLineString* m_tmp_lineString;
-
-    QPair<PointScreenGraphicsItem*, PointScreenGraphicsItem*> m_selectionBox;
 
     bool m_addingPlacemark;
     bool m_drawingPolygon;

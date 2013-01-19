@@ -29,7 +29,6 @@
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 #include "PlacemarkTextAnnotation.h"
-#include "PointScreenGraphicsItem.h"
 
 namespace Marble
 {
@@ -124,14 +123,12 @@ void OsmAnnotatePlugin::initialize ()
     m_actions = 0;
     m_toolbarActions = 0;
 
-    PointScreenGraphicsItem* topLeft = new PointScreenGraphicsItem();
-    PointScreenGraphicsItem* bottomRight = new PointScreenGraphicsItem();
+//    PointScreenGraphicsItem* topLeft = new PointScreenGraphicsItem();
+//    PointScreenGraphicsItem* bottomRight = new PointScreenGraphicsItem();
 
-    topLeft->setVisible(false);
-    bottomRight->setVisible(false);
+//    topLeft->setVisible(false);
+//    bottomRight->setVisible(false);
 
-    m_selectionBox.first = topLeft;
-    m_selectionBox.second = bottomRight;
     m_isInitialized = true;
 }
 
@@ -181,11 +178,6 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
     while(i.hasNext()) {
         TmpGraphicsItem* tmp= i.next();
         tmp->paint(painter, viewport);
-    }
-
-    if( m_selectionBox.first->visible() ) {
-        m_selectionBox.first->paint( painter, viewport, renderPos, layer );
-        m_selectionBox.second->paint( painter, viewport, renderPos, layer );
     }
 
     return true;
@@ -255,13 +247,8 @@ void OsmAnnotatePlugin::loadOsmFile()
 
 void OsmAnnotatePlugin::downloadOsmFile()
 {
-    if( !m_selectionBox.first->visible() ) {
-        m_errorMessage.showMessage( tr("Please select an area before trying to "
-                                       "download an OSM file" ) );
-        return;
-    }
-    QPointF topLeft = m_selectionBox.first->position();
-    QPointF bottomRight = m_selectionBox.second->position();
+    QPointF topLeft(0,0);
+    QPointF bottomRight(m_marbleWidget->size().width(), m_marbleWidget->size().height());
 
     qreal lonTop, latTop;
     qreal lonBottom, latBottom;
@@ -322,10 +309,11 @@ void OsmAnnotatePlugin::saveAnnotationFile()
 
     QList<PlacemarkTextAnnotation*> allAnnotations = annotations();
 
-//    PlacemarkTextAnnotation* annotation;
-//    foreach( annotation, allAnnotations ) {
-//        document.append( annotation->toGeoData() );
-//    }
+    PlacemarkTextAnnotation* annotation;
+    foreach( annotation, allAnnotations ) {
+        GeoDataPlacemark *placemark = new GeoDataPlacemark( *annotation->feature() );
+        document.append( placemark );
+    }
 
     QString filename;
     filename = QFileDialog::getSaveFileName( 0, tr("Save Annotation File"),
@@ -391,27 +379,6 @@ void OsmAnnotatePlugin::loadAnnotationFile()
         delete document;
         emit repaintNeeded(QRegion());
     }
-}
-
-void OsmAnnotatePlugin::selectArea( bool startSelectingArea )
-{
-    if ( !startSelectingArea ) {
-        //finished selecting
-        m_selectionBox.first->setVisible( false );
-        m_selectionBox.second->setVisible( false );
-        return;
-    }
-
-    //move the 2 squares to the middle
-    QPointF middle( m_marbleWidget->size().width() /2 ,
-                    m_marbleWidget->size().height() /2 );
-    m_selectionBox.first->setPosition( middle - QPointF( 20, 20 ) );
-    m_selectionBox.second->setPosition( middle + QPointF( 20, 20 ) );
-
-    m_selectionBox.first->setVisible( true );
-    m_selectionBox.second->setVisible( true );
-
-    emit repaintNeeded(QRegion());
 }
 
 bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
@@ -515,7 +482,6 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QAction*    saveAnnotationFile;
     QAction*    loadAnnotationFile;
     QAction*    enableInputAction;
-    QAction*    selectArea;
     QAction*    downloadOsm;
 
     addPlacemark = new QAction(this);
@@ -560,13 +526,6 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     connect( enableInputAction, SIGNAL(toggled(bool)),
                        widget, SLOT(setInputEnabled(bool)) );
 
-    selectArea = new QAction( this );
-    selectArea->setText( tr("Select Map Area") );
-    selectArea->setCheckable( true );
-    connect( selectArea, SIGNAL(triggered(bool)),
-             this, SLOT(selectArea(bool)) );
-
-
     downloadOsm = new QAction( this );
     downloadOsm->setText( tr("Download Osm File") );
     downloadOsm->setToolTip(tr("Download Osm File for selected area"));
@@ -584,7 +543,6 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     group->addAction( loadAnnotationFile );
     group->addAction( endSeparator );
 
-    nonExclusiveGroup->addAction( selectArea );
     nonExclusiveGroup->addAction( downloadOsm );
 
     actions->append( initial );
