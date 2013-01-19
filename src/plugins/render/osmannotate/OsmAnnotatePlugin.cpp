@@ -311,16 +311,6 @@ void OsmAnnotatePlugin::downloadOsmFile()
 
 void OsmAnnotatePlugin::saveAnnotationFile()
 {
-    GeoDataDocument document;
-
-    QList<PlacemarkTextAnnotation*> allAnnotations = annotations();
-
-    PlacemarkTextAnnotation* annotation;
-    foreach( annotation, allAnnotations ) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark( *annotation->feature() );
-        document.append( placemark );
-    }
-
     QString filename;
     filename = QFileDialog::getSaveFileName( 0, tr("Save Annotation File"),
                             QString(),
@@ -337,9 +327,9 @@ void OsmAnnotatePlugin::saveAnnotationFile()
         // Open file in right mode
         file.open( QIODevice::ReadWrite );
 
-//        if ( !writer.write( &file, document ) ) {
-//            qDebug( "Could not write the file." );
-//        }
+        if ( !writer.write( &file, m_AnnotationDocument ) ) {
+            qDebug( "Could not write the file." );
+        }
     }
 }
 
