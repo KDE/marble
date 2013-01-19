@@ -112,9 +112,7 @@ private:
     QList<QActionGroup*>    *m_actions;
     QList<QActionGroup*>    *m_toolbarActions;
 
-    //Intended to be replaced by an actual model system
-    //FIXME: Merge the two models once TmpGraphicsItem is eliminated
-    QList<TmpGraphicsItem*> model;
+    QList<TmpGraphicsItem*> m_graphicsItems;
 
     QList<PlacemarkTextAnnotation*> annotations() const;
 

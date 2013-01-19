@@ -173,7 +173,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         }
     }
 
-    QListIterator<TmpGraphicsItem*> i(model);
+    QListIterator<TmpGraphicsItem*> i( m_graphicsItems );
 
     while(i.hasNext()) {
         TmpGraphicsItem* tmp= i.next();
@@ -202,7 +202,7 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
 
             area->setGeometry( poly );
 
-            model.append(area);
+            m_graphicsItems.append( area );
 
             //FIXME only redraw the new polygon
             emit(redraw());
@@ -373,7 +373,7 @@ void OsmAnnotatePlugin::loadAnnotationFile()
             PlacemarkTextAnnotation* annotation = new PlacemarkTextAnnotation( *it );
             annotation->setName( (*it)->name() );
             annotation->setDescription( (*it)->description() );
-            model.append( annotation );
+            m_graphicsItems.append( annotation );
         }
 
         delete document;
@@ -412,8 +412,8 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     }
 
     //Pass the event to Graphics Items
-    QList<TmpGraphicsItem*>::ConstIterator itemIterator = model.constBegin();
-    for( ; itemIterator < model.constEnd() ; ++itemIterator ) {
+    QList<TmpGraphicsItem*>::ConstIterator itemIterator = m_graphicsItems.constBegin();
+    for( ; itemIterator < m_graphicsItems.constEnd() ; ++itemIterator ) {
         QListIterator<QRegion> it ( (*itemIterator)->regions() );
 
         while ( it.hasNext() ) {
@@ -435,7 +435,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
         placemark->setCoordinate( coordinates );
         PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation( placemark );
-        model.append(t);
+        m_graphicsItems.append( t );
 
         //FIXME only repaint the new placemark
         ( ( MarbleWidget* ) watched)->update();
@@ -571,7 +571,7 @@ QList<PlacemarkTextAnnotation*> OsmAnnotatePlugin::annotations() const
 {
     QList<PlacemarkTextAnnotation*> tmpAnnotations;
     TmpGraphicsItem* item;
-    foreach( item, model ) {
+    foreach( item, m_graphicsItems ) {
         PlacemarkTextAnnotation* annotation = dynamic_cast<PlacemarkTextAnnotation*>(item);
         if( annotation ) {
             tmpAnnotations.append( annotation );
