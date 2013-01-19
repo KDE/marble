@@ -257,8 +257,8 @@ bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item )
     QList<GeoDataCoordinates>::const_iterator ci;
     int phase = item->phase();
 
-    // plot central line for central eclipses
-    if( m_configWidget->checkBoxShowCentralLine->isChecked() ) {
+    // plot central line
+    if( m_configWidget->checkBoxShowCentralLine->isChecked() && phase > 3 ) {
         painter->setPen( Qt::black );
         painter->drawPolyline( item->centralLine() );
     }
