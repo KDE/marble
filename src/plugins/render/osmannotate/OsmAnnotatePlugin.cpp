@@ -35,6 +35,7 @@ namespace Marble
 
 OsmAnnotatePlugin::OsmAnnotatePlugin()
         : RenderPlugin( 0 ),
+          m_AnnotationDocument( new GeoDataDocument ),
           m_networkAccessManager( 0 ),
           m_isInitialized( false )
 {
@@ -42,6 +43,7 @@ OsmAnnotatePlugin::OsmAnnotatePlugin()
 
 OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
         : RenderPlugin(model),
+          m_AnnotationDocument( new GeoDataDocument ),
           m_networkAccessManager( 0 ),
           m_isInitialized( false )
 {
@@ -50,6 +52,7 @@ OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
 
 OsmAnnotatePlugin::~OsmAnnotatePlugin()
 {
+    delete m_AnnotationDocument;
     delete m_networkAccessManager;
 }
 

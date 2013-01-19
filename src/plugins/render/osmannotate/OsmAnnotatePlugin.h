@@ -32,7 +32,7 @@ namespace Marble
 
     class MarbleWidget;
     class PlacemarkTextAnnotation;
-//    class PointScreenGraphicsItem;
+    class GeoDataDocument;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -112,6 +112,7 @@ private:
     QList<QActionGroup*>    *m_actions;
     QList<QActionGroup*>    *m_toolbarActions;
 
+    GeoDataDocument *m_AnnotationDocument;
     QList<TmpGraphicsItem*> m_graphicsItems;
 
     QList<PlacemarkTextAnnotation*> annotations() const;
