@@ -257,74 +257,51 @@ bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item )
     QList<GeoDataCoordinates>::const_iterator ci;
     int phase = item->phase();
 
-    // plot central line
-    if( m_configWidget->checkBoxShowCentralLine->isChecked() && phase > 3 ) {
-        painter->setPen( Qt::black );
-        painter->drawPolyline( item->centralLine() );
-    }
-
-    // total or annular eclipse
-    if( m_configWidget->checkBoxShowUmbra->isChecked() && phase > 3 )
-    {
-        painter->setPen( Oxygen::aluminumGray4 );
-        QColor sunBoundingBrush ( Oxygen::aluminumGray4 );
-        sunBoundingBrush.setAlpha( 128 );
-        painter->setBrush( sunBoundingBrush );
-        painter->drawPolygon( item->umbra() );
-
-        // draw shadow cone
-        painter->setPen( Qt::black );
-        ci = item->shadowConeUmbra().constBegin();
-        for ( ; ci != item->shadowConeUmbra().constEnd(); ++ci ) {
-            painter->drawEllipse( *ci, 2, 2 );
-        }
-    }
-
-    // penumbra shadow cones
-
+    // Draw full penumbra shadow cone
     if( m_configWidget->checkBoxShowFullPenumbra->isChecked() ) {
-        painter->setPen( Qt::blue );
-        ci = item->shadowConePenumbra().constBegin();
-        for ( ; ci != item->shadowConePenumbra().constEnd(); ++ci ) {
-            painter->drawEllipse( *ci, 2, 2 );
-        }
-    }
-
-    if( m_configWidget->checkBoxShow60MagPenumbra->isChecked() ) {
-        painter->setPen( Qt::magenta );
-        ci = item->shadowCone60MagPenumbra().constBegin();
-        for ( ; ci != item->shadowCone60MagPenumbra().constEnd(); ++ci ) {
-            painter->drawEllipse( *ci, 3, 3 );
-        }
-    }
-
-    if( m_configWidget->checkBoxShowMaximum->isChecked() ) {
-        // mark point of maximum eclipse
-        painter->setPen( Qt::white );
-        QColor sunBoundingBrush ( Qt::white );
-        sunBoundingBrush.setAlpha( 128 );
+        painter->setPen( Oxygen::aluminumGray1 );
+        QColor sunBoundingBrush ( Oxygen::aluminumGray6 );
+        sunBoundingBrush.setAlpha( 48 );
         painter->setBrush( sunBoundingBrush );
-
-        painter->drawEllipse( item->maxLocation(), 15, 15 );
-        painter->setPen( Oxygen::brickRed4 );
-        painter->drawText( item->maxLocation(), tr( "Maximum of Eclipse" ) );
+        painter->drawPolygon( item->shadowConePenumbra() );
     }
 
+    // Draw 60% penumbra shadow cone
+    if( m_configWidget->checkBoxShow60MagPenumbra->isChecked() ) {
+        painter->setPen( Oxygen::aluminumGray2 );
+        QColor penumbraBrush ( Oxygen::aluminumGray6 );
+        penumbraBrush.setAlpha( 96 );
+        painter->setBrush( penumbraBrush );
+        painter->drawPolygon( item->shadowCone60MagPenumbra() );
+    }
+
+    // Draw southern boundary of the penumbra
     if( m_configWidget->checkBoxShowSouthernPenumbra->isChecked() ) {
-        // southern boundary
-        painter->setPen( Oxygen::brickRed4 );
+        QColor southernBoundaryColor(Oxygen::brickRed1);
+        southernBoundaryColor.setAlpha(128);
+        QPen southernBoundary(southernBoundaryColor);
+        southernBoundary.setWidth(3);
+        painter->setPen( southernBoundary );
+        painter->drawPolyline( item->southernPenumbra() );
+        painter->setPen( Oxygen::brickRed5 );
         painter->drawPolyline( item->southernPenumbra() );
     }
 
+    // Draw northern boundary of the penumbra
     if( m_configWidget->checkBoxShowNorthernPenumbra->isChecked() ) {
-        // northern boundary
-        painter->setPen( Oxygen::brickRed4 );
+        QColor northernBoundaryColor(Oxygen::brickRed1);
+        northernBoundaryColor.setAlpha(128);
+        QPen northernBoundary(northernBoundaryColor);
+        northernBoundary.setWidth(3);
+        painter->setPen( northernBoundary );
+        painter->drawPolyline( item->northernPenumbra() );
+        painter->setPen( Oxygen::brickRed5 );
         painter->drawPolyline( item->northernPenumbra() );
     }
 
+    // Draw Sunrise / Sunset Boundaries
     if( m_configWidget->checkBoxShowSunBoundaries->isChecked() ) {
-        // Sunrise / Sunset Boundaries
-        painter->setPen( Oxygen::hotOrange5 );
+        painter->setPen( Oxygen::hotOrange6 );
         const QList<GeoDataLinearRing> boundaries = item->sunBoundaries();
         QList<GeoDataLinearRing>::const_iterator i = boundaries.constBegin();
         QColor sunBoundingBrush ( Oxygen::hotOrange5 );
@@ -333,6 +310,41 @@ bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item )
         for( ; i != boundaries.constEnd(); ++i ) {
             painter->drawPolygon( *i );
         }
+    }
+
+    // total or annular eclipse
+    if( m_configWidget->checkBoxShowUmbra->isChecked() && phase > 3 )
+    {
+        painter->setPen( Oxygen::aluminumGray4 );
+        QColor sunBoundingBrush ( Oxygen::aluminumGray6 );
+        sunBoundingBrush.setAlpha( 128 );
+        painter->setBrush( sunBoundingBrush );
+        painter->drawPolygon( item->umbra() );
+
+        // draw shadow cone
+        painter->setPen( Qt::black );
+        QColor shadowConeBrush ( Oxygen::aluminumGray6 );
+        shadowConeBrush.setAlpha( 128 );
+        painter->setBrush( shadowConeBrush );
+        painter->drawPolygon( item->shadowConeUmbra() );
+    }
+
+    // plot central line
+    if( m_configWidget->checkBoxShowCentralLine->isChecked() && phase > 3 ) {
+        painter->setPen( Qt::black );
+        painter->drawPolyline( item->centralLine() );
+    }
+
+    // mark point of maximum eclipse
+    if( m_configWidget->checkBoxShowMaximum->isChecked() ) {
+        painter->setPen( Qt::white );
+        QColor sunBoundingBrush ( Qt::white );
+        sunBoundingBrush.setAlpha( 128 );
+        painter->setBrush( sunBoundingBrush );
+
+        painter->drawEllipse( item->maxLocation(), 15, 15 );
+        painter->setPen( Oxygen::brickRed4 );
+        painter->drawText( item->maxLocation(), tr( "Maximum of Eclipse" ) );
     }
 
     return true;

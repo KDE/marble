@@ -143,7 +143,7 @@ const GeoDataLineString& EclipsesItem::northernPenumbra()
     return m_northernPenumbra;
 }
 
-const QList<GeoDataCoordinates>& EclipsesItem::shadowConeUmbra()
+GeoDataLinearRing EclipsesItem::shadowConeUmbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -152,7 +152,7 @@ const QList<GeoDataCoordinates>& EclipsesItem::shadowConeUmbra()
     return m_shadowConeUmbra;
 }
 
-const QList<GeoDataCoordinates>& EclipsesItem::shadowConePenumbra()
+GeoDataLinearRing EclipsesItem::shadowConePenumbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
@@ -161,7 +161,7 @@ const QList<GeoDataCoordinates>& EclipsesItem::shadowConePenumbra()
     return m_shadowConePenumbra;
 }
 
-const QList<GeoDataCoordinates>& EclipsesItem::shadowCone60MagPenumbra()
+GeoDataLinearRing EclipsesItem::shadowCone60MagPenumbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();

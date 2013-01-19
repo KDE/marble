@@ -195,19 +195,19 @@ public:
      * @brief Return the shadow cone of the umbra
      * @return The shadow cone of the umbra
      */
-    const QList<GeoDataCoordinates>& shadowConeUmbra();
+    GeoDataLinearRing shadowConeUmbra();
 
     /**
      * @brief Return the shadow cone of the penumbra
      * @return The shadow cone of the penumbra
      */
-    const QList<GeoDataCoordinates>& shadowConePenumbra();
+    GeoDataLinearRing shadowConePenumbra();
 
     /**
      * @brief Return the shadow cone of the penumbra at 60 percent magnitude
      * @return The shadow cone of the penumbra at 60 percent magnitude
      */
-    const QList<GeoDataCoordinates>& shadowCone60MagPenumbra();
+    GeoDataLinearRing shadowCone60MagPenumbra();
 
 private:
     /**
@@ -245,9 +245,9 @@ private:
     GeoDataLinearRing m_umbra;
     GeoDataLineString m_southernPenumbra;
     GeoDataLineString m_northernPenumbra;
-    QList<GeoDataCoordinates> m_shadowConeUmbra;
-    QList<GeoDataCoordinates> m_shadowConePenumbra;
-    QList<GeoDataCoordinates> m_shadowCone60MagPenumbra;
+    GeoDataLinearRing m_shadowConeUmbra;
+    GeoDataLinearRing m_shadowConePenumbra;
+    GeoDataLinearRing m_shadowCone60MagPenumbra;
     QList<GeoDataLinearRing> m_sunBoundaries;
 };
 
