@@ -127,13 +127,6 @@ private Q_SLOTS:
      */
     void updateMenuItemState();
 
-    /**
-     * @brief List eclipses in the eclipses browser for a given year
-     *
-     * @param year The year to calculate eclipse events for
-     */
-    void updateListDialogForYear( int year );
-
 private:
     bool m_isInitialized;
 
