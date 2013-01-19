@@ -392,7 +392,7 @@ void EclipsesItem::calculate()
             upperBoundary = new GeoDataLinearRing( Tessellate );
         }
         if ( pline && ( np > 0 ) && ( lat4 <= 90. ) && ( lat3 <= 90. ) ) {
-            //*upperBoundary << GeoDataCoordinates( lng4, lat4, 0., GeoDataCoordinates::Degree );
+            *upperBoundary << GeoDataCoordinates( lng4, lat4, 0., GeoDataCoordinates::Degree );
         }
 
         lng1 = lng2;
