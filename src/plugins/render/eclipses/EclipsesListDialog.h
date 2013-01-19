@@ -25,6 +25,11 @@ namespace Marble {
 class EclipsesModel;
 class MarbleModel;
 
+/**
+ * @brief The eclipse browser dialog
+ *
+ * This implements the logic for the eclipse browser dialog.
+ */
 class EclipsesListDialog : public QDialog
 {
     Q_OBJECT
@@ -34,18 +39,58 @@ public:
                                  QWidget *parent = 0 );
     ~EclipsesListDialog();
 
+    /**
+     * @brief Set the year
+     *
+     * This sets the year the browser currently shows eclipses for.
+     *
+     * @see year
+     */
     void setYear( int year );
+
+    /**
+     * @brief Return the year the browser is set to
+     *
+     * @return The year the browser shows eclipses for at the moment
+     * @see setYear
+     */
     int year() const;
 
 Q_SIGNALS:
+    /**
+     * @brief This signal is emitted when the use clicks the "show" button
+     * @param year the year of the selected eclipse event
+     * @param index the index of the selected eclipse item
+     */
     void buttonShowClicked( int year, int index );
 
 protected Q_SLOTS:
+    /**
+     * @brief Accept the dialog
+     *
+     * This emits the buttonShowClicked signal
+     *
+     * @see buttonShowClicked
+     */
     void accept();
+
+    /**
+     * @brief Update the list of eclipses for the given year
+     * @param year The year to list eclipses for
+     */
     void updateEclipsesListForYear( int year );
-    void updateButtonsState();
+
+    /**
+     * @brief Update the dialog's button states
+     *
+     * Disable/enable the show button according to the current selection.
+     */
+    void updateButtonState();
 
 protected:
+    /**
+     * @brief Intialize the object
+     */
     void initialize();
 
 private:

@@ -73,17 +73,15 @@ int EclipsesModel::year() const
     return m_currentYear;
 }
 
-EclipsesItem* EclipsesModel::eclipseWithIndex( int year, int index )
+EclipsesItem* EclipsesModel::eclipseWithIndex( int index )
 {
-    setYear( year );
-
     foreach( EclipsesItem *item, m_items ) {
         if( item->index() == index ) {
             return item;
         }
     }
 
-    return 0;
+    return NULL;
 }
 
 QList<EclipsesItem*> EclipsesModel::items() const

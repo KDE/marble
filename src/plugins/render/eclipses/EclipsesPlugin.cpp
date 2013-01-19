@@ -207,7 +207,7 @@ void EclipsesPlugin::initialize()
 
     readSettings();
     updateEclipses();
-    updateMenuItems();
+    updateMenuItemState();
     updateSettings();
 }
 
@@ -222,7 +222,7 @@ bool EclipsesPlugin::eventFilter( QObject *object, QEvent *e )
     MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
     if ( widget && m_marbleWidget != widget ) {
         connect( widget, SIGNAL(themeChanged(QString)),
-                 this, SLOT(updateMenuItems()) );
+                 this, SLOT(updateMenuItemState()) );
         m_marbleWidget = widget;
         m_clock = m_marbleWidget->model()->clock();
         connect( m_clock, SIGNAL(timeChanged()),
@@ -447,7 +447,7 @@ void EclipsesPlugin::updateEclipses()
     }
 }
 
-void EclipsesPlugin::updateMenuItems()
+void EclipsesPlugin::updateMenuItemState()
 {
     if( !isInitialized() ) {
         return;
@@ -464,7 +464,11 @@ void EclipsesPlugin::updateMenuItems()
 
 void EclipsesPlugin::showEclipse( int year, int index )
 {
-    EclipsesItem *item = m_model->eclipseWithIndex( year, index );
+    if( m_model->year() != year ) {
+        m_model->setYear( year );
+    }
+
+    EclipsesItem *item = m_model->eclipseWithIndex( index );
     Q_ASSERT( item );
 
     if( item ) {
@@ -486,7 +490,7 @@ void EclipsesPlugin::showEclipseFromMenu( QAction *action )
     showEclipse( date.year(), index );
 }
 
-}
+} // namespace Marble
 
 Q_EXPORT_PLUGIN2( EclipsesPlugin, Marble::EclipsesPlugin )
 

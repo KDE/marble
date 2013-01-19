@@ -27,24 +27,92 @@ class EclipsesItem;
 class GeoPainter;
 class GeoDataCoordinates;
 
+/**
+ * @brief The model for eclipses
+ *
+ * EclipsesModel provides an interface to the eclsolar backend. Instances
+ * of this class hold EclipseItem objects for every eclipse event of a given
+ * year. Furthermore, it implements QTs AbstractItemModel interface and can 
+ * be used with QTs view classes.
+ */
 class EclipsesModel : public QAbstractItemModel 
 {
     Q_OBJECT
+
 public:
     EclipsesModel( const MarbleModel *model, QObject *parent = 0 );
     ~EclipsesModel();
 
+    /**
+     * @brief Return the current observation point
+     *
+     * Returns the current observation point on which location specific
+     * eclipse calculations are based.
+     *
+     * @return GeoDataCoordinates of the current observation point
+     * @see setObservationPoint
+     */
     const GeoDataCoordinates& observationPoint() const;
+
+    /**
+     * @brief Set the current observation point
+     *
+     * @param coords
+     *
+     * Set the current observation point to @p coords. This will mark all
+     * items for recalculation of eclipses details according to the new
+     * observation point.
+     *
+     * @see observationPoint
+     */
     void setObservationPoint( const GeoDataCoordinates &coords );
 
+    /**
+     * @brief Set the year
+     *
+     * @param year The year
+     *
+     * Sets the year to @p year. This clears all items in the model and
+     * fills it with all eclipse items for the given year.
+     *
+     * @see year
+     */
     void setYear( int year );
+
+    /**
+     * @brief Return the year
+     *
+     * Returns the year of all eclipse items in this model.
+     *
+     * @return the year of eclipse items in this model
+     * @see setYear
+     */
     int year() const;
 
-    EclipsesItem* eclipseWithIndex( int year, int index );
+    /**
+     * @brief Get eclipse item of a given year
+     *
+     * @param index
+     *
+     * This returns the eclipse item with @p index for the year set. If
+     * there is no eclipse with @p index in the set year, NULL will be
+     * returned.
+     *
+     * @return the requested eclipse item or NULL if there is no eclipse
+     * @see setYear
+     */
+    EclipsesItem* eclipseWithIndex( int index );
 
+    /**
+     * @brief Return the items in this model
+     *
+     * Returns a list of items currently in the model.
+     *
+     * @return list of items in the model
+     */
     QList<EclipsesItem*> items() const;
 
-    // QT model interface
+    // QT abstract item model interface
     QModelIndex index( int row, int column,
                        const QModelIndex &parent = QModelIndex() ) const;
     QModelIndex parent( const QModelIndex &index ) const;
@@ -56,9 +124,35 @@ public:
                          int role = Qt::DisplayRole ) const;
 
 private:
-    void paintItem( EclipsesItem *item, GeoPainter *painter );
+    /**
+     * @brief Add an item to the model
+     * @param item the item to add
+     *
+     * Adds @p item to the model.
+     *
+     * @see clear
+     */
     void addItem( EclipsesItem *item );
+
+    /**
+     * @brief Clears all items
+     *
+     * Clear the model by removing all items.
+     *
+     * @see addItem
+     */
     void clear();
+
+    /**
+     * @brief Update the list of eclipse items
+     *
+     * This forces an update of the current list of eclipse items by
+     * calculating all eclipse events for the currently set year and
+     * adding them to the model. All previously added items are
+     * cleared before.
+     *
+     * @see clear
+     */
     void update();
 
     const MarbleModel *m_marbleModel;

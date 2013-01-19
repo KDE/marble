@@ -35,6 +35,8 @@ class EclipsesListDialog;
 /**
  * @brief This plugin displays solar eclipses.
  *
+ * It utilizes Gerhard Holtcamps eclsolar class to render nice
+ * visualizations of eclipse events on earth.
  */
 class EclipsesPlugin : public RenderPlugin,
                        public DialogConfigurationInterface
@@ -49,6 +51,9 @@ public:
     explicit EclipsesPlugin( const MarbleModel *marbleModel );
     virtual ~EclipsesPlugin();
     
+    // this is the implementation of the RenderPlugin interface
+    // see RenderPlugin.h for a description
+
     QStringList backendTypes() const;
     QString renderPolicy() const;
     QStringList renderPosition() const;
@@ -83,11 +88,51 @@ private Q_SLOTS:
     void readSettings();
     void writeSettings();
     void updateSettings();
-    void updateEclipses();
-    void updateMenuItems();
 
+    /**
+     * @brief Update list of eclipses for the current year
+     *
+     * This calculates the list of eclipses for the year the marble clock
+     * is set to.
+     */
+    void updateEclipses();
+
+    /**
+     * @brief Show an eclipse event on the marble map
+     *
+     * @param year The year the eclipse event happens
+     * @param index The index of the eclipse in this year
+     *
+     * Shows the eclipse with index @p index in year @p year by setting
+     * the marble clock to the time of the eclipse's maximum.
+     */
     void showEclipse( int year, int index );
+
+    /**
+     * @brief Show an eclipse event selected from the menu
+     *
+     * @param action The menu items action
+     *
+     * Shows the eclipse the menu item given by @p action refers to.
+     * The eclipse's index is stored in the actions data field while the
+     * year is taken from the action's text.
+     */
     void showEclipseFromMenu( QAction *action );
+
+    /**
+     * @brief Update menu item state
+     *
+     * Updates the state of the plugin's menu items. They will be disabled for
+     * non earth themes since we only support eclipse events on earth.
+     */
+    void updateMenuItemState();
+
+    /**
+     * @brief List eclipses in the eclipses browser for a given year
+     *
+     * @param year The year to calculate eclipse events for
+     */
+    void updateListDialogForYear( int year );
 
 private:
     bool m_isInitialized;
