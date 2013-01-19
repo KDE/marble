@@ -98,6 +98,7 @@ private:
     const MarbleModel *m_marbleModel;
     Ui::EclipsesBrowserDialog *m_listWidget;
     EclipsesModel *m_eclModel;
+    int m_year;
 };
 
 } // namespace Marble

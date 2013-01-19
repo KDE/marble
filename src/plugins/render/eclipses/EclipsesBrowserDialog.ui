@@ -68,11 +68,14 @@
         <property name="suffix">
          <string/>
         </property>
+        <property name="minimum">
+         <number>-100000</number>
+        </property>
         <property name="maximum">
          <number>100000</number>
         </property>
         <property name="value">
-         <number>0</number>
+         <number>1</number>
         </property>
        </widget>
       </item>
