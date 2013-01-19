@@ -90,6 +90,9 @@ PopupItem::PopupItem( QObject* parent ) :
     connect( m_webView, SIGNAL(titleChanged(QString)), m_titleText, SLOT(setText(QString)) );
     connect( m_webView, SIGNAL(urlChanged(QUrl)), this, SLOT(updateBackButton()) );
     connect( hideButton, SIGNAL(clicked()), this, SIGNAL(hide()) );
+
+    // Update the popupitem on changes while loading the webpage
+    connect(m_webView->page(), SIGNAL(repaintRequested(QRect)), this, SIGNAL(repaintNeeded()));
 }
 
 PopupItem::~PopupItem()
@@ -121,7 +124,7 @@ void PopupItem::setUrl( const QUrl &url )
 	m_webView->page()->setPalette(palette);
 	m_webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
 
-        emit dirty();
+        emit repaintNeeded();
     }
 }
 
@@ -278,7 +281,7 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
                                                     event->modifiers() );
             if ( QApplication::sendEvent( child, &shiftedEvent ) ) {
                 widget->setCursor( child->cursor() );
-                emit dirty();
+                emit repaintNeeded();
                 return true;
             }
         }
@@ -293,7 +296,7 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
                                                     event->modifiers() );
             if ( QApplication::sendEvent( child, &shiftedEvent ) ) {
                 widget->setCursor( child->cursor() );
-                emit dirty();
+                emit repaintNeeded();
                 return true;
             }
         }

@@ -160,7 +160,7 @@ protected:
     void paint( QPainter *painter );
 
 Q_SIGNALS:
-    void dirty();
+    void repaintNeeded();
     void hide();
 
 private:

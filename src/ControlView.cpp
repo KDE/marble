@@ -267,6 +267,7 @@ void ControlView::printPreview()
 
     QPointer<QPrintPreviewDialog> preview = new QPrintPreviewDialog( &printer, this );
     preview->setWindowFlags ( Qt::Window );
+    preview->resize(640, 480);
     connect( preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
     preview->exec();
     delete preview;

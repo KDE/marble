@@ -25,7 +25,7 @@ MapInfoDialog::MapInfoDialog(QObject *parent) :
     QObject( parent ),
     m_popupItem( new PopupItem )
 {
-    connect( m_popupItem, SIGNAL(dirty()), this, SIGNAL(repaintNeeded()) );
+    connect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
     connect( m_popupItem, SIGNAL(hide()), this, SLOT(hidePopupItem()) );
 }
 
@@ -71,8 +71,12 @@ void MapInfoDialog::setVisible( bool visible )
 {
     m_popupItem->setVisible( visible );
     if ( !visible ) {
+        disconnect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
         m_popupItem->clearHistory();
         emit repaintNeeded();
+    }
+    else {
+        connect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
     }
 }
 
