@@ -197,14 +197,17 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
     if( !b ) {
         //stopped drawing the polygon
         if ( m_tmp_lineString != 0 ) {
-            AreaAnnotation* area = new AreaAnnotation( new GeoDataPlacemark );
-            GeoDataPolygon poly( Tessellate );
-            poly.setOuterBoundary( GeoDataLinearRing(*m_tmp_lineString) );
+            GeoDataPlacemark *placemark = new GeoDataPlacemark;
+            GeoDataPolygon *poly = new GeoDataPolygon( Tessellate );
+            poly->setOuterBoundary( GeoDataLinearRing(*m_tmp_lineString) );
+            placemark->setGeometry( poly );
+
             delete m_tmp_lineString;
             m_tmp_lineString = 0;
 
-            area->setGeometry( poly );
+            AreaAnnotation* area = new AreaAnnotation( placemark );
 
+            m_AnnotationDocument->append( placemark );
             m_graphicsItems.append( area );
 
             //FIXME only redraw the new polygon
@@ -438,6 +441,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
         placemark->setCoordinate( coordinates );
         PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation( placemark );
+        m_AnnotationDocument->append( placemark );
         m_graphicsItems.append( t );
 
         //FIXME only repaint the new placemark

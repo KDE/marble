@@ -22,13 +22,9 @@ class  AreaAnnotation : public TmpGraphicsItem
 public:
     AreaAnnotation( GeoDataFeature *feature );
 
-    void setGeometry( GeoDataPolygon g);
-    
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
     //FIXME Waiting to be removed
     virtual QRect screenBounding(){return QRect();}
-private:
-    GeoDataPolygon m_geo;
 };
 
 }
