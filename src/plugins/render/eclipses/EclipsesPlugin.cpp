@@ -327,10 +327,10 @@ bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item )
         painter->setPen( Oxygen::hotOrange5 );
         const QList<GeoDataLinearRing> boundaries = item->sunBoundaries();
         QList<GeoDataLinearRing>::const_iterator i = boundaries.constBegin();
+        QColor sunBoundingBrush ( Oxygen::hotOrange5 );
+        sunBoundingBrush.setAlpha( 64 );
+        painter->setBrush( sunBoundingBrush );
         for( ; i != boundaries.constEnd(); ++i ) {
-            QColor sunBoundingBrush ( Oxygen::hotOrange5 );
-            sunBoundingBrush.setAlpha( 64 );
-            painter->setBrush( sunBoundingBrush );
             painter->drawPolygon( *i );
         }
     }
