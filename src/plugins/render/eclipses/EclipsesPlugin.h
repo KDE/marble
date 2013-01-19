@@ -30,7 +30,7 @@ class MarbleWidget;
 class MarbleClock;
 class EclipsesModel;
 class EclipsesItem;
-class EclipsesListDialog;
+class EclipsesBrowserDialog;
 
 /**
  * @brief This plugin displays solar eclipses.
@@ -151,7 +151,7 @@ private:
     // dialogs
     QDialog *m_configDialog;
     Ui::EclipsesConfigDialog *m_configWidget;
-    EclipsesListDialog *m_listDialog;
+    EclipsesBrowserDialog *m_listDialog;
     QDialog *m_reminderDialog;
     Ui::EclipsesReminderDialog *m_reminderWidget;
 };

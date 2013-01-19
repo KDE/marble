@@ -19,7 +19,7 @@
 
 #include "EclipsesModel.h"
 #include "EclipsesItem.h"
-#include "EclipsesListDialog.h"
+#include "EclipsesBrowserDialog.h"
 
 #include "ui_EclipsesConfigDialog.h"
 #include "ui_EclipsesReminderDialog.h"
@@ -176,7 +176,7 @@ void EclipsesPlugin::initialize()
     connect( m_configWidget->buttonBox->button( QDialogButtonBox::Apply ),
              SIGNAL(clicked()), this, SLOT(writeSettings()) );
 
-    m_listDialog = new EclipsesListDialog( marbleModel() );
+    m_listDialog = new EclipsesBrowserDialog( marbleModel() );
     connect( m_listDialog, SIGNAL(buttonShowClicked(int, int)),
              this, SLOT(showEclipse(int,int)) );
 

@@ -8,7 +8,7 @@
 // Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
-#include "EclipsesListDialog.h"
+#include "EclipsesBrowserDialog.h"
 
 #include "MarbleModel.h"
 #include "MarbleClock.h"
@@ -17,11 +17,11 @@
 #include "EclipsesModel.h"
 #include "EclipsesItem.h"
 
-#include "ui_EclipsesListDialog.h"
+#include "ui_EclipsesBrowserDialog.h"
 
 namespace Marble {
 
-EclipsesListDialog::EclipsesListDialog( const MarbleModel *model,
+EclipsesBrowserDialog::EclipsesBrowserDialog( const MarbleModel *model,
                                         QWidget *parent )
     : QDialog( parent ),
     m_marbleModel( model )
@@ -29,24 +29,24 @@ EclipsesListDialog::EclipsesListDialog( const MarbleModel *model,
     initialize();
 }
 
-EclipsesListDialog::~EclipsesListDialog()
+EclipsesBrowserDialog::~EclipsesBrowserDialog()
 {
     delete m_eclModel;
 }
 
-void EclipsesListDialog::setYear( int year )
+void EclipsesBrowserDialog::setYear( int year )
 {
     if( !isVisible() ) {
         m_listWidget->spinBoxYear->setValue( year );
     }
 }
 
-int EclipsesListDialog::year() const
+int EclipsesBrowserDialog::year() const
 {
     return m_listWidget->spinBoxYear->value();
 }
 
-void EclipsesListDialog::accept()
+void EclipsesBrowserDialog::accept()
 {
     QItemSelectionModel *s = m_listWidget->treeView->selectionModel();
     QModelIndex selected = s->currentIndex();
@@ -59,22 +59,22 @@ void EclipsesListDialog::accept()
     QDialog::accept();
 }
 
-void EclipsesListDialog::updateEclipsesListForYear( int year )
+void EclipsesBrowserDialog::updateEclipsesBrowserForYear( int year )
 {
     Q_ASSERT( year >= 0 );
     m_eclModel->setYear( year );
-    updateButtonsState();
+    updateButtonStates();
 }
 
-void EclipsesListDialog::updateButtonsState()
+void EclipsesBrowserDialog::updateButtonStates()
 {
     QItemSelectionModel *s = m_listWidget->treeView->selectionModel();
     m_listWidget->buttonShow->setEnabled( s->hasSelection() );
 }
 
-void EclipsesListDialog::initialize()
+void EclipsesBrowserDialog::initialize()
 {
-    m_listWidget = new Ui::EclipsesListDialog();
+    m_listWidget = new Ui::EclipsesBrowserDialog();
     m_listWidget->setupUi( this );
 
     m_listWidget->treeView->setExpandsOnDoubleClick( false );
@@ -87,11 +87,11 @@ void EclipsesListDialog::initialize()
     connect( m_listWidget->buttonClose, SIGNAL(clicked()),
              this, SLOT(reject()) );
     connect( m_listWidget->spinBoxYear, SIGNAL(valueChanged(int)),
-             this, SLOT(updateEclipsesListForYear(int)) );
+             this, SLOT(updateEclipsesBrowserForYear(int)) );
     connect( m_listWidget->treeView->selectionModel(),
              SIGNAL(selectionChanged(const QItemSelection&,
                                      const QItemSelection&)),
-             this, SLOT(updateButtonsState()) );
+             this, SLOT(updateButtonStates()) );
 
     setYear( m_marbleModel->clock()->dateTime().date().year() );
 
@@ -100,5 +100,5 @@ void EclipsesListDialog::initialize()
 
 } // namespace Marble
 
-#include "EclipsesListDialog.moc"
+#include "EclipsesBrowserDialog.moc"
 

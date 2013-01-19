@@ -8,8 +8,8 @@
 // Copyright 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
-#ifndef MARBLE_ECLIPSESLISTDIALOG_H
-#define MARBLE_ECLIPSESLISTDIALOG_H
+#ifndef MARBLE_ECLIPSESBROWSERDIALOG_H
+#define MARBLE_ECLIPSESBROWSERDIALOG_H
 
 #include <QDialog>
 #include <QTreeView>
@@ -17,7 +17,7 @@
 #include <QListWidgetItem>
 
 namespace Ui {
-    class EclipsesListDialog;
+    class EclipsesBrowserDialog;
 }
 
 namespace Marble {
@@ -30,14 +30,14 @@ class MarbleModel;
  *
  * This implements the logic for the eclipse browser dialog.
  */
-class EclipsesListDialog : public QDialog
+class EclipsesBrowserDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit EclipsesListDialog( const MarbleModel *model,
+    explicit EclipsesBrowserDialog( const MarbleModel *model,
                                  QWidget *parent = 0 );
-    ~EclipsesListDialog();
+    ~EclipsesBrowserDialog();
 
     /**
      * @brief Set the year
@@ -78,14 +78,14 @@ protected Q_SLOTS:
      * @brief Update the list of eclipses for the given year
      * @param year The year to list eclipses for
      */
-    void updateEclipsesListForYear( int year );
+    void updateEclipsesBrowserForYear( int year );
 
     /**
      * @brief Update the dialog's button states
      *
      * Disable/enable the show button according to the current selection.
      */
-    void updateButtonState();
+    void updateButtonStates();
 
 protected:
     /**
@@ -95,11 +95,11 @@ protected:
 
 private:
     const MarbleModel *m_marbleModel;
-    Ui::EclipsesListDialog *m_listWidget;
+    Ui::EclipsesBrowserDialog *m_listWidget;
     EclipsesModel *m_eclModel;
 };
 
 } // namespace Marble
 
-#endif // MARBLE_ECLIPSESLISTDIALOG_H
+#endif // MARBLE_ECLIPSESBROWSERDIALOG_H
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EclipsesListDialog</class>
- <widget class="QDialog" name="EclipsesListDialog">
+ <class>EclipsesBrowserDialog</class>
+ <widget class="QDialog" name="EclipsesBrowserDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -156,7 +156,7 @@
   <connection>
    <sender>buttonShow</sender>
    <signal>clicked()</signal>
-   <receiver>EclipsesListDialog</receiver>
+   <receiver>EclipsesBrowserDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -172,7 +172,7 @@
   <connection>
    <sender>buttonClose</sender>
    <signal>clicked()</signal>
-   <receiver>EclipsesListDialog</receiver>
+   <receiver>EclipsesBrowserDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

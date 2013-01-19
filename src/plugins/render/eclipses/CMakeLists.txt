@@ -16,11 +16,11 @@ set( eclipses_SRCS
     EclipsesModel.cpp
     EclipsesItem.cpp
     EclipsesPlugin.cpp
-    EclipsesListDialog.cpp )
+    EclipsesBrowserDialog.cpp )
 
 qt4_wrap_ui( eclipses_SRCS
     EclipsesConfigDialog.ui
-    EclipsesListDialog.ui
+    EclipsesBrowserDialog.ui
     EclipsesReminderDialog.ui )
 
 qt4_add_resources( eclipses_SRCS eclipses.qrc )
