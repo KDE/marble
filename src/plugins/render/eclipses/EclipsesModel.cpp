@@ -13,11 +13,6 @@
 #include "EclipsesItem.h"
 #include "MarbleDebug.h"
 #include "MarbleClock.h"
-#include "GeoPainter.h"
-#include "GeoDataLineString.h"
-#include "GeoDataCoordinates.h"
-#include "GeoDataLinearRing.h"
-#include "MarbleColors.h"
 
 #include "ecl/eclsolar.h"
 
@@ -33,9 +28,10 @@ EclipsesModel::EclipsesModel( const MarbleModel *model, QObject *parent )
     m_ecps->setLunarEcl( false );
     m_ecps->setTimezone( model->clock()->timezone() / 3600. );
 
+    // oberservation point defaults to home location
     qreal lon, lat;
     int zoom;
-    m_marbleModel->home(lon, lat, zoom);
+    m_marbleModel->home( lon, lat, zoom );
     GeoDataCoordinates homeLocation( lon, lat, 0, GeoDataCoordinates::Degree );
     setObservationPoint( homeLocation );
 }

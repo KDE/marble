@@ -24,8 +24,6 @@ namespace Marble
 {
 
 class EclipsesItem;
-class GeoPainter;
-class GeoDataCoordinates;
 
 /**
  * @brief The model for eclipses
@@ -40,7 +38,8 @@ class EclipsesModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    EclipsesModel( const MarbleModel *model, QObject *parent = 0 );
+    explicit EclipsesModel( const MarbleModel *model, QObject *parent = 0 );
+
     ~EclipsesModel();
 
     /**

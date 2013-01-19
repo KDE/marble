@@ -37,6 +37,7 @@ namespace Marble
 class EclipsesItem : public QObject
 {
     Q_OBJECT
+
 public:
 
     /**
@@ -56,7 +57,8 @@ public:
      * @param ecl The EclSolar backend
      * @param parent The parent object
      */
-    EclipsesItem( EclSolar *ecl, int index, QObject *parent = 0 );
+    explicit EclipsesItem( EclSolar *ecl, int index, QObject *parent = 0 );
+
     ~EclipsesItem();
 
     /**
