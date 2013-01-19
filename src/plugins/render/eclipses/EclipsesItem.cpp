@@ -125,22 +125,22 @@ const GeoDataLinearRing& EclipsesItem::umbra()
     return m_umbra;
 }
 
-const GeoDataLineString& EclipsesItem::southernPenUmbra()
+const GeoDataLineString& EclipsesItem::southernPenumbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
     }
 
-    return m_southernPenUmbra;
+    return m_southernPenumbra;
 }
 
-const GeoDataLineString& EclipsesItem::northernPenUmbra()
+const GeoDataLineString& EclipsesItem::northernPenumbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
     }
 
-    return m_northernPenUmbra;
+    return m_northernPenumbra;
 }
 
 const QList<GeoDataCoordinates>& EclipsesItem::shadowConeUmbra()
@@ -152,22 +152,22 @@ const QList<GeoDataCoordinates>& EclipsesItem::shadowConeUmbra()
     return m_shadowConeUmbra;
 }
 
-const QList<GeoDataCoordinates>& EclipsesItem::shadowConePenUmbra()
+const QList<GeoDataCoordinates>& EclipsesItem::shadowConePenumbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
     }
 
-    return m_shadowConePenUmbra;
+    return m_shadowConePenumbra;
 }
 
-const QList<GeoDataCoordinates>& EclipsesItem::shadowCone60MagPenUmbra()
+const QList<GeoDataCoordinates>& EclipsesItem::shadowCone60MagPenumbra()
 {
     if( m_calculationsNeedUpdate ) {
         calculate();
     }
 
-    return m_shadowCone60MagPenUmbra;
+    return m_shadowCone60MagPenumbra;
 }
 
 const QList<GeoDataLinearRing>& EclipsesItem::sunBoundaries()
@@ -302,8 +302,8 @@ void EclipsesItem::calculate()
 
     // shadow cones
     m_shadowConeUmbra.clear();
-    m_shadowConePenUmbra.clear();
-    m_shadowCone60MagPenUmbra.clear();
+    m_shadowConePenumbra.clear();
+    m_shadowCone60MagPenumbra.clear();
 
     m_ecl->getLocalMax( lat2, lat3, lat4 );
 
@@ -318,7 +318,7 @@ void EclipsesItem::calculate()
     m_ecl->getShadowCone( lat2, false, 60, ltf, lnf );
     for( j = 0; j < 60; j++ ) {
         if( ltf[j] < 100. ) {
-            m_shadowConePenUmbra << GeoDataCoordinates( lnf[j], ltf[j], 0., GeoDataCoordinates::Degree );
+            m_shadowConePenumbra << GeoDataCoordinates( lnf[j], ltf[j], 0., GeoDataCoordinates::Degree );
         }
     }
 
@@ -326,21 +326,21 @@ void EclipsesItem::calculate()
     m_ecl->getShadowCone( lat2, false, 60, ltf, lnf );
     for( j = 0; j < 60; j++ ) {
         if( ltf[j] < 100. ) {
-            m_shadowCone60MagPenUmbra << GeoDataCoordinates( lnf[j], ltf[j], 0., GeoDataCoordinates::Degree );
+            m_shadowCone60MagPenumbra << GeoDataCoordinates( lnf[j], ltf[j], 0., GeoDataCoordinates::Degree );
         }
     }
 
     m_ecl->setPenumbraAngle( 1., 0 );
 
     // eclipse boundaries
-    m_southernPenUmbra.clear();
-    m_northernPenUmbra.clear();
+    m_southernPenumbra.clear();
+    m_northernPenumbra.clear();
 
     np = m_ecl->GNSBound( true, true, lat1, lng2 );
     while( np > 0 ) {
         np = m_ecl->GNSBound( false, true, lat1, lng1 );
         if( ( np > 0 ) && ( lat1 <= 90. ) ) {
-            m_southernPenUmbra << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
+            m_southernPenumbra << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
         }
     }
 
@@ -348,7 +348,7 @@ void EclipsesItem::calculate()
     while( np > 0 ) {
         np = m_ecl->GNSBound( false, false, lat1, lng1 );
         if( ( np > 0 ) && ( lat1 <= 90. ) ) {
-            m_northernPenUmbra << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
+            m_northernPenumbra << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
         }
     }
 

@@ -284,16 +284,16 @@ bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item )
 
     if( m_configWidget->checkBoxShowFullPenumbra->isChecked() ) {
         painter->setPen( Qt::blue );
-        ci = item->shadowConePenUmbra().constBegin();
-        for ( ; ci != item->shadowConePenUmbra().constEnd(); ++ci ) {
+        ci = item->shadowConePenumbra().constBegin();
+        for ( ; ci != item->shadowConePenumbra().constEnd(); ++ci ) {
             painter->drawEllipse( *ci, 2, 2 );
         }
     }
 
     if( m_configWidget->checkBoxShow60MagPenumbra->isChecked() ) {
         painter->setPen( Qt::magenta );
-        ci = item->shadowCone60MagPenUmbra().constBegin();
-        for ( ; ci != item->shadowCone60MagPenUmbra().constEnd(); ++ci ) {
+        ci = item->shadowCone60MagPenumbra().constBegin();
+        for ( ; ci != item->shadowCone60MagPenumbra().constEnd(); ++ci ) {
             painter->drawEllipse( *ci, 3, 3 );
         }
     }
@@ -313,13 +313,13 @@ bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item )
     if( m_configWidget->checkBoxShowSouthernPenumbra->isChecked() ) {
         // southern boundary
         painter->setPen( Oxygen::brickRed4 );
-        painter->drawPolyline( item->southernPenUmbra() );
+        painter->drawPolyline( item->southernPenumbra() );
     }
 
     if( m_configWidget->checkBoxShowNorthernPenumbra->isChecked() ) {
         // northern boundary
         painter->setPen( Oxygen::brickRed4 );
-        painter->drawPolyline( item->northernPenUmbra() );
+        painter->drawPolyline( item->northernPenumbra() );
     }
 
     if( m_configWidget->checkBoxShowSunBoundaries->isChecked() ) {

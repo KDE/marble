@@ -177,13 +177,13 @@ public:
      * @brief Return the eclipse's southern penumbra
      * @return The eclipse's southern penumbra
      */
-    const GeoDataLineString& southernPenUmbra();
+    const GeoDataLineString& southernPenumbra();
 
     /**
      * @brief Return the eclipse's northern penumbra
      * @return The eclipse's northern umbra
      */
-    const GeoDataLineString& northernPenUmbra();
+    const GeoDataLineString& northernPenumbra();
 
     /**
      * @brief Return the eclipse's sun boundaries
@@ -201,13 +201,13 @@ public:
      * @brief Return the shadow cone of the penumbra
      * @return The shadow cone of the penumbra
      */
-    const QList<GeoDataCoordinates>& shadowConePenUmbra();
+    const QList<GeoDataCoordinates>& shadowConePenumbra();
 
     /**
      * @brief Return the shadow cone of the penumbra at 60 percent magnitude
      * @return The shadow cone of the penumbra at 60 percent magnitude
      */
-    const QList<GeoDataCoordinates>& shadowCone60MagPenUmbra();
+    const QList<GeoDataCoordinates>& shadowCone60MagPenumbra();
 
 private:
     /**
@@ -243,11 +243,11 @@ private:
     GeoDataCoordinates m_maxLocation;
     GeoDataLineString m_centralLine;
     GeoDataLinearRing m_umbra;
-    GeoDataLineString m_southernPenUmbra;
-    GeoDataLineString m_northernPenUmbra;
+    GeoDataLineString m_southernPenumbra;
+    GeoDataLineString m_northernPenumbra;
     QList<GeoDataCoordinates> m_shadowConeUmbra;
-    QList<GeoDataCoordinates> m_shadowConePenUmbra;
-    QList<GeoDataCoordinates> m_shadowCone60MagPenUmbra;
+    QList<GeoDataCoordinates> m_shadowConePenumbra;
+    QList<GeoDataCoordinates> m_shadowCone60MagPenumbra;
     QList<GeoDataLinearRing> m_sunBoundaries;
 };
 
