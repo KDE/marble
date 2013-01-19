@@ -257,13 +257,17 @@ void EclipsesItem::calculate()
     np = m_ecl->eclPltCentral( true, lat1, lng1 );
     kp = np;
     m_centralLine.clear();
-    m_centralLine << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
+    m_centralLine << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng1, GeoDataCoordinates::Degree),
+                                         GeoDataCoordinates::normalizeLon(lat1, GeoDataCoordinates::Degree),
+                                         0., GeoDataCoordinates::Degree );
 
     if( np > 3 ) { // central eclipse
         while( np > 3 ) {
             np = m_ecl->eclPltCentral( false, lat1, lng1 );
             if( np > 3 ) {
-                m_centralLine << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
+                m_centralLine << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng1, GeoDataCoordinates::Degree),
+                                                     GeoDataCoordinates::normalizeLon(lat1, GeoDataCoordinates::Degree),
+                                                     0., GeoDataCoordinates::Degree );
             }
         }
     }
@@ -276,16 +280,24 @@ void EclipsesItem::calculate()
         np = m_ecl->centralBound( true, lat1, lng1, lat2, lng2 );
 
         GeoDataLinearRing lowerUmbra( Tessellate ), upperUmbra( Tessellate );
-        lowerUmbra << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
-        upperUmbra << GeoDataCoordinates( lng2, lat2, 0., GeoDataCoordinates::Degree );
+        lowerUmbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng1, GeoDataCoordinates::Degree),
+                                          GeoDataCoordinates::normalizeLon(lat1, GeoDataCoordinates::Degree),
+                                          0., GeoDataCoordinates::Degree );
+        upperUmbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng1, GeoDataCoordinates::Degree),
+                                          GeoDataCoordinates::normalizeLon(lat1, GeoDataCoordinates::Degree),
+                                          0., GeoDataCoordinates::Degree );
 
         while( np > 0 ) {
             np = m_ecl->centralBound( false, lat1, lng1, lat2, lng2 );
             if( lat1 <= 90. ) {
-                lowerUmbra << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
+                lowerUmbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng1, GeoDataCoordinates::Degree),
+                                                  GeoDataCoordinates::normalizeLon(lat1, GeoDataCoordinates::Degree),
+                                                  0., GeoDataCoordinates::Degree );
             }
             if( lat1 <= 90. ) {
-                upperUmbra << GeoDataCoordinates( lng2, lat2, 0., GeoDataCoordinates::Degree );
+                upperUmbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng2, GeoDataCoordinates::Degree),
+                                                  GeoDataCoordinates::normalizeLon(lat2, GeoDataCoordinates::Degree),
+                                                  0., GeoDataCoordinates::Degree );
             }
         }
 
@@ -310,7 +322,9 @@ void EclipsesItem::calculate()
     m_ecl->getShadowCone( lat2, true, 40, ltf, lnf );
     for( j = 0; j < 40; j++ ) {
         if( ltf[j] < 100. ) {
-            m_shadowConeUmbra << GeoDataCoordinates( lnf[j], ltf[j], 0., GeoDataCoordinates::Degree );
+            m_shadowConeUmbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lnf[j], GeoDataCoordinates::Degree),
+                                                     GeoDataCoordinates::normalizeLon(ltf[j], GeoDataCoordinates::Degree),
+                                                     0., GeoDataCoordinates::Degree );
         }
     }
 
@@ -318,7 +332,9 @@ void EclipsesItem::calculate()
     m_ecl->getShadowCone( lat2, false, 60, ltf, lnf );
     for( j = 0; j < 60; j++ ) {
         if( ltf[j] < 100. ) {
-            m_shadowConePenumbra << GeoDataCoordinates( lnf[j], ltf[j], 0., GeoDataCoordinates::Degree );
+            m_shadowConePenumbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lnf[j], GeoDataCoordinates::Degree),
+                                                        GeoDataCoordinates::normalizeLon(ltf[j], GeoDataCoordinates::Degree),
+                                                        0., GeoDataCoordinates::Degree );
         }
     }
 
@@ -326,7 +342,9 @@ void EclipsesItem::calculate()
     m_ecl->getShadowCone( lat2, false, 60, ltf, lnf );
     for( j = 0; j < 60; j++ ) {
         if( ltf[j] < 100. ) {
-            m_shadowCone60MagPenumbra << GeoDataCoordinates( lnf[j], ltf[j], 0., GeoDataCoordinates::Degree );
+            m_shadowCone60MagPenumbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lnf[j], GeoDataCoordinates::Degree),
+                                                             GeoDataCoordinates::normalizeLon(ltf[j], GeoDataCoordinates::Degree),
+                                                             0., GeoDataCoordinates::Degree );
         }
     }
 
@@ -340,7 +358,9 @@ void EclipsesItem::calculate()
     while( np > 0 ) {
         np = m_ecl->GNSBound( false, true, lat1, lng1 );
         if( ( np > 0 ) && ( lat1 <= 90. ) ) {
-            m_southernPenumbra << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
+            m_southernPenumbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng1, GeoDataCoordinates::Degree),
+                                                      GeoDataCoordinates::normalizeLon(lat1, GeoDataCoordinates::Degree),
+                                                      0., GeoDataCoordinates::Degree );
         }
     }
 
@@ -348,7 +368,9 @@ void EclipsesItem::calculate()
     while( np > 0 ) {
         np = m_ecl->GNSBound( false, false, lat1, lng1 );
         if( ( np > 0 ) && ( lat1 <= 90. ) ) {
-            m_northernPenumbra << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
+            m_northernPenumbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng1, GeoDataCoordinates::Degree),
+                                                      GeoDataCoordinates::normalizeLon(lat1, GeoDataCoordinates::Degree),
+                                                      0., GeoDataCoordinates::Degree );
         }
     }
 
@@ -358,10 +380,14 @@ void EclipsesItem::calculate()
     np = m_ecl->GRSBound( true, lat1, lng1, lat3, lng3 );
 
     GeoDataLinearRing *lowerBoundary = new GeoDataLinearRing( Tessellate );
-    *lowerBoundary << GeoDataCoordinates( lng1, lat1, 0., GeoDataCoordinates::Degree );
+    *lowerBoundary << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng1, GeoDataCoordinates::Degree),
+                                          GeoDataCoordinates::normalizeLon(lat1, GeoDataCoordinates::Degree),
+                                          0., GeoDataCoordinates::Degree );
 
     GeoDataLinearRing *upperBoundary = new GeoDataLinearRing( Tessellate );
-    *upperBoundary << GeoDataCoordinates( lng3, lat3, 0., GeoDataCoordinates::Degree );
+    *upperBoundary << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng3, GeoDataCoordinates::Degree),
+                                          GeoDataCoordinates::normalizeLon(lat3, GeoDataCoordinates::Degree),
+                                          0., GeoDataCoordinates::Degree );
 
     m_sunBoundaries.clear();
 
@@ -379,7 +405,9 @@ void EclipsesItem::calculate()
             lowerBoundary = new GeoDataLinearRing( Tessellate );
         }
         if ( ( np > 0 ) && ( lat2 <= 90. ) && ( lat1 <= 90. ) ) {
-            *lowerBoundary << GeoDataCoordinates( lng2, lat2, 0., GeoDataCoordinates::Degree );
+            *lowerBoundary << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng2, GeoDataCoordinates::Degree),
+                                                  GeoDataCoordinates::normalizeLon(lat2, GeoDataCoordinates::Degree),
+                                                  0., GeoDataCoordinates::Degree );
         }
         pline = fabs( lng3 - lng4 ) < 10.; // during partial eclipses, the Rise/Set lines
                                            // switch at one stage.
@@ -392,7 +420,9 @@ void EclipsesItem::calculate()
             upperBoundary = new GeoDataLinearRing( Tessellate );
         }
         if ( pline && ( np > 0 ) && ( lat4 <= 90. ) && ( lat3 <= 90. ) ) {
-            *upperBoundary << GeoDataCoordinates( lng4, lat4, 0., GeoDataCoordinates::Degree );
+            *upperBoundary << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lng4, GeoDataCoordinates::Degree),
+                                                  GeoDataCoordinates::normalizeLon(lat4, GeoDataCoordinates::Degree),
+                                                  0., GeoDataCoordinates::Degree );
         }
 
         lng1 = lng2;
