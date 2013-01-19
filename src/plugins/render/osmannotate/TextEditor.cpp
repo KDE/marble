@@ -10,6 +10,7 @@
 
 #include "TextEditor.h"
 
+#include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 
 #include <QtGui/QAction>
@@ -23,7 +24,9 @@
 namespace Marble
 {
 
-TextEditor::TextEditor() : QWidget()
+TextEditor::TextEditor( GeoDataPlacemark *placemark ) :
+    QWidget(),
+    m_placemark( placemark )
 {
     setCursor( Qt::ArrowCursor );
 
@@ -36,6 +39,7 @@ TextEditor::TextEditor() : QWidget()
      *parent is already set it will mess up the layouts.
      */
     m_description = new QTextEdit;
+    m_description->setText( placemark->description() );
     m_description->setMinimumHeight( 50 );
     m_description->setSizePolicy( QSizePolicy::Fixed,
                                   QSizePolicy::MinimumExpanding );
@@ -44,9 +48,17 @@ TextEditor::TextEditor() : QWidget()
     m_description->viewport()->setAutoFillBackground( true );
     QApplication::setPalette( QPalette() );
     m_description->setBackgroundRole( QPalette::Window );
+    connect( m_description, SIGNAL(textChanged()),
+             this, SLOT(updateDescription()) );
 
     m_name = new QLineEdit;
-    m_name->setText(tr("Placemark Name"));
+    if( m_placemark->name().isEmpty() ) {
+        m_name->setText(tr("Placemark Name"));
+    } else {
+        m_name->setText( placemark->name() );
+    }
+    connect( m_name, SIGNAL(textChanged(QString)),
+             this, SLOT(updateName()) );
 
     // setup the actions and create the buttons
     m_boldAction = new QAction( this );
@@ -81,27 +93,17 @@ TextEditor::TextEditor() : QWidget()
 
 TextEditor::~TextEditor()
 {
-
 }
 
-QString TextEditor::name() const
+void TextEditor::updateName()
 {
-    return m_name->text();
+    m_placemark->setName( m_name->text() );
 }
 
-void TextEditor::setName(const QString &name )
+void TextEditor::updateDescription()
 {
-    m_name->setText( name );
+    m_placemark->setDescription( m_description->toHtml() );
+}
 }
 
-QString TextEditor::description() const
-{
-    return m_description->toHtml();
-}
-
-void TextEditor::setDescription( const QString &description )
-{
-    m_description->setHtml( description );
-}
-
-}
+#include "TextEditor.moc"

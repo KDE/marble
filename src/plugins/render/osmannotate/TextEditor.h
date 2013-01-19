@@ -22,20 +22,23 @@ class QVBoxLayout;
 namespace Marble
 {
 
+class GeoDataPlacemark;
+
 class TextEditor : public QWidget
 {
+    Q_OBJECT
+
 public:
-    TextEditor();
+    TextEditor( GeoDataPlacemark *placemark );
     ~TextEditor();
 
-    //return the plain text name
-    QString name() const;
-    void setName( const QString &name );
-    //return the HTML description
-    QString description() const;
-    void setDescription( const QString &description );
+public Q_SLOTS:
+    void updateName();
+    void updateDescription();
 
 private:
+    GeoDataPlacemark *m_placemark;
+
     QAction* m_boldAction;
     QAction* m_underLineAction;
     QAction* m_italicAction;

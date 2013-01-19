@@ -29,10 +29,6 @@ public:
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
 
     //TextAnnotation
-    virtual QString name() const;
-    virtual void setName( const QString &name );
-    virtual QString description() const;
-    virtual void setDescription( const QString &description );
 
 private:
     GeoWidgetBubble* bubble;

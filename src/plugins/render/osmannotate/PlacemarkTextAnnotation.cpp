@@ -36,7 +36,8 @@ PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataFeature *feature )
 
     //FIXME decide who actually owns this widget and setup destruction
     //accordingly
-    m_textEditor = new TextEditor();
+    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
+    m_textEditor = new TextEditor( placemark );
     bubble->setGeoWidget( m_textEditor );
 }
 
@@ -50,68 +51,23 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
                             const ViewportParams *viewport )
 {
 
-//    painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), true);
-    //Would it not be useful to have a draw latlongbox?
-//    painter->drawRect(geoBounding());
-    qreal north = 0, south = 0, east = 0, west = 0;
-
-    //don't need this if its done by the painter soon
-//    geoBounding(viewport->angularResolution());
-//    north = m_regions.at(0).boundingRect().top();
-//    south = m_regions.at(0).boundingRect().bottom();
-//    east = m_regions.at(0).boundingRect().right();
-//    west = m_regions.at(0).boundingRect().left();
-
-    //would like a method to draw a QRegion ;)
-//    painter->drawRect(GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ),
-//                      m_regions.at(0).boundingRect().width() * RAD2DEG,
-//                      m_regions.at(0).boundingRect().height() * RAD2DEG,true);
-
-
-    painter->drawPoint( GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ) );
     const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( feature() );
     painter->drawPixmap( placemark->coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
 
     qreal x, y;
     bool hidden;
-    bool visable = viewport->currentProjection()->screenCoordinates( coordinate(), viewport, x, y, hidden );
+    bool visible = viewport->currentProjection()->screenCoordinates( placemark->coordinate(), viewport, x, y, hidden );
 
-    if( renderPos == "HOVERS_ABOVE_SURFACE" ) {
-         QList<QRegion> list;
-        list.append( QRegion( x -10 , y-10 , 20 , 20 ) );
-        setRegions( list );
-        painter->drawRect( regions().at(0).boundingRect() );
-        return;
-    }
+    QList<QRegion> list;
+    list.append( QRegion( x -10 , y-10 , 20 , 20 ) );
+    setRegions( list );
 
-
-
-    if( visable && !hidden ) {
+    if( visible && !hidden ) {
         bubble->moveTo( QPoint( x, y ) );
         bubble->paint( painter, viewport );
     } else {
         bubble->setHidden(true );
     }
-}
-
-QString PlacemarkTextAnnotation::name() const
-{
-    return m_textEditor->name();
-}
-
-void PlacemarkTextAnnotation::setName( const QString &name )
-{
-    m_textEditor->setName( name );
-}
-
-QString PlacemarkTextAnnotation::description() const
-{
-    return m_textEditor->description();
-}
-
-void PlacemarkTextAnnotation::setDescription( const QString &description )
-{
-    m_textEditor->setDescription( description );
 }
 
 bool PlacemarkTextAnnotation::mousePressEvent( QMouseEvent* event )
