@@ -125,6 +125,7 @@ void OsmAnnotatePlugin::initialize ()
 {
     widgetInitalised= false;
     m_tmp_lineString = 0;
+    m_tmp_linearRing = 0;
     m_addingPlacemark = false;
     m_drawingPolygon = false;
 
@@ -180,6 +181,9 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         if( m_tmp_lineString ) {
             painter->drawPolyline( *m_tmp_lineString );
         }
+        if( m_tmp_linearRing ) {
+            painter->drawPolyline( *m_tmp_linearRing );
+        }
     }
 
     QListIterator<TmpGraphicsItem*> i( m_graphicsItems );
@@ -202,14 +206,14 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
     m_drawingPolygon = b;
     if( !b ) {
         //stopped drawing the polygon
-        if ( m_tmp_lineString != 0 ) {
+        if ( m_tmp_linearRing != 0 ) {
             GeoDataPlacemark *placemark = new GeoDataPlacemark;
             GeoDataPolygon *poly = new GeoDataPolygon( Tessellate );
-            poly->setOuterBoundary( GeoDataLinearRing(*m_tmp_lineString) );
+            poly->setOuterBoundary( GeoDataLinearRing(*m_tmp_linearRing) );
             placemark->setGeometry( poly );
 
-            delete m_tmp_lineString;
-            m_tmp_lineString = 0;
+            delete m_tmp_linearRing;
+            m_tmp_linearRing = 0;
 
             AreaAnnotation* area = new AreaAnnotation( placemark );
 
@@ -450,11 +454,11 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     // deal with drawing a polygon
     if ( mouseEvent->button() == Qt::LeftButton
          && m_drawingPolygon ) {
-        if ( m_tmp_lineString == 0 ) {
-            m_tmp_lineString = new GeoDataLineString( Tessellate );
+        if ( m_tmp_linearRing == 0 ) {
+            m_tmp_linearRing = new GeoDataLinearRing( Tessellate );
         }
 
-        m_tmp_lineString->append(GeoDataCoordinates(lon, lat));
+        m_tmp_linearRing->append(GeoDataCoordinates(lon, lat));
 
         //FIXME only repaint the line string so far
         marbleWidget->update();

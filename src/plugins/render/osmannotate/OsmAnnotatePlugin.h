@@ -33,6 +33,7 @@ namespace Marble
     class MarbleWidget;
     class PlacemarkTextAnnotation;
     class GeoDataDocument;
+    class GeoDataLinearRing;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -119,6 +120,7 @@ private:
 
     //used while creating new polygons
     GeoDataLineString* m_tmp_lineString;
+    GeoDataLinearRing* m_tmp_linearRing;
 
     bool m_addingPlacemark;
     bool m_drawingPolygon;
