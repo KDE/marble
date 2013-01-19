@@ -24,9 +24,11 @@
 #include "GeoDataLatLonBox.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataTreeModel.h"
 #include "GeoPainter.h"
 #include "GeoWriter.h"
 #include "MarbleDirs.h"
+#include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "PlacemarkTextAnnotation.h"
 
@@ -48,10 +50,13 @@ OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
           m_isInitialized( false )
 {
     Q_UNUSED(model);
+    m_AnnotationDocument->setName( tr("Annotations") );
+    m_AnnotationDocument->setDocumentRole( UserDocument );
 }
 
 OsmAnnotatePlugin::~OsmAnnotatePlugin()
 {
+    m_marbleWidget->model()->treeModel()->removeDocument( m_AnnotationDocument );
     delete m_AnnotationDocument;
     delete m_networkAccessManager;
 }
@@ -163,6 +168,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 
         connect(this, SIGNAL(redraw()),
                 marbleWidget, SLOT(update()) );
+        m_marbleWidget->model()->treeModel()->addDocument( m_AnnotationDocument );
 
         widgetInitalised = true;
     }
@@ -207,7 +213,7 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
 
             AreaAnnotation* area = new AreaAnnotation( placemark );
 
-            m_AnnotationDocument->append( placemark );
+            m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, placemark );
             m_graphicsItems.append( area );
 
             //FIXME only redraw the new polygon
@@ -430,8 +436,9 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
         //Add a placemark on the screen
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
         placemark->setCoordinate( coordinates );
+        placemark->setVisible( false );
         PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation( placemark );
-        m_AnnotationDocument->append( placemark );
+        m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, placemark );
         m_graphicsItems.append( t );
 
         //FIXME only repaint the new placemark
