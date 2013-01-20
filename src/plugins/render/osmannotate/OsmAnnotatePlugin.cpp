@@ -296,6 +296,15 @@ void OsmAnnotatePlugin::downloadOsmFile()
     m_networkAccessManager->get( networkRequest );
 }
 
+void OsmAnnotatePlugin::clearAnnotations()
+{
+    qDeleteAll( m_graphicsItems );
+    m_graphicsItems.clear();
+    while( m_AnnotationDocument->size() > 0 ) {
+        m_marbleWidget->model()->treeModel()->removeFeature( m_AnnotationDocument, 0 );
+    }
+}
+
 void OsmAnnotatePlugin::saveAnnotationFile()
 {
     QString filename;
@@ -473,6 +482,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QAction*    endSeparator;
     QAction*    loadAnnotationFile;
     QAction*    saveAnnotationFile;
+    QAction*    clearAnnotations;
     QAction*    downloadOsm;
 
     enableInputAction = new QAction(this);
@@ -507,6 +517,11 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     connect( saveAnnotationFile, SIGNAL(triggered()),
              this, SLOT(saveAnnotationFile()) );
 
+    clearAnnotations = new QAction( this );
+    clearAnnotations->setText( tr("Clear Annotations") );
+    connect( clearAnnotations, SIGNAL(triggered()),
+             this, SLOT(clearAnnotations()) );
+
     beginSeparator = new QAction( this );
     beginSeparator->setSeparator( true );
     endSeparator = new QAction ( this );
@@ -526,6 +541,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     group->addAction( drawPolygon );
     group->addAction( loadAnnotationFile );
     group->addAction( saveAnnotationFile );
+    group->addAction( clearAnnotations );
     group->addAction( endSeparator );
 
     nonExclusiveGroup->addAction( downloadOsm );

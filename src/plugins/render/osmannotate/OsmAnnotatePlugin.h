@@ -97,6 +97,7 @@ public slots:
     void receiveNetworkReply( QNetworkReply* );
     void downloadOsmFile();
 
+    void clearAnnotations();
     void saveAnnotationFile();
     void loadAnnotationFile();
 
