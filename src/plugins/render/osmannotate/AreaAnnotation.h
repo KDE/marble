@@ -20,7 +20,7 @@ namespace Marble
 class  AreaAnnotation : public TmpGraphicsItem
 {
 public:
-    AreaAnnotation( GeoDataFeature *feature );
+    AreaAnnotation( GeoDataPlacemark *placemark );
 
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
     //FIXME Waiting to be removed

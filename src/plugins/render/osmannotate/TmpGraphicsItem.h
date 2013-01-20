@@ -17,18 +17,17 @@
 #include <QtGui/QMouseEvent>
 
 #include "GeoGraphicsItem.h"
-#include "GeoDataLatLonAltBox.h"
 #include "marble_export.h"
 
 namespace Marble
 {
 
-
+class GeoDataPlacemark;
 
 class TmpGraphicsItem : public GeoGraphicsItem
 {
 public:
-    TmpGraphicsItem( GeoDataFeature *feature );
+    TmpGraphicsItem( GeoDataPlacemark *placemark );
     ~TmpGraphicsItem();
 
     virtual void paint(GeoPainter * painter, const ViewportParams * viewport) =0;

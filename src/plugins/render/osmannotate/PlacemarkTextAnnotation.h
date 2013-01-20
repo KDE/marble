@@ -22,7 +22,7 @@ class TextEditor;
 class PlacemarkTextAnnotation : public TmpGraphicsItem
 {
 public:
-    PlacemarkTextAnnotation( GeoDataFeature *feature );
+    PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
 
     //GeoGraphicsItem
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );

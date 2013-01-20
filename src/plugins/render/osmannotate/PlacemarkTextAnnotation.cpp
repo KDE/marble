@@ -29,14 +29,13 @@
 namespace Marble
 {
 
-PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataFeature *feature )
-        : TmpGraphicsItem( feature )
+PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataPlacemark *placemark )
+        : TmpGraphicsItem( placemark )
 {
     bubble = new GeoWidgetBubble();
 
     //FIXME decide who actually owns this widget and setup destruction
     //accordingly
-    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
     m_textEditor = new TextEditor( placemark );
     bubble->setGeoWidget( m_textEditor );
 }

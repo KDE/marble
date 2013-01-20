@@ -34,6 +34,7 @@ namespace Marble
     class PlacemarkTextAnnotation;
     class GeoDataDocument;
     class GeoDataLinearRing;
+    class GeoDataLineString;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.

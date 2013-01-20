@@ -10,13 +10,15 @@
 
 #include "TmpGraphicsItem.h"
 
+#include "GeoDataPlacemark.h"
+
 #include <QtCore/QVariant>
 
 namespace Marble
 {
 
-TmpGraphicsItem::TmpGraphicsItem( GeoDataFeature *feature )
-    : GeoGraphicsItem( feature )
+TmpGraphicsItem::TmpGraphicsItem( GeoDataPlacemark *placemark )
+    : GeoGraphicsItem( placemark )
 {
 }
 

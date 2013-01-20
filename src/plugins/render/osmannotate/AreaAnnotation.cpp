@@ -18,8 +18,8 @@ namespace Marble
 
 
 
-AreaAnnotation::AreaAnnotation(GeoDataFeature *feature )
-    :TmpGraphicsItem( feature )
+AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark )
+    :TmpGraphicsItem( placemark )
 {
 }
 
