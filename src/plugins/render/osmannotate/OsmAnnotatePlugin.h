@@ -91,15 +91,14 @@ signals:
     void placemarkAdded();
 
 public slots:
-    void downloadOsmFile();
-    void saveAnnotationFile();
-    void loadAnnotationFile();
-
-
     void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );
 
     void receiveNetworkReply( QNetworkReply* );
+    void downloadOsmFile();
+
+    void saveAnnotationFile();
+    void loadAnnotationFile();
 
 protected:
     bool eventFilter(QObject* watched, QEvent* event);

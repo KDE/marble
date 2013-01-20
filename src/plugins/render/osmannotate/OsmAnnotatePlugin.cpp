@@ -460,23 +460,28 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QList<QActionGroup*>* toolbarActions = new QList<QActionGroup*>();
     QList<QActionGroup*>* actions = new QList<QActionGroup*>();
 
-    QActionGroup* initial = new QActionGroup(0);
-    initial->setExclusive( false );
-
     QActionGroup* group = new QActionGroup(0);
-    group->setExclusive( true );
+    group->setExclusive( false );
 
     QActionGroup* nonExclusiveGroup = new QActionGroup(0);
     nonExclusiveGroup->setExclusive( false );
 
+    QAction*    enableInputAction;
     QAction*    addPlacemark;
     QAction*    drawPolygon;
     QAction*    beginSeparator;
     QAction*    endSeparator;
-    QAction*    saveAnnotationFile;
     QAction*    loadAnnotationFile;
-    QAction*    enableInputAction;
+    QAction*    saveAnnotationFile;
     QAction*    downloadOsm;
+
+    enableInputAction = new QAction(this);
+    enableInputAction->setToolTip(tr("Enable Marble Input"));
+    enableInputAction->setCheckable(true);
+    enableInputAction->setChecked( true );
+    enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
+    connect( enableInputAction, SIGNAL(toggled(bool)),
+                       widget, SLOT(setInputEnabled(bool)) );
 
     addPlacemark = new QAction(this);
     addPlacemark->setText( tr("Add Placemark") );
@@ -492,29 +497,21 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     connect( drawPolygon, SIGNAL(toggled(bool)),
              this, SLOT(setDrawingPolygon(bool)) );
 
+    loadAnnotationFile = new QAction( this );
+    loadAnnotationFile->setText( tr("Load Annotation File" ) );
+    connect( loadAnnotationFile, SIGNAL(triggered()),
+             this, SLOT(loadAnnotationFile()) );
 
     saveAnnotationFile = new QAction( this );
     saveAnnotationFile->setText( tr("Save Annotation File") );
     connect( saveAnnotationFile, SIGNAL(triggered()),
              this, SLOT(saveAnnotationFile()) );
 
-    loadAnnotationFile = new QAction( this );
-    loadAnnotationFile->setText( tr("Load Annotation File" ) );
-    connect( loadAnnotationFile, SIGNAL(triggered()),
-             this, SLOT(loadAnnotationFile()) );
-
     beginSeparator = new QAction( this );
     beginSeparator->setSeparator( true );
     endSeparator = new QAction ( this );
     endSeparator->setSeparator( true );
 
-    enableInputAction = new QAction(this);
-    enableInputAction->setToolTip(tr("Enable Marble Input"));
-    enableInputAction->setCheckable(true);
-    enableInputAction->setChecked( true );
-    enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
-    connect( enableInputAction, SIGNAL(toggled(bool)),
-                       widget, SLOT(setInputEnabled(bool)) );
 
     downloadOsm = new QAction( this );
     downloadOsm->setText( tr("Download Osm File") );
@@ -523,22 +520,19 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
              this, SLOT(downloadOsmFile()) );
 
 
-    initial->addAction( enableInputAction );
-    initial->addAction( beginSeparator );
-
+    group->addAction( enableInputAction );
+    group->addAction( beginSeparator );
     group->addAction( addPlacemark );
     group->addAction( drawPolygon );
-    group->addAction( saveAnnotationFile );
     group->addAction( loadAnnotationFile );
+    group->addAction( saveAnnotationFile );
     group->addAction( endSeparator );
 
     nonExclusiveGroup->addAction( downloadOsm );
 
-    actions->append( initial );
     actions->append( group );
     actions->append( nonExclusiveGroup );
 
-    toolbarActions->append( initial );
     toolbarActions->append( group );
     toolbarActions->append( nonExclusiveGroup );
 
