@@ -52,11 +52,7 @@ TextEditor::TextEditor( GeoDataPlacemark *placemark ) :
              this, SLOT(updateDescription()) );
 
     m_name = new QLineEdit;
-    if( m_placemark->name().isEmpty() ) {
-        m_name->setText(tr("Placemark Name"));
-    } else {
-        m_name->setText( placemark->name() );
-    }
+    m_name->setText( placemark->name() );
     connect( m_name, SIGNAL(textChanged(QString)),
              this, SLOT(updateName()) );
 
