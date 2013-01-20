@@ -77,6 +77,8 @@ class OsmAnnotatePlugin :  public RenderPlugin
 
     bool isInitialized () const;
 
+    virtual QString runtimeTrace() const;
+
     virtual QList<QActionGroup*>* actionGroups() const;
     virtual QList<QActionGroup*>* toolbarActionGroups() const;
 

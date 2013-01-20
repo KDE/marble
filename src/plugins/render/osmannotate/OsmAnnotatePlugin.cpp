@@ -146,6 +146,10 @@ bool OsmAnnotatePlugin::isInitialized () const
     return m_isInitialized;
 }
 
+QString OsmAnnotatePlugin::runtimeTrace() const
+{
+    return QString("Annotate Items: %1").arg( m_AnnotationDocument->size() );
+}
 QList<QActionGroup*>* OsmAnnotatePlugin::actionGroups() const
 {
     return m_actions;
