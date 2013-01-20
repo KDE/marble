@@ -175,6 +175,7 @@ geodata/writers/kml/KmlPhotoOverlayWriter.cpp
 geodata/writers/kml/KmlPlacemarkTagWriter.cpp
 geodata/writers/kml/KmlPointTagWriter.cpp
 geodata/writers/kml/KmlPolygonTagWriter.cpp
+geodata/writers/kml/KmlPolyStyleTagWriter.cpp
 geodata/writers/kml/KmlRegionTagWriter.cpp
 geodata/writers/kml/KmlScreenOverlayWriter.cpp
 geodata/writers/kml/KmlStyleMapTagWriter.cpp
