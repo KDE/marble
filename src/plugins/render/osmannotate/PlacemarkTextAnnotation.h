@@ -25,7 +25,6 @@ public:
     PlacemarkTextAnnotation( GeoDataFeature *feature );
 
     //GeoGraphicsItem
-    virtual QRect screenBounding() const;
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
 
     //TextAnnotation

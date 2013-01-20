@@ -132,12 +132,6 @@ void OsmAnnotatePlugin::initialize ()
     m_actions = 0;
     m_toolbarActions = 0;
 
-//    PointScreenGraphicsItem* topLeft = new PointScreenGraphicsItem();
-//    PointScreenGraphicsItem* bottomRight = new PointScreenGraphicsItem();
-
-//    topLeft->setVisible(false);
-//    bottomRight->setVisible(false);
-
     m_isInitialized = true;
 }
 

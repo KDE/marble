@@ -41,12 +41,6 @@ PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataFeature *feature )
     bubble->setGeoWidget( m_textEditor );
 }
 
-QRect PlacemarkTextAnnotation::screenBounding() const
-{
-    //FIXME the first 2 should actually offset it
-    return QRect(-5,-5,20,20);
-}
-
 void PlacemarkTextAnnotation::paint( GeoPainter *painter,
                             const ViewportParams *viewport )
 {
