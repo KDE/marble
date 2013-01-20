@@ -75,8 +75,7 @@ QString OsmAnnotatePlugin::renderPolicy() const
 QStringList OsmAnnotatePlugin::renderPosition() const
 {
     QStringList positions;
-    positions.append( "HOVERS_ABOVE_SURFACE" );
-    positions.append( "USER_TOOLS" );
+    positions.append( "ALWAYS_ON_TOP" );
     return positions;
 }
 
@@ -159,10 +158,6 @@ QList<QActionGroup*>* OsmAnnotatePlugin::toolbarActionGroups() const
 
 bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
-    if ( renderPos != "HOVERS_ABOVE_SURFACE" && renderPos != "USER_TOOLS" ) {
-        return true;
-    }
-    
     if( !widgetInitalised ) {
         MarbleWidget* marbleWidget = (MarbleWidget*) painter->device();
         m_marbleWidget = marbleWidget;
@@ -175,16 +170,14 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         widgetInitalised = true;
     }
 
-    if( renderPos == "HOVERS_ABOVE_SURFACE" ) {
-        painter->autoMapQuality();
+    painter->autoMapQuality();
 
-        //so the user can keep track of the current polygon drawing
-        if( m_tmp_lineString ) {
-            painter->drawPolyline( *m_tmp_lineString );
-        }
-        if( m_tmp_linearRing ) {
-            painter->drawPolyline( *m_tmp_linearRing );
-        }
+    //so the user can keep track of the current polygon drawing
+    if( m_tmp_lineString ) {
+        painter->drawPolyline( *m_tmp_lineString );
+    }
+    if( m_tmp_linearRing ) {
+        painter->drawPolyline( *m_tmp_linearRing );
     }
 
     QListIterator<TmpGraphicsItem*> i( m_graphicsItems );
@@ -436,7 +429,6 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
         //Add a placemark on the screen
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
         placemark->setCoordinate( coordinates );
-        placemark->setVisible( false );
         PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation( placemark );
         m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, placemark );
         m_graphicsItems.append( t );
