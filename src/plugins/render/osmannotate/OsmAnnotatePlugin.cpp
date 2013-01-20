@@ -321,11 +321,12 @@ void OsmAnnotatePlugin::saveAnnotationFile()
         QFile file( filename );
 
         // Open file in right mode
-        file.open( QIODevice::ReadWrite );
+        file.open( QIODevice::WriteOnly );
 
         if ( !writer.write( &file, m_AnnotationDocument ) ) {
             qDebug( "Could not write the file." );
         }
+        file.close();
     }
 }
 
