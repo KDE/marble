@@ -91,7 +91,6 @@ signals:
     void placemarkAdded();
 
 public slots:
-    void loadOsmFile();
     void downloadOsmFile();
     void saveAnnotationFile();
     void loadAnnotationFile();
@@ -115,8 +114,6 @@ private:
 
     GeoDataDocument *m_AnnotationDocument;
     QList<TmpGraphicsItem*> m_graphicsItems;
-
-    QList<PlacemarkTextAnnotation*> annotations() const;
 
     //used while creating new polygons
     GeoDataLineString* m_tmp_lineString;

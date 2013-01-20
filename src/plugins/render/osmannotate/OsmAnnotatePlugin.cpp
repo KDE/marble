@@ -237,30 +237,6 @@ void OsmAnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
     }
 }
 
-void OsmAnnotatePlugin::loadOsmFile()
-{
-    QString filename;
-    filename = QFileDialog::getOpenFileName(0, tr("Open File"),
-                            QString(),
-                            tr("All Supported Files (*.osm);;Open Street Map Data (*.osm)"));
-
-    if ( ! filename.isNull() ) {
-
-        QFile file( filename );
-        if ( !file.exists() ) {
-            qDebug( "File does not exist!" );
-            return;
-        }
-
-        // Open file in right mode
-        file.open( QIODevice::ReadOnly );
-
-        readOsmFile( &file, true );
-
-        file.close();
-    }
-}
-
 void OsmAnnotatePlugin::downloadOsmFile()
 {
     QPointF topLeft(0,0);
@@ -486,7 +462,6 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QAction*    drawPolygon;
     QAction*    beginSeparator;
     QAction*    endSeparator;
-    QAction*    loadOsmFile;
     QAction*    saveAnnotationFile;
     QAction*    loadAnnotationFile;
     QAction*    enableInputAction;
@@ -506,10 +481,6 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     connect( drawPolygon, SIGNAL(toggled(bool)),
              this, SLOT(setDrawingPolygon(bool)) );
 
-    loadOsmFile = new QAction( this );
-    loadOsmFile->setText( tr("Load Osm File") );
-    connect( loadOsmFile, SIGNAL(triggered()),
-             this, SLOT(loadOsmFile()) );
 
     saveAnnotationFile = new QAction( this );
     saveAnnotationFile->setText( tr("Save Annotation File") );
@@ -546,7 +517,6 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
 
     group->addAction( addPlacemark );
     group->addAction( drawPolygon );
-    group->addAction( loadOsmFile );
     group->addAction( saveAnnotationFile );
     group->addAction( loadAnnotationFile );
     group->addAction( endSeparator );
@@ -573,20 +543,6 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
 
 void OsmAnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
 {
-}
-
-QList<PlacemarkTextAnnotation*> OsmAnnotatePlugin::annotations() const
-{
-    QList<PlacemarkTextAnnotation*> tmpAnnotations;
-    TmpGraphicsItem* item;
-    foreach( item, m_graphicsItems ) {
-        PlacemarkTextAnnotation* annotation = dynamic_cast<PlacemarkTextAnnotation*>(item);
-        if( annotation ) {
-            tmpAnnotations.append( annotation );
-        }
-    }
-
-    return tmpAnnotations;
 }
 
 }
