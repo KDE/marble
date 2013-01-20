@@ -18,26 +18,22 @@
 #include "GeoWidgetBubble.h"
 #include "ViewportParams.h"
 #include "MarbleDirs.h"
-#include "TextEditor.h"
 #include "MarbleDebug.h"
 
 #include <QtGui/QPixmap>
-#include <QtGui/QTextEdit>
-#include <QtGui/QPushButton>
-#include <QtCore/QVariant>
 
 namespace Marble
 {
 
 PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataPlacemark *placemark )
-        : TmpGraphicsItem( placemark )
+        : TmpGraphicsItem( placemark ),
+          bubble( new GeoWidgetBubble( placemark ) )
 {
-    bubble = new GeoWidgetBubble();
+}
 
-    //FIXME decide who actually owns this widget and setup destruction
-    //accordingly
-    m_textEditor = new TextEditor( placemark );
-    bubble->setGeoWidget( m_textEditor );
+PlacemarkTextAnnotation::~PlacemarkTextAnnotation()
+{
+    delete bubble;
 }
 
 void PlacemarkTextAnnotation::paint( GeoPainter *painter,

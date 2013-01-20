@@ -11,18 +11,26 @@
 #include "GeoWidgetBubble.h"
 
 #include "GeoPainter.h"
+#include "TextEditor.h"
 
 #include <QtGui/QWidget>
 
 namespace Marble
 {
 
-GeoWidgetBubble::GeoWidgetBubble()
+GeoWidgetBubble::GeoWidgetBubble( GeoDataPlacemark *placemark )
+    : m_widget( new TextEditor( placemark ) ),
+      m_hidden( true ),
+      marbleWidgetInitalised( false ),
+      m_offset( QPoint( 10, 10 ) )
 {
-    m_widget=0;
-    marbleWidgetInitalised = false;
-    m_offset = QPoint( 10, 10 );
-    m_hidden = true;
+    m_widget->setVisible(false);
+    m_widget->setPalette( QPalette(Qt::lightGray, Qt::lightGray) );
+}
+
+GeoWidgetBubble::~GeoWidgetBubble()
+{
+    delete m_widget;
 }
 
 void GeoWidgetBubble::paint( GeoPainter* painter, const ViewportParams* viewport )
@@ -35,7 +43,7 @@ void GeoWidgetBubble::paint( GeoPainter* painter, const ViewportParams* viewport
 
     if( !m_hidden ) {
 
-    if ( marbleWidgetInitalised && ( m_widget!= 0 ) ) {
+    if ( marbleWidgetInitalised ) {
 
         m_widget->setVisible( true );
         QSize widgetSize = m_widget->size();
@@ -65,30 +73,11 @@ void GeoWidgetBubble::paint( GeoPainter* painter, const ViewportParams* viewport
 
 }
 
-void GeoWidgetBubble::setGeoWidget( QWidget* w )
-{
-    QPalette p(Qt::lightGray, Qt::lightGray);
-
-    m_widget= w;
-    m_widget->setVisible(false);
-    m_widget->setPalette( p );
-}
-
-QWidget* GeoWidgetBubble::getGeoWidget()
-{
-    return m_widget;
-}
-
 void GeoWidgetBubble::initaliseMarbleWidget( QWidget* parent )
 {
     m_widget->setParent( parent );
     m_widget->setVisible( true );
     marbleWidgetInitalised = true;
-}
-
-bool GeoWidgetBubble::marbleWidgetIsInitalised() const
-{
-    return marbleWidgetInitalised;
 }
 
 void GeoWidgetBubble::moveTo( QPoint pos )

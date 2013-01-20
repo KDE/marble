@@ -18,22 +18,19 @@ namespace Marble
 {
 
 class GeoPainter;
+class GeoDataPlacemark;
 class ViewportParams;
 class GeoSceneLayer;
-
 
 class GeoWidgetBubble
 {
 public:
-    GeoWidgetBubble();
+    GeoWidgetBubble( GeoDataPlacemark *placemark );
+    ~GeoWidgetBubble();
 
     void paint(GeoPainter* p, const ViewportParams* v);
 
-    void setGeoWidget( QWidget* w );
-    QWidget* getGeoWidget();
-
     void initaliseMarbleWidget( QWidget* parent );
-    bool marbleWidgetIsInitalised() const;
 
     void moveTo( QPoint screenPos );
     void setHidden( bool hide );

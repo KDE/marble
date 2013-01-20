@@ -23,6 +23,7 @@ class PlacemarkTextAnnotation : public TmpGraphicsItem
 {
 public:
     PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
+    ~PlacemarkTextAnnotation();
 
     //GeoGraphicsItem
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
@@ -31,7 +32,6 @@ public:
 
 private:
     GeoWidgetBubble* bubble;
-    TextEditor* m_textEditor;
 
 protected:
     virtual bool mousePressEvent( QMouseEvent *event );
