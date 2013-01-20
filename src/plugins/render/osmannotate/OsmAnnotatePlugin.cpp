@@ -25,6 +25,7 @@
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
+#include "GeoDataTypes.h"
 #include "GeoPainter.h"
 #include "GeoWriter.h"
 #include "MarbleDirs.h"
@@ -327,40 +328,50 @@ void OsmAnnotatePlugin::loadAnnotationFile()
                             QString(),
                             tr("All Supported Files (*.kml);;Kml Annotation file (*.kml)"));
 
-    if ( ! filename.isNull() ) {
-
-        GeoDataParser parser( GeoData_KML );
-
-        QFile file( filename );
-        if ( !file.exists() ) {
-            qDebug( "File does not exist!" );
-            return;
-        }
-
-        // Open file in right mode
-        file.open( QIODevice::ReadOnly );
-
-        if ( !parser.read( &file ) ) {
-            qDebug( "Could not parse file!" );
-            return;
-        }
-
-        GeoDataDocument* document = dynamic_cast<GeoDataDocument*>(parser.releaseDocument() );
-        Q_ASSERT( document );
-
-        file.close();
-
-        QVector<GeoDataFeature*>::ConstIterator it = document->constBegin();
-        for( ; it < document->constEnd(); ++it ) {
-            PlacemarkTextAnnotation* annotation = new PlacemarkTextAnnotation( *it );
-            annotation->setName( (*it)->name() );
-            annotation->setDescription( (*it)->description() );
-            m_graphicsItems.append( annotation );
-        }
-
-        delete document;
-        emit repaintNeeded(QRegion());
+    if ( filename.isNull() ) {
+        return;
     }
+
+
+    QFile file( filename );
+    if ( !file.exists() ) {
+        qDebug( "File does not exist!" );
+        return;
+    }
+
+    // Open file in right mode
+    file.open( QIODevice::ReadOnly );
+
+    GeoDataParser parser( GeoData_KML );
+    if ( !parser.read( &file ) ) {
+        qDebug( "Could not parse file!" );
+        return;
+    }
+
+    GeoDataDocument* document = dynamic_cast<GeoDataDocument*>(parser.releaseDocument() );
+    Q_ASSERT( document );
+
+    file.close();
+
+    foreach( GeoDataFeature *feature, document->featureList() ) {
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
+        if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
+            GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
+            PlacemarkTextAnnotation* annotation = new PlacemarkTextAnnotation( newPlacemark );
+            m_graphicsItems.append( annotation );
+            m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, newPlacemark );
+        }
+        else if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+            GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
+            AreaAnnotation* annotation = new AreaAnnotation( newPlacemark );
+            m_graphicsItems.append( annotation );
+            m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, newPlacemark );
+        }
+    }
+    m_marbleWidget->centerOn( document->latLonAltBox() );
+
+    delete document;
+    emit repaintNeeded(QRegion());
 }
 
 bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
