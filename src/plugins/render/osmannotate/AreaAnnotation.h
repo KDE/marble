@@ -23,6 +23,8 @@ public:
     AreaAnnotation( GeoDataPlacemark *placemark );
 
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
+private:
+    GeoDataPlacemark *m_placemark;
 };
 
 }
