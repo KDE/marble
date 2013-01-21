@@ -24,6 +24,7 @@
 #include "GeoDataLatLonBox.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
 #include "GeoPainter.h"
@@ -53,6 +54,12 @@ OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
     Q_UNUSED(model);
     m_AnnotationDocument->setName( tr("Annotations") );
     m_AnnotationDocument->setDocumentRole( UserDocument );
+    GeoDataStyle style;
+    GeoDataPolyStyle polyStyle;
+    polyStyle.setColor( QColor( 0, 255, 255, 80 ) );
+    style.setStyleId( "polygon" );
+    style.setPolyStyle( polyStyle );
+    m_AnnotationDocument->addStyle( style );
 }
 
 OsmAnnotatePlugin::~OsmAnnotatePlugin()
@@ -203,6 +210,8 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
             GeoDataPolygon *poly = new GeoDataPolygon( Tessellate );
             poly->setOuterBoundary( GeoDataLinearRing(*m_tmp_linearRing) );
             placemark->setGeometry( poly );
+            placemark->setParent( m_AnnotationDocument );
+            placemark->setStyleUrl( "#polygon" );
 
             delete m_tmp_linearRing;
             m_tmp_linearRing = 0;
@@ -363,6 +372,8 @@ void OsmAnnotatePlugin::loadAnnotationFile()
         }
         else if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
             GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
+            newPlacemark->setParent( m_AnnotationDocument );
+            newPlacemark->setStyleUrl( placemark->styleUrl() );
             AreaAnnotation* annotation = new AreaAnnotation( newPlacemark );
             m_graphicsItems.append( annotation );
             m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, newPlacemark );

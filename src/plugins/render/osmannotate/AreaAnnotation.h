@@ -23,8 +23,6 @@ public:
     AreaAnnotation( GeoDataPlacemark *placemark );
 
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
-    //FIXME Waiting to be removed
-    virtual QRect screenBounding(){return QRect();}
 };
 
 }

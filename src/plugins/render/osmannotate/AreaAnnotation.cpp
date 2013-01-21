@@ -25,16 +25,8 @@ AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark )
 
 void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
 {
+    Q_UNUSED(painter);
     Q_UNUSED(viewport);
-    painter->save();
-
-    painter->setBrush( QBrush( QColor( 0, 255, 255, 80 )  ) );
-    const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( feature() );
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark->geometry() );
-    painter->drawPolygon( *polygon );
-
-    painter->restore();
-
 }
 
 }
