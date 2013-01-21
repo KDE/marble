@@ -219,6 +219,10 @@ void EclipsesItem::initialize()
         m_endDatePartial = QDateTime( QDate( year, month, day ),
                                       QTime( hour, min, secs ),
                                       Qt::UTC ).addSecs( - ( tz * 3600 ) );
+    } else {
+        // duration is shorter than 1 min
+        m_startDatePartial = m_dateMaximum;
+        m_endDatePartial = m_dateMaximum;
     }
 
     m_isTotal = ( m_ecl->getTotal( mjd_start, mjd_end ) != 0 );
