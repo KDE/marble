@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
+// Copyright 2013 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #ifndef GEODATATOUR_H
@@ -18,15 +18,22 @@ namespace Marble
 {
 
 class GeoDataTourPrivate;
+class GeoDataPlaylist;
 
 class GEODATA_EXPORT GeoDataTour : public GeoDataFeature
 {
 public:
     GeoDataTour();
+    GeoDataTour(const GeoDataTour &other);
+    GeoDataTour& operator=(const GeoDataTour &other);
     virtual ~GeoDataTour();
 
     QString id() const;
-    void setId(QString value);
+    void setId(const QString &value);
+
+    GeoDataPlaylist* playlist();
+    const GeoDataPlaylist* playlist() const;
+    void setPlaylist(GeoDataPlaylist* playlist);
 
 private:
     GeoDataTourPrivate * const d;

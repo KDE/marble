@@ -80,6 +80,7 @@ geodata/handlers/kml/KmlOverlayXYTagHandler.cpp
 geodata/handlers/kml/KmlPairTagHandler.cpp
 geodata/handlers/kml/KmlPhotoOverlayTagHandler.cpp
 geodata/handlers/kml/KmlPlacemarkTagHandler.cpp
+geodata/handlers/kml/KmlPlaylistTagHandler.cpp
 geodata/handlers/kml/KmlPointTagHandler.cpp
 geodata/handlers/kml/KmlPolygonTagHandler.cpp
 geodata/handlers/kml/KmlPolyStyleTagHandler.cpp
@@ -113,6 +114,7 @@ geodata/handlers/kml/KmlTiltTagHandler.cpp
 geodata/handlers/kml/KmlTimeSpanTagHandler.cpp
 geodata/handlers/kml/KmlTimeStampTagHandler.cpp
 geodata/handlers/kml/KmlTourTagHandler.cpp
+geodata/handlers/kml/KmlTourControlTagHandler.cpp
 geodata/handlers/kml/KmlTrackTagHandler.cpp
 geodata/handlers/kml/KmlValueTagHandler.cpp
 geodata/handlers/kml/KmlViewBoundScaleTagHandler.cpp
@@ -146,6 +148,7 @@ geodata/handlers/kml/KmlLinkSnippetTagHandler.cpp
 geodata/handlers/kml/KmlExpiresTagHandler.cpp
 geodata/handlers/kml/KmlUpdateTagHandler.cpp
 geodata/handlers/kml/KmlNetworkLinkControlTagHandler.cpp
+geodata/handlers/kml/KmlplayModeTagHandler.cpp
 )
 
 SET ( geodata_writers_kml_SRCS
@@ -228,4 +231,3 @@ SET( geodata_SRCS
    )
 
 #add_subdirectory(geodata/data/tests)
-

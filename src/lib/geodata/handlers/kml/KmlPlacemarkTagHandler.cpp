@@ -52,7 +52,7 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataContainer>()->append( placemark );
         return placemark;
     } else if ( parentItem.qualifiedName().first == kmlTag_kml ) {
-        GeoDataDocument* doc = geoDataDoc( parser );
+        GeoDataDocument* doc = geoDataDoc(parser);
         doc->append( placemark );
         return placemark;
     } else {

@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
+// Copyright 2013 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #include <QtCore/QObject>
@@ -14,6 +14,8 @@
 #include <GeoDataParser.h>
 #include <GeoDataDocument.h>
 #include <GeoDataTour.h>
+#include <GeoDataPlaylist.h>
+#include <GeoDataTourControl.h>
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
 #include <GeoDataScreenOverlay.h>
@@ -57,6 +59,13 @@ void TestTour::simpleParseTest()
         " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
         "<Folder>"
         "   <gx:Tour></gx:Tour>"
+        "   <gx:Tour id=\"tourId\">"
+        "       <gx:Playlist>"
+        "           <gx:TourControl id=\"space\">"
+        "               <gx:playMode>pause</gx:playMode>"
+        "           </gx:TourControl>"
+        "       </gx:Playlist>"
+        "   </gx:Tour>"
         "   <gx:Tour id=\"tourId\"></gx:Tour>"
         "</Folder>"
         "</kml>" );
@@ -65,15 +74,23 @@ void TestTour::simpleParseTest()
     QCOMPARE( dataDocument->folderList().size(), 1 );
     GeoDataFolder *folder = dataDocument->folderList().at( 0 );
 
-    GeoDataTour *tour_1 = folder->child(0);
-    GeoDataTour *tour_2 = folder->child(1);
+    GeoDataTour *tour_1 = dynamic_cast<GeoDataTour*>(folder->child(0));
+    GeoDataTour *tour_2 = dynamic_cast<GeoDataTour*>(folder->child(1));
 
     QVERIFY(tour_1 != 0);
     QVERIFY(tour_2 != 0);
 
-    QCOMPARE(tour_1->id(), "");
-    QCOMPARE(tour_2->id(), "tourId");
+    QCOMPARE(tour_1->id(), QString(""));
+    QCOMPARE(tour_2->id(), QString("tourId"));
 
+    GeoDataPlaylist *playlist = tour_2->playlist();
+    QVERIFY(playlist != 0);
+
+    GeoDataTourControl *control = dynamic_cast<GeoDataTourControl*>(
+                playlist->primitive(0));
+    QVERIFY(control != 0);
+    QCOMPARE(control->id(), QString("space"));
+    QCOMPARE(control->playMode(), GeoDataTourControl::Pause);
     delete dataDocument;
 }
 

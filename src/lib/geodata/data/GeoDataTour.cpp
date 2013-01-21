@@ -5,10 +5,11 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
+// Copyright 2013 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
 #include "GeoDataTour.h"
+#include "GeoDataPlaylist.h"
 
 namespace Marble
 {
@@ -16,7 +17,11 @@ namespace Marble
 class GeoDataTourPrivate
 {
 public:
-    GeoDataTourPrivate() : m_id("") {}
+    GeoDataTourPrivate() :
+        m_id(""),
+        m_playlist(0)
+    {}
+    GeoDataPlaylist *m_playlist;
     QString m_id;
 };
 
@@ -24,6 +29,19 @@ GeoDataTour::GeoDataTour() :
     GeoDataFeature(),
     d(new GeoDataTourPrivate)
 {
+}
+
+GeoDataTour::GeoDataTour(const GeoDataTour &other) :
+    GeoDataFeature(),
+    d(new GeoDataTourPrivate(*other.d))
+{
+}
+
+GeoDataTour& GeoDataTour::operator=(const GeoDataTour &other)
+{
+    GeoDataFeature::operator=(other);
+    *d = *other.d;
+    return *this;
 }
 
 GeoDataTour::~GeoDataTour()
@@ -36,9 +54,24 @@ QString GeoDataTour::id() const
     return d->m_id;
 }
 
-void GeoDataTour::setId(QString value)
+void GeoDataTour::setId(const QString &value)
 {
     d->m_id = value;
+}
+
+GeoDataPlaylist* GeoDataTour::playlist()
+{
+    return d->m_playlist;
+}
+
+const GeoDataPlaylist* GeoDataTour::playlist() const
+{
+    return d->m_playlist;
+}
+
+void GeoDataTour::setPlaylist(GeoDataPlaylist *playlist)
+{
+    d->m_playlist = playlist;
 }
 
 } // namespace Marble

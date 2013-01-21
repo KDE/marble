@@ -204,6 +204,9 @@ const char* kmlTag_MultiTrack = "MultiTrack";
 const char* kmlTag_Track = "Track";
 const char* kmlTag_coord = "coord";
 const char* kmlTag_Tour  = "Tour";
+const char* kmlTag_TourControl = "TourControl";
+const char* kmlTag_Playlist = "Playlist";
+const char* kmlTag_playMode = "playMode";
 
 #ifdef KML_LAZY_IMP
  const char* kmlTag_MarblePlacemark = "MarblePlacemark";
