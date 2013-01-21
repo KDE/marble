@@ -142,7 +142,7 @@ const GeoDataFeature* GeoDataContainer::child( int i ) const
 /**
  * @brief returns the position of an item in the list
  */
-int GeoDataContainer::childPosition( GeoDataFeature* object )
+int GeoDataContainer::childPosition( const GeoDataFeature* object ) const
 {
     for ( int i=0; i< p()->m_vector.size(); i++ )
     {

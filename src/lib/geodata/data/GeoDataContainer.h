@@ -101,7 +101,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     /**
      * @brief returns the position of an item in the list
      */
-    int childPosition( GeoDataFeature *child);
+    int childPosition( const GeoDataFeature *child) const;
     
     /**
     * @brief add an element
