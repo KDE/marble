@@ -135,6 +135,7 @@ void OsmAnnotatePlugin::initialize ()
     m_tmp_linearRing = 0;
     m_addingPlacemark = false;
     m_drawingPolygon = false;
+    m_removingItem = false;
 
     m_actions = 0;
     m_toolbarActions = 0;
@@ -225,6 +226,11 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
             emit(redraw());
         }
     }
+}
+
+void OsmAnnotatePlugin::setRemovingItems( bool toggle )
+{
+    m_removingItem = toggle;
 }
 
 void OsmAnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
@@ -417,15 +423,24 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     }
 
     //Pass the event to Graphics Items
-    QList<TmpGraphicsItem*>::ConstIterator itemIterator = m_graphicsItems.constBegin();
-    for( ; itemIterator < m_graphicsItems.constEnd() ; ++itemIterator ) {
-        QListIterator<QRegion> it ( (*itemIterator)->regions() );
+    foreach( TmpGraphicsItem *item, m_graphicsItems ) {
+        QListIterator<QRegion> it ( item->regions() );
 
         while ( it.hasNext() ) {
             QRegion p = it.next();
             if( p.contains( mouseEvent->pos() ) ) {
-                if( (*itemIterator)->sceneEvent( event ) ) {
-                    return true;
+                // deal with removing items
+                if( mouseEvent->button() == Qt::LeftButton && m_removingItem ) {
+                    m_graphicsItems.removeAll( item );
+                    m_marbleWidget->model()->treeModel()->removeFeature( item->feature() );
+                    delete item->feature();
+                    delete item;
+                    emit itemRemoved();
+                }
+                else {
+                    if( item->sceneEvent( event ) ) {
+                        return true;
+                    }
                 }
             }
         }
@@ -480,6 +495,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QAction*    enableInputAction;
     QAction*    addPlacemark;
     QAction*    drawPolygon;
+    QAction*    removeItem;
     QAction*    beginSeparator;
     QAction*    endSeparator;
     QAction*    loadAnnotationFile;
@@ -508,6 +524,14 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     drawPolygon->setCheckable( true );
     connect( drawPolygon, SIGNAL(toggled(bool)),
              this, SLOT(setDrawingPolygon(bool)) );
+
+    removeItem = new QAction( this );
+    removeItem->setText( tr("Remove Item") );
+    removeItem->setCheckable( true );
+    connect( removeItem, SIGNAL(toggled(bool)),
+             this, SLOT(setRemovingItems(bool)) );
+    connect( this, SIGNAL(itemRemoved()),
+             removeItem, SLOT(toggle()) );
 
     loadAnnotationFile = new QAction( this );
     loadAnnotationFile->setText( tr("Load Annotation File" ) );
@@ -541,6 +565,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     group->addAction( beginSeparator );
     group->addAction( addPlacemark );
     group->addAction( drawPolygon );
+    group->addAction( removeItem );
     group->addAction( loadAnnotationFile );
     group->addAction( saveAnnotationFile );
     group->addAction( clearAnnotations );

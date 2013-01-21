@@ -92,10 +92,12 @@ class OsmAnnotatePlugin :  public RenderPlugin
 signals:
     void redraw();
     void placemarkAdded();
+    void itemRemoved();
 
 public slots:
     void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );
+    void setRemovingItems( bool );
 
     void receiveNetworkReply( QNetworkReply* );
     void downloadOsmFile();
@@ -124,6 +126,7 @@ private:
 
     bool m_addingPlacemark;
     bool m_drawingPolygon;
+    bool m_removingItem;
     QNetworkAccessManager* m_networkAccessManager;
     QErrorMessage m_errorMessage;
     bool m_isInitialized;
