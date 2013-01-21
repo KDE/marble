@@ -1,12 +1,12 @@
 # Example
 # add_subdirectory( test )
 
-add_subdirectory( license )
 # Display a control or a screen box
 add_subdirectory( compass )
 add_subdirectory( elevationprofilefloatitem )
 # add_subdirectory( fileview )
 add_subdirectory( gpsinfo )
+add_subdirectory( license )
 add_subdirectory( mapscale )
 add_subdirectory( navigation )
 add_subdirectory( overviewmap )
