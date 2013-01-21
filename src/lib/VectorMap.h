@@ -76,9 +76,6 @@ class VectorMap
 
     ScreenPolygon::Vector m_polygons;
 
-    //	Quaternion m_invRotAxis;
-    matrix            m_rotMatrix;
-
     //	int m_debugNodeCount;
 
     ScreenPolygon     m_polygon;

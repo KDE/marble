@@ -85,7 +85,6 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
                       || m_zPointLimit < 0.0 )
                      ? zlimit : m_zPointLimit;
 
-    viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::ConstIterator  itPolyLine = pntmap->constBegin();
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -102,7 +101,7 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
         for ( int i = 0; i < 5; ++i ) {
             Quaternion qbound = boundary[i]->quaternion();
 
-            qbound.rotateAroundAxis(m_rotMatrix); 
+            qbound.rotateAroundAxis( viewport->planetAxisMatrix() );
             if ( qbound.v[Q_Z] > m_zBoundingBoxLimit ) {
                 // if (qbound.v[Q_Z] > 0){
                 m_polygon.clear();
@@ -133,7 +132,6 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 
     const qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
 
-    viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::ConstIterator  itPolyLine = pntmap->constBegin();
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -236,7 +234,6 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
 
     const qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
 
-    viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::ConstIterator  itPolyLine = pntmap->constBegin();
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -355,7 +352,7 @@ void VectorMap::sphericalCreatePolyLine( GeoDataCoordinates::Vector::ConstIterat
 	++m_debugNodeCount;
 #endif
         Quaternion qpos = itPoint->quaternion();
-        qpos.rotateAroundAxis( m_rotMatrix );
+        qpos.rotateAroundAxis( viewport->planetAxisMatrix() );
         const QPointF currentPoint( ( viewport->width()  / 2 ) + radius * qpos.v[Q_X] + 1.0,
                                     ( viewport->height() / 2 ) - radius * qpos.v[Q_Y] + 1.0 );
 
