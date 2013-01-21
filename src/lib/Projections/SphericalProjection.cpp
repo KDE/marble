@@ -94,7 +94,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = coordinates.quaternion();
 
-    qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
+    qpos.rotateAroundAxis( viewport->planetAxisMatrix() );
 
     qreal      pixelAltitude = ( ( viewport->radius() ) 
                                   / EARTH_RADIUS * absoluteAltitude );
@@ -145,7 +145,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = coordinates.quaternion();
 
-    qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
+    qpos.rotateAroundAxis( viewport->planetAxisMatrix() );
 
     qreal      pixelAltitude = ( ( viewport->radius() ) 
                                   / EARTH_RADIUS * absoluteAltitude );
@@ -705,7 +705,7 @@ bool SphericalProjectionPrivate::globeHidesPoint( const GeoDataCoordinates &coor
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = coordinates.quaternion();
 
-    qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
+    qpos.rotateAroundAxis( viewport->planetAxisMatrix() );
 
     qreal      pixelAltitude = ( ( viewport->radius() )
                                   / EARTH_RADIUS * absoluteAltitude );

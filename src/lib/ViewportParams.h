@@ -94,7 +94,7 @@ class MARBLE_EXPORT ViewportParams
     void centerOn( qreal lon, qreal lat );
 
     Quaternion planetAxis() const;
-    const matrix * planetAxisMatrix() const;
+    const matrix &planetAxisMatrix() const;
 
     int width()  const;
     int height() const;

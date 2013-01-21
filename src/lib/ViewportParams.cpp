@@ -226,9 +226,9 @@ Quaternion ViewportParams::planetAxis() const
     return d->m_planetAxis;
 }
 
-const matrix * ViewportParams::planetAxisMatrix() const
+const matrix &ViewportParams::planetAxisMatrix() const
 {
-    return &d->m_planetAxisMatrix;
+    return d->m_planetAxisMatrix;
 }
 
 int ViewportParams::width()  const
