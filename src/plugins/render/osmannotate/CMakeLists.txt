@@ -7,9 +7,13 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-FILE( GLOB osmannotate_local_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp )
-
 set( osmannotate_SRCS
-        ${geodata_handlers_osm_SRCS} )
+  AreaAnnotation.cpp
+  GeoWidgetBubble.cpp
+  OsmAnnotatePlugin.cpp
+  PlacemarkTextAnnotation.cpp
+  TextEditor.cpp
+  TmpGraphicsItem.cpp
+)
 
 marble_add_plugin( OsmAnnotatePlugin ${osmannotate_SRCS} )
