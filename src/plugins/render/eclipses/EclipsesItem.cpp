@@ -220,7 +220,6 @@ void EclipsesItem::initialize()
                                       QTime( hour, min, secs ),
                                       Qt::UTC ).addSecs( - ( tz * 3600 ) );
     }
-    else Q_ASSERT( false ); // means 'no eclipse' which should never happen
 
     m_isTotal = ( m_ecl->getTotal( mjd_start, mjd_end ) != 0 );
     if( m_isTotal ) {

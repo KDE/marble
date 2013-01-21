@@ -67,8 +67,6 @@ EclipsesPlugin::EclipsesPlugin( const MarbleModel *marbleModel )
 {
     connect( this, SIGNAL(settingsChanged(QString)),
                    SLOT(updateSettings()) );
-
-    setEnabled( true );
 }
 
 EclipsesPlugin::~EclipsesPlugin()

@@ -24,8 +24,7 @@ namespace Marble {
 EclipsesBrowserDialog::EclipsesBrowserDialog( const MarbleModel *model,
                                         QWidget *parent )
     : QDialog( parent ),
-    m_marbleModel( model ),
-    m_year( 1 )
+    m_marbleModel( model )
 {
     initialize();
 }
@@ -37,13 +36,12 @@ EclipsesBrowserDialog::~EclipsesBrowserDialog()
 
 void EclipsesBrowserDialog::setYear( int year )
 {
-    m_year = year;
     m_browserWidget->spinBoxYear->setValue( year );
 }
 
 int EclipsesBrowserDialog::year() const
 {
-    return m_year;
+    return m_browserWidget->spinBoxYear->value();
 }
 
 void EclipsesBrowserDialog::accept()
@@ -61,12 +59,6 @@ void EclipsesBrowserDialog::accept()
 
 void EclipsesBrowserDialog::updateEclipsesBrowserForYear( int year )
 {
-    if( year == 0 ) {
-        // since year 0 make no sense, we proceed to the next valid year
-        setYear( ( m_year > 0 ) ? -1 : 1 );
-        return;
-    }
-
     m_eclModel->setYear( year );
     updateButtonStates();
 }
