@@ -173,6 +173,8 @@ void EclipsesPlugin::initialize()
              SIGNAL(clicked()), this, SLOT(readSettings()) );
     connect( m_configWidget->buttonBox->button( QDialogButtonBox::Apply ),
              SIGNAL(clicked()), this, SLOT(writeSettings()) );
+    connect( m_configWidget->buttonBox->button( QDialogButtonBox::Apply ),
+             SIGNAL(clicked()), this, SLOT(updateEclipses()) );
 
     m_browserDialog = new EclipsesBrowserDialog( marbleModel() );
     connect( m_browserDialog, SIGNAL(buttonShowClicked(int, int)),
@@ -412,14 +414,18 @@ void EclipsesPlugin::updateSettings()
     if (!isInitialized()) {
         return;
     }
+
+    m_browserDialog->setWithLunarEclipses( 
+            m_settings.value( "enableLunarEclipses" ).toBool() );
 }
 
 void EclipsesPlugin::updateEclipses()
 {
     mDebug() << "Updating eclipses....";
     const int year = marbleModel()->clock()->dateTime().date().year();
+    const bool lun = m_configWidget->checkBoxEnableLunarEclipses->isChecked();
 
-    if( m_menuYear != year ) {
+    if( ( m_menuYear != year ) || ( m_model->withLunarEclipses() != lun ) ) {
 
         // remove old menus
         foreach( QAction *action, m_eclipsesListMenu->actions() ) {
@@ -433,6 +439,11 @@ void EclipsesPlugin::updateEclipses()
         }
         m_menuYear = year;
 
+        // enable/disable lunar eclipses if necessary
+        if( m_model->withLunarEclipses() != lun ) {
+            m_model->setWithLunarEclipses( lun );
+        }
+
         m_eclipsesListMenu->setTitle( tr("Eclipses in %1").arg( year ) );
 
         foreach( EclipsesItem *item, m_model->items() ) {
@@ -440,6 +451,15 @@ void EclipsesPlugin::updateEclipses()
                         item->dateMaximum().date().toString() );
             action->setData( QVariant( item->index() ) );
             switch( item->phase() ) {
+                case EclipsesItem::TotalMoon:
+                    action->setIcon( QIcon( ":res/lunar_total.png" ) );
+                    break;
+                case EclipsesItem::PartialMoon:
+                    action->setIcon( QIcon( ":res/lunar_partial.png" ) );
+                    break;
+                case EclipsesItem::PenumbralMoon:
+                    action->setIcon( QIcon( ":res/lunar_penumbra.png" ) );
+                    break;
                 case EclipsesItem::PartialSun:
                     action->setIcon( QIcon( ":res/solar_partial.png" ) );
                     break;

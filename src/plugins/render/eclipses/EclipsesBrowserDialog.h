@@ -57,6 +57,22 @@ public:
      */
     int year() const;
 
+    /**
+     * @brief Set wheter or not to list lunar eclipses
+     * @param enable wheter or not to list lunar eclipses
+     *
+     * @see withLunarEclipses
+     */
+    void setWithLunarEclipses( const bool enable );
+
+    /**
+     * @brief Returns wheter or not lunar eclipses are listed
+     *
+     * @return Wheter or not lunar eclipses are listed
+     * @see setWithLunarEclipses
+     */
+    bool withLunarEclipses() const;
+
 Q_SIGNALS:
     /**
      * @brief This signal is emitted when the use clicks the "show" button
@@ -84,7 +100,7 @@ protected Q_SLOTS:
      * @brief Update the list of eclipses for the given year
      * @param year The year to list eclipses for
      */
-    void updateEclipsesBrowserForYear( int year );
+    void updateEclipsesForYear( int year );
 
     /**
      * @brief Update the dialog's button states

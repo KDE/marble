@@ -44,6 +44,19 @@ int EclipsesBrowserDialog::year() const
     return m_browserWidget->spinBoxYear->value();
 }
 
+void EclipsesBrowserDialog::setWithLunarEclipses( const bool enable )
+{
+    if( m_eclModel->withLunarEclipses() != enable ) {
+        m_eclModel->setWithLunarEclipses( enable );
+        m_eclModel->update();
+    }
+}
+
+bool EclipsesBrowserDialog::withLunarEclipses() const
+{
+    return m_eclModel->withLunarEclipses();
+}
+
 void EclipsesBrowserDialog::accept()
 {
     QItemSelectionModel *s = m_browserWidget->treeView->selectionModel();
@@ -57,7 +70,7 @@ void EclipsesBrowserDialog::accept()
     QDialog::accept();
 }
 
-void EclipsesBrowserDialog::updateEclipsesBrowserForYear( int year )
+void EclipsesBrowserDialog::updateEclipsesForYear( int year )
 {
     m_eclModel->setYear( year );
     updateButtonStates();
@@ -84,7 +97,7 @@ void EclipsesBrowserDialog::initialize()
     connect( m_browserWidget->buttonClose, SIGNAL(clicked()),
              this, SLOT(reject()) );
     connect( m_browserWidget->spinBoxYear, SIGNAL(valueChanged(int)),
-             this, SLOT(updateEclipsesBrowserForYear(int)) );
+             this, SLOT(updateEclipsesForYear(int)) );
     connect( m_browserWidget->treeView->selectionModel(),
              SIGNAL(selectionChanged(const QItemSelection&,
                                      const QItemSelection&)),

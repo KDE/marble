@@ -51,12 +51,15 @@ EclipsesItem::EclipsePhase EclipsesItem::phase() const
 QString EclipsesItem::phaseText() const
 {
     switch( m_phase ) {
-        case PartialSun:            return tr( "Partial Sun" );
-        case NonCentralAnnularSun:  return tr( "non-central Annular Sun" );
-        case NonCentralTotalSun:    return tr( "non-central Total Sun" );
-        case AnnularSun:            return tr( "Annular Sun" );
-        case TotalSun:              return tr( "Total Sun" );
-        case AnnularTotalSun:       return tr( "Annular / Total Sun" );
+        case TotalMoon:             return tr( "Moon, Total" );
+        case PartialMoon:           return tr( "Moon, Partial" );
+        case PenumbralMoon:         return tr( "Moon, Penumbral" );
+        case PartialSun:            return tr( "Sun, Partial" );
+        case NonCentralAnnularSun:  return tr( "Sun, non-central, Annular" );
+        case NonCentralTotalSun:    return tr( "Sun, non-central, Total" );
+        case AnnularSun:            return tr( "Sun, Annular" );
+        case TotalSun:              return tr( "Sun, Total" );
+        case AnnularTotalSun:       return tr( "Sun, Annular/Total" );
     }
 
     return QString();
@@ -190,12 +193,16 @@ void EclipsesItem::initialize()
                                             tz, m_magnitude );
 
     switch( phase ) {
-        case 1: m_phase = EclipsesItem::PartialSun; break;
-        case 2: m_phase = EclipsesItem::NonCentralAnnularSun; break;
-        case 3: m_phase = EclipsesItem::NonCentralTotalSun; break;
-        case 4: m_phase = EclipsesItem::AnnularSun; break;
-        case 5: m_phase = EclipsesItem::TotalSun; break;
-        case 6: m_phase = EclipsesItem::AnnularTotalSun; break;
+        case -4: m_phase = EclipsesItem::TotalMoon; break;
+        case -3: m_phase = EclipsesItem::PartialMoon; break;
+        case -2:
+        case -1: m_phase = EclipsesItem::PenumbralMoon; break;
+        case  1: m_phase = EclipsesItem::PartialSun; break;
+        case  2: m_phase = EclipsesItem::NonCentralAnnularSun; break;
+        case  3: m_phase = EclipsesItem::NonCentralTotalSun; break;
+        case  4: m_phase = EclipsesItem::AnnularSun; break;
+        case  5: m_phase = EclipsesItem::TotalSun; break;
+        case  6: m_phase = EclipsesItem::AnnularTotalSun; break;
         default:
             mDebug() << "Invalid phase for eclipse at" << year << "/" <<
                         day << "/" << month << "!";

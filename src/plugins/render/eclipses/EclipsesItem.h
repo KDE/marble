@@ -44,12 +44,15 @@ public:
      * @brief A type of an eclipse event
      */
     enum EclipsePhase {
-        PartialSun              = 1,
-        NonCentralAnnularSun    = 2,
-        NonCentralTotalSun      = 3,
-        AnnularSun              = 4,
-        TotalSun                = 5,
-        AnnularTotalSun         = 6
+        TotalMoon               = -4,
+        PartialMoon             = -3,
+        PenumbralMoon           = -1,
+        PartialSun              =  1,
+        NonCentralAnnularSun    =  2,
+        NonCentralTotalSun      =  3,
+        AnnularSun              =  4,
+        TotalSun                =  5,
+        AnnularTotalSun         =  6
     };
 
     /**

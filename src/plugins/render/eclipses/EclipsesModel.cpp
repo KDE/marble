@@ -22,11 +22,12 @@ namespace Marble
 EclipsesModel::EclipsesModel( const MarbleModel *model, QObject *parent )
     : QAbstractItemModel( parent ),
       m_marbleModel( model ),
-      m_currentYear( 0 )
+      m_currentYear( 0 ),
+      m_withLunarEclipses( false )
 {
-    m_ecps = new EclSolar();
-    m_ecps->setLunarEcl( false );
-    m_ecps->setTimezone( model->clock()->timezone() / 3600. );
+    m_ecl = new EclSolar();
+    m_ecl->setTimezone( model->clock()->timezone() / 3600. );
+    m_ecl->setLunarEcl( m_withLunarEclipses );
 
     // oberservation point defaults to home location
     qreal lon, lat;
@@ -39,7 +40,7 @@ EclipsesModel::EclipsesModel( const MarbleModel *model, QObject *parent )
 EclipsesModel::~EclipsesModel()
 {
     clear();
-    delete m_ecps;
+    delete m_ecl;
 }
 const GeoDataCoordinates& EclipsesModel::observationPoint() const
 {
@@ -49,7 +50,7 @@ const GeoDataCoordinates& EclipsesModel::observationPoint() const
 void EclipsesModel::setObservationPoint( const GeoDataCoordinates &coords )
 {
     m_observationPoint = coords;
-    m_ecps->setLocalPos( coords.latitude(), coords.altitude(), 6000. );
+    m_ecl->setLocalPos( coords.latitude(), coords.altitude(), 6000. );
 }
 
 void EclipsesModel::setYear( int year )
@@ -58,7 +59,7 @@ void EclipsesModel::setYear( int year )
 
         mDebug() << "Year changed - Calculating eclipses...";
         m_currentYear = year;
-        m_ecps->putYear( year );
+        m_ecl->putYear( year );
 
         update();
     }
@@ -67,6 +68,20 @@ void EclipsesModel::setYear( int year )
 int EclipsesModel::year() const
 {
     return m_currentYear;
+}
+
+void EclipsesModel::setWithLunarEclipses( const bool enable )
+{
+    if( m_withLunarEclipses != enable ) {
+        m_withLunarEclipses = enable;
+        m_ecl->setLunarEcl( m_withLunarEclipses );
+        update();
+    }
+}
+
+bool EclipsesModel::withLunarEclipses() const
+{
+    return m_withLunarEclipses;
 }
 
 EclipsesItem* EclipsesModel::eclipseWithIndex( int index )
@@ -179,9 +194,9 @@ void EclipsesModel::update()
 
     beginInsertRows( QModelIndex(), 0, rowCount() );
 
-    int num = m_ecps->getNumberEclYear();
+    int num = m_ecl->getNumberEclYear();
     for( int i = 1; i <= num; ++i ) {
-        EclipsesItem *item = new EclipsesItem( m_ecps, i );
+        EclipsesItem *item = new EclipsesItem( m_ecl, i );
         addItem( item );
     }
 

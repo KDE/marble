@@ -89,6 +89,27 @@ public:
     int year() const;
 
     /**
+     * @brief Set if lunar eclipses are enbled
+     * @param enable Indicates wheter or not to allow lunar eclipses
+     *
+     * Allows to enable or disable inclusion of lunar eclipses.
+     *
+     * @see withLunarEclipses
+     */
+    void setWithLunarEclipses( const bool enable );
+
+    /**
+     * @brief Return wheter or not lunar eclipses are enabled
+     *
+     * Returns wheter or not lunar eclipses are included in the eclipse
+     * calculation.
+     *
+     * @return True if lunar eclipses are enabled or false otherwise
+     * @see setWithLunarEclipses
+     */
+    bool withLunarEclipses() const;
+
+    /**
      * @brief Get eclipse item of a given year
      *
      * @param index
@@ -122,6 +143,19 @@ public:
     QVariant headerData( int section, Qt::Orientation orientation,
                          int role = Qt::DisplayRole ) const;
 
+public Q_SLOTS:
+    /**
+     * @brief Update the list of eclipse items
+     *
+     * This forces an update of the current list of eclipse items by
+     * calculating all eclipse events for the currently set year and
+     * adding them to the model. All previously added items are
+     * cleared before.
+     *
+     * @see clear
+     */
+    void update();
+
 private:
     /**
      * @brief Add an item to the model
@@ -142,22 +176,11 @@ private:
      */
     void clear();
 
-    /**
-     * @brief Update the list of eclipse items
-     *
-     * This forces an update of the current list of eclipse items by
-     * calculating all eclipse events for the currently set year and
-     * adding them to the model. All previously added items are
-     * cleared before.
-     *
-     * @see clear
-     */
-    void update();
-
     const MarbleModel *m_marbleModel;
-    EclSolar *m_ecps;
+    EclSolar *m_ecl;
     QList<EclipsesItem*> m_items;
     int m_currentYear;
+    bool m_withLunarEclipses;
     GeoDataCoordinates m_observationPoint;
 };
 
