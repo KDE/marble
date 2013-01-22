@@ -43,6 +43,8 @@ protected:
 
 
     virtual bool mousePressEvent( QMouseEvent* event );
+    virtual bool mouseMoveEvent( QMouseEvent* event );
+    virtual bool mouseReleaseEvent( QMouseEvent* event );
 
  private:
     QList<QRegion> m_regions;

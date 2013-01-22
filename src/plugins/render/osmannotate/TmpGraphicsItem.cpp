@@ -36,6 +36,12 @@ bool TmpGraphicsItem::sceneEvent( QEvent* event )
     if( event->type() == QEvent::MouseButtonPress ) {
         return mousePressEvent( static_cast<QMouseEvent*>( event ));
     }
+    if( event->type() == QEvent::MouseMove ) {
+        return mouseMoveEvent( static_cast<QMouseEvent*>( event ));
+    }
+    if( event->type() == QEvent::MouseButtonRelease ) {
+        return mouseReleaseEvent( static_cast<QMouseEvent*>( event ));
+    }
 
     return false;
 }
@@ -45,6 +51,18 @@ bool TmpGraphicsItem::mousePressEvent( QMouseEvent* event )
     Q_UNUSED( event )
     //FIXME re-implement the whole ItemIsSelectable and call an
     //Item Change
+    return false;
+}
+
+bool TmpGraphicsItem::mouseMoveEvent( QMouseEvent *event )
+{
+    Q_UNUSED( event )
+    return false;
+}
+
+bool TmpGraphicsItem::mouseReleaseEvent( QMouseEvent *event )
+{
+    Q_UNUSED( event )
     return false;
 }
 
