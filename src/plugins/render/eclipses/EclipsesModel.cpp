@@ -183,8 +183,6 @@ void EclipsesModel::update()
     for( int i = 1; i <= num; ++i ) {
         EclipsesItem *item = new EclipsesItem( m_ecps, i );
         addItem( item );
-        mDebug() << "Eclipse" << i << "added:" << item->dateMaximum()
-            << "(" << item->phaseText() << ")";
     }
 
     endInsertRows();

@@ -203,7 +203,7 @@ void EclipsesItem::initialize()
 
     m_dateMaximum = QDateTime( QDate( year, month, day ),
                                QTime( hour, min, secs ),
-                               Qt::UTC ).addSecs( - ( tz * 3600 ) );
+                               Qt::LocalTime );
 
     // get global start/end date of eclipse
  
@@ -214,11 +214,11 @@ void EclipsesItem::initialize()
         m_ecl->getDatefromMJD( mjd_start, year, month, day, hour, min, secs );
         m_startDatePartial = QDateTime( QDate( year, month, day ),
                                         QTime( hour, min, secs ),
-                                        Qt::UTC ).addSecs( - ( tz * 3600 ) );
+                                        Qt::LocalTime );
         m_ecl->getDatefromMJD( mjd_end, year, month, day, hour, min, secs );
         m_endDatePartial = QDateTime( QDate( year, month, day ),
                                       QTime( hour, min, secs ),
-                                      Qt::UTC ).addSecs( - ( tz * 3600 ) );
+                                      Qt::LocalTime );
     } else {
         // duration is shorter than 1 min
         m_startDatePartial = m_dateMaximum;
@@ -230,11 +230,11 @@ void EclipsesItem::initialize()
         m_ecl->getDatefromMJD( mjd_start, year, month, day, hour, min, secs );
         m_startDateTotal = QDateTime( QDate( year, month, day ),
                                       QTime( hour, min, secs ),
-                                      Qt::UTC ).addSecs( - ( tz * 3600 ) );
+                                      Qt::LocalTime );
         m_ecl->getDatefromMJD( mjd_end, year, month, day, hour, min, secs );
         m_endDateTotal = QDateTime( QDate( year, month, day ),
                                     QTime( hour, min, secs ),
-                                    Qt::UTC ).addSecs( - ( tz * 3600 ) );
+                                    Qt::LocalTime );
     }
 
     // detailed calculations are done when required
