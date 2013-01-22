@@ -417,13 +417,17 @@ void EclipsesPlugin::updateSettings()
 
     m_browserDialog->setWithLunarEclipses( 
             m_settings.value( "enableLunarEclipses" ).toBool() );
+    if( m_model->withLunarEclipses() != 
+            m_settings.value( "enableLunarEclipses" ).toBool() ) {
+        updateEclipses();
+    }
 }
 
 void EclipsesPlugin::updateEclipses()
 {
     mDebug() << "Updating eclipses....";
     const int year = marbleModel()->clock()->dateTime().date().year();
-    const bool lun = m_configWidget->checkBoxEnableLunarEclipses->isChecked();
+    const bool lun = m_settings.value( "enableLunarEclipses" ).toBool();
 
     if( ( m_menuYear != year ) || ( m_model->withLunarEclipses() != lun ) ) {
 
