@@ -30,6 +30,7 @@ GeoNode* KmlPlaylistTagHandler::parse(GeoParser &parser) const
     if (parentItem.is<GeoDataTour>()) {
         GeoDataPlaylist *playlist = new GeoDataPlaylist;
         parentItem.nodeAs<GeoDataTour>()->setPlaylist(playlist);
+        return playlist;
     }
 
     return 0;

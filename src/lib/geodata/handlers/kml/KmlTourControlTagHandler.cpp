@@ -35,6 +35,7 @@ GeoNode* KmlTourControlTagHandler::parse(GeoParser &parser) const
     if (parentItem.is<GeoDataPlaylist>()) {
         //parentItem.nodeAs<GeoDataPlaylist>()->append(tourControl);
         parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(tourControl);
+        return tourControl;
     } else {
         delete tourControl;
     }
