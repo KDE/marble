@@ -21,8 +21,8 @@ public:
         m_id(""),
         m_playlist(0)
     {}
-    GeoDataPlaylist *m_playlist;
     QString m_id;
+    GeoDataPlaylist *m_playlist;
 };
 
 GeoDataTour::GeoDataTour() :

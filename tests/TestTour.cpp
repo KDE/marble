@@ -58,7 +58,10 @@ void TestTour::simpleParseTest()
         "<kml xmlns=\"http://www.opengis.net/kml/2.2\""
         " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
         "<Folder>"
-        "   <gx:Tour></gx:Tour>"
+        "   <gx:Tour>"
+        "   <name>My Tour</name>"
+        "   <description>This is my tour.</description>"
+        "   </gx:Tour>"
         "   <gx:Tour id=\"tourId\">"
         "       <gx:Playlist>"
         "           <gx:TourControl id=\"space\">"
@@ -81,7 +84,11 @@ void TestTour::simpleParseTest()
     QVERIFY(tour_2 != 0);
 
     QCOMPARE(tour_1->id(), QString(""));
+    QCOMPARE(tour_1->name(), QString("My Tour"));
+    QCOMPARE(tour_1->description(), QString("This is my tour."));
     QCOMPARE(tour_2->id(), QString("tourId"));
+    QCOMPARE(tour_2->name(), QString());
+    QCOMPARE(tour_2->description(), QString());
 
     GeoDataPlaylist *playlist = tour_2->playlist();
     QVERIFY(playlist != 0);
