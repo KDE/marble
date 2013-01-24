@@ -133,6 +133,7 @@ void OsmAnnotatePlugin::initialize ()
     widgetInitalised= false;
     m_tmp_lineString = 0;
     m_tmp_linearRing = 0;
+    m_selectedItem = 0;
     m_addingPlacemark = false;
     m_drawingPolygon = false;
     m_removingItem = false;
@@ -422,6 +423,14 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
         return false;
     }
 
+    // handle easily the mousemove
+    if( event->type() == QEvent::MouseMove && m_selectedItem ) {
+        if( m_selectedItem->sceneEvent( event ) ) {
+            m_marbleWidget->model()->treeModel()->updateFeature( m_selectedItem->placemark() );
+            return true;
+        }
+    }
+
     //Pass the event to Graphics Items
     foreach( TmpGraphicsItem *item, m_graphicsItems ) {
         QListIterator<QRegion> it ( item->regions() );
@@ -439,6 +448,12 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
                 }
                 else {
                     if( item->sceneEvent( event ) ) {
+                        if( event->type() == QEvent::MouseButtonPress ) {
+                            m_selectedItem = item;
+                        } else {
+                            m_selectedItem = 0;
+                        }
+                        m_marbleWidget->model()->treeModel()->updateFeature( item->placemark() );
                         return true;
                     }
                 }
