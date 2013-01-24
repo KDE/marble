@@ -23,8 +23,14 @@ public:
     AreaAnnotation( GeoDataPlacemark *placemark );
 
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
+    virtual bool mousePressEvent( QMouseEvent *event );
+    virtual bool mouseMoveEvent( QMouseEvent *event );
+    virtual bool mouseReleaseEvent( QMouseEvent *event );
+
 private:
     GeoDataPlacemark *m_placemark;
+    int m_movedPoint;
+    const ViewportParams *m_viewport;
 };
 
 }
