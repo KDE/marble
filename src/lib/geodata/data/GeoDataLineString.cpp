@@ -139,6 +139,8 @@ int GeoDataLineString::size() const
 GeoDataCoordinates& GeoDataLineString::at( int pos )
 {
     GeoDataGeometry::detach();
+    p()->m_dirtyRange = true;
+    p()->m_dirtyBox = true;
     return p()->m_vector[ pos ];
 }
 
@@ -150,6 +152,8 @@ const GeoDataCoordinates& GeoDataLineString::at( int pos ) const
 GeoDataCoordinates& GeoDataLineString::operator[]( int pos )
 {
     GeoDataGeometry::detach();
+    p()->m_dirtyRange = true;
+    p()->m_dirtyBox = true;
     return p()->m_vector[ pos ];
 }
 
@@ -161,6 +165,8 @@ const GeoDataCoordinates& GeoDataLineString::operator[]( int pos ) const
 GeoDataCoordinates& GeoDataLineString::last()
 {
     GeoDataGeometry::detach();
+    p()->m_dirtyRange = true;
+    p()->m_dirtyBox = true;
     return p()->m_vector.last();
 }
 
