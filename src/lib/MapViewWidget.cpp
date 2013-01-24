@@ -65,42 +65,118 @@ class CelestialSortFilterProxyModel : public QSortFilterProxyModel
 public:
     CelestialSortFilterProxyModel()
     {
-        // here we will set m_priority for default order
-        const int prefix = 100;
-        m_priority["mercury"] = prefix-1;
-        m_priority["venus"] = prefix-2;
-        m_priority["earth"] = prefix-3;
-        m_priority["mars"] = prefix-4;
-        m_priority["jupiter"] = prefix-5;
-        m_priority["saturn"] = prefix-6;
-        m_priority["uranus"] = prefix-7;
-        m_priority["neptune"] = prefix-8;
-        m_priority["pluto"] = prefix-9;
+        setupPriorities();
+        setupMoonsList();
+        setupDwarfsList();
     }
     ~CelestialSortFilterProxyModel() {}
 
+    // A small trick to change names for dwarfs and moons
+    QVariant data(const QModelIndex &index, int role) const
+    {
+        QVariant var = QSortFilterProxyModel::data(index, role);
+        if (role == Qt::DisplayRole) {
+            QString newOne = var.toString();
+            if (newOne == tr("Moon")) {
+                return QString("  " + tr("Moon"));
+            } else if (m_moons.contains(newOne.toLower())) {
+                return QString("  "+newOne+" (" + tr("moon") + ")");
+            } else if (m_dwarfs.contains(newOne.toLower())) {
+                return QString(newOne+ " (" + tr("dwarf planet") + ")");
+            }
+            return newOne;
+        } else {
+            return var;
+        }
+    }
+
+private:
+    // TODO: create priority on the model side (Planet Class) by taking the distance to the "home planet/home star" into account
+    void setupPriorities()
+    {
+        // here we will set m_priority for default order
+        int prefix = 100;
+
+        m_priority["sun"] = prefix;
+        m_priority["mercury"] = prefix--;
+        m_priority["venus"] = prefix--;
+        m_priority["earth"] = prefix--;
+        m_priority["moon"] = prefix--;
+        m_priority["mars"] = prefix--;
+
+        m_priority["jupiter"] = prefix--;
+        // Moons of Jupiter
+        m_priority["io"] = prefix--;
+        m_priority["europa"] = prefix--;
+        m_priority["ganymede"] = prefix--;
+        m_priority["callisto"] = prefix--;
+
+        m_priority["saturn"] = prefix--;
+        // Moons of Saturn
+        m_priority["mimas"] = prefix--;
+        m_priority["enceladus"] = prefix--;
+        m_priority["thetys"] = prefix--;
+        m_priority["dione"] = prefix--;
+        m_priority["rhea"] = prefix--;
+        m_priority["titan"] = prefix--;
+        m_priority["iapetus"] = prefix--;
+
+        m_priority["uranus"] = prefix--;
+        m_priority["neptune"] = prefix--;
+        m_priority["pluto"] = prefix--;
+        m_priority["ceres"] = prefix--;
+    }
+
+    void setupMoonsList()
+    {
+        m_moons.push_back("moon");
+        m_moons.push_back("europa");
+        m_moons.push_back("ganymede");
+        m_moons.push_back("callisto");
+        m_moons.push_back("mimas");
+        m_moons.push_back("enceladus");
+        m_moons.push_back("thetys");
+        m_moons.push_back("dione");
+        m_moons.push_back("rhea");
+        m_moons.push_back("titan");
+        m_moons.push_back("iapetus");
+    }
+
+    void setupDwarfsList()
+    {
+        m_dwarfs.push_back("pluto");
+        m_dwarfs.push_back("ceres");
+    }
+
 protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const {
-        // get planetids for left and right planets
-        QString first = sourceModel()->index(left.row(), 1).data().toString();
-        QString second = sourceModel()->index(right.row(), 1).data().toString();
+        const QString nameLeft = sourceModel()->index(left.row(), 1).data().toString();
+        const QString nameRight = sourceModel()->index(right.row(), 1).data().toString();
+        const QString first = nameLeft.toLower();
+        const QString second = nameRight.toLower();
+
         // both are in the list
         if (m_priority.contains(first) && m_priority.contains(second)) {
             return m_priority[first] > m_priority[second];
         }
+
         // only left in the list
         if (m_priority.contains(first) && !m_priority.contains(second)) {
             return true;
         }
+
         // only right in the list
         if (!m_priority.contains(first) && m_priority.contains(second)) {
             return false;
         }
+
         return QSortFilterProxyModel::lessThan(left, right);
     }
 
 private:
     QMap<QString, int> m_priority;
+    QList<QString> m_moons;
+    QList<QString> m_dwarfs;
 };
 
 class MapViewWidget::Private {
