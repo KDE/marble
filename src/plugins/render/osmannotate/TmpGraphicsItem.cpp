@@ -18,7 +18,8 @@ namespace Marble
 {
 
 TmpGraphicsItem::TmpGraphicsItem( GeoDataPlacemark *placemark )
-    : GeoGraphicsItem( placemark )
+    : GeoGraphicsItem( placemark ),
+      m_placemark( placemark )
 {
 }
 
@@ -29,6 +30,11 @@ TmpGraphicsItem::~TmpGraphicsItem()
 QList<QRegion> TmpGraphicsItem::regions() const
 {
     return m_regions;
+}
+
+GeoDataPlacemark *TmpGraphicsItem::placemark()
+{
+    return m_placemark;
 }
 
 bool TmpGraphicsItem::sceneEvent( QEvent* event )

@@ -38,6 +38,7 @@ public:
     //is this the best thing to call the event distributer?
     bool sceneEvent( QEvent* event );
 
+    GeoDataPlacemark *placemark();
 protected:
     void setRegions( const QList<QRegion>& regions );
 
@@ -48,6 +49,7 @@ protected:
 
  private:
     QList<QRegion> m_regions;
+    GeoDataPlacemark *m_placemark;
 
 };
 
