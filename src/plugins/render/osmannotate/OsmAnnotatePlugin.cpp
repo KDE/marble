@@ -481,6 +481,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
     // deal with drawing a polygon
     if ( mouseEvent->button() == Qt::LeftButton
+         && mouseEvent->type() == QEvent::MouseButtonPress
          && m_drawingPolygon ) {
         if ( m_tmp_linearRing == 0 ) {
             m_tmp_linearRing = new GeoDataLinearRing( Tessellate );
