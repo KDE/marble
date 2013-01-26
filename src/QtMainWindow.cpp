@@ -625,7 +625,7 @@ void MainWindow::createPluginMenus()
 //        this->menuBar()->removeAction();
     }
 
-    QList<QActionGroup*> *tmp_toolbarActionGroups;
+    const QList<QActionGroup*> *tmp_toolbarActionGroups;
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();

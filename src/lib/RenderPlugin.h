@@ -109,7 +109,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *
      * @return a list of grouped actions
      */
-    virtual QList<QActionGroup*>*   actionGroups() const;
+    virtual const QList<QActionGroup*>*   actionGroups() const;
 
     /**
      * @brief Getting all actions which should be placed in the toolbar
@@ -121,7 +121,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *
      * @return a list of grouped toolbar actions
      */
-    virtual QList<QActionGroup*>*   toolbarActionGroups() const;
+    virtual const QList<QActionGroup*>*   toolbarActionGroups() const;
 
     /**
      * @brief is enabled

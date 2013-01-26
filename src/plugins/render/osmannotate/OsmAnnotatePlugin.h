@@ -80,8 +80,8 @@ class OsmAnnotatePlugin :  public RenderPlugin
 
     virtual QString runtimeTrace() const;
 
-    virtual QList<QActionGroup*>* actionGroups() const;
-    virtual QList<QActionGroup*>* toolbarActionGroups() const;
+    virtual const QList<QActionGroup*>* actionGroups() const;
+    virtual const QList<QActionGroup*>* toolbarActionGroups() const;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos, GeoSceneLayer * layer = 0 );
@@ -95,6 +95,8 @@ signals:
     void itemRemoved();
 
 public slots:
+    void enableModel( bool enabled );
+
     void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );
     void setRemovingItems( bool );
@@ -114,8 +116,8 @@ private:
 
     MarbleWidget* m_marbleWidget;
 
-    QList<QActionGroup*>    *m_actions;
-    QList<QActionGroup*>    *m_toolbarActions;
+    QList<QActionGroup*>    m_actions;
+    QList<QActionGroup*>    m_toolbarActions;
 
     GeoDataDocument *m_AnnotationDocument;
     QList<TmpGraphicsItem*> m_graphicsItems;

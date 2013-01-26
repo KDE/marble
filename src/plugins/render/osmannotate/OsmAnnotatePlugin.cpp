@@ -47,6 +47,7 @@ OsmAnnotatePlugin::OsmAnnotatePlugin()
 
 OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
         : RenderPlugin(model),
+          m_marbleWidget( 0 ),
           m_AnnotationDocument( new GeoDataDocument ),
           m_networkAccessManager( 0 ),
           m_isInitialized( false )
@@ -60,6 +61,7 @@ OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
     style.setStyleId( "polygon" );
     style.setPolyStyle( polyStyle );
     m_AnnotationDocument->addStyle( style );
+    connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
 }
 
 OsmAnnotatePlugin::~OsmAnnotatePlugin()
@@ -137,10 +139,6 @@ void OsmAnnotatePlugin::initialize ()
     m_addingPlacemark = false;
     m_drawingPolygon = false;
     m_removingItem = false;
-
-    m_actions = 0;
-    m_toolbarActions = 0;
-
     m_isInitialized = true;
 }
 
@@ -153,14 +151,14 @@ QString OsmAnnotatePlugin::runtimeTrace() const
 {
     return QString("Annotate Items: %1").arg( m_AnnotationDocument->size() );
 }
-QList<QActionGroup*>* OsmAnnotatePlugin::actionGroups() const
+const QList<QActionGroup*>* OsmAnnotatePlugin::actionGroups() const
 {
-    return m_actions;
+    return &m_actions;
 }
 
-QList<QActionGroup*>* OsmAnnotatePlugin::toolbarActionGroups() const
+const QList<QActionGroup*>* OsmAnnotatePlugin::toolbarActionGroups() const
 {
-    return m_toolbarActions;
+    return &m_toolbarActions;
 }
 
 bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
@@ -169,11 +167,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         MarbleWidget* marbleWidget = (MarbleWidget*) painter->device();
         m_marbleWidget = marbleWidget;
         setupActions( marbleWidget );
-
-        connect(this, SIGNAL(redraw()),
-                marbleWidget, SLOT(update()) );
         m_marbleWidget->model()->treeModel()->addDocument( m_AnnotationDocument );
-
         widgetInitalised = true;
     }
 
@@ -195,6 +189,21 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
     }
 
     return true;
+}
+
+void OsmAnnotatePlugin::enableModel( bool enabled )
+{
+    if( enabled ) {
+        if( m_marbleWidget ) {
+            setupActions( m_marbleWidget );
+            m_marbleWidget->model()->treeModel()->addDocument( m_AnnotationDocument );
+        }
+    } else {
+        setupActions( 0 );
+        if( m_marbleWidget ) {
+            m_marbleWidget->model()->treeModel()->removeDocument( m_AnnotationDocument );
+        }
+    }
 }
 
 void OsmAnnotatePlugin::setAddingPlacemark( bool b)
@@ -222,9 +231,6 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
 
             m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, placemark );
             m_graphicsItems.append( area );
-
-            //FIXME only redraw the new polygon
-            emit(redraw());
         }
     }
 }
@@ -499,108 +505,104 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
 void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
 {
-    QList<QActionGroup*>* toolbarActions = new QList<QActionGroup*>();
-    QList<QActionGroup*>* actions = new QList<QActionGroup*>();
+    qDeleteAll( m_actions );
+    m_actions.clear();
+    m_toolbarActions.clear();
 
-    QActionGroup* group = new QActionGroup(0);
-    group->setExclusive( false );
+    if( widget ) {
+        QActionGroup* group = new QActionGroup(0);
+        group->setExclusive( false );
 
-    QActionGroup* nonExclusiveGroup = new QActionGroup(0);
-    nonExclusiveGroup->setExclusive( false );
+        QActionGroup* nonExclusiveGroup = new QActionGroup(0);
+        nonExclusiveGroup->setExclusive( false );
 
-    QAction*    enableInputAction;
-    QAction*    addPlacemark;
-    QAction*    drawPolygon;
-    QAction*    removeItem;
-    QAction*    beginSeparator;
-    QAction*    endSeparator;
-    QAction*    loadAnnotationFile;
-    QAction*    saveAnnotationFile;
-    QAction*    clearAnnotations;
-    QAction*    downloadOsm;
+        QAction*    enableInputAction;
+        QAction*    addPlacemark;
+        QAction*    drawPolygon;
+        QAction*    removeItem;
+        QAction*    beginSeparator;
+        QAction*    endSeparator;
+        QAction*    loadAnnotationFile;
+        QAction*    saveAnnotationFile;
+        QAction*    clearAnnotations;
+        QAction*    downloadOsm;
 
-    enableInputAction = new QAction(this);
-    enableInputAction->setToolTip(tr("Enable Marble Input"));
-    enableInputAction->setCheckable(true);
-    enableInputAction->setChecked( true );
-    enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
-    connect( enableInputAction, SIGNAL(toggled(bool)),
-                       widget, SLOT(setInputEnabled(bool)) );
+        enableInputAction = new QAction(this);
+        enableInputAction->setToolTip(tr("Enable Marble Input"));
+        enableInputAction->setCheckable(true);
+        enableInputAction->setChecked( true );
+        enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
+        connect( enableInputAction, SIGNAL(toggled(bool)),
+                 widget, SLOT(setInputEnabled(bool)) );
 
-    addPlacemark = new QAction(this);
-    addPlacemark->setText( tr("Add Placemark") );
-    addPlacemark->setCheckable( true );
-    connect( addPlacemark, SIGNAL(toggled(bool)),
-             this, SLOT(setAddingPlacemark(bool)) );
-    connect( this, SIGNAL(placemarkAdded()) ,
-             addPlacemark, SLOT(toggle()) );
+        addPlacemark = new QAction(this);
+        addPlacemark->setText( tr("Add Placemark") );
+        addPlacemark->setCheckable( true );
+        connect( addPlacemark, SIGNAL(toggled(bool)),
+                 this, SLOT(setAddingPlacemark(bool)) );
+        connect( this, SIGNAL(placemarkAdded()) ,
+                 addPlacemark, SLOT(toggle()) );
 
-    drawPolygon = new QAction( this );
-    drawPolygon->setText( tr("Draw Polygon") );
-    drawPolygon->setCheckable( true );
-    connect( drawPolygon, SIGNAL(toggled(bool)),
-             this, SLOT(setDrawingPolygon(bool)) );
+        drawPolygon = new QAction( this );
+        drawPolygon->setText( tr("Draw Polygon") );
+        drawPolygon->setCheckable( true );
+        connect( drawPolygon, SIGNAL(toggled(bool)),
+                 this, SLOT(setDrawingPolygon(bool)) );
 
-    removeItem = new QAction( this );
-    removeItem->setText( tr("Remove Item") );
-    removeItem->setCheckable( true );
-    connect( removeItem, SIGNAL(toggled(bool)),
-             this, SLOT(setRemovingItems(bool)) );
-    connect( this, SIGNAL(itemRemoved()),
-             removeItem, SLOT(toggle()) );
+        removeItem = new QAction( this );
+        removeItem->setText( tr("Remove Item") );
+        removeItem->setCheckable( true );
+        connect( removeItem, SIGNAL(toggled(bool)),
+                 this, SLOT(setRemovingItems(bool)) );
+        connect( this, SIGNAL(itemRemoved()),
+                 removeItem, SLOT(toggle()) );
 
-    loadAnnotationFile = new QAction( this );
-    loadAnnotationFile->setText( tr("Load Annotation File" ) );
-    connect( loadAnnotationFile, SIGNAL(triggered()),
-             this, SLOT(loadAnnotationFile()) );
+        loadAnnotationFile = new QAction( this );
+        loadAnnotationFile->setText( tr("Load Annotation File" ) );
+        connect( loadAnnotationFile, SIGNAL(triggered()),
+                 this, SLOT(loadAnnotationFile()) );
 
-    saveAnnotationFile = new QAction( this );
-    saveAnnotationFile->setText( tr("Save Annotation File") );
-    connect( saveAnnotationFile, SIGNAL(triggered()),
-             this, SLOT(saveAnnotationFile()) );
+        saveAnnotationFile = new QAction( this );
+        saveAnnotationFile->setText( tr("Save Annotation File") );
+        connect( saveAnnotationFile, SIGNAL(triggered()),
+                 this, SLOT(saveAnnotationFile()) );
 
-    clearAnnotations = new QAction( this );
-    clearAnnotations->setText( tr("Clear Annotations") );
-    connect( clearAnnotations, SIGNAL(triggered()),
-             this, SLOT(clearAnnotations()) );
+        clearAnnotations = new QAction( this );
+        clearAnnotations->setText( tr("Clear Annotations") );
+        connect( clearAnnotations, SIGNAL(triggered()),
+                 this, SLOT(clearAnnotations()) );
 
-    beginSeparator = new QAction( this );
-    beginSeparator->setSeparator( true );
-    endSeparator = new QAction ( this );
-    endSeparator->setSeparator( true );
-
-
-    downloadOsm = new QAction( this );
-    downloadOsm->setText( tr("Download Osm File") );
-    downloadOsm->setToolTip(tr("Download Osm File for selected area"));
-    connect( downloadOsm, SIGNAL(triggered()),
-             this, SLOT(downloadOsmFile()) );
+        beginSeparator = new QAction( this );
+        beginSeparator->setSeparator( true );
+        endSeparator = new QAction ( this );
+        endSeparator->setSeparator( true );
 
 
-    group->addAction( enableInputAction );
-    group->addAction( beginSeparator );
-    group->addAction( addPlacemark );
-    group->addAction( drawPolygon );
-    group->addAction( removeItem );
-    group->addAction( loadAnnotationFile );
-    group->addAction( saveAnnotationFile );
-    group->addAction( clearAnnotations );
-    group->addAction( endSeparator );
+        downloadOsm = new QAction( this );
+        downloadOsm->setText( tr("Download Osm File") );
+        downloadOsm->setToolTip(tr("Download Osm File for selected area"));
+        connect( downloadOsm, SIGNAL(triggered()),
+                 this, SLOT(downloadOsmFile()) );
 
-    nonExclusiveGroup->addAction( downloadOsm );
 
-    actions->append( group );
-    actions->append( nonExclusiveGroup );
+        group->addAction( enableInputAction );
+        group->addAction( beginSeparator );
+        group->addAction( addPlacemark );
+        group->addAction( drawPolygon );
+        group->addAction( removeItem );
+        group->addAction( loadAnnotationFile );
+        group->addAction( saveAnnotationFile );
+        group->addAction( clearAnnotations );
+        group->addAction( endSeparator );
 
-    toolbarActions->append( group );
-    toolbarActions->append( nonExclusiveGroup );
+        nonExclusiveGroup->addAction( downloadOsm );
 
-    //delete the old groups if they exist
-    delete m_actions;
-    delete m_toolbarActions;
+        m_actions.append( group );
+        m_actions.append( nonExclusiveGroup );
 
-    m_actions = actions;
-    m_toolbarActions = toolbarActions;
+        m_toolbarActions.append( group );
+        m_toolbarActions.append( nonExclusiveGroup );
+    }
 
     emit actionGroupsChanged();
 }

@@ -93,12 +93,12 @@ QAction* RenderPlugin::action() const
     return &d->m_action;
 }
 
-QList<QActionGroup*>* RenderPlugin::actionGroups() const
+const QList<QActionGroup*>* RenderPlugin::actionGroups() const
 {
     return 0;
 }
 
-QList<QActionGroup*>* RenderPlugin::toolbarActionGroups() const
+const QList<QActionGroup*>* RenderPlugin::toolbarActionGroups() const
 {
     return 0;
 }
