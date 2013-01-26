@@ -478,9 +478,6 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
         PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation( placemark );
         m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, placemark );
         m_graphicsItems.append( t );
-
-        //FIXME only repaint the new placemark
-        ( ( MarbleWidget* ) watched)->update();
         emit placemarkAdded();
         return true;
     }
