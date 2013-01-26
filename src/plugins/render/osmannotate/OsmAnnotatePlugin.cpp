@@ -181,10 +181,10 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         painter->drawPolyline( *m_tmp_linearRing );
     }
 
-    QListIterator<TmpGraphicsItem*> i( m_graphicsItems );
+    QListIterator<SceneGraphicsItem*> i( m_graphicsItems );
 
     while(i.hasNext()) {
-        TmpGraphicsItem* tmp= i.next();
+        SceneGraphicsItem* tmp= i.next();
         tmp->paint(painter, viewport);
     }
 
@@ -438,7 +438,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     }
 
     //Pass the event to Graphics Items
-    foreach( TmpGraphicsItem *item, m_graphicsItems ) {
+    foreach( SceneGraphicsItem *item, m_graphicsItems ) {
         QListIterator<QRegion> it ( item->regions() );
 
         while ( it.hasNext() ) {

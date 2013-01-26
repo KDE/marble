@@ -25,7 +25,7 @@ class QNetworkAccessManager;
 class QNetworkReply;
 
 #include "RenderPlugin.h"
-#include "TmpGraphicsItem.h"
+#include "SceneGraphicsItem.h"
 
 namespace Marble
 {
@@ -120,11 +120,12 @@ private:
     QList<QActionGroup*>    m_toolbarActions;
 
     GeoDataDocument *m_AnnotationDocument;
-    QList<TmpGraphicsItem*> m_graphicsItems;
+    QList<SceneGraphicsItem*> m_graphicsItems;
 
     //used while creating new polygons
     GeoDataLineString* m_tmp_lineString;
     GeoDataLinearRing* m_tmp_linearRing;
+    SceneGraphicsItem *m_selectedItem;
 
     bool m_addingPlacemark;
     bool m_drawingPolygon;

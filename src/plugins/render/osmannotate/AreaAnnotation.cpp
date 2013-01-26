@@ -21,7 +21,7 @@ namespace Marble
 
 
 AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark )
-    :TmpGraphicsItem( placemark ),
+    :SceneGraphicsItem( placemark ),
       m_placemark( placemark ),
       m_movedPoint( -1 ),
       m_viewport( 0 )

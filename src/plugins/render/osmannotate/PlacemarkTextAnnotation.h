@@ -11,7 +11,7 @@
 #ifndef PLACEMARKTEXTANNOTATION_H
 #define PLACEMARKTEXTANNOTATION_H
 
-#include "TmpGraphicsItem.h"
+#include "SceneGraphicsItem.h"
 
 namespace Marble
 {
@@ -19,7 +19,7 @@ namespace Marble
 class GeoWidgetBubble;
 class TextEditor;
 
-class PlacemarkTextAnnotation : public TmpGraphicsItem
+class PlacemarkTextAnnotation : public SceneGraphicsItem
 {
 public:
     PlacemarkTextAnnotation( GeoDataPlacemark *placemark );

@@ -26,7 +26,7 @@ namespace Marble
 {
 
 PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataPlacemark *placemark )
-        : TmpGraphicsItem( placemark ),
+        : SceneGraphicsItem( placemark ),
           bubble( new GeoWidgetBubble( placemark ) )
 {
 }

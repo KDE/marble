@@ -12,8 +12,8 @@ set( osmannotate_SRCS
   GeoWidgetBubble.cpp
   OsmAnnotatePlugin.cpp
   PlacemarkTextAnnotation.cpp
+  SceneGraphicsItem.cpp
   TextEditor.cpp
-  TmpGraphicsItem.cpp
 )
 
 marble_add_plugin( OsmAnnotatePlugin ${osmannotate_SRCS} )

@@ -6,9 +6,10 @@
 // the source code.
 //
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2013      Thibaut Gridel <tgridel@free.fr>
 //
 
-#include "TmpGraphicsItem.h"
+#include "SceneGraphicsItem.h"
 
 #include "GeoDataPlacemark.h"
 
@@ -17,27 +18,27 @@
 namespace Marble
 {
 
-TmpGraphicsItem::TmpGraphicsItem( GeoDataPlacemark *placemark )
+SceneGraphicsItem::SceneGraphicsItem( GeoDataPlacemark *placemark )
     : GeoGraphicsItem( placemark ),
       m_placemark( placemark )
 {
 }
 
-TmpGraphicsItem::~TmpGraphicsItem()
+SceneGraphicsItem::~SceneGraphicsItem()
 {
 }
 
-QList<QRegion> TmpGraphicsItem::regions() const
+QList<QRegion> SceneGraphicsItem::regions() const
 {
     return m_regions;
 }
 
-GeoDataPlacemark *TmpGraphicsItem::placemark()
+GeoDataPlacemark *SceneGraphicsItem::placemark()
 {
     return m_placemark;
 }
 
-bool TmpGraphicsItem::sceneEvent( QEvent* event )
+bool SceneGraphicsItem::sceneEvent( QEvent* event )
 {
     if( event->type() == QEvent::MouseButtonPress ) {
         return mousePressEvent( static_cast<QMouseEvent*>( event ));
@@ -52,7 +53,7 @@ bool TmpGraphicsItem::sceneEvent( QEvent* event )
     return false;
 }
 
-bool TmpGraphicsItem::mousePressEvent( QMouseEvent* event )
+bool SceneGraphicsItem::mousePressEvent( QMouseEvent* event )
 {
     Q_UNUSED( event )
     //FIXME re-implement the whole ItemIsSelectable and call an
@@ -60,19 +61,19 @@ bool TmpGraphicsItem::mousePressEvent( QMouseEvent* event )
     return false;
 }
 
-bool TmpGraphicsItem::mouseMoveEvent( QMouseEvent *event )
+bool SceneGraphicsItem::mouseMoveEvent( QMouseEvent *event )
 {
     Q_UNUSED( event )
     return false;
 }
 
-bool TmpGraphicsItem::mouseReleaseEvent( QMouseEvent *event )
+bool SceneGraphicsItem::mouseReleaseEvent( QMouseEvent *event )
 {
     Q_UNUSED( event )
     return false;
 }
 
-void TmpGraphicsItem::setRegions( const QList<QRegion>& regions )
+void SceneGraphicsItem::setRegions( const QList<QRegion>& regions )
 {
     m_regions.clear();
     m_regions = regions;

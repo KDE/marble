@@ -11,13 +11,13 @@
 #ifndef AREAANNOTATION_H
 #define AREAANNOTATION_H
 
-#include "TmpGraphicsItem.h"
+#include "SceneGraphicsItem.h"
 #include "GeoDataPolygon.h"
 
 namespace Marble
 {
 
-class  AreaAnnotation : public TmpGraphicsItem
+class  AreaAnnotation : public SceneGraphicsItem
 {
 public:
     AreaAnnotation( GeoDataPlacemark *placemark );

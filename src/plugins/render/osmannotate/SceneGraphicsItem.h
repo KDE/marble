@@ -6,10 +6,11 @@
 // the source code.
 //
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2013      Thibaut Gridel <tgridel@free.fr>
 //
 
-#ifndef TMPGRAPHICSITEM_H
-#define TMPGRAPHICSITEM_H
+#ifndef SCENEGRAPHICSITEM_H
+#define SCENEGRAPHICSITEM_H
 
 #include <QtCore/QRect>
 #include <QtCore/QObject>
@@ -24,11 +25,11 @@ namespace Marble
 
 class GeoDataPlacemark;
 
-class TmpGraphicsItem : public GeoGraphicsItem
+class SceneGraphicsItem : public GeoGraphicsItem
 {
 public:
-    TmpGraphicsItem( GeoDataPlacemark *placemark );
-    ~TmpGraphicsItem();
+    SceneGraphicsItem( GeoDataPlacemark *placemark );
+    ~SceneGraphicsItem();
 
     virtual void paint(GeoPainter * painter, const ViewportParams * viewport) =0;
 
@@ -55,4 +56,4 @@ protected:
 
 }
 
-#endif // TMPGRAPHICSITEM_H
+#endif // SCENEGRAPHICSITEM_H
