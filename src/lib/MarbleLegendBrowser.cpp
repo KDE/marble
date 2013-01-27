@@ -39,6 +39,7 @@
 #include "GeoSceneSettings.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
+#include "TemplateDocument.h"
 
 #include "MarbleDirs.h"
 
@@ -137,6 +138,9 @@ void MarbleLegendBrowser::loadLegend()
 
     QString finalHtml = readHtml( QUrl::fromLocalFile( legendPath ) );
 
+    TemplateDocument doc(finalHtml);
+    finalHtml = doc.finalText();
+
     reverseSupportCheckboxes(finalHtml);
 
     // Generate some parts of the html from the MapTheme <Legend> tag. 
@@ -209,21 +213,18 @@ void MarbleLegendBrowser::translateHtml( QString & html )
 
 void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
 {
-    const QString findEntry = "<a href=\"checkbox:";
-    int ind = html.indexOf(findEntry, 0, Qt::CaseInsensitive);
-    while (ind > 0) {
-        QString id = "";
-        int xInd = ind + findEntry.length();
-        while (html[xInd].isLetterOrNumber() && xInd != html.length()) {
-            id += html[xInd];
-            xInd++;
-        }
-        int fin = html.indexOf("</a>", ind, Qt::CaseInsensitive)+4; // 4 = length "</a>";
+    const QString old = "<H4> <!--Locations checkbox--><a href=\"checkbox:cities\"><span style=\"text-decoration: none\"><img src=\"checkbox:cities\">&nbsp;</span></a> Populated Places</H4>";
 
-        html.remove(ind, fin-ind);
+    QString checked = "";
+    if (d->m_checkBoxMap["cities"])
+        checked = "checked";
 
-        ind = html.indexOf(findEntry, 0, Qt::CaseInsensitive);
-    }
+    const QString repair = ""
+            "<div class=\"spec\"><h3><input type=\"checkbox\" "
+            "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" "
+            + checked + " name=\"cities\" />Populated Places</h3></div>\n";
+
+    html.replace(old, repair);
 }
 
 QString MarbleLegendBrowser::generateSectionsHtml()
@@ -240,57 +241,51 @@ QString MarbleLegendBrowser::generateSectionsHtml()
     d->m_symbolMap.clear();
 
     QString bitStyle = "<style>"
-            "* {"
-            "   font: \"sans-serif\"!important;"
+            ".well-legend {"
+            "   padding-top: 10px;"
+            "   padding-bottom: 5px;"
             "}"
-            ".spec {"
-            "   display: block;"
+            ".legend-entry {"
+            "   margin-bottom: 5px;"
             "}"
-            ".spec h3 {"
-            "   height: 30px;"
-            "   margin: 0;"
-            "   font-weight: 500;"
-            "   font-size: 1em;"
+            ".legend-entry .image-pic {"
+            "   float: left;"
+            "   margin-right: 20px;"
+            "   margin-top: 3px;"
             "}"
-            "table {"
-            "   margin-bottom: 20px!important;"
+            ".legend-entry .notation {"
+            "   line-height: 23px;"
             "}"
-            "table td.icon {"
-            "   width: 24px;"
-            "   overflow: hidden;"
-            "   display: inline-block;"
-            "   white-space: nowrap;"
-            "   text-align: center;"
-            "   vertical-align: middle;"
+            "label span {"
+            "   line-height: 30px;"
+            "   font-weight: 800;"
             "}"
-            "table td.text {"
-            "   width: 200px;"
-            "   overflow: hidden;"
-            "   display: inline-block;"
-            "   white-space: nowrap;"
+            "label input {"
+            "   margin-right: 5px!important;"
             "}"
             "</style>";
 
     customLegendString += bitStyle;
 
     foreach ( const GeoSceneSection *section, currentMapTheme->legend()->sections() ) {
+        customLegendString += "<div class=\"well well-small well-legend\">";
         QString checkBoxString; 
         if (section->checkable()) {
             QString checked = "";
             if (d->m_checkBoxMap[section->connectTo()])
                 checked = "checked";
-            checkBoxString = "<div class=\"spec\"><h3><input type=\"checkbox\" "
+            checkBoxString = ""
+                    "<label class=\"checkbox\">"
+                    "<input type=\"checkbox\" "
                     "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" " +
-                    checked + " name=\"" + section->connectTo() +
-                    "\" value=\"" + section->connectTo() + "Value\" />" +
-                    section->heading() + "</h3></div>\n";
+                    checked + " name=\"" + section->connectTo() + "\" /><span>"
+                    + section->heading() +
+                    "</span></label>";
             customLegendString += checkBoxString;
         }
 
-        customLegendString += "<table border=\"0\" cellspacing=\"0\">\n";
-
         foreach (const GeoSceneItem *item, section->items()) {
-            QString path;
+            QString path = "";
             int pixmapWidth = 24;
             int pixmapHeight = 12;
             if (!item->icon()->pixmap().isEmpty()) {
@@ -298,44 +293,32 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 const QPixmap oncePixmap(path);
                 pixmapWidth = oncePixmap.width();
                 pixmapHeight = oncePixmap.height();
-            } else {
+            }/* else {
                 // Tiny hack ;)
                 // There is <img src="%path%" />
                 // We will have <img src="" style="display: none;" />
                 path = "\" style=\"display: none;";
-            }
+            }*/
             QColor color = item->icon()->color();
             QString styleDiv = "";
-            QString styleTd = "";
             if (color != Qt::transparent) {
                 styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                                     QString::number(pixmapHeight) + "px; background-color: "
                         + color.name() + ";";
-                styleTd = "width: " + QString::number(pixmapWidth) + "px; height: " +
-                        QString::number(pixmapHeight) + "px;";
-
             } else {
-                styleTd = "width: " + QString::number(pixmapWidth) + "px; height: " +
+                styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                         QString::number(pixmapHeight) + "px;";
-                styleDiv = styleTd;
             }
             QString src  =  "file://" + path;
-
             QString html = ""
-                    "   <tr>\n"
-                    "       <td class=\"icon\" style=\"" + styleTd + "\">\n"
-                    "           <div style=\"" + styleDiv + "\">\n"
-                    "               <img src=\"" + src + "\" />\n"
-                    "           </div>\n"
-                    "       </td>\n"
-                    "       <td class=\"text\" style=\"padding-left: 5px;\">\n"
-                    "           <p>" + item->text().trimmed() + "</p>\n"
-                    "       </td>\n"
-                    "   </tr>\n";
+                    "<div class=\"legend-entry\">"
+                    "       <img class=\"image-pic\""
+                    "       src=\"" + src + "\" style=\"" + styleDiv + "\" />"
+                    "   <p class=\"notation\">" + item->text() + "</p>"
+                    "</div>";
             customLegendString += html;
         }
-
-        customLegendString += "</table>\n";
+        customLegendString += "</div>"; // <div class="well">
     }
 
     return customLegendString;

@@ -34,6 +34,7 @@
 #include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
 #include "MarbleDirs.h"
+#include "TemplateDocument.h"
 
 // Qt
 #include <QApplication>
@@ -293,11 +294,12 @@ void MarbleWidgetPopupMenu::setupDialogSatellite(MapInfoDialog *popup, const Geo
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
-    QString description = index->description();
-    description.replace("%altitude%", QString::number(location.altitude(), 'f', 2));
-    description.replace("%latitude%", location.latToString());
-    description.replace("%longitude%", location.lonToString());
-    popup->setContent(description);
+    const QString description = index->description();
+    TemplateDocument doc(description);
+    doc["altitude"] = QString::number(location.altitude(), 'f', 2);
+    doc["latitude"] = location.latToString();
+    doc["longitude"] = location.lonToString();
+    popup->setContent(doc.finalText());
 }
 
 void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataPlacemark *index)
@@ -310,9 +312,10 @@ void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataP
         return;
     }
 
-    QString description = descriptionFile.readAll();
-    description.replace("%name%", index->name());
+    const QString description = descriptionFile.readAll();
+    TemplateDocument doc(description);
 
+    doc["name"] = index->name();
     QString  roleString;
     const QString role = index->role();
     if(role=="PPLC") {
@@ -329,15 +332,15 @@ void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataP
               role=="PPLR" || role=="PPLS" || role=="PPLW" ) {
         roleString = tr("Village");
     }
-    description.replace("%category%", roleString);
 
-    description.replace("%shortDescription%", filterEmptyShortDescription(index->description()));
-    description.replace("%latitude%", location.latToString());
-    description.replace("%longitude%", location.lonToString());
-    description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
-    description.replace("%population%", QString::number(index->population()));
-    description.replace("%country%", index->countryCode());
-    description.replace("%state%", index->state());
+    doc["category"] = roleString;
+    doc["shortDescription"] = filterEmptyShortDescription(index->description());
+    doc["latitude"] = location.latToString();
+    doc["longitude"] = location.lonToString();
+    doc["elevation"] =  QString::number(location.altitude(), 'f', 2);
+    doc["population"] = QString::number(index->population());
+    doc["country"] = index->countryCode();
+    doc["state"] = index->state();
 
     QString dst = QString( "%1" ).arg( ( index->extendedData().value("gmt").value().toInt() +
                                          index->extendedData().value("dst").value().toInt() ) /
@@ -346,15 +349,16 @@ void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataP
     // It's possible to variants (e.g.):
     // +1.0 and -1.0, but dst does not have + an the start
     if(dst.startsWith('-')) {
-        description.replace("%timezone%", dst);
+        doc["timezone"] = dst;
     } else {
-        description.replace("%timezone%", "+"+dst);
+        doc["timezone"] = "+"+dst;
     }
 
-    const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
-    description.replace(QLatin1String("%flag%"), flagPath);
+    const QString flagPath = MarbleDirs::path(
+                QString("flags/flag_%1.svg").arg(index->countryCode().toLower()));
+    doc["flag"] = flagPath;
 
-    popup->setContent(description);
+    popup->setContent(doc.finalText());
 }
 
 void MarbleWidgetPopupMenu::setupDialogNation(MapInfoDialog *popup, const GeoDataPlacemark *index)
@@ -367,19 +371,21 @@ void MarbleWidgetPopupMenu::setupDialogNation(MapInfoDialog *popup, const GeoDat
         return;
     }
 
-    QString description = descriptionFile.readAll();
-    description.replace("%name%", index->name());
-    description.replace("%shortDescription%", filterEmptyShortDescription(index->description()));
-    description.replace("%latitude%", location.latToString());
-    description.replace("%longitude%", location.lonToString());
-    description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
-    description.replace("%population%", QString::number(index->population()));
-    description.replace("%area%", QString::number(index->area(), 'f', 2));
+    const QString description = descriptionFile.readAll();
+    TemplateDocument doc(description);
+
+    doc["name"] = index->name();
+    doc["shortDescription"] = filterEmptyShortDescription(index->description());
+    doc["latitude"] = location.latToString();
+    doc["longitude"] = location.lonToString();
+    doc["elevation"] = QString::number(location.altitude(), 'f', 2);
+    doc["population"] = QString::number(index->population());
+    doc["area"] = QString::number(index->area(), 'f', 2);
 
     const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
-    description.replace("%flag%", flagPath);
+    doc["flag"] = flagPath;
 
-    popup->setContent(description);
+    popup->setContent(doc.finalText());
 }
 
 void MarbleWidgetPopupMenu::setupDialogGeoPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index)
@@ -392,14 +398,16 @@ void MarbleWidgetPopupMenu::setupDialogGeoPlaces(MapInfoDialog *popup, const Geo
         return;
     }
 
-    QString description = descriptionFile.readAll();
-    description.replace("%name%", index->name());
-    description.replace("%latitude%", location.latToString());
-    description.replace("%longitude%", location.lonToString());
-    description.replace("%elevation%", QString::number(location.altitude(), 'f', 2));
-    description.replace("%shortDescription%", filterEmptyShortDescription(index->description()));
+    const QString description = descriptionFile.readAll();
+    TemplateDocument doc(description);
 
-    popup->setContent(description);
+    doc["name"] = index->name();
+    doc["latitude"] = location.latToString();
+    doc["longitude"] = location.lonToString();
+    doc["elevation"] = QString::number(location.altitude(), 'f', 2);
+    doc["shortDescription"] = filterEmptyShortDescription(index->description());
+
+    popup->setContent(doc.finalText());
 }
 
 void MarbleWidgetPopupMenu::setupDialogSkyPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index)
@@ -412,15 +420,17 @@ void MarbleWidgetPopupMenu::setupDialogSkyPlaces(MapInfoDialog *popup, const Geo
         return;
     }
 
-    QString description = descriptionFile.readAll();
-    description.replace("%name%", index->name());
-    description.replace("%latitude%", GeoDataCoordinates::latToString(
-                            location.latitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f'));
-    description.replace("%longitude%", GeoDataCoordinates::lonToString(
-                            location.longitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f'));
-    description.replace("%shortDescription%", filterEmptyShortDescription(index->description()));
+    const QString description = descriptionFile.readAll();
+    TemplateDocument doc(description);
 
-    popup->setContent(description);
+    doc["name"] = index->name();
+    doc["latitude"] = GeoDataCoordinates::latToString(
+                            location.latitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f');
+    doc["longitude"] = GeoDataCoordinates::lonToString(
+                            location.longitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f');
+    doc["shortDescription"] = filterEmptyShortDescription(index->description());
+
+    popup->setContent(doc.finalText());
 }
 
 void MarbleWidgetPopupMenu::slotShowOrbit( bool show )

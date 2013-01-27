@@ -102,9 +102,6 @@
       </group>
     </settings>
     <legend>
-      <section>
-        <heading>Guides</heading>
-      </section>
       <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
         <heading>Coordinate Grid</heading>
       </section>
