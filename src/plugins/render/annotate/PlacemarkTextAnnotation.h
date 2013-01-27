@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2013      Thibaut Gridel <tgridel@free.fr>
 //
 
 #ifndef PLACEMARKTEXTANNOTATION_H
