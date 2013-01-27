@@ -528,44 +528,50 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
         enableInputAction->setToolTip(tr("Enable Marble Input"));
         enableInputAction->setCheckable(true);
         enableInputAction->setChecked( true );
-        enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
+        enableInputAction->setIcon( QIcon( ":/icons/hand.png") );
         connect( enableInputAction, SIGNAL(toggled(bool)),
                  widget, SLOT(setInputEnabled(bool)) );
 
         addPlacemark = new QAction(this);
-        addPlacemark->setText( tr("Add Placemark") );
+        addPlacemark->setToolTip( tr("Add Placemark") );
         addPlacemark->setCheckable( true );
+        addPlacemark->setIcon( QIcon( ":/icons/draw-placemark.png") );
         connect( addPlacemark, SIGNAL(toggled(bool)),
                  this, SLOT(setAddingPlacemark(bool)) );
         connect( this, SIGNAL(placemarkAdded()) ,
                  addPlacemark, SLOT(toggle()) );
 
         drawPolygon = new QAction( this );
-        drawPolygon->setText( tr("Draw Polygon") );
+        drawPolygon->setToolTip( tr("Draw Polygon") );
         drawPolygon->setCheckable( true );
+        drawPolygon->setIcon( QIcon( ":/icons/draw-polygon.png") );
         connect( drawPolygon, SIGNAL(toggled(bool)),
                  this, SLOT(setDrawingPolygon(bool)) );
 
         removeItem = new QAction( this );
-        removeItem->setText( tr("Remove Item") );
+        removeItem->setToolTip( tr("Remove Item") );
         removeItem->setCheckable( true );
+        removeItem->setIcon( QIcon( ":/icons/edit-delete-shred.png") );
         connect( removeItem, SIGNAL(toggled(bool)),
                  this, SLOT(setRemovingItems(bool)) );
         connect( this, SIGNAL(itemRemoved()),
                  removeItem, SLOT(toggle()) );
 
         loadAnnotationFile = new QAction( this );
-        loadAnnotationFile->setText( tr("Load Annotation File" ) );
+        loadAnnotationFile->setToolTip( tr("Load Annotation File" ) );
+        loadAnnotationFile->setIcon( QIcon( ":/icons/document-import.png") );
         connect( loadAnnotationFile, SIGNAL(triggered()),
                  this, SLOT(loadAnnotationFile()) );
 
         saveAnnotationFile = new QAction( this );
-        saveAnnotationFile->setText( tr("Save Annotation File") );
+        saveAnnotationFile->setToolTip( tr("Save Annotation File") );
+        saveAnnotationFile->setIcon( QIcon( ":/icons/document-export.png") );
         connect( saveAnnotationFile, SIGNAL(triggered()),
                  this, SLOT(saveAnnotationFile()) );
 
         clearAnnotations = new QAction( this );
-        clearAnnotations->setText( tr("Clear Annotations") );
+        clearAnnotations->setToolTip( tr("Clear Annotations") );
+        clearAnnotations->setIcon( QIcon( ":/icons/remove.png") );
         connect( clearAnnotations, SIGNAL(triggered()),
                  this, SLOT(clearAnnotations()) );
 

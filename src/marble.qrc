@@ -90,5 +90,12 @@
         <file>icons/cache.png</file>
         <file>icons/plugin.png</file>
         <file>icons/transform-move.png</file>
+        <file>icons/document-export.png</file>
+        <file>icons/document-import.png</file>
+        <file>icons/edit-delete-shred.png</file>
+        <file>icons/hand.png</file>
+        <file>icons/draw-placemark.png</file>
+        <file>icons/draw-polygon.png</file>
+        <file>icons/remove.png</file>
     </qresource>
 </RCC>
