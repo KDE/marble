@@ -53,6 +53,13 @@ OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
           m_isInitialized( false )
 {
     Q_UNUSED(model);
+
+    // Plugin is enabled by default
+    setEnabled( true );
+    // Plugin is not visible by default
+    setVisible( false );
+    connect( this, SIGNAL(visibilityChanged(bool,QString)), SLOT(enableModel(bool)) );
+
     m_AnnotationDocument->setName( tr("Annotations") );
     m_AnnotationDocument->setDocumentRole( UserDocument );
     GeoDataStyle style;
@@ -61,7 +68,6 @@ OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
     style.setStyleId( "polygon" );
     style.setPolyStyle( polyStyle );
     m_AnnotationDocument->addStyle( style );
-    connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
 }
 
 OsmAnnotatePlugin::~OsmAnnotatePlugin()
