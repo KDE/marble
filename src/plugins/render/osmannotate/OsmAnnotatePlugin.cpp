@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2013      Thibaut Gridel <tgridel@free.fr>
 //
 
 #include "OsmAnnotatePlugin.h"
@@ -37,7 +38,7 @@
 namespace Marble
 {
 
-OsmAnnotatePlugin::OsmAnnotatePlugin()
+AnnotatePlugin::AnnotatePlugin()
         : RenderPlugin( 0 ),
           m_AnnotationDocument( new GeoDataDocument ),
           m_networkAccessManager( 0 ),
@@ -45,7 +46,7 @@ OsmAnnotatePlugin::OsmAnnotatePlugin()
 {
 }
 
-OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
+AnnotatePlugin::AnnotatePlugin(const MarbleModel *model)
         : RenderPlugin(model),
           m_marbleWidget( 0 ),
           m_AnnotationDocument( new GeoDataDocument ),
@@ -70,73 +71,74 @@ OsmAnnotatePlugin::OsmAnnotatePlugin(const MarbleModel *model)
     m_AnnotationDocument->addStyle( style );
 }
 
-OsmAnnotatePlugin::~OsmAnnotatePlugin()
+AnnotatePlugin::~AnnotatePlugin()
 {
     m_marbleWidget->model()->treeModel()->removeDocument( m_AnnotationDocument );
     delete m_AnnotationDocument;
     delete m_networkAccessManager;
 }
 
-QStringList OsmAnnotatePlugin::backendTypes() const
+QStringList AnnotatePlugin::backendTypes() const
 {
-    return QStringList( "osmannotation" );
+    return QStringList( "annotation" );
 }
 
-QString OsmAnnotatePlugin::renderPolicy() const
+QString AnnotatePlugin::renderPolicy() const
 {
     return QString( "ALWAYS" );
 }
 
-QStringList OsmAnnotatePlugin::renderPosition() const
+QStringList AnnotatePlugin::renderPosition() const
 {
     QStringList positions;
     positions.append( "ALWAYS_ON_TOP" );
     return positions;
 }
 
-QString OsmAnnotatePlugin::name() const
+QString AnnotatePlugin::name() const
 {
-    return tr( "OSM Annotation Plugin" );
+    return tr( "Annotation" );
 }
 
-QString OsmAnnotatePlugin::guiString() const
+QString AnnotatePlugin::guiString() const
 {
-    return tr( "&OSM Annotation Plugin" );
+    return tr( "&Annotation" );
 }
 
-QString OsmAnnotatePlugin::nameId() const
+QString AnnotatePlugin::nameId() const
 {
-    return QString( "osm-annotation-plugin" );
+    return QString( "annotation-plugin" );
 }
 
-QString OsmAnnotatePlugin::description() const
+QString AnnotatePlugin::description() const
 {
-    return tr( "This is a render and interaction plugin used for annotating OSM data." );
+    return tr( "This is a render and interaction plugin used for annotating maps." );
 }
 
-QString OsmAnnotatePlugin::version() const
+QString AnnotatePlugin::version() const
 {
     return "1.0";
 }
 
-QString OsmAnnotatePlugin::copyrightYears() const
+QString AnnotatePlugin::copyrightYears() const
 {
-    return "2009";
+    return "2009, 2013";
 }
 
-QList<PluginAuthor> OsmAnnotatePlugin::pluginAuthors() const
+QList<PluginAuthor> AnnotatePlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( "Andrew Manson", "<g.real.ate@gmail.com>" );
+            << PluginAuthor( "Andrew Manson", "<g.real.ate@gmail.com>" )
+            << PluginAuthor( "Thibaut Gridel", "<tgridel@free.fr>" );
 }
 
-QIcon OsmAnnotatePlugin::icon () const
+QIcon AnnotatePlugin::icon () const
 {
-    return QIcon();
+    return QIcon( ":/icons/draw-placemark.png");
 }
 
 
-void OsmAnnotatePlugin::initialize ()
+void AnnotatePlugin::initialize ()
 {
     widgetInitalised= false;
     m_tmp_lineString = 0;
@@ -148,26 +150,26 @@ void OsmAnnotatePlugin::initialize ()
     m_isInitialized = true;
 }
 
-bool OsmAnnotatePlugin::isInitialized () const
+bool AnnotatePlugin::isInitialized () const
 {
     return m_isInitialized;
 }
 
-QString OsmAnnotatePlugin::runtimeTrace() const
+QString AnnotatePlugin::runtimeTrace() const
 {
     return QString("Annotate Items: %1").arg( m_AnnotationDocument->size() );
 }
-const QList<QActionGroup*>* OsmAnnotatePlugin::actionGroups() const
+const QList<QActionGroup*>* AnnotatePlugin::actionGroups() const
 {
     return &m_actions;
 }
 
-const QList<QActionGroup*>* OsmAnnotatePlugin::toolbarActionGroups() const
+const QList<QActionGroup*>* AnnotatePlugin::toolbarActionGroups() const
 {
     return &m_toolbarActions;
 }
 
-bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+bool AnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
     if( !widgetInitalised ) {
         MarbleWidget* marbleWidget = (MarbleWidget*) painter->device();
@@ -197,7 +199,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
     return true;
 }
 
-void OsmAnnotatePlugin::enableModel( bool enabled )
+void AnnotatePlugin::enableModel( bool enabled )
 {
     if( enabled ) {
         if( m_marbleWidget ) {
@@ -212,12 +214,12 @@ void OsmAnnotatePlugin::enableModel( bool enabled )
     }
 }
 
-void OsmAnnotatePlugin::setAddingPlacemark( bool b)
+void AnnotatePlugin::setAddingPlacemark( bool b)
 {
     m_addingPlacemark = b;
 }
 
-void OsmAnnotatePlugin::setDrawingPolygon(bool b)
+void AnnotatePlugin::setDrawingPolygon(bool b)
 {
     m_drawingPolygon = b;
     if( !b ) {
@@ -241,12 +243,12 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
     }
 }
 
-void OsmAnnotatePlugin::setRemovingItems( bool toggle )
+void AnnotatePlugin::setRemovingItems( bool toggle )
 {
     m_removingItem = toggle;
 }
 
-void OsmAnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
+void AnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
 {
     if( reply->error() == QNetworkReply::NoError ) {
         readOsmFile( reply, false );
@@ -257,7 +259,7 @@ void OsmAnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
     }
 }
 
-void OsmAnnotatePlugin::downloadOsmFile()
+void AnnotatePlugin::downloadOsmFile()
 {
     QPointF topLeft(0,0);
     QPointF bottomRight(m_marbleWidget->size().width(), m_marbleWidget->size().height());
@@ -315,7 +317,7 @@ void OsmAnnotatePlugin::downloadOsmFile()
     m_networkAccessManager->get( networkRequest );
 }
 
-void OsmAnnotatePlugin::clearAnnotations()
+void AnnotatePlugin::clearAnnotations()
 {
     qDeleteAll( m_graphicsItems );
     m_graphicsItems.clear();
@@ -324,7 +326,7 @@ void OsmAnnotatePlugin::clearAnnotations()
     }
 }
 
-void OsmAnnotatePlugin::saveAnnotationFile()
+void AnnotatePlugin::saveAnnotationFile()
 {
     QString filename;
     filename = QFileDialog::getSaveFileName( 0, tr("Save Annotation File"),
@@ -349,7 +351,7 @@ void OsmAnnotatePlugin::saveAnnotationFile()
     }
 }
 
-void OsmAnnotatePlugin::loadAnnotationFile()
+void AnnotatePlugin::loadAnnotationFile()
 {
     //load the file here
     QString filename;
@@ -405,7 +407,7 @@ void OsmAnnotatePlugin::loadAnnotationFile()
     emit repaintNeeded(QRegion());
 }
 
-bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
+bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 {
     MarbleWidget* marbleWidget = dynamic_cast<MarbleWidget*>( watched );
     Q_ASSERT( marbleWidget );
@@ -506,7 +508,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     return false;
 }
 
-void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
+void AnnotatePlugin::setupActions(MarbleWidget* widget)
 {
     qDeleteAll( m_actions );
     m_actions.clear();
@@ -616,12 +618,12 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     emit actionGroupsChanged();
 }
 
-void OsmAnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
+void AnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
 {
 }
 
 }
 
-Q_EXPORT_PLUGIN2( OsmAnnotatePlugin, Marble::OsmAnnotatePlugin )
+Q_EXPORT_PLUGIN2( AnnotatePlugin, Marble::AnnotatePlugin )
 
 #include "OsmAnnotatePlugin.moc"

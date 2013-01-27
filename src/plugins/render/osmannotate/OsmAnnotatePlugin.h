@@ -6,20 +6,19 @@
 // the source code.
 //
 // Copyright 2009 Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2013      Thibaut Gridel <tgridel@free.fr>
 //
 
 //
-// This class is a test plugin.
+// This class provides a Marble plugin to annotate maps with polygons
+// and placemarks
 //
 
-#ifndef MARBLEOSMANNOTATEPLUGIN_H
-#define MARBLEOSMANNOTATEPLUGIN_H
+#ifndef MARBLEANNOTATEPLUGIN_H
+#define MARBLEANNOTATEPLUGIN_H
 
 #include <QtCore/QObject>
-#include <QtGui/QActionGroup>
 #include <QtGui/QErrorMessage>
-#include <QtGui/QToolBar>
-#include <QtGui/QGroupBox>
 
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -41,16 +40,16 @@ namespace Marble
  *
  */
 
-class OsmAnnotatePlugin :  public RenderPlugin
+class AnnotatePlugin :  public RenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( OsmAnnotatePlugin )
+    MARBLE_PLUGIN( AnnotatePlugin )
 
  public:
-    OsmAnnotatePlugin();
-    explicit OsmAnnotatePlugin(const MarbleModel *model);
-    virtual ~OsmAnnotatePlugin();
+    AnnotatePlugin();
+    explicit AnnotatePlugin(const MarbleModel *model);
+    virtual ~AnnotatePlugin();
 
     QStringList backendTypes() const;
 
@@ -137,4 +136,4 @@ private:
 
 }
 
-#endif // MARBLEOSMANNOTATEPLUGIN_H
+#endif // MARBLEANNOTATEPLUGIN_H
