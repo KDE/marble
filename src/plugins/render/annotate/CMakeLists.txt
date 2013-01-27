@@ -1,4 +1,4 @@
-PROJECT( OsmAnnotatePlugin )
+PROJECT( AnnotatePlugin )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -7,13 +7,13 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( osmannotate_SRCS
+set( annotate_SRCS
+  AnnotatePlugin.cpp
   AreaAnnotation.cpp
   GeoWidgetBubble.cpp
-  OsmAnnotatePlugin.cpp
   PlacemarkTextAnnotation.cpp
   SceneGraphicsItem.cpp
   TextEditor.cpp
 )
 
-marble_add_plugin( OsmAnnotatePlugin ${osmannotate_SRCS} )
+marble_add_plugin( AnnotatePlugin ${annotate_SRCS} )

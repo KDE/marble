@@ -9,7 +9,7 @@
 // Copyright 2013      Thibaut Gridel <tgridel@free.fr>
 //
 
-#include "OsmAnnotatePlugin.h"
+#include "AnnotatePlugin.h"
 
 #include <QtGui/QFileDialog>
 
@@ -626,4 +626,4 @@ void AnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
 
 Q_EXPORT_PLUGIN2( AnnotatePlugin, Marble::AnnotatePlugin )
 
-#include "OsmAnnotatePlugin.moc"
+#include "AnnotatePlugin.moc"
