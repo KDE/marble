@@ -16,6 +16,10 @@ done
 cat data/legend.html \
   | tr -d '\n' \
   | sed -e 's/.*<body>\(.*\)<\/body>/\1/' \
+        -e 's/^<!DOCTYPE html>//' \
+        -e 's@<link href="legend.css" rel="stylesheet" type="text/css" />@@' \
+        -e 's/%!{bootstrap}%//' \
+        -e 's/body *{ *padding: 10px; *}//' \
         -e 's/<!--[- "&'\''./0-9:;<=>A-Z_a-z]*-->[\t ]*/\n/g' \
         -e 's/<[A-Za-z0-9]*\( [a-z:]*=\"[-A-Za-z0-9:/_.% ]*\"\)*>[\t ]*/\n/g' \
         -e 's/<\/[A-Za-z0-9]*>[\t ]*/\n/g' \
