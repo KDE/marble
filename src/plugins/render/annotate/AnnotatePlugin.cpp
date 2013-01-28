@@ -319,6 +319,9 @@ void AnnotatePlugin::downloadOsmFile()
 
 void AnnotatePlugin::clearAnnotations()
 {
+    m_selectedItem = 0;
+    delete m_tmp_linearRing;
+    m_tmp_linearRing = 0;
     qDeleteAll( m_graphicsItems );
     m_graphicsItems.clear();
     while( m_AnnotationDocument->size() > 0 ) {
@@ -454,6 +457,7 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
             if( p.contains( mouseEvent->pos() ) ) {
                 // deal with removing items
                 if( mouseEvent->button() == Qt::LeftButton && m_removingItem ) {
+                    m_selectedItem = 0;
                     m_graphicsItems.removeAll( item );
                     m_marbleWidget->model()->treeModel()->removeFeature( item->feature() );
                     delete item->feature();
