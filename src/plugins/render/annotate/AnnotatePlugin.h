@@ -100,8 +100,8 @@ public slots:
     void setDrawingPolygon( bool );
     void setRemovingItems( bool );
 
-    void receiveNetworkReply( QNetworkReply* );
-    void downloadOsmFile();
+//    void receiveNetworkReply( QNetworkReply* );
+//    void downloadOsmFile();
 
     void clearAnnotations();
     void saveAnnotationFile();
@@ -111,7 +111,7 @@ protected:
     bool eventFilter(QObject* watched, QEvent* event);
 private:
     void setupActions(MarbleWidget* m);
-    void readOsmFile( QIODevice* device, bool flyToFile );
+//    void readOsmFile( QIODevice* device, bool flyToFile );
 
     MarbleWidget* m_marbleWidget;
 
@@ -129,8 +129,8 @@ private:
     bool m_addingPlacemark;
     bool m_drawingPolygon;
     bool m_removingItem;
-    QNetworkAccessManager* m_networkAccessManager;
-    QErrorMessage m_errorMessage;
+//    QNetworkAccessManager* m_networkAccessManager;
+//    QErrorMessage m_errorMessage;
     bool m_isInitialized;
 };
 

@@ -41,7 +41,7 @@ namespace Marble
 AnnotatePlugin::AnnotatePlugin()
         : RenderPlugin( 0 ),
           m_AnnotationDocument( new GeoDataDocument ),
-          m_networkAccessManager( 0 ),
+//          m_networkAccessManager( 0 ),
           m_isInitialized( false )
 {
 }
@@ -50,7 +50,7 @@ AnnotatePlugin::AnnotatePlugin(const MarbleModel *model)
         : RenderPlugin(model),
           m_marbleWidget( 0 ),
           m_AnnotationDocument( new GeoDataDocument ),
-          m_networkAccessManager( 0 ),
+//          m_networkAccessManager( 0 ),
           m_isInitialized( false )
 {
     Q_UNUSED(model);
@@ -75,7 +75,7 @@ AnnotatePlugin::~AnnotatePlugin()
 {
     m_marbleWidget->model()->treeModel()->removeDocument( m_AnnotationDocument );
     delete m_AnnotationDocument;
-    delete m_networkAccessManager;
+//    delete m_networkAccessManager;
 }
 
 QStringList AnnotatePlugin::backendTypes() const
@@ -248,74 +248,74 @@ void AnnotatePlugin::setRemovingItems( bool toggle )
     m_removingItem = toggle;
 }
 
-void AnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
-{
-    if( reply->error() == QNetworkReply::NoError ) {
-        readOsmFile( reply, false );
-    } else {
-        m_errorMessage.showMessage( tr("Error while trying to download the "
-                                            "OSM file from the server. The "
-                                            "error was:\n %1" ).arg(reply->errorString()) );
-    }
-}
+//void AnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
+//{
+//    if( reply->error() == QNetworkReply::NoError ) {
+//        readOsmFile( reply, false );
+//    } else {
+//        m_errorMessage.showMessage( tr("Error while trying to download the "
+//                                            "OSM file from the server. The "
+//                                            "error was:\n %1" ).arg(reply->errorString()) );
+//    }
+//}
 
-void AnnotatePlugin::downloadOsmFile()
-{
-    QPointF topLeft(0,0);
-    QPointF bottomRight(m_marbleWidget->size().width(), m_marbleWidget->size().height());
+//void AnnotatePlugin::downloadOsmFile()
+//{
+//    QPointF topLeft(0,0);
+//    QPointF bottomRight(m_marbleWidget->size().width(), m_marbleWidget->size().height());
 
-    qreal lonTop, latTop;
-    qreal lonBottom, latBottom;
+//    qreal lonTop, latTop;
+//    qreal lonBottom, latBottom;
 
-    GeoDataCoordinates topLeftCoordinates;
-    GeoDataCoordinates bottomRightCoordinates;
+//    GeoDataCoordinates topLeftCoordinates;
+//    GeoDataCoordinates bottomRightCoordinates;
 
-    bool topIsOnGlobe = m_marbleWidget->geoCoordinates( topLeft.x(),
-                                                        topLeft.y(),
-                                                        lonTop, latTop,
-                                                        GeoDataCoordinates::Radian);
-    bool bottomIsOnGlobe = m_marbleWidget->geoCoordinates( bottomRight.x(),
-                                                           bottomRight.y(),
-                                                           lonBottom, latBottom,
-                                                           GeoDataCoordinates::Radian );
+//    bool topIsOnGlobe = m_marbleWidget->geoCoordinates( topLeft.x(),
+//                                                        topLeft.y(),
+//                                                        lonTop, latTop,
+//                                                        GeoDataCoordinates::Radian);
+//    bool bottomIsOnGlobe = m_marbleWidget->geoCoordinates( bottomRight.x(),
+//                                                           bottomRight.y(),
+//                                                           lonBottom, latBottom,
+//                                                           GeoDataCoordinates::Radian );
 
-    if( ! ( topIsOnGlobe && bottomIsOnGlobe ) ) {
-        m_errorMessage.showMessage( tr("One of the selection points is not on"
-                                       " the Globe. Please only select a region"
-                                       " on the globe.") );
-        return;
-    }
+//    if( ! ( topIsOnGlobe && bottomIsOnGlobe ) ) {
+//        m_errorMessage.showMessage( tr("One of the selection points is not on"
+//                                       " the Globe. Please only select a region"
+//                                       " on the globe.") );
+//        return;
+//    }
 
-    topLeftCoordinates = GeoDataCoordinates( lonTop, latTop, 0,
-                                             GeoDataCoordinates::Radian );
+//    topLeftCoordinates = GeoDataCoordinates( lonTop, latTop, 0,
+//                                             GeoDataCoordinates::Radian );
 
-    bottomRightCoordinates = GeoDataCoordinates( lonBottom, latBottom, 0,
-                                                 GeoDataCoordinates::Radian );
+//    bottomRightCoordinates = GeoDataCoordinates( lonBottom, latBottom, 0,
+//                                                 GeoDataCoordinates::Radian );
 
-    GeoDataLineString tempString;
-    tempString.append( topLeftCoordinates );
-    tempString.append( bottomRightCoordinates );
+//    GeoDataLineString tempString;
+//    tempString.append( topLeftCoordinates );
+//    tempString.append( bottomRightCoordinates );
 
-    GeoDataLatLonAltBox bounds = GeoDataLatLonAltBox::fromLineString( tempString );
+//    GeoDataLatLonAltBox bounds = GeoDataLatLonAltBox::fromLineString( tempString );
 
-    QString request;
-    request = QString("http://api.openstreetmap.org/api/0.6/map?bbox=%1,%2,%3,%4")
-              .arg(bounds.west(GeoDataCoordinates::Degree) )
-              .arg(bounds.south(GeoDataCoordinates::Degree) )
-              .arg(bounds.east( GeoDataCoordinates::Degree) )
-              .arg( bounds.north( GeoDataCoordinates::Degree ) );
+//    QString request;
+//    request = QString("http://api.openstreetmap.org/api/0.6/map?bbox=%1,%2,%3,%4")
+//              .arg(bounds.west(GeoDataCoordinates::Degree) )
+//              .arg(bounds.south(GeoDataCoordinates::Degree) )
+//              .arg(bounds.east( GeoDataCoordinates::Degree) )
+//              .arg( bounds.north( GeoDataCoordinates::Degree ) );
 
-    QNetworkRequest networkRequest;
-    networkRequest.setUrl(QUrl(request) );
+//    QNetworkRequest networkRequest;
+//    networkRequest.setUrl(QUrl(request) );
 
-    if( ! m_networkAccessManager ) {
-        m_networkAccessManager = new QNetworkAccessManager( this ) ;
-        connect( m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
-                 this, SLOT(receiveNetworkReply(QNetworkReply*)) );
-    }
+//    if( ! m_networkAccessManager ) {
+//        m_networkAccessManager = new QNetworkAccessManager( this ) ;
+//        connect( m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
+//                 this, SLOT(receiveNetworkReply(QNetworkReply*)) );
+//    }
 
-    m_networkAccessManager->get( networkRequest );
-}
+//    m_networkAccessManager->get( networkRequest );
+//}
 
 void AnnotatePlugin::clearAnnotations()
 {
@@ -534,7 +534,7 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
         QAction*    loadAnnotationFile;
         QAction*    saveAnnotationFile;
         QAction*    clearAnnotations;
-        QAction*    downloadOsm;
+//        QAction*    downloadOsm;
 
         enableInputAction = new QAction(this);
         enableInputAction->setToolTip(tr("Enable Marble Input"));
@@ -593,11 +593,11 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
         endSeparator->setSeparator( true );
 
 
-        downloadOsm = new QAction( this );
-        downloadOsm->setText( tr("Download Osm File") );
-        downloadOsm->setToolTip(tr("Download Osm File for selected area"));
-        connect( downloadOsm, SIGNAL(triggered()),
-                 this, SLOT(downloadOsmFile()) );
+//        downloadOsm = new QAction( this );
+//        downloadOsm->setText( tr("Download Osm File") );
+//        downloadOsm->setToolTip(tr("Download Osm File for selected area"));
+//        connect( downloadOsm, SIGNAL(triggered()),
+//                 this, SLOT(downloadOsmFile()) );
 
 
         group->addAction( enableInputAction );
@@ -610,7 +610,7 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
         group->addAction( clearAnnotations );
         group->addAction( endSeparator );
 
-        nonExclusiveGroup->addAction( downloadOsm );
+//        nonExclusiveGroup->addAction( downloadOsm );
 
         m_actions.append( group );
         m_actions.append( nonExclusiveGroup );
@@ -622,9 +622,9 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
     emit actionGroupsChanged();
 }
 
-void AnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
-{
-}
+//void AnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
+//{
+//}
 
 }
 
