@@ -50,6 +50,7 @@ AnnotatePlugin::AnnotatePlugin(const MarbleModel *model)
         : RenderPlugin(model),
           m_marbleWidget( 0 ),
           m_AnnotationDocument( new GeoDataDocument ),
+          m_tmp_placemark( 0 ),
 //          m_networkAccessManager( 0 ),
           m_isInitialized( false )
 {
@@ -141,8 +142,7 @@ QIcon AnnotatePlugin::icon () const
 void AnnotatePlugin::initialize ()
 {
     widgetInitalised= false;
-    m_tmp_lineString = 0;
-    m_tmp_linearRing = 0;
+    m_tmp_placemark = 0;
     m_selectedItem = 0;
     m_addingPlacemark = false;
     m_drawingPolygon = false;
@@ -181,14 +181,6 @@ bool AnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, cons
 
     painter->autoMapQuality();
 
-    //so the user can keep track of the current polygon drawing
-    if( m_tmp_lineString ) {
-        painter->drawPolyline( *m_tmp_lineString );
-    }
-    if( m_tmp_linearRing ) {
-        painter->drawPolyline( *m_tmp_linearRing );
-    }
-
     QListIterator<SceneGraphicsItem*> i( m_graphicsItems );
 
     while(i.hasNext()) {
@@ -222,24 +214,26 @@ void AnnotatePlugin::setAddingPlacemark( bool b)
 void AnnotatePlugin::setDrawingPolygon(bool b)
 {
     m_drawingPolygon = b;
+    if( b ) {
+        m_tmp_placemark = new GeoDataPlacemark;
+        GeoDataPolygon *poly = new GeoDataPolygon( Tessellate );
+        m_tmp_placemark->setGeometry( poly );
+        m_tmp_placemark->setParent( m_AnnotationDocument );
+        m_tmp_placemark->setStyleUrl( "#polygon" );
+        m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, m_tmp_placemark );
+    }
     if( !b ) {
         //stopped drawing the polygon
-        if ( m_tmp_linearRing != 0 ) {
-            GeoDataPlacemark *placemark = new GeoDataPlacemark;
-            GeoDataPolygon *poly = new GeoDataPolygon( Tessellate );
-            poly->setOuterBoundary( GeoDataLinearRing(*m_tmp_linearRing) );
-            placemark->setGeometry( poly );
-            placemark->setParent( m_AnnotationDocument );
-            placemark->setStyleUrl( "#polygon" );
-
-            delete m_tmp_linearRing;
-            m_tmp_linearRing = 0;
-
-            AreaAnnotation* area = new AreaAnnotation( placemark );
-
-            m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, placemark );
+        GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( m_tmp_placemark->geometry() );
+        if ( poly && poly->outerBoundary().size() != 0 ) {
+            AreaAnnotation* area = new AreaAnnotation( m_tmp_placemark );
             m_graphicsItems.append( area );
         }
+        else {
+            m_marbleWidget->model()->treeModel()->removeFeature( m_tmp_placemark );
+            delete m_tmp_placemark;
+        }
+        m_tmp_placemark = 0;
     }
 }
 
@@ -320,8 +314,8 @@ void AnnotatePlugin::setRemovingItems( bool toggle )
 void AnnotatePlugin::clearAnnotations()
 {
     m_selectedItem = 0;
-    delete m_tmp_linearRing;
-    m_tmp_linearRing = 0;
+    delete m_tmp_placemark;
+    m_tmp_placemark = 0;
     qDeleteAll( m_graphicsItems );
     m_graphicsItems.clear();
     while( m_AnnotationDocument->size() > 0 ) {
@@ -498,14 +492,10 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     if ( mouseEvent->button() == Qt::LeftButton
          && mouseEvent->type() == QEvent::MouseButtonPress
          && m_drawingPolygon ) {
-        if ( m_tmp_linearRing == 0 ) {
-            m_tmp_linearRing = new GeoDataLinearRing( Tessellate );
-        }
-
-        m_tmp_linearRing->append(GeoDataCoordinates(lon, lat));
-
-        //FIXME only repaint the line string so far
-        marbleWidget->update();
+        m_marbleWidget->model()->treeModel()->removeFeature( m_tmp_placemark );
+        GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( m_tmp_placemark->geometry() );
+        poly->outerBoundary().append(GeoDataCoordinates(lon, lat));
+        m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, m_tmp_placemark );
         return true;
     }
 

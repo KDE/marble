@@ -122,8 +122,7 @@ private:
     QList<SceneGraphicsItem*> m_graphicsItems;
 
     //used while creating new polygons
-    GeoDataLineString* m_tmp_lineString;
-    GeoDataLinearRing* m_tmp_linearRing;
+    GeoDataPlacemark* m_tmp_placemark;
     SceneGraphicsItem *m_selectedItem;
 
     bool m_addingPlacemark;
