@@ -1078,14 +1078,13 @@ void MarblePart::mapThemeChanged( const QString& newMapTheme )
 void MarblePart::createPluginMenus()
 {
     unplugActionList("plugins_actionlist");
-    QList<QActionGroup*> *tmp_toolbarActionGroups;
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
 
     //Load the toolbars
     for (; i != end; ++i ) {
-        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
+        const QList<QActionGroup*> *tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
 
         if ( tmp_toolbarActionGroups ) {
 

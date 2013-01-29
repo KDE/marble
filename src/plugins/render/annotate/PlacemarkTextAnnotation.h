@@ -23,7 +23,7 @@ class TextEditor;
 class PlacemarkTextAnnotation : public SceneGraphicsItem
 {
 public:
-    PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
+    explicit PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
     ~PlacemarkTextAnnotation();
 
     //GeoGraphicsItem

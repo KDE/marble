@@ -17,14 +17,15 @@
 #ifndef MARBLEANNOTATEPLUGIN_H
 #define MARBLEANNOTATEPLUGIN_H
 
+#include "RenderPlugin.h"
+#include "SceneGraphicsItem.h"
+
 #include <QtCore/QObject>
 #include <QtGui/QErrorMessage>
 
 class QNetworkAccessManager;
 class QNetworkReply;
 
-#include "RenderPlugin.h"
-#include "SceneGraphicsItem.h"
 
 namespace Marble
 {
@@ -47,8 +48,7 @@ class AnnotatePlugin :  public RenderPlugin
     MARBLE_PLUGIN( AnnotatePlugin )
 
  public:
-    AnnotatePlugin();
-    explicit AnnotatePlugin(const MarbleModel *model);
+    explicit AnnotatePlugin(const MarbleModel *model = 0);
     virtual ~AnnotatePlugin();
 
     QStringList backendTypes() const;
@@ -85,11 +85,7 @@ class AnnotatePlugin :  public RenderPlugin
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos, GeoSceneLayer * layer = 0 );
 
-    bool    widgetInitalised;
-
-
 signals:
-    void redraw();
     void placemarkAdded();
     void itemRemoved();
 
@@ -113,6 +109,7 @@ private:
     void setupActions(MarbleWidget* m);
 //    void readOsmFile( QIODevice* device, bool flyToFile );
 
+    bool    m_widgetInitialized;
     MarbleWidget* m_marbleWidget;
 
     QList<QActionGroup*>    m_actions;

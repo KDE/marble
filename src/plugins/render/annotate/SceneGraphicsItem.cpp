@@ -75,7 +75,6 @@ bool SceneGraphicsItem::mouseReleaseEvent( QMouseEvent *event )
 
 void SceneGraphicsItem::setRegions( const QList<QRegion>& regions )
 {
-    m_regions.clear();
     m_regions = regions;
 }
 

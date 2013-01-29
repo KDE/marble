@@ -28,7 +28,7 @@ class GeoDataPlacemark;
 class SceneGraphicsItem : public GeoGraphicsItem
 {
 public:
-    SceneGraphicsItem( GeoDataPlacemark *placemark );
+    explicit SceneGraphicsItem( GeoDataPlacemark *placemark );
     ~SceneGraphicsItem();
 
     virtual void paint(GeoPainter * painter, const ViewportParams * viewport) =0;

@@ -22,7 +22,7 @@ namespace Marble
 GeoWidgetBubble::GeoWidgetBubble( GeoDataPlacemark *placemark )
     : m_widget( new TextEditor( placemark ) ),
       m_hidden( true ),
-      marbleWidgetInitalised( false ),
+      m_widgetInitialized( false ),
       m_offset( QPoint( 10, 10 ) )
 {
     m_widget->setVisible(false);
@@ -38,20 +38,23 @@ void GeoWidgetBubble::paint( GeoPainter* painter, const ViewportParams* viewport
 {
     Q_UNUSED( viewport );
 
-    if( !marbleWidgetInitalised && ( m_widget!=0)  ) {
-        initaliseMarbleWidget( (QWidget* ) painter->device() );
+    if( !m_widgetInitialized && ( m_widget!=0)  ) {
+        QWidget *widget = dynamic_cast<QWidget*>( painter->device() );
+        if ( widget ) {
+            setParentWidget( widget );
+        }
     }
 
     if( !m_hidden ) {
 
-    if ( marbleWidgetInitalised ) {
+    if ( m_widgetInitialized ) {
 
         m_widget->setVisible( true );
         QSize widgetSize = m_widget->size();
         //how wide and high the border is
         //sum of both sides of the border
         QSize borderSize( 40, 40 );
-        QPoint borderOffset( -20, -20 );
+        QPoint borderOffset( -10, -10 );
 
         //position of the bubble
         QPoint position =  m_screenPosition + m_offset;
@@ -60,10 +63,10 @@ void GeoWidgetBubble::paint( GeoPainter* painter, const ViewportParams* viewport
         painter->save();
 
         //draw the border
-        painter->setPen( QPen( QColor( 125, 125, 125) ) );
+        painter->setPen( QPen( Oxygen::aluminumGray4 ) );
         painter->setBrush( QBrush( QColor( 255, 255, 255) , Qt::SolidPattern ));
         painter->drawRoundedRect( QRect( position + borderOffset, widgetSize + borderSize ),
-                                  30, 30  );
+                                  10, 10  );
 
         painter->restore();
         }
@@ -74,14 +77,14 @@ void GeoWidgetBubble::paint( GeoPainter* painter, const ViewportParams* viewport
 
 }
 
-void GeoWidgetBubble::initaliseMarbleWidget( QWidget* parent )
+void GeoWidgetBubble::setParentWidget( QWidget* parent )
 {
     m_widget->setParent( parent );
     m_widget->setVisible( true );
-    marbleWidgetInitalised = true;
+    m_widgetInitialized = true;
 }
 
-void GeoWidgetBubble::moveTo( QPoint pos )
+void GeoWidgetBubble::moveTo( const QPoint &pos )
 {
      m_screenPosition = pos;
 }
@@ -92,16 +95,10 @@ void GeoWidgetBubble::setHidden( bool hide )
         return;
     }
 
-    //if its not hidden and we want to hide
-    if( hide && !m_hidden ) {
-        m_widget->setVisible( m_hidden );
-        m_hidden = true ;
-    }
-    else if (  !hide && m_hidden ) {
-        m_hidden = false;
-    }
+    m_hidden = hide;
+    m_widget->setVisible( m_hidden );
 
-    if ( marbleWidgetInitalised ) {
+    if ( m_widgetInitialized ) {
         m_widget->parentWidget()->update();
     }
 }

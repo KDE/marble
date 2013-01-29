@@ -30,7 +30,7 @@ class TextEditor : public QWidget
     Q_OBJECT
 
 public:
-    TextEditor( GeoDataPlacemark *placemark );
+    explicit TextEditor( GeoDataPlacemark *placemark );
     ~TextEditor();
 
 public Q_SLOTS:

@@ -35,7 +35,7 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
     QList<QRegion> regionList;
 
     painter->save();
-    painter->setBrush( QColor( 100, 100, 100 ) );
+    painter->setBrush( Oxygen::aluminumGray4 );
     if( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
         GeoDataLinearRing &ring = polygon->outerBoundary();
@@ -52,6 +52,7 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
 bool AreaAnnotation::mousePressEvent( QMouseEvent *event )
 {
     QList<QRegion> regionList = regions();
+    // react to all ellipse point markers and skip the polygon
     for( int i=0; i< regionList.size()-1; ++i ) {
         if( regionList.at(i).contains( event->pos()) ) {
             m_movedPoint = i;
@@ -67,15 +68,18 @@ bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
         || m_movedPoint < 0 ) {
         return false;
     }
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
-    GeoDataLinearRing &ring = polygon->outerBoundary();
-    qreal lon, lat;
-    m_viewport->geoCoordinates( event->pos().x(),
-                                event->pos().y(),
-                                lon, lat,
-                                GeoDataCoordinates::Radian );
-    ring[m_movedPoint] = GeoDataCoordinates( lon, lat );
-    return true;
+    if( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
+        GeoDataLinearRing &ring = polygon->outerBoundary();
+        qreal lon, lat;
+        m_viewport->geoCoordinates( event->pos().x(),
+                                    event->pos().y(),
+                                    lon, lat,
+                                    GeoDataCoordinates::Radian );
+        ring[m_movedPoint] = GeoDataCoordinates( lon, lat );
+        return true;
+    }
+    return false;
 }
 
 bool AreaAnnotation::mouseReleaseEvent( QMouseEvent *event )

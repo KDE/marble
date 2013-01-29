@@ -26,21 +26,21 @@ class GeoSceneLayer;
 class GeoWidgetBubble
 {
 public:
-    GeoWidgetBubble( GeoDataPlacemark *placemark );
+    explicit GeoWidgetBubble( GeoDataPlacemark *placemark );
     ~GeoWidgetBubble();
 
     void paint(GeoPainter* p, const ViewportParams* v);
 
-    void initaliseMarbleWidget( QWidget* parent );
+    void setParentWidget( QWidget* parent );
 
-    void moveTo( QPoint screenPos );
+    void moveTo( const QPoint &screenPos );
     void setHidden( bool hide );
     bool isHidden() const;
 
 private:
     QWidget* m_widget;
     bool m_hidden;
-    bool marbleWidgetInitalised;
+    bool m_widgetInitialized;
     QPoint m_offset;
     QPoint m_screenPosition;
 

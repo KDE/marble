@@ -11,12 +11,6 @@
 
 #include "AnnotatePlugin.h"
 
-#include <QtGui/QFileDialog>
-
-#include <QtGui/QAction>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QNetworkRequest>
 
 #include "MarbleDebug.h"
 #include "AbstractProjection.h"
@@ -30,27 +24,32 @@
 #include "GeoDataTypes.h"
 #include "GeoPainter.h"
 #include "GeoWriter.h"
+#include "KmlElementDictionary.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "PlacemarkTextAnnotation.h"
 
+#include <QtGui/QFileDialog>
+
+#include <QtGui/QAction>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
+
 namespace Marble
 {
 
-AnnotatePlugin::AnnotatePlugin()
-        : RenderPlugin( 0 ),
-          m_AnnotationDocument( new GeoDataDocument ),
-//          m_networkAccessManager( 0 ),
-          m_isInitialized( false )
-{
-}
-
 AnnotatePlugin::AnnotatePlugin(const MarbleModel *model)
         : RenderPlugin(model),
+          m_widgetInitialized( false ),
           m_marbleWidget( 0 ),
           m_AnnotationDocument( new GeoDataDocument ),
           m_tmp_placemark( 0 ),
+          m_selectedItem( 0 ),
+          m_addingPlacemark( false ),
+          m_drawingPolygon( false ),
+          m_removingItem( false ),
 //          m_networkAccessManager( 0 ),
           m_isInitialized( false )
 {
@@ -74,7 +73,9 @@ AnnotatePlugin::AnnotatePlugin(const MarbleModel *model)
 
 AnnotatePlugin::~AnnotatePlugin()
 {
-    m_marbleWidget->model()->treeModel()->removeDocument( m_AnnotationDocument );
+    if( m_marbleWidget != 0 ) {
+        m_marbleWidget->model()->treeModel()->removeDocument( m_AnnotationDocument );
+    }
     delete m_AnnotationDocument;
 //    delete m_networkAccessManager;
 }
@@ -108,12 +109,12 @@ QString AnnotatePlugin::guiString() const
 
 QString AnnotatePlugin::nameId() const
 {
-    return QString( "annotation-plugin" );
+    return QString( "annotation" );
 }
 
 QString AnnotatePlugin::description() const
 {
-    return tr( "This is a render and interaction plugin used for annotating maps." );
+    return tr( "Draws annotations on maps with placemarks or polygons." );
 }
 
 QString AnnotatePlugin::version() const
@@ -141,13 +142,17 @@ QIcon AnnotatePlugin::icon () const
 
 void AnnotatePlugin::initialize ()
 {
-    widgetInitalised= false;
-    m_tmp_placemark = 0;
-    m_selectedItem = 0;
-    m_addingPlacemark = false;
-    m_drawingPolygon = false;
-    m_removingItem = false;
-    m_isInitialized = true;
+    if( !m_isInitialized ) {
+        m_widgetInitialized= false;
+        delete m_tmp_placemark;
+        m_tmp_placemark = 0;
+        delete m_selectedItem;
+        m_selectedItem = 0;
+        m_addingPlacemark = false;
+        m_drawingPolygon = false;
+        m_removingItem = false;
+        m_isInitialized = true;
+    }
 }
 
 bool AnnotatePlugin::isInitialized () const
@@ -171,14 +176,6 @@ const QList<QActionGroup*>* AnnotatePlugin::toolbarActionGroups() const
 
 bool AnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
-    if( !widgetInitalised ) {
-        MarbleWidget* marbleWidget = (MarbleWidget*) painter->device();
-        m_marbleWidget = marbleWidget;
-        setupActions( marbleWidget );
-        m_marbleWidget->model()->treeModel()->addDocument( m_AnnotationDocument );
-        widgetInitalised = true;
-    }
-
     painter->autoMapQuality();
 
     QListIterator<SceneGraphicsItem*> i( m_graphicsItems );
@@ -228,6 +225,7 @@ void AnnotatePlugin::setDrawingPolygon(bool b)
         if ( poly && poly->outerBoundary().size() != 0 ) {
             AreaAnnotation* area = new AreaAnnotation( m_tmp_placemark );
             m_graphicsItems.append( area );
+            m_marbleWidget->update();
         }
         else {
             m_marbleWidget->model()->treeModel()->removeFeature( m_tmp_placemark );
@@ -318,9 +316,9 @@ void AnnotatePlugin::clearAnnotations()
     m_tmp_placemark = 0;
     qDeleteAll( m_graphicsItems );
     m_graphicsItems.clear();
-    while( m_AnnotationDocument->size() > 0 ) {
-        m_marbleWidget->model()->treeModel()->removeFeature( m_AnnotationDocument, 0 );
-    }
+    m_marbleWidget->model()->treeModel()->removeDocument( m_AnnotationDocument );
+    m_AnnotationDocument->clear();
+    m_marbleWidget->model()->treeModel()->addDocument( m_AnnotationDocument );
 }
 
 void AnnotatePlugin::saveAnnotationFile()
@@ -334,7 +332,7 @@ void AnnotatePlugin::saveAnnotationFile()
 
         GeoWriter writer;
         //FIXME: a better way to do this?
-        writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+        writer.setDocumentType( kml::kmlTag_nameSpace22 );
 
         QFile file( filename );
 
@@ -342,7 +340,7 @@ void AnnotatePlugin::saveAnnotationFile()
         file.open( QIODevice::WriteOnly );
 
         if ( !writer.write( &file, m_AnnotationDocument ) ) {
-            qDebug( "Could not write the file." );
+            mDebug() << "Could not write the file " << filename;
         }
         file.close();
     }
@@ -363,7 +361,7 @@ void AnnotatePlugin::loadAnnotationFile()
 
     QFile file( filename );
     if ( !file.exists() ) {
-        qDebug( "File does not exist!" );
+        mDebug() << "File " << filename << " does not exist!";
         return;
     }
 
@@ -372,7 +370,7 @@ void AnnotatePlugin::loadAnnotationFile()
 
     GeoDataParser parser( GeoData_KML );
     if ( !parser.read( &file ) ) {
-        qDebug( "Could not parse file!" );
+        mDebug() << "Could not parse file " << filename;
         return;
     }
 
@@ -382,20 +380,22 @@ void AnnotatePlugin::loadAnnotationFile()
     file.close();
 
     foreach( GeoDataFeature *feature, document->featureList() ) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
-        if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
-            GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
-            PlacemarkTextAnnotation* annotation = new PlacemarkTextAnnotation( newPlacemark );
-            m_graphicsItems.append( annotation );
-            m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, newPlacemark );
-        }
-        else if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-            GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
-            newPlacemark->setParent( m_AnnotationDocument );
-            newPlacemark->setStyleUrl( placemark->styleUrl() );
-            AreaAnnotation* annotation = new AreaAnnotation( newPlacemark );
-            m_graphicsItems.append( annotation );
-            m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, newPlacemark );
+        if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
+            if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
+                GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
+                PlacemarkTextAnnotation* annotation = new PlacemarkTextAnnotation( newPlacemark );
+                m_graphicsItems.append( annotation );
+                m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, newPlacemark );
+            }
+            else if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+                GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
+                newPlacemark->setParent( m_AnnotationDocument );
+                newPlacemark->setStyleUrl( placemark->styleUrl() );
+                AreaAnnotation* annotation = new AreaAnnotation( newPlacemark );
+                m_graphicsItems.append( annotation );
+                m_marbleWidget->model()->treeModel()->addFeature( m_AnnotationDocument, newPlacemark );
+            }
         }
     }
     m_marbleWidget->centerOn( document->latLonAltBox() );
@@ -406,9 +406,19 @@ void AnnotatePlugin::loadAnnotationFile()
 
 bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 {
-    MarbleWidget* marbleWidget = dynamic_cast<MarbleWidget*>( watched );
-    Q_ASSERT( marbleWidget );
+    if( !m_widgetInitialized ) {
+        MarbleWidget* marbleWidget = qobject_cast<MarbleWidget*>( watched );
+        if( marbleWidget ) {
+            m_marbleWidget = marbleWidget;
+            setupActions( marbleWidget );
+            m_marbleWidget->model()->treeModel()->addDocument( m_AnnotationDocument );
+            m_widgetInitialized = true;
+        }
+    }
 
+    if( !m_marbleWidget ) {
+        return false;
+    }
     //FIXME why is the QEvent::MousePress not working? caught somewhere else?
     //does this mean we need to centralize the event handling?
 
@@ -425,7 +435,7 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
     GeoDataCoordinates coordinates;
     qreal lon, lat;
-    bool isOnGlobe = marbleWidget->geoCoordinates( mouseEvent->pos().x(),
+    bool isOnGlobe = m_marbleWidget->geoCoordinates( mouseEvent->pos().x(),
                                                    mouseEvent->pos().y(),
                                                    lon, lat,
                                                    GeoDataCoordinates::Radian );
@@ -515,26 +525,16 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
         QActionGroup* nonExclusiveGroup = new QActionGroup(0);
         nonExclusiveGroup->setExclusive( false );
 
-        QAction*    enableInputAction;
-        QAction*    addPlacemark;
-        QAction*    drawPolygon;
-        QAction*    removeItem;
-        QAction*    beginSeparator;
-        QAction*    endSeparator;
-        QAction*    loadAnnotationFile;
-        QAction*    saveAnnotationFile;
-        QAction*    clearAnnotations;
-//        QAction*    downloadOsm;
 
-        enableInputAction = new QAction(this);
-        enableInputAction->setToolTip(tr("Enable Marble Input"));
+        QAction* enableInputAction = new QAction(this);
+        enableInputAction->setToolTip(tr("Enable Moving Map"));
         enableInputAction->setCheckable(true);
         enableInputAction->setChecked( true );
         enableInputAction->setIcon( QIcon( ":/icons/hand.png") );
         connect( enableInputAction, SIGNAL(toggled(bool)),
                  widget, SLOT(setInputEnabled(bool)) );
 
-        addPlacemark = new QAction(this);
+        QAction* addPlacemark= new QAction(this);
         addPlacemark->setToolTip( tr("Add Placemark") );
         addPlacemark->setCheckable( true );
         addPlacemark->setIcon( QIcon( ":/icons/draw-placemark.png") );
@@ -543,14 +543,14 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
         connect( this, SIGNAL(placemarkAdded()) ,
                  addPlacemark, SLOT(toggle()) );
 
-        drawPolygon = new QAction( this );
-        drawPolygon->setToolTip( tr("Draw Polygon") );
+        QAction* drawPolygon = new QAction( this );
+        drawPolygon->setToolTip( tr("Add Polygon") );
         drawPolygon->setCheckable( true );
         drawPolygon->setIcon( QIcon( ":/icons/draw-polygon.png") );
         connect( drawPolygon, SIGNAL(toggled(bool)),
                  this, SLOT(setDrawingPolygon(bool)) );
 
-        removeItem = new QAction( this );
+        QAction* removeItem = new QAction( this );
         removeItem->setToolTip( tr("Remove Item") );
         removeItem->setCheckable( true );
         removeItem->setIcon( QIcon( ":/icons/edit-delete-shred.png") );
@@ -559,31 +559,31 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
         connect( this, SIGNAL(itemRemoved()),
                  removeItem, SLOT(toggle()) );
 
-        loadAnnotationFile = new QAction( this );
+        QAction* loadAnnotationFile = new QAction( this );
         loadAnnotationFile->setToolTip( tr("Load Annotation File" ) );
         loadAnnotationFile->setIcon( QIcon( ":/icons/document-import.png") );
         connect( loadAnnotationFile, SIGNAL(triggered()),
                  this, SLOT(loadAnnotationFile()) );
 
-        saveAnnotationFile = new QAction( this );
+        QAction* saveAnnotationFile = new QAction( this );
         saveAnnotationFile->setToolTip( tr("Save Annotation File") );
         saveAnnotationFile->setIcon( QIcon( ":/icons/document-export.png") );
         connect( saveAnnotationFile, SIGNAL(triggered()),
                  this, SLOT(saveAnnotationFile()) );
 
-        clearAnnotations = new QAction( this );
-        clearAnnotations->setToolTip( tr("Clear Annotations") );
+        QAction* clearAnnotations = new QAction( this );
+        clearAnnotations->setToolTip( tr("Clear all Annotations") );
         clearAnnotations->setIcon( QIcon( ":/icons/remove.png") );
         connect( clearAnnotations, SIGNAL(triggered()),
                  this, SLOT(clearAnnotations()) );
 
-        beginSeparator = new QAction( this );
+        QAction* beginSeparator = new QAction( this );
         beginSeparator->setSeparator( true );
-        endSeparator = new QAction ( this );
+        QAction* endSeparator = new QAction ( this );
         endSeparator->setSeparator( true );
 
 
-//        downloadOsm = new QAction( this );
+//        QAction* downloadOsm = new QAction( this );
 //        downloadOsm->setText( tr("Download Osm File") );
 //        downloadOsm->setToolTip(tr("Download Osm File for selected area"));
 //        connect( downloadOsm, SIGNAL(triggered()),

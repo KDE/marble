@@ -41,12 +41,11 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
                             const ViewportParams *viewport )
 {
 
-    const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( feature() );
-    painter->drawPixmap( placemark->coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
+    painter->drawPixmap( placemark()->coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
 
     qreal x, y;
     bool hidden;
-    bool visible = viewport->currentProjection()->screenCoordinates( placemark->coordinate(), viewport, x, y, hidden );
+    bool visible = viewport->currentProjection()->screenCoordinates( placemark()->coordinate(), viewport, x, y, hidden );
 
     QList<QRegion> list;
     list.append( QRegion( x -10 , y-10 , 20 , 20 ) );
