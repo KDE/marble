@@ -77,6 +77,11 @@ QStringList StarsPlugin::renderPosition() const
     return QStringList() << "STARS";
 }
 
+RenderPlugin::RenderType StarsPlugin::renderType() const
+{
+    return RenderPlugin::ThemeRenderType;
+}
+
 QString StarsPlugin::name() const
 {
     return tr( "Stars" );

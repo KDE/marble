@@ -114,7 +114,7 @@ void AprsPlugin::updateVisibility( bool visible )
 
 RenderPlugin::RenderType AprsPlugin::renderType() const
 {
-    return Online;
+    return OnlineRenderType;
 }
 
 QStringList AprsPlugin::backendTypes() const

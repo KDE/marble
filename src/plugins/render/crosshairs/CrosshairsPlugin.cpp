@@ -64,6 +64,11 @@ QStringList CrosshairsPlugin::renderPosition() const
     return QStringList( "FLOAT_ITEM" ); // although this is not a float item we choose the position of one
 }
 
+RenderPlugin::RenderType CrosshairsPlugin::renderType() const
+{
+    return RenderPlugin::TopLevelRenderType;
+}
+
 QString CrosshairsPlugin::name() const
 {
     return tr( "Crosshairs" );

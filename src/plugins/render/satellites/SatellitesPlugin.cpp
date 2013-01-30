@@ -133,7 +133,7 @@ QIcon SatellitesPlugin::icon() const
 
 RenderPlugin::RenderType SatellitesPlugin::renderType() const
 {
-    return Online;
+    return OnlineRenderType;
 }
 
 void SatellitesPlugin::initialize()

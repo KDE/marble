@@ -56,6 +56,8 @@ class CrosshairsPlugin : public RenderPlugin, public DialogConfigurationInterfac
 
     QStringList renderPosition() const;
 
+    virtual RenderType renderType() const;
+
     QString name() const;
 
     QString guiString() const;

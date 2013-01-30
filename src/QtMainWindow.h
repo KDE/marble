@@ -97,8 +97,6 @@ private Q_SLOTS:
     void  workOffline( bool );
     void  showMapWizard();
 
-    void  updateAtmosphereMenu();
-
     // Edit Menu
     void  copyMap();
     void  copyCoordinates();
@@ -106,11 +104,9 @@ private Q_SLOTS:
 
     // View Menu
     void  lockPosition( bool );
-    void  createInfoBoxesMenu();
-    void  createOnlineServicesMenu();
+    void  createPluginsMenus();
     void  createPluginMenus();
     void  showClouds( bool );
-    void  showAtmosphere( bool );
     void  controlSun();
     void  controlTime();
     void  showSun( bool );
@@ -169,6 +165,7 @@ private:
     QList<QMenu*> m_pluginMenus;
 
     QMenu *m_fileMenu;
+    QMenu *m_viewMenu;
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;
     QMenu *m_panelMenu;
@@ -193,7 +190,6 @@ private:
 
     // View Menu
     QAction *m_showCloudsAct;
-    QAction *m_showAtmosphereAct;
     QAction *m_controlSunAct;
     QAction *m_controlTimeAct;
     QAction *m_reloadAct;

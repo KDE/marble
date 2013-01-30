@@ -88,6 +88,11 @@ void AbstractFloatItem::setSettings(const QHash<QString, QVariant> &settings)
     RenderPlugin::setSettings(settings);
 }
 
+RenderPlugin::RenderType AbstractFloatItem::renderType() const
+{
+    return RenderPlugin::PanelRenderType;
+}
+
 QPen AbstractFloatItem::pen() const
 {
     return d->s_pen;

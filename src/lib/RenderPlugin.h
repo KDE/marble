@@ -58,8 +58,11 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @brief A Type of plugin
      */
     enum RenderType {
-        Unknown,
-        Online
+        UnknownRenderType,
+        TopLevelRenderType,
+        PanelRenderType,
+        OnlineRenderType,
+        ThemeRenderType
     };
 
     explicit RenderPlugin( const MarbleModel *marbleModel );

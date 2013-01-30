@@ -163,7 +163,7 @@ QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& c
 
 RenderPlugin::RenderType AbstractDataPlugin::renderType() const
 {
-    return Online;
+    return OnlineRenderType;
 }
 
 void AbstractDataPlugin::setDelegate( QDeclarativeComponent *delegate, QGraphicsItem* parent )

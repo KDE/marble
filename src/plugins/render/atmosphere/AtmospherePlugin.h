@@ -34,6 +34,8 @@ public:
 
     QStringList renderPosition() const;
 
+    virtual RenderType renderType() const;
+
     QString name() const;
 
     QString guiString() const;
@@ -58,6 +60,9 @@ public:
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
     void repaintPixmap(const ViewportParams *viewParams);
+
+public slots:
+    void updateTheme();
 
 private:
     QPixmap m_renderPixmap;

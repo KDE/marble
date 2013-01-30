@@ -149,8 +149,6 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         createDockWidgets();
     }
 
-    connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateAtmosphereMenu()));
-
     connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
              this, SLOT( updateMapEditButtonVisibility( QString ) ) );
     connect( m_controlView, SIGNAL( showMapWizard() ), this, SLOT( showMapWizard() ) );
@@ -253,19 +251,6 @@ void MainWindow::createActions()
      m_workOfflineAct = new QAction( QIcon(":/icons/user-offline.png"), tr("Work Off&line"), this);
      m_workOfflineAct->setCheckable( true );
      connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
-
-     m_showAtmosphereAct = new QAction( QIcon(":/icons/atmosphere.png"), tr("&Atmosphere"), this);
-     m_showAtmosphereAct->setVisible( false );
-     m_showAtmosphereAct->setCheckable( true );
-     m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
-     connect(m_showAtmosphereAct, SIGNAL(triggered( bool )), this, SLOT( showAtmosphere( bool )));
-     foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
-         if ( plugin->nameId() == "atmosphere" ) {
-             m_showAtmosphereAct->setVisible( plugin->enabled() );
-             connect( plugin, SIGNAL( enabledChanged( bool ) ),
-                      m_showAtmosphereAct, SLOT( setVisible( bool ) ) );
-         }
-     }
 
      m_controlTimeAct = new QAction( QIcon(":/icons/clock.png"), tr( "&Time Control..." ), this );
      m_controlTimeAct->setStatusTip( tr( "Configure Time Control " ) );
@@ -375,42 +360,21 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_copyCoordinatesAct);
     m_fileMenu->addAction( m_osmEditAction );
 
-    m_fileMenu = menuBar()->addMenu(tr("&View"));
-
-    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; i != end; ++i ) {
-        if ( (*i)->nameId() == "crosshairs" ) {
-            m_fileMenu->addAction( (*i)->action() );
-        }
-    }
-    m_fileMenu->addAction(m_reloadAct);
-
-    m_fileMenu->addSeparator();
-    m_panelMenu = m_fileMenu->addMenu( "&Panels" );
-    m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
-    createInfoBoxesMenu();
-
-    m_onlineServicesMenu = m_fileMenu->addMenu("&Online Services");
-    createOnlineServicesMenu();
-
-    m_fileMenu->addSeparator();
-    m_fileMenu->addAction(m_showCloudsAct);
-    m_fileMenu->addAction(m_showAtmosphereAct);
-    m_fileMenu->addSeparator();
-    m_fileMenu->addAction(m_controlSunAct);
-    m_fileMenu->addAction(m_controlTimeAct);
+    m_viewMenu = menuBar()->addMenu(tr("&View"));
+    m_panelMenu = new QMenu( "&Panels" );
+    m_infoBoxesMenu = new QMenu( "&Info Boxes" );
+    m_onlineServicesMenu = new QMenu( "&Online Services" );
+    createPluginsMenus();
 
     m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
     createBookmarkMenu();
     connect( m_bookmarkMenu, SIGNAL( aboutToShow() ), this, SLOT( createBookmarkMenu() ) );
 
-    m_fileMenu = menuBar()->addMenu(tr("&Settings"));
-    m_fileMenu->addAction(m_statusBarAct);
-    m_fileMenu->addAction(m_fullScreenAct);
-    m_fileMenu->addSeparator();
-    m_fileMenu->addAction(m_configDialogAct);
+    m_settingsMenu = menuBar()->addMenu(tr("&Settings"));
+    m_settingsMenu->addAction(m_statusBarAct);
+    m_settingsMenu->addAction(m_fullScreenAct);
+    m_settingsMenu->addSeparator();
+    m_settingsMenu->addAction(m_configDialogAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
     m_helpMenu->addAction(m_handbookAct);
@@ -420,11 +384,8 @@ void MainWindow::createMenus()
     m_helpMenu->addAction(m_aboutMarbleAct);
     m_helpMenu->addAction(m_aboutQtAct);
 
-
-    connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) );
-    connect( m_onlineServicesMenu, SIGNAL( aboutToShow() ), this, SLOT( createOnlineServicesMenu() ) );
-
 //    FIXME: Discuss if this is the best place to put this
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const listEnd = pluginList.constEnd();
     for (; it != listEnd; ++it ) {
@@ -433,9 +394,14 @@ void MainWindow::createMenus()
     }
 }
 
-void MainWindow::createInfoBoxesMenu()
+void MainWindow::createPluginsMenus()
 {
+    m_onlineServicesMenu->clear();
     m_infoBoxesMenu->clear();
+    m_viewMenu->clear();
+
+    m_viewMenu->addAction(m_reloadAct);
+    m_viewMenu->addSeparator();
 
     // Do not create too many menu entries on a MID
     // FIXME: Set up another way of switching the plugins on and off.
@@ -445,38 +411,37 @@ void MainWindow::createInfoBoxesMenu()
 
     m_infoBoxesMenu->addAction(m_lockFloatItemsAct);
     m_infoBoxesMenu->addSeparator();
-
-    QList<AbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
-
-    QList<AbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
-    QList<AbstractFloatItem *>::const_iterator const end = floatItemList.constEnd();
-    for (; i != end; ++i )
-    {
-        m_infoBoxesMenu->addAction( (*i)->action() );
-    }
-}
-
-void MainWindow::createOnlineServicesMenu()
-{
-    m_onlineServicesMenu->clear();
-
-    // Do not create too many menu entries on a MID
-    // FIXME: Set up another way of switching the plugins on and off.
-    if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-        return;
-    }
+    QList<QAction*> themeActions;
 
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
-
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
     for (; i != end; ++i ) {
-        // FIXME: This will go into the layer manager when AbstractDataPlugin is an interface
-
-        if( (*i)->renderType() == RenderPlugin::Online ) {
+        switch( (*i)->renderType() ) {
+        case RenderPlugin::TopLevelRenderType:
+            m_viewMenu->addAction( (*i)->action() );
+            break;
+        case RenderPlugin::PanelRenderType:
+            m_infoBoxesMenu->addAction( (*i)->action() );
+            break;
+        case RenderPlugin::OnlineRenderType:
             m_onlineServicesMenu->addAction( (*i)->action() );
+            break;
+        case RenderPlugin::ThemeRenderType:
+            themeActions.append( (*i)->action() );
+            break;
+        default:
+            break;
         }
     }
+    m_viewMenu->addMenu( m_panelMenu );
+    m_viewMenu->addMenu( m_infoBoxesMenu );
+    m_viewMenu->addMenu( m_onlineServicesMenu );
+    m_viewMenu->addActions( themeActions );
+    m_viewMenu->addAction( m_showCloudsAct );
+    m_viewMenu->addSeparator();
+    m_viewMenu->addAction(m_controlSunAct);
+    m_viewMenu->addAction(m_controlTimeAct);
 }
 
 void MainWindow::createBookmarksListMenu( QMenu *bookmarksListMenu, const GeoDataContainer *container )
@@ -782,13 +747,6 @@ void MainWindow::workOffline( bool offline )
     m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
 }
 
-void MainWindow::showAtmosphere( bool isChecked )
-{
-    m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
-
-    m_showAtmosphereAct->setChecked( isChecked ); // Sync state with the GUI
-}
-
 void MainWindow::lockPosition( bool isChecked )
 {
     QList<AbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
@@ -1042,7 +1000,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          show();
          showClouds(settings.value("showClouds", true ).toBool());
          workOffline(settings.value("workOffline", false ).toBool());
-         showAtmosphere(settings.value("showAtmosphere", true ).toBool());
+         m_controlView->marbleWidget()->setShowAtmosphere(settings.value("showAtmosphere", true ).toBool());
          m_lastFileOpenPath = settings.value("lastFileOpenDir", QDir::homePath()).toString();
          showBookmarks( settings.value( "showBookmarks", true ).toBool() );
          restoreState( settings.value("windowState").toByteArray() );
@@ -1255,7 +1213,7 @@ void MainWindow::writeSettings()
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
-         settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
+         settings.setValue( "showAtmosphere", m_controlView->marbleWidget()->showAtmosphere() );
          settings.setValue( "lastFileOpenDir", m_lastFileOpenPath );
          settings.setValue( "showBookmarks", m_toggleBookmarkDisplayAct->isChecked() );
          settings.setValue( "windowState", saveState() );
@@ -1607,12 +1565,6 @@ void MainWindow::showMapWizard()
     settings.endGroup();
 
     mapWizard->deleteLater();
-}
-
-void MainWindow::updateAtmosphereMenu()
-{
-    bool const hasAtmosphere = m_controlView->marbleModel()->planet()->hasAtmosphere();
-    m_showAtmosphereAct->setEnabled( hasAtmosphere );
 }
 
 void MainWindow::showGoToDialog()

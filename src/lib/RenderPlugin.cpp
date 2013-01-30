@@ -198,7 +198,7 @@ void RenderPlugin::setSettings( const QHash<QString,QVariant> &settings )
 
 RenderPlugin::RenderType RenderPlugin::renderType() const
 {
-    return Unknown;
+    return UnknownRenderType;
 }
 
 QString RenderPlugin::runtimeTrace() const

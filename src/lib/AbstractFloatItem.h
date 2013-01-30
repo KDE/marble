@@ -58,6 +58,8 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
     virtual QHash<QString,QVariant> settings() const;
     virtual void setSettings(const QHash<QString, QVariant> &settings);
 
+    virtual RenderType renderType() const;
+
     /**
      * @brief current pen for rendering
      * @return pen
@@ -85,6 +87,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos = "FLOAT_ITEM", GeoSceneLayer * layer = 0 );
     virtual QString renderPolicy() const;
+
     virtual QStringList renderPosition() const;
 
     /**

@@ -34,6 +34,8 @@ AtmospherePlugin::AtmospherePlugin( const MarbleModel *marbleModel ) :
     RenderPlugin( marbleModel ),
     m_renderRadius(-1)
 {
+    connect( marbleModel, SIGNAL(themeChanged(QString)),
+             this, SLOT( updateTheme() ) );
 }
 
 QStringList AtmospherePlugin::backendTypes() const
@@ -49,6 +51,11 @@ QString AtmospherePlugin::renderPolicy() const
 QStringList AtmospherePlugin::renderPosition() const
 {
     return QStringList() << "SURFACE";
+}
+
+RenderPlugin::RenderType AtmospherePlugin::renderType() const
+{
+    return RenderPlugin::ThemeRenderType;
 }
 
 QString AtmospherePlugin::name() const
@@ -110,6 +117,13 @@ void AtmospherePlugin::initialize()
 bool AtmospherePlugin::isInitialized() const
 {
     return true;
+}
+
+void AtmospherePlugin::updateTheme()
+{
+    bool hasAtmosphere = marbleModel()->planet()->hasAtmosphere();
+    setEnabled( hasAtmosphere );
+    setVisible( hasAtmosphere );
 }
 
 bool AtmospherePlugin::render( GeoPainter *painter,
