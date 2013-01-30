@@ -231,14 +231,15 @@ QColor const oxygenForestGreen4 = QColor::fromRgb( 55, 164, 44 );
 
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.14.90 (0.15 RC 1)" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.15.0 (stable version)" );
 
 // API Version id:
 // form : 0xMMmmpp
 //        MM = major revision.
 //        mm = minor revision.
 //        pp = patch revision.
-#define MARBLE_VERSION 0x000e60
+// Note for Marble developers: This is hex and must match the decimal version string number above
+#define MARBLE_VERSION 0x000f00
 
 static const char NOT_AVAILABLE[] = QT_TR_NOOP("not available");
 
