@@ -15,11 +15,11 @@ add_subdirectory( routing )
 add_subdirectory( speedometer )
 
 # Display geographical information on the map
+add_subdirectory( annotate )
 add_subdirectory( crosshairs )
 add_subdirectory( elevationprofilemarker )
 add_subdirectory( graticule )
 add_subdirectory( measure )
-# add_subdirectory( osmannotate )
 add_subdirectory( positionmarker )
 add_subdirectory( atmosphere )
 add_subdirectory( stars )
