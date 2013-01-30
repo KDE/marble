@@ -41,7 +41,7 @@ bool KmlParser::isValidElement(const QString& tagName) const
 
 GeoDocument* KmlParser::createDocument() const
 {
-    return new GeoDataDocument;
+    return new KmlDocument;
 }
 
 }

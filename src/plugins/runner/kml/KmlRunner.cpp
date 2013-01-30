@@ -11,8 +11,15 @@
 
 #include "GeoDataDocument.h"
 #include "KmlParser.h"
+#include "KmlDocument.h"
+#include "MarbleDebug.h"
+
+#ifdef MARBLE_HAVE_QUAZIP
+#include "KmzHandler.h"
+#endif
 
 #include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 
 namespace Marble
 {
@@ -28,9 +35,29 @@ KmlRunner::~KmlRunner()
 
 void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
 {
-    QFile  file( fileName );
+    QString kmlFileName = fileName;
+    QString kmzPath;
+    QStringList kmzFiles;
+
+#ifdef MARBLE_HAVE_QUAZIP
+    QFileInfo const kmzFile( fileName );
+    if ( kmzFile.exists() && kmzFile.suffix().toLower() == "kmz" ) {
+        KmzHandler kmzHandler;
+        if ( kmzHandler.open( fileName ) ) {
+            kmlFileName = kmzHandler.kmlFile();
+            kmzPath = kmzHandler.kmzPath();
+            kmzFiles = kmzHandler.kmzFiles();
+        } else {
+            qWarning() << "File " << fileName << " is not a valid .kmz file";
+            emit parsingFinished( 0 );
+            return;
+        }
+    }
+#endif
+
+    QFile  file( kmlFileName );
     if ( !file.exists() ) {
-        qWarning( "File does not exist!" );
+        qWarning() << "File" << kmlFileName << "does not exist!";
         emit parsingFinished( 0 );
         return;
     }
@@ -46,9 +73,10 @@ void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     }
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
-    GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
+    KmlDocument* doc = static_cast<KmlDocument*>( document );
     doc->setDocumentRole( role );
     doc->setFileName( fileName );
+    doc->setFiles( kmzPath, kmzFiles );
 
     file.close();
     emit parsingFinished( doc );

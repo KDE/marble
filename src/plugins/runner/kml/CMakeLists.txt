@@ -8,7 +8,17 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( kml_SRCS KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp )
+set( kml_SRCS KmlDocument.cpp KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp )
+
+macro_optional_find_package( quazip )
+marble_set_package_properties( quazip PROPERTIES DESCRIPTION "reading and writing of ZIP archives" )
+marble_set_package_properties( quazip PROPERTIES URL "http://quazip.sourceforge.net/" )
+marble_set_package_properties( quazip PROPERTIES TYPE OPTIONAL PURPOSE "reading and displaying .kmz files" )
+if( QUAZIP_FOUND )
+  add_definitions( -DMARBLE_HAVE_QUAZIP )
+  set( kml_SRCS ${kml_SRCS} KmzHandler.cpp )
+  set( KmlPlugin_LIBS ${QUAZIP_LIBRARIES} )
+endif( QUAZIP_FOUND )
 
 marble_add_plugin( KmlPlugin ${kml_SRCS} )
 

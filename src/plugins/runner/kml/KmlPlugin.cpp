@@ -20,7 +20,7 @@ KmlPlugin::KmlPlugin( QObject *parent ) :
 
 QString KmlPlugin::name() const
 {
-    return tr( "Kml File Parser" );
+    return tr( "KML File Parser" );
 }
 
 QString KmlPlugin::nameId() const
@@ -30,23 +30,24 @@ QString KmlPlugin::nameId() const
 
 QString KmlPlugin::version() const
 {
-    return "1.0";
+    return "1.1";
 }
 
 QString KmlPlugin::description() const
 {
-    return tr( "Create GeoDataDocument from Kml Files" );
+    return tr( "Create GeoDataDocument from KML and KMZ Files" );
 }
 
 QString KmlPlugin::copyrightYears() const
 {
-    return "2011";
+    return "2011, 2013";
 }
 
 QList<PluginAuthor> KmlPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" )
+            << PluginAuthor( "Dennis Nienhüser", "earthwings@gentoo.org" );
 }
 
 QString KmlPlugin::fileFormatDescription() const
@@ -56,7 +57,11 @@ QString KmlPlugin::fileFormatDescription() const
 
 QStringList KmlPlugin::fileExtensions() const
 {
+#ifdef MARBLE_HAVE_QUAZIP
+    return QStringList() << "kml" << "kmz";
+#else
     return QStringList() << "kml";
+#endif
 }
 
 ParsingRunner* KmlPlugin::newRunner() const
