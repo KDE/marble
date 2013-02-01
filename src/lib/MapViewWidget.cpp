@@ -339,13 +339,13 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         QGridLayout* layout = new QGridLayout;
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 0 ), 0, 0 );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 0 ), 0, 1 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 0, 0 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 0, 1 );
         d->m_mapViewUi.line->setVisible( false );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 1, 0 );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 1, 1 );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 2 ), 2, 0 );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 3 ), 2, 1 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 2 ), 1, 0 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 2 ), 1, 1 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 3 ), 2, 0 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 4 ), 2, 1 );
         d->m_mapViewUi.verticalLayout->insertLayout( 0, layout );
         d->m_mapViewUi.mapThemeComboBox->setModel( &d->m_mapSortProxy );
         d->m_mapViewUi.mapThemeComboBox->setIconSize( QSize( 48, 48 ) );
@@ -374,6 +374,7 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
                  this,                                 SLOT( showContextMenu( QPoint ) ) );
 
         d->m_mapViewUi.mapThemeComboBox->setVisible( false );
+        d->setupToolBar();
     }
 
     connect( d->m_mapViewUi.projectionComboBox,    SIGNAL( activated( int ) ),
@@ -424,11 +425,6 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 
     d->updateMapFilter();
     d->updateMapThemeView();
-
-    const bool smallscreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    if ( !smallscreen ) {
-        d->setupToolBar();
-    }
     setProjection(widget->projection());
 }
 
