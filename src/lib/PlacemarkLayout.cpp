@@ -382,10 +382,6 @@ QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport ) con
 QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport )
 {
     m_runtimeTrace.clear();
-    if ( !m_showPlaces && !m_showCities && !m_showTerrain && !m_showOtherPlaces &&
-         !m_showLandingSites && !m_showCraters && !m_showMaria )
-        return QVector<VisiblePlacemark *>();
-
     if ( m_placemarkModel.rowCount() <= 0 )
         return QVector<VisiblePlacemark *>();
 
