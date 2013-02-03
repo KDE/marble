@@ -94,6 +94,17 @@ public:
     void setFileName( const QString &value );
 
     /**
+     * @brief The URI relative paths should be resolved against
+     */
+    QString baseUri() const;
+
+    /**
+     * @brief Change the URI for resolving relative paths.
+     * See http://tools.ietf.org/html/rfc3986#section-5
+     */
+    void setBaseUri( const QString &baseUri );
+
+    /**
      * @brief the NetworkLinkControl of the file
      */
     GeoDataNetworkLinkControl networkLinkControl() const;

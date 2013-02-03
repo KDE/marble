@@ -85,6 +85,17 @@ void GeoDataDocument::setFileName( const QString &value )
     p()->m_filename = value;
 }
 
+QString GeoDataDocument::baseUri() const
+{
+    return p()->m_baseUri;
+}
+
+void GeoDataDocument::setBaseUri( const QString &baseUrl )
+{
+    detach();
+    p()->m_baseUri = baseUrl;
+}
+
 GeoDataNetworkLinkControl GeoDataDocument::networkLinkControl() const
 {
     return p()->m_networkLinkControl;

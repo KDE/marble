@@ -76,6 +76,7 @@ void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     KmlDocument* doc = static_cast<KmlDocument*>( document );
     doc->setDocumentRole( role );
     doc->setFileName( fileName );
+    doc->setBaseUri( kmlFileName );
     doc->setFiles( kmzPath, kmzFiles );
 
     file.close();
