@@ -273,8 +273,8 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
             labelNodes << polygon.at( polygon.size() - 1 );
         }
 
-        // The Label at the start of the polyline:
-        for ( int it = polygon.size() - 1; it > 1; --it ) {
+        // The Label at the end of the polyline:
+        for ( int it = polygon.size() - 2; it > 0; --it ) {
             currentAllowsLabel = pointAllowsLabel( polygon.at( it ) );
 
             if ( currentAllowsLabel ) {
