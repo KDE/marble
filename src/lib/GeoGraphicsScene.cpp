@@ -75,7 +75,13 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAl
         right.setNorth( box.north() );
         right.setSouth( box.south() );
 
-        return items( left, zoomLevel ) + items( right, zoomLevel );
+        QList< GeoGraphicsItem* > allItems = items( left, zoomLevel );
+        foreach( GeoGraphicsItem* item, items( right, zoomLevel ) ) {
+            if ( !allItems.contains( item ) ) {
+                allItems << item;
+            }
+        }
+        return allItems;
     }
 
     QList< GeoGraphicsItem* > result;
