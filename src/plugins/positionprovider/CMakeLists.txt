@@ -27,7 +27,7 @@ IF(QTLOCATION_FOUND)
      ADD_SUBDIRECTORY( qtmobility )
 ENDIF(QTLOCATION_FOUND)
 
-FIND_PACKAGE(libwlocate)
+macro_optional_find_package(libwlocate)
 marble_set_package_properties( libwlocate PROPERTIES DESCRIPTION "WLAN-based geolocation" )
 marble_set_package_properties( libwlocate PROPERTIES URL "http://www.openwlanmap.org/" )
 marble_set_package_properties( libwlocate PROPERTIES TYPE OPTIONAL PURPOSE "Position information based on neighboring WLAN networks" )
