@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010 Torsten Rahn <rahn@kde.org>
+// Copyright 2013      Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
 //
 
 #include "LocalDatabaseRunner.h"
@@ -41,7 +42,7 @@ void LocalDatabaseRunner::search( const QString &searchTerm, const GeoDataLatLon
     QVector<GeoDataPlacemark*> vector;
 
     if (model()) {
-        QAbstractItemModel * placemarkModel = model()->placemarkModel();
+        const QAbstractItemModel * placemarkModel = model()->placemarkModel();
 
         if (placemarkModel) {
             QModelIndexList resultList;

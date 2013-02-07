@@ -7,7 +7,7 @@
 //
 // Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
 // Copyright 2011 Thibaut Gridel <tgridel@free.fr>
-// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012,2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
 #ifndef MARBLE_REVERSEGEOCODINGRUNNER_H
 #define MARBLE_REVERSEGEOCODINGRUNNER_H
@@ -32,7 +32,7 @@ public:
     /**
      * Stores a pointer to the currently used model
      */
-    void setModel( MarbleModel * model );
+    void setModel( const MarbleModel *model );
 
     /**
      * Start a reverse geocoding request. Called by MarbleRunnerManager, runners
@@ -53,10 +53,10 @@ protected:
     /**
      * Access to the currently used model, or null if no was set with @see setModel
      */
-    MarbleModel *model();
+    const MarbleModel *model() const;
 
 private:
-    MarbleModel *m_model;
+    const MarbleModel *m_model;
 };
 
 }

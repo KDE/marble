@@ -7,7 +7,7 @@
 //
 // Copyright 2005-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2010-2011 Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
+// Copyright 2010-2013  Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
 //
 
 //
@@ -117,6 +117,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     GeoDataTreeModel *treeModel();
     QAbstractItemModel *placemarkModel();
+    const QAbstractItemModel *placemarkModel() const;
     QItemSelectionModel *placemarkSelectionModel();
 
     /**

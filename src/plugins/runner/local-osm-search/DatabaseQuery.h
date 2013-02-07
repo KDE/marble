@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_DATABASEQUERY_H
@@ -39,7 +40,7 @@ public:
         DistanceFormat /// display results with distance information
     };
 
-    DatabaseQuery( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
+    DatabaseQuery( const MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
     QueryType queryType() const;
 

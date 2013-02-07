@@ -6,21 +6,21 @@
 // the source code.
 //
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
 //
 
 #include "DatabaseQuery.h"
 
-#include "MarbleMap.h"
+#include "GeoDataLatLonAltBox.h"
 #include "MarbleModel.h"
 #include "PositionTracking.h"
-#include "ViewportParams.h"
 
 #include <QtCore/QMap>
 
 namespace Marble
 {
 
-DatabaseQuery::DatabaseQuery( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
+DatabaseQuery::DatabaseQuery( const MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
     m_queryType( BroadSearch ), m_resultFormat( AddressFormat ), m_searchTerm( searchTerm.trimmed() ),
     m_category( OsmPlacemark::UnknownCategory )
 {

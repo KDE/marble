@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 // Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
-// Copyright 2010-2011 Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
+// Copyright 2010-2013  Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
 //
 
 #include "MarbleModel.h"
@@ -415,6 +415,11 @@ GeoDataTreeModel *MarbleModel::treeModel()
 }
 
 QAbstractItemModel *MarbleModel::placemarkModel()
+{
+    return &d->m_sortproxy;
+}
+
+const QAbstractItemModel *MarbleModel::placemarkModel() const
 {
     return &d->m_sortproxy;
 }

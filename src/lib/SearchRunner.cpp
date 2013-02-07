@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012,2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
 #include "SearchRunner.h"
 
@@ -17,12 +17,12 @@ SearchRunner::SearchRunner( QObject *parent ) :
 {
 }
 
-void SearchRunner::setModel( MarbleModel *model )
+void SearchRunner::setModel( const MarbleModel *model )
 {
     m_model = model;
 }
 
-MarbleModel *SearchRunner::model()
+const MarbleModel *SearchRunner::model() const
 {
     return m_model;
 }

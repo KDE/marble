@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012,2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
 #include "ReverseGeocodingRunner.h"
 
@@ -17,12 +17,12 @@ ReverseGeocodingRunner::ReverseGeocodingRunner( QObject *parent ) :
 {
 }
 
-void ReverseGeocodingRunner::setModel( MarbleModel *model )
+void ReverseGeocodingRunner::setModel( const MarbleModel *model )
 {
     m_model = model;
 }
 
-MarbleModel *ReverseGeocodingRunner::model()
+const MarbleModel *ReverseGeocodingRunner::model() const
 {
     return m_model;
 }

@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2012,2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
 #include "RoutingRunner.h"
 
@@ -22,12 +22,12 @@ RoutingRunner::RoutingRunner( QObject *parent ) :
 {
 }
 
-void RoutingRunner::setModel( MarbleModel *model )
+void RoutingRunner::setModel( const MarbleModel *model )
 {
     m_model = model;
 }
 
-MarbleModel *RoutingRunner::model()
+const MarbleModel *RoutingRunner::model() const
 {
     return m_model;
 }
