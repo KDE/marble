@@ -207,7 +207,7 @@ QVariant FavoritesModel::data( const QModelIndex &index, int role ) const
         foreach( AbstractDataPluginItem* item, d->m_itemSet ) {
             if ( item->initialized() && item->isFavorite() ) {
                 if ( count == row ) {
-                    QString const roleName = roleNames().value( role, int( Qt::DisplayRole ) );
+                    QString const roleName = roleNames().value( role );
                     return item->property( roleName.toAscii() );
                 }
                 ++count;
