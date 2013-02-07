@@ -27,7 +27,7 @@
 *                                                                          *
 * Open Source Code. License: GNU LGPL Version 2+                          *
 *                                                                          *
-* Author: Gerhard HOLTKAMP,        20-JAN-2012                              *
+* Author: Gerhard HOLTKAMP,        28-JAN-2013                              *
 ***************************************************************************/
 
 /*------------ include files and definitions -----------------------------*/
@@ -914,6 +914,7 @@ double EclSolar::phmjd (double yearf, double phase, double tdut,
  {
   double tt, jd, k, m, p, f;
   double s, c, gam, u;
+  int tst;
   Eclipse eclp;
 
   // preliminary (modified) Julian Date 
@@ -1003,10 +1004,21 @@ double EclSolar::phmjd (double yearf, double phase, double tdut,
               emag = 1.0;
              };
             if (eph == 1)     // get magnitude of partial eclipse
-            emag = (1.5432 + u - fabs(gam)) / (0.5460 + 2.0*u);
+                emag = (1.5432 + u - fabs(gam)) / (0.5460 + 2.0*u);
+            if (emag < 0.025) // check if low mag eclipse is OK
+             {
+              eph = 0;
+              u = 1.0 / 720; // 2 min steps
+              for (int j=0; j < 288; j++)
+               {
+                tt = ejd - 0.2 + double(j)*u;
+                tst = eclp.solar(tt,tdut,s,c);
+                if (tst > 0) eph = tst;
+               };
+             };
            }
          }
-       }
+       } // end of solar eclipse check
 
       if (phase == 0.5)        // check for lunar eclipse
        {

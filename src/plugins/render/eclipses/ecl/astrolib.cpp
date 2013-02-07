@@ -16,9 +16,8 @@
   University Science Books, Mill Valley, California, 1992
   and modified correspondingly.
 
-  Linux C++ version
-  License: GNU GPL Version 2
-  Copyright : Gerhard HOLTKAMP          11-JAN-2012
+  License: GNU LGPL Version 2+
+  Copyright : Gerhard HOLTKAMP          28-JAN-2013
   ========================================================================= */
 
 #include <cmath>
@@ -234,12 +233,13 @@ double DefTdUt (int yi)
 
   if (yr > 1899)
    {
-    if (yr >= 2000)  // this corrects for observations until DEC 2006
+    if (yr >= 2000)  // this corrects for observations until 2013
      {
       if (yr > 2006) yr -= 1;
       if (yr > 2006) yr -= 1;  // no leap second at the end of 2007
       if (yr > 2007) yr -= 1;  // no leap second at the end of 2009
       if (yr > 2007) yr -= 1;  // no leap second at the end of 2010
+      if (yr > 2008) yr -= 1;  // no leap second at the end of 2012
       yr -= 6;
       if (yr < 1999) yr = 1999;
      };
@@ -1962,16 +1962,16 @@ int Eclipse::solar (double jd, double tdut, double& phi, double& lamda)
 	else
 	 {
 	  if (r0 < (1.0 + 0.5 * fabs(d_umbra)))
-		 {
-		  if (d_umbra > 0) phase = 2;  // non-central annular eclipse
-		  else phase = 3;     // non-central total eclipse
-		 }
+           {
+            if (d_umbra > 0) phase = 2;  // non-central annular eclipse
+            else phase = 3;     // non-central total eclipse
+           }
 	  else
-		 {
-		  if (r0 < (1.0 + 0.5*d_penumbra)) phase = 1;   // partial eclipse
-		  else phase = 0;   // no eclipse
-		 }
-	  }
+           {
+            if (r0 < (1.0 + 0.5*d_penumbra)) phase = 1;   // partial eclipse
+            else phase = 0;   // no eclipse
+           }
+	 }
 
 	rs[2]*=flat;  // restore from flatting of the Earth
 	rm[2]*=flat;
