@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "LocalOsmSearchPlugin.h"
@@ -19,7 +20,7 @@ namespace Marble
 
 LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
     SearchRunnerPlugin( parent ),
-    m_databaseLoaded( false )
+    m_databaseFiles()
 {
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
@@ -35,6 +36,8 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
     }
     connect( &m_watcher, SIGNAL( directoryChanged( QString ) ), this, SLOT( updateDirectory( QString ) ) );
     connect( &m_watcher, SIGNAL( fileChanged( QString ) ), this, SLOT( updateFile( QString ) ) );
+
+    updateDatabase();
 }
 
 QString LocalOsmSearchPlugin::name() const
@@ -75,38 +78,34 @@ QList<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
 
 SearchRunner* LocalOsmSearchPlugin::newRunner() const
 {
-    if ( !m_databaseLoaded ) {
-        m_databaseLoaded = true;
-        updateDatabase();
-    }
-    return new LocalOsmSearchRunner( &m_database );
+    return new LocalOsmSearchRunner( m_databaseFiles );
 }
 
-void LocalOsmSearchPlugin::addDatabaseDirectory( const QString &path ) const
+void LocalOsmSearchPlugin::addDatabaseDirectory( const QString &path )
 {
     QDir directory( path );
     QStringList const nameFilters = QStringList() << "*.sqlite";
     QStringList const files( directory.entryList( nameFilters, QDir::Files ) );
     foreach( const QString &file, files ) {
-        m_database.addFile( directory.filePath( file ) );
+        m_databaseFiles << directory.filePath( file );
     }
 }
 
-void LocalOsmSearchPlugin::updateDirectory( const QString & ) const
+void LocalOsmSearchPlugin::updateDirectory( const QString & )
 {
-    m_databaseLoaded = false;
+    updateDatabase();
 }
 
-void LocalOsmSearchPlugin::updateFile( const QString &file ) const
+void LocalOsmSearchPlugin::updateFile( const QString &file )
 {
     if ( file.endsWith( QLatin1String( ".sqlite" ) ) ) {
-        m_databaseLoaded = false;
+        updateDatabase();
     }
 }
 
-void LocalOsmSearchPlugin::updateDatabase() const
+void LocalOsmSearchPlugin::updateDatabase()
 {
-    m_database.clear();
+    m_databaseFiles.clear();
     QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
     foreach ( const QString &baseDir, baseDirs ) {
         QString base = baseDir + "/maps/earth/placemarks/";

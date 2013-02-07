@@ -6,11 +6,12 @@
 // the source code.
 //
 // Copyright 2011 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+//
 
 #include "LocalOsmSearchRunner.h"
 #include "DatabaseQuery.h"
 
-#include "OsmDatabase.h"
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -24,9 +25,9 @@ namespace Marble
 
 QMap<OsmPlacemark::OsmCategory, GeoDataFeature::GeoDataVisualCategory> LocalOsmSearchRunner::m_categoryMap;
 
-LocalOsmSearchRunner::LocalOsmSearchRunner( OsmDatabase *database, QObject *parent ) :
+LocalOsmSearchRunner::LocalOsmSearchRunner( const QStringList &databaseFiles, QObject *parent ) :
     SearchRunner( parent ),
-    m_database( database )
+    m_database( databaseFiles )
 {
     if ( m_categoryMap.isEmpty() ) {
         m_categoryMap[OsmPlacemark::UnknownCategory] = GeoDataFeature::OsmSite;
@@ -99,7 +100,7 @@ void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLo
 {
     const DatabaseQuery userQuery( model(), searchTerm, preferred );
 
-    QVector<OsmPlacemark> placemarks = m_database->find( userQuery );
+    QVector<OsmPlacemark> placemarks = m_database.find( userQuery );
 
     QVector<GeoDataPlacemark*> result;
     foreach( const OsmPlacemark &placemark, placemarks ) {

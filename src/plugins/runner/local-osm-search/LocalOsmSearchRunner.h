@@ -6,12 +6,15 @@
 // the source code.
 //
 // Copyright 2011 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+//
 
 #ifndef MARBLE_LOCALOSMSEARCHRUNNER_H
 #define MARBLE_LOCALOSMSEARCHRUNNER_H
 
 #include "SearchRunner.h"
 
+#include "OsmDatabase.h"
 #include "OsmPlacemark.h"
 #include "GeoDataFeature.h"
 
@@ -20,20 +23,18 @@
 namespace Marble
 {
 
-class OsmDatabase;
-
 class LocalOsmSearchRunner : public SearchRunner
 {
     Q_OBJECT
 public:
-    explicit LocalOsmSearchRunner( OsmDatabase *m_database, QObject *parent = 0 );
+    explicit LocalOsmSearchRunner( const QStringList &databaseFiles, QObject *parent = 0 );
 
     ~LocalOsmSearchRunner();
 
     virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
 private:
-    OsmDatabase *m_database;
+    OsmDatabase m_database;
 
     static QMap<OsmPlacemark::OsmCategory, GeoDataFeature::GeoDataVisualCategory> m_categoryMap;
 };

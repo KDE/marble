@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -45,18 +46,16 @@ public:
     virtual SearchRunner* newRunner() const;
 
 private Q_SLOTS:
-    void updateDirectory( const QString &directory ) const;
+    void updateDirectory( const QString &directory );
 
-    void updateFile( const QString &directory ) const;
+    void updateFile( const QString &directory );
 
 private:
-    void addDatabaseDirectory( const QString &path ) const;
+    void addDatabaseDirectory( const QString &path );
 
-    void updateDatabase() const;
+    void updateDatabase();
 
-    /** @todo: FIXME newRunner() is another virtual method that shouldn't be const */
-    mutable bool m_databaseLoaded;
-    mutable OsmDatabase m_database;
+    QStringList m_databaseFiles;
     QFileSystemWatcher m_watcher;
 };
 

@@ -71,28 +71,25 @@ private:
 
 }
 
-OsmDatabase::OsmDatabase()
+OsmDatabase::OsmDatabase( const QStringList &databaseFiles ) :
+    m_databaseFiles( databaseFiles )
 {
-    m_database = QSqlDatabase::addDatabase( "QSQLITE", "marble/local-osm-search" );
-}
-
-void OsmDatabase::addFile( const QString &fileName )
-{
-    m_databases << fileName;
 }
 
 QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
 {
-    if ( m_databases.isEmpty() ) {
+    if ( m_databaseFiles.isEmpty() ) {
         return QVector<OsmPlacemark>();
     }
+
+    QSqlDatabase database = QSqlDatabase::addDatabase( "QSQLITE", QString( "marble/local-osm-search-%1" ).arg( reinterpret_cast<size_t>( this ) ) );
 
     QVector<OsmPlacemark> result;
     QTime timer;
     timer.start();
-    foreach( const QString &databaseFile, m_databases ) {
-        m_database.setDatabaseName( databaseFile );
-        if ( !m_database.open() ) {
+    foreach( const QString &databaseFile, m_databaseFiles ) {
+        database.setDatabaseName( databaseFile );
+        if ( !database.open() ) {
             qWarning() << "Failed to connect to database" << databaseFile;
         }
 
@@ -102,7 +99,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
             regionTimer.start();
             // Nested set model to support region hierarchies, see http://en.wikipedia.org/wiki/Nested_set_model
             const QString regionsQueryString = "SELECT lft, rgt FROM regions WHERE name LIKE '%" + userQuery.region() + "%';";
-            QSqlQuery regionsQuery( regionsQueryString, m_database );
+            QSqlQuery regionsQuery( regionsQueryString, database );
             if ( regionsQuery.lastError().isValid() ) {
                 qWarning() << regionsQuery.lastError() << "in" << databaseFile << "with query" << regionsQuery.lastQuery();
             }
@@ -170,7 +167,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
 
         /** @todo: sort/filter results from several databases */
 
-        QSqlQuery query( m_database );
+        QSqlQuery query( database );
         query.setForwardOnly( true );
         QTime queryTimer;
         queryTimer.start();
@@ -301,11 +298,6 @@ QString OsmDatabase::wildcardQuery( const QString &term ) const
     } else {
         return " = '" + result + '\'';
     }
-}
-
-void OsmDatabase::clear()
-{
-    m_databases.clear();
 }
 
 }
