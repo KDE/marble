@@ -8,6 +8,7 @@
 // Copyright 2011 Dennis Nienhüser <earthwings@gentoo.org>
 
 #include "LocalOsmSearchRunner.h"
+#include "DatabaseQuery.h"
 
 #include "OsmDatabase.h"
 #include "MarbleDebug.h"
@@ -96,7 +97,9 @@ LocalOsmSearchRunner::~LocalOsmSearchRunner()
 
 void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {
-    QVector<OsmPlacemark> placemarks = m_database->find( model(), searchTerm, preferred );
+    const DatabaseQuery userQuery( model(), searchTerm, preferred );
+
+    QVector<OsmPlacemark> placemarks = m_database->find( userQuery );
 
     QVector<GeoDataPlacemark*> result;
     foreach( const OsmPlacemark &placemark, placemarks ) {

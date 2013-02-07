@@ -19,9 +19,8 @@
 
 namespace Marble {
 
-class MarbleModel;
+class DatabaseQuery;
 class GeoDataCoordinates;
-class GeoDataLatLonAltBox;
 
 class OsmDatabase
 {
@@ -37,7 +36,7 @@ public:
     void clear();
 
     /** Search the database for matching regions and placemarks */
-    QVector<OsmPlacemark> find( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
+    QVector<OsmPlacemark> find( const DatabaseQuery &userQuery );
 
 private:
     QString wildcardQuery( const QString &term ) const;

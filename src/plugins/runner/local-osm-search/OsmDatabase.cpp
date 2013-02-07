@@ -81,13 +81,11 @@ void OsmDatabase::addFile( const QString &fileName )
     m_databases << fileName;
 }
 
-QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
+QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
 {
     if ( m_databases.isEmpty() ) {
         return QVector<OsmPlacemark>();
     }
-
-    DatabaseQuery userQuery( model, searchTerm, preferred );
 
     QVector<OsmPlacemark> result;
     QTime timer;
@@ -152,7 +150,7 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
             }
         } else if ( userQuery.queryType() == DatabaseQuery::BroadSearch ) {
             queryString += " WHERE regions.id = places.region"
-                    " AND places.name " + wildcardQuery( searchTerm );
+                    " AND places.name " + wildcardQuery( userQuery.searchTerm() );
         } else {
             queryString += " WHERE regions.id = places.region"
                     "   AND places.name " + wildcardQuery( userQuery.street() );
