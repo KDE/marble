@@ -46,7 +46,7 @@ public:
     QString m_lastSearchTerm;
     GeoDataLatLonAltBox m_lastPreferredBox;
     QMutex m_modelMutex;
-    MarblePlacemarkModel *m_model;
+    MarblePlacemarkModel m_model;
     QVector<GeoDataPlacemark*> m_placemarkContainer;
     QList<GeoDataCoordinates> m_reverseGeocodingResults;
     QString m_reverseGeocodingResult;
@@ -88,7 +88,7 @@ MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( MarbleRunnerManager* par
         m_pluginManager( pluginManager ),
         m_watchdogTimer( 30000 )
 {
-    m_model->setPlacemarkContainer( &m_placemarkContainer );
+    m_model.setPlacemarkContainer( &m_placemarkContainer );
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
     qRegisterMetaType<GeoDataPlacemark>( "GeoDataPlacemark" );
     qRegisterMetaType<GeoDataCoordinates>( "GeoDataCoordinates" );
@@ -130,7 +130,7 @@ void MarbleRunnerManagerPrivate::cleanupSearchTask( SearchTask* task )
     mDebug() << "removing search task" << m_searchTasks.size() << (long)task;
     if ( m_searchTasks.isEmpty() ) {
         if( m_placemarkContainer.isEmpty() ) {
-            emit q->searchResultChanged( m_model );
+            emit q->searchResultChanged( &m_model );
             emit q->searchResultChanged( m_placemarkContainer );
         }
         emit q->searchFinished( m_lastSearchTerm );
@@ -186,7 +186,7 @@ MarbleRunnerManager::~MarbleRunnerManager()
 void MarbleRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
 {
     if ( searchTerm == d->m_lastSearchTerm && preferred == d->m_lastPreferredBox ) {
-      emit searchResultChanged( d->m_model );
+      emit searchResultChanged( &d->m_model );
       emit searchResultChanged( d->m_placemarkContainer );
       emit searchFinished( searchTerm );
       emit placemarkSearchFinished();
@@ -198,11 +198,11 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
     d->m_searchTasks.clear();
 
     d->m_modelMutex.lock();
-    d->m_model->removePlacemarks( "MarbleRunnerManager", 0, d->m_placemarkContainer.size() );
+    d->m_model.removePlacemarks( "MarbleRunnerManager", 0, d->m_placemarkContainer.size() );
     qDeleteAll( d->m_placemarkContainer );
     d->m_placemarkContainer.clear();
     d->m_modelMutex.unlock();
-    emit searchResultChanged( d->m_model );
+    emit searchResultChanged( &d->m_model );
 
     if ( searchTerm.trimmed().isEmpty() ) {
         emit searchFinished( searchTerm );
@@ -250,9 +250,9 @@ void MarbleRunnerManagerPrivate::addSearchResult( QVector<GeoDataPlacemark*> res
             m_placemarkContainer.append( result[i] );
         }
     }
-    m_model->addPlacemarks( start, result.size() );
+    m_model.addPlacemarks( start, result.size() );
     m_modelMutex.unlock();
-    emit q->searchResultChanged( m_model );
+    emit q->searchResultChanged( &m_model );
     emit q->searchResultChanged( m_placemarkContainer );
 }
 
