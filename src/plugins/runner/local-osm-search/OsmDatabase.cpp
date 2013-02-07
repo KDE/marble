@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "OsmDatabase.h"
@@ -33,21 +34,40 @@ namespace Marble {
 
 namespace {
 
-static GeoDataCoordinates s_currentPosition;
-static DatabaseQuery* s_currentQuery = 0;
-
-bool placemarkSmallerDistance( const OsmPlacemark &a, const OsmPlacemark &b )
+class PlacemarkSmallerDistance
 {
-    return distanceSphere( a.longitude() * DEG2RAD, a.latitude() * DEG2RAD,
-                           s_currentPosition.longitude(), s_currentPosition.latitude() )
-         < distanceSphere( b.longitude() * DEG2RAD, b.latitude() * DEG2RAD,
-                           s_currentPosition.longitude(), s_currentPosition.latitude() );
-}
+public:
+    PlacemarkSmallerDistance( const GeoDataCoordinates &currentPosition ) :
+        m_currentPosition( currentPosition )
+    {}
 
-bool placemarkHigherScore( const OsmPlacemark &a, const OsmPlacemark &b )
+    bool operator()( const OsmPlacemark &a, const OsmPlacemark &b ) const
+    {
+        return distanceSphere( a.longitude() * DEG2RAD, a.latitude() * DEG2RAD,
+                               m_currentPosition.longitude(), m_currentPosition.latitude() )
+             < distanceSphere( b.longitude() * DEG2RAD, b.latitude() * DEG2RAD,
+                               m_currentPosition.longitude(), m_currentPosition.latitude() );
+    }
+
+private:
+    GeoDataCoordinates m_currentPosition;
+};
+
+class PlacemarkHigherScore
 {
-    return a.matchScore( s_currentQuery ) > b.matchScore( s_currentQuery );
-}
+public:
+    PlacemarkHigherScore( const DatabaseQuery *currentQuery ) :
+        m_currentQuery( currentQuery )
+    {}
+
+    bool operator()( const OsmPlacemark &a, const OsmPlacemark &b ) const
+    {
+        return a.matchScore( m_currentQuery ) > b.matchScore( m_currentQuery );
+    }
+
+private:
+    const DatabaseQuery *const m_currentQuery;
+};
 
 }
 
@@ -180,12 +200,11 @@ QVector<OsmPlacemark> OsmDatabase::find( MarbleModel* model, const QString &sear
     unique( result );
 
     if ( userQuery.position().isValid() ) {
-        s_currentPosition = userQuery.position();
+        const PlacemarkSmallerDistance placemarkSmallerDistance( userQuery.position() );
         qSort( result.begin(), result.end(), placemarkSmallerDistance );
     } else {
-        s_currentQuery = &userQuery;
+        const PlacemarkHigherScore placemarkHigherScore( &userQuery );
         qSort( result.begin(), result.end(), placemarkHigherScore );
-        s_currentQuery = 0;
     }
 
     if ( result.size() > 50 ) {
