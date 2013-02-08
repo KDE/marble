@@ -93,16 +93,19 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
     foreach( const QString &databaseFile, m_databases ) {
         m_database.setDatabaseName( databaseFile );
         if ( !m_database.open() ) {
-            mDebug() << "Failed to connect to database " << databaseFile;
+            qWarning() << "Failed to connect to database" << databaseFile;
         }
 
         QString regionRestriction;
         if ( !userQuery.region().isEmpty() ) {
             // Nested set model to support region hierarchies, see http://en.wikipedia.org/wiki/Nested_set_model
-            QSqlQuery regionsQuery( "SELECT lft, rgt FROM regions WHERE name LIKE '%" + userQuery.region() + "%';", m_database );
+            const QString regionsQueryString = "SELECT lft, rgt FROM regions WHERE name LIKE '%" + userQuery.region() + "%';";
+
+            mDebug() << Q_FUNC_INFO << "region query in" << databaseFile << "with query" << regionsQueryString;
+
+            QSqlQuery regionsQuery( regionsQueryString, m_database );
             if ( regionsQuery.lastError().isValid() ) {
-                mDebug() << "Error when executing query" << regionsQuery.executedQuery();
-                mDebug() << "Sql reports" << regionsQuery.lastError();
+                qWarning() << regionsQuery.lastError() << "in" << databaseFile << "with query" << regionsQuery.lastQuery();
             }
             regionRestriction = " AND (";
             bool first = true;
@@ -166,10 +169,12 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
 
         /** @todo: sort/filter results from several databases */
 
+        mDebug() << Q_FUNC_INFO << "query in" << databaseFile << "with query" << queryString;
+
         QSqlQuery query( m_database );
         query.setForwardOnly( true );
         if ( !query.exec( queryString ) ) {
-            mDebug() << "Failed to execute query" << query.lastError();
+            qWarning() << query.lastError() << "in" << databaseFile << "with query" << query.lastQuery();
             return result;
         }
 
@@ -188,11 +193,9 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
             placemark.setLatitude( query.value(5).toFloat() );
             result.push_back( placemark );
         }
-
-        // mDebug() << "Query string: " << queryString;
     }
 
-    mDebug() << "Offline OSM search query took " << timer.elapsed() << " ms.";
+    mDebug() << "Offline OSM search query took" << timer.elapsed() << "ms for" << result.count() << "results.";
 
     qSort( result.begin(), result.end() );
     unique( result );
