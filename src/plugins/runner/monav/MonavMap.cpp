@@ -65,10 +65,10 @@ void MonavMap::parseBoundingBox( const QFileInfo &file )
                         points << poly->at( j );
                     }
                     m_tiles.push_back( *poly );
-                }
 
-                if ( poly->size() > 1500 ) {
-                    tooLarge = true;
+                    if ( poly->size() > 1500 ) {
+                        tooLarge = true;
+                    }
                 }
             }
         } else {
