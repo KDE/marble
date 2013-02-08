@@ -11,10 +11,11 @@
 #define MARBLE_LOCALOSMSEARCHRUNNER_H
 
 #include "SearchRunner.h"
+
 #include "OsmPlacemark.h"
 #include "GeoDataFeature.h"
 
-#include <QtCore/QString>
+#include <QtCore/QMap>
 
 namespace Marble
 {
