@@ -98,29 +98,30 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
 
         QString regionRestriction;
         if ( !userQuery.region().isEmpty() ) {
+            QTime regionTimer;
+            regionTimer.start();
             // Nested set model to support region hierarchies, see http://en.wikipedia.org/wiki/Nested_set_model
             const QString regionsQueryString = "SELECT lft, rgt FROM regions WHERE name LIKE '%" + userQuery.region() + "%';";
-
-            mDebug() << Q_FUNC_INFO << "region query in" << databaseFile << "with query" << regionsQueryString;
-
             QSqlQuery regionsQuery( regionsQueryString, m_database );
             if ( regionsQuery.lastError().isValid() ) {
                 qWarning() << regionsQuery.lastError() << "in" << databaseFile << "with query" << regionsQuery.lastQuery();
             }
             regionRestriction = " AND (";
-            bool first = true;
+            int regionCount = 0;
             while ( regionsQuery.next() ) {
-                if ( first ) {
-                    first = false;
-                } else {
+                if ( regionCount > 0 ) {
                     regionRestriction += " OR ";
                 }
                 regionRestriction += " (regions.lft >= " + regionsQuery.value( 0 ).toString();
                 regionRestriction += " AND regions.lft <= " + regionsQuery.value( 1 ).toString() + ')';
+                regionCount++;
             }
             regionRestriction += ')';
 
-            if ( first ) {
+            mDebug() << Q_FUNC_INFO << "region query in" << databaseFile << "with query" << regionsQueryString
+                     << "took" << regionTimer.elapsed() << "ms for" << regionCount << "results";
+
+            if ( regionCount == 0 ) {
                 continue;
             }
         }
@@ -169,15 +170,16 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
 
         /** @todo: sort/filter results from several databases */
 
-        mDebug() << Q_FUNC_INFO << "query in" << databaseFile << "with query" << queryString;
-
         QSqlQuery query( m_database );
         query.setForwardOnly( true );
+        QTime queryTimer;
+        queryTimer.start();
         if ( !query.exec( queryString ) ) {
             qWarning() << query.lastError() << "in" << databaseFile << "with query" << query.lastQuery();
             continue;
         }
 
+        int resultCount = 0;
         while ( query.next() ) {
             OsmPlacemark placemark;
             if ( userQuery.resultFormat() == DatabaseQuery::DistanceFormat ) {
@@ -191,8 +193,13 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
             placemark.setCategory( (OsmPlacemark::OsmCategory) query.value(3).toInt() );
             placemark.setLongitude( query.value(4).toFloat() );
             placemark.setLatitude( query.value(5).toFloat() );
+
             result.push_back( placemark );
+            resultCount++;
         }
+
+        mDebug() << Q_FUNC_INFO << "query in" << databaseFile << "with query" << queryString
+                 << "took" << queryTimer.elapsed() << "ms for" << resultCount << "results";
     }
 
     mDebug() << "Offline OSM search query took" << timer.elapsed() << "ms for" << result.count() << "results.";
