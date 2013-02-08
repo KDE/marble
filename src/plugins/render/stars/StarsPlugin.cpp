@@ -804,7 +804,6 @@ void StarsPlugin::loadStars()
         m_idHash[id] = starIndex;
         // Increment Index for use in hash
         ++starIndex;
-        mDebug() << "id" << id << "RA:" << ra << "DE:" << de << "MAG:" << mag << "Color Id:" << colorId;
     }
 
     // load the Sun pixmap
