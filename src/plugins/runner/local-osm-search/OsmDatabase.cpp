@@ -175,7 +175,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
         query.setForwardOnly( true );
         if ( !query.exec( queryString ) ) {
             qWarning() << query.lastError() << "in" << databaseFile << "with query" << query.lastQuery();
-            return result;
+            continue;
         }
 
         while ( query.next() ) {
