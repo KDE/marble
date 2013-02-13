@@ -13,12 +13,11 @@
 #define AREAANNOTATION_H
 
 #include "SceneGraphicsItem.h"
-#include "GeoDataPolygon.h"
 
 namespace Marble
 {
 
-class  AreaAnnotation : public SceneGraphicsItem
+class AreaAnnotation : public SceneGraphicsItem
 {
 public:
     AreaAnnotation( GeoDataPlacemark *placemark );
@@ -29,7 +28,6 @@ public:
     virtual bool mouseReleaseEvent( QMouseEvent *event );
 
 private:
-    GeoDataPlacemark *m_placemark;
     int m_movedPoint;
     const ViewportParams *m_viewport;
 };

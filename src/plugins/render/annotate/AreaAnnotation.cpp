@@ -23,7 +23,6 @@ namespace Marble
 
 AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark )
     :SceneGraphicsItem( placemark ),
-      m_placemark( placemark ),
       m_movedPoint( -1 ),
       m_viewport( 0 )
 {
@@ -36,8 +35,8 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
 
     painter->save();
     painter->setBrush( Oxygen::aluminumGray4 );
-    if( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
+    if( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing &ring = polygon->outerBoundary();
         for( int i=0; i< ring.size(); ++i ) {
             painter->drawEllipse( ring.at(i) , 10, 10 );
@@ -68,8 +67,8 @@ bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
         || m_movedPoint < 0 ) {
         return false;
     }
-    if( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
+    if( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing &ring = polygon->outerBoundary();
         qreal lon, lat;
         m_viewport->geoCoordinates( event->pos().x(),
