@@ -73,6 +73,7 @@
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
+#include "MapThemeDownloadDialog.h"
 #include "MapWizard.h"
 #include "StackableWindow.h"
 #include "GoToDialog.h"
@@ -624,8 +625,8 @@ void MainWindow::createDockWidgets()
 
 void MainWindow::openMapSite()
 {
-    if( !QDesktopServices::openUrl( QUrl( "http://edu.kde.org/marble/maps-4.5.php" ) ) )
-    qDebug() << "URL not opened";
+    QPointer<MapThemeDownloadDialog> dialog( new MapThemeDownloadDialog( this ) );
+    dialog->show();
 }
 
 void MainWindow::exportMapScreenShot()
