@@ -30,6 +30,10 @@
 #include <QtCore/QTimer>
 #include <QtCore/QFileInfo>
 #include <QtGui/QMessageBox>
+#include <QtGui/QMainWindow>
+#include <QtGui/QDockWidget>
+#include <QtGui/QShortcut>
+#include <QtGui/QMenu>
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -44,13 +48,20 @@
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
+#include "routing/RoutingWidget.h"
 #include "ExternalEditorDialog.h"
+#include "CurrentLocationWidget.h"
+#include "SearchWidget.h"
+#include "MapViewWidget.h"
+#include "FileViewWidget.h"
+#include "LegendWidget.h"
 
 namespace Marble
 {
 
 ControlView::ControlView( QWidget *parent )
-   : QWidget( parent )
+   : QWidget( parent ),
+     m_searchDock( 0 )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
 
@@ -517,6 +528,85 @@ void ControlView::setExternalMapEditor( const QString &editor )
     m_externalEditor = editor;
 }
 
+QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
+{
+    Q_ASSERT( !m_searchDock && "Please create dock widgets just once" );
+
+    mainWindow->setTabPosition( Qt::LeftDockWidgetArea, QTabWidget::North );
+    mainWindow->setTabPosition( Qt::RightDockWidgetArea, QTabWidget::North );
+
+    QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), mainWindow );
+    routingDock->setObjectName( "routingDock" );
+    routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    RoutingWidget* routingWidget = new RoutingWidget( marbleWidget(), mainWindow );
+    routingDock->setWidget( routingWidget );
+    mainWindow->addDockWidget( Qt::LeftDockWidgetArea, routingDock );
+
+    QDockWidget *locationDock = new QDockWidget( tr( "Location" ), this );
+    locationDock->setObjectName( "locationDock" );
+    locationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    CurrentLocationWidget* locationWidget = new CurrentLocationWidget( this );
+    locationWidget->setMarbleWidget( marbleWidget() );
+    locationDock->setWidget( locationWidget );
+    mainWindow->addDockWidget( Qt::LeftDockWidgetArea, locationDock );
+
+    m_searchDock = new QDockWidget( tr( "Search" ), this );
+    m_searchDock->setObjectName( "searchDock" );
+    m_searchDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    SearchWidget* searchWidget = new SearchWidget( this );
+    searchWidget->setMarbleWidget( marbleWidget() );
+    m_searchDock->setWidget( searchWidget );
+    mainWindow->addDockWidget( Qt::LeftDockWidgetArea, m_searchDock );
+
+    mainWindow->tabifyDockWidget( m_searchDock, routingDock );
+    mainWindow->tabifyDockWidget( routingDock, locationDock );
+    m_searchDock->raise();
+
+    QKeySequence searchSequence( Qt::CTRL + Qt::Key_F );
+    searchWidget->setToolTip( tr( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchSequence.toString() ) );
+    QShortcut* searchShortcut = new QShortcut( mainWindow );
+    connect( searchShortcut, SIGNAL(activated()), this, SLOT( showSearch() ) );
+
+    QDockWidget *mapViewDock = new QDockWidget( tr( "Map View" ), this );
+    mapViewDock->setObjectName( "mapViewDock" );
+    mapViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    MapViewWidget* mapViewWidget = new MapViewWidget( this );
+    mapViewWidget->setMarbleWidget( marbleWidget() );
+    mapViewDock->setWidget( mapViewWidget );
+    mainWindow->addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
+
+    QDockWidget *fileViewDock = new QDockWidget( tr( "Files" ), this );
+    fileViewDock->setObjectName( "fileViewDock" );
+    fileViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    FileViewWidget* fileViewWidget = new FileViewWidget( this );
+    fileViewWidget->setMarbleWidget( marbleWidget() );
+    fileViewDock->setWidget( fileViewWidget );
+    mainWindow->addDockWidget( Qt::LeftDockWidgetArea, fileViewDock );
+    fileViewDock->hide();
+
+    QDockWidget *legendDock = new QDockWidget( tr( "Legend" ), this );
+    legendDock->setObjectName( "legendDock" );
+    legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    LegendWidget* legendWidget = new LegendWidget( this );
+    legendWidget->setMarbleModel( marbleModel() );
+    connect( legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
+             marbleWidget(), SLOT( setPropertyValue( const QString &, bool ) ) );
+    legendDock->setWidget( legendWidget );
+    mainWindow->addDockWidget( Qt::LeftDockWidgetArea, legendDock );
+
+    mainWindow->tabifyDockWidget( mapViewDock, legendDock );
+    mapViewDock->raise();
+
+    QList<QAction*> panelActions;
+    panelActions << routingDock->toggleViewAction();
+    panelActions << locationDock->toggleViewAction();
+    panelActions << m_searchDock->toggleViewAction();
+    panelActions << mapViewDock->toggleViewAction();
+    panelActions << fileViewDock->toggleViewAction();
+    panelActions << legendDock->toggleViewAction();
+    return panelActions;
+}
+
 void ControlView::search(const QString &searchTerm, SearchMode searchMode )
 {
     m_control->search( searchTerm, searchMode );
@@ -545,6 +635,17 @@ void ControlView::addGeoDataFile( QString filename )
     } else {
         qWarning() << "File" << filename << "does not exist, cannot open it.";
     }
+}
+
+void ControlView::showSearch()
+{
+    if ( !m_searchDock ) {
+        return;
+    }
+
+    m_searchDock->show();
+    m_searchDock->raise();
+    m_searchDock->widget()->setFocus();
 }
 
 }

@@ -112,8 +112,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_routingWindow( 0 ),
         m_trackingWindow( 0 ),
         m_gotoDialog( 0 ),
-        m_routingWidget( 0 ),
-        m_searchDock( 0 )
+        m_routingWidget( 0 )
 {
 #ifdef Q_WS_MAEMO_5
     setAttribute( Qt::WA_Maemo5StackedWindow );
@@ -177,7 +176,6 @@ void MainWindow::initObject(const QVariantMap& cmdLineSettings)
     QCoreApplication::processEvents ();
     setupStatusBar();
     readSettings(cmdLineSettings);
-    showSearch();
 }
 
 void MainWindow::createActions()
@@ -657,81 +655,12 @@ void MainWindow::createStatusBar()
 
 void MainWindow::createDockWidgets()
 {
-    Q_ASSERT( !m_searchDock && "Please create dock widgets just once" );
-
-    setTabPosition( Qt::LeftDockWidgetArea, QTabWidget::North );
-    setTabPosition( Qt::RightDockWidgetArea, QTabWidget::North );
-
-    QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), this );
-    routingDock->setObjectName( "routingDock" );
-    routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    RoutingWidget* routingWidget = new RoutingWidget( m_controlView->marbleWidget(), this );
-    routingDock->setWidget( routingWidget );
-    addDockWidget( Qt::LeftDockWidgetArea, routingDock );
-
-    QDockWidget *locationDock = new QDockWidget( tr( "Location" ), this );
-    locationDock->setObjectName( "locationDock" );
-    locationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    CurrentLocationWidget* locationWidget = new CurrentLocationWidget( this );
-    locationWidget->setMarbleWidget( m_controlView->marbleWidget() );
-    locationDock->setWidget( locationWidget );
-    addDockWidget( Qt::LeftDockWidgetArea, locationDock );
-
-    m_searchDock = new QDockWidget( tr( "Search" ), this );
-    m_searchDock->setObjectName( "searchDock" );
-    m_searchDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    SearchWidget* searchWidget = new SearchWidget( this );
-    searchWidget->setMarbleWidget( m_controlView->marbleWidget() );
-    m_searchDock->setWidget( searchWidget );
-    addDockWidget( Qt::LeftDockWidgetArea, m_searchDock );
-
-    tabifyDockWidget( m_searchDock, routingDock );
-    tabifyDockWidget( routingDock, locationDock );
-    m_searchDock->raise();
-
-    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
-    searchWidget->setToolTip( tr( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
-    new QShortcut( searchShortcut, this, SLOT( showSearch() ) );
-
-    QDockWidget *mapViewDock = new QDockWidget( tr( "Map View" ), this );
-    mapViewDock->setObjectName( "mapViewDock" );
-    mapViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    MapViewWidget* mapViewWidget = new MapViewWidget( this );
-    mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
-    mapViewDock->setWidget( mapViewWidget );
-    addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
-
-    QDockWidget *fileViewDock = new QDockWidget( tr( "Files" ), this );
-    fileViewDock->setObjectName( "fileViewDock" );
-    fileViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    FileViewWidget* fileViewWidget = new FileViewWidget( this );
-    fileViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
-    fileViewDock->setWidget( fileViewWidget );
-    addDockWidget( Qt::LeftDockWidgetArea, fileViewDock );
-    fileViewDock->hide();
-
-    QDockWidget *legendDock = new QDockWidget( tr( "Legend" ), this );
-    legendDock->setObjectName( "legendDock" );
-    legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    LegendWidget* legendWidget = new LegendWidget( this );
-    legendWidget->setMarbleModel( m_controlView->marbleModel() );
-    connect( legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
-             m_controlView->marbleWidget(), SLOT( setPropertyValue( const QString &, bool ) ) );
-    legendDock->setWidget( legendWidget );
-    addDockWidget( Qt::LeftDockWidgetArea, legendDock );
-
-    tabifyDockWidget( mapViewDock, legendDock );
-    mapViewDock->raise();
-
+    QList<QAction*> panelActions = m_controlView->setupDockWidgets( this );
     if ( m_panelMenu ) {
-        m_panelMenu->addAction( routingDock->toggleViewAction() );
-        m_panelMenu->addAction( locationDock->toggleViewAction() );
-        m_panelMenu->addAction( m_searchDock->toggleViewAction() );
-        m_panelMenu->addAction( mapViewDock->toggleViewAction() );
-        m_panelMenu->addAction( fileViewDock->toggleViewAction() );
-        m_panelMenu->addAction( legendDock->toggleViewAction() );
+        foreach( QAction* action, panelActions ) {
+            m_panelMenu->addAction( action );
+        }
     }
-
 }
 
 void MainWindow::openMapSite()
@@ -1723,16 +1652,6 @@ void MainWindow::showZoomLevel(bool show)
     } else {
         statusBar()->removeWidget( m_zoomLabel );
     }
-}
-
-void MainWindow::showSearch()
-{
-    if ( !m_searchDock )
-        return;
-
-    m_searchDock->show();
-    m_searchDock->raise();
-    m_searchDock->widget()->setFocus();
 }
 
 #include "QtMainWindow.moc"

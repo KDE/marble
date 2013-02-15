@@ -50,6 +50,9 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     createGUI( 0 );
     m_part->setupToolBar( toolBars().first() );
+    QList<QAction*> panelActions = m_part->controlView()->setupDockWidgets( this );
+    m_part->unplugActionList( "panels_actionlist" );
+    m_part->plugActionList( "panels_actionlist", panelActions );
 
     // Creating the plugin menus
     m_part->createInfoBoxesMenu();

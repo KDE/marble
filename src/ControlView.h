@@ -28,6 +28,9 @@
 class QSplitter;
 class QPrintDialog;
 class QTextDocument;
+class QMainWindow;
+class QDockWidget;
+class QMenu;
 
 namespace Marble
 {
@@ -87,6 +90,8 @@ class ControlView : public QWidget
       */
     void setExternalMapEditor( const QString &editor );
 
+    QList<QAction*> setupDockWidgets( QMainWindow* mainWindow );
+
  public slots:
     void setSideBarShown( bool );    
     void setNavigationTabShown( bool );
@@ -114,6 +119,9 @@ class ControlView : public QWidget
      void showMapWizard();
      void showUploadDialog();
      void searchFinished();
+
+private Q_SLOTS:
+     void showSearch();
     
  private:
     /**
@@ -136,6 +144,7 @@ class ControlView : public QWidget
     MarbleControlBox  *m_control;
     QSplitter         *m_splitter;
     QString            m_externalEditor;
+    QDockWidget       *m_searchDock;
 };
 
 }
