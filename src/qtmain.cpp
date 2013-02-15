@@ -118,7 +118,6 @@ int main(int argc, char *argv[])
         qWarning();
         qWarning() << "general options:";
         qWarning() << "  --marbledatapath=<path> .... Overwrite the compile-time path to map themes and other data";
-        qWarning() << "  --enableFileView ........... Add a tab on the left showing detailed information about loaded files";
         qWarning() << "  --latlon=<coordinates> ..... Show map at given lat lon coordinates";
         qWarning() << "  --distance=<value> ......... Set the distance of the observer to the globe (in km)";
         qWarning() << "  --map=<id> ................. Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")";
@@ -243,10 +242,6 @@ int main(int argc, char *argv[])
         }
         else if( arg == "--fps" ) {
             window->marbleControl()->marbleWidget()->setShowFrameRate( true );
-        }
-        else if( arg == "--enableFileView" )
-        {
-            window->marbleControl()->setFileViewTabShown(true);
         }
         else if ( arg == "--tile-id" )
         {

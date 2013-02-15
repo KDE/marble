@@ -46,7 +46,6 @@ class RoutingProfilesWidget;
 class SunControlWidget;
 class TimeControlWidget;
 class GeoDataFolder;
-class SearchInputWidget;
 
 class MarblePart: public KParts::ReadOnlyPart
 {
@@ -61,7 +60,6 @@ class MarblePart: public KParts::ReadOnlyPart
     static KAboutData* createAboutData();
     void createInfoBoxesMenu();
     void createOnlineServicesMenu();
-    void setupToolBar( KToolBar* toolBar );
 
     void initializeCustomTimezone();
 
@@ -80,14 +78,11 @@ class MarblePart: public KParts::ReadOnlyPart
     void  printMapScreenShot();
     void  copyMap();
     void  copyCoordinates();
-    void  setShowFileView( bool );
     void  setShowClouds( bool );
     void  setShowAtmosphere( bool );
     void  updateAtmosphereMenu();
-    void  setShowCurrentLocation( bool );
     void  setShowBookmarks( bool isChecked );
     void  showFullScreen( bool );
-    void  showSideBar( bool );
     void  showStatusBar( bool );
 
     /**
@@ -196,7 +191,6 @@ class MarblePart: public KParts::ReadOnlyPart
     SunControlWidget  *m_sunControlDialog;
     TimeControlWidget *m_timeControlDialog;
     DownloadRegionDialog *m_downloadRegionDialog;
-    SearchInputWidget* m_searchField;
 
     // Actions for the GUI.
     KAction      *m_exportMapAction;
@@ -205,11 +199,8 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_workOfflineAction;
     KAction      *m_copyMapAction;
     KAction      *m_copyCoordinatesAction;
-    KAction      *m_currentLocationAction;
-    KAction      *m_showFileViewAction;
     KAction      *m_showCloudsAction;
     KAction      *m_showAtmosphereAction;
-    KAction      *m_sideBarAct;
     KAction      *m_fullScreenAct;
     KAction      *m_openAct;
     KAction      *m_newStuffAction;

@@ -291,11 +291,6 @@ void MarblePart::setShowBookmarks( bool show )
     m_toggleBookmarkDisplayAction->setChecked( show ); // Sync state with the GUI
 }
 
-void MarblePart::setShowFileView( bool isChecked )
-{
-    m_controlView->setFileViewTabShown( isChecked );
-}
-
 void MarblePart::setShowClouds( bool isChecked )
 {
     m_controlView->marbleWidget()->setShowClouds( isChecked );
@@ -352,13 +347,6 @@ void MarblePart::showFullScreen( bool isChecked )
         KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), isChecked );
 
     m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
-}
-
-void MarblePart::showSideBar( bool isChecked )
-{
-    m_controlView->setSideBarShown( isChecked );
-
-    m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
 void MarblePart::showStatusBar( bool isChecked )
@@ -418,7 +406,7 @@ void MarblePart::setSubSolarPointIconVisible( bool show )
 
 void MarblePart::workOffline( bool offline )
 {
-    m_controlView->marbleControl()->setWorkOffline( offline );
+    m_controlView->setWorkOffline( offline );
     m_newStuffAction->setEnabled( !offline );
     m_downloadRegionAction->setEnabled( !offline );
 }
@@ -442,11 +430,6 @@ void MarblePart::copyCoordinates()
     clipboard->setText( positionString );
 }
 
-void MarblePart::setShowCurrentLocation( bool show )
-{
-    m_controlView->setCurrentLocationTabShown( show );
-}
-
 void MarblePart::readSettings()
 {
     kDebug() << "Start: MarblePart::readSettings()";
@@ -468,9 +451,6 @@ void MarblePart::readSettings()
 
     workOffline( MarbleSettings::workOffline() );
     m_workOfflineAction->setChecked( MarbleSettings::workOffline() );
-
-    setShowCurrentLocation( MarbleSettings::showCurrentLocation() );
-    m_currentLocationAction->setChecked( MarbleSettings::showCurrentLocation() );
 
     m_controlView->marbleWidget()->setShowAtmosphere( MarbleSettings::showAtmosphere() );
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
@@ -624,8 +604,6 @@ void MarblePart::writeSettings()
     MarbleSettings::setWorkOffline( m_workOfflineAction->isChecked() );
     MarbleSettings::setShowAtmosphere( m_controlView->marbleWidget()->showAtmosphere() );
 
-    MarbleSettings::setShowCurrentLocation( m_currentLocationAction->isChecked() );
-
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->
                                          mapQuality( Animation ) );
@@ -732,16 +710,6 @@ void MarblePart::setupActions()
     connect( m_workOfflineAction, SIGNAL( triggered( bool ) ),
              this,                SLOT( workOffline( bool ) ) );
 
-    // Action: Current Location
-    m_currentLocationAction = new KAction( this );
-    actionCollection()->addAction( "show_currentlocation", m_currentLocationAction );
-    m_currentLocationAction->setText( i18nc( "Action for toggling the 'current location' box",
-                                             "Current Location" ) );
-    m_currentLocationAction->setCheckable( true );
-    m_currentLocationAction->setChecked( false );
-    connect( m_currentLocationAction, SIGNAL( triggered( bool ) ),
-             this,                SLOT( setShowCurrentLocation( bool ) ) );
-
     // Action: Copy Map to the Clipboard
     m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ),
                                              actionCollection() );
@@ -788,16 +756,6 @@ void MarblePart::setupActions()
     KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ),
                                     actionCollection() );
 
-    m_sideBarAct = new KAction( i18nc( "Action for toggling the navigation panel",
-                                       "Show &Navigation Panel"), this );
-    actionCollection()->addAction( "options_show_sidebar", m_sideBarAct );
-    m_sideBarAct->setShortcut( Qt::Key_F9 );
-    m_sideBarAct->setCheckable( true );
-    m_sideBarAct->setChecked( true );
-    m_sideBarAct->setStatusTip( i18nc( "Status tip", "Show Navigation Panel" ) );
-    connect( m_sideBarAct, SIGNAL( triggered( bool ) ),
-             this,         SLOT( showSideBar( bool ) ) );
-
     m_fullScreenAct = KStandardAction::fullScreen( 0, 0, widget(),
                                                    actionCollection() );
     connect( m_fullScreenAct, SIGNAL( triggered( bool ) ),
@@ -832,16 +790,6 @@ void MarblePart::setupActions()
             actionCollection()->addAction( "show_crosshairs", (*i)->action() );
         }
     }
-
-    // Action: Show File View
-    m_showFileViewAction = new KAction( this );
-    actionCollection()->addAction( "show_file_view", m_showFileViewAction );
-    m_showFileViewAction->setChecked( false );
-    m_showFileViewAction->setCheckable( true );
-    m_showFileViewAction->setText( i18nc( "Action for showing the File View",
-                                   "&Show File View" ) );
-    connect( m_showFileViewAction, SIGNAL( triggered( bool ) ),
-             this,                 SLOT( setShowFileView( bool ) ) );
 
     // Action: Show Clouds option
     m_showCloudsAction = new KAction( this );
@@ -1735,22 +1683,6 @@ void MarblePart::updateMapEditButtonVisibility( const QString &mapTheme )
 {
     Q_ASSERT( m_externalMapEditorAction );
     m_externalMapEditorAction->setVisible( mapTheme == "earth/openstreetmap/openstreetmap.dgml" );
-}
-
-void MarblePart::setupToolBar( KToolBar *toolBar )
-{
-    m_searchField = new SearchInputWidget( toolBar );
-    m_searchField->setCompletionModel( m_controlView->marbleModel()->placemarkModel() );
-    m_searchField->setMaximumWidth( 400 );
-    connect( m_searchField, SIGNAL( search( QString, SearchMode ) ), m_controlView, SLOT( search( QString, SearchMode ) ) );
-    connect( m_searchField, SIGNAL( centerOn( const GeoDataCoordinates & ) ),
-             m_controlView->marbleWidget(), SLOT( centerOn( const GeoDataCoordinates &) ) );
-    connect( m_controlView, SIGNAL( searchFinished() ), m_searchField, SLOT( disableSearchAnimation() ) );
-
-    QKeySequence searchShortcut( Qt::CTRL + Qt::Key_F );
-    m_searchField->setToolTip( QString( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchShortcut.toString() ) );
-    new QShortcut( searchShortcut, m_searchField, SLOT( setFocus() ) );
-    toolBar->addWidget( m_searchField );
 }
 
 }

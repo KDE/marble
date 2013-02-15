@@ -49,7 +49,6 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
     setStandardToolBarMenuEnabled( true );
 
     createGUI( 0 );
-    m_part->setupToolBar( toolBars().first() );
     QList<QAction*> panelActions = m_part->controlView()->setupDockWidgets( this );
     m_part->unplugActionList( "panels_actionlist" );
     m_part->plugActionList( "panels_actionlist", panelActions );

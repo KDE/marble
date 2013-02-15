@@ -43,7 +43,6 @@
 #include <QtGui/QDockWidget>
 #include <QtNetwork/QNetworkProxy>
 
-#include "SearchInputWidget.h"
 #include "EditBookmarkDialog.h"
 #include "BookmarkManagerDialog.h"
 #include "CurrentLocationWidget.h"
@@ -77,9 +76,6 @@
 #include "GoToDialog.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
-#include "LegendWidget.h"
-#include "SearchWidget.h"
-#include "FileViewWidget.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -353,12 +349,6 @@ void MainWindow::createMenus()
         QAction *goToAction = menuBar()->addAction( tr( "&Go To...") );
         connect( goToAction, SIGNAL( triggered() ),
                  this, SLOT( showGoToDialog() ) );
-
-        m_controlView->marbleControl()->setNavigationTabShown( false );
-        m_controlView->marbleControl()->setLegendTabShown( false );
-        m_controlView->marbleControl()->setMapViewTabShown( false );
-        m_controlView->marbleControl()->setCurrentLocationTabShown( false );
-        m_controlView->marbleControl()->setRoutingTabShown( false );
 
         setupZoomButtons();
 
@@ -786,7 +776,7 @@ void MainWindow::showBookmarks( bool show )
 
 void MainWindow::workOffline( bool offline )
 {
-    m_controlView->marbleControl()->setWorkOffline( offline );
+    m_controlView->setWorkOffline( offline );
 
     m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
 }
@@ -1047,7 +1037,6 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          const Orientation orientation = (Orientation)settings.value( "orientation", (int)OrientationLandscape ).toInt();
          setOrientation( orientation );
 #endif // Q_WS_MAEMO_5
-         m_controlView->setSideBarShown( false );
          showStatusBar(settings.value("statusBar", false ).toBool());
          show();
          showClouds(settings.value("showClouds", true ).toBool());
@@ -1232,7 +1221,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
             initializeTrackingWidget();
             trackingWidget = qobject_cast<CurrentLocationWidget*>( m_trackingWindow->centralWidget() );
         } else {
-            trackingWidget = m_controlView->marbleControl()->currentLocationWidget();
+            trackingWidget = m_controlView->currentLocationWidget();
         }
         Q_ASSERT( trackingWidget );
         trackingWidget->setRecenterMode( settings.value( "recenterMode", 0 ).toInt() );
@@ -1354,7 +1343,7 @@ void MainWindow::writeSettings()
      if ( m_trackingWindow ) {
          trackingWidget = qobject_cast<CurrentLocationWidget*>( m_trackingWindow->centralWidget() );
      } else {
-         trackingWidget = m_controlView->marbleControl()->currentLocationWidget();
+         trackingWidget = m_controlView->currentLocationWidget();
      }
      if ( trackingWidget ) {
          // Can be null due to lazy initialization
@@ -1517,13 +1506,7 @@ void MainWindow::showMapViewDialog()
 
 void MainWindow::showLegendTab( bool enabled )
 {
-    m_toggleRoutingTabAction->setChecked( false );
-    m_controlView->setSideBarShown( enabled );
-    m_controlView->marbleControl()->setNavigationTabShown( false );
-    m_controlView->marbleControl()->setLegendTabShown( enabled );
-    m_controlView->marbleControl()->setMapViewTabShown( false );
-    m_controlView->marbleControl()->setCurrentLocationTabShown( false );
-    m_controlView->marbleControl()->setRoutingTabShown( false );
+    m_controlView->showLegendDock( enabled );
 }
 
 void MainWindow::showRoutingDialog()

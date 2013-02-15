@@ -61,35 +61,21 @@ namespace Marble
 
 ControlView::ControlView( QWidget *parent )
    : QWidget( parent ),
-     m_searchDock( 0 )
+     m_searchDock( 0 ),
+     m_legendDock( 0 ),
+     m_locationWidget( 0 )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
 
     resize( 680, 640 );
 
-    QVBoxLayout *vlayout = new QVBoxLayout( this );
-    vlayout->setMargin( 0 );
-
-    m_splitter = new QSplitter( this );
-    vlayout->addWidget( m_splitter );
-
-    m_control = new MarbleControlBox( this );
-    m_splitter->addWidget( m_control );
-    m_splitter->setStretchFactor( m_splitter->indexOf( m_control ), 0 );
-
     m_marbleWidget = new MarbleWidget( this );
     m_marbleWidget->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
                                                 QSizePolicy::MinimumExpanding ) );
 
-    m_splitter->addWidget( m_marbleWidget );
-    m_splitter->setStretchFactor( m_splitter->indexOf( m_marbleWidget ), 1 );
-    m_splitter->setSizes( QList<int>() << 180 << width() - 180 );
-
-    m_control->setMarbleWidget( m_marbleWidget );
-
-    connect( m_control, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
-    connect( m_control, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
-    connect( m_control, SIGNAL( searchFinished() ), this, SIGNAL( searchFinished() ) );
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addWidget( m_marbleWidget );
+    setLayout( layout );
 }
 
 ControlView::~ControlView()
@@ -130,36 +116,6 @@ void ControlView::moveUp()
 void ControlView::moveDown()
 {
     m_marbleWidget->moveDown();
-}
-
-void ControlView::setSideBarShown( bool show )
-{
-    m_control->setVisible( show );
-}
-
-void ControlView::setNavigationTabShown( bool show )
-{
-    m_control->setNavigationTabShown( show );
-}
-
-void ControlView::setLegendTabShown( bool show )
-{
-    m_control->setLegendTabShown( show );
-}
-
-void ControlView::setMapViewTabShown( bool show )
-{
-    m_control->setMapViewTabShown( show );
-}
-
-void ControlView::setCurrentLocationTabShown( bool show )
-{
-    m_control->setCurrentLocationTabShown( show );
-}
-
-void ControlView::setFileViewTabShown( bool show )
-{
-    m_control->setFileViewTabShown( show );
 }
 
 QString ControlView::defaultMapThemeId() const
@@ -545,9 +501,9 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     QDockWidget *locationDock = new QDockWidget( tr( "Location" ), this );
     locationDock->setObjectName( "locationDock" );
     locationDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    CurrentLocationWidget* locationWidget = new CurrentLocationWidget( this );
-    locationWidget->setMarbleWidget( marbleWidget() );
-    locationDock->setWidget( locationWidget );
+    m_locationWidget = new CurrentLocationWidget( this );
+    m_locationWidget->setMarbleWidget( marbleWidget() );
+    locationDock->setWidget( m_locationWidget );
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, locationDock );
 
     m_searchDock = new QDockWidget( tr( "Search" ), this );
@@ -572,6 +528,8 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     mapViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
     MapViewWidget* mapViewWidget = new MapViewWidget( this );
     mapViewWidget->setMarbleWidget( marbleWidget() );
+    connect( mapViewWidget, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
+    connect( mapViewWidget, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
     mapViewDock->setWidget( mapViewWidget );
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
 
@@ -607,24 +565,29 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     return panelActions;
 }
 
-void ControlView::search(const QString &searchTerm, SearchMode searchMode )
+CurrentLocationWidget *ControlView::currentLocationWidget()
 {
-    m_control->search( searchTerm, searchMode );
+    return m_locationWidget;
+}
+
+void ControlView::setWorkOffline( bool offline )
+{
+    marbleWidget()->model()->setWorkOffline( offline );
+    if ( !offline ) {
+        marbleWidget()->clearVolatileTileCache();
+    }
+}
+
+void ControlView::showLegendDock( bool show )
+{
+    if ( m_legendDock ) {
+        m_legendDock->setVisible( show );
+    }
 }
 
 QString ControlView::externalMapEditor() const
 {
     return m_externalEditor;
-}
-
-QByteArray ControlView::sideBarState() const
-{
-    return m_splitter ? m_splitter->saveState() : QByteArray();
-}
-
-bool ControlView::setSideBarState( const QByteArray &state )
-{
-    return m_splitter ? m_splitter->restoreState( state ) : false;
 }
 
 void ControlView::addGeoDataFile( QString filename )

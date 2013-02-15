@@ -25,9 +25,6 @@
   </Menu>
   <Menu name="view" noMerge="1">
     <text>&amp;View</text>
-    <Action name="show_currentlocation" group="show_merge"/>
-    <Action name="show_file_view"/>
-    <Separator/>
     <Action name="show_crosshairs" group="show_merge"/>
     <Action name="view_redisplay"/>
     <Separator/>
@@ -57,7 +54,6 @@
     <Merge name="StandardToolBarMenuHandler" />
     <Separator/>
     <Action name="options_show_statusbar"/>
-    <Action name="options_show_sidebar" group="show_merge"/>
     <Action name="fullscreen"/>
     <Separator/>
     <Action name="options_configure" append="configure_merge"/>

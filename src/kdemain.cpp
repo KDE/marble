@@ -295,8 +295,6 @@ int main ( int argc, char *argv[] )
     options.add( "debug-info", ki18n( "Enable debug output" ) );
     options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
     options.add( "fps", ki18n( "Show frame rate" ) );
-    options.add( "enableFileView",
-                 ki18n( "Enable tab to see gpxFileView" ) );
     options.add( "tile-id", ki18n( "Show tile IDs" ) );
     options.add( "runtimeTrace", ki18n( "Show time spent in each layer" ) );
     options.add( "marbledatapath <data path>", ki18n( "Use a different directory which contains map data" ) );
@@ -364,10 +362,6 @@ int main ( int argc, char *argv[] )
 
     if ( args->isSet( "fps" ) ) {
         window->marbleControl()->marbleWidget()->setShowFrameRate( true );
-    }
-
-    if ( args->isSet( "enableFileView" ) ) {
-        window->marbleControl()->setFileViewTabShown( true );
     }
 
     if ( args->isSet( "tile-id" ) ) {

@@ -52,7 +52,6 @@ class ControlView : public QWidget
     static QString applicationVersion();
 
     MarbleWidget      *marbleWidget()  const { return m_marbleWidget; }
-    MarbleControlBox  *marbleControl() const { return m_control;      }
     MarbleModel       *marbleModel()         { return m_marbleWidget->model(); }
 
     void zoomIn();
@@ -61,12 +60,6 @@ class ControlView : public QWidget
     void moveRight();
     void moveUp();
     void moveDown();
-
-    bool sideBarShown() const { return m_control->isVisible(); }
-
-    QByteArray sideBarState() const;
-
-    bool setSideBarState( const QByteArray &state );
 
     void addGeoDataFile( QString filename );
 
@@ -92,13 +85,13 @@ class ControlView : public QWidget
 
     QList<QAction*> setupDockWidgets( QMainWindow* mainWindow );
 
+    CurrentLocationWidget* currentLocationWidget();
+
+    void setWorkOffline( bool workOffline );
+
+    void showLegendDock( bool show );
+
  public slots:
-    void setSideBarShown( bool );    
-    void setNavigationTabShown( bool );
-    void setLegendTabShown( bool );
-    void setMapViewTabShown( bool );
-    void setCurrentLocationTabShown( bool );
-    void setFileViewTabShown( bool );
     void printMapScreenShot( QPointer<QPrintDialog> dialog );
     void printPixmap( QPrinter * printer, const QPixmap& pixmap );
     void printPreview();
@@ -109,16 +102,9 @@ class ControlView : public QWidget
       */
     void launchExternalMapEditor();
 
-    /**
-      * Search for the given term and display the results in the search result lists,
-      * which is brought to the front
-      */
-    void search( const QString &searchTerm, SearchMode searchMode );
-
- signals:
-     void showMapWizard();
-     void showUploadDialog();
-     void searchFinished();
+signals:
+    void showMapWizard();
+    void showUploadDialog();
 
 private Q_SLOTS:
      void showSearch();
@@ -139,12 +125,11 @@ private Q_SLOTS:
     void printDrivingInstructions( QTextDocument &document, QString &text );
     void printDrivingInstructionsAdvice( QTextDocument &document, QString &text );
 
-    //MarbleModel       *m_marbleModel;
     MarbleWidget      *m_marbleWidget;
-    MarbleControlBox  *m_control;
-    QSplitter         *m_splitter;
     QString            m_externalEditor;
     QDockWidget       *m_searchDock;
+    QDockWidget       *m_legendDock;
+    CurrentLocationWidget* m_locationWidget;
 };
 
 }
