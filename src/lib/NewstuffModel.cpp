@@ -23,6 +23,7 @@
 #include <QtCore/QtConcurrentRun>
 #include <QtCore/QProcessEnvironment>
 #include <QtCore/QMutexLocker>
+#include <QtGui/QIcon>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
@@ -41,6 +42,7 @@ public:
     QString m_version;
     QString m_releaseDate;
     QUrl m_previewUrl;
+    QIcon m_preview;
     QUrl m_payloadUrl;
     QDomNode m_registryNode;
     qint64 m_payloadSize;
@@ -54,6 +56,8 @@ public:
 
     static bool deeperThan( const QString &one, const QString &two );
 };
+
+class FetchPreviewJob;
 
 class NewstuffModelPrivate
 {
@@ -77,6 +81,8 @@ public:
     QNetworkAccessManager m_networkAccessManager;
 
     QString m_provider;
+
+    QMap<QNetworkReply *, FetchPreviewJob *> m_networkJobs;
 
     QNetworkReply* m_currentReply;
 
@@ -102,6 +108,9 @@ public:
 
     NewstuffModelPrivate( NewstuffModel* parent );
 
+    QIcon preview( int index );
+    void setPreview( int index, const QIcon &previewIcon );
+
     void handleProviderData( QNetworkReply* reply );
 
     bool canExecute( const QString &executable ) const;
@@ -126,6 +135,18 @@ public:
 
     template<class T>
     void readValue( const QDomNode &node, const QString &key, T* target ) const;
+};
+
+class FetchPreviewJob
+{
+public:
+    FetchPreviewJob( NewstuffModelPrivate *modelPrivate, int index );
+
+    void run( const QByteArray &data );
+
+private:
+    NewstuffModelPrivate *const m_modelPrivate;
+    const int m_index;
 };
 
 NewstuffItem::NewstuffItem() : m_payloadSize( -2 )
@@ -176,11 +197,43 @@ bool NewstuffItem::deeperThan(const QString &one, const QString &two)
     return one.length() > two.length();
 }
 
+FetchPreviewJob::FetchPreviewJob( NewstuffModelPrivate *modelPrivate, int index ) :
+    m_modelPrivate( modelPrivate ),
+    m_index( index )
+{
+}
+
+void FetchPreviewJob::run( const QByteArray &data )
+{
+    const QImage image = QImage::fromData( data );
+    const QPixmap pixmap = QPixmap::fromImage( image );
+    const QIcon previewIcon( pixmap );
+    m_modelPrivate->setPreview( m_index, previewIcon );
+}
+
 NewstuffModelPrivate::NewstuffModelPrivate( NewstuffModel* parent ) : m_parent( parent ),
     m_networkAccessManager( 0 ), m_currentReply( 0 ), m_currentFile( 0 ),
     m_idTag( NewstuffModel::PayloadTag ), m_currentAction( -1, Install ), m_unpackProcess( 0 )
 {
     // nothing to do
+}
+
+QIcon NewstuffModelPrivate::preview( int index )
+{
+    if ( m_items.at( index ).m_preview.isNull() ) {
+        QNetworkReply *reply = m_networkAccessManager.get( QNetworkRequest( m_items.at( index ).m_previewUrl ) );
+        m_networkJobs.insert( reply, new FetchPreviewJob( this, index ) );
+    }
+
+    return m_items.at( index ).m_preview;
+}
+
+void NewstuffModelPrivate::setPreview( int index, const QIcon &previewIcon )
+{
+    NewstuffItem &item = m_items[index];
+    item.m_preview = previewIcon;
+    const QModelIndex affected = m_parent->index( index );
+    emit m_parent->dataChanged( affected, affected );
 }
 
 void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
@@ -201,10 +254,21 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
         return;
     }
 
+    FetchPreviewJob *const job = m_networkJobs.take( reply );
+
     // check if we are redirected
     const QVariant redirectionAttribute = reply->attribute( QNetworkRequest::RedirectionTargetAttribute );
     if ( !redirectionAttribute.isNull() ) {
-        m_networkAccessManager.get( QNetworkRequest( QUrl( redirectionAttribute.toUrl() ) ) );
+        QNetworkReply *redirectReply = m_networkAccessManager.get( QNetworkRequest( QUrl( redirectionAttribute.toUrl() ) ) );
+        if ( job ) {
+            m_networkJobs.insert( redirectReply, job );
+        }
+        return;
+    }
+
+    if ( job ) {
+        job->run( reply->readAll() );
+        delete job;
         return;
     }
 
@@ -412,6 +476,7 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
     if ( index.isValid() && index.row() >= 0 && index.row() < d->m_items.size() ) {
         switch ( role ) {
         case Qt::DisplayRole: return d->m_items.at( index.row() ).m_name;
+        case Qt::DecorationRole: return d->preview( index.row() );
         case Name: return d->m_items.at( index.row() ).m_name;
         case Author: return d->m_items.at( index.row() ).m_author;
         case License: return d->m_items.at( index.row() ).m_license;
