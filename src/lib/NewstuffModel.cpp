@@ -40,8 +40,8 @@ public:
     QString m_summary;
     QString m_version;
     QString m_releaseDate;
-    QUrl m_preview;
-    QUrl m_payload;
+    QUrl m_previewUrl;
+    QUrl m_payloadUrl;
     QDomNode m_registryNode;
     qint64 m_payloadSize;
 
@@ -191,7 +191,7 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
             qint64 length = size.toLongLong();
             for ( int i=0; i<m_items.size(); ++i ) {
                 NewstuffItem &item = m_items[i];
-                if ( item.m_payload == reply->url() ) {
+                if ( item.m_payloadUrl == reply->url() ) {
                     item.m_payloadSize = length;
                     QModelIndex const affected = m_parent->index( i );
                     emit m_parent->dataChanged( affected, affected );
@@ -271,7 +271,7 @@ void NewstuffModelPrivate::updateModel()
             bool found = false;
             for ( int j=0; j<m_items.size() && !found; ++j ) {
                 NewstuffItem &item = m_items[j];
-                if ( m_idTag == NewstuffModel::PayloadTag && item.m_payload == value ) {
+                if ( m_idTag == NewstuffModel::PayloadTag && item.m_payloadUrl == value ) {
                     item.m_registryNode = items.item( i );
                     found = true;
                 }
@@ -418,8 +418,8 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
         case Summary: return d->m_items.at( index.row() ).m_summary;
         case Version: return d->m_items.at( index.row() ).m_version;
         case ReleaseDate: return d->m_items.at( index.row() ).m_releaseDate;
-        case Preview: return d->m_items.at( index.row() ).m_preview;
-        case Payload: return d->m_items.at( index.row() ).m_payload;
+        case Preview: return d->m_items.at( index.row() ).m_previewUrl;
+        case Payload: return d->m_items.at( index.row() ).m_payloadUrl;
         case InstalledVersion: return d->m_items.at( index.row() ).installedVersion();
         case InstalledReleaseDate: return d->m_items.at( index.row() ).installedReleaseDate();
         case IsInstalled: return !d->m_items.at( index.row() ).m_registryNode.isNull();
@@ -428,7 +428,7 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
         case IsTransitioning: return d->isTransitioning( index.row() );
         case PayloadSize: {
             qint64 const size = d->m_items.at( index.row() ).m_payloadSize;
-            QUrl const url = d->m_items.at( index.row() ).m_payload;
+            QUrl const url = d->m_items.at( index.row() ).m_payloadUrl;
             if ( size < -1 && !url.isEmpty() ) {
                 d->m_items[index.row()].m_payloadSize = -1; // prevent several head requests for the same item
                 d->m_networkAccessManager.head( QNetworkRequest( url ) );
@@ -705,14 +705,14 @@ void NewstuffModel::contentsListed( int exitStatus )
             d->changeNode( node, d->m_registryDocument, "homepage", QString(), action );
             d->changeNode( node, d->m_registryDocument, "licence", item.m_license, action );
             d->changeNode( node, d->m_registryDocument, "version", item.m_version, action );
-            QString const itemId = d->m_idTag == PayloadTag ? item.m_payload.toString() : item.m_name;
+            QString const itemId = d->m_idTag == PayloadTag ? item.m_payloadUrl.toString() : item.m_name;
             d->changeNode( node, d->m_registryDocument, "id", itemId, action );
             d->changeNode( node, d->m_registryDocument, "releasedate", item.m_releaseDate, action );
             d->changeNode( node, d->m_registryDocument, "summary", item.m_summary, action );
             d->changeNode( node, d->m_registryDocument, "changelog", QString(), action );
-            d->changeNode( node, d->m_registryDocument, "preview", item.m_preview.toString(), action );
-            d->changeNode( node, d->m_registryDocument, "previewBig", item.m_preview.toString(), action );
-            d->changeNode( node, d->m_registryDocument, "payload", item.m_payload.toString(), action );
+            d->changeNode( node, d->m_registryDocument, "preview", item.m_previewUrl.toString(), action );
+            d->changeNode( node, d->m_registryDocument, "previewBig", item.m_previewUrl.toString(), action );
+            d->changeNode( node, d->m_registryDocument, "payload", item.m_payloadUrl.toString(), action );
             d->changeNode( node, d->m_registryDocument, "status", "installed", action );
             d->m_items[d->m_currentAction.first].m_registryNode = node;
 
@@ -765,12 +765,12 @@ void NewstuffModelPrivate::processQueue()
     }
     if ( m_currentAction.second == Install ) {
         if ( !m_currentFile ) {
-            QFileInfo const file = m_items.at( m_currentAction.first ).m_payload.path();
+            QFileInfo const file = m_items.at( m_currentAction.first ).m_payloadUrl.path();
             m_currentFile = new QTemporaryFile( QDir::tempPath() + "/marble-XXXXXX-" + file.fileName() );
         }
 
         if ( m_currentFile->open() ) {
-            QUrl const payload = m_items.at( m_currentAction.first ).m_payload;
+            QUrl const payload = m_items.at( m_currentAction.first ).m_payloadUrl;
             m_currentReply = m_networkAccessManager.get( QNetworkRequest( payload ) );
             QObject::connect( m_currentReply, SIGNAL(readyRead()), m_parent, SLOT(retrieveData()) );
             QObject::connect( m_currentReply, SIGNAL(readChannelFinished()), m_parent, SLOT(retrieveData()) );
@@ -801,8 +801,8 @@ NewstuffItem NewstuffModelPrivate::importNode(const QDomNode &node) const
     readValue<QString>( node, "summary", &item.m_summary );
     readValue<QString>( node, "version", &item.m_version );
     readValue<QString>( node, "releasedate", &item.m_releaseDate );
-    readValue<QUrl>( node, "preview", &item.m_preview );
-    readValue<QUrl>( node, "payload", &item.m_payload );
+    readValue<QUrl>( node, "preview", &item.m_previewUrl );
+    readValue<QUrl>( node, "payload", &item.m_payloadUrl );
     return item;
 }
 
