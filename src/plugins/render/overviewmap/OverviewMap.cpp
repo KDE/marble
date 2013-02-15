@@ -62,6 +62,11 @@ OverviewMap::OverviewMap( const MarbleModel *marbleModel )
 
 OverviewMap::~OverviewMap()
 {
+    QHash<QString, QSvgWidget *>::const_iterator pos = m_svgWidgets.constBegin();
+    QHash<QString, QSvgWidget *>::const_iterator const end = m_svgWidgets.constEnd();
+    for (; pos != end; ++pos ) {
+        delete pos.value();
+    }
 }
 
 QStringList OverviewMap::backendTypes() const
@@ -455,7 +460,7 @@ void OverviewMap::loadPlanetMaps()
         if ( m_svgWidgets.contains( planet) ) {
             m_svgWidgets[planet]->load( m_svgPaths[planet] );
         } else {
-            m_svgWidgets[planet] = new QSvgWidget( m_svgPaths[planet], m_configDialog );
+            m_svgWidgets[planet] = new QSvgWidget( m_svgPaths[planet] );
         }
     }
 }
@@ -469,7 +474,7 @@ void OverviewMap::loadMapSuggestions()
     paths << MarbleDirs::path( "svg/worldmap.svg" ) << MarbleDirs::path( "svg/lunarmap.svg" );
     ui_configWidget->m_tableWidget->setRowCount( paths.size() );
     for( int i = 0; i < paths.size(); ++i ) {
-        ui_configWidget->m_tableWidget->setCellWidget( i, 0, new QSvgWidget( paths[i], m_configDialog ) );
+        ui_configWidget->m_tableWidget->setCellWidget( i, 0, new QSvgWidget( paths[i] ) );
         ui_configWidget->m_tableWidget->setItem( i, 1, new QTableWidgetItem( paths[i] ) );
     }
 }
