@@ -624,6 +624,7 @@ void MainWindow::createPluginMenus()
 
         if ( tmp_toolbarActionGroups ) {
             QToolBar* toolbar = new QToolBar(this);
+            toolbar->setObjectName( QString( "plugin-toolbar-%1" ).arg( (*i)->nameId() ) );
 
             foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
                 toolbar->addActions( ag->actions() );
