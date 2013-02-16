@@ -75,6 +75,7 @@ ControlView::ControlView( QWidget *parent )
 
     QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget( m_marbleWidget );
+    layout->setMargin( 0 );
     setLayout( layout );
 }
 
