@@ -394,7 +394,7 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
     crossDateLine( previousTessellatedCoords, currentModifiedCoords, polygons, viewport );
 }
 
-void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord,
+int AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord,
                                                const GeoDataCoordinates & bCoord,
                                                QVector<QPolygonF*> &polygons,
                                                const ViewportParams *viewport ) const
@@ -412,11 +412,13 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
 
     q->screenCoordinates( bCoord, viewport, x, y, globeHidesPoint );
 
+    int sign = 0;
     if( !globeHidesPoint ) {
 
         if( aSign != bSign
                 && fabs(aLon) + fabs(bLon) > M_PI
                 && q->repeatX() ) {
+            sign = aSign > bSign ? 1 : -1;
             qreal delta = mirrorPoint( viewport );
             if ( aSign > bSign ) {
                 // going eastwards ->
@@ -431,4 +433,5 @@ void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
 
         *polygons.last() << QPointF( x, y );
     }
+    return sign;
 }

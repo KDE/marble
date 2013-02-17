@@ -121,6 +121,8 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     qreal previousX = -1.0;
     qreal previousY = -1.0;
 
+    int mirrorCount = 0;
+
     polygons.append( new QPolygonF );
 
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
@@ -180,7 +182,18 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
                 // the expected rendering is a screen coordinates straight line between
                 // points, but in projections with repeatX things are not smooth
                 // we need to split polygons and use both sides of the repeated point
-                crossDateLine( previousCoords, currentCoords, polygons, viewport );
+                int oldMirrorCount = mirrorCount ;
+                mirrorCount += crossDateLine( previousCoords, currentCoords, polygons, viewport );
+                if( lineString.isClosed() ){
+                    if( oldMirrorCount != mirrorCount ) {
+                        polygons.remove( polygons.size() - 1 );
+                        QPointF &point = polygons.last()->last();
+                        point.setX( point.x() + mirrorPoint( viewport ) * oldMirrorCount );
+                    } else {
+                        QPointF &point = polygons.last()->last();
+                        point.setX( point.x() + mirrorPoint( viewport ) * mirrorCount );
+                    }
+                }
             }
 
             itPreviousCoords = itCoords;

@@ -58,7 +58,7 @@ class AbstractProjectionPrivate
                             QVector<QPolygonF *> &translatedPolygons,
                             qreal xOffset ) const;
 
-    void crossDateLine( const GeoDataCoordinates & aCoord,
+    int crossDateLine( const GeoDataCoordinates & aCoord,
                         const GeoDataCoordinates & bCoord,
                         QVector<QPolygonF*> &polygons,
                         const ViewportParams *viewport ) const;
