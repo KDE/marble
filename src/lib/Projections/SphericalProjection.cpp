@@ -339,27 +339,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
         return false;
     }
 
-    QVector<GeoDataLineString*> lineStrings;
-
-    if (
-         ( !traversablePoles() && lineString.latLonAltBox().containsPole( AnyPole ) ) ||
-         ( lineString.latLonAltBox().crossesDateLine() )
-       ) {
-        // We correct for Poles and DateLines:
-        lineStrings = lineString.toRangeCorrected();
-
-        foreach ( GeoDataLineString * itLineString, lineStrings ) {
-            QVector<QPolygonF *> subPolygons;
-
-            d->lineStringToPolygon( *itLineString, viewport, subPolygons );
-            polygons << subPolygons;
-        }
-    }
-    else {
-        d->lineStringToPolygon( lineString, viewport, polygons );
-    }
-
-    return polygons.isEmpty();
+    d->lineStringToPolygon( lineString, viewport, polygons );
+    return true;
 }
 
 bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &lineString,
