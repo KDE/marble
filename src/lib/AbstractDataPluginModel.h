@@ -85,12 +85,33 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
 
     QObject* favoritesModel();
 
+    /**
+     * Finds the item with @p id in the list.
+     * @return The pointer to the item or (if no item has been found) 0
+     */
+    AbstractDataPluginItem *findItem( const QString& id ) const;
+
+    /**
+     * Testing the existence of the item @p id in the list
+     */
+    bool itemExists( const QString& id ) const;
+
 public Q_SLOTS:
     /**
      * Adds the @p items to the list of initialized items. It checks if items with the same id are
      * already in the list and ignores and deletes them in this case.
      */
     void addItemsToList( const QList<AbstractDataPluginItem*> &items );
+
+    /**
+     * Convenience method to add one item to the list. See addItemsToList
+     */
+    void addItemToList( AbstractDataPluginItem *item );
+
+    /**
+     * Removes all items
+     */
+    void clear();
 
  protected:
     /**
@@ -136,12 +157,7 @@ public Q_SLOTS:
      * Download the description file from the @p url.
      */
     void downloadDescriptionFile( const QUrl& url );
-    
-    /**
-     * Convenience method to add one item to the list. See addItemsToList
-     */
-    void addItemToList( AbstractDataPluginItem *item );
-    
+
     /**
      * Generates the filename relative to the download path from @p id and @p type
      */
@@ -161,22 +177,6 @@ public Q_SLOTS:
      * Testing the existence of a file with @p id and @p type
      */
     bool fileExists( const QString& id, const QString& type ) const;
-    
-    /**
-     * Finds the item with @p id in the list.
-     * @return The pointer to the item or (if no item has been found) 0
-     */
-    AbstractDataPluginItem *findItem( const QString& id ) const;
-    
-    /**
-     * Testing the existence of the item @p id in the list
-     */
-    bool itemExists( const QString& id ) const;
-
-    /**
-     * Removes all items
-     */
-    void clear();
 
     void registerItemProperties( const QMetaObject& item );
     
