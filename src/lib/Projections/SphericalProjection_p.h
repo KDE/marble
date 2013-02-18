@@ -30,13 +30,6 @@ class SphericalProjectionPrivate : public AbstractProjectionPrivate
                               const ViewportParams *viewport,
                               QVector<QPolygonF*> &polygons ) const;
 
-    void manageHorizonCrossing( bool globeHidesPoint,
-                                const GeoDataCoordinates& horizonCoords,
-                                bool& horizonPair,
-                                GeoDataCoordinates& horizonDisappearCoords,
-                                bool& horizonOrphan,
-                                GeoDataCoordinates& horizonOrphanCoords ) const;
-
     void horizonToPolygon( const ViewportParams *viewport,
                            const GeoDataCoordinates & disappearCoords,
                            const GeoDataCoordinates & reappearCoords,

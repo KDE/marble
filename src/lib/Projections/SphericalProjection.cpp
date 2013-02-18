@@ -457,9 +457,14 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
                         horizonPair = false;
                     }
                     else {
-                        manageHorizonCrossing( globeHidesPoint, horizonCoords,
-                                               horizonPair, horizonDisappearCoords,
-                                               horizonOrphan, horizonOrphanCoords );
+                        if ( globeHidesPoint ) {
+                            horizonDisappearCoords = horizonCoords;
+                            horizonPair = true;
+                        }
+                        else {
+                            horizonOrphanCoords = horizonCoords;
+                            horizonOrphan = true;
+                        }
                     }
                 }
 
@@ -553,25 +558,6 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     }
 
     return polygons.isEmpty();
-}
-
-void SphericalProjectionPrivate::manageHorizonCrossing( bool globeHidesPoint,
-                                                const GeoDataCoordinates& horizonCoords,
-                                                bool& horizonPair,
-                                                GeoDataCoordinates& horizonDisappearCoords,
-                                                bool& horizonOrphan,
-                                                GeoDataCoordinates& horizonOrphanCoords ) const
-{
-    if ( !horizonPair ) {
-        if ( globeHidesPoint ) {
-            horizonDisappearCoords = horizonCoords;
-            horizonPair = true;
-        }
-        else {
-            horizonOrphanCoords = horizonCoords;
-            horizonOrphan = true;
-        }
-    }
 }
 
 void SphericalProjectionPrivate::horizonToPolygon( const ViewportParams *viewport,
