@@ -13,6 +13,7 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
+#include "GeoDataLatLonAltBox.h"
 
 #include <QtTest/QtTest>
 
@@ -24,6 +25,32 @@ bool qCompare(qreal val1, qreal val2, qreal epsilon, const char *actual, const c
     return ( qAbs( val1 - val2 ) < epsilon )
         ? compare_helper( true, "COMPARE()", file, line )
         : compare_helper( false, "Compared qreals are not the same", toString( val1 ), toString( val2 ), actual, expected, file, line );
+}
+
+template<>
+char *toString(const Marble::GeoDataLatLonBox &box)
+{
+    const QString string = QString( "North: %1, West: %2, South: %3, East: %4" )
+        .arg( box.north( Marble::GeoDataCoordinates::Degree ) )
+        .arg( box.west( Marble::GeoDataCoordinates::Degree ) )
+        .arg( box.south( Marble::GeoDataCoordinates::Degree ) )
+        .arg( box.east( Marble::GeoDataCoordinates::Degree ) );
+
+    return qstrdup( string.toAscii().data() );
+}
+
+template<>
+char *toString(const Marble::GeoDataLatLonAltBox &box)
+{
+    const QString string = QString( "North: %1, West: %2, South: %3, East: %4, MinAlt: %5, MaxAlt: %6" )
+        .arg( box.north( Marble::GeoDataCoordinates::Degree ) )
+        .arg( box.west( Marble::GeoDataCoordinates::Degree ) )
+        .arg( box.south( Marble::GeoDataCoordinates::Degree ) )
+        .arg( box.east( Marble::GeoDataCoordinates::Degree ) )
+        .arg( box.minAltitude() )
+        .arg( box.maxAltitude() );
+
+    return qstrdup( string.toAscii().data() );
 }
 
 }
