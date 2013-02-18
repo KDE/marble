@@ -380,7 +380,6 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
     qreal horizonX = -1.0;
     qreal horizonY = -1.0;
-    bool isAtHorizon = false;
 
     polygons.append( new QPolygonF );
 
@@ -425,8 +424,6 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     
     while ( itCoords != itEnd )
     {
-        isAtHorizon = false;
-
         // Optimization for line strings with a big amount of nodes
         bool skipNode = itCoords != itBegin && isLong && !processingLastNode &&
                         viewport->resolves( *itPreviousCoords, *itCoords );
@@ -447,8 +444,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             }
 
             // Check for the "horizon case" (which is present e.g. for the spherical projection
-            isAtHorizon = ( globeHidesPoint || previousGlobeHidesPoint ) &&
-                          ( globeHidesPoint !=  previousGlobeHidesPoint );
+            const bool isAtHorizon = ( globeHidesPoint || previousGlobeHidesPoint ) &&
+                                     ( globeHidesPoint !=  previousGlobeHidesPoint );
      
             if ( isAtHorizon ) {
                 // Handle the "horizon case"
