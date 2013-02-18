@@ -251,10 +251,8 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
     QString target = model->planetId();
     QList<AbstractDataPluginItem*> list;
     
-    int const removed = d->m_displayedItems.removeAll( 0 ) + d->m_itemSet.removeAll( 0 );
-    // I don't see why the removeAll( 0 ) calls above should be needed. The assert below will trigger
-    // if I'm wrong.
-    Q_ASSERT( !removed && "Null item in item list. Please report a bug to marble-devel@kde.org" );
+    Q_ASSERT( !d->m_displayedItems.contains( 0 ) && "Null item in m_displayedItems. Please report a bug to marble-devel@kde.org" );
+    Q_ASSERT( !d->m_itemSet.contains( 0 ) && "Null item in m_itemSet. Please report a bug to marble-devel@kde.org" );
 
     QList<AbstractDataPluginItem*> candidates = d->m_displayedItems + d->m_itemSet;
 
@@ -270,8 +268,6 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
 
     // Items that are already shown have the highest priority
     for (; i != end && list.size() < number; ++i ) {
-        Q_ASSERT( *i ); // checked when adding items, also removeAll(0) above
-
         // Only show items that are initialized
         if( !(*i)->initialized() ) {
             continue;
