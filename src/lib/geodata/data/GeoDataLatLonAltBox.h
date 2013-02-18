@@ -53,7 +53,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
  public:
     GeoDataLatLonAltBox();
     GeoDataLatLonAltBox( const GeoDataLatLonAltBox & other );
-    GeoDataLatLonAltBox( const GeoDataLatLonBox & other );
+    GeoDataLatLonAltBox( const GeoDataLatLonBox &other, qreal minAltitude, qreal maxAltitude );
     /**
      * @brief A LatLonAltBox with the data from a GeoDataCoordinate
      * This way of creating a GeoDataLatLonAltBox sets the north and south

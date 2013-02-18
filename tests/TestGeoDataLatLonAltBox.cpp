@@ -30,10 +30,16 @@ private slots:
     void testCopyConstruction();
     void testConstructionFromLatLonBox_data();
     void testConstructionFromLatLonBox();
+    void testAssignment_data();
+    void testAssignment();
     void testContstructionFromCoordinates_data();
     void testContstructionFromCoordinates();
     void testAltitude_data();
     void testAltitude();
+    void testSetNorthRadian_data();
+    void testSetNorthRadian();
+    void testSetSouthRadian_data();
+    void testSetSouthRadian();
     void testContains();
     void testIntersects_data();
     void testIntersects();
@@ -116,22 +122,45 @@ void TestGeoDataLatLonAltBox::testCopyConstruction()
 void TestGeoDataLatLonAltBox::testConstructionFromLatLonBox_data()
 {
     QTest::addColumn<GeoDataLatLonBox>("latLonBox");
+    QTest::addColumn<qreal>("minAltitude");
+    QTest::addColumn<qreal>("maxAltitude");
 
-    QTest::newRow("deg") << GeoDataLatLonBox(15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree);
-    QTest::newRow("rad") << GeoDataLatLonBox(1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian);
+    QTest::newRow("deg") << GeoDataLatLonBox(15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree) << 143.0 << 356.0;
+    QTest::newRow("rad") << GeoDataLatLonBox(1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian) << 112.0 << 120.0;
 }
 
 void TestGeoDataLatLonAltBox::testConstructionFromLatLonBox()
 {
     QFETCH(GeoDataLatLonBox, latLonBox);
+    QFETCH(qreal, minAltitude);
+    QFETCH(qreal, maxAltitude);
 
-    GeoDataLatLonAltBox const box(latLonBox);
+    GeoDataLatLonAltBox const box(latLonBox, minAltitude, maxAltitude);
 
     QCOMPARE(box.west(), latLonBox.west());
     QCOMPARE(box.east(), latLonBox.east());
     QCOMPARE(box.north(), latLonBox.north());
     QCOMPARE(box.south(), latLonBox.south());
     QCOMPARE(box.rotation(), latLonBox.rotation());
+    QCOMPARE(box.minAltitude(), minAltitude);
+    QCOMPARE(box.maxAltitude(), maxAltitude);
+}
+
+void TestGeoDataLatLonAltBox::testAssignment_data()
+{
+    QTest::addColumn<GeoDataLatLonAltBox>("expected");
+
+    QTest::newRow("deg") << GeoDataLatLonAltBox(GeoDataLatLonBox( 15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree), 143.0, 356.0);
+    QTest::newRow("rad") << GeoDataLatLonAltBox(GeoDataLatLonBox( 1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian ), 112.0, 120.0);
+}
+
+void TestGeoDataLatLonAltBox::testAssignment()
+{
+    QFETCH(GeoDataLatLonAltBox, expected);
+
+    GeoDataLatLonAltBox other = expected;
+
+    QCOMPARE( expected, other );
 }
 
 void TestGeoDataLatLonAltBox::testContstructionFromCoordinates_data()
@@ -176,6 +205,43 @@ void TestGeoDataLatLonAltBox::testAltitude()
     QCOMPARE(box.maxAltitude(), alt);
 }
 
+void TestGeoDataLatLonAltBox::testSetNorthRadian_data()
+{
+    QTest::addColumn<GeoDataLatLonAltBox>("box");
+    QTest::addColumn<qreal>("north");
+
+    QTest::newRow("deg") << GeoDataLatLonAltBox(GeoDataLatLonBox( 15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree), 143.0, 356.0) << 0.1;
+    QTest::newRow("rad") << GeoDataLatLonAltBox(GeoDataLatLonBox( 1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian ), 112.0, 120.0) << 0.1;
+}
+
+void TestGeoDataLatLonAltBox::testSetNorthRadian()
+{
+    QFETCH(GeoDataLatLonAltBox, box);
+    QFETCH(qreal, north);
+
+    box.setNorth( north );
+
+    QCOMPARE( box.north(), north );
+}
+
+void TestGeoDataLatLonAltBox::testSetSouthRadian_data()
+{
+    QTest::addColumn<GeoDataLatLonAltBox>("box");
+    QTest::addColumn<qreal>("south");
+
+    QTest::newRow("deg") << GeoDataLatLonAltBox(GeoDataLatLonBox( 15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree), 143.0, 356.0) << 1.4;
+    QTest::newRow("rad") << GeoDataLatLonAltBox(GeoDataLatLonBox( 1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian ), 112.0, 120.0) << 1.4;
+}
+
+void TestGeoDataLatLonAltBox::testSetSouthRadian()
+{
+    QFETCH(GeoDataLatLonAltBox, box);
+    QFETCH(qreal, south);
+
+    box.setSouth( south );
+
+    QCOMPARE( box.south(), south );
+}
 
 void TestGeoDataLatLonAltBox::testContains()
 {
@@ -236,13 +302,8 @@ void TestGeoDataLatLonAltBox::testIntersects()
     QFETCH( qreal, box2maxAltitude );
     QFETCH( bool, intersects );
 
-    GeoDataLatLonAltBox box1( latLonBox1 );
-    box1.setMinAltitude( box1minAltitude );
-    box1.setMaxAltitude( box1maxAltitude );
-
-    GeoDataLatLonAltBox box2( latLonBox2 );
-    box2.setMinAltitude( box2minAltitude );
-    box2.setMaxAltitude( box2maxAltitude );
+    const GeoDataLatLonAltBox box1( latLonBox1, box1minAltitude, box1maxAltitude );
+    const GeoDataLatLonAltBox box2( latLonBox2, box2minAltitude, box2maxAltitude );
 
     QCOMPARE( box1.intersects( box2 ), intersects );
 }

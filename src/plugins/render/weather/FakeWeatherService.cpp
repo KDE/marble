@@ -54,7 +54,7 @@ void FakeWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
 
 void FakeWeatherService::getItem( const QString &, const MarbleModel *model )
 {
-    getAdditionalItems( GeoDataLatLonBox(), model, 1 );
+    getAdditionalItems( GeoDataLatLonAltBox(), model, 1 );
 }
 
 #include "FakeWeatherService.moc"

@@ -265,7 +265,7 @@ void MarbleWidget::setCenter( Coordinate* center )
     }
 }
 
-void MarbleWidget::centerOn( const Marble::GeoDataLatLonAltBox &bbox )
+void MarbleWidget::centerOn( const Marble::GeoDataLatLonBox &bbox )
 {
     m_marbleWidget->centerOn( bbox );
 }

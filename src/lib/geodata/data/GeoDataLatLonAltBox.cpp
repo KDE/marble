@@ -85,7 +85,7 @@ GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataLatLonAltBox & other )
 {
 }
 
-GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataLatLonBox & other )
+GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataLatLonBox &other, qreal minAltitude, qreal maxAltitude )
     : GeoDataLatLonBox( other ),
       d( new GeoDataLatLonAltBoxPrivate )
 {
@@ -95,8 +95,8 @@ GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataLatLonBox & other )
     setSouth( other.south() );
     setRotation( other.rotation() );
 
-    d->m_minAltitude = 0;
-    d->m_maxAltitude = 0;
+    d->m_minAltitude = minAltitude;
+    d->m_maxAltitude = maxAltitude;
 }
 
 
@@ -220,9 +220,10 @@ GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineStrin
         return GeoDataLatLonAltBox();
     }
 
-    GeoDataLatLonAltBox temp ( GeoDataLatLonBox::fromLineString ( lineString ) );
+    const qreal altitude = lineString.first().altitude();
 
-    qreal altitude = lineString.first().altitude();
+    GeoDataLatLonAltBox temp ( GeoDataLatLonBox::fromLineString( lineString ), altitude, altitude );
+
     qreal maxAltitude = altitude;
     qreal minAltitude = altitude;
 
@@ -239,7 +240,7 @@ GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineStrin
     for ( ; it != itEnd; ++it )
     {
         // Get coordinates and normalize them to the desired range.
-        altitude = (it)->altitude();
+        const qreal altitude = (it)->altitude();
 
         // Determining the maximum and minimum latitude
         if ( altitude > maxAltitude ) maxAltitude = altitude;

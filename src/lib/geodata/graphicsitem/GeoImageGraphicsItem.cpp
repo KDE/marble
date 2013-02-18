@@ -24,7 +24,7 @@ GeoImageGraphicsItem::GeoImageGraphicsItem( const GeoDataFeature *feature )
 
 void GeoImageGraphicsItem::setLatLonBox( const GeoDataLatLonBox &box )
 {
-    p()->m_latLonAltBox = box;
+    p()->m_latLonAltBox = GeoDataLatLonAltBox( box, 0, 0 );
 }
 
 const GeoDataLatLonBox& GeoImageGraphicsItem::latLonBox() const

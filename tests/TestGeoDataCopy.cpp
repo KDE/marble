@@ -57,7 +57,6 @@ class TestGeoDataCopy : public QObject
         void copyCoordinates();
         void copyHotSpot();
         void copyLatLonBox();
-        void copyLatLonAltBox();
 
         // GeoDataGeometry:
         void copyLineString();
@@ -482,30 +481,6 @@ void TestGeoDataCopy::copyLatLonBox()
     
     QCOMPARE(llbox.north(), 0.1);
     QCOMPARE(llbox.south(GeoDataCoordinates::Degree), 12.2);
-    QCOMPARE(other.north(GeoDataCoordinates::Degree), 30.1);
-    QCOMPARE(other.south(), 1.4);
-}
-
-void TestGeoDataCopy::copyLatLonAltBox()
-{
-    GeoDataLatLonAltBox llabox(GeoDataLatLonBox(30.1, 12.2, 110.0, 44.9, GeoDataCoordinates::Degree));
-    QCOMPARE(llabox.north(GeoDataCoordinates::Degree), 30.1);
-    QCOMPARE(llabox.south(GeoDataCoordinates::Degree), 12.2);
-    QCOMPARE(llabox.east(GeoDataCoordinates::Degree), 110.0);
-    QCOMPARE(llabox.west(GeoDataCoordinates::Degree), 44.9);
-
-    GeoDataLatLonAltBox other = llabox;
-
-    QCOMPARE(other.north(GeoDataCoordinates::Degree), 30.1);
-    QCOMPARE(other.south(GeoDataCoordinates::Degree), 12.2);
-    QCOMPARE(other.east(GeoDataCoordinates::Degree), 110.0);
-    QCOMPARE(other.west(GeoDataCoordinates::Degree), 44.9);
-    
-    llabox.setNorth(0.1);
-    other.setSouth(1.4);
-    
-    QCOMPARE(llabox.north(), 0.1);
-    QCOMPARE(llabox.south(GeoDataCoordinates::Degree), 12.2);
     QCOMPARE(other.north(GeoDataCoordinates::Degree), 30.1);
     QCOMPARE(other.south(), 1.4);
 }

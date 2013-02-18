@@ -78,7 +78,7 @@ public:
     MarbleModel const*const m_model;
     MarbleWidget *const m_widget;
     SelectionMethod m_selectionMethod;
-    GeoDataLatLonBox m_visibleRegion;
+    GeoDataLatLonAltBox m_visibleRegion;
     RoutingModel *m_routingModel;
     DownloadRegion m_downloadRegion;
 };
@@ -318,13 +318,13 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
                                            d->m_tileLevelRangeWidget->bottomLevel() );
     d->m_downloadRegion.setVisibleTileLevel( d->m_visibleTileLevel );
     // check whether "visible region" or "lat/lon region" is selection method
-    GeoDataLatLonBox downloadRegion;
+    GeoDataLatLonAltBox downloadRegion;
     switch ( d->m_selectionMethod ) {
     case VisibleRegionMethod:
         downloadRegion = d->m_visibleRegion;
         break;
     case SpecifiedRegionMethod:
-        downloadRegion = d->m_latLonBoxWidget->latLonBox();
+        downloadRegion = GeoDataLatLonAltBox( d->m_latLonBoxWidget->latLonBox(), 0, 0 );
         break;
    case RouteDownloadMethod:
         qreal offset = d->m_routeOffsetSpinBox->value();

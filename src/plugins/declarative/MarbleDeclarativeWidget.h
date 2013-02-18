@@ -127,7 +127,7 @@ public Q_SLOTS:
 
     void setCenter( Coordinate* center );
 
-    void centerOn( const Marble::GeoDataLatLonAltBox &bbox );
+    void centerOn( const Marble::GeoDataLatLonBox &bbox );
 
     void centerOn( const GeoDataCoordinates &coordinates );
 
