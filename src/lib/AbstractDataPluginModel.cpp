@@ -392,14 +392,13 @@ void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem
         }
 
         // If the item is already in our list, don't add it.
-        if( AbstractDataPluginItem *oldItem = findItem( item->id() ) ) {
-            if ( oldItem == item ) {
-                continue;
-            }
-            else {
-                item->deleteLater();
-                continue;
-            }
+        if ( d->m_itemSet.contains( item ) ) {
+            continue;
+        }
+
+        if( itemExists( item->id() ) ) {
+            item->deleteLater();
+            continue;
         }
 
         mDebug() << "New item " << item->id();
