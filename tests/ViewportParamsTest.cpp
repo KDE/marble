@@ -172,6 +172,38 @@ void ViewportParamsTest::screenCoordinates_GeoDataLineString_data()
     QTest::newRow("Mercator LatitudeCircle Latitude IDL")
             << projection << flags << latitudeLine << 2;
 
+    projection = Equirectangular;
+
+    flags = NoTessellation;
+    QTest::newRow("Equirect NoTesselation Longitude")
+            << projection << flags << longitudeLine << 2;
+
+    QTest::newRow("Equirect NoTesselation Diagonal IDL")
+            << projection << flags << diagonalLine << 2;
+
+    QTest::newRow("Equirect NoTesselation Latitude IDL")
+            << projection << flags << latitudeLine << 2;
+
+    flags = Tessellate;
+    QTest::newRow("Equirect Tesselate Longitude")
+            << projection << flags << longitudeLine << 2;
+
+    QTest::newRow("Equirect Tesselate Diagonal IDL")
+            << projection << flags << diagonalLine << 4;
+
+    QTest::newRow("Equirect Tesselate Latitude IDL")
+            << projection << flags << latitudeLine << 4;
+
+    flags = Tessellate | RespectLatitudeCircle;
+    QTest::newRow("Equirect LatitudeCircle Longitude")
+            << projection << flags << longitudeLine << 2;
+
+    QTest::newRow("Equirect LatitudeCircle Diagonal IDL")
+            << projection << flags << diagonalLine << 4;
+
+    QTest::newRow("Equirect LatitudeCircle Latitude IDL")
+            << projection << flags << latitudeLine << 2;
+
 
     projection = Spherical;
 
@@ -299,6 +331,37 @@ void ViewportParamsTest::geoDataLinearRing_data()
 //    QTest::newRow("Mercator LatitudeCircle aroundSPoleRing")
 //            << projection << flags << aroundSPoleRing << 1;
 
+    projection = Equirectangular;
+
+    flags = NoTessellation;
+    QTest::newRow("Equirect NoTesselation normalRing")
+            << projection << flags << normalRing << 2;
+
+    QTest::newRow("Equirect NoTesselation acrossIDLRing")
+            << projection << flags << acrossIDLRing << 2;
+
+    QTest::newRow("Equirect NoTesselation aroundSPoleRing")
+            << projection << flags << aroundSPoleRing << 2;
+
+    flags = Tessellate;
+    QTest::newRow("Equirect Tesselate normalRing")
+            << projection << flags << normalRing << 2;
+
+    QTest::newRow("Equirect Tesselate acrossIDLRing")
+            << projection << flags << acrossIDLRing << 2;
+
+    QTest::newRow("Equirect Tesselate aroundSPoleRing")
+            << projection << flags << aroundSPoleRing << 2;
+
+    flags = Tessellate | RespectLatitudeCircle;
+    QTest::newRow("Equirect LatitudeCircle normalRing")
+            << projection << flags << normalRing << 2;
+
+    QTest::newRow("Equirect LatitudeCircle acrossIDLRing")
+            << projection << flags << acrossIDLRing << 2;
+
+    QTest::newRow("Equirect LatitudeCircle aroundSPoleRing")
+            << projection << flags << aroundSPoleRing << 2;
 
     projection = Spherical;
 
