@@ -529,12 +529,9 @@ bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type
 
 AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) const
 {
-    QList<AbstractDataPluginItem*>::iterator listIt = d->m_itemSet.begin();
-    QList<AbstractDataPluginItem*>::iterator const end = d->m_itemSet.end();
-    
-    for (; listIt != end; ++listIt ) {
-        if( (*listIt)->id() == id ) {
-            return (*listIt);
+    foreach ( AbstractDataPluginItem *item, d->m_itemSet ) {
+        if( item->id() == id ) {
+            return item;
         }
     }
     
