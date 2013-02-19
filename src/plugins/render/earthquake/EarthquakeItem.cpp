@@ -41,7 +41,7 @@ QString EarthquakeItem::itemType() const
     return "earthquakeItem";
 }
 
-bool EarthquakeItem::initialized()
+bool EarthquakeItem::initialized() const
 {
     return m_magnitude > 0.0;
 }

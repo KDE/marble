@@ -41,7 +41,7 @@ class WikipediaItem : public AbstractDataPluginItem
     
     QString itemType() const;
      
-    bool initialized();
+    bool initialized() const;
     
     void addDownloadedFile( const QString& url, const QString& type );
     

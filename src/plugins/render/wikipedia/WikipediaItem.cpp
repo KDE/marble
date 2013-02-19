@@ -71,7 +71,7 @@ QString WikipediaItem::itemType() const
     return "wikipediaItem";
 }
      
-bool WikipediaItem::initialized()
+bool WikipediaItem::initialized() const
 {
     return true;
 }

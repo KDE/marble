@@ -83,7 +83,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
      */
     virtual QString itemType() const = 0;
 
-    virtual bool initialized() = 0;
+    virtual bool initialized() const = 0;
 
     virtual void addDownloadedFile( const QString& url, const QString& type );
 

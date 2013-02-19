@@ -29,7 +29,7 @@ QString DeclarativeDataPluginItem::itemType() const
     return "DeclarativeDataPluginItem";
 }
 
-bool DeclarativeDataPluginItem::initialized()
+bool DeclarativeDataPluginItem::initialized() const
 {
     return true;
 }

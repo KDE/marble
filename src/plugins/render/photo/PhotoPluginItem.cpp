@@ -77,7 +77,7 @@ QString PhotoPluginItem::itemType() const
     return QString( "photoItem" );
 }
  
-bool PhotoPluginItem::initialized()
+bool PhotoPluginItem::initialized() const
 {
     return !m_smallImage.isNull() && coordinate().isValid();
 }

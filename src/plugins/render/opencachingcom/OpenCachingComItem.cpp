@@ -70,7 +70,7 @@ QString OpenCachingComItem::itemType() const
     return "OpenCachingComItem";
 }
 
-bool OpenCachingComItem::initialized()
+bool OpenCachingComItem::initialized() const
 {
     return !id().isEmpty();
 }

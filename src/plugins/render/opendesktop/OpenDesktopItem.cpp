@@ -35,7 +35,7 @@ QString OpenDesktopItem::itemType() const
     return "openDesktopItem";
 }
  
-bool OpenDesktopItem::initialized()
+bool OpenDesktopItem::initialized() const
 {
     return size() != QSizeF(-1, -1);
 }

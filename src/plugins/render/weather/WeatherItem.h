@@ -62,7 +62,7 @@ class WeatherItem : public AbstractDataPluginItem
      */
     virtual QString service() const = 0;
      
-    bool initialized();
+    bool initialized() const;
     
     virtual void addDownloadedFile( const QString& url, const QString& type ) = 0;
                          

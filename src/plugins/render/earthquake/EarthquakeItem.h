@@ -33,7 +33,7 @@ public:
     QString itemType() const;
 
     // Returns true if the item is paintable
-    bool initialized();
+    bool initialized() const;
 
     // Here the item gets painted
     void paint( QPainter *painter );

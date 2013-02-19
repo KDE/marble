@@ -29,7 +29,7 @@ public:
 
     virtual QString itemType() const;
 
-    virtual bool initialized();
+    virtual bool initialized() const;
 
     bool operator<( const AbstractDataPluginItem *other ) const;
 };
