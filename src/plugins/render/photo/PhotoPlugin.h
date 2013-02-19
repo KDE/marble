@@ -74,8 +74,6 @@ class PhotoPlugin : public AbstractDataPlugin, public DialogConfigurationInterfa
      */
     virtual void setSettings( const QHash<QString,QVariant> &settings );
 
-    QStringList checkState() const;
-
  protected:
     bool eventFilter( QObject *object, QEvent *event );
 

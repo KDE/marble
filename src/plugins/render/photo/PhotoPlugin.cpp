@@ -189,7 +189,7 @@ QHash<QString,QVariant> PhotoPlugin::settings() const
     QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
     settings.insert( "numberOfItems", numberOfItems() );
-    settings.insert( "checkState", checkState() );
+    settings.insert( "checkState", m_checkStateList );
 
     return settings;
 }
@@ -230,13 +230,8 @@ void PhotoPlugin::readSettings()
 
     ui_configWidget->m_itemNumberSpinBox->setValue( numberOfItems() );
     for ( int i = 0; i < ui_configWidget->m_licenseListWidget->count(); ++i ) {
-        ui_configWidget->m_licenseListWidget->item(i)->setCheckState( Qt::Unchecked );
-        for ( int j = 0; j < checkState().count(); ++j ) {
-            if ( ui_configWidget->m_licenseListWidget->item(i)->data( Qt::UserRole+1 ) ==
-                 checkState().at(j).toInt() ) {
-                ui_configWidget->m_licenseListWidget->item(i)->setCheckState( Qt::Checked );
-            }
-        }
+        const QString licenseId = QString::number( ui_configWidget->m_licenseListWidget->item(i)->data( Qt::UserRole+1 ).toInt() );
+        ui_configWidget->m_licenseListWidget->item(i)->setCheckState( m_checkStateList.contains( licenseId ) ? Qt::Checked : Qt::Unchecked );
     }
 }
 
@@ -274,11 +269,6 @@ void PhotoPlugin::checkNumberOfItems( quint32 number ) {
     }
 
     readSettings();
-}
-
-QStringList PhotoPlugin::checkState() const
-{
-    return m_checkStateList;
 }
 
 Q_EXPORT_PLUGIN2(PhotoPlugin, Marble::PhotoPlugin)
