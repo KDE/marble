@@ -252,7 +252,6 @@ void PhotoPlugin::writeSettings()
         }
     }
     m_checkStateList = licenseCheckStateList;
-    setCheckState();
 
     emit settingsChanged( nameId() );
 }
@@ -280,18 +279,6 @@ void PhotoPlugin::checkNumberOfItems( quint32 number ) {
 QStringList PhotoPlugin::checkState() const
 {
     return m_checkStateList;
-}
-
-void PhotoPlugin::setCheckState()
-{
-    for( int i = 0; i < ui_configWidget->m_licenseListWidget->count(); ++i ) {
-        for ( int j = 0; j < checkState().count(); ++j ) {
-            if ( ui_configWidget->m_licenseListWidget->item(i)->data( Qt::UserRole+1 ) ==
-                checkState().at(j).toInt() ) {
-                ui_configWidget->m_licenseListWidget->item(i)->setCheckState( Qt::Checked );
-            }
-        }
-    }
 }
 
 Q_EXPORT_PLUGIN2(PhotoPlugin, Marble::PhotoPlugin)
