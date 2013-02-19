@@ -189,7 +189,7 @@ QHash<QString,QVariant> PhotoPlugin::settings() const
     QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
     settings.insert( "numberOfItems", numberOfItems() );
-    settings.insert( "checkState", m_checkStateList );
+    settings.insert( "checkState", m_checkStateList.join(",") );
 
     return settings;
 }
@@ -199,13 +199,9 @@ void PhotoPlugin::setSettings( const QHash<QString,QVariant> &settings )
     AbstractDataPlugin::setSettings( settings );
 
     setNumberOfItems( qMin<int>( maximumNumberOfItems, settings.value( "numberOfItems", 15 ).toInt() ) );
-    m_checkStateList = settings.value( "checkState" ).toStringList();
+    m_checkStateList = settings.value( "checkState", "1,2,3,4,5,6,7" ).toString().split( ",", QString::SkipEmptyParts );
 
-    if ( !settings.contains( "checkState" ) ) {
-        m_checkStateList << "1" << "2" << "3" << "4" << "5" << "6" << "7";
-        updateSettings();
-    }
-
+    updateSettings();
     readSettings();
 }
 
