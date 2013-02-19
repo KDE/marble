@@ -334,7 +334,7 @@ GeoDataLineString GeoDataLineString::toRangeCorrected() const
 
         delete p()->m_rangeCorrected;
 
-        GeoDataLineString poleCorrected = toNormalized().toPoleCorrected();
+        GeoDataLineString poleCorrected = toPoleCorrected();
         p()->m_rangeCorrected = new GeoDataLineString( poleCorrected );
     }
 

@@ -50,7 +50,7 @@ GeoDataLineString GeoDataLinearRing::toRangeCorrected() const
 
         delete p()->m_rangeCorrected;
 
-        GeoDataLinearRing poleCorrected = toNormalized().toPoleCorrected();
+        GeoDataLinearRing poleCorrected = toPoleCorrected();
         p()->m_rangeCorrected = new GeoDataLinearRing( poleCorrected );
     }
 
