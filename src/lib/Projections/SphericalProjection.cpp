@@ -572,7 +572,7 @@ void SphericalProjectionPrivate::horizonToPolygon( const ViewportParams *viewpor
     const int itEnd = fabs(diff * RAD2DEG);
 
     // Create a polygon that resembles an arc between the two position vectors
-    for ( int it = 0; it <= itEnd; ++it ) {
+    for ( int it = 1; it <= itEnd; ++it ) {
         const qreal angle = alpha + DEG2RAD * sgndiff * it;
         const qreal itx = imageHalfWidth  +  arcradius * cos( angle );
         const qreal ity = imageHalfHeight +  arcradius * sin( angle );
