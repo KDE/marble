@@ -71,7 +71,7 @@ marble_add_test( TestGeoSceneWriter )
 
 marble_add_test( QuaternionTest )           # Check Quaternion arithmetic
 marble_add_test( TileIdTest )               # Check TileId arithmetic
-marble_add_test( ProjectionTest )           # Check LineString projection
+marble_add_test( ViewportParamsTest )
 marble_add_test( PluginManagerTest )        # Check plugin loading
 marble_add_test( MarbleRunnerManagerTest )  # Check RunnerManager signals
 marble_add_test( BookmarkManagerTest )

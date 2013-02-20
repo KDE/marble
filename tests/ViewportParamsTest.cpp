@@ -6,32 +6,33 @@
 // the source code.
 //
 // Copyright 2012       Thibaut Gridel <tgridel@free.fr>
+// Copyright 2012,2013  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include <QtTest/QtTest>
-#include "GeoPainter.h"
+#include "TestUtils.h"
+
 #include "ViewportParams.h"
-#include "MarbleMap.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 
 namespace Marble
 {
 
-class ProjectionTest : public QObject
+class ViewportParamsTest : public QObject
 {
     Q_OBJECT
 
  private slots:
     void constructorDefaultValues();
 
-    void drawLineString_data();
-    void drawLineString();
+    void screenCoordinates_GeoDataLineString_data();
+    void screenCoordinates_GeoDataLineString();
 
     void setInvalidRadius();
 };
 
-void ProjectionTest::constructorDefaultValues()
+void ViewportParamsTest::constructorDefaultValues()
 {
     const ViewportParams viewport;
 
@@ -53,7 +54,7 @@ void ProjectionTest::constructorDefaultValues()
     // FIXME QCOMPARE( viewport.viewLatLonAltBox().center().latitude(), viewport.centerLatitude() );
 }
 
-void ProjectionTest::drawLineString_data()
+void ViewportParamsTest::screenCoordinates_GeoDataLineString_data()
 {
     QTest::addColumn<Marble::Projection>( "projection" );
     QTest::addColumn<Marble::TessellationFlags>( "tessellation" );
@@ -141,7 +142,7 @@ void ProjectionTest::drawLineString_data()
 
 }
 
-void ProjectionTest::drawLineString()
+void ViewportParamsTest::screenCoordinates_GeoDataLineString()
 {
     QFETCH( Marble::Projection, projection );
     QFETCH( Marble::TessellationFlags, tessellation );
@@ -177,7 +178,7 @@ void ProjectionTest::drawLineString()
     QCOMPARE( polys.size(), size );
 }
 
-void ProjectionTest::setInvalidRadius()
+void ViewportParamsTest::setInvalidRadius()
 {
     ViewportParams viewport;
 
@@ -194,6 +195,6 @@ void ProjectionTest::setInvalidRadius()
 Q_DECLARE_METATYPE( Marble::Projection )
 Q_DECLARE_METATYPE( Marble::TessellationFlag )
 Q_DECLARE_METATYPE( Marble::TessellationFlags )
-QTEST_MAIN( Marble::ProjectionTest )
+QTEST_MAIN( Marble::ViewportParamsTest )
 
-#include "ProjectionTest.moc"
+#include "ViewportParamsTest.moc"
