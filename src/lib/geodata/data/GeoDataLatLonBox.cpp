@@ -597,8 +597,9 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
     QVector<GeoDataCoordinates>::ConstIterator it( lineString.constBegin() );
     QVector<GeoDataCoordinates>::ConstIterator itEnd( lineString.constEnd() );
 
-    for ( ; it != itEnd; ++it )
-    {
+    bool processingLastNode = false;
+
+    while( it != itEnd ) {
         // Get coordinates and normalize them to the desired range.
         (it)->geoCoordinates( lon, lat );
         GeoDataCoordinates::normalizeLonLat( lon, lat );
@@ -654,6 +655,16 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
 
         previousLon = lon;
         previousSign = currentSign;
+
+        if ( processingLastNode ) {
+            break;
+        }
+        ++it;
+
+        if( lineString.isClosed() && it == itEnd ) {
+                it = lineString.constBegin();
+                processingLastNode = true;
+        }
     }
 
     if ( idlCrossed ) {
