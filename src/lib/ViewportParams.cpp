@@ -7,6 +7,7 @@
 //
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2010-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 
@@ -56,8 +57,6 @@ public:
     static const MercatorProjection   s_mercatorProjection;
 
     GeoDataCoordinates   m_focusPoint;
-    bool                 m_hasFocusPoint;
-
 };
 
 ViewportParamsPrivate::ViewportParamsPrivate()
@@ -71,8 +70,7 @@ ViewportParamsPrivate::ViewportParamsPrivate()
       m_angularResolution( 0.25 * M_PI / fabs( (qreal)( m_radius ) ) ),
       m_size( 100, 100 ),
       m_dirtyBox( true ),
-      m_viewLatLonAltBox(),
-      m_hasFocusPoint(false)
+      m_viewLatLonAltBox()
 {
     m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 }
@@ -409,7 +407,7 @@ QRegion ViewportParams::mapRegion() const
 
 GeoDataCoordinates ViewportParams::focusPoint() const
 {
-    if (d->m_hasFocusPoint) {
+    if (d->m_focusPoint.isValid()) {
         return d->m_focusPoint;
     }
     else {
@@ -424,12 +422,11 @@ GeoDataCoordinates ViewportParams::focusPoint() const
 void ViewportParams::setFocusPoint(const GeoDataCoordinates &focusPoint)
 {
     d->m_focusPoint = focusPoint;
-    d->m_hasFocusPoint = true;
 }
 
 void ViewportParams::resetFocusPoint()
 {
-    d->m_hasFocusPoint = false;
+    d->m_focusPoint = GeoDataCoordinates();
 }
 
 }
