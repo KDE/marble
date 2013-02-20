@@ -13,6 +13,7 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 
 #include <QtTest/QtTest>
@@ -25,6 +26,12 @@ bool qCompare(qreal val1, qreal val2, qreal epsilon, const char *actual, const c
     return ( qAbs( val1 - val2 ) < epsilon )
         ? compare_helper( true, "COMPARE()", file, line )
         : compare_helper( false, "Compared qreals are not the same", toString( val1 ), toString( val2 ), actual, expected, file, line );
+}
+
+template<>
+char *toString(const Marble::GeoDataCoordinates &coordinates)
+{
+    return qstrdup( coordinates.toString( Marble::GeoDataCoordinates::Decimal, 10 ).toAscii().data() );
 }
 
 template<>
