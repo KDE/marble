@@ -679,6 +679,12 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
             || west <= east ) {
             east = +M_PI;
             west = -M_PI;
+            // if polygon fully in south hemisphere, contain south pole
+            if( north < 0 ) {
+                south = -M_PI/2;
+            } else {
+                north = M_PI/2;
+            }
         }
     }
 
