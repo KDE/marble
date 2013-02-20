@@ -13,6 +13,8 @@
 #include "TestUtils.h"
 
 #include "ViewportParams.h"
+
+#include "AbstractProjection.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 
@@ -25,6 +27,9 @@ class ViewportParamsTest : public QObject
 
  private slots:
     void constructorDefaultValues();
+
+    void constructorValues_data();
+    void constructorValues();
 
     void screenCoordinates_GeoDataLineString_data();
     void screenCoordinates_GeoDataLineString();
@@ -54,6 +59,60 @@ void ViewportParamsTest::constructorDefaultValues()
     QVERIFY( viewport.viewLatLonAltBox() == viewport.latLonAltBox( QRect( 0, 0, 100, 100 ) ) );
     // FIXME QCOMPARE( viewport.viewLatLonAltBox().center().longitude(), viewport.centerLongitude() );
     // FIXME QCOMPARE( viewport.viewLatLonAltBox().center().latitude(), viewport.centerLatitude() );
+}
+
+void ViewportParamsTest::constructorValues_data()
+{
+    QTest::addColumn<Marble::Projection>( "projection" );
+    QTest::addColumn<qreal>( "lon" );
+    QTest::addColumn<qreal>( "lat" );
+    QTest::addColumn<int>( "radius" );
+    QTest::addColumn<QSize>( "size" );
+
+    ViewportParams viewport;
+
+    viewport.setProjection( Spherical );
+    const AbstractProjection *const spherical = viewport.currentProjection();
+
+    viewport.setProjection( Mercator);
+    const AbstractProjection *const mercator = viewport.currentProjection();
+
+    viewport.setProjection( Equirectangular );
+    const AbstractProjection *const equirectangular = viewport.currentProjection();
+
+    addRow() << Spherical << 0. << 0. << 2000 << QSize( 100, 100 );
+    addRow() << Mercator << 0. << 0. << 2000 << QSize( 100, 100 );
+    addRow() << Equirectangular << 0. << 0. << 2000 << QSize( 100, 100 );
+
+    addRow() << Spherical << 205. * DEG2RAD << spherical->maxValidLat() + 1.0 << 2000 << QSize( 100, 100 );
+    addRow() << Mercator << 205. * DEG2RAD << mercator->maxValidLat() + 1.0 << 2000 << QSize( 100, 100 );
+    addRow() << Equirectangular << 205. * DEG2RAD << equirectangular->maxValidLat() + 1.0 << 2000 << QSize( 100, 100 );
+}
+
+void ViewportParamsTest::constructorValues()
+{
+    QFETCH( Projection, projection );
+    QFETCH( qreal, lon );
+    QFETCH( qreal, lat );
+    QFETCH( int, radius );
+    QFETCH( QSize, size );
+
+    const ViewportParams byConstructor( projection, lon, lat, radius, size );
+
+    ViewportParams bySetters;
+    bySetters.setProjection( projection );
+    bySetters.centerOn( lon, lat );
+    bySetters.setRadius( radius );
+    bySetters.setSize( size );
+
+    QCOMPARE( byConstructor.projection(), bySetters.projection() );
+    QCOMPARE( byConstructor.currentProjection(), bySetters.currentProjection() );
+    QCOMPARE( byConstructor.centerLongitude(), bySetters.centerLongitude() );
+    QCOMPARE( byConstructor.centerLatitude(), bySetters.centerLatitude() );
+    QCOMPARE( byConstructor.planetAxis(), bySetters.planetAxis() );
+    QCOMPARE( byConstructor.angularResolution(), bySetters.angularResolution() );
+    QCOMPARE( byConstructor.radius(), bySetters.radius() );
+    QCOMPARE( byConstructor.size(), bySetters.size() );
 }
 
 void ViewportParamsTest::screenCoordinates_GeoDataLineString_data()

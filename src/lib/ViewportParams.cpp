@@ -31,7 +31,12 @@ namespace Marble
 class ViewportParamsPrivate
 {
 public:
-    ViewportParamsPrivate();
+    ViewportParamsPrivate( Projection projection,
+                           qreal centerLongitude, qreal centerLatitude,
+                           int radius,
+                           const QSize &size );
+
+    static const AbstractProjection *abstractProjection( Projection projection );
 
     // These two go together.  m_currentProjection points to one of
     // the static Projection classes at the bottom.
@@ -59,31 +64,56 @@ public:
     GeoDataCoordinates   m_focusPoint;
 };
 
-ViewportParamsPrivate::ViewportParamsPrivate()
-    : m_projection( Spherical ),
-      m_currentProjection( &s_sphericalProjection ),
-      m_centerLongitude( 0 ),
-      m_centerLatitude( 0 ),
-      m_planetAxis( 1.0, 0.0, 0.0, 0.0 ), // Default view
-      m_planetAxisMatrix(),
-      m_radius( 2000 ),
-      m_angularResolution( 0.25 * M_PI / fabs( (qreal)( m_radius ) ) ),
-      m_size( 100, 100 ),
-      m_dirtyBox( true ),
-      m_viewLatLonAltBox()
-{
-    m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
-}
-
-
 const SphericalProjection  ViewportParamsPrivate::s_sphericalProjection;
 const EquirectProjection   ViewportParamsPrivate::s_equirectProjection;
 const MercatorProjection   ViewportParamsPrivate::s_mercatorProjection;
 
+ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
+                                              qreal centerLongitude, qreal centerLatitude,
+                                              int radius,
+                                              const QSize &size )
+    : m_projection( projection ),
+      m_currentProjection( abstractProjection( projection ) ),
+      m_centerLongitude( centerLongitude ),
+      m_centerLatitude( centerLatitude ),
+      m_planetAxis(),
+      m_planetAxisMatrix(),
+      m_radius( radius ),
+      m_angularResolution( 0.25 * M_PI / fabs( (qreal)( m_radius ) ) ),
+      m_size( size ),
+      m_dirtyBox( true ),
+      m_viewLatLonAltBox()
+{
+}
+
+const AbstractProjection *ViewportParamsPrivate::abstractProjection(Projection projection)
+{
+    switch ( projection ) {
+    case Spherical:
+        return &s_sphericalProjection;
+    case Equirectangular:
+        return &s_equirectProjection;
+    case Mercator:
+        return &s_mercatorProjection;
+    }
+
+    return 0;
+}
+
 
 ViewportParams::ViewportParams()
-    : d( new ViewportParamsPrivate )
+    : d( new ViewportParamsPrivate( Spherical, 0, 0, 2000, QSize( 100, 100 ) ) )
 {
+    centerOn( d->m_centerLongitude, d->m_centerLatitude );
+}
+
+ViewportParams::ViewportParams( Projection projection,
+                                qreal centerLongitude, qreal centerLatitude,
+                                int radius,
+                                const QSize &size )
+    : d( new ViewportParamsPrivate( projection, centerLongitude, centerLatitude, radius, size ) )
+{
+    centerOn( d->m_centerLongitude, d->m_centerLatitude );
 }
 
 ViewportParams::~ViewportParams()
@@ -109,19 +139,7 @@ const AbstractProjection *ViewportParams::currentProjection() const
 void ViewportParams::setProjection(Projection newProjection)
 {
     d->m_projection = newProjection;
-
-    // Set the pointer to the current projection class.
-    switch ( newProjection ) {
-    case Spherical:
-        d->m_currentProjection = &d->s_sphericalProjection;
-        break;
-    case Equirectangular:
-        d->m_currentProjection = &d->s_equirectProjection;
-        break;
-    case Mercator:
-        d->m_currentProjection = &d->s_mercatorProjection;
-        break;
-    }
+    d->m_currentProjection = ViewportParamsPrivate::abstractProjection( newProjection );
 
     // We now need to reset the planetAxis to make sure
     // that it's a valid axis orientation!

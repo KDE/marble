@@ -45,6 +45,10 @@ class MARBLE_EXPORT ViewportParams
 {
  public:
     ViewportParams( );
+    explicit ViewportParams( Projection projection,
+                             qreal centerLongitude = 0, qreal centerLatatitude = 0,
+                             int radius = 2000,
+                             const QSize &size = QSize( 100, 100 ) );
     ~ViewportParams();
 
     // Getters and setters
