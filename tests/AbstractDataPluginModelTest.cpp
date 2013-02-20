@@ -62,6 +62,8 @@ class AbstractDataPluginModelTest : public QObject
     Q_OBJECT
 
  private slots:
+    void init_testcase();
+
     void defaultConstructor();
 
     void destructor();
@@ -71,7 +73,18 @@ class AbstractDataPluginModelTest : public QObject
 
     void addItemToList_keepExisting_data();
     void addItemToList_keepExisting();
+
+ private:
+    const MarbleModel m_marbleModel;
+    static const ViewportParams fullViewport;
 };
+
+const ViewportParams AbstractDataPluginModelTest::fullViewport( Equirectangular, 0, 0, 100, QSize( 230, 230 ) );
+
+void AbstractDataPluginModelTest::init_testcase()
+{
+    QCOMPARE( GeoDataLatLonBox( fullViewport.viewLatLonAltBox() ), GeoDataLatLonBox( 90, -90, 180, -180, GeoDataCoordinates::Degree ) );
+}
 
 void AbstractDataPluginModelTest::defaultConstructor()
 {
@@ -104,24 +117,29 @@ void AbstractDataPluginModelTest::destructor()
 void AbstractDataPluginModelTest::addItemToList_data()
 {
     QTest::addColumn<bool>( "initialized" );
+    QTest::addColumn<QString>( "planetId" );
 
     const bool isInitialized = true;
 
-    addRow() << isInitialized;
-    addRow() << !isInitialized;
+    addRow() << isInitialized << m_marbleModel.planetId();
+    addRow() << !isInitialized << m_marbleModel.planetId();
+    addRow() << isInitialized << QString( "Saturn" );
 }
 
 void AbstractDataPluginModelTest::addItemToList()
 {
     QFETCH( bool, initialized );
+    QFETCH( QString, planetId );
 
     TestDataPluginModel model;
 
+    QVERIFY( model.isFavoriteItemsOnly() == false );
     QVERIFY( !model.itemExists( "foo" ) );
     QVERIFY( model.findItem( "foo" ) == 0 );
 
     TestDataPluginItem *item = new TestDataPluginItem();
     item->setInitialized( initialized );
+    item->setTarget( planetId );
     item->setId( "foo" );
 
     QSignalSpy itemsUpdatedSpy( &model, SIGNAL( itemsUpdated() ) );
@@ -131,6 +149,10 @@ void AbstractDataPluginModelTest::addItemToList()
     QVERIFY( model.itemExists( "foo" ) );
     QVERIFY( model.findItem( "foo" ) != 0 );
     QCOMPARE( itemsUpdatedSpy.count() == 1, initialized );
+
+    const bool visible = initialized && ( m_marbleModel.planetId() == planetId );
+
+    QCOMPARE( static_cast<bool>( model.items( &fullViewport, &m_marbleModel, 1 ).contains( item ) ), visible );
 }
 
 void AbstractDataPluginModelTest::addItemToList_keepExisting_data()
