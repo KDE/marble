@@ -30,6 +30,8 @@ class ViewportParamsTest : public QObject
     void screenCoordinates_GeoDataLineString();
 
     void setInvalidRadius();
+
+    void setFocusPoint();
 };
 
 void ViewportParamsTest::constructorDefaultValues()
@@ -188,6 +190,34 @@ void ViewportParamsTest::setInvalidRadius()
     viewport.setRadius( 0 );
 
     QCOMPARE( viewport.radius(), radius );
+}
+
+void ViewportParamsTest::setFocusPoint()
+{
+    const GeoDataCoordinates focusPoint1( 10, 13, 0, GeoDataCoordinates::Degree );
+    const GeoDataCoordinates focusPoint2( 14.3, 20.5, 0, GeoDataCoordinates::Degree );
+
+    ViewportParams viewport;
+
+    const GeoDataCoordinates center = viewport.focusPoint();
+
+    QVERIFY( center != focusPoint1 );
+    QVERIFY( center != focusPoint2 );
+
+    viewport.setFocusPoint( focusPoint1 );
+    QCOMPARE( viewport.focusPoint(), focusPoint1 );
+
+    viewport.resetFocusPoint();
+    QCOMPARE( viewport.focusPoint(), center );
+
+    viewport.setFocusPoint( focusPoint2 );
+    QCOMPARE( viewport.focusPoint(), focusPoint2 );
+
+    viewport.setFocusPoint( focusPoint1 );
+    QCOMPARE( viewport.focusPoint(), focusPoint1 );
+
+    viewport.resetFocusPoint();
+    QCOMPARE( viewport.focusPoint(), center );
 }
 
 }
