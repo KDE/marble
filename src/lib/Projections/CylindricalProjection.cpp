@@ -206,8 +206,18 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
         }
     }
 
-    if ( polygons.last()->size() <= 1 ){
-        polygons.pop_back(); // Clean up "unused" empty polygon instances
+    GeoDataLatLonAltBox box = lineString.latLonAltBox();
+    if( box.width() == 2*M_PI ) {
+        QPolygonF *poly = polygons.last();
+        if( box.containsPole( NorthPole ) ) {
+            poly->push_front( QPointF( poly->first().x(), 0 ) );
+            poly->push_back( QPointF( poly->last().x(), 0 ) );
+            poly->push_back( QPointF( poly->first().x(), 0 ) );
+        } else {
+            poly->push_front( QPointF( poly->first().x(), viewport->height() ) );
+            poly->push_back( QPointF( poly->last().x(), viewport->height() ) );
+            poly->push_back( QPointF( poly->first().x(), viewport->height() ) );
+        }
     }
 
     repeatPolygons( viewport, polygons );
@@ -220,11 +230,6 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
 {
     Q_Q( const CylindricalProjection );
 
-    if ( !q->repeatX() ) {
-        // The projection doesn't allow repeats in direction of the x-axis
-        return;
-    }
-    
     bool globeHidesPoint = false;
 
     qreal xEast = 0;

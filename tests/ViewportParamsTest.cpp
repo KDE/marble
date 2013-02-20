@@ -296,8 +296,8 @@ void ViewportParamsTest::geoDataLinearRing_data()
 
     GeoDataLinearRing aroundSPoleRing;
     aroundSPoleRing << GeoDataCoordinates(-175, -65, 0, deg )
-                 << GeoDataCoordinates(115, -70, 0, deg )
-                    << GeoDataCoordinates(105, -75, 0, deg );
+                 << GeoDataCoordinates(-55, -70, 0, deg )
+                    << GeoDataCoordinates(65, -75, 0, deg );
 
     Projection projection = Mercator;
 
@@ -417,6 +417,8 @@ void ViewportParamsTest::geoDataLinearRing()
         // at least 3 points in one poly
         QVERIFY( poly->size() > 2 );
         QPointF oldCoord = poly->first();
+        // polygon comes back to same point
+        QVERIFY( poly->isClosed() );
         poly->pop_front();
 
         foreach(const QPointF &coord, *poly) {
