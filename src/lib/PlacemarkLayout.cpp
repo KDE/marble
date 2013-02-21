@@ -267,9 +267,8 @@ int PlacemarkLayout::maxLabelHeight() const
 /// feed an internal QMap of placemarks with TileId as key when model changes
 void PlacemarkLayout::addPlacemarks( QModelIndex parent, int first, int last )
 {
-    int size = m_placemarkModel.rowCount();
-    Q_ASSERT( first < size );
-    Q_ASSERT( last < size );
+    Q_ASSERT( first < m_placemarkModel.rowCount() );
+    Q_ASSERT( last < m_placemarkModel.rowCount() );
     for( int i=first; i<=last; ++i ) {
         QModelIndex index = m_placemarkModel.index( i, 0, parent );
         Q_ASSERT( index.isValid() );
@@ -289,9 +288,8 @@ void PlacemarkLayout::addPlacemarks( QModelIndex parent, int first, int last )
 
 void PlacemarkLayout::removePlacemarks( QModelIndex parent, int first, int last )
 {
-    int size = m_placemarkModel.rowCount();
-    Q_ASSERT( first < size );
-    Q_ASSERT( last < size );
+    Q_ASSERT( first < m_placemarkModel.rowCount() );
+    Q_ASSERT( last < m_placemarkModel.rowCount() );
     for( int i=first; i<=last; ++i ) {
         QModelIndex index = m_placemarkModel.index( i, 0, parent );
         Q_ASSERT( index.isValid() );

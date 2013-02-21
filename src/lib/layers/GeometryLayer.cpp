@@ -399,9 +399,8 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
 
 void GeometryLayer::addPlacemarks( QModelIndex parent, int first, int last )
 {
-    int size = d->m_model->rowCount( parent );
-    Q_ASSERT( first < size );
-    Q_ASSERT( last < size );
+    Q_ASSERT( first < d->m_model->rowCount( parent ) );
+    Q_ASSERT( last < d->m_model->rowCount( parent ) );
     for( int i=first; i<=last; ++i ) {
         QModelIndex index = d->m_model->index( i, 0, parent );
         Q_ASSERT( index.isValid() );
@@ -415,8 +414,7 @@ void GeometryLayer::addPlacemarks( QModelIndex parent, int first, int last )
 
 void GeometryLayer::removePlacemarks( QModelIndex parent, int first, int last )
 {
-    int size = d->m_model->rowCount( parent );
-    Q_ASSERT( last < size );
+    Q_ASSERT( last < d->m_model->rowCount( parent ) );
     for( int i=first; i<=last; ++i ) {
         QModelIndex index = d->m_model->index( i, 0, parent );
         Q_ASSERT( index.isValid() );
