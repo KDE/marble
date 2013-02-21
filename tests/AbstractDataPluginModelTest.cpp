@@ -66,6 +66,8 @@ class AbstractDataPluginModelTest : public QObject
  private slots:
     void defaultConstructor();
 
+    void destructor();
+
     void addItemToList();
 
     void addItemToList_keepExisting();
@@ -79,6 +81,27 @@ void AbstractDataPluginModelTest::defaultConstructor()
     const TestDataPluginModel model;
 
     QCOMPARE( model.isFavoriteItemsOnly(), false );
+}
+
+void AbstractDataPluginModelTest::destructor()
+{
+    QPointer<AbstractDataPluginItem> item( new TestDataPluginItem );
+    item->setId( "foo" );
+
+    QEventLoop loop;
+    connect( item, SIGNAL(destroyed()), &loop, SLOT(quit()) );
+
+    {
+        TestDataPluginModel model;
+        model.addItemToList( item );
+
+        QVERIFY( model.itemExists( "foo" ) );
+    }
+
+    QTimer::singleShot( 5000, &loop, SLOT(quit()) ); // watchdog timer
+    loop.exec();
+
+    QVERIFY( item.isNull() );
 }
 
 void AbstractDataPluginModelTest::addItemToList()
@@ -100,18 +123,23 @@ void AbstractDataPluginModelTest::addItemToList_keepExisting()
 {
     TestDataPluginModel model;
 
-    AbstractDataPluginItem *item = new TestDataPluginItem();
+    QPointer<AbstractDataPluginItem> item( new TestDataPluginItem() );
     item->setId( "foo" );
     model.addItemToList( item );
 
-    AbstractDataPluginItem *rejectedItem = new TestDataPluginItem();
+    QPointer<AbstractDataPluginItem> rejectedItem( new TestDataPluginItem() );
     rejectedItem->setId( "foo" );
+
+    QEventLoop loop;
+    connect( rejectedItem.data(), SIGNAL( destroyed() ), &loop, SLOT( quit() ) );
+
     model.addItemToList( rejectedItem );
 
-    // change id to verify that "foo" isn't contained any longer
-    item->setId( "bar" );
-    QVERIFY( model.itemExists( "bar" ) );
-    QVERIFY( !model.itemExists( "foo" ) );
+    QTimer::singleShot( 5000, &loop, SLOT( quit() ) ); // watchdog timer
+    loop.exec();
+
+    QVERIFY( !item.isNull() );
+    QVERIFY( rejectedItem.isNull() );
 }
 
 void AbstractDataPluginModelTest::addItemToList_itemsUpdated_data()
