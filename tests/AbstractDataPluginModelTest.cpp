@@ -17,8 +17,6 @@
 #include "MarbleModel.h"
 #include "ViewportParams.h"
 
-Q_DECLARE_METATYPE( Marble::AbstractDataPluginItem * )
-
 using namespace Marble;
 
 class TestDataPluginItem : public AbstractDataPluginItem
@@ -26,9 +24,9 @@ class TestDataPluginItem : public AbstractDataPluginItem
     Q_OBJECT
 
 public:
-    TestDataPluginItem( bool initialized = false, QObject *parent = 0 ) :
+    TestDataPluginItem( QObject *parent = 0 ) :
         AbstractDataPluginItem( parent ),
-        m_initialized( initialized )
+        m_initialized( false )
     {}
 
     void setInitialized( bool initialized ) { m_initialized = initialized; }
@@ -68,12 +66,10 @@ class AbstractDataPluginModelTest : public QObject
 
     void destructor();
 
+    void addItemToList_data();
     void addItemToList();
 
     void addItemToList_keepExisting();
-
-    void addItemToList_itemsUpdated_data();
-    void addItemToList_itemsUpdated();
 };
 
 void AbstractDataPluginModelTest::defaultConstructor()
@@ -104,19 +100,36 @@ void AbstractDataPluginModelTest::destructor()
     QVERIFY( item.isNull() );
 }
 
+void AbstractDataPluginModelTest::addItemToList_data()
+{
+    QTest::addColumn<bool>( "initialized" );
+
+    const bool isInitialized = true;
+
+    addRow() << isInitialized;
+    addRow() << !isInitialized;
+}
+
 void AbstractDataPluginModelTest::addItemToList()
 {
+    QFETCH( bool, initialized );
+
     TestDataPluginModel model;
 
     QVERIFY( !model.itemExists( "foo" ) );
     QVERIFY( model.findItem( "foo" ) == 0 );
 
-    AbstractDataPluginItem *item = new TestDataPluginItem();
+    TestDataPluginItem *item = new TestDataPluginItem();
+    item->setInitialized( initialized );
     item->setId( "foo" );
+
+    QSignalSpy itemsUpdatedSpy( &model, SIGNAL( itemsUpdated() ) );
+
     model.addItemToList( item );
 
     QVERIFY( model.itemExists( "foo" ) );
     QVERIFY( model.findItem( "foo" ) != 0 );
+    QCOMPARE( itemsUpdatedSpy.count() == 1, initialized );
 }
 
 void AbstractDataPluginModelTest::addItemToList_keepExisting()
@@ -140,29 +153,6 @@ void AbstractDataPluginModelTest::addItemToList_keepExisting()
 
     QVERIFY( !item.isNull() );
     QVERIFY( rejectedItem.isNull() );
-}
-
-void AbstractDataPluginModelTest::addItemToList_itemsUpdated_data()
-{
-    QTest::addColumn<AbstractDataPluginItem *>( "item" );
-    QTest::addColumn<bool>( "itemsUpdated" );
-
-    addRow() << static_cast<AbstractDataPluginItem *>( new TestDataPluginItem( false ) ) << false;
-    addRow() << static_cast<AbstractDataPluginItem *>( new TestDataPluginItem( true ) ) << true;
-}
-
-void AbstractDataPluginModelTest::addItemToList_itemsUpdated()
-{
-    QFETCH( AbstractDataPluginItem *, item );
-    QFETCH( bool, itemsUpdated );
-
-    TestDataPluginModel model;
-
-    QSignalSpy spy( &model, SIGNAL( itemsUpdated() ) );
-
-    model.addItemToList( item );
-
-    QCOMPARE( spy.count() == 1, itemsUpdated );
 }
 
 QTEST_MAIN( AbstractDataPluginModelTest )
