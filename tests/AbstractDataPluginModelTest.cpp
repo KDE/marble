@@ -69,6 +69,7 @@ class AbstractDataPluginModelTest : public QObject
     void addItemToList_data();
     void addItemToList();
 
+    void addItemToList_keepExisting_data();
     void addItemToList_keepExisting();
 };
 
@@ -132,19 +133,39 @@ void AbstractDataPluginModelTest::addItemToList()
     QCOMPARE( itemsUpdatedSpy.count() == 1, initialized );
 }
 
+void AbstractDataPluginModelTest::addItemToList_keepExisting_data()
+{
+    QTest::addColumn<bool>( "itemInitialized" );
+    QTest::addColumn<bool>( "rejectedInitialized" );
+
+    const bool isInitialized = true;
+
+    addRow() << isInitialized << isInitialized;
+    addRow() << isInitialized << !isInitialized;
+    addRow() << !isInitialized << isInitialized;
+    addRow() << !isInitialized << !isInitialized;
+}
+
 void AbstractDataPluginModelTest::addItemToList_keepExisting()
 {
+    QFETCH( bool, itemInitialized );
+    QFETCH( bool, rejectedInitialized );
+
     TestDataPluginModel model;
 
-    QPointer<AbstractDataPluginItem> item( new TestDataPluginItem() );
+    QPointer<TestDataPluginItem> item( new TestDataPluginItem() );
     item->setId( "foo" );
+    item->setInitialized( itemInitialized );
     model.addItemToList( item );
 
-    QPointer<AbstractDataPluginItem> rejectedItem( new TestDataPluginItem() );
+    QPointer<TestDataPluginItem> rejectedItem( new TestDataPluginItem() );
     rejectedItem->setId( "foo" );
+    rejectedItem->setInitialized( rejectedInitialized );
 
     QEventLoop loop;
     connect( rejectedItem.data(), SIGNAL( destroyed() ), &loop, SLOT( quit() ) );
+
+    QSignalSpy itemsUpdatedSpy( &model, SIGNAL( itemsUpdated() ) );
 
     model.addItemToList( rejectedItem );
 
@@ -153,6 +174,7 @@ void AbstractDataPluginModelTest::addItemToList_keepExisting()
 
     QVERIFY( !item.isNull() );
     QVERIFY( rejectedItem.isNull() );
+    QCOMPARE( itemsUpdatedSpy.count(), 0 );
 }
 
 QTEST_MAIN( AbstractDataPluginModelTest )
