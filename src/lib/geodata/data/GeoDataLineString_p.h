@@ -45,8 +45,8 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     {
         GeoDataGeometryPrivate::operator=( other );
         m_vector = other.m_vector;
-        m_rangeCorrected = other.m_rangeCorrected;
-        m_dirtyRange = other.m_dirtyRange;
+        m_rangeCorrected = 0;
+        m_dirtyRange = true;
         m_latLonAltBox = other.m_latLonAltBox;
         m_dirtyBox = other.m_dirtyBox;
         m_tessellationFlags = other.m_tessellationFlags;
