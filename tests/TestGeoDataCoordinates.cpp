@@ -25,6 +25,8 @@ class TestGeoDataCoordinates : public QObject
     Q_OBJECT
 
 private slots:
+    void initTestCase();
+
     void testConstruction();
     void testSet_Degree();
     void testSet_Radian();
@@ -61,6 +63,11 @@ private slots:
     void testPack_data();
     void testPack();
 };
+
+void TestGeoDataCoordinates::initTestCase()
+{
+    QLocale::setDefault( QLocale::c() ); // needed for testing toString* conversions
+}
 
 /*
  * test constructors
