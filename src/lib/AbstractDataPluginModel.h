@@ -50,9 +50,11 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     Q_PROPERTY( QObject* favoritesModel READ favoritesModel CONSTANT )
  
  public:
-    explicit AbstractDataPluginModel( const QString& name, QObject *parent = 0 );
+    explicit AbstractDataPluginModel( const QString& name, const MarbleModel *marbleModel, QObject *parent = 0 );
     virtual ~AbstractDataPluginModel();
         
+    const MarbleModel *marbleModel() const;
+
     /**
      * @brief Get the items on the viewport
      * Returns the currently downloaded images in the @p viewport.
@@ -61,7 +63,6 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * @return The list of item with most important item first.
      */
     QList<AbstractDataPluginItem*> items( const ViewportParams *viewport,
-                                          const MarbleModel *model,
                                           qint32 number = 10 );
     
     /**
@@ -120,14 +121,13 @@ public Q_SLOTS:
      * This method has to be implemented in a subclass.
      **/
     virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                     const MarbleModel *model,
                                      qint32 number = 10 ) = 0;
 
     /**
      * @brief Retrieve data for a specific item
      * @param id Item id of the item to retrieve
      */
-    virtual void getItem( const QString &id, const MarbleModel *model );
+    virtual void getItem( const QString &id );
        
     /**
      * Parse the @p file and generate items. The items will be added to the list or the method

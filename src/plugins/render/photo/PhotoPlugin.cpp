@@ -65,7 +65,7 @@ PhotoPlugin::~PhotoPlugin()
 void PhotoPlugin::initialize()
 {
     mDebug() << "PhotoPlugin: Initialize";
-    PhotoPluginModel *model = new PhotoPluginModel( this );
+    PhotoPluginModel *model = new PhotoPluginModel( marbleModel(), this );
     setModel( model );
     updateSettings();
 }

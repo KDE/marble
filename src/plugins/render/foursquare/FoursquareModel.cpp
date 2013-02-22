@@ -27,8 +27,8 @@
 namespace Marble
 {
     
-FoursquareModel::FoursquareModel(QObject* parent)
-    : AbstractDataPluginModel("foursquare", parent)
+FoursquareModel::FoursquareModel(const MarbleModel *marbleModel, QObject* parent)
+    : AbstractDataPluginModel("foursquare", marbleModel, parent)
 {
     // Enjoy laziness
 }
@@ -37,9 +37,9 @@ FoursquareModel::~FoursquareModel()
 {
 }
 
-void FoursquareModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *model, qint32 number )
+void FoursquareModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 number )
 {
-    if( model->planetId() != "earth" ) {
+    if( marbleModel()->planetId() != "earth" ) {
         return;
     }
     
@@ -47,8 +47,8 @@ void FoursquareModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const 
     QString clientSecret = "5L2JDCAYQCEJWY5FNDU4A1RWATE4E5FIIXXRM41YBTFSERUH";
     
     QString apiUrl( "https://api.foursquare.com/v2/venues/search" );
-    qreal const distanceLon = model->planetRadius() * distanceSphere( box.west(), box.north(), box.east(), box.north() );
-    qreal const distanceLat = model->planetRadius() * distanceSphere( box.west(), box.north(), box.west(), box.south() );
+    qreal const distanceLon = marbleModel()->planetRadius() * distanceSphere( box.west(), box.north(), box.east(), box.north() );
+    qreal const distanceLat = marbleModel()->planetRadius() * distanceSphere( box.west(), box.north(), box.west(), box.south() );
     qreal const area = distanceLon * distanceLat;
     if ( area > 10 * 1000 * KM2METER * KM2METER ) {
         // Large area (> 10.000 km^2) => too large for bbox queries

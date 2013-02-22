@@ -23,7 +23,7 @@ class DeclarativeDataPluginModel: public AbstractDataPluginModel
     Q_OBJECT
 public:
 
-    explicit DeclarativeDataPluginModel( QObject *parent=0 );
+    explicit DeclarativeDataPluginModel( const MarbleModel *marbleModel, QObject *parent=0 );
 
     virtual ~DeclarativeDataPluginModel();
 
@@ -32,7 +32,7 @@ Q_SIGNALS:
     void dataRequest( qreal north, qreal south, qreal east, qreal west );
 
 protected:
-    void getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *model, qint32 number = 10 );
+    void getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 number = 10 );
 };
 
 }

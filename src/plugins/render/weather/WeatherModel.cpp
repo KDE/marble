@@ -26,8 +26,8 @@
 
 using namespace Marble;
 
-WeatherModel::WeatherModel( QObject *parent )
-    : AbstractDataPluginModel( "weather", parent ),
+WeatherModel::WeatherModel( const MarbleModel *marbleModel, QObject *parent )
+    : AbstractDataPluginModel( "weather", marbleModel, parent ),
       m_initialized( false )
 {
     registerItemProperties( WeatherItem::staticMetaObject );
@@ -91,22 +91,20 @@ void WeatherModel::downloadItemData( const QUrl& url,
 }
 
 void WeatherModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                               const MarbleModel *model,
                                qint32 number )
 {
     m_lastBox = box;
-    m_lastModel = model;
     m_lastNumber = number;
 
     m_initialized = true;
 
-    emit additionalItemsRequested( box, model, number );
+    emit additionalItemsRequested( box, marbleModel(), number );
 }
 
-void WeatherModel::getItem( const QString &id, const MarbleModel *model )
+void WeatherModel::getItem( const QString &id )
 {
     foreach( AbstractWeatherService* service, m_services ) {
-        service->getItem( id, model );
+        service->getItem( id, marbleModel() );
     }
 }
 
@@ -118,7 +116,7 @@ void WeatherModel::parseFile( const QByteArray& file )
 void WeatherModel::updateItems()
 {
     clear();
-    emit additionalItemsRequested( m_lastBox, m_lastModel, m_lastNumber );
+    emit additionalItemsRequested( m_lastBox, marbleModel(), m_lastNumber );
     emit itemsUpdated();
 }
 

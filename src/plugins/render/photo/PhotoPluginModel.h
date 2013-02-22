@@ -17,7 +17,6 @@
 namespace Marble
 {
 
-class MarbleModel;
 class MarbleWidget;
 
 const quint32 numberOfImagesPerFetch = 15;
@@ -27,7 +26,7 @@ class PhotoPluginModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    explicit PhotoPluginModel( QObject *parent = 0 );
+    explicit PhotoPluginModel( const MarbleModel *marbleModel, QObject *parent = 0 );
     
     static QUrl generateUrl( const QString& service,
                              const QString& method,
@@ -43,7 +42,6 @@ class PhotoPluginModel : public AbstractDataPluginModel
      * the @p box surrounding the view and the @p number of files to show.
      **/
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             const MarbleModel *model,
                              qint32 number = 10 );
        
     /**

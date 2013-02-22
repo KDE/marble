@@ -16,8 +16,8 @@
 
 using namespace Marble;
 
-DeclarativeDataPluginModel::DeclarativeDataPluginModel( QObject *parent )
-    : AbstractDataPluginModel( "QMLDataPluginModel", parent )
+DeclarativeDataPluginModel::DeclarativeDataPluginModel( const MarbleModel *marbleModel, QObject *parent )
+    : AbstractDataPluginModel( "QMLDataPluginModel", marbleModel, parent )
 {
     // nothing to do
 }
@@ -27,7 +27,7 @@ DeclarativeDataPluginModel::~DeclarativeDataPluginModel()
     // nothing to do
 }
 
-void DeclarativeDataPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *, qint32 )
+void DeclarativeDataPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 )
 {
     Marble::GeoDataCoordinates::Unit const degree = Marble::GeoDataCoordinates::Degree;
     emit dataRequest( box.north( degree ), box.south( degree ), box.east( degree ), box.west( degree ) );

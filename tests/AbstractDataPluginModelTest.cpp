@@ -44,15 +44,14 @@ class TestDataPluginModel : public AbstractDataPluginModel
     Q_OBJECT
 
 public:
-    TestDataPluginModel( QObject *parent = 0 ) :
-        AbstractDataPluginModel( "test", parent )
+    TestDataPluginModel( const MarbleModel *marbleModel, QObject *parent = 0 ) :
+        AbstractDataPluginModel( "test", marbleModel, parent )
     {}
 
 protected:
-    void getAdditionalItems(const GeoDataLatLonAltBox &box, const MarbleModel *model, qint32 number)
+    void getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
     {
         Q_UNUSED( box )
-        Q_UNUSED( model )
         Q_UNUSED( number )
     }
 };
@@ -91,7 +90,7 @@ void AbstractDataPluginModelTest::init_testcase()
 
 void AbstractDataPluginModelTest::defaultConstructor()
 {
-    const TestDataPluginModel model;
+    const TestDataPluginModel model( &m_marbleModel );
 
     QCOMPARE( model.isFavoriteItemsOnly(), false );
 }
@@ -105,7 +104,7 @@ void AbstractDataPluginModelTest::destructor()
     connect( item, SIGNAL(destroyed()), &loop, SLOT(quit()) );
 
     {
-        TestDataPluginModel model;
+        TestDataPluginModel model( &m_marbleModel );
         model.addItemToList( item );
 
         QVERIFY( model.itemExists( "foo" ) );
@@ -134,7 +133,7 @@ void AbstractDataPluginModelTest::addItemToList()
     QFETCH( bool, initialized );
     QFETCH( QString, planetId );
 
-    TestDataPluginModel model;
+    TestDataPluginModel model( &m_marbleModel );
 
     QVERIFY( model.isFavoriteItemsOnly() == false );
     QVERIFY( !model.itemExists( "foo" ) );
@@ -155,7 +154,7 @@ void AbstractDataPluginModelTest::addItemToList()
 
     const bool visible = initialized && ( m_marbleModel.planetId() == planetId );
 
-    QCOMPARE( static_cast<bool>( model.items( &fullViewport, &m_marbleModel, 1 ).contains( item ) ), visible );
+    QCOMPARE( static_cast<bool>( model.items( &fullViewport, 1 ).contains( item ) ), visible );
 }
 
 void AbstractDataPluginModelTest::addItemToList_keepExisting_data()
@@ -176,7 +175,7 @@ void AbstractDataPluginModelTest::addItemToList_keepExisting()
     QFETCH( bool, itemInitialized );
     QFETCH( bool, rejectedInitialized );
 
-    TestDataPluginModel model;
+    TestDataPluginModel model( &m_marbleModel );
 
     QPointer<TestDataPluginItem> item( new TestDataPluginItem() );
     item->setId( "foo" );
@@ -225,7 +224,7 @@ void AbstractDataPluginModelTest::setFavoriteItemsOnly()
     item->setTarget( m_marbleModel.planetId() );
     item->setFavorite( itemIsFavorite );
 
-    TestDataPluginModel model;
+    TestDataPluginModel model( &m_marbleModel );
     model.setFavoriteItemsOnly( favoriteItemsOnly );
     model.addItemToList( item );
 
@@ -233,7 +232,7 @@ void AbstractDataPluginModelTest::setFavoriteItemsOnly()
 
     const bool visible = !favoriteItemsOnly || itemIsFavorite;
 
-    QCOMPARE( static_cast<bool>( model.items( &fullViewport, &m_marbleModel, 1 ).contains( item ) ), visible );
+    QCOMPARE( static_cast<bool>( model.items( &fullViewport, 1 ).contains( item ) ), visible );
 }
 
 QTEST_MAIN( AbstractDataPluginModelTest )

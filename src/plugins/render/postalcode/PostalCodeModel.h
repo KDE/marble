@@ -15,14 +15,12 @@
 
 namespace Marble {
 
-class MarbleModel;
-
 class PostalCodeModel : public AbstractDataPluginModel
 {
     Q_OBJECT
 
  public:
-    explicit PostalCodeModel( QObject *parent = 0 );
+    explicit PostalCodeModel( const MarbleModel *marbleModel, QObject *parent = 0 );
     ~PostalCodeModel();
 
  protected:
@@ -31,7 +29,6 @@ class PostalCodeModel : public AbstractDataPluginModel
      * the @p box surrounding the view and the @p number of files to show.
      **/
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             const MarbleModel *model,
                              qint32 number = 10 );
 
     /**

@@ -31,8 +31,8 @@
 
 using namespace Marble;
 
-PostalCodeModel::PostalCodeModel( QObject *parent  )
-    : AbstractDataPluginModel( "postalCode", parent )
+PostalCodeModel::PostalCodeModel( const MarbleModel *marbleModel, QObject *parent  )
+    : AbstractDataPluginModel( "postalCode", marbleModel, parent )
 {
 }
 
@@ -40,16 +40,15 @@ PostalCodeModel::~PostalCodeModel() {
 }
 
 void PostalCodeModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                          const MarbleModel *model,
                                           qint32 number )
 {
-    if( model->planetId() != "earth" ) {
+    if( marbleModel()->planetId() != "earth" ) {
         return;
     }
 
     double const lat = box.center().latitude( GeoDataCoordinates::Degree );
     double const lon = box.center().longitude( GeoDataCoordinates::Degree );
-    double const radius = qMin<double>( 30.0, box.height() * model->planet()->radius() * METER2KM );
+    double const radius = qMin<double>( 30.0, box.height() * marbleModel()->planet()->radius() * METER2KM );
 
     QUrl geonamesUrl( "http://ws.geonames.org/findNearbyPostalCodesJSON" );
     geonamesUrl.addQueryItem( "lat", QString::number( lat ) );

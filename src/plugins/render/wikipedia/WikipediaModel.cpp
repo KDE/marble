@@ -35,8 +35,8 @@
 
 using namespace Marble;
 
-WikipediaModel::WikipediaModel( QObject *parent )
-    : AbstractDataPluginModel( "wikipedia", parent ),
+WikipediaModel::WikipediaModel( const MarbleModel *marbleModel, QObject *parent )
+    : AbstractDataPluginModel( "wikipedia", marbleModel, parent ),
       m_marbleWidget( 0 ),
       m_wikipediaIcon( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) ),
       m_showThumbnail( true )
@@ -54,11 +54,10 @@ void WikipediaModel::setShowThumbnail( bool show )
 }
 
 void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                         const MarbleModel *model,
                                          qint32 number )
 {
     // Geonames only supports wikipedia articles for earth
-    if ( model->planetId() != "earth" ) {
+    if ( marbleModel()->planetId() != "earth" ) {
         return;
     }
         

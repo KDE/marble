@@ -27,7 +27,7 @@ class WikipediaModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    explicit WikipediaModel( QObject *parent = 0 );
+    explicit WikipediaModel( const MarbleModel *marbleModel, QObject *parent = 0 );
     ~WikipediaModel();
 
     void setShowThumbnail( bool show );
@@ -40,7 +40,6 @@ class WikipediaModel : public AbstractDataPluginModel
      * the @p box surrounding the view and the @p number of files to show.
      **/
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             const MarbleModel *model,
                              qint32 number = 10 );
        
     /**

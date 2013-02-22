@@ -17,14 +17,12 @@
 namespace Marble
 {
 
-class MarbleModel;
-
 class EarthquakeModel : public AbstractDataPluginModel
 {
     Q_OBJECT
 
 public:
-    explicit EarthquakeModel( QObject *parent = 0 );
+    explicit EarthquakeModel( const MarbleModel *marbleModel, QObject *parent = 0 );
     ~EarthquakeModel();
 
     void setMinMagnitude( double minMagnitude );
@@ -37,7 +35,6 @@ protected:
      * the @p box surrounding the view and the @p number of files to show.
      **/
     virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                     const MarbleModel *model,
                                      qint32 number = 10 );
 
     /**

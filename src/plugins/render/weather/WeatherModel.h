@@ -34,7 +34,7 @@ class WeatherModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    explicit WeatherModel( QObject *parent );
+    explicit WeatherModel( const MarbleModel *marbleModel, QObject *parent );
     ~WeatherModel();
 
     void setUpdateInterval( quint32 hours );
@@ -66,9 +66,8 @@ class WeatherModel : public AbstractDataPluginModel
 
  protected:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             const MarbleModel *marbleModel,
                              qint32 number = 10 );
-    virtual void getItem( const QString &id, const MarbleModel *model );
+    virtual void getItem( const QString &id );
     void parseFile( const QByteArray& file );
 
  private:
@@ -79,7 +78,6 @@ class WeatherModel : public AbstractDataPluginModel
     QList<AbstractWeatherService*> m_services;
     QTimer *m_timer;
     GeoDataLatLonAltBox m_lastBox;
-    const MarbleModel *m_lastModel;
     qint32 m_lastNumber;
 };
 

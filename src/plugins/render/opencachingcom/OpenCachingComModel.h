@@ -43,9 +43,6 @@ public:
     /// Fetch a file for a cache
     void fetchData(const QString& url, const QString &type, OpenCachingComItem *item);
 
-    /// access MarbleModel
-    const MarbleModel* marbleModel();
-
     /// home location
     const GeoDataCoordinates home() const;
 
@@ -55,7 +52,6 @@ protected:
      * the @p box surrounding the view and the @p number of files to show.
      **/
     virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                     const MarbleModel *model,
                                      qint32 number = numberOfItemsOnScreen );
 
     /**
@@ -70,7 +66,6 @@ private slots:
 private:
     GeoDataLatLonAltBox m_previousbox;
     GeoDataCoordinates m_homeCoordinates;
-    const MarbleModel *m_marbleModel;
 };
 
 }

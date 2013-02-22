@@ -33,8 +33,8 @@ using namespace Marble;
 
 const QString flickrApiKey( "620131a1b82b000c9582b94effcdc636" );
 
-PhotoPluginModel::PhotoPluginModel( QObject *parent )
-    : AbstractDataPluginModel( "photo", parent ),
+PhotoPluginModel::PhotoPluginModel( const MarbleModel *marbleModel, QObject *parent )
+    : AbstractDataPluginModel( "photo", marbleModel, parent ),
       m_marbleWidget( 0 )
 {
 }
@@ -69,11 +69,10 @@ QUrl PhotoPluginModel::generateUrl( const QString& service,
 }
 
 void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                           const MarbleModel *model,
                                            qint32 number )
 {
     // Flickr only supports images for earth
-    if( model->planetId() != "earth" ) {
+    if( marbleModel()->planetId() != "earth" ) {
         return;
     }
 

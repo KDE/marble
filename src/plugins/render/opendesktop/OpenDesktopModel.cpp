@@ -24,8 +24,8 @@
 using namespace Marble;
  
  
-OpenDesktopModel::OpenDesktopModel( QObject *parent )
-    : AbstractDataPluginModel( "opendesktop", parent )
+OpenDesktopModel::OpenDesktopModel( const MarbleModel *marbleModel, QObject *parent )
+    : AbstractDataPluginModel( "opendesktop", marbleModel, parent )
 {
     // Nothing to do...
 }
@@ -40,11 +40,11 @@ void OpenDesktopModel::setMarbleWidget(MarbleWidget *widget)
     m_marbleWidget = widget;
 }
  
-void OpenDesktopModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *model, qint32 number )
+void OpenDesktopModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 number )
 {
     Q_UNUSED( number )
   
-    if( model->planetId() != "earth" )
+    if( marbleModel()->planetId() != "earth" )
         return;
     
     GeoDataCoordinates coords = box.center();

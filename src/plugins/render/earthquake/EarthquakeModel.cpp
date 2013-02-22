@@ -27,8 +27,8 @@
 
 namespace Marble {
 
-EarthquakeModel::EarthquakeModel( QObject *parent )
-    : AbstractDataPluginModel( "earthquake", parent ),
+EarthquakeModel::EarthquakeModel( const MarbleModel *marbleModel, QObject *parent )
+    : AbstractDataPluginModel( "earthquake", marbleModel, parent ),
       m_minMagnitude( 0.0 ),
       m_startDate( QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ),
       m_endDate( QDateTime::currentDateTime() )
@@ -55,9 +55,9 @@ void EarthquakeModel::setEndDate( const QDateTime& endDate )
     m_endDate = endDate;
 }
 
-void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *model, qint32 number )
+void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 number )
 {
-    if( model->planetId() != "earth" ) {
+    if( marbleModel()->planetId() != "earth" ) {
         return;
     }
 

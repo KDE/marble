@@ -25,11 +25,10 @@
 namespace Marble {
 
 OpenCachingComModel::OpenCachingComModel( const MarbleModel *marbleModel, QObject *parent )
-    : AbstractDataPluginModel( "opencachingcom", parent )
-    , m_marbleModel( marbleModel )
+    : AbstractDataPluginModel( "opencachingcom", marbleModel, parent )
 {
     updateHome();
-    connect(m_marbleModel, SIGNAL(homeChanged(GeoDataCoordinates)), SLOT(updateHome()));
+    connect(marbleModel, SIGNAL(homeChanged(GeoDataCoordinates)), SLOT(updateHome()));
 
     // translate known values for tags and cache types
     // What would be a nice place for this??? Put here, since this object is only
@@ -57,9 +56,9 @@ OpenCachingComModel::~OpenCachingComModel()
 {
 }
 
-void OpenCachingComModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const MarbleModel *model, qint32 number )
+void OpenCachingComModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 number )
 {
-    if( model->planetId() != "earth" )
+    if( marbleModel()->planetId() != "earth" )
     {
         return;
     }
@@ -118,11 +117,6 @@ void OpenCachingComModel::fetchData(const QString& url, const QString &type, Ope
     downloadItem(url, type, item);
 }
 
-const MarbleModel* OpenCachingComModel::marbleModel()
-{
-    return m_marbleModel;
-}
-
 const GeoDataCoordinates OpenCachingComModel::home() const
 {
     return m_homeCoordinates;
@@ -132,7 +126,7 @@ void OpenCachingComModel::updateHome()
 {
     qreal lon, lat;
     int zoom;
-    m_marbleModel->home( lon, lat, zoom );
+    marbleModel()->home( lon, lat, zoom );
     m_homeCoordinates = GeoDataCoordinates(lon, lat, 0, GeoDataCoordinates::Degree);
 }
 

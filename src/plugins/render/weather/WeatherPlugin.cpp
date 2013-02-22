@@ -68,7 +68,7 @@ void WeatherPlugin::initialize()
 {
     readSettings();
 
-    WeatherModel *model = new WeatherModel( this );
+    WeatherModel *model = new WeatherModel( marbleModel(), this );
 
     setModel( model );
     updateSettings();

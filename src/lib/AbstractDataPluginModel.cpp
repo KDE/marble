@@ -56,6 +56,7 @@ class AbstractDataPluginModelPrivate
 {
 public:
     AbstractDataPluginModelPrivate( const QString& name,
+                                    const MarbleModel *marbleModel,
                                     AbstractDataPluginModel * parent );
     
     ~AbstractDataPluginModelPrivate();
@@ -64,11 +65,11 @@ public:
     
     AbstractDataPluginModel *m_parent;
     const QString m_name;
+    const MarbleModel *const m_marbleModel;
     GeoDataLatLonAltBox m_lastBox;
     GeoDataLatLonAltBox m_downloadedBox;
     qint32 m_lastNumber;
     qint32 m_downloadedNumber;
-    const MarbleModel *m_lastMarbleModel;
     QString m_downloadedTarget;
     QList<AbstractDataPluginItem*> m_itemSet;
     QHash<QString, AbstractDataPluginItem*> m_downloadingItems;
@@ -102,14 +103,15 @@ public:
 };
 
 AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& name,
+                                                                const MarbleModel *marbleModel,
                                 AbstractDataPluginModel * parent )
     : m_parent( parent ),
       m_name( name ),
+      m_marbleModel( marbleModel ),
       m_lastBox(),
       m_downloadedBox(),
       m_lastNumber( 0 ),
       m_downloadedNumber( 0 ),
-      m_lastMarbleModel( 0 ),
       m_downloadTimer( m_parent ),
       m_descriptionFileNumber( 0 ),
       m_itemSettings(),
@@ -140,10 +142,10 @@ AbstractDataPluginModelPrivate::~AbstractDataPluginModelPrivate() {
 
 void AbstractDataPluginModelPrivate::updateFavoriteItems()
 {
-    if ( m_lastMarbleModel && m_favoriteItemsOnly ) {
+    if ( m_favoriteItemsOnly ) {
         foreach( const QString &id, m_favoriteItems ) {
             if ( !m_parent->findItem( id ) ) {
-                m_parent->getItem( id, m_lastMarbleModel );
+                m_parent->getItem( id );
             }
         }
     }
@@ -223,10 +225,12 @@ void FavoritesModel::reset()
     QAbstractListModel::reset();
 }
 
-AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *parent )
+AbstractDataPluginModel::AbstractDataPluginModel( const QString &name, const MarbleModel *marbleModel, QObject *parent )
     : QObject(  parent ),
-      d( new AbstractDataPluginModelPrivate( name, this ) )
+      d( new AbstractDataPluginModelPrivate( name, marbleModel, this ) )
 {
+    Q_ASSERT( marbleModel != 0 );
+
     // Initializing file and download System
     connect( &d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
              this ,                 SLOT( processFinishedJob( QString , QString ) ) );
@@ -243,12 +247,16 @@ AbstractDataPluginModel::~AbstractDataPluginModel()
     delete d;
 }
 
+const MarbleModel *AbstractDataPluginModel::marbleModel() const
+{
+    return d->m_marbleModel;
+}
+
 QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportParams *viewport,
-                                                               const MarbleModel *model,
                                                                qint32 number )
 {
     GeoDataLatLonAltBox currentBox = viewport->viewLatLonAltBox();
-    QString target = model->planetId();
+    QString target = d->m_marbleModel->planetId();
     QList<AbstractDataPluginItem*> list;
     
     Q_ASSERT( !d->m_displayedItems.contains( 0 ) && "Null item in m_displayedItems. Please report a bug to marble-devel@kde.org" );
@@ -318,10 +326,6 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
 
     d->m_lastBox = currentBox;
     d->m_lastNumber = number;
-    if ( d->m_lastMarbleModel != model ) {
-        d->m_lastMarbleModel = model;
-        d->updateFavoriteItems();
-    }
     d->m_displayedItems = list;
     return list;
 }
@@ -435,7 +439,7 @@ void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem
     }
 }
 
-void AbstractDataPluginModel::getItem( const QString &, const MarbleModel * )
+void AbstractDataPluginModel::getItem( const QString & )
 {
     qWarning() << "Retrieving items by identifier is not implemented by this plugin";
 }
@@ -549,7 +553,7 @@ void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSetti
 
 void AbstractDataPluginModel::handleChangedViewport()
 {
-    if( !d->m_lastMarbleModel || d->m_favoriteItemsOnly ) {
+    if( d->m_favoriteItemsOnly ) {
         return;
     }
     
@@ -558,7 +562,7 @@ void AbstractDataPluginModel::handleChangedViewport()
             // We don't need to download if nothing changed
             && ( !( d->m_downloadedBox == d->m_lastBox )
                  || d->m_downloadedNumber != d->m_lastNumber
-                 || d->m_downloadedTarget != d->m_lastMarbleModel->planetId() )
+                 || d->m_downloadedTarget != d->m_marbleModel->planetId() )
             // We try to filter little changes of the bounding box
             && ( fabs( d->m_downloadedBox.east() - d->m_lastBox.east() ) * boxComparisonFactor
                  > d->m_lastBox.width()
@@ -576,10 +580,10 @@ void AbstractDataPluginModel::handleChangedViewport()
         // Save the download parameter
         d->m_downloadedBox = d->m_lastBox;
         d->m_downloadedNumber = d->m_lastNumber;
-        d->m_downloadedTarget = d->m_lastMarbleModel->planetId();
+        d->m_downloadedTarget = d->m_marbleModel->planetId();
         
         // Get items
-        getAdditionalItems( d->m_lastBox, d->m_lastMarbleModel, d->m_lastNumber );
+        getAdditionalItems( d->m_lastBox, d->m_lastNumber );
     }
     else {
         // Don't wait to long to start the next download as we decided not to download anything.
