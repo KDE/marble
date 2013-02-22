@@ -50,7 +50,7 @@ class GeoDataLineString;
 
 class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
 {
-    friend bool operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs );
+    friend bool GEODATA_EXPORT operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs );
 
  public:
     GeoDataLatLonBox();
