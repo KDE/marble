@@ -74,6 +74,9 @@ class AbstractDataPluginModelTest : public QObject
     void addItemToList_keepExisting_data();
     void addItemToList_keepExisting();
 
+    void setFavoriteItemsOnly_data();
+    void setFavoriteItemsOnly();
+
  private:
     const MarbleModel m_marbleModel;
     static const ViewportParams fullViewport;
@@ -147,7 +150,7 @@ void AbstractDataPluginModelTest::addItemToList()
     model.addItemToList( item );
 
     QVERIFY( model.itemExists( "foo" ) );
-    QVERIFY( model.findItem( "foo" ) != 0 );
+    QCOMPARE( model.findItem( "foo" ), item );
     QCOMPARE( itemsUpdatedSpy.count() == 1, initialized );
 
     const bool visible = initialized && ( m_marbleModel.planetId() == planetId );
@@ -196,7 +199,41 @@ void AbstractDataPluginModelTest::addItemToList_keepExisting()
 
     QVERIFY( !item.isNull() );
     QVERIFY( rejectedItem.isNull() );
+    QCOMPARE( model.findItem( item->id() ), item.data() );
     QCOMPARE( itemsUpdatedSpy.count(), 0 );
+}
+
+void AbstractDataPluginModelTest::setFavoriteItemsOnly_data()
+{
+    QTest::addColumn<bool>( "itemIsFavorite" );
+    QTest::addColumn<bool>( "favoriteItemsOnly" );
+
+    addRow() << true << true;
+    addRow() << true << false;
+    addRow() << false << true;
+    addRow() << false << false;
+}
+
+void AbstractDataPluginModelTest::setFavoriteItemsOnly()
+{
+    QFETCH( bool, itemIsFavorite );
+    QFETCH( bool, favoriteItemsOnly );
+
+    TestDataPluginItem *item = new TestDataPluginItem;
+    item->setId( "foo" );
+    item->setInitialized( true );
+    item->setTarget( m_marbleModel.planetId() );
+    item->setFavorite( itemIsFavorite );
+
+    TestDataPluginModel model;
+    model.setFavoriteItemsOnly( favoriteItemsOnly );
+    model.addItemToList( item );
+
+    QVERIFY( model.findItem( item->id() ) == item );
+
+    const bool visible = !favoriteItemsOnly || itemIsFavorite;
+
+    QCOMPARE( static_cast<bool>( model.items( &fullViewport, &m_marbleModel, 1 ).contains( item ) ), visible );
 }
 
 QTEST_MAIN( AbstractDataPluginModelTest )
