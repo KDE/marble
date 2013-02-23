@@ -212,8 +212,8 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
-    qDeleteAll( d->m_rangeCorrected );
-    d->m_rangeCorrected.clear();
+    delete d->m_rangeCorrected;
+    d->m_rangeCorrected = 0;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_vector.append( value );
@@ -223,8 +223,8 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
-    qDeleteAll( d->m_rangeCorrected );
-    d->m_rangeCorrected.clear();
+    delete d->m_rangeCorrected;
+    d->m_rangeCorrected = 0;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_vector.append( value );
@@ -235,8 +235,8 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
-    //qDeleteAll( d->m_rangeCorrected );
-    d->m_rangeCorrected.clear();
+    delete d->m_rangeCorrected;
+    d->m_rangeCorrected = 0;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
 
@@ -254,8 +254,8 @@ void GeoDataLineString::clear()
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
-    //qDeleteAll( d->m_rangeCorrected );
-    d->m_rangeCorrected.clear();
+    delete d->m_rangeCorrected;
+    d->m_rangeCorrected = 0;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
 
@@ -328,18 +328,17 @@ GeoDataLineString GeoDataLineString::toNormalized() const
     return normalizedLineString;
 }
 
-QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
+GeoDataLineString GeoDataLineString::toRangeCorrected() const
 {
     if ( p()->m_dirtyRange ) {
 
-        qDeleteAll( p()->m_rangeCorrected ); // This shouldn't be needed
-        p()->m_rangeCorrected.clear();
+        delete p()->m_rangeCorrected;
 
         GeoDataLineString poleCorrected = toNormalized().toPoleCorrected();
-        p()->m_rangeCorrected.append( new GeoDataLineString( poleCorrected ) );
+        p()->m_rangeCorrected = new GeoDataLineString( poleCorrected );
     }
 
-    return p()->m_rangeCorrected;
+    return *p()->m_rangeCorrected;
 }
 
 QVector<GeoDataLineString*> GeoDataLineString::toDateLineCorrected() const
@@ -565,7 +564,8 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
-    d->m_rangeCorrected.clear();
+    delete d->m_rangeCorrected;
+    d->m_rangeCorrected = 0;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     return d->m_vector.erase( pos );
@@ -576,7 +576,8 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
-    d->m_rangeCorrected.clear();
+    delete d->m_rangeCorrected;
+    d->m_rangeCorrected = 0;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     return d->m_vector.erase( begin, end );

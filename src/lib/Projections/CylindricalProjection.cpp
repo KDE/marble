@@ -16,6 +16,7 @@
 #include "CylindricalProjection_p.h"
 
 // Marble
+#include "GeoDataLinearRing.h"
 #include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
@@ -86,17 +87,16 @@ bool CylindricalProjection::screenCoordinates( const GeoDataLineString &lineStri
         return false;
     }
 
-    QVector<GeoDataLineString*> lineStrings;
-    // We correct for Poles and DateLines:
-    lineStrings = lineString.toRangeCorrected();
-
-    foreach ( GeoDataLineString * itLineString, lineStrings ) {
-        QVector<QPolygonF *> subPolygons;
-
-        d->lineStringToPolygon( *itLineString, viewport, subPolygons );
-        polygons << subPolygons;
+    QVector<QPolygonF *> subPolygons;
+    if( lineString.isClosed() ) {
+        GeoDataLinearRing ring = lineString.toRangeCorrected();
+        d->lineStringToPolygon( ring, viewport, subPolygons );
+    } else {
+        GeoDataLineString string = lineString.toRangeCorrected();
+        d->lineStringToPolygon( string, viewport, subPolygons );
     }
 
+    polygons << subPolygons;
     return polygons.isEmpty();
 }
 

@@ -22,32 +22,30 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 {
   public:
     GeoDataLineStringPrivate( TessellationFlags f )
-         : m_dirtyRange( true ),
+        :  m_rangeCorrected( 0 ),
+           m_dirtyRange( true ),
            m_dirtyBox( true ),
            m_tessellationFlags( f )
     {
     }
 
     GeoDataLineStringPrivate()
-         : m_dirtyRange( true ),
+         : m_rangeCorrected( 0 ),
+           m_dirtyRange( true ),
            m_dirtyBox( true )
     {
     }
 
     ~GeoDataLineStringPrivate()
     {
-        qDeleteAll(m_rangeCorrected);
+        delete m_rangeCorrected;
     }
 
     void operator=( const GeoDataLineStringPrivate &other)
     {
         GeoDataGeometryPrivate::operator=( other );
         m_vector = other.m_vector;
-        qDeleteAll( m_rangeCorrected );
-        foreach( GeoDataLineString *lineString, other.m_rangeCorrected )
-        {
-            m_rangeCorrected.append( new GeoDataLineString( *lineString ) );
-        }
+        m_rangeCorrected = other.m_rangeCorrected;
         m_dirtyRange = other.m_dirtyRange;
         m_latLonAltBox = other.m_latLonAltBox;
         m_dirtyBox = other.m_dirtyBox;
@@ -89,7 +87,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 
     QVector<GeoDataCoordinates> m_vector;
 
-    QVector<GeoDataLineString*>  m_rangeCorrected;
+    GeoDataLineString*          m_rangeCorrected;
     bool                        m_dirtyRange;
 
     bool                        m_dirtyBox; // tells whether there have been changes to the

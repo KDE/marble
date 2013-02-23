@@ -159,11 +159,11 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 /*!
     \brief Provides a more generic representation of the LineString.
 
-    The LineString is normalized, pole corrected and dateline corrected.
+    The LineString is normalized, and pole corrected.
 
     Deprecation Warning: This method will likely be removed from the public API.
 */
-    virtual QVector<GeoDataLineString*> toRangeCorrected() const;
+    virtual GeoDataLineString toRangeCorrected() const;
 
 
 /*!
