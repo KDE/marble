@@ -87,23 +87,14 @@ bool CylindricalProjection::screenCoordinates( const GeoDataLineString &lineStri
     }
 
     QVector<GeoDataLineString*> lineStrings;
+    // We correct for Poles and DateLines:
+    lineStrings = lineString.toRangeCorrected();
 
-    if (
-         ( !traversablePoles() && lineString.latLonAltBox().containsPole( AnyPole ) ) ||
-         ( lineString.latLonAltBox().crossesDateLine() )
-       ) {
-        // We correct for Poles and DateLines:
-        lineStrings = lineString.toRangeCorrected();
+    foreach ( GeoDataLineString * itLineString, lineStrings ) {
+        QVector<QPolygonF *> subPolygons;
 
-        foreach ( GeoDataLineString * itLineString, lineStrings ) {
-            QVector<QPolygonF *> subPolygons;
-
-            d->lineStringToPolygon( *itLineString, viewport, subPolygons );
-            polygons << subPolygons;
-        }
-    }
-    else {
-        d->lineStringToPolygon( lineString, viewport, polygons );
+        d->lineStringToPolygon( *itLineString, viewport, subPolygons );
+        polygons << subPolygons;
     }
 
     return polygons.isEmpty();
