@@ -157,17 +157,17 @@ void ViewportParamsTest::screenCoordinates_GeoDataLineString_data()
             << projection << flags << longitudeLine << 2;
 
     QTest::newRow("Mercator Tesselate Diagonal IDL")
-            << projection << flags << diagonalLine << 4;
+            << projection << flags << diagonalLine << 2;
 
     QTest::newRow("Mercator Tesselate Latitude IDL")
-            << projection << flags << latitudeLine << 4;
+            << projection << flags << latitudeLine << 2;
 
     flags = Tessellate | RespectLatitudeCircle;
     QTest::newRow("Mercator LatitudeCircle Longitude")
             << projection << flags << longitudeLine << 2;
 
     QTest::newRow("Mercator LatitudeCircle Diagonal IDL")
-            << projection << flags << diagonalLine << 4;
+            << projection << flags << diagonalLine << 2;
 
     QTest::newRow("Mercator LatitudeCircle Latitude IDL")
             << projection << flags << latitudeLine << 2;
@@ -189,17 +189,17 @@ void ViewportParamsTest::screenCoordinates_GeoDataLineString_data()
             << projection << flags << longitudeLine << 2;
 
     QTest::newRow("Equirect Tesselate Diagonal IDL")
-            << projection << flags << diagonalLine << 4;
+            << projection << flags << diagonalLine << 2;
 
     QTest::newRow("Equirect Tesselate Latitude IDL")
-            << projection << flags << latitudeLine << 4;
+            << projection << flags << latitudeLine << 2;
 
     flags = Tessellate | RespectLatitudeCircle;
     QTest::newRow("Equirect LatitudeCircle Longitude")
             << projection << flags << longitudeLine << 2;
 
     QTest::newRow("Equirect LatitudeCircle Diagonal IDL")
-            << projection << flags << diagonalLine << 4;
+            << projection << flags << diagonalLine << 2;
 
     QTest::newRow("Equirect LatitudeCircle Latitude IDL")
             << projection << flags << latitudeLine << 2;

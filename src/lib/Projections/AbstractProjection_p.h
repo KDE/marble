@@ -59,9 +59,11 @@ class AbstractProjectionPrivate
                             qreal xOffset ) const;
 
     int crossDateLine( const GeoDataCoordinates & aCoord,
-                        const GeoDataCoordinates & bCoord,
-                        QVector<QPolygonF*> &polygons,
-                        const ViewportParams *viewport ) const;
+                       const GeoDataCoordinates & bCoord,
+                       QVector<QPolygonF*> &polygons,
+                       const ViewportParams *viewport,
+                       int mirrorCount = 0,
+                       qreal repeatDistance = 0 ) const;
 
     AbstractProjection * const q_ptr;
     Q_DECLARE_PUBLIC( AbstractProjection )
