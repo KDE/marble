@@ -163,10 +163,10 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
 
             if ( lineString.tessellate() ) {
 
-                tessellateLineSegment( previousCoords, previousX, previousY,
+                mirrorCount = tessellateLineSegment( previousCoords, previousX, previousY,
                                            currentCoords, x, y,
                                            polygons, viewport,
-                                           f );
+                                           f, mirrorCount, repeatDistance );
             }
 
             else {

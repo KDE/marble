@@ -311,25 +311,25 @@ void ViewportParamsTest::geoDataLinearRing_data()
     QTest::newRow("Mercator NoTesselation aroundSPoleRing")
             << projection << flags << aroundSPoleRing << 2;
 
-//    flags = Tessellate;
-//    QTest::newRow("Mercator Tesselate normalRing")
-//            << projection << flags << normalRing << 2;
+    flags = Tessellate;
+    QTest::newRow("Mercator Tesselate normalRing")
+            << projection << flags << normalRing << 2;
 
-//    QTest::newRow("Mercator Tesselate acrossIDLRing")
-//            << projection << flags << acrossIDLRing << 2;
+    QTest::newRow("Mercator Tesselate acrossIDLRing")
+            << projection << flags << acrossIDLRing << 2;
 
-//    QTest::newRow("Mercator Tesselate aroundSPoleRing")
-//            << projection << flags << aroundSPoleRing << 2;
+    QTest::newRow("Mercator Tesselate aroundSPoleRing")
+            << projection << flags << aroundSPoleRing << 2;
 
-//    flags = Tessellate | RespectLatitudeCircle;
-//    QTest::newRow("Mercator LatitudeCircle normalRing")
-//            << projection << flags << normalRing << 1;
+    flags = Tessellate | RespectLatitudeCircle;
+    QTest::newRow("Mercator LatitudeCircle normalRing")
+            << projection << flags << normalRing << 2;
 
-//    QTest::newRow("Mercator LatitudeCircle acrossIDLRing")
-//            << projection << flags << acrossIDLRing << 1;
+    QTest::newRow("Mercator LatitudeCircle acrossIDLRing")
+            << projection << flags << acrossIDLRing << 2;
 
-//    QTest::newRow("Mercator LatitudeCircle aroundSPoleRing")
-//            << projection << flags << aroundSPoleRing << 1;
+    QTest::newRow("Mercator LatitudeCircle aroundSPoleRing")
+            << projection << flags << aroundSPoleRing << 2;
 
     projection = Equirectangular;
 
@@ -375,25 +375,25 @@ void ViewportParamsTest::geoDataLinearRing_data()
     QTest::newRow("Spherical NoTesselation aroundSPoleRing")
             << projection << flags << aroundSPoleRing << 1;
 
-//    flags = Tessellate;
-//    QTest::newRow("Spherical Tesselate normalRing")
-//            << projection << flags << normalRing << 1;
+    flags = Tessellate;
+    QTest::newRow("Spherical Tesselate normalRing")
+            << projection << flags << normalRing << 1;
 
-//    QTest::newRow("Spherical Tesselate acrossIDLRing")
-//            << projection << flags << acrossIDLRing << 1;
+    QTest::newRow("Spherical Tesselate acrossIDLRing")
+            << projection << flags << acrossIDLRing << 1;
 
-//    QTest::newRow("Spherical Tesselate aroundSPoleRing")
-//            << projection << flags << aroundSPoleRing << 1;
+    QTest::newRow("Spherical Tesselate aroundSPoleRing")
+            << projection << flags << aroundSPoleRing << 1;
 
-//    flags = Tessellate | RespectLatitudeCircle;
-//    QTest::newRow("Spherical LatitudeCircle normalRing")
-//            << projection << flags << normalRing << 1;
+    flags = Tessellate | RespectLatitudeCircle;
+    QTest::newRow("Spherical LatitudeCircle normalRing")
+            << projection << flags << normalRing << 1;
 
-//    QTest::newRow("Spherical LatitudeCircle acrossIDLRing")
-//            << projection << flags << acrossIDLRing << 1;
+    QTest::newRow("Spherical LatitudeCircle acrossIDLRing")
+            << projection << flags << acrossIDLRing << 1;
 
-//    QTest::newRow("Spherical LatitudeCircle aroundSPoleRing")
-//            << projection << flags << aroundSPoleRing << 1;
+    QTest::newRow("Spherical LatitudeCircle aroundSPoleRing")
+            << projection << flags << aroundSPoleRing << 1;
 
 }
 

@@ -267,13 +267,15 @@ QRegion AbstractProjection::mapRegion( const ViewportParams *viewport ) const
 }
 
 
-void AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates &aCoords,
+int AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates &aCoords,
                                                 qreal ax, qreal ay,
                                                 const GeoDataCoordinates &bCoords,
                                                 qreal bx, qreal by,
                                                 QVector<QPolygonF*> &polygons,
                                                 const ViewportParams *viewport,
-                                                TessellationFlags f ) const
+                                                TessellationFlags f,
+                                                int mirrorCount,
+                                                qreal repeatDistance) const
 {
     // We take the manhattan length as a distance approximation
     // that can be too big by a factor of sqrt(2)
@@ -304,27 +306,32 @@ void AbstractProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates 
         // on screen is too big
         if ( distance > finalTessellationPrecision ) {
 
-            processTessellation( aCoords, bCoords,
+            mirrorCount = processTessellation( aCoords, bCoords,
                                  tessellatedNodes,
                                  polygons,
                                  viewport,
-                                 f );
+                                 f,
+                                 mirrorCount,
+                                 repeatDistance );
         }
         else {
-            crossDateLine( aCoords, bCoords, polygons, viewport );
+            mirrorCount = crossDateLine( aCoords, bCoords, polygons, viewport, mirrorCount, repeatDistance );
         }
 #ifdef SAFE_DISTANCE
     }
 #endif
+    return mirrorCount;
 }
 
 
-void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &previousCoords,
+int AbstractProjectionPrivate::processTessellation( const GeoDataCoordinates &previousCoords,
                                                     const GeoDataCoordinates &currentCoords,
                                                     int tessellatedNodes,
                                                     QVector<QPolygonF*> &polygons,
                                                     const ViewportParams *viewport,
-                                                    TessellationFlags f ) const
+                                                    TessellationFlags f,
+                                                    int mirrorCount,
+                                                    qreal repeatDistance) const
 {
 
     const bool clampToGround = f.testFlag( FollowGround );
@@ -352,7 +359,7 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
             }
         }
         if ( fabs( lonDiff ) == 2 * M_PI ) {
-            return;
+            return mirrorCount;
         }
     }
 
@@ -382,7 +389,8 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
         }
 
         const GeoDataCoordinates currentTessellatedCoords( lon, lat, altitude );
-        crossDateLine( previousTessellatedCoords, currentTessellatedCoords, polygons, viewport );
+        mirrorCount = crossDateLine( previousTessellatedCoords, currentTessellatedCoords, polygons, viewport,
+                                     mirrorCount, repeatDistance );
         previousTessellatedCoords = currentTessellatedCoords;
     }
 
@@ -391,7 +399,9 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
     if ( clampToGround ) {
         currentModifiedCoords.setAltitude( 0.0 );
     }
-    crossDateLine( previousTessellatedCoords, currentModifiedCoords, polygons, viewport );
+    mirrorCount = crossDateLine( previousTessellatedCoords, currentModifiedCoords, polygons, viewport,
+                                 mirrorCount, repeatDistance );
+    return mirrorCount;
 }
 
 int AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord,

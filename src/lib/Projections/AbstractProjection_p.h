@@ -36,20 +36,24 @@ class AbstractProjectionPrivate
     // clampToGround flag is added the polygon contains count + 2
     // nodes as the clamped down start and end node get added.
 
-    void tessellateLineSegment( const GeoDataCoordinates &aCoords,
+    int tessellateLineSegment(  const GeoDataCoordinates &aCoords,
                                 qreal ax, qreal ay,
                                 const GeoDataCoordinates &bCoords,
                                 qreal bx, qreal by,
                                 QVector<QPolygonF*> &polygons,
                                 const ViewportParams *viewport,
-                                TessellationFlags f = 0 ) const;
+                                TessellationFlags f = 0,
+                                int mirrorCount = 0,
+                                qreal repeatDistance = 0 ) const;
 
-    void processTessellation(  const GeoDataCoordinates &previousCoords,
+    int processTessellation(   const GeoDataCoordinates &previousCoords,
                                const GeoDataCoordinates &currentCoords,
                                int count,
                                QVector<QPolygonF*> &polygons,
                                const ViewportParams *viewport,
-                               TessellationFlags f = 0 ) const;
+                               TessellationFlags f = 0,
+                               int mirrorCount = 0,
+                               qreal repeatDistance = 0 ) const;
 
     qreal mirrorPoint( const ViewportParams *viewport ) const;
 
