@@ -168,11 +168,11 @@ void EarthquakePlugin::writeSettings()
 void EarthquakePlugin::updateModel()
 {
     if( model() ) {
-        EarthquakeModel *const earthquakeModel = new EarthquakeModel( marbleModel(), this );
+        EarthquakeModel *const earthquakeModel = static_cast<EarthquakeModel *>( model() );
         earthquakeModel->setMinMagnitude( m_minMagnitude );
         earthquakeModel->setStartDate( m_startDate );
         earthquakeModel->setEndDate( m_endDate );
-        setModel( earthquakeModel );
+        earthquakeModel->clear();
     }
 }
 
