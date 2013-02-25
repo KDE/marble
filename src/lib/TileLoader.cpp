@@ -86,10 +86,9 @@ QImage TileLoader::loadTileImage( GeoSceneTiled const *textureLayer, TileId cons
 }
 
 
-GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const usage, QString const &format )
+GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const usage )
 {
-    // Format could be used in the future for use just that parser, instead of all available parsers
-    Q_UNUSED( format );
+    // FIXME: textureLayer->fileFormat() could be used in the future for use just that parser, instead of all available parsers
 
     QString const fileName = tileFileName( textureLayer, tileId );
 

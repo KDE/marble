@@ -206,7 +206,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         // VectorTile
         if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneVectorTileType ){
 
-            GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( textureLayer, tileId, DownloadBrowse, textureLayer->fileFormat() );
+            GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( textureLayer, tileId, DownloadBrowse );
 
             QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata ) );
 
