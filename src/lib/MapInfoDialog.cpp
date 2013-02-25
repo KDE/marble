@@ -54,7 +54,7 @@ bool MapInfoDialog::render( GeoPainter *painter, ViewportParams *viewport,
 
 bool MapInfoDialog::eventFilter( QObject *object, QEvent *e )
 {
-    return m_popupItem && visible() && m_popupItem->eventFilter( object, e );
+    return visible() && m_popupItem->eventFilter( object, e );
 }
 
 qreal MapInfoDialog::zValue() const
@@ -82,25 +82,19 @@ void MapInfoDialog::setVisible( bool visible )
 
 void MapInfoDialog::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)
 {
-    if ( m_popupItem ) {
-        m_popupItem->setCoordinate( coordinates );
-        m_popupItem->setAlignment( alignment );
-    }
+    m_popupItem->setCoordinate( coordinates );
+    m_popupItem->setAlignment( alignment );
 }
 
 void MapInfoDialog::setUrl( const QUrl &url )
 {
-    if ( m_popupItem ) {
-        m_popupItem->setUrl( url );
-    }
+    m_popupItem->setUrl( url );
 }
 
 void MapInfoDialog::setContent( const QString &html )
 {
-    if ( m_popupItem ) {
-        m_popupItem->setContent( html );
-        emit repaintNeeded();
-    }
+    m_popupItem->setContent( html );
+    emit repaintNeeded();
 }
 
 void MapInfoDialog::setBackgroundColor(const QColor &color)
@@ -119,9 +113,7 @@ void MapInfoDialog::setTextColor(const QColor &color)
 
 void MapInfoDialog::setSize( const QSizeF &size )
 {
-    if ( m_popupItem ) {
-        m_popupItem->setSize( size );
-    }
+    m_popupItem->setSize( size );
 }
 
 void MapInfoDialog::setPosition( const QPointF &position )
