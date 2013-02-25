@@ -114,18 +114,16 @@ void PopupItem::setPrintButtonVisible( bool display )
 
 void PopupItem::setUrl( const QUrl &url )
 {
-    if ( m_webView ) {
-        m_webView->setUrl( url );
-        setVisible( true );
+    m_webView->setUrl( url );
+    setVisible( true );
 
-	QPalette palette = m_webView->palette();
-	palette.setBrush(QPalette::Base, Qt::transparent);
-	m_webView->setPalette(palette);
-	m_webView->page()->setPalette(palette);
-	m_webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
+    QPalette palette = m_webView->palette();
+    palette.setBrush(QPalette::Base, Qt::transparent);
+    m_webView->setPalette(palette);
+    m_webView->page()->setPalette(palette);
+    m_webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
 
-        emit repaintNeeded();
-    }
+    emit repaintNeeded();
 }
 
 void PopupItem::setContent( const QString &html )
