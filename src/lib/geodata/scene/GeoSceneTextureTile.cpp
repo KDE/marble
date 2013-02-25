@@ -28,9 +28,4 @@ const char* GeoSceneTextureTile::nodeType() const
     return GeoSceneTypes::GeoSceneTextureTileType;
 }
 
-QString GeoSceneTextureTile::type()
-{
-    return "texturetile";
-}
-
 }

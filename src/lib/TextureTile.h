@@ -80,7 +80,6 @@ class TextureTile : public Tile
     virtual int byteCount() const;
 
     virtual const char* nodeType() const;
-    virtual QString type();
 
  private:
     Q_DISABLE_COPY( TextureTile )

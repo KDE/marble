@@ -27,7 +27,6 @@ class GeoSceneVectorTile : public GeoSceneTiled
     explicit GeoSceneVectorTile( const QString& name );
 
     virtual const char* nodeType() const;
-    virtual QString type();
 };
 
 }

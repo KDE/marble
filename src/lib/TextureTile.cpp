@@ -44,10 +44,5 @@ const char* TextureTile::nodeType() const
     return "TextureTile";
 }
 
-QString TextureTile::type()
-{
-    return "textureTile";
-}
-
 }
 

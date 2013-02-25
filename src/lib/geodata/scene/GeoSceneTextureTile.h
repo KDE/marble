@@ -27,7 +27,6 @@ class GeoSceneTextureTile : public GeoSceneTiled
     explicit GeoSceneTextureTile( const QString& name );
 
     virtual const char* nodeType() const;
-    virtual QString type();
 };
 
 }

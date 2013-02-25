@@ -81,9 +81,5 @@ void GeoSceneGeodata::setBrush( const QBrush& brush )
 {
     m_brush = brush;
 }
-QString GeoSceneGeodata::type()
-{
-    return "geodata";
-}
 
 }

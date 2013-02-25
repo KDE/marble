@@ -43,8 +43,6 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     QBrush brush() const;
     void setBrush( const QBrush& brush );
 
-    virtual QString type();
-    
  private:
     QString m_property;
     QString m_sourceFile;

@@ -27,10 +27,5 @@ const char* GeoSceneVectorTile::nodeType() const
     return GeoSceneTypes::GeoSceneVectorTileType;
 }
 
-QString GeoSceneVectorTile::type()
-{
-    return "vectortile";
-}
-
 }
 

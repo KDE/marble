@@ -79,9 +79,4 @@ void GeoSceneVector::setBrush( const QBrush& brush )
     m_brush = brush;
 }
 
-QString GeoSceneVector::type()
-{
-    return "vector";
-}
-
 }

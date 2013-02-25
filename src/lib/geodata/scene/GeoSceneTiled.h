@@ -99,8 +99,6 @@ class GEODATA_EXPORT GeoSceneTiled : public GeoSceneAbstractDataset
     QList<const DownloadPolicy *> downloadPolicies() const;
     void addDownloadPolicy( const DownloadUsage usage, const int maximumConnections );
 
-    virtual QString type();
-
  private:
     Q_DISABLE_COPY( GeoSceneTiled )
     QStringList hostNames() const;

@@ -40,9 +40,4 @@ const char* Tile::nodeType() const
     return "Tile";
 }
 
-QString Tile::type()
-{
-    return "tile";
-}
-
 }

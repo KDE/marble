@@ -258,11 +258,6 @@ void GeoSceneTiled::addDownloadPolicy( const DownloadUsage usage, const int maxi
     mDebug() << "added download policy" << hostNames() << usage << maximumConnections;
 }
 
-QString GeoSceneTiled::type()
-{
-    return "tiled";
-}
-
 QStringList GeoSceneTiled::hostNames() const
 {
     QStringList result;

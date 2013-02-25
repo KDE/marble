@@ -47,8 +47,6 @@ class GEODATA_EXPORT GeoSceneAbstractDataset : public GeoNode
     int expire() const;
     void setExpire( int expire );
 
-    virtual QString type() = 0;
-
  protected:
     explicit GeoSceneAbstractDataset( const QString& name );
 

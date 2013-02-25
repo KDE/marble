@@ -53,8 +53,6 @@ class GEODATA_EXPORT GeoSceneVector : public GeoSceneAbstractDataset
     QBrush brush() const;
     void setBrush( const QBrush& brush );
 
-    virtual QString type();
-
  private:
     QString m_sourceFile;
     QString m_feature;

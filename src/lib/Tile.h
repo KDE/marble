@@ -98,7 +98,6 @@ class Tile
      const QString *format() const;
 
     virtual const char* nodeType() const;
-    virtual QString type();
 
     virtual int byteCount() const;
 

@@ -40,9 +40,4 @@ const char* VectorTile::nodeType() const
     return "VectorTile";
 }
 
-QString VectorTile::type()
-{
-    return "vectorTile";
-}
-
 }
