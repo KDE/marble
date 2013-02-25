@@ -34,8 +34,6 @@ class HttpDownloadManager::Private
     explicit Private( StoragePolicy *policy );
     ~Private();
 
-    HttpJob *createJob( const QUrl& sourceUrl, const QString& destFileName,
-                        const QString &id );
     DownloadQueueSet *findQueues( const QString& hostName, const DownloadUsage usage );
 
     bool m_downloadEnabled;
@@ -73,15 +71,6 @@ HttpDownloadManager::Private::~Private()
     QMap<DownloadUsage, DownloadQueueSet *>::iterator const end = m_defaultQueueSets.end();
     for (; pos != end; ++pos )
         delete pos.value();
-}
-
-HttpJob *HttpDownloadManager::Private::createJob( const QUrl& sourceUrl,
-                                                  const QString& destFileName,
-                                                  const QString &id )
-{
-    HttpJob * const job = new HttpJob( sourceUrl, destFileName, id, &m_networkAccessManager );
-    job->setUserAgentPluginId( "QNamNetworkPlugin" );
-    return job;
 }
 
 DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostName,
@@ -148,11 +137,10 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
 
     DownloadQueueSet * const queueSet = d->findQueues( sourceUrl.host(), usage );
     if ( queueSet->canAcceptJob( sourceUrl, destFileName )) {
-        HttpJob * const job = d->createJob( sourceUrl, destFileName, id );
-        if ( job ) {
-            job->setDownloadUsage( usage );
-            queueSet->addJob( job );
-        }
+        HttpJob * const job = new HttpJob( sourceUrl, destFileName, id, &d->m_networkAccessManager );
+        job->setUserAgentPluginId( "QNamNetworkPlugin" );
+        job->setDownloadUsage( usage );
+        queueSet->addJob( job );
     }
 }
 
