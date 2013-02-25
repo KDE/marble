@@ -23,7 +23,7 @@ namespace Marble
 
 MapInfoDialog::MapInfoDialog(QObject *parent) :
     QObject( parent ),
-    m_popupItem( new PopupItem )
+    m_popupItem( new PopupItem( this ) )
 {
     connect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
     connect( m_popupItem, SIGNAL(hide()), this, SLOT(hidePopupItem()) );
