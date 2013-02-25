@@ -14,18 +14,10 @@
 using namespace Marble;
 
 TextureMapperInterface::TextureMapperInterface()
-    : m_tileLevel( 0 )
 {
 }
 
 
 TextureMapperInterface::~TextureMapperInterface()
 {
-}
-
-
-void TextureMapperInterface::setTileLevel( int tileLevel )
-{
-    //    mDebug() << "Texture Level was set to: " << tileLevel;
-    m_tileLevel = tileLevel;
 }

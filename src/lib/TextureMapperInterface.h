@@ -30,25 +30,14 @@ public:
     TextureMapperInterface();
     virtual ~TextureMapperInterface();
 
-    void setTileLevel( int tileLevel );
-
     virtual void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,
+                             int tileZoomLevel,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer ) = 0;
 
     virtual void setRepaintNeeded() = 0;
-
-    int tileZoomLevel() const;
-
- private:
-    int         m_tileLevel;
 };
-
-inline int TextureMapperInterface::tileZoomLevel() const
-{
-    return m_tileLevel;
-}
 
 }
 

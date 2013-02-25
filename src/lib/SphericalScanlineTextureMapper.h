@@ -43,13 +43,14 @@ class SphericalScanlineTextureMapper : public TextureMapperInterface
 
     virtual void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,
+                             int tileZoomLevel,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
     virtual void setRepaintNeeded();
 
  private:
-    void mapTexture( const ViewportParams *viewport, MapQuality mapQuality );
+    void mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality );
 
  private:
     class RenderJob;

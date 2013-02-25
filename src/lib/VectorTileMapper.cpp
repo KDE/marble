@@ -47,6 +47,7 @@ VectorTileMapper::VectorTileMapper( StackedTileLoader *tileLoader )
 
 void VectorTileMapper::mapTexture( GeoPainter *painter,
                                    const ViewportParams *viewport,
+                                   int tileZoomLevel,
                                    const QRect &dirtyRect,
                                    TextureColorizer *texColorizer )
 {
@@ -59,21 +60,21 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
     // Sometimes the formula returns wrong huge values, x and y have to be between 0 and 2^ZoomLevel
-    unsigned int minX = qMin<unsigned int>( 2 << tileZoomLevel(),
-                              qMax<unsigned int>( lon2tilex( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), tileZoomLevel() ),
+    unsigned int minX = qMin<unsigned int>( 2 << tileZoomLevel,
+                              qMax<unsigned int>( lon2tilex( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), tileZoomLevel ),
                                     0 ) );
 
-    unsigned int minY = qMin<unsigned int>( 2 << tileZoomLevel(),
-                              qMax<unsigned int>( lat2tiley( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), tileZoomLevel() ),
+    unsigned int minY = qMin<unsigned int>( 2 << tileZoomLevel,
+                              qMax<unsigned int>( lat2tiley( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), tileZoomLevel ),
                                     0 ) );
 
     unsigned int maxX = qMax<unsigned int>( 0,
-                              qMin<unsigned int>( lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                                    2 << tileZoomLevel() ) );
+                              qMin<unsigned int>( lon2tilex( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), tileZoomLevel ),
+                                    2 << tileZoomLevel ) );
 
     unsigned int maxY = qMax<unsigned int>( 0,
-                              qMin<unsigned int>( lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel() ),
-                                    2 << tileZoomLevel() ) );
+                              qMin<unsigned int>( lat2tiley( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), tileZoomLevel ),
+                                    2 << tileZoomLevel ) );
 
     bool left  = minX < m_minTileX;
     bool right = maxX > m_maxTileX;
@@ -84,19 +85,19 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
     // When changing zoom, download everything inside the screen
     if ( left && right && up && down )
 
-                mapTexture( viewport, painter->mapQuality(), minX, minY, maxX, maxY );
+                mapTexture( viewport, tileZoomLevel, painter->mapQuality(), minX, minY, maxX, maxY );
 
     // When only moving screen, just download the new tiles
     else if ( left || right || up || down ){
 
         if ( left )
-            mapTexture( viewport, painter->mapQuality(), minX, m_minTileY, m_minTileX, m_maxTileY );
+            mapTexture( viewport, tileZoomLevel, painter->mapQuality(), minX, m_minTileY, m_minTileX, m_maxTileY );
         if ( right )
-            mapTexture( viewport, painter->mapQuality(), m_maxTileX, m_minTileY, maxX, m_maxTileY );
+            mapTexture( viewport, tileZoomLevel, painter->mapQuality(), m_maxTileX, m_minTileY, maxX, m_maxTileY );
         if ( up )
-            mapTexture( viewport, painter->mapQuality(), m_minTileX, minY, m_maxTileX, m_minTileY );
+            mapTexture( viewport, tileZoomLevel, painter->mapQuality(), m_minTileX, minY, m_maxTileX, m_minTileY );
         if ( down )
-            mapTexture( viewport, painter->mapQuality(), m_minTileX, m_maxTileY, m_maxTileX, maxY );
+            mapTexture( viewport, tileZoomLevel, painter->mapQuality(), m_minTileX, m_maxTileY, m_maxTileX, maxY );
 
         // During testing discovered that this code above does not request the "corner" tiles
 
@@ -114,17 +115,17 @@ void VectorTileMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void VectorTileMapper::initTileRangeCoords(){
+void VectorTileMapper::initTileRangeCoords( int tileZoomLevel ){
 
     // Set tile X and Y to the biggest possible values, but inverted so the
     // left/up/right/down variables can be calculated
-    m_minTileX = 2 << tileZoomLevel();
-    m_minTileY = 2 << tileZoomLevel();
+    m_minTileX = 2 << tileZoomLevel;
+    m_minTileY = 2 << tileZoomLevel;
     m_maxTileX = 0;
     m_maxTileY = 0;
 }
 
-void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality,
+void VectorTileMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality,
                                    unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY )
 {
     Q_UNUSED( mapQuality);
@@ -133,7 +134,7 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, MapQuality ma
     m_tileLoader->resetTilehash();
 
     // Create render thread
-    RenderJob *const job = new RenderJob( m_tileLoader, tileZoomLevel(), viewport,
+    RenderJob *const job = new RenderJob( m_tileLoader, tileZoomLevel, viewport,
                                           minTileX, minTileY, maxTileX, maxTileY);
 
     // Connect the parser thread to the VectorTileMapper for recieving tiles

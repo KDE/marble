@@ -70,6 +70,7 @@ MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( StackedTileLoader 
 
 void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,
                                                 const ViewportParams *viewport,
+                                                int tileZoomLevel,
                                                 const QRect &dirtyRect,
                                                 TextureColorizer *texColorizer )
 {
@@ -89,7 +90,7 @@ void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,
     }
 
     if ( m_repaintNeeded ) {
-        mapTexture( viewport, painter->mapQuality() );
+        mapTexture( viewport, tileZoomLevel, painter->mapQuality() );
 
         if ( texColorizer ) {
             texColorizer->colorize( &m_canvasImage, viewport, painter->mapQuality() );
@@ -106,7 +107,7 @@ void MercatorScanlineTextureMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality )
+void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality )
 {
     // Reset backend
     m_tileLoader->resetTilehash();
@@ -142,7 +143,7 @@ void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, 
     for ( int i = 0; i < numThreads; ++i ) {
         const int yStart = yPaintedTop +  i      * yStep;
         const int yEnd   = yPaintedTop + (i + 1) * yStep;
-        QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), &m_canvasImage, viewport, mapQuality, yStart, yEnd );
+        QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel, &m_canvasImage, viewport, mapQuality, yStart, yEnd );
         m_threadPool.start( job );
     }
 

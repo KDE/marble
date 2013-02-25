@@ -36,12 +36,13 @@ public:
 
     virtual void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,
+                             int tileZoomLevel,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
     virtual void setRepaintNeeded();
 
-    void initTileRangeCoords();
+    void initTileRangeCoords( int tileZoomLevel );
 
 public Q_SLOTS:
     void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );
@@ -50,7 +51,7 @@ Q_SIGNALS:
     void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
 
 private:
-    void mapTexture( const ViewportParams *viewport, MapQuality mapQuality, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
+    void mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
 
     unsigned int lon2tilex(double lon, int z);
 

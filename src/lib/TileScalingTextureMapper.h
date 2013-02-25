@@ -33,6 +33,7 @@ class TileScalingTextureMapper : public QObject, public TextureMapperInterface
 
     virtual void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,
+                             int tileZoomLevel,
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
@@ -45,6 +46,7 @@ class TileScalingTextureMapper : public QObject, public TextureMapperInterface
  private:
     void mapTexture( GeoPainter *painter,
                      const ViewportParams *viewport,
+                     int tileZoomLevel,
                      TextureColorizer *texColorizer );
 
  private:

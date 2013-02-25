@@ -71,6 +71,7 @@ SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoade
 
 void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
                                                  const ViewportParams *viewport,
+                                                 int tileZoomLevel,
                                                  const QRect &dirtyRect,
                                                  TextureColorizer *texColorizer )
 {
@@ -90,7 +91,7 @@ void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
     }
 
     if ( m_repaintNeeded ) {
-        mapTexture( viewport, painter->mapQuality() );
+        mapTexture( viewport, tileZoomLevel, painter->mapQuality() );
 
         if ( texColorizer ) {
             texColorizer->colorize( &m_canvasImage, viewport, painter->mapQuality() );
@@ -112,7 +113,7 @@ void SphericalScanlineTextureMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport, MapQuality mapQuality )
+void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality )
 {
     // Reset backend
     m_tileLoader->resetTilehash();
@@ -135,7 +136,7 @@ void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport,
     for ( int i = 0; i < numThreads; ++i ) {
         const int yStart = yTop +  i      * yStep;
         const int yEnd   = yTop + (i + 1) * yStep;
-        QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel(), &m_canvasImage, viewport, mapQuality, yStart, yEnd );
+        QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel, &m_canvasImage, viewport, mapQuality, yStart, yEnd );
         m_threadPool.start( job );
     }
 

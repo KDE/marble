@@ -69,6 +69,7 @@ public:
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
+    int m_tileZoomLevel;
     VectorTileMapper *m_texmapper;
     QVector<const GeoSceneTiled *> m_textures;
     GeoSceneGroup *m_textureLayerSettings;
@@ -113,6 +114,7 @@ VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
     , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
+    , m_tileZoomLevel( -1 )
     , m_texmapper( 0 )
     , m_textureLayerSettings( 0 )
     , m_repaintTimer()
@@ -242,15 +244,12 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     if ( tileLevel > d->m_tileLoader.maximumTileLevel() )
         tileLevel = d->m_tileLoader.maximumTileLevel();
 
-    const bool changedTileLevel = tileLevel != d->m_texmapper->tileZoomLevel();
-
-    d->m_texmapper->setTileLevel( tileLevel );
-
     // if zoom level has changed, empty vectortile cache
-    if ( changedTileLevel ) {
+    if ( tileLevel != d->m_tileZoomLevel ) {
+        d->m_tileZoomLevel = tileLevel;
         d->m_documents.clear();
         d->m_tileLoader.cleanupTilehash();
-        d->m_texmapper->initTileRangeCoords();
+        d->m_texmapper->initTileRangeCoords( d->m_tileZoomLevel );
     }
     // else remove only tiles that are not shown on the screen
     else{
@@ -264,7 +263,7 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
 
-    d->m_texmapper->mapTexture( painter, viewport, dirtyRect, 0 );
+    d->m_texmapper->mapTexture( painter, viewport, d->m_tileZoomLevel, dirtyRect, 0 );
 
     return true;
 }
@@ -363,10 +362,7 @@ void VectorTileLayer::setMapTheme( const QVector<const GeoSceneTiled *> &texture
 
 int VectorTileLayer::tileZoomLevel() const
 {
-    if (!d->m_texmapper)
-        return -1;
-
-    return d->m_texmapper->tileZoomLevel();
+    return d->m_tileZoomLevel;
 }
 
 QSize VectorTileLayer::tileSize() const

@@ -58,6 +58,7 @@ public:
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
+    int m_tileZoomLevel;
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
     QVector<const GeoSceneTiled *> m_textures;
@@ -79,6 +80,7 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
     , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
+    , m_tileZoomLevel( -1 )
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
     , m_textureLayerSettings( 0 )
@@ -241,17 +243,13 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     if ( tileLevel > d->m_tileLoader.maximumTileLevel() )
         tileLevel = d->m_tileLoader.maximumTileLevel();
 
-    const bool changedTileLevel = tileLevel != d->m_texmapper->tileZoomLevel();
-
-    //    mDebug() << "Texture Level was set to: " << tileLevel;
-    d->m_texmapper->setTileLevel( tileLevel );
-
-    if ( changedTileLevel ) {
-        emit tileLevelChanged( tileLevel );
+    if ( tileLevel != d->m_tileZoomLevel ) {
+        d->m_tileZoomLevel = tileLevel;
+        emit tileLevelChanged( d->m_tileZoomLevel );
     }
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
-    d->m_texmapper->mapTexture( painter, viewport, dirtyRect, d->m_texcolorizer );
+    d->m_texmapper->mapTexture( painter, viewport, d->m_tileZoomLevel, dirtyRect, d->m_texcolorizer );
     d->m_runtimeTrace = QString("Cache: %1 ").arg(d->m_tileLoader.tileCount());
     return true;
 }
@@ -377,10 +375,7 @@ void TextureLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, 
 
 int TextureLayer::tileZoomLevel() const
 {
-    if (!d->m_texmapper)
-        return -1;
-
-    return d->m_texmapper->tileZoomLevel();
+    return d->m_tileZoomLevel;
 }
 
 QSize TextureLayer::tileSize() const

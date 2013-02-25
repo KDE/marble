@@ -47,6 +47,7 @@ TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoade
 
 void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
                                            const ViewportParams *viewport,
+                                           int tileZoomLevel,
                                            const QRect &dirtyRect,
                                            TextureColorizer *texColorizer )
 {
@@ -69,7 +70,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
         }
 
         if ( m_repaintNeeded ) {
-            mapTexture( painter, viewport, texColorizer );
+            mapTexture( painter, viewport, tileZoomLevel, texColorizer );
 
             m_radius = viewport->radius();
             m_repaintNeeded = false;
@@ -77,7 +78,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
 
         painter->drawImage( dirtyRect, m_canvasImage, dirtyRect );
     } else {
-        mapTexture( painter, viewport, texColorizer );
+        mapTexture( painter, viewport, tileZoomLevel, texColorizer );
 
         m_radius = viewport->radius();
     }
@@ -88,7 +89,7 @@ void TileScalingTextureMapper::setRepaintNeeded()
     m_repaintNeeded = true;
 }
 
-void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportParams *viewport, TextureColorizer *texColorizer )
+void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportParams *viewport, int tileZoomLevel, TextureColorizer *texColorizer )
 {
     const int imageHeight = viewport->height();
     const int imageWidth  = viewport->width();
@@ -104,8 +105,8 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
     const qreal centerLon = viewport->centerLongitude();
     const qreal centerLat = viewport->centerLatitude();
 
-    const int numTilesX = m_tileLoader->tileRowCount( tileZoomLevel() );
-    const int numTilesY = m_tileLoader->tileColumnCount( tileZoomLevel() );
+    const int numTilesX = m_tileLoader->tileRowCount( tileZoomLevel );
+    const int numTilesY = m_tileLoader->tileColumnCount( tileZoomLevel );
     Q_ASSERT( numTilesX > 0 );
     Q_ASSERT( numTilesY > 0 );
 
@@ -135,7 +136,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
                 const qreal yBottom = ( 4.0 * radius ) * ( ( tileY + 1 ) / (qreal)numTilesY - yNormalizedCenter ) + ( imageHeight / 2.0 );
 
                 const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
-                const TileId stackedId = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
+                const TileId stackedId = TileId( 0, tileZoomLevel, ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
 
                 const StackedTile *const tile = m_tileLoader->loadTile( stackedId );
 
@@ -168,7 +169,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
                 const qreal yBottom = ( 4.0 * radius ) * ( ( tileY + 1 ) / (qreal)numTilesY - yNormalizedCenter ) + ( imageHeight / 2.0 );
 
                 const QRectF rect = QRectF( QPointF( xLeft, yTop ), QPointF( xRight, yBottom ) );
-                const TileId stackedId = TileId( 0, tileZoomLevel(), ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
+                const TileId stackedId = TileId( 0, tileZoomLevel, ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
                 const StackedTile *const tile = m_tileLoader->loadTile( stackedId ); // load tile here for every frame, otherwise cleanupTilehash() clears all visible tiles
 
                 const QSize size = QSize( qRound( rect.right() - rect.left() ), qRound( rect.bottom() - rect.top() ) );
