@@ -17,11 +17,11 @@ from __future__ import print_function
 from lib.SpaceObject import SpaceObject
 from lib.HorizonsClient import HorizonsClient
 from lib.TASCClient import TASCClient
-from lib.ObjectCatalogue import ObjectCatalogue
+from lib.ObjectCatalog import ObjectCatalog
 
 ####[ Configuration ]#########################################################
 
-object_catalogue_file   = "PlanetarySatellites.msc"
+object_catalog_file   = "PlanetarySatellites.xml"
 data_file_base_url      = "http://files.kde.org/marble/satellites"
 
 # define all interesting objects
@@ -82,9 +82,9 @@ OBJECTS = [
 
 class OrbitDataFetcher(object):
 
-    def __init__(self, object_catalogue):
+    def __init__(self, object_catalog):
         super(OrbitDataFetcher, self).__init__()
-        self._object_catalogue = object_catalogue
+        self._object_catalog = object_catalog
         self._horizons_client = HorizonsClient()
         self._horizons_client.connect()
         self._tasc_client = TASCClient()
@@ -104,7 +104,7 @@ class OrbitDataFetcher(object):
             if(len(vecs) < 1):
                 print("No data found! Skipping.")
                 continue
-            self._object_catalogue.add(obj, vecs[-1])
+            self._object_catalog.add(obj, vecs[-1])
 
     def _fetch_from_horizons(self, space_object):
         return self._horizons_client.get_state_vectors_for_object(space_object)
@@ -113,7 +113,8 @@ class OrbitDataFetcher(object):
         return self._tasc_client.get_state_vectors_for_object(space_object)
 
 # let's start fetching...
-object_catalogue = ObjectCatalogue(object_catalogue_file, data_file_base_url)
-orbit_data_fetcher = OrbitDataFetcher(object_catalogue)
+object_catalog = ObjectCatalog(object_catalog_file, data_file_base_url)
+orbit_data_fetcher = OrbitDataFetcher(object_catalog)
 orbit_data_fetcher.fetch(OBJECTS)
+object_catalog.write() # finally, write data to file
 
