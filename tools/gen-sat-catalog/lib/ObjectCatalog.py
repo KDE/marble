@@ -69,9 +69,9 @@ class ObjectCatalog(object):
 
     def _initXML(self):
         self._E = ElementMaker(
-            namespace="http://marble.kde.org/satellitescatalog",
-            nsmap={'msc' : "http://marble.kde.org/satellitescatalog"})
-        self._xml = self._E.MarbleSatellitesCatalog()
+            namespace="http://marble.kde.org/satellitecatalog",
+            nsmap={'msc' : "http://marble.kde.org/satellitecatalog"})
+        self._xml = self._E.MarbleSatelliteCatalog()
 
     def _open(self):
         self._file = open(self._filename, 'w+')
