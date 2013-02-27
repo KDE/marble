@@ -35,6 +35,8 @@ class ViewportParamsTest : public QObject
     void screenCoordinates_GeoDataLineString_data();
     void screenCoordinates_GeoDataLineString();
 
+    void screenCoordinates_GeoDataLineString2();
+
     void geoDataLinearRing_data();
     void geoDataLinearRing();
 
@@ -273,6 +275,27 @@ void ViewportParamsTest::screenCoordinates_GeoDataLineString()
 
     // check the provided number of polys
     QCOMPARE( polys.size(), size );
+}
+
+void ViewportParamsTest::screenCoordinates_GeoDataLineString2()
+{
+    const ViewportParams viewport( Spherical, 90 * DEG2RAD, 38 * DEG2RAD, 256, QSize( 1165, 833 ) );
+
+    const GeoDataCoordinates coordinates( -90, 23.44, 0.0, GeoDataCoordinates::Degree );
+    qreal x, y;
+    bool globeHidesPoint;
+    viewport.screenCoordinates( coordinates, x, y, globeHidesPoint );
+
+    QCOMPARE( globeHidesPoint, true );
+
+    GeoDataLineString line( Tessellate | RespectLatitudeCircle );
+    line << GeoDataCoordinates( -180, 23.4400, 0.0, GeoDataCoordinates::Degree );
+    line << GeoDataCoordinates( 0, 23.4400, 0.0, GeoDataCoordinates::Degree );
+
+    QVector<QPolygonF*> polys;
+    viewport.screenCoordinates( line, polys );
+
+    QCOMPARE( polys.size(), 2 );
 }
 
 void ViewportParamsTest::geoDataLinearRing_data()

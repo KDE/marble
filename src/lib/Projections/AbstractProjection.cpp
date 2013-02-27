@@ -417,5 +417,12 @@ int AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord,
         delta = repeatDistance * mirrorCount;
         *polygons.last() << QPointF( x +  delta, y );
     }
+    else {
+        if ( !polygons.last()->isEmpty() ) {
+            QPolygonF *path = new QPolygonF;
+            polygons.append( path );
+        }
+    }
+
     return mirrorCount;
 }
