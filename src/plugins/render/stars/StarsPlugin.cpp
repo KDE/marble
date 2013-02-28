@@ -992,11 +992,20 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    QString target = marbleModel()->planetId();
+    const bool renderStars = !viewport->mapCoversViewport() &&
+                             viewport->projection() == Spherical &&
+                             marbleModel()->planetId() == "earth"; // So far displaying stars is only supported on earth.
 
-    // So far this starry sky plugin only supports displaying stars on earth.
-    if ( target != "earth" ) {
-        return true;
+    if ( renderStars != m_renderStars ) {
+        if ( renderStars ) {
+            connect( marbleModel()->clock(), SIGNAL(timeChanged()),
+                     this, SLOT(requestRepaint()) );
+        } else {
+            disconnect( marbleModel()->clock(), SIGNAL(timeChanged()),
+                        this, SLOT(requestRepaint()) );
+        }
+
+        m_renderStars = renderStars;
     }
 
     painter->save();
@@ -1012,8 +1021,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     const qreal centerLat = viewport->centerLatitude();
 
     const qreal  skyRadius      = 0.6 * sqrt( ( qreal )viewport->width() * viewport->width() + viewport->height() * viewport->height() );
-
-    const bool renderStars = !viewport->mapCoversViewport() && viewport->projection() == Spherical;
 
     if ( renderStars ) {
 
@@ -1344,18 +1351,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 painter->drawPixmap( x - deltaX, y - deltaY, m_pixmapSun );
             }
         }
-    }
-
-    if ( renderStars != m_renderStars ) {
-        if ( renderStars ) {
-            connect( marbleModel()->clock(), SIGNAL(timeChanged()),
-                     this, SLOT(requestRepaint()) );
-        } else {
-            disconnect( marbleModel()->clock(), SIGNAL(timeChanged()),
-                        this, SLOT(requestRepaint()) );
-        }
-
-        m_renderStars = renderStars;
     }
 
     painter->restore();
