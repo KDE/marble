@@ -1080,52 +1080,47 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
+        if( m_renderEcliptic ) {
+            const Quaternion eclipticAxis = Quaternion::fromEuler( 0.0, 0.0, -23.5 * DEG2RAD );
+            matrix eclipticAxisMatrix;
+            (eclipticAxis * skyAxis).inverse().toMatrix( eclipticAxisMatrix );
 
+            painter->setPen(eclipticPen);
 
-        if ( m_renderEcliptic || m_renderCelestialEquator) {
+            int previousX = -1;
+            int previousY = -1;
+            for ( int i = 0; i <= 36; ++i) {
+                Quaternion qpos;
+                qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
+                qpos.rotateAroundAxis( eclipticAxisMatrix );
 
-            if( m_renderEcliptic ) {
-                const Quaternion eclipticAxis = Quaternion::fromEuler( 0.0, 0.0, -23.5 * DEG2RAD );
-                matrix eclipticAxisMatrix;
-                (eclipticAxis * skyAxis).inverse().toMatrix( eclipticAxisMatrix );
+                int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
+                int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
 
-                painter->setPen(eclipticPen);
+                if ( qpos.v[Q_Z] < 0 && previousX >= 0 ) painter->drawLine(previousX, previousY, x, y);
 
-                int previousX = -1;
-                int previousY = -1;
-                for ( int i = 0; i <= 36; ++i) {
-                    Quaternion qpos;
-                    qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
-                    qpos.rotateAroundAxis( eclipticAxisMatrix );
-
-                    int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
-                    int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
-
-                    if ( qpos.v[Q_Z] < 0 && previousX >= 0 ) painter->drawLine(previousX, previousY, x, y);
-
-                    previousX = x;
-                    previousY = y;
-                }
+                previousX = x;
+                previousY = y;
             }
+        }
 
-            if( m_renderCelestialEquator ) {
-                painter->setPen(equatorPen);
+        if( m_renderCelestialEquator ) {
+            painter->setPen(equatorPen);
 
-                int previousX = -1;
-                int previousY = -1;
-                for ( int i = 0; i <= 36; ++i) {
-                    Quaternion qpos;
-                    qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
-                    qpos.rotateAroundAxis( skyAxisMatrix );
+            int previousX = -1;
+            int previousY = -1;
+            for ( int i = 0; i <= 36; ++i) {
+                Quaternion qpos;
+                qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
+                qpos.rotateAroundAxis( skyAxisMatrix );
 
-                    int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
-                    int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
+                int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
+                int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
 
-                    if ( qpos.v[Q_Z] < 0 && previousX > 0 ) painter->drawLine(previousX, previousY, x, y);
+                if ( qpos.v[Q_Z] < 0 && previousX > 0 ) painter->drawLine(previousX, previousY, x, y);
 
-                    previousX = x;
-                    previousY = y;
-                }
+                previousX = x;
+                previousY = y;
             }
         }
 
