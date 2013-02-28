@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2008      Torsten Rahn <tackat@kde.org>
+// Copyright 2011-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "StarsPlugin.h"
@@ -1064,7 +1065,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             qpos1 = Quaternion::fromSpherical( 0, 90 * DEG2RAD );
             qpos1.rotateAroundAxis( skyAxisMatrix );
 
-            if ( qpos.v[Q_Z] < 0 ) {
+            if ( qpos1.v[Q_Z] < 0 ) {
                 x1 = ( int )( viewport->width()  / 2 + skyRadius * qpos1.v[Q_X] );
                 y1 = ( int )( viewport->height() / 2 - skyRadius * qpos1.v[Q_Y] );
                 painter->drawLine( x1, y1, x1+10, y1 );
