@@ -1034,9 +1034,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             m_dsosLoaded = true;
         }
 
-        int x, y;
-        Quaternion qpos;
-
         const qreal  earthRadius    = viewport->radius();
 
         // List of Pens used to draw the sky
@@ -1059,15 +1056,13 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             polesPen.setWidth( 2 );
             painter->setPen( polesPen );
 
-            int x1, y1;
-
             Quaternion qpos1;
             qpos1 = Quaternion::fromSpherical( 0, 90 * DEG2RAD );
             qpos1.rotateAroundAxis( skyAxisMatrix );
 
             if ( qpos1.v[Q_Z] < 0 ) {
-                x1 = ( int )( viewport->width()  / 2 + skyRadius * qpos1.v[Q_X] );
-                y1 = ( int )( viewport->height() / 2 - skyRadius * qpos1.v[Q_Y] );
+                const int x1 = ( int )( viewport->width()  / 2 + skyRadius * qpos1.v[Q_X] );
+                const int y1 = ( int )( viewport->height() / 2 - skyRadius * qpos1.v[Q_Y] );
                 painter->drawLine( x1, y1, x1+10, y1 );
                 painter->drawLine( x1+5, y1-5, x1+5, y1+5 );
                 painter->drawText( x1+8, y1+12, "NP" );
@@ -1077,8 +1072,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             qpos2 = Quaternion::fromSpherical( 0, -90 * DEG2RAD );
             qpos2.rotateAroundAxis( skyAxisMatrix );
             if ( qpos2.v[Q_Z] < 0 ) {
-                x1 = ( int )( viewport->width()  / 2 + skyRadius * qpos2.v[Q_X] );
-                y1 = ( int )( viewport->height() / 2 - skyRadius * qpos2.v[Q_Y] );
+                const int x1 = ( int )( viewport->width()  / 2 + skyRadius * qpos2.v[Q_X] );
+                const int y1 = ( int )( viewport->height() / 2 - skyRadius * qpos2.v[Q_Y] );
                 painter->drawLine( x1, y1, x1+10, y1 );
                 painter->drawLine( x1+5, y1-5, x1+5, y1+5 );
                 painter->drawText( x1+8, y1+12, "SP" );
@@ -1089,16 +1084,15 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         if ( m_renderEcliptic || m_renderCelestialEquator) {
 
-            const Quaternion eclipticAxis = Quaternion::fromEuler( 0.0, 0.0, -23.5 * DEG2RAD );
-            matrix eclipticAxisMatrix;
-            (eclipticAxis * skyAxis).inverse().toMatrix( eclipticAxisMatrix );
-
-
-            int previousX = -1;
-            int previousY = -1;
-
             if( m_renderEcliptic ) {
+                const Quaternion eclipticAxis = Quaternion::fromEuler( 0.0, 0.0, -23.5 * DEG2RAD );
+                matrix eclipticAxisMatrix;
+                (eclipticAxis * skyAxis).inverse().toMatrix( eclipticAxisMatrix );
+
                 painter->setPen(eclipticPen);
+
+                int previousX = -1;
+                int previousY = -1;
                 for ( int i = 0; i <= 36; ++i) {
                     Quaternion qpos;
                     qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
@@ -1114,11 +1108,11 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 }
             }
 
-            previousX = -1;
-            previousY = -1;
-
             if( m_renderCelestialEquator ) {
                 painter->setPen(equatorPen);
+
+                int previousX = -1;
+                int previousY = -1;
                 for ( int i = 0; i <= 36; ++i) {
                     Quaternion qpos;
                     qpos = Quaternion::fromSpherical( i * 10 * DEG2RAD, 0 );
@@ -1139,8 +1133,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             painter->setPen(dsoLabelPen);
             // Render Deep Space Objects
             for ( int d = 0; d < m_dsos.size(); ++d ) {
-                qpos = m_dsos.at( d ).quaternion();
-
+                Quaternion qpos = m_dsos.at( d ).quaternion();
                 qpos.rotateAroundAxis( skyAxisMatrix );
 
                 if ( qpos.v[Q_Z] > 0 ) {
@@ -1159,8 +1152,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 }
 
                 // Let (x, y) be the position on the screen of the placemark..
-                x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
-                y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
+                const int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
+                const int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
 
                 // Skip placemarks that are outside the screen area
                 if ( x < 0 || x >= viewport->width() ||
@@ -1289,8 +1282,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
 
             // Let (x, y) be the position on the screen of the placemark..
-            x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
-            y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
+            const int x = ( int )( viewport->width()  / 2 + skyRadius * qpos.v[Q_X] );
+            const int y = ( int )( viewport->height() / 2 - skyRadius * qpos.v[Q_Y] );
 
             // Skip placemarks that are outside the screen area
             if ( x < 0 || x >= viewport->width()
@@ -1344,15 +1337,15 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             // sun
             const SunLocator *sun = marbleModel()->sunLocator();
             Quaternion::fromEuler( -centerLat , centerLon, 0.0 ).inverse().toMatrix( skyAxisMatrix );
-            qpos = Quaternion::fromSpherical( sun->getLon() * DEG2RAD,
-                                              sun->getLat() * DEG2RAD );
+            Quaternion qpos = Quaternion::fromSpherical( sun->getLon() * DEG2RAD,
+                                                         sun->getLat() * DEG2RAD );
             qpos.rotateAroundAxis( skyAxisMatrix );
 
             if ( qpos.v[Q_Z] <= 0 ) {
                 qreal deltaX  = m_pixmapSun.width()  / 2.;
                 qreal deltaY  = m_pixmapSun.height() / 2.;
-                x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
-                y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+                const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
                 painter->drawPixmap( x - deltaX, y - deltaY, m_pixmapSun );
             }
         }
