@@ -62,6 +62,7 @@ class ObjectCatalog(object):
         print(space_obj.name + " added to object catalog.")
 
     def write(self):
+        print("Writing catalog to file: " + self._filename)
         self._file.write(etree.tostring(self._xml,
                                         pretty_print=True,
                                         xml_declaration=True,
