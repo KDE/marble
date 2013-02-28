@@ -27,6 +27,7 @@
 #include "MarbleWidget.h"
 #include "AbstractFloatItem.h"
 #include "GeoPainter.h"
+#include "Planet.h"
 #include "SunLocator.h"
 #include "ViewportParams.h"
 
@@ -1088,7 +1089,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         }
 
         if( m_renderEcliptic ) {
-            const Quaternion eclipticAxis = Quaternion::fromEuler( 0.0, 0.0, -23.5 * DEG2RAD );
+            const Quaternion eclipticAxis = Quaternion::fromEuler( 0.0, 0.0, -marbleModel()->planet()->epsilon() );
             matrix eclipticAxisMatrix;
             (eclipticAxis * skyAxis).inverse().toMatrix( eclipticAxisMatrix );
 
