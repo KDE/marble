@@ -100,9 +100,9 @@ void TestGeoDataCopy::initTestCase()
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
 
-    coordString << QString(" 13° 42' 38,5\"E,  51° 01' 24,6\"N" );
-    coordString << QString(" 14° 42' 38,5\"E,  52° 01' 24,6\"N" );
-    coordString << QString(" 15° 42' 38,5\"E,  53° 01' 24,6\"N" );
+    coordString << QString::fromUtf8(" 13\u00B0 42' 38,5\"E,  51\u00B0 01' 24,6\"N" );
+    coordString << QString::fromUtf8(" 14\u00B0 42' 38,5\"E,  52\u00B0 01' 24,6\"N" );
+    coordString << QString::fromUtf8(" 15\u00B0 42' 38,5\"E,  53\u00B0 01' 24,6\"N" );
 
     coord1.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
     coord1.setDetail(2);
