@@ -25,10 +25,10 @@ test -x "${MERGE_TOOL}" || {
 workdir="$(mktemp -d)"
 
 #prefix="svn://anonsvn.kde.org/home/kde/branches/stable/l10n-kde4/"
-#TAG="4.7.0"
-#prefix="svn://anonsvn.kde.org/home/kde/tags/KDE/${TAG}/l10n-kde4/"
+TAG="4.10.1"
+prefix="svn://anonsvn.kde.org/home/kde/tags/KDE/${TAG}/l10n-kde4/"
 # Translations can also be loaded from SVN trunk, uncomment below.
-prefix="svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4"
+#prefix="svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4"
 
 echo "Generating translation template"
 lupdate $(find "$(dirname ${0})"/../../ -name "*.cpp" -o -name "*.h" -o -name "*.ui" | xargs echo) -ts "${workdir}/template.ts"
