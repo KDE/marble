@@ -26,7 +26,7 @@ workdir="$(mktemp -d)"
 
 #prefix="svn://anonsvn.kde.org/home/kde/branches/stable/l10n-kde4/"
 #TAG="4.7.0"
-#prefix="svn://anonsvn.kde.org/home/kde/tags/KDE/${TAG}/kde-l10n/"
+#prefix="svn://anonsvn.kde.org/home/kde/tags/KDE/${TAG}/l10n-kde4/"
 # Translations can also be loaded from SVN trunk, uncomment below.
 prefix="svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4"
 
