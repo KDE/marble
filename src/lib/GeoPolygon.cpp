@@ -166,10 +166,13 @@ void PntMapLoader::run()
     if ( (fd = open (m_filename.toLatin1(), O_RDONLY) ) < 0)  // krazy:exclude=syscalls
         mDebug() << "cannot open" << m_filename << " for reading";
 
-    if ( fstat (fd,&statbuf) < 0 ) // krazy:exclude=syscalls
+    int filelength;
+    if ( fstat (fd,&statbuf) < 0 ) { // krazy:exclude=syscalls
+        filelength = 0;
         mDebug() << "fstat error";
-
-    int  filelength = statbuf.st_size;
+    } else {
+        filelength = statbuf.st_size;
+    }
 	
     if ((src = (unsigned char*) mmap (0, filelength, PROT_READ, MAP_SHARED, fd, 0))
         == (unsigned char*) (caddr_t) -1)
