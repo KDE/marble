@@ -89,8 +89,6 @@ void MarbleLegendBrowser::setMarbleModel( MarbleModel *marbleModel )
 
 void MarbleLegendBrowser::initTheme()
 {
-    mDebug() << "initTheme";
-
     // Check for a theme specific legend.html first
     if ( d->m_marbleModel != 0 && d->m_marbleModel->mapTheme() != 0 )
     {
@@ -240,6 +238,9 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
     d->m_symbolMap.clear();
 
+    /* This CSS code is required to style the following HTML code
+     * P.S. It use bootstrap also, so we don't need a lot of style here
+     */
     QString bitStyle = "<style>"
             ".well-legend {"
             "   padding-top: 10px;"
@@ -267,13 +268,26 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
     customLegendString += bitStyle;
 
+    /* Okay, if you are reading it now, be ready for hell!
+     * We can't optimize this part of Legend Browser, but we will
+     * do it, anyway. It's complicated a lot, the most important
+     * thing is to understand everything.
+     */
     foreach ( const GeoSceneSection *section, currentMapTheme->legend()->sections() ) {
+        // Each section is devided into the "well"
+        // Well is like a block of data with rounded corners
         customLegendString += "<div class=\"well well-small well-legend\">";
         QString checkBoxString; 
         if (section->checkable()) {
+            // If it's needed to make a checkbox here, we will
             QString checked = "";
             if (d->m_checkBoxMap[section->connectTo()])
                 checked = "checked";
+            /* Important comment:
+             * We inject Marble object into JavaScript of each legend html file
+             * This is only one way to handle checkbox changes we see, so
+             * Marble.setCheckedProperty is a function that does it
+             */
             checkBoxString = ""
                     "<label class=\"checkbox\">"
                     "<input type=\"checkbox\" "
@@ -288,17 +302,14 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             QString path = "";
             int pixmapWidth = 24;
             int pixmapHeight = 12;
+            // NOTICE. There are some pixmaps without image, so we should
+            //         create just a plain rectangle with set color
             if (!item->icon()->pixmap().isEmpty()) {
                 path = MarbleDirs::path( item->icon()->pixmap() );
                 const QPixmap oncePixmap(path);
                 pixmapWidth = oncePixmap.width();
                 pixmapHeight = oncePixmap.height();
-            }/* else {
-                // Tiny hack ;)
-                // There is <img src="%path%" />
-                // We will have <img src="" style="display: none;" />
-                path = "\" style=\"display: none;";
-            }*/
+            }
             QColor color = item->icon()->color();
             QString styleDiv = "";
             if (color != Qt::transparent) {
