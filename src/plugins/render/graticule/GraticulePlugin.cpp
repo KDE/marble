@@ -447,15 +447,15 @@ void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
                                            const QString& lineLabel,
                                            LabelPositionFlags labelPositionFlags )
 {
-    qreal fromWestLon = viewLatLonAltBox.west( GeoDataCoordinates::Degree );
-    qreal toEastLon   = viewLatLonAltBox.east( GeoDataCoordinates::Degree );
+    const qreal fromWestLon = viewLatLonAltBox.west();
+    const qreal toEastLon   = viewLatLonAltBox.east();
 
     // Coordinate line is not displayed inside the viewport
     if ( ( !viewLatLonAltBox.crossesDateLine() 
-           && ( longitude < fromWestLon || toEastLon < longitude   ) ) ||
+           && ( longitude * DEG2RAD < fromWestLon || toEastLon < longitude * DEG2RAD ) ) ||
          (  viewLatLonAltBox.crossesDateLine() &&
-            longitude < toEastLon && fromWestLon < longitude &&
-            fromWestLon != -180.0 && toEastLon != +180.0 )
+            longitude * DEG2RAD < toEastLon && fromWestLon < longitude * DEG2RAD &&
+            fromWestLon != -M_PI && toEastLon != +M_PI )
        ) {
         // mDebug() << "Lon: Out of View:" << viewLatLonAltBox.toString() << " Crossing: "<< viewLatLonAltBox.crossesDateLine() << "Longitude: " << longitude;
         return;
