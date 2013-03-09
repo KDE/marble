@@ -328,31 +328,21 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
 {
 
     const bool clampToGround = f.testFlag( FollowGround );
-    bool followLatitudeCircle = false;     
+    const bool followLatitudeCircle = f.testFlag( RespectLatitudeCircle )
+                                      && previousCoords.latitude() == currentCoords.latitude();
 
     // Maximum amount of tessellation nodes.
     if ( tessellatedNodes > maxTessellationNodes ) tessellatedNodes = maxTessellationNodes;
 
-    qreal previousAltitude = previousCoords.altitude();
-
-    // Calculate steps for tessellation: lonDiff and altDiff 
+    // Calculate steps for tessellation: lonDiff and altDiff
     qreal lonDiff = 0.0;
-    qreal previousLongitude = 0.0;
-    qreal previousLatitude = 0.0;
-    previousCoords.geoCoordinates( previousLongitude, previousLatitude );
-    qreal previousSign = previousLongitude > 0 ? 1 : -1;
+    if ( followLatitudeCircle ) {
+        const int previousSign = previousCoords.longitude() > 0 ? 1 : -1;
+        const int currentSign = currentCoords.longitude() > 0 ? 1 : -1;
 
-    qreal currentLongitude = 0.0;
-    qreal currentLatitude = 0.0;
-    currentCoords.geoCoordinates( currentLongitude, currentLatitude );
-    qreal currentSign = currentLongitude > 0 ? 1 : -1;
-
-    if ( f.testFlag( RespectLatitudeCircle )
-         && previousLatitude == currentLatitude ) {
-        followLatitudeCircle = true;
-        lonDiff = currentLongitude - previousLongitude;
+        lonDiff = currentCoords.longitude() - previousCoords.longitude();
         if ( previousSign != currentSign
-             && fabs(previousLongitude) + fabs(currentLongitude) > M_PI ) {
+             && fabs(previousCoords.longitude()) + fabs(currentCoords.longitude()) > M_PI ) {
             if ( previousSign > currentSign ) {
                 // going eastwards ->
                 lonDiff += 2 * M_PI ;
@@ -366,26 +356,23 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
         }
     }
 
-    qreal  lon = 0.0;
-    qreal  lat = 0.0;
-
-    qreal altDiff = currentCoords.altitude() - previousAltitude;
-
-    int startNode = 1;
-    const int endNode = tessellatedNodes - 2;
+    const qreal altDiff = currentCoords.altitude() - previousCoords.altitude();
 
     // Create the tessellation nodes.
-    for ( int i = startNode; i <= endNode; ++i ) {
-        qreal  t = (qreal)(i) / (qreal)( tessellatedNodes ) ;
+    GeoDataCoordinates previousTessellatedCoords = previousCoords;
+    for ( int i = 1; i <= tessellatedNodes - 2; ++i ) {
+        const qreal t = (qreal)(i) / (qreal)( tessellatedNodes );
 
         // interpolate the altitude, too
-        qreal altitude = clampToGround ? 0 : altDiff * t + previousCoords.altitude();
+        const qreal altitude = clampToGround ? 0 : altDiff * t + previousCoords.altitude();
 
+        qreal lon = 0.0;
+        qreal lat = 0.0;
         if ( followLatitudeCircle ) {
             // To tessellate along latitude circles use the 
             // linear interpolation of the longitude.
             lon = lonDiff * t + previousCoords.longitude();
-            lat = previousLatitude;
+            lat = previousTessellatedCoords.latitude();
         }
         else {
             // To tessellate along great circles use the 
@@ -394,21 +381,17 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
             itpos. getSpherical( lon, lat );
         }
 
-        crossDateLine( GeoDataCoordinates( previousLongitude, previousLatitude, previousAltitude),
-                       GeoDataCoordinates( lon, lat, altitude ), polygons, viewport );
-        previousLongitude = lon;
-        previousLatitude = lat;
-        previousAltitude = altitude;
+        const GeoDataCoordinates currentTessellatedCoords( lon, lat, altitude );
+        crossDateLine( previousTessellatedCoords, currentTessellatedCoords, polygons, viewport );
+        previousTessellatedCoords = currentTessellatedCoords;
     }
-
 
     // For the clampToGround case add the "current" coordinate after adding all other nodes. 
     GeoDataCoordinates currentModifiedCoords( currentCoords );
     if ( clampToGround ) {
         currentModifiedCoords.setAltitude( 0.0 );
     }
-    crossDateLine( GeoDataCoordinates( previousLongitude, previousLatitude, previousAltitude ),
-                   currentModifiedCoords, polygons, viewport );
+    crossDateLine( previousTessellatedCoords, currentModifiedCoords, polygons, viewport );
 }
 
 void AbstractProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord,
