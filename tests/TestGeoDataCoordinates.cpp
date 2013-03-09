@@ -97,17 +97,9 @@ void TestGeoDataCoordinates::testConstruction()
 
     QCOMPARE(coordinates3.longitude(GeoDataCoordinates::Degree), lon);
     QCOMPARE(coordinates3.longitude(), lon*DEG2RAD);
-    QEXPECT_FAIL("", "This should fail", Continue);
-    QCOMPARE(coordinates3.longitude(), lon);
-    QEXPECT_FAIL("", "This should fail", Continue);
-    QCOMPARE(invalid1.longitude(GeoDataCoordinates::Degree), lon*DEG2RAD);
 
     QCOMPARE(coordinates3.latitude(GeoDataCoordinates::Degree), lat);
     QCOMPARE(coordinates3.latitude(), lat*DEG2RAD);
-    QEXPECT_FAIL("", "This should fail", Continue);
-    QCOMPARE(invalid1.latitude(), lat);
-    QEXPECT_FAIL("", "This should fail", Continue);
-    QCOMPARE(invalid1.latitude(GeoDataCoordinates::Degree), lat*DEG2RAD);
 
     QCOMPARE(coordinates3.altitude(), alt);
 
