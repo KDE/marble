@@ -379,7 +379,7 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
         qreal  t = (qreal)(i) / (qreal)( tessellatedNodes ) ;
 
         // interpolate the altitude, too
-        qreal altitude = clampToGround ? 0 : altDiff * t + previousAltitude;
+        qreal altitude = clampToGround ? 0 : altDiff * t + previousCoords.altitude();
 
         if ( followLatitudeCircle ) {
             // To tessellate along latitude circles use the 
@@ -397,6 +397,8 @@ void AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &
         crossDateLine( GeoDataCoordinates( previousLongitude, previousLatitude, previousAltitude),
                        GeoDataCoordinates( lon, lat, altitude ), polygons, viewport );
         previousLongitude = lon;
+        previousLatitude = lat;
+        previousAltitude = altitude;
     }
 
 
