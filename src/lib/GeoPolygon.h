@@ -80,10 +80,6 @@ class MARBLE_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
 
     GeoDataCoordinates::PtrVector  m_boundary;
 
-    qreal  m_lonLeft;
-    qreal  m_latTop;
-    qreal  m_lonRight;
-    qreal  m_latBottom;
     int     m_index;
 };
 

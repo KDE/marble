@@ -38,10 +38,6 @@ const qreal INT2RAD = M_PI / 10800.0;
 GeoPolygon::GeoPolygon()
     : m_dateLineCrossing( false ),
       m_closed( false ),
-      m_lonLeft( 0.0 ),
-      m_latTop( 0.0 ),
-      m_lonRight( 0.0 ),
-      m_latBottom( 0.0 ),
       m_index( 0 )
 {
 }
@@ -54,11 +50,6 @@ GeoPolygon::~GeoPolygon()
 
 void GeoPolygon::setBoundary( qreal lonLeft, qreal latTop, qreal lonRight, qreal latBottom)
 {
-    m_lonLeft   = lonLeft;
-    m_latTop    = latTop;
-    m_lonRight  = lonRight;
-    m_latBottom = latBottom;
-
     m_boundary.clear();
     if ( getDateLine() == GeoPolygon::Even ) {
         qreal xcenter = ( lonLeft + ( 2.0 * M_PI + lonRight) ) / 2.0;
