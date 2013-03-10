@@ -27,6 +27,7 @@ namespace Marble
 {
 
 class GeoPainter;
+class GeoPolygon;
 class PntMap;
 class ViewportParams;
 
@@ -55,18 +56,15 @@ class VectorMap
     void rectangularCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
     void mercatorCreateFromPntMap( const PntMap*, const ViewportParams *viewport );
 
-    void sphericalCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
-				  GeoDataCoordinates::Vector::ConstIterator const &,
+    void sphericalCreatePolyLine( const GeoPolygon *geoPolygon,
                                   const int detail, const ViewportParams *viewport );
-    void rectangularCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
-				    GeoDataCoordinates::Vector::ConstIterator const &,
+    void rectangularCreatePolyLine( const GeoPolygon *geoPolygon,
                                     const int detail, const ViewportParams *viewport, int offset );
-    void mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
-				 GeoDataCoordinates::Vector::ConstIterator const &,
+    void mercatorCreatePolyLine( const GeoPolygon *geoPolygon,
                                  const int detail, const ViewportParams *viewport, int offset );
 
     QPointF  horizonPoint( const ViewportParams *viewport, const QPointF &currentPoint, int rLimit ) const;
-    void           createArc( const ViewportParams *viewport, const QPointF &horizona, const QPointF &horizonb, int rLimit );
+    static void createArc( const ViewportParams *viewport, const QPointF &horizona, const QPointF &horizonb, int rLimit, ScreenPolygon &polygon );
 
     int            getDetailLevel( int radius ) const;
 
@@ -77,8 +75,6 @@ class VectorMap
     ScreenPolygon::Vector m_polygons;
 
     //	int m_debugNodeCount;
-
-    ScreenPolygon     m_polygon;
 };
 
 }
