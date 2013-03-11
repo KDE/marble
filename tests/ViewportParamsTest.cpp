@@ -17,6 +17,7 @@
 #include "AbstractProjection.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
 
 namespace Marble
 {
@@ -33,6 +34,9 @@ class ViewportParamsTest : public QObject
 
     void screenCoordinates_GeoDataLineString_data();
     void screenCoordinates_GeoDataLineString();
+
+    void geoDataLinearRing_data();
+    void geoDataLinearRing();
 
     void setInvalidRadius();
 
@@ -239,6 +243,133 @@ void ViewportParamsTest::screenCoordinates_GeoDataLineString()
     QCOMPARE( polys.size(), size );
 }
 
+void ViewportParamsTest::geoDataLinearRing_data()
+{
+    QTest::addColumn<Marble::Projection>( "projection" );
+    QTest::addColumn<Marble::TessellationFlags>( "tessellation" );
+    QTest::addColumn<GeoDataLinearRing>( "ring" );
+    QTest::addColumn<int>( "size" );
+
+    GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
+
+    GeoDataLinearRing normalRing;
+    normalRing << GeoDataCoordinates(175, 5, 0, deg )
+               << GeoDataCoordinates(175, 15, 0, deg )
+               << GeoDataCoordinates(170, 15, 0, deg );
+
+    GeoDataLinearRing acrossIDLRing;
+    acrossIDLRing << GeoDataCoordinates(-175, 5, 0, deg )
+                  << GeoDataCoordinates(175, 5, 0, deg )
+                  << GeoDataCoordinates(175, 15, 0, deg );
+
+    GeoDataLinearRing aroundSPoleRing;
+    aroundSPoleRing << GeoDataCoordinates(-175, -65, 0, deg )
+                 << GeoDataCoordinates(115, -70, 0, deg )
+                    << GeoDataCoordinates(105, -75, 0, deg );
+
+    Projection projection = Mercator;
+
+    TessellationFlags flags = NoTessellation;
+    QTest::newRow("Mercator NoTesselation normalRing")
+            << projection << flags << normalRing << 2;
+
+    QTest::newRow("Mercator NoTesselation acrossIDLRing")
+            << projection << flags << acrossIDLRing << 2;
+
+    QTest::newRow("Mercator NoTesselation aroundSPoleRing")
+            << projection << flags << aroundSPoleRing << 2;
+
+//    flags = Tessellate;
+//    QTest::newRow("Mercator Tesselate normalRing")
+//            << projection << flags << normalRing << 2;
+
+//    QTest::newRow("Mercator Tesselate acrossIDLRing")
+//            << projection << flags << acrossIDLRing << 2;
+
+//    QTest::newRow("Mercator Tesselate aroundSPoleRing")
+//            << projection << flags << aroundSPoleRing << 2;
+
+//    flags = Tessellate | RespectLatitudeCircle;
+//    QTest::newRow("Mercator LatitudeCircle normalRing")
+//            << projection << flags << normalRing << 1;
+
+//    QTest::newRow("Mercator LatitudeCircle acrossIDLRing")
+//            << projection << flags << acrossIDLRing << 1;
+
+//    QTest::newRow("Mercator LatitudeCircle aroundSPoleRing")
+//            << projection << flags << aroundSPoleRing << 1;
+
+
+    projection = Spherical;
+
+    flags = NoTessellation;
+    QTest::newRow("Spherical NoTesselation normalRing")
+            << projection << flags << normalRing << 1;
+
+    QTest::newRow("Spherical NoTesselation acrossIDLRing")
+            << projection << flags << acrossIDLRing << 1;
+
+    QTest::newRow("Spherical NoTesselation aroundSPoleRing")
+            << projection << flags << aroundSPoleRing << 1;
+
+//    flags = Tessellate;
+//    QTest::newRow("Spherical Tesselate normalRing")
+//            << projection << flags << normalRing << 1;
+
+//    QTest::newRow("Spherical Tesselate acrossIDLRing")
+//            << projection << flags << acrossIDLRing << 1;
+
+//    QTest::newRow("Spherical Tesselate aroundSPoleRing")
+//            << projection << flags << aroundSPoleRing << 1;
+
+//    flags = Tessellate | RespectLatitudeCircle;
+//    QTest::newRow("Spherical LatitudeCircle normalRing")
+//            << projection << flags << normalRing << 1;
+
+//    QTest::newRow("Spherical LatitudeCircle acrossIDLRing")
+//            << projection << flags << acrossIDLRing << 1;
+
+//    QTest::newRow("Spherical LatitudeCircle aroundSPoleRing")
+//            << projection << flags << aroundSPoleRing << 1;
+
+}
+
+void ViewportParamsTest::geoDataLinearRing()
+{
+    QFETCH( Marble::Projection, projection );
+    QFETCH( Marble::TessellationFlags, tessellation );
+    QFETCH( GeoDataLinearRing, ring );
+    QFETCH( int, size );
+
+    ViewportParams viewport;
+    viewport.setProjection( projection );
+    viewport.setRadius( 360 / 4 ); // for easy mapping of lon <-> x
+    viewport.centerOn(175 * DEG2RAD, 0);
+
+    ring.setTessellationFlags( tessellation );
+    QVector<QPolygonF*> polys;
+    viewport.screenCoordinates(ring, polys);
+
+    foreach (QPolygonF* poly, polys) {
+        // at least 3 points in one poly
+        QVERIFY( poly->size() > 2 );
+        QPointF oldCoord = poly->first();
+        poly->pop_front();
+
+        foreach(const QPointF &coord, *poly) {
+            // no 2 same points
+            QVERIFY( (coord-oldCoord) != QPointF() );
+
+            // no 2 consecutive points should be more than 90° apart
+//            QVERIFY( (coord-oldCoord).manhattanLength() < viewport.radius() );
+            oldCoord = coord;
+        }
+    }
+
+    // check the provided number of polys
+    QCOMPARE( polys.size(), size );
+}
+
 void ViewportParamsTest::setInvalidRadius()
 {
     ViewportParams viewport;
@@ -281,6 +412,7 @@ void ViewportParamsTest::setFocusPoint()
 
 }
 
+Q_DECLARE_METATYPE( Marble::GeoDataLinearRing )
 Q_DECLARE_METATYPE( Marble::Projection )
 Q_DECLARE_METATYPE( Marble::TessellationFlag )
 Q_DECLARE_METATYPE( Marble::TessellationFlags )
