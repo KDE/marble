@@ -144,7 +144,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &coordinate
            QSizeF( 0.0, 0.0 ), globeHidesPoint );
 }
 
-qreal AbstractProjectionPrivate::mirrorPoint( const ViewportParams *viewport ) const
+qreal AbstractProjectionPrivate::repeatDistance( const ViewportParams *viewport ) const
 {
     // Choose a latitude that is inside the viewport.
     qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();

@@ -55,7 +55,7 @@ class AbstractProjectionPrivate
                                int mirrorCount = 0,
                                qreal repeatDistance = 0 ) const;
 
-    qreal mirrorPoint( const ViewportParams *viewport ) const;
+    qreal repeatDistance( const ViewportParams *viewport ) const;
 
 
     void translatePolygons( const QVector<QPolygonF *> &polygons,
