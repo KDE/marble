@@ -214,6 +214,23 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     return polygons.isEmpty();
 }
 
+void CylindricalProjectionPrivate::translatePolygons( const QVector<QPolygonF *> &polygons,
+                                                      QVector<QPolygonF *> &translatedPolygons,
+                                                      qreal xOffset ) const
+{
+    // mDebug() << "Translation: " << xOffset;
+
+    QVector<QPolygonF *>::const_iterator itPolygon = polygons.constBegin();
+    QVector<QPolygonF *>::const_iterator itEnd = polygons.constEnd();
+
+    for( ; itPolygon != itEnd; ++itPolygon ) {
+        QPolygonF * polygon = new QPolygonF;
+        *polygon = **itPolygon;
+        polygon->translate( xOffset, 0 );
+        translatedPolygons.append( polygon );
+    }
+}
+
 void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewport,
                                                 QVector<QPolygonF *> &polygons ) const
 {

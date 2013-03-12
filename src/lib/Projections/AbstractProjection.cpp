@@ -161,26 +161,6 @@ qreal AbstractProjectionPrivate::repeatDistance( const ViewportParams *viewport 
     return   xEast - xWest;
 }
 
-
-void AbstractProjectionPrivate::translatePolygons( const QVector<QPolygonF *> &polygons,
-                                                   QVector<QPolygonF *> &translatedPolygons,
-                                                   qreal xOffset ) const
-{
-    // mDebug() << "Translation: " << xOffset;
-
-    QVector<QPolygonF *>::const_iterator itPolygon = polygons.constBegin();
-    QVector<QPolygonF *>::const_iterator itEnd = polygons.constEnd();
-    
-    for( ; itPolygon != itEnd; ++itPolygon ) {
-        QPolygonF * polygon = new QPolygonF;
-        *polygon = **itPolygon;
-        polygon->translate( xOffset, 0 );
-        translatedPolygons.append( polygon );
-    }
-}
-
-
-
 GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport ) const
 {
