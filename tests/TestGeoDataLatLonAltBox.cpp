@@ -466,7 +466,15 @@ void TestGeoDataLatLonAltBox::testFromLineString_data()
                  << GeoDataCoordinates( 180, 0, 200, GeoDataCoordinates::Degree)
                  << GeoDataCoordinates(-180, 0, 200, GeoDataCoordinates::Degree)
                  << GeoDataCoordinates(   0, 0, 200, GeoDataCoordinates::Degree))
-            << GeoDataLatLonBox(0.0, 0.0, 180, -180, GeoDataCoordinates::Degree);
+            << GeoDataLatLonBox(90.0, 0.0, 180, -180, GeoDataCoordinates::Degree);
+
+    QTest::newRow("around south pole")
+            << (GeoDataLineString()
+                 << GeoDataCoordinates(   0, -10, 200, GeoDataCoordinates::Degree)
+                 << GeoDataCoordinates( 180, -10, 200, GeoDataCoordinates::Degree)
+                 << GeoDataCoordinates(-180, -10, 200, GeoDataCoordinates::Degree)
+                 << GeoDataCoordinates(   0, -10, 200, GeoDataCoordinates::Degree))
+            << GeoDataLatLonBox(-10.0, -90.0, 180, -180, GeoDataCoordinates::Degree);
 }
 
 void TestGeoDataLatLonAltBox::testFromLineString() {
