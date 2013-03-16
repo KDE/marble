@@ -23,7 +23,7 @@ namespace Marble
 
 class GeoGraphicsItem;
 class GeoDataFeature;
-class GeoDataLatLonAltBox;
+class GeoDataLatLonBox;
 class GeoGraphicsScenePrivate;
 
 /**
@@ -75,7 +75,7 @@ public:
      * @param maxZoomLevel The max zoom level of tiling
      * @return The list of items in the specified box in no specific order.
      */
-    QList<GeoGraphicsItem *> items( const GeoDataLatLonAltBox& box, int maxZoomLevel ) const;
+    QList<GeoGraphicsItem *> items( const GeoDataLatLonBox &box, int maxZoomLevel ) const;
 
 private:
     GeoGraphicsScenePrivate * const d;

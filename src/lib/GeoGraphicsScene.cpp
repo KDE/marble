@@ -12,7 +12,7 @@
 
 #include "GeoDataFeature.h"
 #include "GeoDataGroundOverlay.h"
-#include "GeoDataLatLonAltBox.h"
+#include "GeoDataLatLonBox.h"
 #include "GeoDataPhotoOverlay.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
@@ -59,17 +59,17 @@ void GeoGraphicsScene::eraseAll()
     d->m_items.clear();
 }
 
-QList< GeoGraphicsItem* > GeoGraphicsScene::items( const Marble::GeoDataLatLonAltBox& box, int zoomLevel ) const
+QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, int zoomLevel ) const
 {
     if ( box.west() > box.east() ) {
         // Handle boxes crossing the IDL by splitting it into two separate boxes
-        GeoDataLatLonAltBox left;
+        GeoDataLatLonBox left;
         left.setWest( -M_PI );
         left.setEast( box.east() );
         left.setNorth( box.north() );
         left.setSouth( box.south() );
 
-        GeoDataLatLonAltBox right;
+        GeoDataLatLonBox right;
         right.setWest( box.west() );
         right.setEast( M_PI );
         right.setNorth( box.north() );
