@@ -11,9 +11,9 @@
 
 #include "QtMobilityPositionProviderPlugin.h"
 
-#include <QtLocation/QGeoPositionInfoSource>
-#include <QtLocation/QGeoPositionInfo>
-#include <QtLocation/QGeoCoordinate>
+#include <QGeoPositionInfoSource>
+#include <QGeoPositionInfo>
+#include <QGeoCoordinate>
 
 QTM_USE_NAMESPACE
 
