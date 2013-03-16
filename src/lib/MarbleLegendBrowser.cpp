@@ -243,11 +243,16 @@ QString MarbleLegendBrowser::generateSectionsHtml()
      */
     QString bitStyle = "<style>"
             ".well-legend {"
+            "   background-color: #fcffdb;"
             "   padding-top: 10px;"
             "   padding-bottom: 5px;"
+            ""
             "}"
             ".legend-entry {"
-            "   margin-bottom: 5px;"
+            "   margin-bottom: -10px!important;"
+            "}"
+            ".well-legend .section-head {"
+            "   color: #b3925d!important;"
             "}"
             ".legend-entry .image-pic {"
             "   float: left;"
@@ -259,7 +264,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             "}"
             "label span {"
             "   line-height: 30px;"
-            "   font-weight: 800;"
+            "   font-weight: 600;"
             "}"
             "label input {"
             "   margin-right: 5px!important;"
@@ -277,6 +282,9 @@ QString MarbleLegendBrowser::generateSectionsHtml()
         // Each section is devided into the "well"
         // Well is like a block of data with rounded corners
         customLegendString += "<div class=\"well well-small well-legend\">";
+
+        customLegendString += "<h4 class=\"section-head\">"+section->heading()+"</h4>";
+
         QString checkBoxString; 
         if (section->checkable()) {
             // If it's needed to make a checkbox here, we will

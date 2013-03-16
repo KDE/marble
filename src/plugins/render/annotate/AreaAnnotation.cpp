@@ -83,6 +83,7 @@ bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
 
 bool AreaAnnotation::mouseReleaseEvent( QMouseEvent *event )
 {
+    Q_UNUSED(event);
     m_movedPoint = -1;
     return true;
 }

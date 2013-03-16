@@ -993,7 +993,7 @@ static void dspace
      )
 {
      const double twopi = 2.0 * pi;
-     int iretn , iret;
+     int iretn;
      double delt, ft, theta, x2li, x2omi, xl, xldot , xnddt, xndt, xomi, g22, g32,
           g44, g52, g54, fasx2, fasx4, fasx6, rptim , step2, stepn , stepp;
 
@@ -1053,7 +1053,6 @@ static void dspace
                delt = stepn;
 
          iretn = 381; // added for do loop
-         iret  =   0; // added for loop
          while (iretn == 381)
            {
              /* ------------------- dot terms calculated ------------- */
@@ -1093,7 +1092,6 @@ static void dspace
              // sgp4fix move end checks to end of routine
              if (fabs(t - atime) >= stepp)
                {
-                 iret  = 0;
                  iretn = 381;
                }
                else // exit here

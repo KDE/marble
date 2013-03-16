@@ -176,6 +176,9 @@ const QList<QActionGroup*>* AnnotatePlugin::toolbarActionGroups() const
 
 bool AnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED(renderPos);
+    Q_UNUSED(layer);
+
     painter->autoMapQuality();
 
     QListIterator<SceneGraphicsItem*> i( m_graphicsItems );
