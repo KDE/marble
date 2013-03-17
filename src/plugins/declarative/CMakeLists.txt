@@ -1,5 +1,3 @@
-if( QT_QTDECLARATIVE_FOUND )
-
 PROJECT( MarbleDeclarativePlugin )
 
 INCLUDE_DIRECTORIES(
@@ -49,5 +47,3 @@ IF( BUILD_HARMATTAN_ZOOMINTERCEPTOR )
   target_link_libraries( MarbleDeclarativePlugin ${libresourceqt1_LIBRARIES} )
 ENDIF()
 INSTALL( FILES qmldir MarbleSettings.qml DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble )
-
-endif( QT_QTDECLARATIVE_FOUND )
