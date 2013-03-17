@@ -126,7 +126,6 @@ geodata/handlers/kml/KmlViewFormatTagHandler.cpp
 geodata/handlers/kml/KmlViewRefreshModeTagHandler.cpp
 geodata/handlers/kml/KmlViewRefreshTimeTagHandler.cpp
 geodata/handlers/kml/KmlViewVolumeTagHandler.cpp
-geodata/handlers/kml/KmlViewVolumeTagHandler.cpp
 geodata/handlers/kml/KmlLeftFovTagHandler.cpp
 geodata/handlers/kml/KmlRightFovTagHandler.cpp
 geodata/handlers/kml/KmlBottomFovTagHandler.cpp

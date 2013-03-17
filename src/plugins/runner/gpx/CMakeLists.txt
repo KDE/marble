@@ -25,7 +25,6 @@ set( gpx_handlers_SRCS
         handlers/GPXhrTagHandler.cpp
         handlers/GPXrteTagHandler.cpp
         handlers/GPXrteptTagHandler.cpp
-        handlers/GPXeleTagHandler.cpp
         handlers/GPXcmtTagHandler.cpp
         handlers/GPXlinkTagHandler.cpp
         handlers/GPXurlTagHandler.cpp
