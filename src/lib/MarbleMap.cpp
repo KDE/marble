@@ -679,6 +679,9 @@ Projection MarbleMap::projection() const
 
 void MarbleMap::setProjection( Projection projection )
 {
+    if ( d->m_viewport.projection() == projection )
+        return;
+
     emit projectionChanged( projection );
 
     d->m_viewport.setProjection( projection );
