@@ -52,7 +52,7 @@ class MarbleWidget : public QGraphicsProxyWidget
     Q_PROPERTY( Coordinate* center READ center WRITE setCenter NOTIFY visibleLatLonAltBoxChanged )
     Q_PROPERTY( int radius READ radius WRITE setRadius NOTIFY radiusChanged )
     Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY mapThemeChanged )
-    Q_PROPERTY( QString projection READ projection WRITE setProjection )
+    Q_PROPERTY( QString projection READ projection WRITE setProjection NOTIFY projectionChanged )
     Q_PROPERTY( bool inputEnabled READ inputEnabled WRITE setInputEnabled )
     Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
@@ -121,6 +121,8 @@ Q_SIGNALS:
     void mapThemeChanged();
 
     void placemarkSelected( Placemark* placemark );
+
+    void projectionChanged();
 
 public Q_SLOTS:
     Coordinate* center();
