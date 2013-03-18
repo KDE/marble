@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin   <ingwa@kde.org>
 // Copyright 2007      Thomas Zander <zander@kde.org>
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
+// Coprright 2011-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 // Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
@@ -462,57 +463,50 @@ void MapViewWidget::Private::updateMapThemeView()
     m_celestialListProxy.sort(0);
 }
 
-void MapViewWidget::setMapThemeId( const QString &theme )
+void MapViewWidget::setMapThemeId( const QString &themeId )
 {
-    if ( !d->m_mapThemeModel || !d->m_marbleModel )
-        return;
-
     const bool smallscreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
 
-    // Check if the new selected theme is different from the current one
     const int currentRow = smallscreen ? d->m_mapViewUi.mapThemeComboBox->currentIndex() :
                                          d->m_mapViewUi.marbleThemeSelectView->currentIndex().row();
-    QString indexTheme = d->m_mapSortProxy.data( d->m_mapSortProxy.index(
-                         currentRow, 1, QModelIndex() ) ).toString();
+    const QString oldThemeId = d->m_mapSortProxy.data( d->m_mapSortProxy.index( currentRow, 1 ) ).toString();
 
-    if ( theme != indexTheme ) {
-        /* indexTheme would be empty if the chosen map has not been set yet. As
-        this needs to be done after the mapThemeId has been set, check if that is
-        not empty first. The behaviour differs between Linux and Windows: on
-        Windows the reading of the settings is not delayed, thus the mapThemeId
-        is available earlier than on Linux.
-        */
-        if( indexTheme.isEmpty() && !d->m_marbleModel->mapThemeId().isEmpty() ) {
-            QList<QStandardItem*> items = d->m_mapThemeModel->findItems( theme, Qt::MatchExactly, 1 );
-            if( items.size() >= 1 ) {
-                QModelIndex iterIndex = items.first()->index();
-                QModelIndex iterIndexName = d->m_mapSortProxy.mapFromSource( iterIndex.sibling( iterIndex.row(), 0 ) );
+    // Check if the new selected theme is different from the current one
+    if ( themeId == oldThemeId )
+        return;
 
-                if ( smallscreen ) {
-                    d->m_mapViewUi.mapThemeComboBox->setCurrentIndex( iterIndexName.row() );
-                }
-                else {
-                    d->m_mapViewUi.marbleThemeSelectView->setCurrentIndex( iterIndexName );
-                    d->m_mapViewUi.marbleThemeSelectView->scrollTo( iterIndexName );
-                }
-            }
-        }
+    const QString oldCelestialBodyId = oldThemeId.section( '/', 0, 0 );
+    const QString celestialBodyId = themeId.section( '/', 0, 0 );
 
-        QString selectedId = d->m_marbleModel->mapTheme()->head()->target();
-
-        QList<QStandardItem*> itemList = d->m_celestialList.findItems( selectedId, Qt::MatchExactly, 1 );
+    // select celestialBodyId in GUI
+    if ( celestialBodyId != oldCelestialBodyId ) {
+        QList<QStandardItem*> itemList = d->m_celestialList.findItems( celestialBodyId, Qt::MatchExactly, 1 );
 
         if ( !itemList.isEmpty() ) {
-            QStandardItem * selectedItem = itemList.first();
+            QStandardItem *bodyIdItem = itemList.first();
 
-            if ( selectedItem ) {
-                QModelIndex const selectedIndex = d->m_celestialList.index( selectedItem->row(), 0 );
-                int const proxyIndex = d->m_celestialListProxy.mapFromSource( selectedIndex ).row();
-                d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( proxyIndex );
-                d->m_mapSortProxy.setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+            const QModelIndex bodyIdIndex = d->m_celestialList.index( bodyIdItem->row(), 0 );
+            const int proxyIndex = d->m_celestialListProxy.mapFromSource( bodyIdIndex ).row();
+            d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( proxyIndex );
+
+            d->m_mapSortProxy.setFilterRegExp( QRegExp( celestialBodyId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+            d->m_mapSortProxy.sort( 0 );
+        }
+    }
+
+    // select themeId in GUI
+    for ( int row = 0; row < d->m_mapSortProxy.rowCount(); ++row ) {
+        if( d->m_mapSortProxy.data( d->m_mapSortProxy.index( row, 1 ) ).toString() == themeId ) {
+            if ( smallscreen ) {
+                d->m_mapViewUi.mapThemeComboBox->setCurrentIndex( row );
+            }
+            else {
+                const QModelIndex index = d->m_mapSortProxy.index( row, 0 );
+                d->m_mapViewUi.marbleThemeSelectView->setCurrentIndex( index );
+                d->m_mapViewUi.marbleThemeSelectView->scrollTo( index );
             }
 
-            d->m_mapSortProxy.sort( 0 );
+            break;
         }
     }
 }
