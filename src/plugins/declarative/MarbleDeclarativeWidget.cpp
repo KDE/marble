@@ -10,7 +10,6 @@
 
 #include "MarbleDeclarativeWidget.h"
 
-#include "MapTheme.h"
 #include "Coordinate.h"
 #include "Tracking.h"
 #include "ZoomButtonInterceptor.h"

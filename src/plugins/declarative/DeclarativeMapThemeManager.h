@@ -11,7 +11,6 @@
 #ifndef DECLARATIVE_MAPTHEMEMANAGER_H
 #define DECLARATIVE_MAPTHEMEMANAGER_H
 
-#include "MapTheme.h"
 #include "MapThemeManager.h"
 
 #include <QtDeclarative/QDeclarativeImageProvider>

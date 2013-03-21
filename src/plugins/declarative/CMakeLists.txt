@@ -14,7 +14,6 @@ DeclarativeDataPluginModel.cpp
 DeclarativeDataPlugin.cpp
 DeclarativeDataPluginItem.cpp
 DeclarativeMapThemeManager.cpp
-MapTheme.cpp
 MarbleDeclarativeObject.cpp
 MarbleDeclarativePlugin.cpp
 MarbleDeclarativeWidget.cpp
