@@ -17,8 +17,7 @@
 
 Search::Search( QObject* parent ) : QObject( parent ),
     m_marbleWidget( 0 ), m_runnerManager( 0 ),
-    m_searchResult( 0 ), m_placemarkDelegate( 0 ),
-    m_delegateParent( 0 )
+    m_searchResult( 0 ), m_placemarkDelegate( 0 )
 {
     // nothing to do
 }
@@ -41,11 +40,6 @@ void Search::setPlacemarkDelegate( QDeclarativeComponent* delegate )
 {
     m_placemarkDelegate = delegate;
     emit placemarkDelegateChanged();
-}
-
-void Search::setDelegateParent( QGraphicsItem* parent )
-{
-    m_delegateParent = parent;
 }
 
 void Search::find( const QString &searchTerm )
@@ -92,7 +86,7 @@ void Search::updateSearchModel( QAbstractItemModel *model )
         QGraphicsItem* graphicsItem = qobject_cast<QGraphicsItem*>( component );
         QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( component );
         if ( graphicsItem && item ) {
-            graphicsItem->setParentItem( m_delegateParent );
+            graphicsItem->setParentItem( m_marbleWidget );
             m_placemarks[i] = item;
         } else {
             delete component;

@@ -334,7 +334,6 @@ Search* MarbleWidget::search()
     if ( !m_search ) {
         m_search = new Search( this );
         m_search->setMarbleWidget( this );
-        m_search->setDelegateParent( this );
     }
 
     return m_search;

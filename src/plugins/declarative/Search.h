@@ -33,8 +33,6 @@ public:
 
     void setMarbleWidget( MarbleWidget* widget );
 
-    void setDelegateParent( QGraphicsItem* parent );
-
     QDeclarativeComponent* placemarkDelegate();
 
     void setPlacemarkDelegate( QDeclarativeComponent* delegate );
@@ -71,8 +69,6 @@ private:
     Marble::MarblePlacemarkModel *m_searchResult;
 
     QDeclarativeComponent* m_placemarkDelegate;
-
-    QGraphicsItem* m_delegateParent;
 
     QMap<int,QDeclarativeItem*> m_placemarks;
 };
