@@ -54,18 +54,4 @@ QStringList MapThemeManager::mapThemeIds() const
     return m_mapThemeManager.mapThemeIds();
 }
 
-QList<QObject*> MapThemeManager::mapThemes()
-{
-    QList<QObject*> dataList;
-
-    QStandardItemModel *model =  m_mapThemeManager.mapThemeModel();
-    for( int i = 0; i < model->rowCount(); ++i ) {
-        QString name = model->data( model->index( i, 0 ), Qt::DisplayRole  ).toString();
-        QString id   = model->data( model->index( i, 0 ), Qt::UserRole + 1 ).toString();
-        dataList.append( new MapTheme( id, name ) );
-    }
-
-    return dataList;
-}
-
 #include "DeclarativeMapThemeManager.moc"

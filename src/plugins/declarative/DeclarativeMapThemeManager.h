@@ -41,18 +41,11 @@ public:
     /** Constructor. Map themes are loaded later on demand. */
     explicit MapThemeManager( QObject *parent = 0 );
 
-public Q_SLOTS:
     /**
       * A list of all installed map theme ids, each entry has the form
       * "planet/themeid/themeid.dgml", e.g. "earth/bluemarble/bluemarble.dgml"
       */
     QStringList mapThemeIds() const;
-
-    /**
-      * A list of all installed map themes. Each list item is an instance
-      * of a MapTheme. This list is useful to feed to qml views.
-      */
-    QList<QObject*> mapThemes();
 
 private:
     /** Marble map theme manager doing the real work */

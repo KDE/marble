@@ -60,7 +60,6 @@ Page {
                 onClicked: {
                     mapListView.currentIndex = index
                     settings.mapTheme = mapThemeId
-                    //settings.mapTheme = themes.mapThemes()[index].id
                 }
             }
         }
