@@ -325,35 +325,31 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         QModelIndex index = m_routingModel->index( i, 0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
-        if ( m_routingModel ) {
+        painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
+        if ( m_selectionModel && m_selectionModel->selection().contains( index ) ) {
+            for ( int j=0; j<m_routingModel->route().size(); ++j ) {
+                const RouteSegment & segment = m_routingModel->route().at( j );
+                if ( segment.maneuver().position() == pos ) {
+                    GeoDataLineString currentRoutePoints = segment.path();
 
-            painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
-            if ( m_selectionModel && m_selectionModel->selection().contains( index ) ) {
-                for ( int j=0; j<m_routingModel->route().size(); ++j ) {
-                    const RouteSegment & segment = m_routingModel->route().at( j );
-                    if ( segment.maneuver().position() == pos ) {
-                        GeoDataLineString currentRoutePoints = segment.path();
+                    QPen activeRouteSegmentPen( m_marbleWidget->model()->routingManager()->routeColorHighlighted() );
 
-                        QPen activeRouteSegmentPen( m_marbleWidget->model()->routingManager()->routeColorHighlighted() );
-
-                        activeRouteSegmentPen.setWidth( 6 );
-                        if ( m_routeDirty ) {
-                            activeRouteSegmentPen.setStyle( Qt::DotLine );
-                        }
-                        painter->setPen( activeRouteSegmentPen );
-                        painter->drawPolyline( currentRoutePoints );
-
-                        painter->setPen( standardRoutePen );
-                        painter->setBrush( QBrush( alphaAdjusted( Oxygen::hotOrange4, 200 ) ) );
+                    activeRouteSegmentPen.setWidth( 6 );
+                    if ( m_routeDirty ) {
+                        activeRouteSegmentPen.setStyle( Qt::DotLine );
                     }
+                    painter->setPen( activeRouteSegmentPen );
+                    painter->drawPolyline( currentRoutePoints );
+
+                    painter->setPen( standardRoutePen );
+                    painter->setBrush( QBrush( alphaAdjusted( Oxygen::hotOrange4, 200 ) ) );
                 }
             }
-
-            QRegion region = painter->regionFromEllipse( pos, 12, 12 );
-            m_instructionRegions.push_front( ModelRegion( index, region ) );
-            painter->drawEllipse( pos, 6, 6 );
-
         }
+
+        QRegion region = painter->regionFromEllipse( pos, 12, 12 );
+        m_instructionRegions.push_front( ModelRegion( index, region ) );
+        painter->drawEllipse( pos, 6, 6 );
 
         if( !m_routingModel->deviatedFromRoute() ) {
             GeoDataCoordinates location = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().position();
@@ -376,7 +372,7 @@ void RoutingLayerPrivate::renderAnnotations( GeoPainter *painter )
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i, 0 );
 
-        if ( m_routingModel && m_selectionModel ) {
+        if ( m_selectionModel ) {
             if ( m_selectionModel->selection().contains( index ) ) {
                 bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
                 GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
@@ -447,7 +443,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 
     foreach( const ModelRegion &region, m_instructionRegions ) {
         if ( region.region.contains( e->pos() ) && m_selectionModel ) {
-            if ( e->button() == Qt::LeftButton && m_routingModel ) {
+            if ( e->button() == Qt::LeftButton ) {
                 QItemSelectionModel::SelectionFlag command = QItemSelectionModel::ClearAndSelect;
                 if ( m_selectionModel->isSelected( region.index ) ) {
                     command = QItemSelectionModel::Clear;
@@ -554,10 +550,6 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
     if ( m_pointSelection ) {
         m_marbleWidget->setCursor( Qt::CrossCursor );
         return true;
-    }
-
-    if ( !m_routingModel ) {
-        return false;
     }
 
     qreal lon( 0.0 ), lat( 0.0 );
@@ -707,17 +699,13 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
         d->renderAlternativeRoutes( painter );
     }
 
-    if ( d->m_routingModel) {
-        d->renderRoute( painter );
-    }
+    d->renderRoute( painter );
 
     if ( d->m_routeRequest) {
         d->renderRequest( painter );
     }
 
-    if ( d->m_routingModel) {
-        d->renderAnnotations( painter );
-    }
+    d->renderAnnotations( painter );
 
     painter->restore();
     if ( d->m_viewportChanged && d->m_viewContext == Still ) {
@@ -804,7 +792,7 @@ void RoutingLayer::exportRoute()
                        QDir::homePath(),
                        tr( "GPX and KML files (*.gpx *.kml)" ) );
 
-    if ( d->m_routingModel && !fileName.isEmpty() ) {
+    if ( !fileName.isEmpty() ) {
         if ( fileName.endsWith( QLatin1String( ".gpx" ), Qt::CaseInsensitive ) ) {
             QFile gpx( fileName );
             if ( gpx.open( QFile::WriteOnly) ) {
