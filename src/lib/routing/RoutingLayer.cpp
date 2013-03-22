@@ -111,9 +111,6 @@ public:
     /** Constructor */
     explicit RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget );
 
-    /** Show a context menu at the specified position */
-    void showContextMenu( const QPoint &position );
-
     /** Update the cached drag position. Use an empty point to clear it. */
     void storeDragPosition( const QPoint &position );
 
@@ -194,11 +191,6 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         m_pixmapSize = QSize( 38, 38 );
     }
 
-}
-
-void RoutingLayerPrivate::showContextMenu( const QPoint &pos )
-{
-    m_contextMenu->showRmbMenu( pos.x(), pos.y() );
 }
 
 int RoutingLayerPrivate::viaInsertPosition( Qt::KeyboardModifiers modifiers ) const
@@ -434,7 +426,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
             } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( true );
                 m_activeMenuIndex = region.index;
-                showContextMenu( e->pos() );
+                m_contextMenu->showRmbMenu( e->x(), e->y() );
                 return true;
             } else
                 return false;
@@ -456,7 +448,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
                 return true;
             } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( false );
-                showContextMenu( e->pos() );
+                m_contextMenu->showRmbMenu( e->x(), e->y() );
                 return true;
             } else
                 return false;
@@ -471,7 +463,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
             return true;
         } else if ( e->button() == Qt::RightButton ) {
             m_removeViaPointAction->setEnabled( false );
-            showContextMenu( e->pos() );
+            m_contextMenu->showRmbMenu( e->x(), e->y() );
             return true;
         } else
             return false;
