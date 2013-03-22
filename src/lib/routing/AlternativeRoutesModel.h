@@ -72,8 +72,6 @@ public:
       */
     void addRoute( GeoDataDocument* document, WritePolicy policy = Lazy );
 
-    void setCurrentRoute( int index );
-
     /** Remove all alternative routes from the model */
     void clear();
 
@@ -88,8 +86,12 @@ public:
     /** Returns the minimal distance of each waypoint of routeA to routeB */
     static QVector<qreal> deviation( const GeoDataDocument* routeA, const GeoDataDocument* routeB );
 
+public Q_SLOTS:
+    void setCurrentRoute( int index );
+
 Q_SIGNALS:
     void currentRouteChanged( GeoDataDocument* newRoute );
+    void currentRouteChanged( int index );
 
 private Q_SLOTS:
     void addRestrainedRoutes();

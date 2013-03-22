@@ -19,7 +19,6 @@
 #include <QtGui/QItemSelection>
 
 class QAbstractProxyModel;
-class QComboBox;
 
 namespace Marble
 {
@@ -65,14 +64,6 @@ public:
       * model which has different indices than a filtered one.
       */
     void synchronizeWith( QItemSelectionModel *selection );
-
-    /**
-      * Stores the alternative routes model and a view working on this model to synchronize
-      * the selection with.
-      * @todo: Should use a QAbstractItemView instead, but working on this instead of the
-      * QComboBox does not work (changing the selection is not reflected by the combo box)
-      */
-    void synchronizeAlternativeRoutesWith( QComboBox *view );
 
     /**
       * Set the placemark model to use. Implicitly removes the routing model.

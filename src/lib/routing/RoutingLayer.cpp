@@ -33,7 +33,6 @@
 #include <QtGui/QMenu>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
-#include <QtGui/QComboBox>
 #include <QtGui/QFileDialog>
 
 namespace Marble
@@ -102,8 +101,6 @@ public:
     QAction *m_removeViaPointAction;
 
     int m_activeMenuIndex;
-
-    QComboBox *m_alternativeRoutesView;
 
     AlternativeRoutesModel* m_alternativeRoutesModel;
 
@@ -182,7 +179,7 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         m_pointSelection( false ), m_routingModel( widget->model()->routingManager()->routingModel() ),
         m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
         m_routeRequest( widget->model()->routingManager()->routeRequest() ),
-        m_activeMenuIndex( -1 ), m_alternativeRoutesView( 0 ),
+        m_activeMenuIndex( -1 ),
         m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() ),
         m_viewContext( Still ), m_viewportChanged( true )
 {
@@ -490,11 +487,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 
     foreach( const RequestRegion &region, m_alternativeRouteRegions ) {
         if ( region.region.contains( e->pos() ) ) {
-            if ( m_alternativeRoutesView ) {
-                m_alternativeRoutesView->setCurrentIndex( region.index );
-            } else {
-                m_alternativeRoutesModel->setCurrentRoute( region.index );
-            }
+            m_alternativeRoutesModel->setCurrentRoute( region.index );
             return true;
         }
     }
@@ -677,6 +670,8 @@ RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
             this, SLOT( setViewportChanged() ) );
     connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
             this, SLOT( setViewportChanged() ) );
+    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int) ),
+             this, SLOT( showAlternativeRoutes() ) );
 }
 
 RoutingLayer::~RoutingLayer()
@@ -767,14 +762,6 @@ void RoutingLayer::setPlacemarkModel ( MarblePlacemarkModel *model )
 void RoutingLayer::synchronizeWith( QItemSelectionModel *selection )
 {
     d->m_selectionModel = selection;
-}
-
-void RoutingLayer::synchronizeAlternativeRoutesWith( QComboBox *view )
-{
-    d->m_alternativeRoutesView = view;
-
-    connect( d->m_alternativeRoutesModel, SIGNAL( rowsInserted( QModelIndex, int, int) ),
-             this, SLOT( showAlternativeRoutes() ) );
 }
 
 void RoutingLayer::setPointSelectionEnabled( bool enabled )

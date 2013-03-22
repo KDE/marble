@@ -259,8 +259,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
     layout()->setMargin( 0 );
 
-    d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_ui.routeComboBox );
-
     d->m_ui.routingProfileComboBox->setModel( d->m_routingManager->profilesModel() );
 
     connect( d->m_routingManager->profilesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
@@ -286,7 +284,9 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     connect( &d->m_progressTimer, SIGNAL( timeout() ),
              this, SLOT( updateProgress() ) );
     connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
-             this, SLOT( switchRoute( int ) ) );
+             d->m_routingManager->alternativeRoutesModel(), SLOT( setCurrentRoute( int ) ) );
+    connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( currentRouteChanged( int ) ),
+             d->m_ui.routeComboBox, SLOT( setCurrentIndex( int ) ) );
     connect( d->m_ui.routingProfileComboBox, SIGNAL( currentIndexChanged( int ) ),
              this, SLOT( setRoutingProfile( int ) ) );
     connect( d->m_ui.routingProfileComboBox, SIGNAL( activated( int ) ),
