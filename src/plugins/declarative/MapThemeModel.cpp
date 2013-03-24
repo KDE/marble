@@ -25,6 +25,11 @@ MapThemeModel::MapThemeModel( QObject *parent ) : QSortFilterProxyModel( parent 
     setSourceModel( m_themeManager->mapThemeModel() );
     handleChangedThemes();
     connect( m_themeManager, SIGNAL(themesChanged()), this, SLOT(handleChangedThemes()) );
+
+    QHash<int,QByteArray> roleNames = this->roleNames();
+    roleNames[ Qt::DecorationRole ] = "icon";
+    roleNames[ Qt::UserRole + 1 ] = "mapThemeId";
+    setRoleNames( roleNames );
 }
 
 int MapThemeModel::count()
