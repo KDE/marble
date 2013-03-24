@@ -512,7 +512,7 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
     if ( m_movingIndex >= 0 ) {
         m_movingIndex = -1;
         clearStopOver();
-        emit q->routeDirty();
+        m_marbleWidget->model()->routingManager()->retrieveRoute();
         return true;
     }
 
@@ -529,7 +529,7 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
             m_dragStopOverRightIndex = viaInsertPosition( e->modifiers() );
             m_routeRequest->insert( m_dragStopOverRightIndex, position );
             clearStopOver();
-            emit q->routeDirty();
+            m_marbleWidget->model()->routingManager()->retrieveRoute();
             return true;
         }
     }
@@ -767,7 +767,7 @@ void RoutingLayer::removeViaPoint()
         d->m_routeRequest->remove( d->m_activeMenuIndex );
         d->m_activeMenuIndex = -1;
         d->setRouteDirty( true );
-        emit routeDirty();
+        d->m_marbleWidget->model()->routingManager()->retrieveRoute();
     }
 }
 

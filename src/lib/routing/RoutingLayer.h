@@ -100,12 +100,6 @@ Q_SIGNALS:
       */
     void pointSelectionAborted();
 
-    /**
-      * The route request was changed permanently (no dragging),
-      * new route instructions should be downloaded
-      */
-    void routeDirty();
-
 public:
     /** Overriding QWidget, used to make the layer interactive */
     bool eventFilter( QObject *obj, QEvent *event );

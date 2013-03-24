@@ -258,8 +258,6 @@ void MarbleWidgetPrivate::construct()
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
     m_widget->setMouseTracking( true );
 
-    m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
-                       m_model.routingManager(), SLOT( retrieveRoute() ) );
     m_widget->connect( m_model.routingManager()->alternativeRoutesModel(),
                        SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
                        m_widget, SLOT( repaint() ) );
