@@ -444,7 +444,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
                 m_dropStopOver = e->pos();
                 storeDragPosition( e->pos() );
                 // annotation and old annotation are dirty, large region
-                m_marbleWidget->update();
+                emit q->repaintNeeded();
                 return true;
             } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( false );
@@ -564,7 +564,7 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
                 m_dragStopOver = QPoint();
                 m_dropStopOver = QPoint();
             }
-            m_marbleWidget->update( dirty );
+            emit q->repaintNeeded( dirty );
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( isInfoPoint( e->pos() ) ) {
             clearStopOver();
@@ -630,11 +630,11 @@ bool RoutingLayerPrivate::isInfoPoint( const QPoint &point )
 
 void RoutingLayerPrivate::paintStopOver( QRect dirty )
 {
-    m_marbleWidget->update( m_dirtyRect );
+    emit q->repaintNeeded( m_dirtyRect );
     int dx = 1 + m_pixmapSize.width() / 2;
     int dy = 1 + m_pixmapSize.height() / 2;
     dirty.adjust( -dx, -dy, -dx, -dy );
-    m_marbleWidget->update( dirty );
+    emit q->repaintNeeded( dirty );
     m_dirtyRect = dirty;
 }
 
@@ -642,7 +642,7 @@ void RoutingLayerPrivate::clearStopOver()
 {
     m_dropStopOver = QPoint();
     m_dragStopOver = QPoint();
-    m_marbleWidget->update( m_dirtyRect );
+    emit q->repaintNeeded( m_dirtyRect );
 }
 
 RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
@@ -654,6 +654,8 @@ RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
             this, SLOT( setViewportChanged() ) );
     connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
             this, SLOT( setViewportChanged() ) );
+    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
+             this, SIGNAL( repaintNeeded() ) );
     connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int) ),
              this, SLOT( showAlternativeRoutes() ) );
 }
@@ -757,8 +759,7 @@ void RoutingLayerPrivate::setRouteDirty( bool dirty )
       * and the exact bounding box needs to be recalculated before doing
       * a partly repaint, otherwise we might end up repainting only parts of the route
       */
-    // m_marbleWidget->repaint( m_routeRegion );
-    m_marbleWidget->update();
+    emit q->repaintNeeded();
 }
 
 void RoutingLayer::removeViaPoint()
@@ -774,7 +775,7 @@ void RoutingLayer::removeViaPoint()
 void RoutingLayer::showAlternativeRoutes()
 {
     setViewportChanged();
-    d->m_marbleWidget->update();
+    emit repaintNeeded();
 }
 
 void RoutingLayer::exportRoute()

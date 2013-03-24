@@ -16,6 +16,7 @@
 #include "RoutingManager.h"
 
 #include <QtCore/QModelIndex>
+#include <QtCore/QRect>
 #include <QtGui/QItemSelection>
 
 class QAbstractProxyModel;
@@ -99,6 +100,8 @@ Q_SIGNALS:
       * Selection of points was aborted by the user without selecting a point
       */
     void pointSelectionAborted();
+
+    void repaintNeeded( const QRect &rect = QRect() );
 
 public:
     /** Overriding QWidget, used to make the layer interactive */

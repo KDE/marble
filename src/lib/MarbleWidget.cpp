@@ -49,8 +49,6 @@
 #include "TileCreatorDialog.h"
 #include "ViewportParams.h"
 #include "routing/RoutingLayer.h"
-#include "routing/RoutingManager.h"
-#include "routing/AlternativeRoutesModel.h"
 #include "MapInfoDialog.h"
 
 namespace Marble
@@ -249,6 +247,8 @@ void MarbleWidgetPrivate::construct()
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setPlacemarkModel( 0 );
+    QObject::connect( m_routingLayer, SIGNAL( repaintNeeded( const QRect & ) ),
+                      m_widget, SLOT( update() ) );
 
     m_mapInfoDialog = new MapInfoDialog( m_widget );
     m_mapInfoDialog->setVisible( false );
@@ -257,10 +257,6 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
     m_widget->setMouseTracking( true );
-
-    m_widget->connect( m_model.routingManager()->alternativeRoutesModel(),
-                       SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
-                       m_widget, SLOT( repaint() ) );
 
     m_map.addLayer( &m_customPaintLayer );
 }
