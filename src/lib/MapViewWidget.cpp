@@ -73,7 +73,7 @@ public:
     ~CelestialSortFilterProxyModel() {}
 
     // A small trick to change names for dwarfs and moons
-    QVariant data(const QModelIndex &index, int role) const
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const
     {
         QVariant var = QSortFilterProxyModel::data(index, role);
         if (role == Qt::DisplayRole && index.column() == 0) {
@@ -280,12 +280,9 @@ class MapViewWidget::Private {
     void updateMapFilter()
     {
         int currentIndex = m_mapViewUi.celestialBodyComboBox->currentIndex();
-        int const row = m_celestialListProxy.mapToSource( m_celestialListProxy.index( currentIndex, 0 ) ).row();
-        QStandardItem * selectedItem = m_celestialList.item( row, 1 );
+        const QString selectedId = m_celestialListProxy.data( m_celestialListProxy.index( currentIndex, 1 ) ).toString();
 
-        if ( selectedItem ) {
-            QString selectedId;
-            selectedId = selectedItem->text();
+        if ( !selectedId.isEmpty() ) {
             m_mapSortProxy.setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
         }
 
@@ -480,18 +477,15 @@ void MapViewWidget::setMapThemeId( const QString &themeId )
 
     // select celestialBodyId in GUI
     if ( celestialBodyId != oldCelestialBodyId ) {
-        QList<QStandardItem*> itemList = d->m_celestialList.findItems( celestialBodyId, Qt::MatchExactly, 1 );
-
-        if ( !itemList.isEmpty() ) {
-            QStandardItem *bodyIdItem = itemList.first();
-
-            const QModelIndex bodyIdIndex = d->m_celestialList.index( bodyIdItem->row(), 0 );
-            const int proxyIndex = d->m_celestialListProxy.mapFromSource( bodyIdIndex ).row();
-            d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( proxyIndex );
-
-            d->m_mapSortProxy.setFilterRegExp( QRegExp( celestialBodyId, Qt::CaseInsensitive,QRegExp::FixedString ) );
-            d->m_mapSortProxy.sort( 0 );
+        for ( int row = 0; row < d->m_celestialListProxy.rowCount(); ++row ) {
+            if ( d->m_celestialListProxy.data( d->m_celestialListProxy.index( row, 1 ) ).toString() == celestialBodyId ) {
+                d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( row );
+                break;
+            }
         }
+
+        d->m_mapSortProxy.setFilterRegExp( QRegExp( celestialBodyId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+        d->m_mapSortProxy.sort( 0 );
     }
 
     // select themeId in GUI
