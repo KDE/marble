@@ -444,7 +444,7 @@ void MapViewWidget::resizeEvent(QResizeEvent *event)
 void MapViewWidget::Private::updateMapThemeView()
 {
     for ( int i = 0; i < m_mapThemeModel->rowCount(); ++i ) {
-        QString celestialBodyId = ( m_mapThemeModel->data( m_mapThemeModel->index( i, 1 ) ).toString() ).section( '/', 0, 0 );
+        QString celestialBodyId = ( m_mapThemeModel->data( m_mapThemeModel->index( i, 0 ), Qt::UserRole + 1 ).toString() ).section( '/', 0, 0 );
         QString celestialBodyName = Planet::name( celestialBodyId );
 
         QList<QStandardItem*> matchingItems = m_celestialList.findItems( celestialBodyId, Qt::MatchExactly, 1 );
@@ -469,7 +469,7 @@ void MapViewWidget::setMapThemeId( const QString &themeId )
 
     const int currentRow = smallscreen ? d->m_mapViewUi.mapThemeComboBox->currentIndex() :
                                          d->m_mapViewUi.marbleThemeSelectView->currentIndex().row();
-    const QString oldThemeId = d->m_mapSortProxy.data( d->m_mapSortProxy.index( currentRow, 1 ) ).toString();
+    const QString oldThemeId = d->m_mapSortProxy.data( d->m_mapSortProxy.index( currentRow, 0 ), Qt::UserRole + 1 ).toString();
 
     // Check if the new selected theme is different from the current one
     if ( themeId == oldThemeId )
@@ -496,7 +496,7 @@ void MapViewWidget::setMapThemeId( const QString &themeId )
 
     // select themeId in GUI
     for ( int row = 0; row < d->m_mapSortProxy.rowCount(); ++row ) {
-        if( d->m_mapSortProxy.data( d->m_mapSortProxy.index( row, 1 ) ).toString() == themeId ) {
+        if( d->m_mapSortProxy.data( d->m_mapSortProxy.index( row, 0 ), Qt::UserRole + 1 ).toString() == themeId ) {
             if ( smallscreen ) {
                 d->m_mapViewUi.mapThemeComboBox->setCurrentIndex( row );
             }
@@ -570,8 +570,8 @@ void MapViewWidget::Private::setCelestialBody( int comboIndex )
 
     for ( int i = 0; i < row; ++i )
     {
-        QModelIndex index = m_mapSortProxy.index(i,1);
-        QString itMapThemeId = m_mapSortProxy.data(index).toString();
+        QModelIndex index = m_mapSortProxy.index(i,0);
+        QString itMapThemeId = m_mapSortProxy.data(index, Qt::UserRole + 1).toString();
         if ( currentMapThemeId == itMapThemeId )
         {
             foundMapTheme = true;
@@ -579,8 +579,8 @@ void MapViewWidget::Private::setCelestialBody( int comboIndex )
         }
     }
     if ( !foundMapTheme ) {
-        QModelIndex index = m_mapSortProxy.index(0,1);
-        emit q->mapThemeIdChanged( m_mapSortProxy.data( index ).toString() );
+        QModelIndex index = m_mapSortProxy.index(0,0);
+        emit q->mapThemeIdChanged( m_mapSortProxy.data( index, Qt::UserRole + 1 ).toString() );
     }
 
     if( oldPlanetId != m_marbleModel->planetId() ) {
@@ -603,8 +603,8 @@ void MapViewWidget::Private::mapThemeSelected( QModelIndex index )
 
 void MapViewWidget::Private::mapThemeSelected( int index )
 {
-    const QModelIndex columnIndex = m_mapSortProxy.index( index, 1, QModelIndex() );
-    const QString currentmaptheme = m_mapSortProxy.data( columnIndex ).toString();
+    const QModelIndex columnIndex = m_mapSortProxy.index( index, 0 );
+    const QString currentmaptheme = m_mapSortProxy.data( columnIndex, Qt::UserRole + 1 ).toString();
 
     mDebug() << Q_FUNC_INFO << currentmaptheme;
 
@@ -622,9 +622,9 @@ QString MapViewWidget::Private::currentThemeName() const
 QString MapViewWidget::Private::currentThemePath() const
 {
     const QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
-    const QModelIndex columnIndex = m_mapSortProxy.index( index.row(), 1, QModelIndex() );
+    const QModelIndex columnIndex = m_mapSortProxy.index( index.row(), 0 );
 
-    return m_mapSortProxy.data( columnIndex ).toString();
+    return m_mapSortProxy.data( columnIndex, Qt::UserRole + 1 ).toString();
 }
 
 void MapViewWidget::Private::showContextMenu( const QPoint& pos )

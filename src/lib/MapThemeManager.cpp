@@ -361,10 +361,6 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
     item->setData( description, Qt::UserRole + 2 );
 
     itemList << item;
-    itemList << new QStandardItem( mapTheme->head()->target() + '/'
-                                   + mapTheme->head()->theme() + '/'
-                                   + mapTheme->head()->theme() + ".dgml" );
-    itemList << new QStandardItem( QObject::tr( description.toUtf8() ) );
 
     delete mapTheme;
 
@@ -377,8 +373,6 @@ void MapThemeManager::Private::updateMapThemeModel()
     m_mapThemeModel.clear();
 
     m_mapThemeModel.setHeaderData(0, Qt::Horizontal, QObject::tr("Name"));
-    m_mapThemeModel.setHeaderData(1, Qt::Horizontal, QObject::tr("Path"));
-    m_mapThemeModel.setHeaderData(2, Qt::Horizontal, QObject::tr("Description"));
 
     QStringList stringlist = findMapThemes();
     QStringListIterator it( stringlist );
