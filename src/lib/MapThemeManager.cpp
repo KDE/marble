@@ -413,8 +413,8 @@ void MapThemeManager::Private::directoryChanged( const QString& path )
     watchPaths();
 
     mDebug() << "Emitting themesChanged()";
-    emit q->themesChanged();
     updateMapThemeModel();
+    emit q->themesChanged();
 }
 
 void MapThemeManager::Private::fileChanged( const QString& path )
