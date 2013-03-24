@@ -76,7 +76,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const
     {
         QVariant var = QSortFilterProxyModel::data(index, role);
-        if (role == Qt::DisplayRole) {
+        if (role == Qt::DisplayRole && index.column() == 0) {
             QString newOne = var.toString();
             if (newOne == tr("Moon")) {
                 return QString("  " + tr("Moon"));
