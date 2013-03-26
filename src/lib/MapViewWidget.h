@@ -56,9 +56,6 @@ private slots:
  private:
     Q_PRIVATE_SLOT( d, void celestialBodySelected( int comboIndex ) )
 
-    /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
-    Q_PRIVATE_SLOT( d, void updateCelestialList() )
-
     Q_PRIVATE_SLOT( d, void projectionSelected( int projectionIndex ) )
 
     Q_PRIVATE_SLOT( d, void mapThemeSelected( QModelIndex index ) )

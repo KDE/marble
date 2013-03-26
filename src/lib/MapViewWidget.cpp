@@ -188,6 +188,8 @@ class MapViewWidget::Private {
           m_celestialListProxy(),
           m_toolBar( 0 )
     {
+        m_mapSortProxy.setDynamicSortFilter( true );
+        m_celestialListProxy.setDynamicSortFilter( true );
     }
 
     void applyExtendedLayout()
@@ -281,14 +283,9 @@ class MapViewWidget::Private {
         if ( !selectedId.isEmpty() ) {
             m_mapSortProxy.setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
         }
-
-        m_mapSortProxy.sort( 0 );
     }
 
     void celestialBodySelected( int comboIndex );
-
-    /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
-    void updateCelestialList();
 
     void projectionSelected( int projectionIndex );
 
@@ -398,10 +395,9 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_marbleModel = widget->model();
     d->m_mapSortProxy.setSourceModel( widget->model()->mapThemeManager()->mapThemeModel() );
+    d->m_mapSortProxy.sort( 0 );
     d->m_celestialListProxy.setSourceModel( widget->model()->mapThemeManager()->celestialBodiesModel() );
-
-    connect( &d->m_mapSortProxy, SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-             this,               SLOT( updateCelestialList() ) );
+    d->m_celestialListProxy.sort( 0 );
 
     connect( this, SIGNAL( projectionChanged( Projection ) ),
              widget, SLOT( setProjection( Projection ) ) );
@@ -415,8 +411,6 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
     connect( this, SIGNAL( mapThemeIdChanged( const QString& ) ),
              widget, SLOT( setMapThemeId( const QString& ) ) );
 
-    d->updateMapFilter();
-    d->updateCelestialList();
     setProjection(widget->projection());
     setMapThemeId(widget->mapThemeId());
 }
@@ -431,11 +425,6 @@ void MapViewWidget::resizeEvent(QResizeEvent *event)
     } else if (!d->m_toolBar->isVisible() && event->size().height() <= 400) {
         d->applyReducedLayout();
     }
-}
-
-void MapViewWidget::Private::updateCelestialList()
-{
-    m_celestialListProxy.sort(0);
 }
 
 void MapViewWidget::setMapThemeId( const QString &themeId )
@@ -640,8 +629,6 @@ void MapViewWidget::Private::toggleFavorite()
         m_settings.setValue( m_mapSortProxy.data( columnIndex ).toString(), QDateTime::currentDateTime() );
     }
     m_settings.endGroup();
-
-    m_mapSortProxy.sort( 0 );
 }
 
 void MapViewWidget::Private::toggleIconSize()
