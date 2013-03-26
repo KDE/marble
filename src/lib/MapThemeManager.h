@@ -67,6 +67,11 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     QStandardItemModel* mapThemeModel();
 
     /**
+     * @brief Provides a model of all installed planets.
+     */
+    QStandardItemModel *celestialBodiesModel();
+
+    /**
      * @brief Returns the map theme as a GeoSceneDocument object
      * @param mapThemeStringID  the string ID that refers to the map theme
      *

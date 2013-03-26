@@ -30,6 +30,7 @@
 #include "GeoSceneParser.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "Planet.h"
 
 namespace
 {
@@ -88,6 +89,7 @@ public:
 
     MapThemeManager *const q;
     QStandardItemModel m_mapThemeModel;
+    QStandardItemModel m_celestialList;
     QFileSystemWatcher m_fileSystemWatcher;
     bool m_isInitialized;
 
@@ -102,6 +104,7 @@ private:
 MapThemeManager::Private::Private( MapThemeManager *parent )
     : q( parent ),
       m_mapThemeModel( 0, 3 ),
+      m_celestialList(),
       m_fileSystemWatcher(),
       m_isInitialized( false )
 {
@@ -288,6 +291,16 @@ QStandardItemModel* MapThemeManager::mapThemeModel()
     return &d->m_mapThemeModel;
 }
 
+QStandardItemModel *MapThemeManager::celestialBodiesModel()
+{
+    if ( !d->m_isInitialized ) {
+        d->updateMapThemeModel();
+        d->m_isInitialized = true;
+    }
+
+    return &d->m_celestialList;
+}
+
 QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString const& mapThemeID )
 {
     QList<QStandardItem *> itemList;
@@ -358,6 +371,18 @@ void MapThemeManager::Private::updateMapThemeModel()
     	QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
         if ( !itemList.empty() ) {
             m_mapThemeModel.appendRow( itemList );
+        }
+    }
+
+    for ( int i = 0; i < m_mapThemeModel.rowCount(); ++i ) {
+        QString celestialBodyId = ( m_mapThemeModel.data( m_mapThemeModel.index( i, 0 ), Qt::UserRole + 1 ).toString() ).section( '/', 0, 0 );
+        QString celestialBodyName = Planet::name( celestialBodyId );
+
+        QList<QStandardItem*> matchingItems = m_celestialList.findItems( celestialBodyId, Qt::MatchExactly, 1 );
+        if ( matchingItems.isEmpty() ) {
+            m_celestialList.appendRow( QList<QStandardItem*>()
+                                << new QStandardItem( celestialBodyName )
+                                << new QStandardItem( celestialBodyId ) );
         }
     }
 }

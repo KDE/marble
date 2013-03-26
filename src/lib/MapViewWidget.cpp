@@ -23,7 +23,6 @@
 #include "MarbleModel.h"
 #include "MapThemeManager.h"
 #include "MapThemeSortFilterProxyModel.h"
-#include "Planet.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 
@@ -185,13 +184,10 @@ class MapViewWidget::Private {
     Private( MapViewWidget *parent )
         : q( parent ),
           m_marbleModel( 0 ),
-          m_mapThemeModel( 0 ),
           m_mapSortProxy(),
-          m_celestialList(),
           m_celestialListProxy(),
           m_toolBar( 0 )
     {
-        m_celestialListProxy.setSourceModel(&m_celestialList);
     }
 
     void applyExtendedLayout()
@@ -313,10 +309,8 @@ class MapViewWidget::Private {
     Ui::MapViewWidget  m_mapViewUi;
     MarbleModel      *m_marbleModel;
 
-    QStandardItemModel     *m_mapThemeModel;
     MapThemeSortFilterProxyModel m_mapSortProxy;
 
-    QStandardItemModel m_celestialList;
     CelestialSortFilterProxyModel m_celestialListProxy;
     QSettings m_settings;
     QToolBar *m_toolBar;
@@ -403,10 +397,10 @@ MapViewWidget::~MapViewWidget()
 void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_marbleModel = widget->model();
-    d->m_mapThemeModel = widget->model()->mapThemeManager()->mapThemeModel();
-    d->m_mapSortProxy.setSourceModel( d->m_mapThemeModel );
+    d->m_mapSortProxy.setSourceModel( widget->model()->mapThemeManager()->mapThemeModel() );
+    d->m_celestialListProxy.setSourceModel( widget->model()->mapThemeManager()->celestialBodiesModel() );
 
-    connect( d->m_mapThemeModel, SIGNAL( rowsInserted( QModelIndex, int, int ) ),
+    connect( &d->m_mapSortProxy, SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this,               SLOT( updateCelestialList() ) );
 
     connect( this, SIGNAL( projectionChanged( Projection ) ),
@@ -441,18 +435,6 @@ void MapViewWidget::resizeEvent(QResizeEvent *event)
 
 void MapViewWidget::Private::updateCelestialList()
 {
-    for ( int i = 0; i < m_mapThemeModel->rowCount(); ++i ) {
-        QString celestialBodyId = ( m_mapThemeModel->data( m_mapThemeModel->index( i, 0 ), Qt::UserRole + 1 ).toString() ).section( '/', 0, 0 );
-        QString celestialBodyName = Planet::name( celestialBodyId );
-
-        QList<QStandardItem*> matchingItems = m_celestialList.findItems( celestialBodyId, Qt::MatchExactly, 1 );
-        if ( matchingItems.isEmpty() ) {
-            m_celestialList.appendRow( QList<QStandardItem*>()
-                                << new QStandardItem( celestialBodyName )
-                                << new QStandardItem( celestialBodyId ) );
-        }
-    }
-
     m_celestialListProxy.sort(0);
 }
 
