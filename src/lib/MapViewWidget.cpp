@@ -289,7 +289,7 @@ class MapViewWidget::Private {
         m_mapSortProxy.sort( 0 );
     }
 
-    void setCelestialBody( int comboIndex );
+    void celestialBodySelected( int comboIndex );
 
     /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
     void updateMapThemeView();
@@ -382,7 +382,7 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     d->m_mapViewUi.celestialBodyComboBox->setModel( &d->m_celestialListProxy );
 
     connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( int ) ),
-             this,                                 SLOT( setCelestialBody( int ) ) );
+             this,                                 SLOT( celestialBodySelected( int ) ) );
 
     d->m_settings.beginGroup( "Favorites" );
     if( !d->m_settings.contains( "initialized" ) ) {
@@ -549,7 +549,7 @@ void MapViewWidget::mercatorViewRequested()
     emit projectionChanged(Marble::Mercator);
 }
 
-void MapViewWidget::Private::setCelestialBody( int comboIndex )
+void MapViewWidget::Private::celestialBodySelected( int comboIndex )
 {
     Q_UNUSED( comboIndex )
 
