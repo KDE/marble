@@ -292,7 +292,7 @@ class MapViewWidget::Private {
     void celestialBodySelected( int comboIndex );
 
     /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
-    void updateMapThemeView();
+    void updateCelestialList();
 
     void projectionSelected( int projectionIndex );
 
@@ -407,7 +407,7 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_mapSortProxy.setSourceModel( d->m_mapThemeModel );
 
     connect( d->m_mapThemeModel, SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-             this,               SLOT( updateMapThemeView() ) );
+             this,               SLOT( updateCelestialList() ) );
 
     connect( this, SIGNAL( projectionChanged( Projection ) ),
              widget, SLOT( setProjection( Projection ) ) );
@@ -422,8 +422,9 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
              widget, SLOT( setMapThemeId( const QString& ) ) );
 
     d->updateMapFilter();
-    d->updateMapThemeView();
+    d->updateCelestialList();
     setProjection(widget->projection());
+    setMapThemeId(widget->mapThemeId());
 }
 
 void MapViewWidget::resizeEvent(QResizeEvent *event)
@@ -438,7 +439,7 @@ void MapViewWidget::resizeEvent(QResizeEvent *event)
     }
 }
 
-void MapViewWidget::Private::updateMapThemeView()
+void MapViewWidget::Private::updateCelestialList()
 {
     for ( int i = 0; i < m_mapThemeModel->rowCount(); ++i ) {
         QString celestialBodyId = ( m_mapThemeModel->data( m_mapThemeModel->index( i, 0 ), Qt::UserRole + 1 ).toString() ).section( '/', 0, 0 );
@@ -452,11 +453,6 @@ void MapViewWidget::Private::updateMapThemeView()
         }
     }
 
-    if ( m_marbleModel ) {
-        QString mapThemeId = m_marbleModel->mapThemeId();
-        if ( !mapThemeId.isEmpty() )
-            q->setMapThemeId( mapThemeId );
-    }
     m_celestialListProxy.sort(0);
 }
 
@@ -579,8 +575,6 @@ void MapViewWidget::Private::celestialBodySelected( int comboIndex )
     if( oldPlanetId != m_marbleModel->planetId() ) {
         emit q->celestialBodyChanged( m_marbleModel->planetId() );
     }
-
-    updateMapThemeView();
 }
 
 // Relay a signal and convert the parameter from an int to a Projection.
