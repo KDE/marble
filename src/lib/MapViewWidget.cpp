@@ -484,8 +484,7 @@ void MapViewWidget::setMapThemeId( const QString &themeId )
             }
         }
 
-        d->m_mapSortProxy.setFilterRegExp( QRegExp( celestialBodyId, Qt::CaseInsensitive,QRegExp::FixedString ) );
-        d->m_mapSortProxy.sort( 0 );
+        d->updateMapFilter();
     }
 
     // select themeId in GUI
