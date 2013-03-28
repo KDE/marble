@@ -179,25 +179,43 @@ Page {
                                 speakerHelp.text = "Turn instructions are spoken when approaching them."
                             }
                         }
-                        onClicked: speakerDialog.open()
-
-                        SpeakersModel{
-                            id: speakers
-                            onCountChanged: speakerDialog.selectedIndex = speakers.indexOf(settings.voiceNavigationSpeaker)
+                        property SelectionDialog dialog
+                        onClicked: {
+                            if (dialog === null) {
+                                dialog = speakerComponent.createObject(b3)
+                            }
+                            dialog.open()
                         }
 
-                        SelectionDialog {
-                            id: speakerDialog
-                            titleText: "Voice Navigation Speaker"
-                            selectedIndex: speakers.indexOf(settings.voiceNavigationSpeaker)
-                            model: speakers
-                            onAccepted: {
-                                if ( speakers.isLocal(selectedIndex) ) {
-                                    settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
-                                } else {
-                                    voiceNavigationPreviewButton.enabled = false
-                                    progressBar.installing = true
-                                    speakers.install(selectedIndex)
+                        Component {
+                            id: speakerComponent
+                            SelectionDialog {
+                                id: speakerDialog
+                                titleText: "Voice Navigation Speaker"
+                                selectedIndex: speakers.indexOf(settings.voiceNavigationSpeaker)
+
+                                model: SpeakersModel {
+                                    id: speakers
+                                    onCountChanged: speakerDialog.selectedIndex = speakers.indexOf(settings.voiceNavigationSpeaker)
+                                    onInstallationProgressed: {
+                                        progressBar.indeterminate = false
+                                        progressBar.value = progress
+                                    }
+                                    onInstallationFinished: {
+                                        progressBar.visible = false
+                                        settings.voiceNavigationSpeaker = speakers.path(speakersDialog.selectedIndex)
+                                        voiceNavigationPreviewButton.enabled = true
+                                    }
+                                }
+
+                                onAccepted: {
+                                    if ( speakers.isLocal(selectedIndex) ) {
+                                        settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
+                                    } else {
+                                        voiceNavigationPreviewButton.enabled = false
+                                        progressBar.visible = true
+                                        speakers.install(selectedIndex)
+                                    }
                                 }
                             }
                         }
@@ -223,26 +241,12 @@ Page {
 
                     ProgressBar {
                         id: progressBar
-                        property bool installing: false
-                        visible: installing
+                        visible: false
                         anchors.left: parent.left
                         anchors.right: voiceNavigationPreviewButton.left
                         minimumValue: 0.0
                         maximumValue: 1.0
                         indeterminate: true
-
-                        Connections {
-                            target: speakers
-                            onInstallationProgressed: {
-                                progressBar.indeterminate = false
-                                progressBar.value = progress
-                            }
-                            onInstallationFinished: {
-                                progressBar.installing = false
-                                settings.voiceNavigationSpeaker = speakers.path(speakerDialog.selectedIndex)
-                                voiceNavigationPreviewButton.enabled = true
-                            }
-                        }
                     }
 
                     ToolButton {
@@ -298,7 +302,9 @@ Page {
                         id: themeDialog
                         titleText: "Street Map Theme"
                         selectedIndex: mapThemeModel.indexOf(settings.streetMapTheme)
+
                         model: mapThemeModel
+
                         delegate:
                             Rectangle {
                             id: delegate
@@ -360,7 +366,10 @@ Page {
                     width: pageGrid.rightRowWidth / 2 - 5
                     text: "Map Themes"
                     onClicked: pageStack.push(themePage)
-                    MapThemePage { id: themePage }
+                    Component {
+                        id: themePage
+                        MapThemePage {  }
+                    }
                 }
 
                 Button {
@@ -370,7 +379,10 @@ Page {
                     anchors.right: parent.right
                     text: "Offline Data"
                     onClicked: pageStack.push(offlineDataPage)
-                    OfflineDataPage { id: offlineDataPage }
+                    Component {
+                        id: offlineDataPage
+                        OfflineDataPage {  }
+                    }
                 }
             }
         }
