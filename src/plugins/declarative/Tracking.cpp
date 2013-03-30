@@ -65,8 +65,6 @@ void Tracking::setPositionSource( PositionSource* source )
                     this, SLOT( updateLastKnownPosition() ) );
             connect( source, SIGNAL( hasPositionChanged() ),
                     this, SLOT( updatePositionMarker() ) );
-            connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ),
-                    this, SLOT( updatePositionMarker() ) );
             connect( source, SIGNAL( positionChanged() ),
                      this, SIGNAL( distanceChanged() ) );
         }
@@ -77,17 +75,19 @@ void Tracking::setPositionSource( PositionSource* source )
 void Tracking::setMarbleWidget( MarbleWidget* widget )
 {
     if ( widget != m_marbleWidget ) {
-        if ( widget ) {
-            widget->model()->positionTracking()->setTrackVisible( showTrack() );
-            setShowPositionMarkerPlugin( m_positionMarkerType == Arrow );
-        }
-
-        if ( m_positionSource ) {
-            m_positionSource->setMarbleModel( widget->model() );
-        }
-
         m_marbleWidget = widget;
-        connect( m_marbleWidget, SIGNAL( mapThemeChanged() ), this, SLOT( updatePositionMarker() ) );
+
+        if ( m_marbleWidget ) {
+            m_marbleWidget->model()->positionTracking()->setTrackVisible( showTrack() );
+            setShowPositionMarkerPlugin( m_positionMarkerType == Arrow );
+
+            if ( m_positionSource ) {
+                m_positionSource->setMarbleModel( widget->model() );
+            }
+
+            connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ), this, SLOT( updatePositionMarker() ) );
+            connect( m_marbleWidget, SIGNAL( mapThemeChanged() ), this, SLOT( updatePositionMarker() ) );
+        }
     }
 }
 
