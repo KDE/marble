@@ -24,8 +24,6 @@
 
 #include <QtGui/QSortFilterProxyModel>
 
-using namespace Marble;
-
 Bookmarks::Bookmarks( QObject* parent ) : QObject( parent ),
     m_marbleWidget( 0 ), m_proxyModel( 0 )
 {
@@ -43,12 +41,12 @@ bool Bookmarks::isBookmark( qreal longitude, qreal latitude )
         return false;
     }
 
-    BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
-    GeoDataDocument *bookmarks = manager->document();
-    GeoDataCoordinates const compareTo( longitude, latitude, 0.0, GeoDataCoordinates::Degree );
-    foreach( const GeoDataFolder* folder, bookmarks->folderList() ) {
-        foreach( const GeoDataPlacemark * const placemark, folder->placemarkList() ) {
-            if ( distanceSphere( placemark->coordinate(), compareTo ) * EARTH_RADIUS < 5 ) {
+    Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
+    Marble::GeoDataDocument *bookmarks = manager->document();
+    Marble::GeoDataCoordinates const compareTo( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
+    foreach( const Marble::GeoDataFolder* folder, bookmarks->folderList() ) {
+        foreach( const Marble::GeoDataPlacemark * const placemark, folder->placemarkList() ) {
+            if ( distanceSphere( placemark->coordinate(), compareTo ) * Marble::EARTH_RADIUS < 5 ) {
                 return true;
             }
         }
@@ -63,10 +61,10 @@ void Bookmarks::addBookmark( qreal longitude, qreal latitude, const QString &nam
         return;
     }
 
-    BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
-    GeoDataDocument *bookmarks = manager->document();
-    GeoDataContainer *target = 0;
-    foreach( GeoDataFolder* const folder, bookmarks->folderList() ) {
+    Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
+    Marble::GeoDataDocument *bookmarks = manager->document();
+    Marble::GeoDataContainer *target = 0;
+    foreach( Marble::GeoDataFolder* const folder, bookmarks->folderList() ) {
         if ( folder->name() == folderName ) {
             target = folder;
             break;
@@ -76,7 +74,7 @@ void Bookmarks::addBookmark( qreal longitude, qreal latitude, const QString &nam
     if ( !target ) {
         manager->addNewBookmarkFolder( bookmarks, folderName );
 
-        foreach( GeoDataFolder* const folder, bookmarks->folderList() ) {
+        foreach( Marble::GeoDataFolder* const folder, bookmarks->folderList() ) {
             if ( folder->name() == folderName ) {
                 target = folder;
                 break;
@@ -86,14 +84,14 @@ void Bookmarks::addBookmark( qreal longitude, qreal latitude, const QString &nam
         Q_ASSERT( target );
     }
 
-    GeoDataPlacemark placemark;
-    GeoDataCoordinates coordinate( longitude, latitude, 0.0, GeoDataCoordinates::Degree );
+    Marble::GeoDataPlacemark placemark;
+    Marble::GeoDataCoordinates coordinate( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
     placemark.setCoordinate( coordinate );
     placemark.setName( name );
-    GeoDataLookAt* lookat = new GeoDataLookAt;
+    Marble::GeoDataLookAt* lookat = new Marble::GeoDataLookAt;
     lookat->setCoordinates( coordinate );
     lookat->setRange( 750 );
-    placemark.extendedData().addValue( GeoDataData( "isBookmark", true ) );
+    placemark.extendedData().addValue( Marble::GeoDataData( "isBookmark", true ) );
 
     manager->addBookmark( target, placemark );
 }
@@ -104,12 +102,12 @@ void Bookmarks::removeBookmark( qreal longitude, qreal latitude )
         return;
     }
 
-    BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
-    GeoDataDocument *bookmarks = manager->document();
-    GeoDataCoordinates const compareTo( longitude, latitude, 0.0, GeoDataCoordinates::Degree );
-    foreach( const GeoDataFolder* folder, bookmarks->folderList() ) {
-        foreach( GeoDataPlacemark * placemark, folder->placemarkList() ) {
-            if ( distanceSphere( placemark->coordinate(), compareTo ) * EARTH_RADIUS < 5 ) {
+    Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
+    Marble::GeoDataDocument *bookmarks = manager->document();
+    Marble::GeoDataCoordinates const compareTo( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
+    foreach( const Marble::GeoDataFolder* folder, bookmarks->folderList() ) {
+        foreach( Marble::GeoDataPlacemark * placemark, folder->placemarkList() ) {
+            if ( distanceSphere( placemark->coordinate(), compareTo ) * Marble::EARTH_RADIUS < 5 ) {
                 manager->removeBookmark( placemark );
                 return;
             }
@@ -120,15 +118,15 @@ void Bookmarks::removeBookmark( qreal longitude, qreal latitude )
 BookmarksModel *Bookmarks::model()
 {
     if ( !m_proxyModel && m_marbleWidget && m_marbleWidget->model()->bookmarkManager() ) {
-        BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
-        GeoDataTreeModel* model = new GeoDataTreeModel( this );
+        Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
+        Marble::GeoDataTreeModel* model = new Marble::GeoDataTreeModel( this );
         model->setRootDocument( manager->document() );
 
         KDescendantsProxyModel* flattener = new KDescendantsProxyModel( this );
         flattener->setSourceModel( model );
 
         m_proxyModel = new BookmarksModel( this );
-        m_proxyModel->setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
+        m_proxyModel->setFilterFixedString( Marble::GeoDataTypes::GeoDataPlacemarkType );
         m_proxyModel->setFilterKeyColumn( 1 );
         m_proxyModel->setSourceModel( flattener );
     }
@@ -157,9 +155,9 @@ int BookmarksModel::count() const
 qreal BookmarksModel::longitude( int idx )
 {
     if ( idx >= 0 && idx < rowCount() ) {
-        QVariant const value = data( index( idx, 0 ), MarblePlacemarkModel::CoordinateRole );
-        GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( value );
-        return coordinates.longitude( GeoDataCoordinates::Degree );
+        QVariant const value = data( index( idx, 0 ), Marble::MarblePlacemarkModel::CoordinateRole );
+        Marble::GeoDataCoordinates const coordinates = qVariantValue<Marble::GeoDataCoordinates>( value );
+        return coordinates.longitude( Marble::GeoDataCoordinates::Degree );
     }
     return 0.0;
 }
@@ -167,9 +165,9 @@ qreal BookmarksModel::longitude( int idx )
 qreal BookmarksModel::latitude( int idx )
 {
     if ( idx >= 0 && idx < rowCount() ) {
-        QVariant const value = data( index( idx, 0 ), MarblePlacemarkModel::CoordinateRole );
-        GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( value );
-        return coordinates.latitude( GeoDataCoordinates::Degree );
+        QVariant const value = data( index( idx, 0 ), Marble::MarblePlacemarkModel::CoordinateRole );
+        Marble::GeoDataCoordinates const coordinates = qVariantValue<Marble::GeoDataCoordinates>( value );
+        return coordinates.latitude( Marble::GeoDataCoordinates::Degree );
     }
     return 0.0;
 }
