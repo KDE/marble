@@ -66,7 +66,7 @@ QObject* Routing::waypointModel()
     return d->m_marbleWidget ? d->m_marbleWidget->model()->routingManager()->routingModel() : 0;
 }
 
-void Routing::setMarbleWidget( MarbleWidget* widget )
+void Routing::setMap( MarbleWidget* widget )
 {
     d->m_marbleWidget = widget;
 
@@ -83,6 +83,13 @@ void Routing::setMarbleWidget( MarbleWidget* widget )
             qDebug() << "Unexpected size of default routing profiles: " << profiles.size();
         }
     }
+
+    emit mapChanged();
+}
+
+MarbleWidget *Routing::map()
+{
+    return d->m_marbleWidget;
 }
 
 QString Routing::routingProfile() const

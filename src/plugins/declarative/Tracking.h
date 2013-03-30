@@ -27,6 +27,7 @@ class Tracking : public QObject
     Q_OBJECT
     Q_ENUMS( PositionMarkerType )
 
+    Q_PROPERTY( MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged )
     Q_PROPERTY( bool showTrack READ showTrack WRITE setShowTrack NOTIFY showTrackChanged )
     Q_PROPERTY( bool autoCenter READ autoCenter WRITE setAutoCenter NOTIFY autoCenterChanged )
     Q_PROPERTY( bool autoZoom READ autoZoom WRITE setAutoZoom NOTIFY autoZoomChanged )
@@ -58,7 +59,9 @@ public:
 
     void setPositionMarker( QObject* marker );
 
-    void setMarbleWidget( MarbleWidget* widget );
+    MarbleWidget* map();
+
+    void setMap( MarbleWidget* widget );
 
     bool hasLastKnownPosition() const;
 
@@ -88,6 +91,8 @@ public Q_SLOTS:
     void clearTrack();
 
 Q_SIGNALS:
+    void mapChanged();
+
     void showTrackChanged();
 
     void positionSourceChanged();

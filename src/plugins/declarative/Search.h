@@ -26,18 +26,23 @@ class Search : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY( MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged )
     Q_PROPERTY( QDeclarativeComponent* placemarkDelegate READ placemarkDelegate WRITE setPlacemarkDelegate NOTIFY placemarkDelegateChanged )
 
 public:
     explicit Search( QObject* parent = 0 );
 
-    void setMarbleWidget( MarbleWidget* widget );
+    MarbleWidget *map();
+
+    void setMap( MarbleWidget* widget );
 
     QDeclarativeComponent* placemarkDelegate();
 
     void setPlacemarkDelegate( QDeclarativeComponent* delegate );
 
 Q_SIGNALS:
+    void mapChanged();
+
     /**
      * The last search triggered by search() is finished and can be
      * retrieved using @see searchResult

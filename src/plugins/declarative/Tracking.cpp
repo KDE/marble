@@ -71,7 +71,12 @@ void Tracking::setPositionSource( PositionSource* source )
     }
 }
 
-void Tracking::setMarbleWidget( MarbleWidget* widget )
+MarbleWidget* Tracking::map()
+{
+    return m_marbleWidget;
+}
+
+void Tracking::setMap( MarbleWidget* widget )
 {
     if ( widget != m_marbleWidget ) {
         m_marbleWidget = widget;
@@ -83,6 +88,8 @@ void Tracking::setMarbleWidget( MarbleWidget* widget )
             connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ), this, SLOT( updatePositionMarker() ) );
             connect( m_marbleWidget, SIGNAL( mapThemeChanged() ), this, SLOT( updatePositionMarker() ) );
         }
+
+        emit mapChanged();
     }
 }
 

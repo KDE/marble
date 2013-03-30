@@ -22,6 +22,7 @@ class NavigationPrivate;
 class Navigation : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged)
     Q_PROPERTY(bool guidanceModeEnabled READ guidanceModeEnabled WRITE setGuidanceModeEnabled NOTIFY guidanceModeEnabledChanged)
     Q_PROPERTY(bool muted READ muted WRITE setMuted NOTIFY mutedChanged)
     Q_PROPERTY(bool soundEnabled READ soundEnabled WRITE setSoundEnabled NOTIFY soundEnabledChanged)
@@ -39,7 +40,9 @@ public:
 
     ~Navigation();
 
-    void setMarbleWidget( MarbleWidget* widget );
+    MarbleWidget* map();
+
+    void setMap( MarbleWidget* widget );
 
     bool guidanceModeEnabled() const;
 
@@ -72,6 +75,8 @@ public:
     bool deviated() const;
 
 Q_SIGNALS:
+    void mapChanged();
+
     void guidanceModeEnabledChanged();
 
     void mutedChanged(bool arg);

@@ -15,6 +15,7 @@
 #include "MarbleMath.h"
 #include "MarblePlacemarkModel.h"
 #include "BookmarkManager.h"
+#include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataFolder.h"
 #include "GeoDataTypes.h"
@@ -30,7 +31,12 @@ Bookmarks::Bookmarks( QObject* parent ) : QObject( parent ),
     // nothing to do
 }
 
-void Bookmarks::setMarbleWidget( ::MarbleWidget* widget )
+MarbleWidget *Bookmarks::map()
+{
+    return m_marbleWidget;
+}
+
+void Bookmarks::setMap( ::MarbleWidget* widget )
 {
     m_marbleWidget = widget;
 }

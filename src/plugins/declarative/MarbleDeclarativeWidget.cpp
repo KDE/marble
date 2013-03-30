@@ -11,7 +11,6 @@
 #include "MarbleDeclarativeWidget.h"
 
 #include "Coordinate.h"
-#include "Tracking.h"
 #include "ZoomButtonInterceptor.h"
 
 #include "GeoDataCoordinates.h"
@@ -38,11 +37,6 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ),
     m_marbleWidget( new Marble::MarbleWidget ),
     m_inputEnabled( true ),
-    m_bookmarks( 0),
-    m_tracking( 0 ),
-    m_routing( 0 ),
-    m_navigation( 0 ),
-    m_search( 0 ),
     m_interceptor( new ZoomButtonInterceptor( this, this ) )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
@@ -223,28 +217,6 @@ Coordinate *MarbleWidget::coordinate( int x, int y )
     return new Coordinate( lon, lat, 0.0, this );
 }
 
-Bookmarks *MarbleWidget::bookmarks()
-{
-    if ( !m_bookmarks ) {
-        m_bookmarks = new Bookmarks( this );
-        m_bookmarks->setMarbleWidget( this );
-        emit bookmarksChanged();
-    }
-
-    return m_bookmarks;
-}
-
-Tracking* MarbleWidget::tracking()
-{
-    if ( !m_tracking ) {
-        m_tracking = new Tracking( this );
-        m_tracking->setMarbleWidget( this );
-        emit trackingChanged();
-    }
-
-    return m_tracking;
-}
-
 Coordinate* MarbleWidget::center()
 {
     m_center.blockSignals( true );
@@ -307,36 +279,6 @@ void MarbleWidget::addLayer( QDeclarativeListProperty<DeclarativeDataPlugin> *li
         object->setDataPluginDelegate( layer->nameId(), layer->delegate() );
         object->m_dataLayers << layer;
     }
-}
-
-Routing* MarbleWidget::routing()
-{
-    if ( !m_routing ) {
-        m_routing = new Routing( this );
-        m_routing->setMarbleWidget( this );
-    }
-
-    return m_routing;
-}
-
-Navigation *MarbleWidget::navigation()
-{
-    if ( !m_navigation ) {
-        m_navigation = new Navigation( this );
-        m_navigation->setMarbleWidget( this );
-    }
-
-    return m_navigation;
-}
-
-Search* MarbleWidget::search()
-{
-    if ( !m_search ) {
-        m_search = new Search( this );
-        m_search->setMarbleWidget( this );
-    }
-
-    return m_search;
 }
 
 QObject *MarbleWidget::mapThemeModel()

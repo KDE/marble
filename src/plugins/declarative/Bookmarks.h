@@ -41,12 +41,15 @@ class Bookmarks : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY( MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged)
     Q_PROPERTY( BookmarksModel* model READ model NOTIFY modelChanged )
 
 public:
     explicit Bookmarks( QObject* parent = 0 );
 
-    void setMarbleWidget( MarbleWidget* widget );
+    MarbleWidget* map();
+
+    void setMap( MarbleWidget* widget );
 
     BookmarksModel* model();
 
@@ -58,6 +61,8 @@ public Q_SLOTS:
     void removeBookmark( qreal longitude, qreal latitude );
 
 Q_SIGNALS:
+    void mapChanged();
+
     void modelChanged();
 
 private:

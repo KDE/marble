@@ -22,13 +22,19 @@ Search::Search( QObject* parent ) : QObject( parent ),
     // nothing to do
 }
 
-void Search::setMarbleWidget( MarbleWidget* widget )
+MarbleWidget *Search::map()
+{
+    return m_marbleWidget;
+}
+
+void Search::setMap( MarbleWidget* widget )
 {
     m_marbleWidget = widget;
     connect( m_marbleWidget, SIGNAL(visibleLatLonAltBoxChanged()),
              this, SLOT(updatePlacemarks()) );
     connect( m_marbleWidget, SIGNAL(mapThemeChanged()),
              this, SLOT(updatePlacemarks()) );
+    emit mapChanged();
 }
 
 QDeclarativeComponent* Search::placemarkDelegate()

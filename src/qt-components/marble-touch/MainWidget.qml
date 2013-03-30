@@ -48,10 +48,19 @@ Item {
         activeFloatItems: [ "compass", "scalebar", "progress" ]
         activeRenderPlugins: settings.activeRenderPlugins
 
+        property Bookmarks bookmarks: Bookmarks {
+            map: map
+        }
+
+        property Routing routing: Routing {
+            map: map
+        }
+
         // The grouped property "tracking" provides access to tracking related
         // properties.
-        tracking {
+        property Tracking tracking: Tracking {
             // Connect the position source from below with the map.
+            map: map
             positionSource: positionProvider
             showTrack: settings.showTrack
             positionMarker: marker
@@ -63,7 +72,8 @@ Item {
             }
         }
 
-        navigation {
+        property Navigation navigation: Navigation {
+            map: map
             muted: settings.voiceNavigationMuted
             speaker: settings.voiceNavigationSpeaker
             soundEnabled: settings.voiceNavigationSoundEnabled
@@ -88,7 +98,8 @@ Item {
 
         onVisibleLatLonAltBoxChanged: updatePositionIndicator()
 
-        search {
+        property Search search: Search {
+            map: map
             // Delegate of a search result.
             /** @todo: Simplify this beast */
             placemarkDelegate:

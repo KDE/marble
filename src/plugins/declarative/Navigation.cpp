@@ -103,7 +103,12 @@ Navigation::~Navigation()
     delete d;
 }
 
-void Navigation::setMarbleWidget( MarbleWidget* widget )
+MarbleWidget *Navigation::map()
+{
+    return d->m_marbleWidget;
+}
+
+void Navigation::setMap( MarbleWidget* widget )
 {
     d->m_marbleWidget = widget;
     if ( d->m_marbleWidget ) {
@@ -127,6 +132,7 @@ void Navigation::setMarbleWidget( MarbleWidget* widget )
 
         d->m_marbleWidget->model()->routingManager()->setAutoNavigation( d->m_autoNavigation );
     }
+    emit mapChanged();
 }
 
 bool Navigation::guidanceModeEnabled() const

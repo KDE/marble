@@ -22,6 +22,7 @@ class RoutingPrivate;
 class Routing : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY( MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged)
     Q_PROPERTY( QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged )
     Q_PROPERTY( bool hasRoute READ hasRoute NOTIFY hasRouteChanged )
 
@@ -32,7 +33,9 @@ public:
 
     ~Routing();
 
-    void setMarbleWidget( MarbleWidget* widget );
+    void setMap( MarbleWidget* widget );
+
+    MarbleWidget *map();
 
     QString routingProfile() const;
 
@@ -62,6 +65,8 @@ public Q_SLOTS:
     QObject* routeRequestModel();
 
 Q_SIGNALS:
+    void mapChanged();
+
     void routingProfileChanged();
 
     void hasRouteChanged();
