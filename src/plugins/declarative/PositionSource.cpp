@@ -11,6 +11,7 @@
 
 #include "PositionSource.h"
 
+#include "MarbleDeclarativeWidget.h"
 #include "MarbleModel.h"
 #include "PluginManager.h"
 #include "PositionTracking.h"
@@ -20,7 +21,7 @@ PositionSource::PositionSource( QObject* parent) : QObject( parent ),
     m_active( false ),
     m_hasPosition( false ),
     m_position( 0 ),
-    m_marbleModel( 0 ),
+    m_marbleWidget( 0 ),
     m_speed( 0.0 )
 {
   // nothing to do
@@ -36,8 +37,8 @@ void PositionSource::setActive( bool active )
     if ( active != m_active ) {
         if ( active ) {
             start();
-        } else if ( m_marbleModel ) {
-            Marble::PositionTracking *tracking = m_marbleModel->positionTracking();
+        } else if ( m_marbleWidget ) {
+            Marble::PositionTracking *tracking = m_marbleWidget->model()->positionTracking();
             tracking->setPositionProviderPlugin( 0 );
         }
 
@@ -84,32 +85,39 @@ Coordinate* PositionSource::position()
 
 void PositionSource::start()
 {
-    if ( !m_marbleModel ) {
+    if ( !m_marbleWidget ) {
         return;
     }
 
-    const Marble::PluginManager* pluginManager = m_marbleModel->pluginManager();
+    const Marble::PluginManager* pluginManager = m_marbleWidget->model()->pluginManager();
     foreach( const Marble::PositionProviderPlugin *plugin, pluginManager->positionProviderPlugins() ) {
         if ( m_source.isEmpty() || plugin->nameId() == m_source ) {
             Marble::PositionProviderPlugin* instance = plugin->newInstance();
-            instance->setMarbleModel( m_marbleModel );
-            Marble::PositionTracking *tracking = m_marbleModel->positionTracking();
+            instance->setMarbleModel( m_marbleWidget->model() );
+            Marble::PositionTracking *tracking = m_marbleWidget->model()->positionTracking();
             tracking->setPositionProviderPlugin( instance );
             break;
         }
     }
 }
 
-void PositionSource::setMarbleModel( Marble::MarbleModel* model )
+MarbleWidget *PositionSource::map()
 {
-    if ( model != m_marbleModel ) {
-        m_marbleModel = model;
+    return m_marbleWidget;
+}
 
-        if ( model ) {
-            connect( model->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+void PositionSource::setMap( MarbleWidget *map )
+{
+    if ( map != m_marbleWidget ) {
+        m_marbleWidget = map;
+
+        if ( m_marbleWidget ) {
+            connect( m_marbleWidget->model()->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
                     this, SLOT(updatePosition()) );
-            connect( model->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
+            connect( m_marbleWidget->model()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
                     this, SLOT(updatePosition()) );
+
+            emit mapChanged();
         }
 
         if ( active() ) {
@@ -125,17 +133,17 @@ qreal PositionSource::speed() const
 
 void PositionSource::updatePosition()
 {
-    if ( m_marbleModel ) {
-        bool const hasPosition = m_marbleModel->positionTracking()->status() == Marble::PositionProviderStatusAvailable;
+    if ( m_marbleWidget ) {
+        bool const hasPosition = m_marbleWidget->model()->positionTracking()->status() == Marble::PositionProviderStatusAvailable;
 
         if ( hasPosition ) {
-            Marble::GeoDataCoordinates position = m_marbleModel->positionTracking()->currentLocation();
+            Marble::GeoDataCoordinates position = m_marbleWidget->model()->positionTracking()->currentLocation();
             m_position.setLongitude( position.longitude( Marble::GeoDataCoordinates::Degree ) );
             m_position.setLatitude( position.latitude( Marble::GeoDataCoordinates::Degree ) );
             m_position.setAltitude( position.altitude() );
         }
 
-        m_speed = m_marbleModel->positionTracking()->speed() * Marble::METER2KM / Marble::SEC2HOUR;
+        m_speed = m_marbleWidget->model()->positionTracking()->speed() * Marble::METER2KM / Marble::SEC2HOUR;
         emit speedChanged();
 
         if ( hasPosition != m_hasPosition ) {

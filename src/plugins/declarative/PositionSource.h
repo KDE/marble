@@ -16,12 +16,13 @@
 #include <QtCore/QObject>
 #include <QtDeclarative/QtDeclarative>
 
-namespace Marble { class MarbleModel; }
+class MarbleWidget;
 
 class PositionSource : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY( MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged )
     Q_PROPERTY( bool active READ active WRITE setActive NOTIFY activeChanged )
     Q_PROPERTY( QString source READ source WRITE setSource NOTIFY sourceChanged )
     Q_PROPERTY( bool hasPosition READ hasPosition NOTIFY hasPositionChanged )
@@ -43,11 +44,15 @@ public:
 
     Coordinate* position();
 
-    void setMarbleModel( Marble::MarbleModel* model );
+    MarbleWidget *map();
+
+    void setMap( MarbleWidget *map );
 
     qreal speed() const;
 
 Q_SIGNALS:
+    void mapChanged();
+
     void activeChanged();
 
     void sourceChanged();
@@ -72,7 +77,7 @@ private:
 
     Coordinate m_position;
 
-    Marble::MarbleModel* m_marbleModel;
+    QPointer<MarbleWidget> m_marbleWidget;
 
     qreal m_speed;
 };

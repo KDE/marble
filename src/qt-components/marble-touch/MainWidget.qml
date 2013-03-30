@@ -211,6 +211,8 @@ Item {
     PositionSource {
         id: positionProvider
 
+        map: map
+
         // Can optionally be used to select a specific position provider
         // plugin of marble. Per default the first one is used.
         // The value is the nameId() of an installed Marble PositionProviderPlugin,

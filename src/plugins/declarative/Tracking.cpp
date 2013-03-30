@@ -58,7 +58,6 @@ void Tracking::setPositionSource( PositionSource* source )
     if ( source != m_positionSource ) {
         m_positionSource = source;
         if ( source ) {
-            source->setMarbleModel( m_marbleWidget->model() );
             connect( source, SIGNAL( positionChanged() ),
                     this, SLOT( updatePositionMarker() ) );
             connect( source, SIGNAL( positionChanged() ),
@@ -80,10 +79,6 @@ void Tracking::setMarbleWidget( MarbleWidget* widget )
         if ( m_marbleWidget ) {
             m_marbleWidget->model()->positionTracking()->setTrackVisible( showTrack() );
             setShowPositionMarkerPlugin( m_positionMarkerType == Arrow );
-
-            if ( m_positionSource ) {
-                m_positionSource->setMarbleModel( widget->model() );
-            }
 
             connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged() ), this, SLOT( updatePositionMarker() ) );
             connect( m_marbleWidget, SIGNAL( mapThemeChanged() ), this, SLOT( updatePositionMarker() ) );
