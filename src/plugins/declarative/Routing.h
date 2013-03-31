@@ -62,8 +62,6 @@ public Q_SLOTS:
 
     QObject* waypointModel();
 
-    QObject* routeRequestModel();
-
 Q_SIGNALS:
     void mapChanged();
 

@@ -21,6 +21,11 @@ Item {
         marbleWidget.routing.updateRoute()
     }
 
+    RouteRequestModel {
+        id: routeRequestModel
+        routing: marbleWidget.routing;
+    }
+
     Column {
         id: content
         width: parent.width
@@ -30,7 +35,7 @@ Item {
         Repeater {
             id: listView
             width: parent.width
-            model: marbleWidget.routing.routeRequestModel()
+            model: routeRequestModel
 
             ViaPointEditor {
                 id: sourcePoint
@@ -38,7 +43,7 @@ Item {
 
                 Component.onCompleted: marbleWidget.mouseClickGeoPosition.connect(retrieveInput)
                 onPositionChanged: {
-                    marbleWidget.routing.routeRequestModel().setPosition(index, lon, lat)
+                    routeRequestModel.setPosition(index, lon, lat)
                     root.calculateRoute()
                 }
             }
@@ -95,7 +100,7 @@ Item {
     Connections { target: routingTypeOptions; onRoutingTypeChanged: root.calculateRoute() }
 
     Component.onCompleted: {
-        if (marbleWidget.routing.routeRequestModel().count === 0) {
+        if (routeRequestModel.count === 0) {
             marbleWidget.routing.addVia(marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude)
         }
     }

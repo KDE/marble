@@ -10,20 +10,17 @@
 
 #include "RouteRequestModel.h"
 
+#include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
+#include "MarbleDeclarativeWidget.h"
+#include "MarbleModel.h"
+#include "Routing.h"
 
-RouteRequestModel::RouteRequestModel( Marble::RouteRequest* request, QObject *parent ) :
-    QAbstractListModel( parent ), m_request( request )
+RouteRequestModel::RouteRequestModel( QObject *parent ) :
+    QAbstractListModel( parent ),
+    m_routing( 0 ),
+    m_request( 0 )
 {
-    if ( m_request ) {
-        connect( m_request, SIGNAL(positionChanged(int,GeoDataCoordinates)),
-                 this, SLOT(updateData(int)) );
-        connect( m_request, SIGNAL(positionAdded(int)),
-                 this, SLOT(updateAfterAddition(int)) );
-        connect( m_request, SIGNAL(positionRemoved(int)),
-                 this, SLOT(updateAfterRemoval(int)) );
-    }
-
     QHash<int,QByteArray> roles = roleNames();
     roles[LongitudeRole] = "longitude";
     roles[LatitudeRole] = "latitude";
@@ -64,6 +61,37 @@ QVariant RouteRequestModel::data ( const QModelIndex &index, int role ) const
     }
 
     return QVariant();
+}
+
+Routing *RouteRequestModel::routing()
+{
+    return m_routing;
+}
+
+void RouteRequestModel::setRouting( Routing *routing )
+{
+    if ( routing != m_routing ) {
+        m_routing = routing;
+        updateMap();
+        connect( m_routing, SIGNAL(mapChanged()), this, SLOT(updateMap()) );
+        emit routingChanged();
+    }
+}
+
+void RouteRequestModel::updateMap()
+{
+    if ( m_routing && m_routing->map() ) {
+        m_request = m_routing->map()->model()->routingManager()->routeRequest();
+
+        connect( m_request, SIGNAL(positionChanged(int,GeoDataCoordinates)),
+                 this, SLOT(updateData(int)) );
+        connect( m_request, SIGNAL(positionAdded(int)),
+                 this, SLOT(updateAfterAddition(int)) );
+        connect( m_request, SIGNAL(positionRemoved(int)),
+                 this, SLOT(updateAfterRemoval(int)) );
+
+        emit layoutChanged();
+    }
 }
 
 void RouteRequestModel::updateData( int idx )

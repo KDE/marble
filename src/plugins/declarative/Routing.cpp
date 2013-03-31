@@ -17,7 +17,6 @@
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
-#include "RouteRequestModel.h"
 #include "routing/RoutingProfilesModel.h"
 
 class RoutingPrivate
@@ -27,15 +26,13 @@ public:
 
     MarbleWidget* m_marbleWidget;
 
-    QAbstractItemModel* m_routeRequestModel;
-
     QMap<QString, Marble::RoutingProfile> m_profiles;
 
     QString m_routingProfile;
 };
 
 RoutingPrivate::RoutingPrivate() :
-    m_marbleWidget( 0 ), m_routeRequestModel( 0 )
+    m_marbleWidget( 0 )
 {
     // nothing to do
 }
@@ -49,16 +46,6 @@ Routing::Routing( QObject* parent) :
 Routing::~Routing()
 {
     delete d;
-}
-
-QObject* Routing::routeRequestModel()
-{
-    if ( !d->m_routeRequestModel && d->m_marbleWidget ) {
-        Marble::RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
-        d->m_routeRequestModel = new RouteRequestModel( request, this );
-    }
-
-    return d->m_routeRequestModel;
 }
 
 QObject* Routing::waypointModel()
