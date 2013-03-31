@@ -27,7 +27,9 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     explicit GeoSceneGeodata( QString name );
     virtual ~GeoSceneGeodata();
     virtual const char* nodeType() const;
-     
+
+    bool operator==( const GeoSceneGeodata &other ) const;
+
     QString property() const;
     void setProperty( QString property );
 

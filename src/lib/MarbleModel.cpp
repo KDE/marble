@@ -260,7 +260,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
     }
 
     // find the list of previous theme's geodata
-    QStringList loadedContainers;
+    QList<GeoSceneGeodata> currentDatasets;
     if ( d->m_mapTheme ) {
         foreach ( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
             if ( layer->backend() != dgml::dgmlValue_geodata )
@@ -270,8 +270,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
             foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
                 GeoSceneGeodata *data = dynamic_cast<GeoSceneGeodata*>( dataset );
                 Q_ASSERT( data );
-                QString containername = data->sourceFile();
-                loadedContainers <<  containername;
+                currentDatasets << *data;
             }
         }
     }
@@ -309,7 +308,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
         sunLocator()->setPlanet(d->m_planet);
     }
 
-    QStringList loadList;
+    QStringList fileList;
     QStringList propertyList;
     QList<GeoDataStyle*> styleList;
 
@@ -318,11 +317,14 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
             continue;
 
         GeoSceneGeodata emptyData("empty");
-        // look for documents
+        // look for datasets which are different from currentDatasets
         foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
             GeoSceneGeodata *data = dynamic_cast<GeoSceneGeodata*>( dataset );
             Q_ASSERT( data );
-            QString containername = data->sourceFile();
+            if( currentDatasets.removeOne( *data ) ) {
+                continue;
+            }
+            QString filename = data->sourceFile();
             QString property = data->property();
             QPen pen = data->pen();
             QBrush brush = data->brush();
@@ -352,22 +354,17 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
                 style->setStyleId( "default" );
             }
 
-            if ( !loadedContainers.removeOne( containername ) ) {
-                loadList << containername;
-                propertyList << property;
-                styleList << style;
-            }
+            fileList << filename;
+            propertyList << property;
+            styleList << style;
         }
     }
-    // unload old standard Placemarks which are not part of the new map
-    foreach(const QString& container, loadedContainers) {
-        loadedContainers.pop_front();
-        d->m_fileManager->removeFile( container );
+    // unload old currentDatasets which are not part of the new map
+    foreach(const GeoSceneGeodata data, currentDatasets) {
+        d->m_fileManager->removeFile( data.sourceFile() );
     }
-    // load new standard Placemarks
-    d->m_fileManager->addFile( loadList, propertyList, styleList, MapDocument );
-    loadList.clear();
-    styleList.clear();
+    // load new datasets
+    d->m_fileManager->addFile( fileList, propertyList, styleList, MapDocument );
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );

@@ -32,6 +32,13 @@ const char* GeoSceneGeodata::nodeType() const
     return GeoSceneTypes::GeoSceneGeodataType;
 }
 
+bool GeoSceneGeodata::operator==( const GeoSceneGeodata &other ) const
+{
+    return m_sourceFile == other.sourceFile()
+            && m_pen == other.pen()
+            && m_brush == other.brush();
+}
+
 QString GeoSceneGeodata::property() const
 {
     return m_property;
