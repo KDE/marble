@@ -47,16 +47,12 @@
                 </texture>
             </layer>
 
-            <layer name="mwdbii" backend="vector" role="polyline">
-                <vector name="pcoast" feature="coast">
+            <layer name="mwdbii" backend="vector">
+                <vector name="pcoast" feature="coastlines">
                     <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
                     <pen color="#ffff00" />
                 </vector>
-                <vector name="international dateline" feature="border">
-                    <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
-                    <pen color="#ffffff" />
-                </vector>
-                <vector name="rivers" feature="river">
+                <vector name="rivers" feature="waterbodies">
                     <sourcefile> mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#ffffff" />
                 </vector>
@@ -82,7 +78,7 @@
         </map>
 
         <settings>
--            <group name="Places">
+            <group name="Places">
                 <property name="places">
                     <value>true</value>
                     <available>true</available>
@@ -101,35 +97,12 @@
                 </property>
             </group>
 
--            <group name="Boundaries">
-                <property name="borders">
-                    <value>false</value>
-                    <available>false</available>
-                </property>
-                <property name="international-boundaries">
-                    <available>false</available>
-                    <value>false</value>
-                </property>
-                <property name="state-boundaries">
-                    <available>false</available>
-                    <value>false</value>
-                </property>
-            </group>
-
             <group name="Water Bodies">
                 <property name="coastlines">
                     <available>true</available>
                     <value>false</value>
                 </property>
                 <property name="waterbodies">
-                    <available>false</available>
-                    <value>false</value>
-                </property>
-                <property name="lakes">
-                    <available>false</available>
-                    <value>false</value>
-                </property>
-                <property name="rivers">
                     <available>false</available>
                     <value>false</value>
                 </property>

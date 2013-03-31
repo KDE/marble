@@ -68,25 +68,9 @@
                     <value>true</value>
                     <available>true</available>
                 </property>
-                <property name="international-boundaries">
-                    <available>true</available>
-                    <value>true</value>
-                </property>
-                <property name="state-boundaries">
-                    <available>true</available>
-                    <value>true</value>
-                </property>
             </group>
             <group name="Water Bodies">
                 <property name="waterbodies">
-                    <available>true</available>
-                    <value>true</value>
-                </property>
-                <property name="lakes">
-                    <available>true</available>
-                    <value>true</value>
-                </property>
-                <property name="rivers">
                     <available>true</available>
                     <value>true</value>
                 </property>

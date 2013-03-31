@@ -49,8 +49,8 @@
                 </filter>
             </layer>
         
-            <layer name="mwdbii" backend="vector" role="polyline">
-                <vector name="pcoast" feature="coast">
+            <layer name="mwdbii" backend="vector">
+                <vector name="pcoast">
                     <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
                     <pen color="#555753" />
                 </vector>
@@ -92,7 +92,7 @@
         </map>
 
         <settings>
--            <group name="Places">
+            <group name="Places">
                 <property name="places">
                     <value>true</value>
                     <available>true</available>
@@ -116,41 +116,11 @@
                     <value>true</value>
                     <available>true</available>
                 </property>
-                <property name="international-boundaries">
-                    <available>false</available>
-                    <value>false</value>
-                </property>
-                <property name="state-boundaries">
-                    <available>false</available>
-                    <value>false</value>
-                </property>
             </group>
             <group name="Water Bodies">
-                <property name="coastlines">
-                    <available>true</available>
-                    <value>true</value>
-                </property>
                 <property name="waterbodies">
                     <available>true</available>
                     <value>true</value>
-                </property>
-                <property name="lakes">
-                    <available>false</available>
-                    <value>false</value>
-                </property>
-                <property name="rivers">
-                    <available>true</available>
-                    <value>true</value>
-                </property>
-            </group>
-            <group name="Surface">
-                <property name="ice">
-                    <value>false</value>
-                    <available>false</available>
-                </property>
-                <property name="relief">
-                    <value>false</value>
-                    <available>false</available>
                 </property>
             </group>
 
