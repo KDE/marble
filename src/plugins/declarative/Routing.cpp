@@ -85,6 +85,8 @@ void Routing::setMap( MarbleWidget* widget )
     }
 
     emit mapChanged();
+    emit routingProfileChanged();
+    emit hasRouteChanged();
 }
 
 MarbleWidget *Routing::map()
