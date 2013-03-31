@@ -55,6 +55,7 @@ GeoNode* DgmlVectorTagHandler::parse(GeoParser& parser) const
         && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vector ) {
 
         vector = new GeoSceneGeodata( name );
+        vector->setProperty( feature );
         vector->setColorize( feature );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( vector );
     }
