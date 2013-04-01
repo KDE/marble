@@ -985,7 +985,7 @@ void MarblePart::createOnlineServicesMenu()
     for (; i != end; ++i ) {
         // FIXME: This will go into the layer manager when AbstractDataPlugin is an interface
 
-        if( (*i)->renderType() == RenderPlugin::Online ) {
+        if( (*i)->renderType() == RenderPlugin::OnlineRenderType ) {
             actionList.append( (*i)->action() );
         }
     }
