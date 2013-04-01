@@ -185,7 +185,6 @@ set(marblewidget_SRCS
     routing/AlternativeRoutesModel.cpp
     routing/Maneuver.cpp
     routing/Route.cpp
-    routing/RouteAnnotator.cpp
     routing/RouteRequest.cpp
     routing/RouteSegment.cpp
     routing/RoutingModel.cpp

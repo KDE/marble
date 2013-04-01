@@ -13,9 +13,9 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataPlacemark.h"
 #include "MarbleMath.h"
 #include "RoutingModel.h"
-#include "RouteAnnotator.h"
 
 #include <QtCore/QTimer>
 #include <QtGui/QPainter>
@@ -356,10 +356,6 @@ void AlternativeRoutesModel::addRestrainedRoutes()
 //            GeoDataDocument* base = d->m_routes.isEmpty() ? 0 : d->m_routes.first();
             d->m_routes.push_back( route );
             endInsertRows();
-//            RouteAnnotator* task = new RouteAnnotator( d->m_marbleModel, this, route, base );
-//            connect( task, SIGNAL( finished( GeoDataDocument*) ),
-//                     this, SLOT( update(GeoDataDocument*) ) );
-//            task->run();
         }
     }
 
@@ -406,11 +402,6 @@ void AlternativeRoutesModel::addRoute( GeoDataDocument* document, WritePolicy po
         beginInsertRows( QModelIndex(), affected, affected );
         d->m_routes.push_back( document );
         endInsertRows();
-
-//        RouteAnnotator* task = new RouteAnnotator( d->m_marbleModel, this, document, d->m_routes.first() );
-//        connect( task, SIGNAL( finished( GeoDataDocument*) ),
-//                 this, SLOT( update(GeoDataDocument*) ) );
-//        task->run();
     }
 }
 
