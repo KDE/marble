@@ -18,8 +18,8 @@
 
 RouteRequestModel::RouteRequestModel( QObject *parent ) :
     QAbstractListModel( parent ),
-    m_routing( 0 ),
-    m_request( 0 )
+    m_request( 0 ),
+    m_routing( 0 )
 {
     QHash<int,QByteArray> roles = roleNames();
     roles[LongitudeRole] = "longitude";
