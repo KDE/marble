@@ -42,7 +42,8 @@ public:
     QList<DeclarativeDataPluginModel*> m_modelInstances;
     QDeclarativeComponent* m_delegate;
     QVariant m_model;
-    static int m_counter;
+    static int m_global_counter;
+    int m_counter;
 
     DeclarativeDataPluginPrivate( DeclarativeDataPlugin* q );
 
@@ -55,12 +56,12 @@ public:
     void parseObject( QObject* object );
 };
 
-int DeclarativeDataPluginPrivate::m_counter = 0;
+int DeclarativeDataPluginPrivate::m_global_counter = 0;
 
 DeclarativeDataPluginPrivate::DeclarativeDataPluginPrivate( DeclarativeDataPlugin* parent ) :
-    q( parent ), m_planet( "earth"), m_isInitialized( false ), m_delegate( 0 )
+    q( parent ), m_planet( "earth"), m_isInitialized( false ), m_delegate( 0 ), m_counter( m_global_counter )
 {
-    ++m_counter;
+    ++m_global_counter;
 }
 
 void DeclarativeDataPluginPrivate::parseChunk( DeclarativeDataPluginItem *item, GeoDataCoordinates &coordinates, const QString &key, const QVariant &value )
