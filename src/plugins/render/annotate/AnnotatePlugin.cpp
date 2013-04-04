@@ -577,6 +577,7 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
         QAction* clearAnnotations = new QAction( this );
         clearAnnotations->setToolTip( tr("Clear all Annotations") );
         clearAnnotations->setIcon( QIcon( ":/icons/remove.png") );
+        connect( drawPolygon, SIGNAL(toggled(bool)), clearAnnotations, SLOT(setDisabled(bool)) );
         connect( clearAnnotations, SIGNAL(triggered()),
                  this, SLOT(clearAnnotations()) );
 
