@@ -14,8 +14,8 @@
 // and placemarks
 //
 
-#ifndef MARBLEANNOTATEPLUGIN_H
-#define MARBLEANNOTATEPLUGIN_H
+#ifndef MARBLE_ANNOTATEPLUGIN_H
+#define MARBLE_ANNOTATEPLUGIN_H
 
 #include "RenderPlugin.h"
 #include "SceneGraphicsItem.h"
@@ -29,12 +29,11 @@ class QNetworkReply;
 
 namespace Marble
 {
-
-    class MarbleWidget;
-    class PlacemarkTextAnnotation;
-    class GeoDataDocument;
-    class GeoDataLinearRing;
-    class GeoDataLineString;
+class MarbleWidget;
+class PlacemarkTextAnnotation;
+class GeoDataDocument;
+class GeoDataLinearRing;
+class GeoDataLineString;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -47,8 +46,8 @@ class AnnotatePlugin :  public RenderPlugin
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( AnnotatePlugin )
 
- public:
-    explicit AnnotatePlugin(const MarbleModel *model = 0);
+    public:
+        explicit AnnotatePlugin(const MarbleModel *model = 0);
     virtual ~AnnotatePlugin();
 
     QStringList backendTypes() const;
@@ -96,8 +95,8 @@ public slots:
     void setDrawingPolygon( bool );
     void setRemovingItems( bool );
 
-//    void receiveNetworkReply( QNetworkReply* );
-//    void downloadOsmFile();
+    //    void receiveNetworkReply( QNetworkReply* );
+    //    void downloadOsmFile();
 
     void clearAnnotations();
     void saveAnnotationFile();
@@ -107,7 +106,7 @@ protected:
     bool eventFilter(QObject* watched, QEvent* event);
 private:
     void setupActions(MarbleWidget* m);
-//    void readOsmFile( QIODevice* device, bool flyToFile );
+    //    void readOsmFile( QIODevice* device, bool flyToFile );
 
     bool    m_widgetInitialized;
     MarbleWidget* m_marbleWidget;
@@ -115,21 +114,21 @@ private:
     QList<QActionGroup*>    m_actions;
     QList<QActionGroup*>    m_toolbarActions;
 
-    GeoDataDocument *m_AnnotationDocument;
+    GeoDataDocument *m_annotationDocument;
     QList<SceneGraphicsItem*> m_graphicsItems;
 
     //used while creating new polygons
-    GeoDataPlacemark* m_tmp_placemark;
+    GeoDataPlacemark* m_polygon_placemark;
     SceneGraphicsItem *m_selectedItem;
 
     bool m_addingPlacemark;
     bool m_drawingPolygon;
     bool m_removingItem;
-//    QNetworkAccessManager* m_networkAccessManager;
-//    QErrorMessage m_errorMessage;
+    //    QNetworkAccessManager* m_networkAccessManager;
+    //    QErrorMessage m_errorMessage;
     bool m_isInitialized;
 };
 
 }
 
-#endif // MARBLEANNOTATEPLUGIN_H
+#endif // MARBLE_ANNOTATEPLUGIN_H
