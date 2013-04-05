@@ -509,6 +509,7 @@ void MarbleModel::clearPersistentTileCache()
                                      sourceDir,
                                      installMap,
                                      (role == "dem") ? "true" : "false" );
+            tileCreator->setTileFormat( texture->fileFormat().toLower() );
 
             QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
             tileCreatorDlg->setSummary( d->m_mapTheme->head()->name(),
