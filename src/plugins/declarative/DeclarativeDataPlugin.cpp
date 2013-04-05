@@ -164,6 +164,8 @@ Marble::RenderPlugin *DeclarativeDataPlugin::newInstance(const Marble::MarbleMod
     instance->d->m_delegate = d->m_delegate;
     instance->d->m_model = d->m_model;
     instance->d->m_counter = d->m_counter;
+    instance->setNumberOfItems( numberOfItems() );
+    instance->setFavoriteItemsOnly( isFavoriteItemsOnly() );
 
     DeclarativeDataPluginModel* dataModel = new DeclarativeDataPluginModel( marbleModel );
     dataModel->addItemsToList( d->m_items );
