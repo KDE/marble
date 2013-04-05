@@ -346,6 +346,7 @@ else (APPLE AND QTONLY)
     SunLocator.h
     ClipPainter.h
     GeoGraphicsScene.h
+    GeoDataTreeModel.h
     geodata/data/GeoDataAbstractView.h
     geodata/data/GeoDataAccuracy.h
     geodata/data/GeoDataColorStyle.h
