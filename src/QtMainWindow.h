@@ -23,6 +23,7 @@ class QAction;
 class QLabel;
 class QMenu;
 class QPrinter;
+class QProgressBar;
 
 namespace Marble
 {
@@ -119,6 +120,7 @@ private Q_SLOTS:
 #endif
     void  showStatusBar( bool );
     void  setupStatusBar();
+    void  setupDownloadProgressBar();
 
     // Help Menu
     void  enterWhatsThis();
@@ -148,6 +150,9 @@ private Q_SLOTS:
     void showGoToDialog();
 
     void showZoomLevel( bool show );
+
+    void downloadJobAdded();
+    void downloadJobRemoved();
 
 private:
     void setupZoomButtons();
@@ -215,6 +220,7 @@ private:
     QLabel      *m_distanceLabel;
     QLabel      *m_zoomLabel;
     QLabel      *m_clockLabel;
+    QProgressBar *m_downloadProgressBar;
     void updateStatusBar();
 
     //Bookmark Menu

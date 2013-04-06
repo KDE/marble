@@ -29,6 +29,7 @@
 #include <QtGui/QIcon>
 #include <QtGui/QMenuBar>
 #include <QtGui/QStatusBar>
+#include <QtGui/QProgressBar>
 #include <QtGui/QToolBar>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QFileDialog>
@@ -59,6 +60,7 @@
 #include "AbstractFloatItem.h"
 #include "MarbleModel.h"
 #include "MarbleClock.h"
+#include "HttpDownloadManager.h"
 #include "BookmarkManager.h"
 #include "NewBookmarkFolderDialog.h"
 #include "GeoDataDocument.h"
@@ -912,6 +914,8 @@ void MainWindow::setupStatusBar()
              this, SLOT( showZoomLevel( bool ) ) );
     statusBar()->addAction( toggleTileLevelAction );
 
+    setupDownloadProgressBar();
+
     m_positionLabel = new QLabel( );
     m_positionLabel->setIndent( 5 );
     QString templatePositionString =
@@ -957,6 +961,43 @@ void MainWindow::setupStatusBar()
               this, SLOT( showDateTime() ) );
 
     updateStatusBar();
+}
+
+void MainWindow::setupDownloadProgressBar()
+{
+    m_downloadProgressBar = new QProgressBar;
+    m_downloadProgressBar->setVisible( true );
+    statusBar()->addPermanentWidget( m_downloadProgressBar );
+
+    HttpDownloadManager * const downloadManager =
+        m_controlView->marbleModel()->downloadManager();
+    Q_ASSERT( downloadManager );
+    connect( downloadManager, SIGNAL( jobAdded() ), SLOT( downloadJobAdded() ) );
+    connect( downloadManager, SIGNAL( jobRemoved() ), SLOT( downloadJobRemoved() ) );
+}
+
+void MainWindow::downloadJobAdded(){
+    m_downloadProgressBar->setUpdatesEnabled( false );
+    if ( m_downloadProgressBar->value() < 0 ) {
+        m_downloadProgressBar->setMaximum( 1 );
+        m_downloadProgressBar->setValue( 0 );
+        m_downloadProgressBar->setVisible( true );
+    } else {
+        m_downloadProgressBar->setMaximum( m_downloadProgressBar->maximum() + 1 );
+    }
+
+    m_downloadProgressBar->setUpdatesEnabled( true );
+}
+
+void MainWindow::downloadJobRemoved(){
+    m_downloadProgressBar->setUpdatesEnabled( false );
+    m_downloadProgressBar->setValue( m_downloadProgressBar->value() + 1 );
+    if ( m_downloadProgressBar->value() == m_downloadProgressBar->maximum() ) {
+        m_downloadProgressBar->reset();
+        m_downloadProgressBar->setVisible( false );
+    }
+
+    m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
