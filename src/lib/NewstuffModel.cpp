@@ -246,8 +246,8 @@ void NewstuffModelPrivate::installMap()
         m_unpackProcess = 0;
     } else if ( m_currentFile->fileName().endsWith( QLatin1String( "tar.gz" ) ) && canExecute( "tar" ) ) {
         m_unpackProcess = new QProcess;
-        QObject::connect( m_unpackProcess, SIGNAL( finished( int ) ),
-                          m_parent, SLOT( contentsListed( int ) ) );
+        QObject::connect( m_unpackProcess, SIGNAL(finished(int)),
+                          m_parent, SLOT(contentsListed(int)) );
         QStringList arguments = QStringList() << "-t" << "-z" << "-f" << m_currentFile->fileName();
         m_unpackProcess->setWorkingDirectory( m_targetDirectory );
         m_unpackProcess->start( "tar", arguments );
@@ -371,8 +371,8 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     setTargetDirectory( MarbleDirs::localPath() + "/maps" );
     // no default registry file
 
-    connect( &d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-             this, SLOT( handleProviderData( QNetworkReply * ) ) );
+    connect( &d->m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
+             this, SLOT(handleProviderData(QNetworkReply*)) );
 
     QHash<int,QByteArray> roles = roleNames();
     roles[Name] = "name";
@@ -628,10 +628,10 @@ void NewstuffModel::retrieveData()
         const QVariant redirectionAttribute = d->m_currentReply->attribute( QNetworkRequest::RedirectionTargetAttribute );
         if ( !redirectionAttribute.isNull() ) {
             d->m_currentReply = d->m_networkAccessManager.get( QNetworkRequest( redirectionAttribute.toUrl() ) );
-            QObject::connect( d->m_currentReply, SIGNAL( readyRead() ), this, SLOT( retrieveData() ) );
-            QObject::connect( d->m_currentReply, SIGNAL( readChannelFinished() ), this, SLOT( retrieveData() ) );
-            QObject::connect( d->m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
-                              this, SLOT( updateProgress( qint64, qint64 ) ) );
+            QObject::connect( d->m_currentReply, SIGNAL(readyRead()), this, SLOT(retrieveData()) );
+            QObject::connect( d->m_currentReply, SIGNAL(readChannelFinished()), this, SLOT(retrieveData()) );
+            QObject::connect( d->m_currentReply, SIGNAL(downloadProgress(qint64,qint64)),
+                              this, SLOT(updateProgress(qint64,qint64)) );
         } else {
             d->m_currentFile->write( d->m_currentReply->readAll() );
             if ( d->m_currentReply->isFinished() ) {
@@ -735,10 +735,10 @@ void NewstuffModel::contentsListed( int exitStatus )
             d->saveRegistry();
         }
 
-        QObject::disconnect( d->m_unpackProcess, SIGNAL( finished( int ) ),
-                             this, SLOT( contentsListed( int ) ) );
-        QObject::connect( d->m_unpackProcess, SIGNAL( finished( int ) ),
-                          this, SLOT( mapInstalled( int ) ) );
+        QObject::disconnect( d->m_unpackProcess, SIGNAL(finished(int)),
+                             this, SLOT(contentsListed(int)) );
+        QObject::connect( d->m_unpackProcess, SIGNAL(finished(int)),
+                          this, SLOT(mapInstalled(int)) );
         QStringList arguments = QStringList() << "-x" << "-z" << "-f" << d->m_currentFile->fileName();
         d->m_unpackProcess->start( "tar", arguments );
     } else {
@@ -772,10 +772,10 @@ void NewstuffModelPrivate::processQueue()
         if ( m_currentFile->open() ) {
             QUrl const payload = m_items.at( m_currentAction.first ).m_payload;
             m_currentReply = m_networkAccessManager.get( QNetworkRequest( payload ) );
-            QObject::connect( m_currentReply, SIGNAL( readyRead() ), m_parent, SLOT( retrieveData() ) );
-            QObject::connect( m_currentReply, SIGNAL( readChannelFinished() ), m_parent, SLOT( retrieveData() ) );
-            QObject::connect( m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
-                              m_parent, SLOT( updateProgress( qint64, qint64 ) ) );
+            QObject::connect( m_currentReply, SIGNAL(readyRead()), m_parent, SLOT(retrieveData()) );
+            QObject::connect( m_currentReply, SIGNAL(readChannelFinished()), m_parent, SLOT(retrieveData()) );
+            QObject::connect( m_currentReply, SIGNAL(downloadProgress(qint64,qint64)),
+                              m_parent, SLOT(updateProgress(qint64,qint64)) );
             /** @todo: handle download errors */
         } else {
             mDebug() << "Failed to write to " << m_currentFile->fileName();
@@ -783,8 +783,8 @@ void NewstuffModelPrivate::processQueue()
     } else {
         // Run in a separate thread to keep the ui responsive
         QFutureWatcher<void>* watcher = new QFutureWatcher<void>( m_parent );
-        QObject::connect( watcher, SIGNAL( finished() ), m_parent, SLOT( mapUninstalled() ) );
-        QObject::connect( watcher, SIGNAL( finished() ), watcher, SLOT( deleteLater() ) );
+        QObject::connect( watcher, SIGNAL(finished()), m_parent, SLOT(mapUninstalled()) );
+        QObject::connect( watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()) );
 
         QFuture<void> future = QtConcurrent::run( this, &NewstuffModelPrivate::uninstall, m_currentAction.first );
         watcher->setFuture( future );

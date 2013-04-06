@@ -28,9 +28,9 @@ SearchInputWidget::SearchInputWidget( QWidget *parent ) :
     Q_ASSERT( !decorator.isNull() );
     setDecorator( decorator );
 
-    connect( this, SIGNAL( clearButtonClicked() ), this, SLOT( search() ) );
-    connect( this, SIGNAL( returnPressed() ), this, SLOT( search() ) );
-    connect( this, SIGNAL( decoratorButtonClicked() ), this, SLOT( showDropDownMenu() ) );
+    connect( this, SIGNAL(clearButtonClicked()), this, SLOT(search()) );
+    connect( this, SIGNAL(returnPressed()), this, SLOT(search()) );
+    connect( this, SIGNAL(decoratorButtonClicked()), this, SLOT(showDropDownMenu()) );
 
     m_sortFilter.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
     m_sortFilter.sort( 0, Qt::AscendingOrder );
@@ -40,7 +40,7 @@ SearchInputWidget::SearchInputWidget( QWidget *parent ) :
     m_completer->setCaseSensitivity( Qt::CaseInsensitive );
     m_completer->setModel( &m_sortFilter );
     setCompleter( m_completer );
-    connect( m_completer, SIGNAL( activated( QModelIndex ) ), this, SLOT( centerOnSearchSuggestion( QModelIndex ) ) );
+    connect( m_completer, SIGNAL(activated(QModelIndex)), this, SLOT(centerOnSearchSuggestion(QModelIndex)) );
 }
 
 void SearchInputWidget::setCompletionModel( QAbstractItemModel *completionModel )
@@ -73,10 +73,10 @@ void SearchInputWidget::centerOnSearchSuggestion(const QModelIndex &index )
 void SearchInputWidget::showDropDownMenu()
 {
     QMenu menu( this );
-    QAction* globalSearch = menu.addAction( tr( "Global Search" ), this, SLOT( setGlobalSearch() ) );
+    QAction* globalSearch = menu.addAction( tr( "Global Search" ), this, SLOT(setGlobalSearch()) );
     globalSearch->setCheckable( true );
     globalSearch->setChecked( !m_areaSearch );
-    QAction* areaSearch = menu.addAction( tr( "Area Search" ), this, SLOT( setAreaSearch() ) );
+    QAction* areaSearch = menu.addAction( tr( "Area Search" ), this, SLOT(setAreaSearch()) );
     areaSearch->setCheckable( true );
     areaSearch->setChecked( m_areaSearch );
     menu.exec( mapToGlobal( QPoint( 0, size().height() ) ) );

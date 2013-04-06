@@ -99,7 +99,7 @@ HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
 {
     d->m_requeueTimer = new QTimer( this );
     d->m_requeueTimer->setInterval( requeueTime );
-    connect( d->m_requeueTimer, SIGNAL( timeout() ), this, SLOT( requeue() ) );
+    connect( d->m_requeueTimer, SIGNAL(timeout()), this, SLOT(requeue()) );
     connectDefaultQueueSets();
 }
 
@@ -187,15 +187,15 @@ void HttpDownloadManager::connectDefaultQueueSets()
 
 void HttpDownloadManager::connectQueueSet( DownloadQueueSet * queueSet )
 {
-    connect( queueSet, SIGNAL( jobFinished( QByteArray, QString, QString )),
-             SLOT( finishJob( QByteArray, QString, QString )));
-    connect( queueSet, SIGNAL( jobRetry() ), SLOT( startRetryTimer() ));
-    connect( queueSet, SIGNAL( jobRedirected( QUrl, QString, QString, DownloadUsage )),
-             SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
+    connect( queueSet, SIGNAL(jobFinished(QByteArray,QString,QString)),
+             SLOT(finishJob(QByteArray,QString,QString)));
+    connect( queueSet, SIGNAL(jobRetry()), SLOT(startRetryTimer()));
+    connect( queueSet, SIGNAL(jobRedirected(QUrl,QString,QString,DownloadUsage)),
+             SLOT(addJob(QUrl,QString,QString,DownloadUsage)));
     // relay jobAdded/jobRemoved signals (interesting for progress bar)
-    connect( queueSet, SIGNAL( jobAdded() ), SIGNAL( jobAdded() ));
-    connect( queueSet, SIGNAL( jobRemoved() ), SIGNAL( jobRemoved() ));
-    connect( queueSet, SIGNAL( progressChanged( int, int ) ), SIGNAL( progressChanged( int, int ) ) );
+    connect( queueSet, SIGNAL(jobAdded()), SIGNAL(jobAdded()));
+    connect( queueSet, SIGNAL(jobRemoved()), SIGNAL(jobRemoved()));
+    connect( queueSet, SIGNAL(progressChanged(int,int)), SIGNAL(progressChanged(int,int)) );
 }
 
 bool HttpDownloadManager::hasDownloadPolicy( const DownloadPolicy& policy ) const

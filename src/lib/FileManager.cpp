@@ -109,8 +109,8 @@ void FileManager::addData( const QString &name, const QString &data, DocumentRol
 
 void FileManagerPrivate::appendLoader( FileLoader *loader )
 {
-    QObject::connect( loader, SIGNAL( loaderFinished( FileLoader* ) ),
-             q, SLOT( cleanupLoader( FileLoader* ) ) );
+    QObject::connect( loader, SIGNAL(loaderFinished(FileLoader*)),
+             q, SLOT(cleanupLoader(FileLoader*)) );
 
     m_loaderList.append( loader );
     loader->start();

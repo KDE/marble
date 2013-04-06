@@ -109,10 +109,10 @@ MarblePhysics::MarblePhysics( MarbleWidget *widget )
     : QObject( widget ),
       d( new MarblePhysicsPrivate( widget ) )
 {
-    connect( &d->m_timeline, SIGNAL( valueChanged( qreal ) ),
-             this, SLOT( updateProgress( qreal ) ) );
-    connect( &d->m_timeline, SIGNAL( finished() ),
-             this, SLOT( startStillMode() ) );
+    connect( &d->m_timeline, SIGNAL(valueChanged(qreal)),
+             this, SLOT(updateProgress(qreal)) );
+    connect( &d->m_timeline, SIGNAL(finished()),
+             this, SLOT(startStillMode()) );
 }
 
 MarblePhysics::~MarblePhysics()

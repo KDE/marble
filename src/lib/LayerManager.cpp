@@ -86,7 +86,7 @@ LayerManager::LayerManager( const MarbleModel* model, QObject *parent )
       d( new Private( model, this ) )
 {
     d->addPlugins();
-    connect( model->pluginManager(), SIGNAL( renderPluginsChanged() ), this, SLOT( addPlugins() ) );
+    connect( model->pluginManager(), SIGNAL(renderPluginsChanged()), this, SLOT(addPlugins()) );
 }
 
 LayerManager::~LayerManager()
@@ -215,12 +215,12 @@ void LayerManager::Private::addPlugins()
         Q_ASSERT( renderPlugin && "Plugin returned null when requesting a new instance." );
         m_renderPlugins.append( renderPlugin );
 
-        QObject::connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
-                 q, SIGNAL( pluginSettingsChanged() ) );
-        QObject::connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
-                 q, SIGNAL( repaintNeeded( QRegion ) ) );
-        QObject::connect( renderPlugin, SIGNAL( visibilityChanged( bool, const QString & ) ),
-                 q, SLOT( updateVisibility( bool, const QString & ) ) );
+        QObject::connect( renderPlugin, SIGNAL(settingsChanged(QString)),
+                 q, SIGNAL(pluginSettingsChanged()) );
+        QObject::connect( renderPlugin, SIGNAL(repaintNeeded(QRegion)),
+                 q, SIGNAL(repaintNeeded(QRegion)) );
+        QObject::connect( renderPlugin, SIGNAL(visibilityChanged(bool,QString)),
+                 q, SLOT(updateVisibility(bool,QString)) );
 
         // get float items ...
         AbstractFloatItem * const floatItem =

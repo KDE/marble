@@ -81,8 +81,8 @@ MarbleClock::MarbleClock( QObject* parent )
     : QObject( parent ), d( new MarbleClockPrivate( this ) )
 
 {
-    connect( &d->m_timer, SIGNAL( timeout() ),
-             this,    SLOT( timerTimeout() ) );
+    connect( &d->m_timer, SIGNAL(timeout()),
+             this,    SLOT(timerTimeout()) );
     d->timerTimeout();
 }
 

@@ -37,7 +37,7 @@ void MapViewWidgetTest::initTestCase()
 void MapViewWidgetTest::setMapThemeId()
 {
     MapViewWidget widget;
-    QSignalSpy spy( &widget, SIGNAL( mapThemeIdChanged( const QString & ) ) );
+    QSignalSpy spy( &widget, SIGNAL(mapThemeIdChanged(QString)) );
 
     widget.setMapThemeId( "" );
 
@@ -49,7 +49,7 @@ void MapViewWidgetTest::setMapThemeId()
 void MapViewWidgetTest::setProjection()
 {
     MapViewWidget widget;
-    QSignalSpy spy( &widget, SIGNAL( projectionChanged( Projection ) ) );
+    QSignalSpy spy( &widget, SIGNAL(projectionChanged(Projection)) );
 
     widget.setProjection( Spherical );
 

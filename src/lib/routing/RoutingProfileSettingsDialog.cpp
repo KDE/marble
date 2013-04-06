@@ -55,13 +55,13 @@ RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( const PluginManager 
 
     m_servicesModel = new QStandardItemModel;
     m_ui->services->setModel( m_servicesModel );
-    connect ( m_ui->services->selectionModel(), SIGNAL( currentChanged( QModelIndex, QModelIndex ) ), SLOT( updateConfigWidget() ), Qt::QueuedConnection );
-    connect ( m_servicesModel, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ), SLOT( updateConfigWidget() ) );
+    connect ( m_ui->services->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), SLOT(updateConfigWidget()), Qt::QueuedConnection );
+    connect ( m_servicesModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SLOT(updateConfigWidget()) );
 
-    connect ( m_ui->buttonBox, SIGNAL( accepted() ), this, SLOT( accept() ) );
-    connect ( m_ui->buttonBox, SIGNAL( rejected() ), this, SLOT( reject() ) );
+    connect ( m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()) );
+    connect ( m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()) );
 
-    connect( m_ui->configureButton, SIGNAL( clicked() ), this, SLOT( openConfigDialog() ) );
+    connect( m_ui->configureButton, SIGNAL(clicked()), this, SLOT(openConfigDialog()) );
 }
 
 RoutingProfileSettingsDialog::~RoutingProfileSettingsDialog()

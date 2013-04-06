@@ -86,10 +86,10 @@ MarblePluginSettingsWidget::MarblePluginSettingsWidget( QWidget *parent )
 
     d->m_itemDelegate = new PluginItemDelegate( d->m_pluginListView, this );
     d->m_pluginListView->setItemDelegate( d->m_itemDelegate );
-    connect( d->m_itemDelegate, SIGNAL( aboutPluginClicked( QModelIndex ) ),
-             this,              SLOT( showPluginAboutDialog( QModelIndex ) ) );
-    connect( d->m_itemDelegate, SIGNAL( configPluginClicked( QModelIndex ) ),
-             this,              SLOT( showPluginConfigDialog( QModelIndex ) ) );
+    connect( d->m_itemDelegate, SIGNAL(aboutPluginClicked(QModelIndex)),
+             this,              SLOT(showPluginAboutDialog(QModelIndex)) );
+    connect( d->m_itemDelegate, SIGNAL(configPluginClicked(QModelIndex)),
+             this,              SLOT(showPluginConfigDialog(QModelIndex)) );
 }
 
 void MarblePluginSettingsWidget::setAboutIcon( const QIcon& icon )
@@ -117,8 +117,8 @@ void MarblePluginSettingsWidget::setModel( RenderPluginModel* pluginModel )
     d->m_pluginListView->setModel( pluginModel );
 
     if ( !d->m_pluginModel.isNull() ) {
-        connect( d->m_pluginModel.data(), SIGNAL( itemChanged( QStandardItem * ) ),
-                 this,                    SIGNAL( pluginListViewClicked() ) );
+        connect( d->m_pluginModel.data(), SIGNAL(itemChanged(QStandardItem*)),
+                 this,                    SIGNAL(pluginListViewClicked()) );
     }
 }
 

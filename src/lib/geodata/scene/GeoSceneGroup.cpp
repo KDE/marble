@@ -105,8 +105,8 @@ void GeoSceneGroup::addProperty( GeoSceneProperty* property )
         m_properties.append( property );
 
         // Establish connection to the outside, e.g. the LegendBrowser
-        connect ( property, SIGNAL( valueChanged( QString, bool ) ), 
-                            SIGNAL( valueChanged( QString, bool ) ) );
+        connect ( property, SIGNAL(valueChanged(QString,bool)), 
+                            SIGNAL(valueChanged(QString,bool)) );
         emit valueChanged( property->name(), property->value() );
     }
 }

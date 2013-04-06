@@ -58,15 +58,15 @@ RoutingProfilesWidget::RoutingProfilesWidget( MarbleModel *marbleModel )
     d->m_ui.setupUi( this );
     d->m_ui.profilesList->setModel( d->m_profilesModel );
 
-    connect( d->m_ui.addButton, SIGNAL( clicked( bool ) ), SLOT( add() ) );
-    connect( d->m_ui.removeButton, SIGNAL( clicked( bool ) ), SLOT( remove( ) ) );
-    connect( d->m_ui.configureButton, SIGNAL( clicked( bool ) ), SLOT( configure() ) );
-    connect( d->m_ui.moveUpButton, SIGNAL( clicked( bool ) ), SLOT( moveUp() ) );
-    connect( d->m_ui.moveDownButton, SIGNAL( clicked( bool ) ), SLOT( moveDown() ) );
-    connect( d->m_ui.profilesList->selectionModel(), SIGNAL( currentRowChanged(QModelIndex,QModelIndex) ), SLOT( updateButtons() ), Qt::QueuedConnection );
-    connect( d->m_ui.profilesList, SIGNAL( doubleClicked( QModelIndex ) ), SLOT( configure() ) );
+    connect( d->m_ui.addButton, SIGNAL(clicked(bool)), SLOT(add()) );
+    connect( d->m_ui.removeButton, SIGNAL(clicked(bool)), SLOT(remove()) );
+    connect( d->m_ui.configureButton, SIGNAL(clicked(bool)), SLOT(configure()) );
+    connect( d->m_ui.moveUpButton, SIGNAL(clicked(bool)), SLOT(moveUp()) );
+    connect( d->m_ui.moveDownButton, SIGNAL(clicked(bool)), SLOT(moveDown()) );
+    connect( d->m_ui.profilesList->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), SLOT(updateButtons()), Qt::QueuedConnection );
+    connect( d->m_ui.profilesList, SIGNAL(doubleClicked(QModelIndex)), SLOT(configure()) );
 
-    connect( d->m_profilesModel, SIGNAL( layoutChanged() ), SLOT( updateButtons() ) );
+    connect( d->m_profilesModel, SIGNAL(layoutChanged()), SLOT(updateButtons()) );
 }
 
 RoutingProfilesWidget::~RoutingProfilesWidget()

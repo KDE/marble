@@ -241,12 +241,12 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
 RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QObject( parent ),
         d( new RoutingManagerPrivate( marbleModel, this, this ) )
 {
-    connect( &d->m_runnerManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
-             this, SLOT( addRoute( GeoDataDocument* ) ) );
-    connect( &d->m_alternativeRoutesModel, SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
-             &d->m_routingModel, SLOT( setCurrentRoute( GeoDataDocument* ) ) );
-    connect( &d->m_routingModel, SIGNAL( deviatedFromRoute( bool ) ),
-             this, SLOT( recalculateRoute( bool ) ) );
+    connect( &d->m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument*)),
+             this, SLOT(addRoute(GeoDataDocument*)) );
+    connect( &d->m_alternativeRoutesModel, SIGNAL(currentRouteChanged(GeoDataDocument*)),
+             &d->m_routingModel, SLOT(setCurrentRoute(GeoDataDocument*)) );
+    connect( &d->m_routingModel, SIGNAL(deviatedFromRoute(bool)),
+             this, SLOT(recalculateRoute(bool)) );
 }
 
 RoutingManager::~RoutingManager()

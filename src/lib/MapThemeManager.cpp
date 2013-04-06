@@ -120,10 +120,10 @@ MapThemeManager::MapThemeManager( QObject *parent )
       d( new Private( this ) )
 {
     d->watchPaths();
-    connect( &d->m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
-             this, SLOT( directoryChanged( const QString& )));
-    connect( &d->m_fileSystemWatcher, SIGNAL( fileChanged( const QString& )),
-             this, SLOT( fileChanged( const QString& )));
+    connect( &d->m_fileSystemWatcher, SIGNAL(directoryChanged(QString)),
+             this, SLOT(directoryChanged(QString)));
+    connect( &d->m_fileSystemWatcher, SIGNAL(fileChanged(QString)),
+             this, SLOT(fileChanged(QString)));
 }
 
 MapThemeManager::~MapThemeManager()

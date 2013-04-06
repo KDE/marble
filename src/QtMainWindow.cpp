@@ -129,12 +129,12 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
 
     // Initializing config dialog
     m_configDialog = new QtMarbleConfigDialog( m_controlView->marbleWidget(), this );
-    connect( m_configDialog, SIGNAL( settingsChanged() ),
-             this, SLOT( updateSettings() ) );
-    connect( m_configDialog, SIGNAL( clearVolatileCacheClicked() ),
-             m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
-    connect( m_configDialog, SIGNAL( clearPersistentCacheClicked() ),
-             m_controlView->marbleModel(), SLOT( clearPersistentTileCache() ) );
+    connect( m_configDialog, SIGNAL(settingsChanged()),
+             this, SLOT(updateSettings()) );
+    connect( m_configDialog, SIGNAL(clearVolatileCacheClicked()),
+             m_controlView->marbleWidget(), SLOT(clearVolatileTileCache()) );
+    connect( m_configDialog, SIGNAL(clearPersistentCacheClicked()),
+             m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
 
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
@@ -151,9 +151,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         createDockWidgets();
     }
 
-    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
-             this, SLOT( updateMapEditButtonVisibility( QString ) ) );
-    connect( m_controlView, SIGNAL( showMapWizard() ), this, SLOT( showMapWizard() ) );
+    connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
+             this, SLOT(updateMapEditButtonVisibility(QString)) );
+    connect( m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()) );
 
     setUpdatesEnabled( true );
 
@@ -179,8 +179,8 @@ void MainWindow::createActions()
      m_openAct = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open..."), this );
      m_openAct->setShortcut( tr( "Ctrl+O" ) );
      m_openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
-     connect( m_openAct, SIGNAL( triggered() ),
-              this, SLOT( openFile() ) );
+     connect( m_openAct, SIGNAL(triggered()),
+              this, SLOT(openFile()) );
 
      m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("&Download Maps..."), this);
      connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapSite()));
@@ -193,7 +193,7 @@ void MainWindow::createActions()
      // Action: Download Region
      m_downloadRegionAction = new QAction( tr( "Download &Region..." ), this );
      m_downloadRegionAction->setStatusTip( tr( "Download a map region in different zoom levels for offline usage" ) );
-     connect( m_downloadRegionAction, SIGNAL( triggered() ), SLOT( showDownloadRegionDialog() ) );
+     connect( m_downloadRegionAction, SIGNAL(triggered()), SLOT(showDownloadRegionDialog()) );
 
      m_printAct = new QAction( QIcon(":/icons/document-print.png"), tr("&Print..."), this);
      m_printAct->setShortcut(tr("Ctrl+P"));
@@ -218,7 +218,7 @@ void MainWindow::createActions()
      m_osmEditAction->setShortcut(tr( "Ctrl+E" ) );
      m_osmEditAction->setStatusTip(tr( "Edit the current map region in an external editor" ) );
      updateMapEditButtonVisibility( m_controlView->marbleWidget()->mapThemeId() );
-     connect( m_osmEditAction, SIGNAL( triggered() ), m_controlView, SLOT( launchExternalMapEditor() ) );
+     connect( m_osmEditAction, SIGNAL(triggered()), m_controlView, SLOT(launchExternalMapEditor()) );
 
      m_configDialogAct = new QAction( QIcon(":/icons/settings-configure.png"),tr("&Configure Marble"), this);
      m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
@@ -232,35 +232,35 @@ void MainWindow::createActions()
      m_fullScreenAct->setShortcut(tr("Ctrl+Shift+F"));
      m_fullScreenAct->setCheckable( true );
      m_fullScreenAct->setStatusTip(tr("Full Screen Mode"));
-     connect(m_fullScreenAct, SIGNAL(triggered( bool )), this, SLOT( showFullScreen( bool )));
+     connect(m_fullScreenAct, SIGNAL(triggered(bool)), this, SLOT(showFullScreen(bool)));
 
      m_statusBarAct = new QAction( tr("&Show Status Bar"), this);
      m_statusBarAct->setCheckable( true );
      m_statusBarAct->setStatusTip(tr("Show Status Bar"));
-     connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
+     connect(m_statusBarAct, SIGNAL(triggered(bool)), this, SLOT(showStatusBar(bool)));
 
 
      m_lockFloatItemsAct = new QAction( QIcon(":/icons/unlock.png"), tr("Lock Position"),this);
      m_lockFloatItemsAct->setCheckable( true );
      m_lockFloatItemsAct->setStatusTip(tr("Lock Position of Floating Items"));
-     connect(m_lockFloatItemsAct, SIGNAL(triggered( bool )), this, SLOT( lockPosition( bool )));
+     connect(m_lockFloatItemsAct, SIGNAL(triggered(bool)), this, SLOT(lockPosition(bool)));
 
      m_showCloudsAct = new QAction( QIcon(":/icons/clouds.png"), tr("&Clouds"), this);
      m_showCloudsAct->setCheckable( true );
      m_showCloudsAct->setStatusTip(tr("Show Real Time Cloud Cover"));
-     connect(m_showCloudsAct, SIGNAL(triggered( bool )), this, SLOT( showClouds( bool )));
+     connect(m_showCloudsAct, SIGNAL(triggered(bool)), this, SLOT(showClouds(bool)));
 
      m_workOfflineAct = new QAction( QIcon(":/icons/user-offline.png"), tr("Work Off&line"), this);
      m_workOfflineAct->setCheckable( true );
-     connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
+     connect(m_workOfflineAct, SIGNAL(triggered(bool)), this, SLOT(workOffline(bool)));
 
      m_controlTimeAct = new QAction( QIcon(":/icons/clock.png"), tr( "&Time Control..." ), this );
      m_controlTimeAct->setStatusTip( tr( "Configure Time Control " ) );
-     connect( m_controlTimeAct, SIGNAL( triggered() ), this, SLOT( controlTime() ) );
+     connect( m_controlTimeAct, SIGNAL(triggered()), this, SLOT(controlTime()) );
 
      m_controlSunAct = new QAction( tr( "S&un Control..." ), this );
      m_controlSunAct->setStatusTip( tr( "Configure Sun Control" ) );
-     connect( m_controlSunAct, SIGNAL( triggered() ), this, SLOT( controlSun() ) );
+     connect( m_controlSunAct, SIGNAL(triggered()), this, SLOT(controlSun()) );
 
      m_reloadAct = new QAction( QIcon(":/icons/view-refresh.png"), tr("&Redisplay"), this);
      m_reloadAct->setShortcut(tr("F5"));
@@ -289,25 +289,25 @@ void MainWindow::createActions()
      m_addBookmarkAct = new QAction( QIcon(":/icons/bookmark-new.png"), tr("&Add Bookmark"),this);
      m_addBookmarkAct->setShortcut(tr("Ctrl+B"));
      m_addBookmarkAct->setStatusTip(tr("Add Bookmark"));
-     connect( m_addBookmarkAct, SIGNAL( triggered() ), this, SLOT( openEditBookmarkDialog() ) );
+     connect( m_addBookmarkAct, SIGNAL(triggered()), this, SLOT(openEditBookmarkDialog()) );
 
      m_setHomeAct = new QAction( QIcon(":/icons/go-home.png"), tr( "&Set Home Location" ),this);
      m_setHomeAct->setStatusTip( tr( "&Set Home Location" ) );
-     connect( m_setHomeAct, SIGNAL( triggered() ), this, SLOT( setHome() ) );
+     connect( m_setHomeAct, SIGNAL(triggered()), this, SLOT(setHome()) );
 
      m_toggleBookmarkDisplayAct = new QAction(tr( "Show &Bookmarks" ), this);
      m_toggleBookmarkDisplayAct->setStatusTip( tr( "Toggle display of Bookmarks" ) );
      m_toggleBookmarkDisplayAct->setCheckable( true );
-     connect( m_toggleBookmarkDisplayAct, SIGNAL( triggered( bool ) ), this, SLOT( showBookmarks( bool ) ) );
+     connect( m_toggleBookmarkDisplayAct, SIGNAL(triggered(bool)), this, SLOT(showBookmarks(bool)) );
 
      m_manageBookmarksAct = new QAction( QIcon( ":/icons/bookmarks-organize.png" ), tr( "&Manage Bookmarks" ), this);
      m_manageBookmarksAct->setStatusTip( tr( "Manage Bookmarks" ) );
-     connect( m_manageBookmarksAct, SIGNAL( triggered() ), this, SLOT( manageBookmarks() ) );
+     connect( m_manageBookmarksAct, SIGNAL(triggered()), this, SLOT(manageBookmarks()) );
      
      // Map Wizard action
      m_mapWizardAct = new QAction( QIcon( ":/icons/create-new-map.png" ), tr("&Create a New Map..."), this );
      m_mapWizardAct->setStatusTip( tr( "A wizard guides you through the creation of your own map theme." ) );
-     connect( m_mapWizardAct, SIGNAL( triggered() ), SLOT( showMapWizard() ) );
+     connect( m_mapWizardAct, SIGNAL(triggered()), SLOT(showMapWizard()) );
 }
 
 void MainWindow::createMenus()
@@ -321,21 +321,21 @@ void MainWindow::createMenus()
         menuBar()->addAction( m_downloadRegionAction );
 
         m_showMapViewDialogAction = menuBar()->addAction( tr( "Map View" ) );
-        connect( m_showMapViewDialogAction, SIGNAL( triggered( bool ) ),
-                 this, SLOT( showMapViewDialog() ) );
+        connect( m_showMapViewDialogAction, SIGNAL(triggered(bool)),
+                 this, SLOT(showMapViewDialog()) );
         m_toggleLegendTabAction = menuBar()->addAction( tr( "Legend" ) );
         m_toggleLegendTabAction->setCheckable( true );
-        connect( m_toggleLegendTabAction, SIGNAL( triggered( bool ) ),
-                 this, SLOT( showLegendTab( bool ) ) );
+        connect( m_toggleLegendTabAction, SIGNAL(triggered(bool)),
+                 this, SLOT(showLegendTab(bool)) );
         m_toggleRoutingTabAction = menuBar()->addAction( tr( "Routing" ) );
-        connect( m_toggleRoutingTabAction, SIGNAL( triggered( bool ) ),
-                 this, SLOT( showRoutingDialog() ) );
+        connect( m_toggleRoutingTabAction, SIGNAL(triggered(bool)),
+                 this, SLOT(showRoutingDialog()) );
         m_showTrackingDialogAction = menuBar()->addAction( tr( "Tracking" ) );
-        connect( m_showTrackingDialogAction, SIGNAL( triggered()),
-                 this, SLOT( showTrackingDialog()) );
+        connect( m_showTrackingDialogAction, SIGNAL(triggered()),
+                 this, SLOT(showTrackingDialog()) );
         QAction *goToAction = menuBar()->addAction( tr( "&Go To...") );
-        connect( goToAction, SIGNAL( triggered() ),
-                 this, SLOT( showGoToDialog() ) );
+        connect( goToAction, SIGNAL(triggered()),
+                 this, SLOT(showGoToDialog()) );
 
         setupZoomButtons();
 
@@ -370,7 +370,7 @@ void MainWindow::createMenus()
 
     m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
     createBookmarkMenu();
-    connect( m_bookmarkMenu, SIGNAL( aboutToShow() ), this, SLOT( createBookmarkMenu() ) );
+    connect( m_bookmarkMenu, SIGNAL(aboutToShow()), this, SLOT(createBookmarkMenu()) );
 
     m_settingsMenu = menuBar()->addMenu(tr("&Settings"));
     m_settingsMenu->addAction(m_statusBarAct);
@@ -391,8 +391,8 @@ void MainWindow::createMenus()
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const listEnd = pluginList.constEnd();
     for (; it != listEnd; ++it ) {
-        connect( (*it), SIGNAL( actionGroupsChanged() ),
-                 this, SLOT( createPluginMenus() ) );
+        connect( (*it), SIGNAL(actionGroupsChanged()),
+                 this, SLOT(createPluginMenus()) );
     }
 }
 
@@ -483,7 +483,7 @@ void MainWindow::createBookmarkMenu()
     m_bookmarkMenu->addSeparator();
 
     m_bookmarkMenu->addAction( QIcon( ":/icons/go-home.png" ), "&Home",
-                               m_controlView->marbleWidget(), SLOT( goHome() ) );
+                               m_controlView->marbleWidget(), SLOT(goHome()) );
     createFolderList( m_bookmarkMenu, m_controlView->marbleModel()->bookmarkManager()->document() );
 }
 
@@ -498,14 +498,14 @@ void MainWindow::createFolderList( QMenu *bookmarksListMenu, const GeoDataContai
         foreach ( const GeoDataFolder *folder, folders ) {
             QMenu *subMenu = bookmarksListMenu->addMenu( QIcon( ":/icons/folder-bookmark.png" ), folder->name() );
             createFolderList( subMenu, folder );
-            connect( subMenu, SIGNAL( triggered ( QAction *) ),
-                                      this, SLOT( lookAtBookmark( QAction *) ) );
+            connect( subMenu, SIGNAL(triggered(QAction*)),
+                                      this, SLOT(lookAtBookmark(QAction*)) );
         }
     }
 
     createBookmarksListMenu( bookmarksListMenu, container );
-    connect( bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
-                              this, SLOT( lookAtBookmark( QAction *) ) );
+    connect( bookmarksListMenu, SIGNAL(triggered(QAction*)),
+                              this, SLOT(lookAtBookmark(QAction*)) );
 }
 
 
@@ -767,8 +767,8 @@ void MainWindow::controlSun()
 {
     if (!m_sunControlDialog) {
         m_sunControlDialog = new SunControlWidget( m_controlView->marbleWidget(), this );
-        connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
-                 this,               SLOT ( showSun( bool ) ) );
+        connect( m_sunControlDialog, SIGNAL(showSun(bool)),
+                 this,               SLOT (showSun(bool)) );
     }
 
      m_sunControlDialog->show();
@@ -910,8 +910,8 @@ void MainWindow::setupStatusBar()
     QAction* toggleTileLevelAction = new QAction( "Show zoom level", statusBar() );
     toggleTileLevelAction->setCheckable( true );
     toggleTileLevelAction->setChecked( false );
-    connect( toggleTileLevelAction, SIGNAL( triggered( bool ) ),
-             this, SLOT( showZoomLevel( bool ) ) );
+    connect( toggleTileLevelAction, SIGNAL(triggered(bool)),
+             this, SLOT(showZoomLevel(bool)) );
     statusBar()->addAction( toggleTileLevelAction );
 
     setupDownloadProgressBar();
@@ -951,14 +951,14 @@ void MainWindow::setupStatusBar()
     m_clockLabel->setFixedWidth( maxDateTimeWidth );
     statusBar()->addPermanentWidget ( m_clockLabel );
 
-    connect( marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
-              this, SLOT( showPosition( QString ) ) );
-    connect( marbleWidget(), SIGNAL( distanceChanged( QString ) ),
-              this, SLOT( showDistance( QString ) ) );
-    connect( marbleWidget(), SIGNAL( tileLevelChanged( int ) ),
-            this, SLOT( showZoom( int ) ) );
-    connect( m_controlView->marbleModel()->clock(), SIGNAL( timeChanged() ),
-              this, SLOT( showDateTime() ) );
+    connect( marbleWidget(), SIGNAL(mouseMoveGeoPosition(QString)),
+              this, SLOT(showPosition(QString)) );
+    connect( marbleWidget(), SIGNAL(distanceChanged(QString)),
+              this, SLOT(showDistance(QString)) );
+    connect( marbleWidget(), SIGNAL(tileLevelChanged(int)),
+            this, SLOT(showZoom(int)) );
+    connect( m_controlView->marbleModel()->clock(), SIGNAL(timeChanged()),
+              this, SLOT(showDateTime()) );
 
     updateStatusBar();
 }
@@ -972,8 +972,8 @@ void MainWindow::setupDownloadProgressBar()
     HttpDownloadManager * const downloadManager =
         m_controlView->marbleModel()->downloadManager();
     Q_ASSERT( downloadManager );
-    connect( downloadManager, SIGNAL( jobAdded() ), SLOT( downloadJobAdded() ) );
-    connect( downloadManager, SIGNAL( jobRemoved() ), SLOT( downloadJobRemoved() ) );
+    connect( downloadManager, SIGNAL(jobAdded()), SLOT(downloadJobAdded()) );
+    connect( downloadManager, SIGNAL(jobRemoved()), SLOT(downloadJobRemoved()) );
 }
 
 void MainWindow::downloadJobAdded(){
@@ -1419,11 +1419,11 @@ void MainWindow::showDownloadRegionDialog()
         // it might be tempting to move the connects to DownloadRegionDialog's "accepted" and
         // "applied" signals, be aware that the "hidden" signal might be come before the "accepted"
         // signal, leading to a too early disconnect.
-        connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
-        connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
-        connect( m_downloadRegionDialog, SIGNAL( shown() ), SLOT( connectDownloadRegionDialog() ));
-        connect( m_downloadRegionDialog, SIGNAL( hidden() ),
-                 SLOT( disconnectDownloadRegionDialog() ));
+        connect( m_downloadRegionDialog, SIGNAL(accepted()), SLOT(downloadRegion()));
+        connect( m_downloadRegionDialog, SIGNAL(applied()), SLOT(downloadRegion()));
+        connect( m_downloadRegionDialog, SIGNAL(shown()), SLOT(connectDownloadRegionDialog()));
+        connect( m_downloadRegionDialog, SIGNAL(hidden()),
+                 SLOT(disconnectDownloadRegionDialog()));
     }
     // FIXME: get allowed range from current map theme
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 16 );
@@ -1441,19 +1441,19 @@ void MainWindow::showDownloadRegionDialog()
 // connect to expensive slots, only needed when the non modal dialog is show
 void MainWindow::connectDownloadRegionDialog()
 {
-    connect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
-             m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
-    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
-             m_downloadRegionDialog, SLOT( updateTextureLayer() ));
+    connect( m_controlView->marbleWidget(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+             m_downloadRegionDialog, SLOT(setVisibleLatLonAltBox(GeoDataLatLonAltBox)));
+    connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
+             m_downloadRegionDialog, SLOT(updateTextureLayer()));
 }
 
 // disconnect from expensive slots, not needed when dialog is hidden
 void MainWindow::disconnectDownloadRegionDialog()
 {
-    disconnect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
-                m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
-    disconnect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
-                m_downloadRegionDialog, SLOT( updateTextureLayer() ));
+    disconnect( m_controlView->marbleWidget(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+                m_downloadRegionDialog, SLOT(setVisibleLatLonAltBox(GeoDataLatLonAltBox)));
+    disconnect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
+                m_downloadRegionDialog, SLOT(updateTextureLayer()));
 }
 
 void MainWindow::downloadRegion()
@@ -1513,11 +1513,11 @@ void MainWindow::showRoutingDialog()
         scrollArea->setWidget( m_routingWidget );
 
         QAction *openAction = new QAction( tr( "Open Route..." ), this );
-        connect( openAction, SIGNAL( triggered() ), m_routingWidget, SLOT( openRoute() ) );
+        connect( openAction, SIGNAL(triggered()), m_routingWidget, SLOT(openRoute()) );
         m_routingWindow->menuBar()->addAction( openAction );
 
         QAction* saveAction = new QAction( tr( "Save Route..." ), this );
-        connect( saveAction, SIGNAL( triggered() ), m_routingWidget, SLOT( saveRoute() ) );
+        connect( saveAction, SIGNAL(triggered()), m_routingWidget, SLOT(saveRoute()) );
         m_routingWindow->menuBar()->addAction( saveAction );
 
         m_routingWindow->setCentralWidget( scrollArea );
@@ -1566,12 +1566,12 @@ void MainWindow::setupZoomButtons()
 
             QAction* zoomIn = new QAction( tr( "Zoom &In" ), this );
             zoomIn->setShortcut( Qt::Key_F7 );
-            connect( zoomIn, SIGNAL( triggered() ), m_controlView->marbleWidget(), SLOT( zoomIn() ) );
+            connect( zoomIn, SIGNAL(triggered()), m_controlView->marbleWidget(), SLOT(zoomIn()) );
             addAction( zoomIn );
 
             QAction* zoomOut = new QAction( tr( "Zoom &Out" ), this );
             zoomOut->setShortcut( Qt::Key_F8 );
-            connect( zoomOut, SIGNAL( triggered() ), m_controlView->marbleWidget(), SLOT( zoomOut() ) );
+            connect( zoomOut, SIGNAL(triggered()), m_controlView->marbleWidget(), SLOT(zoomOut()) );
             addAction( zoomOut );
         }
     }

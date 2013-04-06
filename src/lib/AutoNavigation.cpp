@@ -319,8 +319,8 @@ AutoNavigation::AutoNavigation( MarbleModel *model, const ViewportParams *viewpo
     QObject( parent ),
     d( new AutoNavigation::Private( model, viewport, this ) )
 {
-    connect( d->m_tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
+    connect( d->m_tracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+                this, SLOT(adjust(GeoDataCoordinates,qreal)) );
 }
 
 AutoNavigation::~AutoNavigation()

@@ -138,8 +138,8 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, int tileZoomL
                                           minTileX, minTileY, maxTileX, maxTileY);
 
     // Connect the parser thread to the VectorTileMapper for recieving tiles
-    connect( job, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
-             this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
+    connect( job, SIGNAL(tileCompleted(TileId,GeoDataDocument*,QString)),
+             this, SLOT(updateTile(TileId,GeoDataDocument*,QString)) );
 
     // Start thread
     m_threadPool.start( job );

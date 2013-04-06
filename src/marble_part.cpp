@@ -187,8 +187,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
         break;
     }
 
-    connect( m_controlView, SIGNAL( showUploadDialog() ), this, SLOT( showUploadNewStuffDialog() ) );
-    connect( m_controlView, SIGNAL( showMapWizard() ), this, SLOT( showMapWizard() ) );
+    connect( m_controlView, SIGNAL(showUploadDialog()), this, SLOT(showUploadNewStuffDialog()) );
+    connect( m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()) );
 }
 
 MarblePart::~MarblePart()
@@ -361,14 +361,14 @@ void MarblePart::controlSun()
 {
     if ( !m_sunControlDialog ) {
         m_sunControlDialog = new SunControlWidget( m_controlView->marbleWidget(), m_controlView );
-        connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
-                 this,               SLOT ( showSun( bool ) ) );
-        connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
-                 m_showShadow,               SLOT ( setChecked( bool ) ) );
-        connect( m_sunControlDialog,    SIGNAL( isLockedToSubSolarPoint(bool) ),
-                 m_lockToSubSolarPoint, SLOT ( setChecked( bool ) ) );
-        connect( m_sunControlDialog,         SIGNAL( isSubSolarPointIconVisible(bool) ),
-                 m_setSubSolarPointIconVisible, SLOT ( setChecked( bool ) ) );
+        connect( m_sunControlDialog, SIGNAL(showSun(bool)),
+                 this,               SLOT (showSun(bool)) );
+        connect( m_sunControlDialog, SIGNAL(showSun(bool)),
+                 m_showShadow,               SLOT (setChecked(bool)) );
+        connect( m_sunControlDialog,    SIGNAL(isLockedToSubSolarPoint(bool)),
+                 m_lockToSubSolarPoint, SLOT (setChecked(bool)) );
+        connect( m_sunControlDialog,         SIGNAL(isSubSolarPointIconVisible(bool)),
+                 m_setSubSolarPointIconVisible, SLOT (setChecked(bool)) );
     }
 
     m_sunControlDialog->show();
@@ -682,13 +682,13 @@ void MarblePart::setupActions()
     m_downloadRegionAction->setText( i18nc( "Action for downloading an entire region of a map",
                                             "Download Region..." ));
     actionCollection()->addAction( "file_download_region", m_downloadRegionAction );
-    connect( m_downloadRegionAction, SIGNAL( triggered() ), SLOT( showDownloadRegionDialog() ));
+    connect( m_downloadRegionAction, SIGNAL(triggered()), SLOT(showDownloadRegionDialog()));
 
     // Action: Print Map
-    m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ),
+    m_printMapAction = KStandardAction::print( this, SLOT(printMapScreenShot()),
                                                actionCollection() );
 
-    m_printPreviewAction = KStandardAction::printPreview( m_controlView, SLOT( printPreview() ),
+    m_printPreviewAction = KStandardAction::printPreview( m_controlView, SLOT(printPreview()),
                                                actionCollection() );
 
     // Action: Export Map
@@ -697,8 +697,8 @@ void MarblePart::setupActions()
     m_exportMapAction->setText( i18nc( "Action for saving the map to a file", "&Export Map..." ) );
     m_exportMapAction->setIcon( KIcon( "document-save-as" ) );
     m_exportMapAction->setShortcut( Qt::CTRL + Qt::Key_S );
-    connect( m_exportMapAction, SIGNAL(triggered( bool ) ),
-             this,              SLOT( exportMapScreenShot() ) );
+    connect( m_exportMapAction, SIGNAL(triggered(bool)),
+             this,              SLOT(exportMapScreenShot()) );
 
     // Action: Work Offline
     m_workOfflineAction = new KAction( this );
@@ -707,11 +707,11 @@ void MarblePart::setupActions()
     m_workOfflineAction->setIcon( KIcon( "user-offline" ) );
     m_workOfflineAction->setCheckable( true );
     m_workOfflineAction->setChecked( false );
-    connect( m_workOfflineAction, SIGNAL( triggered( bool ) ),
-             this,                SLOT( workOffline( bool ) ) );
+    connect( m_workOfflineAction, SIGNAL(triggered(bool)),
+             this,                SLOT(workOffline(bool)) );
 
     // Action: Copy Map to the Clipboard
-    m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ),
+    m_copyMapAction = KStandardAction::copy( this, SLOT(copyMap()),
                                              actionCollection() );
     m_copyMapAction->setText( i18nc( "Action for copying the map to the clipboard", "&Copy Map" ) );
 
@@ -722,23 +722,23 @@ void MarblePart::setupActions()
     m_copyCoordinatesAction->setText( i18nc( "Action for copying the coordinates to the clipboard",
                                              "C&opy Coordinates" ) );
     m_copyCoordinatesAction->setIcon( KIcon( ":/icons/copy-coordinates.png" ) );
-    connect( m_copyCoordinatesAction, SIGNAL( triggered( bool ) ),
-             this,                    SLOT( copyCoordinates() ) );
+    connect( m_copyCoordinatesAction, SIGNAL(triggered(bool)),
+             this,                    SLOT(copyCoordinates()) );
 
     // Action: Open a Gpx or a Kml File
-    m_openAct = KStandardAction::open( this, SLOT( openFile() ),
+    m_openAct = KStandardAction::open( this, SLOT(openFile()),
                                        actionCollection() );
     m_openAct->setText( i18nc( "Action for opening a file", "&Open..." ) );
 
     // Standard actions.  So far only Quit.
-    KStandardAction::quit( kapp, SLOT( closeAllWindows() ),
+    KStandardAction::quit( kapp, SLOT(closeAllWindows()),
                            actionCollection() );
 
     // Action: Get hot new stuff
     m_newStuffAction = KNS3::standardAction( i18nc( "Action for downloading maps (GHNS)",
                                                     "Download Maps..."),
                                              this,
-                                             SLOT( showNewStuffDialog() ),
+                                             SLOT(showNewStuffDialog()),
                                              actionCollection(), "new_stuff" );
     m_newStuffAction->setStatusTip( i18nc( "Status tip", "Download new maps"));
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
@@ -751,15 +751,15 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "createMap", m_mapWizardAct );
     m_mapWizardAct->setStatusTip( i18nc( "Status tip",
                                          "A wizard guides you through the creation of your own map theme." ) );
-    connect( m_mapWizardAct, SIGNAL( triggered() ), SLOT( showMapWizard() ) );
+    connect( m_mapWizardAct, SIGNAL(triggered()), SLOT(showMapWizard()) );
 
-    KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ),
+    KStandardAction::showStatusbar( this, SLOT(showStatusBar(bool)),
                                     actionCollection() );
 
     m_fullScreenAct = KStandardAction::fullScreen( 0, 0, widget(),
                                                    actionCollection() );
-    connect( m_fullScreenAct, SIGNAL( triggered( bool ) ),
-             this,            SLOT( showFullScreen( bool ) ) );
+    connect( m_fullScreenAct, SIGNAL(triggered(bool)),
+             this,            SLOT(showFullScreen(bool)) );
 
     // Action: Show Atmosphere option
     m_showAtmosphereAction = new KAction( this );
@@ -769,17 +769,17 @@ void MarblePart::setupActions()
     m_showAtmosphereAction->setChecked( true );
     m_showAtmosphereAction->setText( i18nc( "Action for toggling the atmosphere", "&Atmosphere" ) );
     m_showAtmosphereAction->setIcon( KIcon( ":/icons/atmosphere.png" ) );
-    connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ),
-             this,                   SLOT( setShowAtmosphere( bool ) ) );
+    connect( m_showAtmosphereAction, SIGNAL(triggered(bool)),
+             this,                   SLOT(setShowAtmosphere(bool)) );
     foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
         if ( plugin->nameId() == "atmosphere" ) {
             m_showAtmosphereAction->setVisible( plugin->enabled() );
-            connect( plugin, SIGNAL( enabledChanged( bool ) ),
-                     m_showAtmosphereAction, SLOT( setVisible( bool ) ) );
+            connect( plugin, SIGNAL(enabledChanged(bool)),
+                     m_showAtmosphereAction, SLOT(setVisible(bool)) );
         }
     }
-    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
-            this, SLOT( updateAtmosphereMenu() ) );
+    connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
+            this, SLOT(updateAtmosphereMenu()) );
 
     // Action: Show Crosshairs option
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
@@ -798,25 +798,25 @@ void MarblePart::setupActions()
     m_showCloudsAction->setChecked( true );
     m_showCloudsAction->setIcon( KIcon( ":/icons/clouds.png" ) );
     m_showCloudsAction->setText( i18nc( "Action for toggling clouds", "&Clouds" ) );
-    connect( m_showCloudsAction, SIGNAL( triggered( bool ) ),
-             this,               SLOT( setShowClouds( bool ) ) );
+    connect( m_showCloudsAction, SIGNAL(triggered(bool)),
+             this,               SLOT(setShowClouds(bool)) );
 
     // Action: Show Sunshade options
     m_controlSunAction = new KAction( this );
     actionCollection()->addAction( "control_sun", m_controlSunAction );
     m_controlSunAction->setText( i18nc( "Action for sun control dialog", "S&un Control..." ) );
-    connect( m_controlSunAction, SIGNAL( triggered( bool ) ),
-             this,               SLOT( controlSun() ) );
+    connect( m_controlSunAction, SIGNAL(triggered(bool)),
+             this,               SLOT(controlSun()) );
 
-    KStandardAction::redisplay( m_controlView->marbleWidget(), SLOT( reloadMap() ), actionCollection() );
+    KStandardAction::redisplay( m_controlView->marbleWidget(), SLOT(reloadMap()), actionCollection() );
 
     // Action: Show Time options
     m_controlTimeAction = new KAction( this );
     actionCollection()->addAction( "control_time", m_controlTimeAction );
     m_controlTimeAction->setIcon( KIcon( ":/icons/clock.png" ) );
     m_controlTimeAction->setText( i18nc( "Action for time control dialog", "&Time Control..." ) );
-    connect( m_controlTimeAction, SIGNAL( triggered( bool ) ),
-         this,               SLOT( controlTime() ) );
+    connect( m_controlTimeAction, SIGNAL(triggered(bool)),
+         this,               SLOT(controlTime()) );
 
     // Action: Lock float items
     m_lockFloatItemsAct = new KAction ( this );
@@ -827,10 +827,10 @@ void MarblePart::setupActions()
     m_lockFloatItemsAct->setIcon( KIcon( ":/icons/unlock.png" ) );
     m_lockFloatItemsAct->setCheckable( true );
     m_lockFloatItemsAct->setChecked( false );
-    connect( m_lockFloatItemsAct, SIGNAL( triggered( bool ) ),
-             this,                SLOT( lockFloatItemPosition( bool ) ) );
+    connect( m_lockFloatItemsAct, SIGNAL(triggered(bool)),
+             this,                SLOT(lockFloatItemPosition(bool)) );
 
-    KStandardAction::preferences( this, SLOT( editSettings() ),
+    KStandardAction::preferences( this, SLOT(editSettings()),
                                   actionCollection() );
 
     //Toggle Action: Show sun shadow
@@ -839,14 +839,14 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "sun_shadow", m_showShadow );
     m_showShadow->setCheckedState( KGuiItem( i18n( "Hide Shadow" ) ) );
     m_showShadow->setToolTip(i18n("Shows and hides the shadow of the sun"));
-    connect( m_showShadow, SIGNAL( triggered( bool ) ), this, SLOT( showSun( bool ) ));
+    connect( m_showShadow, SIGNAL(triggered(bool)), this, SLOT(showSun(bool)));
 
     //Toggle Action: Show Sun icon on the Sub-Solar Point
     m_setSubSolarPointIconVisible = new KToggleAction( i18n( "Show sun icon on the Sub-Solar Point" ), this );
     actionCollection()->addAction( "show_icon_on_subsolarpoint", m_setSubSolarPointIconVisible );
     m_setSubSolarPointIconVisible->setCheckedState( KGuiItem( i18n( "Hide sun icon on the Sub-Solar Point" ) ) );
     m_setSubSolarPointIconVisible->setToolTip( i18n( "Show sun icon on the sub-solar point" ) );
-    connect( m_setSubSolarPointIconVisible, SIGNAL( triggered( bool ) ), this, SLOT( setSubSolarPointIconVisible( bool ) ));
+    connect( m_setSubSolarPointIconVisible, SIGNAL(triggered(bool)), this, SLOT(setSubSolarPointIconVisible(bool)));
 
 
     //Toggle Action: Lock globe to the Sub-Solar Point
@@ -854,14 +854,14 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "lock_to_subsolarpoint", m_lockToSubSolarPoint );
     m_lockToSubSolarPoint->setCheckedState( KGuiItem( i18n( "Unlock Globe to the Sub-Solar Point" ) ) );
     m_lockToSubSolarPoint->setToolTip( i18n( "Lock globe to the sub-solar point" ) );
-    connect( m_lockToSubSolarPoint, SIGNAL( triggered( bool ) ), this, SLOT( lockToSubSolarPoint( bool ) ));
+    connect( m_lockToSubSolarPoint, SIGNAL(triggered(bool)), this, SLOT(lockToSubSolarPoint(bool)));
 
     //    FIXME: Discuss if this is the best place to put this
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const itEnd = pluginList.constEnd();
     for (; it != itEnd; ++it ) {
-        connect( (*it), SIGNAL( actionGroupsChanged() ),
-                 this, SLOT( createPluginMenus() ) );
+        connect( (*it), SIGNAL(actionGroupsChanged()),
+                 this, SLOT(createPluginMenus()) );
     }
 
     m_addBookmarkAction = new KAction( this );
@@ -869,8 +869,8 @@ void MarblePart::setupActions()
     m_addBookmarkAction->setText( i18nc( "Add Bookmark", "&Add Bookmark" ) );
     m_addBookmarkAction->setIcon( KIcon( ":/icons/bookmark-new.png" ) );
     m_addBookmarkAction->setShortcut( Qt::CTRL + Qt::Key_B );
-    connect( m_addBookmarkAction, SIGNAL( triggered( ) ),
-             this,                SLOT( openEditBookmarkDialog() ) );
+    connect( m_addBookmarkAction, SIGNAL(triggered()),
+             this,                SLOT(openEditBookmarkDialog()) );
 
     m_toggleBookmarkDisplayAction = new KAction( this );
     actionCollection()->addAction( "show_bookmarks", m_toggleBookmarkDisplayAction );
@@ -878,37 +878,37 @@ void MarblePart::setupActions()
     m_toggleBookmarkDisplayAction->setStatusTip( tr( "Show or hide bookmarks in the map" ) );
     m_toggleBookmarkDisplayAction->setCheckable( true );
     m_toggleBookmarkDisplayAction->setChecked( m_controlView->marbleModel()->bookmarkManager()->showBookmarks() );
-    connect( m_toggleBookmarkDisplayAction, SIGNAL( toggled( bool ) ),
-                  m_controlView->marbleModel()->bookmarkManager(), SLOT( setShowBookmarks( bool ) ) );
+    connect( m_toggleBookmarkDisplayAction, SIGNAL(toggled(bool)),
+                  m_controlView->marbleModel()->bookmarkManager(), SLOT(setShowBookmarks(bool)) );
 
     m_setHomeAction = new KAction( this );
     actionCollection()->addAction( "set_home", m_setHomeAction );
     m_setHomeAction->setText( tr( "&Set Home Location" ) );
     m_setHomeAction->setIcon( KIcon( "go-home" ) );
-    connect( m_setHomeAction, SIGNAL( triggered( ) ),
-             this,                SLOT( setHome() ) );
+    connect( m_setHomeAction, SIGNAL(triggered()),
+             this,                SLOT(setHome()) );
 
     m_manageBookmarksAction = new KAction( this );
     actionCollection()->addAction( "manage_bookmarks", m_manageBookmarksAction );
     m_manageBookmarksAction->setText( i18nc( "Manage Bookmarks", "&Manage Bookmarks" ) );
     m_manageBookmarksAction->setIcon( KIcon( ":/icons/bookmarks-organize.png" ) );
-    connect( m_manageBookmarksAction, SIGNAL( triggered( ) ),
-             this,                SLOT( openManageBookmarksDialog() ) );
+    connect( m_manageBookmarksAction, SIGNAL(triggered()),
+             this,                SLOT(openManageBookmarksDialog()) );
 
 
     createFolderList();
     connect( m_controlView->marbleModel()->bookmarkManager(),
-             SIGNAL( bookmarksChanged() ), this, SLOT( createFolderList() ) );
+             SIGNAL(bookmarksChanged()), this, SLOT(createFolderList()) );
 
     m_externalMapEditorAction = new KAction( this );
     actionCollection()->addAction( "external_editor", m_externalMapEditorAction );
     m_externalMapEditorAction->setText( i18nc( "Edit the map in an external application", "&Edit Map" ) );
     m_externalMapEditorAction->setIcon( KIcon( ":/icons/edit-map.png" ) );
     m_externalMapEditorAction->setShortcut( Qt::CTRL + Qt::Key_E );
-    connect( m_externalMapEditorAction, SIGNAL( triggered( ) ),
-             m_controlView, SLOT( launchExternalMapEditor() ) );
-    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
-             this, SLOT( updateMapEditButtonVisibility( QString ) ) );
+    connect( m_externalMapEditorAction, SIGNAL(triggered()),
+             m_controlView, SLOT(launchExternalMapEditor()) );
+    connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
+             this, SLOT(updateMapEditButtonVisibility(QString)) );
 }
 
 void MarblePart::createFolderList()
@@ -924,8 +924,8 @@ void MarblePart::createFolderList()
        QMenu *m_bookmarksListMenu = new QMenu( (*i)->name() );
 
        createBookmarksListMenu( m_bookmarksListMenu, *(*i) );
-       connect( m_bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
-            this, SLOT( lookAtBookmark( QAction *) ) );
+       connect( m_bookmarksListMenu, SIGNAL(triggered(QAction*)),
+            this, SLOT(lookAtBookmark(QAction*)) );
 
        actionList.append( m_bookmarksListMenu->menuAction() );
    }
@@ -1090,16 +1090,16 @@ void MarblePart::setupStatusBar()
     const QString templateTileZoomLevelString = i18n( TILEZOOMLEVEL_STRING );
     m_tileZoomLevelLabel = setupStatusBarLabel( templateTileZoomLevelString );
 
-    connect( m_controlView->marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
-             this,                          SLOT( showPosition( QString ) ) );
-    connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
-             this,                          SLOT( updateStatusBar() ) );
-    connect( m_controlView->marbleWidget(), SIGNAL( tileLevelChanged( int )),
-             SLOT( showZoomLevel( int )));
-    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
-             this, SLOT( mapThemeChanged( QString )), Qt::QueuedConnection );
-    connect( m_controlView->marbleModel()->clock(), SIGNAL( timeChanged() ),
-             this,                          SLOT( showDateTime() ) );
+    connect( m_controlView->marbleWidget(), SIGNAL(mouseMoveGeoPosition(QString)),
+             this,                          SLOT(showPosition(QString)) );
+    connect( m_controlView->marbleWidget(), SIGNAL(distanceChanged(QString)),
+             this,                          SLOT(updateStatusBar()) );
+    connect( m_controlView->marbleWidget(), SIGNAL(tileLevelChanged(int)),
+             SLOT(showZoomLevel(int)));
+    connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
+             this, SLOT(mapThemeChanged(QString)), Qt::QueuedConnection );
+    connect( m_controlView->marbleModel()->clock(), SIGNAL(timeChanged()),
+             this,                          SLOT(showDateTime()) );
 
 
     setupDownloadProgressBar();
@@ -1134,8 +1134,8 @@ void MarblePart::setupDownloadProgressBar()
     HttpDownloadManager * const downloadManager =
         m_controlView->marbleModel()->downloadManager();
     Q_ASSERT( downloadManager );
-    connect( downloadManager, SIGNAL( jobAdded() ), SLOT( downloadJobAdded() ) );
-    connect( downloadManager, SIGNAL( jobRemoved() ), SLOT( downloadJobRemoved() ) );
+    connect( downloadManager, SIGNAL(jobAdded()), SLOT(downloadJobAdded()) );
+    connect( downloadManager, SIGNAL(jobRemoved()), SLOT(downloadJobRemoved()) );
 }
 
 void MarblePart::setupStatusBarActions()
@@ -1145,8 +1145,8 @@ void MarblePart::setupStatusBarActions()
 
     statusBar->setContextMenuPolicy( Qt::CustomContextMenu );
 
-    connect( statusBar, SIGNAL( customContextMenuRequested( QPoint )),
-             this, SLOT( showStatusBarContextMenu( QPoint )));
+    connect( statusBar, SIGNAL(customContextMenuRequested(QPoint)),
+             this, SLOT(showStatusBarContextMenu(QPoint)));
 
     m_showPositionAction = new KToggleAction( i18nc( "Action for toggling", "Show Position" ),
                                               this );
@@ -1159,16 +1159,16 @@ void MarblePart::setupStatusBarActions()
     m_showDownloadProgressAction = new KToggleAction( i18nc( "Action for toggling",
                                                              "Show Download Progress Bar" ), this );
 
-    connect( m_showPositionAction, SIGNAL( triggered( bool ) ),
-             this, SLOT( showPositionLabel( bool ) ) );
-    connect( m_showAltitudeAction, SIGNAL( triggered( bool ) ),
-             this, SLOT( showAltitudeLabel( bool ) ) );
-    connect( m_showTileZoomLevelAction, SIGNAL( triggered( bool ) ),
-             this, SLOT( showTileZoomLevelLabel( bool ) ) );
-    connect( m_showDateTimeAction, SIGNAL( triggered( bool ) ),
-             this, SLOT( showDateTimeLabel( bool ) ) );
-    connect( m_showDownloadProgressAction, SIGNAL( triggered( bool ) ),
-             this, SLOT( showDownloadProgressBar( bool ) ) );
+    connect( m_showPositionAction, SIGNAL(triggered(bool)),
+             this, SLOT(showPositionLabel(bool)) );
+    connect( m_showAltitudeAction, SIGNAL(triggered(bool)),
+             this, SLOT(showAltitudeLabel(bool)) );
+    connect( m_showTileZoomLevelAction, SIGNAL(triggered(bool)),
+             this, SLOT(showTileZoomLevelLabel(bool)) );
+    connect( m_showDateTimeAction, SIGNAL(triggered(bool)),
+             this, SLOT(showDateTimeLabel(bool)) );
+    connect( m_showDownloadProgressAction, SIGNAL(triggered(bool)),
+             this, SLOT(showDownloadProgressBar(bool)) );
 }
 
 void MarblePart::showNewStuffDialog()
@@ -1198,19 +1198,19 @@ void MarblePart::showUploadNewStuffDialog()
 // connect to expensive slots, only needed when the non modal dialog is show
 void MarblePart::connectDownloadRegionDialog()
 {
-    connect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
-             m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
-    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
-             m_downloadRegionDialog, SLOT( updateTextureLayer() ));
+    connect( m_controlView->marbleWidget(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+             m_downloadRegionDialog, SLOT(setVisibleLatLonAltBox(GeoDataLatLonAltBox)));
+    connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
+             m_downloadRegionDialog, SLOT(updateTextureLayer()));
 }
 
 // disconnect from expensive slots, not needed when dialog is hidden
 void MarblePart::disconnectDownloadRegionDialog()
 {
-    disconnect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
-                m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
-    disconnect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
-                m_downloadRegionDialog, SLOT( updateTextureLayer() ));
+    disconnect( m_controlView->marbleWidget(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+                m_downloadRegionDialog, SLOT(setVisibleLatLonAltBox(GeoDataLatLonAltBox)));
+    disconnect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
+                m_downloadRegionDialog, SLOT(updateTextureLayer()));
 }
 
 void MarblePart::showDownloadRegionDialog()
@@ -1221,11 +1221,11 @@ void MarblePart::showDownloadRegionDialog()
         // it might be tempting to move the connects to DownloadRegionDialog's "accepted" and
         // "applied" signals, be aware that the "hidden" signal might be come before the "accepted"
         // signal, leading to a too early disconnect.
-        connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
-        connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
-        connect( m_downloadRegionDialog, SIGNAL( shown() ), SLOT( connectDownloadRegionDialog() ));
-        connect( m_downloadRegionDialog, SIGNAL( hidden() ),
-                 SLOT( disconnectDownloadRegionDialog() ));
+        connect( m_downloadRegionDialog, SIGNAL(accepted()), SLOT(downloadRegion()));
+        connect( m_downloadRegionDialog, SIGNAL(applied()), SLOT(downloadRegion()));
+        connect( m_downloadRegionDialog, SIGNAL(shown()), SLOT(connectDownloadRegionDialog()));
+        connect( m_downloadRegionDialog, SIGNAL(hidden()),
+                 SLOT(disconnectDownloadRegionDialog()));
     }
     // FIXME: get allowed range from current map theme
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 16 );
@@ -1321,10 +1321,10 @@ void MarblePart::editSettings()
     w_cacheSettings->setObjectName( "cache_page" );
     m_configDialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ),
                              "preferences-web-browser-cache" );
-    connect( w_cacheSettings,               SIGNAL( clearVolatileCache() ),
-             m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
-    connect( w_cacheSettings,                        SIGNAL( clearPersistentCache() ),
-             m_controlView->marbleModel(), SLOT( clearPersistentTileCache() ) );
+    connect( w_cacheSettings,               SIGNAL(clearVolatileCache()),
+             m_controlView->marbleWidget(), SLOT(clearVolatileTileCache()) );
+    connect( w_cacheSettings,                        SIGNAL(clearPersistentCache()),
+             m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
 
     // time page
     Ui_MarbleTimeSettingsWidget ui_timeSettings;
@@ -1351,20 +1351,20 @@ void MarblePart::editSettings()
     w_pluginSettings->setConfigIcon( KIcon( "configure" ) );
     w_pluginSettings->setAboutIcon( KIcon( "help-about" ) );
 
-    connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
-                               SLOT( enableApplyButton() ) );
-    connect( m_configDialog,   SIGNAL( settingsChanged( const QString &) ),
-                               SLOT( updateSettings() ) );
-    connect( m_configDialog,   SIGNAL( applyClicked() ),
-                               SLOT( applyPluginState() ) );
-    connect( m_configDialog,   SIGNAL( okClicked() ),
-                               SLOT( applyPluginState() ) );
-    connect( m_configDialog,   SIGNAL( applyClicked() ),
-             pluginModel,      SLOT( applyPluginState() ) );
-    connect( m_configDialog,   SIGNAL( okClicked() ),
-             pluginModel,      SLOT( applyPluginState() ) );
-    connect( m_configDialog,   SIGNAL( cancelClicked() ),
-             pluginModel,      SLOT( retrievePluginState() ) );
+    connect( w_pluginSettings, SIGNAL(pluginListViewClicked()),
+                               SLOT(enableApplyButton()) );
+    connect( m_configDialog,   SIGNAL(settingsChanged(QString)),
+                               SLOT(updateSettings()) );
+    connect( m_configDialog,   SIGNAL(applyClicked()),
+                               SLOT(applyPluginState()) );
+    connect( m_configDialog,   SIGNAL(okClicked()),
+                               SLOT(applyPluginState()) );
+    connect( m_configDialog,   SIGNAL(applyClicked()),
+             pluginModel,      SLOT(applyPluginState()) );
+    connect( m_configDialog,   SIGNAL(okClicked()),
+             pluginModel,      SLOT(applyPluginState()) );
+    connect( m_configDialog,   SIGNAL(cancelClicked()),
+             pluginModel,      SLOT(retrievePluginState()) );
 
     m_configDialog->show();
 }
@@ -1527,8 +1527,8 @@ void MarblePart::writePluginSettings()
 
 void MarblePart::readPluginSettings()
 {
-    disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
-                this,                          SLOT( writePluginSettings() ) );
+    disconnect( m_controlView->marbleWidget(), SIGNAL(pluginSettingsChanged()),
+                this,                          SLOT(writePluginSettings()) );
 
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
 
@@ -1544,8 +1544,8 @@ void MarblePart::readPluginSettings()
         plugin->setSettings( hash );
     }
 
-    connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
-             this,                          SLOT( writePluginSettings() ) );
+    connect( m_controlView->marbleWidget(), SIGNAL(pluginSettingsChanged()),
+             this,                          SLOT(writePluginSettings()) );
 }
 
 void MarblePart::lockFloatItemPosition( bool enabled )

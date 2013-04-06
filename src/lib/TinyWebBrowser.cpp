@@ -48,14 +48,14 @@ TinyWebBrowser::TinyWebBrowser( QWidget* parent )
     : QWebView( parent ),
       d( 0 )
 {
-    connect( this, SIGNAL( statusBarMessage( QString ) ),
-             this, SIGNAL( statusMessage( QString ) ) );
+    connect( this, SIGNAL(statusBarMessage(QString)),
+             this, SIGNAL(statusMessage(QString)) );
 
     page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
-    connect( this, SIGNAL( linkClicked( QUrl ) ),
-             this, SLOT( openExternalLink( QUrl ) ) );
-    connect( this, SIGNAL( titleChanged( QString ) ),
-             this, SLOT( setWindowTitle( QString ) ) );
+    connect( this, SIGNAL(linkClicked(QUrl)),
+             this, SLOT(openExternalLink(QUrl)) );
+    connect( this, SIGNAL(titleChanged(QString)),
+             this, SLOT(setWindowTitle(QString)) );
 
     pageAction( QWebPage::OpenLinkInNewWindow )->setEnabled( false );
     pageAction( QWebPage::OpenLinkInNewWindow )->setVisible( false );

@@ -75,8 +75,8 @@ ElevationModel::ElevationModel( MarbleModel *const model )
     : QObject( 0 ),
       d( new ElevationModelPrivate( this, model ) )
 {
-    connect( &d->m_tileLoader, SIGNAL( tileCompleted( TileId, QImage ) ),
-             this, SLOT( tileCompleted( TileId, QImage ) ) );
+    connect( &d->m_tileLoader, SIGNAL(tileCompleted(TileId,QImage)),
+             this, SLOT(tileCompleted(TileId,QImage)) );
 }
 
 

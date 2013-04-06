@@ -143,16 +143,16 @@ void RoutingInputWidgetPrivate::createMenu( RoutingInputWidget *parent )
     QMenu* result = new QMenu( parent );
 
     m_centerAction = result->addAction( QIcon( m_route->pixmap( m_index ) ), QObject::tr( "&Center Map here" ),
-                       parent, SLOT( requestActivity() ) );
+                       parent, SLOT(requestActivity()) );
     result->addSeparator();
 
     m_currentLocationAction = result->addAction( QIcon( ":/icons/gps.png" ), QObject::tr( "Current &Location" ),
-                                                 parent, SLOT( setCurrentLocation() ) );
+                                                 parent, SLOT(setCurrentLocation()) );
     m_currentLocationAction->setEnabled( false );
 
     m_mapInput = result->addAction( QIcon( ":/icons/crosshairs.png" ), QObject::tr( "From &Map..." ) );
     m_mapInput->setCheckable( true );
-    QObject::connect( m_mapInput, SIGNAL( triggered( bool ) ), parent, SLOT( setMapInputModeEnabled( bool ) ) );
+    QObject::connect( m_mapInput, SIGNAL(triggered(bool)), parent, SLOT(setMapInputModeEnabled(bool)) );
 
     m_bookmarkAction = result->addAction( QIcon( ":/icons/bookmarks.png" ), QObject::tr( "From &Bookmark" ) );
     m_bookmarkAction->setMenu( createBookmarkMenu( parent ) );
@@ -163,7 +163,7 @@ void RoutingInputWidgetPrivate::createMenu( RoutingInputWidget *parent )
 QMenu* RoutingInputWidgetPrivate::createBookmarkMenu( RoutingInputWidget *parent )
 {
     QMenu* result = new QMenu( parent );
-    result->addAction( QIcon( ":/icons/go-home.png" ), QObject::tr( "&Home" ), parent, SLOT( setHomePosition() ) );
+    result->addAction( QIcon( ":/icons/go-home.png" ), QObject::tr( "&Home" ), parent, SLOT(setHomePosition()) );
 
     QVector<GeoDataFolder*> folders = m_marbleModel->bookmarkManager()->folders();
 
@@ -192,7 +192,7 @@ void RoutingInputWidgetPrivate::createBookmarkActions( QMenu* menu, GeoDataFolde
         QAction *bookmarkAction = new QAction( (*i)->name(), parent );
         bookmarkAction->setData( qVariantFromValue( (*i)->coordinate() ) );
         menu->addAction( bookmarkAction );
-        QObject::connect( menu, SIGNAL( triggered( QAction* ) ), parent, SLOT( setBookmarkPosition( QAction* ) ) );
+        QObject::connect( menu, SIGNAL(triggered(QAction*)), parent, SLOT(setBookmarkPosition(QAction*)) );
     }
 }
 
@@ -223,32 +223,32 @@ RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
         layout->addWidget( d->m_lineEdit );
-        connect( d->m_lineEdit, SIGNAL( decoratorButtonClicked() ), this, SLOT( openTargetSelectionDialog() ) );
+        connect( d->m_lineEdit, SIGNAL(decoratorButtonClicked()), this, SLOT(openTargetSelectionDialog()) );
     } else {
         d->createMenu( this );
         layout->addWidget( d->m_lineEdit );
     }
 
-    connect( d->m_lineEdit, SIGNAL( clearButtonClicked() ), this, SLOT( requestRemoval() ) );
-    connect( d->m_marbleModel->bookmarkManager(), SIGNAL( bookmarksChanged() ),
-             this, SLOT( reloadBookmarks() ) );
-    connect( d->m_marbleModel->positionTracking(), SIGNAL( statusChanged( PositionProviderStatus ) ),
-             this, SLOT( updateCurrentLocationButton( PositionProviderStatus ) ) );
-    connect( &d->m_runnerManager, SIGNAL( searchResultChanged( QAbstractItemModel * ) ),
-             this, SLOT( setPlacemarkModel( QAbstractItemModel * ) ) );
-    connect( &d->m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark )),
-             this, SLOT(retrieveReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
-    connect( d->m_lineEdit, SIGNAL( returnPressed() ),
-             this, SLOT( findPlacemarks() ) );
-    connect( d->m_lineEdit, SIGNAL( textEdited( QString ) ),
-             this, SLOT( setInvalid() ) );
-    connect( &d->m_runnerManager, SIGNAL( searchFinished( QString ) ),
-             this, SLOT( finishSearch() ) );
-    connect( d->m_marbleModel->routingManager()->routeRequest(), SIGNAL( positionChanged( int, GeoDataCoordinates ) ),
-             this, SLOT( updatePosition( int, GeoDataCoordinates ) ) );
-    connect( &d->m_nominatimTimer, SIGNAL( timeout() ),
-             this, SLOT( reverseGeocoding() ) );
-    connect( this, SIGNAL( targetValidityChanged( bool ) ), this, SLOT( updateCenterButton( bool ) ) );
+    connect( d->m_lineEdit, SIGNAL(clearButtonClicked()), this, SLOT(requestRemoval()) );
+    connect( d->m_marbleModel->bookmarkManager(), SIGNAL(bookmarksChanged()),
+             this, SLOT(reloadBookmarks()) );
+    connect( d->m_marbleModel->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
+             this, SLOT(updateCurrentLocationButton(PositionProviderStatus)) );
+    connect( &d->m_runnerManager, SIGNAL(searchResultChanged(QAbstractItemModel*)),
+             this, SLOT(setPlacemarkModel(QAbstractItemModel*)) );
+    connect( &d->m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
+             this, SLOT(retrieveReverseGeocodingResult(GeoDataCoordinates,GeoDataPlacemark)) );
+    connect( d->m_lineEdit, SIGNAL(returnPressed()),
+             this, SLOT(findPlacemarks()) );
+    connect( d->m_lineEdit, SIGNAL(textEdited(QString)),
+             this, SLOT(setInvalid()) );
+    connect( &d->m_runnerManager, SIGNAL(searchFinished(QString)),
+             this, SLOT(finishSearch()) );
+    connect( d->m_marbleModel->routingManager()->routeRequest(), SIGNAL(positionChanged(int,GeoDataCoordinates)),
+             this, SLOT(updatePosition(int,GeoDataCoordinates)) );
+    connect( &d->m_nominatimTimer, SIGNAL(timeout()),
+             this, SLOT(reverseGeocoding()) );
+    connect( this, SIGNAL(targetValidityChanged(bool)), this, SLOT(updateCenterButton(bool)) );
     updateCenterButton( hasTargetPosition() );
 
     d->adjustText();

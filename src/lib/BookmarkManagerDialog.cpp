@@ -327,17 +327,17 @@ void BookmarkManagerDialogPrivate::initializeFoldersView( GeoDataTreeModel* tree
                                                  m_treeModel->index( m_parent->bookmarkDocument() )));
 
     m_parent->connect( m_parent->foldersTreeView,
-            SIGNAL( clicked( QModelIndex ) ),
-            m_parent, SLOT( handleFolderSelection( QModelIndex ) ) );
+            SIGNAL(clicked(QModelIndex)),
+            m_parent, SLOT(handleFolderSelection(QModelIndex)) );
     m_parent->connect( m_parent->foldersTreeView->selectionModel(),
-                      SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
-                      m_parent, SLOT( updateButtonState() ) );
-    m_parent->connect( m_parent->renameFolderButton, SIGNAL( clicked( bool ) ),
-                       m_parent, SLOT( renameFolder() ) );
-    m_parent->connect( m_parent->newFolderButton, SIGNAL( clicked( bool ) ),
-                       m_parent, SLOT( addNewFolder() ) );
-    m_parent->connect( m_parent->removeFolderButton, SIGNAL( clicked( bool ) ),
-                       m_parent, SLOT( deleteFolder() ) );
+                      SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+                      m_parent, SLOT(updateButtonState()) );
+    m_parent->connect( m_parent->renameFolderButton, SIGNAL(clicked(bool)),
+                       m_parent, SLOT(renameFolder()) );
+    m_parent->connect( m_parent->newFolderButton, SIGNAL(clicked(bool)),
+                       m_parent, SLOT(addNewFolder()) );
+    m_parent->connect( m_parent->removeFolderButton, SIGNAL(clicked(bool)),
+                       m_parent, SLOT(deleteFolder()) );
 }
 
 void BookmarkManagerDialogPrivate::initializeBookmarksView( GeoDataTreeModel* treeModel )
@@ -349,12 +349,12 @@ void BookmarkManagerDialogPrivate::initializeBookmarksView( GeoDataTreeModel* tr
     m_parent->bookmarksListView->setEditTriggers( QAbstractItemView::NoEditTriggers );
 
     m_parent->connect( m_parent->bookmarksListView->selectionModel(),
-                      SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
-                      m_parent, SLOT( updateButtonState() ) );
-    m_parent->connect( m_parent->editBookmarkButton, SIGNAL( clicked( bool ) ),
-                       m_parent, SLOT( editBookmark() ) );
-    m_parent->connect( m_parent->removeBookmarkButton, SIGNAL( clicked( bool ) ),
-                       m_parent, SLOT( deleteBookmark() ) );
+                      SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+                      m_parent, SLOT(updateButtonState()) );
+    m_parent->connect( m_parent->editBookmarkButton, SIGNAL(clicked(bool)),
+                       m_parent, SLOT(editBookmark()) );
+    m_parent->connect( m_parent->removeBookmarkButton, SIGNAL(clicked(bool)),
+                       m_parent, SLOT(deleteBookmark()) );
 }
 
 BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *parent )
@@ -374,10 +374,10 @@ BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *paren
     d->initializeBookmarksView( d->m_treeModel );
     d->updateButtonState();
 
-    connect( this, SIGNAL( accepted() ), SLOT( saveBookmarks() ) );
-    connect( this, SIGNAL( rejected() ), SLOT( discardChanges() ) );
-    connect( exportButton, SIGNAL( clicked() ), this, SLOT( exportBookmarks() ) );
-    connect( importButton, SIGNAL( clicked() ), this, SLOT( importBookmarks() ) );
+    connect( this, SIGNAL(accepted()), SLOT(saveBookmarks()) );
+    connect( this, SIGNAL(rejected()), SLOT(discardChanges()) );
+    connect( exportButton, SIGNAL(clicked()), this, SLOT(exportBookmarks()) );
+    connect( importButton, SIGNAL(clicked()), this, SLOT(importBookmarks()) );
 
     d->selectFolder();
 }
@@ -511,8 +511,8 @@ void BookmarkManagerDialog::setButtonBoxVisible( bool visible )
 {
     buttonBox->setVisible( visible );
     if ( !visible ) {
-        disconnect( this, SIGNAL( rejected() ), this, SLOT( discardChanges() ) );
-        connect( this, SIGNAL( rejected() ), SLOT( saveBookmarks() ) );
+        disconnect( this, SIGNAL(rejected()), this, SLOT(discardChanges()) );
+        connect( this, SIGNAL(rejected()), SLOT(saveBookmarks()) );
     }
 }
 

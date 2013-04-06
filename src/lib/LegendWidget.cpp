@@ -56,8 +56,8 @@ void LegendWidget::setMarbleModel( MarbleModel *model )
     d->m_marbleLegendBrowser->setMarbleModel( model );
 
     // connect signals for the Legend
-    connect( d->m_marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
-             this,                            SIGNAL( propertyValueChanged( const QString &, bool ) ) );
+    connect( d->m_marbleLegendBrowser, SIGNAL(toggledShowProperty(QString,bool)),
+             this,                            SIGNAL(propertyValueChanged(QString,bool)) );
 }
 
 }

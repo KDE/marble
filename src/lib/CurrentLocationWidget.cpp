@@ -85,11 +85,11 @@ CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f
     d->m_currentLocationUi.setupUi( this );
     layout()->setMargin( 0 );
 
-    connect( d->m_currentLocationUi.recenterComboBox, SIGNAL ( currentIndexChanged( int ) ),
-            this, SLOT( setRecenterMode( int ) ) );
+    connect( d->m_currentLocationUi.recenterComboBox, SIGNAL (currentIndexChanged(int)),
+            this, SLOT(setRecenterMode(int)) );
 
-    connect( d->m_currentLocationUi.autoZoomCheckBox, SIGNAL( clicked( bool ) ),
-             this, SLOT( setAutoZoom( bool ) ) );
+    connect( d->m_currentLocationUi.autoZoomCheckBox, SIGNAL(clicked(bool)),
+             this, SLOT(setAutoZoom(bool)) );
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     d->m_currentLocationUi.positionTrackingComboBox->setVisible( !smallScreen );
@@ -126,71 +126,71 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
 
     //disconnect CurrentLocation Signals
     disconnect( d->m_widget->model()->positionTracking(),
-             SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-             this, SLOT( receiveGpsCoordinates( GeoDataCoordinates, qreal ) ) );
+             SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+             this, SLOT(receiveGpsCoordinates(GeoDataCoordinates,qreal)) );
     disconnect( d->m_widget->model()->positionTracking(),
-             SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
-             this, SLOT( updateActivePositionProvider( PositionProviderPlugin* ) ) );
-    disconnect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
-             this, SLOT( changePositionProvider( QString ) ) );
-    disconnect( d->m_currentLocationUi.locationLabel, SIGNAL( linkActivated( QString ) ),
-             this, SLOT( centerOnCurrentLocation() ) );
+             SIGNAL(positionProviderPluginChanged(PositionProviderPlugin*)),
+             this, SLOT(updateActivePositionProvider(PositionProviderPlugin*)) );
+    disconnect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL(currentIndexChanged(QString)),
+             this, SLOT(changePositionProvider(QString)) );
+    disconnect( d->m_currentLocationUi.locationLabel, SIGNAL(linkActivated(QString)),
+             this, SLOT(centerOnCurrentLocation()) );
     disconnect( d->m_widget->model()->positionTracking(),
-             SIGNAL( statusChanged( PositionProviderStatus) ),this,
-             SLOT( adjustPositionTrackingStatus( PositionProviderStatus) ) );
+             SIGNAL(statusChanged(PositionProviderStatus)),this,
+             SLOT(adjustPositionTrackingStatus(PositionProviderStatus)) );
 
-    disconnect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( AutoNavigation::CenterMode ) ),
-             this, SLOT( updateRecenterComboBox( AutoNavigation::CenterMode ) ) );
-    disconnect( d->m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
-             this, SLOT( updateAutoZoomCheckBox( bool ) ) );
-    disconnect( d->m_widget->model(), SIGNAL( trackedPlacemarkChanged( const GeoDataPlacemark* ) ),
-             this, SLOT( trackPlacemark() ) );
+    disconnect( d->m_adjustNavigation, SIGNAL(recenterModeChanged(AutoNavigation::CenterMode)),
+             this, SLOT(updateRecenterComboBox(AutoNavigation::CenterMode)) );
+    disconnect( d->m_adjustNavigation, SIGNAL(autoZoomToggled(bool)),
+             this, SLOT(updateAutoZoomCheckBox(bool)) );
+    disconnect( d->m_widget->model(), SIGNAL(trackedPlacemarkChanged(const GeoDataPlacemark*)),
+             this, SLOT(trackPlacemark()) );
 
     //connect CurrentLoctaion signals
     connect( d->m_widget->model()->positionTracking(),
-             SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-             this, SLOT( receiveGpsCoordinates( GeoDataCoordinates, qreal ) ) );
+             SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+             this, SLOT(receiveGpsCoordinates(GeoDataCoordinates,qreal)) );
     connect( d->m_widget->model()->positionTracking(),
-             SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
-             this, SLOT( updateActivePositionProvider( PositionProviderPlugin* ) ) );
+             SIGNAL(positionProviderPluginChanged(PositionProviderPlugin*)),
+             this, SLOT(updateActivePositionProvider(PositionProviderPlugin*)) );
     d->updateActivePositionProvider( d->m_widget->model()->positionTracking()->positionProviderPlugin() );
-    connect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
-             this, SLOT( changePositionProvider( QString ) ) );
-    connect( d->m_currentLocationUi.locationLabel, SIGNAL( linkActivated( QString ) ),
-             this, SLOT( centerOnCurrentLocation() ) );
+    connect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL(currentIndexChanged(QString)),
+             this, SLOT(changePositionProvider(QString)) );
+    connect( d->m_currentLocationUi.locationLabel, SIGNAL(linkActivated(QString)),
+             this, SLOT(centerOnCurrentLocation()) );
     connect( d->m_widget->model()->positionTracking(),
-             SIGNAL( statusChanged( PositionProviderStatus) ), this,
-             SLOT( adjustPositionTrackingStatus( PositionProviderStatus) ) );
+             SIGNAL(statusChanged(PositionProviderStatus)), this,
+             SLOT(adjustPositionTrackingStatus(PositionProviderStatus)) );
 
-    connect( d->m_adjustNavigation, SIGNAL( recenterModeChanged( AutoNavigation::CenterMode ) ),
-             this, SLOT( updateRecenterComboBox( AutoNavigation::CenterMode ) ) );
-    connect( d->m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
-             this, SLOT( updateAutoZoomCheckBox( bool ) ) );
-    connect( d->m_adjustNavigation, SIGNAL( zoomIn( FlyToMode ) ),
-             d->m_widget, SLOT( zoomIn( FlyToMode ) ) );
-    connect( d->m_adjustNavigation, SIGNAL( zoomOut( FlyToMode ) ),
-             d->m_widget, SLOT( zoomOut( FlyToMode ) ) );
-    connect( d->m_adjustNavigation, SIGNAL( centerOn( const GeoDataCoordinates &, bool ) ),
-             d->m_widget, SLOT( centerOn( const GeoDataCoordinates &, bool ) ) );
+    connect( d->m_adjustNavigation, SIGNAL(recenterModeChanged(AutoNavigation::CenterMode)),
+             this, SLOT(updateRecenterComboBox(AutoNavigation::CenterMode)) );
+    connect( d->m_adjustNavigation, SIGNAL(autoZoomToggled(bool)),
+             this, SLOT(updateAutoZoomCheckBox(bool)) );
+    connect( d->m_adjustNavigation, SIGNAL(zoomIn(FlyToMode)),
+             d->m_widget, SLOT(zoomIn(FlyToMode)) );
+    connect( d->m_adjustNavigation, SIGNAL(zoomOut(FlyToMode)),
+             d->m_widget, SLOT(zoomOut(FlyToMode)) );
+    connect( d->m_adjustNavigation, SIGNAL(centerOn(GeoDataCoordinates,bool)),
+             d->m_widget, SLOT(centerOn(GeoDataCoordinates,bool)) );
 
-    connect( d->m_widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
-             d->m_adjustNavigation, SLOT( inhibitAutoAdjustments() ) );
+    connect( d->m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+             d->m_adjustNavigation, SLOT(inhibitAutoAdjustments()) );
 
-    connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL( clicked(bool) ),
-             d->m_widget->model()->positionTracking(), SLOT( setTrackVisible(bool) ));
-    connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL( clicked(bool) ),
+    connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL(clicked(bool)),
+             d->m_widget->model()->positionTracking(), SLOT(setTrackVisible(bool)));
+    connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL(clicked(bool)),
              d->m_widget, SLOT(update()));
     if ( d->m_widget->model()->positionTracking()->trackVisible() ) {
         d->m_currentLocationUi.showTrackCheckBox->setCheckState(Qt::Checked);
     }
-    connect ( d->m_currentLocationUi.saveTrackButton, SIGNAL( clicked(bool)),
+    connect ( d->m_currentLocationUi.saveTrackButton, SIGNAL(clicked(bool)),
               this, SLOT(saveTrack()));
-    connect ( d->m_currentLocationUi.openTrackButton, SIGNAL( clicked(bool)),
+    connect ( d->m_currentLocationUi.openTrackButton, SIGNAL(clicked(bool)),
               this, SLOT(openTrack()));
-    connect (d->m_currentLocationUi.clearTrackButton, SIGNAL( clicked(bool)),
+    connect (d->m_currentLocationUi.clearTrackButton, SIGNAL(clicked(bool)),
              this, SLOT(clearTrack()));
-    connect( d->m_widget->model(), SIGNAL( trackedPlacemarkChanged( const GeoDataPlacemark* ) ),
-             this, SLOT( trackPlacemark() ) );
+    connect( d->m_widget->model(), SIGNAL(trackedPlacemarkChanged(const GeoDataPlacemark*)),
+             this, SLOT(trackPlacemark()) );
 }
 
 void CurrentLocationWidgetPrivate::adjustPositionTrackingStatus( PositionProviderStatus status )

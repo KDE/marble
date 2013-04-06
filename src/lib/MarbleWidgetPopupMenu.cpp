@@ -102,7 +102,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     if ( !smallScreen ) {
         m_rmbMenu->addAction( m_copyCoordinateAction );
     }
-    m_rmbMenu->addAction( QIcon(":/icons/addressbook-details.png"), tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
+    m_rmbMenu->addAction( QIcon(":/icons/addressbook-details.png"), tr( "&Address Details" ), this, SLOT(startReverseGeocoding()) );
     m_rmbMenu->addSeparator();
     m_rmbMenu->addMenu( infoBoxMenu );
 
@@ -112,18 +112,18 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
         m_rmbMenu->addAction( fullscreenAction );
     }
 
-    connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
-    connect( m_directionsToHereAction, SIGNAL( triggered( ) ), SLOT( directionsToHere() ) );
-    connect( addBookmark, SIGNAL( triggered( ) ), SLOT( addBookmark() ) );
-    connect( aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
-    connect( m_copyCoordinateAction, SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
-    connect( m_infoDialogAction, SIGNAL( triggered() ), SLOT( slotInfoDialog() ) );
-    connect( m_showOrbitAction, SIGNAL( triggered(bool) ), SLOT( slotShowOrbit(bool) ) );
-    connect( m_trackPlacemarkAction, SIGNAL( triggered(bool) ), SLOT( slotTrackPlacemark() ) );
-    connect( fullscreenAction, SIGNAL( triggered( bool ) ), this, SLOT( toggleFullscreen( bool ) ) );
+    connect( fromHere, SIGNAL(triggered()), SLOT(directionsFromHere()) );
+    connect( m_directionsToHereAction, SIGNAL(triggered()), SLOT(directionsToHere()) );
+    connect( addBookmark, SIGNAL(triggered()), SLOT(addBookmark()) );
+    connect( aboutDialogAction, SIGNAL(triggered()), SLOT(slotAboutDialog()) );
+    connect( m_copyCoordinateAction, SIGNAL(triggered()), SLOT(slotCopyCoordinates()) );
+    connect( m_infoDialogAction, SIGNAL(triggered()), SLOT(slotInfoDialog()) );
+    connect( m_showOrbitAction, SIGNAL(triggered(bool)), SLOT(slotShowOrbit(bool)) );
+    connect( m_trackPlacemarkAction, SIGNAL(triggered(bool)), SLOT(slotTrackPlacemark()) );
+    connect( fullscreenAction, SIGNAL(triggered(bool)), this, SLOT(toggleFullscreen(bool)) );
 
-    connect( m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-             this, SLOT( showAddressInformation( GeoDataCoordinates, GeoDataPlacemark ) ) );
+    connect( m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
+             this, SLOT(showAddressInformation(GeoDataCoordinates,GeoDataPlacemark)) );
 }
 
 QMenu* MarbleWidgetPopupMenu::createInfoBoxMenu()

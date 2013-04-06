@@ -158,16 +158,16 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
 
     connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
                                                            QItemSelection) ),
-             this,               SLOT( requestStyleReset() ) );
+             this,               SLOT(requestStyleReset()) );
 
-    connect( &m_placemarkModel, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-             this, SLOT( resetCacheData() ) );
-    connect( &m_placemarkModel, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
-             this, SLOT( addPlacemarks(QModelIndex,int,int)) );
-    connect( &m_placemarkModel, SIGNAL( rowsAboutToBeRemoved(const QModelIndex&, int, int) ),
-             this, SLOT( removePlacemarks(QModelIndex,int,int)) );
-    connect( &m_placemarkModel, SIGNAL( modelReset() ),
-             this, SLOT( resetCacheData() ) );
+    connect( &m_placemarkModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+             this, SLOT(resetCacheData()) );
+    connect( &m_placemarkModel, SIGNAL(rowsInserted(QModelIndex,int,int)),
+             this, SLOT(addPlacemarks(QModelIndex,int,int)) );
+    connect( &m_placemarkModel, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
+             this, SLOT(removePlacemarks(QModelIndex,int,int)) );
+    connect( &m_placemarkModel, SIGNAL(modelReset()),
+             this, SLOT(resetCacheData()) );
 }
 
 PlacemarkLayout::~PlacemarkLayout()

@@ -121,7 +121,7 @@ void PntMap::load(const QString &filename)
 {
     m_loader = new PntMapLoader( this, filename );
 
-    connect ( m_loader, SIGNAL( pntMapLoaded( bool ) ), SLOT( setInitialized( bool ) ) );
+    connect ( m_loader, SIGNAL(pntMapLoaded(bool)), SLOT(setInitialized(bool)) );
     m_loader->start();
 }
 

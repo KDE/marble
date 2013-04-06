@@ -494,12 +494,12 @@ void MonavConfigWidgetPrivate::install()
             QString message = QObject::tr( "Downloading %1" ).arg( file.fileName() );
             setBusy( true, message );
             m_currentReply = m_networkAccessManager.get( QNetworkRequest( m_currentDownload ) );
-            QObject::connect( m_currentReply, SIGNAL( readyRead() ),
-                         m_parent, SLOT( retrieveData() ) );
-            QObject::connect( m_currentReply, SIGNAL( readChannelFinished() ),
-                         m_parent, SLOT( retrieveData() ) );
-            QObject::connect( m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
-                     m_parent, SLOT( updateProgressBar( qint64, qint64 ) ) );
+            QObject::connect( m_currentReply, SIGNAL(readyRead()),
+                         m_parent, SLOT(retrieveData()) );
+            QObject::connect( m_currentReply, SIGNAL(readChannelFinished()),
+                         m_parent, SLOT(retrieveData()) );
+            QObject::connect( m_currentReply, SIGNAL(downloadProgress(qint64,qint64)),
+                     m_parent, SLOT(updateProgressBar(qint64,qint64)) );
         } else {
             mDebug() << "Failed to write to " << localFile;
         }

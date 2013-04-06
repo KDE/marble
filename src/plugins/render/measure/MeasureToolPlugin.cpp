@@ -394,7 +394,7 @@ void MeasureToolPlugin::addContextItems()
     connect( m_removeLastMeasurePointAction, SIGNAL(triggered()), SLOT(removeLastMeasurePoint()) );
     connect( m_removeMeasurePointsAction, SIGNAL(triggered()), SLOT(removeMeasurePoints()) );
 
-    connect( this, SIGNAL( numberOfMeasurePointsChanged(int)), SLOT(setNumberOfMeasurePoints(int)) );
+    connect( this, SIGNAL(numberOfMeasurePointsChanged(int)), SLOT(setNumberOfMeasurePoints(int)) );
 }
 
 void MeasureToolPlugin::removeContextItems()

@@ -170,21 +170,21 @@ MarbleModel::MarbleModel( QObject *parent )
 #endif
 
     // The thread will be started at setting persistent tile cache size.
-    connect( this, SIGNAL( themeChanged( QString ) ),
-             &d->m_storageWatcher, SLOT( updateTheme( QString ) ) );
+    connect( this, SIGNAL(themeChanged(QString)),
+             &d->m_storageWatcher, SLOT(updateTheme(QString)) );
 
     // connect the StoragePolicy used by the download manager to the FileStorageWatcher
-    connect( &d->m_storagePolicy, SIGNAL( cleared() ),
-             &d->m_storageWatcher, SLOT( resetCurrentSize() ) );
-    connect( &d->m_storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
-             &d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
+    connect( &d->m_storagePolicy, SIGNAL(cleared()),
+             &d->m_storageWatcher, SLOT(resetCurrentSize()) );
+    connect( &d->m_storagePolicy, SIGNAL(sizeChanged(qint64)),
+             &d->m_storageWatcher, SLOT(addToCurrentSize(qint64)) );
 
     d->m_fileManager = new FileManager( this );
 
     d->m_routingManager = new RoutingManager( this, this );
 
-    connect(&d->m_clock,   SIGNAL( timeChanged() ),
-            &d->m_sunLocator, SLOT( update() ) );
+    connect(&d->m_clock,   SIGNAL(timeChanged()),
+            &d->m_sunLocator, SLOT(update()) );
 
     d->m_elevationModel = new ElevationModel( this );
 

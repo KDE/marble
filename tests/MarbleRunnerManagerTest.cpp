@@ -136,12 +136,12 @@ void MarbleRunnerManagerTest::testAsyncPlacemarks()
 {
     MarbleRunnerManager m_runnerManager(&m_pluginManager, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL( searchFinished( QString ) ) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ) );
+    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(searchFinished(QString)) );
+    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark*>)) );
 
     QEventLoop loop;
-    connect( &m_runnerManager, SIGNAL( searchFinished( QString ) ),
-             &loop, SLOT( quit() ), Qt::QueuedConnection );
+    connect( &m_runnerManager, SIGNAL(searchFinished(QString)),
+             &loop, SLOT(quit()), Qt::QueuedConnection );
 
     QFETCH( QString, name );
     m_runnerManager.findPlacemarks( name );
@@ -200,8 +200,8 @@ void MarbleRunnerManagerTest::testAsyncReverse()
     QSignalSpy resultSpy( &m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)) );
 
     QEventLoop loop;
-    connect( &m_runnerManager, SIGNAL( reverseGeocodingFinished() ),
-             &loop, SLOT( quit() ), Qt::QueuedConnection );
+    connect( &m_runnerManager, SIGNAL(reverseGeocodingFinished()),
+             &loop, SLOT(quit()), Qt::QueuedConnection );
 
     QFETCH( GeoDataCoordinates, coordinates );
     m_runnerManager.reverseGeocoding( coordinates );
@@ -219,7 +219,7 @@ void MarbleRunnerManagerTest::testSyncRouting()
     MarbleRunnerManager m_runnerManager(&m_pluginManager, this);
 
     QSignalSpy finishSpy( &m_runnerManager, SIGNAL(routingFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL( routeRetrieved(GeoDataDocument*)) );
+    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument*)) );
 
     QCOMPARE( finishSpy.count(), 0 );
     QCOMPARE( resultSpy.count(), 0 );
@@ -246,11 +246,11 @@ void MarbleRunnerManagerTest::testAsyncRouting()
     MarbleRunnerManager m_runnerManager(&m_pluginManager, this);
 
     QSignalSpy finishSpy( &m_runnerManager, SIGNAL(routingFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL( routeRetrieved(GeoDataDocument*)) );
+    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument*)) );
 
     QEventLoop loop;
-    connect( &m_runnerManager, SIGNAL( routingFinished() ),
-             &loop, SLOT( quit() ), Qt::QueuedConnection );
+    connect( &m_runnerManager, SIGNAL(routingFinished()),
+             &loop, SLOT(quit()), Qt::QueuedConnection );
 
     QFETCH( QList<GeoDataCoordinates>, coordinatesList );
     RouteRequest request;
@@ -300,8 +300,8 @@ void MarbleRunnerManagerTest::testSyncParsing()
 {
     MarbleRunnerManager m_runnerManager(&m_pluginManager, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL( parsingFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL( parsingFinished(GeoDataDocument*,QString)) );
+    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(parsingFinished()) );
+    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(parsingFinished(GeoDataDocument*,QString)) );
 
     QFETCH( QString, fileName );
     QFETCH( int, resultCount );
@@ -337,12 +337,12 @@ void MarbleRunnerManagerTest::testAsyncParsing()
 {
     MarbleRunnerManager m_runnerManager(&m_pluginManager, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL( parsingFinished() ) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL( parsingFinished(GeoDataDocument*,QString)) );
+    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(parsingFinished()) );
+    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(parsingFinished(GeoDataDocument*,QString)) );
 
     QEventLoop loop;
-    connect( &m_runnerManager, SIGNAL( parsingFinished() ),
-             &loop, SLOT( quit() ), Qt::QueuedConnection );
+    connect( &m_runnerManager, SIGNAL(parsingFinished()),
+             &loop, SLOT(quit()), Qt::QueuedConnection );
 
     QFETCH( QString, fileName );
     QFETCH( int, resultCount );

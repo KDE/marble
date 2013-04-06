@@ -93,34 +93,34 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
 
     d->m_sortproxy = new QSortFilterProxyModel( this );
     d->m_navigationUi.locationListView->setModel( d->m_sortproxy );
-    connect( d->m_navigationUi.goHomeButton,     SIGNAL( clicked() ),
-             this,                               SIGNAL( goHome() ) );
-    connect( d->m_navigationUi.zoomSlider,       SIGNAL( valueChanged( int ) ),
-             this,                               SIGNAL( zoomChanged( int ) ) );
-    connect( d->m_navigationUi.zoomInButton,     SIGNAL( clicked() ),
-             this,                               SIGNAL( zoomIn() ) );
-    connect( d->m_navigationUi.zoomOutButton,    SIGNAL( clicked() ),
-             this,                               SIGNAL( zoomOut() ) );
+    connect( d->m_navigationUi.goHomeButton,     SIGNAL(clicked()),
+             this,                               SIGNAL(goHome()) );
+    connect( d->m_navigationUi.zoomSlider,       SIGNAL(valueChanged(int)),
+             this,                               SIGNAL(zoomChanged(int)) );
+    connect( d->m_navigationUi.zoomInButton,     SIGNAL(clicked()),
+             this,                               SIGNAL(zoomIn()) );
+    connect( d->m_navigationUi.zoomOutButton,    SIGNAL(clicked()),
+             this,                               SIGNAL(zoomOut()) );
 
-    connect( d->m_navigationUi.zoomSlider,       SIGNAL( valueChanged( int ) ),
-             this,                               SLOT( updateButtons( int ) ) );
+    connect( d->m_navigationUi.zoomSlider,       SIGNAL(valueChanged(int)),
+             this,                               SLOT(updateButtons(int)) );
 
-    connect( d->m_navigationUi.moveLeftButton,   SIGNAL( clicked() ),
-             this,                               SIGNAL( moveLeft() ) );
-    connect( d->m_navigationUi.moveRightButton,  SIGNAL( clicked() ),
-             this,                               SIGNAL( moveRight() ) );
-    connect( d->m_navigationUi.moveUpButton,     SIGNAL( clicked() ),
-             this,                               SIGNAL( moveUp() ) );
-    connect( d->m_navigationUi.moveDownButton,   SIGNAL( clicked() ),
-             this,                               SIGNAL( moveDown() ) );
+    connect( d->m_navigationUi.moveLeftButton,   SIGNAL(clicked()),
+             this,                               SIGNAL(moveLeft()) );
+    connect( d->m_navigationUi.moveRightButton,  SIGNAL(clicked()),
+             this,                               SIGNAL(moveRight()) );
+    connect( d->m_navigationUi.moveUpButton,     SIGNAL(clicked()),
+             this,                               SIGNAL(moveUp()) );
+    connect( d->m_navigationUi.moveDownButton,   SIGNAL(clicked()),
+             this,                               SIGNAL(moveDown()) );
 
-    connect( d->m_navigationUi.locationListView, SIGNAL( activated( const QModelIndex& ) ),
-             this,                               SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
+    connect( d->m_navigationUi.locationListView, SIGNAL(activated(QModelIndex)),
+             this,                               SLOT(mapCenterOnSignal(QModelIndex)) );
 
-    connect( d->m_navigationUi.zoomSlider,       SIGNAL( sliderPressed() ),
-             this,                               SLOT( adjustForAnimation() ) );
-    connect( d->m_navigationUi.zoomSlider,       SIGNAL( sliderReleased() ),
-             this,                               SLOT( adjustForStill() ) );
+    connect( d->m_navigationUi.zoomSlider,       SIGNAL(sliderPressed()),
+             this,                               SLOT(adjustForAnimation()) );
+    connect( d->m_navigationUi.zoomSlider,       SIGNAL(sliderReleased()),
+             this,                               SLOT(adjustForStill()) );
 }
 
 NavigationWidget::~NavigationWidget()
@@ -133,9 +133,9 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
     GeoDataTreeModel *treeModel;
 
     d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
-    connect( d->m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
-             this,               SLOT( setSearchResult( QVector<GeoDataPlacemark*> ) ) );
-    connect( d->m_runnerManager, SIGNAL( searchFinished( QString ) ), this, SIGNAL( searchFinished() ) );
+    connect( d->m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark*>)),
+             this,               SLOT(setSearchResult(QVector<GeoDataPlacemark*>)) );
+    connect( d->m_runnerManager, SIGNAL(searchFinished(QString)), this, SIGNAL(searchFinished()) );
 
     d->m_widget = widget;
     d->m_runnerManager->setModel( widget->model() );
@@ -153,21 +153,21 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
                     d->m_branchfilter.mapFromSource( treeModel->index( d->m_document ) ) ) );
 
     // Connect necessary signals.
-    connect( this, SIGNAL( goHome() ),         d->m_widget, SLOT( goHome() ) );
-    connect( this, SIGNAL( zoomChanged(int) ), d->m_widget, SLOT( setZoom( int ) ) );
-    connect( this, SIGNAL( zoomIn() ),         d->m_widget, SLOT( zoomIn() ) );
-    connect( this, SIGNAL( zoomOut() ),        d->m_widget, SLOT( zoomOut() ) );
+    connect( this, SIGNAL(goHome()),         d->m_widget, SLOT(goHome()) );
+    connect( this, SIGNAL(zoomChanged(int)), d->m_widget, SLOT(setZoom(int)) );
+    connect( this, SIGNAL(zoomIn()),         d->m_widget, SLOT(zoomIn()) );
+    connect( this, SIGNAL(zoomOut()),        d->m_widget, SLOT(zoomOut()) );
 
-    connect( this, SIGNAL( moveLeft() ),  d->m_widget, SLOT( moveLeft() ) );
-    connect( this, SIGNAL( moveRight() ), d->m_widget, SLOT( moveRight() ) );
-    connect( this, SIGNAL( moveUp() ),    d->m_widget, SLOT( moveUp() ) );
-    connect( this, SIGNAL( moveDown() ),  d->m_widget, SLOT( moveDown() ) );
+    connect( this, SIGNAL(moveLeft()),  d->m_widget, SLOT(moveLeft()) );
+    connect( this, SIGNAL(moveRight()), d->m_widget, SLOT(moveRight()) );
+    connect( this, SIGNAL(moveUp()),    d->m_widget, SLOT(moveUp()) );
+    connect( this, SIGNAL(moveDown()),  d->m_widget, SLOT(moveDown()) );
 
-    connect( d->m_widget, SIGNAL( zoomChanged( int ) ),
-             this,        SLOT( changeZoom( int ) ) );
+    connect( d->m_widget, SIGNAL(zoomChanged(int)),
+             this,        SLOT(changeZoom(int)) );
 
-    connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
-             this,        SLOT( selectTheme( QString ) ) );
+    connect( d->m_widget, SIGNAL(themeChanged(QString)),
+             this,        SLOT(selectTheme(QString)) );
 }
 
 void NavigationWidget::search(const QString &searchTerm, SearchMode searchMode )

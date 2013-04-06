@@ -82,8 +82,8 @@ void MarbleLegendBrowser::setMarbleModel( MarbleModel *marbleModel )
     d->m_marbleModel = marbleModel;
 
     if ( d->m_marbleModel ) {
-        connect ( d->m_marbleModel, SIGNAL( themeChanged( QString ) ),
-                  this, SLOT( initTheme() ) );
+        connect ( d->m_marbleModel, SIGNAL(themeChanged(QString)),
+                  this, SLOT(initTheme()) );
     }
 }
 
@@ -102,9 +102,9 @@ void MarbleLegendBrowser::initTheme()
             }
         }
 
-        disconnect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ), 0, 0 );
-        connect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ),
-                  this, SLOT( setCheckedProperty( QString, bool ) ) );
+        disconnect ( currentMapTheme, SIGNAL(valueChanged(QString,bool)), 0, 0 );
+        connect ( currentMapTheme, SIGNAL(valueChanged(QString,bool)),
+                  this, SLOT(setCheckedProperty(QString,bool)) );
     }
 
     if ( isVisible() ) {

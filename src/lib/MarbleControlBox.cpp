@@ -100,11 +100,11 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     setCurrentLocationTabShown( true );
     setFileViewTabShown( false );
     
-    connect( d->m_mapViewWidget, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
-    connect( d->m_mapViewWidget, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
-    connect( d->m_mapViewWidget, SIGNAL( celestialBodyChanged( const QString& ) ),
-             d->m_navigationWidget, SLOT( clearSearch() ) );
-    connect( d->m_navigationWidget, SIGNAL( searchFinished() ), this, SIGNAL( searchFinished() ) );
+    connect( d->m_mapViewWidget, SIGNAL(showMapWizard()), this, SIGNAL(showMapWizard()) );
+    connect( d->m_mapViewWidget, SIGNAL(showUploadDialog()), this, SIGNAL(showUploadDialog()) );
+    connect( d->m_mapViewWidget, SIGNAL(celestialBodyChanged(QString)),
+             d->m_navigationWidget, SLOT(clearSearch()) );
+    connect( d->m_navigationWidget, SIGNAL(searchFinished()), this, SIGNAL(searchFinished()) );
 }
 
 MarbleControlBox::~MarbleControlBox()
@@ -128,11 +128,11 @@ void MarbleControlBox::setMarbleWidget(MarbleWidget *widget)
     d->m_mapViewWidget->setMarbleWidget( widget );
     d->m_currentLocationWidget->setMarbleWidget( widget );
 
-    connect( d->m_legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
-             widget,            SLOT( setPropertyValue( const QString &, bool ) ) );
+    connect( d->m_legendWidget, SIGNAL(propertyValueChanged(QString,bool)),
+             widget,            SLOT(setPropertyValue(QString,bool)) );
 
-    connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
-             this,        SLOT( selectTheme( QString ) ) );
+    connect( d->m_widget, SIGNAL(themeChanged(QString)),
+             this,        SLOT(selectTheme(QString)) );
 }
 
 void MarbleControlBox::setWidgetTabShown( QWidget * widget,

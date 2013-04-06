@@ -68,7 +68,7 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
 
     connect( &timer, SIGNAL(timeout()),
              &eventLoop, SLOT(quit()));
-    connect( this, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates, GeoDataPlacemark)),
+    connect( this, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
              &eventLoop, SLOT(quit()) );
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376

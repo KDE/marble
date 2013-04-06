@@ -193,10 +193,10 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
     if ( d->m_positionProvider ) {
         d->m_positionProvider->setParent( this );
         mDebug() << "Initializing position provider:" << d->m_positionProvider->name();
-        connect( d->m_positionProvider, SIGNAL( statusChanged( PositionProviderStatus ) ),
-                this, SLOT( updateStatus() ) );
-        connect( d->m_positionProvider, SIGNAL( positionChanged( GeoDataCoordinates,GeoDataAccuracy ) ),
-                 this, SLOT( updatePosition() ) );
+        connect( d->m_positionProvider, SIGNAL(statusChanged(PositionProviderStatus)),
+                this, SLOT(updateStatus()) );
+        connect( d->m_positionProvider, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)),
+                 this, SLOT(updatePosition()) );
 
         d->m_positionProvider->initialize();
     }

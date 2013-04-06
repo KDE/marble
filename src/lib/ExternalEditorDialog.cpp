@@ -54,8 +54,8 @@ ExternalEditorDialog::ExternalEditorDialog( QWidget * parent, Qt::WindowFlags fl
 {
     setupUi( this );
 
-    connect( editorComboBox, SIGNAL( currentIndexChanged( int ) ),
-             this, SLOT( updateDefaultEditor( int ) ) );
+    connect( editorComboBox, SIGNAL(currentIndexChanged(int)),
+             this, SLOT(updateDefaultEditor(int)) );
 
     if ( d->m_installedEditors[merkaartor] ) {
         d->m_defaultEditor = merkaartor;

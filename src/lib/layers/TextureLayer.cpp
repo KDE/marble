@@ -151,17 +151,17 @@ TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
     : QObject()
     , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this ) )
 {
-    connect( &d->m_loader, SIGNAL( tileCompleted( const TileId &, const QImage & ) ),
-             this, SLOT( updateTile( const TileId &, const QImage & ) ) );
+    connect( &d->m_loader, SIGNAL(tileCompleted(TileId,QImage)),
+             this, SLOT(updateTile(TileId,QImage)) );
 
     // Repaint timer
     d->m_repaintTimer.setSingleShot( true );
     d->m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
-    connect( &d->m_repaintTimer, SIGNAL( timeout() ),
-             this, SIGNAL( repaintNeeded() ) );
+    connect( &d->m_repaintTimer, SIGNAL(timeout()),
+             this, SIGNAL(repaintNeeded()) );
 
-    connect( d->m_veccomposer, SIGNAL( datasetLoaded() ),
-             this, SLOT( mapChanged() ) );
+    connect( d->m_veccomposer, SIGNAL(datasetLoaded()),
+             this, SLOT(mapChanged()) );
 }
 
 TextureLayer::~TextureLayer()
@@ -268,12 +268,12 @@ void TextureLayer::setShowRelief( bool show )
 
 void TextureLayer::setShowSunShading( bool show )
 {
-    disconnect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
-                this, SLOT( reset() ) );
+    disconnect( d->m_sunLocator, SIGNAL(positionChanged(qreal,qreal)),
+                this, SLOT(reset()) );
 
     if ( show ) {
-        connect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
-                 this,       SLOT( reset() ) );
+        connect( d->m_sunLocator, SIGNAL(positionChanged(qreal,qreal)),
+                 this,       SLOT(reset()) );
     }
 
     d->m_layerDecorator.setShowSunShading( show );
@@ -366,8 +366,8 @@ void TextureLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, 
     d->m_textureLayerSettings = textureLayerSettings;
 
     if ( d->m_textureLayerSettings ) {
-        connect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool ) ),
-                 this,                      SLOT( updateTextureLayers() ) );
+        connect( d->m_textureLayerSettings, SIGNAL(valueChanged(QString,bool)),
+                 this,                      SLOT(updateTextureLayers()) );
     }
 
     d->updateTextureLayers();

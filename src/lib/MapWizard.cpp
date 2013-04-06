@@ -115,14 +115,14 @@ PreviewDialog::PreviewDialog( QWidget* parent, QString mapThemeId ) : QDialog( p
     MarbleWidget *widget = new MarbleWidget();
     MarbleNavigator *navigator = new MarbleNavigator();
     
-    connect( navigator, SIGNAL( goHome() ), widget, SLOT( goHome() ) );
-    connect( navigator, SIGNAL( moveUp() ), widget, SLOT( moveUp() ) );
-    connect( navigator, SIGNAL( moveDown() ), widget, SLOT( moveDown() ) );
-    connect( navigator, SIGNAL( moveLeft() ), widget, SLOT( moveLeft() ) );
-    connect( navigator, SIGNAL( moveRight() ), widget, SLOT( moveRight() ) );
-    connect( navigator, SIGNAL( zoomIn() ), widget, SLOT( zoomIn() ) );
-    connect( navigator, SIGNAL( zoomOut() ), widget, SLOT( zoomOut() ) );
-    connect( navigator, SIGNAL( zoomChanged(int) ), widget, SLOT( setZoom(int) ) );
+    connect( navigator, SIGNAL(goHome()), widget, SLOT(goHome()) );
+    connect( navigator, SIGNAL(moveUp()), widget, SLOT(moveUp()) );
+    connect( navigator, SIGNAL(moveDown()), widget, SLOT(moveDown()) );
+    connect( navigator, SIGNAL(moveLeft()), widget, SLOT(moveLeft()) );
+    connect( navigator, SIGNAL(moveRight()), widget, SLOT(moveRight()) );
+    connect( navigator, SIGNAL(zoomIn()), widget, SLOT(zoomIn()) );
+    connect( navigator, SIGNAL(zoomOut()), widget, SLOT(zoomOut()) );
+    connect( navigator, SIGNAL(zoomChanged(int)), widget, SLOT(setZoom(int)) );
     
     widget->setMapThemeId( m_mapThemeId );
     widget->setZoom( 1000 );
@@ -193,23 +193,23 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
 {
     d->uiWidget.setupUi( this );
     
-    connect( this, SIGNAL( currentIdChanged( int ) ), this, SLOT( pageEntered( int ) ) );
+    connect( this, SIGNAL(currentIdChanged(int)), this, SLOT(pageEntered(int)) );
 
-    connect( &( d->xmlAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( parseServerCapabilities( QNetworkReply* ) ) );
-    connect( &( d->legendAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( createWmsLegend( QNetworkReply* ) ) );
-    connect( &( d->levelZeroAccessManager ), SIGNAL( finished( QNetworkReply* ) ), this, SLOT( createLevelZero( QNetworkReply* ) ) );
+    connect( &( d->xmlAccessManager ), SIGNAL(finished(QNetworkReply*)), this, SLOT(parseServerCapabilities(QNetworkReply*)) );
+    connect( &( d->legendAccessManager ), SIGNAL(finished(QNetworkReply*)), this, SLOT(createWmsLegend(QNetworkReply*)) );
+    connect( &( d->levelZeroAccessManager ), SIGNAL(finished(QNetworkReply*)), this, SLOT(createLevelZero(QNetworkReply*)) );
 
-    connect( d->uiWidget.pushButtonSource, SIGNAL( clicked( bool ) ), this, SLOT( querySourceImage() ) );
-    connect( d->uiWidget.pushButtonPreview, SIGNAL( clicked( bool ) ), this, SLOT( queryPreviewImage() ) );
-    connect( d->uiWidget.pushButtonLegend_2, SIGNAL( clicked( bool ) ), this, SLOT( queryLegendImage() ) );
+    connect( d->uiWidget.pushButtonSource, SIGNAL(clicked(bool)), this, SLOT(querySourceImage()) );
+    connect( d->uiWidget.pushButtonPreview, SIGNAL(clicked(bool)), this, SLOT(queryPreviewImage()) );
+    connect( d->uiWidget.pushButtonLegend_2, SIGNAL(clicked(bool)), this, SLOT(queryLegendImage()) );
 
-    connect( d->uiWidget.comboBoxWmsServer, SIGNAL( currentIndexChanged( QString ) ), d->uiWidget.lineEditWmsUrl, SLOT( setText( QString ) ) );
-    connect( d->uiWidget.listWidgetWmsMaps, SIGNAL( itemSelectionChanged() ), this, SLOT( autoFillDetails() ) );
+    connect( d->uiWidget.comboBoxWmsServer, SIGNAL(currentIndexChanged(QString)), d->uiWidget.lineEditWmsUrl, SLOT(setText(QString)) );
+    connect( d->uiWidget.listWidgetWmsMaps, SIGNAL(itemSelectionChanged()), this, SLOT(autoFillDetails()) );
     
-    connect( d->uiWidget.lineEditTitle, SIGNAL( textChanged( QString ) ), d->uiWidget.labelSumMName, SLOT( setText( QString ) ) );
-    connect( d->uiWidget.lineEditTheme, SIGNAL( textChanged( QString ) ), d->uiWidget.labelSumMTheme, SLOT( setText( QString ) ) );
+    connect( d->uiWidget.lineEditTitle, SIGNAL(textChanged(QString)), d->uiWidget.labelSumMName, SLOT(setText(QString)) );
+    connect( d->uiWidget.lineEditTheme, SIGNAL(textChanged(QString)), d->uiWidget.labelSumMTheme, SLOT(setText(QString)) );
     
-    connect( d->uiWidget.pushButtonPreviewMap, SIGNAL( clicked( bool ) ), this, SLOT( showPreview() ) );
+    connect( d->uiWidget.pushButtonPreviewMap, SIGNAL(clicked(bool)), this, SLOT(showPreview()) );
     
 }
 
@@ -1077,7 +1077,7 @@ void MapWizard::accept()
         d->uiWidget.labelPreview->clear();
         d->uiWidget.lineEditSource->clear();
         d->dgmlOutput.clear();
-        QTimer::singleShot( 0, this, SLOT( restart() ) );
+        QTimer::singleShot( 0, this, SLOT(restart()) );
     }
 
     else

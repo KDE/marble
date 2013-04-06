@@ -19,10 +19,10 @@ MarbleCacheSettingsWidget::MarbleCacheSettingsWidget( QWidget *parent ) : QWidge
 {
     setupUi( this );
 
-    connect( button_clearVolatileCache, SIGNAL( clicked() ), SIGNAL( clearVolatileCache() ) );
-    connect( button_clearPersistentCache, SIGNAL( clicked() ), SIGNAL( clearPersistentCache() ) );
-    connect( kcfg_proxyAuth, SIGNAL( toggled ( bool ) ), kcfg_proxyUser, SLOT( setEnabled(bool) ) );
-    connect( kcfg_proxyAuth, SIGNAL( toggled ( bool ) ), kcfg_proxyPass, SLOT( setEnabled(bool) ) );
+    connect( button_clearVolatileCache, SIGNAL(clicked()), SIGNAL(clearVolatileCache()) );
+    connect( button_clearPersistentCache, SIGNAL(clicked()), SIGNAL(clearPersistentCache()) );
+    connect( kcfg_proxyAuth, SIGNAL(toggled(bool)), kcfg_proxyUser, SLOT(setEnabled(bool)) );
+    connect( kcfg_proxyAuth, SIGNAL(toggled(bool)), kcfg_proxyPass, SLOT(setEnabled(bool)) );
 }
 
 #include "MarbleCacheSettingsWidget.moc"

@@ -136,7 +136,7 @@ void WorldClock::init()
     Plasma::DataEngine *m_timeEngine = dataEngine("time");
     m_timeEngine->connectSource( "Local", this, 6000, Plasma::AlignToMinute);
 
-    connect(m_map, SIGNAL(repaintNeeded(const QRegion&)), this, SLOT(slotRepaint()));
+    connect(m_map, SIGNAL(repaintNeeded(QRegion)), this, SLOT(slotRepaint()));
 }
 
 WorldClock::~WorldClock()

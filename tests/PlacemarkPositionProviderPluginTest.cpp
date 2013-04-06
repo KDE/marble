@@ -117,8 +117,8 @@ void PlacemarkPositionProviderPluginTest::initialize()
 
     QCOMPARE( plugin->status(), PositionProviderStatusUnavailable );
 
-    QSignalSpy statusChangedSpy( plugin, SIGNAL( statusChanged( PositionProviderStatus ) ) );
-    QSignalSpy positionChangedSpy( plugin, SIGNAL( positionChanged( GeoDataCoordinates, GeoDataAccuracy ) ) );
+    QSignalSpy statusChangedSpy( plugin, SIGNAL(statusChanged(PositionProviderStatus)) );
+    QSignalSpy positionChangedSpy( plugin, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)) );
 
     plugin->setMarbleModel( &model );
     plugin->initialize();
@@ -161,8 +161,8 @@ void PlacemarkPositionProviderPluginTest::setTrackedPlacemark_afterInitialize()
     PositionProviderPlugin *const plugin = createInitializedPlugin( &model );
     QVERIFY2( plugin != 0, "Need a PlacemarkPositionProviderPlugin!" );
 
-    QSignalSpy statusChangedSpy( plugin, SIGNAL( statusChanged( PositionProviderStatus ) ) );
-    QSignalSpy positionChangedSpy( plugin, SIGNAL( positionChanged( GeoDataCoordinates, GeoDataAccuracy ) ) );
+    QSignalSpy statusChangedSpy( plugin, SIGNAL(statusChanged(PositionProviderStatus)) );
+    QSignalSpy positionChangedSpy( plugin, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)) );
 
     model.setTrackedPlacemark( newPlacemark );
 
@@ -184,7 +184,7 @@ void PlacemarkPositionProviderPluginTest::setClockDateTime()
     PositionProviderPlugin *const plugin = createInitializedPlugin( &model );
     QVERIFY2( plugin != 0, "Need a PlacemarkPositionProviderPlugin!" );
 
-    QSignalSpy positionChangedSpy( plugin, SIGNAL( positionChanged( GeoDataCoordinates, GeoDataAccuracy ) ) );
+    QSignalSpy positionChangedSpy( plugin, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)) );
 
     model.setClockDateTime( m_minTime );
 

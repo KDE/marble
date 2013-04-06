@@ -133,17 +133,17 @@ QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
     m_routeOffsetLabel = new QLabel( tr( "Offset from route:" ) );
     m_routeOffsetLabel->setAlignment( Qt::AlignHCenter );
 
-    connect( m_visibleRegionMethodButton, SIGNAL( toggled( bool ) ),
-             m_dialog, SLOT( toggleSelectionMethod() ) );
-    connect( m_specifiedRegionMethodButton, SIGNAL( toggled( bool ) ),
-             m_dialog, SLOT( toggleSelectionMethod() ));
-    connect( m_routeDownloadMethodButton, SIGNAL( toggled( bool ) ),
-             m_dialog, SLOT( toggleSelectionMethod() ) );
-    connect( m_routingModel, SIGNAL( modelReset() ), m_dialog, SLOT( updateRouteDialog() ) );
-    connect( m_routingModel, SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-             m_dialog, SLOT( updateRouteDialog() ) );
-    connect( m_routingModel, SIGNAL( rowsRemoved( QModelIndex, int, int ) ),
-             m_dialog, SLOT( updateRouteDialog() ) );
+    connect( m_visibleRegionMethodButton, SIGNAL(toggled(bool)),
+             m_dialog, SLOT(toggleSelectionMethod()) );
+    connect( m_specifiedRegionMethodButton, SIGNAL(toggled(bool)),
+             m_dialog, SLOT(toggleSelectionMethod()));
+    connect( m_routeDownloadMethodButton, SIGNAL(toggled(bool)),
+             m_dialog, SLOT(toggleSelectionMethod()) );
+    connect( m_routingModel, SIGNAL(modelReset()), m_dialog, SLOT(updateRouteDialog()) );
+    connect( m_routingModel, SIGNAL(rowsInserted(QModelIndex,int,int)),
+             m_dialog, SLOT(updateRouteDialog()) );
+    connect( m_routingModel, SIGNAL(rowsRemoved(QModelIndex,int,int)),
+             m_dialog, SLOT(updateRouteDialog()) );
 
     QHBoxLayout *routeOffsetLayout = new QHBoxLayout;
     routeOffsetLayout->addWidget( m_routeOffsetLabel );
@@ -201,9 +201,9 @@ QWidget * DownloadRegionDialog::Private::createOkCancelButtonBox()
         m_applyButton->setVisible( false );
     }
     buttonBox->addButton( QDialogButtonBox::Cancel );
-    connect( buttonBox, SIGNAL( accepted() ), m_dialog, SLOT( accept() ) );
-    connect( buttonBox, SIGNAL( rejected() ), m_dialog, SLOT( reject() ) );
-    connect( m_applyButton, SIGNAL( clicked() ), m_dialog, SIGNAL( applied() ) );
+    connect( buttonBox, SIGNAL(accepted()), m_dialog, SLOT(accept()) );
+    connect( buttonBox, SIGNAL(rejected()), m_dialog, SLOT(reject()) );
+    connect( m_applyButton, SIGNAL(clicked()), m_dialog, SIGNAL(applied()) );
     return buttonBox;
 }
 
@@ -243,14 +243,14 @@ DownloadRegionDialog::DownloadRegionDialog( MarbleWidget *const widget, QWidget 
         setLayout( layout );
     }
 
-    connect( d->m_latLonBoxWidget, SIGNAL( valueChanged() ), SLOT( updateTilesCount() ) );
-    connect( d->m_tileLevelRangeWidget, SIGNAL( topLevelChanged( int ) ),
-             SLOT( updateTilesCount() ) );
-    connect( d->m_tileLevelRangeWidget, SIGNAL( bottomLevelChanged( int )),
-             SLOT( updateTilesCount() ) );
-    connect( d->m_routeOffsetSpinBox, SIGNAL( valueChanged( double ) ), SLOT( updateTilesCount() ) );
-    connect( d->m_routeOffsetSpinBox, SIGNAL( valueChanged( double ) ), SLOT( setOffsetUnit() ) );
-    connect( d->m_model, SIGNAL( themeChanged( QString ) ), SLOT( updateTilesCount() ) );
+    connect( d->m_latLonBoxWidget, SIGNAL(valueChanged()), SLOT(updateTilesCount()) );
+    connect( d->m_tileLevelRangeWidget, SIGNAL(topLevelChanged(int)),
+             SLOT(updateTilesCount()) );
+    connect( d->m_tileLevelRangeWidget, SIGNAL(bottomLevelChanged(int)),
+             SLOT(updateTilesCount()) );
+    connect( d->m_routeOffsetSpinBox, SIGNAL(valueChanged(double)), SLOT(updateTilesCount()) );
+    connect( d->m_routeOffsetSpinBox, SIGNAL(valueChanged(double)), SLOT(setOffsetUnit()) );
+    connect( d->m_model, SIGNAL(themeChanged(QString)), SLOT(updateTilesCount()) );
 }
 
 DownloadRegionDialog::~DownloadRegionDialog()

@@ -181,8 +181,8 @@ void FileLoader::run()
             const QDateTime cacheLastModified  = QFileInfo( cacheFile ).lastModified();
 
             if ( sourceLastModified < cacheLastModified ) {
-                connect( &d->m_runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
-                         this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
+                connect( &d->m_runner, SIGNAL(parsingFinished(GeoDataDocument*,QString)),
+                         this, SLOT(documentParsed(GeoDataDocument*,QString)) );
                 d->m_runner.parseFile( cacheFile, d->m_documentRole );
             }
         }
@@ -191,8 +191,8 @@ void FileLoader::run()
             mDebug() << "No recent Default Placemark Cache File available!";
 
             // use runners: pnt, gpx, osm
-            connect( &d->m_runner, SIGNAL( parsingFinished(GeoDataDocument*,QString) ),
-                    this, SLOT( documentParsed( GeoDataDocument*, QString ) ) );
+            connect( &d->m_runner, SIGNAL(parsingFinished(GeoDataDocument*,QString)),
+                    this, SLOT(documentParsed(GeoDataDocument*,QString)) );
             d->m_runner.parseFile( defaultSourceName, d->m_documentRole );
         }
         else {

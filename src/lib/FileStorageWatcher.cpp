@@ -43,8 +43,8 @@ FileStorageWatcherThread::FileStorageWatcherThread( const QString &dataDirectory
     // For now setting cache limit to 0. This won't delete anything
     setCacheLimit( 0 );
     
-    connect( this, SIGNAL( variableChanged() ),
-	     this, SLOT( ensureCacheSize() ),
+    connect( this, SIGNAL(variableChanged()),
+	     this, SLOT(ensureCacheSize()),
 	     Qt::QueuedConnection );
     emit variableChanged();
 }
@@ -181,7 +181,7 @@ void FileStorageWatcherThread::ensureCacheSize()
 	// We have deleted enough files. 
 	// Perhaps there are changes.
 	if( m_filesDeleted > maxFilesDelete ) {
-	    QTimer::singleShot( 100, this, SLOT( ensureCacheSize() ) );
+	    QTimer::singleShot( 100, this, SLOT(ensureCacheSize()) );
 	    return;
 	} 
 	else {
@@ -392,10 +392,10 @@ void FileStorageWatcher::run()
 	
 	m_thread->getCurrentCacheSize();
 	
-	connect( this, SIGNAL( sizeChanged( qint64 ) ),
-		 m_thread, SLOT( addToCurrentSize( qint64 ) ) );
-	connect( this, SIGNAL( cleared() ),
-		 m_thread, SLOT( resetCurrentSize() ) );
+	connect( this, SIGNAL(sizeChanged(qint64)),
+		 m_thread, SLOT(addToCurrentSize(qint64)) );
+	connect( this, SIGNAL(cleared()),
+		 m_thread, SLOT(resetCurrentSize()) );
     
 	// Make sure that we don't want to stop process.
 	// The thread wouldn't exit from event loop.

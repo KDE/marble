@@ -60,14 +60,14 @@ int main(int argc, char** argv)
     mapWidget->centerOn(home);
 
     // Connect the map widget to the position label.
-    QObject::connect( mapWidget, SIGNAL( mouseMoveGeoPosition( QString ) ),
-                      positionLabel, SLOT( setText( QString ) ) );
+    QObject::connect( mapWidget, SIGNAL(mouseMoveGeoPosition(QString)),
+                      positionLabel, SLOT(setText(QString)) );
 
     // Connect the zoom slider to the map widget and vice versa.
-    QObject::connect( zoomSlider, SIGNAL( valueChanged(int) ),
-                      mapWidget, SLOT( zoomView(int) ) );
-    QObject::connect( mapWidget, SIGNAL( zoomChanged(int) ),
-                      zoomSlider, SLOT( setValue(int) ) );
+    QObject::connect( zoomSlider, SIGNAL(valueChanged(int)),
+                      mapWidget, SLOT(zoomView(int)) );
+    QObject::connect( mapWidget, SIGNAL(zoomChanged(int)),
+                      zoomSlider, SLOT(setValue(int)) );
 
     window->setLayout(layout);
     window->resize( 400, 300 );

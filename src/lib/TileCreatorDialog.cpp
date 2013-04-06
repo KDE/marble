@@ -42,10 +42,10 @@ TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
     
     d->uiWidget.setupUi(this);
 
-    connect( d->m_creator, SIGNAL( progress( int ) ),
-             this, SLOT( setProgress( int ) ), Qt::QueuedConnection );
-    connect( d->uiWidget.cancelButton, SIGNAL( clicked() ),
-             this, SLOT( cancelTileCreation() ) );
+    connect( d->m_creator, SIGNAL(progress(int)),
+             this, SLOT(setProgress(int)), Qt::QueuedConnection );
+    connect( d->uiWidget.cancelButton, SIGNAL(clicked()),
+             this, SLOT(cancelTileCreation()) );
 
     // Start the creation process
     d->m_creator->start();
@@ -61,8 +61,8 @@ void TileCreatorDialog::cancelTileCreation()
 
 TileCreatorDialog::~TileCreatorDialog()
 {
-    disconnect( d->m_creator, SIGNAL( progress( int ) ),
-                this, SLOT( setProgress( int ) ) );
+    disconnect( d->m_creator, SIGNAL(progress(int)),
+                this, SLOT(setProgress(int)) );
 
     if ( d->m_creator->isRunning() )
         d->m_creator->cancelTileCreation();
@@ -77,7 +77,7 @@ void TileCreatorDialog::setProgress( int progress )
 
     if ( progress == 100 )
 	{
-        QTimer::singleShot( 0, this, SLOT( accept() ) ); 
+        QTimer::singleShot( 0, this, SLOT(accept()) ); 
 	}
 }
 

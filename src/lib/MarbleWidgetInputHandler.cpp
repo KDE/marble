@@ -82,11 +82,11 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler( MarbleWidget *widget )
     : d( new Protected( widget ) )
 {
     d->m_mouseWheelTimer = new QTimer( this );
-    connect( d->m_mouseWheelTimer, SIGNAL( timeout() ),
-	     this, SLOT( restoreViewContext() ) );
+    connect( d->m_mouseWheelTimer, SIGNAL(timeout()),
+	     this, SLOT(restoreViewContext()) );
     
-    connect( d->m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
-             this,        SLOT( installPluginEventFilter( RenderPlugin * ) ) );
+    connect( d->m_widget, SIGNAL(renderPluginInitialized(RenderPlugin*)),
+             this,        SLOT(installPluginEventFilter(RenderPlugin*)) );
 
     foreach( RenderPlugin *renderPlugin, d->m_widget->renderPlugins() ) {
         if( renderPlugin->isInitialized() )
@@ -317,21 +317,21 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
 
     d->m_toolTipTimer.setSingleShot( true );
     d->m_toolTipTimer.setInterval( TOOLTIP_START_INTERVAL );
-    connect( &d->m_toolTipTimer, SIGNAL( timeout() ), this, SLOT( openItemToolTip() ) );
+    connect( &d->m_toolTipTimer, SIGNAL(timeout()), this, SLOT(openItemToolTip()) );
     d->m_lmbTimer.setSingleShot(true);
     connect( &d->m_lmbTimer, SIGNAL(timeout()), this, SLOT(lmbTimeout()));
 
     d->m_kineticSpinning.setUpdateInterval( 35 );
-    connect( &d->m_kineticSpinning, SIGNAL( positionChanged( qreal, qreal ) ),
-             MarbleWidgetInputHandler::d->m_widget, SLOT( centerOn( qreal, qreal ) ) );
-    connect( &d->m_kineticSpinning, SIGNAL( finished() ), SLOT( restoreViewContext() ) );
+    connect( &d->m_kineticSpinning, SIGNAL(positionChanged(qreal,qreal)),
+             MarbleWidgetInputHandler::d->m_widget, SLOT(centerOn(qreal,qreal)) );
+    connect( &d->m_kineticSpinning, SIGNAL(finished()), SLOT(restoreViewContext()) );
 
 
     // Left and right mouse button signals.
-    connect( this, SIGNAL( rmbRequest( int, int ) ),
-             this, SLOT( showRmbMenu( int, int ) ) );
-    connect( this, SIGNAL( lmbRequest( int, int ) ),
-             this, SLOT( showLmbMenu( int, int ) ) );
+    connect( this, SIGNAL(rmbRequest(int,int)),
+             this, SLOT(showRmbMenu(int,int)) );
+    connect( this, SIGNAL(lmbRequest(int,int)),
+             this, SLOT(showLmbMenu(int,int)) );
 }
 
 MarbleWidgetDefaultInputHandler::~MarbleWidgetDefaultInputHandler()

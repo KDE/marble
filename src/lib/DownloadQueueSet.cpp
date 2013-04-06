@@ -178,12 +178,12 @@ void DownloadQueueSet::activateJob( HttpJob * const job )
     m_activeJobs.push_back( job );
     emit progressChanged( m_activeJobs.size(), m_jobs.count() );
 
-    connect( job, SIGNAL( jobDone( HttpJob *, int )),
-             SLOT( retryOrBlacklistJob( HttpJob *, int )));
-    connect( job, SIGNAL( redirected( HttpJob *, QUrl )),
-             SLOT( redirectJob( HttpJob *, QUrl )));
-    connect( job, SIGNAL( dataReceived( HttpJob *, QByteArray )),
-             SLOT( finishJob( HttpJob *, QByteArray )));
+    connect( job, SIGNAL(jobDone(HttpJob*,int)),
+             SLOT(retryOrBlacklistJob(HttpJob*,int)));
+    connect( job, SIGNAL(redirected(HttpJob*,QUrl)),
+             SLOT(redirectJob(HttpJob*,QUrl)));
+    connect( job, SIGNAL(dataReceived(HttpJob*,QByteArray)),
+             SLOT(finishJob(HttpJob*,QByteArray)));
 
     job->execute();
 }

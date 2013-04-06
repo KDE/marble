@@ -73,15 +73,15 @@ VectorComposer::VectorComposer( QObject * parent )
     m_dateLinePen.setStyle( Qt::DashLine );
     m_dateLinePen.setColor( QColor( 0, 0, 0 ) );
 
-    connect( s_coastLines, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
-    connect( s_islands, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
-    connect( s_lakeislands, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
-    connect( s_lakes, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
-    connect( s_glaciers, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
-    connect( s_rivers, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
-    connect( s_countries, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
-    connect( s_usaStates, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
-    connect( s_dateLine, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
+    connect( s_coastLines, SIGNAL(initialized()), SIGNAL(datasetLoaded()) );
+    connect( s_islands, SIGNAL(initialized()), SIGNAL(datasetLoaded()) );
+    connect( s_lakeislands, SIGNAL(initialized()), SIGNAL(datasetLoaded()) );
+    connect( s_lakes, SIGNAL(initialized()), SIGNAL(datasetLoaded()) );
+    connect( s_glaciers, SIGNAL(initialized()), SIGNAL(datasetLoaded()) );
+    connect( s_rivers, SIGNAL(initialized()), SIGNAL(datasetLoaded()) );
+    connect( s_countries, SIGNAL(initialized()), SIGNAL(datasetLoaded()) );
+    connect( s_usaStates, SIGNAL(initialized()), SIGNAL(datasetLoaded()) );
+    connect( s_dateLine, SIGNAL(initialized()), SIGNAL(datasetLoaded()) );
 }
 
 VectorComposer::~VectorComposer()

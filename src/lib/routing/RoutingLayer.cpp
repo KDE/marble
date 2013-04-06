@@ -182,10 +182,10 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
     m_removeViaPointAction = new QAction( QObject::tr( "&Remove this destination" ), q );
-    QObject::connect( m_removeViaPointAction, SIGNAL( triggered() ), q, SLOT( removeViaPoint() ) );
+    QObject::connect( m_removeViaPointAction, SIGNAL(triggered()), q, SLOT(removeViaPoint()) );
     m_contextMenu->addAction( Qt::RightButton, m_removeViaPointAction );
     QAction *exportAction = new QAction( QObject::tr( "&Export route..." ), q );
-    QObject::connect( exportAction, SIGNAL( triggered() ), q, SLOT( exportRoute() ) );
+    QObject::connect( exportAction, SIGNAL(triggered()), q, SLOT(exportRoute()) );
     m_contextMenu->addAction( Qt::RightButton, exportAction );
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         m_pixmapSize = QSize( 38, 38 );
@@ -648,16 +648,16 @@ void RoutingLayerPrivate::clearStopOver()
 RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
         QObject( parent ), d( new RoutingLayerPrivate( this, widget ) )
 {
-    connect( widget->model()->routingManager(), SIGNAL( stateChanged( RoutingManager::State ) ),
-             this, SLOT( updateRouteState( RoutingManager::State ) ) );
-    connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
-            this, SLOT( setViewportChanged() ) );
-    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
-            this, SLOT( setViewportChanged() ) );
-    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
-             this, SIGNAL( repaintNeeded() ) );
-    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int) ),
-             this, SLOT( showAlternativeRoutes() ) );
+    connect( widget->model()->routingManager(), SIGNAL(stateChanged(RoutingManager::State)),
+             this, SLOT(updateRouteState(RoutingManager::State)) );
+    connect( widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+            this, SLOT(setViewportChanged()) );
+    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL(currentRouteChanged(GeoDataDocument*)),
+            this, SLOT(setViewportChanged()) );
+    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL(currentRouteChanged(GeoDataDocument*)),
+             this, SIGNAL(repaintNeeded()) );
+    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL(rowsInserted(QModelIndex,int,int)),
+             this, SLOT(showAlternativeRoutes()) );
 }
 
 RoutingLayer::~RoutingLayer()

@@ -30,8 +30,8 @@ SearchTask::SearchTask( SearchRunner *runner, MarbleRunnerManager *manager, Marb
     m_searchTerm( searchTerm ),
     m_preferredBbox( preferred )
 {
-    connect( m_runner, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
-             manager, SLOT( addSearchResult( QVector<GeoDataPlacemark*> ) ) );
+    connect( m_runner, SIGNAL(searchFinished(QVector<GeoDataPlacemark*>)),
+             manager, SLOT(addSearchResult(QVector<GeoDataPlacemark*>)) );
     m_runner->setModel( model );
 }
 
@@ -48,8 +48,8 @@ ReverseGeocodingTask::ReverseGeocodingTask( ReverseGeocodingRunner *runner, Marb
     m_runner( runner ),
     m_coordinates( coordinates )
 {
-    connect( m_runner, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-             manager, SLOT( addReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
+    connect( m_runner, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
+             manager, SLOT(addReverseGeocodingResult(GeoDataCoordinates,GeoDataPlacemark)) );
     m_runner->setModel( model );
 }
 
@@ -66,8 +66,8 @@ RoutingTask::RoutingTask( RoutingRunner *runner, MarbleRunnerManager *manager, M
     m_runner( runner ),
     m_routeRequest( routeRequest )
 {
-    connect( m_runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
-             manager, SLOT( addRoutingResult( GeoDataDocument* ) ) );
+    connect( m_runner, SIGNAL(routeCalculated(GeoDataDocument*)),
+             manager, SLOT(addRoutingResult(GeoDataDocument*)) );
     m_runner->setModel( model );
 }
 
@@ -85,8 +85,8 @@ ParsingTask::ParsingTask( ParsingRunner *runner, MarbleRunnerManager *manager, c
     m_fileName( fileName ),
     m_role( role )
 {
-    connect( m_runner, SIGNAL( parsingFinished( GeoDataDocument*, QString ) ),
-             manager, SLOT( addParsingResult( GeoDataDocument*, QString ) ) );
+    connect( m_runner, SIGNAL(parsingFinished(GeoDataDocument*,QString)),
+             manager, SLOT(addParsingResult(GeoDataDocument*,QString)) );
 }
 
 void ParsingTask::run()

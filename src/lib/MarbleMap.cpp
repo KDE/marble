@@ -172,36 +172,36 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_layerManager.addLayer( &m_placemarkLayer );
     m_layerManager.addLayer( &m_customPaintLayer );
 
-    QObject::connect( m_model, SIGNAL( themeChanged( QString ) ),
-                      parent, SLOT( updateMapTheme() ) );
-    QObject::connect( m_model->fileManager(), SIGNAL( fileAdded( QString ) ),
-                      parent, SLOT( setDocument( QString ) ) );
+    QObject::connect( m_model, SIGNAL(themeChanged(QString)),
+                      parent, SLOT(updateMapTheme()) );
+    QObject::connect( m_model->fileManager(), SIGNAL(fileAdded(QString)),
+                      parent, SLOT(setDocument(QString)) );
 
-    QObject::connect( &m_veccomposer, SIGNAL( datasetLoaded() ),
-                      parent, SIGNAL( repaintNeeded() ));
+    QObject::connect( &m_veccomposer, SIGNAL(datasetLoaded()),
+                      parent, SIGNAL(repaintNeeded()));
 
-    QObject::connect( &m_placemarkLayer, SIGNAL( repaintNeeded()),
-                      parent, SIGNAL( repaintNeeded() ));
+    QObject::connect( &m_placemarkLayer, SIGNAL(repaintNeeded()),
+                      parent, SIGNAL(repaintNeeded()));
 
-    QObject::connect ( &m_layerManager, SIGNAL( pluginSettingsChanged() ),
-                       parent,        SIGNAL( pluginSettingsChanged() ) );
-    QObject::connect ( &m_layerManager, SIGNAL( repaintNeeded( QRegion ) ),
-                       parent,        SIGNAL( repaintNeeded( QRegion ) ) );
-    QObject::connect ( &m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
-                       parent,        SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
-    QObject::connect ( &m_layerManager, SIGNAL( visibilityChanged( const QString &, bool ) ),
-                       parent,        SLOT( setPropertyValue( const QString &, bool ) ) );
+    QObject::connect ( &m_layerManager, SIGNAL(pluginSettingsChanged()),
+                       parent,        SIGNAL(pluginSettingsChanged()) );
+    QObject::connect ( &m_layerManager, SIGNAL(repaintNeeded(QRegion)),
+                       parent,        SIGNAL(repaintNeeded(QRegion)) );
+    QObject::connect ( &m_layerManager, SIGNAL(renderPluginInitialized(RenderPlugin*)),
+                       parent,        SIGNAL(renderPluginInitialized(RenderPlugin*)) );
+    QObject::connect ( &m_layerManager, SIGNAL(visibilityChanged(QString,bool)),
+                       parent,        SLOT(setPropertyValue(QString,bool)) );
 
-    QObject::connect( &m_geometryLayer, SIGNAL( repaintNeeded()),
-                      parent, SIGNAL( repaintNeeded() ));
+    QObject::connect( &m_geometryLayer, SIGNAL(repaintNeeded()),
+                      parent, SIGNAL(repaintNeeded()));
 
-    QObject::connect( &m_textureLayer, SIGNAL( tileLevelChanged( int ) ),
-                      parent, SIGNAL( tileLevelChanged( int ) ) );
-    QObject::connect( &m_textureLayer, SIGNAL( repaintNeeded() ),
-                      parent, SIGNAL( repaintNeeded() ) );
+    QObject::connect( &m_textureLayer, SIGNAL(tileLevelChanged(int)),
+                      parent, SIGNAL(tileLevelChanged(int)) );
+    QObject::connect( &m_textureLayer, SIGNAL(repaintNeeded()),
+                      parent, SIGNAL(repaintNeeded()) );
 
-    QObject::connect( parent, SIGNAL( visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox & ) ),
-                      parent, SIGNAL( repaintNeeded() ) );
+    QObject::connect( parent, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+                      parent, SIGNAL(repaintNeeded()) );
 }
 
 void MarbleMapPrivate::updateProperty( const QString &name, bool show )
@@ -799,10 +799,10 @@ void MarbleMapPrivate::updateMapTheme()
     m_layerManager.removeLayer( &m_vectorMapBaseLayer );
     m_layerManager.removeLayer( &m_groundLayer );
 
-    QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
-                      q, SLOT( updateProperty( const QString &, bool ) ) );
-    QObject::connect( m_model->mapTheme()->settings(), SIGNAL( valueChanged( const QString &, bool ) ),
-                      m_model, SLOT( updateProperty(QString,bool) ) );
+    QObject::connect( m_model->mapTheme()->settings(), SIGNAL(valueChanged(QString,bool)),
+                      q, SLOT(updateProperty(QString,bool)) );
+    QObject::connect( m_model->mapTheme()->settings(), SIGNAL(valueChanged(QString,bool)),
+                      m_model, SLOT(updateProperty(QString,bool)) );
 
     q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
 
@@ -1107,16 +1107,16 @@ void MarbleMap::setShowCityLights( bool visible )
 
 void MarbleMap::setLockToSubSolarPoint( bool visible )
 {
-    disconnect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
-                this,                     SLOT( centerOn( qreal, qreal ) ) );
+    disconnect( d->m_model->sunLocator(), SIGNAL(positionChanged(qreal,qreal)),
+                this,                     SLOT(centerOn(qreal,qreal)) );
 
     if( isLockedToSubSolarPoint() != visible ) {
         d->m_isLockedToSubSolarPoint = visible;
     }
 
     if ( isLockedToSubSolarPoint() ) {
-        connect( d->m_model->sunLocator(), SIGNAL( positionChanged( qreal, qreal ) ),
-                 this,                     SLOT( centerOn( qreal, qreal ) ) );
+        connect( d->m_model->sunLocator(), SIGNAL(positionChanged(qreal,qreal)),
+                 this,                     SLOT(centerOn(qreal,qreal)) );
 
         centerOn( d->m_model->sunLocator()->getLon(), d->m_model->sunLocator()->getLat() );
     } else if ( visible ) {

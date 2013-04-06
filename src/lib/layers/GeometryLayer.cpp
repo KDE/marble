@@ -105,14 +105,14 @@ GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
 
-    connect( model, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
-             this, SLOT( resetCacheData() ) );
-    connect( model, SIGNAL( rowsInserted(const QModelIndex&, int, int) ),
-             this, SLOT( addPlacemarks(QModelIndex,int,int) ) );
-    connect( model, SIGNAL( rowsAboutToBeRemoved(const QModelIndex&, int, int) ),
-             this, SLOT( removePlacemarks(QModelIndex,int,int) ) );
-    connect( model, SIGNAL( modelReset() ),
-             this, SLOT( resetCacheData() ) );
+    connect( model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+             this, SLOT(resetCacheData()) );
+    connect( model, SIGNAL(rowsInserted(QModelIndex,int,int)),
+             this, SLOT(addPlacemarks(QModelIndex,int,int)) );
+    connect( model, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
+             this, SLOT(removePlacemarks(QModelIndex,int,int)) );
+    connect( model, SIGNAL(modelReset()),
+             this, SLOT(resetCacheData()) );
 }
 
 GeometryLayer::~GeometryLayer()

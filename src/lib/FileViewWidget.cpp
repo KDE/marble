@@ -76,10 +76,10 @@ void FileViewWidget::setMarbleWidget( MarbleWidget *widget )
     d->setTreeModel( d->m_widget->model()->treeModel() );
     d->setFileManager( d->m_widget->model()->fileManager() );
 
-    connect( this, SIGNAL( centerOn( const GeoDataPlacemark &, bool ) ),
-             d->m_widget, SLOT( centerOn( const GeoDataPlacemark &, bool ) ) );
-    connect( this, SIGNAL( centerOn( const GeoDataLatLonBox &, bool ) ),
-             d->m_widget, SLOT( centerOn( const GeoDataLatLonBox &, bool ) ) );
+    connect( this, SIGNAL(centerOn(GeoDataPlacemark,bool)),
+             d->m_widget, SLOT(centerOn(GeoDataPlacemark,bool)) );
+    connect( this, SIGNAL(centerOn(GeoDataLatLonBox,bool)),
+             d->m_widget, SLOT(centerOn(GeoDataLatLonBox,bool)) );
 }
 
 void FileViewWidgetPrivate::setTreeModel( GeoDataTreeModel *model )
@@ -92,19 +92,19 @@ void FileViewWidgetPrivate::setTreeModel( GeoDataTreeModel *model )
     m_fileViewUi.m_treeView->resizeColumnToContents( 0 );
     m_fileViewUi.m_treeView->resizeColumnToContents( 1 );
     QObject::connect( m_fileViewUi.m_treeView->selectionModel(),
-             SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
-             q, SLOT( enableFileViewActions() ) );
-    QObject::connect( m_fileViewUi.m_treeView, SIGNAL( activated( QModelIndex ) ),
-             q, SLOT( mapCenterOnTreeViewModel( QModelIndex ) ) );
+             SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+             q, SLOT(enableFileViewActions()) );
+    QObject::connect( m_fileViewUi.m_treeView, SIGNAL(activated(QModelIndex)),
+             q, SLOT(mapCenterOnTreeViewModel(QModelIndex)) );
 }
 
 void FileViewWidgetPrivate::setFileManager( FileManager *manager )
 {
     m_fileManager = manager;
-    QObject::connect( m_fileViewUi.m_saveButton,  SIGNAL( clicked() ) ,
-             q, SLOT( saveFile() ) );
-    QObject::connect( m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
-             q, SLOT( closeFile() ) );
+    QObject::connect( m_fileViewUi.m_saveButton,  SIGNAL(clicked()) ,
+             q, SLOT(saveFile()) );
+    QObject::connect( m_fileViewUi.m_closeButton, SIGNAL(clicked()) ,
+             q, SLOT(closeFile()) );
 }
 
 void FileViewWidgetPrivate::saveFile()

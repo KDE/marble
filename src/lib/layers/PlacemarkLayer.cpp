@@ -37,7 +37,7 @@ PlacemarkLayer::PlacemarkLayer( QAbstractItemModel *placemarkModel,
     m_useXWorkaround = testXBug();
     mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
 
-    connect( &m_layout, SIGNAL( repaintNeeded() ), SIGNAL( repaintNeeded() ) );
+    connect( &m_layout, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
 }
 
 PlacemarkLayer::~PlacemarkLayer()

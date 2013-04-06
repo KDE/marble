@@ -207,18 +207,18 @@ void RoutingWidgetPrivate::setupToolBar()
     m_configureButton->setIcon( QIcon(":/icons/16x16/configure.png") );
     m_toolBar->addWidget(m_configureButton);
 
-    QObject::connect( m_openRouteButton, SIGNAL( clicked() ),
-                      m_parent, SLOT( openRoute() ) );
-    QObject::connect( m_saveRouteButton, SIGNAL( clicked() ),
-                      m_parent, SLOT( saveRoute() ) );
-    QObject::connect( m_addViaButton, SIGNAL( clicked() ),
-                      m_parent, SLOT( addInputWidget() ) );
-    QObject::connect( m_reverseRouteButton, SIGNAL( clicked() ),
-                      m_routingManager, SLOT( reverseRoute() ) );
-    QObject::connect( m_clearRouteButton, SIGNAL( clicked() ),
-                      m_routingManager, SLOT( clearRoute() ) );
-    QObject::connect( m_configureButton, SIGNAL( clicked() ),
-                      m_parent,  SLOT( configureProfile() ) );
+    QObject::connect( m_openRouteButton, SIGNAL(clicked()),
+                      m_parent, SLOT(openRoute()) );
+    QObject::connect( m_saveRouteButton, SIGNAL(clicked()),
+                      m_parent, SLOT(saveRoute()) );
+    QObject::connect( m_addViaButton, SIGNAL(clicked()),
+                      m_parent, SLOT(addInputWidget()) );
+    QObject::connect( m_reverseRouteButton, SIGNAL(clicked()),
+                      m_routingManager, SLOT(reverseRoute()) );
+    QObject::connect( m_clearRouteButton, SIGNAL(clicked()),
+                      m_routingManager, SLOT(clearRoute()) );
+    QObject::connect( m_configureButton, SIGNAL(clicked()),
+                      m_parent,  SLOT(configureProfile()) );
 
     m_toolBar->setIconSize(QSize(16, 16));
     m_ui.toolBarLayout->addWidget(m_toolBar, 0, Qt::AlignLeft);
@@ -261,51 +261,51 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     d->m_ui.routingProfileComboBox->setModel( d->m_routingManager->profilesModel() );
 
-    connect( d->m_routingManager->profilesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-             this, SLOT( selectFirstProfile() ) );
-    connect( d->m_routingManager->profilesModel(), SIGNAL( modelReset() ),
-             this, SLOT( selectFirstProfile() ) );
-    connect( d->m_routingLayer, SIGNAL( placemarkSelected( QModelIndex ) ),
-             this, SLOT( activatePlacemark( QModelIndex ) ) );
-    connect( d->m_routingLayer, SIGNAL( pointSelected( GeoDataCoordinates ) ),
-             this, SLOT( retrieveSelectedPoint( GeoDataCoordinates ) ) );
-    connect( d->m_routingLayer, SIGNAL( pointSelectionAborted() ),
-             this, SLOT( pointSelectionCanceled() ) );
-    connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State ) ),
-             this, SLOT( updateRouteState( RoutingManager::State ) ) );
-    connect( d->m_routingManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
-             this, SLOT( indicateRoutingFailure( GeoDataDocument* ) ) );
-    connect( d->m_routeRequest, SIGNAL( positionAdded( int ) ),
-             this, SLOT( insertInputWidget( int ) ) );
-    connect( d->m_routeRequest, SIGNAL( positionRemoved( int ) ),
-             this, SLOT( removeInputWidget( int ) ) );
-    connect( d->m_routeRequest, SIGNAL( routingProfileChanged() ),
-             this, SLOT( updateActiveRoutingProfile() ) );
-    connect( &d->m_progressTimer, SIGNAL( timeout() ),
-             this, SLOT( updateProgress() ) );
-    connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
-             d->m_routingManager->alternativeRoutesModel(), SLOT( setCurrentRoute( int ) ) );
-    connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( currentRouteChanged( int ) ),
-             d->m_ui.routeComboBox, SLOT( setCurrentIndex( int ) ) );
-    connect( d->m_ui.routingProfileComboBox, SIGNAL( currentIndexChanged( int ) ),
-             this, SLOT( setRoutingProfile( int ) ) );
-    connect( d->m_ui.routingProfileComboBox, SIGNAL( activated( int ) ),
-             this, SLOT( retrieveRoute() ) );
-    connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-             this, SLOT( updateAlternativeRoutes() ) );
+    connect( d->m_routingManager->profilesModel(), SIGNAL(rowsInserted(QModelIndex,int,int)),
+             this, SLOT(selectFirstProfile()) );
+    connect( d->m_routingManager->profilesModel(), SIGNAL(modelReset()),
+             this, SLOT(selectFirstProfile()) );
+    connect( d->m_routingLayer, SIGNAL(placemarkSelected(QModelIndex)),
+             this, SLOT(activatePlacemark(QModelIndex)) );
+    connect( d->m_routingLayer, SIGNAL(pointSelected(GeoDataCoordinates)),
+             this, SLOT(retrieveSelectedPoint(GeoDataCoordinates)) );
+    connect( d->m_routingLayer, SIGNAL(pointSelectionAborted()),
+             this, SLOT(pointSelectionCanceled()) );
+    connect( d->m_routingManager, SIGNAL(stateChanged(RoutingManager::State)),
+             this, SLOT(updateRouteState(RoutingManager::State)) );
+    connect( d->m_routingManager, SIGNAL(routeRetrieved(GeoDataDocument*)),
+             this, SLOT(indicateRoutingFailure(GeoDataDocument*)) );
+    connect( d->m_routeRequest, SIGNAL(positionAdded(int)),
+             this, SLOT(insertInputWidget(int)) );
+    connect( d->m_routeRequest, SIGNAL(positionRemoved(int)),
+             this, SLOT(removeInputWidget(int)) );
+    connect( d->m_routeRequest, SIGNAL(routingProfileChanged()),
+             this, SLOT(updateActiveRoutingProfile()) );
+    connect( &d->m_progressTimer, SIGNAL(timeout()),
+             this, SLOT(updateProgress()) );
+    connect( d->m_ui.routeComboBox, SIGNAL(currentIndexChanged(int)),
+             d->m_routingManager->alternativeRoutesModel(), SLOT(setCurrentRoute(int)) );
+    connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL(currentRouteChanged(int)),
+             d->m_ui.routeComboBox, SLOT(setCurrentIndex(int)) );
+    connect( d->m_ui.routingProfileComboBox, SIGNAL(currentIndexChanged(int)),
+             this, SLOT(setRoutingProfile(int)) );
+    connect( d->m_ui.routingProfileComboBox, SIGNAL(activated(int)),
+             this, SLOT(retrieveRoute()) );
+    connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL(rowsInserted(QModelIndex,int,int)),
+             this, SLOT(updateAlternativeRoutes()) );
 
     d->m_ui.directionsListView->setModel( d->m_routingModel );
 
     QItemSelectionModel *selectionModel = d->m_ui.directionsListView->selectionModel();
     d->m_routingLayer->synchronizeWith( selectionModel );
-    connect( d->m_ui.directionsListView, SIGNAL( activated ( QModelIndex ) ),
-             this, SLOT( activateItem ( QModelIndex ) ) );
+    connect( d->m_ui.directionsListView, SIGNAL(activated(QModelIndex)),
+             this, SLOT(activateItem(QModelIndex)) );
 
     // FIXME: apply for this sector
-    connect( d->m_ui.searchButton, SIGNAL( clicked() ),
-             this, SLOT( retrieveRoute () ) );
-    connect( d->m_ui.showInstructionsButton, SIGNAL( clicked( bool ) ),
-             this, SLOT( showDirections() ) );
+    connect( d->m_ui.searchButton, SIGNAL(clicked()),
+             this, SLOT(retrieveRoute()) );
+    connect( d->m_ui.showInstructionsButton, SIGNAL(clicked(bool)),
+             this, SLOT(showDirections()) );
 
     for( int i=0; i<d->m_routeRequest->size(); ++i ) {
         insertInputWidget( i );
@@ -452,16 +452,16 @@ void RoutingWidget::insertInputWidget( int index )
         RoutingInputWidget *input = new RoutingInputWidget( d->m_widget, index, this );
         input->setProgressAnimation( d->m_progressAnimation );
         d->m_inputWidgets.insert( index, input );
-        connect( input, SIGNAL( searchFinished( RoutingInputWidget* ) ),
-                 this, SLOT( handleSearchResult( RoutingInputWidget* ) ) );
-        connect( input, SIGNAL( removalRequest( RoutingInputWidget* ) ),
-                 this, SLOT( removeInputWidget( RoutingInputWidget* ) ) );
-        connect( input, SIGNAL( activityRequest( RoutingInputWidget* ) ),
-                 this, SLOT( centerOnInputWidget( RoutingInputWidget* ) ) );
-        connect( input, SIGNAL( mapInputModeEnabled( RoutingInputWidget*, bool ) ),
-                 this, SLOT( requestMapPosition( RoutingInputWidget*, bool ) ) );
-        connect( input, SIGNAL( targetValidityChanged( bool ) ),
-                 this, SLOT( adjustSearchButton() ) );
+        connect( input, SIGNAL(searchFinished(RoutingInputWidget*)),
+                 this, SLOT(handleSearchResult(RoutingInputWidget*)) );
+        connect( input, SIGNAL(removalRequest(RoutingInputWidget*)),
+                 this, SLOT(removeInputWidget(RoutingInputWidget*)) );
+        connect( input, SIGNAL(activityRequest(RoutingInputWidget*)),
+                 this, SLOT(centerOnInputWidget(RoutingInputWidget*)) );
+        connect( input, SIGNAL(mapInputModeEnabled(RoutingInputWidget*,bool)),
+                 this, SLOT(requestMapPosition(RoutingInputWidget*,bool)) );
+        connect( input, SIGNAL(targetValidityChanged(bool)),
+                 this, SLOT(adjustSearchButton()) );
 
         d->m_ui.routingLayout->insertWidget( index, input );
         d->adjustInputWidgets();

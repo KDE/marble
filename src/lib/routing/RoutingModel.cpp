@@ -150,8 +150,8 @@ RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *
    if( model )
     {
         d->m_positionTracking = model->positionTracking();
-        QObject::connect( d->m_positionTracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                 this, SLOT( updatePosition( GeoDataCoordinates, qreal ) ) );
+        QObject::connect( d->m_positionTracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+                 this, SLOT(updatePosition(GeoDataCoordinates,qreal)) );
     }
 
    QHash<int, QByteArray> roles = roleNames();

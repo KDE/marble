@@ -134,7 +134,7 @@ void PositionTrackingTest::statusChanged()
 
     QCOMPARE( tracking.status(), PositionProviderStatusUnavailable );
 
-    QSignalSpy statusChangedSpy( &tracking, SIGNAL( statusChanged( PositionProviderStatus ) ) );
+    QSignalSpy statusChangedSpy( &tracking, SIGNAL(statusChanged(PositionProviderStatus)) );
 
     FakeProvider provider;
     provider.setStatus( finalStatus );
@@ -158,7 +158,7 @@ void PositionTrackingTest::setPositionProviderPlugin()
 
     QCOMPARE( tracking.status(), PositionProviderStatusUnavailable );
 
-    QSignalSpy gpsLocationSpy( &tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ) );
+    QSignalSpy gpsLocationSpy( &tracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)) );
 
     QPointer<FakeProvider> provider( new FakeProvider );
     provider->setStatus( PositionProviderStatusAvailable );

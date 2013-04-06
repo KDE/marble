@@ -208,30 +208,30 @@ void MarbleWidgetPrivate::construct()
                                        // we do this differently here in the widget
 
     // forward some signals of m_map
-    m_widget->connect( &m_map,   SIGNAL( visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox & ) ),
-                       m_widget, SIGNAL( visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox & ) ) );
-    m_widget->connect( &m_map,   SIGNAL( projectionChanged( Projection ) ),
-                       m_widget, SIGNAL( projectionChanged( Projection ) ) );
-    m_widget->connect( &m_map,   SIGNAL( tileLevelChanged( int ) ),
-                       m_widget, SIGNAL( tileLevelChanged( int ) ) );
-    m_widget->connect( &m_map,   SIGNAL( framesPerSecond( qreal ) ),
-                       m_widget, SIGNAL( framesPerSecond( qreal ) ) );
+    m_widget->connect( &m_map,   SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+                       m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)) );
+    m_widget->connect( &m_map,   SIGNAL(projectionChanged(Projection)),
+                       m_widget, SIGNAL(projectionChanged(Projection)) );
+    m_widget->connect( &m_map,   SIGNAL(tileLevelChanged(int)),
+                       m_widget, SIGNAL(tileLevelChanged(int)) );
+    m_widget->connect( &m_map,   SIGNAL(framesPerSecond(qreal)),
+                       m_widget, SIGNAL(framesPerSecond(qreal)) );
 
-    m_widget->connect( &m_map,   SIGNAL( pluginSettingsChanged() ),
-                       m_widget, SIGNAL( pluginSettingsChanged() ) );
-    m_widget->connect( &m_map,   SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
-                       m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
+    m_widget->connect( &m_map,   SIGNAL(pluginSettingsChanged()),
+                       m_widget, SIGNAL(pluginSettingsChanged()) );
+    m_widget->connect( &m_map,   SIGNAL(renderPluginInitialized(RenderPlugin*)),
+                       m_widget, SIGNAL(renderPluginInitialized(RenderPlugin*)) );
 
     // react to some signals of m_map
-    m_widget->connect( &m_map,   SIGNAL( themeChanged( QString ) ),
-                       m_widget, SLOT( updateMapTheme() ) );
-    m_widget->connect( &m_map,   SIGNAL( repaintNeeded( QRegion ) ),
-                       m_widget, SLOT( update() ) );
-    m_widget->connect( &m_map,   SIGNAL( visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox & ) ),
-                       m_widget, SLOT( updateSystemBackgroundAttribute() ) );
+    m_widget->connect( &m_map,   SIGNAL(themeChanged(QString)),
+                       m_widget, SLOT(updateMapTheme()) );
+    m_widget->connect( &m_map,   SIGNAL(repaintNeeded(QRegion)),
+                       m_widget, SLOT(update()) );
+    m_widget->connect( &m_map,   SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+                       m_widget, SLOT(updateSystemBackgroundAttribute()) );
 
-    m_widget->connect( m_model.fileManager(), SIGNAL( centeredDocument(GeoDataLatLonBox) ),
-                       m_widget, SLOT( centerOn(GeoDataLatLonBox) ) );
+    m_widget->connect( m_model.fileManager(), SIGNAL(centeredDocument(GeoDataLatLonBox)),
+                       m_widget, SLOT(centerOn(GeoDataLatLonBox)) );
 
 
     // Show a progress dialog when the model calculates new map tiles.
@@ -242,17 +242,17 @@ void MarbleWidgetPrivate::construct()
 
     m_popupmenu = new MarbleWidgetPopupMenu( m_widget, &m_model );
 
-    m_widget->connect( m_popupmenu, SIGNAL( trackPlacemark( const GeoDataPlacemark* ) ),
-                       &m_model, SLOT( setTrackedPlacemark( const GeoDataPlacemark* ) ) );
+    m_widget->connect( m_popupmenu, SIGNAL(trackPlacemark(const GeoDataPlacemark*)),
+                       &m_model, SLOT(setTrackedPlacemark(const GeoDataPlacemark*)) );
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setPlacemarkModel( 0 );
-    QObject::connect( m_routingLayer, SIGNAL( repaintNeeded( const QRect & ) ),
-                      m_widget, SLOT( update() ) );
+    QObject::connect( m_routingLayer, SIGNAL(repaintNeeded(QRect)),
+                      m_widget, SLOT(update()) );
 
     m_mapInfoDialog = new MapInfoDialog( m_widget );
     m_mapInfoDialog->setVisible( false );
-    m_widget->connect( m_mapInfoDialog, SIGNAL( repaintNeeded() ), m_widget, SLOT( update() ) );
+    m_widget->connect( m_mapInfoDialog, SIGNAL(repaintNeeded()), m_widget, SLOT(update()) );
     m_map.addLayer( m_mapInfoDialog );
 
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
@@ -310,11 +310,11 @@ void MarbleWidget::setInputHandler( MarbleWidgetInputHandler *handler )
     if ( d->m_inputhandler ) {
         installEventFilter( d->m_inputhandler );
 
-        connect( d->m_inputhandler, SIGNAL( mouseClickScreenPosition( int, int ) ),
-                 this,              SLOT( notifyMouseClick( int, int ) ) );
+        connect( d->m_inputhandler, SIGNAL(mouseClickScreenPosition(int,int)),
+                 this,              SLOT(notifyMouseClick(int,int)) );
 
-        connect( d->m_inputhandler, SIGNAL( mouseMoveGeoPosition( QString ) ),
-                 this,              SIGNAL( mouseMoveGeoPosition( QString ) ) );
+        connect( d->m_inputhandler, SIGNAL(mouseMoveGeoPosition(QString)),
+                 this,              SIGNAL(mouseMoveGeoPosition(QString)) );
     }
 }
 
@@ -738,7 +738,7 @@ void MarbleWidget::resizeEvent( QResizeEvent *event )
 void MarbleWidget::connectNotify( const char * signal )
 {
     if ( QByteArray( signal ) == 
-         QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
+         QMetaObject::normalizedSignature ( SIGNAL(mouseMoveGeoPosition(QString)) ) )
         if ( d->m_inputhandler )
             d->m_inputhandler->setPositionSignalConnected( true );
 }
@@ -746,7 +746,7 @@ void MarbleWidget::connectNotify( const char * signal )
 void MarbleWidget::disconnectNotify( const char * signal )
 {
     if ( QByteArray( signal ) == 
-         QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
+         QMetaObject::normalizedSignature ( SIGNAL(mouseMoveGeoPosition(QString)) ) )
         if ( d->m_inputhandler )
             d->m_inputhandler->setPositionSignalConnected( false );
 }

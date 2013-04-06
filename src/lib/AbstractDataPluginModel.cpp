@@ -232,12 +232,12 @@ AbstractDataPluginModel::AbstractDataPluginModel( const QString &name, const Mar
     Q_ASSERT( marbleModel != 0 );
 
     // Initializing file and download System
-    connect( &d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
-             this ,                 SLOT( processFinishedJob( QString , QString ) ) );
+    connect( &d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),
+             this ,                 SLOT(processFinishedJob(QString,QString)) );
     
     // We want to download a new description file every timeBetweenDownloads ms
-    connect( &d->m_downloadTimer, SIGNAL( timeout() ),
-             this,               SLOT( handleChangedViewport() ),
+    connect( &d->m_downloadTimer, SIGNAL(timeout()),
+             this,               SLOT(handleChangedViewport()),
              Qt::QueuedConnection );
     d->m_downloadTimer.start( timeBetweenDownloads );
 }
@@ -352,7 +352,7 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
                                                 AbstractDataPluginItem *item )
 {
     downloadItem( url, type, item );
-    connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
+    connect( item, SIGNAL(destroyed(QObject*)), this, SLOT(removeItem(QObject*)) );
     addItemToList( item );
 }
 
@@ -415,11 +415,11 @@ void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem
         // Insert the item on the right position in the list
         d->m_itemSet.insert( i, item );
 
-        connect( item, SIGNAL( stickyChanged() ), this, SLOT( scheduleItemSort() ) );
-        connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
-        connect( item, SIGNAL( updated() ), this, SIGNAL( itemsUpdated() ) );
-        connect( item, SIGNAL( favoriteChanged( const QString&, bool ) ), this,
-                 SLOT( favoriteItemChanged( const QString&, bool ) ) );
+        connect( item, SIGNAL(stickyChanged()), this, SLOT(scheduleItemSort()) );
+        connect( item, SIGNAL(destroyed(QObject*)), this, SLOT(removeItem(QObject*)) );
+        connect( item, SIGNAL(updated()), this, SIGNAL(itemsUpdated()) );
+        connect( item, SIGNAL(favoriteChanged(QString,bool)), this,
+                 SLOT(favoriteItemChanged(QString,bool)) );
 
         if ( !needsUpdate && item->initialized() ) {
             needsUpdate = true;

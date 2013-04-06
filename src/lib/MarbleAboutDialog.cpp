@@ -77,8 +77,8 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
     QString const applicationTitle = QObject::tr( "Marble Virtual Globe" );
     setApplicationTitle( applicationTitle );
 
-    connect( d->uiWidget.tabWidget, SIGNAL( currentChanged( int ) ), 
-             this, SLOT( loadPageContents( int ) ) );
+    connect( d->uiWidget.tabWidget, SIGNAL(currentChanged(int)), 
+             this, SLOT(loadPageContents(int)) );
 }
 
 MarbleAboutDialog::~MarbleAboutDialog()

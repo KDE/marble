@@ -91,14 +91,14 @@ SearchWidget::SearchWidget( QWidget *parent, Qt::WindowFlags flags ) :
 
     d->m_searchField = new SearchInputWidget( this );
     setFocusProxy( d->m_searchField );
-    connect( d->m_searchField, SIGNAL( search( QString, SearchMode ) ),
-             this, SLOT( search( QString, SearchMode ) ) );
+    connect( d->m_searchField, SIGNAL(search(QString,SearchMode)),
+             this, SLOT(search(QString,SearchMode)) );
 
     d->m_searchResultView = new QListView( this );
     d->m_searchResultView->setModel( &d->m_sortproxy );
     d->m_searchResultView->setMinimumSize( 0, 0 );
-    connect( d->m_searchResultView, SIGNAL( activated( const QModelIndex& ) ),
-             this, SLOT( centerMapOn( const QModelIndex& ) ) );
+    connect( d->m_searchResultView, SIGNAL(activated(QModelIndex)),
+             this, SLOT(centerMapOn(QModelIndex)) );
 
     QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget( d->m_searchField );
@@ -121,15 +121,15 @@ void SearchWidget::setMarbleWidget( MarbleWidget* widget )
     d->m_widget = widget;
 
     d->m_searchField->setCompletionModel( widget->model()->placemarkModel() );
-    connect( d->m_searchField, SIGNAL( centerOn( const GeoDataCoordinates &) ),
-             widget, SLOT( centerOn( const GeoDataCoordinates & ) ) );
+    connect( d->m_searchField, SIGNAL(centerOn(GeoDataCoordinates)),
+             widget, SLOT(centerOn(GeoDataCoordinates)) );
 
     d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
     d->m_runnerManager->setModel( widget->model() );
-    connect( d->m_runnerManager, SIGNAL( searchResultChanged( QVector<GeoDataPlacemark*> ) ),
-             this,               SLOT( setSearchResult( QVector<GeoDataPlacemark*> ) ) );
-    connect( d->m_runnerManager, SIGNAL( searchFinished( QString ) ),
-             d->m_searchField,   SLOT( disableSearchAnimation() ));
+    connect( d->m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark*>)),
+             this,               SLOT(setSearchResult(QVector<GeoDataPlacemark*>)) );
+    connect( d->m_runnerManager, SIGNAL(searchFinished(QString)),
+             d->m_searchField,   SLOT(disableSearchAnimation()));
 
     GeoDataTreeModel* treeModel = d->m_widget->model()->treeModel();
     treeModel->addDocument( d->m_document );

@@ -47,18 +47,18 @@ MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     m_marbleWidget->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
     setWidget( m_marbleWidget );
 
-    connect( m_marbleWidget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
-             this, SIGNAL( visibleLatLonAltBoxChanged( ) ) );
-    connect( m_marbleWidget->model(), SIGNAL( workOfflineChanged() ),
-             this, SIGNAL( workOfflineChanged() ) );
-    connect( m_marbleWidget, SIGNAL( zoomChanged( int ) ),
-             this, SIGNAL( radiusChanged() ) );
-    connect( m_marbleWidget, SIGNAL( themeChanged( const QString & ) ),
-             this, SIGNAL( mapThemeChanged() ) );
-    connect( m_marbleWidget, SIGNAL( projectionChanged( Projection ) ),
-             this, SIGNAL( projectionChanged() ) );
-    connect( m_marbleWidget, SIGNAL( mouseClickGeoPosition( qreal, qreal, GeoDataCoordinates::Unit ) ),
-             this, SLOT( forwardMouseClick( qreal, qreal, GeoDataCoordinates::Unit ) ) );
+    connect( m_marbleWidget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+             this, SIGNAL(visibleLatLonAltBoxChanged()) );
+    connect( m_marbleWidget->model(), SIGNAL(workOfflineChanged()),
+             this, SIGNAL(workOfflineChanged()) );
+    connect( m_marbleWidget, SIGNAL(zoomChanged(int)),
+             this, SIGNAL(radiusChanged()) );
+    connect( m_marbleWidget, SIGNAL(themeChanged(QString)),
+             this, SIGNAL(mapThemeChanged()) );
+    connect( m_marbleWidget, SIGNAL(projectionChanged(Projection)),
+             this, SIGNAL(projectionChanged()) );
+    connect( m_marbleWidget, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)),
+             this, SLOT(forwardMouseClick(qreal,qreal,GeoDataCoordinates::Unit)) );
     connect( &m_center, SIGNAL(latitudeChanged()), this, SLOT(updateCenterPosition()));
     connect( &m_center, SIGNAL(longitudeChanged()), this, SLOT(updateCenterPosition()));
 

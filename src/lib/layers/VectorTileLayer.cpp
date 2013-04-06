@@ -270,12 +270,12 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
 void VectorTileLayer::setShowSunShading( bool show )
 {
-    disconnect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
-                this, SLOT( reset() ) );
+    disconnect( d->m_sunLocator, SIGNAL(positionChanged(qreal,qreal)),
+                this, SLOT(reset()) );
 
     if ( show ) {
-        connect( d->m_sunLocator, SIGNAL( positionChanged( qreal, qreal ) ),
-                 this,       SLOT( reset() ) );
+        connect( d->m_sunLocator, SIGNAL(positionChanged(qreal,qreal)),
+                 this,       SLOT(reset()) );
     }
 
     d->m_layerDecorator.setShowSunShading( show );
@@ -309,8 +309,8 @@ void VectorTileLayer::setupTextureMapper( )
 
     Q_ASSERT( d->m_texmapper );
 
-    connect( d->m_texmapper, SIGNAL( tileCompleted( TileId, GeoDataDocument*, QString ) ),
-             this, SLOT( updateTile( TileId, GeoDataDocument*, QString ) ) );
+    connect( d->m_texmapper, SIGNAL(tileCompleted(TileId,GeoDataDocument*,QString)),
+             this, SLOT(updateTile(TileId,GeoDataDocument*,QString)) );
 }
 
 void VectorTileLayer::setNeedsUpdate()
@@ -353,8 +353,8 @@ void VectorTileLayer::setMapTheme( const QVector<const GeoSceneTiled *> &texture
     d->m_textureLayerSettings = textureLayerSettings;
 
     if ( d->m_textureLayerSettings ) {
-        connect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool ) ),
-                 this,                      SLOT( updateTextureLayers() ) );
+        connect( d->m_textureLayerSettings, SIGNAL(valueChanged(QString,bool)),
+                 this,                      SLOT(updateTextureLayers()) );
     }
 
     d->updateTextureLayers();

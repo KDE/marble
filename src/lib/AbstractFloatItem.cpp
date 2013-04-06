@@ -240,11 +240,11 @@ QMenu* AbstractFloatItem::contextMenu()
         QAction *lockAction = d->m_contextMenu->addAction( QIcon(":/icons/unlock.png"), tr( "&Lock" ) );
         lockAction->setCheckable( true );
         lockAction->setChecked( positionLocked() );
-        connect( lockAction, SIGNAL( triggered( bool ) ), this, SLOT( setPositionLocked( bool ) ) );
+        connect( lockAction, SIGNAL(triggered(bool)), this, SLOT(setPositionLocked(bool)) );
 
         if(!(flags() & ItemIsHideable)) {
             QAction *hideAction = d->m_contextMenu->addAction( tr( "&Hide" ) );
-            connect( hideAction, SIGNAL( triggered() ), this, SLOT( hide() ) );
+            connect( hideAction, SIGNAL(triggered()), this, SLOT(hide()) );
         }
 
         DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( this );
@@ -253,7 +253,7 @@ QMenu* AbstractFloatItem::contextMenu()
         {
             d->m_contextMenu->addSeparator();
             QAction *configAction = d->m_contextMenu->addAction( QIcon(":/icons/settings-configure.png"), tr( "&Configure..." ) );
-            connect( configAction, SIGNAL( triggered() ), dialog, SLOT( exec() ) );
+            connect( configAction, SIGNAL(triggered()), dialog, SLOT(exec()) );
         }
     }
 

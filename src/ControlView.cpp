@@ -236,7 +236,7 @@ void ControlView::printPreview()
     QPointer<QPrintPreviewDialog> preview = new QPrintPreviewDialog( &printer, this );
     preview->setWindowFlags ( Qt::Window );
     preview->resize(640, 480);
-    connect( preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
+    connect( preview, SIGNAL(paintRequested(QPrinter*)), SLOT(paintPrintPreview(QPrinter*)) );
     preview->exec();
     delete preview;
 #endif
@@ -440,9 +440,9 @@ void ControlView::synchronizeWithExternalMapEditor( const QString &application, 
     QTimer watchdog; // terminates network connection after a short timeout
     watchdog.setSingleShot( true );
     QEventLoop localEventLoop;
-    connect( &watchdog, SIGNAL( timeout() ), &localEventLoop, SLOT( quit() ) );
+    connect( &watchdog, SIGNAL(timeout()), &localEventLoop, SLOT(quit()) );
     QNetworkAccessManager manager;
-    connect( &manager, SIGNAL( finished( QNetworkReply* ) ), &localEventLoop, SLOT( quit() ) );
+    connect( &manager, SIGNAL(finished(QNetworkReply*)), &localEventLoop, SLOT(quit()) );
 
     // Wait at most two seconds for the local server to respond
     QNetworkReply *reply = manager.get( QNetworkRequest( QUrl( "http://localhost:8111/") ) );
@@ -522,15 +522,15 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     QKeySequence searchSequence( Qt::CTRL + Qt::Key_F );
     searchWidget->setToolTip( tr( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchSequence.toString() ) );
     QShortcut* searchShortcut = new QShortcut( mainWindow );
-    connect( searchShortcut, SIGNAL(activated()), this, SLOT( showSearch() ) );
+    connect( searchShortcut, SIGNAL(activated()), this, SLOT(showSearch()) );
 
     QDockWidget *mapViewDock = new QDockWidget( tr( "Map View" ), this );
     mapViewDock->setObjectName( "mapViewDock" );
     mapViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
     MapViewWidget* mapViewWidget = new MapViewWidget( this );
     mapViewWidget->setMarbleWidget( marbleWidget() );
-    connect( mapViewWidget, SIGNAL( showMapWizard() ), this, SIGNAL( showMapWizard() ) );
-    connect( mapViewWidget, SIGNAL( showUploadDialog() ), this, SIGNAL( showUploadDialog() ) );
+    connect( mapViewWidget, SIGNAL(showMapWizard()), this, SIGNAL(showMapWizard()) );
+    connect( mapViewWidget, SIGNAL(showUploadDialog()), this, SIGNAL(showUploadDialog()) );
     mapViewDock->setWidget( mapViewWidget );
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
 
@@ -548,8 +548,8 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
     LegendWidget* legendWidget = new LegendWidget( this );
     legendWidget->setMarbleModel( marbleModel() );
-    connect( legendWidget, SIGNAL( propertyValueChanged( const QString &, bool ) ),
-             marbleWidget(), SLOT( setPropertyValue( const QString &, bool ) ) );
+    connect( legendWidget, SIGNAL(propertyValueChanged(QString,bool)),
+             marbleWidget(), SLOT(setPropertyValue(QString,bool)) );
     legendDock->setWidget( legendWidget );
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, legendDock );
 

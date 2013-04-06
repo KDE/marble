@@ -61,10 +61,10 @@ SpeakersModelPrivate::SpeakersModelPrivate( SpeakersModel* parent ) :
 {
     m_newstuffModel.setTargetDirectory( MarbleDirs::localPath() + "/audio/speakers" );
     m_newstuffModel.setProvider( "http://edu.kde.org/marble/newstuff/speakers.xml" );
-    QObject::connect( &m_newstuffModel, SIGNAL( modelReset() ), m_parent, SLOT( fillModel() ) );
-    QObject::connect( &m_newstuffModel, SIGNAL( installationProgressed( int, qreal ) ),
-                      m_parent, SLOT( handleInstallationProgress( int, qreal ) ) );
-    QObject::connect( &m_newstuffModel, SIGNAL( installationFinished( int ) ), m_parent, SLOT( handleInstallation( int ) ) );
+    QObject::connect( &m_newstuffModel, SIGNAL(modelReset()), m_parent, SLOT(fillModel()) );
+    QObject::connect( &m_newstuffModel, SIGNAL(installationProgressed(int,qreal)),
+                      m_parent, SLOT(handleInstallationProgress(int,qreal)) );
+    QObject::connect( &m_newstuffModel, SIGNAL(installationFinished(int)), m_parent, SLOT(handleInstallation(int)) );
 }
 
 void SpeakersModelPrivate::fillModel()

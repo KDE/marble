@@ -39,10 +39,10 @@ TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoade
       m_repaintNeeded( true ),
       m_radius( 0 )
 {
-    connect( tileLoader, SIGNAL( tileLoaded( TileId ) ),
-             this,       SLOT( removePixmap( TileId ) ) );
-    connect( tileLoader, SIGNAL( cleared() ),
-             this,       SLOT( clearPixmaps() ) );
+    connect( tileLoader, SIGNAL(tileLoaded(TileId)),
+             this,       SLOT(removePixmap(TileId)) );
+    connect( tileLoader, SIGNAL(cleared()),
+             this,       SLOT(clearPixmaps()) );
 }
 
 void TileScalingTextureMapper::mapTexture( GeoPainter *painter,

@@ -192,8 +192,8 @@ void GeoSceneSettings::addGroup( GeoSceneGroup* group )
         d->m_groups.append( group );
 
         // Establish connection to the outside, e.g. the LegendBrowser
-        connect ( group, SIGNAL( valueChanged( QString, bool ) ), 
-                         SIGNAL( valueChanged( QString, bool ) ) );
+        connect ( group, SIGNAL(valueChanged(QString,bool)), 
+                         SIGNAL(valueChanged(QString,bool)) );
     }
 }
 
@@ -240,8 +240,8 @@ void GeoSceneSettings::addProperty( GeoSceneProperty* property )
         d->m_properties.append( property );
 
         // Establish connection to the outside, e.g. the LegendBrowser
-        connect ( property, SIGNAL( valueChanged( QString, bool ) ), 
-                            SIGNAL( valueChanged( QString, bool ) ) );
+        connect ( property, SIGNAL(valueChanged(QString,bool)), 
+                            SIGNAL(valueChanged(QString,bool)) );
         emit valueChanged( property->name(), property->value() );
     }
 }

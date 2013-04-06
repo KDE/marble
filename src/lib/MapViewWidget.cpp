@@ -338,8 +338,8 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
         d->m_mapViewUi.verticalLayout->insertLayout( 0, layout );
         d->m_mapViewUi.mapThemeComboBox->setModel( &d->m_mapSortProxy );
         d->m_mapViewUi.mapThemeComboBox->setIconSize( QSize( 48, 48 ) );
-        connect( d->m_mapViewUi.mapThemeComboBox, SIGNAL( activated( int ) ),
-                 this,                            SLOT( mapThemeSelected( int ) ) );
+        connect( d->m_mapViewUi.mapThemeComboBox, SIGNAL(activated(int)),
+                 this,                            SLOT(mapThemeSelected(int)) );
         d->m_mapViewUi.marbleThemeSelectView->setVisible( false );
     }
     else {
@@ -357,23 +357,23 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
         d->m_mapViewUi.marbleThemeSelectView->setEditTriggers( QListView::NoEditTriggers );
         d->m_mapViewUi.marbleThemeSelectView->setSelectionMode( QListView::SingleSelection );
         d->m_mapViewUi.marbleThemeSelectView->setModel( &d->m_mapSortProxy );
-        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( pressed( QModelIndex ) ),
-                 this,                                 SLOT( mapThemeSelected( QModelIndex ) ) );
-        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( customContextMenuRequested( QPoint ) ),
-                 this,                                 SLOT( showContextMenu( QPoint ) ) );
+        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL(pressed(QModelIndex)),
+                 this,                                 SLOT(mapThemeSelected(QModelIndex)) );
+        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL(customContextMenuRequested(QPoint)),
+                 this,                                 SLOT(showContextMenu(QPoint)) );
 
         d->m_mapViewUi.mapThemeComboBox->setVisible( false );
         d->setupToolBar();
     }
 
-    connect( d->m_mapViewUi.projectionComboBox,    SIGNAL( activated( int ) ),
-             this,                                 SLOT( projectionSelected( int ) ) );
+    connect( d->m_mapViewUi.projectionComboBox,    SIGNAL(activated(int)),
+             this,                                 SLOT(projectionSelected(int)) );
 
     d->m_mapViewUi.projectionComboBox->setEnabled( true );
     d->m_mapViewUi.celestialBodyComboBox->setModel( &d->m_celestialListProxy );
 
-    connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( int ) ),
-             this,                                 SLOT( celestialBodySelected( int ) ) );
+    connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL(activated(int)),
+             this,                                 SLOT(celestialBodySelected(int)) );
 
     d->m_settings.beginGroup( "Favorites" );
     if( !d->m_settings.contains( "initialized" ) ) {
@@ -399,17 +399,17 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_celestialListProxy.setSourceModel( widget->model()->mapThemeManager()->celestialBodiesModel() );
     d->m_celestialListProxy.sort( 0 );
 
-    connect( this, SIGNAL( projectionChanged( Projection ) ),
-             widget, SLOT( setProjection( Projection ) ) );
+    connect( this, SIGNAL(projectionChanged(Projection)),
+             widget, SLOT(setProjection(Projection)) );
 
-    connect( widget, SIGNAL( themeChanged( QString ) ),
-             this, SLOT( setMapThemeId( QString ) ) );
+    connect( widget, SIGNAL(themeChanged(QString)),
+             this, SLOT(setMapThemeId(QString)) );
 
-    connect( widget, SIGNAL( projectionChanged( Projection ) ),
-             this, SLOT( setProjection( Projection ) ) );
+    connect( widget, SIGNAL(projectionChanged(Projection)),
+             this, SLOT(setProjection(Projection)) );
 
-    connect( this, SIGNAL( mapThemeIdChanged( const QString& ) ),
-             widget, SLOT( setMapThemeId( const QString& ) ) );
+    connect( this, SIGNAL(mapThemeIdChanged(QString)),
+             widget, SLOT(setMapThemeId(QString)) );
 
     setProjection(widget->projection());
     setMapThemeId(widget->mapThemeId());
@@ -589,18 +589,18 @@ void MapViewWidget::Private::showContextMenu( const QPoint& pos )
 {
     QMenu menu;
 
-    QAction* iconSizeAction = menu.addAction( tr( "&Show Large Icons" ), q, SLOT( toggleIconSize() ) );
+    QAction* iconSizeAction = menu.addAction( tr( "&Show Large Icons" ), q, SLOT(toggleIconSize()) );
     iconSizeAction->setCheckable( true );
     iconSizeAction->setChecked( m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 96, 96 ) );
-    QAction *favAction = menu.addAction( QIcon( ":/icons/bookmarks.png" ), tr( "&Favorite" ), q, SLOT( toggleFavorite() ) );
+    QAction *favAction = menu.addAction( QIcon( ":/icons/bookmarks.png" ), tr( "&Favorite" ), q, SLOT(toggleFavorite()) );
     favAction->setCheckable( true );
     favAction->setChecked( isCurrentFavorite() );
     menu.addSeparator();
 
-    menu.addAction( QIcon( ":/icons/create-new-map.png" ), tr("&Create a New Map..."), q, SIGNAL( showMapWizard() ) );
+    menu.addAction( QIcon( ":/icons/create-new-map.png" ), tr("&Create a New Map..."), q, SIGNAL(showMapWizard()) );
     if( QFileInfo( MarbleDirs::localPath() + "/maps/" + currentThemePath() ).exists() )
-        menu.addAction( tr( "&Delete Map Theme" ), q, SLOT( deleteMap() ) );
-    menu.addAction( tr( "&Upload Map..." ), q, SIGNAL( showUploadDialog() ) );
+        menu.addAction( tr( "&Delete Map Theme" ), q, SLOT(deleteMap()) );
+    menu.addAction( tr( "&Upload Map..." ), q, SIGNAL(showUploadDialog()) );
     menu.exec( m_mapViewUi.marbleThemeSelectView->mapToGlobal( pos ) );
 }
 

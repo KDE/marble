@@ -168,7 +168,7 @@ QDialog *StarsPlugin::configDialog()
 
 // FIXME: Could Not Make Apply Button Work.
 //        QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-//        connect( applyButton, SIGNAL( clicked() ), this, SLOT( writeSettings() ) );
+//        connect( applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()) );
     }
     return m_configDialog;
 }

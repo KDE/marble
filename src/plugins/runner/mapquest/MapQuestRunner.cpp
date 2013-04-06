@@ -35,8 +35,8 @@ MapQuestRunner::MapQuestRunner( QObject *parent ) :
     m_networkAccessManager(),
     m_request()
 {
-    connect( &m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-             this, SLOT( retrieveData( QNetworkReply * ) ) );
+    connect( &m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
+             this, SLOT(retrieveData(QNetworkReply*)) );
 }
 
 MapQuestRunner::~MapQuestRunner()
@@ -87,11 +87,11 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
 
     connect( &timer, SIGNAL(timeout()),
              &eventLoop, SLOT(quit()));
-    connect( this, SIGNAL( routeCalculated( GeoDataDocument* ) ),
-             &eventLoop, SLOT( quit() ) );
+    connect( this, SIGNAL(routeCalculated(GeoDataDocument*)),
+             &eventLoop, SLOT(quit()) );
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT( get() ) );
+    QTimer::singleShot( 0, this, SLOT(get()) );
     timer.start();
 
     eventLoop.exec();
@@ -100,8 +100,8 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
 void MapQuestRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get( m_request );
-    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
+    connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
+             this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection );
 }
 
 void MapQuestRunner::retrieveData( QNetworkReply *reply )

@@ -72,9 +72,9 @@ void EditBookmarkDialogPrivate::initialize()
     m_ui.position_lbl->setVisible( !smallScreen );
     m_ui.m_latitude->setVisible( !smallScreen );
     m_ui.m_longitude->setVisible( !smallScreen );
-    QObject::connect( m_ui.m_newFolderButton, SIGNAL( clicked() ), q, SLOT( openNewFolderDialog() ) );
-    QObject::connect( m_ui.m_longitude, SIGNAL( valueChanged(qreal) ), q, SLOT( updateCoordinates() ) );
-    QObject::connect( m_ui.m_latitude, SIGNAL( valueChanged(qreal) ), q, SLOT( updateCoordinates() ) );
+    QObject::connect( m_ui.m_newFolderButton, SIGNAL(clicked()), q, SLOT(openNewFolderDialog()) );
+    QObject::connect( m_ui.m_longitude, SIGNAL(valueChanged(qreal)), q, SLOT(updateCoordinates()) );
+    QObject::connect( m_ui.m_latitude, SIGNAL(valueChanged(qreal)), q, SLOT(updateCoordinates()) );
 
     m_ui.m_folders->clear();
     initComboBox( m_bookmarkManager->document() );
@@ -153,8 +153,8 @@ void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
 
     d->m_manager = new MarbleRunnerManager( d->m_widget->model()->pluginManager(), this );
     d->m_manager->setModel( d->m_widget->model() );
-    QObject::connect( d->m_manager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-            this, SLOT( retrieveGeocodeResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
+    QObject::connect( d->m_manager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
+            this, SLOT(retrieveGeocodeResult(GeoDataCoordinates,GeoDataPlacemark)) );
 }
 
 void EditBookmarkDialog::setReverseGeocodeName()

@@ -69,8 +69,8 @@ GeoSceneDocument::GeoSceneDocument()
       d( new GeoSceneDocumentPrivate )
 {
     // Establish connection of property changes to the outside, e.g. the LegendBrowser
-    connect ( d->m_settings, SIGNAL( valueChanged( QString, bool ) ), 
-                          SIGNAL( valueChanged( QString, bool ) ) );
+    connect ( d->m_settings, SIGNAL(valueChanged(QString,bool)), 
+                          SIGNAL(valueChanged(QString,bool)) );
 }
 
 GeoSceneDocument::~GeoSceneDocument()

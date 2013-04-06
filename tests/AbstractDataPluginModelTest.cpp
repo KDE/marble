@@ -144,7 +144,7 @@ void AbstractDataPluginModelTest::addItemToList()
     item->setTarget( planetId );
     item->setId( "foo" );
 
-    QSignalSpy itemsUpdatedSpy( &model, SIGNAL( itemsUpdated() ) );
+    QSignalSpy itemsUpdatedSpy( &model, SIGNAL(itemsUpdated()) );
 
     model.addItemToList( item );
 
@@ -187,13 +187,13 @@ void AbstractDataPluginModelTest::addItemToList_keepExisting()
     rejectedItem->setInitialized( rejectedInitialized );
 
     QEventLoop loop;
-    connect( rejectedItem.data(), SIGNAL( destroyed() ), &loop, SLOT( quit() ) );
+    connect( rejectedItem.data(), SIGNAL(destroyed()), &loop, SLOT(quit()) );
 
-    QSignalSpy itemsUpdatedSpy( &model, SIGNAL( itemsUpdated() ) );
+    QSignalSpy itemsUpdatedSpy( &model, SIGNAL(itemsUpdated()) );
 
     model.addItemToList( rejectedItem );
 
-    QTimer::singleShot( 5000, &loop, SLOT( quit() ) ); // watchdog timer
+    QTimer::singleShot( 5000, &loop, SLOT(quit()) ); // watchdog timer
     loop.exec();
 
     QVERIFY( !item.isNull() );

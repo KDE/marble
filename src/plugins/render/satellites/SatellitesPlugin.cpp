@@ -47,7 +47,7 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
     connect( this, SIGNAL(visibilityChanged(bool,QString)), SLOT(visibleModel(bool)) );
 
     connect( m_configDialog, SIGNAL(activatePluginClicked()), this, SLOT(activate()) );
-    connect( this, SIGNAL( visibilityChanged(bool, QString) ),
+    connect( this, SIGNAL(visibilityChanged(bool,QString)),
              m_configDialog, SLOT(setDialogActive(bool)) );
 
     setVisible( false );

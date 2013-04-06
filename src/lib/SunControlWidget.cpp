@@ -35,10 +35,10 @@ SunControlWidget::SunControlWidget( MarbleWidget* marbleWidget, QWidget* parent 
 
     m_uiWidget->lockWarningLabel->hide();
 	
-    connect( m_uiWidget->applyButton, SIGNAL( clicked() ), this, SLOT( apply() ) );
-    connect( m_uiWidget->cancelButton, SIGNAL( clicked() ), this, SLOT( reject() ) );
-    connect( m_uiWidget->okButton, SIGNAL( clicked() ), this, SLOT( apply() ) );
-    connect( m_uiWidget->okButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
+    connect( m_uiWidget->applyButton, SIGNAL(clicked()), this, SLOT(apply()) );
+    connect( m_uiWidget->cancelButton, SIGNAL(clicked()), this, SLOT(reject()) );
+    connect( m_uiWidget->okButton, SIGNAL(clicked()), this, SLOT(apply()) );
+    connect( m_uiWidget->okButton, SIGNAL(clicked()), this, SLOT(accept()) );
     
     setModal( false );
 

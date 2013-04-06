@@ -92,12 +92,12 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
 
     // Connect the signals of the ButtonBox
     // to the corresponding slots of the dialog.
-    connect( buttons, SIGNAL( accepted() ), this, SLOT( accept() ) ); // Ok
-    connect( buttons, SIGNAL( rejected() ), this, SLOT( reject() ) ); // Cancel
-    connect( buttons->button( QDialogButtonBox::Apply ),SIGNAL( clicked() ),
-             this, SLOT( writeSettings() ) );                         // Apply
+    connect( buttons, SIGNAL(accepted()), this, SLOT(accept()) ); // Ok
+    connect( buttons, SIGNAL(rejected()), this, SLOT(reject()) ); // Cancel
+    connect( buttons->button( QDialogButtonBox::Apply ),SIGNAL(clicked()),
+             this, SLOT(writeSettings()) );                         // Apply
     // If the dialog is accepted. Save the settings.
-    connect( this, SIGNAL( accepted() ), this, SLOT( writeSettings() ) );
+    connect( this, SIGNAL(accepted()), this, SLOT(writeSettings()) );
 
     // view page
     QWidget *w_viewSettings = new QWidget( this );
@@ -130,10 +130,10 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     d->w_cacheSettings = new MarbleCacheSettingsWidget( this );
     tabWidget->addTab( d->w_cacheSettings, tr( "Cache and Proxy" ) );
     // Forwarding clear button signals
-    connect( d->w_cacheSettings, SIGNAL( clearVolatileCache() ),
-             this,               SIGNAL( clearVolatileCacheClicked() ) );
-    connect( d->w_cacheSettings, SIGNAL( clearPersistentCache() ),
-             this,               SIGNAL( clearPersistentCacheClicked() ) );
+    connect( d->w_cacheSettings, SIGNAL(clearVolatileCache()),
+             this,               SIGNAL(clearVolatileCacheClicked()) );
+    connect( d->w_cacheSettings, SIGNAL(clearPersistentCache()),
+             this,               SIGNAL(clearPersistentCacheClicked()) );
 
     // time page
     QWidget *w_timeSettings = new QWidget( this );
@@ -155,8 +155,8 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     d->w_pluginSettings->setAboutIcon( QIcon(":/icons/help-about.png") );
     d->w_pluginSettings->setConfigIcon(  QIcon(":/icons/settings-configure.png") );
 
-    connect( this, SIGNAL( rejected() ), &d->m_pluginModel, SLOT( retrievePluginState() ) );
-    connect( this, SIGNAL( accepted() ), &d->m_pluginModel, SLOT( applyPluginState() ) );
+    connect( this, SIGNAL(rejected()), &d->m_pluginModel, SLOT(retrievePluginState()) );
+    connect( this, SIGNAL(accepted()), &d->m_pluginModel, SLOT(applyPluginState()) );
 
     // Layout
     QVBoxLayout *layout = new QVBoxLayout( this );
@@ -166,7 +166,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     this->setLayout( layout );
 
     // When the settings have been changed, write to disk.
-    connect( this, SIGNAL( settingsChanged() ), this, SLOT( syncSettings() ) );
+    connect( this, SIGNAL(settingsChanged()), this, SLOT(syncSettings()) );
 
     initializeCustomTimezone();
 }
