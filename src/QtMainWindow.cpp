@@ -1046,18 +1046,8 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
                     settings.value("quitLongitude", 0.0).toDouble(),
                     settings.value("quitLatitude", 0.0).toDouble() );
                 if (! isDistanceOverwritten) {
-                    if ( settings.contains("quitRadius") ) {
-                        // provide a default value in case "quitRadius" contains garbage
-                        m_controlView->marbleWidget()->setRadius( settings.value("quitRadius", 1350).toInt() );
-                    }
-                    else if ( settings.contains("quitZoom") ) {
-                        // provide a default value in case "quitZoom" contains garbage
-                        m_controlView->marbleWidget()->setZoom( settings.value("quitZoom", 1000).toInt() );
-                    }
-                    else {
-                        // set radius to 1350 (Atlas theme's "sharp" radius) if Marble starts with a clean config
-                        m_controlView->marbleWidget()->setRadius( 1350 );
-                    }
+                    // set default radius to 1350 (Atlas theme's "sharp" radius)
+                    m_controlView->marbleWidget()->setRadius( settings.value("quitRadius", 1350).toInt() );
                 }
                 break;
             case Marble::ShowHomeLocation:
