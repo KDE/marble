@@ -39,14 +39,14 @@ class RoutingProfilesWidget::Private
     void updateButtons();
 
     RoutingProfilesWidget *const q;
-    MarbleModel *const m_marbleModel;
+    const PluginManager *const m_pluginManager;
     RoutingProfilesModel *const m_profilesModel;
     Ui_RoutingSettingsWidget m_ui;
 };
 
 RoutingProfilesWidget::Private::Private( MarbleModel *marbleModel, RoutingProfilesWidget *parent ) :
     q( parent ),
-    m_marbleModel( marbleModel ),
+    m_pluginManager( marbleModel->pluginManager() ),
     m_profilesModel( marbleModel->routingManager()->profilesModel() )
 {
 }
@@ -81,7 +81,7 @@ void RoutingProfilesWidget::Private::add()
     int profileIndex = m_profilesModel->rowCount() - 1;
     m_ui.profilesList->selectionModel()->select( m_profilesModel->index( profileIndex, 0 ), QItemSelectionModel::Clear | QItemSelectionModel::SelectCurrent );
 
-    RoutingProfileSettingsDialog dialog( m_marbleModel->pluginManager(), m_profilesModel, q );
+    RoutingProfileSettingsDialog dialog( m_pluginManager, m_profilesModel, q );
     dialog.editProfile( profileIndex );
 }
 
@@ -101,7 +101,7 @@ void RoutingProfilesWidget::Private::configure()
 
     int profileIndex = m_ui.profilesList->selectionModel()->selectedRows().first().row();
 
-    RoutingProfileSettingsDialog dialog( m_marbleModel->pluginManager(), m_profilesModel, q );
+    RoutingProfileSettingsDialog dialog( m_pluginManager, m_profilesModel, q );
     dialog.editProfile( profileIndex );
 }
 
