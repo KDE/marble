@@ -24,6 +24,7 @@
 #include <QtGui/QScrollBar>
 #include <QtGui/QStyle>
 #include <QtGui/QStyleOptionButton>
+#include <QtGui/QDesktopServices>
 #include <QtCore/QRegExp>
 #include <QtWebKit/QWebFrame>
 #include <QtWebKit/QWebElement>
@@ -69,6 +70,8 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     QWebFrame *frame = page()->mainFrame();
     connect(frame, SIGNAL(javaScriptWindowObjectCleared()),
             this, SLOT(injectCheckBoxChecker()));
+    page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
+    connect( this, SIGNAL(linkClicked(QUrl)), this, SLOT(openLinkExternally(QUrl)) );
 }
 
 MarbleLegendBrowser::~MarbleLegendBrowser()
@@ -164,6 +167,11 @@ void MarbleLegendBrowser::injectCheckBoxChecker()
 {
     QWebFrame *frame = page()->mainFrame();
     frame->addToJavaScriptWindowObject( "Marble", this );
+}
+
+void MarbleLegendBrowser::openLinkExternally( const QUrl &url )
+{
+    QDesktopServices::openUrl( url );
 }
 
 bool MarbleLegendBrowser::event( QEvent * event )

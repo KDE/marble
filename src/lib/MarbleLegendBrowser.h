@@ -51,6 +51,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
     void initTheme();
     void loadLegend();
     void injectCheckBoxChecker();
+    void openLinkExternally( const QUrl &url );
 
  protected:
     bool event( QEvent * event );
