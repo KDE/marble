@@ -212,8 +212,10 @@ void MarbleGraphicsItem::show()
 
 void MarbleGraphicsItem::setSize( const QSizeF& size )
 {
-    p()->m_size = size;
-    update();
+    if ( p()->m_size != size ) {
+        p()->m_size = size;
+        update();
+    }
 }
 
 QSizeF MarbleGraphicsItem::contentSize() const
