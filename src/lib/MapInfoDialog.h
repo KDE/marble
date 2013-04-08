@@ -142,7 +142,14 @@ private slots:
     void hidePopupItem();
 
 private:
+    /**
+     * @brief Sets size of the popup item, based on the requested size and viewport size
+     * @param viewport required to compute the maximum dimensions
+     */
+    void setAppropriateSize( const ViewportParams *viewport );
+
     PopupItem *m_popupItem;
+    QSizeF m_requestedSize;
 };
 
 }

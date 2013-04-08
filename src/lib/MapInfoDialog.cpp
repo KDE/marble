@@ -47,8 +47,10 @@ bool MapInfoDialog::render( GeoPainter *painter, ViewportParams *viewport,
                                 const QString&, GeoSceneLayer* )
 {
     if ( visible() ) {
+        setAppropriateSize( viewport );
         m_popupItem->paintEvent( painter, viewport );
     }
+
     return true;
 }
 
@@ -113,7 +115,20 @@ void MapInfoDialog::setTextColor(const QColor &color)
 
 void MapInfoDialog::setSize( const QSizeF &size )
 {
-    m_popupItem->setSize( size );
+    m_requestedSize = size;
+}
+
+void MapInfoDialog::setAppropriateSize( const ViewportParams *viewport )
+{
+    qreal margin = 15.0;
+
+    QSizeF maximumSize;
+    maximumSize.setWidth( viewport->width() / 2.0 - margin );
+    maximumSize.setHeight( viewport->height() - 2.0 * margin );
+
+    QSizeF minimumSize( 240.0, 240.0 );
+
+    m_popupItem->setSize( m_requestedSize.boundedTo( maximumSize ).expandedTo( minimumSize ) );
 }
 
 void MapInfoDialog::setPosition( const QPointF &position )

@@ -45,6 +45,7 @@ PopupItem::PopupItem( QObject* parent ) :
     m_needMouseRelease(false)
 {
     setVisible( false );
+    setSize( QSizeF( 240.0, 320.0 ) );
 
     QGridLayout *childLayout = new QGridLayout;
     int position = 0;
