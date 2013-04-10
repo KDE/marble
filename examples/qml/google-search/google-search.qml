@@ -110,7 +110,7 @@ Rectangle {
                     height: parent.height
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     color: "white"
-                    text: hit
+                    text: index+1
                     horizontalAlignment: Text.AlignHCenter
                 }
 
@@ -135,7 +135,7 @@ Rectangle {
                         y: 5
                         width: parent.width - 20
                         height: parent.height - 10
-                        text: name
+                        text: display
                         wrapMode: "WrapAtWordBoundaryOrAnywhere"
                         clip: true
                     }

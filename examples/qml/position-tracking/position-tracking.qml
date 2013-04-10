@@ -55,7 +55,7 @@ Rectangle {
             positionSource: gpsd
 
             // Don't show the default Marble position indicator (arrow)
-            showPosition: false
+            positionMarkerType: Tracking.Circle
 
             // Initially we don't show the track
             showTrack: false
