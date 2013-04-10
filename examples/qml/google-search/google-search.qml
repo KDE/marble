@@ -87,7 +87,8 @@ Rectangle {
             height: 400
             activeRenderPlugins: [ "navigation", "scalebar" ]
 
-            search {
+            property Search search: Search {
+                map: map
                 placemarkDelegate: myDelegate
             }
         }
