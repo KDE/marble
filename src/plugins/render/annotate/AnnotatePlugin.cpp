@@ -34,6 +34,7 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
+#include <QtGui/QMessageBox>
 
 namespace Marble
 {
@@ -306,14 +307,22 @@ void AnnotatePlugin::setRemovingItems( bool enabled )
 
 void AnnotatePlugin::clearAnnotations()
 {
-    m_selectedItem = 0;
-    delete m_polygon_placemark;
-    m_polygon_placemark = 0;
-    qDeleteAll( m_graphicsItems );
-    m_graphicsItems.clear();
-    m_marbleWidget->model()->treeModel()->removeDocument( m_annotationDocument );
-    m_annotationDocument->clear();
-    m_marbleWidget->model()->treeModel()->addDocument( m_annotationDocument );
+
+    const int result = QMessageBox::question( m_marbleWidget,
+                                              QObject::tr( "Clear all annotations" ),
+                                              QObject::tr( "Are you sure you want to clear all annotations?" ),
+                                              QMessageBox::Yes | QMessageBox::Cancel );
+
+    if ( result == QMessageBox::Yes ) {
+        m_selectedItem = 0;
+        delete m_polygon_placemark;
+        m_polygon_placemark = 0;
+        qDeleteAll( m_graphicsItems );
+        m_graphicsItems.clear();
+        m_marbleWidget->model()->treeModel()->removeDocument( m_annotationDocument );
+        m_annotationDocument->clear();
+        m_marbleWidget->model()->treeModel()->addDocument( m_annotationDocument );
+    }
 }
 
 void AnnotatePlugin::saveAnnotationFile()
@@ -436,13 +445,22 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
             QRegion region = it.next();
             if( region.contains( mouseEvent->pos() ) ) {
                 // deal with removing items
-                if( mouseEvent->button() == Qt::LeftButton && m_removingItem ) {
-                    m_selectedItem = 0;
-                    m_graphicsItems.removeAll( item );
-                    m_marbleWidget->model()->treeModel()->removeFeature( item->feature() );
-                    delete item->feature();
-                    delete item;
-                    emit itemRemoved();
+                if( mouseEvent->button() == Qt::LeftButton && event->type() == QEvent::MouseButtonRelease && m_removingItem ) {
+
+                    const int result = QMessageBox::question( m_marbleWidget,
+                                                              QObject::tr( "Remove current item" ),
+                                                              QObject::tr( "Are you sure you want to remove the current item?" ),
+                                                              QMessageBox::Yes | QMessageBox::Yes );
+
+                    if ( result == QMessageBox::Yes ) {
+                        m_selectedItem = 0;
+                        m_graphicsItems.removeAll( item );
+                        m_marbleWidget->model()->treeModel()->removeFeature( item->feature() );
+                        delete item->feature();
+                        delete item;
+                        emit itemRemoved();
+                    }
+                    return true;
                 }
                 else {
                     if( item->sceneEvent( event ) ) {
