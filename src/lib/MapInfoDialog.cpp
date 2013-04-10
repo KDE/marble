@@ -23,7 +23,9 @@ namespace Marble
 
 MapInfoDialog::MapInfoDialog(QObject *parent) :
     QObject( parent ),
-    m_popupItem( new PopupItem( this ) )
+    m_popupItem( new PopupItem( this ) ),
+    m_widget( 0 ),
+    m_adjustMap( false )
 {
     connect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
     connect( m_popupItem, SIGNAL(hide()), this, SLOT(hidePopupItem()) );
@@ -31,6 +33,11 @@ MapInfoDialog::MapInfoDialog(QObject *parent) :
 
 MapInfoDialog::~MapInfoDialog()
 {
+}
+
+void MapInfoDialog::setMarbleWidget( MarbleWidget* widget )
+{
+    m_widget = widget;
 }
 
 QStringList MapInfoDialog::renderPosition() const
@@ -48,6 +55,10 @@ bool MapInfoDialog::render( GeoPainter *painter, ViewportParams *viewport,
 {
     if ( visible() ) {
         setAppropriateSize( viewport );
+        if ( m_adjustMap ) {
+            m_widget->centerOn( m_popupItem->coordinate(), true );
+            m_adjustMap = false;
+        }
         m_popupItem->paintEvent( painter, viewport );
     }
 
@@ -80,6 +91,12 @@ void MapInfoDialog::setVisible( bool visible )
     else {
         connect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
     }
+}
+
+void MapInfoDialog::popup()
+{
+    m_adjustMap = true;
+    setVisible( true );
 }
 
 void MapInfoDialog::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)

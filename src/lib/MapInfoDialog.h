@@ -16,6 +16,8 @@
 #include "LayerInterface.h"
 #include "ViewportParams.h"
 #include "GeoPainter.h"
+#include "MarbleWidget.h"
+#include "GeoDataCoordinates.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
@@ -49,6 +51,13 @@ public:
     qreal zValue() const;
 
     /**
+     * @brief Set the parent MarbleWidget of this dialog
+     *
+     * @param widget parent widget of the dialog
+     */
+    void setMarbleWidget( MarbleWidget* widget );
+
+    /**
      * @brief Is popup item visible
      *
      * If popup item visible, it will return `true`,
@@ -67,6 +76,14 @@ public:
      * @param visible visibility of the item
      */
     void setVisible( bool visible );
+
+    /**
+     * @brief Make the dialog pop up
+     *
+     * This has the same effect as setVisible( true ) and additionally
+     * adjusts the viewport so that the dialog is fully visible.
+     */
+    void popup();
 
     /**
      * @brief Sets coordinates
@@ -149,7 +166,9 @@ private:
     void setAppropriateSize( const ViewportParams *viewport );
 
     PopupItem *m_popupItem;
+    MarbleWidget* m_widget;
     QSizeF m_requestedSize;
+    bool m_adjustMap;
 };
 
 }
