@@ -125,6 +125,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_timeControlDialog( 0 ),
     m_downloadRegionDialog( 0 ),
     m_externalMapEditorAction( 0 ),
+    m_recentFilesAction( 0 ),
     m_configDialog( 0 ),
     m_position( i18n( NOT_AVAILABLE ) ),
     m_tileZoomLevel( i18n( NOT_AVAILABLE ) ),
@@ -213,9 +214,17 @@ KAboutData *MarblePart::createAboutData()
 
 bool MarblePart::openUrl( const KUrl &url )
 {
-    Q_UNUSED( url );
+    QFileInfo fileInfo( url.toLocalFile() );
+    if ( fileInfo.isReadable() ) {
+        m_controlView->marbleModel()->addGeoDataFile( url.toLocalFile() );
+        m_recentFilesAction->addUrl( url );
+        return true;
+    }
 
-    return true;
+    KMessageBox::error( widget(),
+        tr( "Sorry, unable to open '%1'. The file is not accessible." ).arg( fileInfo.fileName() ),
+        tr( "File not accessible" ) );
+    return false;
 }
 
 bool MarblePart::openFile()
@@ -252,12 +261,11 @@ bool MarblePart::openFile()
     }
 
     foreach( const QString &fileName, fileNames ) {
-        m_controlView->marbleModel()->addGeoDataFile( fileName );
+        openUrl( fileName );
     }
 
     return true;
 }
-
 
 void MarblePart::exportMapScreenShot()
 {
@@ -649,6 +657,10 @@ void MarblePart::writeSettings()
 
     writeStatusBarSettings();
 
+    // Store recent files
+    KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
+    m_recentFilesAction->saveEntries( sharedConfig->group( "RecentFiles" ) );
+
     // Store current route settings
     RoutingManager *routingManager = m_controlView->marbleWidget()->model()->routingManager();
     routingManager->writeSettings();
@@ -677,6 +689,12 @@ void MarblePart::writeStatusBarSettings()
 
 void MarblePart::setupActions()
 {
+    // Action: Recent Files
+    m_recentFilesAction = KStandardAction::openRecent( this, SLOT(openUrl(KUrl)),
+                                                       actionCollection() );
+    KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
+    m_recentFilesAction->loadEntries( sharedConfig->group( "RecentFiles" ) );
+
     // Action: Download Region
     m_downloadRegionAction = new KAction( this );
     m_downloadRegionAction->setText( i18nc( "Action for downloading an entire region of a map",

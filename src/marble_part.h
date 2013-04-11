@@ -20,6 +20,7 @@
 #include <kmenu.h>
 #include <kurl.h>
 #include "MarbleGlobal.h"
+#include <krecentfilesaction.h>
 
 class KAboutData;
 class KAction;
@@ -210,6 +211,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_lockFloatItemsAct;
     KAction      *m_mapWizardAct;
     KAction      *m_externalMapEditorAction;
+    KRecentFilesAction *m_recentFilesAction;
 
     //Bookmark Menu
     KAction *m_addBookmarkAction;
