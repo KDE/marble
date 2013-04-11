@@ -306,22 +306,6 @@ void MarblePart::setShowClouds( bool isChecked )
     m_showCloudsAction->setChecked( isChecked ); // Sync state with the GUI
 }
 
-void MarblePart::setShowAtmosphere( bool isChecked )
-{
-    m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
-
-    m_showAtmosphereAction->setChecked( isChecked ); // Sync state with the GUI
-}
-
-void MarblePart::updateAtmosphereMenu()
-{
-    if( m_controlView->marbleModel()->planet()->hasAtmosphere() ) {
-        m_showAtmosphereAction->setEnabled( true );
-    } else {
-        m_showAtmosphereAction->setEnabled( false );
-    }
-}
-
 void MarblePart::showPositionLabel( bool isChecked )
 {
     m_positionLabel->setVisible( isChecked );
@@ -460,8 +444,6 @@ void MarblePart::readSettings()
     workOffline( MarbleSettings::workOffline() );
     m_workOfflineAction->setChecked( MarbleSettings::workOffline() );
 
-    m_controlView->marbleWidget()->setShowAtmosphere( MarbleSettings::showAtmosphere() );
-    m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
     m_lockFloatItemsAct->setChecked(MarbleSettings::lockFloatItemPositions());
     lockFloatItemPosition(MarbleSettings::lockFloatItemPositions());
 
@@ -610,7 +592,6 @@ void MarblePart::writeSettings()
     MarbleSettings::setShowClouds( m_controlView->marbleWidget()->showClouds() );
 
     MarbleSettings::setWorkOffline( m_workOfflineAction->isChecked() );
-    MarbleSettings::setShowAtmosphere( m_controlView->marbleWidget()->showAtmosphere() );
 
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->
@@ -778,26 +759,6 @@ void MarblePart::setupActions()
                                                    actionCollection() );
     connect( m_fullScreenAct, SIGNAL(triggered(bool)),
              this,            SLOT(showFullScreen(bool)) );
-
-    // Action: Show Atmosphere option
-    m_showAtmosphereAction = new KAction( this );
-    actionCollection()->addAction( "show_atmosphere", m_showAtmosphereAction );
-    m_showAtmosphereAction->setCheckable( true );
-    m_showAtmosphereAction->setVisible( false );
-    m_showAtmosphereAction->setChecked( true );
-    m_showAtmosphereAction->setText( i18nc( "Action for toggling the atmosphere", "&Atmosphere" ) );
-    m_showAtmosphereAction->setIcon( KIcon( ":/icons/atmosphere.png" ) );
-    connect( m_showAtmosphereAction, SIGNAL(triggered(bool)),
-             this,                   SLOT(setShowAtmosphere(bool)) );
-    foreach ( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
-        if ( plugin->nameId() == "atmosphere" ) {
-            m_showAtmosphereAction->setVisible( plugin->enabled() );
-            connect( plugin, SIGNAL(enabledChanged(bool)),
-                     m_showAtmosphereAction, SLOT(setVisible(bool)) );
-        }
-    }
-    connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
-            this, SLOT(updateAtmosphereMenu()) );
 
     // Action: Show Crosshairs option
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
@@ -1010,6 +971,24 @@ void MarblePart::createOnlineServicesMenu()
 
     unplugActionList( "onlineservices_actionlist" );
     plugActionList( "onlineservices_actionlist", actionList );
+}
+
+void MarblePart::createRenderPluginActions()
+{
+    QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
+
+    QList<QAction*> actionList;
+
+    QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
+    for (; i != end; ++i ) {
+        if( (*i)->renderType() == RenderPlugin::ThemeRenderType ) {
+            actionList.append( (*i)->action() );
+        }
+    }
+
+    unplugActionList( "themerender_actionlist" );
+    plugActionList( "themerender_actionlist", actionList );
 }
 
 void MarblePart::showDateTime()

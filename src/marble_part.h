@@ -61,6 +61,7 @@ class MarblePart: public KParts::ReadOnlyPart
     static KAboutData* createAboutData();
     void createInfoBoxesMenu();
     void createOnlineServicesMenu();
+    void createRenderPluginActions();
 
     void initializeCustomTimezone();
 
@@ -80,8 +81,6 @@ class MarblePart: public KParts::ReadOnlyPart
     void  copyMap();
     void  copyCoordinates();
     void  setShowClouds( bool );
-    void  setShowAtmosphere( bool );
-    void  updateAtmosphereMenu();
     void  setShowBookmarks( bool isChecked );
     void  showFullScreen( bool );
     void  showStatusBar( bool );
@@ -201,7 +200,6 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_copyMapAction;
     KAction      *m_copyCoordinatesAction;
     KAction      *m_showCloudsAction;
-    KAction      *m_showAtmosphereAction;
     KAction      *m_fullScreenAct;
     KAction      *m_openAct;
     KAction      *m_newStuffAction;

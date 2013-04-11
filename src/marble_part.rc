@@ -41,7 +41,7 @@
     </Menu>
     <Separator/>
     <Action name="show_clouds"/>
-    <Action name="show_atmosphere"/>
+    <ActionList name="themerender_actionlist"/>
     <Separator/>
     <Action name="control_sun"/>
     <Action name="control_time"/>

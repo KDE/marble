@@ -33,9 +33,6 @@
   <entry key="showClouds" type="Bool" >
    <default>true</default>
   </entry>
-  <entry key="showAtmosphere" type="Bool" >
-   <default>true</default>
-  </entry>
   <entry key="workOffline" type="Bool" >
    <default>false</default>
   </entry>

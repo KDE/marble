@@ -56,6 +56,7 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
     // Creating the plugin menus
     m_part->createInfoBoxesMenu();
     m_part->createOnlineServicesMenu();
+    m_part->createRenderPluginActions();
 	m_part->createFolderList();
 
     setAutoSaveSettings();
