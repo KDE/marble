@@ -28,10 +28,6 @@
     <Action name="show_crosshairs" group="show_merge"/>
     <Action name="view_redisplay"/>
     <Separator/>
-    <Menu name="panels" noMerge="1">
-      <text>&amp;Panels</text>
-      <ActionList name="panels_actionlist" />
-    </Menu>
     <Menu name="infoboxes" noMerge="1">
       <text>&amp;Info Boxes</text>
       <Action name="options_lock_floatitems"/>
@@ -53,6 +49,10 @@
     <text>&amp;Settings</text>
     <Merge name="StandardToolBarMenuHandler" />
     <Separator/>
+    <Menu name="panels" noMerge="1">
+      <text>&amp;Panels</text>
+      <ActionList name="panels_actionlist" />
+    </Menu>
     <Action name="options_show_statusbar"/>
     <Action name="fullscreen"/>
     <Separator/>

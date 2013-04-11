@@ -363,7 +363,6 @@ void MainWindow::createMenus()
     m_fileMenu->addAction( m_osmEditAction );
 
     m_viewMenu = menuBar()->addMenu(tr("&View"));
-    m_panelMenu = new QMenu( "&Panels" );
     m_infoBoxesMenu = new QMenu( "&Info Boxes" );
     m_onlineServicesMenu = new QMenu( "&Online Services" );
     createPluginsMenus();
@@ -372,7 +371,9 @@ void MainWindow::createMenus()
     createBookmarkMenu();
     connect( m_bookmarkMenu, SIGNAL(aboutToShow()), this, SLOT(createBookmarkMenu()) );
 
+    m_panelMenu = new QMenu( "&Panels" );
     m_settingsMenu = menuBar()->addMenu(tr("&Settings"));
+    m_settingsMenu->addMenu( m_panelMenu );
     m_settingsMenu->addAction(m_statusBarAct);
     m_settingsMenu->addAction(m_fullScreenAct);
     m_settingsMenu->addSeparator();
@@ -436,7 +437,6 @@ void MainWindow::createPluginsMenus()
             break;
         }
     }
-    m_viewMenu->addMenu( m_panelMenu );
     m_viewMenu->addMenu( m_infoBoxesMenu );
     m_viewMenu->addMenu( m_onlineServicesMenu );
     m_viewMenu->addActions( themeActions );
