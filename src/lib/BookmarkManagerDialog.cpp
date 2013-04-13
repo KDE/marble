@@ -107,6 +107,9 @@ BookmarkManagerDialogPrivate::BookmarkManagerDialogPrivate( BookmarkManagerDialo
 /// consequence is selecting this folder, or unselecting it and going to root folder
 void BookmarkManagerDialogPrivate::handleFolderSelection( const QModelIndex &index )
 {
+    if( !index.isValid() ) {
+        return;
+    }
     Q_ASSERT( index.isValid() );
     Q_ASSERT( index.model() == m_folderFilterModel );
     if( m_selectedFolder.isValid() &&
