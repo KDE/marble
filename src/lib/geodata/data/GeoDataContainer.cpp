@@ -155,6 +155,13 @@ int GeoDataContainer::childPosition( const GeoDataFeature* object ) const
 }
 
 
+void GeoDataContainer::insert( GeoDataFeature *other, int index )
+{
+    detach();
+    other->setParent(this);
+    p()->m_vector.insert( index, other );
+}
+
 void GeoDataContainer::append( GeoDataFeature *other )
 {
     detach();

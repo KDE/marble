@@ -563,9 +563,8 @@ QItemSelectionModel *GeoDataTreeModel::selectionModel()
     return &d->m_selectionModel;
 }
 
-int GeoDataTreeModel::addFeature( GeoDataContainer *parent, GeoDataFeature *feature )
+int GeoDataTreeModel::addFeature( GeoDataContainer *parent, GeoDataFeature *feature, int row )
 {
-    int row = -1;
     if ( parent && feature ) {
 
         QModelIndex modelindex = index( parent );
@@ -576,9 +575,11 @@ int GeoDataTreeModel::addFeature( GeoDataContainer *parent, GeoDataFeature *feat
 
         if( ( parent == d->m_rootDocument ) || modelindex.isValid() )
         {
-            row = parent->size();
+            if( row < 0 || row > parent->size()) {
+                row = parent->size();
+            }
             beginInsertRows( modelindex , row , row );
-            parent->append( feature );
+            parent->insert( feature, row );
             d->checkParenting( parent );
             endInsertRows();
             emit added(feature);
@@ -609,7 +610,7 @@ bool GeoDataTreeModel::removeFeature( GeoDataContainer *parent, int row )
     return false; //Tried to remove a row that is not contained in the parent.
 }
 
-bool GeoDataTreeModel::removeFeature( const GeoDataFeature *feature )
+int GeoDataTreeModel::removeFeature( const GeoDataFeature *feature )
 {
     if ( feature && ( feature!=d->m_rootDocument ) )  {
 
@@ -623,20 +624,23 @@ bool GeoDataTreeModel::removeFeature( const GeoDataFeature *feature )
 
             int row = static_cast< GeoDataContainer* >( feature->parent() )->childPosition( feature );
             if ( row != -1 ) {
-                return removeFeature( static_cast< GeoDataContainer* >( feature->parent() ) , row );
+                bool removed = removeFeature( static_cast< GeoDataContainer* >( feature->parent() ) , row );
+                if( removed ) {
+                    return row;
+                }
             }
-            else
-                return false; //The feature is not contained in the parent it points to
+            //The feature is not contained in the parent it points to
         }
     }
-    return false; //We can not remove the rootDocument
+    return -1; //We can not remove the rootDocument
 }
 
 void GeoDataTreeModel::updateFeature( GeoDataFeature *feature )
 {
     GeoDataContainer *container = static_cast<GeoDataContainer*>( feature->parent() );
-    removeFeature( feature );
-    addFeature( container, feature );
+    int index = removeFeature( feature );
+    Q_ASSERT( index != -1 );
+    addFeature( container, feature, index );
 }
 
 void GeoDataTreeModel::removeDocument( int index )

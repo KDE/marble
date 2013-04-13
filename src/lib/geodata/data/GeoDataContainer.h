@@ -103,6 +103,8 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      */
     int childPosition( const GeoDataFeature *child) const;
     
+    void insert( GeoDataFeature *other, int index );
+
     /**
     * @brief add an element
     */

@@ -86,11 +86,11 @@ public Q_SLOTS:
     void setRootDocument( GeoDataDocument *document );
     GeoDataDocument* rootDocument();
 
-    int addFeature( GeoDataContainer *parent, GeoDataFeature *feature );
+    int addFeature( GeoDataContainer *parent, GeoDataFeature *feature, int row = -1 );
 
     bool removeFeature( GeoDataContainer *parent, int index );
 
-    bool removeFeature( const GeoDataFeature *feature );
+    int removeFeature( const GeoDataFeature *feature );
 
     void updateFeature( GeoDataFeature *feature );
 
