@@ -167,11 +167,13 @@ geodata/writers/kml/KmlLatLonQuadWriter.cpp
 geodata/writers/kml/KmlLinearRingTagWriter.cpp
 geodata/writers/kml/KmlLineStringTagWriter.cpp
 geodata/writers/kml/KmlLineStyleTagWriter.cpp
+geodata/writers/kml/KmlLinkTagWriter.cpp
 geodata/writers/kml/KmlListStyleTagWriter.cpp
 geodata/writers/kml/KmlLodTagWriter.cpp
 geodata/writers/kml/KmlLookAtTagWriter.cpp
 geodata/writers/kml/KmlMultiGeometryTagWriter.cpp
 geodata/writers/kml/KmlMultiTrackTagWriter.cpp
+geodata/writers/kml/KmlNetworkLinkTagWriter.cpp
 geodata/writers/kml/KmlOverlayTagWriter.cpp
 geodata/writers/kml/KmlPhotoOverlayWriter.cpp
 geodata/writers/kml/KmlPlacemarkTagWriter.cpp
