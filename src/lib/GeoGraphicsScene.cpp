@@ -37,6 +37,7 @@ public:
     void addItems(const TileId &tileId, QList<GeoGraphicsItem*> &result, int maxZoomLevel ) const;
 
     QMap<TileId, QList<GeoGraphicsItem*> > m_items;
+    QHash<const GeoDataFeature*, TileId> m_features;
 };
 
 GeoGraphicsScene::GeoGraphicsScene( QObject* parent ): QObject( parent ), d( new GeoGraphicsScenePrivate() )
@@ -57,6 +58,7 @@ void GeoGraphicsScene::eraseAll()
         qDeleteAll(*i);
     }
     d->m_items.clear();
+    d->m_features.clear();
 }
 
 QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, int zoomLevel ) const
@@ -116,33 +118,13 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, 
 
 void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 {
-    int zoomLevel;
-    qreal north, south, east, west;
-
-    if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( feature );
-        placemark->geometry()->latLonAltBox().boundaries( north, south, east, west );
-    } else if( feature->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
-        const GeoDataGroundOverlay *overlay = static_cast<const GeoDataGroundOverlay*>( feature );
-        overlay->latLonBox().boundaries( north, south, east, west );
-    } else if( feature->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
-        const GeoDataPhotoOverlay *overlay = static_cast<const GeoDataPhotoOverlay*>( feature );
-        GeoDataPoint point = overlay->point();
-        point.latLonAltBox().boundaries( north, south, east, west );
-    }
-    for(zoomLevel = feature->zoomLevel(); zoomLevel >= 0; zoomLevel--)
-    {
-        if( TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ) ==
-            TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel ) )
-            break;
-    }
-
-    const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
-
-    QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( 0, zoomLevel, key.x(), key.y() )];
+    const TileId key = d->m_features.value( feature );
+    QList< GeoGraphicsItem* >& tileList = d->m_items[key];
     foreach( GeoGraphicsItem* item, tileList ) {
         if( item->feature() == feature ) {
+            d->m_features.remove( feature );
             tileList.removeAll( item );
+            return;
         }
     }
 }
@@ -167,9 +149,10 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
 
     const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
 
-    QList< GeoGraphicsItem* >& tileList = d->m_items[TileId( 0, zoomLevel, key.x(), key.y() )];
+    QList< GeoGraphicsItem* >& tileList = d->m_items[key];
     QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, zValueLessThan );
     tileList.insert( position, item );
+    d->m_features.insert( item->feature(), key );
 }
 
 void GeoGraphicsScenePrivate::addItems( const TileId &tileId, QList<GeoGraphicsItem *> &result, int maxZoomLevel ) const
