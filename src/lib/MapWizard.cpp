@@ -253,6 +253,7 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
 
     d->wmsProjection = firstLayer.firstChildElement( "SRS" ).text();
     d->uiWidget.listWidgetWmsMaps->clear();
+    d->wmsFetchedMaps.clear();
 
     for( int i = 0; i < layers.size(); ++i )
     {
