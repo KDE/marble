@@ -327,45 +327,36 @@ QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport ) con
      * matching our latLonAltBox.
      */
 
-    QRect rect;
     qreal north, south, east, west;
     viewport->viewLatLonAltBox().boundaries(north, south, east, west);
-    TileId key;
-
-    key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel);
-    rect.setLeft( key.x() );
-    rect.setTop( key.y() );
-
-    key = TileId::fromCoordinates( GeoDataCoordinates(east, south, 0), zoomLevel);
-    rect.setRight( key.x() );
-    rect.setBottom( key.y() );
-
-    TileCoordsPyramid pyramid(0, zoomLevel );
-    pyramid.setBottomLevelCoords( rect );
-
     QSet<TileId> tileIdSet;
-    bool crossesDateLine = viewport->viewLatLonAltBox().crossesDateLine();
-    for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {
+    QVector<QRectF> geoRects;
+    if( west <= east ) {
+        geoRects << QRectF(west, north, east - west, south - north);
+    } else {
+        geoRects << QRectF(west, north, M_PI - west, south - north);
+        geoRects << QRectF(-M_PI, north, east + M_PI, south - north);
+    }
+    foreach( QRectF geoRect, geoRects ) {
+        TileId key;
+        QRect rect;
+
+        key = TileId::fromCoordinates( GeoDataCoordinates(geoRect.left(), north, 0), zoomLevel);
+        rect.setLeft( key.x() );
+        rect.setTop( key.y() );
+
+        key = TileId::fromCoordinates( GeoDataCoordinates(geoRect.right(), south, 0), zoomLevel);
+        rect.setRight( key.x() );
+        rect.setBottom( key.y() );
+
+        TileCoordsPyramid pyramid(0, zoomLevel );
+        pyramid.setBottomLevelCoords( rect );
+
+        for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {
         QRect const coords = pyramid.coords( level );
         int x1, y1, x2, y2;
         coords.getCoords( &x1, &y1, &x2, &y2 );
-        if ( !crossesDateLine ) { // normal case, rect does not cross dateline
             for ( int x = x1; x <= x2; ++x ) {
-                for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( 0, level, x, y );
-                    tileIdSet.insert(tileId);
-                }
-            }
-        } else { // as we cross dateline, we first get west part, then east part
-            // go till max tile
-            for ( int x = x1; x <= ((2 << (level-1))-1); ++x ) {
-                for ( int y = y1; y <= y2; ++y ) {
-                    TileId const tileId( 0, level, x, y );
-                    tileIdSet.insert(tileId);
-                }
-            }
-            // start from min tile
-            for ( int x = 0; x <= x2; ++x ) {
                 for ( int y = y1; y <= y2; ++y ) {
                     TileId const tileId( 0, level, x, y );
                     tileIdSet.insert(tileId);
