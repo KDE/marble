@@ -25,6 +25,7 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
+class QTreeView;
 
 
 namespace Marble
@@ -34,6 +35,7 @@ class PlacemarkTextAnnotation;
 class GeoDataDocument;
 class GeoDataLinearRing;
 class GeoDataLineString;
+class BranchFilterProxyModel;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -80,6 +82,7 @@ class AnnotatePlugin :  public RenderPlugin
 
     virtual const QList<QActionGroup*>* actionGroups() const;
     virtual const QList<QActionGroup*>* toolbarActionGroups() const;
+    virtual QDockWidget* createDockWidget();
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos, GeoSceneLayer * layer = 0 );
@@ -105,7 +108,7 @@ public slots:
 protected:
     bool eventFilter(QObject* watched, QEvent* event);
 private:
-    void setupActions(MarbleWidget* m);
+    void setupActions();
     //    void readOsmFile( QIODevice* device, bool flyToFile );
 
     bool    m_widgetInitialized;
@@ -113,6 +116,8 @@ private:
 
     QList<QActionGroup*>    m_actions;
     QList<QActionGroup*>    m_toolbarActions;
+    QTreeView*              m_treeView;
+    BranchFilterProxyModel* m_treeViewModel;
 
     GeoDataDocument *m_annotationDocument;
     QList<SceneGraphicsItem*> m_graphicsItems;

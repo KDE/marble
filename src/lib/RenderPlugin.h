@@ -25,6 +25,7 @@
 class QAction;
 class QActionGroup;
 class QStandardItem;
+class QDockWidget;
 
 namespace Marble
 {
@@ -126,6 +127,16 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     virtual const QList<QActionGroup*>*   toolbarActionGroups() const;
 
     /**
+     * @brief Creating a dock widget using plugin specific actions
+     *
+     * This method return a dock widget containing the specific actions for
+     * the plugin or 0 if a dock widget is not needed.
+     *
+     * @return a dock widget defined by the plugin
+     */
+    virtual QDockWidget* createDockWidget();
+
+    /**
      * @brief is enabled
      *
      * This method indicates enableability of the plugin
@@ -136,6 +147,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @return enableability of the plugin
      * @see setEnabled
      */
+
     bool    enabled() const;
 
     /**

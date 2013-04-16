@@ -28,6 +28,7 @@
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "PlacemarkTextAnnotation.h"
+#include "BranchFilterProxyModel.h"
 
 #include <QtGui/QFileDialog>
 #include <QtGui/QAction>
@@ -35,6 +36,10 @@
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
 #include <QtGui/QMessageBox>
+#include <QtGui/QTreeView>
+#include <QtGui/QDockWidget>
+#include <QtGui/QToolBar>
+#include <QtGui/QVBoxLayout>
 
 namespace Marble
 {
@@ -43,6 +48,8 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     : RenderPlugin(model),
       m_widgetInitialized( false ),
       m_marbleWidget( 0 ),
+      m_treeView( 0 ),
+      m_treeViewModel( 0 ),
       m_annotationDocument( new GeoDataDocument ),
       m_polygon_placemark( 0 ),
       m_selectedItem( 0 ),
@@ -168,7 +175,36 @@ const QList<QActionGroup*>* AnnotatePlugin::actionGroups() const
 
 const QList<QActionGroup*>* AnnotatePlugin::toolbarActionGroups() const
 {
-    return &m_toolbarActions;
+    return 0;
+}
+
+QDockWidget* AnnotatePlugin::createDockWidget()
+{
+    QDockWidget* dockWidget = new QDockWidget( tr( "KML Editor" ) );
+    dockWidget->setObjectName( QString( "annotateDock" ) );
+    dockWidget->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+
+    QToolBar* toolbar = new QToolBar( dockWidget );
+    toolbar->setObjectName( QString( "annotateDockToolbar" ) );
+
+    setupActions();
+    foreach( QActionGroup* ag, m_toolbarActions ) {
+        toolbar->addActions( ag->actions() );
+    }
+
+    Q_ASSERT( !m_treeView );
+    m_treeView = new QTreeView;
+
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addWidget( toolbar );
+    layout->addWidget( m_treeView );
+    layout->setContentsMargins( 0, 0, 0, 0 );
+
+    QWidget* container = new QWidget;
+    container->setLayout( layout );
+    dockWidget->setWidget( container );
+
+    return dockWidget;
 }
 
 bool AnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
@@ -189,11 +225,11 @@ void AnnotatePlugin::enableModel( bool enabled )
 {
     if( enabled ) {
         if( m_marbleWidget ) {
-            setupActions( m_marbleWidget );
-            m_marbleWidget->model()->treeModel()->addDocument( m_annotationDocument );
+            GeoDataTreeModel* treeModel = m_marbleWidget->model()->treeModel();
+            treeModel->addDocument( m_annotationDocument );
+            m_treeViewModel->setBranchIndex( treeModel, treeModel->index( m_annotationDocument ) );
         }
     } else {
-        setupActions( 0 );
         if( m_marbleWidget ) {
             m_marbleWidget->model()->treeModel()->removeDocument( m_annotationDocument );
         }
@@ -319,9 +355,11 @@ void AnnotatePlugin::clearAnnotations()
         m_polygon_placemark = 0;
         qDeleteAll( m_graphicsItems );
         m_graphicsItems.clear();
-        m_marbleWidget->model()->treeModel()->removeDocument( m_annotationDocument );
+        GeoDataTreeModel* treeModel = m_marbleWidget->model()->treeModel();
+        treeModel->removeDocument( m_annotationDocument );
         m_annotationDocument->clear();
-        m_marbleWidget->model()->treeModel()->addDocument( m_annotationDocument );
+        treeModel->addDocument( m_annotationDocument );
+        m_treeViewModel->setBranchIndex( treeModel, treeModel->index( m_annotationDocument ) );
     }
 }
 
@@ -397,8 +435,13 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
         MarbleWidget* marbleWidget = qobject_cast<MarbleWidget*>( watched );
         if( marbleWidget ) {
             m_marbleWidget = marbleWidget;
-            setupActions( marbleWidget );
             m_marbleWidget->model()->treeModel()->addDocument( m_annotationDocument );
+            GeoDataTreeModel* treeModel = m_marbleWidget->model()->treeModel();
+            Q_ASSERT( !m_treeViewModel );
+            m_treeViewModel = new BranchFilterProxyModel;
+            m_treeViewModel->setSourceModel( treeModel );
+            m_treeViewModel->setBranchIndex( treeModel, treeModel->index( m_annotationDocument ) );
+            m_treeView->setModel( m_treeViewModel );
             m_widgetInitialized = true;
         }
     }
@@ -450,7 +493,7 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
                     const int result = QMessageBox::question( m_marbleWidget,
                                                               QObject::tr( "Remove current item" ),
                                                               QObject::tr( "Are you sure you want to remove the current item?" ),
-                                                              QMessageBox::Yes | QMessageBox::Yes );
+                                                              QMessageBox::Yes | QMessageBox::No );
 
                     if ( result == QMessageBox::Yes ) {
                         m_selectedItem = 0;
@@ -506,103 +549,91 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     return false;
 }
 
-void AnnotatePlugin::setupActions(MarbleWidget* widget)
+void AnnotatePlugin::setupActions()
 {
     qDeleteAll( m_actions );
     m_actions.clear();
     m_toolbarActions.clear();
 
-    if( widget ) {
-        QActionGroup* group = new QActionGroup(0);
-        group->setExclusive( false );
+    QActionGroup* group = new QActionGroup(0);
+    group->setExclusive( false );
 
-        QActionGroup* nonExclusiveGroup = new QActionGroup(0);
-        nonExclusiveGroup->setExclusive( false );
+    QActionGroup* nonExclusiveGroup = new QActionGroup(0);
+    nonExclusiveGroup->setExclusive( false );
 
+    QAction* addPlacemark= new QAction(this);
+    addPlacemark->setToolTip( tr("Add Placemark") );
+    addPlacemark->setCheckable( true );
+    addPlacemark->setIcon( QIcon( ":/icons/draw-placemark.png") );
+    connect( addPlacemark, SIGNAL(toggled(bool)),
+             this, SLOT(setAddingPlacemark(bool)) );
+    connect( this, SIGNAL(placemarkAdded()) ,
+             addPlacemark, SLOT(toggle()) );
 
-        QAction* enableInputAction = new QAction(this);
-        enableInputAction->setToolTip(tr("Enable Moving Map"));
-        enableInputAction->setCheckable(true);
-        enableInputAction->setChecked( true );
-        enableInputAction->setIcon( QIcon( ":/icons/hand.png") );
-        connect( enableInputAction, SIGNAL(toggled(bool)),
-                 widget, SLOT(setInputEnabled(bool)) );
+    QAction* drawPolygon = new QAction( this );
+    drawPolygon->setToolTip( tr("Add Polygon") );
+    drawPolygon->setCheckable( true );
+    drawPolygon->setIcon( QIcon( ":/icons/draw-polygon.png") );
+    connect( drawPolygon, SIGNAL(toggled(bool)),
+             this, SLOT(setDrawingPolygon(bool)) );
 
-        QAction* addPlacemark= new QAction(this);
-        addPlacemark->setToolTip( tr("Add Placemark") );
-        addPlacemark->setCheckable( true );
-        addPlacemark->setIcon( QIcon( ":/icons/draw-placemark.png") );
-        connect( addPlacemark, SIGNAL(toggled(bool)),
-                 this, SLOT(setAddingPlacemark(bool)) );
-        connect( this, SIGNAL(placemarkAdded()) ,
-                 addPlacemark, SLOT(toggle()) );
+    QAction* removeItem = new QAction( this );
+    removeItem->setToolTip( tr("Remove Item") );
+    removeItem->setCheckable( true );
+    removeItem->setIcon( QIcon( ":/icons/edit-delete-shred.png") );
+    connect( removeItem, SIGNAL(toggled(bool)),
+             this, SLOT(setRemovingItems(bool)) );
+    connect( this, SIGNAL(itemRemoved()),
+             removeItem, SLOT(toggle()) );
 
-        QAction* drawPolygon = new QAction( this );
-        drawPolygon->setToolTip( tr("Add Polygon") );
-        drawPolygon->setCheckable( true );
-        drawPolygon->setIcon( QIcon( ":/icons/draw-polygon.png") );
-        connect( drawPolygon, SIGNAL(toggled(bool)),
-                 this, SLOT(setDrawingPolygon(bool)) );
+    QAction* loadAnnotationFile = new QAction( this );
+    loadAnnotationFile->setToolTip( tr("Load Annotation File" ) );
+    loadAnnotationFile->setIcon( QIcon( ":/icons/document-import.png") );
+    connect( loadAnnotationFile, SIGNAL(triggered()),
+             this, SLOT(loadAnnotationFile()) );
 
-        QAction* removeItem = new QAction( this );
-        removeItem->setToolTip( tr("Remove Item") );
-        removeItem->setCheckable( true );
-        removeItem->setIcon( QIcon( ":/icons/edit-delete-shred.png") );
-        connect( removeItem, SIGNAL(toggled(bool)),
-                 this, SLOT(setRemovingItems(bool)) );
-        connect( this, SIGNAL(itemRemoved()),
-                 removeItem, SLOT(toggle()) );
+    QAction* saveAnnotationFile = new QAction( this );
+    saveAnnotationFile->setToolTip( tr("Save Annotation File") );
+    saveAnnotationFile->setIcon( QIcon( ":/icons/document-export.png") );
+    connect( saveAnnotationFile, SIGNAL(triggered()),
+             this, SLOT(saveAnnotationFile()) );
 
-        QAction* loadAnnotationFile = new QAction( this );
-        loadAnnotationFile->setToolTip( tr("Load Annotation File" ) );
-        loadAnnotationFile->setIcon( QIcon( ":/icons/document-import.png") );
-        connect( loadAnnotationFile, SIGNAL(triggered()),
-                 this, SLOT(loadAnnotationFile()) );
+    QAction* clearAnnotations = new QAction( this );
+    clearAnnotations->setToolTip( tr("Clear all Annotations") );
+    clearAnnotations->setIcon( QIcon( ":/icons/remove.png") );
+    connect( drawPolygon, SIGNAL(toggled(bool)), clearAnnotations, SLOT(setDisabled(bool)) );
+    connect( clearAnnotations, SIGNAL(triggered()),
+             this, SLOT(clearAnnotations()) );
 
-        QAction* saveAnnotationFile = new QAction( this );
-        saveAnnotationFile->setToolTip( tr("Save Annotation File") );
-        saveAnnotationFile->setIcon( QIcon( ":/icons/document-export.png") );
-        connect( saveAnnotationFile, SIGNAL(triggered()),
-                 this, SLOT(saveAnnotationFile()) );
-
-        QAction* clearAnnotations = new QAction( this );
-        clearAnnotations->setToolTip( tr("Clear all Annotations") );
-        clearAnnotations->setIcon( QIcon( ":/icons/remove.png") );
-        connect( drawPolygon, SIGNAL(toggled(bool)), clearAnnotations, SLOT(setDisabled(bool)) );
-        connect( clearAnnotations, SIGNAL(triggered()),
-                 this, SLOT(clearAnnotations()) );
-
-        QAction* beginSeparator = new QAction( this );
-        beginSeparator->setSeparator( true );
-        QAction* endSeparator = new QAction ( this );
-        endSeparator->setSeparator( true );
+    QAction* beginSeparator = new QAction( this );
+    beginSeparator->setSeparator( true );
+    QAction* endSeparator = new QAction ( this );
+    endSeparator->setSeparator( true );
 
 
-        //        QAction* downloadOsm = new QAction( this );
-        //        downloadOsm->setText( tr("Download Osm File") );
-        //        downloadOsm->setToolTip(tr("Download Osm File for selected area"));
-        //        connect( downloadOsm, SIGNAL(triggered()),
-        //                 this, SLOT(downloadOsmFile()) );
+    //        QAction* downloadOsm = new QAction( this );
+    //        downloadOsm->setText( tr("Download Osm File") );
+    //        downloadOsm->setToolTip(tr("Download Osm File for selected area"));
+    //        connect( downloadOsm, SIGNAL(triggered()),
+    //                 this, SLOT(downloadOsmFile()) );
 
 
-        group->addAction( enableInputAction );
-        group->addAction( beginSeparator );
-        group->addAction( addPlacemark );
-        group->addAction( drawPolygon );
-        group->addAction( removeItem );
-        group->addAction( loadAnnotationFile );
-        group->addAction( saveAnnotationFile );
-        group->addAction( clearAnnotations );
-        group->addAction( endSeparator );
+    group->addAction( beginSeparator );
+    group->addAction( addPlacemark );
+    group->addAction( drawPolygon );
+    group->addAction( removeItem );
+    group->addAction( loadAnnotationFile );
+    group->addAction( saveAnnotationFile );
+    group->addAction( clearAnnotations );
+    group->addAction( endSeparator );
 
-        //        nonExclusiveGroup->addAction( downloadOsm );
+    //        nonExclusiveGroup->addAction( downloadOsm );
 
-        m_actions.append( group );
-        m_actions.append( nonExclusiveGroup );
+    m_actions.append( group );
+    m_actions.append( nonExclusiveGroup );
 
-        m_toolbarActions.append( group );
-        m_toolbarActions.append( nonExclusiveGroup );
-    }
+    m_toolbarActions.append( group );
+    m_toolbarActions.append( nonExclusiveGroup );
 
     emit actionGroupsChanged();
 }
