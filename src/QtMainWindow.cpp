@@ -149,7 +149,6 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     createStatusBar();
     if ( !smallscreen ) {
         createDockWidgets();
-        createPluginDockWidgets();
     }
 
     connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
@@ -604,23 +603,6 @@ void MainWindow::createPluginMenus()
     }
 
 //    FIXME: load the menus once the method has been settled on
-}
-
-void MainWindow::createPluginDockWidgets()
-{
-
-    QList<RenderPlugin*> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin*>::const_iterator i = renderPluginList.constBegin();
-    QList<RenderPlugin*>::const_iterator const end = renderPluginList.constEnd();
-
-    for (; i != end; ++i ) {
-        QDockWidget* dock = (*i)->createDockWidget();
-        if ( dock ) {
-            dock->setParent( marbleWidget() );
-            this->addDockWidget( Qt::LeftDockWidgetArea, dock );
-            m_panelMenu->addAction( dock->toggleViewAction() );
-        }
-    }
 }
 
 void MainWindow::createStatusBar()

@@ -18,7 +18,7 @@
 namespace Marble
 {
 
-class MARBLE_EXPORT BranchFilterProxyModel : public QSortFilterProxyModel
+class BranchFilterProxyModel : public QSortFilterProxyModel
 {
 public:
     explicit BranchFilterProxyModel( QObject *parent = 0 );

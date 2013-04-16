@@ -107,7 +107,6 @@ private Q_SLOTS:
     void  lockPosition( bool );
     void  createPluginsMenus();
     void  createPluginMenus();
-    void  createPluginDockWidgets();
     void  showClouds( bool );
     void  controlSun();
     void  controlTime();

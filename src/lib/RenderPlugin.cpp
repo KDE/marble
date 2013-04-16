@@ -103,11 +103,6 @@ const QList<QActionGroup*>* RenderPlugin::toolbarActionGroups() const
     return 0;
 }
 
-QDockWidget* RenderPlugin::createDockWidget()
-{
-    return 0;
-}
-
 QStandardItem* RenderPlugin::item()
 {
     d->m_item.setIcon( icon() );
