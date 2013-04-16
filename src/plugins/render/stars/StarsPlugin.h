@@ -17,6 +17,9 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QVector>
+#include <QtCore/QVariant>
+#include <QtCore/QHash>
+#include <QtGui/QBrush>
 
 #include "RenderPlugin.h"
 #include "Quaternion.h"

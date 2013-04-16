@@ -17,7 +17,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/Qt>
-#include <QtGui/QStandardItem>
 
 #include "RenderPluginInterface.h"
 #include "marble_export.h"
