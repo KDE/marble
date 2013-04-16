@@ -336,6 +336,7 @@ GeoDataLineString GeoDataLineString::toRangeCorrected() const
 
         GeoDataLineString poleCorrected = toPoleCorrected();
         p()->m_rangeCorrected = new GeoDataLineString( poleCorrected );
+        p()->m_dirtyRange = false;
     }
 
     return *p()->m_rangeCorrected;
