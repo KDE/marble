@@ -120,9 +120,6 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
 
-    GeoDataCoordinates previousCoords;
-    GeoDataCoordinates currentCoords;
-
     GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
@@ -143,12 +140,10 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
 
         if ( !skipNode ) {
 
-            previousCoords = *itPreviousCoords;
-            currentCoords  = *itCoords;
 
             Q_Q( const CylindricalProjection );
 
-            q->screenCoordinates( currentCoords, viewport, x, y );
+            q->screenCoordinates( *itCoords, viewport, x, y );
 
             // Initializing variables that store the values of the previous iteration
             if ( !processingLastNode && itCoords == itBegin ) {
@@ -163,8 +158,8 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
 
             if ( lineString.tessellate() ) {
 
-                mirrorCount = tessellateLineSegment( previousCoords, previousX, previousY,
-                                           currentCoords, x, y,
+                mirrorCount = tessellateLineSegment( *itPreviousCoords, previousX, previousY,
+                                           *itCoords, x, y,
                                            polygons, viewport,
                                            f, mirrorCount, distance );
             }
@@ -173,7 +168,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
                 // special case for polys which cross dateline but have no Tesselation Flag
                 // the expected rendering is a screen coordinates straight line between
                 // points, but in projections with repeatX things are not smooth
-                mirrorCount = crossDateLine( previousCoords, currentCoords, polygons, viewport, mirrorCount, distance );
+                mirrorCount = crossDateLine( *itPreviousCoords, *itCoords, polygons, viewport, mirrorCount, distance );
             }
 
             itPreviousCoords = itCoords;

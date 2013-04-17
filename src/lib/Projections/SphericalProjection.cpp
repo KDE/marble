@@ -388,10 +388,6 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     bool horizonOrphan = false;
     GeoDataCoordinates horizonOrphanCoords;
 
-
-    GeoDataCoordinates previousCoords;
-    GeoDataCoordinates currentCoords;
-
     GeoDataLineString::ConstIterator itBegin = lineString.constBegin();
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
@@ -411,10 +407,7 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
         if ( !skipNode ) {
 
-            previousCoords = *itPreviousCoords;
-            currentCoords  = *itCoords;
-
-            q->screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
+            q->screenCoordinates( *itCoords, viewport, x, y, globeHidesPoint );
 
             // Initializing variables that store the values of the previous iteration
             if ( !processingLastNode && itCoords == itBegin ) {
@@ -430,7 +423,7 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
      
             if ( isAtHorizon ) {
                 // Handle the "horizon case"
-                horizonCoords = findHorizon( previousCoords, currentCoords, viewport, f );
+                horizonCoords = findHorizon( *itPreviousCoords, *itCoords, viewport, f );
 
                 if ( lineString.isClosed() ) {
                     if ( horizonPair ) {
@@ -466,8 +459,8 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
 
                 if ( !isAtHorizon ) {
 
-                    tessellateLineSegment( previousCoords, previousX, previousY,
-                                           currentCoords, x, y,
+                    tessellateLineSegment( *itPreviousCoords, previousX, previousY,
+                                           *itCoords, x, y,
                                            polygons, viewport,
                                            f );
 
@@ -477,12 +470,12 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
                     // current or previous point in the line. 
                     if ( previousGlobeHidesPoint ) {
                         tessellateLineSegment( horizonCoords, horizonX, horizonY,
-                                               currentCoords, x, y,
+                                               *itCoords, x, y,
                                                polygons, viewport,
                                                f );
                     }
                     else {
-                        tessellateLineSegment( previousCoords, previousX, previousY,
+                        tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                                horizonCoords, horizonX, horizonY,
                                                polygons, viewport,
                                                f );
