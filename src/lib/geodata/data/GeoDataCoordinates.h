@@ -223,6 +223,7 @@ class GEODATA_EXPORT GeoDataCoordinates
 
     /**
     * @brief return the detail flag
+    * detail range: 0 for most important points, 5 for least important
     */
     int detail() const;
 

@@ -188,8 +188,8 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         // Transforming Range of Coordinates to iLat [0,ARCMINUTE] , iLon [0,2 * ARCMINUTE]
         polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD,
                                               0.0, GeoDataCoordinates::Radian,
-                                              qMin( 5, (int)header  ) ) ); // if 1 <= header <= 5, header contains level of detail
-                                                                           // else pick most sparse level of detail, which equals 5
+                                              5 - qMin( 5, (int)header  ) ) ); // if 1 <= header <= 5, header contains level of detail
+                                                                           // else pick most sparse level of detail, which equals 0
 
         ++count;
     }
