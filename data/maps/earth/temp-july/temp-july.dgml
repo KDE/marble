@@ -54,6 +54,7 @@
                 <vector name="pcoast">
                     <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
                     <pen color="#555753" />
+                    <brush color="transparent" />
                 </vector>
                 <vector name="pdiffborder" feature="borders">
                     <sourcefile> mwdbii/PDIFFBORDER.PNT </sourcefile>

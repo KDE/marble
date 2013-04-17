@@ -51,6 +51,7 @@
                 <vector name="pcoast" feature="coastlines">
                     <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
                     <pen color="#ffff00" />
+                    <brush color="transparent" />
                 </vector>
                 <vector name="rivers" feature="waterbodies">
                     <sourcefile> mwdbii/RIVER.PNT </sourcefile>

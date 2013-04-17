@@ -108,7 +108,7 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
             /* header represents start of coastline */
             placemark = new GeoDataPlacemark;
             document->append( placemark );
-            placemark->setGeometry( new GeoDataLineString );
+            placemark->setGeometry( new GeoDataLinearRing );
         }
         else if ( header < 4000 ) {
             /* header represents start of country border */
