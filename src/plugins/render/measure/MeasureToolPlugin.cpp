@@ -188,6 +188,8 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
     if ( m_measureLineString.isEmpty() )
         return true;
 
+    painter->save();
+
     // Prepare for painting the measure line string and paint it.
     painter->autoMapQuality();
     painter->setPen( m_pen );
@@ -206,6 +208,8 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
 
     if ( m_measureLineString.size() > 1 )
         drawTotalDistanceLabel( painter, totalDistance );
+
+    painter->restore();
 
     return true;
 }
