@@ -176,7 +176,6 @@ bool AnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, cons
     Q_UNUSED(renderPos);
     Q_UNUSED(layer);
 
-    painter->autoMapQuality();
     QListIterator<SceneGraphicsItem*> iter( m_graphicsItems );
     while( iter.hasNext() ) {
         iter.next()->paint( painter, viewport );

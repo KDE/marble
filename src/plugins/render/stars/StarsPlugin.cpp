@@ -1016,8 +1016,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->save();
 
-    painter->autoMapQuality();
-
     QDateTime currentDateTime = marbleModel()->clockDateTime();
 
     qreal gmst = siderealTime( currentDateTime );

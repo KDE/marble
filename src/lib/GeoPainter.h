@@ -119,18 +119,6 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     
 /*!
-    \brief Automatically adjusts the painter to the current map quality.
-
-    Automatically adjusts the usage of antialiasing according to the current
-    map quality. It's considered good practice to call this method before
-    starting to draw with a painter. This avoids that objects don't get
-    painted in the wrong quality and it ensures that performance is always
-    optimal.
-*/
-    void autoMapQuality();
-
-    
-/*!
     \brief Returns the map quality.
     \return The map quality that got assigned to the painter.
 */

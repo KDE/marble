@@ -683,7 +683,6 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( layer )
 
     painter->save();
-    painter->autoMapQuality();
 
     if ( d->m_placemarkModel) {
         d->renderPlacemarks( painter );

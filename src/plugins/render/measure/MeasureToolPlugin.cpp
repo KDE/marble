@@ -191,7 +191,6 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
     painter->save();
 
     // Prepare for painting the measure line string and paint it.
-    painter->autoMapQuality();
     painter->setPen( m_pen );
 
     if ( m_showSegmentLabels ) {

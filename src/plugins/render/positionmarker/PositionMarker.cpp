@@ -223,7 +223,6 @@ bool PositionMarker::render( GeoPainter *painter,
         }
 
         painter->save();
-        painter->autoMapQuality();
 
         GeoDataAccuracy accuracy = marbleModel()->positionTracking()->accuracy();
         if ( accuracy.horizontal > 0 && accuracy.horizontal < 1000 ) {

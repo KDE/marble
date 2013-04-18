@@ -421,8 +421,6 @@ bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
 
     painter->save();
 
-    painter->autoMapQuality();
-    
     if ( !( viewport->viewLatLonAltBox() == m_lastBox ) ) {
         m_lastBox = viewport->viewLatLonAltBox();
         QString towrite = "#filter a/" + 

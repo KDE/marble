@@ -263,8 +263,6 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->save();
 
-    painter->autoMapQuality();
-
     if ( m_currentNotation != GeoDataCoordinates::defaultNotation() ) {
         initLineMaps( GeoDataCoordinates::defaultNotation() );
     }

@@ -246,7 +246,6 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( layer )
 
     painter->save();
-    painter->autoMapQuality();
 
     int maxZoomLevel = qMin<int>( qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 ), GeometryLayerPrivate::maximumZoomLevel() );
 

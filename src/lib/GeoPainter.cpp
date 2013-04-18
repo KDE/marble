@@ -191,13 +191,6 @@ GeoPainter::~GeoPainter()
 }
 
 
-void GeoPainter::autoMapQuality()
-{
-    const bool antialiased = d->m_mapQuality == HighQuality || d->m_mapQuality == PrintQuality;
-    setRenderHint( QPainter::Antialiasing, antialiased );
-}
-
-
 MapQuality GeoPainter::mapQuality() const
 {
     return d->m_mapQuality;
