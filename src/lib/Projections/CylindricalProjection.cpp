@@ -130,19 +130,19 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     // which isn't really convenient to achieve with a for loop ...
 
     const bool isLong = lineString.size() > 50;
-    int detailLevel = 0;
-    if( viewport->radius() >5000 ) detailLevel = 5;
-    else if( viewport->radius() >2500 ) detailLevel = 4;
-    else if( viewport->radius() >1000 ) detailLevel = 3;
-    else if( viewport->radius() > 600 ) detailLevel = 2;
-    else if( viewport->radius() >  50 ) detailLevel = 1;
+    const int maximumDetail = ( viewport->radius() > 5000 ) ? 5 :
+                              ( viewport->radius() > 2500 ) ? 4 :
+                              ( viewport->radius() > 1000 ) ? 3 :
+                              ( viewport->radius() >  600 ) ? 2 :
+                              ( viewport->radius() >   50 ) ? 1 :
+                                                              0;
 
     while ( itCoords != itEnd )
     {
 
         // Optimization for line strings with a big amount of nodes
         bool skipNode = itCoords != itBegin && isLong && !processingLastNode &&
-                ( (*itCoords).detail() > detailLevel
+                ( (*itCoords).detail() > maximumDetail
                   || viewport->resolves( *itPreviousCoords, *itCoords ) );
 
         if ( !skipNode ) {
