@@ -295,12 +295,15 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                     GeoDataCoordinates drag( lon, lat );
                     standardRoutePen.setStyle( Qt::DotLine );
                     painter->setPen( standardRoutePen );
+                    GeoDataLineString lineString;
                     if ( m_dragStopOverRightIndex > 0 ) {
-                        painter->drawLine( drag, m_routeRequest->at( m_dragStopOverRightIndex-1 ) );
+                        lineString << m_routeRequest->at( m_dragStopOverRightIndex-1 );
                     }
+                    lineString << drag;
                     if ( m_dragStopOverRightIndex < m_routeRequest->size() ) {
-                        painter->drawLine( drag, m_routeRequest->at( m_dragStopOverRightIndex ) );
+                        lineString << m_routeRequest->at( m_dragStopOverRightIndex );
                     }
+                    painter->drawPolyline( lineString );
                     standardRoutePen.setStyle( Qt::SolidLine );
                     painter->setPen( standardRoutePen );
                 }
