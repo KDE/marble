@@ -802,14 +802,8 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
 
     {
         // FIXME: Better way to get the GeoPainter
-        bool  doClip = true;
-        if ( projection() == Spherical )
-            doClip = ( radius() > width() / 2
-                       || radius() > height() / 2 );
-
         // Create a painter that will do the painting.
-        GeoPainter geoPainter( paintDevice, d->m_map.viewport(),
-                               d->m_map.mapQuality(), doClip );
+        GeoPainter geoPainter( paintDevice, d->m_map.viewport(), d->m_map.mapQuality() );
 
         d->m_map.paint( geoPainter, evt->rect() );
     }

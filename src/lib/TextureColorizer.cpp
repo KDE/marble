@@ -238,24 +238,10 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     // update coast image
     m_coastImage.fill( QColor( 0, 0, 255, 0).rgb() );
 
-    bool doClip = false; //assume false
-    switch( viewport->projection() ) {
-        case Spherical:
-            doClip = ( viewport->radius() > ( viewport->width()  / 2 )
-                       || viewport->radius() > ( viewport->height() / 2 ) );
-            break;
-        case Equirectangular:
-            doClip = true; // clipping should always be enabled
-            break;
-        case Mercator:
-            doClip = true; // clipping should always be enabled
-            break;
-    }
-
     const bool antialiased =    mapQuality == HighQuality
                              || mapQuality == PrintQuality;
 
-    GeoPainter painter( &m_coastImage, viewport, mapQuality, doClip );
+    GeoPainter painter( &m_coastImage, viewport, mapQuality );
     painter.setRenderHint( QPainter::Antialiasing, antialiased );
 
     if ( m_landDocuments.isEmpty() ) {

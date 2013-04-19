@@ -587,9 +587,7 @@ void MarbleMapTest::paint()
 
     QVERIFY( map.projection() == Spherical );
 
-    const bool doClip = map.radius() > map.width() / 2 || map.radius() > map.height() / 2;
-
-    GeoPainter painter1( &paintDevice, map.viewport(), map.mapQuality(), doClip );
+    GeoPainter painter1( &paintDevice, map.viewport(), map.mapQuality() );
     map.paint( painter1, QRect() );
 
     QThreadPool::globalInstance()->waitForDone();  // wait for all runners to terminate

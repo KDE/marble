@@ -43,6 +43,8 @@ class GeoPainterPrivate
     GeoDataLinearRing createLinearRingFromGeoRect( const GeoDataCoordinates & centerCoordinates,
                                                    qreal width, qreal height );
 
+    static bool doClip( const ViewportParams *viewport );
+
     const ViewportParams *const m_viewport;
     const MapQuality       m_mapQuality;
     qreal             *const m_x;

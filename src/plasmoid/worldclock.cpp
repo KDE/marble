@@ -352,7 +352,7 @@ void WorldClock::paintInterface(QPainter *p,
     QPixmap pixmap( m_map->width(), m_map->height() );
     pixmap.fill( Qt::transparent );
     GeoPainter gp( &pixmap, m_map->viewport(),
-                   Marble::NormalQuality, true );
+                   Marble::NormalQuality );
     QRect mapRect( 0, 0, m_map->width(), m_map->height() );
     m_map->paint(gp, mapRect );
     p->drawPixmap( m_t, pixmap );

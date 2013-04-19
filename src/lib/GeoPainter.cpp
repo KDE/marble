@@ -163,11 +163,18 @@ GeoDataLinearRing GeoPainterPrivate::createLinearRingFromGeoRect( const GeoDataC
     return rectangle;
 }
 
+bool GeoPainterPrivate::doClip( const ViewportParams *viewport )
+{
+    if ( viewport->projection() != Spherical )
+        return true;
+
+    return ( viewport->radius() > viewport->width() / 2 || viewport->radius() > viewport->height() / 2 );
+}
+
 // -------------------------------------------------------------------------------------------------
 
-GeoPainter::GeoPainter( QPaintDevice* pd, const ViewportParams *viewport,
-			MapQuality mapQuality, bool clip )
-    : ClipPainter( pd, clip ),
+GeoPainter::GeoPainter( QPaintDevice* pd, const ViewportParams *viewport, MapQuality mapQuality )
+    : ClipPainter( pd, GeoPainterPrivate::doClip( viewport ) ),
       d( new GeoPainterPrivate( viewport, mapQuality ) )
 {
     const bool antialiased = mapQuality == HighQuality || mapQuality == PrintQuality;
