@@ -34,14 +34,6 @@ class GeoPainterPrivate
     ~GeoPainterPrivate();
 
 
-    void createPolygonsFromLineString( const GeoDataLineString & lineString,
-                                       QVector<QPolygonF *> &polygons );
-
-
-    void createPolygonsFromLinearRing( const GeoDataLinearRing & linearRing,
-                                       QVector<QPolygonF *> &polygons );
-
-
     void createAnnotationLayout ( qreal x, qreal y,
                                   QSizeF bubbleSize,
                                   qreal bubbleOffsetX, qreal bubbleOffsetY,

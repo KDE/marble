@@ -42,18 +42,6 @@ GeoPainterPrivate::~GeoPainterPrivate()
     delete[] m_x;
 }
 
-void GeoPainterPrivate::createPolygonsFromLineString( const GeoDataLineString & lineString,
-                                                      QVector<QPolygonF *> &polygons )
-{
-    m_viewport->screenCoordinates( lineString, polygons );
-}
-
-void GeoPainterPrivate::createPolygonsFromLinearRing( const GeoDataLinearRing & linearRing,
-                                                      QVector<QPolygonF *> &polygons )
-{
-    m_viewport->screenCoordinates( linearRing, polygons );
-}
-
 void GeoPainterPrivate::createAnnotationLayout (  qreal x, qreal y,
                                                   QSizeF bubbleSize,
                                                   qreal bubbleOffsetX, qreal bubbleOffsetY,
@@ -550,7 +538,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
     }
 
     QVector<QPolygonF*> polygons;
-    d->createPolygonsFromLineString( lineString, polygons );
+    d->m_viewport->screenCoordinates( lineString, polygons );
 
     if ( labelText.isEmpty() ) {
         foreach( QPolygonF* itPolygon, polygons ) {
@@ -604,7 +592,7 @@ QRegion GeoPainter::regionFromPolyline ( const GeoDataLineString & lineString,
     QPainterPath painterPath;
 
     QVector<QPolygonF*> polygons;
-    d->createPolygonsFromLineString( lineString, polygons );
+    d->m_viewport->screenCoordinates( lineString, polygons );
 
     foreach( QPolygonF* itPolygon, polygons ) {
         painterPath.addPolygon( *itPolygon );
@@ -636,7 +624,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing,
 
     if ( !linearRing.latLonAltBox().crossesDateLine() ) {
         QVector<QPolygonF*> polygons;
-        d->createPolygonsFromLinearRing( linearRing, polygons );
+        d->m_viewport->screenCoordinates( linearRing, polygons );
 
         foreach( QPolygonF* itPolygon, polygons ) {
             ClipPainter::drawPolygon( *itPolygon, fillRule );
@@ -649,7 +637,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing,
         setPen( Qt::NoPen );
 
         QVector<QPolygonF*> polygons;
-        d->createPolygonsFromLinearRing( linearRing, polygons );
+        d->m_viewport->screenCoordinates( linearRing, polygons );
 
         foreach( QPolygonF* itPolygon, polygons ) {
             ClipPainter::drawPolygon( *itPolygon, fillRule );
@@ -663,7 +651,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing,
         lineString << lineString.first();
 
         QVector<QPolygonF*> polylines;
-        d->createPolygonsFromLineString( lineString, polylines );
+        d->m_viewport->screenCoordinates( lineString, polylines );
 
         foreach( QPolygonF* itPolygon, polylines ) {
             ClipPainter::drawPolyline( *itPolygon );
@@ -690,7 +678,7 @@ QRegion GeoPainter::regionFromPolygon ( const GeoDataLinearRing & linearRing,
     QRegion regions;
 
     QVector<QPolygonF*> polygons;
-    d->createPolygonsFromLinearRing( linearRing, polygons );
+    d->m_viewport->screenCoordinates( linearRing, polygons );
 
     if ( strokeWidth == 0 ) {
         // This is the faster way
@@ -733,7 +721,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
 
     // Creating the outer screen polygons first
     QVector<QPolygonF*> outerPolygons;
-    d->createPolygonsFromLinearRing( polygon.outerBoundary(), outerPolygons );
+    d->m_viewport->screenCoordinates( polygon.outerBoundary(), outerPolygons );
 
     // Now creating the "holes" by cutting away the inner boundaries:
 
@@ -758,7 +746,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
     QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries(); 
     foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
         QVector<QPolygonF*> innerPolygons;
-        d->createPolygonsFromLinearRing( itInnerBoundary, innerPolygons );
+        d->m_viewport->screenCoordinates( itInnerBoundary, innerPolygons );
 
         if ( needOutlineWorkaround ) {
             foreach( QPolygonF* polygon, innerPolygons ) {
