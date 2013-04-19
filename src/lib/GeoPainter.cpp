@@ -321,11 +321,9 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPosition,
     }
     else {
         // Initialize variables
-        qreal centerLon = 0.0;
-        qreal centerLat = 0.0;
-        qreal altitude = centerPosition.altitude();
-        centerPosition.geoCoordinates( centerLon, centerLat,
-                                       GeoDataCoordinates::Degree );
+        const qreal centerLon = centerPosition.longitude( GeoDataCoordinates::Degree );
+        const qreal centerLat = centerPosition.latitude( GeoDataCoordinates::Degree );
+        const qreal altitude = centerPosition.altitude();
 
         // Ensure a valid latitude range: 
         if ( centerLat + 0.5 * height > 90.0 || centerLat - 0.5 * height < -90.0 ) {
@@ -340,28 +338,25 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPosition,
              !d->m_viewport->resolves( ellipseBox ) ) return;
 
         GeoDataLinearRing ellipse;
-        qreal lon = 0.0;
-        qreal lat = 0.0;
 
         // Optimizing the precision by determining the size which the 
         // ellipse covers on the screen:
-        qreal degreeResolution = d->m_viewport->angularResolution() * RAD2DEG;
+        const qreal degreeResolution = d->m_viewport->angularResolution() * RAD2DEG;
         // To create a circle shape even for very small precision we require uneven numbers:
-        int precision = width / degreeResolution / 8 + 1; 
-        if ( precision > 81 ) precision = 81;
+        const int precision = qMin<qreal>( width / degreeResolution / 8 + 1, 81 );
 
         // Calculate the shape of the upper half of the ellipse:
         for ( int i = 0; i <= precision; ++i ) {
-            qreal t = 1.0 - 2.0 * (qreal)(i) / (qreal)(precision);
-            lat = centerLat + 0.5 * height * sqrt( 1.0 - t * t );
-            lon = centerLon + 0.5 * width * t;
+            const qreal t = 1.0 - 2.0 * (qreal)(i) / (qreal)(precision);
+            const qreal lat = centerLat + 0.5 * height * sqrt( 1.0 - t * t );
+            const qreal lon = centerLon + 0.5 * width * t;
             ellipse << GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
         }
         // Calculate the shape of the lower half of the ellipse:
         for ( int i = 0; i <= precision; ++i ) {
-            qreal t = 2.0 * (qreal)(i) / (qreal)(precision) -  1.0;
-            lat = centerLat - 0.5 * height * sqrt( 1.0 - t * t );
-            lon = centerLon + 0.5 * width * t;
+            const qreal t = 2.0 * (qreal)(i) / (qreal)(precision) -  1.0;
+            const qreal lat = centerLat - 0.5 * height * sqrt( 1.0 - t * t );
+            const qreal lon = centerLon + 0.5 * width * t;
             ellipse << GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
         }
         
@@ -400,11 +395,9 @@ QRegion GeoPainter::regionFromEllipse ( const GeoDataCoordinates & centerPositio
     }
     else {
         // Initialize variables
-        qreal centerLon = 0.0;
-        qreal centerLat = 0.0;
-        qreal altitude = centerPosition.altitude();
-        centerPosition.geoCoordinates( centerLon, centerLat,
-                                       GeoDataCoordinates::Degree );
+        const qreal centerLon = centerPosition.longitude( GeoDataCoordinates::Degree );
+        const qreal centerLat = centerPosition.latitude( GeoDataCoordinates::Degree );
+        const qreal altitude = centerPosition.altitude();
 
         // Ensure a valid latitude range:
         if ( centerLat + 0.5 * height > 90.0 || centerLat - 0.5 * height < -90.0 ) {
@@ -419,28 +412,25 @@ QRegion GeoPainter::regionFromEllipse ( const GeoDataCoordinates & centerPositio
              !d->m_viewport->resolves( ellipseBox ) ) return QRegion();
 
         GeoDataLinearRing ellipse;
-        qreal lon = 0.0;
-        qreal lat = 0.0;
 
         // Optimizing the precision by determining the size which the
         // ellipse covers on the screen:
-        qreal degreeResolution = d->m_viewport->angularResolution() * RAD2DEG;
+        const qreal degreeResolution = d->m_viewport->angularResolution() * RAD2DEG;
         // To create a circle shape even for very small precision we require uneven numbers:
-        int precision = width / degreeResolution / 8 + 1;
-        if ( precision > 81 ) precision = 81;
+        const int precision = qMin<qreal>( width / degreeResolution / 8 + 1, 81 );
 
         // Calculate the shape of the upper half of the ellipse:
         for ( int i = 0; i <= precision; ++i ) {
-            qreal t = 1.0 - 2.0 * (qreal)(i) / (qreal)(precision);
-            lat = centerLat + 0.5 * height * sqrt( 1.0 - t * t );
-            lon = centerLon + 0.5 * width * t;
+            const qreal t = 1.0 - 2.0 * (qreal)(i) / (qreal)(precision);
+            const qreal lat = centerLat + 0.5 * height * sqrt( 1.0 - t * t );
+            const qreal lon = centerLon + 0.5 * width * t;
             ellipse << GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
         }
         // Calculate the shape of the lower half of the ellipse:
         for ( int i = 0; i <= precision; ++i ) {
-            qreal t = 2.0 * (qreal)(i) / (qreal)(precision) -  1.0;
-            lat = centerLat - 0.5 * height * sqrt( 1.0 - t * t );
-            lon = centerLon + 0.5 * width * t;
+            const qreal t = 2.0 * (qreal)(i) / (qreal)(precision) -  1.0;
+            const qreal lat = centerLat - 0.5 * height * sqrt( 1.0 - t * t );
+            const qreal lon = centerLon + 0.5 * width * t;
             ellipse << GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
         }
 
