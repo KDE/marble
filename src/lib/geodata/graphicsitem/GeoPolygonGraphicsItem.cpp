@@ -48,61 +48,49 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
 {
     Q_UNUSED( viewport );
 
-    if ( !style() )
-    {
-        painter->save();
-        painter->setPen( QPen() );
-        if ( m_polygon ) {
-            painter->drawPolygon( *m_polygon );
-        } else if ( m_ring ) {
-            painter->drawPolygon( *m_ring );
-        }
-        painter->restore();
-        return;
-    }
-
     painter->save();
-    QPen currentPen = painter->pen();
 
-    if ( !style()->polyStyle().outline() )
-    {
-        currentPen.setColor( Qt::transparent );
+    if ( !style() ) {
+        painter->setPen( QPen() );
     }
-    else
-    {
-        if ( currentPen.color() != style()->lineStyle().paintedColor() ||
-                currentPen.widthF() != style()->lineStyle().width() )
-        {
-            currentPen.setColor( style()->lineStyle().paintedColor() );
-            currentPen.setWidthF( style()->lineStyle().width() );
+    else {
+        QPen currentPen = painter->pen();
+
+        if ( !style()->polyStyle().outline() ) {
+            currentPen.setColor( Qt::transparent );
+        }
+        else {
+            if ( currentPen.color() != style()->lineStyle().paintedColor() ||
+                    currentPen.widthF() != style()->lineStyle().width() ) {
+                currentPen.setColor( style()->lineStyle().paintedColor() );
+                currentPen.setWidthF( style()->lineStyle().width() );
+            }
+
+            if ( currentPen.capStyle() != style()->lineStyle().capStyle() )
+                currentPen.setCapStyle( style()->lineStyle().capStyle() );
+
+            if ( currentPen.style() != style()->lineStyle().penStyle() )
+                currentPen.setStyle( style()->lineStyle().penStyle() );
+
+            if ( painter->mapQuality() != Marble::HighQuality
+                    && painter->mapQuality() != Marble::PrintQuality ) {
+                QColor penColor = currentPen.color();
+                penColor.setAlpha( 255 );
+                currentPen.setColor( penColor );
+            }
         }
 
-        if ( currentPen.capStyle() != style()->lineStyle().capStyle() )
-            currentPen.setCapStyle( style()->lineStyle().capStyle() );
+        if ( painter->pen() != currentPen )
+            painter->setPen( currentPen );
 
-        if ( currentPen.style() != style()->lineStyle().penStyle() )
-            currentPen.setStyle( style()->lineStyle().penStyle() );
-
-        if ( painter->mapQuality() != Marble::HighQuality
-                && painter->mapQuality() != Marble::PrintQuality )
-        {
-            QColor penColor = currentPen.color();
-            penColor.setAlpha( 255 );
-            currentPen.setColor( penColor );
+        if ( !style()->polyStyle().fill() ) {
+            if ( painter->brush().color() != Qt::transparent )
+                painter->setBrush( QColor( Qt::transparent ) );
         }
-    }
-    if ( painter->pen() != currentPen ) painter->setPen( currentPen );
-
-    if ( !style()->polyStyle().fill() )
-    {
-        if ( painter->brush().color() != Qt::transparent )
-            painter->setBrush( QColor( Qt::transparent ) );
-    }
-    else
-    {
-        if ( painter->brush().color() != style()->polyStyle().paintedColor() )
-        {
-            painter->setBrush( style()->polyStyle().paintedColor() );
+        else {
+            if ( painter->brush().color() != style()->polyStyle().paintedColor() ) {
+                painter->setBrush( style()->polyStyle().paintedColor() );
+            }
         }
     }
 
@@ -111,6 +99,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
     } else if ( m_ring ) {
         painter->drawPolygon( *m_ring );
     }
+
     painter->restore();
 }
 
