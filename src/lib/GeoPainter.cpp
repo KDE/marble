@@ -170,6 +170,8 @@ GeoPainter::GeoPainter( QPaintDevice* pd, const ViewportParams *viewport,
     : ClipPainter( pd, clip ),
       d( new GeoPainterPrivate( viewport, mapQuality ) )
 {
+    const bool antialiased = mapQuality == HighQuality || mapQuality == PrintQuality;
+    setRenderHint( QPainter::Antialiasing, antialiased );
 }
 
 
