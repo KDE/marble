@@ -297,41 +297,6 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
 
 /*!
-    \brief Draws a line from the given start position to the end position.
-
-    The line is drawn using the current pen.
-    If \a isGeoProjected is true then the line is bent across the surface.
-    If \a isGeoProjected is false then a straight line in screen coordinates is
-    the result.
-
-    \see GeoDataCoordinates
-*/
-    void drawLine (  const GeoDataCoordinates & startPosition,
-                     const GeoDataCoordinates & endPosition,
-                     bool isGeoProjected = false );
-
-
-/*!
-    \brief Creates a region for a given line.
-
-    A QRegion object is created that represents the area covered by
-    GeoPainter::drawLine(). As such it can be used e.g. for input event handling
-    for objects that have been painted using
-    GeoPainter::drawLine( GeoDataLineString ).
-
-    The \a strokeWidth allows to extrude the QRegion by half the amount of
-    "stroke width" pixels. For input event handling it's always advisable to use
-    a width that is slightly bigger than the width of the painter's pen.
-
-    \see GeoDataCoordinates
-*/
-    QRegion regionFromLine ( const GeoDataCoordinates & startPosition,
-                             const GeoDataCoordinates & endPosition,
-                             bool isGeoProjected = false,
-                             qreal strokeWidth = 3 ) const;
-
-
-/*!
     \brief Draws a given line string (a "polyline").
 
     The \a lineString is drawn using the current pen. It's possible to
@@ -501,7 +466,6 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     using QPainter::drawPoint;
     using ClipPainter::drawPolyline;
     using ClipPainter::drawPolygon;
-    using QPainter::drawLine;
     using QPainter::drawRect;
     using QPainter::drawRoundedRect;
 

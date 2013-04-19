@@ -494,33 +494,6 @@ void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPosition,
 }
 
 
-void GeoPainter::drawLine (  const GeoDataCoordinates & startPoint,
-                             const GeoDataCoordinates & endPoint,
-                             bool isGeoProjected )
-{
-    GeoDataLineString line;
-    line.setTessellate( isGeoProjected );
-
-    line << startPoint << endPoint;
-
-    drawPolyline( line ); 
-}
-
-
-QRegion GeoPainter::regionFromLine (const GeoDataCoordinates & startPoint,
-                                    const GeoDataCoordinates & endPoint,
-                                    bool isGeoProjected,
-                                    qreal strokeWidth ) const
-{
-    GeoDataLineString line;
-    line.setTessellate( isGeoProjected );
-
-    line << startPoint << endPoint;
-
-    return regionFromPolyline( line, strokeWidth );
-}
-
-
 void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                                 const QString& labelText,
                                 LabelPositionFlags labelPositionFlags )
