@@ -14,6 +14,7 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "GeoDataLineString.h"
 #include "GeoPainter.h"
 #include "GeoAprsCoordinates.h"
 
@@ -150,24 +151,27 @@ AprsObject::render( GeoPainter *painter, ViewportParams *viewport,
     
         QList<GeoAprsCoordinates>::iterator spot = m_history.begin();
         QList<GeoAprsCoordinates>::iterator endSpot = m_history.end();
-        QList<GeoAprsCoordinates>::iterator lastspot;
         
-        for( ++spot, lastspot = m_history.begin();
-             spot != endSpot;
-             ++spot, ++lastspot ) {
+        GeoDataLineString lineString;
+        lineString.setTessellate( true );
+        lineString << *spot; // *spot exists because m_history.count() > 1
+
+        for( ++spot; spot != endSpot; ++spot ) {
 
             if ( hideTime > 0 && ( *spot ).timestamp().elapsed() > hideTime )
                 break;
 
             // draw the line in the base color
             painter->setPen( baseColor );
-            painter->drawLine( *lastspot, *spot );
+            lineString << *spot;
 
             // draw the new circle in whatever is appropriate for that point
             calculatePaintColor( painter, ( *spot ).seenFrom(), ( *spot ).timestamp(),
                            fadeTime );
-            painter->drawRect( *spot, 5, 5, false );
+            painter->drawRect( *spot, 5, 5 );
         }
+
+        painter->drawPolyline( lineString );
     }
     
 
