@@ -210,10 +210,6 @@ bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    if ( !enabled() || !visible() ) {
-        return true;
-    }
-
     changeViewport( viewport ); // may invalidate graphics item's cache
 
     paintEvent( painter, viewport );

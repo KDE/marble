@@ -94,10 +94,6 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    if ( !d->m_model || !isInitialized() ) {
-        return true;
-    }
-
     if ( d->m_delegate ) {
         handleViewportChange( viewport );
     } else {
