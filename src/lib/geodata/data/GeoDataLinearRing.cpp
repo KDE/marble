@@ -52,6 +52,7 @@ GeoDataLineString GeoDataLinearRing::toRangeCorrected() const
 
         GeoDataLinearRing poleCorrected = toPoleCorrected();
         p()->m_rangeCorrected = new GeoDataLinearRing( poleCorrected );
+        p()->m_dirtyRange = false;
     }
 
     return *p()->m_rangeCorrected;
