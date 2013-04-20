@@ -426,7 +426,7 @@
         </item>
       </section>
       <section name="Food" checkable="false" connect="amenity" spacing="12">
-        <heading>Food</heading>
+        <heading>Food and Drinks</heading>
         <item name="bar">
           <icon pixmap="maps/earth/openstreetmap/legend/mapicons/food_bar.p.12.png"/>
           <text>Bar</text>
