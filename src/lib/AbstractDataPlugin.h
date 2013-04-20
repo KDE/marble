@@ -122,7 +122,7 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     QObject* favoritesModel();
     
 public Q_SLOTS:
-    void handleViewportChange( ViewportParams* viewport );
+    void handleViewportChange( const ViewportParams *viewport );
 
  private Q_SLOTS:
     virtual void favoriteItemsChanged( const QStringList& favoriteItems );

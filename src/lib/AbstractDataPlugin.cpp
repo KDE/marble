@@ -192,7 +192,7 @@ QObject *AbstractDataPlugin::favoritesModel()
     return d->m_model ? d->m_model->favoritesModel() : 0;
 }
 
-void AbstractDataPlugin::handleViewportChange( ViewportParams* viewport )
+void AbstractDataPlugin::handleViewportChange( const ViewportParams *viewport )
 {
     QList<AbstractDataPluginItem*> orphane = d->m_delegateInstances.keys();
     QList<AbstractDataPluginItem*> const items = d->m_model->items( viewport, numberOfItems() );
