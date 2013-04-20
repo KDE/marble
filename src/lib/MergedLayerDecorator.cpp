@@ -219,7 +219,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
     return d->createTile( tiles );
 }
 
-StackedTile *MergedLayerDecorator::createTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage, GeoDataDocument * tileData ) const
+StackedTile *MergedLayerDecorator::updateTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage, GeoDataDocument * tileData ) const
 {
     QVector<QSharedPointer<Tile> > tiles = stackedTile.tiles();
 

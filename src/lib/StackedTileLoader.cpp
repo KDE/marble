@@ -265,7 +265,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
     if ( displayedTile ) {
         Q_ASSERT( !d->m_tileCache.contains( stackedTileId ) );
 
-        StackedTile *const stackedTile = d->m_layerDecorator->createTile( *displayedTile, tileId, tileImage, tileData );
+        StackedTile *const stackedTile = d->m_layerDecorator->updateTile( *displayedTile, tileId, tileImage, tileData );
         d->m_tilesOnDisplay.insert( stackedTileId, stackedTile );
 
         delete displayedTile;
