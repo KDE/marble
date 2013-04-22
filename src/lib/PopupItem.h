@@ -164,7 +164,7 @@ Q_SIGNALS:
     void hide();
 
 private:
-    QPixmap pixmap( const QString &imageid );
+    QPixmap pixmap( const QString &imageid ) const;
     void colorize( QImage &img, const QColor &col ) const;
     QWidget* transform( QPoint &point ) const;
 

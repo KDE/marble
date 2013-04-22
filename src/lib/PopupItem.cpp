@@ -380,7 +380,7 @@ void PopupItem::goBack()
     updateBackButton();
 }
 
-QPixmap PopupItem::pixmap( const QString &imageId )
+QPixmap PopupItem::pixmap( const QString &imageId ) const
 {
   QPixmap result;
   if ( !QPixmapCache::find( imageId, result ) ) {

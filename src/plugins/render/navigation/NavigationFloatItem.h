@@ -71,7 +71,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     void changeViewport( ViewportParams *viewport );
 
-    QPixmap pixmap( const QString &Id );
+    QPixmap pixmap( const QString &Id ) const;
 
  protected:
     bool eventFilter( QObject *object, QEvent *e );
