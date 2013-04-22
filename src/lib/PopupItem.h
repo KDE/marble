@@ -165,7 +165,7 @@ Q_SIGNALS:
 
 private:
     QPixmap pixmap( const QString &imageid );
-    void colorize( QImage &img, const QColor &col );
+    void colorize( QImage &img, const QColor &col ) const;
     QWidget* transform( QPoint &point ) const;
 
     QWidget *m_widget;

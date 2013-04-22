@@ -55,32 +55,32 @@ void ElevationProfilePlotAxis::update()
     updateScale();
 }
 
-qreal ElevationProfilePlotAxis::minValue()
+qreal ElevationProfilePlotAxis::minValue() const
 {
     return m_minValue;
 }
 
-qreal ElevationProfilePlotAxis::maxValue()
+qreal ElevationProfilePlotAxis::maxValue() const
 {
     return m_maxValue;
 }
 
-qreal ElevationProfilePlotAxis::range()
+qreal ElevationProfilePlotAxis::range() const
 {
     return m_maxValue - m_minValue;
 }
 
-qreal ElevationProfilePlotAxis::scale()
+qreal ElevationProfilePlotAxis::scale() const
 {
     return m_displayScale;
 }
 
-QString ElevationProfilePlotAxis::unit()
+QString ElevationProfilePlotAxis::unit() const
 {
     return m_unitString;
 }
 
-AxisTickList ElevationProfilePlotAxis::ticks()
+AxisTickList ElevationProfilePlotAxis::ticks() const
 {
     return m_ticks;
 }

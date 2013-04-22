@@ -86,7 +86,7 @@ class WikipediaItem : public AbstractDataPluginItem
  private:
     void updateSize();
     void updateToolTip();
-    bool showThumbnail();
+    bool showThumbnail() const;
 
     MarbleWidget * m_marbleWidget;
     QUrl m_url;

@@ -154,7 +154,7 @@ void PopupItem::setBackgroundColor(const QColor &color)
     }
 }
 
-void PopupItem::colorize( QImage &img, const QColor &col )
+void PopupItem::colorize( QImage &img, const QColor &col ) const
 {
     if (img.depth() <= 8) return;
     int pixels = img.width()*img.height();

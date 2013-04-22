@@ -56,12 +56,12 @@ class ElevationProfilePlotAxis : public QObject
     void setLength( const int &length );
     void setTickCount( const int min, const int max );
     void update();
-    qreal minValue();
-    qreal maxValue();
-    qreal range();
-    qreal scale();
-    QString unit();
-    AxisTickList ticks();
+    qreal minValue() const;
+    qreal maxValue() const;
+    qreal range() const;
+    qreal scale() const;
+    QString unit() const;
+    AxisTickList ticks() const;
 };
 
 }
