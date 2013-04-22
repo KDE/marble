@@ -102,7 +102,6 @@ private:
     int      m_pixelInterval;
     int      m_valueInterval;
 
-    QString  m_unit;
     QString m_ratioString;
 
     bool     m_scaleInitDone;

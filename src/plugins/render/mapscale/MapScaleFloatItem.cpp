@@ -52,7 +52,6 @@ MapScaleFloatItem::MapScaleFloatItem( const MarbleModel *marbleModel )
       m_bestDivisor(0),
       m_pixelInterval(0),
       m_valueInterval(0),
-      m_unit(tr("km")),
       m_scaleInitDone( false ),
       m_showRatioScale( false ),
       m_contextMenu( 0 ),
@@ -246,20 +245,21 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
         QLocale::MeasurementSystem distanceUnit;
         distanceUnit = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
+        QString unit = tr("km");
         switch ( distanceUnit ) {
         case QLocale::MetricSystem:
             if ( m_bestDivisor * m_valueInterval > 10000 ) {
-                m_unit = tr("km");
+                unit = tr("km");
                 intervalStr.setNum( j * m_valueInterval / 1000 );
             }
             else {
-                m_unit = tr("m");
+                unit = tr("m");
                 intervalStr.setNum( j * m_valueInterval );
             }
             break;
 
         case QLocale::ImperialSystem:
-            m_unit = tr("mi");
+            unit = tr("mi");
             intervalStr.setNum( j * m_valueInterval / 1000 );
 
             if ( m_bestDivisor * m_valueInterval > 3800 ) {
@@ -274,8 +274,8 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
         painter->setFont( font() );
 
         if ( j == 0 ) {
-            painter->drawText( 0, fontHeight, "0 " + m_unit );
-            lastStringEnds = QFontMetrics( font() ).width( "0 " + m_unit );
+            painter->drawText( 0, fontHeight, "0 " + unit );
+            lastStringEnds = QFontMetrics( font() ).width( "0 " + unit );
             continue;
         }
 
