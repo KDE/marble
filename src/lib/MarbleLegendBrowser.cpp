@@ -336,7 +336,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                         QString::number(pixmapHeight) + "px;";
             }
-            QString src  =  "file://" + path;
+            QString src = QUrl::fromLocalFile( path ).toString();
             QString html = ""
                     "<div class=\"legend-entry\">"
                     "       <img class=\"image-pic\""
