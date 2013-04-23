@@ -37,57 +37,55 @@ const GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 
 void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
-    if ( !style() )
-    {
-        painter->save();
-        painter->setPen( QPen() );
-        painter->drawPolyline( *m_lineString );
-        painter->restore();
-        return;
-    }
-
     painter->save();
-    QPen currentPen = painter->pen();
 
-    if ( currentPen.color() != style()->lineStyle().paintedColor() )
-        currentPen.setColor( style()->lineStyle().paintedColor() );
+    if ( !style() ) {
+        painter->setPen( QPen() );
+    }
+    else {
+        QPen currentPen = painter->pen();
 
-    if ( currentPen.widthF() != style()->lineStyle().width() ||
-            style()->lineStyle().physicalWidth() != 0.0 )
-    {
-        if ( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() < style()->lineStyle().width() )
-            currentPen.setWidthF( style()->lineStyle().width() );
-        else
-            currentPen.setWidthF( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() );
+        if ( currentPen.color() != style()->lineStyle().paintedColor() )
+            currentPen.setColor( style()->lineStyle().paintedColor() );
+
+        if ( currentPen.widthF() != style()->lineStyle().width() ||
+                style()->lineStyle().physicalWidth() != 0.0 ) {
+            if ( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() < style()->lineStyle().width() )
+                currentPen.setWidthF( style()->lineStyle().width() );
+            else
+                currentPen.setWidthF( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() );
+        }
+
+        if ( currentPen.capStyle() != style()->lineStyle().capStyle() )
+            currentPen.setCapStyle( style()->lineStyle().capStyle() );
+
+        if ( currentPen.style() != style()->lineStyle().penStyle() )
+            currentPen.setStyle( style()->lineStyle().penStyle() );
+
+        if ( style()->lineStyle().penStyle() == Qt::CustomDashLine )
+            currentPen.setDashPattern( style()->lineStyle().dashPattern() );
+
+        if ( painter->mapQuality() != Marble::HighQuality
+                && painter->mapQuality() != Marble::PrintQuality ) {
+            QColor penColor = currentPen.color();
+            penColor.setAlpha( 255 );
+            currentPen.setColor( penColor );
+        }
+
+        if ( painter->pen() != currentPen )
+            painter->setPen( currentPen );
+
+        if ( style()->lineStyle().background() ) {
+            QBrush brush = painter->background();
+            brush.setColor( style()->polyStyle().paintedColor() );
+            painter->setBackground( brush );
+
+            painter->setBackgroundMode( Qt::OpaqueMode );
+        }
     }
 
-    if ( currentPen.capStyle() != style()->lineStyle().capStyle() )
-        currentPen.setCapStyle( style()->lineStyle().capStyle() );
-
-    if ( currentPen.style() != style()->lineStyle().penStyle() )
-        currentPen.setStyle( style()->lineStyle().penStyle() );
-    
-    if ( style()->lineStyle().penStyle() == Qt::CustomDashLine )
-        currentPen.setDashPattern( style()->lineStyle().dashPattern() );
-
-    if ( painter->mapQuality() != Marble::HighQuality
-            && painter->mapQuality() != Marble::PrintQuality )
-    {
-        QColor penColor = currentPen.color();
-        penColor.setAlpha( 255 );
-        currentPen.setColor( penColor );
-    }
-
-    if ( painter->pen() != currentPen ) painter->setPen( currentPen );
-    if ( style()->lineStyle().background() )
-    {
-        QBrush brush = painter->background();
-        brush.setColor( style()->polyStyle().paintedColor() );
-        painter->setBackground( brush );
-
-        painter->setBackgroundMode( Qt::OpaqueMode );
-    }
     painter->drawPolyline( *m_lineString );
+
     painter->restore();
 }
 
