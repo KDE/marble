@@ -136,6 +136,16 @@ void ProgressFloatItem::initialize()
     connect( manager, SIGNAL(progressChanged(int,int)), this, SLOT(handleProgress(int,int)) , Qt::UniqueConnection );
     connect( manager, SIGNAL(jobRemoved()), this, SLOT(removeProgressItem()), Qt::UniqueConnection );
 
+    // Calculate font size
+    QFont myFont = font();
+    const QString text = "100%";
+    int fontSize = myFont.pointSize();
+    while( QFontMetrics( myFont ).boundingRect( text ).width() < contentRect().width() - 2 ) {
+        ++fontSize;
+        myFont.setPointSize( fontSize );
+    }
+    m_fontSize = fontSize - 1;
+
     m_isInitialized = true;
 }
 
@@ -190,19 +200,8 @@ void ProgressFloatItem::paintContent( QPainter *painter )
     painter->setPen( Qt::NoPen );
     painter->drawPie( rect, startAngle, spanAngle );
 
-    // Calculate font size
-    QFont myFont = font();
-    if ( m_fontSize == 0 ) {
-        QString text = "100%";
-        int fontSize = myFont.pointSize();
-        while( QFontMetrics( myFont ).boundingRect( text ).width() < rect.width() - 4 ) {
-            ++fontSize;
-            myFont.setPointSize( fontSize );
-        }
-        m_fontSize = fontSize - 1;
-    }
-
     // Paint progress label
+    QFont myFont = font();
     myFont.setPointSize( m_fontSize );
     QString done = QString::number( (int) ( completed * 100 ) ) + '%';
     int fontWidth = QFontMetrics( myFont ).boundingRect( done ).width();
