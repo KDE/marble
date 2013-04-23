@@ -43,7 +43,7 @@ OverviewMap::OverviewMap()
 
 OverviewMap::OverviewMap( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( 10.5, 10.5 ), QSizeF( 166.0, 86.0 ) ),
-      m_target( QString() ),
+      m_target(),
       m_planetID( Planet::planetList() ),
       m_defaultSize( AbstractFloatItem::size() ),
       ui_configWidget( 0 ),
@@ -169,10 +169,15 @@ void OverviewMap::changeViewport( ViewportParams *viewport )
     const qreal centerLat = viewport->centerLatitude();
     QString target = marbleModel()->planetId();
 
+    if ( target != m_target ) {
+        changeBackground( target );
+        m_target = target;
+        update();
+    }
+
     if ( !( m_latLonAltBox == latLonAltBox
             && m_centerLon == centerLon
-            && m_centerLat == centerLat
-            && m_target == target ) )
+            && m_centerLat == centerLat ) )
     {
         m_latLonAltBox = latLonAltBox;
         m_centerLon = centerLon;
@@ -187,16 +192,9 @@ void OverviewMap::paintContent( QPainter *painter )
 
     QRectF mapRect( contentRect() );
 
-    QString target = marbleModel()->planetId();
-
-    if ( target != m_target ) {
-        changeBackground( target );
-    }
-
     if ( m_svgobj.isValid() ) {
         // Rerender worldmap pixmap if the size or map has changed
-        if ( m_worldmap.size() != mapRect.size().toSize() 
-            || target != m_target || m_mapChanged ) {
+        if ( m_worldmap.size() != mapRect.size().toSize() || m_mapChanged ) {
             m_mapChanged = false;
             m_worldmap = QPixmap( mapRect.size().toSize() );
             m_worldmap.fill( Qt::transparent );
@@ -236,8 +234,6 @@ void OverviewMap::paintContent( QPainter *painter )
                                0.125 * x * mapRect.width(), mapRect.height() );
         }
     }
-
-    m_target = target;
 
     // Now draw the latitude longitude bounding box
     qreal xWest = mapRect.width() / 2.0 
@@ -333,7 +329,7 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
 
     m_settings.insert( "posColor", settings.value( "posColor", QColor( Qt::white ).name() ) );
 
-    m_target.clear(); // FIXME: forces execution of changeBackground() in paintContent()
+    m_target.clear(); // FIXME: forces execution of changeBackground() in changeViewport()
 
     readSettings();
     emit settingsChanged( nameId() );
@@ -438,6 +434,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
 void OverviewMap::changeBackground( const QString& target )
 {
     m_svgobj.load( m_svgPaths[target] );
+    m_mapChanged = true;
 }
 
 QSvgWidget *OverviewMap::currentWidget() const
@@ -448,7 +445,6 @@ QSvgWidget *OverviewMap::currentWidget() const
 void OverviewMap::setCurrentWidget( QSvgWidget *widget )
 {
     m_svgWidgets[m_planetID[ui_configWidget->m_planetComboBox->currentIndex()]] = widget;
-    m_mapChanged = true;
     if( m_target == m_planetID[ui_configWidget->m_planetComboBox->currentIndex()] ) {
         changeBackground( m_target );
     }
