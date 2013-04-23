@@ -185,8 +185,6 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setFont( font() );
 
-    m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
-
     if ( ! ( m_routeAvailable && m_isInitialized && m_eleData.size() > 0 ) ) {
         painter->setPen( QColor( Qt::black ) );
         QString text = tr( "Create a route to view its elevation profile." );
