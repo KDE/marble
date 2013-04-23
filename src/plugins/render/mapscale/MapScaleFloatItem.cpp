@@ -170,6 +170,16 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
             m_pixel2Length *= M_PI / 2 * cos( centerLatitude );
         }
 
+        m_scaleBarDistance = (qreal)(m_scaleBarWidth) * m_pixel2Length;
+
+        const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
+
+        if ( measurementSystem == QLocale::ImperialSystem ) {
+            m_scaleBarDistance *= KM2MI;
+        }
+
+        calcScaleBar();
+
         update();
     }
 }
@@ -197,16 +207,6 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
     iRatio *= power;
     m_ratioString.setNum(iRatio);
     m_ratioString = m_ratioString = "1 : " + m_ratioString;
-
-    m_scaleBarDistance = (qreal)(m_scaleBarWidth) * m_pixel2Length;
-
-    const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
-
-    if ( measurementSystem == QLocale::ImperialSystem ) {
-        m_scaleBarDistance *= KM2MI;
-    }
-
-    calcScaleBar();
 
     painter->setPen(   QColor( Qt::darkGray ) );
     painter->setBrush( QColor( Qt::darkGray ) );
