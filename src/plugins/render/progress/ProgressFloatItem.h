@@ -89,6 +89,8 @@ private Q_SLOTS:
 
     int m_completedJobs;
 
+    qreal m_completed;
+
     QTimer m_progressHideTimer;
 
     QTimer m_progressShowTimer;

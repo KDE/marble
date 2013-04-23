@@ -37,6 +37,7 @@ ProgressFloatItem::ProgressFloatItem( const MarbleModel *marbleModel )
       m_isInitialized( false ),
       m_totalJobs( 0 ),
       m_completedJobs ( 0 ),
+      m_completed( 1 ),
       m_progressHideTimer(),
       m_progressShowTimer(),
       m_active( false ),
@@ -180,19 +181,9 @@ void ProgressFloatItem::paintContent( QPainter *painter )
 
     painter->save();
 
-    qreal completed = 1.0;
-    if ( m_totalJobs && m_completedJobs <= m_totalJobs ) {
-        completed = (qreal) m_completedJobs / (qreal) m_totalJobs;
-
-        if ( m_completedJobs == m_totalJobs ) {
-            m_progressShowTimer.stop();
-            m_progressHideTimer.start();
-        }
-    }
-
     // Paint progress pie
     int startAngle =  90 * 16; // 12 o' clock
-    int spanAngle = -ceil ( 360 * 16 * completed );
+    int spanAngle = -ceil ( 360 * 16 * m_completed );
     QRectF rect( contentRect() );
     rect.adjust( 1, 1, -1, -1 );
 
@@ -203,7 +194,7 @@ void ProgressFloatItem::paintContent( QPainter *painter )
     // Paint progress label
     QFont myFont = font();
     myFont.setPointSize( m_fontSize );
-    QString done = QString::number( (int) ( completed * 100 ) ) + '%';
+    QString done = QString::number( (int) ( m_completed * 100 ) ) + '%';
     int fontWidth = QFontMetrics( myFont ).boundingRect( done ).width();
     QPointF baseline( padding() + 0.5 * ( rect.width() - fontWidth ), 0.75 * rect.height() );
     QPainterPath path;
@@ -259,11 +250,17 @@ void ProgressFloatItem::handleProgress( int current, int queued )
             m_progressShowTimer.start();
             m_progressHideTimer.stop();
         } else if ( active() ) {
-            if ( m_totalJobs < 1 ) {
+            if ( m_totalJobs < 1 || m_completedJobs == m_totalJobs ) {
+                m_progressShowTimer.stop();
                 m_progressHideTimer.start();
             }
             update();
             scheduleRepaint();
+        }
+
+        m_completed = 1.0;
+        if ( m_totalJobs && m_completedJobs <= m_totalJobs ) {
+            m_completed = (qreal) m_completedJobs / (qreal) m_totalJobs;
         }
     }
 }
