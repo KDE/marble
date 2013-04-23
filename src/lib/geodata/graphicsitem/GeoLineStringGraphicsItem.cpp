@@ -45,9 +45,6 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
         painter->restore();
         return;
     }
-    
-    if(style()->lineStyle().paintedColor() == Qt::transparent)
-        return;
 
     painter->save();
     QPen currentPen = painter->pen();
