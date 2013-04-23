@@ -37,7 +37,7 @@ public:
     void addItems(const TileId &tileId, QList<GeoGraphicsItem*> &result, int maxZoomLevel ) const;
 
     QMap<TileId, QList<GeoGraphicsItem*> > m_items;
-    QHash<const GeoDataFeature*, TileId> m_features;
+    QMultiHash<const GeoDataFeature*, TileId> m_features;
 };
 
 GeoGraphicsScene::GeoGraphicsScene( QObject* parent ): QObject( parent ), d( new GeoGraphicsScenePrivate() )
@@ -118,13 +118,15 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, 
 
 void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 {
-    const TileId key = d->m_features.value( feature );
-    QList< GeoGraphicsItem* >& tileList = d->m_items[key];
-    foreach( GeoGraphicsItem* item, tileList ) {
-        if( item->feature() == feature ) {
-            d->m_features.remove( feature );
-            tileList.removeAll( item );
-            return;
+    QList<TileId> keys = d->m_features.values( feature );
+    foreach( TileId key, keys ) {
+        QList< GeoGraphicsItem* >& tileList = d->m_items[key];
+        foreach( GeoGraphicsItem* item, tileList ) {
+            if( item->feature() == feature ) {
+                d->m_features.remove( feature );
+                tileList.removeAll( item );
+                break;
+            }
         }
     }
 }
