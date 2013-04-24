@@ -612,6 +612,7 @@ void MapViewWidget::Private::deleteMap()
                              QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes )
     {
         MapThemeManager::deleteMapTheme( currentThemePath() );
+        emit q->mapThemeDeleted();
     }
 }
 

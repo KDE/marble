@@ -190,6 +190,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
 
     connect( m_controlView, SIGNAL(showUploadDialog()), this, SLOT(showUploadNewStuffDialog()) );
     connect( m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()) );
+    connect( m_controlView, SIGNAL(mapThemeDeleted()), this, SLOT(fallBackToDefaultTheme()) );
 }
 
 MarblePart::~MarblePart()
@@ -1680,6 +1681,11 @@ void MarblePart::updateMapEditButtonVisibility( const QString &mapTheme )
 {
     Q_ASSERT( m_externalMapEditorAction );
     m_externalMapEditorAction->setVisible( mapTheme == "earth/openstreetmap/openstreetmap.dgml" );
+}
+
+void MarblePart::fallBackToDefaultTheme()
+{
+    m_controlView->marbleWidget()->setMapThemeId( m_controlView->defaultMapThemeId() );
 }
 
 }

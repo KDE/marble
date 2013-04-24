@@ -72,6 +72,7 @@ private slots:
     void projectionChanged( Projection );
     void showMapWizard();
     void showUploadDialog();
+    void mapThemeDeleted();
 
  private:
     Q_DISABLE_COPY( MapViewWidget )

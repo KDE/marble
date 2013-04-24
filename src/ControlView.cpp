@@ -531,6 +531,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     mapViewWidget->setMarbleWidget( marbleWidget() );
     connect( mapViewWidget, SIGNAL(showMapWizard()), this, SIGNAL(showMapWizard()) );
     connect( mapViewWidget, SIGNAL(showUploadDialog()), this, SIGNAL(showUploadDialog()) );
+    connect( mapViewWidget, SIGNAL(mapThemeDeleted()), this, SIGNAL(mapThemeDeleted()) );
     mapViewDock->setWidget( mapViewWidget );
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, mapViewDock );
 

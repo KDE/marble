@@ -88,6 +88,8 @@ private Q_SLOTS:
     void  initObject(const QVariantMap& cmdLineSettings);
     void  editSettings();
     void  updateSettings();
+    
+    void  fallBackToDefaultTheme();
 
     // File Menu
     void  openFile();

@@ -74,6 +74,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  mapThemeChanged( const QString& newMapTheme );
     void  createPluginMenus();
     void  createFolderList();
+    void  fallBackToDefaultTheme();
 
   private Q_SLOTS:
     void  exportMapScreenShot();

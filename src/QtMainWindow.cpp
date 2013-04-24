@@ -154,6 +154,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
              this, SLOT(updateMapEditButtonVisibility(QString)) );
     connect( m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()) );
+    connect( m_controlView, SIGNAL(mapThemeDeleted()), this, SLOT(fallBackToDefaultTheme()) );
 
     setUpdatesEnabled( true );
 
@@ -1619,6 +1620,11 @@ void MainWindow::showZoomLevel(bool show)
     } else {
         statusBar()->removeWidget( m_zoomLabel );
     }
+}
+
+void MainWindow::fallBackToDefaultTheme()
+{
+    m_controlView->marbleWidget()->setMapThemeId( m_controlView->defaultMapThemeId() );
 }
 
 #include "QtMainWindow.moc"

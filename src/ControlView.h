@@ -105,6 +105,7 @@ class ControlView : public QWidget
 signals:
     void showMapWizard();
     void showUploadDialog();
+    void mapThemeDeleted();
 
 private Q_SLOTS:
      void showSearch();
