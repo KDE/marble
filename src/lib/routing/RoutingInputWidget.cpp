@@ -60,6 +60,8 @@ public:
 
     RoutingInputLineEdit *m_lineEdit;
 
+    QToolButton *m_removeButton;
+
     MarbleRunnerManager m_runnerManager;
 
     MarblePlacemarkModel *m_placemarkModel;
@@ -128,6 +130,10 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int 
 
     m_lineEdit = new RoutingInputLineEdit( parent );
     m_lineEdit->setDecorator( addDropDownIndicator( m_route->pixmap( m_index ) ) );
+
+    m_removeButton = new QToolButton( parent );
+    m_removeButton->setIcon( QIcon(":/icons/remove.png") );
+    m_removeButton->setToolTip( QObject::tr("Remove") );
 
     m_nominatimTimer.setInterval( 1000 );
     m_nominatimTimer.setSingleShot( true );
@@ -223,13 +229,17 @@ RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
         layout->addWidget( d->m_lineEdit );
+        layout->addWidget( d->m_removeButton );
         connect( d->m_lineEdit, SIGNAL(decoratorButtonClicked()), this, SLOT(openTargetSelectionDialog()) );
     } else {
         d->createMenu( this );
         layout->addWidget( d->m_lineEdit );
+        layout->addWidget(d->m_removeButton);
     }
 
-    connect( d->m_lineEdit, SIGNAL(clearButtonClicked()), this, SLOT(requestRemoval()) );
+    connect( d->m_removeButton, SIGNAL(clicked()), this, SLOT(requestRemoval()) );
+
+    //connect( d->m_lineEdit, SIGNAL(clearButtonClicked()), this, SLOT(requestRemoval()) );
     connect( d->m_marbleModel->bookmarkManager(), SIGNAL(bookmarksChanged()),
              this, SLOT(reloadBookmarks()) );
     connect( d->m_marbleModel->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
