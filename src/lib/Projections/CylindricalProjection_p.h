@@ -36,6 +36,8 @@ class CylindricalProjectionPrivate : public AbstractProjectionPrivate
     void repeatPolygons( const ViewportParams *viewport,
                          QVector<QPolygonF *> &polygons ) const;
 
+    qreal repeatDistance( const ViewportParams *viewport ) const;
+
     Q_DECLARE_PUBLIC( CylindricalProjection )
 };
 

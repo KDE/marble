@@ -55,13 +55,6 @@ class AbstractProjectionPrivate
                                int mirrorCount = 0,
                                qreal repeatDistance = 0 ) const;
 
-    qreal repeatDistance( const ViewportParams *viewport ) const;
-
-
-    void translatePolygons( const QVector<QPolygonF *> &polygons,
-                            QVector<QPolygonF *> &translatedPolygons,
-                            qreal xOffset ) const;
-
     int crossDateLine( const GeoDataCoordinates & aCoord,
                        const GeoDataCoordinates & bCoord,
                        QVector<QPolygonF*> &polygons,

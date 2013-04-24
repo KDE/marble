@@ -144,23 +144,6 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &coordinate
            QSizeF( 0.0, 0.0 ), globeHidesPoint );
 }
 
-qreal AbstractProjectionPrivate::repeatDistance( const ViewportParams *viewport ) const
-{
-    // Choose a latitude that is inside the viewport.
-    qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
-
-    GeoDataCoordinates westCoords( -M_PI, centerLatitude );
-    GeoDataCoordinates eastCoords( +M_PI, centerLatitude );
-    qreal xWest, xEast, dummyY;
-
-    Q_Q( const AbstractProjection );
-
-    q->screenCoordinates( westCoords, viewport, xWest, dummyY );
-    q->screenCoordinates( eastCoords, viewport, xEast, dummyY );
-
-    return   xEast - xWest;
-}
-
 GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport ) const
 {
