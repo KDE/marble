@@ -45,8 +45,10 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 
     GeoDataStyle style;
     GeoDataLineStyle lineStyle;
-    lineStyle.setColor( Oxygen::forestGreen4 );
-    lineStyle.setWidth(2);
+    QColor transparentRed = Oxygen::brickRed6;
+    transparentRed.setAlpha( 200 );
+    lineStyle.setColor( transparentRed );
+    lineStyle.setWidth( 4 );
     style.setLineStyle(lineStyle);
     style.setStyleId("track");
 
@@ -59,8 +61,10 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     // create a style for routes
     GeoDataStyle routestyle;
     GeoDataLineStyle routeLineStyle;
-    routeLineStyle.setColor( Oxygen::skyBlue4 );
-    routeLineStyle.setWidth(2);
+    QColor skyBlue = Oxygen::skyBlue6;
+    skyBlue.setAlpha( 200 );
+    routeLineStyle.setColor( skyBlue );
+    routeLineStyle.setWidth( 5 );
     routestyle.setLineStyle(routeLineStyle);
     routestyle.setStyleId("route");
 
