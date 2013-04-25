@@ -7,6 +7,7 @@
 //
 // Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2013      Roman Karlstetter <roman.karlstetter@googlemail.com>
 //
 
 #ifndef ELEVATIONPROFILEFLOATITEM_H
@@ -18,9 +19,10 @@
 #include "ElevationProfilePlotAxis.h"
 
 #include "GeoDataDocument.h"
-#include "GeoDataLineString.h"
 #include "GeoGraphicsItem.h"
 #include "LabelGraphicsItem.h"
+#include "ElevationProfileDataSource.h"
+#include "ElevationProfileContextMenu.h"
 
 
 namespace Ui
@@ -84,22 +86,30 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
     QDialog *configDialog();
 
- protected:
+protected:
     bool eventFilter( QObject *object, QEvent *e );
     virtual void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
 
  private Q_SLOTS:
-    void updateData();
+    void handleDataUpdate(const GeoDataLineString &points, QList<QPointF> eleData);
     void updateVisiblePoints();
     void forceRepaint();
     void readSettings();
     void writeSettings();
     void toggleZoomToViewport();
 
- Q_SIGNALS:
+    void switchToRouteDataSource();
+    void switchToTrackDataSource(int index);
+    void switchDataSource(ElevationProfileDataSource *source);
+
+
+Q_SIGNALS:
     void dataUpdated();
 
  private:
+    ElevationProfileDataSource* m_activeDataSource;
+    ElevationProfileRouteDataSource* m_routeDataSource;
+    ElevationProfileTrackDataSource* m_trackDataSource;
     QDialog *m_configDialog;
     Ui::ElevationProfileConfigWidget *ui_configWidget;
 
@@ -122,11 +132,10 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
     bool     m_isInitialized;
 
-    QMenu*   m_contextMenu;
+    friend class ElevationProfileContextMenu;
+    ElevationProfileContextMenu*   m_contextMenu;
 
     MarbleWidget*     m_marbleWidget;
-    const RoutingModel* m_routingModel;
-    bool              m_routeAvailable;
 
     int               m_firstVisiblePoint;
     int               m_lastVisiblePoint;

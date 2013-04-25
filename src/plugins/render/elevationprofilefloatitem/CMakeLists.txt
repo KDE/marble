@@ -12,6 +12,8 @@ endif()
 set( my_SRCS
   ElevationProfileFloatItem.cpp
   ElevationProfilePlotAxis.cpp
+  ElevationProfileDataSource.cpp
+  ElevationProfileContextMenu.cpp
  )
 set( elevationprofile_UI ElevationProfileConfigWidget.ui )
 

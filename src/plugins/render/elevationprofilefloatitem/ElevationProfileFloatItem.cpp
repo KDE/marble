@@ -7,6 +7,7 @@
 //
 // Copyright 2011-2012 Florian Eßer <f.esser@rwth-aachen.de>
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2013      Roman Karlstetter <roman.karlstetter@googlemail.com>
 //
 
 #include "ElevationProfileFloatItem.h"
@@ -25,19 +26,20 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
 #include "ViewportParams.h"
-#include "routing/Route.h"
-#include "routing/RoutingModel.h"
-#include "routing/RoutingManager.h"
 #include "MarbleDirs.h"
 #include "ElevationModel.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleMath.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
 
 ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleModel )
         : AbstractFloatItem( marbleModel, QPointF( 220, 10.5 ), QSizeF( 0.0, 50.0 ) ),
+        m_activeDataSource(0),
+        m_routeDataSource(0),
+        m_trackDataSource(0),
         m_configDialog( 0 ),
         ui_configWidget( 0 ),
         m_leftGraphMargin( 0 ),
@@ -51,8 +53,6 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
         m_isInitialized( false ),
         m_contextMenu( 0 ),
         m_marbleWidget( 0 ),
-        m_routingModel( 0 ),
-        m_routeAvailable( false ),
         m_firstVisiblePoint( 0 ),
         m_lastVisiblePoint( 0 ),
         m_zoomToViewport( false )
@@ -63,7 +63,7 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
         setPosition( QPointF( 10.5, 10.5 ) );
     }
     bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
-    m_eleGraphHeight = highRes ? 100 : 50;
+    m_eleGraphHeight = highRes ? 100 : 50; /// TODO make configurable
 
     setPadding( 1 );
 
@@ -73,6 +73,13 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
     m_markerPlacemark->setName( "Elevation Marker" );
     m_markerPlacemark->setVisible( false );
     m_markerDocument.append( m_markerPlacemark );
+
+    // initialize already here, otherwise we won't get notified for new files when not initialized
+    m_routeDataSource = new ElevationProfileRouteDataSource(const_cast<MarbleModel*>(marbleModel), this);
+    m_trackDataSource = new ElevationProfileTrackDataSource(const_cast<MarbleModel*>(marbleModel), this);
+    m_contextMenu = new ElevationProfileContextMenu(this);
+    connect(m_trackDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()));
+    connect(m_routeDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()));
 }
 
 ElevationProfileFloatItem::~ElevationProfileFloatItem()
@@ -106,7 +113,7 @@ QString ElevationProfileFloatItem::nameId() const
 
 QString ElevationProfileFloatItem::version() const
 {
-    return "1.2";
+    return "1.2"; // TODO: increase to 1.3 ?
 }
 
 QString ElevationProfileFloatItem::description() const
@@ -116,14 +123,15 @@ QString ElevationProfileFloatItem::description() const
 
 QString ElevationProfileFloatItem::copyrightYears() const
 {
-    return "2011, 2012";
+    return "2011, 2012, 2013";
 }
 
 QList<PluginAuthor> ElevationProfileFloatItem::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" )
+            << PluginAuthor( "Roman Karlstetter", "roman.karlstetter@googlemail.com" );
 }
 
 QIcon ElevationProfileFloatItem::icon () const
@@ -133,16 +141,11 @@ QIcon ElevationProfileFloatItem::icon () const
 
 void ElevationProfileFloatItem::initialize ()
 {
-    connect( marbleModel()->elevationModel(), SIGNAL(updateAvailable()), SLOT(updateData()) );
-
-    m_routingModel = marbleModel()->routingManager()->routingModel();
-    connect( m_routingModel, SIGNAL(currentRouteChanged()), this, SLOT(updateData()) );
+    connect( this, SIGNAL(dataUpdated()), SLOT(forceRepaint()) );
+    switchDataSource(m_routeDataSource);
 
     m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
-    m_leftGraphMargin = QFontMetricsF( font() ).width( "0000 m" ); // TODO make this dynamic according to actual need
-    connect( this, SIGNAL(dataUpdated()), SLOT(forceRepaint()) );
-
-    updateData();
+    m_leftGraphMargin = QFontMetricsF( font() ).width( "0000 m" ); /// TODO make this dynamic according to actual need
 
     m_isInitialized = true;
 }
@@ -178,13 +181,17 @@ void ElevationProfileFloatItem::setProjection( const ViewportParams *viewport )
 
 void ElevationProfileFloatItem::paintContent( QPainter *painter )
 {
+    // do not try to draw if not initialized
+    if(!isInitialized()) {
+        return;
+    }
     painter->save();
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setFont( font() );
 
-    if ( ! ( m_routeAvailable && m_isInitialized && m_eleData.size() > 0 ) ) {
+    if ( ! ( m_activeDataSource->isDataAvailable() && m_eleData.size() > 0 ) ) {
         painter->setPen( QColor( Qt::black ) );
-        QString text = tr( "Create a route to view its elevation profile." );
+        QString text = tr( "Create a route or load a track from file to view its elevation profile." );
         painter->drawText( contentRect().toRect(), Qt::TextWordWrap | Qt::AlignCenter, text );
         painter->restore();
         return;
@@ -381,7 +388,7 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
     painter->restore();
 }
 
-QDialog *ElevationProfileFloatItem::configDialog() //FIXME TODO Make a config dialog?
+QDialog *ElevationProfileFloatItem::configDialog() //FIXME TODO Make a config dialog? /// TODO what is this comment?
 {
     if ( !m_configDialog ) {
         // Initializing configuration dialog
@@ -401,24 +408,8 @@ QDialog *ElevationProfileFloatItem::configDialog() //FIXME TODO Make a config di
 
 void ElevationProfileFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
 {
-    if ( !m_contextMenu ) {
-        m_contextMenu = contextMenu();
-
-        foreach( QAction *action, m_contextMenu->actions() ) {
-            if ( action->text() == tr( "&Configure..." ) ) {
-                m_contextMenu->removeAction( action );
-                break;
-            }
-        }
-
-        QAction *toggleAction = m_contextMenu->addAction( tr("&Zoom to viewport"), this,
-                                SLOT(toggleZoomToViewport()) );
-        toggleAction->setCheckable( true );
-        toggleAction->setChecked( m_zoomToViewport );
-    }
-
     Q_ASSERT( m_contextMenu );
-    m_contextMenu->exec( w->mapToGlobal( e->pos() ) );
+    m_contextMenu->getMenu()->exec( w->mapToGlobal( e->pos() ) );
 }
 
 bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
@@ -510,29 +501,22 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
     return AbstractFloatItem::eventFilter(object,e);
 }
 
-void ElevationProfileFloatItem::updateData()
+void ElevationProfileFloatItem::handleDataUpdate(const GeoDataLineString &points, QList<QPointF> eleData)
 {
-    m_routeAvailable = m_routingModel && m_routingModel->rowCount() > 0;
-    m_points = m_routeAvailable ? m_routingModel->route().path() : GeoDataLineString();
-    m_eleData = calculateElevationData( m_points );
-
+    m_eleData = eleData;
+    m_points = points;
     calculateStatistics( m_eleData );
     if ( m_eleData.length() >= 2 ) {
         m_axisX.setRange( m_eleData.first().x(), m_eleData.last().x() );
         m_axisY.setRange( qMin( m_minElevation, qreal( 0.0 ) ), m_maxElevation );
     }
-    emit dataUpdated();
 
-    forceRepaint();
+    emit dataUpdated();
 }
 
 void ElevationProfileFloatItem::updateVisiblePoints()
 {
-    if ( ! ( m_routeAvailable && m_routingModel ) ) {
-        return;
-    }
-    GeoDataLineString points = m_routingModel->route().path();
-    if ( points.size() < 2 ) {
+    if ( ! m_activeDataSource->isDataAvailable() || m_points.size() < 2 ) {
         return;
     }
 
@@ -540,8 +524,8 @@ void ElevationProfileFloatItem::updateVisiblePoints()
     QList<QList<int> > routeSegments;
     QList<int> currentRouteSegment;
     for ( int i = 0; i < m_eleData.count(); i++ ) {
-        qreal lon = points[i].longitude(GeoDataCoordinates::Degree);
-        qreal lat = points[i].latitude (GeoDataCoordinates::Degree);
+        qreal lon = m_points[i].longitude(GeoDataCoordinates::Degree);
+        qreal lat = m_points[i].latitude (GeoDataCoordinates::Degree);
         qreal x = 0;
         qreal y = 0;
 
@@ -573,6 +557,7 @@ void ElevationProfileFloatItem::updateVisiblePoints()
         m_lastVisiblePoint = m_eleData.count() - 1;
     }
 
+    // include setting range to statistics and test for m_zoomToViewport in calculateStatistics();
     if ( m_zoomToViewport ) {
         calculateStatistics( m_eleData );
         m_axisX.setRange( m_eleData.value( m_firstVisiblePoint ).x(),
@@ -581,29 +566,6 @@ void ElevationProfileFloatItem::updateVisiblePoints()
     }
 
     return;
-}
-
-QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataLineString &lineString ) const
-{
-    // TODO: Don't re-calculate the whole route if only a small part of it was changed
-    QList<QPointF> result;
-    qreal distance = 0;
-
-    for ( int i = 0; i < lineString.size(); i++ ) {
-        const qreal lat = lineString[i].latitude ( GeoDataCoordinates::Degree );
-        const qreal lon = lineString[i].longitude( GeoDataCoordinates::Degree );
-        qreal ele = marbleModel()->elevationModel()->height( lon, lat );
-
-        if ( i ) {
-            distance += EARTH_RADIUS * distanceSphere( lineString[i-1], lineString[i] );
-        }
-
-        if ( ele != invalidElevationData ) { // skip no data
-            result.append( QPointF( distance, ele ) );
-        }
-    }
-
-    return result;
 }
 
 void ElevationProfileFloatItem::calculateStatistics( const QList<QPointF> &eleData )
@@ -695,6 +657,24 @@ void ElevationProfileFloatItem::toggleZoomToViewport()
     emit settingsChanged( nameId() );
 }
 
+void ElevationProfileFloatItem::switchToRouteDataSource()
+{
+    switchDataSource(m_routeDataSource);
+}
+
+void ElevationProfileFloatItem::switchToTrackDataSource(int index)
+{
+    m_trackDataSource->setSourceIndex(index);
+    switchDataSource(m_trackDataSource);
+}
+
+void ElevationProfileFloatItem::switchDataSource(ElevationProfileDataSource* source)
+{
+    disconnect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QList<QPointF>)),0,0);
+    m_activeDataSource = source;
+    connect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QList<QPointF>)), this, SLOT(handleDataUpdate(GeoDataLineString,QList<QPointF>)));
+    m_activeDataSource->requestUpdate();
+}
 
 }
 
