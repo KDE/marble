@@ -91,12 +91,6 @@ class Tile
 */
     virtual GeoDataDocument * vectorData() const;
 
-/*!
-    \brief Returns the QString that describes the format of the Tile
-    \return A non-zero pointer to a QString associated with the tile.
-*/
-     const QString *format() const;
-
     virtual const char* nodeType() const;
 
     virtual int byteCount() const;
