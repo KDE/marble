@@ -13,11 +13,17 @@
 
 using namespace Marble;
 
-TextureMapperInterface::TextureMapperInterface()
+TextureMapperInterface::TextureMapperInterface() :
+    m_repaintNeeded( true )
 {
 }
 
 
 TextureMapperInterface::~TextureMapperInterface()
 {
+}
+
+void TextureMapperInterface::setRepaintNeeded()
+{
+    m_repaintNeeded = true;
 }

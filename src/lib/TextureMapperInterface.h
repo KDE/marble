@@ -36,7 +36,10 @@ public:
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer ) = 0;
 
-    virtual void setRepaintNeeded() = 0;
+    void setRepaintNeeded();
+
+protected:
+    bool m_repaintNeeded;
 };
 
 }

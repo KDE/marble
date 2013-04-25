@@ -36,8 +36,6 @@ class MercatorScanlineTextureMapper : public TextureMapperInterface
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
-    virtual void setRepaintNeeded();
-
  private:
     void mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality );
 
@@ -45,7 +43,6 @@ class MercatorScanlineTextureMapper : public TextureMapperInterface
     class RenderJob;
 
     StackedTileLoader *const m_tileLoader;
-    bool   m_repaintNeeded;
     int m_radius;
     QImage m_canvasImage;
     int    m_oldYPaintedTop;

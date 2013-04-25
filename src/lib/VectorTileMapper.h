@@ -40,8 +40,6 @@ public:
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
-    virtual void setRepaintNeeded();
-
     void initTileRangeCoords( int tileZoomLevel );
 
 public Q_SLOTS:
@@ -60,7 +58,6 @@ private:
 private:
     class RenderJob;
     StackedTileLoader *const m_tileLoader;
-    bool m_repaintNeeded;
     int m_radius;
     QThreadPool m_threadPool;
     unsigned int m_minTileX;

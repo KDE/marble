@@ -62,7 +62,6 @@ MercatorScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoad
 MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( StackedTileLoader *tileLoader )
     : TextureMapperInterface(),
       m_tileLoader( tileLoader ),
-      m_repaintNeeded( true ),
       m_radius( 0 ),
       m_oldYPaintedTop( 0 )
 {
@@ -100,11 +99,6 @@ void MercatorScanlineTextureMapper::mapTexture( GeoPainter *painter,
     }
 
     painter->drawImage( dirtyRect, m_canvasImage, dirtyRect );
-}
-
-void MercatorScanlineTextureMapper::setRepaintNeeded()
-{
-    m_repaintNeeded = true;
 }
 
 void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality )

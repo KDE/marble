@@ -36,7 +36,6 @@ TileScalingTextureMapper::TileScalingTextureMapper( StackedTileLoader *tileLoade
       TextureMapperInterface(),
       m_tileLoader( tileLoader ),
       m_cache( 100 ),
-      m_repaintNeeded( true ),
       m_radius( 0 )
 {
     connect( tileLoader, SIGNAL(tileLoaded(TileId)),
@@ -82,11 +81,6 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
 
         m_radius = viewport->radius();
     }
-}
-
-void TileScalingTextureMapper::setRepaintNeeded()
-{
-    m_repaintNeeded = true;
 }
 
 void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportParams *viewport, int tileZoomLevel, TextureColorizer *texColorizer )

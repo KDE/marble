@@ -47,15 +47,12 @@ class SphericalScanlineTextureMapper : public TextureMapperInterface
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
-    virtual void setRepaintNeeded();
-
  private:
     void mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality );
 
  private:
     class RenderJob;
     StackedTileLoader *const m_tileLoader;
-    bool m_repaintNeeded;
     int m_radius;
     QImage m_canvasImage;
     QThreadPool m_threadPool;

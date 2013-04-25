@@ -35,7 +35,6 @@ VectorTileMapper::~VectorTileMapper()
 VectorTileMapper::VectorTileMapper( StackedTileLoader *tileLoader )
     : TextureMapperInterface()
     , m_tileLoader( tileLoader )
-    , m_repaintNeeded( true )
     , m_radius( 0 )
     , m_threadPool()
 {
@@ -108,11 +107,6 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
     m_minTileY = minY;
     m_maxTileX = maxX;
     m_maxTileY = maxY;
-}
-
-void VectorTileMapper::setRepaintNeeded()
-{
-    m_repaintNeeded = true;
 }
 
 void VectorTileMapper::initTileRangeCoords( int tileZoomLevel ){

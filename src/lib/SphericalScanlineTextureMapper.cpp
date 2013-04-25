@@ -63,7 +63,6 @@ SphericalScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoa
 SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( StackedTileLoader *tileLoader )
     : TextureMapperInterface()
     , m_tileLoader( tileLoader )
-    , m_repaintNeeded( true )
     , m_radius( 0 )
     , m_threadPool()
 {
@@ -106,11 +105,6 @@ void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
                 2 * radius, 2 * radius);
     rect = rect.intersect( dirtyRect );
     painter->drawImage( rect, m_canvasImage, rect );
-}
-
-void SphericalScanlineTextureMapper::setRepaintNeeded()
-{
-    m_repaintNeeded = true;
 }
 
 void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality )

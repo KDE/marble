@@ -61,7 +61,6 @@ EquirectScanlineTextureMapper::RenderJob::RenderJob( StackedTileLoader *tileLoad
 EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( StackedTileLoader *tileLoader )
     : TextureMapperInterface(),
       m_tileLoader( tileLoader ),
-      m_repaintNeeded( true ),
       m_radius( 0 ),
       m_oldYPaintedTop( 0 )
 {
@@ -99,11 +98,6 @@ void EquirectScanlineTextureMapper::mapTexture( GeoPainter *painter,
     }
 
     painter->drawImage( dirtyRect, m_canvasImage, dirtyRect );
-}
-
-void EquirectScanlineTextureMapper::setRepaintNeeded()
-{
-    m_repaintNeeded = true;
 }
 
 void EquirectScanlineTextureMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality )

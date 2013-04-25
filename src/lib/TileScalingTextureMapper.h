@@ -37,8 +37,6 @@ class TileScalingTextureMapper : public QObject, public TextureMapperInterface
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
-    virtual void setRepaintNeeded();
-
  private Q_SLOTS:
     void removePixmap( const TileId &tileId );
     void clearPixmaps();
@@ -52,7 +50,6 @@ class TileScalingTextureMapper : public QObject, public TextureMapperInterface
  private:
     StackedTileLoader *const m_tileLoader;
     QCache<TileId, const QPixmap> m_cache;
-    bool   m_repaintNeeded;
     QImage m_canvasImage;
     int    m_radius;
 };
