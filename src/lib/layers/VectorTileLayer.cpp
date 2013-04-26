@@ -14,8 +14,6 @@
 
 #include <QtCore/qmath.h>
 #include <QtCore/QCache>
-#include <QtCore/QPointer>
-#include <QtCore/QTimer>
 
 #include "VectorTileMapper.h"
 #include "GeoPainter.h"
@@ -23,7 +21,6 @@
 #include "GeoSceneTypes.h"
 #include "MergedLayerDecorator.h"
 #include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
 #include "SunLocator.h"
@@ -34,8 +31,6 @@
 
 namespace Marble
 {
-
-const int REPAINT_SCHEDULING_INTERVAL = 1000;
 
 struct CacheDocument
 {
@@ -73,9 +68,6 @@ public:
     VectorTileMapper *m_texmapper;
     QVector<const GeoSceneTiled *> m_textures;
     GeoSceneGroup *m_textureLayerSettings;
-
-    // For scheduling repaints
-    QTimer           m_repaintTimer;
 
     // Vector tile managing
 
@@ -117,7 +109,6 @@ VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
     , m_tileZoomLevel( -1 )
     , m_texmapper( 0 )
     , m_textureLayerSettings( 0 )
-    , m_repaintTimer()
     , m_treeModel( treeModel )
 {
 }
@@ -212,9 +203,6 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( painter );
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
-
-    // Stop repaint timer if it is already running
-    d->m_repaintTimer.stop();
 
     if ( d->m_textures.isEmpty() )
         return false;
