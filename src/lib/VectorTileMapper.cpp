@@ -20,7 +20,7 @@
 #include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
 #include "StackedTile.h"
-#include "TextureColorizer.h"
+#include "TileLoaderHelper.h"
 
 #include "ViewportParams.h"
 #include "MathHelper.h"
@@ -49,8 +49,8 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
     Q_UNUSED( texColorizer );
     Q_UNUSED( dirtyRect );
 
-    const unsigned int maxTileX = 2 << tileZoomLevel;
-    const unsigned int maxTileY = 2 << tileZoomLevel;
+    const unsigned int maxTileX = m_tileLoader->tileColumnCount( tileZoomLevel );
+    const unsigned int maxTileY = m_tileLoader->tileRowCount( tileZoomLevel );
 
     /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
 
