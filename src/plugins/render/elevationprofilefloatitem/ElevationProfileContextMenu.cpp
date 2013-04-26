@@ -10,10 +10,12 @@
 // Copyright 2013      Roman Karlstetter <roman.karlstetter@googlemail.com>
 //
 #include "ElevationProfileContextMenu.h"
+
+#include "ElevationProfileDataSource.h"
 #include "ElevationProfileFloatItem.h"
 #include "MarbleDebug.h"
 
-namespace Marble{
+namespace Marble {
 
 ElevationProfileContextMenu::ElevationProfileContextMenu(ElevationProfileFloatItem *floatItem):
     QObject(floatItem),
@@ -26,10 +28,10 @@ ElevationProfileContextMenu::ElevationProfileContextMenu(ElevationProfileFloatIt
 
 QMenu *ElevationProfileContextMenu::getMenu()
 {
-    if(!m_contextMenu){
+    if (!m_contextMenu) {
         m_contextMenu = m_floatItem->contextMenu();
 
-        foreach( QAction *action, m_contextMenu->actions() ) {
+        foreach ( QAction *action, m_contextMenu->actions() ) {
             if ( action->text() == tr( "&Configure..." ) ) {
                 m_contextMenu->removeAction( action );
                 break;
@@ -52,12 +54,12 @@ QMenu *ElevationProfileContextMenu::getMenu()
 void ElevationProfileContextMenu::updateContextMenuEntries()
 {
     // context menu has not yet been initialized, this functions is called as last step of initialization
-    if(!m_contextMenu) {
+    if (!m_contextMenu) {
         return;
     }
 
     // completely rebuild selection, TODO could be possibly improved to only add/remove items incrementally
-    foreach(QAction* action, m_selectionActions){
+    foreach (QAction* action, m_selectionActions) {
         m_contextMenu->removeAction( action );
     }
 
@@ -66,7 +68,7 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
     m_selectionActions.clear();
 
     // add route data source (if available)
-    if( m_floatItem->m_routeDataSource->isDataAvailable()) {
+    if ( m_floatItem->m_routeDataSource->isDataAvailable()) {
         QAction *route = new QAction( tr( "Route" ), m_contextMenu );
         route->setActionGroup(m_sourceGrp);
         route->setCheckable(true);
@@ -76,9 +78,9 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
     }
 
     // add tracks (if available)
-    if( m_floatItem->m_trackDataSource->isDataAvailable()) {
+    if ( m_floatItem->m_trackDataSource->isDataAvailable()) {
         QStringList sources = m_floatItem->m_trackDataSource->sourceDescriptions();
-        for (int i = 0; i<sources.size(); ++i){
+        for (int i = 0; i<sources.size(); ++i) {
             QAction *track = new QAction( tr("Track: ") + sources[i], m_contextMenu);
             connect(track, SIGNAL(triggered()), m_trackMapper, SLOT(map()));
             track->setCheckable(true);
@@ -91,14 +93,14 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
     }
 
     // no route or track available, add disabled action to inform user about it
-    if( m_selectionActions.isEmpty() ){
-        QAction *empty = new QAction( tr( "Create a route or load a track from file to view its elevation profile." ), m_contextMenu);
-        empty->setEnabled(false);
-        m_selectionActions.append(empty);
+    if ( m_selectionActions.isEmpty() ) {
+        QAction *disabledInformationAction = new QAction( tr( "Create a route or load a track from file to view its elevation profile." ), m_contextMenu);
+        disabledInformationAction->setEnabled(false);
+        m_selectionActions.append(disabledInformationAction);
     }
 
-    foreach(QAction* a, m_selectionActions){
-        m_contextMenu->addAction(a);
+    foreach (QAction *action, m_selectionActions) {
+        m_contextMenu->addAction(action);
     }
 }
 

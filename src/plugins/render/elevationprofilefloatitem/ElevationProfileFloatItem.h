@@ -19,11 +19,9 @@
 #include "ElevationProfilePlotAxis.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataLineString.h"
 #include "GeoGraphicsItem.h"
 #include "LabelGraphicsItem.h"
-#include "ElevationProfileDataSource.h"
-#include "ElevationProfileContextMenu.h"
-
 
 namespace Ui
 {
@@ -33,6 +31,10 @@ namespace Ui
 namespace Marble
 {
 
+class ElevationProfileContextMenu;
+class ElevationProfileDataSource;
+class ElevationProfileTrackDataSource;
+class ElevationProfileRouteDataSource;
 class GeoDataPlacemark;
 class MarbleWidget;
 class RoutingModel;

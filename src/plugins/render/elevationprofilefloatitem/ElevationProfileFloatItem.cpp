@@ -12,14 +12,10 @@
 
 #include "ElevationProfileFloatItem.h"
 
-#include <QContextMenuEvent>
-#include <QRect>
-#include <QPainter>
-#include <QPushButton>
-#include <QMenu>
-#include <QMouseEvent>
-
+#include "ElevationProfileContextMenu.h"
+#include "ElevationProfileDataSource.h"
 #include "ui_ElevationProfileConfigWidget.h"
+
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
@@ -31,6 +27,13 @@
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
+
+#include <QContextMenuEvent>
+#include <QRect>
+#include <QPainter>
+#include <QPushButton>
+#include <QMenu>
+#include <QMouseEvent>
 
 namespace Marble
 {

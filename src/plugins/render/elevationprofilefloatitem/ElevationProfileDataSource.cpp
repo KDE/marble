@@ -10,16 +10,22 @@
 // Copyright 2013      Roman Karlstetter <roman.karlstetter@googlemail.com>
 //
 #include "ElevationProfileDataSource.h"
+
 #include "ElevationModel.h"
+
 #include "GeoDataDocument.h"
-#include "GeoDataTreeModel.h"
+#include "GeoDataLineString.h"
 #include "GeoDataObject.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataTrack.h"
+#include "GeoDataTreeModel.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
+#include "MarbleModel.h"
 #include "routing/Route.h"
 #include "routing/RoutingModel.h"
 #include "routing/RoutingManager.h"
+
 #include <QFileInfo>
 
 namespace Marble
@@ -54,9 +60,6 @@ QList<QPointF> ElevationProfileDataSource::calculateElevationData( const GeoData
 }
 // end of impl of ElevationProfileDataSource
 
-/*
- * ElevationProfileTrackDataSource
- */
 ElevationProfileTrackDataSource::ElevationProfileTrackDataSource( const MarbleModel *marbleModel, QObject *parent ) :
     ElevationProfileDataSource( parent )
 {
@@ -73,7 +76,7 @@ QStringList ElevationProfileTrackDataSource::sourceDescriptions() const
 
 void ElevationProfileTrackDataSource::setSourceIndex(int index)
 {
-    if(m_currentSourceIndex != index){
+    if (m_currentSourceIndex != index) {
         m_currentSourceIndex = index;
         requestUpdate();
     }
@@ -101,81 +104,82 @@ qreal ElevationProfileTrackDataSource::getElevation(const GeoDataCoordinates &co
     return coordinates.altitude();
 }
 
-void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *obj)
+void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *object)
 {
-    const GeoDataDocument *doc = dynamic_cast<const GeoDataDocument *>(obj);
-    if(!doc){
+    const GeoDataDocument *document = dynamic_cast<const GeoDataDocument *>(object);
+    if (!document) {
         return;// don't know what to do if not a document
     }
     QList<const GeoDataTrack *> trackList;
 
-    for(int i = 0; i<doc->size(); ++i){
-        const GeoDataFeature * c = doc->child(i);
-        const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>(c);
-        if(!placemark) {
+    for (int i = 0; i<document->size(); ++i) {
+        const GeoDataFeature *feature = document->child(i);
+        const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>(feature);
+        if (!placemark) {
             continue;
         }
-        const GeoDataMultiGeometry *multi = dynamic_cast<const GeoDataMultiGeometry *>(placemark->geometry());
-        if(!multi){
+        const GeoDataMultiGeometry *multiGeometry = dynamic_cast<const GeoDataMultiGeometry *>(placemark->geometry());
+        if (!multiGeometry) {
             continue;
         }
-        for(int i = 0; i<multi->size(); i++){
-            const GeoDataTrack *track = dynamic_cast<const GeoDataTrack *>(multi->child(i));
-            if (track){
+        for (int i = 0; i<multiGeometry->size(); i++) {
+            const GeoDataTrack *track = dynamic_cast<const GeoDataTrack *>(multiGeometry->child(i));
+            if (track) {
                 mDebug() << "new GeoDataTrack for ElevationProfile detected";
                 trackList.append(track);
             }
         }
     }
 
-    if(trackList.isEmpty()){
+    if (trackList.isEmpty()) {
         return;
     }
 
     // update internal datastructures
-    m_trackHash.insert(doc->fileName(), trackList);
+    m_trackHash.insert(document->fileName(), trackList);
 
     const GeoDataTrack *selectedTrack = 0;
-    if(m_currentSourceIndex < m_trackList.size()){
+    if (m_currentSourceIndex < m_trackList.size()) {
         selectedTrack = m_trackList[m_currentSourceIndex];
     }
 
     m_trackChooserList.clear();
     m_trackList.clear();
-    QHashIterator<QString,   QList<const GeoDataTrack *> > i(m_trackHash);
+    QHashIterator<QString, QList<const GeoDataTrack *> > i(m_trackHash);
     while (i.hasNext()) {
         i.next();
         mDebug() << i.key() << ": " << i.value() << endl;
         QFileInfo info(i.key());
         QString filename = info.fileName();
         QList<const GeoDataTrack *> list = i.value();
-        for(int i = 0; i<list.size(); ++i){
+        for (int i = 0; i<list.size(); ++i) {
             m_trackList << list[i];
             m_trackChooserList << QString(filename + ": " + QString::number(i));
         }
     }
-    if(selectedTrack){
+    if (selectedTrack) {
         m_currentSourceIndex = m_trackList.indexOf(selectedTrack);
     }
 
     emit sourceCountChanged();
 }
 
-void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *obj)
+void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *object)
 {
-    if(m_trackList.size() == 0){
+    if (m_trackList.size() == 0) {
         // no track loaded, nothing to remove
         return;
     }
-    const GeoDataDocument *topLevelDoc = dynamic_cast<const GeoDataDocument *>(obj);
-    if(!topLevelDoc){
+
+    const GeoDataDocument *topLevelDoc = dynamic_cast<const GeoDataDocument*>(object);
+    if (!topLevelDoc) {
         return;// don't know what to do if not a document
     }
 
     const QString key = topLevelDoc->fileName();
     const QList<const GeoDataTrack *> list = m_trackHash.value(key);
     const GeoDataTrack *selectedTrack = m_trackList[m_currentSourceIndex];
-    for(int i = 0; i<list.size(); i++){
+    for (int i = 0; i<list.size(); i++) {
         int idx = m_trackList.indexOf(list[i]);
         m_trackList.removeAt(idx);
         m_trackChooserList.removeAt(idx);
@@ -183,18 +187,16 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *obj)
     m_trackHash.remove(key);
 
     m_currentSourceIndex = m_trackList.indexOf(selectedTrack);
-    if(m_currentSourceIndex == -1){
+    if (m_currentSourceIndex == -1) {
         m_currentSourceIndex = 0;
     }
+
     emit sourceCountChanged();
     requestUpdate();
 }
 
 // end of impl of ElevationProfileTrackDataSource
 
- /*
-  * ElevationProfileRouteDataSource
-  */
 ElevationProfileRouteDataSource::ElevationProfileRouteDataSource( const MarbleModel *marbleModel, QObject *parent ) :
     ElevationProfileDataSource( parent ),
     m_routingModel( marbleModel ? marbleModel->routingManager()->routingModel() : 0 ),
@@ -211,7 +213,7 @@ ElevationProfileRouteDataSource::ElevationProfileRouteDataSource( const MarbleMo
 
 void ElevationProfileRouteDataSource::requestUpdate()
 {
-    if(m_routeAvailable != isDataAvailable()){
+    if (m_routeAvailable != isDataAvailable()) {
         // availability of route changed
         emit sourceCountChanged();
         m_routeAvailable = isDataAvailable();

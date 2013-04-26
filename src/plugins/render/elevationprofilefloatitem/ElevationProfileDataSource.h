@@ -13,27 +13,28 @@
 #ifndef ELEVATIONPROFILEDATASOURCE_H
 #define ELEVATIONPROFILEDATASOURCE_H
 
-#include <QtCore/QObject>
-#include <QtCore/QList>
-#include <QtCore/QPoint>
+#include <QObject>
 
-#include "GeoDataLineString.h"
-#include "GeoDataTrack.h"
-#include "MarbleModel.h"
+#include <QHash>
+#include <QList>
+#include <QPointF>
+#include <QStringList>
 
 namespace Marble
 {
 
 class ElevationModel;
+class GeoDataCoordinates;
+class GeoDataLineString;
+class GeoDataObject;
+class GeoDataTrack;
+class MarbleModel;
 class RoutingModel;
 
 class ElevationProfileDataSource : public QObject
 {
     Q_OBJECT
-signals:
-    void dataUpdated(const GeoDataLineString &points, QList<QPointF> elevationData);
-public slots:
-    virtual void requestUpdate() = 0;
+
 public:
     ElevationProfileDataSource( QObject *parent = 0 );
 
@@ -42,8 +43,14 @@ public:
      * @return true if data is available to display
      */
     virtual bool isDataAvailable() const = 0;
-signals:
+
+public Q_SLOTS:
+    virtual void requestUpdate() = 0;
+
+Q_SIGNALS:
     void sourceCountChanged();
+    void dataUpdated( const GeoDataLineString &points, const QList<QPointF> &elevationData );
+
 protected:
     QList<QPointF> calculateElevationData(const GeoDataLineString &lineString) const;
     virtual qreal getElevation(const GeoDataCoordinates &coordinates) const = 0;
@@ -55,23 +62,29 @@ protected:
 class ElevationProfileTrackDataSource : public ElevationProfileDataSource
 {
     Q_OBJECT
+
 public:
     ElevationProfileTrackDataSource( const MarbleModel *marbleModel, QObject *parent = 0 );
+
+    virtual bool isDataAvailable() const;
+
     QStringList sourceDescriptions() const;
+
     void setSourceIndex(int index);
+
     int currentSourceIndex() const;
 
+public Q_SLOTS:
     virtual void requestUpdate();
-    virtual bool isDataAvailable() const;
+
 protected:
     virtual qreal getElevation(const GeoDataCoordinates &coordinates) const;
 
-private slots:
-    void handleObjectAdded(GeoDataObject *obj);
-    void handleObjectRemoved(GeoDataObject *obj);
+private Q_SLOTS:
+    void handleObjectAdded( GeoDataObject *object );
+    void handleObjectRemoved( GeoDataObject *object );
 
 private:
-
     QHash<QString, QList<const GeoDataTrack *> > m_trackHash;
     QStringList m_trackChooserList;
     QList<const GeoDataTrack *> m_trackList;
@@ -84,22 +97,24 @@ private:
 class ElevationProfileRouteDataSource : public ElevationProfileDataSource
 {
     Q_OBJECT
+
 public:
     ElevationProfileRouteDataSource( const MarbleModel *marbleModel, QObject *parent = 0 );
-public slots:
-    virtual void requestUpdate();
+
     virtual bool isDataAvailable() const;
+
+public Q_SLOTS:
+    virtual void requestUpdate();
+
 protected:
     virtual qreal getElevation(const GeoDataCoordinates &coordinates) const;
 
-private slots:
 private:
     const RoutingModel *const m_routingModel;
     const ElevationModel *const m_elevationModel;
     bool m_routeAvailable; // save state if route is available to notify FloatItem when this changes
-
-
 };
+
 }
 
 #endif // ELEVATIONPROFILEDATASOURCE_H
