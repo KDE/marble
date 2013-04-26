@@ -49,6 +49,7 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
                                    const QRect &dirtyRect,
                                    TextureColorizer *texColorizer )
 {
+    Q_UNUSED( painter );
     Q_UNUSED( texColorizer );
     Q_UNUSED( dirtyRect );
 
@@ -83,19 +84,19 @@ void VectorTileMapper::mapTexture( GeoPainter *painter,
     // When changing zoom, download everything inside the screen
     if ( left && right && up && down )
 
-                mapTexture( viewport, tileZoomLevel, painter->mapQuality(), minX, minY, maxX, maxY );
+                mapTexture( viewport, tileZoomLevel, minX, minY, maxX, maxY );
 
     // When only moving screen, just download the new tiles
     else if ( left || right || up || down ){
 
         if ( left )
-            mapTexture( viewport, tileZoomLevel, painter->mapQuality(), minX, m_minTileY, m_minTileX, m_maxTileY );
+            mapTexture( viewport, tileZoomLevel, minX, m_minTileY, m_minTileX, m_maxTileY );
         if ( right )
-            mapTexture( viewport, tileZoomLevel, painter->mapQuality(), m_maxTileX, m_minTileY, maxX, m_maxTileY );
+            mapTexture( viewport, tileZoomLevel, m_maxTileX, m_minTileY, maxX, m_maxTileY );
         if ( up )
-            mapTexture( viewport, tileZoomLevel, painter->mapQuality(), m_minTileX, minY, m_maxTileX, m_minTileY );
+            mapTexture( viewport, tileZoomLevel, m_minTileX, minY, m_maxTileX, m_minTileY );
         if ( down )
-            mapTexture( viewport, tileZoomLevel, painter->mapQuality(), m_minTileX, m_maxTileY, m_maxTileX, maxY );
+            mapTexture( viewport, tileZoomLevel, m_minTileX, m_maxTileY, m_maxTileX, maxY );
 
         // During testing discovered that this code above does not request the "corner" tiles
 
@@ -118,11 +119,9 @@ void VectorTileMapper::initTileRangeCoords( int tileZoomLevel ){
     m_maxTileY = 0;
 }
 
-void VectorTileMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality,
+void VectorTileMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel,
                                    unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY )
 {
-    Q_UNUSED( mapQuality);
-
     // Reset backend
     m_tileLoader->resetTilehash();
 

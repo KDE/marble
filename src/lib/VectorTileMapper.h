@@ -49,7 +49,7 @@ Q_SIGNALS:
     void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
 
 private:
-    void mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
+    void mapTexture( const ViewportParams *viewport, int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
 
     unsigned int lon2tilex(double lon, int z);
 
