@@ -116,8 +116,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @return a list of all Placemarks in the MarbleModel.
      */
     GeoDataTreeModel *treeModel();
+    const GeoDataTreeModel *treeModel() const;
+
     QAbstractItemModel *placemarkModel();
     const QAbstractItemModel *placemarkModel() const;
+
     QItemSelectionModel *placemarkSelectionModel();
 
     /**
