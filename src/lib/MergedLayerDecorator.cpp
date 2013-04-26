@@ -28,7 +28,9 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
+#include "GeoSceneTextureTile.h"
 #include "GeoSceneTiled.h"
+#include "GeoSceneVectorTile.h"
 #include "MapThemeManager.h"
 #include "StackedTile.h"
 #include "TileLoaderHelper.h"
@@ -177,16 +179,16 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
 {
     QVector<QSharedPointer<Tile> > tiles;
 
-    foreach ( const GeoSceneTiled *textureLayer, textureLayers ) {
-        const TileId tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
+    foreach ( const GeoSceneTiled *layer, textureLayers ) {
+        const TileId tileId( layer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
 
-        mDebug() << Q_FUNC_INFO << textureLayer->sourceDir() << tileId << textureLayer->tileSize() << textureLayer->fileFormat();
+        mDebug() << Q_FUNC_INFO << layer->sourceDir() << tileId << layer->tileSize() << layer->fileFormat();
 
         // Blending (how to merge the images into an only image)
-        const Blending *blending = d->m_blendingFactory.findBlending( textureLayer->blending() );
-        if ( blending == 0 && !textureLayer->blending().isEmpty() ) {
-            mDebug() << Q_FUNC_INFO << "could not find blending" << textureLayer->blending();
+        const Blending *blending = d->m_blendingFactory.findBlending( layer->blending() );
+        if ( blending == 0 && !layer->blending().isEmpty() ) {
+            mDebug() << Q_FUNC_INFO << "could not find blending" << layer->blending();
         }
 
         /*
@@ -196,7 +198,8 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         */
 
         // ImageTile
-        if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ){
+        if ( layer->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ) {
+            const GeoSceneTextureTile *const textureLayer = static_cast<const GeoSceneTextureTile *>( layer );
             const QImage tileImage = d->m_tileLoader->loadTileImage( textureLayer, tileId, DownloadBrowse );
 
             QSharedPointer<Tile> tile( new TextureTile( tileId, tileImage, blending ) );
@@ -204,9 +207,9 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId, const 
         }
 
         // VectorTile
-        if ( textureLayer->nodeType() == GeoSceneTypes::GeoSceneVectorTileType ){
-
-            GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( textureLayer, tileId, DownloadBrowse );
+        if ( layer->nodeType() == GeoSceneTypes::GeoSceneVectorTileType ) {
+            const GeoSceneVectorTile *const vectorLayer = static_cast<const GeoSceneVectorTile *>( layer );
+            GeoDataDocument* tileVectordata = d->m_tileLoader->loadTileVectorData( vectorLayer, tileId, DownloadBrowse );
 
             QSharedPointer<Tile> tile( new VectorTile( tileId, tileVectordata ) );
 

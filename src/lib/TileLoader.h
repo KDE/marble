@@ -37,7 +37,8 @@ namespace Marble
 {
 class HttpDownloadManager;
 class GeoSceneTiled;
-class GeoSceneTexture;
+class GeoSceneTextureTile;
+class GeoSceneVectorTile;
 
 class TileLoader: public QObject
 {
@@ -52,8 +53,8 @@ class TileLoader: public QObject
 
     explicit TileLoader(HttpDownloadManager * const, const PluginManager * );
 
-    QImage loadTileImage( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const );
-    GeoDataDocument* loadTileVectorData( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const usage );
+    QImage loadTileImage( GeoSceneTextureTile const *textureLayer, TileId const & tileId, DownloadUsage const );
+    GeoDataDocument* loadTileVectorData( GeoSceneVectorTile const *textureLayer, TileId const & tileId, DownloadUsage const usage );
     void downloadTile( GeoSceneTiled const *textureLayer, TileId const &, DownloadUsage const );
 
     static int maximumTileLevel( GeoSceneTiled const & texture );
@@ -86,7 +87,7 @@ class TileLoader: public QObject
  private:
     static QString tileFileName( GeoSceneTiled const * textureLayer, TileId const & );
     void triggerDownload( GeoSceneTiled const *textureLayer, TileId const &, DownloadUsage const );
-    QImage scaledLowerLevelTile( GeoSceneTiled const * textureLayer, TileId const & ) const;
+    QImage scaledLowerLevelTile( GeoSceneTextureTile const * textureLayer, TileId const & ) const;
 
     // For vectorTile parsing
     const PluginManager * m_pluginManager;

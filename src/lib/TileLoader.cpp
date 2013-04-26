@@ -27,7 +27,9 @@
 
 #include "MarbleRunnerManager.h"
 
+#include "GeoSceneTextureTile.h"
 #include "GeoSceneTiled.h"
+#include "GeoSceneVectorTile.h"
 #include "GeoDataContainer.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
@@ -52,7 +54,7 @@ TileLoader::TileLoader(HttpDownloadManager * const downloadManager, const Plugin
 // If the tile image file is locally available:
 //     - if not expired: create ImageTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
-QImage TileLoader::loadTileImage( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const usage )
+QImage TileLoader::loadTileImage( GeoSceneTextureTile const *textureLayer, TileId const & tileId, DownloadUsage const usage )
 {
     QString const fileName = tileFileName( textureLayer, tileId );
 
@@ -86,7 +88,7 @@ QImage TileLoader::loadTileImage( GeoSceneTiled const *textureLayer, TileId cons
 }
 
 
-GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneTiled const *textureLayer, TileId const & tileId, DownloadUsage const usage )
+GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTile const *textureLayer, TileId const & tileId, DownloadUsage const usage )
 {
     // FIXME: textureLayer->fileFormat() could be used in the future for use just that parser, instead of all available parsers
 
@@ -235,7 +237,7 @@ void TileLoader::triggerDownload( GeoSceneTiled const *textureLayer, TileId cons
     emit downloadTile( sourceUrl, destFileName, idStr, usage );
 }
 
-QImage TileLoader::scaledLowerLevelTile( const GeoSceneTiled * textureLayer, TileId const & id ) const
+QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTile * textureLayer, TileId const & id ) const
 {
     mDebug() << Q_FUNC_INFO << id;
 
