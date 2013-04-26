@@ -58,7 +58,6 @@ private:
 private:
     class RenderJob;
     StackedTileLoader *const m_tileLoader;
-    int m_radius;
     QThreadPool m_threadPool;
     unsigned int m_minTileX;
     unsigned int m_minTileY;

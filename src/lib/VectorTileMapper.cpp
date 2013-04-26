@@ -35,7 +35,6 @@ VectorTileMapper::~VectorTileMapper()
 VectorTileMapper::VectorTileMapper( StackedTileLoader *tileLoader )
     : TextureMapperInterface()
     , m_tileLoader( tileLoader )
-    , m_radius( 0 )
     , m_threadPool()
 {
     m_minTileX = 0;
