@@ -40,8 +40,6 @@ public:
                              const QRect &dirtyRect,
                              TextureColorizer *texColorizer );
 
-    void initTileRangeCoords( int tileZoomLevel );
-
 public Q_SLOTS:
     void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );
 
@@ -51,18 +49,13 @@ Q_SIGNALS:
 private:
     void mapTexture( const ViewportParams *viewport, int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
 
-    unsigned int lon2tilex(double lon, int z);
-
-    unsigned int lat2tiley(double lat, int z);
+    unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
+    unsigned int lat2tileY( qreal lat, unsigned int maxTileY );
 
 private:
     class RenderJob;
     StackedTileLoader *const m_tileLoader;
     QThreadPool m_threadPool;
-    unsigned int m_minTileX;
-    unsigned int m_minTileY;
-    unsigned int m_maxTileX;
-    unsigned int m_maxTileY;
 };
 
 

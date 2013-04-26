@@ -249,7 +249,6 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
         d->m_tileZoomLevel = tileLevel;
         d->m_documents.clear();
         d->m_tileLoader.cleanupTilehash();
-        d->m_texmapper->initTileRangeCoords( d->m_tileZoomLevel );
     }
     // else remove only tiles that are not shown on the screen
     else{
