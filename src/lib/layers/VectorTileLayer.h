@@ -88,8 +88,6 @@ class VectorTileLayer : public QObject, public LayerInterface
      */
     void setupTextureMapper();
 
-    void setNeedsUpdate();
-
     void setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings );
 
     void setVolatileCacheLimit( quint64 kilobytes );

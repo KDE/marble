@@ -209,6 +209,7 @@ void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * docume
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
                               const QString &renderPos, GeoSceneLayer *layer )
 {
+    Q_UNUSED( painter );
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
@@ -260,9 +261,7 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
             }
     }
 
-    const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
-
-    d->m_texmapper->mapTexture( painter, viewport, d->m_tileZoomLevel, dirtyRect, 0 );
+    d->m_texmapper->mapTexture( viewport, d->m_tileZoomLevel );
 
     return true;
 }
@@ -310,13 +309,6 @@ void VectorTileLayer::setupTextureMapper( )
 
     connect( d->m_texmapper, SIGNAL(tileCompleted(TileId,GeoDataDocument*,QString)),
              this, SLOT(updateTile(TileId,GeoDataDocument*,QString)) );
-}
-
-void VectorTileLayer::setNeedsUpdate()
-{
-    if ( d->m_texmapper ) {
-        d->m_texmapper->setRepaintNeeded();
-    }
 }
 
 void VectorTileLayer::setVolatileCacheLimit( quint64 kilobytes )

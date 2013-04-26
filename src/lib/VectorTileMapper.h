@@ -11,34 +11,28 @@
 #ifndef MARBLE_VECTORTILEMAPPER_H
 #define MARBLE_VECTORTILEMAPPER_H
 
-#include "TextureMapperInterface.h"
+#include <QtCore/QObject>
 
-#include "MarbleGlobal.h"
-#include "TileId.h"
 #include "GeoDataDocument.h"
 
 #include <QtCore/QThreadPool>
-#include <QtGui/QImage>
 
 
 namespace Marble
 {
 
 class StackedTileLoader;
+class TileId;
+class ViewportParams;
 
-class VectorTileMapper : public QObject, public TextureMapperInterface
+class VectorTileMapper : public QObject
 {
     Q_OBJECT
 
 public:
     explicit VectorTileMapper( StackedTileLoader *tileLoader );
-    ~VectorTileMapper();
 
-    virtual void mapTexture( GeoPainter *painter,
-                             const ViewportParams *viewport,
-                             int tileZoomLevel,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer );
+    void mapTexture( const ViewportParams *viewport, int tileZoomLevel );
 
 public Q_SLOTS:
     void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );

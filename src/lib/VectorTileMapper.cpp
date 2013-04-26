@@ -14,13 +14,8 @@
 
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
-#include "GeoPainter.h"
-#include "GeoDataPolygon.h"
-#include "Quaternion.h"
-#include "ScanlineTextureMapperContext.h"
 #include "StackedTileLoader.h"
 #include "StackedTile.h"
-#include "TileLoaderHelper.h"
 
 #include "ViewportParams.h"
 #include "MathHelper.h"
@@ -28,27 +23,14 @@
 
 using namespace Marble;
 
-VectorTileMapper::~VectorTileMapper()
-{
-}
-
 VectorTileMapper::VectorTileMapper( StackedTileLoader *tileLoader )
-    : TextureMapperInterface()
-    , m_tileLoader( tileLoader )
+    : m_tileLoader( tileLoader )
     , m_threadPool()
 {
 }
 
-void VectorTileMapper::mapTexture( GeoPainter *painter,
-                                   const ViewportParams *viewport,
-                                   int tileZoomLevel,
-                                   const QRect &dirtyRect,
-                                   TextureColorizer *texColorizer )
+void VectorTileMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel )
 {
-    Q_UNUSED( painter );
-    Q_UNUSED( texColorizer );
-    Q_UNUSED( dirtyRect );
-
     const unsigned int maxTileX = m_tileLoader->tileColumnCount( tileZoomLevel );
     const unsigned int maxTileY = m_tileLoader->tileRowCount( tileZoomLevel );
 
