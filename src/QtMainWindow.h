@@ -93,7 +93,7 @@ private Q_SLOTS:
 
     // File Menu
     void  openFile();
-    void  openMapSite();
+    void  openMapDialog();
     void  exportMapScreenShot();
     void  showDownloadRegionDialog();
     void  printMapScreenShot();

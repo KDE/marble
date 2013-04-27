@@ -46,6 +46,9 @@
         <file alias="marble/edit-clear.png">../icons/16x16/edit-clear.png</file>
         <file alias="marble/list-add.png">../icons/16x16/list-add.png</file>
         <file alias="marble/reverse.png">../icons/16x16/reverse.png</file>
+        <file alias="marble/dialog-ok.png">../icons/16x16/dialog-ok.png</file>
+        <file alias="marble/edit-delete.png">../icons/16x16/edit-delete.png</file>
+        <file alias="marble/system-software-update.png">../icons/16x16/system-software-update.png</file>
         <file alias="marble/webpopup/arrow2_topleft.png">../../data/bitmaps/webpopup/arrow2_topleft.png</file>
         <file alias="marble/webpopup/arrow2_topleft_shadow.png">../../data/bitmaps/webpopup/arrow2_topleft_shadow.png</file>
         <file alias="marble/webpopup/webpopup2.png">../../data/bitmaps/webpopup/webpopup2.png</file>

@@ -26,13 +26,33 @@ namespace Marble
 class MapItemDelegate : public QStyledItemDelegate
 {
 public:
-    MapItemDelegate( QListView* view );
+    MapItemDelegate( QListView* view, NewstuffModel* newstuffModel );
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
 
+protected:
+    bool editorEvent( QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index );
+
 private:
+    enum Element {
+        Icon,
+        Text,
+        InstallButton,
+        UpgradeButton,
+        CancelButton,
+        RemoveButton,
+        ProgressReport
+    };
+
+    int buttonWidth( const QStyleOptionViewItem &option ) const;
+    QStyleOptionButton button( Element element, const QStyleOptionViewItem &option ) const;
+    QRect position( Element element, const QStyleOptionViewItem &option ) const;
     QString text( const QModelIndex &index ) const;
     QListView* m_view;
+    NewstuffModel* m_newstuffModel;
+    mutable int m_buttonWidth;
+    int const m_margin;
+    int const m_iconSize;
 };
 
 class MapThemeDownloadDialog::Private : public Ui::MapThemeDownloadDialog
@@ -53,10 +73,12 @@ MapThemeDownloadDialog::MapThemeDownloadDialog( QWidget* parent ) :
 
     d->m_model.setTargetDirectory( MarbleDirs::localPath() + "/maps" );
     d->m_model.setProvider( "http://edu.kde.org/marble/newstuff/maps.xml" );
+    d->m_model.setRegistryFile( QDir::homePath() + "/.kde/share/apps/knewstuff3/marble.knsregistry", Marble::NewstuffModel::NameTag );
 
     d->listView->setIconSize( QSize( 130, 130 ) );
     d->listView->setAlternatingRowColors( true );
-    d->listView->setItemDelegate( new MapItemDelegate( d->listView) );
+    d->listView->setUniformItemSizes( false );
+    d->listView->setItemDelegate( new MapItemDelegate( d->listView, &d->m_model ) );
     d->listView->setModel( &d->m_model );
 }
 
@@ -65,13 +87,17 @@ MapThemeDownloadDialog::~MapThemeDownloadDialog()
     delete d;
 }
 
-MapItemDelegate::MapItemDelegate( QListView *view ) :
-    m_view( view )
+MapItemDelegate::MapItemDelegate( QListView *view , NewstuffModel *newstuffModel ) :
+    m_view( view ),
+    m_newstuffModel( newstuffModel ),
+    m_buttonWidth( 0 ),
+    m_margin( 5 ),
+    m_iconSize( 16 )
 {
     // nothing to do
 }
 
-void MapItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void MapItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const
 {
     QStyleOptionViewItemV4 styleOption = option;
     styleOption.text = QString();
@@ -84,46 +110,59 @@ void MapItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
     }
 
     // Draw the map preview icon
-    QRect const rect = option.rect;
-    QSize const iconSize = option.decorationSize;
-    QRect const iconRect( rect.topLeft(), iconSize );
+    QRect const iconRect = position( Icon, option );
     QIcon const icon = qVariantValue<QIcon>( index.data( Qt::DecorationRole ) );
-    painter->drawPixmap( iconRect, icon.pixmap( iconSize ) );
+    painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
 
-    // Draw summary, author, license info as text
-    int const padding = 5;
-    int const button_width = 50;
+    // Draw summary, author, and similar information
     QTextDocument document;
-    document.setTextWidth( rect.width() - iconSize.width() - button_width - 4 * padding );
+    QRect const textRect = position( Text, option );
+    document.setTextWidth( textRect.width() );
     document.setDefaultFont( option.font );
     document.setHtml( text( index ) );
 
     painter->save();
-    painter->translate( iconRect.topRight() + QPoint( padding, 0 ) );
-    painter->save();
-    painter->setClipRect( 0, 0, document.textWidth(), rect.height() );
+    painter->translate( textRect.topLeft() );
+    painter->setClipRect( 0, 0, textRect.width(), textRect.height() );
     document.documentLayout()->draw( painter, paintContext );
     painter->restore();
 
     // Draw buttons and installation progress
-    //QApplication::style()->draw
-    QStyleOptionButton buttonOption;
-    buttonOption.state = option.state;
-    buttonOption.state &= ~QStyle::State_HasFocus;
+    if ( index.data( NewstuffModel::IsTransitioning ).toBool() ) {
+        qint64 total = qMax( qint64( 1 ), qVariantValue<qint64>( index.data( NewstuffModel::PayloadSize ) ) );
+        qint64 progress = qVariantValue<qint64>( index.data( NewstuffModel::DownloadedSize ) );
 
-    buttonOption.palette = option.palette;
-    buttonOption.features = QStyleOptionButton::None;
-    buttonOption.text = tr( "Install" );
-    QSize contentSize = buttonOption.fontMetrics.size( 0, buttonOption.text ) + QSize( 4, 4 );
-    QSize buttonSize = QApplication::style()->sizeFromContents( QStyle::CT_PushButton,
-                                                                &buttonOption,
-                                                                contentSize );
-    buttonOption.rect.setTopLeft( QPoint( 0, 0 ) );
-    buttonOption.rect.setSize( buttonSize );
+        QStyleOptionProgressBar progressBarOption;
+        progressBarOption.rect = position( ProgressReport, option );
+        progressBarOption.minimum = 0;
+        progressBarOption.maximum = 100;
+        progressBarOption.progress = ( 100.0 * progress / total );
+        progressBarOption.text = QString::number( progressBarOption.progress ) + "%";
+        progressBarOption.textVisible = true;
+        QApplication::style()->drawControl(QStyle::CE_ProgressBar, &progressBarOption, painter);
 
-    painter->translate( document.textWidth() + padding, padding );
-    QApplication::style()->drawControl( QStyle::CE_PushButton, &buttonOption, painter );
-    painter->restore();
+        QStyleOptionButton cancelButton = button( CancelButton, option );
+        QRect installRect = position( CancelButton, option );
+        cancelButton.rect = installRect;
+        QApplication::style()->drawControl( QStyle::CE_PushButton, &cancelButton, painter );
+    } else {
+        bool const installed = index.data( NewstuffModel::IsInstalled ).toBool();
+        bool const upgradable = index.data( NewstuffModel::IsUpgradable ).toBool();
+        if ( !installed || upgradable ) {
+            Element element = !installed ? InstallButton : UpgradeButton;
+            QStyleOptionButton installButton = button( element, option );
+            QRect installRect = position( element, option );
+            installButton.rect = installRect;
+            QApplication::style()->drawControl( QStyle::CE_PushButton, &installButton, painter );
+        }
+
+        if ( installed ) {
+            QStyleOptionButton removeButton = button( RemoveButton, option );
+            QRect removeRect = position( RemoveButton, option );
+            removeButton.rect = removeRect;
+            QApplication::style()->drawControl( QStyle::CE_PushButton, &removeButton, painter );
+        }
+    }
 }
 
 QSize MapItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -132,37 +171,148 @@ QSize MapItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModel
         QSize const iconSize = option.decorationSize;
         QTextDocument doc;
         doc.setDefaultFont( option.font );
-        doc.setTextWidth( m_view->width() - iconSize.width() - 50 - 15 );
+        doc.setTextWidth( m_view->width() - iconSize.width() - buttonWidth( option ) - 4 * m_margin );
         doc.setHtml( text( index ) );
-        return QSize( iconSize.width() + doc.size().width(), iconSize.height() );
+        return QSize( iconSize.width() + doc.size().width(), qMax( iconSize.height(), qRound( doc.size().height() ) ) );
     }
 
     return QSize();
 }
 
+bool MapItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *, const QStyleOptionViewItem &option, const QModelIndex &index)
+{
+    if ( ( event->type() == QEvent::MouseButtonRelease ) ) {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent*>( event );
+        if ( index.data( NewstuffModel::IsTransitioning ).toBool() ) {
+            QRect cancelRect = position( CancelButton, option );
+            if ( cancelRect.contains( mouseEvent->pos() ) ) {
+                m_newstuffModel->cancel( index.row() );
+                return true;
+            }
+        } else {
+            bool const installed = index.data( NewstuffModel::IsInstalled ).toBool();
+            bool const upgradable = index.data( NewstuffModel::IsUpgradable ).toBool();
+            if ( !installed || upgradable ) {
+                QRect installRect = position( InstallButton, option );
+                QRect upgradeRect = position( UpgradeButton, option );
+                if ( installRect.contains( mouseEvent->pos() ) || upgradeRect.contains( mouseEvent->pos() ) ) {
+                    m_newstuffModel->install( index.row() );
+                    return true;
+                }
+            }
+
+            if ( installed ) {
+                QRect removeRect = position( RemoveButton, option );
+                if ( removeRect.contains( mouseEvent->pos() ) ) {
+                    m_newstuffModel->uninstall( index.row() );
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+int MapItemDelegate::buttonWidth(const QStyleOptionViewItem &option) const
+{
+    if ( m_buttonWidth <= 0 ) {
+        int const installWidth = option.fontMetrics.size( 0, tr( "Install" ) ).width();
+        int const removeWidth = option.fontMetrics.size( 0, tr( "Remove" ) ).width();
+        int const cancelWidth = option.fontMetrics.size( 0, tr( "Cancel" ) ).width();
+        int const upgradeWidth = option.fontMetrics.size( 0, tr( "Upgrade" ) ).width();
+        m_buttonWidth = m_iconSize + qMax( qMax( installWidth, removeWidth ),
+                                           qMax( cancelWidth, upgradeWidth ) );
+    }
+
+    return m_buttonWidth;
+}
+
+QStyleOptionButton MapItemDelegate::button( Element element, const QStyleOptionViewItem &option ) const
+{
+    QStyleOptionButton result;
+    result.state = option.state;
+    result.state &= ~QStyle::State_HasFocus;
+
+    result.palette = option.palette;
+    result.features = QStyleOptionButton::None;
+
+    switch (element) {
+    case InstallButton:
+        result.text = tr( "Install" );
+        result.icon = QIcon( ":/marble/dialog-ok.png" );
+        result.iconSize = QSize( m_iconSize, m_iconSize );
+        break;
+    case UpgradeButton:
+        result.text = tr( "Update" );
+        result.icon = QIcon( ":/marble/system-software-update.png" );
+        result.iconSize = QSize( m_iconSize, m_iconSize );
+        break;
+    case CancelButton:
+        result.text = tr( "Cancel" );
+        break;
+    case RemoveButton:
+        result.text = tr( "Remove" );
+        result.icon = QIcon( ":/marble/edit-delete.png" );
+        result.iconSize = QSize( m_iconSize, m_iconSize );
+        break;
+    default:
+        // ignored
+        break;
+    }
+
+    return result;
+}
+
+QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &option ) const
+{
+    int const buttonSize = buttonWidth( option );
+    QPoint const topLeftCol1 = option.rect.topLeft();
+    QPoint const topLeftCol2 = topLeftCol1 + QPoint( option.decorationSize.width(), 0 );
+    QPoint const topLeftCol3 = topLeftCol2 + QPoint( option.rect.width() - 3 * m_margin - buttonSize - option.decorationSize.width(), m_margin );
+    switch (element) {
+    case Icon:
+        return QRect( topLeftCol1, option.decorationSize );
+    case Text:
+        return QRect( topLeftCol2, QSize( topLeftCol3.x()-topLeftCol2.x()-m_margin, option.rect.height() ) );
+    case InstallButton:
+    case UpgradeButton:
+    {
+        QStyleOptionButton optionButton = button( element, option );
+        QSize size = option.fontMetrics.size( 0, optionButton.text ) + QSize( 4, 4 );
+        QSize buttonSize = QApplication::style()->sizeFromContents( QStyle::CT_PushButton, &optionButton, size );
+        return QRect( topLeftCol3, buttonSize );
+    }
+    case RemoveButton:
+    case CancelButton:
+    {
+        QStyleOptionButton optionButton = button( element, option );
+        QSize size = option.fontMetrics.size( 0, optionButton.text ) + QSize( 4, 4 );
+        QSize buttonSize = QApplication::style()->sizeFromContents( QStyle::CT_PushButton, &optionButton, size );
+        return QRect( topLeftCol3 + QPoint( 0, option.fontMetrics.height() + 8 + m_margin ), buttonSize );
+    }
+    case ProgressReport:
+    {
+        QSize const progressSize = QSize( buttonSize, option.fontMetrics.height() + 4 );
+        return QRect( topLeftCol3, progressSize );
+    }
+    }
+
+    Q_ASSERT(false);
+    return QRect();
+}
+
 QString MapItemDelegate::text( const QModelIndex &index ) const
 {
-    //    Name = Qt::UserRole + 1,
-    //    Author,
-    //    License,
-    //    Summary,
-    //    Version,
-    //    ReleaseDate,
-    //    Preview,
-    //    Payload,
-    //    InstalledVersion,
-    //    InstalledReleaseDate,
-    //    IsInstalled,
-    //    IsUpgradable,
-    //    Category,
-    //    IsTransitioning,
-    //    PayloadSize
-
-    QString const title = index.data().toString();
-    QString const description = index.data( NewstuffModel::Summary ).toString();
-    QString const license = index.data( NewstuffModel::License ).toString();
-    QString const author = index.data( NewstuffModel::Author ).toString();
-    return QString("<p><b>%1</b></p><p>%2</p><p>Author: %3<br />License: %4</p>").arg( title ).arg( description ).arg(author).arg(license);
+    qreal const size = index.data( NewstuffModel::PayloadSize ).toLongLong() / 1024.0 / 1024.0;
+    return QString("<p><b>%1</b><br />%2</p><p>Author: %3<br />License: %4<br />Version %5 (%6) %7</p>")
+            .arg( index.data().toString() )
+            .arg( index.data( NewstuffModel::Summary ).toString() )
+            .arg( index.data( NewstuffModel::Author ).toString() )
+            .arg( index.data( NewstuffModel::License ).toString() )
+            .arg( index.data( NewstuffModel::Version ).toString() )
+            .arg( index.data( NewstuffModel::ReleaseDate ).toString() )
+            .arg( size > 0 ? QString( "%1 MB" ).arg( size, 0, 'f', 1 ) : QString() );
 }
 
 }

@@ -185,7 +185,7 @@ void MainWindow::createActions()
               this, SLOT(openFile()) );
 
      m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("&Download Maps..."), this);
-     connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapSite()));
+     connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapDialog()));
 
      m_exportMapAct = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
      m_exportMapAct->setShortcut(tr("Ctrl+S"));
@@ -623,10 +623,11 @@ void MainWindow::createDockWidgets()
     }
 }
 
-void MainWindow::openMapSite()
+void MainWindow::openMapDialog()
 {
     QPointer<MapThemeDownloadDialog> dialog( new MapThemeDownloadDialog( this ) );
-    dialog->show();
+    dialog->exec();
+    delete dialog;
 }
 
 void MainWindow::exportMapScreenShot()

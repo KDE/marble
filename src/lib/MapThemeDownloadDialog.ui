@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>628</width>
+    <width>683</width>
     <height>420</height>
    </rect>
   </property>
@@ -23,7 +23,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Abort|QDialogButtonBox::Close</set>
+      <set>QDialogButtonBox::Close</set>
      </property>
     </widget>
    </item>
