@@ -226,15 +226,6 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
         d->m_documents.clear();
         d->m_tileLoader.cleanupTilehash();
     }
-    // else remove only tiles that are not shown on the screen
-    else{
-        foreach( GeoDataLatLonAltBox box , d->m_documents.keys() )
-            if ( !box.intersects( viewport->viewLatLonAltBox() ) ){
-                CacheDocument * document = d->m_documents.take( box );
-                d->m_documents.remove( box );
-                delete document;
-            }
-    }
 
     d->m_texmapper->mapTexture( viewport, d->m_tileZoomLevel );
 
