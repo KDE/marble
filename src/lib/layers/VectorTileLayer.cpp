@@ -78,7 +78,7 @@ public:
     // because a StackedTile in TileLoader will be pointing to it not to have it
     // already parsed if necessary. In order to delete GeoDataDocuments, we will have
     // to notify the TileLoader.
-    QCache< GeoDataLatLonAltBox, CacheDocument> m_documents;
+    QCache< TileId, CacheDocument> m_documents;
 
 };
 
@@ -157,10 +157,10 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 
 VectorTileLayer::~VectorTileLayer()
 {
-    foreach( GeoDataLatLonAltBox box , d->m_documents.keys() ){
-            CacheDocument * document = d->m_documents.take( box );
+    foreach( const TileId &id, d->m_documents.keys() ){
+            CacheDocument * document = d->m_documents.take( id );
             d->m_treeModel->removeDocument( document->document );
-            d->m_documents.remove( box );
+            d->m_documents.remove( id );
             delete document;
         }
     d->m_documents.clear();
@@ -176,11 +176,10 @@ QStringList VectorTileLayer::renderPosition() const
 void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
 {
     Q_UNUSED( format );
-    Q_UNUSED( tileId );
 
-    if ( !d->m_documents.contains( document->latLonAltBox() ) ){
+    if ( !d->m_documents.contains( tileId ) ){
         d->m_treeModel->addDocument( document );
-        d->m_documents.insert( document->latLonAltBox(), new CacheDocument( document, d->m_treeModel ) );
+        d->m_documents.insert( tileId, new CacheDocument( document, d->m_treeModel ) );
     }
 }
 
@@ -250,10 +249,10 @@ void VectorTileLayer::setupTextureMapper( )
 
 void VectorTileLayer::reset()
 {
-    foreach( GeoDataLatLonAltBox box , d->m_documents.keys() ){
-            CacheDocument * document = d->m_documents.take( box );
+    foreach( const TileId &id, d->m_documents.keys() ){
+            CacheDocument * document = d->m_documents.take( id );
             d->m_treeModel->removeDocument( document->document );
-            d->m_documents.remove( box );
+            d->m_documents.remove( id );
             delete document;
         }
     d->m_documents.clear();
