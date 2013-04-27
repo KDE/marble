@@ -45,19 +45,12 @@ class StackedTileLoaderPrivate
 {
 public:
     StackedTileLoaderPrivate( MergedLayerDecorator *mergedLayerDecorator )
-        : m_layerDecorator( mergedLayerDecorator ),
-          m_maxTileLevel( 0 )
+        : m_layerDecorator( mergedLayerDecorator )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
     }
 
-    void detectMaxTileLevel();
-    QVector<GeoSceneTextureTile const *>
-        findRelevantTextureLayers( TileId const & stackedTileId ) const;
-
     MergedLayerDecorator *const m_layerDecorator;
-    int         m_maxTileLevel;
-    QVector<GeoSceneTextureTile const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
     QReadWriteLock m_cacheLock;
@@ -75,52 +68,24 @@ StackedTileLoader::~StackedTileLoader()
     delete d;
 }
 
-void StackedTileLoader::setTextureLayers( QVector<GeoSceneTextureTile const *> & textureLayers )
-{
-    mDebug() << Q_FUNC_INFO;
-
-    d->m_textureLayers = textureLayers;
-
-    clear();
-
-    d->detectMaxTileLevel();
-}
-
-int StackedTileLoader::textureLayersSize()
-{
-    return d->m_textureLayers.size();
-}
-
 int StackedTileLoader::tileColumnCount( int level ) const
 {
-    Q_ASSERT( !d->m_textureLayers.isEmpty() );
-
-    const int levelZeroColumns = d->m_textureLayers.at( 0 )->levelZeroColumns();
-
-    return TileLoaderHelper::levelToColumn( levelZeroColumns, level );
+    return d->m_layerDecorator->tileColumnCount( level );
 }
 
 int StackedTileLoader::tileRowCount( int level ) const
 {
-    Q_ASSERT( !d->m_textureLayers.isEmpty() );
-
-    const int levelZeroRows = d->m_textureLayers.at( 0 )->levelZeroRows();
-
-    return TileLoaderHelper::levelToRow( levelZeroRows, level );
+    return d->m_layerDecorator->tileRowCount( level );
 }
 
 GeoSceneTiled::Projection StackedTileLoader::tileProjection() const
 {
-    Q_ASSERT( !d->m_textureLayers.isEmpty() );
-
-    return d->m_textureLayers.at( 0 )->projection();
+    return d->m_layerDecorator->tileProjection();
 }
 
 QSize StackedTileLoader::tileSize() const
 {
-    Q_ASSERT( !d->m_textureLayers.isEmpty() );
-
-    return d->m_textureLayers.at( 0 )->tileSize();
+    return d->m_layerDecorator->tileSize();
 }
 
 void StackedTileLoader::resetTilehash()
@@ -188,9 +153,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     mDebug() << "load tile from disk:" << stackedTileId;
 
-    QVector<GeoSceneTextureTile const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
-
-    stackedTile = d->m_layerDecorator->loadTile( stackedTileId, textureLayers );
+    stackedTile = d->m_layerDecorator->loadTile( stackedTileId );
     Q_ASSERT( stackedTile );
     stackedTile->setUsed( true );
 
@@ -202,50 +165,20 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     return stackedTile;
 }
 
-void StackedTileLoader::downloadStackedTile( TileId const & stackedTileId )
-{
-    QVector<GeoSceneTextureTile const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
-    d->m_layerDecorator->downloadStackedTile( stackedTileId, textureLayers, DownloadBulk );
-}
-
 quint64 StackedTileLoader::volatileCacheLimit() const
 {
     return d->m_tileCache.maxCost() / 1024;
 }
 
-void StackedTileLoader::reloadVisibleTiles()
+QList<TileId> StackedTileLoader::visibleTiles() const
 {
-    QHash <TileId, StackedTile*>::iterator itpoint = d->m_tilesOnDisplay.begin();
-    QHash <TileId, StackedTile*>::iterator const endpoint = d->m_tilesOnDisplay.end();
-    for (; itpoint != endpoint; ++itpoint ) {
-        QVector<GeoSceneTextureTile const *> const textureLayers = d->findRelevantTextureLayers( itpoint.key() );
-        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
-        // but since "reload" or "refresh" seems to be a common action of a browser and it
-        // allows for more connections (in our model), use "DownloadBrowse"
-        d->m_layerDecorator->downloadStackedTile( itpoint.key(), textureLayers, DownloadBrowse );
-    }
-}
-
-int StackedTileLoader::maximumTileLevel() const
-{
-    return d->m_maxTileLevel;
+    return d->m_tilesOnDisplay.keys();
 }
 
 int StackedTileLoader::tileCount() const
 {
     return d->m_tileCache.count() + d->m_tilesOnDisplay.count();
 }
-
-void StackedTileLoaderPrivate::detectMaxTileLevel()
-{
-    if ( m_textureLayers.isEmpty() ) {
-        m_maxTileLevel = -1;
-        return;
-    }
-
-    m_maxTileLevel = TileLoader::maximumTileLevel( *m_textureLayers.at( 0 ) );
-}
-
 
 void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 {
@@ -255,9 +188,6 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 
 void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage )
 {
-
-    d->detectMaxTileLevel();
-
     const TileId stackedTileId( 0, tileId.zoomLevel(), tileId.x(), tileId.y() );
 
     StackedTile * displayedTile = d->m_tilesOnDisplay.take( stackedTileId );
@@ -286,29 +216,6 @@ void StackedTileLoader::clear()
     d->m_tileCache.clear(); // clear the tile cache in physical memory
 
     emit cleared();
-}
-
-// 
-QVector<GeoSceneTextureTile const *>
-StackedTileLoaderPrivate::findRelevantTextureLayers( TileId const & stackedTileId ) const
-{
-    QVector<GeoSceneTextureTile const *> result;
-    QVector<GeoSceneTextureTile const *>::const_iterator pos = m_textureLayers.constBegin();
-    QVector<GeoSceneTextureTile const *>::const_iterator const end = m_textureLayers.constEnd();
-    for (; pos != end; ++pos ) {
-        GeoSceneTextureTile const * const candidate = dynamic_cast<GeoSceneTextureTile const *>( *pos );
-        // check if layer is enabled. A layer is considered to be enabled if one of the
-        // following conditions is true:
-        // 1) it is the first layer
-        // 2) there are no settings available (group "Texture Layers" not defined in DGML)
-        // 3) the layer is configured and enabled in the settings
-        // also check, if layer provides tiles for the current level
-        if ( candidate
-             && ( !candidate->hasMaximumTileLevel()
-                  || stackedTileId.zoomLevel() <= candidate->maximumTileLevel() ))
-            result.append( candidate );
-    }
-    return result;
 }
 
 }

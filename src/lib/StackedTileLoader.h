@@ -27,7 +27,6 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QSize>
-#include <QtCore/QVector>
 
 #include "GeoSceneTextureTile.h"
 #include "TileId.h"
@@ -71,10 +70,6 @@ class StackedTileLoader : public QObject
         explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent = 0 );
         virtual ~StackedTileLoader();
 
-        void setTextureLayers( QVector<GeoSceneTextureTile const *> & );
-
-        int textureLayersSize();
-
         int tileColumnCount( int level ) const;
 
         int tileRowCount( int level ) const;
@@ -90,7 +85,6 @@ class StackedTileLoader : public QObject
          *                      and the zoom level.
          */
         const StackedTile* loadTile( TileId const &stackedTileId );
-        void downloadStackedTile( TileId const & stackedTileId );
 
         /**
          * Resets the internal tile hash.
@@ -113,13 +107,7 @@ class StackedTileLoader : public QObject
         /**
          * @brief Reloads the tiles that are currently displayed.
          */
-        void reloadVisibleTiles();
-
-        /**
-         * Returns the highest level in which some tiles are theoretically
-         * available for the current texture layers.
-         */
-        int maximumTileLevel() const;
+        QList<TileId> visibleTiles() const;
 
         /**
          * @brief Return the number of tiles in the cache.

@@ -121,12 +121,8 @@ void TextureLayer::Private::updateTextureLayers()
         }
     }
 
-    if ( !result.isEmpty() ) {
-        const GeoSceneTextureTile *const firstTexture = result.at( 0 );
-        m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
-        m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
-    }
-    m_tileLoader.setTextureLayers( result );
+    m_layerDecorator.setTextureLayers( result );
+    m_tileLoader.clear();
 
     mapChanged();
 }
@@ -213,7 +209,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     if ( d->m_textures.isEmpty() )
         return false;
 
-    if ( d->m_tileLoader.textureLayersSize() == 0 )
+    if ( d->m_layerDecorator.textureLayersSize() == 0 )
         return false;
 
     if ( !d->m_texmapper )
@@ -227,8 +223,8 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
-    const int levelZeroWidth = d->m_tileLoader.tileSize().width() * d->m_tileLoader.tileColumnCount( 0 );
-    const int levelZeroHight = d->m_tileLoader.tileSize().height() * d->m_tileLoader.tileRowCount( 0 );
+    const int levelZeroWidth = d->m_layerDecorator.tileSize().width() * d->m_layerDecorator.tileColumnCount( 0 );
+    const int levelZeroHight = d->m_layerDecorator.tileSize().height() * d->m_layerDecorator.tileRowCount( 0 );
     const int levelZeroMinDimension = qMin( levelZeroWidth, levelZeroHight );
 
     // limit to 1 as dirty fix for invalid entry linearLevel
@@ -240,7 +236,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
                                                                          // to work around rounding errors when the radius
                                                                          // roughly equals the global texture width
 
-    const int tileLevel = qMin<int>( d->m_tileLoader.maximumTileLevel(), tileLevelF );
+    const int tileLevel = qMin<int>( d->m_layerDecorator.maximumTileLevel(), tileLevelF );
 
     if ( tileLevel != d->m_tileZoomLevel ) {
         d->m_tileZoomLevel = tileLevel;
@@ -345,12 +341,17 @@ void TextureLayer::reset()
 
 void TextureLayer::reload()
 {
-    d->m_tileLoader.reloadVisibleTiles();
+    foreach ( const TileId &id, d->m_tileLoader.visibleTiles() ) {
+        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
+        // but since "reload" or "refresh" seems to be a common action of a browser and it
+        // allows for more connections (in our model), use "DownloadBrowse"
+        d->m_layerDecorator.downloadStackedTile( id, DownloadBrowse );
+    }
 }
 
 void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
 {
-    d->m_tileLoader.downloadStackedTile( stackedTileId );
+    d->m_layerDecorator.downloadStackedTile( stackedTileId, DownloadBulk );
 }
 
 void TextureLayer::setMapTheme( const QVector<const GeoSceneTextureTile *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
@@ -380,22 +381,22 @@ int TextureLayer::tileZoomLevel() const
 
 QSize TextureLayer::tileSize() const
 {
-    return d->m_tileLoader.tileSize();
+    return d->m_layerDecorator.tileSize();
 }
 
 GeoSceneTiled::Projection TextureLayer::tileProjection() const
 {
-    return d->m_tileLoader.tileProjection();
+    return d->m_layerDecorator.tileProjection();
 }
 
 int TextureLayer::tileColumnCount( int level ) const
 {
-    return d->m_tileLoader.tileColumnCount( level );
+    return d->m_layerDecorator.tileColumnCount( level );
 }
 
 int TextureLayer::tileRowCount( int level ) const
 {
-    return d->m_tileLoader.tileRowCount( level );
+    return d->m_layerDecorator.tileRowCount( level );
 }
 
 qint64 TextureLayer::volatileCacheLimit() const
@@ -405,8 +406,8 @@ qint64 TextureLayer::volatileCacheLimit() const
 
 int TextureLayer::preferredRadiusCeil( int radius ) const
 {
-    const int tileWidth = d->m_tileLoader.tileSize().width();
-    const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
+    const int tileWidth = d->m_layerDecorator.tileSize().width();
+    const int levelZeroColumns = d->m_layerDecorator.tileColumnCount( 0 );
     const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
     const qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
     const int tileLevel = qCeil( tileLevelF );
@@ -419,8 +420,8 @@ int TextureLayer::preferredRadiusCeil( int radius ) const
 
 int TextureLayer::preferredRadiusFloor( int radius ) const
 {
-    const int tileWidth = d->m_tileLoader.tileSize().width();
-    const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
+    const int tileWidth = d->m_layerDecorator.tileSize().width();
+    const int levelZeroColumns = d->m_layerDecorator.tileColumnCount( 0 );
     const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
     const qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
     const int tileLevel = qFloor( tileLevelF );

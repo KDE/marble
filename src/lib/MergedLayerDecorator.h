@@ -17,8 +17,10 @@
 #define MARBLE_MERGEDLAYERDECORATOR_H
 
 #include <QtCore/QSharedPointer>
+#include <QtCore/QSize>
 #include <QtCore/QVector>
 
+#include "GeoSceneTextureTile.h"
 #include "MarbleGlobal.h"
 
 class QImage;
@@ -26,7 +28,7 @@ class QString;
 
 namespace Marble
 {
-class GeoSceneTextureTile;
+
 class SunLocator;
 class StackedTile;
 class Tile;
@@ -39,15 +41,29 @@ class MergedLayerDecorator
     MergedLayerDecorator( TileLoader * const tileLoader, const SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
-    StackedTile *loadTile( const TileId &id, const QVector<const GeoSceneTextureTile *> &textureLayers ) const;
+    void setTextureLayers( const QVector<const GeoSceneTextureTile *> &textureLayers );
 
-    StackedTile *updateTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage ) const;
+    int textureLayersSize() const;
 
-    void downloadStackedTile( const TileId &id, const QVector<GeoSceneTextureTile const *> &textureLayers, DownloadUsage usage );
+    /**
+     * Returns the highest level in which some tiles are theoretically
+     * available for the current texture layers.
+     */
+    int maximumTileLevel() const;
 
-    void setThemeId( const QString &themeId );
+    int tileColumnCount( int level ) const;
 
-    void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );
+    int tileRowCount( int level ) const;
+
+    GeoSceneTextureTile::Projection tileProjection() const;
+
+    QSize tileSize() const;
+
+    StackedTile *loadTile( const TileId &id );
+
+    StackedTile *updateTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage );
+
+    void downloadStackedTile( const TileId &id, DownloadUsage usage );
 
     void setShowSunShading( bool show );
     bool showSunShading() const;
