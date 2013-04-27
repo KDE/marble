@@ -46,6 +46,7 @@ public:
     QUrl m_payloadUrl;
     QDomNode m_registryNode;
     qint64 m_payloadSize;
+    qint64 m_downloadedSize;
 
     NewstuffItem();
 
@@ -149,7 +150,7 @@ private:
     const int m_index;
 };
 
-NewstuffItem::NewstuffItem() : m_payloadSize( -2 )
+NewstuffItem::NewstuffItem() : m_payloadSize( -2 ), m_downloadedSize( 0 )
 {
     // nothing to do
 }
@@ -466,6 +467,7 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     roles[Category] = "category";
     roles[IsTransitioning] = "transitioning";
     roles[PayloadSize] = "size";
+    roles[DownloadedSize] = "downloaded";
     setRoleNames( roles );
 }
 
@@ -513,6 +515,7 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
 
             return qMax<qint64>( -1, size );
         }
+        case DownloadedSize: return d->m_items.at( index.row() ).m_downloadedSize;
         }
     }
 
@@ -696,6 +699,14 @@ void NewstuffModel::updateProgress( qint64 bytesReceived, qint64 bytesTotal )
 {
     qreal const progress = qBound<qreal>( 0.0, 0.9 * bytesReceived / qreal( bytesTotal ), 1.0 );
     emit installationProgressed( d->m_currentAction.first, progress );
+    NewstuffItem &item = d->m_items[d->m_currentAction.first];
+    item.m_payloadSize = bytesTotal;
+    if ( qreal(bytesReceived-item.m_downloadedSize)/bytesTotal >= 0.01 || progress >= 0.9 ) {
+        // Only consider download progress of 1% and more as a data change
+        item.m_downloadedSize = bytesReceived;
+        QModelIndex const affected = index( d->m_currentAction.first );
+        emit dataChanged( affected, affected );
+    }
 }
 
 void NewstuffModel::retrieveData()
