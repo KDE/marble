@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2011 Utku Aydın <utkuaydin34@gmail.com>
+// Copyright 2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2013 Dennis Nienhüser <earthwings@gentoo.org>
 //
 
 #ifndef MARBLE_MAPTHEMEDOWNLOADDIALOG_H
