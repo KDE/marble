@@ -23,7 +23,6 @@
 #include "MarbleDebug.h"
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
-#include "SunLocator.h"
 #include "TileLoader.h"
 #include "ViewportParams.h"
 #include "GeoDataTreeModel.h"
@@ -60,7 +59,6 @@ public:
 
 public:
     VectorTileLayer  *const m_parent;
-    const SunLocator *const m_sunLocator;
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
@@ -102,7 +100,6 @@ VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
                                   VectorTileLayer *parent,
                                   GeoDataTreeModel *treeModel)
     : m_parent( parent )
-    , m_sunLocator( sunLocator )
     , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
@@ -176,16 +173,6 @@ QStringList VectorTileLayer::renderPosition() const
     return QStringList() << "SURFACE";
 }
 
-bool VectorTileLayer::showSunShading() const
-{
-    return d->m_layerDecorator.showSunShading();
-}
-
-bool VectorTileLayer::showCityLights() const
-{
-    return d->m_layerDecorator.showCityLights();
-}
-
 void VectorTileLayer::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
 {
     Q_UNUSED( format );
@@ -254,35 +241,6 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-void VectorTileLayer::setShowSunShading( bool show )
-{
-    disconnect( d->m_sunLocator, SIGNAL(positionChanged(qreal,qreal)),
-                this, SLOT(reset()) );
-
-    if ( show ) {
-        connect( d->m_sunLocator, SIGNAL(positionChanged(qreal,qreal)),
-                 this,       SLOT(reset()) );
-    }
-
-    d->m_layerDecorator.setShowSunShading( show );
-
-    reset();
-}
-
-void VectorTileLayer::setShowCityLights( bool show )
-{
-    d->m_layerDecorator.setShowCityLights( show );
-
-    reset();
-}
-
-void VectorTileLayer::setShowTileId( bool show )
-{
-    d->m_layerDecorator.setShowTileId( show );
-
-    reset();
-}
-
 void VectorTileLayer::setupTextureMapper( )
 {
     if ( d->m_textures.isEmpty() )
@@ -299,11 +257,6 @@ void VectorTileLayer::setupTextureMapper( )
              this, SLOT(updateTile(TileId,GeoDataDocument*,QString)) );
 }
 
-void VectorTileLayer::setVolatileCacheLimit( quint64 kilobytes )
-{
-    d->m_tileLoader.setVolatileCacheLimit( kilobytes );
-}
-
 void VectorTileLayer::reset()
 {
     foreach( GeoDataLatLonAltBox box , d->m_documents.keys() ){
@@ -314,16 +267,6 @@ void VectorTileLayer::reset()
         }
     d->m_documents.clear();
     d->m_tileLoader.clear();
-}
-
-void VectorTileLayer::reload()
-{
-    d->m_tileLoader.reloadVisibleTiles();
-}
-
-void VectorTileLayer::downloadTile( const TileId &tileId )
-{
-    d->m_tileLoader.downloadStackedTile( tileId );
 }
 
 void VectorTileLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings )
@@ -337,64 +280,6 @@ void VectorTileLayer::setMapTheme( const QVector<const GeoSceneTiled *> &texture
     }
 
     d->updateTextureLayers();
-}
-
-int VectorTileLayer::tileZoomLevel() const
-{
-    return d->m_tileZoomLevel;
-}
-
-QSize VectorTileLayer::tileSize() const
-{
-    return d->m_tileLoader.tileSize();
-}
-
-GeoSceneTiled::Projection VectorTileLayer::tileProjection() const
-{
-    return d->m_tileLoader.tileProjection();
-}
-
-int VectorTileLayer::tileColumnCount( int level ) const
-{
-    return d->m_tileLoader.tileColumnCount( level );
-}
-
-int VectorTileLayer::tileRowCount( int level ) const
-{
-    return d->m_tileLoader.tileRowCount( level );
-}
-
-qint64 VectorTileLayer::volatileCacheLimit() const
-{
-    return d->m_tileLoader.volatileCacheLimit();
-}
-
-int VectorTileLayer::preferredRadiusCeil( int radius ) const
-{
-    const int tileWidth = d->m_tileLoader.tileSize().width();
-    const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
-    const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
-    const qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
-    const int tileLevel = qCeil( tileLevelF );
-
-    if ( tileLevel < 0 )
-        return ( tileWidth * levelZeroColumns / 4 ) >> (-tileLevel);
-
-    return ( tileWidth * levelZeroColumns / 4 ) << tileLevel;
-}
-
-int VectorTileLayer::preferredRadiusFloor( int radius ) const
-{
-    const int tileWidth = d->m_tileLoader.tileSize().width();
-    const int levelZeroColumns = d->m_tileLoader.tileColumnCount( 0 );
-    const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
-    const qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
-    const int tileLevel = qFloor( tileLevelF );
-
-    if ( tileLevel < 0 )
-        return ( tileWidth * levelZeroColumns / 4 ) >> (-tileLevel);
-
-    return ( tileWidth * levelZeroColumns / 4 ) << tileLevel;
 }
 
 }

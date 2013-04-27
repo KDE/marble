@@ -51,36 +51,9 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     QStringList renderPosition() const;
 
-    bool showSunShading() const;
-    bool showCityLights() const;
-
-    /**
-     * @brief Return the current tile zoom level. For example for OpenStreetMap
-     *        possible values are 1..18, for BlueMarble 0..6.
-     */
-    int tileZoomLevel() const;
-
-    QSize tileSize() const;
-
-    GeoSceneTiled::Projection tileProjection() const;
-
-    int tileColumnCount( int level ) const;
-    int tileRowCount( int level ) const;
-
-    qint64 volatileCacheLimit() const;
-
-    int preferredRadiusCeil( int radius ) const;
-    int preferredRadiusFloor( int radius ) const;
-
  public Q_SLOTS:
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
-
-    void setShowSunShading( bool show );
-
-    void setShowCityLights( bool show );
-
-    void setShowTileId( bool show );
 
     /**
      * @brief  Set the Projection used for the map
@@ -90,13 +63,7 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     void setMapTheme( const QVector<const GeoSceneTiled *> &textures, GeoSceneGroup *textureLayerSettings );
 
-    void setVolatileCacheLimit( quint64 kilobytes );
-
     void reset();
-
-    void reload();
-
-    void downloadTile( const TileId &tileId );
 
     void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );
 
