@@ -41,7 +41,7 @@ Q_SIGNALS:
     void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
 
 private:
-    void mapTexture( const ViewportParams *viewport, int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
+    void mapTexture( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
 
     unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
     unsigned int lat2tileY( qreal lat, unsigned int maxTileY );
@@ -59,7 +59,7 @@ class VectorTileMapper::RenderJob : public QObject, public QRunnable
 
 public:
 
-    RenderJob(StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport,
+    RenderJob(StackedTileLoader *tileLoader, int tileLevel,
               unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY );
 
     virtual void run();
@@ -70,7 +70,6 @@ Q_SIGNALS:
 private:
     StackedTileLoader *const m_tileLoader;
     const int m_tileLevel;
-    const ViewportParams *const m_viewport;
 
     // Variables for storing current screen tiles
     unsigned int m_minTileX;

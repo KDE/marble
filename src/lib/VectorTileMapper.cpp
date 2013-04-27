@@ -65,33 +65,33 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, int tileZoomL
     // When changing zoom, download everything inside the screen
     if ( left && right && up && down )
 
-                mapTexture( viewport, tileZoomLevel, minX, minY, maxX, maxY );
+                mapTexture( tileZoomLevel, minX, minY, maxX, maxY );
 
     // When only moving screen, just download the new tiles
     else if ( left || right || up || down ){
 
         if ( left )
-            mapTexture( viewport, tileZoomLevel, minX, maxTileY, maxTileX, 0 );
+            mapTexture( tileZoomLevel, minX, maxTileY, maxTileX, 0 );
         if ( right )
-            mapTexture( viewport, tileZoomLevel, 0, maxTileY, maxX, 0 );
+            mapTexture( tileZoomLevel, 0, maxTileY, maxX, 0 );
         if ( up )
-            mapTexture( viewport, tileZoomLevel, maxTileX, minY, 0, maxTileY );
+            mapTexture( tileZoomLevel, maxTileX, minY, 0, maxTileY );
         if ( down )
-            mapTexture( viewport, tileZoomLevel, maxTileX, 0, 0, maxY );
+            mapTexture( tileZoomLevel, maxTileX, 0, 0, maxY );
 
         // During testing discovered that this code above does not request the "corner" tiles
 
     }
 }
 
-void VectorTileMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel,
+void VectorTileMapper::mapTexture( int tileZoomLevel,
                                    unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY )
 {
     // Reset backend
     m_tileLoader->resetTilehash();
 
     // Create render thread
-    RenderJob *const job = new RenderJob( m_tileLoader, tileZoomLevel, viewport,
+    RenderJob *const job = new RenderJob( m_tileLoader, tileZoomLevel,
                                           minTileX, minTileY, maxTileX, maxTileY);
 
     // Connect the parser thread to the VectorTileMapper for recieving tiles
@@ -125,11 +125,10 @@ unsigned int VectorTileMapper::lat2tileY( qreal lat, unsigned int maxTileY )
     return (unsigned int)floor((1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * maxTileY);
 }
 
-VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel, const ViewportParams *viewport,
+VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel,
                                         unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY )
     : m_tileLoader( tileLoader ),
       m_tileLevel( tileLevel ),
-      m_viewport( viewport ),
       m_minTileX( minTileX ),
       m_minTileY( minTileY ),
       m_maxTileX( maxTileX ),
