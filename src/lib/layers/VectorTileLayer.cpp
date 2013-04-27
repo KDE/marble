@@ -157,13 +157,6 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 
 VectorTileLayer::~VectorTileLayer()
 {
-    foreach( const TileId &id, d->m_documents.keys() ){
-            CacheDocument * document = d->m_documents.take( id );
-            d->m_treeModel->removeDocument( document->document );
-            d->m_documents.remove( id );
-            delete document;
-        }
-    d->m_documents.clear();
     delete d->m_texmapper;
     delete d;
 }
@@ -249,12 +242,6 @@ void VectorTileLayer::setupTextureMapper( )
 
 void VectorTileLayer::reset()
 {
-    foreach( const TileId &id, d->m_documents.keys() ){
-            CacheDocument * document = d->m_documents.take( id );
-            d->m_treeModel->removeDocument( document->document );
-            d->m_documents.remove( id );
-            delete document;
-        }
     d->m_documents.clear();
     d->m_tileLoader.clear();
 }
