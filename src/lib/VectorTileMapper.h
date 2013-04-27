@@ -34,9 +34,6 @@ public:
 
     void mapTexture( const ViewportParams *viewport, int tileZoomLevel );
 
-public Q_SLOTS:
-    void updateTile(TileId const & tileId, GeoDataDocument *document, QString const & format );
-
 Q_SIGNALS:
     void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
 

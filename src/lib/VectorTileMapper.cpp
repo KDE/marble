@@ -96,7 +96,7 @@ void VectorTileMapper::mapTexture( int tileZoomLevel,
 
     // Connect the parser thread to the VectorTileMapper for recieving tiles
     connect( job, SIGNAL(tileCompleted(TileId,GeoDataDocument*,QString)),
-             this, SLOT(updateTile(TileId,GeoDataDocument*,QString)) );
+             this, SIGNAL(tileCompleted(TileId,GeoDataDocument*,QString)) );
 
     // Start thread
     m_threadPool.start( job );
@@ -107,12 +107,6 @@ void VectorTileMapper::mapTexture( int tileZoomLevel,
     m_threadPool.waitForDone();
 
     m_tileLoader->cleanupTilehash();
-}
-
-void VectorTileMapper::updateTile(TileId const & tileId, GeoDataDocument * document, QString const &format )
-{
-    // We received a vector tile, send it to the VectorTileLayer
-    emit tileCompleted( tileId, document, format );
 }
 
 unsigned int VectorTileMapper::lon2tileX( qreal lon, unsigned int maxTileX )
