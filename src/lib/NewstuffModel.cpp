@@ -239,9 +239,21 @@ void NewstuffModelPrivate::setPreview( int index, const QIcon &previewIcon )
 void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
 {
     if ( reply->operation() == QNetworkAccessManager::HeadOperation ) {
+        const QVariant redirectionAttribute = reply->attribute( QNetworkRequest::RedirectionTargetAttribute );
+        if ( !redirectionAttribute.isNull() ) {
+            for ( int i=0; i<m_items.size(); ++i ) {
+                NewstuffItem &item = m_items[i];
+                if ( item.m_payloadUrl == reply->url() ) {
+                    item.m_payloadUrl = redirectionAttribute.toUrl();
+                }
+            }
+            m_networkAccessManager.head( QNetworkRequest( redirectionAttribute.toUrl() ) );
+            return;
+        }
+
         QVariant const size = reply->header( QNetworkRequest::ContentLengthHeader );
         if ( size.isValid() ) {
-            qint64 length = size.toLongLong();
+            qint64 length = qVariantValue<qint64>( size );
             for ( int i=0; i<m_items.size(); ++i ) {
                 NewstuffItem &item = m_items[i];
                 if ( item.m_payloadUrl == reply->url() ) {
