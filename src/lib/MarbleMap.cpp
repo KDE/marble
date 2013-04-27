@@ -56,6 +56,7 @@
 #include "GeoScenePalette.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneVector.h"
+#include "GeoSceneVectorTile.h"
 #include "GeoSceneZoom.h"
 #include "GeoDataDocument.h"
 #include "LayerManager.h"
@@ -162,7 +163,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_vectorMapLayer( &m_veccomposer ),
     m_textureLayer( model->downloadManager(), model->sunLocator(), &m_veccomposer, model->pluginManager() ),
     m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock() ),
-    m_vectorTileLayer( model->downloadManager(), model->sunLocator(), model->pluginManager(), model->treeModel() ),
+    m_vectorTileLayer( model->downloadManager(), model->pluginManager(), model->treeModel() ),
     m_isLockedToSubSolarPoint( false ),
     m_isSubSolarPointIconVisible( false )
 {
@@ -873,7 +874,7 @@ void MarbleMapPrivate::updateMapTheme()
         // textures will contain texture layers and
         // vectorTiles vectortile layers
         QVector<const GeoSceneTiled *> textures;
-        QVector<const GeoSceneTiled *> vectorTiles;
+        QVector<const GeoSceneVectorTile *> vectorTiles;
 
         foreach( GeoSceneLayer* layer, m_model->mapTheme()->map()->layers() ){
             if ( layer->backend() == dgml::dgmlValue_texture ){
@@ -925,7 +926,7 @@ void MarbleMapPrivate::updateMapTheme()
             else if ( layer->backend() == dgml::dgmlValue_vectortile ){
 
                 foreach ( const GeoSceneAbstractDataset *pos, layer->datasets() ) {
-                    const GeoSceneTiled *const vectorTile = dynamic_cast<GeoSceneTiled const *>( pos );
+                    const GeoSceneVectorTile *const vectorTile = dynamic_cast<GeoSceneVectorTile const *>( pos );
                     if ( !vectorTile )
                         continue;
 
@@ -998,7 +999,6 @@ void MarbleMapPrivate::updateMapTheme()
         m_textureLayer.setShowRelief( q->showRelief() );
 
         m_vectorTileLayer.setMapTheme( vectorTiles, vectorTileLayerSettings );
-        m_vectorTileLayer.setupTextureMapper();
 
         if ( textureLayersOk )
             m_layerManager.addLayer( &m_textureLayer );
@@ -1007,7 +1007,7 @@ void MarbleMapPrivate::updateMapTheme()
     }
     else {
         m_textureLayer.setMapTheme( QVector<const GeoSceneTiled *>(), 0, "", "" );
-        m_vectorTileLayer.setMapTheme( QVector<const GeoSceneTiled *>(), 0 );
+        m_vectorTileLayer.setMapTheme( QVector<const GeoSceneVectorTile *>(), 0 );
     }
 
     // earth

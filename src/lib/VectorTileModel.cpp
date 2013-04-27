@@ -6,33 +6,95 @@
  the source code.
 
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
+ Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 */
 
 #include "VectorTileModel.h"
 
-#include <QtCore/QRunnable>
-
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonBox.h"
+#include "GeoDataTreeModel.h"
+#include "GeoSceneVectorTile.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MathHelper.h"
-#include "StackedTileLoader.h"
-#include "StackedTile.h"
 #include "TileId.h"
+#include "TileLoader.h"
+
+#include <qmath.h>
+#include <QtCore/QThreadPool>
 
 using namespace Marble;
 
-VectorTileModel::VectorTileModel( StackedTileLoader *tileLoader )
-    : m_tileLoader( tileLoader )
-    , m_threadPool()
+TileRunner::TileRunner( TileLoader *loader, const GeoSceneVectorTile *texture, const TileId &id ) :
+    m_loader( loader ),
+    m_texture( texture ),
+    m_id( id )
 {
 }
 
-void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int tileZoomLevel )
+void TileRunner::run()
 {
-    const unsigned int maxTileX = m_tileLoader->tileColumnCount( tileZoomLevel );
-    const unsigned int maxTileY = m_tileLoader->tileRowCount( tileZoomLevel );
+    GeoDataDocument *const document = m_loader->loadTileVectorData( m_texture, m_id, DownloadBrowse );
+
+    emit documentLoaded( m_id, document );
+}
+
+VectorTileModel::CacheDocument::CacheDocument( GeoDataDocument *doc, GeoDataTreeModel *model ) :
+    m_document( doc ),
+    m_treeModel( model )
+{
+    // nothing to do
+}
+
+VectorTileModel::CacheDocument::~CacheDocument()
+{
+    Q_ASSERT( m_treeModel );
+    m_treeModel->removeDocument( m_document );
+}
+
+VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTile *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool ) :
+    m_loader( loader ),
+    m_layer( layer ),
+    m_treeModel( treeModel ),
+    m_threadPool( threadPool ),
+    m_tileZoomLevel( -1 )
+{
+}
+
+void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
+{
+    // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
+    const int levelZeroWidth = m_layer->tileSize().width() * m_layer->levelZeroColumns();
+    const int levelZeroHight = m_layer->tileSize().height() * m_layer->levelZeroRows();
+    const int levelZeroMinDimension = qMin( levelZeroWidth, levelZeroHight );
+
+    qreal linearLevel = ( 4.0 * (qreal)( radius ) / (qreal)( levelZeroMinDimension ) );
+
+    if ( linearLevel < 1.0 )
+        linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
+
+    // As our tile resolution doubles with each level we calculate
+    // the tile level from tilesize and the globe radius via log(2)
+
+    qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
+    int tileZoomLevel = (int)( tileLevelF * 1.00001 );
+    // snap to the sharper tile level a tiny bit earlier
+    // to work around rounding errors when the radius
+    // roughly equals the global texture width
+
+
+    if ( tileZoomLevel > m_layer->maximumTileLevel() )
+        tileZoomLevel = m_layer->maximumTileLevel();
+
+    // if zoom level has changed, empty vectortile cache
+    if ( tileZoomLevel != m_tileZoomLevel ) {
+        m_tileZoomLevel = tileZoomLevel;
+        m_documents.clear();
+    }
+
+    const unsigned int maxTileX = ( 1 << tileZoomLevel ) * m_layer->levelZeroColumns();
+    const unsigned int maxTileY = ( 1 << tileZoomLevel ) * m_layer->levelZeroRows();
 
     /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
 
@@ -84,29 +146,47 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int tileZoomLev
     }
 }
 
+QString VectorTileModel::name() const
+{
+    return m_layer->name();
+}
+
+void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
+{
+    if ( m_tileZoomLevel != id.zoomLevel() ) {
+        delete document;
+        return;
+    }
+
+    m_treeModel->addDocument( document );
+    m_documents.insert( id, new CacheDocument( document, m_treeModel ) );
+}
+
+void VectorTileModel::clear()
+{
+    m_documents.clear();
+}
+
 void VectorTileModel::setViewport( int tileZoomLevel,
                                    unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY )
 {
-    // Reset backend
-    m_tileLoader->resetTilehash();
+    // Download all the tiles inside the given indexes
+    for ( unsigned int x = minTileX; x <= maxTileX; ++x ) {
+        for ( unsigned int y = minTileY; y <= maxTileY; ++y ) {
+           const TileId tileId = TileId( 0, tileZoomLevel, x, y );
 
-    // Create render thread
-    RenderJob *const job = new RenderJob( m_tileLoader, tileZoomLevel,
-                                          minTileX, minTileY, maxTileX, maxTileY);
+           if ( !m_documents.contains( tileId ) ) {
+               GeoDataDocument *const document = new GeoDataDocument;
 
-    // Connect the parser thread to the VectorTileMapper for recieving tiles
-    connect( job, SIGNAL(tileCompleted(TileId,GeoDataDocument*,QString)),
-             this, SIGNAL(tileCompleted(TileId,GeoDataDocument*,QString)) );
+               TileRunner *job = new TileRunner( m_loader, m_layer, tileId );
+               connect( job, SIGNAL(documentLoaded(TileId,GeoDataDocument*)), this, SLOT(updateTile(TileId,GeoDataDocument*)) );
+               m_threadPool->start( job );
 
-    // Start thread
-    m_threadPool.start( job );
-
-    // Aparently there is not needed to wait for it to finish but
-    // waiting prevents having crashes with TileLoader's cache
-    // when cleaning tile hash (duplicated node errors and double free errors)
-    m_threadPool.waitForDone();
-
-    m_tileLoader->cleanupTilehash();
+               m_treeModel->addDocument( document );
+               m_documents.insert( tileId, new CacheDocument( document, m_treeModel ) );
+           }
+        }
+    }
 }
 
 unsigned int VectorTileModel::lon2tileX( qreal lon, unsigned int maxTileX )
@@ -117,34 +197,6 @@ unsigned int VectorTileModel::lon2tileX( qreal lon, unsigned int maxTileX )
 unsigned int VectorTileModel::lat2tileY( qreal lat, unsigned int maxTileY )
 {
     return (unsigned int)floor((1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * maxTileY);
-}
-
-VectorTileModel::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel,
-                                        unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY )
-    : m_tileLoader( tileLoader ),
-      m_tileLevel( tileLevel ),
-      m_minTileX( minTileX ),
-      m_minTileY( minTileY ),
-      m_maxTileX( maxTileX ),
-      m_maxTileY( maxTileY )
-
-{
-}
-
-void VectorTileModel::RenderJob::run()
-{
-    // Download all the tiles inside the given indexes
-    for (unsigned int x = m_minTileX; x <= m_maxTileX; x++)
-        for (unsigned int y = m_minTileY; y <= m_maxTileY; y++)
-        {
-           const TileId tileId = TileId( 0, m_tileLevel, x, y );
-           const StackedTile * tile = m_tileLoader->loadTile( tileId );
-
-           // When tile has vectorData send it to the VectorTileLayer for it to insert
-           // it in the treeModel
-           if ( tile->resultVectorData()->size() > 0 )
-                emit tileCompleted( tileId, tile->resultVectorData(), "JS" );
-        }
 }
 
 #include "VectorTileModel.moc"
