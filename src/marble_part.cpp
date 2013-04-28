@@ -584,8 +584,6 @@ void MarblePart::writeSettings()
     // Get whether animations to the target are enabled
     MarbleSettings::setAnimateTargetVoyage( m_controlView->marbleWidget()->animationsEnabled() );
 
-    m_controlView->marbleModel()->home( homeLon, homeLat, homeZoom );
-
     // Map theme and projection
     MarbleSettings::setMapTheme( m_controlView->marbleWidget()->mapThemeId() );
     MarbleSettings::setProjection( m_controlView->marbleWidget()->projection() );
