@@ -22,20 +22,20 @@ class GeoDataLatLonBox;
 class StackedTileLoader;
 class TileId;
 
-class VectorTileMapper : public QObject
+class VectorTileModel : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit VectorTileMapper( StackedTileLoader *tileLoader );
+    explicit VectorTileModel( StackedTileLoader *tileLoader );
 
-    void mapTexture( const GeoDataLatLonBox &bbox, int tileZoomLevel );
+    void setViewport( const GeoDataLatLonBox &bbox, int tileZoomLevel );
 
 Q_SIGNALS:
     void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
 
 private:
-    void mapTexture( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
+    void setViewport( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
 
     unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
     unsigned int lat2tileY( qreal lat, unsigned int maxTileY );
@@ -47,7 +47,7 @@ private:
 };
 
 
-class VectorTileMapper::RenderJob : public QObject, public QRunnable
+class VectorTileModel::RenderJob : public QObject, public QRunnable
 {
     Q_OBJECT
 

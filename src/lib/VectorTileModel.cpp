@@ -8,7 +8,7 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-#include "VectorTileMapper.h"
+#include "VectorTileModel.h"
 
 #include <QtCore/QRunnable>
 
@@ -23,13 +23,13 @@
 
 using namespace Marble;
 
-VectorTileMapper::VectorTileMapper( StackedTileLoader *tileLoader )
+VectorTileModel::VectorTileModel( StackedTileLoader *tileLoader )
     : m_tileLoader( tileLoader )
     , m_threadPool()
 {
 }
 
-void VectorTileMapper::mapTexture( const GeoDataLatLonBox &bbox, int tileZoomLevel )
+void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int tileZoomLevel )
 {
     const unsigned int maxTileX = m_tileLoader->tileColumnCount( tileZoomLevel );
     const unsigned int maxTileY = m_tileLoader->tileRowCount( tileZoomLevel );
@@ -65,26 +65,26 @@ void VectorTileMapper::mapTexture( const GeoDataLatLonBox &bbox, int tileZoomLev
     // When changing zoom, download everything inside the screen
     if ( left && right && up && down )
 
-                mapTexture( tileZoomLevel, minX, minY, maxX, maxY );
+                setViewport( tileZoomLevel, minX, minY, maxX, maxY );
 
     // When only moving screen, just download the new tiles
     else if ( left || right || up || down ){
 
         if ( left )
-            mapTexture( tileZoomLevel, minX, maxTileY, maxTileX, 0 );
+            setViewport( tileZoomLevel, minX, maxTileY, maxTileX, 0 );
         if ( right )
-            mapTexture( tileZoomLevel, 0, maxTileY, maxX, 0 );
+            setViewport( tileZoomLevel, 0, maxTileY, maxX, 0 );
         if ( up )
-            mapTexture( tileZoomLevel, maxTileX, minY, 0, maxTileY );
+            setViewport( tileZoomLevel, maxTileX, minY, 0, maxTileY );
         if ( down )
-            mapTexture( tileZoomLevel, maxTileX, 0, 0, maxY );
+            setViewport( tileZoomLevel, maxTileX, 0, 0, maxY );
 
         // During testing discovered that this code above does not request the "corner" tiles
 
     }
 }
 
-void VectorTileMapper::mapTexture( int tileZoomLevel,
+void VectorTileModel::setViewport( int tileZoomLevel,
                                    unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY )
 {
     // Reset backend
@@ -109,17 +109,17 @@ void VectorTileMapper::mapTexture( int tileZoomLevel,
     m_tileLoader->cleanupTilehash();
 }
 
-unsigned int VectorTileMapper::lon2tileX( qreal lon, unsigned int maxTileX )
+unsigned int VectorTileModel::lon2tileX( qreal lon, unsigned int maxTileX )
 {
     return (unsigned int)floor((lon + 180.0) / 360.0 * maxTileX);
 }
 
-unsigned int VectorTileMapper::lat2tileY( qreal lat, unsigned int maxTileY )
+unsigned int VectorTileModel::lat2tileY( qreal lat, unsigned int maxTileY )
 {
     return (unsigned int)floor((1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * maxTileY);
 }
 
-VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel,
+VectorTileModel::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileLevel,
                                         unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY )
     : m_tileLoader( tileLoader ),
       m_tileLevel( tileLevel ),
@@ -131,7 +131,7 @@ VectorTileMapper::RenderJob::RenderJob( StackedTileLoader *tileLoader, int tileL
 {
 }
 
-void VectorTileMapper::RenderJob::run()
+void VectorTileModel::RenderJob::run()
 {
     // Download all the tiles inside the given indexes
     for (unsigned int x = m_minTileX; x <= m_maxTileX; x++)
@@ -147,4 +147,4 @@ void VectorTileMapper::RenderJob::run()
         }
 }
 
-#include "VectorTileMapper.moc"
+#include "VectorTileModel.moc"

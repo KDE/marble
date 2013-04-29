@@ -15,7 +15,7 @@
 #include <QtCore/qmath.h>
 #include <QtCore/QCache>
 
-#include "VectorTileMapper.h"
+#include "VectorTileModel.h"
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
 #include "GeoSceneTypes.h"
@@ -63,7 +63,7 @@ public:
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
     int m_tileZoomLevel;
-    VectorTileMapper *m_texmapper;
+    VectorTileModel *m_texmapper;
     QVector<const GeoSceneTiled *> m_textures;
     GeoSceneGroup *m_textureLayerSettings;
 
@@ -219,7 +219,7 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
         d->m_tileLoader.cleanupTilehash();
     }
 
-    d->m_texmapper->mapTexture( viewport->viewLatLonAltBox(), d->m_tileZoomLevel );
+    d->m_texmapper->setViewport( viewport->viewLatLonAltBox(), d->m_tileZoomLevel );
 
     return true;
 }
@@ -232,7 +232,7 @@ void VectorTileLayer::setupTextureMapper( )
     // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
 
-    d->m_texmapper = new VectorTileMapper( &d->m_tileLoader );
+    d->m_texmapper = new VectorTileModel( &d->m_tileLoader );
 
     Q_ASSERT( d->m_texmapper );
 
