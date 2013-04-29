@@ -493,30 +493,17 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
 
 
-    // Reenabling QPainter methods.
-
-    void drawText ( int x, int y, const QString & text );
-    void drawText ( const QPointF & position, const QString & text );
-    void drawText ( const QPoint & position, const QString & text );
-    void drawText(  const QRect & rectangle, int flags, const QString & text,
-                    QRect * boundingRect = 0 );
-    void drawEllipse ( int x, int y, int width, int height );
-    void drawEllipse ( const QRectF & rectangle );
-    void drawImage ( const QRect & target, const QImage & image,
-                     const QRect & source,
-                     Qt::ImageConversionFlags flags = Qt::AutoColor );
-    void drawImage ( const QRect& rect, const QImage& image );
-    void drawImage ( const QRectF& rect, const QImage& image );
-    void drawPixmap ( int x, int y, const QPixmap & pixmap );
-    void drawPixmap ( const QPointF & point, const QPixmap & pixmap );
-    void drawPixmap ( const QPoint & point, const QPixmap & pixmap );
-    void drawPoint ( int x, int y );
-    void drawPolyline( const QPolygonF & polyline );
-    void drawPolygon( const QPolygonF & polygon );
-    void drawLine ( int x1, int y1, int x2, int y2 );
-    void drawRect ( const QRectF & rectangle );
-    void drawRect ( const QRect & rectangle );
-    void drawRect ( int x, int y, int width, int height );
+    // Reenabling QPainter+ClipPainter methods.
+    using QPainter::drawText;
+    using QPainter::drawEllipse;
+    using QPainter::drawImage;
+    using QPainter::drawPixmap;
+    using QPainter::drawPoint;
+    using ClipPainter::drawPolyline;
+    using ClipPainter::drawPolygon;
+    using QPainter::drawLine;
+    using QPainter::drawRect;
+    using QPainter::drawRoundedRect;
 
  private:
     Q_DISABLE_COPY( GeoPainter )
