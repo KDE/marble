@@ -61,7 +61,7 @@ public:
     int m_tileZoomLevel;
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
-    QVector<const GeoSceneTiled *> m_textures;
+    QVector<const GeoSceneTextureTile *> m_textures;
     const GeoSceneGroup *m_textureLayerSettings;
     QString m_runtimeTrace;
     // For scheduling repaints
@@ -101,29 +101,24 @@ void TextureLayer::Private::mapChanged()
 
 void TextureLayer::Private::updateTextureLayers()
 {
-    QVector<GeoSceneTiled const *> result;
+    QVector<GeoSceneTextureTile const *> result;
 
-    foreach ( const GeoSceneTiled *candidate, m_textures ) {
-
-        // Check if the GeoSceneTiled is a TextureTile or VectorTile.
-        // Only TextureTiles have to be used.
-        if ( candidate->nodeType() == GeoSceneTypes::GeoSceneTextureTileType ){
-            bool enabled = true;
-            if ( m_textureLayerSettings ) {
-                const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
-                enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
-            }
-            if ( enabled ) {
-                result.append( candidate );
-                mDebug() << "enabling texture" << candidate->name();
-            } else {
-                mDebug() << "disabling texture" << candidate->name();
-            }
+    foreach ( const GeoSceneTextureTile *candidate, m_textures ) {
+        bool enabled = true;
+        if ( m_textureLayerSettings ) {
+            const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
+            enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
+        }
+        if ( enabled ) {
+            result.append( candidate );
+            mDebug() << "enabling texture" << candidate->name();
+        } else {
+            mDebug() << "disabling texture" << candidate->name();
         }
     }
 
     if ( !result.isEmpty() ) {
-        const GeoSceneTiled *const firstTexture = result.at( 0 );
+        const GeoSceneTextureTile *const firstTexture = result.at( 0 );
         m_layerDecorator.setLevelZeroLayout( firstTexture->levelZeroColumns(), firstTexture->levelZeroRows() );
         m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
     }
@@ -135,9 +130,7 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
     if ( tileImage.isNull() )
         return; // keep tiles in cache to improve performance
 
-    // updateTile needs to know if its an image or another type of file,
-    // so we indicate its format
-    m_tileLoader.updateTile( tileId, tileImage, 0 );
+    m_tileLoader.updateTile( tileId, tileImage );
 
     mapChanged();
 }
@@ -353,7 +346,7 @@ void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
     d->m_tileLoader.downloadStackedTile( stackedTileId );
 }
 
-void TextureLayer::setMapTheme( const QVector<const GeoSceneTiled *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
+void TextureLayer::setMapTheme( const QVector<const GeoSceneTextureTile *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
 {
     delete d->m_texcolorizer;
     d->m_texcolorizer = 0;

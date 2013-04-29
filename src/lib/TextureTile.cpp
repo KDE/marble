@@ -39,10 +39,5 @@ TextureTile::~TextureTile()
 {
 }
 
-const char* TextureTile::nodeType() const
-{
-    return "TextureTile";
-}
-
 }
 

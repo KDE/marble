@@ -35,9 +35,4 @@ Tile::~Tile()
 {
 }
 
-const char* Tile::nodeType() const
-{
-    return "Tile";
-}
-
 }

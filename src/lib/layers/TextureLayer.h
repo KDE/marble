@@ -15,7 +15,7 @@
 #include <QtCore/QObject>
 
 #include "MarbleGlobal.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTextureTile.h"
 #include "GeoDataDocument.h"
 
 #include <QtCore/QSize>
@@ -96,7 +96,7 @@ public Q_SLOTS:
 
     void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTiled *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
+    void setMapTheme( const QVector<const GeoSceneTextureTile *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
 
     void setVolatileCacheLimit( quint64 kilobytes );
 

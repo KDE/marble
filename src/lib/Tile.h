@@ -20,19 +20,10 @@
 #ifndef MARBLE_TILE_H
 #define MARBLE_TILE_H
 
-#include <QtCore/QDateTime>
-#include <QtGui/QImage>
-
 #include "TileId.h"
-#include "GeoDataContainer.h"
-
-#include "MarbleDebug.h"
-
-class QImage;
 
 namespace Marble
 {
-class Blending;
 
 /*!
     \class Tile
@@ -71,30 +62,6 @@ class Tile
 */     
     TileId const & id() const;
 
-/*!
-    \brief Returns the QImage that describes the look of the Tile
-    \return A non-zero pointer to a QImage associated with the tile.
-*/
-    virtual QImage const * image() const;
-
-/*!
-    \brief Returns the kind of blending used for the texture tile.
-    \return A pointer to the blending object used for painting/merging the Tile.
-
-    If no blending is set the pointer returned will be zero.
-*/
-    virtual Blending const * blending() const;
-
-/*!
-   \brief Returns the GeoDataDocument containing de vector data of the Tile
-   \return A non-zero pointer to a GeoDataDocument associated with the tile.
-*/
-    virtual GeoDataDocument * vectorData() const;
-
-    virtual const char* nodeType() const;
-
-    virtual int byteCount() const;
-
  private:
     Q_DISABLE_COPY( Tile )
 
@@ -107,26 +74,6 @@ class Tile
 inline TileId const & Tile::id() const
 {
     return m_id;
-}
-
-inline QImage const * Tile::image() const
-{
-    return 0;
-}
-
-inline GeoDataDocument * Tile::vectorData() const
-{
-    return 0;
-}
-
-inline Blending const * Tile::blending() const
-{
-    return 0;
-}
-
-inline int Tile::byteCount() const
-{
-    return image()->byteCount();
 }
 
 }

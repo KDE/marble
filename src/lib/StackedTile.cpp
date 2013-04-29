@@ -16,7 +16,7 @@
 #include <QtGui/QImage>
 
 #include "MarbleDebug.h"
-#include "Tile.h"
+#include "TextureTile.h"
 
 using namespace Marble;
 
@@ -58,10 +58,9 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 }
 
 
-StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, GeoDataDocument * resultVector, QVector<QSharedPointer<Tile> > const &tiles ) :
+StackedTilePrivate::StackedTilePrivate( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles ) :
       m_id( id ), 
       m_resultImage( resultImage ),
-      m_resultVector( resultVector ),
       m_depth( resultImage.depth() ),
       m_isGrayscale( resultImage.isGrayscale() ),
       m_tiles( tiles ),
@@ -210,12 +209,12 @@ uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     return topLeftValue;
 }
 
-int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<Tile> > &tiles )
+int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<TextureTile> > &tiles )
 {
     int byteCount = resultImage.numBytes();
 
-    QVector<QSharedPointer<Tile> >::const_iterator pos = tiles.constBegin();
-    QVector<QSharedPointer<Tile> >::const_iterator const end = tiles.constEnd();
+    QVector<QSharedPointer<TextureTile> >::const_iterator pos = tiles.constBegin();
+    QVector<QSharedPointer<TextureTile> >::const_iterator const end = tiles.constEnd();
     for (; pos != end; ++pos )
         byteCount += (*pos)->byteCount();
 
@@ -223,15 +222,10 @@ int StackedTilePrivate::calcByteCount( const QImage &resultImage, const QVector<
 }
 
 
-StackedTile::StackedTile( TileId const &id, QImage const &resultImage, GeoDataDocument * resultVector, QVector<QSharedPointer<Tile> > const &tiles )
-    : d( new StackedTilePrivate( id, resultImage, resultVector, tiles ) )
+StackedTile::StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles )
+    : d( new StackedTilePrivate( id, resultImage, tiles ) )
 {
     Q_ASSERT( !tiles.isEmpty() );
-
-    if ( d->m_resultImage.isNull() && d->m_resultVector->size() == 0 ) {
-        qWarning() << "A tile has no image and no vector data. Please rerun the application.";
-        return;
-    }
 
     if ( d->jumpTable32 == 0 && d->jumpTable8 == 0 ) {
         qWarning() << "Color depth" << d->m_depth << " is not supported.";
@@ -288,7 +282,7 @@ int StackedTile::numBytes() const
     return d->m_byteCount;
 }
 
-QVector<QSharedPointer<Tile> > StackedTile::tiles() const
+QVector<QSharedPointer<TextureTile> > StackedTile::tiles() const
 {
     return d->m_tiles;
 }
@@ -296,10 +290,5 @@ QVector<QSharedPointer<Tile> > StackedTile::tiles() const
 QImage const * StackedTile::resultImage() const
 {
     return &d->m_resultImage;
-}
-
-GeoDataDocument * StackedTile::resultVectorData() const
-{
-    return d->m_resultVector;
 }
 

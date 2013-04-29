@@ -873,14 +873,14 @@ void MarbleMapPrivate::updateMapTheme()
 
         // textures will contain texture layers and
         // vectorTiles vectortile layers
-        QVector<const GeoSceneTiled *> textures;
+        QVector<const GeoSceneTextureTile *> textures;
         QVector<const GeoSceneVectorTile *> vectorTiles;
 
         foreach( GeoSceneLayer* layer, m_model->mapTheme()->map()->layers() ){
             if ( layer->backend() == dgml::dgmlValue_texture ){
 
                 foreach ( const GeoSceneAbstractDataset *pos, layer->datasets() ) {
-                    const GeoSceneTiled *const texture = dynamic_cast<GeoSceneTiled const *>( pos );
+                    const GeoSceneTextureTile *const texture = dynamic_cast<GeoSceneTextureTile const *>( pos );
                     if ( !texture )
                         continue;
 
@@ -1006,7 +1006,7 @@ void MarbleMapPrivate::updateMapTheme()
             m_layerManager.addLayer( &m_vectorTileLayer );
     }
     else {
-        m_textureLayer.setMapTheme( QVector<const GeoSceneTiled *>(), 0, "", "" );
+        m_textureLayer.setMapTheme( QVector<const GeoSceneTextureTile *>(), 0, "", "" );
         m_vectorTileLayer.setMapTheme( QVector<const GeoSceneVectorTile *>(), 0 );
     }
 

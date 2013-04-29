@@ -19,15 +19,13 @@
 
 #include "MarbleGlobal.h"
 
-#include "GeoDataContainer.h"
-
 class QImage;
 
 namespace Marble
 {
 
 class StackedTilePrivate;
-class Tile;
+class TextureTile;
 class TileId;
 
 /*!
@@ -62,7 +60,7 @@ class StackedTile
     friend class StackedTileLoader;
 
  public:
-    explicit StackedTile( TileId const &id, QImage const &resultImage, GeoDataDocument * resultVector, QVector<QSharedPointer<Tile> > const &tiles );
+    explicit StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
     virtual ~StackedTile();
 
 /*!
@@ -81,19 +79,13 @@ class StackedTile
     \brief Returns the stack of Tiles
     \return A container of Tile objects.
 */
-    QVector<QSharedPointer<Tile> > tiles() const;
+    QVector<QSharedPointer<TextureTile> > tiles() const;
 
 /*!
     \brief Returns the QImage that describes the merged stack of Tiles
     \return A non-zero pointer to the resulting QImage 
 */
     QImage const * resultImage() const;
-
-/*!
-    \brief Returns the GeoDataDocument that describes the merged stack of Tiles
-    \return A non-zero pointer to the resulting GeoDataDocument
-*/
-    GeoDataDocument *resultVectorData() const;
 
 /*!
     \brief Returns the color value of the result tile at the given integer position.

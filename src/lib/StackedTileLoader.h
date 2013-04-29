@@ -29,10 +29,9 @@
 #include <QtCore/QSize>
 #include <QtCore/QVector>
 
-#include "GeoSceneTiled.h"
+#include "GeoSceneTextureTile.h"
 #include "TileId.h"
 #include "MarbleGlobal.h"
-#include "GeoDataDocument.h"
 
 class QImage;
 class QString;
@@ -72,7 +71,7 @@ class StackedTileLoader : public QObject
         explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent = 0 );
         virtual ~StackedTileLoader();
 
-        void setTextureLayers( QVector<GeoSceneTiled const *> & );
+        void setTextureLayers( QVector<GeoSceneTextureTile const *> & );
 
         int textureLayersSize();
 
@@ -80,7 +79,7 @@ class StackedTileLoader : public QObject
 
         int tileRowCount( int level ) const;
 
-        GeoSceneTiled::Projection tileProjection() const;
+        GeoSceneTextureTile::Projection tileProjection() const;
 
         QSize tileSize() const;
 
@@ -142,7 +141,7 @@ class StackedTileLoader : public QObject
 
         /**
          */
-        void updateTile(TileId const & tileId, QImage const &tileImage , GeoDataDocument *tileData);
+        void updateTile(TileId const & tileId, QImage const &tileImage );
 
     Q_SIGNALS:
         void tileLoaded( TileId const &tileId );

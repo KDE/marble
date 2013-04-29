@@ -52,12 +52,12 @@ public:
     }
 
     void detectMaxTileLevel();
-    QVector<GeoSceneTiled const *>
+    QVector<GeoSceneTextureTile const *>
         findRelevantTextureLayers( TileId const & stackedTileId ) const;
 
     MergedLayerDecorator *const m_layerDecorator;
     int         m_maxTileLevel;
-    QVector<GeoSceneTiled const *> m_textureLayers;
+    QVector<GeoSceneTextureTile const *> m_textureLayers;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
     QReadWriteLock m_cacheLock;
@@ -75,7 +75,7 @@ StackedTileLoader::~StackedTileLoader()
     delete d;
 }
 
-void StackedTileLoader::setTextureLayers( QVector<GeoSceneTiled const *> & textureLayers )
+void StackedTileLoader::setTextureLayers( QVector<GeoSceneTextureTile const *> & textureLayers )
 {
     mDebug() << Q_FUNC_INFO;
 
@@ -188,7 +188,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     // mDebug() << "load Tile from Disk: " << stackedTileId.toString();
 
-    QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
+    QVector<GeoSceneTextureTile const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
 
     stackedTile = d->m_layerDecorator->loadTile( stackedTileId, textureLayers );
     if ( stackedTile ){
@@ -205,7 +205,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
 void StackedTileLoader::downloadStackedTile( TileId const & stackedTileId )
 {
-    QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
+    QVector<GeoSceneTextureTile const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
     d->m_layerDecorator->downloadStackedTile( stackedTileId, textureLayers, DownloadBulk );
 }
 
@@ -219,7 +219,7 @@ void StackedTileLoader::reloadVisibleTiles()
     QHash <TileId, StackedTile*>::iterator itpoint = d->m_tilesOnDisplay.begin();
     QHash <TileId, StackedTile*>::iterator const endpoint = d->m_tilesOnDisplay.end();
     for (; itpoint != endpoint; ++itpoint ) {
-        QVector<GeoSceneTiled const *> const textureLayers = d->findRelevantTextureLayers( itpoint.key() );
+        QVector<GeoSceneTextureTile const *> const textureLayers = d->findRelevantTextureLayers( itpoint.key() );
         // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
         // but since "reload" or "refresh" seems to be a common action of a browser and it
         // allows for more connections (in our model), use "DownloadBrowse"
@@ -254,7 +254,7 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
-void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage, GeoDataDocument * tileData )
+void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImage )
 {
 
     d->detectMaxTileLevel();
@@ -265,7 +265,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
     if ( displayedTile ) {
         Q_ASSERT( !d->m_tileCache.contains( stackedTileId ) );
 
-        StackedTile *const stackedTile = d->m_layerDecorator->updateTile( *displayedTile, tileId, tileImage, tileData );
+        StackedTile *const stackedTile = d->m_layerDecorator->updateTile( *displayedTile, tileId, tileImage );
         d->m_tilesOnDisplay.insert( stackedTileId, stackedTile );
 
         delete displayedTile;
@@ -289,14 +289,14 @@ void StackedTileLoader::clear()
 }
 
 // 
-QVector<GeoSceneTiled const *>
+QVector<GeoSceneTextureTile const *>
 StackedTileLoaderPrivate::findRelevantTextureLayers( TileId const & stackedTileId ) const
 {
-    QVector<GeoSceneTiled const *> result;
-    QVector<GeoSceneTiled const *>::const_iterator pos = m_textureLayers.constBegin();
-    QVector<GeoSceneTiled const *>::const_iterator const end = m_textureLayers.constEnd();
+    QVector<GeoSceneTextureTile const *> result;
+    QVector<GeoSceneTextureTile const *>::const_iterator pos = m_textureLayers.constBegin();
+    QVector<GeoSceneTextureTile const *>::const_iterator const end = m_textureLayers.constEnd();
     for (; pos != end; ++pos ) {
-        GeoSceneTiled const * const candidate = dynamic_cast<GeoSceneTiled const *>( *pos );
+        GeoSceneTextureTile const * const candidate = dynamic_cast<GeoSceneTextureTile const *>( *pos );
         // check if layer is enabled. A layer is considered to be enabled if one of the
         // following conditions is true:
         // 1) it is the first layer

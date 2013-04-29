@@ -77,9 +77,7 @@ class TextureTile : public Tile
 */
     Blending const * blending() const;
 
-    virtual int byteCount() const;
-
-    virtual const char* nodeType() const;
+    int byteCount() const;
 
  private:
     Q_DISABLE_COPY( TextureTile )
