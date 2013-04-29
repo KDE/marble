@@ -12,14 +12,14 @@
 
 #include <QtCore/QRunnable>
 
+#include "GeoDataDocument.h"
+#include "GeoDataLatLonBox.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
+#include "MathHelper.h"
 #include "StackedTileLoader.h"
 #include "StackedTile.h"
-
-#include "ViewportParams.h"
-#include "MathHelper.h"
-
+#include "TileId.h"
 
 using namespace Marble;
 
@@ -29,7 +29,7 @@ VectorTileMapper::VectorTileMapper( StackedTileLoader *tileLoader )
 {
 }
 
-void VectorTileMapper::mapTexture( const ViewportParams *viewport, int tileZoomLevel )
+void VectorTileMapper::mapTexture( const GeoDataLatLonBox &bbox, int tileZoomLevel )
 {
     const unsigned int maxTileX = m_tileLoader->tileColumnCount( tileZoomLevel );
     const unsigned int maxTileY = m_tileLoader->tileRowCount( tileZoomLevel );
@@ -41,19 +41,19 @@ void VectorTileMapper::mapTexture( const ViewportParams *viewport, int tileZoomL
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
     // Sometimes the formula returns wrong huge values, x and y have to be between 0 and 2^ZoomLevel
     unsigned int minX = qMin<unsigned int>( maxTileX,
-                              qMax<unsigned int>( lon2tileX( viewport->viewLatLonAltBox().west(GeoDataCoordinates::Degree), maxTileX ),
+                              qMax<unsigned int>( lon2tileX( bbox.west(GeoDataCoordinates::Degree), maxTileX ),
                                     0 ) );
 
     unsigned int minY = qMin<unsigned int>( maxTileY,
-                              qMax<unsigned int>( lat2tileY( viewport->viewLatLonAltBox().north(GeoDataCoordinates::Degree), maxTileY ),
+                              qMax<unsigned int>( lat2tileY( bbox.north(GeoDataCoordinates::Degree), maxTileY ),
                                     0 ) );
 
     unsigned int maxX = qMax<unsigned int>( 0,
-                              qMin<unsigned int>( lon2tileX( viewport->viewLatLonAltBox().east(GeoDataCoordinates::Degree), maxTileX ),
+                              qMin<unsigned int>( lon2tileX( bbox.east(GeoDataCoordinates::Degree), maxTileX ),
                                     maxTileX ) );
 
     unsigned int maxY = qMax<unsigned int>( 0,
-                              qMin<unsigned int>( lat2tileY( viewport->viewLatLonAltBox().south(GeoDataCoordinates::Degree), maxTileY ),
+                              qMin<unsigned int>( lat2tileY( bbox.south(GeoDataCoordinates::Degree), maxTileY ),
                                     maxTileY ) );
 
     bool left  = minX < maxTileX;

@@ -219,7 +219,7 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
         d->m_tileLoader.cleanupTilehash();
     }
 
-    d->m_texmapper->mapTexture( viewport, d->m_tileZoomLevel );
+    d->m_texmapper->mapTexture( viewport->viewLatLonAltBox(), d->m_tileZoomLevel );
 
     return true;
 }

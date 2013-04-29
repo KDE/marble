@@ -12,18 +12,15 @@
 #define MARBLE_VECTORTILEMAPPER_H
 
 #include <QtCore/QObject>
-
-#include "GeoDataDocument.h"
-
 #include <QtCore/QThreadPool>
-
 
 namespace Marble
 {
 
+class GeoDataDocument;
+class GeoDataLatLonBox;
 class StackedTileLoader;
 class TileId;
-class ViewportParams;
 
 class VectorTileMapper : public QObject
 {
@@ -32,7 +29,7 @@ class VectorTileMapper : public QObject
 public:
     explicit VectorTileMapper( StackedTileLoader *tileLoader );
 
-    void mapTexture( const ViewportParams *viewport, int tileZoomLevel );
+    void mapTexture( const GeoDataLatLonBox &bbox, int tileZoomLevel );
 
 Q_SIGNALS:
     void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
