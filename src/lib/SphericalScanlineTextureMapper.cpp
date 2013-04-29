@@ -99,7 +99,7 @@ void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
         m_repaintNeeded = false;
     }
 
-    const int radius = (int)(1.05 * (qreal)(viewport->radius()));
+    const int radius = viewport->radius();
 
     QRect rect( viewport->width() / 2 - radius, viewport->height() / 2 - radius,
                 2 * radius, 2 * radius);
