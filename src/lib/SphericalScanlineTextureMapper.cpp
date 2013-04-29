@@ -118,12 +118,12 @@ void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport,
     const qint64  radius      = viewport->radius();
 
     // Calculate the actual y-range of the map on the screen 
-    const int skip = ( mapQuality == LowQuality ) ? 1 : 0;
-    const int yTop = ( ( imageHeight / 2 - radius < 0 )
-                       ? 0 : imageHeight / 2 - radius );
-    const int yBottom = ( (yTop == 0)
-                          ? imageHeight - skip
-                          : yTop + radius + radius - skip );
+    const int skip = ( mapQuality == LowQuality ) ? 1
+                                                  : 0;
+    const int yTop = ( imageHeight / 2 - radius >= 0 ) ? imageHeight / 2 - radius
+                                                       : 0;
+    const int yBottom = ( yTop == 0 ) ? imageHeight - skip
+                                      : yTop + radius + radius - skip;
 
     const int numThreads = m_threadPool.maxThreadCount();
     const int yStep = ( yBottom - yTop ) / numThreads;
@@ -194,10 +194,10 @@ void SphericalScanlineTextureMapper::RenderJob::run()
         // In that situation xLeft equals zero.
         // For xRight the situation is similar.
 
-        const int xLeft  = ( ( imageWidth / 2 - rx > 0 )
-                             ? imageWidth / 2 - rx : 0 ); 
-        const int xRight = ( ( imageWidth / 2 - rx > 0 )
-                             ? xLeft + rx + rx : imageWidth );
+        const int xLeft  = ( imageWidth / 2 - rx > 0 ) ? imageWidth / 2 - rx
+                                                       : 0;
+        const int xRight = ( imageWidth / 2 - rx > 0 ) ? xLeft + rx + rx
+                                                       : imageWidth;
 
         QRgb * scanLine = (QRgb*)( m_canvasImage->scanLine( y ) ) + xLeft;
 
