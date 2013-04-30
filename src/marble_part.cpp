@@ -94,6 +94,7 @@
 #include "SearchInputWidget.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
+#include "MapThemeDownloadDialog.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -147,6 +148,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     else {
         marbleLocale->setMeasurementSystem( QLocale::ImperialSystem );
     }
+
+    migrateNewstuffConfigFiles();
 
     m_externalEditorMapping[0] = "";
     m_externalEditorMapping[1] = "potlatch";
@@ -1051,6 +1054,31 @@ void MarblePart::updateTileZoomLevel()
     }
 }
 
+void MarblePart::migrateNewstuffConfigFiles() const
+{
+    // Newstuff config files used to be in the KDE data directory of the user, but are now
+    // shared between Marble KDE and Marble Qt in Marble's data path of the user.
+    // This method moves an old KDE newstuff config file to the new location if the former
+    // exists and the latter not.
+    QFileInfo const target( MarbleDirs::localPath() + "/newstuff/marble-map-themes.knsregistry" );
+    if ( !target.exists() ) {
+        QString const source = KStandardDirs::locate( "data", "knewstuff3/marble.knsregistry" );
+        if ( !source.isEmpty() ) {
+            if ( !target.absoluteDir().exists() ) {
+                if ( !QDir::root().mkpath( target.absolutePath() ) ) {
+                    mDebug() << "Failed to create target directory " << target.absolutePath() << " needed for newstuff migration";
+                    return;
+                }
+            }
+
+            if ( !QFile::rename( source, target.absoluteFilePath() ) ) {
+                mDebug() << "Failed to move " << source << " file to " << target.absoluteFilePath();
+                return;
+            }
+        }
+    }
+}
+
 void MarblePart::updateStatusBar()
 {
     if ( m_positionLabel )
@@ -1169,11 +1197,7 @@ void MarblePart::setupStatusBarActions()
 
 void MarblePart::showNewStuffDialog()
 {
-    QString  newStuffConfig = KStandardDirs::locate ( "data",
-                                                      "marble/marble.knsrc" );
-    kDebug() << "KNS config file:" << newStuffConfig;
-
-    QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog(newStuffConfig, m_controlView));
+    QPointer<MapThemeDownloadDialog> dialog( new MapThemeDownloadDialog( m_controlView ) );
     dialog->exec();
     delete dialog;
 }

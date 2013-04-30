@@ -73,7 +73,7 @@ MapThemeDownloadDialog::MapThemeDownloadDialog( QWidget* parent ) :
 
     d->m_model.setTargetDirectory( MarbleDirs::localPath() + "/maps" );
     d->m_model.setProvider( "http://edu.kde.org/marble/newstuff/maps.xml" );
-    d->m_model.setRegistryFile( QDir::homePath() + "/.kde/share/apps/knewstuff3/marble.knsregistry", Marble::NewstuffModel::NameTag );
+    d->m_model.setRegistryFile( MarbleDirs::localPath() + "/newstuff/marble-map-themes.knsregistry", Marble::NewstuffModel::NameTag );
 
     d->listView->setIconSize( QSize( 130, 130 ) );
     d->listView->setAlternatingRowColors( true );
