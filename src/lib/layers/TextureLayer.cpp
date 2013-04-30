@@ -281,7 +281,7 @@ void TextureLayer::setShowTileId( bool show )
     reset();
 }
 
-void TextureLayer::setupTextureMapper( Projection projection )
+void TextureLayer::setProjection( Projection projection )
 {
     // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;

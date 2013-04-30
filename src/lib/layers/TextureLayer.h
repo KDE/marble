@@ -92,7 +92,7 @@ public Q_SLOTS:
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void setupTextureMapper( Projection projection );
+    void setProjection( Projection projection );
 
     void setNeedsUpdate();
 
