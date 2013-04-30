@@ -283,9 +283,6 @@ void TextureLayer::setShowTileId( bool show )
 
 void TextureLayer::setupTextureMapper( Projection projection )
 {
-    if ( d->m_textures.isEmpty() )
-        return;
-
     // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
 
