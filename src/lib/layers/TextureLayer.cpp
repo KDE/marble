@@ -218,23 +218,16 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     const int levelZeroHight = d->m_tileLoader.tileSize().height() * d->m_tileLoader.tileRowCount( 0 );
     const int levelZeroMinDimension = qMin( levelZeroWidth, levelZeroHight );
 
-    qreal linearLevel = ( 4.0 * (qreal)( viewport->radius() ) / (qreal)( levelZeroMinDimension ) );
-
-    if ( linearLevel < 1.0 )
-        linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
+    // limit to 1 as dirty fix for invalid entry linearLevel
+    const qreal linearLevel = qMax( 1.0, viewport->radius() * 4.0 / levelZeroMinDimension );
 
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
+    const qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 ) * 1.00001;  // snap to the sharper tile level a tiny bit earlier
+                                                                         // to work around rounding errors when the radius
+                                                                         // roughly equals the global texture width
 
-    qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
-    int tileLevel = (int)( tileLevelF * 1.00001 ); // snap to the sharper tile level a tiny bit earlier
-    // to work around rounding errors when the radius
-    // roughly equals the global texture width
-
-    //    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
-
-    if ( tileLevel > d->m_tileLoader.maximumTileLevel() )
-        tileLevel = d->m_tileLoader.maximumTileLevel();
+    const int tileLevel = qMin<int>( d->m_tileLoader.maximumTileLevel(), tileLevelF );
 
     if ( tileLevel != d->m_tileZoomLevel ) {
         d->m_tileZoomLevel = tileLevel;
