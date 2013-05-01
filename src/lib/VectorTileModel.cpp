@@ -51,6 +51,7 @@ VectorTileModel::CacheDocument::~CacheDocument()
 {
     Q_ASSERT( m_treeModel );
     m_treeModel->removeDocument( m_document );
+    delete m_document;
 }
 
 VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTile *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool ) :
