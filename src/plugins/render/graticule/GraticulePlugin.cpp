@@ -121,8 +121,6 @@ void GraticulePlugin::initialize ()
 
     m_shadowPen = QPen( Qt::NoPen );
 
-    m_utmBandLetters = "CDEFGHJKLMNPQRSTUVWX???";
-
     readSettings();
 
     m_isInitialized = true;
@@ -514,7 +512,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
         
         if ( notation == GeoDataCoordinates::UTM ) {
             int bandLetterIndex = static_cast<int>( itStep / 8.0 ) + 10;
-            label = m_utmBandLetters.at( bandLetterIndex );
+            label = QString( "CDEFGHJKLMNPQRSTUVWX???" ).at( bandLetterIndex );
         } else {
             label = GeoDataCoordinates::latToString( itStep, notation,
                                  GeoDataCoordinates::Degree, -1, 'g' );
