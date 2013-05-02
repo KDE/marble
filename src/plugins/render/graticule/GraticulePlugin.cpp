@@ -258,8 +258,6 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( layer )
     Q_UNUSED( renderPos )
 
-    painter->save();
-
     if ( m_currentNotation != GeoDataCoordinates::defaultNotation() ) {
         initLineMaps( GeoDataCoordinates::defaultNotation() );
     }
@@ -274,6 +272,8 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     QFont gridFont("Sans Serif");
     gridFont.setPointSize( defaultFontSize );    
     gridFont.setBold( true );
+
+    painter->save();
 
     painter->setFont( gridFont );
 
