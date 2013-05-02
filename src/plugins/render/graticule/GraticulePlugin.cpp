@@ -256,10 +256,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 				GeoSceneLayer * layer )
 {
     Q_UNUSED( layer )
-
-    if ( renderPos != "SURFACE" ) {
-        return true;
-    }
+    Q_UNUSED( renderPos )
 
     painter->save();
 
