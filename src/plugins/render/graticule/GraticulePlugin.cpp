@@ -50,7 +50,6 @@ GraticulePlugin::GraticulePlugin( const MarbleModel *marbleModel )
       m_equatorCirclePen( Qt::yellow ),
       m_tropicsCirclePen( Qt::yellow ),
       m_gridCirclePen( Qt::white ),
-      m_shadowPen( Qt::NoPen ),
       m_isInitialized( false ),
       ui_configWidget( 0 ),
       m_configDialog( 0 )
@@ -118,8 +117,6 @@ void GraticulePlugin::initialize ()
     // Initialize range maps that map the zoom to the number of coordinate grid lines.
     
     initLineMaps( GeoDataCoordinates::defaultNotation() );                
-
-    m_shadowPen = QPen( Qt::NoPen );
 
     readSettings();
 
@@ -275,11 +272,6 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->setFont( gridFont );
 
-    if ( m_shadowPen != Qt::NoPen ) {
-        painter->translate( +1.0, +1.0 );
-        renderGrid( painter, viewport, m_shadowPen, m_shadowPen, m_shadowPen );
-        painter->translate( -1.0, -1.0 );
-    }
     renderGrid( painter, viewport, m_equatorCirclePen, m_tropicsCirclePen, m_gridCirclePen );
 
     painter->restore();
