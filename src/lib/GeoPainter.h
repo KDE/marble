@@ -213,16 +213,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 */
     QRegion regionFromPoint ( const GeoDataPoint & point,
                               qreal strokeWidth = 3) const;
-    
-    
-/*!
-    \brief Draws a number of points at the given geographic positions.
-    All \a positions are stored in an array. The first \a pointCount points are
-    drawn using the painter's pen color.
-*/
-    void drawPoints ( const GeoDataCoordinates * positions, int pointCount );
 
-    
+
 /*!
     \brief Draws the given text at a given geographic position.
     The \a text is drawn starting at the given \a position using the painter's

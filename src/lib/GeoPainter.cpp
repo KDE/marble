@@ -261,29 +261,6 @@ QRegion GeoPainter::regionFromPoint ( const GeoDataPoint & point,
 }
 
 
-void GeoPainter::drawPoints (  const GeoDataCoordinates * positions,
-                               int pointCount )
-{
-    int pointRepeatNum;
-    qreal y;
-    bool globeHidesPoint;
-
-    const GeoDataCoordinates * itPoint = positions;
-    while( itPoint < positions + pointCount ) {
-        bool visible = d->m_viewport->screenCoordinates( *itPoint, d->m_x, y, pointRepeatNum, globeHidesPoint );
-    
-        if ( visible ) {
-            // Draw all the x-repeat-instances of the point on the screen
-            for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawPoint( d->m_x[it], y );
-            }
-        }
-
-        ++itPoint;
-    }
-}
-
-
 void GeoPainter::drawText ( const GeoDataCoordinates & position,
                             const QString & text )
 {
