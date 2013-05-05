@@ -72,7 +72,7 @@ MapThemeDownloadDialog::MapThemeDownloadDialog( QWidget* parent ) :
     d->setupUi( this );
 
     d->m_model.setTargetDirectory( MarbleDirs::localPath() + "/maps" );
-    d->m_model.setProvider( "http://edu.kde.org/marble/newstuff/maps.xml" );
+    d->m_model.setProvider( "http://edu.kde.org/marble/newstuff/maps-4.5.xml" );
     d->m_model.setRegistryFile( MarbleDirs::localPath() + "/newstuff/marble-map-themes.knsregistry", Marble::NewstuffModel::NameTag );
 
     d->listView->setIconSize( QSize( 130, 130 ) );
@@ -148,13 +148,15 @@ void MapItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opti
     } else {
         bool const installed = index.data( NewstuffModel::IsInstalled ).toBool();
         bool const upgradable = index.data( NewstuffModel::IsUpgradable ).toBool();
-        if ( !installed || upgradable ) {
-            Element element = !installed ? InstallButton : UpgradeButton;
-            QStyleOptionButton installButton = button( element, option );
-            QRect installRect = position( element, option );
-            installButton.rect = installRect;
-            QApplication::style()->drawControl( QStyle::CE_PushButton, &installButton, painter );
+        Element element = !installed ? InstallButton : UpgradeButton;
+        QStyleOptionButton installButton = button( element, option );
+        if ( installed && !upgradable ) {
+            installButton.state ^= QStyle::State_Enabled;
+            installButton.palette.setCurrentColorGroup( QPalette::Disabled );
         }
+        QRect installRect = position( element, option );
+        installButton.rect = installRect;
+        QApplication::style()->drawControl( QStyle::CE_PushButton, &installButton, painter );
 
         if ( installed ) {
             QStyleOptionButton removeButton = button( RemoveButton, option );
@@ -221,7 +223,7 @@ int MapItemDelegate::buttonWidth(const QStyleOptionViewItem &option) const
         int const removeWidth = option.fontMetrics.size( 0, tr( "Remove" ) ).width();
         int const cancelWidth = option.fontMetrics.size( 0, tr( "Cancel" ) ).width();
         int const upgradeWidth = option.fontMetrics.size( 0, tr( "Upgrade" ) ).width();
-        m_buttonWidth = m_iconSize + qMax( qMax( installWidth, removeWidth ),
+        m_buttonWidth = 2 * m_iconSize + qMax( qMax( installWidth, removeWidth ),
                                            qMax( cancelWidth, upgradeWidth ) );
     }
 
@@ -266,10 +268,10 @@ QStyleOptionButton MapItemDelegate::button( Element element, const QStyleOptionV
 
 QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &option ) const
 {
-    int const buttonSize = buttonWidth( option );
+    int const width = buttonWidth( option );
     QPoint const topLeftCol1 = option.rect.topLeft();
     QPoint const topLeftCol2 = topLeftCol1 + QPoint( option.decorationSize.width(), 0 );
-    QPoint const topLeftCol3 = topLeftCol2 + QPoint( option.rect.width() - 3 * m_margin - buttonSize - option.decorationSize.width(), m_margin );
+    QPoint const topLeftCol3 = topLeftCol2 + QPoint( option.rect.width() - 3 * m_margin - width - option.decorationSize.width(), m_margin );
     switch (element) {
     case Icon:
         return QRect( topLeftCol1, option.decorationSize );
@@ -281,6 +283,7 @@ QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &opt
         QStyleOptionButton optionButton = button( element, option );
         QSize size = option.fontMetrics.size( 0, optionButton.text ) + QSize( 4, 4 );
         QSize buttonSize = QApplication::style()->sizeFromContents( QStyle::CT_PushButton, &optionButton, size );
+        buttonSize.setWidth( width );
         return QRect( topLeftCol3, buttonSize );
     }
     case RemoveButton:
@@ -289,11 +292,12 @@ QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &opt
         QStyleOptionButton optionButton = button( element, option );
         QSize size = option.fontMetrics.size( 0, optionButton.text ) + QSize( 4, 4 );
         QSize buttonSize = QApplication::style()->sizeFromContents( QStyle::CT_PushButton, &optionButton, size );
+        buttonSize.setWidth( width );
         return QRect( topLeftCol3 + QPoint( 0, option.fontMetrics.height() + 8 + m_margin ), buttonSize );
     }
     case ProgressReport:
     {
-        QSize const progressSize = QSize( buttonSize, option.fontMetrics.height() + 4 );
+        QSize const progressSize = QSize( width, option.fontMetrics.height() + 4 );
         return QRect( topLeftCol3, progressSize );
     }
     }
