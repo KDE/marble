@@ -215,27 +215,21 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
 
 void MeasureToolPlugin::drawSegments( GeoPainter* painter )
 {
-    // Temporary container for each segment of the line string
-    GeoDataLineString segment( Tessellate );
-
-    int r = 0, g = 1, b = 2;
-    for ( int i = 0; i < m_measureLineString.size() - 1; i++ ) {
-        segment << m_measureLineString[i] ;
-        segment << m_measureLineString[i + 1];
-
-        qreal segmentLength = segment.length( marbleModel()->planet()->radius() );
-
-        QString distanceString;
-
-        QLocale::MeasurementSystem measurementSystem;
-        measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
+    for ( int segmentIndex = 0; segmentIndex < m_measureLineString.size() - 1; ++segmentIndex ) {
+        GeoDataLineString segment( Tessellate );
+        segment << m_measureLineString[segmentIndex] ;
+        segment << m_measureLineString[segmentIndex + 1];
 
         QPen shadowPen( Oxygen::aluminumGray5 );
         shadowPen.setWidthF(4.0);
         painter->setPen( shadowPen );
-        painter->drawPolyline( segment, distanceString, LineCenter );
+        painter->drawPolyline( segment );
 
-        QPen linePen;
+        const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
+
+        const qreal segmentLength = segment.length( marbleModel()->planet()->radius() );
+
+        QString distanceString;
 
         if ( measurementSystem == QLocale::MetricSystem ) {
             if ( segmentLength >= 1000.0 ) {
@@ -249,23 +243,24 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             distanceString = QString("%1 mi").arg( segmentLength / 1000.0 * KM2MI, 0, 'f', 2 );
         }
 
-        if ( i == r ) {
-            linePen.setColor( Oxygen::brickRed4 );
-            r+=3;
-        }
-        else if ( i == g ) {
-            linePen.setColor( Oxygen::forestGreen4 );
-            g+=3;
-        }
-        else if ( i == b ) {
-            linePen.setColor( Oxygen::skyBlue4 );
-            b+=3;
-        }
-	linePen.setWidthF(2.0);
-	painter->setPen( linePen );
-        painter->drawPolyline( segment, distanceString, LineCenter );
+        QPen linePen;
 
-        segment.clear();
+        // have three alternating colors for the segments
+        switch ( segmentIndex % 3 ) {
+        case 0:
+            linePen.setColor( Oxygen::brickRed4 );
+            break;
+        case 1:
+            linePen.setColor( Oxygen::forestGreen4 );
+            break;
+        case 2:
+            linePen.setColor( Oxygen::skyBlue4 );
+            break;
+        }
+
+        linePen.setWidthF(2.0);
+        painter->setPen( linePen );
+        painter->drawPolyline( segment, distanceString, LineCenter );
     }
 }
 
