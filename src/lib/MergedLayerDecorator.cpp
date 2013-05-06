@@ -116,7 +116,9 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 
             mDebug() << Q_FUNC_INFO << "blending";
 
-            Q_ASSERT( !resultImage.isNull());
+            if ( resultImage.isNull() ) {
+                resultImage = QImage( tile->image()->size(), QImage::Format_ARGB32_Premultiplied );
+            }
 
             blending->blend( &resultImage, tile.data() );
         }

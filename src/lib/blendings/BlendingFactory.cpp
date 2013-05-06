@@ -87,6 +87,7 @@ BlendingFactory::BlendingFactory( const SunLocator *sunLocator )
     // Special purpose blendings
     m_blendings.insert( "CloudsBlending", new CloudsBlending );
     m_blendings.insert( "SunLightBlending", m_sunLightBlending );
+    m_blendings.insert( "GrayscaleBlending", new GrayscaleBlending );
 }
 
 BlendingFactory::~BlendingFactory()

@@ -247,6 +247,12 @@ class CloudsBlending: public Blending
     virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
 };
 
+class GrayscaleBlending: public Blending
+{
+ public:
+    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+};
+
 }
 
 #endif
