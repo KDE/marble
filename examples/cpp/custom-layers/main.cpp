@@ -12,6 +12,7 @@
 #include <marble/MarbleMap.h>
 #include <marble/MarbleModel.h>
 #include <marble/GeoPainter.h>
+#include <marble/GeoDataLineString.h>
 #include <marble/LayerInterface.h>
 
 #include <QtCore/QTime>
@@ -101,10 +102,10 @@ bool MyPaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
         painter->drawEllipse(approximate(home, M_PI * i / 30.0, 1.0), 5, 5);
 
     // hour, minute, second hand
-    painter->drawLine(home, approximate(home, M_PI * now.minute() / 30.0, 0.75));
-    painter->drawLine(home, approximate(home, M_PI * now.hour() / 6.0, 0.5));
+    painter->drawPolyline(GeoDataLineString() << home << approximate(home, M_PI * now.minute() / 30.0, 0.75));
+    painter->drawPolyline(GeoDataLineString() << home << approximate(home, M_PI * now.hour() / 6.0, 0.5));
     painter->setPen(QPen(QBrush(Qt::red), 4.0, Qt::SolidLine, Qt::RoundCap ));
-    painter->drawLine(home, approximate(home, M_PI * now.second() / 30.0, 1.0));
+    painter->drawPolyline(GeoDataLineString() << home << approximate(home, M_PI * now.second() / 30.0, 1.0));
 
     return true;
 }
@@ -130,7 +131,7 @@ int main(int argc, char** argv)
     // Update each second to give the clock second resolution
     QTimer seconds;
     seconds.setInterval(1000);
-    QObject::connect(&seconds, SIGNAL(timeout()), mapWidget, SLOT(updateChangedMap()));
+    QObject::connect(&seconds, SIGNAL(timeout()), mapWidget, SLOT(update()));
     seconds.start();
 
     return app.exec();
