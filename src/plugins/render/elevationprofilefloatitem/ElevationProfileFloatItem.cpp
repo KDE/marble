@@ -355,7 +355,7 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX, 0,
                            m_leftGraphMargin + m_cursorPositionX, m_eleGraphHeight );
         qreal xpos = m_axisX.minValue() + ( m_cursorPositionX / m_eleGraphWidth ) * m_axisX.range();
-        qreal ypos = m_eleGraphHeight - ( ( currentPoint.altitude() - m_axisY.minValue() ) / ( qMax( 1.0, m_axisY.range() ) * m_shrinkFactorY ) ) * m_eleGraphHeight;
+        qreal ypos = m_eleGraphHeight - ( ( currentPoint.altitude() - m_axisY.minValue() ) / ( qMax<qreal>( 1.0, m_axisY.range() ) * m_shrinkFactorY ) ) * m_eleGraphHeight;
 
         painter->drawLine( m_leftGraphMargin + m_cursorPositionX - 5, ypos,
                            m_leftGraphMargin + m_cursorPositionX + 5, ypos );
