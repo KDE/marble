@@ -864,9 +864,9 @@ void MarbleMapPrivate::updateMapTheme()
 
     // Check whether there is a texture layer and vectortile layer available:
     if ( m_model->mapTheme()->map()->hasTextureLayers() ) {
-        GeoSceneSettings *const settings = m_model->mapTheme()->settings();
-        GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
-        GeoSceneGroup *const vectorTileLayerSettings = settings ? settings->group( "VectorTile Layers" ) : 0;
+        const GeoSceneSettings *const settings = m_model->mapTheme()->settings();
+        const GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
+        const GeoSceneGroup *const vectorTileLayerSettings = settings ? settings->group( "VectorTile Layers" ) : 0;
 
         bool textureLayersOk = true;
         bool vectorTileLayersOk = true;

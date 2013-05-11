@@ -58,7 +58,7 @@ class VectorTileLayer : public QObject, public LayerInterface
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
-    void setMapTheme( const QVector<const GeoSceneVectorTile *> &textures, GeoSceneGroup *textureLayerSettings );
+    void setMapTheme( const QVector<const GeoSceneVectorTile *> &textures, const GeoSceneGroup *textureLayerSettings );
 
     void reset();
 

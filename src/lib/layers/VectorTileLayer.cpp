@@ -46,7 +46,7 @@ public:
     TileLoader m_loader;
     QVector<VectorTileModel *> m_texmappers;
     QVector<VectorTileModel *> m_activeTexmappers;
-    GeoSceneGroup *m_textureLayerSettings;
+    const GeoSceneGroup *m_textureLayerSettings;
 
     // TreeModel for displaying GeoDataDocuments
     GeoDataTreeModel *const m_treeModel;
@@ -136,7 +136,7 @@ void VectorTileLayer::reset()
     }
 }
 
-void VectorTileLayer::setMapTheme( const QVector<const GeoSceneVectorTile *> &textures, GeoSceneGroup *textureLayerSettings )
+void VectorTileLayer::setMapTheme( const QVector<const GeoSceneVectorTile *> &textures, const GeoSceneGroup *textureLayerSettings )
 {
     qDeleteAll( d->m_texmappers );
     d->m_texmappers.clear();
