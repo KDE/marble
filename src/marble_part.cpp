@@ -1071,11 +1071,43 @@ void MarblePart::migrateNewstuffConfigFiles() const
                 }
             }
 
-            if ( !QFile::rename( source, target.absoluteFilePath() ) ) {
-                mDebug() << "Failed to move " << source << " file to " << target.absoluteFilePath();
+            QFile registryFile( source );
+            if ( !registryFile.open( QFile::ReadOnly ) ) {
+                mDebug() << "Cannot parse newstuff xml file";
                 return;
             }
+            QDomDocument xml;
+            if ( !xml.setContent( registryFile.readAll() ) ) {
+                mDebug() << "Cannot parse newstuff xml data";
+                return;
+            }
+
+            QDomNodeList items = xml.elementsByTagName( "stuff" );
+            for ( unsigned int i = 0; i < items.length(); ++i ) {
+                repairNode( items.item(i), "summary" );
+                repairNode( items.item(i), "author" );
+            }
+
+            QFile output( target.absoluteFilePath() );
+            if ( !output.open( QFile::WriteOnly ) ) {
+                mDebug() << "Cannot open " << target.absoluteFilePath() << " for writing";
+            } else {
+                QTextStream outStream( &output );
+                outStream << xml.toString( 2 );
+                outStream.flush();
+                output.close();
+            }
         }
+    }
+}
+
+void MarblePart::repairNode( QDomNode node, const QString &child ) const
+{
+    int const size = node.namedItem( child ).toElement().text().size();
+    if ( size > 1024 ) {
+        QString const theme = node.namedItem( "name" ).toElement().text();
+        mDebug() << "Removing GHNS field " << child << " of map theme " << theme << ": Size " << size << " exceeds maximum size (see bug 319542).";
+        node.removeChild( node.namedItem( child ) );
     }
 }
 
