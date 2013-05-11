@@ -83,6 +83,13 @@ public:
      */
     QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
 
+    /**
+     * @brief Deletes any directory with its contents.
+     * @param directory Path to directory
+     * WARNING: Please do not raise this method's visibility in future, keep it private.
+     */
+    static bool deleteDirectory( const QString &directory );
+
     MapThemeManager *const q;
     QStandardItemModel m_mapThemeModel;
     QStandardItemModel m_celestialList;
@@ -158,10 +165,10 @@ void MapThemeManager::deleteMapTheme( const QString &mapThemeId )
     QFileInfo dgmlFile(dgmlPath);
     
     QString themeDir = dgmlFile.dir().absolutePath();
-    deleteDirectory( themeDir );
+    Private::deleteDirectory( themeDir );
 }
 
-bool MapThemeManager::deleteDirectory( const QString& directory )
+bool MapThemeManager::Private::deleteDirectory( const QString& directory )
 {
     QDir dir( directory );
     bool result = true;
