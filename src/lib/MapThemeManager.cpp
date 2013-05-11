@@ -83,10 +83,6 @@ public:
      */
     QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
 
-    static void deleteDirectory( const QString& path );
-    static void deleteDataDirectories( const QString& path );
-    static void deletePreview( const QString& path );
-
     MapThemeManager *const q;
     QStandardItemModel m_mapThemeModel;
     QStandardItemModel m_celestialList;
@@ -158,13 +154,43 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
 
 void MapThemeManager::deleteMapTheme( const QString &mapThemeId )
 {
-    QDir mapThemeDir( QFileInfo( MarbleDirs::localPath() + "/maps/" + mapThemeId ).path() );
-    Private::deleteDirectory( mapThemeDir.path() + "/legend/" );
-    Private::deleteDataDirectories( mapThemeDir.path() + '/' );
-    Private::deletePreview( mapThemeDir.path() + '/' );
-    QFile( MarbleDirs::localPath() + "/maps/" + mapThemeId ).remove();
-    QFile( mapThemeDir.path() + "/legend.html" ).remove();
-    QDir().rmdir( mapThemeDir.path() );
+    QString dgmlPath = MarbleDirs::localPath() + "/maps/" + mapThemeId;
+    QFileInfo dgmlFile(dgmlPath);
+    
+    QString themeDir = dgmlFile.dir().absolutePath();
+    deleteDirectory( themeDir );
+}
+
+bool MapThemeManager::deleteDirectory( const QString& directory )
+{
+    QDir dir( directory );
+    bool result = true;
+ 
+    if ( dir.exists() ) {
+        Q_FOREACH( const QFileInfo &info, dir.entryInfoList(
+            QDir::NoDotAndDotDot | QDir::System | QDir::Hidden |
+            QDir::AllDirs | QDir::Files,
+            QDir::DirsFirst ) ) {
+            
+            if ( info.isDir() ) {
+                result = deleteDirectory( info.absoluteFilePath() );
+            } else {
+                result = QFile::remove( info.absoluteFilePath() );
+            }
+ 
+            if ( !result ) {
+                return result;
+            }
+        }
+        
+        result = dir.rmdir( directory );
+        
+        if( !result ) {
+            return result;
+        }
+    }
+    
+    return result;
 }
 
 GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& mapThemeStringID )
@@ -486,38 +512,6 @@ void MapThemeManager::Private::addMapThemePaths( const QString& mapPathName, QSt
             }
         }
     }
-}
-
-void MapThemeManager::Private::deleteDirectory( const QString& path )
-{
-    QDir directory( path );
-    foreach( const QString &filename, directory.entryList( QDir::Files | QDir::NoDotAndDotDot ) )
-        QFile( path + filename ).remove();
-    QDir().rmdir( path );
-}
-
-void MapThemeManager::Private::deleteDataDirectories( const QString& path )
-{
-    QDir directoryv( path );
-    foreach( const QString &filename, directoryv.entryList( QDir::AllEntries | QDir::NoDotAndDotDot ) )
-    {
-        QString filepath = path + '/' + filename;
-        QFile file( filepath );
-        if( QFileInfo( filepath ).isDir() && filename.contains( QRegExp( "^[0-9]+$" ) ) )
-        {
-            deleteDataDirectories( filepath );
-            QDir().rmdir( filepath );
-        }
-        else if( filename.contains( QRegExp( "^[0-9]\\..+" ) ) )
-            file.remove();
-    }
-}
-
-void MapThemeManager::Private::deletePreview( const QString& path )
-{
-    QDir directoryv( path, "preview.*" );
-    foreach( const QString &filename, directoryv.entryList() )
-        QFile( path + '/' + filename ).remove();
 }
 
 }

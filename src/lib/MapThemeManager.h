@@ -100,6 +100,13 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     Q_PRIVATE_SLOT( d, void fileChanged( const QString & path ) )
 
     Q_DISABLE_COPY( MapThemeManager )
+    
+    /**
+     * @brief Deletes any directory with its contents.
+     * @param directory Path to directory
+     * WARNING: Please do not raise this method's visibility in future, keep it private.
+     */
+    static bool deleteDirectory( const QString &directory );
 
     class Private;
     friend class Private;
