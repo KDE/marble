@@ -5,3 +5,5 @@ REVIEWBOARD_URL = "https://git.reviewboard.kde.org"
 TARGET_GROUPS = "marble"
 
 GUESS_DESCRIPTION = True
+
+BRANCH = "master"
