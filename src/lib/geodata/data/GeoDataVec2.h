@@ -28,8 +28,6 @@ public:
 
     GeoDataVec2( const qreal &x, const qreal &y, const QString &xunit, const QString &yunit );
 
-    GeoDataVec2( const qreal &x, const qreal &y, const Unit &xunit, const Unit &yunit );
-
     GeoDataVec2( const GeoDataVec2 &other );
 
     GeoDataVec2& operator=( const GeoDataVec2 &other );
