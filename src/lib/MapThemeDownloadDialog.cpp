@@ -78,6 +78,7 @@ MapThemeDownloadDialog::MapThemeDownloadDialog( QWidget* parent ) :
     d->listView->setIconSize( QSize( 130, 130 ) );
     d->listView->setAlternatingRowColors( true );
     d->listView->setUniformItemSizes( false );
+    d->listView->setResizeMode( QListView::Adjust );
     d->listView->setItemDelegate( new MapItemDelegate( d->listView, &d->m_model ) );
     d->listView->setModel( &d->m_model );
 }
@@ -173,9 +174,10 @@ QSize MapItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModel
         QSize const iconSize = option.decorationSize;
         QTextDocument doc;
         doc.setDefaultFont( option.font );
-        doc.setTextWidth( m_view->width() - iconSize.width() - buttonWidth( option ) - 4 * m_margin );
+        doc.setTextWidth( qMax( 200, m_view->contentsRect().width() - iconSize.width() - buttonWidth( option ) - 3 * m_margin ) );
         doc.setHtml( text( index ) );
-        return QSize( iconSize.width() + doc.size().width(), qMax( iconSize.height(), qRound( doc.size().height() ) ) );
+        return QSize( iconSize.width() + doc.size().width() + buttonWidth( option ) + 3 * m_margin,
+                      2 + qMax( iconSize.height(), qRound( doc.size().height() ) ) );
     }
 
     return QSize();
@@ -271,12 +273,12 @@ QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &opt
     int const width = buttonWidth( option );
     QPoint const topLeftCol1 = option.rect.topLeft();
     QPoint const topLeftCol2 = topLeftCol1 + QPoint( option.decorationSize.width(), 0 );
-    QPoint const topLeftCol3 = topLeftCol2 + QPoint( option.rect.width() - 3 * m_margin - width - option.decorationSize.width(), m_margin );
+    QPoint const topLeftCol3 = topLeftCol2 + QPoint( option.rect.width() - 3 * m_margin - width - option.decorationSize.width(), 0 );
     switch (element) {
     case Icon:
         return QRect( topLeftCol1, option.decorationSize );
     case Text:
-        return QRect( topLeftCol2, QSize( topLeftCol3.x()-topLeftCol2.x()-m_margin, option.rect.height() ) );
+        return QRect( topLeftCol2, QSize( topLeftCol3.x()-topLeftCol2.x(), option.rect.height() ) );
     case InstallButton:
     case UpgradeButton:
     {
