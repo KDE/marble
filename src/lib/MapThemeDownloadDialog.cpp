@@ -309,13 +309,16 @@ QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &opt
 QString MapItemDelegate::text( const QModelIndex &index ) const
 {
     qreal const size = index.data( NewstuffModel::PayloadSize ).toLongLong() / 1024.0 / 1024.0;
+    // Fields are typically not longer than 200 characters. Prevent excessive long text here anyway
+    // due to bug 319542
+    int const maxEntrySize = 4096;
     return QString("<p><b>%1</b><br />%2</p><p>Author: %3<br />License: %4<br />Version %5 (%6) %7</p>")
             .arg( index.data().toString() )
-            .arg( index.data( NewstuffModel::Summary ).toString() )
-            .arg( index.data( NewstuffModel::Author ).toString() )
-            .arg( index.data( NewstuffModel::License ).toString() )
-            .arg( index.data( NewstuffModel::Version ).toString() )
-            .arg( index.data( NewstuffModel::ReleaseDate ).toString() )
+            .arg( index.data( NewstuffModel::Summary ).toString().left( maxEntrySize ) )
+            .arg( index.data( NewstuffModel::Author ).toString().left( maxEntrySize ) )
+            .arg( index.data( NewstuffModel::License ).toString().left( maxEntrySize ) )
+            .arg( index.data( NewstuffModel::Version ).toString().left( maxEntrySize ) )
+            .arg( index.data( NewstuffModel::ReleaseDate ).toString().left( maxEntrySize ) )
             .arg( size > 0 ? QString( "%1 MB" ).arg( size, 0, 'f', 1 ) : QString() );
 }
 
