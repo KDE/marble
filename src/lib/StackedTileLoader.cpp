@@ -128,6 +128,7 @@ void StackedTileLoader::resetTilehash()
     QHash<TileId, StackedTile*>::const_iterator it = d->m_tilesOnDisplay.constBegin();
     QHash<TileId, StackedTile*>::const_iterator const end = d->m_tilesOnDisplay.constEnd();
     for (; it != end; ++it ) {
+        Q_ASSERT( it.value()->used() && "contained in m_tilesOnDisplay should imply used()" );
         it.value()->setUsed( false );
     }
 }
@@ -167,7 +168,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     // has another thread loaded our tile due to a race condition?
     stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( stackedTile ) {
-        stackedTile->setUsed( true );
+        Q_ASSERT( stackedTile->used() && "other thread should have marked tile as used" );
         d->m_cacheLock.unlock();
         return stackedTile;
     }
@@ -175,6 +176,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     // the tile was not in the hash so check if it is in the cache
     stackedTile = d->m_tileCache.take( stackedTileId );
     if ( stackedTile ) {
+        Q_ASSERT( !stackedTile->used() && "tiles in m_tileCache are invisible and should thus be marked as unused" );
         stackedTile->setUsed( true );
         d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
         d->m_cacheLock.unlock();
@@ -263,6 +265,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
         Q_ASSERT( !d->m_tileCache.contains( stackedTileId ) );
 
         StackedTile *const stackedTile = d->m_layerDecorator->updateTile( *displayedTile, tileId, tileImage );
+        stackedTile->setUsed( true );
         d->m_tilesOnDisplay.insert( stackedTileId, stackedTile );
 
         delete displayedTile;
