@@ -8,6 +8,7 @@
 // Copyright 2007-2010  Torsten Rahn <tackat@kde.org>
 // Copyright 2007       Inge Wallin  <ingwa@kde.org>
 // Copyright 2010       Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2010-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_STACKEDTILE_H
@@ -16,17 +17,14 @@
 #include <QtCore/QSharedPointer>
 #include <QtCore/QVector>
 #include <QtGui/QColor>
+#include <QtGui/QImage>
 
-#include "MarbleGlobal.h"
-
-class QImage;
+#include "TileId.h"
 
 namespace Marble
 {
 
-class StackedTilePrivate;
 class TextureTile;
-class TileId;
 
 /*!
     \class StackedTile
@@ -57,8 +55,6 @@ class TileId;
 
 class StackedTile
 {
-    friend class StackedTileLoader;
-
  public:
     explicit StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
     virtual ~StackedTile();
@@ -112,7 +108,17 @@ class StackedTile
  private:
     Q_DISABLE_COPY( StackedTile )
 
-    StackedTilePrivate *d;
+    const TileId m_id;
+    const QImage m_resultImage;
+    const int m_depth;
+    const bool m_isGrayscale;
+    const QVector<QSharedPointer<TextureTile> > m_tiles;
+    const uchar **const jumpTable8;
+    const uint **const jumpTable32;
+    const int m_byteCount;
+    bool m_isUsed;
+
+    static int calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<TextureTile> > &tiles );
 };
 
 }
