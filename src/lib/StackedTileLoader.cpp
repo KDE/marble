@@ -172,8 +172,6 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
         return stackedTile;
     }
 
-    mDebug() << Q_FUNC_INFO << stackedTileId;
-
     // the tile was not in the hash so check if it is in the cache
     stackedTile = d->m_tileCache.take( stackedTileId );
     if ( stackedTile ) {
@@ -186,7 +184,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
     // tile (valid) has not been found in hash or cache, so load it from disk
     // and place it in the hash from where it will get transferred to the cache
 
-    // mDebug() << "load Tile from Disk: " << stackedTileId.toString();
+    mDebug() << "load tile from disk:" << stackedTileId;
 
     QVector<GeoSceneTextureTile const *> const textureLayers = d->findRelevantTextureLayers( stackedTileId );
 
