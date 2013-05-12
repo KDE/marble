@@ -455,7 +455,7 @@ QVector<const GeoDataPlacemark*> MarbleMap::whichFeatureAt( const QPoint& curpos
     return d->m_placemarkLayer.whichPlacemarkAt( curpos );
 }
 
-void MarbleMap::reload() const
+void MarbleMap::reload()
 {
     d->m_textureLayer.reload();
 }

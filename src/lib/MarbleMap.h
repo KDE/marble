@@ -635,7 +635,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      *        from the Internet. In the future this should be extended to all
      *        kinds of data which is used in the map.
      */
-    void reload() const;
+    void reload();
 
     void downloadRegion( QVector<TileCoordsPyramid> const & );
 
