@@ -19,7 +19,7 @@
 #include <QtGui/QColor>
 #include <QtGui/QImage>
 
-#include "TileId.h"
+#include "Tile.h"
 
 namespace Marble
 {
@@ -53,17 +53,11 @@ class TextureTile;
     the very same projection.
 */
 
-class StackedTile
+class StackedTile : public Tile
 {
  public:
     explicit StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
     virtual ~StackedTile();
-
-/*!
-    \brief Returns a unique ID for the tile.
-    \return A TileId object that encodes zoom level, position and map theme.
-*/
-    TileId const& id() const;
 
     void setUsed( bool used );
     bool used() const;
@@ -108,7 +102,6 @@ class StackedTile
  private:
     Q_DISABLE_COPY( StackedTile )
 
-    const TileId m_id;
     const QImage m_resultImage;
     const int m_depth;
     const bool m_isGrayscale;

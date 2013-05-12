@@ -57,7 +57,7 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
 
 
 StackedTile::StackedTile( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles ) :
-      m_id( id ), 
+      Tile( id ),
       m_resultImage( resultImage ),
       m_depth( resultImage.depth() ),
       m_isGrayscale( resultImage.isGrayscale() ),
@@ -222,12 +222,6 @@ int StackedTile::calcByteCount( const QImage &resultImage, const QVector<QShared
         byteCount += (*pos)->byteCount();
 
     return byteCount;
-}
-
-
-TileId const& StackedTile::id() const
-{
-    return m_id;
 }
 
 void StackedTile::setUsed( bool used )
