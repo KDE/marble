@@ -31,6 +31,7 @@ class GeoDataPolygon;
 class GeoDataLatLonAltBox;
 class GeoDataLineString; // LinearRing is the same!
 class GeoDataMultiGeometry;
+class GeoDataOrientation;
 
 /**
  * @short A base class for all geodata features
@@ -50,6 +51,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     friend class GeoDataLineString;
     friend class GeoDataMultiGeometry;
     friend class GeoDataMultiTrack;
+    friend class GeoDataOrientation;
  public:
     GeoDataGeometry();
     GeoDataGeometry( const GeoDataGeometry& other );

@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
+// Copyright 2013      Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
 
 #include "KmlRollTagHandler.h"
@@ -16,6 +17,8 @@
 #include "GeoDataCamera.h"
 #include "GeoDataIconStyle.h"
 #include "GeoParser.h"
+#include "GeoDataModel.h"
+#include "GeoDataOrientation.h"
 
 namespace Marble
 {
@@ -32,6 +35,9 @@ GeoNode* KmlrollTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.is<GeoDataCamera>() ) {
         qreal roll = parser.readElementText().trimmed().toDouble();
         parentItem.nodeAs<GeoDataCamera>()->setRoll(roll);
+    } else if (parentItem.is<GeoDataOrientation>() ) {
+        qreal roll = parser.readElementText().trimmed().toDouble();
+        parentItem.nodeAs<GeoDataOrientation>()->setRoll(roll);
     }
     return 0;
 }

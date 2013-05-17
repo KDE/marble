@@ -26,6 +26,7 @@ namespace Marble
 
 namespace GeoDataTypes
 {
+const char* GeoDataAliasType = "GeoDataAlias";
 const char* GeoDataCameraType = "GeoDataCamera";
 const char* GeoDataColorStyleType = "GeoDataColorStyle";
 const char* GeoDataContainerType = "GeoDataContainer";
@@ -48,12 +49,15 @@ const char* GeoDataLinearRingType = "GeoDataLinearRing";
 const char* GeoDataLineStringType = "GeoDataLineString";
 const char* GeoDataLineStyleType = "GeoDataLineStyle";
 const char* GeoDataLinkType = "GeoDataLink";
+const char* GeoDataLocationType = "GeoDataLocation";
 const char* GeoDataLodType = "GeoDataLod";
-const char* GeoDataLookAtType = "GeoDataLoookAt";
+const char* GeoDataLookAtType = "GeoDataLookAt";
+const char* GeoDataModelType = "GeoDataModel";
 const char* GeoDataMultiGeometryType = "GeoDataMultiGeometry";
 const char* GeoDataMultiTrackType = "GeoDataMultiTrack";
 const char* GeoDataNetworkLinkType = "GeoDataNetworkLink";
 const char* GeoDataObjectType = "GeoDataObject";
+const char* GeoDataOrientationType = "GeoDataOrientation";
 const char* GeoDataOuterBoundaryType = "GeoDataOuterBoundary";
 const char* GeoDataPhotoOverlayType = "GeoDataPhotoOverlay";
 const char* GeoDataPlacemarkType = "GeoDataPlacemark";
@@ -61,6 +65,7 @@ const char* GeoDataPointType = "GeoDataPoint";
 const char* GeoDataPolygonType = "GeoDataPolygon";
 const char* GeoDataPolyStyleType = "GeoDataPolyStyle";
 const char* GeoDataRegionType = "GeoDataRegion";
+const char* GeoDataResourceMapType = "GeoDataResourceMap";
 const char* GeoDataSimpleArrayDataType = "GeoDataSimpleArrayData";
 const char* GeoDataStyleSelectorType = "GeoDataStyleSelector";
 const char* GeoDataStyleType = "GeoDataStyle";
@@ -69,6 +74,7 @@ const char* GeoDataTimePrimitiveType = "GeoDataTimePrimitive";
 const char* GeoDataTimeSpanType = "GeoDataTimeSpan";
 const char* GeoDataTimeStampType = "GeoDataTimeStamp";
 const char* GeoDataTrackType = "GeoDataTrack";
+const char* GeoDataScaleType = "GeoDataScale";
 const char* GeoDataScreenOverlayType = "GeoDataScreenOverlay";
 const char* GeoDataBalloonStyleType = "GeoDataBalloonStyle";
 const char* GeoDataListStyleType = "GeoDataListStyle";

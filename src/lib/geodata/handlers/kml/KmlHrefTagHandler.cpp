@@ -44,7 +44,7 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_href ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    
+
     QString content = parser.readElementText().trimmed();
 
     if ( parentItem.represents( kmlTag_Icon ) ) {
@@ -60,7 +60,7 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
         }
     } else if ( parentItem.represents( kmlTag_ItemIcon ) ) {
         parentItem.nodeAs<GeoDataItemIcon>()->setIconPath( content );
-    }  else if ( parentItem.represents( kmlTag_Link ) ) {
+    }  else if ( parentItem.is<GeoDataLink>() ) {
         parentItem.nodeAs<GeoDataLink>()->setHref( content );
     }
 

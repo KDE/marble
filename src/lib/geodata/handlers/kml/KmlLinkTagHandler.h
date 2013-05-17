@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
-//
+// 
 
 #ifndef MARBLE_KML_KMLLINKTAGHANDLER_H
 #define MARBLE_KML_KMLLINKTAGHANDLER_H

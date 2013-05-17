@@ -1,0 +1,48 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2013      Sanjiban Bairagya <sanjiban22393@gmail.com>
+//
+
+#include "KmlAliasTagHandler.h"
+
+#include "MarbleDebug.h"
+
+#include "KmlElementDictionary.h"
+#include "GeoDataAlias.h"
+#include "GeoDataResourceMap.h"
+#include "GeoDataGeometry.h"
+#include "GeoDataModel.h"
+#include "GeoDataParser.h"
+
+namespace Marble
+{
+namespace kml
+{
+KML_DEFINE_TAG_HANDLER( Alias )
+
+GeoNode* KmlAliasTagHandler::parse( GeoParser& parser ) const
+{
+    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Alias ) );
+
+    GeoDataAlias alias;
+    GeoStackItem parentItem = parser.parentElement();
+#ifdef DEBUG_TAGS
+    mDebug() << "Parsed <" << kmlTag_Alias << ">"
+             << " parent item name: " << parentItem.qualifiedName().first;
+#endif
+
+    if( parentItem.represents( kmlTag_ResourceMap ) ) {
+        parentItem.nodeAs<GeoDataResourceMap>()->setAlias(alias);
+	    return &parentItem.nodeAs<GeoDataResourceMap>()->alias();
+    } else {
+        return 0;
+    }
+}
+
+}
+}

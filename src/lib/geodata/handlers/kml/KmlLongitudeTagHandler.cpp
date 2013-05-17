@@ -6,7 +6,9 @@
 // the source code.
 //
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
+// Copyright 2013      Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
+
 #include "KmlLongitudeTagHandler.h"
 
 #include "MarbleDebug.h"
@@ -18,6 +20,7 @@
 #include "GeoParser.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"
+#include "GeoDataLocation.h"
 
 namespace Marble
 {
@@ -36,6 +39,9 @@ namespace kml
         } else if ( parentItem.is<GeoDataCamera>() ) {
             qreal longitude = parser.readElementText().trimmed().toDouble();
             parentItem.nodeAs<GeoDataCamera>()->setLongitude(longitude, GeoDataCoordinates::Degree);
+        } else if ( parentItem.is<GeoDataLocation>() ) {
+            qreal longitude = parser.readElementText().trimmed().toDouble();
+            parentItem.nodeAs<GeoDataLocation>()->setLongitude(longitude, GeoDataCoordinates::Degree);
         }
 
       return 0;

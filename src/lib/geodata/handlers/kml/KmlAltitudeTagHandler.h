@@ -7,6 +7,7 @@
 //
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
 //
+
 #ifndef KmlAltitudeTagHandler_h
 #define KmlAltitudeTagHandler_h
 

@@ -26,6 +26,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataCamera.h"
+#include "GeoDataOrientation.h"
 #include "GeoParser.h"
 
 namespace Marble
@@ -46,7 +47,9 @@ GeoNode* KmlheadingTagHandler::parse( GeoParser& parser ) const
             parentItem.nodeAs<GeoDataIconStyle>()->setHeading( heading );
         } else if ( parentItem.represents( kmlTag_Camera ) ) {
             parentItem.nodeAs<GeoDataCamera>()->setHeading( heading );
-        }
+        } else if ( parentItem.represents( kmlTag_Orientation ) ) {
+	    parentItem.nodeAs<GeoDataOrientation>()->setHeading( heading );
+	}
     } else {
         mDebug() << "Invalid heading value " << heading << ", must be withing 0..360. Using 0 instead.";
     }

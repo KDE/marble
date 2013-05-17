@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
+// Copyright 2013      Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
 
 #include "GeoDataLink.h"

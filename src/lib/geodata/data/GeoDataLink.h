@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
-//
+// Copyright 2013      Sanjiban Bairagya <sanjiban22393@gmail.com>
 
 
 #ifndef MARBLE_GEODATALINK_H

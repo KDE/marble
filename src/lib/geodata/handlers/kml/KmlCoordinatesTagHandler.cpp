@@ -29,6 +29,7 @@
 #include "GeoDataTrack.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
+#include "GeoDataModel.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataMultiGeometry.h"
@@ -136,6 +137,8 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                 } else if ( parentItem.represents( kmlTag_MultiGeometry ) ) {
                     GeoDataPoint *point = new GeoDataPoint( coord );
                     parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
+                } else if ( parentItem.represents( kmlTag_Model) ) {
+                    parentItem.nodeAs<GeoDataModel>()->setCoordinates( coord);
                 } else if ( parentItem.represents( kmlTag_Point ) ) {
                     // photo overlay
                     parentItem.nodeAs<GeoDataPoint>()->setCoordinates( coord );

@@ -16,6 +16,9 @@
 #include "GeoDataCamera.h"
 #include "GeoDataIconStyle.h"
 #include "GeoParser.h"
+#include "GeoDataModel.h"
+#include "GeoDataOrientation.h"
+
 
 namespace Marble
 {
@@ -36,10 +39,16 @@ GeoNode* KmltiltTagHandler::parse( GeoParser& parser ) const
         mDebug() << "Parsed <" << kmlTag_tilt << "> containing: " << parser.readElementText().trimmed()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
+    } else if ( parentItem.is<GeoDataOrientation>() ){
+        double tilt = parser.readElementText().trimmed().toDouble();
+	parentItem.nodeAs<GeoDataOrientation>()->setTilt(tilt);
+#ifdef DEBUG_TAGS
+        mDebug() << "Parsed <" << kmlTag_tilt << "> containing: " << parser.readElementText().trimmed()
+                 << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     }
     return 0;
 }
 
 }
 }
-

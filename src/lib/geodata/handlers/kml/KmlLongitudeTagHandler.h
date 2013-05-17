@@ -7,6 +7,7 @@
 //
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
 //
+
 #ifndef KmlLongitudeTagHandler_h
 #define KmlLongitudeTagHandler_h
 

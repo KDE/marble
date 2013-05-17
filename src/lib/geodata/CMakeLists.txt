@@ -68,6 +68,7 @@ geodata/handlers/kml/KmlMaxLodPixelsTagHandler.cpp
 geodata/handlers/kml/KmlMinAltitudeTagHandler.cpp
 geodata/handlers/kml/KmlMinFadeExtentTagHandler.cpp
 geodata/handlers/kml/KmlMinLodPixelsTagHandler.cpp
+geodata/handlers/kml/KmlModelTagHandler.cpp
 geodata/handlers/kml/KmlMultiGeometryTagHandler.cpp
 geodata/handlers/kml/KmlMultiTrackTagHandler.cpp
 geodata/handlers/kml/KmlNameTagHandler.cpp
@@ -148,6 +149,16 @@ geodata/handlers/kml/KmlExpiresTagHandler.cpp
 geodata/handlers/kml/KmlUpdateTagHandler.cpp
 geodata/handlers/kml/KmlNetworkLinkControlTagHandler.cpp
 geodata/handlers/kml/KmlplayModeTagHandler.cpp
+geodata/handlers/kml/KmlOrientationTagHandler.cpp
+geodata/handlers/kml/KmlScaleTagHandler.cpp
+geodata/handlers/kml/KmlXTagHandler.cpp
+geodata/handlers/kml/KmlYTagHandler.cpp
+geodata/handlers/kml/KmlZTagHandler.cpp
+geodata/handlers/kml/KmlLocationTagHandler.cpp
+geodata/handlers/kml/KmlResourceMapTagHandler.cpp
+geodata/handlers/kml/KmlAliasTagHandler.cpp
+geodata/handlers/kml/KmlSourceHrefTagHandler.cpp
+geodata/handlers/kml/KmlTargetHrefTagHandler.cpp
 )
 
 SET ( geodata_writers_kml_SRCS

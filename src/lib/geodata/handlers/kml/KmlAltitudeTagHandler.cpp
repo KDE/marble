@@ -6,7 +6,9 @@
 // the source code.
 //
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
+// Copyright 2013      Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
+
 #include "KmlAltitudeTagHandler.h"
 
 #include "MarbleDebug.h"
@@ -19,7 +21,7 @@
 #include "GeoDataGroundOverlay.h"
 #include "GeoParser.h"
 #include "GeoDataCoordinates.h"
-
+#include "GeoDataLocation.h"
 
 namespace Marble
 {
@@ -40,6 +42,8 @@ KML_DEFINE_TAG_HANDLER( altitude )
             parentItem.nodeAs<GeoDataCamera>()->setAltitude( altitude );
         } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
             parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitude( altitude );
+        } else if ( parentItem.is<GeoDataLocation>() ) {
+	    parentItem.nodeAs<GeoDataLocation>()->setAltitude( altitude );
         }
 
       return 0;

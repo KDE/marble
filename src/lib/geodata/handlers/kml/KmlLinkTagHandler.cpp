@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
-//
+// Copyright 2013      Sanjiban Bairagya <sanjiban22393@gmail.com>
 
 #include "KmlLinkTagHandler.h"
 
@@ -16,6 +16,7 @@
 #include "GeoDataLink.h"
 #include "GeoDataNetworkLink.h"
 #include "GeoDataDocument.h"
+#include "GeoDataModel.h"
 #include "GeoDataParser.h"
 
 namespace Marble
@@ -27,12 +28,17 @@ KML_DEFINE_TAG_HANDLER( Link )
 GeoNode* KmlLinkTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Link ) );
+    GeoDataLink link;
     GeoStackItem parentItem = parser.parentElement();
+
     if ( parentItem.represents( kmlTag_NetworkLink )) {
         return &parentItem.nodeAs<GeoDataNetworkLink>()->link();
+    } else if( parentItem.represents( kmlTag_Model ) ) {
+        parentItem.nodeAs<GeoDataModel>()->setLink(link);
+        return &parentItem.nodeAs<GeoDataModel>()->link();
+    }else{
+        return 0;
     }
-
-    return 0;
 }
 
 }

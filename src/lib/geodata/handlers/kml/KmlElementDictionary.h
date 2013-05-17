@@ -38,6 +38,7 @@ namespace kml
 
     GEODATA_EXPORT extern const char* kmlTag_address;
     GEODATA_EXPORT extern const char* kmlTag_AddressDetails;
+    GEODATA_EXPORT extern const char* kmlTag_Alias;
     GEODATA_EXPORT extern const char* kmlTag_altitude;
     GEODATA_EXPORT extern const char* kmlTag_altitudeMode;
     GEODATA_EXPORT extern const char* kmlTag_BalloonStyle;
@@ -151,6 +152,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_refreshVisibility;
     GEODATA_EXPORT extern const char* kmlTag_Region;
     GEODATA_EXPORT extern const char* kmlTag_request;
+    GEODATA_EXPORT extern const char* kmlTag_ResourceMap;
     GEODATA_EXPORT extern const char* kmlTag_Response;
     GEODATA_EXPORT extern const char* kmlTag_rightFov;
     GEODATA_EXPORT extern const char* kmlTag_roll;
@@ -170,6 +172,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_size;
     GEODATA_EXPORT extern const char* kmlTag_Snippet;
     GEODATA_EXPORT extern const char* kmlTag_south;
+    GEODATA_EXPORT extern const char* kmlTag_sourceHref;
     GEODATA_EXPORT extern const char* kmlTag_state;
     GEODATA_EXPORT extern const char* kmlTag_Status;
     GEODATA_EXPORT extern const char* kmlTag_Style;
@@ -200,7 +203,9 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_width;
     GEODATA_EXPORT extern const char* kmlTag_x;
     GEODATA_EXPORT extern const char* kmlTag_y;
-    
+    GEODATA_EXPORT extern const char* kmlTag_z;
+
+
     // Google KML Extension Namespace (http://code.google.com/apis/kml/documentation/kmlreference.html#kmlextensions)
     GEODATA_EXPORT extern const char* kmlTag_FlyTo;
     GEODATA_EXPORT extern const char* kmlTag_MultiTrack;
@@ -230,8 +235,8 @@ namespace kml
 #define KML_DEFINE_TAG_HANDLER_GX22(Name) GEODATA_DEFINE_TAG_HANDLER(kml, Kml, Name, kmlTag_nameSpaceGx22)
 
 #define KML_DEFINE_TAG_HANDLER(Name) \
-	KML_DEFINE_TAG_HANDLER_20(Name) \
-	KML_DEFINE_TAG_HANDLER_21(Name) \
+    KML_DEFINE_TAG_HANDLER_20(Name) \
+    KML_DEFINE_TAG_HANDLER_21(Name) \
     KML_DEFINE_TAG_HANDLER_22(Name) \
     KML_DEFINE_TAG_HANDLER_OGC22(Name)
 

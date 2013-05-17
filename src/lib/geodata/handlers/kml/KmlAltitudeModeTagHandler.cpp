@@ -32,6 +32,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataTrack.h"
 #include "GeoDataCamera.h"
+#include "GeoDataModel.h"
 
 #include "GeoParser.h"
 
@@ -71,6 +72,8 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitudeMode( mode );
     } else if ( parentItem.is<GeoDataCamera>() ) {
         parentItem.nodeAs<GeoDataCamera>()->setAltitudeMode( mode );
+    } else if ( parentItem.is<GeoDataModel>() ) {
+        parentItem.nodeAs<GeoDataModel>()->setAltitudeMode( mode );
     }
 
 #ifdef DEBUG_TAGS
