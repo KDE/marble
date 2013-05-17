@@ -119,6 +119,7 @@ class GeoStackItem
     template<class T>
     T* nodeAs()
     {
+        Q_ASSERT( dynamic_cast<T*>( m_node ) != 0 );
         return static_cast<T*>(m_node);
     }
     
