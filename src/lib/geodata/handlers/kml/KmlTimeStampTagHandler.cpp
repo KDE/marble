@@ -26,14 +26,9 @@ KML_DEFINE_TAG_HANDLER( TimeStamp )
 GeoNode* KmlTimeStampTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_TimeStamp ) );
-
     GeoStackItem parentItem = parser.parentElement();
-    
-    if ( parentItem.nodeAs<GeoDataFeature>() ) {
-        GeoDataTimeStamp timeStamp;
-        QString id = parser.attribute( "id" ).trimmed();
-        parentItem.nodeAs<GeoDataFeature>()->setTimeStamp( timeStamp );
-
+    if ( parentItem.is<GeoDataFeature>() ) {
+        parentItem.nodeAs<GeoDataFeature>()->setTimeStamp( GeoDataTimeStamp() );
         return &parentItem.nodeAs<GeoDataFeature>()->timeStamp();
     }
     return 0;
