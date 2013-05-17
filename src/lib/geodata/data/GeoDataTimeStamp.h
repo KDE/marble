@@ -27,6 +27,13 @@ class GeoDataTimeStampPrivate;
 class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
 {
   public:
+    enum TimeResolution {
+        SecondResolution,
+        DayResolution,
+        MonthResolution,
+        YearResolution
+    };
+
     GeoDataTimeStamp();
     GeoDataTimeStamp( const GeoDataTimeStamp& other );
     virtual ~GeoDataTimeStamp();
@@ -50,6 +57,10 @@ class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
     */
     void setWhen( const QDateTime& when );
     
+    void setResolution( TimeResolution resolution );
+
+    TimeResolution resolution() const;
+
     /**
      * @brief Serialize the timestamp to a stream
      * @param  stream  the stream

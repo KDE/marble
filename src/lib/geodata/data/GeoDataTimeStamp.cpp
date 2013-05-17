@@ -47,7 +47,7 @@ GeoDataTimeStamp& GeoDataTimeStamp::operator=( const GeoDataTimeStamp& other )
 
 const char* GeoDataTimeStamp::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataTimeStampType;
 }
 
 QDateTime GeoDataTimeStamp::when() const
@@ -58,6 +58,16 @@ QDateTime GeoDataTimeStamp::when() const
 void GeoDataTimeStamp::setWhen( const QDateTime& when )
 {
     d->m_when = when;
+}
+
+void GeoDataTimeStamp::setResolution( GeoDataTimeStamp::TimeResolution resolution )
+{
+    d->m_resolution = resolution;
+}
+
+GeoDataTimeStamp::TimeResolution GeoDataTimeStamp::resolution() const
+{
+    return d->m_resolution;
 }
 
 void GeoDataTimeStamp::pack( QDataStream& stream ) const

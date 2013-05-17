@@ -13,6 +13,7 @@
 
 #include <QtCore/QString>
 #include "GeoTagHandler.h"
+#include <GeoDataTimeStamp.h>
 
 namespace Marble
 {
@@ -24,7 +25,8 @@ class KmlwhenTagHandler : public GeoTagHandler
 public:
     virtual GeoNode* parse(GeoParser&) const;
 
-    void modify( QString& whenString ) const;
+private:
+    Marble::GeoDataTimeStamp::TimeResolution modify( QString& whenString ) const;
 };
 
 }

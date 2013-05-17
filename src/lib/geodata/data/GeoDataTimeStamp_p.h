@@ -14,6 +14,7 @@
 #include <QtCore/QDateTime>
 
 #include "GeoDataTypes.h"
+#include <GeoDataTimeStamp.h>
 
 namespace Marble
 {
@@ -21,12 +22,9 @@ namespace Marble
 class GeoDataTimeStampPrivate
 {
   public:
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataTimeStampType;
-    }
-
     QDateTime m_when;
+
+    GeoDataTimeStamp::TimeResolution m_resolution;
 };
 
 } // namespace Marble
