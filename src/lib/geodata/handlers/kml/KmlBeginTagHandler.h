@@ -23,8 +23,6 @@ class KmlbeginTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse(GeoParser&) const;
-
-    void modify( QString& beginString ) const;
 };
 
 }

@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 #include <QtCore/QDateTime> 
 
+#include "KmlWhenTagHandler.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataTimeSpan.h"
 #include "GeoParser.h"
@@ -31,43 +32,11 @@ GeoNode* KmlbeginTagHandler::parse( GeoParser& parser ) const
 
     if( parentItem.represents( kmlTag_TimeSpan ) ) {
         QString beginString = parser.readElementText().trimmed();
-	modify( beginString );
-        QDateTime begin = QDateTime::fromString( beginString, Qt::ISODate );
+        QDateTime begin = KmlwhenTagHandler::parse( beginString );
         parentItem.nodeAs<GeoDataTimeSpan>()->setBegin( begin );
     }
 
     return 0;
-}
-
-void KmlbeginTagHandler::modify(  QString& beginString ) const
-{
-    switch( beginString.length() )
-    {
-        case 4 : beginString.append( "-01-01" );
-                 break;
-        case 7 : beginString.append( "-01" );
-                 break;
-        case 10: break;
-        case 19: break;
-        case 20: break;
-        case 25: QString localTime = beginString.left( 19 );
-                 QString sign = beginString.at( 19 );
-                 bool ok;
-                 QDateTime dateTime;
-                 int hour = beginString.right( 5 ).left( 2 ).toInt( &ok, 10 );
-                 int min = beginString.right( 2 ).toInt( &ok, 10 );
-                 if( sign == "-")
-                 {
-                     dateTime = QDateTime::fromString( localTime, Qt::ISODate ).addSecs( hour*3600 + min*60 );
-                 }
-                 else
-                 {
-                     dateTime = QDateTime::fromString( localTime, Qt::ISODate ).addSecs( -(hour*3600 + min*60) );
-                 }
-                 beginString = dateTime.toString( Qt::ISODate );
-                 break;
-    }
-
 }
 
 }

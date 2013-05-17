@@ -25,8 +25,10 @@ class KmlwhenTagHandler : public GeoTagHandler
 public:
     virtual GeoNode* parse(GeoParser&) const;
 
+    static QDateTime parse( const QString &dateTime );
+
 private:
-    Marble::GeoDataTimeStamp::TimeResolution modify( QString& whenString ) const;
+    static Marble::GeoDataTimeStamp::TimeResolution modify( QString& whenString );
 };
 
 }

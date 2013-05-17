@@ -43,7 +43,14 @@ GeoNode* KmlwhenTagHandler::parse( GeoParser& parser ) const
     return 0;
 }
 
-GeoDataTimeStamp::TimeResolution KmlwhenTagHandler::modify(  QString& whenString ) const
+QDateTime KmlwhenTagHandler::parse( const QString &dateTime )
+{
+    QString iso = dateTime;
+    modify( iso );
+    return QDateTime::fromString( iso, Qt::ISODate );
+}
+
+GeoDataTimeStamp::TimeResolution KmlwhenTagHandler::modify(  QString& whenString )
 {
     switch( whenString.length() )
     {
