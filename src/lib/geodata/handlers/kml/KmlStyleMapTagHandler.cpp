@@ -48,19 +48,11 @@ GeoNode* KmlStyleMapTagHandler::parse( GeoParser& parser ) const
         QString styleId = parser.attribute( "id" ).trimmed();
         styleMap.setStyleId( styleId );
         parentItem.nodeAs<GeoDataDocument>()->addStyleMap( styleMap );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_StyleMap << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
         return &parentItem.nodeAs<GeoDataDocument>()->styleMap( styleId );
     } else if( parentItem.is<GeoDataFeature>() ) {
 /*        GeoDataStyleMap styleMap;
         styleMap.setStyleId( parser.attribute( "id" ).trimmed() );
         parentItem.nodeAs<GeoDataFeature>()->setStyleMap( styleMap );*/
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_StyleMap << "> Feature (ignoring styles outside of document tag)"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
     }
 
     return 0;

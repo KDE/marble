@@ -43,10 +43,6 @@ GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     GeoDataPolygon *polygon = new GeoDataPolygon;
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_Polygon << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_Placemark ) ) {
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( polygon );

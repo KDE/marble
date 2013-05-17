@@ -50,18 +50,10 @@ GeoNode* KmlstyleUrlTagHandler::parse( GeoParser& parser ) const
         (*parentItem.nodeAs<GeoDataStyleMap>())[ key ] = content;
         parentItem.nodeAs<GeoDataStyleMap>()->setLastKey( "" );
 
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_styleUrl << "> containing: " << content
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
     } else if( parentItem.is<GeoDataFeature>() ) {
         QString content = parser.readElementText().trimmed();
 
         parentItem.nodeAs<GeoDataFeature>()->setStyleUrl( content );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_styleUrl << "> containing: " << content
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
     }
     return 0;
 }

@@ -45,10 +45,6 @@ GeoNode* KmldescriptionTagHandler::parse( GeoParser& parser ) const
         
         parentItem.nodeAs<GeoDataFeature>()->setDescription( description );
         parentItem.nodeAs<GeoDataFeature>()->setDescriptionCDATA( parser.isCDATA() );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_description << "> containing: " << description
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
 
     return 0;

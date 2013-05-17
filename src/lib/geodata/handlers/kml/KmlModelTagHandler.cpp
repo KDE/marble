@@ -30,10 +30,6 @@ GeoNode* KmlModelTagHandler::parse( GeoParser& parser ) const
     GeoDataModel *model = new GeoDataModel;
 
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Model << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_Placemark ) ) {
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( model );

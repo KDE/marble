@@ -31,10 +31,6 @@ GeoNode* KmlendTagHandler::parse( GeoParser& parser ) const
 
     if( parentItem.represents( kmlTag_TimeSpan ) ) {
         QString endString = parser.readElementText().trimmed();
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_end << "> containing: " << endString
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
 	modify( endString );
 	QDateTime end = QDateTime::fromString( endString, Qt::ISODate );
         parentItem.nodeAs<GeoDataTimeSpan>()->setEnd( end );

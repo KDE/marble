@@ -31,14 +31,7 @@ GeoNode* KmlTimeStampTagHandler::parse( GeoParser& parser ) const
     
     if ( parentItem.nodeAs<GeoDataFeature>() ) {
         GeoDataTimeStamp timeStamp;
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_TimeStamp << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         QString id = parser.attribute( "id" ).trimmed();
-#ifdef DEBUG_TAGS
-        mDebug() << "atrribute 'id':" << id;
-#endif // DEBUG_TAGS
         parentItem.nodeAs<GeoDataFeature>()->setTimeStamp( timeStamp );
 
         return &parentItem.nodeAs<GeoDataFeature>()->timeStamp();

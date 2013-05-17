@@ -34,9 +34,6 @@ GeoNode* GPXextensionsTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.represents( gpxTag_trkpt ) )
     {
         GeoDataTrack* track = parentItem.nodeAs<GeoDataTrack>();
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_extensions << ">";
-#endif
         return track;
     }
 

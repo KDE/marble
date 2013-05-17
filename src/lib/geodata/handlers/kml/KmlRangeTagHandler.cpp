@@ -28,10 +28,6 @@ KML_DEFINE_TAG_HANDLER (range)
             qreal range = rangeTemp.toDouble();
 
             parentItem.nodeAs<GeoDataLookAt>()->setRange( range );
-#ifdef DEBUG_TAGS
-            mDebug () << "Parsed <" << kmlTag_range << "> containing: " <<
-            range << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         }
 
       return 0;

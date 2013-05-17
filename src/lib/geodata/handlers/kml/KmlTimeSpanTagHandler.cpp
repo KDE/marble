@@ -32,14 +32,7 @@ GeoNode* KmlTimeSpanTagHandler::parse( GeoParser& parser ) const
         GeoDataTimeSpan timeSpan;
         timeSpan.setBegin( QDateTime::fromString( "1752-01-02T00:00:00", Qt::ISODate ) );
 	timeSpan.setEnd( QDateTime::fromString( "7999-12-31T23:59:59", Qt::ISODate ) );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_TimeSpan << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
 	QString id = parser.attribute( "id" ).trimmed();
-#ifdef DEBUG_TAGS
-        mDebug() << "atrribute 'id':" << id;
-#endif // DEBUG_TAGS
         parentItem.nodeAs<GeoDataFeature>()->setTimeSpan( timeSpan );        
 
         return &parentItem.nodeAs<GeoDataFeature>()->timeSpan();             

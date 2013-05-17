@@ -32,10 +32,6 @@ GeoNode* KmlmaxAltitudeTagHandler::parse( GeoParser& parser ) const
         float maxAltitude = parser.readElementText().trimmed().toFloat();
 
         parentItem.nodeAs<GeoDataLatLonAltBox>()->setMaxAltitude( maxAltitude );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_maxAltitude << "> containing: " << maxAltitude
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
 
     return 0;

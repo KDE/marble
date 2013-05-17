@@ -35,10 +35,6 @@ GeoNode* GPXtimeTagHandler::parse(GeoParser& parser) const
         GeoDataTrack* track = parentItem.nodeAs<GeoDataTrack>();
         QDateTime dateTime = QDateTime::fromString( parser.readElementText().trimmed(), Qt::ISODate );
         track->appendWhen( dateTime );
-
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_time << ">" << dateTime;
-#endif
     }
     return 0;
 }

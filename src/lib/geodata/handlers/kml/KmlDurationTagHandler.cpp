@@ -33,10 +33,6 @@ KML_DEFINE_TAG_HANDLER( duration )
         qreal const duration = parser.readElementText().trimmed().toDouble();
         if ( parentItem.is<GeoDataFlyTo>() ){
             parentItem.nodeAs<GeoDataFlyTo>()->setDuration( duration );
-#ifdef DEBUG_TAGS
-            mDebug () << "Parsed <" << kmlTag_duration << "> containing: " <<
-            duration << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         }
         return 0;
 }

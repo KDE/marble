@@ -54,11 +54,6 @@ GeoNode* KmllistItemTypeTagHandler::parse( GeoParser& parser ) const
                      << "falling back to default - check";
         }
         parentItem.nodeAs<GeoDataListStyle>()->setListItemType( type );
-
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_listItemType << "> containing : " << typeText
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     return 0;
 }

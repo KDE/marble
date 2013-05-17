@@ -34,11 +34,6 @@ GeoNode* KmlItemIconTagHandler::parse( GeoParser& parser ) const
         GeoDataItemIcon *itemIcon = new GeoDataItemIcon;
         parentItem.nodeAs<GeoDataListStyle>()->append( itemIcon );
         return itemIcon;
-
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_ItemIcon << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     return 0;
 }

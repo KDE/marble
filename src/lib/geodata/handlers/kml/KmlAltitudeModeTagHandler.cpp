@@ -76,10 +76,6 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataModel>()->setAltitudeMode( mode );
     }
 
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_altitudeMode << "> containing: " << content
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
     return 0;
 }
 

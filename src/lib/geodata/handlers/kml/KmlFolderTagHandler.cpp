@@ -45,10 +45,6 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
         GeoDataContainer *parentPtr = parentItem.nodeAs<GeoDataContainer>();
         parentPtr->append( folder );
 
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_Folder << "> containing: " << folder
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         return folder;
     } else if ( parentItem.qualifiedName().first == kmlTag_kml) {
         GeoDataDocument* doc = geoDataDoc( parser );

@@ -40,10 +40,6 @@ GeoNode* KmlbgColorTagHandler::parse( GeoParser& parser ) const
     {
         parentItem.nodeAs<GeoDataListStyle>()->setBackgroundColor( color );
     }
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_bgColor << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
 
     return 0;
 }

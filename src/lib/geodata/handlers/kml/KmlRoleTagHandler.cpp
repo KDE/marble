@@ -47,10 +47,6 @@ GeoNode* KmlroleTagHandler::parse( GeoParser& parser ) const
             role = ' ';
         }        
         parentItem.nodeAs<GeoDataPlacemark>()->setRole( role );
-#ifdef DEBUG_TAGS
-//         mDebug() << "Parsed <" << kmlTag_role << "> containing: " << content
-//                  << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
 
     return 0;

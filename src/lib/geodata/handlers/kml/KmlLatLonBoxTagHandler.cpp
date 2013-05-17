@@ -30,10 +30,6 @@ GeoNode* KmlLatLonBoxTagHandler::parse( GeoParser& parser ) const
     GeoDataLatLonBox box;
 
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_LatLonBox << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_GroundOverlay ) )
     {

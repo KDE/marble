@@ -30,10 +30,6 @@ GeoNode* KmlLodTagHandler::parse( GeoParser& parser ) const
     GeoDataLod lod;
 
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Lod << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_Region ) )
     {

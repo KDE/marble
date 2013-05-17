@@ -30,10 +30,6 @@ GeoNode* KmlRegionTagHandler::parse( GeoParser& parser ) const
     GeoDataRegion region;
 
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Region << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.is<GeoDataFeature>() ) {
         parentItem.nodeAs<GeoDataFeature>()->setRegion( region );

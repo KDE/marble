@@ -28,10 +28,6 @@ GeoNode* KmldisplayNameTagHandler::parse( GeoParser& parser ) const
 
     if( parentItem.represents( kmlTag_Data ) ) {
         QString displayName = parser.readElementText().trimmed();
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_displayName << "> containing: " << displayName
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         parentItem.nodeAs<GeoDataData>()->setDisplayName( displayName );
     }
     return 0;

@@ -45,10 +45,6 @@ GeoNode* KmlvisibilityTagHandler::parse( GeoParser& parser ) const
             parentItem.nodeAs<GeoDataFeature>()->setVisible( true );
         else
             parentItem.nodeAs<GeoDataFeature>()->setVisible( false );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_visibility << "> containing: " << visibility
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
 
     return 0;

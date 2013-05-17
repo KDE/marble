@@ -31,10 +31,6 @@ GeoNode* KmlGroundOverlayTagHandler::parse( GeoParser& parser ) const
     GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay;
 
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_GroundOverlay << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
         parentItem.nodeAs<GeoDataContainer>()->append( overlay );

@@ -32,11 +32,6 @@ GeoNode* KmltextTagHandler::parse( GeoParser& parser ) const
     {
         QString text = parser.readElementText().trimmed();
         parentItem.nodeAs<GeoDataBalloonStyle>()->setText( text );
-
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_text << "> containing: " << text
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     return 0;
 }

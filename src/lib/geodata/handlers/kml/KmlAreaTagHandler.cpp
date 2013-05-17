@@ -46,10 +46,6 @@ GeoNode* KmlareaTagHandler::parse( GeoParser& parser ) const
         qreal ar = area.toDouble();
         if( ar < 0.0 ) ar = 0.0;
         parentItem.nodeAs<GeoDataPlacemark>()->setArea( ar );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_area << "> containing: " << area
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
 
     return 0;

@@ -35,10 +35,6 @@ GeoNode* KmlxTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.is<GeoDataScale>() ){
         double x = parser.readElementText().trimmed().toDouble();
 	parentItem.nodeAs<GeoDataScale>()->setX( x );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_x << "> containing: " << parser.readElementText().trimmed()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     return 0;
 }

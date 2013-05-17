@@ -41,11 +41,6 @@ GeoNode* KmlouterBoundaryIsTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_outerBoundaryIs << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
-
     return parentItem.nodeAs<GeoDataPolygon>();
 }
 

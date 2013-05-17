@@ -33,10 +33,6 @@ GeoNode* KmlBalloonStyleTagHandler::parse( GeoParser& parser ) const
         GeoDataBalloonStyle style;
 
         parentItem.nodeAs<GeoDataStyle>()->setBalloonStyle( style );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_BalloonStyle << "> containing: " << &parentItem.nodeAs<GeoDataStyle>()->balloonStyle()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         return &parentItem.nodeAs<GeoDataStyle>()->balloonStyle();
     }
     return 0;

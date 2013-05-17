@@ -31,10 +31,6 @@ GeoNode* KmlbeginTagHandler::parse( GeoParser& parser ) const
 
     if( parentItem.represents( kmlTag_TimeSpan ) ) {
         QString beginString = parser.readElementText().trimmed();
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_begin << "> containing: " << beginString
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
 	modify( beginString );
         QDateTime begin = QDateTime::fromString( beginString, Qt::ISODate );
         parentItem.nodeAs<GeoDataTimeSpan>()->setBegin( begin );

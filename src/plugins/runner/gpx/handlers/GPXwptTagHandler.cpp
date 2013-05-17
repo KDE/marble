@@ -63,9 +63,6 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         placemark->setStyle(&doc->style("waypoint"));
 
         doc->append(placemark);
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_wpt << "> waypoint: " << doc->size();
-#endif
         return placemark;
     }
     return 0;

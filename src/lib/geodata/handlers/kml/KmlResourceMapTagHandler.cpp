@@ -31,11 +31,6 @@ GeoNode* KmlResourceMapTagHandler::parse( GeoParser& parser ) const
     GeoDataResourceMap map;
     GeoStackItem parentItem = parser.parentElement();
 
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_ResourceMap << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
-
     if( parentItem.represents( kmlTag_Model ) ) {
         parentItem.nodeAs<GeoDataModel>()->setResourceMap(map);
 	    return &parentItem.nodeAs<GeoDataModel>()->resourceMap();

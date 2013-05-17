@@ -50,9 +50,6 @@ GeoNode* GPXrteTagHandler::parse(GeoParser& parser) const
         placemark->setGeometry(linestring);
         placemark->setStyleUrl("#map-route");
 
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_rte << "> rte: " << doc->size();
-#endif
         return placemark;
     }
     return 0;

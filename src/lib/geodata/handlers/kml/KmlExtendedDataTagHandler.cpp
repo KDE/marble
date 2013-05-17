@@ -33,18 +33,10 @@ GeoNode* KmlExtendedDataTagHandler::parse( GeoParser& parser ) const
 
     if( parentItem.is<GeoDataFeature>() ) {
         GeoDataExtendedData extendedData;
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_ExtendedData << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         parentItem.nodeAs<GeoDataFeature>()->setExtendedData( extendedData );
         return static_cast<GeoDataExtendedData*>( &parentItem.nodeAs<GeoDataFeature>()->extendedData() );
     } else if( parentItem.is<GeoDataTrack>() ) {
         GeoDataExtendedData extendedData;
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_ExtendedData << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         parentItem.nodeAs<GeoDataTrack>()->setExtendedData( extendedData );
         return static_cast<GeoDataExtendedData*>( &parentItem.nodeAs<GeoDataTrack>()->extendedData() );
     } else {

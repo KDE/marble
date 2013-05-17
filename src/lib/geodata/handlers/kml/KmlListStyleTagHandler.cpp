@@ -33,10 +33,6 @@ GeoNode* KmlListStyleTagHandler::parse( GeoParser& parser ) const
         GeoDataListStyle style;
 
         parentItem.nodeAs<GeoDataStyle>()->setListStyle( style );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_ListStyle << "> containing: " << &parentItem.nodeAs<GeoDataStyle>()->listStyle()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         return &parentItem.nodeAs<GeoDataStyle>()->listStyle();
     }
     return 0;

@@ -306,8 +306,6 @@ if(WIN32)
   # distinguish between debug and release plugin
   SET(CMAKE_DEBUG_POSTFIX "d")
 endif(WIN32)
-# reenable this if you want to debug kml tags
-# add_definitions("-DDEBUG_TAGS")
 ####################################################
 
 ####################################################

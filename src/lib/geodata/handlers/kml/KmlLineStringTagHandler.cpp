@@ -44,10 +44,6 @@ GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     GeoDataLineString *lineString = new GeoDataLineString;
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_LineString << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_Placemark ) ) {
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( lineString );

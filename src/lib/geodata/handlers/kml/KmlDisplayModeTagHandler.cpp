@@ -38,11 +38,6 @@ GeoNode* KmldisplayModeTagHandler::parse( GeoParser& parser ) const
                 displayMode = GeoDataBalloonStyle::Hide;
 
         parentItem.nodeAs<GeoDataBalloonStyle>()->setDisplayMode( displayMode );
-
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_displayMode << "> containing: " << mode
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     return 0;
 }

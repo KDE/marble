@@ -43,10 +43,6 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
 
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Placemark << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
         parentItem.nodeAs<GeoDataContainer>()->append( placemark );

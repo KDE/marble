@@ -40,16 +40,8 @@ GeoNode* KmlSimpleFieldTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     if( parentItem.represents( kmlTag_Schema ) ) {
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_SimpleField << "> "
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         QString name = parser.attribute( "name" ).trimmed();
         QString type = parser.attribute( "type" ).trimmed();
-#ifdef DEBUG_TAGS
-        mDebug() << "adding new Tag" << name << "of type" << type << "to parent Tag.";
-        mDebug() << "not implemented yet.";
-#endif // DEBUG_TAGS
     }
 
     return 0;

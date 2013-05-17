@@ -92,9 +92,6 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     doc->addStyleMap(waypointStyleMap);
     doc->addStyle(waypointStyle);
 
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << gpxTag_gpx << "> document: " << doc;
-#endif
     return doc;
 }
 

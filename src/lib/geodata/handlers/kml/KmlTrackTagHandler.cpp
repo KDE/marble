@@ -29,11 +29,6 @@ GeoNode *KmlTrackTagHandler::parse( GeoParser &parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    #ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Track << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-    #endif // DEBUG_TAGS
-
     if ( parentItem.represents( kmlTag_Placemark ) ) {
         GeoDataTrack *track = new GeoDataTrack();
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( track );

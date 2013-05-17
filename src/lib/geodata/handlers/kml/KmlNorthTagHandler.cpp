@@ -34,10 +34,6 @@ GeoNode* KmlnorthTagHandler::parse( GeoParser& parser ) const
     } else if ( parentItem.represents( kmlTag_LatLonBox ) ) {
         parentItem.nodeAs<GeoDataLatLonBox>()->setNorth( north, GeoDataCoordinates::Degree );
     }
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_north << "> containing: " << north
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
 
     return 0;
 }

@@ -40,17 +40,11 @@ GeoNode* GPXtypeTagHandler::parse(GeoParser& parser) const
         GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
 
         placemark->setRole(parser.readElementText().trimmed());
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_type << "> : " << placemark->role();
-#endif
     }
     else if (parentItem.represents(gpxTag_rte))
     {
         GeoDataFeature* route = parentItem.nodeAs<GeoDataFeature>();
         route->setRole(parser.readElementText().trimmed());
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_type << "> : " << route->role();
-#endif
     }
     // TODO: tracks, link
     return 0;

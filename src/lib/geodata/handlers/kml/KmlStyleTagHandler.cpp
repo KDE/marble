@@ -47,10 +47,6 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
         QString styleId = parser.attribute( "id" ).trimmed();
         style.setStyleId( styleId );
         parentItem.nodeAs<GeoDataDocument>()->addStyle( style );
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Style << "> containing: " << &parentItem.nodeAs<GeoDataDocument>()->style( styleId ) << " parentItem: Document "
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         return &parentItem.nodeAs<GeoDataDocument>()->style( styleId );
     }
     else if ( parentItem.represents( kmlTag_Placemark ) ) {
@@ -58,10 +54,6 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
         style->setStyleId( parser.attribute( "id" ).trimmed() );
         parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
         return style;
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Style << ">" << " parentItem: Feature (ignoring styles outside of document tag)"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     // FIXME: KMLStyle can be contained in MultiGeometry as well
     return 0;

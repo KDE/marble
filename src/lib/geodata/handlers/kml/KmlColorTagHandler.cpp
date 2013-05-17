@@ -48,10 +48,6 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
         } else if ( parentItem.is<GeoDataOverlay>() ) {
             parentItem.nodeAs<GeoDataOverlay>()->setColor( color );
         }
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_color << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     return 0;
 }

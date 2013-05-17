@@ -34,9 +34,6 @@ GeoNode* GPXeleTagHandler::parse(GeoParser& parser) const
     {
         GeoDataTrack* track = parentItem.nodeAs<GeoDataTrack>();
         track->appendAltitude( parser.readElementText().trimmed().toDouble() );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_ele << ">";
-#endif
         return track;
     }
     return 0;

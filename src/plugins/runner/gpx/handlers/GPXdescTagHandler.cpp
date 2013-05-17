@@ -44,9 +44,6 @@ GeoNode* GPXdescTagHandler::parse(GeoParser& parser) const
         placemark->setDescription(desc.append(parser.readElementText().trimmed().replace(QLatin1Char('\n'),QLatin1String("\n<br/>"))));
         placemark->setDescriptionCDATA(true);
 
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_desc << "> : " << placemark->description();
-#endif
     }
     else if (parentItem.represents(gpxTag_rte))
     {
@@ -58,9 +55,6 @@ GeoNode* GPXdescTagHandler::parse(GeoParser& parser) const
         }
         route->setDescription(desc.append(parser.readElementText().trimmed().replace(QLatin1Char('\n'),QLatin1String("\n<br/>"))));
         route->setDescriptionCDATA(true);
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_desc << "> : " << route->description();
-#endif
     }
     return 0;
 }

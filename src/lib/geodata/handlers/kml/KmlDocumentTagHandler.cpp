@@ -46,18 +46,11 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
             GeoDataDocument *document = new GeoDataDocument;
             parentItem.nodeAs<GeoDataContainer>()->append( document );
 
-#ifdef DEBUG_TAGS
-            mDebug() << "Parsed <" << kmlTag_Document << "> containing: " << &parentItem.nodeAs<GeoDataContainer>()->last()
-                     << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
             return document;
         }
         else if ( parentItem.qualifiedName().first == kmlTag_kml)
         {
             GeoDataDocument* doc = geoDataDoc( parser );
-#ifdef DEBUG_TAGS
-            mDebug() << "Parsed <" << kmlTag_Document << "> document: " << doc;
-#endif
             return doc;
         }
     }

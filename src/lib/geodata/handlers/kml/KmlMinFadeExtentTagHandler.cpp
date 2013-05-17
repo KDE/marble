@@ -32,10 +32,6 @@ GeoNode* KmlminFadeExtentTagHandler::parse( GeoParser& parser ) const
         float minFadeExtent = parser.readElementText().trimmed().toFloat();
 
         parentItem.nodeAs<GeoDataLod>()->setMinFadeExtent( minFadeExtent );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_minFadeExtent << "> containing: " << minFadeExtent
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
 
     return 0;

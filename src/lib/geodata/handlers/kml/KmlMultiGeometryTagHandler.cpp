@@ -45,18 +45,10 @@ GeoNode* KmlMultiGeometryTagHandler::parse( GeoParser& parser ) const
     GeoDataMultiGeometry *geom = new GeoDataMultiGeometry;
     if( parentItem.represents( kmlTag_Placemark ) ) {
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( geom );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_MultiGeometry << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
         return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
 
     } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( geom );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_MultiGeometry << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
         return geom;
     } else {
         delete geom;

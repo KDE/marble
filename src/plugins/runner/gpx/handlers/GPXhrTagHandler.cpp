@@ -41,9 +41,6 @@ GeoNode* GPXhrTagHandler::parse(GeoParser& parser) const
         }
         QVariant value( parser.readElementText().toInt() );
         arrayData->append( value );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_hr << "> value" << value;
-#endif
         return 0;
     }
 

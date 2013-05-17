@@ -35,11 +35,6 @@ GeoNode* KmleastTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLatLonBox>()->setEast( east, GeoDataCoordinates::Degree );
     }
 
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_east << "> containing: " << east
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-
     return 0;
 }
 

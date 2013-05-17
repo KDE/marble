@@ -32,18 +32,11 @@ GeoNode* KmlDataTagHandler::parse( GeoParser& parser ) const
 
     if( parentItem.represents( kmlTag_ExtendedData ) ) {
 	GeoDataData data;
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_Data << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         
         QString name = parser.attribute( "name" ).trimmed();
         data.setName( name );
         QString displayName = parser.attribute( "displayName" ).trimmed();
         data.setDisplayName( displayName );
-#ifdef DEBUG_TAGS
-        mDebug() << "attribute 'name':" << name;
-#endif // DEBUG_TAGS
         parentItem.nodeAs< GeoDataExtendedData >()->addValue( data );
         return static_cast<GeoDataData*>( &parentItem.nodeAs<GeoDataExtendedData>()->valueRef( name ) );
     } else {

@@ -46,9 +46,6 @@ GeoNode* GPXtrksegTagHandler::parse(GeoParser& parser) const
         GeoDataTrack *track = new GeoDataTrack;
 
         multigeometry->append( track );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_trkseg << "> trkseg: " << multigeometry->size();
-#endif
         return track;
     }
     return 0;

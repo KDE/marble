@@ -42,25 +42,13 @@ GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     if( parentItem.represents( kmlTag_Placemark ) ) {
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataPlacemark>()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         return parentItem.nodeAs<GeoDataPlacemark>();
 
     } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
         GeoDataPoint *point = new GeoDataPoint;
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataMultiGeometry>()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         return point;
     } else if( parentItem.represents( kmlTag_PhotoOverlay ) ) {
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataPhotoOverlay>()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         return &parentItem.nodeAs<GeoDataPhotoOverlay>()->point();
     }
     return 0;

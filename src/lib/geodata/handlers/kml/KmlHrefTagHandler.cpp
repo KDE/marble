@@ -64,11 +64,6 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLink>()->setHref( content );
     }
 
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_href << "> containing: " << content
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-
     return 0;
 }
 

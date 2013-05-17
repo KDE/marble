@@ -55,11 +55,6 @@ GeoNode* KmlstateTagHandler::parse( GeoParser& parser ) const
         }
 
         parentItem.nodeAs<GeoDataItemIcon>()->setState( itemIconState );
-
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_state << "> containing : " << value
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     return 0;
 }

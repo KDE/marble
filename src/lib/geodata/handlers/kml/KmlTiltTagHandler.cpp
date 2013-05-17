@@ -35,17 +35,9 @@ GeoNode* KmltiltTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.is<GeoDataCamera>() ){
         qreal tilt = parser.readElementText().trimmed().toDouble();
         parentItem.nodeAs<GeoDataCamera>()->setTilt(tilt);
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_tilt << "> containing: " << parser.readElementText().trimmed()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     } else if ( parentItem.is<GeoDataOrientation>() ){
         double tilt = parser.readElementText().trimmed().toDouble();
 	parentItem.nodeAs<GeoDataOrientation>()->setTilt(tilt);
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_tilt << "> containing: " << parser.readElementText().trimmed()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     return 0;
 }

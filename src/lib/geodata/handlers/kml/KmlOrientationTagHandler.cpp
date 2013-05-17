@@ -30,10 +30,6 @@ GeoNode* KmlOrientationTagHandler::parse( GeoParser& parser ) const
 
     GeoDataOrientation orientation;
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Orientation << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_Model ) ) {
         parentItem.nodeAs<GeoDataModel>()->setOrientation(orientation);

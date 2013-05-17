@@ -35,10 +35,6 @@ GeoNode* KmlSimpleArrayDataTagHandler::parse( GeoParser& parser ) const
         GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData();
         QString name = parser.attribute( "name" ).trimmed();
         parentItem.nodeAs<GeoDataExtendedData>()->setSimpleArrayData( name, arrayData );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_SimpleArrayData << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
         return arrayData;
     }
 

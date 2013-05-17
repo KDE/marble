@@ -31,10 +31,6 @@ GeoNode* KmlLocationTagHandler::parse( GeoParser& parser ) const
 
     GeoDataLocation location;
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Location << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_Model ) ) {
         parentItem.nodeAs<GeoDataModel>()->setLocation(location);

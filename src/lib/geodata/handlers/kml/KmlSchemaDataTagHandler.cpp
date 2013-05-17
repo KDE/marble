@@ -31,15 +31,8 @@ GeoNode* KmlSchemaDataTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
 
     if( parentItem.represents( kmlTag_ExtendedData ) ) {
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_SchemaData << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
 
         QString schemaUrl = parser.attribute( "schemaUrl" ).trimmed();
-#ifdef DEBUG_TAGS
-        mDebug() << "attribute 'schemaUrl':" << schemaUrl;
-#endif // DEBUG_TAGS
 
         return parentItem.nodeAs<GeoDataExtendedData>();
     } else {

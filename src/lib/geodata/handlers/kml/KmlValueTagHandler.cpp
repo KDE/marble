@@ -35,17 +35,9 @@ GeoNode* KmlvalueTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_Data ) ) {
         QString value = parser.readElementText().trimmed();
         parentItem.nodeAs<GeoDataData>()->setValue( QVariant( value ) );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_value << "> containing: " << value
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     } else if( parentItem.represents( kmlTag_SimpleArrayData ) ) {
         QString value = parser.readElementText().trimmed();
         parentItem.nodeAs<GeoDataSimpleArrayData>()->append( QVariant( value ) );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_SimpleArrayData << "> containing: " << value
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
     return 0;
 }

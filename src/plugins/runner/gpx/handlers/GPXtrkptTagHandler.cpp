@@ -60,10 +60,6 @@ GeoNode* GPXtrkptTagHandler::parse(GeoParser& parser) const
         coord.set(lon, lat, 0, GeoDataCoordinates::Degree);
         track->appendCoordinates( coord );
 
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_trkpt << "> waypoint: " /*<< linestring->size()*/
-                << coord.toString(GeoDataCoordinates::Decimal);
-#endif
         return track;
     }
     return 0;

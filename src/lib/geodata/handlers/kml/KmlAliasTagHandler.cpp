@@ -31,10 +31,6 @@ GeoNode* KmlAliasTagHandler::parse( GeoParser& parser ) const
 
     GeoDataAlias alias;
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_Alias << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_ResourceMap ) ) {
         parentItem.nodeAs<GeoDataResourceMap>()->setAlias(alias);

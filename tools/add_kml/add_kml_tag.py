@@ -241,10 +241,6 @@ GeoNode* KmltemplateTagHandler::parse( GeoParser& parser ) const
         QString content = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataParent>()->doSomething( content );
-#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_template << "> containing: " << content
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
     }
 
     return 0;

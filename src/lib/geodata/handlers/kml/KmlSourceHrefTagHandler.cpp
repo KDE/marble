@@ -37,10 +37,6 @@ GeoNode* KmlsourceHrefTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.is<GeoDataAlias>() ){
         parentItem.nodeAs<GeoDataAlias>()->setSourceHref( content );
     }
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_sourceHref << "> containing: " << content
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
 
     return 0;
 }

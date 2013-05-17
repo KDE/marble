@@ -31,10 +31,6 @@ GeoNode* KmlwhenTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
 
     QString whenString = parser.readElementText().trimmed();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_when << "> containing: " << whenString
-                << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
 	modify( whenString );
 	QDateTime when = QDateTime::fromString( whenString, Qt::ISODate );
     if( parentItem.represents( kmlTag_TimeStamp ) ) {

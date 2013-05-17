@@ -30,10 +30,6 @@ GeoNode* KmlLatLonAltBoxTagHandler::parse( GeoParser& parser ) const
     GeoDataLatLonAltBox box;
 
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_LatLonAltBox << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if( parentItem.represents( kmlTag_Region ) )
     {

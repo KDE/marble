@@ -28,10 +28,6 @@ GeoNode* KmloverlayXYTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_overlayXY ) );
 
     GeoStackItem parentItem = parser.parentElement();
-#ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_overlayXY << ">"
-             << " parent item name: " << parentItem.qualifiedName().first;
-#endif
 
     if (parentItem.represents( kmlTag_ScreenOverlay ))
     {

@@ -43,11 +43,6 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_LinearRing << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
-
     if( parentItem.represents( kmlTag_outerBoundaryIs ) ) {
         GeoDataLinearRing linearRing;
         parentItem.nodeAs<GeoDataPolygon>()->setOuterBoundary( linearRing );

@@ -43,10 +43,6 @@ GeoNode* KmlfillTagHandler::parse( GeoParser& parser ) const
         bool fill = static_cast<bool>( parser.readElementText().trimmed().toInt() );
         
         parentItem.nodeAs<GeoDataPolyStyle>()->setFill( fill );
-#ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_fill << "> containing: " << fill
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
     }
 
     return 0;
