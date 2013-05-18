@@ -12,11 +12,15 @@
 #define MARBLE_GEODATAABSTRACTVIEW_H
 
 #include "GeoDataObject.h"
+#include "GeoDataTimeSpan.h"
+#include "GeoDataTimeStamp.h"
 
 #include "geodata_export.h"
 
 namespace Marble
 {
+
+class GeoDataAbstractViewPrivate;
 
 /**
  * @see GeoDataLookAt
@@ -25,10 +29,29 @@ class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
 {
  public:
     GeoDataAbstractView();
+
     ~GeoDataAbstractView();
+
+    GeoDataAbstractView( const GeoDataAbstractView &other );
+
+    GeoDataAbstractView& operator=( const GeoDataAbstractView &other );
+
+    const GeoDataTimeSpan& timeSpan() const;
+
+    GeoDataTimeSpan& timeSpan();
+
+    void setTimeSpan( const GeoDataTimeSpan &timeSpan );
+
+    GeoDataTimeStamp& timeStamp();
+
+    const GeoDataTimeStamp& timeStamp() const;
+
+    void setTimeStamp( const GeoDataTimeStamp &timeStamp );
+
+private:
+    GeoDataAbstractViewPrivate* const d;
 };
 
 } // namespace Marble
 
 #endif
-
