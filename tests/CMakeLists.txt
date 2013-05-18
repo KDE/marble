@@ -100,6 +100,8 @@ marble_add_test( TestGeoDataCoordinates )       # Check coordinates specifics
 marble_add_test( TestGeoDataLatLonAltBox )      # Check boxen specifics
 marble_add_test( TestGeoDataGeometry )          # Check geometry specifics
 marble_add_test( TestGeoDataTrack )             # Check track specifics
+marble_add_test( TestGxTimeSpan )
+marble_add_test( TestGxTimeStamp )
 marble_add_test( TestBalloonStyle )             # Check BalloonStyle
 marble_add_test( TestListStyle )                # Check ListStyle
 marble_add_test( TestScreenOverlay )     # Check ScreenOverlay specifics
