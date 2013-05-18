@@ -406,6 +406,9 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataStyleMap.h
     geodata/data/GeoDataStyleSelector.h
     geodata/data/GeoDataTrack.h
+    geodata/data/GeoDataTimeSpan.h
+    geodata/data/GeoDataTimeStamp.h
+    geodata/data/GeoDataTimePrimitive.h
     geodata/data/Serializable.h
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h
