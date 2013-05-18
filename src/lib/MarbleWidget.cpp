@@ -660,7 +660,7 @@ void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
 
 void MarbleWidget::centerOn( const GeoDataPlacemark& placemark, bool animated )
 {
-    GeoDataLookAt *lookAt( placemark.lookAt() );
+    const GeoDataLookAt *lookAt( placemark.lookAt() );
     if ( lookAt ) {
         flyTo( *lookAt, animated ? Automatic : Instant );
     } else {

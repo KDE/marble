@@ -458,7 +458,7 @@ void MainWindow::createBookmarksListMenu( QMenu *bookmarksListMenu, const GeoDat
         QAction *bookmarkAct = new QAction( placemark->name(), this );
         QVariant var;
 
-        GeoDataLookAt* lookAt = placemark->lookAt();
+        const GeoDataLookAt* lookAt = placemark->lookAt();
         if ( !lookAt ) {
             GeoDataCoordinates coordinates = placemark->coordinate( m_controlView->marbleModel()->clockDateTime() );
             GeoDataLookAt coordinateToLookAt;

@@ -246,7 +246,7 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
         GeoDataLookAt *lookat = new GeoDataLookAt;
         lookat->setCoordinates( coordinates() );
         lookat->setRange( range() );
-        bookmark.setLookAt( lookat );
+        bookmark.setAbstractView( lookat );
     }
 
     bookmark.extendedData().addValue( GeoDataData( "isBookmark", true ) );

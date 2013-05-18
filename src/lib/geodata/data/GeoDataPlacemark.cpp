@@ -65,16 +65,14 @@ GeoDataGeometry* GeoDataPlacemark::geometry() const
     return p()->m_geometry;
 }
 
-GeoDataLookAt *GeoDataPlacemark::lookAt() const
+const GeoDataLookAt *GeoDataPlacemark::lookAt() const
 {
-    return p()->m_lookAt;
+    return dynamic_cast<const GeoDataLookAt*>( abstractView() );
 }
 
-void GeoDataPlacemark::setLookAt( GeoDataLookAt *lookAt)
+GeoDataLookAt *GeoDataPlacemark::lookAt()
 {
-    detach();
-    delete p()->m_lookAt;
-    p()->m_lookAt = lookAt;
+    return dynamic_cast<GeoDataLookAt*>( abstractView() );
 }
 
 GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool *iconAtCoordinates ) const

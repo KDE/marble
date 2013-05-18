@@ -206,12 +206,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * to GeoDataLookAt with range equals to altitude of
      * GeoDataCoordinate
      */
-    GeoDataLookAt *lookAt() const;
-
-    /**
-     * Set lookAt @p GeoDataLookAt
-     */
-    void setLookAt( GeoDataLookAt *lookAt );
+    const GeoDataLookAt *lookAt() const;
+    GeoDataLookAt *lookAt();
 
  private:
     GeoDataPlacemarkPrivate *p() const;

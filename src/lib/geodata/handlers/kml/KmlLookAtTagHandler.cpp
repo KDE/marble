@@ -32,7 +32,7 @@ namespace kml
         GeoStackItem parentItem = parser.parentElement();
       if ( parentItem.represents( kmlTag_Placemark ) ) {
           GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
-          placemark->setLookAt( lookAt );
+          placemark->setAbstractView( lookAt );
 
           return lookAt;
       }

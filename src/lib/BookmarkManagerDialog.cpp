@@ -223,7 +223,7 @@ void BookmarkManagerDialogPrivate::editBookmark()
                 GeoDataLookAt *lookat = new GeoDataLookAt;
                 lookat->setCoordinates( dialog->coordinates() );
                 lookat->setRange( dialog->range() );
-                bookmark->setLookAt( lookat );
+                bookmark->setAbstractView( lookat );
             }
             m_manager->updateBookmark( bookmark );
 
