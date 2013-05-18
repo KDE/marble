@@ -14,7 +14,7 @@
 #include <GeoDataParser.h>
 #include <GeoDataDocument.h>
 #include <GeoDataPlacemark.h>
-#include <GeoDataTimeStamp.h>
+#include <GeoDataTimeSpan.h>
 #include <GeoDataCamera.h>
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
@@ -79,5 +79,5 @@ void TestTimeStamp::simpleParseTest()
 
 QTEST_MAIN( TestTimeStamp )
 
-#include "TestStamp.moc"
+#include "TestTimeStamp.moc"
 

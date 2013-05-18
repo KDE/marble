@@ -76,5 +76,5 @@ void TestTimeStamp::simpleParseTest()
 
 QTEST_MAIN( TestTimeStamp )
 
-#include "TestStamp.moc"
+#include "TestTimeStamp.moc"
 

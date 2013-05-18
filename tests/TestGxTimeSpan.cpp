@@ -22,7 +22,7 @@
 
 using namespace Marble;
 
-class TestTimeSpan : public QObject
+class TestGxTimeSpan : public QObject
 {
     Q_OBJECT
 private slots:
@@ -30,13 +30,13 @@ private slots:
     void simpleParseTest();
 };
 
-void TestTimeSpan::initTestCase()
+void TestGxTimeSpan::initTestCase()
 {
     MarbleDebug::enable = true;
 }
 
 
-void TestTimeSpan::simpleParseTest()
+void TestGxTimeSpan::simpleParseTest()
 {
   QString const centerContent (
       "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -64,6 +64,6 @@ void TestTimeSpan::simpleParseTest()
     delete dataDocument;
 }
 
-QTEST_MAIN( TestTimeSpan )
+QTEST_MAIN( TestGxTimeSpan )
 
-#include "TestSpan.moc"
+#include "TestGxTimeSpan.moc"
