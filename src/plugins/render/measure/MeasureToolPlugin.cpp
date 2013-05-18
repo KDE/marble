@@ -55,7 +55,7 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
       m_marbleWidget( 0 ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 ),
-      m_showSegmentLabels( false )
+      m_showSegmentLabels( true )
 {
     m_pen.setWidthF( 2.0 );
 }
@@ -162,7 +162,7 @@ void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
-    m_showSegmentLabels = settings.value( "showSegmentLabels", 0 ).toBool();
+    m_showSegmentLabels = settings.value( "showSegmentLabels", true ).toBool();
 }
 
 void MeasureToolPlugin::writeSettings()
