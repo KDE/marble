@@ -184,6 +184,7 @@ geodata/writers/kml/KmlLinkTagWriter.cpp
 geodata/writers/kml/KmlListStyleTagWriter.cpp
 geodata/writers/kml/KmlLodTagWriter.cpp
 geodata/writers/kml/KmlLookAtTagWriter.cpp
+geodata/writers/kml/KmlModelTagWriter.cpp
 geodata/writers/kml/KmlMultiGeometryTagWriter.cpp
 geodata/writers/kml/KmlMultiTrackTagWriter.cpp
 geodata/writers/kml/KmlNetworkLinkTagWriter.cpp

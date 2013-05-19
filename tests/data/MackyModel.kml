@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Placemark>
+  <visibility>1</visibility>
+  <Model>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <Location>
+      <longitude>-105.27</longitude>
+      <latitude>40</latitude>
+      <altitude>23.4</altitude>
+    </Location>
+    <Orientation>
+      <heading>1</heading>
+      <tilt>2</tilt>
+      <roll>3</roll>
+    </Orientation>
+    <Scale>
+      <x>3</x>
+      <y>4</y>
+      <z>5</z>
+    </Scale>
+    <Link>
+      <href>MackyBldg.kmz/files/CU Macky.dae</href>
+      <refreshMode>onExpire</refreshMode>
+      <refreshInterval>4</refreshInterval>
+      <viewRefreshTime>4</viewRefreshTime>
+      <viewBoundScale>1</viewBoundScale>
+      <viewFormat>BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]</viewFormat>
+    </Link>
+    <ResourceMap>
+      <Alias>
+        <sourceHref>../files/CU-Macky-4sideturretnoCulling.jpg</sourceHref>
+        <targetHref>../files/CU-Macky-4sideturretnoCulling.jpg</targetHref>
+      </Alias>
+    </ResourceMap>
+  </Model>
+</Placemark>
+</kml>

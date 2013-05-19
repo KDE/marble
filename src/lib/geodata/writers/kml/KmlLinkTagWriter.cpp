@@ -52,7 +52,7 @@ bool KmlLinkTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     return true;
 }
 
-QString KmlLinkTagWriter::refreshModeToString( GeoDataLink::RefreshMode refreshMode) const
+QString KmlLinkTagWriter::refreshModeToString( GeoDataLink::RefreshMode refreshMode)
 {
     switch (refreshMode)
     {

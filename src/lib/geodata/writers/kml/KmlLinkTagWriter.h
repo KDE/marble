@@ -22,8 +22,9 @@ class KmlLinkTagWriter : public GeoTagWriter
 public:
     virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
 
+    static QString refreshModeToString( GeoDataLink::RefreshMode refreshMode) ;
+
 private:
-    QString refreshModeToString( GeoDataLink::RefreshMode refreshMode) const;
     QString viewRefreshModeToString( GeoDataLink::ViewRefreshMode) const;
 
 };

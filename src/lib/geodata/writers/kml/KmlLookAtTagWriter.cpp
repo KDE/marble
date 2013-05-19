@@ -35,7 +35,7 @@ bool KmlLookAtTagWriter::write( const GeoNode *node,
     writer.writeElement( "latitude", QString::number( lookAt->latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
     writer.writeElement( "altitude", QString::number( lookAt->altitude(), 'f', 10 ) );
     writer.writeElement( "range", QString::number( lookAt->range(), 'f', 10 ) );
-    
+
     writer.writeEndElement();
 
     return true;

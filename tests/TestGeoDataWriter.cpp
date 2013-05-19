@@ -93,6 +93,7 @@ void TestGeoDataWriter::countFeatures_data()
     QTest::newRow("CDATATest") << parsers.value("CDATATest.kml") << 1;
     QTest::newRow("NetworkLink") << parsers.value("NetworkLink.kml") << 1;
     QTest::newRow("NetworkLinkDocument") << parsers.value("NetworkLinkDocument.kml") << 2;
+    QTest::newRow("MackyModel") << parsers.value("MackyModel.kml") << 1;
 }
 
 void TestGeoDataWriter::countFeatures()
@@ -116,6 +117,7 @@ void TestGeoDataWriter::saveFile_data()
     QTest::newRow("CDATATest") << parsers.value("CDATATest.kml");
     QTest::newRow("NetworkLink") << parsers.value("NetworkLink.kml");
     QTest::newRow("NetworkLinkDocument") << parsers.value("NetworkLinkDocument.kml");
+    QTest::newRow("MackyModel") << parsers.value("MackyModel.kml");
 }
 
 void TestGeoDataWriter::saveFile()
@@ -145,6 +147,7 @@ void TestGeoDataWriter::saveAndLoad_data()
     QTest::newRow("CDATATest") << parsers.value("CDATATest.kml");
     QTest::newRow("NetworkLink") << parsers.value("NetworkLink.kml");
     QTest::newRow("NetworkLinkDocument") << parsers.value("NetworkLinkDocument.kml");
+    QTest::newRow("MackyModel") << parsers.value("MackyModel.kml");
 }
 
 void TestGeoDataWriter::saveAndLoad()
@@ -177,6 +180,7 @@ void TestGeoDataWriter::saveAndCompare_data()
     QTest::newRow("NewYorkDocument") << parsers.value( "NewYorkDocument.kml" ) << "NewYorkDocument.kml";
     QTest::newRow("NetworkLink") << parsers.value( "NetworkLink.kml" ) << "NetworkLink.kml";
     QTest::newRow("NetworkLinkDocument") << parsers.value( "NetworkLinkDocument.kml" ) << "NetworkLinkDocument.kml";
+    QTest::newRow("MackyModel") << parsers.value("MackyModel.kml") << "MackyModel.kml";
 }
 
 void TestGeoDataWriter::saveAndCompare()
