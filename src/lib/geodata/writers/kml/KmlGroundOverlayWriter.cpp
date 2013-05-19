@@ -54,11 +54,11 @@ QString KmlGroundOverlayWriter::altitudeModeToString(AltitudeMode mode)
 {
     switch (mode) {
     case ClampToGround:
-	return "ClampToGround";
+	return "clampToGround";
     case RelativeToGround:
-	return "RelativeToGround";
+	return "relativeToGround";
     case Absolute:
-	return "Absolute";
+	return "absolute";
     }
     return "";
 }
