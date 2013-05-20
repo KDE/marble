@@ -29,7 +29,7 @@ public:
     int m_maxLines;
     QDateTime m_expires;
     GeoDataUpdate m_update;
-    GeoDataAbstractView m_abstractView;
+    GeoDataAbstractView *m_abstractView;
 };
 
 GeoDataNetworkLinkControlPrivate::GeoDataNetworkLinkControlPrivate() :
@@ -43,8 +43,9 @@ GeoDataNetworkLinkControlPrivate::GeoDataNetworkLinkControlPrivate() :
     m_maxLines( 2 ),
     m_expires(),
     m_update(),
-    m_abstractView()
+    m_abstractView( 0 )
 {
+    delete m_abstractView;
 }
 
 GeoDataNetworkLinkControl::GeoDataNetworkLinkControl() :
@@ -179,12 +180,12 @@ void GeoDataNetworkLinkControl::setUpdate( const GeoDataUpdate &update )
     d->m_update = update;
 }
 
-GeoDataAbstractView GeoDataNetworkLinkControl::abstractView() const
+GeoDataAbstractView *GeoDataNetworkLinkControl::abstractView() const
 {
     return d->m_abstractView;
 }
 
-void GeoDataNetworkLinkControl::setAbstractView( const GeoDataAbstractView &abstractView )
+void GeoDataNetworkLinkControl::setAbstractView( GeoDataAbstractView *abstractView )
 {
     d->m_abstractView = abstractView;
 }

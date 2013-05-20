@@ -68,8 +68,8 @@ public:
     const GeoDataUpdate& update() const;
     void setUpdate( const GeoDataUpdate &update );
 
-    GeoDataAbstractView abstractView() const;
-    void setAbstractView( const GeoDataAbstractView &abstractView );
+    GeoDataAbstractView* abstractView() const;
+    void setAbstractView( GeoDataAbstractView *abstractView );
 
 private:
     GeoDataNetworkLinkControlPrivate* const d;
