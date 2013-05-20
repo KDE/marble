@@ -25,6 +25,7 @@ namespace Marble
 
 class EditBookmarkDialogPrivate;
 class BookmarkManager;
+class GeoDataFolder;
 class GeoDataLookAt;
 class MarbleWidget;
 

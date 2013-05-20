@@ -36,6 +36,7 @@ class QUrl;
 namespace Marble
 {
 class HttpDownloadManager;
+class GeoDataDocument;
 class GeoSceneTiled;
 class GeoSceneTextureTile;
 class GeoSceneVectorTile;

@@ -16,7 +16,6 @@
 
 #include <QtCore/QString>
 #include <QtCore/QSize>
-#include <QtGui/QPixmap>
 #include <QtGui/QFont>
 #include <QtGui/QColor>
 
@@ -28,10 +27,6 @@ namespace Marble
 {
 
 // forward define all features we can find.
-class GeoDataContainer;
-class GeoDataFolder;
-class GeoDataDocument;
-class GeoDataPlacemark;
 class GeoDataRegion;
 class GeoDataAbstractView;
 
@@ -60,10 +55,6 @@ class GeoDataFeaturePrivate;
 
 class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 {
-    friend class GeoDataContainer;
-    friend class GeoDataFolder;
-    friend class GeoDataDocument;
-    friend class GeoDataPlacemark;
  public:
     GeoDataFeature();
     /// Create a new GeoDataFeature with @p name as its name.
