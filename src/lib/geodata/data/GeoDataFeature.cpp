@@ -604,7 +604,7 @@ GeoDataTimeSpan& GeoDataFeature::timeSpan() const
     return d->m_timeSpan;
 }
 
-void GeoDataFeature::setTimeSpan( GeoDataTimeSpan timeSpan )
+void GeoDataFeature::setTimeSpan( const GeoDataTimeSpan &timeSpan )
 {
     detach();
     d->m_timeSpan = timeSpan;
@@ -615,7 +615,7 @@ GeoDataTimeStamp&  GeoDataFeature::timeStamp() const
     return d->m_timeStamp;
 }
 
-void GeoDataFeature::setTimeStamp( GeoDataTimeStamp timeStamp )
+void GeoDataFeature::setTimeStamp( const GeoDataTimeStamp &timeStamp )
 {
     detach();
     d->m_timeStamp = timeStamp;

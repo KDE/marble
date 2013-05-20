@@ -361,9 +361,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     /**
      * Set the timespan of the feature.
-     * @param timeSpan new of timespan.	
+     * @param timeSpan new of timespan.
      */
-    void setTimeSpan( GeoDataTimeSpan timeSpan );
+    void setTimeSpan( const GeoDataTimeSpan &timeSpan );
 
     /**
      * Return the timestamp of the feature.
@@ -374,7 +374,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * Set the timestamp of the feature.
      * @param timeStamp new of the timestamp.
      */
-    void setTimeStamp( GeoDataTimeStamp timeStamp );
+    void setTimeStamp( const GeoDataTimeStamp &timeStamp );
 
     /**
      * Return the style assigned to the placemark.
