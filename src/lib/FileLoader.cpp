@@ -324,8 +324,11 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                     || (*i)->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType
                     || (*i)->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
             /** @todo: How to handle this ? */
-        } else {
+        } else if ( (*i)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            Q_ASSERT( dynamic_cast<GeoDataPlacemark*>( *i ) );
+
             GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( *i );
+            Q_ASSERT( placemark->geometry() );
 
             bool hasPopularity = false;
 
@@ -494,6 +497,8 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             if ( placemark->population() < -1 ) {
                 placemark->setZoomLevel( 18 );
             }
+        } else {
+            qWarning() << Q_FUNC_INFO << "Unknown feature" << (*i)->nodeType() << ". Skipping.";
         }
     }
 }
