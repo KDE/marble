@@ -55,7 +55,7 @@ public:
     virtual ~GeoDataObject();
 
     /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+    virtual const char* nodeType() const = 0;
 
     /// Provides the parent of the object in GeoDataContainers
     virtual GeoDataObject *parent() const;

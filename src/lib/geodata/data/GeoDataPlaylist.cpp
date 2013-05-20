@@ -10,6 +10,8 @@
 
 #include "GeoDataPlaylist.h"
 
+#include "GeoDataTypes.h"
+
 namespace Marble
 {
 
@@ -19,6 +21,11 @@ GeoDataPlaylist::GeoDataPlaylist()
 
 GeoDataPlaylist::~GeoDataPlaylist()
 {
+}
+
+const char *GeoDataPlaylist::nodeType() const
+{
+    return GeoDataTypes::GeoDataPlaylistType;
 }
 
 GeoDataTourPrimitive* GeoDataPlaylist::primitive(int id)

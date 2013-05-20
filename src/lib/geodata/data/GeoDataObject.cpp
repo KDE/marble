@@ -34,11 +34,6 @@ class GeoDataObjectPrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataObjectType;
-    }
-
     int  m_id;
     int  m_targetId;
     GeoDataObject *m_parent;
@@ -65,11 +60,6 @@ GeoDataObject & GeoDataObject::operator=( const GeoDataObject & rhs )
 GeoDataObject::~GeoDataObject()
 {
     delete d;
-}
-
-const char* GeoDataObject::nodeType() const
-{
-    return d->nodeType();
 }
 
 GeoDataObject *GeoDataObject::parent() const

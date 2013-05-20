@@ -10,6 +10,8 @@
 
 #include "GeoDataTourControl.h"
 
+#include "GeoDataTypes.h"
+
 namespace Marble
 {
 
@@ -21,6 +23,11 @@ GeoDataTourControl::GeoDataTourControl() :
 
 GeoDataTourControl::~GeoDataTourControl()
 {
+}
+
+const char *GeoDataTourControl::nodeType() const
+{
+    return GeoDataTypes::GeoDataTourControlType;
 }
 
 QString GeoDataTourControl::id() const

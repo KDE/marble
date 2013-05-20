@@ -27,6 +27,8 @@ public:
     GeoDataTourControl();
     ~GeoDataTourControl();
 
+    const char *nodeType() const;
+
     QString id() const;
     void setId(const QString &id);
 

@@ -23,6 +23,8 @@ public:
     GeoDataPlaylist();
     ~GeoDataPlaylist();
 
+    const char *nodeType() const;
+
     GeoDataTourPrimitive* primitive(int id);
     const GeoDataTourPrimitive* primitive(int id) const;
     void addPrimitive(GeoDataTourPrimitive* primitive);
