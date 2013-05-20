@@ -19,6 +19,7 @@ namespace Marble {
 class GeoDataModelPrivate
 {
 public:
+    GeoDataModelPrivate();
 
     GeoDataCoordinates m_coordinates;
     AltitudeMode m_altitudeMode;
@@ -30,23 +31,32 @@ public:
     GeoDataResourceMap m_map;
     QString m_targetHref;
     QString m_sourceHref;
-
-    GeoDataModelPrivate();
 };
 
 GeoDataModelPrivate::GeoDataModelPrivate() :
-    m_coordinates(), m_orientation(), m_location(), m_altitudeMode( ClampToGround ), m_scale(), m_link(), m_map(), m_sourceHref(), m_targetHref()
+    m_coordinates(),
+    m_altitudeMode( ClampToGround ),
+    m_scale(),
+    m_orientation(),
+    m_location(),
+    m_link(),
+    m_map(),
+    m_targetHref(),
+    m_sourceHref()
 {
     // nothing to do
 }
 
-GeoDataModel::GeoDataModel() : GeoDataGeometry(),d( new GeoDataModelPrivate )
+GeoDataModel::GeoDataModel() :
+    GeoDataGeometry(),
+    d( new GeoDataModelPrivate )
 {
     // nothing to do
 }
 
 GeoDataModel::GeoDataModel( const GeoDataModel &other ) :
-    GeoDataGeometry( other ), d( new GeoDataModelPrivate( *other.d ) )
+    GeoDataGeometry( other ),
+    d( new GeoDataModelPrivate( *other.d ) )
 {
     // nothing to do
 }
