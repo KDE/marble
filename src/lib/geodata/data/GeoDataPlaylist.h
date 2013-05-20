@@ -11,13 +11,13 @@
 #ifndef GEODATAPLAYLIST_H
 #define GEODATAPLAYLIST_H
 
-#include "GeoDataFeature.h"
+#include "GeoDataObject.h"
 #include "GeoDataTourPrimitive.h"
 
 namespace Marble
 {
 
-class GEODATA_EXPORT GeoDataPlaylist : public GeoDataFeature
+class GEODATA_EXPORT GeoDataPlaylist : public GeoDataObject
 {
 public:
     GeoDataPlaylist();

@@ -11,13 +11,13 @@
 #ifndef GEODATATOURPRIMITIVE_H
 #define GEODATATOURPRIMITIVE_H
 
-#include "GeoDataFeature.h"
+#include "GeoDataObject.h"
 #include "geodata_export.h"
 
 namespace Marble
 {
 
-class GEODATA_EXPORT GeoDataTourPrimitive : public GeoDataFeature
+class GEODATA_EXPORT GeoDataTourPrimitive : public GeoDataObject
 {
 };
 
