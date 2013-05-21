@@ -787,10 +787,8 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
 
 void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPosition,
                                  int width, int height,
-                                 int xRnd, int yRnd,
-                                 bool isGeoProjected )
+                                 int xRnd, int yRnd )
 {
-    if ( !isGeoProjected ) {
         int pointRepeatNum;
         qreal y;
         bool globeHidesPoint;
@@ -804,5 +802,4 @@ void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPosition,
                 QPainter::drawRoundRect( d->m_x[it] - ( width / 2 ), y - ( height / 2 ), width, height, xRnd, yRnd );
             }
         }
-    }
 }

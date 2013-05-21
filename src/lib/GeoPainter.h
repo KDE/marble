@@ -429,24 +429,18 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     Unlike in QPainter::drawRoundedRect() the rounded corners are not specified
     in percentage but in pixels to provide for optimal aesthetics.
 
+    \param width Width of the rectangle in pixels
+    \param height Height of the rectangle in pixels
     \param xRnd Specifies the geometry of the rounded corners in pixels along
                 the x-axis.
     \param yRnd Specifies the geometry of the rounded corners in pixels along
                 the y-axis.
 
-    If \a isGeoProjected is true then the outline of the rectangle is drawn
-    in geographic coordinates. In this case the \a width and the \a height
-    are interpreted to be degrees.
-    If \a isGeoProjected is false then the outline of the rectangle is drawn
-    in screen coordinates. In this case the \a width and the \a height
-    are interpreted to be pixels.
-
     \see GeoDataCoordinates
 */
     void drawRoundRect ( const GeoDataCoordinates & centerPosition,
                          int width, int height,
-                         int xRnd = 25, int yRnd = 25,
-                         bool isGeoProjected = false );
+                         int xRnd = 25, int yRnd = 25 );
 
 
 
