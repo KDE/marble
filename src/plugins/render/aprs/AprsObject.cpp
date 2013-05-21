@@ -161,8 +161,6 @@ AprsObject::render( GeoPainter *painter, ViewportParams *viewport,
             if ( hideTime > 0 && ( *spot ).timestamp().elapsed() > hideTime )
                 break;
 
-            // draw the line in the base color
-            painter->setPen( baseColor );
             lineString << *spot;
 
             // draw the new circle in whatever is appropriate for that point
@@ -171,6 +169,8 @@ AprsObject::render( GeoPainter *painter, ViewportParams *viewport,
             painter->drawRect( *spot, 5, 5 );
         }
 
+        // draw the line in the base color
+        painter->setPen( baseColor );
         painter->drawPolyline( lineString );
     }
     
