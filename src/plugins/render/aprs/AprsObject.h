@@ -36,10 +36,7 @@ namespace Marble
         void setSeenFrom( int where );
         GeoAprsCoordinates location();
 
-        QColor calculatePaintColor( GeoPainter *painter ) const;
-        QColor calculatePaintColor( GeoPainter *painter, int from,
-                                    const QTime &time,
-                                    int fadetime = 10*60*1000 ) const;
+        QColor calculatePaintColor( int from, const QTime &time, int fadetime = 10*60*1000 ) const;
         void render( GeoPainter *painter, ViewportParams *viewport,
                      int fadeTime = 10*60, int hideTime = 30*60 );
 

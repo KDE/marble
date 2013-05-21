@@ -96,15 +96,7 @@ AprsObject::setSeenFrom( int where )
 }
 
 QColor
-AprsObject::calculatePaintColor( GeoPainter *painter ) const
-{
-    QTime now;
-    return calculatePaintColor( painter, m_seenFrom, now );
-}
-
-QColor
-AprsObject::calculatePaintColor( GeoPainter *painter, int from, const QTime &time,
-                           int fadeTime ) const
+AprsObject::calculatePaintColor( int from, const QTime &time, int fadeTime ) const
 {
     QColor color;
     if ( from & GeoAprsCoordinates::Directly ) {
@@ -130,7 +122,6 @@ AprsObject::calculatePaintColor( GeoPainter *painter, int from, const QTime &tim
         color.setAlpha( 160 );
     }
 
-    painter->setPen( color );
     return color;
 }
 
@@ -143,7 +134,7 @@ AprsObject::render( GeoPainter *painter, ViewportParams *viewport,
     if ( hideTime > 0 && m_history.last().timestamp().elapsed() > hideTime )
         return;
 
-    QColor baseColor = calculatePaintColor( painter, m_seenFrom,
+    QColor baseColor = calculatePaintColor( m_seenFrom,
                                       m_history.last().timestamp(),
                                       fadeTime );
 
@@ -164,8 +155,8 @@ AprsObject::render( GeoPainter *painter, ViewportParams *viewport,
             lineString << *spot;
 
             // draw the new circle in whatever is appropriate for that point
-            calculatePaintColor( painter, ( *spot ).seenFrom(), ( *spot ).timestamp(),
-                           fadeTime );
+            const QColor penColor = calculatePaintColor( spot->seenFrom(), spot->timestamp(), fadeTime );
+            painter->setPen( penColor );
             painter->drawRect( *spot, 5, 5 );
         }
 
