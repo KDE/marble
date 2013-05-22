@@ -174,7 +174,7 @@ else(WIN32)
       SET( MACOSX_BUNDLE_LONG_VERSION_STRING Version 0.3.0 )
       SET( MACOSX_BUNDLE_BUNDLE_NAME Marble)
       #SET( CMAKE_OSX_ARCHITECTURES ppc;i386 ) #Comment out if not universal binary
-      SET( CMAKE_OSX_ARCHITECTURES i386 ) #Comment out if universal binary
+      SET( CMAKE_OSX_ARCHITECTURES x86_64 ) #Comment out if universal binary
       #SET (lib_dir ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
       SET (data_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/data)
       SET (plugin_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/plugins)
