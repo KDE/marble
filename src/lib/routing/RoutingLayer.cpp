@@ -56,7 +56,7 @@ class RoutingLayerPrivate
     typedef PaintRegion<int> RequestRegion;
 
 public:
-    RoutingLayer *q;
+    RoutingLayer *const q;
 
     QList<ModelRegion> m_instructionRegions;
 
@@ -70,7 +70,7 @@ public:
 
     int m_movingIndex;
 
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *const m_marbleWidget;
 
     QPixmap m_targetPixmap;
 
@@ -84,7 +84,7 @@ public:
 
     bool m_pointSelection;
 
-    RoutingModel *m_routingModel;
+    RoutingModel *const m_routingModel;
 
     MarblePlacemarkModel *m_placemarkModel;
 
@@ -102,7 +102,7 @@ public:
 
     int m_activeMenuIndex;
 
-    AlternativeRoutesModel* m_alternativeRoutesModel;
+    AlternativeRoutesModel *const m_alternativeRoutesModel;
 
     ViewContext m_viewContext;
 
