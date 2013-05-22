@@ -44,6 +44,7 @@ public:
         Payload,
         InstalledVersion,
         InstalledReleaseDate,
+        InstalledFiles,
         IsInstalled,
         IsUpgradable,
         Category,

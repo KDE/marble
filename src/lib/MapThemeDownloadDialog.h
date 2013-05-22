@@ -18,12 +18,14 @@
 
 namespace Marble {
 
+class MarbleWidget;
+
 class MARBLE_EXPORT MapThemeDownloadDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit MapThemeDownloadDialog(QWidget *parent = 0);
+    explicit MapThemeDownloadDialog( MarbleWidget *marbleWidget );
     ~MapThemeDownloadDialog();
 
 private:

@@ -1229,7 +1229,7 @@ void MarblePart::setupStatusBarActions()
 
 void MarblePart::showNewStuffDialog()
 {
-    QPointer<MapThemeDownloadDialog> dialog( new MapThemeDownloadDialog( m_controlView ) );
+    QPointer<MapThemeDownloadDialog> dialog( new MapThemeDownloadDialog( m_controlView->marbleWidget() ) );
     dialog->exec();
     delete dialog;
 }

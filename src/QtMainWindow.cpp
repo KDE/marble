@@ -625,7 +625,7 @@ void MainWindow::createDockWidgets()
 
 void MainWindow::openMapDialog()
 {
-    QPointer<MapThemeDownloadDialog> dialog( new MapThemeDownloadDialog( this ) );
+    QPointer<MapThemeDownloadDialog> dialog( new MapThemeDownloadDialog( m_controlView->marbleWidget() ) );
     dialog->exec();
     delete dialog;
 }

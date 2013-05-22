@@ -462,6 +462,7 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     roles[Payload] = "payload";
     roles[InstalledVersion] = "installedversion";
     roles[InstalledReleaseDate] = "installedreleasedate";
+    roles[InstalledFiles] = "installedfiles";
     roles[IsInstalled] = "installed";
     roles[IsUpgradable] = "upgradable";
     roles[Category] = "category";
@@ -501,6 +502,7 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
         case Payload: return d->m_items.at( index.row() ).m_payloadUrl;
         case InstalledVersion: return d->m_items.at( index.row() ).installedVersion();
         case InstalledReleaseDate: return d->m_items.at( index.row() ).installedReleaseDate();
+        case InstalledFiles: return d->m_items.at( index.row() ).installedFiles();
         case IsInstalled: return !d->m_items.at( index.row() ).m_registryNode.isNull();
         case IsUpgradable: return d->m_items.at( index.row() ).isUpgradable();
         case Category: return d->m_items.at( index.row() ).m_category;

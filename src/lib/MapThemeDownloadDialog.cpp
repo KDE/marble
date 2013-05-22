@@ -14,6 +14,7 @@
 
 #include "MarbleDirs.h"
 #include "NewstuffModel.h"
+#include "MarbleWidget.h"
 
 #include <QtGui/QPainter>
 #include <QtGui/QTextDocument>
@@ -26,7 +27,7 @@ namespace Marble
 class MapItemDelegate : public QStyledItemDelegate
 {
 public:
-    MapItemDelegate( QListView* view, NewstuffModel* newstuffModel );
+    MapItemDelegate( QListView* view, NewstuffModel* newstuffModel, MarbleWidget* marbleWidget );
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
 
@@ -39,6 +40,7 @@ private:
         Text,
         InstallButton,
         UpgradeButton,
+        OpenButton,
         CancelButton,
         RemoveButton,
         ProgressReport
@@ -53,6 +55,7 @@ private:
     mutable int m_buttonWidth;
     int const m_margin;
     int const m_iconSize;
+    MarbleWidget* m_marbleWidget;
 };
 
 class MapThemeDownloadDialog::Private : public Ui::MapThemeDownloadDialog
@@ -65,8 +68,8 @@ public:
     NewstuffModel m_model;
 };
 
-MapThemeDownloadDialog::MapThemeDownloadDialog( QWidget* parent ) :
-    QDialog( parent ),
+MapThemeDownloadDialog::MapThemeDownloadDialog( MarbleWidget* marbleWidget ) :
+    QDialog( marbleWidget ),
     d( new Private )
 {
     d->setupUi( this );
@@ -79,7 +82,7 @@ MapThemeDownloadDialog::MapThemeDownloadDialog( QWidget* parent ) :
     d->listView->setAlternatingRowColors( true );
     d->listView->setUniformItemSizes( false );
     d->listView->setResizeMode( QListView::Adjust );
-    d->listView->setItemDelegate( new MapItemDelegate( d->listView, &d->m_model ) );
+    d->listView->setItemDelegate( new MapItemDelegate( d->listView, &d->m_model, marbleWidget ) );
     d->listView->setModel( &d->m_model );
 }
 
@@ -88,12 +91,13 @@ MapThemeDownloadDialog::~MapThemeDownloadDialog()
     delete d;
 }
 
-MapItemDelegate::MapItemDelegate( QListView *view , NewstuffModel *newstuffModel ) :
+MapItemDelegate::MapItemDelegate( QListView *view , NewstuffModel *newstuffModel, MarbleWidget* marbleWidget ) :
     m_view( view ),
     m_newstuffModel( newstuffModel ),
     m_buttonWidth( 0 ),
     m_margin( 5 ),
-    m_iconSize( 16 )
+    m_iconSize( 16 ),
+    m_marbleWidget( marbleWidget )
 {
     // nothing to do
 }
@@ -149,15 +153,14 @@ void MapItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opti
     } else {
         bool const installed = index.data( NewstuffModel::IsInstalled ).toBool();
         bool const upgradable = index.data( NewstuffModel::IsUpgradable ).toBool();
-        Element element = !installed ? InstallButton : UpgradeButton;
-        QStyleOptionButton installButton = button( element, option );
-        if ( installed && !upgradable ) {
-            installButton.state ^= QStyle::State_Enabled;
-            installButton.palette.setCurrentColorGroup( QPalette::Disabled );
+        Element element = InstallButton;
+        if ( installed ) {
+            element = upgradable ? UpgradeButton : OpenButton;
         }
+        QStyleOptionButton actionButton = button( element, option );
         QRect installRect = position( element, option );
-        installButton.rect = installRect;
-        QApplication::style()->drawControl( QStyle::CE_PushButton, &installButton, painter );
+        actionButton.rect = installRect;
+        QApplication::style()->drawControl( QStyle::CE_PushButton, &actionButton, painter );
 
         if ( installed ) {
             QStyleOptionButton removeButton = button( RemoveButton, option );
@@ -196,6 +199,7 @@ bool MapItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *, const QSt
         } else {
             bool const installed = index.data( NewstuffModel::IsInstalled ).toBool();
             bool const upgradable = index.data( NewstuffModel::IsUpgradable ).toBool();
+
             if ( !installed || upgradable ) {
                 QRect installRect = position( InstallButton, option );
                 QRect upgradeRect = position( UpgradeButton, option );
@@ -203,9 +207,21 @@ bool MapItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *, const QSt
                     m_newstuffModel->install( index.row() );
                     return true;
                 }
-            }
-
-            if ( installed ) {
+            } else if ( installed && !upgradable && m_marbleWidget ) {
+                QStringList const files = index.data( NewstuffModel::InstalledFiles ).toStringList();
+                foreach( const QString &file, files ) {
+                    if ( file.endsWith( ".dgml" ) ) {
+                        QFileInfo dgmlFile( file );
+                        QDir baseDir = dgmlFile.dir();
+                        baseDir.cdUp();
+                        baseDir.cdUp();
+                        int const index = baseDir.absolutePath().size();
+                        QString const mapTheme = dgmlFile.absoluteFilePath().mid( index+1 );
+                        m_marbleWidget->setMapThemeId( mapTheme );
+                        return true;
+                    }
+                }
+            } else if ( installed ) {
                 QRect removeRect = position( RemoveButton, option );
                 if ( removeRect.contains( mouseEvent->pos() ) ) {
                     m_newstuffModel->uninstall( index.row() );
@@ -252,6 +268,11 @@ QStyleOptionButton MapItemDelegate::button( Element element, const QStyleOptionV
         result.icon = QIcon( ":/marble/system-software-update.png" );
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
+    case OpenButton:
+        result.text = tr( "Open" );
+        result.icon = QIcon( ":/marble/document-open.png" );
+        result.iconSize = QSize( m_iconSize, m_iconSize );
+        break;
     case CancelButton:
         result.text = tr( "Cancel" );
         break;
@@ -281,6 +302,7 @@ QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &opt
         return QRect( topLeftCol2, QSize( topLeftCol3.x()-topLeftCol2.x(), option.rect.height() ) );
     case InstallButton:
     case UpgradeButton:
+    case OpenButton:
     {
         QStyleOptionButton optionButton = button( element, option );
         QSize size = option.fontMetrics.size( 0, optionButton.text ) + QSize( 4, 4 );
