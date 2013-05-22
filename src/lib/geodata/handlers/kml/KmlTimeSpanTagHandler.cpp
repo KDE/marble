@@ -28,14 +28,12 @@ GeoNode* KmlTimeSpanTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_TimeSpan ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.nodeAs<GeoDataFeature>() ) {
+    if ( parentItem.is<GeoDataFeature>() ) {
         GeoDataTimeSpan timeSpan;
         timeSpan.setBegin( QDateTime::fromString( "1752-01-02T00:00:00", Qt::ISODate ) );
-	timeSpan.setEnd( QDateTime::fromString( "7999-12-31T23:59:59", Qt::ISODate ) );
-	QString id = parser.attribute( "id" ).trimmed();
-        parentItem.nodeAs<GeoDataFeature>()->setTimeSpan( timeSpan );        
-
-        return &parentItem.nodeAs<GeoDataFeature>()->timeSpan();             
+        timeSpan.setEnd( QDateTime::fromString( "7999-12-31T23:59:59", Qt::ISODate ) );
+        parentItem.nodeAs<GeoDataFeature>()->setTimeSpan( timeSpan );
+        return &parentItem.nodeAs<GeoDataFeature>()->timeSpan();
     }
     
     return 0;
