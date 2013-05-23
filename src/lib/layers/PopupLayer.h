@@ -40,7 +40,7 @@ class MARBLE_EXPORT PopupLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 public:
-    explicit PopupLayer( QObject* parent = 0 );
+    explicit PopupLayer( MarbleWidget *widget, QObject* parent = 0 );
     ~PopupLayer();
 
     QStringList renderPosition() const;
@@ -49,13 +49,6 @@ public:
                  const QString &, GeoSceneLayer * );
     virtual bool eventFilter( QObject *, QEvent * );
     qreal zValue() const;
-
-    /**
-     * @brief Set the parent MarbleWidget of this dialog
-     *
-     * @param widget parent widget of the dialog
-     */
-    void setMarbleWidget( MarbleWidget* widget );
 
     /**
      * @brief Is popup item visible
@@ -165,8 +158,8 @@ private:
      */
     void setAppropriateSize( const ViewportParams *viewport );
 
-    PopupItem *m_popupItem;
-    MarbleWidget* m_widget;
+    PopupItem *const m_popupItem;
+    MarbleWidget * const m_widget;
     QSizeF m_requestedSize;
     bool m_adjustMap;
 };

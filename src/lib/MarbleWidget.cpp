@@ -250,8 +250,7 @@ void MarbleWidgetPrivate::construct()
     QObject::connect( m_routingLayer, SIGNAL(repaintNeeded(QRect)),
                       m_widget, SLOT(update()) );
 
-    m_mapInfoDialog = new PopupLayer( m_widget );
-    m_mapInfoDialog->setMarbleWidget( m_widget );
+    m_mapInfoDialog = new PopupLayer( m_widget, m_widget );
     m_mapInfoDialog->setVisible( false );
     m_widget->connect( m_mapInfoDialog, SIGNAL(repaintNeeded()), m_widget, SLOT(update()) );
     m_map.addLayer( m_mapInfoDialog );

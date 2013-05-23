@@ -21,10 +21,10 @@
 namespace Marble
 {
 
-PopupLayer::PopupLayer(QObject *parent) :
+PopupLayer::PopupLayer( MarbleWidget *marbleWidget, QObject *parent ) :
     QObject( parent ),
     m_popupItem( new PopupItem( this ) ),
-    m_widget( 0 ),
+    m_widget( marbleWidget ),
     m_adjustMap( false )
 {
     connect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
@@ -33,11 +33,6 @@ PopupLayer::PopupLayer(QObject *parent) :
 
 PopupLayer::~PopupLayer()
 {
-}
-
-void PopupLayer::setMarbleWidget( MarbleWidget* widget )
-{
-    m_widget = widget;
 }
 
 QStringList PopupLayer::renderPosition() const
