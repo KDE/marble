@@ -44,12 +44,12 @@
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "Planet.h"
+#include "PopupLayer.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "TileCreatorDialog.h"
 #include "ViewportParams.h"
 #include "routing/RoutingLayer.h"
-#include "MapInfoDialog.h"
 
 namespace Marble
 {
@@ -148,7 +148,7 @@ class MarbleWidgetPrivate
     MarblePhysics    m_physics;
 
     RoutingLayer     *m_routingLayer;
-    MapInfoDialog    *m_mapInfoDialog;
+    PopupLayer    *m_mapInfoDialog;
     MarbleWidget::CustomPaintLayer m_customPaintLayer;
 
     MarbleWidgetPopupMenu *m_popupmenu;
@@ -250,7 +250,7 @@ void MarbleWidgetPrivate::construct()
     QObject::connect( m_routingLayer, SIGNAL(repaintNeeded(QRect)),
                       m_widget, SLOT(update()) );
 
-    m_mapInfoDialog = new MapInfoDialog( m_widget );
+    m_mapInfoDialog = new PopupLayer( m_widget );
     m_mapInfoDialog->setMarbleWidget( m_widget );
     m_mapInfoDialog->setVisible( false );
     m_widget->connect( m_mapInfoDialog, SIGNAL(repaintNeeded()), m_widget, SLOT(update()) );
@@ -1402,7 +1402,7 @@ RoutingLayer* MarbleWidget::routingLayer()
     return d->m_routingLayer;
 }
 
-MapInfoDialog *MarbleWidget::mapInfoDialog()
+PopupLayer *MarbleWidget::popupLayer()
 {
     return d->m_mapInfoDialog;
 }

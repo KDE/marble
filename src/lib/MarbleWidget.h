@@ -55,7 +55,7 @@ class TileCoordsPyramid;
 class TileCreator;
 class GeoDataPlacemark;
 class ViewportParams;
-class MapInfoDialog;
+class PopupLayer;
 
 /**
  * @short A widget class that displays a view of the earth.
@@ -241,7 +241,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     RoutingLayer* routingLayer();
 
-    MapInfoDialog* mapInfoDialog();
+    PopupLayer* popupLayer();
 
     /**
      * @brief  Get the Projection used for the map

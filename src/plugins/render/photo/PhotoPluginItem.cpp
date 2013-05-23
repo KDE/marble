@@ -29,8 +29,8 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "RenderPlugin.h"
-#include "MapInfoDialog.h"
 #include "PluginManager.h"
+#include "layers/PopupLayer.h"
 
 // Qt
 #include <QtGui/QAction>
@@ -190,7 +190,7 @@ QAction *PhotoPluginItem::action()
 void PhotoPluginItem::openBrowser()
 {
     if ( m_marbleWidget ) {
-        MapInfoDialog* popup = m_marbleWidget->mapInfoDialog();
+        PopupLayer* popup = m_marbleWidget->popupLayer();
         popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
         popup->setSize( QSizeF( 700, 450 ) );
         popup->setUrl( QUrl( QString( "http://m.flickr.com/photos/%1/%2/" )

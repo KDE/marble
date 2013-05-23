@@ -26,8 +26,8 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "RenderPlugin.h"
-#include "MapInfoDialog.h"
 #include "PluginManager.h"
+#include "layers/PopupLayer.h"
 
 using namespace Marble;
 /* TRANSLATOR Marble::WikipediaItem */
@@ -177,7 +177,7 @@ QAction *WikipediaItem::action()
 void WikipediaItem::openBrowser( )
 {
     if ( m_marbleWidget ) {
-        MapInfoDialog* popup = m_marbleWidget->mapInfoDialog();
+        PopupLayer* popup = m_marbleWidget->popupLayer();
         popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
         popup->setSize( QSizeF( 500, 550 ) );
         popup->setUrl( url() );

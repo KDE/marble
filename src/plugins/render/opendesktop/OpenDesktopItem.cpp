@@ -12,7 +12,7 @@
 #include <QtGui/QPainter>
 #include "OpenDesktopItem.h"
 #include "ViewportParams.h"
-#include "MapInfoDialog.h"
+#include "layers/PopupLayer.h"
 
 using namespace Marble;
 
@@ -96,7 +96,7 @@ QAction *OpenDesktopItem::action()
 
 void OpenDesktopItem::openBrowser()
 {
-    MapInfoDialog *popup = m_marbleWidget->mapInfoDialog();
+    PopupLayer *popup = m_marbleWidget->popupLayer();
     popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
     popup->setUrl( profileUrl() );
     popup->setSize( QSizeF( 900, 600 ) );

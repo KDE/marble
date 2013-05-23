@@ -5,6 +5,7 @@ set( layers_HDRS
     GroundLayer.h
     MarbleSplashLayer.h
     PlacemarkLayer.h
+    PopupLayer.h
     TextureLayer.h
     VectorMapBaseLayer.h
     VectorMapLayer.h
@@ -18,6 +19,7 @@ set( layers_SRCS
     layers/GroundLayer.cpp
     layers/MarbleSplashLayer.cpp
     layers/PlacemarkLayer.cpp
+    layers/PopupLayer.cpp
     layers/TextureLayer.cpp
     layers/VectorMapBaseLayer.cpp
     layers/VectorMapLayer.cpp

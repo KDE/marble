@@ -42,8 +42,8 @@
 #include "AbstractDataPluginItem.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "Planet.h"
+#include "PopupLayer.h"
 #include "RenderPlugin.h"
-#include "MapInfoDialog.h"
 #include "RoutingLayer.h"
 
 namespace Marble {
@@ -391,7 +391,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 {
     Q_UNUSED( o );
 
-    if ( MarbleWidgetInputHandler::d->m_widget->mapInfoDialog()->eventFilter( o, e ) ) {
+    if ( MarbleWidgetInputHandler::d->m_widget->popupLayer()->eventFilter( o, e ) ) {
         return true;
     }
 

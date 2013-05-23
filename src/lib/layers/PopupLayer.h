@@ -10,8 +10,8 @@
 // Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-#ifndef MAPINFODIALOG_H
-#define MAPINFODIALOG_H
+#ifndef POPUPLAYER_H
+#define POPUPLAYER_H
 
 #include "LayerInterface.h"
 #include "ViewportParams.h"
@@ -29,19 +29,19 @@ class PopupItem;
 class MarbleModel;
 
 /**
- * @brief The MapInfoDialog class
+ * @brief The PopupLayer class
  *
  * A popup dialog opening on top of the map. The content is shown in a QWebView,
  * acting like a minimalistic web browser. The dialog is either shown aligned to
  * a geo position or shown at a specific screen position.
  *
  */
-class MARBLE_EXPORT MapInfoDialog : public QObject, public LayerInterface
+class MARBLE_EXPORT PopupLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 public:
-    explicit MapInfoDialog( QObject* parent = 0 );
-    ~MapInfoDialog();
+    explicit PopupLayer( QObject* parent = 0 );
+    ~PopupLayer();
 
     QStringList renderPosition() const;
     QString renderPolicy() const;

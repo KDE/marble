@@ -16,7 +16,6 @@
 // Marble
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
-#include "MapInfoDialog.h"
 #include "MarbleAboutDialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
@@ -27,6 +26,7 @@
 #include "GeoSceneHead.h"
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
+#include "PopupLayer.h"
 #include "Planet.h"
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
@@ -261,7 +261,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         if ( m_model->mapTheme() ) {
             isSky = m_model->mapTheme()->head()->target() == "sky";
         }
-        MapInfoDialog* popup = m_widget->mapInfoDialog();
+        PopupLayer* popup = m_widget->popupLayer();
         popup->setSize(QSizeF(580, 620));
         if (index->role().isEmpty() || isSatellite || isCity || isNation || isSky) {
             if (isSatellite) {
@@ -289,7 +289,7 @@ QString MarbleWidgetPopupMenu::filterEmptyShortDescription(const QString &descri
     return description;
 }
 
-void MarbleWidgetPopupMenu::setupDialogSatellite(MapInfoDialog *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::setupDialogSatellite(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
@@ -302,7 +302,7 @@ void MarbleWidgetPopupMenu::setupDialogSatellite(MapInfoDialog *popup, const Geo
     popup->setContent(doc.finalText());
 }
 
-void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::setupDialogCity(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
@@ -361,7 +361,7 @@ void MarbleWidgetPopupMenu::setupDialogCity(MapInfoDialog *popup, const GeoDataP
     popup->setContent(doc.finalText());
 }
 
-void MarbleWidgetPopupMenu::setupDialogNation(MapInfoDialog *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::setupDialogNation(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
@@ -388,7 +388,7 @@ void MarbleWidgetPopupMenu::setupDialogNation(MapInfoDialog *popup, const GeoDat
     popup->setContent(doc.finalText());
 }
 
-void MarbleWidgetPopupMenu::setupDialogGeoPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::setupDialogGeoPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
@@ -410,7 +410,7 @@ void MarbleWidgetPopupMenu::setupDialogGeoPlaces(MapInfoDialog *popup, const Geo
     popup->setContent(doc.finalText());
 }
 
-void MarbleWidgetPopupMenu::setupDialogSkyPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::setupDialogSkyPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);

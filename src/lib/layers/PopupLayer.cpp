@@ -10,7 +10,7 @@
 // Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-#include "MapInfoDialog.h"
+#include "PopupLayer.h"
 #include "MarbleWidget.h"
 #include "PopupItem.h"
 
@@ -21,7 +21,7 @@
 namespace Marble
 {
 
-MapInfoDialog::MapInfoDialog(QObject *parent) :
+PopupLayer::PopupLayer(QObject *parent) :
     QObject( parent ),
     m_popupItem( new PopupItem( this ) ),
     m_widget( 0 ),
@@ -31,26 +31,26 @@ MapInfoDialog::MapInfoDialog(QObject *parent) :
     connect( m_popupItem, SIGNAL(hide()), this, SLOT(hidePopupItem()) );
 }
 
-MapInfoDialog::~MapInfoDialog()
+PopupLayer::~PopupLayer()
 {
 }
 
-void MapInfoDialog::setMarbleWidget( MarbleWidget* widget )
+void PopupLayer::setMarbleWidget( MarbleWidget* widget )
 {
     m_widget = widget;
 }
 
-QStringList MapInfoDialog::renderPosition() const
+QStringList PopupLayer::renderPosition() const
 {
     return QStringList( "ALWAYS_ON_TOP" );
 }
 
-QString MapInfoDialog::renderPolicy() const
+QString PopupLayer::renderPolicy() const
 {
     return "ALWAYS";
 }
 
-bool MapInfoDialog::render( GeoPainter *painter, ViewportParams *viewport,
+bool PopupLayer::render( GeoPainter *painter, ViewportParams *viewport,
                                 const QString&, GeoSceneLayer* )
 {
     if ( visible() ) {
@@ -65,22 +65,22 @@ bool MapInfoDialog::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-bool MapInfoDialog::eventFilter( QObject *object, QEvent *e )
+bool PopupLayer::eventFilter( QObject *object, QEvent *e )
 {
     return visible() && m_popupItem->eventFilter( object, e );
 }
 
-qreal MapInfoDialog::zValue() const
+qreal PopupLayer::zValue() const
 {
     return 4711.23;
 }
 
-bool MapInfoDialog::visible() const
+bool PopupLayer::visible() const
 {
     return m_popupItem->visible();
 }
 
-void MapInfoDialog::setVisible( bool visible )
+void PopupLayer::setVisible( bool visible )
 {
     m_popupItem->setVisible( visible );
     if ( !visible ) {
@@ -93,49 +93,49 @@ void MapInfoDialog::setVisible( bool visible )
     }
 }
 
-void MapInfoDialog::popup()
+void PopupLayer::popup()
 {
     m_adjustMap = true;
     setVisible( true );
 }
 
-void MapInfoDialog::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)
+void PopupLayer::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)
 {
     m_popupItem->setCoordinate( coordinates );
     m_popupItem->setAlignment( alignment );
 }
 
-void MapInfoDialog::setUrl( const QUrl &url )
+void PopupLayer::setUrl( const QUrl &url )
 {
     m_popupItem->setUrl( url );
 }
 
-void MapInfoDialog::setContent( const QString &html )
+void PopupLayer::setContent( const QString &html )
 {
     m_popupItem->setContent( html );
     emit repaintNeeded();
 }
 
-void MapInfoDialog::setBackgroundColor(const QColor &color)
+void PopupLayer::setBackgroundColor(const QColor &color)
 {
     if(color.isValid()) {
         m_popupItem->setBackgroundColor(color);
     }
 }
 
-void MapInfoDialog::setTextColor(const QColor &color)
+void PopupLayer::setTextColor(const QColor &color)
 {
     if(color.isValid()) {
         m_popupItem->setTextColor(color);
     }
 }
 
-void MapInfoDialog::setSize( const QSizeF &size )
+void PopupLayer::setSize( const QSizeF &size )
 {
     m_requestedSize = size;
 }
 
-void MapInfoDialog::setAppropriateSize( const ViewportParams *viewport )
+void PopupLayer::setAppropriateSize( const ViewportParams *viewport )
 {
     qreal margin = 15.0;
 
@@ -148,17 +148,17 @@ void MapInfoDialog::setAppropriateSize( const ViewportParams *viewport )
     m_popupItem->setSize( m_requestedSize.boundedTo( maximumSize ).expandedTo( minimumSize ) );
 }
 
-void MapInfoDialog::setPosition( const QPointF &position )
+void PopupLayer::setPosition( const QPointF &position )
 {
     /** @todo Implement */
     Q_UNUSED( position );
 }
 
-void MapInfoDialog::hidePopupItem()
+void PopupLayer::hidePopupItem()
 {
     setVisible( false );
 }
 
 }
 
-#include "MapInfoDialog.moc"
+#include "PopupLayer.moc"

@@ -24,7 +24,7 @@
 #include "TinyWebBrowser.h"
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
-#include "MapInfoDialog.h"
+#include "layers/PopupLayer.h"
 
 // Qt
 #include <QtCore/QCoreApplication>
@@ -493,7 +493,7 @@ void WeatherItem::setMarbleWidget(MarbleWidget *widget)
 void WeatherItem::openBrowser()
 {
     if (d->m_marbleWidget) {
-        MapInfoDialog *popup = d->m_marbleWidget->mapInfoDialog();
+        PopupLayer *popup = d->m_marbleWidget->popupLayer();
         popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
         popup->setSize( QSizeF( 610, 550 ) ); // +10 pixels for the width
         popup->setVisible( true );

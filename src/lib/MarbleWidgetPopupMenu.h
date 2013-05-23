@@ -35,7 +35,7 @@ class MarbleModel;
 class GeoDataCoordinates;
 class GeoDataPlacemark;
 class MarbleRunnerManager;
-class MapInfoDialog;
+class PopupLayer;
 
 
 class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
@@ -86,11 +86,11 @@ private Q_SLOTS:
     QMenu* createInfoBoxMenu();
 
     QString filterEmptyShortDescription(const QString &description) const;
-    void setupDialogSatellite(MapInfoDialog *popup, const GeoDataPlacemark *index);
-    void setupDialogCity(MapInfoDialog *popup, const GeoDataPlacemark *index);
-    void setupDialogNation(MapInfoDialog *popup, const GeoDataPlacemark *index);
-    void setupDialogGeoPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index);
-    void setupDialogSkyPlaces(MapInfoDialog *popup, const GeoDataPlacemark *index);
+    void setupDialogSatellite(PopupLayer *popup, const GeoDataPlacemark *index);
+    void setupDialogCity(PopupLayer *popup, const GeoDataPlacemark *index);
+    void setupDialogNation(PopupLayer *popup, const GeoDataPlacemark *index);
+    void setupDialogGeoPlaces(PopupLayer *popup, const GeoDataPlacemark *index);
+    void setupDialogSkyPlaces(PopupLayer *popup, const GeoDataPlacemark *index);
 
  private:
     Q_DISABLE_COPY( MarbleWidgetPopupMenu )
