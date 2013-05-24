@@ -292,7 +292,7 @@ QStyleOptionButton MapItemDelegate::button( Element element, const QStyleOptionV
 QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &option ) const
 {
     int const width = buttonWidth( option );
-    QPoint const topLeftCol1 = option.rect.topLeft();
+    QPoint const topLeftCol1 = option.rect.topLeft() + QPoint( 0, 2 );
     QPoint const topLeftCol2 = topLeftCol1 + QPoint( option.decorationSize.width(), 0 );
     QPoint const topLeftCol3 = topLeftCol2 + QPoint( option.rect.width() - 3 * m_margin - width - option.decorationSize.width(), 0 );
     switch (element) {
@@ -322,7 +322,7 @@ QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &opt
     case ProgressReport:
     {
         QSize const progressSize = QSize( width, option.fontMetrics.height() + 4 );
-        return QRect( topLeftCol3, progressSize );
+        return QRect( topLeftCol3 + QPoint( 0, m_margin ), progressSize );
     }
     }
 
