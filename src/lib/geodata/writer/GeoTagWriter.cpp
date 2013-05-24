@@ -18,8 +18,6 @@
 namespace Marble
 {
 
-GeoTagWriter::TagHash* GeoTagWriter::s_tagWriterHash = 0;
-
 GeoTagWriter::GeoTagWriter()
 {
 }
@@ -49,12 +47,8 @@ void GeoTagWriter::registerWriter(const QualifiedName& name,
 
 GeoTagWriter::TagHash* GeoTagWriter::tagWriterHash()
 {
-    if( !s_tagWriterHash ) {
-        s_tagWriterHash = new TagHash();
-    }
-
-    Q_ASSERT( s_tagWriterHash );
-    return s_tagWriterHash;
+    static TagHash s_tagWriterHash;
+    return &s_tagWriterHash;
 }
 
 const GeoTagWriter* GeoTagWriter::recognizes( const QualifiedName &qname )

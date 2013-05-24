@@ -62,7 +62,6 @@ private:
     //Collect the Tag Writers and provide a singleton like accessor
     typedef QHash<QualifiedName, const GeoTagWriter*> TagHash;
     static TagHash* tagWriterHash();
-    static TagHash* s_tagWriterHash;
 
 private:
     // Only our writer is allowed to access tag handlers.
