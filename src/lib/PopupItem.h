@@ -18,11 +18,9 @@
 #include <QtGui/QLabel>
 
 #include "BillboardGraphicsItem.h"
+#include "ui_WebPopupWidget.h"
 
-class QWebView;
 class QPainter;
-class QPushButton;
-class MarbleWebView;
 
 namespace Marble
 {
@@ -169,10 +167,7 @@ private:
     QWidget* transform( QPoint &point ) const;
 
     QWidget *m_widget;
-    QPushButton *m_printButton;
-    QPushButton *m_goBackButton;
-    QLabel *m_titleText;
-    MarbleWebView *m_webView;
+    Ui::WebPopupWidget m_ui;
     QString m_content;
     QColor m_textColor;
     QColor m_backColor;

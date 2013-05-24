@@ -38,8 +38,6 @@ PopupItem::PopupItem( QObject* parent ) :
     QObject( parent ),
     BillboardGraphicsItem(),
     m_widget( new QWidget ),
-    m_printButton( 0 ),
-    m_webView( new MarbleWebView ( m_widget ) ),
     m_textColor( QColor(Qt::black) ),
     m_backColor( QColor(Qt::white) ),
     m_needMouseRelease(false)
@@ -47,53 +45,32 @@ PopupItem::PopupItem( QObject* parent ) :
     setVisible( false );
     setSize( QSizeF( 240.0, 320.0 ) );
 
-    QGridLayout *childLayout = new QGridLayout;
-    int position = 0;
+    m_ui.setupUi( m_widget );
 
-    m_goBackButton = new QPushButton( m_widget );
-    m_goBackButton->setVisible( false );
-    m_goBackButton->setIcon( QIcon( ":/marble/webpopup/icon-arrow-back.png" ) );
-    m_goBackButton->setFlat( true );
-    m_goBackButton->setMaximumWidth( 24 );
-    childLayout->addWidget( m_goBackButton, 0, position++ );
-    connect( m_goBackButton, SIGNAL(clicked()), this, SLOT(goBack()) );
+    m_ui.goBackButton->setVisible( false );
+    connect( m_ui.goBackButton, SIGNAL(clicked()), this, SLOT(goBack()) );
 
-    m_titleText = new QLabel( m_widget );
-    childLayout->addWidget( m_titleText, 0, position++ );
-
-#ifndef QT_NO_PRINTER
-    m_printButton = new QPushButton( m_widget );
-    m_printButton->setIcon( QIcon( ":/marble/webpopup/icon-print.png" ) );
-    m_printButton->setMaximumWidth( 24 );
-    m_printButton->setFlat( true );
-    childLayout->addWidget( m_printButton, 0, position++ );
-    connect(m_printButton, SIGNAL(clicked()), this, SLOT(printContent()));
+#ifdef QT_NO_PRINTER
+    m_ui.printButton->setVisible( false );
+#else
+    m_ui.printButton->setVisible( true );
+    connect( m_ui.printButton, SIGNAL(clicked()), this, SLOT(printContent()) );
 #endif
 
-    QPushButton *hideButton = new QPushButton( m_widget );
-    hideButton->setIcon( QIcon( ":/marble/webpopup/icon-remove.png" ) );
-    hideButton->setMaximumWidth( 24 );
-    hideButton->setFlat( true );
-    childLayout->addWidget( hideButton, 0, position++ );
-
-    QVBoxLayout *layout = new QVBoxLayout( m_widget );
-    layout->addLayout( childLayout );
-    layout->addWidget( m_webView );
-    m_widget->setLayout( layout );
     m_widget->setAttribute( Qt::WA_NoSystemBackground, true );
-    QPalette palette = m_webView->palette();
+    QPalette palette = m_ui.webView->palette();
     palette.setBrush(QPalette::Base, Qt::transparent);
-    m_webView->setPalette(palette);
-    m_webView->page()->setPalette(palette);
-    m_webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
-    m_webView->setUrl( QUrl( "about:blank" ) );
+    m_ui.webView->setPalette(palette);
+    m_ui.webView->page()->setPalette(palette);
+    m_ui.webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
+    m_ui.webView->setUrl( QUrl( "about:blank" ) );
 
-    connect( m_webView, SIGNAL(titleChanged(QString)), m_titleText, SLOT(setText(QString)) );
-    connect( m_webView, SIGNAL(urlChanged(QUrl)), this, SLOT(updateBackButton()) );
-    connect( hideButton, SIGNAL(clicked()), this, SIGNAL(hide()) );
+    connect( m_ui.webView, SIGNAL(titleChanged(QString)), m_ui.titleText, SLOT(setText(QString)) );
+    connect( m_ui.webView, SIGNAL(urlChanged(QUrl)), this, SLOT(updateBackButton()) );
+    connect( m_ui.hideButton, SIGNAL(clicked()), this, SIGNAL(hide()) );
 
     // Update the popupitem on changes while loading the webpage
-    connect(m_webView->page(), SIGNAL(repaintRequested(QRect)), this, SIGNAL(repaintNeeded()));
+    connect( m_ui.webView->page(), SIGNAL(repaintRequested(QRect)), this, SIGNAL(repaintNeeded()) );
 }
 
 PopupItem::~PopupItem()
@@ -103,26 +80,24 @@ PopupItem::~PopupItem()
 
 bool PopupItem::isPrintButtonVisible() const
 {
-    return m_printButton && m_printButton->isVisible();
+    return m_ui.printButton->isVisible();
 }
 
 void PopupItem::setPrintButtonVisible( bool display )
 {
-    if ( m_printButton ) {
-        m_printButton->setVisible( display );
-    }
+    m_ui.printButton->setVisible( display );
 }
 
 void PopupItem::setUrl( const QUrl &url )
 {
-    m_webView->setUrl( url );
+    m_ui.webView->setUrl( url );
     setVisible( true );
 
-    QPalette palette = m_webView->palette();
+    QPalette palette = m_ui.webView->palette();
     palette.setBrush(QPalette::Base, Qt::transparent);
-    m_webView->setPalette(palette);
-    m_webView->page()->setPalette(palette);
-    m_webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
+    m_ui.webView->setPalette(palette);
+    m_ui.webView->page()->setPalette(palette);
+    m_ui.webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
 
     emit repaintNeeded();
 }
@@ -130,18 +105,19 @@ void PopupItem::setUrl( const QUrl &url )
 void PopupItem::setContent( const QString &html )
 {
     m_content = html;
-    m_webView->setHtml( html );
+    m_ui.webView->setHtml( html );
 }
 
 void PopupItem::setTextColor(const QColor &color)
 {
-    if(color.isValid() && m_titleText != 0) {
+    if(color.isValid() && m_ui.titleText != 0) {
         m_textColor = color;
-        QPalette palette(m_titleText->palette());
+        QPalette palette(m_ui.titleText->palette());
         palette.setColor(QPalette::WindowText, m_textColor);
-        m_titleText->setPalette(palette);
+        m_ui.titleText->setPalette(palette);
     }
 }
+
 void PopupItem::setBackgroundColor(const QColor &color)
 {
     if(color.isValid()) {
@@ -247,12 +223,12 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
     }
 
     if ( e->type() == QEvent::ContextMenu) {
-        QApplication::sendEvent( m_webView, e );
+        QApplication::sendEvent( m_ui.webView, e );
         return BillboardGraphicsItem::eventFilter( object, e );
     }
 
     if ( e->type() == QEvent::KeyPress ) {
-        QApplication::sendEvent( m_webView, e );
+        QApplication::sendEvent( m_ui.webView, e );
         return BillboardGraphicsItem::eventFilter( object, e );
     }
 
@@ -273,7 +249,7 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
                 m_needMouseRelease = false;
             }
             if ( !child ) {
-                child = m_webView;
+                child = m_ui.webView;
             }
             QMouseEvent shiftedEvent = QMouseEvent( e->type(), shiftedPos,
                                                     event->globalPos(), event->button(), event->buttons(),
@@ -345,8 +321,8 @@ QWidget* PopupItem::transform( QPoint &point ) const
 void PopupItem::clearHistory()
 {
     m_content.clear();
-    m_webView->setUrl( QUrl( "about:blank" ) );
-    m_webView->history()->clear();
+    m_ui.webView->setUrl( QUrl( "about:blank" ) );
+    m_ui.webView->history()->clear();
 }
 
 void PopupItem::printContent()
@@ -355,7 +331,7 @@ void PopupItem::printContent()
     QPrinter printer;
     QPointer<QPrintDialog> dialog = new QPrintDialog(&printer);
     if (dialog->exec() == QPrintDialog::Accepted) {
-        m_webView->print(&printer);
+        m_ui.webView->print(&printer);
     }
     delete dialog;
 #endif
@@ -363,19 +339,19 @@ void PopupItem::printContent()
 
 void PopupItem::updateBackButton()
 {
-    bool const hasHistory = m_webView->history()->count() > 1;
-    bool const previousIsHtml = !m_content.isEmpty() && m_webView->history()->currentItemIndex() == 1;
-    bool const atStart = m_webView->history()->currentItemIndex() <= 1;
-    bool const currentIsHtml = m_webView->url() == QUrl( "about:blank" );
-    m_goBackButton->setVisible( hasHistory && !currentIsHtml && ( previousIsHtml || !atStart ) );
+    bool const hasHistory = m_ui.webView->history()->count() > 1;
+    bool const previousIsHtml = !m_content.isEmpty() && m_ui.webView->history()->currentItemIndex() == 1;
+    bool const atStart = m_ui.webView->history()->currentItemIndex() <= 1;
+    bool const currentIsHtml = m_ui.webView->url() == QUrl( "about:blank" );
+    m_ui.goBackButton->setVisible( hasHistory && !currentIsHtml && ( previousIsHtml || !atStart ) );
 }
 
 void PopupItem::goBack()
 {
-    if ( m_webView->history()->currentItemIndex() == 1 && !m_content.isEmpty() ) {
-        m_webView->setHtml( m_content );
+    if ( m_ui.webView->history()->currentItemIndex() == 1 && !m_content.isEmpty() ) {
+        m_ui.webView->setHtml( m_content );
     } else {
-        m_webView->back();
+        m_ui.webView->back();
     }
     updateBackButton();
 }
