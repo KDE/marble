@@ -118,7 +118,12 @@ public:
 
     void clearHistory();
 
-private slots:
+private Q_SLOTS:
+    /**
+     * @brief Marks cache as dirty and tells the world its need for repainting.
+     */
+    void requestUpdate();
+
     /**
      * @brief Print content of the web browser
      *

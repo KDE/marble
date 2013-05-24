@@ -42,6 +42,7 @@ PopupItem::PopupItem( QObject* parent ) :
     m_backColor( QColor(Qt::white) ),
     m_needMouseRelease(false)
 {
+    setCacheMode( ItemCoordinateCache );
     setVisible( false );
     setSize( QSizeF( 240.0, 320.0 ) );
 
@@ -70,7 +71,7 @@ PopupItem::PopupItem( QObject* parent ) :
     connect( m_ui.hideButton, SIGNAL(clicked()), this, SIGNAL(hide()) );
 
     // Update the popupitem on changes while loading the webpage
-    connect( m_ui.webView->page(), SIGNAL(repaintRequested(QRect)), this, SIGNAL(repaintNeeded()) );
+    connect( m_ui.webView->page(), SIGNAL(repaintRequested(QRect)), this, SLOT(requestUpdate()) );
 }
 
 PopupItem::~PopupItem()
@@ -99,13 +100,15 @@ void PopupItem::setUrl( const QUrl &url )
     m_ui.webView->page()->setPalette(palette);
     m_ui.webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
 
-    emit repaintNeeded();
+    requestUpdate();
 }
 
 void PopupItem::setContent( const QString &html )
 {
     m_content = html;
     m_ui.webView->setHtml( html );
+
+    requestUpdate();
 }
 
 void PopupItem::setTextColor(const QColor &color)
@@ -323,6 +326,12 @@ void PopupItem::clearHistory()
     m_content.clear();
     m_ui.webView->setUrl( QUrl( "about:blank" ) );
     m_ui.webView->history()->clear();
+}
+
+void PopupItem::requestUpdate()
+{
+    update();
+    emit repaintNeeded();
 }
 
 void PopupItem::printContent()
