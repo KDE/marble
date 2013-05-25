@@ -115,6 +115,11 @@ QList<QRectF> BillboardGraphicsItem::boundingRects() const
     return rects;
 }
 
+void BillboardGraphicsItem::paint( QPainter *painter )
+{
+    Q_UNUSED( painter )
+}
+
 Qt::Alignment BillboardGraphicsItem::alignment() const
 {
     return p()->m_alignment;
