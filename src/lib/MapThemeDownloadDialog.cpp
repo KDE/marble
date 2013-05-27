@@ -202,26 +202,32 @@ bool MapItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *, const QSt
 
             if ( !installed || upgradable ) {
                 QRect installRect = position( InstallButton, option );
-                QRect upgradeRect = position( UpgradeButton, option );
-                if ( installRect.contains( mouseEvent->pos() ) || upgradeRect.contains( mouseEvent->pos() ) ) {
+                if ( installRect.contains( mouseEvent->pos() ) ) {
                     m_newstuffModel->install( index.row() );
                     return true;
                 }
-            } else if ( installed && !upgradable && m_marbleWidget ) {
-                QStringList const files = index.data( NewstuffModel::InstalledFiles ).toStringList();
-                foreach( const QString &file, files ) {
-                    if ( file.endsWith( ".dgml" ) ) {
-                        QFileInfo dgmlFile( file );
-                        QDir baseDir = dgmlFile.dir();
-                        baseDir.cdUp();
-                        baseDir.cdUp();
-                        int const index = baseDir.absolutePath().size();
-                        QString const mapTheme = dgmlFile.absoluteFilePath().mid( index+1 );
-                        m_marbleWidget->setMapThemeId( mapTheme );
-                        return true;
+            }
+
+            if ( installed && !upgradable && m_marbleWidget ) {
+                QRect openRect = position( OpenButton, option );
+                if ( openRect.contains( mouseEvent->pos() ) ) {
+                    QStringList const files = index.data( NewstuffModel::InstalledFiles ).toStringList();
+                    foreach( const QString &file, files ) {
+                        if ( file.endsWith( ".dgml" ) ) {
+                            QFileInfo dgmlFile( file );
+                            QDir baseDir = dgmlFile.dir();
+                            baseDir.cdUp();
+                            baseDir.cdUp();
+                            int const index = baseDir.absolutePath().size();
+                            QString const mapTheme = dgmlFile.absoluteFilePath().mid( index+1 );
+                            m_marbleWidget->setMapThemeId( mapTheme );
+                            return true;
+                        }
                     }
                 }
-            } else if ( installed ) {
+            }
+
+            if ( installed ) {
                 QRect removeRect = position( RemoveButton, option );
                 if ( removeRect.contains( mouseEvent->pos() ) ) {
                     m_newstuffModel->uninstall( index.row() );
