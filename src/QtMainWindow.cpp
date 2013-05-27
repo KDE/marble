@@ -314,8 +314,9 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-    // Do not create too many menu entries on a MID
-    if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        // Do not create too many menu entries on a MID
+
         menuBar()->addAction( m_workOfflineAct );
         //menuBar()->addAction( m_sideBarAct );
         /** @todo: Full screen cannot be left on Maemo currently (shortcuts not working) */
@@ -343,59 +344,58 @@ void MainWindow::createMenus()
 
         menuBar()->addAction( m_manageBookmarksAct );
         menuBar()->addAction( m_aboutMarbleAct );
-        return;
-    }
+    } else {
+        m_fileMenu = menuBar()->addMenu(tr("&File"));
+        m_fileMenu->addAction(m_openAct);
+        m_fileMenu->addAction(m_downloadAct);
+        m_fileMenu->addAction( m_downloadRegionAction );
+        m_fileMenu->addAction( m_mapWizardAct );
+        m_fileMenu->addAction(m_exportMapAct);
+        m_fileMenu->addSeparator();
+        m_fileMenu->addAction(m_printAct);
+        m_fileMenu->addAction(m_printPreviewAct);
+        m_fileMenu->addSeparator();
+        m_fileMenu->addAction(m_workOfflineAct);
+        m_fileMenu->addAction(m_quitAct);
 
-    m_fileMenu = menuBar()->addMenu(tr("&File"));
-    m_fileMenu->addAction(m_openAct);
-    m_fileMenu->addAction(m_downloadAct);
-    m_fileMenu->addAction( m_downloadRegionAction );
-    m_fileMenu->addAction( m_mapWizardAct );
-    m_fileMenu->addAction(m_exportMapAct);
-    m_fileMenu->addSeparator();
-    m_fileMenu->addAction(m_printAct);
-    m_fileMenu->addAction(m_printPreviewAct);
-    m_fileMenu->addSeparator();
-    m_fileMenu->addAction(m_workOfflineAct);
-    m_fileMenu->addAction(m_quitAct);
+        m_fileMenu = menuBar()->addMenu(tr("&Edit"));
+        m_fileMenu->addAction(m_copyMapAct);
+        m_fileMenu->addAction(m_copyCoordinatesAct);
+        m_fileMenu->addAction( m_osmEditAction );
 
-    m_fileMenu = menuBar()->addMenu(tr("&Edit"));
-    m_fileMenu->addAction(m_copyMapAct);
-    m_fileMenu->addAction(m_copyCoordinatesAct);
-    m_fileMenu->addAction( m_osmEditAction );
+        m_viewMenu = menuBar()->addMenu(tr("&View"));
+        m_infoBoxesMenu = new QMenu( "&Info Boxes" );
+        m_onlineServicesMenu = new QMenu( "&Online Services" );
+        createPluginsMenus();
 
-    m_viewMenu = menuBar()->addMenu(tr("&View"));
-    m_infoBoxesMenu = new QMenu( "&Info Boxes" );
-    m_onlineServicesMenu = new QMenu( "&Online Services" );
-    createPluginsMenus();
+        m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
+        createBookmarkMenu();
+        connect( m_bookmarkMenu, SIGNAL(aboutToShow()), this, SLOT(createBookmarkMenu()) );
 
-    m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
-    createBookmarkMenu();
-    connect( m_bookmarkMenu, SIGNAL(aboutToShow()), this, SLOT(createBookmarkMenu()) );
+        m_panelMenu = new QMenu( "&Panels" );
+        m_settingsMenu = menuBar()->addMenu(tr("&Settings"));
+        m_settingsMenu->addMenu( m_panelMenu );
+        m_settingsMenu->addAction(m_statusBarAct);
+        m_settingsMenu->addAction(m_fullScreenAct);
+        m_settingsMenu->addSeparator();
+        m_settingsMenu->addAction(m_configDialogAct);
 
-    m_panelMenu = new QMenu( "&Panels" );
-    m_settingsMenu = menuBar()->addMenu(tr("&Settings"));
-    m_settingsMenu->addMenu( m_panelMenu );
-    m_settingsMenu->addAction(m_statusBarAct);
-    m_settingsMenu->addAction(m_fullScreenAct);
-    m_settingsMenu->addSeparator();
-    m_settingsMenu->addAction(m_configDialogAct);
+        m_helpMenu = menuBar()->addMenu(tr("&Help"));
+        m_helpMenu->addAction(m_handbookAct);
+        m_helpMenu->addSeparator();
+        m_helpMenu->addAction(m_whatsThisAct);
+        m_helpMenu->addSeparator();
+        m_helpMenu->addAction(m_aboutMarbleAct);
+        m_helpMenu->addAction(m_aboutQtAct);
 
-    m_helpMenu = menuBar()->addMenu(tr("&Help"));
-    m_helpMenu->addAction(m_handbookAct);
-    m_helpMenu->addSeparator();
-    m_helpMenu->addAction(m_whatsThisAct);
-    m_helpMenu->addSeparator();
-    m_helpMenu->addAction(m_aboutMarbleAct);
-    m_helpMenu->addAction(m_aboutQtAct);
-
-//    FIXME: Discuss if this is the best place to put this
-    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const listEnd = pluginList.constEnd();
-    for (; it != listEnd; ++it ) {
-        connect( (*it), SIGNAL(actionGroupsChanged()),
-                 this, SLOT(createPluginMenus()) );
+        // FIXME: Discuss if this is the best place to put this
+        QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+        QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
+        QList<RenderPlugin *>::const_iterator const listEnd = pluginList.constEnd();
+        for (; it != listEnd; ++it ) {
+            connect( (*it), SIGNAL(actionGroupsChanged()),
+                     this, SLOT(createPluginMenus()) );
+        }
     }
 }
 
