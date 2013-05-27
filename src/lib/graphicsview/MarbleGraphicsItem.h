@@ -136,7 +136,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
      * This function will be called by paintEvent().
      */
-    virtual void paint( QPainter *painter ) = 0;
+    virtual void paint( QPainter *painter );
 
     virtual bool eventFilter( QObject *object, QEvent *e );
 

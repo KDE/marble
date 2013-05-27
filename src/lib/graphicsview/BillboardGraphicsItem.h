@@ -55,9 +55,6 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
      */
     QList<QRectF> boundingRects() const;
 
- protected:
-    virtual void paint( QPainter *painter );
-
  private:
     class Private;
     Private *p() const;

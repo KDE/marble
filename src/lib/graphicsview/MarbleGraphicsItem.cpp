@@ -233,6 +233,11 @@ QRectF MarbleGraphicsItem::contentRect() const
     return QRectF( QPointF( 0, 0 ), contentSize() );
 }
 
+void MarbleGraphicsItem::paint( QPainter *painter )
+{
+    Q_UNUSED( painter );
+}
+
 bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
 {
     if ( ! ( e->type() == QEvent::MouseButtonDblClick
