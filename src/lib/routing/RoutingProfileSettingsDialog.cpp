@@ -118,14 +118,9 @@ void RoutingProfileSettingsDialog::editProfile( int profileIndex )
     m_ui->settingsStack->setCurrentWidget( m_ui->selectServicePage );
     m_ui->settingsStack->setEnabled( false );
 
-    bool applyOnRejection = false;
-#ifdef Q_WS_MAEMO_5
-    // Needed because the stacked window on Maemo closes the dialog when
-    // using the back button, which is the only way to leave that window.
-    applyOnRejection = true;
-#endif // Q_WS_MAEMO_5
-
-    if ( exec() != QDialog::Accepted && !applyOnRejection ) {
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    // Small screen profile (like maemo 5) does not have the "buttonBox"
+    if ( exec() != QDialog::Accepted && !smallScreen ) {
         return;
     }
 
