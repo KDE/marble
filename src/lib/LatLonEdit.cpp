@@ -448,7 +448,8 @@ qreal DMInputHandler::calculateValue() const
 
 
 LatLonEditPrivate::LatLonEditPrivate()
-    : m_value(0.0)
+    : m_dimension(Latitude)
+    , m_value(0.0)
     , m_notation(GeoDataCoordinates::DMS)
     , m_inputHandler(new DMSInputHandler(this))
     , m_updating(false)
@@ -517,10 +518,6 @@ void LatLonEdit::onSignChanged()
 
 void LatLonEdit::setDimension( Dimension dimension )
 {
-    if (d->m_dimension == dimension) {
-        return;
-    }
-
     d->m_dimension = dimension;
 
     d->m_updating = true;
@@ -551,10 +548,6 @@ void LatLonEdit::setDimension( Dimension dimension )
 
 void LatLonEdit::setNotation(GeoDataCoordinates::Notation notation)
 {
-    if( d->m_notation == notation ) {
-        return;
-    }
-
     delete d->m_inputHandler;
 
     switch (notation) {
