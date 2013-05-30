@@ -123,15 +123,6 @@ bool MarbleGraphicsItem::contains( const QPointF& point ) const
     return false;
 }
 
-QRectF MarbleGraphicsItem::containsRect( const QPointF& point ) const
-{
-    foreach( const QRectF& rect, d->boundingRects() ) {
-        if( rect.contains( point ) )
-            return rect;
-    }
-    return QRectF();
-}
-
 QList<QRectF> MarbleGraphicsItemPrivate::boundingRects() const
 {
     QList<QRectF> list;

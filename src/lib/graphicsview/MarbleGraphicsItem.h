@@ -56,11 +56,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
     bool contains( const QPointF& point ) const;
 
     /**
-     * Returns the rect of one representation of the object that is at the given position.
-     */
-    QRectF containsRect( const QPointF& point ) const;
-
-    /**
      * Returns the layout of the MarbleGraphicsItem.
      */
     AbstractMarbleGraphicsLayout *layout() const;

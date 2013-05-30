@@ -115,6 +115,16 @@ QList<QRectF> BillboardGraphicsItem::boundingRects() const
     return rects;
 }
 
+QRectF BillboardGraphicsItem::containsRect( const QPointF &point ) const
+{
+    foreach( const QRectF &rect, boundingRects() ) {
+        if( rect.contains( point ) )
+            return rect;
+    }
+
+    return QRectF();
+}
+
 Qt::Alignment BillboardGraphicsItem::alignment() const
 {
     return p()->m_alignment;

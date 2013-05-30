@@ -55,6 +55,11 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
      */
     QList<QRectF> boundingRects() const;
 
+    /**
+     * Returns the rect of one representation of the object that is at the given position.
+     */
+    QRectF containsRect( const QPointF &point ) const;
+
  private:
     class Private;
     Private *p() const;
