@@ -132,7 +132,12 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int 
     m_lineEdit->setDecorator( addDropDownIndicator( m_route->pixmap( m_index ) ) );
 
     m_removeButton = new QPushButton( parent );
+#ifdef Q_WS_MAEMO_5
+    // maemo window background color is black, the 'X' is not visible -> use the red '-' sign
+    m_removeButton->setIcon( QIcon( ":/icons/remove.png" ) );
+#else
     m_removeButton->setIcon( QIcon( ":/marble/routing/icon-remove.png" ) );
+#endif
     m_removeButton->setToolTip( QObject::tr( "Remove via point" ) );
     m_removeButton->setFlat( true );
     m_removeButton->setMaximumWidth( 18 );
