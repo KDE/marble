@@ -555,7 +555,7 @@ void ElevationProfileFloatItem::updateVisiblePoints()
             // off screen --> start new list
             if ( !currentRouteSegment.isEmpty() ) {
                 routeSegments.append( currentRouteSegment );
-                currentRouteSegment.empty();
+                currentRouteSegment.clear();
             }
         }
     }
