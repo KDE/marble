@@ -647,12 +647,16 @@ void RoutingWidget::showDirections()
 
 void RoutingWidget::saveRoute()
 {
-    QString const fileName = QFileDialog::getSaveFileName( this,
+    QString fileName = QFileDialog::getSaveFileName( this,
                        tr( "Save Route" ), // krazy:exclude=qclasses
                        d->m_routingManager->lastSavePath(),
                        tr( "KML files (*.kml)" ) );
 
     if ( !fileName.isEmpty() ) {
+        // maemo 5 file dialog does not append the file extension
+        if ( !fileName.endsWith(QLatin1String( ".kml" ), Qt::CaseInsensitive) ) {
+            fileName.append( ".kml" );
+        }
         d->m_routingManager->setLastSavePath( QFileInfo( fileName ).absolutePath() );
         d->m_routingManager->saveRoute( fileName );
     }
