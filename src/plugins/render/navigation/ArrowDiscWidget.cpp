@@ -12,6 +12,7 @@
 
 #include "MarbleWidget.h"
 
+#include <qmath.h>
 #include <QtGui/QPainter>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPixmapCache>
@@ -204,7 +205,7 @@ Qt::ArrowType ArrowDiscWidget::arrowUnderMouse(const QPoint &position) const
     int const distance_pow2 = px*px + py*py;
 
     if ( distance_pow2 >= min_radius_pow2 && distance_pow2 <= max_radius_pow2 ) {
-        int const angle = int( atan2( py, px ) * RAD2DEG );
+        int const angle = int( qAtan2( py, px ) * RAD2DEG );
         Q_ASSERT( -180 <= angle && angle <= 180 );
 
         if ( angle >= 135 || angle < -135 ) {
