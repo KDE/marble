@@ -55,6 +55,11 @@ void AudioOutput::setMuted( bool )
     // nothing to do
 }
 
+bool AudioOutput::isMuted() const
+{
+    return true;
+}
+
 void AudioOutput::setSpeaker( const QString & )
 {
     // nothing to do
@@ -68,6 +73,11 @@ QString AudioOutput::speaker() const
 void AudioOutput::setSoundEnabled( bool )
 {
     // nothing to do
+}
+
+bool AudioOutput::isSoundEnabled() const
+{
+    return false;
 }
 
 }
