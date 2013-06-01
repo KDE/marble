@@ -31,8 +31,6 @@ public:
     explicit SceneGraphicsItem( GeoDataPlacemark *placemark );
     ~SceneGraphicsItem();
 
-    virtual void paint(GeoPainter * painter, const ViewportParams * viewport) =0;
-
     QList<QRegion> regions() const;
 
     //Start dealing with the event stuff
