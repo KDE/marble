@@ -53,7 +53,7 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
 
     if( visible && !hidden ) {
         bubble->moveTo( QPoint( x, y ) );
-        bubble->paint( painter, viewport );
+        bubble->paint( painter );
     } else {
         bubble->setHidden(true );
     }

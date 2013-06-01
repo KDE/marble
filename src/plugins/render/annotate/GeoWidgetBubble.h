@@ -18,9 +18,7 @@
 namespace Marble
 {
 
-class GeoPainter;
 class GeoDataPlacemark;
-class ViewportParams;
 class GeoSceneLayer;
 
 class GeoWidgetBubble
@@ -29,7 +27,7 @@ public:
     explicit GeoWidgetBubble( GeoDataPlacemark *placemark );
     ~GeoWidgetBubble();
 
-    void paint(GeoPainter* p, const ViewportParams* v);
+    void paint(QPainter* p);
 
     void setParentWidget( QWidget* parent );
 

@@ -11,9 +11,11 @@
 
 #include "GeoWidgetBubble.h"
 
-#include "GeoPainter.h"
 #include "TextEditor.h"
 
+#include "MarbleColors.h"
+
+#include <QtGui/QPainter>
 #include <QtGui/QWidget>
 
 namespace Marble
@@ -34,10 +36,8 @@ GeoWidgetBubble::~GeoWidgetBubble()
     delete m_widget;
 }
 
-void GeoWidgetBubble::paint( GeoPainter* painter, const ViewportParams* viewport )
+void GeoWidgetBubble::paint( QPainter* painter )
 {
-    Q_UNUSED( viewport );
-
     if( !m_widgetInitialized && ( m_widget!=0)  ) {
         QWidget *widget = dynamic_cast<QWidget*>( painter->device() );
         if ( widget ) {
