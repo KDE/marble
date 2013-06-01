@@ -209,8 +209,10 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
                 }
             }
 
-            for ( int i=placemarks.size(); i<m_routeRequest.size(); ++i ) {
-                m_routeRequest.remove( i );
+            // clear unneeded via points
+            const int viaPoints_needed = placemarks.size();
+            for ( int i = m_routeRequest.size(); i > viaPoints_needed; --i ) {
+                m_routeRequest.remove( viaPoints_needed );
             }
         } else {
             mDebug() << "Expected a GeoDataDocument with at least one child, didn't get one though";
