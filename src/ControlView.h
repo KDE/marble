@@ -89,8 +89,6 @@ class ControlView : public QWidget
 
     void setWorkOffline( bool workOffline );
 
-    void showLegendDock( bool show );
-
  public slots:
     void printMapScreenShot( QPointer<QPrintDialog> dialog );
     void printPixmap( QPrinter * printer, const QPixmap& pixmap );
@@ -129,7 +127,6 @@ private Q_SLOTS:
     MarbleWidget      *m_marbleWidget;
     QString            m_externalEditor;
     QDockWidget       *m_searchDock;
-    QDockWidget       *m_legendDock;
     CurrentLocationWidget* m_locationWidget;
 };
 

@@ -146,11 +146,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         createToolBar();
     }
     createActions();
-    createMenus();
+    QList<QAction*> const panelActions = m_controlView->setupDockWidgets( this );
+    createMenus( panelActions );
     createStatusBar();
-    if ( !smallscreen ) {
-        createDockWidgets();
-    }
 
     connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
              this, SLOT(updateMapEditButtonVisibility(QString)) );
@@ -312,7 +310,7 @@ void MainWindow::createActions()
      connect( m_mapWizardAct, SIGNAL(triggered()), SLOT(showMapWizard()) );
 }
 
-void MainWindow::createMenus()
+void MainWindow::createMenus( const QList<QAction*> &panelActions )
 {
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         // Do not create too many menu entries on a MID
@@ -326,10 +324,9 @@ void MainWindow::createMenus()
         m_showMapViewDialogAction = menuBar()->addAction( tr( "Map View" ) );
         connect( m_showMapViewDialogAction, SIGNAL(triggered(bool)),
                  this, SLOT(showMapViewDialog()) );
-        m_toggleLegendTabAction = menuBar()->addAction( tr( "Legend" ) );
-        m_toggleLegendTabAction->setCheckable( true );
-        connect( m_toggleLegendTabAction, SIGNAL(triggered(bool)),
-                 this, SLOT(showLegendTab(bool)) );
+
+        Q_ASSERT( panelActions.size() == 1 );
+        menuBar()->addAction( panelActions[0] );
         m_toggleRoutingTabAction = menuBar()->addAction( tr( "Routing" ) );
         connect( m_toggleRoutingTabAction, SIGNAL(triggered(bool)),
                  this, SLOT(showRoutingDialog()) );
@@ -373,6 +370,10 @@ void MainWindow::createMenus()
         connect( m_bookmarkMenu, SIGNAL(aboutToShow()), this, SLOT(createBookmarkMenu()) );
 
         m_panelMenu = new QMenu( "&Panels" );
+        foreach( QAction* action, panelActions ) {
+            m_panelMenu->addAction( action );
+        }
+
         m_settingsMenu = menuBar()->addMenu(tr("&Settings"));
         m_settingsMenu->addMenu( m_panelMenu );
         m_settingsMenu->addAction(m_statusBarAct);
@@ -611,16 +612,6 @@ void MainWindow::createStatusBar()
 {
     statusBar()->showMessage(tr("Ready"));
     statusBar()->hide();
-}
-
-void MainWindow::createDockWidgets()
-{
-    QList<QAction*> panelActions = m_controlView->setupDockWidgets( this );
-    if ( m_panelMenu ) {
-        foreach( QAction* action, panelActions ) {
-            m_panelMenu->addAction( action );
-        }
-    }
 }
 
 void MainWindow::openMapDialog()
@@ -1495,11 +1486,6 @@ void MainWindow::showMapViewDialog()
     m_mapViewWindow->show();
     m_mapViewWindow->raise();
     m_mapViewWindow->activateWindow();
-}
-
-void MainWindow::showLegendTab( bool enabled )
-{
-    m_controlView->showLegendDock( enabled );
 }
 
 void MainWindow::showRoutingDialog()

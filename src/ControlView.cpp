@@ -62,7 +62,6 @@ namespace Marble
 ControlView::ControlView( QWidget *parent )
    : QWidget( parent ),
      m_searchDock( 0 ),
-     m_legendDock( 0 ),
      m_locationWidget( 0 )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
@@ -492,6 +491,22 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     mainWindow->setTabPosition( Qt::LeftDockWidgetArea, QTabWidget::North );
     mainWindow->setTabPosition( Qt::RightDockWidgetArea, QTabWidget::North );
 
+    QDockWidget* legendDock = new QDockWidget( tr( "Legend" ), this );
+    legendDock->setObjectName( "legendDock" );
+    legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    LegendWidget* legendWidget = new LegendWidget( this );
+    legendWidget->setMarbleModel( marbleModel() );
+    connect( legendWidget, SIGNAL(propertyValueChanged(QString,bool)),
+             marbleWidget(), SLOT(setPropertyValue(QString,bool)) );
+    legendDock->setWidget( legendWidget );
+
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        // Show only the legend as a dock widget on small screen, the others are dialogs
+        mainWindow->addDockWidget( Qt::LeftDockWidgetArea, legendDock );
+        return QList<QAction*>() << legendDock->toggleViewAction();
+    }
+
     QDockWidget *routingDock = new QDockWidget( tr( "Routing" ), mainWindow );
     routingDock->setObjectName( "routingDock" );
     routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
@@ -544,16 +559,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, fileViewDock );
     fileViewDock->hide();
 
-    QDockWidget *legendDock = new QDockWidget( tr( "Legend" ), this );
-    legendDock->setObjectName( "legendDock" );
-    legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    LegendWidget* legendWidget = new LegendWidget( this );
-    legendWidget->setMarbleModel( marbleModel() );
-    connect( legendWidget, SIGNAL(propertyValueChanged(QString,bool)),
-             marbleWidget(), SLOT(setPropertyValue(QString,bool)) );
-    legendDock->setWidget( legendWidget );
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, legendDock );
-
     mainWindow->tabifyDockWidget( mapViewDock, legendDock );
     mapViewDock->raise();
 
@@ -577,13 +583,6 @@ void ControlView::setWorkOffline( bool offline )
     marbleWidget()->model()->setWorkOffline( offline );
     if ( !offline ) {
         marbleWidget()->clearVolatileTileCache();
-    }
-}
-
-void ControlView::showLegendDock( bool show )
-{
-    if ( m_legendDock ) {
-        m_legendDock->setVisible( show );
     }
 }
 

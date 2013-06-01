@@ -71,9 +71,8 @@ protected:
 private:
     void  createToolBar();
     void  createActions();
-    void  createMenus();
+    void  createMenus( const QList<QAction*> &panelActions );
     void  createStatusBar();
-    void  createDockWidgets();
 
     QString  readMarbleDataPath();
     void  readSettings(const QVariantMap& overrideSettings = QVariantMap());
@@ -146,7 +145,6 @@ private Q_SLOTS:
 
     // Small screen devices specific slots
     void showMapViewDialog();
-    void showLegendTab( bool enabled );
     void showRoutingDialog();
     void showTrackingDialog();
     void showGoToDialog();
@@ -233,7 +231,6 @@ private:
 
     // Small screen devices
     QAction *m_showMapViewDialogAction;
-    QAction *m_toggleLegendTabAction;
     QAction *m_toggleRoutingTabAction;
     QAction *m_showTrackingDialogAction;
 
