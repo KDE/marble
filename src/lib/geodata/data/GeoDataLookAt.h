@@ -31,6 +31,8 @@ namespace Marble
 
         ~GeoDataLookAt();
 
+        GeoDataAbstractView *copy() const;
+
         /**
          * @brief set the altitude in a GeoDataLookAt object
          * @param altitude latitude

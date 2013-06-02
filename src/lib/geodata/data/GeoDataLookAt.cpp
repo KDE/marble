@@ -45,6 +45,11 @@ GeoDataLookAt::~GeoDataLookAt()
         delete d;
 }
 
+GeoDataAbstractView *GeoDataLookAt::copy() const
+{
+    return new GeoDataLookAt( *this );
+}
+
 void GeoDataLookAt::setCoordinates( const GeoDataCoordinates& coordinates )
 {
     d->m_coordinates = coordinates;

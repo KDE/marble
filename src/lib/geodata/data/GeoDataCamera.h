@@ -30,6 +30,8 @@ public:
 
     ~GeoDataCamera();
 
+    GeoDataAbstractView *copy() const;
+
     /**
      * @brief set the altitude in a GeoDataCamera object
      * @param altitude latitude

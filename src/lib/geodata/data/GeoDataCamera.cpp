@@ -44,6 +44,11 @@ GeoDataCamera::~GeoDataCamera()
     }
 }
 
+GeoDataAbstractView *GeoDataCamera::copy() const
+{
+    return new GeoDataCamera( *this );
+}
+
 void GeoDataCamera::setCoordinates( const GeoDataCoordinates& coordinates )
 {
     detach();

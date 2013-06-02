@@ -36,6 +36,8 @@ class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
 
     GeoDataAbstractView& operator=( const GeoDataAbstractView &other );
 
+    virtual GeoDataAbstractView *copy() const = 0;
+
     const GeoDataTimeSpan& timeSpan() const;
 
     GeoDataTimeSpan& timeSpan();

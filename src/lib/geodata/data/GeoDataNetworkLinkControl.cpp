@@ -19,6 +19,8 @@ class GeoDataNetworkLinkControlPrivate
 public:
     GeoDataNetworkLinkControlPrivate();
 
+    GeoDataNetworkLinkControlPrivate( const GeoDataNetworkLinkControlPrivate &other );
+
     qreal m_minRefreshPeriod;
     qreal m_maxSessionLength;
     QString m_cookie;
@@ -45,7 +47,21 @@ GeoDataNetworkLinkControlPrivate::GeoDataNetworkLinkControlPrivate() :
     m_update(),
     m_abstractView( 0 )
 {
-    delete m_abstractView;
+}
+
+GeoDataNetworkLinkControlPrivate::GeoDataNetworkLinkControlPrivate( const GeoDataNetworkLinkControlPrivate &other ) :
+    m_minRefreshPeriod( other.m_minRefreshPeriod ),
+    m_maxSessionLength( other.m_maxSessionLength ),
+    m_cookie( other.m_cookie ),
+    m_message( other.m_message ),
+    m_linkName( other.m_linkName ),
+    m_linkDescription( other.m_linkDescription ),
+    m_linkSnippet( other.m_linkSnippet ),
+    m_maxLines( other.m_maxLines ),
+    m_expires( other.m_expires ),
+    m_update( other.m_update ),
+    m_abstractView( other.m_abstractView ? other.m_abstractView->copy() : 0 )
+{
 }
 
 GeoDataNetworkLinkControl::GeoDataNetworkLinkControl() :
@@ -62,11 +78,13 @@ GeoDataNetworkLinkControl &GeoDataNetworkLinkControl::operator=( const GeoDataNe
 {
     GeoDataContainer::operator =( other );
     *d = *other.d;
+    d->m_abstractView = other.d->m_abstractView ? other.d->m_abstractView->copy() : 0;
     return *this;
 }
 
 GeoDataNetworkLinkControl::~GeoDataNetworkLinkControl()
 {
+    delete d->m_abstractView;
     delete d;
 }
 
