@@ -713,7 +713,7 @@ void    invjday
          days    = temp - ((year - 1900) * 365.0 + leapyrs);
        }
 
-     /* ----------------- find remaing data  ------------------------- */
+     /* ----------------- find residual data  ------------------------- */
      days2mdhms(year, days, mon, day, hr, minute, sec);
      sec = sec - 0.00000086400;
    }  // end invjday

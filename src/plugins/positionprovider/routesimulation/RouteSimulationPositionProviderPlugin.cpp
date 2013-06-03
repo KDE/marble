@@ -52,7 +52,7 @@ QString RouteSimulationPositionProviderPlugin::version() const
 
 QString RouteSimulationPositionProviderPlugin::description() const
 {
-    return tr( "Simulates travelling along the current route." );
+    return tr( "Simulates traveling along the current route." );
 }
 
 QString RouteSimulationPositionProviderPlugin::copyrightYears() const

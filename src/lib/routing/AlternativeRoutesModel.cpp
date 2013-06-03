@@ -70,7 +70,7 @@ public:
     static qreal distance( const GeoDataCoordinates &satellite, const GeoDataCoordinates &lineA, const GeoDataCoordinates &lineB );
 
     /**
-      * Returns the point reached when travelling the given distance from start with the given direction
+      * Returns the point reached when traveling the given distance from start with the given direction
       */
     static GeoDataCoordinates coordinates( const GeoDataCoordinates &start, qreal distance, qreal bearing );
 

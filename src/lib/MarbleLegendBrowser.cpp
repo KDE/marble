@@ -287,7 +287,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
      * thing is to understand everything.
      */
     foreach ( const GeoSceneSection *section, currentMapTheme->legend()->sections() ) {
-        // Each section is devided into the "well"
+        // Each section is divided into the "well"
         // Well is like a block of data with rounded corners
         customLegendString += "<div class=\"well well-small well-legend\">";
 

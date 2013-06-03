@@ -89,7 +89,7 @@ class GEODATA_EXPORT GeoDataCoordinates
      * @brief The BearingType enum specifies where to measure the bearing
      * along great circle arcs
      *
-     * When travelling along a great circle arc defined by the two points
+     * When traveling along a great circle arc defined by the two points
      * A and B, the bearing varies along the arc. The "InitialBearing" bearing
      * corresponds to the bearing value at A, the "FinalBearing" bearing to that
      * at B.

@@ -51,7 +51,7 @@ GeoNode* KmlheadingTagHandler::parse( GeoParser& parser ) const
 	    parentItem.nodeAs<GeoDataOrientation>()->setHeading( heading );
 	}
     } else {
-        mDebug() << "Invalid heading value " << heading << ", must be withing 0..360. Using 0 instead.";
+        mDebug() << "Invalid heading value " << heading << ", must be within 0..360. Using 0 instead.";
     }
 
     return 0;

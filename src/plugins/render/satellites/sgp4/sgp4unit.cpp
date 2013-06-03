@@ -1593,7 +1593,7 @@ bool sgp4init
          }
        } // if omeosq = 0 ...
 
-       /* finally propogate to zero epoch to initialize all others. */
+       /* finally propagate to zero epoch to initialize all others. */
        // sgp4fix take out check to let satellites process until they are actually below earth surface
 //       if(satrec.error == 0)
        sgp4(whichconst, satrec, 0.0, r, v);

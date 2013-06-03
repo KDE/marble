@@ -2258,7 +2258,7 @@ int Eclipse::lunar (double jd, double tdut)
 	/* (the factor 1.02 allows for enlargment of shadow due to
 		 Earth's atmosphere) */
 
-	// get angular seperation of center of shadow and Moon
+	// get angular separation of center of shadow and Moon
 	r2 = abs(rm);
 	sep = dot(rs,rm)/(abs(rs)*r2);
 	if (fabs(sep) > 1.0) sep = 1.0;
