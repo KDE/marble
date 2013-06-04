@@ -354,7 +354,6 @@ void MarbleMap::setSize( int width, int height )
 void MarbleMap::setSize( const QSize& size )
 {
     d->m_viewport.setSize( size );
-    d->m_textureLayer.setNeedsUpdate();
 
     emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
 }
@@ -384,8 +383,6 @@ void MarbleMap::setRadius( int radius )
     const int oldRadius = d->m_viewport.radius();
 
     d->m_viewport.setRadius( radius );
-
-    d->m_textureLayer.setNeedsUpdate();
 
     if ( oldRadius != d->m_viewport.radius() ) {
         emit radiusChanged( radius );
