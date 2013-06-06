@@ -167,8 +167,8 @@ void BookmarkManagerDialogPrivate::deleteFolder()
     GeoDataFolder *folder = dynamic_cast<GeoDataFolder*>(selectedFolder());
     if ( folder ) {
         if ( folder->size() > 0 ) {
-            QString const text = m_parent->tr( "The folder %1 is not empty. Removing it will delete all bookmarks it contains. Are you sure you want to delete the folder?" ).arg( folder->name() );
-            if ( QMessageBox::question( m_parent, m_parent->tr("Remove Folder - Marble"), text, QMessageBox::Yes, QMessageBox::No ) != QMessageBox::Yes) {
+            QString const text = QObject::tr( "The folder %1 is not empty. Removing it will delete all bookmarks it contains. Are you sure you want to delete the folder?" ).arg( folder->name() );
+            if ( QMessageBox::question( m_parent, QObject::tr("Remove Folder - Marble"), text, QMessageBox::Yes, QMessageBox::No ) != QMessageBox::Yes) {
                 return;
             }
         }

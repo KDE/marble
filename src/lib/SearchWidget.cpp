@@ -50,7 +50,7 @@ SearchWidgetPrivate::SearchWidgetPrivate() :
     m_sortproxy(),
     m_document( new GeoDataDocument )
 {
-    m_document->setName( m_widget->tr( "Search Results" ) );
+    m_document->setName( QObject::tr( "Search Results" ) );
 }
 
 void SearchWidgetPrivate::setSearchResult( QVector<GeoDataPlacemark *> locations )
@@ -67,7 +67,7 @@ void SearchWidgetPrivate::setSearchResult( QVector<GeoDataPlacemark *> locations
     GeoDataTreeModel *treeModel = m_widget->model()->treeModel();
     treeModel->removeDocument( m_document );
     m_document->clear();
-    m_document->setName( QString( m_widget->tr( "Search for '%1'" ) ).arg( m_searchField->text() ) );
+    m_document->setName( QString( QObject::tr( "Search for '%1'" ) ).arg( m_searchField->text() ) );
     foreach (GeoDataPlacemark *placemark, locations ) {
         m_document->append( new GeoDataPlacemark( *placemark ) );
     }
