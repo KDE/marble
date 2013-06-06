@@ -27,7 +27,7 @@ QString NominatimPlugin::name() const
     return tr( "OpenStreetMap Nominatim Search" );
 }
 
-QString Marble::NominatimPlugin::guiString() const
+QString NominatimPlugin::guiString() const
 {
     return tr( "OpenStreetMap Nominatim" );
 }
