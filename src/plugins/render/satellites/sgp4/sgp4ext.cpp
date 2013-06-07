@@ -348,7 +348,7 @@ void newtonnu
 *    c1          - v**2 - u/r
 *    rdotv       - r dot v
 *    hk          - hk unit vector
-*    sme         - specfic mechanical energy      km2 / s2
+*    sme         - specific mechanical energy      km2 / s2
 *    i           - index
 *    e           - eccentric, parabolic,
 *                  hyperbolic anomaly             rad

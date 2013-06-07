@@ -840,7 +840,7 @@ void AppPos (double jd, double ep2, double lat, double lng, double ht,
 	  ht : height above normal in meters.
 	  solsys : = 1 if object is in solar system and parallax has to be
 						taken into account, 0 otherwise.
-	  r = vector of celestial object. The unit of lenght of this vector
+	  r = vector of celestial object. The unit of length of this vector
 			has to be in terms of the equatorial Earth radius (6378.14 km)
 			if solsys = 1, otherwise it's arbitrary.
 	  azim : azimuth in radians (0 is to the North).
