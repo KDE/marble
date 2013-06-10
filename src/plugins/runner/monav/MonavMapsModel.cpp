@@ -120,3 +120,5 @@ QString MonavMapsModel::payload( int index ) const
 }
 
 }
+
+#include "MonavMapsModel.moc"
