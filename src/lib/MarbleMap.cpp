@@ -904,9 +904,9 @@ void MarbleMapPrivate::updateMapTheme()
                                                     m_model->mapTheme()->head()->description() );
                         tileCreatorDlg->exec();
                         if ( TileLoader::baseTilesAvailable( *texture ) ) {
-                            qDebug() << "Base tiles for" << sourceDir << "successfully created.";
+                            mDebug() << "Base tiles for" << sourceDir << "successfully created.";
                         } else {
-                            qDebug() << "Some or all base tiles for" << sourceDir << "could not be created.";
+                            qWarning() << "Some or all base tiles for" << sourceDir << "could not be created.";
                         }
 
                         delete tileCreatorDlg;
