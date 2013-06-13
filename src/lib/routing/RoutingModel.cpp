@@ -59,8 +59,6 @@ public:
 
     void importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark );
 
-    bool deviatedFromRoute( const GeoDataCoordinates &position, const QVector<GeoDataCoordinates> &waypoints ) const;
-
     void updateViaPoints( const GeoDataCoordinates &position );
 };
 
@@ -70,23 +68,6 @@ RoutingModelPrivate::RoutingModelPrivate( RouteRequest* request )
       m_request( request )
 {
     // nothing to do
-}
-
-bool RoutingModelPrivate::deviatedFromRoute( const GeoDataCoordinates &position, const QVector<GeoDataCoordinates> &waypoints ) const
-{
-    /** @todo: Cache bounding box / expected next target for a quicker check */
-    qreal deviation = 0.0;
-    if ( m_positionTracking && m_positionTracking->accuracy().vertical > 0.0 ) {
-        deviation = qMax<qreal>( m_positionTracking->accuracy().vertical, m_positionTracking->accuracy().horizontal );
-    }
-    qreal const threshold = ( deviation + 100.0 ) / EARTH_RADIUS;
-    foreach( const GeoDataCoordinates &coordinate, waypoints ) {
-        if ( distanceSphere( position, coordinate ) < threshold ) {
-            return false;
-        }
-    }
-
-    return true;
 }
 
 void RoutingModelPrivate::updateViaPoints( const GeoDataCoordinates &position )
