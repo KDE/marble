@@ -1042,7 +1042,6 @@ void MarbleMap::setPropertyValue( const QString& name, bool value )
     else {
         mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
     }
-    d->m_textureLayer.setNeedsUpdate();
 }
 
 void MarbleMap::setShowOverviewMap( bool visible )

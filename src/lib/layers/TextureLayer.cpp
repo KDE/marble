@@ -127,6 +127,8 @@ void TextureLayer::Private::updateTextureLayers()
         m_layerDecorator.setThemeId( "maps/" + firstTexture->sourceDir() );
     }
     m_tileLoader.setTextureLayers( result );
+
+    mapChanged();
 }
 
 void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )
