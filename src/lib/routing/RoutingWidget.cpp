@@ -547,7 +547,7 @@ void RoutingWidget::adjustSearchButton()
 
 void RoutingWidget::pointSelectionCanceled()
 {
-    if ( d->m_inputRequest ) {
+    if ( d->m_inputRequest && d->m_inputWidgets.contains( d->m_inputRequest ) ) {
         d->m_inputRequest->abortMapInputRequest();
     }
 }
