@@ -99,6 +99,8 @@ void TextureLayer::Private::mapChanged()
     if ( !m_repaintTimer.isActive() ) {
         m_repaintTimer.start();
     }
+
+    emit m_parent->repaintNeeded();
 }
 
 void TextureLayer::Private::updateTextureLayers()
