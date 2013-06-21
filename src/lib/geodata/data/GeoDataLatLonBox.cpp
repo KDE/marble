@@ -56,6 +56,11 @@ bool operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs )
         && lhs.d->m_rotation == rhs.d->m_rotation;
 }
 
+bool operator!=( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs )
+{
+    return !( lhs == rhs );
+}
+
 GeoDataLatLonBox::GeoDataLatLonBox()
     : GeoDataObject(),
       d( new GeoDataLatLonBoxPrivate )
