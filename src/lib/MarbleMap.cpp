@@ -655,7 +655,6 @@ void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
 void MarbleMap::centerOn( const qreal lon, const qreal lat )
 {
     d->m_viewport.centerOn( lon * DEG2RAD, lat * DEG2RAD );
-    d->m_textureLayer.setNeedsUpdate();
 
     emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
 }

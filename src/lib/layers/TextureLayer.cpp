@@ -58,6 +58,7 @@ public:
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
+    GeoDataLatLonBox m_latLonBox;
     int m_tileZoomLevel;
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
@@ -80,6 +81,7 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
     , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
+    , m_latLonBox()
     , m_tileZoomLevel( -1 )
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
@@ -212,6 +214,11 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     if ( !d->m_texmapper )
         return false;
+
+    if ( d->m_latLonBox != viewport->viewLatLonAltBox() ) {
+        d->m_latLonBox = viewport->viewLatLonAltBox();
+        d->m_texmapper->setRepaintNeeded();
+    }
 
     // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
     const int levelZeroWidth = d->m_tileLoader.tileSize().width() * d->m_tileLoader.tileColumnCount( 0 );
