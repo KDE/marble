@@ -82,8 +82,6 @@ public:
 
     int m_dragStopOverRightIndex;
 
-    bool m_pointSelection;
-
     RoutingModel *const m_routingModel;
 
     MarblePlacemarkModel *m_placemarkModel;
@@ -154,9 +152,6 @@ public:
     /** Dragging trip points, route polygon hovering */
     inline bool handleMouseMove( QMouseEvent *e );
 
-    /** Escape to stop selecting points */
-    inline bool handleKeyEvent( QKeyEvent *e );
-
     /** True if the given point (screen coordinates) is among the route instruction points */
     inline bool isInfoPoint( const QPoint &point );
 
@@ -173,7 +168,7 @@ public:
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
         q( parent ), m_movingIndex( -1 ), m_marbleWidget( widget ),
         m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
-        m_pointSelection( false ), m_routingModel( widget->model()->routingManager()->routingModel() ),
+        m_routingModel( widget->model()->routingManager()->routingModel() ),
         m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
         m_routeRequest( widget->model()->routingManager()->routeRequest() ),
         m_activeMenuIndex( -1 ),
@@ -413,10 +408,6 @@ QColor RoutingLayerPrivate::alphaAdjusted( const QColor &color, int alpha ) cons
 
 bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 {
-    if ( m_pointSelection ) {
-        return e->button() == Qt::LeftButton;
-    }
-
     foreach( const RequestRegion &region, m_regions ) {
         if ( region.region.contains( e->pos() ) ) {
             if ( e->button() == Qt::LeftButton ) {
@@ -497,19 +488,6 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
         return false;
     }
 
-    if ( m_pointSelection ) {
-        if ( e->button() == Qt::LeftButton ) {
-            qreal lon( 0.0 ), lat( 0.0 );
-            if ( m_marbleWidget->geoCoordinates( e->pos().x(), e->pos().y(),
-                                                 lon, lat, GeoDataCoordinates::Radian ) ) {
-                emit q->pointSelected( GeoDataCoordinates( lon, lat ) );
-                return true;
-            }
-        } else {
-            return false;
-        }
-    }
-
     if ( m_movingIndex >= 0 ) {
         m_movingIndex = -1;
         clearStopOver();
@@ -540,11 +518,6 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
 
 bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
 {
-    if ( m_pointSelection ) {
-        m_marbleWidget->setCursor( Qt::CrossCursor );
-        return true;
-    }
-
     qreal lon( 0.0 ), lat( 0.0 );
     if ( m_marbleWidget->geoCoordinates( e->pos().x(), e->pos().y(),
                                          lon, lat, GeoDataCoordinates::Radian ) ) {
@@ -584,17 +557,6 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
 
         // Update pixmap in the map (old and new position needs repaint)
         paintStopOver( QRect( e->pos(), m_pixmapSize ) );
-        return true;
-    }
-
-    return false;
-}
-
-bool RoutingLayerPrivate::handleKeyEvent( QKeyEvent *e )
-{
-    if ( m_pointSelection && e->key() == Qt::Key_Escape ) {
-        m_pointSelection = false;
-        emit q->pointSelectionAborted();
         return true;
     }
 
@@ -712,11 +674,6 @@ bool RoutingLayer::eventFilter( QObject *obj, QEvent *event )
 {
     Q_UNUSED( obj )
 
-    if ( event->type() == QEvent::KeyPress ) {
-        QKeyEvent *e = static_cast<QKeyEvent*>( event );
-        return d->handleKeyEvent( e );
-    }
-
     if ( event->type() == QEvent::MouseButtonPress ) {
         QMouseEvent *e = static_cast<QMouseEvent*>( event );
         return d->handleMouseButtonPress( e );
@@ -744,11 +701,6 @@ void RoutingLayer::setPlacemarkModel ( MarblePlacemarkModel *model )
 void RoutingLayer::synchronizeWith( QItemSelectionModel *selection )
 {
     d->m_selectionModel = selection;
-}
-
-void RoutingLayer::setPointSelectionEnabled( bool enabled )
-{
-    d->m_pointSelection = enabled;
 }
 
 void RoutingLayerPrivate::setRouteDirty( bool dirty )

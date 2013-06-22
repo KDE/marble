@@ -128,6 +128,7 @@ private Q_SLOTS:
     void updateActiveRoutingProfile();
 
 protected:
+    bool eventFilter( QObject *o, QEvent *e );
     void resizeEvent(QResizeEvent *e);
 
 private:

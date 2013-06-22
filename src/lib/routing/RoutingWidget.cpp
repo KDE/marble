@@ -31,6 +31,8 @@
 #include <QtGui/QComboBox>
 #include <QtGui/QPainter>
 #include <QtGui/QFileDialog>
+#include <QtGui/QKeyEvent>
+#include <QtGui/QMouseEvent>
 #include <QtGui/QToolBar>
 #include <QtGui/QToolButton>
 
@@ -267,10 +269,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT(selectFirstProfile()) );
     connect( d->m_routingLayer, SIGNAL(placemarkSelected(QModelIndex)),
              this, SLOT(activatePlacemark(QModelIndex)) );
-    connect( d->m_routingLayer, SIGNAL(pointSelected(GeoDataCoordinates)),
-             this, SLOT(retrieveSelectedPoint(GeoDataCoordinates)) );
-    connect( d->m_routingLayer, SIGNAL(pointSelectionAborted()),
-             this, SLOT(pointSelectionCanceled()) );
     connect( d->m_routingManager, SIGNAL(stateChanged(RoutingManager::State)),
              this, SLOT(updateRouteState(RoutingManager::State)) );
     connect( d->m_routingManager, SIGNAL(routeRetrieved(GeoDataDocument*)),
@@ -522,7 +520,7 @@ void RoutingWidget::requestMapPosition( RoutingInputWidget *widget, bool enabled
 
     if ( enabled ) {
         d->m_inputRequest = widget;
-        d->m_routingLayer->setPointSelectionEnabled( true );
+        d->m_widget->installEventFilter( this );
         d->m_widget->setFocus( Qt::OtherFocusReason );
     }
 }
@@ -535,7 +533,7 @@ void RoutingWidget::retrieveSelectedPoint( const GeoDataCoordinates &coordinates
     }
 
     d->m_inputRequest = 0;
-    d->m_routingLayer->setPointSelectionEnabled( false );
+    d->m_widget->removeEventFilter( this );
 }
 
 void RoutingWidget::adjustSearchButton()
@@ -550,7 +548,7 @@ void RoutingWidget::pointSelectionCanceled()
     }
 
     d->m_inputRequest = 0;
-    d->m_routingLayer->setPointSelectionEnabled( false );
+    d->m_widget->removeEventFilter( this );
 }
 
 void RoutingWidget::configureProfile()
@@ -679,6 +677,50 @@ void RoutingWidget::updateActiveRoutingProfile()
     RoutingProfile const profile = d->m_routingManager->routeRequest()->routingProfile();
     QList<RoutingProfile> const profiles = d->m_routingManager->profilesModel()->profiles();
     d->m_ui.routingProfileComboBox->setCurrentIndex( profiles.indexOf( profile ) );
+}
+
+bool RoutingWidget::eventFilter( QObject *o, QEvent *event )
+{
+    if ( o != d->m_widget ) {
+        return QWidget::eventFilter( o, event );
+    }
+
+    Q_ASSERT( d->m_inputRequest != 0 );
+    Q_ASSERT( d->m_inputWidgets.contains( d->m_inputRequest ) );
+
+    if ( event->type() == QEvent::MouseButtonPress ) {
+        QMouseEvent *e = static_cast<QMouseEvent*>( event );
+        return e->button() == Qt::LeftButton;
+    }
+
+    if ( event->type() == QEvent::MouseButtonRelease ) {
+        QMouseEvent *e = static_cast<QMouseEvent*>( event );
+        qreal lon( 0.0 ), lat( 0.0 );
+        if ( e->button() == Qt::LeftButton && d->m_widget->geoCoordinates( e->pos().x(), e->pos().y(),
+                                                                                 lon, lat, GeoDataCoordinates::Radian ) ) {
+            retrieveSelectedPoint( GeoDataCoordinates( lon, lat ) );
+            return true;
+        } else {
+            return QWidget::eventFilter( o, event );
+        }
+    }
+
+    if ( event->type() == QEvent::MouseMove ) {
+        d->m_widget->setCursor( Qt::CrossCursor );
+        return true;
+    }
+
+    if ( event->type() == QEvent::KeyPress ) {
+        QKeyEvent *e = static_cast<QKeyEvent*>( event );
+        if ( e->key() == Qt::Key_Escape ) {
+            pointSelectionCanceled();
+            return true;
+        }
+
+        return QWidget::eventFilter( o, event );
+    }
+
+    return QWidget::eventFilter( o, event );
 }
 
 void RoutingWidget::resizeEvent(QResizeEvent *e)

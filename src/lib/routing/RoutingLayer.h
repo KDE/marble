@@ -72,14 +72,6 @@ public:
     void setPlacemarkModel ( MarblePlacemarkModel *model );
 
     /**
-      * When enabled, a cross hair cursor is shown in the map and each click
-      * in the map is reported via the pointSelected signal. Mouse move,
-      * press and release events are fully eaten to avoid things like context
-      * menus chiming in.
-      */
-    void setPointSelectionEnabled( bool enabled );
-
-    /**
       * Set the view context to determine whether the map is used interactively
       */
     void setViewContext( ViewContext viewContext );
@@ -90,16 +82,6 @@ Q_SIGNALS:
       * the model set via setModel
       */
     void placemarkSelected( const QModelIndex &index );
-
-    /**
-      * A point was selected by a mouse click after setPointSelectionEnabled(true) was called
-      */
-    void pointSelected( const GeoDataCoordinates &coordinates );
-
-    /**
-      * Selection of points was aborted by the user without selecting a point
-      */
-    void pointSelectionAborted();
 
     void repaintNeeded( const QRect &rect = QRect() );
 
