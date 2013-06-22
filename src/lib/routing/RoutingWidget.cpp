@@ -524,8 +524,6 @@ void RoutingWidget::requestMapPosition( RoutingInputWidget *widget, bool enabled
         d->m_inputRequest = widget;
         d->m_routingLayer->setPointSelectionEnabled( true );
         d->m_widget->setFocus( Qt::OtherFocusReason );
-    } else {
-        d->m_routingLayer->setPointSelectionEnabled( false );
     }
 }
 
@@ -533,10 +531,10 @@ void RoutingWidget::retrieveSelectedPoint( const GeoDataCoordinates &coordinates
 {
     if ( d->m_inputRequest && d->m_inputWidgets.contains( d->m_inputRequest ) ) {
         d->m_inputRequest->setTargetPosition( coordinates );
-        d->m_inputRequest = 0;
         d->m_widget->update();
     }
 
+    d->m_inputRequest = 0;
     d->m_routingLayer->setPointSelectionEnabled( false );
 }
 
@@ -550,6 +548,9 @@ void RoutingWidget::pointSelectionCanceled()
     if ( d->m_inputRequest && d->m_inputWidgets.contains( d->m_inputRequest ) ) {
         d->m_inputRequest->abortMapInputRequest();
     }
+
+    d->m_inputRequest = 0;
+    d->m_routingLayer->setPointSelectionEnabled( false );
 }
 
 void RoutingWidget::configureProfile()
