@@ -1073,16 +1073,16 @@ the system's graphics drivers. </para>
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Coordinate Grid</guilabel></term>
+<term><guilabel>Compass</guilabel></term>
 <listitem>
-<para>Displays a coordinate grid (you can choose the colors of the grid lines).</para>
+<para>Shows a compass in the map</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Compass</guilabel></term>
+<term><guilabel>Coordinate Grid</guilabel></term>
 <listitem>
-<para>Shows a compass in the map</para>
+<para>Displays a coordinate grid (you can choose the colors of the grid lines).</para>
 </listitem>
 </varlistentry>
 
@@ -1101,9 +1101,65 @@ the system's graphics drivers. </para>
 </varlistentry>
 
 <varlistentry>
+<term><guilabel>Earthquakes</guilabel></term>
+<listitem>
+<para>Displays the earthquake markers on the map.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Elevation Profile</guilabel></term>
+<listitem>
+  <para>Displays the elevation profile overlay for <link linkend="routing">the routes on the map</link>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Elevation Profile Marker</guilabel></term>
+<listitem>
+  <para>Displays the routing markers on the elevation profile overlay.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>GpsInfo</guilabel></term>
+<listitem>
+  <para>Displays a float item that provides <ulink url="http://en.wikipedia.org/wiki/Global_Positioning_System">GPS</ulink> information.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>License</guilabel></term>
+<listitem>
+  <para>Displays a float item that provides copyright information.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Measure Tool</guilabel></term>
+<listitem>
+  <para>The plugin to <link linkend="measure-distances">measure distances between two or more points</link>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
 <term><guilabel>Navigation</guilabel></term>
 <listitem>
 <para>Displays the mouse control to zoom and move as float item on the map.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>OpenCaching.com</guilabel></term>
+<listitem>
+  <para>Displays the <ulink url="http://en.wikipedia.org/wiki/Geocaching">geocaching</ulink> markers on the map.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>OpenDesktop Items</guilabel></term>
+<listitem>
+  <para>Shows <ulink url="http://opendesktop.org/">OpenDesktop</ulink> users' avatars and some extra information about them on the map..</para>
 </listitem>
 </varlistentry>
 
@@ -1122,6 +1178,41 @@ the system's graphics drivers. </para>
 </varlistentry>
 
 <varlistentry>
+<term><guilabel>Places</guilabel></term>
+<listitem>
+  <para>Displays trending <ulink url="https://foursquare.com/">Foursquare</ulink> places.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Position Marker</guilabel></term>
+<listitem>
+  <para>Draws a marker at the current <ulink url="http://en.wikipedia.org/wiki/Global_Positioning_System">GPS</ulink> position.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Postal Codes</guilabel></term>
+<listitem>
+  <para>Shows <ulink url="http://en.wikipedia.org/wiki/Postal_code">postal codes</ulink> of the area on the map.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Routing</guilabel></term>
+<listitem>
+  <para>Displays the <link linkend="routing">routing information</link> and navigation controls.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Satellites</guilabel></term>
+<listitem>
+  <para>Displays the Earth artificial satellites and their orbits.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
 <term><guilabel>Scale Bar</guilabel></term>
 <listitem>
 <para>This is a float item that provides a map scale.</para>
@@ -1129,9 +1220,23 @@ the system's graphics drivers. </para>
 </varlistentry>
 
 <varlistentry>
+<term><guilabel>Speedometer</guilabel></term>
+<listitem>
+  <para>Displays the current cruising speed. Needs some <ulink url="http://en.wikipedia.org/wiki/Global_Positioning_System">GPS</ulink> data.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
 <term><guilabel>Stars</guilabel></term>
 <listitem>
 <para>A plugin that shows the Starry Sky.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Sun</guilabel></term>
+<listitem>
+  <para>A plugin that shows the Sun.</para>
 </listitem>
 </varlistentry>
 
