@@ -1208,7 +1208,7 @@ the system's graphics drivers. </para>
 <varlistentry>
 <term><guilabel>Satellites</guilabel></term>
 <listitem>
-  <para>Displays the Earth artificial satellites and their orbits.</para>
+  <para>Displays the Earth and other planets natural and artificial satellites and their orbits.</para>
 </listitem>
 </varlistentry>
 
