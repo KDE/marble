@@ -23,7 +23,7 @@
 				 <firstname>Dennis</firstname>
 				 <surname>Nienhüser</surname>
 				 <affiliation>
-					 <address><email>earthwings@gentoo.org</email></address>
+					 <address>&Dennis.Nienhueser.mail;</address>
 				 </affiliation>				 
 			 </author>
 
@@ -39,13 +39,13 @@
 		 <copyright>
 			 <year>2010</year>
                          <year>2012</year>
-			 <holder>Dennis Nienhüser</holder>
+			 <holder>&Dennis.Nienhueser;</holder>
 		 </copyright>
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2012-11-10</date>
-		 <releaseinfo>1.4</releaseinfo>
+		 <date>2013-06-23</date>
+		 <releaseinfo>1.6</releaseinfo>
 
 		 <abstract>
 			<para>&marble; is a geographical atlas and a virtual globe 
@@ -108,7 +108,7 @@
 		 <para>
 			On the right you can see a topographical map of our beautiful home planet. To allow for 
             better orientation the map offers a scale bar in the lower left corner as well as a windrose on the top right. 
-            To navigate and to control the view you can use the tools on the <guilabel>Navigation</guilabel> tab at the left: Press the arrow buttons to rotate the globe. The <guilabel>Up</guilabel> and <guilabel>Down</guilabel> arrow buttons will tilt the earth axis back and forth. The <guilabel>Left</guilabel> and <guilabel>Right</guilabel> arrow buttons will make the earth spin around its physical axis.
+            To navigate and to control the view you can use the tools on the <guilabel>Navigation</guilabel> info box at the right: Press the arrow buttons to rotate the globe. The <guilabel>Up</guilabel> and <guilabel>Down</guilabel> arrow buttons will tilt the earth axis back and forth. The <guilabel>Left</guilabel> and <guilabel>Right</guilabel> arrow buttons will make the earth spin around its physical axis.
 		 </para>
          <para>
             You can accomplish the same behavior by pressing the &LMB; somewhere on the globe and by moving the mouse while keeping the &LMB; pressed. Using this drag and drop style navigation will allow you to adjust the viewing angle much easier and more precisely. The cursor keys on your keyboard offer another alternative way to quickly change directions.
@@ -156,7 +156,7 @@
              </listitem>
              <listitem>
                 <para>
-                    <guilabel>Satellite View</guilabel>: Earth as seen from Space. The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA’s Earth Observatory
+		  <guilabel>Satellite View</guilabel>: Earth as seen from Space. The map is based on NASA's beautiful <ulink url="http://earthobservatory.nasa.gov/Features/BlueMarble/">Blue &marble; Next Generation</ulink> pictures. Credits: NASA’s Earth Observatory
                 </para>
              </listitem>
              <listitem>
@@ -250,9 +250,7 @@
         </itemizedlist>
          <para>
             Once you have found your search on the map you can click on its label or its symbol using the
-            &LMB;. A popup menu will appear which allows you to retrieve more information
-            about the placemark.
-            After clicking the name of the location on the popup menu a data sheet dialog will appear, like this:
+            &LMB;. After clicking the name of the location on the map a data sheet will appear, like this:
          </para>
          <screenshot>
              <screeninfo>&marble; Data Sheet</screeninfo>
@@ -263,14 +261,19 @@
          </screenshot>
          <para>
             On the first tab of the dialog some very basic data is provided, like the name, coordinates and flag of the country the place belongs to. In addition, population numbers for cities get shown, as well as the elevation for mountains. 
-            If your computer is connected to the Internet and if you're online, &marble; will try to connect to the popular Internet encyclopedia <quote>Wikipedia</quote>. If a matching Wikipedia article is available &marble; will display it on the second tab of the dialog.
+            If your computer is connected to the Internet and if you're online, &marble; will try to connect to the popular Internet encyclopedia <quote>Wikipedia</quote>. If a matching Wikipedia article is available &marble; will display it on the data sheet.
          </para>
+	 <note>
+	   <para>
+	     The additional data sources can be enabled using <menuchoice><guimenu>View</guimenu><guisubmenu>Online services</guisubmenu></menuchoice> submenu. For example, you should mark <guimenuitem>Wikipedia</guimenuitem> menu item to see Wikipedia articles.
+	   </para>
+	 </note>
      </chapter>
 
      <chapter id="routing">
          <title>Find your way with &marble;</title>
          <para>
-             Besides searching for places, &marble; can display possible routes between two or more of them. Do you want to plan a bicycle tour in the nearby wood? Need driving instructions to get to an address in a foreign city? Click on the <guilabel>Routing</guilabel> tab on the bottom of &marble;'s toolbox to start planning your trip.
+             Besides searching for places, &marble; can display possible routes between two or more of them. Do you want to plan a bicycle tour in the nearby wood? Need driving instructions to get to an address in a foreign city? Click on the <guilabel>Routing</guilabel> tab on the top of &marble;'s toolbox to start planning your trip.
          </para>
          <sect1 id="routing-route-new">
          <title>Creating a new Route</title>
@@ -285,7 +288,7 @@
              </mediaobject>
          </screenshot>
          <para>
-             Matching placemarks line up in the list below the input fields. They're also shown in the map. The first result is automatically selected as the route start. In the map, this position is indicated using the same <guilabel>A</guilabel> icon as the button next to the route start input field. If the first result is not your desired route start, click on any other result to make that the new start position. You can either click on it in the result list or on its icon in the map to achieve that. The currently chosen route start is always indicated using the <guilabel>A</guilabel> icon.
+             Matching placemarks line up in the list below the input fields. They are also shown in the map. The first result is automatically selected as the route start. In the map, this position is indicated using the same <guilabel>A</guilabel> icon as the button next to the route start input field. If the first result is not your desired route start, click on any other result to make that the new start position. You can either click on it in the result list or on its icon in the map to achieve that. The currently chosen route start is always indicated using the <guilabel>A</guilabel> icon.
          </para>
          <para>
              With the route start at hand, let's move on to enter the destination of our trip. The procedure is the same: Enter the destination address in the input field next to the <guilabel>B</guilabel> button, press &Enter; and select the desired item among the result list.
@@ -399,7 +402,7 @@
          <sect1 id="routing-route-export">
          <title>Loading, Saving and Exporting Routes</title>
          <para>
-           You can save routes in <acronym>kml</acronym> (Keyhole Markup Language) format and load them again at a later point - on the same computer or a different device running Marble, or share them with your friends or other applications which are able to read kml files (like Google Earth). To save a route to a .kml file, click on the <guilabel>Save</guilabel> icon on the bottom of the routing tab. The upcoming save dialog allows you to choose a file name to save the route to. Similarly loading a route is initiated with the <guilabel>Open</guilabel> icon on the bottom of the routing tab. Select the .kml route file to open in the upcoming open dialog and Marble loads the route from it.
+           You can save routes in <acronym>kml</acronym> (Keyhole Markup Language) format and load them again at a later point - on the same computer or a different device running &marble;, or share them with your friends or other applications which are able to read kml files (like Google Earth). To save a route to a .kml file, click on the <guilabel>Save</guilabel> icon on the bottom of the routing tab. The upcoming save dialog allows you to choose a file name to save the route to. Similarly loading a route is initiated with the <guilabel>Open</guilabel> icon on the bottom of the routing tab. Select the .kml route file to open in the upcoming open dialog and &marble; loads the route from it.
          </para>
          <para>
              Routes planned in &marble; can be used in other applications or navigation devices which support <acronym>gpx</acronym> (GPS eXchange Format) or equivalent formats. If your navigation device does not support <acronym>gpx</acronym> directly, you can use a conversion utility like gpsbabel to convert a <acronym>gpx</acronym> file exported by &marble; to a suitable format. The export of a route in &marble; is initiated from the routing context menu in the map. Click with the &RMB; on any point of the route in the map. In the context menu that appears, choose <guilabel>Export route...</guilabel>:
@@ -475,7 +478,7 @@
              </mediaobject>
          </screenshot>
          <para>
-           The tile level corresponding to the current zoom level is shown in the status bar on the bottom. Please note that you may have to configure Marble to show that information: Click with the &RMB; on the status bar and select <guilabel>Show Tile Zoom Level</guilabel>.
+           The tile level corresponding to the current zoom level is shown in the status bar on the bottom. Please note that you may have to configure &marble; to show that information: Click with the &RMB; on the status bar and select <guilabel>Show Tile Zoom Level</guilabel>.
          </para>
          <para>
            Select <guilabel>OK</guilabel> to trigger the map region download. The progress bar of &marble; will show the download progress (if activated).
@@ -495,7 +498,7 @@
 			 <title>Menus and shortcut keys</title>
 
 			 <sect2>
-				 <title>The <guimenu>File</guimenu> Menu</title>
+				 <title>The File Menu</title>
 
 				 <variablelist>
                      <varlistentry>
@@ -508,6 +511,22 @@
                          </menuchoice></term>
                          <listitem><para><action>Opens</action> a map file.</para></listitem>
                      </varlistentry>
+		     <varlistentry>
+                         <term><menuchoice>
+                                 <shortcut>
+                                     <keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo>
+                                 </shortcut>
+                                 <guimenu>File</guimenu>
+                                 <guimenuitem>Open...</guimenuitem>
+                         </menuchoice></term>
+                         <listitem>
+			   <para>
+			     This is a shortcut to open recently opened maps. Clicking on this item opens
+			     a list to the side of the menu with several of the most
+			     recently opened files. Clicking on a specific file will open it in &marble; - if the file still resides at the same location.
+			   </para>
+			 </listitem>
+                     </varlistentry>
                      <varlistentry>
                          <term><menuchoice>
                                  <shortcut>
@@ -517,6 +536,13 @@
                                  <guimenuitem>Download Maps...</guimenuitem>
                          </menuchoice></term>
                          <listitem><para><action>Displays</action> the <guilabel>Get Hot New Stuff!</guilabel> dialog to download additional maps for &marble;, among others maps for Mars and Venus.</para></listitem>
+                     </varlistentry>
+		     <varlistentry>
+                         <term><menuchoice>
+                                 <guimenu>File</guimenu>
+                                 <guimenuitem>Create a New Map...</guimenuitem>
+                         </menuchoice></term>
+                         <listitem><para><action>Displays</action> the <guilabel>&marble; Map Theme Creation Wizard</guilabel> dialog to create a new map using Web Map Service data, your own image file or Open Street Map indexed tiles.</para></listitem>
                      </varlistentry>
                      <varlistentry>
                          <term><menuchoice>
@@ -574,7 +600,7 @@
 			 </sect2>
 
              <sect2>
-                 <title>The <guimenu>Edit</guimenu> Menu</title>
+                 <title>The Edit Menu</title>
 
                  <variablelist>
                      <varlistentry>
@@ -594,12 +620,22 @@
                          </menuchoice></term>
                          <listitem><para><action>Copies</action> the current coordinates to the global clipboard.</para></listitem>
                      </varlistentry>
+		     <varlistentry>
+                         <term><menuchoice>
+			         <shortcut>
+                                     <keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
+                                 </shortcut>
+                                 <guimenu>Edit</guimenu>
+                                 <guimenuitem>Edit Map</guimenuitem>
+                         </menuchoice></term>
+			 <listitem><para><action>Allows</action> you to open the current map in the external map editor. The current version supports <application>Potlatch</application> (in a web browser), <application>Merkaartor</application> and <application>JOSM</application> map editors.</para></listitem>
+                     </varlistentry>
                  </variablelist>
 
              </sect2>
 
 <sect2>
-<title>The <guimenu>View</guimenu> Menu</title>
+<title>The View Menu</title>
 
 <variablelist>
 <varlistentry>
@@ -660,7 +696,15 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 <guimenu>View</guimenu>
 <guimenuitem>Atmosphere</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Show</action> the diffuse reflection of the atmosphere around the earth.</para></listitem>
+<listitem><para><action>Show</action> the diffuse reflection of the atmosphere around the Earth.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Stars</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Show</action> the star map as seen from the Solar System.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -668,7 +712,15 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 <guimenu>View</guimenu>
 <guimenuitem>Sun Control...</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Displays</action> the <guilabel>Sun Control</guilabel> where you can set date and time, the simulation time speed, the <guilabel>Sun Shading</guilabel> and center the map on sun position.</para></listitem>
+<listitem><para><action>Displays</action> the <guilabel>Sun Control</guilabel> where you can set the <guilabel>Sun Shading</guilabel> and center the map on subsolar point position.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Time Control...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Displays</action> the <guilabel>Time Control</guilabel> dialog where you can set date and time and the simulation time speed.</para></listitem>
 </varlistentry>
 
 </variablelist>
@@ -676,7 +728,7 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 </sect2>
 
 			 <sect2>
-				 <title>The <guimenu>Settings</guimenu> Menu</title>
+				 <title>The Settings Menu</title>
 
 				 <variablelist>
 					 <varlistentry>
@@ -700,9 +752,9 @@ If a GPS device is connected with your computer, &marble; displays longitude and
                                      <keycap>F9</keycap>
                                  </shortcut>
 								 <guimenu>Settings</guimenu>
-								 <guimenuitem>Show Navigation Panel</guimenuitem>
+								 <guisubmenu>Panels</guisubmenu>
 						 </menuchoice></term>
-						 <listitem><para><action>Toggle</action> the display of the navigation panel on the left side of the main window.</para></listitem>
+						 <listitem><para><action>Toggle</action> the display of the &marble; panels.</para></listitem>
 					 </varlistentry>
 					 <varlistentry>
 						 <term><menuchoice>
@@ -727,7 +779,7 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 			 </sect2>
 
 			 <sect2>
-				 <title>The <guimenu>Help</guimenu> Menu</title>
+				 <title>The Help Menu</title>
 				 &help.menu.documentation;
 			 </sect2>
 		 </sect1>
@@ -773,18 +825,18 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 </varlistentry>
 
 <varlistentry>
+<term><guilabel>During animations</guilabel></term>
+<listitem>
+<para>Specifies the map quality that gets displayed during map animations (&eg; while dragging the globe). Especially on slow machines it is advisable to set this option to <guilabel>Low Quality</guilabel> as this will give better speed.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
 <term><guilabel>Graphics system</guilabel></term>
 <listitem>
 <para>Specifies the graphics system - <guilabel>Native X11</guilabel> or <guilabel>Raster (Software rendering)</guilabel> - 
 that &Qt; uses to draw the map. Changing this setting might be a good idea if there are performance issues with 
 the system's graphics drivers. </para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><guilabel>During animations</guilabel></term>
-<listitem>
-<para>Specifies the map quality that gets displayed during map animations (&eg; while dragging the globe). Especially on slow machines it is advisable to set this option to <guilabel>Low Quality</guilabel> as this will give better speed.</para>
 </listitem>
 </varlistentry>
 
@@ -823,21 +875,35 @@ the system's graphics drivers. </para>
 <varlistentry>
 <term><guilabel>Drag location</guilabel></term>
 <listitem>
-<para>While dragging the mouse there are two standard behaviors when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default Marble makes sure that north is always up which results in a dragging behavior where the location below the mouse pointer slightly "detaches" from the cursor.</para>
+<para>While dragging the mouse there are two standard behaviors when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default &marble; makes sure that north is always up which results in a dragging behavior where the location below the mouse pointer slightly "detaches" from the cursor.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>On Startup</guilabel></term>
+<term><guilabel>Inertial Globe Rotation</guilabel></term>
 <listitem>
-<para>By default Marble will display the home location immediately after the application has started. As an alternative it can also show the last position that was active when the user left the application.</para>
+<para>By default &marble; will use kinetic spinning while dragging the map. You can turn this behavior off using this check box.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Animate voyage to the target</guilabel></term>
 <listitem>
-<para>When searching for a location Marble can either move instantly to the new location or it can show a travel animation from the previous place to the new place.</para>
+<para>When searching for a location &marble; can either move instantly to the new location or it can show a travel animation from the previous place to the new place.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>On Startup</guilabel></term>
+<listitem>
+<para>By default &marble; will display the home location immediately after the application has started. As an alternative it can also show the last position that was active when the user left the application.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>External Editor</guilabel></term>
+<listitem>
+  <para>Here, you can define the default editor for the maps or choose <guilabel>Always ask</guilabel> if &marble; should ask you to choose before starting the external editor.</para>
 </listitem>
 </varlistentry>
 
@@ -870,6 +936,38 @@ the system's graphics drivers. </para>
 <term><guilabel>Proxy</guilabel></term>
 <listitem>
 <para>Proxy settings for your local intranet. Please leave empty if there is no proxy.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configdatetime">
+<title>Date &amp; Time Configuration</title>
+<screenshot>
+<screeninfo>The Date &amp; Time configuration dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-dateandtime.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The Date &amp; Time configuration dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Time Zone</guilabel></term>
+<listitem>
+  <para>Here, you can choose a time zone for &marble;: <ulink url="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</ulink>, system time zone or choose custom time zone. The chosen option changes the map view only if the map can show the light conditions on the surface.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>When &marble; starts</guilabel></term>
+<listitem>
+<para>Here, you can choose the date and time which will be used on &marble; start: system time or the last session time.</para>
 </listitem>
 </varlistentry>
 
@@ -948,7 +1046,7 @@ the system's graphics drivers. </para>
 </mediaobject>
 </screenshot>
 <para>
-  Each plugin can be activated and deactivated using the checkbox on the left. Some plugins provide further configuration options which are accessible by clicking on the tool icon on the right.
+  Each plugin can be activated and deactivated using the check box on the left. Some plugins provide further configuration options which are accessible by clicking on the tool icon on the right.
 </para>
 
 <variablelist>
@@ -957,6 +1055,27 @@ the system's graphics drivers. </para>
 <term><guilabel>Amateur Radio Aprs Plugin</guilabel></term>
 <listitem>
 <para>Retrieves data from the Automatic Packet Reporting System via the Internet, a file or a serial device. The position and status of data senders is displayed in the map and updated in real-time.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Annotation</guilabel></term>
+<listitem>
+<para>Allows you to add annotations on the maps.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Atmosphere</guilabel></term>
+<listitem>
+<para>Displays atmosphere effects.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Coordinate Grid</guilabel></term>
+<listitem>
+<para>Displays a coordinate grid (you can choose the colors of the grid lines).</para>
 </listitem>
 </varlistentry>
 
@@ -974,32 +1093,10 @@ the system's graphics drivers. </para>
 </listitem>
 </varlistentry>
 
-<!-- Not enabled in released version
 <varlistentry>
-<term><guilabel>File view</guilabel></term>
+<term><guilabel>Download Progress Indicator</guilabel></term>
 <listitem>
-<para>Displays a list of currently opened files.</para>
-</listitem>
-</varlistentry>-->
-
-<varlistentry>
-<term><guilabel>GeoRenderer Plugin</guilabel></term>
-<listitem>
-<para>This plugin draws the map content (e.g. provided via a KML file).</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><guilabel>Coordinate Grid</guilabel></term>
-<listitem>
-<para>A plugin that shows a coordinate grid.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><guilabel>Scale Bar</guilabel></term>
-<listitem>
-<para>This is a float item that provides a map scale.</para>
+<para>A pie chart on top of the map that shows the progress of ongoing downloads.</para>
 </listitem>
 </varlistentry>
 
@@ -1025,14 +1122,14 @@ the system's graphics drivers. </para>
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Download Progress Indicator</guilabel></term>
+<term><guilabel>Scale Bar</guilabel></term>
 <listitem>
-<para>A pie chart on top of the map that shows the progress of ongoing downloads.</para>
+<para>This is a float item that provides a map scale.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Stars Plugin</guilabel></term>
+<term><guilabel>Stars</guilabel></term>
 <listitem>
 <para>A plugin that shows the Starry Sky.</para>
 </listitem>
