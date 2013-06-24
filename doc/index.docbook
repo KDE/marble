@@ -748,9 +748,6 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 					 </varlistentry>
 					 <varlistentry>
 						 <term><menuchoice>
-                                 <shortcut>
-                                     <keycap>F9</keycap>
-                                 </shortcut>
 								 <guimenu>Settings</guimenu>
 								 <guisubmenu>Panels</guisubmenu>
 						 </menuchoice></term>
@@ -1117,7 +1114,7 @@ the system's graphics drivers. </para>
 <varlistentry>
 <term><guilabel>Elevation Profile Marker</guilabel></term>
 <listitem>
-  <para>Displays the routing markers on the elevation profile overlay.</para>
+  <para>Marks the current elevation of the elevation profile on the map.</para>
 </listitem>
 </varlistentry>
 
