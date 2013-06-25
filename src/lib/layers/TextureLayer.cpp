@@ -47,7 +47,7 @@ public:
              const PluginManager *pluginManager,
              TextureLayer *parent );
 
-    void mapChanged();
+    void requestDelayedRepaint();
     void updateTextureLayers();
     void updateTile( const TileId &tileId, const QImage &tileImage );
 
@@ -90,7 +90,7 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
 {
 }
 
-void TextureLayer::Private::mapChanged()
+void TextureLayer::Private::requestDelayedRepaint()
 {
     if ( m_texmapper ) {
         m_texmapper->setRepaintNeeded();
@@ -132,7 +132,7 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
 
     m_tileLoader.updateTile( tileId, tileImage );
 
-    mapChanged();
+    requestDelayedRepaint();
 }
 
 
@@ -154,7 +154,7 @@ TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
              this, SIGNAL(repaintNeeded()) );
 
     connect( d->m_veccomposer, SIGNAL(datasetLoaded()),
-             this, SLOT(mapChanged()) );
+             this, SLOT(requestDelayedRepaint()) );
 }
 
 TextureLayer::~TextureLayer()

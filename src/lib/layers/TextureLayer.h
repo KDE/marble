@@ -111,7 +111,7 @@ public Q_SLOTS:
     void repaintNeeded();
 
  private:
-    Q_PRIVATE_SLOT( d, void mapChanged() )
+    Q_PRIVATE_SLOT( d, void requestDelayedRepaint() )
     Q_PRIVATE_SLOT( d, void updateTextureLayers() )
     Q_PRIVATE_SLOT( d, void updateTile( const TileId &tileId, const QImage &tileImage ) )
 
