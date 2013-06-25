@@ -58,7 +58,7 @@ public:
     TileLoader m_loader;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
-    GeoDataLatLonBox m_latLonBox;
+    GeoDataCoordinates m_centerCoordinates;
     int m_tileZoomLevel;
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
@@ -81,7 +81,7 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
     , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
-    , m_latLonBox()
+    , m_centerCoordinates()
     , m_tileZoomLevel( -1 )
     , m_texmapper( 0 )
     , m_texcolorizer( 0 )
@@ -219,8 +219,10 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     if ( !d->m_texmapper )
         return false;
 
-    if ( d->m_latLonBox != viewport->viewLatLonAltBox() ) {
-        d->m_latLonBox = viewport->viewLatLonAltBox();
+    if ( d->m_centerCoordinates.longitude() != viewport->centerLongitude() ||
+         d->m_centerCoordinates.latitude() != viewport->centerLatitude() ) {
+        d->m_centerCoordinates.setLongitude( viewport->centerLongitude() );
+        d->m_centerCoordinates.setLatitude( viewport->centerLatitude() );
         d->m_texmapper->setRepaintNeeded();
     }
 
