@@ -1229,8 +1229,6 @@ AngleUnit MarbleMap::defaultAngleUnit() const
         return DecimalDegree;
     } else if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::UTM ) {
     	return UTM;
-    } else if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::MGRS ) {
-    	return MGRS;
     }
 
     return DMSDegree;

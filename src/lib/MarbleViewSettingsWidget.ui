@@ -110,11 +110,6 @@ p, li { white-space: pre-wrap; }
           <string>Universal Transverse Mercator (UTM)</string>
          </property>
         </item>
-        <item>
-         <property name="text">
-          <string>Military Grid Reference System (MGRS)</string>
-         </property>
-        </item>
        </widget>
       </item>
      </layout>

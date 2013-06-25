@@ -81,7 +81,6 @@ class GEODATA_EXPORT GeoDataCoordinates
         DMS,     ///< "Sexagesimal DMS" notation (base-60)
         DM,      ///< "Sexagesimal DM" notation (base-60)
         UTM,
-        MGRS,
         Astro    /// < "RA and DEC" notation (used for astronomical sky coordinates)
     };
 
