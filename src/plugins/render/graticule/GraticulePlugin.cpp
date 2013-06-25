@@ -500,15 +500,9 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 
     while ( itStep < northLineLat ) {
         // Create a matching label
-        QString label;
-        
-        if ( notation == GeoDataCoordinates::UTM ) {
-            int bandLetterIndex = static_cast<int>( itStep / 8.0 ) + 10;
-            label = QString( "CDEFGHJKLMNPQRSTUVWX???" ).at( bandLetterIndex );
-        } else {
-            label = GeoDataCoordinates::latToString( itStep, notation,
+        QString label = GeoDataCoordinates::latToString( itStep, notation,
                                  GeoDataCoordinates::Degree, -1, 'g' );
-        }
+
         // No additional labels for the equator
         if ( labelPositionFlags.testFlag( LineCenter ) && itStep == 0.0 ) {
             label.clear();
@@ -594,10 +588,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         while ( itStep < eastLineLon ) {
             // Create a matching label
             QString label;
-            if ( notation == GeoDataCoordinates::UTM ) {
-                int zoneNumber = static_cast<int>( itStep / 6.0 ) + 30;
-                label = QString::number( zoneNumber );
-            } else if ( marbleModel()->planet()->id() == "sky" ) {
+            if ( marbleModel()->planet()->id() == "sky" ) {
                 label = GeoDataCoordinates::lonToString( itStep,
                                   GeoDataCoordinates::Astro, GeoDataCoordinates::Degree,
                                   -1, 'g' );
@@ -635,10 +626,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // Create a matching label
             QString label;
-            if ( notation == GeoDataCoordinates::UTM ) {
-                int zoneNumber = static_cast<int>( itStep / 6.0 ) + 30;
-                label = QString::number( zoneNumber );
-            } else if ( marbleModel()->planet()->id() == "sky" ) {
+            if ( marbleModel()->planet()->id() == "sky" ) {
                 label = GeoDataCoordinates::lonToString( itStep,
                                   GeoDataCoordinates::Astro, GeoDataCoordinates::Degree,
                                   -1, 'g' );
@@ -673,10 +661,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // Create a matching label
             QString label;
-            if ( notation == GeoDataCoordinates::UTM ) {
-                int zoneNumber = static_cast<int>( itStep / 6.0 ) + 30;
-                label = QString::number( zoneNumber );
-            } else if ( marbleModel()->planet()->id() == "sky" ) {
+            if ( marbleModel()->planet()->id() == "sky" ) {
                 label = GeoDataCoordinates::lonToString( itStep,
                                   GeoDataCoordinates::Astro, GeoDataCoordinates::Degree,
                                   -1, 'g' );

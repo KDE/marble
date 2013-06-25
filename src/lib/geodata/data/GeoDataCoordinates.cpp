@@ -931,6 +931,11 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
                                                     int precision,
                                                     char format )
 {
+    if ( notation == UTM ) {
+        int zoneNumber = static_cast<int>( lon / 6.0 ) + 30;
+        return QString::number( zoneNumber );
+    }
+
     QString weString = ( lon < 0 ) ? tr("W") : tr("E");
 
     QString lonString;
@@ -1073,6 +1078,11 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
                                                     int precision,
                                                     char format )
 {
+    if ( notation == UTM ) {
+        int bandLetterIndex = static_cast<int>( lat / 8.0 ) + 10;
+        return QString( "CDEFGHJKLMNPQRSTUVWX???" ).at( bandLetterIndex );
+    }
+
     QString pmString;
     QString nsString;
 
