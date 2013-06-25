@@ -99,8 +99,6 @@ void TextureLayer::Private::mapChanged()
     if ( !m_repaintTimer.isActive() ) {
         m_repaintTimer.start();
     }
-
-    emit m_parent->repaintNeeded();
 }
 
 void TextureLayer::Private::updateTextureLayers()
@@ -124,7 +122,7 @@ void TextureLayer::Private::updateTextureLayers()
     m_layerDecorator.setTextureLayers( result );
     m_tileLoader.clear();
 
-    mapChanged();
+    m_parent->setNeedsUpdate();
 }
 
 void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tileImage )
@@ -324,6 +322,8 @@ void TextureLayer::setNeedsUpdate()
     if ( d->m_texmapper ) {
         d->m_texmapper->setRepaintNeeded();
     }
+
+    emit repaintNeeded();
 }
 
 void TextureLayer::setVolatileCacheLimit( quint64 kilobytes )
@@ -336,7 +336,7 @@ void TextureLayer::reset()
     mDebug() << Q_FUNC_INFO;
 
     d->m_tileLoader.clear();
-    d->mapChanged();
+    setNeedsUpdate();
 }
 
 void TextureLayer::reload()
