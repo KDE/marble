@@ -509,12 +509,10 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
         }
 
         // Paint all latitude coordinate lines except for the equator
-        if ( itStep == 0.0 && m_currentNotation == GeoDataCoordinates::DMS ) {
-            itStep += step;
-            continue;
+        if ( itStep != 0.0 ) {
+            renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionFlags );
         }
-        
-        renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionFlags );
+
         itStep += step;
     }
 }
