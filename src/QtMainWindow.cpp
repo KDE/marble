@@ -157,7 +157,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
 
     setUpdatesEnabled( true );
 
-    m_position = NOT_AVAILABLE;
+    m_position = tr( NOT_AVAILABLE );
     m_distance = marbleWidget()->distanceString();
     m_zoom = QString::number( marbleWidget()->tileZoomLevel() );
 
