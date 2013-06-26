@@ -391,7 +391,7 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
     MarblePlacemarkModel *model = widget->searchResultModel();
 
     if ( model->rowCount() ) {
-        QString const results = tr( "%n placemarks found", "", model->rowCount() );
+        QString const results = tr( "placemarks found: %1" ).arg( model->rowCount() );
         d->m_ui.resultLabel->setText( results );
         d->m_ui.resultLabel->setVisible( true );
         // Make sure we have a selection
@@ -601,7 +601,7 @@ void RoutingWidget::updateAlternativeRoutes()
     d->m_progressTimer.stop();
     d->m_ui.searchButton->setIcon( QIcon() );
 
-    QString const results = tr( "%n routes found", "", d->m_ui.routeComboBox->count() );
+    QString const results = tr( "routes found: %1" ).arg( d->m_ui.routeComboBox->count() );
     d->m_ui.resultLabel->setText( results );
     d->m_ui.resultLabel->setVisible( true );
     d->m_saveRouteButton->setEnabled( d->m_routingManager->routingModel()->rowCount() > 0 );
