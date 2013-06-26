@@ -570,7 +570,8 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         return;
     }
 
-    GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
+    GeoDataCoordinates::Notation notation = marbleModel()->planet()->id() == "sky" ? GeoDataCoordinates::Astro :
+                                                                                     GeoDataCoordinates::defaultNotation();
 
     // Longitude
     qreal westLon = viewLatLonAltBox.west( GeoDataCoordinates::Degree );
@@ -585,16 +586,9 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
         while ( itStep < eastLineLon ) {
             // Create a matching label
-            QString label;
-            if ( marbleModel()->planet()->id() == "sky" ) {
-                label = GeoDataCoordinates::lonToString( itStep,
-                                  GeoDataCoordinates::Astro, GeoDataCoordinates::Degree,
-                                  -1, 'g' );
-            } else {
-                label = GeoDataCoordinates::lonToString( itStep,
+            QString label = GeoDataCoordinates::lonToString( itStep,
                                   notation, GeoDataCoordinates::Degree,
                                   -1, 'g' );
-            }
 
             // No additional labels for the prime meridian and the antimeridian
 
@@ -623,16 +617,9 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         while ( itStep < 180.0 ) {
 
             // Create a matching label
-            QString label;
-            if ( marbleModel()->planet()->id() == "sky" ) {
-                label = GeoDataCoordinates::lonToString( itStep,
-                                  GeoDataCoordinates::Astro, GeoDataCoordinates::Degree,
-                                  -1, 'g' );
-            } else {
-                label = GeoDataCoordinates::lonToString( itStep,
+            QString label = GeoDataCoordinates::lonToString( itStep,
                                   notation, GeoDataCoordinates::Degree,
                                   -1, 'g' );
-            }
 
             // No additional labels for the prime meridian and the antimeridian
 
@@ -658,16 +645,9 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         while ( itStep < westLineLon ) {
 
             // Create a matching label
-            QString label;
-            if ( marbleModel()->planet()->id() == "sky" ) {
-                label = GeoDataCoordinates::lonToString( itStep,
-                                  GeoDataCoordinates::Astro, GeoDataCoordinates::Degree,
-                                  -1, 'g' );
-            } else {
-                label = GeoDataCoordinates::lonToString( itStep,
+            QString label = GeoDataCoordinates::lonToString( itStep,
                                   notation, GeoDataCoordinates::Degree,
                                   -1, 'g' );
-            }
 
             // No additional labels for the prime meridian and the antimeridian
             if ( labelPositionFlags.testFlag( LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
