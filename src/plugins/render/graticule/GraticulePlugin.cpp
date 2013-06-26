@@ -604,7 +604,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             }
 
             // Paint all longitude coordinate lines except for the meridians
-            if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
+            if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
                 // handle exceptions for UTM grid
                 if (notation == GeoDataCoordinates::UTM ) {
                     renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
@@ -642,7 +642,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             }
 
             // Paint all longitude coordinate lines except for the meridians
-            if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
+            if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
                 if (notation == GeoDataCoordinates::UTM ) {
                     renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
                     southPolarGap, label, labelPositionFlags );
@@ -676,7 +676,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             }
 
             // Paint all longitude coordinate lines except for the meridians
-            if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
+            if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
                 if (notation == GeoDataCoordinates::UTM ) {
                     renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
                     southPolarGap, label, labelPositionFlags );
