@@ -31,8 +31,6 @@ class MarbleClock;
  */
 class SatellitesTLEItem : public TrackerPluginItem
 {
-    Q_OBJECT
-
 public:
     SatellitesTLEItem( const QString &name,
                        elsetrec satrec,

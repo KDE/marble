@@ -32,8 +32,6 @@ class GeoDataPlacemark;
  */
 class SatellitesMSCItem : public TrackerPluginItem
 {
-    Q_OBJECT
-
 public:
     SatellitesMSCItem( const QString &name,
                        const QString &category,

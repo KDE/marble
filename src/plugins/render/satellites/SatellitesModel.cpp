@@ -89,8 +89,8 @@ void SatellitesModel::updateVisibility()
 {
     beginUpdateItems();
 
-    foreach( QObject *obj, items() ) {
-        SatellitesMSCItem *oItem = qobject_cast<SatellitesMSCItem*>(obj);
+    foreach( TrackerPluginItem *obj, items() ) {
+        SatellitesMSCItem *oItem = dynamic_cast<SatellitesMSCItem*>(obj);
         if( oItem != NULL ) {
             bool enabled = ( ( oItem->relatedBody().toLower() == m_lcPlanet ) &&
                              ( m_enabledIds.contains( oItem->id() ) ) );
@@ -101,7 +101,7 @@ void SatellitesModel::updateVisibility()
             }
         }
 
-        SatellitesTLEItem *eItem = qobject_cast<SatellitesTLEItem*>(obj);
+        SatellitesTLEItem *eItem = dynamic_cast<SatellitesTLEItem*>(obj);
         if( eItem != NULL ) {
             // TLE satellites are always earth satellites
             bool enabled = ( m_lcPlanet == "earth" );

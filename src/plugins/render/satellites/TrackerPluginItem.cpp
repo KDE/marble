@@ -63,6 +63,3 @@ void TrackerPluginItem::setVisible( bool visible )
 }
 
 } // namespace Marble
-
-#include "TrackerPluginItem.moc"
-

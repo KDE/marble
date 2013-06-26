@@ -69,7 +69,7 @@ void SatellitesTLEItem::setDescription()
 {
     QFile templateFile(":/marble/satellites/satellite.html");
     if (!templateFile.open(QIODevice::ReadOnly)) {
-        placemark()->setDescription(tr("No info available."));
+        placemark()->setDescription(QObject::tr("No info available."));
         return;
     }
     QString html = templateFile.readAll();
@@ -227,6 +227,3 @@ double SatellitesTLEItem::square( double x )
 }
 
 } // namespace Marble
-
-#include "SatellitesTLEItem.moc"
-

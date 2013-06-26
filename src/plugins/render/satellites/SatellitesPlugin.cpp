@@ -331,9 +331,9 @@ void SatellitesPlugin::updateDataSourceConfig( const QString &source )
 {
     mDebug() << "Updating orbiter configuration";
 
-    foreach( QObject *obj, m_satModel->items() ) {
+    foreach( TrackerPluginItem *obj, m_satModel->items() ) {
         // catalog items
-        SatellitesMSCItem *item = qobject_cast<SatellitesMSCItem*>( obj );
+        SatellitesMSCItem *item = dynamic_cast<SatellitesMSCItem*>( obj );
         if( ( item != NULL ) && ( item->catalog() == source ) ) {
             m_configDialog->addSatelliteItem(
                 item->relatedBody(),

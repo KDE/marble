@@ -11,8 +11,6 @@
 #ifndef MARBLE_TRACKERPLUGINITEM_H
 #define MARBLE_TRACKERPLUGINITEM_H
 
-#include <QObject>
-
 class QString;
 
 namespace Marble {
@@ -26,10 +24,8 @@ class ViewportParams;
 /**
  * Subclass this to represent items in your TrackerPluginModel.
  */
-class TrackerPluginItem : public QObject
+class TrackerPluginItem
 {
-    Q_OBJECT
-
 public:
     /**
      * Constructs an item and set the wrapped placemark name to @p name

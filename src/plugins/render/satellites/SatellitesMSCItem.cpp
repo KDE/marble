@@ -134,7 +134,7 @@ void SatellitesMSCItem::setDescription()
 
     QFile templateFile(":/marble/satellites/satellite.html");
     if (!templateFile.open(QIODevice::ReadOnly)) {
-        placemark()->setDescription(tr("No info available."));
+        placemark()->setDescription(QObject::tr("No info available."));
         return;
     }
     QString html = templateFile.readAll();
@@ -212,6 +212,3 @@ void SatellitesMSCItem::addTrackPointAt( const QDateTime &dateTime )
 }
 
 } // namespace Marble
-
-#include "SatellitesMSCItem.moc"
-
