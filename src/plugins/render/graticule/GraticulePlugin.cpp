@@ -118,8 +118,6 @@ void GraticulePlugin::initialize ()
     
     initLineMaps( GeoDataCoordinates::defaultNotation() );                
 
-    readSettings();
-
     m_isInitialized = true;
 }
 
