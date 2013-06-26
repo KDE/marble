@@ -35,23 +35,23 @@ SatellitesConfigDialog::SatellitesConfigDialog( QWidget *parent )
     // allow translation for catalog items
     // + categories
     const char *descCat = "An object category";
-    m_translations["Comets"]        = tr( "Comets", descCat );
-    m_translations["Moons"]         = tr( "Moons", descCat );
-    m_translations["Other"]         = tr( "Other", descCat );
-    m_translations["Spacecrafts"]   = tr( "Spacecrafts", descCat );
-    m_translations["Spaceprobes"]  = tr( "Spaceprobes", descCat );
+    m_translations["Comets"]        = tr( "Comets" );
+    m_translations["Moons"]         = tr( "Moons" );
+    m_translations["Other"]         = tr( "Other" );
+    m_translations["Spacecrafts"]   = tr( "Spacecrafts" );
+    m_translations["Spaceprobes"]  = tr( "Spaceprobes" );
     // + bodies
     const char *descBodies = "A planet or space body";
-    m_translations["Moon"]          = tr( "Moon", descBodies );
-    m_translations["Sun"]           = tr( "Sun", descBodies );
-    m_translations["Mercury"]       = tr( "Mercury", descBodies );
-    m_translations["Venus"]         = tr( "Venus", descBodies );
-    m_translations["Earth"]         = tr( "Earth", descBodies );
-    m_translations["Mars"]          = tr( "Mars", descBodies );
-    m_translations["Jupiter"]       = tr( "Jupiter", descBodies );
-    m_translations["Saturn"]        = tr( "Saturn", descBodies );
-    m_translations["Uranus"]        = tr( "Uranus", descBodies );
-    m_translations["Neptune"]       = tr( "Neptune", descBodies );
+    m_translations["Moon"]          = tr( "Moon" );
+    m_translations["Sun"]           = tr( "Sun" );
+    m_translations["Mercury"]       = tr( "Mercury" );
+    m_translations["Venus"]         = tr( "Venus" );
+    m_translations["Earth"]         = tr( "Earth" );
+    m_translations["Mars"]          = tr( "Mars" );
+    m_translations["Jupiter"]       = tr( "Jupiter" );
+    m_translations["Saturn"]        = tr( "Saturn" );
+    m_translations["Uranus"]        = tr( "Uranus" );
+    m_translations["Neptune"]       = tr( "Neptune" );
 }
 
 SatellitesConfigDialog::~SatellitesConfigDialog()
