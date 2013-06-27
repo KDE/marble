@@ -80,8 +80,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     bool  eventFilter( QObject *object, QEvent *event );
 
  private:
-    void  drawMeasurePoints( GeoPainter *painter, ViewportParams *viewport );
-    void  drawMark( GeoPainter* painter, int x, int y );
+    void  drawMeasurePoints( GeoPainter *painter );
     void  drawTotalDistanceLabel( GeoPainter *painter,
                                   qreal totalDistance );
     void  drawSegments( GeoPainter *painter );
@@ -104,6 +103,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     // The line strings in the distance path.
     GeoDataLineString m_measureLineString;
 
+    const QPixmap m_mark;
     QFont   m_font_regular;
     int     m_fontascent;
 

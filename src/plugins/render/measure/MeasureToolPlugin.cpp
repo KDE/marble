@@ -16,19 +16,16 @@
 #include "MeasureToolPlugin.h"
 #include "ui_MeasureConfigWidget.h"
 
-#include "AbstractProjection.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "MarbleLocale.h"
 #include "Planet.h"
-#include "ViewportParams.h"
 
 #include <QtGui/QColor>
 #include <QtGui/QPen>
 #include <QtGui/QPixmap>
-#include <QtGui/QRadialGradient>
 #include <QtGui/QPushButton>
 #include <QtGui/QCheckBox>
 
@@ -45,6 +42,7 @@ MeasureToolPlugin::MeasureToolPlugin()
 MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
       m_measureLineString( GeoDataLineString( Tessellate ) ),
+      m_mark( ":/mark.png" ),
 #ifdef Q_OS_MACX
       m_font_regular( QFont( "Sans Serif", 10, 50, false ) ),
 #else
@@ -178,11 +176,9 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
                           const QString& renderPos,
                           GeoSceneLayer * layer )
 {
+    Q_UNUSED(viewport)
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
-
-    // FIXME: Add this stuff into the Layermanager as something to be
-    // called before the float items.
 
     // No way to paint anything if the list is empty.
     if ( m_measureLineString.isEmpty() )
@@ -200,7 +196,7 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
     }
 
     // Paint the nodes of the paths.
-    drawMeasurePoints( painter, viewport );
+    drawMeasurePoints( painter );
 
     // Paint the total distance in the upper left corner.
     qreal totalDistance = m_measureLineString.length( marbleModel()->planet()->radius() );
@@ -264,57 +260,15 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
     }
 }
 
-void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter,
-                                      ViewportParams *viewport )
+void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter )
 {
-    qreal  y = 0.0;
-
     // Paint the marks.
     GeoDataLineString::const_iterator itpoint = m_measureLineString.constBegin();
     GeoDataLineString::const_iterator const endpoint = m_measureLineString.constEnd();
     for (; itpoint != endpoint; ++itpoint )
     {
-        qreal  lon;
-        qreal  lat;
-
-        itpoint->geoCoordinates( lon, lat );
-
-        // FIXME: Replace all of this by some appropriate drawPlaceMark( GeoDataCrossHairs )
-        //        or drawPlaceMark( GeoDataPlacemark ) method
-        int pointRepeatNum = 0;
-        bool globeHidesPoint = false;
-        qreal * x  = new qreal[100];
-
-        bool visible = viewport->screenCoordinates( GeoDataCoordinates( lon, lat ), x, y, pointRepeatNum, globeHidesPoint );
-
-        if ( visible ) {
-            // Draw all the x-repeat-instances of the point on the screen
-            for( int it = 0; it < pointRepeatNum; ++it ) {
-                drawMark( painter, x[it], y );
-            }
-        }
-
-        delete[] x;
+        painter->drawPixmap( *itpoint, m_mark );
     }
-}
-
-void MeasureToolPlugin::drawMark( GeoPainter* painter, int x, int y )
-{
-    const int markRadius = 5;
-
-    // Paint the mark, and repeat it if the projection allows it.
-    painter->setRenderHint( QPainter::Antialiasing, false );
-
-    QColor backgroundCircleColor( Oxygen::aluminumGray6 );
-    backgroundCircleColor.setAlpha( 128 );
-
-    painter->setBrush( backgroundCircleColor );
-    painter->setPen( Qt::NoPen );
-    painter->drawEllipse( x-8, y-8, 16, 16 );
-
-    painter->setPen( QColor( Qt::white ) );
-    painter->drawLine( x - markRadius, y, x + markRadius, y );
-    painter->drawLine( x, y - markRadius, x, y + markRadius );
 }
 
 void MeasureToolPlugin::drawTotalDistanceLabel( GeoPainter *painter,

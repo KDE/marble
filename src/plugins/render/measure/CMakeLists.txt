@@ -11,4 +11,5 @@ set( measuretool_SRCS MeasureToolPlugin.cpp )
 set( measuretool_UI MeasureConfigWidget.ui )
 
 qt4_wrap_ui(measuretool_SRCS ${measuretool_UI} )
+qt4_add_resources( measuretool_SRCS measuretool.qrc )
 marble_add_plugin( MeasureTool ${measuretool_SRCS} )
