@@ -20,7 +20,7 @@
 
 using namespace Marble;
 
-AprsObject::AprsObject( const GeoAprsCoordinates &at, QString &name )
+AprsObject::AprsObject( const GeoAprsCoordinates &at, const QString &name )
     : m_myName( name ),
       m_seenFrom( at.seenFrom() ),
       m_havePixmap ( false ),
@@ -30,30 +30,19 @@ AprsObject::AprsObject( const GeoAprsCoordinates &at, QString &name )
     m_history.push_back( at );
 }
 
-AprsObject::AprsObject( const qreal &lon, const qreal &lat,
-                        const QString &name, int where )
-    : m_myName( name ),
-      m_seenFrom( where ),
-      m_havePixmap ( false ),
-      m_pixmapFilename( ),
-      m_pixmap( 0 )
-{
-    m_history.push_back( GeoAprsCoordinates( lon, lat, where ) );
-}
-
 AprsObject::~AprsObject()
 {
     delete m_pixmap;
 }
 
 GeoAprsCoordinates
-AprsObject::location()
+AprsObject::location() const
 {
     return m_history.last();
 }
 
 void
-AprsObject::setLocation( GeoAprsCoordinates location )
+AprsObject::setLocation( const GeoAprsCoordinates &location )
 {
     // Not ideal but it's unlikely they'll jump to the *exact* same spot again
     if ( !m_history.contains( location ) ) {
@@ -67,12 +56,6 @@ AprsObject::setLocation( GeoAprsCoordinates location )
     }
 
     m_seenFrom = ( m_seenFrom | location.seenFrom() );
-}
-
-void
-AprsObject::setLocation( qreal lon, qreal lat, int from )
-{
-    setLocation( GeoAprsCoordinates( lon, lat, from ) );
 }
 
 void

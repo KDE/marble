@@ -213,24 +213,22 @@ AprsGatherer::addObject( const QString &callSign,
     AprsObject *foundObject = 0;
     QMutexLocker locker( m_mutex );
         
-    int this_seenFrom = m_seenFrom;
+    GeoAprsCoordinates location( longitude, latitude, m_seenFrom );
     if ( canDoDirect ) {
         if ( !routePath.contains( QChar( '*' ) ) ) {
-            this_seenFrom |= GeoAprsCoordinates::Directly;
+            location.addSeenFrom( GeoAprsCoordinates::Directly );
         }
     }
 
     if ( m_objects->contains( callSign ) ) {
         // we already have one for this callSign; just add the new
         // history item.
-        ( *m_objects )[callSign]->setLocation( longitude, latitude,
-                                               this_seenFrom );
+        ( *m_objects )[callSign]->setLocation( location );
 
         // mDebug() << "  is old";
     }
     else {
-        foundObject = new AprsObject( longitude, latitude, callSign,
-                                      this_seenFrom );
+        foundObject = new AprsObject( location, callSign );
         QString s = m_pixmaps[QPair<QChar, QChar>( '/','*' )];
         foundObject->setPixmapId( m_pixmaps[QPair<QChar, QChar>( symbolTable,symbolCode )] );
         ( *m_objects )[callSign] = foundObject;

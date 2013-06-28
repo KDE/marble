@@ -24,16 +24,12 @@ namespace Marble
     {
 
       public:
-        AprsObject();
-        AprsObject( const GeoAprsCoordinates &at, QString &name );
-        AprsObject( const qreal &lon, const qreal &lat, const QString &name,
-                    int where = GeoAprsCoordinates::FromNowhere );
+        AprsObject( const GeoAprsCoordinates &at, const QString &name );
         ~AprsObject();
 
-        void setLocation( GeoAprsCoordinates location );
-        void setLocation( qreal lon, qreal lat, int from );
+        void setLocation( const GeoAprsCoordinates &location );
         void setPixmapId( QString &pixmap );
-        GeoAprsCoordinates location();
+        GeoAprsCoordinates location() const;
 
         QColor calculatePaintColor( int from, const QTime &time, int fadetime = 10*60*1000 ) const;
         void render( GeoPainter *painter, ViewportParams *viewport,
