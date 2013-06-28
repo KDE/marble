@@ -1156,7 +1156,7 @@ the system's graphics drivers. </para>
 <varlistentry>
 <term><guilabel>OpenDesktop Items</guilabel></term>
 <listitem>
-  <para>Shows <ulink url="http://opendesktop.org/">OpenDesktop</ulink> users' avatars and some extra information about them on the map..</para>
+  <para>Shows <ulink url="http://opendesktop.org/">OpenDesktop</ulink> users' avatars and some extra information about them on the map.</para>
 </listitem>
 </varlistentry>
 
