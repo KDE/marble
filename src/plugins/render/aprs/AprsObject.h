@@ -33,7 +33,6 @@ namespace Marble
         void setLocation( GeoAprsCoordinates location );
         void setLocation( qreal lon, qreal lat, int from );
         void setPixmapId( QString &pixmap );
-        void setSeenFrom( int where );
         GeoAprsCoordinates location();
 
         QColor calculatePaintColor( int from, const QTime &time, int fadetime = 10*60*1000 ) const;

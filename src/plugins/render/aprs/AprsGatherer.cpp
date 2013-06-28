@@ -225,7 +225,6 @@ AprsGatherer::addObject( const QString &callSign,
         // history item.
         ( *m_objects )[callSign]->setLocation( longitude, latitude,
                                                this_seenFrom );
-        ( *m_objects )[callSign]->setSeenFrom( this_seenFrom );
 
         // mDebug() << "  is old";
     }

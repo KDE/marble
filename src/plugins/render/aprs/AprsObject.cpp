@@ -22,7 +22,7 @@ using namespace Marble;
 
 AprsObject::AprsObject( const GeoAprsCoordinates &at, QString &name )
     : m_myName( name ),
-      m_seenFrom( GeoAprsCoordinates::FromNowhere ),
+      m_seenFrom( at.seenFrom() ),
       m_havePixmap ( false ),
       m_pixmapFilename( ),
       m_pixmap( 0 )
@@ -65,6 +65,8 @@ AprsObject::setLocation( GeoAprsCoordinates location )
         m_history[index].setTimestamp( now );
         m_history[index].addSeenFrom( location.seenFrom() );
     }
+
+    m_seenFrom = ( m_seenFrom | location.seenFrom() );
 }
 
 void
@@ -85,12 +87,6 @@ AprsObject::setPixmapId( QString &pixmap )
     else {
         m_havePixmap = false;
     }
-}
-
-void
-AprsObject::setSeenFrom( int where )
-{
-    m_seenFrom = ( m_seenFrom | where );
 }
 
 QColor
