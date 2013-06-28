@@ -18,10 +18,7 @@ namespace Marble
             Directly = 0x08
         };
 
-        GeoAprsCoordinates( qreal lon, qreal lat, qreal alt = 0,
-                            GeoDataCoordinates::Unit unit =
-                            GeoDataCoordinates::Radian,
-                            int where = FromNowhere );
+        GeoAprsCoordinates( qreal lon, qreal lat, int where );
         ~GeoAprsCoordinates();
 
         void  addSeenFrom( int where );

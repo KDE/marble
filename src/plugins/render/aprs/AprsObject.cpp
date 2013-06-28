@@ -38,8 +38,7 @@ AprsObject::AprsObject( const qreal &lon, const qreal &lat,
       m_pixmapFilename( ),
       m_pixmap( 0 )
 {
-    m_history.push_back( GeoAprsCoordinates( lon, lat, 0,
-                                             GeoAprsCoordinates::Degree ) );
+    m_history.push_back( GeoAprsCoordinates( lon, lat, where ) );
 }
 
 AprsObject::~AprsObject()
@@ -71,8 +70,7 @@ AprsObject::setLocation( GeoAprsCoordinates location )
 void
 AprsObject::setLocation( qreal lon, qreal lat, int from )
 {
-    setLocation( GeoAprsCoordinates( lon, lat, 0,
-                                     GeoAprsCoordinates::Degree, from ) );
+    setLocation( GeoAprsCoordinates( lon, lat, from ) );
 }
 
 void

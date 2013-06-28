@@ -12,10 +12,8 @@
 
 using namespace Marble;
 
-GeoAprsCoordinates::GeoAprsCoordinates( qreal lon, qreal lat, qreal alt,
-                                        GeoDataCoordinates::Unit unit,
-                                        int where )
-    : GeoDataCoordinates( lon, lat, alt, unit ),
+GeoAprsCoordinates::GeoAprsCoordinates( qreal lon, qreal lat, int where )
+    : GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree ),
       m_seenFrom( where )
 {
     m_timestamp = QTime::currentTime();
