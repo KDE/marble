@@ -57,6 +57,9 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
             else
                 currentPen.setWidthF( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() );
         }
+        else if ( style()->lineStyle().width() != 0.0 ) {
+            currentPen.setWidthF( style()->lineStyle().width() );
+        }
 
         if ( currentPen.capStyle() != style()->lineStyle().capStyle() )
             currentPen.setCapStyle( style()->lineStyle().capStyle() );
