@@ -192,10 +192,20 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::begin()
     return p()->m_vector.begin();
 }
 
+QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::begin() const
+{
+    return p()->m_vector.constBegin();
+}
+
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::end()
 {
     GeoDataGeometry::detach();
     return p()->m_vector.end();
+}
+
+QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::end() const
+{
+    return p()->m_vector.constEnd();
 }
 
 QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constBegin() const

@@ -295,12 +295,14 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     \brief Returns an iterator that points to the begin of the LineString.
 */
     QVector<GeoDataCoordinates>::Iterator begin();
+    QVector<GeoDataCoordinates>::ConstIterator begin() const;
 
 
 /*!
     \brief Returns an iterator that points to the end of the LineString.
 */
     QVector<GeoDataCoordinates>::Iterator end();
+    QVector<GeoDataCoordinates>::ConstIterator end() const;
 
 
 /*!
