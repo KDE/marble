@@ -90,6 +90,11 @@ void MarbleLegendBrowser::setMarbleModel( MarbleModel *marbleModel )
     }
 }
 
+QSize MarbleLegendBrowser::sizeHint() const
+{
+    return QSize( 180, 320 );
+}
+
 void MarbleLegendBrowser::initTheme()
 {
     // Check for a theme specific legend.html first

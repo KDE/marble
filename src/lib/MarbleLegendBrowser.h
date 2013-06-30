@@ -40,6 +40,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
     ~MarbleLegendBrowser();
 
     void setMarbleModel( MarbleModel *marbleModel );
+    QSize sizeHint() const;
 
  public slots:
     void setCheckedProperty( const QString& name, bool checked );
