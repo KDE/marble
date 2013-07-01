@@ -18,7 +18,7 @@ test -e "${TR_TOOL}"
 test -f "${TR_TOOL}"
 test -x "${TR_TOOL}"
 
-for map in venus mars hikebikemap osmarender public-transport
+for map in venus mars hikebikemap public-transport
 do
   echo "Installing ${map} map theme to $(readlink -f ${MAP_DIR})"
   wget -q "http://files.kde.org/marble/newstuff/maps/${map}-marblemap.tar.gz" -O - | tar -C "${MAP_DIR}" -xzf -
