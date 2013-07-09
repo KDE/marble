@@ -44,9 +44,6 @@
 #include "MarbleGraphicsItem.h"
 #include "MarblePlacemarkModel.h"
 
-#include "StackedTile.h"
-#include "StackedTileLoader.h"
-
 // Qt
 #include <QtCore/qmath.h>
 #include <QtCore/QAbstractItemModel>
