@@ -99,10 +99,11 @@ class MarbleModelPrivate
           m_legend( 0 ),
           m_workOffline( false )
     {
+        m_descendantProxy.setSourceModel( &m_treeModel );
+
         m_placemarkProxyModel.setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
         m_placemarkProxyModel.setFilterKeyColumn( 1 );
         m_placemarkProxyModel.setSourceModel( &m_descendantProxy );
-        m_descendantProxy.setSourceModel( &m_treeModel );
     }
 
     ~MarbleModelPrivate()
