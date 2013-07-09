@@ -26,6 +26,38 @@ class SphericalProjectionPrivate : public AbstractProjectionPrivate
   public:
     explicit SphericalProjectionPrivate( SphericalProjection * parent );
 
+    // This method tessellates a line segment in a way that the line segment
+    // follows great circles. The count parameter specifies the
+    // number of nodes generated for the polygon. If the
+    // clampToGround flag is added the polygon contains count + 2
+    // nodes as the clamped down start and end node get added.
+
+    int tessellateLineSegment(  const GeoDataCoordinates &aCoords,
+                                qreal ax, qreal ay,
+                                const GeoDataCoordinates &bCoords,
+                                qreal bx, qreal by,
+                                QVector<QPolygonF*> &polygons,
+                                const ViewportParams *viewport,
+                                TessellationFlags f = 0,
+                                int mirrorCount = 0,
+                                qreal repeatDistance = 0 ) const;
+
+    int processTessellation(   const GeoDataCoordinates &previousCoords,
+                               const GeoDataCoordinates &currentCoords,
+                               int count,
+                               QVector<QPolygonF*> &polygons,
+                               const ViewportParams *viewport,
+                               TessellationFlags f = 0,
+                               int mirrorCount = 0,
+                               qreal repeatDistance = 0 ) const;
+
+    int crossDateLine( const GeoDataCoordinates & aCoord,
+                       const GeoDataCoordinates & bCoord,
+                       QVector<QPolygonF*> &polygons,
+                       const ViewportParams *viewport,
+                       int mirrorCount = 0,
+                       qreal repeatDistance = 0 ) const;
+
     virtual bool lineStringToPolygon( const GeoDataLineString &lineString,
                               const ViewportParams *viewport,
                               QVector<QPolygonF*> &polygons ) const;
