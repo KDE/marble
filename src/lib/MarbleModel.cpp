@@ -88,21 +88,21 @@ class MarbleModelPrivate
           m_downloadManager( &m_storagePolicy ),
           m_storageWatcher( MarbleDirs::localPath() ),
           m_fileManager( 0 ),
-          m_treemodel(),
-          m_descendantproxy(),
-          m_sortproxy(),
-          m_placemarkselectionmodel( 0 ),
-          m_positionTracking( &m_treemodel ),
+          m_treeModel(),
+          m_descendantProxy(),
+          m_placemarkProxyModel(),
+          m_placemarkSelectionModel( 0 ),
+          m_positionTracking( &m_treeModel ),
           m_trackedPlacemark( 0 ),
-          m_bookmarkManager( &m_treemodel ),
+          m_bookmarkManager( &m_treeModel ),
           m_routingManager( 0 ),
           m_legend( 0 ),
           m_workOffline( false )
     {
-        m_sortproxy.setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
-        m_sortproxy.setFilterKeyColumn( 1 );
-        m_sortproxy.setSourceModel( &m_descendantproxy );
-        m_descendantproxy.setSourceModel( &m_treemodel );
+        m_placemarkProxyModel.setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
+        m_placemarkProxyModel.setFilterKeyColumn( 1 );
+        m_placemarkProxyModel.setSourceModel( &m_descendantProxy );
+        m_descendantProxy.setSourceModel( &m_treeModel );
     }
 
     ~MarbleModelPrivate()
@@ -133,12 +133,12 @@ class MarbleModelPrivate
     // Places on the map
     FileManager             *m_fileManager;
 
-    GeoDataTreeModel         m_treemodel;
-    KDescendantsProxyModel   m_descendantproxy;
-    QSortFilterProxyModel    m_sortproxy;
+    GeoDataTreeModel         m_treeModel;
+    KDescendantsProxyModel   m_descendantProxy;
+    QSortFilterProxyModel    m_placemarkProxyModel;
 
     // Selection handling
-    QItemSelectionModel      m_placemarkselectionmodel;
+    QItemSelectionModel      m_placemarkSelectionModel;
 
     //Gps Stuff
     PositionTracking         m_positionTracking;
@@ -408,27 +408,27 @@ const HttpDownloadManager *MarbleModel::downloadManager() const
 
 GeoDataTreeModel *MarbleModel::treeModel()
 {
-    return &d->m_treemodel;
+    return &d->m_treeModel;
 }
 
 const GeoDataTreeModel *MarbleModel::treeModel() const
 {
-    return &d->m_treemodel;
+    return &d->m_treeModel;
 }
 
 QAbstractItemModel *MarbleModel::placemarkModel()
 {
-    return &d->m_sortproxy;
+    return &d->m_placemarkProxyModel;
 }
 
 const QAbstractItemModel *MarbleModel::placemarkModel() const
 {
-    return &d->m_sortproxy;
+    return &d->m_placemarkProxyModel;
 }
 
 QItemSelectionModel *MarbleModel::placemarkSelectionModel()
 {
-    return &d->m_placemarkselectionmodel;
+    return &d->m_placemarkSelectionModel;
 }
 
 PositionTracking *MarbleModel::positionTracking() const
@@ -662,12 +662,12 @@ void MarbleModel::removeGeoData( const QString& fileName )
 
 void MarbleModel::updateProperty( const QString &property, bool value )
 {
-    foreach( GeoDataFeature *feature, d->m_treemodel.rootDocument()->featureList()) {
+    foreach( GeoDataFeature *feature, d->m_treeModel.rootDocument()->featureList()) {
         if( feature->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
             GeoDataDocument *document = static_cast<GeoDataDocument*>( feature );
             if( document->property() == property ){
                 document->setVisible( value );
-                d->m_treemodel.updateFeature( document );
+                d->m_treeModel.updateFeature( document );
             }
         }
     }
