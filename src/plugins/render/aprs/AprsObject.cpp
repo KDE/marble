@@ -77,19 +77,19 @@ AprsObject::calculatePaintColor( int from, const QTime &time, int fadeTime ) con
 {
     QColor color;
     if ( from & GeoAprsCoordinates::Directly ) {
-        color = QColor( 0, 201, 0, 255 ); // oxygen green if direct
+        color = Oxygen::emeraldGreen4; // oxygen green if direct
     } else if ( (from & ( GeoAprsCoordinates::FromTCPIP | GeoAprsCoordinates::FromTTY ) ) == ( GeoAprsCoordinates::FromTCPIP | GeoAprsCoordinates::FromTTY ) ) {
-        color = QColor( 176, 0, 141, 255 ); // oxygen purple if both
+        color = Oxygen::burgundyPurple4; // oxygen purple if both
     } else if  ( from & GeoAprsCoordinates::FromTCPIP ) {
-        color = QColor( 255, 0, 0, 255 ); // oxygen red if net
+        color = Oxygen::brickRed4; // oxygen red if net
     } else if  ( from & GeoAprsCoordinates::FromTTY ) {
-        color = QColor( 0, 0, 201, 255 ); // oxygen blue if TNC TTY relay
+        color = Oxygen::seaBlue4; // oxygen blue if TNC TTY relay
     } else if ( from & ( GeoAprsCoordinates::FromFile ) ) {
-        color = QColor( 255, 255, 0, 255 ); // oxygen yellow if file only
+        color = Oxygen::sunYellow3; // oxygen yellow if file only
     } else {
         mDebug() << "**************************************** unknown from: "
                  << from;
-        color = QColor( 0, 0, 0, 255 ); // shouldn't happen but a user
+        color = Oxygen::aluminumGray5;  // shouldn't happen but a user
                                         // could mess up I suppose we
                                         // should at least draw it in
                                         // something.
