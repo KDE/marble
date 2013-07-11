@@ -210,9 +210,8 @@ AprsGatherer::addObject( const QString &callSign,
                          const QChar &symbolTable,
                          const QChar &symbolCode )
 {
-    AprsObject *foundObject = 0;
     QMutexLocker locker( m_mutex );
-        
+
     GeoAprsCoordinates location( longitude, latitude, m_seenFrom );
     if ( canDoDirect ) {
         if ( !routePath.contains( QChar( '*' ) ) ) {
@@ -224,22 +223,14 @@ AprsGatherer::addObject( const QString &callSign,
         // we already have one for this callSign; just add the new
         // history item.
         ( *m_objects )[callSign]->setLocation( location );
-
-        // mDebug() << "  is old";
     }
     else {
-        foundObject = new AprsObject( location, callSign );
-        QString s = m_pixmaps[QPair<QChar, QChar>( '/','*' )];
+        AprsObject *foundObject = new AprsObject( location, callSign );
         foundObject->setPixmapId( m_pixmaps[QPair<QChar, QChar>( symbolTable,symbolCode )] );
         ( *m_objects )[callSign] = foundObject;
         mDebug() << "aprs:  new: " << callSign.toLocal8Bit().data();
-        // foundObject->setTarget( "earth" );
     }
-    //emit repaintNeeded( QRegion() );
 }
-
-
-#include "AprsGatherer.moc"
 
 void AprsGatherer::initMicETables()
 {
@@ -295,3 +286,5 @@ AprsGatherer::sleepFor(int seconds)
 {
     sleep(seconds);
 }
+
+#include "AprsGatherer.moc"
