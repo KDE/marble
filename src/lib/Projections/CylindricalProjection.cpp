@@ -92,13 +92,7 @@ bool CylindricalProjection::screenCoordinates( const GeoDataLineString &lineStri
     }
 
     QVector<QPolygonF *> subPolygons;
-    if( lineString.isClosed() ) {
-        GeoDataLinearRing ring = lineString.toRangeCorrected();
-        d->lineStringToPolygon( ring, viewport, subPolygons );
-    } else {
-        GeoDataLineString string = lineString.toRangeCorrected();
-        d->lineStringToPolygon( string, viewport, subPolygons );
-    }
+    d->lineStringToPolygon( lineString, viewport, subPolygons );
 
     polygons << subPolygons;
     return polygons.isEmpty();
