@@ -41,7 +41,8 @@ CylindricalProjection::~CylindricalProjection()
 }
 
 CylindricalProjectionPrivate::CylindricalProjectionPrivate( CylindricalProjection * parent )
-        : AbstractProjectionPrivate( parent )
+        : AbstractProjectionPrivate( parent ),
+          q_ptr( parent )
 {
 
 }
@@ -150,7 +151,7 @@ int CylindricalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinate
                                  repeatDistance );
         }
         else {
-            mirrorCount = crossDateLine( aCoords, bCoords, polygons, viewport, mirrorCount, repeatDistance );
+            mirrorCount = crossDateLine( aCoords, bCoords, bx, by, polygons, mirrorCount, repeatDistance );
         }
 #ifdef SAFE_DISTANCE
     }
@@ -224,7 +225,10 @@ int CylindricalProjectionPrivate::processTessellation( const GeoDataCoordinates 
         }
 
         const GeoDataCoordinates currentTessellatedCoords( lon, lat, altitude );
-        mirrorCount = crossDateLine( previousTessellatedCoords, currentTessellatedCoords, polygons, viewport,
+        Q_Q(const CylindricalProjection);
+        qreal bx, by;
+        q->screenCoordinates( currentTessellatedCoords, viewport, bx, by );
+        mirrorCount = crossDateLine( previousTessellatedCoords, currentTessellatedCoords, bx, by, polygons,
                                      mirrorCount, repeatDistance );
         previousTessellatedCoords = currentTessellatedCoords;
     }
@@ -234,17 +238,21 @@ int CylindricalProjectionPrivate::processTessellation( const GeoDataCoordinates 
     if ( clampToGround ) {
         currentModifiedCoords.setAltitude( 0.0 );
     }
-    mirrorCount = crossDateLine( previousTessellatedCoords, currentModifiedCoords, polygons, viewport,
+    Q_Q(const CylindricalProjection);
+    qreal bx, by;
+    q->screenCoordinates( currentModifiedCoords, viewport, bx, by );
+    mirrorCount = crossDateLine( previousTessellatedCoords, currentModifiedCoords, bx, by, polygons,
                                  mirrorCount, repeatDistance );
     return mirrorCount;
 }
 
 int CylindricalProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord,
-                                              const GeoDataCoordinates & bCoord,
-                                              QVector<QPolygonF*> &polygons,
-                                              const ViewportParams *viewport,
-                                              int mirrorCount,
-                                              qreal repeatDistance ) const
+                                                 const GeoDataCoordinates & bCoord,
+                                                 qreal bx,
+                                                 qreal by,
+                                                 QVector<QPolygonF*> &polygons,
+                                                 int mirrorCount,
+                                                 qreal repeatDistance ) const
 {
     qreal aLon = aCoord.longitude();
     qreal aSign = aLon > 0 ? 1 : -1;
@@ -252,32 +260,18 @@ int CylindricalProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoo
     qreal bLon = bCoord.longitude();
     qreal bSign = bLon > 0 ? 1 : -1;
 
-    qreal x, y;
-    bool globeHidesPoint;
-
     Q_Q( const AbstractProjection );
 
-    q->screenCoordinates( bCoord, viewport, x, y, globeHidesPoint );
-
     int sign = 0;
-    if( !globeHidesPoint ) {
-
-        qreal delta = 0;
-        if( aSign != bSign
-                && fabs(aLon) + fabs(bLon) > M_PI
-                && q->repeatX() ) {
-            sign = aSign > bSign ? 1 : -1;
-            mirrorCount += sign;
-        }
-        delta = repeatDistance * mirrorCount;
-        *polygons.last() << QPointF( x +  delta, y );
+    qreal delta = 0;
+    if( aSign != bSign
+            && fabs(aLon) + fabs(bLon) > M_PI
+            && q->repeatX() ) {
+        sign = aSign > bSign ? 1 : -1;
+        mirrorCount += sign;
     }
-    else {
-        if ( !polygons.last()->isEmpty() ) {
-            QPolygonF *path = new QPolygonF;
-            polygons.append( path );
-        }
-    }
+    delta = repeatDistance * mirrorCount;
+    *polygons.last() << QPointF( bx + delta, by );
 
     return mirrorCount;
 }
@@ -357,7 +351,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
                 // special case for polys which cross dateline but have no Tesselation Flag
                 // the expected rendering is a screen coordinates straight line between
                 // points, but in projections with repeatX things are not smooth
-                mirrorCount = crossDateLine( *itPreviousCoords, *itCoords, polygons, viewport, mirrorCount, distance );
+                mirrorCount = crossDateLine( *itPreviousCoords, *itCoords, x, y, polygons, mirrorCount, distance );
             }
 
             itPreviousCoords = itCoords;

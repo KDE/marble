@@ -52,8 +52,9 @@ class CylindricalProjectionPrivate : public AbstractProjectionPrivate
 
     int crossDateLine( const GeoDataCoordinates & aCoord,
                        const GeoDataCoordinates & bCoord,
+                       qreal bx,
+                       qreal by,
                        QVector<QPolygonF*> &polygons,
-                       const ViewportParams *viewport,
                        int mirrorCount = 0,
                        qreal repeatDistance = 0 ) const;
 
@@ -70,6 +71,7 @@ class CylindricalProjectionPrivate : public AbstractProjectionPrivate
 
     qreal repeatDistance( const ViewportParams *viewport ) const;
 
+    CylindricalProjection * const q_ptr;
     Q_DECLARE_PUBLIC( CylindricalProjection )
 };
 
