@@ -51,7 +51,7 @@ PhotoPluginItem::PhotoPluginItem( MarbleWidget *widget, QObject *parent )
 {
     m_action = new QAction( this );
     connect( m_action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
-    setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+    setCacheMode( ItemCoordinateCache );
 
     m_image.setFrame( FrameGraphicsItem::ShadowFrame );
     m_image.setBorderBrush( QBrush( QColor( Qt::white ) ) );

@@ -55,7 +55,7 @@ AbstractFloatItem::AbstractFloatItem( const MarbleModel *marbleModel, const QPoi
       FrameGraphicsItem(),
       d( new AbstractFloatItemPrivate() )
 {
-    setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+    setCacheMode( ItemCoordinateCache );
     setFrame( RectFrame );
     setPadding( 4.0 );
     setContentSize( size );

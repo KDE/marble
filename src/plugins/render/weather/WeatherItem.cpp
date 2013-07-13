@@ -330,14 +330,14 @@ WeatherItem::WeatherItem(QObject *parent )
     : AbstractDataPluginItem( parent ),
     d( new WeatherItemPrivate( this ) )
 {
-    setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+    setCacheMode( ItemCoordinateCache );
 }
 
 WeatherItem::WeatherItem(MarbleWidget* widget, QObject *parent )
     : AbstractDataPluginItem( parent ),
     d( new WeatherItemPrivate( this ) )
 {
-    setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+    setCacheMode( ItemCoordinateCache );
     d->m_marbleWidget = widget;
 }
 
