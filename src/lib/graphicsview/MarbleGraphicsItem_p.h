@@ -22,7 +22,7 @@
 #include<QtCore/QSize>
 #include<QtCore/QSizeF>
 #include<QtCore/QRect>
-#include<QtGui/QPixmapCache>
+#include<QtGui/QPixmap>
 
 namespace Marble
 {
@@ -99,7 +99,7 @@ class MarbleGraphicsItemPrivate
 
     MarbleGraphicsItem::CacheMode m_cacheMode;
 
-    QPixmapCache::Key m_cacheKey;
+    QPixmap m_pixmap;
 
     bool m_visibility;
 

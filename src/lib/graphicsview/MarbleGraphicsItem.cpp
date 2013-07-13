@@ -21,7 +21,6 @@
 #include <QtCore/QSet>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
-#include <QtGui/QPixmapCache>
 #include <QtGui/QMouseEvent>
 
 using namespace Marble;
@@ -48,12 +47,8 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
         return true;
     }
 
-    // Remove the pixmap if it has been requested. This prevents QPixmapCache from being used
-    // outside the ui thread.
     if ( p()->m_repaintNeeded ) {
         p()->updateChildPositions();
-        p()->m_repaintNeeded = false;
-        QPixmapCache::remove( p()->m_cacheKey );
     }
 
     // At the moment, as GraphicsItems can't be zoomed or rotated ItemCoordinateCache
@@ -61,22 +56,20 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
     if ( ItemCoordinateCache == cacheMode()
          || DeviceCoordinateCache == cacheMode() )
     {
-        QPixmap cachePixmap;
-        bool pixmapAvailable = QPixmapCache::find( p()->m_cacheKey, &cachePixmap );
-        if ( !pixmapAvailable ) {
+        if ( p()->m_repaintNeeded ) {
             QSize neededPixmapSize = size().toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
-        
-            if ( cachePixmap.size() != neededPixmapSize ) {
+
+            if ( p()->m_pixmap.size() != neededPixmapSize ) {
                 if ( size().isValid() && !size().isNull() ) {
-                    cachePixmap = QPixmap( neededPixmapSize ).copy();
+                    p()->m_pixmap = QPixmap( neededPixmapSize ).copy();
                 }
                 else {
                     mDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
                 }
             }
-        
-            cachePixmap.fill( Qt::transparent );
-            QPainter pixmapPainter( &cachePixmap );
+
+            p()->m_pixmap.fill( Qt::transparent );
+            QPainter pixmapPainter( &p()->m_pixmap );
             // We paint in best quality here, as we only have to paint once.
             pixmapPainter.setRenderHint( QPainter::Antialiasing, true );
             // The cache image will get a 0.5 pixel bounding to save antialiasing effects.
@@ -87,12 +80,12 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
             foreach ( MarbleGraphicsItem *item, p()->m_children ) {
                 item->paintEvent( &pixmapPainter, viewport );
             }
-            // Update the pixmap in cache
-            p()->m_cacheKey = QPixmapCache::insert( cachePixmap );
+
+            p()->m_repaintNeeded = false;
         }
-        
+
         foreach( const QPointF& position, p()->positions() ) {
-            painter->drawPixmap( position, cachePixmap );
+            painter->drawPixmap( position, p()->m_pixmap );
         }
     }
     else {
@@ -110,7 +103,7 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
             painter->restore();
         }
     }
-    
+
     return true;
 }
 
