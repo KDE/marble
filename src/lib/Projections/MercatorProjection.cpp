@@ -20,6 +20,7 @@
 
 #include "MathHelper.h"
 #include "GeoDataPoint.h"
+#include "MarbleMath.h"
 
 using namespace Marble;
 
@@ -119,7 +120,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     // Let (x, y) be the position on the screen of the placemark..
     x = ( width  / 2 + rad2Pixel * ( lon - centerLon ) );
-    y = ( height / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
+    y = ( height / 2 - rad2Pixel * ( gdInv( lat ) - gdInv( centerLat ) ) );
 
     // Return true if the calculated point is inside the screen area,
     // otherwise return false.
