@@ -108,16 +108,6 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 */
     virtual qreal length( qreal planetRadius, int offset = 0 ) const;
 
-    
-/*!
-    \brief Provides a more generic representation of the LinearRing.
-
-    The LinearRing is normalized, pole corrected and dateline corrected.
-
-    Deprecation Warning: This method will likely be removed from the public API.
-*/
-    virtual GeoDataLineString toRangeCorrected() const;
-
 /*!
     \brief Returns whether the given coordinates lie within the polygon.
 

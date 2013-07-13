@@ -344,8 +344,11 @@ GeoDataLineString GeoDataLineString::toRangeCorrected() const
 
         delete p()->m_rangeCorrected;
 
-        GeoDataLineString poleCorrected = toPoleCorrected();
-        p()->m_rangeCorrected = new GeoDataLineString( poleCorrected );
+        if( isClosed() ) {
+            p()->m_rangeCorrected = new GeoDataLinearRing( toPoleCorrected() );
+        } else {
+            p()->m_rangeCorrected = new GeoDataLineString( toPoleCorrected() );
+        }
         p()->m_dirtyRange = false;
     }
 

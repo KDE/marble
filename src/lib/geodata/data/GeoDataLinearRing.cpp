@@ -44,20 +44,6 @@ qreal GeoDataLinearRing::length( qreal planetRadius, int offset ) const
     return length + planetRadius * distanceSphere( last(), first() );
 }
 
-GeoDataLineString GeoDataLinearRing::toRangeCorrected() const
-{
-    if ( p()->m_dirtyRange ) {
-
-        delete p()->m_rangeCorrected;
-
-        GeoDataLinearRing poleCorrected = toPoleCorrected();
-        p()->m_rangeCorrected = new GeoDataLinearRing( poleCorrected );
-        p()->m_dirtyRange = false;
-    }
-
-    return *p()->m_rangeCorrected;
-}
-
 bool GeoDataLinearRing::contains( const GeoDataCoordinates &coordinates ) const
 {
     // Quick bounding box check
