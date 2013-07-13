@@ -32,31 +32,24 @@ class SphericalProjectionPrivate : public AbstractProjectionPrivate
     // clampToGround flag is added the polygon contains count + 2
     // nodes as the clamped down start and end node get added.
 
-    int tessellateLineSegment(  const GeoDataCoordinates &aCoords,
+    void tessellateLineSegment(  const GeoDataCoordinates &aCoords,
                                 qreal ax, qreal ay,
                                 const GeoDataCoordinates &bCoords,
                                 qreal bx, qreal by,
                                 QVector<QPolygonF*> &polygons,
                                 const ViewportParams *viewport,
-                                TessellationFlags f = 0,
-                                int mirrorCount = 0,
-                                qreal repeatDistance = 0 ) const;
+                                TessellationFlags f = 0 ) const;
 
-    int processTessellation(   const GeoDataCoordinates &previousCoords,
+    void processTessellation(   const GeoDataCoordinates &previousCoords,
                                const GeoDataCoordinates &currentCoords,
                                int count,
                                QVector<QPolygonF*> &polygons,
                                const ViewportParams *viewport,
-                               TessellationFlags f = 0,
-                               int mirrorCount = 0,
-                               qreal repeatDistance = 0 ) const;
+                               TessellationFlags f = 0 ) const;
 
-    int crossDateLine( const GeoDataCoordinates & aCoord,
-                       const GeoDataCoordinates & bCoord,
+    void crossHorizon( const GeoDataCoordinates & bCoord,
                        QVector<QPolygonF*> &polygons,
-                       const ViewportParams *viewport,
-                       int mirrorCount = 0,
-                       qreal repeatDistance = 0 ) const;
+                       const ViewportParams *viewport ) const;
 
     virtual bool lineStringToPolygon( const GeoDataLineString &lineString,
                               const ViewportParams *viewport,

@@ -346,15 +346,13 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     return true;
 }
 
-int SphericalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates &aCoords,
+void SphericalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates &aCoords,
                                                 qreal ax, qreal ay,
                                                 const GeoDataCoordinates &bCoords,
                                                 qreal bx, qreal by,
                                                 QVector<QPolygonF*> &polygons,
                                                 const ViewportParams *viewport,
-                                                TessellationFlags f,
-                                                int mirrorCount,
-                                                qreal repeatDistance) const
+                                                TessellationFlags f) const
 {
     // We take the manhattan length as a distance approximation
     // that can be too big by a factor of sqrt(2)
@@ -385,32 +383,27 @@ int SphericalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates 
         // on screen is too big
         if ( distance > finalTessellationPrecision ) {
 
-            mirrorCount = processTessellation( aCoords, bCoords,
+            processTessellation( aCoords, bCoords,
                                  tessellatedNodes,
                                  polygons,
                                  viewport,
-                                 f,
-                                 mirrorCount,
-                                 repeatDistance );
+                                 f );
         }
         else {
-            mirrorCount = crossDateLine( aCoords, bCoords, polygons, viewport, mirrorCount, repeatDistance );
+            crossHorizon( bCoords, polygons, viewport );
         }
 #ifdef SAFE_DISTANCE
     }
 #endif
-    return mirrorCount;
 }
 
 
-int SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &previousCoords,
+void SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &previousCoords,
                                                     const GeoDataCoordinates &currentCoords,
                                                     int tessellatedNodes,
                                                     QVector<QPolygonF*> &polygons,
                                                     const ViewportParams *viewport,
-                                                    TessellationFlags f,
-                                                    int mirrorCount,
-                                                    qreal repeatDistance) const
+                                                    TessellationFlags f) const
 {
 
     const bool clampToGround = f.testFlag( FollowGround );
@@ -436,9 +429,6 @@ int SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &p
                 // going westwards ->
                 lonDiff -= 2 * M_PI;
             }
-        }
-        if ( fabs( lonDiff ) == 2 * M_PI ) {
-            return mirrorCount;
         }
     }
 
@@ -468,8 +458,7 @@ int SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &p
         }
 
         const GeoDataCoordinates currentTessellatedCoords( lon, lat, altitude );
-        mirrorCount = crossDateLine( previousTessellatedCoords, currentTessellatedCoords, polygons, viewport,
-                                     mirrorCount, repeatDistance );
+        crossHorizon( currentTessellatedCoords, polygons, viewport );
         previousTessellatedCoords = currentTessellatedCoords;
     }
 
@@ -478,24 +467,13 @@ int SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &p
     if ( clampToGround ) {
         currentModifiedCoords.setAltitude( 0.0 );
     }
-    mirrorCount = crossDateLine( previousTessellatedCoords, currentModifiedCoords, polygons, viewport,
-                                 mirrorCount, repeatDistance );
-    return mirrorCount;
+    crossHorizon( currentModifiedCoords, polygons, viewport );
 }
 
-int SphericalProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord,
-                                              const GeoDataCoordinates & bCoord,
+void SphericalProjectionPrivate::crossHorizon( const GeoDataCoordinates & bCoord,
                                               QVector<QPolygonF*> &polygons,
-                                              const ViewportParams *viewport,
-                                              int mirrorCount,
-                                              qreal repeatDistance ) const
+                                              const ViewportParams *viewport ) const
 {
-    qreal aLon = aCoord.longitude();
-    qreal aSign = aLon > 0 ? 1 : -1;
-
-    qreal bLon = bCoord.longitude();
-    qreal bSign = bLon > 0 ? 1 : -1;
-
     qreal x, y;
     bool globeHidesPoint;
 
@@ -503,18 +481,8 @@ int SphericalProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
 
     q->screenCoordinates( bCoord, viewport, x, y, globeHidesPoint );
 
-    int sign = 0;
     if( !globeHidesPoint ) {
-
-        qreal delta = 0;
-        if( aSign != bSign
-                && fabs(aLon) + fabs(bLon) > M_PI
-                && q->repeatX() ) {
-            sign = aSign > bSign ? 1 : -1;
-            mirrorCount += sign;
-        }
-        delta = repeatDistance * mirrorCount;
-        *polygons.last() << QPointF( x +  delta, y );
+        *polygons.last() << QPointF( x, y );
     }
     else {
         if ( !polygons.last()->isEmpty() ) {
@@ -522,8 +490,6 @@ int SphericalProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoord
             polygons.append( path );
         }
     }
-
-    return mirrorCount;
 }
 
 bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &lineString,
