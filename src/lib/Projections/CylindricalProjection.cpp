@@ -129,12 +129,11 @@ int CylindricalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinate
         bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
         int const finalTessellationPrecision = smallScreen ? 3 * tessellationPrecision : tessellationPrecision;
 
-        int tessellatedNodes = (int)( distance / finalTessellationPrecision );
-
         // Let the line segment follow the spherical surface
         // if the distance between the previous point and the current point
         // on screen is too big
         if ( distance > finalTessellationPrecision ) {
+            const int tessellatedNodes = qMin<int>( distance / finalTessellationPrecision, maxTessellationNodes );
 
             mirrorCount = processTessellation( aCoords, bCoords,
                                  tessellatedNodes,
@@ -167,9 +166,6 @@ int CylindricalProjectionPrivate::processTessellation( const GeoDataCoordinates 
     const bool clampToGround = f.testFlag( FollowGround );
     const bool followLatitudeCircle = f.testFlag( RespectLatitudeCircle )
                                       && previousCoords.latitude() == currentCoords.latitude();
-
-    // Maximum amount of tessellation nodes.
-    if ( tessellatedNodes > maxTessellationNodes ) tessellatedNodes = maxTessellationNodes;
 
     // Calculate steps for tessellation: lonDiff and altDiff
     qreal lonDiff = 0.0;
