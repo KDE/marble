@@ -1,10 +1,19 @@
 FILE( GLOB geodata_data_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/data/*.cpp )
-FILE( GLOB geodata_graphicsitem_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/graphicsitem/*.cpp )
 FILE( GLOB geodata_scene_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/scene/*.cpp )
 
 # handlers and writers sources 
 FILE( GLOB geodata_handlers_dgml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/handlers/dgml/*.cpp )
 FILE( GLOB geodata_writers_dgml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/writers/dgml/*.cpp )
+
+SET( geodata_graphicsitem_SRCS
+    geodata/graphicsitem/GeoImageGraphicsItem.cpp
+    geodata/graphicsitem/GeoLineStringGraphicsItem.cpp
+    geodata/graphicsitem/GeoPhotoGraphicsItem.cpp
+    geodata/graphicsitem/GeoPointGraphicsItem.cpp
+    geodata/graphicsitem/GeoPolygonGraphicsItem.cpp
+    geodata/graphicsitem/GeoTrackGraphicsItem.cpp
+    geodata/graphicsitem/ScreenOverlayGraphicsItem.cpp
+)
 
 SET ( geodata_handlers_kml_SRCS
 geodata/handlers/kml/KmlAltitudeModeTagHandler.cpp
