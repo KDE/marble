@@ -60,6 +60,7 @@ Name[zh_CN]=Marble
 Name[zh_TW]=地理_Marble
 NoDisplay=true
 GenericName=Virtual Globe
+GenericName[ca]=Globus virtual
 GenericName[cs]=Virtuální globus
 GenericName[da]=Virtuel globus
 GenericName[de]=Virtueller Globus
