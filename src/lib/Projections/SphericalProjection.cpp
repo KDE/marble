@@ -432,8 +432,8 @@ void SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &
 
     // Create the tessellation nodes.
     GeoDataCoordinates previousTessellatedCoords = previousCoords;
-    for ( int i = 1; i <= tessellatedNodes - 2; ++i ) {
-        const qreal t = (qreal)(i) / (qreal)( tessellatedNodes );
+    for ( int i = 1; i <= tessellatedNodes; ++i ) {
+        const qreal t = (qreal)(i) / (qreal)( tessellatedNodes + 1 );
 
         // interpolate the altitude, too
         const qreal altitude = clampToGround ? 0 : altDiff * t + previousCoords.altitude();
