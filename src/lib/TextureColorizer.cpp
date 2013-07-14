@@ -146,9 +146,6 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     shadingPainter.end();  // Need to explicitly tell painter lifetime to avoid crash
     gradientPainter.end(); // on some systems. 
 
-    m_seafile = seafile;
-    m_landfile = landfile;
-
     mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
 

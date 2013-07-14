@@ -56,8 +56,6 @@ class TextureColorizer
 
  private:
     VectorComposer *const m_veccomposer;
-    QString m_seafile;
-    QString m_landfile;
     QList<const GeoDataDocument*> m_seaDocuments;
     QList<const GeoDataDocument*> m_landDocuments;
     QImage m_coastImage;
