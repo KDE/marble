@@ -571,43 +571,14 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing,
         return;
     }
 
-    if ( !linearRing.latLonAltBox().crossesDateLine() ) {
-        QVector<QPolygonF*> polygons;
-        d->m_viewport->screenCoordinates( linearRing, polygons );
+    QVector<QPolygonF*> polygons;
+    d->m_viewport->screenCoordinates( linearRing, polygons );
 
-        foreach( QPolygonF* itPolygon, polygons ) {
-            ClipPainter::drawPolygon( *itPolygon, fillRule );
-        }
-
-        qDeleteAll( polygons );
+    foreach( QPolygonF* itPolygon, polygons ) {
+        ClipPainter::drawPolygon( *itPolygon, fillRule );
     }
-    else {
-        QPen polygonPen = pen();
-        setPen( Qt::NoPen );
 
-        QVector<QPolygonF*> polygons;
-        d->m_viewport->screenCoordinates( linearRing, polygons );
-
-        foreach( QPolygonF* itPolygon, polygons ) {
-            ClipPainter::drawPolygon( *itPolygon, fillRule );
-        }
-
-        qDeleteAll( polygons );
-
-        setPen( polygonPen );
-        GeoDataLineString lineString( linearRing );
-
-        lineString << lineString.first();
-
-        QVector<QPolygonF*> polylines;
-        d->m_viewport->screenCoordinates( lineString, polylines );
-
-        foreach( QPolygonF* itPolygon, polylines ) {
-            ClipPainter::drawPolyline( *itPolygon );
-        }
-
-        qDeleteAll( polylines );        
-    }
+    qDeleteAll( polygons );
 }
 
 
