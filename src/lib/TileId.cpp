@@ -39,10 +39,10 @@ TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
     if ( zoomLevel < 0 ) {
         return TileId();
     }
-    const int maxLat = 90000000;
-    const int maxLon = 180000000;
-    int lat = GeoDataCoordinates::normalizeLat( coords.latitude(), GeoDataCoordinates::Degree ) * 1000000;
-    int lon = GeoDataCoordinates::normalizeLon( coords.longitude(), GeoDataCoordinates::Degree ) * 1000000;
+    const int maxLat = 90 * 1000000;
+    const int maxLon = 180 * 1000000;
+    int lat = GeoDataCoordinates::normalizeLat( coords.latitude( GeoDataCoordinates::Degree ), GeoDataCoordinates::Degree ) * 1000000;
+    int lon = GeoDataCoordinates::normalizeLon( coords.longitude( GeoDataCoordinates::Degree ), GeoDataCoordinates::Degree ) * 1000000;
     int x = 0;
     int y = 0;
     for( int i=0; i<zoomLevel; ++i ) {

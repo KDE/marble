@@ -82,8 +82,7 @@ void TileIdTest::testFromCoordinates()
     QFETCH( int, x);
     QFETCH( int, y);
 
-    const TileId tile = TileId::fromCoordinates(GeoDataCoordinates( lon , lat, GeoDataCoordinates::Degree), zoom );
-    qDebug() << "zoom " << zoom;
+    const TileId tile = TileId::fromCoordinates(GeoDataCoordinates( lon , lat, 0, GeoDataCoordinates::Degree), zoom );
 
     QCOMPARE( tile.x(), x );
     QCOMPARE( tile.y(), y );
