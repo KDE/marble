@@ -78,14 +78,16 @@ void WeatherModel::downloadItemData( const QUrl& url,
             weatherItem->request( type );
         }
 
-        AbstractDataPluginModel::downloadItemData( url, type, item );
+        downloadItem( url, type, item );
+        addItemToList( item );
     } else {
         if ( existingItem != item )
             item->deleteLater();
         
         WeatherItem *existingWeatherItem = qobject_cast<WeatherItem*>( existingItem );
         if( existingWeatherItem && existingWeatherItem->request( type ) ) {
-            AbstractDataPluginModel::downloadItemData( url, type, existingWeatherItem );
+            downloadItem( url, type, existingItem );
+            addItemToList( existingItem );
         }
     }
 }
