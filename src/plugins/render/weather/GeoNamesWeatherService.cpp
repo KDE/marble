@@ -12,6 +12,7 @@
 
 #include "WeatherData.h"
 #include "GeoNamesWeatherItem.h"
+#include "GeoDataLatLonAltBox.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 
@@ -28,8 +29,8 @@ QHash<QString, WeatherData::WeatherCondition> GeoNamesWeatherService::dayConditi
 QVector<WeatherData::WindDirection> GeoNamesWeatherService::windDirections
         = QVector<WeatherData::WindDirection>(16);
 
-GeoNamesWeatherService::GeoNamesWeatherService( QObject *parent )
-            : AbstractWeatherService( parent )
+GeoNamesWeatherService::GeoNamesWeatherService( const MarbleModel *model, QObject *parent ) :
+    AbstractWeatherService( model, parent )
 {
     GeoNamesWeatherService::setupHashes();
 }
@@ -39,10 +40,9 @@ GeoNamesWeatherService::~GeoNamesWeatherService()
 }
 
 void GeoNamesWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                            const MarbleModel *model,
                                             qint32 number )
 {
-    if( model->planetId() != "earth" ) {
+    if( marbleModel()->planetId() != "earth" ) {
         return;
     }
 
@@ -56,9 +56,9 @@ void GeoNamesWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
     emit downloadDescriptionFileRequested( geonamesUrl );
 }
 
-void GeoNamesWeatherService::getItem( const QString &id, const MarbleModel *model )
+void GeoNamesWeatherService::getItem( const QString &id )
 {
-    if( model->planetId() != "earth" ) {
+    if( marbleModel()->planetId() != "earth" ) {
         return;
     }
 

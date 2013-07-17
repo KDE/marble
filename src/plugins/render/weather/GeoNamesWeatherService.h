@@ -12,6 +12,7 @@
 #define GEONAMESWEATHERSERVICE_H
 
 #include "AbstractWeatherService.h"
+#include "WeatherData.h"
 
 class QScriptValue;
 
@@ -23,18 +24,17 @@ class GeoNamesWeatherService : public AbstractWeatherService
     Q_OBJECT
 
  public:
-    explicit GeoNamesWeatherService( QObject *parent );
+    explicit GeoNamesWeatherService( const MarbleModel *model, QObject *parent );
     ~GeoNamesWeatherService();
 
  public Q_SLOTS:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             const MarbleModel *model,
                              qint32 number = 10 );
-    virtual void getItem( const QString &id, const MarbleModel *model );
+    void getItem( const QString &id );
     void parseFile( const QByteArray& file );
-    AbstractDataPluginItem* parse( const QScriptValue &value );
 
  private:
+    AbstractDataPluginItem* parse( const QScriptValue &value );
     void setupHashes();
 
     static QHash<QString, WeatherData::WeatherCondition> dayConditions;

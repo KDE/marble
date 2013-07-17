@@ -56,7 +56,6 @@ class WeatherModel : public AbstractDataPluginModel
 
  Q_SIGNALS:
     void additionalItemsRequested( const GeoDataLatLonAltBox &,
-                                   const MarbleModel *,
                                    qint32 number );
     void favoriteItemChanged( const QString& id, bool isFavorite );
     void parseFileRequested( const QByteArray& file );

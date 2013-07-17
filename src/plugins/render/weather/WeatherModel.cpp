@@ -100,13 +100,13 @@ void WeatherModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
 
     m_initialized = true;
 
-    emit additionalItemsRequested( box, marbleModel(), number );
+    emit additionalItemsRequested( box, number );
 }
 
 void WeatherModel::getItem( const QString &id )
 {
     foreach( AbstractWeatherService* service, m_services ) {
-        service->getItem( id, marbleModel() );
+        service->getItem( id );
     }
 }
 
@@ -118,15 +118,15 @@ void WeatherModel::parseFile( const QByteArray& file )
 void WeatherModel::updateItems()
 {
     clear();
-    emit additionalItemsRequested( m_lastBox, marbleModel(), m_lastNumber );
+    emit additionalItemsRequested( m_lastBox, m_lastNumber );
     emit itemsUpdated();
 }
 
 void WeatherModel::createServices()
 {
-    // addService( new FakeWeatherService( this ) );
-    addService( new BBCWeatherService( this ) );
-    addService( new GeoNamesWeatherService( this ) );
+    // addService( new FakeWeatherService( marbleModel(), this ) );
+    addService( new BBCWeatherService( marbleModel(), this ) );
+    addService( new GeoNamesWeatherService( marbleModel(), this ) );
 }
 
 void WeatherModel::downloadDescriptionFileRequested( const QUrl& url )
@@ -152,8 +152,8 @@ void WeatherModel::addService( AbstractWeatherService *service )
     connect( service, SIGNAL(downloadDescriptionFileRequested(QUrl)),
              this, SLOT(downloadDescriptionFileRequested(QUrl)) );
 
-    connect( this, SIGNAL(additionalItemsRequested(GeoDataLatLonAltBox,const MarbleModel*,qint32)),
-             service, SLOT(getAdditionalItems(GeoDataLatLonAltBox,const MarbleModel*,qint32)) );
+    connect( this, SIGNAL(additionalItemsRequested(GeoDataLatLonAltBox,qint32)),
+             service, SLOT(getAdditionalItems(GeoDataLatLonAltBox,qint32)) );
     connect( this, SIGNAL(parseFileRequested(QByteArray)),
              service, SLOT(parseFile(QByteArray)) );
 

@@ -21,14 +21,13 @@ class FakeWeatherService : public AbstractWeatherService
     Q_OBJECT
  
  public:
-    explicit FakeWeatherService( QObject *parent );
+    explicit FakeWeatherService( const MarbleModel *model, QObject *parent );
     ~FakeWeatherService();
     
  public Q_SLOTS:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             const MarbleModel *model,
                              qint32 number = 10 );
-    virtual void getItem( const QString &id, const MarbleModel *model );
+    virtual void getItem( const QString &id );
 };
 
 } // namespace Marble

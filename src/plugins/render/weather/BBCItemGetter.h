@@ -35,7 +35,6 @@ class BBCItemGetter : public AbstractWorkerThread
     ~BBCItemGetter();
 
     void setSchedule( const GeoDataLatLonAltBox& box,
-                      const MarbleModel *model,
                       qint32 number );
 
     void setStationList( const QList<BBCStation>& items );

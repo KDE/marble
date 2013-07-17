@@ -14,10 +14,12 @@
 namespace Marble
 {
 
-AbstractWeatherService::AbstractWeatherService( QObject *parent )
+AbstractWeatherService::AbstractWeatherService( const MarbleModel *model, QObject *parent )
     : QObject( parent ),
-      m_marbleWidget(0)
+      m_marbleModel( model ),
+      m_marbleWidget( 0 )
 {
+    Q_ASSERT( m_marbleModel != 0 );
 }
 
 AbstractWeatherService::~AbstractWeatherService()
@@ -27,6 +29,11 @@ AbstractWeatherService::~AbstractWeatherService()
 void AbstractWeatherService::setMarbleWidget( MarbleWidget *widget )
 {
     m_marbleWidget = widget;
+}
+
+const MarbleModel* AbstractWeatherService::marbleModel() const
+{
+    return m_marbleModel;
 }
 
 MarbleWidget* AbstractWeatherService::marbleWidget()
