@@ -26,23 +26,156 @@
 
 using namespace Marble;
 
-QHash<QString, WeatherData::WeatherCondition> BBCParser::dayConditions
-        = QHash<QString, WeatherData::WeatherCondition>();
-QHash<QString, WeatherData::WeatherCondition> BBCParser::nightConditions
-        = QHash<QString, WeatherData::WeatherCondition>();
-QHash<QString, WeatherData::WindDirection> BBCParser::windDirections
-        = QHash<QString, WeatherData::WindDirection>();
-QHash<QString, WeatherData::PressureDevelopment> BBCParser::pressureDevelopments
-        = QHash<QString, WeatherData::PressureDevelopment>();
-QHash<QString, WeatherData::Visibility> BBCParser::visibilityStates
-        = QHash<QString, WeatherData::Visibility>();
-QHash<QString, int> BBCParser::monthNames
-        = QHash<QString, int>();
-
-BBCParser::BBCParser( QObject *parent )
-        : AbstractWorkerThread( parent )
+BBCParser::BBCParser( QObject *parent ) :
+    AbstractWorkerThread( parent ),
+    m_dayConditions(),
+    m_nightConditions(),
+    m_windDirections(),
+    m_pressureDevelopments(),
+    m_visibilityStates(),
+    m_monthNames()
 {
-    BBCParser::setupHashes();
+    m_dayConditions["sunny"] = WeatherData::ClearDay;
+    m_dayConditions["clear"] = WeatherData::ClearDay;
+    m_dayConditions["clear sky"] = WeatherData::ClearDay;
+    m_dayConditions["sunny intervals"] = WeatherData::FewCloudsDay;
+    m_dayConditions["partly cloudy"] = WeatherData::PartlyCloudyDay;
+    m_dayConditions["white cloud"] = WeatherData::Overcast;
+    m_dayConditions["grey cloud"] = WeatherData::Overcast;
+    m_dayConditions["cloudy"] = WeatherData::Overcast;
+    m_dayConditions["drizzle"] = WeatherData::LightRain;
+    m_dayConditions["misty"] = WeatherData::Mist;
+    m_dayConditions["mist"] = WeatherData::Mist;
+    m_dayConditions["fog"] = WeatherData::Mist;
+    m_dayConditions["foggy"] = WeatherData::Mist;
+    m_dayConditions["dense fog"] = WeatherData::Mist;
+    m_dayConditions["Thick Fog"] = WeatherData::Mist;
+    m_dayConditions["tropical storm"] = WeatherData::Thunderstorm;
+    m_dayConditions["hazy"] = WeatherData::Mist;
+    m_dayConditions["light shower"] = WeatherData::LightShowersDay;
+    m_dayConditions["light rain shower"] = WeatherData::LightShowersDay;
+    m_dayConditions["light showers"] = WeatherData::LightShowersDay;
+    m_dayConditions["light rain"] = WeatherData::ShowersDay;
+    m_dayConditions["heavy rain"] = WeatherData::Rain;
+    m_dayConditions["heavy showers"] = WeatherData::Rain;
+    m_dayConditions["heavy shower"] = WeatherData::Rain;
+    m_dayConditions["heavy rain shower"] = WeatherData::Rain;
+    m_dayConditions["thundery shower"] = WeatherData::Thunderstorm;
+    m_dayConditions["thunderstorm"] = WeatherData::Thunderstorm;
+    m_dayConditions["thunder storm"] = WeatherData::Thunderstorm;
+    m_dayConditions["cloudy with sleet"] = WeatherData::RainSnow;
+    m_dayConditions["sleet shower"] = WeatherData::RainSnow;
+    m_dayConditions["sleet showers"] = WeatherData::RainSnow;
+    m_dayConditions["sleet"] = WeatherData::RainSnow;
+    m_dayConditions["cloudy with hail"] = WeatherData::Hail;
+    m_dayConditions["hail shower"] = WeatherData::Hail;
+    m_dayConditions["hail showers"] = WeatherData::Hail;
+    m_dayConditions["hail"] = WeatherData::Hail;
+    m_dayConditions["light snow"] = WeatherData::LightSnow;
+    m_dayConditions["light snow shower"] = WeatherData::ChanceSnowDay;
+    m_dayConditions["light snow showers"] = WeatherData::ChanceSnowDay;
+    m_dayConditions["cloudy with light snow"] = WeatherData::LightSnow;
+    m_dayConditions["heavy snow"] = WeatherData::Snow;
+    m_dayConditions["heavy snow shower"] = WeatherData::Snow;
+    m_dayConditions["heavy snow showers"] = WeatherData::Snow;
+    m_dayConditions["cloudy with heavy snow"] = WeatherData::Snow;
+    m_dayConditions["sandstorm"] = WeatherData::SandStorm;
+    m_dayConditions["na"] = WeatherData::ConditionNotAvailable;
+    m_dayConditions["N/A"] = WeatherData::ConditionNotAvailable;
+
+    m_nightConditions["sunny"] = WeatherData::ClearNight;
+    m_nightConditions["clear"] = WeatherData::ClearNight;
+    m_nightConditions["clear sky"] = WeatherData::ClearNight;
+    m_nightConditions["sunny intervals"] = WeatherData::FewCloudsNight;
+    m_nightConditions["partly cloudy"] = WeatherData::PartlyCloudyNight;
+    m_nightConditions["white cloud"] = WeatherData::Overcast;
+    m_nightConditions["grey cloud"] = WeatherData::Overcast;
+    m_nightConditions["cloudy"] = WeatherData::Overcast;
+    m_nightConditions["drizzle"] = WeatherData::LightRain;
+    m_nightConditions["misty"] = WeatherData::Mist;
+    m_nightConditions["mist"] = WeatherData::Mist;
+    m_nightConditions["fog"] = WeatherData::Mist;
+    m_nightConditions["foggy"] = WeatherData::Mist;
+    m_nightConditions["dense fog"] = WeatherData::Mist;
+    m_nightConditions["Thick Fog"] = WeatherData::Mist;
+    m_nightConditions["tropical storm"] = WeatherData::Thunderstorm;
+    m_nightConditions["hazy"] = WeatherData::Mist;
+    m_nightConditions["light shower"] = WeatherData::LightShowersNight;
+    m_nightConditions["light rain shower"] = WeatherData::LightShowersNight;
+    m_nightConditions["light showers"] = WeatherData::LightShowersNight;
+    m_nightConditions["light rain"] = WeatherData::ShowersNight;
+    m_nightConditions["heavy rain"] = WeatherData::Rain;
+    m_nightConditions["heavy showers"] = WeatherData::Rain;
+    m_nightConditions["heavy shower"] = WeatherData::Rain;
+    m_nightConditions["heavy rain shower"] = WeatherData::Rain;
+    m_nightConditions["thundery shower"] = WeatherData::Thunderstorm;
+    m_nightConditions["thunderstorm"] = WeatherData::Thunderstorm;
+    m_nightConditions["thunder storm"] = WeatherData::Thunderstorm;
+    m_nightConditions["cloudy with sleet"] = WeatherData::RainSnow;
+    m_nightConditions["sleet shower"] = WeatherData::RainSnow;
+    m_nightConditions["sleet showers"] = WeatherData::RainSnow;
+    m_nightConditions["sleet"] = WeatherData::RainSnow;
+    m_nightConditions["cloudy with hail"] = WeatherData::Hail;
+    m_nightConditions["hail shower"] = WeatherData::Hail;
+    m_nightConditions["hail showers"] = WeatherData::Hail;
+    m_nightConditions["hail"] = WeatherData::Hail;
+    m_nightConditions["light snow"] = WeatherData::LightSnow;
+    m_nightConditions["light snow shower"] = WeatherData::ChanceSnowNight;
+    m_nightConditions["light snow showers"] = WeatherData::ChanceSnowNight;
+    m_nightConditions["cloudy with light snow"] = WeatherData::LightSnow;
+    m_nightConditions["heavy snow"] = WeatherData::Snow;
+    m_nightConditions["heavy snow shower"] = WeatherData::Snow;
+    m_nightConditions["heavy snow showers"] = WeatherData::Snow;
+    m_nightConditions["cloudy with heavy snow"] = WeatherData::Snow;
+    m_nightConditions["sandstorm"] = WeatherData::SandStorm;
+    m_nightConditions["na"] = WeatherData::ConditionNotAvailable;
+    m_nightConditions["N/A"] = WeatherData::ConditionNotAvailable;
+
+    m_windDirections["N"] = WeatherData::N;
+    m_windDirections["NE"] = WeatherData::NE;
+    m_windDirections["ENE"] = WeatherData::ENE;
+    m_windDirections["NNE"] = WeatherData::NNE;
+    m_windDirections["E"] = WeatherData::E;
+    m_windDirections["SSE"] = WeatherData::SSE;
+    m_windDirections["SE"] = WeatherData::SE;
+    m_windDirections["ESE"] = WeatherData::ESE;
+    m_windDirections["S"] = WeatherData::S;
+    m_windDirections["NNW"] = WeatherData::NNW;
+    m_windDirections["NW"] = WeatherData::NW;
+    m_windDirections["WNW"] = WeatherData::WNW;
+    m_windDirections["W"] = WeatherData::W;
+    m_windDirections["SSW"] = WeatherData::SSW;
+    m_windDirections["SW"] = WeatherData::SW;
+    m_windDirections["WSW"] = WeatherData::WSW;
+    m_windDirections["N/A"] = WeatherData::DirectionNotAvailable;
+
+    m_pressureDevelopments["falling"] = WeatherData::Falling;
+    m_pressureDevelopments["no change"] = WeatherData::NoChange;
+    m_pressureDevelopments["steady"] = WeatherData::NoChange;
+    m_pressureDevelopments["rising"] = WeatherData::Rising;
+    m_pressureDevelopments["N/A"] = WeatherData::PressureDevelopmentNotAvailable;
+
+    m_visibilityStates["excellent"] = WeatherData::VeryGood;
+    m_visibilityStates["very good"] = WeatherData::VeryGood;
+    m_visibilityStates["good"] = WeatherData::Good;
+    m_visibilityStates["moderate"] = WeatherData::Normal;
+    m_visibilityStates["poor"] = WeatherData::Poor;
+    m_visibilityStates["very poor"] = WeatherData::VeryPoor;
+    m_visibilityStates["fog"] = WeatherData::Fog;
+    m_visibilityStates["n/a"] = WeatherData::VisibilityNotAvailable;
+
+    m_monthNames["Jan"] = 1;
+    m_monthNames["Feb"] = 2;
+    m_monthNames["Mar"] = 3;
+    m_monthNames["Apr"] = 4;
+    m_monthNames["May"] = 5;
+    m_monthNames["Jun"] = 6;
+    m_monthNames["Jul"] = 7;
+    m_monthNames["Aug"] = 8;
+    m_monthNames["Sep"] = 9;
+    m_monthNames["Oct"] = 10;
+    m_monthNames["Nov"] = 11;
+    m_monthNames["Dec"] = 12;
 }
 
 BBCParser::~BBCParser()
@@ -253,8 +386,8 @@ void BBCParser::readDescription( WeatherData *data )
             if ( pos > -1 ) {
                 QString wind = regExp.cap( 2 );
 
-                if ( windDirections.contains( wind ) ) {
-                    data->setWindDirection( windDirections.value( wind ) );
+                if ( m_windDirections.contains( wind ) ) {
+                    data->setWindDirection( m_windDirections.value( wind ) );
                 }
                 else {
                     mDebug() << "UNHANDLED WIND DIRECTION, PLEASE REPORT: " << wind;
@@ -289,8 +422,8 @@ void BBCParser::readDescription( WeatherData *data )
 
                 QString pressureDevelopment = regExp.cap( 4 );
 
-                if ( pressureDevelopments.contains( pressureDevelopment ) ) {
-                    data->setPressureDevelopment( pressureDevelopments.value( pressureDevelopment ) );
+                if ( m_pressureDevelopments.contains( pressureDevelopment ) ) {
+                    data->setPressureDevelopment( m_pressureDevelopments.value( pressureDevelopment ) );
                 }
                 else {
                     mDebug() << "UNHANDLED PRESSURE DEVELOPMENT, PLEASE REPORT: "
@@ -304,8 +437,8 @@ void BBCParser::readDescription( WeatherData *data )
             if ( pos > -1 ) {
                 QString visibility = regExp.cap( 2 );
 
-                if ( visibilityStates.contains( visibility.toLower() ) ) {
-                    data->setVisibilty( visibilityStates.value( visibility ) );
+                if ( m_visibilityStates.contains( visibility.toLower() ) ) {
+                    data->setVisibilty( m_visibilityStates.value( visibility ) );
                 }
                 else {
                     mDebug() << "UNHANDLED VISIBILITY, PLEASE REPORT: " << visibility;
@@ -340,9 +473,9 @@ void BBCParser::readTitle( WeatherData *data )
             if ( pos > -1 ) {
                 QString value = regExp.cap( 3 );
                 
-                if( dayConditions.contains( value ) ) {
+                if( m_dayConditions.contains( value ) ) {
                     // TODO: Switch for day/night
-                    data->setCondition( dayConditions.value( value ) );
+                    data->setCondition( m_dayConditions.value( value ) );
                 }
                 else {
                     mDebug() << "UNHANDLED BBC WEATHER CONDITION, PLEASE REPORT: " << value;
@@ -406,7 +539,7 @@ void BBCParser::readPubDate( WeatherData *data )
 
                 dateTime.setTimeSpec( Qt::UTC );
                 date.setYMD( regExp.cap( 6 ).toInt(),
-                             monthNames.value( regExp.cap( 4 ) ),
+                             m_monthNames.value( regExp.cap( 4 ) ),
                              regExp.cap( 2 ).toInt() );
                 time.setHMS( regExp.cap( 8 ).toInt(),
                              regExp.cap( 10 ).toInt(),
@@ -429,161 +562,6 @@ void BBCParser::readPubDate( WeatherData *data )
             }
         }
     }
-}
-
-void BBCParser::setupHashes()
-{
-    if( !( ( dayConditions.isEmpty() )
-           || ( nightConditions.isEmpty() )
-           || ( windDirections.isEmpty() )
-           || ( pressureDevelopments.isEmpty() )
-           || ( visibilityStates.isEmpty() )
-           || ( monthNames.isEmpty() ) ) )
-    {
-        return;
-    }
-
-    dayConditions["sunny"] = WeatherData::ClearDay;
-    dayConditions["clear"] = WeatherData::ClearDay;
-    dayConditions["clear sky"] = WeatherData::ClearDay;
-    dayConditions["sunny intervals"] = WeatherData::FewCloudsDay;
-    dayConditions["partly cloudy"] = WeatherData::PartlyCloudyDay;
-    dayConditions["white cloud"] = WeatherData::Overcast;
-    dayConditions["grey cloud"] = WeatherData::Overcast;
-    dayConditions["cloudy"] = WeatherData::Overcast;
-    dayConditions["drizzle"] = WeatherData::LightRain;
-    dayConditions["misty"] = WeatherData::Mist;
-    dayConditions["mist"] = WeatherData::Mist;
-    dayConditions["fog"] = WeatherData::Mist;
-    dayConditions["foggy"] = WeatherData::Mist;
-    dayConditions["dense fog"] = WeatherData::Mist;
-    dayConditions["Thick Fog"] = WeatherData::Mist;
-    dayConditions["tropical storm"] = WeatherData::Thunderstorm;
-    dayConditions["hazy"] = WeatherData::Mist;
-    dayConditions["light shower"] = WeatherData::LightShowersDay;
-    dayConditions["light rain shower"] = WeatherData::LightShowersDay;
-    dayConditions["light showers"] = WeatherData::LightShowersDay;
-    dayConditions["light rain"] = WeatherData::ShowersDay;
-    dayConditions["heavy rain"] = WeatherData::Rain;
-    dayConditions["heavy showers"] = WeatherData::Rain;
-    dayConditions["heavy shower"] = WeatherData::Rain;
-    dayConditions["heavy rain shower"] = WeatherData::Rain;
-    dayConditions["thundery shower"] = WeatherData::Thunderstorm;
-    dayConditions["thunderstorm"] = WeatherData::Thunderstorm;
-    dayConditions["thunder storm"] = WeatherData::Thunderstorm;
-    dayConditions["cloudy with sleet"] = WeatherData::RainSnow;
-    dayConditions["sleet shower"] = WeatherData::RainSnow;
-    dayConditions["sleet showers"] = WeatherData::RainSnow;
-    dayConditions["sleet"] = WeatherData::RainSnow;
-    dayConditions["cloudy with hail"] = WeatherData::Hail;
-    dayConditions["hail shower"] = WeatherData::Hail;
-    dayConditions["hail showers"] = WeatherData::Hail;
-    dayConditions["hail"] = WeatherData::Hail;
-    dayConditions["light snow"] = WeatherData::LightSnow;
-    dayConditions["light snow shower"] = WeatherData::ChanceSnowDay;
-    dayConditions["light snow showers"] = WeatherData::ChanceSnowDay;
-    dayConditions["cloudy with light snow"] = WeatherData::LightSnow;
-    dayConditions["heavy snow"] = WeatherData::Snow;
-    dayConditions["heavy snow shower"] = WeatherData::Snow;
-    dayConditions["heavy snow showers"] = WeatherData::Snow;
-    dayConditions["cloudy with heavy snow"] = WeatherData::Snow;
-    dayConditions["sandstorm"] = WeatherData::SandStorm;
-    dayConditions["na"] = WeatherData::ConditionNotAvailable;
-    dayConditions["N/A"] = WeatherData::ConditionNotAvailable;
-    
-    nightConditions["sunny"] = WeatherData::ClearNight;
-    nightConditions["clear"] = WeatherData::ClearNight;
-    nightConditions["clear sky"] = WeatherData::ClearNight;
-    nightConditions["sunny intervals"] = WeatherData::FewCloudsNight;
-    nightConditions["partly cloudy"] = WeatherData::PartlyCloudyNight;
-    nightConditions["white cloud"] = WeatherData::Overcast;
-    nightConditions["grey cloud"] = WeatherData::Overcast;
-    nightConditions["cloudy"] = WeatherData::Overcast;
-    nightConditions["drizzle"] = WeatherData::LightRain;
-    nightConditions["misty"] = WeatherData::Mist;
-    nightConditions["mist"] = WeatherData::Mist;
-    nightConditions["fog"] = WeatherData::Mist;
-    nightConditions["foggy"] = WeatherData::Mist;
-    nightConditions["dense fog"] = WeatherData::Mist;
-    nightConditions["Thick Fog"] = WeatherData::Mist;
-    nightConditions["tropical storm"] = WeatherData::Thunderstorm;
-    nightConditions["hazy"] = WeatherData::Mist;
-    nightConditions["light shower"] = WeatherData::LightShowersNight;
-    nightConditions["light rain shower"] = WeatherData::LightShowersNight;
-    nightConditions["light showers"] = WeatherData::LightShowersNight;
-    nightConditions["light rain"] = WeatherData::ShowersNight;
-    nightConditions["heavy rain"] = WeatherData::Rain;
-    nightConditions["heavy showers"] = WeatherData::Rain;
-    nightConditions["heavy shower"] = WeatherData::Rain;
-    nightConditions["heavy rain shower"] = WeatherData::Rain;
-    nightConditions["thundery shower"] = WeatherData::Thunderstorm;
-    nightConditions["thunderstorm"] = WeatherData::Thunderstorm;
-    nightConditions["thunder storm"] = WeatherData::Thunderstorm;
-    nightConditions["cloudy with sleet"] = WeatherData::RainSnow;
-    nightConditions["sleet shower"] = WeatherData::RainSnow;
-    nightConditions["sleet showers"] = WeatherData::RainSnow;
-    nightConditions["sleet"] = WeatherData::RainSnow;
-    nightConditions["cloudy with hail"] = WeatherData::Hail;
-    nightConditions["hail shower"] = WeatherData::Hail;
-    nightConditions["hail showers"] = WeatherData::Hail;
-    nightConditions["hail"] = WeatherData::Hail;
-    nightConditions["light snow"] = WeatherData::LightSnow;
-    nightConditions["light snow shower"] = WeatherData::ChanceSnowNight;
-    nightConditions["light snow showers"] = WeatherData::ChanceSnowNight;
-    nightConditions["cloudy with light snow"] = WeatherData::LightSnow;
-    nightConditions["heavy snow"] = WeatherData::Snow;
-    nightConditions["heavy snow shower"] = WeatherData::Snow;
-    nightConditions["heavy snow showers"] = WeatherData::Snow;
-    nightConditions["cloudy with heavy snow"] = WeatherData::Snow;
-    nightConditions["sandstorm"] = WeatherData::SandStorm;
-    nightConditions["na"] = WeatherData::ConditionNotAvailable;
-    nightConditions["N/A"] = WeatherData::ConditionNotAvailable;
-
-    windDirections["N"] = WeatherData::N;
-    windDirections["NE"] = WeatherData::NE;
-    windDirections["ENE"] = WeatherData::ENE;
-    windDirections["NNE"] = WeatherData::NNE;
-    windDirections["E"] = WeatherData::E;
-    windDirections["SSE"] = WeatherData::SSE;
-    windDirections["SE"] = WeatherData::SE;
-    windDirections["ESE"] = WeatherData::ESE;
-    windDirections["S"] = WeatherData::S;
-    windDirections["NNW"] = WeatherData::NNW;
-    windDirections["NW"] = WeatherData::NW;
-    windDirections["WNW"] = WeatherData::WNW;
-    windDirections["W"] = WeatherData::W;
-    windDirections["SSW"] = WeatherData::SSW;
-    windDirections["SW"] = WeatherData::SW;
-    windDirections["WSW"] = WeatherData::WSW;
-    windDirections["N/A"] = WeatherData::DirectionNotAvailable;
-
-    pressureDevelopments["falling"] = WeatherData::Falling;
-    pressureDevelopments["no change"] = WeatherData::NoChange;
-    pressureDevelopments["steady"] = WeatherData::NoChange;
-    pressureDevelopments["rising"] = WeatherData::Rising;
-    pressureDevelopments["N/A"] = WeatherData::PressureDevelopmentNotAvailable;
-
-    visibilityStates["excellent"] = WeatherData::VeryGood;
-    visibilityStates["very good"] = WeatherData::VeryGood;
-    visibilityStates["good"] = WeatherData::Good;
-    visibilityStates["moderate"] = WeatherData::Normal;
-    visibilityStates["poor"] = WeatherData::Poor;
-    visibilityStates["very poor"] = WeatherData::VeryPoor;
-    visibilityStates["fog"] = WeatherData::Fog;
-    visibilityStates["n/a"] = WeatherData::VisibilityNotAvailable;
-
-    monthNames["Jan"] = 1;
-    monthNames["Feb"] = 2;
-    monthNames["Mar"] = 3;
-    monthNames["Apr"] = 4;
-    monthNames["May"] = 5;
-    monthNames["Jun"] = 6;
-    monthNames["Jul"] = 7;
-    monthNames["Aug"] = 8;
-    monthNames["Sep"] = 9;
-    monthNames["Oct"] = 10;
-    monthNames["Nov"] = 11;
-    monthNames["Dec"] = 12;
 }
 
 #include "BBCParser.moc"
