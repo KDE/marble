@@ -58,7 +58,6 @@ class WeatherItemPrivate
           m_priority( 0 ),
           m_browserAction( tr( "Weather" ), parent ),
           m_favoriteAction( parent ),
-          m_browser( 0 ),
           m_parent( parent ),
           m_frameItem( m_parent ),
           m_conditionLabel( &m_frameItem ),
@@ -102,8 +101,8 @@ class WeatherItemPrivate
         updateLabels();
     }
 
-    ~WeatherItemPrivate() {
-        delete m_browser;
+    ~WeatherItemPrivate()
+    {
     }
 
     void updateToolTip()
@@ -302,7 +301,6 @@ class WeatherItemPrivate
     int m_priority;
     QAction m_browserAction;
     QAction m_favoriteAction;
-    TinyWebBrowser *m_browser;
     WeatherItem *m_parent;
     QString m_stationName;
     QHash<QString,QVariant> m_settings;
