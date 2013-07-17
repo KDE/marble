@@ -70,7 +70,6 @@ class WeatherModel : public AbstractDataPluginModel
     void parseFile( const QByteArray& file );
 
  private:
-    void createServices();
     void addService( AbstractWeatherService *service );
 
     bool m_initialized;

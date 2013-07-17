@@ -31,7 +31,10 @@ WeatherModel::WeatherModel( const MarbleModel *marbleModel, QObject *parent )
       m_initialized( false )
 {
     registerItemProperties( WeatherItem::staticMetaObject );
-    createServices();
+
+    // addService( new FakeWeatherService( marbleModel(), this ) );
+    addService( new BBCWeatherService( marbleModel, this ) );
+    addService( new GeoNamesWeatherService( marbleModel, this ) );
 
     m_timer = new QTimer();
     connect( m_timer, SIGNAL(timeout()), SLOT(updateItems()) );
@@ -120,13 +123,6 @@ void WeatherModel::updateItems()
     clear();
     emit additionalItemsRequested( m_lastBox, m_lastNumber );
     emit itemsUpdated();
-}
-
-void WeatherModel::createServices()
-{
-    // addService( new FakeWeatherService( marbleModel(), this ) );
-    addService( new BBCWeatherService( marbleModel(), this ) );
-    addService( new GeoNamesWeatherService( marbleModel(), this ) );
 }
 
 void WeatherModel::downloadDescriptionFileRequested( const QUrl& url )
