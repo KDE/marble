@@ -147,21 +147,13 @@ void WeatherModel::addService( AbstractWeatherService *service )
 
     connect( service, SIGNAL(createdItems(QList<AbstractDataPluginItem*>)),
              this, SLOT(addItemsToList(QList<AbstractDataPluginItem*>)) );
-    connect( service, SIGNAL(requestedDownload(QUrl,
-                                               QString, 
-                                               AbstractDataPluginItem*)),
-             this, SLOT(downloadItemData(QUrl,
-                                         QString,
-                                         AbstractDataPluginItem*)) );
+    connect( service, SIGNAL(requestedDownload(QUrl,QString,AbstractDataPluginItem*)),
+             this, SLOT(downloadItemData(QUrl,QString,AbstractDataPluginItem*)) );
     connect( service, SIGNAL(downloadDescriptionFileRequested(QUrl)),
              this, SLOT(downloadDescriptionFileRequested(QUrl)) );
 
-    connect( this, SIGNAL(additionalItemsRequested(const GeoDataLatLonAltBox,
-                                                   const MarbleModel*,
-                                                   qint32)),
-             service, SLOT(getAdditionalItems(const GeoDataLatLonAltBox,
-                                              const MarbleModel*,
-                                              qint32)) );
+    connect( this, SIGNAL(additionalItemsRequested(GeoDataLatLonAltBox,const MarbleModel*,qint32)),
+             service, SLOT(getAdditionalItems(GeoDataLatLonAltBox,const MarbleModel*,qint32)) );
     connect( this, SIGNAL(parseFileRequested(QByteArray)),
              service, SLOT(parseFile(QByteArray)) );
 
