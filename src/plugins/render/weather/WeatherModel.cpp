@@ -27,8 +27,7 @@
 using namespace Marble;
 
 WeatherModel::WeatherModel( const MarbleModel *marbleModel, QObject *parent )
-    : AbstractDataPluginModel( "weather", marbleModel, parent ),
-      m_initialized( false )
+    : AbstractDataPluginModel( "weather", marbleModel, parent )
 {
     registerItemProperties( WeatherItem::staticMetaObject );
 
@@ -37,7 +36,7 @@ WeatherModel::WeatherModel( const MarbleModel *marbleModel, QObject *parent )
     addService( new GeoNamesWeatherService( marbleModel, this ) );
 
     m_timer = new QTimer();
-    connect( m_timer, SIGNAL(timeout()), SLOT(updateItems()) );
+    connect( m_timer, SIGNAL(timeout()), SLOT(clear()) );
 
     // Default interval = 3 hours
     setUpdateInterval( 3 );
@@ -94,11 +93,6 @@ void WeatherModel::downloadItemData( const QUrl& url,
 void WeatherModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                qint32 number )
 {
-    m_lastBox = box;
-    m_lastNumber = number;
-
-    m_initialized = true;
-
     emit additionalItemsRequested( box, number );
 }
 
@@ -112,13 +106,6 @@ void WeatherModel::getItem( const QString &id )
 void WeatherModel::parseFile( const QByteArray& file )
 {
     emit parseFileRequested( file );
-}
-
-void WeatherModel::updateItems()
-{
-    clear();
-    emit additionalItemsRequested( m_lastBox, m_lastNumber );
-    emit itemsUpdated();
 }
 
 void WeatherModel::downloadDescriptionFileRequested( const QUrl& url )

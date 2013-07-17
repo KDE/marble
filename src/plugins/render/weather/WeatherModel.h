@@ -60,9 +60,6 @@ class WeatherModel : public AbstractDataPluginModel
     void favoriteItemChanged( const QString& id, bool isFavorite );
     void parseFileRequested( const QByteArray& file );
 
- private Q_SLOTS:
-    void updateItems();
-
  protected:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              qint32 number = 10 );
@@ -72,11 +69,8 @@ class WeatherModel : public AbstractDataPluginModel
  private:
     void addService( AbstractWeatherService *service );
 
-    bool m_initialized;
     QList<AbstractWeatherService*> m_services;
     QTimer *m_timer;
-    GeoDataLatLonAltBox m_lastBox;
-    qint32 m_lastNumber;
 };
 
 } // namespace Marble
