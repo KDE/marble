@@ -368,7 +368,6 @@ bool WeatherItem::request( const QString& type )
  
 bool WeatherItem::initialized() const
 {
-    WeatherData current = currentWeather();
     return d->isConditionShown()
            || d->isTemperatureShown()
            || d->isWindDirectionShown()
