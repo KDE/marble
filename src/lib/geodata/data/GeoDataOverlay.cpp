@@ -80,7 +80,7 @@ void GeoDataOverlay::setDrawOrder( int order )
 QImage GeoDataOverlay::icon() const
 {
     if ( d->m_image.isNull() && !d->m_iconPath.isEmpty() ) {
-        d->m_image = QImage( d->m_iconPath );
+        d->m_image = QImage( absoluteIconFile() );
     }
     return d->m_image;
 }
