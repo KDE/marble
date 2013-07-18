@@ -264,13 +264,12 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     GeoDataCoordinates minLatPoint( averageLongitude, minLat(), 0.0, GeoDataCoordinates::Radian );
 
     qreal dummyX, dummyY; // not needed
-    bool dummyVal;
 
-    if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
+    if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY ) ) {
         latLonAltBox.setEast( +M_PI );
         latLonAltBox.setWest( -M_PI );
     }
-    if ( screenCoordinates( minLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
+    if ( screenCoordinates( minLatPoint, viewport, dummyX, dummyY ) ) {
         latLonAltBox.setEast( +M_PI );
         latLonAltBox.setWest( -M_PI );
     }

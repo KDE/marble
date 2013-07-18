@@ -400,8 +400,6 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
 {
     Q_Q( const CylindricalProjection );
 
-    bool globeHidesPoint = false;
-
     qreal xEast = 0;
     qreal xWest = 0;
     qreal y = 0;
@@ -412,8 +410,8 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
     GeoDataCoordinates westCoords( -M_PI, centerLatitude );
     GeoDataCoordinates eastCoords( +M_PI, centerLatitude );
 
-    q->screenCoordinates( westCoords, viewport, xWest, y, globeHidesPoint );
-    q->screenCoordinates( eastCoords, viewport, xEast, y, globeHidesPoint );
+    q->screenCoordinates( westCoords, viewport, xWest, y );
+    q->screenCoordinates( eastCoords, viewport, xEast, y );
 
     if ( xWest <= 0 && xEast >= viewport->width() - 1 ) {
         // mDebug() << "No repeats";
