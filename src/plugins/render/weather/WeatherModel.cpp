@@ -57,10 +57,6 @@ void WeatherModel::setFavoriteItems( const QStringList& list )
         }
 
         AbstractDataPluginModel::setFavoriteItems( list );
-
-        if ( m_initialized && isFavoriteItemsOnly() ) {
-            updateItems();
-        }
     }
 }
 
