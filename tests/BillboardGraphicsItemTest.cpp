@@ -12,6 +12,13 @@
 
 #include "BillboardGraphicsItem.h"
 
+#include "FrameGraphicsItem.h"
+#include "MarbleGraphicsGridLayout.h"
+#include "ViewportParams.h"
+
+#include <QtGui/QImage>
+#include <QtGui/QPainter>
+
 namespace Marble
 {
 
@@ -21,6 +28,8 @@ class BillboardGraphicsItemTest : public QObject
 
  private slots:
     void defaultConstructorValues();
+
+    void paintEvent();
 };
 
 void BillboardGraphicsItemTest::defaultConstructorValues()
@@ -39,6 +48,33 @@ void BillboardGraphicsItemTest::defaultConstructorValues()
     QCOMPARE( item.alignment(), Qt::AlignHCenter | Qt::AlignVCenter );
     QCOMPARE( item.positions(), QList<QPointF>() );
     QCOMPARE( item.boundingRects(), QList<QRectF>() );
+}
+
+void BillboardGraphicsItemTest::paintEvent()
+{
+    BillboardGraphicsItem item;
+    item.setCoordinate( GeoDataCoordinates( 0, 0 ) );
+
+    MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout( 1, 1 );
+    item.setLayout( topLayout );
+
+    FrameGraphicsItem frameItem( &item );
+    frameItem.setSize( QSizeF( 11.2, 11.3 ) );
+    topLayout->addItem( &frameItem, 0, 0 );
+
+    QCOMPARE( item.positions(), QList<QPointF>() );
+    QCOMPARE( item.size(), QSizeF() );
+
+    QImage paintDevice( 100, 100, QImage::Format_ARGB32_Premultiplied );
+    QPainter painter( &paintDevice );
+
+    const ViewportParams viewport( Mercator, 0, 0, 20, paintDevice.size() );
+
+    item.paintEvent( &painter, &viewport );
+
+    QCOMPARE( item.size(), frameItem.size() );
+    QCOMPARE( item.positions().size(), 1 );
+    QCOMPARE( item.positions()[0], QPointF( 44, 44 ) );
 }
 
 }

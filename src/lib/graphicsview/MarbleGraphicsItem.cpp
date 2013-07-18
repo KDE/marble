@@ -41,14 +41,16 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
         return true;
     }
 
+    if ( p()->m_repaintNeeded ) {
+        p()->updateChildPositions();
+        p()->m_pixmap = QPixmap();
+        p()->m_repaintNeeded = false;
+    }
+
     setProjection( viewport );
 
     if ( p()->positions().size() == 0 ) {
         return true;
-    }
-
-    if ( p()->m_repaintNeeded ) {
-        p()->updateChildPositions();
     }
 
     // At the moment, as GraphicsItems can't be zoomed or rotated ItemCoordinateCache
@@ -56,12 +58,12 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
     if ( ItemCoordinateCache == cacheMode()
          || DeviceCoordinateCache == cacheMode() )
     {
-        if ( p()->m_repaintNeeded ) {
-            QSize neededPixmapSize = size().toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
+        const QSize neededPixmapSize = size().toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
+        if ( p()->m_pixmap.size() != neededPixmapSize ) {
 
             if ( p()->m_pixmap.size() != neededPixmapSize ) {
                 if ( size().isValid() && !size().isNull() ) {
-                    p()->m_pixmap = QPixmap( neededPixmapSize ).copy();
+                    p()->m_pixmap = QPixmap( neededPixmapSize );
                 }
                 else {
                     mDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
@@ -80,8 +82,6 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
             foreach ( MarbleGraphicsItem *item, p()->m_children ) {
                 item->paintEvent( &pixmapPainter, viewport );
             }
-
-            p()->m_repaintNeeded = false;
         }
 
         foreach( const QPointF& position, p()->positions() ) {
