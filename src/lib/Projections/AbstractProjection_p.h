@@ -25,8 +25,6 @@ class AbstractProjectionPrivate
     virtual ~AbstractProjectionPrivate() { };
 
 
-    bool   m_repeatX;              // Map repeated in X direction.
-
     qreal  m_maxLat;
     qreal  m_minLat;
 

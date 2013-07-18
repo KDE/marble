@@ -40,8 +40,7 @@ AbstractProjection::~AbstractProjection()
 }
 
 AbstractProjectionPrivate::AbstractProjectionPrivate( AbstractProjection * parent )
-    : m_repeatX(false),
-      m_maxLat(0),
+    : m_maxLat(0),
       m_minLat(0),
       q_ptr( parent)
 {
@@ -89,28 +88,6 @@ void AbstractProjection::setMinLat( qreal minLat )
 
     Q_D( AbstractProjection );
     d->m_minLat = minLat;
-}
-
-bool AbstractProjection::repeatableX() const
-{
-    return true;
-}
-
-bool AbstractProjection::repeatX() const
-{
-    Q_D( const AbstractProjection );
-    return d->m_repeatX;
-}
-
-void AbstractProjection::setRepeatX( bool repeatX )
-{
-    if ( repeatX && !repeatableX() ) {
-        mDebug() << Q_FUNC_INFO << "Trying to repeat a projection that is not repeatable";
-        return;
-    }
-
-    Q_D( AbstractProjection );
-    d->m_repeatX = repeatX;
 }
 
 bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 

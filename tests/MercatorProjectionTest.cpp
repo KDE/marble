@@ -97,7 +97,7 @@ void MercatorProjectionTest::screenCoordinatesValidLat()
         QVERIFY( !globeHidesPoint );
     }
 
-    QVERIFY( viewport.currentProjection()->repeatX() );
+    QVERIFY( viewport.currentProjection()->repeatableX() );
 
     {
         qreal x[2];
@@ -188,7 +188,7 @@ void MercatorProjectionTest::screenCoordinatesOfCenter()
         QCOMPARE( y, 1.0 );
     }
 
-    QVERIFY( viewport.currentProjection()->repeatX() );
+    QVERIFY( viewport.currentProjection()->repeatableX() );
 
     {
         qreal x[2];

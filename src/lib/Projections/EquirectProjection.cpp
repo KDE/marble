@@ -24,7 +24,6 @@ using namespace Marble;
 EquirectProjection::EquirectProjection()
     : CylindricalProjection()
 {
-    setRepeatX( repeatableX() );
     setMinLat( minValidLat() );
     setMaxLat( maxValidLat() );
 }
@@ -134,17 +133,6 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     // Make sure that the requested point is within the visible y range:
     if ( 0 <= y + size.height() / 2.0 && y < height + size.height() / 2.0 ) {
-        // First we deal with the case where the repetition doesn't happen
-        if ( !repeatX() ) {
-            *x = itX;
-            if ( 0 < itX + size.width() / 2.0  && itX < width + size.width() / 2.0 ) {
-                return true;
-            }
-            else {
-                // the requested point is out of the visible x range:
-                return false;
-            }
-        }
         // For the repetition case the same geopoint gets displayed on 
         // the map many times.across the longitude.
 
@@ -260,29 +248,10 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // The remaining algorithm should be pretty generic for all kinds of 
     // flat projections:
 
-    if ( repeatX() ) {
-        int xRepeatDistance = 4 * radius;
-        if ( width >= xRepeatDistance ) {
-            latLonAltBox.setWest( -M_PI );
-            latLonAltBox.setEast( +M_PI );
-        }
-    }
-    else {
-        // We need a point on the screen at maxLat that definitely gets displayed:
-        qreal averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
-    
-        GeoDataCoordinates maxLonPoint( +M_PI, averageLatitude, GeoDataCoordinates::Radian );
-        GeoDataCoordinates minLonPoint( -M_PI, averageLatitude, GeoDataCoordinates::Radian );
-    
-        qreal dummyX, dummyY; // not needed
-        bool dummyVal;
-    
-        if ( screenCoordinates( maxLonPoint, viewport, dummyX, dummyY, dummyVal ) ) {
-            latLonAltBox.setEast( +M_PI );
-        }
-        if ( screenCoordinates( minLonPoint, viewport, dummyX, dummyY, dummyVal ) ) {
-            latLonAltBox.setWest( -M_PI );
-        }
+    int xRepeatDistance = 4 * radius;
+    if ( width >= xRepeatDistance ) {
+        latLonAltBox.setWest( -M_PI );
+        latLonAltBox.setEast( +M_PI );
     }
 
     // Now we need to check whether maxLat (e.g. the north pole) gets displayed

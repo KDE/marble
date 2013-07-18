@@ -82,11 +82,7 @@ class MARBLE_EXPORT AbstractProjection
     qreal  minLat()  const;
     void setMinLat( qreal minLat );
 
-    virtual bool repeatableX() const;
-
-    bool   repeatX() const;
-    void   setRepeatX( bool repeatX );
-
+    virtual bool   repeatableX() const              { return false; }
     virtual bool   traversablePoles()  const        { return false; }
     virtual bool   traversableDateLine()  const     { return false; }
 

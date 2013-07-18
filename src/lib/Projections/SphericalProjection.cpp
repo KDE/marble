@@ -35,7 +35,6 @@ namespace Marble
 SphericalProjection::SphericalProjection()
     : AbstractProjection( new SphericalProjectionPrivate( this ) )
 {
-    setRepeatX( repeatableX() );
     setMinLat( minValidLat() );
     setMaxLat( maxValidLat() );
 }
@@ -43,7 +42,6 @@ SphericalProjection::SphericalProjection()
 SphericalProjection::SphericalProjection( SphericalProjectionPrivate *dd )
         : AbstractProjection( dd )
 {
-    setRepeatX( repeatableX() );
     setMinLat( minValidLat() );
     setMaxLat( maxValidLat() );
 }
