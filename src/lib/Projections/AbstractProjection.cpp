@@ -90,7 +90,16 @@ void AbstractProjection::setMinLat( qreal minLat )
     d->m_minLat = minLat;
 }
 
-bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
+bool AbstractProjection::screenCoordinates( const qreal lon, const qreal lat,
+                                            const ViewportParams *viewport,
+                                            qreal &x, qreal &y ) const
+{
+    bool globeHidesPoint;
+    GeoDataCoordinates geopoint(lon, lat);
+    return screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
+}
+
+bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                                             const ViewportParams *viewport,
                                             qreal &x, qreal &y ) const
 {

@@ -109,9 +109,9 @@ class MARBLE_EXPORT AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const qreal lon, const qreal lat,
-                                    const ViewportParams *viewport,
-                                    qreal& x, qreal& y ) const = 0;
+    bool screenCoordinates( const qreal lon, const qreal lat,
+                            const ViewportParams *viewport,
+                            qreal& x, qreal& y ) const;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.

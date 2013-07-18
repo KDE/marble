@@ -47,42 +47,6 @@ qreal MercatorProjection::minValidLat() const
     return -85.05113 * DEG2RAD;
 }
 
-bool MercatorProjection::screenCoordinates( const qreal lon, const qreal _lat,
-                                            const ViewportParams *viewport,
-                                            qreal& x, qreal& y ) const
-{
-    const bool isLatValid = minLat() <= _lat && _lat <= maxLat();
-
-    qreal lat = _lat;
-    
-    if ( lat > maxLat() ) {
-        lat = maxLat();
-    }
-    if ( lat < minLat() ) {
-        lat = minLat();
-    }
-
-    // Convenience variables
-    int  radius = viewport->radius();
-    qreal  width  = (qreal)(viewport->width());
-    qreal  height = (qreal)(viewport->height());
-
-    qreal  rad2Pixel = 2 * radius / M_PI;
-
-    // Calculate translation of center point
-    const qreal centerLon = viewport->centerLongitude();
-    const qreal centerLat = viewport->centerLatitude();
-
-    // Let (x, y) be the position on the screen of the placemark..
-    x = ( width  / 2 + rad2Pixel * ( lon - centerLon ) );
-    y = ( height / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
-
-    return isLatValid && ( ( 0 <= y && y < height )
-                  && ( ( 0 <= x && x < width )
-                  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
-                  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
-}
-
 bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
                                             qreal &x, qreal &y, bool &globeHidesPoint ) const

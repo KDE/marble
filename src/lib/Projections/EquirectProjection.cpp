@@ -42,33 +42,6 @@ qreal EquirectProjection::minValidLat() const
     return -90.0 * DEG2RAD;
 }
 
-bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
-                                            const ViewportParams *viewport,
-                                            qreal& x, qreal& y ) const
-{
-    // Convenience variables
-    int  radius = viewport->radius();
-    qreal  width  = (qreal)(viewport->width());
-    qreal  height = (qreal)(viewport->height());
-
-    // Calculate translation of center point
-    const qreal centerLon = viewport->centerLongitude();
-    const qreal centerLat = viewport->centerLatitude();
-
-    qreal  rad2Pixel = 2.0 * viewport->radius() / M_PI;
-
-    // Let (x, y) be the position on the screen of the point.
-    x = ( width  / 2.0 + ( lon - centerLon ) * rad2Pixel );
-    y = ( height / 2.0 - ( lat - centerLat ) * rad2Pixel );
-
-    // Return true if the calculated point is inside the screen area,
-    // otherwise return false.
-    return ( ( 0 <= y && y < height )
-             && ( ( 0 <= x && x < width )
-                  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
-                  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
-}
-
 bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
                                             qreal &x, qreal &y, bool &globeHidesPoint ) const

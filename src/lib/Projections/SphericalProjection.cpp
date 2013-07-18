@@ -73,21 +73,6 @@ qreal SphericalProjection::minValidLat() const
     return -90.0 * DEG2RAD;
 }
 
-bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
-                                             const ViewportParams *viewport,
-                                             qreal& x, qreal& y ) const
-{
-    Quaternion p = Quaternion::fromSpherical( lon, lat );
-    p.rotateAroundAxis( viewport->planetAxis().inverse() );
- 
-    x = ( viewport->width()  / 2 + (qreal)( viewport->radius() ) * p.v[Q_X] );
-    y = ( viewport->height() / 2 - (qreal)( viewport->radius() ) * p.v[Q_Y] );
- 
-    return (    ( 0 <= y && y < viewport->height() )
-             && ( 0 <= x && x < viewport->width() ) 
-             && p.v[Q_Z] > 0 );
-}
-
 bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates, 
                                              const ViewportParams *viewport,
                                              qreal &x, qreal &y, bool &globeHidesPoint ) const
