@@ -42,18 +42,18 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
         return true;
     }
 
-    setProjection( viewport );
-
-    if ( p()->positions().size() == 0 ) {
-        return true;
-    }
-
     // Remove the pixmap if it has been requested. This prevents QPixmapCache from being used
     // outside the ui thread.
     if ( p()->m_repaintNeeded ) {
         p()->updateChildPositions();
         p()->m_repaintNeeded = false;
         QPixmapCache::remove( p()->m_cacheKey );
+    }
+
+    setProjection( viewport );
+
+    if ( p()->positions().size() == 0 ) {
+        return true;
     }
 
     // At the moment, as GraphicsItems can't be zoomed or rotated ItemCoordinateCache
