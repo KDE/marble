@@ -74,7 +74,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                   || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
-bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
+bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
                                             const ViewportParams *viewport,
                                             qreal *x, qreal &y,
                                             int &pointRepeatNum,
@@ -91,18 +91,9 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     qreal  width  = (qreal)(viewport->width());
     qreal  height = (qreal)(viewport->height());
 
-    qreal  lon;
-    qreal  lat;
-    qreal  rad2Pixel = 2.0 * radius / M_PI;
-
-    const qreal centerLon = viewport->centerLongitude();
-    const qreal centerLat = viewport->centerLatitude();
-
-    geopoint.geoCoordinates( lon, lat );
-
     // Let (itX, y) be the first guess for one possible position on screen.
-    qreal itX = ( width  / 2.0 + rad2Pixel * ( lon - centerLon ) );
-    y = ( height / 2.0 - rad2Pixel * ( lat - centerLat ) );
+    qreal itX;
+    screenCoordinates( coordinates, viewport, itX, y);
 
     // Make sure that the requested point is within the visible y range:
     if ( 0 <= y + size.height() / 2.0 && y < height + size.height() / 2.0 ) {

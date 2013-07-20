@@ -104,38 +104,14 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
     // obscured by the target planet itself.
     globeHidesPoint = false;
 
-    qreal  lon;
-    qreal  lat;
-
-    coordinates.geoCoordinates( lon, lat );
-
-    const bool isLatValid= minLat() <= lat && lat <= maxLat();
-
-    if ( lat > maxLat() ) {
-        GeoDataCoordinates approxCoords( coordinates );
-        approxCoords.setLatitude( maxLat() );
-        approxCoords.geoCoordinates( lon, lat );
-    }
-
-    if ( lat < minLat() ) {
-        GeoDataCoordinates approxCoords( coordinates );
-        approxCoords.setLatitude( minLat() );
-        approxCoords.geoCoordinates( lon, lat );
-    }
-
     // Convenience variables
     int  radius = viewport->radius();
     qreal  width  = (qreal)(viewport->width());
     qreal  height = (qreal)(viewport->height());
 
-    qreal  rad2Pixel = 2.0 * radius / M_PI;
-
-    const qreal centerLon = viewport->centerLongitude();
-    const qreal centerLat = viewport->centerLatitude();
-
     // Let (itX, y) be the first guess for one possible position on screen..
-    qreal itX = ( width  / 2.0 + rad2Pixel * ( lon - centerLon ) );
-    y = ( height / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
+    qreal itX;
+    screenCoordinates( coordinates, viewport, itX, y);
 
     // Make sure that the requested point is within the visible y range:
     if ( 0 <= y + size.height() / 2.0 && y < height + size.height() / 2.0 ) {
@@ -169,7 +145,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
         pointRepeatNum = itNum;
 
-        return isLatValid && true;
+        return true;
     }
 
     // the requested point is out of the visible y range:

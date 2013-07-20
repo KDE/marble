@@ -128,39 +128,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
                                              bool &globeHidesPoint ) const
 {
     pointRepeatNum = 0;
-    qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
-    Quaternion  qpos             = coordinates.quaternion();
-
-    qpos.rotateAroundAxis( viewport->planetAxisMatrix() );
-
-    qreal      pixelAltitude = ( ( viewport->radius() ) 
-                                  / EARTH_RADIUS * absoluteAltitude );
-    if ( coordinates.altitude() < 10000.0 ) {
-        // Skip placemarks at the other side of the earth.
-        if ( qpos.v[Q_Z] < 0.0 ) {
-            globeHidesPoint = true;
-            return false;
-        }
-    }
-    else {
-        qreal  earthCenteredX = pixelAltitude * qpos.v[Q_X];
-        qreal  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
-        qreal  radius         = viewport->radius();
-
-        // Don't draw high placemarks (e.g. satellites) that aren't visible, 
-        // because they are "behind" the earth
-        if ( qpos.v[Q_Z] < 0.0
-             && ( ( earthCenteredX * earthCenteredX
-                    + earthCenteredY * earthCenteredY )
-                  < radius * radius ) ) {
-            globeHidesPoint = true;
-            return false;
-        }
-    }
-
-    // Let (x, y) be the position on the screen of the placemark..
-    *x = ((qreal)(viewport->width())  / 2.0 + pixelAltitude * qpos.v[Q_X]);
-    y = ((qreal)(viewport->height()) / 2.0 - pixelAltitude * qpos.v[Q_Y]);
+    screenCoordinates( coordinates, viewport, *x, y, globeHidesPoint );
 
     // Skip placemarks that are outside the screen area
     if ( *x + size.width() / 2.0 < 0.0 || *x >= viewport->width() + size.width() / 2.0 
