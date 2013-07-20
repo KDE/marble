@@ -108,25 +108,6 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     return screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
 }
 
-bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
-                                            const ViewportParams *viewport,
-                                            QPointF &screenpoint ) const
-{
-    bool visible;
-    qreal x(0), y(0);
-    visible = screenCoordinates( geopoint, viewport, x, y );
-    screenpoint = QPointF( x,y );
-    return visible;
-}
-
-bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
-                                    const ViewportParams *viewport,
-                                    qreal *x, qreal &y, int &pointRepeatNum, bool &globeHidesPoint ) const
-{
-    return screenCoordinates( coordinates, viewport, x, y, pointRepeatNum, 
-           QSizeF( 0.0, 0.0 ), globeHidesPoint );
-}
-
 GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport ) const
 {

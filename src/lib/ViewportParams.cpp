@@ -373,19 +373,6 @@ bool ViewportParams::screenCoordinates( const GeoDataCoordinates &geopoint,
     return d->m_currentProjection->screenCoordinates( geopoint, this, x, y );
 }
 
-bool ViewportParams::screenCoordinates( const GeoDataCoordinates &geopoint,
-                        QPointF &screenpoint ) const
-{
-    return d->m_currentProjection->screenCoordinates( geopoint, this, screenpoint );
-}
-
-bool ViewportParams::screenCoordinates( const GeoDataCoordinates &coordinates,
-                        qreal *x, qreal &y, int &pointRepeatNum,
-                        bool &globeHidesPoint ) const
-{
-    return d->m_currentProjection->screenCoordinates( coordinates, this, x, y, pointRepeatNum, globeHidesPoint );
-}
-
 bool ViewportParams::screenCoordinates( const GeoDataCoordinates &coordinates,
                         qreal *x, qreal &y, int &pointRepeatNum,
                         const QSizeF& size,

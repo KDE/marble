@@ -209,7 +209,7 @@ void GeoPainter::drawAnnotation( const GeoDataCoordinates & position,
         bubbleSize.setHeight( 2 * yRnd + idealTextHeight );
     }
 
-    bool visible = d->m_viewport->screenCoordinates( position, d->m_x, y, pointRepeatNum, globeHidesPoint );
+    bool visible = d->m_viewport->screenCoordinates( position, d->m_x, y, pointRepeatNum, QSizeF(), globeHidesPoint );
 
     if ( visible ) {
         // Draw all the x-repeat-instances of the point on the screen
@@ -230,7 +230,7 @@ void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
     qreal y;
     bool globeHidesPoint;
 
-    bool visible = d->m_viewport->screenCoordinates( position, d->m_x, y, pointRepeatNum, globeHidesPoint );
+    bool visible = d->m_viewport->screenCoordinates( position, d->m_x, y, pointRepeatNum, QSizeF(), globeHidesPoint );
 
     if ( visible ) {
         // Draw all the x-repeat-instances of the point on the screen

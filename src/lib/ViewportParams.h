@@ -147,9 +147,6 @@ class MARBLE_EXPORT ViewportParams
     bool screenCoordinates( const GeoDataCoordinates &geopoint,
                             qreal &x, qreal &y ) const;
 
-    bool screenCoordinates( const GeoDataCoordinates &geopoint,
-                            QPointF &screenpoint ) const;
-
     /**
      * @brief Get the coordinates of screen points for geographical coordinates in the map.
      *
@@ -165,10 +162,6 @@ class MARBLE_EXPORT ViewportParams
      *
      * @see ViewportParams
      */
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            qreal *x, qreal &y, int &pointRepeatNum,
-                            bool &globeHidesPoint ) const;
-
     bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             qreal *x, qreal &y, int &pointRepeatNum,
                             const QSizeF& size,
