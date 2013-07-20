@@ -360,7 +360,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     }
 
     GeoDataLatLonAltBox box = lineString.latLonAltBox();
-    if( box.width() == 2*M_PI ) {
+    if( lineString.isClosed() && box.width() == 2*M_PI ) {
         QPolygonF *poly = polygons.last();
         if( box.containsPole( NorthPole ) ) {
             poly->push_front( QPointF( poly->first().x(), 0 ) );
