@@ -35,10 +35,10 @@
 namespace Marble
 {
 
-OpenCachingComItem::OpenCachingComItem( QVariantMap cache, QObject *parent )
+OpenCachingComItem::OpenCachingComItem( QVariantMap cache, OpenCachingComModel *parent )
     : AbstractDataPluginItem( parent )
      , m_ui( 0 )
-     , m_model( qobject_cast<OpenCachingComModel*>(parent) )
+     , m_model( parent )
      , m_cache( cache )
      , m_action( new QAction( this ) )
 {
