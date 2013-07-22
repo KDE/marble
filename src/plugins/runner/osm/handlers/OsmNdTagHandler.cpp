@@ -12,11 +12,9 @@
 
 #include "GeoParser.h"
 #include "OsmNodeFactory.h"
-#include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataParser.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
-#include "MarbleDebug.h"
+#include "GeoDataPoint.h"
 #include "OsmElementDictionary.h"
 
 namespace Marble

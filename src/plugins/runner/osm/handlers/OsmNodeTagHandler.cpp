@@ -11,12 +11,9 @@
 #include "OsmNodeTagHandler.h"
 
 #include "GeoParser.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataPoint.h"
-#include "MarbleDebug.h"
 #include "OsmNodeFactory.h"
-#include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataParser.h"
 #include "OsmElementDictionary.h"
 
 namespace Marble
@@ -37,7 +34,7 @@ GeoNode* OsmNodeTagHandler::parse( GeoParser& parser ) const
     qreal lon = parser.attribute( "lon" ).toDouble();
     qreal lat = parser.attribute( "lat" ).toDouble();
 
-    GeoDataPoint *point = new GeoDataPoint( GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree ) );
+    GeoDataPoint *point = new GeoDataPoint( lon, lat, 0, GeoDataCoordinates::Degree );
     osm::OsmNodeFactory::appendPoint( parser.attribute( "id" ).toULongLong(), point );
     return point;
 }
