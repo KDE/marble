@@ -401,11 +401,11 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::RailwayRail]              = GeoDataFeaturePrivate::createStyle( 2, 5, "#989898", "#E1E1E1", true, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, true );
     s_defaultStyle[GeoDataFeature::RailwayTram]              = GeoDataFeaturePrivate::createStyle( 1, 4, "#989898", "#989898", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
     s_defaultStyle[GeoDataFeature::RailwayLightRail]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
-    s_defaultStyle[GeoDataFeature::RailwayAbandoned]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[GeoDataFeature::RailwayAbandoned]         = GeoDataFeaturePrivate::createStyle( 2, 5, Qt::transparent, "#989898", false, false, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false );
     s_defaultStyle[GeoDataFeature::RailwaySubway]            = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
-    s_defaultStyle[GeoDataFeature::RailwayPreserved]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[GeoDataFeature::RailwayPreserved]         = GeoDataFeaturePrivate::createStyle( 2, 5, "#E1E1E1", "#989898", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, true );
     s_defaultStyle[GeoDataFeature::RailwayMiniature]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
-    s_defaultStyle[GeoDataFeature::RailwayConstruction]      = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[GeoDataFeature::RailwayConstruction]      = GeoDataFeaturePrivate::createStyle( 2, 5, "#E1E1E1", "#989898", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, true );
     s_defaultStyle[GeoDataFeature::RailwayMonorail]          = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
     s_defaultStyle[GeoDataFeature::RailwayFunicular]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
 
@@ -927,6 +927,7 @@ void GeoDataFeaturePrivate::initializeOsmVisualCategories()
     s_visualCategories["railway=rail"]               = GeoDataFeature::RailwayRail;
     s_visualCategories["railway=tram"]               = GeoDataFeature::RailwayTram;
     s_visualCategories["railway=light_rail"]         = GeoDataFeature::RailwayLightRail;
+    s_visualCategories["railway=preserved"]          = GeoDataFeature::RailwayPreserved;
     s_visualCategories["railway=abandoned"]          = GeoDataFeature::RailwayAbandoned;
     s_visualCategories["railway=disused"]            = GeoDataFeature::RailwayAbandoned;
     s_visualCategories["railway=subway"]             = GeoDataFeature::RailwaySubway;
