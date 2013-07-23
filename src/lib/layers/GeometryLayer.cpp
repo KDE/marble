@@ -244,9 +244,9 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->save();
 
-    int maxZoomLevel = qMin<int>( qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 ), GeometryLayerPrivate::maximumZoomLevel() );
-
+    int maxZoomLevel = qMin<int>( qMax<int>( qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 ), 1), GeometryLayerPrivate::maximumZoomLevel() );
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
+
     int painted = 0;
     foreach( GeoGraphicsItem* item, items )
     {
