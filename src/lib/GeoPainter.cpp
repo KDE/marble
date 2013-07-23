@@ -489,7 +489,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
     QVector<QPolygonF*> polygons;
     d->m_viewport->screenCoordinates( lineString, polygons );
 
-    if ( labelText.isEmpty() ) {
+    if ( labelText.isEmpty() || labelPositionFlags.testFlag( NoLabel ) ) {
         foreach( QPolygonF* itPolygon, polygons ) {
             ClipPainter::drawPolyline( *itPolygon );
         }
