@@ -341,7 +341,7 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
         qreal boldDegreeStep = 360.0 / m_boldLineMap.lowerBound(viewport->radius()).value();
 
         renderLongitudeLines( painter, viewLatLonAltBox,
-                            boldDegreeStep, normalDegreeStep,
+                            boldDegreeStep, normalDegreeStep, normalDegreeStep,
                             NoLabel
                             );
         renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep,
