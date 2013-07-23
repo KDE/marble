@@ -37,7 +37,7 @@ const GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 
 void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
-    LabelPositionFlags label_position_flags = NoLabel;
+    LabelPositionFlags labelPositionFlags = NoLabel;
 
     painter->save();
 
@@ -90,13 +90,17 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
 
         // label styles
         painter->setFont( style()->labelStyle().font() );
-        if ( style()->labelStyle().alignment() == GeoDataLabelStyle::Corner )
-            label_position_flags |= LineStart;
-        if ( style()->labelStyle().alignment() == GeoDataLabelStyle::Center )
-            label_position_flags |= LineCenter;
+        switch ( style()->labelStyle().alignment() ) {
+        case GeoDataLabelStyle::Corner:
+            labelPositionFlags |= LineStart;
+            break;
+        case GeoDataLabelStyle::Center:
+            labelPositionFlags |= LineCenter;
+            break;
+        }
     }
 
-    painter->drawPolyline( *m_lineString, feature()->name(), label_position_flags );
+    painter->drawPolyline( *m_lineString, feature()->name(), labelPositionFlags );
 
     painter->restore();
 }
