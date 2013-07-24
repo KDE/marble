@@ -111,7 +111,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
     // Let (itX, y) be the first guess for one possible position on screen..
     qreal itX;
-    screenCoordinates( coordinates, viewport, itX, y);
+    bool visible = screenCoordinates( coordinates, viewport, itX, y);
 
     // Make sure that the requested point is within the visible y range:
     if ( 0 <= y + size.height() / 2.0 && y < height + size.height() / 2.0 ) {
@@ -145,7 +145,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
         pointRepeatNum = itNum;
 
-        return true;
+        return visible && true;
     }
 
     // the requested point is out of the visible y range:
