@@ -50,6 +50,8 @@ GraticulePlugin::GraticulePlugin( const MarbleModel *marbleModel )
       m_equatorCirclePen( Qt::yellow ),
       m_tropicsCirclePen( Qt::yellow ),
       m_gridCirclePen( Qt::white ),
+      m_showPrimaryLabels( true ),
+      m_showSecondaryLabels( true ),
       m_isInitialized( false ),
       ui_configWidget( 0 ),
       m_configDialog( 0 )
@@ -163,6 +165,8 @@ QHash<QString,QVariant> GraticulePlugin::settings() const
     settings.insert( "gridColor", m_gridCirclePen.color().name() );
     settings.insert( "tropicsColor", m_tropicsCirclePen.color().name() );
     settings.insert( "equatorColor", m_equatorCirclePen.color().name() );
+    settings.insert( "primarylabels", m_showPrimaryLabels );
+    settings.insert( "secondaryLabels", m_showSecondaryLabels );
 
     return settings;
 }
@@ -174,10 +178,15 @@ void GraticulePlugin::setSettings( const QHash<QString,QVariant> &settings )
     const QColor gridColor = settings.value( "gridColor", QColor( Qt::white ) ).value<QColor>();
     const QColor tropicsColor = settings.value( "tropicsColor", QColor( Qt::yellow ) ).value<QColor>();
     const QColor equatorColor = settings.value( "equatorColor", QColor( Qt::yellow ) ).value<QColor>();
+    bool primaryLabels = settings.value( "primaryLabels", true ).toBool();
+    bool secondaryLabels = settings.value( "secondaryLabels", true ).toBool();
 
     m_gridCirclePen.setColor( gridColor );
     m_tropicsCirclePen.setColor( tropicsColor );
     m_equatorCirclePen.setColor( equatorColor );
+
+    m_showPrimaryLabels = primaryLabels;
+    m_showSecondaryLabels = secondaryLabels;
 
     readSettings();
 }
@@ -200,6 +209,8 @@ void GraticulePlugin::readSettings()
     QPalette equatorPalette;
     equatorPalette.setColor( QPalette::Button, m_equatorCirclePen.color() );
     ui_configWidget->equatorPushButton->setPalette( equatorPalette );
+    ui_configWidget->primaryCheckBox->setChecked( m_showPrimaryLabels );
+    ui_configWidget->secondaryCheckBox->setChecked( m_showSecondaryLabels );
 }
 
 void GraticulePlugin::gridGetColor()
@@ -240,6 +251,8 @@ void GraticulePlugin::writeSettings()
     m_equatorCirclePen.setColor( ui_configWidget->equatorPushButton->palette().color( QPalette::Button ) );
     m_tropicsCirclePen.setColor( ui_configWidget->tropicsPushButton->palette().color( QPalette::Button ) );
     m_gridCirclePen.setColor( ui_configWidget->gridPushButton->palette().color( QPalette::Button) );
+    m_showPrimaryLabels = ui_configWidget->primaryCheckBox->isChecked();
+    m_showSecondaryLabels = ui_configWidget->secondaryCheckBox->isChecked();
 
     emit settingsChanged( nameId() );
 }
@@ -318,11 +331,16 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
     // calculate the angular distance between coordinate lines of the normal grid
     qreal normalDegreeStep = 360.0 / m_normalLineMap.lowerBound(viewport->radius()).value();
 
+    LabelPositionFlags labelXPosition(NoLabel), labelYPosition(NoLabel);
+    if ( m_showSecondaryLabels ) {
+        labelXPosition = LineStart | IgnoreXMargin;
+        labelYPosition = LineStart | IgnoreYMargin;
+    }
     renderLongitudeLines( painter, viewLatLonAltBox,
                           normalDegreeStep, normalDegreeStep, normalDegreeStep,
-                          LineStart | IgnoreXMargin );
+                          labelXPosition );
     renderLatitudeLines(  painter, viewLatLonAltBox, normalDegreeStep,
-                          LineStart | IgnoreYMargin );
+                          labelYPosition );
 
     // Render some non-cut off longitude lines ..
     renderLongitudeLine( painter, +90.0, viewLatLonAltBox );
@@ -350,14 +368,18 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
                             
     painter->setPen( equatorCirclePen );
 
+    LabelPositionFlags mainPosition(NoLabel);
+    if ( m_showPrimaryLabels ) {
+        mainPosition = LineCenter;
+    }
     // Render the equator
-    renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ) );
+    renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ), mainPosition );
 
     // Render the Prime Meridian and Antimeridian
     GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
     if (marbleModel()->planet()->id() != "sky" && notation != GeoDataCoordinates::Astro) {
-        renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, 0.0, tr( "Prime Meridian" ) );
-        renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, 0.0, tr( "Antimeridian" ) );
+        renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, 0.0, tr( "Prime Meridian" ), mainPosition );
+        renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, 0.0, tr( "Antimeridian" ), mainPosition );
     }
 
     QPen tropicsPen = tropicsCirclePen;
@@ -372,12 +394,12 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
 
     if ( axialTilt > 0 ) {
         // Render the tropics
-        renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox, tr( "Tropic of Cancer" )  );
-        renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ) );
+        renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox, tr( "Tropic of Cancer" ), mainPosition  );
+        renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ), mainPosition );
 
         // Render the arctics
-        renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ) );
-        renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ) );
+        renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ), mainPosition );
+        renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ), mainPosition );
     }    
 }
 

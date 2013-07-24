@@ -1380,6 +1380,40 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>&amp;Named Labels:</string>
+        </property>
+        <property name="buddy">
+         <cstring>primaryCheckBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="primaryCheckBox">
+        <property name="toolTip">
+         <string>Show Labels for Prime meridian, Equator, Tropics.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>&amp;Numerical Labels:</string>
+        </property>
+        <property name="buddy">
+         <cstring>secondaryCheckBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="secondaryCheckBox">
+        <property name="toolTip">
+         <string>Show numerical Labels.</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

@@ -219,6 +219,8 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
     QPen m_equatorCirclePen;
     QPen m_tropicsCirclePen;
     QPen m_gridCirclePen;
+    bool m_showPrimaryLabels;
+    bool m_showSecondaryLabels;
 
     bool m_isInitialized;
 
