@@ -14,7 +14,7 @@
 #include "TileCreatorDialog.h"
 
 // Qt
-#include <QtCore/QTimer>
+#include <QTimer>
 
 // Marble
 #include "MarbleDebug.h"

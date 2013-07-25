@@ -10,7 +10,7 @@
 
 #include "XmlParser.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 namespace Marble
 {

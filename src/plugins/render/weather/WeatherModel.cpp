@@ -12,8 +12,8 @@
 #include "WeatherModel.h"
 
 // Qt
-#include <QtCore/QTimer>
-#include <QtCore/QUrl>
+#include <QTimer>
+#include <QUrl>
 
 // Marble
 #include "BBCWeatherService.h"

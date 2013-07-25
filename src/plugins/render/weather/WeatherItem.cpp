@@ -27,17 +27,17 @@
 #include "layers/PopupLayer.h"
 
 // Qt
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDate>
-#include <QtCore/QHash>
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtGui/QAction>
-#include <QtGui/QBrush>
-#include <QtGui/QIcon>
-#include <QtGui/QFontMetrics>
-#include <QtGui/QPushButton>
-#include <QtSvg/QSvgRenderer>
+#include <QCoreApplication>
+#include <QDate>
+#include <QHash>
+#include <QObject>
+#include <QString>
+#include <QAction>
+#include <QBrush>
+#include <QIcon>
+#include <QFontMetrics>
+#include <QPushButton>
+#include <QSvgRenderer>
 
 namespace Marble
 {

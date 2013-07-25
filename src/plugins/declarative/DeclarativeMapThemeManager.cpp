@@ -13,9 +13,9 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 
-#include <QtGui/QIcon>
-#include <QtGui/QStandardItemModel>
-#include <QtCore/QDebug>
+#include <QIcon>
+#include <QStandardItemModel>
+#include <QDebug>
 
 MapThemeImageProvider::MapThemeImageProvider() :
         QDeclarativeImageProvider( QDeclarativeImageProvider::Pixmap )

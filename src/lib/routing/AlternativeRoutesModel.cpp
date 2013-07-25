@@ -17,8 +17,8 @@
 #include "MarbleMath.h"
 #include "RoutingModel.h"
 
-#include <QtCore/QTimer>
-#include <QtGui/QPainter>
+#include <QTimer>
+#include <QPainter>
 
 namespace Marble {
 

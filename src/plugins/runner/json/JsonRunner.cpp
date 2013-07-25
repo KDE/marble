@@ -14,7 +14,7 @@
 #include "GeoDataDocument.h"
 #include "MarbleDebug.h"
 
-#include <QtCore/QFile>
+#include <QFile>
 #include <QFileInfo>
 
 namespace Marble

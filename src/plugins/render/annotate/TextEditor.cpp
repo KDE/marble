@@ -14,12 +14,12 @@
 #include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QLineEdit>
-#include <QtGui/QToolButton>
-#include <QtGui/QTextEdit>
-#include <QtGui/QHBoxLayout>
+#include <QAction>
+#include <QApplication>
+#include <QLineEdit>
+#include <QToolButton>
+#include <QTextEdit>
+#include <QHBoxLayout>
 
 
 namespace Marble

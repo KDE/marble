@@ -13,11 +13,11 @@
 #include "GeoDataTreeModel.h"
 
 // Qt
-#include <QtCore/QModelIndex>
-#include <QtCore/QFile>
-#include <QtCore/QList>
-#include <QtGui/QPixmap>
-#include <QtGui/QItemSelectionModel>
+#include <QModelIndex>
+#include <QFile>
+#include <QList>
+#include <QPixmap>
+#include <QItemSelectionModel>
 
 // Marble
 #include "GeoDataObject.h"

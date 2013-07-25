@@ -15,10 +15,10 @@
 #include <marble/GeoDataLineString.h>
 #include <marble/LayerInterface.h>
 
-#include <QtCore/QTime>
-#include <QtCore/QTimer>
-#include <QtGui/QApplication>
-#include <QtGui/QKeyEvent>
+#include <QTime>
+#include <QTimer>
+#include <QApplication>
+#include <QKeyEvent>
 
 using namespace Marble;
 

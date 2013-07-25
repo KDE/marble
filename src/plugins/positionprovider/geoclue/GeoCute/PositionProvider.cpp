@@ -10,9 +10,9 @@
 
 #include "PositionProvider_p.h"
 
-#include <QtCore/QList>
-#include <QtCore/QVariant>
-#include <QtDBus/QDBusReply>
+#include <QList>
+#include <QVariant>
+#include <QDBusReply>
 
 #include "MasterClient.h"
 

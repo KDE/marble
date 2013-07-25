@@ -10,7 +10,7 @@
 
 #include "MaemoPositionProviderPlugin.h"
 
-#include <QtCore/QTimer>
+#include <QTimer>
 
 #include <location/location-gps-device.h>
 #include <location/location-gpsd-control.h>

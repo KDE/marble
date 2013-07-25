@@ -12,13 +12,13 @@
 
 #include "logger.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QProcess>
-#include <QtCore/QDateTime>
-#include <QtCore/QDir>
-#include <QtCore/QTemporaryFile>
-#include <QtCore/QUrl>
-#include <QtXml/QDomDocument>
+#include <QDebug>
+#include <QProcess>
+#include <QDateTime>
+#include <QDir>
+#include <QTemporaryFile>
+#include <QUrl>
+#include <QDomDocument>
 
 Upload::Upload(QObject *parent) :
     QObject(parent), m_uploadFiles(true)

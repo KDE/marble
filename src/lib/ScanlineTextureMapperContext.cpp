@@ -11,7 +11,7 @@
 
 #include "ScanlineTextureMapperContext.h"
 
-#include <QtGui/QImage>
+#include <QImage>
 
 #include "MarbleDebug.h"
 #include "StackedTile.h"

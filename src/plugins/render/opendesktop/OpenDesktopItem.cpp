@@ -9,7 +9,7 @@
 // Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-#include <QtGui/QPainter>
+#include <QPainter>
 #include "OpenDesktopItem.h"
 #include "ViewportParams.h"
 #include "layers/PopupLayer.h"

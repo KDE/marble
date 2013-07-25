@@ -14,7 +14,7 @@
 
 #include "PbfParser.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 #include <zlib.h>
 

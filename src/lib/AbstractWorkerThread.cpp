@@ -13,7 +13,7 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QMutex>
+#include <QMutex>
 
 namespace Marble
 {

@@ -38,8 +38,8 @@
 #include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
+#include <QFile>
+#include <QFileInfo>
 
 namespace Marble
 {

@@ -8,8 +8,8 @@
 // Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
 //
 
-#include <QtCore/QObject>
-#include <QtTest/QtTest>
+#include <QObject>
+#include <QtTest>
 
 #include "TestUtils.h"
 #include <GeoDataDocument.h>

@@ -28,17 +28,17 @@
 
 // Qt
 #include <QResizeEvent>
-#include <QtCore/QFileInfo>
-#include <QtCore/QSettings>
-#include <QtGui/QMenu>
-#include <QtGui/QMessageBox>
-#include <QtGui/QStandardItemModel>
-#include <QtGui/QGridLayout>
-#include <QtGui/QPainter>
+#include <QFileInfo>
+#include <QSettings>
+#include <QMenu>
+#include <QMessageBox>
+#include <QStandardItemModel>
+#include <QGridLayout>
+#include <QPainter>
 #include <QToolBar>
 #include <QToolButton>
-#include <QtGui/QTextDocument>
-#include <QtGui/QAbstractTextDocumentLayout>
+#include <QTextDocument>
+#include <QAbstractTextDocumentLayout>
 
 using namespace Marble;
 // Ui

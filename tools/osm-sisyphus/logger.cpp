@@ -10,11 +10,11 @@
 
 #include "logger.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QVariant>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
+#include <QDebug>
+#include <QVariant>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
 
 class LoggerPrivate
 {

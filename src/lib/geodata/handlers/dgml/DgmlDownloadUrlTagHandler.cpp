@@ -23,7 +23,7 @@
 #include "DgmlDownloadUrlTagHandler.h"
 
 // Qt
-#include <QtCore/QUrl>
+#include <QUrl>
 
 // Marble
 #include "DgmlAttributeDictionary.h"

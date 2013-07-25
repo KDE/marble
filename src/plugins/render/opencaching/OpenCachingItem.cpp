@@ -12,8 +12,8 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
-#include <QtGui/QFontMetrics>
-#include <QtGui/QPixmap>
+#include <QFontMetrics>
+#include <QPixmap>
 
 #include "ui_OpenCachingCacheDialog.h"
 

@@ -16,7 +16,7 @@
 #include "ui_MarbleAboutDialog.h"
 
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 namespace Marble
 {

@@ -18,10 +18,10 @@
 #include "MarbleDebug.h"
 #include "OpenCachingCache.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QString>
-#include <QtCore/QUrl>
-#include <QtXml/QXmlStreamReader>
+#include <QDebug>
+#include <QString>
+#include <QUrl>
+#include <QXmlStreamReader>
 
 namespace Marble {
 

@@ -21,11 +21,11 @@
 
 #include "sgp4/sgp4ext.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QDateTime>
-#include <QtGui/QAction>
-#include <QtGui/QLabel>
-#include <QtGui/QVBoxLayout>
+#include <QFile>
+#include <QDateTime>
+#include <QAction>
+#include <QLabel>
+#include <QVBoxLayout>
 #include <QColor>
 
 #include <cmath>

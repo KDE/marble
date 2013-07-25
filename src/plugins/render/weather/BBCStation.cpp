@@ -15,8 +15,8 @@
 #include "GeoDataCoordinates.h"
 
 // Qt
-#include <QtCore/QAtomicInt>
-#include <QtCore/QString>
+#include <QAtomicInt>
+#include <QString>
 
 namespace Marble
 {

@@ -11,9 +11,9 @@
 #include "GeoPainter.h"
 #include "GeoPainter_p.h"
 
-#include <QtCore/QList>
-#include <QtGui/QPainterPath>
-#include <QtGui/QRegion>
+#include <QList>
+#include <QPainterPath>
+#include <QRegion>
 
 #include "MarbleDebug.h"
 

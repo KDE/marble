@@ -8,8 +8,8 @@
 // Copyright 2011      Niko Sams <niko.sams@gmail.com>
 //
 
-#include <QtCore/QObject>
-#include <QtTest/QtTest>
+#include <QObject>
+#include <QtTest>
 
 #include "GeoDataPoint.h"
 #include "GeoDataLinearRing.h"

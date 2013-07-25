@@ -10,7 +10,7 @@
 
 #include "OsmRegion.h"
 
-#include <QtCore/QList>
+#include <QList>
 
 namespace Marble
 {

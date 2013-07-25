@@ -10,7 +10,7 @@
 
 #include "VelocityProvider_p.h"
 
-#include <QtDBus/QDBusReply>
+#include <QDBusReply>
 
 
 

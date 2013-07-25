@@ -10,7 +10,7 @@
 
 #include "RoutingWaypoint.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 namespace Marble
 {

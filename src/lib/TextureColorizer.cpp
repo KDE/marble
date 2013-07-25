@@ -13,15 +13,15 @@
 
 #include "TextureColorizer.h"
 
-#include <QtCore/qmath.h>
-#include <QtCore/QFile>
-#include <QtCore/QSharedPointer>
-#include <QtCore/QString>
-#include <QtCore/QVector>
-#include <QtCore/QTime>
-#include <QtGui/QColor>
-#include <QtGui/QImage>
-#include <QtGui/QPainter>
+#include <qmath.h>
+#include <QFile>
+#include <QSharedPointer>
+#include <QString>
+#include <QVector>
+#include <QTime>
+#include <QColor>
+#include <QImage>
+#include <QPainter>
 
 #include "MarbleGlobal.h"
 #include "GeoPainter.h"

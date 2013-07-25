@@ -15,7 +15,7 @@
 
 #include "BlendingFactory.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 #include "blendings/SunLightBlending.h"
 #include "BlendingAlgorithms.h"

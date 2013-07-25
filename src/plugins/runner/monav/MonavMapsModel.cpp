@@ -10,7 +10,7 @@
 
 #include "MonavMapsModel.h"
 
-#include <QtCore/QDate>
+#include <QDate>
 
 namespace Marble
 {

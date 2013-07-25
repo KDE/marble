@@ -16,9 +16,9 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 
-#include <QtCore/QString>
-#include <QtCore/QVector>
-#include <QtCore/QUrl>
+#include <QString>
+#include <QVector>
+#include <QUrl>
 
 namespace Marble
 {

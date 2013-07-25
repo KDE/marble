@@ -14,15 +14,15 @@
 #include "TinyWebBrowser.h"
 
 // Qt
-#include <QtCore/QFileInfo>
-#include <QtCore/QPointer>
-#include <QtCore/QRegExp>
-#include <QtGui/QAction>
-#include <QtGui/QDesktopServices>
-#include <QtGui/QPainter>
-#include <QtGui/QPrintDialog>
-#include <QtGui/QPrinter>
-#include <QtGui/QTextFrame>
+#include <QFileInfo>
+#include <QPointer>
+#include <QRegExp>
+#include <QAction>
+#include <QDesktopServices>
+#include <QPainter>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QTextFrame>
 
 // Marble
 #include "MarbleGlobal.h"

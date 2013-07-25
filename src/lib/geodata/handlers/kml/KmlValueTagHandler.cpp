@@ -17,7 +17,7 @@
 #include "GeoDataSimpleArrayData.h"
 #include "GeoParser.h"
 
-#include <QtCore/QVariant>
+#include <QVariant>
 
 namespace Marble
 {

@@ -13,8 +13,8 @@
 #include "ui_MarblePluginSettingsWidget.h"
 
 // Qt
-#include <QtCore/QPointer>
-#include <QtGui/QDialog>
+#include <QPointer>
+#include <QDialog>
 
 // Marble
 #include "DialogConfigurationInterface.h"

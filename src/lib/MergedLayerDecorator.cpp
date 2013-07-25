@@ -39,9 +39,9 @@
 #include "TileLoader.h"
 
 
-#include <QtCore/QMutexLocker>
-#include <QtCore/QPointer>
-#include <QtGui/QPainter>
+#include <QMutexLocker>
+#include <QPointer>
+#include <QPainter>
 
 using namespace Marble;
 

@@ -24,7 +24,7 @@
 #include "MarbleWidget.h"
 #include "NewBookmarkFolderDialog.h"
 
-#include <QtCore/QPointer>
+#include <QPointer>
 
 namespace Marble {
 

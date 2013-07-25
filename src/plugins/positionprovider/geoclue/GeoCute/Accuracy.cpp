@@ -10,7 +10,7 @@
 
 #include "Accuracy.h"
 
-#include <QtDBus/QDBusArgument>
+#include <QDBusArgument>
 
 
 

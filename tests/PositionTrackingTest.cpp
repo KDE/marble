@@ -8,7 +8,7 @@
 // Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "GeoDataTreeModel.h"
 #include "PositionProviderPlugin.h"

@@ -16,7 +16,7 @@
 #include "GeoDataLineString.h"
 #include "ViewportParams.h"
 
-#include <QtCore/QTimeLine>
+#include <QTimeLine>
 
 namespace Marble
 {

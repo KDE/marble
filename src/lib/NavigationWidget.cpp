@@ -28,9 +28,9 @@
 #include "ViewportParams.h"
 
 // Qt
-#include <QtCore/QTime>
-#include <QtCore/QTimer>
-#include <QtGui/QSortFilterProxyModel>
+#include <QTime>
+#include <QTimer>
+#include <QSortFilterProxyModel>
 
 using namespace Marble;
 

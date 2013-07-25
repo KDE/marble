@@ -11,16 +11,16 @@
 
 #include "FileViewFloatItem.h"
 
-#include <QtCore/QRect>
-#include <QtCore/QPoint>
-#include <QtGui/QApplication>
-#include <QtGui/QFileDialog>
-#include <QtGui/QListView>
-#include <QtGui/QListWidget>
-#include <QtGui/QMenu>
-#include <QtGui/QPixmap>
-#include <QtGui/QSlider>
-#include <QtGui/QMouseEvent>
+#include <QRect>
+#include <QPoint>
+#include <QApplication>
+#include <QFileDialog>
+#include <QListView>
+#include <QListWidget>
+#include <QMenu>
+#include <QPixmap>
+#include <QSlider>
+#include <QMouseEvent>
 
 #include "MarbleDebug.h"
 #include "FileViewModel.h"

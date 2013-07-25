@@ -9,8 +9,8 @@
 // Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 // Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
-#include <QtTest/QtTest>
-#include <QtGui/QApplication>
+#include <QtTest>
+#include <QApplication>
 #include "MarbleGlobal.h"
 #include "MarbleWidget.h"
 #include "AbstractFloatItem.h"

@@ -20,9 +20,9 @@
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
 
-#include <QtCore/QProcess>
-#include <QtCore/QTime>
-#include <QtNetwork/QLocalSocket>
+#include <QProcess>
+#include <QTime>
+#include <QLocalSocket>
 
 using namespace MoNav;
 

@@ -11,7 +11,7 @@
 
 
 #include "svgxmlhandler.h"
-#include <QtCore/QDebug>
+#include <QDebug>
 
 SVGXmlHandler::SVGXmlHandler( QDataStream * out, const QString & path, int header )
     : m_stream(out),

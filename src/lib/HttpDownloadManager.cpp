@@ -12,10 +12,10 @@
 
 #include "HttpDownloadManager.h"
 
-#include <QtCore/QList>
-#include <QtCore/QMap>
-#include <QtCore/QTimer>
-#include <QtNetwork/QNetworkAccessManager>
+#include <QList>
+#include <QMap>
+#include <QTimer>
+#include <QNetworkAccessManager>
 
 #include "DownloadPolicy.h"
 #include "DownloadQueueSet.h"

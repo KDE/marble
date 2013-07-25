@@ -33,13 +33,13 @@
 #include "layers/PopupLayer.h"
 
 // Qt
-#include <QtGui/QAction>
-#include <QtGui/QIcon>
-#include <QtCore/QFile>
-#include <QtCore/QHash>
-#include <QtCore/QUrl>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QPixmap>
+#include <QAction>
+#include <QIcon>
+#include <QFile>
+#include <QHash>
+#include <QUrl>
+#include <QMouseEvent>
+#include <QPixmap>
 
 using namespace Marble;
 

@@ -21,7 +21,7 @@
 #include "ServerLayout.h"
 #include "TileId.h"
 
-#include <QtGui/QImage>
+#include <QImage>
 
 namespace Marble
 {

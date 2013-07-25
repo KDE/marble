@@ -12,7 +12,7 @@
 #include "FileViewWidget.h"
 
 // Qt
-#include <QtGui/QSortFilterProxyModel>
+#include <QSortFilterProxyModel>
 
 // Marble
 #include "GeoDataContainer.h"

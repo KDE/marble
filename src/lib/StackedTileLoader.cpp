@@ -32,10 +32,10 @@
 #include "TileLoaderHelper.h"
 #include "MarbleGlobal.h"
 
-#include <QtCore/QCache>
-#include <QtCore/QHash>
-#include <QtCore/QReadWriteLock>
-#include <QtGui/QImage>
+#include <QCache>
+#include <QHash>
+#include <QReadWriteLock>
+#include <QImage>
 
 
 namespace Marble

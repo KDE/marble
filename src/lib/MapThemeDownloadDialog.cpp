@@ -16,10 +16,10 @@
 #include "NewstuffModel.h"
 #include "MarbleWidget.h"
 
-#include <QtGui/QPainter>
-#include <QtGui/QTextDocument>
-#include <QtGui/QAbstractTextDocumentLayout>
-#include <QtGui/QStyledItemDelegate>
+#include <QPainter>
+#include <QTextDocument>
+#include <QAbstractTextDocumentLayout>
+#include <QStyledItemDelegate>
 
 namespace Marble
 {

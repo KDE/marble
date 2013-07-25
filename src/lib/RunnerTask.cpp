@@ -19,7 +19,7 @@
 #include "RoutingRunner.h"
 #include "routing/RouteRequest.h"
 
-#include <QtCore/QTimer>
+#include <QTimer>
 
 namespace Marble
 {

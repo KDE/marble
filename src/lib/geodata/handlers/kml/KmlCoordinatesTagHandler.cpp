@@ -21,8 +21,8 @@
 
 #include "KmlCoordinatesTagHandler.h"
 
-#include <QtCore/QStringList>
-#include <QtCore/QRegExp>
+#include <QStringList>
+#include <QRegExp>
 
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"

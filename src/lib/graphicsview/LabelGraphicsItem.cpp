@@ -13,10 +13,10 @@
 #include "LabelGraphicsItem_p.h"
 
 // Qt
-#include <QtCore/QString>
-#include <QtGui/QApplication>
-#include <QtGui/QFont>
-#include <QtGui/QPainter>
+#include <QString>
+#include <QApplication>
+#include <QFont>
+#include <QPainter>
 
 using namespace Marble;
 

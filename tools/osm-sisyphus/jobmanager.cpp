@@ -10,12 +10,12 @@
 
 #include "jobmanager.h"
 
-#include <QtCore/QTimer>
-#include <QtCore/QFile>
-#include <QtCore/QTextStream>
-#include <QtCore/QDebug>
-#include <QtCore/QProcess>
-#include <QtXml/QDomDocument>
+#include <QTimer>
+#include <QFile>
+#include <QTextStream>
+#include <QDebug>
+#include <QProcess>
+#include <QDomDocument>
 
 JobManager::JobManager(QObject *parent) :
     QObject(parent)

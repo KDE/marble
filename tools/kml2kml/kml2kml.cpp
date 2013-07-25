@@ -15,7 +15,7 @@
 #include <GeoDataParser.h>
 #include <GeoWriter.h>
 
-#include <QtCore/QFile>
+#include <QFile>
 #include <iostream>
 
 using namespace std;

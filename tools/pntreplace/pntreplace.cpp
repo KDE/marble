@@ -9,13 +9,13 @@
 //
 
 
-#include <QtGui/QApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
-#include <QtCore/QDebug>
-#include <QtXml/QXmlInputSource>
-#include <QtXml/QXmlSimpleReader>
-#include <QtCore/QStringList>
+#include <QApplication>
+#include <QDataStream>
+#include <QFile>
+#include <QDebug>
+#include <QXmlInputSource>
+#include <QXmlSimpleReader>
+#include <QStringList>
 #include "svgxmlhandler.h"
 
 void parseSvg( const QString & svgFilename, QDataStream * out, const QString & path, int header ) {

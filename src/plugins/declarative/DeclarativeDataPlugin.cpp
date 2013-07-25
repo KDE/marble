@@ -19,9 +19,9 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 
-#include <QtCore/QMetaObject>
-#include <QtCore/QMetaProperty>
-#include <QtScript/QScriptValue>
+#include <QMetaObject>
+#include <QMetaProperty>
+#include <QScriptValue>
 
 using namespace Marble;
 

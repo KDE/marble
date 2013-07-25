@@ -9,9 +9,9 @@
 // Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
-#include <QtCore/QMetaType>
+#include <QtTest>
+#include <QSignalSpy>
+#include <QMetaType>
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"

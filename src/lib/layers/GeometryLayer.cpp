@@ -45,9 +45,9 @@
 #include "MarblePlacemarkModel.h"
 
 // Qt
-#include <QtCore/qmath.h>
-#include <QtCore/QAbstractItemModel>
-#include <QtCore/QModelIndex>
+#include <qmath.h>
+#include <QAbstractItemModel>
+#include <QModelIndex>
 
 namespace Marble
 {

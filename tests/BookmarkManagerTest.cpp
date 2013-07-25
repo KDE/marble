@@ -8,8 +8,8 @@
 // Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
+#include <QtTest>
+#include <QSignalSpy>
 
 #include "BookmarkManager.h"
 #include "GeoDataFolder.h"

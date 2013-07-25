@@ -12,11 +12,11 @@
 #include "FileStorageWatcher.h"
 
 // Qt
-#include <QtCore/QDateTime>
-#include <QtCore/QDir>
-#include <QtCore/QDirIterator>
-#include <QtCore/QFileInfo>
-#include <QtCore/QTimer>
+#include <QDateTime>
+#include <QDir>
+#include <QDirIterator>
+#include <QFileInfo>
+#include <QTimer>
 
 // Marble
 #include "MarbleGlobal.h"

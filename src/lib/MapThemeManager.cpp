@@ -14,14 +14,14 @@
 #include "MapThemeManager.h"
 
 // Qt
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QFileSystemWatcher>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QTimer>
-#include <QtGui/QStandardItemModel>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QFileSystemWatcher>
+#include <QString>
+#include <QStringList>
+#include <QTimer>
+#include <QStandardItemModel>
 
 // Local dir
 #include "GeoSceneDocument.h"

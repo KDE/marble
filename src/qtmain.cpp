@@ -9,13 +9,13 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-#include <QtGui/QApplication>
-#include <QtCore/QFile>
-#include <QtCore/QDir>
-#include <QtCore/QLocale>
-#include <QtCore/QSettings>
-#include <QtCore/QTranslator>
-#include <QtCore/QProcessEnvironment>
+#include <QApplication>
+#include <QFile>
+#include <QDir>
+#include <QLocale>
+#include <QSettings>
+#include <QTranslator>
+#include <QProcessEnvironment>
 
 #include "QtMainWindow.h"
 
@@ -25,7 +25,7 @@
 #include "MarbleLocale.h"
 
 #ifdef STATIC_BUILD
- #include <QtCore/QtPlugin>
+ #include <QtPlugin>
  Q_IMPORT_PLUGIN(qjpeg)
  Q_IMPORT_PLUGIN(qsvg)
 #endif

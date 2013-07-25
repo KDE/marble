@@ -17,9 +17,9 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtGui/QAction>
-#include <QtCore/QRect>
-#include <QtCore/QSize>
+#include <QAction>
+#include <QRect>
+#include <QSize>
 
 namespace Marble
 {

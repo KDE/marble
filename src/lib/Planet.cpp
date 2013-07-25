@@ -10,9 +10,9 @@
 //
 #include "Planet.h"
 
-#include <QtCore/QString>
-#include <QtCore/QHash>
-#include <QtCore/QObject>
+#include <QString>
+#include <QHash>
+#include <QObject>
 
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"

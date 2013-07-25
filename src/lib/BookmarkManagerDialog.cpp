@@ -30,12 +30,12 @@
 #include "NewBookmarkFolderDialog.h"
 #include "MarblePlacemarkModel.h"
 
-#include <QtCore/QPointer>
-#include <QtCore/QFile>
-#include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QFileDialog>
-#include <QtGui/QMessageBox>
-#include <QtGui/QItemSelectionModel>
+#include <QPointer>
+#include <QFile>
+#include <QSortFilterProxyModel>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QItemSelectionModel>
 
 namespace Marble {
 

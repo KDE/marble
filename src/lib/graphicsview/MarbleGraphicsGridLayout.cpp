@@ -16,10 +16,10 @@
 #include "ScreenGraphicsItem.h"
 
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QRectF>
-#include <QtCore/QSizeF>
-#include <QtCore/QVector>
+#include <QHash>
+#include <QRectF>
+#include <QSizeF>
+#include <QVector>
 
 namespace Marble
 {

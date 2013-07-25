@@ -13,7 +13,7 @@
 #include "CacheStoragePolicy.h"
 
 // Qt
-#include <QtCore/QDir>
+#include <QDir>
 
 using namespace Marble;
 

@@ -19,15 +19,15 @@
 #include "GeoDataFolder.h"
 #include "routing/RouteRequest.h"
 
-#include <QtCore/QString>
-#include <QtCore/QVector>
-#include <QtCore/QUrl>
-#include <QtCore/QTime>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-#include <QtXml/QDomDocument>
-#include <QtCore/QBuffer>
-#include <QtCore/QTimer>
+#include <QString>
+#include <QVector>
+#include <QUrl>
+#include <QTime>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QDomDocument>
+#include <QBuffer>
+#include <QTimer>
 
 namespace Marble
 {

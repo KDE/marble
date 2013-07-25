@@ -9,11 +9,11 @@
 //
 
 
-#include <QtGui/QApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
-#include <QtCore/QDebug>
-#include <QtCore/QStringList>
+#include <QApplication>
+#include <QDataStream>
+#include <QFile>
+#include <QDebug>
+#include <QStringList>
 
 int main(int argc, char *argv[])
 {

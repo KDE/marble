@@ -8,16 +8,16 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#include <QtCore/QObject>
-#include <QtTest/QtTest>
+#include <QObject>
+#include <QtTest>
 
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 #include "GeoDataColorStyle.h"
 #include "GeoWriter.h"
 
-#include <QtCore/QDir>
-#include <QtCore/QFile>
+#include <QDir>
+#include <QFile>
 
 using namespace Marble;
 

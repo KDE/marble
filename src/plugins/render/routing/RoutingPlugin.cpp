@@ -33,16 +33,16 @@
 #include "ViewportParams.h"
 #include "WidgetGraphicsItem.h"
 
-#include <QtCore/QRect>
-#include <QtGui/QWidget>
-#include <QtGui/QToolButton>
-#include <QtGui/QFont>
-#include <QtGui/QActionGroup>
-#include <QtGui/QPixmap>
-#include <QtGui/QPlastiqueStyle>
-#include <QtGui/QDialog>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
+#include <QRect>
+#include <QWidget>
+#include <QToolButton>
+#include <QFont>
+#include <QActionGroup>
+#include <QPixmap>
+#include <QPlastiqueStyle>
+#include <QDialog>
+#include <QPushButton>
+#include <QSpacerItem>
 
 namespace Marble
 {

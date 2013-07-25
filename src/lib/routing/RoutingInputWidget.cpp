@@ -25,15 +25,15 @@
 #include "MarbleLineEdit.h"
 #include "GoToDialog.h"
 
-#include <QtCore/QTimer>
-#include <QtCore/QUrl>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QIcon>
-#include <QtGui/QPushButton>
-#include <QtGui/QMenu>
-#include <QtGui/QToolButton>
-#include <QtGui/QKeyEvent>
-#include <QtXml/QDomDocument>
+#include <QTimer>
+#include <QUrl>
+#include <QHBoxLayout>
+#include <QIcon>
+#include <QPushButton>
+#include <QMenu>
+#include <QToolButton>
+#include <QKeyEvent>
+#include <QDomDocument>
 
 namespace Marble
 {

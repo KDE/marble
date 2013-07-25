@@ -11,10 +11,10 @@
 
 #include "MapThemeSortFilterProxyModel.h"
 
-#include <QtCore/QString>
-#include <QtCore/QModelIndex>
-#include <QtCore/QDateTime>
-#include <QtCore/QSettings>
+#include <QString>
+#include <QModelIndex>
+#include <QDateTime>
+#include <QSettings>
 
 /* TRANSLATOR Marble::MapThemeSortFilterProxyModel */
 

@@ -13,7 +13,7 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
 
-#include <QtCore/QFile>
+#include <QFile>
 
 namespace Marble
 {

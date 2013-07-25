@@ -8,12 +8,12 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QTextStream>
-#include <QtCore/QTime>
-#include <QtCore/QDebug>
+#include <QCoreApplication>
+#include <QFile>
+#include <QFileInfo>
+#include <QTextStream>
+#include <QTime>
+#include <QDebug>
 
 #include "geodata/parser/GeoDataParser.h"
 #include "geodata/data/GeoDataLineString.h"

@@ -10,7 +10,7 @@
 
 #include "AprsGatherer.h"
 
-#include <QtGui/QPixmap>
+#include <QPixmap>
 
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"

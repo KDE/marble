@@ -17,12 +17,12 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QAtomicInt>
-#include <QtCore/QDate>
-#include <QtCore/QDateTime>
-#include <QtCore/QHash>
-#include <QtCore/QLocale>
-#include <QtGui/QImage>
+#include <QAtomicInt>
+#include <QDate>
+#include <QDateTime>
+#include <QHash>
+#include <QLocale>
+#include <QImage>
 
 #include <cmath>
 

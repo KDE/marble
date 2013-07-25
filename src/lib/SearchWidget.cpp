@@ -18,8 +18,8 @@
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
 
-#include <QtGui/QListView>
-#include <QtGui/QVBoxLayout>
+#include <QListView>
+#include <QVBoxLayout>
 
 namespace Marble {
 

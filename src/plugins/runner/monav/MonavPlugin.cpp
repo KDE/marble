@@ -24,12 +24,12 @@
 #include "GeoDataExtendedData.h"
 #include "routing/RouteRequest.h"
 
-#include <QtCore/QProcess>
-#include <QtCore/QDirIterator>
-#include <QtCore/QTimer>
-#include <QtNetwork/QLocalSocket>
-#include <QtCore/QThread>
-#include <QtCore/QTextStream>
+#include <QProcess>
+#include <QDirIterator>
+#include <QTimer>
+#include <QLocalSocket>
+#include <QThread>
+#include <QTextStream>
 
 namespace Marble
 {

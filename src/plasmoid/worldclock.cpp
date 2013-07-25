@@ -18,16 +18,16 @@
 #include "worldclock.h"
 
 //Qt
-#include <QtGui/QPainter>
-#include <QtGui/QRadialGradient>
-#include <QtGui/QBrush>
-#include <QtGui/QGraphicsSceneHoverEvent>
-#include <QtCore/QList>
-#include <QtCore/QSize>
-#include <QtCore/QRect>
-#include <QtCore/QTime>
-#include <QtCore/QDate>
-#include <QtCore/QDateTime>
+#include <QPainter>
+#include <QRadialGradient>
+#include <QBrush>
+#include <QGraphicsSceneHoverEvent>
+#include <QList>
+#include <QSize>
+#include <QRect>
+#include <QTime>
+#include <QDate>
+#include <QDateTime>
 
 //KDE
 #include <KDebug>

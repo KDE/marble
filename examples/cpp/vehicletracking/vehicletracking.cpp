@@ -8,13 +8,13 @@
 // Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-#include <QtGui/QApplication>
-#include <QtCore/QThread>
-#include <QtCore/QTimer>
-#include <QtCore/QHash>
-#include <QtCore/qmath.h>
-#include <QtCore/QDebug>
-#include <QtGui/QVBoxLayout>
+#include <QApplication>
+#include <QThread>
+#include <QTimer>
+#include <QHash>
+#include <qmath.h>
+#include <QDebug>
+#include <QVBoxLayout>
 
 #include <marble/MarbleWidget.h>
 #include <marble/MarbleGlobal.h>

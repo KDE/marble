@@ -17,9 +17,9 @@
 #include <cmath>
 using std::fabs;
 
-#include <QtCore/QFile>
-#include <QtCore/QDataStream> 
-#include <QtCore/QTime>
+#include <QFile>
+#include <QDataStream> 
+#include <QTime>
 #ifdef Q_OS_UNIX
 # include <unistd.h>
 # include <sys/types.h>

@@ -25,16 +25,16 @@
 #include "GeoDataDocument.h"
 #include "AlternativeRoutesModel.h"
 
-#include <QtCore/QTime>
-#include <QtCore/QTimer>
-#include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QComboBox>
-#include <QtGui/QPainter>
-#include <QtGui/QFileDialog>
-#include <QtGui/QKeyEvent>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QToolBar>
-#include <QtGui/QToolButton>
+#include <QTime>
+#include <QTimer>
+#include <QSortFilterProxyModel>
+#include <QComboBox>
+#include <QPainter>
+#include <QFileDialog>
+#include <QKeyEvent>
+#include <QMouseEvent>
+#include <QToolBar>
+#include <QToolButton>
 
 #include "ui_RoutingWidget.h"
 

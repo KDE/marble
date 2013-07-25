@@ -11,7 +11,7 @@
 #include "KmlEndTagHandler.h"
 
 #include "MarbleDebug.h"
-#include <QtCore/QDateTime> 
+#include <QDateTime> 
 
 #include "KmlWhenTagHandler.h"
 #include "KmlElementDictionary.h"

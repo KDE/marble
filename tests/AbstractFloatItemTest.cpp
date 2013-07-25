@@ -8,8 +8,8 @@
 // Copyright 2013       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest/QtTest>
-#include <QtCore/qmetatype.h>
+#include <QtTest>
+#include <qmetatype.h>
 
 #include "MarbleModel.h"
 #include "PluginManager.h"

@@ -18,11 +18,11 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QByteArray>
-#include <QtCore/QDateTime>
-#include <QtCore/QFile>
-#include <QtCore/QMutexLocker>
-#include <QtCore/QRegExp>
+#include <QByteArray>
+#include <QDateTime>
+#include <QFile>
+#include <QMutexLocker>
+#include <QRegExp>
 
 using namespace Marble;
 

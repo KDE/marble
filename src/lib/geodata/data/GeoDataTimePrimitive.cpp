@@ -15,7 +15,7 @@
 #include "GeoDataTimePrimitive_p.h"
 
 // Qt
-#include <QtCore/QDataStream>
+#include <QDataStream>
 
 // GeoData
 #include "GeoDataTypes.h"

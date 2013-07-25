@@ -25,11 +25,11 @@
 #include "MarbleAboutDialog.h"
 #include "ui_MarbleAboutDialog.h"
 
-#include <QtCore/QFile>
-#include <QtGui/QTextFrame>
-#include <QtGui/QTabWidget>
-#include <QtCore/QTextStream>
-#include <QtGui/QPixmap>
+#include <QFile>
+#include <QTextFrame>
+#include <QTabWidget>
+#include <QTextStream>
+#include <QPixmap>
 
 #include "MarbleGlobal.h"
 #include "MarbleDirs.h"

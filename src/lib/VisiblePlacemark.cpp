@@ -16,10 +16,10 @@
 #include "GeoDataStyle.h"
 #include "PlacemarkLayer.h"
 
-#include <QtGui/QApplication>
-#include <QtGui/QPainter>
-#include <QtGui/QPalette>
-#include <QtGui/QPixmap>
+#include <QApplication>
+#include <QPainter>
+#include <QPalette>
+#include <QPixmap>
 
 using namespace Marble;
 

@@ -2,7 +2,7 @@
 
 #include "InterpolationMethod.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 #include <cmath>
 
 NwwMapImage::NwwMapImage( QDir const & baseDirectory, int const tileLevel )

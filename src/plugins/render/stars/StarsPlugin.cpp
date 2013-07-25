@@ -12,13 +12,13 @@
 #include "StarsPlugin.h"
 
 #include "ui_StarsConfigWidget.h"
-#include <QtCore/QRectF>
-#include <QtCore/QSize>
-#include <QtCore/QDateTime>
-#include <QtGui/QRegion>
-#include <QtGui/QContextMenuEvent>
-#include <QtGui/QMenu>
-#include <QtGui/QColorDialog>
+#include <QRectF>
+#include <QSize>
+#include <QDateTime>
+#include <QRegion>
+#include <QContextMenuEvent>
+#include <QMenu>
+#include <QColorDialog>
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"

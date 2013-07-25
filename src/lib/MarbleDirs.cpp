@@ -13,11 +13,11 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtGui/QApplication>
+#include <QDir>
+#include <QFile>
+#include <QString>
+#include <QStringList>
+#include <QApplication>
 
 #include <stdlib.h>
 

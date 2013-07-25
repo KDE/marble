@@ -2,8 +2,8 @@
 
 #include "ReadOnlyMapImage.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QTime>
+#include <QDebug>
+#include <QTime>
 
 #include <cmath>
 

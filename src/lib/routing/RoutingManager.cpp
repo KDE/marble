@@ -29,9 +29,9 @@
 #include "PluginManager.h"
 #include "PositionProviderPlugin.h"
 
-#include <QtCore/QFile>
-#include <QtGui/QMessageBox>
-#include <QtGui/QCheckBox>
+#include <QFile>
+#include <QMessageBox>
+#include <QCheckBox>
 #include <QMutexLocker>
 
 namespace Marble

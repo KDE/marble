@@ -13,7 +13,7 @@
 #include "ui_TimeControlWidget.h"
 
 // Qt
-#include <QtGui/QShowEvent>
+#include <QShowEvent>
 
 // Marble
 #include "MarbleClock.h"

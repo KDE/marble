@@ -21,7 +21,7 @@
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include <QtCore/QFile>
+#include <QFile>
 
 namespace Marble
 {

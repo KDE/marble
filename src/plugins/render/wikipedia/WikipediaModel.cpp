@@ -25,13 +25,13 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QUrl>
-#include <QtCore/QString>
-#include <QtGui/QIcon>
-#include <QtGui/QImage>
-#include <QtGui/QPainter>
-#include <QtGui/QPixmap>
-#include <QtSvg/QSvgRenderer>
+#include <QUrl>
+#include <QString>
+#include <QIcon>
+#include <QImage>
+#include <QPainter>
+#include <QPixmap>
+#include <QSvgRenderer>
 
 using namespace Marble;
 

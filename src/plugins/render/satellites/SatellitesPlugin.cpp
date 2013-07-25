@@ -23,8 +23,8 @@
 
 #include "ui_SatellitesConfigDialog.h"
 
-#include <QtCore/QUrl>
-#include <QtGui/QPushButton>
+#include <QUrl>
+#include <QPushButton>
 
 namespace Marble
 {

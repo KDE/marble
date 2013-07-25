@@ -17,7 +17,7 @@
 #include "MarbleWidget.h"
 
 // Qt
-#include <QtGui/QMouseEvent>
+#include <QMouseEvent>
 
 
 using namespace Marble;

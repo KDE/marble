@@ -17,14 +17,14 @@
 #include "ui_DataMigrationWidget.h"
 
 // Qt
-#include <QtCore/QDebug>
-#include <QtCore/QDir>
-#include <QtCore/QDirIterator>
-#include <QtCore/QFileInfo>
-#include <QtCore/QPointer>
-#include <QtCore/QStack>
-#include <QtGui/QDialog>
-#include <QtGui/QProgressDialog>
+#include <QDebug>
+#include <QDir>
+#include <QDirIterator>
+#include <QFileInfo>
+#include <QPointer>
+#include <QStack>
+#include <QDialog>
+#include <QProgressDialog>
 
 // std
 #include <limits>

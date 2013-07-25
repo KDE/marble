@@ -12,7 +12,7 @@
 #include "MarbleLocale_p.h"
 
 // Qt
-#include <QtCore/QLocale>
+#include <QLocale>
 
 
 namespace Marble

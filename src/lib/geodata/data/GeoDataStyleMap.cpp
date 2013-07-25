@@ -10,7 +10,7 @@
 
 
 #include "GeoDataStyleMap.h"
-#include <QtCore/QDataStream>
+#include <QDataStream>
 
 #include "GeoDataTypes.h"
 

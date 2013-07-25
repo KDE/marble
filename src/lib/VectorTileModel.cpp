@@ -22,7 +22,7 @@
 #include "TileLoader.h"
 
 #include <qmath.h>
-#include <QtCore/QThreadPool>
+#include <QThreadPool>
 
 using namespace Marble;
 

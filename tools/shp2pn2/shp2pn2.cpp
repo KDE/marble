@@ -33,13 +33,13 @@
 //
 
 
-#include <QtCore/QDebug>
-#include <QtCore/QVector>
-#include <QtCore/QFileInfo>
-#include <QtCore/QFile>
-#include <QtCore/QDataStream>
-#include <QtGui/QApplication>
-#include <QtGui/QTreeView>
+#include <QDebug>
+#include <QVector>
+#include <QFileInfo>
+#include <QFile>
+#include <QDataStream>
+#include <QApplication>
+#include <QTreeView>
  
 #include <marble/MarbleWidget.h>
 #include <marble/MarbleModel.h>

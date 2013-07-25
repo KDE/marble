@@ -12,7 +12,7 @@
 #include "GeoDataCamera.h"
 #include "GeoDataCamera_p.h"
 
-#include <QtCore/QDataStream>
+#include <QDataStream>
 
 namespace Marble
 {

@@ -16,7 +16,7 @@
 #include "ui_SunControlWidget.h"
 
 // Qt
-#include <QtGui/QShowEvent>
+#include <QShowEvent>
 
 // Marble
 #include "MarbleDebug.h"

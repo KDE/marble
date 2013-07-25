@@ -15,8 +15,8 @@
 #include "ViewportParams.h"
 
 // Qt
-#include <QtGui/QFontMetrics>
-#include <QtGui/QPainter>
+#include <QFontMetrics>
+#include <QPainter>
 
 using namespace Marble;
 

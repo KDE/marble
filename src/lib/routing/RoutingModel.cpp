@@ -25,15 +25,15 @@
 #include "MarbleGlobal.h"
 #include "GeoDataExtendedData.h"
 
-#include <QtCore/QBuffer>
-#include <QtCore/QPointer>
-#include <QtCore/QRegExp>
-#include <QtCore/QVector>
-#include <QtCore/QHash>
-#include <QtCore/QByteArray>
-#include <QtGui/QMessageBox>
-#include <QtGui/QPixmap>
-#include <QtXml/QDomDocument>
+#include <QBuffer>
+#include <QPointer>
+#include <QRegExp>
+#include <QVector>
+#include <QHash>
+#include <QByteArray>
+#include <QMessageBox>
+#include <QPixmap>
+#include <QDomDocument>
 
 namespace Marble
 {

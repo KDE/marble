@@ -29,7 +29,7 @@
 #include "MarbleDirs.h"
 #include "PositionProviderPlugin.h"
 
-#include <QtCore/QFile>
+#include <QFile>
 
 namespace Marble
 {

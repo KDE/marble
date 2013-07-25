@@ -18,8 +18,8 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QFile>
-#include <QtCore/QString>
+#include <QFile>
+#include <QString>
 
 using namespace Marble;
 

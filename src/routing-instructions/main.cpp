@@ -12,14 +12,14 @@
 #include "routing/instructions/InstructionTransformation.h"
 #include "routing/instructions/RoutingInstruction.h"
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QLocale>
-#include <QtCore/QFile>
-#include <QtCore/QTextStream>
-#include <QtCore/QTranslator>
-#include <QtCore/QStringList>
-#include <QtCore/QFileInfo>
-#include <QtCore/QDir>
+#include <QCoreApplication>
+#include <QLocale>
+#include <QFile>
+#include <QTextStream>
+#include <QTranslator>
+#include <QStringList>
+#include <QFileInfo>
+#include <QDir>
 
 using namespace Marble;
 

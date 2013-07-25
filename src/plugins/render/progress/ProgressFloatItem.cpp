@@ -18,11 +18,11 @@
 #include "ViewportParams.h"
 #include "HttpDownloadManager.h"
 
-#include <QtCore/QRect>
-#include <QtGui/QColor>
-#include <QtCore/QMutexLocker>
-#include <QtGui/QPaintDevice>
-#include <QtGui/QPainter>
+#include <QRect>
+#include <QColor>
+#include <QMutexLocker>
+#include <QPaintDevice>
+#include <QPainter>
 
 namespace Marble
 {

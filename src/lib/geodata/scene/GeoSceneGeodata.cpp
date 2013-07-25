@@ -11,7 +11,7 @@
 #include "GeoSceneGeodata.h"
 #include "GeoSceneTypes.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 namespace Marble
 {

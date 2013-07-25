@@ -16,9 +16,9 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QSizeF>
-#include <QtGui/QPainter>
-#include <QtGui/QPixmapCache>
+#include <QSizeF>
+#include <QPainter>
+#include <QPixmapCache>
 
 using namespace Marble;
 

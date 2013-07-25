@@ -15,7 +15,7 @@
 #include "MarbleModel.h"
 #include "PositionTracking.h"
 
-#include <QtCore/QMap>
+#include <QMap>
 
 namespace Marble
 {

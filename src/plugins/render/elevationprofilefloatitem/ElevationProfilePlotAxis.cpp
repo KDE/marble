@@ -13,7 +13,7 @@
 #include "MarbleLocale.h"
 #include "MarbleMath.h"
 
-#include <QtCore/qmath.h>
+#include <qmath.h>
 
 namespace Marble
 {

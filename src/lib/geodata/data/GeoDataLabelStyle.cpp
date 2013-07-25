@@ -11,7 +11,7 @@
 
 #include "GeoDataLabelStyle.h"
 
-#include <QtGui/QFont>
+#include <QFont>
 
 #include "GeoDataTypes.h"
 

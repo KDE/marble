@@ -19,9 +19,9 @@
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
 
-#include <QtCore/QProcess>
-#include <QtCore/QMap>
-#include <QtCore/QTemporaryFile>
+#include <QProcess>
+#include <QMap>
+#include <QTemporaryFile>
 #include <MarbleMap.h>
 #include <MarbleModel.h>
 #include <routing/RoutingManager.h>

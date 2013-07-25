@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-#include <QtCore/QRunnable>
+#include <QRunnable>
 
 #include "MarbleGlobal.h"
 #include "GeoPainter.h"

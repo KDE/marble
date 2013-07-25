@@ -10,8 +10,8 @@
 
 #include "WlocatePositionProviderPlugin.h"
 
-#include <QtCore/QFutureWatcher>
-#include <QtCore/QtConcurrentRun>
+#include <QFutureWatcher>
+#include <QtConcurrentRun>
 
 #ifndef ENV_LINUX
 #define ENV_LINUX

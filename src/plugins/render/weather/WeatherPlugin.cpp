@@ -22,10 +22,10 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtGui/QComboBox>
-#include <QtGui/QDialog>
-#include <QtGui/QIcon>
-#include <QtGui/QPushButton>
+#include <QComboBox>
+#include <QDialog>
+#include <QIcon>
+#include <QPushButton>
 
 using namespace Marble;
 /* TRANSLATOR Marble::WeatherPlugin */

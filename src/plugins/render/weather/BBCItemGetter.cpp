@@ -15,8 +15,8 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QMutexLocker>
-#include <QtCore/QUrl>
+#include <QMutexLocker>
+#include <QUrl>
 
 using namespace Marble;
 

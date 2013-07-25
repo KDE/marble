@@ -23,9 +23,9 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#include <QtCore/QTimeLine>
-#include <QtCore/qmath.h>
-#include <QtGui/QApplication>
+#include <QTimeLine>
+#include <qmath.h>
+#include <QApplication>
 
 #include <cstdio>
 

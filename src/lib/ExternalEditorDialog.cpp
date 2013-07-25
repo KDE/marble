@@ -10,9 +10,9 @@
 
 #include "ExternalEditorDialog.h"
 
-#include <QtCore/QProcessEnvironment>
-#include <QtCore/QFileInfo>
-#include <QtCore/QDir>
+#include <QProcessEnvironment>
+#include <QFileInfo>
+#include <QDir>
 
 namespace Marble
 {

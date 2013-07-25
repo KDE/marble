@@ -17,8 +17,8 @@
 
 #include "GeoDataLineString.h"
 
-#include <QtCore/QMap>
-#include <QtCore/QLinkedList>
+#include <QMap>
+#include <QLinkedList>
 #include "GeoDataExtendedData.h"
 
 namespace Marble {

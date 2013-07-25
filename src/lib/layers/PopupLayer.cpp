@@ -14,9 +14,9 @@
 #include "MarbleWidget.h"
 #include "PopupItem.h"
 
-#include <QtGui/QMouseEvent>
-#include <QtGui/QApplication>
-#include <QtGui/QAction>
+#include <QMouseEvent>
+#include <QApplication>
+#include <QAction>
 
 namespace Marble
 {

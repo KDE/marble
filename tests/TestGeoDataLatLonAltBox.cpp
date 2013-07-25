@@ -9,7 +9,7 @@
 // Copyright 2010       Cezar Mocan <mocancezar@gmail.com>
 // Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
-#include <QtTest/QtTest>
+#include <QtTest>
 #include "GeoDataCoordinates.h"
 #include "GeoDataFolder.h"
 #include "GeoDataLineString.h"

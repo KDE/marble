@@ -12,12 +12,12 @@
 
 #include "../../lib/LatLonEdit.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QtPlugin>
-#include <QtGui/QWidget>
-#include <QtGui/QIcon>
-#include <QtDesigner/QDesignerCustomWidgetInterface>
+#include <QObject>
+#include <QString>
+#include <QtPlugin>
+#include <QWidget>
+#include <QIcon>
+#include <QDesignerCustomWidgetInterface>
 
 
 LatLonEditPlugin::LatLonEditPlugin(QObject *parent) : QObject(parent)

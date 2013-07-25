@@ -21,9 +21,9 @@
 
 #include "DgmlPenTagHandler.h"
 
-#include <QtGui/QPen>
-#include <QtGui/QColor>
-#include <QtCore/QString>
+#include <QPen>
+#include <QColor>
+#include <QString>
 
 #include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"

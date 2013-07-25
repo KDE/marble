@@ -14,9 +14,9 @@
 #include "PluginManager.h"
 
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QPluginLoader>
-#include <QtCore/QTime>
+#include <QList>
+#include <QPluginLoader>
+#include <QTime>
 
 // Local dir
 #include "MarbleDirs.h"

@@ -15,13 +15,13 @@
 #include "MarbleLineEdit.h"
 #include "MarbleGlobal.h"
 
-#include <QtGui/QApplication>
-#include <QtGui/QClipboard>
-#include <QtGui/QLabel>
-#include <QtGui/QStyle>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QPainter>
-#include <QtCore/QTimer>
+#include <QApplication>
+#include <QClipboard>
+#include <QLabel>
+#include <QStyle>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QTimer>
 
 namespace Marble
 {

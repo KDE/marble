@@ -13,7 +13,7 @@
 
 #include "GeoWriter.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 namespace Marble
 {

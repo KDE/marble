@@ -11,10 +11,10 @@
 #include "EarthquakeItem.h"
 #include "ViewportParams.h"
 
-#include <QtGui/QFontMetrics>
-#include <QtGui/QPainter>
-#include <QtGui/QPixmap>
-#include <QtSvg/QSvgRenderer>
+#include <QFontMetrics>
+#include <QPainter>
+#include <QPixmap>
+#include <QSvgRenderer>
 
 namespace Marble
 {

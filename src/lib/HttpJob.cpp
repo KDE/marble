@@ -16,8 +16,8 @@
 #include "MarbleDebug.h"
 #include "TinyWebBrowser.h"
 
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 using namespace Marble;
 

@@ -25,15 +25,15 @@
 #include "RoutingManager.h"
 #include "Maneuver.h"
 
-#include <QtCore/QMap>
-#include <QtCore/QAbstractItemModel>
-#include <QtGui/QIcon>
-#include <QtGui/QItemSelectionModel>
-#include <QtGui/QKeyEvent>
-#include <QtGui/QMenu>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QPixmap>
-#include <QtGui/QFileDialog>
+#include <QMap>
+#include <QAbstractItemModel>
+#include <QIcon>
+#include <QItemSelectionModel>
+#include <QKeyEvent>
+#include <QMenu>
+#include <QMouseEvent>
+#include <QPixmap>
+#include <QFileDialog>
 
 namespace Marble
 {

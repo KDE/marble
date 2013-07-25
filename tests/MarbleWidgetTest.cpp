@@ -8,9 +8,9 @@
 // Copyright 2008 Patrick Spendrin  <ps_ml@gmx.de>
 //
 
-#include <QtGui/QtGui>
-#include <QtTest/QtTest>
-#include <QtTest/QTestEvent>
+#include <QtGui>
+#include <QtTest>
+#include <QTestEvent>
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 #include "TestUtils.h"

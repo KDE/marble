@@ -13,12 +13,12 @@
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 
-#include <QtGui/QColor>
-#include <QtGui/QPixmap>
-#include <QtCore/QTimer>
-#include <QtGui/QAction>
-#include <QtCore/QMutexLocker>
-#include <QtNetwork/QTcpSocket>
+#include <QColor>
+#include <QPixmap>
+#include <QTimer>
+#include <QAction>
+#include <QMutexLocker>
+#include <QTcpSocket>
 
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"

@@ -11,10 +11,10 @@
 
 #include "FileManager.h"
 
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtCore/QTime>
-#include <QtGui/QMessageBox>
+#include <QDir>
+#include <QFileInfo>
+#include <QTime>
+#include <QMessageBox>
 
 #include "FileLoader.h"
 #include "MarbleDebug.h"

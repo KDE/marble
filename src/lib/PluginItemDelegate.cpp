@@ -16,15 +16,15 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QEvent>
-#include <QtCore/QSize>
-#include <QtCore/QVariant>
-#include <QtGui/QAbstractItemView>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QStandardItemModel>
-#include <QtGui/QApplication>
-#include <QtGui/QPainter>
-#include <QtGui/QStandardItem>
+#include <QEvent>
+#include <QSize>
+#include <QVariant>
+#include <QAbstractItemView>
+#include <QMouseEvent>
+#include <QStandardItemModel>
+#include <QApplication>
+#include <QPainter>
+#include <QStandardItem>
 
 using namespace Marble;
 /* TRANSLATOR Marble::PluginItemDelegate */

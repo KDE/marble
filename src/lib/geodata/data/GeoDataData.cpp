@@ -11,7 +11,7 @@
 #include "GeoDataData.h"
 #include "GeoDataData_p.h"
 
-#include <QtCore/QDataStream>
+#include <QDataStream>
 
 #include "GeoDataTypes.h"
 

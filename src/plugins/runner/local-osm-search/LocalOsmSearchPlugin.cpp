@@ -13,7 +13,7 @@
 #include "LocalOsmSearchRunner.h"
 #include "MarbleDirs.h"
 
-#include <QtCore/QDirIterator>
+#include <QDirIterator>
 
 namespace Marble
 {

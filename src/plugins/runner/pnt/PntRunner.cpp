@@ -16,9 +16,9 @@
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 
-#include <QtCore/qmath.h>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
+#include <qmath.h>
+#include <QFile>
+#include <QFileInfo>
 
 namespace Marble
 {

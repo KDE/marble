@@ -14,14 +14,14 @@
 
 #include <cmath>
 
-#include <QtCore/QDir>
-#include <QtCore/QRect>
-#include <QtCore/QSize>
-#include <QtCore/QVector>
-#include <QtGui/QApplication>
-#include <QtGui/QImage>
-#include <QtGui/QImageReader>
-#include <QtGui/QPainter>
+#include <QDir>
+#include <QRect>
+#include <QSize>
+#include <QVector>
+#include <QApplication>
+#include <QImage>
+#include <QImageReader>
+#include <QPainter>
 
 #include "MarbleGlobal.h"
 #include "MarbleDirs.h"

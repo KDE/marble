@@ -8,10 +8,10 @@
 // Copyright 2011      Dennis Nienhüser     <earthwings@gentoo.org>
 //
 
-#include <QtCore/QString>
-#include <QtCore/QFileInfo>
-#include <QtCore/QTextStream>
-#include <QtCore/QDebug>
+#include <QString>
+#include <QFileInfo>
+#include <QTextStream>
+#include <QDebug>
 
 void usage( const QString &app )
 {

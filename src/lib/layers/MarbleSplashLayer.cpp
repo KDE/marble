@@ -17,7 +17,7 @@
 #include "MarbleDirs.h"
 #include "ViewportParams.h"
 
-#include <QtGui/QPixmap>
+#include <QPixmap>
 
 namespace Marble
 {

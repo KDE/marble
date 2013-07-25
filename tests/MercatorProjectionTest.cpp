@@ -8,7 +8,7 @@
 // Copyright 2011       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest/QtTest>
+#include <QtTest>
 #include "MercatorProjection.h"
 #include "ViewportParams.h"
 #include "TestUtils.h"

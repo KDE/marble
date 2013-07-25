@@ -27,12 +27,12 @@
 #include "routing/RouteRequest.h"
 #include "routing/RoutingProfilesModel.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QVector>
-#include <QtCore/QThreadPool>
-#include <QtCore/QTimer>
-#include <QtCore/QFileInfo>
+#include <QObject>
+#include <QString>
+#include <QVector>
+#include <QThreadPool>
+#include <QTimer>
+#include <QFileInfo>
 
 namespace Marble
 {

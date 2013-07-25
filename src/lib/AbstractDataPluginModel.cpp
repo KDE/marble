@@ -12,13 +12,13 @@
 #include "AbstractDataPluginModel.h"
 
 // Qt
-#include <QtCore/QUrl>
-#include <QtCore/QTimer>
-#include <QtCore/QPointF>
-#include <QtCore/QtAlgorithms>
-#include <QtCore/QVariant>
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QMetaProperty>
+#include <QUrl>
+#include <QTimer>
+#include <QPointF>
+#include <QtAlgorithms>
+#include <QVariant>
+#include <QAbstractListModel>
+#include <QMetaProperty>
 
 // Marble
 #include "MarbleDebug.h"

@@ -14,12 +14,12 @@
 #include "PositionMarker.h"
 
 #include "MarbleDebug.h"
-#include <QtCore/QRect>
-#include <QtCore/qmath.h>
-#include <QtGui/QFileDialog>
-#include <QtGui/QPushButton>
-#include <QtGui/QColorDialog>
-#include <QtGui/QTransform>
+#include <QRect>
+#include <qmath.h>
+#include <QFileDialog>
+#include <QPushButton>
+#include <QColorDialog>
+#include <QTransform>
 
 #include <cmath>
 

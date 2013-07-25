@@ -12,7 +12,7 @@
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
 
-#include <QtCore/QTimer>
+#include <QTimer>
 
 namespace Marble {
 

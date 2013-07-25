@@ -38,12 +38,12 @@
 
 // Qt
 #include <QApplication>
-#include <QtCore/QMimeData>
-#include <QtCore/QPointer>
-#include <QtGui/QAction>
-#include <QtGui/QClipboard>
-#include <QtGui/QMenu>
-#include <QtGui/QMessageBox>
+#include <QMimeData>
+#include <QPointer>
+#include <QAction>
+#include <QClipboard>
+#include <QMenu>
+#include <QMessageBox>
 
 using namespace Marble;
 /* TRANSLATOR Marble::MarbleWidgetPopupMenu */

@@ -13,8 +13,8 @@
 
 #include "VectorTileLayer.h"
 
-#include <QtCore/qmath.h>
-#include <QtCore/QThreadPool>
+#include <qmath.h>
+#include <QThreadPool>
 
 #include "VectorTileModel.h"
 #include "GeoPainter.h"

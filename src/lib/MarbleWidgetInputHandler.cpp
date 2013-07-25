@@ -13,20 +13,20 @@
 
 #include <cmath>
 
-#include <QtCore/QPoint>
-#include <QtCore/QPointer>
-#include <QtCore/QTime>
-#include <QtCore/QTimer>
-#include <QtGui/QAction>
-#include <QtGui/QCursor>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QPixmap>
-#include <QtGui/QRubberBand>
-#include <QtGui/QToolTip>
+#include <QPoint>
+#include <QPointer>
+#include <QTime>
+#include <QTimer>
+#include <QAction>
+#include <QCursor>
+#include <QMouseEvent>
+#include <QPixmap>
+#include <QRubberBand>
+#include <QToolTip>
 
 #if QT_VERSION >= 0x40600
-  #include <QtGui/QGestureEvent>
-  #include <QtGui/QPinchGesture>
+  #include <QGestureEvent>
+  #include <QPinchGesture>
 #endif
 
 #include "kineticmodel.h"

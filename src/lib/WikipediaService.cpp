@@ -9,8 +9,8 @@
 //
 
 #include "WikipediaService.h"
-#include <QtWebKit/QWebPage>
-#include <QtWebKit/QWebFrame>
+#include <QWebPage>
+#include <QWebFrame>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>

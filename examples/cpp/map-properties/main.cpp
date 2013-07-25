@@ -8,7 +8,7 @@
 // Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#include <QtGui/QApplication>
+#include <QApplication>
 
 #include <marble/MarbleGlobal.h>
 #include <marble/MarbleWidget.h>

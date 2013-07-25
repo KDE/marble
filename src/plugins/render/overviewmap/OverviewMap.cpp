@@ -10,16 +10,16 @@
 
 #include "OverviewMap.h"
 
-#include <QtCore/QRect>
-#include <QtCore/QStringList>
-#include <QtGui/QCursor>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QPainter>
-#include <QtGui/QPixmap>
-#include <QtGui/QFileDialog>
-#include <QtGui/QHBoxLayout>
-#include <QtSvg/QSvgRenderer>
-#include <QtGui/QColorDialog>
+#include <QRect>
+#include <QStringList>
+#include <QCursor>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QPixmap>
+#include <QFileDialog>
+#include <QHBoxLayout>
+#include <QSvgRenderer>
+#include <QColorDialog>
 
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"

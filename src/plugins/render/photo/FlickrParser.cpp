@@ -16,7 +16,7 @@
 #include "PhotoPluginItem.h"
 
 // Qt
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 using namespace Marble;
 

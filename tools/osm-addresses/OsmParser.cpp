@@ -25,8 +25,8 @@
 #include "geodata/writer/GeoWriter.h"
 #include "geodata/data/GeoDataExtendedData.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QTime>
+#include <QDebug>
+#include <QTime>
 
 namespace Marble
 {

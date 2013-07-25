@@ -10,8 +10,8 @@
 
 #include "RoutingInstruction.h"
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QStringList>
+#include <QCoreApplication>
+#include <QStringList>
 
 #include <cmath>
 

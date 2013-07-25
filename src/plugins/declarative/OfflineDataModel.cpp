@@ -11,8 +11,8 @@
 #include "OfflineDataModel.h"
 #include "MarbleDirs.h"
 
-#include <QtCore/QModelIndex>
-#include <QtCore/QDir>
+#include <QModelIndex>
+#include <QDir>
 
 OfflineDataModel::OfflineDataModel( QObject *parent ) : QSortFilterProxyModel( parent ),
     m_vehicleTypeFilter( Any )

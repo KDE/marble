@@ -29,12 +29,12 @@
 #include "MarbleWidget.h"
 #include "PlacemarkTextAnnotation.h"
 
-#include <QtGui/QFileDialog>
-#include <QtGui/QAction>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QNetworkRequest>
-#include <QtGui/QMessageBox>
+#include <QFileDialog>
+#include <QAction>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QMessageBox>
 
 namespace Marble
 {

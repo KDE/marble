@@ -10,7 +10,7 @@
 
 #include "AprsObject.h"
 
-#include <QtGui/QPixmap>
+#include <QPixmap>
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"

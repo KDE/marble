@@ -15,8 +15,8 @@
 #include <cmath>
 #include <cstdlib>
 
-#include <QtCore/QVector>
-#include <QtGui/QColor>
+#include <QVector>
+#include <QColor>
 
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"

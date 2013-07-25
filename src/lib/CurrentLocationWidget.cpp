@@ -33,9 +33,9 @@ using namespace Marble;
 // Ui
 #include "ui_CurrentLocationWidget.h"
 
-#include <QtCore/QDateTime>
-#include <QtGui/QFileDialog>
-#include <QtGui/QMessageBox>
+#include <QDateTime>
+#include <QFileDialog>
+#include <QMessageBox>
 
 namespace Marble
 {

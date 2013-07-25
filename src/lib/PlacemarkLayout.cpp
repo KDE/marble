@@ -12,15 +12,15 @@
 
 #include "PlacemarkLayout.h"
 
-#include <QtCore/QAbstractItemModel>
-#include <QtCore/QList>
-#include <QtCore/QPoint>
-#include <QtCore/QVector>
-#include <QtCore/QVectorIterator>
-#include <QtGui/QFont>
-#include <QtGui/QFontMetrics>
-#include <QtGui/QItemSelectionModel>
-#include <QtCore/qmath.h>
+#include <QAbstractItemModel>
+#include <QList>
+#include <QPoint>
+#include <QVector>
+#include <QVectorIterator>
+#include <QFont>
+#include <QFontMetrics>
+#include <QItemSelectionModel>
+#include <qmath.h>
 
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"

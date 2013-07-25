@@ -29,8 +29,8 @@
 
 #include "kineticmodel.h"
 
-#include <QtCore/QTimer>
-#include <QtCore/QDateTime>
+#include <QTimer>
+#include <QDateTime>
 
 static const int KineticModelDefaultUpdateInterval = 15; // ms
 

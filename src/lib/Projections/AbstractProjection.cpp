@@ -16,7 +16,7 @@
 #include "AbstractProjection_p.h"
 
 #include "MarbleDebug.h"
-#include <QtGui/QRegion>
+#include <QRegion>
 
 // Marble
 #include "GeoDataLineString.h"

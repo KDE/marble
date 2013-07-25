@@ -12,10 +12,10 @@
 
 #include "FpsLayer.h"
 
-#include <QtCore/QPoint>
-#include <QtCore/QTime>
-#include <QtGui/QFont>
-#include <QtGui/QPainter>
+#include <QPoint>
+#include <QTime>
+#include <QFont>
+#include <QPainter>
 
 namespace Marble
 {

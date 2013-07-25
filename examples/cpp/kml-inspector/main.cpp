@@ -8,10 +8,10 @@
 // Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#include <QtCore/QDebug>
-#include <QtCore/QFileInfo>
-#include <QtGui/QApplication>
-#include <QtGui/QTreeView>
+#include <QDebug>
+#include <QFileInfo>
+#include <QApplication>
+#include <QTreeView>
 
 #include <marble/MarbleWidget.h>
 #include <marble/MarbleModel.h>

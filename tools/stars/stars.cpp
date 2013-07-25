@@ -11,9 +11,9 @@
 //
 
 
-#include <QtCore/QFile>
-#include <QtCore/QDebug>
-#include <QtGui/QApplication>
+#include <QFile>
+#include <QDebug>
+#include <QApplication>
 #include <QStringList>
 
 #include <cmath>

@@ -21,9 +21,9 @@
 
 #include "DgmlBrushTagHandler.h"
 
-#include <QtGui/QBrush>
-#include <QtGui/QColor>
-#include <QtCore/QString>
+#include <QBrush>
+#include <QColor>
+#include <QString>
 
 #include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"

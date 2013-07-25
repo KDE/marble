@@ -12,9 +12,9 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
-#include <QtGui/QFontMetrics>
-#include <QtGui/QPixmap>
-#include <QtSvg/QSvgRenderer>
+#include <QFontMetrics>
+#include <QPixmap>
+#include <QSvgRenderer>
  
 namespace Marble
 {

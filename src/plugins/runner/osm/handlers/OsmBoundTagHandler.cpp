@@ -16,7 +16,7 @@
 #include "MarbleDebug.h"
 #include "OsmElementDictionary.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 namespace Marble
 {

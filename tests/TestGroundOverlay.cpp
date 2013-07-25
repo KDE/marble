@@ -8,8 +8,8 @@
 // Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
-#include <QtCore/QObject>
-#include <QtTest/QtTest>
+#include <QObject>
+#include <QtTest>
 
 #include <GeoDataParser.h>
 #include <GeoDataDocument.h>

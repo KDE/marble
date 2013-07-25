@@ -20,7 +20,7 @@
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
 #include "MarbleDebug.h"
-#include <QtCore/QMap>
+#include <QMap>
 
 namespace Marble
 {

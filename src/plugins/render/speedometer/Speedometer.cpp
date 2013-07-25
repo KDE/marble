@@ -19,7 +19,7 @@
 #include "MarbleGraphicsGridLayout.h"
 #include "ViewportParams.h"
 
-#include <QtGui/QLCDNumber>
+#include <QLCDNumber>
 
 namespace Marble
 {

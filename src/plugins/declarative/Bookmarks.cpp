@@ -23,7 +23,7 @@
 #include "GeoDataTreeModel.h"
 #include "kdescendantsproxymodel.h"
 
-#include <QtGui/QSortFilterProxyModel>
+#include <QSortFilterProxyModel>
 
 Bookmarks::Bookmarks( QObject* parent ) : QObject( parent ),
     m_marbleWidget( 0 ), m_proxyModel( 0 )

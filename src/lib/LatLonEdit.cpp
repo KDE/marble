@@ -12,7 +12,7 @@
 #include "LatLonEdit.h"
 #include "ui_LatLonEdit.h"
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include "MarbleDebug.h"
 
 #include "MarbleGlobal.h"

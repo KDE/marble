@@ -18,7 +18,7 @@
 #include <KConfigGroup>
 #include <KGlobal>
 
-#include <QtCore/QFile>
+#include <QFile>
  
 #include "ControlView.h"
 #include "KdeMainWindow.h"
@@ -27,7 +27,7 @@
 #include "MarbleTest.h"
 
 #ifdef STATIC_BUILD
- #include <QtCore/QtPlugin>
+ #include <QtPlugin>
  Q_IMPORT_PLUGIN(qjpeg)
  Q_IMPORT_PLUGIN(qsvg)
 #endif

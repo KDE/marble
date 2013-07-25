@@ -19,16 +19,16 @@
 #include "MarbleModel.h"
 #include "PositionTracking.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QDataStream>
-#include <QtCore/QStringList>
-#include <QtCore/QRegExp>
-#include <QtCore/QVariant>
-#include <QtCore/QTime>
+#include <QFile>
+#include <QDataStream>
+#include <QStringList>
+#include <QRegExp>
+#include <QVariant>
+#include <QTime>
 
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
 
 namespace Marble {
 

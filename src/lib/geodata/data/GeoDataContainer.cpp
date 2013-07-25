@@ -15,7 +15,7 @@
 #include "GeoDataContainer_p.h"
 
 // Qt
-#include <QtGui/QImage>
+#include <QImage>
 
 // Marble
 #include "MarbleDebug.h"

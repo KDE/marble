@@ -8,8 +8,8 @@
 
 // A QML-interface of Marble for the Meego operating system.
 
-#include <QtGui/QApplication>
-#include <QtDeclarative/QtDeclarative>
+#include <QApplication>
+#include <QtDeclarative>
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 

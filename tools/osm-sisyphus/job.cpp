@@ -12,9 +12,9 @@
 #include "logger.h"
 #include "upload.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QDateTime>
-#include <QtCore/QProcess>
+#include <QDebug>
+#include <QDateTime>
+#include <QProcess>
 
 Job::Job(const Region &region, const JobParameters &parameters, QObject *parent) :
     QObject(parent), m_status(Waiting), m_region(region), m_parameters(parameters)

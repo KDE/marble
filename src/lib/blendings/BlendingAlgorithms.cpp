@@ -19,8 +19,8 @@
 
 #include <cmath>
 
-#include <QtGui/QImage>
-#include <QtGui/QPainter>
+#include <QImage>
+#include <QPainter>
 
 namespace Marble
 {

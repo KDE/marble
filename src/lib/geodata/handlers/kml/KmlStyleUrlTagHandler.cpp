@@ -21,7 +21,7 @@
 
 #include "KmlStyleUrlTagHandler.h"
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"

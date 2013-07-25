@@ -13,19 +13,19 @@
 
 #include "MarbleWidget.h"
 
-#include <QtCore/qmath.h>
-#include <QtCore/QAbstractItemModel>
-#include <QtCore/QHash>
-#include <QtCore/QSettings>
-#include <QtCore/QTime>
-#include <QtGui/QItemSelectionModel>
-#include <QtGui/QPaintEvent>
-#include <QtGui/QRegion>
-#include <QtGui/QSizePolicy>
-#include <QtNetwork/QNetworkProxy>
+#include <qmath.h>
+#include <QAbstractItemModel>
+#include <QHash>
+#include <QSettings>
+#include <QTime>
+#include <QItemSelectionModel>
+#include <QPaintEvent>
+#include <QRegion>
+#include <QSizePolicy>
+#include <QNetworkProxy>
 
 #ifdef MARBLE_DBUS
-#include <QtDBus/QDBusConnection>
+#include <QDBusConnection>
 #endif
 
 #include "DataMigration.h"

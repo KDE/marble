@@ -251,22 +251,26 @@ endif(APPLE)
 ####################################################
 # Specific options for if building with Qt or kde4 libs
 
-if(QTONLY)
-  find_package(Qt4 REQUIRED)
-  set( QT_USE_QTXML      ON )
-  set( QT_USE_QTNETWORK  ON )
-  set( QT_USE_QTTEST     ON )
-  set( QT_USE_QTSCRIPT   ON )
-  include( ${QT_USE_FILE} )
-  marble_set_package_properties( Qt4 PROPERTIES DESCRIPTION "cross-platform application framework" )
-  marble_set_package_properties( Qt4 PROPERTIES URL "http://qt.digia.com/" )
-  marble_set_package_properties( Qt4 PROPERTIES TYPE REQUIRED PURPOSE "core framework" )
-  IF ( NOT QT_QTDECLARATIVE_LIBRARY )
-    # older cmake versions have a FindQt4.cmake without support for declarative,
-    # but the library may still be available
-    FIND_LIBRARY(QT_QTDECLARATIVE_LIBRARY NAMES QtDeclarative HINTS ${QT_LIBRARY_DIR})
-  ENDIF()
+find_package(Qt4 REQUIRED)
+set( QT_USE_QTXML         ON )
+set( QT_USE_QTNETWORK     ON )
+set( QT_USE_QTTEST        ON )
+set( QT_USE_QTSCRIPT      ON )
+set( QT_USE_QTWEBKIT      ON )
+set( QT_USE_QTSVG         ON )
+set( QT_USE_QTDECLARATIVE ON )
+set( QT_USE_QTSQL         ON )
+include( ${QT_USE_FILE} )
+marble_set_package_properties( Qt4 PROPERTIES DESCRIPTION "cross-platform application framework" )
+marble_set_package_properties( Qt4 PROPERTIES URL "http://qt.digia.com/" )
+marble_set_package_properties( Qt4 PROPERTIES TYPE REQUIRED PURPOSE "core framework" )
+IF ( NOT QT_QTDECLARATIVE_LIBRARY )
+  # older cmake versions have a FindQt4.cmake without support for declarative,
+  # but the library may still be available
+  FIND_LIBRARY(QT_QTDECLARATIVE_LIBRARY NAMES QtDeclarative HINTS ${QT_LIBRARY_DIR})
+ENDIF()
 
+if(QTONLY)
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources
   add_definitions(-DQTONLY)

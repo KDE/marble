@@ -21,7 +21,7 @@
 #include "GeoDataCoordinates.h"
 
 // Qt
-#include <QtCore/QDataStream>
+#include <QDataStream>
 #include "MarbleDebug.h"
 #include "GeoDataTrack.h"
 

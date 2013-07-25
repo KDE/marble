@@ -14,7 +14,7 @@
 #include "GeoDataPolygon.h"
 #include "MarbleDebug.h"
 
-#include <QtCore/QFileInfo>
+#include <QFileInfo>
 
 #include <shapefil.h>
 

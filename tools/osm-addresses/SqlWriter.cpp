@@ -10,11 +10,11 @@
 
 #include "SqlWriter.h"
 
-#include <QtCore/QVariant>
-#include <QtCore/QDebug>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
+#include <QVariant>
+#include <QDebug>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
 
 namespace Marble
 {

@@ -15,18 +15,18 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QProcess>
-#include <QtCore/QSignalMapper>
-#include <QtGui/QStringListModel>
-#include <QtGui/QComboBox>
-#include <QtGui/QPushButton>
-#include <QtGui/QShowEvent>
-#include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QMessageBox>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-#include <QtXml/QDomDocument>
+#include <QFile>
+#include <QProcess>
+#include <QSignalMapper>
+#include <QStringListModel>
+#include <QComboBox>
+#include <QPushButton>
+#include <QShowEvent>
+#include <QSortFilterProxyModel>
+#include <QMessageBox>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QDomDocument>
 
 namespace Marble
 {

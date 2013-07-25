@@ -23,7 +23,7 @@
 #include "DgmlIconTagHandler.h"
 
 // Qt
-#include <QtGui/QColor>
+#include <QColor>
 
 // Marble
 #include "DgmlElementDictionary.h"

@@ -16,8 +16,8 @@
 #include "GeoDataExtendedData.h"
 #include "MarbleDirs.h"
 
-#include <QtCore/QMap>
-#include <QtGui/QPainter>
+#include <QMap>
+#include <QPainter>
 
 namespace Marble
 {

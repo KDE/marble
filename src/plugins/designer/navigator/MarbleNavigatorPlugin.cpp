@@ -10,7 +10,7 @@
 
 #include "MarbleNavigatorPlugin.h"
 
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 #include "MarbleNavigator.h"
 

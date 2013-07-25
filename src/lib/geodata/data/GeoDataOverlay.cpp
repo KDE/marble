@@ -11,8 +11,8 @@
 #include "GeoDataOverlay.h"
 #include "GeoDataDocument.h"
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QDir>
+#include <QFileInfo>
+#include <QDir>
 
 namespace Marble {
 

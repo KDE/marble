@@ -13,8 +13,8 @@
 
 #include "MarblePlacemarkModel.h"
 
-#include <QtGui/QCompleter>
-#include <QtGui/QMenu>
+#include <QCompleter>
+#include <QMenu>
 
 namespace Marble {
 

@@ -13,9 +13,9 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
-#include <QtGui/QImageReader>
+#include <QImageReader>
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 namespace Marble
 {

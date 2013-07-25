@@ -11,11 +11,11 @@
 
 #include "DeferredFlag.h"
 
-#include <QtGui/QColor>
-#include <QtGui/QPainter>
-#include <QtGui/QPainterPath>
-#include <QtGui/QPixmapCache>
-#include <QtSvg/QSvgRenderer>
+#include <QColor>
+#include <QPainter>
+#include <QPainterPath>
+#include <QPixmapCache>
+#include <QSvgRenderer>
 
 using namespace Marble;
 

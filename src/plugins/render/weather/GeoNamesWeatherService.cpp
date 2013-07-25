@@ -16,11 +16,11 @@
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 
-#include <QtCore/QUrl>
-#include <QtCore/QDateTime>
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptValueIterator>
+#include <QUrl>
+#include <QDateTime>
+#include <QScriptEngine>
+#include <QScriptValue>
+#include <QScriptValueIterator>
 
 using namespace Marble;
 

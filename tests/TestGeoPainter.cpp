@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#include <QtCore/QList>
-#include <QtTest/QtTest>
+#include <QList>
+#include <QtTest>
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"
 #include "GeoPainter_p.h"

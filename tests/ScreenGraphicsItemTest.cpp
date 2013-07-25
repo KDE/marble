@@ -8,7 +8,7 @@
 // Copyright 2013       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "ScreenGraphicsItem.h"
 

@@ -12,10 +12,10 @@
 #include "pbf/PbfParser.h"
 #include "xml/XmlParser.h"
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDebug>
-#include <QtCore/QFileInfo>
-#include <QtCore/QTime>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QFileInfo>
+#include <QTime>
 
 using namespace Marble;
 

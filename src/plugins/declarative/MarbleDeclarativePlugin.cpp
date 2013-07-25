@@ -33,8 +33,8 @@
 #include "RenderPlugin.h"
 #include "DeclarativeDataPlugin.h"
 
-#include <QtDeclarative/qdeclarative.h>
-#include <QtDeclarative/QDeclarativeEngine>
+#include <qdeclarative.h>
+#include <QDeclarativeEngine>
 
 void MarbleDeclarativePlugin::registerTypes( const char * )
 {

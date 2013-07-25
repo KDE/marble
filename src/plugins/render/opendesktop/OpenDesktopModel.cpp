@@ -15,11 +15,11 @@
 #include "MarbleGlobal.h"
 #include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
-#include <QtCore/QString>
-#include <QtCore/QUrl>
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptValueIterator>
+#include <QString>
+#include <QUrl>
+#include <QScriptEngine>
+#include <QScriptValue>
+#include <QScriptValueIterator>
  
 using namespace Marble;
  

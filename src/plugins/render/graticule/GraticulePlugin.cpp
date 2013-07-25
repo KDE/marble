@@ -23,13 +23,13 @@
 #include "GeoDataLatLonAltBox.h"
 
 // Qt
-#include <QtGui/QPushButton>
-#include <QtGui/QLabel>
-#include <QtCore/QRect>
-#include <QtGui/QColor>
-#include <QtGui/QPixmap>
-#include <QtSvg/QSvgRenderer>
-#include <QtGui/QBrush>
+#include <QPushButton>
+#include <QLabel>
+#include <QRect>
+#include <QColor>
+#include <QPixmap>
+#include <QSvgRenderer>
+#include <QBrush>
 #include <QColorDialog>
 #include <QDebug>
 

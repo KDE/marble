@@ -21,8 +21,8 @@
 #include "RenderPluginModel.h"
 
 // Qt
-#include <QtGui/QAction>
-#include <QtGui/QStandardItem>
+#include <QAction>
+#include <QStandardItem>
 
 
 namespace Marble

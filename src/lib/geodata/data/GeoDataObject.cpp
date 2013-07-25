@@ -11,10 +11,10 @@
 
 #include "GeoDataObject.h"
 
-#include <QtCore/QtGlobal>
-#include <QtCore/QDataStream>
-#include <QtCore/QFileInfo>
-#include <QtCore/QUrl>
+#include <QtGlobal>
+#include <QDataStream>
+#include <QFileInfo>
+#include <QUrl>
 
 #include "GeoDataDocument.h"
 

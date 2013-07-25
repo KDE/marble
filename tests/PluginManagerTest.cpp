@@ -8,7 +8,7 @@
 // Copyright 2008 Patrick Spendrin  <ps_ml@gmx.de>
 //
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "MarbleDirs.h"
 #include "PluginManager.h"

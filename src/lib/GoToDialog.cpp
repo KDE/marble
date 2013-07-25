@@ -24,10 +24,10 @@
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
 
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QTimer>
-#include <QtGui/QPushButton>
-#include <QtGui/QPainter>
+#include <QAbstractListModel>
+#include <QTimer>
+#include <QPushButton>
+#include <QPainter>
 
 namespace Marble
 {

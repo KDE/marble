@@ -13,21 +13,21 @@
 
 #include "MarbleLegendBrowser.h"
 
-#include <QtCore/QTime>
-#include <QtCore/QUrl>
-#include <QtGui/QDesktopServices>
-#include <QtCore/QEvent>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtGui/QPainter>
-#include <QtGui/QTextFrame>
-#include <QtGui/QScrollBar>
-#include <QtGui/QStyle>
-#include <QtGui/QStyleOptionButton>
-#include <QtGui/QDesktopServices>
-#include <QtCore/QRegExp>
-#include <QtWebKit/QWebFrame>
-#include <QtWebKit/QWebElement>
+#include <QTime>
+#include <QUrl>
+#include <QDesktopServices>
+#include <QEvent>
+#include <QFile>
+#include <QFileInfo>
+#include <QPainter>
+#include <QTextFrame>
+#include <QScrollBar>
+#include <QStyle>
+#include <QStyleOptionButton>
+#include <QDesktopServices>
+#include <QRegExp>
+#include <QWebFrame>
+#include <QWebElement>
 #include <QTextDocument>
 
 #include "GeoSceneDocument.h"

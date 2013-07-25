@@ -12,9 +12,9 @@
 
 #include "PlacemarkLayer.h"
 
-#include <QtCore/QModelIndex>
-#include <QtCore/QPoint>
-#include <QtGui/QPainter>
+#include <QModelIndex>
+#include <QPoint>
+#include <QPainter>
 
 #include "MarbleDebug.h"
 #include "AbstractProjection.h"

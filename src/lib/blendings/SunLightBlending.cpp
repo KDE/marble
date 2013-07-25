@@ -21,7 +21,7 @@
 #include "TileLoaderHelper.h"
 #include "MarbleGlobal.h"
 
-#include <QtGui/QImage>
+#include <QImage>
 
 #include <cmath>
 

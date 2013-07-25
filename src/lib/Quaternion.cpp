@@ -15,8 +15,8 @@
 #include <cmath>
 using namespace std;
 
-#include <QtCore/QString>
-#include <QtCore/QDebug>
+#include <QString>
+#include <QDebug>
 
 
 using namespace Marble;

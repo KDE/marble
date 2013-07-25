@@ -16,13 +16,13 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataCoordinates_p.h"
 
-#include <QtCore/qmath.h>
-#include <QtCore/QRegExp>
-#include <QtCore/QLocale>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QCoreApplication>
-#include <QtCore/QAtomicInt>
+#include <qmath.h>
+#include <QRegExp>
+#include <QLocale>
+#include <QString>
+#include <QStringList>
+#include <QCoreApplication>
+#include <QAtomicInt>
 
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"

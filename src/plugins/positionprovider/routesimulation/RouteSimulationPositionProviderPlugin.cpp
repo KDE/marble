@@ -12,7 +12,7 @@
 
 #include "RouteSimulationPositionProviderPlugin.h"
 
-#include <QtCore/QTimer>
+#include <QTimer>
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"

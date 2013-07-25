@@ -12,13 +12,13 @@
 
 #include "NavigationFloatItem.h"
 
-#include <QtCore/qmath.h>
-#include <QtCore/QRect>
-#include <QtGui/QPixmap>
-#include <QtGui/QToolButton>
-#include <QtGui/QSlider>
-#include <QtGui/QWidget>
-#include <QtGui/QPainter>
+#include <qmath.h>
+#include <QRect>
+#include <QPixmap>
+#include <QToolButton>
+#include <QSlider>
+#include <QWidget>
+#include <QPainter>
 #include <QPixmapCache>
 
 #include "ui_navigation.h"

@@ -17,17 +17,17 @@
 #include "ui_MarbleTimeSettingsWidget.h"
 
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QSettings>
-#include <QtNetwork/QNetworkProxy>
-#include <QtGui/QApplication>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QMessageBox>
-#include <QtGui/QStandardItem>
-#include <QtGui/QTabWidget>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
-#include <QtCore/QDateTime>
+#include <QList>
+#include <QSettings>
+#include <QNetworkProxy>
+#include <QApplication>
+#include <QDialogButtonBox>
+#include <QMessageBox>
+#include <QStandardItem>
+#include <QTabWidget>
+#include <QVBoxLayout>
+#include <QWidget>
+#include <QDateTime>
 
 // Marble
 #include "MarbleGlobal.h"

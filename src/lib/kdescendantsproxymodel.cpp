@@ -22,8 +22,8 @@
 
 #include "kdescendantsproxymodel.h"
 
-#include <QtCore/QStringList>
-#include <QtCore/QTimer>
+#include <QStringList>
+#include <QTimer>
 
 #include "kbihash_p.h"
 

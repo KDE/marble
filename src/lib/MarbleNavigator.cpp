@@ -12,9 +12,9 @@
 
 #include "MarbleNavigator.h"
 
-#include <QtCore/QtAlgorithms>
-#include <QtCore/QTimer>
-#include <QtGui/QStringListModel>
+#include <QtAlgorithms>
+#include <QTimer>
+#include <QStringListModel>
 
 #include "MarbleDebug.h"
 

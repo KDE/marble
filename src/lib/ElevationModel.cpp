@@ -22,8 +22,8 @@
 #include "MapThemeManager.h"
 #include "TileId.h"
 
-#include <QtGui/QLabel>
-#include <QtCore/qmath.h>
+#include <QLabel>
+#include <qmath.h>
 
 namespace Marble
 {

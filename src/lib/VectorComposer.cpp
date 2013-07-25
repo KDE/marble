@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-#include <QtGui/QColor>
+#include <QColor>
 
 #include "MarbleDebug.h"
 #include "GeoPolygon.h"

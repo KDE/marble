@@ -13,7 +13,7 @@
 #include "NewBookmarkFolderDialog.h"
 #include "MarbleDebug.h"
 
-#include <QtGui/QLineEdit>
+#include <QLineEdit>
 
 namespace Marble {
 

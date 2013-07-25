@@ -8,11 +8,11 @@
 // Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#include <QtGui/QApplication>
+#include <QApplication>
 
-#include <QtGui/QLayout>
-#include <QtGui/QSlider>
-#include <QtGui/QLabel>
+#include <QLayout>
+#include <QSlider>
+#include <QLabel>
 
 #include <marble/MarbleWidget.h>
 

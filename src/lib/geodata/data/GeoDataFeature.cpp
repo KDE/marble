@@ -13,9 +13,9 @@
 #include "GeoDataFeature.h"
 #include "GeoDataFeature_p.h"
 
-#include <QtCore/QDataStream>
-#include <QtCore/QSize>
-#include <QtGui/QPixmap>
+#include <QDataStream>
+#include <QSize>
+#include <QPixmap>
 
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"

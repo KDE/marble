@@ -10,8 +10,8 @@
 
 #include "NavigationButton.h"
 
-#include <QtGui/QPainter>
-#include <QtGui/QMouseEvent>
+#include <QPainter>
+#include <QMouseEvent>
 
 namespace Marble
 {

@@ -20,10 +20,10 @@
 
 #include "TileLoader.h"
 
-#include <QtCore/QDateTime>
-#include <QtCore/QFileInfo>
-#include <QtCore/QMetaType>
-#include <QtGui/QImage>
+#include <QDateTime>
+#include <QFileInfo>
+#include <QMetaType>
+#include <QImage>
 
 #include "MarbleRunnerManager.h"
 

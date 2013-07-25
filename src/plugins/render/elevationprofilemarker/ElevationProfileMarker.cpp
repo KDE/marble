@@ -11,7 +11,7 @@
 
 #include "ElevationProfileMarker.h"
 
-#include <QtCore/QRect>
+#include <QRect>
 
 #include "MarbleLocale.h"
 #include "MarbleModel.h"

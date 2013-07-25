@@ -15,9 +15,9 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
 
-#include <QtCore/QModelIndex>
-#include <QtCore/QDebug>
-#include <QtGui/QStandardItemModel>
+#include <QModelIndex>
+#include <QDebug>
+#include <QStandardItemModel>
 
 MapThemeModel::MapThemeModel( QObject *parent ) : QSortFilterProxyModel( parent ),
     m_themeManager( new Marble::MapThemeManager( this ) ), m_mapThemeFilters( MapThemeModel::AnyTheme )

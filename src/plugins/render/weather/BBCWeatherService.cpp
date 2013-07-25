@@ -25,10 +25,10 @@
 #include "MarbleGlobal.h"
 
 // Qt
-#include <QtCore/QFile>
-#include <QtCore/QList>
-#include <QtCore/QTime>
-#include <QtCore/QUrl>
+#include <QFile>
+#include <QList>
+#include <QTime>
+#include <QUrl>
 
 using namespace Marble;
 

@@ -10,11 +10,11 @@
 
 #include "FileLoader.h"
 
-#include <QtCore/QBuffer>
-#include <QtCore/QDataStream>
-#include <QtCore/QDateTime>
-#include <QtCore/QFile>
-#include <QtCore/QThread>
+#include <QBuffer>
+#include <QDataStream>
+#include <QDateTime>
+#include <QFile>
+#include <QThread>
 
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"

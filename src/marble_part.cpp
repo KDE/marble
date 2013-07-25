@@ -15,19 +15,19 @@
 #include "marble_part.h"
 
 // Qt
-#include <QtCore/QDir>
-#include <QtCore/QPointer>
-#include <QtCore/QStringList>
-#include <QtCore/QTimer>
-#include <QtGui/QClipboard>
-#include <QtGui/QLabel>
-#include <QtGui/QFontMetrics>
-#include <QtGui/QPrinter>
-#include <QtGui/QPrintDialog>
-#include <QtGui/QProgressBar>
-#include <QtGui/QStandardItemModel>
-#include <QtGui/QShortcut>
-#include <QtNetwork/QNetworkProxy>
+#include <QDir>
+#include <QPointer>
+#include <QStringList>
+#include <QTimer>
+#include <QClipboard>
+#include <QLabel>
+#include <QFontMetrics>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QProgressBar>
+#include <QStandardItemModel>
+#include <QShortcut>
+#include <QNetworkProxy>
 
 // KDE
 #include <kaboutdata.h>

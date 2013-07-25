@@ -12,11 +12,11 @@
 
 #include <cmath>
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDebug>
-#include <QtCore/QFile>
-#include <QtCore/QVector>
-#include <QtCore/QStringList>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QFile>
+#include <QVector>
+#include <QStringList>
 #include "../../src/lib/Quaternion.h"
 
 using namespace Marble;

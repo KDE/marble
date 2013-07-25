@@ -17,11 +17,11 @@
 #include "ViewportParams.h"
 
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QSet>
-#include <QtGui/QPainter>
-#include <QtGui/QPixmap>
-#include <QtGui/QMouseEvent>
+#include <QList>
+#include <QSet>
+#include <QPainter>
+#include <QPixmap>
+#include <QMouseEvent>
 
 using namespace Marble;
 

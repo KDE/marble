@@ -15,7 +15,7 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 
-#include <QtCore/QDateTime>
+#include <QDateTime>
 
 namespace Marble
 {

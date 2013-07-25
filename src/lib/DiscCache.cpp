@@ -13,9 +13,9 @@
 #include "DiscCache.h"
 
 // Qt
-#include <QtCore/QtGlobal>
-#include <QtCore/QFile>
-#include <QtCore/QDirIterator>
+#include <QtGlobal>
+#include <QFile>
+#include <QDirIterator>
 
 using namespace Marble;
 

@@ -34,23 +34,23 @@
 #include "MarbleWidget.h"
 #include "MarbleNavigator.h"
 
-#include <QtCore/QBuffer>
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QProcess>
-#include <QtCore/QSharedPointer>
-#include <QtCore/QTimer>
-#include <QtCore/QTemporaryFile>
-#include <QtGui/QPixmap>
-#include <QtGui/QMessageBox>
-#include <QtGui/QFileDialog>
-#include <QtGui/QImageReader>
-#include <QtGui/QDialogButtonBox>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QNetworkRequest>
-#include <QtXml/QDomElement>
-#include <QtXml/QXmlStreamWriter>
+#include <QBuffer>
+#include <QDir>
+#include <QFile>
+#include <QProcess>
+#include <QSharedPointer>
+#include <QTimer>
+#include <QTemporaryFile>
+#include <QPixmap>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QImageReader>
+#include <QDialogButtonBox>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QDomElement>
+#include <QXmlStreamWriter>
 
 namespace Marble
 {

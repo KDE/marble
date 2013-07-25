@@ -20,11 +20,11 @@
 #include "ViewportParams.h"
 #include "MarbleGlobal.h"
 
-#include <QtGui/QPixmap>
-#include <QtGui/QWidget>
-#include <QtCore/QRect>
-#include <QtCore/QPointF>
-#include <QtCore/QTimer>
+#include <QPixmap>
+#include <QWidget>
+#include <QRect>
+#include <QPointF>
+#include <QTimer>
 #include <math.h>
 
 namespace Marble {

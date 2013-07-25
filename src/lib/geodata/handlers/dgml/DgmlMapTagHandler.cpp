@@ -22,7 +22,7 @@
 
 #include "DgmlMapTagHandler.h"
 
-#include <QtGui/QColor>
+#include <QColor>
 
 #include "MarbleDebug.h"
 

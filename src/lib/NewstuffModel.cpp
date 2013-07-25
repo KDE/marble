@@ -13,20 +13,20 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 
-#include <QtCore/QUrl>
-#include <QtCore/QVector>
-#include <QtCore/QTemporaryFile>
-#include <QtCore/QDir>
-#include <QtCore/QFuture>
-#include <QtCore/QPair>
-#include <QtCore/QFutureWatcher>
-#include <QtCore/QtConcurrentRun>
-#include <QtCore/QProcessEnvironment>
-#include <QtCore/QMutexLocker>
-#include <QtGui/QIcon>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-#include <QtXml/QDomDocument>
+#include <QUrl>
+#include <QVector>
+#include <QTemporaryFile>
+#include <QDir>
+#include <QFuture>
+#include <QPair>
+#include <QFutureWatcher>
+#include <QtConcurrentRun>
+#include <QProcessEnvironment>
+#include <QMutexLocker>
+#include <QIcon>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QDomDocument>
 
 namespace Marble
 {

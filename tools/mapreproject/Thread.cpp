@@ -40,7 +40,7 @@
 
 #include "Thread.h"
 
-#include <QtCore/QSignalMapper>
+#include <QSignalMapper>
 
 Thread::Thread( QObject * const parent )
     : QThread( parent )

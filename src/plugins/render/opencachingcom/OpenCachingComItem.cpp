@@ -20,14 +20,14 @@
 #include "ui_CacheDetailsDialog.h"
 #include "OpenCachingComModel.h"
 
-#include <QtGui/QFontMetrics>
-#include <QtGui/QPixmap>
+#include <QFontMetrics>
+#include <QPixmap>
 #include <QAction>
 #include <QDialog>
 #include <QDateTime>
 #include <QFile>
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptValue>
+#include <QScriptEngine>
+#include <QScriptValue>
 #include <QDesktopServices>
 
 #include <QDebug>

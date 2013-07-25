@@ -8,8 +8,8 @@
 // Copyright 2012 Thibaut Gridel <tgridel@free.fr>
 
 
-#include <QtCore/QMetaType>
-#include <QtTest/QtTest>
+#include <QMetaType>
+#include <QtTest>
 #include "TileId.h"
 #include "GeoDataCoordinates.h"
 #include "TestUtils.h"

@@ -10,7 +10,7 @@
 
 #include "AprsFile.h"
 
-#include <QtCore/QFile>
+#include <QFile>
 
 #include "MarbleDebug.h"
 

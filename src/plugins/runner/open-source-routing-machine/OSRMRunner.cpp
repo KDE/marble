@@ -19,16 +19,16 @@
 #include "routing/RouteRequest.h"
 #include "TinyWebBrowser.h"
 
-#include <QtCore/QString>
-#include <QtCore/QVector>
-#include <QtCore/QUrl>
-#include <QtCore/QTime>
-#include <QtCore/QTimer>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptValueIterator>
+#include <QString>
+#include <QVector>
+#include <QUrl>
+#include <QTime>
+#include <QTimer>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QScriptValue>
+#include <QScriptEngine>
+#include <QScriptValueIterator>
 
 namespace Marble
 {

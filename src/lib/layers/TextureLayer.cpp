@@ -12,8 +12,8 @@
 
 #include "TextureLayer.h"
 
-#include <QtCore/qmath.h>
-#include <QtCore/QTimer>
+#include <qmath.h>
+#include <QTimer>
 
 #include "SphericalScanlineTextureMapper.h"
 #include "EquirectScanlineTextureMapper.h"

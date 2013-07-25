@@ -19,10 +19,10 @@
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 
-#include <QtCore/QUrl>
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptValueIterator>
+#include <QUrl>
+#include <QScriptEngine>
+#include <QScriptValue>
+#include <QScriptValueIterator>
 
 namespace Marble
 {

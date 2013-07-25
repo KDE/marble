@@ -14,35 +14,35 @@
 #include "QtMainWindow.h"
 
 #include "MarbleDebug.h"
-#include <QtCore/QList>
-#include <QtCore/QSettings>
-#include <QtCore/QUrl>
-#include <QtGui/QCloseEvent>
-#include <QtCore/QTimer>
-#include <QtCore/QVariant>
-#include <QtCore/QVector>
+#include <QList>
+#include <QSettings>
+#include <QUrl>
+#include <QCloseEvent>
+#include <QTimer>
+#include <QVariant>
+#include <QVector>
 
-#include <QtGui/QAction>
-#include <QtGui/QLabel>
-#include <QtGui/QWhatsThis>
-#include <QtGui/QApplication>
-#include <QtGui/QIcon>
-#include <QtGui/QMenuBar>
-#include <QtGui/QStatusBar>
-#include <QtGui/QProgressBar>
-#include <QtGui/QToolBar>
-#include <QtGui/QDesktopServices>
-#include <QtGui/QFileDialog>
-#include <QtGui/QMessageBox>
-#include <QtGui/QPrintDialog>
-#include <QtGui/QPrinter>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QScrollArea>
-#include <QtGui/QClipboard>
-#include <QtGui/QShortcut>
-#include <QtGui/QDockWidget>
-#include <QtNetwork/QNetworkProxy>
+#include <QAction>
+#include <QLabel>
+#include <QWhatsThis>
+#include <QApplication>
+#include <QIcon>
+#include <QMenuBar>
+#include <QStatusBar>
+#include <QProgressBar>
+#include <QToolBar>
+#include <QDesktopServices>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QDialogButtonBox>
+#include <QHBoxLayout>
+#include <QScrollArea>
+#include <QClipboard>
+#include <QShortcut>
+#include <QDockWidget>
+#include <QNetworkProxy>
 
 #include "EditBookmarkDialog.h"
 #include "BookmarkManagerDialog.h"
@@ -82,7 +82,7 @@
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
-#include <QtGui/QX11Info>
+#include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif // Q_WS_MAEMO_5

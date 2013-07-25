@@ -21,7 +21,7 @@
 
 #include "KmlHrefTagHandler.h"
 
-#include <QtCore/QUrl>
+#include <QUrl>
 
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"

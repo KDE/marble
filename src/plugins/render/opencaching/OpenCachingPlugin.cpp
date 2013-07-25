@@ -12,7 +12,7 @@
 #include "OpenCachingModel.h"
 #include "ui_OpenCachingConfigWidget.h"
 
-#include <QtGui/QPushButton>
+#include <QPushButton>
 
 namespace Marble {
 

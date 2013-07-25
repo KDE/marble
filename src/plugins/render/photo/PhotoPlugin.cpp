@@ -21,9 +21,9 @@
 #include "MarbleWidget.h"
 
 // Qt
-#include <QtGui/QPushButton>
-#include <QtGui/QLabel>
-#include <QtCore/QStringList>
+#include <QPushButton>
+#include <QLabel>
+#include <QStringList>
 
 using namespace Marble;
 /* TRANSLATOR Marble::PhotoPlugin */

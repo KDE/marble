@@ -8,11 +8,11 @@
 // Copyright 2009 Patrick Spendrin  <ps_ml@gmx.de>
 //
 
-#include <QtTest/QtTest>
-#include <QtCore/QCoreApplication>
-#include <QtCore/QPointF>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
+#include <QtTest>
+#include <QCoreApplication>
+#include <QPointF>
+#include <QString>
+#include <QStringList>
 #include "MarbleDebug.h"
 
 #include "MarbleDirs.h"
