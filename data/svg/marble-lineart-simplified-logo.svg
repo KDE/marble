@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2985"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   width="250"
+   height="250"
+   sodipodi:docname="marble-lineart-logo.svg"
+   inkscape:export-filename="/home/torsten/marble_lineart.png"
+   inkscape:export-xdpi="57.693958"
+   inkscape:export-ydpi="57.693958">
+  <metadata
+     id="metadata2991">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2989" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="721"
+     id="namedview2987"
+     showgrid="false"
+     inkscape:zoom="1.119361"
+     inkscape:cx="112.51503"
+     inkscape:cy="133.88406"
+     inkscape:window-x="-3"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2985"
+     showguides="false"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       orientation="0,1"
+       position="277.59275,97.373412"
+       id="guide3919" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="243.43353,101.29976"
+       id="guide3921" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="6.2821556,86.772274"
+       id="guide3923" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="63.214191,142.52641"
+       id="guide3925" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="57.32467,60.465748"
+       id="guide3927" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="80.097484,170.01084"
+       id="guide3929" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="71.074478,25.54239"
+       id="guide3793" />
+  </sodipodi:namedview>
+  <path
+     style="fill:#999999;stroke:none"
+     d="M 126.03125 18.40625 C 111.64119 18.745082 101.89474 27.186096 95.40625 35.875 L 95.5625 36.4375 C 37.927381 46.642991 6.3133343 83.926617 6.5 107.5 L 6.28125 148.625 C 6.28125 185.53266 58.177638 224.45761 124.625 224.4375 C 196.2728 224.4576 243.4375 182.81287 243.4375 150.625 L 243.4375 107.46875 C 243.4375 79.98916 210.18463 48.311251 158.71875 37.1875 C 153.40626 28.163148 142.5171 18.602895 127.4375 18.40625 C 126.96359 18.40005 126.49545 18.39532 126.03125 18.40625 z M 50.875 59.375 C 85.999257 74.783549 123.15486 89.857433 150.875 106.5 C 165.92032 126.4965 186.25617 152.29064 208.03125 186.71875 C 177.70041 173.82255 138.18952 158.0865 109.15625 140 C 84.403873 113.73595 67.429354 85.019107 50.875 59.375 z M 63.28125 68.8125 C 77.450662 89.191406 91.395318 110.15299 111.90625 132.34375 C 113.92039 121.75112 119.40808 114.60222 127.0625 110.84375 C 106.16801 95.372507 84.827307 81.677457 63.28125 68.8125 z M 136.375 108.0625 C 132.74461 108.1453 129.73228 109.09397 127.125 110.375 C 151.30248 132.53039 174.68531 154.68835 198.25 176.84375 L 146.09375 109.71875 C 142.40484 108.46001 139.19863 107.99813 136.375 108.0625 z "
+     id="path3159" />
+</svg>
