@@ -119,9 +119,7 @@ GeoDataFolder* RoutingManagerPrivate::routeRequest() const
     GeoDataFolder* result = new GeoDataFolder;
     result->setName( "Route Request" );
     for ( int i=0; i<m_routeRequest.size(); ++i ) {
-        GeoDataPlacemark* placemark = new GeoDataPlacemark;
-        placemark->setName( m_routeRequest.name( i ) );
-        placemark->setCoordinate( m_routeRequest.at( i ) );
+        GeoDataPlacemark* placemark = new GeoDataPlacemark( m_routeRequest[i] );
         result->append( placemark );
     }
 
@@ -201,11 +199,10 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
             loaded = true;
             QVector<GeoDataPlacemark*> placemarks = viaPoints->placemarkList();
             for( int i=0; i<placemarks.size(); ++i ) {
-                QString const name = placemarks[i]->name();
                 if ( i < m_routeRequest.size() ) {
-                    m_routeRequest.setPosition( i, placemarks[i]->coordinate(), name );
+                    m_routeRequest[i] = *placemarks[i];
                 } else {
-                    m_routeRequest.append( placemarks[i]->coordinate(), name );
+                    m_routeRequest.append( *placemarks[i] );
                 }
             }
 
