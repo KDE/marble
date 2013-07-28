@@ -21,6 +21,7 @@
 #include "MarbleWidget.h"
 #include "routing/RoutingManager.h"
 #include "GeoDataFolder.h"
+#include "GeoDataExtendedData.h"
 #include "PositionTracking.h"
 #include "MarbleLineEdit.h"
 #include "GoToDialog.h"
@@ -99,7 +100,32 @@ public:
     void createBookmarkActions( QMenu* menu, GeoDataFolder* bookmarksFolder, QObject *parent );
 
     QPixmap addDropDownIndicator( const QPixmap &pixmap ) const;
+
+    void updateDescription();
 };
+
+void RoutingInputWidgetPrivate::updateDescription()
+{
+    GeoDataPlacemark const placemark = (*m_route)[m_index];
+    GeoDataExtendedData const address = placemark.extendedData();
+    if ( address.contains( "house_number" ) && address.contains( "road" ) && address.contains( "city" ) )
+    {
+        QString const name = QObject::tr("%1 %2, %3", "An address with parameters %1=house number, %2=road, %3=city");
+        QString const houseNumber = address.value( "house_number" ).value().toString();
+        QString const road = address.value( "road" ).value().toString();
+        QString const city = address.value( "city" ).value().toString();
+        m_lineEdit->setText( name.arg( houseNumber ).arg( road ).arg( city ) );
+    }
+    else if ( m_route->name( m_index ).isEmpty() )
+    {
+        m_lineEdit->setText( placemark.coordinate().toString().trimmed() );
+    }
+    else
+    {
+        m_lineEdit->setText( placemark.name() );
+    }
+    m_lineEdit->setCursorPosition( 0 );
+}
 
 RoutingInputLineEdit::RoutingInputLineEdit( QWidget *parent ) :
     MarbleLineEdit( parent )
@@ -284,8 +310,7 @@ void RoutingInputWidget::reverseGeocoding()
     if ( name.isEmpty() || name == tr( "Current Location" ) ) {
         d->m_runnerManager.reverseGeocoding( targetPosition() );
     } else {
-        d->m_lineEdit->setText( name );
-        d->m_lineEdit->setCursorPosition( 0 );
+        d->updateDescription();
     }
 }
 
@@ -301,8 +326,7 @@ void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position, 
     }
     d->m_route->setPosition( d->m_index, position, name );
     if ( !name.isEmpty() ) {
-        d->m_lineEdit->setText( name );
-        d->m_lineEdit->setCursorPosition( 0 );
+        d->updateDescription();
     }
     emit targetValidityChanged( true );
 }
@@ -404,12 +428,10 @@ void RoutingInputWidget::clear()
     emit targetValidityChanged( false );
 }
 
-void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )
+void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinates &, const GeoDataPlacemark &placemark )
 {
-    QString description = placemark.address().isEmpty() ? coordinates.toString().trimmed() : placemark.address();
-    d->m_route->setName( d->m_index, description );
-    d->m_lineEdit->setText( description );
-    d->m_lineEdit->setCursorPosition( 0 );
+    (*d->m_route)[d->m_index] = placemark;
+    d->updateDescription();
 }
 
 void RoutingInputWidget::setProgressAnimation( const QVector<QIcon> &animation )
