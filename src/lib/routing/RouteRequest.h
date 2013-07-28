@@ -55,6 +55,8 @@ public:
     /** Add the given element to the end */
     void append( const GeoDataCoordinates &coordinates, const QString &name = QString() );
 
+    void append( const GeoDataPlacemark &placemark );
+
     /** Add the given element at the given position */
     void insert( int index, const GeoDataCoordinates &coordinates, const QString &name = QString() );
 
@@ -94,6 +96,10 @@ public:
     void setRoutingProfile( const RoutingProfile &profile );
 
     RoutingProfile routingProfile() const;
+
+    GeoDataPlacemark & operator[] ( int index );
+
+    GeoDataPlacemark const & operator[] ( int index ) const;
 
 Q_SIGNALS:
     /** The value of the n-th element was changed */

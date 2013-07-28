@@ -219,8 +219,13 @@ void RouteRequest::append( const GeoDataCoordinates &coordinates, const QString 
 {
     GeoDataPlacemark placemark;
     placemark.setCoordinate( coordinates );
+    placemark.setName( name );
+    append( placemark );
+}
+
+void RouteRequest::append( const GeoDataPlacemark &placemark )
+{
     d->m_route.append( placemark );
-    setName( d->m_route.size()-1, name );
     emit positionAdded( d->m_route.size()-1 );
 }
 
@@ -316,6 +321,16 @@ void RouteRequest::setRoutingProfile( const RoutingProfile &profile )
 RoutingProfile RouteRequest::routingProfile() const
 {
     return d->m_routingProfile;
+}
+
+GeoDataPlacemark &RouteRequest::operator []( int index )
+{
+    return d->m_route[index];
+}
+
+const GeoDataPlacemark &RouteRequest::operator [](int index) const
+{
+    return d->m_route[index];
 }
 
 } // namespace Marble
