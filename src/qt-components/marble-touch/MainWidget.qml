@@ -6,6 +6,7 @@
 //
 // Copyright 2011 Dennis Nienhüser <earthwings@gentoo.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
+// Copyright 2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
 import QtQuick 1.0
 import org.kde.edu.marble 0.11
@@ -95,8 +96,6 @@ Item {
             settings.quitLongitude = center.longitude
             settings.quitLatitude = center.latitude
         }
-
-        onVisibleLatLonAltBoxChanged: updatePositionIndicator()
 
         property Search search: Search {
             map: map
@@ -207,15 +206,6 @@ Item {
             })
             screen.placemarkSelected(placemark)
         }
-
-        function updatePositionIndicator() {
-            if (positionFinderDirection.visible) {
-                var pos = map.pixel( tracking.lastKnownPosition.longitude, tracking.lastKnownPosition.latitude )
-                positionFinderDirection.rotation = 270 + 180.0 / Math.PI * Math.atan2 ( positionFinderDirection.y - pos.y, positionFinderDirection.x - pos.x )
-                var indicatorPosition = map.coordinate( positionFinderDirection.x, positionFinderDirection.y )
-                positionDistanceText.text = (tracking.lastKnownPosition.distance( indicatorPosition.longitude, indicatorPosition.latitude ) / 1000).toFixed(1) + " km"
-            }
-        }
     }
     
     // Delivers the current (gps) position.
@@ -268,50 +258,12 @@ Item {
         }
     }
 
-    Image {
-        id: positionFinderDirection
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: 10
-        z: 10
-        visible: settings.showPositionIndicator
-        smooth: true
-
-        source: "qrc:/marker-direction.svg"
-        //rotation: 180 + map.tracking.lastKnownPosition.bearing( map.center.longitude, map.center.latitude )
-    }
-
-    Image {
-        id: positionFinder
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: 10
-        z: 10
+    PositionIndicator {
+        anchors.fill: parent
         visible: settings.showPositionIndicator
 
-        source: map.tracking.positionSource.hasPosition ? "qrc:/marker.svg" : "qrc:/marker-yellow.svg"
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: centerOn( map.tracking.lastKnownPosition.longitude, map.tracking.lastKnownPosition.latitude )
-        }
-    }
-
-    Rectangle {
-        id: positionDistance
-        anchors.bottom: positionFinder.top
-        width: positionDistanceText.width + 6
-        height: positionDistanceText.height + 4
-        anchors.right: parent.right
-        anchors.margins: 4
-        radius: 5
-        color: Qt.rgba(192/255, 192/255, 192/255, 192/255)
-        visible: settings.showPositionIndicator
-
-        Text {
-            id: positionDistanceText
-            anchors.centerIn: parent
-        }
+        map: map
+        tracking: tracking
     }
 
     // Starts a search for the passed term.
