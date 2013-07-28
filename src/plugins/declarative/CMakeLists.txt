@@ -27,7 +27,6 @@ Search.cpp
 RouteRequestModel.cpp
 Settings.cpp
 MapThemeModel.cpp
-RelatedActivities.cpp
 ZoomButtonInterceptor.cpp
 )
 

@@ -21,7 +21,6 @@
 #include "Navigation.h"
 #include "Search.h"
 #include "RouteRequestModel.h"
-#include "RelatedActivities.h"
 #include "Settings.h"
 #include "MapThemeModel.h"
 #include "NewstuffModel.h"
@@ -50,7 +49,6 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Navigation>( uri, 0, 11, "Navigation" );
     qmlRegisterType<Search>( uri, 0, 11, "Search" );
     qmlRegisterType<RouteRequestModel>( uri, 0, 11, "RouteRequestModel" );
-    qmlRegisterType<RelatedActivities>( uri, 0, 11, "RelatedActivities" );
     qmlRegisterType<Settings>( uri, 0, 11, "Settings" );
 
     qmlRegisterType<MarbleWidget>( uri, 0, 11, "MarbleWidget" );
