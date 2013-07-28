@@ -295,7 +295,9 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
     }
 
     if ( plugins.isEmpty() ) {
-        emit reverseGeocodingFinished( coordinates, GeoDataPlacemark() );
+        GeoDataPlacemark anonymous;
+        anonymous.setCoordinate( coordinates );
+        emit reverseGeocodingFinished( coordinates, anonymous );
         d->cleanupReverseGeocodingTask( 0 );
     }
 }
