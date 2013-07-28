@@ -7,7 +7,7 @@
 // Copyright 2011 Dennis Nienhüser <earthwings@gentoo.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.edu.marble 0.11
 import com.nokia.meego 1.0
 
