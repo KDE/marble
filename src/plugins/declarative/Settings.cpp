@@ -10,8 +10,11 @@
 
 #include "Settings.h"
 
+#include <QApplication>
+
 Settings::Settings() :
-    m_organizationName( "KDE" ), m_applicationName( "Marble Virtual Globe" )
+    m_organizationName( QApplication::organizationName() ),
+    m_applicationName( QApplication::applicationName() )
 {
     // nothing to do
 }
