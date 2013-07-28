@@ -62,12 +62,6 @@ Item {
         id: settings
     }
 
-    function resetLastActivity() {
-        if ( marbleWidget !== null && pageStack.depth < 2 ) {
-            settings.lastActivity = ""
-        }
-    }
-
     function showNavigation() {
         navigation.open()
     }
@@ -94,6 +88,4 @@ Item {
             activitySelection.openActivity( settings.lastActivity )
         }
     }
-
-    Connections { target: pageStack; onDepthChanged: resetLastActivity() }
 }
