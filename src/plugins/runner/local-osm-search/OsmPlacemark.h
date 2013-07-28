@@ -11,7 +11,7 @@
 #ifndef MARBLE_OSMPLACEMARK_H
 #define MARBLE_OSMPLACEMARK_H
 
-#include <QtCore/QString>
+#include <QString>
 
 namespace Marble {
 

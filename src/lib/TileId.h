@@ -12,8 +12,8 @@
 #ifndef MARBLE_TILEID_H
 #define MARBLE_TILEID_H
 
-#include <QtCore/QHash>
-#include <QtCore/QString>
+#include <QHash>
+#include <QString>
 
 #include "marble_export.h"
 

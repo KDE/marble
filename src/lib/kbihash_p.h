@@ -23,10 +23,10 @@
 #ifndef KBIHASH_P_H
 #define KBIHASH_P_H
 
-#include <QtCore/QHash>
-#include <QtCore/QMap>
+#include <QHash>
+#include <QMap>
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 template<typename LeftContainer, typename RightContainer>
 class KBiAssociativeContainer;

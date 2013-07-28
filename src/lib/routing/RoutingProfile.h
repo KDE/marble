@@ -14,9 +14,9 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QString>
-#include <QtCore/QHash>
-#include <QtCore/QVariant>
+#include <QString>
+#include <QHash>
+#include <QVariant>
 
 namespace Marble
 {

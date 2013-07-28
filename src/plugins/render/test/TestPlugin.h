@@ -15,7 +15,7 @@
 #ifndef MARBLETESTPLUGIN_H
 #define MARBLETESTPLUGIN_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "RenderPlugin.h"
 

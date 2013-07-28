@@ -11,10 +11,10 @@
 #ifndef MARBLE_DISCCACHE_H
 #define MARBLE_DISCCACHE_H
 
-#include <QtCore/QDateTime>
-#include <QtCore/QMap>
-#include <QtCore/QPair>
-#include <QtCore/QString>
+#include <QDateTime>
+#include <QMap>
+#include <QPair>
+#include <QString>
 
 class QByteArray;
 

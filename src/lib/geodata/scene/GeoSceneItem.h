@@ -22,7 +22,7 @@
 #ifndef MARBLE_GEOSCENEITEM_H
 #define MARBLE_GEOSCENEITEM_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "GeoDocument.h"
 

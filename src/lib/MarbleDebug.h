@@ -11,7 +11,7 @@
 #ifndef MARBLE_MARBLEDEBUG_H
 #define MARBLE_MARBLEDEBUG_H
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 #include "marble_export.h"
 

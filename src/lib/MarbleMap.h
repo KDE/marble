@@ -22,11 +22,11 @@
  */
 
 
-#include <QtCore/QSize>
-#include <QtCore/QString>
-#include <QtCore/QObject>
-#include <QtGui/QFont>
-#include <QtGui/QPixmap>
+#include <QSize>
+#include <QString>
+#include <QObject>
+#include <QFont>
+#include <QPixmap>
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/

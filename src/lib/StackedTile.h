@@ -14,10 +14,10 @@
 #ifndef MARBLE_STACKEDTILE_H
 #define MARBLE_STACKEDTILE_H
 
-#include <QtCore/QSharedPointer>
-#include <QtCore/QVector>
-#include <QtGui/QColor>
-#include <QtGui/QImage>
+#include <QSharedPointer>
+#include <QVector>
+#include <QColor>
+#include <QImage>
 
 #include "Tile.h"
 

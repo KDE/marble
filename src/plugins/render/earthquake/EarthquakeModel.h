@@ -12,7 +12,7 @@
 #define EARTHQUAKEMODEL_H
 
 #include "AbstractDataPluginModel.h"
-#include <QtCore/QDateTime>
+#include <QDateTime>
 
 namespace Marble
 {

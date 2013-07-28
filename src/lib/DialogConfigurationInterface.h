@@ -10,7 +10,7 @@
 #ifndef MARBLE_DIALOGCONFIGURATIONINTERFACE_H
 #define MARBLE_DIALOGCONFIGURATIONINTERFACE_H
 
-#include <QtCore/QObject> // for Q_DECLARE_INTERFACE macro
+#include <QObject> // for Q_DECLARE_INTERFACE macro
 #include "marble_export.h"
 
 class QDialog;

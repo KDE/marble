@@ -15,11 +15,11 @@
 #ifndef MARBLESTARSPLUGIN_H
 #define MARBLESTARSPLUGIN_H
 
-#include <QtCore/QObject>
-#include <QtCore/QVector>
-#include <QtCore/QVariant>
-#include <QtCore/QHash>
-#include <QtGui/QBrush>
+#include <QObject>
+#include <QVector>
+#include <QVariant>
+#include <QHash>
+#include <QBrush>
 
 #include "RenderPlugin.h"
 #include "Quaternion.h"

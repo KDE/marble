@@ -14,9 +14,9 @@
 #include "jobparameters.h"
 #include "region.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QRunnable>
-#include <QtCore/QFileInfo>
+#include <QObject>
+#include <QRunnable>
+#include <QFileInfo>
 
 class Job : public QObject, public QRunnable
 {

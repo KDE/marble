@@ -12,7 +12,7 @@
 #define APRSTCPIP_H
 
 #include "AprsSource.h"
-#include <QtCore/QString>
+#include <QString>
 
 namespace Marble {
     class AprsTCPIP : public AprsSource

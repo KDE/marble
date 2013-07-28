@@ -14,7 +14,7 @@
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 class QModelIndex;
 

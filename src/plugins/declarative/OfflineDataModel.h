@@ -13,7 +13,7 @@
 
 #include "NewstuffModel.h"
 
-#include <QtGui/QSortFilterProxyModel>
+#include <QSortFilterProxyModel>
 
 class OfflineDataModel : public QSortFilterProxyModel
 {

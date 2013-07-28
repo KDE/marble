@@ -11,12 +11,12 @@
 #ifndef JSONPARSER_H
 #define JSONPARSER_H
 
-#include <QtScript/QtScript>
+#include <QtScript>
 #include <QList>
 #include <QObject>
 #include <QDebug>
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptEngine>
+#include <QScriptValue>
+#include <QScriptEngine>
 /**
 This is a generic class built up for parsing Json that is JavaScript Object Notification
 FIXME: the class presently has no sanity checking mechanism, it just can't check whether the input given to it is only JSON or Javascript ; a point of potential breach for the software.

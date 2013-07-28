@@ -11,8 +11,8 @@
 #ifndef MARBLE_DECLARATIVE_SEARCH_H
 #define MARBLE_DECLARATIVE_SEARCH_H
 
-#include <QtCore/QObject>
-#include <QtDeclarative/QtDeclarative>
+#include <QObject>
+#include <QtDeclarative>
 
 #include "MarbleRunnerManager.h"
 

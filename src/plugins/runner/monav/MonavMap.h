@@ -14,7 +14,7 @@
 #include "GeoDataLatLonBox.h"
 #include "GeoDataLinearRing.h"
 
-#include <QtCore/QDir>
+#include <QDir>
 
 namespace Marble
 {

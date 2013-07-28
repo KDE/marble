@@ -11,10 +11,10 @@
 #ifndef MARBLE_LABELGRAPHICSITEMPRIVATE_H
 #define MARBLE_LABELGRAPHICSITEMPRIVATE_H
 
-#include <QtCore/QString>
-#include <QtCore/QSizeF>
-#include <QtGui/QImage>
-#include <QtGui/QIcon>
+#include <QString>
+#include <QSizeF>
+#include <QImage>
+#include <QIcon>
 
 class QFont;
 

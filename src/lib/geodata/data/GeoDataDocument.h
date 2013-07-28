@@ -24,9 +24,9 @@
 #ifndef MARBLE_GEODATADOCUMENT_H
 #define MARBLE_GEODATADOCUMENT_H
 
-#include <QtCore/QHash>
-#include <QtCore/QMetaType>
-#include <QtCore/QVector>
+#include <QHash>
+#include <QMetaType>
+#include <QVector>
 
 #include "geodata_export.h"
 

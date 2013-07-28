@@ -11,8 +11,8 @@
 #ifndef MARBLE_DECLARATIVE_ROUTING_H
 #define MARBLE_DECLARATIVE_ROUTING_H
 
-#include <QtCore/QObject>
-#include <QtDeclarative/QtDeclarative>
+#include <QObject>
+#include <QtDeclarative>
 
 class QAbstractItemModel;
 

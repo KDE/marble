@@ -20,9 +20,9 @@
 #ifndef MARBLE_TILELOADER_H
 #define MARBLE_TILELOADER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtGui/QImage>
+#include <QObject>
+#include <QString>
+#include <QImage>
 
 #include "TileId.h"
 #include "GeoDataContainer.h"

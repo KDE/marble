@@ -13,8 +13,8 @@
 
 #include "Coordinate.h"
 
-#include <QtCore/QObject>
-#include <QtDeclarative/QtDeclarative>
+#include <QObject>
+#include <QtDeclarative>
 
 class MarbleWidget;
 

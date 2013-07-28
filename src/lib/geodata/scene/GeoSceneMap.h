@@ -22,9 +22,9 @@
 #ifndef MARBLE_GEOSCENEMAP_H
 #define MARBLE_GEOSCENEMAP_H
 
-#include <QtGui/QColor>
-#include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QColor>
+#include <QString>
+#include <QVector>
 
 #include <geodata_export.h>
 

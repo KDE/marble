@@ -22,8 +22,8 @@
 #ifndef MARBLE_GEOSCENESECTION_H
 #define MARBLE_GEOSCENESECTION_H
 
-#include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QString>
+#include <QVector>
 
 #include "GeoDocument.h"
 

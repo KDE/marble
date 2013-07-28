@@ -16,7 +16,7 @@
 #ifndef MARBLE_CROSSHAIRSPLUGIN_H
 #define MARBLE_CROSSHAIRSPLUGIN_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"

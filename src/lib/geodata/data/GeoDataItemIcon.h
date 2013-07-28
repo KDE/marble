@@ -11,8 +11,8 @@
 #ifndef GEODATAITEMICON_H
 #define GEODATAITEMICON_H
 
-#include <QtGui/QImage>
-#include <QtCore/QFlags>
+#include <QImage>
+#include <QFlags>
 
 #include "GeoDataFeature.h"
 

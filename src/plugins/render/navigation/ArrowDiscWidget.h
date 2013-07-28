@@ -11,9 +11,9 @@
 #ifndef ARROWDISCWIDGET_H
 #define ARROWDISCWIDGET_H
 
-#include <QtGui/QWidget>
-#include <QtGui/QPixmap>
-#include <QtCore/QTimer>
+#include <QWidget>
+#include <QPixmap>
+#include <QTimer>
 
 namespace Marble
 {

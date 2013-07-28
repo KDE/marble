@@ -22,8 +22,8 @@
 #ifndef MARBLE_GEOSCENEFILTER_H
 #define MARBLE_GEOSCENEFILTER_H
 
-#include <QtCore/QString>
-#include <QtCore/QList>
+#include <QString>
+#include <QList>
 
 #include "GeoDocument.h"
 

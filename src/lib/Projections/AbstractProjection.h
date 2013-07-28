@@ -21,10 +21,10 @@
  * @author Torsten Rahn <rahn@kde.org>
  */
 
-#include <QtCore/QRect>
-#include <QtCore/QVector>
-#include <QtGui/QPainterPath>
-#include <QtGui/QPolygonF>
+#include <QRect>
+#include <QVector>
+#include <QPainterPath>
+#include <QPolygonF>
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"

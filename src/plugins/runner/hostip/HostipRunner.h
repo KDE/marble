@@ -12,10 +12,10 @@
 
 #include "SearchRunner.h"
 
-#include <QtCore/QString>
-#include <QtNetwork/QHostInfo>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkRequest>
+#include <QString>
+#include <QHostInfo>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
 
 class QNetworkReply;
 

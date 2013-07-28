@@ -4,12 +4,12 @@
 #include "mapreproject.h"
 #include "ReadOnlyMapImage.h"
 
-#include <QtCore/QCache>
-#include <QtCore/QDir>
-#include <QtCore/QPair>
-#include <QtCore/QSet>
-#include <QtGui/QColor>
-#include <QtGui/QImage>
+#include <QCache>
+#include <QDir>
+#include <QPair>
+#include <QSet>
+#include <QColor>
+#include <QImage>
 
 class InterpolationMethod;
 

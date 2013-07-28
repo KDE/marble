@@ -12,7 +12,7 @@
 #ifndef GEODATA_EXPORT_H
 #define GEODATA_EXPORT_H
 
-#include <QtCore/QtGlobal>
+#include <QtGlobal>
 
 // please make sure to change MAKE_MARBLE_LIB to MAKE_GEODATA_LIB if geodata is an independent library
 #ifndef GEODATA_EXPORT

@@ -13,8 +13,8 @@
 #define MARBLE_CLIPPAINTER_H
 
 
-#include <QtCore/QPointF>
-#include <QtGui/QPainter>
+#include <QPointF>
+#include <QPainter>
 #include "marble_export.h"
 #include "MarbleGlobal.h"
 

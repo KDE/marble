@@ -11,8 +11,8 @@
 #ifndef APRSOBJECT_H
 #define APRSOBJECT_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 
 #include "GeoAprsCoordinates.h"
 #include "GeoPainter.h"

@@ -11,7 +11,7 @@
 #ifndef GEODATATIMESPANPRIVATE_H
 #define GEODATATIMESPANPRIVATE_H
 
-#include <QtCore/QDateTime>
+#include <QDateTime>
 
 #include "GeoDataTypes.h"
 

@@ -12,7 +12,7 @@
 #define APRSFILE_H
 
 #include "AprsSource.h"
-#include <QtCore/QString>
+#include <QString>
 
 namespace Marble {
 class AprsFile : public AprsSource

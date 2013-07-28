@@ -8,7 +8,7 @@
 // Copyright 2013       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "BillboardGraphicsItem.h"
 
@@ -16,8 +16,8 @@
 #include "MarbleGraphicsGridLayout.h"
 #include "ViewportParams.h"
 
-#include <QtGui/QImage>
-#include <QtGui/QPainter>
+#include <QImage>
+#include <QPainter>
 
 namespace Marble
 {

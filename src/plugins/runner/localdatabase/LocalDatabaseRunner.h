@@ -13,7 +13,7 @@
 
 #include "SearchRunner.h"
 
-#include <QtCore/QString>
+#include <QString>
 
 namespace Marble
 {

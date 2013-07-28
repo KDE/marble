@@ -17,8 +17,8 @@
 
 #include "MarbleGlobal.h"
 
-#include <QtCore/QThreadPool>
-#include <QtGui/QImage>
+#include <QThreadPool>
+#include <QImage>
 
 
 namespace Marble

@@ -14,9 +14,9 @@
 #define SVGXMLHHANDLER_H
 
 
-#include <QtCore/QString>
-#include <QtCore/QDataStream>
-#include <QtXml/QXmlDefaultHandler>
+#include <QString>
+#include <QDataStream>
+#include <QXmlDefaultHandler>
 
 
 class SVGXmlHandler : public QXmlDefaultHandler

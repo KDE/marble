@@ -29,11 +29,11 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QDateTime>
-#include <QtCore/QList>
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QDateTime>
+#include <QList>
+#include <QObject>
+#include <QString>
+#include <QVector>
 
 #include "MarbleGlobal.h"
 

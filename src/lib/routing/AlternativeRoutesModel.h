@@ -13,7 +13,7 @@
 
 #include "GeoDataLineString.h"
 
-#include <QtCore/QAbstractListModel>
+#include <QAbstractListModel>
 
 /**
   * A QAbstractItemModel that contains a list of routing instructions.

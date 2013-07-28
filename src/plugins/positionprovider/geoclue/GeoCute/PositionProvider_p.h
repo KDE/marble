@@ -13,8 +13,8 @@
 
 #include "PositionProvider.h"
 
-#include <QtCore/QString>
-#include <QtDBus/QDBusMessage>
+#include <QString>
+#include <QDBusMessage>
 
 #include "SimpleDBusInterface.h"
 

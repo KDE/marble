@@ -14,7 +14,7 @@
 #define MARBLE_GEODATASTYLESELECTOR_H
 
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "GeoDataObject.h"
 

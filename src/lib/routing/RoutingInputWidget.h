@@ -15,7 +15,7 @@
 #include "GeoDataPlacemark.h"
 #include "PositionProviderPluginInterface.h"
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QNetworkReply;
 class QAbstractItemModel;

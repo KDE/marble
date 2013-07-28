@@ -19,7 +19,7 @@
 #include "marble_export.h"
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QStandardItemModel;
 

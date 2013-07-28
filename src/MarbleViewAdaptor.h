@@ -22,7 +22,7 @@
 #ifndef MARBLE_MARBLEVIEWADAPTOR_H
 #define MARBLE_MARBLEVIEWADAPTOR_H
 
-#include <QtDBus/QDBusAbstractAdaptor>
+#include <QDBusAbstractAdaptor>
 
 #include "katlasview.h"
 

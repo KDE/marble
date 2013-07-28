@@ -12,9 +12,9 @@
 #ifndef MARBLE_VECTORMAP_H
 #define MARBLE_VECTORMAP_H
 
-#include <QtCore/QPointF>
-#include <QtGui/QPen>
-#include <QtGui/QBrush>
+#include <QPointF>
+#include <QPen>
+#include <QBrush>
 
 #include "MarbleGlobal.h"
 #include "Quaternion.h"

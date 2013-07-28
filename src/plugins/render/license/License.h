@@ -12,7 +12,7 @@
 #ifndef MARBLELICENSE_H
 #define MARBLELICENSE_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "AbstractFloatItem.h"
 

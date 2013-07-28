@@ -11,8 +11,8 @@
 #ifndef MARBLE_DOWNLOADREGION_H
 #define MARBLE_DOWNLOADREGION_H
 
-#include <QtCore/QObject>
-#include <QtCore/QVector>
+#include <QObject>
+#include <QVector>
 
 #include "TileCoordsPyramid.h"
 #include "marble_export.h"

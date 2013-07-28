@@ -11,7 +11,7 @@
 #ifndef MARBLE_KMLCOLORSTYLETAGWRITER_H
 #define MARBLE_KMLCOLORSTYLETAGWRITER_H
 
-#include <QtGui/QColor>
+#include <QColor>
 
 #include "GeoTagWriter.h"
 

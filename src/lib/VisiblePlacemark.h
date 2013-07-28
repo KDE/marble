@@ -18,10 +18,10 @@
 
 #include "GeoDataPlacemark.h"
 
-#include <QtGui/QPixmap>
-#include <QtCore/QPoint>
-#include <QtCore/QRect>
-#include <QtCore/QString>
+#include <QPixmap>
+#include <QPoint>
+#include <QRect>
+#include <QString>
 
 namespace Marble
 {

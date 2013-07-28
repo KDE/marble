@@ -11,7 +11,7 @@
 #ifndef BBCSTATION_H
 #define BBCSTATION_H
 
-#include <QtCore/QtGlobal>
+#include <QtGlobal>
 
 class QString;
 

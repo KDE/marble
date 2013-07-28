@@ -11,7 +11,7 @@
 #ifndef MARBLE_QTCOMPONENTS_PLUGIN_H
 #define MARBLE_QTCOMPONENTS_PLUGIN_H
 
-#include <QtDeclarative/QDeclarativeExtensionPlugin>
+#include <QDeclarativeExtensionPlugin>
 
 /**
  * Dummy class to export plugin.

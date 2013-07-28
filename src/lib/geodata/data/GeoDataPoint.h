@@ -14,8 +14,8 @@
 #ifndef MARBLE_GEODATAPOINT_H
 #define MARBLE_GEODATAPOINT_H
 
-#include <QtCore/QMetaType>
-#include <QtCore/QVector>
+#include <QMetaType>
+#include <QVector>
 
 #include <cmath>
 

@@ -17,7 +17,7 @@
 #ifndef MARBLE_HTTPDOWNLOADMANAGER_H
 #define MARBLE_HTTPDOWNLOADMANAGER_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "MarbleGlobal.h"
 #include "marble_export.h"

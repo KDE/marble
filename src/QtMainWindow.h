@@ -14,9 +14,9 @@
 #define MARBLE_MAINWINDOW_H
 
 
-#include <QtGui/QMainWindow>
-#include <QtCore/QDateTime>
-#include <QtCore/QVariantMap>
+#include <QMainWindow>
+#include <QDateTime>
+#include <QVariantMap>
 #include "ControlView.h"
 
 class QAction;

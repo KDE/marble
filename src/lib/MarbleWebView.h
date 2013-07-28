@@ -11,7 +11,7 @@
 #ifndef MARBLEWEBVIEW_H
 #define MARBLEWEBVIEW_H
 
-#include <QtWebKit/QWebView>
+#include <QWebView>
 
 class MarbleWebView : public QWebView
 {

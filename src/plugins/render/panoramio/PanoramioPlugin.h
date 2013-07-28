@@ -15,7 +15,7 @@
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
-#include <QtGui/QIcon>
+#include <QIcon>
 
 namespace Marble
 {

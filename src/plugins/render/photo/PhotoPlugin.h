@@ -16,7 +16,7 @@
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
-#include <QtCore/QHash>
+#include <QHash>
 
 class QIcon;
 

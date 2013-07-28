@@ -11,7 +11,7 @@
 #ifndef COMPASS_FLOAT_ITEM_H
 #define COMPASS_FLOAT_ITEM_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "AbstractFloatItem.h"
 #include "DialogConfigurationInterface.h"

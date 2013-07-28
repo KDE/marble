@@ -11,8 +11,8 @@
 #ifndef ABSTRACTWEATHERSERVICE_H
 #define ABSTRACTWEATHERSERVICE_H
 
-#include <QtCore/QObject>
-#include <QtCore/QStringList>
+#include <QObject>
+#include <QStringList>
 
 class QUrl;
 

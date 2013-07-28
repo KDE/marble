@@ -11,7 +11,7 @@
 #ifndef APRSSOURCE_H
 #define APRSSOURCE_H
 
-#include <QtCore/QIODevice>
+#include <QIODevice>
 
 namespace Marble {
 

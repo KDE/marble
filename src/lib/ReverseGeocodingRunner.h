@@ -12,7 +12,7 @@
 #ifndef MARBLE_REVERSEGEOCODINGRUNNER_H
 #define MARBLE_REVERSEGEOCODINGRUNNER_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "marble_export.h"
 
 namespace Marble

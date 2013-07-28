@@ -13,7 +13,7 @@
 #ifndef MARBLE_PARSERUNNERPLUGIN_H
 #define MARBLE_PARSERUNNERPLUGIN_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "PluginInterface.h"
 
 namespace Marble

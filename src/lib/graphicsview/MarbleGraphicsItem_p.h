@@ -16,13 +16,13 @@
 #include "MarbleGraphicsItem.h"
 
 // Qt
-#include<QtCore/QDebug>
-#include<QtCore/QList>
-#include<QtCore/QSet>
-#include<QtCore/QSize>
-#include<QtCore/QSizeF>
-#include<QtCore/QRect>
-#include<QtGui/QPixmap>
+#include<QDebug>
+#include<QList>
+#include<QSet>
+#include<QSize>
+#include<QSizeF>
+#include<QRect>
+#include<QPixmap>
 
 namespace Marble
 {

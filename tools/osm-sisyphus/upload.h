@@ -14,10 +14,10 @@
 #include "region.h"
 #include "jobparameters.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QList>
-#include <QtCore/QFileInfo>
-#include <QtXml/QDomDocument>
+#include <QObject>
+#include <QList>
+#include <QFileInfo>
+#include <QDomDocument>
 
 class Upload : public QObject
 {

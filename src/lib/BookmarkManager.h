@@ -12,9 +12,9 @@
 #ifndef MARBLE_BOOKMARKMANAGER_H
 #define MARBLE_BOOKMARKMANAGER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QObject>
+#include <QString>
+#include <QVector>
 #include "MarbleGlobal.h"
 
 namespace Marble

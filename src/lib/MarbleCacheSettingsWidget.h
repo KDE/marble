@@ -20,7 +20,7 @@
  * @author Torsten Rahn  <torsten@kde.org>
  */
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include "ui_MarbleCacheSettingsWidget.h"
 
 #include "marble_export.h"

@@ -13,8 +13,8 @@
 
 #include "TrackerPluginItem.h"
 
-#include <QtCore/QString>
-#include <QtCore/QDateTime>
+#include <QString>
+#include <QDateTime>
 
 #include "mex/planetarySats.h"
 

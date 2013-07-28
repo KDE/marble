@@ -16,7 +16,7 @@
 #ifndef MARBLE_BLENDING_ALGORITHMS_H
 #define MARBLE_BLENDING_ALGORITHMS_H
 
-#include <QtCore/QtGlobal>
+#include <QtGlobal>
 
 #include "Blending.h"
 

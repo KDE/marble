@@ -13,7 +13,7 @@
 #ifndef MARBLE_GEOMETRYLAYER_H
 #define MARBLE_GEOMETRYLAYER_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "LayerInterface.h"
 
 class QAbstractItemModel;

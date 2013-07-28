@@ -16,7 +16,7 @@
 #include "marble_export.h"
 
 // Qt
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
 
 namespace Marble
 {

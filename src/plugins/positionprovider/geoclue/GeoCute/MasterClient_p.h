@@ -13,7 +13,7 @@
 
 #include "MasterClient.h"
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "SimpleDBusInterface.h"
 

@@ -20,8 +20,8 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-#include <QtGui/QPixmap>
-#include <QtGui/QWidget>
+#include <QPixmap>
+#include <QWidget>
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLookAt.h"

@@ -13,10 +13,10 @@
 #define MARBLE_LAYERMANAGER_H
 
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtGui/QRegion>
+#include <QList>
+#include <QObject>
+#include <QString>
+#include <QRegion>
 
 class QPoint;
 

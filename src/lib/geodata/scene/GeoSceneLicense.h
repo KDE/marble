@@ -11,7 +11,7 @@
 #ifndef MARBLE_GEOSCENE_LICENSE_H
 #define MARBLE_GEOSCENE_LICENSE_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include <geodata_export.h>
 

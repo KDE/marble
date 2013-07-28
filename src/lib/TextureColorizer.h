@@ -20,10 +20,10 @@
 #include "GeoDataDocument.h"
 #include "GeoPainter.h"
 
-#include <QtCore/QString>
-#include <QtGui/QImage>
-#include <QtGui/QPen>
-#include <QtGui/QBrush>
+#include <QString>
+#include <QImage>
+#include <QPen>
+#include <QBrush>
 
 namespace Marble
 {

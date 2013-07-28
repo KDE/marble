@@ -22,7 +22,7 @@
 #ifndef MARBLE_GEOSCENELEGEND_H
 #define MARBLE_GEOSCENELEGEND_H
 
-#include <QtCore/QVector>
+#include <QVector>
 #include "GeoDocument.h"
 
 #include <geodata_export.h>

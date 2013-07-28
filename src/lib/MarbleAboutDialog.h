@@ -17,7 +17,7 @@
 #define MARBLE_MARBLEABOUTDIALOG_H
 
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 #include "marble_export.h"
 

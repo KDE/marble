@@ -21,7 +21,7 @@
 #ifndef KDESCENDANTSPROXYMODEL_P_H
 #define KDESCENDANTSPROXYMODEL_P_H
 
-#include <QtGui/QAbstractProxyModel>
+#include <QAbstractProxyModel>
 
 #include "marble_export.h"
 

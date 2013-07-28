@@ -11,10 +11,10 @@
 #ifndef MARBLE_ABSTRACTDATAPLUGINMODEL_H
 #define MARBLE_ABSTRACTDATAPLUGINMODEL_H
 
-#include <QtCore/QObject>
-#include <QtCore/QList>
-#include <QtCore/QHash>
-#include <QtCore/QString>
+#include <QObject>
+#include <QList>
+#include <QHash>
+#include <QString>
 
 #include "marble_export.h"
 #include "MarbleGlobal.h"

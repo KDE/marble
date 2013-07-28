@@ -13,7 +13,7 @@
 
 #include "MapThemeManager.h"
 
-#include <QtDeclarative/QDeclarativeImageProvider>
+#include <QDeclarativeImageProvider>
 
 class MapThemeImageProvider : public QDeclarativeImageProvider
 {

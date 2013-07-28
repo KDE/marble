@@ -17,7 +17,7 @@
 #define MARBLE_MARBLENAVIGATOR_H
 
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include "marble_export.h"
 

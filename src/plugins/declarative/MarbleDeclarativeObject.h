@@ -11,7 +11,7 @@
 #ifndef MARBLE_DECLARATIVE_OBJECT_H
 #define MARBLE_DECLARATIVE_OBJECT_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MarbleDeclarativeObjectPrivate;
 

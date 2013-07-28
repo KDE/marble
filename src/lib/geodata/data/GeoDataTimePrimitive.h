@@ -11,7 +11,7 @@
 #ifndef MARBLE_GEODATATIMEPRIMITIVE_H
 #define MARBLE_GEODATATIMEPRIMITIVE_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "GeoDataObject.h"
 

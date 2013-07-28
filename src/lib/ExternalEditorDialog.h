@@ -13,7 +13,7 @@
 
 #include "marble_export.h"
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 #include "ui_ExternalEditor.h"
 

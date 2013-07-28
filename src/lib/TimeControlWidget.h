@@ -12,8 +12,8 @@
 #define MARBLE_TIMECONTROLWIDGET_H
 
 // Qt
-#include <QtCore/QDateTime>
-#include <QtGui/QDialog>
+#include <QDateTime>
+#include <QDialog>
 
 // Marble
 #include "marble_export.h"

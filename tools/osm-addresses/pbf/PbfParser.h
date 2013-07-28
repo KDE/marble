@@ -19,11 +19,11 @@
 #include "osmformat.pb.h"
 #include "../OsmParser.h"
 
-#include <QtCore/QString>
-#include <QtCore/QHash>
-#include <QtCore/QSet>
-#include <QtCore/QFile>
-#include <QtCore/QDataStream>
+#include <QString>
+#include <QHash>
+#include <QSet>
+#include <QFile>
+#include <QDataStream>
 
 class PbfParser : public Marble::OsmParser
 {

@@ -13,7 +13,7 @@
 
 #include "AbstractDataPluginItem.h"
 
-#include <QtGui/QFont>
+#include <QFont>
 
 namespace Marble
 {

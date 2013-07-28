@@ -22,7 +22,7 @@
 #ifndef MARBLE_GEOSCENEABSTRACTDATASET_H
 #define MARBLE_GEOSCENEABSTRACTDATASET_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include <geodata_export.h>
 

@@ -18,10 +18,10 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QModelIndex>
-#include <QtCore/QVector>
-#include <QtCore/QPoint>
+#include <QObject>
+#include <QModelIndex>
+#include <QVector>
+#include <QPoint>
 
 class QAction;
 class QMenu;

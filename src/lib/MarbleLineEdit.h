@@ -17,7 +17,7 @@
 
 #include "marble_export.h"
 
-#include <QtGui/QLineEdit>
+#include <QLineEdit>
 
 namespace Marble
 {

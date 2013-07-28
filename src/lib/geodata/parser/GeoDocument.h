@@ -23,7 +23,7 @@
 #ifndef MARBLE_GEODOCUMENT_H
 #define MARBLE_GEODOCUMENT_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "geodata_export.h"
 

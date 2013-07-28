@@ -12,7 +12,7 @@
 #ifndef MARBLE_BOOKMARKINFODIALOG_H
 #define MARBLE_BOOKMARKINFODIALOG_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"

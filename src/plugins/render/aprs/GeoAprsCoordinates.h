@@ -1,7 +1,7 @@
 #ifndef GEOAPRSCOORDINATES_H
 #define GEOAPRSCOORDINATES_H
 
-#include <QtCore/QTime>
+#include <QTime>
 #include "GeoDataCoordinates.h"
 
 namespace Marble

@@ -13,7 +13,7 @@
 
 #include "marble_export.h"
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include "ui_PrintOptions.h"
 

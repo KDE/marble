@@ -19,7 +19,7 @@
 #include "MarbleGlobal.h"
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QModelIndex;
 class QAbstractItemModel;

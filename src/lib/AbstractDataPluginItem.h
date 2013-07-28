@@ -11,9 +11,9 @@
 #ifndef MARBLE_ABSTRACTDATAPLUGINITEM_H
 #define MARBLE_ABSTRACTDATAPLUGINITEM_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QHash>
+#include <QObject>
+#include <QString>
+#include <QHash>
 
 #include "BillboardGraphicsItem.h"
 #include "marble_export.h"

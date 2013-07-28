@@ -14,7 +14,7 @@
 #ifndef MARBLE_GEODATACONTAINER_H
 #define MARBLE_GEODATACONTAINER_H
 
-#include <QtCore/QVector>
+#include <QVector>
 
 #include "geodata_export.h"
 

@@ -14,7 +14,7 @@
 #ifndef MARBLE_TILELEVELRANGEWIDGET_H
 #define MARBLE_TILELEVELRANGEWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include "marble_export.h"
 

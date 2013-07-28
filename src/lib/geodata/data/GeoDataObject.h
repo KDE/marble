@@ -18,7 +18,7 @@
 #include "GeoDocument.h" 
 #include "Serializable.h"
 
-#include <QtCore/QMetaType>
+#include <QMetaType>
 
 namespace Marble
 {

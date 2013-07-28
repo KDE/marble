@@ -11,7 +11,7 @@
 #ifndef OPENDESKTOPITEM_H
 #define OPENDESKTOPITEM_H
  
-#include <QtGui/QAction>
+#include <QAction>
 #include "AbstractDataPluginItem.h"
 #include "TinyWebBrowser.h"
 #include "MarbleWidget.h"

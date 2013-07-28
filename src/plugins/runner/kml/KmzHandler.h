@@ -10,8 +10,8 @@
 #ifndef MARBLE_KMZHANDLER_H
 #define MARBLE_KMZHANDLER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QStringList>
+#include <QObject>
+#include <QStringList>
 
 namespace Marble {
 

@@ -11,7 +11,7 @@
 #ifndef MAPSCALEFLOATITEM_H
 #define MAPSCALEFLOATITEM_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "AbstractFloatItem.h"
 #include "DialogConfigurationInterface.h"

@@ -16,8 +16,8 @@
 #ifndef MARBLE_MARBLEWIDGETINPUTHANDLER_H
 #define MARBLE_MARBLEWIDGETINPUTHANDLER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 
 #include "marble_export.h"
 

@@ -41,9 +41,9 @@
 #ifndef THREAD_H
 #define THREAD_H
 
-#include <QtCore/QMutex>
-#include <QtCore/QThread>
-#include <QtCore/QWaitCondition>
+#include <QMutex>
+#include <QThread>
+#include <QWaitCondition>
 
 class QSignalMapper;
 

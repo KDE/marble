@@ -13,7 +13,7 @@
 #ifndef MARBLE_GEODATAHOTSPOT_H
 #define MARBLE_GEODATAHOTSPOT_H
 
-#include <QtCore/QPoint>
+#include <QPoint>
 
 #include "GeoDataObject.h"
 

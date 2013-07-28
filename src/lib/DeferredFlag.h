@@ -18,10 +18,10 @@
 #define MARBLE_DEFERREDFLAG_H
 
 
-#include <QtCore/QObject>
-#include <QtCore/QSize>
-#include <QtCore/QString>
-#include <QtGui/QPixmap>
+#include <QObject>
+#include <QSize>
+#include <QString>
+#include <QPixmap>
 
 namespace Marble
 {

@@ -19,7 +19,7 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "MarbleGlobal.h"
 

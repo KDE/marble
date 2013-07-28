@@ -14,8 +14,8 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QStringList>
-#include <QtGui/QColor>
+#include <QStringList>
+#include <QColor>
 
 namespace Marble
 {

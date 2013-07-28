@@ -14,7 +14,7 @@
 #define MARBLE_GEODATAICONSTYLE_H
 
 
-#include <QtGui/QPixmap>
+#include <QPixmap>
 
 #include "GeoDataColorStyle.h"
 #include "GeoDataHotSpot.h"

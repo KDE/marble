@@ -11,7 +11,7 @@
 #ifndef MARBLE_POSITIONPROVIDERPLUGININTERFACE_H
 #define MARBLE_POSITIONPROVIDERPLUGININTERFACE_H
 
-#include <QtCore/QDateTime>
+#include <QDateTime>
 
 #include "PluginInterface.h"
 #include "GeoDataCoordinates.h"

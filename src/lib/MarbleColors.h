@@ -14,7 +14,7 @@
 #ifndef MARBLECOLORS_H
 #define MARBLECOLORS_H
 
-#include <QtGui/QColor>
+#include <QColor>
 
 namespace Marble
 {

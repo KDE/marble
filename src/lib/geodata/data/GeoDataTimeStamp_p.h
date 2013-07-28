@@ -11,7 +11,7 @@
 #ifndef GEODATATIMESTAMPPRIVATE_H
 #define GEODATATIMESTAMPPRIVATE_H
 
-#include <QtCore/QDateTime>
+#include <QDateTime>
 
 #include "GeoDataTypes.h"
 #include <GeoDataTimeStamp.h>

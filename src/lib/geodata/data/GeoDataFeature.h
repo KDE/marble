@@ -14,10 +14,10 @@
 #define MARBLE_GEODATAFEATURE_H
 
 
-#include <QtCore/QString>
-#include <QtCore/QSize>
-#include <QtGui/QFont>
-#include <QtGui/QColor>
+#include <QString>
+#include <QSize>
+#include <QFont>
+#include <QColor>
 
 #include "GeoDataObject.h"
 

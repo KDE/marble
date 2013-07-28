@@ -15,8 +15,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
 
-#include <QtCore/QRunnable>
-#include <QtCore/QString>
+#include <QRunnable>
+#include <QString>
 
 namespace Marble
 {

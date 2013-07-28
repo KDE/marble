@@ -11,7 +11,7 @@
 #ifndef MARBLE_ROUTEREQUESTMODEL_H
 #define MARBLE_ROUTEREQUESTMODEL_H
 
-#include <QtCore/QAbstractListModel>
+#include <QAbstractListModel>
 
 namespace Marble { class RouteRequest; }
 class Routing;

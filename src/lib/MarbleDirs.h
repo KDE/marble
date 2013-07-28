@@ -14,7 +14,7 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QDir>
+#include <QDir>
 
 class QString;
 class QStringList;

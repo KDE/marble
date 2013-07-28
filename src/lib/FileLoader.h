@@ -13,8 +13,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataStyle.h"
 
-#include <QtCore/QThread>
-#include <QtCore/QString>
+#include <QThread>
+#include <QString>
 
 namespace Marble
 {

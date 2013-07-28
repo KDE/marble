@@ -12,10 +12,10 @@
 #ifndef MARBLE_VECTORTILEMAPPER_H
 #define MARBLE_VECTORTILEMAPPER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QRunnable>
+#include <QObject>
+#include <QRunnable>
 
-#include <QtCore/QCache>
+#include <QCache>
 
 #include "TileId.h"
 

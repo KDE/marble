@@ -11,10 +11,10 @@
 #ifndef MARBLE_OSMGLOBALS_H
 #define MARBLE_OSMGLOBALS_H
 
-#include <QtCore/QMap>
-#include <QtGui/QColor>
-#include <QtCore/QString>
-#include <QtCore/QList>
+#include <QMap>
+#include <QColor>
+#include <QString>
+#include <QList>
 #include "GeoDataFeature.h"
 
 namespace Marble

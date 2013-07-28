@@ -16,10 +16,10 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QVector>
-#include <QtCore/QString>
-#include <QtCore/QMutex>
+#include <QObject>
+#include <QVector>
+#include <QString>
+#include <QMutex>
 
 class QAbstractItemModel;
 

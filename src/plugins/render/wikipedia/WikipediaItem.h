@@ -13,10 +13,10 @@
 
 #include "AbstractDataPluginItem.h"
 
-#include <QtCore/QHash>
-#include <QtCore/QUrl>
-#include <QtGui/QPixmap>
-#include <QtGui/QIcon>
+#include <QHash>
+#include <QUrl>
+#include <QPixmap>
+#include <QIcon>
 
 class QAction;
 

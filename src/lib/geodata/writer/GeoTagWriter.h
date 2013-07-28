@@ -12,8 +12,8 @@
 #ifndef MARBLE_GEOTAGWRITER_H
 #define MARBLE_GEOTAGWRITER_H
 
-#include <QtCore/QPair>
-#include <QtCore/QHash>
+#include <QPair>
+#include <QHash>
 
 namespace Marble
 {

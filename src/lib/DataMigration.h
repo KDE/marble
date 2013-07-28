@@ -11,7 +11,7 @@
 #ifndef MARBLE_DATAMIGRATION_H
 #define MARBLE_DATAMIGRATION_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace Marble
 {

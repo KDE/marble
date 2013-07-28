@@ -13,7 +13,7 @@
 
 #include "AbstractDataPluginModel.h"
 
-#include <QtGui/QIcon>
+#include <QIcon>
 
 namespace Marble
 {

@@ -11,12 +11,12 @@
 #ifndef MARBLEOVERVIEWMAP_H
 #define MARBLEOVERVIEWMAP_H
 
-#include <QtCore/QObject>
-#include <QtCore/QHash>
-#include <QtGui/QColor>
-#include <QtGui/QAbstractButton>
-#include <QtSvg/QSvgWidget>
-#include <QtSvg/QSvgRenderer>
+#include <QObject>
+#include <QHash>
+#include <QColor>
+#include <QAbstractButton>
+#include <QSvgWidget>
+#include <QSvgRenderer>
 
 #include "GeoDataLatLonAltBox.h"
 #include "AbstractFloatItem.h"

@@ -11,9 +11,9 @@
 #ifndef MARBLE_MARBLEPLACEMARKMODEL_P_H
 #define MARBLE_MARBLEPLACEMARKMODEL_P_H
 
-#include <QtCore/QChar>
-#include <QtCore/QRegExp>
-#include <QtCore/QString>
+#include <QChar>
+#include <QRegExp>
+#include <QString>
 
 namespace Marble
 {

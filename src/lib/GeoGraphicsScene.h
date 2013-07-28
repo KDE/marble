@@ -15,8 +15,8 @@
 #include "marble_export.h"
 #include "MarbleGlobal.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include <QObject>
+#include <QList>
 
 namespace Marble
 {

@@ -15,7 +15,7 @@
 #include "GeoDataCoordinates.h"
 #include "RoutingProfile.h"
 
-#include <QtCore/QAbstractItemModel>
+#include <QAbstractItemModel>
 
 namespace Marble
 {

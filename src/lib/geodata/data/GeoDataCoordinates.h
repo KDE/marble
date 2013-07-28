@@ -14,10 +14,10 @@
 #ifndef MARBLE_GEODATACOORDINATES_H
 #define MARBLE_GEODATACOORDINATES_H
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QMetaType>
-#include <QtCore/QVector>
-#include <QtCore/QString>
+#include <QCoreApplication>
+#include <QMetaType>
+#include <QVector>
+#include <QString>
 
 #include <cmath>
 

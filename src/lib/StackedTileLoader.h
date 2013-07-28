@@ -25,8 +25,8 @@
 #ifndef MARBLE_STACKEDTILELOADER_H
 #define MARBLE_STACKEDTILELOADER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QSize>
+#include <QObject>
+#include <QSize>
 
 #include "GeoSceneTextureTile.h"
 #include "TileId.h"

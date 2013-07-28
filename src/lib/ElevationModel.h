@@ -15,9 +15,9 @@
 #include "GeoDataCoordinates.h"
 #include "marble_export.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QCache>
-#include <QtGui/QImage>
+#include <QObject>
+#include <QCache>
+#include <QImage>
 
 namespace Marble
 {

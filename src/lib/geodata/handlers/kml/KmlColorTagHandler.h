@@ -24,7 +24,7 @@
 
 #include "GeoTagHandler.h"
 
-#include <QtGui/QColor>
+#include <QColor>
 
 namespace Marble
 {

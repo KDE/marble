@@ -18,11 +18,11 @@
 #define MARBLE_PLACEMARKLAYER_H
 
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "LayerInterface.h"
 
-#include <QtCore/QVector>
-#include <QtGui/QColor>
+#include <QVector>
+#include <QColor>
 
 #include "PlacemarkLayout.h"
 

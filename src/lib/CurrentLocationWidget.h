@@ -16,7 +16,7 @@
 #include "AutoNavigation.h"
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 namespace Marble
 {

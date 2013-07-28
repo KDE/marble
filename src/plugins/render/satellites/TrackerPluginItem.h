@@ -11,7 +11,7 @@
 #ifndef MARBLE_TRACKERPLUGINITEM_H
 #define MARBLE_TRACKERPLUGINITEM_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class QString;
 

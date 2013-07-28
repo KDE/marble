@@ -11,10 +11,10 @@
 #ifndef OPENCACHINGCACHEDESCRIPTION_H
 #define OPENCACHINGCACHEDESCRIPTION_H
 
-#include <QtCore/QString>
-#include <QtCore/QDateTime>
-#include <QtCore/QHash>
-#include <QtCore/QVariant>
+#include <QString>
+#include <QDateTime>
+#include <QHash>
+#include <QVariant>
 
 namespace Marble
 {

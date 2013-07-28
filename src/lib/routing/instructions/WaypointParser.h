@@ -14,10 +14,10 @@
 #include "RoutingWaypoint.h"
 #include "marble_export.h"
 
-#include <QtCore/QTextStream>
-#include <QtCore/QMap>
-#include <QtCore/QVariant>
-#include <QtCore/QStringList>
+#include <QTextStream>
+#include <QMap>
+#include <QVariant>
+#include <QStringList>
 
 namespace Marble
 {

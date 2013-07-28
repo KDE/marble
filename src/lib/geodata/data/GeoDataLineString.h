@@ -13,9 +13,9 @@
 #ifndef MARBLE_GEODATALINESTRING_H
 #define MARBLE_GEODATALINESTRING_H
 
-#include <QtCore/QFlags>
-#include <QtCore/QVector>
-#include <QtCore/QMetaType>
+#include <QFlags>
+#include <QVector>
+#include <QMetaType>
 
 #include "MarbleGlobal.h"
 

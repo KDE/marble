@@ -11,7 +11,7 @@
 #ifndef GEODATAVEC2_H
 #define GEODATAVEC2_H
 
-#include <QtCore/QPointF>
+#include <QPointF>
 
 #include "MarbleGlobal.h"
 

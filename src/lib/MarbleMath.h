@@ -12,7 +12,7 @@
 #ifndef MARBLE_MARBLEMATH_H
 #define MARBLE_MARBLEMATH_H
 
-#include <QtCore/QtGlobal>
+#include <QtGlobal>
 
 #include <GeoDataCoordinates.h>
 #include <math.h>

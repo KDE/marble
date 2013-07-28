@@ -16,8 +16,8 @@
 #ifndef MARBLE_SUN_LIGHT_BLENDING_H
 #define MARBLE_SUN_LIGHT_BLENDING_H
 
-#include <QtCore/QtGlobal>
-#include <QtGui/QColor>
+#include <QtGlobal>
+#include <QColor>
 
 #include "Blending.h"
 

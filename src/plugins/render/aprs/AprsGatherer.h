@@ -11,12 +11,12 @@
 #ifndef APRSGATHERER_H
 #define APRSGATHERER_H
 
-#include <QtCore/QThread>
-#include <QtCore/QMap>
-#include <QtCore/QString>
-#include <QtNetwork/QAbstractSocket>
-#include <QtCore/QMutex>
-#include <QtCore/QIODevice>
+#include <QThread>
+#include <QMap>
+#include <QString>
+#include <QAbstractSocket>
+#include <QMutex>
+#include <QIODevice>
 
 #include "AprsSource.h"
 #include "AprsObject.h"

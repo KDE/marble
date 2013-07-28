@@ -14,7 +14,7 @@
 #include "GeoDataFeature.h"
 #include "marble_export.h"
 
-#include <QtXml/QXmlStreamWriter>
+#include <QXmlStreamWriter>
 
 namespace Marble
 {

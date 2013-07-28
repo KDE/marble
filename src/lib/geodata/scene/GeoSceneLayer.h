@@ -22,8 +22,8 @@
 #ifndef MARBLE_GEOSCENELAYER_H
 #define MARBLE_GEOSCENELAYER_H
 
-#include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QString>
+#include <QVector>
 
 #include <geodata_export.h>
 

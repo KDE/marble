@@ -15,9 +15,9 @@
 #include "LayerInterface.h"
 #include "RoutingManager.h"
 
-#include <QtCore/QModelIndex>
-#include <QtCore/QRect>
-#include <QtGui/QItemSelection>
+#include <QModelIndex>
+#include <QRect>
+#include <QItemSelection>
 
 class QAbstractProxyModel;
 

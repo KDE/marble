@@ -15,8 +15,8 @@
 #include "GeoSceneAbstractDataset.h"
 #include "GeoDocument.h"
 
-#include <QtGui/QPen>
-#include <QtGui/QBrush>
+#include <QPen>
+#include <QBrush>
 
 namespace Marble
 {

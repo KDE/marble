@@ -15,7 +15,7 @@
 #define MARBLE_GEODATACOLORSTYLE_H
 
 
-#include <QtGui/QColor>
+#include <QColor>
 
 #include "GeoDataObject.h"
 

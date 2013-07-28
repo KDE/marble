@@ -12,7 +12,7 @@
 #define MARBLE_GEODATACOORDINATES_P_H
 
 #include "Quaternion.h"
-#include <QtCore/QAtomicInt>
+#include <QAtomicInt>
 
 namespace Marble
 {

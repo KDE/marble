@@ -16,7 +16,7 @@
 #include "GeoDataPlacemark.h"
 #include "RoutingProfile.h"
 
-#include <QtCore/QFlags>
+#include <QFlags>
 
 namespace Marble
 {

@@ -25,11 +25,11 @@ any later version.
 #ifndef SIGNALS_H
 #define SIGNALS_H
 
-#include <QtCore/QString>
-#include <QtCore/QVector>
-#include <QtCore/QDataStream>
-#include <QtCore/QStringList>
-#include <QtNetwork/QLocalSocket>
+#include <QString>
+#include <QVector>
+#include <QDataStream>
+#include <QStringList>
+#include <QLocalSocket>
 
 namespace MoNav {
 

@@ -19,8 +19,8 @@
 #include "MarbleWidget.h"
 #include "GeoDataCoordinates.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QUrl>
+#include <QObject>
+#include <QUrl>
 
 namespace Marble
 {

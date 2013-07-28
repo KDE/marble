@@ -11,9 +11,9 @@
 #ifndef MARBLE_FILESTORAGEWATCHER_H
 #define MARBLE_FILESTORAGEWATCHER_H
 
-#include <QtCore/QThread>
-#include <QtCore/QMutex>
-#include <QtCore/QSet>
+#include <QThread>
+#include <QMutex>
+#include <QSet>
 
 namespace Marble
 {

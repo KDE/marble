@@ -11,7 +11,7 @@
 #ifndef GEODATATIMEPRIMITIVEPRIVATE_H
 #define GEODATATIMEPRIMITIVEPRIVATE_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "GeoDataTypes.h"
 

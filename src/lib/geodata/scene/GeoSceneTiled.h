@@ -15,11 +15,11 @@
 #ifndef MARBLE_GEOSCENETILED_H
 #define MARBLE_GEOSCENETILED_H
 
-#include <QtCore/QList>
-#include <QtCore/QStringList>
-#include <QtCore/QUrl>
-#include <QtCore/QVector>
-#include <QtCore/QSize>
+#include <QList>
+#include <QStringList>
+#include <QUrl>
+#include <QVector>
+#include <QSize>
 
 #include "GeoSceneAbstractDataset.h"
 #include "MarbleGlobal.h"

@@ -11,7 +11,7 @@
 #ifndef MARBLE_MAPWIZARD_H
 #define MARBLE_MAPWIZARD_H
 
-#include <QtGui/QWizard>
+#include <QWizard>
 
 #include "marble_export.h"
 

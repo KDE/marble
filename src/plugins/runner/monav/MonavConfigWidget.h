@@ -14,7 +14,7 @@
 #include "ui_MonavConfigWidget.h"
 #include "RoutingRunnerPlugin.h"
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QNetworkReply;
 

@@ -17,7 +17,7 @@
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 class DeclarativeDataPluginPrivate;
 namespace Marble { class MarbleModel; }

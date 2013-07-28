@@ -18,12 +18,12 @@
 #define MARBLE_PLACEMARKLAYOUT_H
 
 
-#include <QtCore/QHash>
-#include <QtCore/QModelIndex>
-#include <QtCore/QRect>
-#include <QtCore/QSet>
-#include <QtCore/QVector>
-#include <QtGui/QSortFilterProxyModel>
+#include <QHash>
+#include <QModelIndex>
+#include <QRect>
+#include <QSet>
+#include <QVector>
+#include <QSortFilterProxyModel>
 
 #include "GeoDataFeature.h"
 

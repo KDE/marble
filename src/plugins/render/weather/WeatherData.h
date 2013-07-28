@@ -11,8 +11,8 @@
 #ifndef WEATHERDATA_H
 #define WEATHERDATA_H
 
-#include<QtCore/QtGlobal>
-#include<QtCore/QCoreApplication>
+#include<QtGlobal>
+#include<QCoreApplication>
 
 class QDate;
 class QDateTime;

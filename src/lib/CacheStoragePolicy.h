@@ -14,8 +14,8 @@
 #include "DiscCache.h"
 #include "StoragePolicy.h"
 
-#include <QtCore/QByteArray>
-#include <QtCore/QString>
+#include <QByteArray>
+#include <QString>
 
 #include "marble_export.h"
 

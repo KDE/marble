@@ -17,7 +17,7 @@
 #include "GeoDataTypes.h"
 
 // Qt
-#include <QtCore/QAtomicInt>
+#include <QAtomicInt>
 
 namespace Marble
 {

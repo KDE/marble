@@ -11,7 +11,7 @@
 #ifndef MARBLE_BOOKMARKMANAGERPRIVATE_H
 #define MARBLE_BOOKMARKMANAGERPRIVATE_H
 
-#include <QtCore/QString>
+#include <QString>
 
 namespace Marble
 {

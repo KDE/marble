@@ -13,8 +13,8 @@
 #define MARBLE_GEODATASTYLEMAP_H
 
 
-#include <QtCore/QString>
-#include <QtCore/QMap>
+#include <QString>
+#include <QMap>
 
 #include "GeoDataObject.h"
 #include "GeoDataStyleSelector.h"

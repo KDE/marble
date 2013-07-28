@@ -16,8 +16,8 @@
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
-#include <QtCore/QHash>
-#include <QtGui/QIcon>
+#include <QHash>
+#include <QIcon>
 
 namespace Ui
 {

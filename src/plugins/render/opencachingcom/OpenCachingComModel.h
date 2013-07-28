@@ -14,7 +14,7 @@
 #include "AbstractDataPluginModel.h"
 #include "GeoDataLatLonAltBox.h"
 
-#include <QtCore/QDateTime>
+#include <QDateTime>
 
 // Please note and respect that this key is for use ONLY within this plugin.
 #define AUTHKEY "mJg2Q5fD3qczP7M8"

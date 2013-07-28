@@ -13,7 +13,7 @@
 
 #include "OpenCachingCacheLogEntry.h"
 
-#include <QtCore/QList>
+#include <QList>
 
 namespace Marble
 {

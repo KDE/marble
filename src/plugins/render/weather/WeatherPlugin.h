@@ -15,7 +15,7 @@
 #include "DialogConfigurationInterface.h"
 
 // Qt
-#include <QtCore/QHash>
+#include <QHash>
 
 class QIcon;
 

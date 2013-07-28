@@ -12,8 +12,8 @@
 #ifndef MARBLE_SEARCHINPUTWIDGET_H
 #define MARBLE_SEARCHINPUTWIDGET_H
 
-#include <QtCore/QModelIndex>
-#include <QtGui/QSortFilterProxyModel>
+#include <QModelIndex>
+#include <QSortFilterProxyModel>
 
 #include "MarbleLineEdit.h"
 #include "MarbleGlobal.h"

@@ -3,9 +3,9 @@
 
 #include "ReadOnlyMapImage.h"
 
-#include <QtCore/QString>
-#include <QtGui/QColor>
-#include <QtGui/QImage>
+#include <QString>
+#include <QColor>
+#include <QImage>
 
 class InterpolationMethod;
 

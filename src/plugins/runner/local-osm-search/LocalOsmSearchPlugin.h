@@ -16,7 +16,7 @@
 #include "SearchRunnerPlugin.h"
 #include "OsmDatabase.h"
 
-#include <QtCore/QFileSystemWatcher>
+#include <QFileSystemWatcher>
 
 namespace Marble
 {

@@ -14,8 +14,8 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QSize>
-#include <QtGui/QRegion>
+#include <QSize>
+#include <QRegion>
 
 // Marble
 #include "MarbleGlobal.h"

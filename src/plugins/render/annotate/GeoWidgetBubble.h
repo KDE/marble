@@ -12,8 +12,8 @@
 #ifndef GEOWIDGETBUBBLE_H
 #define GEOWIDGETBUBBLE_H
 
-#include <QtCore/QString>
-#include <QtGui/QWidget>
+#include <QString>
+#include <QWidget>
 
 namespace Marble
 {

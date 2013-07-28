@@ -13,9 +13,9 @@
 #ifndef POPUPITEM_H
 #define POPUPITEM_H
 
-#include <QtCore/QObject>
-#include <QtCore/QUrl>
-#include <QtGui/QLabel>
+#include <QObject>
+#include <QUrl>
+#include <QLabel>
 
 #include "BillboardGraphicsItem.h"
 #include "ui_WebPopupWidget.h"

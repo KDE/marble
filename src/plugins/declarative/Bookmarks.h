@@ -11,8 +11,8 @@
 #ifndef MARBLE_DECLARATIVE_BOOKMARKS_H
 #define MARBLE_DECLARATIVE_BOOKMARKS_H
 
-#include <QtCore/QObject>
-#include <QtGui/QSortFilterProxyModel>
+#include <QObject>
+#include <QSortFilterProxyModel>
 
 class MarbleWidget;
 

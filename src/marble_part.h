@@ -15,8 +15,8 @@
 #define MARBLE_MARBLEPART_H
 
 #include <kparts/part.h>
-#include <QtCore/QHash>
-#include <QtCore/QDateTime>
+#include <QHash>
+#include <QDateTime>
 #include <kmenu.h>
 #include <kurl.h>
 #include "MarbleGlobal.h"

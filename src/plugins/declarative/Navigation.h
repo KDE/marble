@@ -11,8 +11,8 @@
 #ifndef MARBLE_DECLARATIVE_NAVIGATION_H
 #define MARBLE_DECLARATIVE_NAVIGATION_H
 
-#include <QtCore/QObject>
-#include <QtDeclarative/QtDeclarative>
+#include <QObject>
+#include <QtDeclarative>
 
 class QAbstractItemModel;
 

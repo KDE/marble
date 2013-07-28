@@ -11,8 +11,8 @@
 #ifndef MARBLE_GEODATATIMESTAMP_H
 #define MARBLE_GEODATATIMESTAMP_H
 
-#include <QtCore/QString>
-#include <QtCore/QDateTime>
+#include <QString>
+#include <QDateTime>
 
 #include "GeoDataObject.h"
 #include "GeoDataTimePrimitive.h"

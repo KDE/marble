@@ -13,7 +13,7 @@
 #ifndef MARBLE_GEODATAPOLYGON_H
 #define MARBLE_GEODATAPOLYGON_H
 
-#include <QtCore/QVector>
+#include <QVector>
 
 #include "MarbleGlobal.h"
 

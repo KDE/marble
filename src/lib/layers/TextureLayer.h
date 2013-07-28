@@ -12,13 +12,13 @@
 #define MARBLE_MARBLETEXTURELAYER_H
 
 #include "LayerInterface.h"
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "MarbleGlobal.h"
 #include "GeoSceneTextureTile.h"
 #include "GeoDataDocument.h"
 
-#include <QtCore/QSize>
+#include <QSize>
 
 class QImage;
 class QRegion;

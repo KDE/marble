@@ -13,7 +13,7 @@
 #ifndef MARBLE_REVERSEGEOCODINGRUNNERPLUGIN_H
 #define MARBLE_REVERSEGEOCODINGRUNNERPLUGIN_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "PluginInterface.h"
 
 namespace Marble

@@ -16,7 +16,7 @@
 #include "marble_export.h"
 #include "PositionProviderPluginInterface.h"
 
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace Marble
 {

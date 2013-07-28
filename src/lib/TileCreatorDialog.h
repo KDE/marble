@@ -16,7 +16,7 @@
 #ifndef MARBLE_TILECREATORDIALOG_H
 #define MARBLE_TILECREATORDIALOG_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 #include "marble_export.h"
 

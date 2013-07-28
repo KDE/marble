@@ -12,14 +12,14 @@
 #define MARBLE_TILESCALINGTEXTUREMAPPER_H
 
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "TextureMapperInterface.h"
 
 #include "TileId.h"
 
-#include <QtCore/QCache>
-#include <QtGui/QImage>
-#include <QtGui/QPixmap>
+#include <QCache>
+#include <QImage>
+#include <QPixmap>
 
 namespace Marble
 {

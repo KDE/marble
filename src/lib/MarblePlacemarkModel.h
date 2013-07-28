@@ -17,9 +17,9 @@
 #define MARBLE_MARBLEPLACEMARKMODEL_H
 
 
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QModelIndex>
-#include <QtCore/QVariant>
+#include <QAbstractListModel>
+#include <QModelIndex>
+#include <QVariant>
 
 #include "marble_export.h"
 

@@ -19,8 +19,8 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-#include <QtCore/QSize>
-#include <QtGui/QPainterPath>
+#include <QSize>
+#include <QPainterPath>
 
 #include "GeoDataLatLonAltBox.h"
 

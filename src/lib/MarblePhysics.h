@@ -13,7 +13,7 @@
 
 #include "GeoDataLookAt.h"
 
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace Marble
 {

@@ -14,7 +14,7 @@
 #ifndef MARBLE_TILECOORDSPYRAMID_H
 #define MARBLE_TILECOORDSPYRAMID_H
 
-#include <QtCore/QRect>
+#include <QRect>
 #include "marble_export.h"
 
 namespace Marble

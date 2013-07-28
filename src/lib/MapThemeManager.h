@@ -13,8 +13,8 @@
 #ifndef MARBLE_MAPTHEMEMANAGER_H
 #define MARBLE_MAPTHEMEMANAGER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QStringList>
+#include <QObject>
+#include <QStringList>
 
 #include "marble_export.h"
 

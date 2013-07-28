@@ -12,8 +12,8 @@
 #ifndef MARBLE_SCANLINETEXTUREMAPPERCONTEXT_H
 #define MARBLE_SCANLINETEXTUREMAPPERCONTEXT_H
 
-#include <QtCore/QSize>
-#include <QtGui/QImage>
+#include <QSize>
+#include <QImage>
 
 #include "GeoSceneTiled.h"
 #include "MarbleMath.h"

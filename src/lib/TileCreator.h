@@ -13,10 +13,10 @@
 #define MARBLE_TILECREATOR_H
 
 
-#include <QtCore/QString>
-#include <QtCore/QThread>
-#include <QtCore/QSize>
-#include <QtGui/QImage>
+#include <QString>
+#include <QThread>
+#include <QSize>
+#include <QImage>
 
 #include "marble_export.h"
 

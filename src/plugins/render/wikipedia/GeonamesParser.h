@@ -11,8 +11,8 @@
 #ifndef GEONAMESPARSER_H
 #define GEONAMESPARSER_H
 
-#include <QtCore/QList>
-#include <QtCore/QXmlStreamReader>
+#include <QList>
+#include <QXmlStreamReader>
 
 class QByteArray;
 class QObject;

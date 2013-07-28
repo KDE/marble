@@ -12,10 +12,10 @@
 #ifndef MARBLE_GEOPOLYGON_H
 #define MARBLE_GEOPOLYGON_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QThread>
-#include <QtCore/QVector>
+#include <QObject>
+#include <QString>
+#include <QThread>
+#include <QVector>
 #include "marble_export.h"
 
 #include "GeoDataCoordinates.h"

@@ -11,7 +11,7 @@
 #ifndef COORDINATESPARSER_H
 #define COORDINATESPARSER_H
 
-#include <QtCore/QXmlStreamReader>
+#include <QXmlStreamReader>
 
 class QIODevice;
 

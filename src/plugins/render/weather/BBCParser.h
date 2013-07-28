@@ -16,12 +16,12 @@
 #include "WeatherData.h"
 
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QList>
-#include <QtCore/QMutex>
-#include <QtCore/QPointer>
-#include <QtCore/QStack>
-#include <QtCore/QXmlStreamReader>
+#include <QHash>
+#include <QList>
+#include <QMutex>
+#include <QPointer>
+#include <QStack>
+#include <QXmlStreamReader>
 
 class QObject;
 

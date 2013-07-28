@@ -11,7 +11,7 @@
 #ifndef MARBLE_DECLARATIVE_STREETMAPTHEMEMODEL_H
 #define MARBLE_DECLARATIVE_STREETMAPTHEMEMODEL_H
 
-#include <QtGui/QSortFilterProxyModel>
+#include <QSortFilterProxyModel>
 
 namespace Marble { class MapThemeManager; }
 

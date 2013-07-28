@@ -14,8 +14,8 @@
 #include "MarbleGraphicsItem.h"
 #include "marble_export.h"
 
-#include <QtCore/QList>
-#include <QtCore/QPointF>
+#include <QList>
+#include <QPointF>
 
 #include "GeoDataCoordinates.h"
 

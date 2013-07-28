@@ -22,7 +22,7 @@
 #ifndef MARBLE_GEOSCENEPALETTE_H
 #define MARBLE_GEOSCENEPALETTE_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "GeoDocument.h"
 

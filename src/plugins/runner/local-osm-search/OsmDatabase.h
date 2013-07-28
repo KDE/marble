@@ -14,8 +14,8 @@
 
 #include "OsmPlacemark.h"
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
+#include <QString>
+#include <QStringList>
 
 namespace Marble {
 

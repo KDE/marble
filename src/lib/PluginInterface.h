@@ -14,11 +14,11 @@
 #ifndef MARBLE_PLUGININTERFACE_H
 #define MARBLE_PLUGININTERFACE_H
 
-#include <QtCore/QList>
-#include <QtCore/QObject> // for QObject::tr()
-#include <QtCore/QString>
-#include <QtCore/QtPlugin>
-#include <QtGui/QIcon>
+#include <QList>
+#include <QObject> // for QObject::tr()
+#include <QString>
+#include <QtPlugin>
+#include <QIcon>
 
 #include "marble_export.h"
 

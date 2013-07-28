@@ -18,9 +18,9 @@
 #define MARBLE_CONTROLVIEW_H
 
 
-#include <QtGui/QWidget>
-#include <QtGui/QPixmap>
-#include <QtCore/QPointer>
+#include <QWidget>
+#include <QPixmap>
+#include <QPointer>
 
 #include "MarbleWidget.h"
 #include "MarbleControlBox.h"

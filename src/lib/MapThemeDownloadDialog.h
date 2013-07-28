@@ -12,7 +12,7 @@
 #ifndef MARBLE_MAPTHEMEDOWNLOADDIALOG_H
 #define MARBLE_MAPTHEMEDOWNLOADDIALOG_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 #include "marble_export.h"
 

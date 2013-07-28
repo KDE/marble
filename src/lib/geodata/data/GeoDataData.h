@@ -11,8 +11,8 @@
 #ifndef MARBLE_GEODATADATA_H
 #define MARBLE_GEODATADATA_H
 
-#include <QtCore/QString>
-#include <QtCore/QVariant>
+#include <QString>
+#include <QVariant>
 
 #include "GeoDataObject.h"
 

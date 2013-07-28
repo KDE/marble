@@ -12,16 +12,16 @@
 #ifndef MARBLE_ABSTRACTFLOATITEM_H
 #define MARBLE_ABSTRACTFLOATITEM_H
 
-#include <QtCore/QPointF>
-#include <QtCore/QSizeF>
-#include <QtCore/QString>
-#include <QtCore/Qt>
+#include <QPointF>
+#include <QSizeF>
+#include <QString>
+#include <Qt>
 
-#include <QtGui/QPen>
-#include <QtGui/QFont>
-#include <QtGui/QContextMenuEvent>
-#include <QtGui/QHelpEvent>
-#include <QtGui/QWidget>
+#include <QPen>
+#include <QFont>
+#include <QContextMenuEvent>
+#include <QHelpEvent>
+#include <QWidget>
 
 #include "RenderPlugin.h"
 #include "FrameGraphicsItem.h"

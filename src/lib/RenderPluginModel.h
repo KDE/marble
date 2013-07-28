@@ -12,9 +12,9 @@
 #define MARBLE_RENDERPLUGINMODEL_H
 
 #include "marble_export.h"
-#include <QtGui/QStandardItemModel>
+#include <QStandardItemModel>
 
-#include <QtCore/QList>
+#include <QList>
 
 #include "PluginInterface.h"
 

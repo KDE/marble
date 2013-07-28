@@ -13,9 +13,9 @@
 #define TCCORE_H
 
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDebug>
-#include <QtCore/QObject>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QObject>
 
 #include "../lib/TileCreator.h"
 

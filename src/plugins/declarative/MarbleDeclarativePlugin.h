@@ -11,7 +11,7 @@
 #ifndef MARBLE_DECLARATIVE_PLUGIN_H
 #define MARBLE_DECLARATIVE_PLUGIN_H
 
-#include <QtDeclarative/QDeclarativeExtensionPlugin>
+#include <QDeclarativeExtensionPlugin>
 
 /**
   * Registers MarbleWidget, MarbleRunnerManager and MarbleThemeManager

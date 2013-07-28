@@ -13,7 +13,7 @@
 
 #include "Provider.h"
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "SimpleDBusInterface.h"
 

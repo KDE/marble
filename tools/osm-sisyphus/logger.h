@@ -11,7 +11,7 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class LoggerPrivate;
 

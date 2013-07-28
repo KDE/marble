@@ -12,7 +12,7 @@
 
 #include "GeoDataDocument.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 namespace Marble {
 

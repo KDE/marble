@@ -12,7 +12,7 @@
 #ifndef MARBLE_GEODATAEXTENDEDDATA_H
 #define MARBLE_GEODATAEXTENDEDDATA_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "GeoDataObject.h"
 #include "GeoDataData.h"

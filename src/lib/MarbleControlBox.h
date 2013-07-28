@@ -16,7 +16,7 @@
 
 #include "marble_export.h"
 
-#include <QtGui/QToolBox>
+#include <QToolBox>
 
 #include "MarbleGlobal.h"
 

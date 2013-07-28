@@ -11,7 +11,7 @@
 #ifndef FILEVIEW_FLOAT_ITEM_H
 #define FILEVIEW_FLOAT_ITEM_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 // forward declarations
 class QListView;

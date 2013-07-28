@@ -22,9 +22,9 @@
 #ifndef MARBLE_GEOSCENESETTINGS_H
 #define MARBLE_GEOSCENESETTINGS_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QObject>
+#include <QString>
+#include <QVector>
 
 #include <geodata_export.h>
 

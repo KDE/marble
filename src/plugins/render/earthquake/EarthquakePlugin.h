@@ -14,7 +14,7 @@
 #include "AbstractDataPlugin.h"
 #include "DialogConfigurationInterface.h"
 
-#include <QtCore/QDateTime>
+#include <QDateTime>
 
 namespace Ui
 {

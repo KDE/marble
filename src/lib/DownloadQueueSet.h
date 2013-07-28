@@ -16,12 +16,12 @@
 #ifndef MARBLE_DOWNLOADQUEUESET_H
 #define MARBLE_DOWNLOADQUEUESET_H
 
-#include <QtCore/QList>
-#include <QtCore/QQueue>
-#include <QtCore/QObject>
-#include <QtCore/QSet>
-#include <QtCore/QStack>
-#include <QtCore/QUrl>
+#include <QList>
+#include <QQueue>
+#include <QObject>
+#include <QSet>
+#include <QStack>
+#include <QUrl>
 
 #include "DownloadPolicy.h"
 

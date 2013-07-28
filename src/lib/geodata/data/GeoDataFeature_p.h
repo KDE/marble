@@ -11,8 +11,8 @@
 #ifndef MARBLE_GEODATAFEATUREPRIVATE_H
 #define MARBLE_GEODATAFEATUREPRIVATE_H
 
-#include <QtCore/QString>
-#include <QtCore/QAtomicInt>
+#include <QString>
+#include <QAtomicInt>
 
 #include "GeoDataExtendedData.h"
 #include "GeoDataAbstractView.h"

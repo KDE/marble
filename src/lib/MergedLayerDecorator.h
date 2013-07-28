@@ -16,9 +16,9 @@
 #ifndef MARBLE_MERGEDLAYERDECORATOR_H
 #define MARBLE_MERGEDLAYERDECORATOR_H
 
-#include <QtCore/QSharedPointer>
-#include <QtCore/QSize>
-#include <QtCore/QVector>
+#include <QSharedPointer>
+#include <QSize>
+#include <QVector>
 
 #include "GeoSceneTextureTile.h"
 #include "MarbleGlobal.h"

@@ -17,7 +17,7 @@
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleWidget.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 class QByteArray;
 class QTimer;

@@ -12,11 +12,11 @@
 #ifndef MARBLE_ROUTINGRUNNER_H
 #define MARBLE_ROUTINGRUNNER_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "marble_export.h"
 #include "GeoDataDocument.h"
 
-#include <QtCore/QVector>
+#include <QVector>
 
 namespace Marble
 {

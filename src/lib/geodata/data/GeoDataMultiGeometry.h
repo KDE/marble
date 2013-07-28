@@ -16,7 +16,7 @@
 #include "geodata_export.h"
 
 #include "GeoDataGeometry.h"
-#include <QtCore/QVector>
+#include <QVector>
 
 namespace Marble
 {

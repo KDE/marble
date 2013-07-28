@@ -12,11 +12,11 @@
 #define STATIONLISTPARSER_H
 
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QStringList>
-#include <QtCore/QList>
-#include <QtCore/QThread>
-#include <QtCore/QXmlStreamReader>
+#include <QHash>
+#include <QStringList>
+#include <QList>
+#include <QThread>
+#include <QXmlStreamReader>
 
 class QString;
 

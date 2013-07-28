@@ -13,8 +13,8 @@
 #define MARBLE_STORAGEPOLICY_H
 
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 
 
 class QByteArray;

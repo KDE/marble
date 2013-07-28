@@ -11,8 +11,8 @@
 #ifndef GEOCUTE_PROVIDER_H
 #define GEOCUTE_PROVIDER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 
 #include "Status.h"
 

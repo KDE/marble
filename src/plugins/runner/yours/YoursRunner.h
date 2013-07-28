@@ -14,8 +14,8 @@
 
 #include "RoutingRunner.h"
 
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 class QNetworkAccessManager;
 

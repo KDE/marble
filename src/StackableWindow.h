@@ -11,7 +11,7 @@
 #ifndef MARBLE_STACKABLEWINDOW_H
 #define MARBLE_STACKABLEWINDOW_H
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 
 namespace Marble
 {

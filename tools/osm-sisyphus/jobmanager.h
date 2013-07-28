@@ -14,9 +14,9 @@
 #include "jobqueue.h"
 #include "region.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QStringList>
-#include <QtCore/QVector>
+#include <QObject>
+#include <QStringList>
+#include <QVector>
 
 struct PendingJob {
     Region m_region;

@@ -13,11 +13,11 @@
 #ifndef POSITION_MARKER_H
 #define POSITION_MARKER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QHash>
-#include <QtCore/QVector>
-#include <QtGui/QColor>
-#include <QtGui/QAbstractButton>
+#include <QObject>
+#include <QHash>
+#include <QVector>
+#include <QColor>
+#include <QAbstractButton>
 
 #include "DialogConfigurationInterface.h"
 #include "RenderPlugin.h"

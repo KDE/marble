@@ -11,7 +11,7 @@
 #ifndef MARBLE_GEOPAINTERPRIVATE_H
 #define MARBLE_GEOPAINTERPRIVATE_H
 
-#include <QtCore/QVector>
+#include <QVector>
 
 #include "MarbleGlobal.h"
 

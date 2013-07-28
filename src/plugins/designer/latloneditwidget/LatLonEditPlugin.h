@@ -10,7 +10,7 @@
 #ifndef LATLONEDITPLUGIN_H
 #define LATLONEDITPLUGIN_H
 
-#include <QtDesigner/QDesignerCustomWidgetInterface>
+#include <QDesignerCustomWidgetInterface>
 
 class QObject;
 class QString;

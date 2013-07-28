@@ -11,8 +11,8 @@
 #ifndef GEODATAEXTENDEDDATAPRIVATE_H
 #define GEODATAEXTENDEDDATAPRIVATE_H
 
-#include <QtCore/QString>
-#include <QtCore/QHash>
+#include <QString>
+#include <QHash>
 
 #include "GeoDataData.h"
 #include "GeoDataSimpleArrayData.h"

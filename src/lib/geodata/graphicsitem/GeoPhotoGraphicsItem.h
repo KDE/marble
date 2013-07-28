@@ -15,7 +15,7 @@
 #include "GeoGraphicsItem.h"
 #include "marble_export.h"
 
-#include <QtGui/QImage>
+#include <QImage>
 
 namespace Marble
 {

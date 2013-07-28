@@ -11,7 +11,7 @@
 #ifndef MARBLE_LATLONEDIT_H
 #define MARBLE_LATLONEDIT_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"

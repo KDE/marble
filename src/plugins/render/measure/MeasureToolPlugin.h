@@ -23,10 +23,10 @@
 #include "MarbleWidget.h"
 #include "MarbleWidgetPopupMenu.h"
 
-#include <QtCore/QObject>
-#include <QtGui/QFont>
-#include <QtGui/QPen>
-#include <QtGui/QAction>
+#include <QObject>
+#include <QFont>
+#include <QPen>
+#include <QAction>
 
 namespace Ui {
     class MeasureConfigWidget;

@@ -20,8 +20,8 @@
 #include "RenderPlugin.h"
 #include "SceneGraphicsItem.h"
 
-#include <QtCore/QObject>
-#include <QtGui/QErrorMessage>
+#include <QObject>
+#include <QErrorMessage>
 
 class QNetworkAccessManager;
 class QNetworkReply;

@@ -12,8 +12,8 @@
 #ifndef MARBLE_MAPTHEMESORTFILTERPROXYMODEL_H
 #define MARBLE_MAPTHEMESORTFILTERPROXYMODEL_H
 
-#include <QtCore/QDateTime>
-#include <QtGui/QSortFilterProxyModel>
+#include <QDateTime>
+#include <QSortFilterProxyModel>
 
 namespace Marble
 {

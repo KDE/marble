@@ -14,7 +14,7 @@
 #include "ui_BookmarkManagerDialog.h"
 #include "marble_export.h"
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 namespace Marble
 {

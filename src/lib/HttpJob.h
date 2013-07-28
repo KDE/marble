@@ -14,11 +14,11 @@
 #ifndef MARBLE_HTTPJOB_H
 #define MARBLE_HTTPJOB_H
 
-#include <QtCore/QByteArray>
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QUrl>
-#include <QtNetwork/QNetworkReply>
+#include <QByteArray>
+#include <QObject>
+#include <QString>
+#include <QUrl>
+#include <QNetworkReply>
 
 #include "MarbleGlobal.h"
 

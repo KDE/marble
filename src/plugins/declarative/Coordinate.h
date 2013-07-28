@@ -13,8 +13,8 @@
 
 #include "GeoDataCoordinates.h"
 
-#include <QtCore/QObject>
-#include <QtDeclarative/QtDeclarative>
+#include <QObject>
+#include <QtDeclarative>
 
 /**
   * Represents a coordinate with the properties of a name and coordinates

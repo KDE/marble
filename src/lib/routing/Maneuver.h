@@ -11,8 +11,8 @@
 #ifndef MARBLE_MANEUVER_H
 #define MARBLE_MANEUVER_H
 
-#include <QtCore/QString>
-#include <QtCore/QMap>
+#include <QString>
+#include <QMap>
 
 #include "GeoDataCoordinates.h"
 

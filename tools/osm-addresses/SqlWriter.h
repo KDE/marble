@@ -13,9 +13,9 @@
 
 #include "Writer.h"
 
-#include <QtCore/QMap>
-#include <QtCore/QPair>
-#include <QtSql/QSqlQuery>
+#include <QMap>
+#include <QPair>
+#include <QSqlQuery>
 
 namespace Marble
 {

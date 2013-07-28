@@ -22,8 +22,8 @@
 #ifndef MARBLE_GEOSCENEICON_H
 #define MARBLE_GEOSCENEICON_H
 
-#include <QtCore/QString>
-#include <QtGui/QColor>
+#include <QString>
+#include <QColor>
 
 #include <geodata_export.h>
 

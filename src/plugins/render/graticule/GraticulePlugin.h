@@ -15,14 +15,14 @@
 #ifndef MARBLEGRATICULEPLUGIN_H
 #define MARBLEGRATICULEPLUGIN_H
 
-#include <QtCore/QMap>
-#include <QtCore/QObject>
-#include <QtCore/QVector>
-#include <QtCore/QHash>
-#include <QtGui/QPen>
-#include <QtGui/QIcon>
-#include <QtGui/QColorDialog>
-#include <QtGui/QAbstractButton>
+#include <QMap>
+#include <QObject>
+#include <QVector>
+#include <QHash>
+#include <QPen>
+#include <QIcon>
+#include <QColorDialog>
+#include <QAbstractButton>
 
 
 #include "DialogConfigurationInterface.h"

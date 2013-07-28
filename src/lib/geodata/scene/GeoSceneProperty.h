@@ -22,8 +22,8 @@
 #ifndef MARBLE_GEOSCENEPROPERTY_H
 #define MARBLE_GEOSCENEPROPERTY_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 
 #include <geodata_export.h>
 

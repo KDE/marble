@@ -22,7 +22,7 @@
 #ifndef MARBLE_GEOSCENEHEAD_H
 #define MARBLE_GEOSCENEHEAD_H
 
-#include <QtCore/QString>
+#include <QString>
 #include "GeoDocument.h"
 
 #include <geodata_export.h>

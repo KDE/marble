@@ -14,10 +14,10 @@
 #include "Coordinate.h"
 #include "Placemark.h"
 
-#include <QtGui/QGraphicsProxyWidget>
-#include <QtCore/QList>
-#include <QtCore/QPoint>
-#include <QtDeclarative/QtDeclarative>
+#include <QGraphicsProxyWidget>
+#include <QList>
+#include <QPoint>
+#include <QtDeclarative>
 
 using Marble::GeoDataCoordinates; // Ouch. For signal/slot connection across different namespaces
 

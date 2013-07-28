@@ -11,7 +11,7 @@
 #ifndef MARBLE_DECLARATIVE_ZOOMBUTTONINTERCEPTOR_H
 #define MARBLE_DECLARATIVE_ZOOMBUTTONINTERCEPTOR_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class MarbleWidget;
 

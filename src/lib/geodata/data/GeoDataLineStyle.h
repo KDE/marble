@@ -13,8 +13,8 @@
 #define MARBLE_GEODATALINESTYLE_H
 
 
-#include <QtGui/QFont>
-#include <QtCore/QVector>
+#include <QFont>
+#include <QVector>
 
 #include "GeoDataColorStyle.h"
 

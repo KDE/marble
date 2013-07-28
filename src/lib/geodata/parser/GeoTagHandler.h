@@ -22,7 +22,7 @@
 #ifndef MARBLE_GEOTAGHANDLER_H
 #define MARBLE_GEOTAGHANDLER_H
 
-#include <QtCore/QHash>
+#include <QHash>
 #include "marble_export.h"
 #include "GeoParser.h"
 

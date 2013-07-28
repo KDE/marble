@@ -21,12 +21,12 @@
 #include "marble/GeoDataLineString.h"
 #include "marble/GeoDataPolygon.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QFileInfo>
-#include <QtCore/QMap>
-#include <QtCore/QList>
-#include <QtCore/QPair>
-#include <QtXml/QXmlDefaultHandler>
+#include <QObject>
+#include <QFileInfo>
+#include <QMap>
+#include <QList>
+#include <QPair>
+#include <QXmlDefaultHandler>
 
 namespace Marble
 {

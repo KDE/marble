@@ -13,8 +13,8 @@
 
 #include "GeoDataPolygon.h"
 
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include <QList>
+#include <QString>
 
 namespace Marble
 {

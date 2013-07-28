@@ -11,9 +11,9 @@
 #ifndef APRSPLUGIN_H
 #define APRSPLUGIN_H
 
-#include <QtCore/QObject>
-#include <QtCore/QMutex>
-#include <QtGui/QDialog>
+#include <QObject>
+#include <QMutex>
+#include <QDialog>
 
 #include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"

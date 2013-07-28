@@ -21,10 +21,10 @@
 #define MARBLE_VECTORCOMPOSER_H
 
 
-#include <QtCore/QObject>
-#include <QtCore/QVector>
-#include <QtGui/QBrush>
-#include <QtGui/QPen>
+#include <QObject>
+#include <QVector>
+#include <QBrush>
+#include <QPen>
 
 class QColor;
 

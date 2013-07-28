@@ -22,9 +22,9 @@
 #ifndef MARBLE_GEOSCENEGROUP_H
 #define MARBLE_GEOSCENEGROUP_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QObject>
+#include <QString>
+#include <QVector>
 
 #include "GeoDocument.h"
 

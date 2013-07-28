@@ -13,8 +13,8 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QFileInfo>
+#include <QAbstractListModel>
+#include <QFileInfo>
 
 namespace Marble
 {

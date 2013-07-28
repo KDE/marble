@@ -13,11 +13,11 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QPointF>
-#include <QtCore/QList>
-#include <QtCore/QSizeF>
-#include <QtCore/QRectF>
-#include <QtCore/QString>
+#include <QPointF>
+#include <QList>
+#include <QSizeF>
+#include <QRectF>
+#include <QString>
 
 class QEvent;
 class QObject;

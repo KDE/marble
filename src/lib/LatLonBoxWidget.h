@@ -14,7 +14,7 @@
 #ifndef MARBLE_LATLONBOXWIDGET_H
 #define MARBLE_LATLONBOXWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include "marble_export.h"
 

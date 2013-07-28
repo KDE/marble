@@ -15,8 +15,8 @@
 #include "GeoDataLineString.h"
 #include "Route.h"
 
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QTime>
+#include <QAbstractListModel>
+#include <QTime>
 
 /**
   * A QAbstractItemModel that contains a list of routing instructions.

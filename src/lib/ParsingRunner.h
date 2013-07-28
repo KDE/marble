@@ -12,7 +12,7 @@
 #ifndef MARBLE_PARSINGRUNNER_H
 #define MARBLE_PARSINGRUNNER_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "marble_export.h"
 
 #include "GeoDataDocument.h"

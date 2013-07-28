@@ -16,9 +16,9 @@
 #include "GeoDataLatLonAltBox.h"
 
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QMutex>
-#include <QtCore/QThread>
+#include <QList>
+#include <QMutex>
+#include <QThread>
 
 namespace Marble
 {

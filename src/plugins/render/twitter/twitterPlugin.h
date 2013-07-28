@@ -16,7 +16,7 @@
 #define MARBLETWITTERPLUGIN_H
 #define RADIANSTODEGREES 57.2957795
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QFile>
 #include <QTextStream>
 #include "../lib/HttpDownloadManager.h"

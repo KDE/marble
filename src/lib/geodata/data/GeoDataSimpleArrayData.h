@@ -13,7 +13,7 @@
 
 #include "GeoDataObject.h"
 
-#include <QtCore/QVariant>
+#include <QVariant>
 
 namespace Marble {
 

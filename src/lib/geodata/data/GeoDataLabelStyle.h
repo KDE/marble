@@ -14,7 +14,7 @@
 #define MARBLE_GEODATALABELSTYLE_H
 
 
-#include <QtGui/QFont>
+#include <QFont>
 
 #include "GeoDataColorStyle.h"
 

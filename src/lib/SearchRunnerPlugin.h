@@ -11,7 +11,7 @@
 #ifndef MARBLE_SEARCHRUNNERPLUGIN_H
 #define MARBLE_SEARCHRUNNERPLUGIN_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include "PluginInterface.h"
 
 namespace Marble

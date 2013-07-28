@@ -11,9 +11,9 @@
 #ifndef GEODATALISTSTYLE_H
 #define GEODATALISTSTYLE_H
 
-#include <QtGui/QImage>
-#include <QtCore/QFlags>
-#include <QtCore/QVector>
+#include <QImage>
+#include <QFlags>
+#include <QVector>
 
 #include "MarbleGlobal.h"
 #include "GeoDataObject.h"

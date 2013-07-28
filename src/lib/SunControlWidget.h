@@ -13,9 +13,9 @@
 #ifndef MARBLE_SUNCONTROLWIDGET_H
 #define MARBLE_SUNCONTROLWIDGET_H
 
-#include <QtCore/QDateTime>
-#include <QtCore/QTime>
-#include <QtGui/QDialog>
+#include <QDateTime>
+#include <QTime>
+#include <QDialog>
 
 #include "marble_export.h"
 

@@ -11,13 +11,13 @@
 #ifndef GEOCUTE_SIMPLEDBUSINTERFACE_H
 #define GEOCUTE_SIMPLEDBUSINTERFACE_H
 
-#include <QtCore/QList>
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QVariant>
-#include <QtDBus/QDBusConnection>
-#include <QtDBus/QDBusMessage>
-#include <QtDBus/QDBusPendingCall>
+#include <QList>
+#include <QObject>
+#include <QString>
+#include <QVariant>
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusPendingCall>
 
 
 

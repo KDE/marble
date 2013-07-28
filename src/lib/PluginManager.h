@@ -12,8 +12,8 @@
 #ifndef MARBLE_PLUGINMANAGER_H
 #define MARBLE_PLUGINMANAGER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include <QObject>
+#include <QList>
 #include "marble_export.h"
 
 

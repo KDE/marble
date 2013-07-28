@@ -14,7 +14,7 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 namespace Marble {
 

@@ -16,7 +16,7 @@
 #include "marble_export.h"
 
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 class QWidget;
 

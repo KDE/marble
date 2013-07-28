@@ -14,7 +14,7 @@
 #include "RoutingPoint.h"
 #include "marble_export.h"
 
-#include <QtCore/QVector>
+#include <QVector>
 
 namespace Marble
 {

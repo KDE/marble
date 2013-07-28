@@ -15,9 +15,9 @@
 #include "ReverseGeocodingRunner.h"
 #include "GeoDataCoordinates.h"
 
-#include <QtCore/QString>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkRequest>
+#include <QString>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
 
 class QNetworkReply;
 class QDomNodeList;

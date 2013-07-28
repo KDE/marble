@@ -16,8 +16,8 @@
 #ifndef MARBLE_DOWNLOADPOLICY_H
 #define MARBLE_DOWNLOADPOLICY_H
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
+#include <QString>
+#include <QStringList>
 
 #include "MarbleGlobal.h"
 

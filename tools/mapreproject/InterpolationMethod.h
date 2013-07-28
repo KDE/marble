@@ -1,7 +1,7 @@
 #ifndef INTERPOLATIONMETHOD_H
 #define INTERPOLATIONMETHOD_H
 
-#include <QtGui/QColor>
+#include <QColor>
 
 class ReadOnlyMapImage;
 

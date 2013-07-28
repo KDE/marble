@@ -14,11 +14,11 @@
 #define MARBLE_GEODATASTYLE_H
 
 
-#include <QtCore/QMetaType>
-#include <QtCore/QPoint>
-#include <QtGui/QColor>
-#include <QtGui/QPixmap>
-#include <QtGui/QFont>
+#include <QMetaType>
+#include <QPoint>
+#include <QColor>
+#include <QPixmap>
+#include <QFont>
 
 #include "GeoDataStyleSelector.h"
 #include "GeoDataIconStyle.h"

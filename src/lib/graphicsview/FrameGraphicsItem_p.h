@@ -15,9 +15,9 @@
 #include "FrameGraphicsItem.h"
 
 // Qt
-#include<QtCore/QDebug>
-#include<QtGui/QBrush>
-#include<QtGui/QPixmapCache>
+#include<QDebug>
+#include<QBrush>
+#include<QPixmapCache>
 
 namespace Marble
 {

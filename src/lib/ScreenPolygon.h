@@ -13,8 +13,8 @@
 #define MARBLE_SCREENPOLYGON_H
 
 
-#include <QtCore/QVector>
-#include <QtGui/QPolygonF>
+#include <QVector>
+#include <QPolygonF>
 
 namespace Marble
 {

@@ -15,8 +15,8 @@
 #define MARBLE_VECTORTILELAYER_H
 
 #include "LayerInterface.h"
-#include <QtCore/QObject>
-#include <QtCore/QRunnable>
+#include <QObject>
+#include <QRunnable>
 
 #include "MarbleGlobal.h"
 #include "MarbleModel.h"
@@ -24,7 +24,7 @@
 #include "GeoDataLatLonAltBox.h"
 #include "TileId.h"
 
-#include <QtCore/QSize>
+#include <QSize>
 
 class QImage;
 class QRegion;
