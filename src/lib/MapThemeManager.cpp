@@ -379,7 +379,7 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
     item->setData( QString( "<span style=\" max-width: 150 px;\"> "
                             + QObject::tr( description.toUtf8() ) + " </span>" ), Qt::ToolTipRole );
     item->setData( mapThemeID, Qt::UserRole + 1 );
-    item->setData( description, Qt::UserRole + 2 );
+    item->setData( QObject::tr( description.toUtf8() ), Qt::UserRole + 2 );
 
     itemList << item;
 
