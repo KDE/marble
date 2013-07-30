@@ -23,7 +23,6 @@
 #include <QPointer>
 
 #include "MarbleWidget.h"
-#include "MarbleControlBox.h"
 
 class QSplitter;
 class QPrintDialog;
@@ -35,6 +34,7 @@ class QMenu;
 namespace Marble
 {
 
+class CurrentLocationWidget;
 class MarbleModel;
 
 class ControlView : public QWidget
