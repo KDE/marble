@@ -49,7 +49,6 @@ class AbstractDataPluginItem;
 class GeoDataPlacemark;
 class GeoPainter;
 class MeasureTool;
-class MapThemeManager;
 class PositionTracking;
 class HttpDownloadManager;
 class MarbleModelPrivate;
@@ -176,8 +175,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param  zoom       the default zoom level for the new home point.
      */
     void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
-
-    MapThemeManager *mapThemeManager();
 
     /**
      * @brief Return the downloadmanager to load missing tiles

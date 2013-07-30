@@ -33,6 +33,7 @@
 #include "RoutingWidget.h"
 
 // Marble
+#include "MapThemeManager.h"
 #include "MarbleGlobal.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
@@ -48,6 +49,9 @@ class MarbleControlBoxPrivate
 {
  public:
     MarbleControlBoxPrivate();
+
+    MapThemeManager m_mapThemeManager;
+
     MarbleWidget  *m_widget;
 
     NavigationWidget            *m_navigationWidget;
@@ -125,7 +129,7 @@ void MarbleControlBox::setMarbleWidget(MarbleWidget *widget)
     d->m_fileViewWidget->setMarbleWidget( widget );
     d->m_legendWidget->setMarbleModel( widget->model() );
     d->m_navigationWidget->setMarbleWidget( widget );
-    d->m_mapViewWidget->setMarbleWidget( widget );
+    d->m_mapViewWidget->setMarbleWidget( widget, &d->m_mapThemeManager );
     d->m_currentLocationWidget->setMarbleWidget( widget );
 
     connect( d->m_legendWidget, SIGNAL(propertyValueChanged(QString,bool)),

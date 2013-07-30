@@ -80,7 +80,6 @@ class MarbleModelPrivate
           m_planet( new Planet( "earth" ) ),
           m_sunLocator( &m_clock, m_planet ),
           m_pluginManager(),
-          m_mapThemeManager(),
           m_homePoint( -9.4, 54.8, 0.0, GeoDataCoordinates::Degree ),  // Some point that tackat defined. :-)
           m_homeZoom( 1050 ),
           m_mapTheme( 0 ),
@@ -116,7 +115,6 @@ class MarbleModelPrivate
     SunLocator               m_sunLocator;
 
     PluginManager            m_pluginManager;
-    MapThemeManager          m_mapThemeManager;
 
     // The home position
     GeoDataCoordinates       m_homePoint;
@@ -389,11 +387,6 @@ void MarbleModel::setHome( const GeoDataCoordinates& homePoint, int zoom )
     d->m_homePoint = homePoint;
     d->m_homeZoom = zoom;
     emit homeChanged( d->m_homePoint );
-}
-
-MapThemeManager *MarbleModel::mapThemeManager()
-{
-    return &d->m_mapThemeManager;
 }
 
 HttpDownloadManager *MarbleModel::downloadManager()

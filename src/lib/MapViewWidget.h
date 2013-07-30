@@ -26,6 +26,7 @@ class QStandardItemModel;
 namespace Marble
 {
 
+class MapThemeManager;
 class MarbleWidget;
 
 class MARBLE_EXPORT MapViewWidget : public QWidget
@@ -39,7 +40,7 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
      * @brief Set a MarbleWidget associated to this widget.
      * @param widget  the MarbleWidget to be set.
      */
-    void setMarbleWidget( MarbleWidget *widget );
+    void setMarbleWidget( MarbleWidget *widget, MapThemeManager *mapThemeManager );
 
 protected:
     void resizeEvent(QResizeEvent *event);

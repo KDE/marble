@@ -14,6 +14,8 @@
 #include "Coordinate.h"
 #include "Placemark.h"
 
+#include "MapThemeManager.h"
+
 #include <QGraphicsProxyWidget>
 #include <QList>
 #include <QPoint>
@@ -204,6 +206,8 @@ private:
 
     /** Wrapped MarbleWidget */
     Marble::MarbleWidget *const m_marbleWidget;
+
+    Marble::MapThemeManager m_mapThemeManager;
 
     bool m_inputEnabled;
 

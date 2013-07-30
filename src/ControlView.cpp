@@ -61,6 +61,7 @@ namespace Marble
 
 ControlView::ControlView( QWidget *parent )
    : QWidget( parent ),
+     m_mapThemeManager( new MapThemeManager( this ) ),
      m_searchDock( 0 ),
      m_locationWidget( 0 )
 {
@@ -86,6 +87,11 @@ ControlView::~ControlView()
 QString ControlView::applicationVersion()
 {
     return "1.6.20 (development snapshot)";
+}
+
+MapThemeManager *ControlView::mapThemeManager()
+{
+    return m_mapThemeManager;
 }
 
 void ControlView::zoomIn()
@@ -132,7 +138,7 @@ QString ControlView::defaultMapThemeId() const
       fallBackThemes << "earth/openstreetmap/openstreetmap.dgml";
     }
 
-    const QStringList installedThemes = m_marbleWidget->model()->mapThemeManager()->mapThemeIds();
+    const QStringList installedThemes = m_mapThemeManager->mapThemeIds();
 
     foreach(const QString &fallback, fallBackThemes) {
         if (installedThemes.contains(fallback)) {
@@ -543,7 +549,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     mapViewDock->setObjectName( "mapViewDock" );
     mapViewDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
     MapViewWidget* mapViewWidget = new MapViewWidget( this );
-    mapViewWidget->setMarbleWidget( marbleWidget() );
+    mapViewWidget->setMarbleWidget( marbleWidget(), m_mapThemeManager );
     connect( mapViewWidget, SIGNAL(showMapWizard()), this, SIGNAL(showMapWizard()) );
     connect( mapViewWidget, SIGNAL(showUploadDialog()), this, SIGNAL(showUploadDialog()) );
     connect( mapViewWidget, SIGNAL(mapThemeDeleted()), this, SIGNAL(mapThemeDeleted()) );

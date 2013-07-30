@@ -391,12 +391,12 @@ MapViewWidget::~MapViewWidget()
     delete d;
 }
 
-void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
+void MapViewWidget::setMarbleWidget( MarbleWidget *widget, MapThemeManager *mapThemeManager )
 {
     d->m_marbleModel = widget->model();
-    d->m_mapSortProxy.setSourceModel( widget->model()->mapThemeManager()->mapThemeModel() );
+    d->m_mapSortProxy.setSourceModel( mapThemeManager->mapThemeModel() );
     d->m_mapSortProxy.sort( 0 );
-    d->m_celestialListProxy.setSourceModel( widget->model()->mapThemeManager()->celestialBodiesModel() );
+    d->m_celestialListProxy.setSourceModel( mapThemeManager->celestialBodiesModel() );
     d->m_celestialListProxy.sort( 0 );
 
     connect( this, SIGNAL(projectionChanged(Projection)),

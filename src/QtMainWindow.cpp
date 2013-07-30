@@ -1479,7 +1479,7 @@ void MainWindow::showMapViewDialog()
         m_mapViewWindow->setLayout( layout );
 
         MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewWindow );
-        mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
+        mapViewWidget->setMarbleWidget( m_controlView->marbleWidget(), m_controlView->mapThemeManager() );
         layout->addWidget( mapViewWidget );
     }
 
