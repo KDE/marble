@@ -240,7 +240,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
     if ( !mapThemeId.isEmpty() && mapThemeId == this->mapThemeId() )
         return;
 
-    GeoSceneDocument *mapTheme = d->m_mapThemeManager.loadMapTheme( mapThemeId );
+    GeoSceneDocument *mapTheme = MapThemeManager::loadMapTheme( mapThemeId );
     if ( !mapTheme ) {
         // Check whether the previous theme works
         if ( d->m_mapTheme ){
@@ -251,7 +251,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
         // Fall back to default theme
         QString defaultTheme = "earth/srtm/srtm.dgml";
         qWarning() << "Falling back to default theme:" << defaultTheme;
-        mapTheme = d->m_mapThemeManager.loadMapTheme( defaultTheme );
+        mapTheme = MapThemeManager::loadMapTheme( defaultTheme );
     }
 
     // If this last resort doesn't work either shed a tear and exit
