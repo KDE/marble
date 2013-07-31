@@ -542,10 +542,13 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     // If there's not enough space free don't add a VisiblePlacemark here.
     const GeoDataStyle* style = placemark->style();
 
-    QRectF labelRect = roomForLabel( style, x, y, placemark->name() );
-
-    if ( labelRect.isNull() )
-        return false;
+    QRectF labelRect;
+    if( !placemark->name().isEmpty() ) {
+        labelRect = roomForLabel( style, x, y, placemark->name() );
+        if ( labelRect.isNull() ) {
+            return false;
+        }
+    }
 
     // Find the corresponding visible placemark
     VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
@@ -566,14 +569,16 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
                                      y - qRound( hotSpot.y() ) ) );
     mark->setLabelRect( labelRect );
 
-    // Add the current placemark to the matching row and its
-    // direct neighbors.
-    int idx = y / m_maxLabelHeight;
-    if ( idx - 1 >= 0 )
-        m_rowsection[ idx - 1 ].append( mark );
-    m_rowsection[ idx ].append( mark );
-    if ( idx + 1 < m_rowsection.size() )
-        m_rowsection[ idx + 1 ].append( mark );
+    if ( !labelRect.isEmpty() ) {
+        // Add the current placemark to the matching row and its
+        // direct neighbors.
+        int idx = y / m_maxLabelHeight;
+        if ( idx - 1 >= 0 )
+            m_rowsection[ idx - 1 ].append( mark );
+        m_rowsection[ idx ].append( mark );
+        if ( idx + 1 < m_rowsection.size() )
+            m_rowsection[ idx + 1 ].append( mark );
+    }
 
     m_paintOrder.append( mark );
     m_labelArea += labelRect.width() * labelRect.height();
@@ -640,8 +645,8 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
             labelRect.moveTo( xpos, ypos );
 
             // Check if there is another label or symbol that overlaps.
-            QVector<VisiblePlacemark*>::const_iterator beforeItEnd = m_paintOrder.constEnd();
-            for ( QVector<VisiblePlacemark*>::ConstIterator beforeIt = m_paintOrder.constBegin();
+            QVector<VisiblePlacemark*>::const_iterator beforeItEnd = currentsec.constEnd();
+            for ( QVector<VisiblePlacemark*>::ConstIterator beforeIt = currentsec.constBegin();
                   beforeIt != beforeItEnd;
                   ++beforeIt ) {
                 if ( labelRect.intersects( (*beforeIt)->labelRect()) ) {
