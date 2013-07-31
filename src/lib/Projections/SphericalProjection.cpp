@@ -128,7 +128,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
                                              bool &globeHidesPoint ) const
 {
     pointRepeatNum = 0;
-    screenCoordinates( coordinates, viewport, *x, y, globeHidesPoint );
+    bool visible = screenCoordinates( coordinates, viewport, *x, y, globeHidesPoint );
 
     // Skip placemarks that are outside the screen area
     if ( *x + size.width() / 2.0 < 0.0 || *x >= viewport->width() + size.width() / 2.0 
@@ -141,8 +141,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
     // This projection doesn't have any repetitions, 
     // so the number of screen points referring to the geopoint is one.
     pointRepeatNum = 1;
-    globeHidesPoint = false;
-    return true;
+    return visible;
 }
 
 
