@@ -37,6 +37,8 @@ class GroundLayer : public LayerInterface
 
     QColor color() const;
 
+    virtual QString runtimeTrace() const { return "GroundLayer"; }
+
  private:
     QColor m_color;  // Gets the color specified via DGML's <map bgcolor="">
     

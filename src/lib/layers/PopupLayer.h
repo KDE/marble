@@ -50,6 +50,8 @@ public:
     virtual bool eventFilter( QObject *, QEvent * );
     qreal zValue() const;
 
+    virtual QString runtimeTrace() const { return "PopupLayer"; }
+
     /**
      * @brief Is popup item visible
      *

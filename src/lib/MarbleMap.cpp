@@ -103,6 +103,8 @@ public:
 
     virtual qreal zValue() const { return 1.0e6; }
 
+    virtual QString runtimeTrace() const { return "CustomPaint"; }
+
 private:
     MarbleMap *const m_map;
 };

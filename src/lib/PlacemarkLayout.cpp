@@ -525,7 +525,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         }
     }
 
-    m_runtimeTrace = QString("Visible: %1 Drawn: %2").arg( placemarkList.count() ).arg( m_paintOrder.size() );
+    m_runtimeTrace = QString("Placemarks: %1 Drawn: %2").arg( placemarkList.count() ).arg( m_paintOrder.size() );
     return m_paintOrder;
 }
 

@@ -261,7 +261,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     painter->restore();
-    d->m_runtimeTrace = QString( "Items: %1 Drawn: %2 Zoom: %3")
+    d->m_runtimeTrace = QString( "Geometries: %1 Drawn: %2 Zoom: %3")
                 .arg( items.size() )
                 .arg( painted )
                 .arg( maxZoomLevel );
