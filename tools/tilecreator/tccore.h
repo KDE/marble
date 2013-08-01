@@ -17,7 +17,7 @@
 #include <QDebug>
 #include <QObject>
 
-#include "../lib/TileCreator.h" 
+#include <marble/TileCreator.h>
 
 namespace Marble
 {
@@ -26,7 +26,7 @@ class TCCoreApplication : public QCoreApplication
 {
     public:
         TCCoreApplication( int & argc, char ** argv );
-        
+
     private:
         TileCreator *m_tilecreator;
 };

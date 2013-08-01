@@ -8,7 +8,6 @@ SET(CMAKE_COLOR_MAKEFILE ON)
 ####################################################
 # Generate the tiles with the tilecreator at compile time
 # if this option is set, srtm.jpg will not be installed but the generated tiles instead
-option(TILES_AT_COMPILETIME "Create the data for the Atlas map at compiletime" ON)
 option(QTONLY "Create Marble version without KDE dependencies" OFF)
 option(MOBILE "Create a Marble version optimized for handheld devices")
 

@@ -68,10 +68,7 @@ maps/earth/clouds/0/000000/000000_000000.jpg
 maps/earth/clouds/0/000000/000000_000001.jpg
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/clouds/0/000000)
 
-install (FILES
-maps/earth/srtm/srtm.dgml
-maps/earth/srtm/srtm-preview.png
-DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
+install (DIRECTORY maps/earth/srtm DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth)
 
 install (FILES
 maps/earth/srtm2/srtm2.dgml
@@ -81,12 +78,6 @@ install (FILES
 maps/earth/srtm2/0/000000/000000_000000.png
 maps/earth/srtm2/0/000000/000000_000001.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm2/0/000000)
-
-if(NOT TILES_AT_COMPILETIME)
-install (FILES
-maps/earth/srtm/srtm.jpg
-DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
-endif(NOT TILES_AT_COMPILETIME)
 
 install (FILES
 maps/earth/bluemarble/bluemarble.jpg

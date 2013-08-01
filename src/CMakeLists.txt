@@ -37,7 +37,6 @@ if( QT_QTDECLARATIVE_FOUND )
   ENDIF()
 ENDIF()
 
-add_subdirectory( tilecreator )
 add_subdirectory( routing-instructions )
 add_subdirectory( lib )
 add_subdirectory( plugins )

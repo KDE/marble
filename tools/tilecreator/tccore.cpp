@@ -14,7 +14,6 @@ using namespace Marble;
 
 TCCoreApplication::TCCoreApplication( int & argc, char ** argv ) : QCoreApplication( argc, argv )
 {
-    
     if( !(argc < 5) )
     {
         m_tilecreator = new TileCreator( argv [1], argv[2], argv[3], argv[4] );
