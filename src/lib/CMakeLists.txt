@@ -284,7 +284,7 @@ set (marblewidget_UI
 qt4_add_resources(marblewidget_SRCS libmarble.qrc ../marble.qrc)
 
 qt4_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
-qt4_automoc(${marblewidget_SRCS})
+marble_qt4_automoc(${marblewidget_SRCS})
 
 
 # link with release version of Qt libs

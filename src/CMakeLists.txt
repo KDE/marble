@@ -135,7 +135,7 @@ endif(MINGW)
 qt4_add_resources(marble_SRCS marble.qrc)
 
 qt4_wrap_ui(marble_SRCS ${marble_UI})
-qt4_automoc(${marble_SRCS})
+marble_qt4_automoc(${marble_SRCS})
 
 if (NOT QTONLY)
   kde4_add_ui_files(marble_kde_SRCS ${marble_UI})

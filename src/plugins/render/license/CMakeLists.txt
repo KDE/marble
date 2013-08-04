@@ -9,6 +9,6 @@ INCLUDE(${QT_USE_FILE})
 
 set( license_SRCS License.cpp )
 
-qt4_automoc( ${license_SRCS} )
+marble_qt4_automoc( ${license_SRCS} )
 
 marble_add_plugin( License ${license_SRCS} )

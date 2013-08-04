@@ -31,7 +31,7 @@ set( tilecreator_SRCS
             tccore.cpp
 )
 
-qt4_automoc(${tilecreator_SRCS})
+marble_qt4_automoc( ${tilecreator_SRCS} )
 
 add_definitions( -DMAKE_MARBLE_LIB -DTILECREATOR )
 add_executable( tilecreator ${tilecreator_SRCS} )

@@ -34,7 +34,7 @@ set( aprs_UI AprsConfigWidget.ui )
 qt4_wrap_ui( aprs_SRCS ${aprs_UI} )
 
 if (QTONLY)
-qt4_automoc( ${aprs_SRCS} )
+marble_qt4_automoc( ${aprs_SRCS} )
 endif (QTONLY)
 
 marble_add_plugin( AprsPlugin ${aprs_SRCS} )

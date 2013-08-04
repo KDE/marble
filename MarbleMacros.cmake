@@ -19,12 +19,20 @@ else()
   endmacro()
 endif()
 
+macro( marble_qt4_automoc )
+  if( ${CMAKE_VERSION} STRLESS "2.8" OR QT4_FOUND)
+    qt4_automoc( ${ARGN} )
+  else()
+    # Just ignore it
+  endif()
+endmacro()
+
 # the place to put in common cmake macros
 # this is needed to minimize the amount of errors to do
 macro( marble_add_plugin _target_name )
 set( _src ${ARGN} )
 if( QTONLY )
-    qt4_automoc( ${_src} )
+    marble_qt4_automoc( ${_src} )
     add_library( ${_target_name} MODULE ${_src} )
     target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
                                            ${QT_QTDBUS_LIBRARY}
@@ -69,7 +77,7 @@ set( _src ${ARGN} )
 qt4_add_resources( _src ../../../marble.qrc )
 
 if( QTONLY )
-    qt4_automoc( ${_src} )
+    marble_qt4_automoc( ${_src} )
     add_library( ${_target_name} MODULE ${_src} )
     target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
                                            ${QT_QTDBUS_LIBRARY}
@@ -108,7 +116,7 @@ endmacro( marble_add_designer_plugin _target_name )
 
 macro( marble_add_declarative_plugin _target_name _install_path )
 set( _src ${ARGN} )
-qt4_automoc( ${_src} )
+marble_qt4_automoc( ${_src} )
 add_library( ${_target_name} MODULE ${_src} )
 target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
                                            ${QT_QTDBUS_LIBRARY}

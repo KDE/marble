@@ -271,6 +271,11 @@ IF ( NOT QT_QTDECLARATIVE_FOUND )
   include_directories(${QT_QTDECLARATIVE_INCLUDE_DIR})
 ENDIF()
 
+if( NOT ${CMAKE_VERSION} STRLESS "2.8" AND NOT QT4_FOUND)
+  SET(CMAKE_AUTOMOC TRUE)
+  SET(CMAKE_AUTOMOC_RELAXED_MODE TRUE)
+endif()
+
 if(QTONLY)
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources
