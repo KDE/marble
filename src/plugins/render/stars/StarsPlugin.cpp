@@ -1055,7 +1055,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         QPen eclipticPen( m_eclipticBrush, 1, Qt::DotLine );
         QPen equatorPen( m_celestialEquatorBrush, 1, Qt::DotLine );
         QPen dsoLabelPen (m_dsoLabelBrush, 1, Qt::SolidLine);
-        QBrush starBrush( Qt::white );
 
 
         const Quaternion skyAxis = Quaternion::fromEuler( -centerLat , centerLon + skyRotationAngle, 0.0 );
