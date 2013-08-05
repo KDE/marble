@@ -16,6 +16,9 @@
 #include <QString>
 
 #include "marble_export.h"
+#include "GeoDataCoordinates.h"
+#include "GeoDataLatLonBox.h"
+#include "GeoSceneTextureTile.h"
 
 namespace Marble
 {
@@ -36,6 +39,7 @@ class MARBLE_EXPORT TileId
     bool operator==( TileId const& rhs ) const;
     bool operator<( TileId const& rhs ) const;
 
+    GeoDataLatLonBox toLatLonBox( const GeoSceneTiled *textureLayer ) const;
     static TileId fromCoordinates( const GeoDataCoordinates& coords, int popularity );
 
  private:

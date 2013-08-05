@@ -41,10 +41,6 @@ public:
     virtual QString name() const = 0;
 
 protected:
-    qint64 numTilesX( const Marble::TileId &tileId ) const;
-    qint64 numTilesY( const Marble::TileId &tileId ) const;
-
-protected:
     GeoSceneTiled *const m_textureLayer;
 };
 
@@ -108,9 +104,6 @@ public:
 
     virtual QString name() const;
 
-private:
-    qreal latBottom( const Marble::TileId &tileId ) const;
-    qreal latTop( const Marble::TileId &tileId ) const;
     QString epsgCode() const;
 };
 

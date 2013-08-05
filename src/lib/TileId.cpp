@@ -11,7 +11,6 @@
 
 // Own
 #include "TileId.h"
-#include "GeoDataCoordinates.h"
 
 #include <QDebug>
 #include <QStringList>
@@ -32,6 +31,32 @@ TileId::TileId( uint mapThemeIdHash, int zoomLevel, int tileX, int tileY )
 TileId::TileId()
     : m_mapThemeIdHash( 0 ), m_zoomLevel( 0 ), m_tileX( 0 ), m_tileY( 0 )
 {
+}
+
+GeoDataLatLonBox TileId::toLatLonBox( const GeoSceneTiled *textureLayer ) const
+{
+
+    qreal radius = ( 1 << zoomLevel() ) * textureLayer->levelZeroColumns() / 2.0;
+
+    qreal lonLeft   = ( x() - radius ) / radius * M_PI;
+    qreal lonRight  = ( x() - radius + 1 ) / radius * M_PI;
+
+    radius = ( 1 << zoomLevel() ) * textureLayer->levelZeroRows() / 2.0;
+    qreal latTop = 0;
+    qreal latBottom = 0;
+
+    switch ( textureLayer->projection() ) {
+    case GeoSceneTiled::Equirectangular:
+        latTop = ( radius - y() ) / radius *  M_PI / 2.0;
+        latBottom = ( radius - y() - 1 ) / radius *  M_PI / 2.0;
+        break;
+    case GeoSceneTiled::Mercator:
+        latTop = atan( sinh( ( radius - y() ) / radius * M_PI ) );
+        latBottom = atan( sinh( ( radius - y() - 1 ) / radius * M_PI ) );
+        break;
+    }
+
+    return GeoDataLatLonBox( latTop, latBottom, lonRight, lonLeft );
 }
 
 TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
