@@ -30,7 +30,7 @@ TimeControlWidget::TimeControlWidget( MarbleClock* clock, QWidget* parent )
 {
     m_uiWidget->setupUi( this );
 
-    connect( m_uiWidget->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(speedChanged(int)) );
+    connect( m_uiWidget->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSpeedLabel(int)) );
     connect( m_uiWidget->nowToolButton, SIGNAL(clicked()), this, SLOT(nowClicked()) );
     connect( m_uiWidget->applyButton, SIGNAL(clicked()), this, SLOT(apply()) );
     connect( m_uiWidget->cancelButton, SIGNAL(clicked()), this, SLOT(reject()) );
@@ -48,7 +48,7 @@ TimeControlWidget::~TimeControlWidget()
     delete m_uiWidget;
 }
 
-void TimeControlWidget::speedChanged( int speed )
+void TimeControlWidget::updateSpeedLabel( int speed )
 {
     m_uiWidget->speedLabel->setText( QString( "%1x" ).arg( speed ) );
 }

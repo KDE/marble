@@ -31,7 +31,7 @@ class MarbleClock;
 class MARBLE_EXPORT TimeControlWidget : public QDialog
 {
     Q_OBJECT
-	
+
  public:
     explicit TimeControlWidget( MarbleClock* clock, QWidget* parent = 0 );
     virtual ~TimeControlWidget();
@@ -55,20 +55,19 @@ class MARBLE_EXPORT TimeControlWidget : public QDialog
     /**
     * @brief  set the text of speedLabel to @p speed
     */
-    void speedChanged( int speed );
+    void updateSpeedLabel( int speed );
 
     /**
     * @brief  update the currentDateTimeEdit to current internal time
     */
     void updateDateTime();
 
-	
  protected:
     Q_DISABLE_COPY( TimeControlWidget )
 
     void showEvent( QShowEvent* event );
- 
-    Ui::TimeControlWidget *m_uiWidget;   
+
+    Ui::TimeControlWidget *m_uiWidget;
 
     MarbleClock *m_clock;
     QDateTime    m_lastDateTime;
