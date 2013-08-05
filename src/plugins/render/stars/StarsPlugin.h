@@ -244,6 +244,7 @@ private:
     QVector<QPixmap> m_pixP6Stars;
     QVector<QPixmap> m_pixP7Stars;
 
+    bool m_doRender;
 };
 
 class Constellation

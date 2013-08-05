@@ -57,7 +57,8 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_dsoLabelBrush( Marble::Oxygen::aluminumGray5 ),
       m_eclipticBrush( Marble::Oxygen::aluminumGray5 ),
       m_celestialEquatorBrush( Marble::Oxygen::aluminumGray5 ),
-      m_celestialPoleBrush( Marble::Oxygen::aluminumGray5 )
+      m_celestialPoleBrush( Marble::Oxygen::aluminumGray5 ),
+      m_doRender( false )
 {
     prepareNames();
 }
@@ -998,12 +999,12 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    const bool renderStars = !viewport->mapCoversViewport() &&
+    const bool doRender = !viewport->mapCoversViewport() &&
                              viewport->projection() == Spherical &&
                              marbleModel()->planetId() == "earth"; // So far displaying stars is only supported on earth.
 
-    if ( renderStars != m_renderStars ) {
-        if ( renderStars ) {
+    if ( doRender != m_doRender ) {
+        if ( doRender ) {
             connect( marbleModel()->clock(), SIGNAL(timeChanged()),
                      this, SLOT(requestRepaint()) );
         } else {
@@ -1011,7 +1012,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                         this, SLOT(requestRepaint()) );
         }
 
-        m_renderStars = renderStars;
+        m_doRender = doRender;
     }
 
     painter->save();
@@ -1026,7 +1027,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     const qreal  skyRadius      = 0.6 * sqrt( ( qreal )viewport->width() * viewport->width() + viewport->height() * viewport->height() );
 
-    if ( renderStars ) {
+    if ( doRender ) {
 
         // Delayed initialization:
         // Load the star database only if the sky is actually being painted...
