@@ -22,6 +22,7 @@
 #include "blendings/BlendingFactory.h"
 #include "SunLocator.h"
 #include "MarbleGlobal.h"
+#include "MarbleMath.h"
 #include "MarbleDebug.h"
 #include "GeoSceneTypes.h"
 #include "GeoSceneDocument.h"
@@ -29,6 +30,7 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneTextureTile.h"
 #include "GeoSceneVectorTile.h"
+#include "ImageF.h"
 #include "MapThemeManager.h"
 #include "StackedTile.h"
 #include "TileLoaderHelper.h"
@@ -38,6 +40,7 @@
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 
+#include "GeoDataCoordinates.h"
 
 #include <QMutexLocker>
 #include <QPointer>
@@ -54,6 +57,7 @@ public:
 
     StackedTile *createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const;
 
+    void renderGroundOverlays( QImage *tileImage, const QVector<QSharedPointer<TextureTile> > &tiles ) const;
     void paintSunShading( QImage *tileImage, const TileId &id ) const;
     void paintTileId( QImage *tileImage, const TileId &id ) const;
 
@@ -64,6 +68,7 @@ public:
     const SunLocator *const m_sunLocator;
     BlendingFactory m_blendingFactory;
     QVector<const GeoSceneTextureTile *> m_textureLayers;
+    QList<const GeoDataGroundOverlay *> m_groundOverlays;
     int m_maxTileLevel;
     QString m_themeId;
     int m_levelZeroColumns;
@@ -115,6 +120,12 @@ void MergedLayerDecorator::setTextureLayers( const QVector<const GeoSceneTexture
 
     d->detectMaxTileLevel();
 }
+
+void MergedLayerDecorator::updateGroundOverlays(const QList<const GeoDataGroundOverlay *> &groundOverlays )
+{
+    d->m_groundOverlays = groundOverlays;
+}
+
 
 int MergedLayerDecorator::textureLayersSize() const
 {
@@ -170,7 +181,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
 
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
-    const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId;
+    const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId || !m_groundOverlays.isEmpty();
     foreach ( const QSharedPointer<TextureTile> &tile, tiles ) {
 
         // Image blending. If there are several images in the same tile (like clouds
@@ -197,6 +208,8 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
         }
     }
 
+    renderGroundOverlays( &resultImage, tiles );
+
     if ( m_showSunShading && !m_showCityLights ) {
         paintSunShading( &resultImage, id );
     }
@@ -206,6 +219,101 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     }
 
     return new StackedTile( id, resultImage, tiles );
+}
+
+void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, const QVector<QSharedPointer<TextureTile> > &tiles ) const
+{
+
+    /* All tiles are covering the same area. Pick one. */
+    const TileId tileId = tiles.first()->id();
+
+    const GeoSceneTextureTile *textureLayer = findRelevantTextureLayers( tileId ).first();
+
+    qreal radius = ( 1 << tileId.zoomLevel() ) * textureLayer->levelZeroColumns() / 2.0;
+
+    qreal lonLeft   = ( tileId.x() - radius ) / radius * M_PI;
+    qreal lonRight  = ( tileId.x() - radius + 1 ) / radius * M_PI;
+
+    radius = ( 1 << tileId.zoomLevel() ) * textureLayer->levelZeroRows() / 2.0;
+    qreal latTop = 0;
+    qreal latBottom = 0;
+
+    switch ( textureLayer->projection() ) {
+    case GeoSceneTiled::Equirectangular:
+        latTop = ( radius - tileId.y() ) / radius *  M_PI / 2.0;
+        latBottom = ( radius - tileId.y() - 1 ) / radius *  M_PI / 2.0;
+        break;
+    case GeoSceneTiled::Mercator:
+        latTop = gd( ( radius - tileId.y() ) / radius * M_PI );
+        latBottom = gd( ( radius - tileId.y() - 1 ) / radius * M_PI );
+        break;
+    }
+
+    GeoDataLatLonBox tileLatLonBox = GeoDataLatLonBox( latTop, latBottom, lonRight, lonLeft );
+
+    /* Map the ground overlay to the image. */
+    for ( int i =  0; i < m_groundOverlays.size(); ++i ) {
+
+        const GeoDataGroundOverlay* overlay = m_groundOverlays.at( i );
+
+        const GeoDataLatLonBox overlayLatLonBox = overlay->latLonBox();
+
+        if ( !tileLatLonBox.intersects( overlayLatLonBox.toCircumscribedRectangle() ) ) {
+            continue;
+        }
+
+        const qreal sinRotation = sin( -overlay->latLonBox().rotation() );
+        const qreal cosRotation = cos( -overlay->latLonBox().rotation() );
+
+        const qreal centerLat = overlayLatLonBox.center().latitude();
+
+        const qreal pixelToLat = tileLatLonBox.height() / tileImage->height();
+        const qreal pixelToLon = tileLatLonBox.width() / tileImage->width();
+
+        const qreal latToPixel = overlay->icon().height() / overlayLatLonBox.height();
+        const qreal lonToPixel = overlay->icon().width() / overlayLatLonBox.width();
+
+        for ( int y = 0; y < tileImage->height(); ++y ) {
+             QRgb *scanLine = ( QRgb* ) ( tileImage->scanLine( y ) );
+
+             qreal lat = tileLatLonBox.north() - y * pixelToLat;
+
+             for ( int x = 0; x < tileImage->width(); ++x, ++scanLine ) {
+                 qreal lon = GeoDataCoordinates::normalizeLon( tileLatLonBox.west() + x * pixelToLon );
+
+                 qreal centerLon = overlayLatLonBox.center().longitude();
+
+                 if ( overlayLatLonBox.crossesDateLine() ) {
+                     if ( lon < 0 && centerLon > 0 ) {
+                         centerLon -= 2 * M_PI;
+                     }
+                     if ( lon > 0 && centerLon < 0  ) {
+                         centerLon += 2 * M_PI;
+                     }
+                     if ( overlayLatLonBox.west() > 0 && overlayLatLonBox.east() > 0 && overlayLatLonBox.west() > overlayLatLonBox.east() && lon > 0 && lon < overlayLatLonBox.west() ) {
+                         if ( ! ( lon < overlayLatLonBox.west() && lon > overlayLatLonBox.toCircumscribedRectangle().west() ) ) {
+                            centerLon -= 2 * M_PI;
+                         }
+                     }
+                 }
+
+                 qreal rotatedLon = ( lon - centerLon ) * cosRotation - ( lat - centerLat ) * sinRotation + centerLon;
+                 qreal rotatedLat = ( lon - centerLon ) * sinRotation + ( lat - centerLat ) * cosRotation + centerLat;
+
+                 GeoDataCoordinates::normalizeLonLat( rotatedLon, rotatedLat );
+
+                 if ( overlay->latLonBox().contains( GeoDataCoordinates( rotatedLon, rotatedLat ) ) ) {
+
+                     qreal px = ( GeoDataLatLonBox( 0, 0, rotatedLon, overlayLatLonBox.west() ).width() * lonToPixel );
+                     qreal py = qreal( overlay->icon().height() ) - ( GeoDataLatLonBox( rotatedLat, overlayLatLonBox.south(), 0, 0 ).height() * latToPixel ) - 1;
+
+                     if ( px >= 0 && px < overlay->icon().width() && py >= 0 && py < overlay->icon().height() ) {
+                         *scanLine = ImageF::pixelF( overlay->icon(), px, py );
+                     }
+                 }
+             }
+        }
+    }
 }
 
 StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId )

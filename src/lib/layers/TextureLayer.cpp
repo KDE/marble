@@ -14,17 +14,21 @@
 
 #include <qmath.h>
 #include <QTimer>
+#include <QList>
+#include <QSortFilterProxyModel>
 
 #include "SphericalScanlineTextureMapper.h"
 #include "EquirectScanlineTextureMapper.h"
 #include "MercatorScanlineTextureMapper.h"
 #include "TileScalingTextureMapper.h"
+#include "GeoDataGroundOverlay.h"
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
 #include "GeoSceneTypes.h"
 #include "MergedLayerDecorator.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "MarblePlacemarkModel.h"
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
 #include "SunLocator.h"
@@ -45,11 +49,20 @@ public:
              const SunLocator *sunLocator,
              VectorComposer *veccomposer,
              const PluginManager *pluginManager,
+             QAbstractItemModel *groundOverlayModel,
              TextureLayer *parent );
 
     void requestDelayedRepaint();
     void updateTextureLayers();
     void updateTile( const TileId &tileId, const QImage &tileImage );
+
+    void addGroundOverlays( QModelIndex parent, int first, int last );
+    void removeGroundOverlays( QModelIndex parent, int first, int last );
+    void resetGroundOverlaysCache();
+
+    void updateGroundOverlays();
+
+    static bool drawOrderLessThan( const GeoDataGroundOverlay* o1, const GeoDataGroundOverlay* o2 );
 
 public:
     TextureLayer  *const m_parent;
@@ -65,15 +78,17 @@ public:
     QVector<const GeoSceneTextureTile *> m_textures;
     const GeoSceneGroup *m_textureLayerSettings;
     QString m_runtimeTrace;
+    QSortFilterProxyModel m_groundOverlayModel;
+    QList<const GeoDataGroundOverlay *> m_groundOverlayCache;
     // For scheduling repaints
     QTimer           m_repaintTimer;
-
 };
 
 TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
                                 const SunLocator *sunLocator,
                                 VectorComposer *veccomposer,
                                 const PluginManager *pluginManager,
+                                QAbstractItemModel *groundOverlayModel,
                                 TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
@@ -88,6 +103,24 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
     , m_textureLayerSettings( 0 )
     , m_repaintTimer()
 {
+    m_groundOverlayModel.setSourceModel( groundOverlayModel );
+    m_groundOverlayModel.setDynamicSortFilter( true );
+    m_groundOverlayModel.setSortRole ( MarblePlacemarkModel::PopularityIndexRole );
+    m_groundOverlayModel.sort (0, Qt::AscendingOrder );
+
+    connect( &m_groundOverlayModel, SIGNAL(rowsInserted(QModelIndex,int,int)),
+             m_parent,              SLOT(addGroundOverlays(QModelIndex,int,int)) );
+
+    connect( &m_groundOverlayModel, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
+             m_parent,              SLOT(removeGroundOverlays(QModelIndex,int,int)) );
+
+    connect( &m_groundOverlayModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+             m_parent,              SLOT(resetGroundOverlaysCache()) );
+
+    connect( &m_groundOverlayModel, SIGNAL(modelReset()),
+             m_parent,              SLOT(resetGroundOverlaysCache()) );
+
+    updateGroundOverlays();
 }
 
 void TextureLayer::Private::requestDelayedRepaint()
@@ -119,6 +152,8 @@ void TextureLayer::Private::updateTextureLayers()
         }
     }
 
+    updateGroundOverlays();
+
     m_layerDecorator.setTextureLayers( result );
     m_tileLoader.clear();
 
@@ -135,14 +170,74 @@ void TextureLayer::Private::updateTile( const TileId &tileId, const QImage &tile
     requestDelayedRepaint();
 }
 
+bool TextureLayer::Private::drawOrderLessThan( const GeoDataGroundOverlay* o1, const GeoDataGroundOverlay* o2 )
+{
+    return o1->drawOrder() < o2->drawOrder();
+}
+
+void TextureLayer::Private::addGroundOverlays( QModelIndex parent, int first, int last )
+{
+    for ( int i = first; i <= last; ++i ) {
+        QModelIndex index = m_groundOverlayModel.index( i, 0, parent );
+        const GeoDataGroundOverlay *overlay = static_cast<GeoDataGroundOverlay *>( qvariant_cast<GeoDataObject *>( index.data( MarblePlacemarkModel::ObjectPointerRole ) ) );
+
+        if ( overlay->icon().isNull() ) {
+            continue;
+        }
+
+        int pos = qLowerBound( m_groundOverlayCache.begin(), m_groundOverlayCache.end(), overlay, drawOrderLessThan ) - m_groundOverlayCache.begin();
+        m_groundOverlayCache.insert( pos, overlay );
+    }
+
+    updateGroundOverlays();
+
+    m_parent->reset();
+}
+
+void TextureLayer::Private::removeGroundOverlays( QModelIndex parent, int first, int last )
+{
+    for ( int i = first; i <= last; ++i ) {
+        QModelIndex index = m_groundOverlayModel.index( i, 0, parent );
+        const GeoDataGroundOverlay *overlay = static_cast<GeoDataGroundOverlay *>( qvariant_cast<GeoDataObject *>( index.data( MarblePlacemarkModel::ObjectPointerRole ) ) );
+
+        int pos = qLowerBound( m_groundOverlayCache.begin(), m_groundOverlayCache.end(), overlay, drawOrderLessThan ) - m_groundOverlayCache.begin();
+        if (pos >= 0 && pos < m_groundOverlayCache.size() ) {
+            m_groundOverlayCache.removeAt( pos );
+        }
+    }
+
+    updateGroundOverlays();
+
+    m_parent->reset();
+}
+
+void TextureLayer::Private::resetGroundOverlaysCache()
+{
+    m_groundOverlayCache.clear();
+
+    updateGroundOverlays();
+
+    m_parent->reset();
+}
+
+void TextureLayer::Private::updateGroundOverlays()
+{
+    if ( !m_texcolorizer ) {
+        m_layerDecorator.updateGroundOverlays( m_groundOverlayCache );
+    }
+    else {
+        m_layerDecorator.updateGroundOverlays( QList<const GeoDataGroundOverlay *>() );
+    }
+}
 
 
 TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
                             const SunLocator *sunLocator,
                             VectorComposer *veccomposer ,
-                            const PluginManager *pluginManager )
+                            const PluginManager *pluginManager,
+                            QAbstractItemModel *groundOverlayModel )
     : QObject()
-    , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, this ) )
+    , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, groundOverlayModel, this ) )
 {
     connect( &d->m_loader, SIGNAL(tileCompleted(TileId,QImage)),
              this, SLOT(updateTile(TileId,QImage)) );

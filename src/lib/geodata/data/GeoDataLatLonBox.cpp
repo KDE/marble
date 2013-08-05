@@ -503,6 +503,67 @@ GeoDataLatLonBox GeoDataLatLonBox::united( const GeoDataLatLonBox& other ) const
     return result;
 }
 
+GeoDataLatLonBox GeoDataLatLonBox::toCircumscribedRectangle() const
+{
+    QList<GeoDataCoordinates> coordinates;
+
+    coordinates.append( GeoDataCoordinates( west(), north() ) );
+    coordinates.append( GeoDataCoordinates( west(), south() ) );
+    coordinates.append( GeoDataCoordinates( east() + ( crossesDateLine() ? 2 * M_PI : 0 ), north() ) );
+    coordinates.append( GeoDataCoordinates( east() + ( crossesDateLine() ? 2 * M_PI : 0 ), south() ) );
+
+    const qreal cosRotation = cos( rotation() );
+    const qreal sinRotation = sin( rotation() );
+
+    qreal centerLat = center().latitude();
+    qreal centerLon = center().longitude();
+    if ( GeoDataLatLonBox( 0, 0, center().longitude(), west() ).crossesDateLine() ) {
+        if ( !centerLon ) centerLon += M_PI;
+        else centerLon += 2 * M_PI;
+    }
+
+    GeoDataLatLonBox box;
+
+    bool northSet = false;
+    bool southSet = false;
+    bool eastSet = false;
+    bool westSet = false;
+
+    foreach ( const GeoDataCoordinates& coord, coordinates ) {
+
+        const qreal lon = coord.longitude();
+        const qreal lat = coord.latitude();
+
+        const qreal rotatedLon = ( lon - centerLon ) * cosRotation - ( lat - centerLat ) * sinRotation + centerLon;
+        const qreal rotatedLat = ( lon - centerLon ) * sinRotation + ( lat - centerLat ) * cosRotation + centerLat;
+
+        if ( !northSet || rotatedLat > box.north() ) {
+            northSet = true;
+            box.setNorth( rotatedLat );
+        }
+
+        if ( !southSet || rotatedLat < box.south() ) {
+            southSet = true;
+            box.setSouth( rotatedLat );
+        }
+
+        if ( !westSet || rotatedLon < box.west() ) {
+            westSet = true;
+            box.setWest( rotatedLon );
+        }
+
+        if ( !eastSet || rotatedLon > box.east() ) {
+            eastSet = true;
+            box.setEast( rotatedLon );
+        }
+    }
+
+    box.setBoundaries( GeoDataCoordinates::normalizeLat( box.north() ),
+                       GeoDataCoordinates::normalizeLat( box.south() ),
+                       GeoDataCoordinates::normalizeLon( box.east()  ),
+                       GeoDataCoordinates::normalizeLon( box.west()  )  );
+    return box;
+}
 
 QString GeoDataLatLonBox::toString( GeoDataCoordinates::Unit unit ) const
 {

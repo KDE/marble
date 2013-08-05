@@ -105,4 +105,25 @@ inline qreal gdInv( qreal x ) {
 
 }
 
+/**
+ * @brief This method is a fast Mac Laurin power series approximation of the
+ *        Gudermannian. The Gudermannian gives the latitude
+ *        in the Mercator projection in terms of the vertical position y.
+ *        See: http://en.wikipedia.org/wiki/Mercator_projection
+ */
+inline qreal gd( qreal x ) {
+
+    /*
+    const qreal x2 = x * x;
+    return x
+         - x * x2 * (  a1
+         - x2 * ( a2  - x2 * ( a3  - x2 * ( a4  - x2 * ( a5
+         - x2 * ( a6  - x2 * ( a7  - x2 * ( a8  - x2 * ( a9
+         - x2 * ( a10 - x2 * ( a11 - x2 * ( a12 - x2 * ( a13
+         - x2 * ( a14 - x2 * ( a15 - x2 * ( a16 ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) );
+    */
+
+    return atan ( sinh ( x ) );
+}
+
 #endif

@@ -147,6 +147,7 @@ set(marblewidget_SRCS
     FileManager.cpp
     PositionTracking.cpp
     DataMigration.cpp
+    ImageF.cpp
 
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp

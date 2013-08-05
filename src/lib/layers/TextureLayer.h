@@ -13,6 +13,7 @@
 
 #include "LayerInterface.h"
 #include <QObject>
+#include <QAbstractItemModel>
 
 #include "MarbleGlobal.h"
 #include "GeoSceneTextureTile.h"
@@ -43,7 +44,8 @@ class TextureLayer : public QObject, public LayerInterface
     TextureLayer( HttpDownloadManager *downloadManager,
                   const SunLocator *sunLocator,
                   VectorComposer *veccomposer,
-                  const PluginManager *pluginManager );
+                  const PluginManager *pluginManager,
+                  QAbstractItemModel *groundOverlayModel );
 
     ~TextureLayer();
 
@@ -114,6 +116,9 @@ public Q_SLOTS:
     Q_PRIVATE_SLOT( d, void requestDelayedRepaint() )
     Q_PRIVATE_SLOT( d, void updateTextureLayers() )
     Q_PRIVATE_SLOT( d, void updateTile( const TileId &tileId, const QImage &tileImage ) )
+    Q_PRIVATE_SLOT( d, void addGroundOverlays( QModelIndex parent, int first, int last ) )
+    Q_PRIVATE_SLOT( d, void removeGroundOverlays( QModelIndex parent, int first, int last ) )
+    Q_PRIVATE_SLOT( d, void resetGroundOverlaysCache() )
 
  private:
     class Private;
