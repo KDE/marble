@@ -11,7 +11,6 @@
 #include "GeoDataLocation.h"
 #include "GeoDataTypes.h"
 #include "GeoDataCoordinates.h"
-#include "GeoDataCoordinates_p.h"
 
 namespace Marble {
 
