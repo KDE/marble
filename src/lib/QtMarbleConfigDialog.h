@@ -39,7 +39,6 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     Marble::AngleUnit angleUnit() const;
     Marble::MapQuality stillQuality() const;
     Marble::MapQuality animationQuality() const;
-    Marble::LabelLocalization labelLocalization() const;
     QFont mapFont() const;
 
     // View
@@ -47,7 +46,6 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 
 
     // Navigation Settings
-    DragLocation dragLocation() const;
     OnStartup onStartup() const;
     bool animateTargetVoyage() const;
     QString externalMapEditor() const;

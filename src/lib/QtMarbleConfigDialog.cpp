@@ -205,12 +205,12 @@ void QtMarbleConfigDialog::readSettings()
     d->w_viewSettings->setAngleUnit( angleUnit() );
     d->w_viewSettings->setStillQuality( stillQuality() );
     d->w_viewSettings->setAnimationQuality( animationQuality() );
-    d->w_viewSettings->setLabelLocalization( labelLocalization() );
+    d->w_viewSettings->setLabelLocalization( Marble::Native );
     d->w_viewSettings->setMapFont( mapFont() );
     d->w_viewSettings->setGraphicsSystem( graphicsSystem() );
 
     // Navigation
-    d->w_navigationSettings->setDragLocation( dragLocation() );
+    d->w_navigationSettings->setDragLocation( Marble::KeepAxisVertically );
     d->w_navigationSettings->setStartupLocation( onStartup() );
     d->w_navigationSettings->setInertialEarthRotationEnabled( inertialEarthRotation() );
     d->w_navigationSettings->setAnimateTargetVoyage( animateTargetVoyage() );
@@ -282,13 +282,11 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_settings.setValue( "angleUnit", d->w_viewSettings->angleUnit() );
     d->m_settings.setValue( "stillQuality", d->w_viewSettings->stillQuality() );
     d->m_settings.setValue( "animationQuality", d->w_viewSettings->animationQuality() );
-    d->m_settings.setValue( "labelLocalization", d->w_viewSettings->labelLocalization() );
     d->m_settings.setValue( "mapFont", d->w_viewSettings->mapFont() );
     d->m_settings.setValue( "graphicsSystem", graphicsSystemString );
     d->m_settings.endGroup();
     
     d->m_settings.beginGroup( "Navigation" );
-    d->m_settings.setValue( "dragLocation", d->w_navigationSettings->dragLocation() );
     d->m_settings.setValue( "onStartup", d->w_navigationSettings->startupLocation() );
     d->m_settings.setValue( "inertialEarthRotation", d->w_navigationSettings->isInertialEarthRotationEnabled() );
     d->m_settings.setValue( "animateTargetVoyage", d->w_navigationSettings->isTargetVoyageAnimationEnabled() );
@@ -362,11 +360,6 @@ Marble::MapQuality QtMarbleConfigDialog::animationQuality() const
                                 Marble::LowQuality ).toInt();
 }
 
-LabelLocalization QtMarbleConfigDialog::labelLocalization() const
-{
-    return (Marble::LabelLocalization) d->m_settings.value( "View/labelLocalization" , Marble::Native ).toInt();
-}
-
 QFont QtMarbleConfigDialog::mapFont() const
 {
     return d->m_settings.value( "View/mapFont", QApplication::font() ).value<QFont>();
@@ -381,11 +374,6 @@ Marble::GraphicsSystem QtMarbleConfigDialog::graphicsSystem() const
 
     // default case:  graphicsSystemString == "raster"
     return Marble::NativeGraphics;
-}
-
-DragLocation QtMarbleConfigDialog::dragLocation() const
-{
-    return (Marble::DragLocation) d->m_settings.value( "Navigation/dragLocation", Marble::KeepAxisVertically ).toInt();
 }
 
 OnStartup QtMarbleConfigDialog::onStartup() const
