@@ -12,7 +12,6 @@
 #define GEODATALATLONQUAD_H
 
 #include "GeoDataCoordinates.h"
-#include "GeoDataCoordinates_p.h"
 #include "GeoDataObject.h"
 #include "MarbleGlobal.h"
 
