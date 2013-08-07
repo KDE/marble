@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_QTMARBLECONFIGDIALOG_H
@@ -38,7 +39,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     Marble::AngleUnit angleUnit() const;
     Marble::MapQuality stillQuality() const;
     Marble::MapQuality animationQuality() const;
-    int labelLocalization() const;
+    Marble::LabelLocalization labelLocalization() const;
     QFont mapFont() const;
 
     // View
@@ -46,8 +47,8 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 
 
     // Navigation Settings
-    int dragLocation() const;
-    int onStartup() const;
+    DragLocation dragLocation() const;
+    OnStartup onStartup() const;
     bool animateTargetVoyage() const;
     QString externalMapEditor() const;
     bool inertialEarthRotation() const;
@@ -56,11 +57,11 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     int volatileTileCacheLimit() const;
     int persistentTileCacheLimit() const;
     QString proxyUrl() const;
-    int proxyPort() const;
+    quint16 proxyPort() const;
 
     QString proxyUser() const;
     QString proxyPass() const;
-    bool proxyType() const;
+    ProxyType proxyType() const;
     bool proxyAuth() const;
 
     // Time Settings

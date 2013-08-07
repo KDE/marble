@@ -98,6 +98,8 @@ set(marblewidget_SRCS
     HttpJob.cpp
     LayerManager.cpp
     PluginManager.cpp
+    MarbleViewSettingsWidget.cpp
+    MarbleNavigationSettingsWidget.cpp
     MarbleCacheSettingsWidget.cpp
     TimeControlWidget.cpp
     AbstractFloatItem.cpp
@@ -161,6 +163,7 @@ set(marblewidget_SRCS
     RenderPluginInterface.cpp
     PositionProviderPlugin.cpp
     PositionProviderPluginInterface.cpp
+    MarbleTimeSettingsWidget.cpp
     MarblePluginSettingsWidget.cpp
     RenderPluginModel.cpp
     PluginAboutDialog.cpp
