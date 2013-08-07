@@ -513,9 +513,6 @@
                      </varlistentry>
 		     <varlistentry>
                          <term><menuchoice>
-                                 <shortcut>
-                                     <keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo>
-                                 </shortcut>
                                  <guimenu>File</guimenu>
                                  <guimenuitem>Open Recent</guimenuitem>
                          </menuchoice></term>
