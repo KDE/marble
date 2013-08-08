@@ -127,16 +127,9 @@ void ControlView::moveDown()
 QString ControlView::defaultMapThemeId() const
 {
     QStringList fallBackThemes;
-    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    if ( smallScreen ) {
-      fallBackThemes << "earth/openstreetmap/openstreetmap.dgml";
-      fallBackThemes << "earth/srtm/srtm.dgml";
-      fallBackThemes << "earth/bluemarble/bluemarble.dgml";
-    } else {
       fallBackThemes << "earth/srtm/srtm.dgml";
       fallBackThemes << "earth/bluemarble/bluemarble.dgml";
       fallBackThemes << "earth/openstreetmap/openstreetmap.dgml";
-    }
 
     const QStringList installedThemes = m_mapThemeManager->mapThemeIds();
 
