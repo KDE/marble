@@ -74,10 +74,7 @@
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
-#include "MarbleNavigationSettingsWidget.h"
 #include "MarblePluginSettingsWidget.h"
-#include "MarbleTimeSettingsWidget.h"
-#include "MarbleViewSettingsWidget.h"
 #include "MapWizard.h"
 #include "NewBookmarkFolderDialog.h"
 #include "RenderPluginModel.h"
@@ -104,6 +101,10 @@
 #include "settings.h"
 
 using namespace Marble;
+
+#include "ui_MarbleViewSettingsWidget.h"
+#include "ui_MarbleNavigationSettingsWidget.h"
+#include "ui_MarbleTimeSettingsWidget.h"
 
 namespace Marble
 {
@@ -1336,13 +1337,34 @@ void MarblePart::editSettings()
                                         MarbleSettings::self() );
 
     // view page
-    MarbleViewSettingsWidget *w_viewSettings = new MarbleViewSettingsWidget( 0 );
+    Ui_MarbleViewSettingsWidget  ui_viewSettings;
+    QWidget                     *w_viewSettings = new QWidget( 0 );
+
     w_viewSettings->setObjectName( "view_page" );
+    ui_viewSettings.setupUi( w_viewSettings );
     m_configDialog->addPage( w_viewSettings, i18n( "View" ), "configure" );
 
+    // It's experimental -- so we remove it for now.
+    // FIXME: Delete the following  line once OpenGL support is officially supported.
+    ui_viewSettings.kcfg_graphicsSystem->removeItem( OpenGLGraphics );
+
+    QString nativeString ( i18n("Native") );
+
+    #ifdef Q_WS_X11
+    nativeString = i18n( "Native (X11)" );
+    #endif
+    #ifdef Q_WS_MAC
+    nativeString = i18n( "Native (Mac OS X Core Graphics)" );
+    #endif
+
+    ui_viewSettings.kcfg_graphicsSystem->setItemText( NativeGraphics, nativeString );
+
     // navigation page
-    MarbleNavigationSettingsWidget *w_navigationSettings = new MarbleNavigationSettingsWidget( 0 );
+    Ui_MarbleNavigationSettingsWidget  ui_navigationSettings;
+    QWidget                           *w_navigationSettings = new QWidget( 0 );
+
     w_navigationSettings->setObjectName( "navigation_page" );
+    ui_navigationSettings.setupUi( w_navigationSettings );
     m_configDialog->addPage( w_navigationSettings, i18n( "Navigation" ),
                              "transform-move" );
 
@@ -1357,8 +1379,11 @@ void MarblePart::editSettings()
              m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
 
     // time page
-    MarbleTimeSettingsWidget *w_timeSettings = new MarbleTimeSettingsWidget( 0 );
+    Ui_MarbleTimeSettingsWidget ui_timeSettings;
+    QWidget *w_timeSettings = new QWidget( 0 );
+
     w_timeSettings->setObjectName( "time_page" );
+    ui_timeSettings.setupUi( w_timeSettings );
     m_configDialog->addPage( w_timeSettings, i18n( "Date & Time" ), "clock" );
 
     // routing page

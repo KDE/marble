@@ -7,11 +7,14 @@
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 // Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
-// Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 // Own
 #include "QtMarbleConfigDialog.h"
+
+#include "ui_MarbleViewSettingsWidget.h"
+#include "ui_MarbleNavigationSettingsWidget.h"
+#include "ui_MarbleTimeSettingsWidget.h"
 
 // Qt
 #include <QList>
@@ -20,7 +23,6 @@
 #include <QApplication>
 #include <QDialogButtonBox>
 #include <QMessageBox>
-#include <QPushButton>
 #include <QStandardItem>
 #include <QTabWidget>
 #include <QVBoxLayout>
@@ -33,10 +35,7 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleCacheSettingsWidget.h"
-#include "MarbleNavigationSettingsWidget.h"
 #include "MarblePluginSettingsWidget.h"
-#include "MarbleTimeSettingsWidget.h"
-#include "MarbleViewSettingsWidget.h"
 #include "MarbleLocale.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
@@ -52,19 +51,17 @@ class QtMarbleConfigDialogPrivate
 {
  public:
     QtMarbleConfigDialogPrivate( MarbleWidget *marbleWidget )
-        : w_viewSettings( 0 ),
-          w_navigationSettings( 0 ),
-          w_timeSettings( 0 ),
-          w_cacheSettings( 0 ),
-          w_pluginSettings( 0 ),
+        : ui_viewSettings(),
+          ui_navigationSettings(),
+          ui_timeSettings(),
           m_marbleWidget( marbleWidget ),
           m_pluginModel()
     {
     }
 
-    MarbleViewSettingsWidget           *w_viewSettings;
-    MarbleNavigationSettingsWidget     *w_navigationSettings;
-    MarbleTimeSettingsWidget           *w_timeSettings;
+    Ui::MarbleViewSettingsWidget       ui_viewSettings;
+    Ui::MarbleNavigationSettingsWidget ui_navigationSettings;
+    Ui::MarbleTimeSettingsWidget       ui_timeSettings;
     MarbleCacheSettingsWidget          *w_cacheSettings;
     MarblePluginSettingsWidget         *w_pluginSettings;
 
@@ -103,12 +100,31 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     connect( this, SIGNAL(accepted()), this, SLOT(writeSettings()) );
 
     // view page
-    d->w_viewSettings = new MarbleViewSettingsWidget( this );
-    tabWidget->addTab( d->w_viewSettings, tr( "View" ) );
+    QWidget *w_viewSettings = new QWidget( this );
+
+    d->ui_viewSettings.setupUi( w_viewSettings );
+    tabWidget->addTab( w_viewSettings, tr( "View" ) );
+
+    // It's experimental -- so we remove it for now.
+    // FIXME: Delete the following  line once OpenGL support is officially supported.
+    d->ui_viewSettings.kcfg_graphicsSystem->removeItem( Marble::OpenGLGraphics );
+
+    QString nativeString ( tr("Native") );
+
+    #ifdef Q_WS_X11
+    nativeString = tr( "Native (X11)" );
+    #endif
+    #ifdef Q_WS_MAC
+    nativeString = tr( "Native (Mac OS X Core Graphics)" );
+    #endif
+
+    d->ui_viewSettings.kcfg_graphicsSystem->setItemText( Marble::NativeGraphics, nativeString );
 
     // navigation page
-    d->w_navigationSettings = new MarbleNavigationSettingsWidget( this );
-    tabWidget->addTab( d->w_navigationSettings, tr( "Navigation" ) );
+    QWidget *w_navigationSettings = new QWidget( this );
+
+    d->ui_navigationSettings.setupUi( w_navigationSettings );
+    tabWidget->addTab( w_navigationSettings, tr( "Navigation" ) );
 
     // cache page
     d->w_cacheSettings = new MarbleCacheSettingsWidget( this );
@@ -120,8 +136,9 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
              this,               SIGNAL(clearPersistentCacheClicked()) );
 
     // time page
-    d->w_timeSettings = new MarbleTimeSettingsWidget( this );
-    tabWidget->addTab( d->w_timeSettings, tr( "Date and Time" ) );
+    QWidget *w_timeSettings = new QWidget( this );
+    d->ui_timeSettings.setupUi( w_timeSettings );
+    tabWidget->addTab( w_timeSettings, tr( "Date and Time" ) );
 
     // routing page
     QWidget *w_routingSettings = new RoutingProfilesWidget( marbleWidget->model() );
@@ -199,40 +216,56 @@ void QtMarbleConfigDialog::readSettings()
 
     // Sync settings to make sure that we read the current settings.
     syncSettings();
-
+    
     // View
-    d->w_viewSettings->setMeasurementSystem( measurementSystem() );
-    d->w_viewSettings->setAngleUnit( angleUnit() );
-    d->w_viewSettings->setStillQuality( stillQuality() );
-    d->w_viewSettings->setAnimationQuality( animationQuality() );
-    d->w_viewSettings->setLabelLocalization( Marble::Native );
-    d->w_viewSettings->setMapFont( mapFont() );
-    d->w_viewSettings->setGraphicsSystem( graphicsSystem() );
-
+    d->ui_viewSettings.kcfg_distanceUnit->setCurrentIndex( measurementSystem() );
+    d->ui_viewSettings.kcfg_angleUnit->setCurrentIndex( angleUnit() );
+    d->ui_viewSettings.kcfg_stillQuality->setCurrentIndex( stillQuality() );
+    d->ui_viewSettings.kcfg_animationQuality->setCurrentIndex( animationQuality() );
+    d->ui_viewSettings.kcfg_labelLocalization->setCurrentIndex( Marble::Native );
+    d->ui_viewSettings.kcfg_mapFont->setCurrentFont( mapFont() );
+    d->ui_viewSettings.kcfg_graphicsSystem->setCurrentIndex( graphicsSystem() );
+    
     // Navigation
-    d->w_navigationSettings->setDragLocation( Marble::KeepAxisVertically );
-    d->w_navigationSettings->setStartupLocation( onStartup() );
-    d->w_navigationSettings->setInertialEarthRotationEnabled( inertialEarthRotation() );
-    d->w_navigationSettings->setAnimateTargetVoyage( animateTargetVoyage() );
-    d->w_navigationSettings->setExternalMapEditor( externalMapEditor() );
+    d->ui_navigationSettings.kcfg_dragLocation->setCurrentIndex( Marble::KeepAxisVertically );
+    d->ui_navigationSettings.kcfg_onStartup->setCurrentIndex( onStartup() );
+    if( inertialEarthRotation() ) {
+        d->ui_navigationSettings.kcfg_inertialEarthRotation->setCheckState( Qt::Checked );
+    } else {
+        d->ui_navigationSettings.kcfg_inertialEarthRotation->setCheckState( Qt::Unchecked );
+    }
+    if( animateTargetVoyage() ) {
+        d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
+    } else {
+        d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
+    }
+    int editorIndex = 0;
+    if ( externalMapEditor() == "potlatch") {
+        editorIndex = 1;
+    } else if ( externalMapEditor() == "josm") {
+        editorIndex = 2;
+    } else if ( externalMapEditor() == "merkaartor") {
+        editorIndex = 3;
+    }
+    d->ui_navigationSettings.kcfg_externalMapEditor->setCurrentIndex( editorIndex );
 
     // Cache
-    d->w_cacheSettings->setVolatileTileCacheLimit( volatileTileCacheLimit() );
-    d->w_cacheSettings->setPersistentTileCacheLimit( persistentTileCacheLimit() );
-    d->w_cacheSettings->setProxyUrl( proxyUrl() );
-    d->w_cacheSettings->setProxyPort( proxyPort() );
-    d->w_cacheSettings->setProxyUser( proxyUser() );
-    d->w_cacheSettings->setProxyPassword( proxyPass() );
-    d->w_cacheSettings->setProxyType( proxyType() );
-    d->w_cacheSettings->setProxyAuthenticationEnabled( proxyAuth() );
-
+    d->w_cacheSettings->kcfg_volatileTileCacheLimit->setValue( volatileTileCacheLimit() );
+    d->w_cacheSettings->kcfg_persistentTileCacheLimit->setValue( persistentTileCacheLimit() );
+    d->w_cacheSettings->kcfg_proxyUrl->setText( proxyUrl() );
+    d->w_cacheSettings->kcfg_proxyPort->setValue( proxyPort() );
+    d->w_cacheSettings->kcfg_proxyUser->setText( proxyUser() );
+    d->w_cacheSettings->kcfg_proxyPass->setText( proxyPass() );
+    d->w_cacheSettings->kcfg_proxyType->setCurrentIndex( proxyType() );
+    d->w_cacheSettings->kcfg_proxyAuth->setChecked( proxyAuth() );
+ 
     // Time
-    d->w_timeSettings->setSystemTimeEnabled( systemTimezone() );
-    d->w_timeSettings->setCustomTimezoneEnabled( customTimezone() );
-    d->w_timeSettings->setCustomTimezone( chosenTimezone() );
-    d->w_timeSettings->setUtcEnabled( UTC() );
-    d->w_timeSettings->setSystemTimeEnabled( systemTime() );
-    d->w_timeSettings->setLastSessionTimeEnabled( lastSessionTime() );
+    d->ui_timeSettings.kcfg_systemTimezone->setChecked( systemTimezone() );
+    d->ui_timeSettings.kcfg_customTimezone->setChecked( customTimezone() );
+    d->ui_timeSettings.kcfg_chosenTimezone->setCurrentIndex( chosenTimezone() );
+    d->ui_timeSettings.kcfg_utc->setChecked( UTC() );
+    d->ui_timeSettings.kcfg_systemTime->setChecked( systemTime() );
+    d->ui_timeSettings.kcfg_lastSessionTime->setChecked( lastSessionTime() );
     if( systemTimezone() == true  )
     {
         QDateTime localTime = QDateTime::currentDateTime().toLocalTime();
@@ -263,7 +296,7 @@ void QtMarbleConfigDialog::writeSettings()
 
     // Determining the graphicsSystemString
     QString graphicsSystemString;
-    switch ( d->w_viewSettings->graphicsSystem() )
+    switch ( d->ui_viewSettings.kcfg_graphicsSystem->currentIndex() )
     {
         case Marble::RasterGraphics :
             graphicsSystemString = "raster";
@@ -278,43 +311,61 @@ void QtMarbleConfigDialog::writeSettings()
     }
     
     d->m_settings.beginGroup( "View" );
-    d->m_settings.setValue( "distanceUnit", d->w_viewSettings->measurementSystem() );
-    d->m_settings.setValue( "angleUnit", d->w_viewSettings->angleUnit() );
-    d->m_settings.setValue( "stillQuality", d->w_viewSettings->stillQuality() );
-    d->m_settings.setValue( "animationQuality", d->w_viewSettings->animationQuality() );
-    d->m_settings.setValue( "mapFont", d->w_viewSettings->mapFont() );
+    d->m_settings.setValue( "distanceUnit", d->ui_viewSettings.kcfg_distanceUnit->currentIndex() );
+    d->m_settings.setValue( "angleUnit", d->ui_viewSettings.kcfg_angleUnit->currentIndex() );
+    d->m_settings.setValue( "stillQuality", d->ui_viewSettings.kcfg_stillQuality->currentIndex() );
+    d->m_settings.setValue( "animationQuality", d->ui_viewSettings.kcfg_animationQuality->currentIndex() );
+    d->m_settings.setValue( "mapFont", d->ui_viewSettings.kcfg_mapFont->currentFont() );
     d->m_settings.setValue( "graphicsSystem", graphicsSystemString );
     d->m_settings.endGroup();
     
     d->m_settings.beginGroup( "Navigation" );
-    d->m_settings.setValue( "onStartup", d->w_navigationSettings->startupLocation() );
-    d->m_settings.setValue( "inertialEarthRotation", d->w_navigationSettings->isInertialEarthRotationEnabled() );
-    d->m_settings.setValue( "animateTargetVoyage", d->w_navigationSettings->isTargetVoyageAnimationEnabled() );
-    d->m_settings.setValue( "externalMapEditor", d->w_navigationSettings->externalMapEditor() );
+    d->m_settings.setValue( "onStartup", d->ui_navigationSettings.kcfg_onStartup->currentIndex() );
+    if( d->ui_navigationSettings.kcfg_inertialEarthRotation->checkState() == Qt::Checked ) {
+        d->m_settings.setValue( "inertialEarthRotation", true );
+    } else {
+        d->m_settings.setValue( "inertialEarthRotation", false );
+    }
+    if( d->ui_navigationSettings.kcfg_animateTargetVoyage->checkState() == Qt::Checked ) {
+        d->m_settings.setValue( "animateTargetVoyage", true );
+    } else {
+        d->m_settings.setValue( "animateTargetVoyage", false );
+    }
+    if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 0 ) {
+        d->m_settings.setValue( "externalMapEditor", "" );
+    } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 1 ) {
+        d->m_settings.setValue( "externalMapEditor", "potlatch" );
+    } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 2 ) {
+        d->m_settings.setValue( "externalMapEditor", "josm" );
+    } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 3 ) {
+        d->m_settings.setValue( "externalMapEditor", "merkaartor" );
+    } else {
+        Q_ASSERT( false && "Unexpected index of the external editor setting" );
+    }
     d->m_settings.endGroup();
     
     d->m_settings.beginGroup( "Cache" );
-    d->m_settings.setValue( "volatileTileCacheLimit", d->w_cacheSettings->volatileTileCacheLimit() );
-    d->m_settings.setValue( "persistentTileCacheLimit", d->w_cacheSettings->persistentTileCacheLimit() );
-    d->m_settings.setValue( "proxyUrl", d->w_cacheSettings->proxyUrl() );
-    d->m_settings.setValue( "proxyPort", d->w_cacheSettings->proxyPort() );
-    d->m_settings.setValue( "proxyType", d->w_cacheSettings->proxyType() );
-    if ( d->w_cacheSettings->isProxyAuthenticationEnabled() ) {
+    d->m_settings.setValue( "volatileTileCacheLimit", d->w_cacheSettings->kcfg_volatileTileCacheLimit->value() );
+    d->m_settings.setValue( "persistentTileCacheLimit", d->w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
+    d->m_settings.setValue( "proxyUrl", d->w_cacheSettings->kcfg_proxyUrl->text() );
+    d->m_settings.setValue( "proxyPort", d->w_cacheSettings->kcfg_proxyPort->value() );
+    d->m_settings.setValue( "proxyType", d->w_cacheSettings->kcfg_proxyType->currentIndex() );
+    if ( d->w_cacheSettings->kcfg_proxyAuth->isChecked() ) {
         d->m_settings.setValue( "proxyAuth", true );
-        d->m_settings.setValue( "proxyUser", d->w_cacheSettings->proxyUser() );
-        d->m_settings.setValue( "proxyPass", d->w_cacheSettings->proxyPassword() );
+        d->m_settings.setValue( "proxyUser", d->w_cacheSettings->kcfg_proxyUser->text() );
+        d->m_settings.setValue( "proxyPass", d->w_cacheSettings->kcfg_proxyPass->text() );
     } else {
         d->m_settings.setValue( "proxyAuth", false );
     }
     d->m_settings.endGroup();
 
     d->m_settings.beginGroup( "Time" );
-    d->m_settings.setValue( "systemTimezone", d->w_timeSettings->isSystemTimezoneEnabled() );
-    d->m_settings.setValue( "UTC", d->w_timeSettings->isUtcEnabled() );
-    d->m_settings.setValue( "customTimezone", d->w_timeSettings->isCustomTimezoneEnabled() );
-    d->m_settings.setValue( "systemTime", d->w_timeSettings->isSystemTimeEnabled() );
-    d->m_settings.setValue( "lastSessionTime", d->w_timeSettings->isLastSessionTimeEnabled() );
-    d->m_settings.setValue( "chosenTimezone", d->w_timeSettings->customTimezone() );
+    d->m_settings.setValue( "systemTimezone", d->ui_timeSettings.kcfg_systemTimezone->isChecked() );
+    d->m_settings.setValue( "UTC", d->ui_timeSettings.kcfg_utc->isChecked() );
+    d->m_settings.setValue( "customTimezone", d->ui_timeSettings.kcfg_customTimezone->isChecked() );
+    d->m_settings.setValue( "systemTime", d->ui_timeSettings.kcfg_systemTime->isChecked() );
+    d->m_settings.setValue( "lastSessionTime", d->ui_timeSettings.kcfg_lastSessionTime->isChecked() );
+    d->m_settings.setValue( "chosenTimezone", d->ui_timeSettings.kcfg_chosenTimezone->currentIndex() );
     d->m_settings.endGroup();
 
     // Plugins
@@ -376,11 +427,11 @@ Marble::GraphicsSystem QtMarbleConfigDialog::graphicsSystem() const
     return Marble::NativeGraphics;
 }
 
-OnStartup QtMarbleConfigDialog::onStartup() const
+int QtMarbleConfigDialog::onStartup() const
 {
     bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     int defaultValue = smallScreen ? Marble::LastLocationVisited : Marble::ShowHomeLocation;
-    return (Marble::OnStartup) d->m_settings.value( "Navigation/onStartup", defaultValue ).toInt();
+    return d->m_settings.value( "Navigation/onStartup", defaultValue ).toInt();
 }
 
 QString QtMarbleConfigDialog::externalMapEditor() const
@@ -415,7 +466,7 @@ QString QtMarbleConfigDialog::proxyUrl() const
     return d->m_settings.value( "Cache/proxyUrl", "" ).toString();
 }
 
-quint16 QtMarbleConfigDialog::proxyPort() const
+int QtMarbleConfigDialog::proxyPort() const
 {
     return d->m_settings.value( "Cache/proxyPort", 8080 ).toInt();
 }
@@ -430,9 +481,9 @@ QString QtMarbleConfigDialog::proxyPass() const
     return d->m_settings.value( "Cache/proxyPass", "" ).toString();
 }
 
-ProxyType QtMarbleConfigDialog::proxyType() const
+bool QtMarbleConfigDialog::proxyType() const
 {
-    return static_cast<ProxyType>( d->m_settings.value( "Cache/proxyType", Marble::HttpProxy ).toInt() );
+    return d->m_settings.value( "Cache/proxyType", Marble::HttpProxy ).toInt();
 }
 
 bool QtMarbleConfigDialog::proxyAuth() const

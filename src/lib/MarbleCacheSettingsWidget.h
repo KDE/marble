@@ -7,7 +7,6 @@
 //
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
-// Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_MARBLECACHESETTINGSWIDGET_H
@@ -22,9 +21,9 @@
  */
 
 #include <QWidget>
+#include "ui_MarbleCacheSettingsWidget.h"
 
 #include "marble_export.h"
-#include "MarbleGlobal.h"
 
 namespace Marble
 {
@@ -34,54 +33,17 @@ namespace Marble
  *
  */
 
-class MARBLE_EXPORT MarbleCacheSettingsWidget : public QWidget
+class MARBLE_EXPORT MarbleCacheSettingsWidget : public QWidget, public Ui::MarbleCacheSettingsWidget
 {
     Q_OBJECT
 
  public:
     explicit MarbleCacheSettingsWidget( QWidget *parent = 0 );
-    ~MarbleCacheSettingsWidget();
 
-    int volatileTileCacheLimit() const;
-
-    int persistentTileCacheLimit() const;
-
-    QString proxyUrl() const;
-
-    quint16 proxyPort() const;
-
-    QString proxyUser() const;
-
-    QString proxyPassword() const;
-
-    ProxyType proxyType() const;
-
-    bool isProxyAuthenticationEnabled() const;
-
- public Q_SLOTS:
-    void setVolatileTileCacheLimit( int volatileTileCacheLimit );
-
-    void setPersistentTileCacheLimit( int persistentTileCacheLimit );
-
-    void setProxyUrl( const QString &proxyUrl );
-
-    void setProxyPort( quint16 proxyPort );
-
-    void setProxyUser( const QString &proxyUser );
-
-    void setProxyPassword( const QString &proxyPassword );
-
-    void setProxyType( ProxyType proxyType );
-
-    void setProxyAuthenticationEnabled( bool enabled );
 
  Q_SIGNALS:
     void clearVolatileCache();
     void clearPersistentCache();
-
-private:
-    class Private;
-    Private *d;
 };
 
 }
