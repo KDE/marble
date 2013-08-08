@@ -653,6 +653,7 @@ void MainWindow::showRoutingDialog()
 
         QScrollArea* scrollArea = new QScrollArea;
         m_routingWidget->setMinimumWidth( 760 );
+        scrollArea->setWidgetResizable( true );
         scrollArea->setWidget( m_routingWidget );
 
         QAction *openAction = new QAction( tr( "Open Route..." ), this );
