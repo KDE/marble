@@ -29,8 +29,6 @@ MarbleCacheSettingsWidget::MarbleCacheSettingsWidget( QWidget *parent ) :
 
     connect( d->button_clearVolatileCache, SIGNAL(clicked()), SIGNAL(clearVolatileCache()) );
     connect( d->button_clearPersistentCache, SIGNAL(clicked()), SIGNAL(clearPersistentCache()) );
-    connect( d->kcfg_proxyAuth, SIGNAL(toggled(bool)), d->kcfg_proxyUser, SLOT(setEnabled(bool)) );
-    connect( d->kcfg_proxyAuth, SIGNAL(toggled(bool)), d->kcfg_proxyPass, SLOT(setEnabled(bool)) );
 }
 
 MarbleCacheSettingsWidget::~MarbleCacheSettingsWidget()
