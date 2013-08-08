@@ -230,16 +230,8 @@ void QtMarbleConfigDialog::readSettings()
     // Navigation
     d->ui_navigationSettings.kcfg_dragLocation->setCurrentIndex( Marble::KeepAxisVertically );
     d->ui_navigationSettings.kcfg_onStartup->setCurrentIndex( onStartup() );
-    if( inertialEarthRotation() ) {
-        d->ui_navigationSettings.kcfg_inertialEarthRotation->setCheckState( Qt::Checked );
-    } else {
-        d->ui_navigationSettings.kcfg_inertialEarthRotation->setCheckState( Qt::Unchecked );
-    }
-    if( animateTargetVoyage() ) {
-        d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
-    } else {
-        d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
-    }
+    d->ui_navigationSettings.kcfg_inertialEarthRotation->setChecked( inertialEarthRotation() );
+    d->ui_navigationSettings.kcfg_animateTargetVoyage->setChecked( animateTargetVoyage() );
     int editorIndex = 0;
     if ( externalMapEditor() == "potlatch") {
         editorIndex = 1;
@@ -322,16 +314,8 @@ void QtMarbleConfigDialog::writeSettings()
     
     d->m_settings.beginGroup( "Navigation" );
     d->m_settings.setValue( "onStartup", d->ui_navigationSettings.kcfg_onStartup->currentIndex() );
-    if( d->ui_navigationSettings.kcfg_inertialEarthRotation->checkState() == Qt::Checked ) {
-        d->m_settings.setValue( "inertialEarthRotation", true );
-    } else {
-        d->m_settings.setValue( "inertialEarthRotation", false );
-    }
-    if( d->ui_navigationSettings.kcfg_animateTargetVoyage->checkState() == Qt::Checked ) {
-        d->m_settings.setValue( "animateTargetVoyage", true );
-    } else {
-        d->m_settings.setValue( "animateTargetVoyage", false );
-    }
+    d->m_settings.setValue( "inertialEarthRotation", d->ui_navigationSettings.kcfg_inertialEarthRotation->isChecked() );
+    d->m_settings.setValue( "animateTargetVoyage", d->ui_navigationSettings.kcfg_animateTargetVoyage->isChecked() );
     if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 0 ) {
         d->m_settings.setValue( "externalMapEditor", "" );
     } else if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 1 ) {
