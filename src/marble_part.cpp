@@ -69,7 +69,6 @@
 #include "GeoDataLookAt.h"
 #include "GeoDataPlacemark.h"
 #include "HttpDownloadManager.h"
-#include "MarbleCacheSettingsWidget.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
@@ -102,6 +101,7 @@
 
 using namespace Marble;
 
+#include "ui_MarbleCacheSettingsWidget.h"
 #include "ui_MarbleViewSettingsWidget.h"
 #include "ui_MarbleNavigationSettingsWidget.h"
 #include "ui_MarbleTimeSettingsWidget.h"
@@ -1369,13 +1369,15 @@ void MarblePart::editSettings()
                              "transform-move" );
 
     // cache page
-    MarbleCacheSettingsWidget *w_cacheSettings = new MarbleCacheSettingsWidget();
+    Ui_MarbleCacheSettingsWidget  ui_cacheSettings;
+    QWidget                      *w_cacheSettings = new QWidget( 0 );
+
     w_cacheSettings->setObjectName( "cache_page" );
     m_configDialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ),
                              "preferences-web-browser-cache" );
-    connect( w_cacheSettings,               SIGNAL(clearVolatileCache()),
+    connect( ui_cacheSettings.button_clearVolatileCache, SIGNAL(clearVolatileCache()),
              m_controlView->marbleWidget(), SLOT(clearVolatileTileCache()) );
-    connect( w_cacheSettings,                        SIGNAL(clearPersistentCache()),
+    connect( ui_cacheSettings.button_clearPersistentCache, SIGNAL(clearPersistentCache()),
              m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
 
     // time page

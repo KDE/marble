@@ -12,6 +12,7 @@
 // Own
 #include "QtMarbleConfigDialog.h"
 
+#include "ui_MarbleCacheSettingsWidget.h"
 #include "ui_MarbleViewSettingsWidget.h"
 #include "ui_MarbleNavigationSettingsWidget.h"
 #include "ui_MarbleTimeSettingsWidget.h"
@@ -34,7 +35,6 @@
 #include "DialogConfigurationInterface.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "MarbleCacheSettingsWidget.h"
 #include "MarblePluginSettingsWidget.h"
 #include "MarbleLocale.h"
 #include "MarbleWidget.h"
@@ -54,6 +54,7 @@ class QtMarbleConfigDialogPrivate
         : ui_viewSettings(),
           ui_navigationSettings(),
           ui_timeSettings(),
+          ui_cacheSettings(),
           m_marbleWidget( marbleWidget ),
           m_pluginModel()
     {
@@ -62,7 +63,7 @@ class QtMarbleConfigDialogPrivate
     Ui::MarbleViewSettingsWidget       ui_viewSettings;
     Ui::MarbleNavigationSettingsWidget ui_navigationSettings;
     Ui::MarbleTimeSettingsWidget       ui_timeSettings;
-    MarbleCacheSettingsWidget          *w_cacheSettings;
+    Ui::MarbleCacheSettingsWidget      ui_cacheSettings;
     MarblePluginSettingsWidget         *w_pluginSettings;
 
     QSettings m_settings;
@@ -127,13 +128,13 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     tabWidget->addTab( w_navigationSettings, tr( "Navigation" ) );
 
     // cache page
-    d->w_cacheSettings = new MarbleCacheSettingsWidget( this );
-    tabWidget->addTab( d->w_cacheSettings, tr( "Cache and Proxy" ) );
+    QWidget *w_cacheSettings = new QWidget( this );
+
+    d->ui_cacheSettings.setupUi( w_cacheSettings );
+    tabWidget->addTab( w_cacheSettings, tr( "Cache and Proxy" ) );
     // Forwarding clear button signals
-    connect( d->w_cacheSettings, SIGNAL(clearVolatileCache()),
-             this,               SIGNAL(clearVolatileCacheClicked()) );
-    connect( d->w_cacheSettings, SIGNAL(clearPersistentCache()),
-             this,               SIGNAL(clearPersistentCacheClicked()) );
+    connect( d->ui_cacheSettings.button_clearVolatileCache, SIGNAL(clicked()), SIGNAL(clearVolatileCacheClicked()) );
+    connect( d->ui_cacheSettings.button_clearPersistentCache, SIGNAL(clicked()), SIGNAL(clearPersistentCacheClicked()) );
 
     // time page
     QWidget *w_timeSettings = new QWidget( this );
@@ -250,14 +251,14 @@ void QtMarbleConfigDialog::readSettings()
     d->ui_navigationSettings.kcfg_externalMapEditor->setCurrentIndex( editorIndex );
 
     // Cache
-    d->w_cacheSettings->kcfg_volatileTileCacheLimit->setValue( volatileTileCacheLimit() );
-    d->w_cacheSettings->kcfg_persistentTileCacheLimit->setValue( persistentTileCacheLimit() );
-    d->w_cacheSettings->kcfg_proxyUrl->setText( proxyUrl() );
-    d->w_cacheSettings->kcfg_proxyPort->setValue( proxyPort() );
-    d->w_cacheSettings->kcfg_proxyUser->setText( proxyUser() );
-    d->w_cacheSettings->kcfg_proxyPass->setText( proxyPass() );
-    d->w_cacheSettings->kcfg_proxyType->setCurrentIndex( proxyType() );
-    d->w_cacheSettings->kcfg_proxyAuth->setChecked( proxyAuth() );
+    d->ui_cacheSettings.kcfg_volatileTileCacheLimit->setValue( volatileTileCacheLimit() );
+    d->ui_cacheSettings.kcfg_persistentTileCacheLimit->setValue( persistentTileCacheLimit() );
+    d->ui_cacheSettings.kcfg_proxyUrl->setText( proxyUrl() );
+    d->ui_cacheSettings.kcfg_proxyPort->setValue( proxyPort() );
+    d->ui_cacheSettings.kcfg_proxyUser->setText( proxyUser() );
+    d->ui_cacheSettings.kcfg_proxyPass->setText( proxyPass() );
+    d->ui_cacheSettings.kcfg_proxyType->setCurrentIndex( proxyType() );
+    d->ui_cacheSettings.kcfg_proxyAuth->setChecked( proxyAuth() );
  
     // Time
     d->ui_timeSettings.kcfg_systemTimezone->setChecked( systemTimezone() );
@@ -345,15 +346,15 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_settings.endGroup();
     
     d->m_settings.beginGroup( "Cache" );
-    d->m_settings.setValue( "volatileTileCacheLimit", d->w_cacheSettings->kcfg_volatileTileCacheLimit->value() );
-    d->m_settings.setValue( "persistentTileCacheLimit", d->w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
-    d->m_settings.setValue( "proxyUrl", d->w_cacheSettings->kcfg_proxyUrl->text() );
-    d->m_settings.setValue( "proxyPort", d->w_cacheSettings->kcfg_proxyPort->value() );
-    d->m_settings.setValue( "proxyType", d->w_cacheSettings->kcfg_proxyType->currentIndex() );
-    if ( d->w_cacheSettings->kcfg_proxyAuth->isChecked() ) {
+    d->m_settings.setValue( "volatileTileCacheLimit", d->ui_cacheSettings.kcfg_volatileTileCacheLimit->value() );
+    d->m_settings.setValue( "persistentTileCacheLimit", d->ui_cacheSettings.kcfg_persistentTileCacheLimit->value() );
+    d->m_settings.setValue( "proxyUrl", d->ui_cacheSettings.kcfg_proxyUrl->text() );
+    d->m_settings.setValue( "proxyPort", d->ui_cacheSettings.kcfg_proxyPort->value() );
+    d->m_settings.setValue( "proxyType", d->ui_cacheSettings.kcfg_proxyType->currentIndex() );
+    if ( d->ui_cacheSettings.kcfg_proxyAuth->isChecked() ) {
         d->m_settings.setValue( "proxyAuth", true );
-        d->m_settings.setValue( "proxyUser", d->w_cacheSettings->kcfg_proxyUser->text() );
-        d->m_settings.setValue( "proxyPass", d->w_cacheSettings->kcfg_proxyPass->text() );
+        d->m_settings.setValue( "proxyUser", d->ui_cacheSettings.kcfg_proxyUser->text() );
+        d->m_settings.setValue( "proxyPass", d->ui_cacheSettings.kcfg_proxyPass->text() );
     } else {
         d->m_settings.setValue( "proxyAuth", false );
     }

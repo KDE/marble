@@ -98,7 +98,6 @@ set(marblewidget_SRCS
     HttpJob.cpp
     LayerManager.cpp
     PluginManager.cpp
-    MarbleCacheSettingsWidget.cpp
     TimeControlWidget.cpp
     AbstractFloatItem.cpp
     PopupItem.cpp
@@ -245,7 +244,6 @@ set (marblewidget_UI
     MarbleNavigator.ui
     MarbleViewSettingsWidget.ui
     MarbleNavigationSettingsWidget.ui
-    MarbleCacheSettingsWidget.ui
     TimeControlWidget.ui
     MarbleTimeSettingsWidget.ui
     MarblePluginSettingsWidget.ui
