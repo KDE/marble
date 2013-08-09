@@ -242,6 +242,7 @@ set (marblewidget_UI
     CurrentLocationWidget.ui
     FileViewWidget.ui
     MarbleNavigator.ui
+    MarbleCacheSettingsWidget.ui
     MarbleViewSettingsWidget.ui
     MarbleNavigationSettingsWidget.ui
     TimeControlWidget.ui
