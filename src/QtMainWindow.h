@@ -69,7 +69,6 @@ protected:
     void  closeEvent(QCloseEvent *event);
 
 private:
-    void  createToolBar();
     void  createActions();
     void  createMenus( const QList<QAction*> &panelActions );
     void  createStatusBar();

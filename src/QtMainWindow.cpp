@@ -140,11 +140,6 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
 
-    const bool smallscreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-
-    if ( !smallscreen ) {
-        createToolBar();
-    }
     createActions();
     QList<QAction*> const panelActions = m_controlView->setupDockWidgets( this );
     createMenus( panelActions );
@@ -998,13 +993,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     writeSettings();
     event->accept();
-}
-
-void MainWindow::createToolBar()
-{
-//    QToolBar* toolBar = addToolBar( tr( "Main ToolBar" ) );
-//    toolBar->setObjectName( "mainToolBar" );
-//    toolBar->addWidget( ... );
 }
 
 QString MainWindow::readMarbleDataPath()
