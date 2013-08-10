@@ -43,7 +43,6 @@
 #include <MapViewWidget.h>
 #include <MapWizard.h>
 #include <MarbleAboutDialog.h>
-#include <MarbleAbstractRunner.h>
 #include <MarbleControlBox.h>
 #include <MarbleMap.h>
 #include <MarbleModel.h>
@@ -114,8 +113,6 @@ public:
         sipType = sipType_Marble_GeoGraphicsScene;
     else if (dynamic_cast<Marble::MapThemeManager*>(sipCpp))
         sipType = sipType_Marble_MapThemeManager;
-    else if (dynamic_cast<Marble::MarbleAbstractRunner*>(sipCpp))
-        sipType = sipType_Marble_MarbleAbstractRunner;
     else if (dynamic_cast<Marble::MarbleMap*>(sipCpp))
         sipType = sipType_Marble_MarbleMap;
     else if (dynamic_cast<Marble::MarbleModel*>(sipCpp))

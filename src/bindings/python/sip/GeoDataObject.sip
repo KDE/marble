@@ -18,7 +18,7 @@
 namespace Marble
 {
 
-class GeoDataObject : Marble::GeoNode, Marble::Serializable
+class GeoDataObject : Marble::GeoNode, Marble::Serializable /Abstract/
 {
 %TypeHeaderCode
 #include <GeoDataObject.h>
@@ -34,7 +34,10 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& steam);
     virtual ~GeoDataObject ();
-    virtual const char*     nodeType () const;
+
+// no impl.
+//ig    virtual const char*     nodeType () const;
+
     virtual Marble::GeoDataObject*  parent () const;
     virtual void            setParent (Marble::GeoDataObject* parent);
 };

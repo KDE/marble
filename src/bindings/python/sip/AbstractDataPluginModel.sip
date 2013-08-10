@@ -51,7 +51,6 @@ protected:
     virtual void            getAdditionalItems (const Marble::GeoDataLatLonAltBox& box, const Marble::MarbleModel* model, qint32 number = 10)=0;
 public:
 //ig    explicit                AbstractDataPluginModel (const QString& name, const PluginManager* pluginManager, QObject* parent /TransferThis/ = 0);
-    QList<Marble::AbstractDataPluginItem*>  items (const Marble::ViewportParams* viewport, const Marble::MarbleModel* model, qint32 number = 10);
     virtual void            setFavoriteItems (const QStringList& list);
     QStringList             favoriteItems () const;
     virtual void            setFavoriteItemsOnly (bool favoriteOnly);

@@ -19,7 +19,7 @@
 
 namespace Marble
 {
-class GeoDataAbstractView : Marble::GeoDataObject
+class GeoDataAbstractView : Marble::GeoDataObject /Abstract/
 {
 %TypeHeaderCode
 #include <GeoDataAbstractView.h>

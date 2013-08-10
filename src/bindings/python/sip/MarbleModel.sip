@@ -26,9 +26,6 @@ class MarbleModel : QObject
 
 public:
     QString                 mapThemeId () const;
-    void                    addPlacemarkFile (const QString& filename);
-    void                    addPlacemarkData (const QString& data, const QString& key = "data");
-    void                    removePlacemarkKey (const QString& key);
     qreal                   planetRadius () const;
     QString                 planetName () const;
     const Marble::SunLocator*  sunLocator () const;
@@ -44,7 +41,6 @@ public:
     virtual ~MarbleModel ();
 //ig    Marble::GeoSceneDocument*  mapTheme () const;
 //ig    HttpDownloadManager*    downloadManager () const;
-    void                    openGpxFile (const QString& filename);
     void                    setHome (qreal lon, qreal lat, int zoom = 1050);
     void                    setHome (const Marble::GeoDataCoordinates& homePoint, int zoom = 1050);
     void                    addGeoDataFile (const QString& filename);

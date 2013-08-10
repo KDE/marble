@@ -19,7 +19,7 @@
 
 namespace Marble
 {
-class ReverseGeocodingRunnerPlugin : QObject, Marble::PluginInterface
+class ReverseGeocodingRunnerPlugin : QObject, Marble::PluginInterface /Abstract/
 {
 %TypeHeaderCode
 #include <ReverseGeocodingRunnerPlugin.h>
@@ -29,7 +29,6 @@ public:
     explicit                ReverseGeocodingRunnerPlugin (QObject* parent /TransferThis/ = 0);
     virtual ~ReverseGeocodingRunnerPlugin ();
     virtual QString         guiString () const=0;
-    virtual Marble::MarbleAbstractRunner*  newRunner () const=0;
     bool                    supportsCelestialBody (const QString& celestialBodyId) const;
     bool                    canWorkOffline () const;
     virtual bool            canWork () const;

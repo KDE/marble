@@ -49,7 +49,6 @@ protected:
 public:
     virtual ~MarbleGraphicsItem ();
     bool                    contains (const QPointF& point) const;
-    QRectF                  containsRect (const QPointF& point) const;
     Marble::AbstractMarbleGraphicsLayout*  layout () const;
     void                    setLayout (Marble::AbstractMarbleGraphicsLayout* layout);
     bool                    visible () const;

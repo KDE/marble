@@ -19,7 +19,7 @@
 
 namespace Marble
 {
-class SearchRunnerPlugin : QObject, Marble::PluginInterface
+class SearchRunnerPlugin : QObject, Marble::PluginInterface /Abstract/
 {
 %TypeHeaderCode
 #include <SearchRunnerPlugin.h>
@@ -29,7 +29,6 @@ public:
     explicit                SearchRunnerPlugin (QObject* parent /TransferThis/ = 0);
     virtual ~SearchRunnerPlugin ();
     virtual QString         guiString () const=0;
-    virtual Marble::MarbleAbstractRunner*  newRunner () const=0;
     bool                    supportsCelestialBody (const QString& celestialBodyId) const;
     bool                    canWorkOffline () const;
     virtual bool            canWork () const;
