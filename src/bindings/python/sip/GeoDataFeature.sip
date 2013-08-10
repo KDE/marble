@@ -28,7 +28,6 @@ public:
                             GeoDataFeature ();
                             GeoDataFeature (const QString& name);
                             GeoDataFeature (const Marble::GeoDataFeature& other);
-    bool                    operator == (const Marble::GeoDataFeature&) const;
     Marble::EnumFeatureId   featureId () const;
 
     enum GeoDataVisualCategory
@@ -219,8 +218,6 @@ public:
 protected:
 //ig                            GeoDataFeature (GeoDataFeaturePrivate* priv);
 public:
-    Marble::GeoDataAbstractView  abstractView () const;
-    void                    setAbstractView (const Marble::GeoDataAbstractView& abstractView);
 //ig    Marble::GeoDataTimeSpan&  timeSpan () const;
 //ig    GeoDataTimeStamp&       timeStamp () const;
 //ig    void                    setTimeStamp (GeoDataTimeStamp timeStamp);
@@ -235,7 +232,6 @@ public:
     void                    setZoomLevel (int index);
     static QColor           defaultLabelColor ();
     static void             setDefaultLabelColor (const QColor& color);
-    void                    setStyle (const Marble::GeoDataStyle* style);
     void                    setStyleMap (const Marble::GeoDataStyleMap* map);
 };
 // GeoDataFeature

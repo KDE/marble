@@ -28,8 +28,7 @@ class GeoGraphicsItem
 %End
 
 public:
-                            GeoGraphicsItem ();
-
+    GeoGraphicsItem (const Marble::GeoDataFeature *x);
     virtual ~GeoGraphicsItem ();
     enum GeoGraphicsItemFlag
     {

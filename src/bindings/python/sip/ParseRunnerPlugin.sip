@@ -19,7 +19,7 @@
 
 namespace Marble
 {
-class ParseRunnerPlugin : QObject, Marble::PluginInterface
+class ParseRunnerPlugin : QObject, Marble::PluginInterface /Abstract/
 {
 %TypeHeaderCode
 #include <ParseRunnerPlugin.h>
@@ -30,7 +30,6 @@ public:
     virtual ~ParseRunnerPlugin ();
     virtual QString         fileFormatDescription () const=0;
     virtual QStringList     fileExtensions () const=0;
-    virtual Marble::MarbleAbstractRunner*  newRunner () const=0;
     virtual QIcon           icon () const;
 };
 };

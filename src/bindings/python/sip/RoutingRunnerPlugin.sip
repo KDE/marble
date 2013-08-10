@@ -19,7 +19,7 @@
 
 namespace Marble
 {
-class RoutingRunnerPlugin : QObject, Marble::PluginInterface
+class RoutingRunnerPlugin : QObject, Marble::PluginInterface /Abstract/
 {
 %TypeHeaderCode
 #include <RoutingRunnerPlugin.h>
@@ -29,7 +29,6 @@ public:
     explicit                RoutingRunnerPlugin (QObject* parent /TransferThis/ = 0);
     virtual ~RoutingRunnerPlugin ();
     virtual QString         guiString () const=0;
-    virtual Marble::MarbleAbstractRunner*  newRunner () const=0;
     bool                    supportsCelestialBody (const QString& celestialBodyId) const;
     bool                    canWorkOffline () const;
     virtual bool            canWork () const;

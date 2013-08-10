@@ -42,7 +42,6 @@ signals:
     void                    changedNumberOfItems (quint32 number);
 public:
 //ig    PluginManager*          pluginManager () const;
-    virtual Marble::RenderPlugin::RenderType  renderType () const;
                             AbstractDataPlugin (const Marble::MarbleModel* marbleModel);
     bool                    isInitialized () const;
     void                    setDelegate (QDeclarativeComponent* delegate, QGraphicsItem* parent);

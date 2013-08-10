@@ -103,7 +103,7 @@ protected:
 
 public:
     virtual ~MarbleMap ();
-    void                    reload () const;
+    void                    reload ();
     Marble::ViewportParams*  viewport ();
     Marble::MapQuality      mapQuality () const;
     void                    setSize (const QSize& size);
@@ -140,11 +140,9 @@ public:
 //ig    const Marble::ViewportParams*  viewport () const;
     bool                    showSunShading () const;
     bool                    showCityLights () const;
-    bool                    showSunInZenith () const;
     void                    paint (Marble::GeoPainter& painter, const QRect& dirtyRect);
     void                    setShowSunShading (bool visible);
     void                    setShowCityLights (bool visible);
-    void                    setShowSunInZenith (bool visible);
 signals:
     void                    radiusChanged (int radius);
 public:
