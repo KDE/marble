@@ -28,7 +28,6 @@ class GeoGraphicsScene : QObject
 public:
                             GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
     ~GeoGraphicsScene ();
-    void                    removeItem (Marble::GeoGraphicsItem* item);
     void                    clear ();
     QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonAltBox& box, int maxZoomLevel) const;
 //ig    static int s_tileZoomLevel;

@@ -40,19 +40,11 @@ protected:
 
 public:
     virtual ~RenderPlugin ();
-    virtual QList<QActionGroup*>*  actionGroups () const;
-    virtual QList<QActionGroup*>*  toolbarActionGroups () const;
     virtual QHash<QString,QVariant>  settings () const;
 signals:
     void                    settingsChanged (QString nameId);
     void                    actionGroupsChanged ();
 public:
-    enum RenderType
-    {
-        Unknown,
-        Online
-    };
-    virtual Marble::RenderPlugin::RenderType  renderType () const;
     const Marble::MarbleModel*  marbleModel () const;
     void                    restoreDefaultSettings ();
 signals:

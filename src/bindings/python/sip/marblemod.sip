@@ -97,7 +97,6 @@
 %Include MapViewWidget.sip
 %Include MapWizard.sip
 %Include MarbleAboutDialog.sip
-%Include MarbleAbstractRunner.sip
 %Include MarbleControlBox.sip
 %Include MarbleDirs.sip
 %Include MarbleGlobal.sip

@@ -76,7 +76,6 @@ public:
     virtual void            detach ();
     virtual ~GeoDataCoordinates ();
     bool                    isPole (Marble::Pole = Marble::AnyPole) const;
-    virtual bool            operator != (const Marble::GeoDataCoordinates&) const;
     enum BearingType
     {
         InitialBearing,

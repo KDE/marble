@@ -172,11 +172,9 @@ public:
 //ig    MarbleWidgetPopupMenu*  popupMenu ();
     bool                    showSunShading () const;
     bool                    showCityLights () const;
-    bool                    showSunInZenith () const;
     void                    centerOn (const Marble::GeoDataPlacemark& placemark, bool animated = 0);
     void                    setShowSunShading (bool visible);
     void                    setShowCityLights (bool visible);
-    void                    setShowSunInZenith (bool visible);
     QRegion                 mapRegion () const;
     bool                    screenCoordinates (qreal lon, qreal lat, qreal& x, qreal& y) const;
     bool                    geoCoordinates (int x, int y, qreal& lon, qreal& lat, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Degree) const;
