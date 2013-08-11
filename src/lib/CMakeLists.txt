@@ -27,7 +27,7 @@ INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 
-set(GENERIC_LIB_VERSION "0.15.97")
+set(GENERIC_LIB_VERSION "0.16.0")
 set(GENERIC_LIB_SOVERSION "16")
 
 if (QTONLY)
@@ -152,8 +152,6 @@ set(marblewidget_SRCS
     AbstractDataPluginModel.cpp
     AbstractDataPluginItem.cpp
     AbstractWorkerThread.cpp
-
-    WikipediaService.cpp
 
     PluginInterface.cpp
     DialogConfigurationInterface.cpp
@@ -439,8 +437,6 @@ else (APPLE AND QTONLY)
     AbstractDataPluginModel.h
     AbstractDataPluginItem.h
     AbstractWorkerThread.h
-
-    WikipediaService.h
 
     LatLonEdit.h
     MapWizard.h

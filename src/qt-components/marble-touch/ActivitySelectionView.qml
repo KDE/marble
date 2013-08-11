@@ -98,21 +98,6 @@ Item {
                         width: 180
                         font.bold: true
                     }
-
-                    Loader {
-                        id: previewLoader
-                        anchors.verticalCenter: parent.verticalCenter
-                        height: 48
-                        visible: status == Loader.Ready && item.isActive
-                        source: previewPath
-
-                        Component.onCompleted: {
-                            if ( source !== "" && marbleWidget === null) {
-                                lazyLoader.source = "qrc:/MainWidget.qml";
-                                marbleWidget = lazyLoader.item
-                            }
-                        }
-                    }
                 }
 
                 MouseArea {
@@ -162,68 +147,57 @@ Item {
             name: "Virtual Globe"
             imagePath: "qrc:/icons/activity-virtualglobe.png"
             path: "qrc:/activities/VirtualGlobe.qml"
-            previewPath: ""
         }
 
         ListElement {
             name: "Search"
             imagePath: "qrc:/icons/activity-search.png"
             path: "qrc:/activities/Search.qml"
-            previewPath: ""
         }
         ListElement {
             name: "Routing"
             imagePath: "qrc:/icons/activity-routing.png"
             path: "qrc:/activities/Routing.qml"
-            previewPath: ""
         }
         ListElement {
             name: "Tracking"
             imagePath: "qrc:/icons/activity-tracking.png"
             path: "qrc:/activities/Tracking.qml"
-            previewPath: "qrc:/activities/TrackingPreview.qml"
         }
         ListElement {
             name: "Navigation"
             imagePath: "qrc:/icons/activity-navigation.png"
             path: "qrc:/activities/Navigation.qml"
-            previewPath: "qrc:/activities/NavigationPreview.qml"
         }
         ListElement {
             name: "Weather"
             imagePath: "qrc:/icons/activity-weather.png"
             path: "qrc:/activities/Weather.qml"
-            previewPath: "qrc:/activities/WeatherPreview.qml"
         }
         ListElement {
             name: "Community"
             imagePath: "qrc:/icons/activity-friends.png"
             path: "qrc:/activities/Friends.qml"
-            previewPath: ""
         }
         ListElement {
             name: "Space View"
             imagePath: "qrc:/icons/activity-spaceview.png"
             path: "qrc:/activities/SpaceView.qml"
-            previewPath: ""
         }
         ListElement {
             name: "Explore"
             imagePath: "qrc:/icons/activity-explore.png"
             path: "qrc:/activities/Explore.qml"
-            previewPath: ""
         }
         ListElement {
             name: "Info"
             imagePath: "qrc:/icons/information.png"
             path: "qrc:/AboutMarblePage.qml"
-            previewPath: ""
         }
         ListElement {
             name: "Preferences"
             imagePath: "qrc:/icons/preferences.png"
             path: "qrc:/PreferencesPage.qml"
-            previewPath: ""
         }
     }
 
