@@ -59,7 +59,8 @@ enum AngleUnit
 {
     DMSDegree,
     DecimalDegree,
-    UTM
+    UTM,
+    MGRS
 };
 
 

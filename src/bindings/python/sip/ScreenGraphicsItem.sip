@@ -35,7 +35,8 @@ public:
 
     enum GraphicsItemFlag
     {
-        ItemIsMovable
+        ItemIsMovable,
+        ItemIsHideable
     };
     typedef QFlags<Marble::ScreenGraphicsItem::GraphicsItemFlag> GraphicsItemFlags;
     virtual ~ScreenGraphicsItem ();

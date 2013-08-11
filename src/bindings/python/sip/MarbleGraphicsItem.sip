@@ -85,7 +85,7 @@ private:
 %End
 public:
     bool                    paintEvent (QPainter* painter, const Marble::ViewportParams* viewport);
-    void                    setProjection (Marble::ViewportParams* viewport);
+    virtual void            setProjection (const Marble::ViewportParams* viewport);
 };
 // MarbleGraphicsItem
 

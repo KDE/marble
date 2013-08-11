@@ -36,34 +36,17 @@ public:
     void                    drawPolygon (const Marble::GeoDataLinearRing& linearRing, Qt::FillRule fillRule = Qt::OddEvenFill);
     void                    drawPolygon (const Marble::GeoDataPolygon& polygon, Qt::FillRule fillRule = Qt::OddEvenFill);
     void                    drawRect (const Marble::GeoDataCoordinates& centerPosition, qreal width, qreal height, bool isGeoProjected = 0);
-    void                    drawText (int x, int y, const QString& text);
-    void                    drawText (const QPointF& position, const QString& text);
-    void                    drawText (const QPoint& position, const QString& text);
-    void                    drawText (const QRect& rectangle, int flags, const QString& text, QRect* boundingRect = 0);
-    void                    drawEllipse (int x, int y, int width, int height);
-    void                    drawEllipse (const QRectF& rectangle);
-    void                    drawImage (const QRect& target, const QImage& image, const QRect& source, Qt::ImageConversionFlags flags = Qt::AutoColor);
-    void                    drawPixmap (int x, int y, const QPixmap& pixmap);
-    void                    drawPixmap (const QPointF& point, const QPixmap& pixmap);
-    void                    drawPixmap (const QPoint& point, const QPixmap& pixmap);
-    void                    drawPoint (int x, int y);
-    void                    drawPolyline (const QPolygonF& polyline);
-    void                    drawPolygon (const QPolygonF& polygon);
-    void                    drawLine (int x1, int y1, int x2, int y2);
-    void                    drawRect (const QRectF& rectangle);
-    void                    drawRect (const QRect& rectangle);
-    void                    drawRect (int x, int y, int width, int height);
 
     ~GeoPainter ();
     void                    drawPoint (const Marble::GeoDataPoint& point);
-    void                    drawImage (const QRect& rect, const QImage& image);
-    void                    drawImage (const QRectF& rect, const QImage& image);
     QRegion                 regionFromPoint (const Marble::GeoDataCoordinates& position, qreal strokeWidth = 3) const;
     QRegion                 regionFromPoint (const Marble::GeoDataPoint& point, qreal strokeWidth = 3) const;
     QRegion                 regionFromEllipse (const Marble::GeoDataCoordinates& centerPosition, qreal width, qreal height, bool isGeoProjected = 0, qreal strokeWidth = 3) const;
     QRegion                 regionFromPolyline (const Marble::GeoDataLineString& lineString, qreal strokeWidth = 3) const;
     QRegion                 regionFromPolygon (const Marble::GeoDataLinearRing& linearRing, Qt::FillRule fillRule, qreal strokeWidth = 3) const;
     QRegion                 regionFromRect (const Marble::GeoDataCoordinates& centerPosition, qreal width, qreal height, bool isGeoProjected = 0, qreal strokeWidth = 3) const;
+                            GeoPainter (QPaintDevice* paintDevice, const Marble::ViewportParams* viewportParams, Marble::MapQuality mapQuality = NormalQuality);
+    void                    drawRoundRect (const Marble::GeoDataCoordinates& centerPosition, int width, int height, int xRnd = 25, int yRnd = 25);
 };
 // GeoPainter
 

@@ -17,3 +17,25 @@
 // Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+namespace Marble
+{
+class GeoDataGroundOverlay : Marble::GeoDataOverlay
+{
+%TypeHeaderCode
+#include <GeoDataOverlay.h>
+#include <GeoDataGroundOverlay.h>
+%End
+
+public:
+                            GeoDataGroundOverlay ();
+                            GeoDataGroundOverlay (const Marble::GeoDataGroundOverlay& other);
+    ~GeoDataGroundOverlay ();
+    virtual const char*     nodeType () const;
+    double                  altitude () const;
+    void                    setAltitude (double altitude);
+    Marble::AltitudeMode    altitudeMode () const;
+    void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
+    Marble::GeoDataLatLonBox&  latLonBox () const;
+    void                    setLatLonBox (const Marble::GeoDataLatLonBox& box);
+};
+};

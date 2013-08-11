@@ -39,6 +39,7 @@
 #include <LatLonBoxWidget.h>
 #include <LatLonEdit.h>
 #include <LegendWidget.h>
+#include <MapThemeDownloadDialog.h>
 #include <MapThemeManager.h>
 #include <MapViewWidget.h>
 #include <MapWizard.h>
@@ -51,14 +52,18 @@
 #include <MarbleWidget.h>
 #include <NavigationWidget.h>
 #include <ParseRunnerPlugin.h>
+#include <ParsingRunner.h>
 #include <PluginAboutDialog.h>
 #include <PositionTracking.h>
 #include <QtMarbleConfigDialog.h>
 #include <RenderPlugin.h>
+#include <ReverseGeocodingRunner.h>
 #include <ReverseGeocodingRunnerPlugin.h>
 #include <routing/RouteRequest.h>
 #include <routing/RoutingModel.h>
+#include <RoutingRunner.h>
 #include <RoutingRunnerPlugin.h>
+#include <SearchRunner.h>
 #include <SearchRunnerPlugin.h>
 #include <SunLocator.h>
 #include <TileCreator.h>
@@ -86,7 +91,6 @@ public:
     void                    setAddedAngularResolution (qreal resolution);
     virtual QAction*        action ()=0;
     virtual QString         itemType () const=0;
-    virtual bool            initialized ()=0;
     virtual void            addDownloadedFile (const QString& url, const QString& type)=0;
 //ig    virtual bool            operator < (const Marble::AbstractDataPluginItem* other) const;
 
@@ -121,6 +125,8 @@ public:
         sipType = sipType_Marble_MarbleRunnerManager;
     else if (dynamic_cast<Marble::ParseRunnerPlugin*>(sipCpp))
         sipType = sipType_Marble_ParseRunnerPlugin;
+    else if (dynamic_cast<Marble::ParsingRunner*>(sipCpp))
+        sipType = sipType_Marble_ParsingRunner;
     else if (dynamic_cast<Marble::PositionTracking*>(sipCpp))
         sipType = sipType_Marble_PositionTracking;
     else if (dynamic_cast<Marble::RenderPlugin*>(sipCpp))
@@ -131,12 +137,18 @@ public:
         else if (dynamic_cast<Marble::AbstractFloatItem*>(sipCpp))
             sipType = sipType_Marble_AbstractFloatItem;
         }
+    else if (dynamic_cast<Marble::ReverseGeocodingRunner*>(sipCpp))
+        sipType = sipType_Marble_ReverseGeocodingRunner;
     else if (dynamic_cast<Marble::ReverseGeocodingRunnerPlugin*>(sipCpp))
         sipType = sipType_Marble_ReverseGeocodingRunnerPlugin;
     else if (dynamic_cast<Marble::RouteRequest*>(sipCpp))
         sipType = sipType_Marble_RouteRequest;
+    else if (dynamic_cast<Marble::RoutingRunner*>(sipCpp))
+        sipType = sipType_Marble_RoutingRunner;
     else if (dynamic_cast<Marble::RoutingRunnerPlugin*>(sipCpp))
         sipType = sipType_Marble_RoutingRunnerPlugin;
+    else if (dynamic_cast<Marble::SearchRunner*>(sipCpp))
+        sipType = sipType_Marble_SearchRunner;
     else if (dynamic_cast<Marble::SearchRunnerPlugin*>(sipCpp))
         sipType = sipType_Marble_SearchRunnerPlugin;
     else if (dynamic_cast<Marble::SunLocator*>(sipCpp))
@@ -175,6 +187,8 @@ public:
         sipType = sipType_Marble_TileLevelRangeWidget;
     else if (dynamic_cast<Marble::DownloadRegionDialog*>(sipCpp))
         sipType = sipType_Marble_DownloadRegionDialog;
+    else if (dynamic_cast<Marble::MapThemeDownloadDialog*>(sipCpp))
+        sipType = sipType_Marble_MapThemeDownloadDialog;
     else if (dynamic_cast<Marble::MarbleAboutDialog*>(sipCpp))
         sipType = sipType_Marble_MarbleAboutDialog;
     else if (dynamic_cast<Marble::PluginAboutDialog*>(sipCpp))
@@ -206,6 +220,8 @@ public:
 signals:
     void                    idChanged ();
     void                    stickyChanged ();
+public:
+    virtual bool            initialized () const=0;
 };
 // AbstractDataPluginItem
 

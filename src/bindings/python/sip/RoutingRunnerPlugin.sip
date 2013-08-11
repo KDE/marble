@@ -41,5 +41,7 @@ protected:
     void                    setStatusMessage (const QString& message);
     void                    setSupportedCelestialBodies (const QStringList& celestialBodies);
     void                    setCanWorkOffline (bool canWorkOffline);
+public:
+    virtual Marble::RoutingRunner*  newRunner () const=0;
 };
 };

@@ -41,9 +41,8 @@ public:
     void                    reset ();
     void                    setRootDocument (Marble::GeoDataDocument* document);
     Marble::GeoDataDocument*  rootDocument ();
-    int                     addFeature (Marble::GeoDataContainer* parent, Marble::GeoDataFeature* feature);
+    int                     addFeature (Marble::GeoDataContainer* parent, Marble::GeoDataFeature* feature, int row = -1);
     bool                    removeFeature (Marble::GeoDataContainer* parent, int index);
-    bool                    removeFeature (Marble::GeoDataFeature* feature);
     void                    updateFeature (Marble::GeoDataFeature* feature);
     int                     addDocument (Marble::GeoDataDocument* document);
     void                    removeDocument (int index);
@@ -52,5 +51,8 @@ public:
 signals:
     void                    removed (Marble::GeoDataObject* object);
     void                    added (Marble::GeoDataObject* object);
+public:
+    QItemSelectionModel*    selectionModel ();
+    int                     removeFeature (const Marble::GeoDataFeature* feature);
 };
 };

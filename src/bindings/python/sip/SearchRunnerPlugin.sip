@@ -36,5 +36,7 @@ public:
 protected:
     void                    setSupportedCelestialBodies (const QStringList& celestialBodies);
     void                    setCanWorkOffline (bool canWorkOffline);
+public:
+    virtual Marble::SearchRunner*  newRunner () const=0;
 };
 };

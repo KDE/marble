@@ -61,5 +61,6 @@ public:
     int                     chosenTimezone () const;
     void                    initializeCustomTimezone ();
     QLocale::MeasurementSystem  measurementSystem () const;
+    bool                    inertialEarthRotation () const;
 };
 };

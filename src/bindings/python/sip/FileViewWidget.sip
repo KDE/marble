@@ -28,9 +28,10 @@ class FileViewWidget : QWidget
 public:
                             FileViewWidget (QWidget* parent /TransferThis/ = 0, Qt::WindowFlags f = 0);
     ~FileViewWidget ();
-//ig    void                    setFileViewModel (FileViewModel* model);
 signals:
     void                    centerOn (const Marble::GeoDataPlacemark&, bool animated);
     void                    centerOn (const Marble::GeoDataLatLonBox&, bool animated);
+public:
+    void                    setMarbleWidget (Marble::MarbleWidget* widget);
 };
 };

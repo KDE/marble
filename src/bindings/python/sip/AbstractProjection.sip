@@ -72,6 +72,6 @@ public:
     virtual bool            geoCoordinates (const int x, const int y, const Marble::ViewportParams* viewport, qreal& lon, qreal& lat, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree) const=0;
     virtual Marble::GeoDataLatLonAltBox  latLonAltBox (const QRect& screenRect, const Marble::ViewportParams* viewport) const;
 protected:
-//ig                            AbstractProjection (AbstractProjectionPrivate& dd);
+//ig                            AbstractProjection (AbstractProjectionPrivate* dd);
 };
 };

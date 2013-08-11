@@ -17,22 +17,3 @@
 // Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-namespace Marble
-{
-class GeoGraphicsScene : QObject
-{
-%TypeHeaderCode
-#include <GeoGraphicsScene.h>
-%End
-
-public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    clear ();
-//ig    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
-    void                    eraseAll ();
-    void                    removeItem (const Marble::GeoDataFeature* feature);
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonBox& box, int maxZoomLevel) const;
-};
-};

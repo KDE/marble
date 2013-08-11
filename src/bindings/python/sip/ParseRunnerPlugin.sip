@@ -31,5 +31,6 @@ public:
     virtual QString         fileFormatDescription () const=0;
     virtual QStringList     fileExtensions () const=0;
     virtual QIcon           icon () const;
+    virtual Marble::ParsingRunner*  newRunner () const=0;
 };
 };

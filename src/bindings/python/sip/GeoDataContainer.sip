@@ -53,11 +53,12 @@ public:
 //ig    QVector<Marble::GeoDataFeature*>  featureList () const;
 //ig    QVector<Marble::GeoDataPlacemark*>  placemarkList () const;
     Marble::GeoDataFeature*  child (int);
-    int                     childPosition (Marble::GeoDataFeature* child);
     void                    append (Marble::GeoDataFeature* other);
     void                    remove (int index);
     Marble::GeoDataLatLonAltBox  latLonAltBox () const;
 //ig    const Marble::GeoDataFeature*  child (int) const;
+    int                     childPosition (const Marble::GeoDataFeature* child) const;
+    void                    insert (Marble::GeoDataFeature* other, int index);
 };
 // GeoDataContainer
 

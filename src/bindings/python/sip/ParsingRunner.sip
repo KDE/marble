@@ -19,20 +19,16 @@
 
 namespace Marble
 {
-class GeoGraphicsScene : QObject
+class ParsingRunner : QObject
 {
 %TypeHeaderCode
-#include <GeoGraphicsScene.h>
+#include <ParsingRunner.h>
 %End
 
 public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    clear ();
-//ig    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
-    void                    eraseAll ();
-    void                    removeItem (const Marble::GeoDataFeature* feature);
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonBox& box, int maxZoomLevel) const;
+    explicit                ParsingRunner (QObject* parent /TransferThis/ = 0);
+    virtual void            parseFile (const QString& fileName, Marble::DocumentRole role)=0;
+signals:
+    void                    parsingFinished (Marble::GeoDataDocument* document, const QString& error = QString());
 };
 };

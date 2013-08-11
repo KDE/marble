@@ -44,6 +44,12 @@ public:
     ~GeoDataDocument ();
 //ig    DocumentRole            documentRole () const;
     void                    setDocumentRole (Marble::DocumentRole role);
+    QString                 property () const;
+    void                    setProperty (QString property);
+    QString                 baseUri () const;
+    void                    setBaseUri (const QString& baseUri);
+//ig    Marble::GeoDataNetworkLinkControl  networkLinkControl () const;
+//ig    void                    setNetworkLinkControl (const Marble::GeoDataNetworkLinkControl& networkLinkControl);
 };
 // GeoDataDocument
 

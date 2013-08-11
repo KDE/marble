@@ -41,6 +41,9 @@ public:
                             GeoDataPoint (const Marble::GeoDataCoordinates& other);
     ~GeoDataPoint ();
     virtual const char*     nodeType () const;
+                            GeoDataPoint (qreal lon, qreal lat, qreal alt = 0, Marble::GeoDataPoint::Unit _unit = Marble::GeoDataCoordinates::Radian);
+    void                    setCoordinates (const Marble::GeoDataCoordinates& coordinates);
+    const Marble::GeoDataCoordinates&  coordinates () const;
 };
 // GeoDataPoint
 

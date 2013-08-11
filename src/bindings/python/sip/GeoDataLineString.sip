@@ -74,6 +74,12 @@ public:
     void                    remove (int i);
 protected:
 //ig                            GeoDataLineString (GeoDataLineStringPrivate* priv);
+public:
+
+// FIXME
+//ig    QVector<GeoDataCoordinates>::ConstIterator  begin () const;
+//ig    QVector<GeoDataCoordinates>::ConstIterator  end () const;
+
 };
 // GeoDataLineString
 

@@ -63,14 +63,13 @@ public:
     QString                 planetId () const;
     explicit                MarbleModel (QObject* parent /TransferThis/ = 0);
 //ig    GeoDataTreeModel*       treeModel ();
-    QAbstractItemModel*     placemarkModel ();
+//ig    QAbstractItemModel*     placemarkModel ();
     QItemSelectionModel*    placemarkSelectionModel ();
 //ig    GeoSceneDocument*       mapTheme ();
     void                    home (qreal& lon, qreal& lat, int& zoom) const;
     Marble::MapThemeManager*  mapThemeManager ();
 //ig    HttpDownloadManager*    downloadManager ();
 //ig    FileManager*            fileManager ();
-//ig    FileViewModel*          fileViewModel ();
 //ig    MarbleClock*            clock ();
 //ig    Marble::SunLocator*     sunLocator ();
 //ig    const RoutingManager*   routingManager () const;
@@ -89,6 +88,10 @@ public:
 //ig    PluginManager*          pluginManager ();
 signals:
     void                    homeChanged (const Marble::GeoDataCoordinates newHomePoint);
+public:
+    const Marble::GeoDataTreeModel*  treeModel () const;
+    const QAbstractItemModel*  placemarkModel () const;
+    void                    updateProperty (const QString& property, bool value);
 };
 // MarbleModel
 
