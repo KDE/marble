@@ -64,6 +64,10 @@ public:
     static QString          name (const QString& id);
     ~Planet ();
     static QStringList      planetList ();
+    bool                    hasAtmosphere () const;
+    void                    setHasAtmosphere (bool enabled);
+    QColor                  atmosphereColor () const;
+    void                    setAtmosphereColor (const QColor& color);
 };
 // Planet
 

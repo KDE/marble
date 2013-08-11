@@ -186,6 +186,14 @@ public:
 //ig    const TextureLayer*     textureLayer () const;
     void                    setShowRuntimeTrace (bool visible);
     void                    downloadRegion (const QVector<Marble::TileCoordsPyramid>&);
+
+// FIXME
+//ig    PopupLayer*             popupLayer ();
+    bool                    isLockedToSubSolarPoint () const;
+    bool                    isSubSolarPointIconVisible () const;
+    void                    setZoom (int zoom, Marble::FlyToMode mode = Marble::Instant);
+    void                    setLockToSubSolarPoint (bool visible);
+    void                    setSubSolarPointIconVisible (bool visible);
 };
 // MarbleWidget
 

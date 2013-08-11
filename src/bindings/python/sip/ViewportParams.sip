@@ -76,6 +76,7 @@ public:
 //ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, bool& globeHidesPoint) const;
     bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, const QSizeF& size, bool& globeHidesPoint) const;
 //ig    bool                    screenCoordinates (const Marble::GeoDataLineString& lineString, QVector<QPolygonF*>& polygons) const;
+    explicit                ViewportParams (Marble::Projection projection, qreal centerLongitude = 0, qreal centerLatatitude = 0, int radius = 2000, const QSize& size = QSize(100,100));
 };
 // ViewportParams
 

@@ -19,20 +19,32 @@
 
 namespace Marble
 {
-class GeoGraphicsScene : QObject
+class GeoDataItemIcon : Marble::GeoDataObject
 {
 %TypeHeaderCode
-#include <GeoGraphicsScene.h>
+#include <GeoDataItemIcon.h>
 %End
 
 public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    clear ();
-//ig    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
-    void                    eraseAll ();
-    void                    removeItem (const Marble::GeoDataFeature* feature);
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonBox& box, int maxZoomLevel) const;
+                            GeoDataItemIcon ();
+                            GeoDataItemIcon (const Marble::GeoDataItemIcon& other);
+    ~GeoDataItemIcon ();
+    virtual const char*     nodeType () const;
+    enum ItemIconState
+    {
+        Open,
+        Closed,
+        Error,
+        Fetching0,
+        Fetching1,
+        Fetching2
+    };
+    typedef QFlags<Marble::GeoDataItemIcon::ItemIconState> ItemIconStates;
+    Marble::GeoDataItemIcon::ItemIconStates  state () const;
+    void                    setState (const Marble::GeoDataItemIcon::ItemIconStates& state);
+    QString                 iconPath () const;
+    void                    setIconPath (const QString& path);
+    QImage                  icon () const;
+    void                    setIcon (const QImage& icon);
 };
 };

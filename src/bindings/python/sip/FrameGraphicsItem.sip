@@ -30,7 +30,8 @@ public:
     {
         NoFrame,
         RectFrame,
-        RoundedRectFrame
+        RoundedRectFrame,
+        ShadowFrame
     };
     explicit                FrameGraphicsItem (Marble::MarbleGraphicsItem* parent = 0);
     virtual ~FrameGraphicsItem ();

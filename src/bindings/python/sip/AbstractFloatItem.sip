@@ -44,7 +44,6 @@ public:
     bool                    render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos = "FLOAT_ITEM", Marble::GeoSceneLayer* layer = 0);
     void                    setVisible (bool visible);
     bool                    visible () const;
-    bool                    positionLocked ();
     void                    show ();
     void                    hide ();
 protected:
@@ -55,6 +54,11 @@ public:
     explicit                AbstractFloatItem (const Marble::MarbleModel* marbleModel, const QPointF& point = QPointF(10.0,10.0), const QSizeF& size = QSizeF(150.0,50.0));
 protected:
     virtual void            changeViewport (Marble::ViewportParams* viewport);
+public:
+    virtual QHash<QString,QVariant>  settings () const;
+    virtual void            setSettings (const QHash<QString,QVariant>& settings);
+    virtual Marble::RenderPlugin::RenderType  renderType () const;
+    bool                    positionLocked () const;
 };
 // AbstractFloatItem
 

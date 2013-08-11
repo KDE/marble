@@ -42,6 +42,8 @@ public:
     void                    setIcon (const QImage& icon);
     QString                 iconPath () const;
 //ig    QPointF                 hotSpot (Marble::GeoDataHotSpot::Units& xunits, Marble::GeoDataHotSpot::Units& yunits) const;
+    int                     heading () const;
+    void                    setHeading (int heading);
 };
 // GeoDataIconStyle
 

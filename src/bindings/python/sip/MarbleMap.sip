@@ -149,6 +149,10 @@ public:
 //ig    const TextureLayer*     textureLayer () const;
     void                    setShowRuntimeTrace (bool visible);
     void                    downloadRegion (const QVector<Marble::TileCoordsPyramid>&);
+    bool                    isLockedToSubSolarPoint () const;
+    bool                    isSubSolarPointIconVisible () const;
+    void                    setLockToSubSolarPoint (bool visible);
+    void                    setSubSolarPointIconVisible (bool visible);
 };
 // MarbleMap
 

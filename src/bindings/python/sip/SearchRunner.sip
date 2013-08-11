@@ -19,20 +19,20 @@
 
 namespace Marble
 {
-class GeoGraphicsScene : QObject
+class SearchRunner : QObject
 {
 %TypeHeaderCode
-#include <GeoGraphicsScene.h>
+#include <SearchRunner.h>
 %End
 
 public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    clear ();
-//ig    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
-    void                    eraseAll ();
-    void                    removeItem (const Marble::GeoDataFeature* feature);
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonBox& box, int maxZoomLevel) const;
+    explicit                SearchRunner (QObject* parent /TransferThis/ = 0);
+    void                    setModel (const Marble::MarbleModel* model);
+    virtual void            search (const QString& searchTerm, const Marble::GeoDataLatLonAltBox& preferred)=0;
+signals:
+// FIXME
+//ig    void                    searchFinished (QVector<Marble::GeoDataPlacemark*> result);
+protected:
+    const Marble::MarbleModel*  model () const;
 };
 };

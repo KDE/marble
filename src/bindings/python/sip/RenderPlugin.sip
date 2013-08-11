@@ -62,6 +62,21 @@ public:
     QStringList             settingKeys ();
     bool                    setSetting (const QString& key, const QVariant& value);
     QVariant                setting (const QString& key);
+    enum RenderType
+    {
+        UnknownRenderType,
+        TopLevelRenderType,
+        PanelRenderType,
+        OnlineRenderType,
+        ThemeRenderType
+    };
+    virtual const QList<QActionGroup*>*  actionGroups () const;
+    virtual const QList<QActionGroup*>*  toolbarActionGroups () const;
+    bool                    isUserCheckable () const;
+    virtual Marble::RenderPlugin::RenderType  renderType () const;
+    void                    setUserCheckable (bool isUserCheckable);
+signals:
+    void                    userCheckableChanged (bool isUserCheckable);
 };
 // RenderPlugin
 

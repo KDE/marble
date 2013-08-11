@@ -42,6 +42,7 @@ public:
                             GeoDataColorStyle (const Marble::GeoDataColorStyle& other);
     virtual ~GeoDataColorStyle ();
     virtual const char*     nodeType () const;
+    QColor                  paintedColor () const;
 };
 // GeoDataColorStyle
 

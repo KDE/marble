@@ -31,7 +31,7 @@ public:
     void                    setDocumentType (const QString& documentType);
     void                    writeElement (const QString& namespaceUri, const QString& key, const QString& value);
     void                    writeElement (const QString& key, const QString& value);
-    void                    writeOptionalElement (const QString& key, const QString& value);
+    void                    writeOptionalElement (const QString& key, const QString& value, const QString& defaultValue = QString());
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QXmlStreamWriter'
     sipType = NULL;

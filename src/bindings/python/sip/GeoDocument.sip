@@ -60,7 +60,9 @@ protected:
         else if (dynamic_cast<Marble::GeoDataColorStyle*>(sipCpp))
             {
             sipType = sipType_Marble_GeoDataColorStyle;
-            if (dynamic_cast<Marble::GeoDataIconStyle*>(sipCpp))
+            if (dynamic_cast<Marble::GeoDataBalloonStyle*>(sipCpp))
+                sipType = sipType_Marble_GeoDataBalloonStyle;
+            else if (dynamic_cast<Marble::GeoDataIconStyle*>(sipCpp))
                 sipType = sipType_Marble_GeoDataIconStyle;
             else if (dynamic_cast<Marble::GeoDataLabelStyle*>(sipCpp))
                 sipType = sipType_Marble_GeoDataLabelStyle;
@@ -81,7 +83,11 @@ protected:
                     sipType = sipType_Marble_GeoDataFolder;
                 }
             else if (dynamic_cast<Marble::GeoDataOverlay*>(sipCpp))
+                {
                 sipType = sipType_Marble_GeoDataOverlay;
+                if (dynamic_cast<Marble::GeoDataGroundOverlay*>(sipCpp))
+                    sipType = sipType_Marble_GeoDataGroundOverlay;
+                }
             else if (dynamic_cast<Marble::GeoDataPlacemark*>(sipCpp))
                 sipType = sipType_Marble_GeoDataPlacemark;
             }
@@ -99,18 +105,28 @@ protected:
             else if (dynamic_cast<Marble::GeoDataPoint*>(sipCpp))
                 sipType = sipType_Marble_GeoDataPoint;
             else if (dynamic_cast<Marble::GeoDataPolygon*>(sipCpp))
+                {
                 sipType = sipType_Marble_GeoDataPolygon;
+                if (dynamic_cast<Marble::GeoDataInnerBoundary*>(sipCpp))
+                    sipType = sipType_Marble_GeoDataInnerBoundary;
+                else if (dynamic_cast<Marble::GeoDataOuterBoundary*>(sipCpp))
+                    sipType = sipType_Marble_GeoDataOuterBoundary;
+                }
             else if (dynamic_cast<Marble::GeoDataTrack*>(sipCpp))
                 sipType = sipType_Marble_GeoDataTrack;
             }
         else if (dynamic_cast<Marble::GeoDataHotSpot*>(sipCpp))
             sipType = sipType_Marble_GeoDataHotSpot;
+        else if (dynamic_cast<Marble::GeoDataItemIcon*>(sipCpp))
+            sipType = sipType_Marble_GeoDataItemIcon;
         else if (dynamic_cast<Marble::GeoDataLatLonBox*>(sipCpp))
             {
             sipType = sipType_Marble_GeoDataLatLonBox;
             if (dynamic_cast<Marble::GeoDataLatLonAltBox*>(sipCpp))
                 sipType = sipType_Marble_GeoDataLatLonAltBox;
             }
+        else if (dynamic_cast<Marble::GeoDataListStyle*>(sipCpp))
+            sipType = sipType_Marble_GeoDataListStyle;
         else if (dynamic_cast<Marble::GeoDataLod*>(sipCpp))
             sipType = sipType_Marble_GeoDataLod;
         else if (dynamic_cast<Marble::GeoDataRegion*>(sipCpp))
@@ -122,6 +138,14 @@ protected:
                 sipType = sipType_Marble_GeoDataStyle;
             else if (dynamic_cast<Marble::GeoDataStyleMap*>(sipCpp))
                 sipType = sipType_Marble_GeoDataStyleMap;
+            }
+        else if (dynamic_cast<Marble::GeoDataTimePrimitive*>(sipCpp))
+            {
+            sipType = sipType_Marble_GeoDataTimePrimitive;
+            if (dynamic_cast<Marble::GeoDataTimeSpan*>(sipCpp))
+                sipType = sipType_Marble_GeoDataTimeSpan;
+            else if (dynamic_cast<Marble::GeoDataTimeStamp*>(sipCpp))
+                sipType = sipType_Marble_GeoDataTimeStamp;
             }
         }
 %End
@@ -138,20 +162,24 @@ public:
 %ModuleHeaderCode
 //ctscc
 #include <GeoDataAbstractView.h>
+#include <GeoDataBalloonStyle.h>
 #include <GeoDataColorStyle.h>
 #include <GeoDataContainer.h>
 #include <GeoDataDocument.h>
 #include <GeoDataFeature.h>
 #include <GeoDataFolder.h>
 #include <GeoDataGeometry.h>
+#include <GeoDataGroundOverlay.h>
 #include <GeoDataHotSpot.h>
 #include <GeoDataIconStyle.h>
+#include <GeoDataItemIcon.h>
 #include <GeoDataLabelStyle.h>
 #include <GeoDataLatLonAltBox.h>
 #include <GeoDataLatLonBox.h>
 #include <GeoDataLineString.h>
 #include <GeoDataLineStyle.h>
 #include <GeoDataLinearRing.h>
+#include <GeoDataListStyle.h>
 #include <GeoDataLod.h>
 #include <GeoDataLookAt.h>
 #include <GeoDataMultiGeometry.h>
@@ -165,6 +193,9 @@ public:
 #include <GeoDataStyle.h>
 #include <GeoDataStyleMap.h>
 #include <GeoDataStyleSelector.h>
+#include <GeoDataTimePrimitive.h>
+#include <GeoDataTimeSpan.h>
+#include <GeoDataTimeStamp.h>
 #include <GeoDataTrack.h>
 #include <GeoDocument.h>
 %End

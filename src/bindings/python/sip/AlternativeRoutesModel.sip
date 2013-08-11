@@ -47,5 +47,6 @@ public:
     static QVector<qreal>   deviation (const Marble::GeoDataDocument* routeA, const Marble::GeoDataDocument* routeB);
 signals:
     void                    currentRouteChanged (Marble::GeoDataDocument* newRoute);
+    void                    currentRouteChanged (int index);
 };
 };

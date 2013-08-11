@@ -19,20 +19,29 @@
 
 namespace Marble
 {
-class GeoGraphicsScene : QObject
+class GeoDataTimeStamp : Marble::GeoDataTimePrimitive
 {
 %TypeHeaderCode
-#include <GeoGraphicsScene.h>
+#include <GeoDataTimeStamp.h>
 %End
 
 public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    clear ();
-//ig    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
-    void                    eraseAll ();
-    void                    removeItem (const Marble::GeoDataFeature* feature);
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonBox& box, int maxZoomLevel) const;
+    enum TimeResolution
+    {
+        SecondResolution,
+        DayResolution,
+        MonthResolution,
+        YearResolution
+    };
+                            GeoDataTimeStamp ();
+                            GeoDataTimeStamp (const Marble::GeoDataTimeStamp& other);
+    virtual ~GeoDataTimeStamp ();
+    virtual const char*     nodeType () const;
+    QDateTime               when () const;
+    void                    setWhen (const QDateTime& when);
+    void                    setResolution (Marble::GeoDataTimeStamp::TimeResolution resolution);
+    Marble::GeoDataTimeStamp::TimeResolution  resolution () const;
+    virtual void            pack (QDataStream& stream) const;
+    virtual void            unpack (QDataStream& stream);
 };
 };

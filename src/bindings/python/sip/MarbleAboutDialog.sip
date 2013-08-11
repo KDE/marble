@@ -29,6 +29,14 @@ public:
 
     ~MarbleAboutDialog ();
     void                    setApplicationTitle (const QString& title);
+    enum Tab
+    {
+        About,
+        Authors,
+        Data,
+        License
+    };
+    void                    setInitialTab (Marble::MarbleAboutDialog::Tab tab);
 };
 // MarbleAboutDialog
 

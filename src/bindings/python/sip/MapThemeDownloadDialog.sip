@@ -19,20 +19,14 @@
 
 namespace Marble
 {
-class GeoGraphicsScene : QObject
+class MapThemeDownloadDialog : QDialog
 {
 %TypeHeaderCode
-#include <GeoGraphicsScene.h>
+#include <MapThemeDownloadDialog.h>
 %End
 
 public:
-                            GeoGraphicsScene (QObject* parent /TransferThis/ = 0);
-    ~GeoGraphicsScene ();
-    void                    clear ();
-//ig    static int s_tileZoomLevel;
-    void                    addItem (Marble::GeoGraphicsItem* item);
-    void                    eraseAll ();
-    void                    removeItem (const Marble::GeoDataFeature* feature);
-    QList<Marble::GeoGraphicsItem*>  items (const Marble::GeoDataLatLonBox& box, int maxZoomLevel) const;
+    explicit                MapThemeDownloadDialog (Marble::MarbleWidget* marbleWidget);
+    ~MapThemeDownloadDialog ();
 };
 };
