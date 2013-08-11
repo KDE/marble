@@ -41,5 +41,6 @@ public:
     void                    setCoordinates (const Marble::GeoDataCoordinates& coordinates);
     virtual const char*     nodeType () const;
     void                    detach ();
+    Marble::GeoDataAbstractView*  copy () const;
 };
 };

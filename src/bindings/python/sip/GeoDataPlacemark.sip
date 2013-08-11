@@ -48,6 +48,10 @@ public:
     void                    setGeometry (Marble::GeoDataGeometry* entry);
     const QString           state () const;
     void                    setState (const QString& state);
+    void                    setCoordinate (qreal longitude, qreal latitude, qreal altitude = 0, Marble::GeoDataCoordinates::Unit _unit = Marble::GeoDataCoordinates::Radian);
+    void                    setCoordinate (const Marble::GeoDataCoordinates& coordinate);
+    const Marble::GeoDataLookAt*  lookAt () const;
+//ig    Marble::GeoDataLookAt*  lookAt ();
 };
 // GeoDataPlacemark
 

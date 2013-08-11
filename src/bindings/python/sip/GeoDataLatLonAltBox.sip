@@ -46,10 +46,14 @@ public:
     virtual const char*     nodeType () const;
     virtual Marble::GeoDataCoordinates  center () const;
     virtual void            clear ();
+                            GeoDataLatLonAltBox (const Marble::GeoDataLatLonBox& other, qreal minAltitude, qreal maxAltitude);
+    explicit                GeoDataLatLonAltBox (const Marble::GeoDataCoordinates& coordinates);
+//ig    uint                    qHash (const Marble::GeoDataLatLonAltBox&);
 };
 // GeoDataLatLonAltBox
 
 //ig bool                    operator == (const Marble::GeoDataLatLonAltBox& lhs, const Marble::GeoDataLatLonAltBox& rhs);
+//ig uint                    qHash (const Marble::GeoDataLatLonAltBox& r);
 };
 // Marble
 

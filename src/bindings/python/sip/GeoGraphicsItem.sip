@@ -28,7 +28,7 @@ class GeoGraphicsItem
 %End
 
 public:
-    GeoGraphicsItem (const Marble::GeoDataFeature *x);
+                            GeoGraphicsItem (const Marble::GeoDataFeature* feature);
     virtual ~GeoGraphicsItem ();
     enum GeoGraphicsItemFlag
     {
@@ -54,6 +54,8 @@ public:
     virtual void            paint (Marble::GeoPainter* painter, const Marble::ViewportParams* viewport)=0;
 protected:
 //ig    GeoGraphicsItemPrivate*  p () const;
+public:
+    const Marble::GeoDataFeature*  feature () const;
 };
 // GeoGraphicsItem
 

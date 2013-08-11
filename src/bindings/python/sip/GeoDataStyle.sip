@@ -42,6 +42,12 @@ public:
     virtual void            unpack (QDataStream& stream);
     virtual const char*     nodeType () const;
                             GeoDataStyle (const QImage& icon, const QFont& font, const QColor& color);
+    void                    setBalloonStyle (const Marble::GeoDataBalloonStyle& style);
+//ig    Marble::GeoDataBalloonStyle&  balloonStyle ();
+    const Marble::GeoDataBalloonStyle&  balloonStyle () const;
+    void                    setListStyle (const Marble::GeoDataListStyle& style);
+//ig    Marble::GeoDataListStyle&  listStyle ();
+    const Marble::GeoDataListStyle&  listStyle () const;
 };
 // GeoDataStyle
 

@@ -40,6 +40,7 @@ public:
 
     virtual Marble::GeoDataObject*  parent () const;
     virtual void            setParent (Marble::GeoDataObject* parent);
+    QString                 resolvePath (const QString& relativePath) const;
 };
 // GeoDataObject
 
