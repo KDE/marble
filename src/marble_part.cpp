@@ -1373,11 +1373,12 @@ void MarblePart::editSettings()
     QWidget                      *w_cacheSettings = new QWidget( 0 );
 
     w_cacheSettings->setObjectName( "cache_page" );
+    ui_cacheSettings.setupUi( w_cacheSettings );
     m_configDialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ),
                              "preferences-web-browser-cache" );
-    connect( ui_cacheSettings.button_clearVolatileCache, SIGNAL(clearVolatileCache()),
+    connect( ui_cacheSettings.button_clearVolatileCache, SIGNAL(clicked()),
              m_controlView->marbleWidget(), SLOT(clearVolatileTileCache()) );
-    connect( ui_cacheSettings.button_clearPersistentCache, SIGNAL(clearPersistentCache()),
+    connect( ui_cacheSettings.button_clearPersistentCache, SIGNAL(clicked()),
              m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
 
     // time page
