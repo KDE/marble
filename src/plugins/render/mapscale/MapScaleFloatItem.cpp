@@ -23,7 +23,7 @@
 #include "ui_MapScaleConfigWidget.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
-#include "Projections/AbstractProjection.h"
+#include "projections/AbstractProjection.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "ViewportParams.h"

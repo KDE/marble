@@ -8,7 +8,7 @@ endif (QTONLY)
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
- ${CMAKE_CURRENT_SOURCE_DIR}/Projections
+ ${CMAKE_CURRENT_SOURCE_DIR}/projections
  ${CMAKE_CURRENT_SOURCE_DIR}/routing
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
@@ -110,11 +110,11 @@ set(marblewidget_SRCS
     MapThemeManager.cpp
     ViewportParams.cpp
     ViewParams.cpp
-    Projections/AbstractProjection.cpp
-	Projections/CylindricalProjection.cpp
-    Projections/SphericalProjection.cpp
-    Projections/EquirectProjection.cpp
-    Projections/MercatorProjection.cpp
+    projections/AbstractProjection.cpp
+	projections/CylindricalProjection.cpp
+    projections/SphericalProjection.cpp
+    projections/EquirectProjection.cpp
+    projections/MercatorProjection.cpp
     VisiblePlacemark.cpp
     PlacemarkLayout.cpp
     Planet.cpp
@@ -358,11 +358,11 @@ else (APPLE AND QTONLY)
     GeoPainter.h
     TileCreatorDialog.h
     ViewportParams.h
-    Projections/AbstractProjection.h
-	Projections/CylindricalProjection.h
-    Projections/SphericalProjection.h
-    Projections/EquirectProjection.h
-    Projections/MercatorProjection.h
+    projections/AbstractProjection.h
+	projections/CylindricalProjection.h
+    projections/SphericalProjection.h
+    projections/EquirectProjection.h
+    projections/MercatorProjection.h
     PositionTracking.h
     Quaternion.h
     SunLocator.h
