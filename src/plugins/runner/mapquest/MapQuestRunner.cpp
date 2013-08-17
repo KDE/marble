@@ -52,7 +52,7 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
 
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["mapquest"];
 
-    QString url = "http://open.mapquestapi.com/directions/v0/route?callback=renderAdvancedNarrative&outFormat=xml&narrativeType=text&shapeFormat=raw&generalize=0";
+    QString url = "http://open.mapquestapi.com/directions/v1/route?callback=renderAdvancedNarrative&outFormat=xml&narrativeType=text&shapeFormat=raw&generalize=0";
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     append( &url, "from", QString::number( route->source().latitude( degree ), 'f', 6 ) + ',' + QString::number( route->source().longitude( degree ), 'f', 6 ) );
     for ( int i=1; i<route->size(); ++i ) {
