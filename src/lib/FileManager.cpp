@@ -206,7 +206,10 @@ void FileManagerPrivate::cleanupLoader( FileLoader* loader )
     if ( m_loaderList.isEmpty()  )
     {
         mDebug() << "Finished loading all placemarks " << m_timer.elapsed();
-        emit q->centeredDocument( m_latLonBox );
+
+        if ( !m_latLonBox.isEmpty() ) {
+            emit q->centeredDocument( m_latLonBox );
+        }
         m_latLonBox.clear();
     }
 }
