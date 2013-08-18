@@ -35,8 +35,7 @@ class FileManagerPrivate
 public:
     FileManagerPrivate( MarbleModel* model, FileManager* parent )
         : m_model( model ),
-          q( parent ),
-          m_recenter( false )
+          q( parent )
     {
     }
 
@@ -58,7 +57,7 @@ public:
     FileManager * const q;
     QList<FileLoader*> m_loaderList;
     QHash < QString, GeoDataDocument* > m_fileItemHash;
-    bool m_recenter;
+    GeoDataLatLonBox m_latLonBox;
     QTime m_timer;
 };
 }
@@ -89,8 +88,7 @@ void FileManager::addFile( const QString& filepath, const QString& property, Geo
     mDebug() << "adding container:" << filepath;
     mDebug() << "Starting placemark loading timer";
     d->m_timer.start();
-    d->m_recenter = recenter;
-    FileLoader* loader = new FileLoader( this, d->m_model, filepath, property, style, role );
+    FileLoader* loader = new FileLoader( this, d->m_model, recenter, filepath, property, style, role );
     d->appendLoader( loader );
 }
 
@@ -191,9 +189,8 @@ void FileManagerPrivate::cleanupLoader( FileLoader* loader )
             m_model->treeModel()->addDocument( doc );
             m_fileItemHash.insert( loader->path(), doc );
             emit q->fileAdded( loader->path() );
-            if( m_recenter ) {
-                emit q->centeredDocument( doc->latLonAltBox() );
-                m_recenter = false;
+            if( loader->recenter() ) {
+                m_latLonBox |= doc->latLonAltBox();
             }
         }
         if ( !loader->error().isEmpty() ) {
@@ -209,6 +206,11 @@ void FileManagerPrivate::cleanupLoader( FileLoader* loader )
     if ( m_loaderList.isEmpty()  )
     {
         mDebug() << "Finished loading all placemarks " << m_timer.elapsed();
+
+        if ( !m_latLonBox.isEmpty() ) {
+            emit q->centeredDocument( m_latLonBox );
+        }
+        m_latLonBox.clear();
     }
 }
 

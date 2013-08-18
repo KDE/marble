@@ -39,10 +39,11 @@ namespace Marble
 class FileLoaderPrivate
 {
 public:
-    FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
+    FileLoaderPrivate( FileLoader* parent, MarbleModel *model, bool recenter,
                        const QString& file, const QString& property, GeoDataStyle* style, DocumentRole role )
         : q( parent),
           m_runner( model->pluginManager() ),
+          m_recenter( recenter ),
           m_filepath ( file ),
           m_property( property ),
           m_style( style ),
@@ -61,6 +62,7 @@ public:
                        const QString& contents, const QString& file, DocumentRole role )
         : q( parent ),
           m_runner( model->pluginManager() ),
+          m_recenter( false ),
           m_filepath ( file ),
           m_contents ( contents ),
           m_documentRole ( role ),
@@ -85,6 +87,7 @@ public:
 
     FileLoader *q;
     MarbleRunnerManager m_runner;
+    bool m_recenter;
     QString m_filepath;
     QString m_contents;
     QString m_nonExistentLocalCacheFile;
@@ -98,10 +101,10 @@ public:
     const MarbleClock *m_clock;
 };
 
-FileLoader::FileLoader( QObject* parent, MarbleModel *model,
+FileLoader::FileLoader( QObject* parent, MarbleModel *model, bool recenter,
                        const QString& file, const QString& property, GeoDataStyle* style = new GeoDataStyle(), DocumentRole role = UnknownDocument )
     : QThread( parent ),
-      d( new FileLoaderPrivate( this, model, file, property, style, role ) )
+      d( new FileLoaderPrivate( this, model, recenter, file, property, style, role ) )
 {
 }
 
@@ -228,6 +231,11 @@ void FileLoader::run()
         emit loaderFinished( this );
     }
 
+}
+
+bool FileLoader::recenter() const
+{
+    return d->m_recenter;
 }
 
 const quint32 MarbleMagicNumber = 0x31415926;
