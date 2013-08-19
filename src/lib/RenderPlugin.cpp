@@ -184,16 +184,16 @@ QHash<QString,QVariant> RenderPlugin::settings() const
 {
     QHash<QString,QVariant> result;
 
-    result.insert( "enabled", enabled() );
-    result.insert( "visible", visible() );
+    result.insert( "enabled", d->m_enabled );
+    result.insert( "visible", d->m_visible );
 
     return result;
 }
 
 void RenderPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
-    setEnabled( settings.value( "enabled", enabled() ).toBool() );
-    setVisible( settings.value( "visible", visible() ).toBool() );
+    setEnabled( settings.value( "enabled", d->m_enabled ).toBool() );
+    setVisible( settings.value( "visible", d->m_visible ).toBool() );
 }
 
 RenderPlugin::RenderType RenderPlugin::renderType() const
