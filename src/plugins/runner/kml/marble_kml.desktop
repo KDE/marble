@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 TryExec=marble
-Exec=marble
+Exec=marble %F
 Name=Marble
 Name[ast]=Marble
 Name[bg]=Marble
