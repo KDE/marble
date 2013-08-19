@@ -61,6 +61,8 @@ public:
         return m_controlView->marbleWidget();
     }
 
+    void addGeoDataFile( const QString &fileName );
+
 #ifdef Q_WS_MAEMO_5
     Orientation orientation() const;
 #endif
@@ -242,6 +244,7 @@ private:
     RoutingWidget *m_routingWidget;
 
     QString m_lastFileOpenPath;
+    QStringList m_commandlineFilePaths;
 };
 
 } // namespace Marble

@@ -251,7 +251,7 @@ int main(int argc, char *argv[])
             window->marbleControl()->marbleWidget()->setShowRuntimeTrace( true );
         }
         else if ( i != dataPathIndex && QFile::exists( arg ) )
-            ( window->marbleControl() )->addGeoDataFile( arg );
+            window->addGeoDataFile( arg );
     }
 
     return app.exec();

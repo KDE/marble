@@ -167,11 +167,28 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
                               Q_ARG(QVariantMap, cmdLineSettings));
 }
 
+void MainWindow::addGeoDataFile( const QString &fileName )
+{
+    QFileInfo file( fileName );
+
+    if ( !file.exists() )
+        return;
+
+    // delay file loading to initObject(), such that restoring view from previous session in readSettings()
+    // doesn't interfere with focusing on these files
+    m_commandlineFilePaths << file.absoluteFilePath();
+}
+
 void MainWindow::initObject(const QVariantMap& cmdLineSettings)
 {
     QCoreApplication::processEvents ();
     setupStatusBar();
     readSettings(cmdLineSettings);
+
+    foreach ( const QString &path, m_commandlineFilePaths ) {
+        m_controlView->marbleModel()->addGeoDataFile( path );
+    }
+    m_commandlineFilePaths.clear();
 }
 
 void MainWindow::createActions()
