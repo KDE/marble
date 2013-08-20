@@ -127,7 +127,7 @@ QList<T*> MarbleRunnerManagerPrivate::plugins( const QList<T*> &plugins )
 void MarbleRunnerManagerPrivate::cleanupSearchTask( SearchTask* task )
 {
     m_searchTasks.removeAll( task );
-    mDebug() << "removing search task" << m_searchTasks.size() << (long)task;
+    mDebug() << "removing search task" << m_searchTasks.size() << (quintptr)task;
     if ( m_searchTasks.isEmpty() ) {
         if( m_placemarkContainer.isEmpty() ) {
             emit q->searchResultChanged( &m_model );
@@ -141,7 +141,7 @@ void MarbleRunnerManagerPrivate::cleanupSearchTask( SearchTask* task )
 void MarbleRunnerManagerPrivate::cleanupReverseGeocodingTask( ReverseGeocodingTask* task )
 {
     m_reverseTasks.removeAll( task );
-    mDebug() << "removing task " << m_reverseTasks.size() << " " << (long)task;
+    mDebug() << "removing task " << m_reverseTasks.size() << " " << (quintptr)task;
     if ( m_reverseTasks.isEmpty() ) {
         emit q->reverseGeocodingFinished();
     }
@@ -150,7 +150,7 @@ void MarbleRunnerManagerPrivate::cleanupReverseGeocodingTask( ReverseGeocodingTa
 void MarbleRunnerManagerPrivate::cleanupRoutingTask( RoutingTask* task )
 {
     m_routingTasks.removeAll( task );
-    mDebug() << "removing task " << m_routingTasks.size() << " " << (long)task;
+    mDebug() << "removing task " << m_routingTasks.size() << " " << (quintptr)task;
     if ( m_routingTasks.isEmpty() ) {
         if ( m_routingResult.isEmpty() ) {
             emit q->routeRetrieved( 0 );
@@ -163,7 +163,7 @@ void MarbleRunnerManagerPrivate::cleanupRoutingTask( RoutingTask* task )
 void MarbleRunnerManagerPrivate::cleanupParsingTask( ParsingTask* task )
 {
     m_parsingTasks.removeAll( task );
-    mDebug() << "removing task " << m_parsingTasks.size() << " " << (long)task;
+    mDebug() << "removing task " << m_parsingTasks.size() << " " << (quintptr)task;
 
     if ( m_parsingTasks.isEmpty() ) {
         emit q->parsingFinished();
@@ -215,7 +215,7 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
         SearchTask* task = new SearchTask( plugin->newRunner(), this, d->m_marbleModel, searchTerm, preferred );
         connect( task, SIGNAL(finished(SearchTask*)), this, SLOT(cleanupSearchTask(SearchTask*)) );
         d->m_searchTasks << task;
-        mDebug() << "search task " << plugin->nameId() << " " << (long)task;
+        mDebug() << "search task " << plugin->nameId() << " " << (quintptr)task;
     }
 
     foreach( SearchTask* task, d->m_searchTasks ) {
@@ -286,7 +286,7 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
     foreach( const ReverseGeocodingRunnerPlugin* plugin, plugins ) {
         ReverseGeocodingTask* task = new ReverseGeocodingTask( plugin->newRunner(), this, d->m_marbleModel, coordinates );
         connect( task, SIGNAL(finished(ReverseGeocodingTask*)), this, SLOT(cleanupReverseGeocodingTask(ReverseGeocodingTask*)) );
-        mDebug() << "reverse task " << plugin->nameId() << " " << (long)task;
+        mDebug() << "reverse task " << plugin->nameId() << " " << (quintptr)task;
         d->m_reverseTasks << task;
     }
 
@@ -345,7 +345,7 @@ void MarbleRunnerManager::retrieveRoute( const RouteRequest *request )
 
         RoutingTask* task = new RoutingTask( plugin->newRunner(), this, d->m_marbleModel, request );
         connect( task, SIGNAL(finished(RoutingTask*)), this, SLOT(cleanupRoutingTask(RoutingTask*)) );
-        mDebug() << "route task " << plugin->nameId() << " " << (long)task;
+        mDebug() << "route task " << plugin->nameId() << " " << (quintptr)task;
         d->m_routingTasks << task;
     }
 
@@ -395,7 +395,7 @@ void MarbleRunnerManager::parseFile( const QString &fileName, DocumentRole role 
         if ( extensions.isEmpty() || extensions.contains( suffix ) || extensions.contains( completeSuffix ) ) {
             ParsingTask *task = new ParsingTask( plugin->newRunner(), this, fileName, role );
             connect( task, SIGNAL(finished(ParsingTask*)), this, SLOT(cleanupParsingTask(ParsingTask*)) );
-            mDebug() << "parse task " << plugin->nameId() << " " << (long)task;
+            mDebug() << "parse task " << plugin->nameId() << " " << (quintptr)task;
             d->m_parsingTasks << task;
         }
     }
