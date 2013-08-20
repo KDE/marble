@@ -150,8 +150,8 @@ GeoDataLineString *OSRMRunner::decodePolyline( const QString &geometry ) const
             } while ( block >= 0x20 );
             coordinates[j] += ( ( result & 1 ) != 0 ? ~( result >> 1 ) : ( result >> 1 ) );
         }
-        lineString->append( GeoDataCoordinates( double( coordinates[1] ) / 1E5,
-                                                double( coordinates[0] ) / 1E5,
+        lineString->append( GeoDataCoordinates( double( coordinates[1] ) / 1E6,
+                                                double( coordinates[0] ) / 1E6,
                                                 0.0, GeoDataCoordinates::Degree ) );
     }
     return lineString;
