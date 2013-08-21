@@ -20,6 +20,8 @@ using namespace Marble;
 
 #include "MarbleLegendBrowser.h"
 
+#include <QNetworkAccessManager>
+
 namespace Marble
 {
 
@@ -28,6 +30,7 @@ class LegendWidgetPrivate
  public:
     LegendWidgetPrivate(LegendWidget *myself);
     Ui::LegendWidget    m_legendUi;
+    QNetworkAccessManager m_networkAccessManager;
     MarbleLegendBrowser *m_marbleLegendBrowser;
 };
 
@@ -36,6 +39,10 @@ LegendWidgetPrivate::LegendWidgetPrivate(LegendWidget *myself)
     m_legendUi.setupUi( myself );
     m_marbleLegendBrowser = new MarbleLegendBrowser(myself);
     m_legendUi.verticalLayout->addWidget(m_marbleLegendBrowser);
+
+    // prevent triggering of network requests under Maemo, presumably due to qrc: URLs
+    m_networkAccessManager.setNetworkAccessible( QNetworkAccessManager::NotAccessible );
+    m_marbleLegendBrowser->page()->setNetworkAccessManager( &m_networkAccessManager );
 }
 
 LegendWidget::LegendWidget( QWidget *parent, Qt::WindowFlags f )
