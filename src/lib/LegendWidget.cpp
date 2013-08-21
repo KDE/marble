@@ -25,31 +25,28 @@ using namespace Marble;
 namespace Marble
 {
 
-class LegendWidgetPrivate
+class LegendWidgetPrivate : public Ui::LegendWidget
 {
  public:
-    LegendWidgetPrivate(LegendWidget *myself);
-    Ui::LegendWidget    m_legendUi;
+    LegendWidgetPrivate();
+
     QNetworkAccessManager m_networkAccessManager;
-    MarbleLegendBrowser *m_marbleLegendBrowser;
 };
 
-LegendWidgetPrivate::LegendWidgetPrivate(LegendWidget *myself)
+LegendWidgetPrivate::LegendWidgetPrivate()
 {
-    m_legendUi.setupUi( myself );
-    m_marbleLegendBrowser = new MarbleLegendBrowser(myself);
-    m_legendUi.verticalLayout->addWidget(m_marbleLegendBrowser);
-
-    // prevent triggering of network requests under Maemo, presumably due to qrc: URLs
-    m_networkAccessManager.setNetworkAccessible( QNetworkAccessManager::NotAccessible );
-    m_marbleLegendBrowser->page()->setNetworkAccessManager( &m_networkAccessManager );
 }
 
 LegendWidget::LegendWidget( QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
-      d( new LegendWidgetPrivate(this) )
+      d( new LegendWidgetPrivate )
 {
+    d->setupUi( this );
     layout()->setMargin( 0 );
+
+    // prevent triggering of network requests under Maemo, presumably due to qrc: URLs
+    d->m_networkAccessManager.setNetworkAccessible( QNetworkAccessManager::NotAccessible );
+    d->m_marbleLegendBrowser->page()->setNetworkAccessManager( &d->m_networkAccessManager );
 }
 
 LegendWidget::~LegendWidget()

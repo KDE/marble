@@ -13,8 +13,25 @@
   <property name="windowTitle">
    <string>Legend</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout"/>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="MarbleLegendBrowser" name="m_marbleLegendBrowser">
+     <property name="url">
+      <url>
+       <string>about:blank</string>
+      </url>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MarbleLegendBrowser</class>
+   <extends>QWebView</extends>
+   <header>MarbleLegendBrowser.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
