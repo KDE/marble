@@ -433,7 +433,7 @@ void MapWizard::createLegendFile()
     
     QFile html( QString( "%1/legend.html" ).arg( map.absolutePath() ) );
     html.open( QIODevice::ReadWrite );
-    html.write( d->legendHtml.toAscii().data() );
+    html.write( d->legendHtml.toLatin1().data() );
     html.close();
 }
 

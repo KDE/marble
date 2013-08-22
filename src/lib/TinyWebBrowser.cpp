@@ -107,7 +107,7 @@ QByteArray TinyWebBrowser::userAgent(const QString &platform, const QString &com
 {
     QString result( "Mozilla/5.0 (compatible; Marble/%1; %2; %3)" );
     result = result.arg( MARBLE_VERSION_STRING, platform, component);
-    return result.toAscii();
+    return result.toLatin1();
 }
 
 

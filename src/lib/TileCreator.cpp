@@ -327,7 +327,7 @@ void TileCreator::run()
                                                 Qt::ThresholdDither);
                 }
 
-                bool  ok = tile.save( tileName, d->m_tileFormat.toAscii().data(), d->m_tileFormat == "jpg" ? 100 : d->m_tileQuality );
+                bool  ok = tile.save( tileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == "jpg" ? 100 : d->m_tileQuality );
                 if ( !ok )
                     mDebug() << "Error while writing Tile: " << tileName;
 
@@ -511,7 +511,7 @@ void TileCreator::run()
 
                     // Saving at 100% JPEG quality to have a high-quality
                     // version to create the remaining needed tiles from.
-                    bool  ok = tile.save( newTileName, d->m_tileFormat.toAscii().data(), d->m_tileFormat == "jpg" ? 100 : d->m_tileQuality );
+                    bool  ok = tile.save( newTileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == "jpg" ? 100 : d->m_tileQuality );
                     if ( ! ok )
                         mDebug() << "Error while writing Tile: " << newTileName;
                 }
@@ -554,7 +554,7 @@ void TileCreator::run()
 
                     bool ok;
 
-                    ok = tile.save( tileName, d->m_tileFormat.toAscii().data(), d->m_tileQuality );
+                    ok = tile.save( tileName, d->m_tileFormat.toLatin1().data(), d->m_tileQuality );
 
                     if ( !ok )
                         mDebug() << "Error while writing Tile: " << tileName;

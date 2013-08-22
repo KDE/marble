@@ -241,15 +241,15 @@ qreal AprsGatherer::calculateLongitude( const QString &threeBytes, int offset,
                                          bool isEast )
 {
     // otherwise known as "fun with funky encoding"
-    qreal hours = threeBytes[0].toAscii() - 28 + offset;
+    qreal hours = threeBytes[0].toLatin1() - 28 + offset;
     if ( 180 <= hours && hours <= 189 )
         hours -= 80;
     if ( 190 <= hours && hours <= 199 )
         hours -= 190;
 
     hours +=
-        ( qreal( (threeBytes[1].toAscii() - 28 ) % 60 ) + 
-          ( qreal( threeBytes[2].toAscii() - 28 ) ) / 100 ) / 60.0;
+        ( qreal( (threeBytes[1].toLatin1() - 28 ) % 60 ) + 
+          ( qreal( threeBytes[2].toLatin1() - 28 ) ) / 100 ) / 60.0;
 
     if ( ! isEast )
         hours = -hours;
