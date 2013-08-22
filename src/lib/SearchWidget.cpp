@@ -179,7 +179,7 @@ void SearchWidgetPrivate::centerMapOn( const QModelIndex &index )
         return;
     }
     GeoDataObject *object
-            = qVariantValue<GeoDataObject*>( index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole ) );
+            = index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
     if ( placemark ) {
         m_widget->centerOn( *placemark, true );

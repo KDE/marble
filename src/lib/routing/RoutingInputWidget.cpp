@@ -479,7 +479,7 @@ void RoutingInputWidget::updateCenterButton( bool hasPosition )
 void RoutingInputWidget::setBookmarkPosition( QAction* bookmark )
 {
     if ( !bookmark->data().isNull() ) {
-        setTargetPosition( qVariantValue<GeoDataCoordinates>( bookmark->data() ) );
+        setTargetPosition( bookmark->data().value<GeoDataCoordinates>() );
         requestActivity();
     }
 }

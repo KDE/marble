@@ -58,7 +58,7 @@ private:
     T readField( Field field, const QStringList &fields, const T &defaultValue = T() ) const {
         int index = m_fieldIndices[field];
         if ( index >= 0 && index < fields.size() ) {
-            return qVariantValue<T>( QVariant( fields[index] ) );
+            return QVariant( fields[index] ).value<T>();
         }
 
         return defaultValue;

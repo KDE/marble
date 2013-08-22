@@ -406,7 +406,7 @@ void RoutingWidget::activateItem ( const QModelIndex &index )
     if ( d->m_activeInput && index.isValid() ) {
         QVariant data = index.data( MarblePlacemarkModel::CoordinateRole );
         if ( !data.isNull() ) {
-            d->m_activeInput->setTargetPosition( qVariantValue<GeoDataCoordinates>( data), index.data().toString() );
+            d->m_activeInput->setTargetPosition( data.value<GeoDataCoordinates>(), index.data().toString() );
         }
     }
 }
@@ -432,7 +432,7 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
     for ( int i = 0; i < model->rowCount(); ++i ) {
         QVariant data = model->index( i, 0 ).data( MarblePlacemarkModel::CoordinateRole );
         if ( !data.isNull() ) {
-            placemarks << qVariantValue<GeoDataCoordinates>( data );
+            placemarks << data.value<GeoDataCoordinates>();
         }
     }
 
@@ -458,7 +458,7 @@ void RoutingWidget::activatePlacemark( const QModelIndex &index )
     if ( d->m_activeInput && index.isValid() ) {
         QVariant data = index.data( MarblePlacemarkModel::CoordinateRole );
         if ( !data.isNull() ) {
-            d->m_activeInput->setTargetPosition( qVariantValue<GeoDataCoordinates>( data) );
+            d->m_activeInput->setTargetPosition( data.value<GeoDataCoordinates>() );
         }
     }
 

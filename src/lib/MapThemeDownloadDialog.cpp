@@ -116,7 +116,7 @@ void MapItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opti
 
     // Draw the map preview icon
     QRect const iconRect = position( Icon, option );
-    QIcon const icon = qVariantValue<QIcon>( index.data( Qt::DecorationRole ) );
+    QIcon const icon = index.data( Qt::DecorationRole ).value<QIcon>();
     painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
 
     // Draw summary, author, and similar information
@@ -134,8 +134,8 @@ void MapItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opti
 
     // Draw buttons and installation progress
     if ( index.data( NewstuffModel::IsTransitioning ).toBool() ) {
-        qint64 total = qMax( qint64( 1 ), qVariantValue<qint64>( index.data( NewstuffModel::PayloadSize ) ) );
-        qint64 progress = qVariantValue<qint64>( index.data( NewstuffModel::DownloadedSize ) );
+        qint64 total = qMax( qint64( 1 ), index.data( NewstuffModel::PayloadSize ).value<qint64>() );
+        qint64 progress = index.data( NewstuffModel::DownloadedSize ).value<qint64>();
 
         QStyleOptionProgressBar progressBarOption;
         progressBarOption.rect = position( ProgressReport, option );

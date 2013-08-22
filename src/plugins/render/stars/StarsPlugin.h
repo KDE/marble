@@ -194,7 +194,7 @@ private:
             return defaultValue;
         }
 
-        return qVariantValue<T>( settings[key] );
+        return settings[key].value<T>();
     }
 
     void prepareNames();

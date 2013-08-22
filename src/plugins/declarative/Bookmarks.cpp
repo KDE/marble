@@ -162,7 +162,7 @@ qreal BookmarksModel::longitude( int idx )
 {
     if ( idx >= 0 && idx < rowCount() ) {
         QVariant const value = data( index( idx, 0 ), Marble::MarblePlacemarkModel::CoordinateRole );
-        Marble::GeoDataCoordinates const coordinates = qVariantValue<Marble::GeoDataCoordinates>( value );
+        Marble::GeoDataCoordinates const coordinates = value.value<Marble::GeoDataCoordinates>();
         return coordinates.longitude( Marble::GeoDataCoordinates::Degree );
     }
     return 0.0;
@@ -172,7 +172,7 @@ qreal BookmarksModel::latitude( int idx )
 {
     if ( idx >= 0 && idx < rowCount() ) {
         QVariant const value = data( index( idx, 0 ), Marble::MarblePlacemarkModel::CoordinateRole );
-        Marble::GeoDataCoordinates const coordinates = qVariantValue<Marble::GeoDataCoordinates>( value );
+        Marble::GeoDataCoordinates const coordinates = value.value<Marble::GeoDataCoordinates>();
         return coordinates.latitude( Marble::GeoDataCoordinates::Degree );
     }
     return 0.0;

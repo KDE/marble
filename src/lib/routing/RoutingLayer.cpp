@@ -210,9 +210,9 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
         QModelIndex index = m_placemarkModel->index( i, 0 );
         QVariant data = index.data( MarblePlacemarkModel::CoordinateRole );
         if ( index.isValid() && !data.isNull() ) {
-            GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( data );
+            GeoDataCoordinates pos = data.value<GeoDataCoordinates>();
 
-            QPixmap pixmap = qVariantValue<QPixmap>( index.data( Qt::DecorationRole ) );
+            QPixmap pixmap = index.data( Qt::DecorationRole ).value<QPixmap>();
             if ( !pixmap.isNull() && m_selectionModel->isSelected( index ) ) {
                 QIcon selected = QIcon( pixmap );
                 QPixmap result = selected.pixmap( m_pixmapSize, QIcon::Selected, QIcon::On );
@@ -313,7 +313,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     m_instructionRegions.clear();
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i, 0 );
-        GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
+        GeoDataCoordinates pos = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
 
         painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
         if ( m_selectionModel && m_selectionModel->selection().contains( index ) ) {
@@ -364,7 +364,7 @@ void RoutingLayerPrivate::renderAnnotations( GeoPainter *painter )
 
         if ( m_selectionModel->selection().contains( index ) ) {
             bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-            GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
+            GeoDataCoordinates pos = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
             painter->setPen( QColor( Qt::black ) );
             painter->setBrush( QBrush( Oxygen::sunYellow6 ) );
             painter->drawAnnotation( pos, index.data().toString(), QSize( smallScreen ? 240 : 120, 0 ), 10, 30, 5, 5 );

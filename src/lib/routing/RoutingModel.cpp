@@ -101,7 +101,7 @@ void RoutingModelPrivate::importPlacemark( RouteSegment &outline, QVector<RouteS
                 // The enum value is converted to/from an int in the QVariant
                 // because only a limited set of data types can be serialized with QVariant's
                 // toString() method (which is used to serialize <ExtendedData>/<Data> values)
-                maneuver.setDirection( Maneuver::Direction( qVariantValue<int>( turnType ) ) );
+                maneuver.setDirection( Maneuver::Direction( turnType.toInt() ) );
             }
 
             if ( placemark->extendedData().contains( "roadName" ) ) {

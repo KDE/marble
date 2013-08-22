@@ -66,7 +66,7 @@ void SearchInputWidget::centerOnSearchSuggestion(const QModelIndex &index )
 {
     QAbstractItemModel const * model = completer()->completionModel();
     QVariant const value = model->data( index, MarblePlacemarkModel::CoordinateRole );
-    GeoDataCoordinates const coordinates = qVariantValue<GeoDataCoordinates>( value );
+    GeoDataCoordinates const coordinates = value.value<GeoDataCoordinates>();
     emit centerOn( coordinates );
 }
 

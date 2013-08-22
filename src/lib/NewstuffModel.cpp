@@ -254,7 +254,7 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
 
         QVariant const size = reply->header( QNetworkRequest::ContentLengthHeader );
         if ( size.isValid() ) {
-            qint64 length = qVariantValue<qint64>( size );
+            qint64 length = size.value<qint64>();
             for ( int i=0; i<m_items.size(); ++i ) {
                 NewstuffItem &item = m_items[i];
                 if ( item.m_payloadUrl == reply->url() ) {

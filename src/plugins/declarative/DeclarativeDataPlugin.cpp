@@ -354,7 +354,7 @@ void DeclarativeDataPlugin::setDeclarativeModel( const QVariant &model )
     d->m_model = model;
     d->m_items.clear();
 
-    QObject* object = qVariantValue<QObject*>( model );
+    QObject* object = model.value<QObject*>();
     if( qobject_cast< QAbstractListModel* >( object ) ) {
         d->parseListModel( qobject_cast< QAbstractListModel *>( object ) );
     } else {
