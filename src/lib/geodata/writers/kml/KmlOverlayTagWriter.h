@@ -13,6 +13,8 @@
 
 #include "GeoTagWriter.h"
 
+#include <QString>
+
 namespace Marble
 {
 

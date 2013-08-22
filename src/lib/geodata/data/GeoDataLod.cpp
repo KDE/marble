@@ -12,6 +12,7 @@
 #include "GeoDataLod.h"
 #include "GeoDataLod_p.h"
 
+#include <QDataStream>
 
 namespace Marble
 {

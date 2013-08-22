@@ -22,6 +22,7 @@
 #include <QMetaObject>
 #include <QMetaProperty>
 #include <QScriptValue>
+#include <QScriptValueIterator>
 
 using namespace Marble;
 

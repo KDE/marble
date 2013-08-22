@@ -14,6 +14,8 @@
 #include "GeoDataObject.h"
 #include "GeoDataTourPrimitive.h"
 
+#include <QList>
+
 namespace Marble
 {
 
