@@ -24,6 +24,8 @@
 #include "RoutingProfileSettingsDialog.h"
 #include "GeoDataDocument.h"
 #include "AlternativeRoutesModel.h"
+#include "RouteSyncManager.h"
+#include "CloudRoutesDialog.h"
 
 #include <QTime>
 #include <QTimer>
@@ -62,6 +64,8 @@ public:
 
     RouteRequest *const m_routeRequest;
 
+    RouteSyncManager *m_routeSyncManager;
+
     bool m_zoomRouteAfterDownload;
 
     QTimer m_progressTimer;
@@ -78,6 +82,8 @@ public:
 
     QToolButton *m_openRouteButton;
     QToolButton *m_saveRouteButton;
+    QToolButton *m_uploadToCloudButton;
+    QToolButton *m_openCloudRoutesButton;
     QToolButton *m_addViaButton;
     QToolButton *m_reverseRouteButton;
     QToolButton *m_clearRouteButton;
@@ -117,6 +123,8 @@ RoutingWidgetPrivate::RoutingWidgetPrivate( RoutingWidget *parent, MarbleWidget 
         m_inputRequest( 0 ),
         m_routingModel( m_routingManager->routingModel() ),
         m_routeRequest( marbleWidget->model()->routingManager()->routeRequest() ),
+        m_routeSyncManager( new RouteSyncManager( marbleWidget->model()->cloudSyncManager(),
+                                                  marbleWidget->model()->routingManager() ) ),
         m_zoomRouteAfterDownload( false ),
         m_currentFrame( 0 ),
         m_iconSize( 16 ),
@@ -185,6 +193,20 @@ void RoutingWidgetPrivate::setupToolBar()
     m_saveRouteButton->setIcon( QIcon(":/icons/16x16/document-save.png") );
     m_toolBar->addWidget(m_saveRouteButton);
 
+    m_uploadToCloudButton = new QToolButton;
+    m_uploadToCloudButton->setToolTip( QObject::tr("Upload to Cloud") );
+    m_uploadToCloudButton->setIcon( QIcon(":/icons/cloud-upload.png") );
+
+    m_openCloudRoutesButton = new QToolButton;
+    m_openCloudRoutesButton->setToolTip( QObject::tr("Manage Cloud Routes") );
+    m_openCloudRoutesButton->setIcon( QIcon(":/icons/cloud-download.png") );
+
+    if( m_widget->model()->cloudSyncManager()->isSyncEnabled() && m_widget->model()->cloudSyncManager()->isRouteSyncEnabled() ) {
+        m_toolBar->addSeparator();
+        m_toolBar->addWidget(m_uploadToCloudButton);
+        m_toolBar->addWidget(m_openCloudRoutesButton);
+    }
+
     m_toolBar->addSeparator();
 
     m_addViaButton = new QToolButton;
@@ -213,6 +235,10 @@ void RoutingWidgetPrivate::setupToolBar()
                       m_parent, SLOT(openRoute()) );
     QObject::connect( m_saveRouteButton, SIGNAL(clicked()),
                       m_parent, SLOT(saveRoute()) );
+    QObject::connect( m_uploadToCloudButton, SIGNAL(clicked()),
+                      m_parent, SLOT(uploadToCloud()) );
+    QObject::connect( m_openCloudRoutesButton, SIGNAL(clicked()),
+                      m_parent, SLOT(openCloudRoutesDialog()));
     QObject::connect( m_addViaButton, SIGNAL(clicked()),
                       m_parent, SLOT(addInputWidget()) );
     QObject::connect( m_reverseRouteButton, SIGNAL(clicked()),
@@ -659,6 +685,25 @@ void RoutingWidget::saveRoute()
         d->m_routingManager->setLastSavePath( QFileInfo( fileName ).absolutePath() );
         d->m_routingManager->saveRoute( fileName );
     }
+}
+
+void RoutingWidget::uploadToCloud()
+{
+    d->m_routeSyncManager->uploadRoute();
+}
+
+void RoutingWidget::openCloudRoutesDialog()
+{
+    d->m_routeSyncManager->prepareRouteList();
+
+    CloudRoutesDialog *dialog = new CloudRoutesDialog( d->m_routeSyncManager->model(), d->m_widget );
+    connect( d->m_routeSyncManager, SIGNAL(routeListDownloadProgress(qint64,qint64)), dialog, SLOT(updateListDownloadProgressbar(qint64,qint64)) );
+    connect( dialog, SIGNAL(downloadButtonClicked(QString)), d->m_routeSyncManager, SLOT(downloadRoute(QString)) );
+    connect( dialog, SIGNAL(openButtonClicked(QString)), d->m_routeSyncManager, SLOT(openRoute(QString)) );
+    connect( dialog, SIGNAL(deleteButtonClicked(QString)), d->m_routeSyncManager, SLOT(deleteRoute(QString)) );
+    connect( dialog, SIGNAL(removeFromCacheButtonClicked(QString)), d->m_routeSyncManager, SLOT(removeRouteFromCache(QString)) );
+    connect( dialog, SIGNAL(uploadToCloudButtonClicked(QString)), d->m_routeSyncManager, SLOT(uploadRoute(QString)) );
+    dialog->exec();
 }
 
 void RoutingWidget::indicateRoutingFailure( GeoDataDocument* route )

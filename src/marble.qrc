@@ -97,5 +97,7 @@
         <file>icons/draw-placemark.png</file>
         <file>icons/draw-polygon.png</file>
         <file>icons/remove.png</file>
+        <file>icons/cloud-upload.png</file>
+        <file>icons/cloud-download.png</file>
     </qresource>
 </RCC>

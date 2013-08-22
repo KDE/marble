@@ -20,6 +20,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
  ${CMAKE_CURRENT_SOURCE_DIR}/graphicsview
  ${CMAKE_CURRENT_SOURCE_DIR}/layers
+ ${CMAKE_CURRENT_SOURCE_DIR}/cloudsync
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
@@ -232,6 +233,16 @@ set(marblewidget_SRCS
     SearchWidget.cpp
     kineticmodel.cpp
     NewstuffModel.cpp
+    
+    cloudsync/CloudSyncManager.cpp
+    cloudsync/RouteSyncManager.cpp
+    cloudsync/AbstractSyncBackend.cpp
+    cloudsync/OwncloudSyncBackend.cpp
+    cloudsync/CloudRouteModel.cpp
+    cloudsync/CloudRoutesDialog.cpp
+    cloudsync/RouteItem.cpp
+    cloudsync/RouteItemDelegate.cpp
+    cloudsync/RouteParser.cpp
 )
 
 set (marblewidget_UI
@@ -266,6 +277,8 @@ set (marblewidget_UI
     MapWizard.ui
     MapThemeDownloadDialog.ui
     WebPopupWidget.ui
+    cloudsync/CloudRoutesDialog.ui
+    MarbleCloudSyncSettingsWidget.ui
 )
 
 # FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc

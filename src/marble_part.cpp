@@ -105,6 +105,7 @@ using namespace Marble;
 #include "ui_MarbleViewSettingsWidget.h"
 #include "ui_MarbleNavigationSettingsWidget.h"
 #include "ui_MarbleTimeSettingsWidget.h"
+#include "ui_MarbleCloudSyncSettingsWidget.h"
 
 namespace Marble
 {
@@ -535,6 +536,13 @@ void MarblePart::readSettings()
     readPluginSettings();
 
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
+
+    CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
+    cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
+    cloudSyncManager->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
+    cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
+    cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
+    cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );
 }
 
 void MarblePart::readStatusBarSettings()
@@ -1388,7 +1396,15 @@ void MarblePart::editSettings()
     w_timeSettings->setObjectName( "time_page" );
     ui_timeSettings.setupUi( w_timeSettings );
     m_configDialog->addPage( w_timeSettings, i18n( "Date & Time" ), "clock" );
+    
+    // Sync page
+    Ui_MarbleCloudSyncSettingsWidget ui_cloudSyncSettings;
+    QWidget *w_cloudSyncSettings = new QWidget( 0 );
 
+    w_cloudSyncSettings->setObjectName( "sync_page" );
+    ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
+    m_configDialog->addPage( w_cloudSyncSettings, i18n( "Synchronization" ), "folder-sync" );
+    
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );
     w_routingSettings->setObjectName( "routing_page" );
@@ -1560,6 +1576,13 @@ void MarblePart::updateSettings()
     // External map editor
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
     m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( MarbleSettings::inertialEarthRotation() );
+
+    CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
+    cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
+    cloudSyncManager->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
+    cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
+    cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
+    cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );
 }
 
 void MarblePart::writePluginSettings()

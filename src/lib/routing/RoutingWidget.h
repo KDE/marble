@@ -57,6 +57,12 @@ public Q_SLOTS:
     /** Ask the user for a kml file to save the current route to */
     void saveRoute();
 
+    /** Upload route to the cloud */
+    void uploadToCloud();
+
+    /** Open cloud routes dialog */
+    void openCloudRoutesDialog();
+
     /** Add another input field at the end */
     void addInputWidget();
 
