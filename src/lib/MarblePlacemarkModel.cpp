@@ -185,7 +185,8 @@ void MarblePlacemarkModel::addPlacemarks( int start,
 //    beginInsertRows( QModelIndex(), start, start + length );
     d->m_size += length;
 //    endInsertRows();
-    reset();
+    beginResetModel();
+    endResetModel();
     emit countChanged();
     mDebug() << "addPlacemarks: Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
 }

@@ -371,7 +371,8 @@ void NewstuffModelPrivate::updateModel()
         }
     }
 
-    m_parent->reset();
+    m_parent->beginResetModel();
+    m_parent->endResetModel();
 }
 
 void NewstuffModelPrivate::saveRegistry()

@@ -656,7 +656,8 @@ void GeoDataTreeModel::removeDocument( GeoDataDocument *document )
 void GeoDataTreeModel::update()
 {
 //    mDebug() << "updating GeoDataTreeModel";
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void GeoDataTreeModel::setRootDocument( GeoDataDocument* document )

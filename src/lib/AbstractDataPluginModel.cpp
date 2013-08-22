@@ -222,7 +222,8 @@ QVariant FavoritesModel::data( const QModelIndex &index, int role ) const
 
 void FavoritesModel::reset()
 {
-    QAbstractListModel::reset();
+    beginResetModel();
+    endResetModel();
 }
 
 AbstractDataPluginModel::AbstractDataPluginModel( const QString &name, const MarbleModel *marbleModel, QObject *parent )

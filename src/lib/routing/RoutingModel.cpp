@@ -268,7 +268,8 @@ bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
 
     d->m_deviation = RoutingModelPrivate::Unknown;
 
-    reset();
+    beginResetModel();
+    endResetModel();
     emit currentRouteChanged();
     return true;
 }
@@ -309,7 +310,8 @@ void RoutingModel::exportGpx( QIODevice *device ) const
 void RoutingModel::clear()
 {
     d->m_route = Route();
-    reset();
+    beginResetModel();
+    endResetModel();
     emit currentRouteChanged();
 }
 

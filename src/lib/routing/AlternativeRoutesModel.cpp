@@ -459,7 +459,8 @@ void AlternativeRoutesModel::clear()
     QVector<GeoDataDocument*> routes = d->m_routes;
     d->m_currentIndex = -1;
     d->m_routes.clear();
-    reset();
+    beginResetModel();
+    endResetModel();
     qDeleteAll(routes);
 }
 

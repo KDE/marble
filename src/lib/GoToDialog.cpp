@@ -259,7 +259,8 @@ QVariant TargetModel::data ( const QModelIndex & index, int role ) const
 void TargetModel::setShowRoutingItems( bool show )
 {
     m_showRoutingItems = show;
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void GoToDialogPrivate::createProgressAnimation()
