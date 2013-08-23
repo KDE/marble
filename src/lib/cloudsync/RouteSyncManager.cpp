@@ -224,7 +224,7 @@ void RouteSyncManager::deleteRoute(const QString &timestamp )
 void RouteSyncManager::removeRouteFromCache( const QString &timestamp )
 {
     if( d->m_cloudSyncManager->backend() == CloudSyncManager::Owncloud ) {
-        connect( d->m_owncloudBackend, SIGNAL(removedFromCache( timestamp )), this, SLOT(prepareRouteList()) );
+        connect( d->m_owncloudBackend, SIGNAL(removedFromCache( QString )), this, SLOT(prepareRouteList()) );
         d->m_owncloudBackend->removeFromCache( d->m_cacheDir, timestamp );
     }
 }
