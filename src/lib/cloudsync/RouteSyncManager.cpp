@@ -18,6 +18,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "CloudRoutesDialog.h"
+#include "CloudSyncManager.h"
 #include "OwncloudSyncBackend.h"
 
 #include <QDir>

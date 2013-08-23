@@ -79,6 +79,7 @@
 #include "GoToDialog.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
+#include "cloudsync/CloudSyncManager.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5

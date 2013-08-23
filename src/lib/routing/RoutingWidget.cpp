@@ -26,6 +26,7 @@
 #include "AlternativeRoutesModel.h"
 #include "RouteSyncManager.h"
 #include "CloudRoutesDialog.h"
+#include "CloudSyncManager.h"
 
 #include <QTime>
 #include <QTimer>
