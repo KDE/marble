@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>331</width>
     <height>300</height>
    </rect>
   </property>
@@ -22,7 +22,91 @@
     </widget>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="kcfg_syncRoutes">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="whatsThis">
+        <string>Allows you to store routes in owncloud. Each route must be uploaded/downloaded manually.</string>
+       </property>
+       <property name="text">
+        <string>Enable route synchronization</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="kcfg_syncBookmarks">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="whatsThis">
+        <string>Automatically sync all bookmarks to the server.</string>
+       </property>
+       <property name="text">
+        <string>Enable bookmark synchronization</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title">
       <string>Credentials</string>
      </property>
@@ -35,12 +119,23 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="kcfg_owncloudServer"/>
+       <widget class="QLineEdit" name="kcfg_owncloudServer">
+        <property name="whatsThis">
+         <string>Remote server URL, e.g. myserver.com/owncloud</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="labelUsername">
         <property name="text">
          <string>Username:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="kcfg_owncloudUsername">
+        <property name="whatsThis">
+         <string/>
         </property>
        </widget>
       </item>
@@ -51,31 +146,63 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="kcfg_owncloudUsername"/>
-      </item>
       <item row="2" column="1">
        <widget class="QLineEdit" name="kcfg_owncloudPassword"/>
       </item>
      </layout>
     </widget>
    </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_syncRoutes">
-     <property name="text">
-      <string>Enable route synchronization</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_syncBookmarks">
-     <property name="text">
-      <string>Enable bookmark synchronization</string>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>kcfg_enableSync</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>14</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>165</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>kcfg_enableSync</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_syncRoutes</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>165</x>
+     <y>14</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>177</x>
+     <y>40</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>kcfg_enableSync</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_syncBookmarks</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>165</x>
+     <y>14</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>177</x>
+     <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
