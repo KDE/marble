@@ -23,7 +23,15 @@ namespace Marble {
 class MARBLE_EXPORT CloudSyncManager : public QObject
 {
     Q_OBJECT
-    
+
+    Q_PROPERTY(bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged)
+    Q_PROPERTY(bool syncEnabled READ isSyncEnabled WRITE setSyncEnabled NOTIFY syncEnabledChanged)
+    Q_PROPERTY(bool routeSyncEnabled READ isRouteSyncEnabled WRITE setRouteSyncEnabled NOTIFY routeSyncEnabledChanged)
+
+    Q_PROPERTY(QString owncloudUsername READ owncloudUsername WRITE setOwncloudUsername NOTIFY owncloudUsernameChanged)
+    Q_PROPERTY(QString owncloudPassword READ owncloudPassword WRITE setOwncloudPassword NOTIFY owncloudPasswordChanged)
+    Q_PROPERTY(QString owncloudServer READ owncloudServer WRITE setOwncloudServer NOTIFY owncloudServerChanged)
+
 public:
     explicit CloudSyncManager( QObject *parent = 0 );
     ~CloudSyncManager();
@@ -32,7 +40,7 @@ public:
      * Getter for offine mode.
      * @return true if offline mode enabled
      */
-    bool workOffline();
+    bool workOffline() const;
 
     /**
      * Setter for offine mode.
@@ -48,13 +56,13 @@ public:
      * Checks if the user enabled synchronization.
      * @return true if synchronization enabled
      */
-    bool isSyncEnabled();
+    bool isSyncEnabled() const;
 
     /**
      * Checks if the user enabled route synchronization.
      * @return true if route synchronization enabled
      */
-    bool isRouteSyncEnabled();
+    bool isRouteSyncEnabled() const;
 
     /**
      * Getter for currently selected backend.
@@ -66,19 +74,19 @@ public:
      * Gets ownCloud server from settings.
      * @return ownCloud server
      */
-    QString server() const;
+    QString owncloudServer() const;
 
     /**
      * Gets ownCloud username from settings.
      * @return ownCloud username
      */
-    QString username() const;
+    QString owncloudUsername() const;
 
     /**
      * Gets ownCloud password from settings
      * @return ownCloud password
      */
-    QString password() const;
+    QString owncloudPassword() const;
 
     /**
      * Setter for enabling/disabling synchronization.
@@ -96,19 +104,19 @@ public:
      * Setter for ownCloud server.
      * @param server ownCloud server
      */
-    void setOwncloudServer( const QString &server );
+    void setOwncloudServer( const QString &owncloudServer );
 
     /**
      * Setter for ownCloud username.
      * @param username ownCloud username
      */
-    void setOwncloudUsername( const QString &username );
+    void setOwncloudUsername( const QString &owncloudUsername );
 
     /**
      * Setter for ownCloud password.
      * @param password ownCloud password
      */
-    void setOwncloudPassword( const QString &password );
+    void setOwncloudPassword( const QString &owncloudPassword );
 
     /**
      * Returns API path as a QString.
@@ -121,6 +129,15 @@ public:
      * @return API url as QString
      */
     QUrl apiUrl() const;
+
+Q_SIGNALS:
+    void workOfflineChanged(bool workOffline);
+    void syncEnabledChanged(bool enabled);
+    void routeSyncEnabledChanged(bool enabled);
+
+    void owncloudUsernameChanged(const QString &username);
+    void owncloudPasswordChanged(const QString &password);
+    void owncloudServerChanged(const QString &server);
 
 private:
     class Private;

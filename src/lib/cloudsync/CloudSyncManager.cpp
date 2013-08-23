@@ -48,14 +48,17 @@ CloudSyncManager::~CloudSyncManager()
     delete d;
 }
 
-bool CloudSyncManager::workOffline()
+bool CloudSyncManager::workOffline() const
 {
     return d->m_workOffline;
 }
 
 void CloudSyncManager::setWorkOffline( bool offline )
 {
-    d->m_workOffline = offline;
+    if ( offline != d->m_workOffline ) {
+        d->m_workOffline = offline;
+        emit workOfflineChanged( d->m_workOffline );
+    }
 }
 
 CloudSyncManager::Backend CloudSyncManager::backend() const
@@ -63,54 +66,69 @@ CloudSyncManager::Backend CloudSyncManager::backend() const
     return Owncloud;
 }
 
-bool CloudSyncManager::isSyncEnabled()
+bool CloudSyncManager::isSyncEnabled() const
 {
     return d->m_syncEnabled;
 }
 
-bool CloudSyncManager::isRouteSyncEnabled()
+bool CloudSyncManager::isRouteSyncEnabled() const
 {
     return d->m_routeSyncEnabled;
 }
 
-QString CloudSyncManager::server() const
+QString CloudSyncManager::owncloudServer() const
 {
     return d->m_ownloudServer;
 }
 
-QString CloudSyncManager::username() const
+QString CloudSyncManager::owncloudUsername() const
 {
     return d->m_owncloudUsername;
 }
 
-QString CloudSyncManager::password() const
+QString CloudSyncManager::owncloudPassword() const
 {
     return d->m_owncloudPassword;
 }
 
 void CloudSyncManager::setSyncEnabled( bool enabled )
 {
-    d->m_syncEnabled = enabled;
+    if ( d->m_syncEnabled != enabled ) {
+        d->m_syncEnabled = enabled;
+        emit syncEnabledChanged( d->m_syncEnabled );
+    }
 }
 
 void CloudSyncManager::setRouteSyncEnabled( bool enabled )
 {
-    d->m_routeSyncEnabled = enabled;
+    if ( d->m_routeSyncEnabled != enabled ) {
+        d->m_routeSyncEnabled = enabled;
+        emit routeSyncEnabledChanged( d->m_routeSyncEnabled );
+    }
 }
 
 void CloudSyncManager::setOwncloudServer( const QString &server )
 {
-    d->m_ownloudServer = server;
+    if ( d->m_ownloudServer != server ) {
+        d->m_ownloudServer = server;
+        emit owncloudServerChanged( d->m_ownloudServer );
+    }
 }
 
 void CloudSyncManager::setOwncloudUsername( const QString &username )
 {
-    d->m_owncloudUsername = username;
+    if ( d->m_owncloudUsername != username ) {
+        d->m_owncloudUsername = username;
+        emit owncloudUsernameChanged( d->m_owncloudUsername );
+    }
 }
 
 void CloudSyncManager::setOwncloudPassword( const QString &password )
 {
-    d->m_owncloudPassword = password;
+    if ( d->m_owncloudPassword != password ) {
+        d->m_owncloudPassword = password;
+        emit owncloudPasswordChanged( d->m_owncloudPassword );
+    }
 }
 
 QString CloudSyncManager::apiPath() const
@@ -121,8 +139,8 @@ QString CloudSyncManager::apiPath() const
 QUrl CloudSyncManager::apiUrl() const
 {
     return QUrl( QString( "http://%0:%1@%2/%3" )
-                .arg( username() ).arg( password() )
-                .arg( server() ).arg( apiPath() ) );
+                .arg( owncloudUsername() ).arg( owncloudPassword() )
+                .arg( owncloudServer() ).arg( apiPath() ) );
 }
 
 }
