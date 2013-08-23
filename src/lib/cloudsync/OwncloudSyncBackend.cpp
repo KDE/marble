@@ -26,7 +26,6 @@
 #include <QNetworkAccessManager>
 #include <QScriptValueIterator>
 #include <QNetworkRequest>
-#include <QHttpMultiPart>
 #include <QScriptEngine>
 #include <QFileInfo>
 #include <QBuffer>
