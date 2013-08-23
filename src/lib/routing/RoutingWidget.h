@@ -133,6 +133,9 @@ private Q_SLOTS:
     /** Change selected routing profile to the one set in the shared request */
     void updateActiveRoutingProfile();
 
+    /** Toggle cloud sync button visibility based on whether route sync is enabled */
+    void updateCloudSyncButtons();
+
 protected:
     bool eventFilter( QObject *o, QEvent *e );
     void resizeEvent(QResizeEvent *e);

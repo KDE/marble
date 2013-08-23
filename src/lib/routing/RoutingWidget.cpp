@@ -83,8 +83,9 @@ public:
 
     QToolButton *m_openRouteButton;
     QToolButton *m_saveRouteButton;
-    QToolButton *m_uploadToCloudButton;
-    QToolButton *m_openCloudRoutesButton;
+    QAction *m_cloudSyncSeparator;
+    QAction *m_uploadToCloudAction;
+    QAction *m_openCloudRoutesAction;
     QToolButton *m_addViaButton;
     QToolButton *m_reverseRouteButton;
     QToolButton *m_clearRouteButton;
@@ -194,22 +195,16 @@ void RoutingWidgetPrivate::setupToolBar()
     m_saveRouteButton->setIcon( QIcon(":/icons/16x16/document-save.png") );
     m_toolBar->addWidget(m_saveRouteButton);
 
-    m_uploadToCloudButton = new QToolButton;
-    m_uploadToCloudButton->setToolTip( QObject::tr("Upload to Cloud") );
-    m_uploadToCloudButton->setIcon( QIcon(":/icons/cloud-upload.png") );
+    m_cloudSyncSeparator = m_toolBar->addSeparator();
+    m_uploadToCloudAction = m_toolBar->addAction( QObject::tr("Upload to Cloud") );
+    m_uploadToCloudAction->setToolTip( QObject::tr("Upload to Cloud") );
+    m_uploadToCloudAction->setIcon( QIcon(":/icons/cloud-upload.png") );
 
-    m_openCloudRoutesButton = new QToolButton;
-    m_openCloudRoutesButton->setToolTip( QObject::tr("Manage Cloud Routes") );
-    m_openCloudRoutesButton->setIcon( QIcon(":/icons/cloud-download.png") );
-
-    if( m_widget->model()->cloudSyncManager()->isSyncEnabled() && m_widget->model()->cloudSyncManager()->isRouteSyncEnabled() ) {
-        m_toolBar->addSeparator();
-        m_toolBar->addWidget(m_uploadToCloudButton);
-        m_toolBar->addWidget(m_openCloudRoutesButton);
-    }
+    m_openCloudRoutesAction = m_toolBar->addAction( QObject::tr("Manage Cloud Routes") );
+    m_openCloudRoutesAction->setToolTip( QObject::tr("Manage Cloud Routes") );
+    m_openCloudRoutesAction->setIcon( QIcon(":/icons/cloud-download.png") );
 
     m_toolBar->addSeparator();
-
     m_addViaButton = new QToolButton;
     m_addViaButton->setToolTip( QObject::tr("Add Via") );
     m_addViaButton->setIcon( QIcon(":/marble/list-add.png") );
@@ -236,9 +231,9 @@ void RoutingWidgetPrivate::setupToolBar()
                       m_parent, SLOT(openRoute()) );
     QObject::connect( m_saveRouteButton, SIGNAL(clicked()),
                       m_parent, SLOT(saveRoute()) );
-    QObject::connect( m_uploadToCloudButton, SIGNAL(clicked()),
+    QObject::connect( m_uploadToCloudAction, SIGNAL(triggered()),
                       m_parent, SLOT(uploadToCloud()) );
-    QObject::connect( m_openCloudRoutesButton, SIGNAL(clicked()),
+    QObject::connect( m_openCloudRoutesAction, SIGNAL(triggered()),
                       m_parent, SLOT(openCloudRoutesDialog()));
     QObject::connect( m_addViaButton, SIGNAL(clicked()),
                       m_parent, SLOT(addInputWidget()) );
@@ -318,6 +313,10 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT(retrieveRoute()) );
     connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL(rowsInserted(QModelIndex,int,int)),
              this, SLOT(updateAlternativeRoutes()) );
+    connect( d->m_widget->model()->cloudSyncManager(), SIGNAL(syncEnabledChanged(bool)),
+             this, SLOT(updateCloudSyncButtons()) );
+    connect( d->m_widget->model()->cloudSyncManager(), SIGNAL(routeSyncEnabledChanged(bool)),
+             this, SLOT(updateCloudSyncButtons()) );
 
     d->m_ui.directionsListView->setModel( d->m_routingModel );
 
@@ -344,6 +343,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_ui.resultLabel->setVisible( false );
     setShowDirectionsButtonVisible( false );
     updateActiveRoutingProfile();
+    updateCloudSyncButtons();
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         d->m_ui.directionsListView->setVisible( false );
@@ -723,6 +723,15 @@ void RoutingWidget::updateActiveRoutingProfile()
     RoutingProfile const profile = d->m_routingManager->routeRequest()->routingProfile();
     QList<RoutingProfile> const profiles = d->m_routingManager->profilesModel()->profiles();
     d->m_ui.routingProfileComboBox->setCurrentIndex( profiles.indexOf( profile ) );
+}
+
+void RoutingWidget::updateCloudSyncButtons()
+{
+    CloudSyncManager const * const manager = d->m_widget->model()->cloudSyncManager();
+    bool const show = manager->isSyncEnabled() && manager->isRouteSyncEnabled();
+    d->m_cloudSyncSeparator->setVisible( show );
+    d->m_uploadToCloudAction->setVisible( show );
+    d->m_openCloudRoutesAction->setVisible( show );
 }
 
 bool RoutingWidget::eventFilter( QObject *o, QEvent *event )
