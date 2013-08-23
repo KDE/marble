@@ -10,10 +10,9 @@
 
 #include "RouteSyncManager.h"
 
-#include "GeoParser.h"
+#include "GeoDataParser.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
-#include "RouteParser.h"
 #include "GeoDataFolder.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -120,7 +119,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
         QFile file( d->m_cacheDir.absolutePath() + "/" + routeFilename );
         file.open( QFile::ReadOnly );
 
-        RouteParser parser;
+        GeoDataParser parser( GeoData_KML );
         if( !parser.read( &file ) ) {
             mDebug() << "Could not read " + routeFilename;
         }

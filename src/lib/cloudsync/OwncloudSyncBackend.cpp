@@ -20,8 +20,8 @@
 #include "GeoDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataDocument.h"
+#include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
-#include "RouteParser.h"
 
 #include <QNetworkAccessManager>
 #include <QScriptValueIterator>
@@ -214,7 +214,7 @@ QString OwncloudSyncBackend::routeName( const QString &timestamp )
     QFile file( d->m_cacheDir.absolutePath() + QString( "/%0.kml" ).arg( timestamp ) );
     file.open( QFile::ReadOnly );
 
-    RouteParser parser;
+    GeoDataParser parser( GeoData_KML );
     if( !parser.read( &file ) ) {
         mDebug() << "Could not read " << timestamp << ".kml. Timestamp will be used as "
                     << "route name because of the problem";
