@@ -300,6 +300,13 @@ void OwncloudSyncBackend::saveDownloadedRoute()
     kmlFile.write( d->m_routeDownloadReply->readAll() );
     kmlFile.close();
 
+    QString previewPath = QString( "%0/preview/" ).arg( d->m_cacheDir.absolutePath() );
+    bool previewPathCreated = d->m_cacheDir.mkpath( previewPath );
+    if ( !previewPathCreated ) {
+        mDebug() << "Couldn't create the path " << previewPath <<
+                    ". Check if your user has sufficent permissions for this operation.";
+    }
+
     QString previewFilePath = QString( "%0/preview/%1.jpg").arg( d->m_cacheDir.absolutePath(), timestamp );
     QFile previewFile( previewFilePath );
     bool previewFileOpened = previewFile.open( QFile::ReadWrite );
