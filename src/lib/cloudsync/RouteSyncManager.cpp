@@ -265,6 +265,10 @@ void RouteSyncManager::setRouteModelItems( const QVector<RouteItem> &routeList )
                 d->m_routeList.append( item );
             }
         }
+    } else {
+        foreach( const RouteItem &item, routeList ) {
+            d->m_routeList.append( item );
+        }
     }
 
     d->m_model->setItems( d->m_routeList );
