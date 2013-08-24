@@ -185,7 +185,6 @@ bool MarbleLegendBrowser::event( QEvent * event )
     if ( event->type() == QEvent::Show ) {
         if ( !d->m_isLegendLoaded ) {
             loadLegend();
-            return true;
         }
     }
 
