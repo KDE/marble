@@ -96,9 +96,7 @@ void SearchInputWidget::setAreaSearch()
 
 void SearchInputWidget::updatePlaceholderText()
 {
-#if QT_VERSION >= 0x40700
     setPlaceholderText( m_areaSearch ? tr( "Area Search" ) : tr ( "Global Search" ) );
-#endif
 }
 
 }
