@@ -46,8 +46,9 @@ NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
       m_oldViewportRadius( 0 ),
       m_contextMenu( 0 )
 {
-    // Plugin is visible by default
-    setEnabled( true );
+    // Plugin is visible by default on desktop systems
+    const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    setEnabled( !smallScreen );
     setVisible( true );
 
     setCacheMode( NoCache );
