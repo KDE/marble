@@ -123,8 +123,6 @@ private Q_SLOTS:
     void  showBookmarks( bool show );
 
     // Download region dialog
-    void  connectDownloadRegionDialog();
-    void  disconnectDownloadRegionDialog();
     void  downloadRegion();
 
     void showZoomLevel( bool show );

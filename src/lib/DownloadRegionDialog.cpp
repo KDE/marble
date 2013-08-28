@@ -363,12 +363,22 @@ void DownloadRegionDialog::updateTextureLayer()
 
 void DownloadRegionDialog::hideEvent( QHideEvent * event )
 {
+    disconnect( d->m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+                this, SLOT(setVisibleLatLonAltBox(GeoDataLatLonAltBox)) );
+    disconnect( d->m_widget, SIGNAL(themeChanged(QString)),
+                this, SLOT(updateTextureLayer()) );
+
     emit hidden();
     event->accept();
 }
 
 void DownloadRegionDialog::showEvent( QShowEvent * event )
 {
+    connect( d->m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+             this, SLOT(setVisibleLatLonAltBox(GeoDataLatLonAltBox)) );
+    connect( d->m_widget, SIGNAL(themeChanged(QString)),
+             this, SLOT(updateTextureLayer()) );
+
     emit shown();
     event->accept();
 }

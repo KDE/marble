@@ -136,8 +136,6 @@ class MarblePart: public KParts::ReadOnlyPart
     void  setupStatusBar();
     void  showNewStuffDialog();
     void  showUploadNewStuffDialog();
-    void  connectDownloadRegionDialog();
-    void  disconnectDownloadRegionDialog();
     void  showDownloadRegionDialog();
     void  downloadRegion();
     void  showStatusBarContextMenu( const QPoint& pos );

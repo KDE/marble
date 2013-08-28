@@ -73,8 +73,6 @@ private Q_SLOTS:
 #endif
 
     // Download region dialog
-    void connectDownloadRegionDialog();
-    void disconnectDownloadRegionDialog();
     void downloadRegion();
 
     void showBookmarkManagerDialog();
