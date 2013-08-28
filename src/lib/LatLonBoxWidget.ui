@@ -43,6 +43,9 @@
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
+       <property name="suffix">
+        <string>°</string>
+       </property>
        <property name="decimals">
         <number>3</number>
        </property>
@@ -91,6 +94,9 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string>°</string>
        </property>
        <property name="decimals">
         <number>3</number>
@@ -141,6 +147,9 @@
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
+       <property name="suffix">
+        <string>°</string>
+       </property>
        <property name="decimals">
         <number>3</number>
        </property>
@@ -189,6 +198,9 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string>°</string>
        </property>
        <property name="decimals">
         <number>3</number>
