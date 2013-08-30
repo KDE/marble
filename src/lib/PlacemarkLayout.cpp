@@ -605,10 +605,6 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                                       const qreal x, const qreal y,
                                       const QString &labelText ) const
 {
-    bool  isRoom      = false;
-
-    int symbolwidth = style->iconStyle().icon().width();
-
     QFont labelFont = style->labelStyle().font();
     int textHeight = QFontMetrics( labelFont ).height();
 
@@ -624,27 +620,18 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
     const QVector<VisiblePlacemark*> currentsec = m_rowsection.at( y / m_maxLabelHeight );
 
     if ( style->labelStyle().alignment() == GeoDataLabelStyle::Corner ) {
-        qreal  xpos = x + symbolwidth / 2 + 1;
-        qreal  ypos = y;
+        const int symbolWidth = style->iconStyle().icon().width();
 
         // Check the four possible positions by going through all of them
- 
-        QRectF  labelRect( xpos, ypos, textWidth, textHeight );
-
         for( int i=0; i<4; ++i ) {
-            if( i/2 == 1 ) {
-                xpos = x - symbolwidth / 2 - 1 - textWidth;
-            }
-            if( i%2 == 1 ) {
-                ypos = y - textHeight;
-            } else {
-                ypos = y;
-            }
-
-            isRoom = true;
-            labelRect.moveTo( xpos, ypos );
+            const qreal xPos = ( i/2 == 0 ) ? x + symbolWidth / 2 + 1 :
+                                              x - symbolWidth / 2 - 1 - textWidth;
+            const qreal yPos = ( i%2 == 0 ) ? y :
+                                              y - textHeight;
+            const QRectF labelRect = QRectF( xPos, yPos, textWidth, textHeight );
 
             // Check if there is another label or symbol that overlaps.
+            bool isRoom = true;
             QVector<VisiblePlacemark*>::const_iterator beforeItEnd = currentsec.constEnd();
             for ( QVector<VisiblePlacemark*>::ConstIterator beforeIt = currentsec.constBegin();
                   beforeIt != beforeItEnd;
@@ -662,7 +649,7 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
         }
     }
     else if ( style->labelStyle().alignment() == GeoDataLabelStyle::Center ) {
-        isRoom = true;
+        bool isRoom = true;
         QRectF  labelRect( x - textWidth / 2, y - textHeight / 2,
                           textWidth, textHeight );
 
