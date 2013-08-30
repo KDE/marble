@@ -320,6 +320,8 @@ void OwncloudSyncBackend::saveDownloadedRoute()
     QPixmap preview = createPreview( timestamp );
     preview.save( &previewFile, "JPG" );
     previewFile.close();
+
+    emit routeDownloaded();
 }
 
 }

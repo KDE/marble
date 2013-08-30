@@ -19,7 +19,7 @@ namespace Marble {
 
 class CloudSyncManager;
 
-class RouteSyncManager : public QObject
+class MARBLE_EXPORT RouteSyncManager : public QObject
 {
     Q_OBJECT
     

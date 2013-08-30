@@ -50,6 +50,17 @@ CloudRouteModel::CloudRouteModel( QObject* parent ) :
 {
     connect( &(d->m_network), SIGNAL(finished(QNetworkReply*)),
              this, SLOT(setPreview(QNetworkReply*)) );
+
+    QHash<int, QByteArray> roles = roleNames();
+    roles[ Name ] = "name";
+    roles[ Timestamp ] = "identifier";
+    roles[ PreviewUrl ] = "previewUrl";
+    roles[ Distance ] = "distance";
+    roles[ Duration ] = "duration";
+    roles[ IsCached ] = "isCached";
+    roles[ IsDownloading ] = "isDownloading";
+    roles[ IsOnCloud ] = "isOnCloud";
+    setRoleNames( roles );
 }
 
 QVariant CloudRouteModel::data( const QModelIndex& index, int role ) const

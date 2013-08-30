@@ -13,6 +13,8 @@
 
 #include "RouteItem.h"
 
+#include "marble_export.h"
+
 #include <QModelIndex>
 #include <QNetworkReply>
 #include <QAbstractListModel>
@@ -20,7 +22,7 @@
 namespace Marble
 {
 
-class CloudRouteModel : public QAbstractListModel
+class MARBLE_EXPORT CloudRouteModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -102,4 +104,5 @@ private:
     Private *d;
 };
 }
+
 #endif // CLOUDROUTEMODEL_H

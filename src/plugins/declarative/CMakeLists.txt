@@ -28,6 +28,7 @@ RouteRequestModel.cpp
 Settings.cpp
 MapThemeModel.cpp
 ZoomButtonInterceptor.cpp
+CloudSync.cpp
 )
 
 marble_add_project_resources(qmldir)

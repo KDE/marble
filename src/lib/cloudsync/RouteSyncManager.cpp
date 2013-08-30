@@ -149,12 +149,16 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
             preview = QIcon( previewPath );
         }
 
+        // Would that work on Windows?
+        QUrl previewUrl( QString( "file://%0" ).arg( previewPath ) );
+
         RouteItem item;
         item.setIdentifier( timestamp );
         item.setName( routeName );
         item.setDistance( distance );
         item.setDistance( duration );
         item.setPreview( preview );
+        item.setPreviewUrl( previewUrl );
         item.setOnCloud( false );
         routeList.append( item );
     }
@@ -202,6 +206,7 @@ void RouteSyncManager::downloadRoute( const QString &timestamp )
     if( d->m_cloudSyncManager->backend() == CloudSyncManager::Owncloud ) {
         connect( d->m_owncloudBackend, SIGNAL(routeDownloadProgress(qint64,qint64)),
                  this, SIGNAL(routeDownloadProgress(qint64,qint64)) );
+        connect( d->m_owncloudBackend, SIGNAL(routeDownloaded()), this, SLOT(prepareRouteList()) );
         d->m_owncloudBackend->downloadRoute( timestamp );
     }
 }
