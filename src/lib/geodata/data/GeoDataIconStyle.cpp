@@ -46,7 +46,6 @@ class GeoDataIconStylePrivate
     QImage           m_icon;
     QString          m_iconPath;
     GeoDataHotSpot   m_hotSpot;
-    mutable QPointF  m_pixelHotSpot;
     int              m_heading;
 };
 
@@ -119,39 +118,6 @@ void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot,
 QPointF GeoDataIconStyle::hotSpot( GeoDataHotSpot::Units &xunits, GeoDataHotSpot::Units &yunits ) const
 {
     return d->m_hotSpot.hotSpot( xunits, yunits );
-}
-
-const QPointF& GeoDataIconStyle::hotSpot() const // always in pixels, Origin upper left
-{
-    GeoDataHotSpot::Units xunits;
-    GeoDataHotSpot::Units yunits;
-
-    d->m_pixelHotSpot = d->m_hotSpot.hotSpot( xunits, yunits );
-    switch ( xunits ) {
-    case GeoDataHotSpot::Fraction:
-        d->m_pixelHotSpot.setX( d->m_icon.width() * d->m_pixelHotSpot.x() );
-        break;
-    case GeoDataHotSpot::Pixels:
-        /* nothing to do */
-        break;
-    case GeoDataHotSpot::InsetPixels:
-        d->m_pixelHotSpot.setX( d->m_icon.width() - d->m_pixelHotSpot.x() );
-        break;
-    }
-
-    switch ( yunits ) {
-    case GeoDataHotSpot::Fraction:
-        d->m_pixelHotSpot.setY( d->m_icon.height() * ( 1.0 - d->m_pixelHotSpot.y() ) );
-        break;
-    case GeoDataHotSpot::Pixels:
-        /* nothing to do */
-        break;
-    case GeoDataHotSpot::InsetPixels:
-        d->m_pixelHotSpot.setY( d->m_icon.height() - d->m_pixelHotSpot.y() );
-        break;
-    }
-
-    return d->m_pixelHotSpot;
 }
 
 void GeoDataIconStyle::setScale( const float &scale )

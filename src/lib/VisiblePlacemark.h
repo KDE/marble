@@ -67,6 +67,11 @@ class VisiblePlacemark
     const QPoint& symbolPosition() const;
 
     /**
+     * Returns the top left corner of the place mark symbol's hot spot
+     */
+    const QPointF hotSpot() const;
+
+    /**
      * Sets the @p position of the place mark symbol on the map.
      */
     void setSymbolPosition( const QPoint& position );

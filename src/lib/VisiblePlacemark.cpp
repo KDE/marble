@@ -62,6 +62,41 @@ const QPoint& VisiblePlacemark::symbolPosition() const
     return m_symbolPosition;
 }
 
+const QPointF VisiblePlacemark::hotSpot() const
+{
+    const QSize iconSize = m_placemark->style()->iconStyle().icon().size();
+
+    GeoDataHotSpot::Units xunits;
+    GeoDataHotSpot::Units yunits;
+    QPointF pixelHotSpot = m_placemark->style()->iconStyle().hotSpot( xunits, yunits );
+
+    switch ( xunits ) {
+    case GeoDataHotSpot::Fraction:
+        pixelHotSpot.setX( iconSize.width() * pixelHotSpot.x() );
+        break;
+    case GeoDataHotSpot::Pixels:
+        /* nothing to do */
+        break;
+    case GeoDataHotSpot::InsetPixels:
+        pixelHotSpot.setX( iconSize.width() - pixelHotSpot.x() );
+        break;
+    }
+
+    switch ( yunits ) {
+    case GeoDataHotSpot::Fraction:
+        pixelHotSpot.setY( iconSize.height() * ( 1.0 - pixelHotSpot.y() ) );
+        break;
+    case GeoDataHotSpot::Pixels:
+        /* nothing to do */
+        break;
+    case GeoDataHotSpot::InsetPixels:
+        pixelHotSpot.setY( iconSize.height() - pixelHotSpot.y() );
+        break;
+    }
+
+    return pixelHotSpot;
+}
+
 void VisiblePlacemark::setSymbolPosition( const QPoint& position )
 {
     m_symbolPosition = position;

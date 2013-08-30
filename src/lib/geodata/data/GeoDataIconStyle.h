@@ -49,9 +49,6 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     void setHotSpot( const QPointF& hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits );
     QPointF hotSpot( GeoDataHotSpot::Units& xunits, GeoDataHotSpot::Units& yunits ) const;
 
-    /** Convenience method that transforms the hotspot to the topleft corner */
-    const QPointF& hotSpot() const;
-
     void setScale( const float &scale );
     float scale() const;
 
