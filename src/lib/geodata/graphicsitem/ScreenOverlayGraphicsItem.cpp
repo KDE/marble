@@ -22,7 +22,7 @@ ScreenOverlayGraphicsItem::ScreenOverlayGraphicsItem( const GeoDataScreenOverlay
     setSize( QSizeF( m_screenOverlay->size().x(), m_screenOverlay->size().y() ) );
 
     if ( !m_screenOverlay->icon().isNull() ) {
-        m_image = m_screenOverlay->icon().scaled( size().toSize() );
+        m_pixmap = QPixmap::fromImage( m_screenOverlay->icon().scaled( size().toSize() ) );
     }
 }
 
@@ -65,11 +65,11 @@ qreal ScreenOverlayGraphicsItem::pixelValue( GeoDataVec2::Unit unit, qreal scree
 
 void ScreenOverlayGraphicsItem::paint( QPainter *painter )
 {
-    if ( m_image.isNull() ) {
+    if ( m_pixmap.isNull() ) {
         painter->setBrush( m_screenOverlay->color() );
         painter->drawRect( QRectF( QPointF( 0.0, 0.0 ), size() ) );
     } else {
-        painter->drawImage( QPointF( 0.0, 0.0 ), m_image );
+        painter->drawPixmap( QPointF( 0.0, 0.0 ), m_pixmap );
     }
 }
 

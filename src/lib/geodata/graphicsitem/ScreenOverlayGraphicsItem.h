@@ -18,7 +18,7 @@
 #include "ScreenGraphicsItem.h"
 #include "marble_export.h"
 
-#include <QImage>
+#include <QPixmap>
 
 namespace Marble {
 
@@ -39,7 +39,7 @@ private:
 
     const GeoDataScreenOverlay *m_screenOverlay;
 
-    QImage m_image;
+    QPixmap m_pixmap;
 };
 
 }
