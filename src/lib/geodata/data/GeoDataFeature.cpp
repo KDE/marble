@@ -726,22 +726,6 @@ void GeoDataFeature::setPopularity( qint64 popularity )
     d->m_popularity = popularity;
 }
 
-const QSize GeoDataFeature::symbolSize() const
-{
-    if ( GeoDataFeaturePrivate::s_defaultStyleInitialized == false )
-        GeoDataFeaturePrivate::initializeDefaultStyles();
-
-    return style()->iconStyle().icon().size();
-}
-
-const QImage GeoDataFeature::symbol() const
-{
-    if ( GeoDataFeaturePrivate::s_defaultStyleInitialized == false )
-        GeoDataFeaturePrivate::initializeDefaultStyles();
-
-    return style()->iconStyle().icon();
-}
-
 void GeoDataFeature::resetDefaultStyles()
 {
     GeoDataFeaturePrivate::s_defaultStyleInitialized = false;

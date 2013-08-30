@@ -15,7 +15,6 @@
 
 
 #include <QString>
-#include <QSize>
 #include <QFont>
 #include <QColor>
 
@@ -461,19 +460,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     // ----------------------------------------------------------------
     // The following functions are use for painting, and mostly for placemarks.
-
-    /**
-     * Return the symbol size of the feature in pixels.
-     */
-    const QSize symbolSize() const;
-
-    /**
-     * Return the symbol of the feature as a pixmap.
-     *
-     * Note that the pixmaps are shared between all features with the
-     * same visual category
-     */
-    const QImage symbol() const;
 
     /**
      * Return the label font of the placemark.
