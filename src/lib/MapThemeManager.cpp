@@ -407,8 +407,8 @@ void MapThemeManager::Private::updateMapThemeModel()
         }
     }
 
-    for ( int i = 0; i < m_mapThemeModel.rowCount(); ++i ) {
-        QString celestialBodyId = ( m_mapThemeModel.data( m_mapThemeModel.index( i, 0 ), Qt::UserRole + 1 ).toString() ).section( '/', 0, 0 );
+    foreach ( const QString &mapThemeId, stringlist ) {
+        QString celestialBodyId = mapThemeId.section( '/', 0, 0 );
         QString celestialBodyName = Planet::name( celestialBodyId );
 
         QList<QStandardItem*> matchingItems = m_celestialList.findItems( celestialBodyId, Qt::MatchExactly, 1 );
