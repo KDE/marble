@@ -6,7 +6,6 @@ FILE( GLOB geodata_handlers_dgml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geoda
 FILE( GLOB geodata_writers_dgml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/writers/dgml/*.cpp )
 
 SET( geodata_graphicsitem_SRCS
-    geodata/graphicsitem/GeoImageGraphicsItem.cpp
     geodata/graphicsitem/GeoLineStringGraphicsItem.cpp
     geodata/graphicsitem/GeoPhotoGraphicsItem.cpp
     geodata/graphicsitem/GeoPointGraphicsItem.cpp
