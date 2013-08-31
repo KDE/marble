@@ -81,7 +81,7 @@ public:
     /**
      * @brief Helper method for updateMapThemeModel().
      */
-    QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
+    static QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
 
     /**
      * @brief Deletes any directory with its contents.
