@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     // Widget translation
 
 #ifdef Q_WS_MAEMO_5
-    // Work around http://bugreports.qt.nokia.com/browse/QTBUG-1313
+    // Work around http://bugreports.qt-project.org/browse/QTBUG-1313
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     QString lang( "C" );
     QStringList const locales = QStringList() << "LC_ALL" << "LC_MESSAGES" << "LANG" << "LANGUAGE";

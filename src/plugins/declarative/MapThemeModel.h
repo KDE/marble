@@ -39,7 +39,7 @@ public:
 public:
     explicit MapThemeModel( QObject* parent = 0 );
 
-    /** @todo FIXME https://bugreports.qt.nokia.com/browse/QTCOMPONENTS-1206 */
+    /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
     int count() const;
 
     Q_INVOKABLE QString name( const QString &id ) const;

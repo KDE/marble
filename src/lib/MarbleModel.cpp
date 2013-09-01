@@ -169,8 +169,8 @@ MarbleModel::MarbleModel( QObject *parent )
 {
 #if (QT_VERSION >= 0x040700 && QT_VERSION < 0x040800)
     // fix for KDE bug 288612
-    // Due to a race condition in Qt 4.7 (QTBUG-22107), a segfault might occur at
-    // startup when e.g. reverse geocoding is called very early.
+    // Due to a race condition in Qt 4.7 (https://bugreports.qt-project.org/browse/QTBUG-22107),
+    // a segfault might occur at startup when e.g. reverse geocoding is called very early.
     // The race condition can be avoided by instantiating QNetworkConfigurationManager
     // when only one thread is running (i.e. here).
     // QNetworkConfigurationManager was introduced in Qt 4.7, the bug is fixed
