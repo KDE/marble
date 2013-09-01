@@ -18,6 +18,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QFileSystemWatcher>
+#include <QScopedPointer>
 #include <QString>
 #include <QStringList>
 #include <QTimer>
@@ -338,7 +339,7 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
 {
     QList<QStandardItem *> itemList;
 
-    GeoSceneDocument *mapTheme = loadMapThemeFile( mapThemeID );
+    QScopedPointer<GeoSceneDocument> mapTheme( loadMapThemeFile( mapThemeID ) );
     if ( !mapTheme || !mapTheme->head()->visible() ) {
         return itemList;
     }
@@ -382,8 +383,6 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
     item->setData( QObject::tr( description.toUtf8() ), Qt::UserRole + 2 );
 
     itemList << item;
-
-    delete mapTheme;
 
     return itemList;
 }
