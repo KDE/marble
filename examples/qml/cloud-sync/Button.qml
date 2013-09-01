@@ -14,26 +14,38 @@ Rectangle {
     id: container
 
     property alias label: buttonLabel.text
-    property alias font: buttonLabel.font
     property alias color: buttonLabel.color
-    property color tint: "#FFFFFFFF"
     signal clicked
 
-    width: buttonLabel.width + 20; height: buttonLabel.height + 6
+    width: buttonLabel.width + 20;
+    height: buttonLabel.height + 6
     smooth: true
-    border { width: 1; }
     radius: 8
+    border {
+        width: 1
+        color: "#aaaaaa"
+    }
 
     gradient: Gradient {
         GradientStop {
             position: 0.0
+            color: mouseArea.pressed ? "#cccccc" : "#ffffff"
         }
-        GradientStop { position: 1.0; }
+        GradientStop {
+            position: 1.0;
+            color: "#cccccc"
+        }
     }
 
-    MouseArea { id: mouseArea; anchors.fill: parent; onClicked: container.clicked() }
+    MouseArea {
+        id: mouseArea;
+        anchors.fill: parent;
+        onClicked: container.clicked()
+    }
 
     Text {
-        id: buttonLabel; text: container.label; anchors.centerIn: container
+        id: buttonLabel;
+        text: container.label;
+        anchors.centerIn: container
     }
 }

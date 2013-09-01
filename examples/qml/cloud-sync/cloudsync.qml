@@ -13,7 +13,6 @@ Rectangle {
     id: screen
     width: 640; height: 480
 
-    // The map widget
     MarbleWidget {
         id: map
         anchors.top: parent.top
@@ -41,7 +40,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        width: 300
+        width: 350
 
         model: cloudSync.routeModel
         delegate: routeViewDelegate
@@ -52,7 +51,7 @@ Rectangle {
         
         Rectangle {
             width: routeView.width
-            height: Math.max( previewImage.height, nameText.height )
+            height: Math.max( previewImage.height, nameText.height+buttonRow.height )
             
             Image {
                 id: previewImage
@@ -64,133 +63,74 @@ Rectangle {
             Text {
                 id: nameText
                 text: name
-                width: routeView.width
                 anchors.left: previewImage.right
+                anchors.right: parent.right
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             }
-            
-            Button {
-                id: downloadArea
-                visible: !isCached && isOnCloud
-                width: downloadText.width
-                height: downloadText.height
+
+            Row {
+                id: buttonRow
                 anchors.top: nameText.bottom
                 anchors.left: nameText.left
-                
-                Rectangle {
-                    width: downloadText.width
-                    height: downloadText.height
+
+                Button {
+                    id: downloadArea
+                    visible: !isCached && isOnCloud
+
+                    label: "Download"
                     color: "green"
-                    
-                    Text {
-                        id: downloadText
-                        text: "Download"
-                        color: "white"
+
+                    onClicked: {
+                        cloudSync.downloadRoute( identifier )
                     }
                 }
-                
-                onClicked: {
-                    cloudSync.downloadRoute( identifier )
-                }
-            }
-            
-            Button {
-                id: deleteFromCloudArea
-                visible: !isCached
-                width: deleteFromCloudText.width
-                height: deleteFromCloudText.height
-                anchors.top: downloadArea.top
-                anchors.left: downloadArea.right
-                
-                Rectangle {
-                    width: deleteFromCloudText.width
-                    height: deleteFromCloudText.height
+
+                Button {
+                    id: deleteFromCloudArea
+                    visible: !isCached
+
+                    label: "Delete from cloud"
                     color: "red"
-                    
-                    Text {
-                        id: deleteFromCloudText
-                        text: "Delete from cloud"
-                        color: "white"
+
+                    onClicked: {
+                        cloudSync.deleteRouteFromCloud( identifier )
                     }
                 }
-                
-                onClicked: {
-                    cloudSync.deleteRouteFromCloud( identifier )
-                }
-            }
-            
-            Button {
-                id: openArea
-                visible: isCached
-                width: openText.width
-                height: openText.height
-                anchors.top: downloadArea.top
-                anchors.left: downloadArea.left
-                
-                Rectangle {
-                    width: openText.width
-                    height: openText.height
+
+                Button {
+                    id: openArea
+                    visible: isCached
+
+                    label: "Open"
                     color: "blue"
-                    
-                    Text {
-                        id: openText
-                        text: "Open"
-                        color: "white"
+
+                    onClicked: {
+                        cloudSync.openRoute( identifier )
                     }
                 }
-                
-                onClicked: {
-                    cloudSync.openRoute( identifier )
-                }
-            }
-            
-            Button {
-                id: removeFromCacheArea
-                visible: isCached
-                width: removeFromCacheText.width
-                height: removeFromCacheText.height
-                anchors.top: openArea.top
-                anchors.left: openArea.right
-                
-                Rectangle {
-                    width: removeFromCacheText.width
-                    height: removeFromCacheText.height
+
+                Button {
+                    id: removeFromCacheArea
+                    visible: isCached
+
+                    label: "Remove from device"
                     color: "yellow"
-                    
-                    Text {
-                        id: removeFromCacheText
-                        text: "Remove from device"
-                        color: "black"
+
+                    onClicked: {
+                        cloudSync.removeRouteFromDevice( identifier )
                     }
                 }
-                
-                onClicked: {
-                    cloudSync.removeRouteFromDevice( identifier )
-                }
-            }
-            
-            Button {
-                id: uploadArea
-                visible: isCached && !isOnCloud
-                width: uploadText.width
-                height: uploadText.height
-                anchors.top: removeFromCacheArea.top
-                anchors.left: removeFromCacheArea.right
-                
-                Rectangle {
-                    width: uploadText.width
-                    height: uploadText.height
+
+                Button {
+                    id: uploadArea
+                    visible: isCached && !isOnCloud
+
+                    label: "Upload"
                     color: "grey"
-                    
-                    Text {
-                        id: uploadText
-                        text: "Upload"
-                        color: "black"
+
+                    onClicked: {
+                        cloudSync.uploadRoute( identifier )
                     }
-                }
-                
-                onClicked: {
-                    cloudSync.uploadRoute( identifier )
                 }
             }
         }
