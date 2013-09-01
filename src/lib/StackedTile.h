@@ -63,7 +63,7 @@ class StackedTile : public Tile
     bool used() const;
 
     int depth() const;
-    int numBytes() const;
+    int byteCount() const;
 
 /*!
     \brief Returns the stack of Tiles

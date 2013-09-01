@@ -214,7 +214,7 @@ uint StackedTile::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
 
 int StackedTile::calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<TextureTile> > &tiles )
 {
-    int byteCount = resultImage.numBytes();
+    int byteCount = resultImage.byteCount();
 
     QVector<QSharedPointer<TextureTile> >::const_iterator pos = tiles.constBegin();
     QVector<QSharedPointer<TextureTile> >::const_iterator const end = tiles.constEnd();
@@ -249,7 +249,7 @@ int StackedTile::depth() const
     return m_depth;
 }
 
-int StackedTile::numBytes() const
+int StackedTile::byteCount() const
 {
     return m_byteCount;
 }

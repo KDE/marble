@@ -110,7 +110,7 @@ void StackedTileLoader::cleanupTilehash()
             // If insert call result is false then the cache is too small to store the tile
             // but the item will get deleted nevertheless and the pointer we have
             // doesn't get set to zero (so don't delete it in this case or it will crash!)
-            d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
+            d->m_tileCache.insert( it.key(), it.value(), it.value()->byteCount() );
             d->m_tilesOnDisplay.remove( it.key() );
         }
     }
