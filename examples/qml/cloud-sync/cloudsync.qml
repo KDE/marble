@@ -11,7 +11,7 @@ import org.kde.edu.marble 0.11
 
 Rectangle {
     id: screen
-    width: 640; height: 480
+    width: 1024; height: 768
 
     MarbleWidget {
         id: map
@@ -20,8 +20,6 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: routeView.right
 
-        property bool autoCenter: false
-
         mapThemeId: "earth/openstreetmap/openstreetmap.dgml"
         activeFloatItems: [ "compass", "scalebar", "progress" ]
     }
@@ -29,21 +27,48 @@ Rectangle {
     CloudSync {
         id: cloudSync
         map: map
+    }
 
-        owncloudServer: ""
-        owncloudUsername: ""
-        owncloudPassword: ""
+    Column {
+        id: credentialsColumn
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.margins: 10
+        width: routeView.width
+        spacing: 10
+
+        InputField {
+            label: "Server:"
+            text: "myowncloudserver.com"
+            onAccepted: cloudSync.owncloudServer = text
+        }
+
+        InputField {
+            label: "User:"
+            text: "myuser"
+            onAccepted: cloudSync.owncloudUsername = text
+        }
+
+        InputField {
+            label: "Password:"
+            text: "mypassword"
+            onAccepted: cloudSync.owncloudPassword = text
+            echoMode: TextInput.Password
+        }
     }
 
     ListView {
         id: routeView
-        anchors.top: parent.top
+        anchors.top: credentialsColumn.bottom
+        anchors.topMargin: 5
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        width: 350
+        width: 400
+        clip: true
 
         model: cloudSync.routeModel
         delegate: routeViewDelegate
+        spacing: 5
     }
 
     Component {
@@ -56,7 +81,7 @@ Rectangle {
             Image {
                 id: previewImage
                 source: previewUrl
-                width: 64; height: 64
+                width: 128; height: 128
                 anchors.left: parent.left
             }
             
@@ -64,6 +89,7 @@ Rectangle {
                 id: nameText
                 text: name
                 anchors.left: previewImage.right
+                anchors.leftMargin: 5
                 anchors.right: parent.right
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             }
@@ -72,6 +98,8 @@ Rectangle {
                 id: buttonRow
                 anchors.top: nameText.bottom
                 anchors.left: nameText.left
+                anchors.leftMargin: 5
+                spacing: 5
 
                 Button {
                     id: downloadArea

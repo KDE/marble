@@ -20,7 +20,7 @@ Rectangle {
     width: buttonLabel.width + 20;
     height: buttonLabel.height + 6
     smooth: true
-    radius: 8
+    radius: 3
     border {
         width: 1
         color: "#aaaaaa"
