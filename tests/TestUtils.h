@@ -31,7 +31,7 @@ bool qCompare(qreal val1, qreal val2, qreal epsilon, const char *actual, const c
 template<>
 char *toString(const Marble::GeoDataCoordinates &coordinates)
 {
-    return qstrdup( coordinates.toString( Marble::GeoDataCoordinates::Decimal, 10 ).toAscii().data() );
+    return qstrdup( coordinates.toString( Marble::GeoDataCoordinates::Decimal, 10 ).toLatin1().data() );
 }
 
 template<>
@@ -43,7 +43,7 @@ char *toString(const Marble::GeoDataLatLonBox &box)
         .arg( box.south( Marble::GeoDataCoordinates::Degree ) )
         .arg( box.east( Marble::GeoDataCoordinates::Degree ) );
 
-    return qstrdup( string.toAscii().data() );
+    return qstrdup( string.toLatin1().data() );
 }
 
 template<>
@@ -57,7 +57,7 @@ char *toString(const Marble::GeoDataLatLonAltBox &box)
         .arg( box.minAltitude() )
         .arg( box.maxAltitude() );
 
-    return qstrdup( string.toAscii().data() );
+    return qstrdup( string.toLatin1().data() );
 }
 
 }
@@ -68,8 +68,8 @@ do {\
         return;\
 } while (0)
 
-#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toAscii().data() )
-#define addNamedRow(testName) QTest::newRow( QString("line %1: %2").arg( __LINE__ ).arg(testName).toAscii().data() )
+#define addRow() QTest::newRow( QString("line %1").arg( __LINE__ ).toLatin1().data() )
+#define addNamedRow(testName) QTest::newRow( QString("line %1: %2").arg( __LINE__ ).arg(testName).toLatin1().data() )
 
 namespace Marble {
 

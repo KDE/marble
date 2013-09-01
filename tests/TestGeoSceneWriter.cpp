@@ -92,7 +92,7 @@ void TestGeoSceneWriter::initTestCase()
             QVERIFY( file.open( QIODevice::ReadOnly ) );
 
             //Parser and verify
-            QVERIFY2( parser->read( &file ), filename.toAscii() );
+            QVERIFY2( parser->read( &file ), filename.toLatin1() );
 
             parsers.insert( dataDir.filePath(filename), parserPointer );
 

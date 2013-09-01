@@ -144,7 +144,7 @@ GeoDataLineString *OSRMRunner::decodePolyline( const QString &geometry ) const
         for ( int j=0; j<2; ++j ) { // lat and lon
             int block( 0 ), shift( 0 ), result( 0 );
             do {
-                block = geometry.at( i++ /* increment for outer loop */ ).toAscii() - 63;
+                block = geometry.at( i++ /* increment for outer loop */ ).toLatin1() - 63;
                 result |= ( block & 0x1F ) << shift;
                 shift += 5;
             } while ( block >= 0x20 );
