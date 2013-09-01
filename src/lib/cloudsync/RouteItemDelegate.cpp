@@ -29,7 +29,7 @@ void RouteItemDelegate::paint( QPainter* painter, const QStyleOptionViewItem& op
     }
 
     QRect const iconRect = position( Preview, option );
-    QIcon const icon = qVariantValue<QIcon>( index.data( Qt::DecorationRole ) );
+    QIcon const icon = index.data( Qt::DecorationRole ).value<QIcon>();
     painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
 
     QTextDocument document;

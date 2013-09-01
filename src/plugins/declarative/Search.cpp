@@ -168,7 +168,7 @@ void Search::handleSearchResult()
     for ( int i = 0; i < m_searchResult->rowCount(); ++i ) {
         QVariant data = m_searchResult->index( i, 0 ).data( Marble::MarblePlacemarkModel::CoordinateRole );
         if ( !data.isNull() ) {
-            placemarks << qVariantValue<Marble::GeoDataCoordinates>( data );
+            placemarks << data.value<Marble::GeoDataCoordinates>();
         }
     }
 
