@@ -18,6 +18,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QFileSystemWatcher>
+#include <QtCore/QScopedPointer>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QTimer>
@@ -317,7 +318,7 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
 {
     QList<QStandardItem *> itemList;
 
-    GeoSceneDocument *mapTheme = loadMapThemeFile( mapThemeID );
+    QScopedPointer<GeoSceneDocument> mapTheme( loadMapThemeFile( mapThemeID ) );
     if ( !mapTheme || !mapTheme->head()->visible() ) {
         return itemList;
     }
@@ -364,8 +365,6 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
                                    + mapTheme->head()->theme() + '/'
                                    + mapTheme->head()->theme() + ".dgml" );
     itemList << new QStandardItem( QObject::tr( description.toUtf8() ) );
-
-    delete mapTheme;
 
     return itemList;
 }
