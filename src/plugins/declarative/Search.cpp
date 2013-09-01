@@ -109,7 +109,7 @@ void Search::updatePlacemarks()
         while ( iter != m_placemarks.constEnd() ) {
             qreal x(0), y(0);
             QVariant position = m_searchResult->data( m_searchResult->index( iter.key() ), Marble::MarblePlacemarkModel::CoordinateRole );
-            Marble::GeoDataCoordinates const coordinates = qVariantValue<Marble::GeoDataCoordinates>( position );
+            Marble::GeoDataCoordinates const coordinates = position.value<Marble::GeoDataCoordinates>();
             bool const visible = onEarth && m_marbleWidget->viewport()->screenCoordinates( coordinates.longitude( Marble::GeoDataCoordinates::Radian ),
                                                                                            coordinates.latitude( Marble::GeoDataCoordinates::Radian), x, y );
             QDeclarativeItem* item = iter.value();
