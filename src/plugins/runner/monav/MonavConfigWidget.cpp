@@ -323,6 +323,8 @@ MonavConfigWidget::MonavConfigWidget( MonavPlugin* plugin ) :
         d( new MonavConfigWidgetPrivate( this, plugin ) )
 {
     setupUi( this );
+    m_statusLabel->setText( plugin->statusMessage() );
+    m_statusLabel->setHidden( m_statusLabel->text().isEmpty() );
     d->setBusy( false );
     m_installedMapsListView->setModel( d->m_mapsModel );
     m_configureMapsListView->setModel( d->m_filteredModel );

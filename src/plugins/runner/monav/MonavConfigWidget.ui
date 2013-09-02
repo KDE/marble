@@ -19,15 +19,15 @@
   <property name="windowTitle">
    <string>Monav Configuration</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_4">
-   <item row="0" column="0">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
     <widget class="QStackedWidget" name="m_stackedWidget">
      <property name="currentIndex">
       <number>0</number>
      </property>
      <widget class="QWidget" name="m_settingsPage">
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
         <widget class="QTabWidget" name="monavTabWidget">
          <property name="currentIndex">
           <number>0</number>
@@ -42,55 +42,71 @@
           <attribute name="title">
            <string>Configure</string>
           </attribute>
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Transport Type:</string>
-             </property>
-            </widget>
+          <widget class="QLabel" name="label_2">
+           <property name="geometry">
+            <rect>
+             <x>4</x>
+             <y>4</y>
+             <width>86</width>
+             <height>24</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Transport Type:</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="m_transportTypeComboBox">
+           <property name="geometry">
+            <rect>
+             <x>94</x>
+             <y>4</y>
+             <width>57</width>
+             <height>24</height>
+            </rect>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QComboBox::AdjustToContents</enum>
+           </property>
+           <item>
+            <property name="text">
+             <string>Any</string>
+            </property>
            </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="m_transportTypeComboBox">
-             <property name="sizeAdjustPolicy">
-              <enum>QComboBox::AdjustToContents</enum>
-             </property>
-             <item>
-              <property name="text">
-               <string>Any</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="3">
-            <widget class="QTableView" name="m_configureMapsListView">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="horizontalScrollBarPolicy">
-              <enum>Qt::ScrollBarAlwaysOff</enum>
-             </property>
-             <property name="alternatingRowColors">
-              <bool>true</bool>
-             </property>
-             <attribute name="horizontalHeaderVisible">
-              <bool>true</bool>
-             </attribute>
-             <attribute name="horizontalHeaderStretchLastSection">
-              <bool>false</bool>
-             </attribute>
-             <attribute name="verticalHeaderVisible">
-              <bool>false</bool>
-             </attribute>
-             <attribute name="verticalHeaderStretchLastSection">
-              <bool>false</bool>
-             </attribute>
-            </widget>
-           </item>
-          </layout>
+          </widget>
+          <widget class="QTableView" name="m_configureMapsListView">
+           <property name="geometry">
+            <rect>
+             <x>4</x>
+             <y>32</y>
+             <width>254</width>
+             <height>195</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <attribute name="horizontalHeaderVisible">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderStretchLastSection">
+            <bool>false</bool>
+           </attribute>
+          </widget>
          </widget>
          <widget class="QWidget" name="tab_3">
           <property name="sizePolicy">
@@ -192,6 +208,13 @@
            </item>
           </layout>
          </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="m_statusLabel">
+         <property name="text">
+          <string/>
+         </property>
         </widget>
        </item>
       </layout>
