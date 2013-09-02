@@ -27,6 +27,7 @@ class MARBLE_EXPORT CloudSyncManager : public QObject
     Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
     Q_PROPERTY( bool syncEnabled READ isSyncEnabled WRITE setSyncEnabled NOTIFY syncEnabledChanged )
     Q_PROPERTY( bool routeSyncEnabled READ isRouteSyncEnabled WRITE setRouteSyncEnabled NOTIFY routeSyncEnabledChanged )
+    Q_PROPERTY( bool bookmarkSyncEnabled READ isBookmarkSyncEnabled WRITE setBookmarkSyncEnabled NOTIFY bookmarkSyncEnabledChanged )
 
     Q_PROPERTY( QString owncloudUsername READ owncloudUsername WRITE setOwncloudUsername NOTIFY owncloudUsernameChanged )
     Q_PROPERTY( QString owncloudPassword READ owncloudPassword WRITE setOwncloudPassword NOTIFY owncloudPasswordChanged )
@@ -66,6 +67,12 @@ public:
     bool isRouteSyncEnabled() const;
 
     /**
+     * Checks if the user enabled bookmark synchronization.
+     * @return true if bookmark synchronization enabled
+     */
+    bool isBookmarkSyncEnabled() const;
+
+    /**
      * Getter for currently selected backend.
      * @return Selected backend
      */
@@ -96,10 +103,16 @@ public:
     void setSyncEnabled( bool enabled );
 
     /**
-     * Setter for enabling/disabling synchronization.
+     * Setter for enabling/disabling route synchronization.
      * @param enabled Status of route synchronization
      */
     void setRouteSyncEnabled( bool enabled );
+
+    /**
+     * Setter for enabling/disabling bookmark synchronization.
+     * @param enabled Status of bookmark synchronization
+     */
+    void setBookmarkSyncEnabled( bool enabled );
 
     /**
      * Setter for ownCloud server.
@@ -135,6 +148,7 @@ Q_SIGNALS:
     void workOfflineChanged(bool workOffline);
     void syncEnabledChanged(bool enabled);
     void routeSyncEnabledChanged(bool enabled);
+    void bookmarkSyncEnabledChanged(bool enabled);
 
     void owncloudUsernameChanged(const QString &username);
     void owncloudPasswordChanged(const QString &password);

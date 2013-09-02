@@ -12,9 +12,10 @@
 
 #include "MarbleModel.h"
 #include "MarbleDeclarativeWidget.h"
-#include "cloudsync/RouteSyncManager.h"
 #include "cloudsync/CloudRouteModel.h"
 #include "cloudsync/CloudSyncManager.h"
+#include "cloudsync/RouteSyncManager.h"
+#include "cloudsync/BookmarkSyncManager.h"
 
 class CloudSync::Private
 {
@@ -23,15 +24,17 @@ public:
 
     MarbleWidget *m_map;
     Marble::CloudRouteModel *m_routeModel;
-    Marble::RouteSyncManager *m_routeSyncManager;
     Marble::CloudSyncManager m_cloudSyncManager;
+    Marble::RouteSyncManager *m_routeSyncManager;
+    Marble::BookmarkSyncManager *m_bookmarkSyncManager;
 };
 
 CloudSync::Private::Private() :
     m_map( 0 ),
     m_routeModel( 0 ),
+    m_cloudSyncManager(),
     m_routeSyncManager( 0 ),
-    m_cloudSyncManager()
+    m_bookmarkSyncManager( 0 )
 {
 }
 
@@ -66,10 +69,18 @@ MarbleWidget* CloudSync::map()
 void CloudSync::setMap( MarbleWidget *map )
 {
     if( d->m_map != map ) {
-    d->m_map = map;
+        d->m_map = map;
+
         delete d->m_routeSyncManager;
-        d->m_routeSyncManager = new Marble::RouteSyncManager( &d->m_cloudSyncManager,
-                                                              d->m_map->model()->routingManager() );
+        d->m_routeSyncManager = new Marble::RouteSyncManager(
+                    &d->m_cloudSyncManager,
+                    d->m_map->model()->routingManager() );
+
+        delete d->m_bookmarkSyncManager;
+        d->m_bookmarkSyncManager = new Marble::BookmarkSyncManager( &d->m_cloudSyncManager );
+        connect( d->m_bookmarkSyncManager, SIGNAL(mergeConflict(Marble::MergeItem*)),
+                 this, SIGNAL(mergeConflict(Marble::MergeItem*)));
+
         d->m_routeSyncManager->prepareRouteList();
         emit mapChanged();
     }
@@ -142,6 +153,20 @@ void CloudSync::deleteRouteFromCloud( const QString &identifier )
 {
     if( d->m_routeSyncManager != 0 ) {
         d->m_routeSyncManager->deleteRoute( identifier );
+    }
+}
+
+void CloudSync::syncBookmarks()
+{
+    if( d->m_bookmarkSyncManager != 0 ) {
+        d->m_bookmarkSyncManager->startBookmarkSync();
+    }
+}
+
+void CloudSync::resolveConflict( Marble::MergeItem *item )
+{
+    if( d->m_bookmarkSyncManager != 0 ) {
+        d->m_bookmarkSyncManager->resolveConflict( item );
     }
 }
 

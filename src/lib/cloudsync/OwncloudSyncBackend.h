@@ -11,8 +11,9 @@
 #ifndef OWNCLOUDSYNCBACKEND_H
 #define OWNCLOUDSYNCBACKEND_H
 
-#include "AbstractSyncBackend.h"
 #include "CloudRouteModel.h"
+#include "GeoDataDocument.h"
+#include "AbstractSyncBackend.h"
 
 #include <QUrl>
 #include <QVector>
@@ -41,7 +42,6 @@ public slots:
 private slots:
     void prepareRouteList();
     void saveDownloadedRoute();
-
 signals:
     void routeListDownloaded( const QVector<RouteItem> &routeList );
     void routeDownloaded();

@@ -149,6 +149,33 @@
      </layout>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="button_syncNow">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Sync now</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <resources/>
@@ -198,6 +225,54 @@
     <hint type="destinationlabel">
      <x>177</x>
      <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>kcfg_syncBookmarks</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>button_syncNow</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>178</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>280</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>kcfg_enableSync</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_syncRoutes</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>165</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>178</x>
+     <y>47</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>kcfg_enableSync</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_syncBookmarks</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>165</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>178</x>
+     <y>76</y>
     </hint>
    </hints>
   </connection>

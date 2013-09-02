@@ -12,6 +12,7 @@
 #define CLOUDSYNC_H
 
 #include "cloudsync/CloudSyncManager.h"
+#include "cloudsync/MergeItem.h"
 
 #include <QObject>
 #include <QVector>
@@ -53,6 +54,8 @@ public slots:
     void downloadRoute( const QString &identifier );
     void removeRouteFromDevice( const QString &identifier );
     void deleteRouteFromCloud( const QString &identifier );
+    void syncBookmarks();
+    void resolveConflict( Marble::MergeItem *item );
 
 signals:
     void mapChanged();
@@ -61,6 +64,7 @@ signals:
     void owncloudServerChanged();
     void owncloudUsernameChanged();
     void owncloudPasswordChanged();
+    void mergeConflict( Marble::MergeItem *item );
 
 private:
     class Private;

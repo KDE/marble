@@ -86,6 +86,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  setShowBookmarks( bool isChecked );
     void  showFullScreen( bool );
     void  showStatusBar( bool );
+    void  syncBookmarksManually();
 
     /**
      * @brief Show the dateTime label in the status bar.

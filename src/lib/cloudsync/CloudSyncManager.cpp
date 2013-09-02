@@ -22,6 +22,7 @@ public:
 
     bool m_syncEnabled;
     bool m_routeSyncEnabled;
+    bool m_bookmarkSyncEnabled;
 
     QString m_ownloudServer;
     QString m_owncloudUsername;
@@ -32,6 +33,7 @@ CloudSyncManager::Private::Private() :
     m_workOffline( false ),
     m_syncEnabled( false ),
     m_routeSyncEnabled( true ),
+    m_bookmarkSyncEnabled( true ),
     m_ownloudServer(),
     m_owncloudUsername(),
     m_owncloudPassword()
@@ -76,6 +78,11 @@ bool CloudSyncManager::isRouteSyncEnabled() const
     return d->m_routeSyncEnabled;
 }
 
+bool CloudSyncManager::isBookmarkSyncEnabled() const
+{
+    return d->m_bookmarkSyncEnabled;
+}
+
 QString CloudSyncManager::owncloudServer() const
 {
     return d->m_ownloudServer;
@@ -104,6 +111,14 @@ void CloudSyncManager::setRouteSyncEnabled( bool enabled )
     if ( d->m_routeSyncEnabled != enabled ) {
         d->m_routeSyncEnabled = enabled;
         emit routeSyncEnabledChanged( d->m_routeSyncEnabled );
+    }
+}
+
+void CloudSyncManager::setBookmarkSyncEnabled( bool enabled )
+{
+    if ( d->m_bookmarkSyncEnabled != enabled ) {
+        d->m_bookmarkSyncEnabled = enabled;
+        emit bookmarkSyncEnabledChanged( d->m_bookmarkSyncEnabled );
     }
 }
 

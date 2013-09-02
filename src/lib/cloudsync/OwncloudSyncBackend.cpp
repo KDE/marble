@@ -9,18 +9,19 @@
 //
 
 #include "OwncloudSyncBackend.h"
-#include "CloudRouteModel.h"
+
 #include "MarbleDirs.h"
-#include "MarbleDebug.h"
-#include "MarbleWidget.h"
 #include "MarbleModel.h"
+#include "MarbleDebug.h"
+#include "GeoDocument.h"
+#include "MarbleWidget.h"
 #include "RenderPlugin.h"
 #include "RoutingModel.h"
-#include "RoutingManager.h"
-#include "GeoDocument.h"
-#include "GeoDataFolder.h"
-#include "GeoDataDocument.h"
 #include "GeoDataParser.h"
+#include "GeoDataFolder.h"
+#include "RoutingManager.h"
+#include "GeoDataDocument.h"
+#include "CloudRouteModel.h"
 #include "GeoDataPlacemark.h"
 
 #include <QNetworkAccessManager>

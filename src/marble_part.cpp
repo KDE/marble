@@ -94,6 +94,7 @@
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
 #include "MapThemeDownloadDialog.h"
+#include "cloudsync/BookmarkSyncManager.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -195,6 +196,9 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     connect( m_controlView, SIGNAL(showUploadDialog()), this, SLOT(showUploadNewStuffDialog()) );
     connect( m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()) );
     connect( m_controlView, SIGNAL(mapThemeDeleted()), this, SLOT(fallBackToDefaultTheme()) );
+
+    // Start first bookmark synchronization, and then sync every hour.
+    m_controlView->syncBookmarks();
 }
 
 MarblePart::~MarblePart()
@@ -352,6 +356,11 @@ void MarblePart::showStatusBar( bool isChecked )
         return;
 
     m_statusBarExtension->statusBar()->setVisible( isChecked );
+}
+
+void MarblePart::syncBookmarksManually()
+{
+    m_controlView->syncBookmarks();
 }
 
 void MarblePart::controlSun()
@@ -540,6 +549,7 @@ void MarblePart::readSettings()
     CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
     cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
     cloudSyncManager->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
+    cloudSyncManager->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
     cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
     cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
     cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );
@@ -1382,7 +1392,11 @@ void MarblePart::editSettings()
 
     w_cloudSyncSettings->setObjectName( "sync_page" );
     ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
+    ui_cloudSyncSettings.button_syncNow->setEnabled( MarbleSettings::syncBookmarks() );
     m_configDialog->addPage( w_cloudSyncSettings, i18n( "Synchronization" ), "folder-sync" );
+
+    connect( ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
+             this, SLOT(syncBookmarksManually()) );
     
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );
@@ -1559,6 +1573,7 @@ void MarblePart::updateSettings()
     CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
     cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
     cloudSyncManager->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
+    cloudSyncManager->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
     cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
     cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
     cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );

@@ -164,6 +164,8 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     QWidget *w_cloudSyncSettings = new QWidget( this );
     d->ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
     tabWidget->addTab( w_cloudSyncSettings, tr( "Synchronization" ) );
+    d->ui_cloudSyncSettings.button_syncNow->setEnabled( syncBookmarks() );
+    connect( d->ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()), SIGNAL(syncNowClicked()) );
 
     // Layout
     QVBoxLayout *layout = new QVBoxLayout( this );

@@ -80,6 +80,7 @@
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
 #include "cloudsync/CloudSyncManager.h"
+#include "cloudsync/BookmarkSyncManager.h"
 
 namespace
 {
@@ -122,6 +123,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
              m_controlView->marbleWidget(), SLOT(clearVolatileTileCache()) );
     connect( m_configDialog, SIGNAL(clearPersistentCacheClicked()),
              m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
+    connect( m_configDialog, SIGNAL(syncNowClicked()),
+             this, SLOT(syncBookmarksManually()) );
 
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
@@ -146,6 +149,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     QMetaObject::invokeMethod(this,
                               "initObject", Qt::QueuedConnection,
                               Q_ARG(QVariantMap, cmdLineSettings));
+
+    m_controlView->syncBookmarks();
 }
 
 void MainWindow::addGeoDataFile( const QString &fileName )
@@ -1147,6 +1152,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
      CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
      cloudSyncManager->setSyncEnabled( settings.value( "enableSync", false ).toBool() );
      cloudSyncManager->setRouteSyncEnabled( settings.value( "syncRoutes", true ).toBool() );
+     cloudSyncManager->setRouteSyncEnabled( settings.value( "syncBookmarks", true ).toBool() );
      cloudSyncManager->setOwncloudServer( settings.value( "owncloudServer", "" ).toString() );
      cloudSyncManager->setOwncloudUsername( settings.value( "owncloudUsername", "" ).toString() );
      cloudSyncManager->setOwncloudPassword( settings.value( "owncloudPassword", "" ).toString() );
@@ -1326,6 +1332,7 @@ void MainWindow::updateSettings()
     CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
     cloudSyncManager->setSyncEnabled( m_configDialog->syncEnabled() );
     cloudSyncManager->setRouteSyncEnabled( m_configDialog->syncRoutes() );
+    cloudSyncManager->setBookmarkSyncEnabled( m_configDialog->syncBookmarks() );
     cloudSyncManager->setOwncloudServer( m_configDialog->owncloudServer() );
     cloudSyncManager->setOwncloudUsername( m_configDialog->owncloudUsername() );
     cloudSyncManager->setOwncloudPassword( m_configDialog->owncloudPassword() );
@@ -1414,6 +1421,11 @@ void MainWindow::showZoomLevel(bool show)
 void MainWindow::fallBackToDefaultTheme()
 {
     m_controlView->marbleWidget()->setMapThemeId( m_controlView->defaultMapThemeId() );
+}
+
+void MainWindow::syncBookmarksManually()
+{
+    m_controlView->syncBookmarks();
 }
 
 #include "QtMainWindow.moc"

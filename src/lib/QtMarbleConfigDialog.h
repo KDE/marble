@@ -120,6 +120,11 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
      */
     void clearPersistentCacheClicked();
 
+    /**
+     * The user clicked on the button to manually synchronize bookmarks.
+     */
+    void syncNowClicked();
+
     public Q_SLOTS:
     /**
      * Read settings and update interface.

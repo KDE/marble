@@ -17,6 +17,7 @@
 #include "PositionSource.h"
 #include "Bookmarks.h"
 #include "CloudSync.h"
+#include "cloudsync/MergeItem.h"
 #include "Tracking.h"
 #include "Routing.h"
 #include "Navigation.h"
@@ -58,6 +59,7 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Navigation>( uri, 0, 11, "Navigation" );
     qmlRegisterType<Search>( uri, 0, 11, "Search" );
     qmlRegisterType<CloudSync>( uri, 0, 11, "CloudSync" );
+    qmlRegisterType<Marble::MergeItem>( uri, 0, 11, "MergeItem" );
     qmlRegisterType<RouteRequestModel>( uri, 0, 11, "RouteRequestModel" );
     qmlRegisterType<Settings>( uri, 0, 11, "Settings" );
 
