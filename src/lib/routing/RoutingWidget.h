@@ -112,9 +112,6 @@ private Q_SLOTS:
     /** Progress animation update */
     void updateProgress();
 
-    /** Switch to an alternative route */
-    void switchRoute( int index );
-
     /** Toggle visibility of alternative routes */
     void updateAlternativeRoutes();
 

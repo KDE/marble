@@ -598,15 +598,6 @@ void RoutingWidget::updateProgress()
     }
 }
 
-void RoutingWidget::switchRoute( int index )
-{
-    if ( index >= 0 )
-    {
-        Q_ASSERT( index < d->m_ui.routeComboBox->count() );
-        d->m_routingManager->alternativeRoutesModel()->setCurrentRoute( index );
-    }
-}
-
 void RoutingWidget::updateAlternativeRoutes()
 {
     if ( d->m_ui.routeComboBox->count() == 1) {
