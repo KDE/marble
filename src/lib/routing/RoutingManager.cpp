@@ -16,7 +16,6 @@
 #include "RouteRequest.h"
 #include "RoutingModel.h"
 #include "RoutingProfilesModel.h"
-#include "MarbleRunnerManager.h"
 #include "RoutingRunnerPlugin.h"
 #include "AutoNavigation.h"
 #include "GeoWriter.h"
@@ -28,6 +27,7 @@
 #include "PositionTracking.h"
 #include "PluginManager.h"
 #include "PositionProviderPlugin.h"
+#include "RoutingRunnerManager.h"
 
 #include <QFile>
 #include <QMessageBox>
@@ -52,7 +52,7 @@ public:
 
     AlternativeRoutesModel m_alternativeRoutesModel;
 
-    MarbleRunnerManager m_runnerManager;
+    RoutingRunnerManager m_runnerManager;
 
     bool m_haveRoute;
 
@@ -98,17 +98,16 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_profilesModel( model->pluginManager() ),
         m_marbleModel( model ),
         m_alternativeRoutesModel( parent ),
-        m_runnerManager( model->pluginManager(), q ),
+        m_runnerManager( model, q ),
         m_haveRoute( false ),
         m_adjustNavigation( 0 ),
         m_guidanceModeEnabled( false ),
         m_shutdownPositionTracking( false ),
         m_guidanceModeWarning( true ),
-        m_routeColorStandard   ( Oxygen::skyBlue4 ),
+        m_routeColorStandard( Oxygen::skyBlue4 ),
         m_routeColorHighlighted( Oxygen::skyBlue1 ),
         m_routeColorAlternative( Oxygen::aluminumGray4 )
 {
-    m_runnerManager.setModel( model );
     m_routeColorStandard.setAlpha( 200 );
     m_routeColorHighlighted.setAlpha( 200 );
     m_routeColorAlternative.setAlpha( 200 );

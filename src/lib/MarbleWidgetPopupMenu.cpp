@@ -30,10 +30,10 @@
 #include "Planet.h"
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
-#include "MarbleRunnerManager.h"
 #include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
 #include "MarbleDirs.h"
+#include "ReverseGeocodingRunnerManager.h"
 #include "TemplateDocument.h"
 
 // Qt
@@ -58,7 +58,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_directionsToHereAction( 0 ),
       m_copyCoordinateAction( new QAction( QIcon(":/icons/copy-coordinates.png"), tr("Copy Coordinates"), this ) ),
       m_rmbExtensionPoint( 0 ),
-      m_runnerManager( new MarbleRunnerManager( model->pluginManager(), this ) )
+      m_runnerManager( new ReverseGeocodingRunnerManager( model, this ) )
 {
     // Property actions (Left mouse button)
     m_infoDialogAction = new QAction( this );

@@ -27,7 +27,10 @@ class SearchRunner;
 class ReverseGeocodingRunner;
 class RouteRequest;
 class RoutingRunner;
-class MarbleRunnerManager;
+class ParsingRunnerManager;
+class SearchRunnerManager;
+class ReverseGeocodingRunnerManager;
+class RoutingRunnerManager;
 
 /** A RunnerTask that executes a placemark search */
 class SearchTask : public QObject, public QRunnable
@@ -35,7 +38,7 @@ class SearchTask : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    SearchTask( SearchRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
+    SearchTask( SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
     /**
      * @reimp
@@ -57,7 +60,7 @@ class ReverseGeocodingTask : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    ReverseGeocodingTask( ReverseGeocodingRunner*runner, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates );
+    ReverseGeocodingTask( ReverseGeocodingRunner*runner, ReverseGeocodingRunnerManager *manager, const MarbleModel *model, const GeoDataCoordinates &coordinates );
 
     /**
      * @reimp
@@ -79,7 +82,7 @@ class RoutingTask : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    RoutingTask( RoutingRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest );
+    RoutingTask( RoutingRunner *runner, RoutingRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest );
 
     /**
      * @reimp
@@ -100,7 +103,7 @@ class ParsingTask : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    ParsingTask( ParsingRunner *runner, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role );
+    ParsingTask( ParsingRunner *runner, ParsingRunnerManager *manager, const QString& fileName, DocumentRole role );
 
     /**
      * @reimp

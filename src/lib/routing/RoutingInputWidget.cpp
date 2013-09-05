@@ -13,7 +13,6 @@
 
 #include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
-#include "MarbleRunnerManager.h"
 #include "RouteRequest.h"
 #include "TinyWebBrowser.h"
 #include "BookmarkManager.h"
@@ -23,6 +22,8 @@
 #include "GeoDataFolder.h"
 #include "GeoDataExtendedData.h"
 #include "PositionTracking.h"
+#include "ReverseGeocodingRunnerManager.h"
+#include "SearchRunnerManager.h"
 #include "MarbleLineEdit.h"
 #include "GoToDialog.h"
 
@@ -63,7 +64,8 @@ public:
 
     QPushButton* m_removeButton;
 
-    MarbleRunnerManager m_runnerManager;
+    SearchRunnerManager m_placemarkRunnerManager;
+    ReverseGeocodingRunnerManager m_reverseGeocodingRunnerManager;
 
     MarblePlacemarkModel *m_placemarkModel;
 
@@ -146,14 +148,13 @@ void RoutingInputLineEdit::keyPressEvent(QKeyEvent *event)
 
 RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int index, QWidget *parent ) :
         m_marbleModel( widget->model() ), m_marbleWidget( widget ), m_lineEdit( 0 ),
-        m_runnerManager( m_marbleModel->pluginManager() ),
+        m_placemarkRunnerManager( m_marbleModel ),
+        m_reverseGeocodingRunnerManager( m_marbleModel ),
         m_placemarkModel( 0 ), m_route( m_marbleModel->routingManager()->routeRequest() ), m_index( index ),
         m_currentFrame( 0 ),
         m_bookmarkAction( 0 ), m_mapInput( 0 ), m_currentLocationAction( 0 ),
         m_centerAction( 0 )
 {
-    m_runnerManager.setModel( m_marbleModel );
-
     m_lineEdit = new RoutingInputLineEdit( parent );
     m_lineEdit->setDecorator( addDropDownIndicator( m_route->pixmap( m_index ) ) );
 
@@ -275,15 +276,15 @@ RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget
              this, SLOT(reloadBookmarks()) );
     connect( d->m_marbleModel->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
              this, SLOT(updateCurrentLocationButton(PositionProviderStatus)) );
-    connect( &d->m_runnerManager, SIGNAL(searchResultChanged(QAbstractItemModel*)),
+    connect( &d->m_placemarkRunnerManager, SIGNAL(searchResultChanged(QAbstractItemModel*)),
              this, SLOT(setPlacemarkModel(QAbstractItemModel*)) );
-    connect( &d->m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
+    connect( &d->m_reverseGeocodingRunnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
              this, SLOT(retrieveReverseGeocodingResult(GeoDataCoordinates,GeoDataPlacemark)) );
     connect( d->m_lineEdit, SIGNAL(returnPressed()),
              this, SLOT(findPlacemarks()) );
     connect( d->m_lineEdit, SIGNAL(textEdited(QString)),
              this, SLOT(setInvalid()) );
-    connect( &d->m_runnerManager, SIGNAL(searchFinished(QString)),
+    connect( &d->m_placemarkRunnerManager, SIGNAL(searchFinished(QString)),
              this, SLOT(finishSearch()) );
     connect( d->m_marbleModel->routingManager()->routeRequest(), SIGNAL(positionChanged(int,GeoDataCoordinates)),
              this, SLOT(updatePosition(int,GeoDataCoordinates)) );
@@ -308,7 +309,7 @@ void RoutingInputWidget::reverseGeocoding()
 
     QString const name = d->m_route->name( d->m_index );
     if ( name.isEmpty() || name == tr( "Current Location" ) ) {
-        d->m_runnerManager.reverseGeocoding( targetPosition() );
+        d->m_reverseGeocodingRunnerManager.reverseGeocoding( targetPosition() );
     } else {
         d->updateDescription();
     }
@@ -353,7 +354,7 @@ void RoutingInputWidget::findPlacemarks()
         setInvalid();
     } else {
         d->m_lineEdit->setBusy(true);
-        d->m_runnerManager.findPlacemarks( text );
+        d->m_placemarkRunnerManager.findPlacemarks( text );
     }
 }
 

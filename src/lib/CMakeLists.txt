@@ -201,7 +201,10 @@ set(marblewidget_SRCS
     routing/instructions/RoutingWaypoint.cpp
     routing/instructions/WaypointParser.cpp
 
-    MarbleRunnerManager.cpp
+    ParsingRunnerManager.cpp
+    ReverseGeocodingRunnerManager.cpp
+    RoutingRunnerManager.cpp
+    SearchRunnerManager.cpp
 
     AutoNavigation.cpp
 
@@ -427,7 +430,10 @@ else (APPLE AND QTONLY)
     PositionProviderPluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
-    MarbleRunnerManager.h
+    ParsingRunnerManager.h
+    ReverseGeocodingRunnerManager.h
+    RoutingRunnerManager.h
+    SearchRunnerManager.h
     ParsingRunner.h
     SearchRunner.h
     ReverseGeocodingRunner.h

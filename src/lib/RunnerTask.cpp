@@ -12,11 +12,14 @@
 #include "RunnerTask.h"
 
 #include "MarbleDebug.h"
-#include "MarbleRunnerManager.h"
 #include "ParsingRunner.h"
+#include "ParsingRunnerManager.h"
 #include "SearchRunner.h"
+#include "SearchRunnerManager.h"
 #include "ReverseGeocodingRunner.h"
+#include "ReverseGeocodingRunnerManager.h"
 #include "RoutingRunner.h"
+#include "RoutingRunnerManager.h"
 #include "routing/RouteRequest.h"
 
 #include <QTimer>
@@ -24,7 +27,7 @@
 namespace Marble
 {
 
-SearchTask::SearchTask( SearchRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
+SearchTask::SearchTask( SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
     QObject(),
     m_runner( runner ),
     m_searchTerm( searchTerm ),
@@ -43,7 +46,7 @@ void SearchTask::run()
     emit finished( this );
 }
 
-ReverseGeocodingTask::ReverseGeocodingTask( ReverseGeocodingRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const GeoDataCoordinates &coordinates ) :
+ReverseGeocodingTask::ReverseGeocodingTask( ReverseGeocodingRunner *runner, ReverseGeocodingRunnerManager *manager, const MarbleModel *model, const GeoDataCoordinates &coordinates ) :
     QObject(),
     m_runner( runner ),
     m_coordinates( coordinates )
@@ -61,7 +64,7 @@ void ReverseGeocodingTask::run()
     emit finished( this );
 }
 
-RoutingTask::RoutingTask( RoutingRunner *runner, MarbleRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest ) :
+RoutingTask::RoutingTask( RoutingRunner *runner, RoutingRunnerManager *manager, MarbleModel *model, const RouteRequest* routeRequest ) :
     QObject(),
     m_runner( runner ),
     m_routeRequest( routeRequest )
@@ -79,7 +82,7 @@ void RoutingTask::run()
     emit finished( this );
 }
 
-ParsingTask::ParsingTask( ParsingRunner *runner, MarbleRunnerManager *manager, const QString& fileName, DocumentRole role ) :
+ParsingTask::ParsingTask( ParsingRunner *runner, ParsingRunnerManager *manager, const QString& fileName, DocumentRole role ) :
     QObject(),
     m_runner( runner ),
     m_fileName( fileName ),

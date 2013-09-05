@@ -34,8 +34,8 @@ class MarbleWidget;
 class MarbleModel;
 class GeoDataCoordinates;
 class GeoDataPlacemark;
-class MarbleRunnerManager;
 class PopupLayer;
+class ReverseGeocodingRunnerManager;
 
 
 class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
@@ -112,7 +112,7 @@ private Q_SLOTS:
 
     QAction  *m_rmbExtensionPoint;
 
-    MarbleRunnerManager *const m_runnerManager;
+    ReverseGeocodingRunnerManager *const m_runnerManager;
 
     QPoint m_mousePosition;
 };

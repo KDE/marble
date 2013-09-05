@@ -14,11 +14,12 @@
 #include <QObject>
 #include <QtDeclarative>
 
-#include "MarbleRunnerManager.h"
-
 class QAbstractItemModel;
 
-namespace Marble { class MarblePlacemarkModel; }
+namespace Marble {
+    class MarblePlacemarkModel;
+    class SearchRunnerManager;
+}
 
 class MarbleWidget;
 
@@ -68,7 +69,7 @@ private:
     MarbleWidget* m_marbleWidget;
 
     /** Wrapped Marble runner manager */
-    Marble::MarbleRunnerManager *m_runnerManager;
+    Marble::SearchRunnerManager *m_runnerManager;
 
     /** Search result */
     Marble::MarblePlacemarkModel *m_searchResult;

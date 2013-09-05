@@ -25,8 +25,6 @@
 #include <QMetaType>
 #include <QImage>
 
-#include "MarbleRunnerManager.h"
-
 #include "GeoSceneTextureTile.h"
 #include "GeoSceneTiled.h"
 #include "GeoSceneVectorTile.h"
@@ -34,6 +32,7 @@
 #include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "ParsingRunnerManager.h"
 #include "TileLoaderHelper.h"
 
 Q_DECLARE_METATYPE( Marble::DownloadUsage )
@@ -110,7 +109,7 @@ GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTile const *textu
         if ( file.exists() ) {
 
             // File is ready, so parse and return the vector data in any case
-            MarbleRunnerManager man( m_pluginManager );
+            ParsingRunnerManager man( m_pluginManager );
             GeoDataDocument* document = man.openFile( fileName );
 
             if (document){

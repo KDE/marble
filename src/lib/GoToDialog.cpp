@@ -12,15 +12,15 @@
 #include "GoToDialog.h"
 #include "ui_GoToDialog.h"
 
+#include "BookmarkManager.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "MarbleRunnerManager.h"
 #include "MarblePlacemarkModel.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "PositionTracking.h"
-#include "BookmarkManager.h"
+#include "SearchRunnerManager.h"
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
 
@@ -74,7 +74,7 @@ public:
 
     TargetModel m_targetModel;
 
-    MarbleRunnerManager m_runnerManager;
+    SearchRunnerManager m_runnerManager;
 
     GeoDataDocument *m_searchResult;
 
@@ -296,7 +296,7 @@ GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleModel* marbleMod
     m_parent( parent),
     m_marbleModel( marbleModel ),
     m_targetModel( marbleModel ),
-    m_runnerManager( marbleModel->pluginManager() ),
+    m_runnerManager( marbleModel ),
     m_searchResult( new GeoDataDocument ),
     m_currentFrame( 0 )
 {
@@ -377,7 +377,6 @@ GoToDialog::GoToDialog( MarbleModel* marbleModel, QWidget * parent, Qt::WindowFl
     d->updateSearchMode();
     d->progressButton->setVisible( false );
 
-    d->m_runnerManager.setModel( marbleModel );
     connect( &d->m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark*>)),
              this, SLOT(updateSearchResult(QVector<GeoDataPlacemark*>)) );
     connect( &d->m_runnerManager, SIGNAL(searchFinished(QString)),

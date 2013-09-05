@@ -31,7 +31,7 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "MarbleRunnerManager.h"
+#include "ParsingRunnerManager.h"
 
 namespace Marble
 {
@@ -86,7 +86,7 @@ public:
     void documentParsed( GeoDataDocument *doc, const QString& error);
 
     FileLoader *q;
-    MarbleRunnerManager m_runner;
+    ParsingRunnerManager m_runner;
     bool m_recenter;
     QString m_filepath;
     QString m_contents;

@@ -18,13 +18,13 @@
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
-#include "MarbleRunnerManager.h"
 #include "MarblePlacemarkModel.h"
 #include "BranchFilterProxyModel.h"
 #include "GeoDataDocument.h"
 #include "GeoDataTreeModel.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
+#include "SearchRunnerManager.h"
 #include "ViewportParams.h"
 
 // Qt
@@ -67,7 +67,7 @@ class NavigationWidgetPrivate
     BranchFilterProxyModel  m_branchfilter;
     QSortFilterProxyModel  *m_sortproxy;
     QString                 m_searchTerm;
-    MarbleRunnerManager    *m_runnerManager;
+    SearchRunnerManager *m_runnerManager;
     GeoDataDocument        *m_document;
 };
 
@@ -132,13 +132,12 @@ void NavigationWidget::setMarbleWidget( MarbleWidget *widget )
 {
     GeoDataTreeModel *treeModel;
 
-    d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
+    d->m_runnerManager = new SearchRunnerManager( widget->model(), this );
     connect( d->m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark*>)),
              this,               SLOT(setSearchResult(QVector<GeoDataPlacemark*>)) );
     connect( d->m_runnerManager, SIGNAL(searchFinished(QString)), this, SIGNAL(searchFinished()) );
 
     d->m_widget = widget;
-    d->m_runnerManager->setModel( widget->model() );
     treeModel = d->m_widget->model()->treeModel();
     treeModel->addDocument( d->m_document );
 

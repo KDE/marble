@@ -9,12 +9,14 @@
 //
 
 #include "SearchWidget.h"
+
+#include "GeoDataDocument.h"
 #include "SearchInputWidget.h"
-#include "MarbleRunnerManager.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "BranchFilterProxyModel.h"
 #include "MarblePlacemarkModel.h"
+#include "SearchRunnerManager.h"
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
 
@@ -26,7 +28,7 @@ namespace Marble {
 class SearchWidgetPrivate
 {
 public:
-    MarbleRunnerManager* m_runnerManager;
+    SearchRunnerManager* m_runnerManager;
     SearchInputWidget *m_searchField;
     QListView *m_searchResultView;
     MarbleWidget *m_widget;
@@ -124,8 +126,7 @@ void SearchWidget::setMarbleWidget( MarbleWidget* widget )
     connect( d->m_searchField, SIGNAL(centerOn(GeoDataCoordinates)),
              widget, SLOT(centerOn(GeoDataCoordinates)) );
 
-    d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
-    d->m_runnerManager->setModel( widget->model() );
+    d->m_runnerManager = new SearchRunnerManager( widget->model(), this );
     connect( d->m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark*>)),
              this,               SLOT(setSearchResult(QVector<GeoDataPlacemark*>)) );
     connect( d->m_runnerManager, SIGNAL(searchFinished(QString)),

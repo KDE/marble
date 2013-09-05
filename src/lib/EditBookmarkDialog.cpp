@@ -14,15 +14,16 @@
 #include "ui_EditBookmarkDialog.h"
 
 #include "BookmarkManager.h"
+#include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
 #include "GeoDataFolder.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataExtendedData.h"
 #include "MarbleModel.h"
-#include "MarbleRunnerManager.h"
 #include "MarbleWidget.h"
 #include "NewBookmarkFolderDialog.h"
+#include "ReverseGeocodingRunnerManager.h"
 
 #include <QPointer>
 
@@ -31,7 +32,7 @@ namespace Marble {
 class EditBookmarkDialogPrivate {
 public:
     MarbleWidget *m_widget;
-    MarbleRunnerManager* m_manager;
+    ReverseGeocodingRunnerManager* m_manager;
     BookmarkManager* m_bookmarkManager;
     GeoDataCoordinates m_bookmarkCoordinates;
     qreal m_range;
@@ -151,8 +152,7 @@ void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
     d->m_ui.m_longitude->setNotation( notation );
     d->m_ui.m_latitude->setNotation( notation );
 
-    d->m_manager = new MarbleRunnerManager( d->m_widget->model()->pluginManager(), this );
-    d->m_manager->setModel( d->m_widget->model() );
+    d->m_manager = new ReverseGeocodingRunnerManager( d->m_widget->model(), this );
     QObject::connect( d->m_manager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
             this, SLOT(retrieveGeocodeResult(GeoDataCoordinates,GeoDataPlacemark)) );
 }

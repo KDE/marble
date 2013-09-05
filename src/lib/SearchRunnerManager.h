@@ -1,0 +1,88 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2008 Henry de Valence <hdevalence@gmail.com>
+// Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+
+#ifndef MARBLE_SEARCHRUNNERMANAGER_H
+#define MARBLE_SEARCHRUNNERMANAGER_H
+
+#include "GeoDataLatLonAltBox.h"
+
+#include "marble_export.h"
+
+#include <QObject>
+#include <QVector>
+#include <QString>
+
+class QAbstractItemModel;
+
+namespace Marble
+{
+
+class GeoDataPlacemark;
+class MarbleModel;
+class SearchTask;
+
+class MARBLE_EXPORT SearchRunnerManager : public QObject
+{
+    Q_OBJECT
+
+public:
+    /**
+     * Constructor.
+     * @param pluginManager The plugin manager that gives access to RunnerPlugins
+     * @param parent Optional parent object
+     */
+    explicit SearchRunnerManager( const MarbleModel *marbleModel, QObject *parent = 0 );
+
+    ~SearchRunnerManager();
+
+    /**
+     * Search for placemarks matching the given search term.
+     * @see findPlacemark is asynchronous with results returned using the
+     * @see searchResultChanged signal.
+     * @see searchPlacemark is blocking.
+     * @see searchFinished signal indicates all runners are finished.
+     */
+    void findPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred = GeoDataLatLonAltBox() );
+    QVector<GeoDataPlacemark *> searchPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred = GeoDataLatLonAltBox() );
+
+Q_SIGNALS:
+    /**
+     * Placemarks were added to or removed from the model
+     * @todo FIXME: this sounds like a duplication of QAbstractItemModel signals
+     */
+    void searchResultChanged( QAbstractItemModel *model );
+    void searchResultChanged( const QVector<GeoDataPlacemark *> &result );
+
+    /**
+     * The search request for the given search term has finished, i.e. all
+     * runners are finished and reported their results via the
+     * @see searchResultChanged signal
+     */
+    void searchFinished( const QString &searchTerm );
+
+    /**
+     * Emitted whenever all runners are finished for the query
+     */
+    void placemarkSearchFinished();
+
+private:
+    Q_PRIVATE_SLOT( d, void addSearchResult( const QVector<GeoDataPlacemark *> &result ) )
+    Q_PRIVATE_SLOT( d, void cleanupSearchTask( SearchTask *task ) )
+
+    class Private;
+    friend class Private;
+    Private *const d;
+};
+
+}
+
+#endif
