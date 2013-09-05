@@ -36,7 +36,7 @@ class MarbleModel;
 class RoutingRunnerManager::Private
 {
 public:
-    Private( RoutingRunnerManager *parent, MarbleModel *marbleModel );
+    Private( RoutingRunnerManager *parent, const MarbleModel *marbleModel );
 
     ~Private();
 
@@ -47,14 +47,14 @@ public:
     void cleanupRoutingTask( RoutingTask *task );
 
     RoutingRunnerManager *const q;
-    MarbleModel *const m_marbleModel;
+    const MarbleModel *const m_marbleModel;
     const PluginManager *const m_pluginManager;
     QList<RoutingTask*> m_routingTasks;
     QVector<GeoDataDocument*> m_routingResult;
     int m_watchdogTimer;
 };
 
-RoutingRunnerManager::Private::Private( RoutingRunnerManager *parent, MarbleModel *marbleModel ) :
+RoutingRunnerManager::Private::Private( RoutingRunnerManager *parent, const MarbleModel *marbleModel ) :
     q( parent ),
     m_marbleModel( marbleModel ),
     m_pluginManager( marbleModel->pluginManager() ),
@@ -114,7 +114,7 @@ void RoutingRunnerManager::Private::cleanupRoutingTask( RoutingTask *task )
     }
 }
 
-RoutingRunnerManager::RoutingRunnerManager( MarbleModel *marbleModel, QObject *parent )
+RoutingRunnerManager::RoutingRunnerManager( const MarbleModel *marbleModel, QObject *parent )
     : QObject( parent ),
       d( new Private( this, marbleModel ) )
 {
