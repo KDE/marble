@@ -43,6 +43,7 @@
         <file>MapThemePage.qml</file>
         <file>PreferencesPage.qml</file>
         <file>OfflineDataPage.qml</file>
+        <file>CloudSyncPage.qml</file>
         <file>MarbleTouch.qml</file>
         <file alias="MarbleWindow.qml">harmattan/MarbleWindow.qml</file>
         <file>PositionIndicator.qml</file>

@@ -207,6 +207,15 @@ Item {
             screen.placemarkSelected(placemark)
         }
     }
+
+    // Manages cloud synchronization
+    CloudSync {
+        id: cloudSync
+        map: map
+        owncloudServer: settings.owncloudServer
+        owncloudUsername: settings.owncloudUsername
+        owncloudPassword: settings.owncloudPassword
+    }
     
     // Delivers the current (gps) position.
     PositionSource {

@@ -384,6 +384,20 @@ Page {
                         OfflineDataPage {  }
                     }
                 }
+
+                Button {
+                    id: manageCloudSyncButton
+                    anchors.top: manageThemeButton.bottom
+                    anchors.topMargin: 5
+                    anchors.left: parent.left;
+                    anchors.right: parent.right;
+                    text: "Manage Cloud Sync"
+                    onClicked: pageStack.push(cloudSyncPage)
+                    Component {
+                        id: cloudSyncPage
+                        CloudSyncPage {  }
+                    }
+                }
             }
         }
     }

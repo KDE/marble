@@ -45,6 +45,10 @@ Item {
     property bool navigationStartupWarning: settings.value( "MarbleTouch", "navigationStartupWarning", false)
     property bool navigationStartupWarningEverShown: settings.value( "MarbleTouch", "navigationStartupWarningEverShown", false)
     property string changelogShown: settings.value( "MarbleTouch", "changelogShown", "" )
+    property string owncloudSync: settings.value( "MarbleTouch", "owncloudSync", false )
+    property string owncloudServer: settings.value( "MarbleTouch", "owncloudServer", "" )
+    property string owncloudUsername: settings.value( "MarbleTouch", "owncloudUsername", "" )
+    property string owncloudPassword: settings.value( "MarbleTouch", "owncloudPassword", "" )
 
     // Save settings to file.
     Component.onDestruction: {
@@ -69,6 +73,10 @@ Item {
         settings.setValue( "MarbleTouch", "navigationStartupWarning", root.navigationStartupWarning )
         settings.setValue( "MarbleTouch", "navigationStartupWarningEverShown", root.navigationStartupWarningEverShown )
         settings.setValue( "MarbleTouch", "changelogShown", root.changelogShown )
+        settings.setValue( "MarbleTouch", "owncloudSync", root.owncloudSync )
+        settings.setValue( "MarbleTouch", "owncloudServer", root.owncloudServer )
+        settings.setValue( "MarbleTouch", "owncloudUsername", root.owncloudUsername )
+        settings.setValue( "MarbleTouch", "owncloudPassword", root.owncloudPassword )
     }
 
     function removeElementsFromArray(array, elements) {
