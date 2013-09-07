@@ -52,7 +52,7 @@ public:
      * @see searchFinished signal indicates all runners are finished.
      */
     void findPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred = GeoDataLatLonAltBox() );
-    QVector<GeoDataPlacemark *> searchPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred = GeoDataLatLonAltBox() );
+    QVector<GeoDataPlacemark *> searchPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred = GeoDataLatLonAltBox(), int timeout = 30000 );
 
 Q_SIGNALS:
     /**

@@ -61,15 +61,13 @@ public:
     MarblePlacemarkModel m_model;
     QList<SearchTask *> m_searchTasks;
     QVector<GeoDataPlacemark *> m_placemarkContainer;
-    int m_watchdogTimer;
 };
 
 SearchRunnerManager::Private::Private( SearchRunnerManager *parent, const MarbleModel *marbleModel ) :
     q( parent ),
     m_marbleModel( marbleModel ),
     m_pluginManager( marbleModel->pluginManager() ),
-    m_model( new MarblePlacemarkModel( parent ) ),
-    m_watchdogTimer( 30000 )
+    m_model( new MarblePlacemarkModel( parent ) )
 {
     m_model.setPlacemarkContainer( &m_placemarkContainer );
     qRegisterMetaType<QVector<GeoDataPlacemark *> >( "QVector<GeoDataPlacemark*>" );
@@ -200,7 +198,7 @@ void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
     }
 }
 
-QVector<GeoDataPlacemark *> SearchRunnerManager::searchPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
+QVector<GeoDataPlacemark *> SearchRunnerManager::searchPlacemarks( const QString &searchTerm, const GeoDataLatLonAltBox &preferred, int timeout )
 {
     QEventLoop localEventLoop;
     QTimer watchdog;
@@ -210,7 +208,7 @@ QVector<GeoDataPlacemark *> SearchRunnerManager::searchPlacemarks( const QString
     connect(this, SIGNAL(placemarkSearchFinished()),
             &localEventLoop, SLOT(quit()), Qt::QueuedConnection );
 
-    watchdog.start( d->m_watchdogTimer );
+    watchdog.start( timeout );
     findPlacemarks( searchTerm, preferred );
     localEventLoop.exec();
     return d->m_placemarkContainer;

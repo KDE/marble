@@ -46,14 +46,12 @@ public:
     QList<ReverseGeocodingTask*> m_reverseTasks;
     QList<GeoDataCoordinates> m_reverseGeocodingResults;
     QString m_reverseGeocodingResult;
-    int m_watchdogTimer;
 };
 
 ReverseGeocodingRunnerManager::Private::Private( ReverseGeocodingRunnerManager *parent, const MarbleModel *marbleModel ) :
     q( parent ),
     m_marbleModel( marbleModel ),
-    m_pluginManager( marbleModel->pluginManager() ),
-    m_watchdogTimer( 30000 )
+    m_pluginManager( marbleModel->pluginManager() )
 {
     qRegisterMetaType<GeoDataPlacemark>( "GeoDataPlacemark" );
     qRegisterMetaType<GeoDataCoordinates>( "GeoDataCoordinates" );
@@ -144,7 +142,7 @@ void ReverseGeocodingRunnerManager::reverseGeocoding( const GeoDataCoordinates &
     }
 }
 
-QString ReverseGeocodingRunnerManager::searchReverseGeocoding( const GeoDataCoordinates &coordinates ) {
+QString ReverseGeocodingRunnerManager::searchReverseGeocoding( const GeoDataCoordinates &coordinates, int timeout ) {
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
@@ -153,7 +151,7 @@ QString ReverseGeocodingRunnerManager::searchReverseGeocoding( const GeoDataCoor
     connect(this, SIGNAL(reverseGeocodingFinished()),
             &localEventLoop, SLOT(quit()), Qt::QueuedConnection );
 
-    watchdog.start( d->m_watchdogTimer );
+    watchdog.start( timeout );
     reverseGeocoding( coordinates );
     localEventLoop.exec();
     return d->m_reverseGeocodingResult;

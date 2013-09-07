@@ -48,7 +48,7 @@ public:
      * @see routingFinished signal indicates all runners are finished.
      */
     void retrieveRoute( const RouteRequest *request );
-    QVector<GeoDataDocument *> searchRoute( const RouteRequest *request );
+    QVector<GeoDataDocument *> searchRoute( const RouteRequest *request, int timeout = 30000 );
 
 Q_SIGNALS:
     /**

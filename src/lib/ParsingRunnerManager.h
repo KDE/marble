@@ -50,7 +50,7 @@ public:
      * @see parsingFinished signal indicates all runners are finished.
      */
     void parseFile( const QString &fileName, DocumentRole role = UserDocument );
-    GeoDataDocument *openFile( const QString &fileName, DocumentRole role = UserDocument );
+    GeoDataDocument *openFile( const QString &fileName, DocumentRole role = UserDocument, int timeout = 30000 );
 
 Q_SIGNALS:
     /**

@@ -43,14 +43,12 @@ public:
     const PluginManager *const m_pluginManager;
     QList<ParsingTask *> m_parsingTasks;
     GeoDataDocument *m_fileResult;
-    int m_watchdogTimer;
 };
 
 ParsingRunnerManager::Private::Private( ParsingRunnerManager *parent, const PluginManager *pluginManager ) :
     q( parent ),
     m_pluginManager( pluginManager ),
-    m_fileResult( 0 ),
-    m_watchdogTimer( 30000 )
+    m_fileResult( 0 )
 {
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
 }
@@ -120,7 +118,7 @@ void ParsingRunnerManager::parseFile( const QString &fileName, DocumentRole role
     }
 }
 
-GeoDataDocument* ParsingRunnerManager::openFile( const QString &fileName, DocumentRole role ) {
+GeoDataDocument *ParsingRunnerManager::openFile( const QString &fileName, DocumentRole role, int timeout ) {
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
@@ -129,7 +127,7 @@ GeoDataDocument* ParsingRunnerManager::openFile( const QString &fileName, Docume
     connect(this, SIGNAL(parsingFinished()),
             &localEventLoop, SLOT(quit()), Qt::QueuedConnection );
 
-    watchdog.start( d->m_watchdogTimer );
+    watchdog.start( timeout );
     parseFile( fileName, role);
     localEventLoop.exec();
     return d->m_fileResult;

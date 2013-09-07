@@ -51,14 +51,12 @@ public:
     const PluginManager *const m_pluginManager;
     QList<RoutingTask*> m_routingTasks;
     QVector<GeoDataDocument*> m_routingResult;
-    int m_watchdogTimer;
 };
 
 RoutingRunnerManager::Private::Private( RoutingRunnerManager *parent, const MarbleModel *marbleModel ) :
     q( parent ),
     m_marbleModel( marbleModel ),
-    m_pluginManager( marbleModel->pluginManager() ),
-    m_watchdogTimer( 30000 )
+    m_pluginManager( marbleModel->pluginManager() )
 {
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
 }
@@ -157,7 +155,7 @@ void RoutingRunnerManager::retrieveRoute( const RouteRequest *request )
     }
 }
 
-QVector<GeoDataDocument*> RoutingRunnerManager::searchRoute( const RouteRequest *request ) {
+QVector<GeoDataDocument*> RoutingRunnerManager::searchRoute( const RouteRequest *request, int timeout ) {
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
@@ -166,7 +164,7 @@ QVector<GeoDataDocument*> RoutingRunnerManager::searchRoute( const RouteRequest 
     connect(this, SIGNAL(routingFinished()),
             &localEventLoop, SLOT(quit()), Qt::QueuedConnection );
 
-    watchdog.start( d->m_watchdogTimer );
+    watchdog.start( timeout );
     retrieveRoute( request );
     localEventLoop.exec();
     return d->m_routingResult;

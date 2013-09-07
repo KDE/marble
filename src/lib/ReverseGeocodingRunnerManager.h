@@ -49,7 +49,7 @@ public:
      * @see reverseGeocodingFinished signal indicates all runners are finished.
      */
     void reverseGeocoding( const GeoDataCoordinates &coordinates );
-    QString searchReverseGeocoding( const GeoDataCoordinates &coordinates );
+    QString searchReverseGeocoding( const GeoDataCoordinates &coordinates, int timeout = 30000 );
 
 Q_SIGNALS:
     /**
