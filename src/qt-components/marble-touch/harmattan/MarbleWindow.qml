@@ -97,6 +97,10 @@ PageStackWindow {
             return "image://theme/icon-m-toolbar-favorite-mark"
         } else if ( name === "actions/go-home" ) {
             return "image://theme/icon-m-toolbar-home"
+        } else if ( name === "actions/download" ) {
+            return "image://theme/icon-s-transfer-download"
+        } else if ( name === "actions/upload" ) {
+            return "image://theme/icon-s-transfer-upload"
         }
 
         return name

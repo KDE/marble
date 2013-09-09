@@ -33,6 +33,7 @@ Item {
     property alias search: map.search
     property alias tracking: map.tracking
     property alias navigation: map.navigation
+    property alias cloudSync: map.cloudSync
 
     // The widget representing the map.
     MarbleWidget {
@@ -78,6 +79,14 @@ Item {
             muted: settings.voiceNavigationMuted
             speaker: settings.voiceNavigationSpeaker
             soundEnabled: settings.voiceNavigationSoundEnabled
+        }
+
+        property CloudSync cloudSync: CloudSync {
+            id: cloudSync
+            map: map
+            owncloudServer: settings.owncloudServer
+            owncloudUsername: settings.owncloudUsername
+            owncloudPassword: settings.owncloudPassword
         }
         
         Component.onCompleted: {
@@ -208,15 +217,6 @@ Item {
         }
     }
 
-    // Manages cloud synchronization
-    CloudSync {
-        id: cloudSync
-        map: map
-        owncloudServer: settings.owncloudServer
-        owncloudUsername: settings.owncloudUsername
-        owncloudPassword: settings.owncloudPassword
-    }
-    
     // Delivers the current (gps) position.
     PositionSource {
         id: positionProvider

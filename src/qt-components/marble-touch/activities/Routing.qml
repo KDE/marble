@@ -5,6 +5,7 @@
 // the source code.
 //
 // Copyright 2011 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013 Andrei Duma <andrei.duma.dorian@gmail.com>
 
 import QtQuick 1.0
 import com.nokia.meego 1.0
@@ -82,10 +83,24 @@ Page {
                     saveRouteDialog.open()
                 }
             }
+
+            MenuItem {
+                text: "Save Route to Cloud"
+                onClicked: marbleWidget.cloudSync.uploadRoute()
+                visible: settings.owncloudSync
+            }
+
             MenuItem {
                 text: "Open Route"
                 onClicked: openRouteDialog.open()
             }
+
+            MenuItem {
+                text: "Cloud Routes"
+                onClicked: manageRoutesSheet.open()
+                visible: settings.owncloudSync
+            }
+
             MenuItemSwitch {
                 text: "Elevation Profile"
                 checked: false
@@ -250,6 +265,170 @@ Page {
     onStatusChanged: {
         if ( status === PageStatus.Activating ) {
             mapContainer.embedMarbleWidget()
+        }
+    }
+
+    Sheet {
+        id: manageRoutesSheet
+        rejectButtonText: "Back"
+
+        content: ListView {
+            id: routeView
+            anchors.fill: parent
+            spacing: 5
+            clip: true
+
+            model: marbleWidget.cloudSync.routeModel
+            delegate: routeViewDelegate
+
+            highlight: Rectangle {
+                color: "lightsteelblue"
+                radius: 5
+            }
+        }
+    }
+
+    Component {
+        id: routeViewDelegate
+
+        Item {
+            property bool selected: routeView.currentIndex === index
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: routeView.currentIndex = index
+            }
+
+            width: routeView.width
+            height: routeTopBox.height + (selected ? routeControlBox.height + 15 : 10)
+
+            Item {
+                id: routeTopBox
+                anchors.margins: 5
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: previewImage.height
+
+                Image {
+                    id: previewImage
+                    source: previewUrl
+                    width: 128; height: 128
+                }
+
+                Item {
+                    id: routeInfo
+
+                    anchors.left: previewImage.right
+                    anchors.leftMargin: 5
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+
+                    Text {
+                        id: nameText
+                        text: name
+                        anchors.centerIn: parent
+                        width: parent.width - 20
+                        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                        font.pixelSize: 18
+                    }
+                }
+            }
+
+            Item {
+                id: routeControlBox
+                visible: selected
+
+                anchors.top: routeTopBox.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: 5
+
+                height: openButton.height
+
+                Button {
+                    id: openButton
+
+                    width: 100
+                    text: "Open"
+                    onClicked: {
+                        marbleWidget.cloudSync.openRoute( identifier )
+                        manageRoutesSheet.close()
+                    }
+                }
+
+                Row {
+                    anchors.right: parent.right
+                    spacing: 5
+                    Rectangle {
+                        radius: 25
+                        width: cacheControlBox.width + 12
+                        height: cacheControlBox.height - 1
+                        Row {
+                            id: cacheControlBox
+                            anchors.right: parent.right
+                            spacing: 10
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: isCached ? "On device" : "Not on device"
+                                font.pixelSize: 18
+                            }
+
+                            Button {
+                                width: 56
+                                iconSource: main.icon( "actions/download", 32 )
+                                onClicked: {
+                                    marbleWidget.cloudSync.downloadRoute( identifier )
+                                }
+                                visible: !isCached
+                            }
+
+                            Button {
+                                width: 56
+                                iconSource: main.icon( "actions/dialog-cancel", 32 )
+                                onClicked: {
+                                    marbleWidget.cloudSync.removeRouteFromDevice( identifier )
+                                }
+                                visible: isCached
+                            }
+                        }
+                    }
+                    Rectangle {
+                        radius: 25
+                        width: cloudControlBox.width + 12
+                        height: cloudControlBox.height - 1
+                        Row {
+                            id: cloudControlBox
+                            anchors.right: parent.right
+                            spacing: 10
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: isOnCloud ? "In cloud" : "Not in cloud"
+                                font.pixelSize: 18
+                            }
+
+                            Button {
+                                width: 56
+                                iconSource: main.icon( "actions/upload", 32 )
+                                onClicked: {
+                                    marbleWidget.cloudSync.uploadRoute( identifier )
+                                }
+                                visible: !isOnCloud
+                            }
+
+                            Button {
+                                width: 56
+                                iconSource: main.icon( "actions/dialog-cancel", 32 )
+                                onClicked: {
+                                    marbleWidget.cloudSync.deleteRouteFromCloud( identifier )
+                                }
+                                visible: isOnCloud
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
