@@ -39,13 +39,23 @@
         <file>icons/routing-motorcar.svg</file>
         <file alias="marble/wireless.svg">icons/wireless.svg</file>
         <file alias="marble/globe.svg">icons/globe.svg</file>
+        <file>icons/marker-direction.svg</file>
+        <file>icons/marker-yellow.svg</file>
+        <file>icons/marker.svg</file>
+        <file>icons/placemark.svg</file>
         <file>MapThemeSelectionPage.qml</file>
         <file>MapThemePage.qml</file>
         <file>PreferencesPage.qml</file>
         <file>OfflineDataPage.qml</file>
         <file>CloudSyncPage.qml</file>
         <file>MarbleTouch.qml</file>
-        <file alias="MarbleWindow.qml">harmattan/MarbleWindow.qml</file>
         <file>PositionIndicator.qml</file>
+        <file>FileDialog.qml</file>
+        <file>FileOpenDialog.qml</file>
+        <file>FileSaveDialog.qml</file>
+        <file>PlacemarkEditor.qml</file>
+        <file>RouteEditor.qml</file>
+        <file>SearchField.qml</file>
+        <file>ViaPointEditor.qml</file>
     </qresource>
 </RCC>

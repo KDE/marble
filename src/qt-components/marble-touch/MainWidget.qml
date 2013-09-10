@@ -113,7 +113,7 @@ Item {
             placemarkDelegate:
                 Image {
                 id: searchDelegate
-                source: "qrc:/placemark.svg"
+                source: "qrc:/icons/placemark.svg"
                 transformOrigin: Item.Bottom
                 width: 32
                 fillMode: Image.PreserveAspectFit
@@ -244,7 +244,7 @@ Item {
         width: 60
         fillMode: Image.PreserveAspectFit
         smooth: true
-        source: positionProvider.hasPosition ? "qrc:/marker.svg" : "qrc:/marker-yellow.svg"
+        source: positionProvider.hasPosition ? "qrc:/icons/marker.svg" : "qrc:/icons/marker-yellow.svg"
         visible: false
 
         // Animation that grows/shrinks the marker.

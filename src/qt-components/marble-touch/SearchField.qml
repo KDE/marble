@@ -9,7 +9,6 @@
 
 import QtQuick 1.0
 import com.nokia.meego 1.0
-import org.kde.edu.marble.qtcomponents 0.12
 
 /*
      * A textfield for searching locations.

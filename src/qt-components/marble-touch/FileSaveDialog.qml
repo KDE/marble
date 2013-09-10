@@ -8,7 +8,6 @@
 
 import QtQuick 1.0
 import com.nokia.meego 1.0
-import org.kde.edu.marble.qtcomponents 0.12
 
 FileDialog {
     id: root

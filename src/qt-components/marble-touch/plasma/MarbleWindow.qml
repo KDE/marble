@@ -7,7 +7,6 @@
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 // Copyright 2012 Dennis Nienhüser <earthwings@gentoo.org>
 
-import org.kde.edu.marble.qtcomponents 0.12
 import org.kde.edu.marble 0.11
 import QtQuick 1.0
 import com.nokia.meego 1.0

@@ -24,7 +24,7 @@ Item {
         visible: tracking !== null
         smooth: true
 
-        source: "qrc:/marker-direction.svg"
+        source: "qrc:/icons/marker-direction.svg"
         //rotation: 180 + tracking.lastKnownPosition.bearing( map.center.longitude, map.center.latitude )
     }
 
@@ -36,7 +36,7 @@ Item {
         z: 10
         visible: tracking !== null
 
-        source: ( tracking !== null && tracking.positionSource.hasPosition ) ? "qrc:/marker.svg" : "qrc:/marker-yellow.svg"
+        source: ( tracking !== null && tracking.positionSource.hasPosition ) ? "qrc:/icons/marker.svg" : "qrc:/icons/marker-yellow.svg"
 
         MouseArea {
             anchors.fill: parent
