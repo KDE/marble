@@ -65,7 +65,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addRenderPlugin( RenderPlugin * plugin );
+    void addRenderPlugin( const RenderPlugin *plugin );
 
     /**
      * @brief Returns all available PositionProviderPlugins.
@@ -81,7 +81,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addPositionProviderPlugin( PositionProviderPlugin * plugin );
+    void addPositionProviderPlugin( const PositionProviderPlugin *plugin );
 
     /**
      * Returns all search runner plugins.
@@ -94,7 +94,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addSearchRunnerPlugin( SearchRunnerPlugin * plugin );
+    void addSearchRunnerPlugin( const SearchRunnerPlugin *plugin );
 
     /**
      * Returns all reverse geocoding runner plugins.
@@ -107,7 +107,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addReverseGeocodingRunnerPlugin( ReverseGeocodingRunnerPlugin * plugin );
+    void addReverseGeocodingRunnerPlugin( const ReverseGeocodingRunnerPlugin *plugin );
 
     /**
      * Returns all routing runner plugins.
@@ -133,7 +133,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addParseRunnerPlugin( ParseRunnerPlugin * plugin );
+    void addParseRunnerPlugin( const ParseRunnerPlugin *plugin );
 
 Q_SIGNALS:
     void renderPluginsChanged();

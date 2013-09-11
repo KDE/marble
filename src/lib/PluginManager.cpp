@@ -74,7 +74,7 @@ QList<const RenderPlugin *> PluginManager::renderPlugins() const
     return d->m_renderPluginTemplates;
 }
 
-void PluginManager::addRenderPlugin( RenderPlugin *plugin )
+void PluginManager::addRenderPlugin( const RenderPlugin *plugin )
 {
     d->loadPlugins();
     d->m_renderPluginTemplates << plugin;
@@ -87,7 +87,7 @@ QList<const PositionProviderPlugin *> PluginManager::positionProviderPlugins() c
     return d->m_positionProviderPluginTemplates;
 }
 
-void PluginManager::addPositionProviderPlugin( PositionProviderPlugin *plugin )
+void PluginManager::addPositionProviderPlugin( const PositionProviderPlugin *plugin )
 {
     d->loadPlugins();
     d->m_positionProviderPluginTemplates << plugin;
@@ -100,7 +100,7 @@ QList<const SearchRunnerPlugin *> PluginManager::searchRunnerPlugins() const
     return d->m_searchRunnerPlugins;
 }
 
-void PluginManager::addSearchRunnerPlugin( SearchRunnerPlugin *plugin )
+void PluginManager::addSearchRunnerPlugin( const SearchRunnerPlugin *plugin )
 {
     d->loadPlugins();
     d->m_searchRunnerPlugins << plugin;
@@ -113,7 +113,7 @@ QList<const ReverseGeocodingRunnerPlugin *> PluginManager::reverseGeocodingRunne
     return d->m_reverseGeocodingRunnerPlugins;
 }
 
-void PluginManager::addReverseGeocodingRunnerPlugin( ReverseGeocodingRunnerPlugin *plugin )
+void PluginManager::addReverseGeocodingRunnerPlugin( const ReverseGeocodingRunnerPlugin *plugin )
 {
     d->loadPlugins();
     d->m_reverseGeocodingRunnerPlugins << plugin;
@@ -139,7 +139,7 @@ QList<const ParseRunnerPlugin *> PluginManager::parsingRunnerPlugins() const
     return d->m_parsingRunnerPlugins;
 }
 
-void PluginManager::addParseRunnerPlugin( ParseRunnerPlugin *plugin )
+void PluginManager::addParseRunnerPlugin( const ParseRunnerPlugin *plugin )
 {
     d->loadPlugins();
     d->m_parsingRunnerPlugins << plugin;
