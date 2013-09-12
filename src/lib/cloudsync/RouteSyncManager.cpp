@@ -50,7 +50,7 @@ public:
     CloudRouteModel *m_model;
 
     QDir m_cacheDir;
-    OwncloudSyncBackend *m_owncloudBackend;
+    OwncloudSyncBackend m_owncloudBackend;
     QVector<RouteItem> m_routeList;
 };
 
@@ -61,7 +61,8 @@ RouteSyncManager::Private::Private( CloudSyncManager *cloudSyncManager, RoutingM
     m_model( new CloudRouteModel() )
 {
     m_cacheDir = QDir( MarbleDirs::localPath() + "/cloudsync/cache/routes/" );
-    m_owncloudBackend = new OwncloudSyncBackend( m_cloudSyncManager->apiUrl() );
+    m_owncloudBackend.setApiUrl( m_cloudSyncManager->apiUrl() );
+    connect( m_cloudSyncManager, SIGNAL(apiUrlChanged(QUrl)), &m_owncloudBackend, SLOT(setApiUrl(QUrl)) );
     
     m_uploadProgressDialog->setMinimum( 0 );
     m_uploadProgressDialog->setMaximum( 100 );
@@ -103,8 +104,8 @@ QString RouteSyncManager::saveDisplayedToCache() const
 void RouteSyncManager::uploadRoute()
 {
     if( !d->m_cloudSyncManager->workOffline() ) {
-        d->m_owncloudBackend->uploadRoute( saveDisplayedToCache() );
-        connect( d->m_owncloudBackend, SIGNAL(routeUploadProgress(qint64,qint64)),
+        d->m_owncloudBackend.uploadRoute( saveDisplayedToCache() );
+        connect( &d->m_owncloudBackend, SIGNAL(routeUploadProgress(qint64,qint64)),
                  this, SLOT(updateUploadProgressbar(qint64,qint64)) );
         // FIXME connect( d->m_uploadProgressDialog, SIGNAL(canceled()), syncBackend, SLOT(cancelUpload()) );
         d->m_uploadProgressDialog->exec();
@@ -169,8 +170,8 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
 void RouteSyncManager::uploadRoute( const QString &timestamp )
 {
     if( !d->m_cloudSyncManager->workOffline() ) {
-        d->m_owncloudBackend->uploadRoute( timestamp );
-        connect( d->m_owncloudBackend, SIGNAL(routeUploadProgress(qint64,qint64)),
+        d->m_owncloudBackend.uploadRoute( timestamp );
+        connect( &d->m_owncloudBackend, SIGNAL(routeUploadProgress(qint64,qint64)),
                  this, SLOT(updateUploadProgressbar(qint64,qint64)) );
         // FIXME connect( d->m_uploadProgressDialog, SIGNAL(canceled()), syncBackend, SLOT(cancelUpload()) );
         d->m_uploadProgressDialog->exec();
@@ -188,11 +189,11 @@ void RouteSyncManager::prepareRouteList()
 
     if( !d->m_cloudSyncManager->workOffline() ) {
         if( d->m_cloudSyncManager->backend()  == CloudSyncManager::Owncloud ) {
-            connect( d->m_owncloudBackend, SIGNAL(routeListDownloaded(QVector<RouteItem>)),
+            connect( &d->m_owncloudBackend, SIGNAL(routeListDownloaded(QVector<RouteItem>)),
                      this, SLOT(setRouteModelItems(QVector<RouteItem>)) );
-            connect( d->m_owncloudBackend, SIGNAL(routeListDownloadProgress(qint64,qint64)),
+            connect( &d->m_owncloudBackend, SIGNAL(routeListDownloadProgress(qint64,qint64)),
                      this, SIGNAL(routeListDownloadProgress(qint64,qint64)) );
-            d->m_owncloudBackend->downloadRouteList();
+            d->m_owncloudBackend.downloadRouteList();
         }
     } else {
         // If not offline, setRouteModelItems() does this after
@@ -204,10 +205,10 @@ void RouteSyncManager::prepareRouteList()
 void RouteSyncManager::downloadRoute( const QString &timestamp )
 {
     if( d->m_cloudSyncManager->backend() == CloudSyncManager::Owncloud ) {
-        connect( d->m_owncloudBackend, SIGNAL(routeDownloadProgress(qint64,qint64)),
+        connect( &d->m_owncloudBackend, SIGNAL(routeDownloadProgress(qint64,qint64)),
                  this, SIGNAL(routeDownloadProgress(qint64,qint64)) );
-        connect( d->m_owncloudBackend, SIGNAL(routeDownloaded()), this, SLOT(prepareRouteList()) );
-        d->m_owncloudBackend->downloadRoute( timestamp );
+        connect( &d->m_owncloudBackend, SIGNAL(routeDownloaded()), this, SLOT(prepareRouteList()) );
+        d->m_owncloudBackend.downloadRoute( timestamp );
     }
 }
 
@@ -221,16 +222,16 @@ void RouteSyncManager::openRoute(const QString &timestamp )
 void RouteSyncManager::deleteRoute(const QString &timestamp )
 {
     if( d->m_cloudSyncManager->backend() == CloudSyncManager::Owncloud ) {
-        connect( d->m_owncloudBackend, SIGNAL(routeDeleted()), this, SLOT(prepareRouteList()) );
-        d->m_owncloudBackend->deleteRoute( timestamp );
+        connect( &d->m_owncloudBackend, SIGNAL(routeDeleted()), this, SLOT(prepareRouteList()) );
+        d->m_owncloudBackend.deleteRoute( timestamp );
     }
 }
 
 void RouteSyncManager::removeRouteFromCache( const QString &timestamp )
 {
     if( d->m_cloudSyncManager->backend() == CloudSyncManager::Owncloud ) {
-        connect( d->m_owncloudBackend, SIGNAL(removedFromCache( QString )), this, SLOT(prepareRouteList()) );
-        d->m_owncloudBackend->removeFromCache( d->m_cacheDir, timestamp );
+        connect( &d->m_owncloudBackend, SIGNAL(removedFromCache( QString )), this, SLOT(prepareRouteList()) );
+        d->m_owncloudBackend.removeFromCache( d->m_cacheDir, timestamp );
     }
 }
 

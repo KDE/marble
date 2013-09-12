@@ -112,6 +112,7 @@ void CloudSyncManager::setOwncloudServer( const QString &server )
     if ( d->m_ownloudServer != server ) {
         d->m_ownloudServer = server;
         emit owncloudServerChanged( d->m_ownloudServer );
+        emit apiUrlChanged( apiUrl() );
     }
 }
 
@@ -120,6 +121,7 @@ void CloudSyncManager::setOwncloudUsername( const QString &username )
     if ( d->m_owncloudUsername != username ) {
         d->m_owncloudUsername = username;
         emit owncloudUsernameChanged( d->m_owncloudUsername );
+        emit apiUrlChanged( apiUrl() );
     }
 }
 
@@ -128,6 +130,7 @@ void CloudSyncManager::setOwncloudPassword( const QString &password )
     if ( d->m_owncloudPassword != password ) {
         d->m_owncloudPassword = password;
         emit owncloudPasswordChanged( d->m_owncloudPassword );
+        emit apiUrlChanged( apiUrl() );
     }
 }
 

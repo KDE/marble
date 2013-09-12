@@ -25,7 +25,7 @@ class OwncloudSyncBackend : public AbstractSyncBackend
     Q_OBJECT
     
 public:
-    explicit OwncloudSyncBackend( const QUrl &apiUrl );
+    OwncloudSyncBackend();
     ~OwncloudSyncBackend();
 
     void uploadRoute( const QString &timestamp );

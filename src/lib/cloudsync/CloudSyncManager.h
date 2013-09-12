@@ -31,6 +31,7 @@ class MARBLE_EXPORT CloudSyncManager : public QObject
     Q_PROPERTY( QString owncloudUsername READ owncloudUsername WRITE setOwncloudUsername NOTIFY owncloudUsernameChanged )
     Q_PROPERTY( QString owncloudPassword READ owncloudPassword WRITE setOwncloudPassword NOTIFY owncloudPasswordChanged )
     Q_PROPERTY( QString owncloudServer READ owncloudServer WRITE setOwncloudServer NOTIFY owncloudServerChanged )
+    Q_PROPERTY( QUrl apiUrl READ apiUrl NOTIFY apiUrlChanged )
 
 public:
     explicit CloudSyncManager( QObject *parent = 0 );
@@ -138,6 +139,8 @@ Q_SIGNALS:
     void owncloudUsernameChanged(const QString &username);
     void owncloudPasswordChanged(const QString &password);
     void owncloudServerChanged(const QString &server);
+
+    void apiUrlChanged(const QUrl &url);
 
 private:
     class Private;

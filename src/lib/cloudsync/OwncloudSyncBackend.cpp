@@ -73,8 +73,8 @@ OwncloudSyncBackend::Private::Private() :
 {
 }
 
-OwncloudSyncBackend::OwncloudSyncBackend( const QUrl &apiUrl ) :
-    AbstractSyncBackend( apiUrl ),
+OwncloudSyncBackend::OwncloudSyncBackend() :
+    AbstractSyncBackend(),
     d( new Private() )
 {
 }

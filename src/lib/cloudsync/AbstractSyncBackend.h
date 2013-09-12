@@ -25,7 +25,7 @@ class AbstractSyncBackend : public QObject
     Q_OBJECT
     
 public:
-    explicit AbstractSyncBackend( const QUrl &apiUrl, QObject *parent = 0 );
+    explicit AbstractSyncBackend( QObject *parent = 0 );
     ~AbstractSyncBackend();
 
     /**
@@ -49,6 +49,9 @@ public:
      * @param timestamp Timestamp of the route which will be deleted
      */
     void removeFromCache( const QDir &cacheDir, const QString &timestamp );
+
+public Q_SLOTS:
+    void setApiUrl( const QUrl &apiUrl );
 
 signals:
     void removedFromCache( const QString &timestamp );

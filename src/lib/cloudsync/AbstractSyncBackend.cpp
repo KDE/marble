@@ -19,23 +19,23 @@ namespace Marble
 class AbstractSyncBackend::Private {
     
 public:
-    explicit Private( const QUrl &apiUrl );
     QUrl m_apiUrl;
 };
 
-AbstractSyncBackend::Private::Private( const QUrl &apiUrl ) : m_apiUrl( apiUrl )
-{
-}
-
-AbstractSyncBackend::AbstractSyncBackend( const QUrl &apiUrl, QObject *parent ) :
+AbstractSyncBackend::AbstractSyncBackend( QObject *parent ) :
     QObject( parent ),
-    d( new Private( apiUrl ) )
+    d( new Private )
 {
 }
 
 AbstractSyncBackend::~AbstractSyncBackend()
 {
     delete d;
+}
+
+void AbstractSyncBackend::setApiUrl( const QUrl &apiUrl )
+{
+    d->m_apiUrl = apiUrl;
 }
 
 QUrl AbstractSyncBackend::endpointUrl( const QString &endpoint )
