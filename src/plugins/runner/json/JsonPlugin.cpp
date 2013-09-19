@@ -5,7 +5,7 @@
  find a copy of this license in LICENSE.txt in the top directory of
  the source code.
 
- Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
+ Copyright 2013 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
 #include "JsonPlugin.h"
@@ -21,12 +21,12 @@ JsonPlugin::JsonPlugin( QObject *parent ) :
 
 QString JsonPlugin::name() const
 {
-    return tr( "Json File Parser" );
+    return tr( "GeoJSON File Parser" );
 }
 
 QString JsonPlugin::nameId() const
 {
-    return "Json";
+    return "GeoJSON";
 }
 
 QString JsonPlugin::version() const
@@ -36,7 +36,7 @@ QString JsonPlugin::version() const
 
 QString JsonPlugin::description() const
 {
-    return tr( "Create GeoDataDocument from Json Files" );
+    return tr( "Create GeoDataDocument from GeoJSON Files" );
 }
 
 QString JsonPlugin::copyrightYears() const
@@ -52,12 +52,12 @@ QList<PluginAuthor> JsonPlugin::pluginAuthors() const
 
 QString JsonPlugin::fileFormatDescription() const
 {
-    return tr( "Json or GeoJson" );
+    return tr( "GeoJSON" );
 }
 
 QStringList JsonPlugin::fileExtensions() const
 {
-    return QStringList() << "js";
+    return QStringList() << "json";
 }
 
 ParsingRunner* JsonPlugin::newRunner() const

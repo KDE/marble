@@ -5,7 +5,7 @@
  find a copy of this license in LICENSE.txt in the top directory of
  the source code.
 
- Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
+ Copyright 2013 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
 #ifndef MARBLE_JSONRUNNER_H

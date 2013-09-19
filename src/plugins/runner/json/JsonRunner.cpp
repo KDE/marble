@@ -5,7 +5,7 @@
  find a copy of this license in LICENSE.txt in the top directory of
  the source code.
 
- Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
+ Copyright 2013 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
 #include "JsonRunner.h"
@@ -39,13 +39,6 @@ void JsonRunner::parseFile( const QString &fileName, DocumentRole role = Unknown
         return;
     }
 
-    // Check file extension
-    QFileInfo fileinfo( fileName );
-    if( fileinfo.suffix().compare( "js", Qt::CaseInsensitive ) != 0 ) {
-        emit parsingFinished( 0 );
-        return;
-    }
-
     // Open file in right mode
     file.open( QIODevice::ReadOnly );
 
@@ -54,7 +47,7 @@ void JsonRunner::parseFile( const QString &fileName, DocumentRole role = Unknown
 
     // Start parsing
     if ( !parser.read( &file ) ) {
-        emit parsingFinished( 0, "Could not parse json" );
+        emit parsingFinished( 0, "Could not parse GeoJSON" );
         return;
     }
 
