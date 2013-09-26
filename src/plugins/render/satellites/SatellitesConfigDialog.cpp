@@ -34,14 +34,12 @@ SatellitesConfigDialog::SatellitesConfigDialog( QWidget *parent )
 
     // allow translation for catalog items
     // + categories
-    const char *descCat = "An object category";
     m_translations["Comets"]        = tr( "Comets" );
     m_translations["Moons"]         = tr( "Moons" );
     m_translations["Other"]         = tr( "Other" );
     m_translations["Spacecrafts"]   = tr( "Spacecrafts" );
     m_translations["Spaceprobes"]  = tr( "Spaceprobes" );
     // + bodies
-    const char *descBodies = "A planet or space body";
     m_translations["Moon"]          = tr( "Moon" );
     m_translations["Sun"]           = tr( "Sun" );
     m_translations["Mercury"]       = tr( "Mercury" );

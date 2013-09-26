@@ -365,7 +365,6 @@ void SatellitesPlugin::activateDataSource( const QString &source )
 
 void SatellitesPlugin::addBuiltInDataSources()
 {
-    const char *desc = "A category of satellites to be displayed";
     QString currentCategory;
 
     currentCategory = tr("Special-Interest Satellites" );
