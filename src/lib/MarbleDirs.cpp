@@ -129,8 +129,8 @@ QString MarbleDirs::systemPath()
     CFStringRef myMacPath = CFURLCopyFileSystemPath(myBundleRef, kCFURLPOSIXPathStyle);
     const char *mypPathPtr = CFStringGetCStringPtr(myMacPath,CFStringGetSystemEncoding());
     CFRelease(myBundleRef);
-    CFRelease(myMacPath);
     QString myPath(mypPathPtr);
+    CFRelease(myMacPath);
     //do some magick so that we can still find data dir if
     //marble was not built as a bundle
     if (myPath.contains(".app"))  //its a bundle!
