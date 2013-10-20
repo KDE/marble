@@ -603,11 +603,9 @@ void RoutingWidget::updateAlternativeRoutes()
     if ( d->m_ui.routeComboBox->count() == 1) {
         // Parts of the route may lie outside the route trip points
         GeoDataLatLonBox const bbox = d->m_routingManager->routingModel()->route().bounds();
-        if ( !bbox.isEmpty() ) {
-            if ( d->m_zoomRouteAfterDownload ) {
-                d->m_zoomRouteAfterDownload = false;
-                d->m_widget->centerOn( bbox );
-            }
+        if ( d->m_zoomRouteAfterDownload ) {
+            d->m_zoomRouteAfterDownload = false;
+            d->m_widget->centerOn( bbox );
         }
     }
 
@@ -728,10 +726,7 @@ void RoutingWidget::updateCloudSyncButtons()
 void RoutingWidget::openCloudRoute(const QString &identifier)
 {
     d->m_routeSyncManager->openRoute( identifier );
-    GeoDataLatLonBox const bbox = d->m_routingManager->routingModel()->route().bounds();
-    if ( !bbox.isEmpty() ) {
-        d->m_widget->centerOn( bbox );
-    }
+    d->m_widget->centerOn( d->m_routingManager->routingModel()->route().bounds() );
 }
 
 bool RoutingWidget::eventFilter( QObject *o, QEvent *event )

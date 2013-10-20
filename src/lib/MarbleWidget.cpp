@@ -638,6 +638,10 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 
 void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
 {
+    if ( box.isEmpty() ) {
+        return;
+    }
+
     int newRadius = radius();
     ViewportParams* viewparams = viewport();
     //prevent divide by zero
