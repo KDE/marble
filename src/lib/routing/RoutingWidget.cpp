@@ -691,7 +691,7 @@ void RoutingWidget::openCloudRoutesDialog()
     CloudRoutesDialog *dialog = new CloudRoutesDialog( d->m_routeSyncManager->model(), d->m_widget );
     connect( d->m_routeSyncManager, SIGNAL(routeListDownloadProgress(qint64,qint64)), dialog, SLOT(updateListDownloadProgressbar(qint64,qint64)) );
     connect( dialog, SIGNAL(downloadButtonClicked(QString)), d->m_routeSyncManager, SLOT(downloadRoute(QString)) );
-    connect( dialog, SIGNAL(openButtonClicked(QString)), d->m_routeSyncManager, SLOT(openRoute(QString)) );
+    connect( dialog, SIGNAL(openButtonClicked(QString)), this, SLOT(openCloudRoute(QString)) );
     connect( dialog, SIGNAL(deleteButtonClicked(QString)), d->m_routeSyncManager, SLOT(deleteRoute(QString)) );
     connect( dialog, SIGNAL(removeFromCacheButtonClicked(QString)), d->m_routeSyncManager, SLOT(removeRouteFromCache(QString)) );
     connect( dialog, SIGNAL(uploadToCloudButtonClicked(QString)), d->m_routeSyncManager, SLOT(uploadRoute(QString)) );
@@ -723,6 +723,15 @@ void RoutingWidget::updateCloudSyncButtons()
     d->m_cloudSyncSeparator->setVisible( show );
     d->m_uploadToCloudAction->setVisible( show );
     d->m_openCloudRoutesAction->setVisible( show );
+}
+
+void RoutingWidget::openCloudRoute(const QString &identifier)
+{
+    d->m_routeSyncManager->openRoute( identifier );
+    GeoDataLatLonBox const bbox = d->m_routingManager->routingModel()->route().bounds();
+    if ( !bbox.isEmpty() ) {
+        d->m_widget->centerOn( bbox );
+    }
 }
 
 bool RoutingWidget::eventFilter( QObject *o, QEvent *event )

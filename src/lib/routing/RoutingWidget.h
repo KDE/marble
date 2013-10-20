@@ -133,6 +133,9 @@ private Q_SLOTS:
     /** Toggle cloud sync button visibility based on whether route sync is enabled */
     void updateCloudSyncButtons();
 
+    /** Open a remote route and center on it */
+    void openCloudRoute( const QString &identifier );
+
 protected:
     bool eventFilter( QObject *o, QEvent *e );
     void resizeEvent(QResizeEvent *e);
