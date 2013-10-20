@@ -94,15 +94,12 @@ endif(EXPERIMENTAL_PYTHON_BINDINGS)
 INCLUDE (CTest)
 ENABLE_TESTING()
 
-
 if( QTONLY AND NOT WIN32 )
-    option( BUILD_MARBLE_TESTS "build marble tests if building QTONLY " ON )
-    if( BUILD_MARBLE_TESTS )
-        INCLUDE(CTest)
-    endif( BUILD_MARBLE_TESTS )
+    option( BUILD_MARBLE_TESTS "Build unit tests" ON )
 else()
-    set( BUILD_MARBLE_TESTS ${KDE4_BUILD_TESTS} )
+    option( BUILD_MARBLE_TESTS "Build unit tests" ${KDE4_BUILD_TESTS} )
 endif()
+add_feature_info("Unit tests" BUILD_MARBLE_TESTS "Build unit tests. Toggle with BUILD_MARBLE_TESTS=YES/NO. 'make test' will run all.")
 
 if( BUILD_MARBLE_TESTS )
 #  SET (TEST_DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/tests/test_data")
