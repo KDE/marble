@@ -52,7 +52,7 @@ GeoNode* DgmlItemTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Section)) {
         item = new GeoSceneItem( name );
-        item->setCheckable( checkable == dgmlValue_true || dgmlValue_on );
+        item->setCheckable( checkable == dgmlValue_true || checkable == dgmlValue_on );
         item->setConnectTo( connectTo );
         item->setSpacing( spacing );
         parentItem.nodeAs<GeoSceneSection>()->addItem( item );
