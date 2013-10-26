@@ -51,31 +51,31 @@ public:
         Deleted
     };
 
-    QString pathA();
+    QString pathA() const;
     void setPathA( const QString &path );
 
-    QString pathB();
+    QString pathB() const;
     void setPathB( const QString &path );
 
-    GeoDataPlacemark placemarkA();
+    GeoDataPlacemark placemarkA() const;
     void setPlacemarkA( const GeoDataPlacemark &placemark );
 
-    GeoDataPlacemark placemarkB();
+    GeoDataPlacemark placemarkB() const;
     void setPlacemarkB( const GeoDataPlacemark &placemark );
 
-    QString nameA();
-    QString nameB();
+    QString nameA() const;
+    QString nameB() const;
 
-    QString descriptionA();
-    QString descriptionB();
+    QString descriptionA() const;
+    QString descriptionB() const;
 
     MergeItem::Action actionA();
     void setActionA( MergeItem::Action action );
 
-    MergeItem::Action actionB();
+    MergeItem::Action actionB() const;
     void setActionB( MergeItem::Action action );
 
-    MergeItem::Resolution resolution();
+    MergeItem::Resolution resolution() const;
     void setResolution( MergeItem::Resolution resolution );
 
 signals:

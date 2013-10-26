@@ -18,7 +18,7 @@ MergeItem::MergeItem()
 {
 }
 
-QString MergeItem::pathA()
+QString MergeItem::pathA() const
 {
     return m_pathA;
 }
@@ -29,7 +29,7 @@ void MergeItem::setPathA( const QString &path )
     emit pathAChanged();
 }
 
-QString MergeItem::pathB()
+QString MergeItem::pathB() const
 {
     return m_pathB;
 }
@@ -40,7 +40,7 @@ void MergeItem::setPathB( const QString &path )
     emit pathBChanged();
 }
 
-GeoDataPlacemark MergeItem::placemarkA()
+GeoDataPlacemark MergeItem::placemarkA() const
 {
     return m_placemarkA;
 }
@@ -53,7 +53,7 @@ void MergeItem::setPlacemarkA( const GeoDataPlacemark &placemark )
     emit descriptionAChanged();
 }
 
-GeoDataPlacemark MergeItem::placemarkB()
+GeoDataPlacemark MergeItem::placemarkB() const
 {
     return m_placemarkB;
 }
@@ -66,22 +66,22 @@ void MergeItem::setPlacemarkB( const GeoDataPlacemark &placemark )
     emit descriptionBChanged();
 }
 
-QString MergeItem::nameA()
+QString MergeItem::nameA() const
 {
     return m_placemarkA.name();
 }
 
-QString MergeItem::nameB()
+QString MergeItem::nameB() const
 {
     return m_placemarkB.name();
 }
 
-QString MergeItem::descriptionA()
+QString MergeItem::descriptionA() const
 {
     return m_placemarkA.description();
 }
 
-QString MergeItem::descriptionB()
+QString MergeItem::descriptionB() const
 {
     return m_placemarkB.description();
 }
@@ -96,7 +96,7 @@ void MergeItem::setActionA( MergeItem::Action action )
     m_actionA = action;
 }
 
-MergeItem::Action MergeItem::actionB()
+MergeItem::Action MergeItem::actionB() const
 {
     return m_actionB;
 }
@@ -106,7 +106,7 @@ void MergeItem::setActionB( MergeItem::Action action )
     m_actionB = action;
 }
 
-MergeItem::Resolution MergeItem::resolution()
+MergeItem::Resolution MergeItem::resolution() const
 {
     return m_resolution;
 }
