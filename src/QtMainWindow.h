@@ -130,8 +130,6 @@ private Q_SLOTS:
     void downloadJobAdded();
     void downloadJobRemoved();
 
-    void syncBookmarksManually();
-
 private:
     ControlView *m_controlView;
     SunControlWidget* m_sunControlDialog;

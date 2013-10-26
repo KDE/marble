@@ -124,7 +124,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     connect( m_configDialog, SIGNAL(clearPersistentCacheClicked()),
              m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
     connect( m_configDialog, SIGNAL(syncNowClicked()),
-             this, SLOT(syncBookmarksManually()) );
+             m_controlView, SLOT(syncBookmarks()) );
 
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
@@ -1421,11 +1421,6 @@ void MainWindow::showZoomLevel(bool show)
 void MainWindow::fallBackToDefaultTheme()
 {
     m_controlView->marbleWidget()->setMapThemeId( m_controlView->defaultMapThemeId() );
-}
-
-void MainWindow::syncBookmarksManually()
-{
-    m_controlView->syncBookmarks();
 }
 
 #include "QtMainWindow.moc"
