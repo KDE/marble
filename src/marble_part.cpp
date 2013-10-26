@@ -358,11 +358,6 @@ void MarblePart::showStatusBar( bool isChecked )
     m_statusBarExtension->statusBar()->setVisible( isChecked );
 }
 
-void MarblePart::syncBookmarksManually()
-{
-    m_controlView->syncBookmarks();
-}
-
 void MarblePart::controlSun()
 {
     if ( !m_sunControlDialog ) {
@@ -1396,7 +1391,7 @@ void MarblePart::editSettings()
     m_configDialog->addPage( w_cloudSyncSettings, i18n( "Synchronization" ), "folder-sync" );
 
     connect( ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
-             this, SLOT(syncBookmarksManually()) );
+             m_controlView, SLOT(syncBookmarks()) );
     
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );
