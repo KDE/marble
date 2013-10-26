@@ -69,8 +69,7 @@ ControlView::ControlView( QWidget *parent )
      m_mapThemeManager( new MapThemeManager( this ) ),
      m_searchDock( 0 ),
      m_locationWidget( 0 ),
-     m_bookmarkSyncManager( 0 ),
-     m_syncTimer( new QTimer() )
+     m_bookmarkSyncManager( 0 )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
 
@@ -654,11 +653,11 @@ void ControlView::syncBookmarks()
                  this, SLOT(reloadBookmarks()) );
         connect( m_conflictDialog, SIGNAL(resolveConflict(MergeItem*)),
                  m_bookmarkSyncManager, SLOT(resolveConflict(MergeItem*)) );
-        connect( m_syncTimer, SIGNAL(timeout()), m_bookmarkSyncManager, SLOT(startBookmarkSync()) );
+        connect( &m_syncTimer, SIGNAL(timeout()), m_bookmarkSyncManager, SLOT(startBookmarkSync()) );
         m_bookmarkSyncManager->startBookmarkSync();
 
-        if( !m_syncTimer->isActive() ) {
-            m_syncTimer->start( 3600000 ); // 1 hour. TODO: Make this configurable.
+        if( !m_syncTimer.isActive() ) {
+            m_syncTimer.start( 60 * 60 * 1000 ); // 1 hour. TODO: Make this configurable.
         }
     }
 }
