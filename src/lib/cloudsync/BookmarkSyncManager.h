@@ -33,8 +33,6 @@ public:
 Q_SIGNALS:
     void uploadProgress( qint64 sent, qint64 total );
     void downloadProgress( qint64 received, qint64 total );
-    void timestampDownloaded();
-    void bookmarksDownloaded();
     void mergeConflict( Marble::MergeItem *item );
     void syncComplete();
 

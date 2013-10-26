@@ -221,8 +221,6 @@ BookmarkSyncManager::~BookmarkSyncManager()
 
 void BookmarkSyncManager::startBookmarkSync()
 {
-    connect( this, SIGNAL(timestampDownloaded()),
-             this, SLOT(continueSynchronization()) );
     d->downloadTimestamp();
 }
 
@@ -268,7 +266,7 @@ void BookmarkSyncManager::Private::downloadBookmarks()
     QNetworkRequest request( endpointUrl( m_downloadEndpoint ) );
     m_downloadReply = m_network.get( request );
     connect( m_downloadReply, SIGNAL(finished()),
-             m_q, SIGNAL(bookmarksDownloaded()) );
+             m_q, SLOT(continueSynchronization()) );
     connect( m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)),
              m_q, SIGNAL(downloadProgress(qint64,qint64)) );
 }
@@ -642,7 +640,7 @@ void BookmarkSyncManager::Private::parseTimestamp()
     QScriptValue parsedResponse = engine.evaluate( QString( "(%0)" ).arg( response ) );
     QString timestamp = parsedResponse.property( "data" ).toString();
     m_cloudTimestamp = timestamp;
-    emit m_q->timestampDownloaded();
+    continueSynchronization();
 }
 void BookmarkSyncManager::Private::copyLocalToCache()
 {
@@ -676,8 +674,6 @@ void BookmarkSyncManager::Private::continueSynchronization()
             }
         }
     } else {
-        connect( m_q, SIGNAL(bookmarksDownloaded()),
-                 m_q, SLOT(completeSynchronization()) );
         downloadBookmarks();
     }
 }
