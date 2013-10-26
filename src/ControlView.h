@@ -116,7 +116,6 @@ signals:
     void showMapWizard();
     void showUploadDialog();
     void mapThemeDeleted();
-    void conflictResolved( MergeItem *item );
 
 private Q_SLOTS:
     void showSearch();
