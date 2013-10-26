@@ -69,7 +69,8 @@ ControlView::ControlView( QWidget *parent )
      m_mapThemeManager( new MapThemeManager( this ) ),
      m_searchDock( 0 ),
      m_locationWidget( 0 ),
-     m_bookmarkSyncManager( 0 )
+     m_bookmarkSyncManager( 0 ),
+     m_conflictDialog( 0 )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
 
@@ -84,7 +85,6 @@ ControlView::ControlView( QWidget *parent )
     layout->setMargin( 0 );
     setLayout( layout );
 
-    m_conflictDialog = new ConflictDialog( m_marbleWidget );
     connect( m_marbleWidget->model()->bookmarkManager(), SIGNAL(bookmarksChanged()), this, SLOT(syncBookmarks()) );
 }
 
@@ -632,6 +632,10 @@ void ControlView::reloadBookmarks()
 
 void ControlView::showConflictDialog( MergeItem *item )
 {
+    if ( !m_conflictDialog ) {
+        m_conflictDialog = new ConflictDialog( m_marbleWidget );
+    }
+
     m_conflictDialog->setMergeItem( item );
     m_conflictDialog->open();
 }
@@ -645,6 +649,10 @@ void ControlView::syncBookmarks()
             && m_marbleWidget->model()->cloudSyncManager()->isBookmarkSyncEnabled();
 
     if( syncEnabled ) {
+        if ( !m_conflictDialog ) {
+            m_conflictDialog = new ConflictDialog( m_marbleWidget );
+        }
+
         connect( m_bookmarkSyncManager, SIGNAL(mergeConflict(MergeItem*)),
                  this, SLOT(showConflictDialog(MergeItem*)) );
         connect( m_bookmarkSyncManager, SIGNAL(syncComplete()),
