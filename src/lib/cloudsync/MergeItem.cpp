@@ -26,7 +26,7 @@ QString MergeItem::pathA()
 void MergeItem::setPathA( const QString &path )
 {
     m_pathA = path;
-    pathAChanged();
+    emit pathAChanged();
 }
 
 QString MergeItem::pathB()
@@ -37,7 +37,7 @@ QString MergeItem::pathB()
 void MergeItem::setPathB( const QString &path )
 {
     m_pathB = path;
-    pathBChanged();
+    emit pathBChanged();
 }
 
 GeoDataPlacemark MergeItem::placemarkA()
