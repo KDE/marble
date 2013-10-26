@@ -26,7 +26,7 @@ ConflictDialog::ConflictDialog( QWidget *parent ) :
     m_mergeItem( 0 ),
     m_box( 0 )
 {
-    m_autoResolve = ConflictDialog::Manual;
+    m_resolveAction = ConflictDialog::AskUser;
 }
 
 void ConflictDialog::setMergeItem( MergeItem *item )
@@ -36,7 +36,7 @@ void ConflictDialog::setMergeItem( MergeItem *item )
 
 void ConflictDialog::stopAutoResolve()
 {
-    m_autoResolve = ConflictDialog::Manual;
+    m_resolveAction = ConflictDialog::AskUser;
 }
 
 void ConflictDialog::open()
@@ -45,8 +45,8 @@ void ConflictDialog::open()
         return;
     }
 
-    switch( m_autoResolve ) {
-    case ConflictDialog::Manual:
+    switch( m_resolveAction ) {
+    case ConflictDialog::AskUser:
         prepareLayout();
         QDialog::open();
         break;
@@ -81,12 +81,12 @@ void ConflictDialog::resolveConflict( QAbstractButton *button )
             break;
         case ConflictDialog::AllLocal:
             m_mergeItem->setResolution( MergeItem::A );
-            m_autoResolve = ConflictDialog::PreferLocal;
+            m_resolveAction = ConflictDialog::PreferLocal;
             emit resolveConflict( m_mergeItem );
             break;
         case ConflictDialog::AllCloud:
             m_mergeItem->setResolution( MergeItem::B );
-            m_autoResolve = ConflictDialog::PreferCloud;
+            m_resolveAction = ConflictDialog::PreferCloud;
             emit resolveConflict( m_mergeItem );
             break;
         default:

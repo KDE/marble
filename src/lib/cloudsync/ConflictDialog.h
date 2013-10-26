@@ -31,8 +31,8 @@ public:
         AllCloud
     };
 
-    enum AutoResolve {
-        Manual,
+    enum ResolveAction {
+        AskUser,
         PreferLocal,
         PreferCloud
     };
@@ -55,7 +55,7 @@ private:
 
     MergeItem *m_mergeItem;
     QDialogButtonBox *m_box;
-    ConflictDialog::AutoResolve m_autoResolve;
+    ConflictDialog::ResolveAction m_resolveAction;
 };
 
 }
