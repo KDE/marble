@@ -28,8 +28,6 @@
 #include <QTemporaryFile>
 #include <QNetworkAccessManager>
 
-#define EARTH_RADIUS 6378000.0
-
 namespace Marble {
 
 class BookmarkSyncManager::Private
