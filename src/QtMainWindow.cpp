@@ -1152,7 +1152,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
      CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
      cloudSyncManager->setSyncEnabled( settings.value( "enableSync", false ).toBool() );
      cloudSyncManager->setRouteSyncEnabled( settings.value( "syncRoutes", true ).toBool() );
-     cloudSyncManager->setRouteSyncEnabled( settings.value( "syncBookmarks", true ).toBool() );
+     cloudSyncManager->setBookmarkSyncEnabled( settings.value( "syncBookmarks", true ).toBool() );
      cloudSyncManager->setOwncloudServer( settings.value( "owncloudServer", "" ).toString() );
      cloudSyncManager->setOwncloudUsername( settings.value( "owncloudUsername", "" ).toString() );
      cloudSyncManager->setOwncloudPassword( settings.value( "owncloudPassword", "" ).toString() );
