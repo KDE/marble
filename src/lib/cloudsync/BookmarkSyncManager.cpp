@@ -20,6 +20,8 @@
 #include "CloudSyncManager.h"
 #include "GeoDataCoordinates.h"
 #include "OwncloudSyncBackend.h"
+#include "MarbleModel.h"
+#include "BookmarkManager.h"
 
 #include <QFile>
 #include <QBuffer>
@@ -27,6 +29,7 @@
 #include <QScriptEngine>
 #include <QTemporaryFile>
 #include <QNetworkAccessManager>
+#include <QTimer>
 
 namespace Marble {
 
@@ -79,6 +82,9 @@ public:
     QList<DiffItem> m_diffB;
     QList<DiffItem> m_merged;
     DiffItem m_conflictItem;
+
+    BookmarkManager* m_bookmarkManager;
+    QTimer m_syncTimer;
 
     /**
      * Returns an API endpoint
@@ -199,7 +205,8 @@ public:
 
 BookmarkSyncManager::Private::Private(BookmarkSyncManager *parent, CloudSyncManager *cloudSyncManager ) :
   m_q( parent ),
-  m_cloudSyncManager( cloudSyncManager )
+  m_cloudSyncManager( cloudSyncManager ),
+  m_bookmarkManager( 0 )
 {
     m_cachePath = QString( "%0/cloudsync/cache/bookmarks" ).arg( MarbleDirs::localPath() );
     m_localBookmarksPath = QString( "%0/bookmarks/bookmarks.kml" ).arg( MarbleDirs::localPath() );
@@ -216,7 +223,18 @@ BookmarkSyncManager::BookmarkSyncManager( CloudSyncManager *cloudSyncManager ) :
 
 BookmarkSyncManager::~BookmarkSyncManager()
 {
-    delete d;
+  delete d;
+}
+
+void BookmarkSyncManager::setBookmarkManager(BookmarkManager *manager)
+{
+  d->m_bookmarkManager = manager;
+  connect( manager, SIGNAL(bookmarksChanged()), this, SLOT(syncBookmarks()) );
+  connect( &d->m_syncTimer, SIGNAL(timeout()), this, SLOT(startBookmarkSync()) );
+  if( !d->m_syncTimer.isActive() ) {
+      d->m_syncTimer.start( 60 * 60 * 1000 ); // 1 hour. TODO: Make this configurable.
+  }
+  startBookmarkSync();
 }
 
 void BookmarkSyncManager::startBookmarkSync()
@@ -649,6 +667,8 @@ void BookmarkSyncManager::Private::copyLocalToCache()
 
     QFile bookmarksFile( m_localBookmarksPath );
     bookmarksFile.copy( QString( "%0/%1.kml" ).arg( m_cachePath, m_cloudTimestamp ) );
+    /** @todo FIXME use memory, not files */
+    m_bookmarkManager->loadFile( "bookmarks/bookmarks.kml" );
     emit m_q->syncComplete();
 }
 

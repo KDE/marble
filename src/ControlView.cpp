@@ -69,7 +69,6 @@ ControlView::ControlView( QWidget *parent )
      m_mapThemeManager( new MapThemeManager( this ) ),
      m_searchDock( 0 ),
      m_locationWidget( 0 ),
-     m_bookmarkSyncManager( 0 ),
      m_conflictDialog( 0 )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
@@ -85,7 +84,11 @@ ControlView::ControlView( QWidget *parent )
     layout->setMargin( 0 );
     setLayout( layout );
 
-    connect( m_marbleWidget->model()->bookmarkManager(), SIGNAL(bookmarksChanged()), this, SLOT(syncBookmarks()) );
+    BookmarkSyncManager* bookmarkManager = m_marbleWidget->model()->cloudSyncManager()->bookmarkSyncManager();
+    m_conflictDialog = new ConflictDialog( m_marbleWidget );
+    connect( bookmarkManager, SIGNAL(mergeConflict(MergeItem*)), this, SLOT(showConflictDialog(MergeItem*)) );
+    connect( bookmarkManager, SIGNAL(syncComplete()), m_conflictDialog, SLOT(stopAutoResolve()) );
+    connect( m_conflictDialog, SIGNAL(resolveConflict(MergeItem*)), bookmarkManager, SLOT(resolveConflict(MergeItem*)) );
 }
 
 ControlView::~ControlView()
@@ -594,11 +597,6 @@ void ControlView::setWorkOffline( bool offline )
     }
 }
 
-BookmarkSyncManager* ControlView::bookmarkSyncManager()
-{
-    return m_bookmarkSyncManager;
-}
-
 QString ControlView::externalMapEditor() const
 {
     return m_externalEditor;
@@ -625,49 +623,11 @@ void ControlView::showSearch()
     m_searchDock->widget()->setFocus();
 }
 
-void ControlView::reloadBookmarks()
-{
-    m_marbleWidget->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
-}
-
 void ControlView::showConflictDialog( MergeItem *item )
 {
-    if ( !m_conflictDialog ) {
-        m_conflictDialog = new ConflictDialog( m_marbleWidget );
-    }
-
+    Q_ASSERT( m_conflictDialog );
     m_conflictDialog->setMergeItem( item );
     m_conflictDialog->open();
-}
-
-void ControlView::syncBookmarks()
-{
-    delete m_bookmarkSyncManager;
-    m_bookmarkSyncManager = new BookmarkSyncManager( m_marbleWidget->model()->cloudSyncManager() );
-
-    bool syncEnabled = m_marbleWidget->model()->cloudSyncManager()->isSyncEnabled()
-            && m_marbleWidget->model()->cloudSyncManager()->isBookmarkSyncEnabled();
-
-    if( syncEnabled ) {
-        if ( !m_conflictDialog ) {
-            m_conflictDialog = new ConflictDialog( m_marbleWidget );
-        }
-
-        connect( m_bookmarkSyncManager, SIGNAL(mergeConflict(MergeItem*)),
-                 this, SLOT(showConflictDialog(MergeItem*)) );
-        connect( m_bookmarkSyncManager, SIGNAL(syncComplete()),
-                 m_conflictDialog, SLOT(stopAutoResolve()) );
-        connect( m_bookmarkSyncManager, SIGNAL(syncComplete()),
-                 this, SLOT(reloadBookmarks()) );
-        connect( m_conflictDialog, SIGNAL(resolveConflict(MergeItem*)),
-                 m_bookmarkSyncManager, SLOT(resolveConflict(MergeItem*)) );
-        connect( &m_syncTimer, SIGNAL(timeout()), m_bookmarkSyncManager, SLOT(startBookmarkSync()) );
-        m_bookmarkSyncManager->startBookmarkSync();
-
-        if( !m_syncTimer.isActive() ) {
-            m_syncTimer.start( 60 * 60 * 1000 ); // 1 hour. TODO: Make this configurable.
-        }
-    }
 }
 
 }

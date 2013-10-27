@@ -196,9 +196,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     connect( m_controlView, SIGNAL(showUploadDialog()), this, SLOT(showUploadNewStuffDialog()) );
     connect( m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()) );
     connect( m_controlView, SIGNAL(mapThemeDeleted()), this, SLOT(fallBackToDefaultTheme()) );
-
-    // Start first bookmark synchronization, and then sync every hour.
-    m_controlView->syncBookmarks();
 }
 
 MarblePart::~MarblePart()
@@ -1391,7 +1388,7 @@ void MarblePart::editSettings()
     m_configDialog->addPage( w_cloudSyncSettings, i18n( "Synchronization" ), "folder-sync" );
 
     connect( ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
-             m_controlView, SLOT(syncBookmarks()) );
+             m_controlView->marbleModel()->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
     
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );

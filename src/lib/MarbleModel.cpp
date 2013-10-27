@@ -69,6 +69,7 @@
 #include "BookmarkManager.h"
 #include "ElevationModel.h"
 #include "cloudsync/CloudSyncManager.h"
+#include "cloudsync/BookmarkSyncManager.h"
 
 namespace Marble
 {
@@ -196,6 +197,7 @@ MarbleModel::MarbleModel( QObject *parent )
             &d->m_sunLocator, SLOT(update()) );
 
     d->m_elevationModel = new ElevationModel( this );
+    d->m_cloudSyncManager.bookmarkSyncManager()->setBookmarkManager( bookmarkManager() );
 }
 
 MarbleModel::~MarbleModel()

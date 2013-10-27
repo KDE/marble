@@ -20,6 +20,8 @@
 
 namespace Marble {
 
+class BookmarkSyncManager;
+
 class MARBLE_EXPORT CloudSyncManager : public QObject
 {
     Q_OBJECT
@@ -33,6 +35,8 @@ class MARBLE_EXPORT CloudSyncManager : public QObject
     Q_PROPERTY( QString owncloudPassword READ owncloudPassword WRITE setOwncloudPassword NOTIFY owncloudPasswordChanged )
     Q_PROPERTY( QString owncloudServer READ owncloudServer WRITE setOwncloudServer NOTIFY owncloudServerChanged )
     Q_PROPERTY( QUrl apiUrl READ apiUrl NOTIFY apiUrlChanged )
+
+    Q_PROPERTY( BookmarkSyncManager* bookmarkSyncManager READ bookmarkSyncManager NOTIFY bookmarkSyncManagerChanged )
 
 public:
     explicit CloudSyncManager( QObject *parent = 0 );
@@ -144,6 +148,11 @@ public:
      */
     QUrl apiUrl() const;
 
+    /**
+     * @return A ready to use BookmarkSyncManager instance
+     */
+    BookmarkSyncManager* bookmarkSyncManager();
+
 Q_SIGNALS:
     void workOfflineChanged(bool workOffline);
     void syncEnabledChanged(bool enabled);
@@ -155,6 +164,7 @@ Q_SIGNALS:
     void owncloudServerChanged(const QString &server);
 
     void apiUrlChanged(const QUrl &url);
+    void bookmarkSyncManagerChanged();
 
 private:
     class Private;

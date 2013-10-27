@@ -9,6 +9,7 @@
 //
 
 #include "CloudSyncManager.h"
+#include "BookmarkSyncManager.h"
 
 namespace Marble
 {
@@ -16,7 +17,7 @@ namespace Marble
 class CloudSyncManager::Private {
 
 public:
-    Private();
+    Private( CloudSyncManager *parent );
 
     bool m_workOffline;
 
@@ -27,27 +28,31 @@ public:
     QString m_ownloudServer;
     QString m_owncloudUsername;
     QString m_owncloudPassword;
+
+    BookmarkSyncManager m_bookmarkSyncManager;
 };
 
-CloudSyncManager::Private::Private() :
+CloudSyncManager::Private::Private( CloudSyncManager* parent ) :
     m_workOffline( false ),
     m_syncEnabled( false ),
     m_routeSyncEnabled( true ),
     m_bookmarkSyncEnabled( true ),
     m_ownloudServer(),
     m_owncloudUsername(),
-    m_owncloudPassword()
+    m_owncloudPassword(),
+    m_bookmarkSyncManager( parent )
 {
 }
 
-CloudSyncManager::CloudSyncManager( QObject *parent ) : QObject( parent ),
-    d( new Private() )
+CloudSyncManager::CloudSyncManager( QObject *parent ) :
+    QObject( parent ),
+    d( new Private( this ) )
 {
 }
 
 CloudSyncManager::~CloudSyncManager()
 {
-    delete d;
+  delete d;
 }
 
 bool CloudSyncManager::workOffline() const
@@ -158,7 +163,12 @@ QUrl CloudSyncManager::apiUrl() const
 {
     return QUrl( QString( "http://%0:%1@%2/%3" )
                 .arg( owncloudUsername() ).arg( owncloudPassword() )
-                .arg( owncloudServer() ).arg( apiPath() ) );
+                 .arg( owncloudServer() ).arg( apiPath() ) );
+}
+
+BookmarkSyncManager *CloudSyncManager::bookmarkSyncManager()
+{
+  return &d->m_bookmarkSyncManager;
 }
 
 }

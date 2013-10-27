@@ -124,7 +124,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     connect( m_configDialog, SIGNAL(clearPersistentCacheClicked()),
              m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
     connect( m_configDialog, SIGNAL(syncNowClicked()),
-             m_controlView, SLOT(syncBookmarks()) );
+             m_controlView->marbleModel()->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
 
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
@@ -149,8 +149,6 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     QMetaObject::invokeMethod(this,
                               "initObject", Qt::QueuedConnection,
                               Q_ARG(QVariantMap, cmdLineSettings));
-
-    m_controlView->syncBookmarks();
 }
 
 void MainWindow::addGeoDataFile( const QString &fileName )

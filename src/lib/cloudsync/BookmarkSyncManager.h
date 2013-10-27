@@ -21,6 +21,7 @@
 namespace Marble {
 
 class CloudSyncManager;
+class BookmarkManager;
 
 class MARBLE_EXPORT BookmarkSyncManager : public QObject
 {
@@ -29,6 +30,8 @@ class MARBLE_EXPORT BookmarkSyncManager : public QObject
 public:
     BookmarkSyncManager( CloudSyncManager *cloudSyncManager );
     ~BookmarkSyncManager();
+
+    void setBookmarkManager(BookmarkManager *manager);
 
 Q_SIGNALS:
     void uploadProgress( qint64 sent, qint64 total );
