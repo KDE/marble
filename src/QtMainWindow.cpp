@@ -124,7 +124,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     connect( m_configDialog, SIGNAL(clearPersistentCacheClicked()),
              m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
     connect( m_configDialog, SIGNAL(syncNowClicked()),
-             m_controlView->marbleModel()->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
+             m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
 
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
@@ -1147,10 +1147,10 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
      settings.endGroup();
 
      settings.beginGroup( "CloudSync" );
-     CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
+     CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
      cloudSyncManager->setSyncEnabled( settings.value( "enableSync", false ).toBool() );
-     cloudSyncManager->setRouteSyncEnabled( settings.value( "syncRoutes", true ).toBool() );
-     cloudSyncManager->setBookmarkSyncEnabled( settings.value( "syncBookmarks", true ).toBool() );
+     cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( settings.value( "syncRoutes", true ).toBool() );
+     cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( settings.value( "syncBookmarks", true ).toBool() );
      cloudSyncManager->setOwncloudServer( settings.value( "owncloudServer", "" ).toString() );
      cloudSyncManager->setOwncloudUsername( settings.value( "owncloudUsername", "" ).toString() );
      cloudSyncManager->setOwncloudPassword( settings.value( "owncloudPassword", "" ).toString() );
@@ -1327,10 +1327,10 @@ void MainWindow::updateSettings()
     m_controlView->marbleWidget()->setProxy( m_configDialog->proxyUrl(), m_configDialog->proxyPort(), m_configDialog->user(), m_configDialog->password() );
     */
 
-    CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
+    CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
     cloudSyncManager->setSyncEnabled( m_configDialog->syncEnabled() );
-    cloudSyncManager->setRouteSyncEnabled( m_configDialog->syncRoutes() );
-    cloudSyncManager->setBookmarkSyncEnabled( m_configDialog->syncBookmarks() );
+    cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( m_configDialog->syncRoutes() );
+    cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( m_configDialog->syncBookmarks() );
     cloudSyncManager->setOwncloudServer( m_configDialog->owncloudServer() );
     cloudSyncManager->setOwncloudUsername( m_configDialog->owncloudUsername() );
     cloudSyncManager->setOwncloudPassword( m_configDialog->owncloudPassword() );

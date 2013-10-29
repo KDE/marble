@@ -21,12 +21,14 @@
 
 namespace Marble {
 
+class CloudSyncManager;
+
 class OwncloudSyncBackend : public AbstractSyncBackend
 {
     Q_OBJECT
     
 public:
-    OwncloudSyncBackend();
+    OwncloudSyncBackend( CloudSyncManager* cloudSyncManager );
     ~OwncloudSyncBackend();
 
     void uploadRoute( const QString &timestamp );

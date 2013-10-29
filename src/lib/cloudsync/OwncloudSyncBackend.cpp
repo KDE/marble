@@ -23,6 +23,7 @@
 #include "GeoDataDocument.h"
 #include "CloudRouteModel.h"
 #include "GeoDataPlacemark.h"
+#include "CloudSyncManager.h"
 
 #include <QNetworkAccessManager>
 #include <QScriptValueIterator>
@@ -39,7 +40,7 @@ namespace Marble
 class OwncloudSyncBackend::Private {
     
     public:
-        Private();
+        Private( CloudSyncManager* cloudSyncManager );
 
         QDir m_cacheDir;
         QNetworkAccessManager m_network;
@@ -55,9 +56,11 @@ class OwncloudSyncBackend::Private {
         QString m_routeDownloadEndpoint;
         QString m_routeDeleteEndpoint;
         QString m_routePreviewEndpoint;
+
+        CloudSyncManager* m_cloudSyncManager;
 };
 
-OwncloudSyncBackend::Private::Private() :
+OwncloudSyncBackend::Private::Private( CloudSyncManager* cloudSyncManager ) :
     m_cacheDir( MarbleDirs::localPath() + "/cloudsync/cache/routes/" ),
     m_network(),
     m_routeUploadReply(),
@@ -70,13 +73,14 @@ OwncloudSyncBackend::Private::Private() :
     m_routeListEndpoint( "routes" ),
     m_routeDownloadEndpoint( "routes" ),
     m_routeDeleteEndpoint( "routes/delete" ),
-    m_routePreviewEndpoint( "routes/preview" )
+    m_routePreviewEndpoint( "routes/preview" ),
+    m_cloudSyncManager( cloudSyncManager )
 {
 }
 
-OwncloudSyncBackend::OwncloudSyncBackend() :
+OwncloudSyncBackend::OwncloudSyncBackend( CloudSyncManager* cloudSyncManager ) :
     AbstractSyncBackend(),
-    d( new Private() )
+    d( new Private( cloudSyncManager ) )
 {
 }
 

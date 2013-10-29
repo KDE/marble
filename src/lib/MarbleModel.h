@@ -65,7 +65,6 @@ class RoutingManager;
 class BookmarkManager;
 class FileManager;
 class ElevationModel;
-class CloudSyncManager;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -273,9 +272,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     ElevationModel* elevationModel();
     const ElevationModel* elevationModel() const;
-
-    CloudSyncManager *cloudSyncManager();
-    const CloudSyncManager* cloudSyncManager() const;
 
     /**
      * Returns the placemark being tracked by this model or 0 if no

@@ -25,16 +25,12 @@ public:
     MarbleWidget *m_map;
     Marble::CloudRouteModel *m_routeModel;
     Marble::CloudSyncManager m_cloudSyncManager;
-    Marble::RouteSyncManager *m_routeSyncManager;
-    Marble::BookmarkSyncManager *m_bookmarkSyncManager;
 };
 
 CloudSync::Private::Private() :
     m_map( 0 ),
     m_routeModel( 0 ),
-    m_cloudSyncManager(),
-    m_routeSyncManager( 0 ),
-    m_bookmarkSyncManager( 0 )
+    m_cloudSyncManager()
 {
 }
 
@@ -48,6 +44,8 @@ CloudSync::CloudSync( QObject *parent ) :
              this, SIGNAL(owncloudUsernameChanged()) );
     connect( &d->m_cloudSyncManager, SIGNAL(owncloudPasswordChanged(QString)),
              this, SIGNAL(owncloudPasswordChanged()) );
+    connect( d->m_cloudSyncManager.bookmarkSyncManager(), SIGNAL(mergeConflict(Marble::MergeItem*)),
+             this, SIGNAL(mergeConflict(Marble::MergeItem*)));
 }
 
 CloudSync::~CloudSync()
@@ -57,8 +55,7 @@ CloudSync::~CloudSync()
 
 QObject* CloudSync::routeModel()
 {
-    return d->m_routeSyncManager ? qobject_cast<Marble::CloudRouteModel*>
-                                   ( d->m_routeSyncManager->model() ) : 0;
+    return qobject_cast<Marble::CloudRouteModel*>( d->m_cloudSyncManager.routeSyncManager()->model() );
 }
 
 MarbleWidget* CloudSync::map()
@@ -71,17 +68,9 @@ void CloudSync::setMap( MarbleWidget *map )
     if( d->m_map != map ) {
         d->m_map = map;
 
-        delete d->m_routeSyncManager;
-        d->m_routeSyncManager = new Marble::RouteSyncManager(
-                    &d->m_cloudSyncManager,
-                    d->m_map->model()->routingManager() );
-
-        delete d->m_bookmarkSyncManager;
-        d->m_bookmarkSyncManager = new Marble::BookmarkSyncManager( &d->m_cloudSyncManager );
-        connect( d->m_bookmarkSyncManager, SIGNAL(mergeConflict(Marble::MergeItem*)),
-                 this, SIGNAL(mergeConflict(Marble::MergeItem*)));
-
-        d->m_routeSyncManager->prepareRouteList();
+        d->m_cloudSyncManager.routeSyncManager()->setRoutingManager( map->model()->routingManager() );
+        d->m_cloudSyncManager.bookmarkSyncManager()->setBookmarkManager( map->model()->bookmarkManager() );
+        d->m_cloudSyncManager.routeSyncManager()->prepareRouteList();
         emit mapChanged();
     }
 }
@@ -118,56 +107,42 @@ void CloudSync::setOwncloudPassword( const QString &password )
 
 void CloudSync::uploadRoute()
 {
-    if( d->m_routeSyncManager != 0 ) {
-        d->m_routeSyncManager->uploadRoute();
-    }
+    d->m_cloudSyncManager.routeSyncManager()->uploadRoute();
 }
 
-void CloudSync::uploadRoute( const QString &identifier ) {
-    if( d->m_routeSyncManager != 0 ) {
-        d->m_routeSyncManager->uploadRoute( identifier );
-    }
+void CloudSync::uploadRoute( const QString &identifier )
+{
+    d->m_cloudSyncManager.routeSyncManager()->uploadRoute( identifier );
 }
 
-void CloudSync::openRoute( const QString &identifier ) {
-    if( d->m_routeSyncManager != 0 ) {
-        d->m_routeSyncManager->openRoute( identifier );
-    }
+void CloudSync::openRoute( const QString &identifier )
+{
+    d->m_cloudSyncManager.routeSyncManager()->openRoute( identifier );
 }
 
 void CloudSync::downloadRoute( const QString &identifier )
 {
-    if( d->m_routeSyncManager != 0 ) {
-        d->m_routeSyncManager->downloadRoute( identifier );
-    }
+    d->m_cloudSyncManager.routeSyncManager()->downloadRoute( identifier );
 }
 
 void CloudSync::removeRouteFromDevice( const QString &identifier )
 {
-    if( d->m_routeSyncManager != 0 ) {
-        d->m_routeSyncManager->removeRouteFromCache( identifier );
-    }
+    d->m_cloudSyncManager.routeSyncManager()->removeRouteFromCache( identifier );
 }
 
 void CloudSync::deleteRouteFromCloud( const QString &identifier )
 {
-    if( d->m_routeSyncManager != 0 ) {
-        d->m_routeSyncManager->deleteRoute( identifier );
-    }
+    d->m_cloudSyncManager.routeSyncManager()->deleteRoute( identifier );
 }
 
 void CloudSync::syncBookmarks()
 {
-    if( d->m_bookmarkSyncManager != 0 ) {
-        d->m_bookmarkSyncManager->startBookmarkSync();
-    }
+    d->m_cloudSyncManager.bookmarkSyncManager()->startBookmarkSync();
 }
 
 void CloudSync::resolveConflict( Marble::MergeItem *item )
 {
-    if( d->m_bookmarkSyncManager != 0 ) {
-        d->m_bookmarkSyncManager->resolveConflict( item );
-    }
+    d->m_cloudSyncManager.bookmarkSyncManager()->resolveConflict( item );
 }
 
 #include "CloudSync.moc"

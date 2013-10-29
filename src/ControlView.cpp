@@ -84,11 +84,14 @@ ControlView::ControlView( QWidget *parent )
     layout->setMargin( 0 );
     setLayout( layout );
 
-    BookmarkSyncManager* bookmarkManager = m_marbleWidget->model()->cloudSyncManager()->bookmarkSyncManager();
+    m_cloudSyncManager = new CloudSyncManager( this );
+    m_cloudSyncManager->routeSyncManager()->setRoutingManager( m_marbleWidget->model()->routingManager() );
+    BookmarkSyncManager* bookmarkSyncManager = m_cloudSyncManager->bookmarkSyncManager();
+    bookmarkSyncManager->setBookmarkManager( m_marbleWidget->model()->bookmarkManager() );
     m_conflictDialog = new ConflictDialog( m_marbleWidget );
-    connect( bookmarkManager, SIGNAL(mergeConflict(MergeItem*)), this, SLOT(showConflictDialog(MergeItem*)) );
-    connect( bookmarkManager, SIGNAL(syncComplete()), m_conflictDialog, SLOT(stopAutoResolve()) );
-    connect( m_conflictDialog, SIGNAL(resolveConflict(MergeItem*)), bookmarkManager, SLOT(resolveConflict(MergeItem*)) );
+    connect( bookmarkSyncManager, SIGNAL(mergeConflict(MergeItem*)), this, SLOT(showConflictDialog(MergeItem*)) );
+    connect( bookmarkSyncManager, SIGNAL(syncComplete()), m_conflictDialog, SLOT(stopAutoResolve()) );
+    connect( m_conflictDialog, SIGNAL(resolveConflict(MergeItem*)), bookmarkSyncManager, SLOT(resolveConflict(MergeItem*)) );
 }
 
 ControlView::~ControlView()
@@ -522,6 +525,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     routingDock->setObjectName( "routingDock" );
     routingDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
     RoutingWidget* routingWidget = new RoutingWidget( marbleWidget(), mainWindow );
+    routingWidget->setRouteSyncManager( cloudSyncManager()->routeSyncManager() );
     routingDock->setWidget( routingWidget );
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, routingDock );
 
@@ -595,6 +599,11 @@ void ControlView::setWorkOffline( bool offline )
     if ( !offline ) {
         marbleWidget()->clearVolatileTileCache();
     }
+}
+
+CloudSyncManager *ControlView::cloudSyncManager()
+{
+    return m_cloudSyncManager;
 }
 
 QString ControlView::externalMapEditor() const

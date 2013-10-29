@@ -85,6 +85,7 @@ public:
 
     BookmarkManager* m_bookmarkManager;
     QTimer m_syncTimer;
+    bool m_bookmarkSyncEnabled;
 
     /**
      * Returns an API endpoint
@@ -168,6 +169,8 @@ public:
      * @return A list of differences
      */
     QList<DiffItem> diff( QString &sourcePath, QString &destinationPath );
+    QList<DiffItem> diff( QString &sourcePath, QIODevice* destination );
+    QList<DiffItem> diff( QIODevice *source, QIODevice* destination );
 
     /**
      * Merges two diff lists.
@@ -206,7 +209,8 @@ public:
 BookmarkSyncManager::Private::Private(BookmarkSyncManager *parent, CloudSyncManager *cloudSyncManager ) :
   m_q( parent ),
   m_cloudSyncManager( cloudSyncManager ),
-  m_bookmarkManager( 0 )
+  m_bookmarkManager( 0 ),
+  m_bookmarkSyncEnabled( false )
 {
     m_cachePath = QString( "%0/cloudsync/cache/bookmarks" ).arg( MarbleDirs::localPath() );
     m_localBookmarksPath = QString( "%0/bookmarks/bookmarks.kml" ).arg( MarbleDirs::localPath() );
@@ -219,26 +223,48 @@ BookmarkSyncManager::BookmarkSyncManager( CloudSyncManager *cloudSyncManager ) :
   QObject(),
   d( new Private( this, cloudSyncManager ) )
 {
+    d->m_syncTimer.setInterval( 60 * 60 * 1000 ); // 1 hour. TODO: Make this configurable.
+    connect( &d->m_syncTimer, SIGNAL(timeout()), this, SLOT(startBookmarkSync()) );
 }
 
 BookmarkSyncManager::~BookmarkSyncManager()
 {
-  delete d;
+    delete d;
+}
+
+
+bool BookmarkSyncManager::isBookmarkSyncEnabled() const
+{
+    return d->m_bookmarkSyncEnabled;
+}
+
+void BookmarkSyncManager::setBookmarkSyncEnabled( bool enabled )
+{
+    if ( d->m_bookmarkSyncEnabled != enabled ) {
+        d->m_bookmarkSyncEnabled = enabled;
+        emit bookmarkSyncEnabledChanged( d->m_bookmarkSyncEnabled );
+
+        if ( enabled ) {
+            startBookmarkSync();
+        }
+    }
 }
 
 void BookmarkSyncManager::setBookmarkManager(BookmarkManager *manager)
 {
   d->m_bookmarkManager = manager;
-  connect( manager, SIGNAL(bookmarksChanged()), this, SLOT(syncBookmarks()) );
-  connect( &d->m_syncTimer, SIGNAL(timeout()), this, SLOT(startBookmarkSync()) );
-  if( !d->m_syncTimer.isActive() ) {
-      d->m_syncTimer.start( 60 * 60 * 1000 ); // 1 hour. TODO: Make this configurable.
-  }
+  connect( manager, SIGNAL(bookmarksChanged()), this, SLOT(startBookmarkSync()) );
   startBookmarkSync();
 }
 
 void BookmarkSyncManager::startBookmarkSync()
 {
+    if ( !isBookmarkSyncEnabled() )
+    {
+        return;
+    }
+
+    d->m_syncTimer.start();
     d->downloadTimestamp();
 }
 
@@ -284,13 +310,14 @@ void BookmarkSyncManager::Private::downloadBookmarks()
     QNetworkRequest request( endpointUrl( m_downloadEndpoint ) );
     m_downloadReply = m_network.get( request );
     connect( m_downloadReply, SIGNAL(finished()),
-             m_q, SLOT(continueSynchronization()) );
+             m_q, SLOT(completeSynchronization()) );
     connect( m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)),
              m_q, SIGNAL(downloadProgress(qint64,qint64)) );
 }
 
 void BookmarkSyncManager::Private::downloadTimestamp()
 {
+    mDebug() << "Determining remote bookmark state.";
     m_timestampReply = m_network.get( QNetworkRequest( endpointUrl( m_timestampEndpoint ) ) );
     connect( m_timestampReply, SIGNAL(finished()),
              m_q, SLOT(parseTimestamp()) );
@@ -439,20 +466,32 @@ void BookmarkSyncManager::Private::determineDiffStatus( DiffItem &item, GeoDataD
 
 QList<DiffItem> BookmarkSyncManager::Private::diff( QString &sourcePath, QString &destinationPath )
 {
-    GeoDataParser parserA( GeoData_KML );
-    QFile fileA( sourcePath );
-    if( !fileA.open( QFile::ReadOnly ) ) {
-        mDebug() << "Could not open file " << fileA.fileName();
-    }
-    parserA.read( &fileA );
-    GeoDataDocument *documentA = dynamic_cast<GeoDataDocument*>( parserA.releaseDocument() );
-
-    GeoDataParser parserB( GeoData_KML );
     QFile fileB( destinationPath );
     if( !fileB.open( QFile::ReadOnly ) ) {
         mDebug() << "Could not open file " << fileB.fileName();
     }
-    parserB.read( &fileB );
+    return diff( sourcePath, &fileB );
+}
+
+QList<DiffItem> BookmarkSyncManager::Private::diff( QString &sourcePath, QIODevice *fileB )
+{
+    QFile fileA( sourcePath );
+    if( !fileA.open( QFile::ReadOnly ) ) {
+        mDebug() << "Could not open file " << fileA.fileName();
+    }
+    fileA.close();
+
+    return diff( &fileA, fileB );
+}
+
+QList<DiffItem> BookmarkSyncManager::Private::diff( QIODevice *fileA, QIODevice *fileB )
+{
+    GeoDataParser parserA( GeoData_KML );
+    parserA.read( fileA );
+    GeoDataDocument *documentA = dynamic_cast<GeoDataDocument*>( parserA.releaseDocument() );
+
+    GeoDataParser parserB( GeoData_KML );
+    parserB.read( fileB );
     GeoDataDocument *documentB = dynamic_cast<GeoDataDocument*>( parserB.releaseDocument() );
 
     QList<DiffItem> diffItems = getPlacemarks( documentA, documentB, DiffItem::Destination ); // Compare old to new
@@ -470,9 +509,6 @@ QList<DiffItem> BookmarkSyncManager::Private::diff( QString &sourcePath, QString
             }
         }
     }
-
-    fileA.close();
-    fileB.close();
 
     return diffItems;
 }
@@ -658,6 +694,7 @@ void BookmarkSyncManager::Private::parseTimestamp()
     QScriptValue parsedResponse = engine.evaluate( QString( "(%0)" ).arg( response ) );
     QString timestamp = parsedResponse.property( "data" ).toString();
     m_cloudTimestamp = timestamp;
+    mDebug() << "Remote bookmark timestamp is " << m_cloudTimestamp;
     continueSynchronization();
 }
 void BookmarkSyncManager::Private::copyLocalToCache()
@@ -668,7 +705,9 @@ void BookmarkSyncManager::Private::copyLocalToCache()
     QFile bookmarksFile( m_localBookmarksPath );
     bookmarksFile.copy( QString( "%0/%1.kml" ).arg( m_cachePath, m_cloudTimestamp ) );
     /** @todo FIXME use memory, not files */
+    disconnect( m_bookmarkManager, SIGNAL(bookmarksChanged()), m_q, SLOT(startBookmarkSync()) );
     m_bookmarkManager->loadFile( "bookmarks/bookmarks.kml" );
+    connect( m_bookmarkManager, SIGNAL(bookmarksChanged()), m_q, SLOT(startBookmarkSync()) );
     emit m_q->syncComplete();
 }
 
@@ -676,9 +715,12 @@ void BookmarkSyncManager::Private::copyLocalToCache()
 void BookmarkSyncManager::Private::continueSynchronization()
 {
     bool cloudModified = cloudBookmarksModified( m_cloudTimestamp );
-    if( !cloudModified ) {
+    if( cloudModified ) {
+        downloadBookmarks();
+    } else {
         QString lastSyncedPath = lastSyncedKmlPath();
         if( lastSyncedPath == QString() ) {
+            mDebug() << "Never synced. Uploading bookmarks.";
             uploadBookmarks();
         } else {
             QList<DiffItem> diffList = diff( lastSyncedPath, m_localBookmarksPath );
@@ -690,42 +732,40 @@ void BookmarkSyncManager::Private::continueSynchronization()
             }
 
             if( localModified ) {
+                mDebug() << "Local modifications, uploading.";
                 uploadBookmarks();
             }
         }
-    } else {
-        downloadBookmarks();
     }
 }
 
 void BookmarkSyncManager::Private::completeSynchronization()
 {
+    mDebug() << "Merging remote and local bookmark file";
     QString lastSyncedPath = lastSyncedKmlPath();
     QFile localBookmarksFile( m_localBookmarksPath );
     QByteArray result = m_downloadReply->readAll();
+    QBuffer buffer( &result );
+    buffer.open( QIODevice::ReadOnly );
 
     if( lastSyncedPath == QString() ) {
         if( localBookmarksFile.exists() ) {
-            // Conflict here!
+            mDebug() << "Conflict between remote bookmarks and local ones";
+            m_diffA.clear();
+            m_diffB = diff( m_localBookmarksPath, &buffer );
         } else {
             saveDownloadedToCache( result );
+            return;
         }
-    } else {
-        QTemporaryFile file;
-        file.open();
-        file.write( result );
-        file.close();
-
-        QString tempName = file.fileName();
-
-        m_diffA.clear();
-        m_diffB.clear();
-        m_merged.clear();
-
-        m_diffA = diff( lastSyncedPath, m_localBookmarksPath );
-        m_diffB = diff( lastSyncedPath, tempName );
-        merge();
     }
+    else
+    {
+        m_diffA = diff( lastSyncedPath, m_localBookmarksPath );
+        m_diffB = diff( lastSyncedPath, &buffer );
+    }
+
+    m_merged.clear();
+    merge();
 }
 
 void BookmarkSyncManager::Private::completeMerge()
@@ -747,6 +787,7 @@ void BookmarkSyncManager::Private::completeUpload()
     QScriptValue parsedResponse = engine.evaluate( QString( "(%0)" ).arg( response ) );
     QString timestamp = parsedResponse.property( "data" ).toString();
     m_cloudTimestamp = timestamp;
+    mDebug() << "Uploaded bookmarks to remote server. Timestamp is " << m_cloudTimestamp;
     copyLocalToCache();
 }
 

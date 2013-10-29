@@ -125,8 +125,7 @@ RoutingWidgetPrivate::RoutingWidgetPrivate( RoutingWidget *parent, MarbleWidget 
         m_inputRequest( 0 ),
         m_routingModel( m_routingManager->routingModel() ),
         m_routeRequest( marbleWidget->model()->routingManager()->routeRequest() ),
-        m_routeSyncManager( new RouteSyncManager( marbleWidget->model()->cloudSyncManager(),
-                                                  marbleWidget->model()->routingManager() ) ),
+        m_routeSyncManager( 0 ),
         m_zoomRouteAfterDownload( false ),
         m_currentFrame( 0 ),
         m_iconSize( 16 ),
@@ -313,10 +312,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT(retrieveRoute()) );
     connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL(rowsInserted(QModelIndex,int,int)),
              this, SLOT(updateAlternativeRoutes()) );
-    connect( d->m_widget->model()->cloudSyncManager(), SIGNAL(syncEnabledChanged(bool)),
-             this, SLOT(updateCloudSyncButtons()) );
-    connect( d->m_widget->model()->cloudSyncManager(), SIGNAL(routeSyncEnabledChanged(bool)),
-             this, SLOT(updateCloudSyncButtons()) );
 
     d->m_ui.directionsListView->setModel( d->m_routingModel );
 
@@ -628,6 +623,14 @@ void RoutingWidget::setShowDirectionsButtonVisible( bool visible )
     d->m_ui.showInstructionsButton->setVisible( visible );
 }
 
+void RoutingWidget::setRouteSyncManager(RouteSyncManager *manager)
+{
+    d->m_routeSyncManager = manager;
+    connect( d->m_routeSyncManager, SIGNAL(routeSyncEnabledChanged(bool)),
+             this, SLOT(updateCloudSyncButtons()) );
+    updateCloudSyncButtons();
+}
+
 void RoutingWidget::openRoute()
 {
     QString const file = QFileDialog::getOpenFileName( this, tr( "Open Route" ),
@@ -679,11 +682,13 @@ void RoutingWidget::saveRoute()
 
 void RoutingWidget::uploadToCloud()
 {
+    Q_ASSERT( d->m_routeSyncManager );
     d->m_routeSyncManager->uploadRoute();
 }
 
 void RoutingWidget::openCloudRoutesDialog()
 {
+    Q_ASSERT( d->m_routeSyncManager );
     d->m_routeSyncManager->prepareRouteList();
 
     CloudRoutesDialog *dialog = new CloudRoutesDialog( d->m_routeSyncManager->model(), d->m_widget );
@@ -716,8 +721,7 @@ void RoutingWidget::updateActiveRoutingProfile()
 
 void RoutingWidget::updateCloudSyncButtons()
 {
-    CloudSyncManager const * const manager = d->m_widget->model()->cloudSyncManager();
-    bool const show = manager->isSyncEnabled() && manager->isRouteSyncEnabled();
+    bool const show = d->m_routeSyncManager && d->m_routeSyncManager->isRouteSyncEnabled();
     d->m_cloudSyncSeparator->setVisible( show );
     d->m_uploadToCloudAction->setVisible( show );
     d->m_openCloudRoutesAction->setVisible( show );
@@ -725,6 +729,7 @@ void RoutingWidget::updateCloudSyncButtons()
 
 void RoutingWidget::openCloudRoute(const QString &identifier)
 {
+    Q_ASSERT( d->m_routeSyncManager );
     d->m_routeSyncManager->openRoute( identifier );
     d->m_widget->centerOn( d->m_routingManager->routingModel()->route().bounds() );
 }

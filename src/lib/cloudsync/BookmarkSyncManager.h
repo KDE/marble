@@ -27,16 +27,31 @@ class MARBLE_EXPORT BookmarkSyncManager : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY( bool bookmarkSyncEnabled READ isBookmarkSyncEnabled WRITE setBookmarkSyncEnabled NOTIFY bookmarkSyncEnabledChanged )
+
 public:
     BookmarkSyncManager( CloudSyncManager *cloudSyncManager );
     ~BookmarkSyncManager();
 
+    /**
+     * Checks if the user enabled bookmark synchronization.
+     * @return true if bookmark synchronization enabled
+     */
+    bool isBookmarkSyncEnabled() const;
+
+    /**
+     * Setter for enabling/disabling bookmark synchronization.
+     * @param enabled Status of bookmark synchronization
+     */
+    void setBookmarkSyncEnabled( bool enabled );
+
     void setBookmarkManager(BookmarkManager *manager);
 
 Q_SIGNALS:
+    void bookmarkSyncEnabledChanged(bool enabled);
     void uploadProgress( qint64 sent, qint64 total );
     void downloadProgress( qint64 received, qint64 total );
-    void mergeConflict( Marble::MergeItem *item );
+    void mergeConflict( MergeItem *item );
     void syncComplete();
 
 public Q_SLOTS:

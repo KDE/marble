@@ -18,14 +18,31 @@
 namespace Marble {
 
 class CloudSyncManager;
+class RoutingManager;
 
 class MARBLE_EXPORT RouteSyncManager : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY( bool routeSyncEnabled READ isRouteSyncEnabled WRITE setRouteSyncEnabled NOTIFY routeSyncEnabledChanged )
     
 public:
-    RouteSyncManager( CloudSyncManager *cloudSyncManager, RoutingManager *routingManager );
+    RouteSyncManager( CloudSyncManager *cloudSyncManager );
     ~RouteSyncManager();
+
+    void setRoutingManager( RoutingManager *routingManager );
+
+    /**
+     * Checks if the user enabled route synchronization.
+     * @return true if route synchronization enabled
+     */
+    bool isRouteSyncEnabled() const;
+
+    /**
+     * Setter for enabling/disabling route synchronization.
+     * @param enabled Status of route synchronization
+     */
+    void setRouteSyncEnabled( bool enabled );
 
     /**
      * Returns CloudRouteModel associated with RouteSyncManager instance
@@ -115,6 +132,7 @@ private slots:
 
 
 signals:
+    void routeSyncEnabledChanged(bool enabled);
     void routeDownloadProgress( qint64 received, qint64 total );
     void routeListDownloadProgress( qint64 received, qint64 total );
 

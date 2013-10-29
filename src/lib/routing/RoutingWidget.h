@@ -25,6 +25,7 @@ namespace Marble
 class MarbleWidget;
 class RoutingInputWidget;
 class RoutingWidgetPrivate;
+class RouteSyncManager;
 
 /**
   * A widget consisting of input fields for places / routing destinations,
@@ -49,6 +50,8 @@ public:
 
     /** Show or hide the "open file..." button. Default is false (not visible) */
     void setShowDirectionsButtonVisible( bool visible );
+
+    void setRouteSyncManager(RouteSyncManager* manager);
 
 public Q_SLOTS:
     /** Ask the user for a kml file to open */

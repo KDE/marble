@@ -538,10 +538,10 @@ void MarblePart::readSettings()
 
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 
-    CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
+    CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
     cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
-    cloudSyncManager->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
-    cloudSyncManager->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
+    cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
+    cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
     cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
     cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
     cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );
@@ -1388,7 +1388,7 @@ void MarblePart::editSettings()
     m_configDialog->addPage( w_cloudSyncSettings, i18n( "Synchronization" ), "folder-sync" );
 
     connect( ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
-             m_controlView->marbleModel()->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
+             m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
     
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );
@@ -1562,10 +1562,10 @@ void MarblePart::updateSettings()
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
     m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( MarbleSettings::inertialEarthRotation() );
 
-    CloudSyncManager* cloudSyncManager = m_controlView->marbleWidget()->model()->cloudSyncManager();
+    CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
     cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
-    cloudSyncManager->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
-    cloudSyncManager->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
+    cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
+    cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
     cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
     cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
     cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );

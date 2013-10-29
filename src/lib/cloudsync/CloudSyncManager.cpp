@@ -17,36 +17,41 @@ namespace Marble
 class CloudSyncManager::Private {
 
 public:
-    Private( CloudSyncManager *parent );
+    Private();
+    ~Private();
 
     bool m_workOffline;
 
     bool m_syncEnabled;
-    bool m_routeSyncEnabled;
-    bool m_bookmarkSyncEnabled;
 
     QString m_ownloudServer;
     QString m_owncloudUsername;
     QString m_owncloudPassword;
 
-    BookmarkSyncManager m_bookmarkSyncManager;
+    RouteSyncManager* m_routeSyncManager;
+    BookmarkSyncManager* m_bookmarkSyncManager;
 };
 
-CloudSyncManager::Private::Private( CloudSyncManager* parent ) :
+CloudSyncManager::Private::~Private()
+{
+    delete m_routeSyncManager;
+    delete m_bookmarkSyncManager;
+}
+
+CloudSyncManager::Private::Private() :
     m_workOffline( false ),
     m_syncEnabled( false ),
-    m_routeSyncEnabled( true ),
-    m_bookmarkSyncEnabled( true ),
     m_ownloudServer(),
     m_owncloudUsername(),
     m_owncloudPassword(),
-    m_bookmarkSyncManager( parent )
+    m_routeSyncManager( 0 ),
+    m_bookmarkSyncManager( 0 )
 {
 }
 
 CloudSyncManager::CloudSyncManager( QObject *parent ) :
     QObject( parent ),
-    d( new Private( this ) )
+    d( new Private )
 {
 }
 
@@ -78,16 +83,6 @@ bool CloudSyncManager::isSyncEnabled() const
     return d->m_syncEnabled;
 }
 
-bool CloudSyncManager::isRouteSyncEnabled() const
-{
-    return d->m_routeSyncEnabled;
-}
-
-bool CloudSyncManager::isBookmarkSyncEnabled() const
-{
-    return d->m_bookmarkSyncEnabled;
-}
-
 QString CloudSyncManager::owncloudServer() const
 {
     return d->m_ownloudServer;
@@ -108,22 +103,6 @@ void CloudSyncManager::setSyncEnabled( bool enabled )
     if ( d->m_syncEnabled != enabled ) {
         d->m_syncEnabled = enabled;
         emit syncEnabledChanged( d->m_syncEnabled );
-    }
-}
-
-void CloudSyncManager::setRouteSyncEnabled( bool enabled )
-{
-    if ( d->m_routeSyncEnabled != enabled ) {
-        d->m_routeSyncEnabled = enabled;
-        emit routeSyncEnabledChanged( d->m_routeSyncEnabled );
-    }
-}
-
-void CloudSyncManager::setBookmarkSyncEnabled( bool enabled )
-{
-    if ( d->m_bookmarkSyncEnabled != enabled ) {
-        d->m_bookmarkSyncEnabled = enabled;
-        emit bookmarkSyncEnabledChanged( d->m_bookmarkSyncEnabled );
     }
 }
 
@@ -166,9 +145,22 @@ QUrl CloudSyncManager::apiUrl() const
                  .arg( owncloudServer() ).arg( apiPath() ) );
 }
 
+RouteSyncManager *CloudSyncManager::routeSyncManager()
+{
+    if ( !d->m_routeSyncManager ) {
+        d->m_routeSyncManager = new RouteSyncManager( this );
+    }
+
+    return d->m_routeSyncManager;
+}
+
 BookmarkSyncManager *CloudSyncManager::bookmarkSyncManager()
 {
-  return &d->m_bookmarkSyncManager;
+    if ( !d->m_bookmarkSyncManager ) {
+        d->m_bookmarkSyncManager = new BookmarkSyncManager( this );
+    }
+
+    return d->m_bookmarkSyncManager;
 }
 
 }

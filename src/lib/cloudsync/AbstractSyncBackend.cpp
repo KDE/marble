@@ -17,7 +17,7 @@
 namespace Marble
 {
 class AbstractSyncBackend::Private {
-    
+
 public:
     QUrl m_apiUrl;
 };

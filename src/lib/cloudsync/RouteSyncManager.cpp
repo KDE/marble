@@ -41,8 +41,9 @@ namespace Marble
  */
 class RouteSyncManager::Private {
 public:
-    Private( CloudSyncManager *cloudSyncManager, RoutingManager *routingManager );
+    Private( CloudSyncManager *cloudSyncManager );
 
+    bool m_routeSyncEnabled;
     QProgressDialog *m_uploadProgressDialog;
     CloudSyncManager *m_cloudSyncManager;
     RoutingManager *m_routingManager;
@@ -53,11 +54,13 @@ public:
     QVector<RouteItem> m_routeList;
 };
 
-RouteSyncManager::Private::Private( CloudSyncManager *cloudSyncManager, RoutingManager *routingManager ) :
+RouteSyncManager::Private::Private( CloudSyncManager *cloudSyncManager ) :
+    m_routeSyncEnabled( false ),
     m_uploadProgressDialog( new QProgressDialog() ),
     m_cloudSyncManager( cloudSyncManager ),
-    m_routingManager( routingManager ),
-    m_model( new CloudRouteModel() )
+    m_routingManager( 0 ),
+    m_model( new CloudRouteModel() ),
+    m_owncloudBackend( cloudSyncManager )
 {
     m_cacheDir = QDir( MarbleDirs::localPath() + "/cloudsync/cache/routes/" );
     m_owncloudBackend.setApiUrl( m_cloudSyncManager->apiUrl() );
@@ -68,8 +71,8 @@ RouteSyncManager::Private::Private( CloudSyncManager *cloudSyncManager, RoutingM
     m_uploadProgressDialog->setWindowTitle( tr( "Uploading route..." ) );
 }
 
-RouteSyncManager::RouteSyncManager( CloudSyncManager *cloudSyncManager, RoutingManager *routingManager ) :
-    d( new Private( cloudSyncManager, routingManager ) )
+RouteSyncManager::RouteSyncManager(CloudSyncManager *cloudSyncManager) :
+    d( new Private( cloudSyncManager ) )
 {
     connect( this, SIGNAL(routeDownloadProgress(qint64,qint64)), d->m_model, SLOT(updateProgress(qint64,qint64)) );
 }
@@ -77,6 +80,24 @@ RouteSyncManager::RouteSyncManager( CloudSyncManager *cloudSyncManager, RoutingM
 RouteSyncManager::~RouteSyncManager()
 {
     delete d;
+}
+
+void RouteSyncManager::setRoutingManager(RoutingManager *routingManager)
+{
+    d->m_routingManager = routingManager;
+}
+
+bool RouteSyncManager::isRouteSyncEnabled() const
+{
+    return d->m_routeSyncEnabled;
+}
+
+void RouteSyncManager::setRouteSyncEnabled( bool enabled )
+{
+    if ( d->m_routeSyncEnabled != enabled ) {
+        d->m_routeSyncEnabled = enabled;
+        emit routeSyncEnabledChanged( d->m_routeSyncEnabled );
+    }
 }
 
 CloudRouteModel* RouteSyncManager::model()
@@ -92,6 +113,11 @@ QString RouteSyncManager::generateTimestamp() const
 
 QString RouteSyncManager::saveDisplayedToCache() const
 {
+    if ( !d->m_routingManager ) {
+        qWarning() << "RoutingManager instance not set in RouteSyncManager. Cannot save current route.";
+        return QString();
+    }
+
     d->m_cacheDir.mkpath( d->m_cacheDir.absolutePath() );
     
     const QString timestamp = generateTimestamp();
@@ -213,6 +239,11 @@ void RouteSyncManager::downloadRoute( const QString &timestamp )
 
 void RouteSyncManager::openRoute(const QString &timestamp )
 {
+    if ( !d->m_routingManager ) {
+        qWarning() << "RoutingManager instance not set in RouteSyncManager. Cannot open route " << timestamp;
+        return;
+    }
+
     d->m_routingManager->loadRoute( QString( "%0/%1.kml" )
                                     .arg( d->m_cacheDir.absolutePath() )
                                     .arg( timestamp ) );
