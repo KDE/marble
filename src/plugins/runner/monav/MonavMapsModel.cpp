@@ -28,7 +28,8 @@ void MonavMapsModel::deleteMapFiles( int row )
 void MonavMapsModel::setInstallableVersions( const QMap<QString, QString> remoteMaps )
 {
     m_remoteMaps = remoteMaps;
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 MonavMapsModel::MonavMapsModel( const QVector<MonavMap> &data, QObject * parent ) :

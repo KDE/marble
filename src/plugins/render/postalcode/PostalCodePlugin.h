@@ -19,6 +19,7 @@ namespace Marble {
 
 class PostalCodePlugin : public AbstractDataPlugin {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.PostalCodePlugin" )
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( PostalCodePlugin )
 

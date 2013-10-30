@@ -22,6 +22,10 @@
 #include <QScriptValue>
 #include <QScriptValueIterator>
 
+#if QT_VERSION >= 0x050000
+  #include <QUrlQuery>
+#endif
+
 using namespace Marble;
 
 QHash<QString, WeatherData::WeatherCondition> GeoNamesWeatherService::dayConditions
@@ -47,11 +51,21 @@ void GeoNamesWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
     }
 
     QUrl geonamesUrl( "http://ws.geonames.org/weatherJSON" );
+#if QT_VERSION < 0x050000
     geonamesUrl.addQueryItem( "north", QString::number( box.north( GeoDataCoordinates::Degree ) ) );
     geonamesUrl.addQueryItem( "south", QString::number( box.south( GeoDataCoordinates::Degree ) ) );
     geonamesUrl.addQueryItem( "east", QString::number( box.east( GeoDataCoordinates::Degree ) ) );
     geonamesUrl.addQueryItem( "west", QString::number( box.west( GeoDataCoordinates::Degree ) ) );
     geonamesUrl.addQueryItem( "maxRows", QString::number( number ) );
+#else
+    QUrlQuery urlQuery;
+    urlQuery.addQueryItem( "north", QString::number( box.north( GeoDataCoordinates::Degree ) ) );
+    urlQuery.addQueryItem( "south", QString::number( box.south( GeoDataCoordinates::Degree ) ) );
+    urlQuery.addQueryItem( "east", QString::number( box.east( GeoDataCoordinates::Degree ) ) );
+    urlQuery.addQueryItem( "west", QString::number( box.west( GeoDataCoordinates::Degree ) ) );
+    urlQuery.addQueryItem( "maxRows", QString::number( number ) );
+    geonamesUrl.setQuery( urlQuery );
+#endif
 
     emit downloadDescriptionFileRequested( geonamesUrl );
 }
@@ -64,7 +78,13 @@ void GeoNamesWeatherService::getItem( const QString &id )
 
     if ( id.startsWith(QLatin1String("geonames_") ) ) {
         QUrl geonamesUrl( "http://ws.geonames.org/weatherIcaoJSON" );
+#if QT_VERSION < 0x050000
         geonamesUrl.addQueryItem( "ICAO", id.mid( 9 ) );
+#else
+        QUrlQuery urlQuery;
+        urlQuery.addQueryItem( "ICAO", id.mid( 9 ) );
+        geonamesUrl.setQuery( urlQuery );
+#endif
         emit downloadDescriptionFileRequested( geonamesUrl );
     }
 }

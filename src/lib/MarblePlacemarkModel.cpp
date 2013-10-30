@@ -49,11 +49,15 @@ MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
     : QAbstractListModel( parent ),
       d( new Private )
 {
-    QHash<int,QByteArray> roles = roleNames();
+    QHash<int,QByteArray> roles;
     roles[DescriptionRole] = "description";
     roles[LongitudeRole] = "longitude";
     roles[LatitudeRole] = "latitude";
+#if QT_VERSION < 0x050000
     setRoleNames( roles );
+#else
+    m_roleNames = roles;
+#endif
 }
 
 MarblePlacemarkModel::~MarblePlacemarkModel()
@@ -81,6 +85,13 @@ int MarblePlacemarkModel::columnCount( const QModelIndex &parent ) const
     else
         return 0;
 }
+
+#if QT_VERSION >= 0x050000
+QHash<int, QByteArray> MarblePlacemarkModel::roleNames() const
+{
+    return m_roleNames;
+}
+#endif
 
 QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
 {

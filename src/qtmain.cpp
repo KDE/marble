@@ -39,12 +39,14 @@ using namespace Marble;
  
 int main(int argc, char *argv[])
 {
+#if QT_VERSION < 0x050000
     // The GraphicsSystem needs to be set before the instantiation of the
     // QApplication. Therefore we need to parse the current setting 
     // in this unusual place :-/
     QSettings graphicsSettings("KDE", "Marble Virtual Globe"); // keep the parameters here
     QString const graphicsString = graphicsSettings.value("View/graphicsSystem", "raster").toString();
     QApplication::setGraphicsSystem( graphicsString );
+#endif
 
     QApplication app(argc, argv);
     app.setApplicationName( "Marble Virtual Globe" );

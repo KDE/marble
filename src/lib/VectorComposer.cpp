@@ -52,7 +52,11 @@ VectorComposer::VectorComposer( QObject * parent )
       m_textureLakeBrush( QBrush( QColor( 0, 0, 0 ) ) ),
       m_dateLineBrush( QBrush( Qt::NoBrush ) )
 {
+#if QT_VERSION < 0x050000
     if ( refCounter == 0 ) {
+#else
+    if ( refCounter.load() == 0 ) {
+#endif
         s_coastLinesLoaded = false;
         s_overlaysLoaded = false;
 
@@ -89,7 +93,11 @@ VectorComposer::~VectorComposer()
     delete m_vectorMap;
 
     refCounter.deref();
+#if QT_VERSION < 0x050000
     if (refCounter == 0) {
+#else
+    if (refCounter.load() == 0) {
+#endif
         delete s_dateLine;
         delete s_usaStates;    // The states of the USA
         delete s_countries;    // The country borders

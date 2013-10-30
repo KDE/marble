@@ -113,7 +113,7 @@ marble_add_test( TestModel )
 marble_add_test( TestTimeStamp )
 marble_add_test( TestTimeSpan )
 
-qt4_add_resources(TestGeoDataCopy_SRCS TestGeoDataCopy.qrc) # Check copy operations on CoW classes
+qt_add_resources(TestGeoDataCopy_SRCS TestGeoDataCopy.qrc) # Check copy operations on CoW classes
 marble_add_test( TestGeoDataCopy ${TestGeoDataCopy_SRCS} )
 
 add_definitions( -DCITIES_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../data/placemarks/cityplacemarks.kml\\\"" )

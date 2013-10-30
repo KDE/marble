@@ -27,6 +27,7 @@ namespace Marble
 class ProgressFloatItem  : public AbstractFloatItem
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.ProgressFloatItem" )
 
     Q_INTERFACES( Marble::RenderPluginInterface )
 

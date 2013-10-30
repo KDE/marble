@@ -10,7 +10,9 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-INCLUDE(${QT_USE_FILE})
+if( QT4_FOUND )
+  INCLUDE(${QT_USE_FILE})
+endif()
 
 if (QEXTSERIALPORT_FOUND)
   include_directories (${QEXTSERIALPORT_INCLUDE_DIR})
@@ -31,7 +33,7 @@ set( aprs_SRCS AprsPlugin.cpp
 	       ${serial_src} )
 
 set( aprs_UI AprsConfigWidget.ui )
-qt4_wrap_ui( aprs_SRCS ${aprs_UI} )
+qt_wrap_ui( aprs_SRCS ${aprs_UI} )
 
 if (QTONLY)
 marble_qt4_automoc( ${aprs_SRCS} )

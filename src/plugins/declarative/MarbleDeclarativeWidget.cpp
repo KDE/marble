@@ -33,6 +33,13 @@
 #include "DeclarativeDataPlugin.h"
 #include "PluginManager.h"
 
+#include <QSettings>
+#include <QApplication>
+
+#if QT_VERSION < 0x050000
+  typedef QDeclarativeComponent QQmlComponent;
+#endif
+
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ),
     m_marbleWidget( new Marble::MarbleWidget ),
@@ -125,6 +132,7 @@ QStringList MarbleWidget::activeRenderPlugins() const
     return result;
 }
 
+#if QT_VERSION < 0x050000
 QDeclarativeListProperty<QObject> MarbleWidget::childList()
 {
     return QDeclarativeListProperty<QObject>( this, m_children );
@@ -132,8 +140,20 @@ QDeclarativeListProperty<QObject> MarbleWidget::childList()
 
 QDeclarativeListProperty<DeclarativeDataPlugin> MarbleWidget::dataLayers()
 {
-    return QDeclarativeListProperty<DeclarativeDataPlugin>( this, 0, &MarbleWidget::addLayer );
+    return QDeclarativeListProperty<DeclarativeDataPlugin>( this, 0, &MarbleWidget::addLayer, 0, 0, 0 );
 }
+
+#else
+QQmlListProperty<QObject> MarbleWidget::childList()
+{
+    return QQmlListProperty<QObject>( this, m_children );
+}
+
+QQmlListProperty<DeclarativeDataPlugin> MarbleWidget::dataLayers()
+{
+    return QQmlListProperty<DeclarativeDataPlugin>( this, 0, &MarbleWidget::addLayer, 0, 0, 0 );
+}
+#endif
 
 void MarbleWidget::setActiveRenderPlugins( const QStringList &items )
 {
@@ -271,7 +291,11 @@ void MarbleWidget::forwardMouseClick(qreal lon, qreal lat, Marble::GeoDataCoordi
     }
 }
 
+#if QT_VERSION < 0x050000
 void MarbleWidget::addLayer( QDeclarativeListProperty<DeclarativeDataPlugin> *list, DeclarativeDataPlugin *layer )
+#else
+void MarbleWidget::addLayer( QQmlListProperty<DeclarativeDataPlugin> *list, DeclarativeDataPlugin *layer )
+#endif
 {
     MarbleWidget *object = qobject_cast<MarbleWidget *>( list->object );
     if ( object ) {
@@ -281,7 +305,7 @@ void MarbleWidget::addLayer( QDeclarativeListProperty<DeclarativeDataPlugin> *li
     }
 }
 
-QObject *MarbleWidget::mapThemeModel()
+QStandardItemModel *MarbleWidget::mapThemeModel()
 {
     return m_mapThemeManager.mapThemeModel();
 }
@@ -315,7 +339,7 @@ void MarbleWidget::downloadArea(int topTileLevel, int bottomTileLevel)
     }
 }
 
-void MarbleWidget::setDataPluginDelegate( const QString &plugin, QDeclarativeComponent *delegate )
+void MarbleWidget::setDataPluginDelegate( const QString &plugin, QQmlComponent *delegate )
 {
     QList<Marble::RenderPlugin*> renderPlugins = m_marbleWidget->renderPlugins();
     foreach( Marble::RenderPlugin* renderPlugin, renderPlugins ) {

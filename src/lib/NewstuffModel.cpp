@@ -107,6 +107,10 @@ public:
 
     QList<Action> m_actionQueue;
 
+#if QT_VERSION >= 0x050000
+    QHash<int, QByteArray> m_roleNames;
+#endif
+
     NewstuffModelPrivate( NewstuffModel* parent );
 
     QIcon preview( int index );
@@ -452,7 +456,7 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     connect( &d->m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
              this, SLOT(handleProviderData(QNetworkReply*)) );
 
-    QHash<int,QByteArray> roles = roleNames();
+    QHash<int,QByteArray> roles;;
     roles[Name] = "name";
     roles[Author] = "author";
     roles[License] = "license";
@@ -470,7 +474,11 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     roles[IsTransitioning] = "transitioning";
     roles[PayloadSize] = "size";
     roles[DownloadedSize] = "downloaded";
+#if QT_VERSION < 0x050000
     setRoleNames( roles );
+#else
+    d->m_roleNames = roles;
+#endif
 }
 
 NewstuffModel::~NewstuffModel()
@@ -524,6 +532,14 @@ QVariant NewstuffModel::data ( const QModelIndex &index, int role ) const
 
     return QVariant();
 }
+
+#if QT_VERSION >= 0x050000
+QHash<int, QByteArray> NewstuffModel::roleNames() const
+{
+    return d->m_roleNames;
+}
+#endif
+
 
 int NewstuffModel::count()
 {

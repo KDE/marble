@@ -43,6 +43,7 @@ class RoutingModel;
 class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigurationInterface
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.ElevationProfileFloatItem" )
 
     Q_INTERFACES( Marble::RenderPluginInterface )
     Q_INTERFACES( Marble::DialogConfigurationInterface )

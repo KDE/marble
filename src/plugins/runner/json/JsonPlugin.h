@@ -19,6 +19,7 @@ namespace Marble
 class JsonPlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.JsonPlugin" )
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:

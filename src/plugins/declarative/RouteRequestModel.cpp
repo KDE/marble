@@ -21,10 +21,14 @@ RouteRequestModel::RouteRequestModel( QObject *parent ) :
     m_request( 0 ),
     m_routing( 0 )
 {
-    QHash<int,QByteArray> roles = roleNames();
+    QHash<int,QByteArray> roles;
     roles[LongitudeRole] = "longitude";
     roles[LatitudeRole] = "latitude";
+#if QT_VERSION < 0x050000
     setRoleNames( roles );
+#else
+    m_roleNames = roles;
+#endif
 }
 
 RouteRequestModel::~RouteRequestModel()
@@ -40,6 +44,13 @@ int RouteRequestModel::rowCount ( const QModelIndex &parent ) const
 
     return 0;
 }
+
+#if QT_VERSION >= 0x050000
+QHash<int, QByteArray> RouteRequestModel::roleNames() const
+{
+    return m_roleNames;
+}
+#endif
 
 QVariant RouteRequestModel::headerData ( int section, Qt::Orientation orientation, int role ) const
 {

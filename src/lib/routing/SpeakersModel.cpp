@@ -44,6 +44,10 @@ public:
     void handleInstallationProgress( int row, qreal progress );
 
     void handleInstallation( int );
+
+#if QT_VERSION >= 0x050000
+    QHash<int, QByteArray> m_roleNames;
+#endif
 };
 
 SpeakersModelItem::SpeakersModelItem() : m_newstuffIndex( -1 )
@@ -135,12 +139,16 @@ void SpeakersModelPrivate::handleInstallationProgress( int row, qreal progress )
 SpeakersModel::SpeakersModel( QObject *parent ) :
     QAbstractListModel( parent ), d( new SpeakersModelPrivate( this ) )
 {
-    QHash<int,QByteArray> roles = roleNames();
+    QHash<int,QByteArray> roles;
     roles[Path] = "path";
     roles[Name] = "name";
     roles[IsLocal] = "isLocal";
     roles[IsRemote] = "isRemote";
+#if QT_VERSION < 0x050000
     setRoleNames( roles );
+#else
+    d->m_roleNames = roles;
+#endif
 
     d->fillModel();
 }
@@ -173,6 +181,13 @@ QVariant SpeakersModel::data ( const QModelIndex &index, int role ) const
 
     return QVariant();
 }
+
+#if QT_VERSION >= 0x050000
+QHash<int, QByteArray> SpeakersModel::roleNames() const
+{
+    return d->m_roleNames;
+}
+#endif
 
 int SpeakersModel::indexOf( const QString &name )
 {

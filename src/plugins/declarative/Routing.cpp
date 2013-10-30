@@ -19,6 +19,8 @@
 #include "routing/RouteRequest.h"
 #include "routing/RoutingProfilesModel.h"
 
+#include <QDebug>
+
 class RoutingPrivate
 {
 public:

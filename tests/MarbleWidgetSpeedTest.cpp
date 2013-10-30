@@ -14,6 +14,7 @@
 #include <QtTest>
 #include <QtCore>
 #include <QTime>
+#include <QApplication>
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 

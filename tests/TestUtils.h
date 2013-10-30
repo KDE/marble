@@ -24,7 +24,7 @@ namespace QTest
 bool qCompare(qreal val1, qreal val2, qreal epsilon, const char *actual, const char *expected, const char *file, int line)
 {
     return ( qAbs( val1 - val2 ) < epsilon )
-        ? compare_helper( true, "COMPARE()", file, line )
+        ? compare_helper( true, "COMPARE()", toString( val1 ), toString( val2 ), actual, expected, file, line )
         : compare_helper( false, "Compared qreals are not the same", toString( val1 ), toString( val2 ), actual, expected, file, line );
 }
 

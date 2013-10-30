@@ -12,8 +12,8 @@
 
 #include "DeclarativeDataPlugin.h"
 #include "DeclarativeDataPluginModel.h"
-#include "DeclarativeDataPluginItem.h"
 #include "MarbleDeclarativeWidget.h"
+#include "DeclarativeDataPluginItem.h"
 
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
@@ -23,6 +23,10 @@
 #include <QMetaProperty>
 #include <QScriptValue>
 #include <QScriptValueIterator>
+
+#if QT_VERSION < 0x050000
+  typedef QDeclarativeComponent QQmlComponent;
+#endif
 
 using namespace Marble;
 
@@ -41,7 +45,7 @@ public:
     bool m_isInitialized;
     QList<AbstractDataPluginItem *> m_items;
     QList<DeclarativeDataPluginModel*> m_modelInstances;
-    QDeclarativeComponent* m_delegate;
+    QQmlComponent* m_delegate;
     QVariant m_model;
     static int m_global_counter;
     int m_counter;
@@ -122,7 +126,11 @@ void DeclarativeDataPluginPrivate::parseObject( QObject *object )
     }
 
     for( int i = 0; i < meta->methodCount(); ++i ) {
+#if QT_VERSION < 0x050000
         if( qstrcmp( meta->method(i).signature(), "get(int)" ) == 0 ) {
+#else
+        if( meta->method(i).methodSignature() == "get(int)" ) {
+#endif
             for( int j=0; j < count; ++j ) {
                 QScriptValue value;
                 meta->method(i).invoke( object, Qt::AutoConnection, Q_RETURN_ARG( QScriptValue , value), Q_ARG( int, j ) );
@@ -324,12 +332,12 @@ void DeclarativeDataPlugin::setAboutDataText( const QString & aboutDataText )
     }
 }
 
-QDeclarativeComponent *DeclarativeDataPlugin::delegate()
+QQmlComponent *DeclarativeDataPlugin::delegate()
 {
     return d->m_delegate;
 }
 
-void DeclarativeDataPlugin::setDelegate( QDeclarativeComponent *delegate )
+void DeclarativeDataPlugin::setDelegate( QQmlComponent *delegate )
 {
     if ( delegate != d->m_delegate ) {
         d->m_delegate = delegate;

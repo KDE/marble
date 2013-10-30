@@ -18,7 +18,7 @@
 #include <QDebug>
 
 MapThemeImageProvider::MapThemeImageProvider() :
-        QDeclarativeImageProvider( QDeclarativeImageProvider::Pixmap )
+        QQuickImageProvider( QQuickImageProvider::Pixmap )
 {
     // nothing to do
 }

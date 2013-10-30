@@ -43,6 +43,11 @@ public:
     QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const;
     int rowCount( const QModelIndex& parent = QModelIndex() ) const;
 
+#if QT_VERSION >= 0x050000
+    /** Overload of QAbstractListModel */
+    QHash<int, QByteArray> roleNames() const;
+#endif
+
     /**
      * Sets the list of routes that will show up in CloudRoutesDialog.
      * @param items List of routes.

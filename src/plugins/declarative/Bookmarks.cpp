@@ -142,10 +142,12 @@ BookmarksModel *Bookmarks::model()
 
 BookmarksModel::BookmarksModel( QObject *parent ) : QSortFilterProxyModel( parent )
 {
+#if QT_VERSION < 0x050000
     // Workaround for https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206
     QHash<int,QByteArray> roles = roleNames();
     roles[Qt::DisplayRole] = "name";
     setRoleNames( roles );
+#endif
 
     connect( this, SIGNAL(layoutChanged()), this, SIGNAL(countChanged()) );
     connect( this, SIGNAL(modelReset()), this, SIGNAL(countChanged()) );

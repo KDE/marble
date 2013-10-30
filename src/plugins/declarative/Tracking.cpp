@@ -17,6 +17,13 @@
 #include "ViewportParams.h"
 #include "AutoNavigation.h"
 
+#if QT_VERSION < 0x050000
+  #include <QDeclarativeItem>
+  typedef QDeclarativeItem QQuickItem;
+#else
+  #include <QQuickItem>
+#endif
+
 Tracking::Tracking( QObject* parent) : QObject( parent ),
     m_showTrack( true ),
     m_positionSource( 0 ),
@@ -123,16 +130,17 @@ void Tracking::updatePositionMarker()
         if ( position ) {
             Marble::GeoDataCoordinates const pos( position->longitude(), position->latitude(), 0.0, GeoDataCoordinates::Degree );
             visible = visible && m_marbleWidget->viewport()->screenCoordinates( pos.longitude(), pos.latitude(), x, y );
-            QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( m_positionMarker );
+            QQuickItem* item = qobject_cast<QQuickItem*>( m_positionMarker );
             if ( item ) {
                 item->setVisible( visible );
                 if ( visible ) {
-                    item->setPos( x - item->width() / 2.0, y - item->height() / 2.0 );
+                    item->setX( x - item->width() / 2.0 );
+                    item->setY( y - item->height() / 2.0 );
                 }
             }
         }
     } else if ( m_positionMarkerType != Circle ) {
-        QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( m_positionMarker );
+        QQuickItem* item = qobject_cast<QQuickItem*>( m_positionMarker );
         if ( item ) {
             item->setVisible( false );
         }

@@ -5,11 +5,13 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-INCLUDE(${QT_USE_FILE})
+if( QT4_FOUND )
+  INCLUDE(${QT_USE_FILE})
+endif()
 
 set( mapscale_SRCS MapScaleFloatItem.cpp )
 set( mapscale_UI MapScaleConfigWidget.ui )
 
-qt4_wrap_ui(mapscale_SRCS ${mapscale_UI})
+qt_wrap_ui(mapscale_SRCS ${mapscale_UI})
 
 marble_add_plugin( MapScaleFloatItem ${mapscale_SRCS} )

@@ -20,6 +20,7 @@ namespace Marble
 class TravelingSalesmanPlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.TravelingSalesmanPlugin" )
     Q_INTERFACES( Marble::RunnerPlugin )
 
 public:

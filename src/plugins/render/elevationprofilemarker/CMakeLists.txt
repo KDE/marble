@@ -5,13 +5,15 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-INCLUDE( ${QT_USE_FILE} )
+if( QT4_FOUND )
+  INCLUDE(${QT_USE_FILE})
+endif()
 
 set( my_SRCS
   ElevationProfileMarker.cpp
  )
 
-qt4_add_resources( my_SRCS elevationprofile.qrc)
+qt_add_resources( my_SRCS elevationprofile.qrc)
 marble_qt4_automoc( ${my_SRCS} )
 
 marble_add_plugin( ElevationProfileMarker ${my_SRCS} )

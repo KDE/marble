@@ -26,16 +26,27 @@ MapThemeModel::MapThemeModel( QObject *parent ) : QSortFilterProxyModel( parent 
     handleChangedThemes();
     connect( m_themeManager, SIGNAL(themesChanged()), this, SLOT(handleChangedThemes()) );
 
-    QHash<int,QByteArray> roleNames = this->roleNames();
+    QHash<int,QByteArray> roleNames;
     roleNames[ Qt::DecorationRole ] = "icon";
     roleNames[ Qt::UserRole + 1 ] = "mapThemeId";
+#if QT_VERSION < 0x050000
     setRoleNames( roleNames );
+#else
+    m_roleNames = roleNames;
+#endif
 }
 
 int MapThemeModel::count() const
 {
     return rowCount();
 }
+
+#if QT_VERSION >= 0x050000
+QHash<int, QByteArray> MapThemeModel::roleNames() const
+{
+    return m_roleNames;
+}
+#endif
 
 QString MapThemeModel::name( const QString &id ) const
 {
@@ -113,7 +124,8 @@ void MapThemeModel::handleChangedThemes()
         }
     }
 
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 #include "MapThemeModel.moc"

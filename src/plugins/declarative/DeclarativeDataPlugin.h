@@ -37,7 +37,11 @@ class DeclarativeDataPlugin: public Marble::AbstractDataPlugin
     Q_PROPERTY( QStringList pluginAuthors READ authors WRITE setAuthors NOTIFY authorsChanged )
     Q_PROPERTY( QString aboutDataText READ aboutDataText WRITE setAboutDataText NOTIFY aboutDataTextChanged )
     Q_PROPERTY( QVariant model READ declarativeModel WRITE setDeclarativeModel NOTIFY declarativeModelChanged )
+#if QT_VERSION < 0x050000
     Q_PROPERTY( QDeclarativeComponent* delegate READ delegate WRITE setDelegate NOTIFY delegateChanged )
+#else
+    Q_PROPERTY( QQmlComponent* delegate READ delegate WRITE setDelegate NOTIFY delegateChanged )
+#endif
 
 public:
     Marble::RenderPlugin* newInstance( const Marble::MarbleModel *marbleModel ) const;
@@ -86,9 +90,15 @@ public:
 
     virtual QIcon icon() const;
 
+#if QT_VERSION < 0x050000
     QDeclarativeComponent *delegate();
 
     void setDelegate( QDeclarativeComponent* delegate );
+#else
+    QQmlComponent *delegate();
+
+    void setDelegate( QQmlComponent* delegate );
+#endif
 
     QVariant declarativeModel();
 

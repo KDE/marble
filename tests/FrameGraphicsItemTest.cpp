@@ -9,6 +9,7 @@
 //
 
 #include <QtTest>
+#include <QBrush>
 
 #include "FrameGraphicsItem.h"
 

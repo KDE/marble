@@ -5,7 +5,11 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-INCLUDE(${QT_USE_FILE})
+if( QT4_FOUND )
+  INCLUDE(${QT_USE_FILE})
+else()
+  INCLUDE_DIRECTORIES(${Qt5WebKitWidgets_INCLUDE_DIRS})
+endif()
 
 set( photo_SRCS PhotoPlugin.cpp
                 PhotoPluginModel.cpp
@@ -14,7 +18,7 @@ set( photo_SRCS PhotoPlugin.cpp
                 CoordinatesParser.cpp )
 set( photo_UI PhotoConfigWidget.ui )
 
-qt4_wrap_ui(photo_SRCS ${photo_UI})
+qt_wrap_ui(photo_SRCS ${photo_UI})
 
 marble_add_plugin( Photo ${photo_SRCS} )
 target_link_libraries( Photo ${QT_QTGUI_LIBRARY} ${QT_QTWEBKIT_LIBRARY} )

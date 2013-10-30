@@ -15,6 +15,11 @@
 #include "MarbleWidget.h"
 #include "TestUtils.h"
 
+#if QT_VERSION >= 0x050000
+  #include "qtest_widgets.h"
+  #include "qtestmouse.h"
+#endif
+
 namespace Marble
 {
 

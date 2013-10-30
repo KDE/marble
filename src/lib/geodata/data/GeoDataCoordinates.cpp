@@ -635,7 +635,11 @@ bool GeoDataCoordinates::isValid() const
  */
 void GeoDataCoordinates::detach()
 {
+#if QT_VERSION < 0x050000
     if(d->ref == 1)
+#else
+    if(d->ref.load() == 1)
+#endif
         return;
 
     GeoDataCoordinatesPrivate *new_d = new GeoDataCoordinatesPrivate( *d );

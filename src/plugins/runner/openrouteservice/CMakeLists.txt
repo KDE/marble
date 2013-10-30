@@ -5,12 +5,19 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-INCLUDE(${QT_USE_FILE})
+if( QT4_FOUND )
+  INCLUDE(${QT_USE_FILE})
+else()
+INCLUDE_DIRECTORIES(
+  ${Qt5WebKitWidgets_INCLUDE_DIRS}
+  ${Qt5Xml_INCLUDE_DIRS}
+)
+endif()
 
 set( openrouteservice_SRCS OpenRouteServiceRunner.cpp OpenRouteServicePlugin.cpp )
 
 set( openrouteservice_UI OpenRouteServiceConfigWidget.ui )
 
-qt4_wrap_ui( openrouteservice_SRCS ${openrouteservice_UI} )
+qt_wrap_ui( openrouteservice_SRCS ${openrouteservice_UI} )
 
 marble_add_plugin( OpenRouteServicePlugin ${openrouteservice_SRCS} )

@@ -4,7 +4,9 @@ include_directories(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-include( ${QT_USE_FILE} )
+if( QT4_FOUND )
+  include( ${QT_USE_FILE} )
+endif()
 
 set( routing-instructions_SRC
         ../lib/routing/instructions/InstructionTransformation.cpp
@@ -19,7 +21,13 @@ marble_qt4_automoc( ${routing-instructions_SRC} )
 
 add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( routing-instructions ${routing-instructions_SRC} )
-target_link_libraries( routing-instructions ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} )
+
+if (QT4_FOUND)
+  target_link_libraries( routing-instructions ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} )
+else()
+  target_link_libraries( routing-instructions ${Qt5Core_LIBRARIES} )
+endif()
+
 if (APPLE)
   target_link_libraries (routing-instructions ${APP_SERVICES_LIBRARY})
 endif (APPLE)

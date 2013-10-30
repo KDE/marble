@@ -16,6 +16,8 @@
 #ifndef MARBLEWIDGETPLUGIN_H
 #define MARBLEWIDGETPLUGIN_H
 
+#include <marble_export.h>
+
 // Workaround: moc on osx is unable to find this file, when prefix with QtDesigner/
 // moc also doesn't respect Q_OS_* macros, otherwise I could ifdef this.
 #include <QDesignerCustomWidgetInterface>
@@ -23,6 +25,7 @@
 class MarbleWidgetPlugin : public QObject, public QDesignerCustomWidgetInterface
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.MarbleWidgetPlugin" )
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:

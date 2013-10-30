@@ -70,6 +70,11 @@ public:
     /** Overload of QAbstractListModel */
     QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const;
 
+#if QT_VERSION >= 0x050000
+    /** Overload of QAbstractListModel */
+    QHash<int, QByteArray> roleNames() const;
+#endif
+
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
     int count();
 

@@ -15,6 +15,10 @@
 #include "MarbleGlobal.h"
 #include "TileId.h"
 
+#if QT_VERSION >= 0x050000
+#include <QUrlQuery>
+#endif
+
 #include <math.h>
 
 namespace Marble
@@ -104,7 +108,11 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
 {
     GeoDataLatLonBox box = tileId.toLatLonBox( m_textureLayer );
 
+#if QT_VERSION < 0x050000
     QUrl url = prototypeUrl;
+#else
+    QUrlQuery url(prototypeUrl.query());
+#endif
     url.addQueryItem( "service", "WMS" );
     url.addQueryItem( "request", "GetMap" );
     url.addQueryItem( "version", "1.1.1" );
@@ -127,7 +135,13 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
                                                       .arg( QString::number( box.south( GeoDataCoordinates::Degree ), 'f', 12 ) )
                                                       .arg( QString::number( box.east( GeoDataCoordinates::Degree ), 'f', 12 ) )
                                                       .arg( QString::number( box.north( GeoDataCoordinates::Degree ), 'f', 12 ) ) );
+#if QT_VERSION < 0x050000
     return url;
+#else
+    QUrl finalUrl = prototypeUrl;
+    finalUrl.setQuery(url);
+    return finalUrl;
+#endif
 }
 
 QString WmsServerLayout::name() const

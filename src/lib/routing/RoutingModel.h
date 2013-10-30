@@ -62,6 +62,11 @@ public:
     /** Overload of QAbstractListModel */
     QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const;
 
+#if QT_VERSION >= 0x050000
+    /** Overload of QAbstractListModel */
+    QHash<int, QByteArray> roleNames() const;
+#endif
+
     // Model data filling
 
     /**

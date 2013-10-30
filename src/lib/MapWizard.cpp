@@ -51,6 +51,9 @@
 #include <QNetworkRequest>
 #include <QDomElement>
 #include <QXmlStreamWriter>
+#if QT_VERSION >= 0x050000
+  #include <QUrlQuery>
+#endif
 
 namespace Marble
 {
@@ -221,8 +224,15 @@ MapWizard::~MapWizard()
 void MapWizard::queryServerCapabilities()
 {
     QUrl url( d->uiWidget.lineEditWmsUrl->text() );
+#if QT_VERSION < 0x050000
     url.addQueryItem( "service", "WMS" );
     url.addQueryItem( "request", "GetCapabilities" );
+#else
+    QUrlQuery urlQuery;
+    urlQuery.addQueryItem( "service", "WMS" );
+    urlQuery.addQueryItem( "request", "GetCapabilities" );
+    url.setQuery(urlQuery);
+#endif
 
     QNetworkRequest request;
     request.setUrl( url );
@@ -450,7 +460,12 @@ void MapWizard::downloadLevelZero()
     {
         QString selected = d->uiWidget.listWidgetWmsMaps->currentItem()->text();
         
+#if QT_VERSION < 0x050000
         QUrl downloadUrl( d->uiWidget.lineEditWmsUrl->text() );
+#else
+        QUrl finalDownloadUrl( d->uiWidget.lineEditWmsUrl->text() );
+        QUrlQuery downloadUrl;
+#endif
         downloadUrl.addQueryItem( "request", "GetMap" );
         downloadUrl.addQueryItem( "version", "1.1.1" );
         downloadUrl.addQueryItem( "layers", d->wmsFetchedMaps.key( selected ) );
@@ -460,8 +475,15 @@ void MapWizard::downloadLevelZero()
         downloadUrl.addQueryItem( "bbox", "-180,-90,180,90" );
         downloadUrl.addQueryItem( "format", "image/jpeg" );
         downloadUrl.addQueryItem( "styles", "" );
-        
+
+#if QT_VERSION < 0x050000
         QNetworkRequest request( downloadUrl );
+#else
+        finalDownloadUrl.setQuery( downloadUrl );
+
+        QNetworkRequest request( finalDownloadUrl );
+#endif
+
         d->levelZeroAccessManager.get( request );
     }
     
@@ -777,7 +799,13 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setFileFormat( d->format );
         QString layer = d->wmsFetchedMaps.key( d->uiWidget.listWidgetWmsMaps->currentItem()->text() );
         QUrl downloadUrl = QUrl( d->uiWidget.lineEditWmsUrl->text() );
+#if QT_VERSION < 0x050000
         downloadUrl.addQueryItem( "layers", layer );
+#else
+        QUrlQuery urlQuery;
+        urlQuery.addQueryItem( "layers", layer );
+        downloadUrl.setQuery( urlQuery );
+#endif
         texture->addDownloadUrl( downloadUrl );
         texture->setMaximumTileLevel( 20 );
         texture->setLevelZeroRows( 1 );

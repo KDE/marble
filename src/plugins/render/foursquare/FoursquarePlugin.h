@@ -19,6 +19,7 @@ namespace Marble {
 class FoursquarePlugin : public AbstractDataPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.FoursquarePlugin" )
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( FoursquarePlugin )
 

@@ -538,7 +538,7 @@ void BBCParser::readPubDate( WeatherData *data )
                 QTime time;
 
                 dateTime.setTimeSpec( Qt::UTC );
-                date.setYMD( regExp.cap( 6 ).toInt(),
+                date.setDate( regExp.cap( 6 ).toInt(),
                              m_monthNames.value( regExp.cap( 4 ) ),
                              regExp.cap( 2 ).toInt() );
                 time.setHMS( regExp.cap( 8 ).toInt(),

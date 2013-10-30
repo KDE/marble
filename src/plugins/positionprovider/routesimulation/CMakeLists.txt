@@ -5,8 +5,9 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-
-include(${QT_USE_FILE})
+if( QT4_FOUND )
+  include(${QT_USE_FILE})
+endif()
 
 set( the_SRCS
  RouteSimulationPositionProviderPlugin.cpp

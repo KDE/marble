@@ -16,6 +16,15 @@
 #include "SearchRunnerManager.h"
 #include "ViewportParams.h"
 
+#if QT_VERSION < 0x050000
+  #include <QDeclarativeContext>
+  typedef QDeclarativeItem QQuickItem;
+  typedef QDeclarativeContext QQmlContext;
+  typedef QDeclarativeComponent QQmlComponent;
+#else
+  #include <QQmlContext>
+#endif
+
 Search::Search( QObject* parent ) : QObject( parent ),
     m_marbleWidget( 0 ), m_runnerManager( 0 ),
     m_searchResult( 0 ), m_placemarkDelegate( 0 )
@@ -38,12 +47,12 @@ void Search::setMap( MarbleWidget* widget )
     emit mapChanged();
 }
 
-QDeclarativeComponent* Search::placemarkDelegate()
+QQmlComponent* Search::placemarkDelegate()
 {
     return m_placemarkDelegate;
 }
 
-void Search::setPlacemarkDelegate( QDeclarativeComponent* delegate )
+void Search::setPlacemarkDelegate( QQmlComponent* delegate )
 {
     m_placemarkDelegate = delegate;
     emit placemarkDelegateChanged();
@@ -81,7 +90,7 @@ void Search::updateSearchModel( QAbstractItemModel *model )
 
     QHash<int,QByteArray> const roles = model->roleNames();
     for ( int i=0; i<m_searchResult->rowCount(); ++i ) {
-        QDeclarativeContext *context = new QDeclarativeContext( qmlContext( m_placemarkDelegate ) );
+        QQmlContext *context = new QQmlContext( qmlContext( m_placemarkDelegate ) );
         QModelIndex const index = m_searchResult->index( i );
         QHash<int,QByteArray>::const_iterator iter = roles.constBegin();
         context->setContextProperty( "index", i );
@@ -90,7 +99,7 @@ void Search::updateSearchModel( QAbstractItemModel *model )
         }
         QObject* component = m_placemarkDelegate->create( context );
         QGraphicsItem* graphicsItem = qobject_cast<QGraphicsItem*>( component );
-        QDeclarativeItem* item = qobject_cast<QDeclarativeItem*>( component );
+        QQuickItem* item = qobject_cast<QQuickItem*>( component );
         if ( graphicsItem && item ) {
             graphicsItem->setParentItem( m_marbleWidget );
             m_placemarks[i] = item;
@@ -105,53 +114,54 @@ void Search::updatePlacemarks()
 {
     if ( m_marbleWidget ) {
         bool const onEarth = m_marbleWidget->model()->planetId() == "earth";
-        QMap<int, QDeclarativeItem*>::const_iterator iter = m_placemarks.constBegin();
+        QMap<int, QQuickItem*>::const_iterator iter = m_placemarks.constBegin();
         while ( iter != m_placemarks.constEnd() ) {
             qreal x(0), y(0);
             QVariant position = m_searchResult->data( m_searchResult->index( iter.key() ), Marble::MarblePlacemarkModel::CoordinateRole );
             Marble::GeoDataCoordinates const coordinates = position.value<Marble::GeoDataCoordinates>();
             bool const visible = onEarth && m_marbleWidget->viewport()->screenCoordinates( coordinates.longitude( Marble::GeoDataCoordinates::Radian ),
                                                                                            coordinates.latitude( Marble::GeoDataCoordinates::Radian), x, y );
-            QDeclarativeItem* item = iter.value();
+            QQuickItem* item = iter.value();
             if ( item ) {
                 item->setVisible( visible );
                 if ( visible ) {
                     int shiftX( 0 ), shiftY( 0 );
                     switch( item->transformOrigin() ) {
-                    case QDeclarativeItem::TopLeft:
-                    case QDeclarativeItem::Top:
-                    case QDeclarativeItem::TopRight:
+                    case QQuickItem::TopLeft:
+                    case QQuickItem::Top:
+                    case QQuickItem::TopRight:
                         break;
-                    case QDeclarativeItem::Left:
-                    case QDeclarativeItem::Center:
-                    case QDeclarativeItem::Right:
+                    case QQuickItem::Left:
+                    case QQuickItem::Center:
+                    case QQuickItem::Right:
                         shiftY = item->height() / 2;
                         break;
-                    case QDeclarativeItem::BottomLeft:
-                    case QDeclarativeItem::Bottom:
-                    case QDeclarativeItem::BottomRight:
+                    case QQuickItem::BottomLeft:
+                    case QQuickItem::Bottom:
+                    case QQuickItem::BottomRight:
                         shiftY = item->height();
                         break;
                     }
 
                     switch( item->transformOrigin() ) {
-                    case QDeclarativeItem::TopLeft:
-                    case QDeclarativeItem::Left:
-                    case QDeclarativeItem::BottomLeft:
+                    case QQuickItem::TopLeft:
+                    case QQuickItem::Left:
+                    case QQuickItem::BottomLeft:
                         break;
-                    case QDeclarativeItem::Top:
-                    case QDeclarativeItem::Center:
-                    case QDeclarativeItem::Bottom:
+                    case QQuickItem::Top:
+                    case QQuickItem::Center:
+                    case QQuickItem::Bottom:
                         shiftX = item->width() / 2;
                         break;
-                    case QDeclarativeItem::TopRight:
-                    case QDeclarativeItem::Right:
-                    case QDeclarativeItem::BottomRight:
+                    case QQuickItem::TopRight:
+                    case QQuickItem::Right:
+                    case QQuickItem::BottomRight:
                         shiftX = item->width();
                         break;
                     }
 
-                    item->setPos( x - shiftX, y - shiftY );
+                    item->setX( x - shiftX );
+                    item->setY( y - shiftY );
                 }
             }
             ++iter;

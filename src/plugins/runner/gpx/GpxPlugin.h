@@ -18,6 +18,7 @@ namespace Marble
 class GpxPlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.GpxPlugin" )
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:

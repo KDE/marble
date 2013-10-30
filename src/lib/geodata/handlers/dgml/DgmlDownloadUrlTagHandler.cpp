@@ -24,6 +24,9 @@
 
 // Qt
 #include <QUrl>
+#if QT_VERSION >= 0x050000
+#include <QUrlQuery>
+#endif
 
 // Marble
 #include "DgmlAttributeDictionary.h"
@@ -81,8 +84,15 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
 
     // Attribute query, optional
     const QString queryStr = parser.attribute( dgmlAttr_query ).trimmed();
-    if ( !queryStr.isEmpty() )
+    if ( !queryStr.isEmpty() ) {
+#if QT_VERSION < 0x050000
         url.setEncodedQuery( queryStr.toLatin1() );
+#else
+        QUrlQuery query;
+        query.setQuery( queryStr.toLatin1() );
+        url.setQuery(query);
+#endif
+    }
 
     parentItem.nodeAs<GeoSceneTiled>()->addDownloadUrl( url );
     return 0;

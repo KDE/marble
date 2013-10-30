@@ -20,6 +20,7 @@ namespace Marble
 class GosmorePlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.GosmoreRoutingPlugin" )
     Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:

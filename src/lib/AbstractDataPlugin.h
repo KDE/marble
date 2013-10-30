@@ -15,7 +15,11 @@
 #include "marble_export.h"
 #include "RenderPlugin.h"
 
+#if QT_VERSION < 0x050000
 class QDeclarativeComponent;
+#else
+class QQmlComponent;
+#endif
 class QGraphicsItem;
 
 namespace Marble
@@ -112,7 +116,11 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      */
     virtual RenderType renderType() const;
 
+#if QT_VERSION < 0x050000
     void setDelegate( QDeclarativeComponent* delegate, QGraphicsItem* parent );
+#else
+    void setDelegate( QQmlComponent* delegate, QGraphicsItem* parent );
+#endif
 
     /** Convenience method to set the favorite item state on the current model */
     void setFavoriteItemsOnly( bool favoriteOnly );

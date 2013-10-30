@@ -100,6 +100,13 @@ public:
     QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
 
     void reset();
+
+#if QT_VERSION >= 0x050000
+    QHash<int, QByteArray> roleNames() const;
+
+private:
+    QHash<int, QByteArray> m_roleNames;
+#endif
 };
 
 AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& name,
@@ -174,7 +181,7 @@ static bool lessThanByPointer( const AbstractDataPluginItem *item1,
 FavoritesModel::FavoritesModel( AbstractDataPluginModelPrivate *_d, QObject* parent ) :
     QAbstractListModel( parent ), d(_d)
 {
-    QHash<int,QByteArray> roles = roleNames();
+    QHash<int,QByteArray> roles;
     int const size = d->m_hasMetaObject ? d->m_metaObject.propertyCount() : 0;
     for ( int i=0; i<size; ++i ) {
         QMetaProperty property = d->m_metaObject.property( i );
@@ -182,7 +189,11 @@ FavoritesModel::FavoritesModel( AbstractDataPluginModelPrivate *_d, QObject* par
     }
     roles[Qt::DisplayRole] = "display";
     roles[Qt::DecorationRole] = "decoration";
+#if QT_VERSION < 0x050000
     setRoleNames( roles );
+#else
+    m_roleNames = roles;
+#endif
 }
 
 int FavoritesModel::rowCount ( const QModelIndex &parent ) const
@@ -225,6 +236,13 @@ void FavoritesModel::reset()
     beginResetModel();
     endResetModel();
 }
+
+#if QT_VERSION >= 0x050000
+QHash<int, QByteArray> FavoritesModel::roleNames() const
+{
+    return m_roleNames;
+}
+#endif
 
 AbstractDataPluginModel::AbstractDataPluginModel( const QString &name, const MarbleModel *marbleModel, QObject *parent )
     : QObject(  parent ),

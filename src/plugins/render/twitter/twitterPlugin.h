@@ -43,6 +43,7 @@ struct twitterStructure
 class twitterPlugin : public RenderPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.twitterPlugin" )
     Q_INTERFACES(Marble::RenderPluginInterface)
     MARBLE_PLUGIN(twitterPlugin)
 

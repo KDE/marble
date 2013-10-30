@@ -23,6 +23,7 @@ namespace Marble
 class RoutinoPlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.RoutinoPlugin" )
     Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:

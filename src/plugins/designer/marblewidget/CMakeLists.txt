@@ -6,7 +6,11 @@ INCLUDE_DIRECTORIES(
  ${QT_INCLUDE_DIR}
  ${QT_QTDESIGNER_INCLUDE_DIR}
 )
-INCLUDE( ${QT_USE_FILE} )
+if( QT4_FOUND )
+  INCLUDE(${QT_USE_FILE})
+else()
+  INCLUDE_DIRECTORIES(${Qt5Designer_INCLUDE_DIRS})
+endif()
 
 set( marbleplugin_SRCS MarbleWidgetPlugin.cpp )
 

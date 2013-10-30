@@ -14,7 +14,11 @@
 #include "Coordinate.h"
 
 #include <QObject>
-#include <QtDeclarative>
+#if QT_VERSION < 0x050000
+  #include <QtDeclarative/qdeclarative.h>
+#else
+  #include <QtQml/qqml.h>
+#endif
 
 class MarbleWidget;
 

@@ -18,6 +18,7 @@ namespace Marble
 class Pn2Plugin : public ParseRunnerPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.Pn2Plugin" )
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:

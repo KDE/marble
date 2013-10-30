@@ -56,6 +56,9 @@ public:
     PositionTracking* m_positionTracking;
     RouteRequest* const m_request;
     GeoDataCoordinates m_position;
+#if QT_VERSION >= 0x050000
+    QHash<int, QByteArray> m_roleNames;
+#endif
 
     void importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark );
 
@@ -135,11 +138,15 @@ RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *
                  this, SLOT(updatePosition(GeoDataCoordinates,qreal)) );
     }
 
-   QHash<int, QByteArray> roles = roleNames();
+   QHash<int, QByteArray> roles;
    roles.insert( RoutingModel::TurnTypeIconRole, "turnTypeIcon" );
    roles.insert( RoutingModel::LongitudeRole, "longitude" );
    roles.insert( RoutingModel::LatitudeRole, "latitude" );
+#if QT_VERSION < 0x050000
    setRoleNames( roles );
+#else
+   d->m_roleNames = roles;
+#endif
 }
 
 RoutingModel::~RoutingModel()
@@ -212,6 +219,13 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
 
     return QVariant();
 }
+
+#if QT_VERSION >= 0x050000
+QHash<int, QByteArray> RoutingModel::roleNames() const
+{
+    return d->m_roleNames;
+}
+#endif
 
 bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
 {

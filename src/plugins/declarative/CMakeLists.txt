@@ -5,7 +5,14 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-INCLUDE( ${QT_USE_FILE} )
+if( QT4_FOUND)
+  INCLUDE( ${QT_USE_FILE} )
+else()
+  INCLUDE_DIRECTORIES(
+    ${Qt5Qml_INCLUDE_DIRS}
+    ${Qt5Quick_INCLUDE_DIRS}
+  )
+endif()
 
 set( marbleplugin_SRCS
 Bookmarks.cpp

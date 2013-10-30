@@ -53,7 +53,11 @@ GeoDataGeometry::~GeoDataGeometry()
 
 void  GeoDataGeometry::detach()
 {
+#if QT_VERSION < 0x050000
     if(d->ref == 1)
+#else
+    if(d->ref.load() == 1)
+#endif
         return;
 
      GeoDataGeometryPrivate* new_d = d->copy();

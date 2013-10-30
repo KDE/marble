@@ -20,6 +20,7 @@ namespace Marble
 class LocalDatabasePlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.LocalDatabasePlugin" )
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:

@@ -9,7 +9,13 @@
 // A QML-interface of Marble for the Meego operating system.
 
 #include <QApplication>
-#include <QtDeclarative>
+#if QT_VERSION < 0x050000
+  #include <QtDeclarative>
+  typedef QDeclarativeView QQuickView;
+#else
+  #include <QQuickView>
+  #include <QtQml/qqml.h>
+#endif
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 
@@ -72,7 +78,7 @@ int main( int argc, char *argv[] )
     MarbleGlobal::getInstance()->setProfiles( profiles );
 
     // Create main window based on QML.
-    QDeclarativeView view;
+    QQuickView view;
     view.setSource( QUrl( "qrc:/main.qml" ) );
 
 #ifdef __arm__
@@ -81,7 +87,9 @@ int main( int argc, char *argv[] )
 #else
     if ( portraitMode ) {
         view.resize( view.initialSize().height(), view.initialSize().width() );
+#if QT_VERSION < 0x050000
         view.setTransform( QTransform().rotate( 90 ) );
+#endif
     } else {
         view.resize( view.initialSize().width(), view.initialSize().height() );
     }

@@ -61,7 +61,11 @@ class KBiAssociativeContainer
     {
         /* implicit */ _iterator_impl_ctor(const typename QHash<T, U>::iterator it)
             // Using internals here because I was too lazy to write my own iterator.
+#if QT_VERSION < 0x050000
           : QHash<T, U>::iterator(reinterpret_cast<void *>(static_cast<QHashNode<T, U> *>(it)))
+#else
+          : QHash<T, U>::iterator(it)
+#endif
         {
 
         }
@@ -72,7 +76,11 @@ class KBiAssociativeContainer
     {
         /* implicit */ _iterator_impl_ctor(const typename QMap<T, U>::iterator it)
             // Using internals here because I was too lazy to write my own iterator.
+#if QT_VERSION < 0x050000
           : QMap<T, U>::iterator(static_cast<QMapData::Node*>(it))
+#else
+          : QMap<T, U>::iterator(it)
+#endif
         {
 
         }

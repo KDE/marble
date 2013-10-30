@@ -30,6 +30,7 @@ class QTextDocument;
 class QMainWindow;
 class QDockWidget;
 class QMenu;
+class QPrinter;
 
 namespace Marble
 {
