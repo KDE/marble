@@ -45,35 +45,75 @@
 #include <QMenu>
 #include <QMessageBox>
 
-using namespace Marble;
+namespace Marble {
 /* TRANSLATOR Marble::MarbleWidgetPopupMenu */
 
-MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
-                                         const MarbleModel *model)
-    : QObject(widget),
-      m_model(model),
-      m_widget(widget),
-      m_lmbMenu( new QMenu( m_widget ) ),
-      m_rmbMenu( new QMenu( m_widget ) ),
-      m_directionsToHereAction( 0 ),
-      m_copyCoordinateAction( new QAction( QIcon(":/icons/copy-coordinates.png"), tr("Copy Coordinates"), this ) ),
-      m_rmbExtensionPoint( 0 ),
-      m_runnerManager( new ReverseGeocodingRunnerManager( model, this ) )
+class MarbleWidgetPopupMenu::Private {
+public:
+    const MarbleModel    *const m_model;
+    MarbleWidget   *m_widget;
+
+    QVector<const GeoDataPlacemark*>  m_featurelist;
+    QList<AbstractDataPluginItem *> m_itemList;
+
+    QMenu    *const m_lmbMenu;
+    QMenu    *const m_rmbMenu;
+
+    QAction *m_infoDialogAction;
+    QAction *m_showOrbitAction;
+    QAction *m_trackPlacemarkAction;
+    QAction *m_directionsToHereAction;
+
+    QAction  *const m_copyCoordinateAction;
+
+    QAction  *m_rmbExtensionPoint;
+
+    ReverseGeocodingRunnerManager *const m_runnerManager;
+
+    QPoint m_mousePosition;
+
+public:
+    Private( MarbleWidget *widget, const MarbleModel *model, MarbleWidgetPopupMenu* parent );
+    QMenu* createInfoBoxMenu();
+    QString filterEmptyShortDescription(const QString &description) const;
+    void setupDialogSatellite(PopupLayer *popup, const GeoDataPlacemark *index);
+    void setupDialogCity(PopupLayer *popup, const GeoDataPlacemark *index);
+    void setupDialogNation(PopupLayer *popup, const GeoDataPlacemark *index);
+    void setupDialogGeoPlaces(PopupLayer *popup, const GeoDataPlacemark *index);
+    void setupDialogSkyPlaces(PopupLayer *popup, const GeoDataPlacemark *index);
+
+    /**
+      * Returns the geo coordinates of the mouse pointer at the last right button menu.
+      * You must not pass 0 as coordinates parameter. The result indicates whether the
+      * coordinates are valid, which will be true if the right button menu was opened at least once.
+      */
+    bool mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer );
+};
+
+MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel *model, MarbleWidgetPopupMenu* parent ) :
+    m_model(model),
+    m_widget(widget),
+    m_lmbMenu( new QMenu( m_widget ) ),
+    m_rmbMenu( new QMenu( m_widget ) ),
+    m_directionsToHereAction( 0 ),
+    m_copyCoordinateAction( new QAction( QIcon(":/icons/copy-coordinates.png"), tr("Copy Coordinates"), parent ) ),
+    m_rmbExtensionPoint( 0 ),
+    m_runnerManager( new ReverseGeocodingRunnerManager( model, parent ) )
 {
     // Property actions (Left mouse button)
-    m_infoDialogAction = new QAction( this );
+    m_infoDialogAction = new QAction( parent );
     m_infoDialogAction->setData( 0 );
 
-    m_showOrbitAction = new QAction( tr( "Display orbit" ), this );
+    m_showOrbitAction = new QAction( tr( "Display orbit" ), parent );
     m_showOrbitAction->setCheckable( true );
     m_showOrbitAction->setData( 0 );
 
-    m_trackPlacemarkAction = new QAction( tr( "Keep centered" ), this );
+    m_trackPlacemarkAction = new QAction( tr( "Keep centered" ), parent );
     m_trackPlacemarkAction->setData( 0 );
 
     //	Tool actions (Right mouse button)
-    QAction* fromHere = new QAction( tr( "Directions &from here" ), this );
-    m_directionsToHereAction = new QAction( tr( "Directions &to here" ), this );
+    QAction* fromHere = new QAction( tr( "Directions &from here" ), parent );
+    m_directionsToHereAction = new QAction( tr( "Directions &to here" ), parent );
     RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
     if ( request ) {
         fromHere->setIcon( QIcon( request->pixmap( 0, 16 ) ) );
@@ -81,11 +121,11 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
         m_directionsToHereAction->setIcon( QIcon( request->pixmap( lastIndex, 16 ) ) );
     }
     QAction* addBookmark = new QAction( QIcon(":/icons/bookmark-new.png"),
-                                        tr( "Add &Bookmark" ), this );
-    QAction* fullscreenAction = new QAction( tr( "&Full Screen Mode" ), this );
+                                        tr( "Add &Bookmark" ), parent );
+    QAction* fullscreenAction = new QAction( tr( "&Full Screen Mode" ), parent );
     fullscreenAction->setCheckable( true );
 
-    QAction* aboutDialogAction = new QAction( QIcon(":/icons/marble.png"), tr( "&About" ), this );
+    QAction* aboutDialogAction = new QAction( QIcon(":/icons/marble.png"), tr( "&About" ), parent );
 
     QMenu* infoBoxMenu = createInfoBoxMenu();
 
@@ -102,7 +142,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
     if ( !smallScreen ) {
         m_rmbMenu->addAction( m_copyCoordinateAction );
     }
-    m_rmbMenu->addAction( QIcon(":/icons/addressbook-details.png"), tr( "&Address Details" ), this, SLOT(startReverseGeocoding()) );
+    m_rmbMenu->addAction( QIcon(":/icons/addressbook-details.png"), tr( "&Address Details" ), parent, SLOT(startReverseGeocoding()) );
     m_rmbMenu->addSeparator();
     m_rmbMenu->addMenu( infoBoxMenu );
 
@@ -112,21 +152,34 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
         m_rmbMenu->addAction( fullscreenAction );
     }
 
-    connect( fromHere, SIGNAL(triggered()), SLOT(directionsFromHere()) );
-    connect( m_directionsToHereAction, SIGNAL(triggered()), SLOT(directionsToHere()) );
-    connect( addBookmark, SIGNAL(triggered()), SLOT(addBookmark()) );
-    connect( aboutDialogAction, SIGNAL(triggered()), SLOT(slotAboutDialog()) );
-    connect( m_copyCoordinateAction, SIGNAL(triggered()), SLOT(slotCopyCoordinates()) );
-    connect( m_infoDialogAction, SIGNAL(triggered()), SLOT(slotInfoDialog()) );
-    connect( m_showOrbitAction, SIGNAL(triggered(bool)), SLOT(slotShowOrbit(bool)) );
-    connect( m_trackPlacemarkAction, SIGNAL(triggered(bool)), SLOT(slotTrackPlacemark()) );
-    connect( fullscreenAction, SIGNAL(triggered(bool)), this, SLOT(toggleFullscreen(bool)) );
+    parent->connect( fromHere, SIGNAL(triggered()), SLOT(directionsFromHere()) );
+    parent->connect( m_directionsToHereAction, SIGNAL(triggered()), SLOT(directionsToHere()) );
+    parent->connect( addBookmark, SIGNAL(triggered()), SLOT(addBookmark()) );
+    parent->connect( aboutDialogAction, SIGNAL(triggered()), SLOT(slotAboutDialog()) );
+    parent->connect( m_copyCoordinateAction, SIGNAL(triggered()), SLOT(slotCopyCoordinates()) );
+    parent->connect( m_infoDialogAction, SIGNAL(triggered()), SLOT(slotInfoDialog()) );
+    parent->connect( m_showOrbitAction, SIGNAL(triggered(bool)), SLOT(slotShowOrbit(bool)) );
+    parent->connect( m_trackPlacemarkAction, SIGNAL(triggered(bool)), SLOT(slotTrackPlacemark()) );
+    parent->connect( fullscreenAction, SIGNAL(triggered(bool)), parent, SLOT(toggleFullscreen(bool)) );
 
-    connect( m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
-             this, SLOT(showAddressInformation(GeoDataCoordinates,GeoDataPlacemark)) );
+    parent->connect( m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
+             parent, SLOT(showAddressInformation(GeoDataCoordinates,GeoDataPlacemark)) );
 }
 
-QMenu* MarbleWidgetPopupMenu::createInfoBoxMenu()
+MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
+                                         const MarbleModel *model)
+    : QObject(widget),
+      d( new Private( widget, model, this ) )
+{
+    // nothing to do
+}
+
+MarbleWidgetPopupMenu::~MarbleWidgetPopupMenu()
+{
+    delete d;
+}
+
+QMenu* MarbleWidgetPopupMenu::Private::createInfoBoxMenu()
 {
     QMenu* menu = new QMenu( tr( "&Info Boxes" ) );
     QList<AbstractFloatItem *> floatItemList = m_widget->floatItems();
@@ -148,74 +201,74 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         return;
     }
 
-    if (!m_lmbMenu->isEmpty()) {
-        m_lmbMenu->clear();
+    if (!d->m_lmbMenu->isEmpty()) {
+        d->m_lmbMenu->clear();
         // just clear()-ing the menu won't delete the submenus
-        foreach( QObject *child, m_lmbMenu->children() ) {
+        foreach( QObject *child, d->m_lmbMenu->children() ) {
             child->deleteLater();
         }
     }
 
-    m_mousePosition.setX(xpos);
-    m_mousePosition.setY(ypos);
+    d->m_mousePosition.setX(xpos);
+    d->m_mousePosition.setY(ypos);
 
     const QPoint curpos = QPoint( xpos, ypos );
-    m_featurelist = m_widget->whichFeatureAt( curpos );
+    d->m_featurelist = d->m_widget->whichFeatureAt( curpos );
 
     int  actionidx = 1;
     bool hasSatellites = false;
 
-    QVector<const GeoDataPlacemark*>::const_iterator it = m_featurelist.constBegin();
-    QVector<const GeoDataPlacemark*>::const_iterator const itEnd = m_featurelist.constEnd();
+    QVector<const GeoDataPlacemark*>::const_iterator it = d->m_featurelist.constBegin();
+    QVector<const GeoDataPlacemark*>::const_iterator const itEnd = d->m_featurelist.constEnd();
     for (; it != itEnd; ++it )
     {
         QString name = (*it)->name();
         QPixmap icon = QPixmap::fromImage( ( *it)->style()->iconStyle().icon() );
-        m_infoDialogAction->setData( actionidx );
+        d->m_infoDialogAction->setData( actionidx );
 
         //TODO: don't hardcode this check ?
         if ( (*it)->visualCategory() != GeoDataFeature::Satellite ) {
-            m_infoDialogAction->setText( name );
-            m_infoDialogAction->setIcon( icon );
+            d->m_infoDialogAction->setText( name );
+            d->m_infoDialogAction->setIcon( icon );
 
-            m_lmbMenu->addAction( m_infoDialogAction );
+            d->m_lmbMenu->addAction( d->m_infoDialogAction );
         } else {
 	    hasSatellites = true;
-            QMenu *subMenu = new QMenu( name, m_lmbMenu );
+            QMenu *subMenu = new QMenu( name, d->m_lmbMenu );
             subMenu->setIcon( icon );
-            m_infoDialogAction->setText( tr( "Satellite information" ) );
-            m_infoDialogAction->setIcon( QIcon() );
-            subMenu->addAction( m_infoDialogAction );
+            d->m_infoDialogAction->setText( tr( "Satellite information" ) );
+            d->m_infoDialogAction->setIcon( QIcon() );
+            subMenu->addAction( d->m_infoDialogAction );
 
-            m_showOrbitAction->setChecked( (*it)->style()->lineStyle().penStyle() != Qt::NoPen );
-            m_showOrbitAction->setData( actionidx );
-            subMenu->addAction( m_showOrbitAction );
+            d->m_showOrbitAction->setChecked( (*it)->style()->lineStyle().penStyle() != Qt::NoPen );
+            d->m_showOrbitAction->setData( actionidx );
+            subMenu->addAction( d->m_showOrbitAction );
 
-            m_trackPlacemarkAction->setData( actionidx );
-            subMenu->addAction( m_trackPlacemarkAction );
+            d->m_trackPlacemarkAction->setData( actionidx );
+            subMenu->addAction( d->m_trackPlacemarkAction );
 
-            m_lmbMenu->addAction( subMenu->menuAction() );
+            d->m_lmbMenu->addAction( subMenu->menuAction() );
         }
         actionidx++;
     }
 
-    m_itemList = m_widget->whichItemAt( curpos );
-    QList<AbstractDataPluginItem *>::const_iterator itW = m_itemList.constBegin();
-    QList<AbstractDataPluginItem *>::const_iterator const itWEnd = m_itemList.constEnd();
+    d->m_itemList = d->m_widget->whichItemAt( curpos );
+    QList<AbstractDataPluginItem *>::const_iterator itW = d->m_itemList.constBegin();
+    QList<AbstractDataPluginItem *>::const_iterator const itWEnd = d->m_itemList.constEnd();
     for (; itW != itWEnd; ++itW )
     {
         foreach ( QAction* action, (*itW)->actions() ) {
-            m_lmbMenu->addAction( action );
+            d->m_lmbMenu->addAction( action );
         }
     }
 
-    switch ( m_lmbMenu->actions().size() ) {
+    switch ( d->m_lmbMenu->actions().size() ) {
     case 0: break; // nothing to do, ignore
     case 1: if ( ! hasSatellites ) {
-	      m_lmbMenu->actions().first()->activate( QAction::Trigger );
+          d->m_lmbMenu->actions().first()->activate( QAction::Trigger );
 	      break; // one action? perform immediately
 	    }
-    default: m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
+    default: d->m_lmbMenu->popup( d->m_widget->mapToGlobal( curpos ) );
     }
 }
 
@@ -223,22 +276,22 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 {
     qreal lon, lat;
-    const bool visible = m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
+    const bool visible = d->m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
     if ( !visible )
         return;
 
-    m_mousePosition.setX(xpos);
-    m_mousePosition.setY(ypos);
+    d->m_mousePosition.setX(xpos);
+    d->m_mousePosition.setY(ypos);
 
     QPoint curpos = QPoint( xpos, ypos );
-    m_copyCoordinateAction->setData( curpos );
-    RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
+    d->m_copyCoordinateAction->setData( curpos );
+    RouteRequest* request = d->m_widget->model()->routingManager()->routeRequest();
     if ( request ) {
         int const lastIndex = qMax( 1, request->size()-1 );
-        m_directionsToHereAction->setIcon( QIcon( request->pixmap( lastIndex, 16 ) ) );
+        d->m_directionsToHereAction->setIcon( QIcon( request->pixmap( lastIndex, 16 ) ) );
     }
 
-    m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
+    d->m_rmbMenu->popup( d->m_widget->mapToGlobal( curpos ) );
 }
 
 void MarbleWidgetPopupMenu::slotInfoDialog()
@@ -252,44 +305,44 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
     int actionidx = action->data().toInt();
 
     if ( actionidx > 0 ) {
-        const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
+        const GeoDataPlacemark *index = d->m_featurelist.at( actionidx -1 );
         bool isSatellite = (index->visualCategory() == GeoDataFeature::Satellite);
         bool isCity (index->visualCategory() >= GeoDataFeature::SmallCity &&
                          index->visualCategory() <= GeoDataFeature::LargeNationCapital);
         bool isNation = (index->visualCategory() == GeoDataFeature::Nation);
         bool isSky = false;
-        if ( m_model->mapTheme() ) {
-            isSky = m_model->mapTheme()->head()->target() == "sky";
+        if ( d->m_model->mapTheme() ) {
+            isSky = d->m_model->mapTheme()->head()->target() == "sky";
         }
-        PopupLayer* popup = m_widget->popupLayer();
+        PopupLayer* popup = d->m_widget->popupLayer();
         popup->setSize(QSizeF(580, 620));
         if (index->role().isEmpty() || isSatellite || isCity || isNation || isSky) {
             if (isSatellite) {
-                setupDialogSatellite(popup, index);
+                d->setupDialogSatellite(popup, index);
             } else if (isCity) {
-                setupDialogCity(popup, index);
+                d->setupDialogCity(popup, index);
             } else if (isNation) {
-                setupDialogNation(popup, index);
+                d->setupDialogNation(popup, index);
             } else if (isSky) {
-                setupDialogSkyPlaces(popup, index);
+                d->setupDialogSkyPlaces(popup, index);
             } else {
                 popup->setContent(index->description());
             }
         } else {
-            setupDialogGeoPlaces(popup, index);
+            d->setupDialogGeoPlaces(popup, index);
         }
         popup->popup();
     }
 }
 
-QString MarbleWidgetPopupMenu::filterEmptyShortDescription(const QString &description) const
+QString MarbleWidgetPopupMenu::Private::filterEmptyShortDescription(const QString &description) const
 {
     if(description.isEmpty())
         return tr("No description available.");
     return description;
 }
 
-void MarbleWidgetPopupMenu::setupDialogSatellite(PopupLayer *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::Private::setupDialogSatellite(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
@@ -302,7 +355,7 @@ void MarbleWidgetPopupMenu::setupDialogSatellite(PopupLayer *popup, const GeoDat
     popup->setContent(doc.finalText());
 }
 
-void MarbleWidgetPopupMenu::setupDialogCity(PopupLayer *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::Private::setupDialogCity(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
@@ -361,7 +414,7 @@ void MarbleWidgetPopupMenu::setupDialogCity(PopupLayer *popup, const GeoDataPlac
     popup->setContent(doc.finalText());
 }
 
-void MarbleWidgetPopupMenu::setupDialogNation(PopupLayer *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::Private::setupDialogNation(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
@@ -388,7 +441,7 @@ void MarbleWidgetPopupMenu::setupDialogNation(PopupLayer *popup, const GeoDataPl
     popup->setContent(doc.finalText());
 }
 
-void MarbleWidgetPopupMenu::setupDialogGeoPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::Private::setupDialogGeoPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
@@ -410,7 +463,7 @@ void MarbleWidgetPopupMenu::setupDialogGeoPlaces(PopupLayer *popup, const GeoDat
     popup->setContent(doc.finalText());
 }
 
-void MarbleWidgetPopupMenu::setupDialogSkyPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
+void MarbleWidgetPopupMenu::Private::setupDialogSkyPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
@@ -444,7 +497,7 @@ void MarbleWidgetPopupMenu::slotShowOrbit( bool show )
     int actionidx = action->data().toInt();
 
     if ( actionidx > 0 ) {
-        const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
+        const GeoDataPlacemark *index = d->m_featurelist.at( actionidx -1 );
 
         Qt::PenStyle penStyle = show ? Qt::SolidLine : Qt::NoPen;
         index->style()->lineStyle().setPenStyle( penStyle );
@@ -463,7 +516,7 @@ void MarbleWidgetPopupMenu::slotTrackPlacemark()
 
     if ( actionidx > 0 ) {
         mDebug() << actionidx;
-        const GeoDataPlacemark *index = m_featurelist.at( actionidx -1 );
+        const GeoDataPlacemark *index = d->m_featurelist.at( actionidx -1 );
         emit trackPlacemark( index );
     }
 }
@@ -471,7 +524,7 @@ void MarbleWidgetPopupMenu::slotTrackPlacemark()
 void MarbleWidgetPopupMenu::slotCopyCoordinates()
 {
     GeoDataCoordinates coordinates;
-    if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
+    if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
 	const qreal longitude_degrees = coordinates.longitude(GeoDataCoordinates::Degree);
 	const qreal latitude_degrees = coordinates.latitude(GeoDataCoordinates::Degree);
 
@@ -519,52 +572,52 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
 
 void MarbleWidgetPopupMenu::slotAboutDialog()
 {
-    MarbleAboutDialog dlg( m_widget );
+    MarbleAboutDialog dlg( d->m_widget );
     dlg.exec();
 }
 
 void MarbleWidgetPopupMenu::addAction( Qt::MouseButton button, QAction* action )
 {
     if ( button == Qt::RightButton ) {
-        m_rmbMenu->insertAction( m_rmbExtensionPoint, action );
+        d->m_rmbMenu->insertAction( d->m_rmbExtensionPoint, action );
     }
 }
 
 void MarbleWidgetPopupMenu::directionsFromHere()
 {
-    RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
+    RouteRequest* request = d->m_widget->model()->routingManager()->routeRequest();
     if ( request )
     {
         GeoDataCoordinates coordinates;
-        if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
+        if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
             if ( request->size() > 0 ) {
                 request->setPosition( 0, coordinates );
             } else {
                 request->append( coordinates );
             }
-            m_widget->model()->routingManager()->retrieveRoute();
+            d->m_widget->model()->routingManager()->retrieveRoute();
         }
     }
 }
 
 void MarbleWidgetPopupMenu::directionsToHere()
 {
-    RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
+    RouteRequest* request = d->m_widget->model()->routingManager()->routeRequest();
     if ( request )
     {
         GeoDataCoordinates coordinates;
-        if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
+        if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
             if ( request->size() > 1 ) {
                 request->setPosition( request->size()-1, coordinates );
             } else {
                 request->append( coordinates );
             }
-            m_widget->model()->routingManager()->retrieveRoute();
+            d->m_widget->model()->routingManager()->retrieveRoute();
         }
     }
 }
 
-bool MarbleWidgetPopupMenu::mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer )
+bool MarbleWidgetPopupMenu::Private::mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer )
 {
     Q_ASSERT( coordinates && "You must not pass 0 as coordinates parameter");
     if ( !dataContainer ) {
@@ -590,8 +643,8 @@ bool MarbleWidgetPopupMenu::mouseCoordinates( GeoDataCoordinates* coordinates, Q
 void MarbleWidgetPopupMenu::startReverseGeocoding()
 {
     GeoDataCoordinates coordinates;
-    if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
-        m_runnerManager->reverseGeocoding( coordinates );
+    if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
+        d->m_runnerManager->reverseGeocoding( coordinates );
     }
 }
 
@@ -599,21 +652,21 @@ void MarbleWidgetPopupMenu::showAddressInformation(const GeoDataCoordinates &, c
 {
     QString text = placemark.address();
     if ( !text.isEmpty() ) {
-        QMessageBox::information( m_widget, tr( "Address Details" ), text, QMessageBox::Ok );
+        QMessageBox::information( d->m_widget, tr( "Address Details" ), text, QMessageBox::Ok );
     }
 }
 
 void MarbleWidgetPopupMenu::addBookmark()
 {
     GeoDataCoordinates coordinates;
-    if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
-        QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( m_widget->model()->bookmarkManager(), m_widget );
-        dialog->setMarbleWidget( m_widget );
+    if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
+        QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( d->m_widget->model()->bookmarkManager(), d->m_widget );
+        dialog->setMarbleWidget( d->m_widget );
         dialog->setCoordinates( coordinates );
-        dialog->setRange( m_widget->lookAt().range() );
+        dialog->setRange( d->m_widget->lookAt().range() );
         dialog->setReverseGeocodeName();
         if ( dialog->exec() == QDialog::Accepted ) {
-            m_widget->model()->bookmarkManager()->addBookmark( dialog->folder(), dialog->bookmark() );
+            d->m_widget->model()->bookmarkManager()->addBookmark( dialog->folder(), dialog->bookmark() );
         }
         delete dialog;
     }
@@ -621,7 +674,7 @@ void MarbleWidgetPopupMenu::addBookmark()
 
 void MarbleWidgetPopupMenu::toggleFullscreen( bool enabled )
 {
-    QWidget* parent = m_widget;
+    QWidget* parent = d->m_widget;
     for ( ; parent->parentWidget(); parent = parent->parentWidget() ) {
         // nothing to do
     }
@@ -635,7 +688,9 @@ void MarbleWidgetPopupMenu::toggleFullscreen( bool enabled )
 
 QPoint MarbleWidgetPopupMenu::mousePosition() const
 {
-    return m_mousePosition;
+    return d->m_mousePosition;
+}
+
 }
 
 #include "MarbleWidgetPopupMenu.moc"

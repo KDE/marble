@@ -393,6 +393,7 @@ else (APPLE AND QTONLY)
     MapThemeManager.h
     MarbleAboutDialog.h
     MarbleWidgetInputHandler.h
+    MarbleWidgetPopupMenu.h
     TileId.h
     TileCoordsPyramid.h
     TileLevelRangeWidget.h

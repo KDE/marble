@@ -9,42 +9,35 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-//
-// The MarbleWidgetPopupMenu handles context menus.
-//
-
 #ifndef MARBLE_MARBLEWIDGETPOPUPMENU_H
 #define MARBLE_MARBLEWIDGETPOPUPMENU_H
 
 #include "marble_export.h"
 
 #include <QObject>
-#include <QModelIndex>
-#include <QVector>
 #include <QPoint>
 
 class QAction;
-class QMenu;
 
 namespace Marble
 {
 
-class AbstractDataPluginItem;
 class MarbleWidget;
 class MarbleModel;
 class GeoDataCoordinates;
 class GeoDataPlacemark;
-class PopupLayer;
-class ReverseGeocodingRunnerManager;
 
-
+/**
+ * The MarbleWidgetPopupMenu handles context menus.
+ */
 class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
 {
     Q_OBJECT
 
  public:
-    MarbleWidgetPopupMenu(MarbleWidget*, const MarbleModel*);
-    virtual ~MarbleWidgetPopupMenu(){}
+    MarbleWidgetPopupMenu( MarbleWidget*, const MarbleModel* );
+
+    virtual ~MarbleWidgetPopupMenu();
 
     /**
       * Adds the action to the menu associated with the specified
@@ -52,6 +45,10 @@ class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
       */
     void addAction( Qt::MouseButton button, QAction* action );
 
+    /**
+     * @brief mousePosition Position of the last mouse button click
+     * @return
+     */
     QPoint mousePosition() const;
 
 Q_SIGNALS:
@@ -61,7 +58,7 @@ Q_SIGNALS:
     void  showLmbMenu( int, int );
     void  showRmbMenu( int, int );
 
- protected Q_SLOTS:
+private Q_SLOTS:
     void slotInfoDialog();
     void slotShowOrbit( bool show );
     void slotTrackPlacemark();
@@ -77,44 +74,9 @@ private Q_SLOTS:
     void toggleFullscreen( bool enabled );
 
  private:
-    /**
-      * Returns the geo coordinates of the mouse pointer at the last right button menu.
-      * You must not pass 0 as coordinates parameter. The result indicates whether the
-      * coordinates are valid, which will be true if the right button menu was opened at least once.
-      */
-    bool mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer );
-    QMenu* createInfoBoxMenu();
-
-    QString filterEmptyShortDescription(const QString &description) const;
-    void setupDialogSatellite(PopupLayer *popup, const GeoDataPlacemark *index);
-    void setupDialogCity(PopupLayer *popup, const GeoDataPlacemark *index);
-    void setupDialogNation(PopupLayer *popup, const GeoDataPlacemark *index);
-    void setupDialogGeoPlaces(PopupLayer *popup, const GeoDataPlacemark *index);
-    void setupDialogSkyPlaces(PopupLayer *popup, const GeoDataPlacemark *index);
-
- private:
     Q_DISABLE_COPY( MarbleWidgetPopupMenu )
-    const MarbleModel    *const m_model;
-    MarbleWidget   *m_widget;
-
-    QVector<const GeoDataPlacemark*>  m_featurelist;
-    QList<AbstractDataPluginItem *> m_itemList;
-
-    QMenu    *const m_lmbMenu;
-    QMenu    *const m_rmbMenu;
-
-    QAction *m_infoDialogAction;
-    QAction *m_showOrbitAction;
-    QAction *m_trackPlacemarkAction;
-    QAction *m_directionsToHereAction;
-
-    QAction  *const m_copyCoordinateAction;
-
-    QAction  *m_rmbExtensionPoint;
-
-    ReverseGeocodingRunnerManager *const m_runnerManager;
-
-    QPoint m_mousePosition;
+    class Private;
+    Private* const d;
 };
 
 }
