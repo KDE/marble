@@ -479,7 +479,6 @@ QList<DiffItem> BookmarkSyncManager::Private::diff( QString &sourcePath, QIODevi
     if( !fileA.open( QFile::ReadOnly ) ) {
         mDebug() << "Could not open file " << fileA.fileName();
     }
-    fileA.close();
 
     return diff( &fileA, fileB );
 }
