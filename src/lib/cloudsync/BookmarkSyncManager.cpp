@@ -170,6 +170,7 @@ public:
      */
     QList<DiffItem> diff( QString &sourcePath, QString &destinationPath );
     QList<DiffItem> diff( QString &sourcePath, QIODevice* destination );
+    QList<DiffItem> diff( QIODevice* source, QString &destinationPath );
     QList<DiffItem> diff( QIODevice *source, QIODevice* destination );
 
     /**
@@ -483,6 +484,16 @@ QList<DiffItem> BookmarkSyncManager::Private::diff( QString &sourcePath, QIODevi
     return diff( &fileA, fileB );
 }
 
+QList<DiffItem> BookmarkSyncManager::Private::diff( QIODevice *source, QString &destinationPath )
+{
+    QFile fileB( destinationPath );
+    if( !fileB.open( QFile::ReadOnly ) ) {
+        mDebug() << "Could not open file " << fileB.fileName();
+    }
+
+    return diff( source, &fileB );
+}
+
 QList<DiffItem> BookmarkSyncManager::Private::diff( QIODevice *fileA, QIODevice *fileB )
 {
     GeoDataParser parserA( GeoData_KML );
@@ -750,7 +761,7 @@ void BookmarkSyncManager::Private::completeSynchronization()
     if( lastSyncedPath == QString() ) {
         if( localBookmarksFile.exists() ) {
             mDebug() << "Conflict between remote bookmarks and local ones";
-            m_diffA.clear();
+            m_diffA = diff( &buffer, m_localBookmarksPath );
             m_diffB = diff( m_localBookmarksPath, &buffer );
         } else {
             saveDownloadedToCache( result );
