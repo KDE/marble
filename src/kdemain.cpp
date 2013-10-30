@@ -323,11 +323,7 @@ int main ( int argc, char *argv[] )
 
     
 
-    if ( args->isSet( "debug-info" ) ) {
-        MarbleDebug::enable = true;
-    } else {
-        MarbleDebug::enable = false;
-    }
+    MarbleDebug::setEnabled( args->isSet( "debug-info" ) );
 
     if ( args->isSet( "smallscreen" ) ) {
         profiles |= MarbleGlobal::SmallScreen;

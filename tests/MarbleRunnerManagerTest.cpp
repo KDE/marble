@@ -73,7 +73,7 @@ public:
 
 void MarbleRunnerManagerTest::initTestCase()
 {
-     MarbleDebug::enable = true;
+     MarbleDebug::setEnabled( true );
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
     m_time = 30000;

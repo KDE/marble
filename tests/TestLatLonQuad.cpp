@@ -32,7 +32,7 @@ private slots:
 
 void TestLatLonQuad::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestLatLonQuad::simpleParseTest()

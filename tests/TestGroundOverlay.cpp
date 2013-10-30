@@ -30,7 +30,7 @@ private slots:
 
 void TestGroundOverlay::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestGroundOverlay::simpleParseTest()

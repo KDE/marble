@@ -401,6 +401,7 @@ else (APPLE AND QTONLY)
     global.h
     MarbleColors.h
     MarbleGlobal.h
+    MarbleDebug.h
     MarbleDirs.h
     GeoPainter.h
     TileCreatorDialog.h

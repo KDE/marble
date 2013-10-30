@@ -32,7 +32,7 @@ private slots:
 
 void TestTimeStamp::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestTimeStamp::simpleParseTest()

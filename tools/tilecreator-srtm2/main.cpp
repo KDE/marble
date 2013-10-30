@@ -18,7 +18,7 @@ using namespace Marble;
 int main(int argc, char *argv[])
 {
     TCCoreApplication app( argc, argv );
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
     if( argc < 2 ) {
     /*
             PREFIX: this is the prefix of the source directory

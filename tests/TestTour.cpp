@@ -32,7 +32,7 @@ private slots:
 
 void TestTour::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 GeoDataDocument *parseKml(const QString &content)

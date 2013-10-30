@@ -31,7 +31,7 @@ private slots:
 
 void TestCamera::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestCamera::simpleParseTest()

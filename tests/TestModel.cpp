@@ -32,7 +32,7 @@ private slots:
 };
 void TestModel::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestModel::simpleParseTest()

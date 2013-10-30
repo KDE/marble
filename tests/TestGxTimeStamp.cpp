@@ -32,7 +32,7 @@ private slots:
 
 void TestGxTimeStamp::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestGxTimeStamp::simpleParseTest()

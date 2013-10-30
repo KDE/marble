@@ -40,7 +40,7 @@ private slots:
 
 void TestTrack::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestTrack::simpleParseTest()

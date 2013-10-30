@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
 
         if ( arg == QLatin1String( "--debug-info" ) )
         {
-            MarbleDebug::enable = true;
+            MarbleDebug::setEnabled( true );
         }
         else if ( arg.startsWith( QLatin1String( "--marbledatapath=" ), Qt::CaseInsensitive ) )
         {

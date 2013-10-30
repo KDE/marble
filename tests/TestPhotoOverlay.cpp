@@ -30,7 +30,7 @@ private slots:
 
 void TestPhotoOverlay::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestPhotoOverlay::simpleParseTest()

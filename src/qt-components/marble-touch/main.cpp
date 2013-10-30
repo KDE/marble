@@ -56,7 +56,7 @@ int main( int argc, char *argv[] )
         QString const arg = args.at( i );
 
         if ( arg == "--debug-info" ) {
-            MarbleDebug::enable = true;
+            MarbleDebug::setEnabled( true );
         }
         else if ( arg == "--portrait" ) {
             portraitMode = true;

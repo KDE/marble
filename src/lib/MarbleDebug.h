@@ -17,38 +17,33 @@
 
 namespace Marble
 {
-/**
-  * a simple null device
-  */
-class NullDevice : public QIODevice
-{
-    public:
-        qint64 readData( char * /*data*/, qint64 /*maxSize*/ ) { return -1; };
-        qint64 writeData( const char * /*data*/, qint64 maxSize ) { return maxSize; };
-};
 
 /**
   * a class which takes all the settings and exposes them
   */
-
 class MARBLE_EXPORT MarbleDebug
 {
-    public:
-        static bool enable;
-        static QIODevice* nullDevice() { static QIODevice *device = new NullDevice; return device; };
+public:
+    /**
+     * @brief isEnabled returns whether debug information output is generated
+     */
+    static bool isEnabled();
+
+    /**
+     * @brief setEnabled Toggle debug information output generation
+     * @param enabled Set to true to enable debug output, false to disable
+     */
+    static void setEnabled(bool enabled);
+
+private:
+    static bool m_enabled;
+
 };
 
 /**
-  * an inline function which should replace qDebug()
+  * a function to replace qDebug() in Marble library code
   */
-
-inline QDebug mDebug()
-{
-    if ( MarbleDebug::enable )
-        return QDebug( QtDebugMsg );
-    else
-        return QDebug( MarbleDebug::nullDevice() );
-}
+MARBLE_EXPORT QDebug mDebug();
 
 } // namespace Marble
 

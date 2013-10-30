@@ -31,7 +31,7 @@ private slots:
 
 void TestNetworkLink::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestNetworkLink::simpleParseTest()

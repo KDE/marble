@@ -31,7 +31,7 @@ private slots:
 
 void TestScreenOverlay::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestScreenOverlay::simpleParseTest()

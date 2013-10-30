@@ -40,7 +40,7 @@ private slots:
 
 void TestGeoDataTrack::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
     //"Simple Example" from kmlreference

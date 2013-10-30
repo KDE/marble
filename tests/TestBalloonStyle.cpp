@@ -33,7 +33,7 @@ private slots:
 
 void TestBalloonStyle::initTestCase()
 {
-    MarbleDebug::enable = true;
+    MarbleDebug::setEnabled( true );
 }
 
 void TestBalloonStyle::simpleParseTest()
