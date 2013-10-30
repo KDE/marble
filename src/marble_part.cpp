@@ -539,12 +539,12 @@ void MarblePart::readSettings()
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 
     CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
-    cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
-    cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
-    cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
     cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
     cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
     cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );
+    cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
+    cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
+    cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
 }
 
 void MarblePart::readStatusBarSettings()
@@ -1563,12 +1563,12 @@ void MarblePart::updateSettings()
     m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( MarbleSettings::inertialEarthRotation() );
 
     CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
-    cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
-    cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
-    cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
     cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
     cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
     cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );
+    cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
+    cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
+    cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
 }
 
 void MarblePart::writePluginSettings()

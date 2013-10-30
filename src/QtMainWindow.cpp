@@ -1148,12 +1148,12 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
 
      settings.beginGroup( "CloudSync" );
      CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
-     cloudSyncManager->setSyncEnabled( settings.value( "enableSync", false ).toBool() );
-     cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( settings.value( "syncRoutes", true ).toBool() );
-     cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( settings.value( "syncBookmarks", true ).toBool() );
      cloudSyncManager->setOwncloudServer( settings.value( "owncloudServer", "" ).toString() );
      cloudSyncManager->setOwncloudUsername( settings.value( "owncloudUsername", "" ).toString() );
      cloudSyncManager->setOwncloudPassword( settings.value( "owncloudPassword", "" ).toString() );
+     cloudSyncManager->setSyncEnabled( settings.value( "enableSync", false ).toBool() );
+     cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( settings.value( "syncRoutes", true ).toBool() );
+     cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( settings.value( "syncBookmarks", true ).toBool() );
      settings.endGroup();
 }
 
@@ -1328,12 +1328,12 @@ void MainWindow::updateSettings()
     */
 
     CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
-    cloudSyncManager->setSyncEnabled( m_configDialog->syncEnabled() );
-    cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( m_configDialog->syncRoutes() );
-    cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( m_configDialog->syncBookmarks() );
     cloudSyncManager->setOwncloudServer( m_configDialog->owncloudServer() );
     cloudSyncManager->setOwncloudUsername( m_configDialog->owncloudUsername() );
     cloudSyncManager->setOwncloudPassword( m_configDialog->owncloudPassword() );
+    cloudSyncManager->setSyncEnabled( m_configDialog->syncEnabled() );
+    cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( m_configDialog->syncRoutes() );
+    cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( m_configDialog->syncBookmarks() );
 
     m_controlView->marbleWidget()->update();
 }
