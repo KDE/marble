@@ -418,8 +418,10 @@ else (APPLE AND QTONLY)
     routing/RoutingWidget.h
     routing/RoutingManager.h
     TileCreator.h
+    PluginManager.h
     PluginInterface.h
     DialogConfigurationInterface.h
+    PositionProviderPlugin.h
     PositionProviderPluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
