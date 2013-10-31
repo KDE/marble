@@ -133,7 +133,6 @@ private slots:
 
 signals:
     void routeSyncEnabledChanged(bool enabled);
-    void routeDownloadProgress( qint64 received, qint64 total );
     void routeListDownloadProgress( qint64 received, qint64 total );
 
 private:
