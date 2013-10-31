@@ -214,9 +214,7 @@ void RouteSyncManager::prepareRouteList()
     }
 
     if( !d->m_cloudSyncManager->workOffline() ) {
-        if( d->m_cloudSyncManager->backend()  == CloudSyncManager::Owncloud ) {
-            d->m_owncloudBackend.downloadRouteList();
-        }
+        d->m_owncloudBackend.downloadRouteList();
     } else {
         // If not offline, setRouteModelItems() does this after
         // appending downloaded items to the list.
@@ -226,9 +224,7 @@ void RouteSyncManager::prepareRouteList()
 
 void RouteSyncManager::downloadRoute( const QString &timestamp )
 {
-    if( d->m_cloudSyncManager->backend() == CloudSyncManager::Owncloud ) {
-        d->m_owncloudBackend.downloadRoute( timestamp );
-    }
+    d->m_owncloudBackend.downloadRoute( timestamp );
 }
 
 void RouteSyncManager::openRoute(const QString &timestamp )
@@ -245,16 +241,12 @@ void RouteSyncManager::openRoute(const QString &timestamp )
 
 void RouteSyncManager::deleteRoute(const QString &timestamp )
 {
-    if( d->m_cloudSyncManager->backend() == CloudSyncManager::Owncloud ) {
-        d->m_owncloudBackend.deleteRoute( timestamp );
-    }
+    d->m_owncloudBackend.deleteRoute( timestamp );
 }
 
 void RouteSyncManager::removeRouteFromCache( const QString &timestamp )
 {
-    if( d->m_cloudSyncManager->backend() == CloudSyncManager::Owncloud ) {
-        d->m_owncloudBackend.removeFromCache( d->m_cacheDir, timestamp );
-    }
+    d->m_owncloudBackend.removeFromCache( d->m_cacheDir, timestamp );
 }
 
 void RouteSyncManager::updateUploadProgressbar( qint64 sent, qint64 total )

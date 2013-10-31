@@ -73,11 +73,6 @@ void CloudSyncManager::setWorkOffline( bool offline )
     }
 }
 
-CloudSyncManager::Backend CloudSyncManager::backend() const
-{
-    return Owncloud;
-}
-
 bool CloudSyncManager::isSyncEnabled() const
 {
     return d->m_syncEnabled;

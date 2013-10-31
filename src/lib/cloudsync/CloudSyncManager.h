@@ -53,21 +53,11 @@ public:
      */
     void setWorkOffline( bool offline );
 
-    enum Backend {
-        Owncloud
-    };
-
     /**
      * Checks if the user enabled synchronization.
      * @return true if synchronization enabled
      */
     bool isSyncEnabled() const;
-
-    /**
-     * Getter for currently selected backend.
-     * @return Selected backend
-     */
-    Backend backend() const;
 
     /**
      * Gets ownCloud server from settings.
