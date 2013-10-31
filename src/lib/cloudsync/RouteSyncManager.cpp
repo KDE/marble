@@ -30,7 +30,6 @@
 #include <QNetworkReply>
 #include <QTemporaryFile>
 #include <QNetworkRequest>
-#include <QProgressDialog>
 #include <QNetworkAccessManager>
 
 namespace Marble
@@ -44,7 +43,6 @@ public:
     Private( CloudSyncManager *cloudSyncManager );
 
     bool m_routeSyncEnabled;
-    QProgressDialog *m_uploadProgressDialog;
     CloudSyncManager *m_cloudSyncManager;
     RoutingManager *m_routingManager;
     CloudRouteModel *m_model;
@@ -56,25 +54,19 @@ public:
 
 RouteSyncManager::Private::Private( CloudSyncManager *cloudSyncManager ) :
     m_routeSyncEnabled( false ),
-    m_uploadProgressDialog( new QProgressDialog() ),
     m_cloudSyncManager( cloudSyncManager ),
     m_routingManager( 0 ),
     m_model( new CloudRouteModel() ),
     m_owncloudBackend( cloudSyncManager )
 {
     m_cacheDir = QDir( MarbleDirs::localPath() + "/cloudsync/cache/routes/" );
-    m_owncloudBackend.setApiUrl( m_cloudSyncManager->apiUrl() );
-    
-    m_uploadProgressDialog->setMinimum( 0 );
-    m_uploadProgressDialog->setMaximum( 100 );
-    m_uploadProgressDialog->setWindowTitle( tr( "Uploading route..." ) );
+    m_owncloudBackend.setApiUrl( m_cloudSyncManager->apiUrl() );    
 }
 
 RouteSyncManager::RouteSyncManager(CloudSyncManager *cloudSyncManager) :
     d( new Private( cloudSyncManager ) )
 {
     connect( d->m_cloudSyncManager, SIGNAL(apiUrlChanged(QUrl)), &d->m_owncloudBackend, SLOT(setApiUrl(QUrl)) );
-    connect( d->m_uploadProgressDialog, SIGNAL(canceled()), &d->m_owncloudBackend, SLOT(cancelUpload()) );
     connect( &d->m_owncloudBackend, SIGNAL(routeUploadProgress(qint64,qint64)), this, SLOT(updateUploadProgressbar(qint64,qint64)) );
     connect( &d->m_owncloudBackend, SIGNAL(routeListDownloaded(QVector<RouteItem>)), this, SLOT(setRouteModelItems(QVector<RouteItem>)) );
     connect( &d->m_owncloudBackend, SIGNAL(routeListDownloadProgress(qint64,qint64)), this, SIGNAL(routeListDownloadProgress(qint64,qint64)) );
@@ -137,7 +129,6 @@ void RouteSyncManager::uploadRoute()
 {
     if( !d->m_cloudSyncManager->workOffline() ) {
         d->m_owncloudBackend.uploadRoute( saveDisplayedToCache() );
-        d->m_uploadProgressDialog->exec();
     }
 }
 
@@ -200,7 +191,6 @@ void RouteSyncManager::uploadRoute( const QString &timestamp )
 {
     if( !d->m_cloudSyncManager->workOffline() ) {
         d->m_owncloudBackend.uploadRoute( timestamp );
-        d->m_uploadProgressDialog->exec();
     }
 }
 
@@ -251,11 +241,8 @@ void RouteSyncManager::removeRouteFromCache( const QString &timestamp )
 
 void RouteSyncManager::updateUploadProgressbar( qint64 sent, qint64 total )
 {
-    qint64 percentage = 100.0 * sent / total;
-    d->m_uploadProgressDialog->setValue( percentage );
-    
+    emit routeUploadProgress( sent, total );
     if( sent == total ) {
-        d->m_uploadProgressDialog->accept();
         prepareRouteList();
     }
 }

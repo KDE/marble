@@ -134,6 +134,7 @@ private slots:
 signals:
     void routeSyncEnabledChanged(bool enabled);
     void routeListDownloadProgress( qint64 received, qint64 total );
+    void routeUploadProgress( qint64 sent, qint64 total );
 
 private:
     class Private;

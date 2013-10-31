@@ -139,6 +139,8 @@ private Q_SLOTS:
     /** Open a remote route and center on it */
     void openCloudRoute( const QString &identifier );
 
+    void updateUploadProgress( qint64 sent, qint64 total );
+
 protected:
     bool eventFilter( QObject *o, QEvent *e );
     void resizeEvent(QResizeEvent *e);

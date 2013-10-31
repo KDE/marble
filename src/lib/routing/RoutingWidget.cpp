@@ -38,6 +38,7 @@
 #include <QMouseEvent>
 #include <QToolBar>
 #include <QToolButton>
+#include <QProgressDialog>
 
 #include "ui_RoutingWidget.h"
 
@@ -91,6 +92,8 @@ public:
     QToolButton *m_clearRouteButton;
     QToolButton *m_configureButton;
 
+    QProgressDialog* m_routeUploadDialog;
+
     /** Constructor */
     RoutingWidgetPrivate(RoutingWidget *parent, MarbleWidget *marbleWidget );
 
@@ -130,6 +133,7 @@ RoutingWidgetPrivate::RoutingWidgetPrivate( RoutingWidget *parent, MarbleWidget 
         m_currentFrame( 0 ),
         m_iconSize( 16 ),
         m_collapse_width( 0 ),
+        m_routeUploadDialog( 0 ),
         m_parent( parent )
 {
     createProgressAnimation();
@@ -683,6 +687,18 @@ void RoutingWidget::saveRoute()
 void RoutingWidget::uploadToCloud()
 {
     Q_ASSERT( d->m_routeSyncManager );
+
+    if (!d->m_routeUploadDialog) {
+        d->m_routeUploadDialog = new QProgressDialog( d->m_widget );
+        d->m_routeUploadDialog->setWindowTitle( tr( "Uploading route..." ) );
+        d->m_routeUploadDialog->setMinimum( 0 );
+        d->m_routeUploadDialog->setMaximum( 100 );
+        d->m_routeUploadDialog->setAutoClose( true );
+        d->m_routeUploadDialog->setAutoReset( true );
+        connect( d->m_routeSyncManager, SIGNAL(routeUploadProgress(qint64,qint64)), this, SLOT(updateUploadProgress(qint64,qint64)) );
+    }
+
+    d->m_routeUploadDialog->show();
     d->m_routeSyncManager->uploadRoute();
 }
 
@@ -732,6 +748,12 @@ void RoutingWidget::openCloudRoute(const QString &identifier)
     Q_ASSERT( d->m_routeSyncManager );
     d->m_routeSyncManager->openRoute( identifier );
     d->m_widget->centerOn( d->m_routingManager->routingModel()->route().bounds() );
+}
+
+void RoutingWidget::updateUploadProgress(qint64 sent, qint64 total)
+{
+    Q_ASSERT( d->m_routeUploadDialog );
+    d->m_routeUploadDialog->setValue( 100.0 * sent / total );
 }
 
 bool RoutingWidget::eventFilter( QObject *o, QEvent *event )
