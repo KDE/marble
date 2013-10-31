@@ -13,8 +13,9 @@
 
 #include "CloudRouteModel.h"
 #include "GeoDataDocument.h"
-#include "AbstractSyncBackend.h"
 
+#include <QObject>
+#include <QDir>
 #include <QUrl>
 #include <QVector>
 #include <QNetworkReply>
@@ -23,13 +24,35 @@ namespace Marble {
 
 class CloudSyncManager;
 
-class OwncloudSyncBackend : public AbstractSyncBackend
+class OwncloudSyncBackend : public QObject
 {
     Q_OBJECT
     
 public:
     OwncloudSyncBackend( CloudSyncManager* cloudSyncManager );
     ~OwncloudSyncBackend();
+
+    /**
+     * Generates an endpoint URL by appending endpoint name to API URL
+     * @param endpoint Endpoint name which will be appended to API URL
+     * @return QUrl which can be used for ineractions with API
+     */
+    QUrl endpointUrl( const QString &endpoint );
+
+    /**
+     * Generates an endpoint URL by appending endpoint name and parameter to API URL
+     * @param endpoint Endpoint name which will be appended to API URL
+     * @param parameter Parameter which will be appended to API URL right after endpoint
+     * @return QUrl which can be used for ineractions with API
+     */
+    QUrl endpointUrl( const QString &endpoint, const QString &parameter );
+
+    /**
+     * Removes route with given timestamp from cache
+     * @param cacheDir Local synchronization cache directory
+     * @param timestamp Timestamp of the route which will be deleted
+     */
+    void removeFromCache( const QDir &cacheDir, const QString &timestamp );
 
     void uploadRoute( const QString &timestamp );
     void downloadRouteList();
@@ -38,12 +61,14 @@ public:
     QPixmap createPreview( const QString &timestamp );
     QString routeName( const QString &timestamp );
 
-public slots:
+public Q_SLOTS:
     void cancelUpload();
+    void setApiUrl( const QUrl &apiUrl );
 
 private slots:
     void prepareRouteList();
     void saveDownloadedRoute();
+
 signals:
     void routeListDownloaded( const QVector<RouteItem> &routeList );
     void routeDownloaded();
@@ -51,6 +76,7 @@ signals:
     void routeUploadProgress( qint64 sent, qint64 total );
     void routeDownloadProgress( qint64 received, qint64 total );
     void routeListDownloadProgress( qint64 received, qint64 total );
+    void removedFromCache( const QString &timestamp );
     
 private:
     class Private;

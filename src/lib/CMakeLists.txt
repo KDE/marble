@@ -249,7 +249,6 @@ set(marblewidget_SRCS
     
     cloudsync/CloudSyncManager.cpp
     cloudsync/RouteSyncManager.cpp
-    cloudsync/AbstractSyncBackend.cpp
     cloudsync/OwncloudSyncBackend.cpp
     cloudsync/CloudRouteModel.cpp
     cloudsync/CloudRoutesDialog.cpp

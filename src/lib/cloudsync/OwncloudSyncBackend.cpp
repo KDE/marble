@@ -58,6 +58,7 @@ class OwncloudSyncBackend::Private {
         QString m_routePreviewEndpoint;
 
         CloudSyncManager* m_cloudSyncManager;
+        QUrl m_apiUrl;
 };
 
 OwncloudSyncBackend::Private::Private( CloudSyncManager* cloudSyncManager ) :
@@ -79,7 +80,6 @@ OwncloudSyncBackend::Private::Private( CloudSyncManager* cloudSyncManager ) :
 }
 
 OwncloudSyncBackend::OwncloudSyncBackend( CloudSyncManager* cloudSyncManager ) :
-    AbstractSyncBackend(),
     d( new Private( cloudSyncManager ) )
 {
 }
@@ -327,6 +327,35 @@ void OwncloudSyncBackend::saveDownloadedRoute()
     previewFile.close();
 
     emit routeDownloaded();
+}
+
+void OwncloudSyncBackend::setApiUrl( const QUrl &apiUrl )
+{
+    d->m_apiUrl = apiUrl;
+}
+
+QUrl OwncloudSyncBackend::endpointUrl( const QString &endpoint )
+{
+    QString endpointUrl = QString( "%0/%1" ).arg( d->m_apiUrl.toString() ).arg( endpoint );
+    return QUrl( endpointUrl );
+}
+
+QUrl OwncloudSyncBackend::endpointUrl( const QString &endpoint, const QString &parameter )
+{
+    QString endpointUrl = QString( "%0/%1/%2" ).arg( d->m_apiUrl.toString() ).arg( endpoint ).arg( parameter );
+    return QUrl( endpointUrl );
+}
+
+void OwncloudSyncBackend::removeFromCache( const QDir &cacheDir, const QString &timestamp )
+{
+    bool fileRemoved = QFile( QString( "%0/%1.kml" ).arg( cacheDir.absolutePath(), timestamp ) ).remove();
+    bool previewRemoved = QFile( QString( "%0/preview/%1.jpg" ).arg( cacheDir.absolutePath(), timestamp ) ).remove();
+    if ( !fileRemoved || !previewRemoved ) {
+        mDebug() << "Failed to remove locally cached route " << timestamp << ". It might "
+                    "have been removed already, or its directory is missing / not writable.";
+    }
+
+    emit removedFromCache( timestamp );
 }
 
 }
