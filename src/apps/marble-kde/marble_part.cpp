@@ -51,9 +51,9 @@
 #include <knewstuff3/knewstuffaction.h>
 #include <knewstuff3/downloaddialog.h>
 #include <knewstuff3/uploaddialog.h>
-#include <KStandardDirs>
+#include <KDE/KStandardDirs>
 #include <kdeprintdialog.h>
-#include <KToolBar>
+#include <KDE/KToolBar>
 
 // Marble library classes
 #include "AbstractFloatItem.h"

@@ -9,11 +9,11 @@ if( QT4_FOUND )
 endif()
 
 set( routing-instructions_SRC
-        ../lib/routing/instructions/InstructionTransformation.cpp
-        ../lib/routing/instructions/RoutingInstruction.cpp
-        ../lib/routing/instructions/RoutingPoint.cpp
-        ../lib/routing/instructions/RoutingWaypoint.cpp
-        ../lib/routing/instructions/WaypointParser.cpp
+        ../lib/marble/routing/instructions/InstructionTransformation.cpp
+        ../lib/marble/routing/instructions/RoutingInstruction.cpp
+        ../lib/marble/routing/instructions/RoutingPoint.cpp
+        ../lib/marble/routing/instructions/RoutingWaypoint.cpp
+        ../lib/marble/routing/instructions/WaypointParser.cpp
         ../routing-instructions/main.cpp
 )
 

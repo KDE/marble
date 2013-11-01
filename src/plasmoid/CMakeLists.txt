@@ -13,7 +13,7 @@ include_directories(
 
 set(worldclock_SRCS worldclock.cpp )
 
-qt4_add_resources(worldclock_SRCS ../marble.qrc)
+qt4_add_resources(worldclock_SRCS ../apps/marble-ui/marble.qrc)
 
 kde4_add_ui_files( worldclock_SRCS worldclockConfig.ui )
 

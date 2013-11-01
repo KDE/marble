@@ -10,7 +10,7 @@
 
 #include "LatLonEditPlugin.h"
 
-#include "../../lib/LatLonEdit.h"
+#include "../../lib/marble/LatLonEdit.h"
 
 #include <QObject>
 #include <QString>

@@ -10,13 +10,13 @@
 // Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-#include <KApplication>
-#include <KLocale>
-#include <KAboutData>
-#include <KCmdLineArgs>
-#include <KConfig>
-#include <KConfigGroup>
-#include <KGlobal>
+#include <KDE/KApplication>
+#include <KDE/KLocale>
+#include <KDE/KAboutData>
+#include <KDE/KCmdLineArgs>
+#include <KDE/KConfig>
+#include <KDE/KConfigGroup>
+#include <KDE/KGlobal>
 
 #include <QFile>
  

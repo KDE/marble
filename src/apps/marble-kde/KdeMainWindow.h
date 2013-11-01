@@ -14,7 +14,7 @@
 #define MARBLE_MAINWINDOW_H
  
 
-#include <KXmlGuiWindow>
+#include <KDE/KXmlGuiWindow>
 
 namespace Marble
 {

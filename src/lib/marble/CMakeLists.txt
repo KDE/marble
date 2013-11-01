@@ -295,8 +295,8 @@ set (marblewidget_UI
     MarbleCloudSyncSettingsWidget.ui
 )
 
-# FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc
-qt_add_resources(marblewidget_SRCS libmarble.qrc ../marble.qrc)
+# FIXME: cleaner approach of src/lib/marblwidget/MarbleControlBox.* vs. marble.qrc
+qt_add_resources(marblewidget_SRCS libmarble.qrc ../../apps/marble-ui/marble.qrc)
 
 qt_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
 marble_qt4_automoc(${marblewidget_SRCS})

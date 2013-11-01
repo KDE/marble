@@ -98,7 +98,7 @@ endmacro( marble_add_plugin _target_name )
 macro( marble_add_designer_plugin _target_name )
 set( _src ${ARGN} )
 
-qt_add_resources( _src ../../../marble.qrc )
+qt_add_resources( _src ../../../apps/marble-ui/marble.qrc )
 
 if( QTONLY )
     marble_qt4_automoc( ${_src} )

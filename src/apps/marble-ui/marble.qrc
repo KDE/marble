@@ -62,9 +62,9 @@
         <file>icons/22x22/edit-clear-locationbar-rtl.png</file>
         <file>icons/32x32/edit-clear-locationbar-ltr.png</file>
         <file>icons/32x32/edit-clear-locationbar-rtl.png</file>
-        <file>../data/editors/potlatch.png</file>
-        <file>../data/editors/merkaartor.png</file>
-        <file>../data/editors/josm.png</file>
+        <file>../../../data/editors/potlatch.png</file>
+        <file>../../../data/editors/merkaartor.png</file>
+        <file>../../../data/editors/josm.png</file>
         <file>icons/aprs.png</file>
         <file>icons/lock.png</file>
         <file>icons/routeplanning.png</file>
