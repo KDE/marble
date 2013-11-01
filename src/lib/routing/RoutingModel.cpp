@@ -139,6 +139,7 @@ RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *
     }
 
    QHash<int, QByteArray> roles;
+   roles.insert( Qt::DisplayRole, "display" );
    roles.insert( RoutingModel::TurnTypeIconRole, "turnTypeIcon" );
    roles.insert( RoutingModel::LongitudeRole, "longitude" );
    roles.insert( RoutingModel::LatitudeRole, "latitude" );
