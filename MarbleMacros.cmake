@@ -248,3 +248,12 @@ macro (MACRO_OPTIONAL_FIND_PACKAGE _name )
    endif (WITH_${_name})
 endmacro (MACRO_OPTIONAL_FIND_PACKAGE)
 endif()
+
+# older cmake version don't have the add_feature_info macro.
+# It's just informative, so we add our own that does
+# nothing in that case
+if(NOT COMMAND ADD_FEATURE_INFO)
+macro(ADD_FEATURE_INFO)
+  # just ignore it
+endmacro()
+endif()
