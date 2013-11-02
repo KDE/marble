@@ -1,17 +1,23 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
 SET (TARGET poly2kml)
 PROJECT (${TARGET})
 
-FIND_PACKAGE (Qt4 4.6.0 REQUIRED QtCore QtGui)
-FIND_PACKAGE (Marble REQUIRED)
-INCLUDE (${QT_USE_FILE})
-INCLUDE_DIRECTORIES (${MARBLE_INCLUDE_DIR})
-INCLUDE_DIRECTORIES(../../src/lib)
-INCLUDE_DIRECTORIES(../../src/lib/geodata)
-INCLUDE_DIRECTORIES(../../src/lib/geodata/data)
-INCLUDE_DIRECTORIES(../../src/lib/geodata/parser)
-INCLUDE_DIRECTORIES(../../src/lib/geodata/writer)
-SET (LIBS ${LIBS} ${MARBLE_LIBRARIES} ${QT_LIBRARIES})
+include_directories(
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
+ ${QT_INCLUDE_DIR}
+)
+if( QT4_FOUND )
+  include( ${QT_USE_FILE} )
+endif()
 
-ADD_EXECUTABLE (${TARGET} main.cpp)
-TARGET_LINK_LIBRARIES (${TARGET} ${LIBS})
+set( ${TARGET}_SRC main.cpp )
+add_definitions( -DMAKE_MARBLE_LIB )
+add_executable( ${TARGET} ${${TARGET}_SRC} )
+
+if (QT4_FOUND)
+  target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget )
+else()
+  target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} marblewidget )
+endif()
+
+install( TARGETS ${TARGET} RUNTIME DESTINATION bin )
