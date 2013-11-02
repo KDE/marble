@@ -8,8 +8,8 @@
 // Copyright 2013      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#include <marble/MarbleWidget.h>
-#include <marble/RenderPlugin.h>
+#include <MarbleWidget.h>
+#include <RenderPlugin.h>
 
 #include <QDebug>
 #include <QApplication>
