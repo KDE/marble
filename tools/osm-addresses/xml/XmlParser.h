@@ -18,8 +18,8 @@
 #include "OsmPlacemark.h"
 #include "OsmRegionTree.h"
 
-#include "marble/GeoDataLineString.h"
-#include "marble/GeoDataPolygon.h"
+#include "GeoDataLineString.h"
+#include "GeoDataPolygon.h"
 
 #include <QObject>
 #include <QFileInfo>

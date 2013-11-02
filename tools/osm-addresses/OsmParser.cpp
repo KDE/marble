@@ -11,17 +11,17 @@
 #include "OsmParser.h"
 #include "OsmRegionTree.h"
 
-#include "marble/GeoDataLinearRing.h"
-#include "marble/GeoDataLineString.h"
-#include "marble/GeoDataPolygon.h"
-#include "marble/GeoDataDocument.h"
-#include "marble/GeoDataFolder.h"
-#include "marble/GeoDataPlacemark.h"
-#include "marble/GeoDataMultiGeometry.h"
-#include "marble/GeoDataStyle.h"
-#include "marble/GeoDataStyleMap.h"
-#include "marble/GeoDataLineStyle.h"
-#include "marble/GeoDataFeature.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataLineString.h"
+#include "GeoDataPolygon.h"
+#include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataMultiGeometry.h"
+#include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
+#include "GeoDataLineStyle.h"
+#include "GeoDataFeature.h"
 #include "geodata/writer/GeoWriter.h"
 #include "geodata/data/GeoDataExtendedData.h"
 
@@ -30,6 +30,8 @@
 
 namespace Marble
 {
+
+using namespace Oxygen;
 
 namespace {
     struct GrahamScanHelper {
@@ -691,9 +693,9 @@ GeoDataLinearRing* OsmParser::convexHull() const
 
 QColor OsmParser::randomColor() const
 {
-    QVector<QColor> colors = QVector<QColor>() << oxygenAluminumGray4 << oxygenBrickRed4;
-    colors << oxygenBrownOrange4 << oxygenForestGreen4 << oxygenHotOrange4;
-    colors << oxygenSeaBlue2 << oxygenSkyBlue4 << oxygenSunYellow6;
+    QVector<QColor> colors = QVector<QColor>() << aluminumGray4 << brickRed4;
+    colors << woodBrown4 << forestGreen4 << hotOrange4;
+    colors << seaBlue2 << skyBlue4 << sunYellow6;
     return colors.at( qrand() % colors.size() );
 }
 
@@ -762,3 +764,5 @@ Coordinate::Coordinate(float lon_, float lat_) : lon(lon_), lat(lat_)
 }
 
 }
+
+#include "OsmParser.moc"
