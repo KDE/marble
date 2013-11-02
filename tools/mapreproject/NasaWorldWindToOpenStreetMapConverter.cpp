@@ -146,3 +146,5 @@ void NasaWorldWindToOpenStreetMapConverter::incNextCluster()
             emit finished();
     }
 }
+
+#include "NasaWorldWindToOpenStreetMapConverter.moc"
