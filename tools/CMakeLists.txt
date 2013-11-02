@@ -1,4 +1,5 @@
 add_subdirectory( routing-instructions )
 add_subdirectory( kml2kml )
 add_subdirectory( poly2kml )
+add_subdirectory( shp2pn2 )
 add_subdirectory( maptheme-previewimage )

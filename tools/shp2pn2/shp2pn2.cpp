@@ -41,18 +41,18 @@
 #include <QApplication>
 #include <QTreeView>
  
-#include <marble/MarbleWidget.h>
-#include <marble/MarbleModel.h>
-#include <marble/MarbleRunnerManager.h>
-#include <marble/GeoDataTreeModel.h>
-#include <marble/GeoDataFeature.h>
-#include <marble/GeoDataDocument.h>
-#include <marble/GeoDataPlacemark.h>
-#include <marble/GeoDataLineString.h>
-#include <marble/GeoDataLinearRing.h>
-#include <marble/GeoDataPolygon.h>
-#include <marble/GeoDataPoint.h>
-#include <marble/GeoDataGeometry.h>
+#include <MarbleWidget.h>
+#include <MarbleModel.h>
+#include <ParsingRunnerManager.h>
+#include <GeoDataTreeModel.h>
+#include <GeoDataFeature.h>
+#include <GeoDataDocument.h>
+#include <GeoDataPlacemark.h>
+#include <GeoDataLineString.h>
+#include <GeoDataLinearRing.h>
+#include <GeoDataPolygon.h>
+#include <GeoDataPoint.h>
+#include <GeoDataGeometry.h>
  
 using namespace Marble;
 
@@ -151,7 +151,7 @@ int main(int argc, char** argv)
     
  
     MarbleModel *model = new MarbleModel;
-    MarbleRunnerManager* manager = new MarbleRunnerManager( model->pluginManager() );
+    ParsingRunnerManager* manager = new ParsingRunnerManager( model->pluginManager() );
  
     GeoDataDocument* document = manager->openFile( inputFilename );
 
