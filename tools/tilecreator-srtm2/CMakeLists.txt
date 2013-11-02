@@ -1,41 +1,27 @@
-project( TileCreatorSrtm2 )
-
-cmake_minimum_required(VERSION 2.8)
-find_package(Qt4 REQUIRED)
+SET (TARGET tilecreator-srtm2)
+PROJECT (${TARGET})
 
 include_directories(
- ${CMAKE_SOURCE_DIR}
- ${CMAKE_BINARY_DIR}
- ../../src/lib
- ../../src/lib/geodata
- ../../src/lib/geodata/scene
- ../../src/lib/geodata/parser
- ${CMAKE_BINARY_DIR}/../../src
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-include( ${QT_USE_FILE} )
+if( QT4_FOUND )
+  include( ${QT_USE_FILE} )
+endif()
 
-set( tilecreator_SRCS
-            ../../src/lib/DownloadPolicy.cpp
-            ../../src/lib/TileCreator.cpp
-            ../../src/lib/TileId.cpp
-            ../../src/lib/TileLoaderHelper.cpp
-            ../../src/lib/ServerLayout.cpp
-            ../../src/lib/geodata/parser/GeoDocument.cpp
-            ../../src/lib/geodata/scene/GeoSceneTexture.cpp
-            ../../src/lib/geodata/scene/GeoSceneLayer.cpp
-            ../../src/lib/geodata/parser/GeoSceneTypes.cpp
-            ../../src/lib/MarbleDirs.cpp
-            ../../src/lib/MarbleDebug.cpp
-            main.cpp
-            tccore.cpp
-)
-
-marble_qt4_automoc( ${tilecreator_SRCS} )
-
+set( ${TARGET}_SRC main.cpp tccore.cpp )
 add_definitions( -DMAKE_MARBLE_LIB -DTILECREATOR )
-add_executable( tilecreator ${tilecreator_SRCS} )
-target_link_libraries( tilecreator ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTMAIN_LIBRARY} )
+add_executable( ${TARGET} ${${TARGET}_SRC} )
+
+if (QT4_FOUND)
+  target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget )
+else()
+  target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} marblewidget )
+endif()
+
 if (APPLE)
-  target_link_libraries (tilecreator ${APP_SERVICES_LIBRARY})
+  target_link_libraries (${TARGET} ${APP_SERVICES_LIBRARY})
 endif (APPLE)
+
+install( TARGETS ${TARGET} RUNTIME DESTINATION bin )

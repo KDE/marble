@@ -25,6 +25,8 @@
 #ifndef MARBLE_TILELOADERHELPER_H
 #define MARBLE_TILELOADERHELPER_H
 
+#include "marble_export.h"
+
 namespace Marble
 {
 
@@ -39,7 +41,7 @@ namespace TileLoaderHelper
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int levelToRow( int levelZeroRows, int level );
+    MARBLE_EXPORT int levelToRow( int levelZeroRows, int level );
 
     /**
      * @brief Get the maximum number of tile columns for a given tile level.
@@ -50,7 +52,7 @@ namespace TileLoaderHelper
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int levelToColumn( int levelZeroColumns, int level );
+    MARBLE_EXPORT int levelToColumn( int levelZeroColumns, int level );
 
     /**
      * @brief Get the tile level for the given maximum number of tile columns.
@@ -61,7 +63,7 @@ namespace TileLoaderHelper
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int rowToLevel( int levelZeroRows, int row );
+    MARBLE_EXPORT int rowToLevel( int levelZeroRows, int row );
 
     /**
      * @brief Get the tile level for the given maximum number of tile columns.
@@ -72,7 +74,7 @@ namespace TileLoaderHelper
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int columnToLevel( int levelZeroColumns, int column );
+    MARBLE_EXPORT int columnToLevel( int levelZeroColumns, int column );
 }
 
 }

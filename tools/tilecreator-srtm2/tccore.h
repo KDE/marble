@@ -17,7 +17,7 @@
 #include <QDebug>
 #include <QObject>
 
-#include "../lib/TileCreator.h"
+#include "TileCreator.h"
 
 namespace Marble
 {

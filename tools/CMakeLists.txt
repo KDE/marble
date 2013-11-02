@@ -1,3 +1,5 @@
+add_subdirectory( tilecreator )
+add_subdirectory( tilecreator-srtm2 )
 add_subdirectory( routing-instructions )
 add_subdirectory( kml2kml )
 add_subdirectory( poly2kml )
