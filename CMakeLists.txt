@@ -381,6 +381,12 @@ include(DistTarget)
 
 add_subdirectory(tests)
 
+option(BUILD_MARBLE_TOOLS "Build various tools related to Marble" OFF)
+add_feature_info("Marble tools" BUILD_MARBLE_TOOLS "Build various Marble tools for e.g. file format conversion. Toggle with BUILD_MARBLE_TOOLS=YES/NO.")
+if(BUILD_MARBLE_TOOLS)
+  add_subdirectory(tools)
+endif()
+
 ####################################################
 # Install extra files
 install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})

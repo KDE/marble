@@ -42,7 +42,6 @@ if( QT_QTDECLARATIVE_FOUND OR Qt5Quick_FOUND )
 ENDIF()
 
 add_subdirectory( apps )
-add_subdirectory( routing-instructions )
 add_subdirectory( lib/marble )
 add_subdirectory( plugins )
 add_subdirectory( bindings )

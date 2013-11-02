@@ -9,12 +9,12 @@ if( QT4_FOUND )
 endif()
 
 set( routing-instructions_SRC
-        ../lib/marble/routing/instructions/InstructionTransformation.cpp
-        ../lib/marble/routing/instructions/RoutingInstruction.cpp
-        ../lib/marble/routing/instructions/RoutingPoint.cpp
-        ../lib/marble/routing/instructions/RoutingWaypoint.cpp
-        ../lib/marble/routing/instructions/WaypointParser.cpp
-        ../routing-instructions/main.cpp
+        ../../src/lib/marble/routing/instructions/InstructionTransformation.cpp
+        ../../src/lib/marble/routing/instructions/RoutingInstruction.cpp
+        ../../src/lib/marble/routing/instructions/RoutingPoint.cpp
+        ../../src/lib/marble/routing/instructions/RoutingWaypoint.cpp
+        ../../src/lib/marble/routing/instructions/WaypointParser.cpp
+        main.cpp
 )
 
 marble_qt4_automoc( ${routing-instructions_SRC} )
