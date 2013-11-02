@@ -9,7 +9,7 @@
 //
 
 
-#include <QApplication>
+#include <QCoreApplication>
 #include <QDataStream>
 #include <QFile>
 #include <QDebug>
@@ -17,7 +17,7 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication  app(argc, argv);
+    QCoreApplication  app(argc, argv);
 
     qDebug( " Syntax: pntdel [-i pnt-sourcefile -o pnt-targetfile -id idNumber] " );
 
