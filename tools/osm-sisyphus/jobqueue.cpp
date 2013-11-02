@@ -61,3 +61,5 @@ void JobQueue::startJob(Job *job)
     m_runningJobs << job;
     QThreadPool::globalInstance()->start(job);
 }
+
+#include "jobqueue.moc"

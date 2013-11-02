@@ -132,3 +132,5 @@ void JobManager::addJob(const PendingJob &job)
     countryJob->setMonavSettings(m_monavSettings.absoluteFilePath());
     m_queue.addJob(countryJob);
 }
+
+#include "jobmanager.moc"

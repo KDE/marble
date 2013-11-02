@@ -317,3 +317,5 @@ QFileInfo Job::searchFile()
     QFileInfo result(m_parameters.base(), subdir + '/' + m_region.id() + ".sqlite");
     return result;
 }
+
+#include "job.moc"
