@@ -8,6 +8,7 @@
 // Copyright 2013      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
+#include "MarbleGlobal.h"
 
 #include <QFile>
 #include <QDebug>
@@ -15,8 +16,6 @@
 #include <QStringList>
 #include <QHash>
 #include <QPair>
-
-#include "../../src/lib/MarbleGlobal.h"
 
 #include <cmath>
 
