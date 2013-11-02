@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
     QCoreApplication  app( argc, argv );
 
 
-    if ( strcmp( argv[ 1 ], "-o" ) != 0 || argc != 4)
+    if ( argc != 4 || strcmp( argv[ 1 ], "-o" ) != 0 )
     {
         qDebug(" dateline -o targetfile sourcefile");
         return 0;
