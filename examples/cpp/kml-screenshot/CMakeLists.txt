@@ -1,4 +1,4 @@
-SET (TARGET kml-inspector)
+SET (TARGET kml-screenshot)
 PROJECT (${TARGET})
 
 include_directories(

@@ -8,6 +8,8 @@
 // Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
+#include "vehicletracking.h"
+
 #include <QApplication>
 #include <QThread>
 #include <QTimer>
@@ -18,39 +20,14 @@
 
 #include <marble/MarbleWidget.h>
 #include <marble/MarbleGlobal.h>
-#include <marble/GeoDataDocument.h>
-#include <marble/GeoDataPlacemark.h>
-#include <marble/GeoDataLineString.h>
-#include <marble/GeoDataTreeModel.h>
+#include <GeoDataDocument.h>
+#include <GeoDataPlacemark.h>
+#include <GeoDataLineString.h>
+#include <GeoDataTreeModel.h>
 #include <marble/MarbleModel.h>
 
 
 using namespace Marble;
-
-// CarWorker Class
-class CarWorker : public QObject
-{
-    Q_OBJECT
-public:
-    CarWorker(const GeoDataCoordinates& city, qreal radius, qreal speed);
-
-signals:
-    void coordinatesChanged(GeoDataCoordinates coord);
-
-public slots:
-    void startWork();
-    void finishWork();
-
-private slots:
-    void iterate();
-
-private:
-    QTimer *m_timer;
-    GeoDataCoordinates m_city;
-    qreal m_radius;
-    qreal m_speed;
-    qreal m_alpha;
-};
 
 CarWorker::CarWorker(const GeoDataCoordinates &city, qreal radius, qreal speed) :
     QObject(),
@@ -83,27 +60,6 @@ void CarWorker::finishWork()
 {
     m_timer->stop();
 }
-
-// Window Class
-class Window : public QWidget
-{
-    Q_OBJECT
-public:
-    Window(QWidget *parent = 0);
-    void startCars();
-
-public slots:
-    void setCarCoordinates(const GeoDataCoordinates &coord);
-
-private:
-    MarbleWidget *m_marbleWidget;
-    CarWorker *m_firstWorker;
-    CarWorker *m_secondWorker;
-    GeoDataPlacemark *m_carFirst;
-    GeoDataPlacemark *m_carSecond;
-    QThread *m_threadFirst;
-    QThread *m_threadSecond;
-};
 
 Window::Window(QWidget *parent) :
     QWidget(parent),

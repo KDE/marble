@@ -15,8 +15,8 @@
   */
 
 #include <marble/MarbleWidget.h>
-#include <marble/GeoDataCoordinates.h>
-#include <marble/GeoDataLineString.h>
+#include <GeoDataCoordinates.h>
+#include <GeoDataLineString.h>
 #include <marble/RenderPlugin.h>
 #include <marble/Quaternion.h>
 

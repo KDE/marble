@@ -11,8 +11,8 @@
 #include <QApplication>
 #include <marble/MarbleWidget.h>
 #include <marble/MarbleModel.h>
-#include <marble/RouteRequest.h>
-#include <marble/RoutingManager.h>
+#include <routing/RouteRequest.h>
+#include <routing/RoutingManager.h>
 
 using namespace Marble;
 

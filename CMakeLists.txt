@@ -387,6 +387,12 @@ if(BUILD_MARBLE_TOOLS)
   add_subdirectory(tools)
 endif()
 
+option(BUILD_MARBLE_EXAMPLES "Build C++ examples showing how to use the Marble library" OFF)
+add_feature_info("Marble library C++ examples" BUILD_MARBLE_EXAMPLES "Build C++ examples showing how to use the Marble library. Toggle with BUILD_MARBLE_EXAMPLES=YES/NO.")
+if(BUILD_MARBLE_EXAMPLES)
+  add_subdirectory(examples/cpp)
+endif()
+
 ####################################################
 # Install extra files
 install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})

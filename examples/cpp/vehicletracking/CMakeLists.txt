@@ -1,4 +1,4 @@
-SET (TARGET kml-inspector)
+SET (TARGET vehicletracking)
 PROJECT (${TARGET})
 
 include_directories(
@@ -10,7 +10,8 @@ if( QT4_FOUND )
   include( ${QT_USE_FILE} )
 endif()
 
-set( ${TARGET}_SRC main.cpp)
+set( ${TARGET}_SRC vehicletracking.cpp)
+marble_qt4_automoc( ${${TARGET}_SRC} )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
 target_link_libraries( ${TARGET} marblewidget )

@@ -1,13 +1,23 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
 SET (TARGET animation-video)
 PROJECT (${TARGET})
 
-FIND_PACKAGE (Qt4 4.6.0 REQUIRED QtCore QtGui)
-FIND_PACKAGE (Marble REQUIRED)
-FIND_PACKAGE (OpenCV REQUIRED)
-INCLUDE (${QT_USE_FILE})
-INCLUDE_DIRECTORIES (${MARBLE_INCLUDE_DIR})
-SET (LIBS ${LIBS} ${MARBLE_LIBRARIES} ${QT_LIBRARIES} ${OpenCV_LIBRARIES})
+include_directories(
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
+ ${QT_INCLUDE_DIR}
+)
+if( QT4_FOUND )
+  include( ${QT_USE_FILE} )
+endif()
 
-ADD_EXECUTABLE (${TARGET} main.cpp)
-TARGET_LINK_LIBRARIES (${TARGET} ${LIBS})
+set( ${TARGET}_SRC main.cpp)
+add_executable( ${TARGET} ${${TARGET}_SRC} )
+
+target_link_libraries( ${TARGET} ${OpenCV_LIBRARIES} marblewidget )
+if (QT4_FOUND)
+  target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} )
+else()
+  target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} )
+endif()
+
+install( TARGETS ${TARGET} RUNTIME DESTINATION bin )

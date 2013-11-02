@@ -15,7 +15,7 @@
 
 #include <marble/MarbleWidget.h>
 #include <marble/MarbleModel.h>
-#include <marble/MarbleRunnerManager.h>
+#include <marble/ParsingRunnerManager.h>
 #include <marble/GeoDataTreeModel.h>
 
 using namespace Marble;
@@ -31,7 +31,7 @@ int main(int argc, char** argv)
     }
 
     MarbleModel model;
-    MarbleRunnerManager manager( model.pluginManager() );
+    ParsingRunnerManager manager( model.pluginManager() );
 
     GeoDataDocument* document = manager.openFile( inputFile.absoluteFilePath() );
     if ( !document ) {

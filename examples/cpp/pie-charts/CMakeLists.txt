@@ -1,4 +1,4 @@
-SET (TARGET kml-inspector)
+SET (TARGET pie-charts)
 PROJECT (${TARGET})
 
 include_directories(

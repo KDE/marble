@@ -1,4 +1,4 @@
-SET (TARGET kml-inspector)
+SET (TARGET route-image)
 PROJECT (${TARGET})
 
 include_directories(

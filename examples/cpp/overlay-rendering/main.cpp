@@ -4,8 +4,8 @@
 #include <QImage>
 
 #include <marble/MarbleWidget.h>
-#include <marble/GeoDataDocument.h>
-#include <marble/GeoDataGroundOverlay.h>
+#include <GeoDataDocument.h>
+#include <GeoDataGroundOverlay.h>
 #include <marble/GeoDataTreeModel.h>
 #include <marble/MarbleModel.h>
 
