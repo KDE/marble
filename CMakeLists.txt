@@ -49,7 +49,7 @@ if(QT4_FOUND)
   marble_set_package_properties( Qt4 PROPERTIES DESCRIPTION "cross-platform application framework" )
   marble_set_package_properties( Qt4 PROPERTIES URL "http://qt.digia.com/" )
   marble_set_package_properties( Qt4 PROPERTIES TYPE REQUIRED PURPOSE "core framework" )
-  IF ( NOT QT_QTDECLARATIVE_LIBRARY )
+  IF ( NOT QT_QTDECLARATIVE_FOUND )
     # older cmake versions have a FindQt4.cmake without support for declarative,
     # but the library may still be available
     FIND_PACKAGE(QtDeclarative)
