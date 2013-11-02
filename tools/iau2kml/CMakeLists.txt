@@ -11,13 +11,12 @@ if( QT4_FOUND )
 endif()
 
 set( ${TARGET}_SRC iau2kml.cpp )
-add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
 if (QT4_FOUND)
-  target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget )
+  target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} )
 else()
-  target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} marblewidget )
+  target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} )
 endif()
 
 install( TARGETS ${TARGET} RUNTIME DESTINATION bin )
