@@ -17,7 +17,7 @@
 #include <QFile>
 #include <QVector>
 #include <QStringList>
-#include "../../src/lib/Quaternion.h"
+#include "Quaternion.h"
 
 using namespace Marble;
 

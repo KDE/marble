@@ -1,6 +1,7 @@
 add_subdirectory( tilecreator )
 add_subdirectory( tilecreator-srtm2 )
 add_subdirectory( routing-instructions )
+add_subdirectory( dateline )
 add_subdirectory( asc2kml )
 add_subdirectory( constellations2kml )
 add_subdirectory( kml2kml )
