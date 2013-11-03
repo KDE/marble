@@ -23,5 +23,3 @@ endif()
 if (APPLE)
   target_link_libraries (${TARGET} ${APP_SERVICES_LIBRARY})
 endif (APPLE)
-
-install( TARGETS ${TARGET} RUNTIME DESTINATION bin )

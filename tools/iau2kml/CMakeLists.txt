@@ -18,5 +18,3 @@ if (QT4_FOUND)
 else()
   target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} )
 endif()
-
-install( TARGETS ${TARGET} RUNTIME DESTINATION bin )
