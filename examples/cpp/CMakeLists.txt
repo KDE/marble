@@ -2,6 +2,8 @@
 # and change #include statements to use <marble/...> and "..." includes only
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../src/lib)
 
+set( MARBLE_EXAMPLES_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/apps/marble/examples )
+
 add_subdirectory( hello-marble )
 add_subdirectory( map-properties )
 add_subdirectory( custom-layers )
