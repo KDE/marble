@@ -14,7 +14,7 @@ add_subdirectory( reverse-geocoding )
 add_subdirectory( vehicletracking )
 add_subdirectory( search )
 
-FIND_PACKAGE (OpenCV REQUIRED)
+FIND_PACKAGE (OpenCV QUIET)
 if(OPENCV_FOUND)
   add_subdirectory( animation-video )
 endif()
