@@ -64,6 +64,8 @@ QStringList MyPaintLayer::renderPosition() const
 
 bool MyPaintLayer::eventFilter(QObject *obj, QEvent *event)
 {
+    Q_UNUSED(obj)
+
     // Adjust the current layer when '+' is pressed
     if (event->type() == QEvent::KeyPress)
     {
@@ -89,6 +91,10 @@ GeoDataCoordinates MyPaintLayer::approximate(const GeoDataCoordinates &base, qre
 bool MyPaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
     const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED(viewport)
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
+
     // Have window title reflect the current paint layer
     m_widget->setWindowTitle(renderPosition().first());
     GeoDataCoordinates home(8.4, 48.0, 0.0, GeoDataCoordinates::Degree);

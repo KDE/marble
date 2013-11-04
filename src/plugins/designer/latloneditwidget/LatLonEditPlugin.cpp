@@ -30,6 +30,8 @@ bool LatLonEditPlugin::isInitialized() const
 }
 void LatLonEditPlugin::initialize(QDesignerFormEditorInterface *core)
 {
+    Q_UNUSED(core)
+
     m_initialized = true;
 }
 bool LatLonEditPlugin::isContainer() const

@@ -26,6 +26,9 @@ bool SVGXmlHandler::startElement(const QString& nspace,
                                  const QString& qName,
                                  const QXmlAttributes &atts)
 {
+    Q_UNUSED(nspace)
+    Q_UNUSED(localName)
+
     qDebug();
     if ( qName == "g" ) {
         qDebug( "Parsing Data ..." );

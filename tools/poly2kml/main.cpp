@@ -65,7 +65,6 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
         GeoDataLinearRing *box = new GeoDataLinearRing;
         while ( !stream.atEnd() ) {
             bool inside = true;
-            bool skip = false;
             QString line = stream.readLine().trimmed();
             QStringList entries = line.split( QLatin1Char( ' ' ), QString::SkipEmptyParts );
             if ( entries.size() == 1 ) {
@@ -78,7 +77,6 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
                 } else if ( entries.first() == "END" && !inside ) {
                     qDebug() << "END not expected here";
                 } else if ( entries.first().startsWith( QLatin1String( "!" ) ) ) {
-                    skip = true;
                     qDebug() << "Warning: Negative polygons not supported, skipping";
                 } else {
                     //int number = entries.first().toInt();
