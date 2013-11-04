@@ -9,8 +9,8 @@
 //
 
 #include "tccore.h"
+#include <MarbleGlobal.h>
 #include <TileLoaderHelper.h>
-#include <global.h>
 #include <QFile>
 #include <cmath>
 #include <QPainter>
