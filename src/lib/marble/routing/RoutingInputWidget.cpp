@@ -132,9 +132,7 @@ void RoutingInputWidgetPrivate::updateDescription()
 RoutingInputLineEdit::RoutingInputLineEdit( QWidget *parent ) :
     MarbleLineEdit( parent )
 {
-#if QT_VERSION >= 0x40700
     setPlaceholderText( QObject::tr( "Address or search term..." ) );
-#endif
 }
 
 void RoutingInputLineEdit::keyPressEvent(QKeyEvent *event)

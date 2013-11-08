@@ -355,9 +355,7 @@ GoToDialog::GoToDialog( MarbleModel* marbleModel, QWidget * parent, Qt::WindowFl
         setWindowFlags( Qt::Window );
 #endif // Q_WS_MAEMO_5
 
-#if QT_VERSION >= 0x40700
     d->searchLineEdit->setPlaceholderText( tr( "Address or search term" ) );
-#endif
 
     d->m_searchResultModel.setRootDocument( d->m_searchResult );
     d->bookmarkListView->setModel( &d->m_targetModel );
