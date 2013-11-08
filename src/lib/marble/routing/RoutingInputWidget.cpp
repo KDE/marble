@@ -153,7 +153,8 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int 
         m_placemarkModel( 0 ), m_route( m_marbleModel->routingManager()->routeRequest() ), m_index( index ),
         m_currentFrame( 0 ),
         m_bookmarkAction( 0 ), m_mapInput( 0 ), m_currentLocationAction( 0 ),
-        m_centerAction( 0 )
+        m_centerAction( 0 ),
+        m_menu( 0 )
 {
     m_lineEdit = new RoutingInputLineEdit( parent );
     m_lineEdit->setDecorator( addDropDownIndicator( m_route->pixmap( m_index ) ) );
