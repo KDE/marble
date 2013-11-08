@@ -254,7 +254,6 @@ QPixmap RoutingInputWidgetPrivate::addDropDownIndicator(const QPixmap &pixmap) c
 RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget *parent ) :
         QWidget( parent ), d( new RoutingInputWidgetPrivate( widget, index, this ) )
 {
-    connect(d->m_lineEdit, SIGNAL(decoratorButtonClicked()), this, SLOT(showMenu()));
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setSpacing( 0 );
     layout->setMargin( 0 );
@@ -268,6 +267,7 @@ RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget
         d->createMenu( this );
         layout->addWidget( d->m_lineEdit );
         layout->addWidget(d->m_removeButton);
+        connect(d->m_lineEdit, SIGNAL(decoratorButtonClicked()), this, SLOT(showMenu()));
     }
 
     connect( d->m_removeButton, SIGNAL(clicked()), this, SLOT(requestRemoval()) );
