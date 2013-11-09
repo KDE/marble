@@ -63,9 +63,7 @@ set(marblewidget_SRCS
     MarbleAbstractPresenter.cpp
     MarbleModel.cpp
     MarbleMap.cpp
-    MarbleControlBox.cpp
     MarbleColors.cpp
-    NavigationWidget.cpp
     MapViewWidget.cpp
     CelestialSortFilterProxyModel.cpp
     FileViewWidget.cpp
@@ -305,7 +303,6 @@ endif()
 set (marblewidget_UI
     ${osm_UIS}
     LatLonBoxWidget.ui
-    NavigationWidget.ui
     MapViewWidget.ui
     CurrentLocationWidget.ui
     FileViewWidget.ui
@@ -446,8 +443,6 @@ install( FILES
     MarbleWidget.h
     MarbleMap.h
     MarbleModel.h
-    MarbleControlBox.h
-    NavigationWidget.h
     MapViewWidget.h
     CelestialSortFilterProxyModel.h
     LegendWidget.h
