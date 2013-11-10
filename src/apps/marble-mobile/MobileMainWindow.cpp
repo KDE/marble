@@ -536,10 +536,10 @@ void MainWindow::writeSettings()
     settings.endGroup();
 
     settings.beginGroup( "Tracking" );
-        Q_ASSERT( m_trackingWindow );
-        CurrentLocationWidget* trackingWidget = static_cast<CurrentLocationWidget *>( m_trackingWindow->centralWidget() );
-        if ( trackingWidget ) {
-            // Can be null due to lazy initialization
+        // Can be null due to lazy initialization
+        if (m_trackingWindow) {
+            const CurrentLocationWidget *trackingWidget = static_cast<const CurrentLocationWidget *>( m_trackingWindow->centralWidget() );
+            Q_ASSERT( trackingWidget != 0 );
             settings.setValue( "recenterMode", trackingWidget->recenterMode() );
             settings.setValue( "autoZoom", trackingWidget->autoZoom() );
             settings.setValue( "trackVisible", trackingWidget->trackVisible() );
