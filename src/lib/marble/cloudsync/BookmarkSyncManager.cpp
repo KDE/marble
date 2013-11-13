@@ -642,6 +642,7 @@ GeoDataFolder* BookmarkSyncManager::Private::createFolders( GeoDataContainer *co
 GeoDataDocument* BookmarkSyncManager::Private::constructDocument( const QList<DiffItem> &mergedList )
 {
     GeoDataDocument *document = new GeoDataDocument();
+    document->setName( tr( "Bookmarks" ) );
 
     foreach( DiffItem item, mergedList ) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark( item.m_placemarkA );
