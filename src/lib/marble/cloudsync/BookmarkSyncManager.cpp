@@ -241,11 +241,11 @@ bool BookmarkSyncManager::isBookmarkSyncEnabled() const
 
 void BookmarkSyncManager::setBookmarkSyncEnabled( bool enabled )
 {
-    if ( d->m_bookmarkSyncEnabled != enabled ) {
-        d->m_bookmarkSyncEnabled = enabled;
+    bool const old_state = isBookmarkSyncEnabled();
+    d->m_bookmarkSyncEnabled = enabled;
+    if ( old_state != isBookmarkSyncEnabled() ) {
         emit bookmarkSyncEnabledChanged( d->m_bookmarkSyncEnabled );
-
-        if ( enabled ) {
+        if ( isBookmarkSyncEnabled() ) {
             startBookmarkSync();
         }
     }
