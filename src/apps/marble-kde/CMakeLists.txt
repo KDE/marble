@@ -5,7 +5,6 @@ set(marble_kde_SRCS
 )
 
 set(marblepart_SRCS marble_part.cpp)
-MESSAGE(STATUS "including directory ${KDE4_INCLUDE_DIR}")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui ${KDE4_INCLUDE_DIR})
 kde4_add_kcfg_files(marblepart_SRCS settings.kcfgc)
 kde4_add_plugin(marble_part WITH_PREFIX ${marblepart_SRCS})
