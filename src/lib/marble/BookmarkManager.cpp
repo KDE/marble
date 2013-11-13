@@ -111,10 +111,12 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
     delete d->m_bookmarkDocument;
     d->m_bookmarkDocument = document;
 
-    d->m_treeModel->addDocument( d->m_bookmarkDocument );
-
     if ( recover ) {
+        d->resetBookmarkDocument();
         updateBookmarkFile();
+    } else {
+        Q_ASSERT( d->m_bookmarkDocument && "d->m_bookmarkDocument is 0 but must not be. Please report a bug at http://bugs.kde.org" );
+        d->m_treeModel->addDocument( d->m_bookmarkDocument );
     }
 
     emit bookmarksChanged();
