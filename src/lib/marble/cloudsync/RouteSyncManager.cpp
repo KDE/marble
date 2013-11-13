@@ -88,7 +88,7 @@ void RouteSyncManager::setRoutingManager(RoutingManager *routingManager)
 
 bool RouteSyncManager::isRouteSyncEnabled() const
 {
-    return d->m_routeSyncEnabled;
+    return d->m_routeSyncEnabled && d->m_cloudSyncManager && d->m_cloudSyncManager->isSyncEnabled();
 }
 
 void RouteSyncManager::setRouteSyncEnabled( bool enabled )
