@@ -44,8 +44,8 @@
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2013-06-23</date>
-		 <releaseinfo>1.6</releaseinfo>
+		 <date>2013-11-17</date>
+		 <releaseinfo>1.7</releaseinfo>
 
 		 <abstract>
 			<para>&marble; is a geographical atlas and a virtual globe 
@@ -962,6 +962,48 @@ the system's graphics drivers. </para>
 <term><guilabel>When &marble; starts</guilabel></term>
 <listitem>
 <para>Here, you can choose the date and time which will be used on &marble; start: system time or the last session time.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configsynchronization">
+<title>Synchronization Configuration</title>
+<para>Marble can upload route and bookmark data to <ulink 
+  url="https://en.wikipedia.org/wiki/OwnCloud">ownCloud</ulink> server and 
+synchronize them between &marble; instances installed on different devices.
+</para>
+<screenshot>
+<screeninfo>The Synchronization configuration dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-synchronization.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The Synchronization configuration dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Enable synchronization</guilabel></term>
+<listitem>
+  <para>The synchronization can be enabled or disabled using this item. 
+When the synchronization is enabled you can choose whether to synchronize 
+route and bookmark data using the corresponding checkboxes or click on 
+<guibutton>Sync now</guibutton> to initiate synchronization 
+immediately.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Credentials</guilabel></term>
+<listitem>
+<para>Here, you can enter your ownClowd credentials. More information on 
+ownClowd configuration can be found on the <ulink 
+url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 </listitem>
 </varlistentry>
 
