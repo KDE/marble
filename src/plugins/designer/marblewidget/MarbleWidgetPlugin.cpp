@@ -17,26 +17,20 @@
 
 
 MarbleWidgetPlugin::MarbleWidgetPlugin(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+      m_initialized( false )
 {
-    initialized = false;
-}
-
-MarbleWidgetPlugin::~MarbleWidgetPlugin()
-{
+    // nothing to do
 }
 
 void MarbleWidgetPlugin::initialize(QDesignerFormEditorInterface * /* core */)
 {
-    if (initialized)
-        return;
-
-    initialized = true;
+    m_initialized = true;
 }
 
 bool MarbleWidgetPlugin::isInitialized() const
 {
-    return initialized;
+    return m_initialized;
 }
 
 QWidget *MarbleWidgetPlugin::createWidget(QWidget *parent)
@@ -54,7 +48,7 @@ QString MarbleWidgetPlugin::name() const
 
 QString MarbleWidgetPlugin::group() const
 {
-    return "Marble Desktop Globe";
+    return "Marble Virtual Globe";
 }
 
 QIcon MarbleWidgetPlugin::icon() const
@@ -64,12 +58,12 @@ QIcon MarbleWidgetPlugin::icon() const
 
 QString MarbleWidgetPlugin::toolTip() const
 {
-    return "";
+    return QString();
 }
 
 QString MarbleWidgetPlugin::whatsThis() const
 {
-    return "";
+    return QString();
 }
 
 bool MarbleWidgetPlugin::isContainer() const

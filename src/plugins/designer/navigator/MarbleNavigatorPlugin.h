@@ -30,7 +30,6 @@ class MarbleNavigatorPlugin : public QObject, public QDesignerCustomWidgetInterf
 
 public:
     explicit MarbleNavigatorPlugin(QObject *parent = 0);
-    virtual ~MarbleNavigatorPlugin();
 
     bool isContainer() const;
     bool isInitialized() const;
@@ -46,7 +45,7 @@ public:
     void initialize(QDesignerFormEditorInterface *core);
 
 private:
-    bool initialized;
+    bool m_initialized;
 };
 
 #endif

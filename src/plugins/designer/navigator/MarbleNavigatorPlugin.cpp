@@ -16,31 +16,24 @@
 
 
 MarbleNavigatorPlugin::MarbleNavigatorPlugin(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+      m_initialized(false)
 {
-    initialized = false;
-}
-
-MarbleNavigatorPlugin::~MarbleNavigatorPlugin()
-{
+    //nothing to do
 }
 
 void MarbleNavigatorPlugin::initialize(QDesignerFormEditorInterface * /* core */)
 {
-    if (initialized)
-        return;
-
-    initialized = true;
+    m_initialized = true;
 }
 
 bool MarbleNavigatorPlugin::isInitialized() const
 {
-    return initialized;
+    return m_initialized;
 }
 
 QWidget *MarbleNavigatorPlugin::createWidget(QWidget *parent)
 {
-    // Create the Model (Globe) and one view.
     return new Marble::MarbleNavigator( parent );
 }
 
@@ -51,7 +44,7 @@ QString MarbleNavigatorPlugin::name() const
 
 QString MarbleNavigatorPlugin::group() const
 {
-    return "Marble Desktop Globe";
+    return "Marble Virtual Globe";
 }
 
 QIcon MarbleNavigatorPlugin::icon() const
@@ -61,12 +54,12 @@ QIcon MarbleNavigatorPlugin::icon() const
 
 QString MarbleNavigatorPlugin::toolTip() const
 {
-    return "";
+    return QString();
 }
 
 QString MarbleNavigatorPlugin::whatsThis() const
 {
-    return "";
+    return QString();
 }
 
 bool MarbleNavigatorPlugin::isContainer() const
