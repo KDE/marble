@@ -701,7 +701,7 @@ void MarbleWidget::setProjection( Projection projection )
 
 void MarbleWidget::setProjection( int projection )
 {
-    setProjection( (Projection)( projection ) );
+    setProjection( Projection( qAbs( projection ) % (Mercator+1) ) );
 }
 
 void MarbleWidget::moveLeft( FlyToMode mode )
