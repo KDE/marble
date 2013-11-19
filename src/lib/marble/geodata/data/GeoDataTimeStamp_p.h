@@ -25,7 +25,15 @@ class GeoDataTimeStampPrivate
     QDateTime m_when;
 
     GeoDataTimeStamp::TimeResolution m_resolution;
+
+    GeoDataTimeStampPrivate();
 };
+
+GeoDataTimeStampPrivate::GeoDataTimeStampPrivate() :
+  m_resolution( GeoDataTimeStamp::SecondResolution )
+{
+  // nothing to do
+}
 
 } // namespace Marble
 
