@@ -63,6 +63,11 @@ class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
     void setEnd( const QDateTime& end );
 
     /**
+     * @return True iff begin and end are valid and begin is <= end
+     */
+    bool isValid() const;
+
+    /**
      * @brief Serialize the timespan to a stream
      * @param  stream  the stream
      */
