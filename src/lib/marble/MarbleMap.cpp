@@ -1040,6 +1040,7 @@ void MarbleMap::setPropertyValue( const QString& name, bool value )
     mDebug() << "In MarbleMap the property " << name << "was set to " << value;
     if ( d->m_model->mapTheme() ) {
         d->m_model->mapTheme()->settings()->setPropertyValue( name, value );
+        d->m_textureLayer.setNeedsUpdate();
     }
     else {
         mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
