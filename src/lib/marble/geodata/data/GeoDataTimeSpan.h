@@ -63,7 +63,7 @@ class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
     void setEnd( const QDateTime& end );
 
     /**
-     * @return True iff begin and end are valid and begin is <= end
+     * @return True iff either of begin or end is valid, or if begin and end are both valid and begin is <= end
      */
     bool isValid() const;
 

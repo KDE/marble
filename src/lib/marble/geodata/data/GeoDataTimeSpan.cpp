@@ -56,6 +56,11 @@ void GeoDataTimeSpan::setEnd( const QDateTime& end )
 
 bool GeoDataTimeSpan::isValid() const
 {
+  if (d->m_begin.isValid() != !d->m_end.isValid()) {
+    // Unbounded start or end
+    return true;
+  }
+
   return d->m_begin.isValid() && d->m_end.isValid() && d->m_begin <= d->m_end;
 }
 
