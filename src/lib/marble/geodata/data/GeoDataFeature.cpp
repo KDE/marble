@@ -599,9 +599,14 @@ bool GeoDataFeature::isGloballyVisible() const
 }
 
 
-GeoDataTimeSpan& GeoDataFeature::timeSpan() const
+const GeoDataTimeSpan &GeoDataFeature::timeSpan() const
 {
-    return d->m_timeSpan;
+  return d->m_timeSpan;
+}
+
+GeoDataTimeSpan &GeoDataFeature::timeSpan()
+{
+  return d->m_timeSpan;
 }
 
 void GeoDataFeature::setTimeSpan( const GeoDataTimeSpan &timeSpan )
@@ -610,9 +615,14 @@ void GeoDataFeature::setTimeSpan( const GeoDataTimeSpan &timeSpan )
     d->m_timeSpan = timeSpan;
 }
 
-GeoDataTimeStamp&  GeoDataFeature::timeStamp() const
+const GeoDataTimeStamp &GeoDataFeature::timeStamp() const
 {
-    return d->m_timeStamp;
+  return d->m_timeStamp;
+}
+
+GeoDataTimeStamp &GeoDataFeature::timeStamp()
+{
+  return d->m_timeStamp;
 }
 
 void GeoDataFeature::setTimeStamp( const GeoDataTimeStamp &timeStamp )

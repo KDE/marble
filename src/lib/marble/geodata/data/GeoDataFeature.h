@@ -347,7 +347,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the timespan of the feature.
      */
-    GeoDataTimeSpan& timeSpan() const;
+    const GeoDataTimeSpan& timeSpan() const;
+    GeoDataTimeSpan& timeSpan();
 
     /**
      * Set the timespan of the feature.
@@ -358,7 +359,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the timestamp of the feature.
      */
-    GeoDataTimeStamp& timeStamp() const;
+    const GeoDataTimeStamp& timeStamp() const;
+    GeoDataTimeStamp& timeStamp();
 
     /**
      * Set the timestamp of the feature.
