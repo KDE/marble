@@ -25,10 +25,10 @@ bool KmlLatLonAltBoxWriter::write( const GeoNode *node,
 {
     const GeoDataLatLonAltBox *latLonAltBox = static_cast<const GeoDataLatLonAltBox*>( node );
     writer.writeStartElement(kml::kmlTag_LatLonAltBox);
-    writer.writeTextElement( kml::kmlTag_north, QString::number(latLonAltBox->north()) );
-    writer.writeTextElement( kml::kmlTag_south, QString::number(latLonAltBox->south()) );
-    writer.writeTextElement( kml::kmlTag_east,  QString::number(latLonAltBox->east()) );
-    writer.writeTextElement( kml::kmlTag_west,  QString::number(latLonAltBox->west()) );
+    writer.writeTextElement( kml::kmlTag_north, QString::number(latLonAltBox->north( GeoDataCoordinates::Degree )) );
+    writer.writeTextElement( kml::kmlTag_south, QString::number(latLonAltBox->south( GeoDataCoordinates::Degree )) );
+    writer.writeTextElement( kml::kmlTag_east,  QString::number(latLonAltBox->east( GeoDataCoordinates::Degree )) );
+    writer.writeTextElement( kml::kmlTag_west,  QString::number(latLonAltBox->west( GeoDataCoordinates::Degree )) );
     writer.writeTextElement( kml::kmlTag_minAltitude, QString::number(latLonAltBox->minAltitude()) );
     writer.writeTextElement( kml::kmlTag_maxAltitude, QString::number(latLonAltBox->maxAltitude()) );
     QString const altitudeMode = KmlGroundOverlayWriter::altitudeModeToString( latLonAltBox->altitudeMode() );
