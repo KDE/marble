@@ -14,6 +14,7 @@
 #include <QDateTime>
 
 #include "GeoDataTypes.h"
+#include "GeoDataTimeStamp.h"
 
 namespace Marble
 {
@@ -26,8 +27,8 @@ class GeoDataTimeSpanPrivate
         return GeoDataTypes::GeoDataTimeSpanType;
     }
 
-    QDateTime m_begin;
-    QDateTime m_end;
+    GeoDataTimeStamp m_begin;
+    GeoDataTimeStamp m_end;
 };
 
 } // namespace Marble

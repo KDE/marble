@@ -14,6 +14,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlTimeStampTagWriter.h"
 
 namespace Marble
 {
@@ -26,15 +27,14 @@ static GeoTagWriterRegistrar s_writerLookAt(
 bool KmlTimeSpanWriter::write( const GeoNode *node,
 			       GeoWriter& writer ) const
 {
+    Q_ASSERT( node->nodeType() == GeoDataTypes::GeoDataTimeSpanType );
     const GeoDataTimeSpan *timespan =
 	static_cast<const GeoDataTimeSpan*>( node );
 
     writer.writeStartElement( kml::kmlTag_TimeSpan );
 
-    writer.writeTextElement( "begin",
-			     timespan->begin().toString(Qt::ISODate) );
-    writer.writeTextElement( "end",
-			     timespan->end().toString(Qt::ISODate) );
+    writer.writeTextElement( "begin", KmlTimeStampTagWriter::toString( timespan->begin() ) );
+    writer.writeTextElement( "end", KmlTimeStampTagWriter::toString( timespan->end() ) );
 
     writer.writeEndElement();
 

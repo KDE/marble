@@ -27,6 +27,8 @@ public:
 
     static QDateTime parse( const QString &dateTime );
 
+    static GeoDataTimeStamp parseTimestamp( const QString &dateTime );
+
 private:
     static Marble::GeoDataTimeStamp::TimeResolution modify( QString& whenString );
 };

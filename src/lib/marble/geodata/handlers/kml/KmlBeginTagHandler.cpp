@@ -17,6 +17,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataTimeSpan.h"
 #include "GeoParser.h"
+#include "KmlWhenTagHandler.h"
 
 namespace Marble
 {
@@ -32,8 +33,8 @@ GeoNode* KmlbeginTagHandler::parse( GeoParser& parser ) const
 
     if( parentItem.represents( kmlTag_TimeSpan ) ) {
         QString beginString = parser.readElementText().trimmed();
-        QDateTime begin = KmlwhenTagHandler::parse( beginString );
-        parentItem.nodeAs<GeoDataTimeSpan>()->setBegin( begin );
+        GeoDataTimeStamp beginStamp = KmlwhenTagHandler::parseTimestamp( beginString );
+        parentItem.nodeAs<GeoDataTimeSpan>()->setBegin( beginStamp );
     }
 
     return 0;

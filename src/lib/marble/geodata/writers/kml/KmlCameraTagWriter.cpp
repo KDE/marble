@@ -34,10 +34,10 @@ bool KmlCameraTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     }
 
     writer.writeStartElement("gx:TimeSpan");
-    if (camera->timeSpan().begin().isValid())
-        writer.writeElement("begin", camera->timeSpan().begin().toString(Qt::ISODate));
-    if (camera->timeSpan().end().isValid())
-        writer.writeElement("end", camera->timeSpan().end().toString(Qt::ISODate));
+    if (camera->timeSpan().begin().when().isValid())
+        writer.writeElement("begin", camera->timeSpan().begin().when().toString(Qt::ISODate));
+    if (camera->timeSpan().end().when().isValid())
+        writer.writeElement("end", camera->timeSpan().end().when().toString(Qt::ISODate));
     writer.writeEndElement();
 
     writer.writeElement( "longitude", QString::number( camera->longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );

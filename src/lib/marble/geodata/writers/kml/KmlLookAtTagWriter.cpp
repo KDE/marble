@@ -39,10 +39,10 @@ bool KmlLookAtTagWriter::write( const GeoNode *node,
     }
 
     writer.writeStartElement("gx:TimeSpan");
-    if (lookAt->timeSpan().begin().isValid())
-        writer.writeElement("begin", lookAt->timeSpan().begin().toString(Qt::ISODate));
-    if (lookAt->timeSpan().end().isValid())
-        writer.writeElement("end", lookAt->timeSpan().end().toString(Qt::ISODate));
+    if (lookAt->timeSpan().begin().when().isValid())
+        writer.writeElement("begin", lookAt->timeSpan().begin().when().toString(Qt::ISODate));
+    if (lookAt->timeSpan().end().when().isValid())
+        writer.writeElement("end", lookAt->timeSpan().end().when().toString(Qt::ISODate));
     writer.writeEndElement();
 
     writer.writeElement( "longitude", QString::number( lookAt->longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );

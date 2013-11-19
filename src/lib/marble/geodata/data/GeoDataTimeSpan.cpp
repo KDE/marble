@@ -44,32 +44,41 @@ const char* GeoDataTimeSpan::nodeType() const
     return d->nodeType();
 }
 
-QDateTime GeoDataTimeSpan::end() const
+const GeoDataTimeStamp & GeoDataTimeSpan::end() const
 {
-    return d->m_end;
+  return d->m_end;
 }
 
-void GeoDataTimeSpan::setEnd( const QDateTime& end )
+GeoDataTimeStamp &GeoDataTimeSpan::end()
+{
+  return d->m_end;
+}
+
+void GeoDataTimeSpan::setEnd( const GeoDataTimeStamp& end )
 {
   d->m_end = end;
 }
 
 bool GeoDataTimeSpan::isValid() const
 {
-  if (d->m_begin.isValid() != !d->m_end.isValid()) {
-    // Unbounded start or end
+  if (d->m_begin.when().isValid() != d->m_end.when().isValid()) {
     return true;
   }
 
-  return d->m_begin.isValid() && d->m_end.isValid() && d->m_begin <= d->m_end;
+  return d->m_begin.when().isValid() && d->m_end.when().isValid() && d->m_begin.when() <= d->m_end.when();
 }
 
-QDateTime GeoDataTimeSpan::begin() const
+const GeoDataTimeStamp & GeoDataTimeSpan::begin() const
 {
-    return d->m_begin;
+  return d->m_begin;
 }
 
-void GeoDataTimeSpan::setBegin( const QDateTime& begin )
+GeoDataTimeStamp &GeoDataTimeSpan::begin()
+{
+  return d->m_begin;
+}
+
+void GeoDataTimeSpan::setBegin( const GeoDataTimeStamp& begin )
 {
     d->m_begin = begin;
 }
@@ -84,17 +93,15 @@ GeoDataTimeSpan& GeoDataTimeSpan::operator=( const GeoDataTimeSpan& other )
 void GeoDataTimeSpan::pack( QDataStream& stream ) const
 {
     GeoDataTimePrimitive::pack( stream );
-
-    stream << d->m_begin;
-    stream << d->m_end;
+    d->m_begin.pack( stream );
+    d->m_end.pack( stream );
 }
 
 void GeoDataTimeSpan::unpack( QDataStream& stream )
 {
     GeoDataTimePrimitive::unpack( stream );
-
-    stream >> d->m_begin;
-    stream >> d->m_end;    
+    d->m_begin.unpack( stream );
+    d->m_end.unpack( stream );
 }
 
 }

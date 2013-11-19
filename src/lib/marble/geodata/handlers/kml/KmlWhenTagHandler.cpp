@@ -50,6 +50,15 @@ QDateTime KmlwhenTagHandler::parse( const QString &dateTime )
     return QDateTime::fromString( iso, Qt::ISODate );
 }
 
+GeoDataTimeStamp KmlwhenTagHandler::parseTimestamp( const QString &dateTime )
+{
+  GeoDataTimeStamp result;
+  QString input = dateTime;
+  result.setResolution( modify( input ) );
+  result.setWhen( parse( input) );
+  return result;
+}
+
 GeoDataTimeStamp::TimeResolution KmlwhenTagHandler::modify(  QString& whenString )
 {
     switch( whenString.length() )

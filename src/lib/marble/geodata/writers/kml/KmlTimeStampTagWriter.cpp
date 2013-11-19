@@ -35,16 +35,25 @@ bool KmlTimeStampTagWriter::write( const GeoNode *node,
         writer.writeStartElement( kml::kmlTag_TimeStamp );
 
         writer.writeStartElement( kml::kmlTag_when);
-
-        QString timestampString;
-
-        timestampString = timestamp->when().toString(Qt::ISODate);
-        writer.writeCharacters( timestampString );
-
+        writer.writeCharacters( toString( *timestamp ) );
         writer.writeEndElement();
+
         writer.writeEndElement();
     }
     return true;
+}
+
+QString KmlTimeStampTagWriter::toString( const GeoDataTimeStamp &timestamp )
+{
+    switch ( timestamp.resolution() ) {
+    case GeoDataTimeStamp::SecondResolution: return timestamp.when().toString( Qt::ISODate );
+    case GeoDataTimeStamp::DayResolution:    return timestamp.when().toString( "yyyy-MM-dd" );
+    case GeoDataTimeStamp::MonthResolution:  return timestamp.when().toString( "yyyy-MM" );
+    case GeoDataTimeStamp::YearResolution:   return timestamp.when().toString( "yyyy" );
+    }
+
+    Q_ASSERT( false && "not reachable" );
+    return QString();
 }
 
 }

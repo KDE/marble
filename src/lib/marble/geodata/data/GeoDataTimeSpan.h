@@ -16,6 +16,7 @@
 
 #include "GeoDataObject.h"
 #include "GeoDataTimePrimitive.h"
+#include "GeoDataTimeStamp.h"
 
 #include "geodata_export.h"
 
@@ -43,24 +44,26 @@ class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
     /**
     * @brief return the beginning instant of a timespan
     */
-    QDateTime begin() const;
+    const GeoDataTimeStamp & begin() const;
+    GeoDataTimeStamp & begin();
 
     /**
     * @brief Set the beginning instant of a timespan
     * @param begin the beginning instant of a timespan
     */
-    void setBegin( const QDateTime& begin );
+    void setBegin( const GeoDataTimeStamp& begin );
     
     /**
     * @brief return the ending instant of a timespan
     */
-    QDateTime end() const;
+    const GeoDataTimeStamp & end() const;
+    GeoDataTimeStamp & end();
 
     /**
     * @brief Set the ending instant of a timespan
     * @param begin the ending instant of a timespan
     */
-    void setEnd( const QDateTime& end );
+    void setEnd( const GeoDataTimeStamp& end );
 
     /**
      * @return True iff either of begin or end is valid, or if begin and end are both valid and begin is <= end
