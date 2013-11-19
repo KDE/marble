@@ -34,14 +34,10 @@ GeoNode* KmlTimeSpanTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.is<GeoDataFeature>() ) {
         GeoDataTimeSpan timeSpan;
-        timeSpan.setBegin( QDateTime::fromString( "1752-01-02T00:00:00", Qt::ISODate ) );
-        timeSpan.setEnd( QDateTime::fromString( "7999-12-31T23:59:59", Qt::ISODate ) );
         parentItem.nodeAs<GeoDataFeature>()->setTimeSpan( timeSpan );
         return &parentItem.nodeAs<GeoDataFeature>()->timeSpan();
     } else if ( parentItem.is<GeoDataAbstractView>() ) {
         GeoDataTimeSpan timeSpan;
-        timeSpan.setBegin( QDateTime::fromString( "1752-01-02T00:00:00", Qt::ISODate ) );
-        timeSpan.setEnd( QDateTime::fromString( "7999-12-31T23:59:59", Qt::ISODate ) );
         parentItem.nodeAs<GeoDataAbstractView>()->setTimeSpan( timeSpan );
         return &parentItem.nodeAs<GeoDataAbstractView>()->timeSpan();
     }
