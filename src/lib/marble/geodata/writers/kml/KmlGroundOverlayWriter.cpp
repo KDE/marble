@@ -34,10 +34,10 @@ bool KmlGroundOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) co
     const GeoDataGroundOverlay *ground_overlay =
         static_cast<const GeoDataGroundOverlay*>( node );
 
-    writer.writeTextElement( kml::kmlTag_altitude,
-                             QString::number(ground_overlay->altitude()) );
-    writer.writeTextElement( kml::kmlTag_altitudeMode,
-                             altitudeModeToString(ground_overlay->altitudeMode()) );
+    writer.writeOptionalElement( kml::kmlTag_altitude,
+                                 QString::number(ground_overlay->altitude()), "0" );
+    writer.writeOptionalElement( kml::kmlTag_altitudeMode,
+                                 altitudeModeToString(ground_overlay->altitudeMode()), "clampToGround" );
 
     if ( !ground_overlay->latLonBox().isEmpty() ) {
         writeElement( &ground_overlay->latLonBox(), writer );
