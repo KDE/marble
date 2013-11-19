@@ -31,6 +31,8 @@ KmlGroundOverlayWriter::KmlGroundOverlayWriter() : KmlOverlayTagWriter( kml::kml
 
 bool KmlGroundOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
+    KmlOverlayTagWriter::writeMid( node, writer );
+
     const GeoDataGroundOverlay *ground_overlay =
         static_cast<const GeoDataGroundOverlay*>( node );
 

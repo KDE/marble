@@ -31,6 +31,8 @@ KmlPhotoOverlayWriter::KmlPhotoOverlayWriter() : KmlOverlayTagWriter( kml::kmlTa
 
 bool KmlPhotoOverlayWriter::writeMid( const GeoNode *node, GeoWriter &writer ) const
 {
+    KmlOverlayTagWriter::writeMid( node, writer );
+
     const GeoDataPhotoOverlay *photo_overlay =
         static_cast<const GeoDataPhotoOverlay*>( node );
 

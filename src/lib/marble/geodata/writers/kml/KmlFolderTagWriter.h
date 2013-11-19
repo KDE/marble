@@ -12,14 +12,18 @@
 #define MARBLE_KMLFOLDERTAGWRITER_H
 
 #include "GeoTagWriter.h"
+#include "KmlFeatureTagWriter.h"
 
 namespace Marble
 {
 
-class KmlFolderTagWriter : public GeoTagWriter
+class KmlFolderTagWriter : public KmlFeatureTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+  KmlFolderTagWriter();
+
+protected:
+    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
 };
 
 }

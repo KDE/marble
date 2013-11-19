@@ -29,30 +29,12 @@ static GeoTagWriterRegistrar s_writerPlacemark( GeoTagWriter::QualifiedName(GeoD
                                                new KmlPlacemarkTagWriter() );
 
 
-bool KmlPlacemarkTagWriter::write( const GeoNode *node,
+bool KmlPlacemarkTagWriter::writeMid( const GeoNode *node,
                                    GeoWriter& writer ) const
 {
     const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>(node);
-    writer.writeStartElement( kml::kmlTag_Placemark );
 
-    writer.writeOptionalElement( "name", placemark->name() );
-    writer.writeElement( kml::kmlTag_visibility, QString::number( placemark->isVisible() ) );
     writer.writeOptionalElement( kml::kmlTag_styleUrl, placemark->styleUrl() );
-
-    if( !placemark->description().isEmpty() ) {
-        writer.writeStartElement( "description" );
-        if( placemark->descriptionIsCDATA() ) {
-            writer.writeCDATA( placemark->description() );
-        } else {
-            writer.writeCharacters( placemark->description() );
-        }
-        writer.writeEndElement();
-    }
-
-
-    if( !placemark->extendedData().isEmpty() ){
-        writeElement( &placemark->extendedData(), writer );
-    }
 
     if( placemark->geometry() ) {
         writeElement( placemark->geometry(), writer );
@@ -62,11 +44,13 @@ bool KmlPlacemarkTagWriter::write( const GeoNode *node,
         writeElement( placemark->lookAt(), writer );
     }
 
-    if( placemark->timeStamp().when().isValid() )
-        writeElement( &placemark->timeStamp(), writer );
-
-    writer.writeEndElement();
     return true;
+}
+
+KmlPlacemarkTagWriter::KmlPlacemarkTagWriter() :
+  KmlFeatureTagWriter( kml::kmlTag_Placemark )
+{
+  // nothing to do
 }
 
 }

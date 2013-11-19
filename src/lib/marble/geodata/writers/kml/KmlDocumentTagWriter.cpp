@@ -19,6 +19,7 @@
 #include "MarbleDebug.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataTimeStamp.h"
+#include "GeoDataTimeSpan.h"
 
 #include "GeoDataTypes.h"
 
@@ -31,21 +32,15 @@ static GeoTagWriterRegistrar s_writerDocument( GeoTagWriter::QualifiedName(GeoDa
                                                                             kml::kmlTag_nameSpace22),
                                                new KmlDocumentTagWriter() );
 
-bool KmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+KmlDocumentTagWriter::KmlDocumentTagWriter() :
+  KmlFeatureTagWriter( kml::kmlTag_Document )
+{
+  // nothing to do
+}
+
+bool KmlDocumentTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataDocument *document = static_cast<const GeoDataDocument*>(node);
-
-    // when a document has only one feature and no styling
-    // the document tag is excused
-    if( (document->styles().count() == 0)
-        && (document->styleMaps().count() == 0)
-        && (document->extendedData().isEmpty())
-        && (document->featureList().count() == 1) ) {
-        writeElement( document->featureList()[0], writer );
-        return true;
-    }
-
-    writer.writeStartElement( kml::kmlTag_Document );
 
     foreach( const GeoDataStyle &style, document->styles() ) {
         writeElement( &style, writer );
@@ -54,10 +49,6 @@ bool KmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
         writeElement( &map, writer );
     }
 
-    writer.writeOptionalElement( "name", document->name() );
-    writer.writeElement( kml::kmlTag_visibility, QString::number( document->isVisible() ) );
-    writer.writeOptionalElement( "address", document->address() );
-
     QVector<GeoDataFeature*>::ConstIterator it =  document->constBegin();
     QVector<GeoDataFeature*>::ConstIterator const end = document->constEnd();
 
@@ -65,16 +56,6 @@ bool KmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
         writeElement( &(**it), writer );
     }
 
-    if( !document->extendedData().isEmpty() ){
-        writeElement( &document->extendedData(), writer );
-    }
-
-    if( document->timeStamp().when().isValid() )
-        writeElement( &document->timeStamp(), writer );
-
-
-    //Write the actual important stuff!
-    writer.writeEndElement();
     return true;
 }
 

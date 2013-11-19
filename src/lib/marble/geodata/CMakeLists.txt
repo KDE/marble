@@ -381,6 +381,7 @@ geodata/writers/kml/KmlColorStyleTagWriter.cpp
 geodata/writers/kml/KmlDataTagWriter.cpp
 geodata/writers/kml/KmlDocumentTagWriter.cpp
 geodata/writers/kml/KmlExtendedDataTagWriter.cpp
+geodata/writers/kml/KmlFeatureTagWriter.cpp
 geodata/writers/kml/KmlFolderTagWriter.cpp
 geodata/writers/kml/KmlFlyToTagWriter.cpp
 geodata/writers/kml/KmlGroundOverlayWriter.cpp

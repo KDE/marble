@@ -5,14 +5,13 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_KMLOVERLAYTAGWRITER_H
-#define MARBLE_KMLOVERLAYTAGWRITER_H
+#ifndef MARBLE_KMLFEATURETAGWRITER_H
+#define MARBLE_KMLFEATURETAGWRITER_H
 
 #include "GeoTagWriter.h"
-#include "KmlFeatureTagWriter.h"
 
 #include <QString>
 
@@ -20,13 +19,18 @@ namespace Marble
 {
 
 // No registration for this writer, ColorStyle is an abstract kml element
-class KmlOverlayTagWriter: public KmlFeatureTagWriter
+class KmlFeatureTagWriter: public GeoTagWriter
 {
 public:
-    explicit KmlOverlayTagWriter( const QString &elementName );
+    explicit KmlFeatureTagWriter( const QString &elementName );
+
+    bool write( const GeoNode *node, GeoWriter& writer ) const;
 
 protected:
     virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const = 0;
+
+private:
+    QString const m_elementName;
 };
 
 }

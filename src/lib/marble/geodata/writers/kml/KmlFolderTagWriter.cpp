@@ -13,9 +13,6 @@
 #include "GeoDataFolder.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
-#include "MarbleDebug.h"
-#include "GeoDataExtendedData.h"
-#include "GeoDataTimeStamp.h"
 
 #include "GeoDataTypes.h"
 
@@ -28,20 +25,9 @@ static GeoTagWriterRegistrar s_writerDocument( GeoTagWriter::QualifiedName(GeoDa
                                                                             kml::kmlTag_nameSpace22),
                                                new KmlFolderTagWriter() );
 
-bool KmlFolderTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool KmlFolderTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataFolder *folder = static_cast<const GeoDataFolder*>(node);
-
-    writer.writeStartElement( kml::kmlTag_Folder );
-
-    //Writing folder name
-    writer.writeOptionalElement( "name", folder->name() );
-
-    writer.writeOptionalElement( kml::kmlTag_visibility, QString::number( folder->isVisible() ), "1" );
-
-            if( !folder->extendedData().isEmpty() ){
-        writeElement( &folder->extendedData(), writer );
-    }
 
     //Write all containing features
     QVector<GeoDataFeature*>::ConstIterator it =  folder->constBegin();
@@ -51,12 +37,13 @@ bool KmlFolderTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
         writeElement( *it, writer );
     }
 
-    if( folder->timeStamp().when().isValid() )
-        writeElement( &folder->timeStamp(), writer );
-
-    //close folder tag
-    writer.writeEndElement();
     return true;
+}
+
+KmlFolderTagWriter::KmlFolderTagWriter() :
+  KmlFeatureTagWriter( kml::kmlTag_Folder )
+{
+  // nothing to do
 }
 
 }
