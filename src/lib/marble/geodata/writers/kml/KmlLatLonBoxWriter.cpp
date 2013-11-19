@@ -32,15 +32,15 @@ bool KmlLatLonBoxWriter::write( const GeoNode *node,
     writer.writeStartElement( kml::kmlTag_LatLonBox );
 
     writer.writeTextElement( "north",
-			     QString::number(lat_lon_box->north()) );
+			     QString::number(lat_lon_box->north( GeoDataCoordinates::Degree )) );
     writer.writeTextElement( "south",
-			     QString::number(lat_lon_box->south()) );
+			     QString::number(lat_lon_box->south( GeoDataCoordinates::Degree )) );
     writer.writeTextElement( "east",
-			     QString::number(lat_lon_box->east()) );
+			     QString::number(lat_lon_box->east( GeoDataCoordinates::Degree )) );
     writer.writeTextElement( "west",
-			     QString::number(lat_lon_box->west()) );
+			     QString::number(lat_lon_box->west( GeoDataCoordinates::Degree )) );
     writer.writeTextElement( "rotation",
-			     QString::number(lat_lon_box->rotation()) );
+			     QString::number(lat_lon_box->rotation( GeoDataCoordinates::Degree )) );
 
     writer.writeEndElement();
 
