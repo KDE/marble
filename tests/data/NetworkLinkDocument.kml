@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
 <Document>
-    <visibility>1</visibility>
     <NetworkLink>
       <flyToView>1</flyToView>
       <Link>

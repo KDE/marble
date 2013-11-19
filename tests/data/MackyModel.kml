@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
 <Placemark>
-  <visibility>1</visibility>
   <Model>
     <altitudeMode>relativeToGround</altitudeMode>
     <Location>
