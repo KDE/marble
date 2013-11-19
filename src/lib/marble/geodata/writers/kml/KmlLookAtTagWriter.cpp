@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
+// Copyright 2013      Illya Kovalevskyy   <illya.kovalevskyy@gmail.com>
 //
 
 
@@ -30,6 +31,19 @@ bool KmlLookAtTagWriter::write( const GeoNode *node,
     const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt*>(node);
 
     writer.writeStartElement( kml::kmlTag_LookAt );
+
+    if (lookAt->timeStamp().when().isValid()) {
+        writer.writeStartElement("gx:TimeStamp");
+        writer.writeElement("when", lookAt->timeStamp().when().toString(Qt::ISODate));
+        writer.writeEndElement();
+    }
+
+    writer.writeStartElement("gx:TimeSpan");
+    if (lookAt->timeSpan().begin().isValid())
+        writer.writeElement("begin", lookAt->timeSpan().begin().toString(Qt::ISODate));
+    if (lookAt->timeSpan().end().isValid())
+        writer.writeElement("end", lookAt->timeSpan().end().toString(Qt::ISODate));
+    writer.writeEndElement();
 
     writer.writeElement( "longitude", QString::number( lookAt->longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
     writer.writeElement( "latitude", QString::number( lookAt->latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
