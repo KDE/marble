@@ -21,6 +21,7 @@ namespace Marble
 {
 
 class MarbleWidget;
+class BookmarkSyncManager;
 
 class QtMarbleConfigDialogPrivate;
 
@@ -29,7 +30,8 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     Q_OBJECT
     
     public:
-    explicit QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget *parent = 0 );
+    explicit QtMarbleConfigDialog(MarbleWidget *marbleWidget, BookmarkSyncManager *syncManager,
+                                   QWidget *parent = 0 );
     ~QtMarbleConfigDialog();
 
     // View Settings
@@ -126,6 +128,12 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     void syncNowClicked();
 
     public Q_SLOTS:
+    /**
+     * Disable "Sync Now" button while sync or for 30 sec of timout
+     */
+    void disableSyncNow();
+    void enableSyncNow();
+
     /**
      * Read settings and update interface.
      */

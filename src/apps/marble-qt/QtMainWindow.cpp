@@ -116,7 +116,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     setCentralWidget( m_controlView );
 
     // Initializing config dialog
-    m_configDialog = new QtMarbleConfigDialog( m_controlView->marbleWidget(), this );
+    m_configDialog = new QtMarbleConfigDialog( m_controlView->marbleWidget(),
+                                               m_controlView->cloudSyncManager()->bookmarkSyncManager(),
+                                               this );
     connect( m_configDialog, SIGNAL(settingsChanged()),
              this, SLOT(updateSettings()) );
     connect( m_configDialog, SIGNAL(clearVolatileCacheClicked()),
@@ -125,6 +127,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
              m_controlView->marbleModel(), SLOT(clearPersistentTileCache()) );
     connect( m_configDialog, SIGNAL(syncNowClicked()),
              m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
+    connect(m_configDialog, SIGNAL(syncNowClicked()),
+            m_configDialog, SLOT(disableSyncNow()));
 
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );

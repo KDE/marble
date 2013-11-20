@@ -30,6 +30,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QDateTime>
+#include <QTimer>
 
 // Marble
 #include "MarbleGlobal.h"
@@ -44,6 +45,7 @@
 #include "RenderPluginModel.h"
 #include "MarbleClock.h"
 #include "routing/RoutingProfilesWidget.h"
+#include "BookmarkSyncManager.h"
 
 namespace Marble
 {
@@ -51,12 +53,13 @@ namespace Marble
 class QtMarbleConfigDialogPrivate
 {
  public:
-    QtMarbleConfigDialogPrivate( MarbleWidget *marbleWidget )
+    QtMarbleConfigDialogPrivate( MarbleWidget *marbleWidget, BookmarkSyncManager *syncManager )
         : ui_viewSettings(),
           ui_navigationSettings(),
           ui_timeSettings(),
           ui_cacheSettings(),
           m_marbleWidget( marbleWidget ),
+          m_syncManager(syncManager),
           m_pluginModel()
     {
     }
@@ -71,6 +74,7 @@ class QtMarbleConfigDialogPrivate
     QSettings m_settings;
 
     MarbleWidget *const m_marbleWidget;
+    BookmarkSyncManager *const m_syncManager;
 
     RenderPluginModel m_pluginModel;
 
@@ -81,9 +85,10 @@ class QtMarbleConfigDialogPrivate
     Marble::GraphicsSystem m_previousGraphicsSystem;
 };
 
-QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget *parent )
+QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, BookmarkSyncManager *syncManager,
+                                           QWidget *parent )
     : QDialog( parent ),
-      d( new QtMarbleConfigDialogPrivate( marbleWidget ) )
+      d( new QtMarbleConfigDialogPrivate( marbleWidget, syncManager ) )
 {
     QTabWidget *tabWidget = new QTabWidget( this );
     QDialogButtonBox *buttons = 
@@ -216,6 +221,31 @@ void QtMarbleConfigDialog::syncSettings()
     }
     
     QNetworkProxy::setApplicationProxy(proxy);
+}
+
+void QtMarbleConfigDialog::disableSyncNow()
+{
+    d->ui_cloudSyncSettings.button_syncNow->setDisabled(true);
+
+    QTimer *timeoutTimer = new QTimer(this);
+    connect(timeoutTimer, SIGNAL(timeout()),
+            timeoutTimer, SLOT(stop()));
+    connect(timeoutTimer, SIGNAL(timeout()),
+            this, SLOT(enableSyncNow()));
+
+    connect(d->m_syncManager, SIGNAL(syncComplete()),
+            this, SLOT(enableSyncNow()));
+    connect(d->m_syncManager, SIGNAL(syncComplete()),
+            timeoutTimer, SLOT(stop()));
+    connect(d->m_syncManager, SIGNAL(syncComplete()),
+            timeoutTimer, SLOT(deleteLater()));
+
+    timeoutTimer->start(30*1000); // 30 sec
+}
+
+void QtMarbleConfigDialog::enableSyncNow()
+{
+    d->ui_cloudSyncSettings.button_syncNow->setEnabled(true);
 }
 
 void QtMarbleConfigDialog::readSettings()

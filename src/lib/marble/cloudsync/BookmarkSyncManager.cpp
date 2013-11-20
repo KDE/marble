@@ -719,7 +719,6 @@ void BookmarkSyncManager::Private::copyLocalToCache()
     disconnect( m_bookmarkManager, SIGNAL(bookmarksChanged()), m_q, SLOT(startBookmarkSync()) );
     m_bookmarkManager->loadFile( "bookmarks/bookmarks.kml" );
     connect( m_bookmarkManager, SIGNAL(bookmarksChanged()), m_q, SLOT(startBookmarkSync()) );
-    emit m_q->syncComplete();
 }
 
 // Bookmark synchronization steps
@@ -800,6 +799,7 @@ void BookmarkSyncManager::Private::completeUpload()
     m_cloudTimestamp = timestamp;
     mDebug() << "Uploaded bookmarks to remote server. Timestamp is " << m_cloudTimestamp;
     copyLocalToCache();
+    emit m_q->syncComplete();
 }
 
 }
