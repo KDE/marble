@@ -553,14 +553,15 @@ void MarblePart::readSettings()
 
 void MarblePart::readTrackingSettings()
 {
-    if(MarbleSettings::autoCenter() || MarbleSettings::recenterMode()) {
+    if( MarbleSettings::autoCenter() || MarbleSettings::recenterMode() ) {
         CurrentLocationWidget *trackingWidget = m_controlView->currentLocationWidget();
-        if(!trackingWidget) return;
-        trackingWidget->setRecenterMode( MarbleSettings::recenterMode() );
-        trackingWidget->setAutoZoom( MarbleSettings::autoZoom() );
-        trackingWidget->setTrackVisible( MarbleSettings::trackVisible() );
-        trackingWidget->setLastOpenPath( MarbleSettings::lastTrackOpenPath() );
-        trackingWidget->setLastSavePath( MarbleSettings::lastTrackSavePath() );
+        if( trackingWidget ) {
+            trackingWidget->setRecenterMode( MarbleSettings::recenterMode() );
+            trackingWidget->setAutoZoom( MarbleSettings::autoZoom() );
+            trackingWidget->setTrackVisible( MarbleSettings::trackVisible() );
+            trackingWidget->setLastOpenPath( MarbleSettings::lastTrackOpenPath() );
+            trackingWidget->setLastSavePath( MarbleSettings::lastTrackSavePath() );
+        }
     }
 }
 
@@ -645,7 +646,7 @@ void MarblePart::writeSettings()
 
     // Tracking
     CurrentLocationWidget *trackingWidget = m_controlView->currentLocationWidget();
-    if(trackingWidget)
+    if( trackingWidget )
     {
         MarbleSettings::setRecenterMode( trackingWidget->recenterMode() );
         MarbleSettings::setAutoZoom( trackingWidget->autoZoom() );
