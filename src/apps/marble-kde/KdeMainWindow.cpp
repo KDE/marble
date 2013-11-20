@@ -50,6 +50,7 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     createGUI( 0 );
     QList<QAction*> panelActions = m_part->controlView()->setupDockWidgets( this );
+    m_part->readTrackingSettings();
     m_part->unplugActionList( "panels_actionlist" );
     m_part->plugActionList( "panels_actionlist", panelActions );
 

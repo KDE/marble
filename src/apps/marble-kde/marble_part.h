@@ -64,6 +64,8 @@ class MarblePart: public KParts::ReadOnlyPart
     void createOnlineServicesMenu();
     void createRenderPluginActions();
 
+    void readTrackingSettings();
+
     void initializeCustomTimezone();
 
   public Q_SLOTS:

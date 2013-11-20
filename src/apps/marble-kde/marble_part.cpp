@@ -61,6 +61,7 @@
 #include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
 #include "BookmarkManagerDialog.h"
+#include "CurrentLocationWidget.h"
 #include "DialogConfigurationInterface.h"
 #include "DownloadRegionDialog.h"
 #include "GeoDataCoordinates.h"
@@ -470,6 +471,9 @@ void MarblePart::readSettings()
 
     m_lastFileOpenPath = KUrl::fromLocalFile( MarbleSettings::lastFileOpenDir() );
 
+    // Tracking settings
+    readTrackingSettings();
+
     // Load previous route settings
     m_controlView->marbleModel()->routingManager()->readSettings();
     bool const startupWarning = MarbleSettings::showGuidanceModeStartupWarning();
@@ -545,6 +549,19 @@ void MarblePart::readSettings()
     cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
     cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
     cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
+}
+
+void MarblePart::readTrackingSettings()
+{
+    if(MarbleSettings::autoCenter() || MarbleSettings::recenterMode()) {
+        CurrentLocationWidget *trackingWidget = m_controlView->currentLocationWidget();
+        if(!trackingWidget) return;
+        trackingWidget->setRecenterMode( MarbleSettings::recenterMode() );
+        trackingWidget->setAutoZoom( MarbleSettings::autoZoom() );
+        trackingWidget->setTrackVisible( MarbleSettings::trackVisible() );
+        trackingWidget->setLastOpenPath( MarbleSettings::lastTrackOpenPath() );
+        trackingWidget->setLastSavePath( MarbleSettings::lastTrackSavePath() );
+    }
 }
 
 void MarblePart::readStatusBarSettings()
@@ -625,6 +642,17 @@ void MarblePart::writeSettings()
     MarbleSettings::setShowCitylights( m_controlView->marbleWidget()->showCityLights() );
     MarbleSettings::setLockToSubSolarPoint( m_controlView->marbleWidget()->isLockedToSubSolarPoint() );
     MarbleSettings::setSubSolarPointIconVisible( m_controlView->marbleWidget()->isSubSolarPointIconVisible() );
+
+    // Tracking
+    CurrentLocationWidget *trackingWidget = m_controlView->currentLocationWidget();
+    if(trackingWidget)
+    {
+        MarbleSettings::setRecenterMode( trackingWidget->recenterMode() );
+        MarbleSettings::setAutoZoom( trackingWidget->autoZoom() );
+        MarbleSettings::setTrackVisible( trackingWidget->trackVisible() );
+        MarbleSettings::setLastTrackOpenPath( trackingWidget->lastOpenPath() );
+        MarbleSettings::setLastTrackSavePath( trackingWidget->lastSavePath() );
+    }
 
     // Caches
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->
