@@ -22,11 +22,11 @@
 #include "CurrentLocationWidget.h"
 #include "DownloadRegionDialog.h"
 #include "GoToDialog.h"
-#include "LegendWidget.h"
 #include "MapViewWidget.h"
 #include "MarbleAboutDialog.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "MarbleLegendBrowser.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
@@ -75,7 +75,7 @@ using namespace Marble;
 MainWindow::MainWindow( const QString &marbleDataPath, const QVariantMap &cmdLineSettings, QWidget *parent ) :
         QMainWindow( parent ),
         m_marbleWidget( new MarbleWidget( this ) ),
-        m_legendWidget( new LegendWidget( this ) ),
+        m_legendBrowser( new MarbleLegendBrowser( this ) ),
         m_downloadRegionDialog( 0 ),
         m_mapViewDialog( 0 ),
         m_routingWindow( 0 ),
@@ -90,9 +90,13 @@ MainWindow::MainWindow( const QString &marbleDataPath, const QVariantMap &cmdLin
 #endif // Q_WS_MAEMO_5
     setUpdatesEnabled( false );
 
-    m_legendWidget->setMarbleModel( m_marbleWidget->model() );
-    connect( m_legendWidget, SIGNAL(propertyValueChanged(QString,bool)),
+    m_legendBrowser->setMarbleModel( m_marbleWidget->model() );
+    connect( m_legendBrowser, SIGNAL(toggledShowProperty(QString,bool)),
              m_marbleWidget, SLOT(setPropertyValue(QString,bool)), Qt::QueuedConnection );
+
+    // prevent triggering of network requests under Maemo, presumably due to qrc: URLs
+    m_networkAccessManager.setNetworkAccessible( QNetworkAccessManager::NotAccessible );
+    m_legendBrowser->page()->setNetworkAccessManager( &m_networkAccessManager );
 
     QString selectedPath = marbleDataPath.isEmpty() ? readMarbleDataPath() : marbleDataPath;
     if ( !selectedPath.isEmpty() )
@@ -100,7 +104,7 @@ MainWindow::MainWindow( const QString &marbleDataPath, const QVariantMap &cmdLin
 
     QSplitter *splitter = new QSplitter( this );
     splitter->setOrientation( Qt::Horizontal );
-    splitter->addWidget( m_legendWidget );
+    splitter->addWidget( m_legendBrowser );
     splitter->setStretchFactor( 0, 0 );
     splitter->addWidget( m_marbleWidget );
     splitter->setStretchFactor( 1, 1 );
@@ -258,7 +262,7 @@ void MainWindow::setWorkOffline( bool offline )
 
 void MainWindow::setLegendShown( bool show )
 {
-    m_legendWidget->setVisible( show );
+    m_legendBrowser->setVisible( show );
     m_showLegendAct->setChecked( show );
 }
 
@@ -473,7 +477,7 @@ void MainWindow::writeSettings()
         settings.setValue( "orientation", (int)orientation() );
 #endif // Q_WS_MAEMO_5
         settings.setValue( "workOffline", m_marbleWidget->model()->workOffline() );
-        settings.setValue( "showLegend", m_legendWidget->isVisible() );
+        settings.setValue( "showLegend", m_legendBrowser->isVisible() );
         settings.setValue( "showAtmosphere", m_marbleWidget->showAtmosphere() );
         settings.setValue( "lastFileOpenDir", m_lastFileOpenPath );
         settings.setValue( "windowState", saveState() );
