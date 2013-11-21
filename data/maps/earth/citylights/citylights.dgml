@@ -80,7 +80,12 @@
                     <available>true</available>
                 </property>
             </group>
-
+            <group name="Water Bodies">
+                <property name="waterbodies">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+            </group>
             <property name="coordinate-grid">
                 <value>true</value>
                 <available>true</available>
