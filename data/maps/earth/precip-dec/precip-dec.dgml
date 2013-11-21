@@ -118,12 +118,19 @@
                 </property>
             </group>
             <group name="Water Bodies">
+                <property name="coastlines">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
                 <property name="waterbodies">
                     <available>true</available>
                     <value>true</value>
                 </property>
+                <property name="rivers">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
             </group>
-
             <property name="coordinate-grid">
                 <value>true</value>
                 <available>true</available>
