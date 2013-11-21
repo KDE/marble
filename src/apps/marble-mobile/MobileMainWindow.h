@@ -26,7 +26,7 @@ namespace Marble
 
 class DownloadRegionDialog;
 class GoToDialog;
-class LegendWidget;
+class MarbleLegendBrowser;
 class MarbleWidget;
 class RoutingWidget;
 class StackableWindow;
@@ -90,7 +90,7 @@ private:
     void initializeTrackingWidget();
 
     MarbleWidget *const m_marbleWidget;
-    LegendWidget *const m_legendWidget;
+    MarbleLegendBrowser *const m_legendBrowser;
 
     DownloadRegionDialog *m_downloadRegionDialog;
     QDialog *m_mapViewDialog;
