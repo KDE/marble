@@ -94,6 +94,10 @@ MainWindow::MainWindow( const QString &marbleDataPath, const QVariantMap &cmdLin
     connect( m_legendBrowser, SIGNAL(toggledShowProperty(QString,bool)),
              m_marbleWidget, SLOT(setPropertyValue(QString,bool)), Qt::QueuedConnection );
 
+    // prevent triggering of network requests under Maemo, presumably due to qrc: URLs
+    m_networkAccessManager.setNetworkAccessible( QNetworkAccessManager::NotAccessible );
+    m_legendBrowser->page()->setNetworkAccessManager( &m_networkAccessManager );
+
     QString selectedPath = marbleDataPath.isEmpty() ? readMarbleDataPath() : marbleDataPath;
     if ( !selectedPath.isEmpty() )
         MarbleDirs::setMarbleDataPath( selectedPath );

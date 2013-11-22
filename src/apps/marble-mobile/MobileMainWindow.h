@@ -15,6 +15,8 @@
 #define MARBLE_MAINWINDOW_H
 
 #include <QMainWindow>
+
+#include <QNetworkAccessManager>
 #include <QVariantMap>
 
 #include "MapThemeManager.h"
@@ -101,6 +103,8 @@ private:
 
     QAction *m_workOfflineAct;
     QAction *m_showLegendAct;
+
+    QNetworkAccessManager m_networkAccessManager;
 
     MapThemeManager m_mapThemeManager;
     QString m_lastFileOpenPath;
