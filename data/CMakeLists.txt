@@ -164,6 +164,9 @@ maps/moon/clementine/legend.html
 maps/moon/clementine/clementine.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/moon/clementine)
 
+FILE (GLOB_RECURSE DGML_FILES maps/*.dgml)
+MARBLE_ADD_PROJECT_RESOURCES(${DGML_FILES})
+
 install (FILES
 weather/bbc-stations.xml
 weather/weather-clear-night.png
@@ -251,8 +254,7 @@ install (FILES
   ${AUDIO_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/audio)
 
-FILE (GLOB_RECURSE DGML_FILES maps/*.dgml)
-MARBLE_ADD_PROJECT_RESOURCES(${DGML_FILES})
+add_subdirectory(lang)
 
 # shared-mime-info 0.40 is mandatory for generic-icon
 set( SHARED_MIME_INFO_MINIMUM_VERSION "0.40" )
