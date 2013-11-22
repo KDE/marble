@@ -83,6 +83,7 @@ MainWindow::MainWindow( const QString &marbleDataPath, const QVariantMap &cmdLin
         m_gotoDialog( 0 ),
         m_routingWidget( 0 ),
         m_workOfflineAct( 0 ),
+        m_kineticScrollingAction( 0 ),
         m_showLegendAct( 0 )
 {
 #ifdef Q_WS_MAEMO_5
@@ -122,6 +123,10 @@ MainWindow::MainWindow( const QString &marbleDataPath, const QVariantMap &cmdLin
     m_workOfflineAct->setCheckable( true );
     m_workOfflineAct->setChecked( m_marbleWidget->model()->workOffline() );
     connect( m_workOfflineAct, SIGNAL(triggered(bool)), this, SLOT(setWorkOffline(bool)) );
+
+    m_kineticScrollingAction = menuBar()->addAction( QApplication::translate("MarbleNavigationSettingsWidget", "&Inertial Globe Rotation", 0, QApplication::UnicodeUTF8) );
+    m_kineticScrollingAction->setCheckable( true );
+    connect( m_kineticScrollingAction, SIGNAL(triggered(bool)), this, SLOT(setKineticScrollingEnabled(bool)) );
 
     /** @todo: Full screen cannot be left on Maemo currently (shortcuts not working) */
     //menuBar()->addAction( m_fullScreenAct );
@@ -258,6 +263,12 @@ void MainWindow::setWorkOffline( bool offline )
     }
 
     m_workOfflineAct->setChecked( offline );
+}
+
+void MainWindow::setKineticScrollingEnabled( bool enabled )
+{
+    m_marbleWidget->inputHandler()->setInertialEarthRotationEnabled( enabled );
+    m_kineticScrollingAction->setChecked( enabled ); // Sync state with the GUI
 }
 
 void MainWindow::setLegendShown( bool show )
@@ -454,7 +465,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
 
     settings.beginGroup( "Navigation" );
         m_marbleWidget->setAnimationsEnabled( settings.value( "animateTargetVoyage", true ).toBool() );
-        m_marbleWidget->inputHandler()->setInertialEarthRotationEnabled( settings.value( "inertialEarthRotation", true ).toBool() );
+        setKineticScrollingEnabled( settings.value( "inertialEarthRotation", true ).toBool() );
     settings.endGroup();
 
     settings.beginGroup( "Cache" );
