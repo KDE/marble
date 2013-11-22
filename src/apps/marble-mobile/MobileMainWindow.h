@@ -67,6 +67,7 @@ private Q_SLOTS:
     void fallBackToDefaultTheme();
 
     void setWorkOffline( bool );
+    void setKineticScrollingEnabled( bool );
     void setLegendShown( bool show );
 
     // Settings Menu
@@ -102,6 +103,7 @@ private:
     RoutingWidget *m_routingWidget;
 
     QAction *m_workOfflineAct;
+    QAction *m_kineticScrollingAction;
     QAction *m_showLegendAct;
 
     QNetworkAccessManager m_networkAccessManager;
