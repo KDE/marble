@@ -254,11 +254,11 @@ void QtMarbleConfigDialog::enableSyncNow()
 void QtMarbleConfigDialog::updateLastSync()
 {
     if (!d->m_syncManager->lastSync().isValid()) {
-        d->ui_cloudSyncSettings.labelLastSync->setText(tr("<b>Never synced</b>"));
+        d->ui_cloudSyncSettings.labelLastSync->setText(tr("Never synchronized."));
         return;
     }
 
-    const QString title = tr("<b>Last sync: %1</b>")
+    const QString title = tr("Last synchronization: %1")
             .arg(d->m_syncManager->lastSync().toString());
 
     d->ui_cloudSyncSettings.labelLastSync->setText(title);

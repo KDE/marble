@@ -123,6 +123,16 @@
     </layout>
    </item>
    <item>
+    <widget class="QLabel" name="labelLastSync">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="enabled">
       <bool>false</bool>
@@ -180,13 +190,6 @@
        </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="labelLastSync">
-     <property name="text">
-      <string/>
-     </property>
     </widget>
    </item>
   </layout>
