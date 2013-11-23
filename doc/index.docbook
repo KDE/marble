@@ -970,7 +970,7 @@ the system's graphics drivers. </para>
 
 <sect1 id="configsynchronization">
 <title>Synchronization Configuration</title>
-<para>Marble can upload route and bookmark data to <ulink 
+<para>&marble; can upload route and bookmark data to <ulink 
   url="https://en.wikipedia.org/wiki/OwnCloud">ownCloud</ulink> server and 
 synchronize them between &marble; instances installed on different devices.
 </para>
@@ -992,7 +992,7 @@ synchronize them between &marble; instances installed on different devices.
 <listitem>
   <para>The synchronization can be enabled or disabled using this item. 
 When the synchronization is enabled you can choose whether to synchronize 
-route and bookmark data using the corresponding checkboxes or click on 
+route and bookmark data using the corresponding check boxes or click on 
 <guibutton>Sync now</guibutton> to initiate synchronization 
 immediately.</para>
 </listitem>
