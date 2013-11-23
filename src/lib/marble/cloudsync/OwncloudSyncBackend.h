@@ -63,7 +63,6 @@ public:
 
 public Q_SLOTS:
     void cancelUpload();
-    void setApiUrl( const QUrl &apiUrl );
 
 private slots:
     void prepareRouteList();

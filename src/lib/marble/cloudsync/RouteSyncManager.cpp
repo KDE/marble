@@ -60,13 +60,11 @@ RouteSyncManager::Private::Private( CloudSyncManager *cloudSyncManager ) :
     m_owncloudBackend( cloudSyncManager )
 {
     m_cacheDir = QDir( MarbleDirs::localPath() + "/cloudsync/cache/routes/" );
-    m_owncloudBackend.setApiUrl( m_cloudSyncManager->apiUrl() );    
 }
 
 RouteSyncManager::RouteSyncManager(CloudSyncManager *cloudSyncManager) :
     d( new Private( cloudSyncManager ) )
 {
-    connect( d->m_cloudSyncManager, SIGNAL(apiUrlChanged(QUrl)), &d->m_owncloudBackend, SLOT(setApiUrl(QUrl)) );
     connect( &d->m_owncloudBackend, SIGNAL(routeUploadProgress(qint64,qint64)), this, SLOT(updateUploadProgressbar(qint64,qint64)) );
     connect( &d->m_owncloudBackend, SIGNAL(routeListDownloaded(QVector<RouteItem>)), this, SLOT(setRouteModelItems(QVector<RouteItem>)) );
     connect( &d->m_owncloudBackend, SIGNAL(routeListDownloadProgress(qint64,qint64)), this, SIGNAL(routeListDownloadProgress(qint64,qint64)) );

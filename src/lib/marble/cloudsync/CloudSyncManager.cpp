@@ -24,6 +24,7 @@ public:
 
     bool m_syncEnabled;
 
+    QString m_owncloudProtocol;
     QString m_ownloudServer;
     QString m_owncloudUsername;
     QString m_owncloudPassword;
@@ -41,6 +42,7 @@ CloudSyncManager::Private::~Private()
 CloudSyncManager::Private::Private() :
     m_workOffline( false ),
     m_syncEnabled( false ),
+    m_owncloudProtocol( "http" ),
     m_ownloudServer(),
     m_owncloudUsername(),
     m_owncloudPassword(),
@@ -80,7 +82,7 @@ bool CloudSyncManager::isSyncEnabled() const
 
 QString CloudSyncManager::owncloudServer() const
 {
-    return d->m_ownloudServer;
+    return d->m_owncloudProtocol + d->m_ownloudServer;
 }
 
 QString CloudSyncManager::owncloudUsername() const
@@ -103,11 +105,19 @@ void CloudSyncManager::setSyncEnabled( bool enabled )
 
 void CloudSyncManager::setOwncloudServer( const QString &server )
 {
-    if ( d->m_ownloudServer != server ) {
+    if ( server.startsWith( "http://" ) ) {
+        d->m_owncloudProtocol = "http://";
+        d->m_ownloudServer = server.mid( 7 );
+    } else if ( server.startsWith( "https://" ) ) {
+        d->m_owncloudProtocol = "https://";
+        d->m_ownloudServer = server.mid ( 8 );
+    } else {
+        d->m_owncloudProtocol = "http://";
         d->m_ownloudServer = server;
-        emit owncloudServerChanged( d->m_ownloudServer );
-        emit apiUrlChanged( apiUrl() );
     }
+
+    emit owncloudServerChanged( owncloudServer() );
+    emit apiUrlChanged( apiUrl() );
 }
 
 void CloudSyncManager::setOwncloudUsername( const QString &username )
@@ -135,9 +145,10 @@ QString CloudSyncManager::apiPath() const
 
 QUrl CloudSyncManager::apiUrl() const
 {
-    return QUrl( QString( "http://%0:%1@%2/%3" )
-                .arg( owncloudUsername() ).arg( owncloudPassword() )
-                 .arg( owncloudServer() ).arg( apiPath() ) );
+    return QUrl( QString( "%0%1:%2@%3/%4" )
+                 .arg( d->m_owncloudProtocol )
+                 .arg( d->m_owncloudUsername ).arg( d->m_owncloudPassword )
+                 .arg( d->m_ownloudServer ).arg( apiPath() ) );
 }
 
 RouteSyncManager *CloudSyncManager::routeSyncManager()

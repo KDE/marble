@@ -329,20 +329,15 @@ void OwncloudSyncBackend::saveDownloadedRoute()
     emit routeDownloaded();
 }
 
-void OwncloudSyncBackend::setApiUrl( const QUrl &apiUrl )
-{
-    d->m_apiUrl = apiUrl;
-}
-
 QUrl OwncloudSyncBackend::endpointUrl( const QString &endpoint )
 {
-    QString endpointUrl = QString( "%0/%1" ).arg( d->m_apiUrl.toString() ).arg( endpoint );
+    QString endpointUrl = QString( "%0/%1" ).arg( d->m_cloudSyncManager->apiUrl().toString() ).arg( endpoint );
     return QUrl( endpointUrl );
 }
 
 QUrl OwncloudSyncBackend::endpointUrl( const QString &endpoint, const QString &parameter )
 {
-    QString endpointUrl = QString( "%0/%1/%2" ).arg( d->m_apiUrl.toString() ).arg( endpoint ).arg( parameter );
+    QString endpointUrl = QString( "%0/%1/%2" ).arg( d->m_cloudSyncManager->apiUrl().toString() ).arg( endpoint ).arg( parameter );
     return QUrl( endpointUrl );
 }
 
