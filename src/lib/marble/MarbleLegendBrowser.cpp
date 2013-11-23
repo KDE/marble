@@ -8,6 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn      <tackat@kde.org>
 // Copyright 2007      Inge Wallin       <ingwa@kde.org>
 // Copyright 2012      Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
+// Copyright 2013      Yazeed Zoabi      <yazeedz.zoabi@gmail.com>
 //
 
 
@@ -141,9 +142,9 @@ void MarbleLegendBrowser::loadLegend()
     {
         const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
-        legendPath = MarbleDirs::path( "maps/" + 
-        currentMapTheme->head()->target() + '/' + 
-        currentMapTheme->head()->theme() + "/legend.html" ); 
+        legendPath = MarbleDirs::path( "maps/" +
+        currentMapTheme->head()->target() + '/' +
+        currentMapTheme->head()->theme() + "/legend.html" );
     }
     if ( legendPath.isEmpty() ) {
         legendPath = MarbleDirs::path( "legend.html" );
@@ -156,7 +157,7 @@ void MarbleLegendBrowser::loadLegend()
 
     reverseSupportCheckboxes(finalHtml);
 
-    // Generate some parts of the html from the MapTheme <Legend> tag. 
+    // Generate some parts of the html from the MapTheme <Legend> tag.
     const QString sectionsHtml = generateSectionsHtml();
 
     // And then create the final html from these two parts.
@@ -192,6 +193,7 @@ bool MarbleLegendBrowser::event( QEvent * event )
     if ( event->type() == QEvent::Show ) {
         if ( !d->m_isLegendLoaded ) {
             loadLegend();
+            return true;
         }
     }
 #ifdef Q_WS_MAEMO_5
@@ -256,8 +258,8 @@ void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
 
     const QString repair = ""
             "<div class=\"spec\"><h3><input type=\"checkbox\" "
-            "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" "
-            + checked + " name=\"cities\" />Populated Places</h3></div>\n";
+            "onchange=\"Marble.setCheckedProperty(this.value, this.checked);\" "
+            + checked + " name=\"cities\" value=\"cities\" />Populated Places</h3></div>\n";
 
     html.replace(old, repair);
 }
@@ -322,24 +324,37 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
         customLegendString += "<h4 class=\"section-head\">"+section->heading()+"</h4>";
 
-        QString checkBoxString; 
+        QString checkBoxString;
         if (section->checkable()) {
             // If it's needed to make a checkbox here, we will
-            QString checked = "";
-            if (d->m_checkBoxMap[section->connectTo()])
-                checked = "checked";
+            QString checked = "checked";
+            if (!d->m_checkBoxMap[section->connectTo()])
+                checked = "";
             /* Important comment:
              * We inject Marble object into JavaScript of each legend html file
              * This is only one way to handle checkbox changes we see, so
              * Marble.setCheckedProperty is a function that does it
              */
-            checkBoxString = ""
-                    "<label class=\"checkbox\">"
-                    "<input type=\"checkbox\" "
-                    "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" " +
-                    checked + " name=\"" + section->connectTo() + "\" /><span>"
-                    + section->heading() +
-                    "</span></label>";
+            if(section->radio()!="")
+            {
+                checkBoxString = ""
+                        "<label class=\"radio\">"
+                        "<input type=\"radio\" "
+                        "onchange=\"Marble.setRadioCheckedProperty(this.value, this.name ,this.checked);\" " +
+                        checked + " value=\"" + section->connectTo() + "\" name=\"" + section->radio() + "\" /><span>"
+                        + section->heading() +
+                        "</span></label>";
+
+            }
+            else{
+                checkBoxString = ""
+                        "<label class=\"checkbox\">"
+                        "<input type=\"checkbox\" "
+                        "onchange=\"Marble.setCheckedProperty(this.value, this.checked);\" "+checked+" value=\"" + section->connectTo() + "\" name=\"" + section->connectTo() + "\" /><span>"
+                        + section->heading() +
+                        "</span></label>";
+
+            }
             customLegendString += checkBoxString;
         }
 
@@ -382,11 +397,32 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
 void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
 {
-    QWebElement box = page()->mainFrame()->findFirstElement("input[name="+name+"]");
+    QWebElement box = page()->mainFrame()->findFirstElement("input[value="+name+"]");
     if (!box.isNull()) {
         if (checked != d->m_checkBoxMap[name]) {
             d->m_checkBoxMap[name] = checked;
             emit toggledShowProperty( name, checked );
+        }
+    }
+
+    update();
+}
+
+void MarbleLegendBrowser::setRadioCheckedProperty( const QString& value, const QString& name , bool checked )
+{
+    QWebElement box = page()->mainFrame()->findFirstElement("input[value="+value+"]");
+    QWebElementCollection boxes = page()->mainFrame()->findAllElements("input[name="+name+"]");
+    int i=0;
+    QString CurrentValue="";
+    for(i=0;i<boxes.count();i++){
+        CurrentValue = boxes.at(i).attribute("value");
+        d->m_checkBoxMap[CurrentValue]=false;
+        emit toggledShowProperty( CurrentValue, false );
+    }
+    if (!box.isNull()) {
+        if (checked != d->m_checkBoxMap[value]) {
+            d->m_checkBoxMap[value] = checked;
+            emit toggledShowProperty( value, checked );
         }
     }
 

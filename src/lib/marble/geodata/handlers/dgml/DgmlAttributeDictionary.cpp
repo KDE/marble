@@ -57,6 +57,7 @@ const char* dgmlAttr_port             = "port";
 const char* dgmlAttr_property         = "property";
 const char* dgmlAttr_protocol         = "protocol";
 const char* dgmlAttr_query            = "query";
+const char* dgmlAttr_radio            = "radio";
 const char* dgmlAttr_radius           = "radius";
 const char* dgmlAttr_role             = "role";
 const char* dgmlAttr_short            = "short";

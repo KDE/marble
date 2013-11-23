@@ -41,7 +41,7 @@ class GEODATA_EXPORT GeoSceneSection : public GeoNode
  public:
     explicit GeoSceneSection( const QString& name );
     ~GeoSceneSection();
-    
+
     virtual const char* nodeType() const;
 
     /**
@@ -66,19 +66,24 @@ class GEODATA_EXPORT GeoSceneSection : public GeoNode
     int  spacing() const;
     void setSpacing( int spacing );
 
+    QString radio() const;
+    void setRadio( const QString& radio );
+
  private:
     Q_DISABLE_COPY( GeoSceneSection )
 
     /// The vector holding all the items in the legend section.
-    /// (We want to preserve the order and don't care 
+    /// (We want to preserve the order and don't care
     /// much about speed here), so we don't use a hash
     QVector<GeoSceneItem*> m_items;
 
     QString m_name;
     QString m_heading;
     QString m_connectTo;
+    QString m_radio;
 
     bool    m_checkable;
+
     int     m_spacing;
 };
 

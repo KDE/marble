@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2013      Yazeed Zoabi      <yazeedz.zoabi@gmail.com>
 //
 
 //
@@ -44,6 +45,8 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
 
  public slots:
     void setCheckedProperty( const QString& name, bool checked );
+    void setRadioCheckedProperty( const QString& value,const QString& name, bool checked );
+
 
  signals:
     void toggledShowProperty( QString, bool );
@@ -65,7 +68,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
 
  private:
     Q_DISABLE_COPY( MarbleLegendBrowser )
-    MarbleLegendBrowserPrivate  * const d; 
+    MarbleLegendBrowserPrivate  * const d;
 };
 
 }

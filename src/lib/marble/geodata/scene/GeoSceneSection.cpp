@@ -34,7 +34,8 @@ GeoSceneSection::GeoSceneSection( const QString& name )
       m_heading( "" ),
       m_connectTo( "" ),
       m_checkable( false ),
-      m_spacing( 12 )
+      m_spacing( 12 ),
+      m_radio( "" )
 {
 }
 
@@ -138,6 +139,16 @@ int  GeoSceneSection::spacing() const
 void GeoSceneSection::setSpacing( int spacing )
 {
     m_spacing = spacing;
+}
+
+QString GeoSceneSection::radio() const
+{
+    return m_radio;
+}
+
+void GeoSceneSection::setRadio( const QString& radio )
+{
+    m_radio = radio;
 }
 
 }
