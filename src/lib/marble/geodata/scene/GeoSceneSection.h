@@ -83,7 +83,6 @@ class GEODATA_EXPORT GeoSceneSection : public GeoNode
     QString m_radio;
 
     bool    m_checkable;
-
     int     m_spacing;
 };
 

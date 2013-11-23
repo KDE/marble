@@ -327,16 +327,13 @@ QString MarbleLegendBrowser::generateSectionsHtml()
         QString checkBoxString;
         if (section->checkable()) {
             // If it's needed to make a checkbox here, we will
-            QString checked = "checked";
-            if (!d->m_checkBoxMap[section->connectTo()])
-                checked = "";
+            QString const checked = d->m_checkBoxMap[section->connectTo()] ? "checked" : "";
             /* Important comment:
              * We inject Marble object into JavaScript of each legend html file
              * This is only one way to handle checkbox changes we see, so
              * Marble.setCheckedProperty is a function that does it
              */
-            if(section->radio()!="")
-            {
+            if(section->radio()!="") {
                 checkBoxString = ""
                         "<label class=\"radio\">"
                         "<input type=\"radio\" "
@@ -345,8 +342,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                         + section->heading() +
                         "</span></label>";
 
-            }
-            else{
+            } else {
                 checkBoxString = ""
                         "<label class=\"checkbox\">"
                         "<input type=\"checkbox\" "
@@ -412,12 +408,11 @@ void MarbleLegendBrowser::setRadioCheckedProperty( const QString& value, const Q
 {
     QWebElement box = page()->mainFrame()->findFirstElement("input[value="+value+"]");
     QWebElementCollection boxes = page()->mainFrame()->findAllElements("input[name="+name+"]");
-    int i=0;
-    QString CurrentValue="";
-    for(i=0;i<boxes.count();i++){
-        CurrentValue = boxes.at(i).attribute("value");
-        d->m_checkBoxMap[CurrentValue]=false;
-        emit toggledShowProperty( CurrentValue, false );
+    QString currentValue="";
+    for(int i=0; i<boxes.count(); ++i) {
+        currentValue = boxes.at(i).attribute("value");
+        d->m_checkBoxMap[currentValue]=false;
+        emit toggledShowProperty( currentValue, false );
     }
     if (!box.isNull()) {
         if (checked != d->m_checkBoxMap[value]) {

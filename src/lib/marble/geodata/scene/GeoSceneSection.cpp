@@ -33,9 +33,9 @@ GeoSceneSection::GeoSceneSection( const QString& name )
     : m_name( name ),
       m_heading( "" ),
       m_connectTo( "" ),
+      m_radio( "" ),
       m_checkable( false ),
-      m_spacing( 12 ),
-      m_radio( "" )
+      m_spacing( 12 )
 {
 }
 
