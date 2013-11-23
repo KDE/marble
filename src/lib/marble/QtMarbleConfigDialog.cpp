@@ -172,6 +172,9 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, BookmarkS
     d->ui_cloudSyncSettings.button_syncNow->setEnabled( syncBookmarks() );
     connect( d->ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()), SIGNAL(syncNowClicked()) );
 
+    connect(d->m_syncManager, SIGNAL(syncComplete()), this, SLOT(updateLastSync()));
+    updateLastSync();
+
     // Layout
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->addWidget( tabWidget );
@@ -246,6 +249,19 @@ void QtMarbleConfigDialog::disableSyncNow()
 void QtMarbleConfigDialog::enableSyncNow()
 {
     d->ui_cloudSyncSettings.button_syncNow->setEnabled(true);
+}
+
+void QtMarbleConfigDialog::updateLastSync()
+{
+    if (!d->m_syncManager->lastSync().isValid()) {
+        d->ui_cloudSyncSettings.labelLastSync->setText(tr("<b>Never synced</b>"));
+        return;
+    }
+
+    const QString title = tr("<b>Last sync: %1</b>")
+            .arg(d->m_syncManager->lastSync().toString());
+
+    d->ui_cloudSyncSettings.labelLastSync->setText(title);
 }
 
 void QtMarbleConfigDialog::readSettings()

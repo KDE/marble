@@ -34,6 +34,11 @@ public:
     ~BookmarkSyncManager();
 
     /**
+     * Last time Marble synced everything up
+     */
+    QDateTime lastSync() const;
+
+    /**
      * Checks if the user enabled bookmark synchronization.
      * @return true if bookmark synchronization enabled
      */

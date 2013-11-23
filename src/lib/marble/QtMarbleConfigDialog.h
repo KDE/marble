@@ -135,6 +135,11 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     void enableSyncNow();
 
     /**
+     * Sets new title for the "Last Sync" label indicator
+     */
+    void updateLastSync();
+
+    /**
      * Read settings and update interface.
      */
     void readSettings();

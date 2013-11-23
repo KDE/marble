@@ -233,6 +233,13 @@ BookmarkSyncManager::~BookmarkSyncManager()
     delete d;
 }
 
+QDateTime BookmarkSyncManager::lastSync() const
+{
+    const QString last = d->lastSyncedKmlPath();
+    if (last.isEmpty())
+        return QDateTime();
+    return QFileInfo(last).created();
+}
 
 bool BookmarkSyncManager::isBookmarkSyncEnabled() const
 {
