@@ -115,9 +115,6 @@ MainWindow::MainWindow( const QString &marbleDataPath, const QVariantMap &cmdLin
     setWindowIcon( QIcon( ":/icons/marble.png" ) );
     setCentralWidget( splitter );
 
-    // Load bookmark file. If it does not exist, a default one will be used.
-    m_marbleWidget->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
-
     m_workOfflineAct = menuBar()->addAction( tr( "Work Off&line" ) );
     m_workOfflineAct->setIcon( QIcon( ":/icons/user-offline.png" ) );
     m_workOfflineAct->setCheckable( true );
@@ -304,6 +301,9 @@ QString MainWindow::readMarbleDataPath()
 
 void MainWindow::readSettings(const QVariantMap& overrideSettings)
 {
+    // Load bookmark file. If it does not exist, a default one will be used.
+    m_marbleWidget->model()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
+
     QSettings settings;
 
     settings.beginGroup( "MainWindow" );
