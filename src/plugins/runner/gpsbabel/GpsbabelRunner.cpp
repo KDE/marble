@@ -16,6 +16,7 @@
 #include <QProcess>
 #include <QFileInfo>
 #include <QTemporaryFile>
+#include <QDir>
 
 namespace Marble
 {
@@ -29,7 +30,7 @@ GpsbabelRunner::~GpsbabelRunner()
 {
 }
 
-void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
+void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role )
 {
     if ( !QFileInfo( fileName ).exists() ) {
         qWarning( "File does not exist!" );
@@ -37,7 +38,7 @@ void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role = Unk
         return;
     }
 
-    QTemporaryFile tempKmlFile( "marble-gpsbabel-XXXXXX.kml" );
+    QTemporaryFile tempKmlFile( QDir::tempPath() + "/marble-gpsbabel-XXXXXX.kml" );
     tempKmlFile.open();
     QFile kmlFile( tempKmlFile.fileName() );
     QString command = "gpsbabel -i nmea -f ";
@@ -54,6 +55,7 @@ void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role = Unk
             return;
         }
 
+        document->setDocumentRole( role );
         emit parsingFinished( document );
     } else {
         emit parsingFinished( 0, "Failed to parse NMEA file." );
