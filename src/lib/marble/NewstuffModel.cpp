@@ -226,9 +226,14 @@ NewstuffModelPrivate::NewstuffModelPrivate( NewstuffModel* parent ) : m_parent( 
 QIcon NewstuffModelPrivate::preview( int index )
 {
     if ( m_items.at( index ).m_preview.isNull() ) {
+        QPixmap dummyPixmap( 1, 1 );
+        dummyPixmap.fill( Qt::transparent );
+        setPreview( index, QIcon( dummyPixmap ) );
         QNetworkReply *reply = m_networkAccessManager.get( QNetworkRequest( m_items.at( index ).m_previewUrl ) );
         m_networkJobs.insert( reply, new FetchPreviewJob( this, index ) );
     }
+
+    Q_ASSERT( !m_items.at( index ).m_preview.isNull() );
 
     return m_items.at( index ).m_preview;
 }
