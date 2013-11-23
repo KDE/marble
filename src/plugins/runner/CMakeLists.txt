@@ -27,6 +27,7 @@ add_subdirectory( osm )
 add_subdirectory( pn2 )
 add_subdirectory( pnt )
 add_subdirectory( log )
+add_subdirectory( gpsbabel )
 
 macro_optional_find_package( libshp )
 marble_set_package_properties( libshp PROPERTIES DESCRIPTION "reading and writing of ESRI Shapefiles (.shp)" )
