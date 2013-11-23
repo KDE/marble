@@ -19,6 +19,7 @@
 #include <QEvent>
 #include <QFile>
 #include <QFileInfo>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QTextFrame>
 #include <QScrollBar>
@@ -54,6 +55,9 @@ class MarbleLegendBrowserPrivate
     QMap<QString, bool>     m_checkBoxMap;
     QMap<QString, QPixmap>  m_symbolMap;
     bool                 m_isLegendLoaded;
+#ifdef Q_WS_MAEMO_5
+    bool m_suppressSelection;
+#endif // Q_WS_MAEMO_5
 };
 
 
@@ -66,6 +70,9 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
 {
     d->m_isLegendLoaded = false;
     d->m_marbleModel = 0;
+#ifdef Q_WS_MAEMO_5
+    d->m_suppressSelection = false;
+#endif // Q_WS_MAEMO_5
 
     QWebFrame *frame = page()->mainFrame();
     connect(frame, SIGNAL(javaScriptWindowObjectCleared()),
@@ -187,6 +194,24 @@ bool MarbleLegendBrowser::event( QEvent * event )
             loadLegend();
         }
     }
+#ifdef Q_WS_MAEMO_5
+    else if ( event->type() == QEvent::MouseButtonPress ) {
+        if ( static_cast<QMouseEvent *>( event )->button() == Qt::LeftButton ) {
+            d->m_suppressSelection = true;
+        }
+    }
+    else if ( event->type() == QEvent::MouseButtonRelease ) {
+        if ( static_cast<QMouseEvent *>( event )->button() == Qt::LeftButton ) {
+            d->m_suppressSelection = false;
+        }
+    }
+    else if ( event->type() == QEvent::MouseMove ) {
+        if ( d->m_suppressSelection ) {
+            // eat event to suppress text selection under Maemo5
+            return true;
+        }
+    }
+#endif // Q_WS_MAEMO_5
 
     return MarbleWebView::event( event );
 }
