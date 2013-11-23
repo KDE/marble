@@ -94,4 +94,3 @@ MimeType=application/vnd.google-earth.kml+xml;
 Icon=marble
 Terminal=false
 Categories=Qt;KDE;Education;Geography;
-X-DocPath=marble/index.html
