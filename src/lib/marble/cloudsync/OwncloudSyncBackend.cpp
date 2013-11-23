@@ -289,7 +289,7 @@ void OwncloudSyncBackend::saveDownloadedRoute()
     bool pathCreated = d->m_cacheDir.mkpath( d->m_cacheDir.absolutePath() );
     if ( !pathCreated ) {
         mDebug() << "Couldn't create the path " << d->m_cacheDir.absolutePath() <<
-                    ". Check if your user has sufficent permissions for this operation.";
+                    ". Check if your user has sufficient permissions for this operation.";
     }
     
     QString kmlFilePath = QString( "%0/%1.kml").arg( d->m_cacheDir.absolutePath(), timestamp );
@@ -309,7 +309,7 @@ void OwncloudSyncBackend::saveDownloadedRoute()
     bool previewPathCreated = d->m_cacheDir.mkpath( previewPath );
     if ( !previewPathCreated ) {
         mDebug() << "Couldn't create the path " << previewPath <<
-                    ". Check if your user has sufficent permissions for this operation.";
+                    ". Check if your user has sufficient permissions for this operation.";
     }
 
     QString previewFilePath = QString( "%0/preview/%1.jpg").arg( d->m_cacheDir.absolutePath(), timestamp );
