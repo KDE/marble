@@ -698,6 +698,8 @@ void NewstuffModel::cancel( int index )
                     d->m_currentFile = 0;
                 }
 
+                d->m_items[d->m_currentAction.first].m_downloadedSize = 0;
+
                 emit installationFailed( d->m_currentAction.first, tr( "Installation aborted by user." ) );
                 d->m_currentAction = NewstuffModelPrivate::Action( -1, NewstuffModelPrivate::Install );
             } else {
@@ -769,6 +771,7 @@ void NewstuffModel::mapInstalled( int exitStatus )
     }
 
     emit installationProgressed( d->m_currentAction.first, 1.0 );
+    d->m_items[d->m_currentAction.first].m_downloadedSize = 0;
     if ( exitStatus == 0 ) {
         emit installationFinished( d->m_currentAction.first );
         QModelIndex const affected = index( d->m_currentAction.first );
