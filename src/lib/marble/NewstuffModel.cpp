@@ -774,30 +774,30 @@ void NewstuffModel::mapInstalled( int exitStatus )
     d->m_items[d->m_currentAction.first].m_downloadedSize = 0;
     if ( exitStatus == 0 ) {
         emit installationFinished( d->m_currentAction.first );
-        QModelIndex const affected = index( d->m_currentAction.first );
-        emit dataChanged( affected, affected );
     } else {
         mDebug() << "Process exit status " << exitStatus << " indicates an error.";
         emit installationFailed( d->m_currentAction.first , QString( "Unable to unpack file. Process exited with status code %1." ).arg( exitStatus ) );
     }
+    QModelIndex const affected = index( d->m_currentAction.first );
 
     { // <-- do not remove, mutex locker scope
         QMutexLocker locker( &d->m_mutex );
         d->m_currentAction = NewstuffModelPrivate::Action( -1, NewstuffModelPrivate::Install );
     }
+    emit dataChanged( affected, affected );
     d->processQueue();
 }
 
 void NewstuffModel::mapUninstalled()
 {
     QModelIndex const affected = index( d->m_currentAction.first );
-    emit dataChanged( affected, affected );
     emit uninstallationFinished( d->m_currentAction.first );
 
     { // <-- do not remove, mutex locker scope
         QMutexLocker locker( &d->m_mutex );
         d->m_currentAction = NewstuffModelPrivate::Action( -1, NewstuffModelPrivate::Install );
     }
+    emit dataChanged( affected, affected );
     d->processQueue();
 }
 
