@@ -76,6 +76,33 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
         append( &url, "routeType", settings["preference"].toString() );
     }
 
+    if ( !settings["ascending"].toString().isEmpty() && !settings["descending"].toString().isEmpty() ) {
+            if ( settings["ascending"].toString() == "AVOID_UP_HILL"
+                       && settings["descending"].toString() == "AVOID_DOWN_HILL" ) {
+                append( &url, "roadGradeStrategy", "AVOID_ALL_HILLS" );
+            }
+            else if ( settings["ascending"].toString() == "FAVOR_UP_HILL"
+                         && settings["descending"].toString() == "FAVOR_DOWN_HILL" ) {
+                append( &url, "roadGradeStrategy", "FAVOR_ALL_HILLS" );
+            }
+            else if ( settings["ascending"].toString() == "DEFAULT_STRATEGY"
+                         && settings["descending"].toString() == "DEFAULT_STRATEGY" ) {
+                append( &url, "roadGradeStrategy", "DEFAULT_STRATEGY" );
+            }
+            else if ( settings["ascending"].toString() == "DEFAULT_STRATEGY" ) {
+                append( &url, "roadGradeStrategy", settings["descending"].toString() );
+            }
+            else if ( settings["descending"].toString() == "DEFAULT_STRATEGY" ) {
+                append( &url, "roadGradeStrategy", settings["ascending"].toString() );
+            }
+            else if ( settings["descending"].toString() == "AVOID_DOWN_HILL" ) {
+                append( &url, "roadGradeStrategy", settings["descending"].toString() );
+            }
+            else if ( settings["ascending"].toString() == "AVOID_UP_HILL" ) {
+                append( &url, "roadGradeStrategy", settings["ascending"].toString() );
+            }
+        }
+
     m_request.setUrl( QUrl( url ) );
     m_request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "MapQuestRunner" ) );
 

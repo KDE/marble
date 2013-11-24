@@ -80,6 +80,14 @@ public:
         ui_configWidget->preference->addItem( tr( "Pedestrian" ), "pedestrian" );
         ui_configWidget->preference->addItem( tr( "Bicycle" ), "bicycle" );
         ui_configWidget->preference->addItem( tr( "Transit (Public Transport)" ), "multimodal" );
+
+        ui_configWidget->ascending->addItem( tr( "Ignore" ), "DEFAULT_STRATEGY" );
+        ui_configWidget->ascending->addItem( tr( "Avoid" ), "AVOID_UP_HILL" );
+        ui_configWidget->ascending->addItem( tr( "Favor" ), "FAVOR_UP_HILL" );
+
+        ui_configWidget->descending->addItem( tr( "Ignore" ), "DEFAULT_STRATEGY" );
+        ui_configWidget->descending->addItem( tr( "Avoid" ), "AVOID_DOWN_HILL" );
+        ui_configWidget->descending->addItem( tr( "Favor" ), "FAVOR_DOWN_HILL" );
     }
 
     virtual void loadSettings( const QHash<QString, QVariant> &settings_ )
@@ -90,11 +98,21 @@ public:
         if ( !settings.contains( "preference" ) ) {
             settings.insert( "preference", "fastest" );
         }
+        if ( !settings.contains( "ascending" ) ) {
+            settings.insert( "ascending", "DEFAULT_STRATEGY" );
+        }
+        if ( !settings.contains( "descending" ) ) {
+            settings.insert( "descending", "DEFAULT_STRATEGY" );
+        }
         ui_configWidget->preference->setCurrentIndex(
                     ui_configWidget->preference->findData( settings.value( "preference" ).toString() ) );
         ui_configWidget->noMotorways->setCheckState( static_cast<Qt::CheckState>( settings.value( "noMotorways" ).toInt() ) );
         ui_configWidget->noTollways->setCheckState( static_cast<Qt::CheckState>( settings.value( "noTollways" ).toInt() ) );
         ui_configWidget->noFerries->setCheckState( static_cast<Qt::CheckState>( settings.value( "noFerries" ).toInt() ) );
+        ui_configWidget->ascending->setCurrentIndex(
+                    ui_configWidget->ascending->findData( settings.value( "ascending" ).toString() ) );
+        ui_configWidget->descending->setCurrentIndex(
+                    ui_configWidget->descending->findData( settings.value( "descending" ).toString() ) );
     }
 
     virtual QHash<QString, QVariant> settings() const
@@ -105,6 +123,10 @@ public:
         settings.insert( "noMotorways", ui_configWidget->noMotorways->checkState() );
         settings.insert( "noTollways", ui_configWidget->noTollways->checkState() );
         settings.insert( "noFerries", ui_configWidget->noFerries->checkState() );
+        settings.insert( "ascending",
+                         ui_configWidget->ascending->itemData( ui_configWidget->ascending->currentIndex() ) );
+        settings.insert( "descending",
+                         ui_configWidget->descending->itemData( ui_configWidget->descending->currentIndex() ) );
         return settings;
     }
 private:

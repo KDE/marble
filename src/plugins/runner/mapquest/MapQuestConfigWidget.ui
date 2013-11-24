@@ -6,43 +6,118 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>284</width>
-    <height>145</height>
+    <width>374</width>
+    <height>178</height>
    </rect>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Preference:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QComboBox" name="preference"/>
-   </item>
-   <item row="1" column="1">
-    <widget class="QCheckBox" name="noMotorways">
-     <property name="text">
-      <string>Avoid motorways</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QCheckBox" name="noTollways">
-     <property name="text">
-      <string>Avoid tollways</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QCheckBox" name="noFerries">
-     <property name="text">
-      <string>Avoid ferries</string>
-     </property>
-    </widget>
-   </item>
-  </layout>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>4</x>
+     <y>4</y>
+     <width>73</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Preference:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="preference">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>0</y>
+     <width>221</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="noMotorways">
+   <property name="geometry">
+    <rect>
+     <x>81</x>
+     <y>31</y>
+     <width>129</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Avoid motorways</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="noTollways">
+   <property name="geometry">
+    <rect>
+     <x>81</x>
+     <y>56</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Avoid tollways</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="noFerries">
+   <property name="geometry">
+    <rect>
+     <x>81</x>
+     <y>81</y>
+     <width>102</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Avoid ferries</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="ascending">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>110</y>
+     <width>231</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ascending slope:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>121</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Descending slope:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="descending">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>140</y>
+     <width>231</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
