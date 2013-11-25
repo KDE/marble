@@ -37,7 +37,7 @@ class HttpDownloadManager::Private
     DownloadQueueSet *findQueues( const QString& hostName, const DownloadUsage usage );
 
     bool m_downloadEnabled;
-    QTimer *m_requeueTimer;
+    QTimer m_requeueTimer;
     /**
      * Contains per download policy a queue set containing of
      * - a queue where jobs are waiting for being activated (=downloaded)
@@ -52,7 +52,7 @@ class HttpDownloadManager::Private
 
 HttpDownloadManager::Private::Private( StoragePolicy *policy )
     : m_downloadEnabled( true ), //enabled for now
-      m_requeueTimer( 0 ),
+      m_requeueTimer(),
       m_storagePolicy( policy ),
       m_networkAccessManager()
 {
@@ -97,9 +97,8 @@ DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostN
 HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
     : d( new Private( policy ) )
 {
-    d->m_requeueTimer = new QTimer( this );
-    d->m_requeueTimer->setInterval( requeueTime );
-    connect( d->m_requeueTimer, SIGNAL(timeout()), this, SLOT(requeue()) );
+    d->m_requeueTimer.setInterval( requeueTime );
+    connect( &d->m_requeueTimer, SIGNAL(timeout()), this, SLOT(requeue()) );
     connectDefaultQueueSets();
 }
 
@@ -162,7 +161,7 @@ void HttpDownloadManager::finishJob( const QByteArray& data, const QString& dest
 
 void HttpDownloadManager::requeue()
 {
-    d->m_requeueTimer->stop();
+    d->m_requeueTimer.stop();
 
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator pos = d->m_queueSets.begin();
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator const end = d->m_queueSets.end();
@@ -173,8 +172,8 @@ void HttpDownloadManager::requeue()
 
 void HttpDownloadManager::startRetryTimer()
 {
-    if ( !d->m_requeueTimer->isActive() )
-        d->m_requeueTimer->start();
+    if ( !d->m_requeueTimer.isActive() )
+        d->m_requeueTimer.start();
 }
 
 void HttpDownloadManager::connectDefaultQueueSets()
