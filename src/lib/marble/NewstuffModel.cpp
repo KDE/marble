@@ -211,6 +211,10 @@ FetchPreviewJob::FetchPreviewJob( NewstuffModelPrivate *modelPrivate, int index 
 void FetchPreviewJob::run( const QByteArray &data )
 {
     const QImage image = QImage::fromData( data );
+
+    if ( image.isNull() )
+        return;
+
     const QPixmap pixmap = QPixmap::fromImage( image );
     const QIcon previewIcon( pixmap );
     m_modelPrivate->setPreview( m_index, previewIcon );
