@@ -465,7 +465,8 @@ NewstuffModel::NewstuffModel( QObject *parent ) :
     connect( &d->m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
              this, SLOT(handleProviderData(QNetworkReply*)) );
 
-    QHash<int,QByteArray> roles;;
+    QHash<int,QByteArray> roles;
+    roles[Qt::DisplayRole] = "display";
     roles[Name] = "name";
     roles[Author] = "author";
     roles[License] = "license";

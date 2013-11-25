@@ -27,6 +27,7 @@ MapThemeModel::MapThemeModel( QObject *parent ) : QSortFilterProxyModel( parent 
     connect( m_themeManager, SIGNAL(themesChanged()), this, SLOT(handleChangedThemes()) );
 
     QHash<int,QByteArray> roleNames;
+    roleNames[ Qt::DisplayRole ] = "display";
     roleNames[ Qt::DecorationRole ] = "icon";
     roleNames[ Qt::UserRole + 1 ] = "mapThemeId";
 #if QT_VERSION < 0x050000
