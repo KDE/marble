@@ -21,7 +21,7 @@ set( my_SRCS
 FILE (GLOB QML_FILES *.qml activities/*.qml plasma/*.qml harmattan/*.qml)
 marble_add_project_resources(${QML_FILES})
 
-qt_add_resources(my_SRCS meego.qrc)
+qt_add_resources(my_SRCS meego.qrc harmattan/harmattan.qrc)
 marble_qt4_automoc( ${my_SRCS} )
 add_executable( marble-touch ${my_SRCS} )
 if (QT4_FOUND)
