@@ -19,25 +19,22 @@
 
 namespace Marble
 {
-class GeoDataGroundOverlay : Marble::GeoDataOverlay
+class PositionProviderPlugin : QObject, Marble::PositionProviderPluginInterface
 {
 %TypeHeaderCode
-#include <GeoDataGroundOverlay.h>
+#include <PositionProviderPlugin.h>
 %End
 
 public:
-                            GeoDataGroundOverlay ();
-                            GeoDataGroundOverlay (const Marble::GeoDataGroundOverlay& other);
-    ~GeoDataGroundOverlay ();
-    virtual const char*     nodeType () const;
-    double                  altitude () const;
-    void                    setAltitude (double altitude);
-    Marble::AltitudeMode    altitudeMode () const;
-    void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
-    Marble::GeoDataLatLonBox&  latLonBox () const;
-    void                    setLatLonBox (const Marble::GeoDataLatLonBox& box);
-//ig    const GeoDataLatLonQuad&  latLonQuad () const;
-//ig    GeoDataLatLonQuad&      latLonQuad ();
-//ig    void                    setLatLonQuad (const GeoDataLatLonQuad& quad);
+    virtual ~PositionProviderPlugin ();
+    const Marble::MarbleModel*  marbleModel () const;
+    void                    setMarbleModel (const Marble::MarbleModel*);
+    virtual QString         guiString () const=0;
+    virtual Marble::PositionProviderPlugin*  newInstance () const=0;
+signals:
+    void                    statusChanged (Marble::PositionProviderStatus status) const;
+    void                    positionChanged (Marble::GeoDataCoordinates position, Marble::GeoDataAccuracy accuracy) const;
+protected:
+                            PositionProviderPlugin ();
 };
 };

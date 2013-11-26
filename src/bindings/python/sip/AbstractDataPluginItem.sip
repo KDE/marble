@@ -48,22 +48,28 @@
 #include <MarbleMap.h>
 #include <MarbleModel.h>
 #include <MarbleNavigator.h>
-#include <MarbleRunnerManager.h>
 #include <MarbleWidget.h>
+#include <MarbleWidgetPopupMenu.h>
 #include <NavigationWidget.h>
 #include <ParseRunnerPlugin.h>
 #include <ParsingRunner.h>
+#include <ParsingRunnerManager.h>
 #include <PluginAboutDialog.h>
+#include <PluginManager.h>
+#include <PositionProviderPlugin.h>
 #include <PositionTracking.h>
 #include <QtMarbleConfigDialog.h>
 #include <RenderPlugin.h>
 #include <ReverseGeocodingRunner.h>
+#include <ReverseGeocodingRunnerManager.h>
 #include <ReverseGeocodingRunnerPlugin.h>
 #include <routing/RouteRequest.h>
 #include <routing/RoutingModel.h>
 #include <RoutingRunner.h>
+#include <RoutingRunnerManager.h>
 #include <RoutingRunnerPlugin.h>
 #include <SearchRunner.h>
+#include <SearchRunnerManager.h>
 #include <SearchRunnerPlugin.h>
 #include <SunLocator.h>
 #include <TileCreator.h>
@@ -121,12 +127,18 @@ public:
         sipType = sipType_Marble_MarbleMap;
     else if (dynamic_cast<Marble::MarbleModel*>(sipCpp))
         sipType = sipType_Marble_MarbleModel;
-    else if (dynamic_cast<Marble::MarbleRunnerManager*>(sipCpp))
-        sipType = sipType_Marble_MarbleRunnerManager;
+    else if (dynamic_cast<Marble::MarbleWidgetPopupMenu*>(sipCpp))
+        sipType = sipType_Marble_MarbleWidgetPopupMenu;
     else if (dynamic_cast<Marble::ParseRunnerPlugin*>(sipCpp))
         sipType = sipType_Marble_ParseRunnerPlugin;
     else if (dynamic_cast<Marble::ParsingRunner*>(sipCpp))
         sipType = sipType_Marble_ParsingRunner;
+    else if (dynamic_cast<Marble::ParsingRunnerManager*>(sipCpp))
+        sipType = sipType_Marble_ParsingRunnerManager;
+    else if (dynamic_cast<Marble::PluginManager*>(sipCpp))
+        sipType = sipType_Marble_PluginManager;
+    else if (dynamic_cast<Marble::PositionProviderPlugin*>(sipCpp))
+        sipType = sipType_Marble_PositionProviderPlugin;
     else if (dynamic_cast<Marble::PositionTracking*>(sipCpp))
         sipType = sipType_Marble_PositionTracking;
     else if (dynamic_cast<Marble::RenderPlugin*>(sipCpp))
@@ -139,16 +151,22 @@ public:
         }
     else if (dynamic_cast<Marble::ReverseGeocodingRunner*>(sipCpp))
         sipType = sipType_Marble_ReverseGeocodingRunner;
+    else if (dynamic_cast<Marble::ReverseGeocodingRunnerManager*>(sipCpp))
+        sipType = sipType_Marble_ReverseGeocodingRunnerManager;
     else if (dynamic_cast<Marble::ReverseGeocodingRunnerPlugin*>(sipCpp))
         sipType = sipType_Marble_ReverseGeocodingRunnerPlugin;
     else if (dynamic_cast<Marble::RouteRequest*>(sipCpp))
         sipType = sipType_Marble_RouteRequest;
     else if (dynamic_cast<Marble::RoutingRunner*>(sipCpp))
         sipType = sipType_Marble_RoutingRunner;
+    else if (dynamic_cast<Marble::RoutingRunnerManager*>(sipCpp))
+        sipType = sipType_Marble_RoutingRunnerManager;
     else if (dynamic_cast<Marble::RoutingRunnerPlugin*>(sipCpp))
         sipType = sipType_Marble_RoutingRunnerPlugin;
     else if (dynamic_cast<Marble::SearchRunner*>(sipCpp))
         sipType = sipType_Marble_SearchRunner;
+    else if (dynamic_cast<Marble::SearchRunnerManager*>(sipCpp))
+        sipType = sipType_Marble_SearchRunnerManager;
     else if (dynamic_cast<Marble::SearchRunnerPlugin*>(sipCpp))
         sipType = sipType_Marble_SearchRunnerPlugin;
     else if (dynamic_cast<Marble::SunLocator*>(sipCpp))

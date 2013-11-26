@@ -49,6 +49,7 @@ signals:
     void                    deviatedFromRoute (bool deviated);
     void                    currentRouteChanged ();
 public:
-    int                     rightNeighbor (const Marble::GeoDataCoordinates& position, const Marble::RouteRequest* route) const;
+    QHash<int,QByteArray>   roleNames () const;
+    int                     rightNeighbor (const Marble::GeoDataCoordinates& position, const Marble::RouteRequest * route) const;
 };
 };

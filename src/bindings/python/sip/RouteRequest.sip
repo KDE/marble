@@ -52,5 +52,8 @@ public:
     void                    append (const Marble::GeoDataCoordinates& coordinates, const QString& name = QString());
     void                    insert (int index, const Marble::GeoDataCoordinates& coordinates, const QString& name = QString());
     void                    setPosition (int index, const Marble::GeoDataCoordinates& position, const QString& name = QString());
+    void                    append (const Marble::GeoDataPlacemark& placemark);
+//ig    Marble::GeoDataPlacemark&  operator [] (int index);
+    const Marble::GeoDataPlacemark&  operator [] (int index) const;
 };
 };

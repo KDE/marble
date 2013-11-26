@@ -27,16 +27,5 @@ class GeoDataOverlay : Marble::GeoDataFeature
 
 public:
                             GeoDataOverlay ();
-    ~GeoDataOverlay ();
-                            GeoDataOverlay (const Marble::GeoDataOverlay& other);
-    QColor                  color () const;
-    void                    setColor (const QColor& color);
-    int                     drawOrder () const;
-    void                    setDrawOrder (int order);
-    QImage                  icon () const;
-    void                    setIcon (const QImage& icon);
-    void                    setIconFile (const QString& path);
-    QString                 iconFile () const;
-    QString                 absoluteIconFile () const;
 };
 };

@@ -66,5 +66,9 @@ public:
     void                    clear ();
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
+//ig    QVector<GeoDataItemIcon*>::Iterator  begin ();
+//ig    QVector<GeoDataItemIcon*>::Iterator  end ();
+//ig    QVector<GeoDataItemIcon*>::ConstIterator  constBegin () const;
+//ig    QVector<GeoDataItemIcon*>::ConstIterator  constEnd () const;
 };
 };

@@ -31,7 +31,6 @@ public:
     QImage                  icon () const;
     void                    setIconPath (const QString& filename);
     void                    setHotSpot (const QPointF& hotSpot, Marble::GeoDataHotSpot::Units xunits, Marble::GeoDataHotSpot::Units yunits);
-    const QPointF&          hotSpot () const;
     void                    setScale (const float& scale /in/);
     float                   scale () const;
     virtual void            pack (QDataStream& stream) const;

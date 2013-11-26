@@ -36,12 +36,13 @@ public:
     bool                    operator == (const Marble::TileId& rhs) const;
     bool                    operator < (const Marble::TileId& rhs) const;
     static Marble::TileId   fromCoordinates (const Marble::GeoDataCoordinates& coords, int popularity);
+//ig    Marble::GeoDataLatLonBox  toLatLonBox (const GeoSceneTiled* textureLayer) const;
 };
 uint                    qHash (const Marble::TileId&);
 //ig int                     TileId::zoomLevel () const;
 //ig int                     TileId::x () const;
 //ig int                     TileId::y () const;
 //ig uint                    TileId::mapThemeIdHash () const;
-//ig uint                    qHash (const Marble::TileId& tid);
+//ig uint                    qHash (const Marble::TileId&);
 };
 //ig QDebug                  operator << (QDebug, const Marble::TileId&);

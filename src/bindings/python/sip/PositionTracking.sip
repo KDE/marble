@@ -27,7 +27,6 @@ class PositionTracking : QObject /Abstract/
 
 public:
     ~PositionTracking ();
-//ig    void                    setPositionProviderPlugin (PositionProviderPlugin* plugin);
 //ig    PositionProviderPlugin*  positionProviderPlugin ();
     QString                 error () const;
     qreal                   speed () const;
@@ -40,7 +39,6 @@ public:
     void                    clearTrack ();
 signals:
     void                    gpsLocation (Marble::GeoDataCoordinates, qreal);
-//ig    void                    positionProviderPluginChanged (PositionProviderPlugin* activePlugin);
 public:
     bool                    isTrackEmpty () const;
     explicit                PositionTracking (Marble::GeoDataTreeModel* model);
@@ -52,5 +50,8 @@ public:
     void                    readSettings ();
     void                    writeSettings ();
     bool                    saveTrack (const QString& fileName);
+    void                    setPositionProviderPlugin (Marble::PositionProviderPlugin* plugin);
+signals:
+    void                    positionProviderPluginChanged (Marble::PositionProviderPlugin* activePlugin);
 };
 };

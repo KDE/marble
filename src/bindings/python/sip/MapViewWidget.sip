@@ -28,7 +28,6 @@ class MapViewWidget : QWidget
 public:
                             MapViewWidget (QWidget* parent /TransferThis/ = 0, Qt::WindowFlags f = 0);
     ~MapViewWidget ();
-    void                    setMarbleWidget (Marble::MarbleWidget* widget);
 signals:
     void                    showMapWizard ();
     void                    showUploadDialog ();
@@ -43,5 +42,7 @@ protected:
     void                    resizeEvent (QResizeEvent* event);
 signals:
     void                    mapThemeDeleted ();
+public:
+    void                    setMarbleWidget (Marble::MarbleWidget* widget, Marble::MapThemeManager* mapThemeManager);
 };
 };

@@ -19,20 +19,21 @@
 
 namespace Marble
 {
-class SearchRunner : QObject
+class SearchRunnerManager : QObject
 {
 %TypeHeaderCode
-#include <SearchRunner.h>
+#include <SearchRunnerManager.h>
 %End
 
 public:
-    explicit                SearchRunner (QObject* parent /TransferThis/ = 0);
-    void                    setModel (const Marble::MarbleModel* model);
-    virtual void            search (const QString& searchTerm, const Marble::GeoDataLatLonAltBox& preferred)=0;
-// FIXME
+    explicit                SearchRunnerManager (const Marble::MarbleModel* marbleModel, QObject* parent /TransferThis/ = 0);
+    ~SearchRunnerManager ();
+    void                    findPlacemarks (const QString& searchTerm, const Marble::GeoDataLatLonAltBox& preferred = Marble::GeoDataLatLonAltBox());
+//ig    QVector<Marble::GeoDataPlacemark*>  searchPlacemarks (const QString& searchTerm, const Marble::GeoDataLatLonAltBox& preferred = Marble::GeoDataLatLonAltBox(), int timeout = 30000);
 signals:
-//ig    void                    searchFinished (QVector<Marble::GeoDataPlacemark*> result);
-protected:
-    const Marble::MarbleModel*  model () const;
+    void                    searchResultChanged (QAbstractItemModel* model);
+//ig    void                    searchResultChanged (const QVector<Marble::GeoDataPlacemark*>& result);
+    void                    searchFinished (const QString& searchTerm);
+    void                    placemarkSearchFinished ();
 };
 };

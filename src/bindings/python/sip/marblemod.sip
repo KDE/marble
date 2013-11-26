@@ -30,7 +30,10 @@
 
 %Include AbstractLayerInterface.sip
 %Include CylindricalProjection.sip
+%Include MarbleColors.sip
+%Include MarbleWebView.sip
 %Include TileCreatorDialog.sip
+%Include WikipediaService.sip
 %Include AbstractDataPlugin.sip
 %Include AbstractDataPluginItem.sip
 %Include AbstractDataPluginModel.sip
@@ -59,6 +62,7 @@
 %Include GeoDataFeature.sip
 %Include GeoDataFolder.sip
 %Include GeoDataGeometry.sip
+%Include GeoDataGroundOverlay.sip
 %Include GeoDataHotSpot.sip
 %Include GeoDataIconStyle.sip
 %Include GeoDataItemIcon.sip
@@ -74,7 +78,6 @@
 %Include GeoDataMultiGeometry.sip
 %Include GeoDataObject.sip
 %Include GeoDataOverlay.sip
-%Include GeoDataGroundOverlay.sip
 %Include GeoDataPlacemark.sip
 %Include GeoDataPoint.sip
 %Include GeoDataPolyStyle.sip
@@ -103,8 +106,8 @@
 %Include MapViewWidget.sip
 %Include MapWizard.sip
 %Include MarbleAboutDialog.sip
-%Include MarbleColors.sip
 %Include MarbleControlBox.sip
+%Include MarbleDebug.sip
 %Include MarbleDirs.sip
 %Include MarbleGlobal.sip
 %Include MarbleGraphicsGridLayout.sip
@@ -112,15 +115,17 @@
 %Include MarbleMap.sip
 %Include MarbleModel.sip
 %Include MarbleNavigator.sip
-%Include MarbleRunnerManager.sip
-%Include MarbleWebView.sip
 %Include MarbleWidget.sip
+%Include MarbleWidgetPopupMenu.sip
 %Include NavigationWidget.sip
 %Include ParseRunnerPlugin.sip
 %Include ParsingRunner.sip
+%Include ParsingRunnerManager.sip
 %Include Planet.sip
 %Include PluginAboutDialog.sip
 %Include PluginInterface.sip
+%Include PluginManager.sip
+%Include PositionProviderPlugin.sip
 %Include PositionProviderPluginInterface.sip
 %Include PositionTracking.sip
 %Include QtMarbleConfigDialog.sip
@@ -129,11 +134,14 @@
 %Include RenderPlugin.sip
 %Include RenderPluginInterface.sip
 %Include ReverseGeocodingRunner.sip
+%Include ReverseGeocodingRunnerManager.sip
 %Include ReverseGeocodingRunnerPlugin.sip
 %Include RoutingRunner.sip
+%Include RoutingRunnerManager.sip
 %Include RoutingRunnerPlugin.sip
 %Include ScreenGraphicsItem.sip
 %Include SearchRunner.sip
+%Include SearchRunnerManager.sip
 %Include SearchRunnerPlugin.sip
 %Include Serializable.sip
 %Include SunLocator.sip
@@ -144,7 +152,6 @@
 %Include TinyWebBrowser.sip
 %Include ViewportParams.sip
 %Include WidgetGraphicsItem.sip
-%Include WikipediaService.sip
 %Include AlternativeRoutesModel.sip
 %Include Maneuver.sip
 %Include Route.sip

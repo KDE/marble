@@ -19,25 +19,19 @@
 
 namespace Marble
 {
-class GeoDataGroundOverlay : Marble::GeoDataOverlay
+class RoutingRunnerManager : QObject
 {
 %TypeHeaderCode
-#include <GeoDataGroundOverlay.h>
+#include <RoutingRunnerManager.h>
 %End
 
 public:
-                            GeoDataGroundOverlay ();
-                            GeoDataGroundOverlay (const Marble::GeoDataGroundOverlay& other);
-    ~GeoDataGroundOverlay ();
-    virtual const char*     nodeType () const;
-    double                  altitude () const;
-    void                    setAltitude (double altitude);
-    Marble::AltitudeMode    altitudeMode () const;
-    void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
-    Marble::GeoDataLatLonBox&  latLonBox () const;
-    void                    setLatLonBox (const Marble::GeoDataLatLonBox& box);
-//ig    const GeoDataLatLonQuad&  latLonQuad () const;
-//ig    GeoDataLatLonQuad&      latLonQuad ();
-//ig    void                    setLatLonQuad (const GeoDataLatLonQuad& quad);
+    explicit                RoutingRunnerManager (const Marble::MarbleModel* marbleModel, QObject* parent /TransferThis/ = 0);
+    ~RoutingRunnerManager ();
+    void                    retrieveRoute (const Marble::RouteRequest* request);
+//ig    QVector<Marble::GeoDataDocument*>  searchRoute (const Marble::RouteRequest* request, int timeout = 30000);
+signals:
+    void                    routeRetrieved (Marble::GeoDataDocument* route);
+    void                    routingFinished ();
 };
 };

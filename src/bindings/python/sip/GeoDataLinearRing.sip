@@ -30,7 +30,6 @@ public:
     virtual bool            isClosed () const;
                             GeoDataLinearRing (const Marble::GeoDataGeometry& other);
     virtual qreal           length (qreal planetRadius, int offset = 0) const;
-//ig    virtual QVector<Marble::GeoDataLineString*>  toRangeCorrected () const;
     virtual bool            contains (const Marble::GeoDataCoordinates& coordinates) const;
 };
 // GeoDataLinearRing

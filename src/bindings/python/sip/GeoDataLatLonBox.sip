@@ -65,6 +65,7 @@ public:
     Marble::GeoDataLatLonBox&  operator |= (const Marble::GeoDataLatLonBox& other);
     void                    boundaries (qreal& north, qreal& south, qreal& east, qreal& west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     virtual void            clear ();
+    Marble::GeoDataLatLonBox  toCircumscribedRectangle () const;
 };
 // GeoDataLatLonBox
 

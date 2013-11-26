@@ -19,25 +19,19 @@
 
 namespace Marble
 {
-class GeoDataGroundOverlay : Marble::GeoDataOverlay
+class ReverseGeocodingRunnerManager : QObject
 {
 %TypeHeaderCode
-#include <GeoDataGroundOverlay.h>
+#include <ReverseGeocodingRunnerManager.h>
 %End
 
 public:
-                            GeoDataGroundOverlay ();
-                            GeoDataGroundOverlay (const Marble::GeoDataGroundOverlay& other);
-    ~GeoDataGroundOverlay ();
-    virtual const char*     nodeType () const;
-    double                  altitude () const;
-    void                    setAltitude (double altitude);
-    Marble::AltitudeMode    altitudeMode () const;
-    void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
-    Marble::GeoDataLatLonBox&  latLonBox () const;
-    void                    setLatLonBox (const Marble::GeoDataLatLonBox& box);
-//ig    const GeoDataLatLonQuad&  latLonQuad () const;
-//ig    GeoDataLatLonQuad&      latLonQuad ();
-//ig    void                    setLatLonQuad (const GeoDataLatLonQuad& quad);
+    explicit                ReverseGeocodingRunnerManager (const Marble::MarbleModel* marbleModel, QObject* parent /TransferThis/ = 0);
+    ~ReverseGeocodingRunnerManager ();
+    void                    reverseGeocoding (const Marble::GeoDataCoordinates& coordinates);
+    QString                 searchReverseGeocoding (const Marble::GeoDataCoordinates& coordinates, int timeout = 30000);
+signals:
+    void                    reverseGeocodingFinished (const Marble::GeoDataCoordinates& coordinates, const Marble::GeoDataPlacemark& placemark);
+    void                    reverseGeocodingFinished ();
 };
 };

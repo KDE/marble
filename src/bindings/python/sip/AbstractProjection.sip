@@ -52,8 +52,6 @@ public:
     qreal                   minLat () const;
     void                    setMinLat (qreal minLat);
     virtual bool            repeatableX () const;
-    bool                    repeatX () const;
-    void                    setRepeatX (bool repeatX);
     virtual bool            traversablePoles () const;
     virtual bool            traversableDateLine () const;
     virtual Marble::AbstractProjection::SurfaceType  surfaceType () const=0;
@@ -65,8 +63,6 @@ public:
     virtual bool            screenCoordinates (const qreal lon, const qreal lat, const Marble::ViewportParams* viewport, qreal& x, qreal& y) const=0;
     virtual bool            screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, qreal& x, qreal& y, bool& globeHidesPoint) const=0;
 //ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, qreal& x, qreal& y) const;
-    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, QPointF& screenpoint) const;
-//ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, const Marble::ViewportParams* viewport, qreal* x, qreal& y, int& pointRepeatNum, bool& globeHidesPoint) const;
     virtual bool            screenCoordinates (const Marble::GeoDataCoordinates& coordinates, const Marble::ViewportParams* viewport, qreal* x, qreal& y, int& pointRepeatNum, const QSizeF& size, bool& globeHidesPoint) const=0;
 //ig    bool                    screenCoordinates (const Marble::GeoDataLineString& lineString, const Marble::ViewportParams* viewport, QVector<QPolygonF*>& polygons) const;
     virtual bool            geoCoordinates (const int x, const int y, const Marble::ViewportParams* viewport, qreal& lon, qreal& lat, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree) const=0;

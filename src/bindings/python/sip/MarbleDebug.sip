@@ -19,25 +19,15 @@
 
 namespace Marble
 {
-class GeoDataGroundOverlay : Marble::GeoDataOverlay
+class MarbleDebug
 {
 %TypeHeaderCode
-#include <GeoDataGroundOverlay.h>
+#include <MarbleDebug.h>
 %End
 
 public:
-                            GeoDataGroundOverlay ();
-                            GeoDataGroundOverlay (const Marble::GeoDataGroundOverlay& other);
-    ~GeoDataGroundOverlay ();
-    virtual const char*     nodeType () const;
-    double                  altitude () const;
-    void                    setAltitude (double altitude);
-    Marble::AltitudeMode    altitudeMode () const;
-    void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
-    Marble::GeoDataLatLonBox&  latLonBox () const;
-    void                    setLatLonBox (const Marble::GeoDataLatLonBox& box);
-//ig    const GeoDataLatLonQuad&  latLonQuad () const;
-//ig    GeoDataLatLonQuad&      latLonQuad ();
-//ig    void                    setLatLonQuad (const GeoDataLatLonQuad& quad);
+    static bool             isEnabled ();
+    static void             setEnabled (bool enabled);
 };
+//ig QDebug                  mDebug ();
 };

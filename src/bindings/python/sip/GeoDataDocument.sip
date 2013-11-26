@@ -49,7 +49,7 @@ public:
     QString                 baseUri () const;
     void                    setBaseUri (const QString& baseUri);
 //ig    Marble::GeoDataNetworkLinkControl  networkLinkControl () const;
-//ig    void                    setNetworkLinkControl (const Marble::GeoDataNetworkLinkControl& networkLinkControl);
+//ig    void                    setNetworkLinkControl (const GeoDataNetworkLinkControl& networkLinkControl);
 };
 // GeoDataDocument
 

@@ -19,25 +19,21 @@
 
 namespace Marble
 {
-class GeoDataGroundOverlay : Marble::GeoDataOverlay
+class MarbleWidgetPopupMenu : QObject
 {
 %TypeHeaderCode
-#include <GeoDataGroundOverlay.h>
+#include <MarbleWidgetPopupMenu.h>
 %End
 
 public:
-                            GeoDataGroundOverlay ();
-                            GeoDataGroundOverlay (const Marble::GeoDataGroundOverlay& other);
-    ~GeoDataGroundOverlay ();
-    virtual const char*     nodeType () const;
-    double                  altitude () const;
-    void                    setAltitude (double altitude);
-    Marble::AltitudeMode    altitudeMode () const;
-    void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
-    Marble::GeoDataLatLonBox&  latLonBox () const;
-    void                    setLatLonBox (const Marble::GeoDataLatLonBox& box);
-//ig    const GeoDataLatLonQuad&  latLonQuad () const;
-//ig    GeoDataLatLonQuad&      latLonQuad ();
-//ig    void                    setLatLonQuad (const GeoDataLatLonQuad& quad);
+                            MarbleWidgetPopupMenu (Marble::MarbleWidget*, const Marble::MarbleModel*);
+    virtual ~MarbleWidgetPopupMenu ();
+    void                    addAction (Qt::MouseButton button, QAction* action);
+    QPoint                  mousePosition () const;
+signals:
+    void                    trackPlacemark (const Marble::GeoDataPlacemark* placemark);
+public:
+    void                    showLmbMenu (int, int);
+    void                    showRmbMenu (int, int);
 };
 };

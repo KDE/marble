@@ -31,10 +31,8 @@ public:
     Marble::AngleUnit       angleUnit () const;
     Marble::MapQuality      stillQuality () const;
     Marble::MapQuality      animationQuality () const;
-    int                     labelLocalization () const;
     QFont                   mapFont () const;
     Marble::GraphicsSystem  graphicsSystem () const;
-    int                     dragLocation () const;
     int                     onStartup () const;
     bool                    animateTargetVoyage () const;
     int                     volatileTileCacheLimit () const;
@@ -62,5 +60,14 @@ public:
     void                    initializeCustomTimezone ();
     QLocale::MeasurementSystem  measurementSystem () const;
     bool                    inertialEarthRotation () const;
+    bool                    syncEnabled () const;
+    QString                 syncBackend () const;
+    bool                    syncBookmarks () const;
+    bool                    syncRoutes () const;
+    QString                 owncloudServer () const;
+    QString                 owncloudUsername () const;
+    QString                 owncloudPassword () const;
+signals:
+    void                    syncNowClicked ();
 };
 };

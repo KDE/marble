@@ -64,7 +64,6 @@ public:
     bool                    screenCoordinates (const qreal lon, const qreal lat, qreal& x, qreal& y) const;
     bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, qreal& x, qreal& y, bool& globeHidesPoint) const;
 //    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, qreal& x, qreal& y) const;
-    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, QPointF& screenpoint) const;
 //    bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, bool& globeHidesPoint) const;
 //    bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, const QSizeF& size, bool& globeHidesPoint) const;
 //    bool                    screenCoordinates (const Marble::GeoDataLineString& lineString, QVector<QPolygonF*>& polygons) const;
@@ -73,7 +72,6 @@ public:
     QRegion                 mapRegion () const;
 
 //ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, qreal& x, qreal& y) const;
-//ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, bool& globeHidesPoint) const;
     bool                    screenCoordinates (const Marble::GeoDataCoordinates& coordinates, qreal* x, qreal& y, int& pointRepeatNum, const QSizeF& size, bool& globeHidesPoint) const;
 //ig    bool                    screenCoordinates (const Marble::GeoDataLineString& lineString, QVector<QPolygonF*>& polygons) const;
     explicit                ViewportParams (Marble::Projection projection, qreal centerLongitude = 0, qreal centerLatatitude = 0, int radius = 2000, const QSize& size = QSize(100,100));

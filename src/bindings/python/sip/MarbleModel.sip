@@ -67,7 +67,6 @@ public:
     QItemSelectionModel*    placemarkSelectionModel ();
 //ig    GeoSceneDocument*       mapTheme ();
     void                    home (qreal& lon, qreal& lat, int& zoom) const;
-    Marble::MapThemeManager*  mapThemeManager ();
 //ig    HttpDownloadManager*    downloadManager ();
 //ig    FileManager*            fileManager ();
 //ig    MarbleClock*            clock ();
@@ -92,6 +91,8 @@ public:
     const Marble::GeoDataTreeModel*  treeModel () const;
     const QAbstractItemModel*  placemarkModel () const;
     void                    updateProperty (const QString& property, bool value);
+//ig    QAbstractItemModel*     groundOverlayModel ();
+    const QAbstractItemModel*  groundOverlayModel () const;
 };
 // MarbleModel
 
