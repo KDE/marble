@@ -86,11 +86,11 @@ not provided in a KML file.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QXmlStreamWriter&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, QXmlStreamWriter stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#population">population</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setArea">setArea</a> (self, float area)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, float longitude, float latitude, float altitude=0, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> _unit=Marble.GeoDataPoint.Radian)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, <a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a> point)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, float longitude, float latitude, float altitude=0, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> _unit=Marble.GeoDataCoordinates.Radian)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinate)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCountryCode">setCountryCode</a> (self, QString code)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setGeometry">setGeometry</a> (self, <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> entry)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLookAt">setLookAt</a> (self, <a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a> lookAt)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPopulation">setPopulation</a> (self, long population)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setState">setState</a> (self, QString state)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#state">state</a> (self)</td></tr>
@@ -407,26 +407,8 @@ method.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>longitude</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>latitude</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>altitude=0</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a>&nbsp;</td>
-<td class="paramname"><em>_unit=Marble.GeoDataPoint.Radian</em></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a>&nbsp;</td>
+<td class="paramname"><em>point</em></td>
 </tr>
 <tr>
 <td></td>
@@ -448,8 +430,49 @@ method.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataPoint.html">Marble.GeoDataPoint</a>&nbsp;</td>
-<td class="paramname"><em>point</em></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>longitude</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>latitude</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>altitude=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a>&nbsp;</td>
+<td class="paramname"><em>_unit=Marble.GeoDataCoordinates.Radian</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the coordinate of the placemark with an <b>GeoDataPoint.</b>
+</p></div></div><a class="anchor" name="setCoordinate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCoordinate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>coordinate</em></td>
 </tr>
 <tr>
 <td></td>
@@ -510,29 +533,6 @@ overview for description of the geometry concept. The geometry can be set
 to any <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataGeometry like <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataPoint,@see GeoDataLineString,
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataLinearRing and <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataMultiGeometry
 </dd></dl>
-</p></div></div><a class="anchor" name="setLookAt"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setLookAt</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataLookAt.html">Marble.GeoDataLookAt</a>&nbsp;</td>
-<td class="paramname"><em>lookAt</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Set lookAt <b>GeoDataLookAt</b>
 </p></div></div><a class="anchor" name="setPopulation"></a>
 <div class="memitem">
 <div class="memproto">

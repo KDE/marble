@@ -64,7 +64,7 @@ format that the writer is currently working with.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#write">write</a> (self, QIODevice device, <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a> feature)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeElement">writeElement</a> (self, QString namespaceUri, QString key, QString value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeElement">writeElement</a> (self, QString key, QString value)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeOptionalElement">writeOptionalElement</a> (self, QString key, QString value)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeOptionalElement">writeOptionalElement</a> (self, QString key, QString value, QString defaultValue=QString())</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="GeoWriter"></a>
 <div class="memitem">
@@ -221,7 +221,13 @@ the current Document Type for this GeoWriter. See <dl class="see" compact><dt><b
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>value</em></td>
+<td class="paramname"><em>value</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>defaultValue=QString()</em></td>
 </tr>
 <tr>
 <td></td>
@@ -232,7 +238,7 @@ the current Document Type for this GeoWriter. See <dl class="see" compact><dt><b
 </tr></table>
 </div>
 <div class="memdoc"><p>Convenience method to write &lt;key&gt;value&lt;/key&gt; if value is
-not empty. Otherwise, nothing is written.
+not equal to defaultValue. Otherwise, nothing is written.
 </p></div></div>
 </div>
 </div>

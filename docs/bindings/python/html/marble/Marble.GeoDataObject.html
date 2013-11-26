@@ -52,7 +52,8 @@ Inherits: <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a>,<a href="..
 
 Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
-
+<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
+<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
 <p>A base class for all geodata objects
 </p>
 <p>
@@ -80,9 +81,9 @@ Marble.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataObject">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataObject">__init__</a> (self, <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#id">id</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, QDataStream stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parent">parent</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resolvePath">resolvePath</a> (self, QString relativePath)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setId">setId</a> (self, int value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setParent">setParent</a> (self, <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> parent)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTargetId">setTargetId</a> (self, int value)</td></tr>
@@ -136,19 +137,7 @@ Marble.
 </table>
 </div>
 <div class="memdoc"><p>Get the id of the object.
-</p></div></div><a class="anchor" name="nodeType"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QString nodeType</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="pack"></a>
+</p></div></div><a class="anchor" name="pack"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -181,6 +170,28 @@ Marble.
 <td width="100%"> </td>
 </tr>
 </table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="resolvePath"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString resolvePath</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>relativePath</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
 <div class="memdoc"></div></div><a class="anchor" name="setId"></a>
 <div class="memitem">

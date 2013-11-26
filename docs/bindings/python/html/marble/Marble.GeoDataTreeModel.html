@@ -62,7 +62,7 @@ This class represents all available data given by kml-data files.
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoDataTreeModel">__init__</a> (self, QObject parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addDocument">addDocument</a> (self, <a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a> document)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addFeature">addFeature</a> (self, <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a> parent, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> feature)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addFeature">addFeature</a> (self, <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a> parent, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> feature, int row=-1)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#columnCount">columnCount</a> (self, QModelIndex parent=QModelIndex())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QVariant&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#data">data</a> (self, QModelIndex index, int role)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::ItemFlags</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#flags">flags</a> (self, QModelIndex index)</td></tr>
@@ -74,10 +74,11 @@ This class represents all available data given by kml-data files.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeDocument">removeDocument</a> (self, int index)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeDocument">removeDocument</a> (self, <a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a> document)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeFeature">removeFeature</a> (self, <a href="../marble/Marble.GeoDataContainer.html">Marble.GeoDataContainer</a> parent, int index)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeFeature">removeFeature</a> (self, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> feature)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeFeature">removeFeature</a> (self, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> feature)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reset">reset</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rootDocument">rootDocument</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rowCount">rowCount</a> (self, QModelIndex parent=QModelIndex())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QItemSelectionModel&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectionModel">selectionModel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setData">setData</a> (self, QModelIndex index, QVariant value, int role=Qt.EditRole)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRootDocument">setRootDocument</a> (self, <a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a> document)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#update">update</a> (self)</td></tr>
@@ -188,7 +189,13 @@ This class represents all available data given by kml-data files.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td>
-<td class="paramname"><em>feature</em></td>
+<td class="paramname"><em>feature</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>row=-1</em></td>
 </tr>
 <tr>
 <td></td>
@@ -480,7 +487,7 @@ This class represents all available data given by kml-data files.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">bool removeFeature</td>
+<td class="memname">int removeFeature</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -545,7 +552,19 @@ This class represents all available data given by kml-data files.
 </tr></table>
 </div>
 <div class="memdoc"><p>Return the number of Items in the Model.
-</p></div></div><a class="anchor" name="setData"></a>
+</p></div></div><a class="anchor" name="selectionModel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QItemSelectionModel selectionModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setData"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

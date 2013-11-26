@@ -94,19 +94,16 @@ square or round.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MarbleModel">__init__</a> (self, QObject parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addGeoDataFile">addGeoDataFile</a> (self, QString filename)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addGeoDataString">addGeoDataString</a> (self, QString data, QString key="data")</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addPlacemarkData">addPlacemarkData</a> (self, QString data, QString key="data")</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addPlacemarkFile">addPlacemarkFile</a> (self, QString filename)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.BookmarkManager.html">Marble.BookmarkManager</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bookmarkManager">bookmarkManager</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearPersistentTileCache">clearPersistentTileCache</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QDateTime&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clockDateTime">clockDateTime</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clockSpeed">clockSpeed</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clockTimezone">clockTimezone</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.ElevationModel.html">Marble.ElevationModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#elevationModel">elevationModel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QAbstractItemModel&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#groundOverlayModel">groundOverlayModel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#home">home</a> (self, float lon, float lat, int zoom)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QTextDocument&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#legend">legend</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeId">mapThemeId</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MapThemeManager.html">Marble.MapThemeManager</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeManager">mapThemeManager</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#openGpxFile">openGpxFile</a> (self, QString filename)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#persistentTileCacheLimit">persistentTileCacheLimit</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QAbstractItemModel&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#placemarkModel">placemarkModel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QItemSelectionModel&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#placemarkSelectionModel">placemarkSelectionModel</a> (self)</td></tr>
@@ -116,7 +113,6 @@ square or round.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#planetRadius">planetRadius</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.PositionTracking.html">Marble.PositionTracking</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#positionTracking">positionTracking</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeGeoData">removeGeoData</a> (self, QString key)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removePlacemarkKey">removePlacemarkKey</a> (self, QString key)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setClockDateTime">setClockDateTime</a> (self, QDateTime datetime)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setClockSpeed">setClockSpeed</a> (self, int speed)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setClockTimezone">setClockTimezone</a> (self, int timeInSec)</td></tr>
@@ -129,6 +125,8 @@ square or round.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setWorkOffline">setWorkOffline</a> (self, bool workOffline)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.SunLocator.html">Marble.SunLocator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sunLocator">sunLocator</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataPlacemark.html">Marble.GeoDataPlacemark</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#trackedPlacemark">trackedPlacemark</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataTreeModel.html">Marble.GeoDataTreeModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#treeModel">treeModel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#updateProperty">updateProperty</a> (self, QString property, bool value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#workOffline">workOffline</a> (self)</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="creatingTilesStart"></a>
@@ -162,8 +160,6 @@ square or round.
 </div>
 <div class="memdoc"><p>Signal that the MarbleModel has started to create a new set of tiles.
 @param
-<dl class="see" compact><dt><b>See also:</b></dt><dd> zoomView()
-</dd></dl>
 </p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("creatingTilesStart(Marble::TileCreator*, const QString&, const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="homeChanged"></a>
 <div class="memitem">
 <div class="memproto">
@@ -292,7 +288,14 @@ square or round.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addGeoDataString"></a>
+<div class="memdoc"><p>Handle file loading into the treeModel
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>filename</em>&nbsp;</td><td> the file to load
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addGeoDataString"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -320,60 +323,15 @@ square or round.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addPlacemarkData"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> addPlacemarkData</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>data</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>key="data"</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Please use addGeoDataString instead
-</dd></dl>
-</p></div></div><a class="anchor" name="addPlacemarkFile"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> addPlacemarkFile</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>filename</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Please use addGeoDataFile instead
-</dd></dl>
+<div class="memdoc"><p>Handle raw data loading into the treeModel
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> the raw data to load
+
+<tr><td></td><td valign="top"><em>key</em>&nbsp;</td><td> the name to remove this raw data later
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><a class="anchor" name="bookmarkManager"></a>
 <div class="memitem">
 <div class="memproto">
@@ -440,6 +398,18 @@ square or round.
 <div class="memproto">
 <table class="memname"><tr>
 <td class="memname"><a href="../marble/Marble.ElevationModel.html">Marble.ElevationModel</a> elevationModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="groundOverlayModel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QAbstractItemModel groundOverlayModel</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -525,42 +495,6 @@ that specifies the theme:
 <p>
 Example:
 maptheme = "earth/bluemarble/bluemarble.dgml"
-</p></div></div><a class="anchor" name="mapThemeManager"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.MapThemeManager.html">Marble.MapThemeManager</a> mapThemeManager</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="openGpxFile"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> openGpxFile</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>filename</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Please use addGeoDataFile instead
-</dd></dl>
 </p></div></div><a class="anchor" name="persistentTileCacheLimit"></a>
 <div class="memitem">
 <div class="memproto">
@@ -685,30 +619,13 @@ maptheme = "earth/bluemarble/bluemarble.dgml"
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="removePlacemarkKey"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> removePlacemarkKey</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QString&nbsp;</td>
-<td class="paramname"><em>key</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Please use removeGeoData instead
-</dd></dl>
+<div class="memdoc"><p>Remove the file or raw data from the treeModel
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>key</em>&nbsp;</td><td> either the file name or the key for raw data
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><a class="anchor" name="setClockDateTime"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1022,7 +939,50 @@ maptheme = "earth/bluemarble/bluemarble.dgml"
 placemark is currently tracked.
 <dl class="see" compact><dt><b>See also:</b></dt><dd> setTrackedPlacemark(), trackedPlacemarkChanged()
 </dd></dl>
-</p></div></div><a class="anchor" name="workOffline"></a>
+</p></div></div><a class="anchor" name="treeModel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.GeoDataTreeModel.html">Marble.GeoDataTreeModel</a> treeModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the list of Placemarks as a QAbstractItemModel *
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of all Placemarks in the MarbleModel.
+</dd></dl>
+</p></div></div><a class="anchor" name="updateProperty"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> updateProperty</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>property</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>value</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="workOffline"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

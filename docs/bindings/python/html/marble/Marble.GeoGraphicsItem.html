@@ -57,13 +57,12 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#GeoGraphicsItemFlag">GeoGraphicsItemFlag</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoOptions, ItemIsMovable, ItemIsSelectable, ItemIsVisible&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoGraphicsItem">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#coordinate">coordinate</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#GeoGraphicsItem">__init__</a> (self, <a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> feature)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#feature">feature</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem.GeoGraphicsItemFlags</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#flags">flags</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latLonAltBox">latLonAltBox</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#minZoomLevel">minZoomLevel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paint">paint</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCoordinate">setCoordinate</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> point)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFlag">setFlag</a> (self, <a href="../marble/Marble.GeoGraphicsItem.html#GeoGraphicsItemFlag">Marble.GeoGraphicsItem.GeoGraphicsItemFlag</a> flag, bool enabled=1)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFlags">setFlags</a> (self, <a href="../marble/Marble.GeoGraphicsItem.html">Marble.GeoGraphicsItem.GeoGraphicsItemFlags</a> flags)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLatLonAltBox">setLatLonAltBox</a> (self, <a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> latLonAltBox)</td></tr>
@@ -81,17 +80,27 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <table class="memname"><tr>
 <td class="memname">__init__</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a>&nbsp;</td>
+<td class="paramname"><em>feature</em></td>
 </tr>
-</table>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="coordinate"></a>
+<div class="memdoc"></div></div><a class="anchor" name="feature"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinate</td>
+<td class="memname"><a href="../marble/Marble.GeoDataFeature.html">Marble.GeoDataFeature</a> feature</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -99,7 +108,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Return the coordinate of the item as a GeoDataCoordinates
+<div class="memdoc"><p>Returns the placemark for that item.
 </p></div></div><a class="anchor" name="flags"></a>
 <div class="memitem">
 <div class="memproto">
@@ -127,7 +136,7 @@ this item. <dl class="see" compact><dt><b>See also:</b></dt><dd> QFlags
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the box that is used to determine if an item is active or inactive.
+<div class="memdoc"><p>Returns the bounding box covered by the item.
 </p></div></div><a class="anchor" name="minZoomLevel"></a>
 <div class="memitem">
 <div class="memproto">
@@ -172,31 +181,8 @@ this item. <dl class="see" compact><dt><b>See also:</b></dt><dd> QFlags
 <div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Paints the item using the given GeoPainter.
 </p>
 <p>
-Note that depending on the projection and zoom level, the item may be visible more than once.
-GeoPainter will therefore automatically "repeat" primitives which have a geo position (GeoDataCoordinates).
-</p></div></div><a class="anchor" name="setCoordinate"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setCoordinate</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
-<td class="paramname"><em>point</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Set the coordinate of the item with an <b>GeoDataPoint.</b>
+Note that depending on the projection and zoom level, the item may be visible more than once,
+which is taken care of by GeoPainter.
 </p></div></div><a class="anchor" name="setFlag"></a>
 <div class="memitem">
 <div class="memproto">
@@ -330,8 +316,7 @@ the item will be shown in every case.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Set the box used to determine if an item is active or inactive. If an empty box is passed
-the item will be shown in every case.
+<div class="memdoc"><p>Set the style for the item.
 </p></div></div><a class="anchor" name="setVisible"></a>
 <div class="memitem">
 <div class="memproto">

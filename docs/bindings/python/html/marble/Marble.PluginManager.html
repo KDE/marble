@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Marble.PluginManager</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>PluginManager Class Reference</h1>
+<code>from PyKDE4.marble import *</code>
+<p>
+Inherits: QObject<br />
+
+Namespace: <a href="../marble/Marble.html">Marble</a><br />
+<h2>Detailed Description</h2>
+
+<p>The class that handles Marble's plugins.
+</p>
+<p>
+Ownership policy for plugins:
+</p>
+<p>
+On every invocation of createNetworkPlugins and
+createFloatItems the PluginManager creates new objects and transfers
+ownership to the calling site. In order to create
+the objects, the PluginManager internally has a list of the plugins
+which are owned by the PluginManager and destroyed by it.
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parseRunnerPluginsChanged">parseRunnerPluginsChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#positionProviderPluginsChanged">positionProviderPluginsChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPluginsChanged">renderPluginsChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reverseGeocodingRunnerPluginsChanged">reverseGeocodingRunnerPluginsChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#routingRunnerPluginsChanged">routingRunnerPluginsChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchRunnerPluginsChanged">searchRunnerPluginsChanged</a> ()</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#PluginManager">__init__</a> (self, QObject parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addParseRunnerPlugin">addParseRunnerPlugin</a> (self, <a href="../marble/Marble.ParseRunnerPlugin.html">Marble.ParseRunnerPlugin</a> plugin)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addPositionProviderPlugin">addPositionProviderPlugin</a> (self, <a href="../marble/Marble.PositionProviderPlugin.html">Marble.PositionProviderPlugin</a> plugin)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addRenderPlugin">addRenderPlugin</a> (self, <a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a> plugin)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addReverseGeocodingRunnerPlugin">addReverseGeocodingRunnerPlugin</a> (self, <a href="../marble/Marble.ReverseGeocodingRunnerPlugin.html">Marble.ReverseGeocodingRunnerPlugin</a> plugin)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addRoutingRunnerPlugin">addRoutingRunnerPlugin</a> (self, <a href="../marble/Marble.RoutingRunnerPlugin.html">Marble.RoutingRunnerPlugin</a> plugin)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addSearchRunnerPlugin">addSearchRunnerPlugin</a> (self, <a href="../marble/Marble.SearchRunnerPlugin.html">Marble.SearchRunnerPlugin</a> plugin)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.ParseRunnerPlugin.html">Marble.ParseRunnerPlugin</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parsingRunnerPlugins">parsingRunnerPlugins</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.PositionProviderPlugin.html">Marble.PositionProviderPlugin</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#positionProviderPlugins">positionProviderPlugins</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.ReverseGeocodingRunnerPlugin.html">Marble.ReverseGeocodingRunnerPlugin</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reverseGeocodingRunnerPlugins">reverseGeocodingRunnerPlugins</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.RoutingRunnerPlugin.html">Marble.RoutingRunnerPlugin</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#routingRunnerPlugins">routingRunnerPlugins</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.SearchRunnerPlugin.html">Marble.SearchRunnerPlugin</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchRunnerPlugins">searchRunnerPlugins</a> (self)</td></tr>
+</table>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="parseRunnerPluginsChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> parseRunnerPluginsChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("parseRunnerPluginsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="positionProviderPluginsChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> positionProviderPluginsChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("positionProviderPluginsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="renderPluginsChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> renderPluginsChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("renderPluginsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="reverseGeocodingRunnerPluginsChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> reverseGeocodingRunnerPluginsChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("reverseGeocodingRunnerPluginsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="routingRunnerPluginsChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> routingRunnerPluginsChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("routingRunnerPluginsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="searchRunnerPluginsChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> searchRunnerPluginsChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("searchRunnerPluginsChanged()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="PluginManager"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QObject&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="addParseRunnerPlugin"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addParseRunnerPlugin</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ParseRunnerPlugin.html">Marble.ParseRunnerPlugin</a>&nbsp;</td>
+<td class="paramname"><em>plugin</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add a ParseRunnerPlugin manually to the list of known plugins. Normally you
+don't need to call this method since all plugins are loaded automatically.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>plugin</em>&nbsp;</td><td> The plugin to add. Ownership retains with the caller.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addPositionProviderPlugin"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addPositionProviderPlugin</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.PositionProviderPlugin.html">Marble.PositionProviderPlugin</a>&nbsp;</td>
+<td class="paramname"><em>plugin</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add a PositionProviderPlugin manually to the list of known plugins. Normally you
+don't need to call this method since all plugins are loaded automatically.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>plugin</em>&nbsp;</td><td> The plugin to add. Ownership retains with the caller.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addRenderPlugin"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addRenderPlugin</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a>&nbsp;</td>
+<td class="paramname"><em>plugin</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add a RenderPlugin manually to the list of known plugins. Normally you
+don't need to call this method since all plugins are loaded automatically.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>plugin</em>&nbsp;</td><td> The plugin to add. Ownership retains with the caller.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addReverseGeocodingRunnerPlugin"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addReverseGeocodingRunnerPlugin</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ReverseGeocodingRunnerPlugin.html">Marble.ReverseGeocodingRunnerPlugin</a>&nbsp;</td>
+<td class="paramname"><em>plugin</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add a ReverseGeocodingRunnerPlugin manually to the list of known plugins. Normally you
+don't need to call this method since all plugins are loaded automatically.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>plugin</em>&nbsp;</td><td> The plugin to add. Ownership retains with the caller.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addRoutingRunnerPlugin"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addRoutingRunnerPlugin</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.RoutingRunnerPlugin.html">Marble.RoutingRunnerPlugin</a>&nbsp;</td>
+<td class="paramname"><em>plugin</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add a RoutingRunnerPlugin manually to the list of known plugins. Normally you
+don't need to call this method since all plugins are loaded automatically.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>plugin</em>&nbsp;</td><td> The plugin to add. Ownership retains with the caller.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addSearchRunnerPlugin"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addSearchRunnerPlugin</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.SearchRunnerPlugin.html">Marble.SearchRunnerPlugin</a>&nbsp;</td>
+<td class="paramname"><em>plugin</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add a SearchRunnerPlugin manually to the list of known plugins. Normally you
+don't need to call this method since all plugins are loaded automatically.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>plugin</em>&nbsp;</td><td> The plugin to add. Ownership retains with the caller.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="parsingRunnerPlugins"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../marble/Marble.ParseRunnerPlugin.html">Marble.ParseRunnerPlugin</a>] parsingRunnerPlugins</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns all parse runner plugins.
+@note: The runner plugins are owned by the PluginManager, do not delete them.
+</p></div></div><a class="anchor" name="positionProviderPlugins"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../marble/Marble.PositionProviderPlugin.html">Marble.PositionProviderPlugin</a>] positionProviderPlugins</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns all available PositionProviderPlugins.
+</p>
+<p>
+Ownership of the items remains in PluginManager.
+In order to use the PositionProviderPlugins, first create new instances using
+PositionProviderPlugin.newInstance().
+</p></div></div><a class="anchor" name="reverseGeocodingRunnerPlugins"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../marble/Marble.ReverseGeocodingRunnerPlugin.html">Marble.ReverseGeocodingRunnerPlugin</a>] reverseGeocodingRunnerPlugins</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns all reverse geocoding runner plugins.
+@note: The runner plugins are owned by the PluginManager, do not delete them.
+</p></div></div><a class="anchor" name="routingRunnerPlugins"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../marble/Marble.RoutingRunnerPlugin.html">Marble.RoutingRunnerPlugin</a>] routingRunnerPlugins</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns all routing runner plugins.
+@note: The runner plugins are owned by the PluginManager, do not delete them.
+</p></div></div><a class="anchor" name="searchRunnerPlugins"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../marble/Marble.SearchRunnerPlugin.html">Marble.SearchRunnerPlugin</a>] searchRunnerPlugins</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns all search runner plugins.
+@note: Runner plugins are owned by the PluginManager, do not delete them.
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

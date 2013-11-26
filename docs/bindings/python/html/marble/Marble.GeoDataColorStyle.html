@@ -102,6 +102,7 @@ never randomized.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataColorStyle.html#ColorMode">Marble.GeoDataColorStyle.ColorMode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#colorMode">colorMode</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nodeType">nodeType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pack">pack</a> (self, QDataStream stream)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QColor&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paintedColor">paintedColor</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setColor">setColor</a> (self, QColor value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setColorMode">setColorMode</a> (self, <a href="../marble/Marble.GeoDataColorStyle.html#ColorMode">Marble.GeoDataColorStyle.ColorMode</a> colorMode)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unpack">unpack</a> (self, QDataStream stream)</td></tr>
@@ -205,6 +206,22 @@ never randomized.
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="paintedColor"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QColor paintedColor</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the color that should be painted: Either color() or a randomized
+version of it, depending on the colorMode() setting. Randomization happens once
+per setColor() call, i.e. repeated calls to paintedColor always return the same
+color unless setColor is called in between.
 </p></div></div><a class="anchor" name="setColor"></a>
 <div class="memitem">
 <div class="memproto">

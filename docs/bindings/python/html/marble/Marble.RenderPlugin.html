@@ -54,35 +54,38 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <h2>Detailed Description</h2>
 <dl class="abstract" compact><dt><b>Abstract class:</b></dt>
 <dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
-<p>The abstract class that creates a renderable Item.
+<p>The abstract class that creates a renderable item
+</p>
+<p>
+Renderable Plugins can be used to extend Marble's functionality:
+They allow to draw stuff on top of the map / globe
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ItemDataRole">ItemDataRole</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NameId, ConfigurationDialogAvailable, BackendTypes&nbsp;}</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#RenderType">RenderType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Unknown, Online&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#RenderType">RenderType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UnknownRenderType, TopLevelRenderType, PanelRenderType, OnlineRenderType, ThemeRenderType&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionGroupsChanged">actionGroupsChanged</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#enabledChanged">enabledChanged</a> (bool enable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#repaintNeeded">repaintNeeded</a> (QRegion dirtyRegion=QRegion())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settingsChanged">settingsChanged</a> (QString nameId)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#userCheckableChanged">userCheckableChanged</a> (bool isUserCheckable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#visibilityChanged">visibilityChanged</a> (bool visible, QString nameId)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#RenderPlugin">__init__</a> (self, <a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a> marbleModel)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QAction&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#action">action</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[QActionGroup]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionGroups">actionGroups</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#applyItemState">applyItemState</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#enabled">enabled</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eventFilter">eventFilter</a> (self, QObject a0, QEvent a1)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#guiString">guiString</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QStandardItem&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#item">item</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isUserCheckable">isUserCheckable</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#marbleModel">marbleModel</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newInstance">newInstance</a> (self, <a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a> marbleModel)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.RenderPlugin.html#RenderType">Marble.RenderPlugin.RenderType</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderType">renderType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restoreDefaultSettings">restoreDefaultSettings</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#retrieveItemState">retrieveItemState</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#runtimeTrace">runtimeTrace</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setEnabled">setEnabled</a> (self, bool enabled)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSetting">setSetting</a> (self, QString key, QVariant value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSettings">setSettings</a> (self, {QString:QVariant} settings)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setUserCheckable">setUserCheckable</a> (self, bool isUserCheckable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVisible">setVisible</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QVariant&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setting">setting</a> (self, QString key)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QStringList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settingKeys">settingKeys</a> (self)</td></tr>
@@ -121,7 +124,9 @@ any way
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("enabledChanged(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="repaintNeeded"></a>
+<div class="memdoc"><p>This signal is emitted if the enabled property is changed with <dl class="see" compact><dt><b>See also:</b></dt><dd> setEnabled
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("enabledChanged(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="repaintNeeded"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -159,7 +164,26 @@ true, the whole viewport has to be repainted.
 </tr></table>
 </div>
 <div class="memdoc"><p>This signal is emitted if the settings of the RenderPlugin changed.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("settingsChanged(QString)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="visibilityChanged"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("settingsChanged(QString)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="userCheckableChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> userCheckableChanged</td>
+<td>(</td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>isUserCheckable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted if the user checkable property is changed with <dl class="see" compact><dt><b>See also:</b></dt><dd> setUserCheckable
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("userCheckableChanged(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="visibilityChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -182,7 +206,8 @@ true, the whole viewport has to be repainted.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>This signal is emitted if the visibility is changed with setVisible.
+<div class="memdoc"><p>This signal is emitted if the visibility is changed with <dl class="see" compact><dt><b>See also:</b></dt><dd> setVisible
+</dd></dl>
 </p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("visibilityChanged(bool, const QString&)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="RenderPlugin"></a>
 <div class="memitem">
 <div class="memproto">
@@ -217,7 +242,15 @@ true, the whole viewport has to be repainted.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="actionGroups"></a>
+<div class="memdoc"><p>Plugin's menu action
+</p>
+<p>
+The action is checkable and controls the visibility of the plugin.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> action, displayed in menu
+</dd></dl>
+</p></div></div><a class="anchor" name="actionGroups"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -229,25 +262,18 @@ true, the whole viewport has to be repainted.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>This method is used by the main window to get all of the actions that this
+<div class="memdoc"><p>Getting all actions
+</p>
+<p>
+This method is used by the main window to get all of the actions that this
 plugin defines. There is no guarantee where the main window will place the
 actions but it will generally be in a Menu. The returned QList should
 also contain all of the actions returned by <dl class="see" compact><dt><b>See also:</b></dt><dd> toolbarActions().
-</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A QList of grouped actions
+</dd></dl> </p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of grouped actions
 </dd></dl>
-</p></div></div><a class="anchor" name="applyItemState"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> applyItemState</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="enabled"></a>
+</p></div></div><a class="anchor" name="enabled"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -259,7 +285,20 @@ also contain all of the actions returned by <dl class="see" compact><dt><b>See a
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="eventFilter"></a>
+<div class="memdoc"><p>is enabled
+</p>
+<p>
+This method indicates enableability of the plugin
+</p>
+<p>
+If plugin is enabled it going to be displayed in Marble Menu
+as active action which can be <dl class="see" compact><dt><b>See also:</b></dt><dd> setUserCheckable
+</dd></dl> </p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> enableability of the plugin
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setEnabled
+</dd></dl>
+</p></div></div><a class="anchor" name="eventFilter"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -299,17 +338,22 @@ also contain all of the actions returned by <dl class="see" compact><dt><b>See a
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns the string that should appear in the UI / in the menu.
-.
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>String that should be displayed in GUI
+</p>
+<p>
 Using a "&amp;" you can suggest key shortcuts
 </p>
 <p>
 Example: "&amp;Stars"
-</p></div></div><a class="anchor" name="item"></a>
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> string for gui usage
+</dd></dl>
+</p></div></div><a class="anchor" name="isUserCheckable"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">QStandardItem item</td>
+<td class="memname">bool isUserCheckable</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -317,7 +361,23 @@ Example: "&amp;Stars"
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="marbleModel"></a>
+<div class="memdoc"><p>is user checkable
+</p>
+<p>
+This method indicates user checkability of plugin's
+action displayed in application menu
+</p>
+<p>
+Can control plugin visibility
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> User can do it only if <dl class="see" compact><dt><b>See also:</b></dt><dd> enabled is true
+</dd></dl> </p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> checkability of the plugin
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setUserCheckable
+</dd></dl>
+</p></div></div><a class="anchor" name="marbleModel"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -329,7 +389,17 @@ Example: "&amp;Stars"
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="newInstance"></a>
+<div class="memdoc"><p>Access to the MarbleModel
+</p>
+<p>
+Internal way to access the model of marble.
+Can be used to interact with the main application
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> marble model
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> MarbleModel
+</dd></dl>
+</p></div></div><a class="anchor" name="newInstance"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -351,7 +421,20 @@ Example: "&amp;Stars"
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns a new object of the plugin
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Creation a new instance of the plugin
+</p>
+<p>
+This method is used to create a new object of the current
+plugin using the <b>marbleModel</b> given.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>marbleModel</em>&nbsp;</td><td> base model
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> new instance of current plugin
+</dd></dl> <dl class="note" compact><dt><b>Note:</b></dt><dd> Typically this method is implemented with the help of the MARBLE_PLUGIN() macro.
+</dd></dl>
 </p></div></div><a class="anchor" name="renderType"></a>
 <div class="memitem">
 <div class="memproto">
@@ -364,11 +447,15 @@ Example: "&amp;Stars"
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Function for returning the type of plugin this is for.
+<div class="memdoc"><p>Render type of the plugin
+</p>
+<p>
+Function for returning the type of plugin this is for.
 This affects where in the menu tree the action() is placed.
 </p>
 <p>
-@return: The type of render plugin this is.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> RenderType
+</dd></dl> @return: The type of render plugin this is
 </p></div></div><a class="anchor" name="restoreDefaultSettings"></a>
 <div class="memitem">
 <div class="memproto">
@@ -381,19 +468,11 @@ This affects where in the menu tree the action() is placed.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="retrieveItemState"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> retrieveItemState</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="runtimeTrace"></a>
+<div class="memdoc"><p>Passes an empty set of settings to the plugin
+</p>
+<p>
+Well behaving plugins restore their settings to default values as a result of calling this method.
+</p></div></div><a class="anchor" name="runtimeTrace"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -427,7 +506,23 @@ This affects where in the menu tree the action() is placed.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setSetting"></a>
+<div class="memdoc"><p>settting enabled
+</p>
+<p>
+If <b>enabled</b> = true, plugin will be enabled
+</p>
+<p>
+If plugin is enabled it will be possible to show/hide it
+from menu (access from UI)
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>enabled</em>&nbsp;</td><td> plugin's enabled state
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> enabled
+</dd></dl>
+</p></div></div><a class="anchor" name="setSetting"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -455,7 +550,20 @@ This affects where in the menu tree the action() is placed.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setSettings"></a>
+<div class="memdoc"><p>Change setting key's values
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>key</em>&nbsp;</td><td> setting key
+
+<tr><td></td><td valign="top"><em>value</em>&nbsp;</td><td> new value
+</td></tr>
+</table></dl>
+<p> This method applies <b>value</b> for the <b>key</b>
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> successfully changed or not
+</dd></dl>
+</p></div></div><a class="anchor" name="setSettings"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -477,7 +585,53 @@ This affects where in the menu tree the action() is placed.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Set the settings of the item.
+<div class="memdoc"><p>Set the settings of the plugin
+</p>
+<p>
+Usually this is called at startup to restore saved settings.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>new</em>&nbsp;</td><td> plugin's settings
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> settings
+</dd></dl>
+</p></div></div><a class="anchor" name="setUserCheckable"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setUserCheckable</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>isUserCheckable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>settting user checkable
+</p>
+<p>
+If <b>isUserCheckable</b> = true, user will get an
+option to control visibility in application menu
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>isUserCheckable</em>&nbsp;</td><td> user checkability of the plugin
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> isUserCheckable
+</dd></dl>
 </p></div></div><a class="anchor" name="setVisible"></a>
 <div class="memitem">
 <div class="memproto">
@@ -500,7 +654,19 @@ This affects where in the menu tree the action() is placed.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setting"></a>
+<div class="memdoc"><p>settting visible
+</p>
+<p>
+If <b>visible</b> = true, plugin will be visible
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>visible</em>&nbsp;</td><td> visibility of the plugin
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> visible
+</dd></dl>
+</p></div></div><a class="anchor" name="setting"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -522,7 +688,19 @@ This affects where in the menu tree the action() is placed.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="settingKeys"></a>
+<div class="memdoc"><p>Getting setting value from the settings
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>key</em>&nbsp;</td><td> setting's key index
+</td></tr>
+</table></dl>
+<p> This method should be used to get current value of <b>key</b>
+in settings hash table
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> setting value
+</dd></dl>
+</p></div></div><a class="anchor" name="settingKeys"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -534,7 +712,16 @@ This affects where in the menu tree the action() is placed.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="settings"></a>
+<div class="memdoc"><p>Full list of the settings keys
+</p>
+<p>
+This method should be used to get all possible
+settings' keys for the plugin's settings
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> list with the keys of settings
+</dd></dl>
+</p></div></div><a class="anchor" name="settings"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -546,7 +733,17 @@ This affects where in the menu tree the action() is placed.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>@return: The settings of the item.
+<div class="memdoc"><p>Settings of the plugin
+</p>
+<p>
+Settings is the map (hash table) of plugin's settings
+This method is called to determine the current settings of the plugin
+for serialization, e.g. when closing the application.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> plugin's settings
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setSettings
+</dd></dl>
 </p></div></div><a class="anchor" name="toolbarActionGroups"></a>
 <div class="memitem">
 <div class="memproto">
@@ -559,11 +756,16 @@ This affects where in the menu tree the action() is placed.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>This method returns a subset of the actions returned by <dl class="see" compact><dt><b>See also:</b></dt><dd> actions() which
+<div class="memdoc"><p>Getting all actions which should be placed in the toolbar
+</p>
+<p>
+This method returns a subset of the actions returned by <dl class="see" compact><dt><b>See also:</b></dt><dd> actions() which
 are intended to be placed in a more prominent place such as a toolbar above
 the Marble Widget. You are not guaranteed that they will be in an actual
 toolbar but they will be visible and discoverable
-</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A QList of grouped toolbar actions
+</dd></dl> </p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of grouped toolbar actions
 </dd></dl>
 </p></div></div><a class="anchor" name="visible"></a>
 <div class="memitem">
@@ -577,20 +779,19 @@ toolbar but they will be visible and discoverable
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="ItemDataRole"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname">
-<tr><td class="memname">ItemDataRole</td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>This enum contains the data roles for the QStandardItem that is returned by item().
-TODO: This should get moved into PluginInterface.h
-</p><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NameId</em>&nbsp;=&nbsp;Qt::UserRole+2</td><td><tr><td valign="top"><em>ConfigurationDialogAvailable</em>&nbsp;</td><td><tr><td valign="top"><em>BackendTypes</em>&nbsp;</td><td></table>
-</dl>
-</div></div><p><a class="anchor" name="RenderType"></a>
+<div class="memdoc"><p>is visible
+</p>
+<p>
+This method indicates visibility of the plugin
+</p>
+<p>
+If plugin is visible you can see it on the map/globe
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> visibility of the plugin
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setVisible
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="RenderType"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -598,8 +799,9 @@ TODO: This should get moved into PluginInterface.h
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Unknown</em>&nbsp;</td><td><tr><td valign="top"><em>Online</em>&nbsp;</td><td></table>
+<div class="memdoc"><p>A Type of plugin
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>UnknownRenderType</em>&nbsp;</td><td><tr><td valign="top"><em>TopLevelRenderType</em>&nbsp;</td><td><tr><td valign="top"><em>PanelRenderType</em>&nbsp;</td><td><tr><td valign="top"><em>OnlineRenderType</em>&nbsp;</td><td><tr><td valign="top"><em>ThemeRenderType</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

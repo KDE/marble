@@ -117,6 +117,8 @@ cities, mountain tops or the poles.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.AbstractFloatItem.html">Marble.AbstractFloatItem</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#floatItems">floatItems</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#geoCoordinates">geoCoordinates</a> (self, int x, int y, float lon, float lat, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> a4=Marble.GeoDataCoordinates.Degree)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#height">height</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isLockedToSubSolarPoint">isLockedToSubSolarPoint</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isSubSolarPointIconVisible">isSubSolarPointIconVisible</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#MapQuality">Marble.MapQuality</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapQuality">mapQuality</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.html#MapQuality">Marble.MapQuality</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapQuality">mapQuality</a> (self, <a href="../marble/Marble.html#ViewContext">Marble.ViewContext</a> viewContext)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapThemeId">mapThemeId</a> (self)</td></tr>
@@ -139,6 +141,7 @@ cities, mountain tops or the poles.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCenterLongitude">setCenterLongitude</a> (self, float lon)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultAngleUnit">setDefaultAngleUnit</a> (self, <a href="../marble/Marble.html#AngleUnit">Marble.AngleUnit</a> angleUnit)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultFont">setDefaultFont</a> (self, QFont font)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLockToSubSolarPoint">setLockToSubSolarPoint</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMapQualityForViewContext">setMapQualityForViewContext</a> (self, <a href="../marble/Marble.html#MapQuality">Marble.MapQuality</a> qualityForViewContext, <a href="../marble/Marble.html#ViewContext">Marble.ViewContext</a> viewContext)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMapThemeId">setMapThemeId</a> (self, QString maptheme)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setProjection">setProjection</a> (self, <a href="../marble/Marble.html#Projection">Marble.Projection</a> projection)</td></tr>
@@ -163,12 +166,12 @@ cities, mountain tops or the poles.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowRivers">setShowRivers</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowRuntimeTrace">setShowRuntimeTrace</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowScaleBar">setShowScaleBar</a> (self, bool visible)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowSunInZenith">setShowSunInZenith</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowSunShading">setShowSunShading</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowTerrain">setShowTerrain</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowTileId">setShowTileId</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSize">setSize</a> (self, int width, int height)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSize">setSize</a> (self, QSize size)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSubSolarPointIconVisible">setSubSolarPointIconVisible</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setViewContext">setViewContext</a> (self, <a href="../marble/Marble.html#ViewContext">Marble.ViewContext</a> viewContext)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVolatileTileCacheLimit">setVolatileTileCacheLimit</a> (self, long kiloBytes)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showAtmosphere">showAtmosphere</a> (self)</td></tr>
@@ -189,7 +192,6 @@ cities, mountain tops or the poles.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showRelief">showRelief</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showRivers">showRivers</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showScaleBar">showScaleBar</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showSunInZenith">showSunInZenith</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showSunShading">showSunShading</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showTerrain">showTerrain</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QSize&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#size">size</a> (self)</td></tr>
@@ -761,7 +763,37 @@ the globe and before all other layers have been rendered.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="mapQuality"></a>
+<div class="memdoc"></div></div><a class="anchor" name="isLockedToSubSolarPoint"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isLockedToSubSolarPoint</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the globe is locked to the sub solar point
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> if globe is locked to sub solar point
+</dd></dl>
+</p></div></div><a class="anchor" name="isSubSolarPointIconVisible"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isSubSolarPointIconVisible</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the sun icon is shown in the sub solar point.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> visibility of the sun icon in the sub solar point
+</dd></dl>
+</p></div></div><a class="anchor" name="mapQuality"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1270,7 +1302,36 @@ the previous position and the two offsets.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setMapQualityForViewContext"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setLockToSubSolarPoint"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setLockToSubSolarPoint</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the globe locked to the sub solar point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> vsible if globe is locked to the sub solar point
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setMapQualityForViewContext"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1961,35 +2022,6 @@ if needed.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="setShowSunInZenith"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setShowSunInZenith</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>visible</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Set whether the sun is visible in the zenith.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>visible</em>&nbsp;</td><td> visibility of the sun in the zenith
-</td></tr>
-</table></dl>
-<p>
 </p></div></div><a class="anchor" name="setShowSunShading"></a>
 <div class="memitem">
 <div class="memproto">
@@ -2129,7 +2161,36 @@ and might be subject to changes until Marble 0.8
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setViewContext"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setSubSolarPointIconVisible"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setSubSolarPointIconVisible</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the sun icon is shown in the sub solar point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible if the sun icon is shown in the sub solar point
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setViewContext"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -2446,21 +2507,6 @@ and might be subject to changes until Marble 0.8
 </div>
 <div class="memdoc"><p>Return whether the scale bar is visible.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> The scale bar visibility.
-</dd></dl>
-</p></div></div><a class="anchor" name="showSunInZenith"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool showSunInZenith</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Return whether the sun is shown in the zenith.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> visibility of sun in the zenith
 </dd></dl>
 </p></div></div><a class="anchor" name="showSunShading"></a>
 <div class="memitem">

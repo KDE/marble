@@ -58,6 +58,7 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#WritePolicy">WritePolicy</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Instant, Lazy&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentRouteChanged">currentRouteChanged</a> (<a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a> newRoute)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentRouteChanged">currentRouteChanged</a> (int index)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AlternativeRoutesModel">__init__</a> (self, QObject parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addRoute">addRoute</a> (self, <a href="../marble/Marble.GeoDataDocument.html">Marble.GeoDataDocument</a> document, <a href="../marble/Marble.AlternativeRoutesModel.html#WritePolicy">Marble.AlternativeRoutesModel.WritePolicy</a> policy=Marble.AlternativeRoutesModel.Lazy)</td></tr>
@@ -91,7 +92,24 @@ Namespace: <a href="../marble/Marble.html">Marble</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("currentRouteChanged(Marble::GeoDataDocument*)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="AlternativeRoutesModel"></a>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("currentRouteChanged(Marble::GeoDataDocument*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="currentRouteChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> currentRouteChanged</td>
+<td>(</td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("currentRouteChanged(int)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="AlternativeRoutesModel"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
