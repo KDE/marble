@@ -13,7 +13,9 @@
 
 #include <QWebView>
 
-class MarbleWebView : public QWebView
+#include "marble_export.h"
+
+class MARBLE_EXPORT MarbleWebView : public QWebView
 {
     Q_OBJECT
 public:
