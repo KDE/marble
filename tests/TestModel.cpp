@@ -23,7 +23,7 @@
 #include "TestUtils.h"
 
 using namespace Marble ;
-class MARBLE_EXPORT TestModel : public QObject
+class TestModel : public QObject
 {
     Q_OBJECT
 private slots:
