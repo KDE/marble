@@ -5,7 +5,7 @@ set(marble_kde_SRCS
 )
 
 set(marblepart_SRCS marble_part.cpp)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui ${KDE4_INCLUDE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui ${KDE4_INCLUDES})
 kde4_add_kcfg_files(marblepart_SRCS settings.kcfgc)
 kde4_add_plugin(marble_part WITH_PREFIX ${marblepart_SRCS})
 target_link_libraries(marble_part ${KDE4_KPARTS_LIBS} ${KDE4_KNEWSTUFF3_LIBS} marbleui marblewidget)
