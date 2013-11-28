@@ -17,6 +17,7 @@ install(FILES marble_part.rc DESTINATION ${DATA_INSTALL_DIR}/marble)
 kde4_add_ui_files(marble_kde_SRCS ${marble_UI})
 kde4_add_kcfg_files(marble_kde_SRCS settings.kcfgc)
 
+kde4_add_app_icon(marble_kde_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/hi*-app-marble.png")
 kde4_add_executable (marble ${marble_kde_SRCS})
 
 target_link_libraries (
