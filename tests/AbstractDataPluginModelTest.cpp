@@ -60,6 +60,11 @@ class AbstractDataPluginModelTest : public QObject
 {
     Q_OBJECT
 
+public:
+    AbstractDataPluginModelTest( QObject *parent = 0 ) :
+        QObject( parent )
+    {}
+
  private slots:
     void init_testcase();
 
