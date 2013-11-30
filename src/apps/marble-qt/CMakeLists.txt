@@ -76,5 +76,6 @@ else (APPLE)
     install (TARGETS marble-qt RUNTIME DESTINATION bin )
 endif (APPLE)
 endif(WIN32)
-
-install(PROGRAMS marble-qt.desktop DESTINATION ${APPS_INSTALL_DIR})
+if(APPS_INSTALL_DIR)
+  install(PROGRAMS marble-qt.desktop DESTINATION ${APPS_INSTALL_DIR})
+endif(APPS_INSTALL_DIR)
