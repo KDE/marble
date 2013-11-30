@@ -36,7 +36,11 @@ BookmarkManagerPrivate::BookmarkManagerPrivate( GeoDataTreeModel *treeModel ) :
 
 BookmarkManagerPrivate::~BookmarkManagerPrivate()
 {
-    m_treeModel->removeDocument( m_bookmarkDocument );
+    Q_ASSERT( m_bookmarkDocument && "BookmarkManagerPrivate::m_bookmarkDocument is 0. Please report a Marble bug at http://bugs.kde.org" );
+    if ( m_bookmarkDocument )
+    {
+        m_treeModel->removeDocument( m_bookmarkDocument );
+    }
     delete m_bookmarkDocument;
 }
 
