@@ -38,14 +38,14 @@ GeoDataFlyTo::GeoDataFlyTo() : d( new GeoDataFlyToPrivate )
 }
 
 GeoDataFlyTo::GeoDataFlyTo( const Marble::GeoDataFlyTo &other ) :
-    GeoDataObject( other ), d( new GeoDataFlyToPrivate( *other.d ) )
+    GeoDataTourPrimitive( other ), d( new GeoDataFlyToPrivate( *other.d ) )
 {
 
 }
 
 GeoDataFlyTo &GeoDataFlyTo::operator=( const GeoDataFlyTo &other )
 {
-    GeoDataObject::operator=( other );
+    GeoDataTourPrimitive::operator=( other );
     *d = *other.d;
     return *this;
 }

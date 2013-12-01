@@ -13,13 +13,14 @@
 #define MARBLE_GEODATAFLYTO_H
 
 #include "GeoDataAbstractView.h"
+#include "GeoDataTourPrimitive.h"
 #include "MarbleGlobal.h"
 
 namespace Marble {
 
 class GeoDataFlyToPrivate;
 
-class GeoDataFlyTo: public GeoDataObject
+class GeoDataFlyTo: public GeoDataTourPrimitive
 {
 public:
     enum FlyToMode {
