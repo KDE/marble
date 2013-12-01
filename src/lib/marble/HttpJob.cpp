@@ -32,7 +32,7 @@ class Marble::HttpJobPrivate
     QString        m_initiatorId;
     int            m_trialsLeft;
     DownloadUsage  m_downloadUsage;
-    QString m_pluginId;
+    QString m_userAgent;
     QNetworkAccessManager *const m_networkAccessManager;
     QNetworkReply *m_networkReply;
 };
@@ -46,7 +46,7 @@ HttpJobPrivate::HttpJobPrivate( const QUrl & sourceUrl, const QString & destFile
       m_downloadUsage( DownloadBrowse ),
       // FIXME: remove initialization depending on if empty pluginId
       // results in valid user agent string
-      m_pluginId( "unknown" ),
+      m_userAgent( "unknown" ),
       m_networkAccessManager( networkAccessManager ),
       m_networkReply( 0 )
 {
@@ -116,21 +116,21 @@ void HttpJob::setDownloadUsage( const DownloadUsage usage )
 
 void HttpJob::setUserAgentPluginId( const QString & pluginId ) const
 {
-    d->m_pluginId = pluginId;
+    d->m_userAgent = pluginId;
 }
 
 QByteArray HttpJob::userAgent() const
 {
     switch ( d->m_downloadUsage ) {
     case DownloadBrowse:
-        return TinyWebBrowser::userAgent("Browser", d->m_pluginId);
+        return TinyWebBrowser::userAgent("Browser", d->m_userAgent);
         break;
     case DownloadBulk:
-        return TinyWebBrowser::userAgent("BulkDownloader", d->m_pluginId);
+        return TinyWebBrowser::userAgent("BulkDownloader", d->m_userAgent);
         break;
     default:
         qCritical() << "Unknown download usage value:" << d->m_downloadUsage;
-        return TinyWebBrowser::userAgent("unknown", d->m_pluginId);
+        return TinyWebBrowser::userAgent("unknown", d->m_userAgent);
     }
 }
 
