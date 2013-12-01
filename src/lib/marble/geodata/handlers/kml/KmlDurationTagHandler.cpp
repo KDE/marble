@@ -22,19 +22,22 @@ namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( duration )
-    GeoNode *KmldurationTagHandler::parse(GeoParser & parser) const
-    {
-        Q_ASSERT ( parser.isStartElement()
-                   && parser.isValidElement( kmlTag_duration ) );
 
-        GeoStackItem parentItem = parser.parentElement();
+KML_DEFINE_TAG_HANDLER_GX22( duration )
 
-        qreal const duration = parser.readElementText().trimmed().toDouble();
-        if ( parentItem.is<GeoDataFlyTo>() ){
-            parentItem.nodeAs<GeoDataFlyTo>()->setDuration( duration );
-        }
-        return 0;
+GeoNode *KmldurationTagHandler::parse(GeoParser & parser) const
+{
+    Q_ASSERT ( parser.isStartElement()
+               && parser.isValidElement( kmlTag_duration ) );
+
+    GeoStackItem parentItem = parser.parentElement();
+
+    qreal const duration = parser.readElementText().trimmed().toDouble();
+    if ( parentItem.is<GeoDataFlyTo>() ){
+        parentItem.nodeAs<GeoDataFlyTo>()->setDuration( duration );
+    }
+    return 0;
 }
+
 }
 }
