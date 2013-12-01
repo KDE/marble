@@ -19,14 +19,23 @@
 namespace Marble
 {
 
+static GeoTagWriterRegistrar s_writerFlyTo(
+        GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataFlyToType,
+                                     kml::kmlTag_nameSpace22 ),
+        new KmlFlyToTagWriter );
+
 bool KmlFlyToTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataFlyTo *flyTo = static_cast<const GeoDataFlyTo*>( node );
     writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_FlyTo );
     writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_duration, QString::number( flyTo->duration()) );
-    QString const flyToModeString = flyTo->flyToMode() == GeoDataFlyTo::Smooth ? "smooth" : "bounce";
-    writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_flyToMode, flyToModeString );
-    writeElement( flyTo->view(), writer );
+    if ( flyTo->flyToMode() == GeoDataFlyTo::Smooth ) {
+        // two values, smooth and bounce, bounce is default and can hence be omitted
+        writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_flyToMode, "smooth" );
+    }
+    if ( flyTo->view() ) {
+        writeElement( flyTo->view(), writer );
+    }
     writer.writeEndElement();
     return true;
 }
