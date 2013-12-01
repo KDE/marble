@@ -16,14 +16,11 @@
 #ifndef MARBLE_MERGEDLAYERDECORATOR_H
 #define MARBLE_MERGEDLAYERDECORATOR_H
 
-#include <QSharedPointer>
 #include <QSize>
 #include <QVector>
 #include <QList>
 
 #include "GeoSceneTextureTile.h"
-#include "GeoDataGroundOverlay.h"
-#include "MarbleGlobal.h"
 
 class QImage;
 class QString;
@@ -31,6 +28,7 @@ class QString;
 namespace Marble
 {
 
+class GeoDataGroundOverlay;
 class SunLocator;
 class StackedTile;
 class Tile;

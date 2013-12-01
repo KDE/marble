@@ -24,7 +24,6 @@
 
 #include "StackedTileLoader.h"
 
-#include "GeoSceneTiled.h"
 #include "MarbleDebug.h"
 #include "MergedLayerDecorator.h"
 #include "StackedTile.h"

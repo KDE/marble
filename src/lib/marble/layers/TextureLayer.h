@@ -13,14 +13,13 @@
 
 #include "LayerInterface.h"
 #include <QObject>
-#include <QAbstractItemModel>
 
 #include "MarbleGlobal.h"
-#include "GeoSceneTextureTile.h"
-#include "GeoDataDocument.h"
+#include "GeoSceneTiled.h"
 
 #include <QSize>
 
+class QAbstractItemModel;
 class QImage;
 class QRegion;
 class QRect;
@@ -29,7 +28,9 @@ namespace Marble
 {
 
 class GeoPainter;
+class GeoDataDocument;
 class GeoSceneGroup;
+class GeoSceneTextureTile;
 class HttpDownloadManager;
 class SunLocator;
 class VectorComposer;

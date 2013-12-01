@@ -28,9 +28,8 @@
 #include <QObject>
 #include <QSize>
 
-#include "GeoSceneTextureTile.h"
+#include "GeoSceneTiled.h"
 #include "TileId.h"
-#include "MarbleGlobal.h"
 
 class QImage;
 class QString;
