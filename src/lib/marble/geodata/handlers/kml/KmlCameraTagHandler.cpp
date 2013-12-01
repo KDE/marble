@@ -17,7 +17,7 @@
 #include "GeoParser.h"
 #include "GeoDataContainer.h"
 #include "GeoDataPlacemark.h"
-
+#include "GeoDataFlyTo.h"
 
 namespace Marble
 {
@@ -37,6 +37,11 @@ GeoNode *KmlCameraTagHandler::parse( GeoParser & parser ) const
     if ( parentItem.is<GeoDataFeature>() ) {
         camera = new GeoDataCamera;
         parentItem.nodeAs<GeoDataFeature>()->setAbstractView( camera );
+    }
+
+    if ( parentItem.is<GeoDataFlyTo>() ) {
+        camera = new GeoDataCamera;
+        parentItem.nodeAs<GeoDataFlyTo>()->setView( camera );
     }
 
     return camera;

@@ -16,30 +16,35 @@
 #include "GeoParser.h"
 #include "GeoDataContainer.h"
 #include "GeoDataPlacemark.h"
-
+#include "GeoDataFlyTo.h"
 
 namespace Marble
 {
 namespace kml
 {
-    KML_DEFINE_TAG_HANDLER( LookAt )
-    GeoNode *KmlLookAtTagHandler::parse( GeoParser & parser ) const
-    {
-        Q_ASSERT (parser.isStartElement()
-                  && parser.isValidElement( kmlTag_LookAt ) );
 
-        GeoDataLookAt *lookAt = new GeoDataLookAt();
-        GeoStackItem parentItem = parser.parentElement();
-      if ( parentItem.represents( kmlTag_Placemark ) ) {
-          GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
-          placemark->setAbstractView( lookAt );
+KML_DEFINE_TAG_HANDLER( LookAt )
 
-          return lookAt;
-      }
-      else {
-          delete lookAt;
-          return 0;
-      }
+GeoNode *KmlLookAtTagHandler::parse( GeoParser & parser ) const
+{
+    Q_ASSERT (parser.isStartElement()
+              && parser.isValidElement( kmlTag_LookAt ) );
+
+    GeoDataLookAt *lookAt = new GeoDataLookAt();
+    GeoStackItem parentItem = parser.parentElement();
+    if ( parentItem.is<GeoDataFeature>() ) {
+        GeoDataFeature *feature = parentItem.nodeAs<GeoDataFeature>();
+        feature->setAbstractView( lookAt );
+        return lookAt;
+    } if ( parentItem.is<GeoDataFlyTo>() ) {
+        GeoDataFlyTo *feature = parentItem.nodeAs<GeoDataFlyTo>();
+        feature->setView( lookAt );
+        return lookAt;
+    } else {
+        delete lookAt;
+        return 0;
     }
+}
+
 }
 }
