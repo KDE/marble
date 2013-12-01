@@ -8,6 +8,7 @@
 // Copyright 2013       Mayank Madan <maddiemadan@gmail.com>
 
 #include "GeoDataFlyTo.h"
+#include "GeoDataPlaylist.h"
 #include "GeoParser.h"
 #include "MarbleDebug.h"
 #include "KmlFlyToTagHandler.h"
@@ -24,7 +25,13 @@ GeoNode* KmlFlyToTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_FlyTo ) );
 
-    /** @todo Integrate with gx:TourPrimitive and gx:Tour */
+    GeoStackItem parentItem = parser.parentElement();
+
+    if (parentItem.is<GeoDataPlaylist>()) {
+        GeoDataFlyTo *flyTo = new GeoDataFlyTo;
+        parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive( flyTo );
+        return flyTo;
+    }
 
     return 0;
 }
