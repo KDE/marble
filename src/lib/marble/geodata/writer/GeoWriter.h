@@ -15,6 +15,7 @@
 #include "marble_export.h"
 
 #include <QXmlStreamWriter>
+#include <QVariant>
 
 namespace Marble
 {
@@ -65,6 +66,14 @@ public:
      *
      **/
     void writeOptionalElement(const QString &key, const QString &value , const QString &defaultValue = QString() );
+
+    template<class T>
+    void writeOptionalElement( const QString &key, const T &value , const T &defaultValue = T() )
+    {
+        if ( value != defaultValue ) {
+            writeElement( key, QVariant::fromValue( value ).toString() );
+        }
+    }
 
 private:
     friend class GeoTagWriter;
