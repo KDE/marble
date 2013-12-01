@@ -403,6 +403,7 @@ geodata/writers/kml/KmlNetworkLinkTagWriter.cpp
 geodata/writers/kml/KmlOverlayTagWriter.cpp
 geodata/writers/kml/KmlPhotoOverlayWriter.cpp
 geodata/writers/kml/KmlPlacemarkTagWriter.cpp
+geodata/writers/kml/KmlPlaylistTagWriter.cpp
 geodata/writers/kml/KmlPointTagWriter.cpp
 geodata/writers/kml/KmlPolygonTagWriter.cpp
 geodata/writers/kml/KmlPolyStyleTagWriter.cpp
@@ -413,6 +414,7 @@ geodata/writers/kml/KmlStyleTagWriter.cpp
 geodata/writers/kml/KmlTagWriter.cpp
 geodata/writers/kml/KmlTimeSpanWriter.cpp
 geodata/writers/kml/KmlTimeStampTagWriter.cpp
+geodata/writers/kml/KmlTourTagWriter.cpp
 geodata/writers/kml/KmlTrackWriter.cpp
 )
 
