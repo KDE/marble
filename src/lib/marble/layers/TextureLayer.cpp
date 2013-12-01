@@ -67,14 +67,14 @@ public:
     TextureLayer  *const m_parent;
     const SunLocator *const m_sunLocator;
     VectorComposer *const m_veccomposer;
-    TileLoader m_loader;
+    HttpDownloadManager *const m_downloadManager;
     MergedLayerDecorator m_layerDecorator;
     StackedTileLoader    m_tileLoader;
     GeoDataCoordinates m_centerCoordinates;
     int m_tileZoomLevel;
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
-    QVector<const GeoSceneTextureTile *> m_textures;
+    QVector<TileLoader *> m_textures;
     const GeoSceneGroup *m_textureLayerSettings;
     QString m_runtimeTrace;
     QSortFilterProxyModel m_groundOverlayModel;
@@ -91,8 +91,8 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_veccomposer( veccomposer )
-    , m_loader( downloadManager, 0 )
-    , m_layerDecorator( &m_loader, sunLocator )
+    , m_downloadManager( downloadManager )
+    , m_layerDecorator( sunLocator )
     , m_tileLoader( &m_layerDecorator )
     , m_centerCoordinates()
     , m_tileZoomLevel( -1 )
@@ -134,9 +134,9 @@ void TextureLayer::Private::requestDelayedRepaint()
 
 void TextureLayer::Private::updateTextureLayers()
 {
-    QVector<GeoSceneTextureTile const *> result;
+    QVector<TileLoader *> result;
 
-    foreach ( const GeoSceneTextureTile *candidate, m_textures ) {
+    foreach ( TileLoader *candidate, m_textures ) {
         bool enabled = true;
         if ( m_textureLayerSettings ) {
             const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
@@ -236,9 +236,6 @@ TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
     : QObject()
     , d( new Private( downloadManager, sunLocator, veccomposer, groundOverlayModel, this ) )
 {
-    connect( &d->m_loader, SIGNAL(tileCompleted(TileId,QImage)),
-             this, SLOT(updateTile(TileId,QImage)) );
-
     // Repaint timer
     d->m_repaintTimer.setSingleShot( true );
     d->m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
@@ -253,6 +250,7 @@ TextureLayer::~TextureLayer()
 {
     delete d->m_texmapper;
     delete d->m_texcolorizer;
+    qDeleteAll( d->m_textures );
     delete d;
 }
 
@@ -451,11 +449,20 @@ void TextureLayer::setMapTheme( const QVector<const GeoSceneTextureTile *> &text
     delete d->m_texcolorizer;
     d->m_texcolorizer = 0;
 
+    qDeleteAll( d->m_textures );
+    d->m_textures.clear();
+
     if ( QFileInfo( seaFile ).isReadable() || QFileInfo( landFile ).isReadable() ) {
         d->m_texcolorizer = new TextureColorizer( seaFile, landFile, d->m_veccomposer );
     }
 
-    d->m_textures = textures;
+    foreach ( const GeoSceneTextureTile *textureTile, textures ) {
+        TileLoader *loader = new TileLoader( textureTile, d->m_downloadManager );
+        connect( loader, SIGNAL(tileCompleted(TileId,QImage)),
+                 this, SLOT(updateTile(TileId,QImage)) );
+        d->m_textures.append( loader );
+    }
+
     d->m_textureLayerSettings = textureLayerSettings;
 
     if ( d->m_textureLayerSettings ) {

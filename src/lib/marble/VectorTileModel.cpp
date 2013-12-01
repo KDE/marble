@@ -14,7 +14,6 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonBox.h"
 #include "GeoDataTreeModel.h"
-#include "GeoSceneVectorTile.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MathHelper.h"
@@ -26,16 +25,15 @@
 
 using namespace Marble;
 
-TileRunner::TileRunner( TileLoader *loader, const GeoSceneVectorTile *texture, const TileId &id ) :
+TileRunner::TileRunner( TileLoader *loader, const TileId &id ) :
     m_loader( loader ),
-    m_texture( texture ),
     m_id( id )
 {
 }
 
 void TileRunner::run()
 {
-    GeoDataDocument *const document = m_loader->loadTileVectorData( m_texture, m_id, DownloadBrowse );
+    GeoDataDocument *const document = m_loader->loadTileVectorData( m_id, DownloadBrowse );
 
     emit documentLoaded( m_id, document );
 }
@@ -54,9 +52,8 @@ VectorTileModel::CacheDocument::~CacheDocument()
     delete m_document;
 }
 
-VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTile *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool ) :
-    m_loader( loader ),
-    m_layer( layer ),
+VectorTileModel::VectorTileModel( HttpDownloadManager *downloadManager, const PluginManager *pluginManager, const GeoSceneVectorTile *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool ) :
+    m_loader( layer, downloadManager, pluginManager ),
     m_treeModel( treeModel ),
     m_threadPool( threadPool ),
     m_tileZoomLevel( -1 )
@@ -66,8 +63,8 @@ VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTile *
 void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
 {
     // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
-    const int levelZeroWidth = m_layer->tileSize().width() * m_layer->levelZeroColumns();
-    const int levelZeroHight = m_layer->tileSize().height() * m_layer->levelZeroRows();
+    const int levelZeroWidth = m_loader.tileSize().width() * m_loader.levelZeroColumns();
+    const int levelZeroHight = m_loader.tileSize().height() * m_loader.levelZeroRows();
     const int levelZeroMinDimension = qMin( levelZeroWidth, levelZeroHight );
 
     qreal linearLevel = ( 4.0 * (qreal)( radius ) / (qreal)( levelZeroMinDimension ) );
@@ -85,8 +82,8 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
     // roughly equals the global texture width
 
 
-    if ( tileZoomLevel > m_layer->maximumTileLevel() )
-        tileZoomLevel = m_layer->maximumTileLevel();
+    if ( tileZoomLevel > m_loader.maximumTileLevel() )
+        tileZoomLevel = m_loader.maximumTileLevel();
 
     // if zoom level has changed, empty vectortile cache
     if ( tileZoomLevel != m_tileZoomLevel ) {
@@ -94,8 +91,8 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
         m_documents.clear();
     }
 
-    const unsigned int maxTileX = ( 1 << tileZoomLevel ) * m_layer->levelZeroColumns();
-    const unsigned int maxTileY = ( 1 << tileZoomLevel ) * m_layer->levelZeroRows();
+    const unsigned int maxTileX = ( 1 << tileZoomLevel ) * m_loader.levelZeroColumns();
+    const unsigned int maxTileY = ( 1 << tileZoomLevel ) * m_loader.levelZeroRows();
 
     /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
 
@@ -149,7 +146,7 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
 
 QString VectorTileModel::name() const
 {
-    return m_layer->name();
+    return m_loader.name();
 }
 
 void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
@@ -179,7 +176,7 @@ void VectorTileModel::setViewport( int tileZoomLevel,
            if ( !m_documents.contains( tileId ) ) {
                GeoDataDocument *const document = new GeoDataDocument;
 
-               TileRunner *job = new TileRunner( m_loader, m_layer, tileId );
+               TileRunner *job = new TileRunner( &m_loader, tileId );
                connect( job, SIGNAL(documentLoaded(TileId,GeoDataDocument*)), this, SLOT(updateTile(TileId,GeoDataDocument*)) );
                m_threadPool->start( job );
 

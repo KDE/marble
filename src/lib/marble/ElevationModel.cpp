@@ -33,8 +33,7 @@ class ElevationModelPrivate
 public:
     ElevationModelPrivate( ElevationModel *_q, MarbleModel *const model )
         : q( _q ),
-          m_tileLoader( model->downloadManager(), model->pluginManager() ),
-          m_textureLayer( 0 )
+          m_tileLoader( 0 )
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
 
@@ -53,8 +52,10 @@ public:
         const GeoSceneLayer *sceneLayer = map->layer( head->theme() );
         Q_ASSERT( sceneLayer );
 
-        m_textureLayer = dynamic_cast<GeoSceneTextureTile*>( sceneLayer->datasets().first() );
-        Q_ASSERT( m_textureLayer );
+        const GeoSceneTextureTile *textureLayer = dynamic_cast<GeoSceneTextureTile*>( sceneLayer->datasets().first() );
+        Q_ASSERT( textureLayer );
+
+        m_tileLoader = new TileLoader( textureLayer, model->downloadManager() );
     }
 
     void tileCompleted( const TileId & tileId, const QImage &image )
@@ -66,8 +67,7 @@ public:
 public:
     ElevationModel *q;
 
-    TileLoader m_tileLoader;
-    const GeoSceneTextureTile *m_textureLayer;
+    TileLoader *m_tileLoader;
     QCache<TileId, const QImage> m_cache;
 };
 
@@ -75,25 +75,25 @@ ElevationModel::ElevationModel( MarbleModel *const model )
     : QObject( 0 ),
       d( new ElevationModelPrivate( this, model ) )
 {
-    connect( &d->m_tileLoader, SIGNAL(tileCompleted(TileId,QImage)),
+    connect( d->m_tileLoader, SIGNAL(tileCompleted(TileId,QImage)),
              this, SLOT(tileCompleted(TileId,QImage)) );
 }
 
 
 qreal ElevationModel::height( qreal lon, qreal lat ) const
 {
-    if ( !d->m_textureLayer ) {
+    if ( !d->m_tileLoader ) {
         return invalidElevationData;
     }
 
-    const int tileZoomLevel = d->m_tileLoader.maximumTileLevel( *( d->m_textureLayer ) );
+    const int tileZoomLevel = d->m_tileLoader->maximumTileLevel();
     Q_ASSERT( tileZoomLevel == 9 );
 
-    const int width = d->m_textureLayer->tileSize().width();
-    const int height = d->m_textureLayer->tileSize().height();
+    const int width = d->m_tileLoader->tileSize().width();
+    const int height = d->m_tileLoader->tileSize().height();
 
-    const int numTilesX = TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(), tileZoomLevel );
-    const int numTilesY = TileLoaderHelper::levelToRow( d->m_textureLayer->levelZeroRows(), tileZoomLevel );
+    const int numTilesX = TileLoaderHelper::levelToColumn( d->m_tileLoader->levelZeroColumns(), tileZoomLevel );
+    const int numTilesY = TileLoaderHelper::levelToRow( d->m_tileLoader->levelZeroRows(), tileZoomLevel );
     Q_ASSERT( numTilesX > 0 );
     Q_ASSERT( numTilesY > 0 );
 
@@ -119,7 +119,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
 
         const QImage *image = d->m_cache[id];
         if ( image == 0 ) {
-            image = new QImage( d->m_tileLoader.loadTileImage( d->m_textureLayer, id, DownloadBrowse ) );
+            image = new QImage( d->m_tileLoader->loadTileImage( id, DownloadBrowse ) );
             d->m_cache.insert( id, image );
         }
         Q_ASSERT( image );
@@ -161,13 +161,13 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
 
 QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const
 {
-    if ( !d->m_textureLayer ) {
+    if ( !d->m_tileLoader ) {
         return QList<GeoDataCoordinates>();
     }
 
-    const int tileZoomLevel = d->m_tileLoader.maximumTileLevel( *( d->m_textureLayer ) );
-    const int width = d->m_textureLayer->tileSize().width();
-    const int numTilesX = TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(), tileZoomLevel );
+    const int tileZoomLevel = d->m_tileLoader->maximumTileLevel();
+    const int width = d->m_tileLoader->tileSize().width();
+    const int numTilesX = TileLoaderHelper::levelToColumn( d->m_tileLoader->levelZeroColumns(), tileZoomLevel );
 
     qreal distPerPixel = ( qreal )360 / ( width * numTilesX );
     //mDebug() << "heightProfile" << fromLat << fromLon << toLat << toLon << "distPerPixel" << distPerPixel;
