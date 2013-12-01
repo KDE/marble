@@ -73,6 +73,7 @@ const char* GeoDataStyleMapType = "GeoDataStyleMap";
 const char* GeoDataTimePrimitiveType = "GeoDataTimePrimitive";
 const char* GeoDataTimeSpanType = "GeoDataTimeSpan";
 const char* GeoDataTimeStampType = "GeoDataTimeStamp";
+const char* GeoDataTourType = "GeoDataTour";
 const char* GeoDataTourControlType = "GeoDataTourControl";
 const char* GeoDataTrackType = "GeoDataTrack";
 const char* GeoDataScaleType = "GeoDataScale";

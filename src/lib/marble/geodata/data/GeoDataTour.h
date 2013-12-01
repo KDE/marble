@@ -35,6 +35,8 @@ public:
     const GeoDataPlaylist* playlist() const;
     void setPlaylist(GeoDataPlaylist* playlist);
 
+    virtual const char* nodeType() const;
+
 private:
     GeoDataTourPrivate * const d;
 

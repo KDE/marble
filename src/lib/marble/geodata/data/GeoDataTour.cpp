@@ -10,6 +10,7 @@
 
 #include "GeoDataTour.h"
 #include "GeoDataPlaylist.h"
+#include "GeoDataTypes.h"
 
 namespace Marble
 {
@@ -72,6 +73,12 @@ const GeoDataPlaylist* GeoDataTour::playlist() const
 void GeoDataTour::setPlaylist(GeoDataPlaylist *playlist)
 {
     d->m_playlist = playlist;
+    d->m_playlist->setParent( this );
+}
+
+const char *GeoDataTour::nodeType() const
+{
+    return GeoDataTypes::GeoDataTourType;
 }
 
 } // namespace Marble

@@ -46,6 +46,7 @@ const GeoDataTourPrimitive* GeoDataPlaylist::primitive(int id) const
 
 void GeoDataPlaylist::addPrimitive(GeoDataTourPrimitive *primitive)
 {
+    primitive->setParent( this );
     m_primitives.push_back(primitive);
 }
 
