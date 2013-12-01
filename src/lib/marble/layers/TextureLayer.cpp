@@ -48,7 +48,6 @@ public:
     Private( HttpDownloadManager *downloadManager,
              const SunLocator *sunLocator,
              VectorComposer *veccomposer,
-             const PluginManager *pluginManager,
              QAbstractItemModel *groundOverlayModel,
              TextureLayer *parent );
 
@@ -87,13 +86,12 @@ public:
 TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
                                 const SunLocator *sunLocator,
                                 VectorComposer *veccomposer,
-                                const PluginManager *pluginManager,
                                 QAbstractItemModel *groundOverlayModel,
                                 TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_veccomposer( veccomposer )
-    , m_loader( downloadManager, pluginManager )
+    , m_loader( downloadManager, 0 )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
     , m_centerCoordinates()
@@ -234,10 +232,9 @@ void TextureLayer::Private::updateGroundOverlays()
 TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
                             const SunLocator *sunLocator,
                             VectorComposer *veccomposer ,
-                            const PluginManager *pluginManager,
                             QAbstractItemModel *groundOverlayModel )
     : QObject()
-    , d( new Private( downloadManager, sunLocator, veccomposer, pluginManager, groundOverlayModel, this ) )
+    , d( new Private( downloadManager, sunLocator, veccomposer, groundOverlayModel, this ) )
 {
     connect( &d->m_loader, SIGNAL(tileCompleted(TileId,QImage)),
              this, SLOT(updateTile(TileId,QImage)) );

@@ -31,7 +31,6 @@ namespace Marble
 class GeoPainter;
 class GeoSceneGroup;
 class HttpDownloadManager;
-class PluginManager;
 class SunLocator;
 class VectorComposer;
 class ViewportParams;
@@ -44,7 +43,6 @@ class TextureLayer : public QObject, public LayerInterface
     TextureLayer( HttpDownloadManager *downloadManager,
                   const SunLocator *sunLocator,
                   VectorComposer *veccomposer,
-                  const PluginManager *pluginManager,
                   QAbstractItemModel *groundOverlayModel );
 
     ~TextureLayer();
