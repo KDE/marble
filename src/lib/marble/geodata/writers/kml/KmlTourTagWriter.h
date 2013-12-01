@@ -11,15 +11,17 @@
 #ifndef MARBLE_KMLTOURTAGWRITER_H
 #define MARBLE_KMLTOURTAGWRITER_H
 
-#include "GeoTagWriter.h"
+#include "KmlFeatureTagWriter.h"
 
 namespace Marble
 {
 
-class KmlTourTagWriter : public GeoTagWriter
+class KmlTourTagWriter : public KmlFeatureTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    KmlTourTagWriter();
+
+    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
 };
 
 }

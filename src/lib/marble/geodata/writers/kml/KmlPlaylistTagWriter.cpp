@@ -20,14 +20,14 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerTour(
         GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataPlaylistType,
-                                     kml::kmlTag_nameSpaceGx22 ),
+                                     kml::kmlTag_nameSpace22 ),
         new KmlPlaylistTagWriter );
 
 bool KmlPlaylistTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataPlaylist *playlist = static_cast<const GeoDataPlaylist*>( node );
 
-    writer.writeStartElement( kml::kmlTag_Playlist );
+    writer.writeStartElement( "gx:Playlist" );
 
     for ( int i = 0; i < playlist->size(); i++ ) {
         writeTourPrimitive( playlist->primitive( i ), writer );

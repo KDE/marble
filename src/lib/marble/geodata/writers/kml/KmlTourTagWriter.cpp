@@ -20,30 +20,22 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerTour(
         GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataTourType,
-                                     kml::kmlTag_nameSpaceGx22 ),
+                                     kml::kmlTag_nameSpace22 ),
         new KmlTourTagWriter );
 
-bool KmlTourTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool KmlTourTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
 {
-
-    const GeoDataTour *tour = static_cast<const GeoDataTour*>( node );
-
-    writer.writeStartElement( kml::kmlTag_Tour );
-    if (!tour->id().isEmpty() ) {
-        writer.writeAttribute( "id", tour->id() );
-    }
-
-    writer.writeOptionalElement( kml::kmlTag_name, tour->name() );
-
-    writer.writeOptionalElement( kml::kmlTag_description, tour->description() );
-
-    if ( tour->playlist() != 0 ) {
+    const  GeoDataTour* tour = static_cast<const GeoDataTour*>( node );
+    if ( tour->playlist() ) {
         writeElement( tour->playlist(), writer );
     }
-
-    writer.writeEndElement();
-
     return true;
+}
+
+KmlTourTagWriter::KmlTourTagWriter() :
+    KmlFeatureTagWriter( "gx:Tour" )
+{
+    // nothing to do
 }
 
 }
