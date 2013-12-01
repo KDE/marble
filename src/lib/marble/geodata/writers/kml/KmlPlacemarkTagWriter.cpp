@@ -40,10 +40,6 @@ bool KmlPlacemarkTagWriter::writeMid( const GeoNode *node,
         writeElement( placemark->geometry(), writer );
     }
 
-    if( placemark->lookAt() ){
-        writeElement( placemark->lookAt(), writer );
-    }
-
     return true;
 }
 

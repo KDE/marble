@@ -18,6 +18,8 @@
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataLookAt.h"
+#include "GeoDataCamera.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 
@@ -61,6 +63,15 @@ bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer 
             writer.writeCharacters( feature->description() );
         }
         writer.writeEndElement();
+    }
+
+    GeoDataLookAt const * lookAt = dynamic_cast<const GeoDataLookAt*>( feature->abstractView() );
+    if ( lookAt ) {
+        writeElement( lookAt, writer );
+    }
+    GeoDataCamera const * camera = dynamic_cast<const GeoDataCamera*>( feature->abstractView() );
+    if ( camera ) {
+        writeElement( camera, writer );
     }
 
     if( feature->timeStamp().when().isValid() ) {
