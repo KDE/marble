@@ -18,7 +18,7 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerTour(
+static GeoTagWriterRegistrar s_writerPlaylist(
         GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataPlaylistType,
                                      kml::kmlTag_nameSpace22 ),
         new KmlPlaylistTagWriter );
@@ -45,7 +45,7 @@ void KmlPlaylistTagWriter::writeTourPrimitive( const GeoNode *primitive, GeoWrit
         writeTourControl( static_cast<const GeoDataTourControl*>( primitive ), writer );
     }
     else if ( primitive->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
-        writeElement( static_cast<const GeoDataFlyTo*>( primitive ), writer );
+        writeElement( primitive, writer );
     }
 }
 
