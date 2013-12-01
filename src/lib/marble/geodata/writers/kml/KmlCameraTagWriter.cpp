@@ -21,6 +21,11 @@
 namespace Marble
 {
 
+static GeoTagWriterRegistrar s_writerCamera( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataCameraType,
+                                                                            kml::kmlTag_nameSpace22),
+                                               new KmlCameraTagWriter() );
+
+
 bool KmlCameraTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataCamera *camera = static_cast<const GeoDataCamera*>(node);
@@ -33,20 +38,27 @@ bool KmlCameraTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
         writer.writeEndElement();
     }
 
-    writer.writeStartElement("gx:TimeSpan");
-    if (camera->timeSpan().begin().when().isValid())
-        writer.writeElement("begin", camera->timeSpan().begin().when().toString(Qt::ISODate));
-    if (camera->timeSpan().end().when().isValid())
-        writer.writeElement("end", camera->timeSpan().end().when().toString(Qt::ISODate));
-    writer.writeEndElement();
+    if (camera->timeSpan().isValid()) {
+        writer.writeStartElement("gx:TimeSpan");
+        if (camera->timeSpan().begin().when().isValid())
+            writer.writeElement("begin", camera->timeSpan().begin().when().toString(Qt::ISODate));
+        if (camera->timeSpan().end().when().isValid())
+            writer.writeElement("end", camera->timeSpan().end().when().toString(Qt::ISODate));
+        writer.writeEndElement();
+    }
 
-    writer.writeElement( "longitude", QString::number( camera->longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
-    writer.writeElement( "latitude", QString::number( camera->latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
-    writer.writeElement( "altitude", QString::number( camera->altitude(), 'f', 10 ) );
-    writer.writeElement( "roll", QString::number( camera->roll()) );
-    writer.writeElement( "tilt", QString::number( camera->tilt()) );
-    writer.writeElement( "heading", QString::number( camera->heading()) );
-    writer.writeTextElement( kml::kmlTag_altitudeMode, KmlGroundOverlayWriter::altitudeModeToString(camera->altitudeMode()) );
+    if ( camera->longitude() != 0.0 ) {
+        writer.writeElement( "longitude", QString::number( camera->longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
+    }
+    if ( camera->latitude() != 0.0 ) {
+        writer.writeElement( "latitude", QString::number( camera->latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
+    }
+    writer.writeOptionalElement( "altitude", camera->altitude() );
+    writer.writeOptionalElement( "roll", camera->roll() );
+    writer.writeOptionalElement( "tilt", camera->tilt() );
+    writer.writeOptionalElement( "heading", camera->heading() );
+    QString const altitudeMode = KmlGroundOverlayWriter::altitudeModeToString(camera->altitudeMode());
+    writer.writeOptionalElement( kml::kmlTag_altitudeMode, altitudeMode, "clampToGround" );
 
     writer.writeEndElement();
 
