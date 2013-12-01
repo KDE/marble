@@ -13,6 +13,9 @@
 
 #include "GeoDataFlyTo.h"
 #include "GeoDataTypes.h"
+#include "GeoDataAbstractView.h"
+#include "GeoDataLookAt.h"
+#include "GeoDataCamera.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 
@@ -34,7 +37,14 @@ bool KmlFlyToTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
         writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_flyToMode, "smooth" );
     }
     if ( flyTo->view() ) {
-        writeElement( flyTo->view(), writer );
+        GeoDataLookAt const * lookAt = dynamic_cast<const GeoDataLookAt*>( flyTo->view() );
+        if ( lookAt ) {
+            writeElement( lookAt, writer );
+        }
+        GeoDataCamera const * camera = dynamic_cast<const GeoDataCamera*>( flyTo->view() );
+        if ( camera ) {
+            writeElement( camera, writer );
+        }
     }
     writer.writeEndElement();
     return true;
