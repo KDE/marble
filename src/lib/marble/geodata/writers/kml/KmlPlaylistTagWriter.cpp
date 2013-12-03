@@ -44,6 +44,9 @@ void KmlPlaylistTagWriter::writeTourPrimitive( const GeoNode *primitive, GeoWrit
     if ( primitive->nodeType() == GeoDataTypes::GeoDataTourControlType ) {
         writeTourControl( static_cast<const GeoDataTourControl*>( primitive ), writer );
     }
+    else if ( primitive->nodeType() == GeoDataTypes::GeoDataWaitType ) {
+        writeWait( static_cast<const GeoDataWait*>( primitive ), writer );
+    }
     else if ( primitive->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
         writeElement( primitive, writer );
     }
@@ -57,6 +60,18 @@ void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourContr
     }
 
     writer.writeElement( kml::kmlTag_playMode, playModeToString( tourControl->playMode() ) );
+
+    writer.writeEndElement();
+}
+
+void KmlPlaylistTagWriter::writeWait( const GeoDataWait* wait, GeoWriter& writer ) const
+{
+    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_Wait );
+    if ( !wait->id().isEmpty() ) {
+        writer.writeAttribute( "id", wait->id() );
+    }
+
+    writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_duration, QString::number( wait->duration() ) );
 
     writer.writeEndElement();
 }

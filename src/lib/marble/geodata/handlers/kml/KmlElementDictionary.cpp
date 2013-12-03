@@ -209,6 +209,7 @@ const char* kmlTag_Track = "Track";
 const char* kmlTag_coord = "coord";
 const char* kmlTag_Tour  = "Tour";
 const char* kmlTag_TourControl = "TourControl";
+const char* kmlTag_Wait = "Wait";
 const char* kmlTag_Playlist = "Playlist";
 const char* kmlTag_playMode = "playMode";
 

@@ -62,6 +62,7 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataResourceMap.cpp
         geodata/data/GeoDataTourControl.cpp
         geodata/data/GeoDataAccuracy.cpp
+        geodata/data/GeoDataWait.cpp
 )
 
 SET ( geodata_scene_SRCS
@@ -333,6 +334,7 @@ geodata/handlers/kml/KmlTrackTagHandler.cpp
 geodata/handlers/kml/KmlValueTagHandler.cpp
 geodata/handlers/kml/KmlViewBoundScaleTagHandler.cpp
 geodata/handlers/kml/KmlVisibilityTagHandler.cpp
+geodata/handlers/kml/KmlWaitTagHandler.cpp
 geodata/handlers/kml/KmlWestTagHandler.cpp
 geodata/handlers/kml/KmlWhenTagHandler.cpp
 geodata/handlers/kml/KmlWidthTagHandler.cpp

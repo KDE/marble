@@ -213,6 +213,7 @@ namespace kml
     GEODATA_EXPORT extern const char* kmlTag_coord;
     GEODATA_EXPORT extern const char* kmlTag_Tour;
     GEODATA_EXPORT extern const char* kmlTag_TourControl;
+    GEODATA_EXPORT extern const char* kmlTag_Wait;
     GEODATA_EXPORT extern const char* kmlTag_Playlist;
     GEODATA_EXPORT extern const char* kmlTag_playMode;
 

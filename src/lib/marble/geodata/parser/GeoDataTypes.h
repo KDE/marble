@@ -84,6 +84,7 @@ GEODATA_EXPORT extern const char* GeoDataTimeStampType;
 GEODATA_EXPORT extern const char* GeoDataTimeSpanType;
 GEODATA_EXPORT extern const char* GeoDataTourType;
 GEODATA_EXPORT extern const char* GeoDataTourControlType;
+GEODATA_EXPORT extern const char* GeoDataWaitType;
 GEODATA_EXPORT extern const char* GeoDataTrackType;
 GEODATA_EXPORT extern const char* GeoDataScaleType;
 GEODATA_EXPORT extern const char* GeoDataScreenOverlayType;

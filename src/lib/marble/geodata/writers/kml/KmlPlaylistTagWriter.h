@@ -13,6 +13,7 @@
 
 #include "GeoTagWriter.h"
 #include "GeoDataTourControl.h"
+#include "GeoDataWait.h"
 #include "GeoDataFlyTo.h"
 
 namespace Marble
@@ -26,6 +27,7 @@ public:
 private:
     void writeTourPrimitive( const GeoNode *primitive, GeoWriter& writer ) const;
     void writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer ) const;
+    void writeWait( const GeoDataWait* wait, GeoWriter& writer ) const;
     QString playModeToString( GeoDataTourControl::PlayMode playMode ) const;
 };
 
