@@ -44,8 +44,7 @@ class NavigationFloatItem: public AbstractFloatItem
 MARBLE_PLUGIN( NavigationFloatItem )
 
  public:
-    NavigationFloatItem();
-    explicit NavigationFloatItem( const MarbleModel *marbleModel );
+    explicit NavigationFloatItem( const MarbleModel *marbleModel = 0 );
     ~NavigationFloatItem();
 
     QStringList backendTypes() const;
@@ -74,6 +73,10 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     QPixmap pixmap( const QString &Id ) const;
 
+    QHash<QString,QVariant> settings() const;
+
+    void setSettings( const QHash<QString, QVariant> &settings );
+
  protected:
     bool eventFilter( QObject *object, QEvent *e );
     void paintContent( QPainter *painter );
@@ -86,9 +89,8 @@ MARBLE_PLUGIN( NavigationFloatItem )
     /** Enable/disable zoom in/out buttons */
     void updateButtons( int zoomValue );
 
-    void writeSettings();
-    void toggleToCurrentPositionButton();
-    void toggleToHomeButton();
+    void activateCurrentPositionButton();
+    void activateHomeButton();
     void centerOnCurrentLocation();
 
  private:
@@ -114,6 +116,8 @@ MARBLE_PLUGIN( NavigationFloatItem )
     QMenu *m_contextMenu;
     QAction *m_activateCurrentPositionButtonAction;
     QAction *m_activateHomeButtonAction;
+
+    bool m_showHomeButton;
 };
 
 }

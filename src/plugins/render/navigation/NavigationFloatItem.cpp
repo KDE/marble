@@ -33,18 +33,14 @@
 using namespace Marble;
 /* TRANSLATOR Marble::NavigationFloatItem */
 
-NavigationFloatItem::NavigationFloatItem()
-    : AbstractFloatItem( 0 )
-{
-}
-
 NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( -10, -30 ) ),
       m_marbleWidget( 0 ),
       m_widgetItem( 0 ),
       m_navigationWidget( 0 ),
       m_oldViewportRadius( 0 ),
-      m_contextMenu( 0 )
+      m_contextMenu( 0 ),
+      m_showHomeButton( true )
 {
     // Plugin is visible by default on desktop systems
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -131,6 +127,12 @@ void NavigationFloatItem::initialize()
     layout->addItem( m_widgetItem, 0, 0 );
 
     setLayout( layout );
+
+    if ( m_showHomeButton ) {
+      activateHomeButton();
+    } else {
+      activateCurrentPositionButton();
+    }
 }
 
 bool NavigationFloatItem::isInitialized() const
@@ -169,8 +171,11 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
         connect( m_navigationWidget->arrowDisc, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
 
         connect( m_navigationWidget->homeButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
-        connect( m_navigationWidget->homeButton, SIGNAL(clicked()),
-                 m_marbleWidget, SLOT(goHome()) );
+        if ( m_showHomeButton ) {
+          activateHomeButton();
+        } else {
+          activateCurrentPositionButton();
+        }
 
         connect( m_navigationWidget->zoomInButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
         connect( m_navigationWidget->zoomInButton, SIGNAL(clicked()),
@@ -248,61 +253,65 @@ void NavigationFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
         m_activateHomeButtonAction = new QAction( QIcon( ":/icons/go-home.png" ),
                                                              tr( "Home Button" ),
                                                              m_contextMenu );
-        m_activateHomeButtonAction->setVisible( false );
+        m_activateHomeButtonAction->setVisible( !m_showHomeButton );
+        m_activateCurrentPositionButtonAction->setVisible( m_showHomeButton );
         m_contextMenu->addSeparator();
         m_contextMenu->addAction( m_activateCurrentPositionButtonAction );
         m_contextMenu->addAction( m_activateHomeButtonAction );
 
-        connect( m_activateCurrentPositionButtonAction, SIGNAL(triggered()), SLOT(toggleToCurrentPositionButton()) );
-        connect( m_activateHomeButtonAction, SIGNAL(triggered()), SLOT(toggleToHomeButton()) );
+        connect( m_activateCurrentPositionButtonAction, SIGNAL(triggered()), SLOT(activateCurrentPositionButton()) );
+        connect( m_activateHomeButtonAction, SIGNAL(triggered()), SLOT(activateHomeButton()) );
     }
 
     Q_ASSERT( m_contextMenu );
     m_contextMenu->exec( w->mapToGlobal( e->pos() ) );
 }
 
-void NavigationFloatItem::writeSettings()
+void NavigationFloatItem::activateCurrentPositionButton()
 {
-    if ( m_activateCurrentPositionButtonAction->isVisible() ) {
-        m_activateCurrentPositionButtonAction->setVisible( false );
-        m_activateHomeButtonAction->setVisible( true );
-    } else {
-        m_activateCurrentPositionButtonAction->setVisible( true );
-        m_activateHomeButtonAction->setVisible( false );
+    if ( !isInitialized() ) {
+        return;
     }
-
-    emit settingsChanged( nameId() );
-}
-
-void NavigationFloatItem::toggleToCurrentPositionButton()
-{
-    writeSettings();
 
     QIcon icon;
     icon.addPixmap( pixmap("marble/navigation/navigational_currentlocation"), QIcon::Normal );
     icon.addPixmap( pixmap("marble/navigation/navigational_currentlocation_hover"), QIcon::Active );
     icon.addPixmap( pixmap("marble/navigation/navigational_currentlocation_pressed"), QIcon::Selected );
     m_navigationWidget->homeButton->setProperty("icon", QVariant(icon));
+
+    if ( m_contextMenu ) {
+        m_activateCurrentPositionButtonAction->setVisible( false );
+        m_activateHomeButtonAction->setVisible( true );
+    }
+
     disconnect( m_navigationWidget->homeButton, SIGNAL(clicked()), m_marbleWidget, SLOT(goHome()) );
     connect( m_navigationWidget->homeButton, SIGNAL(clicked()), SLOT(centerOnCurrentLocation()) );
-
     emit repaintNeeded();
+    m_showHomeButton = false;
     emit settingsChanged( nameId() );
 }
 
-void NavigationFloatItem::toggleToHomeButton()
+void NavigationFloatItem::activateHomeButton()
 {
-    writeSettings();
+    if ( !isInitialized() ) {
+        return;
+    }
 
     QIcon icon;
     icon.addPixmap( pixmap("marble/navigation/navigational_homebutton"), QIcon::Normal );
     icon.addPixmap( pixmap("marble/navigation/navigational_homebutton_hover"), QIcon::Active );
     icon.addPixmap( pixmap("marble/navigation/navigational_homebutton_press"), QIcon::Selected );
     m_navigationWidget->homeButton->setProperty("icon", QVariant(icon));
+
+    if ( m_contextMenu ) {
+        m_activateCurrentPositionButtonAction->setVisible( true );
+        m_activateHomeButtonAction->setVisible( false );
+    }
+
     disconnect( m_navigationWidget->homeButton, SIGNAL(clicked()), this, SLOT(centerOnCurrentLocation()) );
     connect( m_navigationWidget->homeButton, SIGNAL(clicked()), m_marbleWidget, SLOT(goHome()) );
-
     emit repaintNeeded();
+    m_showHomeButton = true;
     emit settingsChanged( nameId() );
 }
 
@@ -310,6 +319,24 @@ void NavigationFloatItem::centerOnCurrentLocation()
 {
     if ( m_marbleWidget->model()->positionTracking()->currentLocation().isValid() ) {
         m_marbleWidget->centerOn( m_marbleWidget->model()->positionTracking()->currentLocation(), true );
+    }
+}
+
+QHash<QString,QVariant> NavigationFloatItem::settings() const
+{
+    QHash<QString, QVariant> settings = RenderPlugin::settings();
+    settings.insert( "showHomeButton", m_showHomeButton );
+    return settings;
+}
+
+void NavigationFloatItem::setSettings( const QHash<QString, QVariant> &settings )
+{
+    RenderPlugin::setSettings( settings );
+    m_showHomeButton = settings.value( "showHomeButton", true ).toBool();
+    if ( m_showHomeButton ) {
+        activateHomeButton();
+    } else {
+        activateCurrentPositionButton();
     }
 }
 
