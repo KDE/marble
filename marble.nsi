@@ -34,7 +34,7 @@
 !define prodname "Marble"
 !endif
 
-!define exec "marble.exe"
+!define exec "marble-qt.exe"
  
 ; optional stuff
  
