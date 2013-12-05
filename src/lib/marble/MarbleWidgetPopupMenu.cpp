@@ -87,7 +87,7 @@ public:
       * You must not pass 0 as coordinates parameter. The result indicates whether the
       * coordinates are valid, which will be true if the right button menu was opened at least once.
       */
-    bool mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer );
+    GeoDataCoordinates mouseCoordinates( QAction* dataContainer ) const;
 };
 
 MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel *model, MarbleWidgetPopupMenu* parent ) :
@@ -523,8 +523,8 @@ void MarbleWidgetPopupMenu::slotTrackPlacemark()
 
 void MarbleWidgetPopupMenu::slotCopyCoordinates()
 {
-    GeoDataCoordinates coordinates;
-    if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
+    const GeoDataCoordinates coordinates = d->mouseCoordinates( d->m_copyCoordinateAction );
+    if ( coordinates.isValid() ) {
 	const qreal longitude_degrees = coordinates.longitude(GeoDataCoordinates::Degree);
 	const qreal latitude_degrees = coordinates.latitude(GeoDataCoordinates::Degree);
 
@@ -588,8 +588,8 @@ void MarbleWidgetPopupMenu::directionsFromHere()
     RouteRequest* request = d->m_widget->model()->routingManager()->routeRequest();
     if ( request )
     {
-        GeoDataCoordinates coordinates;
-        if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
+        const GeoDataCoordinates coordinates = d->mouseCoordinates( d->m_copyCoordinateAction );
+        if ( coordinates.isValid() ) {
             if ( request->size() > 0 ) {
                 request->setPosition( 0, coordinates );
             } else {
@@ -605,8 +605,8 @@ void MarbleWidgetPopupMenu::directionsToHere()
     RouteRequest* request = d->m_widget->model()->routingManager()->routeRequest();
     if ( request )
     {
-        GeoDataCoordinates coordinates;
-        if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
+        const GeoDataCoordinates coordinates = d->mouseCoordinates( d->m_copyCoordinateAction );
+        if ( coordinates.isValid() ) {
             if ( request->size() > 1 ) {
                 request->setPosition( request->size()-1, coordinates );
             } else {
@@ -617,33 +617,31 @@ void MarbleWidgetPopupMenu::directionsToHere()
     }
 }
 
-bool MarbleWidgetPopupMenu::Private::mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer )
+GeoDataCoordinates MarbleWidgetPopupMenu::Private::mouseCoordinates( QAction* dataContainer ) const
 {
-    Q_ASSERT( coordinates && "You must not pass 0 as coordinates parameter");
     if ( !dataContainer ) {
-        return false;
+        return GeoDataCoordinates();
     }
 
-    bool valid = true;
     if ( !m_featurelist.isEmpty() ) {
-        *coordinates = m_featurelist.first()->coordinate( m_model->clock()->dateTime() );
+        return m_featurelist.first()->coordinate( m_model->clock()->dateTime() );
     } else {
         QPoint p = dataContainer->data().toPoint();
         qreal lat( 0.0 ), lon( 0.0 );
 
-        valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
+        const bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
         if ( valid ) {
-            *coordinates = GeoDataCoordinates( lon, lat );
+            return GeoDataCoordinates( lon, lat );
         }
     }
 
-    return valid;
+    return GeoDataCoordinates();
 }
 
 void MarbleWidgetPopupMenu::startReverseGeocoding()
 {
-    GeoDataCoordinates coordinates;
-    if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
+    const GeoDataCoordinates coordinates = d->mouseCoordinates( d->m_copyCoordinateAction );
+    if ( coordinates.isValid() ) {
         d->m_runnerManager->reverseGeocoding( coordinates );
     }
 }
@@ -658,8 +656,8 @@ void MarbleWidgetPopupMenu::showAddressInformation(const GeoDataCoordinates &, c
 
 void MarbleWidgetPopupMenu::addBookmark()
 {
-    GeoDataCoordinates coordinates;
-    if ( d->mouseCoordinates( &coordinates, d->m_copyCoordinateAction ) ) {
+    const GeoDataCoordinates coordinates = d->mouseCoordinates( d->m_copyCoordinateAction );
+    if ( coordinates.isValid() ) {
         QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( d->m_widget->model()->bookmarkManager(), d->m_widget );
         dialog->setMarbleWidget( d->m_widget );
         dialog->setCoordinates( coordinates );
