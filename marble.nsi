@@ -25,7 +25,7 @@
  
 ; change this to wherever the files to be packaged reside
 !ifndef srcdir
-!define srcdir "C:\Programme\marble"
+!define srcdir "C:\Program Files\marble"
 !endif
  
 !define company "KDE"
