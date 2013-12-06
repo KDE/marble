@@ -57,7 +57,7 @@ QString GpsbabelPlugin::fileFormatDescription() const
 QStringList GpsbabelPlugin::fileExtensions() const
 {
     return QStringList() << "nmea" << "igc" << "tiger" << "ov2"
-                         << "garmin" << "csv" << "magellan" << "gpx";
+                         << "garmin" << "csv" << "magellan";
 }
 
 ParsingRunner* GpsbabelPlugin::newRunner() const

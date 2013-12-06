@@ -59,9 +59,7 @@ void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role )
 		inputFileType = QString( "magellan" );
 	} else if ( fileSuffix == QString( "csv" ) ) {
 		inputFileType = QString( "csv" );
-	} else if ( fileSuffix == QString( "gpx" ) ) {
-		inputFileType = QString( "gpx" );
-	} else {
+    } else {
         qWarning( "File type is not supported !" );
         emit parsingFinished( 0 );
         return;
