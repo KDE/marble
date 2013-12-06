@@ -82,6 +82,7 @@ set(marblewidget_SRCS
     NavigationWidget.cpp
     MapViewWidget.cpp
     FileViewWidget.cpp
+    TourWidget.cpp
     LegendWidget.cpp
     CurrentLocationWidget.cpp
     MarbleNavigator.cpp
@@ -266,6 +267,7 @@ set (marblewidget_UI
     MapViewWidget.ui
     CurrentLocationWidget.ui
     FileViewWidget.ui
+    TourWidget.ui
     MarbleNavigator.ui
     MarbleCacheSettingsWidget.ui
     MarbleViewSettingsWidget.ui
@@ -389,6 +391,7 @@ else (APPLE AND QTONLY)
     MapViewWidget.h
     LegendWidget.h
     FileViewWidget.h
+    TourWidget.h
     CurrentLocationWidget.h
     MarbleNavigator.h
     AbstractFloatItem.h

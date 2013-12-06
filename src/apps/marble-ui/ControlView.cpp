@@ -52,6 +52,7 @@
 #include "ExternalEditorDialog.h"
 #include "CurrentLocationWidget.h"
 #include "SearchWidget.h"
+#include "TourWidget.h"
 #include "MapViewWidget.h"
 #include "FileViewWidget.h"
 #include "LegendWidget.h"
@@ -574,6 +575,15 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, fileViewDock );
     fileViewDock->hide();
 
+    QDockWidget *tourDock = new QDockWidget( tr( "Tour" ), this );
+    tourDock->setObjectName( "tourDock" );
+    tourDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+    TourWidget *tourWidget = new TourWidget( this );
+    tourWidget->setMarbleWidget( marbleWidget() );
+    tourDock->setWidget( tourWidget );
+    mainWindow->addDockWidget( Qt::LeftDockWidgetArea, tourDock );
+    tourDock->hide();
+
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, legendDock );
     mainWindow->tabifyDockWidget( mapViewDock, legendDock );
     mapViewDock->raise();
@@ -585,6 +595,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     panelActions << mapViewDock->toggleViewAction();
     panelActions << fileViewDock->toggleViewAction();
     panelActions << legendDock->toggleViewAction();
+    panelActions << tourDock->toggleViewAction();
     return panelActions;
 }
 
