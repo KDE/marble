@@ -108,6 +108,11 @@ class ControlView : public QWidget
       */
     void launchExternalMapEditor();
 
+    /**
+     *  Toggles all of the docking panels on or off
+     */
+    void togglePanelVisibility();
+
 signals:
     void showMapWizard();
     void showUploadDialog();
@@ -141,6 +146,10 @@ private Q_SLOTS:
     CurrentLocationWidget* m_locationWidget;
     ConflictDialog *m_conflictDialog;
     CloudSyncManager *m_cloudSyncManager;
+    QAction         *m_togglePanelVisibilityAction;
+    QList<QAction*>  m_panelActions;
+    QList<bool>      m_panelVisibility;
+    bool             m_isPanelVisible;
 };
 
 }

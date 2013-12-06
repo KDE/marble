@@ -70,7 +70,9 @@ ControlView::ControlView( QWidget *parent )
      m_mapThemeManager( new MapThemeManager( this ) ),
      m_searchDock( 0 ),
      m_locationWidget( 0 ),
-     m_conflictDialog( 0 )
+     m_conflictDialog( 0 ),
+     m_togglePanelVisibilityAction( 0 ),
+     m_isPanelVisible( true )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
 
@@ -596,7 +598,39 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     panelActions << fileViewDock->toggleViewAction();
     panelActions << legendDock->toggleViewAction();
     panelActions << tourDock->toggleViewAction();
-    return panelActions;
+
+    // Local list of panel view toggle actions
+    m_panelActions << routingDock->toggleViewAction();
+    m_panelActions << locationDock->toggleViewAction();
+    m_panelActions << m_searchDock->toggleViewAction();
+    m_panelActions << mapViewDock->toggleViewAction();
+    m_panelActions << fileViewDock->toggleViewAction();
+    m_panelActions << legendDock->toggleViewAction();
+    m_panelActions << tourDock->toggleViewAction();
+    foreach( QAction* action, m_panelActions ) {
+        m_panelVisibility << action->isVisible();
+    }
+
+    // Create Settings->Panels Menu
+    // Toggle All Panels action
+    m_togglePanelVisibilityAction = new QAction( tr("Hide &All Panels"), this);
+    m_togglePanelVisibilityAction->setShortcut(tr("F9"));
+    m_togglePanelVisibilityAction->setStatusTip(tr("Show or hide all panels."));
+    connect(m_togglePanelVisibilityAction, SIGNAL(triggered()), this, SLOT(togglePanelVisibility()));
+
+    // Include a Separator in the List
+    QAction *panelSeparatorAct = new QAction( this );
+    panelSeparatorAct->setSeparator( true );
+
+    // Return a list of panel view actions for Marble Menu including show/hide all
+    QList<QAction*> panelMenuActions;
+    panelMenuActions << m_togglePanelVisibilityAction;
+    panelMenuActions << panelSeparatorAct;
+    foreach( QAction* action, m_panelActions ) {
+        panelMenuActions << action;
+    }
+
+    return panelMenuActions;
 }
 
 CurrentLocationWidget *ControlView::currentLocationWidget()
@@ -648,6 +682,37 @@ void ControlView::showConflictDialog( MergeItem *item )
     Q_ASSERT( m_conflictDialog );
     m_conflictDialog->setMergeItem( item );
     m_conflictDialog->open();
+}
+
+void ControlView::togglePanelVisibility()
+{
+    Q_ASSERT( m_panelVisibility.size() == m_panelActions.size() );
+    if ( m_isPanelVisible ) {
+        for( int p=0; p<m_panelActions.size(); ++p ) {
+            // Save state of individual dock visibility
+            m_panelVisibility[p] = m_panelActions.at(p)->isChecked();
+
+            // hide panel if it is showing
+            if ( m_panelActions.at(p)->isChecked() ) {
+                m_panelActions.at(p)->activate( QAction::Trigger );
+            }
+        }
+
+        // Change Menu Item Text
+        m_togglePanelVisibilityAction->setText( tr("Show &All Panels") );
+        m_isPanelVisible = false;
+    } else {
+        for( int p=0; p<m_panelActions.size(); ++p ) {
+            // show panel if it was showing before all panels were hidden
+            if ( m_panelVisibility.at(p) && !m_panelActions.at(p)->isChecked() ) {
+                m_panelActions.at(p)->activate( QAction::Trigger );
+            }
+        }
+
+        // Change Menu Item Text
+        m_togglePanelVisibilityAction->setText( tr("Hide &All Panels") );
+        m_isPanelVisible = true;
+    }
 }
 
 }
