@@ -11,10 +11,8 @@
 #ifndef MARBLE_TOURWIDGET_H
 #define MARBLE_TOURWIDGET_H
 
-// Marble
 #include "marble_export.h"
 
-// Qt
 #include <QWidget>
 
 class QModelIndex;
@@ -42,7 +40,7 @@ class MARBLE_EXPORT TourWidget : public QWidget
 
  private:
     Q_PRIVATE_SLOT( d, void openFile() )
-    Q_PRIVATE_SLOT( d, void mapCenterOn( QModelIndex index ) );
+    Q_PRIVATE_SLOT( d, void mapCenterOn( const QModelIndex &index ) )
     Q_DISABLE_COPY( TourWidget )
 
     TourWidgetPrivate * const d;
