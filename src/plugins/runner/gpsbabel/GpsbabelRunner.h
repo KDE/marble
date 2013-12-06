@@ -24,7 +24,6 @@ class GpsbabelRunner : public ParsingRunner
 
 public:
     explicit GpsbabelRunner( QObject *parent = 0 );
-    ~GpsbabelRunner();
 
     virtual void parseFile( const QString &fileName, DocumentRole role );
 };

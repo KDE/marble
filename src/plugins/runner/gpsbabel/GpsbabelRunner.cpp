@@ -11,23 +11,19 @@
 
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
-#include "MarbleDebug.h"
 
 #include <QFile>
 #include <QProcess>
 #include <QFileInfo>
 #include <QTemporaryFile>
 #include <QDir>
+#include <QMap>
 
 namespace Marble
 {
 
 GpsbabelRunner::GpsbabelRunner( QObject *parent ) :
     ParsingRunner( parent )
-{
-}
-
-GpsbabelRunner::~GpsbabelRunner()
 {
 }
 
@@ -41,25 +37,19 @@ void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role )
     }
 
     // Inspect the filename suffix
-    QString fileSuffix = QFileInfo( fileName ).suffix();
-    QString inputFileType;
+    QString const fileSuffix = QFileInfo( fileName ).suffix();
 
     // Determine if fileName suffix is supported by this plugin
-    if ( fileSuffix == QString( "nmea" ) ) {
-		inputFileType = QString( "nmea" );
-	} else if ( fileSuffix == QString( "igc" ) ) {
-		inputFileType = QString( "igc" );
-	} else if ( fileSuffix == QString( "tiger" ) ) {
-		inputFileType = QString( "tiger" );
-	} else if ( fileSuffix == QString( "ov2" ) ) {
-		inputFileType = QString( "tomtom" );
-	} else if ( fileSuffix == QString( "garmin" ) ) {
-		inputFileType = QString( "garmin_txt" );
-	} else if ( fileSuffix == QString( "magellan" ) ) {
-		inputFileType = QString( "magellan" );
-	} else if ( fileSuffix == QString( "csv" ) ) {
-		inputFileType = QString( "csv" );
-    } else {
+    QMap<QString,QString> fileTypes;
+    fileTypes["nmea"]     = "nmea";
+    fileTypes["igc"]      = "igc";
+    fileTypes["tiger"]    = "tiger";
+    fileTypes["ov2"]      = "tomtom";
+    fileTypes["garmin"]   = "garmin_txt";
+    fileTypes["magellan"] = "magellan";
+    fileTypes["csv"]      = "csv";
+    QString const inputFileType = fileTypes[fileSuffix];
+    if ( inputFileType.isEmpty() ) {
         qWarning( "File type is not supported !" );
         emit parsingFinished( 0 );
         return;
@@ -74,8 +64,6 @@ void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role )
     QString command = "gpsbabel -i " + inputFileType;
     command += " -f " + fileName + " -o kml -F ";
     command += tempKmlFile.fileName();
-
-    mDebug() << "Processing " << inputFileType << " file.";
 
     // Execute gpsbabel to parse the input file
     if ( QProcess::execute( command ) == 0 ) {
