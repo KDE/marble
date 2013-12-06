@@ -25,6 +25,10 @@
 #include "GeoDataContainer.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataPlaylist.h"
+#include "GeoDataTour.h"
+#include "GeoDataWait.h"
+#include "GeoDataFlyTo.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "FileManager.h"
@@ -119,6 +123,16 @@ bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
         return geometry->size();
     }
 
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataTourType ) {
+        GeoDataTour *tour = static_cast<GeoDataTour*>( parentItem );
+        return tour->playlist();
+    }
+
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
+        GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( parentItem );
+        return playlist->size();
+    }
+
     return false;
 }
 
@@ -166,6 +180,21 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
         return geometry->size();
 //    } else {
 //        mDebug() << "rowCount bad geometry " << geometry;
+    }
+
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataTourType ) {
+        GeoDataTour *tour = static_cast<GeoDataTour*>( parentItem );
+        GeoDataPlaylist *playlist = tour->playlist();
+        if ( playlist ) {
+//            mDebug() << "rowCount " << parent << " Playlist " << 1;
+            return 1;
+        }
+    }
+
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
+        GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( parentItem );
+//         mDebug() << "rowCount " << parent << " Playlist " << playlist->size();
+        return playlist->size();
     }
 
 //    mDebug() << "rowcount end";
@@ -220,7 +249,8 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                 }
         }
         if ( object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType
+             || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             if ( index.column() == 0 ){
                 return QVariant( feature->name() );
@@ -233,6 +263,11 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
         GeoDataGeometry *geometry = dynamic_cast<GeoDataGeometry*>( object );
         if ( geometry && index.column() == 1 ){
             return QVariant( geometry->nodeType() );
+        }
+
+        GeoDataPlaylist *playlist = dynamic_cast<GeoDataPlaylist*>( object );
+        if ( playlist && index.column() == 0 ) {
+            return tr( "Playlist" );
         }
 
         GeoDataObject *item = dynamic_cast<GeoDataObject*>( object );
@@ -276,7 +311,8 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
               && index.column() == 0 ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
              || object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType
+             || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             return QVariant(feature->style()->iconStyle().icon());
         }
@@ -284,7 +320,8 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
               && index.column() == 0 ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
              || object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType
+             || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             return QVariant( feature->description() );
         }
@@ -354,6 +391,18 @@ QModelIndex GeoDataTreeModel::index( int row, int column, const QModelIndex &par
         return createIndex( row, column, childItem );
     }
 
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataTourType ) {
+        GeoDataTour *tour = static_cast<GeoDataTour*>( parentItem );
+        childItem = tour->playlist();
+        return createIndex( row, column, childItem );
+    }
+
+    if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
+        GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( parentItem );
+        childItem = playlist->primitive( row );
+        return createIndex(row, column, childItem);
+    }
+
     return QModelIndex();
 }
 
@@ -369,7 +418,7 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
     GeoDataObject *childObject = static_cast<GeoDataObject*>( index.internalPointer() );
     if ( childObject ) {
 
-        /// parentObject can be a container, placemark or multigeometry
+        /// parentObject can be a container, placemark, multigeometry or playlist
         GeoDataObject *parentObject = childObject->parent();
         if ( parentObject == d->m_rootDocument )
         {
@@ -410,6 +459,12 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
 //                        << parentObject->nodeType() << "[" << greatParentItem->childPosition( parentGeometry ) << "](" << parentObject << ")";
             return createIndex( greatparentMultiGeo->childPosition( parentGeometry ), 0, parentObject );
         }
+
+        if ( greatParentObject->nodeType() == GeoDataTypes::GeoDataTourType ) {
+            GeoDataTour *tour = static_cast<GeoDataTour*>( greatParentObject );
+            return createIndex( 0, 0, tour->playlist() );
+        }
+
     }
 
 //    mDebug() << "parent unknown index";
@@ -440,7 +495,8 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
     } else if ( role == Qt::EditRole ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
              || object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+             || object->nodeType() == GeoDataTypes::GeoDataDocumentType
+             || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             feature->setName( value.toString() );
             mDebug() << "setData " << feature->name() << " " << value.toString();
@@ -482,6 +538,16 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
          || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
     }
+
+    if ( object->nodeType() == GeoDataTypes::GeoDataTourType ) {
+        return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled;
+    }
+
+    if ( object->nodeType() == GeoDataTypes::GeoDataWaitType
+         || object->nodeType() == GeoDataTypes::GeoDataFlyToType
+         || object->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+    }
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
@@ -498,6 +564,13 @@ QModelIndex GeoDataTreeModel::index( GeoDataObject *object )
     Q_ASSERT( ( object->nodeType() == GeoDataTypes::GeoDataFolderType )
               || ( object->nodeType() == GeoDataTypes::GeoDataDocumentType )
               || ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+              || ( object->nodeType() == GeoDataTypes::GeoDataTourType )
+              || ( ( object->nodeType() == GeoDataTypes::GeoDataPlaylistType )
+                   && ( object->parent()->nodeType() == GeoDataTypes::GeoDataTourType ) )
+              || ( ( object->nodeType() == GeoDataTypes::GeoDataWaitType )
+                   && ( object->parent()->nodeType() == GeoDataTypes::GeoDataPlaylistType ) )
+              || ( ( object->nodeType() == GeoDataTypes::GeoDataFlyToType )
+                   && ( object->parent()->nodeType() == GeoDataTypes::GeoDataPlaylistType ) )
               || ( ( object->nodeType() == GeoDataTypes::GeoDataLineStringType )
                    && ( object->parent()->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) )
               || ( ( object->nodeType() == GeoDataTypes::GeoDataLinearRingType )
@@ -548,6 +621,20 @@ QModelIndex GeoDataTreeModel::index( GeoDataObject *object )
                 //The child is one of the geometry children of MultiGeometry
                 ancestors.removeLast();
                 itdown = index( static_cast<GeoDataMultiGeometry*>(parent)->childPosition( static_cast<GeoDataGeometry*>(ancestors.last()) ) , 0, itdown );
+            } else if ( ( parent->nodeType() == GeoDataTypes::GeoDataTourType ) ) {
+                ancestors.removeLast();
+                itdown = index( 0, 0, itdown );
+            } else if ( ( parent->nodeType() == GeoDataTypes::GeoDataPlaylistType ) ) {
+                GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( parent );
+                for ( int i=0; i< playlist->size(); i++ )
+                {
+                    if ( playlist->primitive(i) == ancestors.last() )
+                    {
+                        ancestors.removeLast();
+                        itdown = index( i, 0, itdown );
+                        break;
+                    }
+                }
             }
             else  {   //If the element is not found on the tree, it will be added under m_rootDocument
                 itdown = QModelIndex();
