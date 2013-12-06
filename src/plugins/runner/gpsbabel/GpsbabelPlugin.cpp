@@ -51,12 +51,13 @@ QList<PluginAuthor> GpsbabelPlugin::pluginAuthors() const
 
 QString GpsbabelPlugin::fileFormatDescription() const
 {
-    return tr( "NMEA files" );
+    return tr( "GPSBabel files" );
 }
 
 QStringList GpsbabelPlugin::fileExtensions() const
 {
-    return QStringList() << "nmea";
+    return QStringList() << "nmea" << "igc" << "tiger" << "ov2"
+                         << "garmin" << "csv" << "magellan" << "gpx";
 }
 
 ParsingRunner* GpsbabelPlugin::newRunner() const
