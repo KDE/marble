@@ -28,6 +28,7 @@
 #include <QStandardItemModel>
 #include <QShortcut>
 #include <QNetworkProxy>
+#include <QLabel>
 
 // KDE
 #include <kaboutdata.h>
@@ -54,6 +55,7 @@
 #include <KDE/KStandardDirs>
 #include <kdeprintdialog.h>
 #include <KDE/KToolBar>
+#include <KDE/KWallet/Wallet>
 
 // Marble library classes
 #include "AbstractFloatItem.h"
@@ -131,6 +133,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_externalMapEditorAction( 0 ),
     m_recentFilesAction( 0 ),
     m_configDialog( 0 ),
+    m_wallet( 0 ),
+    m_usingKWallet( true ),
     m_position( i18n( NOT_AVAILABLE ) ),
     m_tileZoomLevel( i18n( NOT_AVAILABLE ) ),
     m_positionLabel( 0 ),
@@ -432,6 +436,58 @@ void MarblePart::copyCoordinates()
 void MarblePart::readSettings()
 {
     kDebug() << "Start: MarblePart::readSettings()";
+
+    // Open a wallet.
+    QString m_walletFolderName="Marble";
+    m_wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(), 0 );
+    if ( m_wallet == 0 ) {
+        if ( MarbleSettings::accessKWallet() ) {
+            KDialog *confirmDialog = new KDialog( m_controlView );
+            confirmDialog->setCaption( tr( "Please allow access to KWallet." ) );
+            QLabel *body = new QLabel();
+            body->setText( tr( "You haven't allowed Marble to use KWallet yet.\n"
+                               "This is dangerous since Marble will store your password without encryption.\n"
+                               "Are you sure?" ) );
+            confirmDialog->setMainWidget( body );
+            confirmDialog->setButtons( KDialog::Yes | KDialog::No );
+            if ( confirmDialog->exec() == KDialog::Yes ) {
+                // User wants to save his password in plain text.
+                MarbleSettings::setAccessKWallet( false );
+                m_usingKWallet = false;
+            }
+            else {
+                m_wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(), 0 );
+                if ( m_wallet == 0 ) {
+                    // Show dialog and ask why user don't allowed. 
+                    // If user didn't see KWallet dialog it means that he deny forever.
+                    // Show instructions how to disable the block.
+                    KDialog *confirmDialog = new KDialog( m_controlView );
+                    confirmDialog->setCaption( tr( "Do you allow Marble to use KWallet?" ) );
+                    QLabel *body = new QLabel();
+                    body->setText( tr( "You still don't allow Marble to use KWallet.\n"
+                                       "If you haven't seen the KWallet dialog asking to allow access, it means that you have disabled it.\n"
+                                       "If you would like to change this see System Information -> Account Details -> KDE Wallet -> Access Control.\n"
+                                       "Choose your wallet and allow Marble to use it." ) );
+                    confirmDialog->setMainWidget( body );
+                    confirmDialog->setButtons( KDialog::Ok );
+                    confirmDialog->exec();
+                    // User wants to save his passwords in plain text.
+                    MarbleSettings::setAccessKWallet( false );
+                    m_usingKWallet = false;
+                }
+            }
+        }
+        else {
+            m_usingKWallet = false;
+        }
+    }
+    if ( m_usingKWallet ) {
+        if ( !m_wallet->hasFolder( m_walletFolderName ) ) {
+            m_wallet->createFolder( m_walletFolderName );
+        }
+        m_wallet->setFolder( m_walletFolderName );
+    }
+
     // Set home position
     m_controlView->marbleModel()->setHome( MarbleSettings::homeLongitude(),
                                            MarbleSettings::homeLatitude(),
@@ -542,6 +598,17 @@ void MarblePart::readSettings()
 
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 
+    if ( m_usingKWallet ) {
+        // Read settings from kwallet and store it in MarbleSettings for using in kconfigdialog.
+        QMap<QString, QString> owncloudAuth;
+        m_wallet->readMap( "OwncloudServer", owncloudAuth );
+        if ( owncloudAuth.contains( "Username" ) ) {
+            MarbleSettings::setOwncloudUsername( owncloudAuth[ "Username" ] );
+        }
+        if ( owncloudAuth.contains( "Password" ) ) {
+            MarbleSettings::setOwncloudPassword( owncloudAuth[ "Password" ] );
+        }
+    }
     CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
     cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
     cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
@@ -598,6 +665,17 @@ void MarblePart::writeSettings()
     MarbleSettings::setQuitLongitude( quitLon );
     MarbleSettings::setQuitLatitude( quitLat );
     MarbleSettings::setQuitRange( quitRange );
+
+    if ( m_usingKWallet ) {
+        // Write changes to kwallet...
+        QMap<QString, QString> owncloudAuth;
+        owncloudAuth.insert( "Username", MarbleSettings::owncloudUsername() );
+        owncloudAuth.insert( "Password", MarbleSettings::owncloudPassword() );
+        m_wallet->writeMap( "OwncloudServer",owncloudAuth );
+        // Remove username and password form config file (they were saved in kwallet).
+        MarbleSettings::setOwncloudUsername( QString() );
+        MarbleSettings::setOwncloudPassword( QString() );
+    }
 
     // Get the 'home' values from the widget and store them in the settings.
     qreal  homeLon = 0;
