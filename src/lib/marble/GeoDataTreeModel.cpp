@@ -29,6 +29,7 @@
 #include "GeoDataTour.h"
 #include "GeoDataWait.h"
 #include "GeoDataFlyTo.h"
+#include "GeoDataCamera.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "FileManager.h"
@@ -341,6 +342,15 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
             GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
             return qVariantFromValue( placemark->coordinate() );
+        } else if ( object->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
+            GeoDataFlyTo *flyTo = static_cast<GeoDataFlyTo*>( object );
+            if ( flyTo->view() && flyTo->view()->nodeType() == GeoDataTypes::GeoDataCameraType )  {
+                GeoDataCamera *camera = static_cast<GeoDataCamera*>( flyTo->view() );
+                return QVariant::fromValue<GeoDataCoordinates>( camera->coordinates() );
+            } else if ( flyTo->view() && flyTo->view()->nodeType() == GeoDataTypes::GeoDataLookAtType )  {
+                GeoDataLookAt *lookAt = static_cast<GeoDataLookAt*>( flyTo->view() );
+                return QVariant::fromValue<GeoDataCoordinates>( lookAt->coordinates() );
+            }
         }
     }
 
