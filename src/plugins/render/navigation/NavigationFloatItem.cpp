@@ -328,14 +328,14 @@ void NavigationFloatItem::centerOnCurrentLocation()
 
 QHash<QString,QVariant> NavigationFloatItem::settings() const
 {
-    QHash<QString, QVariant> settings = RenderPlugin::settings();
+    QHash<QString, QVariant> settings = AbstractFloatItem::settings();
     settings.insert( "showHomeButton", m_showHomeButton );
     return settings;
 }
 
 void NavigationFloatItem::setSettings( const QHash<QString, QVariant> &settings )
 {
-    RenderPlugin::setSettings( settings );
+    AbstractFloatItem::setSettings( settings );
     m_showHomeButton = settings.value( "showHomeButton", true ).toBool();
     if ( m_showHomeButton ) {
         activateHomeButton();
