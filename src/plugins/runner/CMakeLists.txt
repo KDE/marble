@@ -9,7 +9,15 @@ add_subdirectory( gosmore-reversegeocoding )
 
 # Routing
 add_subdirectory( gosmore-routing )
-add_subdirectory( mapquest )
+
+# As of 2013-07-15 (or rather in effect around 2013-12-01) MapQuest requires an API key,
+# and has this nice section in their terms of usage: "You are responsible for maintaining
+# the confidentiality of your Credentials and for any usage or abuse of the MapQuest
+# Services or MapQuest Content by anyone using your Credentials."
+# (from http://developer.mapquest.com/web/info/terms-of-use)
+# Good bye, MapQuest
+# add_subdirectory( mapquest )
+
 add_subdirectory( monav )
 add_subdirectory( openrouteservice )
 add_subdirectory( open-source-routing-machine )
