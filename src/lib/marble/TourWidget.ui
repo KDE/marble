@@ -6,16 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>229</width>
-    <height>282</height>
+    <width>264</width>
+    <height>263</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>File View</string>
+   <string>Tour</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QListView" name="m_listView"/>
+    <widget class="QToolBar" name="m_toolBar">
+     <property name="windowTitle">
+      <string>toolBar</string>
+     </property>
+     <addaction name="m_actionAddFlyTo"/>
+     <addaction name="separator"/>
+     <addaction name="m_actionMoveUp"/>
+     <addaction name="m_actionMoveDown"/>
+     <addaction name="separator"/>
+     <addaction name="m_actionDelete"/>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListView" name="m_listView">
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout">
@@ -61,7 +78,60 @@
     </layout>
    </item>
   </layout>
+  <action name="m_actionAddFlyTo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/list-add.png</normaloff>:/marble/list-add.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add FlyTo</string>
+   </property>
+  </action>
+  <action name="m_actionMoveUp">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/go-up.png</normaloff>:/marble/go-up.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move up</string>
+   </property>
+   <property name="toolTip">
+    <string>Move up</string>
+   </property>
+  </action>
+  <action name="m_actionMoveDown">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/go-down.png</normaloff>:/marble/go-down.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move down</string>
+   </property>
+  </action>
+  <action name="m_actionDelete">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/list-remove.png</normaloff>:/marble/list-remove.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="libmarble.qrc"/>
+ </resources>
  <connections/>
 </ui>

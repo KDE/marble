@@ -15,6 +15,7 @@
 
 #include <QWidget>
 
+class QItemSelection;
 class QModelIndex;
 
 namespace Marble
@@ -24,6 +25,7 @@ class FileManager;
 class GeoDataPlacemark;
 class GeoDataLatLonBox;
 class GeoDataTreeModel;
+class GeoDataFeature;
 class MarbleWidget;
 
 class TourWidgetPrivate;
@@ -38,8 +40,18 @@ class MARBLE_EXPORT TourWidget : public QWidget
 
      void setMarbleWidget( MarbleWidget *widget );
 
+ signals:
+    void featureUpdated( GeoDataFeature *feature );
+
+ private slots:
+    void moveUp();
+    void moveDown();
+    void addFlyTo();
+    void deleteSelected();
+
  private:
     Q_PRIVATE_SLOT( d, void openFile() )
+    Q_PRIVATE_SLOT( d, void updateButtonsStates() )
     Q_PRIVATE_SLOT( d, void mapCenterOn( const QModelIndex &index ) )
     Q_DISABLE_COPY( TourWidget )
 

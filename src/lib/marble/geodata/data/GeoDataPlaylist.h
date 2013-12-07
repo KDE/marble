@@ -30,7 +30,11 @@ public:
 
     GeoDataTourPrimitive* primitive(int id);
     const GeoDataTourPrimitive* primitive(int id) const;
-    void addPrimitive(GeoDataTourPrimitive* primitive);
+    void addPrimitive( GeoDataTourPrimitive* primitive, int position = -1 );
+    void removePrimitive( int position );
+    void moveUp( int position );
+    void moveDown( int position );
+
     int size() const;
 
 private:

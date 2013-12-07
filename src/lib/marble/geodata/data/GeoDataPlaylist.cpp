@@ -45,15 +45,40 @@ const GeoDataTourPrimitive* GeoDataPlaylist::primitive(int id) const
     return m_primitives.at(id);
 }
 
-void GeoDataPlaylist::addPrimitive(GeoDataTourPrimitive *primitive)
+void GeoDataPlaylist::addPrimitive( GeoDataTourPrimitive *primitive, int position )
 {
     primitive->setParent( this );
-    m_primitives.push_back(primitive);
+    if ( position == -1 ) {
+        m_primitives.push_back( primitive );
+    } else {
+        m_primitives.insert( position, primitive );
+    }
+}
+
+void GeoDataPlaylist::removePrimitive(int position)
+{
+    m_primitives.removeAt( position );
 }
 
 int GeoDataPlaylist::size() const
 {
     return m_primitives.size();
+}
+
+void GeoDataPlaylist::moveUp(int position)
+{
+    if ( position > 0 && position <= m_primitives.size()-1 ) {
+        m_primitives.insert( position-1, m_primitives.at( position ) );
+        m_primitives.removeAt( position+1 );
+    }
+}
+
+void GeoDataPlaylist::moveDown(int position)
+{
+    if ( position >= 0 && position < m_primitives.size()-1 ) {
+        m_primitives.insert( position+2, m_primitives.at( position ) );
+        m_primitives.removeAt( position );
+    }
 }
 
 } // namespace Marble
