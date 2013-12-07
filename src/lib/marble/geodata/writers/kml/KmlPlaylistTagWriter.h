@@ -15,6 +15,7 @@
 #include "GeoDataTourControl.h"
 #include "GeoDataWait.h"
 #include "GeoDataFlyTo.h"
+#include "GeoDataSoundCue.h"
 
 namespace Marble
 {
@@ -28,6 +29,7 @@ private:
     void writeTourPrimitive( const GeoNode *primitive, GeoWriter& writer ) const;
     void writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer ) const;
     void writeWait( const GeoDataWait* wait, GeoWriter& writer ) const;
+    void writeSoundCue( const GeoDataSoundCue *cue, GeoWriter &writer ) const;
     QString playModeToString( GeoDataTourControl::PlayMode playMode ) const;
 };
 

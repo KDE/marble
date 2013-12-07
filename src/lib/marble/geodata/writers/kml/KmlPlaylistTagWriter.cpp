@@ -50,6 +50,9 @@ void KmlPlaylistTagWriter::writeTourPrimitive( const GeoNode *primitive, GeoWrit
     else if ( primitive->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
         writeElement( primitive, writer );
     }
+    else if ( primitive->nodeType() == GeoDataTypes::GeoDataSoundCueType ) {
+        writeSoundCue( static_cast<const GeoDataSoundCue*>(primitive), writer );
+    }
 }
 
 void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer ) const
@@ -72,6 +75,20 @@ void KmlPlaylistTagWriter::writeWait( const GeoDataWait* wait, GeoWriter& writer
     }
 
     writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_duration, QString::number( wait->duration() ) );
+
+    writer.writeEndElement();
+}
+
+void KmlPlaylistTagWriter::writeSoundCue(const GeoDataSoundCue *cue, GeoWriter &writer) const
+{
+    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_SoundCue );
+    if (!cue->id().isEmpty()) {
+        writer.writeAttribute( "id", cue->id() );
+    }
+
+    writer.writeElement( kml::kmlTag_href, cue->href() );
+    writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_delayedStart,
+                         QString::number(cue->delayedStart()) );
 
     writer.writeEndElement();
 }

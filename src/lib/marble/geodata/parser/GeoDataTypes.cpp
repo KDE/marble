@@ -70,6 +70,7 @@ const char* GeoDataSimpleArrayDataType = "GeoDataSimpleArrayData";
 const char* GeoDataStyleSelectorType = "GeoDataStyleSelector";
 const char* GeoDataStyleType = "GeoDataStyle";
 const char* GeoDataStyleMapType = "GeoDataStyleMap";
+const char* GeoDataSoundCueType = "GeoDataSoundCue";
 const char* GeoDataTimePrimitiveType = "GeoDataTimePrimitive";
 const char* GeoDataTimeSpanType = "GeoDataTimeSpan";
 const char* GeoDataTimeStampType = "GeoDataTimeStamp";

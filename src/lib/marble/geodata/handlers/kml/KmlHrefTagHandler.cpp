@@ -30,6 +30,7 @@
 #include "GeoDataLink.h"
 #include "GeoDataPhotoOverlay.h"
 #include "GeoDataScreenOverlay.h"
+#include "GeoDataSoundCue.h"
 #include "GeoDataItemIcon.h"
 #include "GeoParser.h"
 
@@ -60,8 +61,10 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
         }
     } else if ( parentItem.represents( kmlTag_ItemIcon ) ) {
         parentItem.nodeAs<GeoDataItemIcon>()->setIconPath( content );
-    }  else if ( parentItem.is<GeoDataLink>() ) {
+    } else if ( parentItem.is<GeoDataLink>() ) {
         parentItem.nodeAs<GeoDataLink>()->setHref( content );
+    } else if ( parentItem.is<GeoDataSoundCue>() ) {
+        parentItem.nodeAs<GeoDataSoundCue>()->setHref( content );
     }
 
     return 0;

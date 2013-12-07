@@ -63,6 +63,7 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataTourControl.cpp
         geodata/data/GeoDataAccuracy.cpp
         geodata/data/GeoDataWait.cpp
+        geodata/data/GeoDataSoundCue.cpp
 )
 
 SET ( geodata_scene_SRCS
@@ -374,6 +375,8 @@ geodata/handlers/kml/KmlResourceMapTagHandler.cpp
 geodata/handlers/kml/KmlAliasTagHandler.cpp
 geodata/handlers/kml/KmlSourceHrefTagHandler.cpp
 geodata/handlers/kml/KmlTargetHrefTagHandler.cpp
+geodata/handlers/kml/KmlSoundCueTagHandler.cpp
+geodata/handlers/kml/KmldelayedStartTagHandler.cpp
 )
 
 SET ( geodata_writers_kml_SRCS

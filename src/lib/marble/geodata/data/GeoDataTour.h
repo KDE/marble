@@ -20,6 +20,7 @@ namespace Marble
 
 class GeoDataTourPrivate;
 class GeoDataPlaylist;
+class GeoDataSoundCue;
 
 class GEODATA_EXPORT GeoDataTour : public GeoDataFeature
 {

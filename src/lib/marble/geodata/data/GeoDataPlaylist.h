@@ -13,6 +13,7 @@
 
 #include "GeoDataObject.h"
 #include "GeoDataTourPrimitive.h"
+#include "GeoDataSoundCue.h"
 
 #include <QList>
 
@@ -30,7 +31,6 @@ public:
     GeoDataTourPrimitive* primitive(int id);
     const GeoDataTourPrimitive* primitive(int id) const;
     void addPrimitive(GeoDataTourPrimitive* primitive);
-
     int size() const;
 
 private:

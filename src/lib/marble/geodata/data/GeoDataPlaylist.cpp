@@ -9,6 +9,7 @@
 //
 
 #include "GeoDataPlaylist.h"
+#include "GeoDataSoundCue.h"
 
 #include "GeoDataTypes.h"
 

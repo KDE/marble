@@ -79,6 +79,7 @@ GEODATA_EXPORT extern const char* GeoDataSimpleArrayDataType;
 GEODATA_EXPORT extern const char* GeoDataStyleSelectorType;
 GEODATA_EXPORT extern const char* GeoDataStyleType;
 GEODATA_EXPORT extern const char* GeoDataStyleMapType;
+GEODATA_EXPORT extern const char* GeoDataSoundCueType;
 GEODATA_EXPORT extern const char* GeoDataTimePrimitiveType;
 GEODATA_EXPORT extern const char* GeoDataTimeStampType;
 GEODATA_EXPORT extern const char* GeoDataTimeSpanType;
