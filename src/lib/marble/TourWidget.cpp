@@ -100,9 +100,11 @@ void TourWidgetPrivate::openFile()
         ParsingRunnerManager manager( m_widget->model()->pluginManager() );
         GeoDataDocument* document = manager.openFile( filename );
         if ( document ) {
-            m_model.addDocument( document );
+            GeoDataDocument* oldDocument = m_model.rowCount() ? m_model.rootDocument() : 0;
+            m_model.setRootDocument( document );
             updateRootIndex();
             m_tourUi.m_actionAddFlyTo->setEnabled( true );
+            delete oldDocument;
         }
     }
 }
