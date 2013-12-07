@@ -34,6 +34,7 @@ class SunControlWidget;
 class TimeControlWidget;
 class QtMarbleConfigDialog;
 class DownloadRegionDialog;
+class MovieCaptureDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -43,6 +44,8 @@ public:
     explicit MainWindow(const QString& marbleDataPath = QString(),
                         const QVariantMap& cmdLineSettings = QVariantMap(),
                         QWidget *parent=0);
+    ~MainWindow();
+
 
     ControlView* marbleControl() {
         return m_controlView;
@@ -90,6 +93,7 @@ private Q_SLOTS:
     void  copyMap();
     void  copyCoordinates();
     void  updateMapEditButtonVisibility( const QString &mapTheme );
+    void  showMovieCaptureDialog();
 
     // View Menu
     void  lockPosition( bool );
@@ -136,6 +140,7 @@ private:
     TimeControlWidget* m_timeControlDialog;
     QtMarbleConfigDialog *m_configDialog;
     DownloadRegionDialog* m_downloadRegionDialog;
+    MovieCaptureDialog* m_movieCaptureDialog;
 
     /// Store plugin toolbar pointers so that they can be removed/updated later
     QList<QToolBar*> m_pluginToolbars;
@@ -165,6 +170,7 @@ private:
     QAction *m_copyMapAct;
     QAction *m_copyCoordinatesAct;
     QAction *m_osmEditAction;
+    QAction *m_recordMovieAction;
 
     // View Menu
     QAction *m_showCloudsAct;

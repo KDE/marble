@@ -159,6 +159,8 @@ set(marblewidget_SRCS
     PositionTracking.cpp
     DataMigration.cpp
     ImageF.cpp
+    MovieCapture.cpp
+    MovieCaptureDialog.cpp
 
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp
@@ -295,6 +297,7 @@ set (marblewidget_UI
     WebPopupWidget.ui
     cloudsync/CloudRoutesDialog.ui
     MarbleCloudSyncSettingsWidget.ui
+    MovieCaptureDialog.ui
 )
 
 # FIXME: cleaner approach of src/lib/marblwidget/MarbleControlBox.* vs. marble.qrc

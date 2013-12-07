@@ -22,7 +22,6 @@
 #include <QTimer>
 #include <QVariant>
 #include <QVector>
-
 #include <QAction>
 #include <QLabel>
 #include <QWhatsThis>
@@ -81,6 +80,7 @@
 #include "Planet.h"
 #include "cloudsync/CloudSyncManager.h"
 #include "cloudsync/BookmarkSyncManager.h"
+#include "MovieCaptureDialog.h"
 
 namespace
 {
@@ -98,6 +98,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_sunControlDialog( 0 ),
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
+        m_movieCaptureDialog( 0 ),
         m_panelMenu( 0 ),
         m_downloadRegionAction( 0 ),
         m_osmEditAction( 0 ),
@@ -153,6 +154,11 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     QMetaObject::invokeMethod(this,
                               "initObject", Qt::QueuedConnection,
                               Q_ARG(QVariantMap, cmdLineSettings));
+}
+
+MainWindow::~MainWindow()
+{
+    delete m_movieCaptureDialog;
 }
 
 void MainWindow::addGeoDataFile( const QString &fileName )
@@ -224,6 +230,13 @@ void MainWindow::createActions()
      m_osmEditAction->setStatusTip(tr( "Edit the current map region in an external editor" ) );
      updateMapEditButtonVisibility( m_controlView->marbleWidget()->mapThemeId() );
      connect( m_osmEditAction, SIGNAL(triggered()), m_controlView, SLOT(launchExternalMapEditor()) );
+
+     m_recordMovieAction = new QAction(tr("&Record Movie"), this);
+     m_recordMovieAction->setStatusTip(tr("Records a movie of the globe"));
+     m_recordMovieAction->setShortcut(QKeySequence("Ctrl+Shift+R"));
+     m_recordMovieAction->setIcon(QIcon(":/icons/animator.png"));
+     connect(m_recordMovieAction, SIGNAL(triggered()),
+             this, SLOT(showMovieCaptureDialog()));
 
      m_configDialogAct = new QAction( QIcon(":/icons/settings-configure.png"),tr("&Configure Marble"), this);
      m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
@@ -334,6 +347,8 @@ void MainWindow::createMenus( const QList<QAction*> &panelActions )
         m_fileMenu->addAction(m_copyMapAct);
         m_fileMenu->addAction(m_copyCoordinatesAct);
         m_fileMenu->addAction( m_osmEditAction );
+        m_fileMenu->addSeparator();
+        m_fileMenu->addAction(m_recordMovieAction);
 
         m_viewMenu = menuBar()->addMenu(tr("&View"));
         m_infoBoxesMenu = new QMenu( "&Info Boxes" );
@@ -1388,6 +1403,15 @@ void MainWindow::updateMapEditButtonVisibility( const QString &mapTheme )
 {
     Q_ASSERT( m_osmEditAction );
     m_osmEditAction->setVisible( mapTheme == "earth/openstreetmap/openstreetmap.dgml" );
+}
+
+void MainWindow::showMovieCaptureDialog()
+{
+    if (m_movieCaptureDialog == 0) {
+        m_movieCaptureDialog = new MovieCaptureDialog(m_controlView->marbleWidget(),
+                                                      m_controlView->marbleWidget());
+    }
+    m_movieCaptureDialog->show();
 }
 
 void MainWindow::showMapWizard()
