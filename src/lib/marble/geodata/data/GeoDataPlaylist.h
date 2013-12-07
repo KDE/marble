@@ -13,7 +13,6 @@
 
 #include "GeoDataObject.h"
 #include "GeoDataTourPrimitive.h"
-#include "GeoDataSoundCue.h"
 
 #include <QList>
 
@@ -23,17 +22,14 @@ namespace Marble
 class GEODATA_EXPORT GeoDataPlaylist : public GeoDataObject
 {
 public:
-    GeoDataPlaylist();
-    ~GeoDataPlaylist();
-
     const char *nodeType() const;
 
-    GeoDataTourPrimitive* primitive(int id);
-    const GeoDataTourPrimitive* primitive(int id) const;
-    void addPrimitive( GeoDataTourPrimitive* primitive, int position = -1 );
-    void removePrimitive( int position );
-    void moveUp( int position );
-    void moveDown( int position );
+    GeoDataTourPrimitive* primitive( int index );
+    const GeoDataTourPrimitive* primitive( int index ) const;
+    void addPrimitive( GeoDataTourPrimitive* primitive );
+    void insertPrimitive( int index, GeoDataTourPrimitive* primitive );
+    void removePrimitiveAt( int index );
+    void swapPrimitives( int indexA, int indexB );
 
     int size() const;
 

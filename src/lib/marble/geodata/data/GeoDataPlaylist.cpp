@@ -16,14 +16,6 @@
 namespace Marble
 {
 
-GeoDataPlaylist::GeoDataPlaylist()
-{
-}
-
-GeoDataPlaylist::~GeoDataPlaylist()
-{
-}
-
 const char *GeoDataPlaylist::nodeType() const
 {
     return GeoDataTypes::GeoDataPlaylistType;
@@ -45,40 +37,34 @@ const GeoDataTourPrimitive* GeoDataPlaylist::primitive(int id) const
     return m_primitives.at(id);
 }
 
-void GeoDataPlaylist::addPrimitive( GeoDataTourPrimitive *primitive, int position )
+void GeoDataPlaylist::addPrimitive( GeoDataTourPrimitive *primitive )
 {
     primitive->setParent( this );
-    if ( position == -1 ) {
-        m_primitives.push_back( primitive );
-    } else {
-        m_primitives.insert( position, primitive );
-    }
+    m_primitives.push_back( primitive );
 }
 
-void GeoDataPlaylist::removePrimitive(int position)
+void GeoDataPlaylist::insertPrimitive( int position, GeoDataTourPrimitive *primitive )
+{
+    primitive->setParent( this );
+    int const index = qBound( 0, position, m_primitives.size() );
+    m_primitives.insert( index, primitive );
+}
+
+void GeoDataPlaylist::removePrimitiveAt(int position)
 {
     m_primitives.removeAt( position );
+}
+
+void GeoDataPlaylist::swapPrimitives( int positionA, int positionB )
+{
+    if ( qMin( positionA, positionB ) >= 0 && qMax( positionA, positionB ) < m_primitives.size() ) {
+        m_primitives.swap( positionA, positionB );
+    }
 }
 
 int GeoDataPlaylist::size() const
 {
     return m_primitives.size();
-}
-
-void GeoDataPlaylist::moveUp(int position)
-{
-    if ( position > 0 && position <= m_primitives.size()-1 ) {
-        m_primitives.insert( position-1, m_primitives.at( position ) );
-        m_primitives.removeAt( position+1 );
-    }
-}
-
-void GeoDataPlaylist::moveDown(int position)
-{
-    if ( position >= 0 && position < m_primitives.size()-1 ) {
-        m_primitives.insert( position+2, m_primitives.at( position ) );
-        m_primitives.removeAt( position );
-    }
 }
 
 } // namespace Marble

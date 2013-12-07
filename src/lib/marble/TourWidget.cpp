@@ -149,7 +149,7 @@ void TourWidgetPrivate::addFlyTo()
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
         QModelIndex currentIndex = m_tourUi.m_listView->currentIndex();
         if ( currentIndex.isValid() ) {
-            playlist->addPrimitive( flyTo, currentIndex.row()+1 );
+            playlist->insertPrimitive( currentIndex.row()+1, flyTo );
         } else {
             playlist->addPrimitive( flyTo );
         }
@@ -171,7 +171,7 @@ void TourWidgetPrivate::deleteSelected()
             QModelIndexList::iterator end = selected.end();
             QModelIndexList::iterator iter = selected.begin();
             for( ; iter != end; ++iter ) {
-                playlist->removePrimitive( ( *iter ).row() );
+                playlist->removePrimitiveAt( iter->row() );
             }
         }
     }
@@ -189,11 +189,11 @@ void TourWidgetPrivate::updateButtonsStates()
         qSort( selectedIndexes.begin(), selectedIndexes.end(), qLess<QModelIndex>() );
         QModelIndexList::iterator end = selectedIndexes.end()-1;
         QModelIndexList::iterator start = selectedIndexes.begin();
-        m_tourUi.m_actionMoveUp->setEnabled( ( ( *start ).row() != 0 ) ); // if we can move up enable action else disable.
+        m_tourUi.m_actionMoveUp->setEnabled( ( start->row() != 0 ) ); // if we can move up enable action else disable.
         GeoDataObject *rootObject =  rootIndexObject();
         if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
             GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
-            m_tourUi.m_actionMoveDown->setEnabled( ( ( *end ).row() != playlist->size()-1 ) ); // if we can move down enable action else disable.
+            m_tourUi.m_actionMoveDown->setEnabled( ( end->row() != playlist->size()-1 ) ); // if we can move down enable action else disable.
         }
     }
 }
@@ -208,7 +208,9 @@ void TourWidgetPrivate::moveUp()
         QModelIndexList::iterator end = selected.end();
         QModelIndexList::iterator iter = selected.begin();
         for( ; iter != end; ++iter ) {
-            playlist->moveUp( ( *iter ).row() );
+            int const index = iter->row();
+            Q_ASSERT( index > 0 );
+            playlist->swapPrimitives( index-1, index );
         }
     }
 }
@@ -223,7 +225,9 @@ void TourWidgetPrivate::moveDown()
         QModelIndexList::iterator end = selected.end();
         QModelIndexList::iterator iter = selected.begin();
         for( ; iter != end; ++iter ) {
-            playlist->moveDown( ( *iter ).row() );
+            int const index = iter->row();
+            Q_ASSERT( index < playlist->size()-1 );
+            playlist->swapPrimitives( index, index+1 );
         }
     }
 }
@@ -257,7 +261,7 @@ void TourWidget::addFlyTo()
     d->addFlyTo();
     GeoDataFeature *feature = d->getPlaylistFeature();
     if ( feature ) {
-        emit featureUpdated( d->getPlaylistFeature() );
+        emit featureUpdated( feature );
         d->updateRootIndex();
     }
 }
@@ -267,7 +271,7 @@ void TourWidget::deleteSelected()
     d->deleteSelected();
     GeoDataFeature *feature = d->getPlaylistFeature();
     if ( feature ) {
-        emit featureUpdated( d->getPlaylistFeature() );
+        emit featureUpdated( feature );
         d->updateRootIndex();
     }
 }
@@ -277,7 +281,7 @@ void TourWidget::moveDown()
     d->moveDown();
     GeoDataFeature *feature = d->getPlaylistFeature();
     if ( feature ) {
-        emit featureUpdated( d->getPlaylistFeature() );
+        emit featureUpdated( feature );
         d->updateRootIndex();
     }
 }
@@ -287,7 +291,7 @@ void TourWidget::moveUp()
     d->moveUp();
     GeoDataFeature *feature = d->getPlaylistFeature();
     if ( feature ) {
-        emit featureUpdated( d->getPlaylistFeature() );
+        emit featureUpdated( feature );
         d->updateRootIndex();
     }
 }
