@@ -45,6 +45,9 @@
         <file alias="marble/flag-green.svg">../../../data/svg/flag-green.svg</file>
         <file alias="marble/edit-clear.png">../../apps/marble-ui/icons/16x16/edit-clear.png</file>
         <file alias="marble/list-add.png">../../apps/marble-ui/icons/16x16/list-add.png</file>
+        <file alias="marble/list-remove.png">../../apps/marble-ui/icons/16x16/list-remove.png</file>
+        <file alias="marble/go-up.png">../../apps/marble-ui/icons/16x16/go-up.png</file>
+        <file alias="marble/go-down.png">../../apps/marble-ui/icons/16x16/go-down.png</file>
         <file alias="marble/reverse.png">../../apps/marble-ui/icons/16x16/reverse.png</file>
         <file alias="marble/dialog-ok.png">../../apps/marble-ui/icons/16x16/dialog-ok.png</file>
         <file alias="marble/edit-delete.png">../../apps/marble-ui/icons/16x16/edit-delete.png</file>
