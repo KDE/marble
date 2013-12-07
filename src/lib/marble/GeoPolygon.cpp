@@ -154,13 +154,16 @@ void PntMapLoader::run()
     unsigned char* src; 
     struct stat  statbuf;
 
-    if ( (fd = open (m_filename.toLatin1(), O_RDONLY) ) < 0)  // krazy:exclude=syscalls
+    if ( (fd = open (m_filename.toLatin1(), O_RDONLY) ) < 0) {  // krazy:exclude=syscalls
         mDebug() << "cannot open" << m_filename << " for reading";
+        return;
+    }
 
     int filelength;
     if ( fstat (fd,&statbuf) < 0 ) { // krazy:exclude=syscalls
         filelength = 0;
         mDebug() << "fstat error";
+        return;
     } else {
         filelength = statbuf.st_size;
     }
