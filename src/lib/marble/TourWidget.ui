@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>264</width>
-    <height>263</height>
+    <width>290</width>
+    <height>234</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,6 +19,13 @@
      <property name="windowTitle">
       <string>toolBar</string>
      </property>
+     <addaction name="m_actionNewTour"/>
+     <addaction name="separator"/>
+     <addaction name="m_actionOpenTour"/>
+     <addaction name="separator"/>
+     <addaction name="m_actionSaveTour"/>
+     <addaction name="m_actionSaveTourAs"/>
+     <addaction name="separator"/>
      <addaction name="m_actionAddFlyTo"/>
      <addaction name="separator"/>
      <addaction name="m_actionMoveUp"/>
@@ -33,49 +40,6 @@
       <enum>QAbstractItemView::ExtendedSelection</enum>
      </property>
     </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout">
-     <property name="spacing">
-      <number>6</number>
-     </property>
-     <property name="margin">
-      <number>0</number>
-     </property>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_openButton">
-       <property name="text">
-        <string>Open</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
    </item>
   </layout>
   <action name="m_actionAddFlyTo">
@@ -127,6 +91,48 @@
    </property>
    <property name="text">
     <string>Delete</string>
+   </property>
+  </action>
+  <action name="m_actionNewTour">
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/document-new.png</normaloff>:/marble/document-new.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Tour</string>
+   </property>
+  </action>
+  <action name="m_actionSaveTour">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/document-save.png</normaloff>:/marble/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Tour</string>
+   </property>
+  </action>
+  <action name="m_actionSaveTourAs">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/document-save-as.png</normaloff>:/marble/document-save-as.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Tour As</string>
+   </property>
+  </action>
+  <action name="m_actionOpenTour">
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/document-open.png</normaloff>:/marble/document-open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open Tour</string>
    </property>
   </action>
  </widget>

@@ -51,6 +51,9 @@ class MARBLE_EXPORT TourWidget : public QWidget
 
  private:
     Q_PRIVATE_SLOT( d, void openFile() )
+    Q_PRIVATE_SLOT( d, void createTour() )
+    Q_PRIVATE_SLOT( d, void saveTour() )
+    Q_PRIVATE_SLOT( d, void saveTourAs() )
     Q_PRIVATE_SLOT( d, void updateButtonsStates() )
     Q_PRIVATE_SLOT( d, void mapCenterOn( const QModelIndex &index ) )
     Q_DISABLE_COPY( TourWidget )

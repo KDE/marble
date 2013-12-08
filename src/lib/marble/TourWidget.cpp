@@ -16,6 +16,8 @@
 #include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
 #include "GeoDataFlyTo.h"
+#include "GeoWriter.h"
+#include "KmlElementDictionary.h"
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
 #include "ParsingRunnerManager.h"
@@ -39,6 +41,9 @@ public:
 
 public Q_SLOTS:
     void openFile();
+    void createTour();
+    void saveTour();
+    void saveTourAs();
     void mapCenterOn(const QModelIndex &index );
     void addFlyTo();
     void deleteSelected();
@@ -49,6 +54,11 @@ public Q_SLOTS:
 private:
     GeoDataTour* findTour( GeoDataFeature* feature ) const;
     GeoDataObject *rootIndexObject() const;
+    bool openDocument( GeoDataDocument *document );
+    bool saveTourAs( const QString &filename );
+    bool overrideModifications();
+
+    bool m_isChanged;
 
 public:
     TourWidget *q;
@@ -59,12 +69,12 @@ public:
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     : q( parent ),
-      m_widget( 0 )
+      m_widget( 0 ),
+      m_isChanged( false )
 {
     m_tourUi.setupUi( parent );
     m_tourUi.m_listView->setModel( &m_model );
     m_tourUi.m_listView->setModelColumn(1);
-    QObject::connect( m_tourUi.m_openButton, SIGNAL( clicked() ), q, SLOT( openFile() ) );
     QObject::connect( m_tourUi.m_listView, SIGNAL( activated( QModelIndex ) ), q, SLOT( mapCenterOn( QModelIndex ) ) );
     QObject::connect( m_tourUi.m_listView->selectionModel(), SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
                       q, SLOT( updateButtonsStates() ) );
@@ -73,6 +83,10 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( activated() ), q, SLOT( moveUp() ) );
     QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( activated() ), q, SLOT( moveDown() ) );
     QObject::connect( q, SIGNAL( featureUpdated( GeoDataFeature* ) ), &m_model, SLOT( updateFeature( GeoDataFeature* ) ) );
+    QObject::connect( m_tourUi.m_actionNewTour, SIGNAL( activated() ), q, SLOT( createTour() ) );
+    QObject::connect( m_tourUi.m_actionOpenTour, SIGNAL( activated() ), q, SLOT( openFile() ) );
+    QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL( activated() ), q, SLOT( saveTour() ) );
+    QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( activated() ), q, SLOT( saveTourAs() ) );
 }
 
 TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
@@ -94,17 +108,12 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
 
 void TourWidgetPrivate::openFile()
 {
-    QString const filename = QFileDialog::getOpenFileName( q, q->tr( "Open Tour" ), QDir::homePath(), q->tr( "KML Tours (*.kml)" ) );
-    if ( !filename.isEmpty() ) {
-        m_widget->model()->addGeoDataFile( filename );
-        ParsingRunnerManager manager( m_widget->model()->pluginManager() );
-        GeoDataDocument* document = manager.openFile( filename );
-        if ( document ) {
-            GeoDataDocument* oldDocument = m_model.rowCount() ? m_model.rootDocument() : 0;
-            m_model.setRootDocument( document );
-            updateRootIndex();
-            m_tourUi.m_actionAddFlyTo->setEnabled( true );
-            delete oldDocument;
+    if ( overrideModifications() ) {
+        QString const filename = QFileDialog::getOpenFileName( q, q->tr( "Open Tour" ), QDir::homePath(), q->tr( "KML Tours (*.kml)" ) );
+        if ( !filename.isEmpty() ) {
+            ParsingRunnerManager manager( m_widget->model()->pluginManager() );
+            GeoDataDocument* document = manager.openFile( filename );
+            openDocument( document );
         }
     }
 }
@@ -153,6 +162,8 @@ void TourWidgetPrivate::addFlyTo()
         } else {
             playlist->addPrimitive( flyTo );
         }
+        m_isChanged = true;
+        m_tourUi.m_actionSaveTour->setEnabled( true );
     }
 }
 
@@ -173,6 +184,8 @@ void TourWidgetPrivate::deleteSelected()
             for( ; iter != end; ++iter ) {
                 playlist->removePrimitiveAt( iter->row() );
             }
+            m_isChanged = true;
+            m_tourUi.m_actionSaveTour->setEnabled( true );
         }
     }
 }
@@ -212,6 +225,8 @@ void TourWidgetPrivate::moveUp()
             Q_ASSERT( index > 0 );
             playlist->swapPrimitives( index-1, index );
         }
+        m_isChanged = true;
+        m_tourUi.m_actionSaveTour->setEnabled( true );
     }
 }
 
@@ -229,6 +244,8 @@ void TourWidgetPrivate::moveDown()
             Q_ASSERT( index < playlist->size()-1 );
             playlist->swapPrimitives( index, index+1 );
         }
+        m_isChanged = true;
+        m_tourUi.m_actionSaveTour->setEnabled( true );
     }
 }
 
@@ -300,6 +317,108 @@ GeoDataObject *TourWidgetPrivate::rootIndexObject() const
 {
     QModelIndex const rootIndex = m_tourUi.m_listView->rootIndex();
     return rootIndex.isValid() ? static_cast<GeoDataObject*>( rootIndex.internalPointer() ) : 0;
+}
+
+void TourWidgetPrivate::createTour()
+{
+    if ( overrideModifications() ) {
+        GeoDataDocument *document = new GeoDataDocument();
+        document->setDocumentRole( UserDocument );
+        document->setName( "New Tour" );
+        GeoDataTour *tour = new GeoDataTour();
+        tour->setName( "New Tour" );
+        GeoDataPlaylist *playlist = new GeoDataPlaylist;
+        tour->setPlaylist( playlist );
+        document->append( static_cast<GeoDataFeature*>( tour ) );
+        openDocument( document );
+        m_isChanged = true;
+        m_tourUi.m_actionSaveTour->setEnabled( true );
+    }
+}
+
+bool TourWidgetPrivate::openDocument(GeoDataDocument* document)
+{
+    if ( document ) {
+        GeoDataDocument* oldDocument = m_model.rowCount() ? m_model.rootDocument() : 0;
+        if ( oldDocument ) {
+            m_widget->model()->removeGeoData( oldDocument->fileName() );
+        }
+        if ( !document->fileName().isEmpty() ) {
+            m_widget->model()->addGeoDataFile( document->fileName() );
+        }
+        m_model.setRootDocument( document );
+        m_isChanged = false;
+        updateRootIndex();
+        m_tourUi.m_actionAddFlyTo->setEnabled( true );
+        m_tourUi.m_actionSaveTourAs->setEnabled( true );
+        m_tourUi.m_actionSaveTour->setEnabled( false );
+        m_isChanged = false;
+        delete oldDocument;
+        return true;
+    }
+    return false;
+}
+
+void TourWidgetPrivate::saveTour()
+{
+    if ( m_model.rowCount() ) {
+        if ( !m_model.rootDocument()->fileName().isEmpty() ) {
+            saveTourAs( m_model.rootDocument()->fileName() );
+        } else {
+            saveTourAs();
+        }
+    }
+}
+
+void TourWidgetPrivate::saveTourAs()
+{
+   if ( m_model.rowCount() )
+   {
+       QString const filename = QFileDialog::getSaveFileName( q, q->tr( "Save Tour as" ), QDir::homePath(), q->tr( "KML Tours (*.kml)" ) );
+       if ( !filename.isEmpty() ) {
+            saveTourAs( filename );
+       }
+   }
+}
+
+bool TourWidgetPrivate::saveTourAs(const QString &filename)
+{
+    if ( !filename.isEmpty() )
+    {
+        QFile file( filename );
+        if ( file.open( QIODevice::WriteOnly ) ) {
+            GeoWriter writer;
+            writer.setDocumentType( kml::kmlTag_nameSpace22 );
+            if ( writer.write( &file, m_model.rootDocument() ) ) {
+                file.close();
+                m_tourUi.m_actionSaveTour->setEnabled( false );
+                m_isChanged = false;
+                GeoDataDocument* document = m_model.rootDocument();
+                if ( !document->fileName().isNull() ) {
+                    m_widget->model()->removeGeoData( document->fileName() );
+                }
+                m_widget->model()->addGeoDataFile( filename );
+                m_model.rootDocument()->setFileName( filename );
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool TourWidgetPrivate::overrideModifications()
+{
+    GeoDataDocument* oldDocument = m_model.rowCount() ? m_model.rootDocument() : 0;
+    if ( oldDocument && m_isChanged ) {
+        QString title = q->tr( "Discard Changes" );
+        QString text = q->tr( "Are you sure want to discard all unsaved changes and close current document?" );
+        QMessageBox *dialog = new QMessageBox( QMessageBox::Question, title, text, QMessageBox::Yes | QMessageBox::No, q );
+        dialog->setDefaultButton( QMessageBox::No );
+        if ( dialog->exec() != QMessageBox::Yes ) {
+            return false;
+        }
+    }
+    return true;
 }
 
 }
