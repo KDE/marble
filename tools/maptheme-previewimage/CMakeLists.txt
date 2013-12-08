@@ -13,7 +13,7 @@ endif()
 set( ${TARGET}_SRC main.cpp )
 QT_ADD_RESOURCES( RESOURCES canvas.qrc )
 add_definitions( -DMAKE_MARBLE_LIB )
-add_executable( ${TARGET} ${${TARGET}_SRC} )
+add_executable( ${TARGET} ${${TARGET}_SRC} ${RESOURCES} )
 
 if (QT4_FOUND)
   target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget )

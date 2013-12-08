@@ -15,8 +15,30 @@
 #include <QApplication>
 #include <QPixmap>
 #include <QPainter>
+#include <QProcess>
+#include <QDir>
 
 using namespace Marble;
+
+QPixmap resize(const QPixmap &pixmap)
+{
+    if ( QProcess::execute("convert -version") == 0 ) {
+        QString const inputFile = QDir::tempPath() + "/marble-preview.png";
+        QString const outputFile = QDir::tempPath() + "/marble-preview-scaled.png";
+        if ( pixmap.save( inputFile )
+             && QProcess::execute( "convert", QStringList() << inputFile << "-resize" << "130x130"
+                                   << "-sharpen" << "1x1" << outputFile ) == 0
+             ) {
+            QPixmap result( outputFile );
+            if ( !result.isNull() ) {
+                return result;
+            }
+        }
+    }
+
+    qDebug() << "Warning: Unable to resize pixmap properly. Check imagemagick installation.";
+    return pixmap.scaled( 130, 130, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
+}
 
 int main(int argc, char** argv)
 {
@@ -42,9 +64,10 @@ int main(int argc, char** argv)
     mapWidget->setRadius( 120 * scale / 2.0 );
 
     QPixmap canvas( ":/canvas.png" );
+    Q_ASSERT(!canvas.isNull());
     QPainter globePainter( &canvas );
     QPixmap const globe = QPixmap::grabWidget( mapWidget );
-    globePainter.drawPixmap( QPoint( 2, 2 ), globe.scaled( 130, 130, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) );
+    globePainter.drawPixmap( QPoint( 2, 2 ), resize( globe ) );
     globePainter.end();
     canvas.save( argc > 2 ? argv[2] : "preview.png" );
 
