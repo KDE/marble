@@ -161,6 +161,8 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
      */
     void syncSettings();
 
+    void updateCloudSyncCredentials();
+
     private:
     Q_DISABLE_COPY( QtMarbleConfigDialog )
 

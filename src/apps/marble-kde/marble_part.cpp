@@ -137,6 +137,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_usingKWallet( true ),
     m_position( i18n( NOT_AVAILABLE ) ),
     m_tileZoomLevel( i18n( NOT_AVAILABLE ) ),
+    m_statusLabel( 0 ),
     m_positionLabel( 0 ),
     m_distanceLabel( 0 )
 {
@@ -610,9 +611,9 @@ void MarblePart::readSettings()
         }
     }
     CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
-    cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
-    cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
-    cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );
+    cloudSyncManager->setOwncloudCredentials( MarbleSettings::owncloudServer(),
+                                              MarbleSettings::owncloudUsername(),
+                                              MarbleSettings::owncloudPassword());
     cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
     cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
     cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );
@@ -1244,6 +1245,13 @@ void MarblePart::updateCloudSyncStatus(const QString& status, CloudSyncManager::
     }
 }
 
+void MarblePart::updateCloudSyncCredentials()
+{
+    m_controlView->cloudSyncManager()->setOwncloudCredentials( MarbleSettings::owncloudServer(),
+                                                               MarbleSettings::owncloudUsername(),
+                                                               MarbleSettings::owncloudPassword());
+}
+
 void MarblePart::updateStatusBar()
 {
     if ( m_positionLabel )
@@ -1513,7 +1521,9 @@ void MarblePart::editSettings()
 
     connect( ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
              m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
-    
+    connect( ui_cloudSyncSettings.testLoginButton, SIGNAL(clicked()),
+             this, SLOT(updateCloudSyncCredentials()) );
+
     connect( m_controlView->cloudSyncManager(), SIGNAL(statusChanged(QString, CloudSyncManager::Status)),
              this, SLOT(updateCloudSyncStatus(QString, CloudSyncManager::Status)));
 
@@ -1690,9 +1700,9 @@ void MarblePart::updateSettings()
     m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( MarbleSettings::inertialEarthRotation() );
 
     CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
-    cloudSyncManager->setOwncloudServer( MarbleSettings::owncloudServer() );
-    cloudSyncManager->setOwncloudUsername( MarbleSettings::owncloudUsername() );
-    cloudSyncManager->setOwncloudPassword( MarbleSettings::owncloudPassword() );
+    cloudSyncManager->setOwncloudCredentials( MarbleSettings::owncloudServer(),
+                                              MarbleSettings::owncloudUsername(),
+                                              MarbleSettings::owncloudPassword());
     cloudSyncManager->setSyncEnabled( MarbleSettings::enableSync() );
     cloudSyncManager->routeSyncManager()->setRouteSyncEnabled( MarbleSettings::syncRoutes() );
     cloudSyncManager->bookmarkSyncManager()->setBookmarkSyncEnabled( MarbleSettings::syncBookmarks() );

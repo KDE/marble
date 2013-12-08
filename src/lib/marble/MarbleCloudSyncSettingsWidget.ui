@@ -190,8 +190,22 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QLabel" name="cloudSyncStatus">
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QPushButton" name="testLoginButton">
+          <property name="text">
+           <string>Test Login</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cloudSyncStatus">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

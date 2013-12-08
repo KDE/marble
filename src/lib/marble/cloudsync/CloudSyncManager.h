@@ -89,6 +89,17 @@ public:
     void setSyncEnabled( bool enabled );
 
     /**
+     * Change owncloud server URL, username and password at once without emitting change
+     * signals like setOwncloudServer, setOwncloudUsername, setOwncloudPassword do.
+     * The apiUrlChanged signal is emitted, if needed, however.
+     * @brief setOwncloudCredentials
+     * @param server
+     * @param user
+     * @param password
+     */
+    void setOwncloudCredentials( const QString &server, const QString &user, const QString &password );
+
+    /**
      * Setter for ownCloud server.
      * @param server ownCloud server
      */

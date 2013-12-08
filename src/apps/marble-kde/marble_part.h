@@ -174,6 +174,7 @@ class MarblePart: public KParts::ReadOnlyPart
 //    void  createBookmarkMenu();
 
     void  updateMapEditButtonVisibility( const QString &mapTheme );
+    void  updateCloudSyncCredentials();
 
   private:
     void  setupActions();

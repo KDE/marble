@@ -177,6 +177,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     d->ui_cloudSyncSettings.button_syncNow->setEnabled( syncBookmarks() );
     d->m_cloudSyncStatusLabel = d->ui_cloudSyncSettings.cloudSyncStatus;
     connect( d->ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()), SIGNAL(syncNowClicked()) );
+    connect( d->ui_cloudSyncSettings.testLoginButton, SIGNAL(clicked()), this, SLOT(updateCloudSyncCredentials()) );
 
     connect(d->m_syncManager, SIGNAL(syncComplete()), this, SLOT(updateLastSync()));
     updateLastSync();
@@ -232,6 +233,14 @@ void QtMarbleConfigDialog::syncSettings()
     }
     
     QNetworkProxy::setApplicationProxy(proxy);
+}
+
+void QtMarbleConfigDialog::updateCloudSyncCredentials()
+{
+    d->m_cloudSyncManager->setOwncloudCredentials(
+                d->ui_cloudSyncSettings.kcfg_owncloudServer->text(),
+                d->ui_cloudSyncSettings.kcfg_owncloudUsername->text(),
+                d->ui_cloudSyncSettings.kcfg_owncloudPassword->text() );
 }
 
 void QtMarbleConfigDialog::disableSyncNow()

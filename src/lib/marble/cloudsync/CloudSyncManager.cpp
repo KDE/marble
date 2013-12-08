@@ -107,8 +107,24 @@ void CloudSyncManager::setSyncEnabled( bool enabled )
     }
 }
 
+void CloudSyncManager::setOwncloudCredentials( const QString &server, const QString &user, const QString &password )
+{
+    QUrl const oldApiUrl = apiUrl();
+    blockSignals( true );
+    setOwncloudServer( server );
+    setOwncloudUsername( user );
+    setOwncloudPassword( password );
+    blockSignals( false );
+    if ( oldApiUrl != apiUrl() ) {
+        emit apiUrlChanged( apiUrl() );
+    }
+}
+
 void CloudSyncManager::setOwncloudServer( const QString &server )
 {
+    QString const oldProtocol = d->m_owncloudProtocol;
+    QString const oldServer = d->m_ownloudServer;
+
     if ( server.startsWith( "http://" ) ) {
         d->m_owncloudProtocol = "http://";
         d->m_ownloudServer = server.mid( 7 );
@@ -120,8 +136,12 @@ void CloudSyncManager::setOwncloudServer( const QString &server )
         d->m_ownloudServer = server;
     }
 
-    emit owncloudServerChanged( owncloudServer() );
-    emit apiUrlChanged( apiUrl() );
+    if ( oldServer != d->m_ownloudServer ) {
+        emit owncloudServerChanged( owncloudServer() );
+        emit apiUrlChanged( apiUrl() );
+    } else if ( oldProtocol != d->m_owncloudProtocol ) {
+        emit apiUrlChanged( apiUrl() );
+    }
 }
 
 void CloudSyncManager::setOwncloudUsername( const QString &username )

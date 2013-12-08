@@ -264,7 +264,8 @@ void OwncloudSyncBackend::validateSettings()
 void OwncloudSyncBackend::checkAuthError(QNetworkReply::NetworkError error)
 {
     if ( error == QNetworkReply::HostNotFoundError ) {
-        d->m_cloudSyncManager->setStatus("Server could not be reached", CloudSyncManager::Error);
+        QString const status = tr( "Server '%1' could not be reached" ).arg( d->m_cloudSyncManager->owncloudServer() );
+        d->m_cloudSyncManager->setStatus( status , CloudSyncManager::Error );
     }
 }
 
@@ -281,16 +282,16 @@ void OwncloudSyncBackend::checkAuthReply()
         // not a JSON result
         if ( result.contains("http://owncloud.org") ) {
             // an owncloud login page was returned, marble app is not installed
-            d->m_cloudSyncManager->setStatus("Marble app is not installed on the server", CloudSyncManager::Error);
+            d->m_cloudSyncManager->setStatus( tr( "The Marble app is not installed on the ownCloud server" ), CloudSyncManager::Error);
         } else {
-            d->m_cloudSyncManager->setStatus("Server is not an ownCloud server", CloudSyncManager::Error);
+            d->m_cloudSyncManager->setStatus( tr( "The server is not an ownCloud server" ), CloudSyncManager::Error);
         }
     } else if ( result == "{\"message\":\"Current user is not logged in\"}" && statusCode == 401 ) {
         // credientials were incorrect
-        d->m_cloudSyncManager->setStatus("Username or Password are incorrect", CloudSyncManager::Error);
+        d->m_cloudSyncManager->setStatus( tr( "Username or password are incorrect" ), CloudSyncManager::Error);
     } else if ( result.contains("\"status\":\"success\"") && statusCode == 200 ) {
-        // credientials were correct
-        d->m_cloudSyncManager->setStatus("All details are okay", CloudSyncManager::Success);
+        // credentials were correct
+        d->m_cloudSyncManager->setStatus( tr( "Login successful" ), CloudSyncManager::Success);
     }
 }
 
