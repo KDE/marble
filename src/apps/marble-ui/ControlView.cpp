@@ -101,7 +101,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "1.6.85 (1.7 Beta2)";
+    return "1.7.0 (stable version)";
 }
 
 MapThemeManager *ControlView::mapThemeManager()
