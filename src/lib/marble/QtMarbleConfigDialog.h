@@ -16,12 +16,13 @@
 
 #include "marble_export.h"
 #include "MarbleGlobal.h"
+#include "cloudsync/CloudSyncManager.h"
 
 namespace Marble
 {
 
 class MarbleWidget;
-class BookmarkSyncManager;
+class CloudSyncManager;
 
 class QtMarbleConfigDialogPrivate;
 
@@ -30,7 +31,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     Q_OBJECT
     
     public:
-    explicit QtMarbleConfigDialog(MarbleWidget *marbleWidget, BookmarkSyncManager *syncManager,
+    explicit QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSyncManager *syncManager,
                                    QWidget *parent = 0 );
     ~QtMarbleConfigDialog();
 
@@ -143,6 +144,11 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
      * Read settings and update interface.
      */
     void readSettings();
+
+    /**
+     * Show status on cloud sync settings tab
+     */
+    void updateCloudSyncStatus( const QString &status, CloudSyncManager::Status status_type );
 
     /**
      * Write settings to disk.

@@ -153,6 +153,8 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  updateStatusBar();
 
+    void updateCloudSyncStatus( const QString &status, CloudSyncManager::Status status_type );
+
     /**
      * Saves the settings of all plugins.
      */
@@ -244,6 +246,9 @@ class MarblePart: public KParts::ReadOnlyPart
     QString m_clock;
     QString m_tileZoomLevel;
     KUrl m_lastFileOpenPath;
+
+    // Error item for CloudSyncSettings
+    QLabel *m_statusLabel;
 
     // Items for the statusbar.
     QLabel       *m_positionLabel;

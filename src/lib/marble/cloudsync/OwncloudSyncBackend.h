@@ -65,8 +65,11 @@ public Q_SLOTS:
     void cancelUpload();
 
 private slots:
+    void checkAuthReply();
+    void checkAuthError(QNetworkReply::NetworkError error);
     void prepareRouteList();
     void saveDownloadedRoute();
+    void validateSettings();
 
 signals:
     void routeListDownloaded( const QVector<RouteItem> &routeList );

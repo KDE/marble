@@ -42,6 +42,11 @@ public:
     ~CloudSyncManager();
 
     /**
+     * Status enumeration
+     */
+    enum Status { Unknown, Success, Error };
+
+    /**
      * Getter for offine mode.
      * @return true if offline mode enabled
      */
@@ -102,6 +107,12 @@ public:
     void setOwncloudPassword( const QString &owncloudPassword );
 
     /**
+     * Setter for authentication error.
+     * @param error authentication error
+     */
+    void setStatus( const QString &status, CloudSyncManager::Status status_type );
+
+    /**
      * Returns API path as a QString.
      * @return API path
      */
@@ -130,6 +141,7 @@ Q_SIGNALS:
     void owncloudUsernameChanged(const QString &username);
     void owncloudPasswordChanged(const QString &password);
     void owncloudServerChanged(const QString &server);
+    void statusChanged(const QString &status, CloudSyncManager::Status status_type);
 
     void apiUrlChanged(const QUrl &url);
     void routeSyncManagerChanged();

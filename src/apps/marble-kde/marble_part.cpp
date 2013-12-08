@@ -1228,6 +1228,22 @@ void MarblePart::repairNode( QDomNode node, const QString &child ) const
     }
 }
 
+void MarblePart::updateCloudSyncStatus(const QString& status, CloudSyncManager::Status status_type )
+{
+    m_statusLabel->setText(status);
+    switch (status_type){
+        case CloudSyncManager::Success:
+            m_statusLabel->setStyleSheet("QLabel { color : green; }");
+            break;
+        case CloudSyncManager::Error:
+            m_statusLabel->setStyleSheet("QLabel { color : red; }");
+            break;
+        case CloudSyncManager::Unknown:
+            m_statusLabel->setStyleSheet("QLabel { color : grey; }");
+            break;
+    }
+}
+
 void MarblePart::updateStatusBar()
 {
     if ( m_positionLabel )
@@ -1492,11 +1508,15 @@ void MarblePart::editSettings()
     w_cloudSyncSettings->setObjectName( "sync_page" );
     ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
     ui_cloudSyncSettings.button_syncNow->setEnabled( MarbleSettings::syncBookmarks() );
+    m_statusLabel = ui_cloudSyncSettings.cloudSyncStatus;
     m_configDialog->addPage( w_cloudSyncSettings, i18n( "Synchronization" ), "folder-sync" );
 
     connect( ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
              m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
     
+    connect( m_controlView->cloudSyncManager(), SIGNAL(statusChanged(QString, CloudSyncManager::Status)),
+             this, SLOT(updateCloudSyncStatus(QString, CloudSyncManager::Status)));
+
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );
     w_routingSettings->setObjectName( "routing_page" );

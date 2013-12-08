@@ -46,6 +46,7 @@
 #include "MarbleClock.h"
 #include "routing/RoutingProfilesWidget.h"
 #include "BookmarkSyncManager.h"
+#include "CloudSyncManager.h"
 
 namespace Marble
 {
@@ -53,13 +54,14 @@ namespace Marble
 class QtMarbleConfigDialogPrivate
 {
  public:
-    QtMarbleConfigDialogPrivate( MarbleWidget *marbleWidget, BookmarkSyncManager *syncManager )
+    QtMarbleConfigDialogPrivate( MarbleWidget *marbleWidget, CloudSyncManager *cloudSyncManager )
         : ui_viewSettings(),
           ui_navigationSettings(),
           ui_timeSettings(),
           ui_cacheSettings(),
           m_marbleWidget( marbleWidget ),
-          m_syncManager(syncManager),
+          m_syncManager(cloudSyncManager->bookmarkSyncManager()),
+          m_cloudSyncManager(cloudSyncManager),
           m_pluginModel()
     {
     }
@@ -73,8 +75,11 @@ class QtMarbleConfigDialogPrivate
 
     QSettings m_settings;
 
+    QLabel *m_cloudSyncStatusLabel;
+
     MarbleWidget *const m_marbleWidget;
     BookmarkSyncManager *const m_syncManager;
+    CloudSyncManager *const m_cloudSyncManager;
 
     RenderPluginModel m_pluginModel;
 
@@ -85,10 +90,10 @@ class QtMarbleConfigDialogPrivate
     Marble::GraphicsSystem m_previousGraphicsSystem;
 };
 
-QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, BookmarkSyncManager *syncManager,
+QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSyncManager *cloudSyncManager,
                                            QWidget *parent )
     : QDialog( parent ),
-      d( new QtMarbleConfigDialogPrivate( marbleWidget, syncManager ) )
+      d( new QtMarbleConfigDialogPrivate( marbleWidget, cloudSyncManager ) )
 {
     QTabWidget *tabWidget = new QTabWidget( this );
     QDialogButtonBox *buttons = 
@@ -170,10 +175,13 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, BookmarkS
     d->ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
     tabWidget->addTab( w_cloudSyncSettings, tr( "Synchronization" ) );
     d->ui_cloudSyncSettings.button_syncNow->setEnabled( syncBookmarks() );
+    d->m_cloudSyncStatusLabel = d->ui_cloudSyncSettings.cloudSyncStatus;
     connect( d->ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()), SIGNAL(syncNowClicked()) );
 
     connect(d->m_syncManager, SIGNAL(syncComplete()), this, SLOT(updateLastSync()));
     updateLastSync();
+    connect( d->m_cloudSyncManager, SIGNAL(statusChanged(QString, CloudSyncManager::Status)),
+             this, SLOT(updateCloudSyncStatus(QString, CloudSyncManager::Status)));
 
     // Layout
     QVBoxLayout *layout = new QVBoxLayout( this );
@@ -343,6 +351,22 @@ void QtMarbleConfigDialog::readSettings()
 
     // The settings loaded in the config dialog have been changed.
     emit settingsChanged();
+}
+
+void QtMarbleConfigDialog::updateCloudSyncStatus( const QString &status, CloudSyncManager::Status status_type )
+{
+    d->m_cloudSyncStatusLabel->setText(status);
+    switch (status_type){
+        case CloudSyncManager::Success:
+            d->m_cloudSyncStatusLabel->setStyleSheet("QLabel { color : green; }");
+            break;
+        case CloudSyncManager::Error:
+            d->m_cloudSyncStatusLabel->setStyleSheet("QLabel { color : red; }");
+            break;
+        case CloudSyncManager::Unknown:
+            d->m_cloudSyncStatusLabel->setStyleSheet("QLabel { color : grey; }");
+            break;
+    }
 }
 
 void QtMarbleConfigDialog::writeSettings()

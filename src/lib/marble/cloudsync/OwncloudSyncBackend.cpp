@@ -28,6 +28,7 @@
 #include <QNetworkAccessManager>
 #include <QScriptValueIterator>
 #include <QNetworkRequest>
+#include <QNetworkReply>
 #include <QScriptEngine>
 #include <QFileInfo>
 #include <QBuffer>
@@ -48,6 +49,7 @@ class OwncloudSyncBackend::Private {
         QNetworkReply *m_routeListReply;
         QNetworkReply *m_routeDownloadReply;
         QNetworkReply *m_routeDeleteReply;
+	QNetworkReply *m_authReply;
 
         QVector<RouteItem> m_routeList;
 
@@ -68,6 +70,7 @@ OwncloudSyncBackend::Private::Private( CloudSyncManager* cloudSyncManager ) :
     m_routeListReply(),
     m_routeDownloadReply(),
     m_routeDeleteReply(),
+    m_authReply(),
     m_routeList(),
     // Route API endpoints
     m_routeUploadEndpoint( "routes/create" ),
@@ -82,6 +85,7 @@ OwncloudSyncBackend::Private::Private( CloudSyncManager* cloudSyncManager ) :
 OwncloudSyncBackend::OwncloudSyncBackend( CloudSyncManager* cloudSyncManager ) :
     d( new Private( cloudSyncManager ) )
 {
+    connect(d->m_cloudSyncManager, SIGNAL(apiUrlChanged(QUrl)), this, SLOT(validateSettings()));
 }
 
 OwncloudSyncBackend::~OwncloudSyncBackend()
@@ -239,6 +243,55 @@ QString OwncloudSyncBackend::routeName( const QString &timestamp )
     }
 
     return routeName.left( routeName.length() - 3 );
+}
+
+void OwncloudSyncBackend::validateSettings()
+{
+    if( d->m_cloudSyncManager->owncloudServer().size() > 0
+        && d->m_cloudSyncManager->owncloudUsername().size() > 0
+        && d->m_cloudSyncManager->owncloudPassword().size() > 0 )
+    {
+        QNetworkRequest request( endpointUrl( d->m_routeListEndpoint ) );
+        d->m_authReply = d->m_network.get( request );
+        connect( d->m_authReply, SIGNAL(finished()), this, SLOT(checkAuthReply()) );
+        connect( d->m_authReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(checkAuthError(QNetworkReply::NetworkError)) );
+    } else {
+        // no server, make the error field blank
+        d->m_cloudSyncManager->setStatus("", CloudSyncManager::Success);
+    }
+}
+
+void OwncloudSyncBackend::checkAuthError(QNetworkReply::NetworkError error)
+{
+    if ( error == QNetworkReply::HostNotFoundError ) {
+        d->m_cloudSyncManager->setStatus("Server could not be reached", CloudSyncManager::Error);
+    }
+}
+
+void OwncloudSyncBackend::checkAuthReply()
+{
+    int statusCode = d->m_authReply->attribute( QNetworkRequest::HttpStatusCodeAttribute ).toInt();
+
+    if ( statusCode == 0 ) // request was cancelled
+        return;
+
+    QString result = d->m_authReply->readAll();
+
+    if ( !result.startsWith("{")) {
+        // not a JSON result
+        if ( result.contains("http://owncloud.org") ) {
+            // an owncloud login page was returned, marble app is not installed
+            d->m_cloudSyncManager->setStatus("Marble app is not installed on the server", CloudSyncManager::Error);
+        } else {
+            d->m_cloudSyncManager->setStatus("Server is not an ownCloud server", CloudSyncManager::Error);
+        }
+    } else if ( result == "{\"message\":\"Current user is not logged in\"}" && statusCode == 401 ) {
+        // credientials were incorrect
+        d->m_cloudSyncManager->setStatus("Username or Password are incorrect", CloudSyncManager::Error);
+    } else if ( result.contains("\"status\":\"success\"") && statusCode == 200 ) {
+        // credientials were correct
+        d->m_cloudSyncManager->setStatus("All details are okay", CloudSyncManager::Success);
+    }
 }
 
 void OwncloudSyncBackend::cancelUpload()

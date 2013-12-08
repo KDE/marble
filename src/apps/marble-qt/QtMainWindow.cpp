@@ -118,7 +118,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
 
     // Initializing config dialog
     m_configDialog = new QtMarbleConfigDialog( m_controlView->marbleWidget(),
-                                               m_controlView->cloudSyncManager()->bookmarkSyncManager(),
+                                               m_controlView->cloudSyncManager(),
                                                this );
     connect( m_configDialog, SIGNAL(settingsChanged()),
              this, SLOT(updateSettings()) );

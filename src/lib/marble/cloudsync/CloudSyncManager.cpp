@@ -28,6 +28,8 @@ public:
     QString m_ownloudServer;
     QString m_owncloudUsername;
     QString m_owncloudPassword;
+    QString m_status;
+    CloudSyncManager::Status m_status_type;
 
     RouteSyncManager* m_routeSyncManager;
     BookmarkSyncManager* m_bookmarkSyncManager;
@@ -46,6 +48,8 @@ CloudSyncManager::Private::Private() :
     m_ownloudServer(),
     m_owncloudUsername(),
     m_owncloudPassword(),
+    m_status(),
+    m_status_type( CloudSyncManager::Unknown),
     m_routeSyncManager( 0 ),
     m_bookmarkSyncManager( 0 )
 {
@@ -135,6 +139,15 @@ void CloudSyncManager::setOwncloudPassword( const QString &password )
         d->m_owncloudPassword = password;
         emit owncloudPasswordChanged( d->m_owncloudPassword );
         emit apiUrlChanged( apiUrl() );
+    }
+}
+
+void CloudSyncManager::setStatus( const QString &status, CloudSyncManager::Status status_type )
+{
+    if( d->m_status != status && d->m_status_type != status_type) {
+        d->m_status = status;
+        d->m_status_type = status_type;
+        emit statusChanged( d->m_status, d->m_status_type );
     }
 }
 
