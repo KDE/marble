@@ -1147,6 +1147,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
      settings.endGroup();
 
      settings.beginGroup( "CloudSync" );
+     m_configDialog->setShowCloudSync( settings.value( "showCloudSyncSettings", false ).toBool() );
      CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
      cloudSyncManager->setOwncloudServer( settings.value( "owncloudServer", "" ).toString() );
      cloudSyncManager->setOwncloudUsername( settings.value( "owncloudUsername", "" ).toString() );

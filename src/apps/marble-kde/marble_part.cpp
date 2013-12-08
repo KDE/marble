@@ -1378,17 +1378,19 @@ void MarblePart::editSettings()
     ui_timeSettings.setupUi( w_timeSettings );
     m_configDialog->addPage( w_timeSettings, i18n( "Date & Time" ), "clock" );
     
-    // Sync page
-    Ui_MarbleCloudSyncSettingsWidget ui_cloudSyncSettings;
-    QWidget *w_cloudSyncSettings = new QWidget( 0 );
+    if ( MarbleSettings::showCloudSyncSettings() ) {
+        // Sync page
+        Ui_MarbleCloudSyncSettingsWidget ui_cloudSyncSettings;
+        QWidget *w_cloudSyncSettings = new QWidget( 0 );
 
-    w_cloudSyncSettings->setObjectName( "sync_page" );
-    ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
-    ui_cloudSyncSettings.button_syncNow->setEnabled( MarbleSettings::syncBookmarks() );
-    m_configDialog->addPage( w_cloudSyncSettings, i18n( "Synchronization" ), "folder-sync" );
+        w_cloudSyncSettings->setObjectName( "sync_page" );
+        ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
+        ui_cloudSyncSettings.button_syncNow->setEnabled( MarbleSettings::syncBookmarks() );
+        m_configDialog->addPage( w_cloudSyncSettings, i18n( "Synchronization" ), "folder-sync" );
 
-    connect( ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
-             m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
+        connect( ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
+                 m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
+    }
     
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );

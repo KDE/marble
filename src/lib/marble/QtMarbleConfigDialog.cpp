@@ -57,7 +57,10 @@ class QtMarbleConfigDialogPrivate
           ui_timeSettings(),
           ui_cacheSettings(),
           m_marbleWidget( marbleWidget ),
-          m_pluginModel()
+          m_pluginModel(),
+          m_cloudSyncSettings( 0 ),
+          m_cloudSyncTabIndex( -1 ),
+          m_tabWidget( 0 )
     {
     }
 
@@ -79,13 +82,16 @@ class QtMarbleConfigDialogPrivate
     // Information about the graphics system
     Marble::GraphicsSystem m_initialGraphicsSystem;
     Marble::GraphicsSystem m_previousGraphicsSystem;
+    QWidget* m_cloudSyncSettings;
+    int m_cloudSyncTabIndex;
+    QTabWidget* m_tabWidget;
 };
 
 QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget *parent )
     : QDialog( parent ),
       d( new QtMarbleConfigDialogPrivate( marbleWidget ) )
 {
-    QTabWidget *tabWidget = new QTabWidget( this );
+    d->m_tabWidget = new QTabWidget( this );
     QDialogButtonBox *buttons = 
     new QDialogButtonBox( QDialogButtonBox::Ok
                         | QDialogButtonBox::Apply
@@ -106,7 +112,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     QWidget *w_viewSettings = new QWidget( this );
 
     d->ui_viewSettings.setupUi( w_viewSettings );
-    tabWidget->addTab( w_viewSettings, tr( "View" ) );
+    d->m_tabWidget->addTab( w_viewSettings, tr( "View" ) );
 
     // It's experimental -- so we remove it for now.
     // FIXME: Delete the following  line once OpenGL support is officially supported.
@@ -127,13 +133,13 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     QWidget *w_navigationSettings = new QWidget( this );
 
     d->ui_navigationSettings.setupUi( w_navigationSettings );
-    tabWidget->addTab( w_navigationSettings, tr( "Navigation" ) );
+    d->m_tabWidget->addTab( w_navigationSettings, tr( "Navigation" ) );
 
     // cache page
     QWidget *w_cacheSettings = new QWidget( this );
 
     d->ui_cacheSettings.setupUi( w_cacheSettings );
-    tabWidget->addTab( w_cacheSettings, tr( "Cache and Proxy" ) );
+    d->m_tabWidget->addTab( w_cacheSettings, tr( "Cache and Proxy" ) );
     // Forwarding clear button signals
     connect( d->ui_cacheSettings.button_clearVolatileCache, SIGNAL(clicked()), SIGNAL(clearVolatileCacheClicked()) );
     connect( d->ui_cacheSettings.button_clearPersistentCache, SIGNAL(clicked()), SIGNAL(clearPersistentCacheClicked()) );
@@ -141,18 +147,18 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     // time page
     QWidget *w_timeSettings = new QWidget( this );
     d->ui_timeSettings.setupUi( w_timeSettings );
-    tabWidget->addTab( w_timeSettings, tr( "Date and Time" ) );
+    d->m_tabWidget->addTab( w_timeSettings, tr( "Date and Time" ) );
 
     // routing page
     QWidget *w_routingSettings = new RoutingProfilesWidget( marbleWidget->model() );
-    tabWidget->addTab( w_routingSettings, tr( "Routing" ) );
+    d->m_tabWidget->addTab( w_routingSettings, tr( "Routing" ) );
 
     // plugin page
     d->m_pluginModel.setRenderPlugins( d->m_marbleWidget->renderPlugins() );
     d->w_pluginSettings = new MarblePluginSettingsWidget( this );
     d->w_pluginSettings->setModel( &d->m_pluginModel );
     d->w_pluginSettings->setObjectName( "plugin_page" );
-    tabWidget->addTab( d->w_pluginSettings, tr( "Plugins" ) );
+    d->m_tabWidget->addTab( d->w_pluginSettings, tr( "Plugins" ) );
 
     // Setting the icons for the plugin dialog.
     d->w_pluginSettings->setAboutIcon( QIcon(":/icons/help-about.png") );
@@ -161,15 +167,14 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     connect( this, SIGNAL(rejected()), &d->m_pluginModel, SLOT(retrievePluginState()) );
     connect( this, SIGNAL(accepted()), &d->m_pluginModel, SLOT(applyPluginState()) );
     
-    QWidget *w_cloudSyncSettings = new QWidget( this );
-    d->ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
-    tabWidget->addTab( w_cloudSyncSettings, tr( "Synchronization" ) );
+    d->m_cloudSyncSettings = new QWidget;
+    d->ui_cloudSyncSettings.setupUi( d->m_cloudSyncSettings );
     d->ui_cloudSyncSettings.button_syncNow->setEnabled( syncBookmarks() );
     connect( d->ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()), SIGNAL(syncNowClicked()) );
 
     // Layout
     QVBoxLayout *layout = new QVBoxLayout( this );
-    layout->addWidget( tabWidget );
+    layout->addWidget( d->m_tabWidget );
     layout->addWidget( buttons );
     
     this->setLayout( layout );
@@ -567,6 +572,16 @@ void QtMarbleConfigDialog::initializeCustomTimezone()
         d->m_timezone.insert( 28, -10800 );
         d->m_timezone.insert( 29, -10800 );
         d->m_timezone.insert( 30, -3600 );
+    }
+}
+
+void QtMarbleConfigDialog::setShowCloudSync( bool show )
+{
+    if ( show && d->m_cloudSyncTabIndex < 0 ) {
+        d->m_cloudSyncTabIndex = d->m_tabWidget->addTab( d->m_cloudSyncSettings, tr( "Synchronization" ) );
+    } else if ( !show && d->m_cloudSyncTabIndex >= 0 ) {
+        d->m_tabWidget->removeTab( d->m_cloudSyncTabIndex );
+        d->m_cloudSyncTabIndex = -1;
     }
 }
 

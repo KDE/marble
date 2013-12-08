@@ -297,6 +297,9 @@
   </entry>
  </group>
  <group name="CloudSync">
+  <entry key="showCloudSyncSettings" type="Bool" >
+  <default>false</default>
+ </entry>
   <entry key="enableSync" type="Bool" >
    <default>false</default>
   </entry>
