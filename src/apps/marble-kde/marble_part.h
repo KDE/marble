@@ -24,6 +24,8 @@
 #include <krecentfilesaction.h>
 #include <KDE/KWallet/Wallet>
 
+#include "ui_MarbleCloudSyncSettingsWidget.h"
+
 class KAboutData;
 class KAction;
 class KToggleAction;
@@ -266,6 +268,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
     QHash< int, int > m_timezone;
     QMap<int, QString> m_externalEditorMapping;
+    Ui_MarbleCloudSyncSettingsWidget m_ui_cloudSyncSettings;
 };
 
 }

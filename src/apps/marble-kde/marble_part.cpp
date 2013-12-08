@@ -109,7 +109,6 @@ using namespace Marble;
 #include "ui_MarbleViewSettingsWidget.h"
 #include "ui_MarbleNavigationSettingsWidget.h"
 #include "ui_MarbleTimeSettingsWidget.h"
-#include "ui_MarbleCloudSyncSettingsWidget.h"
 
 namespace Marble
 {
@@ -137,7 +136,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_usingKWallet( true ),
     m_position( i18n( NOT_AVAILABLE ) ),
     m_tileZoomLevel( i18n( NOT_AVAILABLE ) ),
-    m_statusLabel( 0 ),
     m_positionLabel( 0 ),
     m_distanceLabel( 0 )
 {
@@ -1231,25 +1229,25 @@ void MarblePart::repairNode( QDomNode node, const QString &child ) const
 
 void MarblePart::updateCloudSyncStatus(const QString& status, CloudSyncManager::Status status_type )
 {
-    m_statusLabel->setText(status);
+    m_ui_cloudSyncSettings.cloudSyncStatus->setText(status);
     switch (status_type){
         case CloudSyncManager::Success:
-            m_statusLabel->setStyleSheet("QLabel { color : green; }");
+            m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet("QLabel { color : green; }");
             break;
         case CloudSyncManager::Error:
-            m_statusLabel->setStyleSheet("QLabel { color : red; }");
+            m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet("QLabel { color : red; }");
             break;
         case CloudSyncManager::Unknown:
-            m_statusLabel->setStyleSheet("QLabel { color : grey; }");
+            m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet("QLabel { color : grey; }");
             break;
     }
 }
 
 void MarblePart::updateCloudSyncCredentials()
 {
-    m_controlView->cloudSyncManager()->setOwncloudCredentials( MarbleSettings::owncloudServer(),
-                                                               MarbleSettings::owncloudUsername(),
-                                                               MarbleSettings::owncloudPassword());
+    m_controlView->cloudSyncManager()->setOwncloudCredentials( m_ui_cloudSyncSettings.kcfg_owncloudServer->text(),
+                                                               m_ui_cloudSyncSettings.kcfg_owncloudUsername->text(),
+                                                               m_ui_cloudSyncSettings.kcfg_owncloudPassword->text() );
 }
 
 void MarblePart::updateStatusBar()
@@ -1510,18 +1508,16 @@ void MarblePart::editSettings()
     m_configDialog->addPage( w_timeSettings, i18n( "Date & Time" ), "clock" );
     
     // Sync page
-    Ui_MarbleCloudSyncSettingsWidget ui_cloudSyncSettings;
     QWidget *w_cloudSyncSettings = new QWidget( 0 );
 
     w_cloudSyncSettings->setObjectName( "sync_page" );
-    ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
-    ui_cloudSyncSettings.button_syncNow->setEnabled( MarbleSettings::syncBookmarks() );
-    m_statusLabel = ui_cloudSyncSettings.cloudSyncStatus;
+    m_ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
+    m_ui_cloudSyncSettings.button_syncNow->setEnabled( MarbleSettings::syncBookmarks() );
     m_configDialog->addPage( w_cloudSyncSettings, i18n( "Synchronization" ), "folder-sync" );
 
-    connect( ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
+    connect( m_ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()),
              m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
-    connect( ui_cloudSyncSettings.testLoginButton, SIGNAL(clicked()),
+    connect( m_ui_cloudSyncSettings.testLoginButton, SIGNAL(clicked()),
              this, SLOT(updateCloudSyncCredentials()) );
 
     connect( m_controlView->cloudSyncManager(), SIGNAL(statusChanged(QString, CloudSyncManager::Status)),
