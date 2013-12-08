@@ -52,7 +52,10 @@
         <file alias="marble/dialog-ok.png">../../apps/marble-ui/icons/16x16/dialog-ok.png</file>
         <file alias="marble/edit-delete.png">../../apps/marble-ui/icons/16x16/edit-delete.png</file>
         <file alias="marble/system-software-update.png">../../apps/marble-ui/icons/16x16/system-software-update.png</file>
+        <file alias="marble/document-new.png">../../apps/marble-ui/icons/16x16/document-new.png</file>
         <file alias="marble/document-open.png">../../apps/marble-ui/icons/16x16/document-open.png</file>
+        <file alias="marble/document-save.png">../../apps/marble-ui/icons/16x16/document-save.png</file>
+        <file alias="marble/document-save-as.png">../../apps/marble-ui/icons/document-save-as.png</file>
         <file alias="marble/webpopup/arrow2_topleft.png">../../../data/bitmaps/webpopup/arrow2_topleft.png</file>
         <file alias="marble/webpopup/arrow2_topleft_shadow.png">../../../data/bitmaps/webpopup/arrow2_topleft_shadow.png</file>
         <file alias="marble/webpopup/webpopup2.png">../../../data/bitmaps/webpopup/webpopup2.png</file>
