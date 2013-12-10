@@ -6,12 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>230</width>
-    <height>169</height>
+    <width>406</width>
+    <height>222</height>
    </rect>
   </property>
   <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::ExpandingFieldsGrow</enum>
+   </property>
    <item row="0" column="0">
+    <widget class="QLabel" name="appKeyLabel">
+     <property name="text">
+      <string>AppKey</string>
+     </property>
+     <property name="buddy">
+      <cstring>appKey</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="appKey"/>
+   </item>
+   <item row="2" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>Preference:</string>
@@ -21,31 +37,31 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="2" column="1">
     <widget class="QComboBox" name="preference"/>
    </item>
-   <item row="1" column="1">
+   <item row="4" column="1">
     <widget class="QCheckBox" name="noMotorways">
      <property name="text">
       <string>Avoid motorways</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="5" column="1">
     <widget class="QCheckBox" name="noTollways">
      <property name="text">
       <string>Avoid tollways</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
+   <item row="6" column="1">
     <widget class="QCheckBox" name="noFerries">
      <property name="text">
       <string>Avoid ferries</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="0">
+   <item row="7" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Ascending slope:</string>
@@ -55,10 +71,10 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
+   <item row="7" column="1">
     <widget class="QComboBox" name="ascending"/>
    </item>
-   <item row="5" column="0">
+   <item row="8" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>Descending slope:</string>
@@ -68,8 +84,18 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
+   <item row="8" column="1">
     <widget class="QComboBox" name="descending"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;Key is required for MapQuest routing to work. &lt;br/&gt;You can register it &lt;a href=&quot;http://developer.mapquest.com/web/products/open&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;there.&lt;/span&gt;&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

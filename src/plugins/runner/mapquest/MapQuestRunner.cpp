@@ -52,6 +52,11 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
 
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["mapquest"];
 
+    if ( settings.value( "appKey" ).toString().isEmpty() )
+    {
+        return;
+    }
+
     QString url = "http://open.mapquestapi.com/directions/v1/route?callback=renderAdvancedNarrative&outFormat=xml&narrativeType=text&shapeFormat=raw&generalize=0";
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     append( &url, "from", QString::number( route->source().latitude( degree ), 'f', 6 ) + ',' + QString::number( route->source().longitude( degree ), 'f', 6 ) );
@@ -102,8 +107,9 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
                 append( &url, "roadGradeStrategy", settings["ascending"].toString() );
             }
         }
-
-    m_request.setUrl( QUrl( url ) );
+    QUrl qurl(url);
+    qurl.addEncodedQueryItem( "key", settings.value( "appKey" ).toByteArray() );
+    m_request.setUrl( qurl );
     m_request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "MapQuestRunner" ) );
 
     QEventLoop eventLoop;

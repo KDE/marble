@@ -16,7 +16,7 @@ add_subdirectory( gosmore-routing )
 # Services or MapQuest Content by anyone using your Credentials."
 # (from http://developer.mapquest.com/web/info/terms-of-use)
 # Good bye, MapQuest
-# add_subdirectory( mapquest )
+add_subdirectory( mapquest )
 
 add_subdirectory( monav )
 add_subdirectory( openrouteservice )

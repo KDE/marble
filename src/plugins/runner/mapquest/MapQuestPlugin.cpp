@@ -104,6 +104,10 @@ public:
         if ( !settings.contains( "descending" ) ) {
             settings.insert( "descending", "DEFAULT_STRATEGY" );
         }
+        if ( !settings.contains( "appKey" ) ) {
+            settings.insert( "appKey", "" );
+        }
+        ui_configWidget->appKey->setText( settings.value( "appKey" ).toString() );
         ui_configWidget->preference->setCurrentIndex(
                     ui_configWidget->preference->findData( settings.value( "preference" ).toString() ) );
         ui_configWidget->noMotorways->setCheckState( static_cast<Qt::CheckState>( settings.value( "noMotorways" ).toInt() ) );
@@ -118,6 +122,7 @@ public:
     virtual QHash<QString, QVariant> settings() const
     {
         QHash<QString,QVariant> settings;
+        settings.insert( "appKey", ui_configWidget->appKey->text() );
         settings.insert( "preference",
                          ui_configWidget->preference->itemData( ui_configWidget->preference->currentIndex() ) );
         settings.insert( "noMotorways", ui_configWidget->noMotorways->checkState() );
