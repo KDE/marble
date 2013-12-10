@@ -51,7 +51,15 @@ bool PopupLayer::render( GeoPainter *painter, ViewportParams *viewport,
     if ( visible() ) {
         setAppropriateSize( viewport );
         if ( m_adjustMap ) {
-            m_widget->centerOn( m_popupItem->coordinate(), true );
+            GeoDataCoordinates coords = m_popupItem->coordinate();
+            m_widget->centerOn( coords, false );
+            qreal sx, sy, lon, lat;
+            viewport->screenCoordinates(coords, sx, sy);
+            sx = viewport->radius() < viewport->width() ? 0.5 * (viewport->width() + viewport->radius()) : 0.75 * viewport->width();
+            viewport->geoCoordinates(sx, sy, lon, lat, GeoDataCoordinates::Radian);
+            coords.setLatitude(lat);
+            coords.setLongitude(lon);
+            m_widget->centerOn( coords, true );
             m_adjustMap = false;
         }
         m_popupItem->paintEvent( painter, viewport );
@@ -135,10 +143,10 @@ void PopupLayer::setAppropriateSize( const ViewportParams *viewport )
     qreal margin = 15.0;
 
     QSizeF maximumSize;
-    maximumSize.setWidth( viewport->width() / 2.0 - margin );
-    maximumSize.setHeight( viewport->height() - 2.0 * margin );
+    maximumSize.setWidth( viewport->width() - margin );
+    maximumSize.setHeight( viewport->height() - margin );
 
-    QSizeF minimumSize( 240.0, 240.0 );
+    QSizeF minimumSize( 100.0, 100.0 );
 
     m_popupItem->setSize( m_requestedSize.boundedTo( maximumSize ).expandedTo( minimumSize ) );
 }
