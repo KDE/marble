@@ -339,16 +339,18 @@
              </mediaobject>
          </screenshot>         
          <para>
-             The left side lets you configure which routing backends are queried for routes. Six or more backends are supported by &marble;, some working online and the other ones working offline. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
+             The left side lets you configure which routing backends are queried for routes. Seven or more backends are supported by &marble;, some working online and the other ones working offline. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
          </para>
          <itemizedlist>
              <listitem>
                <para>Gosmore: An offline router that also serves as the backend for the Yours online router</para>
              </listitem>
-             <!-- Excluded due to the new terms of use
              <listitem>
-               <para>Mapquest: An online router which provides advanced turn-by-turn instructions</para>
-               </listitem>-->
+               <para>MapQuest: An online router which provides advanced turn-by-turn instructions</para>
+	       <note>
+		 <para>An AppKey is required for MapQuest routing to work. You can register the AppKey <ulink url="http://developer.mapquest.com/web/products/open">here</ulink>.</para>
+	       </note>
+	     </listitem>
              <listitem>
                <para>Monav: An offline router that is very fast even when calculating very large routes</para>
              </listitem>
