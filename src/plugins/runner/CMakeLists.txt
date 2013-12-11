@@ -15,6 +15,7 @@ add_subdirectory( openrouteservice )
 add_subdirectory( open-source-routing-machine )
 add_subdirectory( routino )
 add_subdirectory( yours )
+add_subdirectory( cyclestreets )
 # traveling-salesman works, but it is quite slow (tested version 1.0.3-RC1)
 #add_subdirectory( traveling-salesman )
 
