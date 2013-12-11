@@ -62,9 +62,13 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
         return;
     }
 
+    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["cyclestreets"];
+
     QUrl url("http://www.cyclestreets.net/api/journey.xml");
     url.addQueryItem( "key", "cdccf13997d59e70" );
     url.addQueryItem( "useDom", "1" );
+    url.addQueryItem( "plan", settings["plan"].toString() );
+    url.addQueryItem( "speed", settings["speed"].toString() );
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     QString itinerarypoints;
     itinerarypoints.append( QString::number( route->source().longitude( degree ), 'f', 6 ) + ',' + QString::number( route->source().latitude( degree ), 'f', 6 ) );

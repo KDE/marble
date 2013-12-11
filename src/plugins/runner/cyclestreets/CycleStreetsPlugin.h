@@ -42,6 +42,8 @@ public:
 
     virtual RoutingRunner *newRunner() const;
 
+    ConfigWidget* configWidget();
+
     virtual bool supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
 
 };
