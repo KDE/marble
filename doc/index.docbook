@@ -38,13 +38,13 @@
 		 </copyright>
 		 <copyright>
 			 <year>2010</year>
-                         <year>2012</year>
+                         <year>2013</year>
 			 <holder>&Dennis.Nienhueser;</holder>
 		 </copyright>
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2013-11-17</date>
+		 <date>2013-12-12</date>
 		 <releaseinfo>1.7</releaseinfo>
 
 		 <abstract>
@@ -339,9 +339,12 @@
              </mediaobject>
          </screenshot>         
          <para>
-             The left side lets you configure which routing backends are queried for routes. Seven or more backends are supported by &marble;, some working online and the other ones working offline. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
+             The left side lets you configure which routing backends are queried for routes. Eight or more backends are supported by &marble;, some working online and the other ones working offline. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
          </para>
          <itemizedlist>
+	     <listitem>
+               <para>CycleStreets: Bicycle routing for the United Kingdom using cyclestreets.net</para>
+             </listitem>
              <listitem>
                <para>Gosmore: An offline router that also serves as the backend for the Yours online router</para>
              </listitem>
