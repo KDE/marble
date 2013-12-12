@@ -232,8 +232,8 @@ bool MarblePart::openUrl( const KUrl &url )
     }
 
     KMessageBox::error( widget(),
-        tr( "Sorry, unable to open '%1'. The file is not accessible." ).arg( fileInfo.fileName() ),
-        tr( "File not accessible" ) );
+        i18n( "Sorry, unable to open '%1'. The file is not accessible." ).arg( fileInfo.fileName() ),
+        i18n( "File not accessible" ) );
     return false;
 }
 
@@ -442,9 +442,9 @@ void MarblePart::readSettings()
     if ( m_wallet == 0 ) {
         if ( MarbleSettings::accessKWallet() ) {
             KDialog *confirmDialog = new KDialog( m_controlView );
-            confirmDialog->setCaption( tr( "Please allow access to KWallet." ) );
+            confirmDialog->setCaption( i18n( "Please allow access to KWallet." ) );
             QLabel *body = new QLabel();
-            body->setText( tr( "You haven't allowed Marble to use KWallet yet.\n"
+            body->setText( i18n( "You haven't allowed Marble to use KWallet yet.\n"
                                "This is dangerous since Marble will store your password without encryption.\n"
                                "Are you sure?" ) );
             confirmDialog->setMainWidget( body );
@@ -461,9 +461,9 @@ void MarblePart::readSettings()
                     // If user didn't see KWallet dialog it means that he deny forever.
                     // Show instructions how to disable the block.
                     KDialog *confirmDialog = new KDialog( m_controlView );
-                    confirmDialog->setCaption( tr( "Do you allow Marble to use KWallet?" ) );
+                    confirmDialog->setCaption( i18n( "Do you allow Marble to use KWallet?" ) );
                     QLabel *body = new QLabel();
-                    body->setText( tr( "You still don't allow Marble to use KWallet.\n"
+                    body->setText( i18n( "You still don't allow Marble to use KWallet.\n"
                                        "If you haven't seen the KWallet dialog asking to allow access, it means that you have disabled it.\n"
                                        "If you would like to change this see System Information -> Account Details -> KDE Wallet -> Access Control.\n"
                                        "Choose your wallet and allow Marble to use it." ) );
@@ -541,7 +541,7 @@ void MarblePart::readSettings()
         int numProfiles = profilesGroup.readEntry( "Num", 0 );
         for ( int i = 0; i < numProfiles; ++i ) {
             KConfigGroup profileGroup = profilesGroup.group( QString( "Profile %0" ).arg(i) );
-            QString name = profileGroup.readEntry( "Name", tr( "Unnamed" ) );
+            QString name = profileGroup.readEntry( "Name", i18n( "Unnamed" ) );
             RoutingProfile profile( name );
             foreach ( const QString& pluginName, profileGroup.groupList() ) {
                 KConfigGroup pluginGroup = profileGroup.group( pluginName );
@@ -972,7 +972,7 @@ void MarblePart::setupActions()
     m_toggleBookmarkDisplayAction = new KAction( this );
     actionCollection()->addAction( "show_bookmarks", m_toggleBookmarkDisplayAction );
     m_toggleBookmarkDisplayAction->setText( i18nc( "Show Bookmarks", "Show &Bookmarks" ) );
-    m_toggleBookmarkDisplayAction->setStatusTip( tr( "Show or hide bookmarks in the map" ) );
+    m_toggleBookmarkDisplayAction->setStatusTip( i18n( "Show or hide bookmarks in the map" ) );
     m_toggleBookmarkDisplayAction->setCheckable( true );
     m_toggleBookmarkDisplayAction->setChecked( m_controlView->marbleModel()->bookmarkManager()->showBookmarks() );
     connect( m_toggleBookmarkDisplayAction, SIGNAL(toggled(bool)),
@@ -980,7 +980,7 @@ void MarblePart::setupActions()
 
     m_setHomeAction = new KAction( this );
     actionCollection()->addAction( "set_home", m_setHomeAction );
-    m_setHomeAction->setText( tr( "&Set Home Location" ) );
+    m_setHomeAction->setText( i18n( "&Set Home Location" ) );
     m_setHomeAction->setIcon( KIcon( "go-home" ) );
     connect( m_setHomeAction, SIGNAL(triggered()),
              this,                SLOT(setHome()) );
