@@ -614,7 +614,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     // Create Settings->Panels Menu
     // Toggle All Panels action
     m_togglePanelVisibilityAction = new QAction( tr("Hide &All Panels"), this);
-    m_togglePanelVisibilityAction->setShortcut(tr("F9"));
+    m_togglePanelVisibilityAction->setShortcut( Qt::Key_F9 );
     m_togglePanelVisibilityAction->setStatusTip(tr("Show or hide all panels."));
     connect(m_togglePanelVisibilityAction, SIGNAL(triggered()), this, SLOT(togglePanelVisibility()));
 
