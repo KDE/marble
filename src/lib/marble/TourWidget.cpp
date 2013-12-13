@@ -68,9 +68,9 @@ public:
 };
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
-    : q( parent ),
-      m_widget( 0 ),
-      m_isChanged( false )
+    : m_isChanged( false ),
+      q( parent ),
+      m_widget( 0 )
 {
     m_tourUi.setupUi( parent );
     m_tourUi.m_listView->setModel( &m_model );
