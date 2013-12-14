@@ -110,13 +110,19 @@ void RoutingInputWidgetPrivate::updateDescription()
 {
     GeoDataPlacemark const placemark = (*m_route)[m_index];
     GeoDataExtendedData const address = placemark.extendedData();
-    if ( address.contains( "house_number" ) && address.contains( "road" ) && address.contains( "city" ) )
+    if ( address.contains( "road" ) && address.contains( "city" ) )
     {
-        QString const name = QObject::tr("%1 %2, %3", "An address with parameters %1=house number, %2=road, %3=city");
-        QString const houseNumber = address.value( "house_number" ).value().toString();
         QString const road = address.value( "road" ).value().toString();
         QString const city = address.value( "city" ).value().toString();
-        m_lineEdit->setText( name.arg( houseNumber ).arg( road ).arg( city ) );
+
+        if ( address.contains( "house_number" ) ) {
+            QString const houseNumber = address.value( "house_number" ).value().toString();
+            QString const name = QObject::tr("%1 %2, %3", "An address with parameters %1=house number, %2=road, %3=city");
+            m_lineEdit->setText( name.arg( houseNumber ).arg( road ).arg( city ) );
+        } else {
+            QString const name = QObject::tr("%2, %3", "An address with parameters %1=road, %2=city");
+            m_lineEdit->setText( name.arg( road ).arg( city ) );
+        }
     }
     else if ( m_route->name( m_index ).isEmpty() )
     {
