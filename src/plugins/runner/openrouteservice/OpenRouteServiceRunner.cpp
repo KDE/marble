@@ -243,14 +243,14 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
 
     GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName( "Route" );
-
+    QTime time;
     QDomNodeList summary = root.elementsByTagName( "xls:RouteSummary" );
     if ( summary.size() > 0 ) {
-        QDomNodeList time = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalTime" );
+        QDomNodeList timeNodeList = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalTime" );
         QDomNodeList distance = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalDistance" );
-        if ( time.size() == 1 && distance.size() == 1 ) {
+        if ( timeNodeList.size() == 1 && distance.size() == 1 ) {
             QRegExp regexp = QRegExp( "^P(?:(\\d+)D)?T(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S" );
-            if ( regexp.indexIn( time.item( 0 ).toElement().text() ) == 0 ) {
+            if ( regexp.indexIn( timeNodeList.item( 0 ).toElement().text() ) == 0 ) {
                 QStringList matches = regexp.capturedTexts();
                 unsigned int hours( 0 ), minutes( 0 ), seconds( 0 );
                 switch ( matches.size() ) {
@@ -267,10 +267,10 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
                     seconds = regexp.cap( matches.size() - 1 ).toInt();
                     break;
                 default:
-                    mDebug() << "Unable to parse time string " << time.item( 0 ).toElement().text();
+                    mDebug() << "Unable to parse time string " << timeNodeList.item( 0 ).toElement().text();
                 }
 
-                QTime time( hours, minutes, seconds, 0 );
+                time = QTime( hours, minutes, seconds, 0 );
                 qreal totalDistance = distance.item( 0 ).attributes().namedItem( "value" ).nodeValue().toDouble();
                 QString unit = distance.item( 0 ).attributes().namedItem( "uom" ).nodeValue();
                 if ( unit == "M" ) {
@@ -303,14 +303,27 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     }
     routePlacemark->setGeometry( routeWaypoints );
 
-    QString name = "%1 %2 (OpenRouteService)";
+    QString name = "%1 %2 | %3 | OpenRouteService";
     QString unit = QLatin1String( "m" );
+    QString const hoursString = tr("%n hours","journey duration, hours part", time.hour());
+    QString const minutesString = tr("%n minutes", "journey duration, minutes part", time.minute());
+    QString const timeString = time.hour() ? tr("%1, %2", "journey duration, where %1=%n hours and %2=%m minutes").arg( hoursString ).arg( minutesString )  : minutesString;
     qreal length = routeWaypoints->length( EARTH_RADIUS );
+    GeoDataExtendedData routeData;
+    GeoDataData lengthData;
+    lengthData.setName( "length" );
+    lengthData.setValue( length );
+    GeoDataData durationData;
+    durationData.setName( "duration" );
+    durationData.setValue( time.toString( Qt::ISODate ) );
+    routeData.addValue( lengthData );
+    routeData.addValue( durationData );
+    routePlacemark->setExtendedData( routeData );
     if (length >= 1000) {
         length /= 1000.0;
         unit = "km";
     }
-    result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ) );
+    result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ).arg( timeString ) );
 
     result->append( routePlacemark );
 
