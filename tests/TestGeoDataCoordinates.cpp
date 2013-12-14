@@ -510,51 +510,51 @@ enum SphereType {PosSphere, NegSphere};
 enum UnitsType {NoUnits, WithUnits};
 enum SpacesType {NoSpaces, WithSpaces};
 
-static QString
-createDegreeString(SignType signType,
-                   int degreeValue, int minutesValue, qreal secondsValue,
-                   UnitsType unitsType, SpacesType spacesType)
-{
-    QString string;
+//static QString
+//createDegreeString(SignType signType,
+//                   int degreeValue, int minutesValue, qreal secondsValue,
+//                   UnitsType unitsType, SpacesType spacesType)
+//{
+//    QString string;
 
-    // add degree
-    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
-    string.append(QString::number(degreeValue));
-    if (unitsType == WithUnits) string.append(QChar(0xb0));
+//    // add degree
+//    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
+//    string.append(QString::number(degreeValue));
+//    if (unitsType == WithUnits) string.append(QChar(0xb0));
 
-    // add minutes
-    string.append(QLatin1Char(' ') + QString::number(minutesValue));
-    if (unitsType == WithUnits) string.append(QLatin1Char('\''));
+//    // add minutes
+//    string.append(QLatin1Char(' ') + QString::number(minutesValue));
+//    if (unitsType == WithUnits) string.append(QLatin1Char('\''));
 
-    // add seconds
-    string.append(QString::fromLatin1(" %L1").arg(secondsValue, 0, 'f', 10));
-    if (unitsType == WithUnits) string.append(QLatin1Char('"'));
+//    // add seconds
+//    string.append(QString::fromLatin1(" %L1").arg(secondsValue, 0, 'f', 10));
+//    if (unitsType == WithUnits) string.append(QLatin1Char('"'));
 
-    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
+//    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
 
-    return string;
-}
+//    return string;
+//}
 
-static QString
-createDegreeString(SignType signType,
-                   int degreeValue, qreal minutesValue,
-                   UnitsType unitsType, SpacesType spacesType)
-{
-    QString string;
+//static QString
+//createDegreeString(SignType signType,
+//                   int degreeValue, qreal minutesValue,
+//                   UnitsType unitsType, SpacesType spacesType)
+//{
+//    QString string;
 
-    // add degree
-    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
-    string.append(QString::number(degreeValue));
-    if (unitsType == WithUnits) string.append(QChar(0xb0));
+//    // add degree
+//    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
+//    string.append(QString::number(degreeValue));
+//    if (unitsType == WithUnits) string.append(QChar(0xb0));
 
-    // add minutes
-    string.append(QString::fromLatin1(" %L1").arg(minutesValue, 0, 'f', 10));
-    if (unitsType == WithUnits) string.append(QLatin1Char('\''));
+//    // add minutes
+//    string.append(QString::fromLatin1(" %L1").arg(minutesValue, 0, 'f', 10));
+//    if (unitsType == WithUnits) string.append(QLatin1Char('\''));
 
-    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
+//    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
 
-    return string;
-}
+//    return string;
+//}
 
 static QString
 createDegreeString(SignType signType,
