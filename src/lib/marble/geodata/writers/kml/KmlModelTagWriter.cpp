@@ -31,8 +31,7 @@ bool KmlModelTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 
     writer.writeStartElement( kml::kmlTag_Model );
 
-    writer.writeOptionalElement( kml::kmlTag_altitudeMode, KmlGroundOverlayWriter::altitudeModeToString(model->altitudeMode()),
-                                 KmlGroundOverlayWriter::altitudeModeToString(Marble::ClampToGround ) );
+    KmlGroundOverlayWriter::writeAltitudeMode( writer, model->altitudeMode());
 
     const GeoDataLocation location = model->location() ;
 

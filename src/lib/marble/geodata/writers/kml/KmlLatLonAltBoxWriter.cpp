@@ -31,8 +31,7 @@ bool KmlLatLonAltBoxWriter::write( const GeoNode *node,
     writer.writeTextElement( kml::kmlTag_west,  QString::number(latLonAltBox->west( GeoDataCoordinates::Degree )) );
     writer.writeTextElement( kml::kmlTag_minAltitude, QString::number(latLonAltBox->minAltitude()) );
     writer.writeTextElement( kml::kmlTag_maxAltitude, QString::number(latLonAltBox->maxAltitude()) );
-    QString const altitudeMode = KmlGroundOverlayWriter::altitudeModeToString( latLonAltBox->altitudeMode() );
-    writer.writeTextElement( kml::kmlTag_altitudeMode, altitudeMode );
+    KmlGroundOverlayWriter::writeAltitudeMode( writer, latLonAltBox->altitudeMode());
     writer.writeEndElement();
     return true;
 }

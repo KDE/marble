@@ -57,8 +57,7 @@ bool KmlCameraTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     writer.writeOptionalElement( "roll", camera->roll() );
     writer.writeOptionalElement( "tilt", camera->tilt() );
     writer.writeOptionalElement( "heading", camera->heading() );
-    QString const altitudeMode = KmlGroundOverlayWriter::altitudeModeToString(camera->altitudeMode());
-    writer.writeOptionalElement( kml::kmlTag_altitudeMode, altitudeMode, "clampToGround" );
+    KmlGroundOverlayWriter::writeAltitudeMode( writer, camera->altitudeMode() );
 
     writer.writeEndElement();
 

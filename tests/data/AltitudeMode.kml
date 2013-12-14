@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Folder>
+	<visibility>0</visibility>
+	<GroundOverlay>
+		<altitude>45</altitude>
+		<altitudeMode>absolute</altitudeMode>
+	</GroundOverlay>
+	<GroundOverlay>
+		<altitude>45</altitude>
+		<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+	</GroundOverlay>
+</Folder>
+</kml>

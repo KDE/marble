@@ -147,7 +147,9 @@ enum OnStartup {
 enum AltitudeMode {
     ClampToGround,      ///< Altitude always sticks to ground level
     RelativeToGround,   ///< Altitude is always given relative to ground level
-    Absolute            ///< Altitude is given relative to the sealevel
+    Absolute,            ///< Altitude is given relative to the sealevel
+    RelativeToSeaFloor,  ///< Altitude is given relative to the sea floor
+    ClampToSeaFloor      ///< Altitude always sticks to sea floor
 };
 
 enum Pole {

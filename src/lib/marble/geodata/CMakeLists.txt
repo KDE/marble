@@ -251,6 +251,7 @@ geodata/handlers/kml/KmlFlyToTagHandler.cpp
 geodata/handlers/kml/KmlFlyToViewTagHandler.cpp
 geodata/handlers/kml/KmlFolderTagHandler.cpp
 geodata/handlers/kml/KmlGroundOverlayTagHandler.cpp
+geodata/handlers/kml/KmlGxAltitudeModeTagHandler.cpp
 geodata/handlers/kml/KmlGxTimeSpanTagHandler.cpp
 geodata/handlers/kml/KmlGxTimeStampTagHandler.cpp
 geodata/handlers/kml/KmlHeadingTagHandler.cpp
