@@ -24,6 +24,10 @@
 #include "CloudRouteModel.h"
 #include "GeoDataPlacemark.h"
 #include "CloudSyncManager.h"
+#include "GeoDataDocument.h"
+#include "GeoDocument.h"
+#include "GeoDataTypes.h"
+#include "GeoDataExtendedData.h"
 
 #include <QNetworkAccessManager>
 #include <QScriptValueIterator>
@@ -116,24 +120,6 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
     data.append( "\r\n" );
     data.append( QString( boundary + "\r\n" ).toUtf8() );
 
-    // Duration part
-    data.append( "Content-Disposition: form-data; name=\"duration\"" );
-    data.append( "\r\n\r\n" );
-    data.append( "0\r\n" );
-    data.append( QString( boundary + "\r\n" ).toUtf8() );
-
-    // Distance part
-    data.append( "Content-Disposition: form-data; name=\"distance\"" );
-    data.append( "\r\n\r\n" );
-    data.append( "0\r\n" );
-    data.append( QString( boundary + "\r\n" ).toUtf8() );
-
-    // KML part
-    data.append( QString( "Content-Disposition: form-data; name=\"kml\"; filename=\"%0.kml\"" ).arg( timestamp ).toUtf8() );
-    data.append( "\r\n" );
-    data.append( "Content-Type: application/vnd.google-earth.kml+xml" );
-    data.append( "\r\n\r\n" );
-
     QFile kmlFile( d->m_cacheDir.absolutePath() + QString( "/%0.kml" ).arg( timestamp ) );
 
     if( !kmlFile.open( QFile::ReadOnly ) ) {
@@ -142,6 +128,58 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
         return;
     }
 
+    GeoDataParser parser(GeoData_KML);
+    if (!parser.read(&kmlFile)) {
+        mDebug() << "[OwncloudSyncBackend] KML file" << kmlFile.fileName()
+                 << "is broken so I can't fill required properties";
+        return;
+    }
+
+    GeoDataDocument *root = dynamic_cast<GeoDataDocument*>(parser.releaseDocument());
+    if (!root || root->size() < 2) {
+        mDebug() << "[OwncloudSyncBackend] Root document is broken";
+        return;
+    }
+
+    GeoDataDocument *doc = dynamic_cast<GeoDataDocument*>(root->child(1));
+    if (!doc || doc->nodeType() != GeoDataTypes::GeoDataDocumentType || doc->size() < 1) {
+        mDebug() << "[OwncloudSyncBackend] Tracking document is broken";
+        return;
+    }
+
+    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(doc->child(0));
+    if (!placemark || placemark->nodeType() != GeoDataTypes::GeoDataPlacemarkType) {
+        mDebug() << "[OwncloudSyncBackend] Placemark is broken";
+        return;
+    }
+
+    // Duration part
+    double duration =
+            QTime().secsTo( QTime::fromString( placemark->extendedData().value("duration").value().toString(), Qt::ISODate ) ) / 60.0;
+    mDebug() << "[Owncloud] Duration on write is" << duration;
+    data.append( "Content-Disposition: form-data; name=\"duration\"" );
+    data.append( "\r\n\r\n" );
+    data.append( QString::number(duration).toUtf8() );
+    data.append( "\r\n" );
+    data.append( QString( boundary + "\r\n" ).toUtf8() );
+
+    // Distance part
+    double distance =
+            placemark->extendedData().value("length").value().toDouble();
+    mDebug() << "[Owncloud] Distance on write is" << distance;
+    data.append( "Content-Disposition: form-data; name=\"distance\"" );
+    data.append( "\r\n\r\n" );
+    data.append( QString::number(distance).toUtf8() );
+    data.append( "\r\n" );
+    data.append( QString( boundary + "\r\n" ).toUtf8() );
+
+    // KML part
+    data.append( QString( "Content-Disposition: form-data; name=\"kml\"; filename=\"%0.kml\"" ).arg( timestamp ).toUtf8() );
+    data.append( "\r\n" );
+    data.append( "Content-Type: application/vnd.google-earth.kml+xml" );
+    data.append( "\r\n\r\n" );
+
+    kmlFile.seek(0); // just to be sure
     data.append( kmlFile.readAll() );
     data.append( "\r\n" );
     data.append( QString( boundary + "\r\n" ).toUtf8() );
