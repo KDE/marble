@@ -53,7 +53,7 @@ AudioOutputPrivate::AudioOutputPrivate( AudioOutput* parent ) :
 
 void AudioOutputPrivate::audioOutputFinished()
 {
-    m_output->setCurrentSource( QString() );
+    m_output->setCurrentSource( Phonon::MediaSource() );
     m_output->clearQueue();
 }
 
@@ -72,7 +72,7 @@ void AudioOutputPrivate::reset()
 {
     if ( m_output ) {
         m_output->stop();
-        m_output->setCurrentSource( QString() );
+        m_output->setCurrentSource( Phonon::MediaSource() );
         m_output->clearQueue();
     }
 
@@ -83,7 +83,7 @@ void AudioOutputPrivate::playInstructions()
 {
     setupAudio();
     if ( m_output ) {
-        m_output->enqueue( m_voiceNavigation.instruction() );
+        m_output->enqueue( QUrl::fromLocalFile( m_voiceNavigation.instruction() ) );
         m_output->play();
     }
 }
