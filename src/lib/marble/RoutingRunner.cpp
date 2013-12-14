@@ -10,6 +10,7 @@
 #include "RoutingRunner.h"
 
 #include "GeoDataPlacemark.h"
+#include "GeoDataExtendedData.h"
 
 #include <QString>
 
@@ -30,6 +31,45 @@ void RoutingRunner::setModel( const MarbleModel *model )
 const MarbleModel *RoutingRunner::model() const
 {
     return m_model;
+}
+
+const QString RoutingRunner::lengthString( qreal& length) const
+{
+    const QString result = "%1 %2";
+    QString unit = QLatin1String( "m" );
+    if (length >= 1000) {
+        length /= 1000.0;
+        unit = "km";
+    }
+    return result.arg( length, 0, 'f', 1 ).arg( unit );
+}
+
+const QString RoutingRunner::durationString(const QTime& duration) const
+{
+    const QString hoursString = tr("%n hours","journey duration, hours part", duration.hour());
+    const QString minutesString = tr("%n minutes", "journey duration, minutes part", duration.minute());
+    const QString timeString = duration.hour() ? tr("%1, %2", "journey duration, where %1=%n hours and %2=%m minutes").arg( hoursString ).arg( minutesString )  : minutesString;
+    return timeString;
+}
+
+const QString RoutingRunner::nameString(const QString& name, qreal& length, const QTime& duration) const
+{
+    const QString result = "%1 | %2 | %3";
+    return result.arg( lengthString( length ) ).arg( durationString( duration ) ).arg( name );
+}
+
+const GeoDataExtendedData RoutingRunner::routeData(const qreal& length, const QTime& duration) const
+{
+    GeoDataExtendedData result;
+    GeoDataData lengthData;
+    lengthData.setName( "length" );
+    lengthData.setValue( length );
+    result.addValue( lengthData );
+    GeoDataData durationData;
+    durationData.setName( "duration" );
+    durationData.setValue( duration.toString( Qt::ISODate ) );
+    result.addValue( durationData );
+    return result;
 }
 
 }

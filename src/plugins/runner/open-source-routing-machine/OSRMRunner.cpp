@@ -213,14 +213,13 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input )
         routeWaypoints = decodePolyline( data.property( "route_geometry" ).toString() );
         routePlacemark->setGeometry( routeWaypoints );
 
-        QString name = "%1 %2 (OSRM)";
-        QString unit = QLatin1String( "m" );
+        QTime time;
+        time = time.addSecs( data.property( "route_summary" ).property("total_time").toNumber() );
         qreal length = routeWaypoints->length( EARTH_RADIUS );
-        if (length >= 1000) {
-            length /= 1000.0;
-            unit = "km";
-        }
-        result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ) );
+        const QString name = nameString( "OSRM", length, time );
+        const GeoDataExtendedData extendedData = routeData( length, time );
+        routePlacemark->setExtendedData( extendedData );
+        result->setName( name );
         result->append( routePlacemark );
     }
 

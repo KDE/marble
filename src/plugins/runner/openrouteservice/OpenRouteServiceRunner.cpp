@@ -303,27 +303,11 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     }
     routePlacemark->setGeometry( routeWaypoints );
 
-    QString name = "%1 %2 | %3 | OpenRouteService";
-    QString unit = QLatin1String( "m" );
-    QString const hoursString = tr("%n hours","journey duration, hours part", time.hour());
-    QString const minutesString = tr("%n minutes", "journey duration, minutes part", time.minute());
-    QString const timeString = time.hour() ? tr("%1, %2", "journey duration, where %1=%n hours and %2=%m minutes").arg( hoursString ).arg( minutesString )  : minutesString;
     qreal length = routeWaypoints->length( EARTH_RADIUS );
-    GeoDataExtendedData routeData;
-    GeoDataData lengthData;
-    lengthData.setName( "length" );
-    lengthData.setValue( length );
-    GeoDataData durationData;
-    durationData.setName( "duration" );
-    durationData.setValue( time.toString( Qt::ISODate ) );
-    routeData.addValue( lengthData );
-    routeData.addValue( durationData );
-    routePlacemark->setExtendedData( routeData );
-    if (length >= 1000) {
-        length /= 1000.0;
-        unit = "km";
-    }
-    result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ).arg( timeString ) );
+    const QString name = nameString( "OpenRouteService", length, time );
+    const GeoDataExtendedData data = routeData( length, time );
+    result->setExtendedData( data );
+    result->setName( name );
 
     result->append( routePlacemark );
 
