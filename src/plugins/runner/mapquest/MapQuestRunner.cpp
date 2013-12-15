@@ -220,14 +220,13 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     }
     routePlacemark->setGeometry( routeWaypoints );
 
-    QString name = "%1 %2 (MapQuest)";
-    QString unit = QLatin1String( "m" );
+    QTime time;
+    time = time.addSecs( root.elementsByTagName( "time" ).at( 0 ).toElement().text().toInt() );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
-    if (length >= 1000) {
-        length /= 1000.0;
-        unit = "km";
-    }
-    result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ) );
+    const QString name = nameString( "MapQuest", length, time );
+    const GeoDataExtendedData data = routeData( length, time );
+    routePlacemark->setExtendedData( data );
+    result->setName( name );
     result->append( routePlacemark );
 
     QMap<int,int> mapping;

@@ -166,14 +166,15 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     }
     routePlacemark->setGeometry( routeWaypoints );
 
-    QString name = "%1 %2 (CycleStreets)";
-    QString unit = QLatin1String( "m" );
-    qreal lenght = routeWaypoints->length( EARTH_RADIUS );
-    if ( lenght >= 1000 ) {
-        lenght /= 1000.0;
-        unit = "km";
-    }
-    result->setName( name.arg( lenght, 0, 'f', 1 ).arg( unit ) );
+    QDomElement durationElement = route.elementsByTagName( "cs:time" ).at(0).toElement();
+    QTime duration;
+    duration = duration.addSecs( durationElement.text().toInt() );
+    qreal length = routeWaypoints->length( EARTH_RADIUS );
+
+    const QString name = nameString( "CycleStreets", length, duration );
+    const GeoDataExtendedData data = routeData( length, duration );
+    routePlacemark->setExtendedData( data );
+    result->setName( name );
     result->append( routePlacemark );
 
     int i;
@@ -192,7 +193,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
         } else {
             instructionName = "Straight";
         }
-        if ( name != "Short un-named link" ){
+        if ( name != "Short un-named link" && name != "Un-named link" ){
             instructionName.append( " into " + name );
         }
         instructions->setName( instructionName );

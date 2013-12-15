@@ -40,9 +40,9 @@ public:
 
     bool retrieveData( const RouteRequest *route, const QString &mapDir, RoutingResult* result ) const;
 
-    GeoDataLineString* retrieveRoute( const RouteRequest *route, QVector<GeoDataPlacemark*> *instructions ) const;
+    int retrieveRoute( const RouteRequest *route, QVector<GeoDataPlacemark*> *instructions, GeoDataLineString* geometry ) const;
 
-    GeoDataDocument* createDocument( GeoDataLineString* geometry, const QVector<GeoDataPlacemark*> &instructions  ) const;
+    GeoDataDocument* createDocument( GeoDataLineString *geometry, const QVector<GeoDataPlacemark*> &instructions, const QString &name, const GeoDataExtendedData &data ) const;
 };
 
 MonavRunnerPrivate::MonavRunnerPrivate( const MonavPlugin* plugin ) :
@@ -136,9 +136,8 @@ bool MonavRunnerPrivate::retrieveData( const RouteRequest *route, const QString 
     return false;
 }
 
-GeoDataLineString* MonavRunnerPrivate::retrieveRoute( const RouteRequest *route, QVector<GeoDataPlacemark*> *instructions ) const
+int MonavRunnerPrivate::retrieveRoute( const Marble::RouteRequest* route, QVector< Marble::GeoDataPlacemark* >* instructions, Marble::GeoDataLineString* geometry ) const
 {
-    GeoDataLineString* geometry = new GeoDataLineString;
     RoutingResult reply;
     if ( retrieveData( route, &reply ) ) {
         /** @todo: make use of reply.seconds, the estimated travel time */
@@ -193,12 +192,13 @@ GeoDataLineString* MonavRunnerPrivate::retrieveRoute( const RouteRequest *route,
             placemark->setGeometry( geometry );
             instructions->push_back( placemark );
         }
+        int duration = (int) reply.seconds;
+        return duration;
     }
-
-    return geometry;
+    return 0;
 }
 
-GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString *geometry, const QVector<GeoDataPlacemark*> &instructions ) const
+GeoDataDocument* MonavRunnerPrivate::createDocument( Marble::GeoDataLineString* geometry, const QVector< Marble::GeoDataPlacemark* >& instructions, const QString& name, const Marble::GeoDataExtendedData& data ) const
 {
     if ( !geometry || geometry->isEmpty() ) {
         return 0;
@@ -208,21 +208,14 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString *geometry
     GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName( "Route" );
     routePlacemark->setGeometry( geometry );
+    routePlacemark->setExtendedData( data );
     result->append( routePlacemark );
-
-    QString name = "%1 %2 (Monav)";
-    QString unit = QLatin1String( "m" );
-    qreal length = geometry->length( EARTH_RADIUS );
-    if ( length >= 1000 ) {
-        length /= 1000.0;
-        unit = "km";
-    }
 
     foreach( GeoDataPlacemark* placemark, instructions ) {
         result->append( placemark );
     }
 
-    result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ) );
+    result->setName( name );
     return result;
 }
 
@@ -241,8 +234,14 @@ MonavRunner::~MonavRunner()
 void MonavRunner::retrieveRoute( const RouteRequest *route )
 {
     QVector<GeoDataPlacemark*> instructions;
-    GeoDataLineString* waypoints = d->retrieveRoute( route, &instructions );
-    GeoDataDocument* result = d->createDocument( waypoints, instructions );
+    QTime time;
+    GeoDataLineString* waypoints = new GeoDataLineString();
+    int duration = d->retrieveRoute( route, &instructions, waypoints );
+    time = time.addSecs( duration );
+    qreal length = waypoints->length( EARTH_RADIUS );
+    const QString name = nameString( "Monav", length, time );
+    const GeoDataExtendedData data = routeData( length, time );
+    GeoDataDocument *result = d->createDocument( waypoints, instructions, name, data );
     emit routeCalculated( result );
 }
 
