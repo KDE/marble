@@ -46,15 +46,15 @@ const QString RoutingRunner::lengthString( qreal& length) const
 
 const QString RoutingRunner::durationString(const QTime& duration) const
 {
-    const QString hoursString = tr("%n hours","journey duration, hours part", duration.hour());
-    const QString minutesString = tr("%n minutes", "journey duration, minutes part", duration.minute());
-    const QString timeString = duration.hour() ? tr("%1, %2", "journey duration, where %1=%n hours and %2=%m minutes").arg( hoursString ).arg( minutesString )  : minutesString;
+    const QString hoursString = duration.toString( "hh" );
+    const QString minutesString = duration.toString( "mm" );
+    const QString timeString = tr("%1:%2 h","journey duration").arg( hoursString ).arg( minutesString );
     return timeString;
 }
 
 const QString RoutingRunner::nameString(const QString& name, qreal& length, const QTime& duration) const
 {
-    const QString result = "%1 | %2 | %3";
+    const QString result = "%1; %2 (%3)";
     return result.arg( lengthString( length ) ).arg( durationString( duration ) ).arg( name );
 }
 

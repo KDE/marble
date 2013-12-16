@@ -223,7 +223,7 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     QTime time;
     time = time.addSecs( root.elementsByTagName( "time" ).at( 0 ).toElement().text().toInt() );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
-    const QString name = nameString( "MapQuest", length, time );
+    const QString name = nameString( "MQ", length, time );
     const GeoDataExtendedData data = routeData( length, time );
     routePlacemark->setExtendedData( data );
     result->setName( name );

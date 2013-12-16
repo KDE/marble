@@ -171,7 +171,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     duration = duration.addSecs( durationElement.text().toInt() );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
 
-    const QString name = nameString( "CycleStreets", length, duration );
+    const QString name = nameString( "CS", length, duration );
     const GeoDataExtendedData data = routeData( length, duration );
     routePlacemark->setExtendedData( data );
     result->setName( name );

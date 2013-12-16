@@ -304,7 +304,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     routePlacemark->setGeometry( routeWaypoints );
 
     qreal length = routeWaypoints->length( EARTH_RADIUS );
-    const QString name = nameString( "OpenRouteService", length, time );
+    const QString name = nameString( "ORS", length, time );
     const GeoDataExtendedData data = routeData( length, time );
     routePlacemark->setExtendedData( data );
     result->setName( name );
