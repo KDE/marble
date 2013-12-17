@@ -43,6 +43,7 @@ private:
     Q_PRIVATE_SLOT(d_ptr, void processNextPrimitive())
     Q_PRIVATE_SLOT(d_ptr, void bounceToCurrentPrimitive())
     Q_PRIVATE_SLOT(d_ptr, void playSoundCue())
+    Q_PRIVATE_SLOT(d_ptr, void stopPlaying() )
 
 };
 

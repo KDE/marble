@@ -4,6 +4,10 @@ if (QTONLY)
    cmake_minimum_required(VERSION 2.4.0)
 endif (QTONLY)
 
+macro_optional_find_package(Phonon)
+marble_set_package_properties( Phonon PROPERTIES DESCRIPTION "cross-platform multimedia framework that enables the use of audio and video content" )
+marble_set_package_properties( Phonon PROPERTIES URL "http://qt.digia.com/" )
+marble_set_package_properties( Phonon PROPERTIES TYPE OPTIONAL PURPOSE "Support for playback of soundcue elements" )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -334,6 +338,12 @@ else()
     )
 endif()
 
+if( PHONON_FOUND AND NOT QT5BUILD )
+  INCLUDE_DIRECTORIES( ${PHONON_INCLUDES} )
+  TARGET_LINK_LIBRARIES(marblewidget ${PHONON_LIBS} )
+  set (HAVE_PHONON TRUE)
+endif( PHONON_FOUND AND NOT QT5BUILD )
+
 if (APPLE)
   #defined in top level makefile
   TARGET_LINK_LIBRARIES(marblewidget ${MAC_EXTRA_LIBS} )
@@ -515,3 +525,5 @@ else (APPLE AND QTONLY)
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config-phonon.h.cmake
+               ${CMAKE_CURRENT_BINARY_DIR}/config-phonon.h)

@@ -11,6 +11,12 @@
 #include "GeoDataWait.h"
 #include "GeoDataSoundCue.h"
 #include "GeoDataTypes.h"
+#include "config-phonon.h"
+
+#ifdef HAVE_PHONON
+#include <phonon/MediaObject>
+#include <phonon/AudioOutput>
+#endif
 
 #include "TourPlayback.h"
 
@@ -39,6 +45,9 @@ public:
     QList<TimedSoundCue> m_cues;
     int m_currentPrimitive;
     bool m_pause;
+#ifdef HAVE_PHONON
+    QList<Phonon::MediaObject*> m_mediaList;
+#endif
 
 protected:
     TourPlayback *q_ptr;
@@ -47,6 +56,10 @@ public:
     void processNextPrimitive();
     void bounceToCurrentPrimitive();
     void playSoundCue();
+#ifdef HAVE_PHONON
+    void resumePlaying();
+    void stopPlaying();
+#endif
 
 private:
     Q_DECLARE_PUBLIC(TourPlayback)
@@ -56,6 +69,9 @@ TourPlayback::TourPlayback(QObject *parent) :
     QObject(parent),
     d_ptr(new TourPlaybackPrivate(this))
 {
+#ifdef HAVE_PHONON
+    connect( this, SIGNAL( finished() ), this, SLOT( stopPlaying() ) );
+#endif
 }
 
 TourPlayback::~TourPlayback()
@@ -85,6 +101,9 @@ void TourPlayback::play()
     Q_D(TourPlayback);
     d->m_cues.clear();
     d->m_pause = false;
+#ifdef HAVE_PHONON
+    d->resumePlaying();
+#endif
     d->processNextPrimitive();
 }
 
@@ -181,13 +200,45 @@ void TourPlaybackPrivate::playSoundCue()
     if (m_cues.isEmpty())
         return;
 
+    Q_Q(TourPlayback);
+
     const GeoDataSoundCue *cue = m_cues.first().second;
     m_cues.removeFirst();
 
     if (cue) {
-        mDebug() << "[TourPlayback]" << cue->href() << "should be going on now";
+#ifdef HAVE_PHONON
+        Phonon::MediaObject *mediaObject = new Phonon::MediaObject( q );
+        Phonon::createPath( mediaObject, new Phonon::AudioOutput( Phonon::MusicCategory, q ) );
+        mediaObject->setCurrentSource( cue->href() );
+        mediaObject->play();
+        QObject::connect( q, SIGNAL( paused() ), mediaObject, SLOT( pause() ) );
+        m_mediaList.append( mediaObject );
+#endif
     }
 }
+
+#ifdef HAVE_PHONON
+void TourPlaybackPrivate::stopPlaying()
+{
+    QList<Phonon::MediaObject*>::iterator iter = m_mediaList.begin();
+    QList<Phonon::MediaObject*>::iterator end = m_mediaList.end();
+    for (; iter != end; ++ iter) {
+        (*iter)->stop();
+    }
+    m_mediaList.clear();
+}
+
+void TourPlaybackPrivate::resumePlaying()
+{
+    QList<Phonon::MediaObject*>::iterator iter = m_mediaList.begin();
+    QList<Phonon::MediaObject*>::iterator end = m_mediaList.end();
+    for (; iter != end; ++iter) {
+        if ( (*iter)->state() == Phonon::PausedState ) {
+            (*iter)->play();
+        }
+    }
+}
+#endif // HAVE_PHONON
 
 } // namespace Marble
 
