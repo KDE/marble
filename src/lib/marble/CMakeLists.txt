@@ -83,6 +83,7 @@ set(marblewidget_SRCS
     MapViewWidget.cpp
     FileViewWidget.cpp
     TourWidget.cpp
+    TourPlayback.cpp
     LegendWidget.cpp
     CurrentLocationWidget.cpp
     MarbleNavigator.cpp
@@ -395,6 +396,7 @@ else (APPLE AND QTONLY)
     LegendWidget.h
     FileViewWidget.h
     TourWidget.h
+    TourPlayback.h
     CurrentLocationWidget.h
     MarbleNavigator.h
     AbstractFloatItem.h

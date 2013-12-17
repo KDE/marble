@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QToolBar" name="m_toolBar">
+    <widget class="QToolBar" name="m_toolBarControl">
      <property name="windowTitle">
       <string>toolBar</string>
      </property>
@@ -39,6 +39,18 @@
      <property name="selectionMode">
       <enum>QAbstractItemView::ExtendedSelection</enum>
      </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolBar" name="m_toolBarPlayback">
+     <property name="windowTitle">
+      <string>toolBar</string>
+     </property>
+     <addaction name="actionPlay"/>
+     <addaction name="separator"/>
+     <addaction name="actionPause"/>
+     <addaction name="separator"/>
+     <addaction name="actionStop"/>
     </widget>
    </item>
   </layout>
@@ -133,6 +145,42 @@
    </property>
    <property name="text">
     <string>Open Tour</string>
+   </property>
+  </action>
+  <action name="actionPlay">
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/playback-play.png</normaloff>:/marble/playback-play.png</iconset>
+   </property>
+   <property name="text">
+    <string>Play</string>
+   </property>
+   <property name="toolTip">
+    <string>Begins touring</string>
+   </property>
+  </action>
+  <action name="actionPause">
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/playback-pause.png</normaloff>:/marble/playback-pause.png</iconset>
+   </property>
+   <property name="text">
+    <string>Pause</string>
+   </property>
+   <property name="toolTip">
+    <string>Pauses touring until you start it again</string>
+   </property>
+  </action>
+  <action name="actionStop">
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/playback-stop.png</normaloff>:/marble/playback-stop.png</iconset>
+   </property>
+   <property name="text">
+    <string>Stop</string>
+   </property>
+   <property name="toolTip">
+    <string>Stops touring (playing again will start tour from the start)</string>
    </property>
   </action>
  </widget>

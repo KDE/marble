@@ -20,13 +20,17 @@
 #include "KmlElementDictionary.h"
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
-#include "ParsingRunnerManager.h"
 #include "MarbleWidget.h"
+#include "ParsingRunnerManager.h"
+#include "TourPlayback.h"
 
 #include <QFileDialog>
 #include <QDir>
 #include <QModelIndex>
 #include <QMessageBox>
+#include <QStyledItemDelegate>
+#include <QDebug>
+#include <QPainter>
 
 namespace Marble
 {
@@ -62,19 +66,23 @@ private:
 
 public:
     TourWidget *q;
-    Ui::TourWidget  m_tourUi;
     MarbleWidget *m_widget;
+    Ui::TourWidget  m_tourUi;
     GeoDataTreeModel m_model;
+    GeoDataTour  *m_tour;
+    TourPlayback *m_playback;
 };
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     : m_isChanged( false ),
       q( parent ),
-      m_widget( 0 )
+      m_widget( 0 ),
+      m_playback( 0 )
 {
     m_tourUi.setupUi( parent );
     m_tourUi.m_listView->setModel( &m_model );
     m_tourUi.m_listView->setModelColumn(1);
+
     QObject::connect( m_tourUi.m_listView, SIGNAL( activated( QModelIndex ) ), q, SLOT( mapCenterOn( QModelIndex ) ) );
     QObject::connect( m_tourUi.m_listView->selectionModel(), SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
                       q, SLOT( updateButtonsStates() ) );
@@ -94,6 +102,15 @@ TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
       d( new TourWidgetPrivate( this ) )
 {
     layout()->setMargin( 0 );
+
+    connect(d->m_tourUi.actionPlay, SIGNAL(triggered()),
+            this, SLOT(startPlaying()));
+    connect(d->m_tourUi.actionPause, SIGNAL(triggered()),
+            this, SLOT(pausePlaying()));
+    connect(d->m_tourUi.actionStop, SIGNAL(triggered()),
+            this, SLOT(stopPlaying()));
+
+    d->m_tourUi.m_toolBarPlayback->setDisabled(true);
 }
 
 TourWidget::~TourWidget()
@@ -104,6 +121,44 @@ TourWidget::~TourWidget()
 void TourWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
+}
+
+void TourWidget::startPlaying()
+{
+    if (!d->m_playback) {
+        d->m_playback = new TourPlayback(d->m_widget, d->m_tour);
+        connect(d->m_playback, SIGNAL(centerOn(GeoDataCoordinates)),
+                d->m_widget, SLOT(centerOn(GeoDataCoordinates)));
+    }
+
+    d->m_playback->play();
+
+    d->m_tourUi.actionPlay->setEnabled(false);
+    d->m_tourUi.actionPause->setEnabled(true);
+    d->m_tourUi.actionStop->setEnabled(true);
+}
+
+void TourWidget::pausePlaying()
+{
+    Q_ASSERT(d->m_playback);
+
+    d->m_playback->pause();
+
+    d->m_tourUi.actionPlay->setEnabled(true);
+    d->m_tourUi.actionPause->setEnabled(false);
+    d->m_tourUi.actionStop->setEnabled(true);
+}
+
+void TourWidget::stopPlaying()
+{
+    if (!d->m_playback)
+        return;
+
+    d->m_playback->stop();
+
+    d->m_tourUi.actionPlay->setEnabled(true);
+    d->m_tourUi.actionPause->setEnabled(false);
+    d->m_tourUi.actionStop->setEnabled(false);
 }
 
 void TourWidgetPrivate::openFile()
@@ -266,10 +321,20 @@ void TourWidgetPrivate::updateRootIndex()
 {
     GeoDataTour *tour = findTour( m_model.rootDocument() );
     if ( tour ) {
+        m_tour = tour;
+        delete m_playback; // going to be created if we need another one
+        m_playback = 0;
+
         GeoDataPlaylist *playlist = tour->playlist();
         if ( playlist ) {
             m_tourUi.m_listView->setRootIndex( m_model.index( playlist ) );
         }
+
+        q->stopPlaying();
+        m_tourUi.m_toolBarPlayback->setEnabled(true);
+        m_tourUi.actionPlay->setEnabled(true);
+        m_tourUi.actionPause->setEnabled(false);
+        m_tourUi.actionStop->setEnabled(false);
     }
 }
 

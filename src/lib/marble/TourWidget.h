@@ -38,12 +38,17 @@ class MARBLE_EXPORT TourWidget : public QWidget
     explicit TourWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     ~TourWidget();
 
-     void setMarbleWidget( MarbleWidget *widget );
+    void setMarbleWidget( MarbleWidget *widget );
 
- signals:
+public Q_SLOTS:
+    void startPlaying();
+    void pausePlaying();
+    void stopPlaying();
+
+Q_SIGNALS:
     void featureUpdated( GeoDataFeature *feature );
 
- private slots:
+private Q_SLOTS:
     void moveUp();
     void moveDown();
     void addFlyTo();
