@@ -726,6 +726,27 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 <listitem><para><action>Displays</action> the <guilabel>Time Control</guilabel> dialog where you can set date and time and the simulation time speed.</para></listitem>
 </varlistentry>
 
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guisubmenu>Eclipses in <replaceable>year</replaceable></guisubmenu>
+</menuchoice></term>
+<listitem>
+<para><action>Displays</action> the list of the eclipses for the year chosen using <menuchoice><guimenu>View</guimenu><guimenuitem>Browse Eclipses...</guimenuitem></menuchoice> menu item.</para>
+<para>This menu item will be shown only when <link linkend="eclipsesplugin">Eclipses</link> plugin is enabled</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Browse Eclipses...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Displays</action> the <guilabel>Eclipse Browser</guilabel> dialog where you can set the year to show eclipses for, open plugin settings dialog, view data on eclipse start, end, type and magnitude. Choose some eclipse item from the list and click on <guibutton>Go To Selected Eclipse</guibutton> to view the location of the eclipse on the globe.</para>
+<para>This menu item will be shown only when <link linkend="eclipsesplugin">Eclipses</link> plugin is enabled</para>
+</listitem>
+</varlistentry>
+
 </variablelist>
 
 </sect2>
@@ -1157,6 +1178,13 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 <term><guilabel>Earthquakes</guilabel></term>
 <listitem>
 <para>Displays the earthquake markers on the map.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="eclipsesplugin">
+<term><guilabel>Earthquakes</guilabel></term>
+<listitem>
+<para>Displays the data about Solar and Moon eclipses.</para>
 </listitem>
 </varlistentry>
 
