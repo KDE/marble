@@ -355,11 +355,12 @@ bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item )
 
 QHash<QString, QVariant> EclipsesPlugin::settings() const
 {
-    return m_settings;
+    return RenderPlugin::settings();
 }
 
 void EclipsesPlugin::setSettings( const QHash<QString, QVariant> &settings )
 {
+    RenderPlugin::setSettings( settings );
     m_settings = settings;
     emit settingsChanged( nameId() );
 }
