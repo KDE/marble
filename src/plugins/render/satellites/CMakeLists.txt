@@ -1,6 +1,7 @@
 PROJECT(SatellitesPlugin)
 
 INCLUDE_DIRECTORIES(
+ ${CMAKE_SOURCE_DIR}/src/lib/astro
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
@@ -13,11 +14,6 @@ set( sgp4_SRCS
  sgp4/sgp4ext.cpp
  sgp4/sgp4unit.cpp
  sgp4/sgp4io.cpp )
-
-set( mex_SRCS
- mex/astrolib.cpp
- mex/attlib.cpp
- mex/planetarySats.cpp )
 
 set( satellites_SRCS
  TrackerPluginModel.cpp
@@ -39,6 +35,5 @@ qt_add_resources( satellites_SRCS satellites.qrc )
 
 marble_add_plugin( SatellitesPlugin
  ${satellites_SRCS}
- ${sgp4_SRCS}
- ${mex_SRCS} )
+ ${sgp4_SRCS} )
 

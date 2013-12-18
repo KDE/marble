@@ -19,7 +19,7 @@
 #include "GeoDataStyle.h"
 
 #include "sgp4/sgp4io.h"
-#include "mex/planetarySats.h"
+#include <planetarySats.h>
 
 #include <locale.h>
 

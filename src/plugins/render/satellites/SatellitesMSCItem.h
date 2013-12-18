@@ -16,7 +16,7 @@
 #include <QString>
 #include <QDateTime>
 
-#include "mex/planetarySats.h"
+#include <planetarySats.h>
 
 class QColor;
 
