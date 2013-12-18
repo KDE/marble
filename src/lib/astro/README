@@ -1,0 +1,11 @@
+
+This code allows to calculate solar eclipse events and spaceprobe
+positions. It has been contributed by Gerhard Holtkamp. See license
+headers in the source code files for detailed license information.
+
+     astrolib - Standard astronomy routines
+       attlib - Matrix and vector operations in 3D space
+     astr2lib - Planet calculations in epoch J2000.0 coordinates
+     eclsolar - Solar and lunar eclipse calculation routines
+planetarySats - Spacecraft orbit/position calculation routines
+

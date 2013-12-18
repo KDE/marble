@@ -43,6 +43,7 @@ ENDIF()
 
 add_subdirectory( apps )
 add_subdirectory( lib/marble )
+add_subdirectory( lib/astro )
 add_subdirectory( plugins )
 add_subdirectory( bindings )
 

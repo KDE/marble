@@ -37,7 +37,8 @@ if (QT4_FOUND)
     ${QT_QTSCRIPT_LIBRARY}
     ${QT_QTMAIN_LIBRARY}
     marbleui
-    marblewidget)
+    marblewidget
+    astro)
 else()
   target_link_libraries (
     marble-qt
@@ -49,7 +50,8 @@ else()
     ${Qt5WebKitWidgets_LIBRARIES}
     ${Qt5WebKit_LIBRARIES}
     marbleui
-    marblewidget)
+    marblewidget
+    astro)
 endif()
 
 if(WIN32)

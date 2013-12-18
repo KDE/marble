@@ -26,6 +26,7 @@ target_link_libraries (
     ${KDE4_KNEWSTUFF3_LIBS}
     marbleui
     marblewidget
+    astro
     )
 
 ## this works for win32 only because FindQt4 does not handle this correct
