@@ -37,3 +37,4 @@ marble_add_plugin( SatellitesPlugin
  ${satellites_SRCS}
  ${sgp4_SRCS} )
 
+target_link_libraries( SatellitesPlugin astro )
