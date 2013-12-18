@@ -60,12 +60,14 @@ class RenderPlugin::Private
 RenderPlugin::RenderPlugin( const MarbleModel *marbleModel )
     : d( new Private( marbleModel ) )
 {
-    connect( &d->m_action, SIGNAL(toggled(bool)),
-             this,         SLOT(setVisible(bool)) );
-    connect( this,         SIGNAL(visibilityChanged(bool,QString)),
-             &d->m_action, SLOT(setChecked(bool)) );
-    connect( this,         SIGNAL(enabledChanged(bool)),
-             &d->m_action, SLOT(setVisible(bool)) );
+    connect( &d->m_action, SIGNAL( toggled( bool ) ),
+             this,         SLOT( setVisible( bool ) ) );
+    connect( this,         SIGNAL( visibilityChanged( bool, const QString & ) ),
+             &d->m_action, SLOT( setChecked( bool ) ) );
+    connect( this,         SIGNAL( enabledChanged( bool ) ),
+             &d->m_action, SLOT( setVisible( bool ) ) );
+    connect( this,         SIGNAL( enabledChanged( bool ) ),
+                           SIGNAL( actionGroupsChanged() ) );
 
     connect( this, SIGNAL(visibilityChanged(bool,QString)),
              this, SIGNAL(repaintNeeded()) );

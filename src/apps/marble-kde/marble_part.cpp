@@ -1141,15 +1141,27 @@ void MarblePart::mapThemeChanged( const QString& newMapTheme )
 void MarblePart::createPluginMenus()
 {
     unplugActionList("plugins_actionlist");
+    unplugActionList("plugins_menuactionlist");
+
+    const QList<QActionGroup*> *tmp_actionGroups = NULL;
+    const QList<QActionGroup*> *tmp_toolbarActionGroups = NULL;
+
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
 
-    //Load the toolbars
     for (; i != end; ++i ) {
-        const QList<QActionGroup*> *tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
+        // menus
+        tmp_actionGroups = (*i)->actionGroups();
+        if( (*i)->enabled() && tmp_actionGroups ) {
+            foreach( QActionGroup *ag, *tmp_actionGroups ) {
+                plugActionList( "plugins_menuactionlist", ag->actions() );
+            }
+        }
 
-        if ( tmp_toolbarActionGroups ) {
+        // toolbars
+        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
+        if ( (*i)->enabled() && tmp_toolbarActionGroups ) {
 
             foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
                 plugActionList( "plugins_actionlist", ag->actions() );

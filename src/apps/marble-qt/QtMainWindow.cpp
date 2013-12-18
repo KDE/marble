@@ -566,27 +566,44 @@ void MainWindow::createPluginMenus()
 
     //remove and delete old menus if they exist
     while(  !m_pluginMenus.isEmpty() ) {
-        m_pluginMenus.takeFirst();
-//        FIXME: this does not provide an easy way to remove a menu.
-//        Make a workaround
-//        this->menuBar()->removeAction();
+        m_viewMenu->removeAction( m_pluginMenus.takeFirst() );
     }
 
-    const QList<QActionGroup*> *tmp_toolbarActionGroups;
+
+    const QList<QActionGroup*> *tmp_toolbarActionGroups = NULL;
+    const QList<QActionGroup*> *tmp_actionGroups = NULL;
+
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
 
-    //Load the toolbars
     for (; i != end; ++i ) {
-        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
 
-        if ( tmp_toolbarActionGroups ) {
+        // menus
+        tmp_actionGroups = (*i)->actionGroups();
+        if( (*i)->enabled() && tmp_actionGroups ) {
+           foreach( QActionGroup *ag, *tmp_actionGroups ) {
+               if( !ag->actions().isEmpty() ) {
+                   m_pluginMenus.append( m_viewMenu->addSeparator() );
+               }
+               foreach( QAction *action, ag->actions() ) {
+                   m_viewMenu->addAction( action );
+                   m_pluginMenus.append( action );
+               }
+           }
+        }
+
+        // toolbars
+        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
+        if ( (*i)->enabled() && tmp_toolbarActionGroups ) {
             QToolBar* toolbar = new QToolBar(this);
             toolbar->setObjectName( QString( "plugin-toolbar-%1" ).arg( (*i)->nameId() ) );
 
             foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
                 toolbar->addActions( ag->actions() );
+                if ( tmp_toolbarActionGroups->last() != ag ) {
+                    toolbar->addSeparator();
+                }
             }
 
             m_pluginToolbars.append( toolbar );
