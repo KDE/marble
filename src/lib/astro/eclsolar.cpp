@@ -2636,7 +2636,7 @@ int EclSolar::centralBound(bool firstc, double& lat1, double& lng1, double& lat2
 
   bool lastp;
   int k;
-  double s0, dpn1, t;
+  double dpn1, t;
   double lt1, ln1, lt2, ln2, an;
   Eclipse eclp;
 
@@ -2682,7 +2682,7 @@ int EclSolar::centralBound(bool firstc, double& lat1, double& lng1, double& lat2
   an = navCourse (lt1, ln1, lt2, ln2);  // direction of shadow along Earth surface
   an += 0.5*M_PI; // direction perpendicular to shadow movement (right boundary)
 
-  s0 = eclp.duration(t, eb_del_tdut, dpn1);  // dpn1 is width of umbra in km
+  eclp.duration(t, eb_del_tdut, dpn1);  // dpn1 is width of umbra in km
   dpn1 = (dpn1 / 111.1) * 0.0174533;  // radians of umbra width
   dpn1 /= 2.0;
   navNewPos(dpn1, an, lt1, ln1, lat1, lng1);
