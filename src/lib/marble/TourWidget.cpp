@@ -109,7 +109,7 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
 void TourWidgetPrivate::openFile()
 {
     if ( overrideModifications() ) {
-        QString const filename = QFileDialog::getOpenFileName( q, q->tr( "Open Tour" ), QDir::homePath(), q->tr( "KML Tours (*.kml)" ) );
+        QString const filename = QFileDialog::getOpenFileName( q, QObject::tr( "Open Tour" ), QDir::homePath(), QObject::tr( "KML Tours (*.kml)" ) );
         if ( !filename.isEmpty() ) {
             ParsingRunnerManager manager( m_widget->model()->pluginManager() );
             GeoDataDocument* document = manager.openFile( filename );
@@ -169,8 +169,8 @@ void TourWidgetPrivate::addFlyTo()
 
 void TourWidgetPrivate::deleteSelected()
 {
-    QString title = q->tr( "Remove Selected Items" );
-    QString text = q->tr( "Are you sure want to remove selected items?" );
+    QString title = QObject::tr( "Remove Selected Items" );
+    QString text = QObject::tr( "Are you sure want to remove selected items?" );
     QMessageBox *dialog = new QMessageBox( QMessageBox::Question, title, text, QMessageBox::Yes | QMessageBox::No, q );
     dialog->setDefaultButton( QMessageBox::No );
     if ( dialog->exec() == QMessageBox::Yes ) {
@@ -374,7 +374,7 @@ void TourWidgetPrivate::saveTourAs()
 {
    if ( m_model.rowCount() )
    {
-       QString const filename = QFileDialog::getSaveFileName( q, q->tr( "Save Tour as" ), QDir::homePath(), q->tr( "KML Tours (*.kml)" ) );
+       QString const filename = QFileDialog::getSaveFileName( q, QObject::tr( "Save Tour as" ), QDir::homePath(), QObject::tr( "KML Tours (*.kml)" ) );
        if ( !filename.isEmpty() ) {
             saveTourAs( filename );
        }
@@ -410,8 +410,8 @@ bool TourWidgetPrivate::overrideModifications()
 {
     GeoDataDocument* oldDocument = m_model.rowCount() ? m_model.rootDocument() : 0;
     if ( oldDocument && m_isChanged ) {
-        QString title = q->tr( "Discard Changes" );
-        QString text = q->tr( "Are you sure want to discard all unsaved changes and close current document?" );
+        QString title = QObject::tr( "Discard Changes" );
+        QString text = QObject::tr( "Are you sure want to discard all unsaved changes and close current document?" );
         QMessageBox *dialog = new QMessageBox( QMessageBox::Question, title, text, QMessageBox::Yes | QMessageBox::No, q );
         dialog->setDefaultButton( QMessageBox::No );
         if ( dialog->exec() != QMessageBox::Yes ) {
