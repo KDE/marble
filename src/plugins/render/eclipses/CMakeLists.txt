@@ -6,7 +6,10 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_BINARY_DIR}/src/plugins/render/eclipses
  ${QT_INCLUDE_DIR}
 )
-INCLUDE(${QT_USE_FILE})
+
+if( QT4_FOUND )
+  INCLUDE(${QT_USE_FILE})
+endif()
 
 set( eclipses_SRCS
     EclipsesModel.cpp
