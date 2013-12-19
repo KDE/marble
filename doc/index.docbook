@@ -1182,7 +1182,7 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 </varlistentry>
 
 <varlistentry id="eclipsesplugin">
-<term><guilabel>Earthquakes</guilabel></term>
+<term><guilabel>Eclipses</guilabel></term>
 <listitem>
 <para>Displays the data about Solar and Moon eclipses.</para>
 </listitem>
