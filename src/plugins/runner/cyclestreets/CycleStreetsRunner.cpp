@@ -82,7 +82,6 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
     for ( int i=1; i<route->size(); ++i ) {
         itinerarypoints.append( "|" +  QString::number( route->at( i ).longitude( degree ), 'f', 6 ) + ',' + QString::number( route->at( i ).latitude( degree ), 'f', 6 ) );
     }
-    queryStrings["plan"] = "quietest";
     queryStrings["itinerarypoints"] = itinerarypoints;
 
 #if QT_VERSION >= 0x050000
