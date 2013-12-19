@@ -121,6 +121,7 @@ MainWindow::MainWindow( const QString &marbleDataPath, const QVariantMap &cmdLin
     m_workOfflineAct->setChecked( m_marbleWidget->model()->workOffline() );
     connect( m_workOfflineAct, SIGNAL(triggered(bool)), this, SLOT(setWorkOffline(bool)) );
 
+//FIXME Why QAplication::translate instead of tr?
 #if QT_VERSION >= 0x050000
     m_kineticScrollingAction = menuBar()->addAction( QApplication::translate("MarbleNavigationSettingsWidget", "&Inertial Globe Rotation", 0) );
 #else

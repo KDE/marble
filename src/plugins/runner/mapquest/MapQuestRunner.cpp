@@ -111,6 +111,7 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
             }
         }
     QUrl qurl(url);
+// FIXME: verify that this works with special characters.
 #if QT_VERSION >= 0x050000
     QUrlQuery urlQuery;
     urlQuery.addQueryItem( "key", settings.value( "appKey" ).toByteArray() );
