@@ -27,6 +27,9 @@
 #include <QNetworkReply>
 #include <QDomDocument>
 
+#if QT_VERSION >= 0x050000
+  #include <QUrlQuery>
+#endif
 namespace Marble
 {
 
@@ -108,7 +111,13 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
             }
         }
     QUrl qurl(url);
+#if QT_VERSION >= 0x050000
+    QUrlQuery urlQuery;
+    urlQuery.addQueryItem( "key", settings.value( "appKey" ).toByteArray() );
+    qurl.setQuery(urlQuery);
+#else
     qurl.addEncodedQueryItem( "key", settings.value( "appKey" ).toByteArray() );
+#endif
     m_request.setUrl( qurl );
     m_request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "MapQuestRunner" ) );
 

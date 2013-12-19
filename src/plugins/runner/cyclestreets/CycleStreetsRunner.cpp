@@ -21,6 +21,12 @@
 #include <QTimer>
 #include <QNetworkReply>
 #include <QDomDocument>
+#include <QVector>
+#include <QPair>
+
+#if QT_VERSION >= 0x050000
+  #include <QUrlQuery>
+#endif
 
 namespace Marble
 {
@@ -65,19 +71,31 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["cyclestreets"];
 
     QUrl url("http://www.cyclestreets.net/api/journey.xml");
-    url.addQueryItem( "key", "cdccf13997d59e70" );
-    url.addQueryItem( "useDom", "1" );
-    url.addQueryItem( "plan", settings["plan"].toString() );
-    url.addQueryItem( "speed", settings["speed"].toString() );
+    QMap<QString, QString> queryStrings;
+    queryStrings["key"] = "cdccf13997d59e70";
+    queryStrings["useDom"] = "1";
+    queryStrings["plan"] = settings["plan"].toString();
+    queryStrings["speed"] = settings["speed"].toString();
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     QString itinerarypoints;
     itinerarypoints.append( QString::number( route->source().longitude( degree ), 'f', 6 ) + ',' + QString::number( route->source().latitude( degree ), 'f', 6 ) );
     for ( int i=1; i<route->size(); ++i ) {
         itinerarypoints.append( "|" +  QString::number( route->at( i ).longitude( degree ), 'f', 6 ) + ',' + QString::number( route->at( i ).latitude( degree ), 'f', 6 ) );
     }
+    queryStrings["plan"] = "quietest";
+    queryStrings["itinerarypoints"] = itinerarypoints;
 
-    url.addQueryItem( "plan", "quietest" );
-    url.addQueryItem( "itinerarypoints", itinerarypoints );
+#if QT_VERSION >= 0x050000
+	QUrlQuery urlQuery;
+	Q_FOREACH( const QString& key, queryStrings.keys()){
+		urlQuery.addQueryItem(key, queryStrings.value(key));
+	}
+	url.setQuery( urlQuery);
+#else
+	Q_FOREACH( const QString& key, queryStrings.keys()){
+		url.addQueryItem(key, queryStrings.value(key));
+	}
+#endif
 
     m_request.setUrl( url );
     m_request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "CycleStreetsRunner" ) );
