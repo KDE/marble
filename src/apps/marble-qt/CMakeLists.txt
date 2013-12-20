@@ -2,16 +2,20 @@ set(marble_SRCS qtmain.cpp QtMainWindow.cpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui)
 
-if(MSVC)
-  set(marble_SRCS ${marble_SRCS} marble.rc)
-endif(MSVC)
 
-if(MINGW)
-   QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
-endif(MINGW)
 
 qt_wrap_ui(marble_SRCS ${marble_UI})
 marble_qt4_automoc(${marble_SRCS})
+
+if(WIN32)
+set(marble_SRCS ${marble_SRCS} marble.rc)
+if (MINGW)#tell cmake how to handle rc files on mingw
+      set (CMAKE_RC_COMPILER_INIT windres)
+      enable_language (RC)
+      set (CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -i <SOURCE> -o <OBJECT>")
+endif()
+
+endif()
 
 if (WIN32)
     add_executable (marble-qt WIN32 ${marble_SRCS})

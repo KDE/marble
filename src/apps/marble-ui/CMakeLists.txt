@@ -1,14 +1,6 @@
 set(marble_SRCS ControlView.cpp MarbleTest.cpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-if(MSVC)
-  set(marble_SRCS ${marble_SRCS} marble.qrc)
-endif(MSVC)
-
-if(MINGW)
-   QT4_ADD_RESOURCES2(marble_SRCS marble.qrc)
-endif(MINGW)
-
 qt_add_resources(marble_SRCS marble.qrc)
 
 qt_wrap_ui(marble_SRCS ${marble_UI})
