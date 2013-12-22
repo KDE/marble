@@ -183,7 +183,7 @@ void FileLoader::run()
 
             const QDateTime cacheLastModified  = QFileInfo( cacheFile ).lastModified();
 
-            if ( sourceLastModified < cacheLastModified ) {
+            if ( sourceLastModified <= cacheLastModified ) {
                 connect( &d->m_runner, SIGNAL(parsingFinished(GeoDataDocument*,QString)),
                          this, SLOT(documentParsed(GeoDataDocument*,QString)) );
                 d->m_runner.parseFile( cacheFile, d->m_documentRole );
