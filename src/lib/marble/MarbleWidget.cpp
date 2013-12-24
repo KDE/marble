@@ -1235,7 +1235,12 @@ QString MarbleWidget::distanceString() const
     case QLocale::MetricSystem:
         distanceUnitString = tr("km");
         break;
+#if QT_VERSION < 0x050000
     case QLocale::ImperialSystem:
+#else
+    case QLocale::ImperialUSSystem:
+    case QLocale::ImperialUKSystem:
+#endif
         dist *= KM2MI;
         distanceUnitString = tr("mi");
         break;

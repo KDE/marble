@@ -276,7 +276,12 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
         altitude = position.altitude();
         break;
 
-        case QLocale::ImperialSystem:
+#if QT_VERSION < 0x050000
+    case QLocale::ImperialSystem:
+#else
+    case QLocale::ImperialUSSystem:
+    case QLocale::ImperialUKSystem:
+#endif
         //miles per hour
         unitString = QObject::tr("m/h");
         unitSpeed = speed * HOUR2SEC * METER2KM * KM2MI;

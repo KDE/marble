@@ -150,7 +150,12 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
             case QLocale::MetricSystem:
                 /* nothing to do */
                 break;
-            case QLocale::ImperialSystem:
+#if QT_VERSION < 0x050000
+    case QLocale::ImperialSystem:
+#else
+    case QLocale::ImperialUSSystem:
+    case QLocale::ImperialUKSystem:
+#endif
                 unitString = tr( "ft" );
                 displayScale = M2FT;
                 break;

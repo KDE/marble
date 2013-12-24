@@ -124,7 +124,12 @@ void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal speed )
     QString speedUnit;
 
     switch ( m_locale->measurementSystem() ) {
+#if QT_VERSION < 0x050000
     case QLocale::ImperialSystem:
+#else
+    case QLocale::ImperialUSSystem:
+    case QLocale::ImperialUKSystem:
+#endif
         //miles per hour
         speedUnit = tr("mph");
         speed *= KM2MI;

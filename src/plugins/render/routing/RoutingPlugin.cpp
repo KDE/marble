@@ -132,7 +132,7 @@ QString RoutingPluginPrivate::fuzzyDistance( qreal length ) const
     int precision = 0;
     QString distanceUnit = QLatin1String( "m" );
 
-    if ( MarbleGlobal::getInstance()->locale()->measurementSystem() == QLocale::ImperialSystem ) {
+    if ( MarbleGlobal::getInstance()->locale()->measurementSystem() != QLocale::MetricSystem ) {
         precision = 1;
         distanceUnit = "mi";
         length *= METER2KM;

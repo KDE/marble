@@ -174,7 +174,7 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
 
         const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-        if ( measurementSystem == QLocale::ImperialSystem ) {
+        if ( measurementSystem != QLocale::MetricSystem ) {
             m_scaleBarDistance *= KM2MI;
         }
 
@@ -258,7 +258,12 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
             }
             break;
 
-        case QLocale::ImperialSystem:
+#if QT_VERSION < 0x050000
+    case QLocale::ImperialSystem:
+#else
+    case QLocale::ImperialUSSystem:
+    case QLocale::ImperialUKSystem:
+#endif
             unit = tr("mi");
             intervalStr.setNum( j * m_valueInterval / 1000 );
 

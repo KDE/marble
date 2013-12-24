@@ -146,7 +146,12 @@ void ElevationProfilePlotAxis::updateScale()
             m_displayScale = 1.0;
         }
         break;
+#if QT_VERSION < 0x050000
     case QLocale::ImperialSystem:
+#else
+    case QLocale::ImperialUSSystem:
+    case QLocale::ImperialUKSystem:
+#endif
         // FIXME: Do these values make sense?
         if ( range() >= 10 * KM2METER * MI2KM ) {
             m_unitString = tr( "mi" );

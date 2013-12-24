@@ -291,7 +291,7 @@ QString RoutingInstruction::nextDistanceInstruction() const
     qreal length = distance();
     QString distanceUnit = QLatin1String( "m" );
 
-    if ( measurement == QLocale::ImperialSystem ) {
+    if ( measurement != QLocale::MetricSystem ) {
         precision = 1;
         distanceUnit = "mi";
         length /= 1000.0;
