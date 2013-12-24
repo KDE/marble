@@ -78,15 +78,15 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_tourUi.m_listView, SIGNAL( activated( QModelIndex ) ), q, SLOT( mapCenterOn( QModelIndex ) ) );
     QObject::connect( m_tourUi.m_listView->selectionModel(), SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
                       q, SLOT( updateButtonsStates() ) );
-    QObject::connect( m_tourUi.m_actionAddFlyTo, SIGNAL( activated() ), q, SLOT( addFlyTo() ) );
-    QObject::connect( m_tourUi.m_actionDelete, SIGNAL( activated() ), q, SLOT( deleteSelected() ) );
-    QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( activated() ), q, SLOT( moveUp() ) );
-    QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( activated() ), q, SLOT( moveDown() ) );
+    QObject::connect( m_tourUi.m_actionAddFlyTo, SIGNAL( triggered() ), q, SLOT( addFlyTo() ) );
+    QObject::connect( m_tourUi.m_actionDelete, SIGNAL( triggered() ), q, SLOT( deleteSelected() ) );
+    QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( triggered() ), q, SLOT( moveUp() ) );
+    QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( triggered() ), q, SLOT( moveDown() ) );
     QObject::connect( q, SIGNAL( featureUpdated( GeoDataFeature* ) ), &m_model, SLOT( updateFeature( GeoDataFeature* ) ) );
-    QObject::connect( m_tourUi.m_actionNewTour, SIGNAL( activated() ), q, SLOT( createTour() ) );
-    QObject::connect( m_tourUi.m_actionOpenTour, SIGNAL( activated() ), q, SLOT( openFile() ) );
-    QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL( activated() ), q, SLOT( saveTour() ) );
-    QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( activated() ), q, SLOT( saveTourAs() ) );
+    QObject::connect( m_tourUi.m_actionNewTour, SIGNAL( triggered() ), q, SLOT( createTour() ) );
+    QObject::connect( m_tourUi.m_actionOpenTour, SIGNAL( triggered() ), q, SLOT( openFile() ) );
+    QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL( triggered() ), q, SLOT( saveTour() ) );
+    QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( triggered() ), q, SLOT( saveTourAs() ) );
 }
 
 TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
