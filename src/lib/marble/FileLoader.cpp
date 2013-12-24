@@ -75,9 +75,6 @@ public:
     {
     }
 
-    void saveFile(const QString& filename );
-    void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
-
     void createFilterProperties( GeoDataContainer *container );
     int cityPopIdx( qint64 population ) const;
     int spacePopIdx( qint64 population ) const;
@@ -90,7 +87,6 @@ public:
     bool m_recenter;
     QString m_filepath;
     QString m_contents;
-    QString m_nonExistentLocalCacheFile;
     QString m_property;
     GeoDataStyle* m_style;
     DocumentRole m_documentRole;
@@ -147,7 +143,6 @@ void FileLoader::run()
         if ( path == "." ) path.clear();
         QString name = fileinfo.completeBaseName();
         QString suffix = fileinfo.suffix();
-        QString cacheFile;
 
         // determine source, cache names
         if ( fileinfo.isAbsolute() ) {
@@ -157,40 +152,19 @@ void FileLoader::run()
         else if ( d->m_filepath.contains( '/' ) ) {
             // _relative_ path: "maps/mars/viking/patrick.kml"
             defaultSourceName   = MarbleDirs::path( path + '/' + name + '.' + suffix );
+            if ( !QFile::exists( defaultSourceName ) ) {
+                defaultSourceName = MarbleDirs::path( path + '/' + name + ".cache" );
+            }
         }
         else {
             // _standard_ shared placemarks: "placemarks/patrick.kml"
             defaultSourceName   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
-
-            cacheFile = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
-            if ( cacheFile.isEmpty()) {
-                cacheFile = MarbleDirs::localPath() + "/placemarks/" + path + name + ".cache";
-                if ( !QFileInfo( cacheFile ).exists() ) {
-                    d->m_nonExistentLocalCacheFile = cacheFile;
-                }
+            if ( !QFile::exists( defaultSourceName ) ) {
+                defaultSourceName = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
             }
         }
 
-        // if cache file more recent that source file, load cache file
-        if ( QFile::exists( cacheFile ) ) {
-            mDebug() << "Loading Cache File:" + cacheFile;
-
-            QDateTime sourceLastModified;
-
-            if ( QFile::exists( defaultSourceName ) ) {
-                sourceLastModified = QFileInfo( defaultSourceName ).lastModified();
-            }
-
-            const QDateTime cacheLastModified  = QFileInfo( cacheFile ).lastModified();
-
-            if ( sourceLastModified <= cacheLastModified ) {
-                connect( &d->m_runner, SIGNAL(parsingFinished(GeoDataDocument*,QString)),
-                         this, SLOT(documentParsed(GeoDataDocument*,QString)) );
-                d->m_runner.parseFile( cacheFile, d->m_documentRole );
-            }
-        }
-        // we load source file, multiple cases
-        else if ( QFile::exists( defaultSourceName ) ) {
+        if ( QFile::exists( defaultSourceName ) ) {
             mDebug() << "No recent Default Placemark Cache File available!";
 
             // use runners: pnt, gpx, osm
@@ -238,67 +212,6 @@ bool FileLoader::recenter() const
     return d->m_recenter;
 }
 
-const quint32 MarbleMagicNumber = 0x31415926;
-
-void FileLoaderPrivate::saveFile( const QString& filename )
-{
-
-    if ( !QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() )
-        ( QDir::root() ).mkpath( MarbleDirs::localPath() + "/placemarks/" );
-   
-    mDebug() << "Creating cache at " << filename ;
-
-    QFile file( filename );
-    if ( !file.open( QIODevice::WriteOnly ) ) {
-        mDebug() << Q_FUNC_INFO << "Can't open" << filename << "for writing";
-        return;
-    }
-    QDataStream out( &file );
-
-    // Write a header with a "magic number" and a version
-    // out << (quint32)0xA0B0C0D0;
-    out << (quint32)MarbleMagicNumber;
-    out << (qint32)015;
-
-    out.setVersion( QDataStream::Qt_4_2 );
-
-    savePlacemarks(out, m_document);
-}
-
-void FileLoaderPrivate::savePlacemarks(QDataStream &out, const GeoDataContainer *container)
-{
-
-    qreal lon;
-    qreal lat;
-    qreal alt;
-
-    const QVector<GeoDataPlacemark*> placemarks = container->placemarkList();
-    QVector<GeoDataPlacemark*>::const_iterator it = placemarks.constBegin();
-    QVector<GeoDataPlacemark*>::const_iterator const end = placemarks.constEnd();
-    for (; it != end; ++it ) {
-        out << (*it)->name();
-        (*it)->coordinate( m_clock->dateTime() ).geoCoordinates( lon, lat, alt );
-
-        // Use double to provide a single cache file format across architectures
-        out << (double)(lon) << (double)(lat) << (double)(alt);
-        out << QString( (*it)->role() );
-        out << QString( (*it)->description() );
-        out << QString( (*it)->countryCode() );
-        out << QString( (*it)->state() );
-        out << (double) (*it)->area();
-        out << (qint64) (*it)->population();
-        out << ( qint16 ) ( (*it)->extendedData().value("gmt").value().toInt() );
-        out << ( qint8 ) ( (*it)->extendedData().value("dst").value().toInt() );
-    }
-
-    const QVector<GeoDataFolder*> folders = container->folderList();
-    QVector<GeoDataFolder*>::const_iterator cont = folders.constBegin();
-    QVector<GeoDataFolder*>::const_iterator endcont = folders.constEnd();
-    for (; cont != endcont; ++cont ) {
-            savePlacemarks(out, *cont);
-    }
-}
-
 void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& error )
 {
     m_error = error;
@@ -312,9 +225,6 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
 
         createFilterProperties( doc );
         emit q->newGeoDataDocumentAdded( m_document );
-        if ( !m_nonExistentLocalCacheFile.isEmpty() ) {
-            saveFile( m_nonExistentLocalCacheFile );
-        }
     }
     emit q->loaderFinished( q );
 }

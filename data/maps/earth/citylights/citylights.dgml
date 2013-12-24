@@ -44,19 +44,19 @@
 
             <layer name="standardplaces" backend="geodata">
                 <geodata name="cityplacemarks">
-                    <sourcefile>cityplacemarks.kml</sourcefile>
+                    <sourcefile>cityplacemarks.cache</sourcefile>
                 </geodata>
                 <geodata name="baseplacemarks">
-                    <sourcefile>baseplacemarks.kml</sourcefile>
+                    <sourcefile>baseplacemarks.cache</sourcefile>
                 </geodata>
                 <geodata name="elevplacemarks">
-                    <sourcefile>elevplacemarks.kml</sourcefile>
+                    <sourcefile>elevplacemarks.cache</sourcefile>
                 </geodata>
                 <geodata name="otherplacemarks">
-                    <sourcefile>otherplacemarks.kml</sourcefile>
+                    <sourcefile>otherplacemarks.cache</sourcefile>
                 </geodata>
                 <geodata name="boundaryplacemarks">
-                    <sourcefile>boundaryplacemarks.kml</sourcefile>
+                    <sourcefile>boundaryplacemarks.cache</sourcefile>
                 </geodata>
             </layer>
         </map>
