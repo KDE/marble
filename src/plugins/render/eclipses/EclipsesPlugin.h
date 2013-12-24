@@ -42,6 +42,8 @@ class EclipsesPlugin : public RenderPlugin,
                        public DialogConfigurationInterface
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.EclipsesPlugin" )
+
     Q_INTERFACES( Marble::RenderPluginInterface )
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( EclipsesPlugin )
