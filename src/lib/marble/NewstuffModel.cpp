@@ -308,7 +308,12 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
 
     QDomElement root = xml.documentElement();
     QDomNodeList items = root.elementsByTagName( "stuff" );
-    for ( unsigned int i = 0; i < items.length(); ++i ) {
+#if QT_VERSION < 0x050000
+    unsigned int i=0;
+#else
+    int i=0;
+#endif
+    for ( ; i < items.length(); ++i ) {
         m_items << importNode( items.item( i ) );
     }
 
@@ -353,7 +358,12 @@ void NewstuffModelPrivate::installMap()
 void NewstuffModelPrivate::updateModel()
 {
     QDomNodeList items = m_root.elementsByTagName( "stuff" );
-    for ( unsigned int i = 0; i < items.length(); ++i ) {
+#if QT_VERSION < 0x050000
+    unsigned int i=0;
+#else
+    int i=0;
+#endif
+    for ( ; i < items.length(); ++i ) {
         QString const key = m_idTag == NewstuffModel::PayloadTag ? "payload" : "name";
         QDomNodeList matches = items.item( i ).toElement().elementsByTagName( key );
         if ( matches.size() == 1 ) {
