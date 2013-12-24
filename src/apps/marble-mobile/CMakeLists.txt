@@ -9,6 +9,10 @@ include_directories(
 )
 if( QT4_FOUND )
   include(${QT_USE_FILE})
+else()
+  INCLUDE_DIRECTORIES(
+   ${Qt5WebKitWidgets_INCLUDE_DIRS}
+  )
 endif()
 
 set( marblemobile_SRCS
