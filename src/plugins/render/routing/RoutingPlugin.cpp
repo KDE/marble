@@ -505,9 +505,8 @@ void RoutingPlugin::initialize()
     connect( d->m_widget.instructionLabel, SIGNAL(linkActivated(QString)),
              this, SLOT(reverseRoute()) );
 
-    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-
 #if QT_VERSION < 0x050000
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
         /** @todo: The maemo styling of the progressbar adds a black background and some frame
           * which are even painted when no background painting is requested like WidgetItem does.
