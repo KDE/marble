@@ -26,6 +26,8 @@ public:
     GeoDataPlaylist *m_playlist;
 };
 
+const GeoDataTour GeoDataTour::null;
+
 GeoDataTour::GeoDataTour() :
     GeoDataFeature(),
     d(new GeoDataTourPrivate)

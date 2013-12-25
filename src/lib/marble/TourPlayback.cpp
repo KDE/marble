@@ -29,12 +29,12 @@ class TourPlaybackPrivate
 {
 public:
     TourPlaybackPrivate(TourPlayback *q) :
+        m_tour(&GeoDataTour::null),
         m_currentPrimitive(-1),
         m_pause(false),
         q_ptr(q)
     {}
 
-    MarbleWidget *m_widget;
     const GeoDataTour  *m_tour;
     QList<TimedSoundCue> m_cues;
     int m_currentPrimitive;
@@ -52,12 +52,10 @@ private:
     Q_DECLARE_PUBLIC(TourPlayback)
 };
 
-TourPlayback::TourPlayback(QObject *parent, GeoDataTour *tour) :
+TourPlayback::TourPlayback(QObject *parent) :
     QObject(parent),
     d_ptr(new TourPlaybackPrivate(this))
 {
-    Q_D(TourPlayback);
-    d->m_tour = tour;
 }
 
 TourPlayback::~TourPlayback()
@@ -69,6 +67,17 @@ bool TourPlayback::isPlaying() const
 {
     Q_D(const TourPlayback);
     return !d->m_pause;
+}
+
+void TourPlayback::setTour(const GeoDataTour *tour)
+{
+    Q_D(TourPlayback);
+    if (tour) {
+        d->m_tour = tour;
+    }
+    else {
+        d->m_tour = &GeoDataTour::null;
+    }
 }
 
 void TourPlayback::play()

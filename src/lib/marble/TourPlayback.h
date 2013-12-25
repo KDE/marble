@@ -8,7 +8,7 @@
 namespace Marble
 {
 
-class MarbleWidget;
+class GeoDataCoordinates;
 class GeoDataTour;
 class GeoDataTourPrimitive;
 
@@ -17,10 +17,12 @@ class MARBLE_EXPORT TourPlayback : public QObject
 {
     Q_OBJECT
 public:
-    TourPlayback(QObject *parent, GeoDataTour *tour);
+    TourPlayback(QObject *parent);
     ~TourPlayback();
 
     bool isPlaying() const;
+
+    void setTour(const GeoDataTour *tour);
 
 public Q_SLOTS:
     void play();
@@ -31,8 +33,7 @@ Q_SIGNALS:
     void finished();
     void paused();
     void stopped();
-
-    void centerOn(GeoDataCoordinates);
+    void centerOn(const GeoDataCoordinates &coordinates);
 
 protected:
     TourPlaybackPrivate * const d_ptr;

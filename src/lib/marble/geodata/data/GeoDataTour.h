@@ -39,6 +39,8 @@ public:
 
     virtual const char* nodeType() const;
 
+    static const GeoDataTour null;
+
 private:
     GeoDataTourPrivate * const d;
 

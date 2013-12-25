@@ -28,9 +28,6 @@
 #include <QDir>
 #include <QModelIndex>
 #include <QMessageBox>
-#include <QStyledItemDelegate>
-#include <QDebug>
-#include <QPainter>
 
 namespace Marble
 {
@@ -43,7 +40,7 @@ public:
     GeoDataFeature *getPlaylistFeature() const;
     void updateRootIndex();
 
-public Q_SLOTS:
+public:
     void openFile();
     void createTour();
     void saveTour();
@@ -69,8 +66,7 @@ public:
     MarbleWidget *m_widget;
     Ui::TourWidget  m_tourUi;
     GeoDataTreeModel m_model;
-    GeoDataTour  *m_tour;
-    TourPlayback *m_playback;
+    TourPlayback m_playback;
 };
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
@@ -120,18 +116,20 @@ TourWidget::~TourWidget()
 
 void TourWidget::setMarbleWidget( MarbleWidget *widget )
 {
+    if (d->m_widget) {
+        disconnect(&d->m_playback, SIGNAL(centerOn(GeoDataCoordinates)), d->m_widget, SLOT(centerOn(GeoDataCoordinates)));
+    }
+
     d->m_widget = widget;
+
+    if (d->m_widget) {
+        connect(&d->m_playback, SIGNAL(centerOn(GeoDataCoordinates)), d->m_widget, SLOT(centerOn(GeoDataCoordinates)));
+    }
 }
 
 void TourWidget::startPlaying()
 {
-    if (!d->m_playback) {
-        d->m_playback = new TourPlayback(d->m_widget, d->m_tour);
-        connect(d->m_playback, SIGNAL(centerOn(GeoDataCoordinates)),
-                d->m_widget, SLOT(centerOn(GeoDataCoordinates)));
-    }
-
-    d->m_playback->play();
+    d->m_playback.play();
 
     d->m_tourUi.actionPlay->setEnabled(false);
     d->m_tourUi.actionPause->setEnabled(true);
@@ -140,9 +138,7 @@ void TourWidget::startPlaying()
 
 void TourWidget::pausePlaying()
 {
-    Q_ASSERT(d->m_playback);
-
-    d->m_playback->pause();
+    d->m_playback.pause();
 
     d->m_tourUi.actionPlay->setEnabled(true);
     d->m_tourUi.actionPause->setEnabled(false);
@@ -151,10 +147,7 @@ void TourWidget::pausePlaying()
 
 void TourWidget::stopPlaying()
 {
-    if (!d->m_playback)
-        return;
-
-    d->m_playback->stop();
+    d->m_playback.stop();
 
     d->m_tourUi.actionPlay->setEnabled(true);
     d->m_tourUi.actionPause->setEnabled(false);
@@ -321,10 +314,7 @@ void TourWidgetPrivate::updateRootIndex()
 {
     GeoDataTour *tour = findTour( m_model.rootDocument() );
     if ( tour ) {
-        m_tour = tour;
-        delete m_playback; // going to be created if we need another one
-        m_playback = 0;
-
+        m_playback.setTour( tour );
         GeoDataPlaylist *playlist = tour->playlist();
         if ( playlist ) {
             m_tourUi.m_listView->setRootIndex( m_model.index( playlist ) );
