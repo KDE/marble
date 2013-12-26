@@ -81,12 +81,6 @@ public:
       */
     void clear();
 
-    /**
-      * Set the progress animation to use. Each icon in the vector is displayed
-      * sequentially to create the animation, the animation loops endlessly.
-      */
-    void setProgressAnimation( const QVector<QIcon> &animation );
-
 public Q_SLOTS:
     /**
       * Search for placemarks matching the current input text. Does nothing

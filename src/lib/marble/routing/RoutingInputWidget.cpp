@@ -58,8 +58,6 @@ class RoutingInputWidgetPrivate
 public:
     MarbleModel* m_marbleModel;
 
-    MarbleWidget* m_marbleWidget;
-
     RoutingInputLineEdit *m_lineEdit;
 
     QPushButton* m_removeButton;
@@ -74,10 +72,6 @@ public:
     int m_index;
 
     QTimer m_nominatimTimer;
-
-    QVector<QIcon> m_progressAnimation;
-
-    int m_currentFrame;
 
     QAction* m_bookmarkAction;
 
@@ -151,11 +145,11 @@ void RoutingInputLineEdit::keyPressEvent(QKeyEvent *event)
 }
 
 RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int index, QWidget *parent ) :
-        m_marbleModel( widget->model() ), m_marbleWidget( widget ), m_lineEdit( 0 ),
+        m_marbleModel( widget->model() ),
+        m_lineEdit( 0 ),
         m_placemarkRunnerManager( m_marbleModel ),
         m_reverseGeocodingRunnerManager( m_marbleModel ),
         m_placemarkModel( 0 ), m_route( m_marbleModel->routingManager()->routeRequest() ), m_index( index ),
-        m_currentFrame( 0 ),
         m_bookmarkAction( 0 ), m_mapInput( 0 ), m_currentLocationAction( 0 ),
         m_centerAction( 0 ),
         m_menu( 0 )
@@ -436,11 +430,6 @@ void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinate
 {
     (*d->m_route)[d->m_index] = placemark;
     d->updateDescription();
-}
-
-void RoutingInputWidget::setProgressAnimation( const QVector<QIcon> &animation )
-{
-    d->m_progressAnimation = animation;
 }
 
 void RoutingInputWidget::reloadBookmarks()
