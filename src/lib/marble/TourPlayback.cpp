@@ -56,10 +56,8 @@ public:
     void processNextPrimitive();
     void bounceToCurrentPrimitive();
     void playSoundCue();
-#ifdef HAVE_PHONON
     void resumePlaying();
     void stopPlaying();
-#endif
 
 private:
     Q_DECLARE_PUBLIC(TourPlayback)
@@ -101,9 +99,7 @@ void TourPlayback::play()
     Q_D(TourPlayback);
     d->m_cues.clear();
     d->m_pause = false;
-#ifdef HAVE_PHONON
     d->resumePlaying();
-#endif
     d->processNextPrimitive();
 }
 
@@ -217,19 +213,21 @@ void TourPlaybackPrivate::playSoundCue()
     }
 }
 
-#ifdef HAVE_PHONON
 void TourPlaybackPrivate::stopPlaying()
 {
+#ifdef HAVE_PHONON
     QList<Phonon::MediaObject*>::iterator iter = m_mediaList.begin();
     QList<Phonon::MediaObject*>::iterator end = m_mediaList.end();
     for (; iter != end; ++ iter) {
         (*iter)->stop();
     }
     m_mediaList.clear();
+#endif // HAVE_PHONON
 }
 
 void TourPlaybackPrivate::resumePlaying()
 {
+#ifdef HAVE_PHONON
     QList<Phonon::MediaObject*>::iterator iter = m_mediaList.begin();
     QList<Phonon::MediaObject*>::iterator end = m_mediaList.end();
     for (; iter != end; ++iter) {
@@ -237,8 +235,8 @@ void TourPlaybackPrivate::resumePlaying()
             (*iter)->play();
         }
     }
-}
 #endif // HAVE_PHONON
+}
 
 } // namespace Marble
 
