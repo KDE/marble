@@ -263,16 +263,14 @@ RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setSpacing( 0 );
     layout->setMargin( 0 );
+    layout->addWidget( d->m_lineEdit );
+    layout->addWidget( d->m_removeButton );
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
-        layout->addWidget( d->m_lineEdit );
-        layout->addWidget( d->m_removeButton );
         connect( d->m_lineEdit, SIGNAL(decoratorButtonClicked()), this, SLOT(openTargetSelectionDialog()) );
     } else {
         d->createMenu( this );
-        layout->addWidget( d->m_lineEdit );
-        layout->addWidget(d->m_removeButton);
         connect(d->m_lineEdit, SIGNAL(decoratorButtonClicked()), this, SLOT(showMenu()));
     }
 
