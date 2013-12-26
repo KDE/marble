@@ -473,7 +473,7 @@ void RoutingWidget::addInputWidget()
 void RoutingWidget::insertInputWidget( int index )
 {
     if ( index >= 0 && index <= d->m_inputWidgets.size() ) {
-        RoutingInputWidget *input = new RoutingInputWidget( d->m_widget, index, this );
+        RoutingInputWidget *input = new RoutingInputWidget( d->m_widget->model(), index, this );
         d->m_inputWidgets.insert( index, input );
         connect( input, SIGNAL(searchFinished(RoutingInputWidget*)),
                  this, SLOT(handleSearchResult(RoutingInputWidget*)) );

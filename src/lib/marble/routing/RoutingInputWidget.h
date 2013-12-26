@@ -17,18 +17,14 @@
 
 #include <QWidget>
 
-class QNetworkReply;
 class QAbstractItemModel;
-class QMenu;
 
 namespace Marble
 {
 
 class RoutingInputWidgetPrivate;
+class MarbleModel;
 class MarblePlacemarkModel;
-class RouteRequest;
-class PluginManager;
-class MarbleWidget;
 
 /**
   * Combines a line edit for input and a couple of buttons to let
@@ -43,7 +39,7 @@ class RoutingInputWidget : public QWidget
 public:
 
     /** Constructor */
-    explicit RoutingInputWidget( MarbleWidget* widget, int index, QWidget *parent = 0 );
+    explicit RoutingInputWidget( MarbleModel* model, int index, QWidget *parent = 0 );
 
     /** Destructor */
     ~RoutingInputWidget();

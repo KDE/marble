@@ -84,7 +84,7 @@ public:
     QMenu *m_menu;
 
     /** Constructor */
-    RoutingInputWidgetPrivate( MarbleWidget* widget, int index, QWidget *parent );
+    RoutingInputWidgetPrivate( MarbleModel* model, int index, QWidget *parent );
 
     /** Initiate reverse geocoding request to download address */
     void adjustText();
@@ -144,8 +144,8 @@ void RoutingInputLineEdit::keyPressEvent(QKeyEvent *event)
     }
 }
 
-RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int index, QWidget *parent ) :
-        m_marbleModel( widget->model() ),
+RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleModel* model, int index, QWidget *parent ) :
+        m_marbleModel( model ),
         m_lineEdit( 0 ),
         m_placemarkRunnerManager( m_marbleModel ),
         m_reverseGeocodingRunnerManager( m_marbleModel ),
@@ -251,8 +251,8 @@ QPixmap RoutingInputWidgetPrivate::addDropDownIndicator(const QPixmap &pixmap) c
     return result;
 }
 
-RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget *parent ) :
-        QWidget( parent ), d( new RoutingInputWidgetPrivate( widget, index, this ) )
+RoutingInputWidget::RoutingInputWidget( MarbleModel* model, int index, QWidget *parent ) :
+        QWidget( parent ), d( new RoutingInputWidgetPrivate( model, index, this ) )
 {
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setSpacing( 0 );
