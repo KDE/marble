@@ -166,7 +166,7 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
     const MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
 
     int temperatureUnit;
-    if ( locale->measurementSystem() == QLocale::MetricSystem ) {
+    if ( locale->measurementSystem() == MarbleLocale::MetricSystem ) {
         temperatureUnit = WeatherData::Celsius;
     }
     else {
@@ -175,7 +175,7 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
     m_settings.insert( "temperatureUnit", settings.value( "temperatureUnit", temperatureUnit ) );
 
     int windSpeedUnit;
-    if ( locale->measurementSystem() == QLocale::MetricSystem ) {
+    if ( locale->measurementSystem() == MarbleLocale::MetricSystem ) {
         windSpeedUnit = WeatherData::kph;
     }
     else {
@@ -184,7 +184,7 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
     m_settings.insert( "windSpeedUnit", settings.value( "windSpeedUnit", windSpeedUnit ) );
 
     int pressureUnit;
-    if ( locale->measurementSystem() == QLocale::MetricSystem ) {
+    if ( locale->measurementSystem() == MarbleLocale::MetricSystem ) {
         pressureUnit = WeatherData::HectoPascal;
     }
     else {

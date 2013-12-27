@@ -16,6 +16,7 @@
 
 #include "marble_export.h"
 #include "MarbleGlobal.h"
+#include "MarbleLocale.h"
 #include "cloudsync/CloudSyncManager.h"
 
 namespace Marble
@@ -37,7 +38,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 
     // View Settings
     
-    QLocale::MeasurementSystem measurementSystem() const;
+    MarbleLocale::MeasurementSystem measurementSystem() const;
     Marble::AngleUnit angleUnit() const;
     Marble::MapQuality stillQuality() const;
     Marble::MapQuality animationQuality() const;

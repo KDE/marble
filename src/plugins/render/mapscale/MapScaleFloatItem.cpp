@@ -172,10 +172,13 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
 
         m_scaleBarDistance = (qreal)(m_scaleBarWidth) * m_pixel2Length;
 
-        const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
+        const MarbleLocale::MeasurementSystem measurementSystem =
+                MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-        if ( measurementSystem != QLocale::MetricSystem ) {
+        if ( measurementSystem != MarbleLocale::MetricSystem ) {
             m_scaleBarDistance *= KM2MI;
+        } else if (measurementSystem == MarbleLocale::NauticalSystem) {
+            m_scaleBarDistance *= KM2NM;
         }
 
         calcScaleBar();
@@ -242,12 +245,12 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
 	    painter->setPen(   QColor( Qt::black ) );
         }
 
-        QLocale::MeasurementSystem distanceUnit;
+        MarbleLocale::MeasurementSystem distanceUnit;
         distanceUnit = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
         QString unit = tr("km");
         switch ( distanceUnit ) {
-        case QLocale::MetricSystem:
+        case MarbleLocale::MetricSystem:
             if ( m_bestDivisor * m_valueInterval > 10000 ) {
                 unit = tr("km");
                 intervalStr.setNum( j * m_valueInterval / 1000 );
@@ -257,13 +260,7 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
                 intervalStr.setNum( j * m_valueInterval );
             }
             break;
-
-#if QT_VERSION < 0x050000
-    case QLocale::ImperialSystem:
-#else
-    case QLocale::ImperialUSSystem:
-    case QLocale::ImperialUKSystem:
-#endif
+        case MarbleLocale::ImperialSystem:
             unit = tr("mi");
             intervalStr.setNum( j * m_valueInterval / 1000 );
 

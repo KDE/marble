@@ -132,12 +132,13 @@ QString RoutingPluginPrivate::fuzzyDistance( qreal length ) const
     int precision = 0;
     QString distanceUnit = QLatin1String( "m" );
 
-    if ( MarbleGlobal::getInstance()->locale()->measurementSystem() != QLocale::MetricSystem ) {
+    if ( MarbleGlobal::getInstance()->locale()->measurementSystem() != MarbleLocale::MetricSystem ) {
         precision = 1;
         distanceUnit = "mi";
         length *= METER2KM;
         length *= KM2MI;
-    } else {
+    } else if (MarbleGlobal::getInstance()->locale()->measurementSystem() ==
+               MarbleLocale::MetricSystem) {
         if ( length >= 1000 ) {
             length /= 1000;
             distanceUnit = "km";
@@ -149,6 +150,12 @@ QString RoutingPluginPrivate::fuzzyDistance( qreal length ) const
         } else {
             length = 10 * qRound( length / 10 );
         }
+    } else if (MarbleGlobal::getInstance()->locale()->measurementSystem() ==
+               MarbleLocale::NauticalSystem) {
+        precision = 2;
+        distanceUnit = "nm";
+        length *= METER2KM;
+        length *= KM2NM;
     }
 
     return QString( "%1 %2" ).arg( length, 0, 'f', precision ).arg( distanceUnit );

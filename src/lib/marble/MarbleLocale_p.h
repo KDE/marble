@@ -11,6 +11,7 @@
 #ifndef MARBLE_MARBLELOCALE_P_H
 #define MARBLE_MARBLELOCALE_P_H
 
+#include "MarbleLocale.h"
 
 namespace Marble
 {
@@ -22,7 +23,7 @@ class MarbleLocalePrivate
     MarbleLocalePrivate();
     virtual ~MarbleLocalePrivate();
 
-    QLocale::MeasurementSystem m_measurementSystem;
+    MarbleLocale::MeasurementSystem m_measurementSystem;
 };
 
 }

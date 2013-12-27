@@ -67,7 +67,7 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
         append( &url, "to", QString::number( route->at( i ).latitude( degree ), 'f', 6 ) + ',' + QString::number( route->at( i ).longitude( degree ), 'f', 6 ) );
     }
 
-    QString const unit = MarbleGlobal::getInstance()->locale()->measurementSystem() == QLocale::MetricSystem ? "k" : "m";
+    QString const unit = MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::MetricSystem ? "k" : "m";
     append( &url, "units", unit );
 
     if ( settings["noMotorways"].toInt() ) {

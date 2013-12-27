@@ -263,7 +263,7 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
     html += "</body></html>";
 
     switch ( MarbleGlobal::getInstance()->locale()->measurementSystem() ) {
-        case QLocale::MetricSystem:
+    case MarbleLocale::MetricSystem:
         //kilometers per hour
         unitString = QObject::tr("km/h");
         unitSpeed = speed * HOUR2SEC * METER2KM;
@@ -275,13 +275,7 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
         }
         altitude = position.altitude();
         break;
-
-#if QT_VERSION < 0x050000
-    case QLocale::ImperialSystem:
-#else
-    case QLocale::ImperialUSSystem:
-    case QLocale::ImperialUKSystem:
-#endif
+    case MarbleLocale::ImperialSystem:
         //miles per hour
         unitString = QObject::tr("m/h");
         unitSpeed = speed * HOUR2SEC * METER2KM * KM2MI;
@@ -289,6 +283,16 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
         distanceUnitString = QObject::tr("ft");
         altitude = position.altitude() * M2FT;
         length *= M2FT;
+        break;
+
+    case MarbleLocale::NauticalSystem:
+        // nautical miles
+        unitString = QObject::tr("kt");
+        unitSpeed = speed * HOUR2SEC * METER2KM * KM2NM;
+        altitudeUnitString = QObject::tr("m");
+        distanceUnitString = QObject::tr("nm");
+        altitude = position.altitude();
+        length *= METER2KM*KM2NM;
         break;
     }
     // TODO read this value from the incoming signal

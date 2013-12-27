@@ -145,17 +145,13 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
         if ( m_currentPosition.isValid() ) {
             QString unitString = tr( "m" );
             int displayScale = 1.0;
-            const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
+            const MarbleLocale::MeasurementSystem measurementSystem =
+                    MarbleGlobal::getInstance()->locale()->measurementSystem();
             switch ( measurementSystem ) {
-            case QLocale::MetricSystem:
+            case MarbleLocale::MetricSystem:
                 /* nothing to do */
                 break;
-#if QT_VERSION < 0x050000
-    case QLocale::ImperialSystem:
-#else
-    case QLocale::ImperialUSSystem:
-    case QLocale::ImperialUKSystem:
-#endif
+            case MarbleLocale::ImperialSystem:
                 unitString = tr( "ft" );
                 displayScale = M2FT;
                 break;

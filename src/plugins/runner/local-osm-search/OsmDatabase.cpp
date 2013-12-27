@@ -236,12 +236,13 @@ QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataC
     int precision = 0;
     QString distanceUnit = QLatin1String( "m" );
 
-    if ( MarbleGlobal::getInstance()->locale()->measurementSystem() != QLocale::MetricSystem ) {
+    if ( MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::MetricSystem ) {
         precision = 1;
         distanceUnit = "mi";
         distance *= METER2KM;
         distance *= KM2MI;
-    } else {
+    } else if (MarbleGlobal::getInstance()->locale()->measurementSystem() ==
+               MarbleLocale::MetricSystem) {
         if ( distance >= 1000 ) {
             distance /= 1000;
             distanceUnit = "km";
@@ -253,6 +254,12 @@ QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataC
         } else {
             distance = 10 * qRound( distance / 10 );
         }
+    } else if (MarbleGlobal::getInstance()->locale()->measurementSystem() ==
+               MarbleLocale::NauticalSystem) {
+        precision = 2;
+        distanceUnit = "nm";
+        distance *= METER2KM;
+        distance *= KM2NM;
     }
 
     QString const fuzzyDistance = QString( "%1 %2" ).arg( distance, 0, 'f', precision ).arg( distanceUnit );

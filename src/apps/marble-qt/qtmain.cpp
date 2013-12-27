@@ -178,7 +178,8 @@ int main(int argc, char *argv[])
     }
     MarbleGlobal::getInstance()->setProfiles( profiles );
 
-    QLocale::MeasurementSystem const measurement = QLocale::system().measurementSystem();
+    MarbleLocale::MeasurementSystem const measurement =
+            (MarbleLocale::MeasurementSystem)QLocale::system().measurementSystem();
     MarbleGlobal::getInstance()->locale()->setMeasurementSystem( measurement );
 
     QVariantMap cmdLineSettings;

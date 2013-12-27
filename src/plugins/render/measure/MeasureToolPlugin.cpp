@@ -221,22 +221,24 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         painter->setPen( shadowPen );
         painter->drawPolyline( segment );
 
-        const QLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
+        const MarbleLocale::MeasurementSystem measurementSystem =
+                MarbleGlobal::getInstance()->locale()->measurementSystem();
 
         const qreal segmentLength = segment.length( marbleModel()->planet()->radius() );
 
         QString distanceString;
 
-        if ( measurementSystem == QLocale::MetricSystem ) {
+        if ( measurementSystem == MarbleLocale::MetricSystem ) {
             if ( segmentLength >= 1000.0 ) {
                 distanceString = tr("%1 km").arg( segmentLength / 1000.0, 0, 'f', 2 );
             }
             else {
                 distanceString = tr("%1 m").arg( segmentLength, 0, 'f', 2 );
             }
-        }
-        else {
+        } else if (measurementSystem == MarbleLocale::ImperialSystem) {
             distanceString = QString("%1 mi").arg( segmentLength / 1000.0 * KM2MI, 0, 'f', 2 );
+        } else if (measurementSystem == MarbleLocale::NauticalSystem) {
+            distanceString = QString("%1 nm").arg( segmentLength / 1000.0 * KM2NM, 0, 'f', 2 );
         }
 
         QPen linePen;
@@ -276,10 +278,10 @@ void MeasureToolPlugin::drawTotalDistanceLabel( GeoPainter *painter,
 {
     QString  distanceString;
 
-    QLocale::MeasurementSystem measurementSystem;
+    MarbleLocale::MeasurementSystem measurementSystem;
     measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-    if ( measurementSystem == QLocale::MetricSystem ) {
+    if ( measurementSystem == MarbleLocale::MetricSystem ) {
         if ( totalDistance >= 1000.0 ) {
             distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
         }

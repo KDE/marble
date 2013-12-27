@@ -360,10 +360,10 @@ QString OpenCachingComItem::formatDistance(qreal spheredistance) const
 {
     qreal distance = m_model->marbleModel()->planet()->radius() * spheredistance;
     QString distanceString;
-    QLocale::MeasurementSystem measurementSystem;
+    MarbleLocale::MeasurementSystem measurementSystem;
     measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-    if ( measurementSystem == QLocale::MetricSystem ) {
+    if ( measurementSystem == MarbleLocale::MetricSystem ) {
         if ( distance >= 1000.0 ) {
             distanceString = tr("%1 km").arg( distance / 1000.0, 0, 'f', 2 );
         }
@@ -371,8 +371,10 @@ QString OpenCachingComItem::formatDistance(qreal spheredistance) const
             distanceString = tr("%1 m").arg( distance, 0, 'f', 2 );
         }
     }
-    else {
+    else if (measurementSystem == MarbleLocale::ImperialSystem) {
         distanceString = QString("%1 mi").arg( distance / 1000.0 * KM2MI, 0, 'f', 2 );
+    } else if (measurementSystem == MarbleLocale::NauticalSystem) {
+        distanceString = QString("%1 nm").arg( distance / 1000.0 * KM2NM, 0, 'f', 2 );
     }
 
     return distanceString;

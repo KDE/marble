@@ -122,12 +122,7 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
     QString distanceString;
 
     switch ( m_locale->measurementSystem() ) {
-#if QT_VERSION < 0x050000
-    case QLocale::ImperialSystem:
-#else
-    case QLocale::ImperialUSSystem:
-    case QLocale::ImperialUKSystem:
-#endif
+    case MarbleLocale::ImperialSystem:
         //miles per hour
         speedString = tr("mph");
         speed *= HOUR2SEC * METER2KM * KM2MI;
@@ -136,11 +131,18 @@ void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
         precision *= M2FT;
         break;
 
-    case QLocale::MetricSystem:
+    case MarbleLocale::MetricSystem:
         //kilometers per hour
         speedString = tr("km/h");
         speed *= HOUR2SEC * METER2KM;
         distanceString = tr("m");
+        break;
+
+    case MarbleLocale::NauticalSystem:
+        // nm per hour (knots)
+        speedString = tr("kt");
+        speed *= HOUR2SEC * METER2KM * KM2NM;
+        distanceString = tr("nm");
         break;
     }
 

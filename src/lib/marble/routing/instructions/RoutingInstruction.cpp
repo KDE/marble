@@ -9,6 +9,7 @@
 //
 
 #include "RoutingInstruction.h"
+#include "MarbleLocale.h"
 
 #include <QCoreApplication>
 #include <QStringList>
@@ -291,7 +292,7 @@ QString RoutingInstruction::nextDistanceInstruction() const
     qreal length = distance();
     QString distanceUnit = QLatin1String( "m" );
 
-    if ( measurement != QLocale::MetricSystem ) {
+    if ( measurement != MarbleLocale::MetricSystem ) {
         precision = 1;
         distanceUnit = "mi";
         length /= 1000.0;

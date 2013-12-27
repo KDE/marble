@@ -192,6 +192,10 @@ const int defaultLevelZeroRows = 1;
 const qreal MI2KM = 1.609344;
 const qreal KM2MI = 1.0 / MI2KM;
 
+// Conversion Nautical / Imperial System: nm vs. km
+const qreal NM2KM = 1.852;
+const qreal KM2NM = 1.0 / NM2KM;
+
 // Conversion Metric / Imperial System: meter vs. feet
 const qreal M2FT = 3.2808;
 const qreal FT2M = 1.0 / M2FT;

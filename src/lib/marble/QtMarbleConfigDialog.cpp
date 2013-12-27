@@ -473,14 +473,13 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_previousGraphicsSystem = graphicsSystem();
 }
 
-QLocale::MeasurementSystem QtMarbleConfigDialog::measurementSystem() const
+MarbleLocale::MeasurementSystem QtMarbleConfigDialog::measurementSystem() const
 {
     if( d->m_settings.contains( "View/distanceUnit" ) ) {
-        return (QLocale::MeasurementSystem) d->m_settings.value( "View/distanceUnit" ).toInt();
+        return (MarbleLocale::MeasurementSystem)d->m_settings.value( "View/distanceUnit" ).toInt();
     }
 
     MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
-
     return locale->measurementSystem();
 }
 

@@ -34,8 +34,14 @@ class MARBLE_EXPORT MarbleLocale
     MarbleLocale();
     ~MarbleLocale();
 
-    void setMeasurementSystem( QLocale::MeasurementSystem measurementSystem );
-    QLocale::MeasurementSystem measurementSystem() const;
+    enum MeasurementSystem {
+        MetricSystem = 0,
+        ImperialSystem,
+        NauticalSystem
+    };
+
+    void setMeasurementSystem( MarbleLocale::MeasurementSystem measurementSystem );
+    MarbleLocale::MeasurementSystem measurementSystem() const;
 
     static QString languageCode();
 

@@ -134,10 +134,10 @@ void ElevationProfilePlotAxis::updateTicks()
 
 void ElevationProfilePlotAxis::updateScale()
 {
-    QLocale::MeasurementSystem measurementSystem;
+    MarbleLocale::MeasurementSystem measurementSystem;
     measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
     switch ( measurementSystem ) {
-    case QLocale::MetricSystem:
+    case MarbleLocale::MetricSystem:
         if ( range() >= 10 * KM2METER ) {
             m_unitString = tr( "km" );
             m_displayScale = METER2KM;
@@ -146,12 +146,7 @@ void ElevationProfilePlotAxis::updateScale()
             m_displayScale = 1.0;
         }
         break;
-#if QT_VERSION < 0x050000
-    case QLocale::ImperialSystem:
-#else
-    case QLocale::ImperialUSSystem:
-    case QLocale::ImperialUKSystem:
-#endif
+    case MarbleLocale::ImperialSystem:
         // FIXME: Do these values make sense?
         if ( range() >= 10 * KM2METER * MI2KM ) {
             m_unitString = tr( "mi" );
@@ -160,6 +155,11 @@ void ElevationProfilePlotAxis::updateScale()
             m_unitString = tr( "ft" );
             m_displayScale = M2FT;
         }
+        break;
+
+    case MarbleLocale::NauticalSystem:
+        m_unitString = tr("nm");
+        m_displayScale = METER2KM * KM2NM;
         break;
     }
 }

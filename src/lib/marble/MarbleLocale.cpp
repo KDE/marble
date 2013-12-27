@@ -19,7 +19,7 @@ namespace Marble
 {
 
 MarbleLocalePrivate::MarbleLocalePrivate()
-    : m_measurementSystem( QLocale::MetricSystem )
+    : m_measurementSystem( MarbleLocale::MetricSystem )
 {
 }
 
@@ -37,12 +37,12 @@ MarbleLocale::~MarbleLocale()
     delete d;
 }
 
-void MarbleLocale::setMeasurementSystem( QLocale::MeasurementSystem measurementSystem )
+void MarbleLocale::setMeasurementSystem( MarbleLocale::MeasurementSystem measurementSystem )
 {
     d->m_measurementSystem = measurementSystem;
 }
 
-QLocale::MeasurementSystem MarbleLocale::measurementSystem() const
+MarbleLocale::MeasurementSystem MarbleLocale::measurementSystem() const
 {
     return d->m_measurementSystem;
 }
