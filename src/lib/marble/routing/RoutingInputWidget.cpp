@@ -331,8 +331,7 @@ void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position, 
 
 bool RoutingInputWidget::hasTargetPosition() const
 {
-    GeoDataCoordinates pos = targetPosition();
-    return pos.longitude() != 0.0 && pos.latitude() != 0.0;
+    return targetPosition().isValid();
 }
 
 GeoDataCoordinates RoutingInputWidget::targetPosition() const
