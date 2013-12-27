@@ -414,6 +414,7 @@
             <coordinates>-43.22,-2.45</coordinates>
         </Point>
     </Placemark>
+
     <Placemark>
         <name>Surveyor 3</name>
         <description><![CDATA[<p><i>20.4.1967:</i> <b>Second unmanned American moon landing. Transmitted more than 6,000 images.</b></p>
@@ -423,6 +424,7 @@
             <coordinates>-23.34,-2.94</coordinates>
         </Point>
     </Placemark>
+
     <Placemark>
         <name>Surveyor 5</name>
         <description><![CDATA[<p><i>11.9.1967:</i> <b>Third unmanned American moon landing. Transmitted more than 19,000 images. Alpha-scattering surface analyzer.</b></p>
@@ -432,6 +434,7 @@
             <coordinates>23.18,1.41</coordinates>
         </Point>
     </Placemark>
+
     <Placemark>
         <name>Surveyor 6</name>
         <description><![CDATA[<p><i>10.11.1967:</i> <b>Unmanned American moon landing. Transmitted more than 30,000 images. Robot arm and alpha scatter science.</b></p>
@@ -441,6 +444,7 @@
             <coordinates>-1.37,0.46</coordinates>
         </Point>
     </Placemark>
+
     <Placemark>
         <name>Surveyor 7</name>
         <description><![CDATA[<p><i>7.1.1968:</i> <b>Unmanned American moon landing. Transmitted more than 21,000 images. Robot arm and alpha scatter science.</b></p>
@@ -471,8 +475,8 @@
         </Point>
     </Placemark>
 
-	<!--- Japanese Hard Moon Landings -->
-	<Placemark>
+    <!--- Japanese Hard Moon Landings -->
+    <Placemark>
         <name>Hiten</name>
         <description><![CDATA[<i>10.4.1993:</i> <b>It was Japan's first lunar probe, the first robotic lunar probe since the Soviet Union's Luna 24 in 1976, and the first lunar probe launched by a country other than Soviet Union or the United States. It was placed into a permanent lunar orbit, where it remained until it was deliberately crashed into the lunar surface.</b>]]></description>
         <role>i</role>
@@ -480,7 +484,8 @@
             <coordinates>55.6,-34.3</coordinates>
         </Point>
     </Placemark>
-	<Placemark>
+
+    <Placemark>
         <name>SELENE (Kaguya)</name>
         <description><![CDATA[<i></i>10.6.2009:</i> <b>The main scientific objectives of the mission were to study the origins of the Moon and its geologic evolution, obtain information about the lunar surface environment and perform radio science, especially precise measurement of the moon's gravity field, it impacted with controll.</b>]]> </description>
         <role>i</role>
@@ -488,7 +493,8 @@
             <coordinates>80.5,-65.5</coordinates>
         </Point>
     </Placemark>
-	<Placemark>
+
+    <Placemark>
         <name>SELENE Rstar (Okina)</name>
         <description><![CDATA[<i></i>10.6.2009:</i> <b>The main scientific objectives of the mission were to study the origins of the Moon and its geologic evolution, obtain information about the lunar surface environment and perform radio science, especially precise measurement of the moon's gravity field, it impacted with controll.</b>]]> </description>
         <role>i</role>
@@ -497,8 +503,18 @@
         </Point>
     </Placemark>
 
-	<!--- Chinese Hard Moon Landings -->
-	<Placemark>
+    <!--- Chinese Moon Missions -->
+    <Placemark>
+        <name>Chang'e 3</name>
+        <description><![CDATA[It achieved lunar orbit on 6 December 2013 and landed on 14 December 2013, becoming the first probe in 37 years to soft-land on the Moon since Luna 24 in 1976. The official mission objective is to achieve China's first soft-landing and roving exploration on the Moon, as well as to develop and analyze key technological developments, while identifying resources that could potentially be mined in the future.]]></description>
+        <role>u</role>
+        <Point>
+            <coordinates>-19.51,44.12</coordinates>
+        </Point>
+    </Placemark>
+
+    <!--- Chinese Hard Moon Landings -->
+    <Placemark>
         <name>Chang'e 1</name>
         <description><![CDATA[<i></i>1.3.2009:</i> <b>It was taken out of orbit and it impacted the surface of the Moon.</b>]]> </description>
         <role>i</role>
