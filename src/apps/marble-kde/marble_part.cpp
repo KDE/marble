@@ -149,10 +149,10 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     MarbleLocale *marbleLocale = MarbleGlobal::getInstance()->locale();
     KLocale *kLocale = KGlobal::locale();
     if ( kLocale->measureSystem() == KLocale::Metric ) {
-        marbleLocale->setMeasurementSystem( QLocale::MetricSystem );
+        marbleLocale->setMeasurementSystem( MarbleLocale::MetricSystem );
     }
     else {
-        marbleLocale->setMeasurementSystem( QLocale::ImperialSystem );
+        marbleLocale->setMeasurementSystem( MarbleLocale::ImperialSystem );
     }
 
     migrateNewstuffConfigFiles();
@@ -1619,7 +1619,7 @@ void MarblePart::updateSettings()
     m_controlView->marbleWidget()->
         setDefaultAngleUnit( (AngleUnit) MarbleSettings::angleUnit() );
     MarbleGlobal::getInstance()->locale()->
-        setMeasurementSystem( (QLocale::MeasurementSystem) MarbleSettings::distanceUnit() );
+        setMeasurementSystem( (MarbleLocale::MeasurementSystem) MarbleSettings::distanceUnit() );
 
     updateStatusBar();
 
