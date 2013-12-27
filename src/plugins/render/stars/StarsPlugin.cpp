@@ -1389,10 +1389,15 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         if ( m_renderSun ) {
             // sun
-            const SunLocator *sun = marbleModel()->sunLocator();
-            Quaternion::fromEuler( -centerLat , centerLon, 0.0 ).inverse().toMatrix( skyAxisMatrix );
-            Quaternion qpos = Quaternion::fromSpherical( sun->getLon() * DEG2RAD,
-                                                         sun->getLat() * DEG2RAD );
+            SolarSystem sys;
+            sys.setCentralBody( "Earth" );
+            double ra = 0.0;
+            double decl = 0.0;
+            sys.getSun( ra, decl );
+            ra = 15.0 * sys.DmsDegF( ra );
+            decl = sys.DmsDegF( decl );
+
+            Quaternion qpos = Quaternion::fromSpherical( ra * DEG2RAD, decl * DEG2RAD );
             qpos.rotateAroundAxis( skyAxisMatrix );
 
             if ( qpos.v[Q_Z] <= 0 ) {
