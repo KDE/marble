@@ -19,6 +19,7 @@
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QColorDialog>
+#include <qmath.h>
 
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
@@ -30,6 +31,8 @@
 #include "Planet.h"
 #include "SunLocator.h"
 #include "ViewportParams.h"
+
+#include "src/lib/astro/solarsystem.h"
 
 namespace Marble
 {
@@ -45,6 +48,7 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_renderDsos( true ),
       m_renderDsoLabels( true ),
       m_renderSun( true ),
+      m_renderMoon( true ),
       m_renderEcliptic( true ),
       m_renderCelestialEquator( true ),
       m_renderCelestialPole( true ),
@@ -185,6 +189,7 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     settings["renderDsos"] = m_renderDsos;
     settings["renderDsoLabels"] = m_renderDsoLabels;
     settings["renderSun"] = m_renderSun;
+    settings["renderMoon"] = m_renderMoon;
     settings["renderEcliptic"] = m_renderEcliptic;
     settings["renderCelestialEquator"] = m_renderCelestialEquator;
     settings["renderCelestialPole"] = m_renderCelestialPole;
@@ -210,6 +215,7 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderDsos = readSetting<bool>( settings, "renderDsos", true );
     m_renderDsoLabels = readSetting<bool>( settings, "renderDsoLabels", true);
     m_renderSun = readSetting<bool>( settings, "renderSun", true );
+    m_renderMoon = readSetting<bool>( settings, "renderMoon", true );
     m_renderEcliptic = readSetting<bool>( settings, "renderEcliptic", true );
     m_renderCelestialEquator = readSetting<bool>( settings, "renderCelestialEquator", true );
     m_renderCelestialPole = readSetting<bool>( settings, "renderCelestialPole", true );
@@ -615,6 +621,9 @@ void StarsPlugin::readSettings()
     Qt::CheckState const sunState = m_renderSun ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewSunCheckbox->setCheckState( sunState );
 
+    Qt::CheckState const moonState = m_renderMoon ? Qt::Checked :Qt::Unchecked;
+    ui_configWidget->m_viewMoonCheckbox->setCheckState( moonState );
+
     Qt::CheckState const eclipticState = m_renderEcliptic ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewEclipticCheckbox->setCheckState( eclipticState );
 
@@ -670,6 +679,7 @@ void StarsPlugin::writeSettings()
     m_renderDsos = ui_configWidget->m_viewDsosCheckbox->checkState() == Qt::Checked;
     m_renderDsoLabels = ui_configWidget->m_viewDsoLabelCheckbox->checkState() == Qt::Checked;
     m_renderSun = ui_configWidget->m_viewSunCheckbox->checkState() == Qt::Checked;
+    m_renderMoon = ui_configWidget->m_viewSunCheckbox->checkState() == Qt::Checked;
     m_renderEcliptic = ui_configWidget->m_viewEclipticCheckbox->checkState() == Qt::Checked;
     m_renderCelestialEquator = ui_configWidget->m_viewCelestialEquatorCheckbox->checkState() == Qt::Checked;
     m_renderCelestialPole = ui_configWidget->m_viewCelestialPoleCheckbox->checkState() == Qt::Checked;
@@ -817,6 +827,7 @@ void StarsPlugin::loadStars()
     // load the Sun pixmap
     // TODO: adjust pixmap size according to distance
     m_pixmapSun.load( MarbleDirs::path( "svg/sun.png" ) );
+    m_pixmapMoon.load( MarbleDirs::path( "svg/moon.png" ) );
 
     // Load star pixmaps
     QVector<QPixmap> m_pixBigStars;
@@ -1338,6 +1349,43 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
+        if ( m_renderMoon && marbleModel()->planetName() == "Earth" ) {
+            // moon
+            SolarSystem sys;
+            QDateTime dateTime = marbleModel()->clock()->dateTime();
+            sys.setCurrentMJD(
+                        dateTime.date().year(), dateTime.date().month(), dateTime.date().day(),
+                        dateTime.time().hour(), dateTime.time().minute(),
+                        (double)dateTime.time().second());
+
+            sys.setCentralBody("Earth");
+            double ra=0.0;
+            double decl=0.0;
+            sys.getMoon(ra, decl);
+            ra = 15.0 * sys.DmsDegF(ra);
+            decl = sys.DmsDegF(decl);
+
+            Quaternion qpos = Quaternion::fromSpherical( ra * DEG2RAD,
+                                                         decl * DEG2RAD );
+            qpos.rotateAroundAxis( skyAxisMatrix );
+
+            if ( qpos.v[Q_Z] <= 0 ) {
+                const qreal size = skyRadius * qSin(sys.getDiamMoon()) * 4;
+                const qreal angle = marbleModel()->planet()->epsilon() * qCos(ra * DEG2RAD) * RAD2DEG;
+
+                QTransform form;
+                const qreal factor = size / m_pixmapMoon.size().width();
+                QPixmap moon = m_pixmapMoon.transformed(form.rotate(angle).scale(factor, factor),
+                                                        Qt::SmoothTransformation);
+
+                qreal deltaX  = moon.width()  / 2.;
+                qreal deltaY  = moon.height() / 2.;
+                const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+
+                painter->drawPixmap( x - deltaX, y - deltaY, moon );
+            }
+        }
 
         if ( m_renderSun ) {
             // sun
@@ -1390,6 +1438,16 @@ void StarsPlugin::toggleSun()
     m_renderSun = !m_renderSun;
     if ( m_configDialog ) {
         ui_configWidget->m_viewSunCheckbox->setChecked( m_renderSun );
+    }
+    emit settingsChanged( nameId() );
+    requestRepaint();
+}
+
+void StarsPlugin::toggleMoon()
+{
+    m_renderMoon = !m_renderMoon;
+    if ( m_configDialog ) {
+        ui_configWidget->m_viewMoonCheckbox->setChecked( m_renderMoon );
     }
     emit settingsChanged( nameId() );
     requestRepaint();
@@ -1484,6 +1542,10 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
             QAction *sunAction = menu.addAction( tr("Show &Sun"), this, SLOT(toggleSun()) );
             sunAction->setCheckable( true );
             sunAction->setChecked( m_renderSun );
+
+            QAction *moonAction = menu.addAction( tr("Show &Moon"), this, SLOT(toggleMoon()) );
+            moonAction->setCheckable( true );
+            moonAction->setChecked( m_renderMoon );
 
             QDialog *dialog = configDialog();
             Q_ASSERT( dialog );

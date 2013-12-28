@@ -171,6 +171,7 @@ protected:
 private Q_SLOTS:
     void requestRepaint();
     void toggleSun();
+    void toggleMoon();
     void toggleDsos();
     void toggleDsoLabels();
     void toggleConstellationLines();
@@ -216,6 +217,7 @@ private:
     bool m_renderDsos;
     bool m_renderDsoLabels;
     bool m_renderSun;
+    bool m_renderMoon;
     bool m_renderEcliptic;
     bool m_renderCelestialEquator;
     bool m_renderCelestialPole;
@@ -224,6 +226,7 @@ private:
     bool m_dsosLoaded;
     QVector<StarPoint> m_stars;
     QPixmap m_pixmapSun;
+    QPixmap m_pixmapMoon;
     QVector<Constellation> m_constellations;
     QVector<DsoPoint> m_dsos;
     QHash<int,int> m_idHash;
