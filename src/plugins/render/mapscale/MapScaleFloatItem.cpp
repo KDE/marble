@@ -271,6 +271,17 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
                 intervalStr.setNum( qreal(j * m_valueInterval ) / 1000.0, 'f', 2 );
             }
             break;
+        case MarbleLocale::NauticalSystem:
+            unit = tr("nm");
+            intervalStr.setNum( j * m_valueInterval / 1000 );
+
+            if ( m_bestDivisor * m_valueInterval > 3800 ) {
+                intervalStr.setNum( j * m_valueInterval / 1000 );
+            }
+            else {
+                intervalStr.setNum( qreal(j * m_valueInterval ) / 1000.0, 'f', 2 );
+            }
+            break;
         }
 
         painter->setFont( font() );

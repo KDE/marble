@@ -195,6 +195,7 @@ const qreal KM2MI = 1.0 / MI2KM;
 // Conversion Nautical / Imperial System: nm vs. km
 const qreal NM2KM = 1.852;
 const qreal KM2NM = 1.0 / NM2KM;
+const qreal NM2FT = 6080; // nm feet
 
 // Conversion Metric / Imperial System: meter vs. feet
 const qreal M2FT = 3.2808;

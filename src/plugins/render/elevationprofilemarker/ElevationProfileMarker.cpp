@@ -155,6 +155,9 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
                 unitString = tr( "ft" );
                 displayScale = M2FT;
                 break;
+            case MarbleLocale::NauticalSystem:
+                unitString = tr("ft");
+                displayScale = 0.001 * KM2NM * NM2FT;
             }
 
             QString intervalStr;
