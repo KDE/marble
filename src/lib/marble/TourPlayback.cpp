@@ -1,5 +1,6 @@
 #include <QTimer>
 #include <QList>
+#include <qurl.h>
 
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
@@ -196,16 +197,15 @@ void TourPlaybackPrivate::playSoundCue()
     if (m_cues.isEmpty())
         return;
 
-    Q_Q(TourPlayback);
-
     const GeoDataSoundCue *cue = m_cues.first().second;
     m_cues.removeFirst();
 
     if (cue) {
 #ifdef HAVE_PHONON
+        Q_Q(TourPlayback);
         Phonon::MediaObject *mediaObject = new Phonon::MediaObject( q );
         Phonon::createPath( mediaObject, new Phonon::AudioOutput( Phonon::MusicCategory, q ) );
-        mediaObject->setCurrentSource( cue->href() );
+        mediaObject->setCurrentSource( QUrl( cue->href() ) );
         mediaObject->play();
         QObject::connect( q, SIGNAL( paused() ), mediaObject, SLOT( pause() ) );
         m_mediaList.append( mediaObject );
