@@ -53,7 +53,7 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
       m_marbleWidget( 0 ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 ),
-      m_showSegmentLabels( true )
+      m_showDistanceLabel( true )
 {
     m_pen.setWidthF( 2.0 );
 }
@@ -142,7 +142,8 @@ QDialog *MeasureToolPlugin::configDialog()
                  this,        SLOT(writeSettings()) );
     }
 
-    m_uiConfigWidget->m_showSegLabelsCheckBox->setChecked( m_showSegmentLabels );
+    m_uiConfigWidget->m_showDistanceLabelsCheckBox->setChecked( m_showDistanceLabel );
+    m_uiConfigWidget->m_showBearingLabelsCheckBox->setChecked( m_showBearingLabel );
 
     return m_configDialog;
 }
@@ -151,7 +152,8 @@ QHash<QString,QVariant> MeasureToolPlugin::settings() const
 {
     QHash<QString, QVariant> settings = RenderPlugin::settings();
 
-    settings.insert( "showSegmentLabels", m_showSegmentLabels );
+    settings.insert( "showDistanceLabel", m_showDistanceLabel );
+    settings.insert( "showBearingLabel", m_showBearingLabel );
 
     return settings;
 }
@@ -160,12 +162,14 @@ void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
-    m_showSegmentLabels = settings.value( "showSegmentLabels", true ).toBool();
+    m_showDistanceLabel = settings.value( "showDistanceLabel", true ).toBool();
+    m_showBearingLabel = settings.value( "showBearingLabel", true ).toBool();
 }
 
 void MeasureToolPlugin::writeSettings()
 {
-    m_showSegmentLabels = m_uiConfigWidget->m_showSegLabelsCheckBox->isChecked();
+    m_showDistanceLabel = m_uiConfigWidget->m_showDistanceLabelsCheckBox->isChecked();
+    m_showBearingLabel = m_uiConfigWidget->m_showBearingLabelsCheckBox->isChecked();
 
     emit settingsChanged( nameId() );
     emit repaintNeeded();
@@ -189,7 +193,7 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
     // Prepare for painting the measure line string and paint it.
     painter->setPen( m_pen );
 
-    if ( m_showSegmentLabels ) {
+    if ( m_showDistanceLabel || m_showBearingLabel) {
         drawSegments( painter );
     } else {
         painter->drawPolyline( m_measureLineString );
@@ -221,44 +225,62 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         painter->setPen( shadowPen );
         painter->drawPolyline( segment );
 
-        const MarbleLocale::MeasurementSystem measurementSystem =
-                MarbleGlobal::getInstance()->locale()->measurementSystem();
+        QString infoString;
 
-        const qreal segmentLength = segment.length( marbleModel()->planet()->radius() );
+        if ( m_showDistanceLabel ) {
 
-        QString distanceString;
+            const MarbleLocale::MeasurementSystem measurementSystem =
+                    MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-        if ( measurementSystem == MarbleLocale::MetricSystem ) {
-            if ( segmentLength >= 1000.0 ) {
-                distanceString = tr("%1 km").arg( segmentLength / 1000.0, 0, 'f', 2 );
+            const qreal segmentLength = segment.length( marbleModel()->planet()->radius() );
+
+            if ( measurementSystem == MarbleLocale::MetricSystem ) {
+                if ( segmentLength >= 1000.0 ) {
+                    infoString = tr("%1 km").arg( segmentLength / 1000.0, 0, 'f', 2 );
+                }
+                else {
+                    infoString = tr("%1 m").arg( segmentLength, 0, 'f', 2 );
+                }
+            } else if (measurementSystem == MarbleLocale::ImperialSystem) {
+                infoString = QString("%1 mi").arg( segmentLength / 1000.0 * KM2MI, 0, 'f', 2 );
+            } else if (measurementSystem == MarbleLocale::NauticalSystem) {
+                infoString = QString("%1 nm").arg( segmentLength / 1000.0 * KM2NM, 0, 'f', 2 );
             }
-            else {
-                distanceString = tr("%1 m").arg( segmentLength, 0, 'f', 2 );
-            }
-        } else if (measurementSystem == MarbleLocale::ImperialSystem) {
-            distanceString = QString("%1 mi").arg( segmentLength / 1000.0 * KM2MI, 0, 'f', 2 );
-        } else if (measurementSystem == MarbleLocale::NauticalSystem) {
-            distanceString = QString("%1 nm").arg( segmentLength / 1000.0 * KM2NM, 0, 'f', 2 );
         }
 
-        QPen linePen;
-
-        // have three alternating colors for the segments
-        switch ( segmentIndex % 3 ) {
-        case 0:
-            linePen.setColor( Oxygen::brickRed4 );
-            break;
-        case 1:
-            linePen.setColor( Oxygen::forestGreen4 );
-            break;
-        case 2:
-            linePen.setColor( Oxygen::skyBlue4 );
-            break;
+        if ( m_showBearingLabel ) {
+            GeoDataCoordinates coordinates = segment.first();
+            qreal bearing = coordinates.bearing( segment.last(), GeoDataCoordinates::Degree );
+            if ( bearing < 0 ) {
+                bearing += 360;
+            }
+            QString bearingString = QString::fromUtf8( "%1°" ).arg( bearing, 0, 'f', 2 );
+            if ( !infoString.isEmpty() ) {
+                infoString.append( "\n" );
+            }
+            infoString.append( bearingString );
         }
 
-        linePen.setWidthF(2.0);
-        painter->setPen( linePen );
-        painter->drawPolyline( segment, distanceString, LineCenter );
+        if ( !infoString.isEmpty() ) {
+            QPen linePen;
+
+            // have three alternating colors for the segments
+            switch ( segmentIndex % 3 ) {
+            case 0:
+                linePen.setColor( Oxygen::brickRed4 );
+                break;
+            case 1:
+                linePen.setColor( Oxygen::forestGreen4 );
+                break;
+            case 2:
+                linePen.setColor( Oxygen::skyBlue4 );
+                break;
+            }
+
+            linePen.setWidthF(2.0);
+            painter->setPen( linePen );
+            painter->drawPolyline( segment, infoString, LineCenter );
+        }
     }
 }
 

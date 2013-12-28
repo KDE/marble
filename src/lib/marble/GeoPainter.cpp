@@ -513,8 +513,8 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                     if ( labelPosition.y() < ymin ) labelPosition.setY( ymin );
                     qreal ymax = viewport().height() - 10.0 - labelAscent;
                     if ( labelPosition.y() > ymax ) labelPosition.setY( ymax );
- 
-                    drawText( labelPosition, labelText );
+
+                    drawText( QRectF( labelPosition, fontMetrics().size( 0, labelText) ), labelText );
                 }
             }
         }

@@ -119,7 +119,8 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
 
     QDialog * m_configDialog;
     Ui::MeasureConfigWidget * m_uiConfigWidget;
-    bool m_showSegmentLabels;
+    bool m_showDistanceLabel;
+    bool m_showBearingLabel;
 };
 
 }

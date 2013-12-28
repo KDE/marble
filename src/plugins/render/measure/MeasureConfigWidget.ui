@@ -13,12 +13,31 @@
   <property name="windowTitle">
    <string>Marble - Measure Tool Configuration</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QCheckBox" name="m_showSegLabelsCheckBox">
-     <property name="text">
-      <string>Show distance labels for each section</string>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Segment labels</string>
      </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QCheckBox" name="m_showDistanceLabelsCheckBox">
+        <property name="text">
+         <string>Distance </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_showBearingLabelsCheckBox">
+        <property name="text">
+         <string>Bearing</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
