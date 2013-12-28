@@ -52,13 +52,13 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_renderEcliptic( true ),
       m_renderCelestialEquator( true ),
       m_renderCelestialPole( true ),
-      m_zoomSunMoon( true ),
-      m_viewSolarSystemLabel( true ),
-      m_zoomCoefficient( 4 ),
       m_starsLoaded( false ),
       m_constellationsLoaded( false ),
       m_dsosLoaded( false ),
+      m_zoomSunMoon( true ),
+      m_viewSolarSystemLabel( true ),
       m_magnitudeLimit( 100 ),
+      m_zoomCoefficient( 4 ),
       m_constellationBrush( Marble::Oxygen::aluminumGray5 ),
       m_constellationLabelBrush( Marble::Oxygen::aluminumGray5 ),
       m_dsoLabelBrush( Marble::Oxygen::aluminumGray5 ),
@@ -1363,6 +1363,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
+        char *centralBody = QString("Earth").toLatin1().data();
+
         if ( m_renderMoon && marbleModel()->planetName() == "Earth" ) {
             // moon
             SolarSystem sys;
@@ -1372,7 +1374,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                         dateTime.time().hour(), dateTime.time().minute(),
                         (double)dateTime.time().second());
 
-            sys.setCentralBody("Earth");
+            sys.setCentralBody( centralBody );
             double ra=0.0;
             double decl=0.0;
             sys.getMoon(ra, decl);
@@ -1408,7 +1410,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         if ( m_renderSun ) {
             // sun
             SolarSystem sys;
-            sys.setCentralBody( "Earth" );
+            sys.setCentralBody( centralBody );
             double ra = 0.0;
             double decl = 0.0;
             sys.getSun( ra, decl );
