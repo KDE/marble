@@ -53,7 +53,8 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
       m_marbleWidget( 0 ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 ),
-      m_showDistanceLabel( true )
+      m_showDistanceLabel( true ),
+      m_showBearingLabel( true )
 {
     m_pen.setWidthF( 2.0 );
 }
