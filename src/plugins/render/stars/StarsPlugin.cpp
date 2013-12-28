@@ -52,6 +52,9 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_renderEcliptic( true ),
       m_renderCelestialEquator( true ),
       m_renderCelestialPole( true ),
+      m_zoomSunMoon( true ),
+      m_viewSolarSystemLabel( true ),
+      m_zoomCoefficient( 4 ),
       m_starsLoaded( false ),
       m_constellationsLoaded( false ),
       m_dsosLoaded( false ),
@@ -193,6 +196,8 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     settings["renderEcliptic"] = m_renderEcliptic;
     settings["renderCelestialEquator"] = m_renderCelestialEquator;
     settings["renderCelestialPole"] = m_renderCelestialPole;
+    settings["zoomSunMoon"] = m_zoomSunMoon;
+    settings["viewSolarSystemLabel"] = m_viewSolarSystemLabel;
     settings["magnitudeLimit"] = m_magnitudeLimit;
     settings["constellationBrush"] = m_constellationBrush.color().rgb();
     settings["constellationLabelBrush"] = m_constellationLabelBrush.color().rgb();
@@ -219,6 +224,8 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderEcliptic = readSetting<bool>( settings, "renderEcliptic", true );
     m_renderCelestialEquator = readSetting<bool>( settings, "renderCelestialEquator", true );
     m_renderCelestialPole = readSetting<bool>( settings, "renderCelestialPole", true );
+    m_zoomSunMoon = readSetting<bool>( settings, "zoomSunMoon", true );
+    m_viewSolarSystemLabel = readSetting<bool>( settings, "viewSolarSystemLabel", true );
     m_magnitudeLimit = readSetting<int>( settings, "magnitudeLimit", 100 );
     QColor const defaultColor = Marble::Oxygen::aluminumGray5;
     m_constellationBrush = QColor( readSetting<QRgb>( settings, "constellationBrush", defaultColor.rgb() ) );
@@ -619,10 +626,10 @@ void StarsPlugin::readSettings()
     ui_configWidget->m_viewDsoLabelCheckbox->setCheckState( dsoLabelState );
 
     Qt::CheckState const sunState = m_renderSun ? Qt::Checked : Qt::Unchecked;
-    ui_configWidget->m_viewSunCheckbox->setCheckState( sunState );
+    ui_configWidget->m_solarSystemListWidget->item( 0 )->setCheckState( sunState );
 
     Qt::CheckState const moonState = m_renderMoon ? Qt::Checked :Qt::Unchecked;
-    ui_configWidget->m_viewMoonCheckbox->setCheckState( moonState );
+    ui_configWidget->m_solarSystemListWidget->item( 1 )->setCheckState( moonState );
 
     Qt::CheckState const eclipticState = m_renderEcliptic ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewEclipticCheckbox->setCheckState( eclipticState );
@@ -633,6 +640,11 @@ void StarsPlugin::readSettings()
     Qt::CheckState const celestialPoleState = m_renderCelestialPole ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewCelestialPoleCheckbox->setCheckState( celestialPoleState );
 
+    Qt::CheckState const zoomSunMoonState = m_zoomSunMoon ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_zoomSunMoonCheckbox->setCheckState( zoomSunMoonState );
+
+    Qt::CheckState const viewSolarSystemLabelState = m_viewSolarSystemLabel ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_viewSolarSystemLabelCheckbox->setCheckState( viewSolarSystemLabelState );
 
     int magState = m_magnitudeLimit;
     if ( magState < ui_configWidget->m_magnitudeSlider->minimum() ) {
@@ -678,11 +690,13 @@ void StarsPlugin::writeSettings()
     m_renderConstellationLabels = ui_configWidget->m_viewConstellationLabelsCheckbox->checkState() == Qt::Checked;
     m_renderDsos = ui_configWidget->m_viewDsosCheckbox->checkState() == Qt::Checked;
     m_renderDsoLabels = ui_configWidget->m_viewDsoLabelCheckbox->checkState() == Qt::Checked;
-    m_renderSun = ui_configWidget->m_viewSunCheckbox->checkState() == Qt::Checked;
-    m_renderMoon = ui_configWidget->m_viewSunCheckbox->checkState() == Qt::Checked;
+    m_renderSun = ui_configWidget->m_solarSystemListWidget->item( 0 )->checkState() == Qt::Checked;
+    m_renderMoon = ui_configWidget->m_solarSystemListWidget->item( 1 )->checkState() == Qt::Checked;
     m_renderEcliptic = ui_configWidget->m_viewEclipticCheckbox->checkState() == Qt::Checked;
     m_renderCelestialEquator = ui_configWidget->m_viewCelestialEquatorCheckbox->checkState() == Qt::Checked;
     m_renderCelestialPole = ui_configWidget->m_viewCelestialPoleCheckbox->checkState() == Qt::Checked;
+    m_zoomSunMoon = ui_configWidget->m_zoomSunMoonCheckbox->checkState() == Qt::Checked;
+    m_viewSolarSystemLabel = ui_configWidget->m_viewSolarSystemLabelCheckbox->checkState() == Qt::Checked;
     m_magnitudeLimit = ui_configWidget->m_magnitudeSlider->value();
     m_constellationBrush = QBrush( ui_configWidget->m_constellationColorButton->palette().color( QPalette::Button) );
     m_constellationLabelBrush = QBrush( ui_configWidget->m_constellationLabelColorButton->palette().color( QPalette::Button) );
@@ -1370,7 +1384,11 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             qpos.rotateAroundAxis( skyAxisMatrix );
 
             if ( qpos.v[Q_Z] <= 0 ) {
-                const qreal size = skyRadius * qSin(sys.getDiamMoon()) * 4;
+
+                // If zoom Sun and Moon is enabled size is multiplied by zoomCoefficient.
+                const int coefficient = m_zoomSunMoon ? m_zoomCoefficient : 1;
+
+                const qreal size = skyRadius * qSin(sys.getDiamMoon()) * coefficient;
                 const qreal angle = marbleModel()->planet()->epsilon() * qCos(ra * DEG2RAD) * RAD2DEG;
 
                 QTransform form;
@@ -1442,7 +1460,8 @@ void StarsPlugin::toggleSun()
 {
     m_renderSun = !m_renderSun;
     if ( m_configDialog ) {
-        ui_configWidget->m_viewSunCheckbox->setChecked( m_renderSun );
+        Qt::CheckState const sunState = m_renderSun ? Qt::Checked : Qt::Unchecked;
+        ui_configWidget->m_solarSystemListWidget->item( 0 )->setCheckState( sunState );
     }
     emit settingsChanged( nameId() );
     requestRepaint();
@@ -1452,7 +1471,8 @@ void StarsPlugin::toggleMoon()
 {
     m_renderMoon = !m_renderMoon;
     if ( m_configDialog ) {
-        ui_configWidget->m_viewMoonCheckbox->setChecked( m_renderMoon );
+        Qt::CheckState const moonState = m_renderMoon ? Qt::Checked : Qt::Unchecked;
+        ui_configWidget->m_solarSystemListWidget->item( 1 )->setCheckState( moonState );
     }
     emit settingsChanged( nameId() );
     requestRepaint();

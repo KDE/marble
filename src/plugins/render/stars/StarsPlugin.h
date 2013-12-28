@@ -224,6 +224,8 @@ private:
     bool m_starsLoaded;
     bool m_constellationsLoaded;
     bool m_dsosLoaded;
+    bool m_zoomSunMoon;
+    bool m_viewSolarSystemLabel;
     QVector<StarPoint> m_stars;
     QPixmap m_pixmapSun;
     QPixmap m_pixmapMoon;
@@ -232,6 +234,7 @@ private:
     QHash<int,int> m_idHash;
     QImage m_dsoImage;
     int m_magnitudeLimit;
+    int m_zoomCoefficient;
     QBrush m_constellationBrush;
     QBrush m_constellationLabelBrush;
     QBrush m_dsoLabelBrush;
