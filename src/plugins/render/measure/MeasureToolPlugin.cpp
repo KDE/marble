@@ -312,8 +312,10 @@ void MeasureToolPlugin::drawTotalDistanceLabel( GeoPainter *painter,
             distanceString = tr("Total Distance: %1 m").arg( totalDistance );
         }
     }
-    else {
+    else if (measurementSystem == MarbleLocale::ImperialSystem) {
         distanceString = QString("Total Distance: %1 mi").arg( totalDistance/1000.0 * KM2MI );
+    } else if (measurementSystem == MarbleLocale::NauticalSystem) {
+        distanceString = QString("Total Distance: %1 nm").arg( totalDistance/1000.0 * KM2NM );
     }
 
     painter->setPen( QColor( Qt::black ) );
