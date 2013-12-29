@@ -32,6 +32,7 @@ namespace Ui
     class StarsConfigWidget;
 }
 
+class QMenu;
 
 namespace Marble
 {
@@ -126,6 +127,7 @@ class StarsPlugin : public RenderPlugin, public DialogConfigurationInterface
     MARBLE_PLUGIN(StarsPlugin)
 public:
     explicit StarsPlugin( const MarbleModel *marbleModel=0 );
+    ~StarsPlugin();
 
     QStringList backendTypes() const;
 
@@ -170,13 +172,10 @@ protected:
 
 private Q_SLOTS:
     void requestRepaint();
-    void toggleSun();
-    void toggleMoon();
+    void toggleSunMoon();
+    void togglePlanets();
     void toggleDsos();
-    void toggleDsoLabels();
-    void toggleConstellationLines();
-    void toggleConstellationLabels();
-
+    void toggleConstellations();
 
 public Q_SLOTS:
     void readSettings();
@@ -218,6 +217,7 @@ private:
     bool m_renderDsoLabels;
     bool m_renderSun;
     bool m_renderMoon;
+    bool m_renderPlanets;
     bool m_renderEcliptic;
     bool m_renderCelestialEquator;
     bool m_renderCelestialPole;
@@ -250,6 +250,13 @@ private:
     QVector<QPixmap> m_pixP5Stars;
     QVector<QPixmap> m_pixP6Stars;
     QVector<QPixmap> m_pixP7Stars;
+
+    /* Context menu */
+    QMenu *m_contextMenu;
+    QAction *m_constellationsAction;
+    QAction *m_sunMoonAction;
+    QAction *m_planetsAction;
+    QAction *m_dsoAction;
 
     bool m_doRender;
 };

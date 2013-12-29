@@ -70,6 +70,15 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
     prepareNames();
 }
 
+StarsPlugin::~StarsPlugin()
+{
+    delete m_contextMenu;
+    delete m_constellationsAction;
+    delete m_sunMoonAction;
+    delete m_planetsAction;
+    delete m_dsoAction;
+}
+
 QStringList StarsPlugin::backendTypes() const
 {
     return QStringList( "stars" );
@@ -1517,23 +1526,19 @@ void StarsPlugin::requestRepaint()
     emit repaintNeeded( QRegion() );
 }
 
-void StarsPlugin::toggleSun()
+void StarsPlugin::toggleSunMoon()
 {
-    m_renderSun = !m_renderSun;
-    if ( m_configDialog ) {
-        Qt::CheckState const sunState = m_renderSun ? Qt::Checked : Qt::Unchecked;
-        ui_configWidget->m_solarSystemListWidget->item( 0 )->setCheckState( sunState );
-    }
-    emit settingsChanged( nameId() );
-    requestRepaint();
-}
+    QAction *sunMoonAction = qobject_cast<QAction*>(sender());
+    sunMoonAction->setChecked(!sunMoonAction->isChecked());
 
-void StarsPlugin::toggleMoon()
-{
-    m_renderMoon = !m_renderMoon;
+    const bool changed = !(m_renderSun || m_renderMoon);
+    m_renderSun = changed;
+    m_renderMoon = changed;
+
+    Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
-        Qt::CheckState const moonState = m_renderMoon ? Qt::Checked : Qt::Unchecked;
-        ui_configWidget->m_solarSystemListWidget->item( 1 )->setCheckState( moonState );
+        ui_configWidget->m_solarSystemListWidget->item( 0 )->setCheckState( state );
+        ui_configWidget->m_solarSystemListWidget->item( 1 )->setCheckState( state );
     }
     emit settingsChanged( nameId() );
     requestRepaint();
@@ -1541,43 +1546,43 @@ void StarsPlugin::toggleMoon()
 
 void StarsPlugin::toggleDsos()
 {
-    m_renderDsos = !m_renderDsos;
+    QAction *dsosAction = qobject_cast<QAction*>(sender());
+    dsosAction->setChecked(!dsosAction->isChecked());
+
+    const bool changed = !(m_renderDsos || m_renderDsoLabels);
+    m_renderDsos = changed;
+    m_renderDsoLabels = changed;
+
+    Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
-        ui_configWidget->m_viewDsosCheckbox->setChecked( m_renderDsos );
+        ui_configWidget->m_viewDsosCheckbox->setChecked(state);
+        ui_configWidget->m_viewDsoLabelCheckbox->setChecked(state);
     }
     emit settingsChanged( nameId() );
     requestRepaint();
 }
 
-void StarsPlugin::toggleDsoLabels()
+void StarsPlugin::toggleConstellations()
 {
-    m_renderDsoLabels = !m_renderDsoLabels;
+    QAction *constellationsAction = qobject_cast<QAction*>(sender());
+    constellationsAction->setChecked(!constellationsAction->isChecked());
+
+    const bool changed = !(m_renderConstellationLines || m_renderConstellationLabels);
+    m_renderConstellationLines = changed;
+    m_renderConstellationLabels = changed;
+
+    Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
-        ui_configWidget->m_viewDsoLabelCheckbox->setChecked( m_renderDsoLabels );
+        ui_configWidget->m_viewConstellationLinesCheckbox->setChecked( state );
+        ui_configWidget->m_viewConstellationLabelsCheckbox->setChecked( state );
     }
     emit settingsChanged( nameId() );
     requestRepaint();
 }
 
-
-void StarsPlugin::toggleConstellationLines()
+void StarsPlugin::togglePlanets()
 {
-    m_renderConstellationLines = !m_renderConstellationLines;
-    if ( m_configDialog ) {
-        ui_configWidget->m_viewConstellationLinesCheckbox->setChecked( m_renderConstellationLines );
-    }
-    emit settingsChanged( nameId() );
-    requestRepaint();
-}
-
-void StarsPlugin::toggleConstellationLabels()
-{
-    m_renderConstellationLabels = !m_renderConstellationLabels;
-    if ( m_configDialog ) {
-        ui_configWidget->m_viewConstellationLabelsCheckbox->setChecked( m_renderConstellationLabels );
-    }
-    emit settingsChanged( nameId() );
-    requestRepaint();
+    // TODO: Implement this stuff later
 }
 
 bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
@@ -1607,38 +1612,59 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
                 }
             }
 
-            QMenu menu;
-            QAction *constellationLinesAction = menu.addAction( tr("Show &Constellation Lines"), this, SLOT(toggleConstellationLines()) );
-            constellationLinesAction->setCheckable( true );
-            constellationLinesAction->setChecked( m_renderConstellationLines );
+            bool scheduleConfigAction = false;
+            if (!m_contextMenu) {
+                m_contextMenu = new QMenu;
+                scheduleConfigAction = true;
+            }
 
-            QAction *constellationLabelsAction = menu.addAction( tr("Show Constellation &Labels"), this, SLOT(toggleConstellationLabels()) );
-            constellationLabelsAction->setCheckable( true );
-            constellationLabelsAction->setChecked( m_renderConstellationLabels );
+            if (!m_constellationsAction) {
+                m_constellationsAction =
+                        m_contextMenu->addAction( tr("Show &Constellations"),
+                                                  this, SLOT(toggleConstellations()) );
+            }
 
-            QAction *dsoAction = menu.addAction( tr("Show &Deep Sky Objects"), this, SLOT(toggleDsos()) );
-            dsoAction->setCheckable( true );
-            dsoAction->setChecked( m_renderDsos );
+            m_constellationsAction->setCheckable( true );
+            m_constellationsAction->setChecked(
+                        m_renderConstellationLines || m_renderConstellationLabels );
 
-            QAction *dsoLabelAction = menu.addAction( tr("Show Deep Sky Object Labels"), this, SLOT(toggleDsoLabels()) );
-            dsoLabelAction->setCheckable( true );
-            dsoLabelAction->setChecked( m_renderDsoLabels );
 
-            QAction *sunAction = menu.addAction( tr("Show &Sun"), this, SLOT(toggleSun()) );
-            sunAction->setCheckable( true );
-            sunAction->setChecked( m_renderSun );
+            if (!m_sunMoonAction) {
+                m_sunMoonAction = m_contextMenu->addAction( tr("Show &Sun and Moon"),
+                                                            this, SLOT(toggleSunMoon()) );
+            }
 
-            QAction *moonAction = menu.addAction( tr("Show &Moon"), this, SLOT(toggleMoon()) );
-            moonAction->setCheckable( true );
-            moonAction->setChecked( m_renderMoon );
+            m_sunMoonAction->setCheckable( true );
+            m_sunMoonAction->setChecked( m_renderSun || m_renderMoon );
 
-            QDialog *dialog = configDialog();
-            Q_ASSERT( dialog );
-            menu.addSeparator();
-            QAction *configAction = menu.addAction( tr( "&Configure..." ) );
-            connect( configAction, SIGNAL(triggered()), dialog, SLOT(exec()) );
+            if (!m_planetsAction) {
+                m_planetsAction = m_contextMenu->addAction( tr("Show &Planets"),
+                                                            this, SLOT(togglePlanets()));
+                // TODO: Remove hidden action
+                m_planetsAction->setEnabled(false);
+                m_planetsAction->setVisible(false);
+            }
 
-            menu.exec(widget->mapToGlobal(menuEvent->pos()));
+            m_planetsAction->setCheckable( true );
+            m_planetsAction->setChecked( m_renderPlanets );
+
+            if (!m_dsoAction) {
+                m_dsoAction = m_contextMenu->addAction( tr("Show &Deep Sky Objects"),
+                                                        this, SLOT(toggleDsos()) );
+            }
+
+            m_dsoAction->setCheckable( true );
+            m_dsoAction->setChecked( m_renderDsos || m_renderDsoLabels );
+
+            if (scheduleConfigAction) {
+                QDialog *dialog = configDialog();
+                Q_ASSERT( dialog );
+                m_contextMenu->addSeparator();
+                QAction *configAction = m_contextMenu->addAction( tr( "&Configure..." ) );
+                connect( configAction, SIGNAL(triggered()), dialog, SLOT(exec()) );
+            }
+
+            m_contextMenu->exec(widget->mapToGlobal(menuEvent->pos()));
             return true;
         }
         return false;
