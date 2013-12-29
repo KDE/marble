@@ -1363,18 +1363,57 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
+        SolarSystem sys;
+        QDateTime dateTime = marbleModel()->clock()->dateTime();
+        sys.setCurrentMJD(
+                    dateTime.date().year(), dateTime.date().month(), dateTime.date().day(),
+                    dateTime.time().hour(), dateTime.time().minute(),
+                    (double)dateTime.time().second());
         char *centralBody = QString("Earth").toLatin1().data();
+        sys.setCentralBody( centralBody );
+
+        if ( m_renderSun ) {
+            // sun
+            SolarSystem sys;
+            sys.setCentralBody( centralBody );
+            double ra = 0.0;
+            double decl = 0.0;
+            sys.getSun( ra, decl );
+            ra = 15.0 * sys.DmsDegF( ra );
+            decl = sys.DmsDegF( decl );
+
+            Quaternion qpos = Quaternion::fromSpherical( ra * DEG2RAD, decl * DEG2RAD );
+            qpos.rotateAroundAxis( skyAxisMatrix );
+
+            if ( qpos.v[Q_Z] <= 0 ) {
+                QPixmap glow(MarbleDirs::path( "svg/glow.png" ));
+                qreal deltaX  = glow.width()  / 2.;
+                qreal deltaY  = glow.height() / 2.;
+                int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+                painter->drawPixmap( x - deltaX, y - deltaY, glow );
+
+                qreal diameter = 0.0, mag = 0.0;
+                sys.getPhysSun(diameter, mag);
+                const int coefficient = m_zoomSunMoon ? m_zoomCoefficient : 1;
+                const qreal size = skyRadius * qSin(diameter) * coefficient;
+                const qreal factor = size/m_pixmapSun.width();
+                QPixmap sun = m_pixmapSun.transformed(QTransform().scale(factor, factor),
+                                                      Qt::SmoothTransformation);
+                deltaX  = sun.width()  / 2.;
+                deltaY  = sun.height() / 2.;
+                x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+                painter->drawPixmap( x - deltaX, y - deltaY, sun );
+
+                // It's labels' time!
+                if (m_viewSolarSystemLabel)
+                    painter->drawText(x+deltaX*1.5, y+deltaY*1.5, tr("Sun"));
+            }
+        }
 
         if ( m_renderMoon && marbleModel()->planetName() == "Earth" ) {
             // moon
-            SolarSystem sys;
-            QDateTime dateTime = marbleModel()->clock()->dateTime();
-            sys.setCurrentMJD(
-                        dateTime.date().year(), dateTime.date().month(), dateTime.date().day(),
-                        dateTime.time().hour(), dateTime.time().minute(),
-                        (double)dateTime.time().second());
-
-            sys.setCentralBody( centralBody );
             double ra=0.0;
             double decl=0.0;
             sys.getMoon(ra, decl);
@@ -1442,28 +1481,10 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
 
                 painter->drawPixmap( x - deltaX, y - deltaY, moon );
-            }
-        }
 
-        if ( m_renderSun ) {
-            // sun
-            SolarSystem sys;
-            sys.setCentralBody( centralBody );
-            double ra = 0.0;
-            double decl = 0.0;
-            sys.getSun( ra, decl );
-            ra = 15.0 * sys.DmsDegF( ra );
-            decl = sys.DmsDegF( decl );
-
-            Quaternion qpos = Quaternion::fromSpherical( ra * DEG2RAD, decl * DEG2RAD );
-            qpos.rotateAroundAxis( skyAxisMatrix );
-
-            if ( qpos.v[Q_Z] <= 0 ) {
-                qreal deltaX  = m_pixmapSun.width()  / 2.;
-                qreal deltaY  = m_pixmapSun.height() / 2.;
-                const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
-                const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
-                painter->drawPixmap( x - deltaX, y - deltaY, m_pixmapSun );
+                // It's labels' time!
+                if (m_viewSolarSystemLabel)
+                    painter->drawText(x+deltaX, y+deltaY, tr("Moon"));
             }
         }
     }
@@ -1602,7 +1623,6 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
             QAction *dsoLabelAction = menu.addAction( tr("Show Deep Sky Object Labels"), this, SLOT(toggleDsoLabels()) );
             dsoLabelAction->setCheckable( true );
             dsoLabelAction->setChecked( m_renderDsoLabels );
-
 
             QAction *sunAction = menu.addAction( tr("Show &Sun"), this, SLOT(toggleSun()) );
             sunAction->setCheckable( true );

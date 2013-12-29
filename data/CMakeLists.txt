@@ -44,6 +44,7 @@ svg/wikipedia_shadow.svg
 svg/sunshine.png
 svg/sun.png
 svg/moon.png
+svg/glow.png
 svg/track_turtle.svg
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/svg)
 
