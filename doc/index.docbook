@@ -443,6 +443,11 @@
          <para>
             Once you have added at least two measure points, the total distance will be displayed in the top left corner of the map. &marble; will assume a spherical earth for all measurements which should be accurate enough for most cases.
          </para>
+	 <tip>
+	   <para>
+	     Displaying of distances and bearings for the measured segments can be configured using <link linkend="measure-tool-config">Measure Tool configuration dialog</link>.
+	   </para>
+	 </tip>
      </chapter>
      
      <chapter id="download-region">
@@ -1216,10 +1221,11 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 </listitem>
 </varlistentry>
 
-<varlistentry>
+<varlistentry id="measure-tool-config">
 <term><guilabel>Measure Tool</guilabel></term>
 <listitem>
   <para>The plugin to <link linkend="measure-distances">measure distances between two or more points</link>.</para>
+  <para>Displaying of the distance and the bearing between the points can be configured after pressing the tool icon. It is enough to check the corresponding item to make &marble; show the labels or uncheck the item to hide the labels.</para>
 </listitem>
 </varlistentry>
 
