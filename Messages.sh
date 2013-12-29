@@ -27,6 +27,8 @@ cat data/legend.html \
   | sed -e 's/^\(.*\)$/\/\/i18n: file .\/data\/legend.html\ni18n(\"\1\");/' \
   >> rc.cpp
 
+cut -d ';' -f 1 data/stars/names.csv | sed -e 's/^/i18n(\"/' -e 's/$/\");/' >> rc.cpp
+
 # Eliminate empty i18n calls.
 egrep -B1 'i18nc?\(".*[^ ].*"\)' rc.cpp > rc.cpp.1
 mv rc.cpp.1 rc.cpp

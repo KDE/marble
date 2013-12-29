@@ -224,7 +224,7 @@ naturalearth/ne_10m_rivers_lake_centerlines.pn2
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/naturalearth)
 
 FILE (GLOB STAR_FILES stars/*.dat)
-install (FILES ${STAR_FILES} stars/deepsky.png
+install (FILES ${STAR_FILES} stars/deepsky.png stars/names.csv
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/stars)
 
 install (FILES
