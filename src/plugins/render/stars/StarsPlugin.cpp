@@ -1386,16 +1386,54 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             qpos.rotateAroundAxis( skyAxisMatrix );
 
             if ( qpos.v[Q_Z] <= 0 ) {
-
                 // If zoom Sun and Moon is enabled size is multiplied by zoomCoefficient.
                 const int coefficient = m_zoomSunMoon ? m_zoomCoefficient : 1;
+
+                QPixmap moon = m_pixmapMoon.copy();
+
+                // Moon phases
+                qreal phase = 0.0, ildisk = 0.0, amag = 0.0;
+                sys.getLunarPhase(phase, ildisk, amag);
+
+                QPainterPath path;
+
+                QRectF fullMoonRect = moon.rect();
+                if (ildisk < 0.05) {
+                    // small enough, so it's not visible
+                    path.addEllipse(fullMoonRect);
+                } else if (ildisk < 0.95) { // makes sense to do smth
+                    QRectF halfEllipseRect;
+                    qreal ellipseWidth = 2 * qAbs(ildisk-0.5) * moon.width();
+                    halfEllipseRect.setX((fullMoonRect.width() - ellipseWidth) * 0.5);
+                    halfEllipseRect.setWidth(ellipseWidth);
+                    halfEllipseRect.setHeight(moon.height());
+
+                    if (ildisk < 0.5) {
+                        path.moveTo(fullMoonRect.width()/2, moon.height());
+                        path.arcTo(fullMoonRect, -90, 180);
+                        path.arcTo(halfEllipseRect, 90, 180);
+                    } else {
+                        path.moveTo(fullMoonRect.width()/2, 0);
+                        path.arcTo(fullMoonRect, 90, 180);
+                        path.arcTo(halfEllipseRect, -90, 180);
+                    }
+                    path.closeSubpath();
+                }
+
+                QPainter overlay;
+                overlay.begin(&moon);
+                overlay.setPen(Qt::NoPen);
+                overlay.setBrush(QBrush(QColor(0, 0, 0, 180)));
+                overlay.setRenderHint(QPainter::Antialiasing, true);
+                overlay.drawPath(path);
+                overlay.end();
 
                 const qreal size = skyRadius * qSin(sys.getDiamMoon()) * coefficient;
                 const qreal angle = marbleModel()->planet()->epsilon() * qCos(ra * DEG2RAD) * RAD2DEG;
 
                 QTransform form;
-                const qreal factor = size / m_pixmapMoon.size().width();
-                QPixmap moon = m_pixmapMoon.transformed(form.rotate(angle).scale(factor, factor),
+                const qreal factor = size / moon.size().width();
+                moon = moon.transformed(form.rotate(angle).scale(factor, factor),
                                                         Qt::SmoothTransformation);
 
                 qreal deltaX  = moon.width()  / 2.;
