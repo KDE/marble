@@ -13,6 +13,7 @@
 #include "PopupLayer.h"
 #include "MarbleWidget.h"
 #include "PopupItem.h"
+#include "GeoDataStyle.h"
 
 #include <QMouseEvent>
 #include <QApplication>
