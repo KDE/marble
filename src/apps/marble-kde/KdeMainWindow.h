@@ -16,6 +16,9 @@
 
 #include <KDE/KXmlGuiWindow>
 
+class QActionGroup;
+class QAction;
+
 namespace Marble
 {
 
@@ -37,9 +40,12 @@ class MainWindow : public KXmlGuiWindow
 
  public slots:
     void setMapTitle();
+    void changeViewSize( QAction* );
 
  private:
+    QSize m_savedSize;
     MarblePart *m_part;
+    QActionGroup *m_viewSizeActsGroup;
 };
 
 }

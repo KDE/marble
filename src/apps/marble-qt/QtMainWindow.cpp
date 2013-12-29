@@ -95,13 +95,16 @@ using namespace Marble;
 
 MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLineSettings, QWidget *parent) :
         QMainWindow(parent),
+        m_savedSize( QSize(-1, -1) ),
         m_sunControlDialog( 0 ),
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
         m_movieCaptureDialog( 0 ),
         m_panelMenu( 0 ),
+        m_viewSizeMenu( 0 ),
         m_downloadRegionAction( 0 ),
         m_osmEditAction( 0 ),
+        m_viewSizeActsGroup( 0 ),
         m_zoomLabel( 0 )
 {
     setUpdatesEnabled( false );
@@ -326,6 +329,74 @@ void MainWindow::createActions()
      m_mapWizardAct = new QAction( QIcon( ":/icons/create-new-map.png" ), tr("&Create a New Map..."), this );
      m_mapWizardAct->setStatusTip( tr( "A wizard guides you through the creation of your own map theme." ) );
      connect( m_mapWizardAct, SIGNAL(triggered()), SLOT(showMapWizard()) );
+
+     // View size actions
+     m_viewSizeActsGroup = new QActionGroup( this );
+
+     QAction *actDefault = new QAction( tr( "Default (Resizable)" ), this );
+     actDefault->setCheckable(true);
+     m_viewSizeActsGroup->addAction(actDefault);
+
+     QAction *actSeparator = new QAction(this);
+     actSeparator->setSeparator(true);
+     m_viewSizeActsGroup->addAction(actSeparator);
+
+     QAction *actNtsc = new QAction( tr( "NTSC (720x486)" ), this );
+     actNtsc->setData( QSize( 720, 486 ) );
+     actNtsc->setCheckable(true);
+     m_viewSizeActsGroup->addAction(actNtsc);
+
+     QAction *actPal = new QAction( tr( "PAL (720x576)" ), this );
+     actPal->setData( QSize( 720, 576 ) );
+     actPal->setCheckable(true);
+     m_viewSizeActsGroup->addAction(actPal);
+
+     QAction *actNtsc16x9 = new QAction( tr( "NTSC 16:9 (864x486)" ), this );
+     actNtsc16x9->setData( QSize( 864, 486 ) );
+     actNtsc16x9->setCheckable(true);
+     m_viewSizeActsGroup->addAction(actNtsc16x9);
+
+     QAction *actPal16x9 = new QAction( tr( "PAL 16:9 (1024x576)" ), this );
+     actPal16x9->setData( QSize( 1024, 576 ) );
+     actPal16x9->setCheckable(true);
+     m_viewSizeActsGroup->addAction(actPal16x9);
+
+     QAction *actDvd = new QAction( tr( "DVD (852x480p)" ), this );
+     actDvd->setData( QSize( 852, 480 ) );
+     actDvd->setCheckable(true);
+     m_viewSizeActsGroup->addAction(actDvd);
+
+     QAction *actHd = new QAction( tr( "HD (1280x720p)" ), this );
+     actHd->setData( QSize( 1280, 720 ) );
+     actHd->setCheckable(true);
+     m_viewSizeActsGroup->addAction(actHd);
+
+     QAction *actFullhd = new QAction( tr( "Full HD (1920x1080p)" ), this );
+     actFullhd->setData( QSize( 1920, 1080 ) );
+     actFullhd->setCheckable(true);
+     m_viewSizeActsGroup->addAction(actFullhd);
+
+     QAction *actDc = new QAction( tr( "Digital Cinema (2048x1536)" ), this );
+     actDc->setData( QSize( 2048, 1536 ) );
+     actDc->setCheckable(true);
+     m_viewSizeActsGroup->addAction(actDc);
+
+     /**
+      * FIXME: Needs testing, worked with errors.
+     QAction *act4kuhd = new QAction( tr( "4K UHD (3840x2160)" ), this );
+     act4kuhd->setData( QSize( 3840, 2160 ) );
+     act4kuhd->setCheckable(true);
+     m_viewSizeActsGroup->addAction(act4kuhd);
+
+     QAction *act4k = new QAction( tr( "4K (4096x3072)" ), this );
+     act4k->setData( QSize( 4096, 3072 ) );
+     act4k->setCheckable(true);
+     m_viewSizeActsGroup->addAction(act4k);
+     */
+
+     connect( m_viewSizeActsGroup, SIGNAL(triggered(QAction*)), this, SLOT(changeViewSize(QAction*)) );
+
+     actDefault->setChecked( true );
 }
 
 void MainWindow::createMenus( const QList<QAction*> &panelActions )
@@ -364,9 +435,14 @@ void MainWindow::createMenus( const QList<QAction*> &panelActions )
             m_panelMenu->addAction( action );
         }
 
+        m_viewSizeMenu = new QMenu( "&View Size" );
+        m_viewSizeMenu->addActions( m_viewSizeActsGroup->actions() );
+
         m_settingsMenu = menuBar()->addMenu(tr("&Settings"));
         m_settingsMenu->addMenu( m_panelMenu );
         m_settingsMenu->addAction(m_statusBarAct);
+        m_settingsMenu->addSeparator();
+        m_settingsMenu->addMenu( m_viewSizeMenu );
         m_settingsMenu->addAction(m_fullScreenAct);
         m_settingsMenu->addSeparator();
         m_settingsMenu->addAction(m_configDialogAct);
@@ -1464,6 +1540,25 @@ void MainWindow::showZoomLevel(bool show)
 void MainWindow::fallBackToDefaultTheme()
 {
     m_controlView->marbleWidget()->setMapThemeId( m_controlView->defaultMapThemeId() );
+}
+
+void MainWindow::changeViewSize( QAction* action )
+{
+    if ( action->data().type() == QVariant::Size ) {
+        if ( m_savedSize.isEmpty() ) {
+            m_savedSize = m_controlView->size();
+        }
+        m_controlView->setFixedSize( action->data().toSize() );
+        adjustSize();
+    } else {
+        m_controlView->setMinimumSize( QSize( 0, 0 ) );
+        m_controlView->setMaximumSize( QSize( QWIDGETSIZE_MAX, QWIDGETSIZE_MAX ) );
+        m_controlView->resize( m_savedSize );
+        m_controlView->setMinimumSize( m_savedSize );
+        adjustSize();
+        m_controlView->setMinimumSize( QSize( 0, 0 ) );
+        m_savedSize.setHeight( -1 );
+    }
 }
 
 #include "QtMainWindow.moc"

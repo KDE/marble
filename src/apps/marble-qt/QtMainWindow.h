@@ -20,6 +20,7 @@
 #include <QVariantMap>
 #include "ControlView.h"
 
+class QActionGroup;
 class QAction;
 class QLabel;
 class QMenu;
@@ -106,6 +107,7 @@ private Q_SLOTS:
     void  reload();
 
     // Settings Menu
+    void  changeViewSize( QAction* );
     void  showFullScreen( bool );
     void  showStatusBar( bool );
     void  setupStatusBar();
@@ -136,6 +138,7 @@ private Q_SLOTS:
 
 private:
     ControlView *m_controlView;
+    QSize m_savedSize;
     SunControlWidget* m_sunControlDialog;
     TimeControlWidget* m_timeControlDialog;
     QtMarbleConfigDialog *m_configDialog;
@@ -153,6 +156,7 @@ private:
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;
     QMenu *m_panelMenu;
+    QMenu *m_viewSizeMenu;
     QMenu *m_infoBoxesMenu;
     QMenu *m_onlineServicesMenu;
     QMenu *m_bookmarkMenu;
@@ -183,6 +187,7 @@ private:
     QAction *m_fullScreenAct;
     QAction *m_statusBarAct;
     QAction *m_configDialogAct;
+    QActionGroup *m_viewSizeActsGroup;
 
     // Help Menu
     QAction *m_whatsThisAct;

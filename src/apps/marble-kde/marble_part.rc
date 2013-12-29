@@ -57,6 +57,11 @@
       <ActionList name="panels_actionlist" />
     </Menu>
     <Action name="options_show_statusbar"/>
+    <Separator/>
+    <Menu name="viewSize" noMerge="1">
+      <text>&amp;View Size</text>
+      <ActionList name="viewSize_actionlist" />
+    </Menu>
     <Action name="fullscreen"/>
     <Separator/>
     <Action name="options_configure" append="configure_merge"/>
