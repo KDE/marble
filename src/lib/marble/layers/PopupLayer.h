@@ -130,6 +130,13 @@ public:
     void setContent( const QString &html );
 
     /**
+     * @brief Sets style of the popup
+     *
+     * @param style the style to set
+     */
+    void setStyle( const GeoDataStyle *style );
+
+    /**
      * @brief Sets background color of the header
      *
      * @see PopupItem::setBackgroundColor();

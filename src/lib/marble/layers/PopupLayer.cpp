@@ -119,6 +119,19 @@ void PopupLayer::setContent( const QString &html )
     emit repaintNeeded();
 }
 
+void PopupLayer::setStyle( const GeoDataStyle *style )
+{
+    if (style == 0) {
+	m_popupItem->setBackgroundColor(QColor(Qt::white));
+	m_popupItem->setTextColor(QColor(Qt::black));
+	return;
+    }
+    if (&style->balloonStyle()) {
+        m_popupItem->setBackgroundColor(style->balloonStyle().backgroundColor());
+        m_popupItem->setTextColor(style->balloonStyle().textColor());
+    }
+}
+
 void PopupLayer::setBackgroundColor(const QColor &color)
 {
     if(color.isValid()) {
