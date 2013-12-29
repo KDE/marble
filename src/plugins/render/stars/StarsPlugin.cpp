@@ -1383,8 +1383,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         if ( m_renderSun ) {
             // sun
-            SolarSystem sys;
-            sys.setCentralBody( centralBody );
             double ra = 0.0;
             double decl = 0.0;
             sys.getSun( ra, decl );
