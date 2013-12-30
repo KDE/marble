@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>391</width>
-    <height>407</height>
+    <height>488</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -109,9 +109,6 @@
              </property>
              <property name="checkState">
               <enum>Unchecked</enum>
-             </property>
-             <property name="flags">
-              <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsUserCheckable</set>
              </property>
             </item>
             <item>

@@ -26,13 +26,12 @@
 #include "DialogConfigurationInterface.h"
 
 class QDateTime;
+class QMenu;
 
 namespace Ui
 {
     class StarsConfigWidget;
 }
-
-class QMenu;
 
 namespace Marble
 {
@@ -208,7 +207,7 @@ private:
     void loadStars();
     void loadConstellations();
     void loadDsos();
-    QDialog *m_configDialog;
+    QPointer<QDialog> m_configDialog;
     Ui::StarsConfigWidget *ui_configWidget;
     bool m_renderStars;
     bool m_renderConstellationLines;
@@ -217,7 +216,7 @@ private:
     bool m_renderDsoLabels;
     bool m_renderSun;
     bool m_renderMoon;
-    bool m_renderPlanets;
+    bool m_renderVenus;
     bool m_renderEcliptic;
     bool m_renderCelestialEquator;
     bool m_renderCelestialPole;

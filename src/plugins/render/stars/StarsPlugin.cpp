@@ -49,7 +49,7 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_renderDsoLabels( true ),
       m_renderSun( true ),
       m_renderMoon( true ),
-      m_renderPlanets( true ),
+      m_renderVenus( true ),
       m_renderEcliptic( true ),
       m_renderCelestialEquator( true ),
       m_renderCelestialPole( true ),
@@ -159,9 +159,9 @@ bool StarsPlugin::isInitialized() const
 
 QDialog *StarsPlugin::configDialog()
 {
-    if ( !m_configDialog ) {
+    if (!m_configDialog) {
         // Initializing configuration dialog
-        m_configDialog = new QDialog();
+        m_configDialog = new QDialog;
         ui_configWidget = new Ui::StarsConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
 
@@ -181,18 +181,14 @@ QDialog *StarsPlugin::configDialog()
 
         connect( ui_configWidget->m_eclipticColorButton, SIGNAL(clicked()), this,
                 SLOT(eclipticGetColor()) );
-                
+
         connect( ui_configWidget->m_celestialEquatorColorButton, SIGNAL(clicked()), this,
                 SLOT(celestialEquatorGetColor()) );
 
         connect( ui_configWidget->m_celestialPoleColorButton, SIGNAL(clicked()), this,
                 SLOT(celestialPoleGetColor()) );
-
-
-// FIXME: Could Not Make Apply Button Work.
-//        QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-//        connect( applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()) );
     }
+
     return m_configDialog;
 }
 
@@ -208,6 +204,7 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     settings["renderDsoLabels"] = m_renderDsoLabels;
     settings["renderSun"] = m_renderSun;
     settings["renderMoon"] = m_renderMoon;
+    settings["renderVenus"] = m_renderVenus;
     settings["renderEcliptic"] = m_renderEcliptic;
     settings["renderCelestialEquator"] = m_renderCelestialEquator;
     settings["renderCelestialPole"] = m_renderCelestialPole;
@@ -236,6 +233,7 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderDsoLabels = readSetting<bool>( settings, "renderDsoLabels", true);
     m_renderSun = readSetting<bool>( settings, "renderSun", true );
     m_renderMoon = readSetting<bool>( settings, "renderMoon", true );
+    m_renderVenus = readSetting<bool>( settings, "renderVenus", true );
     m_renderEcliptic = readSetting<bool>( settings, "renderEcliptic", true );
     m_renderCelestialEquator = readSetting<bool>( settings, "renderCelestialEquator", true );
     m_renderCelestialPole = readSetting<bool>( settings, "renderCelestialPole", true );
@@ -309,8 +307,11 @@ void StarsPlugin::readSettings()
     Qt::CheckState const sunState = m_renderSun ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_solarSystemListWidget->item( 0 )->setCheckState( sunState );
 
-    Qt::CheckState const moonState = m_renderMoon ? Qt::Checked :Qt::Unchecked;
+    Qt::CheckState const moonState = m_renderMoon ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_solarSystemListWidget->item( 1 )->setCheckState( moonState );
+
+    Qt::CheckState const venusState = m_renderVenus ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_solarSystemListWidget->item( 3 )->setCheckState(venusState);
 
     Qt::CheckState const eclipticState = m_renderEcliptic ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewEclipticCheckbox->setCheckState( eclipticState );
@@ -373,6 +374,7 @@ void StarsPlugin::writeSettings()
     m_renderDsoLabels = ui_configWidget->m_viewDsoLabelCheckbox->checkState() == Qt::Checked;
     m_renderSun = ui_configWidget->m_solarSystemListWidget->item( 0 )->checkState() == Qt::Checked;
     m_renderMoon = ui_configWidget->m_solarSystemListWidget->item( 1 )->checkState() == Qt::Checked;
+    m_renderVenus = ui_configWidget->m_solarSystemListWidget->item( 3 )->checkState() == Qt::Checked;
     m_renderEcliptic = ui_configWidget->m_viewEclipticCheckbox->checkState() == Qt::Checked;
     m_renderCelestialEquator = ui_configWidget->m_viewCelestialEquatorCheckbox->checkState() == Qt::Checked;
     m_renderCelestialPole = ui_configWidget->m_viewCelestialPoleCheckbox->checkState() == Qt::Checked;
@@ -1126,28 +1128,28 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                     halfEllipseRect.setWidth(ellipseWidth);
                     halfEllipseRect.setHeight(moon.height());
 
-		    if (phase < 0.5) {
-			if (ildisk < 0.5) {
-			    path.moveTo(fullMoonRect.width()/2, moon.height());
-			    path.arcTo(fullMoonRect, -90, -180);
-			    path.arcTo(halfEllipseRect, 90, -180);
-			} else {
-			    path.moveTo(fullMoonRect.width()/2, 0);
-			    path.arcTo(fullMoonRect, 90, 180);
-			    path.arcTo(halfEllipseRect, -90, -180);
-			}
-		    }
-		    else {
-			if (ildisk < 0.5) {
-			    path.moveTo(fullMoonRect.width()/2, moon.height());
-			    path.arcTo(fullMoonRect, -90, 180);
-			    path.arcTo(halfEllipseRect, 90, 180);
-			} else {
-			    path.moveTo(fullMoonRect.width()/2, 0);
-			    path.arcTo(fullMoonRect, 90, -180);
-			    path.arcTo(halfEllipseRect, -90, 180);
-			}
-		    }
+                    if (phase < 0.5) {
+                        if (ildisk < 0.5) {
+                            path.moveTo(fullMoonRect.width()/2, moon.height());
+                            path.arcTo(fullMoonRect, -90, -180);
+                            path.arcTo(halfEllipseRect, 90, -180);
+                        } else {
+                            path.moveTo(fullMoonRect.width()/2, 0);
+                            path.arcTo(fullMoonRect, 90, 180);
+                            path.arcTo(halfEllipseRect, -90, -180);
+                        }
+                    } else {
+                        if (ildisk < 0.5) {
+                            path.moveTo(fullMoonRect.width()/2, moon.height());
+                            path.arcTo(fullMoonRect, -90, 180);
+                            path.arcTo(halfEllipseRect, 90, 180);
+                        } else {
+                            path.moveTo(fullMoonRect.width()/2, 0);
+                            path.arcTo(fullMoonRect, 90, -180);
+                            path.arcTo(halfEllipseRect, -90, 180);
+                        }
+                    }
+
                     path.closeSubpath();
                 }
 
@@ -1177,6 +1179,32 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 // It's labels' time!
                 if (m_viewSolarSystemLabel)
                     painter->drawText(x+deltaX, y+deltaY, tr("Moon"));
+            }
+        }
+
+        if ( m_renderVenus ) {
+            double ra=0.0, decl=0.0;
+            sys.getVenus(ra, decl);
+            ra = 15.0 * sys.DmsDegF(ra);
+            decl = sys.DmsDegF(decl);
+
+            Quaternion qpos = Quaternion::fromSpherical( ra * DEG2RAD,
+                                                         decl * DEG2RAD );
+            qpos.rotateAroundAxis( skyAxisMatrix );
+
+            if ( qpos.v[Q_Z] <= 0 ) {
+                QPixmap venus = QPixmap(MarbleDirs::path("bitmaps/stars/star_0_white.png"));
+
+                qreal deltaX  = venus.width()  / 2.;
+                qreal deltaY  = venus.height() / 2.;
+                const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+
+                painter->drawPixmap( x - deltaX, y - deltaY, venus );
+
+                // It's labels' time!
+                if (m_viewSolarSystemLabel)
+                    painter->drawText(x+deltaX, y+deltaY, Planet("venus").name());
             }
         }
     }
@@ -1217,11 +1245,16 @@ void StarsPlugin::toggleSunMoon()
     const bool changed = !(m_renderSun || m_renderMoon);
     m_renderSun = changed;
     m_renderMoon = changed;
+    if (changed) {
+        qDebug() << "Changed this to true";
+        m_viewSolarSystemLabel = true;
+    }
 
     Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
         ui_configWidget->m_solarSystemListWidget->item( 0 )->setCheckState( state );
         ui_configWidget->m_solarSystemListWidget->item( 1 )->setCheckState( state );
+        ui_configWidget->m_viewSolarSystemLabelCheckbox->setChecked(m_viewSolarSystemLabel);
     }
     emit settingsChanged( nameId() );
     requestRepaint();
@@ -1265,7 +1298,20 @@ void StarsPlugin::toggleConstellations()
 
 void StarsPlugin::togglePlanets()
 {
-    // TODO: Implement this stuff later
+    QAction *planetsAction = qobject_cast<QAction*>(sender());
+    planetsAction->setChecked(!planetsAction->isChecked());
+
+    const bool changed = !planetsAction->isChecked();
+    m_renderVenus = changed;
+
+    Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
+    if ( m_configDialog ) {
+        // Venus
+        ui_configWidget->m_solarSystemListWidget->item(3)->setCheckState(state);
+    }
+
+    emit settingsChanged( nameId() );
+    requestRepaint();
 }
 
 bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
@@ -1318,18 +1364,19 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
             }
 
             m_sunMoonAction->setCheckable( true );
-            m_sunMoonAction->setChecked( m_renderSun || m_renderMoon );
+            m_sunMoonAction->setChecked( m_renderSun || m_renderMoon || m_viewSolarSystemLabel );
 
             if (!m_planetsAction) {
                 m_planetsAction = m_contextMenu->addAction( tr("Show &Planets"),
                                                             this, SLOT(togglePlanets()));
-                // TODO: Remove hidden action
-                m_planetsAction->setEnabled(false);
-                m_planetsAction->setVisible(false);
             }
 
             m_planetsAction->setCheckable( true );
-            m_planetsAction->setChecked( m_renderPlanets );
+            if (m_renderVenus /* || other planets, later */) {
+                m_planetsAction->setChecked( true );
+            } else {
+                m_planetsAction->setChecked( false );
+            }
 
             if (!m_dsoAction) {
                 m_dsoAction = m_contextMenu->addAction( tr("Show &Deep Sky Objects"),
