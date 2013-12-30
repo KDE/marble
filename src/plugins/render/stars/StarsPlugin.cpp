@@ -1460,15 +1460,28 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                     halfEllipseRect.setWidth(ellipseWidth);
                     halfEllipseRect.setHeight(moon.height());
 
-                    if (ildisk < 0.5) {
-                        path.moveTo(fullMoonRect.width()/2, moon.height());
-                        path.arcTo(fullMoonRect, -90, 180);
-                        path.arcTo(halfEllipseRect, 90, 180);
-                    } else {
-                        path.moveTo(fullMoonRect.width()/2, 0);
-                        path.arcTo(fullMoonRect, 90, -180);
-                        path.arcTo(halfEllipseRect, -90, 180);
-                    }
+		    if (phase < 0.5) {
+			if (ildisk < 0.5) {
+			    path.moveTo(fullMoonRect.width()/2, moon.height());
+			    path.arcTo(fullMoonRect, -90, -180);
+			    path.arcTo(halfEllipseRect, 90, -180);
+			} else {
+			    path.moveTo(fullMoonRect.width()/2, 0);
+			    path.arcTo(fullMoonRect, 90, 180);
+			    path.arcTo(halfEllipseRect, -90, -180);
+			}
+		    }
+		    else {
+			if (ildisk < 0.5) {
+			    path.moveTo(fullMoonRect.width()/2, moon.height());
+			    path.arcTo(fullMoonRect, -90, 180);
+			    path.arcTo(halfEllipseRect, 90, 180);
+			} else {
+			    path.moveTo(fullMoonRect.width()/2, 0);
+			    path.arcTo(fullMoonRect, 90, -180);
+			    path.arcTo(halfEllipseRect, -90, 180);
+			}
+		    }
                     path.closeSubpath();
                 }
 
