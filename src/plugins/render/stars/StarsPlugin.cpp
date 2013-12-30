@@ -49,6 +49,7 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_renderDsoLabels( true ),
       m_renderSun( true ),
       m_renderMoon( true ),
+      m_renderPlanets( true ),
       m_renderEcliptic( true ),
       m_renderCelestialEquator( true ),
       m_renderCelestialPole( true ),
@@ -65,6 +66,11 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_eclipticBrush( Marble::Oxygen::aluminumGray5 ),
       m_celestialEquatorBrush( Marble::Oxygen::aluminumGray5 ),
       m_celestialPoleBrush( Marble::Oxygen::aluminumGray5 ),
+      m_contextMenu(0),
+      m_constellationsAction(0),
+      m_sunMoonAction(0),
+      m_planetsAction(0),
+      m_dsoAction(0),
       m_doRender( false )
 {
     prepareNames();

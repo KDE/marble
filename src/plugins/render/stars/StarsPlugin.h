@@ -252,11 +252,11 @@ private:
     QVector<QPixmap> m_pixP7Stars;
 
     /* Context menu */
-    QMenu *m_contextMenu;
-    QAction *m_constellationsAction;
-    QAction *m_sunMoonAction;
-    QAction *m_planetsAction;
-    QAction *m_dsoAction;
+    QPointer<QMenu> m_contextMenu;
+    QPointer<QAction> m_constellationsAction;
+    QPointer<QAction> m_sunMoonAction;
+    QPointer<QAction> m_planetsAction;
+    QPointer<QAction> m_dsoAction;
 
     bool m_doRender;
 };
