@@ -50,6 +50,10 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
 #endif
       m_fontascent( QFontMetrics( m_font_regular ).ascent() ),
       m_pen( Qt::red ),
+      m_addMeasurePointAction( 0 ),
+      m_removeLastMeasurePointAction( 0 ),
+      m_removeMeasurePointsAction( 0 ),
+      m_separator( 0 ),
       m_marbleWidget( 0 ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 ),
