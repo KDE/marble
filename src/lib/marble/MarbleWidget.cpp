@@ -1313,7 +1313,7 @@ void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
         const int radius = qRound( radiusFromDistance( newLookAt.range() * METER2KM ) );
         qreal const zoom = d->zoom( radius );
         // Prevent exceeding zoom range. Note: Bounding to range is not useful here
-        if ( zoom >= minimumZoom() && zoom <= maximumZoom() ) {
+        if ( qRound( zoom ) >= minimumZoom() && qRound( zoom ) <= maximumZoom() ) {
             d->m_map.setRadius( radius );
             d->m_logzoom = qRound( d->zoom( radius ) );
 
