@@ -795,6 +795,13 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 					 </varlistentry>
 					 <varlistentry>
 						 <term><menuchoice>
+								 <guimenu>Settings</guimenu>
+								 <guisubmenu>View Size</guisubmenu>
+						 </menuchoice></term>
+					     <listitem><para><action>Switches between various sizes of &marble; map area.</action> You can choose one of the sizes that are suitable for capturing frames for screencast or keep &marble; map area resizable (<guimenuitem>Default (resizable)</guimenuitem> menu item).</para></listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term><menuchoice>
                                  <shortcut>
                                      <keycombo action="simul">&Ctrl;&Shift;<keycap>F</keycap></keycombo>
                                  </shortcut>
