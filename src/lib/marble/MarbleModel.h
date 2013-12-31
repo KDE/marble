@@ -324,7 +324,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     /** @brief Emitted when the home location is changed
      * @see home(), setHome()
      */
-    void homeChanged( const GeoDataCoordinates newHomePoint );
+    void homeChanged( const GeoDataCoordinates &newHomePoint );
     
  private:
     Q_DISABLE_COPY( MarbleModel )
