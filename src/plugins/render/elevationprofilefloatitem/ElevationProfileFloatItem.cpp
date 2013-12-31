@@ -475,7 +475,7 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
                 return true;
             }
 
-            if ( e->type() == QEvent::MouseMove && !event->buttons() & Qt::LeftButton ) {
+            if ( e->type() == QEvent::MouseMove && !(event->buttons() & Qt::LeftButton) ) {
                 // Cross hair cursor when moving above the float item
                 // and mark the position on the graph
                 widget->setCursor(QCursor(Qt::CrossCursor));

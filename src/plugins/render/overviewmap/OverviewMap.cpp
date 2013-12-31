@@ -420,7 +420,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
         }
 
         if ( cursorAboveFloatItem && e->type() == QEvent::MouseMove 
-                && !event->buttons() & Qt::LeftButton )
+                && !(event->buttons() & Qt::LeftButton) )
         {
             // Cross hair cursor when moving above the float item without pressing a button
             widget->setCursor(QCursor(Qt::CrossCursor));
