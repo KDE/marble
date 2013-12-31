@@ -133,7 +133,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_recentFilesAction( 0 ),
     m_configDialog( 0 ),
     m_wallet( 0 ),
-    m_usingKWallet( true ),
     m_position( i18n( NOT_AVAILABLE ) ),
     m_tileZoomLevel( i18n( NOT_AVAILABLE ) ),
     m_positionLabel( 0 ),
@@ -452,7 +451,6 @@ void MarblePart::readSettings()
             if ( confirmDialog->exec() == KDialog::Yes ) {
                 // User wants to save his password in plain text.
                 MarbleSettings::setAccessKWallet( false );
-                m_usingKWallet = false;
             }
             else {
                 m_wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(), 0 );
@@ -472,15 +470,11 @@ void MarblePart::readSettings()
                     confirmDialog->exec();
                     // User wants to save his passwords in plain text.
                     MarbleSettings::setAccessKWallet( false );
-                    m_usingKWallet = false;
                 }
             }
         }
-        else {
-            m_usingKWallet = false;
-        }
     }
-    if ( m_usingKWallet ) {
+    if ( m_wallet ) {
         if ( !m_wallet->hasFolder( m_walletFolderName ) ) {
             m_wallet->createFolder( m_walletFolderName );
         }
@@ -597,7 +591,7 @@ void MarblePart::readSettings()
 
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
 
-    if ( m_usingKWallet ) {
+    if ( m_wallet ) {
         // Read settings from kwallet and store it in MarbleSettings for using in kconfigdialog.
         QMap<QString, QString> owncloudAuth;
         m_wallet->readMap( "OwncloudServer", owncloudAuth );
@@ -665,7 +659,7 @@ void MarblePart::writeSettings()
     MarbleSettings::setQuitLatitude( quitLat );
     MarbleSettings::setQuitRange( quitRange );
 
-    if ( m_usingKWallet ) {
+    if ( m_wallet ) {
         // Write changes to kwallet...
         QMap<QString, QString> owncloudAuth;
         owncloudAuth.insert( "Username", MarbleSettings::owncloudUsername() );

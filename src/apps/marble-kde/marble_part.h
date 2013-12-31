@@ -243,7 +243,6 @@ class MarblePart: public KParts::ReadOnlyPart
     QHash<QString, int> m_pluginEnabled;
 
     KWallet::Wallet *m_wallet;
-    bool m_usingKWallet;
 
     QString m_position;
     QString m_clock;
