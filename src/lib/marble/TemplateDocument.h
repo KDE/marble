@@ -76,6 +76,7 @@ public:
     QString finalText() const;
 
 private:
+    Q_DISABLE_COPY(TemplateDocument)
     TemplateDocumentPrivate *d;
 };
 

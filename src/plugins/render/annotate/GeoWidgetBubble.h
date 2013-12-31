@@ -36,6 +36,7 @@ public:
     bool isHidden() const;
 
 private:
+    Q_DISABLE_COPY(GeoWidgetBubble)
     QWidget* m_widget;
     bool m_hidden;
     bool m_widgetInitialized;
