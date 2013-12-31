@@ -30,13 +30,14 @@ class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
         qDeleteAll(m_vector);
     }
 
-    void operator=( const GeoDataMultiTrackPrivate &other)
+    GeoDataMultiTrackPrivate& operator=( const GeoDataMultiTrackPrivate &other)
     {
         GeoDataGeometryPrivate::operator=( other );
         qDeleteAll( m_vector );
         foreach( GeoDataTrack *track, other.m_vector ) {
             m_vector.append( new GeoDataTrack( *track ) );
         }
+        return *this;
     }
 
     virtual GeoDataGeometryPrivate* copy()

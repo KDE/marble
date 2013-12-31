@@ -30,13 +30,14 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
         qDeleteAll(m_vector);
     }
 
-    void operator=( const GeoDataMultiGeometryPrivate &other)
+    GeoDataMultiGeometryPrivate& operator=( const GeoDataMultiGeometryPrivate &other)
     {
         GeoDataGeometryPrivate::operator=( other );
         qDeleteAll( m_vector );
         foreach( GeoDataGeometry *geometry, other.m_vector ) {
             m_vector.append( new GeoDataGeometry( *geometry ) );
         }
+        return *this;
     }
 
     virtual GeoDataGeometryPrivate* copy()

@@ -43,10 +43,12 @@ class GeoDataGeometryPrivate
     {
     }
 
-    void operator=( const GeoDataGeometryPrivate &other )
+    GeoDataGeometryPrivate& operator=( const GeoDataGeometryPrivate &other )
     {
         m_extrude = other.m_extrude;
         m_altitudeMode = other.m_altitudeMode;
+        m_latLonAltBox = other.m_latLonAltBox;
+        return *this;
     }
 
     virtual GeoDataGeometryPrivate* copy()

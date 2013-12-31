@@ -35,7 +35,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         delete m_geometry;
     }
 
-    void operator=( const GeoDataPlacemarkPrivate& other )
+    GeoDataPlacemarkPrivate& operator=( const GeoDataPlacemarkPrivate& other )
     {
         GeoDataFeaturePrivate::operator=( other );
 
@@ -77,6 +77,8 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         m_area = other.m_area;
         m_population = other.m_population;
         m_state = other.m_state;
+
+        return *this;
     }
 
     virtual GeoDataFeaturePrivate* copy()

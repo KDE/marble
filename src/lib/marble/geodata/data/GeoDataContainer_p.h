@@ -30,7 +30,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         qDeleteAll( m_vector );
     }
 
-    void operator=( const GeoDataContainerPrivate &other)
+    GeoDataContainerPrivate& operator=( const GeoDataContainerPrivate &other)
     {
         GeoDataFeaturePrivate::operator=( other );
         qDeleteAll( m_vector );
@@ -38,6 +38,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         {
             m_vector.append( new GeoDataFeature( *feature ) );
         }
+        return *this;
     }
 
     virtual GeoDataFeaturePrivate* copy()

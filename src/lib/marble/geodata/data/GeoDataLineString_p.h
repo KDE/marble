@@ -41,15 +41,15 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
         delete m_rangeCorrected;
     }
 
-    void operator=( const GeoDataLineStringPrivate &other)
+    GeoDataLineStringPrivate& operator=( const GeoDataLineStringPrivate &other)
     {
         GeoDataGeometryPrivate::operator=( other );
         m_vector = other.m_vector;
         m_rangeCorrected = 0;
         m_dirtyRange = true;
-        m_latLonAltBox = other.m_latLonAltBox;
         m_dirtyBox = other.m_dirtyBox;
         m_tessellationFlags = other.m_tessellationFlags;
+        return *this;
     }
 
 
