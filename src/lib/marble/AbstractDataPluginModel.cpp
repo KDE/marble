@@ -650,10 +650,11 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
 
 void AbstractDataPluginModel::removeItem( QObject *item )
 {
-    d->m_itemSet.removeAll( (AbstractDataPluginItem *) item );
+    AbstractDataPluginItem * pluginItem = qobject_cast<AbstractDataPluginItem*>( item );
+    d->m_itemSet.removeAll( pluginItem );
     QHash<QString, AbstractDataPluginItem *>::iterator i;
     for( i = d->m_downloadingItems.begin(); i != d->m_downloadingItems.end(); ++i ) {
-        if( (*i) == (AbstractDataPluginItem *) item ) {
+        if( *i == pluginItem ) {
             i = d->m_downloadingItems.erase( i );
         }
     }

@@ -209,7 +209,7 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesCategoryItem(
     // find category
     for( int i = 0; i < catalogItem->childrenCount(); ++i ) {
         if( catalogItem->childAt( i )->name() == theCategory ) {
-            return (SatellitesConfigNodeItem*)catalogItem->childAt( i );
+            return dynamic_cast<SatellitesConfigNodeItem*>(catalogItem->childAt( i ) );
         }
     }
 
@@ -230,14 +230,13 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesBodyItem(
 {
     QString theBody = translation( body );
 
-    SatellitesConfigModel *model;
-    model = (SatellitesConfigModel*)m_configWidget->treeView->model();
+    SatellitesConfigModel *model = dynamic_cast<SatellitesConfigModel*>( m_configWidget->treeView->model() );
     SatellitesConfigNodeItem *rootItem = model->rootItem();
 
     // try to find it
     for( int i = 0; i < rootItem->childrenCount(); ++i ) {
         if( rootItem->childAt( i )->name() == theBody ) {
-            return (SatellitesConfigNodeItem*)rootItem->childAt( i ); 
+            return dynamic_cast<SatellitesConfigNodeItem*>(rootItem->childAt( i ) );
         }
     }
 
