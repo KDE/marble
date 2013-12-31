@@ -38,15 +38,6 @@ using std::cos;
 using std::asin;
 using std::abs;
 
-
-// epoch J2000 = 1 January 2000, noon Terrestrial Time (11:58:55.816 UTC)
-const int J2000 = 2451545;
-
-// taking the full moon of 15 January 1900 19:07 UTC as the epoch for the moon
-// value from http://home.hiwaay.net/~krcool/Astro/moon/fullmoon.htm
-const qreal MOON_EPOCH = 2415035.297;
-const qreal MOON_SYNODIC_PERIOD = 29.530588;
-
 // emit updateSun() every update_interval ms
 const int update_interval = 60000;
 
@@ -122,10 +113,11 @@ qreal SunLocator::shading(qreal lon, qreal a, qreal c) const
 
     qreal twilightZone = 0.0;
 
-    if ( d->m_planet->id() == "earth" || d->m_planet->id() == "venus" ) {
+    QString planetId = d->m_planet->id();
+    if ( planetId == "earth" || planetId == "venus") {
         twilightZone = 0.1; // this equals 18 deg astronomical twilight.
     }
-    else if ( d->m_planet->id() == "mars" ) {
+    else if ( planetId == "mars" ) {
         twilightZone = 0.05;
     }
 
