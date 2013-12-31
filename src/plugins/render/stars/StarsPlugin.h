@@ -204,8 +204,6 @@ private:
     QHash<QString, QString> m_nativeHash;
     int m_nameIndex;
 
-    // sidereal time in hours:
-    qreal siderealTime( const QDateTime& );
     void createStarPixmaps();
     void loadStars();
     void loadConstellations();

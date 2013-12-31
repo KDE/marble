@@ -751,9 +751,10 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
+    QString planetId = marbleModel()->planetId();
     const bool doRender = !viewport->mapCoversViewport() &&
                              viewport->projection() == Spherical &&
-                             marbleModel()->planetId() == "earth"; // So far displaying stars is only supported on earth.
+                             planetId == "earth"; // So far displaying stars is only supported on earth.
 
     if ( doRender != m_doRender ) {
         if ( doRender ) {
@@ -769,10 +770,18 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->save();
 
-    QDateTime currentDateTime = marbleModel()->clockDateTime();
+    SolarSystem sys;
+    QDateTime dateTime = marbleModel()->clock()->dateTime();
+    sys.setCurrentMJD(
+                dateTime.date().year(), dateTime.date().month(), dateTime.date().day(),
+                dateTime.time().hour(), dateTime.time().minute(),
+                (double)dateTime.time().second());
+    QString pname = planetId.at(0).toUpper() + planetId.right(planetId.size() - 1);
+    char *centralBody = pname.toLatin1().data();
+    sys.setCentralBody( centralBody );
 
-    qreal gmst = siderealTime( currentDateTime );
-    qreal skyRotationAngle = gmst / 12.0 * M_PI;
+    Vec3 skyVector = sys.getPlanetocentric (0.0, 0.0);
+    qreal skyRotationAngle = -atan2(skyVector[1], skyVector[0]);
 
     const qreal centerLon = viewport->centerLongitude();
     const qreal centerLat = viewport->centerLatitude();
@@ -1064,15 +1073,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
-        SolarSystem sys;
-        QDateTime dateTime = marbleModel()->clock()->dateTime();
-        sys.setCurrentMJD(
-                    dateTime.date().year(), dateTime.date().month(), dateTime.date().day(),
-                    dateTime.time().hour(), dateTime.time().minute(),
-                    (double)dateTime.time().second());
-        char *centralBody = QString("Earth").toLatin1().data();
-        sys.setCentralBody( centralBody );
-
         if ( m_renderSun ) {
             // sun
             double ra = 0.0;
@@ -1288,24 +1288,6 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     painter->restore();
 
     return true;
-}
-
-qreal StarsPlugin::siderealTime( const QDateTime& localDateTime )
-{
-    QDateTime utcDateTime = localDateTime.toTimeSpec( Qt::UTC );
-    qreal mjdUtc = ( qreal )( utcDateTime.date().toJulianDay() );
-
-    qreal offsetUtcSecs = -utcDateTime.time().secsTo( QTime( 00, 00 ) );
-    qreal d_days = mjdUtc - 2451545.5;
-    qreal d = d_days + ( offsetUtcSecs / ( 24.0 * 3600 ) );
-
-    //  Appendix A of USNO Circular No. 163 (1981):
-    //  Approximate value for Greenwich mean sidereal time in hours:
-    //  (Loss of precision: 0.1 secs per century)
-    qreal gmst = 18.697374558 + 24.06570982441908 * d;
-
-    // Range (0..24) for gmst:
-    return gmst - ( int )( gmst / 24.0 ) * 24.0;
 }
 
 void StarsPlugin::requestRepaint()
