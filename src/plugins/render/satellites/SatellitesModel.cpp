@@ -219,8 +219,8 @@ void SatellitesModel::parseTLE( const QString &id,
     int i = 0;
     while ( i < tleLines.size() - 1 ) {
         QString satelliteName = QString( tleLines.at( i++ ) ).trimmed();
-        char line1[80];
-        char line2[80];
+        char line1[130];
+        char line2[130];
         if( tleLines.at( i ).size() >= 79  ||
             tleLines.at( i+1 ).size() >= 79 ) {
             mDebug() << "Invalid TLE data!";
