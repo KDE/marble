@@ -25,6 +25,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/graphicsview
  ${CMAKE_CURRENT_SOURCE_DIR}/layers
  ${CMAKE_CURRENT_SOURCE_DIR}/cloudsync
+ ${CMAKE_SOURCE_DIR}/src/lib/astro
  ${QT_INCLUDE_DIR}
 )
 
@@ -340,21 +341,21 @@ endif()
 
 if( PHONON_FOUND AND NOT QT5BUILD )
   INCLUDE_DIRECTORIES( ${PHONON_INCLUDES} )
-  TARGET_LINK_LIBRARIES(marblewidget ${PHONON_LIBS} )
+  TARGET_LINK_LIBRARIES(marblewidget astro ${PHONON_LIBS} )
   set (HAVE_PHONON TRUE)
 endif( PHONON_FOUND AND NOT QT5BUILD )
 
 if (APPLE)
   #defined in top level makefile
-  TARGET_LINK_LIBRARIES(marblewidget ${MAC_EXTRA_LIBS} )
+  TARGET_LINK_LIBRARIES(marblewidget astro ${MAC_EXTRA_LIBS} )
 endif (APPLE)
 
 if (CMAKE_SYSTEM_NAME MATCHES "SunOS")
-  TARGET_LINK_LIBRARIES(marblewidget m)
+  TARGET_LINK_LIBRARIES(marblewidget astro m)
 endif (CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
 if(WIN32)
-  TARGET_LINK_LIBRARIES(marblewidget ws2_32 imm32 winmm)
+  TARGET_LINK_LIBRARIES(marblewidget astro ws2_32 imm32 winmm)
 endif(WIN32)
 
 

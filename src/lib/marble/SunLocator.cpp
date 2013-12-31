@@ -22,6 +22,8 @@
  
 #include "MarbleDebug.h"
 
+#include "src/lib/astro/solarsystem.h"
+
 #include <cmath>
 // M_PI is sometimes defined in <cmath>
 #ifndef M_PI 
@@ -80,66 +82,26 @@ SunLocator::~SunLocator()
 
 void SunLocator::updatePosition()
 {
-    if( d->m_planet->id() == "moon" ) {
-        // days since the first full moon of the 20th century
-        qreal days = (qreal)d->m_clock->dateTime().date().toJulianDay() + d->m_clock->dayFraction() - MOON_EPOCH;
+    QString planetId = d->m_planet->id();
+    SolarSystem sys;
 
-        // number of orbits the moon has made (relative to the sun as observed from earth)
-        days /= MOON_SYNODIC_PERIOD;
+    QDateTime dateTime = d->m_clock->dateTime();
+    sys.setCurrentMJD(
+                dateTime.date().year(), dateTime.date().month(), dateTime.date().day(),
+                dateTime.time().hour(), dateTime.time().minute(),
+                (double)dateTime.time().second());
+    QString pname = planetId.at(0).toUpper() + planetId.right(planetId.size() - 1);
+    char *centralBody = pname.toLatin1().data();
+    sys.setCentralBody( centralBody );
 
-        // take fractional part
-        days = days - (int)days;
-
-        // for dates before MOON_EPOCH
-        if (days < 0.0)
-            days += 1.0;
-
-        mDebug() << "MOON:" << (int)(days*100) << "% of orbit completed and"
-                 << (int)(abs((days-0.5)*2) * 100) << "% illuminated";
-
-        d->m_lon = (1-days) * 2*M_PI;
-
-        // not necessarily accurate but close enough
-        // (only differs by about +-6 degrees of this value)
-        d->m_lat = 0.0;
-        return;
-    }
-
-    // find current Julian day number relative to epoch J2000
-    long day = d->m_clock->dateTime().date().toJulianDay() - J2000;
-
-    // from http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
-    // mean anomaly
-    qreal M = d->m_planet->M_0() + d->m_planet->M_1()*day;
-
-    // equation of center
-    qreal C = d->m_planet->C_1()*sin(M) + d->m_planet->C_2()*sin(2*M)
-            + d->m_planet->C_3()*sin(3*M) + d->m_planet->C_4()*sin(4*M)
-            + d->m_planet->C_5()*sin(5*M) + d->m_planet->C_6()*sin(6*M);
-
-    // true anomaly
-    qreal nu = M + C;
-
-    // ecliptic longitude of sun as seen from planet
-    qreal lambda_sun = nu + d->m_planet->Pi() + M_PI;
-
-    // declination of sun as seen from planet
-    qreal delta_sun = asin(sin(d->m_planet->epsilon())*sin(lambda_sun));
-
-    // right ascension of sun as seen from planet
-    qreal alpha_sun = atan2(cos(d->m_planet->epsilon())*sin(lambda_sun), cos(lambda_sun));
-
-    // solar noon occurs when sidereal time is equal to alpha_sun
-    qreal theta = alpha_sun;
-
-    // convert sidereal time to geographic longitude
-    d->m_lon = M_PI - (d->m_planet->theta_0() + d->m_planet->theta_1()
-                       * (day + d->m_clock->dayFraction()) - theta);
-
-    while(d->m_lon < 0)
-        d->m_lon += 2*M_PI;
-
-    d->m_lat = delta_sun;
+    double ra = 0.0;
+    double decl = 0.0;
+    sys.getSun( ra, decl );
+    double lon = 0.0;
+    double lat = 0.0;
+    sys.getPlanetographic (ra, decl, lon, lat);
+    d->m_lon = lon * DEG2RAD;
+    d->m_lat = lat * DEG2RAD;
 }
 
 
@@ -162,6 +124,9 @@ qreal SunLocator::shading(qreal lon, qreal a, qreal c) const
 
     if ( d->m_planet->id() == "earth" || d->m_planet->id() == "venus" ) {
         twilightZone = 0.1; // this equals 18 deg astronomical twilight.
+    }
+    else if ( d->m_planet->id() == "mars" ) {
+        twilightZone = 0.05;
     }
 
     qreal brightness;
