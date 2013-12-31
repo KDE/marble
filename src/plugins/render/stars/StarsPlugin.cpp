@@ -50,10 +50,13 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_renderSun( true ),
       m_renderMoon( true ),
       m_renderVenus( true ),
+      m_renderMars( true ),
+      m_renderJupiter( true ),
       m_renderEcliptic( true ),
       m_renderCelestialEquator( true ),
       m_renderCelestialPole( true ),
       m_starsLoaded( false ),
+      m_starPixmapsCreated( false ),
       m_constellationsLoaded( false ),
       m_dsosLoaded( false ),
       m_zoomSunMoon( true ),
@@ -205,6 +208,8 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     settings["renderSun"] = m_renderSun;
     settings["renderMoon"] = m_renderMoon;
     settings["renderVenus"] = m_renderVenus;
+    settings["renderMars"] = m_renderMars;
+    settings["renderJupiter"] = m_renderJupiter;
     settings["renderEcliptic"] = m_renderEcliptic;
     settings["renderCelestialEquator"] = m_renderCelestialEquator;
     settings["renderCelestialPole"] = m_renderCelestialPole;
@@ -234,6 +239,8 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderSun = readSetting<bool>( settings, "renderSun", true );
     m_renderMoon = readSetting<bool>( settings, "renderMoon", true );
     m_renderVenus = readSetting<bool>( settings, "renderVenus", true );
+    m_renderMars = readSetting<bool>( settings, "renderMars", true );
+    m_renderJupiter = readSetting<bool>( settings, "renderJupiter", true );
     m_renderEcliptic = readSetting<bool>( settings, "renderEcliptic", true );
     m_renderCelestialEquator = readSetting<bool>( settings, "renderCelestialEquator", true );
     m_renderCelestialPole = readSetting<bool>( settings, "renderCelestialPole", true );
@@ -247,6 +254,31 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_eclipticBrush = QColor( readSetting<QRgb>( settings, "eclipticBrush", defaultColor.rgb() ) );
     m_celestialEquatorBrush = QColor( readSetting<QRgb>( settings, "celestialEquatorBrush", defaultColor.rgb() ) );
     m_celestialPoleBrush = QColor( readSetting<QRgb>( settings, "celestialPoleBrush", defaultColor.rgb() ) );
+}
+
+QPixmap StarsPlugin::starPixmap(qreal mag, int colorId) const
+{
+   if ( mag < -1 ) {
+       return m_pixN1Stars.at(colorId);
+   } else if ( mag < 0 ) {
+       return m_pixP0Stars.at(colorId);
+   } else if ( mag < 1 ) {
+       return m_pixP1Stars.at(colorId);
+   } else if ( mag < 2 ) {
+       return m_pixP2Stars.at(colorId);
+   } else if ( mag < 3 ) {
+       return m_pixP3Stars.at(colorId);
+   } else if ( mag < 4 ) {
+       return m_pixP4Stars.at(colorId);
+   } else if ( mag < 5 ) {
+       return m_pixP5Stars.at(colorId);
+   } else if ( mag < 6 ) {
+       return m_pixP6Stars.at(colorId);
+   } else {
+       return m_pixP7Stars.at(colorId);
+   }
+
+   return QPixmap();
 }
 
 void StarsPlugin::prepareNames()
@@ -313,6 +345,12 @@ void StarsPlugin::readSettings()
     Qt::CheckState const venusState = m_renderVenus ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_solarSystemListWidget->item( 3 )->setCheckState(venusState);
 
+    Qt::CheckState const marsState = m_renderMars ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_solarSystemListWidget->item( 5 )->setCheckState(marsState);
+
+    Qt::CheckState const jupiterState = m_renderJupiter ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_solarSystemListWidget->item( 6 )->setCheckState(jupiterState);
+
     Qt::CheckState const eclipticState = m_renderEcliptic ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewEclipticCheckbox->setCheckState( eclipticState );
 
@@ -375,6 +413,8 @@ void StarsPlugin::writeSettings()
     m_renderSun = ui_configWidget->m_solarSystemListWidget->item( 0 )->checkState() == Qt::Checked;
     m_renderMoon = ui_configWidget->m_solarSystemListWidget->item( 1 )->checkState() == Qt::Checked;
     m_renderVenus = ui_configWidget->m_solarSystemListWidget->item( 3 )->checkState() == Qt::Checked;
+    m_renderMars = ui_configWidget->m_solarSystemListWidget->item( 5 )->checkState() == Qt::Checked;
+    m_renderJupiter = ui_configWidget->m_solarSystemListWidget->item( 6 )->checkState() == Qt::Checked;
     m_renderEcliptic = ui_configWidget->m_viewEclipticCheckbox->checkState() == Qt::Checked;
     m_renderCelestialEquator = ui_configWidget->m_viewCelestialEquatorCheckbox->checkState() == Qt::Checked;
     m_renderCelestialPole = ui_configWidget->m_viewCelestialPoleCheckbox->checkState() == Qt::Checked;
@@ -526,6 +566,11 @@ void StarsPlugin::loadStars()
     m_pixmapSun.load( MarbleDirs::path( "svg/sun.png" ) );
     m_pixmapMoon.load( MarbleDirs::path( "svg/moon.png" ) );
 
+    m_starsLoaded = true;
+}
+
+void StarsPlugin::createStarPixmaps()
+{
     // Load star pixmaps
     QVector<QPixmap> m_pixBigStars;
     m_pixBigStars.clear();
@@ -603,9 +648,8 @@ void StarsPlugin::loadStars()
         m_pixP7Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
-    m_starsLoaded = true;
+    m_starPixmapsCreated = true;
 }
-
 
 void StarsPlugin::loadConstellations()
 {
@@ -736,6 +780,10 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     const qreal  skyRadius      = 0.6 * sqrt( ( qreal )viewport->width() * viewport->width() + viewport->height() * viewport->height() );
 
     if ( doRender ) {
+        if (!m_starPixmapsCreated) {
+            createStarPixmaps();
+            m_starPixmapsCreated = true;
+        }
 
         // Delayed initialization:
         // Load the star database only if the sky is actually being painted...
@@ -1009,37 +1057,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
                 // colorId is used to select which pixmap in vector to display
                 int colorId = m_stars.at(s).colorId();
-                QPixmap s_pixmap;
-
-                // Magnitude is used to select which pixmap vector (size) to use
-                if ( m_stars.at(s).magnitude() < -1 ) {
-                    s_pixmap = m_pixN1Stars.at(colorId);
-                }
-                else if ( m_stars.at(s).magnitude() < 0 ) {
-                    s_pixmap = m_pixP0Stars.at(colorId);
-                }
-                else if ( m_stars.at(s).magnitude() < 1 ) {
-                    s_pixmap = m_pixP1Stars.at(colorId);
-                }
-                else if ( m_stars.at(s).magnitude() < 2 ) {
-                    s_pixmap = m_pixP2Stars.at(colorId);
-                }
-                else if ( m_stars.at(s).magnitude() < 3 ) {
-                    s_pixmap = m_pixP3Stars.at(colorId);
-                }
-                else if ( m_stars.at(s).magnitude() < 4 ) {
-                    s_pixmap = m_pixP4Stars.at(colorId);
-                }
-                else if ( m_stars.at(s).magnitude() < 5 ) {
-                    s_pixmap = m_pixP5Stars.at(colorId);
-                }
-                else if ( m_stars.at(s).magnitude() < 6 ) {
-                    s_pixmap = m_pixP6Stars.at(colorId);
-                }
-                else {
-                    s_pixmap = m_pixP7Stars.at(colorId);
-                }
-
+                QPixmap s_pixmap = starPixmap(m_stars.at(s).magnitude(), colorId);
                 int sizeX = s_pixmap.width();
                 int sizeY = s_pixmap.height();
                 painter->drawPixmap( x-sizeX/2, y-sizeY/2 ,s_pixmap );
@@ -1193,7 +1211,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             qpos.rotateAroundAxis( skyAxisMatrix );
 
             if ( qpos.v[Q_Z] <= 0 ) {
-                QPixmap venus = QPixmap(MarbleDirs::path("bitmaps/stars/star_0_white.png"));
+                qreal diam = 0.0, mag = 0.0, phase = 0.0;
+                sys.getPhysVenus(diam, mag, phase);
+                QPixmap venus = starPixmap(mag, 2);
 
                 qreal deltaX  = venus.width()  / 2.;
                 qreal deltaY  = venus.height() / 2.;
@@ -1205,6 +1225,62 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 // It's labels' time!
                 if (m_viewSolarSystemLabel)
                     painter->drawText(x+deltaX, y+deltaY, Planet("venus").name());
+            }
+        }
+
+        if ( m_renderMars ) {
+            double ra=0.0, decl=0.0;
+            sys.getMars(ra, decl);
+            ra = 15.0 * sys.DmsDegF(ra);
+            decl = sys.DmsDegF(decl);
+
+            Quaternion qpos = Quaternion::fromSpherical( ra * DEG2RAD,
+                                                         decl * DEG2RAD );
+            qpos.rotateAroundAxis( skyAxisMatrix );
+
+            if ( qpos.v[Q_Z] <= 0 ) {
+                qreal diam = 0.0, mag = 0.0, phase = 0.0;
+                sys.getPhysMars(diam, mag, phase);
+                QPixmap mars = starPixmap(mag, 5);
+
+                qreal deltaX  = mars.width()  / 2.;
+                qreal deltaY  = mars.height() / 2.;
+                const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+
+                painter->drawPixmap( x - deltaX, y - deltaY, mars );
+
+                // It's labels' time!
+                if (m_viewSolarSystemLabel)
+                    painter->drawText(x+deltaX, y+deltaY, Planet("mars").name());
+            }
+        }
+
+        if ( m_renderJupiter ) {
+            double ra=0.0, decl=0.0;
+            sys.getJupiter(ra, decl);
+            ra = 15.0 * sys.DmsDegF(ra);
+            decl = sys.DmsDegF(decl);
+
+            Quaternion qpos = Quaternion::fromSpherical( ra * DEG2RAD,
+                                                         decl * DEG2RAD );
+            qpos.rotateAroundAxis( skyAxisMatrix );
+
+            if ( qpos.v[Q_Z] <= 0 ) {
+                qreal diam = 0.0, mag = 0.0, phase = 0.0;
+                sys.getPhysJupiter(diam, mag, phase);
+                QPixmap jupiter = starPixmap(mag, 2);
+
+                qreal deltaX  = jupiter.width()  / 2.;
+                qreal deltaY  = jupiter.height() / 2.;
+                const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+
+                painter->drawPixmap( x - deltaX, y - deltaY, jupiter );
+
+                // It's labels' time!
+                if (m_viewSolarSystemLabel)
+                    painter->drawText(x+deltaX, y+deltaY, Planet("jupiter").name());
             }
         }
     }
@@ -1306,8 +1382,10 @@ void StarsPlugin::togglePlanets()
 
     Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
-        // Venus
+        // Venus, Mars, Jupiter
         ui_configWidget->m_solarSystemListWidget->item(3)->setCheckState(state);
+        ui_configWidget->m_solarSystemListWidget->item(5)->setCheckState(state);
+        ui_configWidget->m_solarSystemListWidget->item(6)->setCheckState(state);
     }
 
     emit settingsChanged( nameId() );
@@ -1372,7 +1450,7 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
             }
 
             m_planetsAction->setCheckable( true );
-            if (m_renderVenus /* || other planets, later */) {
+            if (m_renderVenus || m_renderMars || m_renderJupiter) {
                 m_planetsAction->setChecked( true );
             } else {
                 m_planetsAction->setChecked( false );

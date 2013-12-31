@@ -197,6 +197,8 @@ private:
         return settings[key].value<T>();
     }
 
+    QPixmap starPixmap(qreal mag, int colorId) const;
+
     void prepareNames();
     QHash<QString, QString> m_abbrHash;
     QHash<QString, QString> m_nativeHash;
@@ -204,6 +206,7 @@ private:
 
     // sidereal time in hours:
     qreal siderealTime( const QDateTime& );
+    void createStarPixmaps();
     void loadStars();
     void loadConstellations();
     void loadDsos();
@@ -217,10 +220,13 @@ private:
     bool m_renderSun;
     bool m_renderMoon;
     bool m_renderVenus;
+    bool m_renderMars;
+    bool m_renderJupiter;
     bool m_renderEcliptic;
     bool m_renderCelestialEquator;
     bool m_renderCelestialPole;
     bool m_starsLoaded;
+    bool m_starPixmapsCreated;
     bool m_constellationsLoaded;
     bool m_dsosLoaded;
     bool m_zoomSunMoon;
