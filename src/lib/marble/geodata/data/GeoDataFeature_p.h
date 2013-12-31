@@ -76,7 +76,7 @@ class GeoDataFeaturePrivate
     {
     }
 
-    void operator=( const GeoDataFeaturePrivate& other )
+    GeoDataFeaturePrivate& operator=( const GeoDataFeaturePrivate& other )
     {
         m_name = other.m_name;
         m_description = other.m_description;
@@ -96,6 +96,7 @@ class GeoDataFeaturePrivate
         m_visualCategory = other.m_visualCategory;
         m_extendedData = other.m_extendedData;
         m_region = other.m_region;
+        return *this;
     }
     
     virtual GeoDataFeaturePrivate* copy()
