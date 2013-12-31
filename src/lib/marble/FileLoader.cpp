@@ -64,8 +64,10 @@ public:
           m_runner( model->pluginManager() ),
           m_recenter( false ),
           m_filepath ( file ),
+          m_style( 0 ),
           m_contents ( contents ),
           m_documentRole ( role ),
+          m_styleMap( 0 ),
           m_document( 0 ),
           m_clock( model->clock() )
     {

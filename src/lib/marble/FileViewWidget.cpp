@@ -54,7 +54,10 @@ class FileViewWidgetPrivate
 };
 
 FileViewWidgetPrivate::FileViewWidgetPrivate( FileViewWidget *parent )
-    :q( parent ) {
+    :q( parent ),
+    m_widget( 0 ),
+    m_fileManager( 0 )
+{
 }
 
 FileViewWidget::FileViewWidget( QWidget *parent, Qt::WindowFlags f )
