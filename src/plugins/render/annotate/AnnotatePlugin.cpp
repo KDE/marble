@@ -449,7 +449,7 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
                     const int result = QMessageBox::question( m_marbleWidget,
                                                               QObject::tr( "Remove current item" ),
                                                               QObject::tr( "Are you sure you want to remove the current item?" ),
-                                                              QMessageBox::Yes | QMessageBox::Yes );
+                                                              QMessageBox::Yes | QMessageBox::No );
 
                     if ( result == QMessageBox::Yes ) {
                         m_selectedItem = 0;
