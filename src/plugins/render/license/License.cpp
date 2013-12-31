@@ -132,6 +132,7 @@ QIcon License::icon () const
 
 void License::initialize ()
 {
+    delete m_widgetItem;
     m_widgetItem = new WidgetGraphicsItem( this );
     m_label = new QLabel;
     m_label->setStyle( new OutlinedStyle );
