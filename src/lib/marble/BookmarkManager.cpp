@@ -122,6 +122,7 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
         Q_ASSERT( d->m_bookmarkDocument && "d->m_bookmarkDocument is 0 but must not be. Please report a bug at http://bugs.kde.org" );
         d->m_treeModel->addDocument( d->m_bookmarkDocument );
     }
+    ensureDefaultFolder();
 
     emit bookmarksChanged();
     return true;
@@ -208,6 +209,13 @@ void BookmarkManager::removeBookmarkFolder( GeoDataFolder *folder )
 {
     d->m_treeModel->removeFeature( folder );
     delete folder;
+}
+
+void BookmarkManager::ensureDefaultFolder()
+{
+    if ( d->m_bookmarkDocument->size() == 0 ) {
+        addNewBookmarkFolder( d->m_bookmarkDocument, "Default" );
+    }
 }
 
 void BookmarkManager::removeAllBookmarks()

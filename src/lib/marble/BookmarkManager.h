@@ -85,6 +85,12 @@ class MARBLE_EXPORT BookmarkManager : public QObject
     void removeBookmarkFolder( GeoDataFolder *folder );
 
     /**
+     * @brief checks that there is at least one folder
+     */
+
+    void ensureDefaultFolder();
+
+    /**
       * @brief remove all folders and bookmarks except default folder
       */
     void removeAllBookmarks();

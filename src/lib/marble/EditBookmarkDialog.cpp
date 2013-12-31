@@ -83,6 +83,7 @@ void EditBookmarkDialogPrivate::initialize()
 
 void EditBookmarkDialogPrivate::initComboBox( const GeoDataContainer* const container )
 {
+    m_bookmarkManager->ensureDefaultFolder();
     foreach( GeoDataFolder *folder, container->folderList() ) {
         QVariant folderVariant;
         folderVariant.setValue(folder);
