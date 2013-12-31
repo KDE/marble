@@ -108,6 +108,9 @@ class MarbleWidgetPrivate
     ~MarbleWidgetPrivate()
     {
         m_map.removeLayer( &m_customPaintLayer );
+        m_map.removeLayer( m_mapInfoDialog );
+        delete m_mapInfoDialog;
+        delete m_popupmenu;
     }
 
     void  construct();
