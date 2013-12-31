@@ -111,6 +111,9 @@ class MarbleModelPrivate
 
     ~MarbleModelPrivate()
     {
+        delete m_fileManager;
+        delete m_mapTheme;
+        delete m_planet;
     }
 
     // Misc stuff.
@@ -195,9 +198,6 @@ MarbleModel::MarbleModel( QObject *parent )
 
 MarbleModel::~MarbleModel()
 {
-    delete d->m_fileManager;
-    delete d->m_mapTheme;
-    delete d->m_planet;
     delete d;
 
     mDebug() << "Model deleted:" << this;
