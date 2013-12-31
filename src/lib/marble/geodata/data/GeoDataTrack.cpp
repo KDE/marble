@@ -27,8 +27,7 @@ class GeoDataTrackPrivate
 {
 public:
     GeoDataTrackPrivate()
-        : m_lineString( new GeoDataLineString() ),
-          m_lineStringNeedsUpdate( false ),
+        : m_lineStringNeedsUpdate( false ),
           m_interpolate( false )
     {
     }
@@ -41,7 +40,7 @@ public:
         }
     }
 
-    GeoDataLineString *m_lineString;
+    GeoDataLineString m_lineString;
     bool m_lineStringNeedsUpdate;
 
     QList<QDateTime> m_when;
@@ -247,14 +246,13 @@ void GeoDataTrack::removeAfter( const QDateTime &when )
 const GeoDataLineString *GeoDataTrack::lineString() const
 {
     if ( d->m_lineStringNeedsUpdate ) {
-        delete d->m_lineString;
-        d->m_lineString = new GeoDataLineString();
+        d->m_lineString = GeoDataLineString();
         foreach ( const GeoDataCoordinates &coordinates, coordinatesList() ) {
-            d->m_lineString->append( coordinates );
+            d->m_lineString.append( coordinates );
         }
         d->m_lineStringNeedsUpdate = false;
     }
-    return d->m_lineString;
+    return &d->m_lineString;
 }
 
 GeoDataExtendedData& GeoDataTrack::extendedData() const
