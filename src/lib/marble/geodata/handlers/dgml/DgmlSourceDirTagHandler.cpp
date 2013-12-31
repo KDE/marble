@@ -39,12 +39,10 @@ GeoNode* DgmlSourceDirTagHandler::parse(GeoParser& parser) const
 
     QString format = parser.attribute(dgmlAttr_format).trimmed();
 
-    GeoSceneTiled *texture = 0;
-
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_Vectortile) ) {
-        texture = parentItem.nodeAs<GeoSceneTiled>();
+        GeoSceneTiled *texture = parentItem.nodeAs<GeoSceneTiled>();
         texture->setSourceDir( parser.readElementText().trimmed() );
         texture->setFileFormat(format);
     }

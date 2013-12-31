@@ -250,10 +250,9 @@ int CylindricalProjectionPrivate::crossDateLine( const GeoDataCoordinates & aCoo
     qreal bLon = bCoord.longitude();
     qreal bSign = bLon > 0 ? 1 : -1;
 
-    int sign = 0;
     qreal delta = 0;
     if( aSign != bSign && fabs(aLon) + fabs(bLon) > M_PI ) {
-        sign = aSign > bSign ? 1 : -1;
+        int sign = aSign > bSign ? 1 : -1;
         mirrorCount += sign;
     }
     delta = repeatDistance * mirrorCount;

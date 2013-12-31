@@ -232,13 +232,11 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
 void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPointF>& labelNodes, 
                                         LabelPositionFlags labelPositionFlags)
 {
-    int labelPosition = 0;
-
     bool currentAllowsLabel = false;
 
     if ( labelPositionFlags.testFlag( LineCenter ) ) {
         // The Label at the center of the polyline:
-        labelPosition = static_cast<int>( polygon.size() / 2.0 );
+        int labelPosition = static_cast<int>( polygon.size() / 2.0 );
         if ( polygon.size() > 0 ) {
             if ( labelPosition >= polygon.size() ) {
                 labelPosition = polygon.size() - 1;

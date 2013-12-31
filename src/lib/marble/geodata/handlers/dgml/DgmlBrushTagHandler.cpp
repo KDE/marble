@@ -44,8 +44,6 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
 
     QString color = parser.attribute(dgmlAttr_color).trimmed();
 
-    GeoSceneVector *vector = 0;
-    GeoSceneGeodata *geodata = 0;
     QBrush brush;
 
     if ( !color.isEmpty() && QColor( color ).isValid() ) {
@@ -55,10 +53,10 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.represents( dgmlTag_Vector ) ) {
-        vector = parentItem.nodeAs<GeoSceneVector>();
+        GeoSceneVector *vector = parentItem.nodeAs<GeoSceneVector>();
         vector->setBrush( brush );
     } else if ( parentItem.represents( dgmlTag_Geodata ) ) {
-        geodata = parentItem.nodeAs<GeoSceneGeodata>();
+        GeoSceneGeodata *geodata = parentItem.nodeAs<GeoSceneGeodata>();
         geodata->setBrush( brush );
     }
 

@@ -106,11 +106,10 @@ AlternativeRoutesModelPrivate::AlternativeRoutesModelPrivate() :
 
 int AlternativeRoutesModelPrivate::nonZero( const QImage &image )
 {
-  QRgb* destLine = 0;
   QRgb const black = qRgb( 0, 0, 0 );
   int count = 0;
   for ( int y = 0; y < image.height(); ++y ) {
-      destLine = (QRgb*) image.scanLine( y );
+      QRgb* destLine = (QRgb*) image.scanLine( y );
       for ( int x = 0; x < image.width(); ++x ) {
           count += destLine[x] == black ? 0 : 1;
       }

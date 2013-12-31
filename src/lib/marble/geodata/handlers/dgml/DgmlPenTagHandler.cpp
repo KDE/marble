@@ -46,8 +46,6 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
     QString style = parser.attribute(dgmlAttr_style).toLower().trimmed();
     qreal  width = parser.attribute(dgmlAttr_width).toDouble();
 
-    GeoSceneVector *vector = 0;
-    GeoSceneGeodata *geodata = 0;
     QPen pen;
 
     if ( !color.isEmpty() && QColor( color ).isValid() ) {
@@ -70,10 +68,10 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.represents( dgmlTag_Vector ) ) {
-        vector = parentItem.nodeAs<GeoSceneVector>();
+        GeoSceneVector *vector = parentItem.nodeAs<GeoSceneVector>();
         vector->setPen( pen );
     } else if ( parentItem.represents( dgmlTag_Geodata ) ) {
-        geodata = parentItem.nodeAs<GeoSceneGeodata>();
+        GeoSceneGeodata *geodata = parentItem.nodeAs<GeoSceneGeodata>();
         geodata->setPen( pen );
     }
 

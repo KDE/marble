@@ -458,10 +458,8 @@ void EclipsesItem::calculate()
         sunBoundary = *sunBoundaries.last();
         sunBoundaries.pop_back();
 
-        int closestSection;
-
         while ( sunBoundaries.size() > 0) {
-            closestSection = -1;
+            int closestSection = -1;
 
             // TODO: Now that MableMath is not public anymore we need a
             // GeoDataCoordinates::distance() method in Marble.

@@ -67,10 +67,9 @@ GeoDataTreeModel::Private::~Private()
 
 void GeoDataTreeModel::Private::checkParenting( GeoDataObject *object )
 {
-    GeoDataContainer *container;
     if(    object->nodeType() == GeoDataTypes::GeoDataDocumentType
         || object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
-        container = static_cast<GeoDataContainer*>( object );
+        GeoDataContainer *container = static_cast<GeoDataContainer*>( object );
         foreach( GeoDataFeature *child, container->featureList() ) {
             if ( child->parent() != container ) {
                 qWarning() << "Parenting mismatch for " << child->name();
@@ -607,11 +606,9 @@ QModelIndex GeoDataTreeModel::index( GeoDataObject *object )
 
         itdown = index( d->m_rootDocument->childPosition( static_cast<GeoDataFeature*>( ancestors.last() ) ),0,QModelIndex());//Iterator to go top down
 
-        GeoDataObject *parent;
-
         while ( ( ancestors.size() > 1 ) ) {
 
-            parent = static_cast<GeoDataObject*>( ancestors.last() );
+            GeoDataObject *parent = static_cast<GeoDataObject*>( ancestors.last() );
 
             if ( ( parent->nodeType() == GeoDataTypes::GeoDataFolderType )
                 || ( parent->nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {

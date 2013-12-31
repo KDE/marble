@@ -645,10 +645,6 @@ void MainWindow::createPluginMenus()
         m_viewMenu->removeAction( m_pluginMenus.takeFirst() );
     }
 
-
-    const QList<QActionGroup*> *tmp_toolbarActionGroups = NULL;
-    const QList<QActionGroup*> *tmp_actionGroups = NULL;
-
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
@@ -656,7 +652,7 @@ void MainWindow::createPluginMenus()
     for (; i != end; ++i ) {
 
         // menus
-        tmp_actionGroups = (*i)->actionGroups();
+        const QList<QActionGroup*> *tmp_actionGroups = (*i)->actionGroups();
         if( (*i)->enabled() && tmp_actionGroups ) {
            foreach( QActionGroup *ag, *tmp_actionGroups ) {
                if( !ag->actions().isEmpty() ) {
@@ -670,7 +666,7 @@ void MainWindow::createPluginMenus()
         }
 
         // toolbars
-        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
+        const QList<QActionGroup*> *tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
         if ( (*i)->enabled() && tmp_toolbarActionGroups ) {
             QToolBar* toolbar = new QToolBar(this);
             toolbar->setObjectName( QString( "plugin-toolbar-%1" ).arg( (*i)->nameId() ) );

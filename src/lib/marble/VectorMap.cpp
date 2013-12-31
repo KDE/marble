@@ -730,15 +730,13 @@ void VectorMap::createArc( const ViewportParams *viewport, const QPointF &horizo
 
         // qDebug () << " beta: " << beta << " alpha " << alpha << " diff: " << diff;
 	
-        int  itx;
-        int  ity;
         // mDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((qreal)(m_rlimit));
         qreal  arcradius = sqrt( (qreal)( rLimit ) );
 
         for ( int it = 1; it < fabs(diff); ++it ) {
             qreal angle = DEG2RAD * (qreal)( alpha + (sgndiff * it) );
-            itx = (int)( ( viewport->width()  / 2 ) +  arcradius * cos( angle ) + 1 );
-            ity = (int)( ( viewport->height() / 2 ) +  arcradius * sin( angle ) + 1 );
+            int itx = (int)( ( viewport->width()  / 2 ) +  arcradius * cos( angle ) + 1 );
+            int ity = (int)( ( viewport->height() / 2 ) +  arcradius * sin( angle ) + 1 );
             // mDebug() << " ity: " << ity;
             polygon.append( QPoint( itx, ity ) );
         }

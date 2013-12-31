@@ -172,17 +172,14 @@ void PntMapLoader::run()
         == (unsigned char*) (caddr_t) -1)
         mDebug() << "mmap error for input";
 		
-    short  header;
-    short  iLat;
-    short  iLon;
     int    count = 0;
 
     //const int halfFileLength = filelength / 2;
 
     for (int i=0; i < filelength; i+=6){
-        header = src[i] | (src[i+1] << 8);
-        iLat = src[i+2] | (src[i+3] << 8);
-        iLon = src[i+4] | (src[i+5] << 8);   
+        short header = src[i] | (src[i+1] << 8);
+        short iLat = src[i+2] | (src[i+3] << 8);
+        short iLon = src[i+4] | (src[i+5] << 8);
 
         // Transforming Range of Coordinates to iLat [0,ARCMINUTE] ,
         // iLon [0,2 * ARCMINUTE]

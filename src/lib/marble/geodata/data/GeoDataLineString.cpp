@@ -59,14 +59,13 @@ void GeoDataLineStringPrivate::interpolateDateLine( const GeoDataCoordinates & p
 {
     GeoDataCoordinates dateLineCoords;
 
-    int recursionCounter = 0;
-
 //    mDebug() << Q_FUNC_INFO;
 
     if ( f.testFlag( RespectLatitudeCircle ) && previousCoords.latitude() == currentCoords.latitude() ) {
         dateLineCoords = currentCoords;
     }
     else {
+        int recursionCounter = 0;
         dateLineCoords = findDateLine( previousCoords, currentCoords, recursionCounter );
     }
 
