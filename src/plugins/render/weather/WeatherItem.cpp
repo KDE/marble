@@ -452,7 +452,7 @@ void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts )
         if ( it.key() < minDate ) {
             d->m_forecastWeather.remove( it.key() );
         }
-        it++;
+        ++it;
     }
 
     d->updateToolTip();
