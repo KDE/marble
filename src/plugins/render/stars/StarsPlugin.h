@@ -222,6 +222,8 @@ private:
     bool m_renderJupiter;
     bool m_renderMercury;
     bool m_renderSaturn;
+    bool m_renderUranus;
+    bool m_renderNeptune;
     bool m_renderEcliptic;
     bool m_renderCelestialEquator;
     bool m_renderCelestialPole;

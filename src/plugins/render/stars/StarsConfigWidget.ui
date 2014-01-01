@@ -150,9 +150,6 @@
              <property name="checkState">
               <enum>Unchecked</enum>
              </property>
-             <property name="flags">
-              <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsUserCheckable</set>
-             </property>
             </item>
             <item>
              <property name="text">
@@ -160,9 +157,6 @@
              </property>
              <property name="checkState">
               <enum>Unchecked</enum>
-             </property>
-             <property name="flags">
-              <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsUserCheckable</set>
              </property>
             </item>
            </widget>

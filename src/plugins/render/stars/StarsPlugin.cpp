@@ -54,6 +54,8 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_renderJupiter( true ),
       m_renderMercury( true ),
       m_renderSaturn( true ),
+      m_renderUranus( true ),
+      m_renderNeptune( true ),
       m_renderEcliptic( true ),
       m_renderCelestialEquator( true ),
       m_renderCelestialPole( true ),
@@ -212,6 +214,8 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     settings["renderVenus"] = m_renderVenus;
     settings["renderMercury"] = m_renderMercury;
     settings["renderSaturn"] = m_renderSaturn;
+    settings["renderUranus"] = m_renderUranus;
+    settings["renderNeptune"] = m_renderNeptune;
     settings["renderMars"] = m_renderMars;
     settings["renderJupiter"] = m_renderJupiter;
     settings["renderEcliptic"] = m_renderEcliptic;
@@ -243,6 +247,8 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderSun = readSetting<bool>( settings, "renderSun", true );
     m_renderMercury = readSetting<bool>( settings, "renderMercury", true );
     m_renderSaturn = readSetting<bool>( settings, "renderSaturn", true );
+    m_renderUranus = readSetting<bool>( settings, "renderUranus", true );
+    m_renderNeptune = readSetting<bool>( settings, "renderNeptune", true );
     m_renderMoon = readSetting<bool>( settings, "renderMoon", true );
     m_renderVenus = readSetting<bool>( settings, "renderVenus", true );
     m_renderMars = readSetting<bool>( settings, "renderMars", true );
@@ -348,6 +354,9 @@ void StarsPlugin::readSettings()
     Qt::CheckState const moonState = m_renderMoon ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_solarSystemListWidget->item( 1 )->setCheckState( moonState );
 
+    Qt::CheckState const mercuryState = m_renderMercury ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_solarSystemListWidget->item( 2 )->setCheckState(mercuryState);
+
     Qt::CheckState const venusState = m_renderVenus ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_solarSystemListWidget->item( 3 )->setCheckState(venusState);
 
@@ -357,11 +366,14 @@ void StarsPlugin::readSettings()
     Qt::CheckState const jupiterState = m_renderJupiter ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_solarSystemListWidget->item( 6 )->setCheckState(jupiterState);
 
-    Qt::CheckState const mercuryState = m_renderMercury ? Qt::Checked : Qt::Unchecked;
-    ui_configWidget->m_solarSystemListWidget->item( 2 )->setCheckState(mercuryState);
-
     Qt::CheckState const saturnState = m_renderSaturn ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_solarSystemListWidget->item( 7 )->setCheckState(saturnState);
+
+    Qt::CheckState const uranusState = m_renderUranus ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_solarSystemListWidget->item( 8 )->setCheckState(uranusState);
+
+    Qt::CheckState const neptuneState = m_renderNeptune ? Qt::Checked : Qt::Unchecked;
+    ui_configWidget->m_solarSystemListWidget->item( 9 )->setCheckState(neptuneState);
 
     Qt::CheckState const eclipticState = m_renderEcliptic ? Qt::Checked : Qt::Unchecked;
     ui_configWidget->m_viewEclipticCheckbox->setCheckState( eclipticState );
@@ -424,11 +436,13 @@ void StarsPlugin::writeSettings()
     m_renderDsoLabels = ui_configWidget->m_viewDsoLabelCheckbox->checkState() == Qt::Checked;
     m_renderSun = ui_configWidget->m_solarSystemListWidget->item( 0 )->checkState() == Qt::Checked;
     m_renderMoon = ui_configWidget->m_solarSystemListWidget->item( 1 )->checkState() == Qt::Checked;
+    m_renderMercury = ui_configWidget->m_solarSystemListWidget->item( 2 )->checkState() == Qt::Checked;
     m_renderVenus = ui_configWidget->m_solarSystemListWidget->item( 3 )->checkState() == Qt::Checked;
     m_renderMars = ui_configWidget->m_solarSystemListWidget->item( 5 )->checkState() == Qt::Checked;
     m_renderJupiter = ui_configWidget->m_solarSystemListWidget->item( 6 )->checkState() == Qt::Checked;
-    m_renderMercury = ui_configWidget->m_solarSystemListWidget->item( 2 )->checkState() == Qt::Checked;
     m_renderSaturn = ui_configWidget->m_solarSystemListWidget->item( 7 )->checkState() == Qt::Checked;
+    m_renderUranus = ui_configWidget->m_solarSystemListWidget->item( 8 )->checkState() == Qt::Checked;
+    m_renderNeptune = ui_configWidget->m_solarSystemListWidget->item( 9 )->checkState() == Qt::Checked;
     m_renderEcliptic = ui_configWidget->m_viewEclipticCheckbox->checkState() == Qt::Checked;
     m_renderCelestialEquator = ui_configWidget->m_viewCelestialEquatorCheckbox->checkState() == Qt::Checked;
     m_renderCelestialPole = ui_configWidget->m_viewCelestialPoleCheckbox->checkState() == Qt::Checked;
@@ -1354,6 +1368,62 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                     painter->drawText(x+deltaX, y+deltaY, Planet("saturn").name());
             }
         }
+
+        if (m_renderUranus) {
+            double ra=0.0, decl=0.0;
+            sys.getUranus(ra, decl);
+            ra = 15.0 * sys.DmsDegF(ra);
+            decl = sys.DmsDegF(decl);
+
+            Quaternion qpos = Quaternion::fromSpherical( ra * DEG2RAD,
+                                                         decl * DEG2RAD );
+            qpos.rotateAroundAxis( skyAxisMatrix );
+
+            if ( qpos.v[Q_Z] <= 0 ) {
+                qreal diam = 0.0, mag = 0.0, phase = 0.0;
+                sys.getPhysUranus(diam, mag, phase);
+                QPixmap uranus = starPixmap(mag, 0);
+
+                qreal deltaX  = uranus.width()  / 2.;
+                qreal deltaY  = uranus.height() / 2.;
+                const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+
+                painter->drawPixmap( x - deltaX, y - deltaY, uranus );
+
+                // It's labels' time!
+                if (m_viewSolarSystemLabel)
+                    painter->drawText(x+deltaX, y+deltaY, Planet("uranus").name());
+            }
+        }
+
+        if (m_renderNeptune) {
+            double ra=0.0, decl=0.0;
+            sys.getNeptune(ra, decl);
+            ra = 15.0 * sys.DmsDegF(ra);
+            decl = sys.DmsDegF(decl);
+
+            Quaternion qpos = Quaternion::fromSpherical( ra * DEG2RAD,
+                                                         decl * DEG2RAD );
+            qpos.rotateAroundAxis( skyAxisMatrix );
+
+            if ( qpos.v[Q_Z] <= 0 ) {
+                qreal diam = 0.0, mag = 0.0, phase = 0.0;
+                sys.getPhysNeptune(diam, mag, phase);
+                QPixmap neptune = starPixmap(mag, 0);
+
+                qreal deltaX  = neptune.width()  / 2.;
+                qreal deltaY  = neptune.height() / 2.;
+                const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+
+                painter->drawPixmap( x - deltaX, y - deltaY, neptune );
+
+                // It's labels' time!
+                if (m_viewSolarSystemLabel)
+                    painter->drawText(x+deltaX, y+deltaY, Planet("neptune").name());
+            }
+        }
     }
 
     painter->restore();
@@ -1375,7 +1445,6 @@ void StarsPlugin::toggleSunMoon()
     m_renderSun = changed;
     m_renderMoon = changed;
     if (changed) {
-        qDebug() << "Changed this to true";
         m_viewSolarSystemLabel = true;
     }
 
@@ -1436,15 +1505,19 @@ void StarsPlugin::togglePlanets()
     m_renderJupiter = changed;
     m_renderMercury = changed;
     m_renderSaturn = changed;
+    m_renderUranus = changed;
+    m_renderNeptune = changed;
 
     Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
-        // Mercury, Venus, Mars, Jupiter, Saturn
+        // Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune
         ui_configWidget->m_solarSystemListWidget->item(2)->setCheckState(state);
         ui_configWidget->m_solarSystemListWidget->item(3)->setCheckState(state);
         ui_configWidget->m_solarSystemListWidget->item(5)->setCheckState(state);
         ui_configWidget->m_solarSystemListWidget->item(6)->setCheckState(state);
         ui_configWidget->m_solarSystemListWidget->item(7)->setCheckState(state);
+        ui_configWidget->m_solarSystemListWidget->item(8)->setCheckState(state);
+        ui_configWidget->m_solarSystemListWidget->item(9)->setCheckState(state);
     }
 
     emit settingsChanged( nameId() );
@@ -1510,7 +1583,7 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
 
             m_planetsAction->setCheckable( true );
             if (m_renderVenus || m_renderMars || m_renderJupiter ||
-                m_renderMercury || m_renderSaturn) {
+                m_renderMercury || m_renderSaturn || m_renderUranus || m_renderNeptune) {
                 m_planetsAction->setChecked( true );
             } else {
                 m_planetsAction->setChecked( false );
