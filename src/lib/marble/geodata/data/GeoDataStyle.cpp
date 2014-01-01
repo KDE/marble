@@ -108,6 +108,7 @@ void GeoDataStyle::setBalloonStyle( const GeoDataBalloonStyle& style )
 void GeoDataStyle::setListStyle( const GeoDataListStyle& style )
 {
     d->m_listStyle = style;
+    d->m_listStyle.setParent( this );
 }
 
 GeoDataIconStyle& GeoDataStyle::iconStyle() const

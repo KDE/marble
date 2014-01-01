@@ -91,7 +91,7 @@ QImage GeoDataItemIcon::icon() const
     }
     else if(!d->m_iconPath.isEmpty())
     {
-        d->m_icon = QImage(d->m_iconPath);
+        d->m_icon = QImage(resolvePath(d->m_iconPath));
         return d->m_icon;
     }
     else
