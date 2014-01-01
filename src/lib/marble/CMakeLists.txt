@@ -312,11 +312,14 @@ qt_add_resources(marblewidget_SRCS libmarble.qrc ../../apps/marble-ui/marble.qrc
 qt_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
 marble_qt4_automoc(${marblewidget_SRCS})
 
+ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
+
+# link with libastro
+TARGET_LINK_LIBRARIES (marblewidget astro)
 
 # link with release version of Qt libs
-ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 if( QT4_FOUND )
-  TARGET_LINK_LIBRARIES (marblewidget 
+  TARGET_LINK_LIBRARIES (marblewidget
     ${QT_QTCORE_LIBRARY}
     ${QT_QTDBUS_LIBRARY}
     ${QT_QTGUI_LIBRARY}
@@ -341,21 +344,21 @@ endif()
 
 if( PHONON_FOUND AND NOT QT5BUILD )
   INCLUDE_DIRECTORIES( ${PHONON_INCLUDES} )
-  TARGET_LINK_LIBRARIES(marblewidget astro ${PHONON_LIBS} )
+  TARGET_LINK_LIBRARIES(marblewidget ${PHONON_LIBS} )
   set (HAVE_PHONON TRUE)
 endif( PHONON_FOUND AND NOT QT5BUILD )
 
 if (APPLE)
   #defined in top level makefile
-  TARGET_LINK_LIBRARIES(marblewidget astro ${MAC_EXTRA_LIBS} )
+  TARGET_LINK_LIBRARIES(marblewidget ${MAC_EXTRA_LIBS} )
 endif (APPLE)
 
 if (CMAKE_SYSTEM_NAME MATCHES "SunOS")
-  TARGET_LINK_LIBRARIES(marblewidget astro m)
+  TARGET_LINK_LIBRARIES(marblewidget m)
 endif (CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
 if(WIN32)
-  TARGET_LINK_LIBRARIES(marblewidget astro ws2_32 imm32 winmm)
+  TARGET_LINK_LIBRARIES(marblewidget ws2_32 imm32 winmm)
 endif(WIN32)
 
 
