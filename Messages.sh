@@ -27,7 +27,7 @@ cat data/legend.html \
   | sed -e 's/^\(.*\)$/\/\/i18n: file .\/data\/legend.html\ni18n(\"\1\");/' \
   >> rc.cpp
 
-cut -d ';' -f 1 data/stars/names.csv | sed -e 's/^/i18n(\"/' -e 's/$/\");/' >> rc.cpp
+cut -d ';' -f 1 data/stars/names.csv | sed -e 's/^/tr(\"/' -e 's/$/\");/' >> rc_qt.cpp
 
 # Eliminate empty i18n calls.
 egrep -B1 'i18nc?\(".*[^ ].*"\)' rc.cpp > rc.cpp.1
@@ -37,4 +37,5 @@ $EXTRACTRC `find . -name '*.ui' \
             -o -name '*.rc' -a ! -name marble.rc \
             -o -name '*.kcfg'` >> rc.cpp
 $XGETTEXT src/apps/marble-kde/kdemain.cpp src/apps/marble-kde/marble_part.cpp rc.cpp -o $podir/marble.pot
-$XGETTEXT_QT src/apps/marble-qt/QtMainWindow.cpp src/apps/marble-qt/qtmain.cpp src/apps/marble-ui/ControlView.cpp `find src/plugins -name '*.cpp' | grep -v '/test/'` `find src/lib -name '*.cpp'` src/lib/marble/global.h src/lib/marble/MarbleGlobal.h -o $podir/marble_qt.pot
+$XGETTEXT_QT src/apps/marble-qt/QtMainWindow.cpp src/apps/marble-qt/qtmain.cpp src/apps/marble-ui/ControlView.cpp `find src/plugins -name '*.cpp' | grep -v '/test/'` `find src/lib -name '*.cpp'` src/lib/marble/global.h src/lib/marble/MarbleGlobal.h rc_qt.cpp -o $podir/marble_qt.pot
+rm -f rc_qt.cpp
