@@ -220,6 +220,8 @@ private:
     bool m_renderVenus;
     bool m_renderMars;
     bool m_renderJupiter;
+    bool m_renderMercury;
+    bool m_renderSaturn;
     bool m_renderEcliptic;
     bool m_renderCelestialEquator;
     bool m_renderCelestialPole;
