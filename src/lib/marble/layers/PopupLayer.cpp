@@ -13,6 +13,7 @@
 #include "PopupLayer.h"
 #include "MarbleWidget.h"
 #include "PopupItem.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 
 #include <QMouseEvent>
@@ -120,17 +121,30 @@ void PopupLayer::setContent( const QString &html )
     emit repaintNeeded();
 }
 
-void PopupLayer::setStyle( const GeoDataStyle *style )
+void PopupLayer::setPlacemark( const GeoDataPlacemark *placemark )
 {
-    if (style == 0) {
-	m_popupItem->setBackgroundColor(QColor(Qt::white));
-	m_popupItem->setTextColor(QColor(Qt::black));
-	return;
+    if (placemark->style() == 0) {
+        m_popupItem->setBackgroundColor(QColor(Qt::white));
+        m_popupItem->setTextColor(QColor(Qt::black));
+        return;
     }
-    if (&style->balloonStyle()) {
-        m_popupItem->setBackgroundColor(style->balloonStyle().backgroundColor());
-        m_popupItem->setTextColor(style->balloonStyle().textColor());
+    if (placemark->style()->balloonStyle().displayMode() == GeoDataBalloonStyle::Hide) {
+        setVisible(false);
+        return;
     }
+    QString content = placemark->style()->balloonStyle().text();
+    if (content.length() > 0) {
+        content = content.replace("$[name]", placemark->name(), Qt::CaseInsensitive);
+        content = content.replace("$[description]", placemark->description(), Qt::CaseInsensitive);
+        content = content.replace("$[address]", placemark->address(), Qt::CaseInsensitive);
+        // @TODO: implement the line calculation, so that snippet().maxLines actually has effect.
+        content = content.replace("$[snippet]", placemark->snippet().text(), Qt::CaseInsensitive);
+        content = content.replace("$[id]", QString::number(placemark->id()), Qt::CaseInsensitive);
+        m_popupItem->setContent(content);
+    }
+    m_popupItem->setBackgroundColor(placemark->style()->balloonStyle().backgroundColor());
+    m_popupItem->setTextColor(placemark->style()->balloonStyle().textColor());
+    emit repaintNeeded();
 }
 
 void PopupLayer::setBackgroundColor(const QColor &color)

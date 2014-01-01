@@ -21,6 +21,7 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataListStyle.cpp
         geodata/data/GeoDataFlyTo.cpp
         geodata/data/GeoDataMultiTrack.cpp
+        geodata/data/GeoDataSnippet.cpp
         geodata/data/GeoDataStyle.cpp
         geodata/data/GeoDataLinearRing.cpp
         geodata/data/GeoDataFolder.cpp
@@ -362,6 +363,7 @@ geodata/handlers/kml/KmlMessageTagHandler.cpp
 geodata/handlers/kml/KmlLinkNameTagHandler.cpp
 geodata/handlers/kml/KmlLinkDescriptionTagHandler.cpp
 geodata/handlers/kml/KmlLinkSnippetTagHandler.cpp
+geodata/handlers/kml/KmlSnippetTagHandler.cpp
 geodata/handlers/kml/KmlExpiresTagHandler.cpp
 geodata/handlers/kml/KmlUpdateTagHandler.cpp
 geodata/handlers/kml/KmlNetworkLinkControlTagHandler.cpp

@@ -19,6 +19,7 @@
 #include <QColor>
 
 #include "GeoDataObject.h"
+#include "GeoDataSnippet.h"
 
 #include "geodata_export.h"
 
@@ -38,6 +39,8 @@ class GeoDataTimeSpan;
 class GeoDataTimeStamp;
 
 class GeoDataFeaturePrivate;
+
+class GeoDataSnippet;
 
 /**
  * @short A base class for all geodata features
@@ -289,6 +292,20 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * @param value  the new name
      */
     void setName( const QString &value );
+
+    /**
+     * @brief A short description of the feature.
+     *
+     * HTML markup is not supported.
+     * @TODO When the Snippet is not supplied, the first lines of description should be used.
+     * @return The name of this feature
+     */
+    GeoDataSnippet snippet() const;
+    /**
+     * @brief Set a new name for this feature
+     * @param value  the new name
+     */
+    void setSnippet( const GeoDataSnippet &value );
 
     /// Return the address of the feature
     QString address() const;

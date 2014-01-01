@@ -331,7 +331,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         } else {
             d->setupDialogGeoPlaces(popup, index);
         }
-        popup->setStyle(index->style());
+        popup->setPlacemark(index);
         popup->popup();
     }
 }

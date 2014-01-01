@@ -130,11 +130,14 @@ public:
     void setContent( const QString &html );
 
     /**
-     * @brief Sets style of the popup
+     * @brief Sets style and content of the browser
      *
-     * @param style the style to set
+     * Sets the bgColor, textColor, displayMode and Content.
+     * Replaces $[*] by their values.
+     *
+     * @param placemark the placemark which invoked this popup
      */
-    void setStyle( const GeoDataStyle *style );
+    void setPlacemark( const GeoDataPlacemark *placemark );
 
     /**
      * @brief Sets background color of the header

@@ -488,6 +488,17 @@ void GeoDataFeature::setName( const QString &value )
     d->m_name = value;
 }
 
+GeoDataSnippet GeoDataFeature::snippet() const
+{
+    return d->m_snippet;
+}
+
+void GeoDataFeature::setSnippet( const GeoDataSnippet &snippet )
+{
+    detach();
+    d->m_snippet = snippet;
+}
+
 QString GeoDataFeature::address() const
 {
     return d->m_address;

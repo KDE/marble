@@ -32,6 +32,7 @@ class GeoDataFeaturePrivate
   public:
     GeoDataFeaturePrivate() :
         m_name(),
+        m_snippet(),
         m_description(),
         m_descriptionCDATA(),
         m_address(),
@@ -55,6 +56,7 @@ class GeoDataFeaturePrivate
 
     GeoDataFeaturePrivate( const GeoDataFeaturePrivate& other ) :
         m_name( other.m_name ),
+        m_snippet( other.m_snippet ),
         m_description( other.m_description ),
         m_descriptionCDATA( other.m_descriptionCDATA),
         m_address( other.m_address ),
@@ -79,6 +81,7 @@ class GeoDataFeaturePrivate
     GeoDataFeaturePrivate& operator=( const GeoDataFeaturePrivate& other )
     {
         m_name = other.m_name;
+        m_snippet = other.m_snippet;
         m_description = other.m_description;
         m_descriptionCDATA = other.m_descriptionCDATA;
         m_address = other.m_address;
@@ -178,6 +181,7 @@ class GeoDataFeaturePrivate
     }
 
     QString             m_name;         // Name of the feature. Is shown on screen
+    GeoDataSnippet      m_snippet;      // Snippet of the feature.
     QString             m_description;  // A longer textual description
     bool                m_descriptionCDATA; // True if description should be considered CDATA
     QString             m_address;      // The address.  Optional
