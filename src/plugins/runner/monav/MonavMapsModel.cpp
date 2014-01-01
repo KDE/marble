@@ -53,8 +53,7 @@ QVariant MonavMapsModel::headerData ( int section, Qt::Orientation orientation, 
         case 4:
             return tr( "Delete" );
         case 5:
-            /** @todo: Change to 'Date' after string freeze */
-            return tr( "Update" );
+            return tr( "Date" );
         }
     }
 
