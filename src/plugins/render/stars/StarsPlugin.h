@@ -27,6 +27,7 @@
 
 class QDateTime;
 class QMenu;
+class SolarSystem;
 
 namespace Ui
 {
@@ -204,6 +205,12 @@ private:
     QHash<QString, QString> m_nativeHash;
     int m_nameIndex;
 
+    void renderPlanet(const QString &planetId,
+                      GeoPainter *painter,
+                      SolarSystem &sys,
+                      ViewportParams *viewport,
+                      qreal skyRadius,
+                      matrix &skyAxisMatrix);
     void createStarPixmaps();
     void loadStars();
     void loadConstellations();
@@ -217,13 +224,7 @@ private:
     bool m_renderDsoLabels;
     bool m_renderSun;
     bool m_renderMoon;
-    bool m_renderVenus;
-    bool m_renderMars;
-    bool m_renderJupiter;
-    bool m_renderMercury;
-    bool m_renderSaturn;
-    bool m_renderUranus;
-    bool m_renderNeptune;
+    QMap<QString, bool> m_renderPlanet;
     bool m_renderEcliptic;
     bool m_renderCelestialEquator;
     bool m_renderCelestialPole;
