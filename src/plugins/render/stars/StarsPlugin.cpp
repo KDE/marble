@@ -1180,7 +1180,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 overlay.end();
 
                 const qreal size = skyRadius * qSin(sys.getDiamMoon()) * coefficient;
-                const qreal angle = marbleModel()->planet()->epsilon() * qCos(ra * DEG2RAD) * RAD2DEG;
+                qreal angle = marbleModel()->planet()->epsilon() * qCos(ra * DEG2RAD) * RAD2DEG;
+                if (viewport->polarity() < 0) angle += 180;
 
                 QTransform form;
                 const qreal factor = size / moon.size().width();
