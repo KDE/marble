@@ -600,80 +600,80 @@ void StarsPlugin::loadStars()
 void StarsPlugin::createStarPixmaps()
 {
     // Load star pixmaps
-    QVector<QPixmap> m_pixBigStars;
-    m_pixBigStars.clear();
-    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_blue.png")));
-    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_bluewhite.png")));
-    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_white.png")));
-    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_yellow.png")));
-    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_orange.png")));
-    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_red.png")));
-    m_pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_garnetred.png")));
+    QVector<QPixmap> pixBigStars;
+    pixBigStars.clear();
+    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_blue.png")));
+    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_bluewhite.png")));
+    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_white.png")));
+    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_yellow.png")));
+    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_orange.png")));
+    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_red.png")));
+    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_garnetred.png")));
 
-    QVector<QPixmap> m_pixSmallStars;
-    m_pixSmallStars.clear();
-    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_blue.png")));
-    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_bluewhite.png")));
-    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_white.png")));
-    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_yellow.png")));
-    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_orange.png")));
-    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_red.png")));
-    m_pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_garnetred.png")));
+    QVector<QPixmap> pixSmallStars;
+    pixSmallStars.clear();
+    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_blue.png")));
+    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_bluewhite.png")));
+    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_white.png")));
+    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_yellow.png")));
+    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_orange.png")));
+    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_red.png")));
+    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_garnetred.png")));
 
 
     // Pre-Scale Star Pixmaps
     m_pixN1Stars.clear();
-    for ( int p=0; p < m_pixBigStars.size(); ++p) {
-        int width = 1.0*m_pixBigStars.at(p).width();
-        m_pixN1Stars.append(m_pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    for ( int p=0; p < pixBigStars.size(); ++p) {
+        int width = 1.0*pixBigStars.at(p).width();
+        m_pixN1Stars.append(pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
     m_pixP0Stars.clear();
-    for ( int p=0; p < m_pixBigStars.size(); ++p) {
-        int width = 0.90*m_pixBigStars.at(p).width();
-        m_pixP0Stars.append(m_pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    for ( int p=0; p < pixBigStars.size(); ++p) {
+        int width = 0.90*pixBigStars.at(p).width();
+        m_pixP0Stars.append(pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
     m_pixP1Stars.clear();
-    for ( int p=0; p < m_pixBigStars.size(); ++p) {
-        int width = 0.80*m_pixBigStars.at(p).width();
-        m_pixP1Stars.append(m_pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    for ( int p=0; p < pixBigStars.size(); ++p) {
+        int width = 0.80*pixBigStars.at(p).width();
+        m_pixP1Stars.append(pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
     m_pixP2Stars.clear();
-    for ( int p=0; p < m_pixBigStars.size(); ++p) {
-        int width = 0.70*m_pixBigStars.at(p).width();
-        m_pixP2Stars.append(m_pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+    for ( int p=0; p < pixBigStars.size(); ++p) {
+        int width = 0.70*pixBigStars.at(p).width();
+        m_pixP2Stars.append(pixBigStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
     m_pixP3Stars.clear();
-    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+    for ( int p=0; p < pixSmallStars.size(); ++p) {
         int width = 14;
-        m_pixP3Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+        m_pixP3Stars.append(pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
     m_pixP4Stars.clear();
-    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+    for ( int p=0; p < pixSmallStars.size(); ++p) {
         int width = 10;
-        m_pixP4Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+        m_pixP4Stars.append(pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
     m_pixP5Stars.clear();
-    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+    for ( int p=0; p < pixSmallStars.size(); ++p) {
         int width = 6;
-        m_pixP5Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+        m_pixP5Stars.append(pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
     m_pixP6Stars.clear();
-    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+    for ( int p=0; p < pixSmallStars.size(); ++p) {
         int width = 4;
-        m_pixP6Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+        m_pixP6Stars.append(pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
     m_pixP7Stars.clear();
-    for ( int p=0; p < m_pixSmallStars.size(); ++p) {
+    for ( int p=0; p < pixSmallStars.size(); ++p) {
         int width = 1;
-        m_pixP7Stars.append(m_pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
+        m_pixP7Stars.append(pixSmallStars.at(p).scaledToWidth(width,Qt::SmoothTransformation));
     }
 
     m_starPixmapsCreated = true;
