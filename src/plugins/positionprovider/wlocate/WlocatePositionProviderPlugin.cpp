@@ -187,11 +187,7 @@ void WlocatePositionProviderPlugin::handleWlocateResult()
         int const returnCode = d->m_futureWatcher->result();
         d->m_status = returnCode == WLOC_OK ? PositionProviderStatusAvailable : PositionProviderStatusError;
         if ( d->m_status == PositionProviderStatusAvailable ) {
-#if QT_VERSION < 0x040700
-            d->m_timestamp = QDateTime::currentDateTime().toUTC();
-#else
             d->m_timestamp = QDateTime::currentDateTimeUtc();
-#endif
             emit positionChanged( position(), accuracy() );
         }
     }

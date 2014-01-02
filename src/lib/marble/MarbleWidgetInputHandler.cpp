@@ -24,10 +24,8 @@
 #include <QRubberBand>
 #include <QToolTip>
 
-#if QT_VERSION >= 0x40600
-  #include <QGestureEvent>
-  #include <QPinchGesture>
-#endif
+#include <QGestureEvent>
+#include <QPinchGesture>
 
 #include "kineticmodel.h"
 
@@ -309,9 +307,7 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler( MarbleWidget *
     : MarbleWidgetInputHandler( widget ),
       d( new Private( widget ) )
 {
-#if QT_VERSION >= 0x40600
     widget->grabGesture( Qt::PinchGesture );
-#endif
 
     d->m_selectionRubber.hide();
 

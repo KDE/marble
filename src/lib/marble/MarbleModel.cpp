@@ -25,7 +25,7 @@
 #include <QItemSelectionModel>
 #include <QSortFilterProxyModel>
 
-#if (QT_VERSION >= 0x040700 && QT_VERSION < 0x040800)
+#if (QT_VERSION < 0x040800)
 // See comment below why this is needed
 #include <QNetworkConfigurationManager>
 #endif
@@ -166,7 +166,7 @@ MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate() )
 {
-#if (QT_VERSION >= 0x040700 && QT_VERSION < 0x040800)
+#if (QT_VERSION < 0x040800)
     // fix for KDE bug 288612
     // Due to a race condition in Qt 4.7 (https://bugreports.qt-project.org/browse/QTBUG-22107),
     // a segfault might occur at startup when e.g. reverse geocoding is called very early.

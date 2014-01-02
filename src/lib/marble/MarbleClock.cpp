@@ -35,13 +35,8 @@ public:
 MarbleClockPrivate::MarbleClockPrivate( MarbleClock* parent ) :
     q( parent ),
     m_speed( 1 ),
-#if QT_VERSION < 0x040700
-    m_datetime( QDateTime::currentDateTime().toUTC() ),
-    m_lasttime( QDateTime::currentDateTime().toUTC() ),
-#else
     m_datetime( QDateTime::currentDateTimeUtc() ),
     m_lasttime( QDateTime::currentDateTimeUtc() ),
-#endif
     m_timezoneInSec( 0 ),
     m_updateInterval( 60 )
 {
@@ -51,13 +46,8 @@ MarbleClockPrivate::MarbleClockPrivate( MarbleClock* parent ) :
 void MarbleClockPrivate::timerTimeout()
 {
     // calculate real period elapsed since last call
-#if QT_VERSION < 0x040700
-    QDateTime curenttime( QDateTime::currentDateTime().toUTC() );
-    int msecdelta = 1000 * m_lasttime.secsTo( curenttime );
-#else
     QDateTime curenttime( QDateTime::currentDateTimeUtc() );
     int msecdelta = m_lasttime.msecsTo( curenttime );
-#endif
     m_lasttime = curenttime;
 
     // update m_datetime at m_speed pace
