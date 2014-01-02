@@ -100,6 +100,7 @@ set(marblewidget_SRCS
     GeoDataTreeModel.cpp
     kdescendantsproxymodel.cpp
     BranchFilterProxyModel.cpp
+    TreeViewDecoratorModel.cpp
     MarbleDebug.cpp
     Tile.cpp
     TextureTile.cpp

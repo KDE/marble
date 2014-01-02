@@ -23,6 +23,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
+#include "TreeViewDecoratorModel.h"
 
 using namespace Marble;
 // Ui
@@ -49,7 +50,7 @@ class FileViewWidgetPrivate
     FileViewWidget *q;
     Ui::FileViewWidget  m_fileViewUi;
     MarbleWidget *m_widget;
-    QSortFilterProxyModel m_treeSortProxy;
+    TreeViewDecoratorModel m_treeSortProxy;
     FileManager *m_fileManager;
 };
 
