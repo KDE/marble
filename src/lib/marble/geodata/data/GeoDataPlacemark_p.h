@@ -37,6 +37,10 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 
     GeoDataPlacemarkPrivate& operator=( const GeoDataPlacemarkPrivate& other )
     {
+        if ( this == &other ) {
+            return *this;
+        }
+
         GeoDataFeaturePrivate::operator=( other );
 
         GeoDataGeometry * geometry = 0;
