@@ -19,7 +19,6 @@
 #include <QColor>
 
 #include "GeoDataObject.h"
-#include "GeoDataSnippet.h"
 
 #include "geodata_export.h"
 

@@ -13,6 +13,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataParser.h"
+#include "GeoDataSnippet.h"
 
 namespace Marble
 {

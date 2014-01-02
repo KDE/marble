@@ -22,6 +22,7 @@
 #include "GeoDataTimeSpan.h"
 #include "GeoDataTypes.h"
 #include "GeoDataStyle.h"
+#include "GeoDataSnippet.h"
 #include "MarbleDirs.h"
 
 namespace Marble

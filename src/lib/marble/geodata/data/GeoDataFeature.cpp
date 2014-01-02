@@ -29,7 +29,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataRegion.h"
 
-
 namespace Marble
 {
 QFont GeoDataFeaturePrivate::s_defaultFont = QFont("Sans Serif");

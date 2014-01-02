@@ -15,6 +15,7 @@
 #include "PopupItem.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataSnippet.h"
 
 #include <QMouseEvent>
 #include <QApplication>
