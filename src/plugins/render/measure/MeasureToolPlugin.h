@@ -44,8 +44,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     MARBLE_PLUGIN( MeasureToolPlugin )
 
  public:
-    MeasureToolPlugin();
-    explicit MeasureToolPlugin( const MarbleModel *marbleModel );
+    explicit MeasureToolPlugin( const MarbleModel *marbleModel = 0 );
 
     QStringList backendTypes() const;
     QString renderPolicy() const;

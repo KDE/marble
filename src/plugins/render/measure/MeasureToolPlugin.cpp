@@ -32,13 +32,6 @@
 namespace Marble
 {
 
-MeasureToolPlugin::MeasureToolPlugin()
-    : RenderPlugin( 0 ),
-      m_configDialog( 0 ),
-      m_uiConfigWidget( 0 )
-{
-}
-
 MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
       m_measureLineString( GeoDataLineString( Tessellate ) ),
