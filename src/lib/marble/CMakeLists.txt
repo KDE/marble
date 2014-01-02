@@ -469,6 +469,7 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataPolygon.h
     geodata/data/GeoDataPolyStyle.h
     geodata/data/GeoDataRegion.h
+    geodata/data/GeoDataSnippet.h
     geodata/data/GeoDataStyle.h
     geodata/data/GeoDataStyleMap.h
     geodata/data/GeoDataStyleSelector.h
