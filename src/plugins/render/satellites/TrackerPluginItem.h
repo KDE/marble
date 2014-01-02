@@ -11,6 +11,8 @@
 #ifndef MARBLE_TRACKERPLUGINITEM_H
 #define MARBLE_TRACKERPLUGINITEM_H
 
+#include <qglobal.h>
+
 class QString;
 
 namespace Marble {
@@ -74,6 +76,7 @@ public:
     virtual void update() = 0;
 
 private:
+    Q_DISABLE_COPY(TrackerPluginItem)
     TrackerPluginItemPrivate *d;
 };
 
