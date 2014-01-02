@@ -95,6 +95,12 @@ void FileViewWidgetPrivate::setTreeModel( GeoDataTreeModel *model )
     m_fileViewUi.m_treeView->sortByColumn( 0, Qt::AscendingOrder );
     m_fileViewUi.m_treeView->resizeColumnToContents( 0 );
     m_fileViewUi.m_treeView->resizeColumnToContents( 1 );
+    QObject::connect( m_fileViewUi.m_treeView,
+             SIGNAL(expanded(QModelIndex)),
+             &m_treeSortProxy, SLOT(trackExpandedState(QModelIndex)) );
+    QObject::connect( m_fileViewUi.m_treeView,
+             SIGNAL(collapsed(QModelIndex)),
+             &m_treeSortProxy, SLOT(trackCollapsedState(QModelIndex)) );
     QObject::connect( m_fileViewUi.m_treeView->selectionModel(),
              SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
              q, SLOT(enableFileViewActions()) );

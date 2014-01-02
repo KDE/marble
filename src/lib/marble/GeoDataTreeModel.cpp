@@ -311,20 +311,12 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     else if ( role == Qt::DecorationRole
               && index.column() == 0 ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+             || object->nodeType() == GeoDataTypes::GeoDataFolderType
              || object->nodeType() == GeoDataTypes::GeoDataDocumentType
              || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
             return QVariant(feature->style()->iconStyle().icon());
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
-        GeoDataFolder *folder = static_cast<GeoDataFolder*>( object );
-        // @TODO: Subclass QTreeView, and overwrite icon rendering and pass a specific @role,
-        // so as to be able to determine the state of the folder.
-        foreach( GeoDataItemIcon *icon, folder->style()->listStyle().itemIconList() ) {
-            if ( icon->state() == GeoDataItemIcon::Open ) {
-                return icon->icon();
-            }
-        }
-    }
+	    }
     } else if ( role == Qt::ToolTipRole
               && index.column() == 0 ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
