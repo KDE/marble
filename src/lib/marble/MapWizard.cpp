@@ -62,7 +62,8 @@ class MapWizardPrivate
 {
 public:
     MapWizardPrivate()
-        : m_serverCapabilitiesValid( false )
+        : m_serverCapabilitiesValid( false ),
+          mapProviderType()
     {}
 
     void pageEntered( int id );

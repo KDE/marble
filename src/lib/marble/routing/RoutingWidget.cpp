@@ -133,6 +133,16 @@ RoutingWidgetPrivate::RoutingWidgetPrivate( RoutingWidget *parent, MarbleWidget 
         m_currentFrame( 0 ),
         m_iconSize( 16 ),
         m_collapse_width( 0 ),
+        m_toolBar( 0 ),
+        m_openRouteButton( 0 ),
+        m_saveRouteButton( 0 ),
+        m_cloudSyncSeparator( 0 ),
+        m_uploadToCloudAction( 0 ),
+        m_openCloudRoutesAction( 0 ),
+        m_addViaButton( 0 ),
+        m_reverseRouteButton( 0 ),
+        m_clearRouteButton( 0 ),
+        m_configureButton( 0 ),
         m_routeUploadDialog( 0 ),
         m_parent( parent )
 {

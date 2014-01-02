@@ -40,6 +40,9 @@ namespace Marble
 
 GraticulePlugin::GraticulePlugin()
     : RenderPlugin( 0 ),
+      m_showPrimaryLabels( true ),
+      m_showSecondaryLabels( true ),
+      m_isInitialized( false ),
       ui_configWidget( 0 ),
       m_configDialog( 0 )
 {

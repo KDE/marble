@@ -44,6 +44,7 @@ class PositionTrackingPrivate
         m_currentTrackPlacemark( new GeoDataPlacemark ),
         m_trackSegments( new GeoDataMultiTrack ),
         m_document(),
+        m_currentTrack( 0 ),
         m_positionProvider( 0 ),
         m_length( 0.0 )
     {

@@ -28,7 +28,11 @@ namespace Marble
 
 CompassFloatItem::CompassFloatItem()
     : AbstractFloatItem( 0 ),
-      m_svgobj( 0 )
+      m_svgobj( 0 ),
+      m_polarity( 0 ),
+      m_themeIndex( 0 ),
+      m_configDialog( 0 ),
+      m_uiConfigWidget( 0 )
 {
 }
 

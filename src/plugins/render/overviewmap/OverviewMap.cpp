@@ -37,7 +37,8 @@ namespace Marble
 OverviewMap::OverviewMap()
     : AbstractFloatItem( 0 ),
       ui_configWidget( 0 ),
-      m_configDialog( 0 )
+      m_configDialog( 0 ),
+      m_mapChanged( false )
 {
 }
 

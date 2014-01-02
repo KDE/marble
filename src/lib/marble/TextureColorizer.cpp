@@ -72,6 +72,7 @@ TextureColorizer::TextureColorizer( const QString &seafile,
                                     const QString &landfile,
                                     VectorComposer *veccomposer )
     : m_veccomposer( veccomposer ),
+      m_showRelief( false ),
       m_landColor(qRgb( 255, 0, 0 ) ),
       m_seaColor( qRgb( 0, 255, 0 ) )
 {

@@ -57,7 +57,6 @@ private:
     QString m_name;
     SatellitesConfigAbstractItem *m_parent;
     Qt::ItemFlags m_flags;
-    bool m_checked;
 };
 
 } // namespace Marble

@@ -29,7 +29,8 @@ class MarblePlacemarkModel::Private
 
  public:
     Private()
-      : m_size(0)
+      : m_size(0),
+        m_placemarkContainer( 0 )
     {
     }
 

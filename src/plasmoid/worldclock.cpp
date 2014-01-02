@@ -57,7 +57,11 @@ namespace Marble
 
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-    m_map(0)
+    m_showDate( false ),
+    m_customTz( false ),
+    m_map(0),
+    m_isHovered( false ),
+    m_timeEngine( 0 )
 {
     KGlobal::locale()->insertCatalog("marble");
     KGlobal::locale()->insertCatalog("marble_qt");

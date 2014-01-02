@@ -186,7 +186,13 @@ class MapViewWidget::Private {
           m_marbleModel( 0 ),
           m_mapSortProxy(),
           m_celestialListProxy(),
-          m_toolBar( 0 )
+          m_toolBar( 0 ),
+          m_globeViewButton( 0 ),
+          m_mercatorViewButton( 0 ),
+          m_popupMenu( 0 ),
+          m_flatViewAction( 0 ),
+          m_mercatorViewAction( 0 ),
+          m_celestialBodyAction( 0 )
     {
         m_mapSortProxy.setDynamicSortFilter( true );
         m_celestialListProxy.setDynamicSortFilter( true );

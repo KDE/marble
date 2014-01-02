@@ -12,6 +12,7 @@
 #include "jsonparser.h"
 
 jsonParser::jsonParser()
+    : dataStorage()
 {
   myEngine.setProcessEventsInterval(10);//this lets the gui remain responsive
 }

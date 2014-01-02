@@ -35,6 +35,7 @@ class GeoDataGeometryPrivate
     GeoDataGeometryPrivate( const GeoDataGeometryPrivate& other )
         : m_extrude( other.m_extrude ),
           m_altitudeMode( other.m_altitudeMode ),
+          m_latLonAltBox(),
           ref( 0 )
     {
     }

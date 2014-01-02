@@ -22,7 +22,8 @@ namespace Marble
 QFont FoursquareItem::s_font = QFont( "Sans Serif", 8 );
 
 FoursquareItem::FoursquareItem(QObject* parent)
-    : AbstractDataPluginItem( parent )
+    : AbstractDataPluginItem( parent ),
+    m_usersCount( 0 )
 {
     setSize( QSize( 0, 0 ) );
 }

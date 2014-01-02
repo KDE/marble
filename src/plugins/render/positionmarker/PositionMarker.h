@@ -40,8 +40,7 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( PositionMarker )
  public:
-    PositionMarker ();
-    explicit PositionMarker( const MarbleModel *marbleModel );
+    explicit PositionMarker( const MarbleModel *marbleModel = 0 );
     ~PositionMarker ();
 
     QStringList renderPosition() const;

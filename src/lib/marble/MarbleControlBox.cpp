@@ -65,7 +65,14 @@ class MarbleControlBoxPrivate
     RoutingWidget  *m_routingWidget;
 };
 
-MarbleControlBoxPrivate::MarbleControlBoxPrivate() : m_routingWidget(0)
+MarbleControlBoxPrivate::MarbleControlBoxPrivate()
+    : m_widget( 0 ),
+      m_navigationWidget( 0 ),
+      m_legendWidget( 0 ),
+      m_mapViewWidget( 0 ),
+      m_currentLocationWidget( 0 ),
+      m_fileViewWidget( 0 ),
+      m_routingWidget( 0 )
 {
 }
 

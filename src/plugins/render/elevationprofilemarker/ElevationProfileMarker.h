@@ -34,8 +34,7 @@ class ElevationProfileMarker : public RenderPlugin
     MARBLE_PLUGIN( ElevationProfileMarker )
 
  public:
-    ElevationProfileMarker();
-    explicit ElevationProfileMarker( const MarbleModel *marbleModel );
+    explicit ElevationProfileMarker( const MarbleModel *marbleModel = 0 );
     ~ElevationProfileMarker();
 
     QStringList backendTypes() const;

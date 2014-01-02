@@ -31,13 +31,6 @@
 namespace Marble
 {
 
-MapScaleFloatItem::MapScaleFloatItem()
-    : AbstractFloatItem( 0 ),
-      m_configDialog( 0 ),
-      ui_configWidget( 0 )
-{
-}
-
 MapScaleFloatItem::MapScaleFloatItem( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( 10.5, -10.5 ), QSizeF( 0.0, 40.0 ) ),
       m_configDialog(0),

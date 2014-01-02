@@ -59,10 +59,14 @@ class QtMarbleConfigDialogPrivate
           ui_navigationSettings(),
           ui_timeSettings(),
           ui_cacheSettings(),
+          w_pluginSettings( 0 ),
+          m_cloudSyncStatusLabel( 0 ),
           m_marbleWidget( marbleWidget ),
           m_syncManager(cloudSyncManager->bookmarkSyncManager()),
           m_cloudSyncManager(cloudSyncManager),
-          m_pluginModel()
+          m_pluginModel(),
+          m_initialGraphicsSystem(),
+          m_previousGraphicsSystem()
     {
     }
 

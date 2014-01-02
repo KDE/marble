@@ -14,6 +14,7 @@ namespace Marble
 {
 
 OpenCachingCacheLog::OpenCachingCacheLog()
+    : m_cacheId( 0 )
 {
 }
 

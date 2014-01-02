@@ -22,7 +22,8 @@ namespace Marble {
 EarthquakePlugin::EarthquakePlugin()
     : AbstractDataPlugin( 0 ),
       m_ui( 0 ),
-      m_configDialog( 0 )
+      m_configDialog( 0 ),
+      m_maximumNumberOfItems( 100 )
 {
 }
 

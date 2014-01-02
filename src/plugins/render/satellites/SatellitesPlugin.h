@@ -38,8 +38,7 @@ class SatellitesPlugin : public RenderPlugin,
     MARBLE_PLUGIN( SatellitesPlugin )
 
 public:
-    SatellitesPlugin();
-    explicit SatellitesPlugin( const MarbleModel *marbleModel );
+    explicit SatellitesPlugin( const MarbleModel *marbleModel = 0 );
     virtual ~SatellitesPlugin();
     
     QStringList backendTypes() const;

@@ -15,6 +15,7 @@ namespace Marble {
 
 OpenCachingComPlugin::OpenCachingComPlugin()
     : AbstractDataPlugin( 0 )
+    , m_isInitialized( false )
 {
 }
 

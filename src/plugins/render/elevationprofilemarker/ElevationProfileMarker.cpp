@@ -25,11 +25,6 @@
 namespace Marble
 {
 
-ElevationProfileMarker::ElevationProfileMarker()
-    : RenderPlugin( 0 )
-{
-}
-
 ElevationProfileMarker::ElevationProfileMarker( const MarbleModel *marbleModel )
         : RenderPlugin( marbleModel ),
         m_fontHeight( 10 ),
@@ -38,6 +33,9 @@ ElevationProfileMarker::ElevationProfileMarker( const MarbleModel *marbleModel )
         m_markerIcon( &m_markerItem ),
         m_markerText( &m_markerItem )
 {
+    if ( !marbleModel ) {
+        return;
+    }
     setVisible( false );
     m_markerItem.setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 

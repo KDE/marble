@@ -29,13 +29,6 @@
 namespace Marble
 {
 
-SatellitesPlugin::SatellitesPlugin()
-    : RenderPlugin( 0 ),
-      m_satModel( 0 ),
-      m_configDialog( 0 )
-{
-}
-
 SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
      m_satModel( 0 ),
