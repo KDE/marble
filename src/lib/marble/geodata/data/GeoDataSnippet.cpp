@@ -13,40 +13,31 @@
 namespace Marble
 {
 
-GeoDataSnippet::GeoDataSnippet()
+GeoDataSnippet::GeoDataSnippet(const QString &text , int maxLines ) :
+    m_text( text ),
+    m_maxLines( maxLines )
 {
-    this->m_text = QString();
-    this->m_maxLines = 0;
-}
-
-GeoDataSnippet::GeoDataSnippet( const QString &text , const int maxLines )
-{
-    this->m_text = text;
-    this->m_maxLines = maxLines;
+    // nothing to do
 }
 
 int GeoDataSnippet::maxLines() const
 {
-	return this->m_maxLines;
+    return m_maxLines;
 }
 
-void GeoDataSnippet::setMaxLines( const int lines )
+void GeoDataSnippet::setMaxLines( int lines )
 {
-	this->m_maxLines = lines;
+    m_maxLines = lines;
 }
 
 QString GeoDataSnippet::text() const
 {
-	return this->m_text;
+    return m_text;
 }
 
 void GeoDataSnippet::setText( const QString &text )
 {
-	this->m_text = text;
-}
-
-GeoDataSnippet::~GeoDataSnippet()
-{
+    m_text = text;
 }
 
 }

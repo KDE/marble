@@ -8,10 +8,8 @@
 // Copyright 2013 Levente Kurusa <levex@linux.com>
 //
 
-
 #ifndef MARBLE_GEODATASNIPPET_H
 #define MARBLE_GEODATASNIPPET_H
-
 
 #include <QString>
 
@@ -20,26 +18,22 @@ namespace Marble
 
 class GeoDataSnippet
 {
- public:
-    /**
-     * Create a new snippet, setting its text to "" and maxLines to 0.
-     */
-    GeoDataSnippet();
-
+public:
     /**
      * Create a new snippet with the given @text text and @maxLines maximum of lines.
      */
-    explicit GeoDataSnippet( const QString &text , const int maxLines );
+    explicit GeoDataSnippet( const QString &text = QString() , int maxLines = 0 );
 
     /**
-     * Return the number of lines that should be displayed at maximum.
+     * Return the number of lines that should be displayed at maximum. The value
+     * 0 (default) means "all"
      */
     int maxLines() const;
 
     /**
      * Set the number of lines displayed at maximum.
      */
-    void setMaxLines( const int lines );
+    void setMaxLines( int lines );
 
     /**
      * Returns the text that is associated with this snippet.
@@ -50,11 +44,6 @@ class GeoDataSnippet
      * Set the text that the snippet will display.
      */
     void setText( const QString &text );
-
-    /**
-    * Delete the snippet
-    */
-    ~GeoDataSnippet();
 
 private:
     QString   m_text;     // Text of the snippet
