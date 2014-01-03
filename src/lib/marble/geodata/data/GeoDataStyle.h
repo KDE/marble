@@ -74,19 +74,23 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     /// set the icon style
     void setIconStyle( const GeoDataIconStyle& style );
     /// Return the icon style of this style
-    GeoDataIconStyle& iconStyle() const;
+    GeoDataIconStyle& iconStyle();
+    const GeoDataIconStyle& iconStyle() const;
     /// set the label style
     void setLabelStyle( const GeoDataLabelStyle& style );
     /// Return the label style of this style
-    GeoDataLabelStyle& labelStyle() const;
+    GeoDataLabelStyle& labelStyle();
+    const GeoDataLabelStyle& labelStyle() const;
     /// set the line style
     void setLineStyle( const GeoDataLineStyle& style );
     /// Return the label style of this style
-    GeoDataLineStyle& lineStyle() const;
+    GeoDataLineStyle& lineStyle();
+    const GeoDataLineStyle& lineStyle() const;
     /// set the poly style
     void setPolyStyle( const GeoDataPolyStyle& style );
     /// Return the label style of this style
-    GeoDataPolyStyle& polyStyle() const;
+    GeoDataPolyStyle& polyStyle();
+    const GeoDataPolyStyle& polyStyle() const;
     /// set the balloon style
     void setBalloonStyle( const GeoDataBalloonStyle& style );
     /// Return the balloon style of this style

@@ -111,22 +111,42 @@ void GeoDataStyle::setListStyle( const GeoDataListStyle& style )
     d->m_listStyle.setParent( this );
 }
 
-GeoDataIconStyle& GeoDataStyle::iconStyle() const
+GeoDataIconStyle& GeoDataStyle::iconStyle()
 {
     return d->m_iconStyle;
 }
 
-GeoDataLineStyle& GeoDataStyle::lineStyle() const
+const GeoDataIconStyle& GeoDataStyle::iconStyle() const
+{
+    return d->m_iconStyle;
+}
+
+GeoDataLineStyle& GeoDataStyle::lineStyle()
 {
     return d->m_lineStyle;
 }
 
-GeoDataPolyStyle& GeoDataStyle::polyStyle() const
+const GeoDataLineStyle& GeoDataStyle::lineStyle() const
+{
+    return d->m_lineStyle;
+}
+
+GeoDataPolyStyle& GeoDataStyle::polyStyle()
 {
     return d->m_polyStyle;
 }
 
-GeoDataLabelStyle& GeoDataStyle::labelStyle() const
+const GeoDataPolyStyle& GeoDataStyle::polyStyle() const
+{
+    return d->m_polyStyle;
+}
+
+GeoDataLabelStyle& GeoDataStyle::labelStyle()
+{
+    return d->m_labelStyle;
+}
+
+const GeoDataLabelStyle& GeoDataStyle::labelStyle() const
 {
     return d->m_labelStyle;
 }
