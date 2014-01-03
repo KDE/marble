@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=marble --geo-uri=%u
+Name=Marble
+MimeType=x-scheme-handler/geo;
+Terminal=true
+NoDisplay=true
+

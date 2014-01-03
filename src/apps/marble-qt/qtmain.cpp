@@ -23,6 +23,7 @@
 #include "MarbleDebug.h"
 #include "MarbleTest.h"
 #include "MarbleLocale.h"
+#include "GeoUriParser.h"
 
 #ifdef STATIC_BUILD
  #include <QtPlugin>
@@ -94,6 +95,7 @@ int main(int argc, char *argv[])
     QString mapThemeId;
     QString coordinatesString;
     QString distanceString;
+    QString geoUriString;
     MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
 
     QStringList args = QApplication::arguments();
@@ -105,6 +107,7 @@ int main(int argc, char *argv[])
         qWarning();
         qWarning() << "general options:";
         qWarning() << "  --marbledatapath=<path> .... Overwrite the compile-time path to map themes and other data";
+        qWarning() << "  --geo-uri=<uri> ............ Show map at given geo uri";
         qWarning() << "  --latlon=<coordinates> ..... Show map at given lat lon coordinates";
         qWarning() << "  --distance=<value> ......... Set the distance of the observer to the globe (in km)";
         qWarning() << "  --map=<id> ................. Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")";
@@ -134,7 +137,7 @@ int main(int argc, char *argv[])
         {
             marbleDataPath = args.at(i).mid(17);
         }
-        else if ( arg.compare( QLatin1String( "--marbledatapath" ), Qt::CaseInsensitive ) == 0 ) {
+        else if ( arg.compare( QLatin1String( "--marbledatapath" ), Qt::CaseInsensitive ) == 0 && i+1 < args.size() ) {
             dataPathIndex = i + 1;
             marbleDataPath = args.value( dataPathIndex );
             ++i;
@@ -149,30 +152,32 @@ int main(int argc, char *argv[])
         {
             coordinatesString = arg.mid(9);
         }
-        else if ( arg.compare( QLatin1String( "--latlon" ), Qt::CaseInsensitive ) == 0 ) {
+        else if ( arg.compare( QLatin1String( "--latlon" ), Qt::CaseInsensitive ) == 0 && i+1 < args.size() ) {
             ++i;
-            // TODO: misses an error check if there is a value at all
-            // and error reporting to user (problem also exists with marbledatapath)
             coordinatesString = args.value( i );
+        }
+        else if ( arg.compare( QLatin1String( "--geo-uri=" ), Qt::CaseInsensitive ) == 0 ) {
+            geoUriString = arg.mid(10);
+        }
+        else if ( arg.compare( QLatin1String( "--geo-uri" ), Qt::CaseInsensitive ) == 0 && i+1 < args.size() )
+        {
+            ++i;
+            geoUriString = args.value(i);
         }
         else if ( arg.startsWith( QLatin1String( "--distance=" ), Qt::CaseInsensitive ) )
         {
             distanceString = arg.mid(11);
         }
-        else if ( arg.compare( QLatin1String( "--distance" ), Qt::CaseInsensitive ) == 0 ) {
+        else if ( arg.compare( QLatin1String( "--distance" ), Qt::CaseInsensitive ) == 0 && i+1 < args.size() ) {
             ++i;
-            // TODO: misses an error check if there is a value at all
-            // and error reporting to user (problem also exists with marbledatapath)
             distanceString = args.value( i );
         }
         else if ( arg.startsWith( QLatin1String( "--map=" ), Qt::CaseInsensitive ) )
         {
             mapThemeId = arg.mid(6);
         }
-        else if ( arg.compare( QLatin1String( "--map" ), Qt::CaseInsensitive ) == 0 ) {
+        else if ( arg.compare( QLatin1String( "--map" ), Qt::CaseInsensitive ) == 0 && i+1 < args.size() ) {
             ++i;
-            // TODO: misses an error check if there is a value at all
-            // and error reporting to user (problem also exists with marbledatapath)
             mapThemeId = args.value( i );
         }
     }
@@ -208,6 +213,18 @@ int main(int argc, char *argv[])
     MainWindow *window = new MainWindow( marbleDataPath, cmdLineSettings );
     window->setAttribute( Qt::WA_DeleteOnClose, true );
 
+	if ( !geoUriString.isEmpty() ) {
+		GeoUriParser uriParser( geoUriString );
+		if ( uriParser.parse() )
+		{
+			window->marbleWidget()->centerOn( uriParser.coordinates() );
+			if ( uriParser.coordinates().altitude() > 0.0 )
+			{
+				window->marbleWidget()->setDistance( uriParser.coordinates().altitude() * METER2KM );
+			}
+		}
+	}
+
 //    window->marbleWidget()->rotateTo( 0, 0, -90 );
 //    window->show();
 
@@ -225,7 +242,7 @@ int main(int argc, char *argv[])
         }
         else if ( arg == "--tile-id" )
         {
-	    window->marbleControl()->marbleWidget()->setShowTileId(true);
+        window->marbleControl()->marbleWidget()->setShowTileId(true);
         }
         else if( arg == "--runtimeTrace" ) {
             window->marbleControl()->marbleWidget()->setShowRuntimeTrace( true );

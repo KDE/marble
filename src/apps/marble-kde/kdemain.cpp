@@ -22,6 +22,7 @@
  
 #include "ControlView.h"
 #include "KdeMainWindow.h"
+#include "GeoUriParser.h"
 #include "MarbleDebug.h"
 
 #include "MarbleTest.h"
@@ -64,7 +65,7 @@ int main ( int argc, char *argv[] )
                           ControlView::applicationVersion().toLatin1(),
                           ki18n( "A World Atlas." ),
                           KAboutData::License_LGPL,
-                          ki18n( "(c) 2007-2012" ), // FIXME: use subs() here and replace 2012 by %1
+                          ki18n( "(c) 2007-2014" ), // FIXME: use subs() here and replace 2012 by %1
                           KLocalizedString(),
                           "http://edu.kde.org/marble" );
 
@@ -311,6 +312,7 @@ int main ( int argc, char *argv[] )
         options.add( "highresolution", ki18n( "Use the interface optimized for high resolutions" ) );
     }
     options.add( "latlon <coordinates>", ki18n( "Show map at given lat lon coordinates" ) );
+    options.add( "geo-uri <uri>", ki18n( "Show map at given geo uri" ) );
     options.add( "distance <value>", ki18n( "Set the distance of the observer to the globe (in km)" ) );
     options.add( "map <id>", ki18n( "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")" ) );
     options.add( "+[file]", ki18n( "One or more placemark files to be opened" ) );
@@ -361,7 +363,7 @@ int main ( int argc, char *argv[] )
     }
 
     if ( args->isSet( "tile-id" ) ) {
-	window->marbleControl()->marbleWidget()->setShowTileId( true );
+        window->marbleControl()->marbleWidget()->setShowTileId( true );
     }
 
     const QString map = args->getOption( "map" );
@@ -377,6 +379,16 @@ int main ( int argc, char *argv[] )
             const qreal longitude = coordinates.longitude(GeoDataCoordinates::Degree);
             const qreal latitude = coordinates.latitude(GeoDataCoordinates::Degree);
             window->marbleWidget()->centerOn(longitude, latitude);
+        }
+    }
+
+    const QString geoUriString = args->getOption( "geo-uri" );
+    GeoUriParser uriParser( geoUriString );
+    if ( uriParser.parse() ) {
+        window->marbleWidget()->centerOn( uriParser.coordinates() );
+        if ( uriParser.coordinates().altitude() > 0.0 )
+        {
+            window->marbleWidget()->setDistance( uriParser.coordinates().altitude() * METER2KM );
         }
     }
 

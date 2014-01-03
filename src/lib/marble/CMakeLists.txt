@@ -98,6 +98,7 @@ set(marblewidget_SRCS
     MarbleWidgetPopupMenu.cpp
     MarblePlacemarkModel.cpp
     GeoDataTreeModel.cpp
+    GeoUriParser.cpp
     kdescendantsproxymodel.cpp
     BranchFilterProxyModel.cpp
     TreeViewDecoratorModel.cpp
