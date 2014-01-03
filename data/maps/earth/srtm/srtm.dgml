@@ -27,7 +27,7 @@
             <!-- Now we create the layer structure that gets handled by the
     layer management class -->
         
-        <map bgcolor="#000000">
+        <map bgcolor="#99b3cc">
             <canvas/>
             <!-- In this place one could e.g. insert a sky plugin -->
             <target/>
@@ -40,27 +40,7 @@
                     <storageLayout maximumTileLevel="5"/>
                 </texture>
             </layer>
-            
-            <!-- This layer creates the coastlines that are needed to
-                colorize the elevation model properly -->
-            <layer name="mwdbii-canvas" backend="vector" role="filterhelper">
-                <vector name="pcoast" feature="land">
-                    <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
-                </vector>
-                <vector name="pisland" feature="land">
-                    <sourcefile> mwdbii/PISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plakeisland" feature="land">
-                    <sourcefile> mwdbii/PLAKEISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plake" feature="sea">
-                    <sourcefile> mwdbii/PLAKE.PNT </sourcefile>
-                </vector>
-                <vector name="pglacier" feature="sea">
-                    <sourcefile> mwdbii/PGLACIER.PNT </sourcefile>
-                </vector>
-            </layer>
-        
+
             <!-- This layer provides the colorization -->
             <layer name="colorme" backend="filter">
                 <filter name="texturecolorizer" type="colorize">
@@ -68,24 +48,47 @@
                     <palette type="land">landcolors.leg</palette>
                 </filter>
             </layer>
+            
+            <!-- This layer creates the coastlines that are needed to
+                colorize the elevation model properly -->
+            <layer name="mwdbii-canvas" backend="geodata">
+                <geodata name="pcoast" property="land" colorize="land">
+                    <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
+                </geodata>
+                <geodata name="pisland" property="land" colorize="land">
+                    <sourcefile> mwdbii/PISLAND.PNT </sourcefile>
+                </geodata>
+                <geodata name="plakeisland" property="land" colorize="land">
+                    <sourcefile> mwdbii/PLAKEISLAND.PNT </sourcefile>
+                </geodata>
+                <geodata name="plake" property="waterbodies" colorize="sea">
+                    <sourcefile> mwdbii/PLAKE.PNT </sourcefile>
+                    <brush color="f00e0eff" />
+                </geodata>
+                <geodata name="pglacier" property="ice" colorize="sea">
+                    <sourcefile> mwdbii/PGLACIER.PNT </sourcefile>
+                    <brush color="ffffffff" />
+                </geodata>
+            </layer>
         
-            <layer name="mwdbii" backend="vector" role="polyline">
-                <vector name="pdiffborder" feature="border">
+        
+            <layer name="mwdbii" backend="geodata">
+                <geodata name="pdiffborder" property="borders">
                     <sourcefile> mwdbii/PDIFFBORDER.PNT </sourcefile>
                     <pen color="#f86649" />
-                </vector>
-                <vector name="pusa48" feature="border">
+                </geodata>
+                <geodata name="pusa48" property="borders">
                     <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
                     <pen color="#f86649" />
-                </vector>
-                <vector name="international dateline" feature="border">
+                </geodata>
+                <geodata name="international dateline" property="borders">
                     <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
                     <pen color="#000000" />
-                </vector>
-                <vector name="rivers" feature="river">
+                </geodata>
+                <geodata name="rivers" property="waterbodies">
                     <sourcefile> mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#637bff" />
-                </vector>
+                </geodata>
             </layer>
         
             <layer name="standardplaces" backend="geodata">
@@ -251,6 +254,14 @@
                 </item>
             </section>
     
+            <section name="ice" checkable="true" connect="ice" spacing="12">
+                <heading>Ice and Glaciers</heading>
+            </section>
+
+            <section name="relief" checkable="true" connect="relief" spacing="12">
+                <heading>Relief</heading>
+            </section>
+
             <section name="elevation" checkable="false" spacing="12">
                 <heading>Elevation</heading>
 
@@ -320,13 +331,6 @@
                 </item>
             </section>
 
-            <section name="ice" checkable="true" connect="ice" spacing="12">
-                <heading>Ice and Glaciers</heading>
-            </section>
-
-            <section name="relief" checkable="true" connect="relief" spacing="12">
-                <heading>Relief</heading>
-            </section>
 
             <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
                 <heading>Coordinate Grid</heading>

@@ -33,31 +33,31 @@
             <!-- In this place one could e.g. insert a sky plugin -->
             <target/>
         
-            <layer name="mwdbii" backend="vector" role="polyline">
-                <vector name="pcoast" feature="coast">
+            <layer name="mwdbii" backend="geodata">
+                <geodata name="pcoast">
                     <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
                     <brush color="#f2efe9" />
-                </vector>
-                <vector name="pdiffborder" feature="borders">
-                    <sourcefile> mwdbii/PDIFFBORDER.PNT </sourcefile>
-                    <pen color="#cccbca" />
-                </vector>
-                <vector name="pusa48" feature="borders">
-                    <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
-                    <pen color="#cccbca" />
-                </vector>
-                <vector name="international dateline" feature="borders">
-                    <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
-                    <pen color="#000000" />
-                </vector>
-                <vector name="plake" feature="waterbodies">
+                </geodata>
+                <geodata name="plake" property="waterbodies">
                     <sourcefile> mwdbii/PLAKE.PNT </sourcefile>
-                    <pen color="#99b3cc" />
-                </vector>
-                <vector name="rivers" feature="waterbodies">
+                    <brush color="#99b3cc" />
+                </geodata>
+                <geodata name="rivers" property="waterbodies">
                     <sourcefile> mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#99b3cc" />
-                </vector>
+                </geodata>
+                <geodata name="pdiffborder" property="borders">
+                    <sourcefile> mwdbii/PDIFFBORDER.PNT </sourcefile>
+                    <pen color="#cccbca" />
+                </geodata>
+                <geodata name="pusa48" property="borders">
+                    <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                    <pen color="#cccbca" />
+                </geodata>
+                <geodata name="international dateline" property="borders">
+                    <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
+                    <pen color="#000000" />
+                </geodata>
             </layer>
         
             <layer name="standardplaces" backend="geodata">

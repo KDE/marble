@@ -50,7 +50,7 @@
                 </filter>
             </layer>
         
-            <layer name="mwdbii" backend="vector" role="polyline">
+            <layer name="mwdbii" backend="vector">
                 <vector name="pcoast">
                     <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
                     <pen color="#555753" />
