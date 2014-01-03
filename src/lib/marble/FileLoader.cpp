@@ -100,14 +100,14 @@ public:
 };
 
 FileLoader::FileLoader( QObject* parent, MarbleModel *model, bool recenter,
-                       const QString& file, const QString& property, GeoDataStyle* style = new GeoDataStyle(), DocumentRole role = UnknownDocument )
+                       const QString& file, const QString& property, GeoDataStyle* style, DocumentRole role )
     : QThread( parent ),
       d( new FileLoaderPrivate( this, model, recenter, file, property, style, role ) )
 {
 }
 
 FileLoader::FileLoader( QObject* parent, MarbleModel *model,
-                        const QString& contents, const QString& file, DocumentRole role = UnknownDocument)
+                        const QString& contents, const QString& file, DocumentRole role )
     : QThread( parent ),
       d( new FileLoaderPrivate( this, model, contents, file, role ) )
 {
