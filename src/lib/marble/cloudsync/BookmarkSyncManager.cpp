@@ -736,7 +736,7 @@ void BookmarkSyncManager::Private::continueSynchronization()
         downloadBookmarks();
     } else {
         QString lastSyncedPath = lastSyncedKmlPath();
-        if( lastSyncedPath == QString() ) {
+        if( lastSyncedPath.isEmpty() ) {
             mDebug() << "Never synced. Uploading bookmarks.";
             uploadBookmarks();
         } else {
@@ -765,7 +765,7 @@ void BookmarkSyncManager::Private::completeSynchronization()
     QBuffer buffer( &result );
     buffer.open( QIODevice::ReadOnly );
 
-    if( lastSyncedPath == QString() ) {
+    if( lastSyncedPath.isEmpty() ) {
         if( localBookmarksFile.exists() ) {
             mDebug() << "Conflict between remote bookmarks and local ones";
             m_diffA = diff( &buffer, m_localBookmarksPath );
