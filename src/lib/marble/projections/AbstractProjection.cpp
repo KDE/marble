@@ -90,6 +90,31 @@ void AbstractProjection::setMinLat( qreal minLat )
     d->m_minLat = minLat;
 }
 
+bool AbstractProjection::repeatableX() const
+{
+    return false;
+}
+
+bool AbstractProjection::traversablePoles() const
+{
+    return false;
+}
+
+bool AbstractProjection::traversableDateLine() const
+{
+    return false;
+}
+
+AbstractProjection::PreservationType AbstractProjection::preservationType() const
+{
+    return NoPreservation;
+}
+
+bool AbstractProjection::isOrientedNormal() const
+{
+    return true;
+}
+
 bool AbstractProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
                                             qreal &x, qreal &y ) const

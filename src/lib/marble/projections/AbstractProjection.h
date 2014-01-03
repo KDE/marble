@@ -82,20 +82,20 @@ class MARBLE_EXPORT AbstractProjection
     qreal  minLat()  const;
     void setMinLat( qreal minLat );
 
-    virtual bool   repeatableX() const              { return false; }
-    virtual bool   traversablePoles()  const        { return false; }
-    virtual bool   traversableDateLine()  const     { return false; }
+    virtual bool   repeatableX() const;
+    virtual bool   traversablePoles()  const;
+    virtual bool   traversableDateLine()  const;
 
     virtual SurfaceType surfaceType() const = 0; 
 
-    virtual PreservationType preservationType() const { return NoPreservation; }
+    virtual PreservationType preservationType() const;
 
     // The projection surface can have different orientations:
     // - normal: the surface's axis of symmetry matches the Earth's axis
     // - transverse: orthogonally oriented compared to the Earth's axis
     // - oblique: somewhere in between
 
-    virtual bool   isOrientedNormal() const        { return true; }
+    virtual bool   isOrientedNormal() const;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.

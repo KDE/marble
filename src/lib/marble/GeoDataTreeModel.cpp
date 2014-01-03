@@ -518,6 +518,12 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
     return false;
 }
 
+void GeoDataTreeModel::reset()
+{
+    beginResetModel();
+    endResetModel();
+}
+
 Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 {
     if ( !index.isValid() )

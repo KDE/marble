@@ -72,7 +72,7 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
 
     bool setData ( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
 
-    void reset() { beginResetModel(); endResetModel(); }
+    void reset();
 
     QItemSelectionModel *selectionModel();
 
