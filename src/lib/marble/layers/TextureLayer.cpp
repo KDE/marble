@@ -316,7 +316,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     const int levelZeroMinDimension = qMin( levelZeroWidth, levelZeroHight );
 
     // limit to 1 as dirty fix for invalid entry linearLevel
-    const qreal linearLevel = qMax( 1.0, viewport->radius() * 4.0 / levelZeroMinDimension );
+    const qreal linearLevel = qMax( qreal(1.0), viewport->radius() * 4.0 / levelZeroMinDimension );
 
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
