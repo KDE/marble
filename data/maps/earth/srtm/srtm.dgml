@@ -58,10 +58,12 @@
                 <geodata name="plake" property="waterbodies" colorize="sea">
                     <sourcefile> naturalearth/50m_lakes.pn2 </sourcefile>
                     <brush color="f00e0eff" />
+                    <pen color="transparent" style="nopen"/>
                 </geodata>
                 <geodata name="pglacier" property="ice" colorize="sea">
                     <sourcefile> naturalearth/50m_glaciated_areas.pn2 </sourcefile>
                     <brush color="ffffffff" />
+                    <pen color="transparent" style="nopen"/>
                 </geodata>
             </layer>
         
@@ -69,7 +71,7 @@
             <layer name="mwdbii" backend="geodata">
                 <geodata name="pdiffborder" property="borders">
                     <sourcefile> naturalearth/ne_10m_admin_0_boundary_lines_land.pn2 </sourcefile>
-                    <pen color="#f86649" />
+                    <pen color="#f86649" width="1" />
                 </geodata>
                 <geodata name="purbanareas" property="urbanareas">
                     <sourcefile> naturalearth/50m-urban-area.pn2 </sourcefile>
@@ -78,7 +80,7 @@
                 </geodata>
                 <geodata name="pusa48" property="borders">
                     <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
-                    <pen color="#f86649" />
+                    <pen color="#f86649" style="dashdotline" />
                 </geodata>
                 <geodata name="international dateline" property="borders">
                     <sourcefile> mwdbii/DATELINE.PNT </sourcefile>
