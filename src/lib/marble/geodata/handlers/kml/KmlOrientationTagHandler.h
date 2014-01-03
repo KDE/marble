@@ -26,4 +26,5 @@ public:
 
 }
 }
+
 #endif // KMLORIENTATIONTAGHANDLER_H
