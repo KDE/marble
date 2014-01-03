@@ -330,7 +330,7 @@ void EclipsesItem::calculate()
     m_ecl->getLocalMax( lat2, lat3, lat4 );
 
     m_ecl->getShadowCone( lat2, true, 40, ltf, lnf );
-    for( j = 0; j < 40; j++ ) {
+    for( j = 0; j < 40; ++j ) {
         if( ltf[j] < 100. ) {
             m_shadowConeUmbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lnf[j], GeoDataCoordinates::Degree),
                                                      GeoDataCoordinates::normalizeLon(ltf[j], GeoDataCoordinates::Degree),
@@ -340,7 +340,7 @@ void EclipsesItem::calculate()
 
     m_ecl->setPenumbraAngle( 1., 0 );
     m_ecl->getShadowCone( lat2, false, 60, ltf, lnf );
-    for( j = 0; j < 60; j++ ) {
+    for( j = 0; j < 60; ++j ) {
         if( ltf[j] < 100. ) {
             m_shadowConePenumbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lnf[j], GeoDataCoordinates::Degree),
                                                         GeoDataCoordinates::normalizeLon(ltf[j], GeoDataCoordinates::Degree),
@@ -350,7 +350,7 @@ void EclipsesItem::calculate()
 
     m_ecl->setPenumbraAngle( 0.6, 1 );
     m_ecl->getShadowCone( lat2, false, 60, ltf, lnf );
-    for( j = 0; j < 60; j++ ) {
+    for( j = 0; j < 60; ++j ) {
         if( ltf[j] < 100. ) {
             m_shadowCone60MagPenumbra << GeoDataCoordinates( GeoDataCoordinates::normalizeLon(lnf[j], GeoDataCoordinates::Degree),
                                                              GeoDataCoordinates::normalizeLon(ltf[j], GeoDataCoordinates::Degree),
