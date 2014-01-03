@@ -14,6 +14,7 @@
 
 #include <cmath>
 
+#include <QtCore/qmath.h>
 #include <QRunnable>
 
 #include "MarbleGlobal.h"
@@ -130,10 +131,10 @@ void SphericalScanlineTextureMapper::mapTexture( const ViewportParams *viewport,
                                       : yTop + radius + radius - skip;
 
     const int numThreads = m_threadPool.maxThreadCount();
-    const int yStep = ( yBottom - yTop ) / numThreads;
+    const int yStep = qCeil(qreal( yBottom - yTop ) / qreal(numThreads));
     for ( int i = 0; i < numThreads; ++i ) {
         const int yStart = yTop +  i      * yStep;
-        const int yEnd   = yTop + (i + 1) * yStep;
+        const int yEnd   = qMin(yBottom, yTop + (i + 1) * yStep);
         QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel, &m_canvasImage, viewport, mapQuality, yStart, yEnd );
         m_threadPool.start( job );
     }
