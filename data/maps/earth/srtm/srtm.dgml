@@ -53,20 +53,14 @@
                 colorize the elevation model properly -->
             <layer name="mwdbii-canvas" backend="geodata">
                 <geodata name="pcoast" property="land" colorize="land">
-                    <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
-                </geodata>
-                <geodata name="pisland" property="land" colorize="land">
-                    <sourcefile> mwdbii/PISLAND.PNT </sourcefile>
-                </geodata>
-                <geodata name="plakeisland" property="land" colorize="land">
-                    <sourcefile> mwdbii/PLAKEISLAND.PNT </sourcefile>
+                    <sourcefile> naturalearth/50m_land.pn2 </sourcefile>
                 </geodata>
                 <geodata name="plake" property="waterbodies" colorize="sea">
-                    <sourcefile> mwdbii/PLAKE.PNT </sourcefile>
+                    <sourcefile> naturalearth/50m_lakes.pn2 </sourcefile>
                     <brush color="f00e0eff" />
                 </geodata>
                 <geodata name="pglacier" property="ice" colorize="sea">
-                    <sourcefile> mwdbii/PGLACIER.PNT </sourcefile>
+                    <sourcefile> naturalearth/50m_glaciated_areas.pn2 </sourcefile>
                     <brush color="ffffffff" />
                 </geodata>
             </layer>
@@ -74,8 +68,13 @@
         
             <layer name="mwdbii" backend="geodata">
                 <geodata name="pdiffborder" property="borders">
-                    <sourcefile> mwdbii/PDIFFBORDER.PNT </sourcefile>
+                    <sourcefile> naturalearth/ne_10m_admin_0_boundary_lines_land.pn2 </sourcefile>
                     <pen color="#f86649" />
+                </geodata>
+                <geodata name="purbanareas" property="urbanareas">
+                    <sourcefile> naturalearth/50m-urban-area.pn2 </sourcefile>
+                    <pen color="#dfc5af" />
+                    <brush color="#dfc5af" />
                 </geodata>
                 <geodata name="pusa48" property="borders">
                     <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
@@ -86,7 +85,7 @@
                     <pen color="#000000" />
                 </geodata>
                 <geodata name="rivers" property="waterbodies">
-                    <sourcefile> mwdbii/RIVER.PNT </sourcefile>
+                    <sourcefile> naturalearth/ne_10m_rivers_lake_centerlines.pn2 </sourcefile>
                     <pen color="#637bff" />
                 </geodata>
             </layer>
@@ -131,6 +130,10 @@
             </group>
 
             <group name="Boundaries">
+                <property name="urbanareas">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
                 <property name="borders">
                     <value>true</value>
                     <available>true</available>
