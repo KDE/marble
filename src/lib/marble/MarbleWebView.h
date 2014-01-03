@@ -25,7 +25,7 @@ protected:
     void contextMenuEvent(QContextMenuEvent *event);
     void keyPressEvent(QKeyEvent *event);
 
-private slots:
+private Q_SLOTS:
     void copySelectedText();
 
 private:

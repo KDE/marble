@@ -49,7 +49,7 @@ protected:
     void setMapThemeId( const QString & );
     void setProjection( Projection projection );
 
-private slots:
+private Q_SLOTS:
     void globeViewRequested();
     void mercatorViewRequested();
     void flatViewRequested();
