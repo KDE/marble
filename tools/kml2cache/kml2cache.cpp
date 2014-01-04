@@ -39,7 +39,7 @@ void savePlacemarks( QDataStream &out, const GeoDataContainer *container, Marble
     QVector<GeoDataPlacemark*>::const_iterator const end = placemarks.constEnd();
     for (; it != end; ++it ) {
         out << (*it)->name();
-        (*it)->coordinate( clock->dateTime() ).geoCoordinates( lon, lat, alt );
+        (*it)->coordinate().geoCoordinates( lon, lat, alt );
 
         // Use double to provide a single cache file format across architectures
         out << (double)(lon) << (double)(lat) << (double)(alt);
