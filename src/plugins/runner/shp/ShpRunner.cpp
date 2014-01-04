@@ -125,9 +125,10 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
             case SHPT_POLYGON: {
                 if ( shape->nParts != 1 ) {
                     GeoDataPolygon *poly = new GeoDataPolygon;
-                    for( int j=0; j<shape->nParts-1; ++j ) {
+                    for( int j=0; j<shape->nParts; ++j ) {
                         GeoDataLinearRing ring;
-                        for( int k=shape->panPartStart[j]; k<shape->panPartStart[j+1]; ++k ) {
+                        int itEnd = (j + 1 < shape->nParts) ? shape->panPartStart[j+1] : shape->nVertices;
+                        for( int k=shape->panPartStart[j]; k<itEnd; ++k ) {
                             ring.append( GeoDataCoordinates(
                                          shape->padfX[k], shape->padfY[k],
                                          0, GeoDataCoordinates::Degree ) );
