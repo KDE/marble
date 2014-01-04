@@ -258,7 +258,7 @@ void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
 
     const QString repair = ""
             "<input type=\"checkbox\" "
-            "onchange=\"Marble.setCheckedProperty(this.value, this.checked);\" " + checked + " name=\"cities\" value=\"cities\" />";
+            "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" " + checked + " name=\"cities\"/>";
 
     html.replace(old, repair);
 }
@@ -309,7 +309,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 checkBoxString = ""
                         "<label class=\"section-head\">"
                         "<input type=\"checkbox\" "
-                        "onchange=\"Marble.setCheckedProperty(this.value, this.checked);\" "+checked+" value=\"" + section->connectTo() + "\" name=\"" + section->connectTo() + "\" /><span>"
+                        "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" "+checked+" name=\"" + section->connectTo() + "\" /><span>"
                         + section->heading() +
                         "</span></label>";
 
@@ -359,7 +359,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
 void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
 {
-    QWebElement box = page()->mainFrame()->findFirstElement("input[value="+name+']');
+    QWebElement box = page()->mainFrame()->findFirstElement("input[name="+name+']');
     if (!box.isNull()) {
         if (checked != d->m_checkBoxMap[name]) {
             d->m_checkBoxMap[name] = checked;
