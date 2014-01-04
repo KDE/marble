@@ -286,7 +286,6 @@ QString MarbleLegendBrowser::generateSectionsHtml()
         // Well is like a block of data with rounded corners
         customLegendString += "<div class=\"well well-small well-legend\">";
 
-        customLegendString += "<h4 class=\"section-head\">"+section->heading()+"</h4>";
 
         QString checkBoxString;
         if (section->checkable()) {
@@ -299,7 +298,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
              */
             if(section->radio()!="") {
                 checkBoxString = ""
-                        "<label class=\"radio\">"
+                        "<label class=\"section-head\">"
                         "<input type=\"radio\" "
                         "onchange=\"Marble.setRadioCheckedProperty(this.value, this.name ,this.checked);\" " +
                         checked + " value=\"" + section->connectTo() + "\" name=\"" + section->radio() + "\" /><span>"
@@ -308,7 +307,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
             } else {
                 checkBoxString = ""
-                        "<label class=\"checkbox\">"
+                        "<label class=\"section-head\">"
                         "<input type=\"checkbox\" "
                         "onchange=\"Marble.setCheckedProperty(this.value, this.checked);\" "+checked+" value=\"" + section->connectTo() + "\" name=\"" + section->connectTo() + "\" /><span>"
                         + section->heading() +
@@ -316,6 +315,9 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
             }
             customLegendString += checkBoxString;
+
+        } else {
+            customLegendString += "<h4 class=\"section-head\">"+section->heading()+"</h4>";
         }
 
         foreach (const GeoSceneItem *item, section->items()) {
