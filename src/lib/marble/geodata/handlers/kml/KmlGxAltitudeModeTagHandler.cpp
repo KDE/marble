@@ -9,12 +9,12 @@
 //
 
 
+#include "KmlGxAltitudeModeTagHandler.h"
 #include "KmlAltitudeModeTagHandler.h"
 
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
-#include "KmlGxAltitudeModeTagHandler.h"
 
 #include "GeoDataGeometry.h"
 #include "GeoDataGroundOverlay.h"

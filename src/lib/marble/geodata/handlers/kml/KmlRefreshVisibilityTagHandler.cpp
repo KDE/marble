@@ -8,9 +8,9 @@
 // Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
 //
 
+#include "KmlRefreshVisibilityTagHandler.h"
 #include "GeoDataNetworkLink.h"
 #include "GeoParser.h"
-#include "KmlRefreshVisibilityTagHandler.h"
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"

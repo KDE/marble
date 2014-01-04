@@ -9,9 +9,9 @@
 // Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
-#include "cstdlib"
-
 #include "GeoDataColorStyle.h"
+
+#include "cstdlib"
 
 #include "GeoDataTypes.h"
 

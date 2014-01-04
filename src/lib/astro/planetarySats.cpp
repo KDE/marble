@@ -18,6 +18,7 @@
 ***************************************************************************/
 
 /*------------ include files and definitions -----------------------------*/
+#include "planetarySats.h"
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
@@ -26,7 +27,6 @@
 #include <ctime>
 using namespace std;
 
-#include "planetarySats.h"
 #include "attlib.h"
 #include "astrolib.h"
 

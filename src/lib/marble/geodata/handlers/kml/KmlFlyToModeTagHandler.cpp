@@ -8,9 +8,9 @@
 // Copyright 2013       Mayank Madan <maddiemadan@gmail.com>
 //
 
+#include "KmlFlyToModeTagHandler.h"
 #include "GeoDataFlyTo.h"
 #include "GeoParser.h"
-#include "KmlFlyToModeTagHandler.h"
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 

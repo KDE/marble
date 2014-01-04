@@ -17,10 +17,9 @@
  ***********************************************************************/
 
 //#include <iostream>
+#include "attlib.h"
 #include <cmath>
 using namespace std;
-                       
-#include "attlib.h"
 
 /*********************************************************************/
 double atan20 (double y, double x)

@@ -30,6 +30,7 @@
 ***************************************************************************/
 
 /*------------ include files and definitions -----------------------------*/
+#include "solarsystem.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -37,7 +38,6 @@
 #include <ctime>
 using namespace std;
 
-#include "solarsystem.h"
 #include "astrolib.h"
 #include "astr2lib.h"
 #include "attlib.h"

@@ -8,12 +8,12 @@
 // Copyright 2012      Illya Kovalevskyy   <illya.kovalevskyy@gmail.com>
 //
 
+#include "MarbleWebView.h"
 #include <QApplication>
 #include <QMenu>
 #include <QContextMenuEvent>
 #include <QKeyEvent>
 #include <QClipboard>
-#include "MarbleWebView.h"
 
 MarbleWebView::MarbleWebView(QWidget *parent) :
     QWebView(parent),

@@ -8,11 +8,11 @@
 // Copyright 2013   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-#include <QFileDialog>
-#include <QMessageBox>
-
 #include "MovieCaptureDialog.h"
 #include "ui_MovieCaptureDialog.h"
+
+#include <QFileDialog>
+#include <QMessageBox>
 
 #include "MarbleWidget.h"
 #include "MovieCapture.h"

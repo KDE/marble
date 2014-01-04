@@ -13,8 +13,8 @@
 */
 
 
-#include "GeoSceneTypes.h"
 #include "GeoSceneTextureTile.h"
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {

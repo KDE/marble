@@ -1,3 +1,5 @@
+#include "TourPlayback.h"
+
 #include <QTimer>
 #include <QList>
 #include <qurl.h>
@@ -18,8 +20,6 @@
 #include <phonon/MediaObject>
 #include <phonon/AudioOutput>
 #endif
-
-#include "TourPlayback.h"
 
 namespace Marble
 {

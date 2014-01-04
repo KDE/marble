@@ -18,12 +18,12 @@
   Copyright :Gerhard HOLTKAMP          21-SEP-2004   18:00
   ========================================================================= */
 
+#include "astr2lib.h"
 #include <cmath>
 using namespace std;
 
 #include "attlib.h"
 #include "astrolib.h"
-#include "astr2lib.h"
 
 extern double frac (double f);
 extern double atan21 (double y, double x);

@@ -20,11 +20,12 @@
   Copyright : Gerhard HOLTKAMP          28-JAN-2013
   ========================================================================= */
 
+#include "astrolib.h"
+
 #include <cmath>
 using namespace std;
 
 #include "attlib.h"
-#include "astrolib.h"
 
 double frac (double f)
  { return fmod(f,1.0); }

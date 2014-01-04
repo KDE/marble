@@ -7,11 +7,11 @@
 //
 // Copyright 2013       Mayank Madan <maddiemadan@gmail.com>
 
+#include "KmlFlyToTagHandler.h"
 #include "GeoDataFlyTo.h"
 #include "GeoDataPlaylist.h"
 #include "GeoParser.h"
 #include "MarbleDebug.h"
-#include "KmlFlyToTagHandler.h"
 #include "KmlElementDictionary.h"
 
 namespace Marble

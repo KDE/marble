@@ -8,14 +8,13 @@
 // Copyright 2013 Mihail Ivchenko <ematirov@gmail.com>
 //
 
+#include "KmlWaitTagHandler.h"
 #include "KmlPlaylistTagHandler.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoDataPlaylist.h"
 #include "GeoDataWait.h"
-
-#include "KmlWaitTagHandler.h"
 
 namespace Marble
 {

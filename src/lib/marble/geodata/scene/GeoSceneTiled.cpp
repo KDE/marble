@@ -12,8 +12,8 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-#include "GeoSceneTypes.h"
 #include "GeoSceneTiled.h"
+#include "GeoSceneTypes.h"
 
 #include "DownloadPolicy.h"
 #include "MarbleDebug.h"

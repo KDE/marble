@@ -31,6 +31,7 @@
 ***************************************************************************/
 
 /*------------ include files and definitions -----------------------------*/
+#include "eclsolar.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -38,7 +39,6 @@
 #include <ctime>
 using namespace std;
 
-#include "eclsolar.h"
 #include "astrolib.h"
 
 /* const double PI = 3.14159265359; */

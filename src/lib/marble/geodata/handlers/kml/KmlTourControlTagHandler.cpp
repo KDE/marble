@@ -8,14 +8,13 @@
 // Copyright 2012      Illya Kovalevskyy   <illya.kovalevskyy@gmail.com>
 //
 
+#include "KmlTourControlTagHandler.h"
 #include "KmlPlaylistTagHandler.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoDataPlaylist.h"
 #include "GeoDataTourControl.h"
-
-#include "KmlTourControlTagHandler.h"
 
 namespace Marble
 {
