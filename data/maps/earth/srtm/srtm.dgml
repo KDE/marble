@@ -53,15 +53,15 @@
                 colorize the elevation model properly -->
             <layer name="mwdbii-canvas" backend="geodata">
                 <geodata name="pcoast" property="land" colorize="land">
-                    <sourcefile> naturalearth/50m_land.pn2 </sourcefile>
+                    <sourcefile> naturalearth/ne_50m_land.pn2 </sourcefile>
                 </geodata>
                 <geodata name="plake" property="waterbodies" colorize="sea">
-                    <sourcefile> naturalearth/50m_lakes.pn2 </sourcefile>
+                    <sourcefile> naturalearth/ne_50m_lakes.pn2 </sourcefile>
                     <brush color="f00e0eff" />
                     <pen color="transparent" style="nopen"/>
                 </geodata>
                 <geodata name="pglacier" property="ice" colorize="sea">
-                    <sourcefile> naturalearth/50m_glaciated_areas.pn2 </sourcefile>
+                    <sourcefile> naturalearth/ne_50m_glaciated_areas.pn2 </sourcefile>
                     <brush color="ffffffff" />
                     <pen color="transparent" style="nopen"/>
                 </geodata>
@@ -69,17 +69,41 @@
         
         
             <layer name="mwdbii" backend="geodata">
+                <geodata name="lakeshistoric" property="historiclakes">
+                    <sourcefile> naturalearth/ne_50m_lakes_historic.pn2 </sourcefile>
+                    <pen color="#bfd5ee" style="dotline"/>
+                    <brush color="transparent" />
+                </geodata>
+                <geodata name="playas" property="playas">
+                    <sourcefile> naturalearth/ne_50m_playas.pn2 </sourcefile>
+                    <pen color="#89b0da" style="dashline"/>
+                    <brush color="#bfd5ee" alpha="0.3" />
+                </geodata>
+                <geodata name="antarciticiceshelves" property="iceshelves">
+                    <sourcefile> naturalearth/ne_50m_antarctic_ice_shelves_polys.pn2 </sourcefile>
+                    <pen color="#5182b4" style="dashline"/>
+                    <brush color="transparent" />
+                </geodata>
                 <geodata name="pdiffborder" property="borders">
-                    <sourcefile> naturalearth/ne_10m_admin_0_boundary_lines_land.pn2 </sourcefile>
-                    <pen color="#f86649" width="1" />
+                    <sourcefile> naturalearth/ne_50m_admin_0_boundary_lines_land.pn2 </sourcefile>
+                    <pen color="#f86649" width="1.0" />
+                </geodata>
+                <geodata name="maritimeindicators" property="maritimeborders">
+                    <sourcefile> naturalearth/ne_50m_admin_0_boundary_lines_maritime_indicator.pn2 </sourcefile>
+                    <pen color="#d47d79" width="1.0" />
+                </geodata>
+                <geodata name="breakawaydisputed" property="disputedborders">
+                    <sourcefile> naturalearth/ne_50m_admin_0_breakaway_disputed_areas.pn2 </sourcefile>
+                    <pen color="#c173b0" width="1" />
+                    <brush color="#c173b0" alpha="0.20" />
                 </geodata>
                 <geodata name="purbanareas" property="urbanareas">
-                    <sourcefile> naturalearth/50m-urban-area.pn2 </sourcefile>
+                    <sourcefile> naturalearth/ne_50m_urban_areas.pn2 </sourcefile>
                     <pen color="#dfc5af" />
-                    <brush color="#dfc5af" />
+                    <brush color="#dfc5af" alpha="0.60" />
                 </geodata>
                 <geodata name="pusa48" property="borders">
-                    <sourcefile> mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                    <sourcefile> naturalearth/ne_50m_admin_1_states_provinces_lines.pn2 </sourcefile>
                     <pen color="#f86649" style="dashdotline" />
                 </geodata>
                 <geodata name="international dateline" property="borders">
@@ -87,7 +111,7 @@
                     <pen color="#000000" />
                 </geodata>
                 <geodata name="rivers" property="waterbodies">
-                    <sourcefile> naturalearth/ne_10m_rivers_lake_centerlines.pn2 </sourcefile>
+                    <sourcefile> naturalearth/ne_50m_rivers_lake_centerlines.pn2 </sourcefile>
                     <pen color="#637bff" />
                 </geodata>
             </layer>
@@ -140,6 +164,14 @@
                     <value>true</value>
                     <available>true</available>
                 </property>
+                <property name="maritimeborders">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="disputedborders">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
                 <property name="international-boundaries">
                     <available>true</available>
                     <value>true</value>
@@ -158,6 +190,14 @@
                     <available>true</available>
                     <value>true</value>
                 </property>
+                <property name="historiclakes">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="playas">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
                 <property name="rivers">
                     <available>true</available>
                     <value>true</value>
@@ -165,6 +205,10 @@
             </group>
             <group name="Surface">
                 <property name="ice">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="iceshelves">
                     <value>true</value>
                     <available>true</available>
                 </property>

@@ -42,11 +42,14 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Brush));
 
     QString color = parser.attribute(dgmlAttr_color).trimmed();
+    qreal alpha = parser.attribute(dgmlAttr_alpha).isEmpty() ? 1.0 : parser.attribute(dgmlAttr_alpha).toDouble();
 
     QBrush brush;
 
     if ( !color.isEmpty() && QColor( color ).isValid() ) {
-        brush.setColor( QColor( color ) ); 
+        QColor brushColor( color );
+        brushColor.setAlphaF( alpha );
+        brush.setColor( brushColor );
     }
 
     // Checking for parent item

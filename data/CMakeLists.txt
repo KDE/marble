@@ -214,13 +214,8 @@ mwdbii/PUSA48.DIFF.PNT
 mwdbii/RIVER.PNT
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
 
-install (FILES
-naturalearth/50m-urban-area.pn2
-naturalearth/50m_glaciated_areas.pn2
-naturalearth/50m_lakes.pn2
-naturalearth/50m_land.pn2
-naturalearth/ne_10m_admin_0_boundary_lines_land.pn2
-naturalearth/ne_10m_rivers_lake_centerlines.pn2
+FILE (GLOB PN2_FILES naturalearth/*.pn2)
+install (FILES ${PN2_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/naturalearth)
 
 FILE (GLOB STAR_FILES stars/*.dat)

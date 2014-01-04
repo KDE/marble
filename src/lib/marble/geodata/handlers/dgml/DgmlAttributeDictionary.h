@@ -33,6 +33,7 @@ namespace dgml
 
     extern const char* dgmlAttr_nameSpace20;
 
+    extern const char* dgmlAttr_alpha;
     extern const char* dgmlAttr_attribution;
     extern const char* dgmlAttr_backend;
     extern const char* dgmlAttr_bgcolor;

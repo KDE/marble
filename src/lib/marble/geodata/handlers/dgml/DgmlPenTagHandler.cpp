@@ -48,7 +48,7 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
     QPen pen;
 
     if ( !color.isEmpty() && QColor( color ).isValid() ) {
-        pen.setColor( QColor( color ) ); 
+        pen.setColor( QColor( color ) );
     }
 
     if ( !style.isEmpty() ) {

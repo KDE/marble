@@ -149,10 +149,10 @@ int main(int argc, char** argv)
     if ( outputIndex > 0 && outputIndex + 1 < argc )
         outputFilename = app.arguments().at( outputIndex + 1 );
     
- 
+
     MarbleModel *model = new MarbleModel;
     ParsingRunnerManager* manager = new ParsingRunnerManager( model->pluginManager() );
- 
+
     GeoDataDocument* document = manager->openFile( inputFilename );
 
     QFile file( outputFilename );
