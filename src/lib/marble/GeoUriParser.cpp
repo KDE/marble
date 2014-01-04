@@ -46,7 +46,7 @@ bool GeoUriParser::parse()
 
     QString const floatRegexp = "[-+]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?";
 
-    QRegExp geoUriRegexp( "(?:geo:)(" + floatRegexp + "),(" + floatRegexp + "),?(" + floatRegexp + ")?(?:\;crs\=)?(.*)?(?:[\,\;]u\=)?(\d+)?" , Qt::CaseSensitive, QRegExp::RegExp2 );
+    QRegExp geoUriRegexp( "(?:geo:)(" + floatRegexp + "),(" + floatRegexp + "),?(" + floatRegexp + ")?(?:\\;crs\\=)?(.*)?(?:[\\,\\;]u\\=)?(\\d+)?" , Qt::CaseSensitive, QRegExp::RegExp2 );
 
     if ( geoUriRegexp.indexIn( m_geoUri ) > -1 && geoUriRegexp.captureCount() > 1 ) {
         double const lat = geoUriRegexp.capturedTexts()[1].toDouble();
