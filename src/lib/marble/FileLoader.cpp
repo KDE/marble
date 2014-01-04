@@ -263,7 +263,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             // Mountain (H), Volcano (V), Shipwreck (W)
             if ( placemark->role() == "H" || placemark->role() == "V" || placemark->role() == "W" )
             {
-                qreal altitude = placemark->coordinate( m_clock->dateTime() ).altitude();
+                qreal altitude = placemark->coordinate().altitude();
                 if ( altitude != 0.0 )
                 {
                     hasPopularity = true;

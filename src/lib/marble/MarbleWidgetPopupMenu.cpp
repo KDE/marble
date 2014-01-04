@@ -358,7 +358,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogSatellite(PopupLayer *popup, con
 
 void MarbleWidgetPopupMenu::Private::setupDialogCity(PopupLayer *popup, const GeoDataPlacemark *index)
 {
-    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+    GeoDataCoordinates location = index->coordinate();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
     QFile descriptionFile(":/marble/webpopup/city.html");
@@ -417,7 +417,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity(PopupLayer *popup, const Ge
 
 void MarbleWidgetPopupMenu::Private::setupDialogNation(PopupLayer *popup, const GeoDataPlacemark *index)
 {
-    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+    GeoDataCoordinates location = index->coordinate();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
     QFile descriptionFile(":/marble/webpopup/nation.html");
@@ -444,7 +444,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogNation(PopupLayer *popup, const 
 
 void MarbleWidgetPopupMenu::Private::setupDialogGeoPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
 {
-    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+    GeoDataCoordinates location = index->coordinate();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
     QFile descriptionFile(":/marble/webpopup/geoplace.html");
@@ -466,7 +466,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogGeoPlaces(PopupLayer *popup, con
 
 void MarbleWidgetPopupMenu::Private::setupDialogSkyPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
 {
-    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
+    GeoDataCoordinates location = index->coordinate();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
     QFile descriptionFile(":/marble/webpopup/skyplace.html");
