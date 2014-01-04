@@ -1122,20 +1122,29 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 qreal deltaY  = glow.height() / 2.;
                 int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
                 int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
-                painter->drawPixmap( x - deltaX, y - deltaY, glow );
 
-                qreal diameter = 0.0, mag = 0.0;
-                sys.getPhysSun(diameter, mag);
-                const int coefficient = m_zoomSunMoon ? m_zoomCoefficient : 1;
-                const qreal size = skyRadius * qSin(diameter) * coefficient;
-                const qreal factor = size/m_pixmapSun.width();
-                QPixmap sun = m_pixmapSun.transformed(QTransform().scale(factor, factor),
-                                                      Qt::SmoothTransformation);
-                deltaX  = sun.width()  / 2.;
-                deltaY  = sun.height() / 2.;
-                x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
-                y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
-                painter->drawPixmap( x - deltaX, y - deltaY, sun );
+                bool glowDrawn = false;
+                if (!(x < -glow.width() || x >= viewport->width() ||
+                      y < -glow.height() || y >= viewport->height())) {
+                    painter->drawPixmap( x - deltaX, y - deltaY, glow );
+                    glowDrawn = true;
+                }
+
+                if (glowDrawn) {
+                    qreal diameter = 0.0, mag = 0.0;
+                    sys.getPhysSun(diameter, mag);
+                    const int coefficient = m_zoomSunMoon ? m_zoomCoefficient : 1;
+                    const qreal size = skyRadius * qSin(diameter) * coefficient;
+                    const qreal factor = size/m_pixmapSun.width();
+                    QPixmap sun = m_pixmapSun.transformed(QTransform().scale(factor, factor),
+                                                          Qt::SmoothTransformation);
+                    deltaX  = sun.width()  / 2.;
+                    deltaY  = sun.height() / 2.;
+                    x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                    y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+
+                    painter->drawPixmap( x - deltaX, y - deltaY, sun );
+                }
 
                 // It's labels' time!
                 if (m_viewSolarSystemLabel)
@@ -1161,75 +1170,79 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
                 QPixmap moon = m_pixmapMoon.copy();
 
-                // Moon phases
-                qreal phase = 0.0, ildisk = 0.0, amag = 0.0;
-                sys.getLunarPhase(phase, ildisk, amag);
-
-                QPainterPath path;
-
-                QRectF fullMoonRect = moon.rect();
-                if (ildisk < 0.05) {
-                    // small enough, so it's not visible
-                    path.addEllipse(fullMoonRect);
-                } else if (ildisk < 0.95) { // makes sense to do smth
-                    QRectF halfEllipseRect;
-                    qreal ellipseWidth = 2 * qAbs(ildisk-0.5) * moon.width();
-                    halfEllipseRect.setX((fullMoonRect.width() - ellipseWidth) * 0.5);
-                    halfEllipseRect.setWidth(ellipseWidth);
-                    halfEllipseRect.setHeight(moon.height());
-
-                    if (phase < 0.5) {
-                        if (ildisk < 0.5) {
-                            path.moveTo(fullMoonRect.width()/2, moon.height());
-                            path.arcTo(fullMoonRect, -90, -180);
-                            path.arcTo(halfEllipseRect, 90, -180);
-                        } else {
-                            path.moveTo(fullMoonRect.width()/2, 0);
-                            path.arcTo(fullMoonRect, 90, 180);
-                            path.arcTo(halfEllipseRect, -90, -180);
-                        }
-                    } else {
-                        if (ildisk < 0.5) {
-                            path.moveTo(fullMoonRect.width()/2, moon.height());
-                            path.arcTo(fullMoonRect, -90, 180);
-                            path.arcTo(halfEllipseRect, 90, 180);
-                        } else {
-                            path.moveTo(fullMoonRect.width()/2, 0);
-                            path.arcTo(fullMoonRect, 90, -180);
-                            path.arcTo(halfEllipseRect, -90, 180);
-                        }
-                    }
-
-                    path.closeSubpath();
-                }
-
-                QPainter overlay;
-                overlay.begin(&moon);
-                overlay.setPen(Qt::NoPen);
-                overlay.setBrush(QBrush(QColor(0, 0, 0, 180)));
-                overlay.setRenderHint(QPainter::Antialiasing, true);
-                overlay.drawPath(path);
-                overlay.end();
-
                 const qreal size = skyRadius * qSin(sys.getDiamMoon()) * coefficient;
-                qreal angle = marbleModel()->planet()->epsilon() * qCos(ra * DEG2RAD) * RAD2DEG;
-                if (viewport->polarity() < 0) angle += 180;
-
-                QTransform form;
-                const qreal factor = size / moon.size().width();
-                moon = moon.transformed(form.rotate(angle).scale(factor, factor),
-                                                        Qt::SmoothTransformation);
-
-                qreal deltaX  = moon.width()  / 2.;
-                qreal deltaY  = moon.height() / 2.;
+                qreal deltaX  = size  / 2.;
+                qreal deltaY  = size / 2.;
                 const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
                 const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
 
-                painter->drawPixmap( x - deltaX, y - deltaY, moon );
 
-                // It's labels' time!
-                if (m_viewSolarSystemLabel)
-                    painter->drawText(x+deltaX, y+deltaY, tr("Moon"));
+                if (!(x < -size || x >= viewport->width() ||
+                      y < -size || y >= viewport->height())) {
+                    // Moon phases
+                    qreal phase = 0.0, ildisk = 0.0, amag = 0.0;
+                    sys.getLunarPhase(phase, ildisk, amag);
+
+                    QPainterPath path;
+
+                    QRectF fullMoonRect = moon.rect();
+                    if (ildisk < 0.05) {
+                        // small enough, so it's not visible
+                        path.addEllipse(fullMoonRect);
+                    } else if (ildisk < 0.95) { // makes sense to do smth
+                        QRectF halfEllipseRect;
+                        qreal ellipseWidth = 2 * qAbs(ildisk-0.5) * moon.width();
+                        halfEllipseRect.setX((fullMoonRect.width() - ellipseWidth) * 0.5);
+                        halfEllipseRect.setWidth(ellipseWidth);
+                        halfEllipseRect.setHeight(moon.height());
+
+                        if (phase < 0.5) {
+                            if (ildisk < 0.5) {
+                                path.moveTo(fullMoonRect.width()/2, moon.height());
+                                path.arcTo(fullMoonRect, -90, -180);
+                                path.arcTo(halfEllipseRect, 90, -180);
+                            } else {
+                                path.moveTo(fullMoonRect.width()/2, 0);
+                                path.arcTo(fullMoonRect, 90, 180);
+                                path.arcTo(halfEllipseRect, -90, -180);
+                            }
+                        } else {
+                            if (ildisk < 0.5) {
+                                path.moveTo(fullMoonRect.width()/2, moon.height());
+                                path.arcTo(fullMoonRect, -90, 180);
+                                path.arcTo(halfEllipseRect, 90, 180);
+                            } else {
+                                path.moveTo(fullMoonRect.width()/2, 0);
+                                path.arcTo(fullMoonRect, 90, -180);
+                                path.arcTo(halfEllipseRect, -90, 180);
+                            }
+                        }
+
+                        path.closeSubpath();
+                    }
+
+                    QPainter overlay;
+                    overlay.begin(&moon);
+                    overlay.setPen(Qt::NoPen);
+                    overlay.setBrush(QBrush(QColor(0, 0, 0, 180)));
+                    overlay.setRenderHint(QPainter::Antialiasing, true);
+                    overlay.drawPath(path);
+                    overlay.end();
+
+                    qreal angle = marbleModel()->planet()->epsilon() * qCos(ra * DEG2RAD) * RAD2DEG;
+                    if (viewport->polarity() < 0) angle += 180;
+
+                    QTransform form;
+                    const qreal factor = size / moon.size().width();
+                    moon = moon.transformed(form.rotate(angle).scale(factor, factor),
+                                                            Qt::SmoothTransformation);
+
+                    painter->drawPixmap( x - deltaX, y - deltaY, moon );
+
+                    // It's labels' time!
+                    if (m_viewSolarSystemLabel)
+                        painter->drawText(x+deltaX, y+deltaY, Planet("moon").name());
+                }
             }
         }
 
@@ -1302,7 +1315,10 @@ void StarsPlugin::renderPlanet(const QString &planetId,
         const int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
         const int y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
 
-        painter->drawPixmap( x - deltaX, y - deltaY, planetPixmap );
+        if (!(x < 0 || x >= viewport->width() ||
+             y < 0 || y >= viewport->height())) {
+             painter->drawPixmap( x - deltaX, y - deltaY, planetPixmap );
+        }
 
         // It's labels' time!
         if (m_viewSolarSystemLabel)
