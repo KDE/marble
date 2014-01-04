@@ -20,7 +20,7 @@ namespace Marble
 class AreaAnnotation : public SceneGraphicsItem
 {
 public:
-    AreaAnnotation( GeoDataPlacemark *placemark );
+    explicit AreaAnnotation( GeoDataPlacemark *placemark );
 
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
     virtual bool mousePressEvent( QMouseEvent *event );

@@ -38,7 +38,7 @@ class TileLoader;
 class MergedLayerDecorator
 {
  public:
-    MergedLayerDecorator( const SunLocator* sunLocator );
+    explicit MergedLayerDecorator( const SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
     void setTextureLayers( const QVector<TileLoader *> &textureLayers );

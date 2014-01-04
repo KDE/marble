@@ -29,7 +29,7 @@ class OwncloudSyncBackend : public QObject
     Q_OBJECT
     
 public:
-    OwncloudSyncBackend( CloudSyncManager* cloudSyncManager );
+    explicit OwncloudSyncBackend( CloudSyncManager* cloudSyncManager );
     ~OwncloudSyncBackend();
 
     /**

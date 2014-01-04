@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 {
   public:
-    GeoDataLineStringPrivate( TessellationFlags f )
+    explicit GeoDataLineStringPrivate( TessellationFlags f )
         :  m_rangeCorrected( 0 ),
            m_dirtyRange( true ),
            m_dirtyBox( true ),

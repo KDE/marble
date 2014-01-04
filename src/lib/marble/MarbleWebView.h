@@ -19,7 +19,7 @@ class MARBLE_EXPORT MarbleWebView : public QWebView
 {
     Q_OBJECT
 public:
-    MarbleWebView(QWidget *parent = 0);
+    explicit MarbleWebView(QWidget *parent = 0);
 
 protected:
     void contextMenuEvent(QContextMenuEvent *event);

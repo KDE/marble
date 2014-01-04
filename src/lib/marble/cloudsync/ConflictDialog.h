@@ -37,7 +37,7 @@ public:
         PreferCloud
     };
 
-    ConflictDialog( QWidget *parent = 0 );
+    explicit ConflictDialog( QWidget *parent = 0 );
     void setMergeItem( MergeItem *item );
 
 public slots:

@@ -29,7 +29,7 @@ public:
     /**
      * Constructs a new GeoUriParser with the given Geo URI
      */
-    GeoUriParser( const QString& geoUri = QString() );
+    explicit GeoUriParser( const QString& geoUri = QString() );
 
     /**
      * Returns the Geo URI stored in this parser

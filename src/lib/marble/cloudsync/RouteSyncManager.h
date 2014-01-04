@@ -27,7 +27,7 @@ class MARBLE_EXPORT RouteSyncManager : public QObject
     Q_PROPERTY( bool routeSyncEnabled READ isRouteSyncEnabled WRITE setRouteSyncEnabled NOTIFY routeSyncEnabledChanged )
     
 public:
-    RouteSyncManager( CloudSyncManager *cloudSyncManager );
+    explicit RouteSyncManager( CloudSyncManager *cloudSyncManager );
     ~RouteSyncManager();
 
     void setRoutingManager( RoutingManager *routingManager );

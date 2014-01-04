@@ -30,7 +30,7 @@ class MARBLE_EXPORT BookmarkSyncManager : public QObject
     Q_PROPERTY( bool bookmarkSyncEnabled READ isBookmarkSyncEnabled WRITE setBookmarkSyncEnabled NOTIFY bookmarkSyncEnabledChanged )
 
 public:
-    BookmarkSyncManager( CloudSyncManager *cloudSyncManager );
+    explicit BookmarkSyncManager( CloudSyncManager *cloudSyncManager );
     ~BookmarkSyncManager();
 
     /**

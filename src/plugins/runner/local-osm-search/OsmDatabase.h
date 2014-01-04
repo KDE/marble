@@ -25,7 +25,7 @@ class GeoDataCoordinates;
 class OsmDatabase
 {
 public:
-    OsmDatabase( const QStringList &databaseFiles );
+    explicit OsmDatabase( const QStringList &databaseFiles );
 
     // Methods for read access
 

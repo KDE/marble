@@ -37,7 +37,7 @@ public:
      * These parameters can be obtained by calling treeModel() and
      * pluginManager() on an instance of MarbleModel.
      */
-    TrackerPluginModel( GeoDataTreeModel *treeModel );
+    explicit TrackerPluginModel( GeoDataTreeModel *treeModel );
 
     virtual ~TrackerPluginModel();
 

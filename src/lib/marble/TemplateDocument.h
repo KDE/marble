@@ -38,7 +38,7 @@ class TemplateDocument
 {
 public:
     TemplateDocument();
-    TemplateDocument(const QString &templateText);
+    explicit TemplateDocument(const QString &templateText);
     ~TemplateDocument();
 
     /**

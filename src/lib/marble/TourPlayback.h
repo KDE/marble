@@ -17,7 +17,7 @@ class MARBLE_EXPORT TourPlayback : public QObject
 {
     Q_OBJECT
 public:
-    TourPlayback(QObject *parent);
+    explicit TourPlayback(QObject *parent);
     ~TourPlayback();
 
     bool isPlaying() const;
