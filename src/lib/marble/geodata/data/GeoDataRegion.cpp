@@ -73,12 +73,11 @@ const GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
                 GeoDataPlacemark * placemark = dynamic_cast<GeoDataPlacemark*>( d->m_parent );
                 GeoDataGeometry * geometry = placemark->geometry();
                 if ( geometry ) {
-                    // TODO: automatically calculate the geometry from the
-                    //       GeoDataGeometry object.
-                    // return geometry->latLonAltBox();
+                    d->m_latLonAltBox = new GeoDataLatLonAltBox( placemark->geometry()->latLonAltBox() );
                 }
-
-                d->m_latLonAltBox = new GeoDataLatLonAltBox( placemark->coordinate() );
+                else {
+                    d->m_latLonAltBox = new GeoDataLatLonAltBox();
+                }
             }
             else {
                 // If the parent is not a placemark then create a default LatLonAltBox
