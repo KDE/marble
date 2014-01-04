@@ -57,9 +57,9 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
     placemark()->setGeometry( m_track );
 
     GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
+    style->lineStyle().setPenStyle( Qt::NoPen );
+    style->labelStyle().setGlow( true );
     placemark()->setStyle( style );
-    placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
-    placemark()->style()->labelStyle().setGlow( true );
 
     update();
 }

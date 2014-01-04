@@ -54,15 +54,15 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
     placemark()->setGeometry( m_track );
 
     GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
-    placemark()->setStyle( style );
-    placemark()->style()->lineStyle().setPenStyle( Qt::NoPen );
-    placemark()->style()->labelStyle().setGlow( true );
+    style->lineStyle().setPenStyle( Qt::NoPen );
+    style->labelStyle().setGlow( true );
 
     // use special icon for moons
     if( m_category == "Moons" ) {
-        placemark()->style()->iconStyle().setIcon(
-            QImage( ":/icons/moon.png" ) );
+        style->iconStyle().setIcon( QImage( ":/icons/moon.png" ) );
     }
+
+    placemark()->setStyle( style );
 
 
     m_planSat->getKeplerElements(
