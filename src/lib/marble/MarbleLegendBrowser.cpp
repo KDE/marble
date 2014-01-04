@@ -277,41 +277,6 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
     d->m_symbolMap.clear();
 
-    /* This CSS code is required to style the following HTML code
-     * P.S. It use bootstrap also, so we don't need a lot of style here
-     */
-    QString bitStyle = "<style>"
-            ".well-legend {"
-            "   background-color: #fcffdb;"
-            "   padding-top: 10px;"
-            "   padding-bottom: 5px;"
-            ""
-            "}"
-            ".legend-entry {"
-            "   margin-bottom: -10px!important;"
-            "}"
-            ".well-legend .section-head {"
-            "   color: #b3925d!important;"
-            "}"
-            ".legend-entry .image-pic {"
-            "   float: left;"
-            "   margin-right: 20px;"
-            "   margin-top: 3px;"
-            "}"
-            ".legend-entry .notation {"
-            "   line-height: 23px;"
-            "}"
-            "label span {"
-            "   line-height: 30px;"
-            "   font-weight: 600;"
-            "}"
-            "label input {"
-            "   margin-right: 5px!important;"
-            "}"
-            "</style>";
-
-    customLegendString += bitStyle;
-
     /* Okay, if you are reading it now, be ready for hell!
      * We can't optimize this part of Legend Browser, but we will
      * do it, anyway. It's complicated a lot, the most important

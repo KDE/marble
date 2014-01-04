@@ -15,4 +15,39 @@ body
 {
   background: #ffffff;
   color: black
+  padding: 10px;
+}
+
+label span {
+   line-height: 30px;
+   font-weight: 600;
+}
+
+label input {
+   margin-right: 5px!important;
+}
+
+.well-legend {
+   background-color: #fcffdb;
+   padding-top: 10px;
+   padding-bottom: 5px;
+
+}
+
+.well-legend .section-head {
+   color: #b3925d!important;
+}
+
+.legend-entry {
+   margin-bottom: -10px!important;
+}
+
+.legend-entry .image-pic {
+   float: left;
+   margin-right: 20px;
+   margin-top: 3px;
+}
+
+.legend-entry .notation {
+   line-height: 23px;
 }
