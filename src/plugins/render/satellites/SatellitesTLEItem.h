@@ -38,8 +38,6 @@ public:
 
     void update();
 
-    void setOrbitColor( const QColor &color );
-
 private:
     bool m_showOrbit;
     double m_earthSemiMajorAxis; // in km

@@ -186,11 +186,21 @@ void SatellitesModel::parseCatalog( const QString &id,
             missionEnd = QDateTime::fromTime_t( elms[4].toUInt() );
         }
 
-        SatellitesMSCItem *item;
-        item = new SatellitesMSCItem( name, category, body, id,
+        SatellitesMSCItem *item = new SatellitesMSCItem( name, category, body, id,
                                       missionStart, missionEnd,
                                       index++, planSat, m_clock );
-        item->setOrbitColor( nextColor() );
+        GeoDataStyle *style = new GeoDataStyle( *item->placemark()->style() );
+        style->lineStyle().setPenStyle( Qt::NoPen );
+        style->lineStyle().setColor( nextColor() );
+        style->labelStyle().setGlow( true );
+
+        // use special icon for moons
+        if( category == "Moons" ) {
+            style->iconStyle().setIcon( QImage( ":/icons/moon.png" ) );
+        }
+
+        item->placemark()->setStyle( style );
+
         item->placemark()->setVisible( ( body.toLower() == m_lcPlanet ) );
         addItem( item );
     }
@@ -235,9 +245,12 @@ void SatellitesModel::parseTLE( const QString &id,
             return;
         }
 
-        SatellitesTLEItem *item = new SatellitesTLEItem( satelliteName,
-                                                         satrec, m_clock );
-        item->setOrbitColor( nextColor() );
+        SatellitesTLEItem *item = new SatellitesTLEItem( satelliteName, satrec, m_clock );
+        GeoDataStyle *style = new GeoDataStyle( *item->placemark()->style() );
+        style->lineStyle().setPenStyle( Qt::NoPen );
+        style->lineStyle().setColor( nextColor() );
+        style->labelStyle().setGlow( true );
+        item->placemark()->setStyle( style );
         addItem( item );
     }
 

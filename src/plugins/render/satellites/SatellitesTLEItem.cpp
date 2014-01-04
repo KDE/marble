@@ -56,11 +56,6 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
     placemark()->setZoomLevel( 0 );
     placemark()->setGeometry( m_track );
 
-    GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
-    style->lineStyle().setPenStyle( Qt::NoPen );
-    style->labelStyle().setGlow( true );
-    placemark()->setStyle( style );
-
     update();
 }
 
@@ -110,11 +105,6 @@ void SatellitesTLEItem::update()
 
         addPointAt( QDateTime::fromTime_t( i ) );
     }
-}
-
-void SatellitesTLEItem::setOrbitColor(const QColor &color)
-{
-    placemark()->style()->lineStyle().setColor(color);
 }
 
 void SatellitesTLEItem::addPointAt( const QDateTime &dateTime )

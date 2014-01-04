@@ -53,18 +53,6 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
     placemark()->setZoomLevel( 0 );
     placemark()->setGeometry( m_track );
 
-    GeoDataStyle *style = new GeoDataStyle( *placemark()->style() );
-    style->lineStyle().setPenStyle( Qt::NoPen );
-    style->labelStyle().setGlow( true );
-
-    // use special icon for moons
-    if( m_category == "Moons" ) {
-        style->iconStyle().setIcon( QImage( ":/icons/moon.png" ) );
-    }
-
-    placemark()->setStyle( style );
-
-
     m_planSat->getKeplerElements(
         m_perc, m_apoc, m_inc, m_ecc, m_ra, m_tano, m_m0, m_a, m_n0 );
 
@@ -178,11 +166,6 @@ void SatellitesMSCItem::update()
     }
 
     addTrackPointAt( m_clock->dateTime() );
-}
-
-void SatellitesMSCItem::setOrbitColor(const QColor &color)
-{
-    placemark()->style()->lineStyle().setColor(color);
 }
 
 void SatellitesMSCItem::addTrackPointAt( const QDateTime &dateTime )
