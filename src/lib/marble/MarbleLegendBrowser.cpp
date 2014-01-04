@@ -321,6 +321,19 @@ QString MarbleLegendBrowser::generateSectionsHtml()
         }
 
         foreach (const GeoSceneItem *item, section->items()) {
+
+            // checkbox for item
+            QString checkBoxString;
+            if (item->checkable()) {
+                QString const checked = d->m_checkBoxMap[item->connectTo()] ? "checked" : "";
+                checkBoxString = ""
+                        "<input type=\"checkbox\" "
+                        "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" "
+                        + checked + " name=\"" + item->connectTo() + "\" />";
+
+            }
+
+            // pixmap and text
             QString path = "";
             int pixmapWidth = 24;
             int pixmapHeight = 12;
@@ -345,9 +358,10 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             QString src = QUrl::fromLocalFile( path ).toString();
             QString html = ""
                     "<div class=\"legend-entry\">"
-                    "       <img class=\"image-pic\""
-                    "       src=\"" + src + "\" style=\"" + styleDiv + "\" />"
-                    "   <p class=\"notation\">" + item->text() + "</p>"
+                    "  <label>" + checkBoxString +
+                    "    <img class=\"image-pic\" src=\"" + src + "\" style=\"" + styleDiv + "\"/>"
+                    "    <span class=\"notation\">" + item->text() + "</span>"
+                    "  </label>"
                     "</div>";
             customLegendString += html;
         }

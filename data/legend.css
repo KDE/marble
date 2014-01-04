@@ -18,11 +18,6 @@ body
   padding: 10px;
 }
 
-label span {
-   line-height: 30px;
-   font-weight: 600;
-}
-
 label input {
    margin-right: 5px!important;
 }
@@ -38,12 +33,16 @@ label input {
    color: #b3925d!important;
 }
 
+.section-head span {
+   line-height: 30px;
+   font-weight: 600;
+}
+
 .legend-entry {
    margin-bottom: -10px!important;
 }
 
 .legend-entry .image-pic {
-   float: left;
    margin-right: 20px;
    margin-top: 3px;
 }
