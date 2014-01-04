@@ -38,13 +38,10 @@ public:
 
     void update();
 
-    QString name();
-
     void showOrbit( bool show );
     void setOrbitColor( const QColor &color );
 
 private:
-    QString m_name;
     bool m_showOrbit;
     double m_earthSemiMajorAxis; // in km
     elsetrec m_satrec;

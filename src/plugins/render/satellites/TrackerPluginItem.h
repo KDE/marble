@@ -42,7 +42,7 @@ public:
     /**
      * Satellite's name
      */
-    QString name();
+    QString name() const;
 
     /**
      * Returns the wrapped placemark which will be displayed if this item is in a TrackerPluginModel

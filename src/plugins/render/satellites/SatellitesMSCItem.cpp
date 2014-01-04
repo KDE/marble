@@ -42,7 +42,6 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
       m_track( new GeoDataTrack() ),
       m_clock( clock ),
       m_planSat( planSat ),
-      m_name( name ),
       m_category( category ),
       m_relatedBody( relatedBody ),
       m_catalog( catalog ),
@@ -76,11 +75,6 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
 SatellitesMSCItem::~SatellitesMSCItem()
 {
     delete m_planSat;
-}
-
-QString SatellitesMSCItem::name() const
-{
-    return m_name;
 }
 
 QString SatellitesMSCItem::category() const

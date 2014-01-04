@@ -40,7 +40,6 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
                                       elsetrec satrec,
                                       const MarbleClock *clock )
     : TrackerPluginItem( name ),
-      m_name(name),
       m_showOrbit( false ),
       m_satrec( satrec ),
       m_track( new GeoDataTrack() ),
@@ -111,11 +110,6 @@ void SatellitesTLEItem::update()
 
         addPointAt( QDateTime::fromTime_t( i ) );
     }
-}
-
-QString SatellitesTLEItem::name()
-{
-    return m_name;
 }
 
 void SatellitesTLEItem::setOrbitColor(const QColor &color)

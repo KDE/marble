@@ -44,7 +44,6 @@ public:
                        const MarbleClock *clock );
     ~SatellitesMSCItem();
 
-    QString name() const;
     QString category() const;
     QString relatedBody() const;
     QString catalog() const;
@@ -63,7 +62,6 @@ private:
     GeoDataTrack *m_track;
     const MarbleClock *m_clock;
     PlanetarySats *m_planSat;
-    const QString m_name;
     const QString m_category;
     const QString m_relatedBody;
     const QString m_catalog;

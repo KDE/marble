@@ -17,24 +17,31 @@ namespace Marble {
 class TrackerPluginItemPrivate
 {
 public:
-    TrackerPluginItemPrivate( GeoDataPlacemark *placemark )
-        : m_placemark( placemark ),
+    TrackerPluginItemPrivate( const QString &name, GeoDataPlacemark *placemark )
+        : m_name( name ),
+          m_placemark( placemark ),
           m_enabled( false )
     {
     }
 
+    QString m_name;
     GeoDataPlacemark *m_placemark;
     bool m_enabled;
 };
 
 TrackerPluginItem::TrackerPluginItem( const QString &name )
-    : d( new TrackerPluginItemPrivate( new GeoDataPlacemark( name ) ) )
+    : d( new TrackerPluginItemPrivate( name, new GeoDataPlacemark( name ) ) )
 {
 }
 
 TrackerPluginItem::~TrackerPluginItem()
 {
     delete d;
+}
+
+QString TrackerPluginItem::name() const
+{
+    return d->m_name;
 }
 
 GeoDataPlacemark* TrackerPluginItem::placemark()
