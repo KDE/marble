@@ -54,7 +54,6 @@ public:
     const QDateTime& missionEnd() const;
 
     void update();
-    void showOrbit( bool show );
     void setOrbitColor( const QColor &color );
 
 private:

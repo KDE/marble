@@ -38,7 +38,6 @@ public:
 
     void update();
 
-    void showOrbit( bool show );
     void setOrbitColor( const QColor &color );
 
 private:
