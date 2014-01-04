@@ -250,16 +250,15 @@ void MarbleLegendBrowser::translateHtml( QString & html )
 
 void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
 {
-    const QString old = "<H4> <!--Locations checkbox--><a href=\"checkbox:cities\"><span style=\"text-decoration: none\"><img src=\"checkbox:cities\">&nbsp;</span></a> Populated Places</H4>";
+    const QString old = "<a href=\"checkbox:cities\"/>";
 
     QString checked = "";
     if (d->m_checkBoxMap["cities"])
         checked = "checked";
 
     const QString repair = ""
-            "<div class=\"spec\"><h3><input type=\"checkbox\" "
-            "onchange=\"Marble.setCheckedProperty(this.value, this.checked);\" "
-            + checked + " name=\"cities\" value=\"cities\" />Populated Places</h3></div>\n";
+            "<input type=\"checkbox\" "
+            "onchange=\"Marble.setCheckedProperty(this.value, this.checked);\" " + checked + " name=\"cities\" value=\"cities\" />";
 
     html.replace(old, repair);
 }
