@@ -532,13 +532,13 @@ QList<DiffItem> BookmarkSyncManager::Private::diff( QIODevice *fileA, QIODevice 
 
 void BookmarkSyncManager::Private::merge()
 {
-    foreach( DiffItem itemA, m_diffA ) {
+    foreach( const DiffItem &itemA, m_diffA ) {
         if( itemA.m_action == DiffItem::NoAction ) {
             bool deleted = false;
             bool changed = false;
             DiffItem other;
 
-            foreach( DiffItem itemB, m_diffB ) {
+            foreach( const DiffItem &itemB, m_diffB ) {
                 if( EARTH_RADIUS * distanceSphere( itemA.m_placemarkA.coordinate(), itemB.m_placemarkA.coordinate() ) <= 1 ) {
                     if( itemB.m_action == DiffItem::Deleted ) {
                         deleted = true;
@@ -559,7 +559,7 @@ void BookmarkSyncManager::Private::merge()
             bool conflict = false;
             DiffItem other;
 
-            foreach( DiffItem itemB, m_diffB ) {
+            foreach( const DiffItem &itemB, m_diffB ) {
                 if( EARTH_RADIUS * distanceSphere( itemA.m_placemarkB.coordinate(), itemB.m_placemarkB.coordinate() ) <= 1 ) {
                     if( ( itemA.m_action == DiffItem::Changed && ( itemB.m_action == DiffItem::Changed || itemB.m_action == DiffItem::Deleted ) )
                             || ( itemA.m_action == DiffItem::Deleted && itemB.m_action == DiffItem::Changed ) ) {
@@ -611,7 +611,7 @@ void BookmarkSyncManager::Private::merge()
         }
     }
 
-    foreach( DiffItem itemB, m_diffB ) {
+    foreach( const DiffItem &itemB, m_diffB ) {
         if( itemB.m_action == DiffItem::Created ) {
             m_merged.append( itemB );
         }
@@ -651,7 +651,7 @@ GeoDataDocument* BookmarkSyncManager::Private::constructDocument( const QList<Di
     GeoDataDocument *document = new GeoDataDocument();
     document->setName( tr( "Bookmarks" ) );
 
-    foreach( DiffItem item, mergedList ) {
+    foreach( const DiffItem &item, mergedList ) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark( item.m_placemarkA );
         QStringList splitted = item.m_path.split( '/', QString::SkipEmptyParts );
         GeoDataFolder *folder = createFolders( document, splitted );
@@ -742,7 +742,7 @@ void BookmarkSyncManager::Private::continueSynchronization()
         } else {
             QList<DiffItem> diffList = diff( lastSyncedPath, m_localBookmarksPath );
             bool localModified = false;
-            foreach( DiffItem item, diffList ) {
+            foreach( const DiffItem &item, diffList ) {
                 if( item.m_action != DiffItem::NoAction ) {
                     localModified = true;
                 }

@@ -337,7 +337,7 @@ QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport ) con
         geoRects << QRectF(west, north, M_PI - west, south - north);
         geoRects << QRectF(-M_PI, north, east + M_PI, south - north);
     }
-    foreach( QRectF geoRect, geoRects ) {
+    foreach( const QRectF &geoRect, geoRects ) {
         TileId key;
         QRect rect;
 

@@ -554,7 +554,7 @@ void ElevationProfileFloatItem::updateVisiblePoints()
     routeSegments.append( currentRouteSegment ); // in case the route ends on screen
 
     int maxLenght = 0;
-    foreach ( currentRouteSegment, routeSegments ) {
+    foreach ( const QList<int> &currentRouteSegment, routeSegments ) {
         if ( currentRouteSegment.size() > maxLenght ) {
             maxLenght = currentRouteSegment.size() ;
             m_firstVisiblePoint = currentRouteSegment.first();

@@ -301,8 +301,10 @@ QHash<QString,QVariant> OverviewMap::settings() const
 {
     QHash<QString, QVariant> result = AbstractFloatItem::settings();
 
-    foreach ( const QString &key, m_settings.keys() ) {
-        result.insert( key, m_settings[key] );
+    typedef QHash<QString, QVariant>::ConstIterator Iterator;
+    Iterator end = m_settings.constEnd();
+    for ( Iterator iter = m_settings.constBegin(); iter != end; ++iter ) {
+        result.insert( iter.key(), iter.value() );
     }
 
     return result;

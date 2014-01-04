@@ -91,9 +91,11 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
 	}
 	url.setQuery( urlQuery);
 #else
-	Q_FOREACH( const QString& key, queryStrings.keys()){
-		url.addQueryItem(key, queryStrings.value(key));
-	}
+    typedef QMap<QString, QString>::ConstIterator Iterator;
+    Iterator end = queryStrings.constEnd();
+    for ( Iterator iter = queryStrings.constBegin(); iter != end; ++iter ) {
+        url.addQueryItem(iter.key(), iter.value());
+    }
 #endif
 
     m_request.setUrl( url );

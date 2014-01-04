@@ -324,8 +324,8 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
         GeoSceneGeodata emptyData("empty");
         // look for datasets which are different from currentDatasets
-        foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
-            GeoSceneGeodata *data = dynamic_cast<GeoSceneGeodata*>( dataset );
+        foreach ( const GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+            const GeoSceneGeodata *data = dynamic_cast<const GeoSceneGeodata*>( dataset );
             Q_ASSERT( data );
             if( currentDatasets.removeOne( *data ) ) {
                 continue;

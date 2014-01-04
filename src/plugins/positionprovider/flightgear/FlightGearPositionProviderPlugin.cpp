@@ -118,11 +118,12 @@ void FlightGearPositionProviderPlugin::readPendingDatagrams()
         quint16 senderPort;
 
         m_socket->readDatagram(datagram.data(), datagram.size(), &sender, &senderPort);
-        foreach(QByteArray line, datagram.split('\n')) {
-            fixBadGPRMC(line);
-            //qDebug() << line;
-            line.append( "\n" );
-            parseNmeaSentence( line );
+        typedef QList<QByteArray>::Iterator Iterator;
+        QList<QByteArray> splitted = datagram.split('\n');
+        for (Iterator i = splitted.begin(); i != splitted.end(); i++) {
+            fixBadGPRMC(*i);
+            *i->append( "\n" );
+            parseNmeaSentence( *i );
         }
     }
 }
