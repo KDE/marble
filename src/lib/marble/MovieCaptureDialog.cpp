@@ -65,7 +65,7 @@ void MovieCaptureDialog::loadDestinationFile()
 
     bool supported = false;
     foreach(const QString &format, formats) {
-        if (destination.endsWith("."+format))
+        if (destination.endsWith('.'+format))
             supported = true;
     }
 

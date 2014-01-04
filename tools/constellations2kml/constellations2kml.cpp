@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
                 << "            <LineString> \n"
                 << "                <coordinates> \n";
 
-            starIndexes = indexList.split( " " );
+            starIndexes = indexList.split( ' ' );
             QList<qreal> x;
             QList<qreal> y;
             QList<qreal> z;

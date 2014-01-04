@@ -343,7 +343,7 @@ QString OpenCachingComItem::iconName() const
     static QStringList iconnames;
     iconnames<<"traditional"<<"multi-cache"<<"puzzle"<<"virtual";
 
-    QString res = m_cache["type"].toString().section(" ", 0, 0).toLower();
+    QString res = m_cache["type"].toString().section(' ', 0, 0).toLower();
     if ( iconnames.contains(res) )
     {
         return res;

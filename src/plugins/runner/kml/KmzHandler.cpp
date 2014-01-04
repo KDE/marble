@@ -37,7 +37,7 @@ bool KmzHandler::open( const QString &kmz )
     m_kmzPath = outputDir.fileName();
     QuaZipFile zipFile( &zip );
     for ( bool moreFiles=zip.goToFirstFile(); moreFiles; moreFiles=zip.goToNextFile() ) {
-        QFileInfo output = QFileInfo( outputDir.fileName() + "/" + zip.getCurrentFileName() );
+        QFileInfo output = QFileInfo( outputDir.fileName() + '/' + zip.getCurrentFileName() );
         if ( !output.dir().exists() ) {
             QDir::root().mkpath( output.dir().absolutePath() );
         }

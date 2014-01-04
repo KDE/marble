@@ -80,9 +80,9 @@ public:
             if (newOne == tr("Moon")) {
                 return QString("  " + tr("Moon"));
             } else if (m_moons.contains(newOne.toLower())) {
-                return QString("  "+newOne+" (" + tr("moon") + ")");
+                return QString("  "+newOne+" (" + tr("moon") + ')');
             } else if (m_dwarfs.contains(newOne.toLower())) {
-                return QString(newOne+ " (" + tr("dwarf planet") + ")");
+                return QString(newOne+ " (" + tr("dwarf planet") + ')');
             }
             return newOne;
         } else {

@@ -118,7 +118,7 @@ QString RouteSyncManager::saveDisplayedToCache() const
     d->m_cacheDir.mkpath( d->m_cacheDir.absolutePath() );
     
     const QString timestamp = generateTimestamp();
-    const QString filename = d->m_cacheDir.absolutePath() + "/" + timestamp + ".kml";
+    const QString filename = d->m_cacheDir.absolutePath() + '/' + timestamp + ".kml";
     d->m_routingManager->saveRoute( filename );
     return timestamp;
 }
@@ -135,7 +135,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
     QVector<RouteItem> routeList;
     QStringList cachedRoutes = d->m_cacheDir.entryList( QStringList() << "*.kml", QDir::Files );
     foreach ( const QString &routeFilename, cachedRoutes ) {
-        QFile file( d->m_cacheDir.absolutePath() + "/" + routeFilename );
+        QFile file( d->m_cacheDir.absolutePath() + '/' + routeFilename );
         file.open( QFile::ReadOnly );
 
         GeoDataParser parser( GeoData_KML );
@@ -158,8 +158,8 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
 
         routeName = routeName.left( routeName.length() - 3 );
         QString timestamp = routeFilename.left( routeFilename.length() - 4 );
-        QString distance = "0";
-        QString duration = "0";
+        QString distance = QString('0');
+        QString duration = QString('0');
 
         QString previewPath = QString( "%0/preview/%1.jpg" ).arg( d->m_cacheDir.absolutePath(), timestamp );
         QIcon preview;

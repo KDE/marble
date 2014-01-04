@@ -93,7 +93,7 @@ QString TemplateDocument::finalText() const
 {
     QString ready = d->templateText;
     foreach (const QString &key, d->templateEntries.keys()) {
-        ready.replace("%" + key + "%", d->templateEntries[key]);
+        ready.replace('%' + key + '%', d->templateEntries[key]);
     }
     d->processTemplateIncludes(ready);
     return ready;

@@ -135,7 +135,7 @@ void MovieCapture::stopRecording()
     QString argv = QString("-i %1 -r %2 -b 2000k %3")
             .arg(input).arg(fps()).arg(output);
 
-    avconv->start(d->encoderExec+" "+argv);
+    avconv->start(d->encoderExec+' '+argv);
     connect(avconv, SIGNAL(finished(int)), this, SLOT(processWrittenMovie(int)));
 }
 

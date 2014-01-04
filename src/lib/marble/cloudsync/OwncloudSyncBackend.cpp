@@ -316,7 +316,7 @@ void OwncloudSyncBackend::checkAuthReply()
 
     QString result = d->m_authReply->readAll();
 
-    if ( !result.startsWith("{")) {
+    if ( !result.startsWith('{')) {
         // not a JSON result
         if ( result.contains("http://owncloud.org") ) {
             // an owncloud login page was returned, marble app is not installed

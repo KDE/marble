@@ -299,7 +299,7 @@ void StarsPlugin::prepareNames()
     QTextStream in( &names );
     while ( !in.atEnd() ) {
         QString line = in.readLine();
-        QStringList list = line.split( ";" );
+        QStringList list = line.split( ';' );
         if ( list.size() == 3 ) {
             m_nativeHash[ list.at( 0 ) ] = tr( list.at( 1 ).toUtf8().constData() );
             m_abbrHash[ list.at( 0 ) ] = list.at( 2 );

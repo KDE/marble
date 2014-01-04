@@ -371,7 +371,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             if (color != Qt::transparent) {
                 styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                                     QString::number(pixmapHeight) + "px; background-color: "
-                        + color.name() + ";";
+                        + color.name() + ';';
             } else {
                 styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                         QString::number(pixmapHeight) + "px;";
@@ -393,7 +393,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
 void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
 {
-    QWebElement box = page()->mainFrame()->findFirstElement("input[value="+name+"]");
+    QWebElement box = page()->mainFrame()->findFirstElement("input[value="+name+']');
     if (!box.isNull()) {
         if (checked != d->m_checkBoxMap[name]) {
             d->m_checkBoxMap[name] = checked;
@@ -406,8 +406,8 @@ void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked 
 
 void MarbleLegendBrowser::setRadioCheckedProperty( const QString& value, const QString& name , bool checked )
 {
-    QWebElement box = page()->mainFrame()->findFirstElement("input[value="+value+"]");
-    QWebElementCollection boxes = page()->mainFrame()->findAllElements("input[name="+name+"]");
+    QWebElement box = page()->mainFrame()->findFirstElement("input[value="+value+']');
+    QWebElementCollection boxes = page()->mainFrame()->findAllElements("input[name="+name+']');
     QString currentValue="";
     for(int i=0; i<boxes.count(); ++i) {
         currentValue = boxes.at(i).attribute("value");
