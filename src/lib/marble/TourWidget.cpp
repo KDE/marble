@@ -219,7 +219,7 @@ void TourWidgetPrivate::deleteSelected()
 {
     QString title = QObject::tr( "Remove Selected Items" );
     QString text = QObject::tr( "Are you sure want to remove selected items?" );
-    QMessageBox *dialog = new QMessageBox( QMessageBox::Question, title, text, QMessageBox::Yes | QMessageBox::No, q );
+    QPointer<QMessageBox> dialog = new QMessageBox( QMessageBox::Question, title, text, QMessageBox::Yes | QMessageBox::No, q );
     dialog->setDefaultButton( QMessageBox::No );
     if ( dialog->exec() == QMessageBox::Yes ) {
         GeoDataObject *rootObject =  rootIndexObject();
@@ -236,6 +236,7 @@ void TourWidgetPrivate::deleteSelected()
             m_tourUi.m_actionSaveTour->setEnabled( true );
         }
     }
+    delete dialog;
 }
 
 void TourWidgetPrivate::updateButtonsStates()
