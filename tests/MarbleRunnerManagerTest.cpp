@@ -299,7 +299,7 @@ void MarbleRunnerManagerTest::testSyncParsing_data()
     addNamedRow("kml") << QString( MARBLE_SRC_DIR ).append( "/examples/kml/NewYork.kml") << 1;
     //log
     addNamedRow("osm") << QString( MARBLE_SRC_DIR ).append( "/examples/osm/map.osm") << 1;
-    addNamedRow("pn2") << QString( MARBLE_SRC_DIR ).append( "/data/naturalearth/50m_lakes.pn2") << 1;
+    addNamedRow("pn2") << QString( MARBLE_SRC_DIR ).append( "/data/naturalearth/ne_50m_lakes.pn2") << 1;
     addNamedRow("pnt") << QString( MARBLE_SRC_DIR ).append( "/data/mwdbii/PGLACIER.PNT" )    << 1;
     //shp
 
