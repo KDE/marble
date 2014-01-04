@@ -137,7 +137,7 @@ int main(int argc, char** argv)
     QApplication app(argc,argv);
 
 
-    qDebug( " Syntax: pnt2svg [-i shp-sourcefile -o pn2-targetfile]" );
+    qDebug( " Syntax: shp2pn2 [-i shp-sourcefile -o pn2-targetfile]" );
 
     QString inputFilename;
     int inputIndex = app.arguments().indexOf( "-i" );
