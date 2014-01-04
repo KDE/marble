@@ -13,6 +13,7 @@ target_link_libraries(marble_part ${KDE4_KPARTS_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ma
 install(TARGETS marble_part DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES marble_part.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 install(FILES marble_geo.desktop DESTINATION ${APPS_INSTALL_DIR})
+install(FILES marble_worldwind.desktop DESTINATION ${APPS_INSTALL_DIR})
 install(FILES marble_part.rc DESTINATION ${DATA_INSTALL_DIR}/marble)
 
 kde4_add_ui_files(marble_kde_SRCS ${marble_UI})

@@ -97,6 +97,12 @@ class ControlView : public QWidget
 
     CloudSyncManager* cloudSyncManager();
 
+    /**
+     * Opens the passed Geo URI
+     * @see Marble::GeoUriParser for details
+     */
+    void openGeoUri( const QString& geoUriString );
+
  public slots:
     void printMapScreenShot( QPointer<QPrintDialog> dialog );
     void printPixmap( QPrinter * printer, const QPixmap& pixmap );

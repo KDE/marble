@@ -37,6 +37,7 @@
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
+#include "GeoUriParser.h"
 #include "MarbleWidget.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
@@ -223,6 +224,27 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
             }
     }
 #endif
+}
+
+void ControlView::openGeoUri( const QString& geoUriString )
+{
+    GeoUriParser uriParser( geoUriString );
+    if ( uriParser.parse() ) {
+        if ( uriParser.planet().id() != marbleModel()->planet()->id() ) {
+            MapThemeManager *manager = mapThemeManager();
+            foreach( const QString& planetName, manager->mapThemeIds()) {
+                if ( planetName.startsWith(uriParser.planet().id(), Qt::CaseInsensitive)) {
+                    m_marbleWidget->setMapThemeId(planetName);
+                    break;
+                }
+            }
+        }
+        m_marbleWidget->centerOn( uriParser.coordinates() );
+        if ( uriParser.coordinates().altitude() > 0.0 )
+        {
+            m_marbleWidget->setDistance( uriParser.coordinates().altitude() * METER2KM );
+        }
+    }
 }
 
 void ControlView::printPixmap( QPrinter * printer, const QPixmap& pixmap  )

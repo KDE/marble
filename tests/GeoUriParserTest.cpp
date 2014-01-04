@@ -32,6 +32,7 @@ void GeoUriParserTest::testGeoUri_data()
     QTest::addColumn<double>( "lon" );
     QTest::addColumn<double>( "alt" );
 
+    // geo: URI tests
     addRow() << "geo:-25.0064,153.359,250" << true << -25.0064 << 153.359 << 250.00;
     addRow() << "geo:-25.0064153.359250" << false << 0.00 << 0.00 << 0.00;
     addRow() << "geo-25.0064,153.359,250" << false << 0.00 << 0.00 << 0.00;
@@ -41,6 +42,20 @@ void GeoUriParserTest::testGeoUri_data()
     addRow() << "geo:37.786971,-122.399677;u=35" << true << 37.786971 << -122.399677 << 0.00;
     addRow() << "geo:37.786971,-122.399677;crs=Moon-2011" << true << 37.786971 << -122.399677 << 0.00;
     addRow() << "geo:37.786971,-122.399677;crs=Moon-2011,u=25" << true <<  37.786971 << -122.399677 << 0.00;
+
+    // worldwind: URI tests
+    addRow() << "worldwind://goto/world=Earth&lat=-43.54642&lon=172.69&alt=25883&bank=242&tilt=1&dir=2&layer=Hello"
+             << true << -43.54642 << 172.69 << 25883.0;
+    addRow() << "worldwind://goto/world=Earth&lat=-43.54642&lon=172.69"
+             << true << -43.54642 << 172.69 << 0.0;
+    addRow() << "worldwind://lat=-43.54642&lon=172.69&alt=25883"
+             << false << 0.0 << 0.0 << 0.0;
+    addRow() << "worldwind://goto/world=Earth&alt=25883"
+             << true << 0.0 << 0.0 << 25883.0;
+    addRow() << "goto/world=Earth&lat=-43.54642&lon=172.69&alt=25883"
+             << false << 0.0 << 0.0 << 0.0;
+    addRow() << "world=Earth&lat=-43.54642&lon=172.69&alt=25883&bank=242&tilt=1&dir=2&layer=Hello"
+             << false << 0.0 << 0.0 << 0.0;
 }
 
 void GeoUriParserTest::testGeoUri()

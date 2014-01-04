@@ -13,6 +13,7 @@
 
 
 #include <QChar>
+#include "Planet.h"
 #include "GeoDataCoordinates.h"
 #include "marble_export.h"
 
@@ -47,6 +48,11 @@ public:
     GeoDataCoordinates coordinates() const;
 
     /**
+     * Returns the Planet on which the coordinates are valid.
+     */
+    Planet planet() const;
+
+    /**
      * Parse the given Geo URI
      *
      * \returns true iff the GeoURI is valid and was successfully parsed
@@ -54,8 +60,11 @@ public:
     bool parse();
 
 private:
+    double getDoubleFromParameter( const QUrl& url, const QString& key, const QString& secondaryKey ) const;
+
     QString m_geoUri;
     GeoDataCoordinates m_coordinates;
+    Planet m_planet;
 };
 
 }

@@ -19,6 +19,7 @@
 
 #include "QtMainWindow.h"
 
+#include "MapThemeManager.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleTest.h"
@@ -210,20 +211,10 @@ int main(int argc, char *argv[])
         }
     }
 
+    cmdLineSettings.insert( QLatin1String("geo-uri"), QVariant(geoUriString) );
+
     MainWindow *window = new MainWindow( marbleDataPath, cmdLineSettings );
     window->setAttribute( Qt::WA_DeleteOnClose, true );
-
-	if ( !geoUriString.isEmpty() ) {
-		GeoUriParser uriParser( geoUriString );
-		if ( uriParser.parse() )
-		{
-			window->marbleWidget()->centerOn( uriParser.coordinates() );
-			if ( uriParser.coordinates().altitude() > 0.0 )
-			{
-				window->marbleWidget()->setDistance( uriParser.coordinates().altitude() * METER2KM );
-			}
-		}
-	}
 
 //    window->marbleWidget()->rotateTo( 0, 0, -90 );
 //    window->show();

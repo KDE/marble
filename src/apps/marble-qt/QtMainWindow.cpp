@@ -63,8 +63,10 @@
 #include "HttpDownloadManager.h"
 #include "BookmarkManager.h"
 #include "NewBookmarkFolderDialog.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
+#include "GeoUriParser.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingWidget.h"
@@ -1131,6 +1133,12 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          }
          if (isDistanceOverwritten) {
              m_controlView->marbleWidget()->setDistance(distanceIt.value().toDouble());
+         }
+
+         // Geo URI parsing
+         QString geoUriString = qvariant_cast<QString>( overrideSettings.value("geo-uri", ""));
+         if ( !geoUriString.isEmpty() ) {
+             m_controlView->openGeoUri( geoUriString );
          }
 
          bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();

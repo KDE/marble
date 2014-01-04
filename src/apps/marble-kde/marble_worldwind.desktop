@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=marble --geo-uri=%u
+Name=Marble
+MimeType=x-scheme-handler/worldwind;
+Terminal=true
+NoDisplay=true
+

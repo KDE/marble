@@ -24,6 +24,7 @@
 #include "KdeMainWindow.h"
 #include "GeoUriParser.h"
 #include "MarbleDebug.h"
+#include "MapThemeManager.h"
 
 #include "MarbleTest.h"
 
@@ -383,13 +384,8 @@ int main ( int argc, char *argv[] )
     }
 
     const QString geoUriString = args->getOption( "geo-uri" );
-    GeoUriParser uriParser( geoUriString );
-    if ( uriParser.parse() ) {
-        window->marbleWidget()->centerOn( uriParser.coordinates() );
-        if ( uriParser.coordinates().altitude() > 0.0 )
-        {
-            window->marbleWidget()->setDistance( uriParser.coordinates().altitude() * METER2KM );
-        }
+    if ( !geoUriString.isEmpty() ) {
+        window->marbleControl()->openGeoUri( geoUriString );
     }
 
     const QString distance = args->getOption( "distance" );
