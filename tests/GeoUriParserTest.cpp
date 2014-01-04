@@ -8,7 +8,6 @@
 // Copyright 2014       Levente Kurusa <levex@linux.com>
 //
 
-#include <QtTest>
 #include <QString>
 #include "TestUtils.h"
 #include "GeoUriParser.h"

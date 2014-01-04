@@ -8,9 +8,6 @@
 // Copyright 2013 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-#include <QObject>
-#include <QtTest>
-
 #include <GeoDataParser.h>
 #include <GeoDataDocument.h>
 #include <GeoDataTour.h>
@@ -19,6 +16,10 @@
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
 #include <GeoDataScreenOverlay.h>
+
+#include <QObject>
+#include <QBuffer>
+#include <QTest>
 
 using namespace Marble;
 

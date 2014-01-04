@@ -9,10 +9,6 @@
 // Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
-#include <QSignalSpy>
-#include <QMetaType>
-
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
@@ -24,6 +20,10 @@
 #include "GeoDataPlacemark.h"
 #include "routing/RouteRequest.h"
 #include "TestUtils.h"
+
+#include <QSignalSpy>
+#include <QMetaType>
+#include <QThreadPool>
 
 Q_DECLARE_METATYPE( QList<Marble::GeoDataCoordinates> )
 

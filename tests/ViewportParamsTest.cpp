@@ -9,7 +9,6 @@
 // Copyright 2012,2013  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
 #include "TestUtils.h"
 
 #include "ViewportParams.h"

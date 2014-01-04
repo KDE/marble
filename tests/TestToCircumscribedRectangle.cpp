@@ -9,7 +9,6 @@
 // Copyright 2013       Adrian Draghici <draghici.adrian.b@gmail.com>
 //
 
-#include <QtTest>
 
 #include "MarbleGlobal.h"
 #include "GeoDataLatLonBox.h"

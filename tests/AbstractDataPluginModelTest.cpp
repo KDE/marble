@@ -8,7 +8,6 @@
 // Copyright 2013       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
 #include "TestUtils.h"
 
 #include "AbstractDataPluginModel.h"
@@ -16,6 +15,9 @@
 #include "AbstractDataPluginItem.h"
 #include "MarbleModel.h"
 #include "ViewportParams.h"
+
+#include <QTimer>
+#include <QSignalSpy>
 
 using namespace Marble;
 

@@ -9,7 +9,6 @@
 
 
 #include <QMetaType>
-#include <QtTest>
 #include "TileId.h"
 #include "GeoDataCoordinates.h"
 #include "TestUtils.h"

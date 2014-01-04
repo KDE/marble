@@ -9,7 +9,6 @@
 //
 
 #include <QObject>
-#include <QtTest>
 
 #include "GeoDataPoint.h"
 #include "GeoDataLinearRing.h"

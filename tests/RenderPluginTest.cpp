@@ -8,11 +8,13 @@
 // Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
 
 #include "MarbleModel.h"
 #include "PluginManager.h"
 #include "RenderPlugin.h"
+
+#include <QMetaType>
+#include <QTest>
 
 Q_DECLARE_METATYPE( const Marble::RenderPlugin * )
 

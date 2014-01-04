@@ -8,10 +8,11 @@
 // Copyright 2008 Patrick Spendrin  <ps_ml@gmx.de>
 //
 
-#include <QtTest>
 
 #include "MarbleDirs.h"
 #include "PluginManager.h"
+
+#include <QTest>
 
 namespace Marble
 {

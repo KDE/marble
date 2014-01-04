@@ -9,7 +9,6 @@
 // Copyright 2010       Cezar Mocan <mocancezar@gmail.com>
 // Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
-#include <QtTest>
 #include "GeoDataCoordinates.h"
 #include "GeoDataFolder.h"
 #include "GeoDataLineString.h"
@@ -17,6 +16,9 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLatLonBox.h"
 #include "GeoDataPlacemark.h"
+
+#include <QTest>
+#include <QBuffer>
 
 using namespace Marble;
 

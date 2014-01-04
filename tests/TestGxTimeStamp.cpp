@@ -9,7 +9,6 @@
 //
 
 #include <QObject>
-#include <QtTest>
 
 #include <GeoDataParser.h>
 #include <GeoDataDocument.h>

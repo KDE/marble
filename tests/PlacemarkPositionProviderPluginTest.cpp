@@ -8,13 +8,14 @@
 // Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
 #include "GeoDataTrack.h"
 #include "GeoDataPlacemark.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
 #include "MarbleModel.h"
 #include "TestUtils.h"
+
+#include <QSignalSpy>
 
 Q_DECLARE_METATYPE( Marble::GeoDataPlacemark * )
 

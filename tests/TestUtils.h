@@ -16,7 +16,8 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 
-#include <QtTest>
+#include <QBuffer>
+#include <QTest>
 
 namespace QTest
 {

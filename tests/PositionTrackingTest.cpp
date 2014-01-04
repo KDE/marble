@@ -8,12 +8,13 @@
 // Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
 
 #include "GeoDataTreeModel.h"
 #include "PositionProviderPlugin.h"
 #include "PositionTracking.h"
 #include "TestUtils.h"
+
+#include <QSignalSpy>
 
 class FakeProvider : public Marble::PositionProviderPlugin
 {

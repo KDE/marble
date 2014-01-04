@@ -9,7 +9,6 @@
 //
 
 #include <QObject>
-#include <QtTest>
 
 #include "PlacemarkTextAnnotation.h"
 #include "TextAnnotation.h"

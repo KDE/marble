@@ -9,7 +9,6 @@
 //
 
 #include <QtGui>
-#include <QtTest>
 #include <QTestEvent>
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"

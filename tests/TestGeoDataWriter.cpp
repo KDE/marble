@@ -9,7 +9,6 @@
 //
 
 #include <QObject>
-#include <QtTest>
 
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
@@ -18,6 +17,9 @@
 
 #include <QDir>
 #include <QFile>
+#include <QTest>
+#include <QTemporaryFile>
+#include <QTextStream>
 
 using namespace Marble;
 

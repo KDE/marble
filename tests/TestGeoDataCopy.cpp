@@ -8,13 +8,7 @@
 // Copyright 2009 Patrick Spendrin  <ps_ml@gmx.de>
 //
 
-#include <QtTest>
-#include <QCoreApplication>
-#include <QPointF>
-#include <QString>
-#include <QStringList>
 #include "MarbleDebug.h"
-
 #include "MarbleDirs.h"
 
 // Feature:
@@ -42,6 +36,12 @@
 #include "GeoDataLatLonBox.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"
+
+#include <QCoreApplication>
+#include <QPointF>
+#include <QString>
+#include <QStringList>
+#include <QTest>
 
 namespace Marble
 {

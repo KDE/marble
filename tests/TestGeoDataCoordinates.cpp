@@ -9,13 +9,17 @@
 // Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 // Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
-#include <QtTest>
-#include <QApplication>
 #include "MarbleGlobal.h"
 #include "MarbleWidget.h"
 #include "AbstractFloatItem.h"
 #include "GeoDataCoordinates.h"
 #include "TestUtils.h"
+
+#include <QApplication>
+#include <QLocale>
+#include <QDebug>
+#include <QTranslator>
+#include <QTemporaryFile>
 
 using namespace Marble;
 

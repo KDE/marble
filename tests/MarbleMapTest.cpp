@@ -8,11 +8,12 @@
 // Copyright 2011       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
 #include "GeoPainter.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "TestUtils.h"
+
+#include <QThreadPool>
 
 namespace Marble
 {

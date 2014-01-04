@@ -8,19 +8,19 @@
 // Copyright 2008 Patrick Spendrin  <ps_ml@gmx.de>
 //
 
-#include <QtTest>
-#include <QCoreApplication>
-#include <QString>
-#include <QBuffer>
-#include <QByteArray>
-#include <QDebug>
-
 #include "MarbleDirs.h"
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
+
+#include <QCoreApplication>
+#include <QString>
+#include <QBuffer>
+#include <QByteArray>
+#include <QDebug>
+#include <QTest>
 
 namespace Marble
 {

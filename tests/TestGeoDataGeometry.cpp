@@ -8,11 +8,11 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#include <QObject>
-#include <QtTest>
-
 #include "GeoDataPoint.h"
 #include "GeoDataLinearRing.h"
+
+#include <QObject>
+#include <QTest>
 
 using namespace Marble;
 

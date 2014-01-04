@@ -8,14 +8,15 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#include <QList>
-#include <QtTest>
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"
 #include "GeoPainter_p.h"
 #include "GeoPainter.h"
 #include "MarbleGlobal.h"
 #include "ViewportParams.h"
+
+#include <QList>
+#include <QTest>
 
 namespace Marble
 {

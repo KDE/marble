@@ -8,7 +8,6 @@
 // Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
 
 #include "RenderPluginModel.h"
 #include "MarbleMap.h"

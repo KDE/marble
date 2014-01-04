@@ -8,7 +8,6 @@
 // Copyright 2013       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
 
 #include "BillboardGraphicsItem.h"
 
@@ -18,6 +17,7 @@
 
 #include <QImage>
 #include <QPainter>
+#include <QTest>
 
 namespace Marble
 {

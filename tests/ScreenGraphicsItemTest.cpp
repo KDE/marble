@@ -8,11 +8,11 @@
 // Copyright 2013       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
 
 #include "ScreenGraphicsItem.h"
-
 #include "GeoGraphicsItem.h"
+
+#include <QTest>
 
 namespace Marble
 {

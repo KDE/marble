@@ -8,10 +8,10 @@
 // Copyright 2012       Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include <QtTest>
-#include <QBrush>
-
 #include "FrameGraphicsItem.h"
+
+#include <QBrush>
+#include <QTest>
 
 namespace Marble
 {
