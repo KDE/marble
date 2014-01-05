@@ -60,7 +60,7 @@ public:
     bool parse();
 
 private:
-    double getDoubleFromParameter( const QUrl& url, const QString& key, const QString& secondaryKey ) const;
+    QString queryValue( const QUrl& url, const QString& key, const QString& secondaryKey=QString() ) const;
 
     QString m_geoUri;
     GeoDataCoordinates m_coordinates;

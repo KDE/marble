@@ -10,6 +10,9 @@
 
 #include <QString>
 #include <QUrl>
+#if QT_VERSION >= 0x050000
+#include <QUrlQuery>
+#endif
 
 #include "Planet.h"
 #include "GeoUriParser.h"
@@ -46,13 +49,24 @@ Planet GeoUriParser::planet() const
     return m_planet;
 }
 
-double GeoUriParser::getDoubleFromParameter(const QUrl& url, const QString& one, const QString& two) const
+QString GeoUriParser::queryValue(const QUrl& url, const QString& one, const QString& two) const
 {
-    QString str = url.queryItemValue( one );
-    if ( str.isNull() && !two.isNull() ) {
-        str = url.queryItemValue( two );
+#if QT_VERSION < 0x050000
+    QString value = url.queryItemValue( one );
+    if ( value.isEmpty() && !two.isEmpty() ) {
+        value = url.queryItemValue( two );
     }
-    return str.toDouble();
+    return value;
+#else
+    QUrlQuery query( url );
+    if ( query.hasQueryItem( one ) ) {
+        return query.queryItemValue( one );
+    } else if ( query.hasQueryItem( two )  ) {
+        return query.queryItemValue( two );
+    }
+
+    return QString();
+#endif
 }
 
 bool GeoUriParser::parse()
@@ -103,14 +117,14 @@ bool GeoUriParser::parse()
         m_geoUri = m_geoUri.replace("goto/", "goto/?");
         QUrl worldwindUrl( m_geoUri );
 
-        double lat = getDoubleFromParameter(worldwindUrl, "lat", "latitude");
-        double lon = getDoubleFromParameter(worldwindUrl, "lon", "longitude");
-        double alt = getDoubleFromParameter(worldwindUrl, "alt", "altitude");
+        double lat = queryValue(worldwindUrl, "lat", "latitude").toDouble();
+        double lon = queryValue(worldwindUrl, "lon", "longitude").toDouble();
+        double alt = queryValue(worldwindUrl, "alt", "altitude").toDouble();
         //double bank = getDoubleFromParameter(worldwindUrl, "bank", "");
         //double dir = getDoubleFromParameter(worldwindUrl, "dir", "direction");
         //double tilt = getDoubleFromParameter(worldwindUrl, "tilt", "");
         //QString layer = worldwindUrl.queryItemValue("layer");
-        QString world = worldwindUrl.queryItemValue("world");
+        QString world = queryValue(worldwindUrl, "world");
 
         foreach ( const QString& str, Planet::planetList()) {
             if ( world.contains(str, Qt::CaseInsensitive) ) {
