@@ -122,7 +122,7 @@ void FlightGearPositionProviderPlugin::readPendingDatagrams()
         QList<QByteArray> splitted = datagram.split('\n');
         for (Iterator i = splitted.begin(); i != splitted.end(); i++) {
             fixBadGPRMC(*i);
-            *i->append( "\n" );
+            i->append( "\n" );
             parseNmeaSentence( *i );
         }
     }
