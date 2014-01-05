@@ -316,18 +316,16 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         }
         PopupLayer* popup = d->m_widget->popupLayer();
         popup->setSize(QSizeF(580, 620));
-        if (index->role().isEmpty() || isSatellite || isCity || isNation || isSky) {
-            if (isSatellite) {
-                d->setupDialogSatellite(popup, index);
-            } else if (isCity) {
-                d->setupDialogCity(popup, index);
-            } else if (isNation) {
-                d->setupDialogNation(popup, index);
-            } else if (isSky) {
-                d->setupDialogSkyPlaces(popup, index);
-            } else {
-                popup->setContent(index->description());
-            }
+        if (isSatellite) {
+            d->setupDialogSatellite(popup, index);
+        } else if (isCity) {
+            d->setupDialogCity(popup, index);
+        } else if (isNation) {
+            d->setupDialogNation(popup, index);
+        } else if (isSky) {
+            d->setupDialogSkyPlaces(popup, index);
+        } else if (index->role().isEmpty()) {
+            popup->setContent(index->description());
         } else {
             d->setupDialogGeoPlaces(popup, index);
         }
