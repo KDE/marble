@@ -215,7 +215,7 @@ void AnnotatePlugin::setDrawingPolygon( bool enabled )
         m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polygon_placemark );
     } else {
         //stopped drawing the polygon
-        GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( m_polygon_placemark->geometry() );
+        const GeoDataPolygon *poly = dynamic_cast<const GeoDataPolygon*>( m_polygon_placemark->geometry() );
         Q_ASSERT( poly );
         if ( !poly->outerBoundary().isEmpty() ) {
             AreaAnnotation* area = new AreaAnnotation( m_polygon_placemark );

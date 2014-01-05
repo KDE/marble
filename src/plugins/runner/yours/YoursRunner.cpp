@@ -148,9 +148,9 @@ qreal YoursRunner::distance( const GeoDataDocument* document ) const
     QVector<GeoDataFolder*> folders = document->folderList();
     foreach( const GeoDataFolder *folder, folders ) {
         foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
-            GeoDataGeometry* geometry = placemark->geometry();
+            const GeoDataGeometry* geometry = placemark->geometry();
             if ( geometry->geometryId() == GeoDataLineStringId ) {
-                GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
+                const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
                 Q_ASSERT( lineString && "Internal error: geometry ID does not match class type" );
                 return lineString->length( EARTH_RADIUS );
             }

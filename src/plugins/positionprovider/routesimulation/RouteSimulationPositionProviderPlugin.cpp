@@ -121,8 +121,8 @@ void RouteSimulationPositionProviderPlugin::initialize()
     GeoDataDocument* document = const_cast<MarbleModel *>( marbleModel() )->routingManager()->alternativeRoutesModel()->currentRoute();
     if ( document && document->size() > 0 ) {
         foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
-            GeoDataGeometry* geometry = placemark->geometry();
-            GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
+            const GeoDataGeometry* geometry = placemark->geometry();
+            const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
             if ( lineString ) {
                 m_lineString << *lineString;
             }

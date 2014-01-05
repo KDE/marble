@@ -36,8 +36,8 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
     painter->save();
     painter->setBrush( Oxygen::aluminumGray4 );
     if( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
-        GeoDataLinearRing &ring = polygon->outerBoundary();
+        const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( placemark()->geometry() );
+        const GeoDataLinearRing &ring = polygon->outerBoundary();
         for( int i=0; i< ring.size(); ++i ) {
             painter->drawEllipse( ring.at(i) , 10, 10 );
             regionList.append( painter->regionFromEllipse( ring.at(i), 10, 10 ));

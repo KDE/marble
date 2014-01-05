@@ -54,12 +54,12 @@ void MonavMap::parseBoundingBox( const QFileInfo &file )
             m_date = placemark->extendedData().value( "date" ).value().toString();
             m_transport = placemark->extendedData().value( "transport" ).value().toString();
             m_payload = placemark->extendedData().value( "payload" ).value().toString();
-            GeoDataMultiGeometry* geometry = dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() );
+            const GeoDataMultiGeometry* geometry = dynamic_cast<const GeoDataMultiGeometry*>( placemark->geometry() );
             if ( geometry->size() > 1500 ) {
                 tooLarge = true;
             }
             for ( int i = 0; geometry && i < geometry->size(); ++i ) {
-                GeoDataLinearRing* poly = dynamic_cast<GeoDataLinearRing*>( geometry->child( i ) );
+                const GeoDataLinearRing* poly = dynamic_cast<const GeoDataLinearRing*>( geometry->child( i ) );
                 if ( poly ) {
                     for ( int j = 0; j < poly->size(); ++j ) {
                         points << poly->at( j );
