@@ -55,7 +55,7 @@ public:
     /**
       * Returns the distance between the given polygon and the given point
       */
-    static qreal distance( GeoDataLineString* wayPoints, const GeoDataCoordinates &position );
+    static qreal distance( const GeoDataLineString* wayPoints, const GeoDataCoordinates &position );
 
     /**
       * Returns the bearing of the great circle path defined by the coordinates one and two
@@ -145,7 +145,7 @@ qreal AlternativeRoutesModelPrivate::similarity( const GeoDataDocument* routeA, 
                         unidirectionalSimilarity( routeB, routeA ) );
 }
 
-qreal AlternativeRoutesModelPrivate::distance( GeoDataLineString* wayPoints, const GeoDataCoordinates &position )
+qreal AlternativeRoutesModelPrivate::distance( const GeoDataLineString* wayPoints, const GeoDataCoordinates &position )
 {
     Q_ASSERT( wayPoints && !wayPoints->isEmpty() );
     qreal minDistance = 0;
@@ -198,8 +198,8 @@ qreal AlternativeRoutesModelPrivate::distance( const GeoDataCoordinates &satelli
 
 qreal AlternativeRoutesModelPrivate::unidirectionalSimilarity( const GeoDataDocument* routeA, const GeoDataDocument* routeB )
 {
-    GeoDataLineString* waypointsA = waypoints( routeA );
-    GeoDataLineString* waypointsB = waypoints( routeB );
+    const GeoDataLineString* waypointsA = waypoints( routeA );
+    const GeoDataLineString* waypointsB = waypoints( routeB );
     if ( !waypointsA || !waypointsB )
     {
         return 0.0;
@@ -411,8 +411,8 @@ qreal AlternativeRoutesModel::distance( const GeoDataCoordinates &satellite, con
 
 QVector<qreal> AlternativeRoutesModel::deviation( const GeoDataDocument* routeA, const GeoDataDocument* routeB )
 {
-    GeoDataLineString* waypointsA = waypoints( routeA );
-    GeoDataLineString* waypointsB = waypoints( routeB );
+    const GeoDataLineString* waypointsA = waypoints( routeA );
+    const GeoDataLineString* waypointsB = waypoints( routeB );
     QVector<qreal> result;
     for ( int a=0; a<waypointsA->size(); ++a ) {
         result.push_back( AlternativeRoutesModelPrivate::distance( waypointsB, waypointsA->at( a ) ) );

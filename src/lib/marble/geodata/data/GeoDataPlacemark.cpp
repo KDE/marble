@@ -84,9 +84,9 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
         // Beware: comparison between pointers, not strings.
         if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType ) {
             hasIcon = true;
-            coord = static_cast<GeoDataPoint *>( p()->m_geometry )->coordinates();
+            coord = static_cast<const GeoDataPoint *>( p()->m_geometry )->coordinates();
         } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
-            GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry *>( p()->m_geometry );
+            const GeoDataMultiGeometry *multiGeometry = static_cast<const GeoDataMultiGeometry *>( p()->m_geometry );
 
             QVector<GeoDataGeometry*>::ConstIterator it = multiGeometry->constBegin();
             QVector<GeoDataGeometry*>::ConstIterator end = multiGeometry->constEnd();
@@ -99,7 +99,7 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
 
             coord = p()->m_geometry->latLonAltBox().center();
         } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataTrackType ) {
-            GeoDataTrack *track = static_cast<GeoDataTrack *>( p()->m_geometry );
+            const GeoDataTrack *track = static_cast<const GeoDataTrack *>( p()->m_geometry );
             hasIcon = track->size() != 0 && track->firstWhen() <= dateTime;
             coord = track->coordinatesAt( dateTime );
         } else {

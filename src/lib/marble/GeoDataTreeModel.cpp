@@ -110,7 +110,7 @@ bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
-        return dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() );
+        return dynamic_cast<const GeoDataMultiGeometry*>( placemark->geometry() );
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataFolderType
@@ -169,7 +169,7 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
-        if ( dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() ) ) {
+        if ( dynamic_cast<const GeoDataMultiGeometry*>( placemark->geometry() ) ) {
 //            mDebug() << "rowCount " << type << "(" << parentItem << ") = 1";
             return 1;
         }

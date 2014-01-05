@@ -236,7 +236,7 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
     for ( int i=0; i<m_alternativeRoutesModel->rowCount(); ++i ) {
         GeoDataDocument* route = m_alternativeRoutesModel->route( i );
         if ( route && route != m_alternativeRoutesModel->currentRoute() ) {
-            GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
+            const GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
             if ( points ) {
                 painter->drawPolyline( *points );
                 if ( m_viewportChanged && m_viewContext == Still ) {

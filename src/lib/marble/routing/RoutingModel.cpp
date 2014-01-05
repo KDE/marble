@@ -88,8 +88,8 @@ void RoutingModelPrivate::updateViaPoints( const GeoDataCoordinates &position )
 
 void RoutingModelPrivate::importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark )
 {
-    GeoDataGeometry* geometry = placemark->geometry();
-    GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
+    const GeoDataGeometry* geometry = placemark->geometry();
+    const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
     QStringList blacklist = QStringList() << "" << "Route" << "Tessellated";
     RouteSegment segment;
     bool isOutline = true;

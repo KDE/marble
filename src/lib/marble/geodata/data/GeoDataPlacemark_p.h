@@ -49,25 +49,25 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
             case InvalidGeometryId:
                 break;
             case GeoDataPointId:
-                geometry = new GeoDataPoint( *static_cast<GeoDataPoint*>( other.m_geometry ) );
+                geometry = new GeoDataPoint( *static_cast<const GeoDataPoint*>( other.m_geometry ) );
                 break;
             case GeoDataLineStringId:
-                geometry = new GeoDataLineString( *static_cast<GeoDataLineString*>( other.m_geometry ) );
+                geometry = new GeoDataLineString( *static_cast<const GeoDataLineString*>( other.m_geometry ) );
                 break;
             case GeoDataLinearRingId:
-                geometry = new GeoDataLinearRing( *static_cast<GeoDataLinearRing*>( other.m_geometry ) );
+                geometry = new GeoDataLinearRing( *static_cast<const GeoDataLinearRing*>( other.m_geometry ) );
                 break;
             case GeoDataPolygonId:
-                geometry = new GeoDataPolygon( *static_cast<GeoDataPolygon*>( other.m_geometry ) );
+                geometry = new GeoDataPolygon( *static_cast<const GeoDataPolygon*>( other.m_geometry ) );
                 break;
             case GeoDataMultiGeometryId:
-                geometry = new GeoDataMultiGeometry( *static_cast<GeoDataMultiGeometry*>( other.m_geometry ) );
+                geometry = new GeoDataMultiGeometry( *static_cast<const GeoDataMultiGeometry*>( other.m_geometry ) );
                 break;
             case GeoDataTrackId:
-                geometry = new GeoDataTrack( *static_cast<GeoDataTrack*>( other.m_geometry ) );
+                geometry = new GeoDataTrack( *static_cast<const GeoDataTrack*>( other.m_geometry ) );
                 break;
             case GeoDataMultiTrackId:
-                geometry = new GeoDataMultiTrack( *static_cast<GeoDataMultiTrack*>( other.m_geometry ) );
+                geometry = new GeoDataMultiTrack( *static_cast<const GeoDataMultiTrack*>( other.m_geometry ) );
                 break;
             case GeoDataModelId:
                 break;

@@ -176,7 +176,7 @@ void Routing::openRoute( const QString &fileName )
         routingManager->loadRoute( target );
         Marble::GeoDataDocument* route = routingManager->alternativeRoutesModel()->currentRoute();
         if ( route ) {
-            Marble::GeoDataLineString* waypoints = routingManager->alternativeRoutesModel()->waypoints( route );
+            const Marble::GeoDataLineString* waypoints = Marble::AlternativeRoutesModel::waypoints( route );
             if ( waypoints ) {
                 d->m_marbleWidget->centerOn( waypoints->latLonAltBox() );
             }
