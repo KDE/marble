@@ -36,6 +36,7 @@ GeoDataPlacemark::GeoDataPlacemark()
 GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
 : GeoDataFeature( other )
 {
+    // FIXME: violates invariant of this == p()->m_geometry->parent() for other (which could lead to crashes)
     p()->m_geometry->setParent( this );
 }
 
