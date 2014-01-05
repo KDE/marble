@@ -29,7 +29,6 @@
         
         <map bgcolor="#99b3cc">
             <canvas/>
-            <!-- In this place one could e.g. insert a sky plugin -->
             <target/>
         
             <!-- This layer creates the elevation model -->
@@ -51,16 +50,16 @@
             
             <!-- This layer creates the coastlines that are needed to
                 colorize the elevation model properly -->
-            <layer name="mwdbii-canvas" backend="geodata">
-                <geodata name="pcoast" property="land" colorize="land">
+            <layer name="naturalearth-canvas" backend="geodata">
+                <geodata name="coast" property="land" colorize="land">
                     <sourcefile> naturalearth/ne_50m_land.pn2 </sourcefile>
                 </geodata>
-                <geodata name="plake" property="waterbodies" colorize="sea">
+                <geodata name="lake" property="waterbodies" colorize="sea">
                     <sourcefile> naturalearth/ne_50m_lakes.pn2 </sourcefile>
                     <brush color="f00e0eff" />
                     <pen color="transparent" style="nopen"/>
                 </geodata>
-                <geodata name="pglacier" property="ice" colorize="sea">
+                <geodata name="glacier" property="ice" colorize="sea">
                     <sourcefile> naturalearth/ne_50m_glaciated_areas.pn2 </sourcefile>
                     <brush color="ffffffff" />
                     <pen color="transparent" style="nopen"/>
@@ -68,7 +67,7 @@
             </layer>
         
         
-            <layer name="mwdbii" backend="geodata">
+            <layer name="naturalearth" backend="geodata">
                 <geodata name="lakeshistoric" property="waterbodies">
                     <sourcefile> naturalearth/ne_50m_lakes_historic.pn2 </sourcefile>
                     <pen color="#bfd5ee" style="dotline"/>
@@ -84,7 +83,7 @@
                     <pen color="#5182b4" style="dashline"/>
                     <brush color="transparent" />
                 </geodata>
-                <geodata name="pdiffborder" property="borders">
+                <geodata name="border" property="borders">
                     <sourcefile> naturalearth/ne_50m_admin_0_boundary_lines_land.pn2 </sourcefile>
                     <pen color="#f86649" width="1.0" />
                 </geodata>
@@ -102,7 +101,7 @@
                     <pen color="#dfc5af" />
                     <brush color="#dfc5af" alpha="0.60" />
                 </geodata>
-                <geodata name="pusa48" property="borders">
+                <geodata name="admin1" property="borders">
                     <sourcefile> naturalearth/ne_50m_admin_1_states_provinces_lines.pn2 </sourcefile>
                     <pen color="#f86649" style="dashdotline" />
                 </geodata>
