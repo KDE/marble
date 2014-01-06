@@ -92,9 +92,9 @@ QString& TemplateDocument::operator[](const QString &key)
 QString TemplateDocument::finalText() const
 {
     QString ready = d->templateText;
-    typedef QMap<QString, QString>::ConstIterator Iterator;
-    Iterator end = d->templateEntries.end();
-    for (Iterator i = d->templateEntries.constBegin(); i != end; i++) {
+    typedef QMap<QString, QString>::ConstIterator ConstIterator;
+    ConstIterator end = d->templateEntries.constEnd();
+    for (ConstIterator i = d->templateEntries.constBegin(); i != end; i++) {
         ready.replace("%" + i.key() + "%", i.value());
     }
     d->processTemplateIncludes(ready);
