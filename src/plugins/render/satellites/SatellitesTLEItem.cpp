@@ -85,9 +85,12 @@ void SatellitesTLEItem::update()
         return;
     }
 
-    QDateTime startTime = m_clock->dateTime().addSecs( - 2 * 60 );
-
-    QDateTime endTime = startTime.addSecs( period() );
+    QDateTime startTime = m_clock->dateTime();
+    QDateTime endTime = startTime;
+    if( isTrackVisible() ) {
+        startTime = startTime.addSecs( -2 * 60 );
+        endTime = startTime.addSecs( period() );
+    }
 
     m_track->removeBefore( startTime );
     m_track->removeAfter( endTime );

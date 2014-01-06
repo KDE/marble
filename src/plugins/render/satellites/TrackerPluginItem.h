@@ -55,7 +55,7 @@ public:
     virtual bool isEnabled() const;
 
     /**
-     * Enable/Disable the item according to @p enabled.
+     * Enable/Disable the item following the user checkbox action according to @p enabled.
      */
     virtual void setEnabled( bool enabled );
 
@@ -68,6 +68,16 @@ public:
      * Set item visible/invisible according to @p visible.
      */
     virtual void setVisible( bool visible );
+
+    /**
+     * Return whether the track is visible or invisible.
+     */
+    virtual bool isTrackVisible() const;
+
+    /**
+     * Set item track visible/invisible according to @p visible.
+     */
+    virtual void setTrackVisible( bool visible );
 
     /**
      * Reimplement this method to update the placemark, for example to change its coordinates.

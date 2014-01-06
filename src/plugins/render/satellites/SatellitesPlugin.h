@@ -62,6 +62,8 @@ public:
                  const QString &renderPos,
                  GeoSceneLayer *layer );
 
+    bool eventFilter( QObject *object, QEvent *event );
+
     QHash<QString, QVariant> settings() const;
     void setSettings( const QHash<QString, QVariant> &settings );
 
@@ -78,6 +80,9 @@ private Q_SLOTS:
     void dataSourceParsed( const QString &source );
     void userDataSourceAdded( const QString &source );
 
+    void showOrbit( bool show );
+    void trackPlacemark();
+
 protected:
     void activateDataSource( const QString &source );
     void addBuiltInDataSources();
@@ -91,6 +96,10 @@ private:
     QStringList m_newDataSources;
 
     SatellitesConfigDialog *m_configDialog;
+
+    QAction *m_showOrbitAction;
+    QAction *m_trackPlacemarkAction;
+    QVector<TrackerPluginItem*> m_trackerList;
 };
 
 } // namespace Marble

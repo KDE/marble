@@ -20,13 +20,15 @@ public:
     TrackerPluginItemPrivate( const QString &name, GeoDataPlacemark *placemark )
         : m_name( name ),
           m_placemark( placemark ),
-          m_enabled( false )
+          m_enabled( false ),
+          m_trackVisible( false )
     {
     }
 
     QString m_name;
     GeoDataPlacemark *m_placemark;
     bool m_enabled;
+    bool m_trackVisible;
 };
 
 TrackerPluginItem::TrackerPluginItem( const QString &name )
@@ -67,6 +69,16 @@ bool TrackerPluginItem::isVisible() const
 void TrackerPluginItem::setVisible( bool visible )
 {
     d->m_placemark->setVisible( visible );
+}
+
+bool TrackerPluginItem::isTrackVisible() const
+{
+    return d->m_trackVisible;
+}
+
+void TrackerPluginItem::setTrackVisible( bool visible )
+{
+    d->m_trackVisible = visible;
 }
 
 } // namespace Marble

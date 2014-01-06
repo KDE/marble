@@ -246,9 +246,6 @@ void MarbleWidgetPrivate::construct()
 
     m_popupmenu = new MarbleWidgetPopupMenu( m_widget, &m_model );
 
-    m_widget->connect( m_popupmenu, SIGNAL(trackPlacemark(const GeoDataPlacemark*)),
-                       &m_model, SLOT(setTrackedPlacemark(const GeoDataPlacemark*)) );
-
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
     m_routingLayer->setPlacemarkModel( 0 );
     QObject::connect( m_routingLayer, SIGNAL(repaintNeeded(QRect)),

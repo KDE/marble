@@ -147,15 +147,18 @@ void SatellitesMSCItem::update()
     }
 
     double period = 24  * 3600 / m_n0;
-    QDateTime startTime = m_clock->dateTime().addSecs( - period / 2. );
-    QDateTime endTime = startTime.addSecs( period );
+    QDateTime startTime = m_clock->dateTime();
+    QDateTime endTime = startTime;
+    if( isTrackVisible() ) {
+        startTime = startTime.addSecs( - period / 2. );
+        endTime = startTime.addSecs( period );
+    }
 
     m_track->removeBefore( startTime );
     m_track->removeAfter( endTime );
 
     double step = period / 500.;
 
-    // FIXME update track only if orbit is visible
     for( double i = startTime.toTime_t(); i < endTime.toTime_t(); i += step ) {
 
         if ( i >= m_track->firstWhen().toTime_t() ) {

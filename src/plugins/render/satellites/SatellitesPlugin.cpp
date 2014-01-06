@@ -12,6 +12,8 @@
 #include "SatellitesPlugin.h"
 
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
+#include "MarbleWidgetPopupMenu.h"
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
 #include "SatellitesMSCItem.h"
@@ -24,7 +26,7 @@
 #include "ui_SatellitesConfigDialog.h"
 
 #include <QUrl>
-#include <QPushButton>
+#include <QMouseEvent>
 
 namespace Marble
 {
@@ -45,6 +47,15 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
 
     setVisible( false );
     setSettings( QHash<QString, QVariant>() );
+
+    m_showOrbitAction = new QAction( tr( "Display orbit" ), this );
+    m_showOrbitAction->setCheckable( true );
+    m_showOrbitAction->setData( 0 );
+
+    m_trackPlacemarkAction = new QAction( tr( "Keep centered" ), this );
+    m_trackPlacemarkAction->setData( 0 );
+    connect( m_showOrbitAction, SIGNAL(triggered(bool)), SLOT(showOrbit(bool)) );
+    connect( m_trackPlacemarkAction, SIGNAL(triggered(bool)), SLOT(trackPlacemark()) );
 }
 
 SatellitesPlugin::~SatellitesPlugin()
@@ -179,6 +190,66 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     enableModel( enabled() );
 
     return true;
+}
+
+bool SatellitesPlugin::eventFilter( QObject *object, QEvent *event )
+{
+    // only if active plugin
+    if( !enabled() || !visible() ) {
+        return false;
+    }
+
+    if( event->type() != QEvent::MouseButtonPress )
+    {
+        return false;
+    }
+
+    MarbleWidget *widget = qobject_cast<MarbleWidget*> ( object );
+    Q_ASSERT ( widget );
+
+    QMouseEvent* mouseEvent = dynamic_cast<QMouseEvent*>(event);
+    Q_ASSERT( mouseEvent );
+
+    if( mouseEvent->button() == Qt::LeftButton ) {
+        m_trackerList.clear();
+        QVector<const GeoDataPlacemark*> vector = widget->whichFeatureAt( mouseEvent->pos() );
+        foreach (const GeoDataPlacemark *placemark, vector) {
+            foreach (TrackerPluginItem *obj, m_satModel->items() ) {
+                if( obj->placemark() == placemark ) {
+                    m_showOrbitAction->data() = m_trackerList.size();
+                    m_showOrbitAction->setChecked( obj->isTrackVisible() );
+                    widget->popupMenu()->addAction( Qt::LeftButton, m_showOrbitAction );
+
+                    m_trackPlacemarkAction->data() = m_trackerList.size();
+                    widget->popupMenu()->addAction( Qt::LeftButton, m_trackPlacemarkAction );
+
+                    m_trackerList.append( obj );
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void SatellitesPlugin::showOrbit(bool show)
+{
+    QAction *action = qobject_cast<QAction *>( sender() );
+    Q_ASSERT( action );
+
+    int actionIndex = action->data().toInt();
+    TrackerPluginItem *item = m_trackerList.at( actionIndex );
+    item->setTrackVisible( show );
+    m_satModel->updateVisibility();
+}
+
+void SatellitesPlugin::trackPlacemark()
+{
+    QAction *action = qobject_cast<QAction *>( sender() );
+    Q_ASSERT( action );
+
+    int actionIndex = action->data().toInt();
+    TrackerPluginItem *item = m_trackerList.at( actionIndex );
+    const_cast<MarbleModel *>( marbleModel() )->setTrackedPlacemark( item->placemark() );
 }
 
 QHash<QString, QVariant> SatellitesPlugin::settings() const

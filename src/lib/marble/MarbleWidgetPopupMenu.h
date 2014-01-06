@@ -51,17 +51,13 @@ class MARBLE_EXPORT MarbleWidgetPopupMenu  : public QObject
      */
     QPoint mousePosition() const;
 
-Q_SIGNALS:
-    void trackPlacemark( const GeoDataPlacemark *placemark );
-
  public Q_SLOTS:
     void  showLmbMenu( int, int );
     void  showRmbMenu( int, int );
 
 private Q_SLOTS:
+    void resetMenu();
     void slotInfoDialog();
-    void slotShowOrbit( bool show );
-    void slotTrackPlacemark();
     void slotCopyCoordinates();
     void slotAboutDialog();
 
