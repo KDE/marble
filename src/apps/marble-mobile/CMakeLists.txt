@@ -21,7 +21,7 @@ set( marblemobile_SRCS
   StackableWindow.cpp
 )
 
-add_definitions(-DMARBLE_MOBILE_VERSION_STRING="1.6.20")
+add_definitions(-DMARBLE_MOBILE_VERSION_STRING="1.7.20")
 
 marble_qt4_automoc( ${marblemobile_SRCS} )
 add_executable( marble-mobile ${marblemobile_SRCS} )
