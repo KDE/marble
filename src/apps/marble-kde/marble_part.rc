@@ -23,6 +23,9 @@
     <Action name="edit_copy_coordinates"/>
     <Separator/>
     <Action name="external_editor"/>
+    <Separator/>
+    <Action name="record_movie" />
+    <Action name="stop_recording" />
   </Menu>
   <Menu name="view" noMerge="1">
     <text>&amp;View</text>

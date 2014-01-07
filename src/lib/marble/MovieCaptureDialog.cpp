@@ -92,27 +92,16 @@ void MovieCaptureDialog::startRecording()
         return;
     }
 
-    disconnect(ui->startButton, SIGNAL(clicked()),
-                this, SLOT(startRecording()));
-    connect(ui->startButton, SIGNAL(clicked()),
-            this, SLOT(stopRecording()));
-    ui->startButton->setText(tr("Stop"));
-
     hide();
 
     m_recorder->setFps(ui->fpsSlider->value());
     m_recorder->startRecording();
+    emit started();
 }
 
 void MovieCaptureDialog::stopRecording()
 {
     m_recorder->stopRecording();
-
-    ui->startButton->setText(tr("Start"));
-    connect(ui->startButton, SIGNAL(clicked()),
-            this, SLOT(stopRecording()));
-    connect(ui->startButton, SIGNAL(clicked()),
-            this, SLOT(startRecording()));
 }
 
 } // namespace Marble

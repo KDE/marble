@@ -45,6 +45,7 @@ class StatusBarExtension;
 namespace Marble
 {
 
+class MovieCaptureDialog;
 class ControlView;
 class DownloadRegionDialog;
 class RoutingProfilesWidget;
@@ -91,6 +92,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  setShowBookmarks( bool isChecked );
     void  showFullScreen( bool );
     void  showStatusBar( bool );
+    void  changeRecordingState();
 
     /**
      * @brief Show the dateTime label in the status bar.
@@ -176,6 +178,8 @@ class MarblePart: public KParts::ReadOnlyPart
 //    void  createBookmarkMenu();
 
     void  updateMapEditButtonVisibility( const QString &mapTheme );
+    void  showMovieCaptureDialog();
+    void  stopRecording();
     void  updateCloudSyncCredentials();
 
   private:
@@ -201,6 +205,7 @@ class MarblePart: public KParts::ReadOnlyPart
     SunControlWidget  *m_sunControlDialog;
     TimeControlWidget *m_timeControlDialog;
     DownloadRegionDialog *m_downloadRegionDialog;
+    MovieCaptureDialog *m_movieCaptureDialog;
 
     // Actions for the GUI.
     KAction      *m_exportMapAction;
@@ -219,6 +224,8 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_lockFloatItemsAct;
     KAction      *m_mapWizardAct;
     KAction      *m_externalMapEditorAction;
+    KAction      *m_recordMovieAction;
+    KAction      *m_stopRecordingAction;
     KRecentFilesAction *m_recentFilesAction;
 
     //Bookmark Menu

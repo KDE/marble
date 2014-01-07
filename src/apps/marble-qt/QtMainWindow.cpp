@@ -243,6 +243,13 @@ void MainWindow::createActions()
      connect(m_recordMovieAction, SIGNAL(triggered()),
              this, SLOT(showMovieCaptureDialog()));
 
+     m_stopRecordingAction = new QAction( tr("&Stop recording"), this );
+     m_stopRecordingAction->setStatusTip( tr("Stop recording a movie of the globe") );
+     m_stopRecordingAction->setShortcut(QKeySequence( "Ctrl+Shift+S" ));
+     m_stopRecordingAction->setEnabled( false );
+     connect( m_stopRecordingAction, SIGNAL(triggered()),
+             this, SLOT(stopRecording()) );
+
      m_configDialogAct = new QAction( QIcon(":/icons/settings-configure.png"),tr("&Configure Marble"), this);
      m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
      connect(m_configDialogAct, SIGNAL(triggered()), this, SLOT(editSettings()));
@@ -422,6 +429,7 @@ void MainWindow::createMenus( const QList<QAction*> &panelActions )
         m_fileMenu->addAction( m_osmEditAction );
         m_fileMenu->addSeparator();
         m_fileMenu->addAction(m_recordMovieAction);
+        m_fileMenu->addAction(m_stopRecordingAction);
 
         m_viewMenu = menuBar()->addMenu(tr("&View"));
         m_infoBoxesMenu = new QMenu( "&Info Boxes" );
@@ -1507,8 +1515,23 @@ void MainWindow::showMovieCaptureDialog()
     if (m_movieCaptureDialog == 0) {
         m_movieCaptureDialog = new MovieCaptureDialog(m_controlView->marbleWidget(),
                                                       m_controlView->marbleWidget());
+        connect( m_movieCaptureDialog, SIGNAL(started()), this, SLOT(changeRecordingState()));
     }
     m_movieCaptureDialog->show();
+}
+
+void MainWindow::stopRecording()
+{
+    if ( m_movieCaptureDialog ) {
+        m_movieCaptureDialog->stopRecording();
+        changeRecordingState();
+    }
+}
+
+void MainWindow::changeRecordingState()
+{
+    m_recordMovieAction->setEnabled( !m_recordMovieAction->isEnabled() );
+    m_stopRecordingAction->setEnabled( !m_stopRecordingAction->isEnabled() );
 }
 
 void MainWindow::showMapWizard()

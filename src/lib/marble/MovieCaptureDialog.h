@@ -39,6 +39,9 @@ public slots:
 private slots:
     void loadDestinationFile();
 
+signals:
+    void started();
+
 private:
     Ui::MovieCaptureDialog *ui;
     MovieCapture *m_recorder;

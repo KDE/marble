@@ -81,6 +81,8 @@ private Q_SLOTS:
     
     void  fallBackToDefaultTheme();
 
+    void  changeRecordingState();
+
     // File Menu
     void  openFile();
     void  openMapDialog();
@@ -95,6 +97,7 @@ private Q_SLOTS:
     void  copyCoordinates();
     void  updateMapEditButtonVisibility( const QString &mapTheme );
     void  showMovieCaptureDialog();
+    void  stopRecording();
 
     // View Menu
     void  lockPosition( bool );
@@ -176,6 +179,7 @@ private:
     QAction *m_copyCoordinatesAct;
     QAction *m_osmEditAction;
     QAction *m_recordMovieAction;
+    QAction *m_stopRecordingAction;
 
     // View Menu
     QAction *m_showCloudsAct;

@@ -98,12 +98,12 @@ void MovieCapture::startRecording()
         QProcess encoder(this);
         encoder.start("avconv -version");
         encoder.waitForFinished();
-        if (encoder.exitCode() == 0) { // avconv exits with 0 when it's here
+        if ( !encoder.readAll().isEmpty() ) { // avconv have output when it's here
             d->encoderExec = "avconv";
         } else {
             encoder.start("ffmpeg -version");
             encoder.waitForFinished();
-            if (encoder.exitCode() == 0) {
+            if ( !encoder.readAll().isEmpty() ) {
                 d->encoderExec = "ffmpeg";
             } else {
                 return;
@@ -132,11 +132,11 @@ void MovieCapture::stopRecording()
     QString input = QString("%1/marble-%2-frame-%06d.bmp")
             .arg(d->tempDir.path()).arg(d->sessionId);
     QString output = d->destinationFile;
-    QString argv = QString("-i %1 -r %2 -b 2000k %3")
+    QString argv = QString("-i %1 -r %2 -b 2000k -y %3")
             .arg(input).arg(fps()).arg(output);
 
-    avconv->start(d->encoderExec+' '+argv);
     connect(avconv, SIGNAL(finished(int)), this, SLOT(processWrittenMovie(int)));
+    avconv->start(d->encoderExec+' '+argv);
 }
 
 void MovieCapture::processWrittenMovie(int exitCode)

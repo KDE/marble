@@ -98,6 +98,7 @@
 #include "Planet.h"
 #include "MapThemeDownloadDialog.h"
 #include "cloudsync/BookmarkSyncManager.h"
+#include "MovieCaptureDialog.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -129,7 +130,10 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_sunControlDialog( 0 ),
     m_timeControlDialog( 0 ),
     m_downloadRegionDialog( 0 ),
+    m_movieCaptureDialog( 0 ),
     m_externalMapEditorAction( 0 ),
+    m_recordMovieAction( 0 ),
+    m_stopRecordingAction( 0 ),
     m_recentFilesAction( 0 ),
     m_configDialog( 0 ),
     m_wallet( 0 ),
@@ -1000,6 +1004,22 @@ void MarblePart::setupActions()
              m_controlView, SLOT(launchExternalMapEditor()) );
     connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
              this, SLOT(updateMapEditButtonVisibility(QString)) );
+
+     m_recordMovieAction = new KAction( tr( "&Record Movie" ), this );
+     actionCollection()->addAction( "record_movie" , m_recordMovieAction );
+     m_recordMovieAction->setStatusTip( tr( "Records a movie of the globe" ) );
+     m_recordMovieAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_R );
+     m_recordMovieAction->setIcon( KIcon( ":/icons/animator.png" ) );
+     connect( m_recordMovieAction, SIGNAL(triggered()),
+             this, SLOT(showMovieCaptureDialog()) );
+
+     m_stopRecordingAction = new KAction( tr( "&Stop recording" ), this );
+     actionCollection()->addAction( "stop_recording" , m_stopRecordingAction );
+     m_stopRecordingAction->setStatusTip( tr( "Stop recording a movie of the globe" ) );
+     m_recordMovieAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_S );
+     m_stopRecordingAction->setEnabled( false );
+     connect( m_stopRecordingAction, SIGNAL(triggered()),
+             this, SLOT(stopRecording()) );
 }
 
 void MarblePart::createFolderList()
@@ -1888,6 +1908,30 @@ void MarblePart::updateMapEditButtonVisibility( const QString &mapTheme )
 void MarblePart::fallBackToDefaultTheme()
 {
     m_controlView->marbleWidget()->setMapThemeId( m_controlView->defaultMapThemeId() );
+}
+
+void MarblePart::showMovieCaptureDialog()
+{
+    if (m_movieCaptureDialog == 0) {
+        m_movieCaptureDialog = new MovieCaptureDialog(m_controlView->marbleWidget(),
+                                                      m_controlView->marbleWidget());
+        connect( m_movieCaptureDialog, SIGNAL(started()), this, SLOT(changeRecordingState()));
+    }
+    m_movieCaptureDialog->show();
+}
+
+void MarblePart::stopRecording()
+{
+    if ( m_movieCaptureDialog ) {
+        m_movieCaptureDialog->stopRecording();
+        changeRecordingState();
+    }
+}
+
+void MarblePart::changeRecordingState()
+{
+    m_recordMovieAction->setEnabled( !m_recordMovieAction->isEnabled() );
+    m_stopRecordingAction->setEnabled( !m_stopRecordingAction->isEnabled() );
 }
 
 }
