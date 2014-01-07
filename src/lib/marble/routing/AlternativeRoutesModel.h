@@ -78,7 +78,7 @@ public:
     GeoDataDocument* currentRoute();
 
     /** Returns the waypoints contained in the route as a linestring */
-    static GeoDataLineString* waypoints( const GeoDataDocument* document );
+    static const GeoDataLineString* waypoints( const GeoDataDocument* document );
 
     /** Returns the distance between the given point and the given great circle path */
     static qreal distance( const GeoDataCoordinates &satellite, const GeoDataCoordinates &lineA, const GeoDataCoordinates &lineB );

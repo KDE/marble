@@ -90,7 +90,7 @@ public:
       */
     static qreal instructionScore( const GeoDataDocument* document );
 
-    static GeoDataLineString* waypoints( const GeoDataDocument* document );
+    static const GeoDataLineString* waypoints( const GeoDataDocument* document );
 
     static int nonZero( const QImage &image );
 
@@ -270,13 +270,13 @@ qreal AlternativeRoutesModelPrivate::instructionScore( const GeoDataDocument* do
     return hasInstructions ? 0.5 : 0.0;
 }
 
-GeoDataLineString* AlternativeRoutesModelPrivate::waypoints( const GeoDataDocument* document )
+const GeoDataLineString* AlternativeRoutesModelPrivate::waypoints( const GeoDataDocument* document )
 {
     QVector<GeoDataFolder*> folders = document->folderList();
     foreach( const GeoDataFolder *folder, folders ) {
         foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
-            GeoDataGeometry* geometry = placemark->geometry();
-            GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
+            const GeoDataGeometry* geometry = placemark->geometry();
+            const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
             if ( lineString ) {
                 return lineString;
             }
@@ -284,8 +284,8 @@ GeoDataLineString* AlternativeRoutesModelPrivate::waypoints( const GeoDataDocume
     }
 
     foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
-        GeoDataGeometry* geometry = placemark->geometry();
-        GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
+        const GeoDataGeometry* geometry = placemark->geometry();
+        const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
         if ( lineString ) {
             return lineString;
         }
@@ -429,7 +429,7 @@ void AlternativeRoutesModel::update( GeoDataDocument* route )
     }
 }
 
-GeoDataLineString* AlternativeRoutesModel::waypoints( const GeoDataDocument* document )
+const GeoDataLineString* AlternativeRoutesModel::waypoints( const GeoDataDocument* document )
 {
     return AlternativeRoutesModelPrivate::waypoints( document );
 }

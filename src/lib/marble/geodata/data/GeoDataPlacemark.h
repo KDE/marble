@@ -100,8 +100,9 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * along with the icon at the coordinate associated with this Placemark.
      * @return a pointer to the current Geometry object
      */
-    GeoDataGeometry* geometry() const;
-    
+    GeoDataGeometry* geometry();
+    const GeoDataGeometry* geometry() const;
+
     /**
      * Return the coordinates of the placemark as @p longitude,
      * @p latitude and @p altitude.
