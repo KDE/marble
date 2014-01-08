@@ -45,7 +45,7 @@ public:
     };
 
     qreal rotation() const;
-    void setRotation( const qreal &rotation );
+    void setRotation( const qreal rotation );
 
     GeoDataViewVolume &viewVolume();
     const GeoDataViewVolume& viewVolume() const;
@@ -58,9 +58,8 @@ public:
     GeoDataPoint& point() const;
     void setPoint( const GeoDataPoint &point );
 
-    Shape& shape();
-    const Shape& shape() const;
-    void setShape( const Shape &shape );
+    Shape shape() const;
+    void setShape( Shape shape );
 
 private:
     GeoDataPhotoOverlayPrivate* const d;

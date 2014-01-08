@@ -68,7 +68,7 @@ qreal GeoDataPhotoOverlay::rotation() const
     return d->m_rotation;
 }
 
-void GeoDataPhotoOverlay::setRotation( const qreal &rotation )
+void GeoDataPhotoOverlay::setRotation( const qreal rotation )
 {
     d->m_rotation = rotation;
 }
@@ -113,17 +113,12 @@ void GeoDataPhotoOverlay::setPoint( const GeoDataPoint &point )
     d->m_point = point;
 }
 
-GeoDataPhotoOverlay::Shape& GeoDataPhotoOverlay::shape()
+GeoDataPhotoOverlay::Shape GeoDataPhotoOverlay::shape() const
 {
     return d->m_shape;
 }
 
-const GeoDataPhotoOverlay::Shape& GeoDataPhotoOverlay::shape() const
-{
-    return d->m_shape;
-}
-
-void GeoDataPhotoOverlay::setShape( const Shape &shape )
+void GeoDataPhotoOverlay::setShape( Shape shape )
 {
     d->m_shape = shape;
 }
