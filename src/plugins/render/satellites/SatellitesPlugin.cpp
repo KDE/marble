@@ -63,6 +63,8 @@ SatellitesPlugin::~SatellitesPlugin()
     delete m_satModel;
 
     delete m_configDialog;
+    delete m_showOrbitAction;
+    delete m_trackPlacemarkAction;
 }
 
 QStringList SatellitesPlugin::backendTypes() const
