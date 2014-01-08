@@ -103,7 +103,12 @@ void GeoDataPhotoOverlay::setImagePyramid( const GeoDataImagePyramid &imagePyram
     d->m_imagePyramid = imagePyramid;
 }
 
-GeoDataPoint& GeoDataPhotoOverlay::point() const
+GeoDataPoint& GeoDataPhotoOverlay::point()
+{
+    return d->m_point;
+}
+
+const GeoDataPoint& GeoDataPhotoOverlay::point() const
 {
     return d->m_point;
 }

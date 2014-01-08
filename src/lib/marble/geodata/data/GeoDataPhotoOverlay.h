@@ -55,7 +55,8 @@ public:
     const GeoDataImagePyramid& imagePyramid() const;
     void setImagePyramid( const GeoDataImagePyramid &imagePyramid );
 
-    GeoDataPoint& point() const;
+    GeoDataPoint& point();
+    const GeoDataPoint& point() const;
     void setPoint( const GeoDataPoint &point );
 
     Shape shape() const;
