@@ -52,11 +52,6 @@ GeoDataPoint::GeoDataPoint( const GeoDataCoordinates& other )
     p()->m_latLonAltBox = GeoDataLatLonAltBox( p()->m_coordinates );
 }
 
-GeoDataPoint::GeoDataPoint( const GeoDataGeometry& other )
-  : GeoDataGeometry( other )
-{
-}
-
 GeoDataPoint::GeoDataPoint()
     : GeoDataGeometry( new GeoDataPointPrivate )
 {

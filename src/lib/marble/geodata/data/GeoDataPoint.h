@@ -52,7 +52,6 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
 
     GeoDataPoint( const GeoDataPoint& other );
     explicit GeoDataPoint( const GeoDataCoordinates& other );
-    explicit GeoDataPoint( const GeoDataGeometry& other );
     GeoDataPoint();
 
     /**
