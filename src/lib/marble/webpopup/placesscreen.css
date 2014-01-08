@@ -1,35 +1,28 @@
 /* * Style sheet for weather plugin
    ================================================== */
 
-body {
-    margin-top: 50px;
-    background-image: url('qrc:/marble/webpopup/deco_places.png');
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-}
-
 h1 {
     color: #b3925d;
-    font-size: 24px;
-    margin-top: 80px;
+    font-size: 20px;
+    margin-top: 20px;
 }
 
 h2 {
     color: #888a85;
     font-size: 18px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 h3 {
     color: #b3925d;
     font-size: 16px;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
-    table {
+table {
     font: 11px/24px Verdana, Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 400px;
+    width: 220px;
 }
 
 tr.blue td {
@@ -61,22 +54,31 @@ td+td {
 p.gray {
     color: #888a85;
     font-size: 12px;
-    margin-top: 20px;
 }
 
 p {
     color: black;
     font-size: 11px;
-    margin-top: 20px;
-    width: 400px;
+    width: 220px;
 }
 
 hr {
     margin-left: 0px;
-    width: 400px;
-    margin-top: 25px;
+    width: 220px;
+    margin-top: 15px;
 }
 
 a {
     color: #382509;
+}
+
+.name, .flag {
+  width: 220px;
+  height: 50px;
+}
+
+.flag {
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:right center;
 }

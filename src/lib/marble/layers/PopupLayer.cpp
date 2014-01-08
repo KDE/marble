@@ -138,7 +138,7 @@ void PopupLayer::setPlacemark( const GeoDataPlacemark *placemark )
     if ( m_widget->model()->mapTheme() ) {
         isSky = m_widget->model()->mapTheme()->head()->target() == "sky";
     }
-    setSize(QSizeF(580, 620));
+    setSize(QSizeF(400, 400));
     if (isSatellite) {
         setupDialogSatellite( placemark );
     } else if (isCity) {
