@@ -21,9 +21,6 @@
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
-#include "GeoDataExtendedData.h"
-#include "GeoSceneDocument.h"
-#include "GeoSceneHead.h"
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "PopupLayer.h"
@@ -32,9 +29,7 @@
 #include "routing/RouteRequest.h"
 #include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
-#include "MarbleDirs.h"
 #include "ReverseGeocodingRunnerManager.h"
-#include "TemplateDocument.h"
 
 // Qt
 #include <QApplication>
@@ -73,12 +68,6 @@ public:
 public:
     Private( MarbleWidget *widget, const MarbleModel *model, MarbleWidgetPopupMenu* parent );
     QMenu* createInfoBoxMenu();
-    QString filterEmptyShortDescription(const QString &description) const;
-    void setupDialogSatellite(PopupLayer *popup, const GeoDataPlacemark *index);
-    void setupDialogCity(PopupLayer *popup, const GeoDataPlacemark *index);
-    void setupDialogNation(PopupLayer *popup, const GeoDataPlacemark *index);
-    void setupDialogGeoPlaces(PopupLayer *popup, const GeoDataPlacemark *index);
-    void setupDialogSkyPlaces(PopupLayer *popup, const GeoDataPlacemark *index);
 
     /**
       * Returns the geo coordinates of the mouse pointer at the last right button menu.
@@ -280,183 +269,10 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
 
     if ( actionidx > 0 ) {
         const GeoDataPlacemark *index = d->m_featurelist.at( actionidx -1 );
-        bool isSatellite = (index->visualCategory() == GeoDataFeature::Satellite);
-        bool isCity (index->visualCategory() >= GeoDataFeature::SmallCity &&
-                         index->visualCategory() <= GeoDataFeature::LargeNationCapital);
-        bool isNation = (index->visualCategory() == GeoDataFeature::Nation);
-        bool isSky = false;
-        if ( d->m_model->mapTheme() ) {
-            isSky = d->m_model->mapTheme()->head()->target() == "sky";
-        }
         PopupLayer* popup = d->m_widget->popupLayer();
-        popup->setSize(QSizeF(580, 620));
-        if (isSatellite) {
-            d->setupDialogSatellite(popup, index);
-        } else if (isCity) {
-            d->setupDialogCity(popup, index);
-        } else if (isNation) {
-            d->setupDialogNation(popup, index);
-        } else if (isSky) {
-            d->setupDialogSkyPlaces(popup, index);
-        } else if (index->role().isEmpty()) {
-            popup->setContent(index->description());
-        } else {
-            d->setupDialogGeoPlaces(popup, index);
-        }
         popup->setPlacemark(index);
         popup->popup();
     }
-}
-
-QString MarbleWidgetPopupMenu::Private::filterEmptyShortDescription(const QString &description) const
-{
-    if(description.isEmpty())
-        return tr("No description available.");
-    return description;
-}
-
-void MarbleWidgetPopupMenu::Private::setupDialogSatellite(PopupLayer *popup, const GeoDataPlacemark *index)
-{
-    GeoDataCoordinates location = index->coordinate(m_model->clockDateTime());
-    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
-
-    const QString description = index->description();
-    TemplateDocument doc(description);
-    doc["altitude"] = QString::number(location.altitude(), 'f', 2);
-    doc["latitude"] = location.latToString();
-    doc["longitude"] = location.lonToString();
-    popup->setContent(doc.finalText());
-}
-
-void MarbleWidgetPopupMenu::Private::setupDialogCity(PopupLayer *popup, const GeoDataPlacemark *index)
-{
-    GeoDataCoordinates location = index->coordinate();
-    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
-
-    QFile descriptionFile(":/marble/webpopup/city.html");
-    if (!descriptionFile.open(QIODevice::ReadOnly)) {
-        return;
-    }
-
-    const QString description = descriptionFile.readAll();
-    TemplateDocument doc(description);
-
-    doc["name"] = index->name();
-    QString  roleString;
-    const QString role = index->role();
-    if(role=="PPLC") {
-        roleString = tr("National Capital");
-    } else if(role=="PPL") {
-        roleString = tr("City");
-    } else if(role=="PPLA") {
-        roleString = tr("State Capital");
-    } else if(role=="PPLA2") {
-        roleString = tr("County Capital");
-    } else if(role=="PPLA3" || role=="PPLA4" ) {
-        roleString = tr("Capital");
-    } else if(role=="PPLF" || role=="PPLG" || role=="PPLL" || role=="PPLQ" ||
-              role=="PPLR" || role=="PPLS" || role=="PPLW" ) {
-        roleString = tr("Village");
-    }
-
-    doc["category"] = roleString;
-    doc["shortDescription"] = filterEmptyShortDescription(index->description());
-    doc["latitude"] = location.latToString();
-    doc["longitude"] = location.lonToString();
-    doc["elevation"] =  QString::number(location.altitude(), 'f', 2);
-    doc["population"] = QString::number(index->population());
-    doc["country"] = index->countryCode();
-    doc["state"] = index->state();
-
-    QString dst = QString( "%1" ).arg( ( index->extendedData().value("gmt").value().toInt() +
-                                         index->extendedData().value("dst").value().toInt() ) /
-                                       ( double ) 100, 0, 'f', 1 );
-    // There is an issue about UTC.
-    // It's possible to variants (e.g.):
-    // +1.0 and -1.0, but dst does not have + an the start
-    if(dst.startsWith('-')) {
-        doc["timezone"] = dst;
-    } else {
-        doc["timezone"] = '+'+dst;
-    }
-
-    const QString flagPath = MarbleDirs::path(
-                QString("flags/flag_%1.svg").arg(index->countryCode().toLower()));
-    doc["flag"] = flagPath;
-
-    popup->setContent(doc.finalText());
-}
-
-void MarbleWidgetPopupMenu::Private::setupDialogNation(PopupLayer *popup, const GeoDataPlacemark *index)
-{
-    GeoDataCoordinates location = index->coordinate();
-    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
-
-    QFile descriptionFile(":/marble/webpopup/nation.html");
-    if (!descriptionFile.open(QIODevice::ReadOnly)) {
-        return;
-    }
-
-    const QString description = descriptionFile.readAll();
-    TemplateDocument doc(description);
-
-    doc["name"] = index->name();
-    doc["shortDescription"] = filterEmptyShortDescription(index->description());
-    doc["latitude"] = location.latToString();
-    doc["longitude"] = location.lonToString();
-    doc["elevation"] = QString::number(location.altitude(), 'f', 2);
-    doc["population"] = QString::number(index->population());
-    doc["area"] = QString::number(index->area(), 'f', 2);
-
-    const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
-    doc["flag"] = flagPath;
-
-    popup->setContent(doc.finalText());
-}
-
-void MarbleWidgetPopupMenu::Private::setupDialogGeoPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
-{
-    GeoDataCoordinates location = index->coordinate();
-    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
-
-    QFile descriptionFile(":/marble/webpopup/geoplace.html");
-    if (!descriptionFile.open(QIODevice::ReadOnly)) {
-        return;
-    }
-
-    const QString description = descriptionFile.readAll();
-    TemplateDocument doc(description);
-
-    doc["name"] = index->name();
-    doc["latitude"] = location.latToString();
-    doc["longitude"] = location.lonToString();
-    doc["elevation"] = QString::number(location.altitude(), 'f', 2);
-    doc["shortDescription"] = filterEmptyShortDescription(index->description());
-
-    popup->setContent(doc.finalText());
-}
-
-void MarbleWidgetPopupMenu::Private::setupDialogSkyPlaces(PopupLayer *popup, const GeoDataPlacemark *index)
-{
-    GeoDataCoordinates location = index->coordinate();
-    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
-
-    QFile descriptionFile(":/marble/webpopup/skyplace.html");
-    if (!descriptionFile.open(QIODevice::ReadOnly)) {
-        return;
-    }
-
-    const QString description = descriptionFile.readAll();
-    TemplateDocument doc(description);
-
-    doc["name"] = index->name();
-    doc["latitude"] = GeoDataCoordinates::latToString(
-                            location.latitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f');
-    doc["longitude"] = GeoDataCoordinates::lonToString(
-                            location.longitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f');
-    doc["shortDescription"] = filterEmptyShortDescription(index->description());
-
-    popup->setContent(doc.finalText());
 }
 
 void MarbleWidgetPopupMenu::slotCopyCoordinates()

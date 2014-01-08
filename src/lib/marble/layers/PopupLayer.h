@@ -170,6 +170,13 @@ private:
      */
     void setAppropriateSize( const ViewportParams *viewport );
 
+    QString filterEmptyShortDescription(const QString &description) const;
+    void setupDialogSatellite( const GeoDataPlacemark *index );
+    void setupDialogCity( const GeoDataPlacemark *index );
+    void setupDialogNation( const GeoDataPlacemark *index );
+    void setupDialogGeoPlaces( const GeoDataPlacemark *index );
+    void setupDialogSkyPlaces( const GeoDataPlacemark *index );
+
     PopupItem *const m_popupItem;
     MarbleWidget * const m_widget;
     QSizeF m_requestedSize;

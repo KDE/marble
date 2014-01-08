@@ -12,10 +12,16 @@
 
 #include "PopupLayer.h"
 #include "MarbleWidget.h"
+#include "MarbleModel.h"
+#include "MarbleDirs.h"
 #include "PopupItem.h"
+#include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataSnippet.h"
+#include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
+#include "TemplateDocument.h"
 
 #include <QMouseEvent>
 #include <QApplication>
@@ -124,6 +130,29 @@ void PopupLayer::setContent( const QString &html )
 
 void PopupLayer::setPlacemark( const GeoDataPlacemark *placemark )
 {
+    bool isSatellite = (placemark->visualCategory() == GeoDataFeature::Satellite);
+    bool isCity (placemark->visualCategory() >= GeoDataFeature::SmallCity &&
+                     placemark->visualCategory() <= GeoDataFeature::LargeNationCapital);
+    bool isNation = (placemark->visualCategory() == GeoDataFeature::Nation);
+    bool isSky = false;
+    if ( m_widget->model()->mapTheme() ) {
+        isSky = m_widget->model()->mapTheme()->head()->target() == "sky";
+    }
+    setSize(QSizeF(580, 620));
+    if (isSatellite) {
+        setupDialogSatellite( placemark );
+    } else if (isCity) {
+        setupDialogCity( placemark );
+    } else if (isNation) {
+        setupDialogNation( placemark );
+    } else if (isSky) {
+        setupDialogSkyPlaces( placemark );
+    } else if ( placemark->role().isEmpty() ) {
+        setContent( placemark->description() );
+    } else {
+        setupDialogGeoPlaces( placemark );
+    }
+
     if (placemark->style() == 0) {
         m_popupItem->setBackgroundColor(QColor(Qt::white));
         m_popupItem->setTextColor(QColor(Qt::black));
@@ -161,6 +190,159 @@ void PopupLayer::setTextColor(const QColor &color)
         m_popupItem->setTextColor(color);
     }
 }
+
+QString PopupLayer::filterEmptyShortDescription(const QString &description) const
+{
+    if(description.isEmpty())
+        return tr("No description available.");
+    return description;
+}
+
+void PopupLayer::setupDialogSatellite( const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate(m_widget->model()->clockDateTime());
+    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    const QString description = index->description();
+    TemplateDocument doc(description);
+    doc["altitude"] = QString::number(location.altitude(), 'f', 2);
+    doc["latitude"] = location.latToString();
+    doc["longitude"] = location.lonToString();
+    setContent(doc.finalText());
+}
+
+void PopupLayer::setupDialogCity( const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate();
+    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/city.html");
+    if (!descriptionFile.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    const QString description = descriptionFile.readAll();
+    TemplateDocument doc(description);
+
+    doc["name"] = index->name();
+    QString  roleString;
+    const QString role = index->role();
+    if(role=="PPLC") {
+        roleString = tr("National Capital");
+    } else if(role=="PPL") {
+        roleString = tr("City");
+    } else if(role=="PPLA") {
+        roleString = tr("State Capital");
+    } else if(role=="PPLA2") {
+        roleString = tr("County Capital");
+    } else if(role=="PPLA3" || role=="PPLA4" ) {
+        roleString = tr("Capital");
+    } else if(role=="PPLF" || role=="PPLG" || role=="PPLL" || role=="PPLQ" ||
+              role=="PPLR" || role=="PPLS" || role=="PPLW" ) {
+        roleString = tr("Village");
+    }
+
+    doc["category"] = roleString;
+    doc["shortDescription"] = filterEmptyShortDescription(index->description());
+    doc["latitude"] = location.latToString();
+    doc["longitude"] = location.lonToString();
+    doc["elevation"] =  QString::number(location.altitude(), 'f', 2);
+    doc["population"] = QString::number(index->population());
+    doc["country"] = index->countryCode();
+    doc["state"] = index->state();
+
+    QString dst = QString( "%1" ).arg( ( index->extendedData().value("gmt").value().toInt() +
+                                         index->extendedData().value("dst").value().toInt() ) /
+                                       ( double ) 100, 0, 'f', 1 );
+    // There is an issue about UTC.
+    // It's possible to variants (e.g.):
+    // +1.0 and -1.0, but dst does not have + an the start
+    if(dst.startsWith('-')) {
+        doc["timezone"] = dst;
+    } else {
+        doc["timezone"] = '+'+dst;
+    }
+
+    const QString flagPath = MarbleDirs::path(
+                QString("flags/flag_%1.svg").arg(index->countryCode().toLower()));
+    doc["flag"] = flagPath;
+
+    setContent(doc.finalText());
+}
+
+void PopupLayer::setupDialogNation( const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate();
+    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/nation.html");
+    if (!descriptionFile.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    const QString description = descriptionFile.readAll();
+    TemplateDocument doc(description);
+
+    doc["name"] = index->name();
+    doc["shortDescription"] = filterEmptyShortDescription(index->description());
+    doc["latitude"] = location.latToString();
+    doc["longitude"] = location.lonToString();
+    doc["elevation"] = QString::number(location.altitude(), 'f', 2);
+    doc["population"] = QString::number(index->population());
+    doc["area"] = QString::number(index->area(), 'f', 2);
+
+    const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
+    doc["flag"] = flagPath;
+
+    setContent(doc.finalText());
+}
+
+void PopupLayer::setupDialogGeoPlaces( const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate();
+    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/geoplace.html");
+    if (!descriptionFile.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    const QString description = descriptionFile.readAll();
+    TemplateDocument doc(description);
+
+    doc["name"] = index->name();
+    doc["latitude"] = location.latToString();
+    doc["longitude"] = location.lonToString();
+    doc["elevation"] = QString::number(location.altitude(), 'f', 2);
+    doc["shortDescription"] = filterEmptyShortDescription(index->description());
+
+    setContent(doc.finalText());
+}
+
+void PopupLayer::setupDialogSkyPlaces( const GeoDataPlacemark *index)
+{
+    GeoDataCoordinates location = index->coordinate();
+    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/skyplace.html");
+    if (!descriptionFile.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    const QString description = descriptionFile.readAll();
+    TemplateDocument doc(description);
+
+    doc["name"] = index->name();
+    doc["latitude"] = GeoDataCoordinates::latToString(
+                            location.latitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f');
+    doc["longitude"] = GeoDataCoordinates::lonToString(
+                            location.longitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f');
+    doc["shortDescription"] = filterEmptyShortDescription(index->description());
+
+    setContent(doc.finalText());
+}
+
+
 
 void PopupLayer::setSize( const QSizeF &size )
 {
