@@ -40,9 +40,6 @@ public:
     /** Provides type information for downcasting a GeoNode */
     virtual const char* nodeType() const;
 
-    double altitude() const;
-    void setAltitude( double altitude );
-
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
