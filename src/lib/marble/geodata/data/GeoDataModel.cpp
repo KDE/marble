@@ -22,7 +22,6 @@ public:
     GeoDataModelPrivate();
 
     GeoDataCoordinates m_coordinates;
-    AltitudeMode m_altitudeMode;
 
     GeoDataScale m_scale;
     GeoDataOrientation m_orientation;
@@ -35,7 +34,6 @@ public:
 
 GeoDataModelPrivate::GeoDataModelPrivate() :
     m_coordinates(),
-    m_altitudeMode( ClampToGround ),
     m_scale(),
     m_orientation(),
     m_location(),
@@ -44,14 +42,13 @@ GeoDataModelPrivate::GeoDataModelPrivate() :
     m_targetHref(),
     m_sourceHref()
 {
-    // nothing to do
 }
 
 GeoDataModel::GeoDataModel() :
     GeoDataGeometry(),
     d( new GeoDataModelPrivate )
 {
-    // nothing to do
+    setAltitudeMode( ClampToGround );
 }
 
 GeoDataModel::GeoDataModel( const GeoDataModel &other ) :
@@ -106,16 +103,6 @@ void GeoDataModel::setCoordinates(const GeoDataCoordinates &coordinates)
 void GeoDataModel::setLocation(const GeoDataLocation &location)
 {
     d->m_location = location;
-}
-
-AltitudeMode GeoDataModel::altitudeMode() const
-{
-    return d->m_altitudeMode;
-}
-
-void GeoDataModel::setAltitudeMode( const AltitudeMode altitudeMode )
-{
-    d->m_altitudeMode = altitudeMode;
 }
 
 const GeoDataLink &GeoDataModel::link() const
