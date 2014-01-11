@@ -331,7 +331,8 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
         if( d->m_routeOffsetSpinBox->suffix() == " km") {
             offset *= KM2METER;
         }
-        return d->m_downloadRegion.routeRegion( d->m_textureLayer, offset );
+        const GeoDataLineString waypoints = d->m_model->routingManager()->routingModel()->route().path();
+        return d->m_downloadRegion.fromPath( d->m_textureLayer, offset, waypoints );
         break;
     }
 

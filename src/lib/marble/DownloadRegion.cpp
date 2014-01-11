@@ -14,10 +14,9 @@
 #include "MarbleMap.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
-#include "RoutingManager.h"
-#include "RoutingModel.h"
 #include "TextureLayer.h"
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataLineString.h"
 
 namespace Marble {
 
@@ -174,18 +173,12 @@ void DownloadRegion::setVisibleTileLevel(const int tileLevel)
     d->m_visibleTileLevel = tileLevel;
 }
 
-QVector<TileCoordsPyramid> DownloadRegion::routeRegion( const TextureLayer *textureLayer, qreal offset ) const
+QVector<TileCoordsPyramid> DownloadRegion::fromPath( const TextureLayer *textureLayer, qreal offset, const GeoDataLineString &waypoints ) const
 {
     if ( !d->m_marbleModel ) {
         return QVector<TileCoordsPyramid>();
     }
 
-    RoutingModel* routingModel = d->m_marbleModel->routingManager()->routingModel();
-    if( routingModel->rowCount() == 0 ) {
-        return QVector<TileCoordsPyramid>();
-    }
-
-    GeoDataLineString waypoints = routingModel->route().path();
     int const topLevel = d->m_tileLevelRange.first;
     int const bottomLevel = d->m_tileLevelRange.second;
     TileCoordsPyramid coordsPyramid( topLevel, bottomLevel );

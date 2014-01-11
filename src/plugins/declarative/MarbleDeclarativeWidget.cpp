@@ -29,6 +29,7 @@
 #include "DownloadRegion.h"
 #include "BookmarkManager.h"
 #include "routing/RoutingManager.h"
+#include "routing/RoutingModel.h"
 #include "routing/RoutingProfilesModel.h"
 #include "DeclarativeDataPlugin.h"
 #include "PluginManager.h"
@@ -321,7 +322,8 @@ void MarbleWidget::downloadRoute( qreal offset, int topTileLevel, int bottomTile
     region.setMarbleModel( m_marbleWidget->model() );
     region.setVisibleTileLevel( m_marbleWidget->tileZoomLevel() );
     region.setTileLevelRange( topTileLevel, bottomTileLevel );
-    QVector<Marble::TileCoordsPyramid> const pyramid = region.routeRegion( m_marbleWidget->textureLayer(), offset );
+    const Marble::GeoDataLineString waypoints = m_marbleWidget->model()->routingManager()->routingModel()->route().path();
+    QVector<Marble::TileCoordsPyramid> const pyramid = region.fromPath( m_marbleWidget->textureLayer(), offset, waypoints );
     if ( !pyramid.isEmpty() ) {
         m_marbleWidget->downloadRegion( pyramid );
     }
