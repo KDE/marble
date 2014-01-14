@@ -12,42 +12,48 @@
 // Mainly useful to test the successful reading and writing of KML data
 
 #include <MarbleWidget.h>
-#include <GeoDataParser.h>
+#include <ParsingRunnerManager.h>
+#include <PluginManager.h>
 #include <GeoWriter.h>
 
+#include <QApplication>
 #include <QFile>
-#include <iostream>
+#include <QDebug>
 
 using namespace std;
 using namespace Marble;
 
 int main(int argc, char** argv)
 {
-  if (argc != 3) {
-    cout << "Usage: " << argv[0] << " input.kml output.kml" << endl;
-    return 0;
-  }
+    QApplication app(argc,argv);
 
-  QFile file(argv[1]);
-  file.open(QIODevice::ReadOnly);
-  GeoDataParser parser(GeoData_KML);
-  if ( !parser.read( &file ) ) {
-    cerr << "Error parsing '" << file.fileName().toStdString();
-    cerr << "': '" << parser.errorString().toStdString() << "'" << endl;
-    return 1;
-  }
+    QString inputFilename;
+    int inputIndex = app.arguments().indexOf( "-i" );
+    if ( inputIndex > 0 && inputIndex + 1 < argc ) {
+        inputFilename = app.arguments().at( inputIndex + 1 );
+    } else {
+        qDebug( " Syntax: kml2kml -i sourcefile [-o kml-targetfile]" );
+        return 1;
+    }
 
-  GeoDocument* document = parser.releaseDocument();
-  if (!document) {
-    cerr << "Could not parse kml file. No error message available unfortunately" << endl;
-    return 2;
-  }
+    QString outputFilename = "output.kml";
+    int outputIndex = app.arguments().indexOf("-o");
+    if ( outputIndex > 0 && outputIndex + 1 < argc )
+        outputFilename = app.arguments().at( outputIndex + 1 );
 
-  QFile output(argv[2]);
-  if (!output.open(QIODevice::WriteOnly)) {
-    cerr << "Unable to write to " << output.fileName().toStdString() << endl;
-    return 3;
-  }
+    ParsingRunnerManager* manager = new ParsingRunnerManager( new PluginManager );
+    GeoDataDocument* document = manager->openFile( inputFilename );
+    if (!document) {
+        qDebug() << "Could not parse input file. No error message available unfortunately";
+        return 2;
+    }
 
-  GeoWriter().write(&output, dynamic_cast<GeoDataFeature*>(document));
+
+    QFile output(outputFilename);
+    if (!output.open(QIODevice::WriteOnly)) {
+        qDebug() << "Unable to write to " << output.fileName();
+        return 3;
+    }
+
+    GeoWriter().write(&output, dynamic_cast<GeoDataFeature*>(document));
 }

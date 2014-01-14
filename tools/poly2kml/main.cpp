@@ -15,7 +15,6 @@
 #include <QTime>
 #include <QDebug>
 
-#include "geodata/parser/GeoDataParser.h"
 #include "geodata/data/GeoDataLineString.h"
 #include "geodata/data/GeoDataDocument.h"
 #include "geodata/data/GeoDataFolder.h"

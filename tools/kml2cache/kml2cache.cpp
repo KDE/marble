@@ -11,14 +11,16 @@
 
 // A simple tool to read a .kml file and write it back to a .cache file
 
-#include <MarbleWidget.h>
+#include <ParsingRunnerManager.h>
+#include <PluginManager.h>
 #include <MarbleClock.h>
-#include <GeoDataParser.h>
 #include <GeoDataDocument.h>
+#include <GeoDataFolder.h>
 #include <GeoDataPlacemark.h>
 #include <GeoDataExtendedData.h>
 #include <GeoWriter.h>
 
+#include <QApplication>
 #include <QDebug>
 #include <QFile>
 #include <iostream>
@@ -82,25 +84,28 @@ void saveFile( const QString& filename, GeoDataDocument* document )
 
 int main(int argc, char** argv)
 {
-  if (argc != 3) {
-    cout << "Usage: " << argv[0] << " input.kml output.cache" << endl;
-    return 0;
-  }
+    QApplication app(argc,argv);
 
-  QFile file(argv[1]);
-  file.open(QIODevice::ReadOnly);
-  GeoDataParser parser(GeoData_KML);
-  if ( !parser.read( &file ) ) {
-    cerr << "Error parsing '" << file.fileName().toStdString();
-    cerr << "': '" << parser.errorString().toStdString() << "'" << endl;
-    return 1;
-  }
+    QString inputFilename;
+    int inputIndex = app.arguments().indexOf( "-i" );
+    if ( inputIndex > 0 && inputIndex + 1 < argc ) {
+        inputFilename = app.arguments().at( inputIndex + 1 );
+    } else {
+        qDebug( " Syntax: kml2cache -i sourcefile [-o cache-targetfile]" );
+        return 1;
+    }
 
-  GeoDataDocument* document = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
-  if (!document) {
-    cerr << "Could not parse kml file. No error message available unfortunately" << endl;
-    return 2;
-  }
+    QString outputFilename = "output.cache";
+    int outputIndex = app.arguments().indexOf("-o");
+    if ( outputIndex > 0 && outputIndex + 1 < argc )
+        outputFilename = app.arguments().at( outputIndex + 1 );
 
-  saveFile( argv[2], document );
+    ParsingRunnerManager* manager = new ParsingRunnerManager( new PluginManager );
+    GeoDataDocument* document = manager->openFile( inputFilename );
+    if (!document) {
+        qDebug() << "Could not parse input file. No error message available unfortunately";
+        return 2;
+    }
+
+    saveFile( outputFilename, document );
 }
