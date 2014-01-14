@@ -10,7 +10,6 @@
 
 #include <QObject>
 
-#include <GeoDataParser.h>
 #include <GeoDataDocument.h>
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>

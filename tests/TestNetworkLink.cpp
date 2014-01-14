@@ -13,7 +13,6 @@
 #include "TestUtils.h"
 #include <GeoDataDocument.h>
 #include <GeoDataFolder.h>
-#include <GeoDataParser.h>
 #include <MarbleDebug.h>
 #include <GeoDataNetworkLink.h>
 

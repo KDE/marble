@@ -10,7 +10,6 @@
 
 #include <QObject>
 
-#include <GeoDataParser.h>
 #include <GeoDataDocument.h>
 #include <GeoDataPlacemark.h>
 #include <GeoDataTimeStamp.h>
