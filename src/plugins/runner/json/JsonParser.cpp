@@ -261,7 +261,7 @@ bool JsonParser::read( QIODevice* device )
                                 placemarkList.at( pl )->setName( propertyIterator.value().toString() );
                             }
                         }
-                        // Else if the geometry still doesnt have a category, try if this
+                        // Else if the geometry still doesn't have a category, try if this
                         // key-value properties match any OSM visual category
                         else if ( category == GeoDataFeature::None ) {
                             category = GeoDataFeature::OsmVisualCategory( propertyIterator.name().toLower() + '=' + propertyIterator.value().toString().toLower() );

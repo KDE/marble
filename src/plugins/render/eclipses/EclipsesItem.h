@@ -77,7 +77,7 @@ public:
      * @brief Check if the event takes place at a given datetime
      * @param dateTime The date time to check
      *
-     * Checks wheter or not this eclipse event takes place at the given
+     * Checks whether or not this eclipse event takes place at the given
      * @p dateTime. This is true if @p dateTime is between the global
      * start and end dates of the event.
      *

@@ -90,7 +90,7 @@ public:
 
     /**
      * @brief Set if lunar eclipses are enbled
-     * @param enable Indicates wheter or not to allow lunar eclipses
+     * @param enable Indicates whether or not to allow lunar eclipses
      *
      * Allows to enable or disable inclusion of lunar eclipses.
      *
@@ -99,9 +99,9 @@ public:
     void setWithLunarEclipses( const bool enable );
 
     /**
-     * @brief Return wheter or not lunar eclipses are enabled
+     * @brief Return whether or not lunar eclipses are enabled
      *
-     * Returns wheter or not lunar eclipses are included in the eclipse
+     * Returns whether or not lunar eclipses are included in the eclipse
      * calculation.
      *
      * @return True if lunar eclipses are enabled or false otherwise

@@ -298,7 +298,7 @@ void SatellitesConfigDialog::openDataSource()
 
     const QString filter = QString("%1;;%2;;%3").arg(
         tr( "All Supported Files (*.txt *.msc)" ),
-        tr( "Marble Satellite Catalogue (*.msc)" ),
+        tr( "Marble Satellite Catalog (*.msc)" ),
         tr( "Two Line Element Set (*.txt)" ),
         tr( "All Files (*.*)" ) );
 

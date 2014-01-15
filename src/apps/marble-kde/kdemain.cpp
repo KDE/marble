@@ -145,9 +145,9 @@ int main ( int argc, char *argv[] )
                          "rene@bitkanal.net" );
     aboutData.addAuthor( ki18n( "Guillaume Martres" ),
                          ki18n( "ESA Summer of Code in Space 2011 Project:"
-                                " Visualisation of Satellite Orbits" ),
-                         "smarter@ubuntu.com" );    
-    
+                                " Visualization of Satellite Orbits" ),
+                         "smarter@ubuntu.com" );
+
     // Google Summer of Code
     aboutData.addAuthor( ki18n( "Konstantin Oblaukhov" ),
                          ki18n( "Google Summer of Code 2011 Project:"

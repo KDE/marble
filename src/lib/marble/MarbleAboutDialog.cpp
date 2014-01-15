@@ -152,7 +152,7 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
            "<i>Project: Visualization of planetary satellites</i></p>")+
         QObject::tr("<p><b>2011</b></p>")+
         QObject::tr("<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu.com</a><br />"
-           "<i>Project: Visualisation of Satellite Orbits</i></p>")+
+           "<i>Project: Visualization of Satellite Orbits</i></p>")+
 
         QObject::tr("<b>Google Code-in</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "

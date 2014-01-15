@@ -165,7 +165,7 @@ QVariant SatellitesConfigModel::headerData( int section,
 
     switch (section) {
         case 0: {
-            return QVariant( tr( "Catalogues" ) );
+            return QVariant( tr( "Catalogs" ) );
         }
         default: {
             return QVariant();

@@ -58,17 +58,17 @@ public:
     int year() const;
 
     /**
-     * @brief Set wheter or not to list lunar eclipses
-     * @param enable wheter or not to list lunar eclipses
+     * @brief Set whether or not to list lunar eclipses
+     * @param enable whether or not to list lunar eclipses
      *
      * @see withLunarEclipses
      */
     void setWithLunarEclipses( const bool enable );
 
     /**
-     * @brief Returns wheter or not lunar eclipses are listed
+     * @brief Returns whether or not lunar eclipses are listed
      *
-     * @return Wheter or not lunar eclipses are listed
+     * @return Whether or not lunar eclipses are listed
      * @see setWithLunarEclipses
      */
     bool withLunarEclipses() const;
@@ -111,7 +111,7 @@ protected Q_SLOTS:
 
 protected:
     /**
-     * @brief Intialize the object
+     * @brief Initialize the object
      */
     void initialize();
 

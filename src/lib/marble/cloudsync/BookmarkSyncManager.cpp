@@ -653,8 +653,8 @@ GeoDataDocument* BookmarkSyncManager::Private::constructDocument( const QList<Di
 
     foreach( const DiffItem &item, mergedList ) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark( item.m_placemarkA );
-        QStringList splitted = item.m_path.split( '/', QString::SkipEmptyParts );
-        GeoDataFolder *folder = createFolders( document, splitted );
+        QStringList splitten = item.m_path.split( '/', QString::SkipEmptyParts );
+        GeoDataFolder *folder = createFolders( document, splitten );
         folder->append( placemark );
     }
 
