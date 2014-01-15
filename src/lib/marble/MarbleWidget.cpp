@@ -1118,9 +1118,10 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator,
                                        const QString &name, 
                                        const QString &description )
 {
-    TileCreatorDialog dlg( creator, this );
-    dlg.setSummary( name, description );
-    dlg.exec();
+    QPointer<TileCreatorDialog> dialog = new TileCreatorDialog( creator, this );
+    dialog->setSummary( name, description );
+    dialog->exec();
+    delete dialog;
 }
 
 MapQuality MarbleWidget::mapQuality( ViewContext viewContext ) const

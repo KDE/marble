@@ -451,7 +451,7 @@ void BookmarkManagerDialog::importBookmarks()
                             continue;
                         }
 
-                        QMessageBox messageBox( this );
+                        QPointer<QMessageBox> messageBox = new QMessageBox( this );
                         QString const intro = tr( "The file contains a bookmark that already exists among your Bookmarks." );
                         QString const newBookmark = tr( "Imported bookmark" );
                         QString const existingBookmark = tr( "Existing bookmark" );
@@ -461,37 +461,41 @@ void BookmarkManagerDialog::importBookmarks()
                         html = html.arg( intro ).arg( existingBookmark ).arg( existingFolder->name() );
                         html = html.arg( existingPlacemark->name() ).arg( newBookmark ).arg( newFolder->name() );
                         html = html.arg( newPlacemark->name() ).arg( question );
-                        messageBox.setText( html );
+                        messageBox->setText( html );
 
-                        QAbstractButton *replaceButton    = messageBox.addButton(tr( "Replace" ),     QMessageBox::ActionRole );
-                        QAbstractButton *replaceAllButton = messageBox.addButton(tr( "Replace All" ), QMessageBox::ActionRole );
-                        QAbstractButton *skipButton       = messageBox.addButton(tr( "Skip" ),        QMessageBox::ActionRole );
-                        QAbstractButton *skipAllButton    = messageBox.addButton(tr( "Skip All" ),    QMessageBox::ActionRole );
-                                                            messageBox.addButton(tr( "Cancel" ),      QMessageBox::RejectRole );
-                        messageBox.setIcon( QMessageBox::Question );
+                        QAbstractButton *replaceButton    = messageBox->addButton(tr( "Replace" ),     QMessageBox::ActionRole );
+                        QAbstractButton *replaceAllButton = messageBox->addButton(tr( "Replace All" ), QMessageBox::ActionRole );
+                        QAbstractButton *skipButton       = messageBox->addButton(tr( "Skip" ),        QMessageBox::ActionRole );
+                        QAbstractButton *skipAllButton    = messageBox->addButton(tr( "Skip All" ),    QMessageBox::ActionRole );
+                                                            messageBox->addButton(tr( "Cancel" ),      QMessageBox::RejectRole );
+                        messageBox->setIcon( QMessageBox::Question );
 
                         if ( !replaceAll ) {
-                            messageBox.exec();
+                            messageBox->exec();
                         }
-                        if ( messageBox.clickedButton() == replaceAllButton ) {
+                        if ( messageBox->clickedButton() == replaceAllButton ) {
                             replaceAll = true;
-                        } else if ( messageBox.clickedButton() == skipAllButton ) {
+                        } else if ( messageBox->clickedButton() == skipAllButton ) {
                             skipAll = true;
                             added = true;
-                        } else if ( messageBox.clickedButton() == skipButton ) {
+                        } else if ( messageBox->clickedButton() == skipButton ) {
                             added = true;
+                            delete messageBox;
                             continue;
-                        } else if ( messageBox.clickedButton() != replaceButton ) {
+                        } else if ( messageBox->clickedButton() != replaceButton ) {
+                            delete messageBox;
                             return;
                         }
 
-                        if ( messageBox.clickedButton() == replaceButton || replaceAll ) {
+                        if ( messageBox->clickedButton() == replaceButton || replaceAll ) {
                             d->m_manager->removeBookmark( existingPlacemark );
                             d->m_manager->addBookmark( newFolder, *newPlacemark );
                             mDebug() << "Placemark " << newPlacemark->name() << " replaces " << existingPlacemark->name();
                             added = true;
+                            delete messageBox;
                             break;
                         }
+                        delete messageBox;
                     }
                 }
             }

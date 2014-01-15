@@ -212,7 +212,7 @@ void FileViewFloatItem::contextMenu( const QPoint& pos )
     if( !m_marbleWidget )
         return;
 
-    QMenu *test = new QMenu( m_fileView );
+    QPointer<QMenu> test = new QMenu( m_fileView );
     // We need the global position to move the menu.
     // pos contains the relative position.
     test->move( m_itemPosition );
@@ -222,6 +222,7 @@ void FileViewFloatItem::contextMenu( const QPoint& pos )
              this, SLOT(removeFile()) );
     m_persIndex = new QPersistentModelIndex( m_fileView->indexAt( pos ) );
     test->exec();
+    delete test;
 }
 
 void FileViewFloatItem::addFile()

@@ -716,7 +716,7 @@ void RoutingWidget::openCloudRoutesDialog()
     Q_ASSERT( d->m_routeSyncManager );
     d->m_routeSyncManager->prepareRouteList();
 
-    CloudRoutesDialog *dialog = new CloudRoutesDialog( d->m_routeSyncManager->model(), d->m_widget );
+    QPointer<CloudRoutesDialog> dialog = new CloudRoutesDialog( d->m_routeSyncManager->model(), d->m_widget );
     connect( d->m_routeSyncManager, SIGNAL(routeListDownloadProgress(qint64,qint64)), dialog, SLOT(updateListDownloadProgressbar(qint64,qint64)) );
     connect( dialog, SIGNAL(downloadButtonClicked(QString)), d->m_routeSyncManager, SLOT(downloadRoute(QString)) );
     connect( dialog, SIGNAL(openButtonClicked(QString)), this, SLOT(openCloudRoute(QString)) );
@@ -724,6 +724,7 @@ void RoutingWidget::openCloudRoutesDialog()
     connect( dialog, SIGNAL(removeFromCacheButtonClicked(QString)), d->m_routeSyncManager, SLOT(removeRouteFromCache(QString)) );
     connect( dialog, SIGNAL(uploadToCloudButtonClicked(QString)), d->m_routeSyncManager, SLOT(uploadRoute(QString)) );
     dialog->exec();
+    delete dialog;
 }
 
 void RoutingWidget::indicateRoutingFailure( GeoDataDocument* route )

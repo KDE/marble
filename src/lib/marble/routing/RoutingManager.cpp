@@ -387,15 +387,16 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
             text += ' ' + tr( "Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route to your destination." );
             text += ' ' + tr( "Please use common sense while navigating." ) + "</p>";
             text += "<p>" + tr( "The Marble development team wishes you a pleasant and safe journey." ) + "</p>";
-            QMessageBox messageBox( QMessageBox::Information, tr( "Guidance Mode - Marble" ), text, QMessageBox::Ok );
+            QPointer<QMessageBox> messageBox = new QMessageBox( QMessageBox::Information, tr( "Guidance Mode - Marble" ), text, QMessageBox::Ok );
             QCheckBox showAgain( tr( "Show again" ) );
             showAgain.setChecked( true );
             showAgain.blockSignals( true ); // otherwise it'd close the dialog
-            messageBox.addButton( &showAgain, QMessageBox::ActionRole );
+            messageBox->addButton( &showAgain, QMessageBox::ActionRole );
             bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-            messageBox.resize( 380, smallScreen ? 400 : 240 );
-            messageBox.exec();
+            messageBox->resize( 380, smallScreen ? 400 : 240 );
+            messageBox->exec();
             d->m_guidanceModeWarning = showAgain.isChecked();
+            delete messageBox;
         }
     } else {
         d->loadRoute( d->stateFile( "guidance.kml" ) );

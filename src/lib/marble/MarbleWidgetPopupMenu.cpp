@@ -326,8 +326,9 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
 
 void MarbleWidgetPopupMenu::slotAboutDialog()
 {
-    MarbleAboutDialog dlg( d->m_widget );
-    dlg.exec();
+    QPointer<MarbleAboutDialog> dialog = new MarbleAboutDialog( d->m_widget );
+    dialog->exec();
+    delete dialog;
 }
 
 void MarbleWidgetPopupMenu::addAction( Qt::MouseButton button, QAction* action )

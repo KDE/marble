@@ -276,9 +276,10 @@ void MainWindow::setLegendShown( bool show )
 
 void MainWindow::showAboutMarbleDialog()
 {
-    MarbleAboutDialog dlg( this );
-    dlg.setApplicationTitle( tr( "Marble Virtual Globe %1" ).arg( "MARBLE_MOBILE_VERSION_STRING" ) );
-    dlg.exec();
+    QPointer<MarbleAboutDialog> dialog = new MarbleAboutDialog( this );
+    dialog->setApplicationTitle( tr( "Marble Virtual Globe %1" ).arg( "MARBLE_MOBILE_VERSION_STRING" ) );
+    dialog->exec();
+    delete dialog;
 }
 
 void MainWindow::closeEvent( QCloseEvent *event )

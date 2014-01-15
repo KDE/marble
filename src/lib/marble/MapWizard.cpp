@@ -1134,8 +1134,9 @@ void MapWizard::showPreview()
         }
     }
     
-    PreviewDialog *previewDialog = new PreviewDialog( this, document.data()->head()->mapThemeId() );
+    QPointer<PreviewDialog> previewDialog = new PreviewDialog( this, document.data()->head()->mapThemeId() );
     previewDialog->exec();
+    delete previewDialog;
 }
 
 

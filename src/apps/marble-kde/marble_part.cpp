@@ -444,7 +444,7 @@ void MarblePart::readSettings()
     m_wallet = KWallet::Wallet::openWallet( KWallet::Wallet::NetworkWallet(), 0 );
     if ( m_wallet == 0 ) {
         if ( MarbleSettings::accessKWallet() ) {
-            KDialog *confirmDialog = new KDialog( m_controlView );
+            QPointer<KDialog> confirmDialog = new KDialog( m_controlView );
             confirmDialog->setCaption( i18n( "Please allow access to KWallet." ) );
             QLabel *body = new QLabel();
             body->setText( i18n( "You haven't allowed Marble to use KWallet yet.\n"
@@ -462,7 +462,7 @@ void MarblePart::readSettings()
                     // Show dialog and ask why user don't allowed. 
                     // If user didn't see KWallet dialog it means that he deny forever.
                     // Show instructions how to disable the block.
-                    KDialog *confirmDialog = new KDialog( m_controlView );
+                    QPointer<KDialog> confirmDialog = new KDialog( m_controlView );
                     confirmDialog->setCaption( i18n( "Do you allow Marble to use KWallet?" ) );
                     QLabel *body = new QLabel();
                     body->setText( i18n( "You still don't allow Marble to use KWallet.\n"
@@ -474,8 +474,10 @@ void MarblePart::readSettings()
                     confirmDialog->exec();
                     // User wants to save his passwords in plain text.
                     MarbleSettings::setAccessKWallet( false );
+                    delete confirmDialog;
                 }
             }
+            delete confirmDialog;
         }
     }
     if ( m_wallet ) {

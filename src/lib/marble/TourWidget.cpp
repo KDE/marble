@@ -468,11 +468,13 @@ bool TourWidgetPrivate::overrideModifications()
     if ( oldDocument && m_isChanged ) {
         QString title = QObject::tr( "Discard Changes" );
         QString text = QObject::tr( "Are you sure want to discard all unsaved changes and close current document?" );
-        QMessageBox *dialog = new QMessageBox( QMessageBox::Question, title, text, QMessageBox::Yes | QMessageBox::No, q );
+        QPointer<QMessageBox> dialog = new QMessageBox( QMessageBox::Question, title, text, QMessageBox::Yes | QMessageBox::No, q );
         dialog->setDefaultButton( QMessageBox::No );
         if ( dialog->exec() != QMessageBox::Yes ) {
-            return false;
+            delete dialog;
+	    return false;
         }
+        delete dialog;
     }
     return true;
 }
