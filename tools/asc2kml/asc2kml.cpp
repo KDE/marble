@@ -11,8 +11,6 @@
 //
 
 
-// #include <zlib.h>
-
 #include <QCoreApplication>
 #include <QDebug>
 #include <QFile>
@@ -34,21 +32,16 @@ QString escapeXml( const QString &str )
 
 int main(int argc, char *argv[])
 {
-    QString  sourcefilename;
-    QString  targetfilename;
-    QString  supportfilename;
-    QString  timezonefilename;
-
     QCoreApplication  app( argc, argv );
 
     for ( int i = 1; i < argc; ++i ) {
         if ( strcmp( argv[ i ], "-o" ) != 0 )
             continue;
 
-        targetfilename   = QString( argv[i+1] );
-        sourcefilename   = QString( argv[i+2] );
-        supportfilename  = QString( argv[i+3] );
-        timezonefilename = QString( argv[i+4] );
+        const QString targetfilename   = QString( argv[i+1] );
+        const QString sourcefilename   = QString( argv[i+2] );
+        const QString supportfilename  = QString( argv[i+3] );
+        const QString timezonefilename = QString( argv[i+4] );
 
         qDebug() << "Source: " << sourcefilename;
         qDebug() << "Support: " << supportfilename;
@@ -86,44 +79,29 @@ int main(int argc, char *argv[])
         targetstream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n"
                      << "<kml xmlns=\"http://earth.google.com/kml/2.1\"> \n"
                      << "<Document> \n";
-        QString  rawline;
-        QString  name;
-    	QString  elestring;
         QString  state;
-        QString  statecode;
-        QString  country;
-        QString  role;
-        QString  popstring;
-        QString  latstring;
-        QString  lngstring;
-        QString  timezone;
         QString  gmt;
         QString	 dst;
-        int      dstoffset;
-        int      gmtoffset;
-        QStringList  splitline;
 
         while ( !sourcestream.atEnd() ) {
 
-            rawline=sourcestream.readLine();
-            splitline = rawline.split('\t');
+            const QString rawline = sourcestream.readLine();
+            const QStringList splitline = rawline.split('\t');
 
-            name       = splitline[1];
-            latstring  = splitline[4];
-            lngstring  = splitline[5];
-            role       = splitline[7];
-            country    = splitline[8];
-            statecode  = splitline[10];
-            popstring  = splitline[14];
-            elestring  = splitline[16];
-            timezone   = splitline[17];
+            const QString name       = splitline[1];
+            const QString latstring  = splitline[4];
+            const QString lngstring  = splitline[5];
+            const QString role       = splitline[7];
+            const QString country    = splitline[8];
+            const QString statecode  = splitline[10];
+            const QString popstring  = splitline[14];
+            const QString elestring  = splitline[16];
+            const QString timezone   = splitline[17];
 	
             supportstream.seek(0);
             while ( !supportstream.atEnd() ) {
-                QString supportrawline;
-                QStringList supportsplitline;
-                supportrawline = supportstream.readLine();
-                supportsplitline = supportrawline.split('\t');
+                const QString supportrawline = supportstream.readLine();
+                const QStringList supportsplitline = supportrawline.split('\t');
                 if(supportsplitline[0] == (country + '.' +statecode))
                 {
                     state = supportsplitline[1];
@@ -134,10 +112,8 @@ int main(int argc, char *argv[])
             timezonestream.seek(0);
             timezonestream.readLine();
             while ( !timezonestream.atEnd() ) {
-                    QString timezonerawline;
-                    QStringList timezonesplitline;
-                    timezonerawline = timezonestream.readLine();
-                    timezonesplitline = timezonerawline.split('\t');
+                    const QString timezonerawline = timezonestream.readLine();
+                    const QStringList timezonesplitline = timezonerawline.split('\t');
 
                     if( timezonesplitline[0] == timezone )
                     {
@@ -147,14 +123,14 @@ int main(int argc, char *argv[])
                     }
             }
 
-            gmtoffset = ( int ) ( gmt.toFloat() * 100 );
-            dstoffset = ( int ) ( dst.toFloat() * 100 ) - gmtoffset;
+            const int gmtoffset = ( int ) ( gmt.toFloat() * 100 );
+            const int dstoffset = ( int ) ( dst.toFloat() * 100 ) - gmtoffset;
 	
             if(role != "PPLX")
             {          
 	            targetstream << "    <Placemark> \n";
          	    targetstream << "        <name>" << escapeXml( name ) << "</name> \n";
-                    targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
+                targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
       	        targetstream << "        <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n";
         	    targetstream << "        <role>" << escapeXml( role ) << "</role> \n";
         	    targetstream << "        <pop>"
