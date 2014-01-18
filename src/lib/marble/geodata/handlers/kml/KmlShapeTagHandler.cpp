@@ -39,6 +39,9 @@ GeoNode* KmlshapeTagHandler::parse( GeoParser& parser ) const
             shape = GeoDataPhotoOverlay::Cylinder;
         } else if ( shapeText == "sphere" ) {
             shape = GeoDataPhotoOverlay::Sphere;
+        } else {
+            mDebug() << "Unknown shape attribute" << shapeText << ", falling back to default value 'rectangle'";
+            shape = GeoDataPhotoOverlay::Rectangle;
         }
 
         parentItem.nodeAs<GeoDataPhotoOverlay>()->setShape( shape );
