@@ -237,7 +237,12 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
             GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
                 if ( index.column() == 0 ){
-                    return QVariant( placemark->name() );
+                    if ( placemark->countryCode().isEmpty() ) {
+                        return QVariant( placemark->name() );
+                    } else {
+                        return QVariant( QString( "%1 (%2)" ).arg( placemark->name() ).arg( placemark->countryCode() ) );
+                    }
+
                 }
                 else if ( index.column() == 1 ){
                     return QVariant( placemark->nodeType() );
