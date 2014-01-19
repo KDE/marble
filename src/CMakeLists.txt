@@ -41,7 +41,12 @@ if( QT_QTDECLARATIVE_FOUND OR Qt5Quick_FOUND )
   ENDIF()
 ENDIF()
 
-add_subdirectory( apps )
+option(BUILD_MARBLE_APPS "Build Marble Desktop/Mobile applications" ON)
+add_feature_info("Marble Desktop/Mobile applications" BUILD_MARBLE_APPS "Build Marble Desktop/Mobile applications. Toggle with BUILD_MARBLE_APPS=YES/NO.")
+if(BUILD_MARBLE_APPS)
+  add_subdirectory( apps )
+endif()
+
 add_subdirectory( lib/marble )
 add_subdirectory( lib/astro )
 add_subdirectory( plugins )
