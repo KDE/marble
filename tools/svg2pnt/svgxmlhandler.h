@@ -11,7 +11,7 @@
 
 
 #ifndef SVGXMLHANDLER_H
-#define SVGXMLHHANDLER_H
+#define SVGXMLHANDLER_H
 
 
 #include <QXmlDefaultHandler>
