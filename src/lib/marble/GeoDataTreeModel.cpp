@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Thibaut Gridel <tgridel@free.fr>
+// Copyright 2013      Levente Kurusa <levex@linux.com>
 //
 
 
@@ -13,6 +14,7 @@
 #include "GeoDataTreeModel.h"
 
 // Qt
+#include <QBrush>
 #include <QModelIndex>
 #include <QFile>
 #include <QList>
@@ -355,6 +357,16 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
             } else if ( flyTo->view() && flyTo->view()->nodeType() == GeoDataTypes::GeoDataLookAtType )  {
                 GeoDataLookAt *lookAt = static_cast<GeoDataLookAt*>( flyTo->view() );
                 return QVariant::fromValue<GeoDataCoordinates>( lookAt->coordinates() );
+            }
+        }
+    } else if ( role == Qt::BackgroundRole ) {
+        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
+            if ( placemark->parent() &&
+                 ( placemark->parent()->nodeType() == GeoDataTypes::GeoDataFolderType ||
+                   placemark->parent()->nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
+                GeoDataContainer *container = static_cast<GeoDataContainer *>( placemark->parent() );
+                return QVariant( QBrush( container->style()->listStyle().backgroundColor() ));
             }
         }
     }
