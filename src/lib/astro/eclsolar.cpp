@@ -2474,11 +2474,9 @@ void EclSolar::getLocalDetails(char *otxt)
     mnt = i* int(eb_cstep);   // cut to proper time step
     hh = ddd (deg, mnt, sec);
     jd = mjd (dd, mm, yy, hh);
-    jd = jd;
     jdf = ept[nump-1];
     for (i=0; i<nump; i++)
      if ((ept[i] > jdf) && (spp[i] > 3)) jdf = ept[i]; // end of central phase
-    jdf = jdf;      // use UT
 
     jd += eb_cstep / (24.0*60.0);
    }
