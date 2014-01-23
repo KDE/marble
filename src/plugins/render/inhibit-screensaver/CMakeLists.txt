@@ -9,7 +9,10 @@ IF( BUILD_INHIBIT_SCREENSAVER_PLUGIN )
    ${QT_INCLUDE_DIR}
    ${QT_QTNETWORK_INCLUDE_DIR}
   )
-  INCLUDE(${QT_USE_FILE})
+
+  if( QT4_FOUND )
+    INCLUDE(${QT_USE_FILE})
+  endif()
 
   set( inhibit-screensaver_SRCS InhibitScreensaverPlugin.cpp )		 
 
