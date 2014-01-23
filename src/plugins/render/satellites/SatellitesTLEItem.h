@@ -39,7 +39,6 @@ public:
     void update();
 
 private:
-    bool m_showOrbit;
     double m_earthSemiMajorAxis; // in km
     elsetrec m_satrec;
 

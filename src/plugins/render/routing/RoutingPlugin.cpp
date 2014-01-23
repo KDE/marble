@@ -51,7 +51,6 @@ namespace Marble
 
 namespace
 {
-int const thresholdTime = 3; // in minutes
 int const thresholdDistance = 1000; // in meter
 }
 

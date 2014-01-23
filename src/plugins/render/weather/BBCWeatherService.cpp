@@ -32,8 +32,6 @@
 
 using namespace Marble;
 
-const quint32 maxDisplayedFavoritesNumber = 100;
-
 BBCWeatherService::BBCWeatherService( const MarbleModel *model, QObject *parent )
     : AbstractWeatherService( model, parent ),
       m_parsingStarted( false ),

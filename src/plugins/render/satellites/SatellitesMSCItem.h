@@ -56,7 +56,6 @@ public:
     void update();
 
 private:
-    bool m_showOrbit;
     GeoDataTrack *m_track;
     const MarbleClock *m_clock;
     PlanetarySats *m_planSat;

@@ -73,8 +73,6 @@ class ElevationProfileMarker : public RenderPlugin
     void onGeoObjectRemoved( GeoDataObject *object );
 
  private:
-    int m_fontHeight;
-
     GeoDataPlacemark *m_markerPlacemark;
     GeoDataCoordinates m_currentPosition;
 

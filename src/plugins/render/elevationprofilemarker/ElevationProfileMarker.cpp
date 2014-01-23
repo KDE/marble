@@ -27,7 +27,6 @@ namespace Marble
 
 ElevationProfileMarker::ElevationProfileMarker( const MarbleModel *marbleModel )
         : RenderPlugin( marbleModel ),
-        m_fontHeight( 10 ),
         m_markerPlacemark( 0 ),
         m_markerItem(),
         m_markerIcon( &m_markerItem ),

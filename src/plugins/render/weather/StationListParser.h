@@ -50,7 +50,6 @@ private:
 
     QString m_path;
     QList<BBCStation> m_list;
-    QObject *m_parent;
 };
 
 } // Marble namespace

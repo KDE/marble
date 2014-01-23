@@ -38,9 +38,6 @@ using std::cos;
 using std::asin;
 using std::abs;
 
-// emit updateSun() every update_interval ms
-const int update_interval = 60000;
-
 class SunLocatorPrivate
 {
 public:

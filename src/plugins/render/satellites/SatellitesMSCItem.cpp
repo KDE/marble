@@ -38,7 +38,6 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
                                       PlanetarySats *planSat,
                                       const MarbleClock *clock )
     : TrackerPluginItem( name ),
-      m_showOrbit( false ),
       m_track( new GeoDataTrack() ),
       m_clock( clock ),
       m_planSat( planSat ),

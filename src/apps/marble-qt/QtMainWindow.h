@@ -154,7 +154,6 @@ private:
     QList<QAction*> m_pluginMenus;
 
     QMenu *m_fileMenu;
-    QMenu *m_editMenu;
     QMenu *m_viewMenu;
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;

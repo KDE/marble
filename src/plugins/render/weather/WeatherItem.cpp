@@ -45,8 +45,6 @@ namespace Marble
 const QSize borderSpacing( 4, 4 );
 const QSize imageSize( 28, 28 );
 const double imageSizeRatio = ( (double) imageSize.width()) / ( (double) imageSize.height() );
-const qint32 horizontalSpacing = 4;
-const qint32 verticalSpacing = 2;
 
 class WeatherItemPrivate
 {

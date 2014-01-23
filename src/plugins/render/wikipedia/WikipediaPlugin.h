@@ -27,8 +27,6 @@ namespace Ui
 namespace Marble
 {
 
-class MarbleWidget;
-
 class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
@@ -89,7 +87,6 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
     Ui::WikipediaConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
     bool m_showThumbnails;
-    MarbleWidget* m_marbleWidget;
 };
 
 }

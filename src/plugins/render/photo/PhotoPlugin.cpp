@@ -33,8 +33,7 @@ const quint32 maximumNumberOfItems = 99;
 PhotoPlugin::PhotoPlugin()
     : AbstractDataPlugin( 0 ),
       ui_configWidget( 0 ),
-      m_configDialog( 0 ),
-      m_marbleWidget( 0 )
+      m_configDialog( 0 )
 {    
 }
 

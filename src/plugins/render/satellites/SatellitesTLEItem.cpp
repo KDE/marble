@@ -40,7 +40,6 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
                                       elsetrec satrec,
                                       const MarbleClock *clock )
     : TrackerPluginItem( name ),
-      m_showOrbit( false ),
       m_satrec( satrec ),
       m_track( new GeoDataTrack() ),
       m_clock( clock )

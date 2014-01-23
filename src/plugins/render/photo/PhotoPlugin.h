@@ -28,8 +28,6 @@ namespace Ui
 namespace Marble
 {
 
-class MarbleWidget;
-
 class PhotoPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
@@ -88,8 +86,6 @@ class PhotoPlugin : public AbstractDataPlugin, public DialogConfigurationInterfa
  private:
     Ui::PhotoConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
-
-    MarbleWidget *m_marbleWidget;
 
     QStringList m_checkStateList;
 };

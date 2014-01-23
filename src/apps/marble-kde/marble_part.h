@@ -256,9 +256,6 @@ class MarblePart: public KParts::ReadOnlyPart
     QString m_tileZoomLevel;
     KUrl m_lastFileOpenPath;
 
-    // Error item for CloudSyncSettings
-    QLabel *m_statusLabel;
-
     // Items for the statusbar.
     QLabel       *m_positionLabel;
     QLabel       *m_clockLabel;

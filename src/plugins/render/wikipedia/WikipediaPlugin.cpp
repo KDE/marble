@@ -30,8 +30,7 @@ const quint32 maximumNumberOfItems = 99;
 WikipediaPlugin::WikipediaPlugin()
     : AbstractDataPlugin( 0 ),
       ui_configWidget( 0 ),
-      m_configDialog( 0 ),
-      m_marbleWidget( 0 )
+      m_configDialog( 0 )
 {
 }
 
@@ -40,8 +39,7 @@ WikipediaPlugin::WikipediaPlugin( const MarbleModel *marbleModel )
       m_icon( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) ),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),
-      m_showThumbnails( true ),
-      m_marbleWidget( 0 )
+      m_showThumbnails( true )
 {
     // Plugin is enabled by default
     setEnabled( true );

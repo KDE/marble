@@ -24,10 +24,6 @@
 
 using namespace Marble;
 
-// @todo: unused variables, delete in master.
-const int RECT_FRAME_MIN_PADDING = 1;
-const int ROUNDED_RECT_FRAME_MIN_PADDING = 2;
-
 FrameGraphicsItem::FrameGraphicsItem( MarbleGraphicsItem *parent )
         : ScreenGraphicsItem( parent ),
           d( new FrameGraphicsItemPrivate( this ) )
