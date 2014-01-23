@@ -40,7 +40,7 @@ class ASTROLIB_EXPORT Plan200      // Calculating the Planets in epoch J2000.0 c
 	 double	c3[19], s3[19];
 	 double	c[11], s[11];
 	 double	m1, m2, m3, m4, m5, m6, m7, m8;
-	 double	d, a, uu, tt;
+	 double	tt;
 	 double	u, v, dl, dr, db, l, b, r;
 	 Vec3   	rp, vp;   // state vector of planet
 
