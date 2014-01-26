@@ -6,7 +6,7 @@ if(QUAZIP_INCLUDE_DIR AND QUAZIP_LIBRARIES)
   set(QUAZIP_FOUND TRUE)
 else(QUAZIP_INCLUDE_DIR AND QUAZIP_LIBRARIES)
 
-  find_path(QUAZIP_INCLUDE_DIR NAMES quazip.h PATH_SUFFIXES quazip)
+  find_path(QUAZIP_INCLUDE_DIR NAMES quazip/quazip.h)
   find_library(QUAZIP_LIBRARIES NAMES quazip)
 
   include(FindPackageHandleStandardArgs)
