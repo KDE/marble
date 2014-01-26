@@ -18,6 +18,7 @@ marble_set_package_properties( quazip PROPERTIES URL "http://quazip.sourceforge.
 marble_set_package_properties( quazip PROPERTIES TYPE OPTIONAL PURPOSE "reading and displaying .kmz files" )
 if( QUAZIP_FOUND )
   add_definitions( -DMARBLE_HAVE_QUAZIP )
+  include_directories( ${QUAZIP_INCLUDE_DIR} )
   set( kml_SRCS ${kml_SRCS} KmzHandler.cpp )
   set( KmlPlugin_LIBS ${QUAZIP_LIBRARIES} )
 endif( QUAZIP_FOUND )
