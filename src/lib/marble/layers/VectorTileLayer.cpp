@@ -22,6 +22,7 @@
 #include "GeoSceneTypes.h"
 #include "GeoSceneVectorTile.h"
 #include "MarbleDebug.h"
+#include "TileLoader.h"
 #include "ViewportParams.h"
 #include "GeoDataLatLonAltBox.h"
 
@@ -42,8 +43,7 @@ public:
 
 public:
     VectorTileLayer  *const m_parent;
-    HttpDownloadManager *const m_downloadManager;
-    const PluginManager *const m_pluginManager;
+    TileLoader m_loader;
     QVector<VectorTileModel *> m_texmappers;
     QVector<VectorTileModel *> m_activeTexmappers;
     const GeoSceneGroup *m_textureLayerSettings;
@@ -59,8 +59,7 @@ VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
                                   VectorTileLayer *parent,
                                   GeoDataTreeModel *treeModel) :
     m_parent( parent ),
-    m_downloadManager( downloadManager ),
-    m_pluginManager( pluginManager ),
+    m_loader( downloadManager, pluginManager ),
     m_texmappers(),
     m_activeTexmappers(),
     m_textureLayerSettings( 0 ),
@@ -144,7 +143,7 @@ void VectorTileLayer::setMapTheme( const QVector<const GeoSceneVectorTile *> &te
     d->m_activeTexmappers.clear();
 
     foreach ( const GeoSceneVectorTile *layer, textures ) {
-        d->m_texmappers << new VectorTileModel( d->m_downloadManager, d->m_pluginManager, layer, d->m_treeModel, &d->m_threadPool );
+        d->m_texmappers << new VectorTileModel( &d->m_loader, layer, d->m_treeModel, &d->m_threadPool );
     }
 
     d->m_textureLayerSettings = textureLayerSettings;

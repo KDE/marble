@@ -38,10 +38,10 @@ class TileLoader;
 class MergedLayerDecorator
 {
  public:
-    explicit MergedLayerDecorator( const SunLocator* sunLocator );
+    MergedLayerDecorator( TileLoader * const tileLoader, const SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
-    void setTextureLayers( const QVector<TileLoader *> &textureLayers );
+    void setTextureLayers( const QVector<const GeoSceneTextureTile *> &textureLayers );
     void updateGroundOverlays( const QList<const GeoDataGroundOverlay *> &groundOverlays );
 
     int textureLayersSize() const;

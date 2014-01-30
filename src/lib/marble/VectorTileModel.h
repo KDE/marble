@@ -18,7 +18,6 @@
 #include <QCache>
 
 #include "TileId.h"
-#include "TileLoader.h"
 
 class QThreadPool;
 
@@ -29,15 +28,14 @@ class GeoDataDocument;
 class GeoDataLatLonBox;
 class GeoDataTreeModel;
 class GeoSceneVectorTile;
-class HttpDownloadManager;
-class PluginManager;
+class TileLoader;
 
 class TileRunner : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
-    TileRunner( TileLoader *loader, const TileId &id );
+    TileRunner( TileLoader *loader, const GeoSceneVectorTile *texture, const TileId &id );
     void run();
 
 Q_SIGNALS:
@@ -45,6 +43,7 @@ Q_SIGNALS:
 
 private:
     TileLoader *const m_loader;
+    const GeoSceneVectorTile *const m_texture;
     const TileId m_id;
 };
 
@@ -53,7 +52,7 @@ class VectorTileModel : public QObject
     Q_OBJECT
 
 public:
-    explicit VectorTileModel( HttpDownloadManager *downloadManager, const PluginManager *pluginManager, const GeoSceneVectorTile *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool );
+    explicit VectorTileModel( TileLoader *loader, const GeoSceneVectorTile *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool );
 
     void setViewport( const GeoDataLatLonBox &bbox, int radius );
 
@@ -89,7 +88,8 @@ private:
         Q_DISABLE_COPY( CacheDocument )
     };
 
-    TileLoader m_loader;
+    TileLoader *const m_loader;
+    const GeoSceneVectorTile *const m_layer;
     GeoDataTreeModel *const m_treeModel;
     QThreadPool *const m_threadPool;
     int m_tileZoomLevel;
