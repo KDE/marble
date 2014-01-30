@@ -1131,7 +1131,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 }
 
                 if (glowDrawn) {
-                    qreal diameter = 0.0, mag = 0.0;
+                    double diameter = 0.0, mag = 0.0;
                     sys.getPhysSun(diameter, mag);
                     const int coefficient = m_zoomSunMoon ? m_zoomCoefficient : 1;
                     const qreal size = skyRadius * qSin(diameter) * coefficient;
@@ -1180,7 +1180,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 if (!(x < -size || x >= viewport->width() ||
                       y < -size || y >= viewport->height())) {
                     // Moon phases
-                    qreal phase = 0.0, ildisk = 0.0, amag = 0.0;
+                    double phase = 0.0, ildisk = 0.0, amag = 0.0;
                     sys.getLunarPhase(phase, ildisk, amag);
 
                     QPainterPath path;
@@ -1264,7 +1264,7 @@ void StarsPlugin::renderPlanet(const QString &planetId,
                                qreal skyRadius,
                                matrix &skyAxisMatrix)
 {
-    qreal ra(.0), decl(.0), diam(.0), mag(.0), phase(.0);
+    double ra(.0), decl(.0), diam(.0), mag(.0), phase(.0);
     int color=0;
 
     // venus, mars, jupiter, uranus, neptune, saturn
