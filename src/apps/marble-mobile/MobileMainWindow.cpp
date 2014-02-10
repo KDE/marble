@@ -121,7 +121,7 @@ MainWindow::MainWindow( const QString &marbleDataPath, const QVariantMap &cmdLin
     m_workOfflineAct->setChecked( m_marbleWidget->model()->workOffline() );
     connect( m_workOfflineAct, SIGNAL(triggered(bool)), this, SLOT(setWorkOffline(bool)) );
 
-    m_kineticScrollingAction = menuBar()->addAction( QApplication::translate("MarbleNavigationSettingsWidget", "&Inertial Globe Rotation", 0, QApplication::UnicodeUTF8) );
+    m_kineticScrollingAction = menuBar()->addAction( tr( "&Inertial Globe Rotation" ) );
     m_kineticScrollingAction->setCheckable( true );
     connect( m_kineticScrollingAction, SIGNAL(triggered(bool)), this, SLOT(setKineticScrollingEnabled(bool)) );
 
