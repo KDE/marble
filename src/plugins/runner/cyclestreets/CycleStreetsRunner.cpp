@@ -204,6 +204,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
         QString name = segment.elementsByTagName( "cs:name" ).at( 0 ).toElement().text();
         QString maneuver = segment.elementsByTagName( "cs:turn" ).at( 0 ).toElement().text();
         QStringList points = segment.elementsByTagName( "cs:points" ).at( 0 ).toElement().text().split( ' ' );
+        QStringList const elevation = segment.elementsByTagName( "cs:elevations" ).at( 0 ).toElement().text().split( ',' );
 
         GeoDataPlacemark *instructions = new GeoDataPlacemark;
         QString instructionName;
@@ -227,11 +228,12 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
         GeoDataLineString *lineString = new GeoDataLineString;
         QStringList::iterator iter = points.begin();
         QStringList::iterator end = points.end();
-        for  ( ; iter != end; ++iter ) {
+        for  ( int j=0; iter != end; ++iter, ++j ) {
             QStringList coordinate = iter->split( ',' );
             double const lon = coordinate.at( 0 ).toDouble();
             double const lat = coordinate.at( 1 ).toDouble();
-            lineString->append( GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ) );
+            double const alt = j < elevation.size() ? elevation[j].toDouble() : 0.0;
+            lineString->append( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ) );
         }
         instructions->setGeometry( lineString );
         result->append( instructions );
