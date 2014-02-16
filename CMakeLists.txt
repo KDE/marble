@@ -1,7 +1,7 @@
 project(marble)
 
 ####################################################
-# CMake Settings 
+# CMake Settings
 SET(CMAKE_COLOR_MAKEFILE ON)
 # SET(CMAKE_SKIP_RPATH ON)
 
@@ -103,7 +103,7 @@ endif (QTONLY)
 
 ####################################################
 # Build a D-Bus interface for marble
-# This is disabled by default for all win32, apple and Qt-Only builds  
+# This is disabled by default for all win32, apple and Qt-Only builds
 if( QTONLY OR WIN32 OR APPLE)
     option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" OFF)
 else( QTONLY OR WIN32 OR APPLE )
@@ -119,7 +119,7 @@ if( NOT QTONLY AND NOT KDE4_FOUND )
     marble_set_package_properties( KDE4 PROPERTIES TYPE REQUIRED PURPOSE "KDE version of Marble" )
     include (KDE4Defaults)
     include (MacroLibrary)
-endif( NOT QTONLY AND NOT KDE4_FOUND) 
+endif( NOT QTONLY AND NOT KDE4_FOUND)
 
 #### Python support ####
 set(PythonSupport_FOUND FALSE)
@@ -190,11 +190,11 @@ if( QTONLY )
     cmake_minimum_required( VERSION 2.4.8 )
 
     #suppress the policy warnings while keeping the same behaviour
-    if( COMMAND cmake_policy )    
+    if( COMMAND cmake_policy )
     cmake_policy( SET CMP0005 OLD )
     cmake_policy( SET CMP0003 OLD )
     endif( COMMAND cmake_policy )
-    
+
 endif( QTONLY )
 
 ####################################################
@@ -238,15 +238,8 @@ else(WIN32)
       SET (CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/)
       # path for library references
       SET (CMAKE_INSTALL_NAME_DIR @executable_path/lib)
-      #set info.plist properties on mac
-      SET( PROGNAME ${PROJECT_NAME})
-      SET( MACOSX_BUNDLE_ICON_FILE Marble.icns)
-      SET( MACOSX_BUNDLE_SHORT_VERSION_STRING 0.3.0 )
-      SET( MACOSX_BUNDLE_VERSION 0.3.0 )
-      SET( MACOSX_BUNDLE_LONG_VERSION_STRING Version 0.3.0 )
-      SET( MACOSX_BUNDLE_BUNDLE_NAME Marble)
-      #SET( CMAKE_OSX_ARCHITECTURES ppc;i386 ) #Comment out if not universal binary
-      SET( CMAKE_OSX_ARCHITECTURES x86_64 ) #Comment out if universal binary
+      # install the Info.plist file
+      install(FILES src/mac/Info.plist DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents)
       #SET (lib_dir ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
       SET (data_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/data)
       SET (plugin_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/plugins)
@@ -310,12 +303,12 @@ if(STATIC_BUILD)
 endif(STATIC_BUILD)
 
 ####################################################
-# Workaround FindQt4.cmake bug not finding 
+# Workaround FindQt4.cmake bug not finding
 # QtDesigner includes
 if(APPLE)
   if (NOT DEFINED ${QT_QTDESIGNER_INCLUDE_DIR})
-    set ( QT_QTDESIGNER_INCLUDE_DIR 
-    ${QT_LIBRARY_DIR}/QtDesigner.framework/Headers 
+    set ( QT_QTDESIGNER_INCLUDE_DIR
+    ${QT_LIBRARY_DIR}/QtDesigner.framework/Headers
     )
   endif(NOT DEFINED ${QT_QTDESIGNER_INCLUDE_DIR})
 endif(APPLE)

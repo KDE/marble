@@ -17,9 +17,9 @@ if (WIN32)
     add_executable (marble-qt WIN32 ${marble_SRCS})
 else (WIN32)
     if (APPLE)
-        add_executable (marble-qt MACOSX_BUNDLE ${marble_SRCS})
+        add_executable (marble-qt ${marble_SRCS})
         # For Mac OS X, the executable must be at the root of the bundle's executable folder
-        INSTALL(TARGETS marble-qt RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+        INSTALL(TARGETS marble-qt RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS)
     else (APPLE)
         add_executable (marble-qt ${marble_SRCS})
     endif (APPLE)
@@ -38,7 +38,7 @@ if (QT4_FOUND)
     ${QT_QTMAIN_LIBRARY}
     marbleui
     marblewidget
-    astro)
+    )
 else()
   target_link_libraries (
     marble-qt
