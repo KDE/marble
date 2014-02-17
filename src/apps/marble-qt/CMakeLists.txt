@@ -38,7 +38,7 @@ if (QT4_FOUND)
     ${QT_QTMAIN_LIBRARY}
     marbleui
     marblewidget
-    )
+    astro)
 else()
   target_link_libraries (
     marble-qt
