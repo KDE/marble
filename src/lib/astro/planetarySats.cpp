@@ -451,7 +451,7 @@ int PlanetarySats::selectSat(char* sname)
   return res;
 }
 	
-void PlanetarySats::getSatName(char* sname)
+void PlanetarySats::getSatName(char* sname) const
 {
   strcpy (sname, pls_satname);
 }
@@ -467,12 +467,12 @@ void PlanetarySats::nextStep()
   getSatPos(pls_time);
 }
 
-double PlanetarySats::getLastMJD()
+double PlanetarySats::getLastMJD() const
 {
   return pls_time;
 }
 
-void PlanetarySats::getPlanetographic(double &lng, double &lat, double &height)
+void PlanetarySats::getPlanetographic(double &lng, double &lat, double &height) const
 {
   // planetographic coordinates from current state vector
   

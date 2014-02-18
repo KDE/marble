@@ -71,7 +71,7 @@ class ASTROLIB_EXPORT Mat3
                 double x23, double x31, double x32, double x33);
    void assign (double x[3][3]);             // assign matrix
    void PutMij (double x, int i, int j);    // put single matrix element
-   double GetMij (int i, int j);            // get single matrix element
+   double GetMij (int i, int j) const;      // get single matrix element
    Mat3& operator = (const Mat3& c);
    Mat3& operator += (const Mat3& c);
    Mat3& operator -= (const Mat3& c);

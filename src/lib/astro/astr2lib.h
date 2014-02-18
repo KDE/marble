@@ -25,8 +25,8 @@ class ASTROLIB_EXPORT Plan200      // Calculating the Planets in epoch J2000.0 c
  {
   public:
     Plan200();
-    Vec3 velocity();   // return last calculated planet velocity
-    void state (Vec3& rs, Vec3& vs);  // return last state vector
+    Vec3 velocity() const;   // return last calculated planet velocity
+    void state (Vec3& rs, Vec3& vs) const;  // return last state vector
     Vec3 Mercury (double t);   // position of Mercury at time t
     Vec3 Venus (double t);   // position of Venus at time t
     Vec3 Mars (double t);   // position of Mars at time t
@@ -44,7 +44,7 @@ class ASTROLIB_EXPORT Plan200      // Calculating the Planets in epoch J2000.0 c
 	 double	u, v, dl, dr, db, l, b, r;
 	 Vec3   	rp, vp;   // state vector of planet
 
-    void addthe (double c1, double s1, double c2, double s2,
+    static void addthe (double c1, double s1, double c2, double s2,
 					double& cc, double& ss);
     void term (int i1, int i, int it, double dlc, double dls, double drc,
 			  double drs, double dbc, double dbs);

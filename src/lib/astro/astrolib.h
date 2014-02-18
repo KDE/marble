@@ -82,7 +82,7 @@ class ASTROLIB_EXPORT Sun200      // Calculating the Sun in epoch J2000.0 coordi
    double d, a, uu, tt;
    double cl, sl, cb, sb;
    double u, v, dl, dr, db;
-   void addthe (double c1, double s1, double c2, double s2,
+   static void addthe (double c1, double s1, double c2, double s2,
                 double& cc, double& ss);
    void term (int i1, int i, int it, double dlc, double dls, double drc,
               double drs, double dbc, double dbs);
@@ -105,20 +105,20 @@ class ASTROLIB_EXPORT Moon200     // Calculating the position of the Moon in J20
    double dl0, dl, dls, df, dd, ds;
    double co[13][4];
    double si[13][4];
-   void addthe (double c1, double s1, double c2, double s2,
+   static void addthe (double c1, double s1, double c2, double s2,
                 double& c, double& s);
-   double sinus (double phi);
+   static double sinus (double phi);
    void long_periodic (double t);
    void minit(double t);
-   void term (int p, int q, int r, int s, double& x, double& y);
+   void term (int p, int q, int r, int s, double& x, double& y) const;
    void addsol(double coeffl, double coeffs, double coeffg,
                double coeffp, int p, int q, int r, int s);
    void solar1();
    void solar2();
    void solar3();
    void addn (double coeffn, int p, int q, int r, int s,
-              double& n, double&x, double& y);
-   void solarn (double& n);
+              double& n, double&x, double& y) const;
+   void solarn (double& n) const;
    void planetary (double t);
  };
 
@@ -133,9 +133,9 @@ class ASTROLIB_EXPORT Eclipse      // Eclipse Calculations
    void umbra (double jd, double tdut, Vec3& vrm, Vec3& ves,
                 double& dpn, double& pang);
    double duration (double jd, double tdut, double& width);
-   Vec3 GetRSun ();    // get Earth - Sun vector in Earth radii
-   Vec3 GetRMoon ();   // get Earth - Moon vector in Earth radii
-   double GetEp2 ();   // get the ep2 value
+   Vec3 GetRSun () const;    // get Earth - Sun vector in Earth radii
+   Vec3 GetRMoon () const;   // get Earth - Moon vector in Earth radii
+   double GetEp2 () const;   // get the ep2 value
    int lunar (double jd, double tdut);
 
   private: 

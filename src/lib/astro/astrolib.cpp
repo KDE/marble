@@ -1700,7 +1700,7 @@ void Moon200::minit(double t)
    }
  }
 
-void Moon200::term (int p, int q, int r, int s, double& x, double& y)
+void Moon200::term (int p, int q, int r, int s, double& x, double& y) const
  {
   // calculate x=cos(p*arg1+q*arg2...); y=sin(p*arg1+q*arg2...)
   int i[4];
@@ -1837,13 +1837,13 @@ void Moon200::solar3()
  }
 
 void Moon200::addn (double coeffn, int p, int q, int r, int s,
-                    double& n, double&x, double& y)
+                    double& n, double&x, double& y) const
  {
   term (p,q,r,s,x,y);
   n=n+coeffn*y;
  }
 
-void Moon200::solarn (double& n)
+void Moon200::solarn (double& n) const
  {
   // perturbation N of ecliptic latitude
   double x, y;
@@ -2133,7 +2133,7 @@ void Eclipse::equ_sun_moon(double jd, double tdut)
 	  jd = Modified Julian Date (UT)
 	  tdut = TDT - UT in sec
 	*/
-	double ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
+	const double ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
 	Mat3 mx;
 
 	t = julcent (jd) + tdut / 3.15576e9;  // =(86400.0 * 36525.0);
@@ -2212,17 +2212,17 @@ double Eclipse::duration (double jd, double tdut, double& width)
   return dur;
  }
 
-Vec3 Eclipse::GetRSun ()    // get Earth - Sun vector in Earth radii
+Vec3 Eclipse::GetRSun () const    // get Earth - Sun vector in Earth radii
  {
   return rs;
  }
 
-Vec3 Eclipse::GetRMoon ()   // get Earth - Moon vector in Earth radii
+Vec3 Eclipse::GetRMoon () const   // get Earth - Moon vector in Earth radii
  {
   return rm;
  }
 
-double Eclipse::GetEp2 ()   // get the ep2 value
+double Eclipse::GetEp2 () const   // get the ep2 value
  {
   return ep2;
  }

@@ -25,9 +25,9 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
     void setAutoTAI_UTC();  // IERS Parameter TAI - UTC to auto
     void setCurrentMJD(int year, int month, int day, int hour, int min, double sec); // set current time
     void setCurrentMJD();  // sets current MJD to R/T 
-    double getMJD(int year, int month, int day, int hour, int min, double sec); // get MJD from date 
+    double getMJD(int year, int month, int day, int hour, int min, double sec) const; // get MJD from date
     void getDatefromMJD(double mjd, int &year, int &month, int &day,
-                        int &hour, int &min, double &sec); // convert MJD into date and time
+                        int &hour, int &min, double &sec) const; // convert MJD into date and time
     void setEpoch (double yr);  // set epoch of coordinates
     void setNutation (bool nut);  // specify whether nutation is to be included.
     void setCentralBody (char* pname); // select which planet is central body
@@ -66,22 +66,22 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
     double getCometMag(double g, double k);  // apparent magnitude of comet
     double getAsteroidMag(double h, double g);   // apparent magnitude of asteroid
     
-    double DmsDegF (double h); // conversion from Format DDD.MMSS into d.fff
-    double DegFDms (double h); // conversion from Format d.fff into DDD.MMSS
+    static double DmsDegF (double h); // conversion from Format DDD.MMSS into d.fff
+    static double DegFDms (double h); // conversion from Format d.fff into DDD.MMSS
 
 
   private:  
     void ssinit();  // initialize SolarSystem
-    double atan23 (double y, double x);  // atan without singularity for x,y=0
+    static double atan23 (double y, double x);  // atan without singularity for x,y=0
     void DefTime ();  // Get System Time and Date
-    void getRaDec (Vec3 r1, double& ra, double& decl); // convert r1 into RA and DEC
+    static void getRaDec (Vec3 r1, double& ra, double& decl); // convert r1 into RA and DEC
     void updateSolar();  // update all positions of planets according to current MJD.
    
     void MoonDetails();
-    void MoonLibr (double jd, Vec3 rm, Vec3 sn, double &lblon, double &lblat, double &termt);
-    Vec3 SnPos (double &ep2, double &els);
-    Vec3 MnPos (double &ep2, double &els);
-    Mat3 getSelenographic();
+    static void MoonLibr (double jd, Vec3 rm, Vec3 sn, double &lblon, double &lblat, double &termt);
+    Vec3 SnPos (double &ep2, double &els) const;
+    Vec3 MnPos (double &ep2, double &els) const;
+    Mat3 getSelenographic() const;
     void getConstSun();  // Sun constants
     void getConstMoon();  // Moon planetary constants
     void getConstMercury();  // Mercury planetary constants

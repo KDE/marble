@@ -25,7 +25,7 @@ class ASTROLIB_EXPORT EclSolar     // Calculate Solar Eclipses
     EclSolar();
     ~EclSolar();
 
-    int getYear();  // the year currently used by EclSolar
+    int getYear() const;  // the year currently used by EclSolar
     void putYear(int yr);  // set the year to be used by EclSolar
     int getNumberEclYear();  // get the number of eclipses of the currently selected year
     void setLunarEcl(bool lecl);  // include lunar eclipses
@@ -37,7 +37,7 @@ class ASTROLIB_EXPORT EclSolar     // Calculate Solar Eclipses
     void getLocalDetails(char *otxt);  // provide eclipse details for local position
     void setCurrentMJD(int year, int month, int day, int hour, int min, double sec); // set current time
     void getDatefromMJD(double mjd, int &year, int &month, int &day,
-                        int &hour, int &min, double &sec); // convert MJD into date and time
+                        int &hour, int &min, double &sec) const; // convert MJD into date and time
     int getLocalVisibility(double &mjd_start, double &mjd_stop);  // local start and stop times for eclipse
     int getLocalTotal(double &mjd_start, double &mjd_stop);  // local start and stop times for totality/annularity
     int getLocalMax(double &mjdmax, double &magmax, double &elmax);  // get local (solar) eclipse maximum
@@ -51,7 +51,7 @@ class ASTROLIB_EXPORT EclSolar     // Calculate Solar Eclipses
     void putEclSelect(int es);  // select particular eclipse for details
     void nextEcl();  // select the next eclipse for details
     void previousEcl();  // select the previous eclipse for details
-    double getLastMJD();  // get the MJD last used in calculations
+    double getLastMJD() const;  // get the MJD last used in calculations
     void getMaxPos(double &lat, double &lng); // get position of maximum eclipse
     int eclPltCentral(bool firstc, double &lat, double &lng);  // calc central eclipse line
     int GNSBound(bool firstc, bool north, double& lat, double& lng); // northern or southern boundary
@@ -63,29 +63,29 @@ class ASTROLIB_EXPORT EclSolar     // Calculate Solar Eclipses
 
   private:  
     void esinit();  // initialize EclSolar
-    double atan23 (double y, double x);  // atan without singularity for x,y=0
+    static double atan23 (double y, double x);  // atan without singularity for x,y=0
     void DefTime ();  // Get System Time and Date
     void calcMaxPos(double &lat, double &lng); // get position of maximum eclipse
-    void GetMonth (int mm, char* mchr);
-    double phmjd (double yearf, double phase, double tdut,
+    static void GetMonth (int mm, char* mchr);
+    static double phmjd (double yearf, double phase, double tdut,
 				  int& eph, double& ejd, double& emag);
     void ckphase (double minmjd, double maxmjd, double yr,
               double deltdut, int &mp, PMJD p, double phase);
-    void dtmstr(double jdmoon, char *dts);
+    static void dtmstr(double jdmoon, char *dts);
     void moonph();  // calculate phases of the Moon
     void eclStart();   // initialize detailed calcs for selected eclipse
-    double getlocmag(double jd, double ep2, double phi, double lamda,
+    static double getlocmag(double jd, double ep2, double phi, double lamda,
                      double height, Vec3 rs, Vec3 rm, int& totflg);
-    int iscrs(double vrc0, double vrc1, double dpn,
+    static int iscrs(double vrc0, double vrc1, double dpn,
                            double& vrx0, double& vrx1, double& vrx20, double& vrx21);
     void InitBound(); // initialize boundary calcs
     void InRSBound();  // initialize Sunrise/Sunset boundaries
-    double DegFDms (double h);
+    static double DegFDms (double h);
     int localStart(int j, double *spt, double *ept, int *spp,
                                    int p, char *otxt);
-    double navCourse (double lat1, double lng1, double lat2, double lng2); // navigation course from p1 to p2
-    void navNewPos (double d, double an, double lat1, double lng1, double &lat2, double &lng2);
-    double sunObscure(double l1, double l2, double m);  // get the Obscuration of the Sun
+    static double navCourse (double lat1, double lng1, double lat2, double lng2); // navigation course from p1 to p2
+    static void navNewPos (double d, double an, double lat1, double lng1, double &lat2, double &lng2);
+    static double sunObscure(double l1, double l2, double m);  // get the Obscuration of the Sun
 
    // data fields
 

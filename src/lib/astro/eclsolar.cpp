@@ -124,7 +124,7 @@ void EclSolar::DefTime ()  // Get System Time and Date
   if (eb_del_auto) eb_del_tdut = DefTdUt(eb_year);
   };
 
-int EclSolar::getYear()
+int EclSolar::getYear() const
 {
   return eb_year;
 }
@@ -435,7 +435,7 @@ void EclSolar::setCurrentMJD(int year, int month, int day, int hour, int min, do
 
 }
 
-void EclSolar::getDatefromMJD(double mjd, int &year, int &month, int &day, int &hour, int &min, double &sec)
+void EclSolar::getDatefromMJD(double mjd, int &year, int &month, int &day, int &hour, int &min, double &sec) const
 {
     // convert times given in Modified Julian Date (MJD) into conventional date and time
     // correct for timezone
@@ -761,7 +761,7 @@ void EclSolar::previousEcl()
 
 }
 
-double EclSolar::getLastMJD()
+double EclSolar::getLastMJD() const
 {
  // RETURN the MJD last used in calculations
 

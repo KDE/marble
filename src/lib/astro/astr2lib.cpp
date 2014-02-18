@@ -59,12 +59,12 @@ void Plan200::term (int i1, int i, int it, double dlc, double dls, double drc,
 	 db = db + dbc*u + dbs*v;
  }
 
-Vec3 Plan200::velocity()   // return last calculated planet velocity
+Vec3 Plan200::velocity() const   // return last calculated planet velocity
  {
   return vp;
  }
 
-void Plan200::state (Vec3& rs, Vec3& vs)
+void Plan200::state (Vec3& rs, Vec3& vs) const
  {
   /* State vector rs (position) and vs (velocity) of the Sun in
 	  ecliptic of date coordinates for last calculated planet

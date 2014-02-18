@@ -227,7 +227,7 @@ void SolarSystem::setCurrentMJD()
 
 }
 
-double SolarSystem::getMJD(int year, int month, int day, int hour, int min, double sec)
+double SolarSystem::getMJD(int year, int month, int day, int hour, int min, double sec) const
 {
     // return the (MJD-) time corresponding to year, month, day, hour, min, sec
     // corrected for timezone
@@ -240,7 +240,7 @@ double SolarSystem::getMJD(int year, int month, int day, int hour, int min, doub
     return jd;
 }
 
-void SolarSystem::getDatefromMJD(double mjd, int &year, int &month, int &day, int &hour, int &min, double &sec)
+void SolarSystem::getDatefromMJD(double mjd, int &year, int &month, int &day, int &hour, int &min, double &sec) const
 {
     // convert times given in Modified Julian Date (MJD) into conventional date and time
     // correct for timezone
@@ -909,7 +909,7 @@ void SolarSystem::getLunarPhase (double &phase, double &ildisk, double &amag)
   amag = ss_moon_mag;
 }
 
-Vec3 SolarSystem::SnPos (double &ep2, double &els)
+Vec3 SolarSystem::SnPos (double &ep2, double &els) const
  {
   // return the apparent position of the Sun
   // and the Nutation ep2 value and the ecliptic longitude of the Sun els
@@ -934,7 +934,7 @@ Vec3 SolarSystem::SnPos (double &ep2, double &els)
   return rs;
  }
 
-Vec3 SolarSystem::MnPos (double &ep2, double &elm)
+Vec3 SolarSystem::MnPos (double &ep2, double &elm) const
  {
   // return the apparent position of the Moon
   // and the Nutation ep2 value and the ecliptic longitude of the Moon elm
@@ -1048,7 +1048,7 @@ void SolarSystem::MoonDetails ()
   double dist, ps;
   static double els, elm;
   double const degrad = M_PI / 180.0;
-  double ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
+  double const ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
   static Vec3 snc, mnc;   // position of the Sun and the Moon
   Vec3 s, rm, rs, s3;
   double ep2;    // correction for Apparent Sideral Time
@@ -1260,7 +1260,7 @@ void SolarSystem::getConstNeptune()  // Neptune planetary constants
   ss_GM = 6.8713077560e+15;
 }	
 
-Mat3 SolarSystem::getSelenographic ()
+Mat3 SolarSystem::getSelenographic () const
 {
   // Calculate the Matrix to transform from Mean of J2000 into selenographic
   // coordinates at MJD time ss_time.

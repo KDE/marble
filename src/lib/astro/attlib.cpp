@@ -274,7 +274,7 @@ void Mat3::PutMij (double x, int i, int j)
   if ((i>0) && (i<4) && (j>0) && (j<4)) m[i-1][j-1] = x;
  }
 
-double Mat3::GetMij (int i, int j)
+double Mat3::GetMij (int i, int j) const
  {
   double result;
 
