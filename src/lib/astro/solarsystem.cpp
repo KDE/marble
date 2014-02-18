@@ -1268,7 +1268,6 @@ Mat3 SolarSystem::getSelenographic ()
   double t, gam, gmp, l, omg, mln;
   double a, b, c, ic, gn, gp, omp;
   double const degrad = M_PI / 180.0;
-  Vec3 v1;
   Mat3 m1, m2;
 
   t = (ss_time - 15019.5) / 36525.0;

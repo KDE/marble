@@ -2247,7 +2247,6 @@ int Eclipse::lunar (double jd, double tdut)
 	double umbra, penumbra;
 	double r2, s0, sep;
 	int phase;
-	Vec3 v1, v2;
 
 	// get position of Sun and Moon
 	equ_sun_moon(jd, tdut);

@@ -1590,7 +1590,6 @@ int EclSolar::eclPltCentral(bool firstc, double &lat, double &lng)
   */
   double phi, lamda, d1, d2, jd, jd2;
   int kp, kp2, i;
-  Vec3 gx;
   Eclipse eclp;
 
   if (!eb_start_called) eclStart();
