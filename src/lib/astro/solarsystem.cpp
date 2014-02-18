@@ -1046,10 +1046,10 @@ void SolarSystem::MoonDetails ()
 
   double jd, t, lblon, lblat, termt, mnmag;
   double dist, ps;
-  static double els, elm;
+  double els, elm;
   double const degrad = M_PI / 180.0;
   double const ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
-  static Vec3 snc, mnc;   // position of the Sun and the Moon
+  Vec3 snc, mnc;   // position of the Sun and the Moon
   Vec3 s, rm, rs, s3;
   double ep2;    // correction for Apparent Sideral Time
 
