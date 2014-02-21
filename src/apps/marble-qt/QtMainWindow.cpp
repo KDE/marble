@@ -340,7 +340,7 @@ void MainWindow::createActions()
      connect( m_mapWizardAct, SIGNAL(triggered()), SLOT(showMapWizard()) );
 
      // Statusbar Actions
-     m_toggleTileLevelAction = new QAction( "Show Tile Zoom Level", statusBar() );
+     m_toggleTileLevelAction = new QAction( tr( "Show Tile Zoom Level" ), statusBar() );
      m_toggleTileLevelAction->setCheckable( true );
      m_toggleTileLevelAction->setChecked( false );
      connect( m_toggleTileLevelAction, SIGNAL(triggered(bool)),
