@@ -209,6 +209,7 @@ private:
     QLabel      *m_zoomLabel;
     QLabel      *m_clockLabel;
     QProgressBar *m_downloadProgressBar;
+    QAction     *m_toggleTileLevelAction;
     void updateStatusBar();
 
     //Bookmark Menu

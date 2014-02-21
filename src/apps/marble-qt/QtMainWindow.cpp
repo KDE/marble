@@ -339,6 +339,13 @@ void MainWindow::createActions()
      m_mapWizardAct->setStatusTip( tr( "A wizard guides you through the creation of your own map theme." ) );
      connect( m_mapWizardAct, SIGNAL(triggered()), SLOT(showMapWizard()) );
 
+     // Statusbar Actions
+     m_toggleTileLevelAction = new QAction( "Show Zoom Level", statusBar() );
+     m_toggleTileLevelAction->setCheckable( true );
+     m_toggleTileLevelAction->setChecked( false );
+     connect( m_toggleTileLevelAction, SIGNAL(triggered(bool)),
+              this, SLOT(showZoomLevel(bool)) );
+
      // View size actions
      m_viewSizeActsGroup = new QActionGroup( this );
 
@@ -961,13 +968,7 @@ void MainWindow::setupStatusBar()
     statusBar()->setSizeGripEnabled( true );
     statusBar()->setContextMenuPolicy( Qt::ActionsContextMenu );
 
-    QAction* toggleTileLevelAction = new QAction( "Show zoom level", statusBar() );
-    toggleTileLevelAction->setCheckable( true );
-    toggleTileLevelAction->setChecked( false );
-    connect( toggleTileLevelAction, SIGNAL(triggered(bool)),
-             this, SLOT(showZoomLevel(bool)) );
-    statusBar()->addAction( toggleTileLevelAction );
-
+    statusBar()->addAction( m_toggleTileLevelAction );
     setupDownloadProgressBar();
 
     m_positionLabel = new QLabel( );
@@ -1081,6 +1082,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
          showStatusBar(settings.value("statusBar", false ).toBool());
+         showZoomLevel(settings.value("showZoomLevel",false).toBool());
          show();
          showClouds(settings.value("showClouds", true ).toBool());
          workOffline(settings.value("workOffline", false ).toBool());
@@ -1290,6 +1292,7 @@ void MainWindow::writeSettings()
          settings.setValue( "pos", pos() );
          settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
+         settings.setValue( "showZoomLevel", m_toggleTileLevelAction->isChecked() );
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
          settings.setValue( "showAtmosphere", m_controlView->marbleWidget()->showAtmosphere() );
@@ -1562,6 +1565,8 @@ void MainWindow::showZoomLevel(bool show)
     } else {
         statusBar()->removeWidget( m_zoomLabel );
     }
+    // update from last modification
+    m_toggleTileLevelAction->setChecked( show );
 }
 
 void MainWindow::fallBackToDefaultTheme()
