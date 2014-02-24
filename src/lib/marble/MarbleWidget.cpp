@@ -72,6 +72,7 @@ class MarbleWidget::CustomPaintLayer : public LayerInterface
         Q_UNUSED( renderPos );
         Q_UNUSED( layer );
 
+        painter->setPen( Qt::black );
         m_widget->customPaint( painter );
 
         return true;
