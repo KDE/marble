@@ -454,6 +454,7 @@ else (APPLE AND QTONLY)
     geodata/data/GeoDataLabelStyle.h
     geodata/data/GeoDataLatLonAltBox.h
     geodata/data/GeoDataLatLonBox.h
+    geodata/data/GeoDataLatLonQuad.h
     geodata/data/GeoDataLinearRing.h
     geodata/data/GeoDataLineString.h
     geodata/data/GeoDataLineStyle.h
