@@ -78,9 +78,9 @@ void SunLocator::updatePosition()
                 dateTime.date().year(), dateTime.date().month(), dateTime.date().day(),
                 dateTime.time().hour(), dateTime.time().minute(),
                 (double)dateTime.time().second());
-    QString pname = planetId.at(0).toUpper() + planetId.right(planetId.size() - 1);
-    char *centralBody = pname.toLatin1().data();
-    sys.setCentralBody( centralBody );
+    QString const pname = planetId.at(0).toUpper() + planetId.right(planetId.size() - 1);
+    QByteArray const name = pname.toLatin1();
+    sys.setCentralBody( name.data() );
 
     double ra = 0.0;
     double decl = 0.0;

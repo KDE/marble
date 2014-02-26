@@ -30,7 +30,7 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
                         int &hour, int &min, double &sec) const; // convert MJD into date and time
     void setEpoch (double yr);  // set epoch of coordinates
     void setNutation (bool nut);  // specify whether nutation is to be included.
-    void setCentralBody (char* pname); // select which planet is central body
+    void setCentralBody (const char *pname); // select which planet is central body
 
     void getSun (double& ra, double& decl);  // RA and Dec for the Sun 
     void getMoon (double& ra, double& decl);  // RA and Dec for the Moon 

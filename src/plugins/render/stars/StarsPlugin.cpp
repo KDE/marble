@@ -808,9 +808,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 dateTime.date().year(), dateTime.date().month(), dateTime.date().day(),
                 dateTime.time().hour(), dateTime.time().minute(),
                 (double)dateTime.time().second());
-    QString pname = planetId.at(0).toUpper() + planetId.right(planetId.size() - 1);
-    char *centralBody = pname.toLatin1().data();
-    sys.setCentralBody( centralBody );
+    QString const pname = planetId.at(0).toUpper() + planetId.right(planetId.size() - 1);
+    QByteArray const name = pname.toLatin1();
+    sys.setCentralBody( name.data() );
 
     Vec3 skyVector = sys.getPlanetocentric (0.0, 0.0);
     qreal skyRotationAngle = -atan2(skyVector[1], skyVector[0]);
