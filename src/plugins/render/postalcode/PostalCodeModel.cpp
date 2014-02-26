@@ -60,12 +60,14 @@ void PostalCodeModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     geonamesUrl.addQueryItem( "lng", QString::number( lon ) );
     geonamesUrl.addQueryItem( "radius", QString::number( radius ) );
     geonamesUrl.addQueryItem( "maxRows", QString::number( number ) );
+    geonamesUrl.addQueryItem( "username", "marble" );
 #else
     QUrlQuery urlQuery;
     urlQuery.addQueryItem( "lat", QString::number( lat ) );
     urlQuery.addQueryItem( "lng", QString::number( lon ) );
     urlQuery.addQueryItem( "radius", QString::number( radius ) );
     urlQuery.addQueryItem( "maxRows", QString::number( number ) );
+    urlQuery.addQueryItem( "username", "marble" );
     geonamesUrl.setQuery( urlQuery );
 #endif
 
