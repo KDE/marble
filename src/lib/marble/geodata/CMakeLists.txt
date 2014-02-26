@@ -65,6 +65,7 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataAccuracy.cpp
         geodata/data/GeoDataWait.cpp
         geodata/data/GeoDataSoundCue.cpp
+        geodata/data/GeoDataAnimatedUpdate.cpp
 )
 
 SET ( geodata_scene_SRCS
@@ -224,6 +225,7 @@ SET( geodata_graphicsitem_SRCS
 SET ( geodata_handlers_kml_SRCS
 geodata/handlers/kml/KmlAltitudeModeTagHandler.cpp
 geodata/handlers/kml/KmlAltitudeTagHandler.cpp
+geodata/handlers/kml/KmlAnimatedUpdateTagHandler.cpp
 geodata/handlers/kml/KmlAreaTagHandler.cpp
 geodata/handlers/kml/KmlBalloonStyleTagHandler.cpp
 geodata/handlers/kml/KmlBeginTagHandler.cpp

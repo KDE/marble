@@ -16,6 +16,7 @@
 #include "MarbleGlobal.h"
 #include "GeoDataFlyTo.h"
 #include "GeoDataWait.h"
+#include "GeoDataAnimatedUpdate.h"
 #include "GeoParser.h"
 
 
@@ -40,6 +41,9 @@ GeoNode *KmldurationTagHandler::parse(GeoParser & parser) const
     if ( parentItem.is<GeoDataWait>() ){
         parentItem.nodeAs<GeoDataWait>()->setDuration( duration );
     }
+    if ( parentItem.is<GeoDataAnimatedUpdate>() ){
+		parentItem.nodeAs<GeoDataAnimatedUpdate>()->setDuration( duration );
+	}
     return 0;
 }
 

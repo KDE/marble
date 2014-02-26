@@ -36,6 +36,7 @@ namespace GeoDataTypes
  * please keep alphabetic order to prevent mess
  */
 GEODATA_EXPORT extern const char* GeoDataAliasType;
+GEODATA_EXPORT extern const char* GeoDataAnimatedUpdateType;
 GEODATA_EXPORT extern const char* GeoDataCameraType;
 GEODATA_EXPORT extern const char* GeoDataColorStyleType;
 GEODATA_EXPORT extern const char* GeoDataContainerType;

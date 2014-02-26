@@ -16,6 +16,7 @@
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
 #include <GeoDataScreenOverlay.h>
+#include <GeoDataAnimatedUpdate.h>
 
 #include <QObject>
 #include <QBuffer>
@@ -60,8 +61,8 @@ void TestTour::simpleParseTest()
         " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
         "<Folder>"
         "   <gx:Tour>"
-        "   <name>My Tour</name>"
-        "   <description>This is my tour.</description>"
+        "       <name>My Tour</name>"
+        "       <description>This is my tour.</description>"
         "   </gx:Tour>"
         "   <gx:Tour id=\"tourId\">"
         "       <gx:Playlist>"
@@ -70,7 +71,18 @@ void TestTour::simpleParseTest()
         "           </gx:TourControl>"
         "       </gx:Playlist>"
         "   </gx:Tour>"
-        "   <gx:Tour id=\"tourId\"></gx:Tour>"
+        "   <gx:Tour id=\"animUpd\">"
+        "       <name>TourAnim</name>"
+        "       <description>Tour with AnimatedUpdate</description>"
+        "       <gx:Playlist>"
+        "           <gx:AnimatedUpdate>"
+        "               <gx:duration>5.0</gx:duration>"
+        "               <Update>"
+        "                   <targetHref>Whatever.jpg</targetHref>"
+        "               </Update>"
+        "           </gx:AnimatedUpdate>"
+        "       </gx:Playlist>"
+        "   </gx:Tour>"
         "</Folder>"
         "</kml>" );
 
@@ -78,18 +90,26 @@ void TestTour::simpleParseTest()
     QCOMPARE( dataDocument->folderList().size(), 1 );
     GeoDataFolder *folder = dataDocument->folderList().at( 0 );
 
+
     GeoDataTour *tour_1 = dynamic_cast<GeoDataTour*>(folder->child(0));
     GeoDataTour *tour_2 = dynamic_cast<GeoDataTour*>(folder->child(1));
+    GeoDataTour *tour_3 = dynamic_cast<GeoDataTour*>(folder->child(2));
 
     QVERIFY(tour_1 != 0);
     QVERIFY(tour_2 != 0);
+    QVERIFY(tour_3 != 0);
 
     QCOMPARE(tour_1->id(), QString(""));
     QCOMPARE(tour_1->name(), QString("My Tour"));
     QCOMPARE(tour_1->description(), QString("This is my tour."));
+
     QCOMPARE(tour_2->id(), QString("tourId"));
     QCOMPARE(tour_2->name(), QString());
     QCOMPARE(tour_2->description(), QString());
+
+    QCOMPARE(tour_3->id(), QString("animUpd"));
+    QCOMPARE(tour_3->name(), QString("TourAnim"));
+    QCOMPARE(tour_3->description(), QString("Tour with AnimatedUpdate"));
 
     GeoDataPlaylist *playlist = tour_2->playlist();
     QVERIFY(playlist != 0);
@@ -99,6 +119,15 @@ void TestTour::simpleParseTest()
     QVERIFY(control != 0);
     QCOMPARE(control->id(), QString("space"));
     QCOMPARE(control->playMode(), GeoDataTourControl::Pause);
+
+    GeoDataPlaylist *playlist2 = tour_3->playlist();
+    QVERIFY(playlist2 != 0);
+
+    GeoDataAnimatedUpdate *update = dynamic_cast<GeoDataAnimatedUpdate*>(playlist2->primitive(0));
+    QVERIFY(update != 0);
+    QCOMPARE(update->duration(),5.0);
+    QCOMPARE(update->update().targetHref(),QString("Whatever.jpg"));
+
     delete dataDocument;
 }
 

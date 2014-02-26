@@ -207,6 +207,7 @@ namespace kml
 
 
     // Google KML Extension Namespace (http://code.google.com/apis/kml/documentation/kmlreference.html#kmlextensions)
+    GEODATA_EXPORT extern const char* kmlTag_AnimatedUpdate;
     GEODATA_EXPORT extern const char* kmlTag_FlyTo;
     GEODATA_EXPORT extern const char* kmlTag_MultiTrack;
     GEODATA_EXPORT extern const char* kmlTag_Track;

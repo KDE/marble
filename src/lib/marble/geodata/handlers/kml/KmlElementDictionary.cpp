@@ -203,6 +203,7 @@ const char* kmlTag_x = "x";
 const char* kmlTag_y = "y";
 const char* kmlTag_z = "z";
 
+const char* kmlTag_AnimatedUpdate = "AnimatedUpdate";
 const char* kmlTag_FlyTo = "FlyTo";
 const char* kmlTag_MultiTrack = "MultiTrack";
 const char* kmlTag_Track = "Track";

@@ -18,6 +18,7 @@
 #include "GeoParser.h"
 #include "GeoDataModel.h"
 #include "GeoDataAlias.h"
+#include "GeoDataAnimatedUpdate.h"
 
 
 namespace Marble
@@ -35,6 +36,9 @@ GeoNode* KmltargetHrefTagHandler::parse( GeoParser& parser ) const
 
     if ( parentItem.is<GeoDataAlias>() ){
         parentItem.nodeAs<GeoDataAlias>()->setTargetHref( content );
+    }
+    else if ( parentItem.is<GeoDataUpdate>() ){
+        parentItem.nodeAs<GeoDataUpdate>()->setTargetHref( content );
     }
 
     return 0;

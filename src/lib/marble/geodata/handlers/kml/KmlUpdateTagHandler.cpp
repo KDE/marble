@@ -13,6 +13,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataUpdate.h"
+#include "GeoDataAnimatedUpdate.h"
 #include "GeoDataParser.h"
 
 namespace Marble
@@ -29,6 +30,8 @@ GeoNode* KmlUpdateTagHandler::parse( GeoParser& parser ) const
 
     if ( parentItem.represents( kmlTag_NetworkLinkControl ) ) {
         return &parentItem.nodeAs<GeoDataNetworkLinkControl>()->update();
+    } else if ( parentItem.represents( kmlTag_AnimatedUpdate ) ) {
+        return &parentItem.nodeAs<GeoDataAnimatedUpdate>()->update();
     }
 
     return 0;
