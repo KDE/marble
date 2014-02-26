@@ -32,6 +32,8 @@ class GEODATA_EXPORT GeoDataData : public GeoDataObject
     GeoDataData( const QString &name, const QVariant &value );
 
     GeoDataData( const GeoDataData& other );
+    bool operator==( const GeoDataData& other ) const;
+    bool operator!=( const GeoDataData& other ) const;
     virtual ~GeoDataData();
 
     /**

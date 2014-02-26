@@ -40,6 +40,16 @@ GeoDataData& GeoDataData::operator=( const GeoDataData& other )
     return *this;
 }
 
+bool GeoDataData::operator==( const GeoDataData& other) const
+{
+    return (d->m_name == other.d->m_name) && (d->m_value == other.d->m_value) && (d->m_displayName == other.d->m_displayName);
+}
+
+bool GeoDataData::operator!=( const GeoDataData &other ) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataData::GeoDataData( const QString &name, const QVariant &value )
     : d( new GeoDataDataPrivate )
 {

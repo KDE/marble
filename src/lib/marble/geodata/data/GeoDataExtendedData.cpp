@@ -28,6 +28,11 @@ GeoDataExtendedData::GeoDataExtendedData( const GeoDataExtendedData& other )
 {
 }
 
+bool GeoDataExtendedData::operator==( const GeoDataExtendedData& other ) const
+{
+    return ( d->hash == other.d->hash ) && ( d->arrayHash == other.d->arrayHash );
+}
+
 GeoDataExtendedData::~GeoDataExtendedData()
 {
     qDeleteAll( d->arrayHash );
@@ -39,6 +44,11 @@ GeoDataExtendedData& GeoDataExtendedData::operator=( const GeoDataExtendedData& 
     GeoDataObject::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+bool GeoDataExtendedData::operator!=( const GeoDataExtendedData &other ) const
+{
+    return !this->operator==(other);
 }
 
 const char* GeoDataExtendedData::nodeType() const

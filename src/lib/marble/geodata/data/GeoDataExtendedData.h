@@ -47,6 +47,9 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
      */
     GeoDataExtendedData& operator=( const GeoDataExtendedData& other );
 
+    bool operator==( const GeoDataExtendedData& other ) const;
+    bool operator!=( const GeoDataExtendedData& other ) const;
+
     /**
      * @brief return the value of GeoDataExtendedData associated with the given @p key 
      */

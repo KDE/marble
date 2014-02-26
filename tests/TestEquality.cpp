@@ -13,6 +13,9 @@
 #include <MarbleDebug.h>
 #include <GeoDataAlias.h>
 #include <GeoDataAccuracy.h>
+#include <GeoDataSimpleArrayData.h>
+#include <GeoDataData.h>
+#include <GeoDataExtendedData.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -24,6 +27,9 @@ private slots:
     void initTestCase();
     void aliasTest();
     void accuracyTest();
+    void simpleArrayDataTest();
+    void dataTest();
+    void extendedDataTest();
 };
 
 
@@ -82,6 +88,65 @@ void TestEquality::accuracyTest()
     accuracy2.horizontal = 1;
 
     QCOMPARE( accuracy1 == accuracy2, false );
+}
+
+void TestEquality::simpleArrayDataTest()
+{
+    GeoDataSimpleArrayData simpleArray1, simpleArray2;
+
+    simpleArray1.append("Marble");
+    simpleArray1.append(2014);
+    simpleArray1.append("Globe");
+
+    simpleArray2.append("Globe");
+    simpleArray2.append(2014);
+    simpleArray2.append("Marble");
+
+    QCOMPARE( simpleArray1 == simpleArray2, false );
+    QCOMPARE( simpleArray1 != simpleArray2, true );
+}
+
+void TestEquality::dataTest()
+{
+    GeoDataData data1, data2;
+
+    data1.setName("Something");
+    data1.setValue(QVariant(23.56));
+    data1.setDisplayName("Marble");
+
+    data2.setName("Something");
+    data2.setValue(QVariant(23.56));
+    data2.setDisplayName("Marble");
+
+    QCOMPARE( data1 == data2, true );
+    QCOMPARE( data1 != data2, false );
+
+    data1.setName("Marble");
+    data1.setDisplayName("Something");
+
+    QCOMPARE( data1 == data2, false );
+    QCOMPARE( data1 != data2, true );
+}
+
+void TestEquality::extendedDataTest()
+{
+    GeoDataExtendedData extendedData1, extendedData2;
+    GeoDataData data1, data2;
+
+    data1.setName("Something");
+    data1.setValue(QVariant(23.56));
+    data1.setDisplayName("Marble");
+
+    data2.setName("Marble");
+    data2.setValue(QVariant(23.56));
+    data2.setDisplayName("Globe");
+
+    extendedData1.addValue(data1);
+    extendedData2.addValue(data2);
+
+    QCOMPARE( extendedData1 == extendedData2, false );
+    QCOMPARE( extendedData1 != extendedData2, true );
+
 }
 
 QTEST_MAIN( TestEquality )

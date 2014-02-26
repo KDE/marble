@@ -25,6 +25,8 @@ class GEODATA_EXPORT GeoDataSimpleArrayData : public GeoDataObject
 public:
     GeoDataSimpleArrayData();
     GeoDataSimpleArrayData( const GeoDataSimpleArrayData& other );
+    bool operator==( const GeoDataSimpleArrayData &other ) const;
+    bool operator!=( const GeoDataSimpleArrayData &other) const;
     ~GeoDataSimpleArrayData();
 
     /**
