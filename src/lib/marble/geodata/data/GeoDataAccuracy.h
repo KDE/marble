@@ -36,6 +36,8 @@ class MARBLE_EXPORT GeoDataAccuracy
 
     bool operator==( const GeoDataAccuracy &other ) const;
 
+    bool operator!=( const GeoDataAccuracy &other ) const;
+
     /**
      * @brief Approximate descriptive accuracy.
      */

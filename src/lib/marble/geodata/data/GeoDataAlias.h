@@ -30,6 +30,10 @@ public:
 
     GeoDataAlias& operator=( const GeoDataAlias &other );
 
+    bool operator==( const GeoDataAlias &other ) const;
+
+    bool operator!=( const GeoDataAlias &other ) const;
+
     ~GeoDataAlias();
 
     /** Provides type information for downcasting a GeoNode */

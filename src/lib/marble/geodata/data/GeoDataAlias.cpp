@@ -45,6 +45,16 @@ GeoDataAlias &GeoDataAlias::operator=( const GeoDataAlias &other )
     return *this;
 }
 
+bool GeoDataAlias::operator==( const GeoDataAlias &other ) const
+{
+    return ( d->m_sourceHref == other.d->m_sourceHref ) && ( d->m_targetHref == other.d->m_targetHref );
+}
+
+bool GeoDataAlias::operator!=( const GeoDataAlias &other ) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataAlias::~GeoDataAlias()
 {
     delete d;
