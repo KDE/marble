@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+       <ScreenOverlay>
+               <drawOrder>9</drawOrder>
+               <overlayXY x="2.5" xunits="fraction" y="-0.5" yunits="fraction"/>
+               <rotationXY x="1.5" xunits="fraction" y="3.5" yunits="insetPixels"/>
+               <screenXY x="0.5" xunits="pixels" y="0.5" yunits="pixels"/>
+               <size x="23" xunits="pixels" y="0.5" yunits="insetPixels"/>
+               <rotation>23</rotation>
+       </ScreenOverlay>
+</kml>

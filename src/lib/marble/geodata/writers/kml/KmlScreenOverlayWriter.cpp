@@ -48,9 +48,9 @@ void KmlScreenOverlayWriter::writeVec2( const QString &element, const GeoDataVec
 {
     writer.writeStartElement( element );
     writer.writeAttribute( "x", QString::number( vec2.x() ) );
-    writer.writeAttribute( "xunit", unitToString( vec2.xunit() ) );
+    writer.writeAttribute( "xunits", unitToString( vec2.xunit() ) );
     writer.writeAttribute( "y", QString::number( vec2.y() ) );
-    writer.writeAttribute( "yunit", unitToString( vec2.yunit() ) );
+    writer.writeAttribute( "yunits", unitToString( vec2.yunit() ) );
     writer.writeEndElement();
 }
 

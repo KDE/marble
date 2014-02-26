@@ -98,6 +98,8 @@ void TestGeoDataWriter::countFeatures_data()
     QTest::newRow("MackyModel") << parsers.value("MackyModel.kml") << 1;
     QTest::newRow("Tour") << parsers.value("Tour.kml") << 1;
     QTest::newRow("AltitudeMode") << parsers.value("AltitudeMode.kml") << 1;
+    QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml") << 1;
+    QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml") << 1;
 }
 
 void TestGeoDataWriter::countFeatures()
@@ -124,6 +126,8 @@ void TestGeoDataWriter::saveFile_data()
     QTest::newRow("MackyModel") << parsers.value("MackyModel.kml");
     QTest::newRow("Tour") << parsers.value("Tour.kml");
     QTest::newRow("AltitudeMode") << parsers.value("AltitudeMode.kml");
+    QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml");
+    QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml");
 }
 
 void TestGeoDataWriter::saveFile()
@@ -156,6 +160,8 @@ void TestGeoDataWriter::saveAndLoad_data()
     QTest::newRow("MackyModel") << parsers.value("MackyModel.kml");
     QTest::newRow("Tour") << parsers.value("Tour.kml");
     QTest::newRow("AltitudeMode") << parsers.value("AltitudeMode.kml");
+    QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml");
+    QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml");
 }
 
 void TestGeoDataWriter::saveAndLoad()
@@ -190,7 +196,9 @@ void TestGeoDataWriter::saveAndCompare_data()
     QTest::newRow("NetworkLinkDocument") << parsers.value( "NetworkLinkDocument.kml" ) << "NetworkLinkDocument.kml";
     QTest::newRow("MackyModel") << parsers.value("MackyModel.kml") << "MackyModel.kml";
     QTest::newRow("Tour") << parsers.value("Tour.kml") << "Tour.kml";
-	QTest::newRow("AltitudeMode") << parsers.value("AltitudeMode.kml") << "AltitudeMode.kml";
+    QTest::newRow("AltitudeMode") << parsers.value("AltitudeMode.kml") << "AltitudeMode.kml";
+    QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml") << "ScreenOverlay_Folder.kml";
+    QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml") << "ScreenOverlay_kml.kml";
 }
 
 void TestGeoDataWriter::saveAndCompare()
