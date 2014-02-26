@@ -48,6 +48,8 @@ void TestEquality::aliasTest()
     alias2.setSourceHref("test1");
     alias2.setTargetHref("test1");
 
+    QCOMPARE( alias, alias );
+    QCOMPARE( alias2, alias2 );
     QCOMPARE( alias, alias2 );
 
     alias.setSourceHref("test2");
@@ -62,7 +64,7 @@ void TestEquality::aliasTest()
     QCOMPARE( alias == alias2, false );
 
     alias2.setSourceHref("Test3");
-    QCOMPARE( alias != alias2, true );
+    QVERIFY( alias != alias2 );
 
     alias.setSourceHref("Test3");
     alias.setTargetHref("test2");
@@ -79,10 +81,12 @@ void TestEquality::accuracyTest()
     accuracy2.level = GeoDataAccuracy::Country;
     accuracy2.vertical = 2;
     accuracy2.horizontal = 3;
+    QCOMPARE( accuracy1, accuracy1 );
+    QCOMPARE( accuracy2, accuracy2 );
     QCOMPARE( accuracy1, accuracy2 );
 
     accuracy1.vertical = 1;
-    QCOMPARE( accuracy1 != accuracy2, true );
+    QVERIFY( accuracy1 != accuracy2 );
 
     accuracy1.horizontal = 1;
     accuracy2.horizontal = 1;
@@ -102,8 +106,10 @@ void TestEquality::simpleArrayDataTest()
     simpleArray2.append(2014);
     simpleArray2.append("Marble");
 
+    QCOMPARE( simpleArray1, simpleArray1 );
+    QCOMPARE( simpleArray2, simpleArray2 );
     QCOMPARE( simpleArray1 == simpleArray2, false );
-    QCOMPARE( simpleArray1 != simpleArray2, true );
+    QVERIFY( simpleArray1 != simpleArray2 );
 }
 
 void TestEquality::dataTest()
@@ -118,14 +124,16 @@ void TestEquality::dataTest()
     data2.setValue(QVariant(23.56));
     data2.setDisplayName("Marble");
 
-    QCOMPARE( data1 == data2, true );
+    QCOMPARE( data1, data1 );
+    QCOMPARE( data2, data2 );
+    QCOMPARE( data1, data2 );
     QCOMPARE( data1 != data2, false );
 
     data1.setName("Marble");
     data1.setDisplayName("Something");
 
     QCOMPARE( data1 == data2, false );
-    QCOMPARE( data1 != data2, true );
+    QVERIFY( data1 != data2 );
 }
 
 void TestEquality::extendedDataTest()
@@ -144,9 +152,10 @@ void TestEquality::extendedDataTest()
     extendedData1.addValue(data1);
     extendedData2.addValue(data2);
 
+    QCOMPARE( extendedData1, extendedData1 );
+    QCOMPARE( extendedData2, extendedData2 );
     QCOMPARE( extendedData1 == extendedData2, false );
-    QCOMPARE( extendedData1 != extendedData2, true );
-
+    QVERIFY( extendedData1 != extendedData2 );
 }
 
 QTEST_MAIN( TestEquality )
