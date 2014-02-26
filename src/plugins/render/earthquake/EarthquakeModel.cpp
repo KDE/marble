@@ -68,6 +68,7 @@ void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint32
     geonamesUrl += "&west="    + QString::number( box.west() * RAD2DEG );
     geonamesUrl += "&date=" + m_endDate.toString( "yyyy-MM-dd" );
     geonamesUrl += "&maxRows=" + QString::number( number );
+    geonamesUrl += "&username=marble";
     geonamesUrl += "&formatted=true";
     downloadDescriptionFile( QUrl( geonamesUrl ) );
 }

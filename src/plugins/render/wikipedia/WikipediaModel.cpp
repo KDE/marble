@@ -73,6 +73,7 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     geonamesUrl.addQueryItem( "west", QString::number( box.west( GeoDataCoordinates::Degree ) ) );
     geonamesUrl.addQueryItem( "maxRows", QString::number( number ) );
     geonamesUrl.addQueryItem( "lang", m_languageCode );
+    geonamesUrl.addQueryItem( "username", "marble" );
 #else
     QUrlQuery urlQuery;
     urlQuery.addQueryItem( "north", QString::number( box.north( GeoDataCoordinates::Degree ) ) );
@@ -81,6 +82,7 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     urlQuery.addQueryItem( "west", QString::number( box.west( GeoDataCoordinates::Degree ) ) );
     urlQuery.addQueryItem( "maxRows", QString::number( number ) );
     urlQuery.addQueryItem( "lang", m_languageCode );
+    urlQuery.addQueryItem( "username", "marble" );
     geonamesUrl.setQuery( urlQuery );
 #endif
 
