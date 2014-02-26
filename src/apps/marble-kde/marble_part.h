@@ -129,8 +129,8 @@ class MarblePart: public KParts::ReadOnlyPart
      */
     void showDownloadProgressBar( bool isChecked );
 
-    void  downloadJobAdded();
-    void  downloadJobRemoved();
+    void  handleProgress( int active, int queued);
+    void  removeProgressItem();
 
     void  lockFloatItemPosition( bool );
     void  controlSun();

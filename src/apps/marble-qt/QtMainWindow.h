@@ -136,8 +136,8 @@ private Q_SLOTS:
 
     void showZoomLevel( bool show );
 
-    void downloadJobAdded();
-    void downloadJobRemoved();
+    void handleProgress( int, int );
+    void removeProgressItem();
 
 private:
     ControlView *m_controlView;

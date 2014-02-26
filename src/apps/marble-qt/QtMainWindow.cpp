@@ -1027,24 +1027,24 @@ void MainWindow::setupDownloadProgressBar()
     HttpDownloadManager * const downloadManager =
         m_controlView->marbleModel()->downloadManager();
     Q_ASSERT( downloadManager );
-    connect( downloadManager, SIGNAL(jobAdded()), SLOT(downloadJobAdded()) );
-    connect( downloadManager, SIGNAL(jobRemoved()), SLOT(downloadJobRemoved()) );
+    connect( downloadManager, SIGNAL(progressChanged( int, int )), SLOT(handleProgress( int, int )) );
+    connect( downloadManager, SIGNAL(jobRemoved()), SLOT(removeProgressItem()) );
 }
 
-void MainWindow::downloadJobAdded(){
+void MainWindow::handleProgress( int active, int queued ){
     m_downloadProgressBar->setUpdatesEnabled( false );
     if ( m_downloadProgressBar->value() < 0 ) {
         m_downloadProgressBar->setMaximum( 1 );
         m_downloadProgressBar->setValue( 0 );
         m_downloadProgressBar->setVisible( true );
     } else {
-        m_downloadProgressBar->setMaximum( m_downloadProgressBar->maximum() + 1 );
+        m_downloadProgressBar->setMaximum( qMax<int>( m_downloadProgressBar->maximum(), active + queued ) );
     }
 
     m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
-void MainWindow::downloadJobRemoved(){
+void MainWindow::removeProgressItem(){
     m_downloadProgressBar->setUpdatesEnabled( false );
     m_downloadProgressBar->setValue( m_downloadProgressBar->value() + 1 );
     if ( m_downloadProgressBar->value() == m_downloadProgressBar->maximum() ) {
