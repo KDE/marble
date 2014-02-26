@@ -48,34 +48,39 @@ public:
      * @param  mag magnitude
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    StarPoint(int id, qreal rect, qreal decl, qreal mag, int colorId) {
-        m_id = id;
+    StarPoint(int id, qreal rect, qreal decl, qreal mag, int colorId) :
+        m_id( id ),
+        m_magnitude( mag ),
+        m_colorId( colorId )
+    {
         m_q = Quaternion::fromSpherical( rect, decl );
-        m_mag = mag;
-        m_colorId = colorId;
     }
 
     ~StarPoint() {}
 
-    qreal magnitude() const {
-        return m_mag;
+    qreal magnitude() const
+    {
+        return m_magnitude;
     }
 
-    const Quaternion &quaternion() const {
+    const Quaternion &quaternion() const
+    {
         return m_q;
     }
 
-    int id() const {
+    int id() const
+    {
         return m_id;
     }
     
-    int colorId() const {
+    int colorId() const
+    {
         return m_colorId;
     } 
 
 private:
     int         m_id;
-    qreal       m_mag;
+    qreal       m_magnitude;
     Quaternion  m_q;
     int         m_colorId;
 };
@@ -96,13 +101,13 @@ public:
         m_q = Quaternion::fromSpherical( rect, decl );
     }
 
-    ~DsoPoint() {}
-
-    QString id() const {
+    QString id() const
+    {
         return m_id;
     }  
 
-    const Quaternion &quaternion() const {
+    const Quaternion &quaternion() const
+    {
         return m_q;
     }
 
@@ -273,9 +278,10 @@ class Constellation
 {
 public:
     Constellation() {}
-    Constellation(StarsPlugin *plug, QString &name, QString &stars) {
-        m_plugin = plug;
-        m_name = name;
+    Constellation(StarsPlugin *plugin, const QString &name, const QString &stars) :
+        m_plugin( plugin ),
+        m_name( name )
+    {
         QStringList starlist = stars.split(" ");
         for (int i = 0; i < starlist.size(); ++i) {
             m_stars << starlist.at(i).toInt();
@@ -283,17 +289,24 @@ public:
 
     }
 
-    int size() const {
+    int size() const
+    {
         return m_stars.size();
     }
 
-    int at(const int index) const {
-        if (index < 0) return -1;
-        if (index >= m_stars.size()) return -1;
+    int at(const int index) const
+    {
+        if (index < 0) {
+            return -1;
+        }
+        if (index >= m_stars.size()) {
+            return -1;
+        }
         return m_stars.at(index);
     }
 
-    QString name() const {
+    QString name() const
+    {
         return m_plugin->assembledConstellation(m_name);
     }
 
