@@ -178,6 +178,8 @@ void TestEquality::balloonTest()
     balloon2.setText("Text1");
     balloon2.setDisplayMode(GeoDataBalloonStyle::Hide);
 
+    QCOMPARE( balloon1, balloon1 );
+    QCOMPARE( balloon2, balloon2 );
     QCOMPARE( balloon1, balloon2 );
 
     balloon2.setDisplayMode(GeoDataBalloonStyle::Default);
@@ -195,13 +197,28 @@ void TestEquality::colorTest()
     GeoDataColorStyle color1, color2;
 
     color1.setColor(Qt::white);
-    color1.setColorMode(GeoDataColorStyle::Random);
-
     color2.setColor(Qt::white);
-    color2.setColorMode(GeoDataColorStyle::Random);
 
-    QVERIFY( color1 == color2 );
-    QCOMPARE( color1, color2);
+    QCOMPARE( color1, color1 );
+    QCOMPARE( color2, color2 );
+    QCOMPARE( color1, color2 );
+
+    color1.setColorMode(GeoDataColorStyle::Random);
+    QCOMPARE( color1, color1 );
+    QCOMPARE( color2, color2 );
+    // Different color mode, so not equal
+    QVERIFY( color1 != color2 );
+
+    color2.setColorMode(GeoDataColorStyle::Random);
+    QCOMPARE( color1, color1 );
+    QCOMPARE( color2, color2 );
+    // Paint colors are now likely different, but we still consider them equal
+    QCOMPARE( color1, color2 );
+
+    color2.setColor( Qt::yellow );
+    QCOMPARE( color1, color1 );
+    QCOMPARE( color2, color2 );
+    QVERIFY( color1 != color2 );
 }
 
 void TestEquality::cameraTest()
@@ -224,6 +241,8 @@ void TestEquality::cameraTest()
     camera1.setRoll(300);
     camera1.setTilt(400);
 
+    QCOMPARE( camera1, camera1 );
+    QCOMPARE( camera2, camera2 );
     QCOMPARE( camera1 == camera2, false );
     QVERIFY( camera1 != camera2 );
 }
