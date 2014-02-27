@@ -37,6 +37,20 @@ GeoDataCamera& GeoDataCamera::operator=( const GeoDataCamera &other )
     return *this;
 }
 
+bool GeoDataCamera::operator==( const GeoDataCamera &other ) const
+{
+    return d->m_coordinates == other.d->m_coordinates &&
+           d->m_roll == other.d->m_roll &&
+           d->m_heading == other.d->m_heading &&
+           d->m_tilt == other.d->m_tilt &&
+           d->m_altitudeMode == other.d->m_altitudeMode;
+}
+
+bool GeoDataCamera::operator!=( const GeoDataCamera &other ) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataCamera::~GeoDataCamera()
 {
     if( !d->ref.deref() ) {

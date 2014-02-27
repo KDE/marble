@@ -28,6 +28,9 @@ public:
     GeoDataBalloonStyle( const GeoDataBalloonStyle &other );
 
     GeoDataBalloonStyle& operator=( const GeoDataBalloonStyle &other );
+    bool operator==( const GeoDataBalloonStyle &other ) const;
+    bool operator!=( const GeoDataBalloonStyle &other ) const;
+
 
     ~GeoDataBalloonStyle();
 

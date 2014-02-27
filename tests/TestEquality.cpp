@@ -16,6 +16,9 @@
 #include <GeoDataSimpleArrayData.h>
 #include <GeoDataData.h>
 #include <GeoDataExtendedData.h>
+#include <GeoDataBalloonStyle.h>
+#include <GeoDataCamera.h>
+#include <GeoDataColorStyle.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -30,6 +33,9 @@ private slots:
     void simpleArrayDataTest();
     void dataTest();
     void extendedDataTest();
+    void balloonTest();
+    void colorTest();
+    void cameraTest();
 };
 
 
@@ -156,6 +162,70 @@ void TestEquality::extendedDataTest()
     QCOMPARE( extendedData2, extendedData2 );
     QCOMPARE( extendedData1 == extendedData2, false );
     QVERIFY( extendedData1 != extendedData2 );
+}
+
+void TestEquality::balloonTest()
+{
+    GeoDataBalloonStyle balloon1, balloon2;
+
+    balloon1.setBackgroundColor(Qt::white);
+    balloon1.setTextColor(Qt::black);
+    balloon1.setText("Text1");
+    balloon1.setDisplayMode(GeoDataBalloonStyle::Hide);
+
+    balloon2.setBackgroundColor(Qt::white);
+    balloon2.setTextColor(Qt::black);
+    balloon2.setText("Text1");
+    balloon2.setDisplayMode(GeoDataBalloonStyle::Hide);
+
+    QCOMPARE( balloon1, balloon2 );
+
+    balloon2.setDisplayMode(GeoDataBalloonStyle::Default);
+    QCOMPARE( balloon1 != balloon2, true );
+
+    balloon1.setDisplayMode(GeoDataBalloonStyle::Default);
+    balloon1.setText("Text2");
+    QCOMPARE( balloon1 == balloon2, false);
+
+    QVERIFY( balloon1 != balloon2 );
+}
+
+void TestEquality::colorTest()
+{
+    GeoDataColorStyle color1, color2;
+
+    color1.setColor(Qt::white);
+    color1.setColorMode(GeoDataColorStyle::Random);
+
+    color2.setColor(Qt::white);
+    color2.setColorMode(GeoDataColorStyle::Random);
+
+    QVERIFY( color1 == color2 );
+    QCOMPARE( color1, color2);
+}
+
+void TestEquality::cameraTest()
+{
+    GeoDataCamera camera1, camera2;
+
+    camera1.setAltitudeMode(Marble::Absolute);
+    camera1.setAltitude(100);
+    camera1.setLatitude(100);
+    camera1.setLongitude(100);
+    camera1.setHeading(200);
+    camera1.setRoll(300);
+    camera1.setTilt(400);
+
+    camera1.setAltitudeMode(Marble::ClampToGround);
+    camera1.setAltitude(100);
+    camera1.setLatitude(100);
+    camera1.setLongitude(100);
+    camera1.setHeading(200);
+    camera1.setRoll(300);
+    camera1.setTilt(400);
+
+    QCOMPARE( camera1 == camera2, false );
+    QVERIFY( camera1 != camera2 );
 }
 
 QTEST_MAIN( TestEquality )

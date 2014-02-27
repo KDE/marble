@@ -27,6 +27,8 @@ public:
     GeoDataCamera(const GeoDataCamera& other);
 
     GeoDataCamera& operator=(const GeoDataCamera &other);
+    bool operator==( const GeoDataCamera &other ) const;
+    bool operator!=( const GeoDataCamera &other ) const;
 
     ~GeoDataCamera();
 

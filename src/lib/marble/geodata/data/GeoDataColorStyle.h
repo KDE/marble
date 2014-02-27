@@ -100,6 +100,8 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
     * @param other the other colorstyle
     */
     GeoDataColorStyle& operator=( const GeoDataColorStyle& other );
+    bool operator==( const GeoDataColorStyle &other ) const;
+    bool operator!=( const GeoDataColorStyle &other ) const;
 
     /**
      * @brief Serialize the style to a stream
