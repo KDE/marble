@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document>
+        <name>Track</name>
+        <Style id="track">
+            <BalloonStyle>
+                <displayMode>default</displayMode>
+            </BalloonStyle>
+            <IconStyle>
+                <scale>1.000000</scale>
+                <Icon>
+                    <href>/home/username/marble/export/share/marble/data/bitmaps/default_location.png</href>
+                </Icon>
+                <hotSpot x="0.500000" y="0.500000" xunits="fraction" yunits="fraction"/>
+            </IconStyle>
+            <LineStyle>
+                <color>c80008e2</color>
+                <width>4</width>
+            </LineStyle>
+            <ListStyle/>
+            <PolyStyle>
+                <fill>1</fill>
+                <outline>1</outline>
+            </PolyStyle>
+        </Style>
+        <StyleMap id="map-track">
+            <Pair>
+                <key>normal</key>
+                <styleUrl>#track</styleUrl>
+            </Pair>
+        </StyleMap>
+        <Placemark>
+            <name>Track Track</name>
+            <styleUrl>#map-track</styleUrl>
+            <gx:MultiTrack>
+                <gx:Track/>
+                <gx:Track>
+                    <when>2014-02-27T05:14:01</when>
+                    <gx:coord>88.4159300000 22.5305680000 0.0000000000</gx:coord>
+                    <when>2014-02-27T05:14:01</when>
+                    <gx:coord>88.4105360000 22.5317960000 0.0000000000</gx:coord>
+                    <when>2014-02-27T05:14:01</when>
+                    <gx:coord>88.4051050000 22.5330300000 0.0000000000</gx:coord>
+                    <when>2014-02-27T05:14:02</when>
+                    <gx:coord>88.4032270000 22.5334380000 0.0000000000</gx:coord>
+                    <when>2014-02-27T05:14:02</when>
+                    <gx:coord>88.4031550000 22.5334750000 0.0000000000</gx:coord>
+                    <when>2014-02-27T05:14:02</when>
+                    <gx:coord>88.4031140000 22.5335300000 0.0000000000</gx:coord>
+                </gx:Track>
+            </gx:MultiTrack>
+        </Placemark>
+    </Document>
+</kml>

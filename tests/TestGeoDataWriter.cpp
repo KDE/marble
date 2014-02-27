@@ -100,6 +100,7 @@ void TestGeoDataWriter::countFeatures_data()
     QTest::newRow("AltitudeMode") << parsers.value("AltitudeMode.kml") << 1;
     QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml") << 1;
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml") << 1;
+    QTest::newRow("Track") << parsers.value("Track.kml") << 1;
 }
 
 void TestGeoDataWriter::countFeatures()
@@ -128,6 +129,7 @@ void TestGeoDataWriter::saveFile_data()
     QTest::newRow("AltitudeMode") << parsers.value("AltitudeMode.kml");
     QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml");
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml");
+    QTest::newRow("Track") << parsers.value("Track.kml");
 }
 
 void TestGeoDataWriter::saveFile()
@@ -162,6 +164,7 @@ void TestGeoDataWriter::saveAndLoad_data()
     QTest::newRow("AltitudeMode") << parsers.value("AltitudeMode.kml");
     QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml");
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml");
+    QTest::newRow("Track") << parsers.value("Track.kml");
 }
 
 void TestGeoDataWriter::saveAndLoad()
@@ -199,6 +202,7 @@ void TestGeoDataWriter::saveAndCompare_data()
     QTest::newRow("AltitudeMode") << parsers.value("AltitudeMode.kml") << "AltitudeMode.kml";
     QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml") << "ScreenOverlay_Folder.kml";
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml") << "ScreenOverlay_kml.kml";
+    QTest::newRow("Track") << parsers.value("Track.kml") << "Track.kml";
 }
 
 void TestGeoDataWriter::saveAndCompare()
