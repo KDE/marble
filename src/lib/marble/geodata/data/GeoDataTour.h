@@ -30,9 +30,6 @@ public:
     GeoDataTour& operator=(const GeoDataTour &other);
     virtual ~GeoDataTour();
 
-    QString id() const;
-    void setId(const QString &value);
-
     GeoDataPlaylist* playlist();
     const GeoDataPlaylist* playlist() const;
     void setPlaylist(GeoDataPlaylist* playlist);

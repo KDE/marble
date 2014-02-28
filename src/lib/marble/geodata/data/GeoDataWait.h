@@ -25,14 +25,10 @@ public:
 
     const char *nodeType() const;
 
-    QString id() const;
-    void setId(const QString &id);
-
     double duration() const;
     void setDuration(double duration);
 
 private:
-    QString m_id;
     double m_duration;
 };
 

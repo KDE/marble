@@ -16,7 +16,6 @@ namespace Marble
 {
 
 GeoDataTourControl::GeoDataTourControl() :
-    m_id(""),
     m_playMode(Play)
 {
 }
@@ -28,16 +27,6 @@ GeoDataTourControl::~GeoDataTourControl()
 const char *GeoDataTourControl::nodeType() const
 {
     return GeoDataTypes::GeoDataTourControlType;
-}
-
-QString GeoDataTourControl::id() const
-{
-    return m_id;
-}
-
-void GeoDataTourControl::setId(const QString &id)
-{
-    m_id = id;
 }
 
 GeoDataTourControl::PlayMode GeoDataTourControl::playMode() const

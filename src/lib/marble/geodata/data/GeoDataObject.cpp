@@ -28,14 +28,14 @@ class GeoDataObjectPrivate
 {
   public:
     GeoDataObjectPrivate()
-        : m_id(0),
-          m_targetId(0),
+        : m_id(),
+          m_targetId(),
           m_parent(0)
     {
     }
 
-    int  m_id;
-    int  m_targetId;
+    QString  m_id;
+    QString  m_targetId;
     GeoDataObject *m_parent;
 };
 
@@ -72,22 +72,22 @@ void GeoDataObject::setParent(GeoDataObject *parent)
     d->m_parent = parent;
 }
 
-int GeoDataObject::id() const
+QString GeoDataObject::id() const
 {
     return d->m_id;
 }
 
-void GeoDataObject::setId( int value )
+void GeoDataObject::setId( const QString& value )
 {
     d->m_id = value;
 }
 
-int GeoDataObject::targetId() const
+QString GeoDataObject::targetId() const
 {
     return d->m_targetId;
 }
 
-void GeoDataObject::setTargetId( int value )
+void GeoDataObject::setTargetId( const QString& value )
 {
     d->m_targetId = value;
 }

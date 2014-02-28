@@ -16,7 +16,6 @@ namespace Marble
 {
 
 GeoDataWait::GeoDataWait() :
-    m_id(""),
     m_duration(0.0)
 {
 }
@@ -28,16 +27,6 @@ GeoDataWait::~GeoDataWait()
 const char *GeoDataWait::nodeType() const
 {
     return GeoDataTypes::GeoDataWaitType;
-}
-
-QString GeoDataWait::id() const
-{
-    return m_id;
-}
-
-void GeoDataWait::setId(const QString &id)
-{
-    m_id = id;
 }
 
 double GeoDataWait::duration() const

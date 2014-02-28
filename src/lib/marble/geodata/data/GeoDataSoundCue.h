@@ -27,15 +27,11 @@ public:
     QString href() const;
     void setHref(const QString &url);
 
-    QString id() const;
-    void setId(const QString &i);
-
     double delayedStart() const;
     void setDelayedStart(double pause);
 
 private:
     QString m_href;
-    QString m_id;
     double m_delayedStart;
 };
 

@@ -38,16 +38,6 @@ void GeoDataSoundCue::setHref(const QString &url)
     m_href = url;
 }
 
-QString GeoDataSoundCue::id() const
-{
-    return m_id;
-}
-
-void GeoDataSoundCue::setId(const QString &i)
-{
-    m_id = i;
-}
-
 double GeoDataSoundCue::delayedStart() const
 {
     return m_delayedStart;

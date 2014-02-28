@@ -19,10 +19,8 @@ class GeoDataTourPrivate
 {
 public:
     GeoDataTourPrivate() :
-        m_id(""),
         m_playlist(0)
     {}
-    QString m_id;
     GeoDataPlaylist *m_playlist;
 };
 
@@ -50,16 +48,6 @@ GeoDataTour& GeoDataTour::operator=(const GeoDataTour &other)
 GeoDataTour::~GeoDataTour()
 {
     delete d;
-}
-
-QString GeoDataTour::id() const
-{
-    return d->m_id;
-}
-
-void GeoDataTour::setId(const QString &value)
-{
-    d->m_id = value;
 }
 
 GeoDataPlaylist* GeoDataTour::playlist()

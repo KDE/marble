@@ -169,7 +169,7 @@ void PopupLayer::setPlacemark( const GeoDataPlacemark *placemark )
         content = content.replace("$[address]", placemark->address(), Qt::CaseInsensitive);
         // @TODO: implement the line calculation, so that snippet().maxLines actually has effect.
         content = content.replace("$[snippet]", placemark->snippet().text(), Qt::CaseInsensitive);
-        content = content.replace("$[id]", QString::number(placemark->id()), Qt::CaseInsensitive);
+        content = content.replace("$[id]", placemark->id(), Qt::CaseInsensitive);
         m_popupItem->setContent(content);
     }
     m_popupItem->setBackgroundColor(placemark->style()->balloonStyle().backgroundColor());

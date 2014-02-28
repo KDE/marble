@@ -29,14 +29,10 @@ public:
 
     const char *nodeType() const;
 
-    QString id() const;
-    void setId(const QString &id);
-
     PlayMode playMode() const;
     void setPlayMode(const PlayMode &mode);
 
 private:
-    QString m_id;
     PlayMode m_playMode;
 };
 

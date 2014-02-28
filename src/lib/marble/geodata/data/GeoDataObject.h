@@ -66,22 +66,22 @@ public:
     /**
      * @brief Get the id of the object.
      */
-    int id() const;
+    QString id() const;
     /**
      * @brief Set the id of the object
      * @param value the new id value
      */
-    void setId( int value );
+    void setId( const QString &value );
 
     /**
      * @brief Get the targetId of the object to be replaced
      */
-    int targetId() const;
+    QString targetId() const;
     /**
      * @brief set a new targetId of this object
      * @param value the new targetId value
      */
-    void setTargetId( int value );
+    void setTargetId( const QString &value );
 
     QString resolvePath( const QString &relativePath ) const;
 
