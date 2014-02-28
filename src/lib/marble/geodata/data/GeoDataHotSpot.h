@@ -35,6 +35,8 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
     ~GeoDataHotSpot();
 
     GeoDataHotSpot& operator=( const GeoDataHotSpot& other );
+    bool operator==( const GeoDataHotSpot& other );
+    bool operator!=( const GeoDataHotSpot& other );
 
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;

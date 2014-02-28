@@ -30,6 +30,8 @@ public:
     GeoDataItemIcon( const GeoDataItemIcon &other );
 
     GeoDataItemIcon& operator=( const GeoDataItemIcon &other );
+    bool operator==( const GeoDataItemIcon &other );
+    bool operator!=( const GeoDataItemIcon &other );
 
     ~GeoDataItemIcon();
 

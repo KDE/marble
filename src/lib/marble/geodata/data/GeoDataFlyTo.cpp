@@ -50,6 +50,16 @@ GeoDataFlyTo &GeoDataFlyTo::operator=( const GeoDataFlyTo &other )
     return *this;
 }
 
+bool GeoDataFlyTo::operator==( const GeoDataFlyTo& other ) const
+{
+    return ( d->m_duration == other.d->m_duration ) && ( d->m_flyToMode == other.d->m_flyToMode ) && ( d->m_view == other.d->m_view );
+}
+
+bool GeoDataFlyTo::operator!=( const GeoDataFlyTo& other ) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataFlyTo::~GeoDataFlyTo()
 {
     delete d;

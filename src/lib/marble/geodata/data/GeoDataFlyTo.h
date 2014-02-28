@@ -20,7 +20,7 @@ namespace Marble {
 
 class GeoDataFlyToPrivate;
 
-class GeoDataFlyTo: public GeoDataTourPrimitive
+class MARBLE_EXPORT GeoDataFlyTo: public GeoDataTourPrimitive
 {
 public:
     enum FlyToMode {
@@ -33,6 +33,8 @@ public:
     GeoDataFlyTo( const GeoDataFlyTo &other );
 
     GeoDataFlyTo& operator=( const GeoDataFlyTo &other );
+    bool operator==( const GeoDataFlyTo& other ) const;
+    bool operator!=( const GeoDataFlyTo& other ) const;
 
     ~GeoDataFlyTo();
 

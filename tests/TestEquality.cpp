@@ -19,6 +19,11 @@
 #include <GeoDataBalloonStyle.h>
 #include <GeoDataCamera.h>
 #include <GeoDataColorStyle.h>
+#include <GeoDataFlyTo.h>
+#include <GeoDataHotSpot.h>
+#include <GeoDataImagePyramid.h>
+#include <GeoDataItemIcon.h>
+#include <GeoDataLink.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -36,6 +41,11 @@ private slots:
     void balloonTest();
     void colorTest();
     void cameraTest();
+    void flyToTest();
+    void hotSpotTest();
+    void imagePyramidTest();
+    void itemIconTest();
+    void linkTest();
 };
 
 
@@ -246,6 +256,103 @@ void TestEquality::cameraTest()
     QCOMPARE( camera1 == camera2, false );
     QVERIFY( camera1 != camera2 );
 }
+
+void TestEquality::flyToTest()
+{
+    GeoDataFlyTo flyTo1, flyTo2;
+
+    flyTo1.setDuration(7.6);
+    flyTo1.setFlyToMode(GeoDataFlyTo::Bounce);
+
+    flyTo2.setDuration( 5.8 );
+    flyTo1.setFlyToMode( GeoDataFlyTo::Smooth );
+
+    QCOMPARE( flyTo1, flyTo1 );
+    QCOMPARE( flyTo2, flyTo2 );
+    QCOMPARE( flyTo1 == flyTo2, false );
+    QVERIFY( flyTo1 != flyTo2 );
+}
+
+void TestEquality::hotSpotTest()
+{
+    QPointF point1, point2;
+    point1.setX( 5 );
+    point1.setY( 4 );
+    point2.setX( 6 );
+    point2.setY( 2 );
+
+    GeoDataHotSpot hotSpot1, hotSpot2;
+    hotSpot1.setHotSpot( point1, GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction );
+    hotSpot2.setHotSpot( point2, GeoDataHotSpot::Pixels, GeoDataHotSpot::Pixels );
+
+    QCOMPARE( &hotSpot1, &hotSpot1 );
+    QCOMPARE( &hotSpot2, &hotSpot2 );
+    QCOMPARE( hotSpot1 == hotSpot2, false );
+    QVERIFY( hotSpot1 != hotSpot2 );
+}
+
+void TestEquality::imagePyramidTest()
+{
+    GeoDataImagePyramid pyramid1, pyramid2;
+    pyramid1.setGridOrigin( GeoDataImagePyramid::LowerLeft );
+    pyramid1.setMaxHeight( 40 );
+    pyramid1.setMaxWidth( 30 );
+    pyramid1.setTileSize( 20 );
+
+    pyramid2.setGridOrigin( GeoDataImagePyramid::UpperLeft );
+    pyramid2.setMaxHeight( 50 );
+    pyramid2.setMaxWidth( 80 );
+    pyramid2.setTileSize( 30 );
+
+    QCOMPARE( &pyramid1, &pyramid1 );
+    QCOMPARE( &pyramid2, &pyramid2 );
+    QCOMPARE( pyramid1 == pyramid2, false );
+    QVERIFY( pyramid1 != pyramid2 );
+}
+
+void TestEquality::itemIconTest()
+{
+    GeoDataItemIcon icon1, icon2;
+    QImage img1( 10, 20, QImage::Format_Mono );
+    QImage img2( 30, 50, QImage::Format_Mono );
+
+    icon1.setIcon( img1 );
+    icon1.setIconPath( "some/path" );
+    icon1.setState( GeoDataItemIcon::Open );
+
+    icon2.setIcon( img2 );
+    icon2.setIconPath( "some/other/path" );
+    icon2.setState( GeoDataItemIcon::Closed );
+
+    QCOMPARE( &icon1, &icon1 );
+    QCOMPARE( &icon2, &icon2 );
+    QCOMPARE( &icon1 == &icon2, false );
+    QVERIFY( &icon1 != &icon2 );
+
+}
+
+void TestEquality::linkTest()
+{
+    GeoDataLink link1, link2;
+
+    link1.setHref("some/example/href.something");
+    link1.setRefreshInterval( 23 );
+    link1.setRefreshMode( GeoDataLink::OnChange );
+    link1.setViewBoundScale( 50 );
+    link1.setViewRefreshTime( 30 );
+
+    link2.setHref("some/other/example/href.something");
+    link1.setRefreshInterval( 32 );
+    link1.setRefreshMode(GeoDataLink::OnChange);
+    link1.setViewBoundScale( 60 );
+    link1.setViewRefreshTime( 40 );
+
+    QCOMPARE( &link1, &link1 );
+    QCOMPARE( &link2, &link2 );
+    QCOMPARE( &link1 == &link2, false );
+    QVERIFY( &link1 != &link2 );
+}
+
 
 QTEST_MAIN( TestEquality )
 

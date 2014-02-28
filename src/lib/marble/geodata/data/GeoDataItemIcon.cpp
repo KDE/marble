@@ -48,6 +48,16 @@ GeoDataItemIcon &GeoDataItemIcon::operator=( const GeoDataItemIcon &other )
     return *this;
 }
 
+bool GeoDataItemIcon::operator==( const GeoDataItemIcon& other )
+{
+    return ( d->m_state == other.d->m_state ) && ( d->m_iconPath == other.d->m_iconPath ) && ( d->m_icon == other.d->m_icon );
+}
+
+bool GeoDataItemIcon::operator!=( const GeoDataItemIcon& other )
+{
+    return !this->operator==(other);
+}
+
 GeoDataItemIcon::~GeoDataItemIcon()
 {
     delete d;
