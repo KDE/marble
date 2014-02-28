@@ -101,6 +101,7 @@ void TestGeoDataWriter::countFeatures_data()
     QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml") << 1;
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml") << 1;
     QTest::newRow("Track") << parsers.value("Track.kml") << 1;
+    QTest::newRow("Route") << parsers.value("Route.kml") << 2;
 }
 
 void TestGeoDataWriter::countFeatures()
@@ -130,6 +131,7 @@ void TestGeoDataWriter::saveFile_data()
     QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml");
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml");
     QTest::newRow("Track") << parsers.value("Track.kml");
+    QTest::newRow("Route") << parsers.value("Route.kml");
 }
 
 void TestGeoDataWriter::saveFile()
@@ -165,6 +167,7 @@ void TestGeoDataWriter::saveAndLoad_data()
     QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml");
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml");
     QTest::newRow("Track") << parsers.value("Track.kml");
+    QTest::newRow("Route") << parsers.value("Route.kml");
 }
 
 void TestGeoDataWriter::saveAndLoad()
@@ -203,6 +206,7 @@ void TestGeoDataWriter::saveAndCompare_data()
     QTest::newRow("ScreenOverlay_Folder") << parsers.value("ScreenOverlay_Folder.kml") << "ScreenOverlay_Folder.kml";
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml") << "ScreenOverlay_kml.kml";
     QTest::newRow("Track") << parsers.value("Track.kml") << "Track.kml";
+    QTest::newRow("Route") << parsers.value("Route.kml") << "Route.kml";
 }
 
 void TestGeoDataWriter::saveAndCompare()
