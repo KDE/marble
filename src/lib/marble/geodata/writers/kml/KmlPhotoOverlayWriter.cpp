@@ -36,10 +36,9 @@ bool KmlPhotoOverlayWriter::writeMid( const GeoNode *node, GeoWriter &writer ) c
     const GeoDataPhotoOverlay *photo_overlay =
         static_cast<const GeoDataPhotoOverlay*>( node );
 
-
     // rotation
-    QString rot_value = QString::number( photo_overlay->rotation(), 'f', 3 );
-    writer.writeOptionalElement( kml::kmlTag_rotation, rot_value, "0.000" );
+    QString const rotation = QString::number( photo_overlay->rotation(), 'f', 3 );
+    writer.writeOptionalElement( kml::kmlTag_rotation, rotation, "0.000" );
 
     // ViewVolume
     writer.writeStartElement( kml::kmlTag_ViewVolume );
@@ -50,30 +49,25 @@ bool KmlPhotoOverlayWriter::writeMid( const GeoNode *node, GeoWriter &writer ) c
     writer.writeOptionalElement<qreal>( kml::kmlTag_topFov, photo_overlay->viewVolume().topFov(), 0 );
     writer.writeEndElement();
 
-
     // ImagePyramid
     writer.writeStartElement( kml::kmlTag_ImagePyramid );
-    writer.writeOptionalElement<int>( kml::kmlTag_tileSize, photo_overlay->imagePyramid().tileSize(), 256);
+    writer.writeOptionalElement<int>( kml::kmlTag_tileSize, photo_overlay->imagePyramid().tileSize(), 256 );
     writer.writeOptionalElement<int>( kml::kmlTag_maxWidth, photo_overlay->imagePyramid().maxWidth() );
     writer.writeOptionalElement<int>( kml::kmlTag_maxHeight, photo_overlay->imagePyramid().maxHeight() );
 
-    writer.writeStartElement( kml::kmlTag_gridOrigin);
     switch ( photo_overlay->imagePyramid().gridOrigin() )
     {
     case GeoDataImagePyramid::LowerLeft:
-        writer.writeCharacters( "lowerLeft" );
+        writer.writeElement( kml::kmlTag_gridOrigin, "lowerLeft" );
         break;
     case GeoDataImagePyramid::UpperLeft:
-        writer.writeCharacters( "upperLeft" );
+        writer.writeElement( kml::kmlTag_gridOrigin, "upperLeft" );
         break;
     }
     writer.writeEndElement();
-    writer.writeEndElement();
-
 
     // Point
-    writeElement(&photo_overlay->point(), writer);
-
+    writeElement( &photo_overlay->point(), writer );
 
     // shape
     switch ( photo_overlay->shape() )
@@ -81,14 +75,10 @@ bool KmlPhotoOverlayWriter::writeMid( const GeoNode *node, GeoWriter &writer ) c
     case GeoDataPhotoOverlay::Rectangle:
         break;
     case GeoDataPhotoOverlay::Cylinder:
-        writer.writeStartElement( kml::kmlTag_shape );
-        writer.writeCharacters( "cylinder" );
-        writer.writeEndElement();
+        writer.writeElement( kml::kmlTag_shape, "cylinder" );
         break;
     case GeoDataPhotoOverlay::Sphere:
-        writer.writeStartElement( kml::kmlTag_shape );
-        writer.writeCharacters( "sphere" );
-        writer.writeEndElement();
+        writer.writeElement( kml::kmlTag_shape, "sphere" );
         break;
     }
 
