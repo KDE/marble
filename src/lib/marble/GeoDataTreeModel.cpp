@@ -289,6 +289,17 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
             GeoDataPlacemark *feature = static_cast<GeoDataPlacemark*>( object );
             const char* type = feature->geometry()->nodeType();
+            if ( feature->parent()->nodeType() == GeoDataTypes::GeoDataFolderType ) {
+                GeoDataFolder *folder = static_cast<GeoDataFolder *>( feature->parent() );
+                if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder 
+                  || folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly) {
+                    if ( feature->isVisible() ) {
+                        return QVariant ( Qt::Checked );
+                    } else {
+                        return QVariant ( Qt::Unchecked );
+                    }
+                }
+            }
             if ( type == GeoDataTypes::GeoDataLineStringType
                  || type == GeoDataTypes::GeoDataPolygonType
                  || type == GeoDataTypes::GeoDataLinearRingType
@@ -306,6 +317,42 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
         } else if ( object->nodeType() == GeoDataTypes::GeoDataFolderType
                     || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+            if ( object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
+                GeoDataFolder *folder = static_cast<GeoDataFolder *>( object );
+                if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder) {
+                    bool anyVisible = false;
+                    QVector<GeoDataFeature *>::Iterator i = folder->begin();
+                    for (; i < folder->end(); ++i) {
+                        if ((*i)->isVisible()) {
+                            anyVisible = true;
+                            break;
+                        }
+                    }
+                    if (anyVisible) {
+                        return QVariant( Qt::PartiallyChecked );
+                    } else {
+                        return QVariant( Qt::Unchecked );
+                    }
+                } else if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly) {
+                    QVector<GeoDataFeature *>::Iterator i = folder->begin();
+                    bool anyVisible = false;
+                    bool allVisible = true;
+                    for (; i < folder->end(); ++i) {
+                        if ((*i)->isVisible()) {
+                            anyVisible = true;
+                        } else {
+                            allVisible = false;
+                        }
+                    }
+                    if (allVisible) {
+                        return QVariant( Qt::Checked );
+                    } else if (anyVisible) {
+                        return QVariant( Qt::PartiallyChecked );
+                    } else {
+                        return QVariant( Qt::Unchecked );
+                    }
+                }
+            }
             if ( feature->isGloballyVisible() ) {
                 return QVariant( Qt::Checked );
             } else if ( feature->isVisible() ) {
@@ -514,8 +561,34 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
              || object->nodeType() == GeoDataTypes::GeoDataFolderType
              || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
-            feature->setVisible( value.toBool() );
-            mDebug() << "setData " << feature->name() << " " << value.toBool();
+            bool bValue = value.toBool();
+            if (feature->parent()->nodeType() == GeoDataTypes::GeoDataFolderType) {
+                GeoDataFolder *pfolder = static_cast<GeoDataFolder *>(feature->parent());
+                if ( pfolder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder) {
+                    if ( bValue ) {
+                        QVector< GeoDataFeature * >::Iterator i = pfolder->begin();
+                        for(; i < pfolder->end(); ++i) {
+                            (*i)->setVisible( false );
+                        }
+                    }
+                }
+            }
+            if ( feature->nodeType() == GeoDataTypes::GeoDataFolderType) {
+                GeoDataFolder *folder = static_cast<GeoDataFolder *>( object );
+                if ( bValue ) {
+                } else {
+                    if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder 
+                      || folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly ) {
+                        QVector< GeoDataFeature * >::Iterator i = folder->begin();
+                        for(; i < folder->end(); ++i) {
+                            (*i)->setVisible( false );
+                        }
+                        folder->setVisible( false );
+                    }
+                }
+            }
+            feature->setVisible( bValue );
+            mDebug() << "setData " << feature->name();
             updateFeature( feature );
             return true;
         }
@@ -553,7 +626,42 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
             return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
         }
     }
-    if( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+    if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+        GeoDataObject *parent = feature->parent();
+
+        if ( parent->nodeType() == GeoDataTypes::GeoDataFolderType ) {
+            GeoDataFolder *parentfolder = static_cast<GeoDataFolder *>( parent );
+            if ( parentfolder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder ) {
+                return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
+            } else if ( parentfolder->style()->listStyle().listItemType() == GeoDataListStyle::CheckHideChildren ) {
+                return 0;
+            }
+        }
+    }
+    if ( object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
+        GeoDataFolder *folder = static_cast<GeoDataFolder *>( object );
+        if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder) {
+            return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable; 
+        } else if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly ) {
+            QVector<GeoDataFeature *>::Iterator i = folder->begin();
+            bool allVisible = true;
+            for(; i < folder->end(); ++i) {
+                if( ! (*i)->isVisible() ) {
+                    allVisible = false;
+                    break;
+                }
+            }
+            if ( allVisible ) {
+                return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable; 
+            } else {
+                return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+            }
+        } else if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckHideChildren) {
+            return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable; 
+        }
+    }
+    if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
      || object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
         GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
         GeoDataObject *parent = feature->parent();
