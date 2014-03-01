@@ -29,9 +29,6 @@
             <Placemark>
                 <name>Route</name>
                 <ExtendedData>
-                    <Data name="duration">
-                        <value>00:00:17</value>
-                    </Data>
                     <Data name="length">
                         <value>92.1322548876347</value>
                     </Data>
@@ -76,9 +73,6 @@
             <Placemark>
                 <name>Turn right into Haid-und-Neu-Straße.</name>
                 <ExtendedData>
-                    <Data name="roadName">
-                        <value>Haid-und-Neu-Straße</value>
-                    </Data>
                     <Data name="turnType">
                         <value>3</value>
                     </Data>
