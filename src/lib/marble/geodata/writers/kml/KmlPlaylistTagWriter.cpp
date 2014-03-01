@@ -27,7 +27,7 @@ bool KmlPlaylistTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataPlaylist *playlist = static_cast<const GeoDataPlaylist*>( node );
 
-    writer.writeStartElement( "gx:Playlist" );
+    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_Playlist );
 
     for ( int i = 0; i < playlist->size(); i++ ) {
         writeTourPrimitive( playlist->primitive( i ), writer );
@@ -57,12 +57,12 @@ void KmlPlaylistTagWriter::writeTourPrimitive( const GeoNode *primitive, GeoWrit
 
 void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer ) const
 {
-    writer.writeStartElement( kml::kmlTag_TourControl );
+    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_TourControl );
     if ( !tourControl->id().isEmpty() ) {
         writer.writeAttribute( "id", tourControl->id() );
     }
 
-    writer.writeElement( kml::kmlTag_playMode, playModeToString( tourControl->playMode() ) );
+    writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_playMode, playModeToString( tourControl->playMode() ) );
 
     writer.writeEndElement();
 }
