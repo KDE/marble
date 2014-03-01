@@ -107,7 +107,6 @@ marble_add_test( TestBalloonStyle )             # Check BalloonStyle
 marble_add_test( TestListStyle )                # Check ListStyle
 marble_add_test( TestTour )
 marble_add_test( TestGroundOverlay )     # Check GroundOverlay specifics
-marble_add_test( TestPhotoOverlay )      # Check PhotoOverlay specifics
 marble_add_test( TestModel )
 marble_add_test( TestTimeStamp )
 marble_add_test( TestTimeSpan )

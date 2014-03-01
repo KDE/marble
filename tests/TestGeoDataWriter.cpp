@@ -102,6 +102,8 @@ void TestGeoDataWriter::countFeatures_data()
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml") << 1;
     QTest::newRow("Track") << parsers.value("Track.kml") << 1;
     QTest::newRow("Route") << parsers.value("Route.kml") << 2;
+    QTest::newRow("PhotoOverlayInFolder") << parsers.value("PhotoOverlayInFolder.kml") << 1;
+    QTest::newRow("PhotoOverlayAsRoot") << parsers.value("PhotoOverlayAsRoot.kml") << 1;
 }
 
 void TestGeoDataWriter::countFeatures()
@@ -132,6 +134,8 @@ void TestGeoDataWriter::saveFile_data()
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml");
     QTest::newRow("Track") << parsers.value("Track.kml");
     QTest::newRow("Route") << parsers.value("Route.kml");
+    QTest::newRow("PhotoOverlayInFolder") << parsers.value("PhotoOverlayInFolder.kml");
+    QTest::newRow("PhotoOverlayAsRoot") << parsers.value("PhotoOverlayAsRoot.kml");
 }
 
 void TestGeoDataWriter::saveFile()
@@ -168,6 +172,8 @@ void TestGeoDataWriter::saveAndLoad_data()
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml");
     QTest::newRow("Track") << parsers.value("Track.kml");
     QTest::newRow("Route") << parsers.value("Route.kml");
+    QTest::newRow("PhotoOverlayInFolder") << parsers.value("PhotoOverlayInFolder.kml");
+    QTest::newRow("PhotoOverlayAsRoot") << parsers.value("PhotoOverlayAsRoot.kml");
 }
 
 void TestGeoDataWriter::saveAndLoad()
@@ -207,6 +213,8 @@ void TestGeoDataWriter::saveAndCompare_data()
     QTest::newRow("ScreenOverlay_kml") << parsers.value("ScreenOverlay_kml.kml") << "ScreenOverlay_kml.kml";
     QTest::newRow("Track") << parsers.value("Track.kml") << "Track.kml";
     QTest::newRow("Route") << parsers.value("Route.kml") << "Route.kml";
+    QTest::newRow("PhotoOverlayInFolder") << parsers.value("PhotoOverlayInFolder.kml") << "PhotoOverlayInFolder.kml";
+    QTest::newRow("PhotoOverlayAsRoot") << parsers.value("PhotoOverlayAsRoot.kml") << "PhotoOverlayAsRoot.kml";
 }
 
 void TestGeoDataWriter::saveAndCompare()
