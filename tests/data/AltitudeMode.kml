@@ -3,6 +3,9 @@
 <Folder>
 	<visibility>0</visibility>
 	<GroundOverlay>
+                <Icon>
+                  <href>myOverlay.png</href>
+                </Icon>
 		<altitude>45</altitude>
 		<altitudeMode>absolute</altitudeMode>
 	</GroundOverlay>

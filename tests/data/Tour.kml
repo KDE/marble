@@ -19,6 +19,9 @@
       <href>http://www.example.com/audio/trumpets.mp3</href>
       <gx:delayedStart>15</gx:delayedStart>
     </gx:SoundCue>
+    <gx:TourControl id="myTourControl">
+      <gx:playMode>pause</gx:playMode>
+    </gx:TourControl>
   </gx:Playlist>
 </gx:Tour>
 </kml>
