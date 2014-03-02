@@ -93,6 +93,13 @@ public:
  private:
 
     GeoDataObjectPrivate * d;
+
+ protected:
+    /**
+     * @brief Compares the value of id and targetId of the two objects
+     * @return true if they these values are equal or false otherwise
+     */
+    bool equals(const GeoDataObject &other) const;
 };
 
 }

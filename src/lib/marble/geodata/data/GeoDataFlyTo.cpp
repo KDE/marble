@@ -52,7 +52,10 @@ GeoDataFlyTo &GeoDataFlyTo::operator=( const GeoDataFlyTo &other )
 
 bool GeoDataFlyTo::operator==( const GeoDataFlyTo& other ) const
 {
-    return ( d->m_duration == other.d->m_duration ) && ( d->m_flyToMode == other.d->m_flyToMode ) && ( d->m_view == other.d->m_view );
+    return equals(other) &&
+           d->m_duration == other.d->m_duration &&
+           d->m_flyToMode == other.d->m_flyToMode &&
+           d->m_view == other.d->m_view;
 }
 
 bool GeoDataFlyTo::operator!=( const GeoDataFlyTo& other ) const

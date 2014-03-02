@@ -123,4 +123,9 @@ void GeoDataObject::unpack( QDataStream& stream )
     stream >> d->m_targetId;
 }
 
+bool GeoDataObject::equals(const GeoDataObject &other) const
+{
+    return d->m_id == other.d->m_id && d->m_targetId == other.d->m_targetId;
+}
+
 }

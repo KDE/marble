@@ -68,7 +68,10 @@ GeoDataHotSpot& GeoDataHotSpot::operator=( const GeoDataHotSpot& other )
 
 bool GeoDataHotSpot::operator==( const GeoDataHotSpot& other )
 {
-    return ( d->m_hotSpot == other.d->m_hotSpot ) && ( d->m_xunits == other.d->m_xunits ) && ( d->m_yunits == other.d->m_yunits );
+    return equals(other) &&
+           d->m_hotSpot == other.d->m_hotSpot &&
+           d->m_xunits == other.d->m_xunits &&
+           d->m_yunits == other.d->m_yunits;
 }
 
 bool GeoDataHotSpot::operator!=( const GeoDataHotSpot& other )

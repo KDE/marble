@@ -40,7 +40,7 @@ GeoDataSimpleArrayData::GeoDataSimpleArrayData( const GeoDataSimpleArrayData& ot
 
 bool GeoDataSimpleArrayData::operator==( const GeoDataSimpleArrayData &other ) const
 {
-    return ( d->m_values == other.d->m_values );
+    return equals(other) && d->m_values == other.d->m_values;
 }
 
 bool GeoDataSimpleArrayData::operator!=( const GeoDataSimpleArrayData &other ) const

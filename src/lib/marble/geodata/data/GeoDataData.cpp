@@ -42,7 +42,10 @@ GeoDataData& GeoDataData::operator=( const GeoDataData& other )
 
 bool GeoDataData::operator==( const GeoDataData& other) const
 {
-    return (d->m_name == other.d->m_name) && (d->m_value == other.d->m_value) && (d->m_displayName == other.d->m_displayName);
+    return equals(other) &&
+           d->m_name == other.d->m_name &&
+           d->m_value == other.d->m_value &&
+           d->m_displayName == other.d->m_displayName;
 }
 
 bool GeoDataData::operator!=( const GeoDataData &other ) const

@@ -43,14 +43,14 @@ class GeoDataLatLonAltBoxPrivate
 
 bool operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs )
 {
-    return lhs.west() == rhs.west()
-        && lhs.east() == rhs.east()
-        && lhs.north() == rhs.north()
-        && lhs.south() == rhs.south()
-        && lhs.rotation() == rhs.rotation() 
-        && lhs.d->m_minAltitude == rhs.d->m_minAltitude
-        && lhs.d->m_maxAltitude == rhs.d->m_maxAltitude
-        && lhs.d->m_altitudeMode == rhs.d->m_altitudeMode;
+    return lhs.west() == rhs.west() &&
+           lhs.east() == rhs.east() &&
+           lhs.north() == rhs.north() &&
+           lhs.south() == rhs.south() &&
+           lhs.rotation() == rhs.rotation() &&
+           lhs.d->m_minAltitude == rhs.d->m_minAltitude &&
+           lhs.d->m_maxAltitude == rhs.d->m_maxAltitude &&
+           lhs.d->m_altitudeMode == rhs.d->m_altitudeMode;
 }
 
 GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataLatLonAltBox &other )

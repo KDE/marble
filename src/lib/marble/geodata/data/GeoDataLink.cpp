@@ -62,8 +62,15 @@ GeoDataLink &GeoDataLink::operator=( const GeoDataLink &other )
 
 bool GeoDataLink::operator==( const GeoDataLink& other )
 {
-    return ( d->m_href == other.d->m_href ) && ( d->m_refreshMode == other.d->m_refreshMode ) && ( d->m_refreshInterval == other.d->m_refreshInterval ) && ( d->m_viewRefreshMode == other.d->m_viewRefreshMode )
-        && ( d->m_viewRefreshTime == other.d->m_viewRefreshTime ) && ( d->m_viewBoundScale == other.d->m_viewBoundScale ) && ( d->m_viewFormat == other.d->m_viewFormat ) && ( d->m_httpQuery == other.d->m_httpQuery );
+    return equals(other) &&
+           d->m_href == other.d->m_href &&
+           d->m_refreshMode == other.d->m_refreshMode &&
+           d->m_refreshInterval == other.d->m_refreshInterval &&
+           d->m_viewRefreshMode == other.d->m_viewRefreshMode &&
+           d->m_viewRefreshTime == other.d->m_viewRefreshTime &&
+           d->m_viewBoundScale == other.d->m_viewBoundScale &&
+           d->m_viewFormat == other.d->m_viewFormat &&
+           d->m_httpQuery == other.d->m_httpQuery;
 }
 
 bool GeoDataLink::operator!=( const GeoDataLink& other )

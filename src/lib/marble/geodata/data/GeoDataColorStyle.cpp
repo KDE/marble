@@ -67,7 +67,7 @@ GeoDataColorStyle& GeoDataColorStyle::operator=( const GeoDataColorStyle& other 
 
 bool GeoDataColorStyle::operator==( const GeoDataColorStyle &other ) const
 {
-    return d->m_color == other.d->m_color &&
+    return equals(other) && d->m_color == other.d->m_color &&
            d->m_colorMode == other.d->m_colorMode;
 }
 

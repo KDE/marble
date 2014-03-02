@@ -30,7 +30,9 @@ GeoDataExtendedData::GeoDataExtendedData( const GeoDataExtendedData& other )
 
 bool GeoDataExtendedData::operator==( const GeoDataExtendedData& other ) const
 {
-    return ( d->hash == other.d->hash ) && ( d->arrayHash == other.d->arrayHash );
+    return equals(other) &&
+           d->hash == other.d->hash &&
+           d->arrayHash == other.d->arrayHash;
 }
 
 GeoDataExtendedData::~GeoDataExtendedData()

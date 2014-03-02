@@ -49,11 +49,11 @@ class GeoDataLatLonBoxPrivate
 
 bool operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs )
 {
-    return lhs.d->m_west == rhs.d->m_west
-        && lhs.d->m_east == rhs.d->m_east
-        && lhs.d->m_north == rhs.d->m_north
-        && lhs.d->m_south == rhs.d->m_south
-        && lhs.d->m_rotation == rhs.d->m_rotation;
+    return lhs.d->m_west == rhs.d->m_west &&
+           lhs.d->m_east == rhs.d->m_east &&
+           lhs.d->m_north == rhs.d->m_north &&
+           lhs.d->m_south == rhs.d->m_south &&
+           lhs.d->m_rotation == rhs.d->m_rotation;
 }
 
 bool operator!=( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs )

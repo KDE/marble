@@ -50,7 +50,10 @@ GeoDataItemIcon &GeoDataItemIcon::operator=( const GeoDataItemIcon &other )
 
 bool GeoDataItemIcon::operator==( const GeoDataItemIcon& other )
 {
-    return ( d->m_state == other.d->m_state ) && ( d->m_iconPath == other.d->m_iconPath ) && ( d->m_icon == other.d->m_icon );
+    return equals(other) &&
+           d->m_state == other.d->m_state &&
+           d->m_iconPath == other.d->m_iconPath &&
+           d->m_icon == other.d->m_icon;
 }
 
 bool GeoDataItemIcon::operator!=( const GeoDataItemIcon& other )
