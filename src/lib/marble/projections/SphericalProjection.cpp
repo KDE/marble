@@ -35,6 +35,11 @@ namespace Marble
 class SphericalProjectionPrivate : public AbstractProjectionPrivate
 {
   public:
+    enum LineStringFlag {
+        PlainLineString = 0x00,
+        ClosedLineString = 0x01
+    };
+
     explicit SphericalProjectionPrivate( SphericalProjection * parent );
 
     // This method tessellates a line segment in a way that the line segment
@@ -47,6 +52,7 @@ class SphericalProjectionPrivate : public AbstractProjectionPrivate
                                 qreal ax, qreal ay,
                                 const GeoDataCoordinates &bCoords,
                                 qreal bx, qreal by,
+                                LineStringFlag lineStringFlag,
                                 QVector<QPolygonF*> &polygons,
                                 const ViewportParams *viewport,
                                 TessellationFlags f = 0 ) const;
@@ -54,11 +60,13 @@ class SphericalProjectionPrivate : public AbstractProjectionPrivate
     void processTessellation(   const GeoDataCoordinates &previousCoords,
                                const GeoDataCoordinates &currentCoords,
                                int count,
+                               LineStringFlag lineStringFlag,
                                QVector<QPolygonF*> &polygons,
                                const ViewportParams *viewport,
                                TessellationFlags f = 0 ) const;
 
     void crossHorizon( const GeoDataCoordinates & bCoord,
+                       LineStringFlag lineStringFlag,
                        QVector<QPolygonF*> &polygons,
                        const ViewportParams *viewport ) const;
 
@@ -351,6 +359,7 @@ void SphericalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates
                                                 qreal ax, qreal ay,
                                                 const GeoDataCoordinates &bCoords,
                                                 qreal bx, qreal by,
+                                                LineStringFlag lineStringFlag,
                                                 QVector<QPolygonF*> &polygons,
                                                 const ViewportParams *viewport,
                                                 TessellationFlags f) const
@@ -380,17 +389,19 @@ void SphericalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates
         // Let the line segment follow the spherical surface
         // if the distance between the previous point and the current point
         // on screen is too big
+
         if ( distance > finalTessellationPrecision ) {
             const int tessellatedNodes = qMin<int>( distance / finalTessellationPrecision, maxTessellationNodes );
 
             processTessellation( aCoords, bCoords,
                                  tessellatedNodes,
+                                 lineStringFlag,
                                  polygons,
                                  viewport,
                                  f );
         }
         else {
-            crossHorizon( bCoords, polygons, viewport );
+            crossHorizon( bCoords, lineStringFlag, polygons, viewport );
         }
 #ifdef SAFE_DISTANCE
     }
@@ -401,6 +412,7 @@ void SphericalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates
 void SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &previousCoords,
                                                     const GeoDataCoordinates &currentCoords,
                                                     int tessellatedNodes,
+                                                    LineStringFlag lineStringFlag,
                                                     QVector<QPolygonF*> &polygons,
                                                     const ViewportParams *viewport,
                                                     TessellationFlags f) const
@@ -455,7 +467,7 @@ void SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &
         }
 
         const GeoDataCoordinates currentTessellatedCoords( lon, lat, altitude );
-        crossHorizon( currentTessellatedCoords, polygons, viewport );
+        crossHorizon( currentTessellatedCoords, lineStringFlag, polygons, viewport );
         previousTessellatedCoords = currentTessellatedCoords;
     }
 
@@ -464,10 +476,11 @@ void SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &
     if ( clampToGround ) {
         currentModifiedCoords.setAltitude( 0.0 );
     }
-    crossHorizon( currentModifiedCoords, polygons, viewport );
+    crossHorizon( currentModifiedCoords, lineStringFlag, polygons, viewport );
 }
 
 void SphericalProjectionPrivate::crossHorizon( const GeoDataCoordinates & bCoord,
+                                              LineStringFlag lineStringFlag,
                                               QVector<QPolygonF*> &polygons,
                                               const ViewportParams *viewport ) const
 {
@@ -482,7 +495,7 @@ void SphericalProjectionPrivate::crossHorizon( const GeoDataCoordinates & bCoord
         *polygons.last() << QPointF( x, y );
     }
     else {
-        if ( !polygons.last()->isEmpty() ) {
+        if ( !polygons.last()->isEmpty() && lineStringFlag != ClosedLineString  ) {
             QPolygonF *path = new QPolygonF;
             polygons.append( path );
         }
@@ -609,15 +622,13 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             // segments of a linestring. If you are about to learn how the code of
             // this class works you can safely ignore this section for a start.
 
-            if ( lineString.tessellate() /* && ( isVisible || previousIsVisible ) */ ) {
-
+            if ( lineString.tessellate() ) {
+                LineStringFlag lineStringFlag = lineString.isClosed() ? ClosedLineString : PlainLineString;
                 if ( !isAtHorizon ) {
-
                     tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                            *itCoords, x, y,
-                                           polygons, viewport,
+                                           lineStringFlag, polygons, viewport,
                                            f );
-
                 }
                 else {
                     // Connect the interpolated  point at the horizon with the
@@ -625,13 +636,13 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
                     if ( previousGlobeHidesPoint ) {
                         tessellateLineSegment( horizonCoords, horizonX, horizonY,
                                                *itCoords, x, y,
-                                               polygons, viewport,
+                                               lineStringFlag, polygons, viewport,
                                                f );
                     }
                     else {
                         tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                                horizonCoords, horizonX, horizonY,
-                                               polygons, viewport,
+                                               lineStringFlag, polygons, viewport,
                                                f );
                     }
                 }
