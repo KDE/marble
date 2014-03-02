@@ -213,6 +213,11 @@ void TestEquality::colorTest()
     QCOMPARE( color2, color2 );
     QCOMPARE( color1, color2 );
 
+    color1.setId("foo");
+    QVERIFY( color1 != color2 );
+    color2.setId("foo");
+    QCOMPARE( color1, color2 );
+
     color1.setColorMode(GeoDataColorStyle::Random);
     QCOMPARE( color1, color1 );
     QCOMPARE( color2, color2 );
