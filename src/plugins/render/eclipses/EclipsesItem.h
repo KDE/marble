@@ -92,6 +92,13 @@ public:
      */
     EclipsesItem::EclipsePhase phase() const;
 
+
+    /**
+     * @brief Returns an icon of the eclipse type
+     * @return an icon representing the eclipse's type
+     */
+    QIcon icon() const;
+
     /**
      * @brief Returns a human readable representation of the eclipse type
      * @return A string representing the eclipse's type

@@ -108,6 +108,9 @@ void EclipsesBrowserDialog::initialize()
     setYear( m_marbleModel->clock()->dateTime().date().year() );
 
     update();
+
+    m_browserWidget->treeView->resizeColumnToContents(2);
+    m_browserWidget->treeView->resizeColumnToContents(3);
 }
 
 } // namespace Marble

@@ -16,6 +16,8 @@
 
 #include <eclsolar.h>
 
+#include <QIcon>
+
 namespace Marble
 {
 
@@ -137,19 +139,20 @@ QVariant EclipsesModel::data( const QModelIndex &index, int role ) const
         return QVariant();
     }
 
-    if( role != Qt::DisplayRole ) {
-        return QVariant();
-    }
-
     Q_ASSERT( index.column() < 4 );
 
     EclipsesItem *item = static_cast<EclipsesItem*>( index.internalPointer() );
-    switch( index.column() ) {
-        case 0: return QVariant( item->startDatePartial() );
-        case 1: return QVariant( item->endDatePartial() );
-        case 2: return QVariant( item->phaseText() );
-        case 3: return QVariant( item->magnitude() );
-        default: break; // should never happen
+    if( role == Qt::DisplayRole ) {
+        switch( index.column() ) {
+            case 0: return QVariant( item->startDatePartial() );
+            case 1: return QVariant( item->endDatePartial() );
+            case 2: return QVariant( item->phaseText() );
+            case 3: return QVariant( item->magnitude() );
+            default: break; // should never happen
+        }
+    }
+    if( role == Qt::DecorationRole ) {
+        if ( index.column() == 2 ) return QVariant( item->icon() );
     }
 
     return QVariant();
