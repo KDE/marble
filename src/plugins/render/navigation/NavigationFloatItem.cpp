@@ -13,6 +13,7 @@
 #include "NavigationFloatItem.h"
 
 #include <qmath.h>
+#include <QContextMenuEvent>
 #include <QRect>
 #include <QPixmap>
 #include <QToolButton>

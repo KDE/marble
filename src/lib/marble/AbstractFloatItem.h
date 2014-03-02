@@ -14,21 +14,18 @@
 
 #include <QPointF>
 #include <QSizeF>
-#include <QString>
-#include <Qt>
-
 #include <QPen>
 #include <QFont>
-#include <QContextMenuEvent>
-#include <QHelpEvent>
-#include <QWidget>
 
 #include "RenderPlugin.h"
 #include "FrameGraphicsItem.h"
 #include "marble_export.h"
 
 
+class QContextMenuEvent;
+class QHelpEvent;
 class QMenu;
+class QWidget;
 
 namespace Marble
 {

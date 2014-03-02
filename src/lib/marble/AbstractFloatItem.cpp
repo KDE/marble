@@ -14,7 +14,9 @@
 // Qt
 #include <QMenu>
 #include <QAction>
+#include <QContextMenuEvent>
 #include <QDialog>
+#include <QHelpEvent>
 
 // Marble
 #include "DialogConfigurationInterface.h"

@@ -22,9 +22,11 @@
 
 #include <QMessageBox>
 #include <QCommonStyle>
+#include <QContextMenuEvent>
 #include <QPainter>
 #include <QLabel>
 #include <QMenu>
+#include <QMouseEvent>
 
 namespace Marble
 {

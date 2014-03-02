@@ -11,7 +11,9 @@
 
 #include "MapScaleFloatItem.h"
 
+#include <QContextMenuEvent>
 #include <QDebug>
+#include <QHelpEvent>
 #include <QRect>
 #include <QPixmap>
 #include <QApplication>

@@ -11,10 +11,12 @@
 
 #include "ElevationProfileFloatItem.h"
 
+#include <QContextMenuEvent>
 #include <QRect>
 #include <QPainter>
 #include <QPushButton>
 #include <QMenu>
+#include <QMouseEvent>
 
 #include "ui_ElevationProfileConfigWidget.h"
 #include "MarbleLocale.h"
