@@ -455,30 +455,8 @@ void EclipsesPlugin::updateEclipses()
         foreach( EclipsesItem *item, m_model->items() ) {
             QAction *action = m_eclipsesListMenu->addAction(
                         item->dateMaximum().date().toString() );
-            action->setData( QVariant( item->index() ) );
-            switch( item->phase() ) {
-                case EclipsesItem::TotalMoon:
-                    action->setIcon( QIcon( ":res/lunar_total.png" ) );
-                    break;
-                case EclipsesItem::PartialMoon:
-                    action->setIcon( QIcon( ":res/lunar_partial.png" ) );
-                    break;
-                case EclipsesItem::PenumbralMoon:
-                    action->setIcon( QIcon( ":res/lunar_penumbra.png" ) );
-                    break;
-                case EclipsesItem::PartialSun:
-                    action->setIcon( QIcon( ":res/solar_partial.png" ) );
-                    break;
-                case EclipsesItem::NonCentralAnnularSun:
-                case EclipsesItem::AnnularSun:
-                    action->setIcon( QIcon( ":res/solar_annular.png" ) );
-                    break;
-                case EclipsesItem::AnnularTotalSun:
-                case EclipsesItem::NonCentralTotalSun:
-                case EclipsesItem::TotalSun:
-                    action->setIcon( QIcon( ":res/solar_total.png" ) );
-                    break;
-            }
+            action->setData( QVariant( 1000 * item->dateMaximum().date().year() +  item->index() ) );
+            action->setIcon( item->icon() );
         }
 
         emit actionGroupsChanged();
@@ -518,14 +496,11 @@ void EclipsesPlugin::showEclipse( int year, int index )
 
 void EclipsesPlugin::showEclipseFromMenu( QAction *action )
 {
-    QDate date = QDate::fromString( action->text() );
-    Q_ASSERT( date.isValid() );
     Q_ASSERT( action->data().isValid() );
-    int index = action->data().toInt();
+    int year = action->data().toInt() / 1000;
+    int index = action->data().toInt() - 1000 * year;
 
-    mDebug() << "Eclipse from menu selected: year=" <<
-        date.year() << ", index=" << index;
-    showEclipse( date.year(), index );
+    showEclipse( year, index );
 }
 
 } // namespace Marble
