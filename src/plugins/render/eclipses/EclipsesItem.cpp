@@ -23,7 +23,13 @@ EclipsesItem::EclipsesItem( EclSolar *ecl, int index, QObject *parent )
       m_isTotal( false ),
       m_phase( TotalSun ),
       m_magnitude( 0. ),
-      m_umbra( Tessellate )
+      m_centralLine(Tessellate),
+      m_umbra( Tessellate ),
+      m_southernPenumbra( Tessellate ),
+      m_northernPenumbra( Tessellate ),
+      m_shadowConeUmbra( Tessellate ),
+      m_shadowConePenumbra( Tessellate ),
+      m_shadowCone60MagPenumbra( Tessellate )
 {
     initialize();
 }
