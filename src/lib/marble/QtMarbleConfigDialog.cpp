@@ -136,12 +136,16 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     #endif
 
     d->ui_viewSettings.kcfg_graphicsSystem->setItemText( Marble::NativeGraphics, nativeString );
+    d->ui_viewSettings.kcfg_labelLocalization->hide();
+    d->ui_viewSettings.label_labelLocalization->hide();
 
     // navigation page
     QWidget *w_navigationSettings = new QWidget( this );
 
     d->ui_navigationSettings.setupUi( w_navigationSettings );
     tabWidget->addTab( w_navigationSettings, tr( "Navigation" ) );
+    d->ui_navigationSettings.kcfg_dragLocation->hide();
+    d->ui_navigationSettings.label_dragLocation->hide();
 
     // cache page
     QWidget *w_cacheSettings = new QWidget( this );

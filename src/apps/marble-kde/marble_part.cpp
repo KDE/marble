@@ -1501,6 +1501,8 @@ void MarblePart::editSettings()
     #endif
 
     ui_viewSettings.kcfg_graphicsSystem->setItemText( NativeGraphics, nativeString );
+    ui_viewSettings.label_labelLocalization->hide();
+    ui_viewSettings.kcfg_labelLocalization->hide();
 
     // navigation page
     Ui_MarbleNavigationSettingsWidget  ui_navigationSettings;
@@ -1510,6 +1512,8 @@ void MarblePart::editSettings()
     ui_navigationSettings.setupUi( w_navigationSettings );
     m_configDialog->addPage( w_navigationSettings, i18n( "Navigation" ),
                              "transform-move" );
+    ui_navigationSettings.kcfg_dragLocation->hide();
+    ui_navigationSettings.label_dragLocation->hide();
 
     // cache page
     Ui_MarbleCacheSettingsWidget  ui_cacheSettings;
