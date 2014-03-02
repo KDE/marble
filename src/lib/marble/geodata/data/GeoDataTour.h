@@ -28,8 +28,6 @@ public:
     GeoDataTour();
     GeoDataTour(const GeoDataTour &other);
     GeoDataTour& operator=(const GeoDataTour &other);
-    bool operator==(const GeoDataTour &other) const;
-    bool operator!=(const GeoDataTour &other) const;
     virtual ~GeoDataTour();
 
     GeoDataPlaylist* playlist();

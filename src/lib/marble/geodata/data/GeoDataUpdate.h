@@ -27,8 +27,6 @@ public:
     GeoDataUpdate( const GeoDataUpdate &other );
 
     GeoDataUpdate& operator=( const GeoDataUpdate &other );
-    bool operator==( const GeoDataUpdate &other ) const;
-    bool operator!=( const GeoDataUpdate &other ) const;
 
     ~GeoDataUpdate();
 

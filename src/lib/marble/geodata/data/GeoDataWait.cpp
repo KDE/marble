@@ -24,16 +24,6 @@ GeoDataWait::~GeoDataWait()
 {
 }
 
-bool GeoDataWait::operator==(const GeoDataWait& other) const
-{
-    return this->m_duration == other.m_duration;
-}
-
-bool GeoDataWait::operator!=(const GeoDataWait& other) const
-{
-    return !this->operator==(other);
-}
-
 const char *GeoDataWait::nodeType() const
 {
     return GeoDataTypes::GeoDataWaitType;

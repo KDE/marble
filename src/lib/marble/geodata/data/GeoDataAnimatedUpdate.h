@@ -27,8 +27,6 @@ public:
     GeoDataAnimatedUpdate();
     GeoDataAnimatedUpdate( const GeoDataAnimatedUpdate &other );
     GeoDataAnimatedUpdate& operator=( const GeoDataAnimatedUpdate &other );
-    bool operator== (const GeoDataAnimatedUpdate &other) const;
-    bool operator!= (const GeoDataAnimatedUpdate &other) const;
     ~GeoDataAnimatedUpdate();
 
     /** Provides type information for downcasting a GeoNode */

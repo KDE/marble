@@ -27,8 +27,6 @@ public:
     GeoDataTourControl();
     ~GeoDataTourControl();
 
-    bool operator==( const GeoDataTourControl &other ) const;
-    bool operator!=( const GeoDataTourControl &other ) const;
     const char *nodeType() const;
 
     PlayMode playMode() const;

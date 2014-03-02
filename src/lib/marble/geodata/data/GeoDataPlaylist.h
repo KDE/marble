@@ -22,9 +22,6 @@ namespace Marble
 class GEODATA_EXPORT GeoDataPlaylist : public GeoDataObject
 {
 public:
-
-    bool operator==( const GeoDataPlaylist &other ) const;
-    bool operator!=( const GeoDataPlaylist &other ) const;
     const char *nodeType() const;
 
     GeoDataTourPrimitive* primitive( int index );

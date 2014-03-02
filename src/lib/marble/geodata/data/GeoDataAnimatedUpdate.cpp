@@ -48,16 +48,6 @@ GeoDataAnimatedUpdate &GeoDataAnimatedUpdate::operator=( const GeoDataAnimatedUp
     return *this;
 }
 
-bool GeoDataAnimatedUpdate::operator==(const GeoDataAnimatedUpdate& other) const
-{
-    return d->m_duration == other.d->m_duration && d->m_update == other.d->m_update;
-}
-
-bool GeoDataAnimatedUpdate::operator!=(const GeoDataAnimatedUpdate& other) const
-{
-    return !this->operator==(other);
-}
-
 GeoDataAnimatedUpdate::~GeoDataAnimatedUpdate()
 {
     delete d;
