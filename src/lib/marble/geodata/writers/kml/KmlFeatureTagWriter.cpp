@@ -21,6 +21,7 @@
 #include "GeoDataLookAt.h"
 #include "GeoDataCamera.h"
 #include "GeoWriter.h"
+#include "GeoDataRegion.h"
 #include "KmlElementDictionary.h"
 
 namespace Marble
@@ -84,6 +85,10 @@ bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer 
 
     if( !feature->extendedData().isEmpty() ) {
         writeElement( &feature->extendedData(), writer );
+    }
+
+    if ( !feature->region().latLonAltBox().isNull() ) {
+        writeElement( &feature->region(), writer );
     }
 
     bool const result = writeMid( node, writer );

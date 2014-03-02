@@ -21,6 +21,11 @@
 namespace Marble
 {
 
+static GeoTagWriterRegistrar s_writerRegion(
+    GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataRegionType,
+                                 kml::kmlTag_nameSpace22 ),
+    new KmlRegionTagWriter);
+
 bool KmlRegionTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataRegion *region = static_cast<const GeoDataRegion*>( node );
