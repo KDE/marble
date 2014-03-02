@@ -141,13 +141,15 @@ bool NavigationFloatItem::isInitialized() const
     return m_widgetItem;
 }
 
-void NavigationFloatItem::changeViewport( ViewportParams *viewport )
+void NavigationFloatItem::setProjection( const ViewportParams *viewport )
 {
     if ( viewport->radius() != m_oldViewportRadius ) {
         m_oldViewportRadius = viewport->radius();
         // The slider depends on the map state (zoom factor)
         update();
     }
+
+    AbstractFloatItem::setProjection( viewport );
 }
 
 bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )

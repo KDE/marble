@@ -124,13 +124,15 @@ QPainterPath CompassFloatItem::backgroundShape() const
     return path;
 }
 
-void CompassFloatItem::changeViewport( ViewportParams *viewport )
+void CompassFloatItem::setProjection( const ViewportParams *viewport )
 {
     // figure out the polarity ...
     if ( m_polarity != viewport->polarity() ) {
         m_polarity = viewport->polarity();
         update();
     }
+
+    AbstractFloatItem::setProjection( viewport );
 }
 
 void CompassFloatItem::paintContent( QPainter *painter )

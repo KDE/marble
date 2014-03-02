@@ -62,7 +62,7 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
 
     bool isInitialized () const;
 
-    void changeViewport( ViewportParams *viewport );
+    void setProjection( const ViewportParams *viewport );
 
     void paintContent( QPainter *painter );
 

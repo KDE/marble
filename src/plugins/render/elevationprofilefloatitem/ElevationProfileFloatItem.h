@@ -78,7 +78,7 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
     virtual bool isInitialized() const;
 
-    virtual void changeViewport( ViewportParams *viewport );
+    virtual void setProjection( const ViewportParams *viewport );
 
     virtual void paintContent( QPainter *painter );
 

@@ -69,7 +69,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     bool isInitialized () const;
 
-    void changeViewport( ViewportParams *viewport );
+    void setProjection( const ViewportParams *viewport );
 
     QPixmap pixmap( const QString &Id ) const;
 

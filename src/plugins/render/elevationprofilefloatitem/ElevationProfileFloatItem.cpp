@@ -151,7 +151,7 @@ bool ElevationProfileFloatItem::isInitialized () const
     return m_isInitialized;
 }
 
-void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
+void ElevationProfileFloatItem::setProjection( const ViewportParams *viewport )
 {
     if ( !( viewport->width() == m_viewportWidth && m_isInitialized ) ) {
         bool const highRes = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::HighResolution;
@@ -171,6 +171,8 @@ void ElevationProfileFloatItem::changeViewport( ViewportParams *viewport )
     }
 
     update();
+
+    AbstractFloatItem::setProjection( viewport );
 }
 
 void ElevationProfileFloatItem::paintContent( QPainter *painter )
