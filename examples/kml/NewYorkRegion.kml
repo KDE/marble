@@ -19,8 +19,8 @@
     <Lod>
       <minLodPixels>10</minLodPixels>
       <maxLodPixels>10000</maxLodPixels>
-      <minFadeExtend>5</minFadeExtend>
-      <maxFadeExtend>5</maxFadeExtend>
+      <minFadeExtent>5</minFadeExtent>
+      <maxFadeExtent>5</maxFadeExtent>
     </Lod>
   </Region>
 </Placemark>
