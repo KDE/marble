@@ -24,6 +24,16 @@ GeoDataTourControl::~GeoDataTourControl()
 {
 }
 
+bool GeoDataTourControl::operator==(const GeoDataTourControl& other) const
+{
+    return this->m_playMode == other.m_playMode;
+}
+
+bool GeoDataTourControl::operator!=(const GeoDataTourControl& other) const
+{
+    return !this->operator==(other);
+}
+
 const char *GeoDataTourControl::nodeType() const
 {
     return GeoDataTypes::GeoDataTourControlType;

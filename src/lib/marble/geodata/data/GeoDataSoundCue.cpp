@@ -19,6 +19,16 @@ GeoDataSoundCue::GeoDataSoundCue() :
 {
 }
 
+bool GeoDataSoundCue::operator==(const GeoDataSoundCue& other) const
+{
+    return this->m_delayedStart == other.m_delayedStart && this->m_href == other.m_href;
+}
+
+bool GeoDataSoundCue::operator!=(const GeoDataSoundCue& other) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataSoundCue::~GeoDataSoundCue()
 {
 }

@@ -44,6 +44,16 @@ GeoDataUpdate &GeoDataUpdate::operator=( const GeoDataUpdate &other )
     return *this;
 }
 
+bool GeoDataUpdate::operator==(const GeoDataUpdate& other) const
+{
+    return d->m_targetHref == other.d->m_targetHref;
+}
+
+bool GeoDataUpdate::operator!=(const GeoDataUpdate& other) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataUpdate::~GeoDataUpdate()
 {
     delete d;

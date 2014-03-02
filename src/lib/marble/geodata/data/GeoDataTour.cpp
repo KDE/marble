@@ -45,6 +45,16 @@ GeoDataTour& GeoDataTour::operator=(const GeoDataTour &other)
     return *this;
 }
 
+bool GeoDataTour::operator==(const GeoDataTour& other) const
+{
+    return *d->m_playlist == *other.d->m_playlist;
+}
+
+bool GeoDataTour::operator!=(const GeoDataTour& other) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataTour::~GeoDataTour()
 {
     delete d;
