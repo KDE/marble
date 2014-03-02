@@ -23,6 +23,8 @@ public:
     GeoDataWait();
     ~GeoDataWait();
 
+    bool operator==(const GeoDataWait &other) const;
+    bool operator!=(const GeoDataWait &other) const;
     const char *nodeType() const;
 
     double duration() const;

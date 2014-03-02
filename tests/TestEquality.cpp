@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2014      Cruceru Calin-Cristian <crucerucalincristian@gmail.com>
+// Copyright 2014      Sanjiban Bairagya      <sanjiban22393@gmail.com>
 //
 
 #include <QObject>
@@ -24,6 +25,11 @@
 #include <GeoDataImagePyramid.h>
 #include <GeoDataItemIcon.h>
 #include <GeoDataLink.h>
+#include <GeoDataAnimatedUpdate.h>
+#include <GeoDataSoundCue.h>
+#include <GeoDataTourControl.h>
+#include <GeoDataWait.h>
+#include <GeoDataTour.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -46,6 +52,7 @@ private slots:
     void imagePyramidTest();
     void itemIconTest();
     void linkTest();
+    void tourTest();
 };
 
 
@@ -358,6 +365,62 @@ void TestEquality::linkTest()
     QVERIFY( &link1 != &link2 );
 }
 
+void TestEquality::tourTest()
+{
+    GeoDataTour tour1;
+    GeoDataTour tour2;
+    GeoDataPlaylist* playlist1 = new GeoDataPlaylist;
+    GeoDataPlaylist* playlist2 = new GeoDataPlaylist;
+
+    GeoDataAnimatedUpdate* animatedUpdate1 = new GeoDataAnimatedUpdate;
+    GeoDataAnimatedUpdate* animatedUpdate2 = new GeoDataAnimatedUpdate;
+    GeoDataSoundCue* cue1 = new GeoDataSoundCue;
+    GeoDataSoundCue* cue2 = new GeoDataSoundCue;
+    GeoDataTourControl* control1 = new GeoDataTourControl;
+    GeoDataTourControl* control2 = new GeoDataTourControl;
+    GeoDataWait* wait1 = new GeoDataWait;
+    GeoDataWait* wait2 = new GeoDataWait;
+    GeoDataFlyTo* flyTo1 = new GeoDataFlyTo;
+    GeoDataFlyTo* flyTo2 = new GeoDataFlyTo;
+
+    playlist1->addPrimitive( animatedUpdate1 );
+    playlist1->addPrimitive( cue1 );
+    playlist1->addPrimitive( control1 );
+    playlist1->addPrimitive( wait1 );
+    playlist1->addPrimitive( flyTo1 );
+
+    playlist2->addPrimitive( animatedUpdate2 );
+    playlist2->addPrimitive( cue2 );
+    playlist2->addPrimitive( control2 );
+    playlist2->addPrimitive( wait2 );
+    playlist2->addPrimitive( flyTo2 );
+
+    tour1.setPlaylist( playlist1 );
+    tour2.setPlaylist( playlist2 );
+
+    QCOMPARE( tour1, tour1 );
+    QCOMPARE( tour2, tour2 );
+    QCOMPARE( tour1 != tour2, false );
+    QVERIFY( tour1 == tour2 );
+
+    tour1.playlist()->swapPrimitives( 1, 3 );
+
+    QCOMPARE( tour1, tour1 );
+    QCOMPARE( tour2, tour2 );
+    QCOMPARE( tour1 == tour2, false );
+    QVERIFY( tour1 != tour2 );
+
+    tour1.playlist()->swapPrimitives( 1, 3 );
+    QVERIFY( tour1 == tour2 );
+
+    GeoDataSoundCue* cue3 = new GeoDataSoundCue;
+    tour1.playlist()->addPrimitive( cue3 );
+
+    QCOMPARE( tour1, tour1 );
+    QCOMPARE( tour2, tour2 );
+    QCOMPARE( tour1 == tour2, false );
+    QVERIFY( tour1 != tour2 );
+}
 
 QTEST_MAIN( TestEquality )
 
