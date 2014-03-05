@@ -27,6 +27,8 @@ public:
     GeoDataLatLonQuad( const GeoDataLatLonQuad &other );
 
     GeoDataLatLonQuad& operator=( const GeoDataLatLonQuad &other );
+    bool operator==( const GeoDataLatLonQuad &other ) const;
+    bool operator!=( const GeoDataLatLonQuad &other ) const;
 
     ~GeoDataLatLonQuad();
 

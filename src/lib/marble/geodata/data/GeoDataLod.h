@@ -64,6 +64,10 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 /*!
     \brief Provides type information for downcasting a GeoNode
 */
+
+    bool operator==( const GeoDataLod &other ) const;
+    bool operator!=( const GeoDataLod &other ) const;
+
     virtual const char* nodeType() const;
 
 

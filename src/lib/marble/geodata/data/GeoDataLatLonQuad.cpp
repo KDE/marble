@@ -48,6 +48,20 @@ GeoDataLatLonQuad &GeoDataLatLonQuad::operator=( const GeoDataLatLonQuad &other 
     return *this;
 }
 
+bool GeoDataLatLonQuad::operator==(const GeoDataLatLonQuad& other) const
+{
+    return equals( other )
+           && d->m_bottomLeft == other.d->m_bottomLeft
+           && d->m_bottomRight == other.d->m_bottomRight
+           && d->m_topLeft == other.d->m_topLeft
+           && d->m_topRight == other.d->m_topRight;
+}
+
+bool GeoDataLatLonQuad::operator!=(const GeoDataLatLonQuad& other) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataLatLonQuad::~GeoDataLatLonQuad()
 {
     delete d;

@@ -58,6 +58,17 @@ const char* GeoDataRegion::nodeType() const
     return d->nodeType();
 }
 
+bool GeoDataRegion::operator==(const GeoDataRegion& other) const
+{
+    return equals(other)
+           && this->latLonAltBox() == other.latLonAltBox()
+           && this->lod() == other.lod();
+}
+
+bool GeoDataRegion::operator!=(const GeoDataRegion& other) const
+{
+    return !this->operator==(other);
+}
 
 const GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
 {

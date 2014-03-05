@@ -82,7 +82,8 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
 */
     virtual const char* nodeType() const;
 
-
+    bool operator==( const GeoDataRegion &other ) const;
+    bool operator!=( const GeoDataRegion &other ) const;
     
 /*!
     \brief Returns a geodesic bounding box ("latLonAltBox") of the region.

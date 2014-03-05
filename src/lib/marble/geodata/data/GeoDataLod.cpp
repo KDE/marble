@@ -33,6 +33,19 @@ GeoDataLod::~GeoDataLod()
     delete d;
 }
 
+bool GeoDataLod::operator==(const GeoDataLod& other) const
+{
+    return equals( other )
+           &&d->m_maxFadeExtent == other.d->m_maxFadeExtent
+           && d->m_maxLodPixels == other.d->m_maxLodPixels
+           && d->m_minFadeExtent == other.d->m_minFadeExtent
+           && d->m_minLodPixels == other.d->m_minLodPixels;
+}
+
+bool GeoDataLod::operator!=(const GeoDataLod& other) const
+{
+    return !this->operator==( other );
+}
 
 const char* GeoDataLod::nodeType() const
 {

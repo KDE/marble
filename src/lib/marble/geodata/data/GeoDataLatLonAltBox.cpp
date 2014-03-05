@@ -61,7 +61,6 @@ GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataLatLonAltBox &
     return *this;
 }
 
-
 GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataCoordinates &other )
 {
     setWest( other.longitude() );

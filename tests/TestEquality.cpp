@@ -34,6 +34,11 @@
 #include <GeoDataLinearRing.h>
 #include <GeoDataLineString.h>
 #include <GeoDataPolygon.h>
+#include <GeoDataLatLonQuad.h>
+#include <GeoDataLatLonAltBox.h>
+#include <GeoDataLatLonBox.h>
+#include <GeoDataLod.h>
+#include <GeoDataRegion.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -61,6 +66,11 @@ private slots:
     void linearRingTest();
     void lineStringTest();
     void polygonTest();
+    void latLonQuadTest();
+    void latLonBoxTest();
+    void latLonAltBoxTest();
+    void lodTest();
+    void regionTest();
 };
 
 
@@ -600,6 +610,195 @@ void TestEquality::polygonTest()
     QVERIFY( polygon1 != polygon2 );
 
     QCOMPARE( polygon1 == polygon2, false );
+}
+
+void TestEquality::latLonQuadTest()
+{
+    GeoDataLatLonQuad quad1, quad2;
+    quad1.setBottomLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad1.setBottomLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad1.setBottomRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad1.setBottomRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    quad1.setTopLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad1.setTopLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad1.setTopRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad1.setTopRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    quad2.setBottomLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad2.setBottomLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad2.setBottomRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad2.setBottomRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    quad2.setTopLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad2.setTopLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad2.setTopRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad2.setTopRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    QCOMPARE( quad1, quad1 );
+    QCOMPARE( quad2, quad2 );
+    QCOMPARE( quad1 != quad2, false );
+    QVERIFY( quad1 == quad2 );
+
+    quad1.setTopLeftLatitude( 65, GeoDataCoordinates::Degree );
+
+    QCOMPARE( quad1, quad1 );
+    QCOMPARE( quad2, quad2 );
+    QCOMPARE( quad1 == quad2, false );
+    QVERIFY( quad1 != quad2 );
+}
+
+void TestEquality::latLonBoxTest()
+{
+    GeoDataLatLonBox latLonBox1, latLonBox2;
+
+    latLonBox1.setEast( 40 );
+    latLonBox1.setWest( 50 );
+    latLonBox1.setNorth( 60 );
+    latLonBox1.setSouth( 70 );
+    latLonBox1.setRotation( 20 );
+    latLonBox1.setBoundaries( 70, 80, 50, 60 );
+
+    latLonBox2.setEast( 40 );
+    latLonBox2.setWest( 50 );
+    latLonBox2.setNorth( 60 );
+    latLonBox2.setSouth( 70 );
+    latLonBox2.setRotation( 20 );
+    latLonBox2.setBoundaries( 70, 80, 50, 60 );
+
+    QCOMPARE( latLonBox1, latLonBox1 );
+    QCOMPARE( latLonBox2, latLonBox2 );
+    QCOMPARE( latLonBox1 != latLonBox2, false );
+    QVERIFY( latLonBox1 == latLonBox2 );
+
+    latLonBox2.setWest( 55 );
+
+    QCOMPARE( latLonBox1, latLonBox1 );
+    QCOMPARE( latLonBox2, latLonBox2 );
+    QCOMPARE( latLonBox1 == latLonBox2, false );
+    QVERIFY( latLonBox1 != latLonBox2 );
+}
+
+void TestEquality::latLonAltBoxTest()
+{
+    GeoDataLatLonAltBox latLonAltBox1, latLonAltBox2;
+
+    latLonAltBox1.setEast( 40 );
+    latLonAltBox1.setWest( 50 );
+    latLonAltBox1.setNorth( 60 );
+    latLonAltBox1.setSouth( 70 );
+    latLonAltBox1.setRotation( 20 );
+    latLonAltBox1.setBoundaries( 70, 80, 50, 60 );
+    latLonAltBox1.setMaxAltitude( 100 );
+    latLonAltBox1.setMinAltitude( 20 );
+    latLonAltBox1.setAltitudeMode( Marble::Absolute );
+
+    latLonAltBox2.setEast( 40 );
+    latLonAltBox2.setWest( 50 );
+    latLonAltBox2.setNorth( 60 );
+    latLonAltBox2.setSouth( 70 );
+    latLonAltBox2.setRotation( 20 );
+    latLonAltBox2.setBoundaries( 70, 80, 50, 60 );
+    latLonAltBox2.setMaxAltitude( 100 );
+    latLonAltBox2.setMinAltitude( 20 );
+    latLonAltBox2.setAltitudeMode( Marble::Absolute );
+
+    QCOMPARE( latLonAltBox1, latLonAltBox1 );
+    QCOMPARE( latLonAltBox2, latLonAltBox2 );
+    QCOMPARE( latLonAltBox1 != latLonAltBox2, false );
+    QVERIFY( latLonAltBox1 == latLonAltBox2 );
+
+    latLonAltBox2.setEast( 30 );
+
+    QCOMPARE( latLonAltBox1, latLonAltBox1 );
+    QCOMPARE( latLonAltBox2, latLonAltBox2 );
+    QCOMPARE( latLonAltBox1 == latLonAltBox2, false );
+    QVERIFY( latLonAltBox1 != latLonAltBox2 );
+}
+
+void TestEquality::lodTest()
+{
+    GeoDataLod lod1, lod2;
+    lod1.setMaxFadeExtent( 20 );
+    lod1.setMinFadeExtent( 10 );
+    lod1.setMaxLodPixels( 30 );
+    lod1.setMinLodPixels( 5 );
+
+    lod2.setMaxFadeExtent( 20 );
+    lod2.setMinFadeExtent( 10 );
+    lod2.setMaxLodPixels( 30 );
+    lod2.setMinLodPixels( 5 );
+
+    QCOMPARE( lod1, lod1 );
+    QCOMPARE( lod2, lod2 );
+    QCOMPARE( lod1 != lod2, false );
+    QVERIFY( lod1 == lod2 );
+
+    lod2.setMaxFadeExtent( 30 );
+
+    QCOMPARE( lod1, lod1 );
+    QCOMPARE( lod2, lod2 );
+    QCOMPARE( lod1 == lod2, false );
+    QVERIFY( lod1 != lod2 );
+}
+
+void TestEquality::regionTest()
+{
+    GeoDataRegion region1;
+    GeoDataRegion region2;
+
+    GeoDataLatLonAltBox latLonAltBox1;
+    GeoDataLatLonAltBox latLonAltBox2;
+
+    latLonAltBox1.setEast( 40 );
+    latLonAltBox1.setWest( 50 );
+    latLonAltBox1.setNorth( 60 );
+    latLonAltBox1.setSouth( 70 );
+    latLonAltBox1.setRotation( 20 );
+    latLonAltBox1.setBoundaries( 70, 80, 50, 60 );
+    latLonAltBox1.setMaxAltitude( 100 );
+    latLonAltBox1.setMinAltitude( 20 );
+    latLonAltBox1.setAltitudeMode( Marble::Absolute );
+
+    latLonAltBox2.setEast( 40 );
+    latLonAltBox2.setWest( 50 );
+    latLonAltBox2.setNorth( 60 );
+    latLonAltBox2.setSouth( 70 );
+    latLonAltBox2.setRotation( 20 );
+    latLonAltBox2.setBoundaries( 70, 80, 50, 60 );
+    latLonAltBox2.setMaxAltitude( 100 );
+    latLonAltBox2.setMinAltitude( 20 );
+    latLonAltBox2.setAltitudeMode( Marble::Absolute );
+
+    region1.setLatLonAltBox( latLonAltBox1 );
+    region2.setLatLonAltBox( latLonAltBox2 );
+
+    GeoDataLod lod1;
+    GeoDataLod lod2;
+    lod1.setMaxFadeExtent( 20 );
+    lod1.setMinFadeExtent( 10 );
+    lod1.setMaxLodPixels( 30 );
+    lod1.setMinLodPixels( 5 );
+
+    lod2.setMaxFadeExtent( 20 );
+    lod2.setMinFadeExtent( 10 );
+    lod2.setMaxLodPixels( 30 );
+    lod2.setMinLodPixels( 5 );
+
+    region1.setLod( lod1 );
+    region2.setLod( lod2 );
+
+    QCOMPARE( region1, region1 );
+    QCOMPARE( region2, region2 );
+    QCOMPARE( region1 != region2, false );
+    QVERIFY( region1 == region2 );
+
+    region2.lod().setMaxFadeExtent( 30 );
+
+    QCOMPARE( region1, region1 );
+    QCOMPARE( region2, region2 );
+    QCOMPARE( region1 == region2, false );
+    QVERIFY( region1 != region2 );
 }
 
 QTEST_MAIN( TestEquality )

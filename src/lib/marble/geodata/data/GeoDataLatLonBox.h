@@ -99,8 +99,8 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     qreal rotation( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
     void setRotation( const qreal rotation, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
-    void    boundaries( qreal &north, qreal &south, qreal &east, qreal &west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void    setBoundaries( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    void boundaries( qreal &north, qreal &south, qreal &east, qreal &west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setBoundaries( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Get the width of the longitude interval
