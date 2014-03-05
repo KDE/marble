@@ -143,4 +143,10 @@ void GeoDataGeometry::unpack( QDataStream& stream )
     d->m_altitudeMode = (AltitudeMode) am;
 }
 
+bool GeoDataGeometry::equals(const GeoDataGeometry &other) const
+{
+    return d->m_extrude == other.d->m_extrude &&
+           d->m_altitudeMode == other.d->m_altitudeMode;
+}
+
 }

@@ -67,6 +67,9 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
 
     ~GeoDataPoint();
 
+    bool operator==( const GeoDataPoint &other ) const;
+    bool operator!=( const GeoDataPoint &other ) const;
+
     void setCoordinates( const GeoDataCoordinates &coordinates );
 
     const GeoDataCoordinates& coordinates() const;

@@ -61,6 +61,17 @@ GeoDataPoint::~GeoDataPoint()
 {
 }
 
+bool GeoDataPoint::operator==( const GeoDataPoint &other ) const
+{
+    return GeoDataGeometry::equals(other) &&
+           coordinates() == other.coordinates();
+}
+
+bool GeoDataPoint::operator!=( const GeoDataPoint &other ) const
+{
+    return !this->operator==(other);
+}
+
 void GeoDataPoint::setCoordinates( const GeoDataCoordinates &coordinates )
 {
     p()->m_coordinates = coordinates;

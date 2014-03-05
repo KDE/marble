@@ -30,6 +30,10 @@
 #include <GeoDataTourControl.h>
 #include <GeoDataWait.h>
 #include <GeoDataTour.h>
+#include <GeoDataPoint.h>
+#include <GeoDataLinearRing.h>
+#include <GeoDataLineString.h>
+#include <GeoDataPolygon.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -53,6 +57,10 @@ private slots:
     void itemIconTest();
     void linkTest();
     void tourTest();
+    void pointTest();
+    void linearRingTest();
+    void lineStringTest();
+    void polygonTest();
 };
 
 
@@ -420,6 +428,178 @@ void TestEquality::tourTest()
     QCOMPARE( tour2, tour2 );
     QCOMPARE( tour1 == tour2, false );
     QVERIFY( tour1 != tour2 );
+}
+
+void TestEquality::pointTest()
+{
+    GeoDataPoint point1, point2;
+    GeoDataCoordinates coord1, coord2;
+
+    coord1.set(100,100,100);
+    coord2.set(200,200,200);
+    point1.setCoordinates(coord1);
+    point2.setCoordinates(coord2);
+
+    QVERIFY( point1 != point2 );
+    QCOMPARE( point1 != point2, true );
+
+    coord1.set(100,150);
+    coord2.set(100,150);
+    point1.setCoordinates(coord1);
+    point2.setCoordinates(coord2);
+
+    QVERIFY( point1 == point2 );
+    QCOMPARE( point1, point2 );
+    QCOMPARE( point1 == point2, true );
+
+    QVERIFY( point1 == point1 );
+    QCOMPARE( point1, point2 );
+}
+
+void TestEquality::linearRingTest()
+{
+    GeoDataLinearRing linearRing1, linearRing2;
+    GeoDataCoordinates coord1, coord2, coord3, coord4, coord5, coord6;
+
+    coord1.set(123,100);
+    coord2.set(124,101);
+    coord3.set(123,100);
+    coord4.set(123,100);
+    coord5.set(124,101);
+    coord6.set(123,100);
+
+    linearRing1.append(coord1);
+    linearRing1.append(coord2);
+    linearRing1.append(coord3);
+    linearRing2.append(coord4);
+    linearRing2.append(coord5);
+    linearRing2.append(coord6);
+    linearRing1.setTessellate(false);
+    linearRing2.setTessellate(false);
+
+    QVERIFY( linearRing1 == linearRing2 );
+    QCOMPARE( linearRing1 != linearRing2, false );
+
+    linearRing2.clear();
+    linearRing2.append(coord1);
+    linearRing2.append(coord3);
+    linearRing2.append(coord4);
+
+    QVERIFY( linearRing1 != linearRing2 );
+    QCOMPARE( linearRing1 == linearRing2, false );
+}
+
+void TestEquality::lineStringTest()
+{
+    GeoDataLineString lineString1, lineString2;
+    GeoDataCoordinates coord1, coord2, coord3, coord4, coord5, coord6;
+
+    coord1.set(100,100,100);
+    coord2.set(-100,-100,-100);
+    coord3.set(50,50,50);
+    coord4.set(150,150,150);
+    coord5.set(-150,-150,-150);
+    coord6.set(-50,-50,-50);
+
+    lineString1.append(coord1);
+    lineString1.append(coord3);
+    lineString1.append(coord4);
+    lineString2.append(coord2);
+    lineString2.append(coord5);
+    lineString2.append(coord6);
+    lineString1.setTessellate(false);
+    lineString2.setTessellate(false);
+
+    QVERIFY( lineString1 != lineString2 );
+    QCOMPARE( lineString1 == lineString2, false );
+
+    lineString2.clear();
+    lineString2.append(coord1);
+    lineString2.append(coord3);
+    lineString2.append(coord4);
+
+    QVERIFY( lineString1 == lineString2 );
+    QCOMPARE( lineString1 != lineString2, false );
+}
+
+void TestEquality::polygonTest()
+{
+    GeoDataPolygon polygon1, polygon2;
+
+    GeoDataLinearRing outerBoundary1, outerBoundary2;
+    GeoDataCoordinates coord1, coord2, coord3, coord4, coord5, coord6;
+
+    coord1.set(623,600);
+    coord2.set(624,601);
+    coord3.set(623,600);
+    coord4.set(623,600);
+    coord5.set(624,601);
+    coord6.set(623,600);
+
+    outerBoundary1.append(coord1);
+    outerBoundary1.append(coord2);
+    outerBoundary1.append(coord3);
+    outerBoundary2.append(coord4);
+    outerBoundary2.append(coord5);
+    outerBoundary2.append(coord6);
+    outerBoundary1.setTessellate(true);
+    outerBoundary2.setTessellate(true);
+    polygon1.setOuterBoundary(outerBoundary1);
+    polygon2.setOuterBoundary(outerBoundary2);
+
+
+    GeoDataLinearRing innerBoundary11, innerBoundary12, innerBoundary21, innerBoundary22;
+    GeoDataCoordinates coord111, coord112, coord113, coord121, coord122, coord123;
+    GeoDataCoordinates coord211, coord212, coord213, coord221, coord222, coord223;
+
+    coord111.set(100,100);
+    coord112.set(200,200);
+    coord113.set(100,100);
+    coord121.set(400,400);
+    coord122.set(500,500);
+    coord123.set(400,400);
+    coord211.set(100,100);
+    coord212.set(200,200);
+    coord213.set(100,100);
+    coord221.set(400,400);
+    coord222.set(500,500);
+    coord223.set(400,400);
+
+    innerBoundary11.append(coord111);
+    innerBoundary11.append(coord112);
+    innerBoundary11.append(coord113);
+    innerBoundary12.append(coord121);
+    innerBoundary12.append(coord122);
+    innerBoundary12.append(coord123);
+    innerBoundary21.append(coord211);
+    innerBoundary21.append(coord212);
+    innerBoundary21.append(coord213);
+    innerBoundary22.append(coord221);
+    innerBoundary22.append(coord222);
+    innerBoundary22.append(coord223);
+    innerBoundary11.setTessellate(true);
+    innerBoundary12.setTessellate(true);
+    innerBoundary21.setTessellate(true);
+    innerBoundary22.setTessellate(true);
+
+    polygon1.appendInnerBoundary(innerBoundary11);
+    polygon1.appendInnerBoundary(innerBoundary12);
+    polygon2.appendInnerBoundary(innerBoundary21);
+    polygon2.appendInnerBoundary(innerBoundary22);
+    polygon1.setTessellate(true);
+    polygon2.setTessellate(true);
+
+    QVERIFY( polygon1 == polygon2 );
+    QCOMPARE( polygon1 != polygon2, false );
+
+    polygon1.setTessellate(false);
+    QVERIFY( polygon1 != polygon2 );
+
+    polygon1.setTessellate(true);
+    polygon1.appendInnerBoundary(innerBoundary11);
+    QVERIFY( polygon1 != polygon2 );
+
+    QCOMPARE( polygon1 == polygon2, false );
 }
 
 QTEST_MAIN( TestEquality )

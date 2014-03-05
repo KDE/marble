@@ -86,6 +86,15 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 */
     virtual ~GeoDataLinearRing();
 
+
+/*!
+    \brief Returns true/false depending on whether this and other are/are not equal.
+*/
+
+    bool operator==( const GeoDataLinearRing &other ) const;
+    bool operator!=( const GeoDataLinearRing &other ) const;
+
+
 /*!
     \brief Returns whether a LinearRing is a closed polygon.
 

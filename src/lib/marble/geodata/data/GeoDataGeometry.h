@@ -81,6 +81,9 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     GeoDataGeometryPrivate* p() const;
     GeoDataGeometryPrivate* d;
     explicit GeoDataGeometry( GeoDataGeometryPrivate* priv );
+
+ protected:
+    bool equals(const GeoDataGeometry &other) const;
 };
 
 }

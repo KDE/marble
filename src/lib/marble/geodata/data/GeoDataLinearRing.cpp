@@ -32,6 +32,17 @@ GeoDataLinearRing::~GeoDataLinearRing()
 {
 }
 
+bool GeoDataLinearRing::operator==( const GeoDataLinearRing &other ) const
+{
+    return isClosed() == other.isClosed() &&
+           GeoDataLineString::operator==( other );
+}
+
+bool GeoDataLinearRing::operator!=( const GeoDataLinearRing &other ) const
+{
+    return !this->operator==(other);
+}
+
 bool GeoDataLinearRing::isClosed() const
 {
     return true;
