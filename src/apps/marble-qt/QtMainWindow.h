@@ -163,41 +163,41 @@ private:
     QMenu *m_onlineServicesMenu;
     QMenu *m_bookmarkMenu;
     // File Menu
-    QAction *m_openAct;
-    QAction *m_exportMapAct;
-    QAction *m_downloadAct;
+    QAction *m_openAction;
+    QAction *m_exportMapAction;
+    QAction *m_downloadAction;
     QAction *m_downloadRegionAction;
-    QAction *m_printPreviewAct;
-    QAction *m_printAct;
-    QAction *m_workOfflineAct;
-    QAction *m_quitAct;
-    QAction *m_mapWizardAct;
+    QAction *m_printPreviewAction;
+    QAction *m_printAction;
+    QAction *m_workOfflineAction;
+    QAction *m_quitAction;
+    QAction *m_mapWizardAction;
 
     // Edit Menu
-    QAction *m_copyMapAct;
-    QAction *m_copyCoordinatesAct;
+    QAction *m_copyMapAction;
+    QAction *m_copyCoordinatesAction;
     QAction *m_osmEditAction;
     QAction *m_recordMovieAction;
     QAction *m_stopRecordingAction;
 
     // View Menu
-    QAction *m_showCloudsAct;
-    QAction *m_controlSunAct;
-    QAction *m_controlTimeAct;
-    QAction *m_reloadAct;
+    QAction *m_showCloudsAction;
+    QAction *m_controlSunAction;
+    QAction *m_controlTimeAction;
+    QAction *m_reloadAction;
 
     // Settings Menu
-    QAction *m_fullScreenAct;
-    QAction *m_statusBarAct;
-    QAction *m_configDialogAct;
+    QAction *m_fullScreenAction;
+    QAction *m_statusBarAction;
+    QAction *m_configDialogAction;
     QActionGroup *m_viewSizeActsGroup;
 
     // Help Menu
-    QAction *m_whatsThisAct;
-    QAction *m_aboutMarbleAct;
-    QAction *m_aboutQtAct;
-    QAction *m_lockFloatItemsAct;
-    QAction *m_handbookAct;
+    QAction *m_whatsThisAction;
+    QAction *m_aboutMarbleAction;
+    QAction *m_aboutQtAction;
+    QAction *m_lockFloatItemsAction;
+    QAction *m_handbookAction;
 
     // Status Bar
     QString     m_position;
@@ -213,10 +213,10 @@ private:
     void updateStatusBar();
 
     //Bookmark Menu
-    QAction *m_addBookmarkAct;
-    QAction *m_setHomeAct;
-    QAction *m_toggleBookmarkDisplayAct;
-    QAction *m_manageBookmarksAct;
+    QAction *m_addBookmarkAction;
+    QAction *m_setHomeAction;
+    QAction *m_toggleBookmarkDisplayAction;
+    QAction *m_manageBookmarksAction;
 
     QString m_lastFileOpenPath;
     QStringList m_commandlineFilePaths;
