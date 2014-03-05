@@ -263,7 +263,9 @@ bool GeoDataLineString::operator==( const GeoDataLineString &other ) const
 {
     if ( !GeoDataGeometry::equals(other) ||
           size() != other.size() ||
-          tessellate() != other.tessellate() ) return false;
+          tessellate() != other.tessellate() ) {
+        return false;
+    }
 
     GeoDataLineStringPrivate* d = p();
     GeoDataLineStringPrivate* other_d = other.p();
@@ -274,11 +276,12 @@ bool GeoDataLineString::operator==( const GeoDataLineString &other ) const
     QVector<GeoDataCoordinates>::const_iterator otherItEnd = other_d->m_vector.constEnd();
 
     for ( ; itCoords != itEnd && otherItCoords != otherItEnd; ++itCoords, ++otherItCoords ) {
-        if ( *itCoords != *otherItCoords )
+        if ( *itCoords != *otherItCoords ) {
             return false;
+        }
     }
 
-    if ( itCoords != itEnd || otherItCoords != otherItEnd ) return false;
+    Q_ASSERT ( itCoords == itEnd && otherItCoords == otherItEnd );
     return true;
 }
 
