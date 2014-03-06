@@ -226,7 +226,7 @@ bool SpeakersModel::isRemote( int idx ) const
     return data( index( idx ), IsRemote ).toBool();
 }
 
-int SpeakersModel::count()
+int SpeakersModel::count() const
 {
     return rowCount();
 }

@@ -108,7 +108,7 @@ void MarbleClock::setUpdateInterval( int seconds )
     emit updateIntervalChanged( seconds );
 }
 
-int MarbleClock::updateInterval()
+int MarbleClock::updateInterval() const
 {
     return d->m_updateInterval;
 }

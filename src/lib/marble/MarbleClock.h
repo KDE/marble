@@ -75,7 +75,7 @@ public:
      * @return The interval in seconds.
      * @see setUpdateInterval
      */
-    int updateInterval();
+    int updateInterval() const;
 
     /**
      * @brief Sets the speed of the timer which is how fast the marble clock can run relative to actual speed of time.

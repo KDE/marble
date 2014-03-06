@@ -51,7 +51,7 @@ public:
     QHash<int, QByteArray> roleNames() const;
 
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
-    int count();
+    int count() const;
 
 public Q_SLOTS:
     int indexOf( const QString &name );

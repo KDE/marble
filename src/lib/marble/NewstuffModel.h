@@ -76,7 +76,7 @@ public:
 #endif
 
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
-    int count();
+    int count() const;
 
     /**
       * Add a newstuff provider

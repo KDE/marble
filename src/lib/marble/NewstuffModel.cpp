@@ -561,7 +561,7 @@ QHash<int, QByteArray> NewstuffModel::roleNames() const
 #endif
 
 
-int NewstuffModel::count()
+int NewstuffModel::count() const
 {
     return rowCount();
 }

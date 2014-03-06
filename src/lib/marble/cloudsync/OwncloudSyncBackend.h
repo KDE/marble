@@ -37,7 +37,7 @@ public:
      * @param endpoint Endpoint name which will be appended to API URL
      * @return QUrl which can be used for ineractions with API
      */
-    QUrl endpointUrl( const QString &endpoint );
+    QUrl endpointUrl( const QString &endpoint ) const;
 
     /**
      * Generates an endpoint URL by appending endpoint name and parameter to API URL
@@ -45,7 +45,7 @@ public:
      * @param parameter Parameter which will be appended to API URL right after endpoint
      * @return QUrl which can be used for ineractions with API
      */
-    QUrl endpointUrl( const QString &endpoint, const QString &parameter );
+    QUrl endpointUrl( const QString &endpoint, const QString &parameter ) const;
 
     /**
      * Removes route with given timestamp from cache
