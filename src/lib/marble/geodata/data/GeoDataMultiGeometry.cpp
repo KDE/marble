@@ -37,7 +37,12 @@ GeoDataMultiGeometry::~GeoDataMultiGeometry()
 {
 }
 
-GeoDataMultiGeometryPrivate* GeoDataMultiGeometry::p() const
+GeoDataMultiGeometryPrivate* GeoDataMultiGeometry::p()
+{
+    return static_cast<GeoDataMultiGeometryPrivate*>(d);
+}
+
+const GeoDataMultiGeometryPrivate* GeoDataMultiGeometry::p() const
 {
     return static_cast<GeoDataMultiGeometryPrivate*>(d);
 }

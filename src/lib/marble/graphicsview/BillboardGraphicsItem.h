@@ -62,7 +62,8 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
 
  private:
     class Private;
-    Private *p() const;
+    Private *p();
+    const Private *p() const;
 };
 
 } // Marble namespace

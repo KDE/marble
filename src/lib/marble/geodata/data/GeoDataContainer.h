@@ -154,7 +154,8 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     explicit GeoDataContainer( GeoDataContainerPrivate *priv );
 
  private:
-    GeoDataContainerPrivate* p() const;
+    GeoDataContainerPrivate* p();
+    const GeoDataContainerPrivate* p() const;
 };
 
 }

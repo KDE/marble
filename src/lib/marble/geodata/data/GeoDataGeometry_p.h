@@ -71,7 +71,7 @@ class GeoDataGeometryPrivate
 
     bool         m_extrude;
     AltitudeMode m_altitudeMode;
-    GeoDataLatLonAltBox m_latLonAltBox;
+    mutable GeoDataLatLonAltBox m_latLonAltBox;
 
     QAtomicInt  ref;
 };

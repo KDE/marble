@@ -45,7 +45,12 @@ GeoDataContainer::~GeoDataContainer()
 {
 }
 
-GeoDataContainerPrivate* GeoDataContainer::p() const
+GeoDataContainerPrivate* GeoDataContainer::p()
+{
+    return static_cast<GeoDataContainerPrivate*>(d);
+}
+
+const GeoDataContainerPrivate* GeoDataContainer::p() const
 {
     return static_cast<GeoDataContainerPrivate*>(d);
 }

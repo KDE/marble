@@ -259,7 +259,12 @@ bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
     return false;
 }
 
-MarbleGraphicsItemPrivate *MarbleGraphicsItem::p() const
+MarbleGraphicsItemPrivate *MarbleGraphicsItem::p()
+{
+    return d;
+}
+
+const MarbleGraphicsItemPrivate *MarbleGraphicsItem::p() const
 {
     return d;
 }

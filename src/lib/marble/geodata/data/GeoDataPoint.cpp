@@ -83,7 +83,12 @@ const GeoDataCoordinates &GeoDataPoint::coordinates() const
     return p()->m_coordinates;
 }
 
-GeoDataPointPrivate* GeoDataPoint::p() const
+GeoDataPointPrivate* GeoDataPoint::p()
+{
+    return static_cast<GeoDataPointPrivate*>(GeoDataGeometry::d);
+}
+
+const GeoDataPointPrivate* GeoDataPoint::p() const
 {
     return static_cast<GeoDataPointPrivate*>(GeoDataGeometry::d);
 }

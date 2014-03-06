@@ -94,7 +94,12 @@ void GeoGraphicsItem::setZValue( qreal z )
     p()->m_zValue = z;
 }
 
-GeoGraphicsItemPrivate *GeoGraphicsItem::p() const
+GeoGraphicsItemPrivate *GeoGraphicsItem::p()
+{
+    return reinterpret_cast<GeoGraphicsItemPrivate *>( d );
+}
+
+const GeoGraphicsItemPrivate *GeoGraphicsItem::p() const
 {
     return reinterpret_cast<GeoGraphicsItemPrivate *>( d );
 }

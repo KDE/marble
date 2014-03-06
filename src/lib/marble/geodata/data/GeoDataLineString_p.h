@@ -70,27 +70,27 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
         return GeoDataLineStringId;
     }
 
-    void toPoleCorrected( const GeoDataLineString & q, GeoDataLineString & poleCorrected );
+    void toPoleCorrected( const GeoDataLineString & q, GeoDataLineString & poleCorrected ) const;
 
     void toDateLineCorrected( const GeoDataLineString & q,
-                              QVector<GeoDataLineString*> & lineStrings );
+                              QVector<GeoDataLineString*> & lineStrings ) const;
 
     void interpolateDateLine( const GeoDataCoordinates & previousCoords,
                               const GeoDataCoordinates & currentCoords,
                               GeoDataCoordinates & previousAtDateline,
                               GeoDataCoordinates & currentAtDateline,
-                              TessellationFlags f );
+                              TessellationFlags f ) const;
 
     GeoDataCoordinates findDateLine( const GeoDataCoordinates & previousCoords,
                        const GeoDataCoordinates & currentCoords,
-                       int recursionCounter );
+                       int recursionCounter ) const;
 
     QVector<GeoDataCoordinates> m_vector;
 
-    GeoDataLineString*          m_rangeCorrected;
-    bool                        m_dirtyRange;
+    mutable GeoDataLineString*  m_rangeCorrected;
+    mutable bool                m_dirtyRange;
 
-    bool                        m_dirtyBox; // tells whether there have been changes to the
+    mutable bool                m_dirtyBox; // tells whether there have been changes to the
                                             // GeoDataPoints since the LatLonAltBox has 
                                             // been calculated. Saves performance. 
     TessellationFlags           m_tessellationFlags;

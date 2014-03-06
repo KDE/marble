@@ -56,7 +56,12 @@ bool GeoDataPlacemark::operator==( const GeoDataPlacemark& other ) const
     return equals(other) && p() == other.p();
 }
 
-GeoDataPlacemarkPrivate* GeoDataPlacemark::p() const
+GeoDataPlacemarkPrivate* GeoDataPlacemark::p()
+{
+    return static_cast<GeoDataPlacemarkPrivate*>(d);
+}
+
+const GeoDataPlacemarkPrivate* GeoDataPlacemark::p() const
 {
     return static_cast<GeoDataPlacemarkPrivate*>(d);
 }

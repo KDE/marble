@@ -144,7 +144,8 @@ class MARBLE_EXPORT MarbleGraphicsItem
     MarbleGraphicsItemPrivate * const d;
 
  private:
-    MarbleGraphicsItemPrivate* p() const;
+    MarbleGraphicsItemPrivate* p();
+    const MarbleGraphicsItemPrivate* p() const;
 };
 
 } // Namespace Marble

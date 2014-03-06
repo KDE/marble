@@ -211,7 +211,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     GeoDataLookAt *lookAt();
 
  private:
-    GeoDataPlacemarkPrivate *p() const;
+    GeoDataPlacemarkPrivate *p();
+    const GeoDataPlacemarkPrivate *p() const;
 };
 
 }

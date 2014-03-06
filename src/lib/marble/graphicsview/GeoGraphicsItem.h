@@ -122,7 +122,8 @@ class MARBLE_EXPORT GeoGraphicsItem
     GeoGraphicsItemPrivate *const d;
 
  private:
-    GeoGraphicsItemPrivate *p() const;
+    GeoGraphicsItemPrivate *p();
+    const GeoGraphicsItemPrivate *p() const;
 };
 
 } // Namespace Marble

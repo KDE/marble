@@ -36,7 +36,12 @@ GeoDataMultiTrack::~GeoDataMultiTrack()
 {
 }
 
-GeoDataMultiTrackPrivate* GeoDataMultiTrack::p() const
+GeoDataMultiTrackPrivate* GeoDataMultiTrack::p()
+{
+    return static_cast<GeoDataMultiTrackPrivate*>(d);
+}
+
+const GeoDataMultiTrackPrivate* GeoDataMultiTrack::p() const
 {
     return static_cast<GeoDataMultiTrackPrivate*>(d);
 }

@@ -81,7 +81,8 @@ public:
     // Unserialize the Placemark from @p stream
     virtual void unpack( QDataStream& stream );
  private:
-    GeoDataMultiTrackPrivate *p() const;
+    GeoDataMultiTrackPrivate *p();
+    const GeoDataMultiTrackPrivate *p() const;
 };
 
 }

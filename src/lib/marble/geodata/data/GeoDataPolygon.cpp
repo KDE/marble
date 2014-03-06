@@ -36,15 +36,20 @@ GeoDataPolygon::~GeoDataPolygon()
 #endif
 }
 
-GeoDataPolygonPrivate* GeoDataPolygon::p() const
+GeoDataPolygonPrivate* GeoDataPolygon::p()
+{
+    return static_cast<GeoDataPolygonPrivate*>(d);
+}
+
+const GeoDataPolygonPrivate* GeoDataPolygon::p() const
 {
     return static_cast<GeoDataPolygonPrivate*>(d);
 }
 
 bool GeoDataPolygon::operator==( const GeoDataPolygon &other ) const
 {
-    GeoDataPolygonPrivate *d = p();
-    GeoDataPolygonPrivate *other_d = other.p();
+    const GeoDataPolygonPrivate *d = p();
+    const GeoDataPolygonPrivate *other_d = other.p();
 
     if ( !GeoDataGeometry::equals(other) ||
          tessellate() != other.tessellate() ||

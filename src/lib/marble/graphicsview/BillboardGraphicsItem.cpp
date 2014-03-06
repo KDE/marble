@@ -135,7 +135,12 @@ void BillboardGraphicsItem::setAlignment(Qt::Alignment alignment)
     p()->m_alignment = alignment;
 }
 
-BillboardGraphicsItem::Private *BillboardGraphicsItem::p() const
+BillboardGraphicsItem::Private *BillboardGraphicsItem::p()
+{
+    return static_cast<Private *>( d );
+}
+
+const BillboardGraphicsItem::Private *BillboardGraphicsItem::p() const
 {
     return static_cast<Private *>( d );
 }

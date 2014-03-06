@@ -218,7 +218,8 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
     virtual void unpack( QDataStream& stream );
 
  private:
-    GeoDataPolygonPrivate *p() const;
+    GeoDataPolygonPrivate *p();
+    const GeoDataPolygonPrivate *p() const;
 };
 
 class GEODATA_EXPORT GeoDataOuterBoundary : public GeoDataPolygon

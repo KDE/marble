@@ -49,7 +49,12 @@ GeoDataDocument::~GeoDataDocument()
 {
 }
 
-GeoDataDocumentPrivate* GeoDataDocument::p() const
+GeoDataDocumentPrivate* GeoDataDocument::p()
+{
+    return static_cast<GeoDataDocumentPrivate*>(d);
+}
+
+const GeoDataDocumentPrivate* GeoDataDocument::p() const
 {
     return static_cast<GeoDataDocumentPrivate*>(d);
 }
