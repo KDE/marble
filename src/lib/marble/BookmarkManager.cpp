@@ -151,7 +151,12 @@ void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
     updateBookmarkFile();
 }
 
-GeoDataDocument * BookmarkManager::document() const
+GeoDataDocument * BookmarkManager::document()
+{
+    return d->m_bookmarkDocument;
+}
+
+const GeoDataDocument * BookmarkManager::document() const
 {
     return d->m_bookmarkDocument;
 }
