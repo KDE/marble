@@ -161,7 +161,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the model that this view shows.
      */
-    MarbleModel *model() const;
+    MarbleModel *model();
+    const MarbleModel *model() const;
 
     ViewportParams *viewport();
     const ViewportParams *viewport() const;

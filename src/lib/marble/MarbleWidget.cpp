@@ -282,11 +282,15 @@ void MarbleWidgetPrivate::updateSystemBackgroundAttribute()
 // ----------------------------------------------------------------
 
 
-MarbleModel *MarbleWidget::model() const
+MarbleModel *MarbleWidget::model()
 {
     return &d->m_model;
 }
 
+const MarbleModel *MarbleWidget::model() const
+{
+    return &d->m_model;
+}
 
 ViewportParams* MarbleWidget::viewport()
 {
