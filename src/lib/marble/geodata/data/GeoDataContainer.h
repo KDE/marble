@@ -50,7 +50,6 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     /// Default constructor
     GeoDataContainer();
     GeoDataContainer( const GeoDataContainer& other );
-    GeoDataContainerPrivate* p() const;
     /// Destruct the GeoDataContainer
     virtual ~GeoDataContainer();
 
@@ -150,10 +149,12 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      * @param  stream  the stream
      */
     virtual void unpack( QDataStream& stream );
-private:
-    friend class GeoDataDocument;
-    friend class GeoDataFolder;
+
+ protected:
     explicit GeoDataContainer( GeoDataContainerPrivate *priv );
+
+ private:
+    GeoDataContainerPrivate* p() const;
 };
 
 }

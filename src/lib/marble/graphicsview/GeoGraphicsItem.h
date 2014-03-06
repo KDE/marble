@@ -119,10 +119,10 @@ class MARBLE_EXPORT GeoGraphicsItem
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport ) = 0;
 
  protected:
-    GeoGraphicsItemPrivate *p() const;
+    GeoGraphicsItemPrivate *const d;
 
  private:
-    GeoGraphicsItemPrivate *const d;
+    GeoGraphicsItemPrivate *p() const;
 };
 
 } // Namespace Marble

@@ -363,10 +363,11 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     virtual void unpack( QDataStream& stream );
 
-
  protected:
-    GeoDataLineStringPrivate *p() const;
     GeoDataLineString(GeoDataLineStringPrivate* priv);
+
+ private:
+    GeoDataLineStringPrivate *p() const;
 };
 
 }
