@@ -64,7 +64,7 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     /**
      * @brief returns the position of an item in the list
      */
-    int childPosition( GeoDataGeometry *child);
+    int childPosition( const GeoDataGeometry *child ) const;
 
     /**
     * @brief add an element

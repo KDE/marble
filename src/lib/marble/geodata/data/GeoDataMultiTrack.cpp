@@ -169,7 +169,7 @@ const GeoDataTrack* GeoDataMultiTrack::child( int i ) const
 /**
  * @brief returns the position of an item in the list
  */
-int GeoDataMultiTrack::childPosition( GeoDataTrack *object)
+int GeoDataMultiTrack::childPosition( const GeoDataTrack *object ) const
 {
     for ( int i=0; i< p()->m_vector.size(); i++ )
     {

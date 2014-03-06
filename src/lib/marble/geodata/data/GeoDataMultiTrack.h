@@ -56,7 +56,7 @@ public:
     /**
      * @brief returns the position of an item in the list
      */
-    int childPosition( GeoDataTrack *child);
+    int childPosition( const GeoDataTrack *child ) const;
 
     /**
     * @brief add an element
