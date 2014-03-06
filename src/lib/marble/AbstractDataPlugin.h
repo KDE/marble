@@ -83,8 +83,9 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     /**
      * @return The model associated with the plugin.
      */
-    AbstractDataPluginModel *model() const;
-    
+    AbstractDataPluginModel *model();
+    const AbstractDataPluginModel *model() const;
+
     /**
      * Set the model of the plugin.
      */

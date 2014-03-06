@@ -121,7 +121,12 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-AbstractDataPluginModel *AbstractDataPlugin::model() const
+AbstractDataPluginModel *AbstractDataPlugin::model()
+{
+    return d->m_model;
+}
+
+const AbstractDataPluginModel *AbstractDataPlugin::model() const
 {
     return d->m_model;
 }
