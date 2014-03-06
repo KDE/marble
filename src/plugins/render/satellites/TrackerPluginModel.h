@@ -79,11 +79,6 @@ public:
     void endUpdateItems();
 
     /**
-     * Load settings.
-     */
-    void loadSettings( const QHash<QString, QVariant> &settings );
-
-    /**
      * Adds @p url to the download queue.
      * Once the file is downloaded, parseFile() will be called with its first
      * parameter equals to @p id.

@@ -163,7 +163,6 @@ void SatellitesConfigDialog::initialize()
     m_configWidget = new Ui::SatellitesConfigDialog();
     m_configWidget->setupUi( this );
 
-    setupSatellitesTab();
     setupDataSourcesTab();
 
     setDialogActive( false );
@@ -171,10 +170,6 @@ void SatellitesConfigDialog::initialize()
              this, SIGNAL(activatePluginClicked()) );
 
     update();
-}
-
-void SatellitesConfigDialog::setupSatellitesTab()
-{
 }
 
 void SatellitesConfigDialog::setupDataSourcesTab()

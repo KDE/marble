@@ -66,7 +66,6 @@ public Q_SLOTS:
 
 protected:
     void initialize();
-    void setupSatellitesTab();
     void setupDataSourcesTab();
     SatellitesConfigNodeItem* getSatellitesCategoryItem(
         const QString &body,
