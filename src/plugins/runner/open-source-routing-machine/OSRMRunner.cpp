@@ -197,7 +197,7 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instructi
     return RoutingInstruction::Unknown;
 }
 
-GeoDataDocument *OSRMRunner::parse( const QByteArray &input )
+GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
 {
     QScriptEngine engine;
     // Qt requires parentheses around json code

@@ -263,7 +263,7 @@ AprsGatherer::setDumpOutput( bool to )
 }
 
 bool
-AprsGatherer::dumpOutput()
+AprsGatherer::dumpOutput() const
 {
     return m_dumpOutput;
 }

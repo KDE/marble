@@ -41,7 +41,7 @@ public:
     ~Private();
 
     template<typename T>
-    QList<T*> plugins( const QList<T*> &plugins );
+    QList<T*> plugins( const QList<T*> &plugins ) const;
 
     void addRoutingResult( GeoDataDocument *route );
     void cleanupRoutingTask( RoutingTask *task );
@@ -67,7 +67,7 @@ RoutingRunnerManager::Private::~Private()
 }
 
 template<typename T>
-QList<T*> RoutingRunnerManager::Private::plugins( const QList<T*> &plugins )
+QList<T*> RoutingRunnerManager::Private::plugins( const QList<T*> &plugins ) const
 {
     QList<T*> result;
     foreach( T* plugin, plugins ) {

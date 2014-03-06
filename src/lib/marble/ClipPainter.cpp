@@ -69,11 +69,11 @@ class ClipPainterPrivate
                                 QVector<QPolygonF> & clippedPolyObjects,
                                 const QPointF& corner,
                                 const QPointF& point,
-                                bool isClosed );
+                                bool isClosed ) const;
     inline void clipOnceEdge(   QPolygonF & clippedPolyObject,
                                 QVector<QPolygonF> & clippedPolyObjects,
                                 const QPointF& point,
-                                bool isClosed );
+                                bool isClosed ) const;
 
 
     void labelPosition( const QPolygonF & polygon, QVector<QPointF>& labelNodes, 
@@ -1008,7 +1008,7 @@ void ClipPainterPrivate::clipOnceCorner( QPolygonF & clippedPolyObject,
                                          QVector<QPolygonF> & clippedPolyObjects,
                                          const QPointF& corner,
                                          const QPointF& point, 
-                                         bool isClosed )
+                                         bool isClosed ) const
 {
     Q_UNUSED( clippedPolyObjects )
     Q_UNUSED( isClosed )
@@ -1027,7 +1027,7 @@ void ClipPainterPrivate::clipOnceCorner( QPolygonF & clippedPolyObject,
 void ClipPainterPrivate::clipOnceEdge( QPolygonF & clippedPolyObject,
                                        QVector<QPolygonF> & clippedPolyObjects,
                                        const QPointF& point,
-                                       bool isClosed )
+                                       bool isClosed ) const
 {
     if ( m_currentSector == 4) {
         // Appearing

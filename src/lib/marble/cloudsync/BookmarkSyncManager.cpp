@@ -92,7 +92,7 @@ public:
      * @param endpoint Endpoint itself without server info
      * @return Complete API URL as QUrl
      */
-    QUrl endpointUrl( const QString &endpoint );
+    QUrl endpointUrl( const QString &endpoint ) const;
 
     /**
      * Uploads local bookmarks.kml to cloud.
@@ -276,7 +276,7 @@ void BookmarkSyncManager::startBookmarkSync()
     d->downloadTimestamp();
 }
 
-QUrl BookmarkSyncManager::Private::endpointUrl( const QString &endpoint )
+QUrl BookmarkSyncManager::Private::endpointUrl( const QString &endpoint ) const
 {
     return QUrl( QString( "%0/%1" ).arg( m_cloudSyncManager->apiUrl().toString() ).arg( endpoint ) );
 }

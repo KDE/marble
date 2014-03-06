@@ -86,7 +86,6 @@ protected:
     bool eventFilter( QObject *object, QEvent *e );
 
 private Q_SLOTS:
-    bool renderItem( GeoPainter *painter, EclipsesItem *item );
     void readSettings();
     void writeSettings();
     void updateSettings();
@@ -128,6 +127,9 @@ private Q_SLOTS:
      * non earth themes since we only support eclipse events on earth.
      */
     void updateMenuItemState();
+
+private:
+    bool renderItem( GeoPainter *painter, EclipsesItem *item ) const;
 
 private:
     bool m_isInitialized;

@@ -47,7 +47,7 @@ public:
     Private( SearchRunnerManager *parent, const MarbleModel *marbleModel );
 
     template<typename T>
-    QList<T*> plugins( const QList<T*> &plugins );
+    QList<T*> plugins( const QList<T*> &plugins ) const;
 
     void addSearchResult( const QVector<GeoDataPlacemark *> &result );
     void cleanupSearchTask( SearchTask *task );
@@ -74,7 +74,7 @@ SearchRunnerManager::Private::Private( SearchRunnerManager *parent, const Marble
 }
 
 template<typename T>
-QList<T*> SearchRunnerManager::Private::plugins( const QList<T*> &plugins )
+QList<T*> SearchRunnerManager::Private::plugins( const QList<T*> &plugins ) const
 {
     QList<T*> result;
     foreach( T* plugin, plugins ) {

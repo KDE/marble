@@ -27,11 +27,11 @@ public:
     int count() const;
 
 public Q_SLOTS:
-    qreal longitude( int index );
+    qreal longitude( int index ) const;
 
-    qreal latitude( int index );
+    qreal latitude( int index ) const;
 
-    QString name( int index );
+    QString name( int index ) const;
 
 Q_SIGNALS:
     void countChanged();
@@ -53,9 +53,9 @@ public:
 
     BookmarksModel* model();
 
-public Q_SLOTS:
-    bool isBookmark( qreal longitude, qreal latitude );
+    bool isBookmark( qreal longitude, qreal latitude ) const;
 
+public Q_SLOTS:
     void addBookmark( qreal longitude, qreal latitude, const QString &name, const QString &folder );
 
     void removeBookmark( qreal longitude, qreal latitude );

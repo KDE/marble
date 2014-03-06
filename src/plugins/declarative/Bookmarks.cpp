@@ -41,7 +41,7 @@ void Bookmarks::setMap( ::MarbleWidget* widget )
     m_marbleWidget = widget;
 }
 
-bool Bookmarks::isBookmark( qreal longitude, qreal latitude )
+bool Bookmarks::isBookmark( qreal longitude, qreal latitude ) const
 {
     if ( !m_marbleWidget || !m_marbleWidget->model()->bookmarkManager() ) {
         return false;
@@ -160,7 +160,7 @@ int BookmarksModel::count() const
     return rowCount();
 }
 
-qreal BookmarksModel::longitude( int idx )
+qreal BookmarksModel::longitude( int idx ) const
 {
     if ( idx >= 0 && idx < rowCount() ) {
         QVariant const value = data( index( idx, 0 ), Marble::MarblePlacemarkModel::CoordinateRole );
@@ -170,7 +170,7 @@ qreal BookmarksModel::longitude( int idx )
     return 0.0;
 }
 
-qreal BookmarksModel::latitude( int idx )
+qreal BookmarksModel::latitude( int idx ) const
 {
     if ( idx >= 0 && idx < rowCount() ) {
         QVariant const value = data( index( idx, 0 ), Marble::MarblePlacemarkModel::CoordinateRole );
@@ -180,7 +180,7 @@ qreal BookmarksModel::latitude( int idx )
     return 0.0;
 }
 
-QString BookmarksModel::name( int idx )
+QString BookmarksModel::name( int idx ) const
 {
     if ( idx >= 0 && idx < rowCount() ) {
         return data( index( idx, 0 ) ).toString();

@@ -132,7 +132,7 @@ public:
     inline void renderRoute( GeoPainter *painter );
 
     /** Paint turn instruction for selected items */
-    inline void renderAnnotations( GeoPainter *painter );
+    inline void renderAnnotations( GeoPainter *painter ) const;
 
     /** Paint alternative routes in gray */
     inline void renderAlternativeRoutes( GeoPainter *painter );
@@ -352,7 +352,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     }
 }
 
-void RoutingLayerPrivate::renderAnnotations( GeoPainter *painter )
+void RoutingLayerPrivate::renderAnnotations( GeoPainter *painter ) const
 {
     if ( !m_selectionModel || m_selectionModel->selection().isEmpty() ) {
         // nothing to do

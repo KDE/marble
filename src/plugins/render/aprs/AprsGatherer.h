@@ -47,7 +47,7 @@ namespace Marble {
                         const QChar &symbolCode );
 
         void setDumpOutput( bool to );
-        bool dumpOutput();
+        bool dumpOutput() const;
 
         void setSeenFrom ( GeoAprsCoordinates::SeenFrom seenFrom );
         GeoAprsCoordinates::SeenFrom seenFrom();

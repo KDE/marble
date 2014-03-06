@@ -56,7 +56,7 @@ class ControlView : public QWidget
       */
     static QString applicationVersion();
 
-    MarbleWidget      *marbleWidget()  const { return m_marbleWidget; }
+    MarbleWidget      *marbleWidget()        { return m_marbleWidget; }
     MarbleModel       *marbleModel()         { return m_marbleWidget->model(); }
     MapThemeManager   *mapThemeManager();
 

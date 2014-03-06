@@ -255,9 +255,8 @@ bool EclipsesPlugin::render( GeoPainter *painter,
     return true;
 }
 
-bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item )
+bool EclipsesPlugin::renderItem( GeoPainter *painter, EclipsesItem *item ) const
 {
-    QList<GeoDataCoordinates>::const_iterator ci;
     int phase = item->phase();
 
     // Draw full penumbra shadow cone

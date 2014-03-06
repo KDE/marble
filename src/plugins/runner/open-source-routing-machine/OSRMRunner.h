@@ -53,7 +53,7 @@ private:
 
     RoutingInstruction::TurnType parseTurnType( const QString &instruction ) const;
 
-    GeoDataDocument* parse( const QByteArray &input );
+    GeoDataDocument* parse( const QByteArray &input ) const;
 
     QNetworkAccessManager m_networkAccessManager;
 

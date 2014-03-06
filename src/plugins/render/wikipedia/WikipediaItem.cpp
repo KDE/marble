@@ -113,7 +113,7 @@ void WikipediaItem::paint( QPainter *painter )
     }
 }
 
-qreal WikipediaItem::longitude()
+qreal WikipediaItem::longitude() const
 {
     return coordinate().longitude();
 }
@@ -125,7 +125,7 @@ void WikipediaItem::setLongitude( qreal longitude )
     setCoordinate( updatedCoordinates );
 }
     
-qreal WikipediaItem::latitude()
+qreal WikipediaItem::latitude() const
 {
     return coordinate().latitude();
 }

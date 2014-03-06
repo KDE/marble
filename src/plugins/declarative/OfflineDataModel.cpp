@@ -39,7 +39,7 @@ OfflineDataModel::OfflineDataModel( QObject *parent ) : QSortFilterProxyModel( p
     connect( &m_newstuffModel, SIGNAL(uninstallationFinished(int)), this, SLOT(handleUninstallationFinished(int)) );
 }
 
-int OfflineDataModel::count()
+int OfflineDataModel::count() const
 {
     return rowCount();
 }

@@ -49,11 +49,11 @@ class WikipediaItem : public AbstractDataPluginItem
                  
     bool operator<( const AbstractDataPluginItem *other ) const;
     
-    qreal longitude();
+    qreal longitude() const;
     
     void setLongitude( qreal longitude );
     
-    qreal latitude();
+    qreal latitude() const;
     
     void setLatitude( qreal latitude );
     

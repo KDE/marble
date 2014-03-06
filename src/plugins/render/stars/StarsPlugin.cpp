@@ -1262,7 +1262,7 @@ void StarsPlugin::renderPlanet(const QString &planetId,
                                SolarSystem &sys,
                                ViewportParams *viewport,
                                qreal skyRadius,
-                               matrix &skyAxisMatrix)
+                               matrix &skyAxisMatrix) const
 {
     double ra(.0), decl(.0), diam(.0), mag(.0), phase(.0);
     int color=0;
