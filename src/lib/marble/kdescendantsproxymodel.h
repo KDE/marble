@@ -90,16 +90,6 @@ class MARBLE_EXPORT KDescendantsProxyModel : public QAbstractProxyModel
     virtual void setSourceModel( QAbstractItemModel *model );
 
     /**
-     * Sets the root index to @p index. This is the root of the proxy model.
-     *
-     * @param index The root index in the *source* model which will be shown in this model.
-     *              If the index is invalid, the model is empty.
-     *
-     * \note You must set the model before setting the root index.
-     */
-    void setRootIndex( const QModelIndex &index);
-
-    /**
      * Set whether to show ancestor data in the model. If @p display is true, then
      * a source model which is displayed as
      *

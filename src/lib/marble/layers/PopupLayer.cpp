@@ -49,11 +49,6 @@ QStringList PopupLayer::renderPosition() const
     return QStringList( "ALWAYS_ON_TOP" );
 }
 
-QString PopupLayer::renderPolicy() const
-{
-    return "ALWAYS";
-}
-
 bool PopupLayer::render( GeoPainter *painter, ViewportParams *viewport,
                                 const QString&, GeoSceneLayer* )
 {
@@ -360,12 +355,6 @@ void PopupLayer::setAppropriateSize( const ViewportParams *viewport )
     QSizeF minimumSize( 100.0, 100.0 );
 
     m_popupItem->setSize( m_requestedSize.boundedTo( maximumSize ).expandedTo( minimumSize ) );
-}
-
-void PopupLayer::setPosition( const QPointF &position )
-{
-    /** @todo Implement */
-    Q_UNUSED( position );
 }
 
 void PopupLayer::hidePopupItem()

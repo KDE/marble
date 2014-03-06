@@ -44,7 +44,6 @@ public:
     ~PopupLayer();
 
     QStringList renderPosition() const;
-    QString renderPolicy() const;
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &, GeoSceneLayer * );
     virtual bool eventFilter( QObject *, QEvent * );
@@ -113,12 +112,6 @@ public:
      * @param size popup size, arrows in count
      */
     void setSize( const QSizeF &size );
-
-    /**
-     * @brief Sets the position of the dialog to the given screen position.
-     * @warning Any geo position set with setCoordinates() is invalidated.
-     */
-    void setPosition( const QPointF &position );
 
     /**
      * @brief Sets content of the browser

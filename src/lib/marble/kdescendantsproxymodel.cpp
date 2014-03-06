@@ -216,11 +216,6 @@ KDescendantsProxyModel::~KDescendantsProxyModel()
   delete d_ptr;
 }
 
-void KDescendantsProxyModel::setRootIndex(const QModelIndex &index)
-{
-  Q_UNUSED(index)
-}
-
 QModelIndexList KDescendantsProxyModel::match(const QModelIndex &start, int role, const QVariant &value, int hits, Qt::MatchFlags flags) const
 {
   return QAbstractProxyModel::match(start, role, value, hits, flags);
