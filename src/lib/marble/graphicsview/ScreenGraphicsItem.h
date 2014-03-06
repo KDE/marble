@@ -100,7 +100,8 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     virtual bool eventFilter( QObject *, QEvent * );
 
  private:
-    ScreenGraphicsItemPrivate *p() const;
+    ScreenGraphicsItemPrivate *p();
+    const ScreenGraphicsItemPrivate *p() const;
 };
 
 } // Namespace Marble

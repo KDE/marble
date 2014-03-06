@@ -169,7 +169,12 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
     }
 }
 
-ScreenGraphicsItemPrivate *ScreenGraphicsItem::p() const
+ScreenGraphicsItemPrivate *ScreenGraphicsItem::p()
 {
-    return reinterpret_cast<ScreenGraphicsItemPrivate *>( d );
+    return static_cast<ScreenGraphicsItemPrivate *>( d );
+}
+
+const ScreenGraphicsItemPrivate *ScreenGraphicsItem::p() const
+{
+    return static_cast<const ScreenGraphicsItemPrivate *>( d );
 }
