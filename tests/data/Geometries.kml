@@ -22,7 +22,7 @@
             </Lod>
         </Region>
         <Point>
-            <coordinates>-74.0063930000,40.7141720000</coordinates>
+            <coordinates>-74.0063930000,40.7141720000,1500.1234567890</coordinates>
         </Point>
     </Placemark>
     <Folder>

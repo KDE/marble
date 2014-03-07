@@ -5,13 +5,19 @@
   <gx:Playlist>
     <gx:FlyTo>
       <gx:duration>2.55</gx:duration>
-      <gx:flyToMode>smooth</gx:flyToMode>
-      <Camera>
-	    <longitude>-113.0844480000</longitude>
-	    <latitude>36.5670810000</latitude>
-	    <altitude>41277.571403</altitude>
-	    <altitudeMode>absolute</altitudeMode>
-      </Camera>
+		<LookAt>
+			<gx:TimeStamp>
+                <when>1997-07-16T07:30:15Z</when>
+            </gx:TimeStamp>
+            <gx:TimeSpan>
+                <begin>2010-05-28T02:02:09Z</begin>
+                <end>2010-05-28T02:02:56Z</end>
+            </gx:TimeSpan>
+            <longitude>-122.2055440000</longitude>
+			<latitude>37.3733860000</latitude>
+			<altitude>0.0000000000</altitude>
+			<range>1300.0000000000</range>
+		</LookAt>
     </gx:FlyTo>
     <gx:Wait>
       <gx:duration>10.5</gx:duration>

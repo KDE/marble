@@ -20,10 +20,9 @@
                 <width>4</width>
             </LineStyle>
             <ListStyle>
-                <listItemType>checkHideChildren</listItemType>
                 <bgColor>ff336699</bgColor>
                 <ItemIcon>
-                    <state>closed</state>
+                    <state></state>
                     <href>../../data/bitmaps/wikipedia.png</href>
                 </ItemIcon>
             </ListStyle>

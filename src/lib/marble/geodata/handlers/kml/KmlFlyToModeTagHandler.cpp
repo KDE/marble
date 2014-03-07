@@ -38,8 +38,7 @@ GeoNode* KmlflyToModeTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.is<GeoDataFlyTo>()
-         && parentItem.represents( kmlTag_flyToMode ) ) {
+    if ( parentItem.is<GeoDataFlyTo>() ) {
          parentItem.nodeAs<GeoDataFlyTo>()->setFlyToMode( mode );
     }
 

@@ -20,10 +20,10 @@
                 <width>4</width>
             </LineStyle>
             <ListStyle>
-                <listItemType>checkHideChildren</listItemType>
+                <listItemType>radioFolder</listItemType>
                 <bgColor>ff336699</bgColor>
                 <ItemIcon>
-                    <state>closed</state>
+                    <state>fetching0</state>
                     <href>../../data/bitmaps/wikipedia.png</href>
                 </ItemIcon>
             </ListStyle>

@@ -6,7 +6,11 @@
 			<gx:TimeStamp>
 				<when>1946-07-29T05:00:00-08:00</when>
 			</gx:TimeStamp>
-			<longitude>-122.5181720000</longitude>
+            <gx:TimeSpan>
+                <begin>2010-05-28T02:02:09Z</begin>
+                <end>2010-05-28T02:02:56Z</end>
+            </gx:TimeSpan>
+            <longitude>-122.5181720000</longitude>
 			<latitude>37.7780360000</latitude>
 			<altitude>221</altitude>
 			<tilt>75</tilt>
@@ -19,7 +23,7 @@
 	<Placemark>
 		<name>Palace of Fine Arts in 2002</name>
 		<LookAt>
-			<gx:TimeSpan>
+            <gx:TimeSpan>
 				<begin>2010-05-28T02:02:09Z</begin>
 				<end>2010-05-28T02:02:56Z</end>
 			</gx:TimeSpan>
