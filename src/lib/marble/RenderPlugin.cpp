@@ -218,7 +218,7 @@ void RenderPlugin::restoreDefaultSettings()
     setSettings( QHash<QString,QVariant>() );
 }
 
-QStringList RenderPlugin::settingKeys()
+QStringList RenderPlugin::settingKeys() const
 {
     return settings().keys();
 }
@@ -236,7 +236,7 @@ bool RenderPlugin::setSetting( const QString & key, const QVariant & value )
     }
 }
 
-QVariant RenderPlugin::setting( const QString & name )
+QVariant RenderPlugin::setting( const QString & name ) const
 {
     return settings().value( name, QVariant() );
 }

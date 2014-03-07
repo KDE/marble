@@ -250,7 +250,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *
      * @return list with the keys of settings
      */
-    QStringList settingKeys();
+    QStringList settingKeys() const;
 
     /**
      * @brief Change setting key's values
@@ -272,7 +272,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *
      * @return setting value
      */
-    QVariant setting( const QString & key );
+    QVariant setting( const QString & key ) const;
 
     /**
      * @brief Plugin's menu action
