@@ -5,7 +5,7 @@
         <description>Some description here</description>
         <Style id="track">
             <BalloonStyle>
-                <text><![CDATA[<b><font color="#CC0000" size="+3">$[name]</font></b><br/><br/><font face="Courier">$[description]</font><br/><br/>Extra text that will appear in the description balloon<br/><br/>]]></text>
+                <text>Forgot to add a BalloonStyle with regular text, not regex :)</text>
                 <displayMode>default</displayMode> 
             </BalloonStyle>
             <IconStyle>
