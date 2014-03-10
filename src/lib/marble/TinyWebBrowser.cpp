@@ -105,8 +105,10 @@ void TinyWebBrowser::openExternalLink( QUrl url )
 
 QByteArray TinyWebBrowser::userAgent(const QString &platform, const QString &component)
 {
-    QString result( "Mozilla/5.0 (compatible; Marble/%1; %2; %3)" );
-    result = result.arg( MARBLE_VERSION_STRING, platform, component);
+    QString result( "Mozilla/5.0 (compatible; Marble/%1; %2; %3; %4)" );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    QString const device = smallScreen ? "MobileDevice" : "DesktopDevice";
+    result = result.arg( MARBLE_VERSION_STRING, device, platform, component);
     return result.toLatin1();
 }
 
