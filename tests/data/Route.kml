@@ -5,7 +5,7 @@
             <name>Route Request</name>
             <Placemark>
                 <ExtendedData>
-                    <Data name="routingVisited">
+                    <Data name="routingVisited" displayName="Visited">
                         <value>false</value>
                     </Data>
                 </ExtendedData>

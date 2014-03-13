@@ -13,7 +13,7 @@
 	    <altitudeMode>absolute</altitudeMode>
       </Camera>
     </gx:FlyTo>
-    <gx:Wait>
+    <gx:Wait id="wait">
       <gx:duration>10.5</gx:duration>
     </gx:Wait>
     <gx:SoundCue id="demoSound">
@@ -22,6 +22,9 @@
     </gx:SoundCue>
     <gx:TourControl id="myTourControl">
       <gx:playMode>pause</gx:playMode>
+    </gx:TourControl>
+    <gx:TourControl id="myOtherTourControl">
+      <gx:playMode>play</gx:playMode>
     </gx:TourControl>
   </gx:Playlist>
 </gx:Tour>

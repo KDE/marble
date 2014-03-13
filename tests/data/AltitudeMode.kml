@@ -57,6 +57,5 @@
 		<altitude>45</altitude>
 		<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
 	</GroundOverlay>
-    
 </Folder>
 </kml>
