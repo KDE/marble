@@ -85,8 +85,8 @@ class SphericalProjectionPrivate : public AbstractProjectionPrivate
                                     TessellationFlags f = 0,
                                     int recursionCounter = 0 ) const;
 
-    bool globeHidesPoint( const GeoDataCoordinates &coordinates,
-                          const ViewportParams *viewport ) const;
+    static bool globeHidesPoint( const GeoDataCoordinates &coordinates,
+                                 const ViewportParams *viewport );
 
     Q_DECLARE_PUBLIC( SphericalProjection )
 };
@@ -822,7 +822,7 @@ GeoDataCoordinates SphericalProjectionPrivate::findHorizon( const GeoDataCoordin
 
 
 bool SphericalProjectionPrivate::globeHidesPoint( const GeoDataCoordinates &coordinates,
-                                          const ViewportParams *viewport ) const
+                                          const ViewportParams *viewport )
 {
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = coordinates.quaternion();

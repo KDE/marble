@@ -27,8 +27,8 @@ public:
     virtual GeoNode* parse( GeoParser& ) const;
 
 private:
-    GeoDataPlacemark *convertWayToPolygon( GeoDataDocument *doc, GeoDataPlacemark *placemark, GeoDataGeometry *geometry ) const;
-    GeoDataPlacemark *createPOI( GeoDataDocument *doc, GeoDataGeometry *geometry ) const;
+    static GeoDataPlacemark *convertWayToPolygon( GeoDataDocument *doc, GeoDataPlacemark *placemark, GeoDataGeometry *geometry );
+    static GeoDataPlacemark *createPOI( GeoDataDocument *doc, GeoDataGeometry *geometry );
 };
 
 }

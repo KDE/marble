@@ -80,7 +80,7 @@ public:
 
     GeoDataFolder* routeRequest() const;
 
-    QString stateFile( const QString &name = QString( "route.kml" ) ) const;
+    static QString stateFile( const QString &name = QString( "route.kml" ) );
 
     void saveRoute( const QString &filename );
 
@@ -125,7 +125,7 @@ GeoDataFolder* RoutingManagerPrivate::routeRequest() const
     return result;
 }
 
-QString RoutingManagerPrivate::stateFile( const QString &name) const
+QString RoutingManagerPrivate::stateFile( const QString &name)
 {
     QString const subdir = "routing";
     QDir dir( MarbleDirs::localPath() );

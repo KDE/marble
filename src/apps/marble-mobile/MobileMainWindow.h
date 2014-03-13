@@ -87,7 +87,7 @@ private Q_SLOTS:
     void showGoToDialog();
 
 private:
-    QString readMarbleDataPath();
+    static QString readMarbleDataPath();
     void readSettings( const QVariantMap &overrideSettings = QVariantMap() );
     void writeSettings();
     void initializeTrackingWidget();

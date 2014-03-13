@@ -38,7 +38,7 @@ public:
     // Overriding QObject
     virtual bool eventFilter(QObject *obj, QEvent *event);
 
-    GeoDataCoordinates approximate(const GeoDataCoordinates &base, qreal angle, qreal dist) const;
+    static GeoDataCoordinates approximate(const GeoDataCoordinates &base, qreal angle, qreal dist);
 
 private:
     MarbleWidget* m_widget;
@@ -79,7 +79,7 @@ bool MyPaintLayer::eventFilter(QObject *obj, QEvent *event)
     return false;
 }
 
-GeoDataCoordinates MyPaintLayer::approximate(const GeoDataCoordinates &base, qreal angle, qreal dist) const
+GeoDataCoordinates MyPaintLayer::approximate(const GeoDataCoordinates &base, qreal angle, qreal dist)
 {
     // This is just a rough estimation that ignores projections.
     // It only works for short distances. Don't use in real code.

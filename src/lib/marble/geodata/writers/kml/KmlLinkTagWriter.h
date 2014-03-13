@@ -25,7 +25,7 @@ public:
     static QString refreshModeToString( GeoDataLink::RefreshMode refreshMode) ;
 
 private:
-    QString viewRefreshModeToString( GeoDataLink::ViewRefreshMode) const;
+    static QString viewRefreshModeToString( GeoDataLink::ViewRefreshMode);
 
 };
 

@@ -68,9 +68,9 @@ public:
 
     void stopDaemon();
 
-    bool isDaemonRunning() const;
+    static bool isDaemonRunning();
 
-    bool isDaemonInstalled() const;
+    static bool isDaemonInstalled();
 
     void loadMaps();
 
@@ -96,14 +96,14 @@ MonavPluginPrivate::~MonavPluginPrivate()
     stopDaemon();
 }
 
-bool MonavPluginPrivate::isDaemonRunning() const
+bool MonavPluginPrivate::isDaemonRunning()
 {
     QLocalSocket socket;
     socket.connectToServer( "MoNavD" );
     return socket.waitForConnected();
 }
 
-bool MonavPluginPrivate::isDaemonInstalled() const
+bool MonavPluginPrivate::isDaemonInstalled()
 {
     QString path = QProcessEnvironment::systemEnvironment().value( "PATH", "/usr/local/bin:/usr/bin:/bin" );
     foreach( const QString &application, QStringList() << "monav-daemon" << "MoNavD" ) {

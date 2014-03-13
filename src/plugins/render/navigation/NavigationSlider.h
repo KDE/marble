@@ -24,8 +24,6 @@ public:
     explicit NavigationSlider( QWidget *parent = 0 );
     ~NavigationSlider();
 
-    QPixmap pixmap(const QString &id );
-
 Q_SIGNALS:
     void repaintNeeded();
 
@@ -39,6 +37,7 @@ protected:
     void repaint();
 
 private:
+    static QPixmap pixmap(const QString &id );
     QString m_handleImagePath;
 };
 

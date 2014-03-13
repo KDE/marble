@@ -99,7 +99,7 @@ private:
     /**
      * @return The square of @p x
      */
-    double square( double x );
+    static double square( double x );
 };
 
 } // namespace Marble

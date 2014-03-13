@@ -228,7 +228,7 @@ void NavigationFloatItem::updateButtons( int zoomValue )
     }
 }
 
-QPixmap NavigationFloatItem::pixmap( const QString &id ) const
+QPixmap NavigationFloatItem::pixmap( const QString &id )
 {
     QPixmap result;
     if ( !QPixmapCache::find( id, result ) ) {

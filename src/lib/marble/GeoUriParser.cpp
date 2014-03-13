@@ -49,7 +49,7 @@ Planet GeoUriParser::planet() const
     return m_planet;
 }
 
-QString GeoUriParser::queryValue(const QUrl& url, const QString& one, const QString& two) const
+QString GeoUriParser::queryValue(const QUrl& url, const QString& one, const QString& two)
 {
 #if QT_VERSION < 0x050000
     QString value = url.queryItemValue( one );

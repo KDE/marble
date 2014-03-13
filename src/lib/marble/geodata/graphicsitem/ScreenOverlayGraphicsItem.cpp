@@ -45,7 +45,7 @@ void ScreenOverlayGraphicsItem::setProjection( const ViewportParams *viewport )
                                       m_screenOverlay->screenXY().y() ) ) );
 }
 
-qreal ScreenOverlayGraphicsItem::pixelValue( GeoDataVec2::Unit unit, qreal screenSize, qreal imageSize, qreal value ) const
+qreal ScreenOverlayGraphicsItem::pixelValue( GeoDataVec2::Unit unit, qreal screenSize, qreal imageSize, qreal value )
 {
     switch (unit) {
     case GeoDataVec2::Pixels:

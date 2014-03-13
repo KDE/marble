@@ -54,7 +54,7 @@ class PositionTrackingPrivate
 
     void updateStatus();
 
-    QString statusFile();
+    static QString statusFile();
 
     PositionTracking *const q;
 

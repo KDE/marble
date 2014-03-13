@@ -23,8 +23,8 @@ public:
     virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
 
 private:
-    QString itemTypeToString( GeoDataListStyle::ListItemType itemType ) const;
-    QString iconStateToString( GeoDataItemIcon::ItemIconStates state ) const;
+    static QString itemTypeToString( GeoDataListStyle::ListItemType itemType );
+    static QString iconStateToString( GeoDataItemIcon::ItemIconStates state );
 };
 
 }

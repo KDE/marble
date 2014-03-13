@@ -55,7 +55,7 @@ public:
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
 
 private:
-    QString text( const QModelIndex &index ) const;
+    static QString text( const QModelIndex &index );
     QListView* m_view;
     QIcon m_bookmarkIcon;
 };
@@ -718,7 +718,7 @@ QSize MapViewItemDelegate::sizeHint( const QStyleOptionViewItem &option, const Q
     return QSize();
 }
 
-QString MapViewItemDelegate::text( const QModelIndex &index ) const
+QString MapViewItemDelegate::text( const QModelIndex &index )
 {
     QString const title = index.data().toString();
     QString const description = index.data( Qt::UserRole+2 ).toString();

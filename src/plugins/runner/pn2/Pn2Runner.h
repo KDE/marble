@@ -23,9 +23,9 @@ class Pn2Runner : public ParsingRunner
 public:
     explicit Pn2Runner(QObject *parent = 0);
     ~Pn2Runner();
-    bool errorCheckLat( qint16 lat );
-    bool errorCheckLon( qint16 lon );
-    bool importPolygon( QDataStream &stream, GeoDataLineString* linestring, quint32 nrAbsoluteNodes );
+    static bool errorCheckLat( qint16 lat );
+    static bool errorCheckLon( qint16 lon );
+    static bool importPolygon( QDataStream &stream, GeoDataLineString* linestring, quint32 nrAbsoluteNodes );
     virtual void parseFile( const QString &fileName, DocumentRole role );
 
 signals:

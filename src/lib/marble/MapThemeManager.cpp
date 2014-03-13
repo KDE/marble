@@ -102,7 +102,7 @@ private:
      * @brief Returns all directory paths and .dgml file paths below local and
      *        system map directory.
      */
-    QStringList pathsToWatch();
+    static QStringList pathsToWatch();
 };
 
 MapThemeManager::Private::Private( MapThemeManager *parent )

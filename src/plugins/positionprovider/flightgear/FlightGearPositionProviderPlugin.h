@@ -53,7 +53,7 @@ private Q_SLOTS:
 
  private:
     void parseNmeaSentence(const QString &sentence);
-    double parsePosition(const QString &value, bool isNegative) const;
+    static double parsePosition(const QString &value, bool isNegative);
     QUdpSocket* m_socket;
     PositionProviderStatus m_status;
     GeoDataCoordinates m_position;

@@ -113,7 +113,7 @@ class PlacemarkLayout : public QObject
 
     void styleReset();
 
-    QSet<TileId> visibleTiles( const ViewportParams *viewport ) const;
+    static QSet<TileId> visibleTiles( const ViewportParams *viewport );
     bool layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected );
 
     /**

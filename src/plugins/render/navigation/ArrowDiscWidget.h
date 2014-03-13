@@ -27,7 +27,6 @@ public:
     explicit ArrowDiscWidget( QWidget *parent = 0 );
     ~ArrowDiscWidget();
 
-    QPixmap pixmap(const QString &id );
     void setMarbleWidget( MarbleWidget *marbleWidget );
 
 Q_SIGNALS:
@@ -46,6 +45,7 @@ private slots:
     void repeatPress();
 
 private:
+    static QPixmap pixmap(const QString &id );
     Qt::ArrowType arrowUnderMouse( const QPoint &position ) const;
     QTimer m_initialPressTimer;
     QTimer m_repeatPressTimer;

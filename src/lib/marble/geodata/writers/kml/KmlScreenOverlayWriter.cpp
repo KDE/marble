@@ -54,7 +54,7 @@ void KmlScreenOverlayWriter::writeVec2( const QString &element, const GeoDataVec
     writer.writeEndElement();
 }
 
-QString KmlScreenOverlayWriter::unitToString( GeoDataVec2::Unit unit ) const
+QString KmlScreenOverlayWriter::unitToString( GeoDataVec2::Unit unit )
 {
     switch( unit ) {
     case GeoDataVec2::Fraction:    return "fraction";

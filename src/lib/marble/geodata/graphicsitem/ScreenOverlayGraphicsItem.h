@@ -35,7 +35,7 @@ protected:
     virtual void paint( QPainter* painter );
 
 private:
-    qreal pixelValue( GeoDataVec2::Unit unit, qreal screenSize, qreal imageSize, qreal value ) const;
+    static qreal pixelValue( GeoDataVec2::Unit unit, qreal screenSize, qreal imageSize, qreal value );
 
     const GeoDataScreenOverlay *m_screenOverlay;
 

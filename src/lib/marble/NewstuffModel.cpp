@@ -118,7 +118,7 @@ public:
 
     void handleProviderData( QNetworkReply* reply );
 
-    bool canExecute( const QString &executable ) const;
+    static bool canExecute( const QString &executable );
 
     void installMap();
 
@@ -320,7 +320,7 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
     updateModel();
 }
 
-bool NewstuffModelPrivate::canExecute( const QString &executable ) const
+bool NewstuffModelPrivate::canExecute( const QString &executable )
 {
     QString path = QProcessEnvironment::systemEnvironment().value( "PATH", "/usr/local/bin:/usr/bin:/bin" );
     foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {

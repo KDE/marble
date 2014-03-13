@@ -88,7 +88,7 @@ class TileLoader: public QObject
  private:
     static QString tileFileName( GeoSceneTiled const * textureLayer, TileId const & );
     void triggerDownload( GeoSceneTiled const *textureLayer, TileId const &, DownloadUsage const );
-    QImage scaledLowerLevelTile( GeoSceneTextureTile const * textureLayer, TileId const & ) const;
+    static QImage scaledLowerLevelTile( GeoSceneTextureTile const * textureLayer, TileId const & );
 
     // For vectorTile parsing
     const PluginManager * m_pluginManager;

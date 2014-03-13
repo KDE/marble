@@ -60,7 +60,7 @@ public:
     bool parse();
 
 private:
-    QString queryValue( const QUrl& url, const QString& key, const QString& secondaryKey=QString() ) const;
+    static QString queryValue( const QUrl& url, const QString& key, const QString& secondaryKey=QString() );
 
     QString m_geoUri;
     GeoDataCoordinates m_coordinates;

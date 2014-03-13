@@ -62,9 +62,9 @@ private:
 
     QString iconName() const;
 
-    QString dateString(const QVariant& ms); ///< create a date string from millisecondssinceepoch in a qvariant
+    static QString dateString(const QVariant& ms); ///< create a date string from millisecondssinceepoch in a qvariant
 
-    const QString ratingNumberString(QVariant number) const; ///< "1" -> "1.0"
+    static const QString ratingNumberString(QVariant number); ///< "1" -> "1.0"
 
     QString formatDistance(qreal spheredistance) const; ///< nice string from a Marble::distanceSphere()
 

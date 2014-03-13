@@ -91,9 +91,9 @@ public:
 
     void togglePositionTracking( bool enabled );
 
-    QString richText( const QString &source ) const;
+    static QString richText( const QString &source );
 
-    QString fuzzyDistance( qreal distanceMeter ) const;
+    static QString fuzzyDistance( qreal distanceMeter );
 
     void readSettings();
 
@@ -121,12 +121,12 @@ RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
     m_audio->setSoundEnabled( true );
 }
 
-QString RoutingPluginPrivate::richText( const QString &source ) const
+QString RoutingPluginPrivate::richText( const QString &source )
 {
     return QString( "<font size=\"+1\" color=\"black\">%1</font>" ).arg( source );
 }
 
-QString RoutingPluginPrivate::fuzzyDistance( qreal length ) const
+QString RoutingPluginPrivate::fuzzyDistance( qreal length )
 {
     int precision = 0;
     QString distanceUnit = QLatin1String( "m" );

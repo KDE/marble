@@ -129,7 +129,7 @@ void OpenRouteServiceRunner::handleError( QNetworkReply::NetworkError error )
     mDebug() << " Error when retrieving openrouteservice.org route: " << error;
 }
 
-QString OpenRouteServiceRunner::xmlHeader() const
+QString OpenRouteServiceRunner::xmlHeader()
 {
     QString result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
     result += "<xls:XLS xmlns:xls=\"http://www.opengis.net/xls\" xmlns:sch=\"http://www.ascc.net/xml/schematron\" ";
@@ -141,7 +141,7 @@ QString OpenRouteServiceRunner::xmlHeader() const
     return result;
 }
 
-QString OpenRouteServiceRunner::requestHeader( const QString &unit, const QString &routePreference ) const
+QString OpenRouteServiceRunner::requestHeader( const QString &unit, const QString &routePreference )
 {
     QString result = "<xls:Request methodName=\"RouteRequest\" requestID=\"123456789\" version=\"1.1\">\n";
     result += "<xls:DetermineRouteRequest distanceUnit=\"%1\">\n";
@@ -151,7 +151,7 @@ QString OpenRouteServiceRunner::requestHeader( const QString &unit, const QStrin
     return result.arg( unit ).arg( routePreference );
 }
 
-QString OpenRouteServiceRunner::requestPoint( PointType pointType, const GeoDataCoordinates &coordinates ) const
+QString OpenRouteServiceRunner::requestPoint( PointType pointType, const GeoDataCoordinates &coordinates )
 {
     QString result = "<xls:%1>\n";
     result += "<xls:Position>\n";
@@ -167,7 +167,7 @@ QString OpenRouteServiceRunner::requestPoint( PointType pointType, const GeoData
     return result;
 }
 
-QString OpenRouteServiceRunner::requestFooter( const QHash<QString, QVariant>& settings ) const
+QString OpenRouteServiceRunner::requestFooter( const QHash<QString, QVariant>& settings )
 {
     QString result = "</xls:WayPointList>\n";
 
@@ -190,7 +190,7 @@ QString OpenRouteServiceRunner::requestFooter( const QHash<QString, QVariant>& s
     return result;
 }
 
-QString OpenRouteServiceRunner::xmlFooter() const
+QString OpenRouteServiceRunner::xmlFooter()
 {
     return "</xls:XLS>\n";
 }
@@ -378,7 +378,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     return result;
 }
 
-RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QString &text, QString *road ) const
+RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QString &text, QString *road )
 {
     QRegExp syntax( "^(Go|Drive) (half left|left|sharp left|straight forward|half right|right|sharp right)( on )?(.*)?$", Qt::CaseSensitive, QRegExp::RegExp2 );
     QString instruction;

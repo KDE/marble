@@ -236,7 +236,7 @@ void TileLoader::triggerDownload( GeoSceneTiled const *textureLayer, TileId cons
     emit downloadTile( sourceUrl, destFileName, idStr, usage );
 }
 
-QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTile * textureLayer, TileId const & id ) const
+QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTile * textureLayer, TileId const & id )
 {
     mDebug() << Q_FUNC_INFO << id;
 

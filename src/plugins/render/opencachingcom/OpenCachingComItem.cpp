@@ -351,7 +351,7 @@ QString OpenCachingComItem::iconName() const
     return "unknown";
 }
 
-const QString OpenCachingComItem::ratingNumberString(QVariant number) const
+const QString OpenCachingComItem::ratingNumberString(QVariant number)
 {
     return QString::number(number.toDouble(), 'f', 1);
 }

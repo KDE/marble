@@ -92,7 +92,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
    void repaintNeeded();
 
  private:
-    bool testXBug();
+    static bool testXBug();
 
     PlacemarkLayout m_layout;
 };

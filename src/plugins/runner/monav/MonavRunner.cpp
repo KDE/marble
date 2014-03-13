@@ -42,7 +42,7 @@ public:
 
     int retrieveRoute( const RouteRequest *route, QVector<GeoDataPlacemark*> *instructions, GeoDataLineString* geometry ) const;
 
-    GeoDataDocument* createDocument( GeoDataLineString *geometry, const QVector<GeoDataPlacemark*> &instructions, const QString &name, const GeoDataExtendedData &data ) const;
+    static GeoDataDocument* createDocument( GeoDataLineString *geometry, const QVector<GeoDataPlacemark*> &instructions, const QString &name, const GeoDataExtendedData &data );
 };
 
 MonavRunnerPrivate::MonavRunnerPrivate( const MonavPlugin* plugin ) :
@@ -198,7 +198,7 @@ int MonavRunnerPrivate::retrieveRoute( const Marble::RouteRequest* route, QVecto
     return 0;
 }
 
-GeoDataDocument* MonavRunnerPrivate::createDocument( Marble::GeoDataLineString* geometry, const QVector< Marble::GeoDataPlacemark* >& instructions, const QString& name, const Marble::GeoDataExtendedData& data ) const
+GeoDataDocument* MonavRunnerPrivate::createDocument( Marble::GeoDataLineString* geometry, const QVector< Marble::GeoDataPlacemark* >& instructions, const QString& name, const Marble::GeoDataExtendedData& data )
 {
     if ( !geometry || geometry->isEmpty() ) {
         return 0;

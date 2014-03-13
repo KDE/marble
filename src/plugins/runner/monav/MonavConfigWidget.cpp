@@ -121,12 +121,12 @@ public:
 
     void updateTransportPreference();
 
-    bool canExecute( const QString &executable ) const;
+    static bool canExecute( const QString &executable );
 
     void setBusy( bool busy, const QString &message = QString() ) const;
 
 private:
-    bool fillComboBox( QStringList items, QComboBox* comboBox ) const;
+    static bool fillComboBox( QStringList items, QComboBox* comboBox );
 };
 
 void MonavStuffEntry::setPayload( const QString &payload )
@@ -254,7 +254,7 @@ void MonavConfigWidgetPrivate::parseNewStuff( const QByteArray &data )
     updateInstalledMapsViewButtons();
 }
 
-bool MonavConfigWidgetPrivate::fillComboBox( QStringList items, QComboBox* comboBox ) const
+bool MonavConfigWidgetPrivate::fillComboBox( QStringList items, QComboBox* comboBox )
 {
     comboBox->clear();
     qSort( items );
@@ -552,7 +552,7 @@ void MonavConfigWidget::updateProgressBar( qint64 bytesReceived, qint64 bytesTot
     m_progressBar->setFormat( progress.arg( bytesReceived / 1024 / 1024 ).arg( bytesTotal / 1024 / 1024 ) );
 }
 
-bool MonavConfigWidgetPrivate::canExecute( const QString &executable ) const
+bool MonavConfigWidgetPrivate::canExecute( const QString &executable )
 {
     QString path = QProcessEnvironment::systemEnvironment().value( "PATH", "/usr/local/bin:/usr/bin:/bin" );
     foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {

@@ -33,15 +33,15 @@ public:
     QVector<OsmPlacemark> find( const DatabaseQuery &userQuery );
 
 private:
-    QString wildcardQuery( const QString &term ) const;
+    static QString wildcardQuery( const QString &term );
 
     void unique( QVector<OsmPlacemark> &placemarks ) const;
 
     QStringList m_databaseFiles;
 
-    QString formatDistance( const GeoDataCoordinates &a, const GeoDataCoordinates &b ) const;
+    static QString formatDistance( const GeoDataCoordinates &a, const GeoDataCoordinates &b );
 
-    qreal bearing( const GeoDataCoordinates &a, const GeoDataCoordinates &b ) const;
+    static qreal bearing( const GeoDataCoordinates &a, const GeoDataCoordinates &b );
 
     Q_DISABLE_COPY( OsmDatabase )
 };

@@ -69,8 +69,8 @@ Q_SIGNALS:
 private:
     void setViewport( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
 
-    unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
-    unsigned int lat2tileY( qreal lat, unsigned int maxTileY );
+    static unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
+    static unsigned int lat2tileY( qreal lat, unsigned int maxTileY );
 
 private:
     struct CacheDocument

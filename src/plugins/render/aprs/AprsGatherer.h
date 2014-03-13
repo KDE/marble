@@ -57,8 +57,8 @@ namespace Marble {
 
       private:
         void initMicETables();
-        qreal calculateLongitude( const QString &threeBytes,
-                                  int offset, bool isEast );
+        static qreal calculateLongitude( const QString &threeBytes,
+                                         int offset, bool isEast );
 
         AprsSource                  *m_source;
         QIODevice                   *m_socket;

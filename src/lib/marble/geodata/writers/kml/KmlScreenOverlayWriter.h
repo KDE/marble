@@ -29,7 +29,7 @@ public:
 
 private:
     void writeVec2( const QString &element, const GeoDataVec2 &vec2, GeoWriter& writer ) const;
-    QString unitToString( GeoDataVec2::Unit unit ) const;
+    static QString unitToString( GeoDataVec2::Unit unit );
 };
 
 }

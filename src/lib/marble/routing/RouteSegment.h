@@ -56,9 +56,9 @@ public:
     bool operator!=( const RouteSegment &other ) const;
 
 private:
-    qreal distancePointToLine(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b) const;
+    static qreal distancePointToLine(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b);
 
-    GeoDataCoordinates projected(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b) const;
+    static GeoDataCoordinates projected(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b);
 
     bool m_valid;
 

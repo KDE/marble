@@ -297,7 +297,7 @@ void WorldClock::recalculateFonts( )
     m_timeFont = calculateFont(timestr, timeRect);
 }
 
-QFont WorldClock::calculateFont(const QString &text, const QRect &boundingBox) const
+QFont WorldClock::calculateFont(const QString &text, const QRect &boundingBox)
 {
     QFont resultFont( "Helvetica", 3, QFont::Bold);
      

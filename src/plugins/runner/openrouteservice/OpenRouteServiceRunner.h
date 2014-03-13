@@ -52,23 +52,23 @@ private Q_SLOTS:
 
 private:
     /** Builds the xml request header. */
-    QString xmlHeader() const;
+    static QString xmlHeader();
 
     /** Builds the route request header in the xml request. */
-    QString requestHeader( const QString &unit, const QString &routePreference ) const;
+    static QString requestHeader( const QString &unit, const QString &routePreference );
 
     /** Builds a route point substring. */
-    QString requestPoint( PointType pointType, const GeoDataCoordinates &coordinates ) const;
+    static QString requestPoint( PointType pointType, const GeoDataCoordinates &coordinates );
 
     /** Builds the route request footer in the xml request. */
-    QString requestFooter( const QHash<QString, QVariant> &settings ) const;
+    static QString requestFooter( const QHash<QString, QVariant> &settings );
 
     /** Builds the xml request footer. */
-    QString xmlFooter() const;
+    static QString xmlFooter();
 
     GeoDataDocument* parse( const QByteArray &input ) const;
 
-    RoutingInstruction::TurnType parseTurnType( const QString &text, QString* road ) const;
+    static RoutingInstruction::TurnType parseTurnType( const QString &text, QString* road );
 
     QNetworkAccessManager m_networkAccessManager;
 

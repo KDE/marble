@@ -31,7 +31,7 @@ namespace Marble
         void setPixmapId( QString &pixmap );
         GeoAprsCoordinates location() const;
 
-        QColor calculatePaintColor( int from, const QTime &time, int fadetime = 10*60*1000 ) const;
+        static QColor calculatePaintColor( int from, const QTime &time, int fadetime = 10*60*1000 );
         void render( GeoPainter *painter, ViewportParams *viewport,
                      int fadeTime = 10*60, int hideTime = 30*60 );
 

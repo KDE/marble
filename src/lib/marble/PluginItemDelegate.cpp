@@ -314,23 +314,23 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
 QStyleOptionButton PluginItemDelegate::checkboxOption( const QStyleOptionViewItem& option,
                                                        const QModelIndex& index,
                                                        int position,
-                                                       Qt::AlignmentFlag alignment ) const
+                                                       Qt::AlignmentFlag alignment )
 {
-    QStyleOptionButton checkboxOption;
+    QStyleOptionButton styleOptionButton;
     if ( index.data( Qt::CheckStateRole ).toBool() )
-        checkboxOption.state = option.state | QStyle::State_On;
+        styleOptionButton.state = option.state | QStyle::State_On;
     else
-        checkboxOption.state = option.state | QStyle::State_Off;
+        styleOptionButton.state = option.state | QStyle::State_Off;
     QSize size = QApplication::style()->sizeFromContents( QStyle::CT_CheckBox, &option, QSize() );
     if ( size.isEmpty() ) {
         // A checkbox has definitely a size != 0
-        checkboxOption.rect.setSize( QSize( 22, 22 ) );
+        styleOptionButton.rect.setSize( QSize( 22, 22 ) );
     }
     else {
-        checkboxOption.rect.setSize( QSize( size.width(), size.height() ) );
+        styleOptionButton.rect.setSize( QSize( size.width(), size.height() ) );
     }
-    checkboxOption.rect = alignRect( checkboxOption.rect, option.rect, position, alignment );
-    return checkboxOption;
+    styleOptionButton.rect = alignRect( styleOptionButton.rect, option.rect, position, alignment );
+    return styleOptionButton;
 }
 
 QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem& option,
@@ -386,7 +386,7 @@ QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem&
     return buttonOption;
 }
 
-QSize PluginItemDelegate::nameSize( const QModelIndex& index ) const
+QSize PluginItemDelegate::nameSize( const QModelIndex& index )
 {
     QString name = index.data( Qt::DisplayRole ).toString();
     // FIXME: QApplication::fontMetrics() doesn't work for non-application fonts
@@ -397,7 +397,7 @@ QSize PluginItemDelegate::nameSize( const QModelIndex& index ) const
 QRect PluginItemDelegate::alignRect( QRect object,
                                      QRect frame,
                                      int position,
-                                     Qt::AlignmentFlag alignment ) const
+                                     Qt::AlignmentFlag alignment )
 {
     QRect rect = object;
     

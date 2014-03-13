@@ -73,7 +73,7 @@ AprsObject::setPixmapId( QString &pixmap )
 }
 
 QColor
-AprsObject::calculatePaintColor( int from, const QTime &time, int fadeTime ) const
+AprsObject::calculatePaintColor( int from, const QTime &time, int fadeTime )
 {
     QColor color;
     if ( from & GeoAprsCoordinates::Directly ) {

@@ -159,7 +159,7 @@ class WeatherDataPrivate
         }
     }
     
-    qreal fromKelvin( qreal temp, WeatherData::TemperatureUnit format ) const
+    static qreal fromKelvin( qreal temp, WeatherData::TemperatureUnit format )
     {
         if( WeatherData::Kelvin == format ) {
             return temp;
@@ -176,7 +176,7 @@ class WeatherDataPrivate
         }
     }
     
-    qreal toKelvin( qreal temp, WeatherData::TemperatureUnit format ) const
+    static qreal toKelvin( qreal temp, WeatherData::TemperatureUnit format )
     {
         if( WeatherData::Kelvin == format ) {
             return temp;
@@ -202,7 +202,7 @@ class WeatherDataPrivate
         return false;
     }
     
-    QString generateTemperatureString( qreal temp, WeatherData::TemperatureUnit format ) const
+    static QString generateTemperatureString( qreal temp, WeatherData::TemperatureUnit format )
     {
         QLocale locale = QLocale::system();
         // We round to integer.

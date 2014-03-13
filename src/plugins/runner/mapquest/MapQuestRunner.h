@@ -44,7 +44,7 @@ private Q_SLOTS:
 private:
     void append( QString* input, const QString &key, const QString &value );
 
-    int maneuverType( int mapQuestId ) const;
+    static int maneuverType( int mapQuestId );
 
     GeoDataDocument* parse( const QByteArray &input ) const;
 

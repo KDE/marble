@@ -41,7 +41,7 @@ private:
 
     int buttonWidth( const QStyleOptionViewItem &option ) const;
     QStyleOptionButton button( Element element, const QStyleOptionViewItem &option ) const;
-    QString text( const QModelIndex &index ) const;
+    static QString text( const QModelIndex &index );
     QRect position( Element element, const QStyleOptionViewItem &option ) const;
 
     QListView *m_view;

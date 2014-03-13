@@ -78,9 +78,9 @@ public:
     }
 
     void createFilterProperties( GeoDataContainer *container );
-    int cityPopIdx( qint64 population ) const;
-    int spacePopIdx( qint64 population ) const;
-    int areaPopIdx( qreal area ) const;
+    static int cityPopIdx( qint64 population );
+    static int spacePopIdx( qint64 population );
+    static int areaPopIdx( qreal area );
 
     void documentParsed( GeoDataDocument *doc, const QString& error);
 
@@ -424,7 +424,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
     }
 }
 
-int FileLoaderPrivate::cityPopIdx( qint64 population ) const
+int FileLoaderPrivate::cityPopIdx( qint64 population )
 {
     int popidx = 3;
 
@@ -439,7 +439,7 @@ int FileLoaderPrivate::cityPopIdx( qint64 population ) const
     return popidx;
 }
 
-int FileLoaderPrivate::spacePopIdx( qint64 population ) const
+int FileLoaderPrivate::spacePopIdx( qint64 population )
 {
     int popidx = 1;
 
@@ -456,7 +456,7 @@ int FileLoaderPrivate::spacePopIdx( qint64 population ) const
     return popidx;
 }
 
-int FileLoaderPrivate::areaPopIdx( qreal area ) const
+int FileLoaderPrivate::areaPopIdx( qreal area )
 {
     int popidx = 1;
     if      ( area <  200000  )      popidx=5;

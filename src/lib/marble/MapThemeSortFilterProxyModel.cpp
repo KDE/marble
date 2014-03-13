@@ -52,7 +52,7 @@ bool MapThemeSortFilterProxyModel::filterAcceptsRow( int sourceRow, const QModel
      return (sourceModel()->data( index, Qt::UserRole + 1 ).toString().contains( filterRegExp() ) );
  }
  
-bool MapThemeSortFilterProxyModel::isFavorite( const QModelIndex& index ) const
+bool MapThemeSortFilterProxyModel::isFavorite( const QModelIndex& index )
 {
     const QAbstractItemModel *model = index.model();
     QModelIndex columnIndex = model->index( index.row(), 0, QModelIndex() );
@@ -60,7 +60,7 @@ bool MapThemeSortFilterProxyModel::isFavorite( const QModelIndex& index ) const
     return QSettings().contains( key );
 }
 
-QDateTime MapThemeSortFilterProxyModel::favoriteDateTime( const QModelIndex& index ) const
+QDateTime MapThemeSortFilterProxyModel::favoriteDateTime( const QModelIndex& index )
 {
     const QAbstractItemModel *model = index.model();
     QModelIndex columnIndex = model->index( index.row(), 0, QModelIndex() );

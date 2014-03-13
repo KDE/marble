@@ -46,7 +46,7 @@ public:
 
     void setFolderName( const QString &name );
 
-    QString append( const QString &bookmark, const QString &text);
+    static QString append( const QString &bookmark, const QString &text);
 
     void openNewFolderDialog();
 

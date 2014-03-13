@@ -65,18 +65,18 @@ class PluginItemDelegate : public QAbstractItemDelegate
         Configure
     };
 
-    QStyleOptionButton checkboxOption( const QStyleOptionViewItem& option,
-                                       const QModelIndex& index,
-                                       int position = 0,
-                                       Qt::AlignmentFlag alignment = Qt::AlignLeft ) const;
+    static QStyleOptionButton checkboxOption( const QStyleOptionViewItem& option,
+                                              const QModelIndex& index,
+                                              int position = 0,
+                                              Qt::AlignmentFlag alignment = Qt::AlignLeft );
     QStyleOptionButton buttonOption(   const QStyleOptionViewItem& option,
                                        const QModelIndex& index,
                                        PluginItemDelegate::ButtonType type,
                                        int position = 0,
                                        Qt::AlignmentFlag alignment = Qt::AlignLeft ) const;
-    QSize nameSize( const QModelIndex& index ) const;
+    static QSize nameSize( const QModelIndex& index );
     
-    QRect alignRect( QRect object, QRect frame, int position, Qt::AlignmentFlag alignment ) const;
+    static QRect alignRect( QRect object, QRect frame, int position, Qt::AlignmentFlag alignment );
 
     QModelIndex m_configPressedIndex;
     QModelIndex m_aboutPressedIndex;

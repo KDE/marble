@@ -93,7 +93,7 @@ void KmlPlaylistTagWriter::writeSoundCue(const GeoDataSoundCue *cue, GeoWriter &
     writer.writeEndElement();
 }
 
-QString KmlPlaylistTagWriter::playModeToString( GeoDataTourControl::PlayMode playMode ) const
+QString KmlPlaylistTagWriter::playModeToString( GeoDataTourControl::PlayMode playMode )
 {
     switch (playMode)
     {

@@ -49,7 +49,7 @@ private:
     int buttonWidth( const QStyleOptionViewItem &option ) const;
     QStyleOptionButton button( Element element, const QStyleOptionViewItem &option ) const;
     QRect position( Element element, const QStyleOptionViewItem &option ) const;
-    QString text( const QModelIndex &index ) const;
+    static QString text( const QModelIndex &index );
     QListView* m_view;
     NewstuffModel* m_newstuffModel;
     mutable int m_buttonWidth;
@@ -336,7 +336,7 @@ QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &opt
     return QRect();
 }
 
-QString MapItemDelegate::text( const QModelIndex &index ) const
+QString MapItemDelegate::text( const QModelIndex &index )
 {
     qreal const size = index.data( NewstuffModel::PayloadSize ).toLongLong() / 1024.0 / 1024.0;
     // Fields are typically not longer than 200 characters. Prevent excessive long text here anyway

@@ -117,7 +117,7 @@ public:
     // keep the code clean
 
     /** Returns the same color as the given one with its alpha channel adjusted to the given value */
-    inline QColor alphaAdjusted( const QColor &color, int alpha ) const;
+    static inline QColor alphaAdjusted( const QColor &color, int alpha );
 
     /**
       * Returns the start or destination position if Ctrl key is among the
@@ -399,7 +399,7 @@ void RoutingLayerPrivate::storeDragPosition( const QPoint &pos )
     }
 }
 
-QColor RoutingLayerPrivate::alphaAdjusted( const QColor &color, int alpha ) const
+QColor RoutingLayerPrivate::alphaAdjusted( const QColor &color, int alpha )
 {
     QColor result( color );
     result.setAlpha( alpha );

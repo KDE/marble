@@ -175,7 +175,7 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence( const QString &sentenc
     }
 }
 
-double FlightGearPositionProviderPlugin::parsePosition( const QString &value, bool isNegative ) const
+double FlightGearPositionProviderPlugin::parsePosition( const QString &value, bool isNegative )
 {
     double pos = value.toDouble();
     pos = int( pos / 100.0 ) + ( pos - 100.0 * int( pos / 100.0 ) ) / 60.0;

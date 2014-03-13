@@ -44,9 +44,9 @@ private Q_SLOTS:
     void get();
 
 private:
-    GeoDataDocument* parse( const QByteArray &input ) const;
+    static GeoDataDocument* parse( const QByteArray &input );
 
-    qreal distance( const GeoDataDocument* document ) const;
+    static qreal distance( const GeoDataDocument* document );
 
     QNetworkAccessManager m_networkAccessManager;
 

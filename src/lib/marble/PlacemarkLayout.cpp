@@ -316,7 +316,7 @@ void PlacemarkLayout::resetCacheData()
     emit repaintNeeded();
 }
 
-QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport ) const
+QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport )
 {
     int zoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 

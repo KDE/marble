@@ -40,8 +40,8 @@ class GeoPainterPrivate
                                   qreal xRnd, qreal yRnd,
                                   QPainterPath& path, QRectF& rect );
 
-    GeoDataLinearRing createLinearRingFromGeoRect( const GeoDataCoordinates & centerCoordinates,
-                                                   qreal width, qreal height );
+    static GeoDataLinearRing createLinearRingFromGeoRect( const GeoDataCoordinates & centerCoordinates,
+                                                          qreal width, qreal height );
 
     static bool doClip( const ViewportParams *viewport );
 

@@ -163,7 +163,7 @@ private:
      */
     void setAppropriateSize( const ViewportParams *viewport );
 
-    QString filterEmptyShortDescription(const QString &description) const;
+    static QString filterEmptyShortDescription(const QString &description);
     void setupDialogSatellite( const GeoDataPlacemark *index );
     void setupDialogCity( const GeoDataPlacemark *index );
     void setupDialogNation( const GeoDataPlacemark *index );

@@ -40,9 +40,9 @@ public:
 
     QByteArray retrieveWaypoints( const QStringList &params ) const;
 
-    GeoDataDocument* createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions ) const;
+    static GeoDataDocument* createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions );
 
-    GeoDataLineString* parseRoutinoOutput( const QByteArray &content ) const;
+    static GeoDataLineString* parseRoutinoOutput( const QByteArray &content );
 
     QVector<GeoDataPlacemark*> parseRoutinoInstructions( const QByteArray &content ) const;
 
@@ -123,7 +123,7 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints( const QStringList &params ) 
     return 0;
 }
 
-GeoDataLineString* RoutinoRunnerPrivate::parseRoutinoOutput( const QByteArray &content ) const
+GeoDataLineString* RoutinoRunnerPrivate::parseRoutinoOutput( const QByteArray &content )
 {
     GeoDataLineString* routeWaypoints = new GeoDataLineString;
 
@@ -181,7 +181,7 @@ QVector<GeoDataPlacemark*> RoutinoRunnerPrivate::parseRoutinoInstructions( const
     return result;
 }
 
-GeoDataDocument* RoutinoRunnerPrivate::createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions ) const
+GeoDataDocument* RoutinoRunnerPrivate::createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions )
 {
     if ( !routeWaypoints || routeWaypoints->isEmpty() ) {
         return 0;

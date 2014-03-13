@@ -186,7 +186,7 @@ void PopupLayer::setTextColor(const QColor &color)
     }
 }
 
-QString PopupLayer::filterEmptyShortDescription(const QString &description) const
+QString PopupLayer::filterEmptyShortDescription(const QString &description)
 {
     if(description.isEmpty())
         return tr("No description available.");

@@ -71,7 +71,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     void setProjection( const ViewportParams *viewport );
 
-    QPixmap pixmap( const QString &Id ) const;
+    static QPixmap pixmap( const QString &Id );
 
     QHash<QString,QVariant> settings() const;
 

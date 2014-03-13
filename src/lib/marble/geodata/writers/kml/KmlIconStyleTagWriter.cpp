@@ -53,7 +53,7 @@ bool KmlIconStyleTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) c
     return true;
 }
 
-QString KmlIconStyleTagWriter::unitString(GeoDataHotSpot::Units unit) const
+QString KmlIconStyleTagWriter::unitString(GeoDataHotSpot::Units unit)
 {
     switch (unit) {
     case GeoDataHotSpot::Pixels: return "pixels";

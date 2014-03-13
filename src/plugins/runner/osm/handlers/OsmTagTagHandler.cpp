@@ -144,7 +144,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     return 0;
 }
 
-GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeometry* geometry ) const
+GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeometry* geometry )
 {
     GeoDataPoint *point = dynamic_cast<GeoDataPoint *>( geometry );
     Q_ASSERT( point );
@@ -157,7 +157,7 @@ GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeom
     return placemark;
 }
 
-GeoDataPlacemark *OsmTagTagHandler::convertWayToPolygon( GeoDataDocument *doc, GeoDataPlacemark *placemark, GeoDataGeometry *geometry ) const
+GeoDataPlacemark *OsmTagTagHandler::convertWayToPolygon( GeoDataDocument *doc, GeoDataPlacemark *placemark, GeoDataGeometry *geometry )
 {
     GeoDataLineString *polyline = dynamic_cast<GeoDataLineString *>( geometry );
     Q_ASSERT( polyline );

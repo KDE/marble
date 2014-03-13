@@ -62,7 +62,7 @@ QString KmlLinkTagWriter::refreshModeToString( GeoDataLink::RefreshMode refreshM
     }
 }
 
-QString KmlLinkTagWriter::viewRefreshModeToString( GeoDataLink::ViewRefreshMode viewRefreshMode) const
+QString KmlLinkTagWriter::viewRefreshModeToString( GeoDataLink::ViewRefreshMode viewRefreshMode)
 {
     switch (viewRefreshMode)
     {

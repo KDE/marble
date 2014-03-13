@@ -30,8 +30,8 @@ protected:
     bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
 
 private:
-    bool isFavorite( const QModelIndex& index ) const;
-    QDateTime favoriteDateTime( const QModelIndex& index ) const;
+    static bool isFavorite( const QModelIndex& index );
+    static QDateTime favoriteDateTime( const QModelIndex& index );
 };
 
 }

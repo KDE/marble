@@ -65,7 +65,7 @@ private:
     void  createMenus( const QList<QAction*> &panelActions );
     void  createStatusBar();
 
-    QString  readMarbleDataPath();
+    static QString  readMarbleDataPath();
     void  readSettings(const QVariantMap& overrideSettings = QVariantMap());
     void  writeSettings();
 

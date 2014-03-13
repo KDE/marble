@@ -48,7 +48,7 @@ bool KmlListStyleTagWriter::write( const GeoNode *node,
     return true;
 }
 
-QString KmlListStyleTagWriter::itemTypeToString( GeoDataListStyle::ListItemType itemType ) const
+QString KmlListStyleTagWriter::itemTypeToString( GeoDataListStyle::ListItemType itemType )
 {
     switch ( itemType )
     {
@@ -59,7 +59,7 @@ QString KmlListStyleTagWriter::itemTypeToString( GeoDataListStyle::ListItemType 
     }
 }
 
-QString KmlListStyleTagWriter::iconStateToString( GeoDataItemIcon::ItemIconStates state ) const
+QString KmlListStyleTagWriter::iconStateToString( GeoDataItemIcon::ItemIconStates state )
 {
     QStringList stateList;
     if ( state & GeoDataItemIcon::Open ) {

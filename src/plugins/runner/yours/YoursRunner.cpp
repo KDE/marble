@@ -126,7 +126,7 @@ void YoursRunner::handleError( QNetworkReply::NetworkError error )
     emit routeCalculated( 0 );
 }
 
-GeoDataDocument* YoursRunner::parse( const QByteArray &content ) const
+GeoDataDocument* YoursRunner::parse( const QByteArray &content )
 {
     GeoDataParser parser( GeoData_UNKNOWN );
 
@@ -143,7 +143,7 @@ GeoDataDocument* YoursRunner::parse( const QByteArray &content ) const
     return document;
 }
 
-qreal YoursRunner::distance( const GeoDataDocument* document ) const
+qreal YoursRunner::distance( const GeoDataDocument* document )
 {
     QVector<GeoDataFolder*> folders = document->folderList();
     foreach( const GeoDataFolder *folder, folders ) {

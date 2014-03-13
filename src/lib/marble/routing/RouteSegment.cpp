@@ -92,7 +92,7 @@ bool RouteSegment::isValid() const
     return m_valid;
 }
 
-qreal RouteSegment::distancePointToLine(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b) const
+qreal RouteSegment::distancePointToLine(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b)
 {
     qreal const y0 = p.latitude();
     qreal const x0 = p.longitude();
@@ -119,7 +119,7 @@ qreal RouteSegment::distancePointToLine(const GeoDataCoordinates &p, const GeoDa
     }
 }
 
-GeoDataCoordinates RouteSegment::projected(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b) const
+GeoDataCoordinates RouteSegment::projected(const GeoDataCoordinates &p, const GeoDataCoordinates &a, const GeoDataCoordinates &b)
 {
     qreal const y0 = p.latitude();
     qreal const x0 = p.longitude();

@@ -27,7 +27,7 @@ protected:
     virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
 
 private:
-    QString unitString( GeoDataHotSpot::Units unit ) const;
+    static QString unitString( GeoDataHotSpot::Units unit );
 };
 
 }

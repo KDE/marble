@@ -173,7 +173,7 @@ void MapQuestRunner::append(QString *input, const QString &key, const QString &v
     *input += '&' + key + '=' + value;
 }
 
-int MapQuestRunner::maneuverType( int mapQuestId ) const
+int MapQuestRunner::maneuverType( int mapQuestId )
 {
     /** @todo FIXME: review 10, 11 */
     switch( mapQuestId ) {
