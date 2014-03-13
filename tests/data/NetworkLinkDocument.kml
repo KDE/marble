@@ -21,7 +21,7 @@
         <href>http://www.example.com/geotiff/NE/MergedReflectivityQComposite.kml</href>
         <refreshMode>onInterval</refreshMode>
         <refreshInterval>30</refreshInterval>
-        <viewRefreshMode>onStop</viewRefreshMode>
+        <viewRefreshMode>onRequest</viewRefreshMode>
         <viewRefreshTime>7</viewRefreshTime>
         <viewBoundScale>1</viewBoundScale>
         <viewFormat>BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth];CAMERA=\

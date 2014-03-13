@@ -22,6 +22,7 @@
       <href>MackyBldg.kmz/files/CU Macky.dae</href>
       <refreshMode>onExpire</refreshMode>
       <refreshInterval>4</refreshInterval>
+      <viewRefreshMode>onRegion</viewRefreshMode>
       <viewRefreshTime>4</viewRefreshTime>
       <viewBoundScale>1</viewBoundScale>
       <viewFormat>BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]</viewFormat>

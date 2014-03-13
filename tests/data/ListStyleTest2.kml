@@ -9,14 +9,17 @@
                 <displayMode>default</displayMode> 
             </BalloonStyle>
             <IconStyle>
+                <color>aabbccdd</color>
+                <colorMode>random</colorMode>
                 <scale>1.000000</scale>
                 <Icon>
                     <href>/home/username/marble/export/share/marble/data/bitmaps/default_location.png</href>
                 </Icon>
-                <hotSpot x="0.500000" y="0.500000" xunits="fraction" yunits="fraction"/>
+                <hotSpot x="128.500000" y="128.500000" xunits="insetPixels" yunits="insetPixels"/>
             </IconStyle>
             <LineStyle>
                 <color>c80008e2</color>
+                <colorMode>random</colorMode>
                 <width>4</width>
             </LineStyle>
             <ListStyle>
@@ -28,6 +31,8 @@
                 </ItemIcon>
             </ListStyle>
             <PolyStyle>
+                <color>ffaabbdd</color>
+                <colorMode>random</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
