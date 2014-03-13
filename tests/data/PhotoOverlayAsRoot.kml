@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-<PhotoOverlay>
+  <PhotoOverlay>
     <rotation>13.314</rotation>
     <ViewVolume>
-        <near>1500</near>
-        <leftFov>-60</leftFov>
-        <rightFov>60</rightFov>
-        <bottomFov>-45</bottomFov>
-        <topFov>45</topFov>
+      <near>1500</near>
+      <leftFov>-60</leftFov>
+      <rightFov>60</rightFov>
+      <bottomFov>-45</bottomFov>
+      <topFov>45</topFov>
     </ViewVolume>
     <ImagePyramid>
-        <tileSize>219</tileSize>
-        <maxWidth>22</maxWidth>
-        <maxHeight>36</maxHeight>
-        <gridOrigin>lowerLeft</gridOrigin>
+      <tileSize>219</tileSize>
+      <maxWidth>22</maxWidth>
+      <maxHeight>36</maxHeight>
+      <gridOrigin>lowerLeft</gridOrigin>
     </ImagePyramid>
     <Point>
-        <coordinates>23.7866501000,0.6565100000</coordinates>
+      <coordinates>23.7866501000,0.6565100000</coordinates>
     </Point>
     <shape>sphere</shape>
-</PhotoOverlay>
+  </PhotoOverlay>
 </kml>

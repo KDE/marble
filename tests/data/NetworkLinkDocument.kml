@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-<Document>
+  <Document>
     <NetworkLink>
       <flyToView>1</flyToView>
       <Link>
@@ -29,5 +29,5 @@
           [horizFov],[vertFov],[horizPixels],[vertPixels],[terrainEnabled]</viewFormat>
       </Link>
     </NetworkLink>
-</Document>
+  </Document>
 </kml>

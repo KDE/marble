@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-<Document>
-<Placemark>
-  <name>Feature.kml</name>
-  <Snippet maxLines="4">
+  <Document>
+    <Placemark>
+      <name>Feature.kml</name>
+      <Snippet maxLines="4">
     The snippet is a way of
     providing an alternative
     description that will be
     shown in the List view.
-  </Snippet> 
-  <description>
-    <![CDATA[
+  </Snippet>
+      <description><![CDATA[
       Styles: <i>Italics</i>, <b>Bold</b>, <u>Underlined</u>, 
       <s>Strike Out</s>, subscript<sub>subscript</sub>,
       superscript<sup>superscript</sup>,  
@@ -101,11 +100,10 @@
       <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
       <tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
       </table>
-    ]]>
-  </description>
-  <Point>
-    <coordinates>-122.378927,37.826793,0</coordinates>
-  </Point> 
-</Placemark>
-</Document>
+    ]]></description>
+      <Point>
+        <coordinates>-122.378927,37.826793,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
 </kml>

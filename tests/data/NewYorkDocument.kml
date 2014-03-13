@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-<Document>
-  <Placemark>
-    <name>New York City</name>
-    <description>New York City</description>
-    <Point>
-      <coordinates>-74.0063930000,40.7141720000</coordinates>
-    </Point>
-  </Placemark>
-  <Placemark>
-    <name>New York City 2</name>
-    <visibility>0</visibility>
-    <description>New York City</description>
-    <Point>
-      <coordinates>-74.0060000000,40.7140000000</coordinates>
-    </Point>
+  <Document>
+    <Placemark>
+      <name>New York City</name>
+      <description>New York City</description>
+      <Point>
+        <coordinates>-74.0063930000,40.7141720000</coordinates>
+      </Point>
     </Placemark>
-</Document>
+    <Placemark>
+      <name>New York City 2</name>
+      <visibility>0</visibility>
+      <description>New York City</description>
+      <Point>
+        <coordinates>-74.0060000000,40.7140000000</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
 </kml>

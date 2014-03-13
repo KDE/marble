@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-<Placemark>
-  <name>New York City</name>
-  <visibility>0</visibility>
-  <description>New York City</description>
-  <TimeStamp>
-    <when>2011-04-12T12:30:45</when>
-  </TimeStamp>
-  <Point>
-    <coordinates>-74.0063930000,40.7141720000</coordinates>
-  </Point>
-</Placemark>
+  <Placemark>
+    <name>New York City</name>
+    <visibility>0</visibility>
+    <description>New York City</description>
+    <TimeStamp>
+      <when>2011-04-12T12:30:45</when>
+    </TimeStamp>
+    <Point>
+      <coordinates>-74.0063930000,40.7141720000</coordinates>
+    </Point>
+  </Placemark>
 </kml>

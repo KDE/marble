@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-<gx:Tour>
-  <name>Play me!</name>
-  <gx:Playlist>
-    <gx:FlyTo>
-      <gx:duration>2.55</gx:duration>
-      <gx:flyToMode>smooth</gx:flyToMode>
-      <Camera>
-	    <longitude>-113.0844480000</longitude>
-	    <latitude>36.5670810000</latitude>
-	    <altitude>41277.571403</altitude>
-	    <altitudeMode>absolute</altitudeMode>
-      </Camera>
-    </gx:FlyTo>
-    <gx:Wait id="wait">
-      <gx:duration>10.5</gx:duration>
-    </gx:Wait>
-    <gx:SoundCue id="demoSound">
-      <href>http://www.example.com/audio/trumpets.mp3</href>
-      <gx:delayedStart>15</gx:delayedStart>
-    </gx:SoundCue>
-    <gx:TourControl id="myTourControl">
-      <gx:playMode>pause</gx:playMode>
-    </gx:TourControl>
-    <gx:TourControl id="myOtherTourControl">
-      <gx:playMode>play</gx:playMode>
-    </gx:TourControl>
-  </gx:Playlist>
-</gx:Tour>
+  <gx:Tour>
+    <name>Play me!</name>
+    <gx:Playlist>
+      <gx:FlyTo>
+        <gx:duration>2.55</gx:duration>
+        <gx:flyToMode>smooth</gx:flyToMode>
+        <Camera>
+          <longitude>-113.0844480000</longitude>
+          <latitude>36.5670810000</latitude>
+          <altitude>41277.571403</altitude>
+          <altitudeMode>absolute</altitudeMode>
+        </Camera>
+      </gx:FlyTo>
+      <gx:Wait id="wait">
+        <gx:duration>10.5</gx:duration>
+      </gx:Wait>
+      <gx:SoundCue id="demoSound">
+        <href>http://www.example.com/audio/trumpets.mp3</href>
+        <gx:delayedStart>15</gx:delayedStart>
+      </gx:SoundCue>
+      <gx:TourControl id="myTourControl">
+        <gx:playMode>pause</gx:playMode>
+      </gx:TourControl>
+      <gx:TourControl id="myOtherTourControl">
+        <gx:playMode>play</gx:playMode>
+      </gx:TourControl>
+    </gx:Playlist>
+  </gx:Tour>
 </kml>

@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document>
-        <name>Track</name>
-        <description>Some description here</description>
-        <Style id="track">
-            <BalloonStyle>
-                <text>Forgot to add a BalloonStyle with regular text, not regex :)</text>
-                <displayMode>default</displayMode> 
-            </BalloonStyle>
-            <IconStyle>
-                <color>aabbccdd</color>
-                <colorMode>random</colorMode>
-                <scale>1.000000</scale>
-                <Icon>
-                    <href>/home/username/marble/export/share/marble/data/bitmaps/default_location.png</href>
-                </Icon>
-                <hotSpot x="128.500000" y="128.500000" xunits="insetPixels" yunits="insetPixels"/>
-            </IconStyle>
-            <LineStyle>
-                <color>c80008e2</color>
-                <colorMode>random</colorMode>
-                <width>4</width>
-            </LineStyle>
-            <ListStyle>
-                <listItemType>radioFolder</listItemType>
-                <bgColor>ff336699</bgColor>
-                <ItemIcon>
-                    <state>fetching0</state>
-                    <href>../../data/bitmaps/wikipedia.png</href>
-                </ItemIcon>
-            </ListStyle>
-            <PolyStyle>
-                <color>ffaabbdd</color>
-                <colorMode>random</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>       
-        <StyleMap id="map-track">
-            <Pair>
-                <key>normal</key>
-                <styleUrl>#track</styleUrl>
-            </Pair>
-        </StyleMap>
-        <Placemark>
-            <name>Track Track</name>
-            <styleUrl>#map-track</styleUrl>
-            <gx:MultiTrack>
-                <gx:Track/>
-                <gx:Track>
-                    <when>2014-02-27T05:14:01</when>
-                    <gx:coord>88.4159300000 22.5305680000 0.0000000000</gx:coord>
-                    <when>2014-02-27T05:14:01</when>
-                    <gx:coord>88.4105360000 22.5317960000 0.0000000000</gx:coord>
-                    <when>2014-02-27T05:14:01</when>
-                    <gx:coord>88.4051050000 22.5330300000 0.0000000000</gx:coord>
-                    <when>2014-02-27T05:14:02</when>
-                    <gx:coord>88.4032270000 22.5334380000 0.0000000000</gx:coord>
-                    <when>2014-02-27T05:14:02</when>
-                    <gx:coord>88.4031550000 22.5334750000 0.0000000000</gx:coord>
-                    <when>2014-02-27T05:14:02</when>
-                    <gx:coord>88.4031140000 22.5335300000 0.0000000000</gx:coord>
-                </gx:Track>
-            </gx:MultiTrack>
-        </Placemark>
-    </Document>
+  <Document>
+    <name>Track</name>
+    <description>Some description here</description>
+    <Style id="track">
+      <BalloonStyle>
+        <text>Forgot to add a BalloonStyle with regular text, not regex :)</text>
+        <displayMode>default</displayMode>
+      </BalloonStyle>
+      <IconStyle>
+        <color>aabbccdd</color>
+        <colorMode>random</colorMode>
+        <scale>1.000000</scale>
+        <Icon>
+          <href>/home/username/marble/export/share/marble/data/bitmaps/default_location.png</href>
+        </Icon>
+        <hotSpot x="128.500000" y="128.500000" xunits="insetPixels" yunits="insetPixels"/>
+      </IconStyle>
+      <LineStyle>
+        <color>c80008e2</color>
+        <colorMode>random</colorMode>
+        <width>4</width>
+      </LineStyle>
+      <ListStyle>
+        <listItemType>radioFolder</listItemType>
+        <bgColor>ff336699</bgColor>
+        <ItemIcon>
+          <state>fetching0</state>
+          <href>../../data/bitmaps/wikipedia.png</href>
+        </ItemIcon>
+      </ListStyle>
+      <PolyStyle>
+        <color>ffaabbdd</color>
+        <colorMode>random</colorMode>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <StyleMap id="map-track">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#track</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>Track Track</name>
+      <styleUrl>#map-track</styleUrl>
+      <gx:MultiTrack>
+        <gx:Track/>
+        <gx:Track>
+          <when>2014-02-27T05:14:01</when>
+          <gx:coord>88.4159300000 22.5305680000 0.0000000000</gx:coord>
+          <when>2014-02-27T05:14:01</when>
+          <gx:coord>88.4105360000 22.5317960000 0.0000000000</gx:coord>
+          <when>2014-02-27T05:14:01</when>
+          <gx:coord>88.4051050000 22.5330300000 0.0000000000</gx:coord>
+          <when>2014-02-27T05:14:02</when>
+          <gx:coord>88.4032270000 22.5334380000 0.0000000000</gx:coord>
+          <when>2014-02-27T05:14:02</when>
+          <gx:coord>88.4031550000 22.5334750000 0.0000000000</gx:coord>
+          <when>2014-02-27T05:14:02</when>
+          <gx:coord>88.4031140000 22.5335300000 0.0000000000</gx:coord>
+        </gx:Track>
+      </gx:MultiTrack>
+    </Placemark>
+  </Document>
 </kml>

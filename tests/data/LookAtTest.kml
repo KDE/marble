@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-<gx:Tour>
-  <name>Play me!</name>
-  <gx:Playlist>
-    <gx:FlyTo>
-      <gx:duration>2.55</gx:duration>
-		<LookAt>
-			<gx:TimeStamp>
-                <when>1997-07-16T07:30:15Z</when>
-            </gx:TimeStamp>
-            <gx:TimeSpan>
-                <begin>2010-05-28T02:02:09Z</begin>
-                <end>2010-05-28T02:02:56Z</end>
-            </gx:TimeSpan>
-            <longitude>-122.2055440000</longitude>
-			<latitude>37.3733860000</latitude>
-			<altitude>0.0000000000</altitude>
-			<range>1300.0000000000</range>
-		</LookAt>
-    </gx:FlyTo>
-    <gx:Wait>
-      <gx:duration>10.5</gx:duration>
-    </gx:Wait>
-    <gx:SoundCue id="demoSound">
-      <href>http://www.example.com/audio/trumpets.mp3</href>
-      <gx:delayedStart>15</gx:delayedStart>
-    </gx:SoundCue>
-    <gx:TourControl id="myTourControl">
-      <gx:playMode>pause</gx:playMode>
-    </gx:TourControl>
-  </gx:Playlist>
-</gx:Tour>
+  <gx:Tour>
+    <name>Play me!</name>
+    <gx:Playlist>
+      <gx:FlyTo>
+        <gx:duration>2.55</gx:duration>
+        <LookAt>
+          <gx:TimeStamp>
+            <when>1997-07-16T07:30:15Z</when>
+          </gx:TimeStamp>
+          <gx:TimeSpan>
+            <begin>2010-05-28T02:02:09Z</begin>
+            <end>2010-05-28T02:02:56Z</end>
+          </gx:TimeSpan>
+          <longitude>-122.2055440000</longitude>
+          <latitude>37.3733860000</latitude>
+          <altitude>0.0000000000</altitude>
+          <range>1300.0000000000</range>
+        </LookAt>
+      </gx:FlyTo>
+      <gx:Wait>
+        <gx:duration>10.5</gx:duration>
+      </gx:Wait>
+      <gx:SoundCue id="demoSound">
+        <href>http://www.example.com/audio/trumpets.mp3</href>
+        <gx:delayedStart>15</gx:delayedStart>
+      </gx:SoundCue>
+      <gx:TourControl id="myTourControl">
+        <gx:playMode>pause</gx:playMode>
+      </gx:TourControl>
+    </gx:Playlist>
+  </gx:Tour>
 </kml>

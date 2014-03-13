@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-<Folder>
+  <Folder>
     <PhotoOverlay>
-        <rotation>12.355</rotation>
-        <ViewVolume>
-            <near>1000</near>
-            <leftFov>-60</leftFov>
-            <rightFov>60</rightFov>
-            <bottomFov>-45</bottomFov>
-            <topFov>45</topFov>
-        </ViewVolume>
-        <ImagePyramid>
-            <tileSize>219</tileSize>
-            <maxWidth>22</maxWidth>
-            <maxHeight>36</maxHeight>
-            <gridOrigin>lowerLeft</gridOrigin>
-        </ImagePyramid>
-        <Point>
-            <coordinates>45.7866500000,0.6565000000</coordinates>
-        </Point>
-        <shape>sphere</shape>
+      <rotation>12.355</rotation>
+      <ViewVolume>
+        <near>1000</near>
+        <leftFov>-60</leftFov>
+        <rightFov>60</rightFov>
+        <bottomFov>-45</bottomFov>
+        <topFov>45</topFov>
+      </ViewVolume>
+      <ImagePyramid>
+        <tileSize>219</tileSize>
+        <maxWidth>22</maxWidth>
+        <maxHeight>36</maxHeight>
+        <gridOrigin>lowerLeft</gridOrigin>
+      </ImagePyramid>
+      <Point>
+        <coordinates>45.7866500000,0.6565000000</coordinates>
+      </Point>
+      <shape>sphere</shape>
     </PhotoOverlay>
     <PhotoOverlay>
-        <rotation>31.235</rotation>
-        <ViewVolume>
-            <near>500</near>
-            <leftFov>-30</leftFov>
-            <rightFov>20</rightFov>
-            <bottomFov>-15</bottomFov>
-            <topFov>25</topFov>
-        </ViewVolume>
-        <ImagePyramid>
-            <tileSize>312</tileSize>
-            <maxWidth>62</maxWidth>
-            <maxHeight>62</maxHeight>
-            <gridOrigin>upperLeft</gridOrigin>
-        </ImagePyramid>
-        <Point>
-            <coordinates>45.7866500000,0.6565000000</coordinates>
-        </Point>
-        <shape>cylinder</shape>
+      <rotation>31.235</rotation>
+      <ViewVolume>
+        <near>500</near>
+        <leftFov>-30</leftFov>
+        <rightFov>20</rightFov>
+        <bottomFov>-15</bottomFov>
+        <topFov>25</topFov>
+      </ViewVolume>
+      <ImagePyramid>
+        <tileSize>312</tileSize>
+        <maxWidth>62</maxWidth>
+        <maxHeight>62</maxHeight>
+        <gridOrigin>upperLeft</gridOrigin>
+      </ImagePyramid>
+      <Point>
+        <coordinates>45.7866500000,0.6565000000</coordinates>
+      </Point>
+      <shape>cylinder</shape>
     </PhotoOverlay>
-</Folder>
+  </Folder>
 </kml>

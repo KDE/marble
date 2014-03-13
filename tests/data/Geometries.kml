@@ -1,116 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-<Document>
+  <Document>
     <Placemark>
-        <name>New York City</name>
-        <description>New York City</description>
-        <Region>
-            <LatLonAltBox>
-                <north>42</north>
-                <south>40</south>
-                <east>-73</east>
-                <west>-75</west>
-                <minAltitude>-1</minAltitude>
-                <maxAltitude>1</maxAltitude>
-                <altitudeMode>absolute</altitudeMode>
-            </LatLonAltBox>
-            <Lod>
-                <minLodPixels>10</minLodPixels>
-                <maxLodPixels>10000</maxLodPixels>
-                <minFadeExtent>5</minFadeExtent>
-                <maxFadeExtent>5</maxFadeExtent>
-            </Lod>
-        </Region>
-        <Point>
-            <coordinates>-74.0063930000,40.7141720000,1500.1234567890</coordinates>
-        </Point>
+      <name>New York City</name>
+      <description>New York City</description>
+      <Region>
+        <LatLonAltBox>
+          <north>42</north>
+          <south>40</south>
+          <east>-73</east>
+          <west>-75</west>
+          <minAltitude>-1</minAltitude>
+          <maxAltitude>1</maxAltitude>
+          <altitudeMode>absolute</altitudeMode>
+        </LatLonAltBox>
+        <Lod>
+          <minLodPixels>10</minLodPixels>
+          <maxLodPixels>10000</maxLodPixels>
+          <minFadeExtent>5</minFadeExtent>
+          <maxFadeExtent>5</maxFadeExtent>
+        </Lod>
+      </Region>
+      <Point>
+        <coordinates>-74.0063930000,40.7141720000,1500.1234567890</coordinates>
+      </Point>
     </Placemark>
     <Folder>
-        <GroundOverlay>
-            <LatLonBox>
-                <north>37.919</north>
-                <south>37.465</south>
-                <east>15.358</east>
-                <west>14.601</west>
-                <rotation>313.231</rotation>
-            </LatLonBox>
-            <gx:LatLonQuad>
-                <coordinates>81.601,44.161 83.529,43.665 82.947,44.248 81.509,44.321</coordinates>
-            </gx:LatLonQuad>
-        </GroundOverlay>
+      <GroundOverlay>
+        <LatLonBox>
+          <north>37.919</north>
+          <south>37.465</south>
+          <east>15.358</east>
+          <west>14.601</west>
+          <rotation>313.231</rotation>
+        </LatLonBox>
+        <gx:LatLonQuad>
+          <coordinates>81.601,44.161 83.529,43.665 82.947,44.248 81.509,44.321</coordinates>
+        </gx:LatLonQuad>
+      </GroundOverlay>
     </Folder>
     <Placemark>
+      <LineString>
+        <coordinates>23.2354000000,9.1300000000,0.00 17.1230000000,33.5830000000,0.00 -9.2310000000,8.2300000000,200.23</coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <LineString>
+        <coordinates>23.2354000000,9.1300000000 17.1230000000,33.5830000000 -9.2310000000,8.2300000000</coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <LinearRing>
+        <coordinates>34.4621300000,9.6382900000 23.2000000000,12.3345000000 24.2321300000,-32.2382900000 13.2000052000,2.3045010000 24.1221300000,19.7382900000 31.2233000000,21.0045100000 41.4221300000,12.6382900000 21.2000000000,17.5330000000</coordinates>
+      </LinearRing>
+    </Placemark>
+    <Placemark>
+      <name>MultiGeometry</name>
+      <MultiGeometry>
+        <Point>
+          <coordinates>31.2310000000,29.1234567890</coordinates>
+        </Point>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>-122.3662780000,37.8188440000 -122.3652480000,37.8192670000 -122.3656400000,37.8198610000 -122.3666690000,37.8194290000 -122.3662780000,37.8188440000</coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+          <innerBoundaryIs>
+            <LinearRing>
+              <coordinates>-122.3662120000,37.8189770000 -122.3654240000,37.8192940000 -122.3657040000,37.8197310000 -122.3664880000,37.8194020000 -122.3662120000,37.8189770000</coordinates>
+            </LinearRing>
+          </innerBoundaryIs>
+        </Polygon>
         <LineString>
-            <coordinates>23.2354000000,9.1300000000,0.00 17.1230000000,33.5830000000,0.00 -9.2310000000,8.2300000000,200.23</coordinates>
+          <coordinates>-122.4425587930,37.8066641860 -122.4428379590,37.8066357830</coordinates>
         </LineString>
-    </Placemark>
-    <Placemark>
         <LineString>
-            <coordinates>23.2354000000,9.1300000000 17.1230000000,33.5830000000 -9.2310000000,8.2300000000</coordinates>
+          <coordinates>-122.4425509770,37.8066258806 -122.4428340530,37.8065999493</coordinates>
         </LineString>
+        <Model>
+          <altitudeMode>relativeToGround</altitudeMode>
+          <Location>
+            <longitude>-105.27</longitude>
+            <latitude>40</latitude>
+            <altitude>23.4</altitude>
+          </Location>
+          <Orientation>
+            <heading>1</heading>
+            <tilt>2</tilt>
+            <roll>3</roll>
+          </Orientation>
+          <Scale>
+            <x>3</x>
+            <y>4</y>
+            <z>5</z>
+          </Scale>
+          <Link>
+            <href>MackyBldg.kmz/files/CU Macky.dae</href>
+            <refreshMode>onExpire</refreshMode>
+            <refreshInterval>4</refreshInterval>
+            <viewRefreshTime>4</viewRefreshTime>
+            <viewBoundScale>1</viewBoundScale>
+            <viewFormat>BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]</viewFormat>
+          </Link>
+          <ResourceMap>
+            <Alias>
+              <sourceHref>../files/CU-Macky-4sideturretnoCulling.jpg</sourceHref>
+              <targetHref>../files/CU-Macky-4sideturretnoCulling.jpg</targetHref>
+            </Alias>
+          </ResourceMap>
+        </Model>
+      </MultiGeometry>
     </Placemark>
-    <Placemark>
-        <LinearRing>
-            <coordinates>34.4621300000,9.6382900000 23.2000000000,12.3345000000 24.2321300000,-32.2382900000 13.2000052000,2.3045010000 24.1221300000,19.7382900000 31.2233000000,21.0045100000 41.4221300000,12.6382900000 21.2000000000,17.5330000000</coordinates>
-        </LinearRing>
-    </Placemark>
-    <Placemark>
-        <name>MultiGeometry</name>
-        <MultiGeometry>
-            <Point>
-                <coordinates>31.2310000000,29.1234567890</coordinates>
-            </Point>
-            <Polygon>
-                <outerBoundaryIs>
-                    <LinearRing>
-                        <coordinates>-122.3662780000,37.8188440000 -122.3652480000,37.8192670000 -122.3656400000,37.8198610000 -122.3666690000,37.8194290000 -122.3662780000,37.8188440000</coordinates>
-                    </LinearRing>
-                </outerBoundaryIs>
-                <innerBoundaryIs>
-                    <LinearRing>
-                        <coordinates>-122.3662120000,37.8189770000 -122.3654240000,37.8192940000 -122.3657040000,37.8197310000 -122.3664880000,37.8194020000 -122.3662120000,37.8189770000</coordinates>
-                    </LinearRing>
-                </innerBoundaryIs>
-            </Polygon>
-            <LineString>
-                <coordinates>-122.4425587930,37.8066641860 -122.4428379590,37.8066357830</coordinates>
-            </LineString>
-	        <LineString>
-                <coordinates>-122.4425509770,37.8066258806 -122.4428340530,37.8065999493</coordinates>
-            </LineString>
-	        <Model>
-                <altitudeMode>relativeToGround</altitudeMode>
-                <Location>
-                    <longitude>-105.27</longitude>
-                    <latitude>40</latitude>
-                    <altitude>23.4</altitude>
-                </Location>
-                <Orientation>
-                    <heading>1</heading>
-                    <tilt>2</tilt>
-                    <roll>3</roll>
-                </Orientation>
-                <Scale>
-                    <x>3</x>
-                    <y>4</y>
-                    <z>5</z>
-                </Scale>
-                <Link>
-                    <href>MackyBldg.kmz/files/CU Macky.dae</href>
-                    <refreshMode>onExpire</refreshMode>
-                    <refreshInterval>4</refreshInterval>
-                    <viewRefreshTime>4</viewRefreshTime>
-                    <viewBoundScale>1</viewBoundScale>
-                    <viewFormat>BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]</viewFormat>
-                </Link>
-                <ResourceMap>
-                    <Alias>
-                        <sourceHref>../files/CU-Macky-4sideturretnoCulling.jpg</sourceHref>
-                        <targetHref>../files/CU-Macky-4sideturretnoCulling.jpg</targetHref>
-                    </Alias>
-                </ResourceMap>
-            </Model>
-        </MultiGeometry>
-    </Placemark>
-</Document>
+  </Document>
 </kml>
