@@ -619,7 +619,9 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     panelActions << mapViewDock->toggleViewAction();
     panelActions << fileViewDock->toggleViewAction();
     panelActions << legendDock->toggleViewAction();
-    panelActions << tourDock->toggleViewAction();
+    // Hidden from the menu for Marble 1.8 but still
+    // available in the context menu for the curious
+    //panelActions << tourDock->toggleViewAction();
 
     // Local list of panel view toggle actions
     m_panelActions << routingDock->toggleViewAction();
@@ -628,7 +630,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     m_panelActions << mapViewDock->toggleViewAction();
     m_panelActions << fileViewDock->toggleViewAction();
     m_panelActions << legendDock->toggleViewAction();
-    m_panelActions << tourDock->toggleViewAction();
+    //m_panelActions << tourDock->toggleViewAction();
     foreach( QAction* action, m_panelActions ) {
         m_panelVisibility << action->isVisible();
     }
