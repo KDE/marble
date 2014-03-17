@@ -273,13 +273,13 @@ void TestEquality::cameraTest()
     camera1.setRoll(300);
     camera1.setTilt(400);
 
-    camera1.setAltitudeMode(Marble::ClampToGround);
-    camera1.setAltitude(100);
-    camera1.setLatitude(100);
-    camera1.setLongitude(100);
-    camera1.setHeading(200);
-    camera1.setRoll(300);
-    camera1.setTilt(400);
+    camera2.setAltitudeMode(Marble::ClampToGround);
+    camera2.setAltitude(100);
+    camera2.setLatitude(100);
+    camera2.setLongitude(100);
+    camera2.setHeading(200);
+    camera2.setRoll(300);
+    camera2.setTilt(400);
 
     QCOMPARE( camera1, camera1 );
     QCOMPARE( camera2, camera2 );
