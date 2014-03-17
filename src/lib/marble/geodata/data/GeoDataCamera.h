@@ -100,10 +100,6 @@ public:
 
     void setTilt(qreal tilt);
 
-    AltitudeMode altitudeMode() const;
-
-    void setAltitudeMode(const AltitudeMode altitudeMode);
-
     void setCoordinates( const GeoDataCoordinates& coordinates );
 
     /// Provides type information for downcasting a GeoNode

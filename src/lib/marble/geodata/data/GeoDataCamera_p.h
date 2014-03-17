@@ -28,7 +28,6 @@ class GeoDataCameraPrivate
           m_roll( 0.0 ),
           m_heading( 0.0 ),
           m_tilt( 0.0 ),
-          m_altitudeMode(),
           ref( 1 )
     {
     }
@@ -37,7 +36,6 @@ class GeoDataCameraPrivate
     qreal m_roll;
     qreal m_heading;
     qreal m_tilt;
-    AltitudeMode m_altitudeMode;
 
     QAtomicInt ref;
 };

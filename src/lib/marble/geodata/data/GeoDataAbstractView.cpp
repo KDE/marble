@@ -16,14 +16,25 @@ namespace Marble {
 class GeoDataAbstractViewPrivate
 {
 public:
+    GeoDataAbstractViewPrivate();
+
     GeoDataTimeSpan m_timeSpan;
     GeoDataTimeStamp m_timeStamp;
+    AltitudeMode m_altitudeMode;
 };
 
-GeoDataAbstractView::GeoDataAbstractView() :
-    d( new GeoDataAbstractViewPrivate )
+GeoDataAbstractViewPrivate::GeoDataAbstractViewPrivate() :
+    m_timeSpan(),
+    m_timeStamp(),
+    m_altitudeMode( ClampToGround )
 {
-    // nothing to do
+    // do nothing
+}
+
+GeoDataAbstractView::GeoDataAbstractView() :
+    d( new GeoDataAbstractViewPrivate() )
+{
+    // do nothing
 }
 
 GeoDataAbstractView::~GeoDataAbstractView()
@@ -73,6 +84,16 @@ const GeoDataTimeStamp &GeoDataAbstractView::timeStamp() const
 void GeoDataAbstractView::setTimeStamp( const GeoDataTimeStamp &timeStamp )
 {
     d->m_timeStamp = timeStamp;
+}
+
+AltitudeMode GeoDataAbstractView::altitudeMode() const
+{
+    return d->m_altitudeMode;
+}
+
+void GeoDataAbstractView::setAltitudeMode(const AltitudeMode altitudeMode)
+{
+    d->m_altitudeMode = altitudeMode;
 }
 
 }

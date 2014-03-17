@@ -11,6 +11,7 @@
 #ifndef MARBLE_GEODATAABSTRACTVIEW_H
 #define MARBLE_GEODATAABSTRACTVIEW_H
 
+#include "MarbleGlobal.h"
 #include "GeoDataObject.h"
 #include "GeoDataTimeSpan.h"
 #include "GeoDataTimeStamp.h"
@@ -49,6 +50,10 @@ class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
     const GeoDataTimeStamp& timeStamp() const;
 
     void setTimeStamp( const GeoDataTimeStamp &timeStamp );
+
+    AltitudeMode altitudeMode() const;
+
+    void setAltitudeMode(const AltitudeMode altitudeMode);
 
 private:
     GeoDataAbstractViewPrivate* const d;

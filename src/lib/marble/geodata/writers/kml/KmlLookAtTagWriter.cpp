@@ -16,6 +16,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlGroundOverlayWriter.h"
 
 namespace Marble
 {
@@ -49,6 +50,7 @@ bool KmlLookAtTagWriter::write( const GeoNode *node,
     writer.writeElement( "latitude", QString::number( lookAt->latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
     writer.writeElement( "altitude", QString::number( lookAt->altitude(), 'f', 10 ) );
     writer.writeElement( "range", QString::number( lookAt->range(), 'f', 10 ) );
+    KmlGroundOverlayWriter::writeAltitudeMode( writer, lookAt->altitudeMode() );
 
     writer.writeEndElement();
 
