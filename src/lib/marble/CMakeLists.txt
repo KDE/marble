@@ -43,7 +43,7 @@ INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 
-set(GENERIC_LIB_VERSION "0.17.20")
+set(GENERIC_LIB_VERSION "0.17.95")
 set(GENERIC_LIB_SOVERSION "18")
 
 if (QTONLY)
