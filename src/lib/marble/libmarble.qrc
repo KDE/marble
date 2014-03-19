@@ -82,6 +82,11 @@
         <file alias="marble/webpopup/arrow2_vertical_topright.png">../../../data/bitmaps/webpopup/arrow_vertical_topright.png</file>
         <file alias="marble/webpopup/arrow2_vertical_topright_shadow.png">../../../data/bitmaps/webpopup/arrow_vertical_topright_shadow.png</file>
         <file alias="marble/frames/shadowframe.png">../../../data/bitmaps/shadowframe.png</file>
+        <file alias="marble/flag.png">../../../data/bitmaps/flag.png</file>
+        <file alias="marble/document-edit.png">../../../data/bitmaps/document-edit.png</file>
+        <file alias="marble/media-playback-pause.png">../../../data/bitmaps/media-playback-pause.png</file>
+        <file alias="marble/player-time.png">../../../data/bitmaps/player-time.png</file>
+        <file alias="marble/audio-x-generic.png">../../../data/bitmaps/audio-x-generic.png</file>
     </qresource>
     <qresource prefix="/marble/webpopup">
         <file alias="deco_places.png">webpopup/marble_deco_places.png</file>
