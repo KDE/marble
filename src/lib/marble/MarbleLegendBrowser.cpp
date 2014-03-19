@@ -43,7 +43,6 @@
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 #include "TemplateDocument.h"
-
 #include "MarbleDirs.h"
 
 namespace Marble
@@ -184,7 +183,11 @@ void MarbleLegendBrowser::injectCheckBoxChecker()
 
 void MarbleLegendBrowser::openLinkExternally( const QUrl &url )
 {
-    QDesktopServices::openUrl( url );
+    if ( url.scheme() == "tour" ) {
+        emit tourLinkClicked( "maps/"+url.host() + url.path() );
+    } else {
+        QDesktopServices::openUrl( url );
+    }
 }
 
 bool MarbleLegendBrowser::event( QEvent * event )

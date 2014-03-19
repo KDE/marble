@@ -39,6 +39,7 @@ class MARBLE_EXPORT TourWidget : public QWidget
     ~TourWidget();
 
     void setMarbleWidget( MarbleWidget *widget );
+    bool openTour( const QString &filename );
 
 public Q_SLOTS:
     void startPlaying();

@@ -39,6 +39,8 @@ LegendWidget::LegendWidget( QWidget *parent, Qt::WindowFlags f )
 {
     d->setupUi( this );
     layout()->setMargin( 0 );
+    connect( d->m_marbleLegendBrowser, SIGNAL(tourLinkClicked( const QString& )),
+             this, SIGNAL(tourLinkClicked( const QString& ) ) );
 }
 
 LegendWidget::~LegendWidget()

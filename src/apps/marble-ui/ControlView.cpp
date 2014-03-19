@@ -40,6 +40,7 @@
 #include "GeoUriParser.h"
 #include "MarbleWidget.h"
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "MarbleMap.h"
 #include "MapThemeManager.h"
@@ -73,7 +74,8 @@ ControlView::ControlView( QWidget *parent )
      m_locationWidget( 0 ),
      m_conflictDialog( 0 ),
      m_togglePanelVisibilityAction( 0 ),
-     m_isPanelVisible( true )
+     m_isPanelVisible( true ),
+     m_tourWidget( 0 )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
 
@@ -534,7 +536,9 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     legendDock->setObjectName( "legendDock" );
     legendDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
     LegendWidget* legendWidget = new LegendWidget( this );
-    legendWidget->setMarbleModel( marbleModel() );
+    legendWidget->setMarbleModel( m_marbleWidget->model() );
+    connect( legendWidget, SIGNAL(tourLinkClicked(QString)),
+             this, SLOT(handleTourLinkClicked(QString)) );
     connect( legendWidget, SIGNAL(propertyValueChanged(QString,bool)),
              marbleWidget(), SLOT(setPropertyValue(QString,bool)) );
     legendDock->setWidget( legendWidget );
@@ -602,9 +606,9 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     QDockWidget *tourDock = new QDockWidget( tr( "Tour" ), this );
     tourDock->setObjectName( "tourDock" );
     tourDock->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-    TourWidget *tourWidget = new TourWidget( this );
-    tourWidget->setMarbleWidget( marbleWidget() );
-    tourDock->setWidget( tourWidget );
+    m_tourWidget = new TourWidget( this );
+    m_tourWidget->setMarbleWidget( marbleWidget() );
+    tourDock->setWidget( m_tourWidget );
     mainWindow->addDockWidget( Qt::LeftDockWidgetArea, tourDock );
     tourDock->hide();
 
@@ -734,6 +738,16 @@ void ControlView::togglePanelVisibility()
         // Change Menu Item Text
         m_togglePanelVisibilityAction->setText( tr("Hide &All Panels") );
         m_isPanelVisible = true;
+    }
+}
+
+void ControlView::handleTourLinkClicked(const QString& path)
+{
+    QString tourPath = MarbleDirs::path( path );
+    if ( !tourPath.isEmpty() ) {
+        if ( m_tourWidget->openTour( tourPath ) ) {
+            m_tourWidget->startPlaying();
+        }
     }
 }
 

@@ -72,6 +72,7 @@ public:
 
 public:
     void openFile();
+    bool openFile( const QString &filename );
     void createTour();
     void saveTour();
     void saveTourAs();
@@ -323,6 +324,19 @@ void TourWidgetPrivate::openFile()
             openDocument( document );
         }
     }
+}
+
+bool TourWidgetPrivate::openFile( const QString &filename )
+{
+    if ( overrideModifications() ) {
+        if ( !filename.isEmpty() ) {
+            ParsingRunnerManager manager( m_widget->model()->pluginManager() );
+            GeoDataDocument* document = manager.openFile( filename );
+            return openDocument( document );
+        }
+    }
+
+    return false;
 }
 
 GeoDataTour *TourWidgetPrivate::findTour( GeoDataFeature *feature ) const
@@ -636,6 +650,11 @@ bool TourWidgetPrivate::overrideModifications()
         delete dialog;
     }
     return true;
+}
+
+bool TourWidget::openTour( const QString &filename)
+{
+    return d->openFile( filename );
 }
 
 }

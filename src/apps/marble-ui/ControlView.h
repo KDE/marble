@@ -35,6 +35,7 @@ class QPrinter;
 namespace Marble
 {
 
+class TourWidget;
 class CurrentLocationWidget;
 class MapThemeManager;
 class ConflictDialog;
@@ -119,6 +120,8 @@ class ControlView : public QWidget
      */
     void togglePanelVisibility();
 
+    void handleTourLinkClicked( const QString &path );
+
 signals:
     void showMapWizard();
     void showUploadDialog();
@@ -156,6 +159,7 @@ private Q_SLOTS:
     QList<QAction*>  m_panelActions;
     QList<bool>      m_panelVisibility;
     bool             m_isPanelVisible;
+    TourWidget      *m_tourWidget;
 };
 
 }

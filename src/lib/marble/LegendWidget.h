@@ -33,13 +33,14 @@ class MARBLE_EXPORT LegendWidget : public QWidget
     ~LegendWidget();
 
     /**
-     * @brief Set a MarbleWidget associated to this widget.
-     * @param widget  the MarbleWidget to be set.
+     * @brief Set a MarbleModel associated to this widget.
+     * @param model  the MarbleModel to be set.
      */
     void setMarbleModel( MarbleModel *model );
 
  Q_SIGNALS:
     void propertyValueChanged( const QString &propertyName, bool value );
+    void tourLinkClicked( const QString &url );
 
  private:
     Q_DISABLE_COPY( LegendWidget )
