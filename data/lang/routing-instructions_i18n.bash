@@ -29,6 +29,7 @@ svn -q export "${prefix}/subdirs" "${workdir}/subdirs"
 untranslated=""
 for i in $(cat "${workdir}/subdirs")
 do
+        test -e "${workdir}/marble_qt.po" && rm "${workdir}/marble_qt.po"
 	if svn -q export "${prefix}/${i}/messages/kdeedu/marble_qt.po" "${workdir}/marble_qt.po" 2>/dev/null
         then
           # Limit translations to RoutingInstruction.cpp
