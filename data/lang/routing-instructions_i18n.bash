@@ -33,7 +33,7 @@ do
         then
           # Limit translations to RoutingInstruction.cpp
           # Assumption: All translations needed for routing-instructions are contained in this file
-          grep -A 4 "#: src/lib/routing/instructions/RoutingInstruction.cpp:" "${workdir}/marble_qt.po" | sed 's/^--$//' > "${workdir}/marble_fi.po"
+          grep -A 4 "#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:" "${workdir}/marble_qt.po" | sed 's/^--$//' > "${workdir}/marble_fi.po"
 
           # Convert the gettext format to Qt's ts format. Set the translation context to QObject
           # Assumption: All translated strings are invoked by QObject::tr (from a private class)
