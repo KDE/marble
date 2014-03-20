@@ -1,9 +1,10 @@
-         This file describes how to build and install Marble
+This file describes how to build and install Marble
 
 The most recent version of this file can be found at:
 
-http://edu.kde.org/marble/obtain.php
+http://marble.kde.org/sources.php
 
+Please refer to the online version above if possible.
 
 NOTE: This file describes how to build Marble as a stand-alone
       application.  If you are building Marble as part of the KDE-EDU
@@ -13,16 +14,14 @@ NOTE: This file describes how to build Marble as a stand-alone
 
 
 Prerequisites for building Marble are:
- - Qt 4.5 or newer
+ - Qt 4.7 or newer
  - cmake version 2.4 or newer
  - (optional): kdelibs from the KDE subversion repositories.
- - gpsd-2.37 or newer. Older versions of gpsd had C++ bindings
-    removed, how far back I don't know but 2.36 was one of them.
-    Great thanks to the gpsd developers for adding them back.
+ - other dependencies are optional
 
-A checkout of Marble. You can check out Marble using SVN via the command:
+A checkout of Marble. You can check out Marble using GIT via the command:
 
-svn co svn://anonsvn.kde.org/home/kde/trunk/KDE/kdeedu/marble
+git clone git://anongit.kde.org/marble ~/marble/sources
 
 
 You can build and install Marble in two different ways:
@@ -54,14 +53,14 @@ By default, marble is installed into /usr/local.  If you want to
 install it into any other directory, add
 -DCMAKE_INSTALL_PREFIX=/path/to/install/into like in this example:
 
-  cmake -DQTONLY=ON -DCMAKE_INSTALL_PREFIX=/home/ingwa/apps ../marble
+  cmake -DQTONLY=ON -DCMAKE_INSTALL_PREFIX=~/apps ../marble
 
 If you have no write permission to the installation directory of cmake
 (because you have a system installed cmake) you need to add another
-parameter -DPACKAGE_ROOT_PREFIX=/home/ingwa/apps to the cmake command:
+parameter -DPACKAGE_ROOT_PREFIX=~/apps to the cmake command:
 
-  cmake -DQTONLY=ON -DCMAKE_INSTALL_PREFIX=/home/ingwa/apps \
-        -DPACKAGE_ROOT_PREFIX=/home/ingwa/apps ../marble
+  cmake -DQTONLY=ON -DCMAKE_INSTALL_PREFIX=~/apps \
+        -DPACKAGE_ROOT_PREFIX=~/apps ../marble
 
 To modify the position of the data directory at compile time, see the notes
 at 3.1 .
