@@ -42,7 +42,7 @@ namespace Marble
 class TourItemDelegate : public QStyledItemDelegate
 {
 public:
-    TourItemDelegate(QListView* view, GeoDataTreeModel* model, MarbleWidget* marbleWidget );
+    TourItemDelegate();
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
@@ -56,10 +56,6 @@ public:
 private:
 
     QRect position(Element element, const QStyleOptionViewItem &option ) const;
-
-    GeoDataTreeModel* m_model;
-    QListView* m_view;
-    MarbleWidget* m_marbleWidget;
 };
 
 class TourWidgetPrivate
@@ -138,13 +134,10 @@ TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
             this, SLOT(stopPlaying()));
 
     d->m_tourUi.m_toolBarPlayback->setDisabled(true);
-    d->m_tourUi.m_listView->setItemDelegate(new TourItemDelegate(d->m_tourUi.m_listView, &d->m_model, d->m_widget));
+    d->m_tourUi.m_listView->setItemDelegate(new TourItemDelegate());
 }
 
-TourItemDelegate::TourItemDelegate(QListView* view, GeoDataTreeModel* model, MarbleWidget* marbleWidget) :
-    m_model( model ),
-    m_view( view ),
-    m_marbleWidget( marbleWidget )
+TourItemDelegate::TourItemDelegate()
 {
     // nothing to do
 }
