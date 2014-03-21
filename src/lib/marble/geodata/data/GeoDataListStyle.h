@@ -58,7 +58,7 @@ public:
 
     const GeoDataItemIcon* child( int ) const;
 
-    int childPosition( GeoDataItemIcon *child);
+    int childPosition( const GeoDataItemIcon *child ) const;
 
     void append( GeoDataItemIcon *other );
 

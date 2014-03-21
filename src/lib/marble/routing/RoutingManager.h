@@ -151,7 +151,7 @@ public:
     /**
      * Get color for standard route rendering
      */
-    QColor routeColorStandard();
+    QColor routeColorStandard() const;
 
     /**
      * Set color for highlighted route rendering
@@ -161,7 +161,7 @@ public:
     /**
      * Get color for highlighted route rendering
      */
-    QColor routeColorHighlighted();
+    QColor routeColorHighlighted() const;
 
     /**
      * Set color for alternative route rendering
@@ -171,7 +171,7 @@ public:
     /**
      * Get color for alternative route rendering
      */
-    QColor routeColorAlternative();
+    QColor routeColorAlternative() const;
 
     bool guidanceModeEnabled() const;
 

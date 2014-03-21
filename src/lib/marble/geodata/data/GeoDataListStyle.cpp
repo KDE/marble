@@ -94,9 +94,9 @@ const GeoDataItemIcon* GeoDataListStyle::child( int i ) const
     return d->m_vector.at(i);
 }
 
-int GeoDataListStyle::childPosition( GeoDataItemIcon* object )
+int GeoDataListStyle::childPosition( const GeoDataItemIcon* object ) const
 {
-    return d->m_vector.indexOf( object );
+    return d->m_vector.indexOf( const_cast<GeoDataItemIcon *>( object ) );
 }
 
 void GeoDataListStyle::append( GeoDataItemIcon *other )

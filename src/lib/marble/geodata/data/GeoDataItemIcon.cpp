@@ -48,7 +48,7 @@ GeoDataItemIcon &GeoDataItemIcon::operator=( const GeoDataItemIcon &other )
     return *this;
 }
 
-bool GeoDataItemIcon::operator==( const GeoDataItemIcon& other )
+bool GeoDataItemIcon::operator==( const GeoDataItemIcon& other ) const
 {
     return equals(other) &&
            d->m_state == other.d->m_state &&
@@ -56,7 +56,7 @@ bool GeoDataItemIcon::operator==( const GeoDataItemIcon& other )
            d->m_icon == other.d->m_icon;
 }
 
-bool GeoDataItemIcon::operator!=( const GeoDataItemIcon& other )
+bool GeoDataItemIcon::operator!=( const GeoDataItemIcon& other ) const
 {
     return !this->operator==(other);
 }

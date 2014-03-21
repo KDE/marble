@@ -489,7 +489,7 @@ void RoutingManager::setRouteColorStandard( QColor color )
     d->m_routeColorStandard = color;
 }
 
-QColor RoutingManager::routeColorStandard()
+QColor RoutingManager::routeColorStandard() const
 {
     return d->m_routeColorStandard;
 }
@@ -499,7 +499,7 @@ void RoutingManager::setRouteColorHighlighted( QColor color )
     d->m_routeColorHighlighted = color;
 }
 
-QColor RoutingManager::routeColorHighlighted()
+QColor RoutingManager::routeColorHighlighted() const
 {
     return d->m_routeColorHighlighted;
 }
@@ -509,7 +509,7 @@ void RoutingManager::setRouteColorAlternative( QColor color )
     d->m_routeColorAlternative = color;
 }
 
-QColor RoutingManager::routeColorAlternative()
+QColor RoutingManager::routeColorAlternative() const
 {
     return d->m_routeColorAlternative;
 }

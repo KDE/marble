@@ -58,7 +58,7 @@ AbstractDataPluginItem::~AbstractDataPluginItem()
     delete d;
 }
 
-QString AbstractDataPluginItem::target()
+QString AbstractDataPluginItem::target() const
 {
     return d->m_target;
 }
