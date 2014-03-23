@@ -94,12 +94,9 @@ public:
 
     QString format;
 
-    QString wmsProjection;
     QStringList wmsLegends;
 
     QString sourceImage;
-
-    QString dgmlOutput;
 };
 
 class PreviewDialog : public QDialog
@@ -261,7 +258,6 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     QDomElement firstLayer = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Layer" );
     QDomNodeList layers = firstLayer.elementsByTagName( "Layer" );
 
-    d->wmsProjection = firstLayer.firstChildElement( "SRS" ).text();
     d->uiWidget.listWidgetWmsMaps->clear();
     d->wmsFetchedMaps.clear();
 
@@ -1106,7 +1102,6 @@ void MapWizard::accept()
         d->uiWidget.textEditDesc->clear();
         d->uiWidget.labelPreview->clear();
         d->uiWidget.lineEditSource->clear();
-        d->dgmlOutput.clear();
         QTimer::singleShot( 0, this, SLOT(restart()) );
     }
 
