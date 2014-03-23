@@ -55,7 +55,7 @@ public:
 
 private:
 
-    QRect position(Element element, const QStyleOptionViewItem &option ) const;
+    static QRect position(Element element, const QStyleOptionViewItem &option );
 };
 
 class TourWidgetPrivate
@@ -232,7 +232,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
     painter->restore();
 }
 
-QRect TourItemDelegate::position(Element element, const QStyleOptionViewItem &option ) const
+QRect TourItemDelegate::position(Element element, const QStyleOptionViewItem &option )
 {
     QPoint const topCol1 = option.rect.topLeft() + QPoint(10, 10);
     QPoint const topCol2 = topCol1 + QPoint(30, 0);

@@ -46,7 +46,7 @@ class GeoDataTreeModel::Private {
     Private( QAbstractItemModel* model );
     ~Private();
 
-    void checkParenting( GeoDataObject *object );
+    static void checkParenting( GeoDataObject *object );
 
     GeoDataDocument* m_rootDocument;
     bool             m_ownsRootDocument;

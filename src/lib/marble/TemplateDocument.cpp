@@ -28,10 +28,10 @@ public:
     }
     QString templateText;
     QMap<QString, QString> templateEntries;
-    void processTemplateIncludes(QString &input) const;
+    static void processTemplateIncludes(QString &input);
 };
 
-void TemplateDocumentPrivate::processTemplateIncludes(QString &input) const
+void TemplateDocumentPrivate::processTemplateIncludes(QString &input)
 {
     QRegExp rx("%!\\{([^}]*)\\}%");
 

@@ -106,7 +106,6 @@ class ControlView : public QWidget
 
  public slots:
     void printMapScreenShot( QPointer<QPrintDialog> dialog );
-    void printPixmap( QPrinter * printer, const QPixmap& pixmap );
     void printPreview();
     void paintPrintPreview( QPrinter * printer );
 
@@ -142,11 +141,12 @@ private Q_SLOTS:
       */
     void synchronizeWithExternalMapEditor( const QString &application, const QString &argument );
 
+    static void printPixmap( QPrinter * printer, const QPixmap& pixmap );
     void printMap( QTextDocument &document, QString &text, QPrinter *printer );
     void printLegend( QTextDocument &document, QString &text );
     void printRouteSummary( QTextDocument &document, QString &text );
     void printDrivingInstructions( QTextDocument &document, QString &text );
-    void printDrivingInstructionsAdvice( QTextDocument &document, QString &text );
+    static void printDrivingInstructionsAdvice( QTextDocument &document, QString &text );
 
     MapThemeManager   *const m_mapThemeManager;
     MarbleWidget      *m_marbleWidget;

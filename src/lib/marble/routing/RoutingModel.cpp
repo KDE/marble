@@ -60,7 +60,7 @@ public:
     QHash<int, QByteArray> m_roleNames;
 #endif
 
-    void importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark );
+    static void importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark );
 
     void updateViaPoints( const GeoDataCoordinates &position );
 };

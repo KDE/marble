@@ -35,7 +35,7 @@ public:
 private:
     static QString wildcardQuery( const QString &term );
 
-    void unique( QVector<OsmPlacemark> &placemarks ) const;
+    static void makeUnique( QVector<OsmPlacemark> &placemarks );
 
     QStringList m_databaseFiles;
 

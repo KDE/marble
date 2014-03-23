@@ -129,7 +129,7 @@ void OSRMRunner::get()
              this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection );
 }
 
-void OSRMRunner::append(QString *input, const QString &key, const QString &value) const
+void OSRMRunner::append(QString *input, const QString &key, const QString &value)
 {
     *input += '&' + key + '=' + value;
 }

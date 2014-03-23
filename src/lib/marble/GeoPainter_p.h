@@ -34,11 +34,11 @@ class GeoPainterPrivate
     ~GeoPainterPrivate();
 
 
-    void createAnnotationLayout ( qreal x, qreal y,
-                                  QSizeF bubbleSize,
-                                  qreal bubbleOffsetX, qreal bubbleOffsetY,
-                                  qreal xRnd, qreal yRnd,
-                                  QPainterPath& path, QRectF& rect );
+    static void createAnnotationLayout ( qreal x, qreal y,
+                                         QSizeF bubbleSize,
+                                         qreal bubbleOffsetX, qreal bubbleOffsetY,
+                                         qreal xRnd, qreal yRnd,
+                                         QPainterPath& path, QRectF& rect );
 
     static GeoDataLinearRing createLinearRingFromGeoRect( const GeoDataCoordinates & centerCoordinates,
                                                           qreal width, qreal height );

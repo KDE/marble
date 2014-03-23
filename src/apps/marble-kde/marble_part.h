@@ -197,7 +197,7 @@ class MarblePart: public KParts::ReadOnlyPart
         update. */
     void  updateTileZoomLevel();
     void migrateNewstuffConfigFiles() const;
-    void repairNode( QDomNode node, const QString &child ) const;
+    static void repairNode( QDomNode node, const QString &child );
 
   private:
     // All the functionality is provided by this widget.

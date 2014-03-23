@@ -1242,7 +1242,7 @@ void MarblePart::migrateNewstuffConfigFiles() const
     }
 }
 
-void MarblePart::repairNode( QDomNode node, const QString &child ) const
+void MarblePart::repairNode( QDomNode node, const QString &child )
 {
     int const size = node.namedItem( child ).toElement().text().size();
     if ( size > 1024 ) {

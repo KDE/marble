@@ -55,7 +55,7 @@ void KmlPlaylistTagWriter::writeTourPrimitive( const GeoNode *primitive, GeoWrit
     }
 }
 
-void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer ) const
+void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer )
 {
     writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_TourControl );
     if ( !tourControl->id().isEmpty() ) {
@@ -67,7 +67,7 @@ void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourContr
     writer.writeEndElement();
 }
 
-void KmlPlaylistTagWriter::writeWait( const GeoDataWait* wait, GeoWriter& writer ) const
+void KmlPlaylistTagWriter::writeWait( const GeoDataWait* wait, GeoWriter& writer )
 {
     writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_Wait );
     if ( !wait->id().isEmpty() ) {
@@ -79,7 +79,7 @@ void KmlPlaylistTagWriter::writeWait( const GeoDataWait* wait, GeoWriter& writer
     writer.writeEndElement();
 }
 
-void KmlPlaylistTagWriter::writeSoundCue(const GeoDataSoundCue *cue, GeoWriter &writer) const
+void KmlPlaylistTagWriter::writeSoundCue(const GeoDataSoundCue *cue, GeoWriter &writer)
 {
     writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_SoundCue );
     if (!cue->id().isEmpty()) {

@@ -98,7 +98,7 @@ class VisiblePlacemark
     };
 
  private:
-    void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle, const QColor &color );
+    static void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle, const QColor &color );
     void drawLabelPixmap();
 
     const GeoDataPlacemark *m_placemark;

@@ -47,7 +47,7 @@ private Q_SLOTS:
     void get();
 
 private:
-    void append( QString* input, const QString &key, const QString &value ) const;
+    static void append( QString* input, const QString &key, const QString &value );
 
     static GeoDataLineString* decodePolyline( const QString &geometry );
 

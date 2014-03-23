@@ -128,18 +128,18 @@ public:
 
     void uninstall( int index );
 
-    void changeNode( QDomNode &node, QDomDocument &domDocument, const QString &key, const QString &value, NodeAction action );
+    static void changeNode( QDomNode &node, QDomDocument &domDocument, const QString &key, const QString &value, NodeAction action );
 
     void readInstalledFiles( QStringList* target, const QDomNode &node );
 
     void processQueue();
 
-    NewstuffItem importNode( const QDomNode &node ) const;
+    static NewstuffItem importNode( const QDomNode &node );
 
     bool isTransitioning( int index ) const;
 
     template<class T>
-    void readValue( const QDomNode &node, const QString &key, T* target ) const;
+    static void readValue( const QDomNode &node, const QString &key, T* target );
 };
 
 class FetchPreviewJob
@@ -450,7 +450,7 @@ void NewstuffModelPrivate::changeNode( QDomNode &node, QDomDocument &domDocument
 }
 
 template<class T>
-void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, T* target ) const
+void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, T* target )
 {
     QDomNodeList matches = node.toElement().elementsByTagName( key );
     if ( matches.size() == 1 ) {
@@ -921,7 +921,7 @@ void NewstuffModelPrivate::processQueue()
     }
 }
 
-NewstuffItem NewstuffModelPrivate::importNode(const QDomNode &node) const
+NewstuffItem NewstuffModelPrivate::importNode(const QDomNode &node)
 {
     NewstuffItem item;
     item.m_category = node.attributes().namedItem( "category" ).toAttr().value();

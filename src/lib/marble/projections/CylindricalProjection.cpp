@@ -379,7 +379,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
 
 void CylindricalProjectionPrivate::translatePolygons( const QVector<QPolygonF *> &polygons,
                                                       QVector<QPolygonF *> &translatedPolygons,
-                                                      qreal xOffset ) const
+                                                      qreal xOffset )
 {
     // mDebug() << "Translation: " << xOffset;
 

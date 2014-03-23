@@ -41,7 +41,7 @@ public:
 
     static GeoDataLineString parseGosmoreOutput( const QByteArray &content );
 
-    void merge( GeoDataLineString* one, const GeoDataLineString& two ) const;
+    static void merge( GeoDataLineString* one, const GeoDataLineString& two );
 
     QVector<GeoDataPlacemark*> parseGosmoreInstructions( const QByteArray &content );
 
@@ -58,7 +58,7 @@ GosmoreRunnerPrivate::GosmoreRunnerPrivate()
 
 QMap<QString, QByteArray> GosmoreRunnerPrivate::m_partialRoutes;
 
-void GosmoreRunnerPrivate::merge( GeoDataLineString* one, const GeoDataLineString& two ) const
+void GosmoreRunnerPrivate::merge( GeoDataLineString* one, const GeoDataLineString& two )
 {
     Q_ASSERT( one );
 

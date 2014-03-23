@@ -53,7 +53,7 @@ namespace Marble {
         GeoAprsCoordinates::SeenFrom seenFrom();
 
         void shutDown();
-        void sleepFor(int seconds);
+        static void sleepFor(int seconds);
 
       private:
         void initMicETables();

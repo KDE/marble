@@ -98,7 +98,7 @@ class WeatherDataPrivate
         initializeIcons();
     }
     
-    void initializeIcons()
+    static void initializeIcons()
     {
         if( s_iconPath.size() == 0 ) {
             // Clouds

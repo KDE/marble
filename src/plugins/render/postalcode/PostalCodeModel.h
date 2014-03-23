@@ -38,7 +38,7 @@ class PostalCodeModel : public AbstractDataPluginModel
     void parseFile( const QByteArray& file );
 
 private:
-    void addLine( QString* string, const QString &line );
+    static void addLine( QString* string, const QString &line );
 };
 
 }

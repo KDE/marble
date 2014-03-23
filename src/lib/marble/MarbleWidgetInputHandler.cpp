@@ -156,7 +156,7 @@ class MarbleWidgetDefaultInputHandler::Private
       * same position while zooming
       * @param distance New camera distance to the ground
       */
-    void ZoomAt(MarbleWidget* widget, const QPoint &pos, qreal distance);
+    static void ZoomAt(MarbleWidget* widget, const QPoint &pos, qreal distance);
 
     /**
       * @brief Change zoom value by the given factor, making the given point the new center
@@ -164,7 +164,7 @@ class MarbleWidgetDefaultInputHandler::Private
       * @param pos A screen position. The underlying geopoint will become the new center point
       * @param factor Zoom factor, 1.0 means no change
       */
-    void MoveTo(MarbleWidget* marbleWidget, const QPoint &pos, qreal zoomFactor);
+    static void MoveTo(MarbleWidget* marbleWidget, const QPoint &pos, qreal zoomFactor);
 
     QPixmap m_curpmtl;
     QPixmap m_curpmtc;

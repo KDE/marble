@@ -42,7 +42,7 @@ private Q_SLOTS:
     void handleError( QNetworkReply::NetworkError );
 
 private:
-    void append( QString* input, const QString &key, const QString &value );
+    static void append( QString* input, const QString &key, const QString &value );
 
     static int maneuverType( int mapQuestId );
 

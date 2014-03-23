@@ -44,7 +44,7 @@ bool KmlScreenOverlayWriter::writeMid( const GeoNode *node, GeoWriter& writer ) 
     return true;
 }
 
-void KmlScreenOverlayWriter::writeVec2( const QString &element, const GeoDataVec2 &vec2, GeoWriter &writer ) const
+void KmlScreenOverlayWriter::writeVec2( const QString &element, const GeoDataVec2 &vec2, GeoWriter &writer )
 {
     writer.writeStartElement( element );
     writer.writeAttribute( "x", QString::number( vec2.x() ) );

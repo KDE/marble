@@ -93,7 +93,7 @@ public:
 
     QMenu* createBookmarkMenu( RoutingInputWidget *parent );
 
-    void createBookmarkActions( QMenu* menu, GeoDataFolder* bookmarksFolder, QObject *parent );
+    static void createBookmarkActions( QMenu* menu, GeoDataFolder* bookmarksFolder, QObject *parent );
 
     static QPixmap addDropDownIndicator( const QPixmap &pixmap );
 

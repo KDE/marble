@@ -52,7 +52,7 @@ public:
 
     DeclarativeDataPluginPrivate( DeclarativeDataPlugin* q );
 
-    void parseChunk( DeclarativeDataPluginItem * item, GeoDataCoordinates &coordinates, const QString &key, const QVariant &value );
+    static void parseChunk( DeclarativeDataPluginItem * item, GeoDataCoordinates &coordinates, const QString &key, const QVariant &value );
 
     void addItem( DeclarativeDataPluginItem* item, const GeoDataCoordinates &coordinates );
 

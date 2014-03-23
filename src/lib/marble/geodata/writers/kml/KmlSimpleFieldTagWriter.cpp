@@ -41,7 +41,7 @@ bool KmlSimpleFieldTagWriter::write( const GeoNode *node, GeoWriter& writer ) co
     return true;
 }
 
-QString KmlSimpleFieldTagWriter::resolveType( GeoDataSimpleField::SimpleFieldType type ) const
+QString KmlSimpleFieldTagWriter::resolveType( GeoDataSimpleField::SimpleFieldType type )
 {
     switch (type)
     {

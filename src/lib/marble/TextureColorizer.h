@@ -44,7 +44,7 @@ class TextureColorizer
 
     void setShowRelief( bool show );
 
-    void drawIndividualDocument( GeoPainter *painter, const GeoDataDocument *document );
+    static void drawIndividualDocument( GeoPainter *painter, const GeoDataDocument *document );
 
     void drawTextureMap( GeoPainter *painter );
 

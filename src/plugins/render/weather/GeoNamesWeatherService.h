@@ -35,7 +35,7 @@ class GeoNamesWeatherService : public AbstractWeatherService
 
  private:
     AbstractDataPluginItem* parse( const QScriptValue &value );
-    void setupHashes();
+    static void setupHashes();
 
     static QHash<QString, WeatherData::WeatherCondition> dayConditions;
     static QVector<WeatherData::WindDirection> windDirections;

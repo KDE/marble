@@ -62,9 +62,9 @@ class CylindricalProjectionPrivate : public AbstractProjectionPrivate
                               const ViewportParams *viewport,
                               QVector<QPolygonF*> &polygons ) const;
 
-    void translatePolygons( const QVector<QPolygonF *> &polygons,
-                            QVector<QPolygonF *> &translatedPolygons,
-                            qreal xOffset ) const;
+    static void translatePolygons( const QVector<QPolygonF *> &polygons,
+                                   QVector<QPolygonF *> &translatedPolygons,
+                                   qreal xOffset );
 
     void repeatPolygons( const ViewportParams *viewport,
                          QVector<QPolygonF *> &polygons ) const;
