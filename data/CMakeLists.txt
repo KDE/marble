@@ -164,6 +164,7 @@ maps/moon/clementine/clementine.jpg
 maps/moon/clementine/clementine-preview.png
 maps/moon/clementine/legend.html 
 maps/moon/clementine/clementine.dgml
+maps/moon/clementine/tour.kml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/moon/clementine)
 
 FILE (GLOB_RECURSE DGML_FILES maps/*.dgml)

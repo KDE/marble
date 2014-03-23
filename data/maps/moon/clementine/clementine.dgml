@@ -106,6 +106,13 @@
         
         <legend>
 
+            <section name="Tours">
+                <heading>Explore the Moon</heading>
+                <item name="moonlandingsites">
+                    <icon pixmap="bitmaps/manned_landing.png"/>
+                    <text><![CDATA[<a href="tour://moon/clementine/tour.kml">Play a tour of different landing sites.</a>]]></text>
+                </item>
+            </section>
             <section name="landingsites" checkable="true" connect="landingsites" spacing="12">
                 <heading>Landing Sites</heading>
                 <item name="mannedlanding">
