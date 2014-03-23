@@ -231,28 +231,27 @@ void OwncloudSyncBackend::deleteRoute( const QString &timestamp )
 
 QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp )
 {
-    MarbleWidget *mapWidget = new MarbleWidget;
-    foreach( RenderPlugin* plugin, mapWidget->renderPlugins() ) {
+    MarbleWidget mapWidget;
+    foreach( RenderPlugin* plugin, mapWidget.renderPlugins() ) {
         plugin->setEnabled( false );
     }
 
-    mapWidget->setProjection( Mercator );
-    mapWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
-    mapWidget->resize( 512, 512 );
+    mapWidget.setProjection( Mercator );
+    mapWidget.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    mapWidget.resize( 512, 512 );
 
-    RoutingManager* manager = mapWidget->model()->routingManager();
+    RoutingManager* manager = mapWidget.model()->routingManager();
     manager->loadRoute( d->m_cacheDir.absolutePath() + QString( "/%0.kml" ).arg( timestamp ) );
     GeoDataLatLonBox const bbox = manager->routingModel()->route().bounds();
 
     if ( !bbox.isEmpty() ) {
-        mapWidget->centerOn( bbox );
+        mapWidget.centerOn( bbox );
     }
 
-    QPixmap pixmap = QPixmap::grabWidget( mapWidget );
+    QPixmap pixmap = QPixmap::grabWidget( &mapWidget );
     QDir( d->m_cacheDir.absolutePath() ).mkpath( "preview" );
     pixmap.save( d->m_cacheDir.absolutePath() + "/preview/" + timestamp + ".jpg" );
 
-    delete mapWidget;
     return pixmap;
 }
 
