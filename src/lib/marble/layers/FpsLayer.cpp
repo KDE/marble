@@ -25,7 +25,7 @@ FpsLayer::FpsLayer( QTime *time )
 {
 }
 
-void FpsLayer::paint( QPainter *painter )
+void FpsLayer::paint( QPainter *painter ) const
 {
     const qreal fps = 1000.0 / (qreal)( m_time->elapsed() );
     const QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );

@@ -75,7 +75,7 @@ void CloudSync::setMap( MarbleWidget *map )
     }
 }
 
-QString CloudSync::owncloudServer()
+QString CloudSync::owncloudServer() const
 {
     return d->m_cloudSyncManager.owncloudServer();
 }
@@ -85,7 +85,7 @@ void CloudSync::setOwncloudServer( const QString &server )
     d->m_cloudSyncManager.setOwncloudServer( server );
 }
 
-QString CloudSync::owncloudUsername()
+QString CloudSync::owncloudUsername() const
 {
     return d->m_cloudSyncManager.owncloudUsername();
 }
@@ -95,7 +95,7 @@ void CloudSync::setOwncloudUsername( const QString &username )
     d->m_cloudSyncManager.setOwncloudUsername( username );
 }
 
-QString CloudSync::owncloudPassword()
+QString CloudSync::owncloudPassword() const
 {
     return d->m_cloudSyncManager.owncloudPassword();
 }

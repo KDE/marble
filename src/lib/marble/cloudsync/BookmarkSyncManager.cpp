@@ -113,7 +113,7 @@ public:
      * Compares cloud bookmarks.kml's timestamp to last synced bookmarks.kml's timestamp.
      * @return true if cloud one is different from last synced one.
      */
-    bool cloudBookmarksModified( const QString &cloudTimestamp );
+    bool cloudBookmarksModified( const QString &cloudTimestamp ) const;
 
     /**
      * Removes all KMLs in the cache except the
@@ -125,7 +125,7 @@ public:
      * Finds the last synced bookmarks.kml file and returns its path
      * @return Path of last synced bookmarks.kml file.
      */
-    QString lastSyncedKmlPath();
+    QString lastSyncedKmlPath() const;
 
     /**
      * Gets all placemarks in a document as DiffItems, compares them to another document and puts the result in a list.
@@ -152,7 +152,7 @@ public:
      * @param bookmark The bookmark whose counterpart will be searched in the container.
      * @return Counterpart of the given placemark.
      */
-    GeoDataPlacemark* findPlacemark( GeoDataContainer* container, const GeoDataPlacemark &bookmark ) const;
+    const GeoDataPlacemark* findPlacemark( GeoDataContainer* container, const GeoDataPlacemark &bookmark ) const;
 
     /**
      * Determines the status (created, deleted, changed or unchanged) of given DiffItem
@@ -160,7 +160,7 @@ public:
      * @param item The item whose status will be determined.
      * @param document The document whose placemarks will be used to determine DiffItem's status.
      */
-    void determineDiffStatus( DiffItem &item, GeoDataDocument* document );
+    void determineDiffStatus( DiffItem &item, GeoDataDocument* document ) const;
 
     /**
      * Finds differences between two bookmark files.
@@ -331,7 +331,7 @@ void BookmarkSyncManager::Private::downloadTimestamp()
              m_q, SLOT(parseTimestamp()) );
 }
 
-bool BookmarkSyncManager::Private::cloudBookmarksModified( const QString &cloudTimestamp )
+bool BookmarkSyncManager::Private::cloudBookmarksModified( const QString &cloudTimestamp ) const
 {
     QStringList entryList = QDir( m_cachePath ).entryList(
                 // TODO: replace with regex filter that only
@@ -365,7 +365,7 @@ void BookmarkSyncManager::Private::clearCache()
     }
 }
 
-QString BookmarkSyncManager::Private::lastSyncedKmlPath()
+QString BookmarkSyncManager::Private::lastSyncedKmlPath() const
 {
     QDir cacheDir( m_cachePath );
     QFileInfoList fileInfoList = cacheDir.entryInfoList(
@@ -423,7 +423,7 @@ QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataFolder *fold
     return diffItems;
 }
 
-GeoDataPlacemark* BookmarkSyncManager::Private::findPlacemark( GeoDataContainer* container, const GeoDataPlacemark &bookmark ) const
+const GeoDataPlacemark* BookmarkSyncManager::Private::findPlacemark( GeoDataContainer* container, const GeoDataPlacemark &bookmark ) const
 {
     foreach( GeoDataPlacemark* placemark, container->placemarkList() ) {
         if ( EARTH_RADIUS * distanceSphere( placemark->coordinate(), bookmark.coordinate() ) <= 1 ) {
@@ -432,7 +432,7 @@ GeoDataPlacemark* BookmarkSyncManager::Private::findPlacemark( GeoDataContainer*
     }
 
     foreach( GeoDataFolder* folder, container->folderList() ) {
-        GeoDataPlacemark* placemark = findPlacemark( folder, bookmark );
+        const GeoDataPlacemark* placemark = findPlacemark( folder, bookmark );
         if ( placemark ) {
             return placemark;
         }
@@ -441,9 +441,9 @@ GeoDataPlacemark* BookmarkSyncManager::Private::findPlacemark( GeoDataContainer*
     return 0;
 }
 
-void BookmarkSyncManager::Private::determineDiffStatus( DiffItem &item, GeoDataDocument *document )
+void BookmarkSyncManager::Private::determineDiffStatus( DiffItem &item, GeoDataDocument *document ) const
 {
-    GeoDataPlacemark *match = findPlacemark( document, item.m_placemarkA );
+    const GeoDataPlacemark *match = findPlacemark( document, item.m_placemarkA );
 
     if( match != 0 ) {
         item.m_placemarkB = *match;

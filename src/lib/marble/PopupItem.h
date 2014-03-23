@@ -131,7 +131,7 @@ private Q_SLOTS:
      * executes print dialog for printing its content.
      *
      */
-    void printContent();
+    void printContent() const;
 
     /**
      * @brief Updates Back Button (web surfing history)

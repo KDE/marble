@@ -127,7 +127,7 @@ void SatellitesTLEItem::addPointAt( const QDateTime &dateTime )
     m_track->addPoint( dateTime, coordinates);
 }
 
-QDateTime SatellitesTLEItem::timeAtEpoch()
+QDateTime SatellitesTLEItem::timeAtEpoch() const
 {
     int year = m_satrec.epochyr + ( m_satrec.epochyr < 57 ? 2000 : 1900 );
 
@@ -142,29 +142,29 @@ QDateTime SatellitesTLEItem::timeAtEpoch()
                       Qt::UTC );
 }
 
-double SatellitesTLEItem::period()
+double SatellitesTLEItem::period() const
 {
     // no := mean motion (rad / min)
     return 60 * (2 * M_PI / m_satrec.no);
 }
 
-double SatellitesTLEItem::apogee()
+double SatellitesTLEItem::apogee() const
 {
     return m_satrec.alta * m_earthSemiMajorAxis;
 }
 
-double SatellitesTLEItem::perigee()
+double SatellitesTLEItem::perigee() const
 {
     return m_satrec.altp * m_earthSemiMajorAxis;
 }
 
-double SatellitesTLEItem::semiMajorAxis()
+double SatellitesTLEItem::semiMajorAxis() const
 {
 
     return m_satrec.a * m_earthSemiMajorAxis;
 }
 
-double SatellitesTLEItem::inclination()
+double SatellitesTLEItem::inclination() const
 {
     return m_satrec.inclo / M_PI * 180;
 }
@@ -172,7 +172,7 @@ double SatellitesTLEItem::inclination()
 GeoDataCoordinates SatellitesTLEItem::fromTEME( double x,
                                                 double y,
                                                 double z,
-                                                double gmst )
+                                                double gmst ) const
 {
     double lon = atan2( y, x );
     // Rotate the angle by gmst (the origin goes from the vernal equinox
@@ -200,7 +200,7 @@ GeoDataCoordinates SatellitesTLEItem::fromTEME( double x,
     return GeoDataCoordinates( lon, lat, alt * 1000 );
 }
 
-double SatellitesTLEItem::gmst( double minutesP )
+double SatellitesTLEItem::gmst( double minutesP ) const
 {
     // Earth rotation rate in rad/min, from sgp4io.cpp
     double rptim = 4.37526908801129966e-3;

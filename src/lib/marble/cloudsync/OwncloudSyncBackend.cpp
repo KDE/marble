@@ -229,7 +229,7 @@ void OwncloudSyncBackend::deleteRoute( const QString &timestamp )
     connect( d->m_routeDeleteReply, SIGNAL(finished()), this, SIGNAL(routeDeleted()) );
 }
 
-QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp )
+QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp ) const
 {
     MarbleWidget mapWidget;
     foreach( RenderPlugin* plugin, mapWidget.renderPlugins() ) {
@@ -255,7 +255,7 @@ QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp )
     return pixmap;
 }
 
-QString OwncloudSyncBackend::routeName( const QString &timestamp )
+QString OwncloudSyncBackend::routeName( const QString &timestamp ) const
 {
     QFile file( d->m_cacheDir.absolutePath() + QString( "/%0.kml" ).arg( timestamp ) );
     file.open( QFile::ReadOnly );

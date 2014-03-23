@@ -47,9 +47,9 @@ public:
 
     void reset();
 
-    QString audioFile(const QString &name);
+    QString audioFile(const QString &name) const;
 
-    QString distanceAudioFile( qreal dest );
+    QString distanceAudioFile( qreal dest ) const;
 
     QString turnTypeAudioFile( Maneuver::Direction turnType, qreal distance );
 
@@ -77,7 +77,7 @@ void VoiceNavigationModelPrivate::reset()
     m_lastDistance = 0.0;
 }
 
-QString VoiceNavigationModelPrivate::audioFile( const QString &name )
+QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
 {
     QStringList const formats = QStringList() << "ogg" << "mp3" << "wav";
     if ( m_speakerEnabled ) {
@@ -102,7 +102,7 @@ QString VoiceNavigationModelPrivate::audioFile( const QString &name )
     return QString();
 }
 
-QString VoiceNavigationModelPrivate::distanceAudioFile( qreal dest )
+QString VoiceNavigationModelPrivate::distanceAudioFile( qreal dest ) const
 {
     if ( dest > 0.0 && dest < 900.0 ) {
         qreal minDistance = 0.0;

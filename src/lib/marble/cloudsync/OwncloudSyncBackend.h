@@ -58,8 +58,8 @@ public:
     void downloadRouteList();
     void downloadRoute( const QString &timestamp );
     void deleteRoute( const QString &timestamp );
-    QPixmap createPreview( const QString &timestamp );
-    QString routeName( const QString &timestamp );
+    QPixmap createPreview( const QString &timestamp ) const;
+    QString routeName( const QString &timestamp ) const;
 
 public Q_SLOTS:
     void cancelUpload();

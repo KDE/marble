@@ -60,41 +60,41 @@ private:
      * as TEME (True equator, Mean equinox) with Greenwich Mean Sidereal Time
      * @p gmst in radians at time of observation.
      */
-    GeoDataCoordinates fromTEME( double x, double y, double z, double gmst );
+    GeoDataCoordinates fromTEME( double x, double y, double z, double gmst ) const;
 
     /**
      * @return The time at the satellite epoch determined from m_satrec
      */
-    QDateTime timeAtEpoch();
+    QDateTime timeAtEpoch() const;
 
     /**
      * @return The orbital period of the satellite in seconds
      */
-    double period();
+    double period() const;
 
     /**
      * @return The apogee of the satellite in km
      */
-    double apogee();
+    double apogee() const;
     /**
      * @return The perigee of the satellite in km
      */
-    double perigee();
+    double perigee() const;
     /**
      * @return The semi-major axis in km
      */
-    double semiMajorAxis();
+    double semiMajorAxis() const;
 
     /**
      * @return The inclination in degrees
      */
-    double inclination();
+    double inclination() const;
 
     /**
      * Returns the Greenwich Mean Sideral Time in radians, @p minutes
      * after the epoch.
      */
-    double gmst( double minutes );
+    double gmst( double minutes ) const;
 
     /**
      * @return The square of @p x

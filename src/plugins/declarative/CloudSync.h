@@ -38,13 +38,13 @@ public:
     MarbleWidget* map();
     void setMap( MarbleWidget *map );
 
-    QString owncloudServer();
+    QString owncloudServer() const;
     void setOwncloudServer( const QString &server );
 
-    QString owncloudUsername();
+    QString owncloudUsername() const;
     void setOwncloudUsername( const QString &username );
 
-    QString owncloudPassword();
+    QString owncloudPassword() const;
     void setOwncloudPassword( const QString &password );
 
 public slots:

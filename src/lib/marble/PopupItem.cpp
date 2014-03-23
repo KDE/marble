@@ -334,7 +334,7 @@ void PopupItem::requestUpdate()
     emit repaintNeeded();
 }
 
-void PopupItem::printContent()
+void PopupItem::printContent() const
 {
 #ifndef QT_NO_PRINTER
     QPrinter printer;

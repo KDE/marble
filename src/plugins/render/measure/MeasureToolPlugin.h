@@ -80,9 +80,9 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     bool  eventFilter( QObject *object, QEvent *event );
 
  private:
-    void  drawMeasurePoints( GeoPainter *painter );
+    void  drawMeasurePoints( GeoPainter *painter ) const;
     void  drawTotalDistanceLabel( GeoPainter *painter,
-                                  qreal totalDistance );
+                                  qreal totalDistance ) const;
     void  drawSegments( GeoPainter *painter );
     void  addContextItems();
     void  removeContextItems();

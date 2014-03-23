@@ -282,7 +282,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
     }
 }
 
-void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter )
+void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter ) const
 {
     // Paint the marks.
     GeoDataLineString::const_iterator itpoint = m_measureLineString.constBegin();
@@ -294,7 +294,7 @@ void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter )
 }
 
 void MeasureToolPlugin::drawTotalDistanceLabel( GeoPainter *painter,
-                                          qreal totalDistance )
+                                          qreal totalDistance ) const
 {
     QString  distanceString;
 

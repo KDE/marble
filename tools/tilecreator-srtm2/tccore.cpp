@@ -122,7 +122,7 @@ public:
     }
 
 private:
-    QString hgtFileName( int lng, int lat )
+    QString hgtFileName( int lng, int lat ) const
     {
         QChar EW( lng >= 0 ? 'E' : 'W' );
         QChar NS( lat >= 0 ? 'N' : 'S' );

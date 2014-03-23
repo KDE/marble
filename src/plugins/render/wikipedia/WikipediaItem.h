@@ -57,15 +57,15 @@ class WikipediaItem : public AbstractDataPluginItem
     
     void setLatitude( qreal latitude );
     
-    QUrl url();
+    QUrl url() const;
     
     void setUrl( const QUrl& url );
     
-    QUrl thumbnailImageUrl();
+    QUrl thumbnailImageUrl() const;
     
     void setThumbnailImageUrl( const QUrl& thumbnailImageUrl );
 
-    QString summary();
+    QString summary() const;
 
     void setSummary( const QString& summary );
     

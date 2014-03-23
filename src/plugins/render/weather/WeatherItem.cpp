@@ -231,37 +231,37 @@ class WeatherItemPrivate
         m_parent->update();
     }
     
-    bool isConditionShown()
+    bool isConditionShown() const
     {
         return m_currentWeather.hasValidCondition()
                && m_settings.value( "showCondition", showConditionDefault ).toBool();
     }
     
-    bool isTemperatureShown()
+    bool isTemperatureShown() const
     {
         return m_currentWeather.hasValidTemperature()
                && m_settings.value( "showTemperature", showTemperatureDefault ).toBool();
     }
     
-    bool isWindDirectionShown()
+    bool isWindDirectionShown() const
     {
         return m_currentWeather.hasValidWindDirection()
                && m_settings.value( "showWindDirection", showWindDirectionDefault ).toBool();
     }
     
-    bool isWindSpeedShown()
+    bool isWindSpeedShown() const
     {
         return m_currentWeather.hasValidWindSpeed()
                && m_settings.value( "showWindSpeed", showWindSpeedDefault ).toBool();
     }
 
-    QString temperatureString()
+    QString temperatureString() const
     {
         WeatherData::TemperatureUnit tUnit = temperatureUnit();
         return m_currentWeather.temperatureString( tUnit );
     }
 
-    WeatherData::TemperatureUnit temperatureUnit()
+    WeatherData::TemperatureUnit temperatureUnit() const
     {
         WeatherData::TemperatureUnit tUnit
                 = (WeatherData::TemperatureUnit) m_settings.value( "temperatureUnit",
@@ -269,23 +269,23 @@ class WeatherItemPrivate
         return tUnit;
     }
 
-    QString windSpeedString()
+    QString windSpeedString() const
     {
         return m_currentWeather.windSpeedString( speedUnit() );
     }
 
-    WeatherData::SpeedUnit speedUnit()
+    WeatherData::SpeedUnit speedUnit() const
     {
         return (WeatherData::SpeedUnit) m_settings.value( "windSpeedUnit",
                                                           WeatherData::kph ).toInt();
     }
 
-    QString pressureString()
+    QString pressureString() const
     {
         return m_currentWeather.pressureString( pressureUnit() );
     }
 
-    WeatherData::PressureUnit pressureUnit()
+    WeatherData::PressureUnit pressureUnit() const
     {
         return (WeatherData::PressureUnit) m_settings.value( "pressureUnit",
                                                              WeatherData::HectoPascal ).toInt();

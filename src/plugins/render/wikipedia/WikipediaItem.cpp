@@ -137,7 +137,7 @@ void WikipediaItem::setLatitude( qreal latitude )
     setCoordinate( updatedCoordinates );
 }
 
-QUrl WikipediaItem::url()
+QUrl WikipediaItem::url() const
 {
     return m_url;
 }
@@ -147,7 +147,7 @@ void WikipediaItem::setUrl( const QUrl& url )
     m_url = url;
 }
 
-QUrl WikipediaItem::thumbnailImageUrl()
+QUrl WikipediaItem::thumbnailImageUrl() const
 {
     return m_thumbnailImageUrl;
 }
@@ -157,7 +157,7 @@ void WikipediaItem::setThumbnailImageUrl( const QUrl& thumbnailImageUrl )
     m_thumbnailImageUrl = thumbnailImageUrl;
 }
 
-QString WikipediaItem::summary()
+QString WikipediaItem::summary() const
 {
     return m_summary;
 }

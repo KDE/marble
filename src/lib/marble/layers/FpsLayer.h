@@ -22,7 +22,7 @@ class FpsLayer
 public:
     explicit FpsLayer( QTime *time );
 
-    void paint( QPainter *painter );
+    void paint( QPainter *painter ) const;
 
 private:
     QTime *const m_time;
