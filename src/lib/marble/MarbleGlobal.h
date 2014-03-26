@@ -229,14 +229,14 @@ const qreal SEC2HOUR = 1.0 / HOUR2SEC;
 
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.17.95 (0.18 Beta 3)" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.17.97 (0.18 RC 1)" );
 
 // API Version id:
 // form : 0xMMmmpp
 //        MM = major revision.
 //        mm = minor revision.
 //        pp = patch revision.
-#define MARBLE_VERSION 0x00115f
+#define MARBLE_VERSION 0x001161
 
 static const char NOT_AVAILABLE[] = QT_TR_NOOP("not available");
 
