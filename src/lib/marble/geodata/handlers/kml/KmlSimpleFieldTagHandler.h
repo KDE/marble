@@ -37,6 +37,8 @@ class KmlSimpleFieldTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse(GeoParser&) const;
+
+private:
     static GeoDataSimpleField::SimpleFieldType resolveType( const QString& type );
 };
 

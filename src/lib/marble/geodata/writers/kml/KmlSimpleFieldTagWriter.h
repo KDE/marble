@@ -24,7 +24,8 @@ class KmlSimpleFieldTagWriter : public GeoTagWriter
   public:
     virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
 
-    QString resolveType( GeoDataSimpleField::SimpleFieldType& type ) const;
+private:
+    QString resolveType( GeoDataSimpleField::SimpleFieldType type ) const;
 };
 
 }

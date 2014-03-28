@@ -41,34 +41,22 @@ bool KmlSimpleFieldTagWriter::write( const GeoNode *node, GeoWriter& writer ) co
     return true;
 }
 
-QString KmlSimpleFieldTagWriter::resolveType( GeoDataSimpleField::SimpleFieldType& type ) const
+QString KmlSimpleFieldTagWriter::resolveType( GeoDataSimpleField::SimpleFieldType type ) const
 {
-    QString simpleFieldType;
-    if ( type == GeoDataSimpleField::String ) {
-        simpleFieldType = QString("string");
+    switch (type)
+    {
+    case GeoDataSimpleField::String: return "string";
+    case GeoDataSimpleField::Int:    return "int";
+    case GeoDataSimpleField::UInt:   return "uint";
+    case GeoDataSimpleField::Short:  return "short";
+    case GeoDataSimpleField::UShort: return "ushort";
+    case GeoDataSimpleField::Float:  return "float";
+    case GeoDataSimpleField::Double: return "double";
+    case GeoDataSimpleField::Bool:   return "bool";
     }
-    else if ( type == GeoDataSimpleField::Int ) {
-        simpleFieldType = QString("int");
-    }
-    else if ( type == GeoDataSimpleField::UInt ) {
-        simpleFieldType = QString("uint");
-    }
-    else if (type == GeoDataSimpleField::Short ) {
-        simpleFieldType = QString("short");
-    }
-    else if ( type == GeoDataSimpleField::UShort ) {
-        simpleFieldType = QString("ushort");
-    }
-    else if ( type == GeoDataSimpleField::Float ) {
-        simpleFieldType = QString("float");
-    }
-    else if ( type == GeoDataSimpleField::Double ) {
-        simpleFieldType = QString("double");
-    }
-    else {
-        simpleFieldType = QString("bool");
-    }
-    return simpleFieldType;
+
+    Q_ASSERT(false);
+    return "string";
 }
 
 }

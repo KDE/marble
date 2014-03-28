@@ -24,7 +24,7 @@ class GeoDataSimpleFieldPrivate;
 
 class GEODATA_EXPORT GeoDataSimpleField : public GeoNode
 {
-  public:
+public:
     GeoDataSimpleField();
     GeoDataSimpleField( const GeoDataSimpleField& other );
     virtual ~GeoDataSimpleField();
@@ -99,7 +99,7 @@ class GEODATA_EXPORT GeoDataSimpleField : public GeoNode
      */
     virtual void unpack( QDataStream& stream );
 
-  private:
+private:
     GeoDataSimpleFieldPrivate * const d;
 
 };

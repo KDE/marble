@@ -49,7 +49,7 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
 
     mutable QMap<QString, GeoDataStyle> m_styleHash;
     mutable QMap<QString, GeoDataStyleMap> m_styleMapHash;
-    mutable QMap<QString, GeoDataSchema> m_schemaHash;
+    QMap<QString, GeoDataSchema> m_schemaHash;
     QString m_filename;
     QString m_baseUri;
     GeoDataNetworkLinkControl m_networkLinkControl;

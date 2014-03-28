@@ -177,7 +177,8 @@ public:
      * @brief Returns a schema with id = schemaId form schema storage
      * @param schemaId  The id of schema to be returned
      */
-    GeoDataSchema& schema( const QString& schemaId ) const;
+    GeoDataSchema schema( const QString& schemaId ) const;
+    GeoDataSchema &schema( const QString& schemaId );
 
     /**
      * @brief dump a vector of all schemas

@@ -23,15 +23,6 @@ namespace Marble
 class GeoDataSimpleFieldPrivate
 {
   public:
-    GeoDataSimpleFieldPrivate()
-    {
-    }
-
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataSimpleFieldType;
-    }
-
     QString m_name;
     GeoDataSimpleField::SimpleFieldType m_type;
     QString m_displayName;
@@ -92,7 +83,7 @@ GeoDataSimpleField& GeoDataSimpleField::operator=( const GeoDataSimpleField& oth
 
 const char* GeoDataSimpleField::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataSimpleFieldType;
 }
 
 void GeoDataSimpleField::pack( QDataStream& stream ) const

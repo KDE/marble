@@ -29,10 +29,11 @@ class GeoDataSchemaPrivate;
 
 class GEODATA_EXPORT GeoDataSchema : public GeoDataObject
 {
-  public:
+public:
     GeoDataSchema();
     GeoDataSchema( const QHash<QString, GeoDataSimpleField>& simpleFields );
     GeoDataSchema( const GeoDataSchema& other );
+    GeoDataSchema& operator=( const GeoDataSchema& other );
     ~GeoDataSchema();
 
     /*
@@ -44,7 +45,7 @@ class GEODATA_EXPORT GeoDataSchema : public GeoDataObject
      * @brief sets the id of schema
      * @param schemaId  The to be set
      */
-    void setSchemaId( QString& schemaId );
+    void setSchemaId( const QString& schemaId );
 
     /*
      * @brief Returns the name attribute of schema
@@ -55,19 +56,19 @@ class GEODATA_EXPORT GeoDataSchema : public GeoDataObject
      * @brief Sets the name attribute of the schema
      * @param name  The name to be set
      */
-    void setSchemaName( QString& name );
+    void setSchemaName( const QString& name );
 
     /*
      * @brief Returns the SimpleField child of schema
      * @param name  The value of name attribute of SimpleField which is to be returned
      */
-    GeoDataSimpleField& simpleField( QString& name ) const;
+    GeoDataSimpleField& simpleField( const QString &name ) const;
 
     /*
      * @brief Adds a SimpleField to schema
      * @param value  The SimpleField to be added
      */
-    void addSimpleField( GeoDataSimpleField& value );
+    void addSimpleField( const GeoDataSimpleField& value );
 
     /*
      * @brief dump a vector containing all simple fields of schema
@@ -79,8 +80,9 @@ class GEODATA_EXPORT GeoDataSchema : public GeoDataObject
     virtual void pack( QDataStream& stream ) const;
 
     virtual void unpack( QDataStream& stream );
-  private:
-    GeoDataSchemaPrivate * d;
+
+private:
+    GeoDataSchemaPrivate * const d;
 
 };
 
