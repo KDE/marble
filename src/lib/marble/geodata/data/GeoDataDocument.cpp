@@ -126,13 +126,18 @@ void GeoDataDocument::removeStyle( const QString& styleId )
     p()->m_styleHash.remove( styleId );
 }
 
-GeoDataStyle& GeoDataDocument::style( const QString& styleId ) const
+GeoDataStyle& GeoDataDocument::style( const QString& styleId )
 {
     /*
      * FIXME: m_styleHash always should contain at least default
      *        GeoDataStyle element
      */
     return p()->m_styleHash[ styleId ];
+}
+
+GeoDataStyle GeoDataDocument::style( const QString &styleId ) const
+{
+    return p()->m_styleHash.value( styleId );
 }
 
 QList<GeoDataStyle> GeoDataDocument::styles() const
@@ -153,9 +158,14 @@ void GeoDataDocument::removeStyleMap( const QString& mapId )
     p()->m_styleMapHash.remove( mapId );
 }
 
-GeoDataStyleMap& GeoDataDocument::styleMap( const QString& styleId ) const
+GeoDataStyleMap& GeoDataDocument::styleMap( const QString& styleId )
 {
     return p()->m_styleMapHash[ styleId ];
+}
+
+GeoDataStyleMap GeoDataDocument::styleMap( const QString &styleId ) const
+{
+    return p()->m_styleMapHash.value( styleId );
 }
 
 QList<GeoDataStyleMap> GeoDataDocument::styleMaps() const

@@ -131,7 +131,8 @@ public:
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    GeoDataStyle& style( const QString& styleId ) const;
+    GeoDataStyle& style( const QString& styleId );
+    GeoDataStyle style( const QString& styleId ) const;
 
     /**
     * @brief dump a Vector of all styles
@@ -154,7 +155,8 @@ public:
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    GeoDataStyleMap& styleMap( const QString& styleId ) const;
+    GeoDataStyleMap& styleMap( const QString& styleId );
+    GeoDataStyleMap styleMap( const QString& styleId ) const;
 
     /**
     * @brief dump a Vector of all styles
