@@ -49,6 +49,7 @@ enum DocumentRole {
 class GeoDataStyle;
 class GeoDataStyleMap;
 class GeoDataNetworkLinkControl;
+class GeoDataSchema;
 
 class GeoDataDocumentPrivate;
 
@@ -159,6 +160,29 @@ public:
     * @brief dump a Vector of all styles
     */
     QList<GeoDataStyleMap> styleMaps() const;
+
+    /**
+     * @brief Add a schema to simplemap storage
+     * @param schema  the new schema
+     */
+    void addSchema( const GeoDataSchema& schema );
+
+    /**
+     * @brief remove a schema from schema storage
+     * @param schemaId  the of schema to be removed
+     */
+    void removeSchema( const QString& schemaId );
+
+    /**
+     * @brief Returns a schema with id = schemaId form schema storage
+     * @param schemaId  The id of schema to be returned
+     */
+    GeoDataSchema& schema( const QString& schemaId ) const;
+
+    /**
+     * @brief dump a vector of all schemas
+     */
+    QList<GeoDataSchema> schemas() const;
 
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;

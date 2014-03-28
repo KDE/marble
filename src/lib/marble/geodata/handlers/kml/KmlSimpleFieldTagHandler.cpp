@@ -24,6 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "GeoDataSchema.h"
 
 #include "GeoParser.h"
 
@@ -38,13 +39,49 @@ GeoNode* KmlSimpleFieldTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_SimpleField ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    
+
     if( parentItem.represents( kmlTag_Schema ) ) {
+        GeoDataSimpleField simpleField;
         QString name = parser.attribute( "name" ).trimmed();
         QString type = parser.attribute( "type" ).trimmed();
+        simpleField.setName( name );
+        GeoDataSimpleField::SimpleFieldType fieldType = resolveType( type );
+        simpleField.setType( fieldType );
+        parentItem.nodeAs<GeoDataSchema>()->addSimpleField( simpleField );
+        return &parentItem.nodeAs<GeoDataSchema>()->simpleField( name );
     }
 
     return 0;
+}
+
+GeoDataSimpleField::SimpleFieldType KmlSimpleFieldTagHandler::resolveType( const QString& type )
+{
+    GeoDataSimpleField::SimpleFieldType fieldType;
+    if ( type == QString("string") ) {
+        fieldType = GeoDataSimpleField::String;
+    }
+    else if ( type == QString("int") ) {
+        fieldType = GeoDataSimpleField::Int;
+    }
+    else if ( type == QString("unit") ) {
+        fieldType = GeoDataSimpleField::UInt;
+    }
+    else if ( type == QString("short") ) {
+        fieldType = GeoDataSimpleField::Short;
+    }
+    else if ( type == QString("ushort") ) {
+        fieldType = GeoDataSimpleField::UShort;
+    }
+    else if ( type == QString("float") ) {
+        fieldType = GeoDataSimpleField::Float;
+    }
+    else if ( type == QString("double") ) {
+        fieldType = GeoDataSimpleField::Double;
+    }
+    else {
+        fieldType = GeoDataSimpleField::Bool;
+    }
+    return fieldType;
 }
 
 }

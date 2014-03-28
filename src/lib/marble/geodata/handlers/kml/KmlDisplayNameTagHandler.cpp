@@ -12,6 +12,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataData.h"
+#include "GeoDataSimpleField.h"
 #include "GeoParser.h"
 
 namespace Marble
@@ -26,9 +27,13 @@ GeoNode* KmldisplayNameTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_Data ) ) {
+    if ( parentItem.represents( kmlTag_Data ) ) {
         QString displayName = parser.readElementText().trimmed();
         parentItem.nodeAs<GeoDataData>()->setDisplayName( displayName );
+    }
+    else if ( parentItem.represents( kmlTag_SimpleField ) ) {
+        QString displayName = parser.readElementText().trimmed();
+        parentItem.nodeAs<GeoDataSimpleField>()->setDisplayName( displayName );
     }
     return 0;
 }

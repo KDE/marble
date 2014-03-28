@@ -66,6 +66,8 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataWait.cpp
         geodata/data/GeoDataSoundCue.cpp
         geodata/data/GeoDataAnimatedUpdate.cpp
+        geodata/data/GeoDataSchema.cpp
+        geodata/data/GeoDataSimpleField.cpp
 )
 
 SET ( geodata_scene_SRCS
@@ -418,6 +420,8 @@ geodata/writers/kml/KmlPointTagWriter.cpp
 geodata/writers/kml/KmlPolygonTagWriter.cpp
 geodata/writers/kml/KmlPolyStyleTagWriter.cpp
 geodata/writers/kml/KmlRegionTagWriter.cpp
+geodata/writers/kml/KmlSimpleFieldTagWriter.cpp
+geodata/writers/kml/KmlSchemaTagWriter.cpp
 geodata/writers/kml/KmlScreenOverlayWriter.cpp
 geodata/writers/kml/KmlStyleMapTagWriter.cpp
 geodata/writers/kml/KmlStyleTagWriter.cpp

@@ -14,6 +14,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataSchema.h"
 #include "GeoDataContainer_p.h"
 
 #include "GeoDataTypes.h"
@@ -48,6 +49,7 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
 
     mutable QMap<QString, GeoDataStyle> m_styleHash;
     mutable QMap<QString, GeoDataStyleMap> m_styleMapHash;
+    mutable QMap<QString, GeoDataSchema> m_schemaHash;
     QString m_filename;
     QString m_baseUri;
     GeoDataNetworkLinkControl m_networkLinkControl;

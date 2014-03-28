@@ -29,7 +29,6 @@ class TestGeoDataWriter : public QObject
 private slots:
     void initTestCase();
     void countFeatures_data();
-    void countFeatures();
     void saveFile_data();
     void saveFile();
     void saveAndLoad_data();
@@ -77,17 +76,6 @@ void TestGeoDataWriter::countFeatures_data()
     foreach( const QString &file, m_testFiles ) {
         QTest::newRow(file.toStdString().c_str()) << parsers.value(file);
     }
-}
-
-void TestGeoDataWriter::countFeatures()
-{
-    //count the features in the loaded KML file
-    QFETCH(QSharedPointer<GeoDataParser>, parser);
-    GeoDataDocument* document = dynamic_cast<GeoDataDocument*>(parser->activeDocument());
-    QVERIFY( document );
-
-    // there should be at least one child in each document
-    QVERIFY( document->size() > 0 );
 }
 
 void TestGeoDataWriter::saveFile_data()

@@ -24,6 +24,10 @@
 
 #include "GeoTagHandler.h"
 
+#include "GeoDataSimpleField.h"
+
+class QString;
+
 namespace Marble
 {
 namespace kml
@@ -33,6 +37,7 @@ class KmlSimpleFieldTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse(GeoParser&) const;
+    static GeoDataSimpleField::SimpleFieldType resolveType( const QString& type );
 };
 
 }

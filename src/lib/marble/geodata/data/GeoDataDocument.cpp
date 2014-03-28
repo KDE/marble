@@ -28,6 +28,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataNetworkLinkControl.h"
+#include "GeoDataSchema.h"
 
 #include "MarbleDebug.h"
 
@@ -160,6 +161,30 @@ GeoDataStyleMap& GeoDataDocument::styleMap( const QString& styleId ) const
 QList<GeoDataStyleMap> GeoDataDocument::styleMaps() const
 {
     return p()->m_styleMapHash.values();
+}
+
+void GeoDataDocument::addSchema( const GeoDataSchema& schema )
+{
+    detach();
+    p()->m_schemaHash.insert( schema.schemaId(), schema );
+    p()->m_schemaHash[ schema.schemaId() ].setParent( this );
+}
+
+void GeoDataDocument::removeSchema( const QString& schemaId )
+{
+    detach();
+    GeoDataSchema schema = p()->m_schemaHash.take( schemaId );
+    schema.setParent( 0 );
+}
+
+GeoDataSchema& GeoDataDocument::schema( const QString& schemaId ) const
+{
+    return p()->m_schemaHash[ schemaId ];
+}
+
+QList<GeoDataSchema> GeoDataDocument::schemas() const
+{
+    return p()->m_schemaHash.values();
 }
 
 void GeoDataDocument::pack( QDataStream& stream ) const

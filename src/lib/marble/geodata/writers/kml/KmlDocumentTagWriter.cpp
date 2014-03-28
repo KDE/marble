@@ -20,6 +20,7 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataTimeStamp.h"
 #include "GeoDataTimeSpan.h"
+#include "GeoDataSchema.h"
 
 #include "GeoDataTypes.h"
 
@@ -47,6 +48,9 @@ bool KmlDocumentTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) co
     }
     foreach( const GeoDataStyleMap &map, document->styleMaps() ) {
         writeElement( &map, writer );
+    }
+    foreach( const GeoDataSchema &schema, document->schemas() ) {
+        writeElement( &schema, writer );
     }
 
     QVector<GeoDataFeature*>::ConstIterator it =  document->constBegin();

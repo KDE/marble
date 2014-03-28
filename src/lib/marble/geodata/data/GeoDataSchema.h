@@ -1,0 +1,89 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
+//
+
+#ifndef MARBLE_GEODATASCHEMA_H
+#define MARBLE_GEODATASCHEMA_H
+
+// Qt
+#include <QHash>
+#include <QList>
+
+// Marble
+#include "GeoDataObject.h"
+#include "GeoDataSimpleField.h"
+#include "geodata_export.h"
+
+class QDataStream;
+
+namespace Marble
+{
+
+class GeoDataSchemaPrivate;
+
+class GEODATA_EXPORT GeoDataSchema : public GeoDataObject
+{
+  public:
+    GeoDataSchema();
+    GeoDataSchema( const QHash<QString, GeoDataSimpleField>& simpleFields );
+    GeoDataSchema( const GeoDataSchema& other );
+    ~GeoDataSchema();
+
+    /*
+     * @brief Returns the id of schema
+     */
+    QString schemaId() const;
+
+    /*
+     * @brief sets the id of schema
+     * @param schemaId  The to be set
+     */
+    void setSchemaId( QString& schemaId );
+
+    /*
+     * @brief Returns the name attribute of schema
+     */
+    QString schemaName() const;
+
+    /*
+     * @brief Sets the name attribute of the schema
+     * @param name  The name to be set
+     */
+    void setSchemaName( QString& name );
+
+    /*
+     * @brief Returns the SimpleField child of schema
+     * @param name  The value of name attribute of SimpleField which is to be returned
+     */
+    GeoDataSimpleField& simpleField( QString& name ) const;
+
+    /*
+     * @brief Adds a SimpleField to schema
+     * @param value  The SimpleField to be added
+     */
+    void addSimpleField( GeoDataSimpleField& value );
+
+    /*
+     * @brief dump a vector containing all simple fields of schema
+     */
+    QList<GeoDataSimpleField> simpleFields() const;
+
+    virtual const char* nodeType() const;
+
+    virtual void pack( QDataStream& stream ) const;
+
+    virtual void unpack( QDataStream& stream );
+  private:
+    GeoDataSchemaPrivate * d;
+
+};
+
+}
+
+#endif  // MARBLE_GEODATASCHEMA_H
