@@ -737,9 +737,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 #endif
 
         // let others, especially float items, still process the event
-        // Mouse move events need to be eaten to avoid the default oxygen behavior of
-        // moving the window around when we don't handle the event. See bug 242414.
-        return event->type() != QEvent::MouseMove;
+        // Note: This caused a bug in combination with oxygen, see https://bugs.kde.org/show_bug.cgi?id=242414
+        // and changing it a related regression, see https://bugs.kde.org/show_bug.cgi?id=324862
+        return false;
     }
     else {
         if ( e->type() == QEvent::Wheel ) {
