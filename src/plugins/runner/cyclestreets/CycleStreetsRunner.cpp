@@ -178,10 +178,12 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
 
     for( ; iter != end; ++iter) {
         QStringList coordinate =  iter->split(',');
-        double const lon = coordinate.at( 0 ).toDouble();
-        double const lat = coordinate.at( 1 ).toDouble();
-        GeoDataCoordinates const position( lon, lat, 0.0, GeoDataCoordinates::Degree );
-        routeWaypoints->append( position );
+        if ( coordinate.size() == 2 ) {
+            double const lon = coordinate.at( 0 ).toDouble();
+            double const lat = coordinate.at( 1 ).toDouble();
+            GeoDataCoordinates const position( lon, lat, 0.0, GeoDataCoordinates::Degree );
+            routeWaypoints->append( position );
+        }
     }
     routePlacemark->setGeometry( routeWaypoints );
 
@@ -230,10 +232,12 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
         QStringList::iterator end = points.end();
         for  ( int j=0; iter != end; ++iter, ++j ) {
             QStringList coordinate = iter->split( ',' );
-            double const lon = coordinate.at( 0 ).toDouble();
-            double const lat = coordinate.at( 1 ).toDouble();
-            double const alt = j < elevation.size() ? elevation[j].toDouble() : 0.0;
-            lineString->append( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ) );
+            if ( coordinate.size() == 2 ) {
+                double const lon = coordinate.at( 0 ).toDouble();
+                double const lat = coordinate.at( 1 ).toDouble();
+                double const alt = j < elevation.size() ? elevation[j].toDouble() : 0.0;
+                lineString->append( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ) );
+            }
         }
         instructions->setGeometry( lineString );
         result->append( instructions );
