@@ -199,7 +199,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     result->append( routePlacemark );
 
     int i;
-    for ( i = 1; features.at( i ).firstChildElement().tagName() != "cs:segment"; ++i );
+    for ( i = 1; i < features.count() && features.at( i ).firstChildElement().tagName() != "cs:segment"; ++i );
     for ( ; i < features.count(); ++i) {
         QDomElement segment = features.at( i ).toElement();
 
