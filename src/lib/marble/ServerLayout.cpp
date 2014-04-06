@@ -84,7 +84,11 @@ CustomServerLayout::CustomServerLayout( GeoSceneTiled *texture )
 
 QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
+#if QT_VERSION < 0x050000
     QString urlStr = prototypeUrl.toString();
+#else
+    QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved );
+#endif
 
     urlStr.replace( "{zoomLevel}", QString::number( id.zoomLevel() ) );
     urlStr.replace( "{x}", QString::number( id.x() ) );
@@ -169,7 +173,11 @@ QuadTreeServerLayout::QuadTreeServerLayout( GeoSceneTiled *textureLayer )
 
 QUrl QuadTreeServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &id ) const
 {
+#if QT_VERSION < 0x050000
     QString urlStr = prototypeUrl.toString();
+#else
+    QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved );
+#endif
 
     urlStr.replace( "{quadIndex}", encodeQuadTree( id ) );
 
