@@ -2,45 +2,8 @@
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document>
         <Schema name="Flight" id="002f">
-            <SimpleField name="arrivesAt" type="string">
-                <displayName>This flight arrives at</displayName>
-            </SimpleField>
             <SimpleField name="journeyTime" type="float">
                 <displayName>The expected time(hh.mm) of journey</displayName>
-            </SimpleField>
-            <SimpleField name="operator" type="string">
-                <displayName>Operator of This Flight</displayName>
-            </SimpleField>
-            <SimpleField name="departsFrom" type="string">
-                <displayName>This flight departs from</displayName>
-            </SimpleField>
-            <SimpleField name="flightNumber" type="int">
-                <displayName>Flight Number</displayName>
-            </SimpleField>
-        </Schema>
-        <Schema name="CountryInfo" id="CountryInfo">
-            <SimpleField name="population" type="double">
-                <displayName>Pupulation of The Country</displayName>
-            </SimpleField>
-            <SimpleField name="Name" type="string">
-                <displayName>Country Name</displayName>
-            </SimpleField>
-            <SimpleField name="continent" type="string">
-                <displayName>Division Contenent</displayName>
-            </SimpleField>
-            <SimpleField name="iso_a3" type="string">
-                <displayName>Three Letter ISO Code of Country</displayName>
-            </SimpleField>
-        </Schema>
-        <Schema name="TrailHeadType" id="TrailHeadTypeId">
-            <SimpleField name="ElevationGain" type="int">
-                <displayName>Change in altitude</displayName>
-            </SimpleField>
-            <SimpleField name="TrailLength" type="double">
-                <displayName>Length in miles</displayName>
-            </SimpleField>
-            <SimpleField name="TrailHeadName" type="string">
-                <displayName>Trail Head Name</displayName>
             </SimpleField>
         </Schema>
     </Document>
