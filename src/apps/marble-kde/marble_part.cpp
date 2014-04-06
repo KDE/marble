@@ -1252,10 +1252,10 @@ void MarblePart::repairNode( QDomNode node, const QString &child )
     }
 }
 
-void MarblePart::updateCloudSyncStatus(const QString& status, CloudSyncManager::Status status_type )
+void MarblePart::updateCloudSyncStatus(const QString& status )
 {
     m_ui_cloudSyncSettings.cloudSyncStatus->setText(status);
-    switch (status_type){
+    switch (m_controlView->cloudSyncManager()->status()){
         case CloudSyncManager::Success:
             m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet("QLabel { color : green; }");
             break;
@@ -1549,8 +1549,8 @@ void MarblePart::editSettings()
     connect( m_ui_cloudSyncSettings.testLoginButton, SIGNAL(clicked()),
              this, SLOT(updateCloudSyncCredentials()) );
 
-    connect( m_controlView->cloudSyncManager(), SIGNAL(statusChanged(QString, CloudSyncManager::Status)),
-             this, SLOT(updateCloudSyncStatus(QString, CloudSyncManager::Status)));
+    connect( m_controlView->cloudSyncManager(), SIGNAL(statusChanged(QString)),
+             this, SLOT(updateCloudSyncStatus(QString)));
 
     // routing page
     RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget( m_controlView->marbleModel() );

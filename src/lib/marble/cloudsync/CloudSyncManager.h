@@ -124,6 +124,16 @@ public:
     void setStatus( const QString &status, CloudSyncManager::Status status_type );
 
     /**
+     * @return Last synchronization status
+     */
+    CloudSyncManager::Status status() const;
+
+    /**
+     * @return A human readable description of the last synchronization status
+     */
+    QString statusDescription() const;
+
+    /**
      * Returns API path as a QString.
      * @return API path
      */
@@ -152,7 +162,7 @@ Q_SIGNALS:
     void owncloudUsernameChanged(const QString &username);
     void owncloudPasswordChanged(const QString &password);
     void owncloudServerChanged(const QString &server);
-    void statusChanged(const QString &status, CloudSyncManager::Status status_type);
+    void statusChanged(const QString &status);
 
     void apiUrlChanged(const QUrl &url);
     void routeSyncManagerChanged();

@@ -157,7 +157,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  updateStatusBar();
 
-    void updateCloudSyncStatus( const QString &status, CloudSyncManager::Status status_type );
+    void updateCloudSyncStatus(const QString &status);
 
     /**
      * Saves the settings of all plugins.

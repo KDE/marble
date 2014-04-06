@@ -167,8 +167,18 @@ void CloudSyncManager::setStatus( const QString &status, CloudSyncManager::Statu
     if( d->m_status != status && d->m_status_type != status_type) {
         d->m_status = status;
         d->m_status_type = status_type;
-        emit statusChanged( d->m_status, d->m_status_type );
+        emit statusChanged( d->m_status );
     }
+}
+
+CloudSyncManager::Status CloudSyncManager::status() const
+{
+    return d->m_status_type;
+}
+
+QString CloudSyncManager::statusDescription() const
+{
+    return d->m_status;
 }
 
 QString CloudSyncManager::apiPath() const
