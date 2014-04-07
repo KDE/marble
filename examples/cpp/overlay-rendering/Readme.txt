@@ -7,5 +7,5 @@ an icon that gets displayed on top of a certain area on the globe and a
 LatLonBox (GeoDataLatLonBox in Marble) describing its exact surface.
 
 As in the tutorial for displaying placemarks, we will be using a
-GeoDataDocument as the the containter for our overlay. The document is
+GeoDataDocument as the containter for our overlay. The document is
 afterwards exposed to Marble by having it added to the GeoDataTreeModel.
