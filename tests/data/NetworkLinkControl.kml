@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <NetworkLinkControl>
+    <minRefreshPeriod>0</minRefreshPeriod>
+    <maxSessionLength>-1</maxSessionLength>
+    <cookie>cookie=sometext</cookie>
+    <message>Message</message>
+    <linkName>Link name</linkName>
+    <linkDescription>Link description</linkDescription>
+    <linkSnippet maxLines="2">Link snippet</linkSnippet>
+    <expires>2014-02-02T00:00:00</expires>
+    <Update>
+      <targetHref>Some-targethref</targetHref>
+    </Update>
+  </NetworkLinkControl>
+</kml>

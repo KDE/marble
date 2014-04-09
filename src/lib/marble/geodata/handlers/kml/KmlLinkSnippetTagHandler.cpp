@@ -28,8 +28,8 @@ GeoNode* KmllinkSnippetTagHandler::parse( GeoParser& parser ) const
 
     if ( parentItem.represents( kmlTag_NetworkLinkControl ) )
     {
-        QString linkSnippet = parser.readElementText();
         int maxLines = parser.attribute( "maxLines" ).trimmed().toInt();
+        QString linkSnippet = parser.readElementText();
 
         parentItem.nodeAs<GeoDataNetworkLinkControl>()->setLinkSnippet( linkSnippet );
         parentItem.nodeAs<GeoDataNetworkLinkControl>()->setMaxLines( maxLines );
