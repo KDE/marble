@@ -63,7 +63,7 @@ GeoDataPoint::~GeoDataPoint()
 
 bool GeoDataPoint::operator==( const GeoDataPoint &other ) const
 {
-    return GeoDataGeometry::equals(other) &&
+    return equals(other) &&
            coordinates() == other.coordinates();
 }
 

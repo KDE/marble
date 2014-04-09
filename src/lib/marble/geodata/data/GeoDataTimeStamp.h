@@ -43,6 +43,13 @@ class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
     */
     GeoDataTimeStamp& operator=( const GeoDataTimeStamp& other );
 
+    /**
+     * @brief equality operators
+     */
+    bool operator==( const GeoDataTimeStamp& other ) const;
+    bool operator!=( const GeoDataTimeStamp& other ) const;
+
+
     /// Provides type information for downcasting a GeoNode
     virtual const char* nodeType() const;
 

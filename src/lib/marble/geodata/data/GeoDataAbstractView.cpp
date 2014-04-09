@@ -56,6 +56,15 @@ GeoDataAbstractView &GeoDataAbstractView::operator =( const GeoDataAbstractView 
     return *this;
 }
 
+
+bool GeoDataAbstractView::equals(const GeoDataAbstractView &other) const
+{
+    return GeoDataObject::equals(other) &&
+           d->m_timeSpan == other.d->m_timeSpan &&
+           d->m_timeStamp == other.d->m_timeStamp &&
+           d->m_altitudeMode == other.d->m_altitudeMode;
+}
+
 const GeoDataTimeSpan &GeoDataAbstractView::timeSpan() const
 {
     return d->m_timeSpan;

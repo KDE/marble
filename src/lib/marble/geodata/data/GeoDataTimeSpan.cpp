@@ -90,6 +90,18 @@ GeoDataTimeSpan& GeoDataTimeSpan::operator=( const GeoDataTimeSpan& other )
     return *this;
 }
 
+bool GeoDataTimeSpan::operator==( const GeoDataTimeSpan& other ) const
+{
+    return equals(other) &&
+           d->m_begin == other.d->m_begin &&
+           d->m_end == other.d->m_end;
+}
+
+bool GeoDataTimeSpan::operator!=( const GeoDataTimeSpan& other ) const
+{
+    return !this->operator==( other );
+}
+
 void GeoDataTimeSpan::pack( QDataStream& stream ) const
 {
     GeoDataTimePrimitive::pack( stream );

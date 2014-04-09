@@ -57,6 +57,11 @@ class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
 
 private:
     GeoDataAbstractViewPrivate* const d;
+
+protected:
+    bool equals(const GeoDataAbstractView &other) const;
+
+    using GeoDataObject::equals;
 };
 
 } // namespace Marble

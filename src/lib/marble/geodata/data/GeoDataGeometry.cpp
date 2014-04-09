@@ -145,7 +145,8 @@ void GeoDataGeometry::unpack( QDataStream& stream )
 
 bool GeoDataGeometry::equals(const GeoDataGeometry &other) const
 {
-    return d->m_extrude == other.d->m_extrude &&
+    return GeoDataObject::equals(other) &&
+           d->m_extrude == other.d->m_extrude &&
            d->m_altitudeMode == other.d->m_altitudeMode;
 }
 

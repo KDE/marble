@@ -45,6 +45,19 @@ GeoDataTimeStamp& GeoDataTimeStamp::operator=( const GeoDataTimeStamp& other )
     return *this;
 }
 
+bool GeoDataTimeStamp::operator==( const GeoDataTimeStamp& other ) const
+{
+    return equals(other) &&
+           d->m_resolution == other.d->m_resolution &&
+           d->m_when == other.d->m_when;
+}
+
+bool GeoDataTimeStamp::operator!=( const GeoDataTimeStamp& other ) const
+{
+    return !this->operator==( other );
+}
+
+
 const char* GeoDataTimeStamp::nodeType() const
 {
     return GeoDataTypes::GeoDataTimeStampType;

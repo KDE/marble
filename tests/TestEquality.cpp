@@ -39,6 +39,8 @@
 #include <GeoDataLatLonBox.h>
 #include <GeoDataLod.h>
 #include <GeoDataRegion.h>
+#include <GeoDataTimeSpan.h>
+#include <GeoDataTimeStamp.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -71,6 +73,8 @@ private slots:
     void latLonAltBoxTest();
     void lodTest();
     void regionTest();
+    void timeSpanTest();
+    void timeStampTest();
 };
 
 
@@ -284,6 +288,50 @@ void TestEquality::cameraTest()
     QCOMPARE( camera1, camera1 );
     QCOMPARE( camera2, camera2 );
     QCOMPARE( camera1 == camera2, false );
+    QVERIFY( camera1 != camera2 );
+
+
+    GeoDataTimeStamp timeStampBegin, timeStampEnd;
+    QDateTime date1( QDate(2014, 4, 7) );
+
+    timeStampBegin.setWhen( date1 );
+    timeStampEnd.setWhen( date1 );
+    timeStampBegin.setResolution( GeoDataTimeStamp::YearResolution );
+    timeStampEnd.setResolution( GeoDataTimeStamp::YearResolution );
+
+    GeoDataTimeSpan timeSpan1, timeSpan2;
+    timeSpan1.setBegin( timeStampBegin );
+    timeSpan1.setEnd( timeStampEnd );
+    timeSpan2.setBegin( timeStampBegin );
+    timeSpan2.setEnd( timeStampEnd );
+
+    GeoDataTimeStamp timeStamp1, timeStamp2;
+    QDateTime date2( QDate(2014, 4, 8) );
+    timeStamp1.setWhen( date2 );
+    timeStamp2.setWhen( date2 );
+    timeStamp1.setResolution( GeoDataTimeStamp::SecondResolution );
+    timeStamp2.setResolution( GeoDataTimeStamp::SecondResolution );
+
+    camera1.setTimeSpan( timeSpan1 );
+    camera2.setTimeSpan( timeSpan2 );
+    camera1.setTimeStamp( timeStamp1 );
+    camera2.setTimeStamp( timeStamp2 );
+
+    camera2.setAltitudeMode( Marble::Absolute );
+
+    QCOMPARE( camera1, camera2 );
+    QCOMPARE( camera2, camera2 );
+    QVERIFY( camera1 == camera2 );
+
+    camera1.setId("camera1");
+    camera2.setId("camera2");
+    QVERIFY( camera1 != camera2 );
+
+    camera1.setId("camera2");
+    QVERIFY( camera1 == camera2 );
+
+    timeStamp1.setResolution( GeoDataTimeStamp::YearResolution );
+    camera2.setTimeStamp( timeStamp1 );
     QVERIFY( camera1 != camera2 );
 }
 
@@ -799,6 +847,64 @@ void TestEquality::regionTest()
     QCOMPARE( region2, region2 );
     QCOMPARE( region1 == region2, false );
     QVERIFY( region1 != region2 );
+}
+
+void TestEquality::timeSpanTest()
+{
+    GeoDataTimeSpan timeSpan1, timeSpan2;
+    GeoDataTimeStamp timeStampBegin, timeStampEnd;
+
+    QDateTime date1( QDate(2014, 1, 10) ), date2( QDate(2014, 4, 21) );
+
+    timeStampBegin.setWhen( date1 );
+    timeStampEnd.setWhen( date2 );
+    timeStampBegin.setResolution( GeoDataTimeStamp::DayResolution );
+    timeStampEnd.setResolution( GeoDataTimeStamp::DayResolution );
+
+    timeSpan1.setBegin( timeStampBegin );
+    timeSpan1.setEnd( timeStampEnd );
+    timeSpan2.setBegin( timeStampBegin );
+    timeSpan2.setEnd( timeStampBegin );
+
+    QCOMPARE( timeSpan1, timeSpan1 );
+    QCOMPARE( timeSpan2, timeSpan2 );
+    QCOMPARE( timeSpan1 == timeSpan2, false );
+    QVERIFY( timeSpan1 != timeSpan2 );
+
+    timeSpan2.setEnd( timeStampEnd );
+
+    timeSpan1.setTargetId("timeSpan2");
+    timeSpan2.setTargetId("timeSpan1");
+    QVERIFY( timeSpan1 != timeSpan2 );
+
+    timeSpan1.setTargetId("timeSpan1");
+    QVERIFY( timeSpan1 == timeSpan2 );
+}
+
+void TestEquality::timeStampTest()
+{
+    GeoDataTimeStamp timeStamp1, timeStamp2;
+    QDateTime date1( QDate(1994, 10, 4) ), date2( QDate(2070, 10, 4) );
+
+    timeStamp1.setWhen( date1 );
+    timeStamp2.setWhen( date2 );
+    timeStamp1.setResolution( GeoDataTimeStamp::YearResolution );
+    timeStamp2.setResolution( GeoDataTimeStamp::DayResolution );
+
+    QCOMPARE( timeStamp1, timeStamp1 );
+    QCOMPARE( timeStamp2, timeStamp2 );
+    QCOMPARE( timeStamp1 == timeStamp2, false );
+    QVERIFY( timeStamp1 != timeStamp2 );
+
+    timeStamp2.setWhen( date1 );
+    timeStamp1.setResolution( GeoDataTimeStamp::DayResolution );
+
+    timeStamp1.setId("timeStamp1");
+    timeStamp2.setId("timeStamp2");
+    QVERIFY( timeStamp1 != timeStamp2 );
+
+    timeStamp1.setId("timeStamp2");
+    QVERIFY( timeStamp1 == timeStamp2 );
 }
 
 QTEST_MAIN( TestEquality )

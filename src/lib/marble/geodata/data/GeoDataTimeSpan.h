@@ -38,6 +38,12 @@ class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
     */
     GeoDataTimeSpan& operator=( const GeoDataTimeSpan& other );
 
+    /**
+     * @brief equality operators
+     */
+    bool operator==( const GeoDataTimeSpan& other ) const;
+    bool operator!=( const GeoDataTimeSpan& other ) const;
+
     /// Provides type information for downcasting a GeoNode
     virtual const char* nodeType() const;
 

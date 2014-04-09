@@ -84,6 +84,8 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 
  protected:
     bool equals(const GeoDataGeometry &other) const;
+
+    using GeoDataObject::equals;
 };
 
 }
