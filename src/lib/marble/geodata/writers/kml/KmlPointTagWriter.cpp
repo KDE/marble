@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2014      Marek Hakala <hakala.marek@gmail.com>
 //
 
 #include "KmlPointTagWriter.h"
@@ -29,7 +30,7 @@ bool KmlPointTagWriter::write( const GeoNode *node,
     const GeoDataPoint *point = static_cast<const GeoDataPoint*>(node);
 
     writer.writeStartElement( kml::kmlTag_Point );
-
+    writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( point->extrude() ), "0" );
     writer.writeStartElement("coordinates");
 
     QString coordinateString;

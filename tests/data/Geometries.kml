@@ -51,6 +51,7 @@
     </Placemark>
     <Placemark>
       <LinearRing>
+	<extrude>1</extrude>
         <coordinates>34.4621300000,9.6382900000 23.2000000000,12.3345000000 24.2321300000,-32.2382900000 13.2000052000,2.3045010000 24.1221300000,19.7382900000 31.2233000000,21.0045100000 41.4221300000,12.6382900000 21.2000000000,17.5330000000</coordinates>
       </LinearRing>
     </Placemark>
@@ -58,9 +59,11 @@
       <name>MultiGeometry</name>
       <MultiGeometry>
         <Point>
+	  <extrude>1</extrude>
           <coordinates>31.2310000000,29.1234567890</coordinates>
         </Point>
         <Polygon>
+	  <extrude>1</extrude>
           <outerBoundaryIs>
             <LinearRing>
               <coordinates>-122.3662780000,37.8188440000 -122.3652480000,37.8192670000 -122.3656400000,37.8198610000 -122.3666690000,37.8194290000 -122.3662780000,37.8188440000</coordinates>
@@ -73,6 +76,7 @@
           </innerBoundaryIs>
         </Polygon>
         <LineString>
+	  <extrude>1</extrude>
           <coordinates>-122.4425587930,37.8066641860 -122.4428379590,37.8066357830</coordinates>
         </LineString>
         <LineString>

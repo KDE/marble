@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2014      Marek Hakala <hakala.marek@gmail.com>
 //
 
 #include "KmlLinearRingTagWriter.h"
@@ -30,6 +31,7 @@ bool KmlLinearRingTagWriter::write( const GeoNode *node, GeoWriter& writer ) con
     if ( ring->size() > 1 )
     {
         writer.writeStartElement( kml::kmlTag_LinearRing );
+        writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( ring->extrude() ), "0" );
         writer.writeStartElement( "coordinates" );
 
         for ( int i = 0; i < ring->size(); ++i )

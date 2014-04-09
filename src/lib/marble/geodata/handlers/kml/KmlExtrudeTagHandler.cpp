@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+    Copyright (C) 2014 Marek Hakala <hakala.marek@gmail.com>
 
     This file is part of the KDE project
 
@@ -20,13 +21,14 @@
 */
 
 #include "KmlExtrudeTagHandler.h"
-
 #include "MarbleDebug.h"
-
 #include "KmlElementDictionary.h"
 
 #include "GeoDataGeometry.h"
 #include "GeoDataPoint.h"
+#include "GeoDataPolygon.h"
+#include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
 #include "GeoDataPlacemark.h"
 
 #include "GeoParser.h"
@@ -40,23 +42,31 @@ KML_DEFINE_TAG_HANDLER( extrude )
 GeoNode* KmlextrudeTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_extrude ) );
-
     GeoStackItem parentItem = parser.parentElement();
-    
+
     GeoDataGeometry* geometry;
     bool validParents = false;
 
-    if( parentItem.is<GeoDataPlacemark>() && parentItem.represents( kmlTag_Point ) ) {
+    if( parentItem.is<GeoDataPoint>() ) {
+        geometry = parentItem.nodeAs<GeoDataPoint>();
+        validParents = true;
+    } else if( parentItem.is<GeoDataPlacemark>() ) {
         geometry = parentItem.nodeAs<GeoDataPlacemark>()->geometry();
         validParents = true;
-    } else if( parentItem.nodeAs<GeoDataGeometry>() ) {
-        geometry = parentItem.nodeAs<GeoDataGeometry>();
+    } else if( parentItem.is<GeoDataPolygon>() ) {
+        geometry = parentItem.nodeAs<GeoDataPolygon>();
+        validParents = true;
+    } else if( parentItem.is<GeoDataLineString>() ) {
+        geometry = parentItem.nodeAs<GeoDataLineString>();
+        validParents = true;
+    } else if( parentItem.is<GeoDataLinearRing>() ) {
+        geometry = parentItem.nodeAs<GeoDataLinearRing>();
         validParents = true;
     }
 
     if( validParents ) {
         QString content = parser.readElementText().trimmed();
-        
+
         if( content == QString( "1" ) ) {
             geometry->setExtrude( true );
         } else {

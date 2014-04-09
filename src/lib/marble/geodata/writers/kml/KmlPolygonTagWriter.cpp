@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Shou Ya <shouyatf@gmail.com>
+// Copyright 2014      Marek Hakala <hakala.marek@gmail.com>
 //
 
 #include "KmlPolygonTagWriter.h"
@@ -28,6 +29,7 @@ bool KmlPolygonTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( node );
 
     writer.writeStartElement( kml::kmlTag_Polygon );
+    writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( polygon->extrude() ), "0" );
 
     writer.writeStartElement( "outerBoundaryIs" );
     writeElement( &polygon->outerBoundary(), writer );
