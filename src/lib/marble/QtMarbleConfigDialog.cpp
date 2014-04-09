@@ -62,7 +62,7 @@ class QtMarbleConfigDialogPrivate
           w_pluginSettings( 0 ),
           m_cloudSyncStatusLabel( 0 ),
           m_marbleWidget( marbleWidget ),
-          m_syncManager(cloudSyncManager->bookmarkSyncManager()),
+          m_syncManager( cloudSyncManager ? cloudSyncManager->bookmarkSyncManager() : 0 ),
           m_cloudSyncManager(cloudSyncManager),
           m_pluginModel(),
           m_initialGraphicsSystem(),
@@ -187,10 +187,14 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     connect( d->ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()), SIGNAL(syncNowClicked()) );
     connect( d->ui_cloudSyncSettings.testLoginButton, SIGNAL(clicked()), this, SLOT(updateCloudSyncCredentials()) );
 
-    connect(d->m_syncManager, SIGNAL(syncComplete()), this, SLOT(updateLastSync()));
-    updateLastSync();
-    connect( d->m_cloudSyncManager, SIGNAL(statusChanged(QString, CloudSyncManager::Status)),
-             this, SLOT(updateCloudSyncStatus(QString, CloudSyncManager::Status)));
+    if ( d->m_syncManager ) {
+        connect(d->m_syncManager, SIGNAL(syncComplete()), this, SLOT(updateLastSync()));
+        updateLastSync();
+    }
+    if ( d->m_cloudSyncManager ) {
+        connect( d->m_cloudSyncManager, SIGNAL(statusChanged(QString)),
+                 this, SLOT(updateCloudSyncStatus(QString)));
+    }
 
     // Layout
     QVBoxLayout *layout = new QVBoxLayout( this );
@@ -245,14 +249,20 @@ void QtMarbleConfigDialog::syncSettings()
 
 void QtMarbleConfigDialog::updateCloudSyncCredentials()
 {
-    d->m_cloudSyncManager->setOwncloudCredentials(
-                d->ui_cloudSyncSettings.kcfg_owncloudServer->text(),
-                d->ui_cloudSyncSettings.kcfg_owncloudUsername->text(),
-                d->ui_cloudSyncSettings.kcfg_owncloudPassword->text() );
+    if ( d->m_cloudSyncManager ) {
+        d->m_cloudSyncManager->setOwncloudCredentials(
+                    d->ui_cloudSyncSettings.kcfg_owncloudServer->text(),
+                    d->ui_cloudSyncSettings.kcfg_owncloudUsername->text(),
+                    d->ui_cloudSyncSettings.kcfg_owncloudPassword->text() );
+    }
 }
 
 void QtMarbleConfigDialog::disableSyncNow()
 {
+    if ( !d->m_syncManager ) {
+        return;
+    }
+
     d->ui_cloudSyncSettings.button_syncNow->setDisabled(true);
 
     QTimer *timeoutTimer = new QTimer(this);
@@ -273,11 +283,19 @@ void QtMarbleConfigDialog::disableSyncNow()
 
 void QtMarbleConfigDialog::enableSyncNow()
 {
+    if ( !d->m_syncManager ) {
+        return;
+    }
+
     d->ui_cloudSyncSettings.button_syncNow->setEnabled(true);
 }
 
 void QtMarbleConfigDialog::updateLastSync()
 {
+    if ( !d->m_syncManager ) {
+        return;
+    }
+
     if (!d->m_syncManager->lastSync().isValid()) {
         d->ui_cloudSyncSettings.labelLastSync->setText(tr("Never synchronized."));
         return;
