@@ -34,6 +34,9 @@ public:
 
     GeoDataListStyle& operator=( const GeoDataListStyle &other );
 
+    bool operator==( const GeoDataListStyle &other ) const;
+    bool operator!=( const GeoDataListStyle &other ) const;
+
     ~GeoDataListStyle();
 
     /** Provides type information for downcasting a GeoNode */

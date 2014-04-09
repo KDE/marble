@@ -52,6 +52,19 @@ GeoDataStyleSelector& GeoDataStyleSelector::operator=( const GeoDataStyleSelecto
     return *this;
 }
 
+bool GeoDataStyleSelector::operator==( const GeoDataStyleSelector &other ) const
+{
+    if ( !GeoDataObject::equals( other ) ) {
+        return false;
+    }
+    return d->m_styleId == other.d->m_styleId;
+}
+
+bool GeoDataStyleSelector::operator!=( const GeoDataStyleSelector &other ) const
+{
+    return !this->operator==( other );
+}
+
 const char* GeoDataStyleSelector::nodeType() const
 {
     return d->nodeType();

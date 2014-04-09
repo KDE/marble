@@ -49,6 +49,35 @@ GeoDataListStyle &GeoDataListStyle::operator=( const GeoDataListStyle &other )
     return *this;
 }
 
+bool GeoDataListStyle::operator==( const GeoDataListStyle &other ) const
+{
+    if ( !GeoDataObject::equals( other ) ||
+         d->m_bgColor != other.d->m_bgColor ||
+         d->m_listItemType != other.d->m_listItemType ||
+         d->m_vector.size() != other.d->m_vector.size() )
+    {
+        return false;
+    }
+
+    QVector<GeoDataItemIcon*>::const_iterator begin = d->m_vector.begin();
+    QVector<GeoDataItemIcon*>::const_iterator end = d->m_vector.end();
+    QVector<GeoDataItemIcon*>::const_iterator otherBegin = other.d->m_vector.begin();
+    QVector<GeoDataItemIcon*>::const_iterator otherEnd = other.d->m_vector.end();
+
+    for( ; begin != end; ++begin, ++otherBegin ) {
+        if ( **begin != **otherBegin ) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool GeoDataListStyle::operator!=( const GeoDataListStyle &other ) const
+{
+    return !this->operator==( other );
+}
+
 GeoDataListStyle::~GeoDataListStyle()
 {
     delete d;

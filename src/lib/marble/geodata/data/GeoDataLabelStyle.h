@@ -55,6 +55,9 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     */
     GeoDataLabelStyle& operator=( const GeoDataLabelStyle& other );
 
+    bool operator==( const GeoDataLabelStyle &other ) const;
+    bool operator!=( const GeoDataLabelStyle &other ) const;
+
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;
 

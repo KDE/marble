@@ -59,6 +59,9 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
     */
     GeoDataStyleSelector& operator=( const GeoDataStyleSelector& other );
 
+    bool operator==( const GeoDataStyleSelector &other ) const;
+    bool operator!=( const GeoDataStyleSelector &other ) const;
+
     /**
      * @brief Serialize the styleselector to a stream
      * @param  stream  the stream

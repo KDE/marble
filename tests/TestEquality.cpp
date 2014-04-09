@@ -7,6 +7,7 @@
 //
 // Copyright 2014      Cruceru Calin-Cristian <crucerucalincristian@gmail.com>
 // Copyright 2014      Sanjiban Bairagya      <sanjiban22393@gmail.com>
+// Copyright 2014      Abhinav Gangwar        <abhgang@gmail.com>
 //
 
 #include <QObject>
@@ -39,6 +40,13 @@
 #include <GeoDataLatLonBox.h>
 #include <GeoDataLod.h>
 #include <GeoDataRegion.h>
+#include <GeoDataIconStyle.h>
+#include <GeoDataLabelStyle.h>
+#include <GeoDataLineStyle.h>
+#include <GeoDataListStyle.h>
+#include <GeoDataPolyStyle.h>
+#include <GeoDataStyle.h>
+#include <GeoDataStyleMap.h>
 #include <GeoDataTimeSpan.h>
 #include <GeoDataTimeStamp.h>
 #include "TestUtils.h"
@@ -73,6 +81,13 @@ private slots:
     void latLonAltBoxTest();
     void lodTest();
     void regionTest();
+    void iconStyleTest();
+    void lineStyleTest();
+    void listStyleTest();
+    void polyStyleTest();
+    void labelStyleTest();
+    void styleTest();
+    void styleMapTest();
     void timeSpanTest();
     void timeStampTest();
 };
@@ -393,6 +408,8 @@ void TestEquality::itemIconTest()
     GeoDataItemIcon icon1, icon2;
     QImage img1( 10, 20, QImage::Format_Mono );
     QImage img2( 30, 50, QImage::Format_Mono );
+    img1.fill( Qt::green );
+    img2.fill( Qt::green );
 
     icon1.setIcon( img1 );
     icon1.setIconPath( "some/path" );
@@ -905,6 +922,294 @@ void TestEquality::timeStampTest()
 
     timeStamp1.setId("timeStamp2");
     QVERIFY( timeStamp1 == timeStamp2 );
+}
+
+void TestEquality::iconStyleTest()
+{
+    GeoDataIconStyle iconStyle1, iconStyle2;
+    QImage icon( 50, 50, QImage::Format_Mono );
+    icon.fill( Qt::black );
+    QPointF hotSpot = QPointF( 6.7, 4.6 );
+
+    iconStyle1.setScale( 1.0 );
+    iconStyle1.setIconPath( "path/to/icon" );
+    iconStyle1.setIcon( icon );
+    iconStyle1.setHotSpot( hotSpot, GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction );
+    iconStyle1.setHeading( 0 );
+
+    iconStyle2.setScale( 1.0 );
+    iconStyle2.setIconPath( "path/to/icon" );
+    iconStyle2.setIcon( icon );
+    iconStyle2.setHotSpot( hotSpot, GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction );
+    iconStyle2.setHeading( 0 );
+
+    QCOMPARE( iconStyle1, iconStyle1 );
+    QCOMPARE( iconStyle2, iconStyle2 );
+    QCOMPARE( iconStyle1 != iconStyle2, false );
+    QVERIFY( iconStyle1 == iconStyle2 );
+
+    iconStyle2.setHeading( 1 );
+    iconStyle2.setScale( 2.0 );
+
+    QCOMPARE( iconStyle1, iconStyle1 );
+    QCOMPARE( iconStyle2, iconStyle2 );
+    QCOMPARE( iconStyle1 == iconStyle2, false );
+    QVERIFY( iconStyle1 != iconStyle2 );
+
+}
+
+void TestEquality::lineStyleTest()
+{
+    GeoDataLineStyle lineStyle1, lineStyle2;
+    QVector< qreal > pattern( 7, 7.8 );
+    
+    lineStyle1.setWidth( 1.3 );
+    lineStyle1.setPhysicalWidth( 1.0 );
+    lineStyle1.setCapStyle( Qt::RoundCap );
+    lineStyle1.setPenStyle( Qt::SolidLine );
+    lineStyle1.setBackground( false );
+    lineStyle1.setDashPattern( pattern );
+
+    lineStyle2.setWidth( 1.3 );
+    lineStyle2.setPhysicalWidth( 1.0 );
+    lineStyle2.setCapStyle( Qt::RoundCap );
+    lineStyle2.setPenStyle( Qt::SolidLine );
+    lineStyle2.setBackground( false );
+    lineStyle2.setDashPattern( pattern );
+
+    QCOMPARE( lineStyle1, lineStyle2 );
+    QCOMPARE( lineStyle2, lineStyle2 );
+    QCOMPARE( lineStyle1 != lineStyle2, false );
+    QVERIFY( lineStyle1 == lineStyle2 );
+
+    lineStyle2.setCapStyle( Qt::FlatCap );
+    lineStyle2.setBackground( true );
+
+    QCOMPARE( lineStyle1, lineStyle1 );
+    QCOMPARE( lineStyle2, lineStyle2 );
+    QCOMPARE( lineStyle1 == lineStyle2, false );
+    QVERIFY( lineStyle1 != lineStyle2 );
+}
+
+void TestEquality::listStyleTest()
+{
+    GeoDataListStyle listStyle1, listStyle2;
+    
+    listStyle1.setListItemType( GeoDataListStyle::Check );
+    listStyle1.setBackgroundColor( Qt::gray );
+    for( int i = 0; i < 5; ++i ) {
+        GeoDataItemIcon *icon = new GeoDataItemIcon;
+        QImage img( 10 * ( i + 1 ), 10 * ( i + 1 ), QImage::Format_Mono );
+        img.fill( Qt::black );
+        icon->setIcon( img );
+        icon->setIconPath( QString("path/to/icon") );
+        icon->setState( GeoDataItemIcon::Open );
+        listStyle1.append( icon );
+    }
+
+    listStyle2.setListItemType( GeoDataListStyle::Check );
+    listStyle2.setBackgroundColor( Qt::gray );
+    for( int i = 0; i < 5; ++i ) {
+        GeoDataItemIcon *icon = new GeoDataItemIcon;
+        QImage img( 10 * ( i + 1 ), 10 * ( i + 1 ), QImage::Format_Mono );
+        img.fill( Qt::black );
+        icon->setIcon( img );
+        icon->setIconPath( QString("path/to/icon") );
+        icon->setState( GeoDataItemIcon::Open );
+        listStyle2.append( icon );
+    }
+
+    QCOMPARE( listStyle1, listStyle1 );
+    QCOMPARE( listStyle2, listStyle2 );
+    QCOMPARE( listStyle1 != listStyle2, false );
+    QVERIFY( listStyle1 == listStyle2 );
+
+    listStyle2.setBackgroundColor( Qt::green );
+    listStyle2.setListItemType( GeoDataListStyle::RadioFolder );
+
+    QCOMPARE( listStyle1, listStyle1 );
+    QCOMPARE( listStyle2, listStyle2 );
+    QCOMPARE( listStyle1 == listStyle2, false );
+    QVERIFY( listStyle1 != listStyle2 );
+}
+
+void TestEquality::polyStyleTest()
+{
+    GeoDataPolyStyle polyStyle1, polyStyle2;
+
+    polyStyle1.setColor( Qt::red );
+    polyStyle1.setFill( false );
+    polyStyle1.setOutline( false );
+    polyStyle1.setBrushStyle( Qt::SolidPattern );
+
+    polyStyle2.setColor( Qt::red );
+    polyStyle2.setFill( false );
+    polyStyle2.setOutline( false );
+    polyStyle2.setBrushStyle( Qt::SolidPattern );
+
+    QCOMPARE( polyStyle1, polyStyle1 );
+    QCOMPARE( polyStyle2, polyStyle2 );
+    QCOMPARE( polyStyle1 != polyStyle2, false );
+    QVERIFY( polyStyle1 == polyStyle2 );
+
+    polyStyle2.setOutline( true );
+    polyStyle2.setBrushStyle( Qt::CrossPattern );
+
+    QCOMPARE( polyStyle1, polyStyle1 );
+    QCOMPARE( polyStyle2, polyStyle2 );
+    QCOMPARE( polyStyle1 == polyStyle2, false );
+    QVERIFY( polyStyle1 != polyStyle2 );
+}
+
+void TestEquality::labelStyleTest()
+{
+    GeoDataLabelStyle labelStyle1, labelStyle2;
+
+    labelStyle1.setColor( Qt::blue );
+    labelStyle1.setScale( 1.0 );
+    labelStyle1.setAlignment( GeoDataLabelStyle::Center );
+    labelStyle1.setFont( QFont( "Helvetica", 10 ) );
+
+    labelStyle2.setColor( Qt::blue );
+    labelStyle2.setScale( 1.0 );
+    labelStyle2.setAlignment( GeoDataLabelStyle::Center );
+    labelStyle2.setFont( QFont( "Helvetica", 10 ) );
+
+    QCOMPARE( labelStyle1, labelStyle1 );
+    QCOMPARE( labelStyle2, labelStyle2 );
+    QCOMPARE( labelStyle1 != labelStyle2, false );
+    QVERIFY( labelStyle1 == labelStyle2);
+
+    labelStyle2.setAlignment( GeoDataLabelStyle::Corner );
+    labelStyle2.setFont( QFont( "Helvetica [Cronyx]", 12 ) );
+
+    QCOMPARE( labelStyle1, labelStyle1 );
+    QCOMPARE( labelStyle2, labelStyle2 );
+    QCOMPARE( labelStyle1 == labelStyle2, false);
+    QVERIFY( labelStyle1 != labelStyle2 );
+}
+
+void TestEquality::styleTest()
+{
+    GeoDataStyle style1, style2;
+    GeoDataIconStyle iconStyle;
+    QImage icon( 50, 50, QImage::Format_Mono );
+    icon.fill( Qt::black );
+    QPointF hotSpot = QPointF( 7.6, 6.4 );
+
+    iconStyle.setScale( 1.0 );
+    iconStyle.setIconPath( "path/to/icon" );
+    iconStyle.setIcon( icon );
+    iconStyle.setHotSpot( hotSpot, GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction );
+    iconStyle.setHeading( 0 );
+    
+    GeoDataLabelStyle labelStyle;
+    labelStyle.setColor( Qt::blue );
+    labelStyle.setScale( 1.0 );
+    labelStyle.setAlignment( GeoDataLabelStyle::Center );
+    labelStyle.setFont( QFont( "Helvetica", 10 ) );
+
+    GeoDataLineStyle lineStyle;
+    QVector< qreal > pattern( 5, 6.2 );
+    lineStyle.setWidth( 1.2 );
+    lineStyle.setPhysicalWidth( 1.0 );
+    lineStyle.setCapStyle( Qt::RoundCap );
+    lineStyle.setPenStyle( Qt::SolidLine );
+    lineStyle.setBackground( false );
+    lineStyle.setDashPattern( pattern );
+
+    GeoDataPolyStyle polyStyle;
+    polyStyle.setColor( Qt::red );
+    polyStyle.setFill( false );
+    polyStyle.setOutline( false );
+    polyStyle.setBrushStyle( Qt::SolidPattern );
+
+    GeoDataBalloonStyle balloon;
+    balloon.setBackgroundColor(Qt::white);
+    balloon.setTextColor(Qt::black);
+    balloon.setText("SomeText");
+    balloon.setDisplayMode(GeoDataBalloonStyle::Hide);
+
+    GeoDataListStyle listStyle;    
+    listStyle.setListItemType( GeoDataListStyle::Check );
+    listStyle.setBackgroundColor( Qt::gray );
+    for( int i = 0; i < 5; ++i ) {
+        GeoDataItemIcon *icon = new GeoDataItemIcon;
+        QImage img( 20 * ( i + 1 ), 20 * ( i + 1 ), QImage::Format_Mono );
+        img.fill( Qt::black );
+        icon->setIcon( img );
+        icon->setIconPath( QString("path/to/icon") );
+        icon->setState( GeoDataItemIcon::Open );
+        listStyle.append( icon );
+    }
+
+    style1.setIconStyle( iconStyle );
+    style1.setLineStyle( lineStyle );
+    style1.setLabelStyle( labelStyle );
+    style1.setPolyStyle( polyStyle );
+    style1.setBalloonStyle( balloon );
+    style1.setListStyle( listStyle );
+
+    style2.setIconStyle( iconStyle );
+    style2.setListStyle( listStyle );
+    style2.setLabelStyle( labelStyle );
+    style2.setPolyStyle( polyStyle );
+    style2.setBalloonStyle( balloon );
+    style2.setListStyle( listStyle );
+
+    QCOMPARE( style1, style1 );
+    QCOMPARE( style2, style2 );
+    QCOMPARE( style1 != style2, false );
+    QVERIFY( style1 == style2 );
+
+    iconStyle.setScale( 2.0 );
+    labelStyle.setAlignment( GeoDataLabelStyle::Corner );
+    lineStyle.setBackground( true );
+    polyStyle.setOutline( true );
+
+    style2.setIconStyle( iconStyle );
+    style2.setLabelStyle( labelStyle );
+    style2.setLineStyle( lineStyle );
+    style2.setPolyStyle( polyStyle );
+    
+    QCOMPARE( style1, style1 );
+    QCOMPARE( style2, style2 );
+    QCOMPARE( style1 == style2, false );
+    QVERIFY( style1 != style2 );
+}
+
+void TestEquality::styleMapTest()
+{
+    GeoDataStyleMap styleMap1, styleMap2;
+    styleMap1["germany"] = "gst1";
+    styleMap1["germany"] = "gst2";
+    styleMap1["germany"] = "gst3";
+    styleMap1["poland"] = "pst1";
+    styleMap1["poland"] = "pst2";
+    styleMap1["poland"] = "pst3";
+    styleMap1.setLastKey("poland");
+
+    styleMap2["germany"] = "gst1";
+    styleMap2["germany"] = "gst2";
+    styleMap2["germany"] = "gst3";
+    styleMap2["poland"] = "pst1";
+    styleMap2["poland"] = "pst2";
+    styleMap2["poland"] = "pst3";
+    styleMap2.setLastKey("poland");
+
+    QCOMPARE( styleMap1, styleMap1 );
+    QCOMPARE( styleMap2, styleMap2 );
+    QCOMPARE( styleMap1 != styleMap2, false );
+
+    styleMap2.insert("Romania", "rst1");
+    styleMap2.insert("Romania", "rst2");
+    styleMap2.insert("Romania", "rst3");
+    styleMap2.setLastKey("Romania");
+
+    QCOMPARE( styleMap1, styleMap1 );
+    QCOMPARE( styleMap2, styleMap2 );
+    QCOMPARE( styleMap1 == styleMap2, false );
+    QVERIFY( styleMap1 != styleMap2 );
 }
 
 QTEST_MAIN( TestEquality )

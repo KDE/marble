@@ -108,6 +108,9 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     */
     GeoDataStyle& operator=( const GeoDataStyle& other );
 
+    bool operator==( const GeoDataStyle &other ) const;
+    bool operator!=( const GeoDataStyle &other ) const;
+
     /**
      * @brief Serialize the style to a stream
      * @param  stream  the stream

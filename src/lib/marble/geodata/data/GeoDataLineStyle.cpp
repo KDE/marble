@@ -68,6 +68,25 @@ GeoDataLineStyle& GeoDataLineStyle::operator=( const GeoDataLineStyle& other )
     return *this;
 }
 
+bool GeoDataLineStyle::operator==( const GeoDataLineStyle &other ) const
+{
+    if ( GeoDataColorStyle::operator!=( other ) ) {
+        return false;
+    }
+
+    return d->m_width == other.d->m_width &&
+           d->m_physicalWidth == other.d->m_physicalWidth &&
+           d->m_capStyle == other.d->m_capStyle &&
+           d->m_penStyle == other.d->m_penStyle &&
+           d->m_background == other.d->m_background &&
+           d->m_pattern == other.d->m_pattern;
+}
+
+bool GeoDataLineStyle::operator!=( const GeoDataLineStyle &other ) const
+{
+    return !this->operator==( other );
+}
+
 const char* GeoDataLineStyle::nodeType() const
 {
     return d->nodeType();

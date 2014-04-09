@@ -50,6 +50,9 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
     */
     GeoDataPolyStyle& operator=( const GeoDataPolyStyle& other );
 
+    bool operator==( const GeoDataPolyStyle &other ) const;
+    bool operator!=( const GeoDataPolyStyle &other ) const;
+
     /// Provides type information for downcasting a GeoNode
     virtual const char* nodeType() const;
 

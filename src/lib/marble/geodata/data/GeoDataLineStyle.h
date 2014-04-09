@@ -52,6 +52,9 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
     */
     GeoDataLineStyle& operator=( const GeoDataLineStyle& other );
 
+    bool operator==( const GeoDataLineStyle &other ) const;
+    bool operator!=( const GeoDataLineStyle &other ) const;
+
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;
 

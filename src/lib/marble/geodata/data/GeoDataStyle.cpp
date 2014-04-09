@@ -74,6 +74,25 @@ GeoDataStyle& GeoDataStyle::operator=( const GeoDataStyle& other )
     return *this;
 }
 
+bool GeoDataStyle::operator==( const GeoDataStyle &other ) const
+{
+    if ( GeoDataStyleSelector::operator!=( other ) ) {
+        return false;
+    }
+
+    return d->m_iconStyle == other.d->m_iconStyle &&
+           d->m_labelStyle == other.d->m_labelStyle &&
+           d->m_listStyle == other.d->m_listStyle &&
+           d->m_polyStyle == other.d->m_polyStyle &&
+           d->m_balloonStyle == other.d->m_balloonStyle &&
+           d->m_listStyle == other.d->m_listStyle;
+}
+
+bool GeoDataStyle::operator!=( const GeoDataStyle &other ) const
+{
+    return !this->operator==( other );
+}
+
 const char* GeoDataStyle::nodeType() const
 {
     return d->nodeType();

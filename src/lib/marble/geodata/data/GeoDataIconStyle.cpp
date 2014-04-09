@@ -76,6 +76,24 @@ GeoDataIconStyle& GeoDataIconStyle::operator=( const GeoDataIconStyle& other )
     return *this;
 }
 
+bool GeoDataIconStyle::operator==( const GeoDataIconStyle &other ) const
+{
+    if ( GeoDataColorStyle::operator!=( other ) ) {
+        return false;
+    }
+
+    return d->m_scale == other.d->m_scale &&
+           d->m_icon == other.d->m_icon &&
+           d->m_iconPath == other.d->m_iconPath &&
+           d->m_hotSpot == other.d->m_hotSpot &&
+           d->m_heading == other.d->m_heading;
+}
+
+bool GeoDataIconStyle::operator!=( const GeoDataIconStyle &other ) const
+{
+    return !this->operator==( other );
+}
+
 const char* GeoDataIconStyle::nodeType() const
 {
     return d->nodeType();

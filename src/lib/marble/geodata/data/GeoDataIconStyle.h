@@ -37,6 +37,9 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
 
     GeoDataIconStyle& operator=( const GeoDataIconStyle& other );
 
+    bool operator==( const GeoDataIconStyle &other ) const;
+    bool operator!=( const GeoDataIconStyle &other ) const;
+
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;
 

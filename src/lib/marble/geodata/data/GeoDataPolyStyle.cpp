@@ -64,6 +64,22 @@ GeoDataPolyStyle& GeoDataPolyStyle::operator=( const GeoDataPolyStyle& other )
     return *this;
 }
 
+bool GeoDataPolyStyle::operator==( const GeoDataPolyStyle &other ) const
+{
+    if ( GeoDataColorStyle::operator!=( other ) ) {
+        return false;
+    }
+
+    return d->m_fill == other.d->m_fill &&
+           d->m_outline == other.d->m_outline &&
+           d->m_brushStyle == other.d->m_brushStyle;
+}
+
+bool GeoDataPolyStyle::operator!=( const GeoDataPolyStyle &other ) const
+{
+    return !this->operator==( other );
+}
+
 const char* GeoDataPolyStyle::nodeType() const
 {
     return d->nodeType();

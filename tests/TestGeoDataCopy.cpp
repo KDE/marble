@@ -591,23 +591,27 @@ void TestGeoDataCopy::copyPolyStyle()
 void TestGeoDataCopy::copyStyleMap()
 {
     GeoDataStyleMap styleMap;
-    QMap<QString,QString> testMap;
     styleMap["germany"] = "gst1";
     styleMap["germany"] = "gst2";
     styleMap["germany"] = "gst3";
     styleMap["poland"] = "pst1";
     styleMap["poland"] = "pst2";
     styleMap["poland"] = "pst3";
-    testMap["germany"] = "gst1";
-    testMap["germany"] = "gst2";
-    testMap["germany"] = "gst3";
-    testMap["poland"] = "pst1";
-    testMap["poland"] = "pst2";
-    testMap["poland"] = "pst3";
     styleMap.setLastKey("poland");
 
-    QVERIFY(styleMap == testMap);
-    QVERIFY(styleMap.lastKey() == QString("poland"));
+    QVERIFY( styleMap.lastKey() == QString("poland") );
+
+    GeoDataStyleMap testMap = styleMap;
+
+    QVERIFY( styleMap == testMap );
+
+    testMap.insert("Romania", "rst1");
+    testMap.insert("Romania", "rst2");
+    testMap.insert("Romania", "rst3");
+    testMap.setLastKey("Romania");
+
+    QVERIFY( testMap.lastKey() == QString("Romania") );
+    QVERIFY( styleMap.lastKey() == QString("poland") );
 }
 
 }

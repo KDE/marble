@@ -68,6 +68,22 @@ GeoDataStyleMap& GeoDataStyleMap::operator=( const GeoDataStyleMap& other )
     return *this;
 }
 
+bool GeoDataStyleMap::operator==( const GeoDataStyleMap &other ) const
+{
+    if ( GeoDataStyleSelector::operator!=( other ) ||
+         QMap<QString, QString>::operator!=( other ) )
+    {
+        return false;
+    }
+
+    return d->lastKey == other.d->lastKey;
+}
+
+bool GeoDataStyleMap::operator!=( const GeoDataStyleMap &other ) const
+{
+    return !this->operator==( other );
+}
+
 void GeoDataStyleMap::pack( QDataStream& stream ) const
 {
     GeoDataStyleSelector::pack( stream );
