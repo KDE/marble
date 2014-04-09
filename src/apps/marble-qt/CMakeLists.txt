@@ -6,9 +6,9 @@ if(MSVC)
   set(marble_SRCS ${marble_SRCS} marble.rc)
 endif(MSVC)
 
-if(MINGW)
+if(MINGW AND QT4_FOUND)
    QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
-endif(MINGW)
+endif(MINGW AND QT4_FOUND)
 
 qt_wrap_ui(marble_SRCS ${marble_UI})
 marble_qt4_automoc(${marble_SRCS})
