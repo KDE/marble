@@ -46,6 +46,21 @@ GeoDataScreenOverlay &GeoDataScreenOverlay::operator=( const GeoDataScreenOverla
     return *this;
 }
 
+bool GeoDataScreenOverlay::operator==(const GeoDataScreenOverlay& other) const
+{
+    return equals(other) &&
+           d->m_overlayXY == other.d->m_overlayXY &&
+           d->m_screenXY == other.d->m_screenXY &&
+           d->m_rotationXY == other.d->m_rotationXY &&
+           d->m_size == other.d->m_size &&
+           d->m_rotation == other.d->m_rotation;
+}
+
+bool GeoDataScreenOverlay::operator!=(const GeoDataScreenOverlay& other) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataScreenOverlay::~GeoDataScreenOverlay()
 {
     delete d;

@@ -32,7 +32,8 @@ public:
     GeoDataPhotoOverlay( const GeoDataPhotoOverlay &other );
 
     GeoDataPhotoOverlay& operator=( const GeoDataPhotoOverlay &other );
-
+    bool operator==( const GeoDataPhotoOverlay &other ) const;
+    bool operator!=( const GeoDataPhotoOverlay &other ) const;
     ~GeoDataPhotoOverlay();
 
     /** Provides type information for downcasting a GeoNode */

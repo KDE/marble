@@ -27,6 +27,8 @@ public:
     GeoDataViewVolume( const GeoDataViewVolume &other );
 
     GeoDataViewVolume& operator=( const GeoDataViewVolume &other );
+    bool operator==( const GeoDataViewVolume &other ) const;
+    bool operator!=( const GeoDataViewVolume &other ) const;
 
     ~GeoDataViewVolume();
 

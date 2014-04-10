@@ -27,7 +27,8 @@ public:
     GeoDataScreenOverlay( const GeoDataScreenOverlay &other );
 
     GeoDataScreenOverlay& operator=( const GeoDataScreenOverlay &other );
-
+    bool operator==( const GeoDataScreenOverlay &other ) const;
+    bool operator!=( const GeoDataScreenOverlay &other ) const;
     ~GeoDataScreenOverlay();
 
     /** Provides type information for downcasting a GeoNode */

@@ -31,7 +31,8 @@ public:
     GeoDataVec2( const GeoDataVec2 &other );
 
     GeoDataVec2& operator=( const GeoDataVec2 &other );
-
+    bool operator==( const GeoDataVec2 &other ) const;
+    bool operator!=( const GeoDataVec2 &other ) const;
     ~GeoDataVec2();
 
     Unit xunit() const;

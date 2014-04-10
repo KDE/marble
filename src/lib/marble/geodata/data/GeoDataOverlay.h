@@ -61,6 +61,9 @@ class GEODATA_EXPORT GeoDataOverlay: public GeoDataFeature
 
 private:
     GeoDataOverlayPrivate * const d;
+
+protected:
+    bool equals(const GeoDataOverlay &other) const;
 };
 
 }

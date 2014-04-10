@@ -53,6 +53,21 @@ GeoDataPhotoOverlay &GeoDataPhotoOverlay::operator=( const GeoDataPhotoOverlay &
     return *this;
 }
 
+bool GeoDataPhotoOverlay::operator==(const GeoDataPhotoOverlay& other) const
+{
+    return equals(other) &&
+           d->m_rotation == other.d->m_rotation &&
+           d->m_shape == other.d->m_shape &&
+           d->m_imagePyramid == other.d->m_imagePyramid &&
+           d->m_point == other.d->m_point &&
+           d->m_viewVolume == other.d->m_viewVolume;
+}
+
+bool GeoDataPhotoOverlay::operator!=(const GeoDataPhotoOverlay& other) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataPhotoOverlay::~GeoDataPhotoOverlay()
 {
     delete d;

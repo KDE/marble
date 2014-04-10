@@ -70,6 +70,17 @@ GeoDataVec2 &GeoDataVec2::operator=( const GeoDataVec2 &other )
     return *this;
 }
 
+bool GeoDataVec2::operator==(const GeoDataVec2& other) const
+{
+    return x() == other.x() && y() == other.y() &&
+           d->m_xunit == other.d->m_xunit && d->m_yunit == other.d->m_yunit;
+}
+
+bool GeoDataVec2::operator!=(const GeoDataVec2& other) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataVec2::~GeoDataVec2()
 {
     delete d;

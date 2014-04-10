@@ -29,7 +29,8 @@ public:
     GeoDataGroundOverlay( const GeoDataGroundOverlay &other );
 
     GeoDataGroundOverlay& operator=( const GeoDataGroundOverlay &other );
-
+    bool operator==( const GeoDataGroundOverlay &other ) const;
+    bool operator!=( const GeoDataGroundOverlay &other ) const;
     ~GeoDataGroundOverlay();
 
     /** Provides type information for downcasting a GeoNode */

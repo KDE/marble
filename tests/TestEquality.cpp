@@ -49,6 +49,11 @@
 #include <GeoDataStyleMap.h>
 #include <GeoDataTimeSpan.h>
 #include <GeoDataTimeStamp.h>
+#include <GeoDataViewVolume.h>
+#include <GeoDataVec2.h>
+#include <GeoDataScreenOverlay.h>
+#include <GeoDataPhotoOverlay.h>
+#include <GeoDataGroundOverlay.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -90,6 +95,11 @@ private slots:
     void styleMapTest();
     void timeSpanTest();
     void timeStampTest();
+    void viewVolumeTest();
+    void vecTest();
+    void screenOverlayTest();
+    void photoOverlayTest();
+    void groundOverlayTest();
 };
 
 
@@ -1210,6 +1220,230 @@ void TestEquality::styleMapTest()
     QCOMPARE( styleMap2, styleMap2 );
     QCOMPARE( styleMap1 == styleMap2, false );
     QVERIFY( styleMap1 != styleMap2 );
+}
+
+void TestEquality::viewVolumeTest()
+{
+    GeoDataViewVolume volume1, volume2;
+
+    volume1.setLeftFov( 5.6 );
+    volume1.setRightFov( 6.5 );
+    volume1.setTopFov( 2.3 );
+    volume1.setBottomFov( 9.2 );
+    volume1.setNear( 8.6 );
+
+    volume2.setLeftFov( 5.6 );
+    volume2.setRightFov( 6.5 );
+    volume2.setTopFov( 2.3 );
+    volume2.setBottomFov( 9.2 );
+    volume2.setNear( 8.6 );
+
+    QCOMPARE( volume1, volume1 );
+    QCOMPARE( volume2, volume2 );
+    QCOMPARE( volume1 != volume2, false );
+    QVERIFY( volume1 == volume2 );
+
+    volume2.setRightFov( 7.3 );
+
+    QCOMPARE( volume1, volume1 );
+    QCOMPARE( volume2, volume2 );
+    QCOMPARE( volume1 == volume2, false );
+    QVERIFY( volume1 != volume2 );
+}
+
+void TestEquality::vecTest()
+{
+    GeoDataVec2 vec1, vec2;
+
+    vec1.setXunits( GeoDataVec2::Fraction );
+    vec1.setYunits( GeoDataVec2::Pixels );
+
+    vec2.setXunits( GeoDataVec2::Fraction );
+    vec2.setYunits( GeoDataVec2::Pixels );
+
+    QCOMPARE( vec1, vec1 );
+    QCOMPARE( vec2, vec2 );
+    QCOMPARE( vec1 != vec2, false );
+    QVERIFY( vec1 == vec2 );
+
+    vec2.setYunits( GeoDataVec2::Fraction );
+
+    QCOMPARE( vec1, vec1 );
+    QCOMPARE( vec2, vec2 );
+    QCOMPARE( vec1 == vec2, false );
+    QVERIFY( vec1 != vec2 );
+}
+
+void TestEquality::screenOverlayTest()
+{
+    GeoDataVec2 vec1, vec2, vec3, vec4;
+
+    vec1.setXunits( GeoDataVec2::Fraction );
+    vec1.setYunits( GeoDataVec2::Pixels );
+
+    vec2.setXunits( GeoDataVec2::Fraction );
+    vec2.setYunits( GeoDataVec2::InsetPixels );
+
+    vec3.setXunits( GeoDataVec2::Pixels );
+    vec3.setYunits( GeoDataVec2::Pixels );
+
+    vec4.setXunits( GeoDataVec2::Fraction );
+    vec4.setYunits( GeoDataVec2::Fraction );
+
+    GeoDataScreenOverlay overlay1, overlay2;
+
+    overlay1.setOverlayXY( vec1 );
+    overlay1.setRotationXY( vec2 );
+    overlay1.setScreenXY( vec3 );
+    overlay1.setSize( vec4 );
+    overlay1.setRotation( 3.4 );
+
+    overlay2.setOverlayXY( vec1 );
+    overlay2.setRotationXY( vec2 );
+    overlay2.setScreenXY( vec3 );
+    overlay2.setSize( vec4 );
+    overlay2.setRotation( 3.4 );
+
+    QCOMPARE( overlay1, overlay1 );
+    QCOMPARE( overlay2, overlay2 );
+    QCOMPARE( overlay1 != overlay2, false );
+    QVERIFY( overlay1 == overlay2 );
+
+    overlay2.setRotation( 7.3 );
+
+    QCOMPARE( overlay1, overlay1 );
+    QCOMPARE( overlay2, overlay2 );
+    QCOMPARE( overlay1 == overlay2, false );
+    QVERIFY( overlay1 != overlay2 );
+}
+
+void TestEquality::photoOverlayTest()
+{
+    GeoDataPhotoOverlay overlay1, overlay2;
+    GeoDataViewVolume volume1, volume2;
+
+    volume1.setLeftFov( 5.6 );
+    volume1.setRightFov( 6.5 );
+    volume1.setTopFov( 2.3 );
+    volume1.setBottomFov( 9.2 );
+    volume1.setNear( 8.6 );
+
+    volume2.setLeftFov( 5.6 );
+    volume2.setRightFov( 6.5 );
+    volume2.setTopFov( 2.3 );
+    volume2.setBottomFov( 9.2 );
+    volume2.setNear( 8.6 );
+
+    overlay1.setViewVolume( volume1 );
+    overlay2.setViewVolume( volume2 );
+
+    GeoDataImagePyramid pyramid1, pyramid2;
+
+    pyramid1.setTileSize( 3 );
+    pyramid1.setMaxWidth( 5 );
+    pyramid1.setMaxHeight( 8 );
+    pyramid1.setGridOrigin( GeoDataImagePyramid::UpperLeft );
+
+    pyramid2.setTileSize( 3 );
+    pyramid2.setMaxWidth( 5 );
+    pyramid2.setMaxHeight( 8 );
+    pyramid2.setGridOrigin( GeoDataImagePyramid::UpperLeft );
+
+    overlay1.setImagePyramid( pyramid1 );
+    overlay2.setImagePyramid( pyramid2 );
+
+    GeoDataPoint point1, point2;
+    GeoDataCoordinates coord1, coord2;
+
+    coord1.set(100,100,100);
+    coord2.set(100,100,100);
+    point1.setCoordinates(coord1);
+    point2.setCoordinates(coord2);
+    overlay1.setPoint( point1 );
+    overlay2.setPoint( point2 );
+
+    overlay1.setShape( GeoDataPhotoOverlay::Cylinder );
+    overlay2.setShape( GeoDataPhotoOverlay::Cylinder );
+
+    overlay1.setRotation( 2.5 );
+    overlay2.setRotation( 2.5 );
+
+    QCOMPARE( overlay1, overlay1 );
+    QCOMPARE( overlay2, overlay2 );
+    QCOMPARE( overlay1 != overlay2, false );
+    QVERIFY( overlay1 == overlay2 );
+
+    overlay2.setRotation( 4.3 );
+
+    QCOMPARE( overlay1, overlay1 );
+    QCOMPARE( overlay2, overlay2 );
+    QCOMPARE( overlay1 == overlay2, false );
+    QVERIFY( overlay1 != overlay2 );
+}
+
+void TestEquality::groundOverlayTest()
+{
+    GeoDataGroundOverlay overlay1, overlay2;
+    GeoDataLatLonBox latLonBox1, latLonBox2;
+
+    latLonBox1.setEast( 40 );
+    latLonBox1.setWest( 50 );
+    latLonBox1.setNorth( 60 );
+    latLonBox1.setSouth( 70 );
+    latLonBox1.setRotation( 20 );
+    latLonBox1.setBoundaries( 70, 80, 50, 60 );
+
+    latLonBox2.setEast( 40 );
+    latLonBox2.setWest( 50 );
+    latLonBox2.setNorth( 60 );
+    latLonBox2.setSouth( 70 );
+    latLonBox2.setRotation( 20 );
+    latLonBox2.setBoundaries( 70, 80, 50, 60 );
+
+    overlay1.setLatLonBox( latLonBox1 );
+    overlay2.setLatLonBox( latLonBox2 );
+
+    GeoDataLatLonQuad quad1, quad2;
+    quad1.setBottomLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad1.setBottomLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad1.setBottomRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad1.setBottomRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    quad1.setTopLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad1.setTopLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad1.setTopRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad1.setTopRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    quad2.setBottomLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad2.setBottomLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad2.setBottomRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad2.setBottomRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    quad2.setTopLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad2.setTopLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad2.setTopRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad2.setTopRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    overlay1.setLatLonQuad( quad1 );
+    overlay2.setLatLonQuad( quad2 );
+
+    overlay1.setAltitude( 23.5 );
+    overlay2.setAltitude( 23.5 );
+
+    overlay1.setAltitudeMode( Marble::Absolute );
+    overlay2.setAltitudeMode( Marble::Absolute );
+
+    QCOMPARE( overlay1, overlay1 );
+    QCOMPARE( overlay2, overlay2 );
+    QCOMPARE( overlay1 != overlay2, false );
+    QVERIFY( overlay1 == overlay2 );
+
+    overlay2.setAltitude( 42.3 );
+
+    QCOMPARE( overlay1, overlay1 );
+    QCOMPARE( overlay2, overlay2 );
+    QCOMPARE( overlay1 == overlay2, false );
+    QVERIFY( overlay1 != overlay2 );
 }
 
 QTEST_MAIN( TestEquality )

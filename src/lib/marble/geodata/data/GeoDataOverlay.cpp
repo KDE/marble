@@ -105,4 +105,12 @@ QString GeoDataOverlay::absoluteIconFile() const
     return resolvePath( d->m_iconPath );
 }
 
+bool GeoDataOverlay::equals(const GeoDataOverlay& other) const
+{
+    return d->m_drawOrder == other.d->m_drawOrder
+        && d->m_color == other.d->m_color
+        && d->m_iconPath == other.d->m_iconPath
+        && d->m_image == other.d->m_image;
+}
+
 }

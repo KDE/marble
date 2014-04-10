@@ -50,6 +50,20 @@ GeoDataGroundOverlay &GeoDataGroundOverlay::operator=( const GeoDataGroundOverla
     return *this;
 }
 
+bool GeoDataGroundOverlay::operator==(const GeoDataGroundOverlay& other) const
+{
+    return equals(other) &&
+           d->m_altitude == other.d->m_altitude &&
+           d->m_altitudeMode == other.d->m_altitudeMode &&
+           d->m_latLonBox == other.d->m_latLonBox &&
+           d->m_latLonQuad == other.d->m_latLonQuad;
+}
+
+bool GeoDataGroundOverlay::operator!=(const GeoDataGroundOverlay& other) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataGroundOverlay::~GeoDataGroundOverlay()
 {
     delete d;
@@ -98,6 +112,11 @@ GeoDataLatLonQuad &GeoDataGroundOverlay::latLonQuad()
 const GeoDataLatLonQuad &GeoDataGroundOverlay::latLonQuad() const
 {
     return d->m_latLonQuad;
+}
+
+void GeoDataGroundOverlay::setLatLonQuad(const GeoDataLatLonQuad& quad)
+{
+    d->m_latLonQuad = quad;
 }
 
 }

@@ -55,6 +55,21 @@ GeoDataViewVolume &GeoDataViewVolume::operator=( const GeoDataViewVolume &other 
     return *this;
 }
 
+bool GeoDataViewVolume::operator==(const GeoDataViewVolume& other) const
+{
+    return equals(other)
+        && d->m_leftFov == other.d->m_leftFov
+        && d->m_rightFov == other.d->m_rightFov
+        && d->m_topFov == other.d->m_topFov
+        && d->m_bottomFov == other.d->m_bottomFov
+        && d->m_near == other.d->m_near;
+}
+
+bool GeoDataViewVolume::operator!=(const GeoDataViewVolume& other) const
+{
+    return !this->operator==(other);
+}
+
 GeoDataViewVolume::~GeoDataViewVolume()
 {
     delete d;
