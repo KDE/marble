@@ -50,6 +50,19 @@ GeoDataSchema &GeoDataSchema::operator=(const GeoDataSchema &other)
     return *this;
 }
 
+bool GeoDataSchema::operator==(const GeoDataSchema& other) const
+{
+    return equals(other) &&
+           d->m_name == other.d->m_name &&
+           d->m_schemaId == other.d->m_schemaId &&
+           d->m_simpleField == other.d->m_simpleField;
+}
+
+bool GeoDataSchema::operator!=(const GeoDataSchema& other) const
+{
+    return !this->operator==( other );
+}
+
 GeoDataSchema::~GeoDataSchema()
 {
     delete d;

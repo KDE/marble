@@ -54,6 +54,8 @@
 #include <GeoDataScreenOverlay.h>
 #include <GeoDataPhotoOverlay.h>
 #include <GeoDataGroundOverlay.h>
+#include <GeoDataSchema.h>
+#include <GeoDataSimpleField.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -100,6 +102,8 @@ private slots:
     void screenOverlayTest();
     void photoOverlayTest();
     void groundOverlayTest();
+    void simpleFieldTest();
+    void schemaTest();
 };
 
 
@@ -1444,6 +1448,65 @@ void TestEquality::groundOverlayTest()
     QCOMPARE( overlay2, overlay2 );
     QCOMPARE( overlay1 == overlay2, false );
     QVERIFY( overlay1 != overlay2 );
+}
+
+void TestEquality::simpleFieldTest()
+{
+    GeoDataSimpleField field1, field2;
+    field1.setDisplayName("Simple Field");
+    field1.setName("Field Name");
+    field1.setType(GeoDataSimpleField::Int);
+
+    field2.setDisplayName("Simple Field");
+    field2.setName("Field Name");
+    field2.setType(GeoDataSimpleField::Int);
+
+    QCOMPARE( field1, field1 );
+    QCOMPARE( field2, field2 );
+    QCOMPARE( field1 != field2, false );
+    QVERIFY( field1 == field2 );
+
+    field2.setType( GeoDataSimpleField::Double );
+
+    QCOMPARE( field1, field1 );
+    QCOMPARE( field2, field2 );
+    QCOMPARE( field1 == field2, false );
+    QVERIFY( field1 != field2 );
+}
+
+void TestEquality::schemaTest()
+{
+    GeoDataSimpleField field1, field2;
+    field1.setDisplayName("Simple Field 1");
+    field1.setName("Field Name 1");
+    field1.setType(GeoDataSimpleField::Int);
+
+    field2.setDisplayName("Simple Field 2");
+    field2.setName("Field Name 2");
+    field2.setType(GeoDataSimpleField::Double);
+
+    GeoDataSchema schema1, schema2;
+    schema1.setSchemaId( "Some ID" );
+    schema1.setSchemaName( "Some Name" );
+    schema1.addSimpleField( field1 );
+    schema1.addSimpleField( field2 );
+
+    schema2.setSchemaId( "Some ID" );
+    schema2.setSchemaName( "Some Name" );
+    schema2.addSimpleField( field1 );
+    schema2.addSimpleField( field2 );
+
+    QCOMPARE( schema1, schema1 );
+    QCOMPARE( schema2, schema2 );
+    QCOMPARE( schema1 != schema2, false );
+    QVERIFY( schema1 == schema2 );
+
+    schema2.setSchemaName( "Changed Name" );
+
+    QCOMPARE( schema1, schema1 );
+    QCOMPARE( schema2, schema2 );
+    QCOMPARE( schema1 == schema2, false );
+    QVERIFY( schema1 != schema2 );
 }
 
 QTEST_MAIN( TestEquality )

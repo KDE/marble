@@ -27,6 +27,8 @@ class GEODATA_EXPORT GeoDataSimpleField : public GeoNode
 public:
     GeoDataSimpleField();
     GeoDataSimpleField( const GeoDataSimpleField& other );
+    bool operator==( const GeoDataSimpleField& other ) const;
+    bool operator!=( const GeoDataSimpleField& other ) const;
     virtual ~GeoDataSimpleField();
 
     /*

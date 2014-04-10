@@ -40,6 +40,18 @@ GeoDataSimpleField::GeoDataSimpleField( const GeoDataSimpleField& other )
 {
 }
 
+bool GeoDataSimpleField::operator==(const GeoDataSimpleField& other) const
+{
+    return d->m_name == other.d->m_name && 
+           d->m_type == other.d->m_type && 
+           d->m_displayName == other.d->m_displayName;
+}
+
+bool GeoDataSimpleField::operator!=(const GeoDataSimpleField& other) const
+{
+    return !this->operator==( other );
+}
+
 GeoDataSimpleField::~GeoDataSimpleField()
 {
     delete d;

@@ -34,6 +34,8 @@ public:
     GeoDataSchema( const QHash<QString, GeoDataSimpleField>& simpleFields );
     GeoDataSchema( const GeoDataSchema& other );
     GeoDataSchema& operator=( const GeoDataSchema& other );
+    bool operator==( const GeoDataSchema& other ) const;
+    bool operator!=( const GeoDataSchema& other ) const;
     ~GeoDataSchema();
 
     /*
