@@ -11,14 +11,14 @@
 #ifndef ROUTESYNCMANAGER_H
 #define ROUTESYNCMANAGER_H
 
-#include "routing/RoutingManager.h"
-#include "CloudRouteModel.h"
 #include "marble_export.h"
 
 namespace Marble {
 
 class CloudSyncManager;
 class RoutingManager;
+class CloudRouteModel;
+class RouteItem;
 
 class MARBLE_EXPORT RouteSyncManager : public QObject
 {

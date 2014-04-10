@@ -19,6 +19,7 @@
 #include "CloudRoutesDialog.h"
 #include "CloudSyncManager.h"
 #include "OwncloudSyncBackend.h"
+#include "RoutingManager.h"
 
 #include <QDir>
 #include <QUrl>

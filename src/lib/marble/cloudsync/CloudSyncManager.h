@@ -14,13 +14,12 @@
 #include <QObject>
 #include <QUrl>
 
-#include "RouteSyncManager.h"
 #include "marble_export.h"
-#include "routing/RoutingManager.h"
 
 namespace Marble {
 
 class BookmarkSyncManager;
+class RouteSyncManager;
 
 class MARBLE_EXPORT CloudSyncManager : public QObject
 {

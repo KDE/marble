@@ -10,6 +10,7 @@
 
 #include "CloudSyncManager.h"
 #include "BookmarkSyncManager.h"
+#include "RouteSyncManager.h"
 
 namespace Marble
 {

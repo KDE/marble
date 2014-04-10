@@ -99,6 +99,7 @@
 #include "MapThemeDownloadDialog.h"
 #include "cloudsync/BookmarkSyncManager.h"
 #include "MovieCaptureDialog.h"
+#include "cloudsync/RouteSyncManager.h"
 
 // Marble non-library classes
 #include "ControlView.h"

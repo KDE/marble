@@ -82,6 +82,7 @@
 #include "Planet.h"
 #include "cloudsync/CloudSyncManager.h"
 #include "cloudsync/BookmarkSyncManager.h"
+#include "cloudsync/RouteSyncManager.h"
 #include "MovieCaptureDialog.h"
 
 namespace

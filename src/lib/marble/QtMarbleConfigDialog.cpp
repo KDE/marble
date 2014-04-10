@@ -388,10 +388,12 @@ void QtMarbleConfigDialog::readSettings()
     emit settingsChanged();
 }
 
-void QtMarbleConfigDialog::updateCloudSyncStatus( const QString &status, CloudSyncManager::Status status_type )
+void QtMarbleConfigDialog::updateCloudSyncStatus( const QString &status )
 {
     d->m_cloudSyncStatusLabel->setText(status);
-    switch (status_type){
+    CloudSyncManager::Status status_type =
+            d->m_cloudSyncManager ? d->m_cloudSyncManager->status() : CloudSyncManager::Unknown;
+    switch (status_type) {
         case CloudSyncManager::Success:
             d->m_cloudSyncStatusLabel->setStyleSheet("QLabel { color : green; }");
             break;

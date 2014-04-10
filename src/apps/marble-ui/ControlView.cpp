@@ -61,6 +61,7 @@
 #include "BookmarkManager.h"
 #include "cloudsync/CloudSyncManager.h"
 #include "cloudsync/BookmarkSyncManager.h"
+#include "cloudsync/RouteSyncManager.h"
 #include "cloudsync/ConflictDialog.h"
 #include "cloudsync/MergeItem.h"
 
