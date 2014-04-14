@@ -222,7 +222,17 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
         m_textureLayer.setShowRelief( show );
     }
 
-    m_layerManager.setVisible( name, show );
+    foreach( RenderPlugin *renderPlugin, m_layerManager.renderPlugins() ) {
+        if ( name == renderPlugin->nameId() ) {
+            if ( renderPlugin->visible() == show ) {
+                break;
+            }
+
+            renderPlugin->setVisible( show );
+
+            break;
+        }
+    }
 }
 
 // ----------------------------------------------------------------

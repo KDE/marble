@@ -246,20 +246,6 @@ void LayerManager::setShowRuntimeTrace( bool show )
     d->m_showRuntimeTrace = show;
 }
 
-void LayerManager::setVisible( const QString &nameId, bool visible )
-{
-    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
-        if ( nameId == renderPlugin->nameId() ) {
-            if ( renderPlugin->visible() == visible )
-                return;
-
-            renderPlugin->setVisible( visible );
-
-            return;
-        }
-    }
-}
-
 void LayerManager::addLayer(LayerInterface *layer)
 {
     d->m_internalLayers.push_back(layer);
