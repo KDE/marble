@@ -8,6 +8,7 @@ Notes:
   <mime-type type="application/x-gpx+xml">
     <!-- prevent txt/plain thumbnailer <sub-class-of type="application/xml"/> -->
     <comment>GPX geographic data</comment>
+    <comment xml:lang="">GPX-geografidata</comment>
     <acronym>GPX</acronym>
     <expanded-acronym>GPS eXchange Format</expanded-acronym>
     <generic-icon name="application-vnd-google-earth-kml"/>
@@ -26,6 +27,7 @@ Notes:
   <mime-type type="application/x-osm+xml">
     <!-- prevent txt/plain thumbnailer <sub-class-of type="application/xml"/> -->
     <comment>OSM Data</comment>
+    <comment xml:lang="">OSM-data</comment>
     <acronym>OSM</acronym>
     <expanded-acronym>OpenStreetMap</expanded-acronym>
     <generic-icon name="application-vnd-google-earth-kml"/>
@@ -41,6 +43,7 @@ Notes:
   <mime-type type="application/x-esri-shape">
     <generic-icon name="application-vnd-google-earth-kml"/>
     <comment>ESRI Shapefile</comment>
+    <comment xml:lang="">ESRI-shapefil</comment>
     <generic-icon name="application-vnd-google-earth-kml"/>
     <glob pattern="*.shp"/>
     <magic priority="50">
@@ -49,6 +52,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-esri-shape-index">
     <comment>ESRI Shapefile Index</comment>
+    <comment xml:lang="">ESRI shapefil-indeks</comment>
     <generic-icon name="application-octet-stream"/>
     <glob pattern="*.shx"/>
     <magic priority="50">
