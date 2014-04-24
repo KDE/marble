@@ -30,6 +30,7 @@ Notes:
     <comment xml:lang="lv">GPX ģeogrāfiskie dati</comment>
     <comment xml:lang="mr">GPX भूगोल डेटा</comment>
     <comment xml:lang="nb">GPX geografiske data</comment>
+    <comment xml:lang="nds">GPX-Geodaten</comment>
     <comment xml:lang="nl">GPX geografische gegevens</comment>
     <comment xml:lang="pl">Dane geograficzne GPX</comment>
     <comment xml:lang="pt">Dados geográficos GPX</comment>
@@ -128,6 +129,7 @@ Notes:
     <comment xml:lang="lv">ESRI Shapefile fails</comment>
     <comment xml:lang="mr">ESRI आकार फाईल</comment>
     <comment xml:lang="nb">ESRI formfil</comment>
+    <comment xml:lang="nds">ESRI-Ümreetdatei</comment>
     <comment xml:lang="nl">ESRI vormbestand</comment>
     <comment xml:lang="pl">Plik kształtu ESRI</comment>
     <comment xml:lang="pt">Ficheiro de formas da ESRI</comment>
@@ -167,6 +169,7 @@ Notes:
     <comment xml:lang="lv">ESRI Shapefile faila indekss</comment>
     <comment xml:lang="mr">ESRI आकार फाईल अनुक्रमणिका</comment>
     <comment xml:lang="nb">ESRI formfil-indeks</comment>
+    <comment xml:lang="nds">ESRI-Ümreetdatei-Index</comment>
     <comment xml:lang="nl">Index van ESRI vormbestand</comment>
     <comment xml:lang="pl">Indeks pliku kształtu ESRI</comment>
     <comment xml:lang="pt">Índice de formas da ESRI</comment>
