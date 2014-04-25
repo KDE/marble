@@ -108,8 +108,6 @@ class LayerManager : public QObject
 
     void setShowRuntimeTrace( bool show );
 
-    void setVisible( const QString &nameId, bool visible );
-
  private:
     Q_PRIVATE_SLOT( d, void updateVisibility( bool, const QString & ) )
 
