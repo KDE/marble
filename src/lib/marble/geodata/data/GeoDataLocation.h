@@ -29,6 +29,9 @@ public:
 
     GeoDataLocation& operator=( const GeoDataLocation &other );
 
+    bool operator==( const GeoDataLocation &other ) const;
+    bool operator!=( const GeoDataLocation &other ) const;
+
     ~GeoDataLocation();
 
     /** Provides type information for downcasting a GeoNode */

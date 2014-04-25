@@ -35,6 +35,9 @@ public:
 
     GeoDataModel& operator=( const GeoDataModel &other );
 
+    bool operator==( const GeoDataModel &other ) const;
+    bool operator!=( const GeoDataModel &other ) const;
+
     ~GeoDataModel();
 
     /** Provides type information for downcasting a GeoNode */

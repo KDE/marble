@@ -56,6 +56,11 @@
 #include <GeoDataGroundOverlay.h>
 #include <GeoDataSchema.h>
 #include <GeoDataSimpleField.h>
+#include <GeoDataScale.h>
+#include <GeoDataOrientation.h>
+#include <GeoDataLocation.h>
+#include <GeoDataResourceMap.h>
+#include <GeoDataModel.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -104,6 +109,11 @@ private slots:
     void groundOverlayTest();
     void simpleFieldTest();
     void schemaTest();
+    void scaleTest();
+    void orientationTest();
+    void locationTest();
+    void resourceMapTest();
+    void modelTest();
 };
 
 
@@ -1507,6 +1517,190 @@ void TestEquality::schemaTest()
     QCOMPARE( schema2, schema2 );
     QCOMPARE( schema1 == schema2, false );
     QVERIFY( schema1 != schema2 );
+}
+
+void TestEquality::scaleTest()
+{
+    GeoDataScale scale1, scale2;
+
+    scale1.setX( 1.0 );
+    scale1.setY( 2.0 );
+    scale1.setZ( 3.0 );
+
+    scale2 = scale1;
+    scale2.setZ( 3.5 );
+
+    QCOMPARE( scale1, scale1 );
+    QCOMPARE( scale2, scale2 );
+    QCOMPARE( scale1 == scale2, false );
+    QVERIFY( scale1 != scale2 );
+
+    scale2.setZ( 3.0 );
+    QVERIFY( scale1 == scale2 );
+}
+
+void TestEquality::orientationTest()
+{
+    GeoDataOrientation obj1, obj2;
+
+    obj1.setHeading( 90 );
+    obj1.setTilt( 45 );
+    obj1.setRoll( -90 );
+
+    obj2 = obj1;
+    obj2.setRoll( -45 );
+
+    QCOMPARE( obj1, obj1 );
+    QCOMPARE( obj2, obj2 );
+    QCOMPARE( obj1 == obj2, false );
+    QVERIFY( obj1 != obj2 );
+
+    obj2.setRoll( - 90 );
+    QVERIFY( obj1 == obj2 );
+}
+
+void TestEquality::locationTest()
+{
+    GeoDataLocation loc1, loc2;
+
+    loc1.setLatitude( M_PI_4, GeoDataCoordinates::Degree );
+    loc1.setLongitude( M_PI_4, GeoDataCoordinates::Degree );
+    loc1.setAltitude( 2500.0 );
+
+    loc2 = loc1;
+    loc2.setAltitude( 2000.0 );
+
+    QCOMPARE( loc1, loc1 );
+    QCOMPARE( loc2, loc2 );
+    QCOMPARE( loc1 == loc2, false );
+    QVERIFY( loc1 != loc2 );
+
+    loc2.setAltitude( 2500.0 );
+    QVERIFY( loc1 == loc2 );
+}
+
+void TestEquality::resourceMapTest()
+{
+    GeoDataResourceMap rMap1, rMap2;
+
+    rMap1.setSourceHref( "/path/to/source/href" );
+    rMap1.setTargetHref( "/path/to/target/href" );
+
+    rMap2 = rMap1;
+    rMap2.setTargetHref( "/path/to/target/href2" );
+
+    QCOMPARE( rMap1, rMap1 );
+    QCOMPARE( rMap2, rMap2 );
+    QCOMPARE( rMap1 == rMap2, false );
+    QVERIFY( rMap1 != rMap2 );
+
+    rMap2.setTargetHref( "/path/to/target/href" );
+    QVERIFY( rMap1 == rMap2 );
+}
+
+void TestEquality::modelTest()
+{
+    GeoDataModel model1, model2;
+
+
+    GeoDataLink link1, link2;
+    link1.setHref("some/example/href.something");
+    link1.setRefreshInterval( 23 );
+    link1.setRefreshMode( GeoDataLink::OnChange );
+    link1.setViewBoundScale( 50 );
+    link1.setViewRefreshTime( 30 );
+
+    link2 = link1;
+    link2.setRefreshMode( GeoDataLink::OnExpire );
+
+    model1.setLink( link1 );
+    model1.setLink( link2 );
+
+
+    GeoDataCoordinates coord1, coord2;
+    coord1.set(100, 200, 300);
+    coord2.set(100, 200, 200);
+
+    model1.setCoordinates( coord1 );
+    model2.setCoordinates( coord2 );
+
+
+    GeoDataScale scale1, scale2;
+
+    scale1.setX( 1.0 );
+    scale1.setY( 2.0 );
+    scale1.setZ( 3.0 );
+
+    scale2 = scale1;
+    scale2.setZ( 3.5 );
+
+    model1.setScale( scale1 );
+    model2.setScale( scale2 );
+
+
+    GeoDataOrientation obj1, obj2;
+
+    obj1.setHeading( 90 );
+    obj1.setTilt( 45 );
+    obj1.setRoll( -90 );
+
+    obj2 = obj1;
+    obj2.setRoll( -45 );
+
+    model1.setOrientation( obj1 );
+    model2.setOrientation( obj2 );
+
+
+    GeoDataLocation loc1, loc2;
+
+    loc1.setLatitude( M_PI_4, GeoDataCoordinates::Degree );
+    loc1.setLongitude( M_PI_4, GeoDataCoordinates::Degree );
+    loc1.setAltitude( 2500.0 );
+
+    loc2 = loc1;
+    loc2.setAltitude( 2000.0 );
+
+    model1.setLocation( loc1 );
+    model2.setLocation( loc2 );
+
+
+    GeoDataResourceMap rMap1, rMap2;
+
+    rMap1.setSourceHref( "/path/to/source/href" );
+    rMap1.setTargetHref( "/path/to/target/href" );
+
+    rMap2 = rMap1;
+    rMap2.setTargetHref( "/path/to/target/href2" );
+
+    model1.setResourceMap( rMap1 );
+    model2.setResourceMap( rMap2 );
+
+
+    QCOMPARE( model1, model1 );
+    QCOMPARE( model2, model2 );
+    QCOMPARE( model1 == model2, false );
+    QVERIFY( model1 != model2 );
+
+
+    link2.setRefreshMode( GeoDataLink::OnExpire );
+    model2.setLink( link2 );
+
+    coord2.setAltitude( 300 );
+    model2.setCoordinates( coord2 );
+
+    scale2.setZ( 3.0 );
+    model2.setScale( scale2 );
+
+    obj2.setRoll( -90 );
+    model2.setOrientation( obj2 );
+
+    loc2.setAltitude( 2500.0 );
+    model2.setLocation( loc2 );
+
+    rMap2.setTargetHref( "/path/to/target/href" );
+    model2.setResourceMap( rMap2 );
+
+    QVERIFY( model1 == model2 );
 }
 
 QTEST_MAIN( TestEquality )

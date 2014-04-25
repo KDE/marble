@@ -50,6 +50,20 @@ GeoDataScale &GeoDataScale::operator=( const GeoDataScale &other )
     return *this;
 }
 
+
+bool GeoDataScale::operator==( const GeoDataScale &other ) const
+{
+    return equals(other) &&
+           d->m_x == other.d->m_x &&
+           d->m_y == other.d->m_y &&
+           d->m_z == other.d->m_z;
+}
+
+bool GeoDataScale::operator!=( const GeoDataScale &other ) const
+{
+    return !this->operator==( other );
+}
+
 GeoDataScale::~GeoDataScale()
 {
     delete d;

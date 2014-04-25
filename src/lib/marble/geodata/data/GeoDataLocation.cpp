@@ -47,6 +47,18 @@ GeoDataLocation &GeoDataLocation::operator=( const GeoDataLocation &other )
     return *this;
 }
 
+
+bool GeoDataLocation::operator==( const GeoDataLocation &other ) const
+{
+    return equals(other) &&
+           d->m_coordinates == other.d->m_coordinates;
+}
+
+bool GeoDataLocation::operator!=( const GeoDataLocation &other ) const
+{
+    return !this->operator==( other );
+}
+
 GeoDataLocation::~GeoDataLocation()
 {
     delete d;

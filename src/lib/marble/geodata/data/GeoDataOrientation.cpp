@@ -49,6 +49,20 @@ GeoDataOrientation &GeoDataOrientation::operator=( const GeoDataOrientation &oth
     return *this;
 }
 
+
+bool GeoDataOrientation::operator==( const GeoDataOrientation &other ) const
+{
+    return equals(other) &&
+           d->m_heading == other.d->m_heading &&
+           d->m_roll == other.d->m_roll &&
+           d->m_tilt == other.d->m_tilt;
+}
+
+bool GeoDataOrientation::operator!=( const GeoDataOrientation &other ) const
+{
+    return !this->operator==( other );
+}
+
 GeoDataOrientation::~GeoDataOrientation()
 {
     delete d;

@@ -107,7 +107,8 @@ QString GeoDataOverlay::absoluteIconFile() const
 
 bool GeoDataOverlay::equals(const GeoDataOverlay& other) const
 {
-    return d->m_drawOrder == other.d->m_drawOrder
+    return GeoDataObject::equals(other)
+        && d->m_drawOrder == other.d->m_drawOrder
         && d->m_color == other.d->m_color
         && d->m_iconPath == other.d->m_iconPath
         && d->m_image == other.d->m_image;

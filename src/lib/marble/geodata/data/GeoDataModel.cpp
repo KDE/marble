@@ -65,6 +65,25 @@ GeoDataModel &GeoDataModel::operator=( const GeoDataModel &other )
     return *this;
 }
 
+
+bool GeoDataModel::operator==( const GeoDataModel &other ) const
+{
+    return equals(other) &&
+           d->m_coordinates == other.d->m_coordinates &&
+           d->m_scale == other.d->m_scale &&
+           d->m_orientation == other.d->m_orientation &&
+           d->m_location == other.d->m_location &&
+           d->m_link == other.d->m_link &&
+           d->m_map == other.d->m_map &&
+           d->m_targetHref == other.d->m_targetHref &&
+           d->m_sourceHref == other.d->m_sourceHref;
+}
+
+bool GeoDataModel::operator!=( const GeoDataModel &other ) const
+{
+    return !this->operator==( other );
+}
+
 GeoDataModel::~GeoDataModel()
 {
     delete d;

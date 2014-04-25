@@ -27,6 +27,9 @@ public:
 
     GeoDataOrientation& operator=( const GeoDataOrientation &other );
 
+    bool operator==( const GeoDataOrientation &other ) const;
+    bool operator!=( const GeoDataOrientation &other ) const;
+
     ~GeoDataOrientation();
 
     /** Provides type information for downcasting a GeoNode */

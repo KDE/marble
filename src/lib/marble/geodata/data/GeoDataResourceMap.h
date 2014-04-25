@@ -28,6 +28,9 @@ public:
 
     GeoDataResourceMap& operator=( const GeoDataResourceMap &other );
 
+    bool operator==( const GeoDataResourceMap &other ) const;
+    bool operator!=( const GeoDataResourceMap &other ) const;
+
     ~GeoDataResourceMap();
 
     /** Provides type information for downcasting a GeoNode */

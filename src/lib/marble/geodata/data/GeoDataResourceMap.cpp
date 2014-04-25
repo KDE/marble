@@ -43,6 +43,16 @@ GeoDataResourceMap &GeoDataResourceMap::operator=( const GeoDataResourceMap &oth
     return *this;
 }
 
+bool GeoDataResourceMap::operator==( const GeoDataResourceMap &other ) const
+{
+    return d->m_alias == other.d->m_alias;
+}
+
+bool GeoDataResourceMap::operator!=( const GeoDataResourceMap &other ) const
+{
+    return !this->operator==( other );
+}
+
 GeoDataResourceMap::~GeoDataResourceMap()
 {
     delete d;

@@ -64,6 +64,8 @@ private:
 
 protected:
     bool equals(const GeoDataOverlay &other) const;
+
+    using GeoDataObject::equals;
 };
 
 }

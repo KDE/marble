@@ -28,6 +28,9 @@ public:
 
     GeoDataScale& operator=( const GeoDataScale &other );
 
+    bool operator==( const GeoDataScale &other ) const;
+    bool operator!=( const GeoDataScale &other ) const;
+
     ~GeoDataScale();
 
     /** Provides type information for downcasting a GeoNode */
