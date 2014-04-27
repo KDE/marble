@@ -46,13 +46,13 @@ namespace Marble {
 class MarbleWidgetPopupMenu::Private {
 public:
     const MarbleModel    *const m_model;
-    MarbleWidget   *m_widget;
+    MarbleWidget   *const m_widget;
 
     QVector<const GeoDataPlacemark*>  m_featurelist;
     QList<AbstractDataPluginItem *> m_itemList;
 
-    QMenu    *const m_lmbMenu;
-    QMenu    *const m_rmbMenu;
+    QMenu m_lmbMenu;
+    QMenu m_rmbMenu;
 
     QAction *m_infoDialogAction;
     QAction *m_directionsToHereAction;
@@ -61,7 +61,7 @@ public:
 
     QAction  *m_rmbExtensionPoint;
 
-    ReverseGeocodingRunnerManager *const m_runnerManager;
+    ReverseGeocodingRunnerManager m_runnerManager;
 
     QPoint m_mousePosition;
 
@@ -80,12 +80,12 @@ public:
 MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel *model, MarbleWidgetPopupMenu* parent ) :
     m_model(model),
     m_widget(widget),
-    m_lmbMenu( new QMenu( m_widget ) ),
-    m_rmbMenu( new QMenu( m_widget ) ),
+    m_lmbMenu( m_widget ),
+    m_rmbMenu( m_widget ),
     m_directionsToHereAction( 0 ),
     m_copyCoordinateAction( new QAction( QIcon(":/icons/copy-coordinates.png"), tr("Copy Coordinates"), parent ) ),
     m_rmbExtensionPoint( 0 ),
-    m_runnerManager( new ReverseGeocodingRunnerManager( model, parent ) )
+    m_runnerManager( model )
 {
     // Property actions (Left mouse button)
     m_infoDialogAction = new QAction( parent );
@@ -112,27 +112,27 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
 
     if ( !smallScreen ) {
-        m_rmbExtensionPoint = m_rmbMenu->addSeparator();
+        m_rmbExtensionPoint = m_rmbMenu.addSeparator();
     }
 
-    m_rmbMenu->addAction( fromHere );
-    m_rmbMenu->addAction( m_directionsToHereAction );
-    m_rmbMenu->addSeparator();
-    m_rmbMenu->addAction( addBookmark );
+    m_rmbMenu.addAction( fromHere );
+    m_rmbMenu.addAction( m_directionsToHereAction );
+    m_rmbMenu.addSeparator();
+    m_rmbMenu.addAction( addBookmark );
     if ( !smallScreen ) {
-        m_rmbMenu->addAction( m_copyCoordinateAction );
+        m_rmbMenu.addAction( m_copyCoordinateAction );
     }
-    m_rmbMenu->addAction( QIcon(":/icons/addressbook-details.png"), tr( "&Address Details" ), parent, SLOT(startReverseGeocoding()) );
-    m_rmbMenu->addSeparator();
-    m_rmbMenu->addMenu( infoBoxMenu );
+    m_rmbMenu.addAction( QIcon(":/icons/addressbook-details.png"), tr( "&Address Details" ), parent, SLOT(startReverseGeocoding()) );
+    m_rmbMenu.addSeparator();
+    m_rmbMenu.addMenu( infoBoxMenu );
 
     if ( !smallScreen ) {
-        m_rmbMenu->addAction( aboutDialogAction );
+        m_rmbMenu.addAction( aboutDialogAction );
     } else {
-        m_rmbMenu->addAction( fullscreenAction );
+        m_rmbMenu.addAction( fullscreenAction );
     }
 
-    parent->connect( m_lmbMenu, SIGNAL(aboutToHide()), SLOT(resetMenu()) );
+    parent->connect( &m_lmbMenu, SIGNAL(aboutToHide()), SLOT(resetMenu()) );
     parent->connect( fromHere, SIGNAL(triggered()), SLOT(directionsFromHere()) );
     parent->connect( m_directionsToHereAction, SIGNAL(triggered()), SLOT(directionsToHere()) );
     parent->connect( addBookmark, SIGNAL(triggered()), SLOT(addBookmark()) );
@@ -141,7 +141,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     parent->connect( m_infoDialogAction, SIGNAL(triggered()), SLOT(slotInfoDialog()) );
     parent->connect( fullscreenAction, SIGNAL(triggered(bool)), parent, SLOT(toggleFullscreen(bool)) );
 
-    parent->connect( m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
+    parent->connect( &m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
              parent, SLOT(showAddressInformation(GeoDataCoordinates,GeoDataPlacemark)) );
 }
 
@@ -199,10 +199,10 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         d->m_infoDialogAction->setIcon( icon );
         // Insert as first action in the menu
         QAction *firstAction = 0;
-        if( !d->m_lmbMenu->actions().isEmpty() ) {
-            firstAction = d->m_lmbMenu->actions().first();
+        if( !d->m_lmbMenu.actions().isEmpty() ) {
+            firstAction = d->m_lmbMenu.actions().first();
         }
-        d->m_lmbMenu->insertAction( firstAction, d->m_infoDialogAction );
+        d->m_lmbMenu.insertAction( firstAction, d->m_infoDialogAction );
         actionidx++;
     }
 
@@ -212,21 +212,21 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     for (; itW != itWEnd; ++itW )
     {
         foreach ( QAction* action, (*itW)->actions() ) {
-            d->m_lmbMenu->addAction( action );
+            d->m_lmbMenu.addAction( action );
         }
     }
 
-    switch ( d->m_lmbMenu->actions().size() ) {
+    switch ( d->m_lmbMenu.actions().size() ) {
     case 0: // nothing to do, ignore
         break;
 
     case 1: // one action? perform immediately
-        d->m_lmbMenu->actions().first()->activate( QAction::Trigger );
-        d->m_lmbMenu->clear();
+        d->m_lmbMenu.actions().first()->activate( QAction::Trigger );
+        d->m_lmbMenu.clear();
         break;
 
     default:
-        d->m_lmbMenu->popup( d->m_widget->mapToGlobal( curpos ) );
+        d->m_lmbMenu.popup( d->m_widget->mapToGlobal( curpos ) );
     }
 }
 
@@ -249,12 +249,12 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
         d->m_directionsToHereAction->setIcon( QIcon( request->pixmap( lastIndex, 16 ) ) );
     }
 
-    d->m_rmbMenu->popup( d->m_widget->mapToGlobal( curpos ) );
+    d->m_rmbMenu.popup( d->m_widget->mapToGlobal( curpos ) );
 }
 
 void MarbleWidgetPopupMenu::resetMenu()
 {
-    d->m_lmbMenu->clear();
+    d->m_lmbMenu.clear();
 }
 
 void MarbleWidgetPopupMenu::slotInfoDialog()
@@ -334,9 +334,9 @@ void MarbleWidgetPopupMenu::slotAboutDialog()
 void MarbleWidgetPopupMenu::addAction( Qt::MouseButton button, QAction* action )
 {
     if ( button == Qt::RightButton ) {
-        d->m_rmbMenu->insertAction( d->m_rmbExtensionPoint, action );
+        d->m_rmbMenu.insertAction( d->m_rmbExtensionPoint, action );
     } else {
-        d->m_lmbMenu->addAction( action );
+        d->m_lmbMenu.addAction( action );
     }
 }
 
@@ -399,7 +399,7 @@ void MarbleWidgetPopupMenu::startReverseGeocoding()
 {
     const GeoDataCoordinates coordinates = d->mouseCoordinates( d->m_copyCoordinateAction );
     if ( coordinates.isValid() ) {
-        d->m_runnerManager->reverseGeocoding( coordinates );
+        d->m_runnerManager.reverseGeocoding( coordinates );
     }
 }
 
