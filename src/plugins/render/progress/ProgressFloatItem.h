@@ -63,8 +63,6 @@ class ProgressFloatItem  : public AbstractFloatItem
 
     void paintContent( QPainter *painter );
 
-    bool eventFilter(QObject *object, QEvent *e);
-
 private Q_SLOTS:
     void removeProgressItem();
 

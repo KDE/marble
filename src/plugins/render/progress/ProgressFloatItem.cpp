@@ -203,15 +203,6 @@ void ProgressFloatItem::paintContent( QPainter *painter )
     painter->restore();
 }
 
-bool ProgressFloatItem::eventFilter(QObject *object, QEvent *e)
-{
-    if ( !enabled() || !visible() ) {
-        return false;
-    }
-
-    return AbstractFloatItem::eventFilter( object, e );
-}
-
 void ProgressFloatItem::removeProgressItem()
 {
     m_jobMutex.lock();
