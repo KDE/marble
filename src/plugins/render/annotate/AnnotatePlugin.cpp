@@ -413,8 +413,7 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     //so far only accept mouse events
     if( event->type() != QEvent::MouseButtonPress &&
         event->type() != QEvent::MouseButtonRelease &&
-        event->type() != QEvent::MouseMove &&
-        event->type() != QEvent::MouseP )
+        event->type() != QEvent::MouseMove )
     {
         return false;
     }
