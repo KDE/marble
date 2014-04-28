@@ -62,8 +62,10 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
 
     m_annotationDocument->setName( tr("Annotations") );
     m_annotationDocument->setDocumentRole( UserDocument );
+
     GeoDataStyle style;
     GeoDataPolyStyle polyStyle;
+
     polyStyle.setColor( QColor( 0, 255, 255, 80 ) );
     style.setStyleId( "polygon" );
     style.setPolyStyle( polyStyle );
@@ -409,9 +411,10 @@ bool AnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     //does this mean we need to centralize the event handling?
 
     //so far only accept mouse events
-    if( event->type() != QEvent::MouseButtonPress
-            && event->type() != QEvent::MouseButtonRelease
-            && event->type() != QEvent::MouseMove )
+    if( event->type() != QEvent::MouseButtonPress &&
+        event->type() != QEvent::MouseButtonRelease &&
+        event->type() != QEvent::MouseMove &&
+        event->type() != QEvent::MouseP )
     {
         return false;
     }
@@ -520,7 +523,7 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
 
 
         QAction* enableInputAction = new QAction(this);
-        enableInputAction->setToolTip(tr("Enable Moving Map"));
+        enableInputAction->setText( tr("Enable Moving Map") );
         enableInputAction->setCheckable(true);
         enableInputAction->setChecked( true );
         enableInputAction->setIcon( QIcon( ":/icons/hand.png") );
@@ -528,7 +531,7 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
                  widget, SLOT(setInputEnabled(bool)) );
 
         QAction* addPlacemark= new QAction(this);
-        addPlacemark->setToolTip( tr("Add Placemark") );
+        addPlacemark->setText( tr("Add Placemark") );
         addPlacemark->setCheckable( true );
         addPlacemark->setIcon( QIcon( ":/icons/draw-placemark.png") );
         connect( addPlacemark, SIGNAL(toggled(bool)),
@@ -537,14 +540,14 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
                  addPlacemark, SLOT(toggle()) );
 
         QAction* drawPolygon = new QAction( this );
-        drawPolygon->setToolTip( tr("Add Polygon") );
+        drawPolygon->setText( tr("Add Polygon") );
         drawPolygon->setCheckable( true );
         drawPolygon->setIcon( QIcon( ":/icons/draw-polygon.png") );
         connect( drawPolygon, SIGNAL(toggled(bool)),
                  this, SLOT(setDrawingPolygon(bool)) );
 
         QAction* removeItem = new QAction( this );
-        removeItem->setToolTip( tr("Remove Item") );
+        removeItem->setText( tr("Remove Item") );
         removeItem->setCheckable( true );
         removeItem->setIcon( QIcon( ":/icons/edit-delete-shred.png") );
         connect( removeItem, SIGNAL(toggled(bool)),
@@ -553,19 +556,19 @@ void AnnotatePlugin::setupActions(MarbleWidget* widget)
                  removeItem, SLOT(toggle()) );
 
         QAction* loadAnnotationFile = new QAction( this );
-        loadAnnotationFile->setToolTip( tr("Load Annotation File" ) );
+        loadAnnotationFile->setText( tr("Load Annotation File" ) );
         loadAnnotationFile->setIcon( QIcon( ":/icons/document-import.png") );
         connect( loadAnnotationFile, SIGNAL(triggered()),
                  this, SLOT(loadAnnotationFile()) );
 
         QAction* saveAnnotationFile = new QAction( this );
-        saveAnnotationFile->setToolTip( tr("Save Annotation File") );
+        saveAnnotationFile->setText( tr("Save Annotation File") );
         saveAnnotationFile->setIcon( QIcon( ":/icons/document-export.png") );
         connect( saveAnnotationFile, SIGNAL(triggered()),
                  this, SLOT(saveAnnotationFile()) );
 
         QAction* clearAnnotations = new QAction( this );
-        clearAnnotations->setToolTip( tr("Clear all Annotations") );
+        clearAnnotations->setText( tr("Clear all Annotations") );
         clearAnnotations->setIcon( QIcon( ":/icons/remove.png") );
         connect( drawPolygon, SIGNAL(toggled(bool)), clearAnnotations, SLOT(setDisabled(bool)) );
         connect( clearAnnotations, SIGNAL(triggered()),
