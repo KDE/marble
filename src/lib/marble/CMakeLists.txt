@@ -389,10 +389,7 @@ endif(WIN32 AND QTONLY)
 
 ########### install files ###############
 
-if (APPLE AND QTONLY)
-  # do nothing because we don't put .h files in the bundle
-else (APPLE AND QTONLY)
-  install( FILES
+install( FILES
     ${graphicsview_HDRS}
     AutoNavigation.h
     BookmarkManager.h
@@ -530,6 +527,6 @@ else (APPLE AND QTONLY)
 
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
-endif (APPLE AND QTONLY)
+
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config-phonon.h.cmake
                ${CMAKE_CURRENT_BINARY_DIR}/config-phonon.h)
