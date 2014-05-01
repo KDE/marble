@@ -106,6 +106,8 @@ public:
 
     bool m_viewportChanged;
 
+    bool m_isInteractive;
+
     /** Constructor */
     explicit RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget );
 
@@ -173,7 +175,9 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         m_routeRequest( widget->model()->routingManager()->routeRequest() ),
         m_activeMenuIndex( -1 ),
         m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() ),
-        m_viewContext( Still ), m_viewportChanged( true )
+        m_viewContext( Still ),
+        m_viewportChanged( true ),
+        m_isInteractive( true )
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
     m_removeViaPointAction = new QAction( QObject::tr( "&Remove this destination" ), q );
@@ -239,7 +243,7 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
             const GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
             if ( points ) {
                 painter->drawPolyline( *points );
-                if ( m_viewportChanged && m_viewContext == Still ) {
+                if ( m_viewportChanged && m_isInteractive && m_viewContext == Still ) {
                     QRegion region = painter->regionFromPolyline( *points, 8 );
                     m_alternativeRouteRegions.push_back( RequestRegion( i, region ) );
                 }
@@ -262,7 +266,9 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     painter->drawPolyline( waypoints );
     if ( m_viewportChanged && m_viewContext == Still ) {
         int const offset = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 24 : 8;
-        m_routeRegion = painter->regionFromPolyline( waypoints, offset );
+        if ( m_isInteractive ) {
+            m_routeRegion = painter->regionFromPolyline( waypoints, offset );
+        }
     }
 
 
@@ -337,8 +343,10 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             }
         }
 
-        QRegion region = painter->regionFromEllipse( pos, 12, 12 );
-        m_instructionRegions.push_front( ModelRegion( index, region ) );
+        if ( m_isInteractive ) {
+            QRegion region = painter->regionFromEllipse( pos, 12, 12 );
+            m_instructionRegions.push_front( ModelRegion( index, region ) );
+        }
         painter->drawEllipse( pos, 6, 6 );
 
         if( !m_routingModel->deviatedFromRoute() ) {
@@ -674,6 +682,10 @@ bool RoutingLayer::eventFilter( QObject *obj, QEvent *event )
 {
     Q_UNUSED( obj )
 
+    if ( !d->m_isInteractive ) {
+        return false;
+    }
+
     if ( event->type() == QEvent::MouseButtonPress ) {
         QMouseEvent *e = static_cast<QMouseEvent*>( event );
         return d->handleMouseButtonPress( e );
@@ -767,6 +779,16 @@ void RoutingLayer::setViewportChanged()
 void RoutingLayer::setViewContext( ViewContext viewContext )
 {
     d->m_viewContext = viewContext;
+}
+
+void RoutingLayer::setInteractive( bool interactive )
+{
+    d->m_isInteractive = interactive;
+}
+
+bool RoutingLayer::isInteractive() const
+{
+    return d->m_isInteractive;
 }
 
 } // namespace Marble

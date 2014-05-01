@@ -26,6 +26,7 @@
 #include "PopupLayer.h"
 #include "Planet.h"
 #include "routing/RoutingManager.h"
+#include "routing/RoutingLayer.h"
 #include "routing/RouteRequest.h"
 #include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
@@ -55,6 +56,7 @@ public:
     QMenu m_rmbMenu;
 
     QAction *m_infoDialogAction;
+    QAction *m_directionsFromHereAction;
     QAction *m_directionsToHereAction;
 
     QAction  *const m_copyCoordinateAction;
@@ -82,6 +84,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     m_widget(widget),
     m_lmbMenu( m_widget ),
     m_rmbMenu( m_widget ),
+    m_directionsFromHereAction( 0 ),
     m_directionsToHereAction( 0 ),
     m_copyCoordinateAction( new QAction( QIcon(":/icons/copy-coordinates.png"), tr("Copy Coordinates"), parent ) ),
     m_rmbExtensionPoint( 0 ),
@@ -92,11 +95,11 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     m_infoDialogAction->setData( 0 );
 
     //	Tool actions (Right mouse button)
-    QAction* fromHere = new QAction( tr( "Directions &from here" ), parent );
+    m_directionsFromHereAction = new QAction( tr( "Directions &from here" ), parent );
     m_directionsToHereAction = new QAction( tr( "Directions &to here" ), parent );
     RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
     if ( request ) {
-        fromHere->setIcon( QIcon( request->pixmap( 0, 16 ) ) );
+        m_directionsFromHereAction->setIcon( QIcon( request->pixmap( 0, 16 ) ) );
         int const lastIndex = qMax( 1, request->size()-1 );
         m_directionsToHereAction->setIcon( QIcon( request->pixmap( lastIndex, 16 ) ) );
     }
@@ -115,7 +118,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
         m_rmbExtensionPoint = m_rmbMenu.addSeparator();
     }
 
-    m_rmbMenu.addAction( fromHere );
+    m_rmbMenu.addAction( m_directionsFromHereAction );
     m_rmbMenu.addAction( m_directionsToHereAction );
     m_rmbMenu.addSeparator();
     m_rmbMenu.addAction( addBookmark );
@@ -133,7 +136,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     }
 
     parent->connect( &m_lmbMenu, SIGNAL(aboutToHide()), SLOT(resetMenu()) );
-    parent->connect( fromHere, SIGNAL(triggered()), SLOT(directionsFromHere()) );
+    parent->connect( m_directionsFromHereAction, SIGNAL(triggered()), SLOT(directionsFromHere()) );
     parent->connect( m_directionsToHereAction, SIGNAL(triggered()), SLOT(directionsToHere()) );
     parent->connect( addBookmark, SIGNAL(triggered()), SLOT(addBookmark()) );
     parent->connect( aboutDialogAction, SIGNAL(triggered()), SLOT(slotAboutDialog()) );
@@ -243,6 +246,10 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 
     QPoint curpos = QPoint( xpos, ypos );
     d->m_copyCoordinateAction->setData( curpos );
+
+    bool const showDirectionButtons = d->m_widget->routingLayer() && d->m_widget->routingLayer()->isInteractive();
+    d->m_directionsFromHereAction->setVisible( showDirectionButtons );
+    d->m_directionsToHereAction->setVisible( showDirectionButtons );
     RouteRequest* request = d->m_widget->model()->routingManager()->routeRequest();
     if ( request ) {
         int const lastIndex = qMax( 1, request->size()-1 );

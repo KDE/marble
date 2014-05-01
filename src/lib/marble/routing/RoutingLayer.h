@@ -76,6 +76,18 @@ public:
       */
     void setViewContext( ViewContext viewContext );
 
+    /**
+     * Determine whether the route can be edited by the user (via points added,
+     * route cleared)
+     */
+    void setInteractive( bool interactive );
+
+    /**
+     * Returns whether the route is interactive (true by default if not changed
+     * by setInteractive)
+     */
+    bool isInteractive() const;
+
 Q_SIGNALS:
     /**
       * A placemark was selected (clicked) by the user. The index belongs to
