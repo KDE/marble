@@ -18,8 +18,8 @@
 #include <QDir>
 #include <QFile>
 #include <QTest>
-#include <QTemporaryFile>
 #include <QTextStream>
+#include <QBuffer>
 
 using namespace Marble;
 
@@ -91,16 +91,17 @@ void TestGeoDataWriter::saveFile()
     QFETCH( QSharedPointer<GeoDataParser>, parser );
 
     //attempt to save a file using the GeoWriter
-    QTemporaryFile tempFile;
+    QByteArray data;
+    QBuffer buffer( &data );
 
     GeoWriter writer;
     //FIXME: a better way to do this?
     writer.setDocumentType( "http://earth.google.com/kml/2.2" );
 
     // Open file in right mode
-    QVERIFY( tempFile.open() );
+    QVERIFY( buffer.open( QIODevice::WriteOnly ) );
 
-    QVERIFY( writer.write( &tempFile, &(*dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
+    QVERIFY( writer.write( &buffer, &(*dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
 
 }
 
@@ -117,20 +118,22 @@ void TestGeoDataWriter::saveAndLoad()
     //Save the file and then verify loading it again
     QFETCH( QSharedPointer<GeoDataParser>, parser );
 
-    QTemporaryFile tempFile;
+    QByteArray data;
+    QBuffer buffer( &data );
+
     GeoWriter writer;
     //FIXME: a better way to do this?
     writer.setDocumentType( "http://earth.google.com/kml/2.2" );
 
     // Open file in right mode
-    QVERIFY( tempFile.open() );
+    QVERIFY( buffer.open( QIODevice::ReadWrite ) );
 
-    QVERIFY( writer.write( &tempFile, &( *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
+    QVERIFY( writer.write( &buffer, &( *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
 
     GeoDataParser resultParser( GeoData_KML );
 
-    tempFile.reset();
-    QVERIFY( resultParser.read( &tempFile ) );
+    buffer.reset();
+    QVERIFY( resultParser.read( &buffer ) );
 }
 
 void TestGeoDataWriter::saveAndCompare_data()
@@ -154,22 +157,21 @@ void TestGeoDataWriter::saveAndCompare()
     QFETCH( QString, original );
 
     //attempt to save a file using the GeoWriter
-    QTemporaryFile tempFile;
+    QByteArray data;
+    QBuffer buffer( &data );
+    buffer.open( QIODevice::ReadWrite );
 
     GeoWriter writer;
     //FIXME: a better way to do this?
     writer.setDocumentType( "http://earth.google.com/kml/2.2" );
 
-    // Open file in right mode
-    QVERIFY( tempFile.open() );
-
-    QVERIFY( writer.write( &tempFile, &( *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
+    QVERIFY( writer.write( &buffer, &( *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
 
     QFile file( dataDir.filePath( original ) );
     QVERIFY( file.open( QIODevice::ReadOnly ) );
-    QVERIFY( tempFile.reset() );
+    QVERIFY( buffer.reset() );
     QTextStream oldFile( &file );
-    QTextStream newFile( &tempFile );
+    QTextStream newFile( &buffer );
 
     QCOMPARE( newFile.readAll().simplified(), oldFile.readAll().simplified() );
 }
