@@ -61,6 +61,8 @@
 #include <GeoDataLocation.h>
 #include <GeoDataResourceMap.h>
 #include <GeoDataModel.h>
+#include <GeoDataTrack.h>
+#include <GeoDataMultiTrack.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -114,6 +116,8 @@ private slots:
     void locationTest();
     void resourceMapTest();
     void modelTest();
+    void trackTest();
+    void multiTrackTest();
 };
 
 
@@ -1701,6 +1705,106 @@ void TestEquality::modelTest()
     model2.setResourceMap( rMap2 );
 
     QVERIFY( model1 == model2 );
+}
+
+void TestEquality::trackTest()
+{
+    GeoDataTrack track1, track2;
+    QDateTime date11( QDate(2000, 10, 4) ), date12( QDate(2001, 10, 4) );
+    QDateTime date21( QDate(2002, 10, 4) ), date22( QDate(2003, 10, 4) );
+    GeoDataCoordinates coord1(100, 100), coord2(200, 300), coord3(300, 300), coord4(400, 400);
+    GeoDataExtendedData extendedData1, extendedData2;
+    GeoDataData data1, data2;
+
+    data1.setName("Something");
+    data1.setValue(QVariant(23.56));
+    data1.setDisplayName("Marble");
+
+    data2.setName("Marble");
+    data2.setValue(QVariant(23.56));
+    data2.setDisplayName("Globe");
+
+    extendedData1.addValue(data1);
+    extendedData2.addValue(data2);
+
+    track1.addPoint(date11, coord1);
+    track1.addPoint(date12, coord2);
+    track2.addPoint(date21, coord3);
+    track2.addPoint(date22, coord4);
+
+    track1.setExtendedData(extendedData1);
+    track2.setExtendedData(extendedData2);
+
+    track1.setInterpolate( true );
+    track2.setInterpolate( true );
+
+    QCOMPARE(track1, track1);
+    QCOMPARE(track2, track2);
+    QCOMPARE(track1 == track2, false);
+    QVERIFY(track1 != track2);
+
+    track1.clear();
+    track1.addPoint(date21, coord3);
+    track1.addPoint(date22, coord4);
+    track1.setExtendedData(extendedData2);
+    QVERIFY(track1 == track2);
+}
+
+void TestEquality::multiTrackTest()
+{
+    GeoDataMultiTrack multiTrack1, multiTrack2;
+    GeoDataTrack *track1, *track2, *track3, *track4;
+    QDateTime date11( QDate(2000, 10, 4) ), date12( QDate(2001, 10, 4) );
+    QDateTime date21( QDate(2002, 10, 4) ), date22( QDate(2003, 10, 4) );
+    GeoDataCoordinates coord1(100, 100), coord2(200, 300), coord3(300, 300), coord4(400, 400);
+    GeoDataExtendedData extendedData1, extendedData2;
+    GeoDataData data1, data2;
+
+    data1.setName("Something");
+    data1.setValue(QVariant(23.56));
+    data1.setDisplayName("Marble");
+
+    data2.setName("Marble");
+    data2.setValue(QVariant(23.56));
+    data2.setDisplayName("Globe");
+
+    extendedData1.addValue(data1);
+    extendedData2.addValue(data2);
+
+    track1 = new GeoDataTrack();
+    track2 = new GeoDataTrack();
+    track1->addPoint(date11, coord1);
+    track1->addPoint(date12, coord2);
+    track2->addPoint(date11, coord1);
+    track2->addPoint(date12, coord2);
+    track1->setExtendedData(extendedData1);
+    track2->setExtendedData(extendedData1);
+    track1->setInterpolate( true );
+    track2->setInterpolate( true );
+
+    track3 = new GeoDataTrack();
+    track4 = new GeoDataTrack();
+    track3->addPoint(date21, coord3);
+    track3->addPoint(date22, coord4);
+    track4->addPoint(date21, coord3);
+    track4->addPoint(date22, coord4);
+    track3->setExtendedData(extendedData2);
+    track4->setExtendedData(extendedData2);
+    track3->setInterpolate( false );
+    track4->setInterpolate( false );
+
+    multiTrack1.append(track1);
+    multiTrack2.append(track2);
+    multiTrack1.append(track3);
+    multiTrack2.append(track4);
+
+    QCOMPARE(*track1, *track2);
+    QCOMPARE(*track3, *track4);
+
+    QCOMPARE(multiTrack1, multiTrack1);
+    QCOMPARE(multiTrack2, multiTrack2);
+    QCOMPARE(multiTrack1 != multiTrack2, false);
+    QVERIFY(multiTrack1 == multiTrack2);
 }
 
 QTEST_MAIN( TestEquality )

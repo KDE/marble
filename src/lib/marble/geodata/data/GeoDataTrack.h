@@ -64,6 +64,12 @@ public:
     int size() const;
 
     /**
+     * @brief: Equality operators.
+     */
+    bool operator==( const GeoDataTrack& other ) const;
+    bool operator!=( const GeoDataTrack& other ) const;
+
+    /**
      * Returns true if coordinatesAt() should use interpolation, false otherwise.
      * The default is false.
      *

@@ -47,6 +47,28 @@ const GeoDataMultiTrackPrivate* GeoDataMultiTrack::p() const
 }
 
 
+bool GeoDataMultiTrack::operator==( const GeoDataMultiTrack& other ) const
+{
+    if ( !equals(other) ) return false;
+
+    QVector<GeoDataTrack*>::const_iterator d_it = p()->m_vector.constBegin();
+    QVector<GeoDataTrack*>::const_iterator d_end = p()->m_vector.constEnd();
+    QVector<GeoDataTrack*>::const_iterator other_it = other.p()->m_vector.constBegin();
+    QVector<GeoDataTrack*>::const_iterator other_end = other.p()->m_vector.constEnd();
+
+
+    for (; d_it != d_end && other_it != other_end; ++d_it, ++other_it) {
+        if ( **d_it != **other_it ) return false;
+    }
+
+    return d_it == d_end && other_it == other_end;
+}
+
+bool GeoDataMultiTrack::operator!=( const GeoDataMultiTrack& other ) const
+{
+    return !this->operator==( other );
+}
+
 const GeoDataLatLonAltBox& GeoDataMultiTrack::latLonAltBox() const
 {
     QVector<GeoDataTrack*>::const_iterator it = p()->m_vector.constBegin();

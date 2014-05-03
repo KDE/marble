@@ -30,6 +30,9 @@ public:
 
     virtual ~GeoDataMultiTrack();
 
+    bool operator==( const GeoDataMultiTrack& other ) const;
+    bool operator!=( const GeoDataMultiTrack& other ) const;
+
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
     int size() const;

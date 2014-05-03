@@ -63,6 +63,21 @@ GeoDataTrack::GeoDataTrack( const GeoDataGeometry &other )
 
 }
 
+
+bool GeoDataTrack::operator==( const GeoDataTrack& other ) const
+{
+    return equals(other) &&
+           d->m_when == other.d->m_when &&
+           d->m_coordinates == other.d->m_coordinates &&
+           d->m_extendedData == other.d->m_extendedData &&
+           d->m_interpolate == other.d->m_interpolate;
+}
+
+bool GeoDataTrack::operator!=( const GeoDataTrack& other ) const
+{
+    return !this->operator==( other );
+}
+
 int GeoDataTrack::size() const
 {
     return d->m_coordinates.size();
