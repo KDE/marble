@@ -10,6 +10,8 @@
 
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataTypes.h"
+#include "GeoDataCamera.h"
+#include "GeoDataLookAt.h"
 
 namespace Marble
 {
@@ -80,6 +82,60 @@ GeoDataNetworkLinkControl &GeoDataNetworkLinkControl::operator=( const GeoDataNe
     *d = *other.d;
     d->m_abstractView = other.d->m_abstractView ? other.d->m_abstractView->copy() : 0;
     return *this;
+}
+
+
+bool GeoDataNetworkLinkControl::operator==( const GeoDataNetworkLinkControl &other ) const
+{
+    if ( !equals(other) ||
+         d->m_minRefreshPeriod != other.d->m_minRefreshPeriod ||
+         d->m_maxSessionLength != other.d->m_maxSessionLength ||
+         d->m_cookie != other.d->m_cookie ||
+         d->m_message != other.d->m_message ||
+         d->m_linkName != other.d->m_linkName ||
+         d->m_linkDescription != other.d->m_linkDescription ||
+         d->m_linkSnippet != other.d->m_linkSnippet ||
+         d->m_maxLines != other.d->m_maxLines ||
+         d->m_expires != other.d->m_expires ||
+         d->m_update != other.d->m_update ) {
+        return false;
+    }
+
+    if ( !d->m_abstractView && !other.d->m_abstractView ) {
+        return true;
+    } else if ( (!d->m_abstractView && other.d->m_abstractView) ||
+                (d->m_abstractView && !other.d->m_abstractView) ) {
+        return false;
+    }
+
+    if ( d->m_abstractView->nodeType() != other.d->m_abstractView->nodeType() ) {
+        return false;
+    }
+
+    if ( d->m_abstractView->nodeType() == GeoDataTypes::GeoDataCameraType ) {
+        GeoDataCamera *thisCam = dynamic_cast<GeoDataCamera*>( d->m_abstractView );
+        GeoDataCamera *otherCam = dynamic_cast<GeoDataCamera*>( other.d->m_abstractView );
+        Q_ASSERT(thisCam && otherCam);
+
+        if ( *thisCam != *otherCam ) {
+            return false;
+        }
+    } else if ( d->m_abstractView->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
+        GeoDataLookAt *thisLookAt = dynamic_cast<GeoDataLookAt*>( d->m_abstractView );
+        GeoDataLookAt *otherLookAt = dynamic_cast<GeoDataLookAt*>( other.d->m_abstractView );
+        Q_ASSERT(thisLookAt && otherLookAt);
+
+        if ( *thisLookAt != *otherLookAt ) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool GeoDataNetworkLinkControl::operator!=( const GeoDataNetworkLinkControl &other ) const
+{
+    return !this->operator==( other );
 }
 
 GeoDataNetworkLinkControl::~GeoDataNetworkLinkControl()
@@ -206,6 +262,7 @@ GeoDataAbstractView *GeoDataNetworkLinkControl::abstractView() const
 void GeoDataNetworkLinkControl::setAbstractView( GeoDataAbstractView *abstractView )
 {
     d->m_abstractView = abstractView;
+    d->m_abstractView->setParent( this );
 }
 
 }

@@ -65,6 +65,8 @@
 #include <GeoDataMultiTrack.h>
 #include <GeoDataSnippet.h>
 #include <GeoDataLookAt.h>
+#include <GeoDataNetworkLink.h>
+#include <GeoDataNetworkLinkControl.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -122,6 +124,8 @@ private slots:
     void multiTrackTest();
     void snippetTest();
     void lookAtTest();
+    void networkLinkTest();
+    void networkLinkControlTest();
 };
 
 
@@ -2063,6 +2067,158 @@ void TestEquality::lookAtTest()
 
     lookAt2.setAltitude( 2000 );
     QVERIFY( lookAt1 != lookAt2 );
+}
+
+void TestEquality::networkLinkTest()
+{
+    GeoDataNetworkLink netL1, netL2;
+
+    netL1.setRefreshVisibility( true );
+    netL2.setRefreshVisibility( false );
+    netL1.setFlyToView( true );
+    netL2.setFlyToView( false );
+
+    GeoDataLink link;
+    link.setHref(QString("/link/to/something"));
+    link.setRefreshMode( GeoDataLink::OnExpire );
+    link.setRefreshInterval( 20.22 );
+    link.setViewRefreshMode( GeoDataLink::OnRequest );
+    link.setViewRefreshTime( 3.22 );
+    link.setViewBoundScale( 1.132 );
+    link.setViewFormat( QString("Format 1") );
+    link.setHttpQuery( QString("HttpQueryy1") );
+
+    netL1.setLink( link );
+    netL2.setLink( link );
+
+    QCOMPARE( netL1, netL1 );
+    QCOMPARE( netL2, netL2 );
+    QCOMPARE( netL1 == netL2, false );
+    QVERIFY( netL1 != netL2 );
+
+    netL1.setName( QString("NetL1") );
+    netL1.setSnippet( GeoDataSnippet("Textttt", 10) );
+    netL1.setDescription( QString("Descr1") );
+    netL1.setDescriptionCDATA( false );
+    netL1.setAddress( QString("Some address") );
+    netL1.setPhoneNumber( QString("Some phone number") );
+    netL1.setStyleUrl( QString("/link/to/style1") );
+    netL1.setPopularity( 66666 );
+    netL1.setZoomLevel( 10 );
+    netL1.setVisible( true );
+    netL1.setRole( QString("Role1") );
+    netL2.setName( QString("NetL1") );
+    netL2.setSnippet( GeoDataSnippet("Textttt", 10) );
+    netL2.setDescription( QString("Descr1") );
+    netL2.setDescriptionCDATA( false );
+    netL2.setAddress( QString("Some address") );
+    netL2.setPhoneNumber( QString("Some phone number") );
+    netL2.setStyleUrl( QString("/link/to/style1") );
+    netL2.setPopularity( 66666 );
+    netL2.setZoomLevel( 10 );
+    netL2.setVisible( true );
+    netL2.setRole( QString("Role1") );
+
+    GeoDataLookAt lookAt1, lookAt2;
+
+    lookAt1.setAltitudeMode( Marble::ClampToGround );
+    lookAt1.setAltitude( 100 );
+    lookAt1.setLatitude( 100 );
+    lookAt1.setLongitude( 100 );
+    lookAt1.setRange( 500 );
+    lookAt2 = lookAt1;
+
+    netL1.setAbstractView( &lookAt1 );
+    netL2.setAbstractView( &lookAt2 );
+    netL1.setFlyToView( false );
+    netL2.setRefreshVisibility( true );
+
+    QVERIFY( netL1 == netL2 );
+}
+
+void TestEquality::networkLinkControlTest()
+{
+    GeoDataNetworkLinkControl netLC1, netLC2;
+
+    netLC1.setMinRefreshPeriod( 25 );
+    netLC1.setMaxSessionLength( 100 );
+    netLC1.setCookie( QString("Coookiiee") );
+    netLC1.setMessage( QString("Some message here") );
+    netLC1.setLinkName( QString("Link name") );
+    netLC1.setLinkDescription( QString("Some link description here") );
+    netLC1.setLinkSnippet( QString("Link snippet") );
+    netLC1.setMaxLines( 100 );
+    netLC1.setExpires( QDateTime(QDate(2014, 5, 4)) );
+    netLC2.setMinRefreshPeriod( 25 );
+    netLC2.setMaxSessionLength( 100 );
+    netLC2.setCookie( QString("Coookiiee") );
+    netLC2.setMessage( QString("Some message here") );
+    netLC2.setLinkName( QString("Link name") );
+    netLC2.setLinkDescription( QString("Some link description here") );
+    netLC2.setLinkSnippet( QString("Link snippet") );
+    netLC2.setMaxLines( 100 );
+    netLC2.setExpires( QDateTime(QDate(2014, 5, 4)) );
+
+    GeoDataUpdate update;
+    update.setTargetHref( QString("Target href") );
+
+    netLC1.setUpdate( update );
+    netLC2.setUpdate( update );
+
+
+    GeoDataCamera *camera1 = new GeoDataCamera;
+    GeoDataCamera *camera2 = new GeoDataCamera;
+
+    camera1->setAltitudeMode( Marble::ClampToGround );
+    camera1->setAltitude( 2000 );
+    camera1->setLatitude( 2.555 );
+    camera1->setLongitude( 1.32 );
+    camera1->setHeading( 200 );
+    camera1->setRoll( 300 );
+    camera1->setTilt( 400 );
+    *camera2 = *camera1;
+
+
+    netLC1.setAbstractView( camera1 );
+    netLC2.setAbstractView( camera2 );
+    QVERIFY( netLC1 == netLC2 );
+
+    camera2->setAltitudeMode( Marble::Absolute );
+    QVERIFY( netLC1 != netLC2 );
+
+    camera1->setAltitudeMode( Marble::Absolute );
+    QVERIFY( netLC1 == netLC2 );
+
+    netLC1.setMaxLines( 50 );
+    QVERIFY( netLC1 != netLC2 );
+
+    netLC1.setStyleMap(0);
+    netLC2.setStyleMap(0);
+
+    GeoDataStyleMap styleMap1, styleMap2;
+    styleMap1["germany"] = "gst1";
+    styleMap1["germany"] = "gst2";
+    styleMap1["germany"] = "gst3";
+    styleMap1["poland"] = "pst1";
+    styleMap1["poland"] = "pst2";
+    styleMap1["poland"] = "pst3";
+    styleMap1.setLastKey("poland");
+    styleMap2["germany"] = "gst1";
+    styleMap2["germany"] = "gst2";
+    styleMap2["germany"] = "gst3";
+    styleMap2["poland"] = "pst1";
+    styleMap2["poland"] = "pst2";
+    styleMap2["poland"] = "pst3";
+    styleMap2.setLastKey("romania");
+
+
+    netLC2.setMaxLines( 50 );
+    netLC1.setStyleMap( &styleMap1 );
+    netLC2.setStyleMap( &styleMap2 );
+    QVERIFY( netLC1 != netLC2 );
+
+    styleMap1.setLastKey("romania");
+    QVERIFY( netLC1 == netLC2 );
 }
 
 QTEST_MAIN( TestEquality )

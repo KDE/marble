@@ -49,6 +49,19 @@ GeoDataNetworkLink &GeoDataNetworkLink::operator=( const GeoDataNetworkLink &oth
     return *this;
 }
 
+bool GeoDataNetworkLink::operator==( const GeoDataNetworkLink &other ) const
+{
+    return equals( other) &&
+           d->m_refreshVisibility == other.d->m_refreshVisibility &&
+           d->m_link == other.d->m_link &&
+           d->m_flyToView == other.d->m_flyToView;
+}
+
+bool GeoDataNetworkLink::operator!=( const GeoDataNetworkLink &other ) const
+{
+    return !this->operator==( other );
+}
+
 GeoDataNetworkLink::~GeoDataNetworkLink()
 {
     delete d;

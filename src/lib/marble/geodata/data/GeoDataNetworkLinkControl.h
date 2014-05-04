@@ -33,6 +33,9 @@ public:
 
     GeoDataNetworkLinkControl& operator=( const GeoDataNetworkLinkControl &other );
 
+    bool operator==( const GeoDataNetworkLinkControl &other ) const;
+    bool operator!=( const GeoDataNetworkLinkControl &other ) const;
+
     ~GeoDataNetworkLinkControl();
 
     /** Provides type information for downcasting a GeoNode */
@@ -69,6 +72,9 @@ public:
     void setUpdate( const GeoDataUpdate &update );
 
     GeoDataAbstractView* abstractView() const;
+    /**
+     * Sets the abstract view and takes control of this pointer.
+     */
     void setAbstractView( GeoDataAbstractView *abstractView );
 
 private:

@@ -29,6 +29,9 @@ public:
 
     GeoDataNetworkLink& operator=( const GeoDataNetworkLink &other );
 
+    bool operator==( const GeoDataNetworkLink &other ) const;
+    bool operator!=( const GeoDataNetworkLink &other ) const;
+
     ~GeoDataNetworkLink();
 
     /** Provides type information for downcasting a GeoNode */
