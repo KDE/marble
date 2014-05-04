@@ -35,6 +35,7 @@ GeoDataLookAt::GeoDataLookAt( const GeoDataLookAt& other ) :
 
 GeoDataLookAt& GeoDataLookAt::operator=( const GeoDataLookAt &other )                                   
 {
+    GeoDataAbstractView::operator=( other );
     qAtomicAssign( d, other.d );
     return *this;
 }
