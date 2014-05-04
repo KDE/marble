@@ -29,6 +29,9 @@ namespace Marble
 
         GeoDataLookAt& operator=(const GeoDataLookAt &other);
 
+        bool operator==(const GeoDataLookAt &other) const;
+        bool operator!=(const GeoDataLookAt &other) const;
+
         ~GeoDataLookAt();
 
         GeoDataAbstractView *copy() const;

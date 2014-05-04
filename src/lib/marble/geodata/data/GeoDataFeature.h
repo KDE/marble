@@ -502,6 +502,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     GeoDataFeaturePrivate* d;
     GeoDataFeature( GeoDataFeaturePrivate* priv );
 
+    bool equals( const GeoDataFeature &other ) const;
+    using GeoDataObject::equals;
+
  private:
     // the private d pointer accessor - use it instead of the d pointer directly
     GeoDataFeaturePrivate* p() const;

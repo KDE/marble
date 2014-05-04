@@ -63,6 +63,8 @@
 #include <GeoDataModel.h>
 #include <GeoDataTrack.h>
 #include <GeoDataMultiTrack.h>
+#include <GeoDataSnippet.h>
+#include <GeoDataLookAt.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -118,6 +120,8 @@ private slots:
     void modelTest();
     void trackTest();
     void multiTrackTest();
+    void snippetTest();
+    void lookAtTest();
 };
 
 
@@ -530,6 +534,184 @@ void TestEquality::tourTest()
     QCOMPARE( tour1, tour1 );
     QCOMPARE( tour2, tour2 );
     QCOMPARE( tour1 == tour2, false );
+    QVERIFY( tour1 != tour2 );
+
+    // Test GeoDataFeature properties
+    tour1.setName( QString("Tour1") );
+    tour1.setSnippet( GeoDataSnippet("Text1", 10) );
+    tour1.setDescription( QString("Description1") );
+    tour1.setDescriptionCDATA( true );
+    tour1.setAddress( QString("Address1") );
+    tour1.setPhoneNumber( QString("+40768652156") );
+    tour1.setStyleUrl( QString("/link/to/style1") );
+    tour1.setPopularity( 66666 );
+    tour1.setZoomLevel( 10 );
+    tour1.setVisible( true );
+    tour1.setRole( QString("Role1") );
+
+    GeoDataStyle style1, style2;
+    GeoDataIconStyle iconStyle;
+    QImage icon( 50, 50, QImage::Format_Mono );
+    icon.fill( Qt::black );
+    QPointF hotSpot = QPointF( 7.6, 6.4 );
+
+    iconStyle.setScale( 1.0 );
+    iconStyle.setIconPath( "path/to/icon" );
+    iconStyle.setIcon( icon );
+    iconStyle.setHotSpot( hotSpot, GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction );
+    iconStyle.setHeading( 0 );
+
+    GeoDataLabelStyle labelStyle;
+    labelStyle.setColor( Qt::blue );
+    labelStyle.setScale( 1.0 );
+    labelStyle.setAlignment( GeoDataLabelStyle::Center );
+    labelStyle.setFont( QFont( "Helvetica", 10 ) );
+
+    GeoDataLineStyle lineStyle;
+    QVector< qreal > pattern( 5, 6.2 );
+    lineStyle.setWidth( 1.2 );
+    lineStyle.setPhysicalWidth( 1.0 );
+    lineStyle.setCapStyle( Qt::RoundCap );
+    lineStyle.setPenStyle( Qt::SolidLine );
+    lineStyle.setBackground( false );
+    lineStyle.setDashPattern( pattern );
+
+    GeoDataPolyStyle polyStyle;
+    polyStyle.setColor( Qt::red );
+    polyStyle.setFill( false );
+    polyStyle.setOutline( false );
+    polyStyle.setBrushStyle( Qt::SolidPattern );
+
+    GeoDataBalloonStyle balloon;
+    balloon.setBackgroundColor(Qt::white);
+    balloon.setTextColor(Qt::black);
+    balloon.setText("SomeText");
+    balloon.setDisplayMode(GeoDataBalloonStyle::Hide);
+
+    GeoDataListStyle listStyle;
+    listStyle.setListItemType( GeoDataListStyle::Check );
+    listStyle.setBackgroundColor( Qt::gray );
+    for( int i = 0; i < 5; ++i ) {
+        GeoDataItemIcon *icon = new GeoDataItemIcon;
+        QImage img( 20 * ( i + 1 ), 20 * ( i + 1 ), QImage::Format_Mono );
+        img.fill( Qt::black );
+        icon->setIcon( img );
+        icon->setIconPath( QString("path/to/icon") );
+        icon->setState( GeoDataItemIcon::Open );
+        listStyle.append( icon );
+    }
+
+    style1.setIconStyle( iconStyle );
+    style1.setLineStyle( lineStyle );
+    style1.setLabelStyle( labelStyle );
+    style1.setPolyStyle( polyStyle );
+    style1.setBalloonStyle( balloon );
+    style1.setListStyle( listStyle );
+
+    style2 = style1;
+
+    GeoDataStyleMap styleMap1, styleMap2;
+    styleMap1["germany"] = "gst1";
+    styleMap1["germany"] = "gst2";
+    styleMap1["germany"] = "gst3";
+    styleMap1["poland"] = "pst1";
+    styleMap1["poland"] = "pst2";
+    styleMap1["poland"] = "pst3";
+    styleMap1.setLastKey("poland");
+
+    styleMap2 = styleMap1;
+
+
+    GeoDataRegion region1;
+    GeoDataRegion region2;
+    GeoDataLatLonAltBox latLonAltBox1;
+    GeoDataLod lod1;
+
+    latLonAltBox1.setEast( 40 );
+    latLonAltBox1.setWest( 50 );
+    latLonAltBox1.setNorth( 60 );
+    latLonAltBox1.setSouth( 70 );
+    latLonAltBox1.setRotation( 20 );
+    latLonAltBox1.setBoundaries( 70, 80, 50, 60 );
+    latLonAltBox1.setMaxAltitude( 100 );
+    latLonAltBox1.setMinAltitude( 20 );
+    latLonAltBox1.setAltitudeMode( Marble::Absolute );
+
+    region1.setLatLonAltBox( latLonAltBox1 );
+    region2.setLatLonAltBox( latLonAltBox1 );
+
+    lod1.setMaxFadeExtent( 20 );
+    lod1.setMinFadeExtent( 10 );
+    lod1.setMaxLodPixels( 30 );
+    lod1.setMinLodPixels( 5 );
+
+    region1.setLod( lod1 );
+    region2.setLod( lod1 );
+
+
+    GeoDataExtendedData extendedData1, extendedData2;
+    GeoDataData data1;
+
+    data1.setName( "Something" );
+    data1.setValue( QVariant(23.56) );
+    data1.setDisplayName( "Marble" );
+
+    extendedData1.addValue(data1);
+    extendedData2.addValue(data1);
+
+
+    GeoDataTimeStamp timeStamp1, timeStamp2;
+    QDateTime date1( QDate(1994, 10, 4) );
+
+    timeStamp1.setWhen( date1 );
+    timeStamp1.setResolution( GeoDataTimeStamp::YearResolution );
+    timeStamp2 = timeStamp1;
+
+
+    GeoDataCamera camera1, camera2;
+
+    camera1.setAltitudeMode(Marble::Absolute);
+    camera1.setAltitude(100);
+    camera1.setLatitude(100);
+    camera1.setLongitude(100);
+    camera1.setHeading(200);
+    camera1.setRoll(300);
+    camera1.setTilt(400);
+    camera2 = camera1;
+
+    tour1.setAbstractView( &camera1 );
+    tour1.setTimeStamp( timeStamp1 );
+    tour1.setExtendedData( extendedData1 );
+    tour1.setRegion( region1 );
+    tour1.setStyle( &style1 );
+    tour1.setStyleMap( &styleMap1 );
+    tour2 = tour1;
+
+    QCOMPARE( tour1, tour1 );
+    QCOMPARE( tour2, tour2 );
+    QCOMPARE( tour1 != tour2, false );
+    QVERIFY( tour1 == tour2 );
+
+
+    GeoDataLookAt lookAt;
+
+    lookAt.setLatitude( 1.1113 );
+    lookAt.setLongitude( 2.33 );
+    lookAt.setAltitude( 1500 );
+    lookAt.setRange( 500 );
+
+    tour2.setAbstractView( &lookAt );
+    QVERIFY( tour1 != tour2 );
+
+    tour1.setAbstractView( &lookAt );
+    tour1.setStyleMap( 0 );
+    QVERIFY(tour1 != tour2 );
+
+    tour1.setStyleMap( &styleMap1 );
+    QVERIFY( tour1 == tour2 );
+
+    camera2.setRoll(400);
+    tour1.setAbstractView( &camera2 );
     QVERIFY( tour1 != tour2 );
 }
 
@@ -1805,6 +1987,82 @@ void TestEquality::multiTrackTest()
     QCOMPARE(multiTrack2, multiTrack2);
     QCOMPARE(multiTrack1 != multiTrack2, false);
     QVERIFY(multiTrack1 == multiTrack2);
+}
+
+void TestEquality::snippetTest()
+{
+    GeoDataSnippet snipp1, snipp2;
+
+    snipp1.setText( QString("Text1") );
+    snipp2.setText( QString("Text2") );
+
+    snipp1.setMaxLines( 10 );
+    snipp2.setMaxLines( 666013 );
+
+    QCOMPARE( snipp1, snipp1 );
+    QCOMPARE( snipp2, snipp2 );
+    QCOMPARE( snipp1 == snipp2, false );
+    QVERIFY( snipp1 != snipp2 );
+
+    snipp1.setText( QString("Text2") );
+    snipp2.setMaxLines( 10 );
+    QVERIFY( snipp1 == snipp2 );
+}
+
+void TestEquality::lookAtTest()
+{
+    GeoDataLookAt lookAt1, lookAt2;
+
+    lookAt1.setLatitude(1.112);
+    lookAt1.setLongitude(2.33);
+    lookAt1.setAltitude(1500);
+    lookAt2 = lookAt1;
+
+    GeoDataTimeStamp timeStampBegin, timeStampEnd;
+    QDateTime date1( QDate(2014, 4, 7) );
+
+    timeStampBegin.setWhen( date1 );
+    timeStampEnd.setWhen( date1 );
+    timeStampBegin.setResolution( GeoDataTimeStamp::YearResolution );
+    timeStampEnd.setResolution( GeoDataTimeStamp::YearResolution );
+
+    GeoDataTimeSpan timeSpan1, timeSpan2;
+    timeSpan1.setBegin( timeStampBegin );
+    timeSpan1.setEnd( timeStampEnd );
+    timeSpan2 = timeSpan1;
+
+    GeoDataTimeStamp timeStamp1, timeStamp2;
+    QDateTime date2( QDate(2014, 4, 8) );
+    timeStamp1.setWhen( date2 );
+    timeStamp2.setWhen( date2 );
+    timeStamp1.setResolution( GeoDataTimeStamp::SecondResolution );
+    timeStamp2.setResolution( GeoDataTimeStamp::SecondResolution );
+
+    lookAt1.setTimeSpan( timeSpan1 );
+    lookAt2.setTimeSpan( timeSpan2 );
+    lookAt1.setTimeStamp( timeStamp1 );
+    lookAt2.setTimeStamp( timeStamp2 );
+
+    lookAt1.setRange( 500 );
+    lookAt2.setRange( 300 );
+
+    QCOMPARE( lookAt1, lookAt1 );
+    QCOMPARE( lookAt2, lookAt2 );
+    QCOMPARE( lookAt1 == lookAt2, false );
+    QVERIFY( lookAt1 != lookAt2 );
+
+    lookAt2.setRange( 500 );
+    QVERIFY( lookAt1 == lookAt2 );
+
+    timeStamp1.setResolution( GeoDataTimeStamp::YearResolution );
+    lookAt1.setTimeStamp( timeStamp1 );
+    QVERIFY( lookAt1 != lookAt2 );
+
+    lookAt2.setTimeStamp( timeStamp1 );
+    QVERIFY( lookAt1 == lookAt2 );
+
+    lookAt2.setAltitude( 2000 );
+    QVERIFY( lookAt1 != lookAt2 );
 }
 
 QTEST_MAIN( TestEquality )

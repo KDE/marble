@@ -20,6 +20,16 @@ GeoDataSnippet::GeoDataSnippet(const QString &text , int maxLines ) :
     // nothing to do
 }
 
+bool GeoDataSnippet::operator==( const GeoDataSnippet &other ) const
+{
+    return m_text == other.m_text && m_maxLines == other.m_maxLines;
+}
+
+bool GeoDataSnippet::operator!=( const GeoDataSnippet &other ) const
+{
+    return !this->operator==( other );
+}
+
 int GeoDataSnippet::maxLines() const
 {
     return m_maxLines;

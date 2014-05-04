@@ -12,17 +12,24 @@
 #define MARBLE_GEODATASNIPPET_H
 
 #include <QString>
+#include "geodata_export.h"
 
 namespace Marble
 {
 
-class GeoDataSnippet
+class GEODATA_EXPORT GeoDataSnippet
 {
 public:
     /**
      * Create a new snippet with the given @text text and @maxLines maximum of lines.
      */
     explicit GeoDataSnippet( const QString &text = QString() , int maxLines = 0 );
+
+    /**
+     * Check for equality/inequality between two GeoDataSnippets.
+     */
+    bool operator==( const GeoDataSnippet &other ) const;
+    bool operator!=( const GeoDataSnippet &other ) const;
 
     /**
      * Return the number of lines that should be displayed at maximum. The value

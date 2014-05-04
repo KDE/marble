@@ -28,6 +28,7 @@
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataRegion.h"
+#include "GeoDataCamera.h"
 
 namespace Marble
 {
@@ -88,6 +89,70 @@ GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
     d->ref.ref();
     
     return *this;
+}
+
+bool GeoDataFeature::equals( const GeoDataFeature &other ) const
+{
+    if ( !GeoDataObject::equals(other) ||
+         p()->m_name != other.p()->m_name ||
+         p()->m_snippet != other.p()->m_snippet ||
+         p()->m_description != other.p()->m_description ||
+         p()->m_descriptionCDATA != other.p()->m_descriptionCDATA ||
+         p()->m_address != other.p()->m_address ||
+         p()->m_phoneNumber != other.p()->m_phoneNumber ||
+         p()->m_styleUrl != other.p()->m_styleUrl ||
+         p()->m_popularity != other.p()->m_popularity ||
+         p()->m_zoomLevel != other.p()->m_zoomLevel ||
+         p()->m_visible != other.p()->m_visible ||
+         p()->m_role != other.p()->m_role ||
+         p()->m_extendedData != other.p()->m_extendedData ||
+         p()->m_timeSpan != other.p()->m_timeSpan ||
+         p()->m_timeStamp != other.p()->m_timeStamp ||
+         p()->m_region != other.p()->m_region ||
+         *style() != *other.style() ) {
+        return false;
+    }
+
+    if ( (!p()->m_styleMap && other.p()->m_styleMap) ||
+         (p()->m_styleMap && !other.p()->m_styleMap) ) {
+        return false;
+    }
+
+    if ( (p()->m_styleMap && other.p()->m_styleMap) &&
+         (*p()->m_styleMap != *other.p()->m_styleMap) ) {
+        return false;
+    }
+
+    if ( !p()->m_abstractView && !other.p()->m_abstractView ) {
+        return true;
+    } else if ( (!p()->m_abstractView && other.p()->m_abstractView) ||
+                (p()->m_abstractView && !other.p()->m_abstractView) ) {
+        return false;
+    }
+
+    if ( p()->m_abstractView->nodeType() != other.p()->m_abstractView->nodeType() ) {
+        return false;
+    }
+
+    if ( p()->m_abstractView->nodeType() == GeoDataTypes::GeoDataCameraType ) {
+        GeoDataCamera *thisCam = dynamic_cast<GeoDataCamera*>( p()->m_abstractView );
+        GeoDataCamera *otherCam = dynamic_cast<GeoDataCamera*>( other.p()->m_abstractView );
+        Q_ASSERT(thisCam && otherCam);
+
+        if ( *thisCam != *otherCam ) {
+            return false;
+        }
+    } else if ( p()->m_abstractView->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
+        GeoDataLookAt *thisLookAt = dynamic_cast<GeoDataLookAt*>( p()->m_abstractView );
+        GeoDataLookAt *otherLookAt = dynamic_cast<GeoDataLookAt*>( other.p()->m_abstractView );
+        Q_ASSERT(thisLookAt && otherLookAt);
+
+        if ( *thisLookAt != *otherLookAt ) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 const char* GeoDataFeature::nodeType() const
