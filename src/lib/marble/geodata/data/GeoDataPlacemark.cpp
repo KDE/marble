@@ -24,6 +24,7 @@
 #include <QDataStream>
 #include "MarbleDebug.h"
 #include "GeoDataTrack.h"
+#include "GeoDataModel.h"
 
 namespace Marble
 {
@@ -53,7 +54,89 @@ GeoDataPlacemark::~GeoDataPlacemark()
 
 bool GeoDataPlacemark::operator==( const GeoDataPlacemark& other ) const
 { 
-    return equals(other) && p() == other.p();
+    if ( !equals(other) ||
+         p()->m_countrycode != other.p()->m_countrycode ||
+         p()->m_area != other.p()->m_area ||
+         p()->m_population != other.p()->m_population ||
+         p()->m_state != other.p()->m_state ) {
+        return false;
+    }
+
+    if ( !p()->m_geometry && !other.p()->m_geometry ) {
+        return true;
+    } else if ( (!p()->m_geometry && other.p()->m_geometry) ||
+                (p()->m_geometry && !other.p()->m_geometry) ) {
+        return false;
+    }
+
+    if ( p()->m_geometry->nodeType() != other.p()->m_geometry->nodeType() ) {
+        return false;
+    }
+
+    if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+        GeoDataPolygon *thisPoly = dynamic_cast<GeoDataPolygon*>( p()->m_geometry );
+        GeoDataPolygon *otherPoly = dynamic_cast<GeoDataPolygon*>( other.p()->m_geometry );
+        Q_ASSERT( thisPoly && otherPoly );
+
+        if ( *thisPoly != *otherPoly ) {
+            return false;
+        }
+    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+        GeoDataLineString *thisLine = dynamic_cast<GeoDataLineString*>( p()->m_geometry );
+        GeoDataLineString *otherLine = dynamic_cast<GeoDataLineString*>( other.p()->m_geometry );
+        Q_ASSERT( thisLine && otherLine );
+
+        if ( *thisLine != *otherLine ) {
+            return false;
+        }
+    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataModelType ) {
+        GeoDataModel *thisModel = dynamic_cast<GeoDataModel*>( p()->m_geometry );
+        GeoDataModel *otherModel = dynamic_cast<GeoDataModel*>( other.p()->m_geometry );
+        Q_ASSERT( thisModel && otherModel );
+
+        if ( *thisModel != *otherModel ) {
+            return false;
+        }
+    /*} else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
+        GeoDataMultiGeometry *thisMG = dynamic_cast<GeoDataMultiGeometry*>( p()->m_geometry );
+        GeoDataMultiGeometry *otherMG = dynamic_cast<GeoDataMultiGeometry*>( other.p()->m_geometry );
+        Q_ASSERT( thisMG && otherMG );
+
+        if ( *thisMG != *otherMG ) {
+            return false;
+        } */ // Does not have equality operators. I guess they need to be implemented soon.
+    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataTrackType ) {
+        GeoDataTrack *thisTrack = dynamic_cast<GeoDataTrack*>( p()->m_geometry );
+        GeoDataTrack *otherTrack = dynamic_cast<GeoDataTrack*>( other.p()->m_geometry );
+        Q_ASSERT( thisTrack && otherTrack );
+
+        if ( *thisTrack != *otherTrack ) {
+            return false;
+        }
+    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiTrackType ) {
+        GeoDataMultiTrack *thisMT = dynamic_cast<GeoDataMultiTrack*>( p()->m_geometry );
+        GeoDataMultiTrack *otherMT = dynamic_cast<GeoDataMultiTrack*>( other.p()->m_geometry );
+        Q_ASSERT( thisMT && otherMT );
+
+        if ( *thisMT != *otherMT ) {
+            return false;
+        }
+    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType ) {
+        GeoDataPoint *thisPoint = dynamic_cast<GeoDataPoint*>( p()->m_geometry );
+        GeoDataPoint *otherPoint = dynamic_cast<GeoDataPoint*>( other.p()->m_geometry );
+        Q_ASSERT( thisPoint && otherPoint );
+
+        if ( *thisPoint != *otherPoint ) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool GeoDataPlacemark::operator!=( const GeoDataPlacemark& other ) const
+{
+    return !this->operator==( other );
 }
 
 GeoDataPlacemarkPrivate* GeoDataPlacemark::p()

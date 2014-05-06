@@ -75,10 +75,10 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     ~GeoDataPlacemark();
 
     /**
-    * comparison operator is implemented slightly different than one would expect.
-    * Only Placemarks that are copies of each other are assumed to be equal.
+    * Equality operators.
     */
     bool operator==( const GeoDataPlacemark& other ) const;
+    bool operator!=( const GeoDataPlacemark& other ) const;
 
     /**
      * Return the coordinates of the placemark at time @p dateTime as a GeoDataCoordinates
