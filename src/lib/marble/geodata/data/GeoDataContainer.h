@@ -153,6 +153,9 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
  protected:
     explicit GeoDataContainer( GeoDataContainerPrivate *priv );
 
+    bool equals( const GeoDataContainer &other ) const;
+    using GeoDataFeature::equals;
+
  private:
     GeoDataContainerPrivate* p();
     const GeoDataContainerPrivate* p() const;

@@ -67,6 +67,7 @@
 #include <GeoDataLookAt.h>
 #include <GeoDataNetworkLink.h>
 #include <GeoDataNetworkLinkControl.h>
+#include <GeoDataFolder.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -126,6 +127,7 @@ private slots:
     void lookAtTest();
     void networkLinkTest();
     void networkLinkControlTest();
+    void folderTest();
 };
 
 
@@ -2219,6 +2221,79 @@ void TestEquality::networkLinkControlTest()
 
     styleMap1.setLastKey("romania");
     QVERIFY( netLC1 == netLC2 );
+}
+
+void TestEquality::folderTest()
+{
+    GeoDataFolder folder1, folder2;
+
+    GeoDataGroundOverlay *overlay11, *overlay12, *overlay21, *overlay22;
+    GeoDataLatLonBox latLonBox1, latLonBox2;
+
+    overlay11 = new GeoDataGroundOverlay;
+    overlay12 = new GeoDataGroundOverlay;
+    overlay21 = new GeoDataGroundOverlay;
+    overlay22 = new GeoDataGroundOverlay;
+
+    latLonBox1.setEast( 33 );
+    latLonBox1.setWest( 52 );
+    latLonBox1.setNorth( 61 );
+    latLonBox1.setSouth( 72 );
+    latLonBox1.setRotation( 51 );
+    latLonBox1.setBoundaries( 23, 54, 33, 21 );
+
+    latLonBox2.setEast( 40 );
+    latLonBox2.setWest( 50 );
+    latLonBox2.setNorth( 60 );
+    latLonBox2.setSouth( 70 );
+    latLonBox2.setRotation( 20 );
+    latLonBox2.setBoundaries( 70, 80, 50, 60 );
+
+    overlay11->setLatLonBox( latLonBox1 );
+    overlay12->setLatLonBox( latLonBox2 );
+
+    GeoDataLatLonQuad quad1, quad2;
+    quad1.setBottomLeftLatitude( 1.23, GeoDataCoordinates::Radian );
+    quad1.setBottomLeftLongitude( 2.60, GeoDataCoordinates::Radian );
+    quad1.setBottomRightLatitude( 0.45, GeoDataCoordinates::Radian );
+    quad1.setBottomRightLongitude( 1.260, GeoDataCoordinates::Radian );
+
+    quad1.setTopLeftLatitude( 2.55, GeoDataCoordinates::Radian );
+    quad1.setTopLeftLongitude( 1.65, GeoDataCoordinates::Radian );
+    quad1.setTopRightLatitude( 1.245, GeoDataCoordinates::Radian );
+    quad1.setTopRightLongitude( 1.350, GeoDataCoordinates::Radian );
+
+    quad2.setBottomLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad2.setBottomLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad2.setBottomRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad2.setBottomRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    quad2.setTopLeftLatitude( 55, GeoDataCoordinates::Degree );
+    quad2.setTopLeftLongitude( 60, GeoDataCoordinates::Degree );
+    quad2.setTopRightLatitude( 45, GeoDataCoordinates::Degree );
+    quad2.setTopRightLongitude( 50, GeoDataCoordinates::Degree );
+
+    overlay11->setLatLonQuad( quad1 );
+    overlay12->setLatLonQuad( quad2 );
+
+    overlay11->setAltitude( 23.5 );
+    overlay12->setAltitude( 23.5 );
+
+    overlay11->setAltitudeMode( Marble::Absolute );
+    overlay12->setAltitudeMode( Marble::Absolute );
+
+    *overlay21 = *overlay11;
+    *overlay22 = *overlay12;
+
+    folder1.append( overlay11 );
+    folder1.append( overlay12 );
+    folder2.append( overlay21 );
+    folder2.append( overlay22 );
+
+    QCOMPARE( folder1, folder1 );
+    QCOMPARE( folder2, folder2 );
+    QCOMPARE( folder1 != folder2, false );
+    QVERIFY( folder1 == folder2 );
 }
 
 QTEST_MAIN( TestEquality )

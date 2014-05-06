@@ -87,7 +87,7 @@ GeoDataNetworkLinkControl &GeoDataNetworkLinkControl::operator=( const GeoDataNe
 
 bool GeoDataNetworkLinkControl::operator==( const GeoDataNetworkLinkControl &other ) const
 {
-    if ( !equals(other) ||
+    if ( !GeoDataContainer::equals(other) ||
          d->m_minRefreshPeriod != other.d->m_minRefreshPeriod ||
          d->m_maxSessionLength != other.d->m_maxSessionLength ||
          d->m_cookie != other.d->m_cookie ||

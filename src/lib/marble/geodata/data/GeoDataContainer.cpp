@@ -22,6 +22,14 @@
 #include "GeoDataFeature.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataDocument.h"
+#include "GeoDataNetworkLinkControl.h"
+#include "GeoDataNetworkLink.h"
+#include "GeoDataGroundOverlay.h"
+#include "GeoDataPhotoOverlay.h"
+#include "GeoDataScreenOverlay.h"
+#include "GeoDataTour.h"
+
 
 namespace Marble
 {
@@ -53,6 +61,100 @@ GeoDataContainerPrivate* GeoDataContainer::p()
 const GeoDataContainerPrivate* GeoDataContainer::p() const
 {
     return static_cast<GeoDataContainerPrivate*>(d);
+}
+
+bool GeoDataContainer::equals( const GeoDataContainer &other ) const
+{
+    if ( !GeoDataFeature::equals(other) ) {
+        return false;
+    }
+
+    QVector<GeoDataFeature*>::const_iterator thisBegin = p()->m_vector.constBegin();
+    QVector<GeoDataFeature*>::const_iterator thisEnd = p()->m_vector.constEnd();
+    QVector<GeoDataFeature*>::const_iterator otherBegin = other.p()->m_vector.constBegin();
+    QVector<GeoDataFeature*>::const_iterator otherEnd = other.p()->m_vector.constEnd();
+
+    for (; thisBegin != thisEnd && otherBegin != otherEnd; ++thisBegin, ++otherBegin) {
+        if ( (*thisBegin)->nodeType() != (*otherBegin)->nodeType() ) {
+            return false;
+        }
+
+        if ( (*thisBegin)->nodeType() ==  GeoDataTypes::GeoDataDocumentType ) {
+            GeoDataDocument *thisDoc = static_cast<GeoDataDocument*>( *thisBegin );
+            GeoDataDocument *otherDoc = static_cast<GeoDataDocument*>( *otherBegin );
+            Q_ASSERT( thisDoc && otherDoc );
+
+            if ( *thisDoc != *otherDoc ) {
+                return false;
+            }
+        } else if ( (*thisBegin)->nodeType() == GeoDataTypes::GeoDataFolderType ) {
+            GeoDataFolder *thisFolder = static_cast<GeoDataFolder*>( *thisBegin );
+            GeoDataFolder *otherFolder = static_cast<GeoDataFolder*>( *otherBegin );
+            Q_ASSERT( thisFolder && otherFolder );
+
+            if ( *thisFolder != *otherFolder ) {
+                return false;
+            }
+        } else if ( (*thisBegin)->nodeType() == GeoDataTypes::GeoDataNetworkLinkControlType ) {
+            GeoDataNetworkLinkControl *thisNLC = static_cast<GeoDataNetworkLinkControl*>( *thisBegin );
+            GeoDataNetworkLinkControl *otherNLC = static_cast<GeoDataNetworkLinkControl*>( *otherBegin );
+            Q_ASSERT( thisNLC && otherNLC );
+
+            if ( *thisNLC != *otherNLC ) {
+                return false;
+            }
+        } else if ( (*thisBegin)->nodeType() == GeoDataTypes::GeoDataNetworkLinkType ) {
+            GeoDataNetworkLink *thisNetLink = static_cast<GeoDataNetworkLink*>( *thisBegin );
+            GeoDataNetworkLink *otherNetLink = static_cast<GeoDataNetworkLink*>( *otherBegin );
+            Q_ASSERT( thisNetLink && otherNetLink );
+
+            if ( *thisNetLink != *otherNetLink ) {
+                return false;
+            }
+        } else if ( (*thisBegin)->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
+            GeoDataGroundOverlay *thisGO = static_cast<GeoDataGroundOverlay*>( *thisBegin );
+            GeoDataGroundOverlay *otherGO = static_cast<GeoDataGroundOverlay*>( *otherBegin );
+            Q_ASSERT( thisGO && otherGO );
+
+            if ( *thisGO != *otherGO ) {
+                return false;
+            }
+        } else if ( (*thisBegin)->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
+            GeoDataPhotoOverlay *thisPO = static_cast<GeoDataPhotoOverlay*>( *thisBegin );
+            GeoDataPhotoOverlay *otherPO = static_cast<GeoDataPhotoOverlay*>( *otherBegin );
+            Q_ASSERT( thisPO && otherPO );
+
+            if ( *thisPO != *otherPO ) {
+                return false;
+            }
+        } else if ( (*thisBegin)->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
+            GeoDataScreenOverlay *thisSO = static_cast<GeoDataScreenOverlay*>( *thisBegin );
+            GeoDataScreenOverlay *otherSO = static_cast<GeoDataScreenOverlay*>( *otherBegin );
+            Q_ASSERT( thisSO && otherSO );
+
+            if ( *thisSO != *otherSO ) {
+                return false;
+            }
+        } else if ( (*thisBegin)->nodeType() == GeoDataTypes::GeoDataTourType ) {
+            GeoDataTour *thisTour = static_cast<GeoDataTour*>( *thisBegin );
+            GeoDataTour *otherTour = static_cast<GeoDataTour*>( *otherBegin );
+            Q_ASSERT( thisTour && otherTour );
+
+            if ( *thisTour != *otherTour ) {
+                return false;
+            }
+        } else if ( (*thisBegin)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            GeoDataPlacemark *thisPM = static_cast<GeoDataPlacemark*>( *thisBegin );
+            GeoDataPlacemark *otherPM = static_cast<GeoDataPlacemark*>( *otherBegin );
+            Q_ASSERT( thisPM && otherPM );
+
+            if ( *thisPM != *otherPM ) {
+                return false;
+            }
+        }
+    }
+
+    return thisBegin == thisEnd && otherBegin == otherEnd;
 }
 
 GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const

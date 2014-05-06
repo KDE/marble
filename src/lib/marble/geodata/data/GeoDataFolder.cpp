@@ -70,4 +70,14 @@ GeoDataFolderPrivate* GeoDataFolder::p() const
     return static_cast<GeoDataFolderPrivate*>(d);
 }
 
+bool GeoDataFolder::operator==( const GeoDataFolder &other ) const
+{
+    return GeoDataContainer::equals( other );
+}
+
+bool GeoDataFolder::operator!=( const GeoDataFolder &other ) const
+{
+    return !this->operator==( other );
+}
+
 }

@@ -70,6 +70,9 @@ public:
     GeoDataDocument( const GeoDataDocument& other );
     ~GeoDataDocument();
 
+    bool operator==( const GeoDataDocument &other ) const;
+    bool operator!=( const GeoDataDocument &other ) const;
+
     /// Provides type information for downcasting a GeoData
     virtual bool isGeoDataDocument() const { return true; }
 

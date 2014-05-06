@@ -60,6 +60,24 @@ const GeoDataDocumentPrivate* GeoDataDocument::p() const
     return static_cast<GeoDataDocumentPrivate*>(d);
 }
 
+bool GeoDataDocument::operator==( const GeoDataDocument &other ) const
+{
+    return GeoDataContainer::equals(other) &&
+           p()->m_styleHash == other.p()->m_styleHash &&
+           p()->m_styleMapHash == other.p()->m_styleMapHash &&
+           p()->m_schemaHash == other.p()->m_schemaHash &&
+           p()->m_filename == other.p()->m_filename &&
+           p()->m_baseUri == other.p()->m_baseUri &&
+           p()->m_networkLinkControl == other.p()->m_networkLinkControl &&
+           p()->m_property == other.p()->m_property &&
+           p()->m_documentRole == other.p()->m_documentRole;
+}
+
+bool GeoDataDocument::operator!=( const GeoDataDocument &other ) const
+{
+    return !this->operator==( other );
+}
+
 DocumentRole GeoDataDocument::documentRole() const
 {
     return p()->m_documentRole;

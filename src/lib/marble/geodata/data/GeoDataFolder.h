@@ -54,6 +54,9 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
     GeoDataFolder( const GeoDataFolder& other );
     ~GeoDataFolder();
 
+    bool operator==( const GeoDataFolder &other ) const;
+    bool operator!=( const GeoDataFolder &other ) const;
+
  private:
     GeoDataFolderPrivate *p() const;
 };
