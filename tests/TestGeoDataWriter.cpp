@@ -35,6 +35,8 @@ private slots:
     void saveAndLoad();
     void saveAndCompare_data();
     void saveAndCompare();
+    void saveAndCompareEquality_data();
+    void saveAndCompareEquality();
     void cleanupTestCase();
 private:
     QDir dataDir;
@@ -174,6 +176,44 @@ void TestGeoDataWriter::saveAndCompare()
     QTextStream newFile( &buffer );
 
     QCOMPARE( newFile.readAll().simplified(), oldFile.readAll().simplified() );
+}
+
+void TestGeoDataWriter::saveAndCompareEquality_data()
+{
+    QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
+    QTest::addColumn<QString>("original");
+
+    /** @todo Look into why these two files fail */
+    QStringList const blacklist = QStringList() << "CDATATest.kml" << "TimeStamp.kml";
+    foreach( const QString &file, m_testFiles ) {
+        if ( !blacklist.contains( file ) ) {
+            QTest::newRow(file.toStdString().c_str()) << parsers.value(file) << file;
+        }
+    }
+}
+
+void TestGeoDataWriter::saveAndCompareEquality()
+{
+    QFETCH( QSharedPointer<GeoDataParser>, parser );
+    QFETCH( QString, original );
+
+    QByteArray data;
+    QBuffer buffer( &data );
+    buffer.open( QIODevice::ReadWrite );
+
+    GeoWriter writer;
+    //FIXME: a better way to do this?
+    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+
+    GeoDataDocument *initialDoc = dynamic_cast<GeoDataDocument*>( parser->activeDocument() );
+    QVERIFY( writer.write( &buffer, initialDoc) );
+
+    buffer.reset();
+    GeoDataParser otherParser( GeoData_KML);
+    QVERIFY( otherParser.read( &buffer ) );
+
+    GeoDataDocument *otherDoc = dynamic_cast<GeoDataDocument*>( otherParser.activeDocument() );
+    QVERIFY( *initialDoc == *otherDoc );
 }
 
 void TestGeoDataWriter::cleanupTestCase()
