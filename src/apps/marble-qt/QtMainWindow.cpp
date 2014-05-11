@@ -705,7 +705,7 @@ void MainWindow::createPluginMenus()
     while( !m_pluginToolbars.isEmpty() ) {
         QToolBar* tb = m_pluginToolbars.takeFirst();
         this->removeToolBar(tb);
-        delete tb;
+        tb->deleteLater();
     }
 
     // Do not create too many menu entries on a MID
