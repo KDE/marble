@@ -32,7 +32,7 @@ public:
     //TextAnnotation
 
 private:
-    GeoWidgetBubble* bubble;
+    GeoWidgetBubble *bubble;
 
 protected:
     virtual bool mousePressEvent( QMouseEvent *event );

@@ -22,10 +22,12 @@ SceneGraphicsItem::SceneGraphicsItem( GeoDataPlacemark *placemark )
     : GeoGraphicsItem( placemark ),
       m_placemark( placemark )
 {
+
 }
 
 SceneGraphicsItem::~SceneGraphicsItem()
 {
+
 }
 
 QList<QRegion> SceneGraphicsItem::regions() const
@@ -38,7 +40,7 @@ GeoDataPlacemark *SceneGraphicsItem::placemark()
     return m_placemark;
 }
 
-bool SceneGraphicsItem::sceneEvent( QEvent* event )
+bool SceneGraphicsItem::sceneEvent( QEvent *event )
 {
     if( event->type() == QEvent::MouseButtonPress ) {
         return mousePressEvent( static_cast<QMouseEvent*>( event ));

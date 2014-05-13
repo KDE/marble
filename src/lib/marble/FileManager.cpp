@@ -20,11 +20,11 @@
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "GeoDataTreeModel.h"
-#include "GeoWriter.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataStyle.h"
+#include "GeoWriter.h"
 
 
 using namespace Marble;
@@ -157,7 +157,6 @@ void FileManager::saveFile( const QString &fileName, GeoDataDocument *document )
     }
 
     writer.write( &file, document );
-
     file.close();
 }
 

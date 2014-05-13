@@ -19,13 +19,12 @@
 namespace Marble
 {
 
-
-
 AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark )
-    :SceneGraphicsItem( placemark ),
+    : SceneGraphicsItem( placemark ),
       m_movedPoint( -1 ),
       m_viewport( 0 )
 {
+
 }
 
 void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
@@ -38,7 +37,7 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
     if( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( placemark()->geometry() );
         const GeoDataLinearRing &ring = polygon->outerBoundary();
-        for( int i=0; i< ring.size(); ++i ) {
+        for( int i = 0; i<  ring.size(); ++i ) {
             painter->drawEllipse( ring.at(i) , 10, 10 );
             regionList.append( painter->regionFromEllipse( ring.at(i), 10, 10 ));
         }
@@ -52,7 +51,7 @@ bool AreaAnnotation::mousePressEvent( QMouseEvent *event )
 {
     QList<QRegion> regionList = regions();
     // react to all ellipse point markers and skip the polygon
-    for( int i=0; i< regionList.size()-1; ++i ) {
+    for( int i = 0; i < regionList.size()-1; ++i ) {
         if( regionList.at(i).contains( event->pos()) ) {
             m_movedPoint = i;
             return true;
@@ -63,10 +62,10 @@ bool AreaAnnotation::mousePressEvent( QMouseEvent *event )
 
 bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
 {
-    if( !m_viewport
-        || m_movedPoint < 0 ) {
+    if( !m_viewport || m_movedPoint < 0 ) {
         return false;
     }
+
     if( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing &ring = polygon->outerBoundary();

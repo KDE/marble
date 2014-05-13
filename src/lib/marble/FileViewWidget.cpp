@@ -124,8 +124,8 @@ void FileViewWidgetPrivate::saveFile()
     GeoDataObject *object
         = index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
     GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
-    if ( document ) {
-        m_fileManager->saveFile( QFileDialog::getSaveFileName( q, "Save To" ), document );
+    if ( document && !document->fileName().isEmpty() ) {
+        m_fileManager->saveFile( QFileDialog::getSaveFileName( q, "Select filename for KML document" ), document );
     }
 }
 
@@ -135,8 +135,8 @@ void FileViewWidgetPrivate::closeFile()
     GeoDataObject *object
         = index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
     GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
-    if ( document ) {
-        m_fileManager->saveFile( QFileDialog::getSaveFileName( q, "Save To" ), document );
+    if ( document && !document->fileName().isEmpty() ) {
+        m_fileManager->saveFile( QFileDialog::getSaveFileName( q, "Select filename for KML document" ), document );
     }
 }
 

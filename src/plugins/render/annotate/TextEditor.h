@@ -40,19 +40,19 @@ public Q_SLOTS:
 private:
     GeoDataPlacemark *m_placemark;
 
-    QAction* m_boldAction;
-    QAction* m_underLineAction;
-    QAction* m_italicAction;
+    QAction *m_boldAction;
+    QAction *m_underLineAction;
+    QAction *m_italicAction;
 
-    QToolButton* m_boldButton;
-    QToolButton* m_underLineButton;
-    QToolButton* m_italicButton;
+    QToolButton *m_boldButton;
+    QToolButton *m_underLineButton;
+    QToolButton *m_italicButton;
 
-    QLineEdit* m_name;
-    QTextEdit* m_description;
+    QLineEdit *m_name;
+    QTextEdit *m_description;
 
-    QHBoxLayout* m_buttonLayout;
-    QVBoxLayout* m_layout;
+    QHBoxLayout *m_buttonLayout;
+    QVBoxLayout *m_layout;
 };
 
 }

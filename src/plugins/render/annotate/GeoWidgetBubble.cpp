@@ -36,7 +36,7 @@ GeoWidgetBubble::~GeoWidgetBubble()
     delete m_widget;
 }
 
-void GeoWidgetBubble::paint( QPainter* painter )
+void GeoWidgetBubble::paint( QPainter *painter )
 {
     if( !m_widgetInitialized && ( m_widget!=0)  ) {
         QWidget *widget = dynamic_cast<QWidget*>( painter->device() );
@@ -65,16 +65,13 @@ void GeoWidgetBubble::paint( QPainter* painter )
         //draw the border
         painter->setPen( QPen( Oxygen::aluminumGray4 ) );
         painter->setBrush( QBrush( QColor( 255, 255, 255) , Qt::SolidPattern ));
-        painter->drawRoundedRect( QRect( position + borderOffset, widgetSize + borderSize ),
-                                  10, 10  );
+        painter->drawRoundedRect( QRect( position + borderOffset, widgetSize + borderSize ), 10, 10  );
 
         painter->restore();
         }
-    }
-    else {
+    } else {
         m_widget->hide();
     }
-
 }
 
 void GeoWidgetBubble::setParentWidget( QWidget* parent )

@@ -25,9 +25,9 @@
 namespace Marble
 {
 
-TextEditor::TextEditor( GeoDataPlacemark *placemark ) :
-    QWidget(),
-    m_placemark( placemark )
+TextEditor::TextEditor( GeoDataPlacemark *placemark )
+    : QWidget(),
+      m_placemark( placemark )
 {
     setCursor( Qt::ArrowCursor );
 
@@ -90,6 +90,7 @@ TextEditor::TextEditor( GeoDataPlacemark *placemark ) :
 
 TextEditor::~TextEditor()
 {
+    // nothing to do
 }
 
 void TextEditor::updateName()
@@ -101,6 +102,7 @@ void TextEditor::updateDescription()
 {
     m_placemark->setDescription( m_description->toHtml() );
 }
+
 }
 
 #include "TextEditor.moc"

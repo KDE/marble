@@ -38,15 +38,15 @@ public:
     bool sceneEvent( QEvent* event );
 
     GeoDataPlacemark *placemark();
+
 protected:
     void setRegions( const QList<QRegion>& regions );
-
 
     virtual bool mousePressEvent( QMouseEvent* event );
     virtual bool mouseMoveEvent( QMouseEvent* event );
     virtual bool mouseReleaseEvent( QMouseEvent* event );
 
- private:
+private:
     QList<QRegion> m_regions;
     GeoDataPlacemark *m_placemark;
 

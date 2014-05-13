@@ -37,8 +37,7 @@ PlacemarkTextAnnotation::~PlacemarkTextAnnotation()
     delete bubble;
 }
 
-void PlacemarkTextAnnotation::paint( GeoPainter *painter,
-                            const ViewportParams *viewport )
+void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *viewport )
 {
 
     painter->drawPixmap( placemark()->coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
