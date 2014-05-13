@@ -72,7 +72,7 @@ class FileManager : public QObject
     */
     void addData( const QString &name, const QString &data, DocumentRole role );
 
-    void saveFile( GeoDataDocument *document );
+    void saveFile( const QString &fileName, GeoDataDocument *document );
     void closeFile( GeoDataDocument *document );
 
     int size() const;

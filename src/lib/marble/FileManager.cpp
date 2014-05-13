@@ -20,6 +20,7 @@
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "GeoDataTreeModel.h"
+#include "GeoWriter.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
@@ -145,9 +146,19 @@ void FileManagerPrivate::closeFile( const QString& key )
     }
 }
 
-void FileManager::saveFile( GeoDataDocument *document )
+void FileManager::saveFile( const QString &fileName, GeoDataDocument *document )
 {
-    Q_UNUSED(document)
+    GeoWriter writer;
+    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+
+    QFile file( fileName );
+    if ( !file.open( QIODevice::WriteOnly | QIODevice::Truncate ) ) {
+        return;
+    }
+
+    writer.write( &file, document );
+
+    file.close();
 }
 
 void FileManager::closeFile( GeoDataDocument *document )

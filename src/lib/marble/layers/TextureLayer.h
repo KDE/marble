@@ -35,7 +35,7 @@ class HttpDownloadManager;
 class SunLocator;
 class ViewportParams;
 
-class TextureLayer : public QObject, public LayerInterface
+class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 

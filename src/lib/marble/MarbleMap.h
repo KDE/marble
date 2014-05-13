@@ -389,7 +389,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     QFont defaultFont() const;
 
-    const TextureLayer *textureLayer() const;
+    TextureLayer *textureLayer() const;
 
     /**
      * @brief Add a layer to be included in rendering.
