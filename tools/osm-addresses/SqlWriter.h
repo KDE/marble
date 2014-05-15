@@ -38,7 +38,7 @@ private:
 
     void execQuery( const QString &query ) const;
 
-    QMap<QString, int> m_placemarks;
+    QHash<QString, int> m_placemarks;
 
     QPair<int, QString> m_lastPlacemark;
 
