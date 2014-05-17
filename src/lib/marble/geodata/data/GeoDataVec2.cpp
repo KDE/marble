@@ -22,7 +22,7 @@ public:
     GeoDataVec2::Unit  m_xunit;
     GeoDataVec2::Unit  m_yunit;
 
-    GeoDataVec2::Unit  parseUnits( const QString &value );
+    static GeoDataVec2::Unit  parseUnits( const QString &value );
 };
 
 GeoDataVec2Private::GeoDataVec2Private() :
@@ -40,8 +40,8 @@ GeoDataVec2::GeoDataVec2(const qreal &x, const qreal &y, const QString &xunits, 
 {
     setX( x );
     setY( y );
-    d->m_xunit = d->parseUnits( xunits );
-    d->m_yunit = d->parseUnits( yunits );
+    d->m_xunit = GeoDataVec2Private::parseUnits( xunits );
+    d->m_yunit = GeoDataVec2Private::parseUnits( yunits );
 }
 
 GeoDataVec2::Unit GeoDataVec2Private::parseUnits( const QString &value )
