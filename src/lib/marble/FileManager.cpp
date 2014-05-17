@@ -75,7 +75,7 @@ FileManager::~FileManager()
     delete d;
 }
 
-void FileManager::addFile( const QString& filepath, const QString& property, GeoDataStyle* style, DocumentRole role, bool recenter )
+void FileManager::addFile( const QString& filepath, const QString& property, const GeoDataStyle* style, DocumentRole role, bool recenter )
 {
     if( d->m_fileItemHash.contains( filepath ) ) {
             return;  // already loaded
@@ -93,7 +93,7 @@ void FileManager::addFile( const QString& filepath, const QString& property, Geo
     d->appendLoader( loader );
 }
 
-void FileManager::addFile( const QStringList& filepaths, const QStringList& propertyList, const QList<GeoDataStyle*>& styles, DocumentRole role )
+void FileManager::addFile( const QStringList& filepaths, const QStringList& propertyList, const QList<const GeoDataStyle*>& styles, DocumentRole role )
 {
     for (int i = 0 ; i < filepaths.size(); ++i ) {
         addFile( filepaths.at(i), propertyList.at(i), styles.at(i), role );
@@ -146,7 +146,7 @@ void FileManagerPrivate::closeFile( const QString& key )
     }
 }
 
-void FileManager::saveFile( const QString &fileName, GeoDataDocument *document )
+void FileManager::saveFile( const QString &fileName, const GeoDataDocument *document )
 {
     GeoWriter writer;
     writer.setDocumentType( "http://earth.google.com/kml/2.2" );
@@ -160,7 +160,7 @@ void FileManager::saveFile( const QString &fileName, GeoDataDocument *document )
     file.close();
 }
 
-void FileManager::closeFile( GeoDataDocument *document )
+void FileManager::closeFile( const GeoDataDocument *document )
 {
     QHash < QString, GeoDataDocument* >::iterator itpoint = d->m_fileItemHash.begin();
     QHash < QString, GeoDataDocument* >::iterator const endpoint = d->m_fileItemHash.end();

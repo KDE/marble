@@ -315,7 +315,7 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
     QStringList fileList;
     QStringList propertyList;
-    QList<GeoDataStyle*> styleList;
+    QList<const GeoDataStyle*> styleList;
 
     foreach ( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
         if ( layer->backend() != dgml::dgmlValue_geodata

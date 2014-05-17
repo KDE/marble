@@ -40,7 +40,7 @@ class FileLoaderPrivate
 {
 public:
     FileLoaderPrivate( FileLoader* parent, MarbleModel *model, bool recenter,
-                       const QString& file, const QString& property, GeoDataStyle* style, DocumentRole role )
+                       const QString& file, const QString& property, const GeoDataStyle* style, DocumentRole role )
         : q( parent),
           m_runner( model->pluginManager() ),
           m_recenter( recenter ),
@@ -90,7 +90,7 @@ public:
     QString m_filepath;
     QString m_contents;
     QString m_property;
-    GeoDataStyle* m_style;
+    const GeoDataStyle *const m_style;
     DocumentRole m_documentRole;
     GeoDataStyleMap* m_styleMap;
     GeoDataDocument *m_document;
@@ -100,7 +100,7 @@ public:
 };
 
 FileLoader::FileLoader( QObject* parent, MarbleModel *model, bool recenter,
-                       const QString& file, const QString& property, GeoDataStyle* style, DocumentRole role )
+                       const QString& file, const QString& property, const GeoDataStyle* style, DocumentRole role )
     : QThread( parent ),
       d( new FileLoaderPrivate( this, model, recenter, file, property, style, role ) )
 {
