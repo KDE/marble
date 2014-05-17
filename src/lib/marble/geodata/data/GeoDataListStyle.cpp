@@ -62,7 +62,6 @@ bool GeoDataListStyle::operator==( const GeoDataListStyle &other ) const
     QVector<GeoDataItemIcon*>::const_iterator begin = d->m_vector.begin();
     QVector<GeoDataItemIcon*>::const_iterator end = d->m_vector.end();
     QVector<GeoDataItemIcon*>::const_iterator otherBegin = other.d->m_vector.begin();
-    QVector<GeoDataItemIcon*>::const_iterator otherEnd = other.d->m_vector.end();
 
     for( ; begin != end; ++begin, ++otherBegin ) {
         if ( **begin != **otherBegin ) {
