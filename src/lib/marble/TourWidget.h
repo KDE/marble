@@ -14,6 +14,9 @@
 #include "marble_export.h"
 
 #include <QWidget>
+#include <QStyledItemDelegate>
+#include <QListView>
+#include <GeoDataCoordinates.h>
 
 class QItemSelection;
 class QModelIndex;
@@ -65,6 +68,40 @@ private Q_SLOTS:
     Q_DISABLE_COPY( TourWidget )
 
     TourWidgetPrivate * const d;
+};
+
+
+class TourItemDelegate : public QStyledItemDelegate
+{
+Q_OBJECT
+
+public:
+    TourItemDelegate( QListView* view, MarbleWidget* widget );
+    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+    void setIsEditing( QModelIndex index, bool newValue );
+
+Q_SIGNALS:
+    void editingChanged( QModelIndex index );
+
+public:
+
+    enum Element {
+        GeoDataElementIcon,
+        Label,
+        EditButton,
+        ActionButton
+    };
+
+protected:
+    bool editorEvent( QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index );
+
+private:
+    static QRect position( Element element, const QStyleOptionViewItem &option );
+    QList<QPersistentModelIndex> m_editingIndices;
+    QListView* m_listView;
+    MarbleWidget *m_widget;
+
 };
 
 }
