@@ -17,6 +17,11 @@ bool MarbleDebug::m_enabled = false;
 class NullDevice : public QIODevice
 {
 public:
+    NullDevice()
+    {
+        open( QIODevice::WriteOnly );
+    }
+
     qint64 readData( char * /*data*/, qint64 /*maxSize*/ )
     {
         return -1;
