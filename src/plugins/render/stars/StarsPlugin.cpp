@@ -1152,7 +1152,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
-        if ( m_renderMoon && marbleModel()->planetName() == "Earth" ) {
+        if ( m_renderMoon && marbleModel()->planetId() == "earth" ) {
             // moon
             double ra=0.0;
             double decl=0.0;
