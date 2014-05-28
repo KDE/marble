@@ -20,6 +20,9 @@
 
 class QItemSelection;
 class QModelIndex;
+class QDoubleSpinBox;
+class QRadioButton;
+class QLineEdit;
 
 namespace Marble
 {
@@ -29,9 +32,90 @@ class GeoDataPlacemark;
 class GeoDataLatLonBox;
 class GeoDataTreeModel;
 class GeoDataFeature;
+class GeoDataFlyTo;
+class GeoDataTourControl;
+class GeoDataWait;
+class GeoDataSoundCue;
 class MarbleWidget;
 
 class TourWidgetPrivate;
+
+class FlyToEditWidget: public QWidget
+{
+    Q_OBJECT
+
+public:
+    FlyToEditWidget( const QModelIndex& index, MarbleWidget* widget, QWidget* parent=0 );
+
+Q_SIGNALS:
+    void editingDone( const QModelIndex& index );
+
+private Q_SLOTS:
+    void save();
+
+private:
+    GeoDataFlyTo* flyToElement();
+    MarbleWidget* m_widget;
+    QModelIndex m_index;
+};
+
+class TourControlEditWidget: public QWidget
+{
+    Q_OBJECT
+
+public:
+    TourControlEditWidget( const QModelIndex& index, QWidget* parent=0 );
+
+Q_SIGNALS:
+    void editingDone( const QModelIndex& index );
+
+private Q_SLOTS:
+    void save();
+
+private:
+    GeoDataTourControl* tourControlElement();
+    QModelIndex m_index;
+    QRadioButton *m_radio_play;
+    QRadioButton *m_radio_pause;
+};
+
+class WaitEditWidget: public QWidget
+{
+    Q_OBJECT
+
+public:
+    WaitEditWidget( const QModelIndex& index, QWidget* parent=0 );
+
+Q_SIGNALS:
+    void editingDone( const QModelIndex& index );
+
+private Q_SLOTS:
+    void save();
+
+private:
+    GeoDataWait* waitElement();
+    QModelIndex m_index;
+    QDoubleSpinBox *m_spinBox;
+};
+
+class SoundCueEditWidget: public QWidget
+{
+    Q_OBJECT
+
+public:
+    SoundCueEditWidget( const QModelIndex& index, QWidget* parent=0 );
+
+Q_SIGNALS:
+    void editingDone( const QModelIndex& index );
+
+private Q_SLOTS:
+    void save();
+
+private:
+    GeoDataSoundCue* soundCueElement();
+    QModelIndex m_index;
+    QLineEdit* m_lineEdit;
+};
 
 class MARBLE_EXPORT TourWidget : public QWidget
 {
@@ -80,6 +164,7 @@ public:
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     void setIsEditing( QModelIndex index, bool newValue );
+    QWidget* createEditor ( QWidget * parent, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
 
 Q_SIGNALS:
     void editingChanged( QModelIndex index );
@@ -96,12 +181,14 @@ public:
 protected:
     bool editorEvent( QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index );
 
+private Q_SLOTS:
+    void closeEditor(const QModelIndex& index);
+
 private:
     static QRect position( Element element, const QStyleOptionViewItem &option );
     QList<QPersistentModelIndex> m_editingIndices;
     QListView* m_listView;
     MarbleWidget *m_widget;
-
 };
 
 }

@@ -65,10 +65,7 @@ void WidgetGraphicsItem::paint( QPainter *painter )
         return;
 
     // Paint widget without a background
-    d->m_widget->render( painter, 
-                         QPoint( 0, 0 ),
-                         QRegion(),
-                         QWidget::RenderFlags(QWidget::DrawChildren) );
+    d->m_widget->render( painter, QPoint( 0, 0 ), QRegion(), QWidget::RenderFlags( QWidget::DrawChildren) );
 }
 
 bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
