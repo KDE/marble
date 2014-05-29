@@ -11,7 +11,7 @@
 #include "MarblePhysics.h"
 
 #include "Quaternion.h"
-#include "MarbleWidget.h"
+#include "MarbleAbstractPresenter.h"
 #include "MarbleDebug.h"
 #include "GeoDataLineString.h"
 #include "ViewportParams.h"
@@ -23,7 +23,7 @@ namespace Marble
 
 class MarblePhysicsPrivate {
 public:
-    MarbleWidget *const m_widget;
+    MarbleAbstractPresenter *const m_presenter;
 
     GeoDataLookAt m_source;
 
@@ -35,8 +35,8 @@ public:
 
     qreal m_planetRadius;
 
-    MarblePhysicsPrivate( MarbleWidget *widget )
-        : m_widget( widget ),
+    MarblePhysicsPrivate( MarbleAbstractPresenter *presenter )
+        : m_presenter( presenter ),
           m_mode( Instant ),
           m_planetRadius( EARTH_RADIUS )
     {
@@ -105,9 +105,9 @@ public:
 };
 
 
-MarblePhysics::MarblePhysics( MarbleWidget *widget )
-    : QObject( widget ),
-      d( new MarblePhysicsPrivate( widget ) )
+MarblePhysics::MarblePhysics( MarbleAbstractPresenter *presenter )
+    : QObject( presenter ),
+      d( new MarblePhysicsPrivate( presenter ) )
 {
     connect( &d->m_timeline, SIGNAL(valueChanged(qreal)),
              this, SLOT(updateProgress(qreal)) );
@@ -123,9 +123,9 @@ MarblePhysics::~MarblePhysics()
 void MarblePhysics::flyTo( const GeoDataLookAt &target, FlyToMode mode )
 {
     d->m_timeline.stop();
-    d->m_source = d->m_widget->lookAt();
+    d->m_source = d->m_presenter->lookAt();
     d->m_target = target;
-    const ViewportParams *viewport = d->m_widget->viewport();
+    const ViewportParams *viewport = d->m_presenter->viewport();
 
     FlyToMode effectiveMode = mode;
     qreal x(0), y(0);
@@ -150,7 +150,7 @@ void MarblePhysics::flyTo( const GeoDataLookAt &target, FlyToMode mode )
     switch(effectiveMode)
     {
     case Instant:
-        d->m_widget->flyTo( target, Instant );
+        d->m_presenter->flyTo( target, Instant );
         return;
         break;
     case Linear:
@@ -179,8 +179,8 @@ void MarblePhysics::updateProgress(qreal progress)
 
     if (progress >= 1.0)
     {
-        d->m_widget->flyTo( d->m_target, Instant );
-        d->m_widget->setViewContext( Marble::Still );
+        d->m_presenter->flyTo( d->m_target, Instant );
+        d->m_presenter->setViewContext( Marble::Still );
         return;
     }
 
@@ -195,13 +195,13 @@ void MarblePhysics::updateProgress(qreal progress)
     intermediate.setAltitude(0.0);
     intermediate.setRange(range);
 
-    d->m_widget->setViewContext( Marble::Animation );
-    d->m_widget->flyTo( intermediate, Instant );
+    d->m_presenter->setViewContext( Marble::Animation );
+    d->m_presenter->flyTo( intermediate, Instant );
 }
 
 void MarblePhysics::startStillMode()
 {
-    d->m_widget->setViewContext( Marble::Still );
+    d->m_presenter->setViewContext( Marble::Still );
 }
 
 }

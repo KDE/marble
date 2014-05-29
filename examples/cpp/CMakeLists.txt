@@ -16,6 +16,10 @@ add_subdirectory( reverse-geocoding )
 add_subdirectory( vehicletracking )
 add_subdirectory( search )
 
+if(NOT QT4_FOUND)
+    add_subdirectory( marbleQuick2 )
+endif()
+
 FIND_PACKAGE (OpenCV QUIET)
 if(OPENCV_FOUND)
   add_subdirectory( animation-video )

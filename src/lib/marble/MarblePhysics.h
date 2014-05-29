@@ -19,7 +19,7 @@ namespace Marble
 {
 
 class MarblePhysicsPrivate;
-class MarbleWidget;
+class MarbleAbstractPresenter;
 
 class MarblePhysics : public QObject
 {
@@ -30,7 +30,7 @@ class MarblePhysics : public QObject
       * @brief Constructor
       * @param widget the MarbleWidget that is being animated
       */
-    explicit MarblePhysics( MarbleWidget *widget );
+    explicit MarblePhysics( MarbleAbstractPresenter *presenter );
 
     /**
       * @brief Destructor
