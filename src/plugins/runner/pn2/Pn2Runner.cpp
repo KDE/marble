@@ -36,6 +36,8 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
+#include "GeoDataPolyStyle.h"
 #include "MarbleDebug.h"
 
 #include <QFile>
@@ -135,14 +137,16 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
     quint8 fileHeaderVersion;
     quint32 fileHeaderPolygons;
+    bool isMapColorField;       // Whether the file contains color indexes
 
-    stream >> fileHeaderVersion >> fileHeaderPolygons;
+    stream >> fileHeaderVersion >> fileHeaderPolygons >> isMapColorField;
 
     bool error = false;
 
     quint32 ID, nrAbsoluteNodes;
     quint8 flag, prevFlag = -1;
 
+    GeoDataStyle *style =0;
     GeoDataPolygon *polygon = new GeoDataPolygon;
 
     for ( quint32 currentPoly = 1; ( currentPoly <= fileHeaderPolygons ) && ( !error ) && ( !stream.atEnd() ); currentPoly++ ) {
@@ -153,6 +157,11 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
             GeoDataPlacemark *placemark = new GeoDataPlacemark;
             placemark->setGeometry( polygon );
+            if ( isMapColorField ) {
+                if ( style ) {
+                    placemark->setStyle( style );
+                }
+            }
             document->append( placemark );
         }
 
@@ -166,6 +175,16 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         }
 
         if ( ( flag == LINEARRING ) || ( flag == OUTERBOUNDARY ) || ( flag == INNERBOUNDARY ) ) {
+
+            if ( flag == OUTERBOUNDARY && isMapColorField ) {
+                quint8 colorIndex;
+                stream >> colorIndex;
+                style = new GeoDataStyle;
+                GeoDataPolyStyle polyStyle;
+                polyStyle.setColorIndex( colorIndex );
+                style->setPolyStyle( polyStyle );
+            }
+
             GeoDataLinearRing* linearring = new GeoDataLinearRing;
             error = error | importPolygon( stream, linearring, nrAbsoluteNodes );
 
@@ -196,6 +215,11 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
     if ( prevFlag == INNERBOUNDARY || prevFlag == OUTERBOUNDARY ) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        if ( isMapColorField ) {
+            if ( style ) {
+                placemark->setStyle( style );
+            }
+        }
         placemark->setGeometry( polygon );
         document->append( placemark );
     }

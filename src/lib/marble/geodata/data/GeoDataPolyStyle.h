@@ -90,6 +90,18 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
     Qt::BrushStyle brushStyle() const;
 
     /**
+     * @brief Set the color index which will be used to assign color to brush
+     * @param colorIndex The value of color index
+     */
+    void setColorIndex( quint8 colorIndex );
+
+    /**
+     * @brief Return the value of color index
+     * @return Color index
+     */
+    quint8 colorIndex() const;
+
+    /**
      * @brief  Serialize the style to a stream.
      * @param  stream  the stream
      */

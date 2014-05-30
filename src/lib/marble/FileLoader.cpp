@@ -75,6 +75,8 @@ public:
 
     ~FileLoaderPrivate()
     {
+        delete m_style;
+        delete m_styleMap;
     }
 
     void createFilterProperties( GeoDataContainer *container );

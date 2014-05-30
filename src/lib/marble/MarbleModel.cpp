@@ -46,7 +46,11 @@
 #include "GeoSceneVector.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataFeature.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
+#include "GeoDataPolyStyle.h"
 #include "GeoDataTypes.h"
 
 #include "DgmlAuxillaryDictionary.h"
@@ -188,6 +192,8 @@ MarbleModel::MarbleModel( QObject *parent )
              &d->m_storageWatcher, SLOT(addToCurrentSize(qint64)) );
 
     d->m_fileManager = new FileManager( this );
+    connect( d->m_fileManager, SIGNAL(fileAdded( QString)),
+             this, SLOT(assignFillColors( QString)) );
 
     d->m_routingManager = new RoutingManager( this, this );
 
@@ -317,53 +323,85 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
     QStringList propertyList;
     QList<const GeoDataStyle*> styleList;
 
+    bool skip = false;
+    bool sourceFileMatch = false;
+    int datasetIndex = -1;
     foreach ( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
         if ( layer->backend() != dgml::dgmlValue_geodata
              && layer->backend() != dgml::dgmlValue_vector )
             continue;
 
-        GeoSceneGeodata emptyData("empty");
         // look for datasets which are different from currentDatasets
         foreach ( const GeoSceneAbstractDataset *dataset, layer->datasets() ) {
             const GeoSceneGeodata *data = dynamic_cast<const GeoSceneGeodata*>( dataset );
             Q_ASSERT( data );
-            if( currentDatasets.removeOne( *data ) ) {
+            skip = false;
+            sourceFileMatch = false;
+            for ( int i = 0; i < currentDatasets.size(); ++i ) {
+                if ( currentDatasets[i] == *data ) {
+                    currentDatasets.removeAt( i );
+                    skip = true;
+                    break;
+                }
+                /**
+                 * If the sourcefile of data matches any in the currentDatasets then there
+                 * is no need to parse the file again just update the style
+                 * i.e. <brush> and <pen> values of already parsed file. assignNewStyle() does that
+                 */
+                if ( currentDatasets[i].sourceFile() == data->sourceFile() ) {
+                    sourceFileMatch = true;
+                    datasetIndex = i;
+                }
+            }
+            if ( skip ) {
                 continue;
             }
+
             QString filename = data->sourceFile();
             QString property = data->property();
             QPen pen = data->pen();
             QBrush brush = data->brush();
-            GeoDataLineStyle *lineStyle = 0;
-            GeoDataPolyStyle* polyStyle = 0;
             GeoDataStyle* style = 0;
 
-            if( pen != emptyData.pen() ) {
-                lineStyle = new GeoDataLineStyle( pen.color() );
-                lineStyle->setPenStyle( pen.style() );
-                lineStyle->setWidth( pen.width() );
-            }
-
-            if( brush != emptyData.brush() ) {
-                polyStyle = new GeoDataPolyStyle( brush.color() );
-                polyStyle->setFill( true );
-            }
-
-            if( lineStyle || polyStyle ) {
+            /**
+             * data->colors() are the colorMap values from dgml file. If this is not
+             * empty then we are supposed to assign every placemark a different style
+             * by giving it a color from colorMap values based on color index
+             * of that placemark. See assignFillColors() for details. So, we need to
+             * send an empty style to fileManeger otherwise the FileLoader::createFilterProperties()
+             * will overwrite the parsed value of color index ( GeoDataPolyStyle::d->m_colorIndex ).
+             */
+            if ( data->colors().isEmpty() ) {
+                GeoDataLineStyle lineStyle( pen.color() );
+                lineStyle.setPenStyle( pen.style() );
+                lineStyle.setWidth( pen.width() );
+                GeoDataPolyStyle polyStyle( brush.color() );
+                polyStyle.setFill( true );
                 style = new GeoDataStyle;
-                if( lineStyle ) {
-                    style->setLineStyle( *lineStyle );
-                }
-                if( polyStyle ) {
-                    style->setPolyStyle( *polyStyle );
-                }
+                style->setLineStyle( lineStyle );
+                style->setPolyStyle( polyStyle );
                 style->setStyleId( "default" );
             }
-
-            fileList << filename;
-            propertyList << property;
-            styleList << style;
-        }
+                if ( sourceFileMatch && !currentDatasets[datasetIndex].colors().isEmpty() ) {
+                    /**
+                     * if already parsed sourcefile doesn't contains colorMap
+                     * then assignNewStyle otherwise assignFillColors.
+                     */
+                    currentDatasets.removeAt( datasetIndex );
+                    if ( data->colors().isEmpty() ) {
+                        qDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
+                        assignNewStyle( filename, style );
+                    }
+                    else {
+                        assignFillColors( data->sourceFile() );
+                    }
+                }
+                else {
+                    fileList << filename;
+                    propertyList << property;
+                    styleList << style;
+                }
+         }
     }
     // unload old currentDatasets which are not part of the new map
     foreach(const GeoSceneGeodata data, currentDatasets) {
@@ -374,6 +412,35 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
+}
+
+void MarbleModel::assignNewStyle( const QString &filePath, GeoDataStyle *style )
+{
+        GeoDataDocument *doc = d->m_fileManager->at( filePath );
+        Q_ASSERT( doc );
+        GeoDataStyleMap styleMap;
+        styleMap.setStyleId("default-map");
+        styleMap.insert( "normal", QString("#").append(style->styleId()) );
+        doc->addStyleMap( styleMap );
+        doc->addStyle( *style );
+
+        QVector<GeoDataFeature*>::iterator iter = doc->begin();
+        QVector<GeoDataFeature*>::iterator const end = doc->end();
+
+        for ( ; iter != end; ++iter ) {
+            if ( (*iter)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+                GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( *iter );
+                if ( placemark ) {
+                    if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
+                        placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType )
+                    {
+                        placemark->setStyleUrl( QString("#").append( style->styleId() ) );
+                    }
+                }
+            }
+        }
+        delete style;
+        style = 0;
 }
 
 void MarbleModel::home( qreal &lon, qreal &lat, int& zoom ) const
@@ -679,6 +746,90 @@ void MarbleModel::updateProperty( const QString &property, bool value )
             if( document->property() == property ){
                 document->setVisible( value );
                 d->m_treeModel.updateFeature( document );
+            }
+        }
+    }
+}
+
+void MarbleModel::assignFillColors( const QString &filePath ) {
+    foreach( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
+        if ( layer->backend() == dgml::dgmlValue_geodata 
+             || layer->backend() == dgml::dgmlValue_vector )
+        {
+            foreach( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+                GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
+                if ( data ) {
+                    if ( data->sourceFile() == filePath ) {
+                        GeoDataDocument *doc = d->m_fileManager->at( filePath );
+                        Q_ASSERT( doc );
+                        QPen pen = data->pen();
+                        QBrush brush = data->brush();
+                        QList<QColor> colors = data->colors();
+                        GeoDataLineStyle lineStyle( pen.color() );
+                        lineStyle.setPenStyle( pen.style() );
+                        lineStyle.setWidth( pen.width() );
+
+                        if ( !colors.isEmpty() ) {
+                            qreal alpha = data->alpha();
+                            QVector<GeoDataFeature*>::iterator it = doc->begin();
+                            QVector<GeoDataFeature*>::iterator itEnd = doc->end();
+                            for ( ; it != itEnd; ++it ) {
+                                GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( *it );
+                                if ( placemark ) {
+                                    GeoDataStyle *style = new GeoDataStyle;
+                                    style->setLineStyle( lineStyle );
+                                    quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
+                                    GeoDataPolyStyle polyStyle;
+                                    // Set the colorIndex so that it's not lost after setting new style.
+                                    polyStyle.setColorIndex( colorIndex );
+                                    QColor color;
+                                    // color index having value 99 is undefined
+                                    Q_ASSERT( colors.size() );
+                                    if ( colorIndex > colors.size() || ( colorIndex - 1 ) < 0 )
+                                    {
+                                        color = colors[0];      // Assign the first color as default
+                                    }
+                                    else {
+                                        color = colors[colorIndex-1];
+                                    }
+                                    color.setAlphaF( alpha );
+                                    polyStyle.setColor( color );
+                                    polyStyle.setFill( true );
+                                    style->setPolyStyle( polyStyle );
+                                    placemark->setStyle( style );
+                                }
+                            }
+                        }
+                        else {
+                            GeoDataStyle style;
+                            GeoDataPolyStyle polyStyle( brush.color() );
+                            polyStyle.setFill( true );
+                            style.setLineStyle( lineStyle );
+                            style.setPolyStyle( polyStyle );
+                            style.setStyleId( "default" );
+                            GeoDataStyleMap styleMap;
+                            styleMap.setStyleId("default-map");
+                            styleMap.insert( "normal", QString("#").append(style.styleId()) );
+                            doc->addStyle( style );
+                            doc->addStyleMap( styleMap );
+
+                            QVector<GeoDataFeature*>::iterator iter = doc->begin();
+                            QVector<GeoDataFeature*>::iterator const end = doc->end();
+
+                            for ( ; iter != end; ++iter ) {
+                                if ( (*iter)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+                                    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( *iter );
+                                    Q_ASSERT( placemark );
+                                    if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
+                                        placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType )
+                                    {
+                                            placemark->setStyleUrl( QString("#").append( style.styleId() ) );
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

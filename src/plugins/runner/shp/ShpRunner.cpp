@@ -12,6 +12,10 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataSchema.h"
+#include "GeoDataSimpleField.h"
+#include "GeoDataStyle.h"
+#include "GeoDataPolyStyle.h"
 #include "MarbleDebug.h"
 
 #include <QFileInfo>
@@ -53,9 +57,20 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     dbfhandle = DBFOpen( fileName.toStdString().c_str(), "rb");
     int nameField = DBFGetFieldIndex( dbfhandle, "Name" );
     int noteField = DBFGetFieldIndex( dbfhandle, "Note" );
+    int mapColorField = DBFGetFieldIndex( dbfhandle, "mapcolor13" );
 
     GeoDataDocument *document = new GeoDataDocument;
     document->setDocumentRole( role );
+
+    if ( mapColorField != -1 ) {
+        GeoDataSchema schema;
+        schema.setSchemaId("default");
+        GeoDataSimpleField simpleField;
+        simpleField.setName("mapcolor13");
+        simpleField.setType( GeoDataSimpleField::Double );
+        schema.addSimpleField( simpleField );
+        document->addSchema( schema );
+    }
 
     for ( int i=0; i< entities; ++i ) {
         GeoDataPlacemark  *placemark = 0;
@@ -72,6 +87,20 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
             const char* note = DBFReadStringAttribute( dbfhandle, i, noteField );
             placemark->setDescription( note );
             mDebug() << "desc " << placemark->description();
+        }
+
+        double mapColor = DBFReadDoubleAttribute( dbfhandle, i, mapColorField );
+        if ( mapColor ) {
+            GeoDataStyle *style = new GeoDataStyle;
+            if ( mapColor >= 0 && mapColor <=255 ) {
+                quint8 colorIndex = quint8( mapColor );
+                style->polyStyle().setColorIndex( colorIndex );
+            }
+            else {
+                quint8 colorIndex = 0;     // mapColor is undefined in this case
+                style->polyStyle().setColorIndex( colorIndex );
+            }
+            placemark->setStyle( style );
         }
 
         switch ( shapeType ) {
@@ -125,24 +154,31 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
             case SHPT_POLYGON: {
                 if ( shape->nParts != 1 ) {
-                    GeoDataPolygon *poly = new GeoDataPolygon;
+                    bool isRingClockwise = false;
+                    GeoDataMultiGeometry *multigeom = new GeoDataMultiGeometry;
+                    GeoDataPolygon *poly = 0;
                     for( int j=0; j<shape->nParts; ++j ) {
                         GeoDataLinearRing ring;
+                        int itStart = shape->panPartStart[j];
                         int itEnd = (j + 1 < shape->nParts) ? shape->panPartStart[j+1] : shape->nVertices;
-                        for( int k=shape->panPartStart[j]; k<itEnd; ++k ) {
+                        for( int k = itStart; k<itEnd; ++k ) {
                             ring.append( GeoDataCoordinates(
                                          shape->padfX[k], shape->padfY[k],
                                          0, GeoDataCoordinates::Degree ) );
                         }
-                        // TODO: outer boundary per SHP spec is for the clockwise ring
-                        // and inner holes are anticlockwise
-                        if ( j==0 ) {
+                        isRingClockwise = ring.isClockwise();
+                        if ( j == 0 || isRingClockwise ) {
+                            poly = new GeoDataPolygon;
                             poly->setOuterBoundary( ring );
-                        } else {
+                            multigeom->append( poly );
+                        }
+                        else {
                             poly->appendInnerBoundary( ring );
                         }
+                        // TODO: outer boundary per SHP spec is for the clockwise ring
+                        // and inner holes are anticlockwise
                     }
-                    placemark->setGeometry( poly );
+                    placemark->setGeometry( multigeom );
                     mDebug() << "donut " << placemark->name() << " " << shape->nParts;
 
                 } else {

@@ -58,6 +58,7 @@ class TileCreator;
 class PluginManager;
 class GeoDataCoordinates;
 class GeoDataDocument;
+class GeoDataStyle;
 class GeoDataTreeModel;
 class GeoSceneDocument;
 class Planet;
@@ -280,6 +281,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     const GeoDataPlacemark *trackedPlacemark() const;
 
+    void assignNewStyle( const QString &filePath, GeoDataStyle *style );
+
  public Q_SLOTS:
     void clearPersistentTileCache();
 
@@ -296,6 +299,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void setTrackedPlacemark( const GeoDataPlacemark *placemark );
 
     void updateProperty( const QString &property, bool value );
+
+    void assignFillColors( const QString &filePath );
 
  Q_SIGNALS:
 

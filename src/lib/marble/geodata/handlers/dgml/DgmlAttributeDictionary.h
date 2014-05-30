@@ -39,6 +39,7 @@ namespace dgml
     extern const char* dgmlAttr_bgcolor;
     extern const char* dgmlAttr_color;
     extern const char* dgmlAttr_colorize;
+    extern const char* dgmlAttr_colorMap;
     extern const char* dgmlAttr_checkable;
     extern const char* dgmlAttr_connect;
     extern const char* dgmlAttr_expire;

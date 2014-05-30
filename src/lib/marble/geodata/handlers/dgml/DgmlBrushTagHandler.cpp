@@ -23,6 +23,7 @@
 
 #include <QBrush>
 #include <QColor>
+#include <QList>
 #include <QString>
 
 #include "DgmlElementDictionary.h"
@@ -42,6 +43,7 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Brush));
 
     QString color = parser.attribute(dgmlAttr_color).trimmed();
+    QString colorMap = parser.attribute(dgmlAttr_colorMap).trimmed();
     qreal alpha = parser.attribute(dgmlAttr_alpha).isEmpty() ? 1.0 : parser.attribute(dgmlAttr_alpha).toDouble();
 
     QBrush brush;
@@ -58,6 +60,15 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
          || parentItem.represents( dgmlTag_Geodata ) ) {
         GeoSceneGeodata *geodata = parentItem.nodeAs<GeoSceneGeodata>();
         geodata->setBrush( brush );
+        QList<QColor> colorList;
+        if ( !colorMap.isEmpty() ) {
+            QStringList colorString = colorMap.split(",");
+            for ( int i = 0; i < colorString.size(); ++i ) {
+                colorList.append( QColor( colorString[i] ) );
+           }
+            geodata->setColors( colorList );
+        }
+        geodata->setAlpha( alpha );
     }
 
     return 0;

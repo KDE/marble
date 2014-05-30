@@ -47,6 +47,10 @@
 #include <GeoDataTreeModel.h>
 #include <GeoDataFeature.h>
 #include <GeoDataDocument.h>
+#include <GeoDataStyle.h>
+#include <GeoDataPolyStyle.h>
+#include <GeoDataSchema.h>
+#include <GeoDataSimpleField.h>
 #include <GeoDataPlacemark.h>
 #include <GeoDataLineString.h>
 #include <GeoDataLinearRing.h>
@@ -161,9 +165,11 @@ int main(int argc, char** argv)
 
     quint8 fileHeaderVersion;
     quint32 fileHeaderPolygons;
+    bool isMapColorField;
 
     fileHeaderVersion = 1;
     fileHeaderPolygons = 0; // This variable counts the number of polygons inside the document
+    isMapColorField = false; // Whether the file contains mapcolor field or not.
 
     QVector<GeoDataFeature*>::Iterator i = document->begin();
     QVector<GeoDataFeature*>::Iterator const end = document->end();
@@ -185,11 +191,32 @@ int main(int argc, char** argv)
         }
 
         if ( multigeom ) {
-            fileHeaderPolygons += multigeom->size(); // number of polygons inside the multigeometry
+            QVector<GeoDataGeometry*>::Iterator multi = multigeom->begin();
+            QVector<GeoDataGeometry*>::Iterator multiEnd = multigeom->end();
+            for ( ; multi != multiEnd; ++multi ) {
+                /**
+                 * Handle the no. of polygons in multigeom according to whether
+                 * it contains GeoDataLineString or GeoDataPolygon
+                 */
+                GeoDataLineString *lineString = dynamic_cast<GeoDataLineString*>( *multi );
+                GeoDataPolygon *poly  = dynamic_cast<GeoDataPolygon*>( *multi );
+                if ( lineString ) {
+                    ++fileHeaderPolygons;
+                }
+                if ( poly ) {
+                    fileHeaderPolygons += 1 + poly->innerBoundaries().size();
+                }
+            }
         }
     }
 
-    stream << fileHeaderVersion << fileHeaderPolygons;
+    GeoDataSchema schema = document->schema( QString("default") );
+    if ( schema.simpleField("mapcolor13").name() == QString("mapcolor13") ) {
+        isMapColorField = true;
+    }
+
+    // Write in the beginnig whether the file contains mapcolor or not.
+    stream << fileHeaderVersion << fileHeaderPolygons << isMapColorField;
 
     i = document->begin();
 
@@ -206,7 +233,6 @@ int main(int argc, char** argv)
         GeoDataMultiGeometry* multigeom = dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() );
 
         if ( polygon ) {
-
             // Outer boundary
             ++polyCurrentID;
             QVector<GeoDataCoordinates>::Iterator jBegin = polygon->outerBoundary().begin();
@@ -214,7 +240,13 @@ int main(int argc, char** argv)
             polyParentNodes = getParentNodes( jBegin, jEnd );
             polyFlag = OUTERBOUNDARY;
 
-            stream << polyCurrentID << polyParentNodes << polyFlag;
+            if ( isMapColorField ) {
+                quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
+                stream << polyCurrentID << polyParentNodes << polyFlag << colorIndex;
+            }
+            else {
+                stream << polyCurrentID << polyParentNodes <<polyFlag;
+            }
 
             printAllNodes( jBegin, jEnd, stream );
 
@@ -258,25 +290,63 @@ int main(int argc, char** argv)
 
             QVector<GeoDataGeometry*>::Iterator multi = multigeom->begin();
             QVector<GeoDataGeometry*>::Iterator multiEnd = multigeom->end();
-    
+
             for ( ; multi != multiEnd; ++multi ) {
                 GeoDataLineString* currLineString = dynamic_cast<GeoDataLineString*>( *multi );
+                GeoDataPolygon *currPolygon = dynamic_cast<GeoDataPolygon*>( *multi );
 
-                ++polyCurrentID;
-                QVector<GeoDataCoordinates>::Iterator jBegin = currLineString->begin();
-                QVector<GeoDataCoordinates>::Iterator jEnd = currLineString->end();
-                polyParentNodes = getParentNodes( jBegin, jEnd );
-                if ( currLineString->isClosed() )
-                    polyFlag = LINEARRING;
-                else
-                    polyFlag = LINESTRING;
+                if ( currLineString ) {
+                    ++polyCurrentID;
+                    QVector<GeoDataCoordinates>::Iterator jBegin = currLineString->begin();
+                    QVector<GeoDataCoordinates>::Iterator jEnd = currLineString->end();
+                    polyParentNodes = getParentNodes( jBegin, jEnd );
+                    if ( currLineString->isClosed() )
+                        polyFlag = LINEARRING;
+                    else
+                        polyFlag = LINESTRING;
 
-                stream << polyCurrentID << polyParentNodes << polyFlag;
+                    stream << polyCurrentID << polyParentNodes << polyFlag;
 
-                printAllNodes( jBegin, jEnd, stream );
+                    printAllNodes( jBegin, jEnd, stream );
+                }
+
+                else if ( currPolygon ) {
+                    // Outer boundary
+                    ++polyCurrentID;
+                    QVector<GeoDataCoordinates>::Iterator jBegin = currPolygon->outerBoundary().begin();
+                    QVector<GeoDataCoordinates>::Iterator jEnd = currPolygon->outerBoundary().end();
+                    polyParentNodes = getParentNodes( jBegin, jEnd );
+                    polyFlag = OUTERBOUNDARY;
+
+                    if ( isMapColorField ) {
+                        quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
+                        stream << polyCurrentID << polyParentNodes << polyFlag << colorIndex;
+                    }
+                    else {
+                        stream << polyCurrentID << polyParentNodes <<polyFlag;
+                    }
+
+                    printAllNodes( jBegin, jEnd, stream );
+
+                    // Inner boundaries
+                    QVector<GeoDataLinearRing>::Iterator inner = currPolygon->innerBoundaries().begin();
+                    QVector<GeoDataLinearRing>::Iterator innerEnd = currPolygon->innerBoundaries().end();
+
+                    for ( ; inner != innerEnd; ++inner ) {
+                        GeoDataLinearRing linearring = static_cast<GeoDataLinearRing>( *inner );
+
+                        ++polyCurrentID;
+                        jBegin = linearring.begin();
+                        jEnd = linearring.end();
+                        polyParentNodes = getParentNodes( jBegin, jEnd );
+                        polyFlag = INNERBOUNDARY;
+
+                        stream << polyCurrentID << polyParentNodes << polyFlag;
+
+                        printAllNodes( jBegin, jEnd, stream );
+                    }
+                }
             }
-            
         }
     }
-
 }

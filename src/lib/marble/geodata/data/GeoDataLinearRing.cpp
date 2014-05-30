@@ -83,4 +83,16 @@ bool GeoDataLinearRing::contains( const GeoDataCoordinates &coordinates ) const
     return inside;
 }
 
+bool GeoDataLinearRing::isClockwise() const
+{
+    int n = size();
+    qreal area = 0;
+    for ( int i = 1; i < n - 1; ++i ){
+        area += ( at( i ).longitude() - at( i - 1 ).longitude() ) * ( at( i ).latitude() + at( i - 1 ).latitude() );
+    }
+    area += ( at( 0 ).longitude() - at( n - 2 ).longitude() ) * ( at ( 0 ).latitude() + at( n - 2 ).latitude() );
+
+    return area > 0;
+}
+
 }

@@ -18,6 +18,7 @@ namespace Marble
 GeoSceneGeodata::GeoSceneGeodata( QString name )
     : GeoSceneAbstractDataset( name ),
       m_sourceFile( QString() ),
+      m_alpha( 1.0 ),
       m_pen( QPen( Qt::NoPen ) ),
       m_brush( QBrush( Qt::transparent ) )
 {
@@ -74,6 +75,16 @@ QPen GeoSceneGeodata::pen() const
     return m_pen;
 }
 
+void GeoSceneGeodata::setAlpha( const qreal &alpha )
+{
+    m_alpha = alpha;
+}
+
+qreal GeoSceneGeodata::alpha() const
+{
+    return m_alpha;
+}
+
 void GeoSceneGeodata::setPen( const QPen& pen )
 {
     m_pen = pen;
@@ -87,6 +98,16 @@ QBrush GeoSceneGeodata::brush() const
 void GeoSceneGeodata::setBrush( const QBrush& brush )
 {
     m_brush = brush;
+}
+
+QList<QColor> GeoSceneGeodata::colors() const
+{
+    return m_colors;
+}
+
+void GeoSceneGeodata::setColors( const QList<QColor> &colors )
+{
+    m_colors = colors;
 }
 
 }

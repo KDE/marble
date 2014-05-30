@@ -123,6 +123,12 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
     \return <code>true</code> if the coordinates lie within the polygon, false otherwise.
 */
     virtual bool contains( const GeoDataCoordinates &coordinates ) const;
+
+/*!
+ * \brief Returns whether the orientaion of ring is coloskwise or not
+ * \return Return value is true if ring is clockwise orientated
+ */
+    virtual bool isClockwise() const;
 };
 
 }
