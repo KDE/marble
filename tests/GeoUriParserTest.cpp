@@ -71,7 +71,7 @@ void GeoUriParserTest::testGeoUri()
 
     GeoDataCoordinates coords = parser.coordinates();
 
-    double cLat = 0.0, cLon = 0.0, cAlt = 0.0;
+    qreal cLat = 0.0, cLon = 0.0, cAlt = 0.0;
     coords.geoCoordinates(cLon, cLat, cAlt, GeoDataCoordinates::Degree);
 
     QCOMPARE(ret, valid);
