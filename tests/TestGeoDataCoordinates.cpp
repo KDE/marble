@@ -358,9 +358,9 @@ void TestGeoDataCoordinates::testIsPole_data()
     QTest::addColumn<qreal>("alt");
     QTest::addColumn<QString>("pole");
 
-    QTest::newRow("false") << 50.0 << 50.0 << 0.0 << "false_pole";
-    QTest::newRow("south") << 0.0 << -90.0 << 0.0 << "south_pole";
-    QTest::newRow("north") << 0.0 << 90.0 << 0.0 << "north_pole";
+    QTest::newRow("false") << qreal(50.0) << qreal(50.0) << qreal(0.0) << "false_pole";
+    QTest::newRow("south") << qreal(0.0) << qreal(-90.0) << qreal(0.0) << "south_pole";
+    QTest::newRow("north") << qreal(0.0) << qreal(90.0) << qreal(0.0) << "north_pole";
 }
 
 /*
@@ -391,9 +391,9 @@ void TestGeoDataCoordinates::testNormalizeLat_data()
 {
     QTest::addColumn<qreal>( "latRadian" );
 
-    QTest::newRow( "north pole" ) << M_PI / 2;
-    QTest::newRow( "south pole" ) << - M_PI / 2;
-    QTest::newRow( "somewhere" ) << 1.0;
+    QTest::newRow( "north pole" ) << qreal(M_PI / 2);
+    QTest::newRow( "south pole" ) << qreal(- M_PI / 2);
+    QTest::newRow( "somewhere" ) << qreal(1.0);
 }
 
 void TestGeoDataCoordinates::testNormalizeLat()
@@ -419,11 +419,11 @@ void TestGeoDataCoordinates::testNormalizeLon_data()
 {
     QTest::addColumn<qreal>( "lonRadian" );
 
-    QTest::newRow( "half east" ) << M_PI / 2;
-    QTest::newRow( "half west" ) << - M_PI / 2;
-    QTest::newRow( "somewhere" ) << 1.0;
-    QTest::newRow( "date line east" ) << M_PI;
-    QTest::newRow( "date line west" ) << - M_PI;
+    QTest::newRow( "half east" ) << qreal(M_PI / 2);
+    QTest::newRow( "half west" ) << qreal(- M_PI / 2);
+    QTest::newRow( "somewhere" ) << qreal(1.0);
+    QTest::newRow( "date line east" ) << qreal(M_PI);
+    QTest::newRow( "date line west" ) << - qreal(M_PI);
 
 }
 
@@ -433,7 +433,7 @@ void TestGeoDataCoordinates::testNormalizeLon()
 
     qreal lonDegree = RAD2DEG * lonRadian;
     for ( int i = 1; i < 10; ++i ) {
-        if ( lonRadian == M_PI || lonRadian == -M_PI ) {
+        if ( lonRadian == qreal(M_PI) || lonRadian == qreal(-M_PI) ) {
             int lonRadianLarge = qRound( lonRadian * 1000 );
             int lonDegreeLarge = qRound( lonDegree * 1000 );
             if ( qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ) * 1000 ) != lonRadianLarge
@@ -469,8 +469,8 @@ void TestGeoDataCoordinates::testNormalize_data()
     QTest::addColumn<qreal>("lat");
     QTest::addColumn<QString>("unit");
 
-    QTest::newRow("deg") << 200.0 << 130.0 << "degree";
-    QTest::newRow("rad") << 3.6 << 2.7  << "radian";
+    QTest::newRow("deg") << qreal(200.0) << qreal(130.0) << "degree";
+    QTest::newRow("rad") << qreal(3.6) << qreal(2.7)  << "radian";
 }
 
 /*
@@ -839,7 +839,7 @@ void TestGeoDataCoordinates::testFromStringD_data()
         << NoSpaces << WithSpaces;
 
     const QVector<qreal> degreeSamples = QVector<qreal>()
-        << 0.0 << 3.14159 << 180.0;
+        << qreal(0.0) << qreal(3.14159) << qreal(180.0);
 
     foreach(const UnitsType unitsType, unitsTypes) {
     foreach(const SpacesType spacesType, spacesTypes) {
@@ -905,9 +905,9 @@ void TestGeoDataCoordinates::testFromStringD_data()
     }
     }
 
-    QTest::newRow("scientific notation") << "0.0,1.0e-2" << 1.0e-2 << 0.0;
-    QTest::newRow("scientific notation") << "-2.4E0 1.0e-18" << 1e-18 << -2.4e0;
-    QTest::newRow("scientific notation") << "1.14e-02;1.33e+01" << 1.33e1 << 1.14e-2;
+    QTest::newRow("scientific notation") << "0.0,1.0e-2" << qreal(1.0e-2) << qreal(0.0);
+    QTest::newRow("scientific notation") << "-2.4E0 1.0e-18" << qreal(1e-18) << qreal(-2.4e0);
+    QTest::newRow("scientific notation") << "1.14e-02;1.33e+01" << qreal(1.33e1) << qreal(1.14e-2);
 }
 
 /*
@@ -1535,65 +1535,65 @@ void TestGeoDataCoordinates::testToString_Decimal_data()
     QTest::addColumn<int>("precision");
     QTest::addColumn<QString>("expected");
 
-    addRow() << 150.0 << 80.0 << 0 << QString::fromUtf8( " 150°E,   80°N" );
-    addRow() << 150.0 << 80.0 << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
-    addRow() << 150.0 << 80.0 << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
-    addRow() << 150.0 << 80.0 << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
-    addRow() << 150.0 << 80.0 << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
-    addRow() << 150.0 << 80.0 << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
+    addRow() << qreal(150.0) << qreal(80.0) << 0 << QString::fromUtf8( " 150°E,   80°N" );
+    addRow() << qreal(150.0) << qreal(80.0) << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
+    addRow() << qreal(150.0) << qreal(80.0) << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
+    addRow() << qreal(150.0) << qreal(80.0) << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
+    addRow() << qreal(150.0) << qreal(80.0) << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
+    addRow() << qreal(150.0) << qreal(80.0) << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
 
-    addRow() << 149.6       << 79.6       << 0 << QString::fromUtf8( " 150°E,   80°N" );
-    addRow() << 149.96      << 79.96      << 0 << QString::fromUtf8( " 150°E,   80°N" );
+    addRow() << qreal(149.6)       << qreal(79.6)       << 0 << QString::fromUtf8( " 150°E,   80°N" );
+    addRow() << qreal(149.96)      << qreal(79.96)      << 0 << QString::fromUtf8( " 150°E,   80°N" );
 
-    addRow() << 149.6       << 79.6       << 1 << QString::fromUtf8( "149.6°E,  79.6°N" );
-    addRow() << 149.96      << 79.96      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
-    addRow() << 149.996     << 79.996     << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
+    addRow() << qreal(149.6)       << qreal(79.6)       << 1 << QString::fromUtf8( "149.6°E,  79.6°N" );
+    addRow() << qreal(149.96)      << qreal(79.96)      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
+    addRow() << qreal(149.996)     << qreal(79.996)     << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
 
-    addRow() << 149.96      << 79.96      << 2 << QString::fromUtf8( "149.96°E,  79.96°N" );
-    addRow() << 149.996     << 79.996     << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
-    addRow() << 149.9996    << 79.9996    << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
+    addRow() << qreal(149.96)      << qreal(79.96)      << 2 << QString::fromUtf8( "149.96°E,  79.96°N" );
+    addRow() << qreal(149.996)     << qreal(79.996)     << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
+    addRow() << qreal(149.9996)    << qreal(79.9996)    << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
 
-    addRow() << 149.996     << 79.996     << 3 << QString::fromUtf8( "149.996°E,  79.996°N" );
-    addRow() << 149.9996    << 79.9996    << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
-    addRow() << 149.99996   << 79.99996   << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
+    addRow() << qreal(149.996)     << qreal(79.996)     << 3 << QString::fromUtf8( "149.996°E,  79.996°N" );
+    addRow() << qreal(149.9996)    << qreal(79.9996)    << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
+    addRow() << qreal(149.99996)   << qreal(79.99996)   << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
 
-    addRow() << 149.9996    << 79.9996    << 4 << QString::fromUtf8( "149.9996°E,  79.9996°N" );
-    addRow() << 149.99996   << 79.99996   << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
-    addRow() << 149.999996  << 79.999996  << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
+    addRow() << qreal(149.9996)    << qreal(79.9996)    << 4 << QString::fromUtf8( "149.9996°E,  79.9996°N" );
+    addRow() << qreal(149.99996)   << qreal(79.99996)   << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
+    addRow() << qreal(149.999996)  << qreal(79.999996)  << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
 
-    addRow() << 149.99996   << 79.99996   << 5 << QString::fromUtf8( "149.99996°E,  79.99996°N" );
-    addRow() << 149.999996  << 79.999996  << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
-    addRow() << 149.9999996 << 79.9999996 << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
+    addRow() << qreal(149.99996)   << qreal(79.99996)   << 5 << QString::fromUtf8( "149.99996°E,  79.99996°N" );
+    addRow() << qreal(149.999996)  << qreal(79.999996)  << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
+    addRow() << qreal(149.9999996) << qreal(79.9999996) << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
 
-    addRow() << 149.999996  << 79.999996  << 6 << QString::fromUtf8( "149.999996°E,  79.999996°N" );
-    addRow() << 149.9999996 << 79.9999996 << 6 << QString::fromUtf8( "150.000000°E,  80.000000°N" );
+    addRow() << qreal(149.999996)  << qreal(79.999996)  << 6 << QString::fromUtf8( "149.999996°E,  79.999996°N" );
+    addRow() << qreal(149.9999996) << qreal(79.9999996) << 6 << QString::fromUtf8( "150.000000°E,  80.000000°N" );
 
 
-    addRow() << 150.1       << 80.1       << 0 << QString::fromUtf8( " 150°E,   80°N" );
-    addRow() << 150.01      << 80.01      << 0 << QString::fromUtf8( " 150°E,   80°N" );
+    addRow() << qreal(150.1)       << qreal(80.1)       << 0 << QString::fromUtf8( " 150°E,   80°N" );
+    addRow() << qreal(150.01)      << qreal(80.01)      << 0 << QString::fromUtf8( " 150°E,   80°N" );
 
-    addRow() << 150.1       << 80.1       << 1 << QString::fromUtf8( "150.1°E,  80.1°N" );
-    addRow() << 150.01      << 80.01      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
-    addRow() << 150.001     << 80.001     << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
+    addRow() << qreal(150.1)       << qreal(80.1)       << 1 << QString::fromUtf8( "150.1°E,  80.1°N" );
+    addRow() << qreal(150.01)      << qreal(80.01)      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
+    addRow() << qreal(150.001)     << qreal(80.001)     << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
 
-    addRow() << 150.01      << 80.01      << 2 << QString::fromUtf8( "150.01°E,  80.01°N" );
-    addRow() << 150.001     << 80.001     << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
-    addRow() << 150.0001    << 80.0001    << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
+    addRow() << qreal(150.01)      << qreal(80.01)      << 2 << QString::fromUtf8( "150.01°E,  80.01°N" );
+    addRow() << qreal(150.001)     << qreal(80.001)     << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
+    addRow() << qreal(150.0001)    << qreal(80.0001)    << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
 
-    addRow() << 150.001     << 80.001     << 3 << QString::fromUtf8( "150.001°E,  80.001°N" );
-    addRow() << 150.0001    << 80.0001    << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
-    addRow() << 150.00001   << 80.00001   << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
+    addRow() << qreal(150.001)     << qreal(80.001)     << 3 << QString::fromUtf8( "150.001°E,  80.001°N" );
+    addRow() << qreal(150.0001)    << qreal(80.0001)    << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
+    addRow() << qreal(150.00001)   << qreal(80.00001)   << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
 
-    addRow() << 150.0001    << 80.0001    << 4 << QString::fromUtf8( "150.0001°E,  80.0001°N" );
-    addRow() << 150.00001   << 80.00001   << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
-    addRow() << 150.000001  << 80.000001  << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
+    addRow() << qreal(150.0001)    << qreal(80.0001)    << 4 << QString::fromUtf8( "150.0001°E,  80.0001°N" );
+    addRow() << qreal(150.00001)   << qreal(80.00001)   << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
+    addRow() << qreal(150.000001)  << qreal(80.000001)  << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
 
-    addRow() << 150.00001   << 80.00001   << 5 << QString::fromUtf8( "150.00001°E,  80.00001°N" );
-    addRow() << 150.000001  << 80.000001  << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
-    addRow() << 150.0000001 << 80.0000001 << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
+    addRow() << qreal(150.00001)   << qreal(80.00001)   << 5 << QString::fromUtf8( "150.00001°E,  80.00001°N" );
+    addRow() << qreal(150.000001)  << qreal(80.000001)  << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
+    addRow() << qreal(150.0000001) << qreal(80.0000001) << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
 
-    addRow() << 150.000001  << 80.000001  << 6 << QString::fromUtf8( "150.000001°E,  80.000001°N" );
-    addRow() << 150.0000001 << 80.0000001 << 6 << QString::fromUtf8( "150.000000°E,  80.000000°N" );
+    addRow() << qreal(150.000001)  << qreal(80.000001)  << 6 << QString::fromUtf8( "150.000001°E,  80.000001°N" );
+    addRow() << qreal(150.0000001) << qreal(80.0000001) << 6 << QString::fromUtf8( "150.000000°E,  80.000000°N" );
 }
 
 /*
@@ -1622,48 +1622,48 @@ void TestGeoDataCoordinates::testToString_DMS_data()
     QTest::addColumn<int>("precision");
     QTest::addColumn<QString>("expected");
 
-    addRow() << (0.)                         << (0.)                        << 0 << QString::fromUtf8( "  0°E,   0°S" );
-    addRow() << (150.)                       << (80.)                       << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (149. + 31./60)              << (79. + 31./60)              << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (149. + 30./60 + 31./3600)   << (79. + 30./60 + 31./3600)   << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (149. + 30./60 + 30.51/3600) << (79. + 30./60 + 30.51/3600) << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (150. + 29./60)              << (80. + 29./60)              << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (150. + 29./60 + 29./3600)   << (80. + 29./60 + 29./3600)   << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (150. + 29./60 + 29.49/3600) << (80. + 29./60 + 29.49/3600) << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(0.)                         << qreal(0.)                        << 0 << QString::fromUtf8( "  0°E,   0°S" );
+    addRow() << qreal(150.)                       << qreal(80.)                       << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(149. + 31./60)              << qreal(79. + 31./60)              << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(149. + 30./60 + 31./3600)   << qreal(79. + 30./60 + 31./3600)   << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(149. + 30./60 + 30.51/3600) << qreal(79. + 30./60 + 30.51/3600) << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(150. + 29./60)              << qreal(80. + 29./60)              << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(150. + 29./60 + 29./3600)   << qreal(80. + 29./60 + 29./3600)   << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(150. + 29./60 + 29.49/3600) << qreal(80. + 29./60 + 29.49/3600) << 0 << QString::fromUtf8( "150°E,  80°N" );
 
-    addRow() << (0.)                         << (0.)                        << 1 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
-    addRow() << (150.)                       << (80.)                       << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (149. + 59./60 + 31./3600)   << (79. + 59./60 + 31./3600)   << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (149. + 59./60 + 30.51/3600) << (79. + 59./60 + 30.51/3600) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (150.          + 29./3600)   << (80.          + 29./3600)   << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (150.          + 29.49/3600) << (80.          + 29.49/3600) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(0.)                         << qreal(0.)                        << 1 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
+    addRow() << qreal(150.)                       << qreal(80.)                       << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(149. + 59./60 + 31./3600)   << qreal(79. + 59./60 + 31./3600)   << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(149. + 59./60 + 30.51/3600) << qreal(79. + 59./60 + 30.51/3600) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(150.          + 29./3600)   << qreal(80.          + 29./3600)   << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(150.          + 29.49/3600) << qreal(80.          + 29.49/3600) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
-    addRow() << (0.)                         << (0.)                        << 2 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
-    addRow() << (150.)                       << (80.)                       << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (149. + 59./60 + 31./3600)   << (79. + 59./60 + 31./3600)   << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (149. + 59./60 + 30.51/3600) << (79. + 59./60 + 30.51/3600) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (150.          + 29./3600)   << (80.          + 29./3600)   << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (150.          + 29.49/3600) << (80.          + 29.49/3600) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(0.)                         << qreal(0.)                        << 2 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
+    addRow() << qreal(150.)                       << qreal(80.)                       << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(149. + 59./60 + 31./3600)   << qreal(79. + 59./60 + 31./3600)   << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(149. + 59./60 + 30.51/3600) << qreal(79. + 59./60 + 30.51/3600) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(150.          + 29./3600)   << qreal(80.          + 29./3600)   << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(150.          + 29.49/3600) << qreal(80.          + 29.49/3600) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
-    addRow() << (0.)                         << (0.)                        << 3 << QString::fromUtf8( "  0° 00' 00\"E,   0° 00' 00\"S" );
-    addRow() << (150.)                       << (80.)                       << 3 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
-    addRow() << (149. + 59./60 + 59.51/3600) << (79. + 59./60 + 59.51/3600) << 3 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
-    addRow() << (150.          +  0.49/3600) << (80.          +  0.49/3600) << 3 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
+    addRow() << qreal(0.)                         << qreal(0.)                        << 3 << QString::fromUtf8( "  0° 00' 00\"E,   0° 00' 00\"S" );
+    addRow() << qreal(150.)                       << qreal(80.)                       << 3 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
+    addRow() << qreal(149. + 59./60 + 59.51/3600) << qreal(79. + 59./60 + 59.51/3600) << 3 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
+    addRow() << qreal(150.          +  0.49/3600) << qreal(80.          +  0.49/3600) << 3 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
 
-    addRow() << (0.)                         << (0.)                        << 4 << QString::fromUtf8( "  0° 00' 00\"E,   0° 00' 00\"S" );
-    addRow() << (150.)                       << (80.)                       << 4 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
-    addRow() << (149. + 59./60 + 59.51/3600) << (79. + 59./60 + 59.51/3600) << 4 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
-    addRow() << (150.          +  0.49/3600) << (80.          +  0.49/3600) << 4 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
+    addRow() << qreal(0.)                         << qreal(0.)                        << 4 << QString::fromUtf8( "  0° 00' 00\"E,   0° 00' 00\"S" );
+    addRow() << qreal(150.)                       << qreal(80.)                       << 4 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
+    addRow() << qreal(149. + 59./60 + 59.51/3600) << qreal(79. + 59./60 + 59.51/3600) << 4 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
+    addRow() << qreal(150.          +  0.49/3600) << qreal(80.          +  0.49/3600) << 4 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
 
-    addRow() << (0.)                          << (0.)                         << 5 << QString::fromUtf8( "  0° 00' 00.0\"E,   0° 00' 00.0\"S" );
-    addRow() << (150.)                        << (80.)                        << 5 << QString::fromUtf8( "150° 00' 00.0\"E,  80° 00' 00.0\"N" );
-    addRow() << (149. + 59./60 + 59.951/3600) << (79. + 59./60 + 59.951/3600) << 5 << QString::fromUtf8( "150° 00' 00.0\"E,  80° 00' 00.0\"N" );
-    addRow() << (150.          +  0.049/3600) << (80.          +  0.049/3600) << 5 << QString::fromUtf8( "150° 00' 00.0\"E,  80° 00' 00.0\"N" );
+    addRow() << qreal(0.)                          << qreal(0.)                         << 5 << QString::fromUtf8( "  0° 00' 00.0\"E,   0° 00' 00.0\"S" );
+    addRow() << qreal(150.)                        << qreal(80.)                        << 5 << QString::fromUtf8( "150° 00' 00.0\"E,  80° 00' 00.0\"N" );
+    addRow() << qreal(149. + 59./60 + 59.951/3600) << qreal(79. + 59./60 + 59.951/3600) << 5 << QString::fromUtf8( "150° 00' 00.0\"E,  80° 00' 00.0\"N" );
+    addRow() << qreal(150.          +  0.049/3600) << qreal(80.          +  0.049/3600) << 5 << QString::fromUtf8( "150° 00' 00.0\"E,  80° 00' 00.0\"N" );
 
-    addRow() << (0.)                           << (0.)                          << 6 << QString::fromUtf8( "  0° 00' 00.00\"E,   0° 00' 00.00\"S" );
-    addRow() << (150.)                         << (80.)                         << 6 << QString::fromUtf8( "150° 00' 00.00\"E,  80° 00' 00.00\"N" );
-    addRow() << (149. + 59./60 + 59.9951/3600) << (79. + 59./60 + 59.9951/3600) << 6 << QString::fromUtf8( "150° 00' 00.00\"E,  80° 00' 00.00\"N" );
-    addRow() << (150.          +  0.0049/3600) << (80.          +  0.0049/3600) << 6 << QString::fromUtf8( "150° 00' 00.00\"E,  80° 00' 00.00\"N" );
+    addRow() << qreal(0.)                           << qreal(0.)                          << 6 << QString::fromUtf8( "  0° 00' 00.00\"E,   0° 00' 00.00\"S" );
+    addRow() << qreal(150.)                         << qreal(80.)                         << 6 << QString::fromUtf8( "150° 00' 00.00\"E,  80° 00' 00.00\"N" );
+    addRow() << qreal(149. + 59./60 + 59.9951/3600) << qreal(79. + 59./60 + 59.9951/3600) << 6 << QString::fromUtf8( "150° 00' 00.00\"E,  80° 00' 00.00\"N" );
+    addRow() << qreal(150.          +  0.0049/3600) << qreal(80.          +  0.0049/3600) << 6 << QString::fromUtf8( "150° 00' 00.00\"E,  80° 00' 00.00\"N" );
 }
 
 /*
@@ -1692,32 +1692,32 @@ void TestGeoDataCoordinates::testToString_DM_data()
     QTest::addColumn<int>("precision");
     QTest::addColumn<QString>("expected");
 
-    addRow() << (0.)              << (0.)             << 0 << QString::fromUtf8( "  0°E,   0°S" );
-    addRow() << (150.)            << (80.)            << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (149. + 31./60)   << (79. + 31./60)   << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (149. + 30.51/60) << (79. + 30.51/60) << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (150. + 29./60)   << (80. + 29./60)   << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << (150. + 29.49/60) << (80. + 29.49/60) << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(0.)              << qreal(0.)             << 0 << QString::fromUtf8( "  0°E,   0°S" );
+    addRow() << qreal(150.)            << qreal(80.)            << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(149. + 31./60)   << qreal(79. + 31./60)   << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(149. + 30.51/60) << qreal(79. + 30.51/60) << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(150. + 29./60)   << qreal(80. + 29./60)   << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(150. + 29.49/60) << qreal(80. + 29.49/60) << 0 << QString::fromUtf8( "150°E,  80°N" );
 
-    addRow() << (0.)              << (0.)             << 1 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
-    addRow() << (150.)            << (80.)            << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (149. + 59.51/60) << (79. + 59.51/60) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (150. +  0.49/60) << (80. +  0.49/60) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(0.)              << qreal(0.)             << 1 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
+    addRow() << qreal(150.)            << qreal(80.)            << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(149. + 59.51/60) << qreal(79. + 59.51/60) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(150. +  0.49/60) << qreal(80. +  0.49/60) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
-    addRow() << (0.)              << (0.)             << 2 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
-    addRow() << (150.)            << (80.)            << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (149. + 59.51/60) << (79. + 59.51/60) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << (150. +  0.49/60) << (80. +  0.49/60) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(0.)              << qreal(0.)             << 2 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
+    addRow() << qreal(150.)            << qreal(80.)            << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(149. + 59.51/60) << qreal(79. + 59.51/60) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(150. +  0.49/60) << qreal(80. +  0.49/60) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
 
-    addRow() << (0.)               << (0.)              << 3 << QString::fromUtf8( "  0° 00.0'E,   0° 00.0'S" );
-    addRow() << (150.)             << (80.)             << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
-    addRow() << (149. + 59.951/60) << (79. + 59.951/60) << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
-    addRow() << (150. +  0.049/60) << (80. +  0.049/60) << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
+    addRow() << qreal(0.)               << qreal(0.)              << 3 << QString::fromUtf8( "  0° 00.0'E,   0° 00.0'S" );
+    addRow() << qreal(150.)             << qreal(80.)             << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
+    addRow() << qreal(149. + 59.951/60) << qreal(79. + 59.951/60) << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
+    addRow() << qreal(150. +  0.049/60) << qreal(80. +  0.049/60) << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
 
-    addRow() << (0.)                << (0.)               << 4 << QString::fromUtf8( "  0° 00.00'E,   0° 00.00'S" );
-    addRow() << (150.)              << (80.)              << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
-    addRow() << (149. + 59.9951/60) << (79. + 59.9951/60) << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
-    addRow() << (150. +  0.0049/60) << (80. +  0.0049/60) << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
+    addRow() << qreal(0.)                << qreal(0.)               << 4 << QString::fromUtf8( "  0° 00.00'E,   0° 00.00'S" );
+    addRow() << qreal(150.)              << qreal(80.)              << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
+    addRow() << qreal(149. + 59.9951/60) << qreal(79. + 59.9951/60) << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
+    addRow() << qreal(150. +  0.0049/60) << qreal(80. +  0.0049/60) << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
 }
 
 /*
@@ -1745,7 +1745,7 @@ void TestGeoDataCoordinates::testPack_data()
     QTest::addColumn<qreal>("lat");
     QTest::addColumn<qreal>("alt");
 
-    QTest::newRow("deg") << 180.0 << 90.0 << 400.0;
+    QTest::newRow("deg") << qreal(180.0) << qreal(90.0) << qreal(400.0);
 }
 
 /*

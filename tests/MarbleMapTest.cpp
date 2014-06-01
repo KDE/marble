@@ -75,36 +75,36 @@ void MarbleMapTest::centerOnSpherical_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << 0.0 << 0.0;
+    addRow() << qreal(0.0) << qreal(0.0);
 
-    addRow() << -180.0 << 0.0;
-    addRow() <<  -90.0 << 0.0;
-    addRow() <<   90.0 << 0.0;
-    addRow() <<  180.0 << 0.0;
+    addRow() << qreal(-180.0) << qreal(0.0);
+    addRow() <<  qreal(-90.0) << qreal(0.0);
+    addRow() <<   qreal(90.0) << qreal(0.0);
+    addRow() <<  qreal(180.0) << qreal(0.0);
 
-    addRow() << -180.0 << 90.0;
-    addRow() <<  -90.0 << 90.0;
-    addRow() <<    0.0 << 90.0;
-    addRow() <<   90.0 << 90.0;
-    addRow() <<  180.0 << 90.0;
+    addRow() << qreal(-180.0) << qreal(90.0);
+    addRow() <<  qreal(-90.0) << qreal(90.0);
+    addRow() <<    qreal(0.0) << qreal(90.0);
+    addRow() <<   qreal(90.0) << qreal(90.0);
+    addRow() <<  qreal(180.0) << qreal(90.0);
 
-    addRow() << -180.0 << -90.0;
-    addRow() <<  -90.0 << -90.0;
-    addRow() <<    0.0 << -90.0;
-    addRow() <<   90.0 << -90.0;
-    addRow() <<  180.0 << -90.0;
+    addRow() << qreal(-180.0) << qreal(-90.0);
+    addRow() <<  qreal(-90.0) << qreal(-90.0);
+    addRow() <<    qreal(0.0) << qreal(-90.0);
+    addRow() <<   qreal(90.0) << qreal(-90.0);
+    addRow() <<  qreal(180.0) << qreal(-90.0);
 
-    addRow() << -180.0 << 180.0;
-    addRow() <<  -90.0 << 180.0;
-    addRow() <<    0.0 << 180.0;
-    addRow() <<   90.0 << 180.0;
-    addRow() <<  180.0 << 180.0;
+    addRow() << qreal(-180.0) << qreal(180.0);
+    addRow() <<  qreal(-90.0) << qreal(180.0);
+    addRow() <<    qreal(0.0) << qreal(180.0);
+    addRow() <<   qreal(90.0) << qreal(180.0);
+    addRow() <<  qreal(180.0) << qreal(180.0);
 
-    addRow() << -180.0 << -180.0;
-    addRow() <<  -90.0 << -180.0;
-    addRow() <<    0.0 << -180.0;
-    addRow() <<   90.0 << -180.0;
-    addRow() <<  180.0 << -180.0;
+    addRow() << qreal(-180.0) << qreal(-180.0);
+    addRow() <<  qreal(-90.0) << qreal(-180.0);
+    addRow() <<    qreal(0.0) << qreal(-180.0);
+    addRow() <<   qreal(90.0) << qreal(-180.0);
+    addRow() <<  qreal(180.0) << qreal(-180.0);
 }
 
 void MarbleMapTest::centerOnSpherical()
@@ -125,24 +125,24 @@ void MarbleMapTest::centerOnEquirectangular_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << 0.0 << 0.0;
+    addRow() << qreal(0.0) << qreal(0.0);
 
-    addRow() << -180.0 << 0.0;
-    addRow() <<  -90.0 << 0.0;
-    addRow() <<   90.0 << 0.0;
-    addRow() <<  180.0 << 0.0;
+    addRow() << qreal(-180.0) << qreal(0.0);
+    addRow() <<  qreal(-90.0) << qreal(0.0);
+    addRow() <<   qreal(90.0) << qreal(0.0);
+    addRow() <<  qreal(180.0) << qreal(0.0);
 
-    addRow() << -180.0 << 90.0;
-    addRow() <<  -90.0 << 90.0;
-    addRow() <<    0.0 << 90.0;
-    addRow() <<   90.0 << 90.0;
-    addRow() <<  180.0 << 90.0;
+    addRow() << qreal(-180.0) << qreal(90.0);
+    addRow() <<  qreal(-90.0) << qreal(90.0);
+    addRow() <<    qreal(0.0) << qreal(90.0);
+    addRow() <<   qreal(90.0) << qreal(90.0);
+    addRow() <<  qreal(180.0) << qreal(90.0);
 
-    addRow() << -180.0 << -90.0;
-    addRow() <<  -90.0 << -90.0;
-    addRow() <<    0.0 << -90.0;
-    addRow() <<   90.0 << -90.0;
-    addRow() <<  180.0 << -90.0;
+    addRow() << qreal(-180.0) << qreal(-90.0);
+    addRow() <<  qreal(-90.0) << qreal(-90.0);
+    addRow() <<    qreal(0.0) << qreal(-90.0);
+    addRow() <<   qreal(90.0) << qreal(-90.0);
+    addRow() <<  qreal(180.0) << qreal(-90.0);
 }
 
 void MarbleMapTest::centerOnEquirectangular()
@@ -163,24 +163,24 @@ void MarbleMapTest::centerOnMercator_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << 0.0 << 0.0;
+    addRow() << qreal(0.0) << qreal(0.0);
 
-    addRow() << -180.0 << 0.0;
-    addRow() <<  -90.0 << 0.0;
-    addRow() <<   90.0 << 0.0;
-    addRow() <<  180.0 << 0.0;
+    addRow() << qreal(-180.0) << qreal(0.0);
+    addRow() <<  qreal(-90.0) << qreal(0.0);
+    addRow() <<   qreal(90.0) << qreal(0.0);
+    addRow() <<  qreal(180.0) << qreal(0.0);
 
-    addRow() << -180.0 << -85.0511;
-    addRow() <<  -90.0 << -85.0511;
-    addRow() <<    0.0 << -85.0511;
-    addRow() <<   90.0 << -85.0511;
-    addRow() <<  180.0 << -85.0511;
+    addRow() << qreal(-180.0) << qreal(-85.0511);
+    addRow() <<  qreal(-90.0) << qreal(-85.0511);
+    addRow() <<    qreal(0.0) << qreal(-85.0511);
+    addRow() <<   qreal(90.0) << qreal(-85.0511);
+    addRow() <<  qreal(180.0) << qreal(-85.0511);
 
-    addRow() << -180.0 << 85.0511;
-    addRow() <<  -90.0 << 85.0511;
-    addRow() <<    0.0 << 85.0511;
-    addRow() <<   90.0 << 85.0511;
-    addRow() <<  180.0 << 85.0511;
+    addRow() << qreal(-180.0) << qreal(85.0511);
+    addRow() <<  qreal(-90.0) << qreal(85.0511);
+    addRow() <<    qreal(0.0) << qreal(85.0511);
+    addRow() <<   qreal(90.0) << qreal(85.0511);
+    addRow() <<  qreal(180.0) << qreal(85.0511);
 }
 
 void MarbleMapTest::centerOnMercator()
@@ -203,11 +203,11 @@ void MarbleMapTest::centerOnSphericalMinLat_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << -180.0 << -180.001;
-    addRow() <<  -90.0 << -180.001;
-    addRow() <<    0.0 << -180.001;
-    addRow() <<   90.0 << -180.001;
-    addRow() <<  180.0 << -180.001;
+    addRow() << qreal(-180.0) << qreal(-180.001);
+    addRow() <<  qreal(-90.0) << qreal(-180.001);
+    addRow() <<    qreal(0.0) << qreal(-180.001);
+    addRow() <<   qreal(90.0) << qreal(-180.001);
+    addRow() <<  qreal(180.0) << qreal(-180.001);
 }
 
 void MarbleMapTest::centerOnSphericalMinLat()
@@ -230,11 +230,11 @@ void MarbleMapTest::centerOnSphericalMaxLat_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << -180.0 << 180.001;
-    addRow() <<  -90.0 << 180.001;
-    addRow() <<    0.0 << 180.001;
-    addRow() <<   90.0 << 180.001;
-    addRow() <<  180.0 << 180.001;
+    addRow() << qreal(-180.0) << qreal(180.001);
+    addRow() <<  qreal(-90.0) << qreal(180.001);
+    addRow() <<    qreal(0.0) << qreal(180.001);
+    addRow() <<   qreal(90.0) << qreal(180.001);
+    addRow() <<  qreal(180.0) << qreal(180.001);
 }
 
 void MarbleMapTest::centerOnSphericalMaxLat()
@@ -257,11 +257,11 @@ void MarbleMapTest::centerOnEquirectangularMinLat_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << -180.0 << -90.001;
-    addRow() <<  -90.0 << -90.001;
-    addRow() <<    0.0 << -90.001;
-    addRow() <<   90.0 << -90.001;
-    addRow() <<  180.0 << -90.001;
+    addRow() << qreal(-180.0) << qreal(-90.001);
+    addRow() <<  qreal(-90.0) << qreal(-90.001);
+    addRow() <<    qreal(0.0) << qreal(-90.001);
+    addRow() <<   qreal(90.0) << qreal(-90.001);
+    addRow() <<  qreal(180.0) << qreal(-90.001);
 }
 
 void MarbleMapTest::centerOnEquirectangularMinLat()
@@ -284,11 +284,11 @@ void MarbleMapTest::centerOnEquirectangularMaxLat_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << -180.0 << 90.001;
-    addRow() <<  -90.0 << 90.001;
-    addRow() <<    0.0 << 90.001;
-    addRow() <<   90.0 << 90.001;
-    addRow() <<  180.0 << 90.001;
+    addRow() << qreal(-180.0) << qreal(90.001);
+    addRow() <<  qreal(-90.0) << qreal(90.001);
+    addRow() <<    qreal(0.0) << qreal(90.001);
+    addRow() <<   qreal(90.0) << qreal(90.001);
+    addRow() <<  qreal(180.0) << qreal(90.001);
 }
 
 void MarbleMapTest::centerOnEquirectangularMaxLat()
@@ -311,17 +311,17 @@ void MarbleMapTest::centerOnMercatorMinLat_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << -180.0 << -87.0;
-    addRow() <<  -90.0 << -87.0;
-    addRow() <<    0.0 << -87.0;
-    addRow() <<   90.0 << -87.0;
-    addRow() <<  180.0 << -87.0;
+    addRow() << qreal(-180.0) << qreal(-87.0);
+    addRow() <<  qreal(-90.0) << qreal(-87.0);
+    addRow() <<    qreal(0.0) << qreal(-87.0);
+    addRow() <<   qreal(90.0) << qreal(-87.0);
+    addRow() <<  qreal(180.0) << qreal(-87.0);
 
-    addRow() << -180.0 << -90.0;
-    addRow() <<  -90.0 << -90.0;
-    addRow() <<    0.0 << -90.0;
-    addRow() <<   90.0 << -90.0;
-    addRow() <<  180.0 << -90.0;
+    addRow() << qreal(-180.0) << qreal(-90.0);
+    addRow() <<  qreal(-90.0) << qreal(-90.0);
+    addRow() <<    qreal(0.0) << qreal(-90.0);
+    addRow() <<   qreal(90.0) << qreal(-90.0);
+    addRow() <<  qreal(180.0) << qreal(-90.0);
 }
 
 void MarbleMapTest::centerOnMercatorMinLat()
@@ -344,17 +344,17 @@ void MarbleMapTest::centerOnMercatorMaxLat_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << -180.0 << 87.0;
-    addRow() <<  -90.0 << 87.0;
-    addRow() <<    0.0 << 87.0;
-    addRow() <<   90.0 << 87.0;
-    addRow() <<  180.0 << 87.0;
+    addRow() << qreal(-180.0) << qreal(87.0);
+    addRow() <<  qreal(-90.0) << qreal(87.0);
+    addRow() <<    qreal(0.0) << qreal(87.0);
+    addRow() <<   qreal(90.0) << qreal(87.0);
+    addRow() <<  qreal(180.0) << qreal(87.0);
 
-    addRow() << -180.0 << 90.0;
-    addRow() <<  -90.0 << 90.0;
-    addRow() <<    0.0 << 90.0;
-    addRow() <<   90.0 << 90.0;
-    addRow() <<  180.0 << 90.0;
+    addRow() << qreal(-180.0) << qreal(90.0);
+    addRow() <<  qreal(-90.0) << qreal(90.0);
+    addRow() <<    qreal(0.0) << qreal(90.0);
+    addRow() <<   qreal(90.0) << qreal(90.0);
+    addRow() <<  qreal(180.0) << qreal(90.0);
 }
 
 void MarbleMapTest::centerOnMercatorMaxLat()

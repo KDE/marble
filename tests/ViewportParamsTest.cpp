@@ -85,13 +85,13 @@ void ViewportParamsTest::constructorValues_data()
     viewport.setProjection( Equirectangular );
     const AbstractProjection *const equirectangular = viewport.currentProjection();
 
-    addRow() << Spherical << 0. << 0. << 2000 << QSize( 100, 100 );
-    addRow() << Mercator << 0. << 0. << 2000 << QSize( 100, 100 );
-    addRow() << Equirectangular << 0. << 0. << 2000 << QSize( 100, 100 );
+    addRow() << Spherical << qreal(0) << qreal(0) << 2000 << QSize( 100, 100 );
+    addRow() << Mercator << qreal(0) << qreal(0) << 2000 << QSize( 100, 100 );
+    addRow() << Equirectangular << qreal(0) << qreal(0) << 2000 << QSize( 100, 100 );
 
-    addRow() << Spherical << 205. * DEG2RAD << spherical->maxValidLat() + 1.0 << 2000 << QSize( 100, 100 );
-    addRow() << Mercator << 205. * DEG2RAD << mercator->maxValidLat() + 1.0 << 2000 << QSize( 100, 100 );
-    addRow() << Equirectangular << 205. * DEG2RAD << equirectangular->maxValidLat() + 1.0 << 2000 << QSize( 100, 100 );
+    addRow() << Spherical << qreal(205 * DEG2RAD) << spherical->maxValidLat() + qreal(1.0) << 2000 << QSize( 100, 100 );
+    addRow() << Mercator << qreal(205 * DEG2RAD) << mercator->maxValidLat() + qreal(1.0) << 2000 << QSize( 100, 100 );
+    addRow() << Equirectangular << qreal(205 * DEG2RAD) << equirectangular->maxValidLat() + qreal(1.0) << 2000 << QSize( 100, 100 );
 }
 
 void ViewportParamsTest::constructorValues()

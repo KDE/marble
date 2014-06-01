@@ -127,8 +127,8 @@ void TestGeoDataLatLonAltBox::testConstructionFromLatLonBox_data()
     QTest::addColumn<qreal>("minAltitude");
     QTest::addColumn<qreal>("maxAltitude");
 
-    QTest::newRow("deg") << GeoDataLatLonBox(15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree) << 143.0 << 356.0;
-    QTest::newRow("rad") << GeoDataLatLonBox(1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian) << 112.0 << 120.0;
+    QTest::newRow("deg") << GeoDataLatLonBox(15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree) << qreal(143.0) << qreal(356.0);
+    QTest::newRow("rad") << GeoDataLatLonBox(1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian) << qreal(112.0) << qreal(120.0);
 }
 
 void TestGeoDataLatLonAltBox::testConstructionFromLatLonBox()
@@ -191,8 +191,8 @@ void TestGeoDataLatLonAltBox::testAltitude_data()
 {
     QTest::addColumn<qreal>("alt");
 
-    QTest::newRow("Altitude 1") << 27.2;
-    QTest::newRow("Altitude 2") << 0.22;
+    QTest::newRow("Altitude 1") << qreal(27.2);
+    QTest::newRow("Altitude 2") << qreal(0.22);
 }
 
 void TestGeoDataLatLonAltBox::testAltitude() 
@@ -212,8 +212,8 @@ void TestGeoDataLatLonAltBox::testSetNorthRadian_data()
     QTest::addColumn<GeoDataLatLonAltBox>("box");
     QTest::addColumn<qreal>("north");
 
-    QTest::newRow("deg") << GeoDataLatLonAltBox(GeoDataLatLonBox( 15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree), 143.0, 356.0) << 0.1;
-    QTest::newRow("rad") << GeoDataLatLonAltBox(GeoDataLatLonBox( 1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian ), 112.0, 120.0) << 0.1;
+    QTest::newRow("deg") << GeoDataLatLonAltBox(GeoDataLatLonBox( 15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree), 143.0, 356.0) << qreal(0.1);
+    QTest::newRow("rad") << GeoDataLatLonAltBox(GeoDataLatLonBox( 1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian ), 112.0, 120.0) << qreal(0.1);
 }
 
 void TestGeoDataLatLonAltBox::testSetNorthRadian()
@@ -231,8 +231,8 @@ void TestGeoDataLatLonAltBox::testSetSouthRadian_data()
     QTest::addColumn<GeoDataLatLonAltBox>("box");
     QTest::addColumn<qreal>("south");
 
-    QTest::newRow("deg") << GeoDataLatLonAltBox(GeoDataLatLonBox( 15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree), 143.0, 356.0) << 1.4;
-    QTest::newRow("rad") << GeoDataLatLonAltBox(GeoDataLatLonBox( 1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian ), 112.0, 120.0) << 1.4;
+    QTest::newRow("deg") << GeoDataLatLonAltBox(GeoDataLatLonBox( 15.0, 180.0, 90.0, 118.0, GeoDataCoordinates::Degree), 143.0, 356.0) << qreal(1.4);
+    QTest::newRow("rad") << GeoDataLatLonAltBox(GeoDataLatLonBox( 1.0, 2.2, 1.8, 1.4, GeoDataCoordinates::Radian ), 112.0, 120.0) << qreal(1.4);
 }
 
 void TestGeoDataLatLonAltBox::testSetSouthRadian()
@@ -277,20 +277,20 @@ void TestGeoDataLatLonAltBox::testIntersects_data()
     QTest::addColumn<qreal>( "box2maxAltitude" );
     QTest::addColumn<bool>( "intersects" );
 
-    QTest::newRow( "empty1" ) << GeoDataLatLonBox( 0.5, 0.4, 0.3, 0.2 ) << 0.0 << 0.0
-                              << GeoDataLatLonBox() << 0.0 << 0.0
+    QTest::newRow( "empty1" ) << GeoDataLatLonBox( 0.5, 0.4, 0.3, 0.2 ) << qreal(0.0) << qreal(0.0)
+                              << GeoDataLatLonBox() << qreal(0.0) << qreal(0.0)
                               << false;
-    QTest::newRow( "empty2" ) << GeoDataLatLonBox() << 0.0 << 0.0
-                              << GeoDataLatLonBox( 0.5, 0.4, 0.3, 0.2 ) << 0.0 << 0.0
+    QTest::newRow( "empty2" ) << GeoDataLatLonBox() << qreal(0.0) << qreal(0.0)
+                              << GeoDataLatLonBox( 0.5, 0.4, 0.3, 0.2 ) << qreal(0.0) << qreal(0.0)
                               << false;
-    QTest::newRow( "same" ) << GeoDataLatLonBox( 56.0, 40.0, 11.0, 0.0, GeoDataCoordinates::Degree ) << 10.0 << 12.0
-                            << GeoDataLatLonBox( 56.0, 40.0, 11.0, 0.0, GeoDataCoordinates::Degree ) << 10.0 << 12.0
+    QTest::newRow( "same" ) << GeoDataLatLonBox( 56.0, 40.0, 11.0, 0.0, GeoDataCoordinates::Degree ) << qreal(10.0) << qreal(12.0)
+                            << GeoDataLatLonBox( 56.0, 40.0, 11.0, 0.0, GeoDataCoordinates::Degree ) << qreal(10.0) << qreal(12.0)
                             << true;
-    QTest::newRow( "dateLineFalse" ) << GeoDataLatLonBox( 30.0, -30.0,  170.0, -170.0, GeoDataCoordinates::Degree ) << 0.0 << 0.0
-                                     << GeoDataLatLonBox( 30.0, -30.0, -171.0,  171.0, GeoDataCoordinates::Degree ) << 0.0 << 0.0
+    QTest::newRow( "dateLineFalse" ) << GeoDataLatLonBox( 30.0, -30.0,  170.0, -170.0, GeoDataCoordinates::Degree ) << qreal(0.0) << qreal(0.0)
+                                     << GeoDataLatLonBox( 30.0, -30.0, -171.0,  171.0, GeoDataCoordinates::Degree ) << qreal(0.0) << qreal(0.0)
                                      << false;
-    QTest::newRow( "dateLineTrue" ) << GeoDataLatLonBox( 20.0,   0.0,  171.0, -171.0, GeoDataCoordinates::Degree ) << 0.0 << 0.0
-                                    << GeoDataLatLonBox( 30.0, -30.0, -170.0,  170.0, GeoDataCoordinates::Degree ) << 0.0 << 0.0
+    QTest::newRow( "dateLineTrue" ) << GeoDataLatLonBox( 20.0,   0.0,  171.0, -171.0, GeoDataCoordinates::Degree ) << qreal(0.0) << qreal(0.0)
+                                    << GeoDataLatLonBox( 30.0, -30.0, -170.0,  170.0, GeoDataCoordinates::Degree ) << qreal(0.0) << qreal(0.0)
                                     << true;
 }
 
@@ -551,8 +551,8 @@ void TestGeoDataLatLonAltBox::testContainerBox_data() {
     QTest::addColumn<qreal>("lon3");
     QTest::addColumn<qreal>("lat3");
 
-    QTest::newRow("rad1") << 2.4 << 0.1 << 1.0 << 1.2 << -1.8 << -0.7 ;
-    QTest::newRow("rad2") << -1.3 << -0.1 << 0.2 << 1.1 << 2.9 << 0.9 ;
+    QTest::newRow("rad1") << qreal(2.4) << qreal(0.1) << qreal(1.0) << qreal(1.2) << qreal(-1.8) << qreal(-0.7) ;
+    QTest::newRow("rad2") << qreal(-1.3) << qreal(-0.1) << qreal(0.2) << qreal(1.1) << qreal(2.9) << qreal(0.9) ;
 }
 
 void TestGeoDataLatLonAltBox::testContainerBox() {

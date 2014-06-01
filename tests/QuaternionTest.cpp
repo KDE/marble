@@ -37,64 +37,64 @@ void QuaternionTest::testEuler_data()
     QTest::addColumn<qreal>( "yaw" );
     QTest::addColumn<qreal>( "roll" );
 
-    addRow() << 0.0 << 0.0 << 0.0;
+    addRow() << qreal(0.0) << qreal(0.0) << qreal(0.0);
 
-    addRow() << -180.0 << 0.0 << 0.0;
-    addRow() <<  -90.0 << 0.0 << 0.0;
-    addRow() <<   90.0 << 0.0 << 0.0;
-    addRow() <<  180.0 << 0.0 << 0.0;
+    addRow() << qreal(-180.0) << qreal(0.0) << qreal(0.0);
+    addRow() <<  qreal(-90.0) << qreal(0.0) << qreal(0.0);
+    addRow() <<   qreal(90.0) << qreal(0.0) << qreal(0.0);
+    addRow() <<  qreal(180.0) << qreal(0.0) << qreal(0.0);
 
-    addRow() << -180.0 << -90.0 << 0.0;
-    addRow() <<  -90.0 << -90.0 << 0.0;
-    addRow() <<    0.0 << -90.0 << 0.0;
-    addRow() <<   90.0 << -90.0 << 0.0;
-    addRow() <<  180.0 << -90.0 << 0.0;
+    addRow() << qreal(-180.0) << qreal(-90.0) << qreal(0.0);
+    addRow() <<  qreal(-90.0) << qreal(-90.0) << qreal(0.0);
+    addRow() <<    qreal(0.0) << qreal(-90.0) << qreal(0.0);
+    addRow() <<   qreal(90.0) << qreal(-90.0) << qreal(0.0);
+    addRow() <<  qreal(180.0) << qreal(-90.0) << qreal(0.0);
 
-    addRow() << -180.0 << 90.0 << 0.0;
-    addRow() <<  -90.0 << 90.0 << 0.0;
-    addRow() <<    0.0 << 90.0 << 0.0;
-    addRow() <<   90.0 << 90.0 << 0.0;
-    addRow() <<  180.0 << 90.0 << 0.0;
+    addRow() << qreal(-180.0) << qreal(90.0) << qreal(0.0);
+    addRow() <<  qreal(-90.0) << qreal(90.0) << qreal(0.0);
+    addRow() <<    qreal(0.0) << qreal(90.0) << qreal(0.0);
+    addRow() <<   qreal(90.0) << qreal(90.0) << qreal(0.0);
+    addRow() <<  qreal(180.0) << qreal(90.0) << qreal(0.0);
 
-    addRow() << -180.0 << 0.0 << 90.0;
-    addRow() <<  -90.0 << 0.0 << 90.0;
-    addRow() <<   90.0 << 0.0 << 90.0;
-    addRow() <<  180.0 << 0.0 << 90.0;
+    addRow() << qreal(-180.0) << qreal(0.0) << qreal(90.0);
+    addRow() <<  qreal(-90.0) << qreal(0.0) << qreal(90.0);
+    addRow() <<   qreal(90.0) << qreal(0.0) << qreal(90.0);
+    addRow() <<  qreal(180.0) << qreal(0.0) << qreal(90.0);
 
-    addRow() << -180.0 << 0.0 << -90.0;
-    addRow() <<  -90.0 << 0.0 << -90.0;
-    addRow() <<   90.0 << 0.0 << -90.0;
-    addRow() <<  180.0 << 0.0 << -90.0;
+    addRow() << qreal(-180.0) << qreal(0.0) << qreal(-90.0);
+    addRow() <<  qreal(-90.0) << qreal(0.0) << qreal(-90.0);
+    addRow() <<   qreal(90.0) << qreal(0.0) << qreal(-90.0);
+    addRow() <<  qreal(180.0) << qreal(0.0) << qreal(-90.0);
 
 //
 // the following tests currently fail, which should be fixed:
 //
 
-//    addRow() << 10.0 << 20.0 << 30.0;
+//    addRow() << qreal(10.0) << qreal(20.0) << qreal(30.0);
 
-//    addRow() << -180.0 << -89.0 << 90.0;
-//    addRow() <<  -90.0 << -89.0 << 90.0;
-//    addRow() <<    0.0 << -89.0 << 90.0;
-//    addRow() <<   90.0 << -89.0 << 90.0;
-//    addRow() <<  180.0 << -89.0 << 90.0;
+//    addRow() << qreal(-180.0) << qreal(-89.0) << qreal(90.0);
+//    addRow() <<  qreal(-90.0) << qreal(-89.0) << qreal(90.0);
+//    addRow() <<    qreal(0.0) << qreal(-89.0) << qreal(90.0);
+//    addRow() <<   qreal(90.0) << qreal(-89.0) << qreal(90.0);
+//    addRow() <<  qreal(180.0) << qreal(-89.0) << qreal(90.0);
 
-//    addRow() << -180.0 << 89.0 << 90.0;
-//    addRow() <<  -90.0 << 89.0 << 90.0;
-//    addRow() <<    0.0 << 89.0 << 90.0;
-//    addRow() <<   90.0 << 89.0 << 90.0;
-//    addRow() <<  180.0 << 89.0 << 90.0;
+//    addRow() << qreal(-180.0) << qreal(89.0) << qreal(90.0);
+//    addRow() <<  qreal(-90.0) << qreal(89.0) << qreal(90.0);
+//    addRow() <<    qreal(0.0) << qreal(89.0) << qreal(90.0);
+//    addRow() <<   qreal(90.0) << qreal(89.0) << qreal(90.0);
+//    addRow() <<  qreal(180.0) << qreal(89.0) << qreal(90.0);
 
-//    addRow() << -180.0 << -89.0 << -90.0;
-//    addRow() <<  -90.0 << -89.0 << -90.0;
-//    addRow() <<    0.0 << -89.0 << -90.0;
-//    addRow() <<   90.0 << -89.0 << -90.0;
-//    addRow() <<  180.0 << -89.0 << -90.0;
+//    addRow() << qreal(-180.0) << qreal(-89.0) << qreal(-90.0);
+//    addRow() <<  qreal(-90.0) << qreal(-89.0) << qreal(-90.0);
+//    addRow() <<    qreal(0.0) << qreal(-89.0) << qreal(-90.0);
+//    addRow() <<   qreal(90.0) << qreal(-89.0) << qreal(-90.0);
+//    addRow() <<  qreal(180.0) << qreal(-89.0) << qreal(-90.0);
 
-//    addRow() << -180.0 << 89.0 << -90.0;
-//    addRow() <<  -90.0 << 89.0 << -90.0;
-//    addRow() <<    0.0 << 89.0 << -90.0;
-//    addRow() <<   90.0 << 89.0 << -90.0;
-//    addRow() <<  180.0 << 89.0 << -90.0;
+//    addRow() << qreal(-180.0) << qreal(89.0) << qreal(-90.0);
+//    addRow() <<  qreal(-90.0) << qreal(89.0) << qreal(-90.0);
+//    addRow() <<    qreal(0.0) << qreal(89.0) << qreal(-90.0);
+//    addRow() <<   qreal(90.0) << qreal(89.0) << qreal(-90.0);
+//    addRow() <<  qreal(180.0) << qreal(89.0) << qreal(-90.0);
 }
 
 void QuaternionTest::testEuler()
@@ -115,24 +115,24 @@ void QuaternionTest::testSpherical_data()
     QTest::addColumn<qreal>( "lon" );
     QTest::addColumn<qreal>( "lat" );
 
-    addRow() << 0.0 << 0.0;
+    addRow() << qreal(0.0) << qreal(0.0);
 
-    addRow() << -180.0 << 0.0;
-    addRow() <<  -90.0 << 0.0;
-    addRow() <<   90.0 << 0.0;
-    addRow() <<  180.0 << 0.0;
+    addRow() << qreal(-180.0) << qreal(0.0);
+    addRow() <<  qreal(-90.0) << qreal(0.0);
+    addRow() <<   qreal(90.0) << qreal(0.0);
+    addRow() <<  qreal(180.0) << qreal(0.0);
 
-    addRow() << -180.0 << -89.0;
-    addRow() <<  -90.0 << -89.0;
-    addRow() <<    0.0 << -89.0;
-    addRow() <<   90.0 << -89.0;
-    addRow() <<  180.0 << -89.0;
+    addRow() << qreal(-180.0) << qreal(-89.0);
+    addRow() <<  qreal(-90.0) << qreal(-89.0);
+    addRow() <<    qreal(0.0) << qreal(-89.0);
+    addRow() <<   qreal(90.0) << qreal(-89.0);
+    addRow() <<  qreal(180.0) << qreal(-89.0);
 
-    addRow() << -180.0 << 89.0;
-    addRow() <<  -90.0 << 89.0;
-    addRow() <<    0.0 << 89.0;
-    addRow() <<   90.0 << 89.0;
-    addRow() <<  180.0 << 89.0;
+    addRow() << qreal(-180.0) << qreal(89.0);
+    addRow() <<  qreal(-90.0) << qreal(89.0);
+    addRow() <<    qreal(0.0) << qreal(89.0);
+    addRow() <<   qreal(90.0) << qreal(89.0);
+    addRow() <<  qreal(180.0) << qreal(89.0);
 
 //
 // the following cases fail, which should be fixed
@@ -141,17 +141,17 @@ void QuaternionTest::testSpherical_data()
 // bug 285570: animated zooming looks incorrect in globe projection when the earth is upside down
 //
 
-//    addRow() << -180.0 << -179.0;
-//    addRow() <<  -90.0 << -179.0;
-//    addRow() <<    0.0 << -179.0;
-//    addRow() <<   90.0 << -179.0;
-//    addRow() <<  180.0 << -179.0;
+//    addRow() << qreal(-180.0) << qreal(-179.0);
+//    addRow() <<  qreal(-90.0) << qreal(-179.0);
+//    addRow() <<    qreal(0.0) << qreal(-179.0);
+//    addRow() <<   qreal(90.0) << qreal(-179.0);
+//    addRow() <<  qreal(180.0) << qreal(-179.0);
 
-//    addRow() << -180.0 << 179.0;
-//    addRow() <<  -90.0 << 179.0;
-//    addRow() <<    0.0 << 179.0;
-//    addRow() <<   90.0 << 179.0;
-//    addRow() <<  180.0 << 179.0;
+//    addRow() << qreal(-180.0) << qreal(179.0);
+//    addRow() <<  qreal(-90.0) << qreal(179.0);
+//    addRow() <<    qreal(0.0) << qreal(179.0);
+//    addRow() <<   qreal(90.0) << qreal(179.0);
+//    addRow() <<  qreal(180.0) << qreal(179.0);
 }
 
 void QuaternionTest::testSpherical()
