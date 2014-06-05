@@ -8,6 +8,7 @@
 // Copyright 2014      Adam Dabrowski <adamdbrw@gmail.com>
 //
 
+
 #include <MarbleQuickItem.h>
 #include <QPainter>
 #include <QPaintDevice>
@@ -20,66 +21,107 @@
 #include <MarbleLocale.h>
 #include <Planet.h>
 #include <MarbleAbstractPresenter.h>
+#include <AbstractFloatItem.h>
+#include <MarbleInputHandler.h>
 
 namespace Marble
 {
-    //TODO - just a test stub, integrate with MarbleWidgetInputHandler after refactoring it
-    class MarbleQuickInputHandler : public QObject
+    //TODO - move to separate files
+    class QuickItemSelectionRubber : public AbstractSelectionRubber
+    { //TODO: support rubber selection in MarbleQuickItem
+    public:
+        void show() { m_visible = true; }
+        void hide() { m_visible = false; }
+        bool isVisible() const { return m_visible; }
+        const QRect &geometry() const { return m_geometry; }
+        void setGeometry(const QRect &/*geometry*/) {}
+    private:
+        QRect m_geometry;
+        bool m_visible;
+    };
+
+    //TODO - implement missing functionalities
+    class MarbleQuickInputHandler : public MarbleDefaultInputHandler
     {
     public:
-
-        MarbleQuickInputHandler(MarbleAbstractPresenter *marblePresenter) : m_marblePresenter(marblePresenter)
+        MarbleQuickInputHandler(MarbleAbstractPresenter *marblePresenter, MarbleQuickItem *marbleQuick)
+            : MarbleDefaultInputHandler(marblePresenter)
+            ,m_marbleQuick(marbleQuick)
         {
+            setInertialEarthRotationEnabled(false); //Disabled by default, it's buggy. TODO - fix
         }
 
-        bool eventFilter(QObject* object, QEvent* e)
+        bool acceptMouse()
         {
-            if (e->type() == QEvent::KeyPress)
-            {
-                QKeyEvent *keyPressEvent = static_cast<QKeyEvent*>(e);
-                return handleKeyPressEvent(keyPressEvent);
-            }
-            return QObject::eventFilter(object, e);
+            return true;
         }
 
-        bool handleKeyPressEvent(QKeyEvent *event)
-        {
-            FlyToMode mode = Automatic;
-            bool accept = true;
-            switch (event->key())
-            {
-                case Qt::Key_Left:
-                    m_marblePresenter->moveByStep(-1, 0, mode);
-                    break;
-                case Qt::Key_Right:
-                    m_marblePresenter->moveByStep(1, 0, mode);
-                    break;
-                case Qt::Key_Up:
-                    m_marblePresenter->moveByStep(0, -1, mode);
-                    break;
-                case Qt::Key_Down:
-                    m_marblePresenter->moveByStep(0, 1, mode);
-                    break;
-                case Qt::Key_Plus:
-                    m_marblePresenter->zoomIn();
-                    break;
-                case Qt::Key_Minus:
-                    m_marblePresenter->zoomOut();
-                    break;
-                case Qt::Key_Home:
-                    m_marblePresenter->goHome();
-                    break;
-                default:
-                    accept = false;
-                    break;
-            }
-            if (accept)
-                event->accept();
-            return accept;
+        void pinch(QPointF center, qreal scale, Qt::GestureState state)
+        {   //TODO - this whole thing should be moved to MarbleAbstractPresenter
+            (void)handlePinch(center, scale, state);
         }
+
+    private slots:
+        void showLmbMenu(int, int) {}
+        void showRmbMenu(int, int) {}
+        void openItemToolTip() {}
+        void setCursor(const QCursor &cursor)
+        {
+            m_marbleQuick->setCursor(cursor);
+        }
+
+    private slots:
+        void installPluginEventFilter(RenderPlugin *) {}
 
     private:
-        MarbleAbstractPresenter *m_marblePresenter;
+        bool layersEventFilter(QObject *, QEvent *)
+        {
+            return false;
+        }
+
+        //empty - don't check. It would be invalid with quick items
+        void checkReleasedMove(QMouseEvent *) {}
+
+        bool handleTouch(QTouchEvent *event)
+        {
+            if (event->touchPoints().count() > 1)
+            {   //not handling multi-touch at all, let PinchArea or MultiPointTouchArea take care of it
+                return false;
+            }
+
+            if (event->touchPoints().count() == 1)
+            {   //handle - but do not accept. I.e. pinchArea still needs to get this
+                QTouchEvent::TouchPoint p = event->touchPoints().at(0);
+                if (event->type() == QEvent::TouchBegin)
+                {
+                    QMouseEvent press(QMouseEvent::MouseButtonPress, p.pos(),
+                                      Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+                    handleMouseEvent(&press);
+                }
+                else if (event->type() == QEvent::TouchUpdate)
+                {
+                    QMouseEvent move(QMouseEvent::MouseMove, p.pos(),
+                                      Qt::NoButton, Qt::LeftButton, Qt::NoModifier);
+                    handleMouseEvent(&move);
+                }
+                else if (event->type() == QEvent::TouchEnd)
+                {
+                    QMouseEvent release(QMouseEvent::MouseButtonRelease, p.pos(),
+                                      Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+                    handleMouseEvent(&release);
+                }
+            }
+            return false;
+        }
+
+        AbstractSelectionRubber *selectionRubber()
+        {
+            return &m_selectionRubber;
+        }
+
+        MarbleQuickItem *m_marbleQuick;
+        QuickItemSelectionRubber m_selectionRubber;
+        bool m_usePinchArea;
     };
 
     class MarbleQuickItemPrivate : public MarbleAbstractPresenter
@@ -87,7 +129,7 @@ namespace Marble
     public:
         MarbleQuickItemPrivate(MarbleQuickItem *marble) : MarbleAbstractPresenter()
           ,m_marble(marble)
-          ,m_inputHandler(this)
+          ,m_inputHandler(this, marble)
         {
             connect(this, SIGNAL(updateRequired()), m_marble, SLOT(update()));
         }
@@ -102,37 +144,36 @@ namespace Marble
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
       ,d(new MarbleQuickItemPrivate(this))
     {
-        setSize(QSizeF(800, 800));
-        setFocus(true);
+        foreach (AbstractFloatItem *item, d->map()->floatItems())
+        {   //TODO: These are not supported in Marble Quick - need refactoring: show them only in
+            //MarbleWidget, MarbleQuickItem should not have them accessible
+            item->hide();
+        }
 
-        // Initialize the map and forward some signals.
-        d->map()->setSize(width(), height());
-        d->map()->setShowFrameRate(false);
-        d->map()->setProjection(Spherical);
-        d->map()->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
         connect(d->map(), SIGNAL(repaintNeeded(QRegion)), this, SLOT(update()));
+        connect(this, SIGNAL(widthChanged()), this, SLOT(resizeMap()));
+        connect(this, SIGNAL(heightChanged()), this, SLOT(resizeMap()));
 
         setAcceptedMouseButtons(Qt::AllButtons);
         installEventFilter(&d->m_inputHandler);
     }
 
+    void MarbleQuickItem::resizeMap()
+    {
+        const int minWidth = 100;
+        const int minHeight = 100;
+        int newWidth = width() > minWidth ? (int)width() : minWidth;
+        int newHeight = height() > minHeight ? (int)height() : minHeight;
+
+        d->map()->setSize(newWidth, newHeight);
+        update();
+    }
+
     void MarbleQuickItem::paint(QPainter *painter)
-    {   //Simple copy&port of MarbleWidget paintEvent - much to be done here still (TODO)
+    {   //TODO - much to be done here still, i.e paint !enabled version
         QPaintDevice *paintDevice = painter->device();
         QImage image;
         QRect rect = contentsBoundingRect().toRect();
-        if (!isEnabled())
-        {
-            // If the globe covers fully the screen then we can use the faster
-            // RGB32 as there are no translucent areas involved.
-            QImage::Format imageFormat = ( d->map()->viewport()->mapCoversViewport() )
-                                         ? QImage::Format_RGB32
-                                         : QImage::Format_ARGB32_Premultiplied;
-            // Paint to an intermediate image
-            image = QImage(rect.size(), imageFormat);
-            image.fill(Qt::transparent);
-            paintDevice = &image;
-        }
 
         {
             painter->end();
@@ -141,18 +182,6 @@ namespace Marble
             d->map()->paint(geoPainter, rect);
         }
         painter->begin(paintDevice);
-
-        if (!isEnabled())
-        {
-            // Draw a grayscale version of the intermediate image
-            QRgb* pixel = reinterpret_cast<QRgb*>(image.scanLine( 0 ));
-            for (int i=0; i<image.width()*image.height(); ++i, ++pixel) {
-                int gray = qGray(*pixel);
-                *pixel = qRgb(gray, gray, gray);
-            }
-
-            painter->drawImage(rect, image);
-        }
     }
 
     void MarbleQuickItem::classBegin()
@@ -161,5 +190,60 @@ namespace Marble
 
     void MarbleQuickItem::componentComplete()
     {
+    }
+
+    MarbleModel* MarbleQuickItem::model()
+    {
+        return d->model();
+    }
+
+    const MarbleModel* MarbleQuickItem::model() const
+    {
+        return d->model();
+    }
+
+    MarbleMap* MarbleQuickItem::map()
+    {
+        return d->map();
+    }
+
+    const MarbleMap* MarbleQuickItem::map() const
+    {
+        return d->map();
+    }
+
+    void MarbleQuickItem::setZoom(int newZoom, FlyToMode mode)
+    {
+        d->setZoom(newZoom, mode);
+    }
+
+    void MarbleQuickItem::centerOn(const GeoDataPlacemark& placemark, bool animated)
+    {
+        d->centerOn(placemark, animated);
+    }
+
+    void MarbleQuickItem::goHome()
+    {
+        d->goHome();
+    }
+
+    void MarbleQuickItem::zoomIn(FlyToMode mode)
+    {
+        d->zoomIn(mode);
+    }
+
+    void MarbleQuickItem::zoomOut(FlyToMode mode)
+    {
+        d->zoomOut(mode);
+    }
+
+    QObject *MarbleQuickItem::getEventFilter() const
+    {   //We would want to install the same event filter for abstract layer QuickItems such as PinchArea
+        return &d->m_inputHandler;
+    }
+
+    void MarbleQuickItem::pinch(QPointF center, qreal scale, Qt::GestureState state)
+    {
+        d->m_inputHandler.pinch(center, scale, state);
     }
 }

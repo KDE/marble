@@ -7,118 +7,46 @@
 //
 // Copyright 2005-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-//
-
-//
-// The MarbleWidgetInputHandler handles mouse and keyboard input.
+// Copyright 2014      Adam Dabrowski <adamdbrw@gmail.com>
 //
 
 #ifndef MARBLE_MARBLEWIDGETINPUTHANDLER_H
 #define MARBLE_MARBLEWIDGETINPUTHANDLER_H
 
 #include <QObject>
-#include <QString>
-
-#include "marble_export.h"
-
-class QEvent;
-class QRubberBand;
-class QTimer;
+#include <QSharedPointer>
+#include "MarbleInputHandler.h"
 
 namespace Marble
 {
 
-class MarbleModel;
 class MarbleWidget;
-class MarbleWidgetPopupMenu;
-class AbstractDataPluginItem;
 class RenderPlugin;
+class MarbleWidgetInputHandlerPrivate;
 
-class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
+class MarbleWidgetInputHandler : public MarbleDefaultInputHandler
 {
     Q_OBJECT
 
- public:
-    explicit MarbleWidgetInputHandler( MarbleWidget* );
-    virtual ~MarbleWidgetInputHandler();
+public:
+    MarbleWidgetInputHandler(MarbleAbstractPresenter *marblePresenter, MarbleWidget *marbleWidget);
 
-    void setPositionSignalConnected( bool connected );
-    bool isPositionSignalConnected() const;
-
-    /**
-     * @brief  Set whether a popup menu appears on a click (not drag) with the left mouse button
-     * @param  enabled True to enable the popup menu (default), false to disable it
-     */
-    void setMouseButtonPopupEnabled( Qt::MouseButton mouseButton, bool enabled );
-
-    /**
-     * @brief  Return whether the left mouse button popup menu is active
-     * @return True iff a popup menu is shown on left mouse button clicks
-     */
-    bool isMouseButtonPopupEnabled( Qt::MouseButton mouseButton ) const;
-
-    void setPanViaArrowsEnabled( bool enabled );
-
-    bool panViaArrowsEnabled() const;
-
-    void setInertialEarthRotationEnabled( bool enabled );
-
-    /**
-     * @brief Returns true iff dragging the map with the mouse keeps spinning
-     * in the chosen direction for a slightly longer time than the mouse is
-     * actually performing the drag operation
-     */
-    bool inertialEarthRotationEnabled() const;
-
- Q_SIGNALS:
-    // Mouse button menus
-    void lmbRequest( int, int );
-    void rmbRequest( int, int );
-
-    //Gps coordinates
-    void mouseClickScreenPosition( int, int );
-    void mouseMoveGeoPosition( QString );
-
- protected Q_SLOTS:
-    void restoreViewContext();
-    void installPluginEventFilter( RenderPlugin *renderPlugin );
-
- protected:
-    class Protected;
-    Protected * const d;
-
- private:
-    Q_DISABLE_COPY( MarbleWidgetInputHandler )
-};
-
-
-
-class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
-{
-    Q_OBJECT
-
- public:
-    explicit MarbleWidgetDefaultInputHandler( MarbleWidget* );
-    ~MarbleWidgetDefaultInputHandler();
-
-    static bool keyEvent( MarbleWidget * widget, QEvent* e );
-
- protected:
-    bool eventFilter( QObject *, QEvent * );
-
- private Q_SLOTS:
-    void showLmbMenu( int, int );
-
-    void showRmbMenu( int, int );
-
+private slots:
+    void installPluginEventFilter(RenderPlugin *renderPlugin);
+    void showLmbMenu(int x, int y);
+    void showRmbMenu(int x, int y);
     void openItemToolTip();
+    void setCursor(const QCursor &cursor);
 
-    void lmbTimeout();
+private:
+    AbstractSelectionRubber *selectionRubber();
+    bool layersEventFilter(QObject *o, QEvent *e);
 
- private:
-    Q_DISABLE_COPY( MarbleWidgetDefaultInputHandler )
-    class Private;
-    Private * const d;
+    typedef QSharedPointer<MarbleWidgetInputHandlerPrivate> MarbleWidgetInputHandlerPrivatePtr;
+    MarbleWidgetInputHandlerPrivatePtr d;
+    friend class MarbleWidgetInputHandlerPrivate;
+
+    Q_DISABLE_COPY(MarbleWidgetInputHandler)
 };
 
 }

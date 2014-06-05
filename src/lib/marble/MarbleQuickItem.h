@@ -13,11 +13,13 @@
 
 #include <QSharedPointer>
 #include <QQuickPaintedItem>
+#include "GeoDataPlacemark.h"
 #include "MarbleGlobal.h"
 
 namespace Marble
 {
     class MarbleModel;
+    class MarbleMap;
     class MarbleQuickItemPrivate;
 
     //Class is still being developed
@@ -28,6 +30,14 @@ namespace Marble
     public:
         MarbleQuickItem(QQuickItem *parent = 0);
 
+    public slots:
+        void goHome();
+        void setZoom(int zoom, FlyToMode mode = Instant);
+        void centerOn(const GeoDataPlacemark& placemark, bool animated = false);
+
+        void zoomIn(FlyToMode mode = Automatic);
+        void zoomOut(FlyToMode mode = Automatic);
+
     // QQuickPaintedItem interface
     public:
         void paint(QPainter *painter);
@@ -36,6 +46,19 @@ namespace Marble
     public:
         void classBegin();
         void componentComplete();
+
+    protected:
+        MarbleModel* model();
+        const MarbleModel* model() const;
+
+        MarbleMap* map();
+        const MarbleMap* map() const;
+
+        QObject *getEventFilter() const;
+        void pinch(QPointF center, qreal scale, Qt::GestureState state);
+
+    private slots:
+        void resizeMap();
 
     private:
         typedef QSharedPointer<MarbleQuickItemPrivate> MarbleQuickItemPrivatePtr;

@@ -10,10 +10,11 @@
 // Copyright 2014      Adam Dabrowski <adamdbrw@gmail.com>
 //
 
-#ifndef MARBLEPRESENTER_H
-#define MARBLEPRESENTER_H
+#ifndef MARBLEABSTRACTPRESENTER_H
+#define MARBLEABSTRACTPRESENTER_H
 
 #include <QSharedPointer>
+#include <QList>
 #include "GeoDataLookAt.h"
 #include "GeoDataLatLonBox.h"
 #include "MarbleMap.h"
@@ -30,6 +31,12 @@ namespace Marble
         void zoomChanged(int zoom);
         void distanceChanged(const QString& distanceString);
         void updateRequired();
+
+        /** This signal is emitted when a new rectangle region is selected over the map
+        *  The list of double values includes coordinates in degrees using the following:
+        *  lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
+        */
+        void regionSelected(const QList<double>&);
 
     public:
         MarbleAbstractPresenter();
@@ -51,7 +58,7 @@ namespace Marble
           * @param stepsDown Number of steps to go down. Negative values go up.
           * @param mode Interpolation mode to use when traveling to the target
           */
-        void moveByStep(int stepsRight, int stepsDown, FlyToMode mode);
+        void moveByStep(int stepsRight, int stepsDown, FlyToMode mode = Automatic);
 
         int polarity() const;
         int zoom() const;
@@ -90,7 +97,7 @@ namespace Marble
         const ViewportParams* viewport() const;
 
     public slots:
-        void rotateBy(const qreal deltaLon, const qreal deltaLat, FlyToMode mode);
+        void rotateBy(const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant);
         void flyTo(const GeoDataLookAt &newLookAt, FlyToMode mode = Automatic);
         void goHome(FlyToMode mode = Automatic);
 
@@ -112,6 +119,7 @@ namespace Marble
         void setAnimationsEnabled(bool enabled);
         void setRadius(int radius);
         void setDistance(qreal newDistance);
+        void setSelection(const QRect& region);
 
     private:
         //MarbleAbstractPresenter owns these
@@ -127,4 +135,4 @@ namespace Marble
 }
 
 
-#endif // MARBLEPRESENTER_H
+#endif // MARBLEABSTRACTPRESENTER_H

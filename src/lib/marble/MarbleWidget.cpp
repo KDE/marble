@@ -114,6 +114,9 @@ class MarbleWidgetPrivate : public MarbleAbstractPresenter
 
     void updateMapTheme();
 
+    void setInputHandler();
+    void setInputHandler( MarbleWidgetInputHandler *handler );
+
     /**
       * @brief Update widget flags and cause a full repaint
       *
@@ -186,6 +189,8 @@ void MarbleWidgetPrivate::construct()
     map()->setShowFrameRate( false );  // never let the map draw the frame rate,
                                        // we do this differently here in the widget
 
+    m_widget->connect(this, SIGNAL(regionSelected(QList<double>)), m_widget, SIGNAL(regionSelected(QList<double>)));
+
     m_widget->connect(this, SIGNAL(updateRequired()),
                       m_widget, SLOT(update()));
     m_widget->connect(this, SIGNAL(zoomChanged(int)), m_widget, SIGNAL(zoomChanged(int)));
@@ -236,10 +241,32 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_mapInfoDialog, SIGNAL(repaintNeeded()), m_widget, SLOT(update()) );
     map()->addLayer( m_mapInfoDialog );
 
-    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler( m_widget ) );
+    setInputHandler();
     m_widget->setMouseTracking( true );
 
     map()->addLayer( &m_customPaintLayer );
+}
+
+void MarbleWidgetPrivate::setInputHandler()
+{
+    setInputHandler(new MarbleWidgetInputHandler(this, m_widget));
+}
+
+void MarbleWidgetPrivate::setInputHandler( MarbleWidgetInputHandler *handler )
+{
+    delete m_inputhandler;
+    m_inputhandler = handler;
+
+    if ( m_inputhandler )
+    {
+        m_widget->installEventFilter( m_inputhandler );
+
+        connect( m_inputhandler, SIGNAL(mouseClickScreenPosition(int,int)),
+               m_widget,       SLOT(notifyMouseClick(int,int)) );
+
+        connect( m_inputhandler, SIGNAL(mouseMoveGeoPosition(QString)),
+                 m_widget,       SIGNAL(mouseMoveGeoPosition(QString)) );
+    }
 }
 
 void MarbleWidgetPrivate::updateSystemBackgroundAttribute()
@@ -281,18 +308,7 @@ MarbleWidgetPopupMenu *MarbleWidget::popupMenu()
 
 void MarbleWidget::setInputHandler( MarbleWidgetInputHandler *handler )
 {
-    delete d->m_inputhandler;
-    d->m_inputhandler = handler;
-
-    if ( d->m_inputhandler ) {
-        installEventFilter( d->m_inputhandler );
-
-        connect( d->m_inputhandler, SIGNAL(mouseClickScreenPosition(int,int)),
-                 this,              SLOT(notifyMouseClick(int,int)) );
-
-        connect( d->m_inputhandler, SIGNAL(mouseMoveGeoPosition(QString)),
-                 this,              SIGNAL(mouseMoveGeoPosition(QString)) );
-    }
+    d->setInputHandler(handler);
 }
 
 MarbleWidgetInputHandler *MarbleWidget::inputHandler() const
@@ -1033,23 +1049,7 @@ void MarbleWidget::setDefaultFont( const QFont& font )
 
 void MarbleWidget::setSelection( const QRect& region )
 {
-    QPoint tl = region.topLeft();
-    QPoint br = region.bottomRight();
-    mDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") (" 
-             << br.x() << ", " << br.y() << ")" << endl;
-
-    GeoDataLatLonAltBox box  = viewport()->latLonAltBox( region );
-
-    // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)
-    // as left/top, right/bottom rectangle.
-    QList<double> coordinates;
-    coordinates << box.west( GeoDataCoordinates::Degree ) << box.north( GeoDataCoordinates::Degree )
-                << box.east( GeoDataCoordinates::Degree ) << box.south( GeoDataCoordinates::Degree );
-
-    mDebug() << "West: " << coordinates[0] << " North: " <<  coordinates[1]
-             << " East: " << coordinates[2] << " South: " << coordinates[3] << endl;
-
-    emit regionSelected( coordinates );
+    d->setSelection(region);
 }
 
 qreal MarbleWidget::distance() const
@@ -1073,7 +1073,7 @@ void MarbleWidget::setInputEnabled( bool enabled )
     if ( enabled )
     {
         if ( !d->m_inputhandler ) {
-            setInputHandler( new MarbleWidgetDefaultInputHandler( this ) );
+            d->setInputHandler();
         }
         else {
             installEventFilter( d->m_inputhandler );

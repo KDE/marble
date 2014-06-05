@@ -100,6 +100,7 @@ set(marblewidget_SRCS
     MarbleNavigator.cpp
     MarbleLegendBrowser.cpp
     MarbleAboutDialog.cpp
+    MarbleInputHandler.cpp
     MarbleWidgetInputHandler.cpp
     MarbleWidgetPopupMenu.cpp
     MarblePlacemarkModel.cpp
@@ -423,6 +424,7 @@ install( FILES
     AbstractFloatItem.h
     MapThemeManager.h
     MarbleAboutDialog.h
+    MarbleInputHandler.h
     MarbleWidgetInputHandler.h
     MarbleWidgetPopupMenu.h
     TileId.h

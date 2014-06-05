@@ -585,6 +585,27 @@ namespace Marble
         setRadius(newRadius);
     }
 
+    void MarbleAbstractPresenter::setSelection(const QRect& region)
+    {
+        QPoint tl = region.topLeft();
+        QPoint br = region.bottomRight();
+        mDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") ("
+            << br.x() << ", " << br.y() << ")" << endl;
+
+         GeoDataLatLonAltBox box = viewport()->latLonAltBox(region);
+
+         // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)
+         // as left/top, right/bottom rectangle.
+         QList<double> coordinates;
+         coordinates << box.west(GeoDataCoordinates::Degree) << box.north(GeoDataCoordinates::Degree)
+                     << box.east(GeoDataCoordinates::Degree) << box.south(GeoDataCoordinates::Degree);
+
+         mDebug() << "West: " << coordinates[0] << " North: " <<  coordinates[1]
+                  << " East: " << coordinates[2] << " South: " << coordinates[3] << endl;
+
+         emit regionSelected(coordinates);
+     }
+
 }
 
 #include "MarbleAbstractPresenter.moc"
