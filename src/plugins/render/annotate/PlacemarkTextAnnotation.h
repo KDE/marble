@@ -26,16 +26,17 @@ public:
     explicit PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
     ~PlacemarkTextAnnotation();
 
-    //GeoGraphicsItem
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
 
-    //TextAnnotation
+    virtual const char *graphicType() const;
 
 private:
     GeoWidgetBubble *bubble;
 
 protected:
     virtual bool mousePressEvent( QMouseEvent *event );
+    virtual bool mouseMoveEvent( QMouseEvent *event );
+    virtual bool mouseReleaseEvent( QMouseEvent *event );
 };
 
 }

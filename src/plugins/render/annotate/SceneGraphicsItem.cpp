@@ -10,10 +10,8 @@
 //
 
 #include "SceneGraphicsItem.h"
-
 #include "GeoDataPlacemark.h"
 
-#include <QVariant>
 
 namespace Marble
 {
@@ -35,6 +33,16 @@ QList<QRegion> SceneGraphicsItem::regions() const
     return m_regions;
 }
 
+void SceneGraphicsItem::setRegions( const QList<QRegion> &regions )
+{
+    m_regions = regions;
+}
+
+const GeoDataPlacemark *SceneGraphicsItem::placemark() const
+{
+    return m_placemark;
+}
+
 GeoDataPlacemark *SceneGraphicsItem::placemark()
 {
     return m_placemark;
@@ -43,41 +51,16 @@ GeoDataPlacemark *SceneGraphicsItem::placemark()
 bool SceneGraphicsItem::sceneEvent( QEvent *event )
 {
     if( event->type() == QEvent::MouseButtonPress ) {
-        return mousePressEvent( static_cast<QMouseEvent*>( event ));
+        return mousePressEvent( static_cast<QMouseEvent*>( event ) );
     }
     if( event->type() == QEvent::MouseMove ) {
-        return mouseMoveEvent( static_cast<QMouseEvent*>( event ));
+        return mouseMoveEvent( static_cast<QMouseEvent*>( event ) );
     }
     if( event->type() == QEvent::MouseButtonRelease ) {
-        return mouseReleaseEvent( static_cast<QMouseEvent*>( event ));
+        return mouseReleaseEvent( static_cast<QMouseEvent*>( event ) );
     }
 
     return false;
-}
-
-bool SceneGraphicsItem::mousePressEvent( QMouseEvent* event )
-{
-    Q_UNUSED( event )
-    //FIXME re-implement the whole ItemIsSelectable and call an
-    //Item Change
-    return false;
-}
-
-bool SceneGraphicsItem::mouseMoveEvent( QMouseEvent *event )
-{
-    Q_UNUSED( event )
-    return false;
-}
-
-bool SceneGraphicsItem::mouseReleaseEvent( QMouseEvent *event )
-{
-    Q_UNUSED( event )
-    return false;
-}
-
-void SceneGraphicsItem::setRegions( const QList<QRegion>& regions )
-{
-    m_regions = regions;
 }
 
 }

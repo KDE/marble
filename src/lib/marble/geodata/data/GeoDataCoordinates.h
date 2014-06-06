@@ -243,6 +243,14 @@ class GEODATA_EXPORT GeoDataCoordinates
     qreal bearing( const GeoDataCoordinates &other, Unit unit = Radian, BearingType type = InitialBearing ) const;
 
     /**
+     * @brief Returns the coordinates of the resulting point after moving this point
+     * according to the distance and bearing parameters
+     * @param bearing the same as above
+     * @param distance the distance on a unit sphere
+     */
+    GeoDataCoordinates moveByBearing( qreal bearing, qreal distance ) const;
+
+    /**
     * @brief return a Quaternion with the used coordinates
     */
     const Quaternion &quaternion() const;

@@ -18,7 +18,9 @@
 #include "SceneGraphicsItem.h"
 #include "GeoDataLatLonBox.h"
 #include "GeoDataGroundOverlay.h"
+#include "GeoDataPolygon.h"
 #include "GroundOverlayFrame.h"
+#include "AreaAnnotation.h"
 
 #include <QObject>
 #include <QErrorMessage>
@@ -83,11 +85,11 @@ public:
 
     virtual QString runtimeTrace() const;
 
-    virtual const QList<QActionGroup*>* actionGroups() const;
-    virtual const QList<QActionGroup*>* toolbarActionGroups() const;
+    virtual const QList<QActionGroup*> *actionGroups() const;
+    virtual const QList<QActionGroup*> *toolbarActionGroups() const;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos, GeoSceneLayer * layer = 0 );
+                 const QString &renderPos, GeoSceneLayer *layer = 0 );
 
 signals:
     void placemarkAdded();
@@ -99,6 +101,7 @@ public slots:
 
     void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );
+    void setAddingPolygonHole( bool );
     void setAddingOverlay( bool );
     void setRemovingItems( bool );
 
@@ -115,19 +118,28 @@ public slots:
 private slots:
     void editOverlay();
     void removeOverlay();
+    void removePolygon();
+    void selectNode();
+    void deleteNode();
+    void unselectNodes();
+    void deleteSelectedNodes();
     void updateOverlayFrame( GeoDataGroundOverlay *overlay );
 
 
 protected:
-    bool eventFilter(QObject* watched, QEvent* event);
+    bool eventFilter( QObject *watched, QEvent *event );
 
 private:
-    void setupActions(MarbleWidget* m);
+    void setupActions( MarbleWidget *marbleWidget );
     void setupGroundOverlayModel();
     void setupOverlayRmbMenu();
+    void setupPolygonRmbMenu();
+    void setupNodeRmbMenu();
     //    void readOsmFile( QIODevice* device, bool flyToFile );
 
     void showOverlayRmbMenu( GeoDataGroundOverlay *overlay, qreal x, qreal y );
+    void showPolygonRmbMenu( AreaAnnotation *selectedArea, qreal x, qreal y );
+    void showNodeRmbMenu( AreaAnnotation *area, qreal x, qreal y );
     void displayOverlayEditDialog( GeoDataGroundOverlay *overlay );
     void displayOverlayFrame( GeoDataGroundOverlay *overlay );
     void clearOverlayFrames();
@@ -136,7 +148,10 @@ private:
     bool m_widgetInitialized;
     MarbleWidget *m_marbleWidget;
 
-    QMenu*                  m_overlayRmbMenu;
+    QMenu *m_overlayRmbMenu;
+    QMenu *m_polygonRmbMenu;
+    QMenu *m_nodeRmbMenu;
+
     QList<QActionGroup*>    m_actions;
     QList<QActionGroup*>    m_toolbarActions;
     QSortFilterProxyModel   m_groundOverlayModel;
@@ -145,16 +160,18 @@ private:
     GeoDataDocument*          m_annotationDocument;
     QList<SceneGraphicsItem*> m_graphicsItems;
 
-    // used while creating new polygons
-    GeoDataPlacemark     *m_polygon_placemark;
+    GeoDataPlacemark     *m_polygonPlacemark;
     SceneGraphicsItem    *m_selectedItem;
     GeoDataGroundOverlay *m_rmbOverlay;
+    AreaAnnotation       *m_rmbSelectedArea;
+    GeoDataPolygon       *m_holedPolygon;
 
     //    QNetworkAccessManager* m_networkAccessManager;
     //    QErrorMessage m_errorMessage;
 
     bool m_addingPlacemark;
     bool m_drawingPolygon;
+    bool m_addingPolygonHole;
     bool m_addingOverlay;
     bool m_removingItem;
     bool m_isInitialized;

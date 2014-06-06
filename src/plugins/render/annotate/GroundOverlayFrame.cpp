@@ -14,6 +14,8 @@
 #include "GeoDataTypes.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
+#include "SceneGraphicsTypes.h"
+
 
 namespace Marble
 {
@@ -35,13 +37,12 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
 
     painter->save();
     painter->setBrush( Oxygen::aluminumGray4 );
-    if( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+    if ( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing &ring = polygon->outerBoundary();
-        for( int i=0; i< ring.size(); ++i ) {
+        for ( int i = 0; i < ring.size(); ++i ) {
             regionList.append( painter->regionFromEllipse( ring.at(i), 10, 10 ) );
         }
-        regionList.append( painter->regionFromPolygon( ring, Qt::OddEvenFill ) );
         regionList.append( painter->regionFromPolygon( ring, Qt::OddEvenFill ) );
     }
     painter->restore();
@@ -51,9 +52,10 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
 bool GroundOverlayFrame::mousePressEvent( QMouseEvent *event )
 {
     QList<QRegion> regionList = regions();
-    // react to all ellipse point markers and skip the polygon
-    for( int i=0; i< regionList.size()-1; ++i ) {
-        if( regionList.at(i).contains( event->pos()) ) {
+
+    // React to all ellipse as well as to the polygon.
+    for ( int i = 0; i < regionList.size(); ++i ) {
+        if ( regionList.at(i).contains( event->pos() ) ) {
             m_movedPoint = i;
 
             qreal lon, lat;
@@ -71,10 +73,10 @@ bool GroundOverlayFrame::mousePressEvent( QMouseEvent *event )
 
 bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
 {
-    if( !m_viewport
-        || m_movedPoint < 0 ) {
+    if( !m_viewport || m_movedPoint < 0 ) {
         return false;
     }
+
     if( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         qreal lon, lat;
         m_viewport->geoCoordinates( event->pos().x(),
@@ -125,7 +127,7 @@ bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
 
 bool GroundOverlayFrame::mouseReleaseEvent( QMouseEvent *event )
 {
-    Q_UNUSED(event);
+    Q_UNUSED( event );
 
     m_movedPoint = -1;
     m_textureLayer->reset();
@@ -184,6 +186,11 @@ void GroundOverlayFrame::rotateAroundCenter( qreal lon, qreal lat, qreal &rotate
     rotatedLat = ( lon - centerLon ) * sinRotation + ( lat - centerLat ) * cosRotation + centerLat;
 
     GeoDataCoordinates::normalizeLonLat( rotatedLon, rotatedLat );
+}
+
+const char *GroundOverlayFrame::graphicType() const
+{
+    return SceneGraphicTypes::SceneGraphicGroundOverlay;
 }
 
 }

@@ -20,8 +20,10 @@
 #include "ViewportParams.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "SceneGraphicsTypes.h"
 
 #include <QPixmap>
+
 
 namespace Marble
 {
@@ -47,7 +49,7 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *
     bool visible = viewport->currentProjection()->screenCoordinates( placemark()->coordinate(), viewport, x, y, hidden );
 
     QList<QRegion> list;
-    list.append( QRegion( x -10 , y-10 , 20 , 20 ) );
+    list.append( QRegion( x -10 , y -10 , 20 , 20 ) );
     setRegions( list );
 
     if( visible && !hidden ) {
@@ -58,11 +60,29 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *
     }
 }
 
+const char *PlacemarkTextAnnotation::graphicType() const
+{
+    return SceneGraphicTypes::SceneGraphicPlacemark;
+}
+
 bool PlacemarkTextAnnotation::mousePressEvent( QMouseEvent* event )
 {
-    Q_UNUSED(event);
+    Q_UNUSED( event );
     bubble->setHidden( !bubble->isHidden() );
     return true;
 }
+
+bool PlacemarkTextAnnotation::mouseMoveEvent( QMouseEvent *event )
+{
+    Q_UNUSED( event );
+    return true;
+}
+
+bool PlacemarkTextAnnotation::mouseReleaseEvent( QMouseEvent *event )
+{
+    Q_UNUSED( event );
+    return true;
+}
+
 
 }

@@ -23,11 +23,6 @@ class GroundOverlayFrame : public SceneGraphicsItem
 public:
     GroundOverlayFrame( GeoDataPlacemark *placemark, GeoDataGroundOverlay *overlay, TextureLayer *textureLayer );
 
-    virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
-    virtual bool mousePressEvent( QMouseEvent *event );
-    virtual bool mouseMoveEvent( QMouseEvent *event );
-    virtual bool mouseReleaseEvent( QMouseEvent *event );
-
     enum MovedRegion {
         NorthWest,
         SouthWest,
@@ -36,9 +31,17 @@ public:
         Polygon
     };
 
+    virtual const char *graphicType() const;
+
     void update();
 
 private:
+    virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
+    virtual bool mousePressEvent( QMouseEvent *event );
+    virtual bool mouseMoveEvent( QMouseEvent *event );
+    virtual bool mouseReleaseEvent( QMouseEvent *event );
+
+
     int m_movedPoint;
     GeoDataCoordinates m_movedPointCoordinates;
     GeoDataGroundOverlay *m_overlay;

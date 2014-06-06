@@ -1223,6 +1223,16 @@ qreal GeoDataCoordinates::bearing( const GeoDataCoordinates &other, Unit unit, B
     return unit == Radian ? bearing : bearing * RAD2DEG;
 }
 
+GeoDataCoordinates GeoDataCoordinates::moveByBearing( qreal bearing, qreal distance ) const
+{
+    qreal newLat = asin( sin(d->m_lat) * cos(distance) +
+                         cos(d->m_lat) * sin(distance) * cos(bearing) );
+    qreal newLon = d->m_lon + atan2( sin(bearing) * sin(distance) * cos(d->m_lat),
+                                     cos(distance) - sin(d->m_lat) * sin(newLat) );
+
+    return GeoDataCoordinates( newLon, newLat );
+}
+
 const Quaternion& GeoDataCoordinates::quaternion() const
 {
     return d->m_q;
