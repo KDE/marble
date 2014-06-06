@@ -297,6 +297,11 @@ QString RoutingInstruction::nextDistanceInstruction() const
         distanceUnit = "mi";
         length /= 1000.0;
         length /= 1.609344;
+        if ( length < 0.1 ) {
+            length = 10 * qRound( length * 528 );
+            precision = 0;
+            distanceUnit = "ft";
+        }
     } else {
         if ( length >= 1000 ) {
             length /= 1000;
