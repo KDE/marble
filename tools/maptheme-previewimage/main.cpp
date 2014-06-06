@@ -9,6 +9,8 @@
 //
 
 #include <MarbleWidget.h>
+#include <MarbleModel.h>
+#include <GeoDataTreeModel.h>
 #include <RenderPlugin.h>
 
 #include <QDebug>
@@ -17,8 +19,11 @@
 #include <QPainter>
 #include <QProcess>
 #include <QDir>
+#include <QThread>
 
 using namespace Marble;
+
+class Cheeeeze : private QThread { public: using QThread::msleep; };
 
 QPixmap resize(const QPixmap &pixmap)
 {
@@ -66,6 +71,13 @@ int main(int argc, char** argv)
     QPixmap canvas( ":/canvas.png" );
     Q_ASSERT(!canvas.isNull());
     QPainter globePainter( &canvas );
+
+    // Hack: Wait up to ten seconds for six documents to be parsed.
+    // We need proper load progress signalization in Marble
+    for ( int i=0; i<400 && mapWidget->model()->treeModel()->rowCount() < 6; ++i ) {
+        Cheeeeze::msleep( 25 );
+        app.processEvents();
+    }
     QPixmap const globe = QPixmap::grabWidget( mapWidget );
     globePainter.drawPixmap( QPoint( 2, 2 ), resize( globe ) );
     globePainter.end();
