@@ -15,7 +15,7 @@ XmlListModel {
     property real west
 
     function update() {
-      source =  "http://ws.geonames.org/earthquakes?style=full"
+      source =  "http://ws.geonames.org/earthquakes?username=marble&style=full"
                  + "&north=" + north
                  + "&south=" + south
                  +  "&east=" + east
