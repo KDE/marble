@@ -21,7 +21,7 @@
 namespace Marble {
 
 class MarbleModel;
-class GeoDataLatLonAltBox;
+class GeoDataLatLonBox;
 
 /**
   * Parse result of a user's search term
@@ -40,7 +40,7 @@ public:
         DistanceFormat /// display results with distance information
     };
 
-    DatabaseQuery( const MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
+    DatabaseQuery( const MarbleModel* model, const QString &searchTerm, const GeoDataLatLonBox &preferred );
 
     QueryType queryType() const;
 

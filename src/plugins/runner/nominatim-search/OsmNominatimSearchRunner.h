@@ -33,7 +33,7 @@ public:
 
     ~OsmNominatimRunner();
 
-    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
+    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred );
 
 private Q_SLOTS:
     // Forward a result to the search or reverse geocoding handler

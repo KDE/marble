@@ -22,7 +22,7 @@
 namespace Marble
 {
 
-class GeoDataLatLonAltBox;
+class GeoDataLatLonBox;
 class GeoDataPlacemark;
 class MarbleModel;
 class RouteRequest;
@@ -45,7 +45,7 @@ public:
      * If implemented in a plugin, make sure to include Search in the
      * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
      */
-    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) = 0;
+    virtual void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) = 0;
 
 Q_SIGNALS:
     /**

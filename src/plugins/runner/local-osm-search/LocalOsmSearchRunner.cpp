@@ -96,7 +96,7 @@ LocalOsmSearchRunner::~LocalOsmSearchRunner()
 }
 
 
-void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred )
+void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLonBox &preferred )
 {
     const DatabaseQuery userQuery( model(), searchTerm, preferred );
 

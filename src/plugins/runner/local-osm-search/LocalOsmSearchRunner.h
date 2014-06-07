@@ -31,7 +31,7 @@ public:
 
     ~LocalOsmSearchRunner();
 
-    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
+    virtual void search( const QString &searchTerm, const GeoDataLatLonBox &preferred );
 
 private:
     OsmDatabase m_database;

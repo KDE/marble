@@ -40,7 +40,7 @@ void HostipRunner::slotNoResults()
     emit searchFinished( QVector<GeoDataPlacemark*>() );
 }
 
-void HostipRunner::search( const QString &searchTerm, const GeoDataLatLonAltBox & )
+void HostipRunner::search( const QString &searchTerm, const GeoDataLatLonBox & )
 {
     if( !searchTerm.contains('.') ) {
         // Simple IP/hostname heuristic to avoid requests not needed:

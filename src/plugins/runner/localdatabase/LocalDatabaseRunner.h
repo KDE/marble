@@ -13,8 +13,6 @@
 
 #include "SearchRunner.h"
 
-#include <QString>
-
 namespace Marble
 {
 
@@ -24,8 +22,8 @@ class LocalDatabaseRunner : public SearchRunner
 public:
     explicit LocalDatabaseRunner(QObject *parent = 0);
     ~LocalDatabaseRunner();
-    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
 
+    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred );
 };
 
 }

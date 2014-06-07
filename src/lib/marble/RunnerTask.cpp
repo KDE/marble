@@ -27,7 +27,7 @@
 namespace Marble
 {
 
-SearchTask::SearchTask( SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
+SearchTask::SearchTask( SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model, const QString &searchTerm, const GeoDataLatLonBox &preferred ) :
     QObject(),
     m_runner( runner ),
     m_searchTerm( searchTerm ),

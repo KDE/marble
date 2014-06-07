@@ -42,7 +42,7 @@ private Q_SLOTS:
     // No results (or an error)
     void slotNoResults();
 
-    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
+    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred );
 
 private:
     QHostInfo m_hostInfo;

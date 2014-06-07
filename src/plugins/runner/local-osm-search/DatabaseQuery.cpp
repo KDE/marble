@@ -11,7 +11,7 @@
 
 #include "DatabaseQuery.h"
 
-#include "GeoDataLatLonAltBox.h"
+#include "GeoDataLatLonBox.h"
 #include "MarbleModel.h"
 #include "PositionTracking.h"
 
@@ -20,7 +20,7 @@
 namespace Marble
 {
 
-DatabaseQuery::DatabaseQuery( const MarbleModel* model, const QString &searchTerm, const GeoDataLatLonAltBox &preferred ) :
+DatabaseQuery::DatabaseQuery( const MarbleModel* model, const QString &searchTerm, const GeoDataLatLonBox &preferred ) :
     m_queryType( BroadSearch ), m_resultFormat( AddressFormat ), m_searchTerm( searchTerm.trimmed() ),
     m_category( OsmPlacemark::UnknownCategory )
 {

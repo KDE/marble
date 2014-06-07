@@ -23,7 +23,7 @@ class LatLonRunner : public SearchRunner
 public:
     explicit LatLonRunner(QObject *parent = 0);
     ~LatLonRunner();
-    virtual void search( const QString &searchTerm, const GeoDataLatLonAltBox &preferred );
+    virtual void search( const QString &searchTerm, const GeoDataLatLonBox &preferred );
 
 };
 
