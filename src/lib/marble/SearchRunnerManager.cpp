@@ -165,6 +165,7 @@ void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
     }
 
     d->m_lastSearchTerm = searchTerm;
+    d->m_lastPreferredBox = preferred;
 
     d->m_searchTasks.clear();
 
