@@ -108,6 +108,8 @@ public:
 
     virtual bool isInitialized() const;
 
+    Marble::RenderState renderState() const;
+
 Q_SIGNALS:
     /** Additional data for the currently visible map region is requested */
     void dataRequest( qreal north, qreal south, qreal east, qreal west );

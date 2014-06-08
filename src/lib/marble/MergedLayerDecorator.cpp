@@ -315,6 +315,35 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId )
     return d->createTile( tiles );
 }
 
+RenderState MergedLayerDecorator::renderState( const TileId &stackedTileId ) const
+{
+    QString const nameTemplate = "Tile %1/%2/%3";
+    RenderState state( nameTemplate.arg( stackedTileId.zoomLevel() )
+                       .arg( stackedTileId.x() )
+                       .arg( stackedTileId.y() ) );
+    const QVector<const GeoSceneTextureTile *> textureLayers = d->findRelevantTextureLayers( stackedTileId );
+    foreach ( const GeoSceneTextureTile *layer, textureLayers ) {
+        const TileId tileId( layer->sourceDir(), stackedTileId.zoomLevel(),
+                             stackedTileId.x(), stackedTileId.y() );
+        RenderStatus tileStatus = Complete;
+        switch ( TileLoader::tileStatus( layer, tileId ) ) {
+        case TileLoader::Available:
+            tileStatus = Complete;
+            break;
+        case TileLoader::Expired:
+            tileStatus = WaitingForUpdate;
+            break;
+        case TileLoader::Missing:
+            tileStatus = WaitingForData;
+            break;
+        }
+
+        state.addChild( RenderState( layer->name(), tileStatus ) );
+    }
+
+    return state;
+}
+
 StackedTile *MergedLayerDecorator::updateTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage )
 {
     Q_ASSERT( !tileImage.isNull() );

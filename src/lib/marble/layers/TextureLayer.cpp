@@ -78,6 +78,7 @@ public:
     QList<const GeoDataGroundOverlay *> m_groundOverlayCache;
     // For scheduling repaints
     QTimer           m_repaintTimer;
+    RenderState m_renderState;
 };
 
 TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
@@ -283,6 +284,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 {
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
+    d->m_renderState = RenderState( "Texture Tiles" );
 
     // Stop repaint timer if it is already running
     d->m_repaintTimer.stop();
@@ -326,6 +328,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     const QRect dirtyRect = QRect( QPoint( 0, 0), viewport->size() );
     d->m_texmapper->mapTexture( painter, viewport, d->m_tileZoomLevel, dirtyRect, d->m_texcolorizer );
+    d->m_renderState.addChild( d->m_tileLoader.renderState() );
     d->m_runtimeTrace = QString("Texture Cache: %1 ").arg(d->m_tileLoader.tileCount());
     return true;
 }
@@ -513,6 +516,11 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
         return ( tileWidth * levelZeroColumns / 4 ) >> (-tileLevel);
 
     return ( tileWidth * levelZeroColumns / 4 ) << tileLevel;
+}
+
+RenderState TextureLayer::renderState() const
+{
+    return d->m_renderState;
 }
 
 }

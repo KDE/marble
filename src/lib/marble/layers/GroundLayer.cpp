@@ -63,4 +63,9 @@ QColor GroundLayer::color() const
     return m_color;
 }
 
+RenderState GroundLayer::renderState() const
+{
+    return RenderState( "Ground" );
+}
+
 }

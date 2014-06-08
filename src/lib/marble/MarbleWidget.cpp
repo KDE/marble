@@ -81,6 +81,8 @@ class MarbleWidget::CustomPaintLayer : public LayerInterface
 
     virtual qreal zValue() const { return 1.0e7; }
 
+    RenderState renderState() const { return RenderState( "Custom Widget Paint" ); }
+
  private:
     MarbleWidget *const m_widget;
 };
@@ -218,6 +220,10 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SLOT(update()) );
     m_widget->connect( map(),   SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
                        m_widget, SLOT(updateSystemBackgroundAttribute()) );
+    m_widget->connect( map(),   SIGNAL(renderStatusChanged(RenderStatus)),
+                       m_widget, SIGNAL(renderStatusChanged(RenderStatus)) );
+    m_widget->connect( map(),   SIGNAL(renderStateChanged(RenderState)),
+                       m_widget, SIGNAL(renderStateChanged(RenderState)) );
 
     m_widget->connect( model()->fileManager(), SIGNAL(centeredDocument(GeoDataLatLonBox)),
                        m_widget, SLOT(centerOn(GeoDataLatLonBox)) );
@@ -379,6 +385,16 @@ Marble::TextureLayer* MarbleWidget::textureLayer() const
 QPixmap MarbleWidget::mapScreenShot()
 {
     return QPixmap::grabWidget( this );
+}
+
+RenderStatus MarbleWidget::renderStatus() const
+{
+    return d->map()->renderStatus();
+}
+
+RenderState MarbleWidget::renderState() const
+{
+    return d->map()->renderState();
 }
 
 bool MarbleWidget::showOverviewMap() const

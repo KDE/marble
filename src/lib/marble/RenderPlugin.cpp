@@ -203,6 +203,11 @@ RenderPlugin::RenderType RenderPlugin::renderType() const
     return UnknownRenderType;
 }
 
+RenderState RenderPlugin::renderState() const
+{
+    return RenderState( name() );
+}
+
 QString RenderPlugin::runtimeTrace() const
 {
     return name();

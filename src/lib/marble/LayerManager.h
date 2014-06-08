@@ -12,6 +12,8 @@
 #ifndef MARBLE_LAYERMANAGER_H
 #define MARBLE_LAYERMANAGER_H
 
+#include "RenderState.h"
+
 // Qt
 #include <QList>
 #include <QObject>
@@ -82,6 +84,8 @@ class LayerManager : public QObject
     void removeLayer(LayerInterface *layer);
 
     QList<LayerInterface *> internalLayers() const;
+
+    RenderState renderState() const;
 
  Q_SIGNALS:
     /**

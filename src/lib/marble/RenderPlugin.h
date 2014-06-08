@@ -197,6 +197,9 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @return: The type of render plugin this is
      */
     virtual RenderType renderType() const;
+
+    RenderState renderState() const;
+
     virtual QString runtimeTrace() const;
 
  public Q_SLOTS:

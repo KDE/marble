@@ -206,6 +206,17 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
     }
 }
 
+RenderState StackedTileLoader::renderState() const
+{
+    RenderState renderState( "Stacked Tiles" );
+    QHash<TileId, StackedTile*>::const_iterator it = d->m_tilesOnDisplay.constBegin();
+    QHash<TileId, StackedTile*>::const_iterator const end = d->m_tilesOnDisplay.constEnd();
+    for (; it != end; ++it ) {
+        renderState.addChild( d->m_layerDecorator->renderState( it.key() ) );
+    }
+    return renderState;
+}
+
 void StackedTileLoader::clear()
 {
     mDebug() << Q_FUNC_INFO;

@@ -24,6 +24,11 @@ qreal LayerInterface::zValue() const
     return 0.0;
 }
 
+RenderState LayerInterface::renderState() const
+{
+    return RenderState();
+}
+
 QString LayerInterface::runtimeTrace() const
 {
     return QString();

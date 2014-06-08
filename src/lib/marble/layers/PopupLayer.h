@@ -49,6 +49,8 @@ public:
     virtual bool eventFilter( QObject *, QEvent * );
     qreal zValue() const;
 
+    RenderState renderState() const;
+
     virtual QString runtimeTrace() const { return "PopupLayer"; }
 
     /**

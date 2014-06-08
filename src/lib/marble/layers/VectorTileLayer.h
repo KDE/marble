@@ -54,6 +54,8 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     QStringList renderPosition() const;
 
+    RenderState renderState() const;
+
  public Q_SLOTS:
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );

@@ -66,5 +66,10 @@ bool MarbleSplashLayer::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
+RenderState MarbleSplashLayer::renderState() const
+{
+    return RenderState( "Splash Screen" );
+}
+
 
 }

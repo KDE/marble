@@ -27,6 +27,7 @@ public:
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
        const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
 
+    RenderState renderState() const;
     virtual QString runtimeTrace() const { return "FogLayer"; }
 };
 

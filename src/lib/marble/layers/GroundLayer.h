@@ -37,6 +37,8 @@ class GroundLayer : public LayerInterface
 
     QColor color() const;
 
+    RenderState renderState() const;
+
     virtual QString runtimeTrace() const { return "GroundLayer"; }
 
  private:

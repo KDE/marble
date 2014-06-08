@@ -185,6 +185,11 @@ GeoDataDocument * FileManager::at( const QString &key )
     return 0;
 }
 
+int FileManager::pendingFiles() const
+{
+    return d->m_loaderList.size();
+}
+
 void FileManagerPrivate::cleanupLoader( FileLoader* loader )
 {
     GeoDataDocument *doc = loader->document();

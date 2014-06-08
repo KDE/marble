@@ -82,6 +82,11 @@ qreal PopupLayer::zValue() const
     return 4711.23;
 }
 
+RenderState PopupLayer::renderState() const
+{
+    return RenderState( "Popup Window" );
+}
+
 bool PopupLayer::visible() const
 {
     return m_popupItem->visible();

@@ -73,6 +73,8 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
     int preferredRadiusCeil( int radius ) const;
     int preferredRadiusFloor( int radius ) const;
 
+    RenderState renderState() const;
+
     virtual QString runtimeTrace() const;
 
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,

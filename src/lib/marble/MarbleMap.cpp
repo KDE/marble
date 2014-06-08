@@ -100,6 +100,8 @@ public:
 
     virtual qreal zValue() const { return 1.0e6; }
 
+    RenderState renderState() const { return RenderState( "Custom Map Paint" ); }
+
     virtual QString runtimeTrace() const { return "CustomPaint"; }
 
 private:
@@ -144,6 +146,7 @@ public:
 
     bool m_isLockedToSubSolarPoint;
     bool m_isSubSolarPointIconVisible;
+    RenderState m_renderState;
 };
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
@@ -746,7 +749,16 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
     QTime t;
     t.start();
 
+    RenderStatus const oldRenderStatus = d->m_renderState.status();
     d->m_layerManager.renderLayers( &painter, &d->m_viewport );
+    d->m_renderState = d->m_layerManager.renderState();
+    bool const parsing = d->m_model->fileManager()->pendingFiles() > 0;
+    d->m_renderState.addChild( RenderState( "Files", parsing ? WaitingForData : Complete ) );
+    RenderStatus const newRenderStatus = d->m_renderState.status();
+    if ( oldRenderStatus != newRenderStatus ) {
+        emit renderStatusChanged( newRenderStatus );
+    }
+    emit renderStateChanged( d->m_renderState );
 
     if ( d->m_showFrameRate ) {
         FpsLayer fpsPainter( &t );
@@ -1230,6 +1242,16 @@ void MarbleMap::addLayer( LayerInterface *layer )
 void MarbleMap::removeLayer( LayerInterface *layer )
 {
     d->m_layerManager.removeLayer(layer);
+}
+
+RenderStatus MarbleMap::renderStatus() const
+{
+    return d->m_layerManager.renderState().status();
+}
+
+RenderState MarbleMap::renderState() const
+{
+    return d->m_layerManager.renderState();
 }
 
 // this method will only temporarily "pollute" the MarbleModel class

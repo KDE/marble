@@ -27,6 +27,8 @@ public:
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString &renderPos = "SURFACE", GeoSceneLayer *layer = 0 );
 
+    RenderState renderState() const;
+
     virtual QString runtimeTrace() const { return "SplashLayer"; }
 
 };

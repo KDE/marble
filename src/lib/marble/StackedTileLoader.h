@@ -30,6 +30,7 @@
 
 #include "GeoSceneTiled.h"
 #include "TileId.h"
+#include "RenderState.h"
 
 class QImage;
 class QString;
@@ -129,6 +130,8 @@ class StackedTileLoader : public QObject
         /**
          */
         void updateTile(TileId const & tileId, QImage const &tileImage );
+
+        RenderState renderState() const;
 
     Q_SIGNALS:
         void tileLoaded( TileId const &tileId );

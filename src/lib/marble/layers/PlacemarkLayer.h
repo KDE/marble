@@ -66,6 +66,8 @@ class PlacemarkLayer : public QObject, public LayerInterface
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
+    RenderState renderState() const;
+
     virtual QString runtimeTrace() const;
 
     /**

@@ -13,6 +13,7 @@
 #define MARBLE_LAYERINTERFACE_H
 
 #include "marble_export.h"
+#include "RenderState.h"
 
 #include <QStringList>
 
@@ -67,6 +68,7 @@ public:
       */
     virtual qreal zValue() const;
 
+    virtual RenderState renderState() const;
 
     /**
       * @brief Returns a debug line for perfo/tracing issues

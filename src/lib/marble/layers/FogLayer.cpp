@@ -77,4 +77,9 @@ bool FogLayer::render( GeoPainter *painter,
     return true;
 }
 
+RenderState FogLayer::renderState() const
+{
+    return RenderState( "Fog" );
+}
+
 }

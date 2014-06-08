@@ -678,6 +678,11 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
+RenderState RoutingLayer::renderState() const
+{
+    return RenderState( "Routing", d->m_routeDirty ? WaitingForUpdate : Complete );
+}
+
 bool RoutingLayer::eventFilter( QObject *obj, QEvent *event )
 {
     Q_UNUSED( obj )

@@ -78,6 +78,8 @@ class FileManager : public QObject
     int size() const;
     GeoDataDocument *at( const QString &key );
 
+    /** Returns the number of files being opened at the moment */
+    int pendingFiles() const;
 
  Q_SIGNALS:
     void fileAdded( const QString &key );

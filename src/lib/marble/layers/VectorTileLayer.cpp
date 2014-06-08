@@ -115,6 +115,11 @@ QStringList VectorTileLayer::renderPosition() const
     return QStringList() << "SURFACE";
 }
 
+RenderState VectorTileLayer::renderState() const
+{
+    return RenderState( "Vector Tiles" );
+}
+
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
                               const QString &renderPos, GeoSceneLayer *layer )
 {

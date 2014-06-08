@@ -24,6 +24,7 @@
 #include "PluginManager.h"
 #include "RenderPlugin.h"
 #include "LayerInterface.h"
+#include "RenderState.h"
 
 namespace Marble
 {
@@ -58,6 +59,7 @@ class LayerManager::Private
 
     bool m_showBackground;
 
+    RenderState m_renderState;
     bool m_showRuntimeTrace;
 };
 
@@ -126,6 +128,7 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
 
 void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
 {
+    d->m_renderState = RenderState( "Marble" );
     const QTime totalTime = QTime::currentTime();
 
     QStringList renderPositions;
@@ -169,10 +172,10 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         foreach( LayerInterface *layer, layers ) {
             timer.start();
             layer->render( painter, viewport, renderPosition, 0 );
+            d->m_renderState.addChild( layer->renderState() );
             traceList.append( QString("%2 ms %3").arg( timer.elapsed(),3 ).arg( layer->runtimeTrace() ) );
         }
     }
-
 
     if ( d->m_showRuntimeTrace ) {
         const int totalElapsed = totalTime.elapsed();
@@ -259,6 +262,11 @@ void LayerManager::removeLayer(LayerInterface *layer)
 QList<LayerInterface *> LayerManager::internalLayers() const
 {
     return d->m_internalLayers;
+}
+
+RenderState LayerManager::renderState() const
+{
+    return d->m_renderState;
 }
 
 }

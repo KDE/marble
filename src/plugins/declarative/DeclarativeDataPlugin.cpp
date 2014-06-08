@@ -358,6 +358,11 @@ bool DeclarativeDataPlugin::isInitialized() const
     return d->m_isInitialized;
 }
 
+RenderState DeclarativeDataPlugin::renderState() const
+{
+    return RenderState( "Declarative Data" );
+}
+
 void DeclarativeDataPlugin::setDeclarativeModel( const QVariant &model )
 {
     d->m_model = model;

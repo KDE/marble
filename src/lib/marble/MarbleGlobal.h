@@ -185,6 +185,16 @@ enum SearchMode {
     AreaSearch ///< Search a certain region of a planet (e.g. visible region)
 };
 
+/**
+ * @brief
+ */
+enum RenderStatus {
+    Complete, ///< All data is there and up to date
+    WaitingForUpdate, ///< Rendering is based on complete, but outdated data, data update was requested
+    WaitingForData, ///< Rendering is based on no or partial data, more data was requested (e.g. pending network queries)
+    Incomplete ///< Data is missing and some error occurred when trying to retrieve it (e.g. network failure)
+};
+
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 

@@ -266,6 +266,11 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
+RenderState GeometryLayer::renderState() const
+{
+    return RenderState( "GeoGraphicsScene" );
+}
+
 QString GeometryLayer::runtimeTrace() const
 {
     return d->m_runtimeTrace;

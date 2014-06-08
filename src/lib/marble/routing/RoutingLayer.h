@@ -59,6 +59,8 @@ public:
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
+    RenderState renderState() const;
+
     /**
       * Set the proxy model another QAbstractItemView uses that should share
       * its selection model with us. Needed because this class uses an unfiltered

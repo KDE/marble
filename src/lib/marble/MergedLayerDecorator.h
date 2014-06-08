@@ -21,6 +21,7 @@
 #include <QList>
 
 #include "GeoSceneTextureTile.h"
+#include "RenderState.h"
 
 class QImage;
 class QString;
@@ -73,6 +74,8 @@ class MergedLayerDecorator
     bool showCityLights() const;
 
     void setShowTileId(bool show);
+
+    RenderState renderState( const TileId &stackedTileId ) const;
 
  protected:
     Q_DISABLE_COPY( MergedLayerDecorator )

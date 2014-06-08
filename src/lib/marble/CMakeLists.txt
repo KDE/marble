@@ -182,6 +182,7 @@ set(marblewidget_SRCS
     PluginInterface.cpp
     DialogConfigurationInterface.cpp
     LayerInterface.cpp
+    RenderState.cpp
     RenderPlugin.cpp
     RenderPluginInterface.cpp
     PositionProviderPlugin.cpp
@@ -515,6 +516,7 @@ install( FILES
     RoutingRunnerPlugin.h
     ParseRunnerPlugin.h
     LayerInterface.h
+    RenderState.h
     PluginAboutDialog.h
     marble_export.h
     Planet.h
