@@ -571,7 +571,7 @@ QString GeoDataLatLonBox::toString( GeoDataCoordinates::Unit unit ) const
     default:
     case GeoDataCoordinates::Radian:
         return QString( "North: %1; West: %2; South: %3; East: %4" )
-            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
+            .arg( d->m_north ).arg( d->m_west ).arg( d->m_south ).arg( d->m_east );
         break;
     case GeoDataCoordinates::Degree:
         return QString( "North: %1; West: %2; South: %3; East: %4" )
