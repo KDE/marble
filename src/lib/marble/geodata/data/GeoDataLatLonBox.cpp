@@ -570,11 +570,11 @@ QString GeoDataLatLonBox::toString( GeoDataCoordinates::Unit unit ) const
     switch( unit ){
     default:
     case GeoDataCoordinates::Radian:
-        return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
+        return QString( "North: %1; West: %2; South: %3; East: %4" )
             .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
         break;
     case GeoDataCoordinates::Degree:
-        return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
+        return QString( "North: %1; West: %2; South: %3; East: %4" )
             .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
         break;
     }
