@@ -37,7 +37,9 @@
           <tileSize width="256" height="256"/>
           <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="17" mode="OpenStreetMap"/>
           <projection name="Mercator"/>
-          <downloadUrl protocol="http" host="toolserver.org" path="/~cmarqu/hill/"/>
+          <downloadUrl protocol="http" host="a.tiles.wmflabs.org" path="/hillshading/"/>
+          <downloadUrl protocol="http" host="b.tiles.wmflabs.org" path="/hillshading/"/>
+          <downloadUrl protocol="http" host="c.tiles.wmflabs.org" path="/hillshading/"/>
           <blending name="AlphaBlending"/>
         </texture>
       </layer>
