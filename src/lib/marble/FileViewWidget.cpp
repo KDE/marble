@@ -135,8 +135,8 @@ void FileViewWidgetPrivate::closeFile()
     GeoDataObject *object
         = index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
     GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
-    if ( document && !document->fileName().isEmpty() ) {
-        m_fileManager->saveFile( QFileDialog::getSaveFileName( q, "Select filename for KML document" ), document );
+    if ( document ) {
+        m_fileManager->closeFile( document );
     }
 }
 
