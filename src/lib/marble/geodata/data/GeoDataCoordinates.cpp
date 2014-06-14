@@ -1238,6 +1238,31 @@ const Quaternion& GeoDataCoordinates::quaternion() const
     return d->m_q;
 }
 
+GeoDataCoordinates GeoDataCoordinates::interpolate( const GeoDataCoordinates &target, double t_ ) const
+{
+    double const t = qBound( 0.0, t_, 1.0 );
+    Quaternion const quat = Quaternion::slerp( d->m_q, target.d->m_q, t );
+    qreal lon, lat;
+    quat.getSpherical( lon, lat );
+    double const alt = (1.0-t) * d->m_altitude + t * target.d->m_altitude;
+    return GeoDataCoordinates( lon, lat, alt );
+}
+
+GeoDataCoordinates GeoDataCoordinates::interpolate( const GeoDataCoordinates &before, const GeoDataCoordinates &target, const GeoDataCoordinates &after, double t_ ) const
+{
+    double const t = qBound( 0.0, t_, 1.0 );
+    Quaternion const b1 = GeoDataCoordinatesPrivate::basePoint( before.d->m_q, d->m_q, target.d->m_q );
+    Quaternion const a2 = GeoDataCoordinatesPrivate::basePoint( d->m_q, target.d->m_q, after.d->m_q );
+    Quaternion const a = Quaternion::slerp( d->m_q, target.d->m_q, t );
+    Quaternion const b = Quaternion::slerp( b1, a2, t );
+    Quaternion c = Quaternion::slerp( a, b, 2 * t * (1.0-t) );
+    qreal lon, lat;
+    c.getSpherical( lon, lat );
+    // @todo spline interpolation of altitude?
+    double const alt = (1.0-t) * d->m_altitude + t * target.d->m_altitude;
+    return GeoDataCoordinates( lon, lat, alt );
+}
+
 bool GeoDataCoordinates::isPole( Pole pole ) const
 {
     // Evaluate the most likely case first:
@@ -1316,6 +1341,13 @@ void GeoDataCoordinates::unpack( QDataStream& stream )
     stream >> d->m_altitude;
 
     d->m_q = Quaternion::fromSpherical( d->m_lon, d->m_lat );
+}
+
+Quaternion GeoDataCoordinatesPrivate::basePoint( const Quaternion &q1, const Quaternion &q2, const Quaternion &q3 )
+{
+    Quaternion const a = (q2.inverse() * q3).log();
+    Quaternion const b = (q2.inverse() * q1).log();
+    return q2 * ((a+b)*-0.25).exp();
 }
 
 }

@@ -96,6 +96,8 @@ class GeoDataCoordinatesPrivate
     bool operator==( const GeoDataCoordinatesPrivate &rhs ) const;
     bool operator!=( const GeoDataCoordinatesPrivate &rhs ) const;
 
+    static Quaternion basePoint( const Quaternion &q1, const Quaternion &q2, const Quaternion &q3 );
+
     Quaternion m_q;
     qreal      m_lon;
     qreal      m_lat;

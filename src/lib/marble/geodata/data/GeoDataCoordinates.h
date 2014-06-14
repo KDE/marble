@@ -256,6 +256,23 @@ class GEODATA_EXPORT GeoDataCoordinates
     const Quaternion &quaternion() const;
 
     /**
+     * @brief slerp (spherical linear) interpolation between this coordinate and the given target coordinate
+     * @param target Destination coordinate
+     * @param t Fraction 0..1 to weight between this and target
+     * @return Interpolated coordinate between this (t<=0.0) and target (t>=1.0)
+     */
+    GeoDataCoordinates interpolate( const GeoDataCoordinates &target, double t ) const;
+
+    /**
+     * @brief squad (spherical and quadrangle) interpolation between b and c
+     * @param before First base point
+     * @param target Third base point (second interpolation point)
+     * @param after Fourth base point
+     * @param t Offset between b (t<=0) and c (t>=1)
+     */
+    GeoDataCoordinates interpolate( const GeoDataCoordinates &before, const GeoDataCoordinates &target, const GeoDataCoordinates &after, double t ) const;
+
+    /**
     * @brief return whether our coordinates represent a pole
     * This method can be used to check whether the coordinate equals one of 
     * the poles. 
