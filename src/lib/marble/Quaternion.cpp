@@ -86,6 +86,22 @@ Quaternion Quaternion::inverse() const
     return inverse;
 }
 
+Quaternion Quaternion::log() const
+{
+    double const qlen = length();
+    double const vlen = sqrt(v[Q_X]*v[Q_X] + v[Q_Y]*v[Q_Y] + v[Q_Z]*v[Q_Z]);
+    double const a = acos(v[Q_W]/qlen) / vlen;
+    return Quaternion(std::log(qlen), v[Q_X] * a, v[Q_Y] * a, v[Q_Z] * a);
+}
+
+Quaternion Quaternion::exp() const
+{
+    double const vlen = sqrt(v[Q_X]*v[Q_X] + v[Q_Y]*v[Q_Y] + v[Q_Z]*v[Q_Z]);
+    double const s = std::exp(v[Q_W]);
+    double const a = s * sin(vlen) / vlen;
+    return Quaternion(s * cos(vlen), v[Q_X] * a, v[Q_Y] * a, v[Q_Z] * a);
+}
+
 Quaternion Quaternion::fromEuler(qreal pitch, qreal yaw, qreal roll)
 {
     const qreal cPhi = cos(0.5 * pitch); // also: "heading"
@@ -157,6 +173,14 @@ Quaternion Quaternion::operator*(const Quaternion &q) const
     const qreal z = v[Q_W] * q.v[Q_Z] + v[Q_X] * q.v[Q_Y] - v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
 
     return Quaternion( w, x, y, z );
+}
+
+Quaternion Quaternion::operator+(const Quaternion &q) const
+{
+    return Quaternion(v[Q_W] + q.v[Q_W],
+                      v[Q_X] + q.v[Q_X],
+                      v[Q_Y] + q.v[Q_Y],
+                      v[Q_Z] + q.v[Q_Z]);
 }
 
 Quaternion Quaternion::operator*(qreal factor) const
