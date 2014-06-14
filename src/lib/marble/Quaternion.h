@@ -25,9 +25,6 @@
 namespace Marble
 {
 
-using std::cos;
-using std::sin;
-
 enum
 {
     Q_X = 0,
