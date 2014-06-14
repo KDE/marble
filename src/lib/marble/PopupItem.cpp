@@ -103,10 +103,11 @@ void PopupItem::setUrl( const QUrl &url )
     requestUpdate();
 }
 
-void PopupItem::setContent( const QString &html )
+void PopupItem::setContent( const QString &html, const QUrl &baseUrl )
 {
     m_content = html;
-    m_ui.webView->setHtml( html );
+    m_baseUrl = baseUrl;
+    m_ui.webView->setHtml( html, baseUrl );
 
     requestUpdate();
 }
@@ -358,7 +359,7 @@ void PopupItem::updateBackButton()
 void PopupItem::goBack()
 {
     if ( m_ui.webView->history()->currentItemIndex() == 1 && !m_content.isEmpty() ) {
-        m_ui.webView->setHtml( m_content );
+        m_ui.webView->setHtml( m_content, m_baseUrl );
     } else {
         m_ui.webView->back();
     }
