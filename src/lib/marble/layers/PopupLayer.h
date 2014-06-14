@@ -127,7 +127,7 @@ public:
      *
      * @param html content (in html format)
      */
-    void setContent( const QString &html );
+    void setContent( const QString &html, const QUrl & baseUrl = QUrl() );
 
     /**
      * @brief Sets style and content of the browser

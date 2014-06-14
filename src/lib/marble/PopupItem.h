@@ -89,7 +89,7 @@ public:
      *
      * @param html custom html for popup
      */
-    void setContent( const QString &html );
+    void setContent( const QString &html, const QUrl & baseUrl = QUrl() );
 
     /**
      * @brief Sets text color of the header
@@ -177,6 +177,7 @@ private:
     QColor m_textColor;
     QColor m_backColor;
     bool m_needMouseRelease;
+    QUrl m_baseUrl;
 };
 
 }
