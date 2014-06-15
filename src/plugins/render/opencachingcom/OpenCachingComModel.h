@@ -60,12 +60,8 @@ protected:
      **/
     void parseFile( const QByteArray& file );
 
-private slots:
-    void updateHome();
-
 private:
     GeoDataLatLonAltBox m_previousbox;
-    GeoDataCoordinates m_homeCoordinates;
 };
 
 }

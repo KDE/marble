@@ -27,9 +27,6 @@ namespace Marble {
 OpenCachingComModel::OpenCachingComModel( const MarbleModel *marbleModel, QObject *parent )
     : AbstractDataPluginModel( "opencachingcom", marbleModel, parent )
 {
-    updateHome();
-    connect(marbleModel, SIGNAL(homeChanged(GeoDataCoordinates)), SLOT(updateHome()));
-
     // translate known values for tags and cache types
     // What would be a nice place for this??? Put here, since this object is only
     // constructed once.
@@ -119,15 +116,10 @@ void OpenCachingComModel::fetchData(const QString& url, const QString &type, Ope
 
 const GeoDataCoordinates OpenCachingComModel::home() const
 {
-    return m_homeCoordinates;
-}
-
-void OpenCachingComModel::updateHome()
-{
     qreal lon, lat;
     int zoom;
     marbleModel()->home( lon, lat, zoom );
-    m_homeCoordinates = GeoDataCoordinates(lon, lat, 0, GeoDataCoordinates::Degree);
+    return GeoDataCoordinates(lon, lat, 0, GeoDataCoordinates::Degree);
 }
 
 } // namespace Marble
