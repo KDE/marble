@@ -27,7 +27,6 @@ namespace Marble
 {
 
 class MarbleWidget;
-class MarbleClock;
 class EclipsesModel;
 class EclipsesItem;
 class EclipsesBrowserDialog;
@@ -135,7 +134,6 @@ private:
     bool m_isInitialized;
 
     MarbleWidget *m_marbleWidget;
-    MarbleClock *m_clock;
 
     EclipsesModel *m_model;
     QList<QActionGroup*> m_actionGroups;
