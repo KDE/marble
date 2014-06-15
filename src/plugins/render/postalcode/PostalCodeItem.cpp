@@ -34,11 +34,6 @@ PostalCodeItem::~PostalCodeItem()
 {
 }
 
-QString PostalCodeItem::itemType() const
-{
-    return "postalCodeItem";
-}
-
 bool PostalCodeItem::initialized() const
 {
     return !m_text.isEmpty();

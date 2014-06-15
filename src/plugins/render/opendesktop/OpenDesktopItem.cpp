@@ -29,12 +29,6 @@ OpenDesktopItem::~OpenDesktopItem()
     delete m_action;
 }
  
-QString OpenDesktopItem::itemType() const
-{
-    // Our itemType:
-    return "openDesktopItem";
-}
- 
 bool OpenDesktopItem::initialized() const
 {
     return size() != QSizeF(-1, -1);

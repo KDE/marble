@@ -35,8 +35,6 @@ class PhotoPluginItem : public AbstractDataPluginItem
     
     QString name() const;
     
-    QString itemType() const;
-    
     bool initialized() const;
     
     void addDownloadedFile( const QString& url, const QString& type );

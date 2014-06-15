@@ -71,11 +71,6 @@ QString PhotoPluginItem::name() const
 {
     return title();
 }
-
-QString PhotoPluginItem::itemType() const
-{
-    return QString( "photoItem" );
-}
  
 bool PhotoPluginItem::initialized() const
 {

@@ -27,8 +27,6 @@ public:
 
     ~DeclarativeDataPluginItem();
 
-    virtual QString itemType() const;
-
     virtual bool initialized() const;
 
     bool operator<( const AbstractDataPluginItem *other ) const;

@@ -38,8 +38,6 @@ public:
 
     ~OpenCachingComItem();
 
-    QString itemType() const;
-
     bool initialized() const;
 
     void paint( QPainter *painter );

@@ -35,12 +35,6 @@ EarthquakeItem::~EarthquakeItem()
     // nothing to do
 }
 
-QString EarthquakeItem::itemType() const
-{
-    // Our itemType:
-    return "earthquakeItem";
-}
-
 bool EarthquakeItem::initialized() const
 {
     return m_magnitude > 0.0;

@@ -24,11 +24,6 @@ DeclarativeDataPluginItem::~DeclarativeDataPluginItem()
     // nothing to do
 }
 
-QString DeclarativeDataPluginItem::itemType() const
-{
-    return "DeclarativeDataPluginItem";
-}
-
 bool DeclarativeDataPluginItem::initialized() const
 {
     return true;

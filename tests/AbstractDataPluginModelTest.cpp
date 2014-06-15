@@ -33,7 +33,6 @@ public:
 
     void setInitialized( bool initialized ) { m_initialized = initialized; }
 
-    QString itemType() const { return "test"; }
     bool initialized() const { return m_initialized; }
     bool operator<( const AbstractDataPluginItem *other ) const { return this < other; }
 

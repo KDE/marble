@@ -66,11 +66,6 @@ void WikipediaItem::setName( const QString& name )
     updateToolTip();
 }
 
-QString WikipediaItem::itemType() const
-{
-    return "wikipediaItem";
-}
-     
 bool WikipediaItem::initialized() const
 {
     return true;

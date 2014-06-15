@@ -32,8 +32,6 @@ class OpenDesktopItem : public AbstractDataPluginItem
 
         ~OpenDesktopItem();
 
-        QString itemType() const;
-
         bool initialized() const;
 
         void addDownloadedFile( const QString& url, const QString& type );

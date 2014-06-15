@@ -32,11 +32,6 @@ FoursquareItem::~FoursquareItem()
 {
 }
 
-QString FoursquareItem::itemType() const
-{
-    return "foursquareItem";
-}
-
 bool FoursquareItem::initialized() const
 {
     // Find something logical for this

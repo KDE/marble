@@ -78,11 +78,6 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
      */
     virtual QAction *action();
 
-    /**
-     * Returns the type of this specific item.
-     */
-    virtual QString itemType() const = 0;
-
     virtual bool initialized() const = 0;
 
     virtual void addDownloadedFile( const QString& url, const QString& type );

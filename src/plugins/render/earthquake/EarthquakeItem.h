@@ -29,9 +29,6 @@ public:
 
     ~EarthquakeItem();
 
-    // Returns the item type of the item.
-    QString itemType() const;
-
     // Returns true if the item is paintable
     bool initialized() const;
 

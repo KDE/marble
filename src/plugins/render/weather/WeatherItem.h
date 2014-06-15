@@ -49,8 +49,6 @@ class WeatherItem : public AbstractDataPluginItem
     ~WeatherItem();
     
     QAction *action();
-    
-    QString itemType() const;
 
     /**
      * Test if the item wants to request @p type again.

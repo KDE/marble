@@ -351,11 +351,6 @@ QAction *WeatherItem::action()
     return &d->m_browserAction;
 }
 
-QString WeatherItem::itemType() const
-{
-    return QString( "weatherItem" );
-}
-
 bool WeatherItem::request( const QString& type )
 {
     Q_UNUSED( type )

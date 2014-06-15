@@ -27,8 +27,6 @@ class PostalCodeItem : public AbstractDataPluginItem
 
     ~PostalCodeItem();
 
-    QString itemType() const;
-
     bool initialized() const;
 
     void paint( QPainter *painter );
