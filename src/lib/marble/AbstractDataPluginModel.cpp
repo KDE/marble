@@ -62,7 +62,7 @@ public:
     ~AbstractDataPluginModelPrivate();
 
     void updateFavoriteItems();
-    
+
     AbstractDataPluginModel *m_parent;
     const QString m_name;
     const MarbleModel *const m_marbleModel;
@@ -155,6 +155,13 @@ void AbstractDataPluginModelPrivate::updateFavoriteItems()
                 m_parent->getItem( id );
             }
         }
+    }
+}
+
+void AbstractDataPluginModel::themeChanged()
+{
+    if ( d->m_downloadedTarget != d->m_marbleModel->planetId() ) {
+        clear();
     }
 }
 
@@ -253,7 +260,10 @@ AbstractDataPluginModel::AbstractDataPluginModel( const QString &name, const Mar
     // Initializing file and download System
     connect( &d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),
              this ,                 SLOT(processFinishedJob(QString,QString)) );
-    
+
+    connect( marbleModel, SIGNAL(themeChanged(QString)),
+             this, SLOT(themeChanged()) );
+
     // We want to download a new description file every timeBetweenDownloads ms
     connect( &d->m_downloadTimer, SIGNAL(timeout()),
              this,               SLOT(handleChangedViewport()),
@@ -275,7 +285,6 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
                                                                qint32 number )
 {
     GeoDataLatLonAltBox currentBox = viewport->viewLatLonAltBox();
-    QString target = d->m_marbleModel->planetId();
     QList<AbstractDataPluginItem*> list;
     
     Q_ASSERT( !d->m_displayedItems.contains( 0 ) && "Null item in m_displayedItems. Please report a bug to marble-devel@kde.org" );
@@ -297,11 +306,6 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
     for (; i != end && list.size() < number; ++i ) {
         // Only show items that are initialized
         if( !(*i)->initialized() ) {
-            continue;
-        }
-        
-        // Only show items that are on the current planet
-        if( (*i)->target() != target ) {
             continue;
         }
 
@@ -669,6 +673,10 @@ void AbstractDataPluginModel::clear()
         (*iter)->deleteLater();
     }
     d->m_itemSet.clear();
+    d->m_lastBox = GeoDataLatLonAltBox();
+    d->m_downloadedBox = GeoDataLatLonAltBox();
+    d->m_downloadedNumber = 0;
+    d->m_downloadedTarget.clear();
     emit itemsUpdated();
 }
 

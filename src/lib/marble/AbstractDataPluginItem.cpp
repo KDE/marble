@@ -28,7 +28,6 @@ class AbstractDataPluginItemPrivate
 {
  public:
     QString m_id;
-    QString m_target;
     QString m_toolTip;
     bool m_favorite;
     bool m_sticky;
@@ -56,16 +55,6 @@ AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
 AbstractDataPluginItem::~AbstractDataPluginItem()
 {
     delete d;
-}
-
-QString AbstractDataPluginItem::target() const
-{
-    return d->m_target;
-}
-
-void AbstractDataPluginItem::setTarget( const QString& target )
-{
-    d->m_target = target;
 }
 
 QString AbstractDataPluginItem::toolTip() const

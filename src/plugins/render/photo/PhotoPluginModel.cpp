@@ -139,9 +139,7 @@ void PhotoPluginModel::parseFile( const QByteArray& file )
             delete (*it);
             continue;
         }
-        
-        // Currently all Flickr images with geotags are on earth
-        (*it)->setTarget( "earth" );
+
         downloadItem( (*it)->photoUrl(), "thumbnail", (*it) );
         downloadItem( (*it)->infoUrl(),  "info",      (*it) );
         items << *it;

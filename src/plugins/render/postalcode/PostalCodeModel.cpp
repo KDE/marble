@@ -123,7 +123,6 @@ void PostalCodeModel::parseFile( const QByteArray& file )
                     PostalCodeItem *item = new PostalCodeItem( this );
                     item->setId( id );
                     item->setCoordinate( coordinates );
-                    item->setTarget( "earth" );
                     item->setToolTip( tooltip );
                     item->setText( postalCode );
 

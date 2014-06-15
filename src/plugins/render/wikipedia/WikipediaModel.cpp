@@ -106,8 +106,6 @@ void WikipediaModel::parseFile( const QByteArray& file )
         }
 
         (*it)->setIcon( m_wikipediaIcon );
-        // Currently all wikipedia articles with geotags are on earth
-        (*it)->setTarget( "earth" );
         QUrl thumbnailImageUrl = (*it)->thumbnailImageUrl();
         if ( m_showThumbnail && !thumbnailImageUrl.isEmpty() ) {
             downloadItem( thumbnailImageUrl, "thumbnail", *it );

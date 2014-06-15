@@ -111,7 +111,6 @@ void BBCWeatherService::createItem( BBCStation station )
     item->setCoordinate( station.coordinate() );
     item->setPriority( station.priority() );
     item->setStationName( station.name() );
-    item->setTarget( "earth" );
 
     emit requestedDownload( item->observationUrl(), "bbcobservation", item );
     emit requestedDownload( item->forecastUrl(),    "bbcforecast",    item );

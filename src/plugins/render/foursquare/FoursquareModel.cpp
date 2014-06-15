@@ -112,7 +112,6 @@ void FoursquareModel::parseFile( const QByteArray& file )
                 FoursquareItem *item = new FoursquareItem( this );
                 item->setId( id );
                 item->setCoordinate( coordinates );
-                item->setTarget( "earth" );
                 item->setName( name );
                 item->setCategory( category );
                 item->setAddress( address );

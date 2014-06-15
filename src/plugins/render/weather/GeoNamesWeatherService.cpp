@@ -192,7 +192,6 @@ AbstractDataPluginItem *GeoNamesWeatherService::parse( const QScriptValue &value
         item->setMarbleWidget( marbleWidget() );
         item->setId( id );
         item->setCoordinate( coordinates );
-        item->setTarget( "earth" );
         item->setPriority( 0 );
         item->setStationName( name );
         item->setCurrentWeather( data );

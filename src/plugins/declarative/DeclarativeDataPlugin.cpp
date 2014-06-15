@@ -86,7 +86,6 @@ void DeclarativeDataPluginPrivate::addItem( DeclarativeDataPluginItem *item, con
 {
     if ( coordinates.isValid() ) {
         item->setCoordinate( coordinates );
-        item->setTarget( m_planet );
         QVariant const idValue = item->property( "identifier" );
         if ( idValue.isValid() && !idValue.toString().isEmpty() ) {
             item->setId( idValue.toString() );

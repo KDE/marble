@@ -202,6 +202,8 @@ public Q_SLOTS:
 
     void scheduleItemSort();
 
+    void themeChanged();
+
  Q_SIGNALS:
     void itemsUpdated();
     void favoriteItemsChanged( const QStringList& favoriteItems );

@@ -147,7 +147,6 @@ void AbstractDataPluginModelTest::addItemToList()
 
     TestDataPluginItem *item = new TestDataPluginItem();
     item->setInitialized( initialized );
-    item->setTarget( planetId );
     item->setId( "foo" );
 
     QSignalSpy itemsUpdatedSpy( &model, SIGNAL(itemsUpdated()) );
@@ -227,7 +226,6 @@ void AbstractDataPluginModelTest::setFavoriteItemsOnly()
     TestDataPluginItem *item = new TestDataPluginItem;
     item->setId( "foo" );
     item->setInitialized( true );
-    item->setTarget( m_marbleModel.planetId() );
     item->setFavorite( itemIsFavorite );
 
     TestDataPluginModel model( &m_marbleModel );

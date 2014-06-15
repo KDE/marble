@@ -104,7 +104,6 @@ void EarthquakeModel::parseFile( const QByteArray& file )
                     EarthquakeItem *item = new EarthquakeItem( this );
                     item->setId( eqid );
                     item->setCoordinate( coordinates );
-                    item->setTarget( "earth" );
                     item->setMagnitude( magnitude );
                     item->setDateTime( date );
                     item->setDepth( depth );

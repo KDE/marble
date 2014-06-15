@@ -37,9 +37,6 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
     explicit AbstractDataPluginItem( QObject *parent = 0 );
     virtual ~AbstractDataPluginItem();
 
-    QString target() const;
-    void setTarget( const QString& target );
-
     /**
      * Returns the item's tool tip.
      */
