@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2012 Anders Lund <anders@alweb.dk>
+// Copyright 2014 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #include "OpenCachingComItem.h"
@@ -299,21 +300,28 @@ void OpenCachingComItem::addDownloadedFile( const QString &url, const QString &t
         m_cache["logs"] = cache["logs"];
         m_cache["hint"] = cache["hint"];
 
+        QVariantList images = m_cache["images"].toList();
+        for (int i = 0; i < images.size(); i++) {
+            QVariantMap image = images.at(i).toMap();
+            QString url =  "http://www.opencaching.com/api/geocache/" + id() + "/" + image["caption"].toString();
+//            qDebug()<<"Adding image: "<<url;
+            m_model->fetchData(url, QString("image-%1").arg(i), this);
+            m_images << url;
+        }
+
         fillDialogTabs();
     }
 
-    // ### images does not work, opencaching.com redirects them to
-    // a localized location and can not return them.
     else if (type.startsWith(QLatin1String("image")))
     {
         int index = type.mid(6).toInt();
-        m_images << url;
-        if (m_ui)
-        {
-            m_ui->textDescription->append(
-                "<p><img src=\"" + url + " width=\"100%\" height=\"auto\"/><br/>"
-                + m_cache["images"].toList().at(index).toMap()["name"].toString()
-                + "</p>");
+        if (index < m_images.size()) {
+            QString description = m_cache["description"].toString();
+            description.replace( m_images[index], url );
+            m_cache["description"] = description;
+            m_images[index] = url;
+
+            fillDialogTabs();
         }
     }
 }
@@ -384,27 +392,18 @@ void OpenCachingComItem::fillDialogTabs()
 {
     if (m_ui)
     {
-        m_ui->textDescription->setText(m_cache["description"].toString());
+        m_ui->textDescription->setHtml(m_cache["description"].toString());
 
         // images
-        // ### does not work at this point, talk to opencaching.com people!
-        QVariantList images = m_cache["images"].toList();
-        for (int i = 0; i < images.size(); i++)
+        for (int i = 0; i < m_images.size(); i++)
         {
             if (m_images.size() > i)
             {
                 // ### what about spoiler images? (don't display, but then what?)
                 m_ui->textDescription->append(
-                    "<p><img src=\"" + m_images.at(i) + " width=\"100%\" height=\"auto\"/><br/>"
+                    "<p><img src=\"" + m_images.at(i) + "\" width=\"100%\" height=\"auto\"/><br/>"
                     + m_cache["images"].toList().at(i).toMap()["name"].toString()
                     + "</p>");
-            }
-            else
-            {
-                QVariantMap image = images.at(i).toMap();
-                QString url =  "http://www.opencaching.com/api/" + id() + "/" + image["caption"].toString();
-//                     qDebug()<<"Adding image: "<<url;
-                m_model->fetchData(url, QString("image-%1").arg(i), this);
             }
         }
 
