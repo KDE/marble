@@ -61,6 +61,9 @@ public:
     
     ~AbstractDataPluginModelPrivate();
 
+    QString generateFilename( const QString& id, const QString& type ) const;
+    QString generateFilepath( const QString& id, const QString& type ) const;
+
     void updateFavoriteItems();
 
     AbstractDataPluginModel *m_parent;
@@ -387,7 +390,7 @@ void AbstractDataPluginModel::downloadItem( const QUrl& url,
         return;
     }
 
-    QString id = generateFilename( item->id(), type );
+    QString id = d->generateFilename( item->id(), type );
 
     d->m_downloadManager.addJob( url, id, id, DownloadBrowse );
     d->m_downloadingItems.insert( id, item );
@@ -528,7 +531,7 @@ void AbstractDataPluginModel::scheduleItemSort()
     d->m_needsSorting = true;
 }
 
-QString AbstractDataPluginModel::generateFilename( const QString& id, const QString& type ) const
+QString AbstractDataPluginModelPrivate::generateFilename( const QString& id, const QString& type ) const
 {
     QString name;
     name += id;
@@ -538,19 +541,9 @@ QString AbstractDataPluginModel::generateFilename( const QString& id, const QStr
     return name;
 }
 
-QString AbstractDataPluginModel::generateFilepath( const QString& id, const QString& type ) const
+QString AbstractDataPluginModelPrivate::generateFilepath( const QString& id, const QString& type ) const
 {
-    return MarbleDirs::localPath() + "/cache/" + d->m_name + '/' + generateFilename( id, type );
-}
-
-bool AbstractDataPluginModel::fileExists( const QString& fileName ) const
-{
-    return d->m_storagePolicy.fileExists( fileName );
-}
-
-bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type ) const
-{
-    return fileExists( generateFilename( id, type ) );
+    return MarbleDirs::localPath() + "/cache/" + m_name + '/' + generateFilename( id, type );
 }
 
 AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) const
@@ -644,7 +637,7 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
                 return;
             }
             
-            (*i)->addDownloadedFile( generateFilepath( itemId, fileType ),
+            (*i)->addDownloadedFile( d->generateFilepath( itemId, fileType ),
                                      fileType );
 
             d->m_downloadingItems.erase( i );

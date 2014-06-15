@@ -157,26 +157,6 @@ public Q_SLOTS:
      */
     void downloadDescriptionFile( const QUrl& url );
 
-    /**
-     * Generates the filename relative to the download path from @p id and @p type
-     */
-    QString generateFilename( const QString& id, const QString& type ) const;
-    
-    /**
-     * Generates the absolute filepath of the from @p id and @p type
-     */
-    QString generateFilepath( const QString& id, const QString& type ) const;
-    
-    /**
-     * Testing the existence of the file @p fileName
-     */
-    bool fileExists( const QString& fileName ) const;
-    
-    /**
-     * Testing the existence of a file with @p id and @p type
-     */
-    bool fileExists( const QString& id, const QString& type ) const;
-
     void registerItemProperties( const QMetaObject& item );
     
  private Q_SLOTS:
