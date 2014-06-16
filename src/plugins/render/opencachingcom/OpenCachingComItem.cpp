@@ -208,7 +208,7 @@ void OpenCachingComItem::showInfoDialog()
         fillDialogTabs();
     }
 
-    m_ui->textDescription->setOpenExternalLinks(true);
+    m_ui->textDescription->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
     m_ui->textLogs->setOpenExternalLinks(true);
 
     connect( ui.buttonClose, SIGNAL(clicked()), &dialog, SLOT(close()) );
@@ -300,24 +300,10 @@ void OpenCachingComItem::addDownloadedFile( const QString &url, const QString &t
             QVariantMap image = images.at(i).toMap();
             QString url =  "http://www.opencaching.com/api/geocache/" + id() + "/" + image["caption"].toString();
 //            qDebug()<<"Adding image: "<<url;
-            m_model->fetchData(url, QString("image-%1").arg(i), this);
             m_images << url;
         }
 
         fillDialogTabs();
-    }
-
-    else if (type.startsWith(QLatin1String("image")))
-    {
-        int index = type.mid(6).toInt();
-        if (index < m_images.size()) {
-            QString description = m_cache["description"].toString();
-            description.replace( m_images[index], url );
-            m_cache["description"] = description;
-            m_images[index] = url;
-
-            fillDialogTabs();
-        }
     }
 }
 
@@ -387,7 +373,7 @@ void OpenCachingComItem::fillDialogTabs()
 {
     if (m_ui)
     {
-        m_ui->textDescription->setHtml(m_cache["description"].toString());
+        QString html = m_cache["description"].toString();
 
         // images
         for (int i = 0; i < m_images.size(); i++)
@@ -395,12 +381,14 @@ void OpenCachingComItem::fillDialogTabs()
             if (m_images.size() > i)
             {
                 // ### what about spoiler images? (don't display, but then what?)
-                m_ui->textDescription->append(
+                html.append(
                     "<p><img src=\"" + m_images.at(i) + "\" width=\"100%\" height=\"auto\"/><br/>"
                     + m_cache["images"].toList().at(i).toMap()["name"].toString()
                     + "</p>");
             }
         }
+
+        m_ui->textDescription->setHtml(html);
 
         QString hint = m_cache["hint"].toString().trimmed();
         if (! hint.isEmpty())

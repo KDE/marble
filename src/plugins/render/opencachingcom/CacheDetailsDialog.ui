@@ -107,7 +107,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
-        <widget class="QTextBrowser" name="textDescription"/>
+        <widget class="MarbleWebView" name="textDescription"/>
        </item>
       </layout>
      </widget>
@@ -158,6 +158,18 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKit/QWebView</header>
+  </customwidget>
+  <customwidget>
+   <class>Marble::MarbleWebView</class>
+   <extends>QWebView</extends>
+   <header>MarbleWebView.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
