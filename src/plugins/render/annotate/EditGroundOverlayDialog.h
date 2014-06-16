@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-class MARBLE_EXPORT EditGroundOverlayDialog : public QDialog
+class EditGroundOverlayDialog : public QDialog
 {
     Q_OBJECT
 
