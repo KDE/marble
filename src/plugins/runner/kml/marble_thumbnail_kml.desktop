@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Service
+Name=KML Geographic Data
+
+X-KDE-ServiceTypes=ThumbCreator
+MimeType=application/vnd.google-earth.kml+xml;
+
+X-KDE-Library=marblethumbnail
+CacheThumbnail=true

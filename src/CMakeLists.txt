@@ -56,6 +56,9 @@ if( NOT QTONLY AND KDE4_PLASMA_LIBS )   # don't try to build this against kdelib
    add_subdirectory( plasmoid )
    add_subdirectory( plasmarunner )
 endif( NOT QTONLY AND KDE4_PLASMA_LIBS )
+if( NOT QTONLY )
+   add_subdirectory( thumbnailer )
+endif( NOT QTONLY )
 
 if(APPLE)
   add_subdirectory( mac )

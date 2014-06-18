@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Service
+Name=ESRI Shapefile
+
+X-KDE-ServiceTypes=ThumbCreator
+MimeType=application/x-esri-shape;
+
+X-KDE-Library=marblethumbnail
+CacheThumbnail=true

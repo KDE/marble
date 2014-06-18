@@ -46,6 +46,7 @@ if(QTONLY)
 else(QTONLY)
   install(PROGRAMS marble_gpx.desktop DESTINATION ${APPS_INSTALL_DIR})
   install(FILES marble_part_gpx.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+  install(FILES marble_thumbnail_gpx.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 endif(QTONLY)
 
 

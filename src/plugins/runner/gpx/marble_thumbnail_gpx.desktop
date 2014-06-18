@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Service
+Name=GPX Geographic Data
+
+X-KDE-ServiceTypes=ThumbCreator
+MimeType=application/x-gpx+xml;
+
+X-KDE-Library=marblethumbnail
+CacheThumbnail=true
