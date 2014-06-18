@@ -8,6 +8,7 @@
             </gx:SoundCue>
             <gx:FlyTo>
                 <gx:duration>2</gx:duration>
+                <gx:flyToMode>smooth</gx:flyToMode>
                 <LookAt>
                     <longitude>23.63</longitude>
                     <latitude>0.71</latitude>
@@ -17,6 +18,7 @@
             </gx:FlyTo>
             <gx:FlyTo>
                 <gx:duration>3</gx:duration>
+                <gx:flyToMode>smooth</gx:flyToMode>
                 <LookAt>
                     <longitude>-17.48</longitude>
                     <latitude>-3.65</latitude>
@@ -26,6 +28,7 @@
             </gx:FlyTo>
             <gx:FlyTo>
                 <gx:duration>3</gx:duration>
+                <gx:flyToMode>smooth</gx:flyToMode>
                 <LookAt>
                     <longitude>15.51</longitude>
                     <latitude>-8.97</latitude>
@@ -35,6 +38,7 @@
             </gx:FlyTo>
             <gx:FlyTo>
                 <gx:duration>2</gx:duration>
+                <gx:flyToMode>smooth</gx:flyToMode>
                 <LookAt>
                     <longitude>-62.0</longitude>
                     <latitude>9.6</latitude>
@@ -44,6 +48,7 @@
             </gx:FlyTo>
 	    <gx:FlyTo>
                 <gx:duration>4</gx:duration>
+                <gx:flyToMode>smooth</gx:flyToMode>
                 <LookAt>
                     <longitude>56.3</longitude>
                     <latitude>3.34</latitude>
@@ -53,6 +58,7 @@
             </gx:FlyTo>
 	    <gx:FlyTo>
                 <gx:duration>1</gx:duration>
+                <gx:flyToMode>smooth</gx:flyToMode>
                 <LookAt>
                     <longitude>-35.0</longitude>
                     <latitude>38.28</latitude>
@@ -62,6 +68,7 @@
             </gx:FlyTo>
 	    <gx:FlyTo>
                 <gx:duration>2</gx:duration>
+                <gx:flyToMode>smooth</gx:flyToMode>
                 <LookAt>
                     <longitude>21.5</longitude>
                     <latitude>9.4</latitude>
