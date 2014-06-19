@@ -1,18 +1,47 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2014 Sanjiban Bairagya <sanjiban22393@gmail.com>
+//
+
 #ifndef TOURPLAYBACK_H
 #define TOURPLAYBACK_H
 
 #include <QObject>
+#include <QSlider>
 
 #include "marble_export.h"
+#include "GeoDataFlyTo.h"
+#include "GeoDataWait.h"
+#include "GeoDataTourControl.h"
+#include "GeoDataSoundCue.h"
+#include "GeoDataAnimatedUpdate.h"
+#include "SerialTrack.h"
+#include "ParallelTrack.h"
 
 namespace Marble
 {
+
+class MarbleWidget;
 
 class GeoDataCoordinates;
 class GeoDataTour;
 class GeoDataTourPrimitive;
 
 class TourPlaybackPrivate;
+class SerialTrack;
+class ParallelTrack;
+class PlaybackItem;
+class PlaybackFlyToItem;
+class PlaybackWaitItem;
+class PlaybackTourControlItem;
+class PlaybackSoundCueItem;
+class PlaybackAnimatedUpdateItem;
+
 class MARBLE_EXPORT TourPlayback : public QObject
 {
     Q_OBJECT
@@ -23,28 +52,29 @@ public:
     bool isPlaying() const;
 
     void setTour(const GeoDataTour *tour);
+    void setupProgressBar( QSlider *slider );
+    void setMarbleWidget( MarbleWidget *widget );
 
-public Q_SLOTS:
     void play();
     void pause();
     void stop();
+    void seek( double t );
 
 Q_SIGNALS:
     void finished();
     void paused();
     void stopped();
-    void centerOn(const GeoDataCoordinates &coordinates);
+    void centerOn( const GeoDataCoordinates &coordinates );
+    void progressChanged( double );
 
-protected:
-    TourPlaybackPrivate * const d_ptr;
+public Q_SLOTS:
+    void finishedSlot();
+    //void stopPlaying();
 
 private:
-    Q_DECLARE_PRIVATE(TourPlayback)
-    Q_PRIVATE_SLOT(d_ptr, void processNextPrimitive())
-    Q_PRIVATE_SLOT(d_ptr, void bounceToCurrentPrimitive())
-    Q_PRIVATE_SLOT(d_ptr, void playSoundCue())
-    Q_PRIVATE_SLOT(d_ptr, void stopPlaying() )
-
+    TourPlaybackPrivate * const d;
+    SerialTrack* mainTrack();
+    friend class TourPlaybackPrivate;
 };
 
 } // namespace Marble

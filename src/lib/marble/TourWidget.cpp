@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2013 Mihail Ivchenko <ematirov@gmail>
+// Copyright 2014 Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
 
 #include "TourWidget.h"
@@ -27,6 +28,7 @@
 #include "MarbleWidget.h"
 #include "ParsingRunnerManager.h"
 #include "TourPlayback.h"
+#include "MarbleDebug.h"
 
 #include <QFileDialog>
 #include <QDir>
@@ -67,6 +69,7 @@ public:
     void updateButtonsStates();
     void moveUp();
     void moveDown();
+    void handlePlaybackProgress( const double position );
 
 private:
     GeoDataTour* findTour( GeoDataFeature* feature ) const;
@@ -74,7 +77,6 @@ private:
     bool openDocument( GeoDataDocument *document );
     bool saveTourAs( const QString &filename );
     bool overrideModifications();
-
     bool m_isChanged;
 
 public:
@@ -84,6 +86,7 @@ public:
     GeoDataTreeModel m_model;
     TourPlayback m_playback;
     TourItemDelegate *m_delegate;
+    bool m_playState;
 };
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
@@ -91,7 +94,8 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
       q( parent ),
       m_widget( 0 ),
       m_playback( 0 ),
-      m_delegate( 0 )
+      m_delegate( 0 ),
+      m_playState( false )
 {
     m_tourUi.setupUi( parent );
     m_tourUi.m_listView->setModel( &m_model );
@@ -117,12 +121,12 @@ TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
 {
     layout()->setMargin( 0 );
 
-    connect(d->m_tourUi.actionPlay, SIGNAL(triggered()),
-            this, SLOT(startPlaying()));
-    connect(d->m_tourUi.actionPause, SIGNAL(triggered()),
-            this, SLOT(pausePlaying()));
-    connect(d->m_tourUi.actionStop, SIGNAL(triggered()),
-            this, SLOT(stopPlaying()));
+    connect( d->m_tourUi.actionPlay, SIGNAL( triggered() ),
+            this, SLOT( togglePlaying() ) );
+    connect( d->m_tourUi.actionStop, SIGNAL( triggered() ),
+            this, SLOT( stopPlaying() ) );
+    connect( d->m_tourUi.m_slider, SIGNAL( sliderMoved( int ) ),
+             this, SLOT( handleSliderMove( int ) ) );
 
     d->m_tourUi.m_toolBarPlayback->setDisabled(true);
 }
@@ -352,31 +356,47 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_tourUi.m_listView->setItemDelegate( d->m_delegate );
 }
 
+void TourWidget::togglePlaying()
+{
+    if( !d->m_playState ){
+        d->m_playState = true;
+        startPlaying();
+    } else {
+        d->m_playState = false;
+        pausePlaying();
+    }
+}
+
 void TourWidget::startPlaying()
 {
     d->m_playback.play();
-
-    d->m_tourUi.actionPlay->setEnabled(false);
-    d->m_tourUi.actionPause->setEnabled(true);
-    d->m_tourUi.actionStop->setEnabled(true);
+    d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-pause.png" ) );
+    d->m_tourUi.actionPlay->setEnabled( true );
+    d->m_tourUi.actionStop->setEnabled( true );
 }
 
 void TourWidget::pausePlaying()
 {
     d->m_playback.pause();
-
-    d->m_tourUi.actionPlay->setEnabled(true);
-    d->m_tourUi.actionPause->setEnabled(false);
-    d->m_tourUi.actionStop->setEnabled(true);
+    d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-play.png" ) );
+    d->m_tourUi.actionPlay->setEnabled( true );
+    d->m_tourUi.actionStop->setEnabled( true );
 }
 
 void TourWidget::stopPlaying()
 {
     d->m_playback.stop();
+    d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-play.png" ) );
+    d->m_tourUi.actionPlay->setEnabled( true );
+    d->m_tourUi.actionStop->setEnabled( false );
+    d->m_playState = false;
+}
 
-    d->m_tourUi.actionPlay->setEnabled(true);
-    d->m_tourUi.actionPause->setEnabled(false);
-    d->m_tourUi.actionStop->setEnabled(false);
+void TourWidget::handleSliderMove( int value )
+{
+    int max = d->m_tourUi.m_slider->maximum();
+    double fraction = value * 1.0 / max;
+    d->m_playback.seek( fraction );
 }
 
 void TourWidgetPrivate::openFile()
@@ -552,18 +572,22 @@ GeoDataFeature* TourWidgetPrivate::getPlaylistFeature() const
 void TourWidgetPrivate::updateRootIndex()
 {
     GeoDataTour *tour = findTour( m_model.rootDocument() );
-    if ( tour ) {
-        m_playback.setTour( tour );
+    if ( tour ){
         GeoDataPlaylist *playlist = tour->playlist();
         if ( playlist ) {
             m_tourUi.m_listView->setRootIndex( m_model.index( playlist ) );
         }
-
+        m_playback.setMarbleWidget( m_widget );
+        m_playback.setTour( tour );
+        m_playback.setupProgressBar( m_tourUi.m_slider );
+        QObject::connect( &m_playback, SIGNAL( centerOn( GeoDataCoordinates ) ),
+                         m_widget, SLOT( centerOn( GeoDataCoordinates ) ) );
+        QObject::connect( &m_playback, SIGNAL( progressChanged( double ) ),
+                         q, SLOT( handlePlaybackProgress( double ) ) );
         q->stopPlaying();
-        m_tourUi.m_toolBarPlayback->setEnabled(true);
-        m_tourUi.actionPlay->setEnabled(true);
-        m_tourUi.actionPause->setEnabled(false);
-        m_tourUi.actionStop->setEnabled(false);
+        m_tourUi.m_toolBarPlayback->setEnabled( true );
+        m_tourUi.actionPlay->setEnabled( true );
+        m_tourUi.actionStop->setEnabled( false );
     }
 }
 
@@ -571,7 +595,7 @@ void TourWidget::addFlyTo()
 {
     d->addFlyTo();
     GeoDataFeature *feature = d->getPlaylistFeature();
-    if ( feature ) {
+    if ( feature ){
         emit featureUpdated( feature );
         d->updateRootIndex();
     }
@@ -646,6 +670,7 @@ bool TourWidgetPrivate::openDocument(GeoDataDocument* document)
         m_tourUi.m_actionAddFlyTo->setEnabled( true );
         m_tourUi.m_actionSaveTourAs->setEnabled( true );
         m_tourUi.m_actionSaveTour->setEnabled( false );
+        m_tourUi.m_slider->setEnabled( true );
         m_isChanged = false;
         delete oldDocument;
         return true;
@@ -720,6 +745,13 @@ bool TourWidgetPrivate::overrideModifications()
 bool TourWidget::openTour( const QString &filename)
 {
     return d->openFile( filename );
+}
+
+void TourWidgetPrivate::handlePlaybackProgress(const double position)
+{
+    if( !m_tourUi.m_slider->isSliderDown() ){
+        m_tourUi.m_slider->setValue( position * 100 );
+    }
 }
 
 FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget, QWidget *parent ) :

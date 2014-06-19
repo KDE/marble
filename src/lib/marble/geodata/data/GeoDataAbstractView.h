@@ -15,6 +15,7 @@
 #include "GeoDataObject.h"
 #include "GeoDataTimeSpan.h"
 #include "GeoDataTimeStamp.h"
+#include "GeoDataCoordinates.h"
 
 #include "geodata_export.h"
 
@@ -54,6 +55,8 @@ class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
     AltitudeMode altitudeMode() const;
 
     void setAltitudeMode(const AltitudeMode altitudeMode);
+
+    GeoDataCoordinates coordinates() const;
 
 private:
     GeoDataAbstractViewPrivate* const d;

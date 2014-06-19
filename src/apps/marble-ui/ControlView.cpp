@@ -747,7 +747,7 @@ void ControlView::handleTourLinkClicked(const QString& path)
     QString tourPath = MarbleDirs::path( path );
     if ( !tourPath.isEmpty() ) {
         if ( m_tourWidget->openTour( tourPath ) ) {
-            m_tourWidget->startPlaying();
+            m_tourWidget->togglePlaying();
         }
     }
 }

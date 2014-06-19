@@ -42,16 +42,25 @@
     </widget>
    </item>
    <item>
-    <widget class="QToolBar" name="m_toolBarPlayback">
-     <property name="windowTitle">
-      <string>toolBar</string>
-     </property>
-     <addaction name="actionPlay"/>
-     <addaction name="separator"/>
-     <addaction name="actionPause"/>
-     <addaction name="separator"/>
-     <addaction name="actionStop"/>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QToolBar" name="m_toolBarPlayback">
+       <property name="windowTitle">
+        <string>toolBar</string>
+       </property>
+       <addaction name="actionPlay"/>
+       <addaction name="separator"/>
+       <addaction name="actionStop"/>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="m_slider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
   <action name="m_actionAddFlyTo">
@@ -148,6 +157,9 @@
    </property>
   </action>
   <action name="actionPlay">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="libmarble.qrc">
      <normaloff>:/marble/playback-play.png</normaloff>:/marble/playback-play.png</iconset>
@@ -157,18 +169,6 @@
    </property>
    <property name="toolTip">
     <string>Begins touring</string>
-   </property>
-  </action>
-  <action name="actionPause">
-   <property name="icon">
-    <iconset resource="libmarble.qrc">
-     <normaloff>:/marble/playback-pause.png</normaloff>:/marble/playback-pause.png</iconset>
-   </property>
-   <property name="text">
-    <string>Pause</string>
-   </property>
-   <property name="toolTip">
-    <string>Pauses touring until you start it again</string>
    </property>
   </action>
   <action name="actionStop">

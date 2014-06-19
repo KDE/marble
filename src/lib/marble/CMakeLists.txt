@@ -96,6 +96,14 @@ set(marblewidget_SRCS
     TourWidget.cpp
     TourPlayback.cpp
     LegendWidget.cpp
+    PlaybackItem.cpp
+    PlaybackAnimatedUpdateItem.cpp
+    PlaybackFlyToItem.cpp
+    PlaybackSoundCueItem.cpp
+    PlaybackTourControlItem.cpp
+    PlaybackWaitItem.cpp
+    SerialTrack.cpp
+    ParallelTrack.cpp
     CurrentLocationWidget.cpp
     MarbleNavigator.cpp
     MarbleLegendBrowser.cpp

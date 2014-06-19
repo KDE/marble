@@ -11,6 +11,10 @@
 
 #include "GeoDataAbstractView.h"
 
+#include "GeoDataCamera.h"
+#include "GeoDataLookAt.h"
+#include "GeoDataTypes.h"
+
 namespace Marble {
 
 class GeoDataAbstractViewPrivate
@@ -54,6 +58,23 @@ GeoDataAbstractView &GeoDataAbstractView::operator =( const GeoDataAbstractView 
     GeoDataObject::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+GeoDataCoordinates GeoDataAbstractView::coordinates() const
+{
+    if ( nodeType() == GeoDataTypes::GeoDataLookAtType) {
+        const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt*>( this );
+        if( lookAt ){
+            return lookAt->coordinates();
+        }
+    }
+    else if( nodeType() == GeoDataTypes::GeoDataCameraType ){
+        const GeoDataCamera *camera = static_cast<const GeoDataCamera*>( this );
+        if ( camera ){
+            return camera->coordinates();
+        }
+    }
+    return GeoDataCoordinates();
 }
 
 

@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2013 Mihail Ivchenko <ematirov@gmail.com>
+// Copyright 2014 Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
 
 #ifndef MARBLE_TOURWIDGET_H
@@ -131,7 +132,9 @@ class MARBLE_EXPORT TourWidget : public QWidget
 public Q_SLOTS:
     void startPlaying();
     void pausePlaying();
+    void togglePlaying();
     void stopPlaying();
+    void handleSliderMove( int );
 
 Q_SIGNALS:
     void featureUpdated( GeoDataFeature *feature );
@@ -149,6 +152,7 @@ private Q_SLOTS:
     Q_PRIVATE_SLOT( d, void saveTourAs() )
     Q_PRIVATE_SLOT( d, void updateButtonsStates() )
     Q_PRIVATE_SLOT( d, void mapCenterOn( const QModelIndex &index ) )
+    Q_PRIVATE_SLOT( d, void handlePlaybackProgress( const double position ) )
     Q_DISABLE_COPY( TourWidget )
 
     TourWidgetPrivate * const d;
@@ -163,7 +167,6 @@ public:
     TourItemDelegate( QListView* view, MarbleWidget* widget );
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
-    void setIsEditing( QModelIndex index, bool newValue );
     QWidget* createEditor ( QWidget * parent, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
 
 Q_SIGNALS:
