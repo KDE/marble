@@ -389,6 +389,7 @@ endif()
 ####################################################
 # Install extra files
 install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
+install(FILES marble.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
 
 ####################################################
 # Install CMake module

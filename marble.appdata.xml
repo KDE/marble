@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<component type="desktop">
+  <id>marble.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LGPL</project_license>
+  <name>Marble</name>
+  <summary>Virtual Globe</summary>
+  <description>
+      <p>Marble is a virtual globe and world atlas — your swiss army knife for maps.</p>
+      <p>Explore the neighborhood with Marble's rich set of city and street level maps. Search for addresses and places of interest. Marble takes care of querying various search backends and presents their results in a unified view. Calculate pedestrian, bike and motorcar routes with ease — online and offline, with an arbitrary number of via points.</p>
+      <p>Start exploring the world. View clouds and sun shadow, follow satellites and space stations and display their orbits, all updated in real-time. Travel back in time and learn about historic views of our planet using maps from past centuries. Earth is not enough? Marble also offers maps of the moon and other planets.</p>
+  </description>
+  <url type="homepage">http://marble.kde.org/</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=marble</url>
+  <url type="faq">http://techbase.kde.org/Projects/Marble/FAQ</url>
+  <url type="help">http://marble.kde.org/support.php</url>
+  <url type="donation">http://www.kde.org/community/donations/</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://marble.kde.org/img/gallery/marble-desktop-satellite-clouds.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>marble</binary>
+  </provides>
+</component>
