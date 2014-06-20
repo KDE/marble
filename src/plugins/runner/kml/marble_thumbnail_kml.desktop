@@ -1,6 +1,13 @@
 [Desktop Entry]
 Type=Service
 Name=KML Geographic Data
+Name[nds]=KML-Geodaten
+Name[pt]=Dados Geográficos em KML
+Name[pt_BR]=Dados geográficos em KML
+Name[sk]=Zemepisné dáta KML
+Name[sv]=KML geografisk data
+Name[uk]=географічні дані KML
+Name[x-test]=xxKML Geographic Dataxx
 
 X-KDE-ServiceTypes=ThumbCreator
 MimeType=application/vnd.google-earth.kml+xml;

@@ -1,6 +1,13 @@
 [Desktop Entry]
 Type=Service
 Name=KML Geographic Compressed Data
+Name[nds]=Komprimeert KML-Geodaten
+Name[pt]=Dados Geográficos Comprimidos em KML
+Name[pt_BR]=Dados geográficos compactados em KML
+Name[sk]=Zemepisné komprimované dáta KML
+Name[sv]=KML komprimerad geografisk data
+Name[uk]=стиснені географічні дані KML
+Name[x-test]=xxKML Geographic Compressed Dataxx
 
 X-KDE-ServiceTypes=ThumbCreator
 MimeType=application/vnd.google-earth.kmz;

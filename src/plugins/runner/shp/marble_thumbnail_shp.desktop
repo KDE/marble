@@ -1,6 +1,13 @@
 [Desktop Entry]
 Type=Service
 Name=ESRI Shapefile
+Name[nds]=ESRI-Ümreetdatei
+Name[pt]=Ficheiro de formas da ESRI
+Name[pt_BR]=Shapefile ESRI
+Name[sk]=Súbor tvarov ESRI
+Name[sv]=ESRI-formfil
+Name[uk]=файл форми ESRI
+Name[x-test]=xxESRI Shapefilexx
 
 X-KDE-ServiceTypes=ThumbCreator
 MimeType=application/x-esri-shape;
