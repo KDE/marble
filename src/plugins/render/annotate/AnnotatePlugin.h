@@ -117,6 +117,7 @@ public slots:
 
 private slots:
     void editOverlay();
+    void editPolygon();
     void removeOverlay();
     void removePolygon();
     void selectNode();
@@ -141,6 +142,7 @@ private:
     void showPolygonRmbMenu( AreaAnnotation *selectedArea, qreal x, qreal y );
     void showNodeRmbMenu( AreaAnnotation *area, qreal x, qreal y );
     void displayOverlayEditDialog( GeoDataGroundOverlay *overlay );
+    void displayPolygonEditDialog( GeoDataPlacemark *placemark );
     void displayOverlayFrame( GeoDataGroundOverlay *overlay );
     void clearOverlayFrames();
 

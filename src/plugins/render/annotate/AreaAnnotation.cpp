@@ -55,7 +55,7 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
                 painter->setBrush( Oxygen::aluminumGray6 );
             }
 
-            painter->drawEllipse( outerRing.at(i) , 15, 15 );
+            painter->drawEllipse( outerRing.at(i) , 10, 10 );
             regionList.append( newRegion );
         }
 
@@ -73,7 +73,7 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
                     painter->setBrush( Oxygen::aluminumGray6 );
                 }
 
-                painter->drawEllipse( ring.at(i), 15, 15 );
+                painter->drawEllipse( ring.at(i), 10, 10 );
                 regionList.append( newRegion );
             }
             sizeOffset += ring.size();
@@ -150,8 +150,7 @@ bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
                                 lon, lat,
                                 GeoDataCoordinates::Radian );
 
-    GeoDataCoordinates const coords( lon, lat );
-
+    const GeoDataCoordinates coords( lon, lat );
     // This means one of the nodes has been clicked. The clicked node can be on the outer
     // boundary of the polygon as well as on its inner boundary.
     if ( m_movedNodeIndex >= 0 && m_movedNodeIndex < regionList.size() - 1 ) {
@@ -176,6 +175,7 @@ bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
             } else {
                 outerRing[m_movedNodeIndex] = coords;
             }
+
             return true;
         } else {
             return false;
