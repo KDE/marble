@@ -108,7 +108,8 @@ void GeoDataThumbnailer::onGeoDataObjectAdded( GeoDataObject* object )
     if ( object->nodeType() != GeoDataTypes::GeoDataDocumentType ) {
         return;
     }
-    GeoDataDocument *document = static_cast<GeoDataDocument*>(object);
+
+    const GeoDataDocument *document = static_cast<GeoDataDocument*>(object);
     if (document->fileName() != m_currentFilename) {
         return;
     }
@@ -119,7 +120,7 @@ void GeoDataThumbnailer::onGeoDataObjectAdded( GeoDataObject* object )
     int newRadius = m_marbleMap->radius();
     //prevent divide by zero
     if( latLonAltBox.height() && latLonAltBox.width() ) {
-        ViewportParams* viewparams = m_marbleMap->viewport();
+        const ViewportParams* viewparams = m_marbleMap->viewport();
         //work out the needed zoom level
         const int horizontalRadius = ( 0.25 * M_PI ) * ( viewparams->height() / latLonAltBox.height() );
         const int verticalRadius = ( 0.25 * M_PI ) * ( viewparams->width() / latLonAltBox.width() );
