@@ -2,6 +2,7 @@
 Type=Service
 Name=ESRI Shapefile
 Name[nds]=ESRI-Ümreetdatei
+Name[nl]=ESRI Shapefile
 Name[pt]=Ficheiro de formas da ESRI
 Name[pt_BR]=Shapefile ESRI
 Name[sk]=Súbor tvarov ESRI

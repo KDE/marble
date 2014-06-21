@@ -2,6 +2,7 @@
 Type=Service
 Name=KML Geographic Compressed Data
 Name[nds]=Komprimeert KML-Geodaten
+Name[nl]=KML Geographic Compressed Data
 Name[pt]=Dados Geográficos Comprimidos em KML
 Name[pt_BR]=Dados geográficos compactados em KML
 Name[sk]=Zemepisné komprimované dáta KML

@@ -2,6 +2,7 @@
 Type=Service
 Name=OSM Data
 Name[nds]=OSM-Daten
+Name[nl]=OSM-gegevens
 Name[pt]=Dados do OSM
 Name[pt_BR]=Dados do OSM
 Name[sk]=Dáta OSM
