@@ -25,9 +25,6 @@
 
 namespace Marble {
 class MarbleMap;
-class MarbleModel;
-class GeoDataDocument;
-class GeoDataTreeModel;
 class GeoDataObject;
 
 
@@ -48,7 +45,6 @@ private slots:
 
 private:
     MarbleMap *m_marbleMap;
-    MarbleModel *m_model;
 
     QString m_currentFilename;
     bool m_loadingCompleted :1;

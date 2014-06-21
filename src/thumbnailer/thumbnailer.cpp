@@ -47,8 +47,6 @@ GeoDataThumbnailer::GeoDataThumbnailer()
         plugin->setEnabled( false );
     }
 
-    m_model = m_marbleMap->model();
-
     m_outtimer.setInterval(timeoutTime);
     m_outtimer.setSingleShot(true);
     connect(&m_outtimer, SIGNAL(timeout()), &m_eventLoop, SLOT(quit()));
@@ -64,12 +62,14 @@ bool GeoDataThumbnailer::create(const QString &path, int width, int height, QIma
 {
     m_marbleMap->setSize(width, height);
 
+    MarbleModel *const model = m_marbleMap->model();
+
     // load the document content
     m_loadingCompleted = false;
 
     m_currentFilename = path;
-    connect(m_model->treeModel(), SIGNAL(added(GeoDataObject*)), this, SLOT(onGeoDataObjectAdded(GeoDataObject*)));
-    m_model->addGeoDataFile(path);
+    connect(model->treeModel(), SIGNAL(added(GeoDataObject*)), this, SLOT(onGeoDataObjectAdded(GeoDataObject*)));
+    model->addGeoDataFile(path);
 
     if (! m_loadingCompleted) {
         // loading is done async, so wait here for a while
@@ -91,8 +91,8 @@ bool GeoDataThumbnailer::create(const QString &path, int width, int height, QIma
         m_marbleMap->paint( geoPainter, QRect() ); // TODO: dirtyRect seems currently unused, make sure it is
     }
 
-    disconnect(m_model->treeModel(), SIGNAL(added(GeoDataObject*)), this, SLOT(onGeoDataObjectAdded(GeoDataObject*)));
-    m_model->removeGeoData(path);
+    disconnect(model->treeModel(), SIGNAL(added(GeoDataObject*)), this, SLOT(onGeoDataObjectAdded(GeoDataObject*)));
+    model->removeGeoData(path);
     m_currentFilename.clear();
 
     return m_loadingCompleted;
