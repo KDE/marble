@@ -17,8 +17,12 @@
 #ifndef _MARBLEGEODATATHUMBNAILER_H_
 #define _MARBLEGEODATATHUMBNAILER_H_
 
+// Marble
+#include "MarbleMap.h"
+
 // KDE
 #include <kio/thumbcreator.h>
+
 // Qt
 #include <QEventLoop>
 #include <QTimer>
@@ -44,7 +48,7 @@ private slots:
     void onGeoDataObjectAdded(GeoDataObject *object);
 
 private:
-    MarbleMap *m_marbleMap;
+    MarbleMap m_marbleMap;
 
     QString m_currentFilename;
     bool m_loadingCompleted :1;

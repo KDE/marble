@@ -16,7 +16,6 @@
 #include "thumbnailer.h"
 
 // Marble
-#include <MarbleMap.h>
 #include <MarbleModel.h>
 #include <GeoDataDocument.h>
 #include <GeoPainter.h>
@@ -37,13 +36,13 @@ namespace Marble {
 
 GeoDataThumbnailer::GeoDataThumbnailer()
   : ThumbCreator()
-  , m_marbleMap(new MarbleMap())
+  , m_marbleMap()
 {
-    m_marbleMap->setMapThemeId(QLatin1String("earth/openstreetmap/openstreetmap.dgml"));
-    m_marbleMap->setProjection(Equirectangular);
-    m_marbleMap->setMapQualityForViewContext( PrintQuality, Still );
-    m_marbleMap->setViewContext( Still );
-    foreach( RenderPlugin* plugin, m_marbleMap->renderPlugins() ) {
+    m_marbleMap.setMapThemeId(QLatin1String("earth/openstreetmap/openstreetmap.dgml"));
+    m_marbleMap.setProjection(Equirectangular);
+    m_marbleMap.setMapQualityForViewContext( PrintQuality, Still );
+    m_marbleMap.setViewContext( Still );
+    foreach( RenderPlugin* plugin, m_marbleMap.renderPlugins() ) {
         plugin->setEnabled( false );
     }
 
@@ -55,14 +54,13 @@ GeoDataThumbnailer::GeoDataThumbnailer()
 
 GeoDataThumbnailer::~GeoDataThumbnailer()
 {
-    delete m_marbleMap;
 }
 
 bool GeoDataThumbnailer::create(const QString &path, int width, int height, QImage &image)
 {
-    m_marbleMap->setSize(width, height);
+    m_marbleMap.setSize(width, height);
 
-    MarbleModel *const model = m_marbleMap->model();
+    MarbleModel *const model = m_marbleMap.model();
 
     // load the document content
     m_loadingCompleted = false;
@@ -85,10 +83,10 @@ bool GeoDataThumbnailer::create(const QString &path, int width, int height, QIma
         image.fill(qRgba(0, 0, 0, 0));
 
         // Create a painter that will do the painting.
-        GeoPainter geoPainter( &image, m_marbleMap->viewport(),
-                               m_marbleMap->mapQuality() );
+        GeoPainter geoPainter( &image, m_marbleMap.viewport(),
+                               m_marbleMap.mapQuality() );
 
-        m_marbleMap->paint( geoPainter, QRect() ); // TODO: dirtyRect seems currently unused, make sure it is
+        m_marbleMap.paint( geoPainter, QRect() ); // TODO: dirtyRect seems currently unused, make sure it is
     }
 
     disconnect(model->treeModel(), SIGNAL(added(GeoDataObject*)), this, SLOT(onGeoDataObjectAdded(GeoDataObject*)));
@@ -117,20 +115,20 @@ void GeoDataThumbnailer::onGeoDataObjectAdded( GeoDataObject* object )
     const GeoDataLatLonAltBox latLonAltBox = document->latLonAltBox();
     const GeoDataCoordinates center = latLonAltBox.center();
 
-    int newRadius = m_marbleMap->radius();
+    int newRadius = m_marbleMap.radius();
     //prevent divide by zero
     if( latLonAltBox.height() && latLonAltBox.width() ) {
-        const ViewportParams* viewparams = m_marbleMap->viewport();
+        const ViewportParams* viewparams = m_marbleMap.viewport();
         //work out the needed zoom level
         const int horizontalRadius = ( 0.25 * M_PI ) * ( viewparams->height() / latLonAltBox.height() );
         const int verticalRadius = ( 0.25 * M_PI ) * ( viewparams->width() / latLonAltBox.width() );
         newRadius = qMin<int>( horizontalRadius, verticalRadius );
-        newRadius = qMax<int>(radius(m_marbleMap->minimumZoom()), qMin<int>(newRadius, radius(m_marbleMap->maximumZoom())));
+        newRadius = qMax<int>(radius(m_marbleMap.minimumZoom()), qMin<int>(newRadius, radius(m_marbleMap.maximumZoom())));
     }
 
-    m_marbleMap->centerOn( center.longitude(GeoDataCoordinates::Degree), center.latitude(GeoDataCoordinates::Degree) );
+    m_marbleMap.centerOn( center.longitude(GeoDataCoordinates::Degree), center.latitude(GeoDataCoordinates::Degree) );
 
-    m_marbleMap->setRadius( newRadius );
+    m_marbleMap.setRadius( newRadius );
 
     m_loadingCompleted = true;
     m_outtimer.stop();
