@@ -119,6 +119,8 @@ void PopupItem::setTextColor(const QColor &color)
         QPalette palette(m_ui.titleText->palette());
         palette.setColor(QPalette::WindowText, m_textColor);
         m_ui.titleText->setPalette(palette);
+
+        requestUpdate();
     }
 }
 
@@ -131,6 +133,8 @@ void PopupItem::setBackgroundColor(const QColor &color)
         QPixmapCache::remove( "marble/webpopup/arrow2_bottomleft" );
         QPixmapCache::remove( "marble/webpopup/arrow2_topright" );
         QPixmapCache::remove( "marble/webpopup/arrow2_bottomright" );
+
+        requestUpdate();
     }
 }
 

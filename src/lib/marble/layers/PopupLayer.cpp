@@ -158,7 +158,6 @@ void PopupLayer::setUrl( const QUrl &url )
 void PopupLayer::setContent( const QString &html, const QUrl &baseUrl )
 {
     d->m_popupItem->setContent( html, baseUrl );
-    emit repaintNeeded();
 }
 
 void PopupLayer::setPlacemark( const GeoDataPlacemark *placemark )
@@ -209,7 +208,6 @@ void PopupLayer::setPlacemark( const GeoDataPlacemark *placemark )
     }
     d->m_popupItem->setBackgroundColor(placemark->style()->balloonStyle().backgroundColor());
     d->m_popupItem->setTextColor(placemark->style()->balloonStyle().textColor());
-    emit repaintNeeded();
 }
 
 void PopupLayer::setBackgroundColor(const QColor &color)
