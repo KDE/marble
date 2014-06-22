@@ -64,7 +64,7 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
     if ( mapColorField != -1 ) {
         GeoDataSchema schema;
-        schema.setSchemaId("default");
+        schema.setId("default");
         GeoDataSimpleField simpleField;
         simpleField.setName("mapcolor13");
         simpleField.setType( GeoDataSimpleField::Double );

@@ -15,6 +15,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -28,10 +29,9 @@ bool KmlSchemaTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataSchema *schema = static_cast<const GeoDataSchema*>( node );
     writer.writeStartElement( kml::kmlTag_Schema );
+    KmlObjectTagWriter::writeIdentifiers( writer, schema );
     QString name = schema->schemaName();
-    QString id = schema->schemaId();
     writer.writeAttribute( "name", name );
-    writer.writeAttribute( "id", id );
 
     foreach( const GeoDataSimpleField &simpleField, schema->simpleFields() ) {
         writeElement( &simpleField, writer );

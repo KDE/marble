@@ -12,6 +12,7 @@
 #include "KmlPlaylistTagHandler.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoParser.h"
 #include "GeoDataPlaylist.h"
 #include "GeoDataWait.h"
@@ -29,7 +30,7 @@ GeoNode* KmlWaitTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     GeoDataWait *wait = new GeoDataWait;
-    wait->setId(QString(parser.attribute("id").toUtf8()));
+    KmlObjectTagHandler::parseIdentifiers( parser, wait );
 
     if (parentItem.is<GeoDataPlaylist>()) {
         parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(wait);

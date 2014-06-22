@@ -9,7 +9,7 @@
 //
 
 #include "KmlTrackTagHandler.h"
-
+#include "KmlObjectTagHandler.h"
 #include "GeoDataMultiTrack.h"
 #include "GeoDataTrack.h"
 #include "GeoDataPlacemark.h"
@@ -28,19 +28,20 @@ GeoNode *KmlTrackTagHandler::parse( GeoParser &parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Track ) );
 
     GeoStackItem parentItem = parser.parentElement();
+    GeoDataTrack *track = new GeoDataTrack();
+    KmlObjectTagHandler::parseIdentifiers( parser, track );
 
     if ( parentItem.represents( kmlTag_Placemark ) ) {
-        GeoDataTrack *track = new GeoDataTrack();
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( track );
         return track;
     } else if ( parentItem.represents( kmlTag_MultiTrack ) ) {
-        GeoDataTrack *track = new GeoDataTrack();
         parentItem.nodeAs<GeoDataMultiTrack>()->append( track );
         return track;
     } else if ( parentItem.represents( kmlTag_MultiGeometry ) ) {
-        GeoDataTrack *track = new GeoDataTrack();
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( track );
         return track;
+    } else {
+        delete track;
     }
 
     return 0;

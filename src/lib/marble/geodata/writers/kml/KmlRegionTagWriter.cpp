@@ -17,6 +17,7 @@
 #include "KmlElementDictionary.h"
 #include "KmlLatLonAltBoxWriter.h"
 #include "KmlLodTagWriter.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -30,6 +31,7 @@ bool KmlRegionTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataRegion *region = static_cast<const GeoDataRegion*>( node );
     writer.writeStartElement( kml::kmlTag_Region );
+    KmlObjectTagWriter::writeIdentifiers( writer, region );
     writeElement( &region->latLonAltBox(), writer );
     writeElement( &region->lod(), writer );
     writer.writeEndElement();

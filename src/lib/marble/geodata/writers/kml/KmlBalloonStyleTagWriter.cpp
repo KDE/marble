@@ -16,6 +16,7 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "KmlColorStyleTagWriter.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -29,6 +30,7 @@ bool KmlBalloonStyleTagWriter::write( const GeoNode *node,
 {
     const GeoDataBalloonStyle *balloonStyle = static_cast<const GeoDataBalloonStyle*>( node );
     writer.writeStartElement( kml::kmlTag_BalloonStyle );
+    KmlObjectTagWriter::writeIdentifiers( writer, balloonStyle );
 
     QString const textColor = KmlColorStyleTagWriter::formatColor( balloonStyle->textColor() );
     writer.writeOptionalElement( kml::kmlTag_textColor, textColor, "ff000000" );

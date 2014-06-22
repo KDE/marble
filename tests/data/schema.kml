@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document>
-        <Schema name="Flight" id="002f">
+        <Schema id="002f" name="Flight">
             <SimpleField name="journeyTime" type="float">
                 <displayName>The expected time(hh.mm) of journey</displayName>
             </SimpleField>

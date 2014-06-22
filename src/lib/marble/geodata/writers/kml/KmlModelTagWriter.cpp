@@ -16,6 +16,7 @@
 #include "KmlGroundOverlayWriter.h"
 #include "KmlLinkTagWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -30,6 +31,7 @@ bool KmlModelTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     const GeoDataModel *model = static_cast<const GeoDataModel*>( node );
 
     writer.writeStartElement( kml::kmlTag_Model );
+    KmlObjectTagWriter::writeIdentifiers( writer, model );
 
     KmlGroundOverlayWriter::writeAltitudeMode( writer, model->altitudeMode());
 

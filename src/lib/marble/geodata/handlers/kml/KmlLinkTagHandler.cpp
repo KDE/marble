@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataLink.h"
 #include "GeoDataNetworkLink.h"
 #include "GeoDataDocument.h"
@@ -29,6 +30,7 @@ GeoNode* KmlLinkTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Link ) );
     GeoDataLink link;
+    KmlObjectTagHandler::parseIdentifiers( parser, &link );
     GeoStackItem parentItem = parser.parentElement();
 
     if ( parentItem.represents( kmlTag_NetworkLink )) {

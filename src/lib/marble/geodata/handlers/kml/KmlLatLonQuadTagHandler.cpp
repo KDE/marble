@@ -11,6 +11,7 @@
 #include "KmlLatLonQuadTagHandler.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoParser.h"
 #include "GeoDataLatLonQuad.h"
 #include "GeoDataGroundOverlay.h"
@@ -27,7 +28,9 @@ GeoNode* KmlLatLonQuadTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     if( parentItem.represents( kmlTag_GroundOverlay ) )
     {
-        return &parentItem.nodeAs<GeoDataGroundOverlay>()->latLonQuad();
+        GeoDataLatLonQuad* quad = &parentItem.nodeAs<GeoDataGroundOverlay>()->latLonQuad();
+        KmlObjectTagHandler::parseIdentifiers( parser, quad );
+        return quad;
     }
 
     return 0;

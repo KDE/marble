@@ -24,6 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
@@ -44,6 +45,7 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
         // the new Document tag works like a Folder
         if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
             GeoDataDocument *document = new GeoDataDocument;
+            KmlObjectTagHandler::parseIdentifiers( parser, document );
             parentItem.nodeAs<GeoDataContainer>()->append( document );
 
             return document;

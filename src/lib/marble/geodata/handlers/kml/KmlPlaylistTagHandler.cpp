@@ -11,6 +11,7 @@
 #include "KmlPlaylistTagHandler.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoParser.h"
 #include "GeoDataPlaylist.h"
 #include "GeoDataTour.h"
@@ -29,6 +30,7 @@ GeoNode* KmlPlaylistTagHandler::parse(GeoParser &parser) const
 
     if (parentItem.is<GeoDataTour>()) {
         GeoDataPlaylist *playlist = new GeoDataPlaylist;
+        KmlObjectTagHandler::parseIdentifiers( parser, playlist );
         parentItem.nodeAs<GeoDataTour>()->setPlaylist(playlist);
         return playlist;
     }

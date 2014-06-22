@@ -24,6 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataContainer.h"
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
@@ -41,6 +42,7 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     GeoDataFolder *folder = new GeoDataFolder;
+    KmlObjectTagHandler::parseIdentifiers( parser, folder );
     if ( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
         GeoDataContainer *parentPtr = parentItem.nodeAs<GeoDataContainer>();
         parentPtr->append( folder );

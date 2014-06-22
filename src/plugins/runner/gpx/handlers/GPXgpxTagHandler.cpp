@@ -50,11 +50,11 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     lineStyle.setColor( transparentRed );
     lineStyle.setWidth( 4 );
     style.setLineStyle(lineStyle);
-    style.setStyleId("track");
+    style.setId("track");
 
     GeoDataStyleMap styleMap;
-    styleMap.setStyleId("map-track");
-    styleMap.insert("normal", QString("#").append(style.styleId()));
+    styleMap.setId("map-track");
+    styleMap.insert("normal", QString("#").append(style.id()));
     doc->addStyleMap(styleMap);
     doc->addStyle(style);
 
@@ -66,17 +66,17 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     routeLineStyle.setColor( skyBlue );
     routeLineStyle.setWidth( 5 );
     routestyle.setLineStyle(routeLineStyle);
-    routestyle.setStyleId("route");
+    routestyle.setId("route");
 
     GeoDataStyleMap routeStyleMap;
-    routeStyleMap.setStyleId("map-route");
-    routeStyleMap.insert("normal", QString("#").append(routestyle.styleId()));
+    routeStyleMap.setId("map-route");
+    routeStyleMap.insert("normal", QString("#").append(routestyle.id()));
     doc->addStyleMap(routeStyleMap);
     doc->addStyle(routestyle);
 
     // create a default style for waypoint icons
     GeoDataStyle waypointStyle;
-    waypointStyle.setStyleId("waypoint");
+    waypointStyle.setId("waypoint");
     GeoDataIconStyle iconStyle;
     iconStyle.setIconPath(MarbleDirs::path("bitmaps/flag.png"));
     iconStyle.setHotSpot(QPointF(0.12,0.03), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
@@ -87,8 +87,8 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     waypointStyle.setLabelStyle(waypointLabelStyle);
 
     GeoDataStyleMap waypointStyleMap;
-    waypointStyleMap.setStyleId("map-waypoint");
-    waypointStyleMap.insert("normal", QString("#").append(waypointStyle.styleId()));
+    waypointStyleMap.setId("map-waypoint");
+    waypointStyleMap.insert("normal", QString("#").append(waypointStyle.id()));
     doc->addStyleMap(waypointStyleMap);
     doc->addStyle(waypointStyle);
 

@@ -39,17 +39,6 @@ public:
     ~GeoDataSchema();
 
     /*
-     * @brief Returns the id of schema
-     */
-    QString schemaId() const;
-
-    /*
-     * @brief sets the id of schema
-     * @param schemaId  The to be set
-     */
-    void setSchemaId( const QString& schemaId );
-
-    /*
      * @brief Returns the name attribute of schema
      */
     QString schemaName() const;

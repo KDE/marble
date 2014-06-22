@@ -14,6 +14,7 @@
 #include "GeoDataColorStyle.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -29,6 +30,7 @@ bool KmlColorStyleTagWriter::write( const Marble::GeoNode *node, GeoWriter &writ
     writer.writeStartElement( m_elementName );
 
     GeoDataColorStyle const *colorStyle = static_cast<const GeoDataColorStyle*>(node);
+    KmlObjectTagWriter::writeIdentifiers( writer, colorStyle);
     writer.writeOptionalElement( kml::kmlTag_color, formatColor( colorStyle->color() ), "ffffffff" );
     QString const colorMode = colorStyle->colorMode() == GeoDataColorStyle::Random ? "random" : "normal";
     writer.writeOptionalElement( kml::kmlTag_colorMode, colorMode, "normal" );

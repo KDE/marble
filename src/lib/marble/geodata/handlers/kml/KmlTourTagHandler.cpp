@@ -9,6 +9,7 @@
 //
 
 #include "KmlTourTagHandler.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataTour.h"
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
@@ -27,7 +28,7 @@ GeoNode* KmlTourTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     GeoDataTour *tour = new GeoDataTour;
-    tour->setId(QString(parser.attribute("id").toUtf8()));
+    KmlObjectTagHandler::parseIdentifiers( parser, tour );
 
     if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document)) {
         parentItem.nodeAs<GeoDataContainer>()->append(tour);

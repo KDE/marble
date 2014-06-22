@@ -16,6 +16,7 @@
 #include "GeoTagWriter.h"
 #include "KmlGroundOverlayWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -30,6 +31,7 @@ bool KmlLatLonAltBoxWriter::write( const GeoNode *node,
 {
     const GeoDataLatLonAltBox *latLonAltBox = static_cast<const GeoDataLatLonAltBox*>( node );
     writer.writeStartElement(kml::kmlTag_LatLonAltBox);
+    KmlObjectTagWriter::writeIdentifiers( writer, latLonAltBox );
     writer.writeTextElement( kml::kmlTag_north, QString::number(latLonAltBox->north( GeoDataCoordinates::Degree )) );
     writer.writeTextElement( kml::kmlTag_south, QString::number(latLonAltBox->south( GeoDataCoordinates::Degree )) );
     writer.writeTextElement( kml::kmlTag_east,  QString::number(latLonAltBox->east( GeoDataCoordinates::Degree )) );

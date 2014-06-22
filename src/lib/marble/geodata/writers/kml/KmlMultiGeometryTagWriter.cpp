@@ -14,6 +14,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -28,6 +29,7 @@ bool KmlMultiGeometryTagWriter::write( const GeoNode *node, GeoWriter& writer ) 
     const GeoDataMultiGeometry *geometry = static_cast<const GeoDataMultiGeometry*>( node );
 
     writer.writeStartElement( kml::kmlTag_MultiGeometry );
+    KmlObjectTagWriter::writeIdentifiers( writer, geometry );
 
     for ( int i = 0; i < geometry->size(); ++i )
     {

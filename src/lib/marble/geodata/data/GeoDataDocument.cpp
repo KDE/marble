@@ -134,8 +134,8 @@ void GeoDataDocument::setNetworkLinkControl( const GeoDataNetworkLinkControl &ne
 void GeoDataDocument::addStyle( const GeoDataStyle& style )
 {
     detach();
-    p()->m_styleHash.insert( style.styleId(), style );
-    p()->m_styleHash[ style.styleId() ].setParent( this );
+    p()->m_styleHash.insert( style.id(), style );
+    p()->m_styleHash[ style.id() ].setParent( this );
 }
 
 void GeoDataDocument::removeStyle( const QString& styleId )
@@ -166,8 +166,8 @@ QList<GeoDataStyle> GeoDataDocument::styles() const
 void GeoDataDocument::addStyleMap( const GeoDataStyleMap& map )
 {
     detach();
-    p()->m_styleMapHash.insert( map.styleId(), map );
-    p()->m_styleMapHash[ map.styleId() ].setParent( this );
+    p()->m_styleMapHash.insert( map.id(), map );
+    p()->m_styleMapHash[ map.id() ].setParent( this );
 }
 
 void GeoDataDocument::removeStyleMap( const QString& mapId )
@@ -194,8 +194,8 @@ QList<GeoDataStyleMap> GeoDataDocument::styleMaps() const
 void GeoDataDocument::addSchema( const GeoDataSchema& schema )
 {
     detach();
-    p()->m_schemaHash.insert( schema.schemaId(), schema );
-    p()->m_schemaHash[ schema.schemaId() ].setParent( this );
+    p()->m_schemaHash.insert( schema.id(), schema );
+    p()->m_schemaHash[ schema.id() ].setParent( this );
 }
 
 void GeoDataDocument::removeSchema( const QString& schemaId )
@@ -247,7 +247,7 @@ void GeoDataDocument::unpack( QDataStream& stream )
     for( int i = 0; i < size; i++ ) {
         GeoDataStyle style;
         style.unpack( stream );
-        p()->m_styleHash.insert( style.styleId(), style );
+        p()->m_styleHash.insert( style.id(), style );
     }
 }
 

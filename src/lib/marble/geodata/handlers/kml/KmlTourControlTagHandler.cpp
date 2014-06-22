@@ -12,6 +12,7 @@
 #include "KmlPlaylistTagHandler.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoParser.h"
 #include "GeoDataPlaylist.h"
 #include "GeoDataTourControl.h"
@@ -29,7 +30,7 @@ GeoNode* KmlTourControlTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     GeoDataTourControl *tourControl = new GeoDataTourControl;
-    tourControl->setId(QString(parser.attribute("id").toUtf8()));
+    KmlObjectTagHandler::parseIdentifiers( parser, tourControl );
 
     if (parentItem.is<GeoDataPlaylist>()) {
         //parentItem.nodeAs<GeoDataPlaylist>()->append(tourControl);

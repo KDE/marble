@@ -16,6 +16,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataParser.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 
 namespace Marble
 {
@@ -31,6 +32,7 @@ GeoNode* KmlBalloonStyleTagHandler::parse( GeoParser& parser ) const
 
     if ( parentItem.represents( kmlTag_Style ) ) {
         GeoDataBalloonStyle style;
+        KmlObjectTagHandler::parseIdentifiers( parser, &style );
 
         parentItem.nodeAs<GeoDataStyle>()->setBalloonStyle( style );
         return &parentItem.nodeAs<GeoDataStyle>()->balloonStyle();

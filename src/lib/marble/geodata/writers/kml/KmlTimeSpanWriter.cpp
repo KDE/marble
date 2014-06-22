@@ -15,6 +15,7 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "KmlTimeStampTagWriter.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -32,6 +33,7 @@ bool KmlTimeSpanWriter::write( const GeoNode *node,
 	static_cast<const GeoDataTimeSpan*>( node );
 
     writer.writeStartElement( kml::kmlTag_TimeSpan );
+    KmlObjectTagWriter::writeIdentifiers( writer, timespan );
 
     writer.writeTextElement( "begin", KmlTimeStampTagWriter::toString( timespan->begin() ) );
     writer.writeTextElement( "end", KmlTimeStampTagWriter::toString( timespan->end() ) );

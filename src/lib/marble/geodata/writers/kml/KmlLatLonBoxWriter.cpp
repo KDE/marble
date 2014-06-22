@@ -14,6 +14,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -30,6 +31,7 @@ bool KmlLatLonBoxWriter::write( const GeoNode *node,
 	static_cast<const GeoDataLatLonBox*>( node );
 
     writer.writeStartElement( kml::kmlTag_LatLonBox );
+    KmlObjectTagWriter::writeIdentifiers( writer, lat_lon_box );
 
     writer.writeTextElement( "north",
 			     QString::number(lat_lon_box->north( GeoDataCoordinates::Degree )) );

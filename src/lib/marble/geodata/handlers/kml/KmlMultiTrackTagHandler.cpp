@@ -12,7 +12,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
-
+#include "KmlObjectTagHandler.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataMultiTrack.h"
@@ -33,6 +33,7 @@ GeoNode* KmlMultiTrackTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
 
     GeoDataMultiTrack *geom = new GeoDataMultiTrack;
+    KmlObjectTagHandler::parseIdentifiers( parser, geom );
     if( parentItem.represents( kmlTag_Placemark ) ) {
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( geom );
         return parentItem.nodeAs<GeoDataPlacemark>()->geometry();

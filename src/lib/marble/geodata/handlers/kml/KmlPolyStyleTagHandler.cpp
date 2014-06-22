@@ -24,6 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataStyle.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoParser.h"
@@ -43,6 +44,7 @@ GeoNode* KmlPolyStyleTagHandler::parse( GeoParser& parser ) const
     
     if ( parentItem.represents( kmlTag_Style ) ) {
         GeoDataPolyStyle style;
+        KmlObjectTagHandler::parseIdentifiers( parser, &style );
         parentItem.nodeAs<GeoDataStyle>()->setPolyStyle( style );
         return &parentItem.nodeAs<GeoDataStyle>()->polyStyle();
     }

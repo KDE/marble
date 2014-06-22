@@ -23,6 +23,7 @@
 #include "GeoWriter.h"
 #include "GeoDataRegion.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -52,6 +53,8 @@ bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer 
     writer.writeStartElement( m_elementName );
 
     GeoDataFeature const *feature = static_cast<const GeoDataFeature*>(node);
+    KmlObjectTagWriter::writeIdentifiers( writer, feature );
+
     writer.writeOptionalElement( kml::kmlTag_name, feature->name() );
     writer.writeOptionalElement( kml::kmlTag_visibility, QString::number( feature->isVisible() ), "1" );
     writer.writeOptionalElement( "address", feature->address() );

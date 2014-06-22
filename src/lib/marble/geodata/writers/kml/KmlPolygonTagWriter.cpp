@@ -15,6 +15,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -29,6 +30,7 @@ bool KmlPolygonTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( node );
 
     writer.writeStartElement( kml::kmlTag_Polygon );
+    KmlObjectTagWriter::writeIdentifiers( writer, polygon );
     writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( polygon->extrude() ), "0" );
 
     writer.writeStartElement( "outerBoundaryIs" );

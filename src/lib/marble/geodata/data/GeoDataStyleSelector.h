@@ -44,17 +44,6 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
     virtual const char* nodeType() const;
 
     /**
-     * @brief Set a new style id.
-     * @param  value  the new id
-     */
-    void setStyleId( const QString &value );
-    /**
-     * @brief Return the style id.
-     * @return the style id
-     */
-    QString styleId() const;
-
-    /**
     * @brief assignment operator
     */
     GeoDataStyleSelector& operator=( const GeoDataStyleSelector& other );

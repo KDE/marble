@@ -105,7 +105,7 @@ void TestGeoData::parentingTest()
     GeoDataIconStyle iconStyle;
     iconStyle.setIconPath( "myicon.png" );
     GeoDataStyle* style = new GeoDataStyle;
-    style->setStyleId( "mystyle" );
+    style->setId( "mystyle" );
     style->setIconStyle( iconStyle );
     GeoDataObject* noParent = 0;
     QCOMPARE( style->parent(), noParent );
@@ -120,7 +120,7 @@ void TestGeoData::parentingTest()
 
     /// Set a style map
     GeoDataStyleMap* styleMap = new GeoDataStyleMap;
-    styleMap->setStyleId( "mystylemap" );
+    styleMap->setId( "mystylemap" );
     styleMap->insert( "normal", "#mystyle" );
     styleMap->insert( "highlight", "#mystyle" );
     document->addStyle( *style );

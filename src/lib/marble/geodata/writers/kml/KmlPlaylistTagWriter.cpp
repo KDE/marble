@@ -14,6 +14,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -58,9 +59,7 @@ void KmlPlaylistTagWriter::writeTourPrimitive( const GeoNode *primitive, GeoWrit
 void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer )
 {
     writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_TourControl );
-    if ( !tourControl->id().isEmpty() ) {
-        writer.writeAttribute( "id", tourControl->id() );
-    }
+    KmlObjectTagWriter::writeIdentifiers( writer, tourControl );
 
     writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_playMode, playModeToString( tourControl->playMode() ) );
 
@@ -70,9 +69,7 @@ void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourContr
 void KmlPlaylistTagWriter::writeWait( const GeoDataWait* wait, GeoWriter& writer )
 {
     writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_Wait );
-    if ( !wait->id().isEmpty() ) {
-        writer.writeAttribute( "id", wait->id() );
-    }
+    KmlObjectTagWriter::writeIdentifiers( writer, wait );
 
     writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_duration, QString::number( wait->duration() ) );
 
@@ -82,9 +79,7 @@ void KmlPlaylistTagWriter::writeWait( const GeoDataWait* wait, GeoWriter& writer
 void KmlPlaylistTagWriter::writeSoundCue(const GeoDataSoundCue *cue, GeoWriter &writer)
 {
     writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_SoundCue );
-    if (!cue->id().isEmpty()) {
-        writer.writeAttribute( "id", cue->id() );
-    }
+    KmlObjectTagWriter::writeIdentifiers( writer, cue );
 
     writer.writeElement( kml::kmlTag_href, cue->href() );
     writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_delayedStart,

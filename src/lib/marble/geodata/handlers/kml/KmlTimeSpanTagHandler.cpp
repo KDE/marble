@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataTimeSpan.h"
 #include "GeoDataFeature.h"
 #include "GeoParser.h"
@@ -30,6 +31,7 @@ GeoNode* KmlTimeSpanTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.is<GeoDataFeature>() ) {
         GeoDataTimeSpan timeSpan;
+        KmlObjectTagHandler::parseIdentifiers( parser, &timeSpan );
         parentItem.nodeAs<GeoDataFeature>()->setTimeSpan( timeSpan );
         return &parentItem.nodeAs<GeoDataFeature>()->timeSpan();
     }

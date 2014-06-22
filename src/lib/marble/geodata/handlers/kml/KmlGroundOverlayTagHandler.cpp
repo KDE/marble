@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataGroundOverlay.h"
 #include "GeoDataContainer.h"
 #include "GeoDataDocument.h"
@@ -29,6 +30,7 @@ GeoNode* KmlGroundOverlayTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_GroundOverlay ) );
 
     GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay;
+    KmlObjectTagHandler::parseIdentifiers( parser, overlay );
 
     GeoStackItem parentItem = parser.parentElement();
 

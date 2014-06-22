@@ -24,6 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataPhotoOverlay.h"
@@ -46,10 +47,13 @@ GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
 
     } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
         GeoDataPoint *point = new GeoDataPoint;
+        KmlObjectTagHandler::parseIdentifiers( parser, point );
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
         return point;
     } else if( parentItem.represents( kmlTag_PhotoOverlay ) ) {
-        return &parentItem.nodeAs<GeoDataPhotoOverlay>()->point();
+        GeoDataPoint *point = &parentItem.nodeAs<GeoDataPhotoOverlay>()->point();
+        KmlObjectTagHandler::parseIdentifiers( parser, point );
+        return point;
     }
     return 0;
 }

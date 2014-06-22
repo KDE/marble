@@ -295,6 +295,7 @@ geodata/handlers/kml/KmlMultiTrackTagHandler.cpp
 geodata/handlers/kml/KmlNameTagHandler.cpp
 geodata/handlers/kml/KmlNetworkLinkTagHandler.cpp
 geodata/handlers/kml/KmlNorthTagHandler.cpp
+geodata/handlers/kml/KmlObjectTagHandler.cpp
 geodata/handlers/kml/KmlOpenTagHandler.cpp
 geodata/handlers/kml/KmlOuterBoundaryIsTagHandler.cpp
 geodata/handlers/kml/KmlOutlineTagHandler.cpp
@@ -414,6 +415,7 @@ geodata/writers/kml/KmlMultiGeometryTagWriter.cpp
 geodata/writers/kml/KmlMultiTrackTagWriter.cpp
 geodata/writers/kml/KmlNetworkLinkTagWriter.cpp
 geodata/writers/kml/KmlNetworkLinkControlTagWriter.cpp
+geodata/writers/kml/KmlObjectTagWriter.cpp
 geodata/writers/kml/KmlOverlayTagWriter.cpp
 geodata/writers/kml/KmlPhotoOverlayWriter.cpp
 geodata/writers/kml/KmlPlacemarkTagWriter.cpp

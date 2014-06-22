@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoParser.h"
 #include "GeoDataLod.h"
 #include "GeoDataRegion.h"
@@ -28,7 +29,7 @@ GeoNode* KmlLodTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Lod ) );
 
     GeoDataLod lod;
-
+    KmlObjectTagHandler::parseIdentifiers( parser, &lod );
     GeoStackItem parentItem = parser.parentElement();
 
     if( parentItem.represents( kmlTag_Region ) )

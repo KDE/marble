@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoParser.h"
 #include "GeoDataLatLonBox.h"
 #include "GeoDataGroundOverlay.h"
@@ -28,6 +29,7 @@ GeoNode* KmlLatLonBoxTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LatLonBox ) );
 
     GeoDataLatLonBox box;
+    KmlObjectTagHandler::parseIdentifiers( parser, &box );
 
     GeoStackItem parentItem = parser.parentElement();
 

@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataOrientation.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataModel.h"
@@ -29,11 +30,12 @@ GeoNode* KmlOrientationTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Orientation ) );
 
     GeoDataOrientation orientation;
+    KmlObjectTagHandler::parseIdentifiers( parser, &orientation );
     GeoStackItem parentItem = parser.parentElement();
 
     if( parentItem.represents( kmlTag_Model ) ) {
         parentItem.nodeAs<GeoDataModel>()->setOrientation(orientation);
-	return &parentItem.nodeAs<GeoDataModel>()->orientation();
+        return &parentItem.nodeAs<GeoDataModel>()->orientation();
     }
     else{
         return 0;

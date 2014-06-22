@@ -10,6 +10,7 @@
 
 #include "KmlSoundCueTagHandler.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoParser.h"
 
 #include "GeoDataPlaylist.h"
@@ -29,7 +30,7 @@ GeoNode* KmlSoundCueTagHandler::parse(GeoParser &parser) const
 
     if (parentItem.is<GeoDataPlaylist>()) {
         GeoDataSoundCue *cue = new GeoDataSoundCue;
-        cue->setId(parser.attribute("id"));
+        KmlObjectTagHandler::parseIdentifiers( parser, cue );
         parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(cue);
         return cue;
     }

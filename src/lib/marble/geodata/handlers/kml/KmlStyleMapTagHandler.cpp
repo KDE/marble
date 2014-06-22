@@ -24,7 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
-
+#include "KmlObjectTagHandler.h"
 #include "GeoDataFeature.h"
 #include "GeoDataDocument.h"
 #include "GeoDataStyleMap.h"
@@ -45,13 +45,11 @@ GeoNode* KmlStyleMapTagHandler::parse( GeoParser& parser ) const
     
     if( parentItem.represents( kmlTag_Document ) ) {
         GeoDataStyleMap styleMap;
-        QString styleId = parser.attribute( "id" ).trimmed();
-        styleMap.setStyleId( styleId );
+        KmlObjectTagHandler::parseIdentifiers( parser, &styleMap );
         parentItem.nodeAs<GeoDataDocument>()->addStyleMap( styleMap );
-        return &parentItem.nodeAs<GeoDataDocument>()->styleMap( styleId );
+        return &parentItem.nodeAs<GeoDataDocument>()->styleMap( styleMap.id() );
     } else if( parentItem.is<GeoDataFeature>() ) {
 /*        GeoDataStyleMap styleMap;
-        styleMap.setStyleId( parser.attribute( "id" ).trimmed() );
         parentItem.nodeAs<GeoDataFeature>()->setStyleMap( styleMap );*/
     }
 

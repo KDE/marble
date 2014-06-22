@@ -24,7 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
-
+#include "KmlObjectTagHandler.h"
 #include "GeoDataDocument.h"
 #include "GeoDataSchema.h"
 
@@ -44,12 +44,12 @@ GeoNode* KmlSchemaTagHandler::parse( GeoParser& parser ) const
 
     if( parentItem.represents( kmlTag_Document ) ) {
         GeoDataSchema schema;
+        KmlObjectTagHandler::parseIdentifiers( parser, &schema );
         QString name = parser.attribute( "name" ).trimmed();
-        QString id = parser.attribute( "id" ).trimmed();
-        schema.setSchemaId( id );
+
         schema.setSchemaName( name );
         parentItem.nodeAs<GeoDataDocument>()->addSchema( schema );
-        return &parentItem.nodeAs<GeoDataDocument>()->schema( id );
+        return &parentItem.nodeAs<GeoDataDocument>()->schema( schema.id() );
     }
     return 0;
 

@@ -82,7 +82,7 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     GeoDataPolyStyle polyStyle;
 
     polyStyle.setColor( QColor( 0, 255, 255, 80 ) );
-    style.setStyleId( "polygon" );
+    style.setId( "polygon" );
     style.setPolyStyle( polyStyle );
     m_annotationDocument->addStyle( style );
 }

@@ -1688,12 +1688,12 @@ void TestEquality::schemaTest()
     field2.setType(GeoDataSimpleField::Double);
 
     GeoDataSchema schema1, schema2;
-    schema1.setSchemaId( "Some ID" );
+    schema1.setId( "Some ID" );
     schema1.setSchemaName( "Some Name" );
     schema1.addSimpleField( field1 );
     schema1.addSimpleField( field2 );
 
-    schema2.setSchemaId( "Some ID" );
+    schema2.setId( "Some ID" );
     schema2.setSchemaName( "Some Name" );
     schema2.addSimpleField( field1 );
     schema2.addSimpleField( field2 );

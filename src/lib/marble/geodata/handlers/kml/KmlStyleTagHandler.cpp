@@ -24,6 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataStyle.h"
 #include "GeoDataFeature.h"
 #include "GeoParser.h"
@@ -44,14 +45,13 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
     /// for documents several styles are allowed: document wide styles are saved different!!!!!
     if( parentItem.represents( kmlTag_Document ) ) {
         GeoDataStyle style;
-        QString styleId = parser.attribute( "id" ).trimmed();
-        style.setStyleId( styleId );
+        KmlObjectTagHandler::parseIdentifiers( parser, &style );
         parentItem.nodeAs<GeoDataDocument>()->addStyle( style );
-        return &parentItem.nodeAs<GeoDataDocument>()->style( styleId );
+        return &parentItem.nodeAs<GeoDataDocument>()->style( style.id() );
     }
     else if ( parentItem.represents( kmlTag_Placemark ) ) {
         GeoDataStyle* style = new GeoDataStyle;
-        style->setStyleId( parser.attribute( "id" ).trimmed() );
+        KmlObjectTagHandler::parseIdentifiers( parser, style );
         parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
         return style;
     }

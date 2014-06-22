@@ -8,6 +8,7 @@
 // Copyright 2013       Mayank Madan <maddiemadan@gmail.com>
 
 #include "KmlFlyToTagHandler.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataFlyTo.h"
 #include "GeoDataPlaylist.h"
 #include "GeoParser.h"
@@ -29,6 +30,7 @@ GeoNode* KmlFlyToTagHandler::parse( GeoParser& parser ) const
 
     if (parentItem.is<GeoDataPlaylist>()) {
         GeoDataFlyTo *flyTo = new GeoDataFlyTo;
+        KmlObjectTagHandler::parseIdentifiers( parser, flyTo );
         parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive( flyTo );
         return flyTo;
     }

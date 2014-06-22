@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataScale.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataModel.h"
@@ -29,6 +30,7 @@ GeoNode* KmlScaleTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Scale ) );
 
     GeoDataScale scale;
+    KmlObjectTagHandler::parseIdentifiers( parser, &scale );
     GeoStackItem parentItem = parser.parentElement();
 
     if( parentItem.represents( kmlTag_Model ) ) {

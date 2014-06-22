@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataCamera.h"
 #include "GeoParser.h"
 #include "GeoDataContainer.h"
@@ -36,11 +37,13 @@ GeoNode *KmlCameraTagHandler::parse( GeoParser & parser ) const
 
     if ( parentItem.is<GeoDataFeature>() ) {
         camera = new GeoDataCamera;
+        KmlObjectTagHandler::parseIdentifiers( parser, camera );
         parentItem.nodeAs<GeoDataFeature>()->setAbstractView( camera );
     }
 
     if ( parentItem.is<GeoDataFlyTo>() ) {
         camera = new GeoDataCamera;
+        KmlObjectTagHandler::parseIdentifiers( parser, camera );
         parentItem.nodeAs<GeoDataFlyTo>()->setView( camera );
     }
 

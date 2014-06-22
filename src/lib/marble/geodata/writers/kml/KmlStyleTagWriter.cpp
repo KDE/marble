@@ -14,6 +14,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -28,7 +29,7 @@ bool KmlStyleTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     const GeoDataStyle *style = static_cast<const GeoDataStyle*>( node );
 
     writer.writeStartElement( kml::kmlTag_Style );
-    writer.writeAttribute( "id", style->styleId() );
+    KmlObjectTagWriter::writeIdentifiers( writer, style );
 
     writeElement( &style->balloonStyle(), writer );
     writeElement( &style->iconStyle(), writer );

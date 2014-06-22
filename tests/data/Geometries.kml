@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
-    <Placemark>
+    <Placemark id="newYork">
       <name>New York City</name>
       <description>New York City</description>
       <Region>
@@ -26,7 +26,7 @@
       </Point>
     </Placemark>
     <Folder>
-      <GroundOverlay>
+      <GroundOverlay id="someOverlay">
         <LatLonBox>
           <north>37.919</north>
           <south>37.465</south>

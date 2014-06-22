@@ -726,14 +726,14 @@ void OsmParser::writeKml( const QString &area, const QString &version, const QSt
     lineStyle.setColor( color );
     lineStyle.setWidth( 4 );
     style.setLineStyle( lineStyle );
-    style.setStyleId( color.name().replace( '#', 'f' ) );
+    style.setId( color.name().replace( '#', 'f' ) );
 
     GeoDataStyleMap styleMap;
-    styleMap.setStyleId( color.name().replace( '#', 'f' ) );
-    styleMap.insert( "normal", QString( "#" ).append( style.styleId() ) );
+    styleMap.setId( color.name().replace( '#', 'f' ) );
+    styleMap.insert( "normal", QString( "#" ).append( style.id() ) );
     document->addStyle( style );
 
-    placemark->setStyleUrl( QString( "#" ).append( styleMap.styleId() ) );
+    placemark->setStyleUrl( QString( "#" ).append( styleMap.id() ) );
 
     //placemark->setGeometry( new GeoDataLinearRing( region.region.geometry().outerBoundary() ) );
     GeoDataMultiGeometry *geometry = new GeoDataMultiGeometry;

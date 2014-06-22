@@ -24,7 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
-
+#include "KmlObjectTagHandler.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataMultiGeometry.h"
 
@@ -43,6 +43,7 @@ GeoNode* KmlMultiGeometryTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
 
     GeoDataMultiGeometry *geom = new GeoDataMultiGeometry;
+    KmlObjectTagHandler::parseIdentifiers( parser, geom );
     if( parentItem.represents( kmlTag_Placemark ) ) {
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( geom );
         return parentItem.nodeAs<GeoDataPlacemark>()->geometry();

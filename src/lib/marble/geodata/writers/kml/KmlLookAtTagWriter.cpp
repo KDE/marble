@@ -17,6 +17,7 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "KmlGroundOverlayWriter.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -32,6 +33,7 @@ bool KmlLookAtTagWriter::write( const GeoNode *node,
     const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt*>(node);
 
     writer.writeStartElement( kml::kmlTag_LookAt );
+    KmlObjectTagWriter::writeIdentifiers( writer, lookAt );
 
     if (lookAt->timeStamp().when().isValid()) {
         writer.writeStartElement("gx:TimeStamp");

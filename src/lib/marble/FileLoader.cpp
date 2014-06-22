@@ -53,8 +53,8 @@ public:
           m_clock( model->clock() )
     {
         if( m_style ) {
-            m_styleMap->setStyleId("default-map");
-            m_styleMap->insert("normal", QString("#").append(m_style->styleId()));
+            m_styleMap->setId("default-map");
+            m_styleMap->insert("normal", QString("#").append(m_style->id()));
         }
     }
 
@@ -259,7 +259,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType
                  && m_documentRole == MapDocument
                  && m_style ) {
-                placemark->setStyleUrl( QString("#").append( m_styleMap->styleId() ) );
+                placemark->setStyleUrl( QString("#").append( m_styleMap->id() ) );
             }
 
             // Mountain (H), Volcano (V), Shipwreck (W)

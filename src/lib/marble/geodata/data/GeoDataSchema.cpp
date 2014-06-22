@@ -22,7 +22,6 @@ class GeoDataSchemaPrivate
 {
   public:
     QHash<QString, GeoDataSimpleField> m_simpleField;
-    QString m_schemaId;
     QString m_name;
 };
 
@@ -54,7 +53,6 @@ bool GeoDataSchema::operator==(const GeoDataSchema& other) const
 {
     return equals(other) &&
            d->m_name == other.d->m_name &&
-           d->m_schemaId == other.d->m_schemaId &&
            d->m_simpleField == other.d->m_simpleField;
 }
 
@@ -66,16 +64,6 @@ bool GeoDataSchema::operator!=(const GeoDataSchema& other) const
 GeoDataSchema::~GeoDataSchema()
 {
     delete d;
-}
-
-QString GeoDataSchema::schemaId() const
-{
-    return d->m_schemaId;
-}
-
-void GeoDataSchema::setSchemaId( const QString& schemaId )
-{
-    d->m_schemaId = schemaId;
 }
 
 QString GeoDataSchema::schemaName() const

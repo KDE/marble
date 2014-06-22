@@ -41,7 +41,7 @@ GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
     backgroundPolyStyle.setColor( OsmGlobals::backgroundColor );
     GeoDataStyle backgroundStyle;
     backgroundStyle.setPolyStyle( backgroundPolyStyle );
-    backgroundStyle.setStyleId( "background" );
+    backgroundStyle.setId( "background" );
     doc->addStyle( backgroundStyle );
 
     return doc;

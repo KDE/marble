@@ -14,6 +14,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
@@ -28,6 +29,7 @@ bool KmlLinkTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     const GeoDataLink *link = static_cast<const GeoDataLink*>( node );
 
     writer.writeStartElement( kml::kmlTag_Link );
+    KmlObjectTagWriter::writeIdentifiers( writer, link );
 
     writer.writeElement( kml::kmlTag_href, link->href() );
 

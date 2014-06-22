@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 #include "GeoDataTimeStamp.h"
 #include "GeoDataFeature.h"
 #include "GeoParser.h"
@@ -31,11 +32,13 @@ GeoNode* KmlTimeStampTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_TimeStamp ) );
     GeoStackItem parentItem = parser.parentElement();
+    GeoDataTimeStamp timestamp;
+    KmlObjectTagHandler::parseIdentifiers( parser, &timestamp );
     if ( parentItem.is<GeoDataFeature>() ) {
-        parentItem.nodeAs<GeoDataFeature>()->setTimeStamp( GeoDataTimeStamp() );
+        parentItem.nodeAs<GeoDataFeature>()->setTimeStamp( timestamp );
         return &parentItem.nodeAs<GeoDataFeature>()->timeStamp();
     } else if ( parentItem.is<GeoDataAbstractView>() ) {
-        parentItem.nodeAs<GeoDataAbstractView>()->setTimeStamp( GeoDataTimeStamp() );
+        parentItem.nodeAs<GeoDataAbstractView>()->setTimeStamp( timestamp );
         return &parentItem.nodeAs<GeoDataAbstractView>()->timeStamp();
     }
     return 0;
