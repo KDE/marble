@@ -176,7 +176,7 @@ void WikipediaItem::openBrowser( )
         popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
         popup->setSize( QSizeF( 500, 550 ) );
         popup->setUrl( url() );
-        popup->setVisible( true );
+        popup->popup();
     } else {
         if ( !m_browser ) {
             m_browser = new TinyWebBrowser();
