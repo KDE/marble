@@ -22,7 +22,6 @@ namespace Marble
 {
 
 class GeoDataCoordinates;
-class GeoDataPlacemark;
 class MarbleWidget;
 
 /**
@@ -119,16 +118,6 @@ public:
      * @param html content (in html format)
      */
     void setContent( const QString &html, const QUrl & baseUrl = QUrl() );
-
-    /**
-     * @brief Sets style and content of the browser
-     *
-     * Sets the bgColor, textColor, displayMode and Content.
-     * Replaces $[*] by their values.
-     *
-     * @param placemark the placemark which invoked this popup
-     */
-    void setPlacemark( const GeoDataPlacemark *placemark );
 
     /**
      * @brief Sets background color of the header
