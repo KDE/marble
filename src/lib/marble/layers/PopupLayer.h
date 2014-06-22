@@ -29,8 +29,7 @@ class MarbleWidget;
  * @brief The PopupLayer class
  *
  * A popup dialog opening on top of the map. The content is shown in a QWebView,
- * acting like a minimalistic web browser. The dialog is either shown aligned to
- * a geo position or shown at a specific screen position.
+ * acting like a minimalistic web browser.
  *
  */
 class MARBLE_EXPORT PopupLayer : public QObject, public LayerInterface
