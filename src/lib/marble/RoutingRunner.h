@@ -14,15 +14,15 @@
 
 #include <QObject>
 #include "marble_export.h"
-#include "GeoDataDocument.h"
+#include "GeoDataExtendedData.h"
 
-#include <QVector>
+class QTime;
 
 namespace Marble
 {
 
 class MarbleModel;
-class GeoDataExtendedData;
+class GeoDataDocument;
 class RouteRequest;
 
 class MARBLE_EXPORT RoutingRunner : public QObject
