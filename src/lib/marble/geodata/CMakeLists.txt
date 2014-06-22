@@ -384,6 +384,7 @@ geodata/handlers/kml/KmlSourceHrefTagHandler.cpp
 geodata/handlers/kml/KmlTargetHrefTagHandler.cpp
 geodata/handlers/kml/KmlSoundCueTagHandler.cpp
 geodata/handlers/kml/KmldelayedStartTagHandler.cpp
+geodata/handlers/kml/KmlBalloonVisibilityTagHandler.cpp
 )
 
 SET ( geodata_writers_kml_SRCS

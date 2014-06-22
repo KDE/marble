@@ -176,6 +176,16 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     void setCountryCode( const QString &code );
 
     /**
+     * Returns whether balloon is visible or not
+     */
+    bool isBalloonVisible() const;
+
+    /**
+     * Set visibility of the balloon
+     */
+    void setBalloonVisible( bool visible );
+
+    /**
      * Serialize the Placemark to a data stream. This is a binary serialisation
      * and is deserialised using @see unpack()
      * @param stream the QDataStream to serialise object to.

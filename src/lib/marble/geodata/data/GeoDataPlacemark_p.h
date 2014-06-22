@@ -26,7 +26,8 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     GeoDataPlacemarkPrivate()
       : m_geometry( new GeoDataPoint ),
         m_area( -1.0 ),
-        m_population( -1 )
+        m_population( -1 ),
+        m_isBalloonVisible( false )
     {
     }
 
@@ -108,6 +109,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     qreal               m_area;         // Area in square kilometer
     qint64              m_population;   // population in number of inhabitants
     QString             m_state;        // State
+    bool                m_isBalloonVisible;  //Visibility of balloon
 };
 
 } // namespace Marble

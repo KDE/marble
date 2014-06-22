@@ -18,7 +18,8 @@ namespace Marble
 {
 namespace kml
 {
-
+namespace gx
+{
 KML_DEFINE_TAG_HANDLER_GX22( AnimatedUpdate )
 
 GeoNode* KmlAnimatedUpdateTagHandler::parse( GeoParser& parser ) const
@@ -38,6 +39,6 @@ GeoNode* KmlAnimatedUpdateTagHandler::parse( GeoParser& parser ) const
 
     return 0;
 }
-
+}
 }
 }

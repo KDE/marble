@@ -215,6 +215,7 @@ const char* kmlTag_TourControl = "TourControl";
 const char* kmlTag_Wait = "Wait";
 const char* kmlTag_Playlist = "Playlist";
 const char* kmlTag_playMode = "playMode";
+const char* kmlTag_balloonVisibility = "balloonVisibility";
 
 #ifdef KML_LAZY_IMP
  const char* kmlTag_MarblePlacemark = "MarblePlacemark";

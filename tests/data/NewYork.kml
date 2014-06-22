@@ -10,5 +10,6 @@
     <Point>
       <coordinates>-74.0063930000,40.7141720000</coordinates>
     </Point>
+    <gx:balloonVisibility>1</gx:balloonVisibility>
   </Placemark>
 </kml>

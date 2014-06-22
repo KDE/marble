@@ -5,10 +5,11 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2014       Sanjiban Bairagya <sanjiban22393@gmail.com>
+// Copyright 2014      Sanjiban Bairagya  <sanjiban22393@gmail.com>
+//
 
-#ifndef MARBLE_KML_KMLANIMATEDUPDATETAGHANDLER_H
-#define MARBLE_KML_KMLANIMATEDUPDATETAGHANDLER_H
+#ifndef MARBLE_KML_BALLOONVISIBILITYTAGHANDLER_H
+#define MARBLE_KML_BALLOONVISIBILITYTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -18,13 +19,13 @@ namespace kml
 {
 namespace gx
 {
-class KmlAnimatedUpdateTagHandler : public GeoTagHandler
+class KmlballoonVisibilityTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse(GeoParser&) const;
 };
-}
-}
-}
 
+}
+}
+}
 #endif

@@ -279,6 +279,17 @@ void GeoDataPlacemark::setCountryCode( const QString &countrycode )
     p()->m_countrycode = countrycode;
 }
 
+bool GeoDataPlacemark::isBalloonVisible() const
+{
+    return p()->m_isBalloonVisible;
+}
+
+void GeoDataPlacemark::setBalloonVisible( bool visible )
+{
+    detach();
+    p()->m_isBalloonVisible = visible;
+}
+
 void GeoDataPlacemark::pack( QDataStream& stream ) const
 {
     GeoDataFeature::pack( stream );
