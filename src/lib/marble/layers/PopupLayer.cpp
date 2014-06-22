@@ -11,10 +11,13 @@
 //
 
 #include "PopupLayer.h"
+
+#include "GeoPainter.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "PopupItem.h"
+#include "ViewportParams.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
@@ -23,25 +26,55 @@
 #include "GeoSceneHead.h"
 #include "TemplateDocument.h"
 
-#include <QMouseEvent>
-#include <QApplication>
-#include <QAction>
+#include <QSizeF>
 
 namespace Marble
 {
 
-PopupLayer::PopupLayer( MarbleWidget *marbleWidget, QObject *parent ) :
-    QObject( parent ),
-    m_popupItem( new PopupItem( this ) ),
+class PopupLayer::Private
+{
+public:
+    Private( MarbleWidget *marbleWidget, PopupLayer *q );
+
+    /**
+     * @brief Sets size of the popup item, based on the requested size and viewport size
+     * @param viewport required to compute the maximum dimensions
+     */
+    void setAppropriateSize( const ViewportParams *viewport );
+
+    static QString filterEmptyShortDescription(const QString &description);
+    void setupDialogSatellite( const GeoDataPlacemark *index );
+    void setupDialogCity( const GeoDataPlacemark *index );
+    void setupDialogNation( const GeoDataPlacemark *index );
+    void setupDialogGeoPlaces( const GeoDataPlacemark *index );
+    void setupDialogSkyPlaces( const GeoDataPlacemark *index );
+
+    PopupLayer *const q;
+    PopupItem *const m_popupItem;
+    MarbleWidget *const m_widget;
+    QSizeF m_requestedSize;
+    bool m_adjustMap;
+};
+
+PopupLayer::Private::Private( MarbleWidget *marbleWidget, PopupLayer *_q ) :
+    q( _q ),
+    m_popupItem( new PopupItem( _q ) ),
     m_widget( marbleWidget ),
     m_adjustMap( false )
 {
-    connect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
-    connect( m_popupItem, SIGNAL(hide()), this, SLOT(hidePopupItem()) );
+}
+
+PopupLayer::PopupLayer( MarbleWidget *marbleWidget, QObject *parent ) :
+    QObject( parent ),
+    d( new Private( marbleWidget, this ) )
+{
+    connect( d->m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
+    connect( d->m_popupItem, SIGNAL(hide()), this, SLOT(hidePopupItem()) );
 }
 
 PopupLayer::~PopupLayer()
 {
+    delete d;
 }
 
 QStringList PopupLayer::renderPosition() const
@@ -53,20 +86,20 @@ bool PopupLayer::render( GeoPainter *painter, ViewportParams *viewport,
                                 const QString&, GeoSceneLayer* )
 {
     if ( visible() ) {
-        setAppropriateSize( viewport );
-        if ( m_adjustMap ) {
-            GeoDataCoordinates coords = m_popupItem->coordinate();
-            m_widget->centerOn( coords, false );
+        d->setAppropriateSize( viewport );
+        if ( d->m_adjustMap ) {
+            GeoDataCoordinates coords = d->m_popupItem->coordinate();
+            d->m_widget->centerOn( coords, false );
             qreal sx, sy, lon, lat;
             viewport->screenCoordinates(coords, sx, sy);
             sx = viewport->radius() < viewport->width() ? 0.5 * (viewport->width() + viewport->radius()) : 0.75 * viewport->width();
             viewport->geoCoordinates(sx, sy, lon, lat, GeoDataCoordinates::Radian);
             coords.setLatitude(lat);
             coords.setLongitude(lon);
-            m_widget->centerOn( coords, true );
-            m_adjustMap = false;
+            d->m_widget->centerOn( coords, true );
+            d->m_adjustMap = false;
         }
-        m_popupItem->paintEvent( painter, viewport );
+        d->m_popupItem->paintEvent( painter, viewport );
     }
 
     return true;
@@ -74,7 +107,7 @@ bool PopupLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
 bool PopupLayer::eventFilter( QObject *object, QEvent *e )
 {
-    return visible() && m_popupItem->eventFilter( object, e );
+    return visible() && d->m_popupItem->eventFilter( object, e );
 }
 
 qreal PopupLayer::zValue() const
@@ -89,42 +122,42 @@ RenderState PopupLayer::renderState() const
 
 bool PopupLayer::visible() const
 {
-    return m_popupItem->visible();
+    return d->m_popupItem->visible();
 }
 
 void PopupLayer::setVisible( bool visible )
 {
-    m_popupItem->setVisible( visible );
+    d->m_popupItem->setVisible( visible );
     if ( !visible ) {
-        disconnect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
-        m_popupItem->clearHistory();
+        disconnect( d->m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
+        d->m_popupItem->clearHistory();
         emit repaintNeeded();
     }
     else {
-        connect( m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
+        connect( d->m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
     }
 }
 
 void PopupLayer::popup()
 {
-    m_adjustMap = true;
+    d->m_adjustMap = true;
     setVisible( true );
 }
 
 void PopupLayer::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)
 {
-    m_popupItem->setCoordinate( coordinates );
-    m_popupItem->setAlignment( alignment );
+    d->m_popupItem->setCoordinate( coordinates );
+    d->m_popupItem->setAlignment( alignment );
 }
 
 void PopupLayer::setUrl( const QUrl &url )
 {
-    m_popupItem->setUrl( url );
+    d->m_popupItem->setUrl( url );
 }
 
 void PopupLayer::setContent( const QString &html, const QUrl &baseUrl )
 {
-    m_popupItem->setContent( html, baseUrl );
+    d->m_popupItem->setContent( html, baseUrl );
     emit repaintNeeded();
 }
 
@@ -135,27 +168,27 @@ void PopupLayer::setPlacemark( const GeoDataPlacemark *placemark )
                      placemark->visualCategory() <= GeoDataFeature::LargeNationCapital);
     bool isNation = (placemark->visualCategory() == GeoDataFeature::Nation);
     bool isSky = false;
-    if ( m_widget->model()->mapTheme() ) {
-        isSky = m_widget->model()->mapTheme()->head()->target() == "sky";
+    if ( d->m_widget->model()->mapTheme() ) {
+        isSky = d->m_widget->model()->mapTheme()->head()->target() == "sky";
     }
     setSize(QSizeF(400, 400));
     if (isSatellite) {
-        setupDialogSatellite( placemark );
+        d->setupDialogSatellite( placemark );
     } else if (isCity) {
-        setupDialogCity( placemark );
+        d->setupDialogCity( placemark );
     } else if (isNation) {
-        setupDialogNation( placemark );
+        d->setupDialogNation( placemark );
     } else if (isSky) {
-        setupDialogSkyPlaces( placemark );
+        d->setupDialogSkyPlaces( placemark );
     } else if ( placemark->role().isEmpty() ) {
         setContent( placemark->description() );
     } else {
-        setupDialogGeoPlaces( placemark );
+        d->setupDialogGeoPlaces( placemark );
     }
 
     if (placemark->style() == 0) {
-        m_popupItem->setBackgroundColor(QColor(Qt::white));
-        m_popupItem->setTextColor(QColor(Qt::black));
+        d->m_popupItem->setBackgroundColor(QColor(Qt::white));
+        d->m_popupItem->setTextColor(QColor(Qt::black));
         return;
     }
     if (placemark->style()->balloonStyle().displayMode() == GeoDataBalloonStyle::Hide) {
@@ -172,51 +205,51 @@ void PopupLayer::setPlacemark( const GeoDataPlacemark *placemark )
         content = content.replace("$[id]", placemark->id(), Qt::CaseInsensitive);
         QString const basePath = placemark->resolvePath(".");
         QUrl const baseUrl = basePath != "." ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
-        m_popupItem->setContent(content, baseUrl );
+        d->m_popupItem->setContent(content, baseUrl );
     }
-    m_popupItem->setBackgroundColor(placemark->style()->balloonStyle().backgroundColor());
-    m_popupItem->setTextColor(placemark->style()->balloonStyle().textColor());
+    d->m_popupItem->setBackgroundColor(placemark->style()->balloonStyle().backgroundColor());
+    d->m_popupItem->setTextColor(placemark->style()->balloonStyle().textColor());
     emit repaintNeeded();
 }
 
 void PopupLayer::setBackgroundColor(const QColor &color)
 {
     if(color.isValid()) {
-        m_popupItem->setBackgroundColor(color);
+        d->m_popupItem->setBackgroundColor(color);
     }
 }
 
 void PopupLayer::setTextColor(const QColor &color)
 {
     if(color.isValid()) {
-        m_popupItem->setTextColor(color);
+        d->m_popupItem->setTextColor(color);
     }
 }
 
-QString PopupLayer::filterEmptyShortDescription(const QString &description)
+QString PopupLayer::Private::filterEmptyShortDescription(const QString &description)
 {
     if(description.isEmpty())
         return tr("No description available.");
     return description;
 }
 
-void PopupLayer::setupDialogSatellite( const GeoDataPlacemark *index)
+void PopupLayer::Private::setupDialogSatellite( const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate(m_widget->model()->clockDateTime());
-    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+    q->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
     const QString description = index->description();
     TemplateDocument doc(description);
     doc["altitude"] = QString::number(location.altitude(), 'f', 2);
     doc["latitude"] = location.latToString();
     doc["longitude"] = location.lonToString();
-    setContent(doc.finalText());
+    q->setContent(doc.finalText());
 }
 
-void PopupLayer::setupDialogCity( const GeoDataPlacemark *index)
+void PopupLayer::Private::setupDialogCity( const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate();
-    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+    q->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
     QFile descriptionFile(":/marble/webpopup/city.html");
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
@@ -269,13 +302,13 @@ void PopupLayer::setupDialogCity( const GeoDataPlacemark *index)
                 QString("flags/flag_%1.svg").arg(index->countryCode().toLower()));
     doc["flag"] = flagPath;
 
-    setContent(doc.finalText());
+    q->setContent(doc.finalText());
 }
 
-void PopupLayer::setupDialogNation( const GeoDataPlacemark *index)
+void PopupLayer::Private::setupDialogNation( const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate();
-    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+    q->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
     QFile descriptionFile(":/marble/webpopup/nation.html");
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
@@ -296,13 +329,13 @@ void PopupLayer::setupDialogNation( const GeoDataPlacemark *index)
     const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
     doc["flag"] = flagPath;
 
-    setContent(doc.finalText());
+    q->setContent(doc.finalText());
 }
 
-void PopupLayer::setupDialogGeoPlaces( const GeoDataPlacemark *index)
+void PopupLayer::Private::setupDialogGeoPlaces( const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate();
-    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+    q->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
     QFile descriptionFile(":/marble/webpopup/geoplace.html");
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
@@ -318,13 +351,13 @@ void PopupLayer::setupDialogGeoPlaces( const GeoDataPlacemark *index)
     doc["elevation"] = QString::number(location.altitude(), 'f', 2);
     doc["shortDescription"] = filterEmptyShortDescription(index->description());
 
-    setContent(doc.finalText());
+    q->setContent(doc.finalText());
 }
 
-void PopupLayer::setupDialogSkyPlaces( const GeoDataPlacemark *index)
+void PopupLayer::Private::setupDialogSkyPlaces( const GeoDataPlacemark *index)
 {
     GeoDataCoordinates location = index->coordinate();
-    setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+    q->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
     QFile descriptionFile(":/marble/webpopup/skyplace.html");
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
@@ -341,17 +374,17 @@ void PopupLayer::setupDialogSkyPlaces( const GeoDataPlacemark *index)
                             location.longitude(), GeoDataCoordinates::Astro, GeoDataCoordinates::Radian, -1, 'f');
     doc["shortDescription"] = filterEmptyShortDescription(index->description());
 
-    setContent(doc.finalText());
+    q->setContent(doc.finalText());
 }
 
 
 
 void PopupLayer::setSize( const QSizeF &size )
 {
-    m_requestedSize = size;
+    d->m_requestedSize = size;
 }
 
-void PopupLayer::setAppropriateSize( const ViewportParams *viewport )
+void PopupLayer::Private::setAppropriateSize( const ViewportParams *viewport )
 {
     qreal margin = 15.0;
 
