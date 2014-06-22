@@ -53,14 +53,12 @@ public:
     PopupItem *const m_popupItem;
     MarbleWidget *const m_widget;
     QSizeF m_requestedSize;
-    bool m_adjustMap;
 };
 
 PopupLayer::Private::Private( MarbleWidget *marbleWidget, PopupLayer *_q ) :
     q( _q ),
     m_popupItem( new PopupItem( _q ) ),
-    m_widget( marbleWidget ),
-    m_adjustMap( false )
+    m_widget( marbleWidget )
 {
 }
 
@@ -87,18 +85,6 @@ bool PopupLayer::render( GeoPainter *painter, ViewportParams *viewport,
 {
     if ( visible() ) {
         d->setAppropriateSize( viewport );
-        if ( d->m_adjustMap ) {
-            GeoDataCoordinates coords = d->m_popupItem->coordinate();
-            d->m_widget->centerOn( coords, false );
-            qreal sx, sy, lon, lat;
-            viewport->screenCoordinates(coords, sx, sy);
-            sx = viewport->radius() < viewport->width() ? 0.5 * (viewport->width() + viewport->radius()) : 0.75 * viewport->width();
-            viewport->geoCoordinates(sx, sy, lon, lat, GeoDataCoordinates::Radian);
-            coords.setLatitude(lat);
-            coords.setLongitude(lon);
-            d->m_widget->centerOn( coords, true );
-            d->m_adjustMap = false;
-        }
         d->m_popupItem->paintEvent( painter, viewport );
     }
 
@@ -140,8 +126,18 @@ void PopupLayer::setVisible( bool visible )
 
 void PopupLayer::popup()
 {
-    d->m_adjustMap = true;
     setVisible( true );
+
+    const ViewportParams *const viewport = d->m_widget->viewport();
+    GeoDataCoordinates coords = d->m_popupItem->coordinate();
+    d->m_widget->centerOn( coords, false );
+    qreal sx, sy, lon, lat;
+    viewport->screenCoordinates(coords, sx, sy);
+    sx = viewport->radius() < viewport->width() ? 0.5 * (viewport->width() + viewport->radius()) : 0.75 * viewport->width();
+    viewport->geoCoordinates(sx, sy, lon, lat, GeoDataCoordinates::Radian);
+    coords.setLatitude(lat);
+    coords.setLongitude(lon);
+    d->m_widget->centerOn( coords, true );
 }
 
 void PopupLayer::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)
