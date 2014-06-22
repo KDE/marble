@@ -94,7 +94,7 @@ void OpenDesktopItem::openBrowser()
     popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
     popup->setUrl( profileUrl() );
     popup->setSize( QSizeF( 900, 600 ) );
-    popup->setVisible( true );
+    popup->popup();
 }
 
 QUrl OpenDesktopItem::profileUrl() const
