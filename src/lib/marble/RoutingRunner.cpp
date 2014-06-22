@@ -33,7 +33,7 @@ const MarbleModel *RoutingRunner::model() const
     return m_model;
 }
 
-const QString RoutingRunner::lengthString( qreal& length) const
+const QString RoutingRunner::lengthString(qreal length) const
 {
     const QString result = "%1 %2";
     QString unit = QLatin1String( "m" );
@@ -52,13 +52,13 @@ const QString RoutingRunner::durationString(const QTime& duration) const
     return timeString;
 }
 
-const QString RoutingRunner::nameString(const QString& name, qreal& length, const QTime& duration) const
+const QString RoutingRunner::nameString(const QString& name, qreal length, const QTime& duration) const
 {
     const QString result = "%1; %2 (%3)";
     return result.arg( lengthString( length ) ).arg( durationString( duration ) ).arg( name );
 }
 
-const GeoDataExtendedData RoutingRunner::routeData(const qreal& length, const QTime& duration) const
+const GeoDataExtendedData RoutingRunner::routeData(qreal length, const QTime& duration) const
 {
     GeoDataExtendedData result;
     GeoDataData lengthData;
