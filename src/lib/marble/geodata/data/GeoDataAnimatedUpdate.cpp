@@ -20,12 +20,12 @@ class GeoDataAnimatedUpdatePrivate
 {
 public:
     double m_duration;
-    GeoDataUpdate m_update;
+    GeoDataUpdate* m_update;
     GeoDataAnimatedUpdatePrivate();
 };
 
 GeoDataAnimatedUpdatePrivate::GeoDataAnimatedUpdatePrivate() :
-    m_duration( 0.0 ), m_update( )
+    m_duration( 0.0 ), m_update( 0 )
 {
 
 }
@@ -50,7 +50,12 @@ GeoDataAnimatedUpdate &GeoDataAnimatedUpdate::operator=( const GeoDataAnimatedUp
 
 bool GeoDataAnimatedUpdate::operator==(const GeoDataAnimatedUpdate& other) const
 {
-    return d->m_duration == other.d->m_duration && d->m_update == other.d->m_update;
+    if( ( !d->m_update && other.d->m_update ) || ( d->m_update && !other.d->m_update) ){
+        return false;
+    } else if( d->m_update && other.d->m_update ){
+        return d->m_duration == other.d->m_duration && *(d->m_update) == *(other.d->m_update);
+    }
+    return d->m_duration == other.d->m_duration;
 }
 
 bool GeoDataAnimatedUpdate::operator!=(const GeoDataAnimatedUpdate& other) const
@@ -68,19 +73,23 @@ const char *GeoDataAnimatedUpdate::nodeType() const
     return GeoDataTypes::GeoDataAnimatedUpdateType;
 }
 
-const GeoDataUpdate &GeoDataAnimatedUpdate::update() const
+const GeoDataUpdate* GeoDataAnimatedUpdate::update() const
 {
     return d->m_update;
 }
 
-GeoDataUpdate &GeoDataAnimatedUpdate::update()
+GeoDataUpdate* GeoDataAnimatedUpdate::update()
 {
     return d->m_update;
 }
 
-void GeoDataAnimatedUpdate::setUpdate( GeoDataUpdate &update )
+void GeoDataAnimatedUpdate::setUpdate( GeoDataUpdate *update )
 {
+    delete d->m_update;
     d->m_update = update;
+    if ( d->m_update ) {
+        d->m_update->setParent( this );
+    }
 }
 
 double GeoDataAnimatedUpdate::duration() const

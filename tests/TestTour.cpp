@@ -126,7 +126,7 @@ void TestTour::simpleParseTest()
     GeoDataAnimatedUpdate *update = dynamic_cast<GeoDataAnimatedUpdate*>(playlist2->primitive(0));
     QVERIFY(update != 0);
     QCOMPARE(update->duration(),5.0);
-    QCOMPARE(update->update().targetHref(),QString("Whatever.jpg"));
+    QCOMPARE(update->update()->targetHref(),QString("Whatever.jpg"));
 
     delete dataDocument;
 }

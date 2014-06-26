@@ -54,6 +54,9 @@ void KmlPlaylistTagWriter::writeTourPrimitive( const GeoNode *primitive, GeoWrit
     else if ( primitive->nodeType() == GeoDataTypes::GeoDataSoundCueType ) {
         writeSoundCue( static_cast<const GeoDataSoundCue*>(primitive), writer );
     }
+    else if ( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
+        writeElement( primitive, writer );
+    }
 }
 
 void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer )

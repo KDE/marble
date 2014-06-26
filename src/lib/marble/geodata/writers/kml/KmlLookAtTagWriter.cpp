@@ -41,17 +41,19 @@ bool KmlLookAtTagWriter::write( const GeoNode *node,
         writer.writeEndElement();
     }
 
-    writer.writeStartElement("gx:TimeSpan");
-    if (lookAt->timeSpan().begin().when().isValid())
-        writer.writeElement("begin", lookAt->timeSpan().begin().when().toString(Qt::ISODate));
-    if (lookAt->timeSpan().end().when().isValid())
-        writer.writeElement("end", lookAt->timeSpan().end().when().toString(Qt::ISODate));
-    writer.writeEndElement();
+    if( lookAt->timeSpan().isValid() ){
+        writer.writeStartElement("gx:TimeSpan");
+        if (lookAt->timeSpan().begin().when().isValid())
+            writer.writeElement("begin", lookAt->timeSpan().begin().when().toString(Qt::ISODate));
+        if (lookAt->timeSpan().end().when().isValid())
+            writer.writeElement("end", lookAt->timeSpan().end().when().toString(Qt::ISODate));
+        writer.writeEndElement();
+    }
 
-    writer.writeElement( "longitude", QString::number( lookAt->longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
-    writer.writeElement( "latitude", QString::number( lookAt->latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
-    writer.writeElement( "altitude", QString::number( lookAt->altitude(), 'f', 10 ) );
-    writer.writeElement( "range", QString::number( lookAt->range(), 'f', 10 ) );
+    writer.writeOptionalElement( "longitude", QString::number( lookAt->longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
+    writer.writeOptionalElement( "latitude", QString::number( lookAt->latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
+    writer.writeOptionalElement( "altitude", QString::number( lookAt->altitude(), 'f', 10 ) );
+    writer.writeOptionalElement( "range", QString::number( lookAt->range(), 'f', 10 ) );
     KmlGroundOverlayWriter::writeAltitudeMode( writer, lookAt->altitudeMode() );
 
     writer.writeEndElement();

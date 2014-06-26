@@ -15,6 +15,7 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
+#include "KmlGroundOverlayWriter.h"
 #include "KmlObjectTagWriter.h"
 
 namespace Marble
@@ -29,6 +30,10 @@ bool KmlPointTagWriter::write( const GeoNode *node,
                                GeoWriter& writer ) const
 {
     const GeoDataPoint *point = static_cast<const GeoDataPoint*>(node);
+
+    if ( !point->coordinates().isValid() ){
+        return true;
+    }
 
     writer.writeStartElement( kml::kmlTag_Point );
     KmlObjectTagWriter::writeIdentifiers( writer, point );
@@ -50,8 +55,10 @@ bool KmlPointTagWriter::write( const GeoNode *node,
     }
 
     writer.writeCharacters( coordinateString );
-
     writer.writeEndElement();
+
+    KmlGroundOverlayWriter::writeAltitudeMode( writer, point->altitudeMode() );
+
     writer.writeEndElement();
 
     return true;

@@ -39,7 +39,7 @@ GeoNode* KmlModelTagHandler::parse( GeoParser& parser ) const
 
     } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( model );
-    return model;
+        return model;
 
     } else {
         delete model;

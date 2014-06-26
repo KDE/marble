@@ -37,9 +37,9 @@ public:
     double duration() const;
     void setDuration( double duration );
 
-    const GeoDataUpdate& update() const;
-    GeoDataUpdate& update();
-    void setUpdate( GeoDataUpdate &update );
+    const GeoDataUpdate* update() const;
+    GeoDataUpdate* update();
+    void setUpdate( GeoDataUpdate *update );
 
 private:
     GeoDataAnimatedUpdatePrivate* const d;

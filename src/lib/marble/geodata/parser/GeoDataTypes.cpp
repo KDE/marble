@@ -29,6 +29,7 @@ namespace GeoDataTypes
 const char* GeoDataAnimatedUpdateType = "GeoDataAnimatedUpdate";
 const char* GeoDataAliasType = "GeoDataAlias";
 const char* GeoDataCameraType = "GeoDataCamera";
+const char* GeoDataChangeType = "GeoDataChange";
 const char* GeoDataColorStyleType = "GeoDataColorStyle";
 const char* GeoDataContainerType = "GeoDataContainer";
 const char* GeoDataDataType = "GeoDataData";

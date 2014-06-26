@@ -12,6 +12,7 @@
 #define GEODATAUPDATE_H
 
 #include "GeoDataObject.h"
+#include "GeoDataChange.h"
 #include "marble_export.h"
 
 namespace Marble
@@ -37,6 +38,9 @@ public:
 
     QString targetHref() const;
     void setTargetHref( const QString &targetHref );
+
+    GeoDataChange* change() const;
+    void setChange( GeoDataChange* change );
 
 private:
     GeoDataUpdatePrivate* const d;

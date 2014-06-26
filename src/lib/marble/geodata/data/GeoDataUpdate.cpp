@@ -18,12 +18,12 @@ class GeoDataUpdatePrivate
 {
 public:
     GeoDataUpdatePrivate();
-
+    GeoDataChange* m_change;
     QString m_targetHref;
 };
 
 GeoDataUpdatePrivate::GeoDataUpdatePrivate() :
-    m_targetHref( "" )
+    m_change( 0 ), m_targetHref( "" )
 {
 }
 
@@ -46,6 +46,15 @@ GeoDataUpdate &GeoDataUpdate::operator=( const GeoDataUpdate &other )
 
 bool GeoDataUpdate::operator==(const GeoDataUpdate& other) const
 {
+    bool const changeEmpty = !d->m_change || d->m_change->size() == 0;
+    bool const otherChangeEmpty = !other.d->m_change || other.d->m_change->size() == 0;
+
+    if( changeEmpty != otherChangeEmpty ) {
+        return false;
+    } else if( d->m_change && other.d->m_change && *d->m_change != *other.d->m_change ) {
+        return false;
+    }
+
     return d->m_targetHref == other.d->m_targetHref;
 }
 
@@ -72,6 +81,20 @@ QString GeoDataUpdate::targetHref() const
 void GeoDataUpdate::setTargetHref( const QString &targetHref )
 {
     d->m_targetHref = targetHref;
+}
+
+GeoDataChange* GeoDataUpdate::change() const
+{
+    return d->m_change;
+}
+
+void GeoDataUpdate::setChange( GeoDataChange* change )
+{
+    delete d->m_change;
+    d->m_change = change;
+    if ( d->m_change ) {
+        d->m_change->setParent( this );
+    }
 }
 
 }

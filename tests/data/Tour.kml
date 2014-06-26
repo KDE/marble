@@ -1,31 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-  <gx:Tour>
-    <name>Play me!</name>
-    <gx:Playlist>
-      <gx:FlyTo>
-        <gx:duration>2.55</gx:duration>
-        <gx:flyToMode>smooth</gx:flyToMode>
-        <Camera>
-          <longitude>-113.0844480000</longitude>
-          <latitude>36.5670810000</latitude>
-          <altitude>41277.571403</altitude>
-          <altitudeMode>absolute</altitudeMode>
-        </Camera>
-      </gx:FlyTo>
-      <gx:Wait id="wait">
-        <gx:duration>10.5</gx:duration>
-      </gx:Wait>
-      <gx:SoundCue id="demoSound">
-        <href>http://www.example.com/audio/trumpets.mp3</href>
-        <gx:delayedStart>15</gx:delayedStart>
-      </gx:SoundCue>
-      <gx:TourControl id="myTourControl">
-        <gx:playMode>pause</gx:playMode>
-      </gx:TourControl>
-      <gx:TourControl id="myOtherTourControl">
-        <gx:playMode>play</gx:playMode>
-      </gx:TourControl>
-    </gx:Playlist>
-  </gx:Tour>
+  <Document>
+    <name>balloonVisibility Example</name>
+
+    <gx:Tour>
+      <name>Play me</name>
+      <gx:Playlist>
+
+        <gx:FlyTo>
+          <gx:duration>5</gx:duration>
+          <LookAt>
+            <longitude>-119.7485845412</longitude>
+            <latitude>33.7362661545</latitude>
+            <altitude>4.1241253000</altitude>
+            <range>4469.8504141245</range>
+            <gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+          </LookAt>
+        </gx:FlyTo>
+
+        <gx:AnimatedUpdate>
+          <Update>
+            <Change>
+              <Placemark targetId="underwater1">
+                <gx:balloonVisibility>1</gx:balloonVisibility>
+              </Placemark>
+            </Change>
+          </Update>
+        </gx:AnimatedUpdate>
+
+        <gx:Wait>
+          <gx:duration>4</gx:duration>
+        </gx:Wait>
+
+        <gx:AnimatedUpdate>
+          <Update>
+            <Change>
+              <Placemark targetId="underwater1">
+                <gx:balloonVisibility>1</gx:balloonVisibility>
+              </Placemark>
+            </Change>
+          </Update>
+        </gx:AnimatedUpdate>
+
+        <gx:FlyTo>
+          <gx:duration>3</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <LookAt>
+            <longitude>-119.7826301245</longitude>
+            <latitude>33.8628552512</latitude>
+            <altitude>2.1425130000</altitude>
+            <range>6792.6655400000</range>
+            <gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+          </LookAt>
+        </gx:FlyTo>
+
+        <gx:AnimatedUpdate>
+          <Update>
+            <Change>
+              <Placemark targetId="underwater2">
+                <gx:balloonVisibility>1</gx:balloonVisibility>
+              </Placemark>
+            </Change>
+          </Update>
+        </gx:AnimatedUpdate>
+
+        <gx:Wait>
+          <gx:duration>4</gx:duration>
+        </gx:Wait>
+
+        <gx:AnimatedUpdate>
+          <Update>
+            <Change>
+              <Placemark targetId="underwater2">
+                <gx:balloonVisibility>1</gx:balloonVisibility>
+              </Placemark>
+            </Change>
+          </Update>
+        </gx:AnimatedUpdate>
+
+        <gx:FlyTo>
+          <gx:duration>3</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <LookAt>
+            <longitude>-119.8495780000</longitude>
+            <latitude>33.9685150000</latitude>
+            <altitude>5.1543674521</altitude>
+            <range>3733.6660230000</range>
+            <altitudeMode>relativeToGround</altitudeMode>
+          </LookAt>
+        </gx:FlyTo>
+
+        <gx:Wait>
+          <gx:duration>4</gx:duration>
+        </gx:Wait>
+
+      </gx:Playlist>
+    </gx:Tour>
+
+    <Placemark id="underwater1">
+      <name>Underwater off the California Coast</name>
+      <description>The tour begins near the Santa Cruz Canyon, off the coast of California, USA.</description>
+      <Point>
+        <coordinates>-119.7495310000,33.7150590000</coordinates>
+        <gx:altitudeMode>clampToSeaFloor</gx:altitudeMode>
+      </Point>
+    </Placemark>
+
+    <Placemark id="underwater2">
+      <name>Still swimming...</name>
+      <description>We're about to leave the ocean, and visit the coast...</description>
+      <Point>
+        <coordinates>-119.7795500000,33.8292680000</coordinates>
+        <gx:altitudeMode>clampToSeaFloor</gx:altitudeMode>
+      </Point>
+    </Placemark>
+
+  </Document>
 </kml>

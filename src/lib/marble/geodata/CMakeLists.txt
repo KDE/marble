@@ -68,6 +68,7 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataAnimatedUpdate.cpp
         geodata/data/GeoDataSchema.cpp
         geodata/data/GeoDataSimpleField.cpp
+        geodata/data/GeoDataChange.cpp
 )
 
 SET ( geodata_scene_SRCS
@@ -233,6 +234,7 @@ geodata/handlers/kml/KmlBalloonStyleTagHandler.cpp
 geodata/handlers/kml/KmlBeginTagHandler.cpp
 geodata/handlers/kml/KmlBgColorTagHandler.cpp
 geodata/handlers/kml/KmlCameraTagHandler.cpp
+geodata/handlers/kml/KmlChangeTagHandler.cpp
 geodata/handlers/kml/KmlColorModeTagHandler.cpp
 geodata/handlers/kml/KmlColorTagHandler.cpp
 geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
@@ -389,6 +391,7 @@ geodata/handlers/kml/KmlBalloonVisibilityTagHandler.cpp
 )
 
 SET ( geodata_writers_kml_SRCS
+geodata/writers/kml/KmlAnimatedUpdateTagWriter.cpp
 geodata/writers/kml/KmlBalloonStyleTagWriter.cpp
 geodata/writers/kml/KmlCameraTagWriter.cpp
 geodata/writers/kml/KmlColorStyleTagWriter.cpp
