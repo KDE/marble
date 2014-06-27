@@ -9,10 +9,11 @@
 // Copyright 2013      Thibaut Gridel           <tgridel@free.fr>
 // Copyright 2014      Calin-Cristian Cruceru   <crucerucalincristian@gmail.com
 //
+
+// Self
 #include "AreaAnnotation.h"
 
-#include <qmath.h>
-
+// Marble
 #include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
 #include "GeoPainter.h"
@@ -20,12 +21,16 @@
 #include "SceneGraphicsTypes.h"
 #include "MarbleMath.h"
 
+// Qt
+#include <qmath.h>
+
 
 namespace Marble
 {
 
 AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark )
     : SceneGraphicsItem( placemark ),
+      m_state( Normal ),
       m_movedNodeIndex( -1 ),
       m_rightClickedNode( -2 ),
       m_viewport( 0 )
@@ -55,7 +60,15 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
                 painter->setBrush( Oxygen::aluminumGray6 );
             }
 
+            // If we are in the MergingNodes state paint with a different color the node.
+            if ( ( i == m_mergedNodes.first && m_state == MergingNodes ) ||
+                 ( i == m_mergedNodes.second && m_state == MergingNodes ) ) {
+                painter->setBrush( Oxygen::emeraldGreen6 );
+                painter->drawEllipse( outerRing.at(i) , 15, 15 );
+            } else {
+
             painter->drawEllipse( outerRing.at(i) , 10, 10 );
+            }
             regionList.append( newRegion );
         }
 
@@ -73,7 +86,14 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
                     painter->setBrush( Oxygen::aluminumGray6 );
                 }
 
-                painter->drawEllipse( ring.at(i), 10, 10 );
+                if ( ( i + sizeOffset == m_mergedNodes.first && m_state == MergingNodes ) ||
+                     ( i + sizeOffset == m_mergedNodes.second && m_state == MergingNodes ) ) {
+                    painter->setBrush( Oxygen::emeraldGreen6 );
+                    painter->drawEllipse( ring.at(i) , 15, 15 );
+                } else {
+                    painter->drawEllipse( ring.at(i) , 10, 10 );
+                }
+
                 regionList.append( newRegion );
             }
             sizeOffset += ring.size();
@@ -89,44 +109,42 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport )
 bool AreaAnnotation::mousePressEvent( QMouseEvent *event )
 {
     QList<QRegion> regionList = regions();
+
     qreal lat, lon;
     m_viewport->geoCoordinates( event->pos().x(), event->pos().y(),
                                 lon, lat,
                                 GeoDataCoordinates::Radian );
-
-
-
     m_movedPointCoords.set( lon, lat );
-    // We loop through all regions from the list, including the last one, which
-    // is the entire polygon. This will be useful in mouseMoveEvent to know
-    // whether to move a node or the whole polygon.
-    for ( int i = 0; i < regionList.size(); ++i ) {
-        if ( regionList.at(i).contains( event->pos()) ) {
 
-            // Check if the clicked region is an inner boundary of the polygon.
-            if ( i == regionList.size() - 1 && isInnerBoundsPoint( event->pos() ) ) {
-                m_rightClickedNode = -2;
-                return false;
-            }
+    int index = firstRegionWhichContains( event );
 
-            if ( event->button() == Qt::LeftButton ) {
-                m_movedNodeIndex = i;
-                return true;
+    if ( index == regionList.size() - 1 && isInnerBoundsPoint( event->pos() ) ) {
+        m_rightClickedNode = -2;
+        return false;
+    }
 
-            } else if ( event->button() == Qt::RightButton ) {
-                if ( i < regionList.size() - 1 ) {
-                    m_rightClickedNode = i;
-                } else {
-                    m_rightClickedNode = -1;
-                }
-
-                // Return false because we cannot fully deal with this event within this class.
-                // We need to have access to the marble widget to show a menu of options on the
-                // screen as well as control of the object since one of the options will be
-                // "remove polygon".
-                return false;
+    if ( event->button() == Qt::LeftButton ) {
+        m_movedNodeIndex = index;
+        // If we are in the merging state store the clicked nodes.
+        if ( m_state == MergingNodes && index < regionList.size() - 1 ) {
+            if ( m_mergedNodes.first != -1 && m_mergedNodes.second != -1 ) {
+                m_mergedNodes = QPair<int, int>( -1, -1 );
+            } else if ( m_mergedNodes.first == -1 ) {
+                m_mergedNodes.first = index;
+            } else {
+                m_mergedNodes.second = index;
             }
         }
+
+        return true;
+    } else if ( event->button() == Qt::RightButton ) {
+        if ( index < regionList.size() - 1 ) {
+            m_rightClickedNode = index;
+        } else {
+            m_rightClickedNode = -1;
+        }
+
+        return true;
     }
 
     return false;
@@ -143,14 +161,14 @@ bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
     }
 
     QList<QRegion> regionList = regions();
-    qreal lon, lat;
 
+    qreal lon, lat;
     m_viewport->geoCoordinates( event->pos().x(),
                                 event->pos().y(),
                                 lon, lat,
                                 GeoDataCoordinates::Radian );
-
     const GeoDataCoordinates coords( lon, lat );
+
     // This means one of the nodes has been clicked. The clicked node can be on the outer
     // boundary of the polygon as well as on its inner boundary.
     if ( m_movedNodeIndex >= 0 && m_movedNodeIndex < regionList.size() - 1 ) {
@@ -234,6 +252,10 @@ bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
 
 bool AreaAnnotation::mouseReleaseEvent( QMouseEvent *event )
 {
+    // The offset in pixels after which a mouse move event should not be considered actually a mouse
+    // press event.
+    static const int mouseMoveOffset = 1;
+
     // If the event is caught in one of the polygon's holes, we return false in
     // order to pass it to other potential polygons which have been drawn there.
     if ( isInnerBoundsPoint( event->pos() ) && m_movedNodeIndex == -1 ) {
@@ -248,27 +270,29 @@ bool AreaAnnotation::mouseReleaseEvent( QMouseEvent *event )
     qreal x, y;
     m_viewport->screenCoordinates( m_movedPointCoords.longitude(), m_movedPointCoords.latitude(), x, y );
 
+    // Get the index of the first region from the regionList which contains the event pos.
+    // This may refer to a node or, if i == regionList.size() - 1, to the whole polygon.
+    int index = firstRegionWhichContains( event );
+
     // The node gets selected only if it is clicked and not moved.
     // Is this value ok in order to avoid this?
-    if ( qFabs(event->pos().x() - x) > 1 ||
-         qFabs(event->pos().y() - y) > 1 ) {
+    if ( qFabs(event->pos().x() - x) > mouseMoveOffset ||
+         qFabs(event->pos().y() - y) > mouseMoveOffset ) {
         return true;
     }
 
-    // Only loop until size - 1 because we only want to mark nodes
-    // as selected, and not the entire polygon.
-    for ( int i = 0; i < regionList.size() - 1; ++i ) {
-        if ( regionList.at(i).contains( event->pos()) ) {
+    // If the action state is set to MergingNodes then the clicked node should not get into the
+    // selectedNodes list.
+    if ( m_state == MergingNodes ) {
+        return true;
+    }
 
-            if ( event->button() == Qt::LeftButton ) {
-                if ( !m_selectedNodes.contains( i ) ) {
-                    m_selectedNodes.append( i );
-                } else {
-                    m_selectedNodes.removeAll( i );
-                }
-
-                return true;
-            }
+    // Do the same as above with the node which has been clicked.
+    if ( index >= 0 && index < regionList.size() - 1 && event->button() == Qt::LeftButton ) {
+        if ( !m_selectedNodes.contains( index ) ) {
+             m_selectedNodes.append( index );
+        } else {
+            m_selectedNodes.removeAll( index );
         }
     }
 
@@ -276,6 +300,21 @@ bool AreaAnnotation::mouseReleaseEvent( QMouseEvent *event )
     // be marked (the interior of the polygon has been clicked) and we don't want to do
     // anything else than release it, so we tell caller that we handled the event.
     return true;
+}
+
+void AreaAnnotation::setState( ActionState state )
+{
+    m_state = state;
+
+    // Also do the initializations.
+    if ( state == MergingNodes ) {
+        m_mergedNodes = QPair<int, int>( -1, -1 );
+    }
+}
+
+AreaAnnotation::ActionState AreaAnnotation::state() const
+{
+    return m_state;
 }
 
 QList<int> &AreaAnnotation::selectedNodes()
@@ -288,11 +327,24 @@ int AreaAnnotation::rightClickedNode() const
     return m_rightClickedNode;
 }
 
-bool AreaAnnotation::isInnerBoundsPoint( const QPoint &point ) const
+bool AreaAnnotation::isInnerBoundsPoint( const QPoint &point, bool restrictive ) const
 {
     foreach ( const QRegion &innerRegion, m_innerBoundariesList ) {
-        if ( innerRegion.contains( point ) )
-            return true;
+        if ( innerRegion.contains( point ) ) {
+            if ( restrictive ) {
+                QList<QRegion> regionList = regions();
+
+                for ( int i = 0; i < regionList.size() - 1; ++i ) {
+                    if ( regionList.at(i).contains( point ) ) {
+                        return false;
+                    }
+                }
+
+                return true;
+            } else {
+                return true;
+            }
+        }
     }
 
     return false;
@@ -313,9 +365,34 @@ bool AreaAnnotation::isValidPolygon() const
     return true;
 }
 
+void AreaAnnotation::setMergedNodes( const QPair<int, int> &nodes )
+{
+    m_mergedNodes = nodes;
+}
+
+QPair<int, int> &AreaAnnotation::mergedNodes()
+{
+    return m_mergedNodes;
+}
+
 const char *AreaAnnotation::graphicType() const
 {
     return SceneGraphicTypes::SceneGraphicAreaAnnotation;
+}
+
+int AreaAnnotation::firstRegionWhichContains( QMouseEvent *mouseEvent )
+{
+    QList<QRegion> regionList = regions();
+
+    for ( int i = 0; i < regionList.size(); ++i ) {
+        if ( regionList.at(i).contains( mouseEvent->pos() ) ) {
+            return i;
+        }
+    }
+
+    // It cannot get here since the region list is used so far for handling the mouse events.
+    Q_ASSERT( 0 );
+    return -1;
 }
 
 }

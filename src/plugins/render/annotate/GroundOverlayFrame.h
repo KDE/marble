@@ -31,9 +31,12 @@ public:
         Polygon
     };
 
-    virtual const char *graphicType() const;
-
     void update();
+
+    /**
+     * @brief Provides information for downcasting a SceneGraphicsItem.
+     */
+    virtual const char *graphicType() const;
 
 private:
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
