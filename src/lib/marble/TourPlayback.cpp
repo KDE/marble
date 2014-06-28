@@ -156,7 +156,9 @@ void TourPlayback::setTour(const GeoDataTour *tour)
         }
     }
     Q_ASSERT( d->m_widget );
-    d->m_mapCenter.setView( new GeoDataLookAt( d->m_widget->lookAt() ) );
+    GeoDataLookAt* lookat = new GeoDataLookAt( d->m_widget->lookAt() );
+    lookat->setAltitude( lookat->range() );
+    d->m_mapCenter.setView( lookat );
     PlaybackFlyToItem* mapCenterItem = new PlaybackFlyToItem( &d->m_mapCenter );
     PlaybackFlyToItem* before = mapCenterItem;
     for ( int i=0; i<d->m_mainTrack->size(); ++i ) {
@@ -179,8 +181,9 @@ void TourPlayback::setTour(const GeoDataTour *tour)
 void TourPlayback::play()
 {
     d->m_pause = false;
-    GeoDataCoordinates coords = d->m_widget->focusPoint();
-    d->m_mapCenter.setView( new GeoDataLookAt( d->m_widget->lookAt() ) );
+    GeoDataLookAt* lookat = new GeoDataLookAt( d->m_widget->lookAt() );
+    lookat->setAltitude( lookat->range() );
+    d->m_mapCenter.setView( lookat );
     mainTrack()->play();
     foreach( ParallelTrack* track, d->m_parallelTracks) {
         track->play();
