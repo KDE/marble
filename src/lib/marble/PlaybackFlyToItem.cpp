@@ -70,6 +70,7 @@ void PlaybackFlyToItem::playNext()
             QTimer::singleShot( 5, this, SLOT( playNext() ) );
         }
     } else {
+        center( 1.0 );
         emit finished();
         stop();
     }
