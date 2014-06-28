@@ -113,6 +113,7 @@ void TourPlayback::setupProgressBar( QSlider *slider )
 void TourPlayback::setTour(const GeoDataTour *tour)
 {
     d->m_mainTrack->clear();
+    qDeleteAll( d->m_parallelTracks );
     d->m_parallelTracks.clear();
     if (tour) {
         d->m_tour = tour;
