@@ -69,7 +69,8 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     void finishedSlot();
-    //void stopPlaying();
+    void hideBalloon();
+    void showBalloon( GeoDataPlacemark* );
 
 private:
     TourPlaybackPrivate * const d;

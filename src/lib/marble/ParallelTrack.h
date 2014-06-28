@@ -12,6 +12,7 @@
 #define PARALLELTRACK_H
 
 #include "PlaybackItem.h"
+#include "GeoDataPlacemark.h"
 
 #include <QDateTime>
 #include <QTimer>
@@ -31,6 +32,10 @@ public:
     void seek( double position );
     void stop();
     void setPaused( bool );
+
+Q_SIGNALS:
+    void balloonHidden();
+    void balloonShown( GeoDataPlacemark* );
 
 public Q_SLOTS:
     void playSlot();

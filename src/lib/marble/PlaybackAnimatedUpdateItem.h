@@ -13,11 +13,14 @@
 
 #include "PlaybackItem.h"
 #include "GeoDataAnimatedUpdate.h"
+#include "GeoDataDocument.h"
+#include "GeoDataPlacemark.h"
 
 namespace Marble
 {
 class PlaybackAnimatedUpdateItem : public PlaybackItem
 {
+    Q_OBJECT
 public:
     PlaybackAnimatedUpdateItem( const GeoDataAnimatedUpdate* animatedUpdate );
     const GeoDataAnimatedUpdate* animatedUpdate() const;
@@ -26,7 +29,10 @@ public:
     void pause();
     void seek( double position );
     void stop();
+
 private:
+    GeoDataDocument* rootDocument( GeoDataObject* ) const;
+    GeoDataPlacemark* findPlacemark( GeoDataFeature*, const QString& ) const;
     const GeoDataAnimatedUpdate* m_animatedUpdate;
 };
 }

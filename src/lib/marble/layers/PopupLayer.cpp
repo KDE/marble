@@ -121,16 +121,16 @@ void PopupLayer::popup()
                              coords.longitude(), coords.latitude(), d->m_widget->viewport()->radius(),
                              d->m_widget->viewport()->size() );
     qreal sx, sy, lon, lat;
-    viewport.screenCoordinates(coords, sx, sy);
+    viewport.screenCoordinates( coords, sx, sy );
     sx = viewport.radius() < viewport.width() ? 0.5 * (viewport.width() + viewport.radius()) : 0.75 * viewport.width();
-    viewport.geoCoordinates(sx, sy, lon, lat, GeoDataCoordinates::Radian);
-    coords.setLatitude(lat);
-    coords.setLongitude(lon);
+    viewport.geoCoordinates( sx, sy, lon, lat, GeoDataCoordinates::Radian );
+    coords.setLatitude( lat );
+    coords.setLongitude( lon );
     d->m_widget->centerOn( coords, true );
     setVisible( true );
 }
 
-void PopupLayer::setCoordinates(const GeoDataCoordinates &coordinates , Qt::Alignment alignment)
+void PopupLayer::setCoordinates( const GeoDataCoordinates &coordinates , Qt::Alignment alignment )
 {
     d->m_popupItem->setCoordinate( coordinates );
     d->m_popupItem->setAlignment( alignment );

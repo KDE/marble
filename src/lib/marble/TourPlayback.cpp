@@ -14,9 +14,11 @@
 #include <QList>
 #include <QSlider>
 #include <qurl.h>
+#include <QtCore/qnamespace.h>
 
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
+#include "PopupLayer.h"
 #include "GeoDataTour.h"
 #include "GeoDataTourPrimitive.h"
 #include "GeoDataFlyTo.h"
@@ -83,7 +85,7 @@ TourPlayback::~TourPlayback()
 
 void TourPlayback::finishedSlot()
 {
-    foreach( ParallelTrack* track, d->m_parallelTracks) {
+    foreach( ParallelTrack* track, d->m_parallelTracks ){
         track->stop();
         track->setPaused( false );
     }
@@ -92,6 +94,20 @@ void TourPlayback::finishedSlot()
 SerialTrack* TourPlayback::mainTrack()
 {
     return d->m_mainTrack;
+}
+
+void TourPlayback::showBalloon( GeoDataPlacemark* placemark )
+{
+    GeoDataPoint* point = static_cast<GeoDataPoint*>( placemark->geometry() );
+    d->m_widget->popupLayer()->setCoordinates( point->coordinates(), Qt::AlignRight | Qt::AlignCenter );
+    d->m_widget->popupLayer()->setContent( placemark->description() );
+    d->m_widget->popupLayer()->setVisible( true );
+    d->m_widget->popupLayer()->setSize( QSizeF( 480, 500 ) );
+}
+
+void TourPlayback::hideBalloon()
+{
+    d->m_widget->popupLayer()->setVisible( false );
 }
 
 bool TourPlayback::isPlaying() const
@@ -153,6 +169,8 @@ void TourPlayback::setTour(const GeoDataTour *tour)
             ParallelTrack *track = new ParallelTrack( item );
             track->setDelayBeforeTrackStarts( delay );
             d->m_parallelTracks.append( track );
+            connect( track, SIGNAL( balloonHidden()), this, SLOT( hideBalloon() ) );
+            connect( track, SIGNAL( balloonShown( GeoDataPlacemark* ) ), this, SLOT( showBalloon( GeoDataPlacemark* ) ) );
         }
     }
     Q_ASSERT( d->m_widget );
@@ -206,6 +224,7 @@ void TourPlayback::stop()
     foreach( ParallelTrack* track, d->m_parallelTracks) {
         track->stop();
     }
+    hideBalloon();
 }
 
 void TourPlayback::seek( double t )

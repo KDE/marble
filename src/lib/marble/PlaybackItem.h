@@ -12,6 +12,7 @@
 #define PLAYBACKITEM_H
 
 #include "GeoDataCoordinates.h"
+#include "GeoDataPlacemark.h"
 #include <QObject>
 
 namespace Marble
@@ -32,6 +33,8 @@ Q_SIGNALS:
     void centerOn( const GeoDataCoordinates &coordinates );
     void paused();
     void progressChanged( double seconds );
+    void balloonShown( GeoDataPlacemark* );
+    void balloonHidden();
 };
 }
 #endif
