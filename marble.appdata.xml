@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL</project_license>
   <name>Marble</name>
+  <name xml:lang="es">Marble</name>
   <name xml:lang="nds">Marble</name>
   <name xml:lang="nl">Marble</name>
   <name xml:lang="pt">Marble</name>
@@ -13,6 +14,7 @@
   <name xml:lang="uk">Marble</name>
   <name xml:lang="x-test">xxMarblexx</name>
   <summary>Virtual Globe</summary>
+  <summary xml:lang="es">Globo virtual</summary>
   <summary xml:lang="nds">Virtuell Globus</summary>
   <summary xml:lang="nl">Virtuele globe</summary>
   <summary xml:lang="pt">Globo Virtual</summary>
@@ -23,6 +25,7 @@
   <summary xml:lang="x-test">xxVirtual Globexx</summary>
   <description>
     <p>Marble is a virtual globe and world atlas — your swiss army knife for maps.</p>
+    <p xml:lang="es">Marble es un globo virtual y atlas mundial: su navaja suiza para los mapas.</p>
     <p xml:lang="nds">Marble is en virtuell Globus un en Atlas för de hele Welt – dat Swiezer Armeemetz för Koorten.</p>
     <p xml:lang="nl">Marble is een virtuele globe en wereldatlas  — uw Zwitsers zakmes voor kaarten.</p>
     <p xml:lang="pt">O Marble é um globo virtual e um atlas mundial — o seu canivete-suíço para mapas.</p>
