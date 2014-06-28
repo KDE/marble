@@ -2,6 +2,7 @@
 Type=Service
 Name=KML Geographic Compressed Data
 Name[es]=Datos geográficos comprimidos KML
+Name[fi]=Pakattu KML-paikkatieto
 Name[nds]=Komprimeert KML-Geodaten
 Name[nl]=KML Geographic Compressed Data
 Name[pt]=Dados Geográficos Comprimidos em KML
@@ -10,6 +11,7 @@ Name[sk]=Zemepisné komprimované dáta KML
 Name[sv]=KML komprimerad geografisk data
 Name[uk]=стиснені географічні дані KML
 Name[x-test]=xxKML Geographic Compressed Dataxx
+Name[zh_TW]=KML 地理壓縮資料
 
 X-KDE-ServiceTypes=ThumbCreator
 MimeType=application/vnd.google-earth.kmz;

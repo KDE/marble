@@ -2,6 +2,7 @@
 Type=Service
 Name=ESRI Shapefile
 Name[es]=Archivo de formas ESRI
+Name[fi]=ESRI Shapefile
 Name[nds]=ESRI-Ümreetdatei
 Name[nl]=ESRI Shapefile
 Name[pt]=Ficheiro de formas da ESRI
@@ -10,6 +11,7 @@ Name[sk]=Súbor tvarov ESRI
 Name[sv]=ESRI-formfil
 Name[uk]=файл форми ESRI
 Name[x-test]=xxESRI Shapefilexx
+Name[zh_TW]=ESRI Shapefile
 
 X-KDE-ServiceTypes=ThumbCreator
 MimeType=application/x-esri-shape;

@@ -2,6 +2,7 @@
 Type=Service
 Name=OSM Data
 Name[es]=Datos OSM
+Name[fi]=OSM-data
 Name[nds]=OSM-Daten
 Name[nl]=OSM-gegevens
 Name[pt]=Dados do OSM
@@ -10,6 +11,7 @@ Name[sk]=Dáta OSM
 Name[sv]=OSM-data
 Name[uk]=дані OSM
 Name[x-test]=xxOSM Dataxx
+Name[zh_TW]=OSM 資料
 
 X-KDE-ServiceTypes=ThumbCreator
 MimeType=application/x-osm+xml;
