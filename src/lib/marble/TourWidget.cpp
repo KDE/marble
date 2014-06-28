@@ -449,9 +449,7 @@ void TourWidgetPrivate::mapCenterOn( const QModelIndex &index )
 void TourWidgetPrivate::addFlyTo()
 {
     GeoDataFlyTo *flyTo = new GeoDataFlyTo();
-    GeoDataLookAt *lookAt = new GeoDataLookAt();
-    lookAt->setCoordinates( m_widget->focusPoint() );
-    flyTo->setView( lookAt );
+    flyTo->setView( new GeoDataLookAt( m_widget->lookAt() ) );
     GeoDataObject *rootObject =  rootIndexObject();
     if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
