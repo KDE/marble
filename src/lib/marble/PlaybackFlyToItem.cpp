@@ -98,15 +98,18 @@ void PlaybackFlyToItem::stop()
 
 void PlaybackFlyToItem::center( double t )
 {
+    Q_ASSERT( t >= 0.0 && t <= 1.0 );
     Q_ASSERT( m_before );
-    if ( m_flyTo->flyToMode() == GeoDataFlyTo::Bounce ) {
-        emit centerOn( m_before->m_flyTo->view()->coordinates().interpolate( m_flyTo->view()->coordinates(), t ) );
+    if ( m_flyTo->flyToMode() == GeoDataFlyTo::Bounce || !m_before->m_before || !m_next ) {
+        GeoDataCoordinates const a = m_before->m_flyTo->view()->coordinates();
+        GeoDataCoordinates const b = m_flyTo->view()->coordinates();
+        emit centerOn( a.interpolate( b, t ) );
     } else {
         Q_ASSERT( m_flyTo->flyToMode() == GeoDataFlyTo::Smooth );
-        GeoDataCoordinates const a = m_before->m_before ? m_before->m_before->m_flyTo->view()->coordinates() : m_before->m_flyTo->view()->coordinates();
-        GeoDataCoordinates const b = m_before->m_before ? m_before->m_flyTo->view()->coordinates() : m_before->m_flyTo->view()->coordinates().interpolate( m_flyTo->view()->coordinates(), 0.1 );
-        GeoDataCoordinates const c = m_next ? m_flyTo->view()->coordinates() : b.interpolate( m_flyTo->view()->coordinates(), 0.9 );
-        GeoDataCoordinates const d = m_next ? m_next->m_flyTo->view()->coordinates() : m_flyTo->view()->coordinates();
+        GeoDataCoordinates const a = m_before->m_before->m_flyTo->view()->coordinates();
+        GeoDataCoordinates const b = m_before->m_flyTo->view()->coordinates();
+        GeoDataCoordinates const c = m_flyTo->view()->coordinates();
+        GeoDataCoordinates const d = m_next->m_flyTo->view()->coordinates();
         emit centerOn( b.interpolate( a, c, d, t ) );
     }
 }
