@@ -11,7 +11,7 @@
 #ifndef PANORAMIOWIDGET_H
 #define PANORAMIOWIDGET_H
 
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 
 #include <QDate>
 #include <QPixmap>
@@ -21,25 +21,22 @@ namespace Marble
     
 const QString standardImageSize = "mini_square";
  
-class PanoramioWidget : public AbstractDataPluginWidget
+class PanoramioWidget : public AbstractDataPluginItem
 {
  public:
     explicit PanoramioWidget( QObject *parent );
     
-    QString widgetType() const;
-     
-    bool initialized();
+    bool initialized() const;
     
-    void addDownloadedFile( QString url, QString type );
+    void addDownloadedFile( const QString &url, const QString &type );
     
     QDate uploadDate() const;
     
     void setUploadDate( QDate uploadDate );
     
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos, GeoSceneLayer * layer = 0 );
+    void paint( QPainter *painter );
                  
-    bool operator<( const AbstractDataPluginWidget *other ) const;
+    bool operator<( const AbstractDataPluginItem *other ) const;
  private:
     QImage smallImage;
     QDate m_uploadDate;

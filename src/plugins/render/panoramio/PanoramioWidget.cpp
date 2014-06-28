@@ -20,21 +20,16 @@
 using namespace Marble;
 
 PanoramioWidget::PanoramioWidget( QObject *parent )
-    : AbstractDataPluginWidget( parent )
+    : AbstractDataPluginItem( parent )
 {
 }
 
-QString PanoramioWidget::widgetType() const
-{
-    return "panoramioWidget";
-}
-     
-bool PanoramioWidget::initialized()
+bool PanoramioWidget::initialized() const
 {
     return !smallImage.isNull();
 }
     
-void PanoramioWidget::addDownloadedFile( QString url, QString type )
+void PanoramioWidget::addDownloadedFile( const QString &url, const QString &type )
 {
     if( standardImageSize == type ) {
         // Loading original image
@@ -45,6 +40,7 @@ void PanoramioWidget::addDownloadedFile( QString url, QString type )
         smallImage = largeImage.scaled( largeImage.size() / 2,
                                         Qt::IgnoreAspectRatio,
                                         Qt::SmoothTransformation );
+        update();
     }
     else {
         mDebug() << "PanoramioWidget: addDownloadFile can't handle type " << type;
@@ -61,21 +57,16 @@ void PanoramioWidget::setUploadDate( QDate uploadDate )
     m_uploadDate = uploadDate;
 }
 
-bool PanoramioWidget::operator<( const AbstractDataPluginWidget *other ) const
+bool PanoramioWidget::operator<( const AbstractDataPluginItem *other ) const
 {
-    if( other->widgetType() == widgetType() ) {
-        return uploadDate() > ((PanoramioWidget *) other)->uploadDate();
-    }
-    else {
-        return false;
-    }
+    Q_ASSERT( dynamic_cast<const PanoramioWidget *>( other ) != 0 );
+
+    return uploadDate() > static_cast<const PanoramioWidget *>( other )->uploadDate();
 }
-   
-bool PanoramioWidget::render( GeoPainter *painter, ViewportParams *viewport,
-                              const QString& renderPos, GeoSceneLayer * layer )
+
+void PanoramioWidget::paint( QPainter *painter )
 {
-    painter->drawImage( coordinates(), smallImage );
-    return true;
+    painter->drawImage( 0, 0, smallImage );
 }
 
 #include "PanoramioWidget.h"

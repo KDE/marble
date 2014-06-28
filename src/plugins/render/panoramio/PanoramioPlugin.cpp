@@ -15,15 +15,20 @@
 
 using namespace Marble;
 
-PanoramioPlugin::PanoramioPlugin()
-{  
-    setNameId( "panoramio" );
+PanoramioPlugin::PanoramioPlugin( const MarbleModel *marbleModel ) :
+    AbstractDataPlugin( marbleModel )
+{
 }
-     
+
+QString Marble::PanoramioPlugin::nameId() const
+{
+    return "panoramio";
+}
+
 void PanoramioPlugin::initialize()
 {
-    setModel( new PanoramioModel( this ) );
-    setNumberOfWidgets( numberOfImagesPerFetch );
+    setModel( new PanoramioModel( marbleModel(), this ) );
+    setNumberOfItems( numberOfImagesPerFetch );
 }
 
 QString PanoramioPlugin::name() const
@@ -45,6 +50,23 @@ QIcon PanoramioPlugin::icon() const
 {
     return QIcon();
 }
+
+
+QString Marble::PanoramioPlugin::version() const
+{
+    return "0.1";
+}
+
+QString PanoramioPlugin::copyrightYears() const
+{
+    return "2009, 2014";
+}
+
+QList<PluginAuthor> PanoramioPlugin::pluginAuthors() const
+{
+    return QList<PluginAuthor>() << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+}
+
 Q_EXPORT_PLUGIN2(PanoramioPlugin, Marble::PanoramioPlugin)
 
 #include "PanoramioPlugin.moc"

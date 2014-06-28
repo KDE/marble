@@ -11,6 +11,7 @@
 
 // Self
 #include "PanoramioModel.h"
+#include "jsonparser.h"
 
 // Marble
 #include "GeoDataLatLonAltBox.h"
@@ -22,28 +23,33 @@
 
 using namespace Marble;
 
-PanoramioModel::PanoramioModel( QObject *parent )
-    : AbstractDataPluginModel( "panoramio", parent ) 
+PanoramioModel::PanoramioModel( const MarbleModel *marbleModel, QObject *parent )
+    : AbstractDataPluginModel( "panoramio", marbleModel, parent )
 {
 }
 
-QUrl PanoramioModel::descriptionFileUrl( GeoDataLatLonAltBox *box, qint32 number ) {
+void PanoramioModel::getAdditionalItems( const GeoDataLatLonAltBox &box, qint32 number )
+{
     // FIXME: Download a list of constant number, because the parser doesn't support
     // loading a file of an unknown length.
     QUrl jsonUrl( "http://www.panoramio.com/map/get_panoramas.php?from="
                   + QString::number( 0 )
                   + "&order=upload_date"
-                  + "&to="   + QString::number( numberOfImagesPerFetch )
+                  + "&set=public"
+                  + "&to="   + QString::number( number )
 //                   + "&to=" + QString::number( number )
-                  + "&minx=" + QString::number( box->west()  * RAD2DEG )
-                  + "&miny=" + QString::number( box->south()  * RAD2DEG )
-                  + "&maxx=" + QString::number( box->east() * RAD2DEG )
-                  + "&maxy=" + QString::number( box->north() * RAD2DEG )
+                  + "&minx=" + QString::number( box.west() * RAD2DEG )
+                  + "&miny=" + QString::number( box.south() * RAD2DEG )
+                  + "&maxx=" + QString::number( box.east() * RAD2DEG )
+                  + "&maxy=" + QString::number( box.north() * RAD2DEG )
                   + "&size=small");
-    return jsonUrl;
+
+    downloadDescriptionFile( jsonUrl );
 }
 
-void PanoramioModel::parseFile( QByteArray file ) {
+void PanoramioModel::parseFile( const QByteArray &file )
+{
+    jsonParser panoramioJsonParser;
     QList<panoramioDataStructure> list
         = panoramioJsonParser.parseAllObjects( file,
                                                numberOfImagesPerFetch );
@@ -56,18 +62,19 @@ void PanoramioModel::parseFile( QByteArray file ) {
                                         0,
                                         GeoDataCoordinates::Degree );
                                         
-        if( widgetExists( QString::number( (*it).photo_id ) ) ) {
+        if( itemExists( QString::number( (*it).photo_id ) ) ) {
             continue;
         }
         
         PanoramioWidget *widget = new PanoramioWidget( this );
-        widget->setCoordinates( coordinates );
+        widget->setTarget( "earth" );
+        widget->setCoordinate( coordinates );
         widget->setId( QString::number( (*it).photo_id ) );
         widget->setUploadDate( (*it).upload_date );
         
         // We need to download the file from Panoramio if it doesn't exist already
         if ( !fileExists( widget->id(), standardImageSize ) ) {
-            downloadWidgetData( QUrl( (*it).photo_file_url ),
+            downloadItem( QUrl( (*it).photo_file_url ),
                                 standardImageSize,
                                 widget );
         }
@@ -78,8 +85,8 @@ void PanoramioModel::parseFile( QByteArray file ) {
             widget->addDownloadedFile( filename,
                                        standardImageSize );
             
-            addWidgetToList( widget );
-        }           
+            addItemToList( widget );
+        }
     }
 }
 

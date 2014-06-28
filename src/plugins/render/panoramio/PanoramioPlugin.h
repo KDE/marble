@@ -12,10 +12,6 @@
 #define PANORAMIOPLUGIN_H
 
 #include "AbstractDataPlugin.h"
-#include "RenderPlugin.h"
-#include "RenderPluginInterface.h"
-
-#include <QIcon>
 
 namespace Marble
 {
@@ -26,18 +22,26 @@ class PanoramioPlugin : public AbstractDataPlugin
     Q_PLUGIN_METADATA( IID "org.kde.edu.marble.PanoramioPlugin" )
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( PanoramioPlugin )
-    
+
  public:
-    PanoramioPlugin();
-     
+    PanoramioPlugin( const MarbleModel *marbleModel = 0 );
+
+    QString nameId() const;
+
+    QString version() const;
+
+    QString copyrightYears() const;
+
+    QList<PluginAuthor> pluginAuthors() const;
+
     void initialize();
-    
+
     QString name() const;
-    
+
     QString guiString() const;
-    
+
     QString description() const;
-    
+
     QIcon icon() const;
 };
 
