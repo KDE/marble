@@ -394,7 +394,7 @@ install(FILES marble.appdata.xml DESTINATION ${CMAKE_INSTALL_PREFIX}/share/appda
 if( CMAKE_MODULES_INSTALL_PATH AND NOT WIN32 )
   install( FILES FindMarble.cmake
            DESTINATION ${CMAKE_MODULES_INSTALL_PATH}  )
-endif( CMAKE_MODULES_INSTALL_PATH )
+endif()
 
 ############################################################
 # Uninstall stuff
