@@ -16,6 +16,8 @@
 namespace Marble
 {
 
+class MarbleWidget;
+
 const quint32 numberOfImagesPerFetch = 7;
 
 class PanoramioModel : public AbstractDataPluginModel
@@ -24,6 +26,8 @@ class PanoramioModel : public AbstractDataPluginModel
 
  public:
     explicit PanoramioModel( const MarbleModel *marbleModel, QObject *parent = 0 );
+
+    void setMarbleWidget( MarbleWidget *widget );
 
  protected:
     /**
@@ -38,6 +42,9 @@ class PanoramioModel : public AbstractDataPluginModel
      * depending on if they have to download information to be shown.
      **/
     void parseFile( const QByteArray &file );
+
+private:
+    MarbleWidget *m_marbleWidget;
 };
 
 }

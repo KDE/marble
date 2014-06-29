@@ -33,6 +33,7 @@ panoramioDataStructure PanoramioParser::parseObjectOnPosition(const QString &con
     myEngine.evaluate(QString("function latitude(x){return myJSONObject.photos[x].latitude};"));
     myEngine.evaluate(QString("function longitude (x){return myJSONObject.photos[x].longitude};"));
     myEngine.evaluate(QString("function owner_id(x){return myJSONObject.photos[x].owner_id};"));
+    myEngine.evaluate(QString("function photo_url(x){return myJSONObject.photos[x].photo_url};"));
     myEngine.evaluate(QString("function photo_file_url(x){return myJSONObject.photos[x].photo_file_url};"));
     myEngine.evaluate(QString("function photo_title(x){return myJSONObject.photos[x].photo_title};"));
     myEngine.evaluate(QString("function photo_id(x){return myJSONObject.photos[x].photo_id};"));
@@ -41,6 +42,7 @@ panoramioDataStructure PanoramioParser::parseObjectOnPosition(const QString &con
     myEngine.evaluate(QString("var x="+QString::number(requiredObjectPosition)));
     dataStorage.longitude=myEngine.evaluate(QString("longitude(x)")).toNumber();
     dataStorage.latitude=myEngine.evaluate(QString("latitude(x)")).toNumber();
+    dataStorage.photo_url=myEngine.evaluate("photo_url(x)").toString();
     dataStorage.photo_file_url=myEngine.evaluate(QString("photo_file_url(x)")).toString();
     dataStorage.photo_title=myEngine.evaluate(QString("photo_title(x)")).toString();
     dataStorage.photo_id=myEngine.evaluate(QString("photo_id(x)")).toNumber();

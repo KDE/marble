@@ -43,6 +43,9 @@ class PanoramioPlugin : public AbstractDataPlugin
     QString description() const;
 
     QIcon icon() const;
+
+ protected:
+    bool eventFilter( QObject *object, QEvent *event );
 };
 
 }

@@ -23,9 +23,15 @@
 
 using namespace Marble;
 
-PanoramioModel::PanoramioModel( const MarbleModel *marbleModel, QObject *parent )
-    : AbstractDataPluginModel( "panoramio", marbleModel, parent )
+PanoramioModel::PanoramioModel( const MarbleModel *marbleModel, QObject *parent ) :
+    AbstractDataPluginModel( "panoramio", marbleModel, parent ),
+    m_marbleWidget( 0 )
 {
+}
+
+void PanoramioModel::setMarbleWidget( MarbleWidget *widget )
+{
+    m_marbleWidget = widget;
 }
 
 void PanoramioModel::getAdditionalItems( const GeoDataLatLonAltBox &box, qint32 number )
@@ -66,10 +72,11 @@ void PanoramioModel::parseFile( const QByteArray &file )
             continue;
         }
         
-        PanoramioItem *item = new PanoramioItem( this );
+        PanoramioItem *item = new PanoramioItem( m_marbleWidget, this );
         item->setTarget( "earth" );
         item->setCoordinate( coordinates );
         item->setId( QString::number( (*it).photo_id ) );
+        item->setPhotoUrl( (*it).photo_url );
         item->setUploadDate( (*it).upload_date );
         
         // We need to download the file from Panoramio if it doesn't exist already

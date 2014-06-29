@@ -13,14 +13,20 @@
 
 // Marble
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
+#include "layers/PopupLayer.h"
 
+#include <QAction>
 #include <QPainter>
 
 using namespace Marble;
 
-PanoramioItem::PanoramioItem( QObject *parent )
-    : AbstractDataPluginItem( parent )
+PanoramioItem::PanoramioItem( MarbleWidget *marbleWidget, QObject *parent ) :
+    AbstractDataPluginItem( parent ),
+    m_marbleWidget( marbleWidget )
 {
+    m_action = new QAction( this );
+    connect( m_action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
 }
 
 bool PanoramioItem::initialized() const
@@ -39,11 +45,17 @@ void PanoramioItem::addDownloadedFile( const QString &url, const QString &type )
         smallImage = largeImage.scaled( largeImage.size() / 2,
                                         Qt::IgnoreAspectRatio,
                                         Qt::SmoothTransformation );
+        setSize( smallImage.size() );
         update();
     }
     else {
         mDebug() << Q_FUNC_INFO << "can't handle type" << type;
     }
+}
+
+void PanoramioItem::setPhotoUrl( const QUrl &url )
+{
+    m_url = url;
 }
 
 QDate PanoramioItem::uploadDate() const
@@ -66,6 +78,26 @@ bool PanoramioItem::operator<( const AbstractDataPluginItem *other ) const
 void PanoramioItem::paint( QPainter *painter )
 {
     painter->drawImage( 0, 0, smallImage );
+}
+
+QAction *Marble::PanoramioItem::action()
+{
+    if( m_action->icon().isNull() ) {
+        m_action->setIcon( QIcon( QPixmap::fromImage( smallImage ) ) );
+    }
+
+    return m_action;
+}
+
+void PanoramioItem::openBrowser()
+{
+    if ( m_marbleWidget ) {
+        PopupLayer* popup = m_marbleWidget->popupLayer();
+        popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
+        popup->setSize( QSizeF( 700, 450 ) );
+        popup->setUrl( m_url );
+        popup->popup();
+    }
 }
 
 #include "PanoramioItem.moc"
