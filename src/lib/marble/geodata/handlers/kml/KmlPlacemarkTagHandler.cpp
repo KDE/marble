@@ -47,7 +47,7 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
 
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ||
-        parentItem.represents( kmlTag_Change ) ){
+        parentItem.represents( kmlTag_Change ) || parentItem.represents( kmlTag_Create ) || parentItem.represents( kmlTag_Delete ) ){
         parentItem.nodeAs<GeoDataContainer>()->append( placemark );
         return placemark;
     } else if ( parentItem.qualifiedName().first == kmlTag_kml ) {

@@ -20,11 +20,13 @@
 
         <gx:AnimatedUpdate>
           <Update>
-            <Change>
-              <Placemark targetId="underwater1">
-                <gx:balloonVisibility>1</gx:balloonVisibility>
+            <Create>
+              <Placemark id="placemark891">
+                <Point>
+                  <coordinates>-95.4802021230,40.4300121452</coordinates>
+                </Point>
               </Placemark>
-            </Change>
+            </Create>
           </Update>
         </gx:AnimatedUpdate>
 
@@ -70,11 +72,9 @@
 
         <gx:AnimatedUpdate>
           <Update>
-            <Change>
-              <Placemark targetId="underwater2">
-                <gx:balloonVisibility>1</gx:balloonVisibility>
-              </Placemark>
-            </Change>
+            <Delete>
+              <Placemark targetId="underwater2"/>
+            </Delete>
           </Update>
         </gx:AnimatedUpdate>
 
