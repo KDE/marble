@@ -23,7 +23,7 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerModel(
     GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataModelType,
-                                 kml::kmlTag_nameSpace22 ),
+                                 kml::kmlTag_nameSpaceOgc22 ),
     new KmlModelTagWriter);
 
 bool KmlModelTagWriter::write( const GeoNode *node, GeoWriter& writer ) const

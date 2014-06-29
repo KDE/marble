@@ -20,7 +20,7 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerNetworkLink(
         GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataNetworkLinkType,
-                                     kml::kmlTag_nameSpace22 ),
+                                     kml::kmlTag_nameSpaceOgc22 ),
         new KmlNetworkLinkTagWriter );
 
 bool KmlNetworkLinkTagWriter::write( const GeoNode *node, GeoWriter& writer ) const

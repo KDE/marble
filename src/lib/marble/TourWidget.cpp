@@ -708,7 +708,7 @@ bool TourWidgetPrivate::saveTourAs(const QString &filename)
         QFile file( filename );
         if ( file.open( QIODevice::WriteOnly ) ) {
             GeoWriter writer;
-            writer.setDocumentType( kml::kmlTag_nameSpace22 );
+            writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
             if ( writer.write( &file, m_model.rootDocument() ) ) {
                 file.close();
                 m_tourUi.m_actionSaveTour->setEnabled( false );

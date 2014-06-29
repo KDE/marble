@@ -21,7 +21,7 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerLookAt(
     GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataLatLonBoxType,
-				 kml::kmlTag_nameSpace22 ),
+				 kml::kmlTag_nameSpaceOgc22 ),
     new KmlLatLonBoxWriter );
 
 bool KmlLatLonBoxWriter::write( const GeoNode *node,

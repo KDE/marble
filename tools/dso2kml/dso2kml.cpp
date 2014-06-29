@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     QTextStream out( &file );
 
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n"
-        << "<kml xmlns=\"http://earth.google.com/kml/2.2\" hint=\"target=sky\"> \n"
+        << "<kml xmlns=\"http://www.opengis.net/kml/2.2\" hint=\"target=sky\"> \n"
         << "<Document> \n"
         << "    <Style id=\"iconStyle\"> \n"
         << "        <IconStyle> \n"

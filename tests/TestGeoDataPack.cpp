@@ -72,7 +72,7 @@ void TestGeoDataPack::initTestCase()
 
     content = QString( 
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-"<kml xmlns=\"http://earth.google.com/kml/2.2\">\n"
+"<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
 "  <Document>\n"
 "    <Placemark>\n"
 "      <name>Empty</name>\n"

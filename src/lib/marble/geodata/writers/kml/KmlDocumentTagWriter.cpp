@@ -30,7 +30,7 @@ namespace Marble
 {
 
 static GeoTagWriterRegistrar s_writerDocument( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataDocumentType,
-                                                                            kml::kmlTag_nameSpace22),
+                                                                            kml::kmlTag_nameSpaceOgc22),
                                                new KmlDocumentTagWriter() );
 
 KmlDocumentTagWriter::KmlDocumentTagWriter() :

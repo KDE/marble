@@ -20,7 +20,7 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerTour(
         GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataTourType,
-                                     kml::kmlTag_nameSpace22 ),
+                                     kml::kmlTag_nameSpaceOgc22 ),
         new KmlTourTagWriter );
 
 bool KmlTourTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const

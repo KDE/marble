@@ -25,7 +25,7 @@ namespace Marble
 // the object type strings instead
 //FIXME: USE object strings provided by idis
 static GeoTagWriterRegistrar s_writerPlacemark( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPlacemarkType,
-                                                kml::kmlTag_nameSpace22), new KmlPlacemarkTagWriter() );
+                                                kml::kmlTag_nameSpaceOgc22), new KmlPlacemarkTagWriter() );
 
 bool KmlPlacemarkTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
 {

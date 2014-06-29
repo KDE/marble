@@ -28,6 +28,7 @@
 #include "PluginManager.h"
 #include "PositionProviderPlugin.h"
 #include "RoutingRunnerManager.h"
+#include <KmlElementDictionary.h>
 
 #include <QFile>
 #include <QMessageBox>
@@ -146,7 +147,7 @@ QString RoutingManagerPrivate::stateFile( const QString &name)
 void RoutingManagerPrivate::saveRoute(const QString &filename)
 {
     GeoWriter writer;
-    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
     QMutexLocker locker( &m_fileMutex );
     QFile file( filename );

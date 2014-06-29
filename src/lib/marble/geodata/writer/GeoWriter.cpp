@@ -22,7 +22,7 @@ namespace Marble
 GeoWriter::GeoWriter()
 {
     //FIXME: work out a standard way to do this.
-    m_documentType = kml::kmlTag_nameSpace22;
+    m_documentType = kml::kmlTag_nameSpaceOgc22;
 }
 
 bool GeoWriter::write(QIODevice* device, const GeoNode *feature)

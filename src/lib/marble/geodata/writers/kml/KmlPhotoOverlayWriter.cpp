@@ -21,7 +21,7 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerLookAt(
     GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataPhotoOverlayType,
-				 kml::kmlTag_nameSpace22 ),
+				 kml::kmlTag_nameSpaceOgc22 ),
     new KmlPhotoOverlayWriter );
 
 KmlPhotoOverlayWriter::KmlPhotoOverlayWriter() : KmlOverlayTagWriter( kml::kmlTag_PhotoOverlay )

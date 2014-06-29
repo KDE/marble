@@ -22,7 +22,7 @@ namespace Marble
 {
 
 static GeoTagWriterRegistrar s_writerDocument( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataFolderType,
-                                                                            kml::kmlTag_nameSpace22),
+                                                                            kml::kmlTag_nameSpaceOgc22),
                                                new KmlFolderTagWriter() );
 
 bool KmlFolderTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const

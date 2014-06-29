@@ -20,7 +20,7 @@ namespace Marble
 {
 
 static GeoTagWriterRegistrar s_writerUpdate( GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataUpdateType,
-                                             kml::kmlTag_nameSpace22 ), new KmlUpdateTagWriter );
+                                             kml::kmlTag_nameSpaceOgc22 ), new KmlUpdateTagWriter );
 
 bool KmlUpdateTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {

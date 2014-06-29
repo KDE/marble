@@ -26,6 +26,7 @@
 #include "geodata/data/GeoDataData.h"
 #include "geodata/data/GeoDataExtendedData.h"
 #include "geodata/writer/GeoWriter.h"
+#include "geodata/handlers/kml/KmlElementDictionary.h"
 
 using namespace Marble;
 
@@ -130,7 +131,7 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
 int save( GeoDataDocument* document, const QFileInfo &filename )
 {
     GeoWriter writer;
-    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
     QFile file( filename.absoluteFilePath() );
     if ( !file.open( QIODevice::WriteOnly | QIODevice::Truncate ) )

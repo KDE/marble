@@ -22,7 +22,7 @@ namespace Marble
 {
 
 static GeoTagWriterRegistrar s_writerTimeStamp( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTimeStampType,
-                                                                            kml::kmlTag_nameSpace22),
+                                                                            kml::kmlTag_nameSpaceOgc22),
                                                new KmlTimeStampTagWriter() );
 
 

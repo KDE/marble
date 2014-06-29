@@ -20,7 +20,7 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerLineStyle(
     GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataLineStyleType,
-                                 kml::kmlTag_nameSpace22 ),
+                                 kml::kmlTag_nameSpaceOgc22 ),
     new KmlLineStyleTagWriter );
 
 KmlLineStyleTagWriter::KmlLineStyleTagWriter() : KmlColorStyleTagWriter( kml::kmlTag_LineStyle )

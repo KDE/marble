@@ -25,6 +25,7 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataStyle.h"
 #include "GeoWriter.h"
+#include <KmlElementDictionary.h>
 
 
 using namespace Marble;
@@ -149,7 +150,7 @@ void FileManagerPrivate::closeFile( const QString& key )
 void FileManager::saveFile( const QString &fileName, const GeoDataDocument *document )
 {
     GeoWriter writer;
-    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
     QFile file( fileName );
     if ( !file.open( QIODevice::WriteOnly | QIODevice::Truncate ) ) {

@@ -261,7 +261,7 @@ bool PositionTracking::saveTrack( const QString& fileName )
 
     GeoWriter writer;
     //FIXME: a better way to do this?
-    writer.setDocumentType( kml::kmlTag_nameSpace22 );
+    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
     GeoDataDocument *document = new GeoDataDocument;
     QFileInfo fileInfo( fileName );

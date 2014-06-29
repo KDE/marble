@@ -14,6 +14,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataColorStyle.h"
 #include "GeoWriter.h"
+#include <geodata/handlers/kml/KmlElementDictionary.h>
 
 #include <QDir>
 #include <QFile>
@@ -98,7 +99,7 @@ void TestGeoDataWriter::saveFile()
 
     GeoWriter writer;
     //FIXME: a better way to do this?
-    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
     // Open file in right mode
     QVERIFY( buffer.open( QIODevice::WriteOnly ) );
@@ -125,7 +126,7 @@ void TestGeoDataWriter::saveAndLoad()
 
     GeoWriter writer;
     //FIXME: a better way to do this?
-    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
     // Open file in right mode
     QVERIFY( buffer.open( QIODevice::ReadWrite ) );
@@ -165,7 +166,7 @@ void TestGeoDataWriter::saveAndCompare()
 
     GeoWriter writer;
     //FIXME: a better way to do this?
-    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
     QVERIFY( writer.write( &buffer, &( *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) ) );
 
@@ -203,7 +204,7 @@ void TestGeoDataWriter::saveAndCompareEquality()
 
     GeoWriter writer;
     //FIXME: a better way to do this?
-    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
     GeoDataDocument *initialDoc = dynamic_cast<GeoDataDocument*>( parser->activeDocument() );
     QVERIFY( writer.write( &buffer, initialDoc) );

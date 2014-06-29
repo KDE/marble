@@ -24,6 +24,7 @@
 #include "GeoDataFeature.h"
 #include "geodata/writer/GeoWriter.h"
 #include "geodata/data/GeoDataExtendedData.h"
+#include <geodata/handlers/kml/KmlElementDictionary.h>
 
 #include <QDebug>
 #include <QTime>
@@ -745,7 +746,7 @@ void OsmParser::writeKml( const QString &area, const QString &version, const QSt
 //    }
 
     GeoWriter writer;
-    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
     QFile file( filename );
     if ( !file.open( QIODevice::WriteOnly | QIODevice::Truncate ) ) {

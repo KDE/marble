@@ -21,7 +21,7 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerLookAt(
     GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataGroundOverlayType,
-				 kml::kmlTag_nameSpace22 ),
+				 kml::kmlTag_nameSpaceOgc22 ),
     new KmlGroundOverlayWriter );
 
 KmlGroundOverlayWriter::KmlGroundOverlayWriter() : KmlOverlayTagWriter( kml::kmlTag_GroundOverlay )

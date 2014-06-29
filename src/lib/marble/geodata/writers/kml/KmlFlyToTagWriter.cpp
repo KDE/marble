@@ -24,7 +24,7 @@ namespace Marble
 
 static GeoTagWriterRegistrar s_writerFlyTo(
         GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataFlyToType,
-                                     kml::kmlTag_nameSpace22 ),
+                                     kml::kmlTag_nameSpaceOgc22 ),
         new KmlFlyToTagWriter );
 
 bool KmlFlyToTagWriter::write( const GeoNode *node, GeoWriter& writer ) const

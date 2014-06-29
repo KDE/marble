@@ -19,7 +19,7 @@
 using namespace Marble;
 
 static GeoTagWriterRegistrar s_writerPoint( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTrackType,
-                                                                            kml::kmlTag_nameSpace22),
+                                                                            kml::kmlTag_nameSpaceOgc22),
                                                new KmlTrackWriter() );
 
 bool KmlTrackWriter::write( const GeoNode *node, GeoWriter &writer ) const

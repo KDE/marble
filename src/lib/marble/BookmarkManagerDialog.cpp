@@ -29,6 +29,7 @@
 #include "MarbleModel.h"
 #include "NewBookmarkFolderDialog.h"
 #include "MarblePlacemarkModel.h"
+#include <KmlElementDictionary.h>
 
 #include <QPointer>
 #include <QFile>
@@ -403,7 +404,7 @@ void BookmarkManagerDialog::exportBookmarks()
     if ( !fileName.isEmpty() ) {
         QFile file( fileName );
         GeoWriter writer;
-        writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+        writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
         if ( !file.open( QIODevice::ReadWrite ) || !writer.write( &file, bookmarkDocument() ) ) {
             mDebug() << "Could not write the bookmarks file" << fileName;

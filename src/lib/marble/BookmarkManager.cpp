@@ -235,7 +235,7 @@ bool BookmarkManager::updateBookmarkFile()
 
     if ( ! d->m_bookmarkFileRelativePath.isNull() ) {
         GeoWriter writer;
-        writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+        writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
 
         QFile file( absoluteLocalFilePath );
 

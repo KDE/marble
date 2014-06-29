@@ -404,7 +404,7 @@ void AnnotatePlugin::saveAnnotationFile()
     if ( !filename.isNull() ) {
         GeoWriter writer;
         //FIXME: a better way to do this?
-        writer.setDocumentType( kml::kmlTag_nameSpace22 );
+        writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
         QFile file( filename );
         file.open( QIODevice::WriteOnly );
         if ( !writer.write( &file, m_annotationDocument ) ) {
