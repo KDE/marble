@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-  <Folder>
+  <Folder id="placemarkContainer">
     <Placemark id="luna2">
       <name>Luna 2</name>
       <visibility>0</visibility>
@@ -90,7 +90,7 @@
         </gx:SoundCue>
         <gx:AnimatedUpdate>
           <Create>
-            <Placemark id="armstrong">
+            <Placemark id="armstrong" targetId="placemarkContainer">
               <name>Neil Armstrong</name>
               <description><![CDATA[<p>Armstrong became the first to step onto the lunar surface six hours later on July 21 at 02:56 UTC.</p>
 ]]></description>
