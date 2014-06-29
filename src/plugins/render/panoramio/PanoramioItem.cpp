@@ -9,33 +9,32 @@
 //
 
 // Self
-#include "PanoramioWidget.h"
+#include "PanoramioItem.h"
 
 // Marble
 #include "MarbleDebug.h"
-#include "GeoPainter.h"
-#include "ViewportParams.h"
-#include "GeoSceneLayer.h"
+
+#include <QPainter>
 
 using namespace Marble;
 
-PanoramioWidget::PanoramioWidget( QObject *parent )
+PanoramioItem::PanoramioItem( QObject *parent )
     : AbstractDataPluginItem( parent )
 {
 }
 
-bool PanoramioWidget::initialized() const
+bool PanoramioItem::initialized() const
 {
     return !smallImage.isNull();
 }
-    
-void PanoramioWidget::addDownloadedFile( const QString &url, const QString &type )
+
+void PanoramioItem::addDownloadedFile( const QString &url, const QString &type )
 {
     if( standardImageSize == type ) {
         // Loading original image
         QImage largeImage;
         largeImage.load( url );
-        
+
         // Scaling the image to the half of the original size
         smallImage = largeImage.scaled( largeImage.size() / 2,
                                         Qt::IgnoreAspectRatio,
@@ -43,30 +42,30 @@ void PanoramioWidget::addDownloadedFile( const QString &url, const QString &type
         update();
     }
     else {
-        mDebug() << "PanoramioWidget: addDownloadFile can't handle type " << type;
+        mDebug() << Q_FUNC_INFO << "can't handle type" << type;
     }
 }
 
-QDate PanoramioWidget::uploadDate() const
+QDate PanoramioItem::uploadDate() const
 {
     return m_uploadDate;
 }
-    
-void PanoramioWidget::setUploadDate( QDate uploadDate )
+
+void PanoramioItem::setUploadDate( const QDate &uploadDate )
 {
     m_uploadDate = uploadDate;
 }
 
-bool PanoramioWidget::operator<( const AbstractDataPluginItem *other ) const
+bool PanoramioItem::operator<( const AbstractDataPluginItem *other ) const
 {
-    Q_ASSERT( dynamic_cast<const PanoramioWidget *>( other ) != 0 );
+    Q_ASSERT( dynamic_cast<const PanoramioItem *>( other ) != 0 );
 
-    return uploadDate() > static_cast<const PanoramioWidget *>( other )->uploadDate();
+    return uploadDate() > static_cast<const PanoramioItem *>( other )->uploadDate();
 }
 
-void PanoramioWidget::paint( QPainter *painter )
+void PanoramioItem::paint( QPainter *painter )
 {
     painter->drawImage( 0, 0, smallImage );
 }
 
-#include "PanoramioWidget.moc"
+#include "PanoramioItem.moc"

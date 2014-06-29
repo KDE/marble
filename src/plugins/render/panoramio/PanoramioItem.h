@@ -8,37 +8,38 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef PANORAMIOWIDGET_H
-#define PANORAMIOWIDGET_H
+#ifndef PANORAMIOITEM_H
+#define PANORAMIOITEM_H
 
 #include "AbstractDataPluginItem.h"
 
 #include <QDate>
-#include <QPixmap>
+#include <QImage>
 
 namespace Marble
 {
 
 const QString standardImageSize = "mini_square";
 
-class PanoramioWidget : public AbstractDataPluginItem
+class PanoramioItem : public AbstractDataPluginItem
 {
     Q_OBJECT
 
  public:
-    explicit PanoramioWidget( QObject *parent );
-    
+    explicit PanoramioItem( QObject *parent );
+
     bool initialized() const;
-    
+
     void addDownloadedFile( const QString &url, const QString &type );
-    
+
     QDate uploadDate() const;
-    
-    void setUploadDate( QDate uploadDate );
-    
+
+    void setUploadDate( const QDate &uploadDate );
+
     void paint( QPainter *painter );
-                 
+
     bool operator<( const AbstractDataPluginItem *other ) const;
+
  private:
     QImage smallImage;
     QDate m_uploadDate;
@@ -46,4 +47,4 @@ class PanoramioWidget : public AbstractDataPluginItem
 
 }
 
-#endif // PANORAMIOWIDGET_H
+#endif // PANORAMIOITEM_H

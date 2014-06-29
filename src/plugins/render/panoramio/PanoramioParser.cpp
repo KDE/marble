@@ -9,19 +9,22 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#include "jsonparser.h"
+#include "PanoramioParser.h"
 
-jsonParser::jsonParser()
-    : dataStorage()
+#include <QScriptValue>
+#include <QScriptEngine>
+
+PanoramioParser::PanoramioParser() :
+    dataStorage()
 {
   myEngine.setProcessEventsInterval(10);//this lets the gui remain responsive
 }
 
-jsonParser::~jsonParser()
+PanoramioParser::~PanoramioParser()
 {
 }
 
-panoramioDataStructure jsonParser::parseObjectOnPosition(const QString &content , int requiredObjectPosition)
+panoramioDataStructure PanoramioParser::parseObjectOnPosition(const QString &content, int requiredObjectPosition)
 {
     QString temp = "var myJSONObject =" + content;
     myEngine.evaluate(temp);
@@ -85,7 +88,7 @@ panoramioDataStructure jsonParser::parseObjectOnPosition(const QString &content 
     return dataStorage;
 }
 
-QList<panoramioDataStructure> jsonParser::parseAllObjects(const QString &content, int number)
+QList<panoramioDataStructure> PanoramioParser::parseAllObjects(const QString &content, int number)
 {
     QList <panoramioDataStructure> returnStructure;
     

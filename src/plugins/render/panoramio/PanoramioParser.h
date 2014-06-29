@@ -8,15 +8,13 @@
 // Copyright 2008      Shashan Singh <shashank.personal@gmail.com>
 //
 
-#ifndef JSONPARSER_H
-#define JSONPARSER_H
+#ifndef PANORAMIOPARSER_H
+#define PANORAMIOPARSER_H
 
 #include <QtScript>
 #include <QList>
 #include <QObject>
-#include <QDebug>
-#include <QScriptValue>
-#include <QScriptEngine>
+
 /**
 This is a generic class built up for parsing Json that is JavaScript Object Notification
 FIXME: the class presently has no sanity checking mechanism, it just can't check whether the input given to it is only JSON or Javascript ; a point of potential breach for the software.
@@ -43,12 +41,12 @@ struct panoramioDataStructure
     QString owner_url; // Url of the User Uplaoded
 };
 
-class jsonParser 
+class PanoramioParser
 {
 public:
-    jsonParser();
+    PanoramioParser();
 
-    ~jsonParser();
+    ~PanoramioParser();
 
     panoramioDataStructure parseObjectOnPosition(const QString &content, int requiredObjectPosition);   //for parsing single object
 

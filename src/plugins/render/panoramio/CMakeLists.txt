@@ -11,8 +11,8 @@ endif()
 
 set( panoramio_SRCS PanoramioPlugin.cpp
                     PanoramioModel.cpp
-                    PanoramioWidget.cpp
-                    jsonparser.cpp )
+                    PanoramioItem.cpp
+                    PanoramioParser.cpp )
 
 qt_add_resources( panoramio_SRCS panoramio.qrc )
 
