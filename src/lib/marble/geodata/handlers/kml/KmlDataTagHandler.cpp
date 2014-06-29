@@ -35,8 +35,6 @@ GeoNode* KmlDataTagHandler::parse( GeoParser& parser ) const
         
         QString name = parser.attribute( "name" ).trimmed();
         data.setName( name );
-        QString displayName = parser.attribute( "displayName" ).trimmed();
-        data.setDisplayName( displayName );
         parentItem.nodeAs< GeoDataExtendedData >()->addValue( data );
         return static_cast<GeoDataData*>( &parentItem.nodeAs<GeoDataExtendedData>()->valueRef( name ) );
     } else {
