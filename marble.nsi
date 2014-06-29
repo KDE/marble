@@ -19,6 +19,8 @@
  
 ;    3. This notice may not be removed or altered from any source distribution.
 
+!include "FileAssociation.nsh"
+
 !ifndef setup
 !define setup "marble-setup.exe"
 !endif
@@ -42,7 +44,7 @@
 ; !define notefile "README.txt"
  
 ; license text file
-!define licensefile LICENSE.txt
+!define licensefile lgpl2.txt
  
 ; icons must be Microsoft .ICO files
 ; !define icon "icon.ico"
@@ -89,7 +91,7 @@ InstallDirRegKey HKLM "${regkey}" ""
  
 !ifdef licensefile
 LicenseText "License"
-LicenseData "${srcdir}\data\${licensefile}"
+LicenseData "${srcdir}\data\licenses\${licensefile}"
 !endif
  
 ; pages
@@ -146,6 +148,8 @@ Section
 !endif
  
   WriteRegStr HKCR "${prodname}\Shell\open\command\" "" '"$INSTDIR\${exec} "%1"'
+  ${registerExtension} "$INSTDIR\${exec}" ".kml" "Keyhole Markup Language (KML)"
+  ${registerExtension} "$INSTDIR\${exec}" ".gpx" "GPS Exchange Format (GPX)"
  
 !ifdef icon
   WriteRegStr HKCR "${prodname}\DefaultIcon" "" "$INSTDIR\${icon}"
@@ -157,10 +161,16 @@ Section
 ; package all files, recursively, preserving attributes
 ; assume files are in the correct places
 
-File /a /r /x "*.nsi" /x "${setup}" "${srcdir}\*.*" 
+File /a /r \
+  /x "*.nsi" \
+  /x "${setup}" \
+  /x "marble-touch.exe" \
+  /x "marble-mobile.exe" \
+  /x "RoutinoPlugin.dll" \
+  "${srcdir}\*.*"
 
 !ifdef licensefile
-File /a "${srcdir}\data\${licensefile}"
+File /a "${srcdir}\data\licenses\${licensefile}"
 !endif
  
 !ifdef notefile
@@ -224,6 +234,8 @@ Section "Uninstall"
  
 DeleteRegKey HKLM "${uninstkey}"
 DeleteRegKey HKLM "${regkey}"
+${unregisterExtension} ".kml" "Keyhole Markup Language (KML)"
+${unregisterExtension} ".gpx" "GPS Exchange Format (GPX)"
 
 RMDir /r "${startmenu}"
 RMDir /r "$INSTDIR"
