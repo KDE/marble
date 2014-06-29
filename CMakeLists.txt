@@ -391,7 +391,7 @@ install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
 if( CMAKE_MODULES_INSTALL_PATH AND NOT WIN32 )
   install( FILES FindMarble.cmake
            DESTINATION ${CMAKE_MODULES_INSTALL_PATH}  )
-endif( CMAKE_MODULES_INSTALL_PATH )
+endif()
 
 ############################################################
 # Uninstall stuff
