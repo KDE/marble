@@ -69,4 +69,4 @@ void PanoramioWidget::paint( QPainter *painter )
     painter->drawImage( 0, 0, smallImage );
 }
 
-#include "PanoramioWidget.h"
+#include "PanoramioWidget.moc"
