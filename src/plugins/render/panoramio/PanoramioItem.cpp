@@ -42,7 +42,7 @@ void PanoramioItem::addDownloadedFile( const QString &url, const QString &type )
         largeImage.load( url );
 
         // Scaling the image to the half of the original size
-        smallImage = largeImage.scaled( largeImage.size() / 2,
+        smallImage = largeImage.scaled( largeImage.size() / 3,
                                         Qt::IgnoreAspectRatio,
                                         Qt::SmoothTransformation );
         setSize( smallImage.size() );
