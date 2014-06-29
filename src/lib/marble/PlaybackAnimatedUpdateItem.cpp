@@ -32,18 +32,20 @@ double PlaybackAnimatedUpdateItem::duration() const
 
 void PlaybackAnimatedUpdateItem::play()
 {
-    QVector<GeoDataPlacemark*> placemarkList = m_animatedUpdate->update()->change()->placemarkList();
-    for( int i = 0; i < placemarkList.size(); i++ ){
-        GeoDataPlacemark* placemark = placemarkList.at( i );
-        QString targetId = placemark->targetId();
-        if( placemark->isBalloonVisible() ){
-            GeoDataDocument* document = rootDocument( placemark );
-            GeoDataPlacemark* placemarkFromDocument = findPlacemark( document, targetId );
-            if( placemarkFromDocument ){
-                emit balloonShown( placemarkFromDocument );
+    if ( m_animatedUpdate->update() ) {
+        QVector<GeoDataPlacemark*> placemarkList = m_animatedUpdate->update()->change()->placemarkList();
+        for( int i = 0; i < placemarkList.size(); i++ ){
+            GeoDataPlacemark* placemark = placemarkList.at( i );
+            QString targetId = placemark->targetId();
+            if( placemark->isBalloonVisible() ){
+                GeoDataDocument* document = rootDocument( placemark );
+                GeoDataPlacemark* placemarkFromDocument = findPlacemark( document, targetId );
+                if( placemarkFromDocument ){
+                    emit balloonShown( placemarkFromDocument );
+                }
+            } else {
+                emit balloonHidden();
             }
-        } else {
-            emit balloonHidden();
         }
     }
 }
