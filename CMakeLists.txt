@@ -290,10 +290,6 @@ if(WIN32)
   set (STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (win32 only)?")
 endif(WIN32)
 
-# Variables to test new kml implementation
-# Will removed in feature after success
-#add_definitions(-DKML_DEBUG)
-#add_definitions(-DKML_GSOC)
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 
 ####################################################
@@ -393,7 +389,7 @@ install(FILES marble.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
 
 ####################################################
 # Install CMake module
-if( CMAKE_MODULES_INSTALL_PATH )
+if( CMAKE_MODULES_INSTALL_PATH AND NOT WIN32 )
   install( FILES FindMarble.cmake
            DESTINATION ${CMAKE_MODULES_INSTALL_PATH}  )
 endif( CMAKE_MODULES_INSTALL_PATH )
