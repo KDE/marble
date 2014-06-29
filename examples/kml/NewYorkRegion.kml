@@ -3,15 +3,12 @@
 <Placemark>
   <name>New York City</name>
   <description>New York City</description>
-  <Point>
-    <coordinates>-74.006393,40.714172,0</coordinates>
-  </Point>
   <Region>
     <LatLonAltBox>
-      <west>-75</west>
-      <east>-73</east>
       <north>42</north>
       <south>40</south>
+      <east>-73</east>
+      <west>-75</west>
       <minAltitude>-1</minAltitude>
       <maxAltitude>1</maxAltitude>
       <altitudeMode>absolute</altitudeMode>
@@ -23,5 +20,8 @@
       <maxFadeExtent>5</maxFadeExtent>
     </Lod>
   </Region>
+  <Point>
+    <coordinates>-74.006393,40.714172,0</coordinates>
+  </Point>
 </Placemark>
 </kml>

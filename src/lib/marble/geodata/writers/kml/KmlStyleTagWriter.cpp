@@ -31,12 +31,12 @@ bool KmlStyleTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     writer.writeStartElement( kml::kmlTag_Style );
     KmlObjectTagWriter::writeIdentifiers( writer, style );
 
-    writeElement( &style->balloonStyle(), writer );
     writeElement( &style->iconStyle(), writer );
     writeElement( &style->labelStyle(), writer );
     writeElement( &style->lineStyle(), writer );
-    writeElement( &style->listStyle(), writer );
     writeElement( &style->polyStyle(), writer );
+    writeElement( &style->balloonStyle(), writer );
+    writeElement( &style->listStyle(), writer );
 
     writer.writeEndElement();
 

@@ -3,11 +3,11 @@
   <PhotoOverlay>
     <rotation>13.314</rotation>
     <ViewVolume>
-      <near>1500</near>
       <leftFov>-60</leftFov>
       <rightFov>60</rightFov>
       <bottomFov>-45</bottomFov>
       <topFov>45</topFov>
+      <near>1500</near>
     </ViewVolume>
     <ImagePyramid>
       <tileSize>219</tileSize>

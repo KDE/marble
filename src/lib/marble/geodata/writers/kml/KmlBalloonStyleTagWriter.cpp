@@ -32,10 +32,10 @@ bool KmlBalloonStyleTagWriter::write( const GeoNode *node,
     writer.writeStartElement( kml::kmlTag_BalloonStyle );
     KmlObjectTagWriter::writeIdentifiers( writer, balloonStyle );
 
-    QString const textColor = KmlColorStyleTagWriter::formatColor( balloonStyle->textColor() );
-    writer.writeOptionalElement( kml::kmlTag_textColor, textColor, "ff000000" );
     QString const backgroundColor = KmlColorStyleTagWriter::formatColor( balloonStyle->backgroundColor() );
     writer.writeOptionalElement( kml::kmlTag_bgColor, backgroundColor, "ffffffff" );
+    QString const textColor = KmlColorStyleTagWriter::formatColor( balloonStyle->textColor() );
+    writer.writeOptionalElement( kml::kmlTag_textColor, textColor, "ff000000" );
 
     QString const textString = balloonStyle->text();
     if ( textString.contains( QRegExp( "[<>&]" ) ) ) {

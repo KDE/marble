@@ -3,8 +3,8 @@
   <ScreenOverlay>
     <drawOrder>9</drawOrder>
     <overlayXY x="2.5" xunits="fraction" y="-0.5" yunits="fraction"/>
-    <rotationXY x="1.5" xunits="fraction" y="3.5" yunits="insetPixels"/>
     <screenXY x="0.5" xunits="pixels" y="0.5" yunits="pixels"/>
+    <rotationXY x="1.5" xunits="fraction" y="3.5" yunits="insetPixels"/>
     <size x="23" xunits="pixels" y="0.5" yunits="insetPixels"/>
     <rotation>23</rotation>
   </ScreenOverlay>

@@ -29,8 +29,8 @@
       </Link>
       <ResourceMap>
         <Alias>
-          <sourceHref>../files/CU-Macky-4sideturretnoCulling.jpg</sourceHref>
           <targetHref>../files/CU-Macky-4sideturretnoCulling.jpg</targetHref>
+          <sourceHref>../files/CU-Macky-4sideturretnoCulling.jpg</sourceHref>
         </Alias>
       </ResourceMap>
     </Model>

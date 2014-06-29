@@ -74,8 +74,8 @@ bool KmlModelTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     const GeoDataAlias alias = map.alias() ;
     writer.writeStartElement( kml::kmlTag_Alias );
 
-    writer.writeTextElement( kml::kmlTag_sourceHref, alias.sourceHref() );
     writer.writeTextElement( kml::kmlTag_targetHref, alias.targetHref() );
+    writer.writeTextElement( kml::kmlTag_sourceHref, alias.sourceHref() );
 
     writer.writeEndElement();
 

@@ -42,11 +42,11 @@ bool KmlPhotoOverlayWriter::writeMid( const GeoNode *node, GeoWriter &writer ) c
 
     // ViewVolume
     writer.writeStartElement( kml::kmlTag_ViewVolume );
-    writer.writeOptionalElement<qreal>( kml::kmlTag_near, photo_overlay->viewVolume().near(), 0 );
     writer.writeOptionalElement<qreal>( kml::kmlTag_leftFov, photo_overlay->viewVolume().leftFov(), 0 );
     writer.writeOptionalElement<qreal>( kml::kmlTag_rightFov, photo_overlay->viewVolume().rightFov(), 0 );
     writer.writeOptionalElement<qreal>( kml::kmlTag_bottomFov, photo_overlay->viewVolume().bottomFov(), 0 );
     writer.writeOptionalElement<qreal>( kml::kmlTag_topFov, photo_overlay->viewVolume().topFov(), 0 );
+    writer.writeOptionalElement<qreal>( kml::kmlTag_near, photo_overlay->viewVolume().near(), 0 );
     writer.writeEndElement();
 
     // ImagePyramid

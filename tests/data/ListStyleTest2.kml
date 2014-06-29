@@ -4,10 +4,6 @@
     <name>Track</name>
     <description>Some description here</description>
     <Style id="track">
-      <BalloonStyle>
-        <text>Forgot to add a BalloonStyle with regular text, not regex :)</text>
-        <displayMode>default</displayMode>
-      </BalloonStyle>
       <IconStyle>
         <color>aabbccdd</color>
         <colorMode>random</colorMode>
@@ -22,6 +18,16 @@
         <colorMode>random</colorMode>
         <width>4</width>
       </LineStyle>
+      <PolyStyle>
+        <color>ffaabbdd</color>
+        <colorMode>random</colorMode>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <BalloonStyle>
+        <text>Forgot to add a BalloonStyle with regular text, not regex :)</text>
+        <displayMode>default</displayMode>
+      </BalloonStyle>
       <ListStyle>
         <listItemType>radioFolder</listItemType>
         <bgColor>ff336699</bgColor>
@@ -30,12 +36,6 @@
           <href>../../data/bitmaps/wikipedia.png</href>
         </ItemIcon>
       </ListStyle>
-      <PolyStyle>
-        <color>ffaabbdd</color>
-        <colorMode>random</colorMode>
-        <fill>1</fill>
-        <outline>1</outline>
-      </PolyStyle>
     </Style>
     <StyleMap id="map-track">
       <Pair>

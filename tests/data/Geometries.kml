@@ -32,7 +32,7 @@
           <south>37.465</south>
           <east>15.358</east>
           <west>14.601</west>
-          <rotation>313.231</rotation>
+          <rotation>113.123</rotation>
         </LatLonBox>
         <gx:LatLonQuad>
           <coordinates>81.601,44.161 83.529,43.665 82.947,44.248 81.509,44.321</coordinates>
@@ -109,8 +109,8 @@
           </Link>
           <ResourceMap>
             <Alias>
-              <sourceHref>../files/CU-Macky-4sideturretnoCulling.jpg</sourceHref>
               <targetHref>../files/CU-Macky-4sideturretnoCulling.jpg</targetHref>
+              <sourceHref>../files/CU-Macky-4sideturretnoCulling.jpg</sourceHref>
             </Alias>
           </ResourceMap>
         </Model>
