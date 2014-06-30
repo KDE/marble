@@ -84,9 +84,9 @@ void PanoramioModel::parseFile( const QByteArray &file )
                                                  standardImageSize );
             widget->addDownloadedFile( filename,
                                        standardImageSize );
-            
-            addItemToList( widget );
         }
+
+        addItemToList( widget );
     }
 }
 
