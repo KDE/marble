@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL</project_license>
   <name>Marble</name>
+  <name xml:lang="cs">Marble</name>
   <name xml:lang="es">Marble</name>
   <name xml:lang="nds">Marble</name>
   <name xml:lang="nl">Marble</name>
@@ -15,6 +16,7 @@
   <name xml:lang="uk">Marble</name>
   <name xml:lang="x-test">xxMarblexx</name>
   <summary>Virtual Globe</summary>
+  <summary xml:lang="cs">Virtuální glóbus</summary>
   <summary xml:lang="es">Globo virtual</summary>
   <summary xml:lang="nds">Virtuell Globus</summary>
   <summary xml:lang="nl">Virtuele globe</summary>
