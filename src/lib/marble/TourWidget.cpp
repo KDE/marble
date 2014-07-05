@@ -570,7 +570,7 @@ void TourWidgetPrivate::updateRootIndex()
         }
         m_playback.setMarbleWidget( m_widget );
         m_playback.setTour( tour );
-        m_playback.setupProgressBar( m_tourUi.m_slider );
+        m_tourUi.m_slider->setMaximum( m_playback.duration() * 100 );
         QObject::connect( &m_playback, SIGNAL( centerOn( GeoDataCoordinates ) ),
                          m_widget, SLOT( centerOn( GeoDataCoordinates ) ) );
         QObject::connect( &m_playback, SIGNAL( progressChanged( double ) ),

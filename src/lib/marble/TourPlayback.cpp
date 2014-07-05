@@ -35,6 +35,8 @@
 #include "PlaybackTourControlItem.h"
 #include "PlaybackSoundCueItem.h"
 #include "PlaybackAnimatedUpdateItem.h"
+#include "SerialTrack.h"
+#include "ParallelTrack.h"
 
 namespace Marble
 {
@@ -51,7 +53,6 @@ public:
     GeoDataCoordinates m_coordinates;
     GeoDataFlyTo m_mapCenter;
     MarbleWidget *m_widget;
-    QSlider *m_slider;
 
 protected:
     TourPlayback *q_ptr;
@@ -73,9 +74,9 @@ TourPlayback::TourPlayback(QObject *parent) :
     QObject(parent),
     d(new TourPlaybackPrivate(this))
 {
-    connect( mainTrack(), SIGNAL( centerOn( GeoDataCoordinates ) ), this, SIGNAL( centerOn( GeoDataCoordinates ) ) );
-    connect( mainTrack(), SIGNAL( progressChanged( double ) ), this, SIGNAL( progressChanged( double ) ) );
-    connect( mainTrack(), SIGNAL( finished() ), this, SLOT( finishedSlot() ) );
+    connect( d->m_mainTrack, SIGNAL( centerOn( GeoDataCoordinates ) ), this, SIGNAL( centerOn( GeoDataCoordinates ) ) );
+    connect( d->m_mainTrack, SIGNAL( progressChanged( double ) ), this, SIGNAL( progressChanged( double ) ) );
+    connect( d->m_mainTrack, SIGNAL( finished() ), this, SLOT( stopTour() ) );
 }
 
 TourPlayback::~TourPlayback()
@@ -83,17 +84,12 @@ TourPlayback::~TourPlayback()
     delete d;
 }
 
-void TourPlayback::finishedSlot()
+void TourPlayback::stopTour()
 {
     foreach( ParallelTrack* track, d->m_parallelTracks ){
         track->stop();
         track->setPaused( false );
     }
-}
-
-SerialTrack* TourPlayback::mainTrack()
-{
-    return d->m_mainTrack;
 }
 
 void TourPlayback::showBalloon( GeoDataPlacemark* placemark )
@@ -118,12 +114,6 @@ bool TourPlayback::isPlaying() const
 void TourPlayback::setMarbleWidget(MarbleWidget* widget)
 {
     d->m_widget = widget;
-}
-
-void TourPlayback::setupProgressBar( QSlider *slider )
-{
-    slider->setMaximum( d->m_mainTrack->duration() * 100 );
-    d->m_slider = slider;
 }
 
 void TourPlayback::setTour(const GeoDataTour *tour)
@@ -202,7 +192,7 @@ void TourPlayback::play()
     GeoDataLookAt* lookat = new GeoDataLookAt( d->m_widget->lookAt() );
     lookat->setAltitude( lookat->range() );
     d->m_mapCenter.setView( lookat );
-    mainTrack()->play();
+    d->m_mainTrack->play();
     foreach( ParallelTrack* track, d->m_parallelTracks) {
         track->play();
     }
@@ -211,7 +201,7 @@ void TourPlayback::play()
 void TourPlayback::pause()
 {
     d->m_pause = true;
-    mainTrack()->pause();
+    d->m_mainTrack->pause();
     foreach( ParallelTrack* track, d->m_parallelTracks) {
         track->pause();
     }
@@ -229,12 +219,17 @@ void TourPlayback::stop()
 
 void TourPlayback::seek( double t )
 {
-    Q_ASSERT( t >= 0.0 && t <= 1.0 );
-    double const offset = t * mainTrack()->duration();
-    mainTrack()->seek( offset );
+    t = qBound( 0.0, t, 1.0 );
+    double const offset = t * d->m_mainTrack->duration();
+    d->m_mainTrack->seek( offset );
     foreach( ParallelTrack* track, d->m_parallelTracks ){
         track->seek( offset );
     }
+}
+
+double TourPlayback::duration() const
+{
+    return d->m_mainTrack->duration();
 }
 
 } // namespace Marble
