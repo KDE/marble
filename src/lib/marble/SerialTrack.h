@@ -25,6 +25,8 @@ class SerialTrack : public QObject
     Q_OBJECT
 public:
     SerialTrack();
+    ~SerialTrack();
+
     void append( PlaybackItem* item );
     void play();
     void seek( double position );

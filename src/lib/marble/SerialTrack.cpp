@@ -31,6 +31,11 @@ SerialTrack::SerialTrack(): QObject()
     m_paused = true;
 }
 
+SerialTrack::~SerialTrack()
+{
+    clear();
+}
+
 void SerialTrack::append(PlaybackItem* item)
 {
     connect( item, SIGNAL( progressChanged( double ) ), this, SLOT( changeProgress( double ) ) );
