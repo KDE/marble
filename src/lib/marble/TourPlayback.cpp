@@ -217,10 +217,9 @@ void TourPlayback::stop()
     hideBalloon();
 }
 
-void TourPlayback::seek( double t )
+void TourPlayback::seek( double value )
 {
-    t = qBound( 0.0, t, 1.0 );
-    double const offset = t * d->m_mainTrack->duration();
+    double const offset = qBound( 0.0, value, d->m_mainTrack->duration() );
     d->m_mainTrack->seek( offset );
     foreach( ParallelTrack* track, d->m_parallelTracks ){
         track->seek( offset );

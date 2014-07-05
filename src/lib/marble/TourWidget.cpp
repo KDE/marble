@@ -387,9 +387,7 @@ void TourWidget::stopPlaying()
 
 void TourWidget::handleSliderMove( int value )
 {
-    int max = d->m_tourUi.m_slider->maximum();
-    double fraction = value * 1.0 / max;
-    d->m_playback.seek( fraction );
+    d->m_playback.seek( value / 100.0 );
 }
 
 void TourWidgetPrivate::openFile()

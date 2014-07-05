@@ -42,6 +42,11 @@ public:
     void play();
     void pause();
     void stop();
+
+    /**
+     * Seek to the given timestamp (in seconds)
+     * @param offset Target timestamp in seconds in the range 0..duration()
+     */
     void seek( double offset );
 
 Q_SIGNALS:
