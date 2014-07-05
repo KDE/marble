@@ -32,7 +32,7 @@ double PlaybackAnimatedUpdateItem::duration() const
 
 void PlaybackAnimatedUpdateItem::play()
 {
-    if ( m_animatedUpdate->update() ) {
+    if ( m_animatedUpdate->update() && m_animatedUpdate->update()->change() ) {
         QVector<GeoDataPlacemark*> placemarkList = m_animatedUpdate->update()->change()->placemarkList();
         for( int i = 0; i < placemarkList.size(); i++ ){
             GeoDataPlacemark* placemark = placemarkList.at( i );
