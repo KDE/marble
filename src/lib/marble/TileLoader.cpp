@@ -246,7 +246,7 @@ QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTile * textureLaye
                                         id.x() >> deltaLevel, id.y() >> deltaLevel );
         QString const fileName = tileFileName( textureLayer, replacementTileId );
         mDebug() << "TileLoader::scaledLowerLevelTile" << "trying" << fileName;
-        QImage toScale( fileName );
+        QImage toScale = QFile::exists(fileName) ? QImage(fileName) : QImage();
 
         if ( level == 0 && toScale.isNull() ) {
             mDebug() << "No level zero tile installed in map theme dir. Falling back to a transparent image for now.";
