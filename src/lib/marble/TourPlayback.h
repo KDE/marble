@@ -29,7 +29,7 @@ class MARBLE_EXPORT TourPlayback : public QObject
 {
     Q_OBJECT
 public:
-    explicit TourPlayback(QObject *parent);
+    explicit TourPlayback(QObject *parent=0);
     ~TourPlayback();
 
     void setTour(const GeoDataTour *tour);
