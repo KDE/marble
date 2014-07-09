@@ -24,6 +24,7 @@ namespace Marble
 {
 
 class GeoDataSimpleArrayData;
+class GeoDataSchemaData;
 
 class GeoDataExtendedDataPrivate;
 
@@ -102,8 +103,27 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
     /**
      * @brief return SimpleArrayData for given @p key, 0 pointer if none is set
      */
-    GeoDataSimpleArrayData* simpleArrayData( const QString& key ) const;
 
+    GeoDataSimpleArrayData* simpleArrayData( const QString& key ) const;
+    /**
+     * @brief Adds a SchemaData @p schemaData element to schemaDataHash
+     */
+    GeoDataSchemaData& schemaData( const QString& schemaUrl ) const;
+    
+    /**
+     * @brief Adds a SchemaData @p schemaData element to schemaDataHash
+     */
+    void addSchemaData( const GeoDataSchemaData& schemaData );
+    
+    /**
+     * @brief Removes a SchemaData element with schema url @p schemaUrl from schemaDataHash
+     */
+    void removeSchemaData( const QString& schemaUrl );
+    
+    /**
+     * @brief Dump a vector containing all SchemaData element
+     */
+    QList< GeoDataSchemaData > schemaDataList() const;
 
     /**
      * @brief Serialize the ExtendedData to a stream

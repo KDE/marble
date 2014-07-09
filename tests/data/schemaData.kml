@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document>
+        <Schema id="002f" name="Flight">
+            <SimpleField name="arrivesAt" type="string">
+                <displayName>This flight arrives at</displayName>
+            </SimpleField>
+            <SimpleField name="journeyTime" type="float">
+                <displayName>The expected time(hh.mm) of journey</displayName>
+            </SimpleField>
+            <SimpleField name="operator" type="string">
+                <displayName>Operator of This Flight</displayName>
+            </SimpleField>
+            <SimpleField name="departsFrom" type="string">
+                <displayName>This flight departs from</displayName>
+            </SimpleField>
+            <SimpleField name="flightNumber" type="int">
+                <displayName>Flight Number</displayName>
+            </SimpleField>
+        </Schema>
+        <Schema id="CountryInfo" name="CountryInfo">
+            <SimpleField name="population" type="double">
+                <displayName>Pupulation of The Country</displayName>
+            </SimpleField>
+            <SimpleField name="Name" type="string">
+                <displayName>Country Name</displayName>
+            </SimpleField>
+            <SimpleField name="continent" type="string">
+                <displayName>Division Contenent</displayName>
+            </SimpleField>
+            <SimpleField name="iso_a3" type="string">
+                <displayName>Three Letter ISO Code of Country</displayName>
+            </SimpleField>
+        </Schema>
+        <Schema id="TrailHeadTypeId" name="TrailHeadType">
+            <SimpleField name="ElevationGain" type="int">
+                <displayName>Change in altitude</displayName>
+            </SimpleField>
+            <SimpleField name="TrailLength" type="double">
+                <displayName>Length in miles</displayName>
+            </SimpleField>
+            <SimpleField name="TrailHeadName" type="string">
+                <displayName>Trail Head Name</displayName>
+            </SimpleField>
+        </Schema>
+        <Placemark>
+            <name>Flight-9W230</name>
+            <ExtendedData>
+                <SchemaData schemaUrl="#002f">
+                    <SimpleData name="arrivesAt">Brussels</SimpleData>
+                    <SimpleData name="journeyTime">08.29</SimpleData>
+                    <SimpleData name="operator">Indian Airlines</SimpleData>
+                    <SimpleData name="departsFrom">New Delhi</SimpleData>
+                    <SimpleData name="flightNumber">9W230</SimpleData>
+                </SchemaData>
+            </ExtendedData>
+            <LineString>
+                <coordinates>77.2311938886,28.6128148563 4.3527700000,50.8466000000</coordinates>
+            </LineString>
+        </Placemark>
+           <Placemark>
+            <name>Hungary</name>
+            <ExtendedData>
+                <SchemaData schemaUrl="#CountryInfo">
+                    <SimpleData name="population">9956108.000000</SimpleData>
+                    <SimpleData name="Name">Hungary</SimpleData>
+                    <SimpleData name="continent">Europe</SimpleData>
+                    <SimpleData name="iso_a3">HUN</SimpleData>
+                </SchemaData>
+            </ExtendedData>
+            <Point>
+                <coordinates>19.9919963642,46.9999336951</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>India</name>
+            <ExtendedData>
+                <SchemaData schemaUrl="#CountryInfo">
+                    <SimpleData name="population">1166079220.000000</SimpleData>
+                    <SimpleData name="Name">India</SimpleData>
+                    <SimpleData name="continent">Asia</SimpleData>
+                    <SimpleData name="iso_a3">IND</SimpleData>
+                </SchemaData>
+            </ExtendedData>
+            <Point>
+                <coordinates>77.0000000000,20.0000000000</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Easy trail</name>
+            <ExtendedData>
+                <SchemaData schemaUrl="#TrailHeadTypeId">
+                    <SimpleData name="ElevationGain">10</SimpleData>
+                    <SimpleData name="TrailLength">3.14159</SimpleData>
+                    <SimpleData name="TrailHeadName">Pi in the sky</SimpleData>
+                </SchemaData>
+            </ExtendedData>
+            <Point>
+                <coordinates>-122.0000000000,37.0020000000</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Difficult trail</name>
+            <ExtendedData>
+                <SchemaData schemaUrl="#TrailHeadTypeId">
+                    <SimpleData name="ElevationGain">10000</SimpleData>
+                    <SimpleData name="TrailLength">347.45</SimpleData>
+                    <SimpleData name="TrailHeadName">Mount Everest</SimpleData>
+                </SchemaData>
+            </ExtendedData>
+            <Point>
+                <coordinates>-121.9980000000,37.0078000000</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>

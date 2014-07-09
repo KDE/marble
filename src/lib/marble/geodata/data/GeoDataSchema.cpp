@@ -98,6 +98,7 @@ const char* GeoDataSchema::nodeType() const
 
 void GeoDataSchema::pack( QDataStream& stream ) const
 {
+    stream << d->m_name;
     stream << d->m_simpleField.size();
 
     QHash<QString, GeoDataSimpleField>::const_iterator begin = d->m_simpleField.begin();
@@ -110,6 +111,7 @@ void GeoDataSchema::pack( QDataStream& stream ) const
 
 void GeoDataSchema::unpack( QDataStream& stream )
 {
+    stream >> d->m_name;
     int size = 0;
     stream >> size;
     for( int i = 0; i < size; ++i ) {

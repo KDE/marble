@@ -11,6 +11,7 @@
 
 #include "GeoDataExtendedData.h"
 #include "GeoDataExtendedData_p.h"
+
 #include <QDataStream>
 
 #include "GeoDataTypes.h"
@@ -90,7 +91,7 @@ int GeoDataExtendedData::size() const
 
 bool GeoDataExtendedData::isEmpty( ) const
 {
-    return d->hash.empty();
+    return d->hash.empty() && d->schemaDataHash.empty();
 }
 
 bool GeoDataExtendedData::contains( const QString &key ) const
@@ -101,6 +102,26 @@ bool GeoDataExtendedData::contains( const QString &key ) const
 void GeoDataExtendedData::setSimpleArrayData( const QString& key, GeoDataSimpleArrayData *values )
 {
     d->arrayHash[ key ] = values;
+}
+
+GeoDataSchemaData& GeoDataExtendedData::schemaData( const QString& schemaUrl ) const
+{
+    return d->schemaDataHash[ schemaUrl ];
+}
+
+void GeoDataExtendedData::addSchemaData( const GeoDataSchemaData& schemaData )
+{
+    d->schemaDataHash.insert( schemaData.schemaUrl(), schemaData );
+}
+
+void GeoDataExtendedData::removeSchemaData( const QString& schemaUrl )
+{
+    d->schemaDataHash.remove( schemaUrl );
+}
+
+QList<GeoDataSchemaData> GeoDataExtendedData::schemaDataList() const
+{
+    return d->schemaDataHash.values();
 }
 
 GeoDataSimpleArrayData* GeoDataExtendedData::simpleArrayData( const QString& key ) const

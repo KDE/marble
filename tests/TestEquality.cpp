@@ -68,6 +68,8 @@
 #include <GeoDataNetworkLink.h>
 #include <GeoDataNetworkLinkControl.h>
 #include <GeoDataFolder.h>
+#include <GeoDataSchemaData.h>
+#include <GeoDataSimpleData.h>
 #include "TestUtils.h"
 
 using namespace Marble;
@@ -128,6 +130,8 @@ private slots:
     void networkLinkTest();
     void networkLinkControlTest();
     void folderTest();
+    void simpleDataTest();
+    void schemaDataTest();
 };
 
 
@@ -2294,6 +2298,58 @@ void TestEquality::folderTest()
     QCOMPARE( folder2, folder2 );
     QCOMPARE( folder1 != folder2, false );
     QVERIFY( folder1 == folder2 );
+}
+
+void TestEquality::simpleDataTest()
+{
+    GeoDataSimpleData simpleData1, simpleData2;
+    simpleData1.setName( "height" );
+    simpleData1.setData( "4.65" );
+
+    simpleData2.setName( "height" );
+    simpleData2.setData( "4.65" );
+
+    QCOMPARE( simpleData1, simpleData1 );
+    QCOMPARE( simpleData2, simpleData2 );
+    QCOMPARE( simpleData1 != simpleData2, false );
+    QVERIFY( simpleData1 == simpleData2 );
+
+    simpleData2.setData( "7.45" );
+
+    QCOMPARE( simpleData1, simpleData1 );
+    QCOMPARE( simpleData2, simpleData2 );
+    QCOMPARE( simpleData1 == simpleData2, false );
+    QVERIFY( simpleData1 != simpleData2 );
+}
+
+void TestEquality::schemaDataTest()
+{
+    GeoDataSimpleData simpleData1, simpleData2;
+    simpleData1.setName( "width" );
+    simpleData1.setData( "6.24" );
+
+    simpleData2.setName( "width" );
+    simpleData2.setData( "6.24" );
+
+    GeoDataSchemaData schemaData1, schemaData2;
+    schemaData1.setSchemaUrl( "dimensions" );
+    schemaData1.addSimpleData( simpleData1 );
+    schemaData1.addSimpleData( simpleData2 );
+    schemaData2.setSchemaUrl( "dimensions" );
+    schemaData2.addSimpleData( simpleData1 );
+    schemaData2.addSimpleData( simpleData2 );
+
+    QCOMPARE( schemaData1, schemaData1 );
+    QCOMPARE( schemaData2, schemaData2 );
+    QCOMPARE( schemaData1 != schemaData2, false );
+    QVERIFY( schemaData1 == schemaData2 );
+
+    schemaData2.setSchemaUrl( "some other id" );
+
+    QCOMPARE( schemaData1, schemaData1 );
+    QCOMPARE( schemaData2, schemaData2 );
+    QCOMPARE( schemaData1 == schemaData2, false );
+    QVERIFY( schemaData1 != schemaData2 );
 }
 
 QTEST_MAIN( TestEquality )

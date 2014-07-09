@@ -165,6 +165,7 @@ const char* kmlTag_ScreenOverlay = "ScreenOverlay";
 const char* kmlTag_screenXY = "screenXY";
 const char* kmlTag_shape = "shape";
 const char* kmlTag_SimpleArrayData = "SimpleArrayData";
+const char* kmlTag_SimpleData = "SimpleData";
 const char* kmlTag_SimpleArrayField = "SimpleArrayField";
 const char* kmlTag_SimpleField = "SimpleField";
 const char* kmlTag_size = "size";
