@@ -14,6 +14,7 @@
 
 #include "SceneGraphicsItem.h"
 
+
 namespace Marble
 {
 
@@ -28,18 +29,25 @@ public:
 
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
 
+    virtual bool containsPoint( const QPoint &eventPos ) const;
+
+    virtual void dealWithItemChange( const SceneGraphicsItem *other );
+
     /**
      * @brief Provides information for downcasting a SceneGraphicsItem.
      */
     virtual const char *graphicType() const;
 
-private:
-    GeoWidgetBubble *bubble;
-
 protected:
     virtual bool mousePressEvent( QMouseEvent *event );
     virtual bool mouseMoveEvent( QMouseEvent *event );
     virtual bool mouseReleaseEvent( QMouseEvent *event );
+
+    virtual void dealWithStateChange( SceneGraphicsItem::ActionState previousState );
+
+private:
+    GeoWidgetBubble *bubble;
+    QList<QRegion>   m_regionList;
 };
 
 }

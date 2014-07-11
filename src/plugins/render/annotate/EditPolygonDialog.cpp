@@ -5,18 +5,19 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2014      Calin-Cristian Cruceru <crucerucalincristian@gmail.com>
+// Copyright 2014      Calin Cruceru <crucerucalincristian@gmail.com>
 //
 
 // Self
 #include "EditPolygonDialog.h"
 #include "ui_EditPolygonDialog.h"
 
+// Qt
+#include <QColorDialog>
+
 // Marble
 #include "GeoDataStyle.h"
 
-// Qt
-#include <QColorDialog>
 
 namespace Marble {
 

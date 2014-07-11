@@ -25,9 +25,9 @@
 namespace Marble
 {
 
-TextEditor::TextEditor( GeoDataPlacemark *placemark )
-    : QWidget(),
-      m_placemark( placemark )
+TextEditor::TextEditor( GeoDataPlacemark *placemark ) :
+    QWidget(),
+    m_placemark( placemark )
 {
     setCursor( Qt::ArrowCursor );
 
@@ -42,10 +42,8 @@ TextEditor::TextEditor( GeoDataPlacemark *placemark )
     m_description = new QTextEdit;
     m_description->setText( placemark->description() );
     m_description->setMinimumHeight( 50 );
-    m_description->setSizePolicy( QSizePolicy::Fixed,
-                                  QSizePolicy::MinimumExpanding );
-    m_description->viewport()->setSizePolicy( QSizePolicy::Fixed,
-                                              QSizePolicy::MinimumExpanding );
+    m_description->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::MinimumExpanding );
+    m_description->viewport()->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::MinimumExpanding );
     m_description->viewport()->setAutoFillBackground( true );
     QApplication::setPalette( QPalette() );
     m_description->setBackgroundRole( QPalette::Window );

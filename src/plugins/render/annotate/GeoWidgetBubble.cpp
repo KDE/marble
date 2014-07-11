@@ -9,26 +9,28 @@
 // Copyright 2013      Thibaut Gridel <tgridel@free.fr>
 //
 
+// Self
 #include "GeoWidgetBubble.h"
 
-#include "TextEditor.h"
-
-#include "MarbleColors.h"
-
+// Qt
 #include <QPainter>
 #include <QWidget>
+
+// Marble
+#include "TextEditor.h"
+#include "MarbleColors.h"
 
 
 namespace Marble
 {
 
-GeoWidgetBubble::GeoWidgetBubble( GeoDataPlacemark *placemark )
-    : m_widget( new TextEditor( placemark ) ),
-      m_hidden( true ),
-      m_widgetInitialized( false ),
-      m_offset( QPoint( 10, 10 ) )
+GeoWidgetBubble::GeoWidgetBubble( GeoDataPlacemark *placemark ) :
+    m_widget( new TextEditor( placemark ) ),
+    m_hidden( true ),
+    m_widgetInitialized( false ),
+    m_offset( QPoint( 10, 10 ) )
 {
-    m_widget->setVisible(false);
+    m_widget->setVisible( false );
     m_widget->setPalette( QPalette( Qt::lightGray, Qt::lightGray ) );
 }
 
@@ -48,21 +50,21 @@ void GeoWidgetBubble::paint( QPainter *painter )
 
     if ( !m_hidden ) {
         if ( m_widgetInitialized ) {
-
             m_widget->setVisible( true );
             QSize widgetSize = m_widget->size();
-            //how wide and high the border is
-            //sum of both sides of the border
+
+            // how wide and high the border is
+            // sum of both sides of the border
             QSize borderSize( 40, 40 );
             QPoint borderOffset( -10, -10 );
 
-            //position of the bubble
+            // position of the bubble
             QPoint position =  m_screenPosition + m_offset;
             m_widget->move( position ) ;
 
             painter->save();
 
-            //draw the border
+            // draw the border
             painter->setPen( QPen( Oxygen::aluminumGray4 ) );
             painter->setBrush( QBrush( QColor( 255, 255, 255), Qt::SolidPattern ) );
             painter->drawRoundedRect( QRect( position + borderOffset, widgetSize + borderSize ), 10, 10 );

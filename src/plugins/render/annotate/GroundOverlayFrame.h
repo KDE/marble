@@ -33,25 +33,34 @@ public:
 
     void update();
 
+    virtual bool containsPoint( const QPoint &eventPos ) const;
+
+    virtual void dealWithItemChange( const SceneGraphicsItem *other );
+
     /**
      * @brief Provides information for downcasting a SceneGraphicsItem.
      */
     virtual const char *graphicType() const;
 
-private:
+protected:
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
     virtual bool mousePressEvent( QMouseEvent *event );
     virtual bool mouseMoveEvent( QMouseEvent *event );
     virtual bool mouseReleaseEvent( QMouseEvent *event );
 
-
-    int m_movedPoint;
-    GeoDataCoordinates m_movedPointCoordinates;
+    virtual void dealWithStateChange( SceneGraphicsItem::ActionState previousState );
+private:
     GeoDataGroundOverlay *m_overlay;
-    TextureLayer *m_textureLayer;
+    TextureLayer         *m_textureLayer;
+
+    QList<QRegion>     m_regionList;
+    GeoDataCoordinates m_movedPointCoordinates;
+    int                m_movedPoint;
+
     const ViewportParams *m_viewport;
 
-    static void rotateAroundCenter( qreal lon, qreal lat, qreal &rotatedLon, qreal &rotatedLat, GeoDataLatLonBox &box, bool inverse = false );
+    static void rotateAroundCenter( qreal lon, qreal lat, qreal &rotatedLon, qreal &rotatedLat,
+                                    GeoDataLatLonBox &box, bool inverse = false );
 };
 
 }

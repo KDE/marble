@@ -12,13 +12,9 @@
 #ifndef SCENEGRAPHICSITEM_H
 #define SCENEGRAPHICSITEM_H
 
-#include <QRect>
-#include <QObject>
-#include <QPainterPath>
 #include <QMouseEvent>
 
 #include "GeoGraphicsItem.h"
-#include "marble_export.h"
 
 
 namespace Marble
@@ -37,15 +33,46 @@ public:
     explicit SceneGraphicsItem( GeoDataPlacemark *placemark );
     ~SceneGraphicsItem();
 
-    /**
-     * @brief Returns the list of regions which form the scene graphic element.
-     */
-    QList<QRegion> regions() const;
+    enum ActionState {
+        // General action states
+        Editing,
+
+        // Polygon specific
+        DrawingPolygon,
+        AddingPolygonHole,
+        MergingPolygonNodes,
+        AddingPolygonNodes,
+
+        // Placemark specific
+        AddingPlacemark,
+
+        // Ground Overlays specific
+        AddingOverlay
+    };
 
     /**
-     * @brief A setter for the m_regions private member.
+     * @brief Pure virtual method which is implemented by concrete scene graphic items
+     * and returns true if the item contains the @p eventPos.
      */
-    void setRegions( const QList<QRegion> &regions );
+    virtual bool containsPoint( const QPoint &eventPos ) const = 0;
+
+    /**
+     * @brief Pure virtual method which is implemented by concrete scene graphic items
+     * and deals with changes that occur when this item is no longer the item we interact
+     * with (by means of mouse events - so far).
+     */
+    virtual void dealWithItemChange( const SceneGraphicsItem *other ) = 0;
+
+    /**
+     * @brief Returns the current state.
+     */
+    ActionState state() const;
+
+    /**
+     * @brief Sets the ActionState of this item. This also calls dealWithStateChange() with
+     * a parameter: the previous state.
+     */
+    void setState( ActionState state );
 
     /**
      * @brief SceneGraphicItem class, when called from one of its derived classes'
@@ -60,8 +87,6 @@ public:
     /**
      * @brief This function is used to call the event distributer and makes use of
      * the re-implemented virtual functions which handle the mouse events.
-     *
-     * FIXME: There is still doubt whether there is a better way to do this or not.
      */
     bool sceneEvent( QEvent *event );
 
@@ -81,8 +106,10 @@ protected:
     virtual bool mouseMoveEvent( QMouseEvent *event ) = 0;
     virtual bool mouseReleaseEvent( QMouseEvent *event ) = 0;
 
+    virtual void dealWithStateChange( SceneGraphicsItem::ActionState previousState ) = 0;
+
 private:
-    QList<QRegion> m_regions;
+    ActionState       m_state;
     GeoDataPlacemark *m_placemark;
 };
 

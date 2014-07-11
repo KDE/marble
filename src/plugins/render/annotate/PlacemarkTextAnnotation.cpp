@@ -9,29 +9,27 @@
 // Copyright 2013      Thibaut Gridel <tgridel@free.fr>
 //
 
+// Self
 #include "PlacemarkTextAnnotation.h"
 
-
+// Marble
 #include "AbstractProjection.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDocument.h"
 #include "GeoPainter.h"
 #include "GeoWidgetBubble.h"
 #include "ViewportParams.h"
 #include "MarbleDirs.h"
-#include "MarbleDebug.h"
 #include "SceneGraphicsTypes.h"
-
-#include <QPixmap>
 
 
 namespace Marble
 {
 
-PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataPlacemark *placemark )
-        : SceneGraphicsItem( placemark ),
-          bubble( new GeoWidgetBubble( placemark ) )
+PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataPlacemark *placemark ) :
+    SceneGraphicsItem( placemark ),
+    bubble( new GeoWidgetBubble( placemark ) )
 {
+    // nothing to do
 }
 
 PlacemarkTextAnnotation::~PlacemarkTextAnnotation()
@@ -41,18 +39,16 @@ PlacemarkTextAnnotation::~PlacemarkTextAnnotation()
 
 void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *viewport )
 {
-
-    painter->drawPixmap( placemark()->coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
+    m_regionList.clear();
+    painter->drawPixmap( placemark()->coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) ) );
 
     qreal x, y;
     bool hidden;
     bool visible = viewport->currentProjection()->screenCoordinates( placemark()->coordinate(), viewport, x, y, hidden );
 
-    QList<QRegion> list;
-    list.append( QRegion( x -10 , y -10 , 20 , 20 ) );
-    setRegions( list );
+    m_regionList.append( QRegion( x -10 , y -10 , 20 , 20 ) );
 
-    if( visible && !hidden ) {
+    if ( visible && !hidden ) {
         bubble->moveTo( QPoint( x, y ) );
         bubble->paint( painter );
     } else {
@@ -60,9 +56,26 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *
     }
 }
 
+
+bool PlacemarkTextAnnotation::containsPoint( const QPoint &eventPos ) const
+{
+    foreach ( const QRegion &region, m_regionList ) {
+        if ( region.contains( eventPos ) ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void PlacemarkTextAnnotation::dealWithItemChange( const SceneGraphicsItem *other )
+{
+    Q_UNUSED( other );
+}
+
 const char *PlacemarkTextAnnotation::graphicType() const
 {
-    return SceneGraphicTypes::SceneGraphicPlacemark;
+    return SceneGraphicsTypes::SceneGraphicPlacemark;
 }
 
 bool PlacemarkTextAnnotation::mousePressEvent( QMouseEvent* event )
@@ -84,5 +97,9 @@ bool PlacemarkTextAnnotation::mouseReleaseEvent( QMouseEvent *event )
     return true;
 }
 
+void PlacemarkTextAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previousState )
+{
+    Q_UNUSED( previousState );
+}
 
 }

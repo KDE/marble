@@ -5,9 +5,9 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009       Andrew Manson           <g.real.ate@gmail.com>
-// Copyright 2013       Thibaut Gridel          <tgridel@free.fr>
-// Copyright 2014       Calin-Cristian Cruceru  <crucerucalincristian@gmail.com>
+// Copyright 2009       Andrew Manson  <g.real.ate@gmail.com>
+// Copyright 2013       Thibaut Gridel <tgridel@free.fr>
+// Copyright 2014       Calin Cruceru  <crucerucalincristian@gmail.com>
 //
 
 
@@ -16,14 +16,11 @@
 
 #include "RenderPlugin.h"
 #include "SceneGraphicsItem.h"
-#include "GeoDataLatLonBox.h"
 #include "GeoDataGroundOverlay.h"
-#include "GeoDataPolygon.h"
 #include "GroundOverlayFrame.h"
 #include "AreaAnnotation.h"
 
 #include <QObject>
-#include <QErrorMessage>
 #include <QMenu>
 #include <QSortFilterProxyModel>
 
@@ -103,6 +100,7 @@ public slots:
     void setDrawingPolygon( bool );
     void setAddingPolygonHole( bool );
     void setMergingNodes( bool );
+    void setAddingNodes( bool );
     void setAddingOverlay( bool );
     void setRemovingItems( bool );
 
@@ -115,7 +113,6 @@ public slots:
     void saveAnnotationFile();
     void loadAnnotationFile();
 
-
 private slots:
     void editOverlay();
     void removeOverlay();
@@ -125,9 +122,8 @@ private slots:
     void removePolygon();
     void selectNode();
     void deleteNode();
-    void unselectNodes();
+    void deselectNodes();
     void deleteSelectedNodes();
-
 
 protected:
     bool eventFilter( QObject *watched, QEvent *event );
@@ -148,7 +144,6 @@ private:
     void showPolygonRmbMenu( AreaAnnotation *selectedArea, qreal x, qreal y );
     void showNodeRmbMenu( AreaAnnotation *area, qreal x, qreal y );
 
-
     void handleUncaughtEvents( QMouseEvent *mouseEvent );
     void handleReleaseOverlay( QMouseEvent *mouseEvent );
 
@@ -156,16 +151,17 @@ private:
     bool handleAddingPolygon( QMouseEvent *mouseEvent );
     bool handleMovingSelectedItem( QMouseEvent *mouseEvent );
 
-    bool handleMousePressEvent( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
-    bool handleMouseReleaseEvent( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
+    void handleRemovingItem( SceneGraphicsItem *item );
+    void handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
 
-    bool handleRemovingItem( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
-    bool handleAddingHole( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
-    bool handleMergingNodes( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
-    bool handleShowingRmbMenus( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
+    void handleSuccessfulPressEvent( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
+    void handleSuccessfulHoverEvent( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
+    void handleSuccessfulReleaseEvent( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
 
+    void announceStateChanged( SceneGraphicsItem::ActionState newState );
 
     //    void readOsmFile( QIODevice* device, bool flyToFile );
+
 
     bool m_widgetInitialized;
     MarbleWidget *m_marbleWidget;
@@ -184,20 +180,15 @@ private:
 
     GeoDataPlacemark     *m_polygonPlacemark;
     SceneGraphicsItem    *m_movedItem;
+    SceneGraphicsItem    *m_lastItem;
     GeoDataGroundOverlay *m_rmbOverlay;
     AreaAnnotation       *m_rmbSelectedArea;
-    GeoDataPolygon       *m_holedPolygon;
-
-    AreaAnnotation       *m_mergedArea;
-    int                   m_mergedNodeIndex;
 
     //    QNetworkAccessManager* m_networkAccessManager;
     //    QErrorMessage m_errorMessage;
 
     bool m_addingPlacemark;
     bool m_drawingPolygon;
-    bool m_addingPolygonHole;
-    bool m_mergingNodes;
     bool m_addingOverlay;
     bool m_removingItem;
     bool m_isInitialized;

@@ -37,9 +37,12 @@ public:
 
 private:
     Q_DISABLE_COPY(GeoWidgetBubble)
+
     QWidget *m_widget;
+
     bool m_hidden;
     bool m_widgetInitialized;
+
     QPoint m_offset;
     QPoint m_screenPosition;
 };
