@@ -83,10 +83,10 @@ public:
     TourWidget *q;
     MarbleWidget *m_widget;
     Ui::TourWidget  m_tourUi;
-    GeoDataTreeModel m_model;
     TourPlayback m_playback;
     TourItemDelegate *m_delegate;
     bool m_playState;
+    GeoDataDocument* m_document;
 };
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
@@ -95,20 +95,16 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
       m_widget( 0 ),
       m_playback( 0 ),
       m_delegate( 0 ),
-      m_playState( false )
+      m_playState( false ),
+      m_document( 0 )
 {
     m_tourUi.setupUi( parent );
-    m_tourUi.m_listView->setModel( &m_model );
-    m_tourUi.m_listView->setModelColumn(1);
 
     QObject::connect( m_tourUi.m_listView, SIGNAL( activated( QModelIndex ) ), q, SLOT( mapCenterOn( QModelIndex ) ) );
-    QObject::connect( m_tourUi.m_listView->selectionModel(), SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
-                      q, SLOT( updateButtonsStates() ) );
     QObject::connect( m_tourUi.m_actionAddFlyTo, SIGNAL( triggered() ), q, SLOT( addFlyTo() ) );
     QObject::connect( m_tourUi.m_actionDelete, SIGNAL( triggered() ), q, SLOT( deleteSelected() ) );
     QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( triggered() ), q, SLOT( moveUp() ) );
     QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( triggered() ), q, SLOT( moveDown() ) );
-    QObject::connect( q, SIGNAL( featureUpdated( GeoDataFeature* ) ), &m_model, SLOT( updateFeature( GeoDataFeature* ) ) );
     QObject::connect( m_tourUi.m_actionNewTour, SIGNAL( triggered() ), q, SLOT( createTour() ) );
     QObject::connect( m_tourUi.m_actionOpenTour, SIGNAL( triggered() ), q, SLOT( openFile() ) );
     QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL( triggered() ), q, SLOT( saveTour() ) );
@@ -347,6 +343,8 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_widget = widget;
     d->m_delegate = new TourItemDelegate( d->m_tourUi.m_listView, d->m_widget );
     d->m_tourUi.m_listView->setItemDelegate( d->m_delegate );
+    connect( this, SIGNAL( featureUpdated( GeoDataFeature* ) ),
+             d->m_widget->model()->treeModel(), SLOT( updateFeature( GeoDataFeature* ) ) );
 }
 
 void TourWidget::togglePlaying()
@@ -437,7 +435,7 @@ GeoDataTour *TourWidgetPrivate::findTour( GeoDataFeature *feature ) const
 
 void TourWidgetPrivate::mapCenterOn( const QModelIndex &index )
 {
-    QVariant coordinatesVariant = m_model.data( index, MarblePlacemarkModel::CoordinateRole );
+    QVariant coordinatesVariant = m_widget->model()->treeModel()->data( index, MarblePlacemarkModel::CoordinateRole );
     if ( !coordinatesVariant.isNull() ) {
         GeoDataCoordinates const coordinates = coordinatesVariant.value<GeoDataCoordinates>();
         m_widget->centerOn( coordinates );
@@ -560,11 +558,14 @@ GeoDataFeature* TourWidgetPrivate::getPlaylistFeature() const
 
 void TourWidgetPrivate::updateRootIndex()
 {
-    GeoDataTour *tour = findTour( m_model.rootDocument() );
+    GeoDataTour *tour = findTour( m_document );
     if ( tour ){
         GeoDataPlaylist *playlist = tour->playlist();
         if ( playlist ) {
-            m_tourUi.m_listView->setRootIndex( m_model.index( playlist ) );
+            m_tourUi.m_listView->setModel( m_widget->model()->treeModel() );
+            m_tourUi.m_listView->setRootIndex( m_widget->model()->treeModel()->index( playlist ) );
+            QObject::connect( m_tourUi.m_listView->selectionModel(), SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
+                              q, SLOT( updateButtonsStates() ) );
         }
         m_playback.setMarbleWidget( m_widget );
         m_playback.setTour( tour );
@@ -656,14 +657,12 @@ void TourWidgetPrivate::createTour()
 bool TourWidgetPrivate::openDocument(GeoDataDocument* document)
 {
     if ( document ) {
-        GeoDataDocument* oldDocument = m_model.rowCount() ? m_model.rootDocument() : 0;
-        if ( oldDocument ) {
-            m_widget->model()->removeGeoData( oldDocument->fileName() );
+        if ( m_document ) {
+            m_widget->model()->treeModel()->removeDocument( m_document );
+            delete m_document;
         }
-        if ( !document->fileName().isEmpty() ) {
-            m_widget->model()->addGeoDataFile( document->fileName() );
-        }
-        m_model.setRootDocument( document );
+        m_document = document;
+        m_widget->model()->treeModel()->addDocument( m_document );
         m_isChanged = false;
         updateRootIndex();
         m_tourUi.m_actionAddFlyTo->setEnabled( true );
@@ -671,7 +670,6 @@ bool TourWidgetPrivate::openDocument(GeoDataDocument* document)
         m_tourUi.m_actionSaveTour->setEnabled( false );
         m_tourUi.m_slider->setEnabled( true );
         m_isChanged = false;
-        delete oldDocument;
         return true;
     }
     return false;
@@ -679,9 +677,9 @@ bool TourWidgetPrivate::openDocument(GeoDataDocument* document)
 
 void TourWidgetPrivate::saveTour()
 {
-    if ( m_model.rowCount() ) {
-        if ( !m_model.rootDocument()->fileName().isEmpty() ) {
-            saveTourAs( m_model.rootDocument()->fileName() );
+    if ( m_document ) {
+        if ( !m_document->fileName().isEmpty() ) {
+            saveTourAs( m_document->fileName() );
         } else {
             saveTourAs();
         }
@@ -690,7 +688,7 @@ void TourWidgetPrivate::saveTour()
 
 void TourWidgetPrivate::saveTourAs()
 {
-   if ( m_model.rowCount() )
+   if ( m_document )
    {
        QString const filename = QFileDialog::getSaveFileName( q, QObject::tr( "Save Tour as" ), QDir::homePath(), QObject::tr( "KML Tours (*.kml)" ) );
        if ( !filename.isEmpty() ) {
@@ -707,16 +705,16 @@ bool TourWidgetPrivate::saveTourAs(const QString &filename)
         if ( file.open( QIODevice::WriteOnly ) ) {
             GeoWriter writer;
             writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
-            if ( writer.write( &file, m_model.rootDocument() ) ) {
+            if ( writer.write( &file, m_document ) ) {
                 file.close();
                 m_tourUi.m_actionSaveTour->setEnabled( false );
                 m_isChanged = false;
-                GeoDataDocument* document = m_model.rootDocument();
+                GeoDataDocument* document = m_document;
                 if ( !document->fileName().isNull() ) {
                     m_widget->model()->removeGeoData( document->fileName() );
                 }
                 m_widget->model()->addGeoDataFile( filename );
-                m_model.rootDocument()->setFileName( filename );
+                m_document->setFileName( filename );
                 return true;
             }
         }
@@ -726,8 +724,7 @@ bool TourWidgetPrivate::saveTourAs(const QString &filename)
 
 bool TourWidgetPrivate::overrideModifications()
 {
-    GeoDataDocument* oldDocument = m_model.rowCount() ? m_model.rootDocument() : 0;
-    if ( oldDocument && m_isChanged ) {
+    if ( m_document && m_isChanged ) {
         QString title = QObject::tr( "Discard Changes" );
         QString text = QObject::tr( "Are you sure want to discard all unsaved changes and close current document?" );
         QPointer<QMessageBox> dialog = new QMessageBox( QMessageBox::Question, title, text, QMessageBox::Yes | QMessageBox::No, q );
