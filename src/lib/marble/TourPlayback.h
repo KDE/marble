@@ -22,6 +22,7 @@ class MarbleWidget;
 class GeoDataCoordinates;
 class GeoDataTour;
 class GeoDataPlacemark;
+class GeoDataFeature;
 
 class TourPlaybackPrivate;
 
@@ -55,6 +56,7 @@ Q_SIGNALS:
     void stopped();
     void centerOn( const GeoDataCoordinates &coordinates );
     void progressChanged( double );
+    void updated( GeoDataFeature* );
 
 private Q_SLOTS:
     void stopTour();

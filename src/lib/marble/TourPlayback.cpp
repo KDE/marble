@@ -156,6 +156,7 @@ void TourPlayback::setTour(const GeoDataTour *tour)
             d->m_parallelTracks.append( track );
             connect( track, SIGNAL( balloonHidden()), this, SLOT( hideBalloon() ) );
             connect( track, SIGNAL( balloonShown( GeoDataPlacemark* ) ), this, SLOT( showBalloon( GeoDataPlacemark* ) ) );
+            connect( track, SIGNAL( updated( GeoDataFeature* ) ), this, SIGNAL( updated( GeoDataFeature* ) ) );
         }
     }
     Q_ASSERT( d->m_widget );

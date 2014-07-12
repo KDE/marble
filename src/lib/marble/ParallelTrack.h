@@ -36,6 +36,7 @@ public:
 Q_SIGNALS:
     void balloonHidden();
     void balloonShown( GeoDataPlacemark* );
+    void updated( GeoDataFeature* );
 
 public Q_SLOTS:
     void playSlot();

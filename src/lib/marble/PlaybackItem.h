@@ -35,6 +35,7 @@ Q_SIGNALS:
     void progressChanged( double seconds );
     void balloonShown( GeoDataPlacemark* );
     void balloonHidden();
+    void updated( GeoDataFeature* );
 };
 }
 #endif

@@ -110,6 +110,7 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL( triggered() ), q, SLOT( saveTour() ) );
     QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( triggered() ), q, SLOT( saveTourAs() ) );
     QObject::connect( &m_playback, SIGNAL(centerOn(GeoDataCoordinates)), q, SLOT(centerOn(GeoDataCoordinates)) );
+    QObject::connect( &m_playback, SIGNAL(updated(GeoDataFeature*)), q, SIGNAL(featureUpdated(GeoDataFeature*)) );
 }
 
 TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
