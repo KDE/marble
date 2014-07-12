@@ -37,6 +37,7 @@ class GeoDataFlyTo;
 class GeoDataTourControl;
 class GeoDataWait;
 class GeoDataSoundCue;
+class GeoDataContainer;
 class MarbleWidget;
 
 class TourWidgetPrivate;
@@ -138,6 +139,8 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void featureUpdated( GeoDataFeature *feature );
+    void featureAdded( GeoDataContainer *parent, GeoDataFeature *feature, int row );
+    void featureRemoved( const GeoDataFeature *feature  );
 
 private Q_SLOTS:
     void moveUp();

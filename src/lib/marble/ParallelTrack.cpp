@@ -26,6 +26,8 @@ ParallelTrack::ParallelTrack( PlaybackItem* item )
     connect( m_item, SIGNAL( balloonHidden() ), this, SIGNAL( balloonHidden() ) );
     connect( m_item, SIGNAL( balloonShown( GeoDataPlacemark* ) ), this, SIGNAL( balloonShown( GeoDataPlacemark* ) ) );
     connect( m_item, SIGNAL( updated( GeoDataFeature* ) ), this, SIGNAL( updated( GeoDataFeature* ) ) );
+    connect( m_item, SIGNAL(added(GeoDataContainer*,GeoDataFeature*,int)), this, SIGNAL( added(GeoDataContainer*,GeoDataFeature*,int)) );
+    connect( m_item, SIGNAL(removed(const GeoDataFeature*)), this, SIGNAL(removed(const GeoDataFeature*)) );
 }
 
 void ParallelTrack::setDelayBeforeTrackStarts( double delay )

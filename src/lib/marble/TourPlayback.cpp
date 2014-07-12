@@ -44,7 +44,7 @@ public:
     TourPlaybackPrivate();
     ~TourPlaybackPrivate();
 
-    const GeoDataTour *m_tour;
+    GeoDataTour *m_tour;
     bool m_pause;
     SerialTrack m_mainTrack;
     QList<ParallelTrack*> m_parallelTracks;
@@ -53,7 +53,7 @@ public:
 };
 
 TourPlaybackPrivate::TourPlaybackPrivate() :
-    m_tour( &GeoDataTour::null ),
+    m_tour( 0 ),
     m_pause( false ),
     m_mainTrack()
 {
@@ -111,20 +111,22 @@ void TourPlayback::setMarbleWidget(MarbleWidget* widget)
     d->m_widget = widget;
 }
 
-void TourPlayback::setTour(const GeoDataTour *tour)
+void TourPlayback::setTour(GeoDataTour *tour)
 {
     d->m_mainTrack.clear();
     qDeleteAll( d->m_parallelTracks );
     d->m_parallelTracks.clear();
-    if (tour) {
-        d->m_tour = tour;
+    d->m_tour = tour;
+    if ( !d->m_tour ) {
+        d->m_mainTrack.clear();
+        qDeleteAll(d->m_parallelTracks);
+        d->m_parallelTracks.clear();
+        return;
     }
-    else {
-        d->m_tour = &GeoDataTour::null;
-    }
+
     double delay = 0;
     for( int i = 0; i < d->m_tour->playlist()->size(); i++){
-        const GeoDataTourPrimitive* primitive = d->m_tour->playlist()->primitive( i );
+        GeoDataTourPrimitive* primitive = d->m_tour->playlist()->primitive( i );
         if( primitive->nodeType() == GeoDataTypes::GeoDataFlyToType ){
             const GeoDataFlyTo *flyTo = dynamic_cast<const GeoDataFlyTo*>(primitive);
             d->m_mainTrack.append( new PlaybackFlyToItem( flyTo ) );
@@ -149,7 +151,7 @@ void TourPlayback::setTour(const GeoDataTour *tour)
             d->m_parallelTracks.append( track );
         }
         else if( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ){
-            const GeoDataAnimatedUpdate *animatedUpdate = dynamic_cast<const GeoDataAnimatedUpdate*>(primitive);
+            GeoDataAnimatedUpdate *animatedUpdate = dynamic_cast<GeoDataAnimatedUpdate*>(primitive);
             PlaybackAnimatedUpdateItem *item = new PlaybackAnimatedUpdateItem( animatedUpdate );
             ParallelTrack *track = new ParallelTrack( item );
             track->setDelayBeforeTrackStarts( delay );
@@ -157,6 +159,8 @@ void TourPlayback::setTour(const GeoDataTour *tour)
             connect( track, SIGNAL( balloonHidden()), this, SLOT( hideBalloon() ) );
             connect( track, SIGNAL( balloonShown( GeoDataPlacemark* ) ), this, SLOT( showBalloon( GeoDataPlacemark* ) ) );
             connect( track, SIGNAL( updated( GeoDataFeature* ) ), this, SIGNAL( updated( GeoDataFeature* ) ) );
+            connect( track, SIGNAL(added(GeoDataContainer*,GeoDataFeature*,int)), this, SIGNAL(added(GeoDataContainer*,GeoDataFeature*,int)) );
+            connect( track, SIGNAL(removed(const GeoDataFeature*)), this, SIGNAL(removed(const GeoDataFeature*)) );
         }
     }
     Q_ASSERT( d->m_widget );

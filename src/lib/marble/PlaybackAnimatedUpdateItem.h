@@ -14,7 +14,10 @@
 #include "PlaybackItem.h"
 #include "GeoDataAnimatedUpdate.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
+#include "GeoDataFolder.h"
+#include "GeoDataGroundOverlay.h"
+#include "GeoDataScreenOverlay.h"
+#include "GeoDataPhotoOverlay.h"
 
 namespace Marble
 {
@@ -22,7 +25,7 @@ class PlaybackAnimatedUpdateItem : public PlaybackItem
 {
     Q_OBJECT
 public:
-    PlaybackAnimatedUpdateItem( const GeoDataAnimatedUpdate* animatedUpdate );
+    PlaybackAnimatedUpdateItem( GeoDataAnimatedUpdate *animatedUpdate );
     const GeoDataAnimatedUpdate* animatedUpdate() const;
     double duration() const;
     void play();
@@ -31,9 +34,14 @@ public:
     void stop();
 
 private:
-    GeoDataDocument* rootDocument( GeoDataObject* ) const;
-    GeoDataPlacemark* findPlacemark( GeoDataFeature*, const QString& ) const;
-    const GeoDataAnimatedUpdate* m_animatedUpdate;
+    bool canDelete( const char* nodeType ) const;
+
+    GeoDataDocument* rootDocument( GeoDataObject *object ) const;
+    GeoDataFeature* findFeature( GeoDataFeature* feature, const QString& id ) const;
+    GeoDataAnimatedUpdate* m_animatedUpdate;
+    QList<GeoDataFeature*> m_createdObjects;
+    QList<GeoDataFeature*> m_deletedObjects;
+    GeoDataDocument* m_rootDocument;
 };
 }
 #endif

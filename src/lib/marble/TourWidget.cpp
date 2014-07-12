@@ -111,6 +111,8 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( triggered() ), q, SLOT( saveTourAs() ) );
     QObject::connect( &m_playback, SIGNAL(centerOn(GeoDataCoordinates)), q, SLOT(centerOn(GeoDataCoordinates)) );
     QObject::connect( &m_playback, SIGNAL(updated(GeoDataFeature*)), q, SIGNAL(featureUpdated(GeoDataFeature*)) );
+    QObject::connect( &m_playback, SIGNAL(added(GeoDataContainer*,GeoDataFeature*,int)), q, SIGNAL(featureAdded(GeoDataContainer*,GeoDataFeature*,int)) );
+    QObject::connect( &m_playback, SIGNAL(removed(const GeoDataFeature*)), q, SIGNAL(featureRemoved(const GeoDataFeature*)) );
 }
 
 TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
@@ -346,6 +348,10 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_tourUi.m_listView->setItemDelegate( d->m_delegate );
     connect( this, SIGNAL( featureUpdated( GeoDataFeature* ) ),
              d->m_widget->model()->treeModel(), SLOT( updateFeature( GeoDataFeature* ) ) );
+    connect( this, SIGNAL( featureAdded(GeoDataContainer*,GeoDataFeature*,int)),
+             d->m_widget->model()->treeModel(), SLOT(addFeature(GeoDataContainer*,GeoDataFeature*,int)) );
+    connect( this, SIGNAL( featureRemoved(const GeoDataFeature*)),
+             d->m_widget->model()->treeModel(), SLOT(removeFeature(const GeoDataFeature*)) );
 }
 
 void TourWidget::togglePlaying()

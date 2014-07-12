@@ -23,6 +23,7 @@ class GeoDataCoordinates;
 class GeoDataTour;
 class GeoDataPlacemark;
 class GeoDataFeature;
+class GeoDataContainer;
 
 class TourPlaybackPrivate;
 
@@ -33,7 +34,7 @@ public:
     explicit TourPlayback(QObject *parent=0);
     ~TourPlayback();
 
-    void setTour(const GeoDataTour *tour);
+    void setTour(GeoDataTour *tour);
     void setMarbleWidget( MarbleWidget *widget );
 
     /** Tour duration in seconds */
@@ -57,6 +58,8 @@ Q_SIGNALS:
     void centerOn( const GeoDataCoordinates &coordinates );
     void progressChanged( double );
     void updated( GeoDataFeature* );
+    void added( GeoDataContainer *parent, GeoDataFeature *feature, int row );
+    void removed( const GeoDataFeature *feature  );
 
 private Q_SLOTS:
     void stopTour();
