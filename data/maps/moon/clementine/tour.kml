@@ -1,181 +1,189 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-  <Folder id="placemarkContainer">
-    <Placemark id="luna2">
-      <name>Luna 2</name>
-      <visibility>0</visibility>
-      <description><![CDATA[<p><b>1959-09-13: First spacecraft to reach the surface of the moon.</b></p>
+  <Document>
+    <name>Moon Landing Sites Tour</name>
+    <Folder id="placemarkContainer">
+      <name>Landing Sites</name>
+      <Placemark id="luna2">
+        <name>Luna 2</name>
+        <visibility>0</visibility>
+        <description><![CDATA[<p><b>1959-09-13: First spacecraft to reach the surface of the moon.</b></p>
       <p>Luna 2 (E-1A series) was the second of the Soviet Union's Luna programme spacecraft launched to the Moon. It was the first man-made object to land on another celestial body. <a href="http://en.wikipedia.org/wiki/Luna_2">Read more at Wikipedia.</a></p>
       <img src="http://files.kde.org/marble/tours/clementine/Luna_2_Soviet_moon_probe.jpg" />
 ]]></description>
-      <role>i</role>
-      <Point>
-        <coordinates>0.0,29.1</coordinates>
-      </Point>
-    </Placemark>
-    <Placemark id="apollo11">
-      <name>Apollo 11</name>
-      <visibility>0</visibility>
-      <description><![CDATA[<p><b>1969-07-21: First manned lunar landing mission</b></p>
+        <role>i</role>
+        <Point>
+          <coordinates>0.0,29.1</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark id="apollo11">
+        <name>Apollo 11</name>
+        <visibility>0</visibility>
+        <description><![CDATA[<p><b>1969-07-21: First manned lunar landing mission</b></p>
           <p>Apollo 11 was the spaceflight that landed the first humans on the Moon, Americans Neil Armstrong and Buzz Aldrin, on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the lunar surface six hours later on July 21 at 02:56 UTC. <a href="http://en.wikipedia.org/wiki/Apollo_11">Read more at Wikipedia.</a></p>
           <img src="http://files.kde.org/marble/tours/clementine/306px-Apollo_11.jpg" />
 ]]></description>
-      <role>h</role>
-      <Point>
-        <coordinates>23.63,0.71</coordinates>
-      </Point>
-    </Placemark>
-    <Placemark id="change3">
-      <name>Chang'e 3</name>
-      <visibility>0</visibility>
-      <description><![CDATA[<p><b>2013-12-14: First Chinese soft-landing</b> Chang'e 3 achieved lunar orbit on 6 December 2013 and landed on 14 December 2013, becoming the first probe in 37 years to soft-land on the Moon since Luna 24 in 1976. <a href="http://en.wikipedia.org/wiki/Chang%27e_3">Read more at Wikipedia.</a></p>]]></description>
-      <role>u</role>
-      <Point>
-        <coordinates>-19.51,44.12</coordinates>
-      </Point>
-    </Placemark>
-    <gx:Tour>
-      <name>Moon Landing Sites</name>
-      <gx:Playlist>
-        <!-- Luna 2 mission: Move camera nearby -->
-        <gx:FlyTo>
-          <gx:duration>4</gx:duration>
-          <gx:flyToMode>smooth</gx:flyToMode>
-          <LookAt>
-            <longitude>33.45</longitude>
-            <latitude>24.91</latitude>
-            <altitude>520000</altitude>
-            <altitudeMode>absolute</altitudeMode>
-            <range>0</range>
-          </LookAt>
-        </gx:FlyTo>
-        <!-- Luna 2 mission: Show description balloon for some seconds -->
-        <gx:AnimatedUpdate>
-          <Update>
-            <Change>
-              <Placemark targetId="luna2">
-                <gx:balloonVisibility>1</gx:balloonVisibility>
-              </Placemark>
-            </Change>
-          </Update>
-        </gx:AnimatedUpdate>
-        <gx:Wait>
-          <gx:duration>8</gx:duration>
-        </gx:Wait>
-        <gx:AnimatedUpdate>
-          <Update>
-            <Change>
-              <Placemark targetId="luna2">
-                <gx:balloonVisibility>0</gx:balloonVisibility>
-              </Placemark>
-            </Change>
-          </Update>
-        </gx:AnimatedUpdate>
-        <!-- Apollo 11 mission: Move camera on top -->
-        <gx:FlyTo>
-          <gx:duration>4</gx:duration>
-          <gx:flyToMode>smooth</gx:flyToMode>
-          <LookAt>
-            <longitude>23.63</longitude>
-            <latitude>0.71</latitude>
-            <altitude>720000</altitude>
-            <altitudeMode>absolute</altitudeMode>
-            <range>0</range>
-          </LookAt>
-        </gx:FlyTo>
-        <!-- Apollo 11 mission: Create a placemark for Neil Armstrong stepping
+        <role>h</role>
+        <Point>
+          <coordinates>23.63,0.71</coordinates>
+        </Point>
+      </Placemark>
+      <Placemark id="change3">
+        <name>Chang'e 3</name>
+        <visibility>0</visibility>
+        <description><![CDATA[<p><b>2013-12-14: First Chinese soft-landing</b> Chang'e 3 achieved lunar orbit on 6 December 2013 and landed on 14 December 2013, becoming the first probe in 37 years to soft-land on the Moon since Luna 24 in 1976. <a href="http://en.wikipedia.org/wiki/Chang%27e_3">Read more at Wikipedia.</a></p>]]></description>
+        <role>u</role>
+        <Point>
+          <coordinates>-19.51,44.12</coordinates>
+        </Point>
+      </Placemark>
+      <gx:Tour>
+        <name>Moon Landing Sites</name>
+        <gx:Playlist>
+          <!-- Luna 2 mission: Move camera nearby -->
+          <gx:FlyTo>
+            <gx:duration>4</gx:duration>
+            <gx:flyToMode>smooth</gx:flyToMode>
+            <LookAt>
+              <longitude>33.45</longitude>
+              <latitude>24.91</latitude>
+              <altitude>520000</altitude>
+              <altitudeMode>absolute</altitudeMode>
+              <range>0</range>
+            </LookAt>
+          </gx:FlyTo>
+          <!-- Luna 2 mission: Show description balloon for some seconds -->
+          <gx:AnimatedUpdate>
+            <Update>
+              <Change>
+                <Placemark targetId="luna2">
+                  <gx:balloonVisibility>1</gx:balloonVisibility>
+                </Placemark>
+              </Change>
+            </Update>
+          </gx:AnimatedUpdate>
+          <gx:Wait>
+            <gx:duration>8</gx:duration>
+          </gx:Wait>
+          <gx:AnimatedUpdate>
+            <Update>
+              <Change>
+                <Placemark targetId="luna2">
+                  <gx:balloonVisibility>0</gx:balloonVisibility>
+                </Placemark>
+              </Change>
+            </Update>
+          </gx:AnimatedUpdate>
+          <!-- Apollo 11 mission: Move camera on top -->
+          <gx:FlyTo>
+            <gx:duration>4</gx:duration>
+            <gx:flyToMode>smooth</gx:flyToMode>
+            <LookAt>
+              <longitude>23.63</longitude>
+              <latitude>0.71</latitude>
+              <altitude>720000</altitude>
+              <altitudeMode>absolute</altitudeMode>
+              <range>0</range>
+            </LookAt>
+          </gx:FlyTo>
+          <!-- Apollo 11 mission: Create a placemark for Neil Armstrong stepping
            onto lunar surface and have him speak his famous words -->
-        <gx:SoundCue>
-          <href>http://files.kde.org/marble/tours/clementine/Frase_de_Neil_Armstrong.ogg</href>
-        </gx:SoundCue>
-        <gx:AnimatedUpdate>
-          <Create>
-            <Placemark id="armstrong" targetId="placemarkContainer">
-              <name>Neil Armstrong</name>
-              <description><![CDATA[<p>Armstrong became the first to step onto the lunar surface six hours later on July 21 at 02:56 UTC.</p>
+          <gx:SoundCue>
+            <href>http://files.kde.org/marble/tours/clementine/Frase_de_Neil_Armstrong.ogg</href>
+          </gx:SoundCue>
+          <gx:AnimatedUpdate>
+            <Update>
+              <Create>
+                <Placemark id="armstrong" targetId="placemarkContainer">
+                  <name>Neil Armstrong</name>
+                  <description><![CDATA[<p>Armstrong became the first to step onto the lunar surface six hours later on July 21 at 02:56 UTC.</p>
 ]]></description>
-              <Point>
-                <coordinates>23.63,0.71</coordinates>
-              </Point>
-            </Placemark>
-          </Create>
-        </gx:AnimatedUpdate>
-        <gx:Wait>
-          <gx:duration>8</gx:duration>
-        </gx:Wait>
-        <!-- Apollo 11 mission: Move camera nearby -->
-        <gx:FlyTo>
-          <gx:duration>2</gx:duration>
-          <gx:flyToMode>smooth</gx:flyToMode>
-          <LookAt>
-            <longitude>53.85</longitude>
-            <latitude>0.36</latitude>
-            <altitude>720000</altitude>
-            <altitudeMode>absolute</altitudeMode>
-            <range>0</range>
-          </LookAt>
-        </gx:FlyTo>
-        <!-- Apollo 11 mission: Show description balloon for some seconds -->
-        <gx:AnimatedUpdate>
-          <Update>
-            <Change>
-              <Placemark targetId="apollo11">
-                <gx:balloonVisibility>1</gx:balloonVisibility>
-              </Placemark>
-            </Change>
-          </Update>
-        </gx:AnimatedUpdate>
-        <gx:Wait>
-          <gx:duration>8</gx:duration>
-        </gx:Wait>
-        <gx:AnimatedUpdate>
-          <Update>
-            <Change>
-              <Placemark targetId="apollo11">
-                <gx:balloonVisibility>0</gx:balloonVisibility>
-              </Placemark>
-            </Change>
-          </Update>
-        </gx:AnimatedUpdate>
-        <gx:AnimatedUpdate>
-          <Delete>
-            <Placemark targetId="armstrong"/>
-          </Delete>
-        </gx:AnimatedUpdate>
-        <!-- Chang'e 3 mission -->
-        <gx:FlyTo>
-          <gx:duration>4</gx:duration>
-          <gx:flyToMode>smooth</gx:flyToMode>
-          <LookAt>
-            <longitude>33.20</longitude>
-            <latitude>46.95</latitude>
-            <altitude>940000</altitude>
-            <altitudeMode>absolute</altitudeMode>
-            <range>0</range>
-          </LookAt>
-        </gx:FlyTo>
-        <gx:AnimatedUpdate>
-          <Update>
-            <Change>
-              <Placemark targetId="change3">
-                <gx:balloonVisibility>1</gx:balloonVisibility>
-              </Placemark>
-            </Change>
-          </Update>
-        </gx:AnimatedUpdate>
-        <gx:Wait>
-          <gx:duration>8</gx:duration>
-        </gx:Wait>
-        <gx:AnimatedUpdate>
-          <Update>
-            <Change>
-              <Placemark targetId="change3">
-                <gx:balloonVisibility>0</gx:balloonVisibility>
-              </Placemark>
-            </Change>
-          </Update>
-        </gx:AnimatedUpdate>
-      </gx:Playlist>
-    </gx:Tour>
-  </Folder>
+                  <Point>
+                    <coordinates>23.63,0.71</coordinates>
+                  </Point>
+                </Placemark>
+              </Create>
+            </Update>
+          </gx:AnimatedUpdate>
+          <gx:Wait>
+            <gx:duration>8</gx:duration>
+          </gx:Wait>
+          <!-- Apollo 11 mission: Move camera nearby -->
+          <gx:FlyTo>
+            <gx:duration>2</gx:duration>
+            <gx:flyToMode>smooth</gx:flyToMode>
+            <LookAt>
+              <longitude>53.85</longitude>
+              <latitude>0.36</latitude>
+              <altitude>720000</altitude>
+              <altitudeMode>absolute</altitudeMode>
+              <range>0</range>
+            </LookAt>
+          </gx:FlyTo>
+          <!-- Apollo 11 mission: Show description balloon for some seconds -->
+          <gx:AnimatedUpdate>
+            <Update>
+              <Change>
+                <Placemark targetId="apollo11">
+                  <gx:balloonVisibility>1</gx:balloonVisibility>
+                </Placemark>
+              </Change>
+            </Update>
+          </gx:AnimatedUpdate>
+          <gx:Wait>
+            <gx:duration>8</gx:duration>
+          </gx:Wait>
+          <gx:AnimatedUpdate>
+            <Update>
+              <Change>
+                <Placemark targetId="apollo11">
+                  <gx:balloonVisibility>0</gx:balloonVisibility>
+                </Placemark>
+              </Change>
+            </Update>
+          </gx:AnimatedUpdate>
+          <gx:AnimatedUpdate>
+            <Update>
+              <Delete>
+                <Placemark targetId="armstrong"/>
+              </Delete>
+            </Update>
+          </gx:AnimatedUpdate>
+          <!-- Chang'e 3 mission -->
+          <gx:FlyTo>
+            <gx:duration>4</gx:duration>
+            <gx:flyToMode>smooth</gx:flyToMode>
+            <LookAt>
+              <longitude>33.20</longitude>
+              <latitude>46.95</latitude>
+              <altitude>940000</altitude>
+              <altitudeMode>absolute</altitudeMode>
+              <range>0</range>
+            </LookAt>
+          </gx:FlyTo>
+          <gx:AnimatedUpdate>
+            <Update>
+              <Change>
+                <Placemark targetId="change3">
+                  <gx:balloonVisibility>1</gx:balloonVisibility>
+                </Placemark>
+              </Change>
+            </Update>
+          </gx:AnimatedUpdate>
+          <gx:Wait>
+            <gx:duration>8</gx:duration>
+          </gx:Wait>
+          <gx:AnimatedUpdate>
+            <Update>
+              <Change>
+                <Placemark targetId="change3">
+                  <gx:balloonVisibility>0</gx:balloonVisibility>
+                </Placemark>
+              </Change>
+            </Update>
+          </gx:AnimatedUpdate>
+        </gx:Playlist>
+      </gx:Tour>
+    </Folder>
+  </Document>
 </kml>
