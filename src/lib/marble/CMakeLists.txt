@@ -130,6 +130,7 @@ set(marblewidget_SRCS
     GeoPainter.cpp
     HttpDownloadManager.cpp
     HttpJob.cpp
+    RemoteIconLoader.cpp
     LayerManager.cpp
     PluginManager.cpp
     TimeControlWidget.cpp

@@ -9,9 +9,12 @@
 //
 
 
+#include <QUrl>
+
 #include "GeoDataIconStyle.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "RemoteIconLoader.h"
 
 #include "GeoDataTypes.h"
 
@@ -47,7 +50,10 @@ class GeoDataIconStylePrivate
     QString          m_iconPath;
     GeoDataHotSpot   m_hotSpot;
     int              m_heading;
+    static RemoteIconLoader *m_remoteIconLoader;
 };
+
+RemoteIconLoader* GeoDataIconStylePrivate::m_remoteIconLoader = new RemoteIconLoader();
 
 GeoDataIconStyle::GeoDataIconStyle() :
     d( new GeoDataIconStylePrivate() )
@@ -116,10 +122,23 @@ QString GeoDataIconStyle::iconPath() const
 
 QImage GeoDataIconStyle::icon() const
 {
-    if(!d->m_icon.isNull())
+    if ( !d->m_icon.isNull() ) {
         return d->m_icon;
-    else if(!d->m_iconPath.isEmpty()) {
+    }
+    else if ( !d->m_iconPath.isEmpty() ) {
         d->m_icon = QImage( resolvePath( d->m_iconPath ) );
+        if( d->m_icon.isNull() ) {
+            // if image is not found on disk, check whether the icon is
+            // at remote location. If yes then go for remote icon loading
+            QUrl remoteLocation = QUrl( d->m_iconPath );
+            if( remoteLocation.isValid() ) {
+                d->m_icon = d->m_remoteIconLoader->load( d->m_iconPath );
+            }
+            else {
+                mDebug() << "Unable to open style icon at: " << d->m_iconPath;
+            }
+        }
+
         return d->m_icon;
     }
     else
@@ -156,6 +175,11 @@ int GeoDataIconStyle::heading() const
 void GeoDataIconStyle::setHeading( int heading )
 {
     d->m_heading = heading;
+}
+
+RemoteIconLoader *GeoDataIconStyle::remoteIconLoader() const
+{
+    return d->m_remoteIconLoader;
 }
 
 void GeoDataIconStyle::pack( QDataStream& stream ) const

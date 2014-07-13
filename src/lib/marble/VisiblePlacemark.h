@@ -18,6 +18,7 @@
 
 #include "GeoDataPlacemark.h"
 
+#include <QObject>
 #include <QPixmap>
 #include <QPoint>
 #include <QRect>
@@ -35,8 +36,10 @@ static const qreal s_labelOutlineWidth = 2.5;
  * This class is used by PlacemarkLayout to pass the visible place marks
  * to the PlacemarkPainter.
  */
-class VisiblePlacemark
+class VisiblePlacemark : public QObject
 {
+ Q_OBJECT
+
  public:
     explicit VisiblePlacemark( const GeoDataPlacemark *placemark );
 
@@ -96,6 +99,12 @@ class VisiblePlacemark
         Glow,
         Selected
     };
+
+Q_SIGNALS:
+    void updateNeeded();
+
+private Q_SLOTS:
+    void setSymbolPixmap();
 
  private:
     static void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle, const QColor &color );

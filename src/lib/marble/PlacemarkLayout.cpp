@@ -557,6 +557,7 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
         // create a new one...
         mark = new VisiblePlacemark( placemark );
         m_visiblePlacemarks.insert( placemark, mark );
+        connect( mark, SIGNAL(updateNeeded()), this, SIGNAL(repaintNeeded()) );
     }
 
     // Finally save the label position on the map.

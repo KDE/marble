@@ -12,6 +12,7 @@
 #include "VisiblePlacemark.h"
 
 #include "MarbleDebug.h"
+#include "RemoteIconLoader.h"
 
 #include "GeoDataStyle.h"
 #include "PlacemarkLayer.h"
@@ -27,6 +28,11 @@ VisiblePlacemark::VisiblePlacemark( const GeoDataPlacemark *placemark )
     : m_placemark( placemark ),
       m_selected( false )
 {
+    const GeoDataStyle *style = m_placemark->style();
+    const RemoteIconLoader *remoteLoader = style->iconStyle().remoteIconLoader();
+    QObject::connect( remoteLoader, SIGNAL(iconReady()),
+                     this, SLOT(setSymbolPixmap()) );
+
     drawLabelPixmap();
 }
 
@@ -105,6 +111,18 @@ void VisiblePlacemark::setSymbolPosition( const QPoint& position )
 const QPixmap& VisiblePlacemark::labelPixmap() const
 {
     return m_labelPixmap;
+}
+
+void VisiblePlacemark::setSymbolPixmap()
+{
+    const GeoDataStyle *style = m_placemark->style();
+    if ( style ) {
+        m_symbolPixmap = QPixmap::fromImage( style->iconStyle().icon() );
+        emit updateNeeded();
+    }
+    else {
+        mDebug() << "Style pointer is Null";
+    }
 }
 
 const QRectF& VisiblePlacemark::labelRect() const
@@ -219,3 +237,4 @@ void VisiblePlacemark::drawLabelText(QPainter &labelPainter, const QString &text
     }
 }
 
+#include "VisiblePlacemark.moc"

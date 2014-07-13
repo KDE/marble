@@ -25,6 +25,7 @@ namespace Marble
 {
 
 class GeoDataIconStylePrivate;
+class RemoteIconLoader;
 
 class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
 {
@@ -57,6 +58,8 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
 
     int heading() const;
     void setHeading( int heading );
+    
+    RemoteIconLoader *remoteIconLoader() const;
 
     /*
      * Serializable methods
