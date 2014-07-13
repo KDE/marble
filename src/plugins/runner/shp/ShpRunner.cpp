@@ -196,7 +196,6 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
                 break;
             }
         }
-
     }
 
     SHPClose( handle );

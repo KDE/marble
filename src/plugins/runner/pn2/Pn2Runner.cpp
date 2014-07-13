@@ -30,6 +30,7 @@
 //
 // Copyright 2012 Torsten Rahn <rahn@kde.org>
 // Copyright 2012 Cezar Mocan <mocancezar@gmail.com>
+// Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
 #include "Pn2Runner.h"
@@ -45,7 +46,6 @@
 
 namespace Marble
 {
-
 // Polygon header flags, representing the type of polygon
 enum polygonFlagType { LINESTRING = 0, LINEARRING = 1, OUTERBOUNDARY = 2, INNERBOUNDARY = 3, MULTIGEOMETRY = 4 };
 
@@ -130,16 +130,24 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     }
 
     file.open( QIODevice::ReadOnly );
-    QDataStream stream( &file );  // read the data serialized from the file
+    m_stream.setDevice( &file );  // read the data serialized from the file
 
+    m_stream >> m_fileHeaderVersion >> m_fileHeaderPolygons >> m_isMapColorField;
+
+    switch( m_fileHeaderVersion ) {
+        case 1: parseForVersion1( fileName, role );
+                break;
+        case 2: parseForVersion2( fileName, role );
+                break;
+        default: qDebug() << "File can't be parsed. We don't have parser for file header version:" << m_fileHeaderVersion;
+                break;
+    }
+}
+
+void Pn2Runner::parseForVersion1(const QString& fileName, DocumentRole role)
+{
     GeoDataDocument *document = new GeoDataDocument();
     document->setDocumentRole( role );
-
-    quint8 fileHeaderVersion;
-    quint32 fileHeaderPolygons;
-    bool isMapColorField;       // Whether the file contains color indexes
-
-    stream >> fileHeaderVersion >> fileHeaderPolygons >> isMapColorField;
 
     bool error = false;
 
@@ -149,15 +157,15 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     GeoDataStyle *style =0;
     GeoDataPolygon *polygon = new GeoDataPolygon;
 
-    for ( quint32 currentPoly = 1; ( currentPoly <= fileHeaderPolygons ) && ( !error ) && ( !stream.atEnd() ); currentPoly++ ) {
+    for ( quint32 currentPoly = 1; ( currentPoly <= m_fileHeaderPolygons ) && ( !error ) && ( !m_stream.atEnd() ); currentPoly++ ) {
 
-        stream >> ID >> nrAbsoluteNodes >> flag;
+        m_stream >> ID >> nrAbsoluteNodes >> flag;
 
         if ( flag != INNERBOUNDARY && ( prevFlag == INNERBOUNDARY || prevFlag == OUTERBOUNDARY ) ) {
 
             GeoDataPlacemark *placemark = new GeoDataPlacemark;
             placemark->setGeometry( polygon );
-            if ( isMapColorField ) {
+            if ( m_isMapColorField ) {
                 if ( style ) {
                     placemark->setStyle( style );
                 }
@@ -167,7 +175,7 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
         if ( flag == LINESTRING ) {
             GeoDataLineString *linestring = new GeoDataLineString;
-            error = error | importPolygon( stream, linestring, nrAbsoluteNodes );
+            error = error | importPolygon( m_stream, linestring, nrAbsoluteNodes );
 
             GeoDataPlacemark *placemark = new GeoDataPlacemark;
             placemark->setGeometry( linestring );
@@ -175,10 +183,9 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
         }
 
         if ( ( flag == LINEARRING ) || ( flag == OUTERBOUNDARY ) || ( flag == INNERBOUNDARY ) ) {
-
-            if ( flag == OUTERBOUNDARY && isMapColorField ) {
+            if ( flag == OUTERBOUNDARY && m_isMapColorField ) {
                 quint8 colorIndex;
-                stream >> colorIndex;
+                m_stream >> colorIndex;
                 style = new GeoDataStyle;
                 GeoDataPolyStyle polyStyle;
                 polyStyle.setColorIndex( colorIndex );
@@ -186,7 +193,7 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
             }
 
             GeoDataLinearRing* linearring = new GeoDataLinearRing;
-            error = error | importPolygon( stream, linearring, nrAbsoluteNodes );
+            error = error | importPolygon( m_stream, linearring, nrAbsoluteNodes );
 
             if ( flag == LINEARRING ) {
                 GeoDataPlacemark *placemark = new GeoDataPlacemark;
@@ -204,8 +211,6 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
             }
         }
 
-        
-
         if ( flag == MULTIGEOMETRY ) {
             // not implemented yet, for now elements inside a multigeometry are separated as individual geometries
         }
@@ -215,7 +220,7 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
     if ( prevFlag == INNERBOUNDARY || prevFlag == OUTERBOUNDARY ) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
-        if ( isMapColorField ) {
+        if ( m_isMapColorField ) {
             if ( style ) {
                 placemark->setStyle( style );
             }
@@ -235,6 +240,167 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     emit parsingFinished( document );
 }
 
+void Pn2Runner::parseForVersion2( const QString &fileName, DocumentRole role )
+{
+    GeoDataDocument *document = new GeoDataDocument();
+    document->setDocumentRole( role );
+
+    bool error = false;
+
+    quint32 nrAbsoluteNodes;
+    quint32 placemarkCurrentID = 1;
+    quint32 placemarkPrevID = 0;
+    quint8 flag, prevFlag = -1;
+
+    GeoDataPolygon *polygon = new GeoDataPolygon;
+    GeoDataStyle *style =0;
+    GeoDataPlacemark *placemark =0; // new GeoDataPlacemark;
+
+    quint32 currentPoly;
+    for ( currentPoly = 1; ( currentPoly <= m_fileHeaderPolygons ) && ( !error ) && ( !m_stream.atEnd() ); currentPoly++ ) {
+        m_stream >> flag >> placemarkCurrentID;
+
+        if ( flag == MULTIGEOMETRY && ( prevFlag == INNERBOUNDARY || prevFlag == OUTERBOUNDARY ) ) {
+            if ( placemark ) {
+                placemark->setGeometry( polygon );
+            }
+        }
+
+        if ( flag != MULTIGEOMETRY && flag != INNERBOUNDARY && ( prevFlag == INNERBOUNDARY || prevFlag == OUTERBOUNDARY ) ) {
+            if ( placemark ) {
+                placemark->setGeometry( polygon );
+            }
+        }
+        /**
+         * If the parsed placemark id @p placemarkCurrentID is different
+         * from the id of previous placemark @p placemarkPrevID, it means
+         * we have encountered a new placemark. So, prepare a style @p style
+         * if file has color indices
+         */
+        if ( placemarkCurrentID != placemarkPrevID ) {
+            placemark = new GeoDataPlacemark;
+
+            // Handle the color index
+            if( m_isMapColorField ) {
+                quint8 colorIndex;
+                m_stream >> colorIndex;
+                style = new GeoDataStyle;
+                GeoDataPolyStyle polyStyle;
+                polyStyle.setColorIndex( colorIndex );
+                polyStyle.setFill( true );
+                style->setPolyStyle( polyStyle );
+                placemark->setStyle( style );
+            }
+
+            document->append( placemark );
+        }
+
+        placemarkPrevID = placemarkCurrentID;
+
+        if ( flag != MULTIGEOMETRY ) {
+            m_stream >> nrAbsoluteNodes;
+
+            if ( flag == LINESTRING ) {
+                GeoDataLineString *linestring = new GeoDataLineString;
+                error = error | importPolygon( m_stream, linestring, nrAbsoluteNodes );
+                if ( placemark ) {
+                    placemark->setGeometry( linestring );
+                }
+            }
+
+            if ( ( flag == LINEARRING ) || ( flag == OUTERBOUNDARY ) || ( flag == INNERBOUNDARY ) ) {
+                GeoDataLinearRing* linearring = new GeoDataLinearRing;
+                error = error | importPolygon( m_stream, linearring, nrAbsoluteNodes );
+
+                if ( flag == LINEARRING ) {
+                    if ( placemark ) {
+                        placemark->setGeometry( linearring );
+                    }
+                }
+
+                if ( flag == OUTERBOUNDARY ) {
+                    polygon = new GeoDataPolygon;
+                    polygon->setOuterBoundary( *linearring );
+                }
+
+                if ( flag == INNERBOUNDARY ) {
+                    polygon->appendInnerBoundary( *linearring );
+                }
+            }
+            prevFlag = flag;
+        }
+
+        else {
+            quint32 placemarkCurrentIDInMulti;
+            quint8 flagInMulti;
+            quint8 prevFlagInMulti = -1;
+            quint8 multiSize = 0;
+
+            m_stream >> multiSize;
+
+            GeoDataMultiGeometry *multigeom = new GeoDataMultiGeometry;
+
+            /**
+             * Read @p multiSize GeoDataGeometry objects
+             */
+            for ( int iter = 0; iter < multiSize; ++iter ) {
+                m_stream >> flagInMulti >> placemarkCurrentIDInMulti >> nrAbsoluteNodes;
+                if ( flagInMulti != INNERBOUNDARY && ( prevFlagInMulti == INNERBOUNDARY || prevFlagInMulti == OUTERBOUNDARY ) ) {
+                    multigeom->append( polygon );
+                }
+
+                if ( flagInMulti == LINESTRING ) {
+                    GeoDataLineString *linestring = new GeoDataLineString;
+                    error = error | importPolygon( m_stream, linestring, nrAbsoluteNodes );
+                    multigeom->append( linestring );
+                }
+
+                if ( ( flagInMulti == LINEARRING ) || ( flagInMulti == OUTERBOUNDARY ) || ( flagInMulti == INNERBOUNDARY ) ) {
+                    GeoDataLinearRing* linearring = new GeoDataLinearRing;
+                    error = error | importPolygon( m_stream, linearring, nrAbsoluteNodes );
+
+                    if ( flagInMulti == LINEARRING ) {
+                        multigeom->append( linearring );
+                    }
+
+                    if ( flagInMulti == OUTERBOUNDARY ) {
+                        polygon = new GeoDataPolygon;
+                        polygon->setOuterBoundary( *linearring );
+                    }
+
+                    if ( flagInMulti == INNERBOUNDARY ) {
+                        polygon->appendInnerBoundary( *linearring );
+                    }
+                }
+                prevFlagInMulti = flagInMulti;
+            }
+
+            if ( prevFlagInMulti == INNERBOUNDARY || prevFlagInMulti == OUTERBOUNDARY ) {
+                multigeom->append( polygon );
+            }
+            if ( placemark ) {
+                placemark->setGeometry( multigeom );
+            }
+            prevFlag = MULTIGEOMETRY;
+        }
+    }
+
+    if ( (prevFlag == INNERBOUNDARY || prevFlag == OUTERBOUNDARY) && prevFlag != MULTIGEOMETRY ) {
+        placemark->setGeometry( polygon );
+    }
+
+    if ( error ) {
+        delete document;
+        document = 0;
+        emit parsingFinished( 0, "Errors occurred while parsing the .pn2 file!" );
+        return;
+    }
+    document->setFileName( fileName );
+
+    emit parsingFinished( document );
 }
+
+}
+
 
 #include "Pn2Runner.moc"

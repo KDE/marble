@@ -30,6 +30,7 @@
 //
 // Copyright 2012 Torsten Rahn <rahn@kde.org>
 // Copyright 2012 Cezar Mocan <mocancezar@gmail.com>
+// Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
 
@@ -167,7 +168,7 @@ int main(int argc, char** argv)
     quint32 fileHeaderPolygons;
     bool isMapColorField;
 
-    fileHeaderVersion = 1;
+    fileHeaderVersion = 2;
     fileHeaderPolygons = 0; // This variable counts the number of polygons inside the document
     isMapColorField = false; // Whether the file contains mapcolor field or not.
 
@@ -220,33 +221,43 @@ int main(int argc, char** argv)
 
     i = document->begin();
 
-    quint32 polyCurrentID = 0;
+    quint32 placemarkCurrentID = 0;
     quint32 polyParentNodes;
-    quint8 polyFlag; 
+    quint8 polyFlag;
 
     for ( ; i != end; ++i ) {
         GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( *i );
+
+        ++placemarkCurrentID;
 
         // Types of placemarks
         GeoDataPolygon* polygon = dynamic_cast<GeoDataPolygon*>( placemark->geometry() );
         GeoDataLineString* linestring = dynamic_cast<GeoDataLineString*>( placemark->geometry() );
         GeoDataMultiGeometry* multigeom = dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() );
 
+        /**
+         * For every placemark write a color index ( if isMapColorField is true )
+         * and a placemarkID. In pn2 runner we will parse a color
+         * index ( if it exists ) for every different placemarkID.
+         * The general pattern is for writing values in pn2 file is:
+         * flag -> placemarkID -> colorIndex -> polyParentNodes -> all nodes
+         */
+
         if ( polygon ) {
             // Outer boundary
-            ++polyCurrentID;
             QVector<GeoDataCoordinates>::Iterator jBegin = polygon->outerBoundary().begin();
             QVector<GeoDataCoordinates>::Iterator jEnd = polygon->outerBoundary().end();
             polyParentNodes = getParentNodes( jBegin, jEnd );
             polyFlag = OUTERBOUNDARY;
 
+            stream << polyFlag << placemarkCurrentID;
+
             if ( isMapColorField ) {
                 quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
-                stream << polyCurrentID << polyParentNodes << polyFlag << colorIndex;
+                stream << colorIndex;
             }
-            else {
-                stream << polyCurrentID << polyParentNodes <<polyFlag;
-            }
+
+            stream << polyParentNodes;
 
             printAllNodes( jBegin, jEnd, stream );
 
@@ -257,22 +268,19 @@ int main(int argc, char** argv)
             for ( ; inner != innerEnd; ++inner ) {
                 GeoDataLinearRing linearring = static_cast<GeoDataLinearRing>( *inner );
 
-                ++polyCurrentID;
                 jBegin = linearring.begin();
                 jEnd = linearring.end();
                 polyParentNodes = getParentNodes( jBegin, jEnd );
                 polyFlag = INNERBOUNDARY;
 
-                stream << polyCurrentID << polyParentNodes << polyFlag;
+                stream << polyFlag << placemarkCurrentID << polyParentNodes;
 
                 printAllNodes( jBegin, jEnd, stream );
-               
             }
 
         }
 
         if ( linestring ) {
-            ++polyCurrentID;
             QVector<GeoDataCoordinates>::Iterator jBegin = linestring->begin();
             QVector<GeoDataCoordinates>::Iterator jEnd = linestring->end();
             polyParentNodes = getParentNodes( jBegin, jEnd );
@@ -281,22 +289,59 @@ int main(int argc, char** argv)
             else
                 polyFlag = LINESTRING;
 
-            stream << polyCurrentID << polyParentNodes << polyFlag;
+            stream << polyFlag << placemarkCurrentID;
+
+            if ( isMapColorField ) {
+                quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
+                stream << colorIndex;
+            }
+
+            stream << polyParentNodes;
 
             printAllNodes( jBegin, jEnd, stream );
         }
 
         if ( multigeom ) {
-
             QVector<GeoDataGeometry*>::Iterator multi = multigeom->begin();
-            QVector<GeoDataGeometry*>::Iterator multiEnd = multigeom->end();
+            QVector<GeoDataGeometry*>::Iterator const multiEnd = multigeom->end();
+
+            quint8 multiGeomSize = 0;
+
+            for ( ; multi != multiEnd; ++multi ) {
+                GeoDataLineString *lineString = dynamic_cast<GeoDataLineString*>( *multi );
+                GeoDataPolygon *poly  = dynamic_cast<GeoDataPolygon*>( *multi );
+                if ( lineString ) {
+                    ++multiGeomSize;
+                }
+                if ( poly ) {
+                    multiGeomSize += 1 + poly->innerBoundaries().size();
+                }
+            }
+
+            multi = multigeom->begin();
+
+            /**
+             * While parsing pn2 whenever we encounter a MULTIGEOMETRY
+             * flag we will proceed differently parsing @p multiGeomSize
+             * GeoDataGeometry objects
+             */
+
+            polyFlag = MULTIGEOMETRY;
+
+            stream << polyFlag << placemarkCurrentID;
+
+            if ( isMapColorField ) {
+                quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
+                stream << colorIndex;
+            }
+
+            stream << multiGeomSize;            
 
             for ( ; multi != multiEnd; ++multi ) {
                 GeoDataLineString* currLineString = dynamic_cast<GeoDataLineString*>( *multi );
                 GeoDataPolygon *currPolygon = dynamic_cast<GeoDataPolygon*>( *multi );
 
                 if ( currLineString ) {
-                    ++polyCurrentID;
                     QVector<GeoDataCoordinates>::Iterator jBegin = currLineString->begin();
                     QVector<GeoDataCoordinates>::Iterator jEnd = currLineString->end();
                     polyParentNodes = getParentNodes( jBegin, jEnd );
@@ -305,26 +350,19 @@ int main(int argc, char** argv)
                     else
                         polyFlag = LINESTRING;
 
-                    stream << polyCurrentID << polyParentNodes << polyFlag;
+                    stream << polyFlag << placemarkCurrentID << polyParentNodes;
 
                     printAllNodes( jBegin, jEnd, stream );
                 }
 
                 else if ( currPolygon ) {
                     // Outer boundary
-                    ++polyCurrentID;
                     QVector<GeoDataCoordinates>::Iterator jBegin = currPolygon->outerBoundary().begin();
                     QVector<GeoDataCoordinates>::Iterator jEnd = currPolygon->outerBoundary().end();
                     polyParentNodes = getParentNodes( jBegin, jEnd );
                     polyFlag = OUTERBOUNDARY;
 
-                    if ( isMapColorField ) {
-                        quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
-                        stream << polyCurrentID << polyParentNodes << polyFlag << colorIndex;
-                    }
-                    else {
-                        stream << polyCurrentID << polyParentNodes <<polyFlag;
-                    }
+                    stream << polyFlag << placemarkCurrentID << polyParentNodes;
 
                     printAllNodes( jBegin, jEnd, stream );
 
@@ -335,13 +373,12 @@ int main(int argc, char** argv)
                     for ( ; inner != innerEnd; ++inner ) {
                         GeoDataLinearRing linearring = static_cast<GeoDataLinearRing>( *inner );
 
-                        ++polyCurrentID;
                         jBegin = linearring.begin();
                         jEnd = linearring.end();
                         polyParentNodes = getParentNodes( jBegin, jEnd );
                         polyFlag = INNERBOUNDARY;
 
-                        stream << polyCurrentID << polyParentNodes << polyFlag;
+                        stream << polyFlag << placemarkCurrentID << polyParentNodes;
 
                         printAllNodes( jBegin, jEnd, stream );
                     }
