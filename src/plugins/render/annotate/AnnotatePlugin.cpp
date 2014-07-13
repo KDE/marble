@@ -243,7 +243,7 @@ void AnnotatePlugin::setDrawingPolygon( bool enabled )
         m_polygonPlacemark->setGeometry( polygon );
         m_polygonPlacemark->setParent( m_annotationDocument );
         m_polygonPlacemark->setStyleUrl( "#polygon" );
-        m_polygonPlacemark->setName( QString("New Polygon") );
+        m_polygonPlacemark->setName( QString("Untitled Polygon") );
 
         m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polygonPlacemark );
         announceStateChanged( SceneGraphicsItem::DrawingPolygon );
@@ -812,21 +812,21 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
 
         QAction *addHole = new QAction( this );
         addHole->setText( tr("Add Polygon Hole") );
-        // TODO: set icon
+        addHole->setIcon( QIcon(":/icons/16x16/add-holes.png") );
         addHole->setCheckable( true );
         connect( addHole, SIGNAL(toggled(bool)),
                  this, SLOT(setAddingPolygonHole(bool)) );
 
         QAction *mergeNodes = new QAction( this );
         mergeNodes->setText( tr("Merge Nodes") );
-        // TODO: set icon
+        mergeNodes->setIcon( QIcon(":/icons/16x16/merge-nodes.png") );
         mergeNodes->setCheckable( true );
         connect( mergeNodes, SIGNAL(toggled(bool)),
                  this, SLOT(setMergingNodes(bool)) );
 
         QAction *addNodes = new QAction( this );
         addNodes->setText( tr("Add Nodes") );
-        // TODO: set icon
+        addNodes->setIcon( QIcon(":/icons/16x16/add-nodes.png") );
         addNodes->setCheckable( true );
         connect( addNodes, SIGNAL(toggled(bool)),
                  this, SLOT(setAddingNodes(bool)) );

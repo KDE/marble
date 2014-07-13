@@ -58,10 +58,16 @@
         <file>icons/16x16/edit-clear-list.png</file>
         <file>icons/16x16/edit-clear-locationbar-ltr.png</file>
         <file>icons/16x16/edit-clear-locationbar-rtl.png</file>
+        <file>icons/16x16/add-holes.png</file>
+        <file>icons/16x16/add-nodes.png</file>
+        <file>icons/16x16/merge-nodes.png</file>
         <file>icons/22x22/edit-clear-locationbar-ltr.png</file>
         <file>icons/22x22/edit-clear-locationbar-rtl.png</file>
         <file>icons/32x32/edit-clear-locationbar-ltr.png</file>
         <file>icons/32x32/edit-clear-locationbar-rtl.png</file>
+        <file>icons/32x32/add-holes.png</file>
+        <file>icons/32x32/add-nodes.png</file>
+        <file>icons/32x32/merge-nodes.png</file>
         <file>../../../data/editors/potlatch.png</file>
         <file>../../../data/editors/merkaartor.png</file>
         <file>../../../data/editors/josm.png</file>
