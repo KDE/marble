@@ -40,8 +40,16 @@ MarbleServerLayout::MarbleServerLayout( GeoSceneTiled *textureLayer )
 
 QUrl MarbleServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
+    const QString path = QString( "%1maps/%2/%3/%4/%4_%5.%6" )
+        .arg( prototypeUrl.path() )
+        .arg( m_textureLayer->sourceDir() )
+        .arg( id.zoomLevel() )
+        .arg( id.y(), tileDigits, 10, QChar('0') )
+        .arg( id.x(), tileDigits, 10, QChar('0') )
+        .arg( m_textureLayer->fileFormat().toLower() );
+
     QUrl url = prototypeUrl;
-    url.setPath( url.path() + m_textureLayer->relativeTileFileName( id ) );
+    url.setPath( path );
 
     return url;
 }
