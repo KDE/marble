@@ -86,7 +86,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
         return invalidElevationData;
     }
 
-    const int tileZoomLevel = d->m_tileLoader.maximumTileLevel( *( d->m_textureLayer ) );
+    const int tileZoomLevel = TileLoader::maximumTileLevel( *( d->m_textureLayer ) );
     Q_ASSERT( tileZoomLevel == 9 );
 
     const int width = d->m_textureLayer->tileSize().width();
@@ -165,7 +165,7 @@ QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLon, qreal fr
         return QList<GeoDataCoordinates>();
     }
 
-    const int tileZoomLevel = d->m_tileLoader.maximumTileLevel( *( d->m_textureLayer ) );
+    const int tileZoomLevel = TileLoader::maximumTileLevel( *( d->m_textureLayer ) );
     const int width = d->m_textureLayer->tileSize().width();
     const int numTilesX = TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(), tileZoomLevel );
 
