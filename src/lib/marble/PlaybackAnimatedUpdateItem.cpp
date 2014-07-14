@@ -88,7 +88,6 @@ void PlaybackAnimatedUpdateItem::play()
     }
 }
 
-
 GeoDataFeature* PlaybackAnimatedUpdateItem::findFeature(GeoDataFeature* feature, const QString& id ) const
 {
     if ( feature && feature->id() == id ){

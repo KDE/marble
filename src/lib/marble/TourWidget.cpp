@@ -21,6 +21,7 @@
 #include "GeoDataCamera.h"
 #include "GeoDataTourControl.h"
 #include "GeoDataSoundCue.h"
+#include "GeoDataAnimatedUpdate.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "MarbleModel.h"
@@ -245,11 +246,32 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
 
         QIcon const icon = QIcon( ":/marble/audio-x-generic.png" );
         painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
+    } else if ( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ){
+        GeoDataAnimatedUpdate *animUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
+        GeoDataUpdate *update = animUpdate->update();
+        QString text;
+        if( update ){
+            label.setHtml( tr( "Update items" ) );
+        }
+
+        painter->save();
+        painter->translate( labelRect.topLeft() );
+        painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
+        label.documentLayout()->draw( painter, paintContext );
+        painter->restore();
+
+        button.icon = QIcon( ":/marble/document-edit.png" );
+        QRect const buttonRect = position( EditButton, option );
+        button.rect = buttonRect;
+        button.state &= ~QStyle::State_Enabled & ~QStyle::State_Sunken;
+
+        QIcon const icon = QIcon( ":/marble/player-time.png" );
+        painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
     }
     QApplication::style()->drawControl( QStyle::CE_PushButton, &button, painter );
 }
 
-QRect TourItemDelegate::position(Element element, const QStyleOptionViewItem &option )
+QRect TourItemDelegate::position( Element element, const QStyleOptionViewItem &option )
 {
     QPoint const topCol1 = option.rect.topLeft() + QPoint(10, 10);
     QPoint const topCol2 = topCol1 + QPoint(30, 0);
