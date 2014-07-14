@@ -14,4 +14,6 @@ set( panoramio_SRCS PanoramioPlugin.cpp
                     PanoramioWidget.cpp
                     jsonparser.cpp )
 
+qt_add_resources( panoramio_SRCS panoramio.qrc )
+
 marble_add_plugin( Panoramio ${panoramio_SRCS} )

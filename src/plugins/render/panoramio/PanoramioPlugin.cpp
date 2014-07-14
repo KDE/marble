@@ -48,7 +48,7 @@ QString PanoramioPlugin::description() const
     
 QIcon PanoramioPlugin::icon() const
 {
-    return QIcon();
+    return QIcon( ":/icons/panoramio.png" );
 }
 
 
