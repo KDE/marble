@@ -31,7 +31,7 @@ BBCItemGetter::~BBCItemGetter()
 {
 }
 
-void BBCItemGetter::setSchedule( const GeoDataLatLonAltBox& box,
+void BBCItemGetter::setSchedule( const GeoDataLatLonBox& box,
                                  qint32 number )
 {
     m_scheduleMutex.lock();
@@ -74,9 +74,9 @@ void BBCItemGetter::work()
     }
 
     m_scheduleMutex.lock();
-    GeoDataLatLonAltBox box = m_scheduledBox;
+    GeoDataLatLonBox box = m_scheduledBox;
     qint32 number = m_scheduledNumber;
-    m_scheduledBox = GeoDataLatLonAltBox();
+    m_scheduledBox = GeoDataLatLonBox();
     m_scheduledNumber = 0;
     m_scheduleMutex.unlock();
 
