@@ -109,7 +109,7 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
 
 EditPolygonDialog::~EditPolygonDialog()
 {
-    // nothing to do
+    delete d;
 }
 
 void EditPolygonDialog::updatePolygon()
