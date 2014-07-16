@@ -2,6 +2,7 @@
 Type=Service
 Name=GPX Geographic Data
 Name[da]=GPX geografiske data
+Name[en_GB]=GPX Geographic Data
 Name[es]=Datos geográficos GPX
 Name[fi]=GPX-paikkatieto
 Name[fr]=Données géographiques GPX
@@ -12,6 +13,7 @@ Name[pl]=Dane geograficzne GPX
 Name[pt]=Dados Geográficos em GPX
 Name[pt_BR]=Dados geográficos em GPX
 Name[sk]=Zemepisné dáta GPX
+Name[sl]=Geografski podatki GPX
 Name[sv]=GPX geografisk data
 Name[uk]=географічні дані GPX
 Name[x-test]=xxGPX Geographic Dataxx

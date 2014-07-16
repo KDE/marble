@@ -2,6 +2,7 @@
 Type=Service
 Name=OSM Data
 Name[da]=OSM-data
+Name[en_GB]=OSM Data
 Name[es]=Datos OSM
 Name[fi]=OSM-data
 Name[fr]=Données OSM
@@ -12,6 +13,7 @@ Name[pl]=Dane OSM
 Name[pt]=Dados do OSM
 Name[pt_BR]=Dados do OSM
 Name[sk]=Dáta OSM
+Name[sl]=Podatki OSM
 Name[sv]=OSM-data
 Name[uk]=дані OSM
 Name[x-test]=xxOSM Dataxx

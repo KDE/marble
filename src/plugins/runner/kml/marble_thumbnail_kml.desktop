@@ -2,6 +2,7 @@
 Type=Service
 Name=KML Geographic Data
 Name[da]=KML geografiske data
+Name[en_GB]=KML Geographic Data
 Name[es]=Datos geográficos KML
 Name[fi]=KML-paikkatieto
 Name[fr]=Données géographiques KML
@@ -12,6 +13,7 @@ Name[pl]=Dane geograficzne KML
 Name[pt]=Dados Geográficos em KML
 Name[pt_BR]=Dados geográficos em KML
 Name[sk]=Zemepisné dáta KML
+Name[sl]=Geografski podatki KML
 Name[sv]=KML geografisk data
 Name[uk]=географічні дані KML
 Name[x-test]=xxKML Geographic Dataxx

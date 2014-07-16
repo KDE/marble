@@ -2,6 +2,7 @@
 Type=Service
 Name=ESRI Shapefile
 Name[da]=ESRI-shapefil
+Name[en_GB]=ESRI Shapefile
 Name[es]=Archivo de formas ESRI
 Name[fi]=ESRI Shapefile
 Name[fr]=Fichier de formes ESRI
@@ -11,6 +12,7 @@ Name[pl]=Plik kształtu ESRI
 Name[pt]=Ficheiro de formas da ESRI
 Name[pt_BR]=Shapefile ESRI
 Name[sk]=Súbor tvarov ESRI
+Name[sl]=ESRI Shapefile
 Name[sv]=ESRI-formfil
 Name[uk]=файл форми ESRI
 Name[x-test]=xxESRI Shapefilexx
