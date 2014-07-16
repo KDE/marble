@@ -29,6 +29,12 @@
 !ifndef srcdir
 !define srcdir "C:\Program Files\marble"
 !endif
+
+; change this to wherever Qt is installed
+!ifndef qtdir
+!define qtdir "C:\Qt\4.8.6\bin"
+!endif
+
  
 !define company "KDE"
  
@@ -167,8 +173,18 @@ File /a /r \
   /x "marble-touch.exe" \
   /x "marble-mobile.exe" \
   /x "RoutinoPlugin.dll" \
-  "${srcdir}\*.*"
-
+  "${srcdir}\*.*" \
+  "${qtdir}\QtCore4.dll" \
+  "${qtdir}\QtDeclarative4.dll" \
+  "${qtdir}\QtGui4.dll" \
+  "${qtdir}\QtNetwork4.dll" \
+  "${qtdir}\QtScript4.dll" \
+  "${qtdir}\QtSql4.dll" \
+  "${qtdir}\QtSvg4.dll" \
+  "${qtdir}\QtWebkit4.dll" \
+  "${qtdir}\QtXml4.dll" \
+  "${qtdir}\phonon4.dll"
+  
 !ifdef licensefile
 File /a "${srcdir}\data\licenses\${licensefile}"
 !endif
