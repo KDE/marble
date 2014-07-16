@@ -16,6 +16,7 @@ Notes:
     <comment xml:lang="da">GPX-geografidata</comment>
     <comment xml:lang="de">GPX-Geografiedaten</comment>
     <comment xml:lang="el">Γεωγραφικά δεδομένα GPX</comment>
+    <comment xml:lang="en_GB">GPX geographic data</comment>
     <comment xml:lang="es">Datos geográficos GPX</comment>
     <comment xml:lang="et">GPX geograafilised andmed</comment>
     <comment xml:lang="fi">GPX-paikkatieto</comment>
@@ -68,6 +69,7 @@ Notes:
     <comment xml:lang="da">OSM-data</comment>
     <comment xml:lang="de">OSM-Daten</comment>
     <comment xml:lang="el">Δεδομένα OSM</comment>
+    <comment xml:lang="en_GB">OSM Data</comment>
     <comment xml:lang="es">Datos OSM</comment>
     <comment xml:lang="et">OSM andmed</comment>
     <comment xml:lang="fi">OSM-data</comment>
@@ -116,6 +118,7 @@ Notes:
     <comment xml:lang="da">ESRI-shapefil</comment>
     <comment xml:lang="de">ESRI-Shapefile</comment>
     <comment xml:lang="el">ESRI Shapefile</comment>
+    <comment xml:lang="en_GB">ESRI Shapefile</comment>
     <comment xml:lang="es">Archivo de formas ESRI</comment>
     <comment xml:lang="et">ESRI Shapefile</comment>
     <comment xml:lang="fi">ESRI Shapefile</comment>
@@ -156,6 +159,7 @@ Notes:
     <comment xml:lang="da">ESRI shapefil-indeks</comment>
     <comment xml:lang="de">ESRI-Shapefile-Index</comment>
     <comment xml:lang="el">ESRI Shapefile Index</comment>
+    <comment xml:lang="en_GB">ESRI Shapefile Index</comment>
     <comment xml:lang="es">Índice de archivo de formas ESRI</comment>
     <comment xml:lang="et">ESRI Shapefile Index</comment>
     <comment xml:lang="fi">ESRI Shapefile -hakemisto</comment>
