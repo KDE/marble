@@ -159,6 +159,7 @@ private:
     void handleSuccessfulReleaseEvent( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
 
     void announceStateChanged( SceneGraphicsItem::ActionState newState );
+    void setupCursor( SceneGraphicsItem *item );
 
     //    void readOsmFile( QIODevice* device, bool flyToFile );
 

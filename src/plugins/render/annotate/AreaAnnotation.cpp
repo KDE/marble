@@ -25,6 +25,7 @@
 #include "SceneGraphicsTypes.h"
 #include "MarbleMath.h"
 
+#include <QDebug>
 
 namespace Marble {
 
@@ -40,6 +41,8 @@ public:
         NodeIsSelected = 0x1,
         NodeIsInnerTmp = 0x2,
         NodeIsMerged = 0x4,
+        NodeIsEditingHighlighted = 0x8,
+        NodeIsMergingHighlighted = 0x10
     };
 
     Q_DECLARE_FLAGS(PolyNodeFlags, PolyNodeFlag)
@@ -47,6 +50,8 @@ public:
     bool isSelected() const;
     bool isInnerTmp() const;
     bool isBeingMerged() const;
+    bool isEditingHighlighted() const;
+    bool isMergingHighlighted() const;
 
     void setFlag( PolyNodeFlag flag, bool enabled = true );
     void setFlags( PolyNodeFlags flags );
@@ -84,6 +89,16 @@ bool PolygonNode::isInnerTmp() const
 bool PolygonNode::isBeingMerged() const
 {
     return m_flags & NodeIsMerged;
+}
+
+bool PolygonNode::isEditingHighlighted() const
+{
+    return m_flags & NodeIsEditingHighlighted;
+}
+
+bool PolygonNode::isMergingHighlighted() const
+{
+    return m_flags & NodeIsMergingHighlighted;
 }
 
 void PolygonNode::setRegion( QRegion newRegion )
@@ -126,6 +141,7 @@ AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark ) :
     m_viewport( 0 ),
     m_regionsInitialized( false ),
     m_request( NoRequest ),
+    m_hoveredNode( -1, -1 ),
     m_interactingObj( InteractingNothing ),
     m_virtualHovered( -1, -1 )
 {
@@ -186,7 +202,33 @@ void AreaAnnotation::dealWithItemChange( const SceneGraphicsItem *other )
 
     // So far we only deal with item changes when hovering virtual nodes, so that
     // they do not remain hovered when changing the item we interact with.
-    if ( state() == SceneGraphicsItem::AddingPolygonNodes ) {
+    if ( state() == SceneGraphicsItem::Editing ) {
+        if ( m_hoveredNode != QPair<int, int>( -1, -1 ) ) {
+            int i = m_hoveredNode.first;
+            int j = m_hoveredNode.second;
+
+            if ( j == -1 ) {
+                m_outerNodesList[i].setFlag( PolygonNode::NodeIsEditingHighlighted, false );
+            } else {
+                m_innerNodesList[i][j].setFlag( PolygonNode::NodeIsEditingHighlighted, false );
+            }
+        }
+
+        m_hoveredNode = QPair<int, int>( -1, -1 );
+    } else if ( state() == SceneGraphicsItem::MergingPolygonNodes ) {
+        if ( m_hoveredNode != QPair<int, int>( -1, -1 ) ) {
+            int i = m_hoveredNode.first;
+            int j = m_hoveredNode.second;
+
+            if ( j == -1 ) {
+                m_outerNodesList[i].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
+            } else {
+                m_innerNodesList[i][j].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
+            }
+        }
+
+        m_hoveredNode = QPair<int, int>( -1, -1 );
+    } else if ( state() == SceneGraphicsItem::AddingPolygonNodes ) {
         m_virtualHovered = QPair<int, int>( -1, -1 );
     }
 }
@@ -286,6 +328,8 @@ void AreaAnnotation::deleteClickedNode()
 
     int i = m_clickedNodeIndexes.first;
     int j = m_clickedNodeIndexes.second;
+
+    m_hoveredNode = QPair<int, int>( -1, -1 );
 
     if ( i != -1 && j == -1 ) {
         if ( m_outerNodesList.size() <= 3 ) {
@@ -429,6 +473,7 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
     // Dealing with cases when exiting a state has an effect on this item.
     if ( previousState == SceneGraphicsItem::Editing ) {
         m_clickedNodeIndexes = QPair<int, int>( -1, -1 );
+        m_hoveredNode = QPair<int, int>( -1, -1 );
     } else if ( previousState == SceneGraphicsItem::AddingPolygonHole ) {
         // Check if a polygon hole was being drawn before changing state.
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
@@ -461,6 +506,7 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
         }
 
         m_firstMergedNode = QPair<int, int>( -1, -1 );
+        m_hoveredNode = QPair<int, int>( -1, -1 );
     } else if ( previousState == SceneGraphicsItem::AddingPolygonNodes ) {
         m_outerVirtualNodes.clear();
         m_innerVirtualNodes.clear();
@@ -473,11 +519,13 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
     if ( state() == SceneGraphicsItem::Editing ) {
         m_interactingObj = InteractingNothing;
         m_clickedNodeIndexes = QPair<int, int>( -1, -1 );
+        m_hoveredNode = QPair<int, int>( -1, -1 );
     } else if ( state() == SceneGraphicsItem::AddingPolygonHole ) {
         // Nothing to do so far when entering this state.
     } else if ( state() == SceneGraphicsItem::MergingPolygonNodes ) {
         m_firstMergedNode = QPair<int, int>( -1, -1 );
         m_secondMergedNode = QPair<int, int>( -1, -1 );
+        m_hoveredNode = QPair<int, int>( -1, -1 );
     } else if ( state() == SceneGraphicsItem::AddingPolygonNodes ) {
         m_virtualHovered = QPair<int, int>( -1, -1 );
         m_adjustedNode = -2;
@@ -554,6 +602,9 @@ void AreaAnnotation::applyChanges( GeoPainter *painter )
         int ss = m_secondMergedNode.second;
 
         if ( ff != -1 && fs == -1 && sf != -1 && ss == -1 ) {
+            m_outerNodesList[sf].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
+            m_hoveredNode = QPair<int, int>( -1, -1 );
+
             // If the first clicked node is selected but the second one is not, make sure the
             // resulting node is selected as well.
             if ( m_outerNodesList.at(ff).isSelected() ) {
@@ -572,6 +623,9 @@ void AreaAnnotation::applyChanges( GeoPainter *painter )
             m_firstMergedNode = QPair<int, int>( -1, -1 );
             m_secondMergedNode = QPair<int, int>( -1, -1 );
         } else if ( ff != -1 && fs != -1 && sf != -1 && ss != -1 ) {
+            m_innerNodesList[sf][ss].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
+            m_hoveredNode = QPair<int, int>( -1, -1 );
+
             if ( m_innerNodesList.at(ff).at(fs).isSelected() ) {
                 m_innerNodesList[sf][ss].setFlag( PolygonNode::NodeIsSelected );
             }
@@ -699,9 +753,47 @@ void AreaAnnotation::drawNodes( GeoPainter *painter )
         } else if ( m_outerNodesList.at(i).isSelected() ) {
             painter->setBrush( selectedColor );
             painter->drawEllipse( outerRing.at(i), d_selectedDim, d_selectedDim );
+
+            if ( m_outerNodesList.at(i).isEditingHighlighted() ||
+                 m_outerNodesList.at(i).isMergingHighlighted() ) {
+                QPen defaultPen = painter->pen();
+                QPen newPen;
+                newPen.setWidth( defaultPen.width() + 3 );
+
+                if ( m_outerNodesList.at(i).isEditingHighlighted() ) {
+                    newPen.setColor( QColor( 0, 255, 255, 120 ) );
+                } else {
+                    newPen.setColor( QColor( 25, 255, 25, 180 ) );
+                }
+
+                painter->setBrush( Qt::NoBrush );
+                painter->setPen( newPen );
+                painter->drawEllipse( outerRing.at(i), d_selectedDim + 2, d_selectedDim + 2 );
+
+                painter->setPen( defaultPen );
+            }
         } else {
             painter->setBrush( regularColor );
             painter->drawEllipse( outerRing.at(i), d_regularDim, d_regularDim );
+
+            if ( m_outerNodesList.at(i).isEditingHighlighted() ||
+                 m_outerNodesList.at(i).isMergingHighlighted() ) {
+                QPen defaultPen = painter->pen();
+                QPen newPen;
+                newPen.setWidth( defaultPen.width() + 3 );
+
+                if ( m_outerNodesList.at(i).isEditingHighlighted() ) {
+                    newPen.setColor( QColor( 0, 255, 255, 120 ) );
+                } else {
+                    newPen.setColor( QColor( 25, 255, 25, 180 ) );
+                }
+
+                painter->setPen( newPen );
+                painter->setBrush( Qt::NoBrush );
+                painter->drawEllipse( outerRing.at(i), d_regularDim + 2, d_regularDim + 2 );
+
+                painter->setPen( defaultPen );
+            }
         }
     }
 
@@ -713,6 +805,25 @@ void AreaAnnotation::drawNodes( GeoPainter *painter )
             } else if ( m_innerNodesList.at(i).at(j).isSelected() ) {
                 painter->setBrush( selectedColor );
                 painter->drawEllipse( innerRings.at(i).at(j), d_selectedDim, d_selectedDim );
+
+                if ( m_innerNodesList.at(i).at(j).isEditingHighlighted() ||
+                     m_innerNodesList.at(i).at(j).isMergingHighlighted() ) {
+                    QPen defaultPen = painter->pen();
+                    QPen newPen;
+                    newPen.setWidth( defaultPen.width() + 3 );
+
+                    if ( m_innerNodesList.at(i).at(j).isEditingHighlighted() ) {
+                        newPen.setColor( QColor( 0, 255, 255, 120 ) );
+                    } else {
+                        newPen.setColor( QColor( 25, 255, 25, 180 ) );
+                    }
+
+                    painter->setBrush( Qt::NoBrush );
+                    painter->setPen( newPen );
+                    painter->drawEllipse( innerRings.at(i).at(j), d_selectedDim + 2, d_selectedDim + 2 );
+
+                    painter->setPen( defaultPen );
+                }
             } else if ( m_innerNodesList.at(i).at(j).isInnerTmp() ) {
                 // Do not draw inner nodes until the 'process' of adding these nodes ends
                 // (aka while being in the 'Adding Polygon Hole').
@@ -720,6 +831,25 @@ void AreaAnnotation::drawNodes( GeoPainter *painter )
             } else {
                 painter->setBrush( regularColor );
                 painter->drawEllipse( innerRings.at(i).at(j), d_regularDim, d_regularDim );
+
+                if ( m_innerNodesList.at(i).at(j).isEditingHighlighted() ||
+                     m_innerNodesList.at(i).at(j).isMergingHighlighted() ) {
+                    QPen defaultPen = painter->pen();
+                    QPen newPen;
+                    newPen.setWidth( defaultPen.width() + 3 );
+
+                    if ( m_innerNodesList.at(i).at(j).isEditingHighlighted() ) {
+                        newPen.setColor( QColor( 0, 255, 255, 120 ) );
+                    } else {
+                        newPen.setColor( QColor( 25, 255, 25, 180 ) );
+                    }
+
+                    painter->setBrush( Qt::NoBrush );
+                    painter->setPen( newPen );
+                    painter->drawEllipse( innerRings.at(i).at(j), d_regularDim + 2, d_regularDim + 2 );
+
+                    painter->setPen( defaultPen );
+                }
             }
         }
     }
@@ -941,8 +1071,9 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
 
         m_movedPointCoords = newCoords;
         return true;
-    } // Just need to add a new if ( m_interactingObj = InteractingNothing ) here if you one wants to
-      // handle polygon hovers in Editing state.
+    } else if ( m_interactingObj == InteractingNothing ) {
+        return dealWithHovering( mouseEvent );
+    }
 
     return false;
 }
@@ -992,18 +1123,6 @@ bool AreaAnnotation::processEditingOnRelease( QMouseEvent *mouseEvent )
 
 bool AreaAnnotation::processAddingHoleOnPress( QMouseEvent *mouseEvent )
 {
-    Q_UNUSED( mouseEvent );
-    return true;
-}
-
-bool AreaAnnotation::processAddingHoleOnMove( QMouseEvent *mouseEvent )
-{
-    Q_UNUSED( mouseEvent );
-    return true;
-}
-
-bool AreaAnnotation::processAddingHoleOnRelease( QMouseEvent *mouseEvent )
-{
     if ( mouseEvent->button() != Qt::LeftButton ) {
         return false;
     }
@@ -1027,6 +1146,18 @@ bool AreaAnnotation::processAddingHoleOnRelease( QMouseEvent *mouseEvent )
     return true;
 }
 
+bool AreaAnnotation::processAddingHoleOnMove( QMouseEvent *mouseEvent )
+{
+    Q_UNUSED( mouseEvent );
+    return true;
+}
+
+bool AreaAnnotation::processAddingHoleOnRelease( QMouseEvent *mouseEvent )
+{
+    Q_UNUSED( mouseEvent );
+    return true;
+}
+
 bool AreaAnnotation::processMergingOnPress( QMouseEvent *mouseEvent )
 {
     Q_UNUSED( mouseEvent );
@@ -1035,13 +1166,11 @@ bool AreaAnnotation::processMergingOnPress( QMouseEvent *mouseEvent )
 
 bool AreaAnnotation::processMergingOnMove( QMouseEvent *mouseEvent )
 {
-    Q_UNUSED( mouseEvent );
-    return true;
+    return dealWithHovering( mouseEvent );
 }
 
 bool AreaAnnotation::processMergingOnRelease( QMouseEvent *mouseEvent )
 {
-    // TODO: Verify if the size becomes smaller than 3.
     if ( mouseEvent->button() != Qt::LeftButton ) {
         return false;
     }
@@ -1234,6 +1363,9 @@ bool AreaAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
 bool AreaAnnotation::processAddingNodesOnMove( QMouseEvent *mouseEvent )
 {
     Q_ASSERT( mouseEvent->button() == Qt::NoButton );
+
+    QPair<int, int> index = virtualNodeContains( mouseEvent->pos() );
+
     // If we are adjusting a virtual node which has just been clicked and became real, just
     // change its coordinates when moving it, as we do with nodes in Editing state on move.
     if ( m_adjustedNode != -2 ) {
@@ -1258,8 +1390,7 @@ bool AreaAnnotation::processAddingNodesOnMove( QMouseEvent *mouseEvent )
 
     // If we are hovering a virtual node, store its index in order to be painted in drawNodes
     // method.
-    } else {
-        QPair<int, int> index = virtualNodeContains( mouseEvent->pos() );
+    } else if ( index != QPair<int, int>( -1, -1 ) ) {
         m_virtualHovered = index;
         return true;
     }
@@ -1273,6 +1404,71 @@ bool AreaAnnotation::processAddingNodesOnRelease( QMouseEvent *mouseEvent )
 {
     Q_UNUSED( mouseEvent );
     return m_adjustedNode == -2;
+}
+
+bool AreaAnnotation::dealWithHovering( QMouseEvent *mouseEvent )
+{
+    PolygonNode::PolyNodeFlag flag = state() == SceneGraphicsItem::Editing ?
+                                                    PolygonNode::NodeIsEditingHighlighted :
+                                                    PolygonNode::NodeIsMergingHighlighted;
+
+    int outerIndex = outerNodeContains( mouseEvent->pos() );
+    if ( outerIndex != -1 ) {
+        if ( !m_outerNodesList.at(outerIndex).isEditingHighlighted() &&
+             !m_outerNodesList.at(outerIndex).isMergingHighlighted() ) {
+            // Deal with the case when two nodes are very close to each other.
+            if ( m_hoveredNode != QPair<int, int>( -1, -1 ) ) {
+                int i = m_hoveredNode.first;
+                int j = m_hoveredNode.second;
+
+                if ( j == -1 ) {
+                    m_outerNodesList[i].setFlag( flag, false );
+                } else {
+                    m_innerNodesList[i][j].setFlag( flag, false );
+                }
+            }
+
+            m_hoveredNode = QPair<int, int>( outerIndex, -1 );
+            m_outerNodesList[outerIndex].setFlag( flag );
+        }
+
+        return true;
+    } else if ( m_hoveredNode != QPair<int, int>( -1, -1 ) && m_hoveredNode.second == -1 ) {
+        m_outerNodesList[m_hoveredNode.first].setFlag( flag, false );
+        m_hoveredNode = QPair<int, int>( -1, -1 );
+
+        return true;
+    }
+
+    QPair<int, int> innerIndex = innerNodeContains( mouseEvent->pos() );
+    if ( innerIndex != QPair<int, int>( -1, -1 ) ) {
+        if ( !m_innerNodesList.at(innerIndex.first).at(innerIndex.second).isEditingHighlighted() &&
+             !m_innerNodesList.at(innerIndex.first).at(innerIndex.second).isMergingHighlighted()) {
+            // Deal with the case when two nodes are very close to each other.
+            if ( m_hoveredNode != QPair<int, int>( -1, -1 ) ) {
+                int i = m_hoveredNode.first;
+                int j = m_hoveredNode.second;
+
+                if ( j == -1 ) {
+                    m_outerNodesList[i].setFlag( flag, false );
+                } else {
+                    m_innerNodesList[i][j].setFlag( flag, false );
+                }
+            }
+
+            m_hoveredNode = innerIndex;
+            m_innerNodesList[innerIndex.first][innerIndex.second].setFlag( flag );
+        }
+
+        return true;
+    } else if ( m_hoveredNode != QPair<int, int>( -1, -1 ) && m_hoveredNode.second != -1 ) {
+        m_innerNodesList[m_hoveredNode.first][m_hoveredNode.second].setFlag( flag, false );
+        m_hoveredNode = QPair<int, int>( -1, -1 );
+
+        return true;
+    }
+
+    return false;
 }
 
 }

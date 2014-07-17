@@ -90,11 +90,16 @@ bool GroundOverlayFrame::mousePressEvent( QMouseEvent *event )
 
 bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
 {
-    if( !m_viewport || m_movedPoint < 0 ) {
+    if ( !m_viewport ) {
         return false;
     }
 
-    if( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+    // Catch hover events.
+    if ( m_movedPoint < 0 ) {
+        return true;
+    }
+
+    if ( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         qreal lon, lat;
         m_viewport->geoCoordinates( event->pos().x(),
                                     event->pos().y(),
@@ -103,26 +108,21 @@ bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
 
         qreal rotatedLon;
         qreal rotatedLat;
-
         rotateAroundCenter( lon, lat, rotatedLon, rotatedLat, m_overlay->latLonBox(), true );
 
         if ( m_movedPoint == NorthWest ) {
             m_overlay->latLonBox().setNorth( rotatedLat );
             m_overlay->latLonBox().setWest( rotatedLon );
-        }
-        if ( m_movedPoint == SouthWest ) {
+        } else if ( m_movedPoint == SouthWest ) {
             m_overlay->latLonBox().setSouth( rotatedLat );
             m_overlay->latLonBox().setWest( rotatedLon );
-        }
-        if ( m_movedPoint == SouthEast ) {
+        } else if ( m_movedPoint == SouthEast ) {
             m_overlay->latLonBox().setSouth( rotatedLat );
             m_overlay->latLonBox().setEast( rotatedLon );
-        }
-        if ( m_movedPoint == NorthEast ) {
+        } else if ( m_movedPoint == NorthEast ) {
             m_overlay->latLonBox().setNorth( rotatedLat );
             m_overlay->latLonBox().setEast( rotatedLon );
-        }
-        if ( m_movedPoint == Polygon ) {
+        } else if ( m_movedPoint == Polygon ) {
 
            qreal centerLonDiff = lon - m_movedPointCoordinates.longitude();
            qreal centerLatDiff = lat - m_movedPointCoordinates.latitude();
@@ -136,7 +136,6 @@ bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
         }
 
         update();
-
         return true;
     }
     return false;

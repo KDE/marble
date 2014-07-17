@@ -183,6 +183,12 @@ private:
     bool polygonContains( const QPoint &point ) const;
 
     /**
+     * @brief It is called from processOnMove functions and deals with polygons
+     * hovering.
+     */
+    bool dealWithHovering( QMouseEvent *mouseEvent );
+
+    /**
      * @brief Each state has its corresponding event handler, since in each state the
      * item may behave differently. These are the event handlers for the Editing state.
      */
@@ -243,6 +249,7 @@ private:
     };
     GeoDataCoordinates       m_movedPointCoords;
     QPair<int, int>          m_clickedNodeIndexes;
+    QPair<int, int>          m_hoveredNode;
     EditingInteractingObject m_interactingObj;
 
     // Used in Merging Nodes state

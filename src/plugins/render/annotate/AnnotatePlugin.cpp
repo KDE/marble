@@ -546,6 +546,7 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
     // it is outside the globe, which is treated above).
     if ( mouseEvent->type() == QEvent::MouseMove && m_movedItem &&
          handleMovingSelectedItem( mouseEvent ) ) {
+        setupCursor( m_movedItem );
         return true;
     }
 
@@ -568,6 +569,8 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
 
         if ( item->sceneEvent( event ) ) {
             m_lastItem = item;
+
+            setupCursor( item );
 
             if ( mouseEvent->type() == QEvent::MouseButtonPress ) {
                 handleSuccessfulPressEvent( mouseEvent, item );
@@ -592,50 +595,57 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
 
 bool AnnotatePlugin::handleAddingPlacemark( QMouseEvent *mouseEvent )
 {
-    if ( mouseEvent->button() != Qt::LeftButton ) {
-        return false;
+    if ( mouseEvent->type() == QEvent::MouseMove ) {
+        setupCursor( 0 );
+        return true;
+    } if ( mouseEvent->button() == Qt::LeftButton &&
+           mouseEvent->type() == QEvent::MouseButtonPress ) {
+        qreal lon, lat;
+        m_marbleWidget->geoCoordinates( mouseEvent->pos().x(),
+                                        mouseEvent->pos().y(),
+                                        lon, lat,
+                                        GeoDataCoordinates::Radian );
+        const GeoDataCoordinates coords( lon, lat );
+
+
+        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        placemark->setCoordinate( coords );
+        m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, placemark );
+
+        PlacemarkTextAnnotation *textAnnotation = new PlacemarkTextAnnotation( placemark );
+        m_graphicsItems.append( textAnnotation );
+
+        emit placemarkAdded();
+        return true;
     }
 
-    qreal lon, lat;
-    m_marbleWidget->geoCoordinates( mouseEvent->pos().x(),
-                                    mouseEvent->pos().y(),
-                                    lon, lat,
-                                    GeoDataCoordinates::Radian );
-    const GeoDataCoordinates coords( lon, lat );
-
-
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
-    placemark->setCoordinate( coords );
-    m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, placemark );
-
-    PlacemarkTextAnnotation *textAnnotation = new PlacemarkTextAnnotation( placemark );
-    m_graphicsItems.append( textAnnotation );
-
-    emit placemarkAdded();
-    return true;
+    return false;
 }
 
 bool AnnotatePlugin::handleAddingPolygon( QMouseEvent *mouseEvent )
 {
-    if ( mouseEvent->button() != Qt::LeftButton ||
-         mouseEvent->type() != QEvent::MouseButtonPress ) {
-        return false;
+    if ( mouseEvent->type() == QEvent::MouseMove ) {
+        setupCursor( 0 );
+        return true;
+    } else if ( mouseEvent->button() == Qt::LeftButton &&
+                mouseEvent->type() == QEvent::MouseButtonPress ) {
+        qreal lon, lat;
+        m_marbleWidget->geoCoordinates( mouseEvent->pos().x(),
+                                        mouseEvent->pos().y(),
+                                        lon, lat,
+                                        GeoDataCoordinates::Radian );
+        const GeoDataCoordinates coords( lon, lat );
+
+
+        m_marbleWidget->model()->treeModel()->removeFeature( m_polygonPlacemark );
+        GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( m_polygonPlacemark->geometry() );
+        poly->outerBoundary().append( coords );
+        m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polygonPlacemark );
+
+        return true;
     }
 
-    qreal lon, lat;
-    m_marbleWidget->geoCoordinates( mouseEvent->pos().x(),
-                                    mouseEvent->pos().y(),
-                                    lon, lat,
-                                    GeoDataCoordinates::Radian );
-    const GeoDataCoordinates coords( lon, lat );
-
-
-    m_marbleWidget->model()->treeModel()->removeFeature( m_polygonPlacemark );
-    GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( m_polygonPlacemark->geometry() );
-    poly->outerBoundary().append( coords );
-    m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polygonPlacemark );
-
-    return true;
+    return false;
 }
 
 void AnnotatePlugin::handleReleaseOverlay( QMouseEvent *mouseEvent )
@@ -658,6 +668,7 @@ void AnnotatePlugin::handleReleaseOverlay( QMouseEvent *mouseEvent )
             if ( mouseEvent->button() == Qt::LeftButton ) {
                 if ( m_removingItem ) {
                     m_marbleWidget->model()->treeModel()->removeFeature( overlay );
+                    emit itemRemoved();
                 } else {
                     displayOverlayFrame( overlay );
                 }
@@ -789,19 +800,23 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
 
     if ( widget ) {
         QActionGroup *group = new QActionGroup( 0 );
-        group->setExclusive( false );
+        group->setExclusive( true );
 
         // QActionGroup *nonExclusiveGroup = new QActionGroup(0);
         // nonExclusiveGroup->setExclusive( false );
 
 
-        QAction *enableInputAction = new QAction( this );
-        enableInputAction->setText( tr("Enable Moving Map") );
-        enableInputAction->setCheckable( true );
-        enableInputAction->setChecked( true );
-        enableInputAction->setIcon( QIcon( ":/icons/hand.png") );
-        connect( enableInputAction, SIGNAL(toggled(bool)),
-                 widget, SLOT(setInputEnabled(bool)) );
+        QAction *selectItem = new QAction( this );
+        selectItem->setText( tr("Select item") );
+        selectItem->setCheckable( true );
+        selectItem->setChecked( true );
+        selectItem->setIcon( QIcon( ":/icons/hand.png") );
+        connect( this, SIGNAL(placemarkAdded()),
+                 selectItem, SLOT(toggle()) );
+        connect( this, SIGNAL(overlayAdded()),
+                 selectItem, SLOT(toggle()) );
+        connect( this, SIGNAL(itemRemoved()),
+                 selectItem, SLOT(toggle()) );
 
         QAction *drawPolygon = new QAction( this );
         drawPolygon->setText( tr("Add Polygon") );
@@ -812,22 +827,22 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
 
         QAction *addHole = new QAction( this );
         addHole->setText( tr("Add Polygon Hole") );
-        addHole->setIcon( QIcon(":/icons/16x16/add-holes.png") );
         addHole->setCheckable( true );
+        addHole->setIcon( QIcon(":/icons/16x16/add-holes.png") );
         connect( addHole, SIGNAL(toggled(bool)),
                  this, SLOT(setAddingPolygonHole(bool)) );
 
         QAction *mergeNodes = new QAction( this );
         mergeNodes->setText( tr("Merge Nodes") );
-        mergeNodes->setIcon( QIcon(":/icons/16x16/merge-nodes.png") );
         mergeNodes->setCheckable( true );
+        mergeNodes->setIcon( QIcon(":/icons/16x16/merge-nodes.png") );
         connect( mergeNodes, SIGNAL(toggled(bool)),
                  this, SLOT(setMergingNodes(bool)) );
 
         QAction *addNodes = new QAction( this );
         addNodes->setText( tr("Add Nodes") );
-        addNodes->setIcon( QIcon(":/icons/16x16/add-nodes.png") );
         addNodes->setCheckable( true );
+        addNodes->setIcon( QIcon(":/icons/16x16/add-nodes.png") );
         connect( addNodes, SIGNAL(toggled(bool)),
                  this, SLOT(setAddingNodes(bool)) );
 
@@ -837,8 +852,6 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
         addPlacemark->setIcon( QIcon( ":/icons/draw-placemark.png") );
         connect( addPlacemark, SIGNAL(toggled(bool)),
                  this, SLOT(setAddingPlacemark(bool)) );
-        connect( this, SIGNAL(placemarkAdded()) ,
-                 addPlacemark, SLOT(toggle()) );
 
         QAction *addOverlay = new QAction( this );
         addOverlay->setText( tr("Add Ground Overlay") );
@@ -848,8 +861,6 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
                  this, SLOT(setAddingOverlay(bool)) );
         connect( addOverlay, SIGNAL(toggled(bool)),
                  this, SLOT(addOverlay()) );
-        connect( this, SIGNAL(overlayAdded()),
-                 addOverlay, SLOT(toggle()) );
 
         QAction *removeItem = new QAction( this );
         removeItem->setText( tr("Remove Item") );
@@ -857,8 +868,6 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
         removeItem->setIcon( QIcon( ":/icons/edit-delete-shred.png") );
         connect( removeItem, SIGNAL(toggled(bool)),
                  this, SLOT(setRemovingItems(bool)) );
-        connect( this, SIGNAL(itemRemoved()),
-                 removeItem, SLOT(toggle()) );
 
         QAction *loadAnnotationFile = new QAction( this );
         loadAnnotationFile->setText( tr("Load Annotation File" ) );
@@ -880,6 +889,14 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
         connect( clearAnnotations, SIGNAL(triggered()),
                  this, SLOT(clearAnnotations()) );
 
+
+        // QAction* downloadOsm = new QAction( this );
+        // downloadOsm->setText( tr("Download Osm File") );
+        // downloadOsm->setToolTip(tr("Download Osm File for selected area"));
+        // connect( downloadOsm, SIGNAL(triggered()),
+        //          this, SLOT(downloadOsmFile()) );
+
+
         QAction *beginSeparator = new QAction( this );
         beginSeparator->setSeparator( true );
         QAction *polygonEndSeparator = new QAction( this );
@@ -892,14 +909,7 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
         endSeparator->setSeparator( true );
 
 
-        // QAction* downloadOsm = new QAction( this );
-        // downloadOsm->setText( tr("Download Osm File") );
-        // downloadOsm->setToolTip(tr("Download Osm File for selected area"));
-        // connect( downloadOsm, SIGNAL(triggered()),
-        //          this, SLOT(downloadOsmFile()) );
-
-
-        group->addAction( enableInputAction );
+        group->addAction( selectItem );
         group->addAction( beginSeparator );
         group->addAction( drawPolygon );
         group->addAction( addHole );
@@ -1176,6 +1186,14 @@ void AnnotatePlugin::announceStateChanged( SceneGraphicsItem::ActionState newSta
     }
 }
 
+void AnnotatePlugin::setupCursor( SceneGraphicsItem *item )
+{
+    if ( !item || item->state() == SceneGraphicsItem::AddingPolygonNodes ) {
+        m_marbleWidget->setCursor( Qt::DragCopyCursor );
+    } else { // Maybe use different cursors, but so far I cannot find anything which fits better.
+        m_marbleWidget->setCursor( Qt::PointingHandCursor );
+    }
+}
 
 //void AnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
 //{
