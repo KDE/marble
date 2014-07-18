@@ -42,6 +42,7 @@ private:
     QList<GeoDataFeature*> m_createdObjects;
     QList<GeoDataFeature*> m_deletedObjects;
     GeoDataDocument* m_rootDocument;
+    bool m_playing;
 };
 }
 #endif

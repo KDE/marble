@@ -19,6 +19,7 @@ PlaybackAnimatedUpdateItem::PlaybackAnimatedUpdateItem( GeoDataAnimatedUpdate* a
 {
     m_animatedUpdate = animatedUpdate;
     m_rootDocument = rootDocument( m_animatedUpdate );
+    m_playing = false;
 }
 
 const GeoDataAnimatedUpdate* PlaybackAnimatedUpdateItem::animatedUpdate() const
@@ -33,6 +34,11 @@ double PlaybackAnimatedUpdateItem::duration() const
 
 void PlaybackAnimatedUpdateItem::play()
 {
+    if( m_playing ){
+        return;
+    }
+    m_playing = true;
+
     if ( !m_rootDocument || !m_animatedUpdate->update() ) {
         return;
     }
@@ -127,11 +133,16 @@ void PlaybackAnimatedUpdateItem::pause()
 void PlaybackAnimatedUpdateItem::seek( double position )
 {
     Q_UNUSED( position );
-    //do nothing
+    play();
 }
 
 void PlaybackAnimatedUpdateItem::stop()
 {
+    if( !m_playing ){
+        return;
+    }
+    m_playing = false;
+
     /** @todo We need a more robust approach to reverting changes */
 
     foreach( GeoDataFeature* feature, m_createdObjects ) {
