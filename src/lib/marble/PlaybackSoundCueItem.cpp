@@ -30,13 +30,6 @@ const GeoDataSoundCue* PlaybackSoundCueItem::soundCue() const
     return m_soundCue;
 }
 
-#ifdef HAVE_PHONON
-Phonon::MediaObject* PlaybackSoundCueItem::mediaObject()
-{
-    return m_mediaObject;
-}
-#endif
-
 double PlaybackSoundCueItem::duration() const
 {
 #ifdef HAVE_PHONON

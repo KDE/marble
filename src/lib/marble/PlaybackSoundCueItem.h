@@ -28,9 +28,6 @@ class PlaybackSoundCueItem : public PlaybackItem
 public:
     PlaybackSoundCueItem( const GeoDataSoundCue* soundCue );
     const GeoDataSoundCue* soundCue() const;
-#ifdef HAVE_PHONON
-    Phonon::MediaObject* mediaObject();
-#endif
     double duration() const;
     void play();
     void pause();
