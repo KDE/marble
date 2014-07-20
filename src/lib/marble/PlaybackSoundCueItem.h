@@ -36,7 +36,7 @@ public:
 private:
     const GeoDataSoundCue* m_soundCue;
 #ifdef HAVE_PHONON
-    Phonon::MediaObject* m_mediaObject;
+    Phonon::MediaObject m_mediaObject;
 #endif
 };
 }
