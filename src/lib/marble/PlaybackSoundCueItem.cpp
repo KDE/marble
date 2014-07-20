@@ -10,6 +10,8 @@
 
 #include "PlaybackSoundCueItem.h"
 
+#include <QUrl>
+
 namespace Marble
 {
 PlaybackSoundCueItem::PlaybackSoundCueItem( const GeoDataSoundCue* soundCue )

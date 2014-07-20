@@ -17,8 +17,8 @@
 #include "config-phonon.h"
 
 #ifdef HAVE_PHONON
-#include <Phonon/MediaObject>
-#include <Phonon/AudioOutput>
+#include <phonon/MediaObject>
+#include <phonon/AudioOutput>
 #endif
 
 namespace Marble
