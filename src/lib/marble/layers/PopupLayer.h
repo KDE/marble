@@ -18,6 +18,8 @@
 #include <QObject>
 #include <QUrl>
 
+class QSizeF;
+
 namespace Marble
 {
 
