@@ -9,6 +9,10 @@
 //
 
 #include "PlaybackAnimatedUpdateItem.h"
+
+#include "GeoDataAnimatedUpdate.h"
+#include "GeoDataDocument.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
 
 #include <QString>

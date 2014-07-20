@@ -12,15 +12,15 @@
 #define PLAYBACKANIMATEDUPDATEITEM_H
 
 #include "PlaybackItem.h"
-#include "GeoDataAnimatedUpdate.h"
-#include "GeoDataDocument.h"
-#include "GeoDataFolder.h"
-#include "GeoDataGroundOverlay.h"
-#include "GeoDataScreenOverlay.h"
-#include "GeoDataPhotoOverlay.h"
 
 namespace Marble
 {
+
+class GeoDataAnimatedUpdate;
+class GeoDataDocument;
+class GeoDataFeature;
+class GeoDataObject;
+
 class PlaybackAnimatedUpdateItem : public PlaybackItem
 {
     Q_OBJECT
@@ -44,5 +44,6 @@ private:
     GeoDataDocument* m_rootDocument;
     bool m_playing;
 };
+
 }
 #endif

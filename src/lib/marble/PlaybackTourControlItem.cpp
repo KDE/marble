@@ -10,6 +10,8 @@
 
 #include "PlaybackTourControlItem.h"
 
+#include "GeoDataTourControl.h"
+
 namespace Marble
 {
 

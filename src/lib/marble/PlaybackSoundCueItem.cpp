@@ -10,6 +10,12 @@
 
 #include "PlaybackSoundCueItem.h"
 
+#include "GeoDataSoundCue.h"
+
+#ifdef HAVE_PHONON
+#include <phonon/AudioOutput>
+#endif
+
 #include <QUrl>
 
 namespace Marble

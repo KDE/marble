@@ -12,17 +12,18 @@
 #define PLAYBACKSOUNDCUEITEM_H
 
 #include "PlaybackItem.h"
-#include "GeoDataSoundCue.h"
 
 #include "config-phonon.h"
 
 #ifdef HAVE_PHONON
 #include <phonon/MediaObject>
-#include <phonon/AudioOutput>
 #endif
 
 namespace Marble
 {
+
+class GeoDataSoundCue;
+
 class PlaybackSoundCueItem : public PlaybackItem
 {
     Q_OBJECT
@@ -40,5 +41,6 @@ private:
     Phonon::MediaObject m_mediaObject;
 #endif
 };
+
 }
 #endif

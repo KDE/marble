@@ -12,10 +12,12 @@
 #define PLAYBACKTOURCONTROLITEM_H
 
 #include "PlaybackItem.h"
-#include "GeoDataTourControl.h"
 
 namespace Marble
 {
+
+class GeoDataTourControl;
+
 class PlaybackTourControlItem : public PlaybackItem
 {
 public:
@@ -29,5 +31,6 @@ public:
 private:
     const GeoDataTourControl* m_tourControl;
 };
+
 }
 #endif

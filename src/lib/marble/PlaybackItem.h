@@ -11,15 +11,15 @@
 #ifndef PLAYBACKITEM_H
 #define PLAYBACKITEM_H
 
-#include "GeoDataCoordinates.h"
-#include "GeoDataPlacemark.h"
 #include <QObject>
 
 namespace Marble
 {
 
 class GeoDataContainer;
+class GeoDataCoordinates;
 class GeoDataFeature;
+class GeoDataPlacemark;
 
 class PlaybackItem : public QObject
 {
