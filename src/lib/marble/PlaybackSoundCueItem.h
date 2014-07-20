@@ -25,6 +25,7 @@ namespace Marble
 {
 class PlaybackSoundCueItem : public PlaybackItem
 {
+    Q_OBJECT
 public:
     PlaybackSoundCueItem( const GeoDataSoundCue* soundCue );
     const GeoDataSoundCue* soundCue() const;

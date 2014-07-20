@@ -66,3 +66,5 @@ void PlaybackSoundCueItem::stop()
 }
 
 }
+
+#include "PlaybackSoundCueItem.moc"
