@@ -13,6 +13,8 @@
 #ifndef AREAANNOTATION_H
 #define AREAANNOTATION_H
 
+#include <QPointer>
+
 #include "SceneGraphicsItem.h"
 #include "GeoDataCoordinates.h"
 
@@ -21,6 +23,7 @@ namespace Marble
 {
 
 class PolygonNode;
+class MergingNodesAnimation;
 
 /**
  * @brief The AreaAnnotation class controls everything related to Polygons Editing Mode.
@@ -29,6 +32,8 @@ class PolygonNode;
  */
 class AreaAnnotation : public SceneGraphicsItem
 {
+    friend class MergingNodesAnimation;
+
 public:
     explicit AreaAnnotation( GeoDataPlacemark *placemark );
 
@@ -45,6 +50,7 @@ public:
         InvalidShapeWarning,
         ShowPolygonRmbMenu,
         ShowNodeRmbMenu,
+        StartAnimation,
         RemovePolygonRequest
     };
 
@@ -69,6 +75,12 @@ public:
      * AddingPolygonNodes state (@see SceneGraphicsItem::dealWithItemChange documentation).
      */
     virtual void dealWithItemChange( const SceneGraphicsItem *other );
+
+    /**
+     * @brief Changes the busy state of the object according to @p enabled. It is mostly used
+     * by Annotate Plugin to not send events to this object anymore.
+     */
+    void setBusy( bool enabled );
 
     /**
      * @brief Returns the widget request.
@@ -109,6 +121,12 @@ public:
     bool clickedNodeIsSelected() const;
 
     /**
+     * @brief Returns the animation to be handled by a QObject which can connect signals
+     * and slots.
+     */
+    QPointer<MergingNodesAnimation> animation();
+
+    /**
      * @brief Provides information for downcasting a SceneGraphicsItem.
      */
     virtual const char *graphicType() const;
@@ -144,15 +162,6 @@ private:
      * @see updateRegions() method for more detailed explanation.
      */
     void setupRegionsLists( GeoPainter *painter );
-
-    /**
-     * @brief This function alongside the event handler methods is where most of nodes
-     * regions changes take place. Since the PolygonNode instances are not created at
-     * each ::paint call (only their associated regions are modified) and since we need
-     * the GeoPainter in order to update these regions, this function completes the
-     * changes from event handlers.
-     */
-    void applyChanges( GeoPainter *painter );
 
     /**
      * @brief As briefly mentioned above, the PolygonNodes instances are not created at
@@ -233,6 +242,7 @@ private:
     const GeoPainter     *m_geopainter;
     const ViewportParams *m_viewport;
     bool                  m_regionsInitialized;
+    bool                  m_busy;
     MarbleWidgetRequest   m_request;
 
     QList<PolygonNode>          m_outerNodesList;
@@ -255,7 +265,7 @@ private:
     // Used in Merging Nodes state
     QPair<int, int>    m_firstMergedNode;
     QPair<int, int>    m_secondMergedNode;
-    GeoDataCoordinates m_resultingCoords;
+    QPointer<MergingNodesAnimation> m_animation;
 
     // Used in Adding Nodes state
     QPair<int, int> m_virtualHovered;

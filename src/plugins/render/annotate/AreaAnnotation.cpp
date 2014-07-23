@@ -24,18 +24,14 @@
 #include "ViewportParams.h"
 #include "SceneGraphicsTypes.h"
 #include "MarbleMath.h"
+#include "MergingNodesAnimation.h"
 
-#include <QDebug>
 
 namespace Marble {
 
 
 class PolygonNode {
-
 public:
-    explicit PolygonNode( QRegion region );
-    ~PolygonNode();
-
     enum PolyNodeFlag {
         NoOption = 0x0,
         NodeIsSelected = 0x1,
@@ -44,14 +40,18 @@ public:
         NodeIsEditingHighlighted = 0x8,
         NodeIsMergingHighlighted = 0x10
     };
-
     Q_DECLARE_FLAGS(PolyNodeFlags, PolyNodeFlag)
+
+    explicit PolygonNode( QRegion region, PolyNodeFlags flags = 0 );
+    ~PolygonNode();
 
     bool isSelected() const;
     bool isInnerTmp() const;
     bool isBeingMerged() const;
     bool isEditingHighlighted() const;
     bool isMergingHighlighted() const;
+
+    PolyNodeFlags flags() const;
 
     void setFlag( PolyNodeFlag flag, bool enabled = true );
     void setFlags( PolyNodeFlags flags );
@@ -64,9 +64,9 @@ private:
     PolyNodeFlags m_flags;
 };
 
-PolygonNode::PolygonNode( QRegion region ) :
+PolygonNode::PolygonNode( QRegion region, PolyNodeFlags flags ) :
     m_region( region ),
-    m_flags( NoOption )
+    m_flags( flags )
 {
     // nothing to do
 }
@@ -106,6 +106,11 @@ void PolygonNode::setRegion( QRegion newRegion )
     m_region = newRegion;
 }
 
+PolygonNode::PolyNodeFlags PolygonNode::flags() const
+{
+    return m_flags;
+}
+
 void PolygonNode::setFlag( PolyNodeFlag flag, bool enabled )
 {
     if ( enabled ) {
@@ -140,6 +145,7 @@ AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark ) :
     m_geopainter( 0 ),
     m_viewport( 0 ),
     m_regionsInitialized( false ),
+    m_busy( false ),
     m_request( NoRequest ),
     m_hoveredNode( -1, -1 ),
     m_interactingObj( InteractingNothing ),
@@ -150,7 +156,7 @@ AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark ) :
 
 AreaAnnotation::~AreaAnnotation()
 {
-    // nothing to do
+    delete m_animation;
 }
 
 void AreaAnnotation::paint( GeoPainter *painter, const ViewportParams *viewport )
@@ -164,7 +170,6 @@ void AreaAnnotation::paint( GeoPainter *painter, const ViewportParams *viewport 
         setupRegionsLists( painter );
         m_regionsInitialized = true;
     } else {
-        applyChanges( painter );
         updateRegions( painter );
     }
 
@@ -230,6 +235,19 @@ void AreaAnnotation::dealWithItemChange( const SceneGraphicsItem *other )
         m_hoveredNode = QPair<int, int>( -1, -1 );
     } else if ( state() == SceneGraphicsItem::AddingPolygonNodes ) {
         m_virtualHovered = QPair<int, int>( -1, -1 );
+    }
+}
+
+void AreaAnnotation::setBusy( bool enabled )
+{
+    m_busy = enabled;
+
+    if ( !enabled ) {
+        if ( state() == SceneGraphicsItem::MergingPolygonNodes ) {
+
+        }
+
+        delete m_animation;
     }
 }
 
@@ -405,9 +423,14 @@ bool AreaAnnotation::clickedNodeIsSelected() const
            ( i != -1 && j != -1 && m_innerNodesList.at(i).at(j).isSelected() );
 }
 
+QPointer<MergingNodesAnimation> AreaAnnotation::animation()
+{
+    return m_animation;
+}
+
 bool AreaAnnotation::mousePressEvent( QMouseEvent *event )
 {
-    if ( !m_viewport || !m_geopainter ) {
+    if ( !m_viewport || !m_geopainter || m_busy ) {
         return false;
     }
 
@@ -428,7 +451,7 @@ bool AreaAnnotation::mousePressEvent( QMouseEvent *event )
 
 bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
 {
-    if ( !m_viewport || !m_geopainter ) {
+    if ( !m_viewport || !m_geopainter || m_busy ) {
         return false;
     }
 
@@ -449,7 +472,7 @@ bool AreaAnnotation::mouseMoveEvent( QMouseEvent *event )
 
 bool AreaAnnotation::mouseReleaseEvent( QMouseEvent *event )
 {
-    if ( !m_viewport || !m_geopainter ) {
+    if ( !m_viewport || !m_geopainter || m_busy ) {
         return false;
     }
 
@@ -507,6 +530,7 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
 
         m_firstMergedNode = QPair<int, int>( -1, -1 );
         m_hoveredNode = QPair<int, int>( -1, -1 );
+        delete m_animation;
     } else if ( previousState == SceneGraphicsItem::AddingPolygonNodes ) {
         m_outerVirtualNodes.clear();
         m_innerVirtualNodes.clear();
@@ -526,6 +550,7 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
         m_firstMergedNode = QPair<int, int>( -1, -1 );
         m_secondMergedNode = QPair<int, int>( -1, -1 );
         m_hoveredNode = QPair<int, int>( -1, -1 );
+        m_animation = 0;
     } else if ( state() == SceneGraphicsItem::AddingPolygonNodes ) {
         m_virtualHovered = QPair<int, int>( -1, -1 );
         m_adjustedNode = -2;
@@ -571,31 +596,18 @@ void AreaAnnotation::setupRegionsLists( GeoPainter *painter )
     m_boundariesList.append( painter->regionFromPolygon( outerRing, Qt::OddEvenFill ) );
 }
 
-void AreaAnnotation::applyChanges( GeoPainter *painter )
+void AreaAnnotation::updateRegions( GeoPainter *painter )
 {
+    if ( m_busy ) {
+        return;
+    }
+
     const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( placemark()->geometry() );
     const GeoDataLinearRing &outerRing = polygon->outerBoundary();
     const QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
 
-    if ( state() == SceneGraphicsItem::Editing ) {
-        // Only nodes update is needed, so there is nothing else to do so far.
-    } else if ( state() == SceneGraphicsItem::AddingPolygonHole ) {
-        // If meanwhile a new inner boundary have been added, append an empty list of PolygonNodes.
-        if ( m_innerNodesList.size() < innerRings.size() ) {
-            m_innerNodesList.append( QList<PolygonNode>() );
-        }
-
-        // If meanwhile a new node has been added, append it to the most recent inner boundary from
-        // the inner boundaries regions list.
-        if ( m_innerNodesList.size() &&
-             m_innerNodesList.last().size() < innerRings.last().size() ) {
-            PolygonNode newNode = PolygonNode( painter->regionFromEllipse(
-                                               innerRings.last().last(), regularDim, regularDim ) );
-            newNode.setFlag( PolygonNode::NodeIsInnerTmp );
-            m_innerNodesList.last().append( newNode );
-        }
-    } else if ( state() == SceneGraphicsItem::MergingPolygonNodes ) {
-        // Update the PolygonNodes lists after both nodes to be merged have been selected.
+    if ( state() == SceneGraphicsItem::MergingPolygonNodes ) {
+        // Update the PolygonNodes lists after the animation has finished its execution.
         int ff = m_firstMergedNode.first;
         int fs = m_firstMergedNode.second;
         int sf = m_secondMergedNode.first;
@@ -605,18 +617,11 @@ void AreaAnnotation::applyChanges( GeoPainter *painter )
             m_outerNodesList[sf].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
             m_hoveredNode = QPair<int, int>( -1, -1 );
 
-            // If the first clicked node is selected but the second one is not, make sure the
-            // resulting node is selected as well.
+            // Remove the merging node flag and add the NodeIsSelected flag if either one of the
+            // merged nodes had been selected before merging them.
+            m_outerNodesList[sf].setFlag( PolygonNode::NodeIsMerged, false );
             if ( m_outerNodesList.at(ff).isSelected() ) {
                 m_outerNodesList[sf].setFlag( PolygonNode::NodeIsSelected );
-            }
-
-            if ( m_outerNodesList.at(sf).isSelected() ) {
-                m_outerNodesList[sf].setRegion( painter->regionFromEllipse(
-                                                m_resultingCoords, selectedDim, selectedDim ) );
-            } else {
-                m_outerNodesList[sf].setRegion( painter->regionFromEllipse(
-                                                m_resultingCoords, regularDim, regularDim ) );
             }
             m_outerNodesList.removeAt( ff );
 
@@ -626,16 +631,9 @@ void AreaAnnotation::applyChanges( GeoPainter *painter )
             m_innerNodesList[sf][ss].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
             m_hoveredNode = QPair<int, int>( -1, -1 );
 
+            m_innerNodesList[sf][ss].setFlag( PolygonNode::NodeIsMerged, false );
             if ( m_innerNodesList.at(ff).at(fs).isSelected() ) {
                 m_innerNodesList[sf][ss].setFlag( PolygonNode::NodeIsSelected );
-            }
-
-            if ( m_innerNodesList.at(sf).at(ss).isSelected() ) {
-                m_innerNodesList[sf][ss].setRegion( painter->regionFromEllipse(
-                                                    m_resultingCoords, selectedDim, selectedDim ) );
-            } else {
-                m_innerNodesList[sf][ss].setRegion( painter->regionFromEllipse(
-                                                    m_resultingCoords, regularDim, regularDim ) );
             }
             m_innerNodesList[sf].removeAt( fs );
 
@@ -643,27 +641,8 @@ void AreaAnnotation::applyChanges( GeoPainter *painter )
             m_secondMergedNode = QPair<int, int>( -1, -1 );
         }
     } else if ( state() == SceneGraphicsItem::AddingPolygonNodes ) {
-        // If our outer nodes list has less entries than the polygon's outer boundary, it means that a
-        // virtual node has just been clicked, so make sure its corresponding region is added to the
-        // PolygonNodes list as well.
-        if ( m_outerNodesList.size() < outerRing.size() ) {
-            QRegion newRegion = painter->regionFromEllipse( outerRing.last(), regularDim, regularDim );
-            m_outerNodesList.append( PolygonNode( newRegion ) );
-        }
-
-        for ( int i = 0; i < innerRings.size(); ++i ) {
-            if ( m_innerNodesList.at(i).size() < innerRings.at(i).size() ) {
-                QRegion newRegion = painter->regionFromEllipse( innerRings.at(i).last(),
-                                                                regularDim, regularDim );
-                m_innerNodesList[i].append( PolygonNode( newRegion ) );
-                break;
-            }
-        }
-
-        // All we have to do next is to update the virtual nodes list based on polygon's outer boundary.
-        // It is done here and not in the updateRegions method (althought it would work as well) to
-        // avoid creating this virtual nodes list even when not being in the 'Adding Nodes' state, which
-        // might create overhead.
+        // Create and update virtual nodes lists when being in the AddingPolgonNodes state, to
+        // avoid overhead in other states.
         m_outerVirtualNodes.clear();
         QRegion firstRegion( painter->regionFromEllipse( outerRing.at(0).interpolate(
                                              outerRing.last(), 0.5 ), hoveredDim, hoveredDim ) );
@@ -687,13 +666,7 @@ void AreaAnnotation::applyChanges( GeoPainter *painter )
             }
         }
     }
-}
 
-void AreaAnnotation::updateRegions( GeoPainter *painter )
-{
-    const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( placemark()->geometry() );
-    const GeoDataLinearRing &outerRing = polygon->outerBoundary();
-    const QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
 
     // Update the boundaries list.
     m_boundariesList.clear();
@@ -1037,7 +1010,6 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
 
         const qreal bearing = m_movedPointCoords.bearing( newCoords );
         const qreal distance = distanceSphere( newCoords, m_movedPointCoords );
-
         polygon->outerBoundary().clear();
         polygon->innerBoundaries().clear();
 
@@ -1140,8 +1112,10 @@ bool AreaAnnotation::processAddingHoleOnPress( QMouseEvent *mouseEvent )
     // Check if this is the first node which is being added as a new polygon inner boundary.
     if ( !innerBounds.size() || !m_innerNodesList.last().last().isInnerTmp() ) {
        polygon->innerBoundaries().append( GeoDataLinearRing( Tessellate ) );
+       m_innerNodesList.append( QList<PolygonNode>() );
     }
     innerBounds.last().append( newCoords );
+    m_innerNodesList.last().append( PolygonNode( QRegion(), PolygonNode::NodeIsInnerTmp ) );
 
     return true;
 }
@@ -1160,24 +1134,12 @@ bool AreaAnnotation::processAddingHoleOnRelease( QMouseEvent *mouseEvent )
 
 bool AreaAnnotation::processMergingOnPress( QMouseEvent *mouseEvent )
 {
-    Q_UNUSED( mouseEvent );
-    return true;
-}
-
-bool AreaAnnotation::processMergingOnMove( QMouseEvent *mouseEvent )
-{
-    return dealWithHovering( mouseEvent );
-}
-
-bool AreaAnnotation::processMergingOnRelease( QMouseEvent *mouseEvent )
-{
     if ( mouseEvent->button() != Qt::LeftButton ) {
         return false;
     }
 
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     GeoDataLinearRing initialOuterRing = polygon->outerBoundary();
-    QVector<GeoDataLinearRing> initialInnerRings = polygon->innerBoundaries();
 
     GeoDataLinearRing &outerRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
@@ -1189,13 +1151,20 @@ bool AreaAnnotation::processMergingOnRelease( QMouseEvent *mouseEvent )
         if ( m_firstMergedNode.first == -1 && m_firstMergedNode.second == -1 ) {
             m_firstMergedNode = QPair<int, int>( outerIndex, -1 );
             m_outerNodesList[outerIndex].setFlag( PolygonNode::NodeIsMerged );
-        // If this is the second node to be merged but it is an inner boundary node, raise
-        // the request for showing warning.
+        // If the first selected node was an inner boundary node, raise the request for showing
+        // warning.
         } else if ( m_firstMergedNode.first != -1 && m_firstMergedNode.second != -1 ) {
             m_request = OuterInnerMergingWarning;
             m_innerNodesList[m_firstMergedNode.first][m_firstMergedNode.second].setFlag(
                                                         PolygonNode::NodeIsMerged, false );
-            m_firstMergedNode = QPair<int, int>( -1, -1 );
+
+            if ( m_hoveredNode.first != -1 ) {
+                // We can be sure that the hovered node is an outer node.
+                Q_ASSERT( m_hoveredNode.second == -1 );
+                m_outerNodesList[m_hoveredNode.first].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
+            }
+
+            m_hoveredNode = m_firstMergedNode = QPair<int, int>( -1, -1 );
         } else {
             Q_ASSERT( m_firstMergedNode.first != -1 && m_firstMergedNode.second == -1 );
 
@@ -1213,22 +1182,32 @@ bool AreaAnnotation::processMergingOnRelease( QMouseEvent *mouseEvent )
                 return true;
             }
 
-            m_resultingCoords = outerRing.at(m_firstMergedNode.first).interpolate(
-                                                    outerRing.at(outerIndex), 0.5 );
-            outerRing.at(outerIndex) = m_resultingCoords;
+            outerRing[outerIndex] = outerRing.at(m_firstMergedNode.first).interpolate( outerRing.at(outerIndex),
+                                                                                       0.5 );
             outerRing.remove( m_firstMergedNode.first );
-
             if ( !isValidPolygon() ) {
                 polygon->outerBoundary() = initialOuterRing;
-                polygon->innerBoundaries() = initialInnerRings;
                 m_outerNodesList[m_firstMergedNode.first].setFlag( PolygonNode::NodeIsMerged,  false );
 
-                m_firstMergedNode = QPair<int, int>( -1, -1 );
+                // Remove highlight effect before showing warning
+                if ( m_hoveredNode.first != -1 ) {
+                    m_outerNodesList[m_hoveredNode.first].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
+                }
+
+                m_hoveredNode = m_firstMergedNode = QPair<int, int>( -1, -1 );
                 m_request = InvalidShapeWarning;
                 return true;
             }
 
+            // Do not modify it here. The animation has access to the object. It will modify the polygon.
+            polygon->outerBoundary() = initialOuterRing;
+
+            m_outerNodesList[outerIndex].setFlag( PolygonNode::NodeIsMerged );
             m_secondMergedNode = QPair<int, int>( outerIndex, -1 );
+
+            delete m_animation;
+            m_animation = new MergingNodesAnimation( this );
+            m_request = StartAnimation;
         }
 
         return true;
@@ -1244,18 +1223,29 @@ bool AreaAnnotation::processMergingOnRelease( QMouseEvent *mouseEvent )
         if ( i == -1 && j == -1 ) {
             m_firstMergedNode = innerIndexes;
             m_innerNodesList[innerIndexes.first][innerIndexes.second].setFlag( PolygonNode::NodeIsMerged );
-        // If this is the second selected node but it is an outer boundary node, raise the request for
-        // showing warning.
+        // If the first selected node has been an outer boundary one, raise the request for showing warning.
         } else if ( i != -1 && j == -1 ) {
             m_request = OuterInnerMergingWarning;
             m_outerNodesList[i].setFlag( PolygonNode::NodeIsMerged, false );
+
+            if ( m_hoveredNode.first != -1 ) {
+                // We can now be sure that the highlighted node is a node from polygon's outer boundary
+                Q_ASSERT( m_hoveredNode.second != -1 );
+                m_outerNodesList[m_hoveredNode.first].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
+            }
             m_firstMergedNode = QPair<int, int>( -1, -1 );
         } else {
             Q_ASSERT( i != -1 && j != -1 );
             if ( i != innerIndexes.first ) {
                 m_request = InnerInnerMergingWarning;
                 m_innerNodesList[i][j].setFlag( PolygonNode::NodeIsMerged, false );
-                m_firstMergedNode = QPair<int, int>( -1, -1 );
+
+                if ( m_hoveredNode.first != -1 && m_hoveredNode.second != -1 ) {
+                    m_innerNodesList[m_hoveredNode.first][m_hoveredNode.second].setFlag(
+                                                        PolygonNode::NodeIsMergingHighlighted, false );
+                }
+
+                m_hoveredNode = m_firstMergedNode = QPair<int, int>( -1, -1 );
                 return true;
             }
 
@@ -1272,23 +1262,32 @@ bool AreaAnnotation::processMergingOnRelease( QMouseEvent *mouseEvent )
                 innerRings.remove( i );
                 m_innerNodesList.removeAt( i );
 
-                m_firstMergedNode = QPair<int, int>( -1, -1 );
-                m_secondMergedNode = QPair<int, int>( -1, -1 );
+                m_firstMergedNode = m_secondMergedNode = m_hoveredNode = QPair<int, int>( -1, -1 );
                 return true;
             }
 
-            m_resultingCoords = innerRings.at(i).at(j).interpolate(
-                                            innerRings.at(i).at(innerIndexes.second), 0.5 );
-            innerRings[i][innerIndexes.second] = m_resultingCoords;
-            innerRings[i].remove( j );
-
+            m_innerNodesList[innerIndexes.first][innerIndexes.second].setFlag( PolygonNode::NodeIsMerged );
             m_secondMergedNode = innerIndexes;
+
+            m_animation = new MergingNodesAnimation( this );
+            m_request = StartAnimation;
         }
 
         return true;
     }
 
     return false;
+}
+
+bool AreaAnnotation::processMergingOnMove( QMouseEvent *mouseEvent )
+{
+    return dealWithHovering( mouseEvent );
+}
+
+bool AreaAnnotation::processMergingOnRelease( QMouseEvent *mouseEvent )
+{
+    Q_UNUSED( mouseEvent );
+    return true;
 }
 
 bool AreaAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
@@ -1314,13 +1313,15 @@ bool AreaAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
             QList<PolygonNode> newList;
             for ( int k = i; k < i + outerRing.size(); ++k ) {
                 newRing.append( outerRing.at(k % outerRing.size()) );
-                newList.append( m_outerNodesList.at(k % m_outerNodesList.size()) );
+                newList.append( PolygonNode( QRegion(), m_outerNodesList.at(k % outerRing.size()).flags() ) );
             }
             GeoDataCoordinates newCoords = newRing.at(0).interpolate( newRing.last(), 0.5 );
             newRing.append( newCoords );
 
-            polygon->outerBoundary() = newRing;
             m_outerNodesList = newList;
+            m_outerNodesList.append( PolygonNode( QRegion() ) );
+
+            polygon->outerBoundary() = newRing;
             m_adjustedNode = -1;
         } else {
             Q_ASSERT( i != -1 && j != -1 );
@@ -1329,13 +1330,16 @@ bool AreaAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
             QList<PolygonNode> newList;
             for ( int k = j; k < j + innerRings.at(i).size(); ++k ) {
                 newRing.append( innerRings.at(i).at(k % innerRings.at(i).size()) );
-                newList.append( m_innerNodesList.at(i).at(k % m_innerNodesList.at(i).size() ) );
+                newList.append( PolygonNode( QRegion(),
+                                             m_innerNodesList.at(i).at(k % innerRings.at(i).size()).flags() ) );
             }
             GeoDataCoordinates newCoords = newRing.at(0).interpolate( newRing.last(), 0.5 );
             newRing.append( newCoords );
 
-            polygon->innerBoundaries()[i] = newRing;
             m_innerNodesList[i] = newList;
+            m_innerNodesList[i].append( PolygonNode( QRegion() ) );
+
+            polygon->innerBoundaries()[i] = newRing;
             m_adjustedNode = i;
         }
 

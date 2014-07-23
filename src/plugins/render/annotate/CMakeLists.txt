@@ -23,6 +23,7 @@ set( annotate_SRCS
   EditPolygonDialog.cpp
   GeoWidgetBubble.cpp
   GroundOverlayFrame.cpp
+  MergingNodesAnimation.cpp
   PlacemarkTextAnnotation.cpp
   SceneGraphicsItem.cpp
   SceneGraphicsTypes.cpp

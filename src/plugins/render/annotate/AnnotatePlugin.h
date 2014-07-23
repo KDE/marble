@@ -124,6 +124,7 @@ private slots:
     void deleteNode();
     void deselectNodes();
     void deleteSelectedNodes();
+    void setAreaAvailable();
 
 protected:
     bool eventFilter( QObject *watched, QEvent *event );
@@ -183,7 +184,7 @@ private:
     SceneGraphicsItem    *m_movedItem;
     SceneGraphicsItem    *m_lastItem;
     GeoDataGroundOverlay *m_rmbOverlay;
-    AreaAnnotation       *m_rmbSelectedArea;
+    AreaAnnotation       *m_selectedArea;
 
     //    QNetworkAccessManager* m_networkAccessManager;
     //    QErrorMessage m_errorMessage;
