@@ -248,7 +248,7 @@ void AnnotatePlugin::setDrawingPolygon( bool enabled )
         m_polygonPlacemark->setGeometry( polygon );
         m_polygonPlacemark->setParent( m_annotationDocument );
         m_polygonPlacemark->setStyleUrl( "#polygon" );
-        m_polygonPlacemark->setName( QString("Untitled Polygon") );
+        m_polygonPlacemark->setName( tr("Untitled Polygon") );
 
         m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polygonPlacemark );
         announceStateChanged( SceneGraphicsItem::DrawingPolygon );
@@ -755,20 +755,20 @@ void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem 
             animation->startAnimation();
         } else if ( area->request() == AreaAnnotation::OuterInnerMergingWarning ) {
             QMessageBox::warning( m_marbleWidget,
-                                  QString( "Operation not permitted" ),
-                                  QString( "Cannot merge a node from polygon's outer boundary "
-                                           "with a node from one of its inner boundaries." ) );
+                                  tr( "Operation not permitted" ),
+                                  tr( "Cannot merge a node from polygon's outer boundary "
+                                      "with a node from one of its inner boundaries." ) );
         } else if ( area->request() == AreaAnnotation::InnerInnerMergingWarning ) {
             QMessageBox::warning( m_marbleWidget,
-                                  QString( "Operation not permitted" ),
-                                  QString( "Cannot merge two nodes from two different inner "
+                                  tr( "Operation not permitted" ),
+                                  tr( "Cannot merge two nodes from two different inner "
                                            "boundaries." ) );
         } else if ( area->request() == AreaAnnotation::InvalidShapeWarning ) {
             QMessageBox::warning( m_marbleWidget,
-                                  QString( "Operation not permitted" ),
-                                  QString( "Cannot merge the selected nodes. Most probably "
-                                           "this would make the polygon's outer boundary not "
-                                           "contain all its inner boundary nodes." ) );
+                                  tr( "Operation not permitted" ),
+                                  tr( "Cannot merge the selected nodes. Most probably "
+                                      "this would make the polygon's outer boundary not "
+                                      "contain all its inner boundary nodes." ) );
         } else if ( area->request() == AreaAnnotation::RemovePolygonRequest ) {
             m_lastItem = 0;
             m_movedItem = 0;
@@ -1118,8 +1118,8 @@ void AnnotatePlugin::deleteSelectedNodes()
         removePolygon();
     } else if ( m_selectedArea->request() == AreaAnnotation::InvalidShapeWarning ) {
         QMessageBox::warning( m_marbleWidget,
-                              QString( "Operation not permitted" ),
-                              QString( "Cannot delete one of the selected nodes. Most probably "
+                              tr( "Operation not permitted" ),
+                              tr( "Cannot delete one of the selected nodes. Most probably "
                                        "this would make the polygon's outer boundary not "
                                        "contain all its inner boundary nodes." ) );
     }
@@ -1199,8 +1199,8 @@ void AnnotatePlugin::deleteNode()
         removePolygon();
     } else if ( m_selectedArea->request() == AreaAnnotation::InvalidShapeWarning ) {
         QMessageBox::warning( m_marbleWidget,
-                              QString( "Operation not permitted" ),
-                              QString( "Cannot delete one of the selected nodes. Most probably "
+                              tr( "Operation not permitted" ),
+                              tr( "Cannot delete one of the selected nodes. Most probably "
                                        "this would make the polygon's outer boundary not "
                                        "contain all its inner boundary nodes." ) );
     }
