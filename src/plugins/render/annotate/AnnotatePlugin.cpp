@@ -1010,6 +1010,9 @@ void AnnotatePlugin::displayOverlayFrame( GeoDataGroundOverlay *overlay )
 {
     if ( !m_groundOverlayFrames.keys().contains( overlay ) ) {
 
+        GeoDataPolygon *polygon = new GeoDataPolygon( Tessellate );
+        polygon->outerBoundary().setTessellate( true );
+
         GeoDataPlacemark *rectangle_placemark = new GeoDataPlacemark;
         rectangle_placemark->setGeometry( new GeoDataPolygon );
         rectangle_placemark->setParent( m_annotationDocument );
