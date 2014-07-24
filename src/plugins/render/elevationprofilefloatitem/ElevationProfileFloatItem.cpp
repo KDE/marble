@@ -586,26 +586,19 @@ QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataL
 {
     // TODO: Don't re-calculate the whole route if only a small part of it was changed
     QList<QPointF> result;
+    qreal distance = 0;
 
-    GeoDataLineString path;
     for ( int i = 0; i < lineString.size(); i++ ) {
-        path.append( lineString[i] );
-
         const qreal lat = lineString[i].latitude ( GeoDataCoordinates::Degree );
         const qreal lon = lineString[i].longitude( GeoDataCoordinates::Degree );
         qreal ele = marbleModel()->elevationModel()->height( lon, lat );
-        if ( ele == invalidElevationData ) { // no data
-            ele = 0;
+
+        if ( i ) {
+            distance += EARTH_RADIUS * distanceSphere( lineString[i-1], lineString[i] );
         }
 
-        // result.append( QPointF( path.length( EARTH_RADIUS ), ele ) );
-        // The code below does the same as the line above, but is much faster - O(1) instead of O(n)
-        if ( i ) {
-            Q_ASSERT( !result.isEmpty() ); // The else part below appended something in the first run
-            qreal const distance = EARTH_RADIUS * distanceSphere( lineString[i-1], lineString[i] );
-            result.append( QPointF( result.last().x() + distance, ele ) );
-        } else {
-            result.append( QPointF( 0, ele ) );
+        if ( ele != invalidElevationData ) { // skip no data
+            result.append( QPointF( distance, ele ) );
         }
     }
 
@@ -614,33 +607,38 @@ QList<QPointF> ElevationProfileFloatItem::calculateElevationData( const GeoDataL
 
 void ElevationProfileFloatItem::calculateStatistics( const QList<QPointF> &eleData )
 {
-    const int averageOrder = 5;
+    const qreal averageDistance = 200.0;
 
-    qreal lastAverage = 0;
     m_maxElevation = 0.0;
     m_minElevation = invalidElevationData;
     m_gain = 0;
     m_loss = 0;
     const int start = m_zoomToViewport ? m_firstVisiblePoint : 0;
     const int end = m_zoomToViewport ? m_lastVisiblePoint : eleData.size();
-    for ( int i = start; i < end; ++i ) {
-        m_maxElevation = qMax( m_maxElevation, eleData.value( i ).y() );
-        m_minElevation = qMin( m_minElevation, eleData.value( i ).y() );
 
-        // Low-pass filtering (moving average) of the elevation profile to calculate gain and loss values
-        // not always the best method, see for example
-        // http://www.ikg.uni-hannover.de/fileadmin/ikg/staff/thesis/finished/documents/StudArb_Schulze.pdf
-        // (German), chapter 4.2
+    if( start < end ) {
+        qreal lastAverage = eleData.value( start ).y();
+        m_maxElevation = lastAverage;
+        m_minElevation = lastAverage;
 
-        if ( i >= averageOrder ) {
+        int averageStart = start;
+        for ( int index = start + 1; index <= end; ++index ) {
+            m_maxElevation = qMax( m_maxElevation, eleData.value( index ).y() );
+            m_minElevation = qMin( m_minElevation, eleData.value( index ).y() );
+
+            // Low-pass filtering (moving average) of the elevation profile to calculate gain and loss values
+            // not always the best method, see for example
+            // http://www.ikg.uni-hannover.de/fileadmin/ikg/staff/thesis/finished/documents/StudArb_Schulze.pdf
+            // (German), chapter 4.2
+
             qreal average = 0;
-            for( int j = 0; j < averageOrder; j++ ) {
-                average += eleData.value( i-j ).y();
+            while( eleData.value( index ).x() - eleData.value( averageStart ).x() > averageDistance && averageStart < index ) {
+                ++averageStart;
             }
-            average /= averageOrder;
-            if ( i == averageOrder ) {
-                lastAverage = average; // else the initial elevation would be counted as gain
+            for( int averageIndex = averageStart; averageIndex <= index; ++averageIndex ) {
+                average += eleData.value( averageIndex ).y();
             }
+            average /= (index - averageStart + 1);
             if ( average > lastAverage ) {
                 m_gain += average - lastAverage;
             } else {
