@@ -183,6 +183,7 @@ File /a /r \
   "${qtdir}\QtSvg4.dll" \
   "${qtdir}\QtWebkit4.dll" \
   "${qtdir}\QtXml4.dll" \
+  "${qtdir}\QtXmlPatterns4.dll" \
   "${qtdir}\phonon4.dll"
   
 !ifdef licensefile
