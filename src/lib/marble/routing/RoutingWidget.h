@@ -141,6 +141,16 @@ private Q_SLOTS:
 
     void updateUploadProgress( qint64 sent, qint64 total );
 
+    void centerOn( const GeoDataCoordinates &coordinates );
+
+    void seekTourToStart();
+
+    void initializeTour();
+
+    void clearTour();
+
+    void toggleRoutePlay();
+
 protected:
     bool eventFilter( QObject *o, QEvent *e );
     void resizeEvent(QResizeEvent *e);

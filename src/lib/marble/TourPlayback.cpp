@@ -55,7 +55,8 @@ public:
 TourPlaybackPrivate::TourPlaybackPrivate() :
     m_tour( 0 ),
     m_pause( false ),
-    m_mainTrack()
+    m_mainTrack(),
+    m_widget( 0 )
 {
     // do nothing
 }
@@ -76,6 +77,7 @@ TourPlayback::TourPlayback(QObject *parent) :
 
 TourPlayback::~TourPlayback()
 {
+    stop();
     delete d;
 }
 
@@ -85,6 +87,7 @@ void TourPlayback::stopTour()
         track->stop();
         track->setPaused( false );
     }
+    emit finished();
 }
 
 void TourPlayback::showBalloon( GeoDataPlacemark* placemark )
@@ -98,7 +101,9 @@ void TourPlayback::showBalloon( GeoDataPlacemark* placemark )
 
 void TourPlayback::hideBalloon()
 {
-    d->m_widget->popupLayer()->setVisible( false );
+    if( d->m_widget ){
+        d->m_widget->popupLayer()->setVisible( false );
+    }
 }
 
 bool TourPlayback::isPlaying() const
