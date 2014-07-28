@@ -89,10 +89,14 @@ GeoDataLabelStyle& GeoDataLabelStyle::operator=( const GeoDataLabelStyle& other 
 
 bool GeoDataLabelStyle::operator==( const GeoDataLabelStyle &other ) const
 {
-   return d->m_scale == other.d->m_scale &&
-          d->m_alignment == other.d->m_alignment &&
-          d->m_font == other.d->m_font &&
-          d->m_glow == other.d->m_glow;
+    if ( GeoDataColorStyle::operator!=( other ) ) {
+        return false;
+    }
+
+    return d->m_scale == other.d->m_scale &&
+           d->m_alignment == other.d->m_alignment &&
+           d->m_font == other.d->m_font &&
+           d->m_glow == other.d->m_glow;
 }
 
 bool GeoDataLabelStyle::operator!=( const GeoDataLabelStyle &other ) const
