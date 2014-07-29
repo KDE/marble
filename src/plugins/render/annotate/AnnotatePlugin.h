@@ -136,7 +136,6 @@ private:
     void setupOverlayRmbMenu();
     void showOverlayRmbMenu( GeoDataGroundOverlay *overlay, qreal x, qreal y );
     void displayOverlayEditDialog( GeoDataGroundOverlay *overlay );
-    void displayPolygonEditDialog( GeoDataPlacemark *placemark );
     void displayOverlayFrame( GeoDataGroundOverlay *overlay );
     void clearOverlayFrames();
 

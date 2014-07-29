@@ -248,7 +248,6 @@ void AnnotatePlugin::setDrawingPolygon( bool enabled )
         m_polygonPlacemark->setGeometry( polygon );
         m_polygonPlacemark->setParent( m_annotationDocument );
         m_polygonPlacemark->setStyleUrl( "#polygon" );
-        m_polygonPlacemark->setName( tr("Untitled Polygon") );
 
         m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polygonPlacemark );
         announceStateChanged( SceneGraphicsItem::DrawingPolygon );
@@ -1142,12 +1141,7 @@ void AnnotatePlugin::removePolygon()
 
 void AnnotatePlugin::editPolygon()
 {
-    displayPolygonEditDialog( m_selectedArea->placemark() );
-}
-
-void AnnotatePlugin::displayPolygonEditDialog( GeoDataPlacemark *placemark )
-{
-    EditPolygonDialog *dialog = new EditPolygonDialog( placemark, m_marbleWidget );
+    EditPolygonDialog *dialog = new EditPolygonDialog( m_selectedArea->placemark(), m_marbleWidget );
 
     connect( dialog, SIGNAL(polygonUpdated(GeoDataFeature*)),
              this, SIGNAL(repaintNeeded()) );

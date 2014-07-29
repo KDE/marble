@@ -44,7 +44,8 @@ EditPolygonDialog::Private::Private( GeoDataPlacemark *placemark ) :
 
 EditPolygonDialog::Private::~Private()
 {
-
+    delete m_linesDialog;
+    delete m_polyDialog;
 }
 
 EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
@@ -52,6 +53,11 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     d( new Private( placemark ) )
 {
     d->setupUi( this );
+
+    // If the polygon has just been drawn, assign it a default name.
+    if ( d->m_placemark->name().isNull() ) {
+        d->m_placemark->setName( tr("Untitled Polygon") );
+    }
 
     d->m_name->setText( placemark->name() );
     d->m_description->setText( placemark->description() );
