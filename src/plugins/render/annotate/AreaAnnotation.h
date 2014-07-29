@@ -40,21 +40,6 @@ public:
     ~AreaAnnotation();
 
     /**
-     * @brief Some events may lead to particular requests to the widget, so it is the
-     * AnnotatePlugin which has to test whether there is any request from this polygon.
-     */
-    enum MarbleWidgetRequest {
-        NoRequest,
-        OuterInnerMergingWarning,
-        InnerInnerMergingWarning,
-        InvalidShapeWarning,
-        ShowPolygonRmbMenu,
-        ShowNodeRmbMenu,
-        StartAnimation,
-        RemovePolygonRequest
-    };
-
-    /**
      * @brief Paints the nodes on the screen and updates the regions which correspond
      * to each node using the given GeoPainter.
      */
@@ -81,11 +66,6 @@ public:
      * by Annotate Plugin to not send events to this object anymore.
      */
     void setBusy( bool enabled );
-
-    /**
-     * @brief Returns the widget request.
-     */
-    MarbleWidgetRequest request() const;
 
     /**
      * @brief Iterates through all nodes which form the polygon's outer boundary as well
@@ -239,11 +219,9 @@ private:
     static const QColor mergedColor;
     static const QColor hoveredColor;
 
-    const GeoPainter     *m_geopainter;
     const ViewportParams *m_viewport;
     bool                  m_regionsInitialized;
     bool                  m_busy;
-    MarbleWidgetRequest   m_request;
 
     QList<PolygonNode>          m_outerNodesList;
     QList<PolygonNode>          m_outerVirtualNodes;

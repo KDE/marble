@@ -22,6 +22,7 @@ namespace Marble
 SceneGraphicsItem::SceneGraphicsItem( GeoDataPlacemark *placemark ) :
     GeoGraphicsItem( placemark ),
     m_state( Editing ),
+    m_request( NoRequest ),
     m_placemark( placemark )
 {
     // nothing to do
@@ -42,6 +43,16 @@ void SceneGraphicsItem::setState( ActionState state )
     ActionState previousState = m_state;
     m_state = state;
     dealWithStateChange( previousState );
+}
+
+SceneGraphicsItem::MarbleWidgetRequest SceneGraphicsItem::request() const
+{
+    return m_request;
+}
+
+void SceneGraphicsItem::setRequest( MarbleWidgetRequest request )
+{
+    m_request = request;
 }
 
 const GeoDataPlacemark *SceneGraphicsItem::placemark() const
