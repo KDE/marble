@@ -12,6 +12,9 @@
 #include "EditGroundOverlayDialog.h"
 #include "ui_EditGroundOverlayDialog.h"
 
+// Qt
+#include <QFileDialog>
+
 namespace Marble
 {
 
@@ -66,6 +69,7 @@ EditGroundOverlayDialog::EditGroundOverlayDialog( GeoDataGroundOverlay *overlay,
     d->m_east->setValue( latLonBox.east( GeoDataCoordinates::Degree ) );
     d->m_rotation->setValue( latLonBox.rotation( GeoDataCoordinates::Degree ) );
 
+    connect( d->m_browseButton, SIGNAL(clicked()), this, SLOT(loadPicture()) );
     connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updateGroundOverlay()) );
     connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(setGroundOverlayUpdated()) );
     connect( d->buttonBox, SIGNAL(accepted()), d->m_textureLayer, SLOT(reset()) );
@@ -76,6 +80,18 @@ EditGroundOverlayDialog::~EditGroundOverlayDialog()
     delete d;
 }
 
+void EditGroundOverlayDialog::loadPicture()
+{
+    const QString filename = QFileDialog::getOpenFileName( this,
+                                                           tr( "Open Annotation File" ),
+                                                           QString(),
+                                                           tr( "All Supported Files (*.jpg *.png)" ) );
+    if ( filename.isNull() ) {
+        return;
+    }
+
+    d->m_link->setText( filename );
+}
 
 void EditGroundOverlayDialog::updateGroundOverlay()
 {
