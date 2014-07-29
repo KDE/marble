@@ -90,7 +90,6 @@ public:
 
 signals:
     void placemarkAdded();
-    void overlayAdded();
     void itemRemoved();
 
 public slots:
@@ -101,7 +100,6 @@ public slots:
     void setAddingPolygonHole( bool );
     void setMergingNodes( bool );
     void setAddingNodes( bool );
-    void setAddingOverlay( bool );
     void setRemovingItems( bool );
 
     void addOverlay();
@@ -190,7 +188,6 @@ private:
 
     bool m_addingPlacemark;
     bool m_drawingPolygon;
-    bool m_addingOverlay;
     bool m_removingItem;
     bool m_isInitialized;
 };

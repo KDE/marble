@@ -277,17 +277,6 @@ void AnnotatePlugin::setAddingPolygonHole( bool enabled )
     }
 }
 
-void AnnotatePlugin::setAddingOverlay( bool enabled )
-{
-	m_addingOverlay = enabled;
-
-    if ( enabled ) {
-        announceStateChanged( SceneGraphicsItem::AddingOverlay );
-    } else {
-        announceStateChanged( SceneGraphicsItem::Editing );
-    }
-}
-
 void AnnotatePlugin::setMergingNodes( bool enabled )
 {
     if ( enabled ) {
@@ -317,23 +306,6 @@ void AnnotatePlugin::setAreaAvailable()
 void AnnotatePlugin::setRemovingItems( bool enabled )
 {
     m_removingItem = enabled;
-}
-
-void AnnotatePlugin::addOverlay()
-{
-	if ( !m_addingOverlay ) {
-		return;
-	}
-
-	GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay();
-    EditGroundOverlayDialog *dialog = new EditGroundOverlayDialog( overlay,
-                                                                   m_marbleWidget->textureLayer(),
-                                                                   m_marbleWidget );
-	dialog->exec();
-
-	m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, overlay );
-
-	emit overlayAdded();
 }
 
 //void AnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
@@ -840,8 +812,6 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
         selectItem->setIcon( QIcon( ":/icons/hand.png") );
         connect( this, SIGNAL(placemarkAdded()),
                  selectItem, SLOT(toggle()) );
-        connect( this, SIGNAL(overlayAdded()),
-                 selectItem, SLOT(toggle()) );
         connect( this, SIGNAL(itemRemoved()),
                  selectItem, SLOT(toggle()) );
 
@@ -882,11 +852,8 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
 
         QAction *addOverlay = new QAction( this );
         addOverlay->setText( tr("Add Ground Overlay") );
-        addOverlay->setCheckable( true );
         addOverlay->setIcon( QIcon( ":/icons/draw-overlay.png") );
-        connect( addOverlay, SIGNAL(toggled(bool)),
-                 this, SLOT(setAddingOverlay(bool)) );
-        connect( addOverlay, SIGNAL(toggled(bool)),
+        connect( addOverlay, SIGNAL(triggered()),
                  this, SLOT(addOverlay()) );
 
         QAction *removeItem = new QAction( this );
@@ -975,14 +942,28 @@ void AnnotatePlugin::setupGroundOverlayModel()
 
 void AnnotatePlugin::setupOverlayRmbMenu()
 {
-    QAction *removeOverlay = new QAction( tr( "Remove Ground Overlay" ), m_overlayRmbMenu );
     QAction *editOverlay = new QAction( tr( "Edit Ground Overlay" ), m_overlayRmbMenu );
+    QAction *removeOverlay = new QAction( tr( "Remove Ground Overlay" ), m_overlayRmbMenu );
 
-    m_overlayRmbMenu->addAction( editOverlay );
     m_overlayRmbMenu->addAction( removeOverlay );
+    m_overlayRmbMenu->addSeparator();
+    m_overlayRmbMenu->addAction( editOverlay );
 
     connect( editOverlay, SIGNAL(triggered()), this, SLOT(editOverlay()) );
     connect( removeOverlay, SIGNAL(triggered()), this, SLOT(removeOverlay()) );
+}
+
+void AnnotatePlugin::addOverlay()
+{
+    GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay();
+    QPointer<EditGroundOverlayDialog> dialog = new EditGroundOverlayDialog(
+                                                                 overlay,
+                                                                 m_marbleWidget->textureLayer(),
+                                                                 m_marbleWidget );
+    dialog->exec();
+
+    delete dialog;
+    m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, overlay );
 }
 
 void AnnotatePlugin::showOverlayRmbMenu( GeoDataGroundOverlay *overlay, qreal x, qreal y )
@@ -1013,7 +994,7 @@ void AnnotatePlugin::displayOverlayFrame( GeoDataGroundOverlay *overlay )
         polygon->outerBoundary().setTessellate( true );
 
         GeoDataPlacemark *rectangle_placemark = new GeoDataPlacemark;
-        rectangle_placemark->setGeometry( new GeoDataPolygon );
+        rectangle_placemark->setGeometry( polygon );
         rectangle_placemark->setParent( m_annotationDocument );
         rectangle_placemark->setStyleUrl( "#polygon" );
 
