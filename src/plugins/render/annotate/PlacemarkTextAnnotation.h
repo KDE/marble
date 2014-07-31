@@ -20,13 +20,8 @@
 namespace Marble
 {
 
-class GeoWidgetBubble;
-class TextEditor;
-
 class PlacemarkTextAnnotation : public SceneGraphicsItem
 {
-    friend class EditTextAnnotationDialog;
-
 public:
     explicit PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
     ~PlacemarkTextAnnotation();
