@@ -2,6 +2,7 @@
 Type=Service
 Name=OSM Data
 Name[da]=OSM-data
+Name[de]=OSM-Daten
 Name[en_GB]=OSM Data
 Name[es]=Datos OSM
 Name[et]=OSM andmed
