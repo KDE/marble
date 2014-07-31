@@ -202,7 +202,7 @@ void AreaAnnotation::dealWithItemChange( const SceneGraphicsItem *other )
 {
     Q_UNUSED( other );
 
-    // So far we only deal with item changes when hovering virtual nodes, so that
+    // So far we only deal with item changes when hovering nodes, so that
     // they do not remain hovered when changing the item we interact with.
     if ( state() == SceneGraphicsItem::Editing ) {
         if ( m_hoveredNode != QPair<int, int>( -1, -1 ) ) {
@@ -487,6 +487,18 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
 {
     // Dealing with cases when exiting a state has an effect on this item.
     if ( previousState == SceneGraphicsItem::Editing ) {
+        // Make sure that when changing the state, there is no highlighted node.
+        if ( m_hoveredNode != QPair<int, int>( -1, -1 ) ) {
+            int i = m_hoveredNode.first;
+            int j = m_hoveredNode.second;
+
+            if ( j == -1 ) {
+                m_outerNodesList[i].setFlag( PolygonNode::NodeIsEditingHighlighted, false );
+            } else {
+                m_innerNodesList[i][j].setFlag( PolygonNode::NodeIsEditingHighlighted, false );
+            }
+        }
+
         m_clickedNodeIndexes = QPair<int, int>( -1, -1 );
         m_hoveredNode = QPair<int, int>( -1, -1 );
     } else if ( previousState == SceneGraphicsItem::AddingPolygonHole ) {
@@ -518,6 +530,18 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
             m_innerNodesList[i][j].setFlag( PolygonNode::NodeIsMerged, false );
         } else if ( i != -1 && j == -1 ) {
             m_outerNodesList[i].setFlag( PolygonNode::NodeIsMerged, false );
+        }
+
+        // Make sure that when changing the state, there is no highlighted node.
+        if ( m_hoveredNode != QPair<int, int>( -1, -1 ) ) {
+            int i = m_hoveredNode.first;
+            int j = m_hoveredNode.second;
+
+            if ( j == -1 ) {
+                m_outerNodesList[i].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
+            } else {
+                m_innerNodesList[i][j].setFlag( PolygonNode::NodeIsMergingHighlighted, false );
+            }
         }
 
         m_firstMergedNode = QPair<int, int>( -1, -1 );
