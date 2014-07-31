@@ -2,6 +2,7 @@
 Type=Service
 Name=ESRI Shapefile
 Name[da]=ESRI-shapefil
+Name[de]=ESRI-Shapefile
 Name[en_GB]=ESRI Shapefile
 Name[es]=Archivo de formas ESRI
 Name[et]=ESRI Shapefile
