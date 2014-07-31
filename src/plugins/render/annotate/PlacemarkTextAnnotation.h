@@ -5,12 +5,14 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2009      Andrew Manson  <g.real.ate@gmail.com>
 // Copyright 2013      Thibaut Gridel <tgridel@free.fr>
+// Copyright 2014      Calin Cruceru  <crucerucalincristian@gmail.com>
 //
 
 #ifndef PLACEMARKTEXTANNOTATION_H
 #define PLACEMARKTEXTANNOTATION_H
+
 
 #include "SceneGraphicsItem.h"
 
@@ -23,6 +25,8 @@ class TextEditor;
 
 class PlacemarkTextAnnotation : public SceneGraphicsItem
 {
+    friend class EditTextAnnotationDialog;
+
 public:
     explicit PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
     ~PlacemarkTextAnnotation();
@@ -46,8 +50,10 @@ protected:
     virtual void dealWithStateChange( SceneGraphicsItem::ActionState previousState );
 
 private:
-    GeoWidgetBubble *bubble;
-    QList<QRegion>   m_regionList;
+    const ViewportParams *m_viewport;
+    bool m_movingPlacemark;
+
+    QRegion m_region;
 };
 
 }

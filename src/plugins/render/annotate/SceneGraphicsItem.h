@@ -42,12 +42,6 @@ public:
         AddingPolygonHole,
         MergingPolygonNodes,
         AddingPolygonNodes,
-
-        // Placemark specific
-        AddingPlacemark,
-
-        // Ground Overlays specific
-        AddingOverlay
     };
 
     /**

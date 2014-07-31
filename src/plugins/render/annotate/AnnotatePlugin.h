@@ -91,11 +91,11 @@ public:
 signals:
     void placemarkAdded();
     void itemRemoved();
+    void placemarkMoved();
 
 public slots:
     void enableModel( bool enabled );
 
-    void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );
     void setAddingPolygonHole( bool );
     void setMergingNodes( bool );
@@ -103,6 +103,7 @@ public slots:
     void setRemovingItems( bool );
 
     void addOverlay();
+    void addTextAnnotation();
 
     //    void receiveNetworkReply( QNetworkReply* );
     //    void downloadOsmFile();
@@ -112,6 +113,9 @@ public slots:
     void loadAnnotationFile();
 
 private slots:
+    void editTextAnnotationRmbMenu();
+    void removeTextAnnotation();
+
     void editOverlay();
     void removeOverlay();
     void updateOverlayFrame( GeoDataGroundOverlay *overlay );
@@ -129,6 +133,9 @@ protected:
 
 private:
     void setupActions( MarbleWidget *marbleWidget );
+
+    void setupTextAnnotationRmbMenu();
+    void showTextAnnotationRmbMenu( PlacemarkTextAnnotation *placemark, qreal x, qreal y );
 
     void setupGroundOverlayModel();
     void setupOverlayRmbMenu();
@@ -168,6 +175,7 @@ private:
     QMenu *m_overlayRmbMenu;
     QMenu *m_polygonRmbMenu;
     QMenu *m_nodeRmbMenu;
+    QMenu *m_textAnnotationRmbMenu;
 
     QList<QActionGroup*>    m_actions;
     QList<QActionGroup*>    m_toolbarActions;
@@ -177,16 +185,17 @@ private:
     GeoDataDocument*          m_annotationDocument;
     QList<SceneGraphicsItem*> m_graphicsItems;
 
-    GeoDataPlacemark     *m_polygonPlacemark;
-    SceneGraphicsItem    *m_movedItem;
-    SceneGraphicsItem    *m_lastItem;
-    GeoDataGroundOverlay *m_rmbOverlay;
-    AreaAnnotation       *m_selectedArea;
+    SceneGraphicsItem       *m_movedItem;
+    SceneGraphicsItem       *m_lastItem;
+
+    GeoDataPlacemark        *m_polygonPlacemark;
+    GeoDataGroundOverlay    *m_rmbOverlay;
+    AreaAnnotation          *m_selectedArea;
+    PlacemarkTextAnnotation *m_selectedTextAnnotation;
 
     //    QNetworkAccessManager* m_networkAccessManager;
     //    QErrorMessage m_errorMessage;
 
-    bool m_addingPlacemark;
     bool m_drawingPolygon;
     bool m_removingItem;
     bool m_isInitialized;
