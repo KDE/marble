@@ -935,7 +935,10 @@ void AnnotatePlugin::editTextAnnotationRmbMenu()
 void AnnotatePlugin::addTextAnnotation()
 {
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
-    placemark->setCoordinate( m_marbleWidget->focusPoint() );
+    qreal lat = m_marbleWidget->focusPoint().latitude();
+    qreal lon = m_marbleWidget->focusPoint().longitude();
+    GeoDataCoordinates::normalizeLonLat( lon, lat );
+    placemark->setCoordinate( lon, lat );
     m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, placemark );
 
     m_selectedTextAnnotation = new PlacemarkTextAnnotation( placemark );
