@@ -100,10 +100,10 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolyDialog(const QColor&)) );
 
 
-    // Promote "Apply" button to default button and connect it to updatePolygon() slot.
-    QPushButton *applyButton = d->buttonBox->button( QDialogButtonBox::Apply );
-    d->buttonBox->button( QDialogButtonBox::Apply )->setDefault( true );
-    connect( applyButton, SIGNAL(clicked()), this, SLOT(updatePolygon()) );
+    // Promote "Ok" button to default button and connect it to updatePolygon() slot.
+    QPushButton *okButton = d->buttonBox->button( QDialogButtonBox::Ok );
+    okButton->setDefault( true );
+    connect( okButton, SIGNAL(clicked()), this, SLOT(updatePolygon()) );
 
     // Make sure pressing "OK" will also update the polygon.
     connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updatePolygon()) );
