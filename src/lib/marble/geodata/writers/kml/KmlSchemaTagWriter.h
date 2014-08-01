@@ -18,7 +18,7 @@ namespace Marble
 
 class KmlSchemaTagWriter : public GeoTagWriter
 {
-public:
+  public:
     virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
 };
 

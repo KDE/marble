@@ -15,7 +15,6 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataExtendedData.h"
-#include "GeoDataSchemaData.h"
 
 #include "GeoParser.h"
 
@@ -32,18 +31,15 @@ GeoNode* KmlSchemaDataTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
 
     if( parentItem.represents( kmlTag_ExtendedData ) ) {
-        GeoDataSchemaData schemaData;
+
         QString schemaUrl = parser.attribute( "schemaUrl" ).trimmed();
 
-        schemaData.setSchemaUrl( schemaUrl );
-        parentItem.nodeAs<GeoDataExtendedData>()->addSchemaData( schemaData );
-        return &parentItem.nodeAs<GeoDataExtendedData>()->schemaData( schemaUrl );
+        return parentItem.nodeAs<GeoDataExtendedData>();
+    } else {
+        return 0;
     }
-
-    return 0;
 
 }
 
-}   // namespace kml
-
-}   // namespace Marble
+}
+}
