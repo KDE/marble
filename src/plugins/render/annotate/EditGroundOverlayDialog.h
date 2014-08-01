@@ -31,6 +31,7 @@ private slots:
     void loadPicture();
     void updateGroundOverlay();
     void setGroundOverlayUpdated();
+    void checkFields();
 
 signals:
     void groundOverlayUpdated( GeoDataGroundOverlay* );

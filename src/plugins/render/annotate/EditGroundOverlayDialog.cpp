@@ -14,6 +14,8 @@
 
 // Qt
 #include <QFileDialog>
+#include <QMessageBox>
+
 
 namespace Marble
 {
@@ -70,9 +72,10 @@ EditGroundOverlayDialog::EditGroundOverlayDialog( GeoDataGroundOverlay *overlay,
     d->m_rotation->setValue( latLonBox.rotation( GeoDataCoordinates::Degree ) );
 
     connect( d->m_browseButton, SIGNAL(clicked()), this, SLOT(loadPicture()) );
-    connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updateGroundOverlay()) );
-    connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(setGroundOverlayUpdated()) );
-    connect( d->buttonBox, SIGNAL(accepted()), d->m_textureLayer, SLOT(reset()) );
+    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
+    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(clicked()), this, SLOT(updateGroundOverlay()) );
+    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(clicked()), this, SLOT(setGroundOverlayUpdated()) );
+    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(clicked()), d->m_textureLayer, SLOT(reset()) );
 }
 
 EditGroundOverlayDialog::~EditGroundOverlayDialog()
@@ -111,6 +114,26 @@ void EditGroundOverlayDialog::updateGroundOverlay()
 void EditGroundOverlayDialog::setGroundOverlayUpdated()
 {
     emit groundOverlayUpdated( d->m_overlay );
+}
+
+void EditGroundOverlayDialog::checkFields()
+{
+    if ( d->m_name->text().isEmpty() ) {
+        QMessageBox::warning( this,
+                              tr( "No name specified" ),
+                              tr( "Please specify a name for this ground overlay." ) );
+    } else if ( d->m_link->text().isEmpty() ) {
+        QMessageBox::warning( this,
+                              tr( "No image specified" ),
+                              tr( "Please specify an image file." ) );
+    } else {
+        QFileInfo fileInfo( d->m_link->text() );
+        if ( !fileInfo.exists() ) {
+            QMessageBox::warning( this,
+                                  tr( "Invalid image path" ),
+                                  tr( "Please specify a valid path for the image file." ) );
+        }
+    }
 }
 
 }

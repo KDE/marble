@@ -14,6 +14,7 @@
 
 // Qt
 #include <QColorDialog>
+#include <QMessageBox>
 
 // Marble
 #include "GeoDataStyle.h"
@@ -100,13 +101,15 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolyDialog(const QColor&)) );
 
 
-    // Promote "Ok" button to default button and connect it to updatePolygon() slot.
-    QPushButton *okButton = d->buttonBox->button( QDialogButtonBox::Ok );
-    okButton->setDefault( true );
-    connect( okButton, SIGNAL(clicked()), this, SLOT(updatePolygon()) );
+    // Promote "Ok" button to default button.
+    d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
 
-    // Make sure pressing "OK" will also update the polygon.
-    connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updatePolygon()) );
+    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields() ) );
+    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(clicked()), this, SLOT(updatePolygon()) );
+
+    // Make sure pressing "Apply" will check the fields and then will update the polygon.
+    connect( d->buttonBox->button( QDialogButtonBox::Apply ), SIGNAL(pressed()), this, SLOT(checkFields() ) );
+    connect( d->buttonBox->button( QDialogButtonBox::Apply ), SIGNAL(clicked()), this, SLOT(updatePolygon()) );
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or
     // Close).
@@ -155,6 +158,15 @@ void EditPolygonDialog::updatePolyDialog( const QColor &color )
                         d->m_polyColorButton->iconSize().height() );
     polyPixmap.fill( color );
     d->m_polyColorButton->setIcon( QIcon( polyPixmap ) );
+}
+
+void EditPolygonDialog::checkFields()
+{
+    if ( d->m_name->text().isEmpty() ) {
+        QMessageBox::warning( this,
+                              tr( "No name specified" ),
+                              tr( "Please specify a name for this polygon." ) );
+    }
 }
 
 }
