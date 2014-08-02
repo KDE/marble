@@ -14,6 +14,7 @@
 #include <QHash>
 #include <QObject>
 
+#include "PlanetFactory.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "MarbleColors.h"
@@ -33,29 +34,17 @@ public:
     QString name, id; //localized and nonlocalized names
     bool atmosphere;
     QColor atmosphereColor;
-    //convenience function
-    void setup(qreal M_0, qreal M_1, qreal C_1, qreal C_2, qreal C_3, qreal C_4,
-               qreal C_5, qreal C_6, qreal Pi, qreal epsilon, qreal theta_0,
-               qreal theta_1, qreal radius, const QString& name,
-               const QString& id, bool atmosphere = false )
+    PlanetPrivate() :
+        M_0(0.0), M_1(0.0),
+        C_1(0.0), C_2(0.0), C_3(0.0), C_4(0.0), C_5(0.0), C_6(0.0),
+        Pi(0.0), epsilon(0.0),
+        theta_0(0.0), theta_1(0.0),
+        radius(10000000.0),
+        name(), id(),
+        atmosphere(false)
     {
-        this->M_0 = M_0;
-        this->M_1 = M_1;
-        this->C_1 = C_1;
-        this->C_2 = C_2;
-        this->C_3 = C_3;
-        this->C_4 = C_4;
-        this->C_5 = C_5;
-        this->C_6 = C_6;
-        this->Pi = Pi;
-        this->epsilon = epsilon;
-        this->theta_0 = theta_0;
-        this->theta_1 = theta_1;
-        this->radius = radius;
-        this->name = name;
-        this->id = id;
-        this->atmosphere = atmosphere;
-    };
+        // nothing to do
+    }
 };
 
 
@@ -63,113 +52,13 @@ public:
 Planet::Planet()
     : d( new PlanetPrivate )
 {
-    d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            QObject::tr("Unknown Planet", "a planet without data"), QString("unknown") );
+    // nothing to do
 }
 
 Planet::Planet( const QString& id )
     : d( new PlanetPrivate )
 {
-    // constants taken from
-    // http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
-    if ( id == "mercury" ) {
-        d->setup( (174.7948*DEG2RAD), (4.09233445*DEG2RAD),
-                (23.4400*DEG2RAD), (2.9818*DEG2RAD), (0.5255*DEG2RAD),
-                (0.1058*DEG2RAD), (0.0241*DEG2RAD), (0.0055*DEG2RAD),
-                (111.5943*DEG2RAD), (0.02*DEG2RAD), (13.5964*DEG2RAD),
-                (6.1385025*DEG2RAD), 2440000.0,
-                name( id ), id  );
-    } else if ( id == "venus" ) {
-        d->setup( (50.4161*DEG2RAD), (1.60213034*DEG2RAD),
-                (0.7758*DEG2RAD), (0.0033*DEG2RAD), (0.0000*DEG2RAD),
-                (0.0000*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
-                (73.9519*DEG2RAD), (2.64*DEG2RAD), (215.2995*DEG2RAD),
-                (-1.4813688*DEG2RAD), 6051800.0,
-                name( id ), id, true );
-        setAtmosphereColor(Oxygen::sunYellow4);
-    } else if ( id == "earth" ) {
-        d->setup( (357.5291*DEG2RAD), (0.98560028*DEG2RAD),
-                (1.9148*DEG2RAD), (0.0200*DEG2RAD), (0.0003*DEG2RAD),
-                (0.0000*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
-                (102.9372*DEG2RAD), (23.45*DEG2RAD), (280.1600*DEG2RAD),
-                (360.9856235*DEG2RAD), 6378000.0,
-                name( id ), id, true );
-        setAtmosphereColor(Qt::white);
-    } else if ( id == "mars" ) {
-        d->setup( (19.3730*DEG2RAD), (0.52402068*DEG2RAD),
-                (10.6912*DEG2RAD), (0.6228*DEG2RAD), (0.0503*DEG2RAD),
-                (0.0046*DEG2RAD), (0.0005*DEG2RAD), (0.0000*DEG2RAD),
-                (70.9812*DEG2RAD), (25.19*DEG2RAD), (313.4803*DEG2RAD),
-                (350.89198226*DEG2RAD), 3397000.0,
-                name( id ), id, true );
-        setAtmosphereColor(Oxygen::hotOrange2);
-    } else if ( id == "jupiter" ) {
-        d->setup( (20.0202*DEG2RAD), (0.08308529*DEG2RAD),
-                (5.5549*DEG2RAD), (0.1683*DEG2RAD), (0.0071*DEG2RAD),
-                (0.0003*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
-                (237.2074*DEG2RAD), (3.12*DEG2RAD), (146.0727*DEG2RAD),
-                (870.5366420*DEG2RAD), 71492000.0,
-                name( id ), id, true );
-        setAtmosphereColor(Oxygen::sunYellow2);
-    } else if ( id == "saturn" ) {
-        d->setup( (317.0207*DEG2RAD), (0.03344414*DEG2RAD),
-                (6.3585*DEG2RAD), (0.2204*DEG2RAD), (0.0106*DEG2RAD),
-                (0.0006*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
-                (99.4571*DEG2RAD), (26.74*DEG2RAD), (174.3479*DEG2RAD),
-                (810.7939024*DEG2RAD), 60268000.0,
-                name( id ), id, true );
-        setAtmosphereColor(Oxygen::sunYellow2);
-    } else if ( id == "uranus" ) {
-        d->setup( (141.0498*DEG2RAD), (0.01172834*DEG2RAD),
-                (5.3042*DEG2RAD), (0.1534*DEG2RAD), (0.0062*DEG2RAD),
-                (0.0003*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
-                (5.4639*DEG2RAD), (82.22*DEG2RAD), (17.9705*DEG2RAD),
-                (-501.1600928*DEG2RAD), 25559000.0,
-                name( id ), id, true );
-        setAtmosphereColor(Oxygen::seaBlue4);
-    } else if ( id == "neptune" ) {
-        d->setup( (256.2250*DEG2RAD), (0.00598103*DEG2RAD),
-                (1.0302*DEG2RAD), (0.0058*DEG2RAD), (0.0000*DEG2RAD),
-                (0.0000*DEG2RAD), (0.0000*DEG2RAD), (0.0000*DEG2RAD),
-                (182.1957*DEG2RAD), (27.84*DEG2RAD), (52.3996*DEG2RAD),
-                (536.3128492*DEG2RAD), 24766000.0,
-                name( id ), id, true );
-        setAtmosphereColor(Oxygen::skyBlue2);
-    // dwarf planets ... (everybody likes pluto)
-    } else if ( id == "pluto" ) {
-        d->setup( (14.882*DEG2RAD), (0.00396*DEG2RAD),
-                (28.3150*DEG2RAD), (4.3408*DEG2RAD), (0.9214*DEG2RAD),
-                (0.2235*DEG2RAD), (0.0627*DEG2RAD), (0.0174*DEG2RAD),
-                (4.5433*DEG2RAD), (57.46*DEG2RAD), (56.3183*DEG2RAD),
-                (-56.3623195*DEG2RAD), 1151000.0,
-                name( id ), id );
-    // sun and moon
-    } else if ( id == "sun" ) {
-        mDebug() << "WARNING:";
-        mDebug() << "creating \"sun\" which has invalid orbital elements";
-        //FIXME: fill in with valid data
-        d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 695000000.0,
-                name( id ), id, true );
-        setAtmosphereColor(Qt::white);
-    } else if ( id == "moon" ) {
-        mDebug() << "WARNING:";
-        mDebug() << "creating \"moon\" which has invalid orbital elements";
-        //FIXME: fill in with valid data
-        d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1738000.0,
-                name( id ), id );
-        setHasAtmosphere(false);
-      } else if ( id == "sky" ) {
-          mDebug() << "WARNING:";
-          mDebug() << "creating \"sky\" which has invalid orbital elements";
-          //FIXME: fill in with valid data
-          d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10000000.0,
-                  name( id ), id );
-    } else {
-        mDebug() << "WARNING:";
-        mDebug() << "creating planet" << id << "without enough info";
-        d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10000000.0,
-                name( QString() ), QString("unknown") );
-    }
+    *this = PlanetFactory::construct( id );
 }
 
 //Copy Constructor
@@ -334,61 +223,15 @@ void Planet::setId( const QString& id )
     d->id = id;
 }
 
+
 QString Planet::name( const QString& id )
 {
-    if ( id == "mercury" ) {
-        return QObject::tr("Mercury", "the planet");
-    } else if ( id == "venus" ) {
-        return QObject::tr("Venus", "the planet");
-    } else if ( id == "earth" ) {
-        return QObject::tr("Earth", "the planet");
-    } else if ( id == "mars" ) {
-        return QObject::tr("Mars", "the planet");
-    } else if ( id == "jupiter" ) {
-        return QObject::tr("Jupiter", "the planet");
-    } else if ( id == "saturn" ) {
-        return QObject::tr("Saturn", "the planet");
-    } else if ( id == "uranus" ) {
-        return QObject::tr("Uranus", "the planet");
-    } else if ( id == "neptune" ) {
-        return QObject::tr("Neptune", "the planet");
-    // dwarf planets ... (everybody likes pluto)
-    } else if ( id == "pluto" ) {
-        return QObject::tr("Pluto", "the planet");
-    // sun, moon and sky
-    } else if ( id == "sun" ) {
-        return QObject::tr("Sun", "the earth's star");
-    } else if ( id == "moon" ) {
-        return QObject::tr("Moon", "the earth's moon");
-    } else if ( id == "sky" ) {
-        return QObject::tr("Sky");
-    } else if ( id.isEmpty() ) {
-        mDebug() << "Warning: empty id";
-        return QObject::tr("Unknown Planet", "a planet without data");
-    }
-
-    return id;
+    return PlanetFactory::localizedName( id );
 }
 
 QStringList Planet::planetList()
 {
-
-	QStringList planets;
-
-	planets << "mercury"
-	<< "venus"
-	<< "earth"
-	<< "mars"
-	<< "jupiter"
-	<< "saturn"
-	<< "uranus"
-	<< "neptune"
-	<< "pluto"
-	<< "sun"
-  << "moon"
-  << "sky";
-
-	return planets;
+    return PlanetFactory::planetList();
 }
 
 Planet& Planet::operator=(const Planet& rhs)

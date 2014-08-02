@@ -32,6 +32,7 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "Planet.h"
+#include "PlanetFactory.h"
 
 namespace
 {
@@ -408,7 +409,7 @@ void MapThemeManager::Private::updateMapThemeModel()
 
     foreach ( const QString &mapThemeId, stringlist ) {
         QString celestialBodyId = mapThemeId.section( '/', 0, 0 );
-        QString celestialBodyName = Planet::name( celestialBodyId );
+        QString celestialBodyName = PlanetFactory::localizedName( celestialBodyId );
 
         QList<QStandardItem*> matchingItems = m_celestialList.findItems( celestialBodyId, Qt::MatchExactly, 1 );
         if ( matchingItems.isEmpty() ) {

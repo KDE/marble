@@ -30,6 +30,7 @@
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
 #include "Planet.h"
+#include "PlanetFactory.h"
 
 namespace Marble
 {
@@ -45,7 +46,7 @@ OverviewMap::OverviewMap()
 OverviewMap::OverviewMap( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( 10.5, 10.5 ), QSizeF( 166.0, 86.0 ) ),
       m_target(),
-      m_planetID( Planet::planetList() ),
+      m_planetID( PlanetFactory::planetList() ),
       m_defaultSize( AbstractFloatItem::size() ),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),
@@ -124,7 +125,7 @@ QDialog *OverviewMap::configDialog()
         ui_configWidget = new Ui::OverviewMapConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
         for( int i = 0; i < m_planetID.size(); ++i ) {
-            ui_configWidget->m_planetComboBox->addItem( Planet::name(m_planetID.value( i ) ) );
+            ui_configWidget->m_planetComboBox->addItem( PlanetFactory::localizedName(m_planetID.value( i ) ) );
         }
         ui_configWidget->m_planetComboBox->setCurrentIndex( 2 );
         readSettings();
@@ -319,7 +320,7 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
     m_settings.insert( "width", settings.value( "width", m_defaultSize.toSize().width() ) );
     m_settings.insert( "height", settings.value( "height", m_defaultSize.toSize().height() ) );
 
-    foreach ( const QString& planet, Planet::planetList() ) {
+    foreach ( const QString& planet, PlanetFactory::planetList() ) {
         QString mapFile = MarbleDirs::path( QString( "svg/%1map.svg" ).arg( planet ) );
 
         if ( planet == "moon" ) {
@@ -362,7 +363,7 @@ void OverviewMap::writeSettings()
     m_settings.insert( "width", contentRect().width() );
     m_settings.insert( "height", contentRect().height() );
 
-    QStringList const planets = Planet::planetList();
+    QStringList const planets = PlanetFactory::planetList();
     foreach( const QString &planet, planets ) {
         m_settings.insert( "path_" + planet, m_svgPaths[planet] );
     }
@@ -374,7 +375,7 @@ void OverviewMap::writeSettings()
 
 void OverviewMap::updateSettings()
 {
-    QStringList const planets = Planet::planetList();
+    QStringList const planets = PlanetFactory::planetList();
     foreach( const QString &planet, planets ) {
         m_svgPaths.insert( planet, m_settings.value( "path_" + planet, QString() ).toString() );
     }

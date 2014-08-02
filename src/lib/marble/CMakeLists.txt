@@ -154,6 +154,7 @@ set(marblewidget_SRCS
     VisiblePlacemark.cpp
     PlacemarkLayout.cpp
     Planet.cpp
+    PlanetFactory.cpp
     Quaternion.cpp
     TextureColorizer.cpp
     TextureMapperInterface.cpp
@@ -530,6 +531,7 @@ install( FILES
     PluginAboutDialog.h
     marble_export.h
     Planet.h
+    PlanetFactory.h
 
     AbstractDataPlugin.h
     AbstractDataPluginModel.h

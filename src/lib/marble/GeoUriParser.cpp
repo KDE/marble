@@ -15,6 +15,7 @@
 #endif
 
 #include "Planet.h"
+#include "PlanetFactory.h"
 #include "GeoUriParser.h"
 #include "MarbleDebug.h"
 
@@ -23,7 +24,7 @@ namespace Marble {
 GeoUriParser::GeoUriParser( const QString& geoUri )
     : m_geoUri( geoUri ),
       m_coordinates(),
-      m_planet( "earth" )
+      m_planet( PlanetFactory::construct( "earth" ) )
 {
 }
 
@@ -31,7 +32,7 @@ void GeoUriParser::setGeoUri( const QString &geoUri )
 {
     m_geoUri = geoUri;
     m_coordinates = GeoDataCoordinates();
-    m_planet = Planet( "earth" );
+    m_planet = PlanetFactory::construct( "earth" );
 }
 
 QString GeoUriParser::geoUri() const
@@ -90,13 +91,13 @@ bool GeoUriParser::parse()
             for ( int i = 4; i <= geoUriRegexp.captureCount(); ++i )
             {
                 if ( geoUriRegexp.capturedTexts()[i] == "crs" ) {
-                    foreach ( const QString& str, Planet::planetList()) {
+                    foreach ( const QString& str, PlanetFactory::planetList()) {
                         if ( geoUriRegexp.captureCount() < i+1 ) {
                             i = geoUriRegexp.captureCount() + 1;
                             break;
                         }
                         if ( geoUriRegexp.capturedTexts()[i+1].contains(str, Qt::CaseInsensitive) ) {
-                            m_planet = Planet( str );
+                            m_planet = PlanetFactory::construct( str );
                             break;
                         }
                     }
@@ -126,9 +127,9 @@ bool GeoUriParser::parse()
         //QString layer = worldwindUrl.queryItemValue("layer");
         QString world = queryValue(worldwindUrl, "world");
 
-        foreach ( const QString& str, Planet::planetList()) {
+        foreach ( const QString& str, PlanetFactory::planetList()) {
             if ( world.contains(str, Qt::CaseInsensitive) ) {
-                m_planet = Planet( str );
+                m_planet = PlanetFactory::construct( str );
                 break;
             }
         }

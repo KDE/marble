@@ -29,6 +29,7 @@
 #include "AbstractFloatItem.h"
 #include "GeoPainter.h"
 #include "Planet.h"
+#include "PlanetFactory.h"
 #include "SunLocator.h"
 #include "ViewportParams.h"
 
@@ -1241,7 +1242,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
                     // It's labels' time!
                     if (m_viewSolarSystemLabel)
-                        painter->drawText(x+deltaX, y+deltaY, Planet("moon").name());
+                        painter->drawText(x+deltaX, y+deltaY, PlanetFactory::localizedName("moon"));
                 }
             }
         }
@@ -1322,7 +1323,7 @@ void StarsPlugin::renderPlanet(const QString &planetId,
 
         // It's labels' time!
         if (m_viewSolarSystemLabel)
-            painter->drawText(x+deltaX, y+deltaY, Planet(planetId).name());
+            painter->drawText(x+deltaX, y+deltaY, PlanetFactory::localizedName(planetId));
     }
 }
 
