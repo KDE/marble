@@ -42,6 +42,7 @@
               </Placemark>
             </Change>
           </Update>
+          <gx:delayedStart>4.2</gx:delayedStart>
         </gx:AnimatedUpdate>
 
         <gx:FlyTo>

@@ -13,6 +13,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoDataSoundCue.h"
+#include "GeoDataAnimatedUpdate.h"
 
 namespace Marble
 {
@@ -27,8 +28,11 @@ GeoNode* KmldelayedStartTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     if (parentItem.is<GeoDataSoundCue>()) {
-        int delay = parser.readElementText().toInt();
+        double const delay = parser.readElementText().toDouble();
         parentItem.nodeAs<GeoDataSoundCue>()->setDelayedStart(delay);
+    } else if (parentItem.is<GeoDataAnimatedUpdate>()) {
+        double const delay = parser.readElementText().toDouble();
+        parentItem.nodeAs<GeoDataAnimatedUpdate>()->setDelayedStart(delay);
     }
 
     return 0;
