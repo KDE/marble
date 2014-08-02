@@ -55,7 +55,6 @@ Q_SIGNALS:
     void finished();
     void paused();
     void stopped();
-    void centerOn( const GeoDataCoordinates &coordinates );
     void progressChanged( double );
     void updated( GeoDataFeature* );
     void added( GeoDataContainer *parent, GeoDataFeature *feature, int row );
@@ -65,6 +64,7 @@ private Q_SLOTS:
     void stopTour();
     void hideBalloon();
     void showBalloon( GeoDataPlacemark* );
+    void centerOn( const GeoDataCoordinates &coordinates );
 
 private:
     TourPlaybackPrivate * const d;

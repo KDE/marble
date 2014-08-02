@@ -151,7 +151,7 @@ void PlaybackAnimatedUpdateItem::stop()
 
     foreach( GeoDataFeature* feature, m_createdObjects ) {
         // remove from its new place
-        // emit removed( feature );
+        emit removed( feature );
         // bring back into its old place
         m_animatedUpdate->update()->create()->append( feature );
     }

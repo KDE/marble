@@ -25,6 +25,8 @@
 #include "GeoDataTourControl.h"
 #include "GeoDataSoundCue.h"
 #include "GeoDataAnimatedUpdate.h"
+#include "MarbleModel.h"
+#include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
 #include "PlaybackFlyToItem.h"
 #include "PlaybackAnimatedUpdateItem.h"
@@ -70,7 +72,7 @@ TourPlayback::TourPlayback(QObject *parent) :
     QObject(parent),
     d(new TourPlaybackPrivate())
 {
-    connect( &d->m_mainTrack, SIGNAL( centerOn( GeoDataCoordinates ) ), this, SIGNAL( centerOn( GeoDataCoordinates ) ) );
+    connect( &d->m_mainTrack, SIGNAL( centerOn( GeoDataCoordinates ) ), this, SLOT( centerOn( GeoDataCoordinates ) ) );
     connect( &d->m_mainTrack, SIGNAL( progressChanged( double ) ), this, SIGNAL( progressChanged( double ) ) );
     connect( &d->m_mainTrack, SIGNAL( finished() ), this, SLOT( stopTour() ) );
 }
@@ -114,6 +116,23 @@ bool TourPlayback::isPlaying() const
 void TourPlayback::setMarbleWidget(MarbleWidget* widget)
 {
     d->m_widget = widget;
+
+    connect( this, SIGNAL(added(GeoDataContainer*,GeoDataFeature*,int)),
+                      d->m_widget->model()->treeModel(), SLOT(addFeature(GeoDataContainer*,GeoDataFeature*,int)) );
+    connect( this, SIGNAL(removed(const GeoDataFeature*)),
+                      d->m_widget->model()->treeModel(), SLOT(removeFeature(const GeoDataFeature*)) );
+    connect( this, SIGNAL(updated(GeoDataFeature*)),
+                      d->m_widget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
+}
+
+void TourPlayback::centerOn( const GeoDataCoordinates &coordinates )
+{
+    if ( d->m_widget ) {
+        GeoDataLookAt lookat;
+        lookat.setCoordinates( coordinates );
+        lookat.setRange( coordinates.altitude() );
+        d->m_widget->flyTo( lookat, Instant );
+    }
 }
 
 void TourPlayback::setTour(GeoDataTour *tour)
@@ -159,7 +178,7 @@ void TourPlayback::setTour(GeoDataTour *tour)
             GeoDataAnimatedUpdate *animatedUpdate = dynamic_cast<GeoDataAnimatedUpdate*>(primitive);
             PlaybackAnimatedUpdateItem *item = new PlaybackAnimatedUpdateItem( animatedUpdate );
             ParallelTrack *track = new ParallelTrack( item );
-            track->setDelayBeforeTrackStarts( delay );
+            track->setDelayBeforeTrackStarts( delay + animatedUpdate->delayedStart() );
             d->m_parallelTracks.append( track );
             connect( track, SIGNAL( balloonHidden()), this, SLOT( hideBalloon() ) );
             connect( track, SIGNAL( balloonShown( GeoDataPlacemark* ) ), this, SLOT( showBalloon( GeoDataPlacemark* ) ) );

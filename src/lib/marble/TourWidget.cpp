@@ -110,7 +110,6 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_tourUi.m_actionOpenTour, SIGNAL( triggered() ), q, SLOT( openFile() ) );
     QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL( triggered() ), q, SLOT( saveTour() ) );
     QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( triggered() ), q, SLOT( saveTourAs() ) );
-    QObject::connect( &m_playback, SIGNAL(centerOn(GeoDataCoordinates)), q, SLOT(centerOn(GeoDataCoordinates)) );
     QObject::connect( &m_playback, SIGNAL(updated(GeoDataFeature*)), q, SIGNAL(featureUpdated(GeoDataFeature*)) );
     QObject::connect( &m_playback, SIGNAL(added(GeoDataContainer*,GeoDataFeature*,int)), q, SIGNAL(featureAdded(GeoDataContainer*,GeoDataFeature*,int)) );
     QObject::connect( &m_playback, SIGNAL(removed(const GeoDataFeature*)), q, SIGNAL(featureRemoved(const GeoDataFeature*)) );
@@ -627,16 +626,6 @@ void TourWidget::deleteSelected()
     if ( feature ) {
         emit featureUpdated( feature );
         d->updateRootIndex();
-    }
-}
-
-void TourWidget::centerOn( const GeoDataCoordinates &coordinates )
-{
-    if ( d->m_widget ) {
-        GeoDataLookAt lookat;
-        lookat.setCoordinates( coordinates );
-        lookat.setRange( coordinates.altitude() );
-        d->m_widget->flyTo( lookat, Instant );
     }
 }
 
