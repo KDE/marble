@@ -32,11 +32,9 @@ public:
     static void addDummyPlacemark( GeoDataPlacemark *placemark );
     static void cleanUpDummyPlacemarks();
 
-    static QColor buildingColor;
     static QColor backgroundColor;
 
 private:
-    static void setupCategories();
     static void setupAreaTags();
     
     static QList<QString> m_areaTags;
