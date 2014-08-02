@@ -53,6 +53,7 @@ GeoDataOverlay::GeoDataOverlay( const GeoDataOverlay &other ) :
 
 GeoDataOverlay &GeoDataOverlay::operator=( const GeoDataOverlay &other )
 {
+    GeoDataFeature::operator=( other );
     *d = *other.d;
     return *this;
 }

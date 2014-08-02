@@ -49,6 +49,7 @@ GeoDataPhotoOverlay::GeoDataPhotoOverlay( const Marble::GeoDataPhotoOverlay &oth
 
 GeoDataPhotoOverlay &GeoDataPhotoOverlay::operator=( const GeoDataPhotoOverlay &other )
 {
+    GeoDataOverlay::operator=( other );
     *d = *other.d;
     return *this;
 }
