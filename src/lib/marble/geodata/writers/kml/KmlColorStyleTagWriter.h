@@ -31,6 +31,9 @@ public:
 protected:
     virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const = 0;
 
+    /** Returns true iff all properties have a default value */
+    virtual bool isEmpty( const GeoNode *node ) const = 0;
+
 private:
     QString const m_elementName;
 };

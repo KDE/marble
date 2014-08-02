@@ -27,9 +27,18 @@ KmlColorStyleTagWriter::KmlColorStyleTagWriter(const QString &elementName)
 
 bool KmlColorStyleTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer ) const
 {
+    GeoDataColorStyle const *colorStyle = static_cast<const GeoDataColorStyle*>(node);
+
+    if ( colorStyle->id().isEmpty() &&
+         colorStyle->targetId().isEmpty() &&
+         colorStyle->color() == QColor( Qt::white ) &&
+         colorStyle->colorMode() == GeoDataColorStyle::Normal &&
+         isEmpty( node ) ) {
+        return true;
+    }
+
     writer.writeStartElement( m_elementName );
 
-    GeoDataColorStyle const *colorStyle = static_cast<const GeoDataColorStyle*>(node);
     KmlObjectTagWriter::writeIdentifiers( writer, colorStyle);
     writer.writeOptionalElement( kml::kmlTag_color, formatColor( colorStyle->color() ), "ffffffff" );
     QString const colorMode = colorStyle->colorMode() == GeoDataColorStyle::Random ? "random" : "normal";

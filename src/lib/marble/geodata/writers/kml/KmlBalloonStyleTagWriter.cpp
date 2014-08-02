@@ -29,6 +29,14 @@ bool KmlBalloonStyleTagWriter::write( const GeoNode *node,
                                GeoWriter& writer ) const
 {
     const GeoDataBalloonStyle *balloonStyle = static_cast<const GeoDataBalloonStyle*>( node );
+    bool const isEmpty = balloonStyle->backgroundColor() == QColor( Qt::white ) &&
+            balloonStyle->textColor() == QColor( Qt::black ) &&
+            balloonStyle->text().isEmpty() &&
+            balloonStyle->displayMode() == GeoDataBalloonStyle::Default;
+    if ( isEmpty ) {
+            return true;
+    }
+
     writer.writeStartElement( kml::kmlTag_BalloonStyle );
     KmlObjectTagWriter::writeIdentifiers( writer, balloonStyle );
 
@@ -46,8 +54,9 @@ bool KmlBalloonStyleTagWriter::write( const GeoNode *node,
         writer.writeOptionalElement( kml::kmlTag_text, textString );
     }
 
-    QString const displayMode = balloonStyle->displayMode() == GeoDataBalloonStyle::Hide ? "hide" : "default";
-    writer.writeOptionalElement( kml::kmlTag_displayMode, displayMode );
+    if ( balloonStyle->displayMode() == GeoDataBalloonStyle::Hide ) {
+        writer.writeElement( kml::kmlTag_displayMode, "hide" );
+    }
 
     writer.writeEndElement();
     return true;

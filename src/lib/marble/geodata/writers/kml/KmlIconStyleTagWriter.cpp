@@ -32,25 +32,53 @@ bool KmlIconStyleTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) c
 {
     const GeoDataIconStyle *style = static_cast<const GeoDataIconStyle*>( node );
 
-    writer.writeElement( kml::kmlTag_scale, QString::number( style->scale(), 'f' ) );
+    if ( style->scale() != 1.0 ) {
+        writer.writeElement( kml::kmlTag_scale, QString::number( style->scale(), 'f' ) );
+    }
 
-    writer.writeStartElement( kml::kmlTag_Icon );
-    writer.writeStartElement( kml::kmlTag_href );
-    writer.writeCharacters( style->iconPath() );
-    writer.writeEndElement();
-    writer.writeEndElement();
+    if ( !style->iconPath().isEmpty() ) {
+        writer.writeStartElement( kml::kmlTag_Icon );
+        writer.writeStartElement( kml::kmlTag_href );
+        writer.writeCharacters( style->iconPath() );
+        writer.writeEndElement();
+        writer.writeEndElement();
+    }
 
-    writer.writeStartElement( kml::kmlTag_hotSpot );
     GeoDataHotSpot::Units xunits, yunits;
     QPointF const hotSpot = style->hotSpot( xunits, yunits );
-    writer.writeAttribute( "x", QString::number( hotSpot.x(), 'f' ) );
-    writer.writeAttribute( "y", QString::number( hotSpot.y(), 'f' ) );
+    bool const emptyHotSpot = hotSpot.x() == 0.5 && hotSpot.y() == 0.5 &&
+        xunits == GeoDataHotSpot::Fraction && yunits == GeoDataHotSpot::Fraction;
+    if ( !emptyHotSpot ) {
+        writer.writeStartElement( kml::kmlTag_hotSpot );
+        if ( hotSpot.x() != 0.5 || xunits != GeoDataHotSpot::Fraction ) {
+            writer.writeAttribute( "x", QString::number( hotSpot.x(), 'f' ) );
+        }
+        if ( hotSpot.y() != 0.5 || yunits != GeoDataHotSpot::Fraction ) {
+            writer.writeAttribute( "y", QString::number( hotSpot.y(), 'f' ) );
+        }
 
-    writer.writeAttribute( "xunits", unitString( xunits ) );
-    writer.writeAttribute( "yunits", unitString( yunits ) );
-    writer.writeEndElement();
+        if ( xunits != GeoDataHotSpot::Fraction ) {
+            writer.writeAttribute( "xunits", unitString( xunits ) );
+        }
+        if ( yunits != GeoDataHotSpot::Fraction ) {
+            writer.writeAttribute( "yunits", unitString( yunits ) );
+        }
+        writer.writeEndElement();
+    }
 
     return true;
+}
+
+bool KmlIconStyleTagWriter::isEmpty( const GeoNode *node ) const
+{
+    const GeoDataIconStyle *style = static_cast<const GeoDataIconStyle*>( node );
+    GeoDataHotSpot::Units xunits, yunits;
+    QPointF const hotSpot = style->hotSpot( xunits, yunits );
+    return style->iconPath().isEmpty() &&
+            hotSpot.x() == 0.5 &&
+            hotSpot.y() == 0.5 &&
+            xunits == GeoDataHotSpot::Fraction &&
+            yunits == GeoDataHotSpot::Fraction;
 }
 
 QString KmlIconStyleTagWriter::unitString(GeoDataHotSpot::Units unit)

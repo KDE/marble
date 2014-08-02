@@ -7,7 +7,6 @@
       <IconStyle>
         <color>aabbccdd</color>
         <colorMode>random</colorMode>
-        <scale>1.000000</scale>
         <Icon>
           <href>/home/username/marble/export/share/marble/data/bitmaps/default_location.png</href>
         </Icon>
@@ -21,12 +20,9 @@
       <PolyStyle>
         <color>ffaabbdd</color>
         <colorMode>random</colorMode>
-        <fill>1</fill>
-        <outline>1</outline>
       </PolyStyle>
       <BalloonStyle>
         <text>Forgot to add a BalloonStyle with regular text, not regex :)</text>
-        <displayMode>default</displayMode>
       </BalloonStyle>
       <ListStyle>
         <listItemType>radioFolder</listItemType>

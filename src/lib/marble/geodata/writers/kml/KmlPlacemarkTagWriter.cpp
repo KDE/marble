@@ -16,6 +16,7 @@
 #include "GeoDataTimeStamp.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
+#include "GeoDataStyle.h"
 
 namespace Marble
 {
@@ -32,6 +33,9 @@ bool KmlPlacemarkTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) c
     const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>(node);
 
     writer.writeOptionalElement( kml::kmlTag_styleUrl, placemark->styleUrl() );
+    if ( placemark->styleUrl().isEmpty() && placemark->customStyle() ) {
+        writeElement( placemark->customStyle(), writer );
+    }
 
     if( placemark->geometry() ) {
         writeElement( placemark->geometry(), writer );

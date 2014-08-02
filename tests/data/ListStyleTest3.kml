@@ -5,23 +5,16 @@
     <description>Some description here</description>
     <Style id="track">
       <IconStyle>
-        <scale>1.000000</scale>
         <Icon>
           <href>/home/username/marble/export/share/marble/data/bitmaps/default_location.png</href>
         </Icon>
-        <hotSpot x="0.500000" y="0.500000" xunits="fraction" yunits="fraction"/>
       </IconStyle>
       <LineStyle>
         <color>c80008e2</color>
         <width>4</width>
       </LineStyle>
-      <PolyStyle>
-        <fill>1</fill>
-        <outline>1</outline>
-      </PolyStyle>
       <BalloonStyle>
         <text><![CDATA[<b><font color="#CC0000" size="+3">$[name]</font></b><br/><br/><font face="Courier">$[description]</font><br/><br/>Extra text that will appear in the description balloon<br/><br/>]]></text>
-        <displayMode>default</displayMode>
       </BalloonStyle>
       <ListStyle>
         <listItemType>radioFolder</listItemType>

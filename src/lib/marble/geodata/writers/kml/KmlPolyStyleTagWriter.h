@@ -22,6 +22,7 @@ public:
 
 protected:
     virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
+    virtual bool isEmpty( const GeoNode *node ) const;
 };
 
 }

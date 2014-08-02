@@ -30,10 +30,20 @@ bool KmlPolyStyleTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) c
 {
     const GeoDataPolyStyle *style = static_cast<const GeoDataPolyStyle*>( node );
 
-    writer.writeElement( "fill", QString::number( style->fill() ) );
-    writer.writeElement( "outline", QString::number( style->outline() ) );
+    if ( !style->fill() ) {
+        writer.writeElement( "fill", "0" );
+    }
+    if ( !style->outline() ) {
+        writer.writeElement( "outline", "0" );
+    }
 
     return true;
+}
+
+bool KmlPolyStyleTagWriter::isEmpty(const GeoNode *node) const
+{
+    const GeoDataPolyStyle *style = static_cast<const GeoDataPolyStyle*>( node );
+    return style->fill() && style->outline();
 }
 
 }
