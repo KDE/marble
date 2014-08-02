@@ -727,6 +727,11 @@ const GeoDataStyle* GeoDataFeature::style() const
     }
 }
 
+const GeoDataStyle *GeoDataFeature::customStyle() const
+{
+    return d->m_style;
+}
+
 void GeoDataFeature::setStyle( GeoDataStyle* style )
 {
     detach();
