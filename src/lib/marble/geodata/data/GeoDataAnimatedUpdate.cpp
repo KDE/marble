@@ -20,12 +20,13 @@ class GeoDataAnimatedUpdatePrivate
 {
 public:
     double m_duration;
+    double m_delayedStart;
     GeoDataUpdate* m_update;
     GeoDataAnimatedUpdatePrivate();
 };
 
 GeoDataAnimatedUpdatePrivate::GeoDataAnimatedUpdatePrivate() :
-    m_duration( 0.0 ), m_update( 0 )
+    m_duration( 0.0 ), m_delayedStart( 0 ), m_update( 0 )
 {
 
 }
@@ -101,4 +102,15 @@ void GeoDataAnimatedUpdate::setDuration( double duration )
 {
     d->m_duration = duration;
 }
+
+double GeoDataAnimatedUpdate::delayedStart() const
+{
+    return d->m_delayedStart;
+}
+
+void GeoDataAnimatedUpdate::setDelayedStart( double delayedStart )
+{
+    d->m_delayedStart = delayedStart;
+}
+
 }

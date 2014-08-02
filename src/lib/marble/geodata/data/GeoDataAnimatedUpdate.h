@@ -36,6 +36,9 @@ public:
 
     double duration() const;
     void setDuration( double duration );
+    
+    double delayedStart() const;
+    void setDelayedStart( double delayedStart );
 
     const GeoDataUpdate* update() const;
     GeoDataUpdate* update();
