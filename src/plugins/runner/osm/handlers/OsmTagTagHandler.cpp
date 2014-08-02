@@ -10,16 +10,16 @@
 
 #include "OsmTagTagHandler.h"
 
-#include "GeoParser.h"
-#include "OsmNodeFactory.h"
+#include "OsmElementDictionary.h"
+#include "OsmParser.h"
+
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 #include "GeoDataLineString.h"
-#include "MarbleDebug.h"
-#include "OsmElementDictionary.h"
-#include "OsmGlobals.h"
 #include "GeoDataStyle.h"
+
+#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -31,8 +31,11 @@ static GeoTagHandlerRegistrar osmTagTagHandler( GeoParser::QualifiedName( osmTag
 
 static QStringList tagBlackList = QStringList() << "created_by";
 
-GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
+GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
 {
+    Q_ASSERT( dynamic_cast<OsmParser *>( &geoParser ) != 0 );
+    OsmParser &parser = static_cast<OsmParser &>( geoParser );
+
     Q_ASSERT( parser.isStartElement() );
 
     GeoStackItem parentItem = parser.parentElement();
@@ -46,13 +49,13 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     GeoDataGeometry * geometry = parentItem.nodeAs<GeoDataGeometry>();
     if ( !geometry )
         return 0;
-    
+
     GeoDataGeometry *placemarkGeometry = geometry;
     
     //If node geometry is part of multigeometry -> go up to placemark geometry.
     while( dynamic_cast<GeoDataMultiGeometry*>(placemarkGeometry->parent()) )
         placemarkGeometry = dynamic_cast<GeoDataMultiGeometry*>(placemarkGeometry->parent());
-    
+
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(placemarkGeometry->parent());
 
     if ( key == "name" )
@@ -73,10 +76,19 @@ GeoNode* OsmTagTagHandler::parse( GeoParser& parser ) const
     {
         Q_ASSERT( placemark );
 
-        //Convert area ways or relations to polygons
-        if( !dynamic_cast<GeoDataPolygon*>( geometry ) && OsmGlobals::tagNeedArea( key + '=' + value ) )
-        {
-            placemark = convertWayToPolygon( doc, placemark, geometry );
+        if( !dynamic_cast<GeoDataPolygon*>( geometry ) && parser.tagNeedArea( key + '=' + value ) ) {
+            //Convert area ways or relations to polygons
+            GeoDataLineString *polyline = dynamic_cast<GeoDataLineString *>( geometry );
+            Q_ASSERT( polyline );
+            doc->remove( doc->childPosition( placemark ) );
+            parser.addDummyPlacemark( placemark );
+            placemark = new GeoDataPlacemark( *placemark );
+            GeoDataPolygon *polygon = new GeoDataPolygon;
+            polygon->setOuterBoundary( *polyline );
+            //FIXME: Dirty hack to change placemark associated with node, for parsing purposes.
+            polyline->setParent( placemark );
+            placemark->setGeometry( polygon );
+            doc->append( placemark );
         }
         if ( key == "building" && value == "yes" && placemark->visualCategory() == GeoDataFeature::Default )
         {
@@ -157,23 +169,6 @@ GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeom
     return placemark;
 }
 
-GeoDataPlacemark *OsmTagTagHandler::convertWayToPolygon( GeoDataDocument *doc, GeoDataPlacemark *placemark, GeoDataGeometry *geometry )
-{
-    GeoDataLineString *polyline = dynamic_cast<GeoDataLineString *>( geometry );
-    Q_ASSERT( polyline );
-    doc->remove( doc->childPosition( placemark ) );
-    OsmGlobals::addDummyPlacemark( placemark );
-    GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
-    GeoDataPolygon *polygon = new GeoDataPolygon;
-    polygon->setOuterBoundary( *polyline );
-    //FIXME: Dirty hack to change placemark associated with node, for parsing purposes.
-    polyline->setParent( newPlacemark );
-    newPlacemark->setGeometry( polygon );
-    doc->append( newPlacemark );
-    return newPlacemark;
 }
 
 }
-
-}
-

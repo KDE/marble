@@ -10,11 +10,11 @@
 
 #include "OsmNodeTagHandler.h"
 
-#include "GeoParser.h"
+#include "OsmElementDictionary.h"
+#include "OsmParser.h"
+
 #include "GeoDataCoordinates.h"
 #include "GeoDataPoint.h"
-#include "OsmNodeFactory.h"
-#include "OsmElementDictionary.h"
 
 namespace Marble
 {
@@ -25,17 +25,19 @@ namespace osm
 static GeoTagHandlerRegistrar osmNodeTagHandler( GeoParser::QualifiedName( osmTag_node, "" ),
         new OsmNodeTagHandler() );
 
-GeoNode* OsmNodeTagHandler::parse( GeoParser& parser ) const
+GeoNode* OsmNodeTagHandler::parse( GeoParser &geoParser ) const
 {
     // Osm Node http://wiki.openstreetmap.org/wiki/Data_Primitives#Node
 
+    Q_ASSERT( dynamic_cast<OsmParser *>( &geoParser ) );
+    OsmParser &parser = static_cast<OsmParser &>( geoParser );
     Q_ASSERT( parser.isStartElement() );
 
     qreal lon = parser.attribute( "lon" ).toDouble();
     qreal lat = parser.attribute( "lat" ).toDouble();
 
     GeoDataPoint *point = new GeoDataPoint( lon, lat, 0, GeoDataCoordinates::Degree );
-    osm::OsmNodeFactory::appendPoint( parser.attribute( "id" ).toULongLong(), point );
+    parser.setNode( parser.attribute( "id" ).toULongLong(), point );
     return point;
 }
 

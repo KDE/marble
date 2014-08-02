@@ -12,12 +12,12 @@
 
 #include "OsmMemberTagHandler.h"
 
-#include "GeoParser.h"
-#include "OsmWayFactory.h"
-#include "OsmRelationFactory.h"
+#include "OsmParser.h"
+#include "OsmElementDictionary.h"
+
 #include "GeoDataParser.h"
 #include "GeoDataPolygon.h"
-#include "OsmElementDictionary.h"
+
 #include "MarbleDebug.h"
 
 namespace Marble
@@ -29,10 +29,13 @@ namespace osm
 static GeoTagHandlerRegistrar osmMemberTagHandler( GeoParser::QualifiedName( osmTag_member, "" ),
         new OsmMemberTagHandler() );
 
-GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
+GeoNode* OsmMemberTagHandler::parse( GeoParser &geoParser ) const
 {
     // Relations members examples
     // http://wiki.openstreetmap.org/wiki/Relation:multipolygon#Examples
+
+    Q_ASSERT( dynamic_cast<OsmParser *>( &geoParser ) );
+    OsmParser &parser = static_cast<OsmParser &>( geoParser );
 
     Q_ASSERT( parser.isStartElement() );
 
@@ -54,7 +57,7 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                 quint64 id = parser.attribute( "ref" ).toULongLong();
 
                 // With the id we get the way geometry
-                if ( GeoDataLineString *line =  osm::OsmWayFactory::line( id )  )
+                if ( GeoDataLineString *line =  parser.way( id )  )
                 {
                     // Some of the ways that build the relation
                     // might be in opposite directions
@@ -143,7 +146,7 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                 quint64 id = parser.attribute( "ref" ).toULongLong();
 
                 // With the id we get the way geometry
-                if ( GeoDataLineString *line = osm::OsmWayFactory::line( id ) )
+                if ( GeoDataLineString *line = parser.way( id ) )
                 {
                     polygon->appendInnerBoundary( GeoDataLinearRing( *line ) );
                 }
@@ -169,7 +172,7 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser& parser ) const
                 quint64 id = parser.attribute( "ref" ).toULongLong();
 
                 // With the id we get the relation geometry
-                if ( GeoDataPolygon *p =  osm::OsmRelationFactory::polygon( id ) )
+                if ( GeoDataPolygon *p =  parser.polygon( id ) )
                 {
                     polygon->appendInnerBoundary( p->outerBoundary() );
                 }

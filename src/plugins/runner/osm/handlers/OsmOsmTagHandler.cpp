@@ -10,6 +10,9 @@
 
 #include "OsmOsmTagHandler.h"
 
+#include "OsmElementDictionary.h"
+#include "OsmParser.h"
+
 #include "GeoParser.h"
 #include "GeoDataPoint.h"
 #include "GeoDataDocument.h"
@@ -18,8 +21,6 @@
 #include "GeoDataLineStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataStyle.h"
-#include "OsmElementDictionary.h"
-#include "OsmGlobals.h"
 
 namespace Marble
 {
@@ -38,7 +39,7 @@ GeoNode* OsmOsmTagHandler::parse( GeoParser& parser ) const
     GeoDataPolyStyle backgroundPolyStyle;
     backgroundPolyStyle.setFill( true );
     backgroundPolyStyle.setOutline( false );
-    backgroundPolyStyle.setColor( OsmGlobals::backgroundColor );
+    backgroundPolyStyle.setColor( OsmParser::backgroundColor );
     GeoDataStyle backgroundStyle;
     backgroundStyle.setPolyStyle( backgroundPolyStyle );
     backgroundStyle.setId( "background" );

@@ -11,7 +11,6 @@
 #include "OsmBoundTagHandler.h"
 
 #include "GeoParser.h"
-#include "OsmNodeFactory.h"
 #include "GeoDataParser.h"
 #include "MarbleDebug.h"
 #include "OsmElementDictionary.h"

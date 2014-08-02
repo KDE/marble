@@ -12,14 +12,13 @@
 
 #include "OsmRelationTagHandler.h"
 
-#include "GeoParser.h"
-#include "OsmRelationFactory.h"
+#include "OsmParser.h"
+#include "OsmElementDictionary.h"
+
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 #include "GeoDataPolygon.h"
-#include "OsmElementDictionary.h"
-#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -30,9 +29,12 @@ namespace osm
 static GeoTagHandlerRegistrar osmRelationTagHandler( GeoParser::QualifiedName( osmTag_relation, "" ),
         new OsmRelationTagHandler() );
 
-GeoNode* OsmRelationTagHandler::parse( GeoParser& parser ) const
+GeoNode* OsmRelationTagHandler::parse( GeoParser &geoParser ) const
 {
     // Osm Relation http://wiki.openstreetmap.org/wiki/Data_Primitives#Relation
+
+    Q_ASSERT( dynamic_cast<OsmParser *>( &geoParser ) != 0 );
+    OsmParser &parser = static_cast<OsmParser &>( geoParser );
 
     Q_ASSERT( parser.isStartElement() );
 
@@ -48,7 +50,7 @@ GeoNode* OsmRelationTagHandler::parse( GeoParser& parser ) const
     placemark->setVisible( false );
     doc->append( placemark );
 
-    osm::OsmRelationFactory::appendPolygon( parser.attribute( "id" ).toULongLong(), polygon );
+    parser.setPolygon( parser.attribute( "id" ).toULongLong(), polygon );
 
     return polygon;
 }
