@@ -32,7 +32,7 @@ public:
     static void addDummyPlacemark( GeoDataPlacemark *placemark );
     static void cleanUpDummyPlacemarks();
 
-    static QColor backgroundColor;
+    static const QColor backgroundColor;
 
 private:
     static void setupAreaTags();

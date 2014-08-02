@@ -22,7 +22,7 @@ namespace osm
 {
 QList<QString> OsmGlobals::m_areaTags;
 
-QColor OsmGlobals::backgroundColor( 0xF1, 0xEE, 0xE8 );
+const QColor OsmGlobals::backgroundColor( 0xF1, 0xEE, 0xE8 );
 QList<GeoDataPlacemark*> OsmGlobals::dummyPlacemarks;
 
 bool OsmGlobals::tagNeedArea(const QString& keyValue)
