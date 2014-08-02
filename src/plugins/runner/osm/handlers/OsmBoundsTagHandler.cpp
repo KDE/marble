@@ -10,15 +10,16 @@
 
 #include "OsmBoundsTagHandler.h"
 
+#include "OsmElementDictionary.h"
+
 #include "GeoParser.h"
-#include "OsmNodeFactory.h"
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataRegion.h"
+
 #include "MarbleDebug.h"
-#include "OsmElementDictionary.h"
 
 namespace Marble
 {

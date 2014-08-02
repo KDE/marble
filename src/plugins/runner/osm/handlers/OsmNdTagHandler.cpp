@@ -10,12 +10,12 @@
 
 #include "OsmNdTagHandler.h"
 
-#include "GeoParser.h"
-#include "OsmNodeFactory.h"
+#include "OsmElementDictionary.h"
+#include "OsmParser.h"
+
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPoint.h"
-#include "OsmElementDictionary.h"
 
 namespace Marble
 {
@@ -26,8 +26,11 @@ namespace osm
 static GeoTagHandlerRegistrar osmNdTagHandler( GeoParser::QualifiedName( osmTag_nd, "" ),
         new OsmNdTagHandler() );
 
-GeoNode* OsmNdTagHandler::parse( GeoParser& parser ) const
+GeoNode* OsmNdTagHandler::parse( GeoParser &geoParser ) const
 {
+    Q_ASSERT( dynamic_cast<OsmParser *>( &geoParser ) != 0 );
+    OsmParser &parser = static_cast<OsmParser &>( geoParser );
+
     Q_ASSERT( parser.isStartElement() );
 
     GeoStackItem parentItem = parser.parentElement();
@@ -37,8 +40,7 @@ GeoNode* OsmNdTagHandler::parse( GeoParser& parser ) const
         GeoDataLineString *s = parentItem.nodeAs<GeoDataLineString>();
         Q_ASSERT( s );
         quint64 id = parser.attribute( "ref" ).toULongLong();
-        if ( GeoDataPoint *p = osm::OsmNodeFactory::getPoint( id ) )
-        {
+        if ( GeoDataPoint *p = parser.node( id ) ) {
             s->append( GeoDataCoordinates( p->coordinates().longitude(), p->coordinates().latitude() ) );
         }
 

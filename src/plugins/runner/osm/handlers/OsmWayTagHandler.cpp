@@ -10,13 +10,13 @@
 
 #include "OsmWayTagHandler.h"
 
-#include "GeoParser.h"
-#include "OsmWayFactory.h"
+#include "OsmParser.h"
+#include "OsmElementDictionary.h"
+
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 #include "GeoDataLineString.h"
-#include "OsmElementDictionary.h"
 
 namespace Marble
 {
@@ -27,9 +27,12 @@ namespace osm
 static GeoTagHandlerRegistrar osmWayTagHandler( GeoParser::QualifiedName( osmTag_way, "" ),
         new OsmWayTagHandler() );
 
-GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
+GeoNode* OsmWayTagHandler::parse( GeoParser &geoParser ) const
 {
     // Osm Way http://wiki.openstreetmap.org/wiki/Data_Primitives#Way
+
+    Q_ASSERT( dynamic_cast<OsmParser *>( &geoParser ) );
+    OsmParser &parser = static_cast<OsmParser &>( geoParser );
 
     Q_ASSERT( parser.isStartElement() );
 
@@ -45,7 +48,7 @@ GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
     placemark->setVisible( false );
     doc->append( placemark );
 
-    osm::OsmWayFactory::appendLine( parser.attribute( "id" ).toULongLong(), polyline );
+    parser.setWay( parser.attribute( "id" ).toULongLong(), polyline );
 
     return polyline;
 }
