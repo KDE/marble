@@ -57,7 +57,7 @@ bool KmlDocumentTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) co
     QVector<GeoDataFeature*>::ConstIterator const end = document->constEnd();
 
     for ( ; it != end; ++it ) {
-        writeElement( &(**it), writer );
+        writeElement( *it, writer );
     }
 
     return true;
