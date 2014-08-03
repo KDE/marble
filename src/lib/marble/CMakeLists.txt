@@ -103,7 +103,8 @@ set(marblewidget_SRCS
     PlaybackTourControlItem.cpp
     PlaybackWaitItem.cpp
     SerialTrack.cpp
-    ParallelTrack.cpp
+    SoundTrack.cpp
+    AnimatedUpdateTrack.cpp
     CurrentLocationWidget.cpp
     MarbleNavigator.cpp
     MarbleLegendBrowser.cpp

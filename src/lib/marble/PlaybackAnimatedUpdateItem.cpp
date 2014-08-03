@@ -147,7 +147,21 @@ void PlaybackAnimatedUpdateItem::stop()
     }
     m_playing = false;
 
-    /** @todo We need a more robust approach to reverting changes */
+    if ( m_animatedUpdate->update()->change() ) {
+        QVector<GeoDataPlacemark*> placemarkList = m_animatedUpdate->update()->change()->placemarkList();
+        for( int i = 0; i < placemarkList.size(); i++ ){
+            GeoDataPlacemark* placemark = placemarkList.at( i );
+            QString targetId = placemark->targetId();
+            GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
+            if( placemark->isBalloonVisible() ){
+                if( feature && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ){
+                    emit balloonHidden();
+                }
+            } else {
+                emit balloonShown( static_cast<GeoDataPlacemark*>( feature ) );
+            }
+        }
+    }
 
     foreach( GeoDataFeature* feature, m_createdObjects ) {
         // remove from its new place
@@ -160,12 +174,17 @@ void PlaybackAnimatedUpdateItem::stop()
     foreach( GeoDataFeature* feature, m_deletedObjects ) {
         GeoDataFeature* target = findFeature( m_rootDocument, feature->targetId() );
         if ( target ) {
-            // @todo: Do we have to note the original row position and restore it?
+            /** @todo Do we have to note the original row position and restore it? */
             Q_ASSERT( dynamic_cast<GeoDataContainer*>( target ) );
-           //  emit added( static_cast<GeoDataContainer*>( target ), feature, -1 );
+            emit added( static_cast<GeoDataContainer*>( target ), feature, -1 );
         } // else the root document was modified in an unfortunate way and we cannot restore it at this point
     }
     m_deletedObjects.clear();
+}
+
+bool PlaybackAnimatedUpdateItem::isApplied() const
+{
+    return m_playing;
 }
 
 bool PlaybackAnimatedUpdateItem::canDelete(const char *nodeType) const

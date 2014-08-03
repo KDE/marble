@@ -124,6 +124,11 @@ void SerialTrack::clear()
 {
     qDeleteAll( m_items );
     m_items.clear();
+    m_duration = 0;
+    m_currentIndex = 0;
+    m_finishedPosition = 0;
+    m_currentPosition = 0;
+    m_paused = true;
 }
 
 void SerialTrack::handleFinishedItem()
@@ -156,6 +161,10 @@ PlaybackItem* SerialTrack::at( int i )
     return m_items.at( i );
 }
 
+double SerialTrack::currentPosition()
+{
+    return m_currentPosition;
+}
 
 }
 

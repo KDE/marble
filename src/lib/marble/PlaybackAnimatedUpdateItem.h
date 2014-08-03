@@ -30,12 +30,12 @@ public:
     double duration() const;
     void play();
     void pause();
-    void seek( double position );
+    void seek( double );
     void stop();
+    bool isApplied() const;
 
 private:
     bool canDelete( const char* nodeType ) const;
-
     GeoDataDocument* rootDocument( GeoDataObject *object ) const;
     GeoDataFeature* findFeature( GeoDataFeature* feature, const QString& id ) const;
     GeoDataAnimatedUpdate* m_animatedUpdate;

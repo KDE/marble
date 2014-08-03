@@ -367,12 +367,6 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_widget = widget;
     d->m_delegate = new TourItemDelegate( d->m_tourUi.m_listView, d->m_widget );
     d->m_tourUi.m_listView->setItemDelegate( d->m_delegate );
-    connect( this, SIGNAL( featureUpdated( GeoDataFeature* ) ),
-             d->m_widget->model()->treeModel(), SLOT( updateFeature( GeoDataFeature* ) ) );
-    connect( this, SIGNAL( featureAdded(GeoDataContainer*,GeoDataFeature*,int)),
-             d->m_widget->model()->treeModel(), SLOT(addFeature(GeoDataContainer*,GeoDataFeature*,int)) );
-    connect( this, SIGNAL( featureRemoved(const GeoDataFeature*)),
-             d->m_widget->model()->treeModel(), SLOT(removeFeature(const GeoDataFeature*)) );
 }
 
 void TourWidget::togglePlaying()
@@ -598,8 +592,6 @@ void TourWidgetPrivate::updateRootIndex()
         m_playback.setMarbleWidget( m_widget );
         m_playback.setTour( tour );
         m_tourUi.m_slider->setMaximum( m_playback.duration() * 100 );
-        QObject::connect( &m_playback, SIGNAL( centerOn( GeoDataCoordinates ) ),
-                         m_widget, SLOT( centerOn( GeoDataCoordinates ) ) );
         QObject::connect( &m_playback, SIGNAL( progressChanged( double ) ),
                          q, SLOT( handlePlaybackProgress( double ) ) );
         q->stopPlaying();

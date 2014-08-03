@@ -8,15 +8,12 @@
 // Copyright 2014 Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
 
-#include "ParallelTrack.h"
-
-#include "PlaybackSoundCueItem.h"
-#include "PlaybackAnimatedUpdateItem.h"
+#include "AnimatedUpdateTrack.h"
 
 namespace Marble
 {
 
-ParallelTrack::ParallelTrack( PlaybackItem* item )
+AnimatedUpdateTrack::AnimatedUpdateTrack( PlaybackAnimatedUpdateItem* item )
 {
     m_item = item;
     m_progress = 0;
@@ -30,19 +27,19 @@ ParallelTrack::ParallelTrack( PlaybackItem* item )
     connect( m_item, SIGNAL(removed(const GeoDataFeature*)), this, SIGNAL(removed(const GeoDataFeature*)) );
 }
 
-void ParallelTrack::setDelayBeforeTrackStarts( double delay )
+void AnimatedUpdateTrack::setDelayBeforeTrackStarts( double delay )
 {
     m_delayBeforeTrackStarts = delay;
     m_timer.setSingleShot( true );
     m_timer.setInterval( m_delayBeforeTrackStarts * 1000 );
 }
 
-double ParallelTrack::delayBeforeTrackStarts() const
+double AnimatedUpdateTrack::delayBeforeTrackStarts() const
 {
     return m_delayBeforeTrackStarts;
 }
 
-void ParallelTrack::play()
+void AnimatedUpdateTrack::play()
 {
     m_paused = false;
     m_playTime = QDateTime::currentDateTime();
@@ -53,12 +50,12 @@ void ParallelTrack::play()
     }
 }
 
-void ParallelTrack::playSlot()
+void AnimatedUpdateTrack::playSlot()
 {
     m_item->play();
 }
 
-void ParallelTrack::pause()
+void AnimatedUpdateTrack::pause()
 {
     m_paused = true;
     m_pauseTime = QDateTime::currentDateTime();
@@ -70,7 +67,7 @@ void ParallelTrack::pause()
     }
 }
 
-void ParallelTrack::seek( double offset )
+void AnimatedUpdateTrack::seek( double offset )
 {
     m_timer.stop();
     m_progress = offset;
@@ -95,7 +92,7 @@ void ParallelTrack::seek( double offset )
     }
 }
 
-void ParallelTrack::stop()
+void AnimatedUpdateTrack::stop()
 {
     m_paused = true;
     m_item->stop();
@@ -105,11 +102,11 @@ void ParallelTrack::stop()
     m_progress = 0;
 }
 
-void ParallelTrack::setPaused( bool pause )
+void AnimatedUpdateTrack::setPaused( bool pause )
 {
     m_paused = pause;
 }
 
 }
 
-#include "ParallelTrack.moc"
+#include "AnimatedUpdateTrack.moc"

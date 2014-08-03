@@ -34,6 +34,7 @@ public:
     void clear();
     int size() const;
     PlaybackItem* at( int i );
+    double currentPosition();
 
 Q_SIGNALS:
     void centerOn( const GeoDataCoordinates &coordinates );

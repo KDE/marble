@@ -8,10 +8,10 @@
 // Copyright 2014 Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
 
-#ifndef PARALLELTRACK_H
-#define PARALLELTRACK_H
+#ifndef ANIMATEDUPDATETRACK_H
+#define ANIMATEDUPDATETRACK_H
 
-#include "PlaybackItem.h"
+#include "PlaybackAnimatedUpdateItem.h"
 #include "GeoDataPlacemark.h"
 
 #include <QDateTime>
@@ -19,12 +19,12 @@
 
 namespace Marble
 {
-class ParallelTrack : public QObject
+class AnimatedUpdateTrack : public QObject
 {
     Q_OBJECT
 
 public:
-    ParallelTrack( PlaybackItem* item );
+    AnimatedUpdateTrack( PlaybackAnimatedUpdateItem* item );
     void setDelayBeforeTrackStarts( double delay );
     double delayBeforeTrackStarts() const;
     void play();
@@ -44,7 +44,7 @@ public Q_SLOTS:
     void playSlot();
 
 private:
-    PlaybackItem* m_item;
+    PlaybackAnimatedUpdateItem* m_item;
     QDateTime m_playTime;
     QDateTime m_pauseTime;
     double m_delayBeforeTrackStarts;
