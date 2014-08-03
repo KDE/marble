@@ -8,24 +8,18 @@
 // Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
-#ifndef MARBLE_KMLSIMPLEFIELDTAGWRITER_H
-#define MARBLE_KMLSIMPLEFIELDTAGWRITER_H
+#ifndef MARBLE_KMLSIMPLEDATATAGWRITER_H
+#define MARBLE_KMLSIMPLEDATATAGWRITER_H
 
 #include "GeoTagWriter.h"
-#include "GeoDataSimpleField.h"
-
-class QString;
 
 namespace Marble
 {
 
-class KmlSimpleFieldTagWriter : public GeoTagWriter
+class KmlSimpleDataTagWriter : public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
-
-private:
-    static QString resolveType( GeoDataSimpleField::SimpleFieldType type );
+    virtual bool write( const GeoNode *node, GeoWriter &writer ) const;
 };
 
 }

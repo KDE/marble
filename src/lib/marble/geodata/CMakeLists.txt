@@ -71,6 +71,8 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataChange.cpp
         geodata/data/GeoDataCreate.cpp
         geodata/data/GeoDataDelete.cpp
+        geodata/data/GeoDataSchemaData.cpp
+        geodata/data/GeoDataSimpleData.cpp
 )
 
 SET ( geodata_scene_SRCS
@@ -327,6 +329,7 @@ geodata/handlers/kml/KmlSchemaTagHandler.cpp
 geodata/handlers/kml/KmlScreenOverlayTagHandler.cpp
 geodata/handlers/kml/KmlScreenXYTagHandler.cpp
 geodata/handlers/kml/KmlSimpleArrayDataTagHandler.cpp
+geodata/handlers/kml/KmlSimpleDataTagHandler.cpp
 geodata/handlers/kml/KmlSimpleFieldTagHandler.cpp
 geodata/handlers/kml/KmlSizeTagHandler.cpp
 geodata/handlers/kml/KmlSouthTagHandler.cpp
@@ -431,8 +434,10 @@ geodata/writers/kml/KmlPointTagWriter.cpp
 geodata/writers/kml/KmlPolygonTagWriter.cpp
 geodata/writers/kml/KmlPolyStyleTagWriter.cpp
 geodata/writers/kml/KmlRegionTagWriter.cpp
-geodata/writers/kml/KmlSimpleFieldTagWriter.cpp
 geodata/writers/kml/KmlSchemaTagWriter.cpp
+geodata/writers/kml/KmlSchemaDataTagWriter.cpp
+geodata/writers/kml/KmlSimpleDataTagWriter.cpp
+geodata/writers/kml/KmlSimpleFieldTagWriter.cpp
 geodata/writers/kml/KmlScreenOverlayWriter.cpp
 geodata/writers/kml/KmlStyleMapTagWriter.cpp
 geodata/writers/kml/KmlStyleTagWriter.cpp

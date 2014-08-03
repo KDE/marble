@@ -16,8 +16,11 @@
 
 #include "GeoDataExtendedData.h"
 #include "GeoDataSimpleArrayData.h"
+#include "GeoDataSchemaData.h"
+#include "GeoDataTypes.h"
 
 #include "GeoParser.h"
+#include "GeoDocument.h"
 
 namespace Marble
 {
@@ -36,6 +39,19 @@ GeoNode* KmlSimpleArrayDataTagHandler::parse( GeoParser& parser ) const
         QString name = parser.attribute( "name" ).trimmed();
         parentItem.nodeAs<GeoDataExtendedData>()->setSimpleArrayData( name, arrayData );
         return arrayData;
+    }
+
+    if ( parentItem.is<GeoDataSchemaData>() ) {
+        GeoNode *parent = parentItem.nodeAs<GeoDataSchemaData>()->parent();
+        if ( parent->nodeType() == GeoDataTypes::GeoDataExtendedDataType ) {
+            GeoDataExtendedData *extendedData = static_cast<GeoDataExtendedData*>( parent );
+            if ( extendedData ) {
+                GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData;
+                QString name = parser.attribute( "name" ).trimmed();
+                extendedData->setSimpleArrayData( name, arrayData );
+                return arrayData;
+            }
+        }
     }
 
     return 0;

@@ -80,6 +80,8 @@ GEODATA_EXPORT extern const char* GeoDataPolyStyleType;
 GEODATA_EXPORT extern const char* GeoDataRegionType;
 GEODATA_EXPORT extern const char* GeoDataResourceMapType;
 GEODATA_EXPORT extern const char* GeoDataSchemaType;
+GEODATA_EXPORT extern const char* GeoDataSchemaDataType;
+GEODATA_EXPORT extern const char* GeoDataSimpleDataType;
 GEODATA_EXPORT extern const char* GeoDataSimpleFieldType;
 GEODATA_EXPORT extern const char* GeoDataSimpleArrayDataType;
 GEODATA_EXPORT extern const char* GeoDataStyleSelectorType;

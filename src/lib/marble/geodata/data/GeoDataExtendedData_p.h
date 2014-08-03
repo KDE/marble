@@ -16,6 +16,7 @@
 
 #include "GeoDataData.h"
 #include "GeoDataSimpleArrayData.h"
+#include "GeoDataSchemaData.h"
 
 #include "GeoDataTypes.h"
 
@@ -33,6 +34,7 @@ class GeoDataExtendedDataPrivate
 
     QHash< QString, GeoDataData > hash;
     QHash< QString, GeoDataSimpleArrayData* > arrayHash;
+    QHash< QString, GeoDataSchemaData> schemaDataHash;
 
 };
 

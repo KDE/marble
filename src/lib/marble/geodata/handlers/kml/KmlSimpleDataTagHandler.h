@@ -8,19 +8,24 @@
 // Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
-#ifndef MARBLE_KMLSCHEMATAGWRITER_H
-#define MARBLE_KMLSCHEMATAGWRITER_H
+#ifndef MARBLE_KMLSIMPLEDATATAGHANDLER_H
+#define MARBLE_KMLSIMPLEDATATAGHANDLER_H
 
-#include "GeoTagWriter.h"
+#include "GeoTagHandler.h"
+#include "GeoDataSimpleData.h"
 
 namespace Marble
 {
+namespace kml
+{
 
-class KmlSchemaTagWriter : public GeoTagWriter
+class KmlSimpleDataTagHandler : public GeoTagHandler
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    virtual GeoNode* parse( GeoParser& ) const;
 };
+
+}
 
 }
 

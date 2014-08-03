@@ -90,7 +90,7 @@ int GeoDataExtendedData::size() const
 
 bool GeoDataExtendedData::isEmpty( ) const
 {
-    return d->hash.empty();
+    return d->hash.empty() && d->schemaDataHash.empty();
 }
 
 bool GeoDataExtendedData::contains( const QString &key ) const
@@ -107,6 +107,28 @@ GeoDataSimpleArrayData* GeoDataExtendedData::simpleArrayData( const QString& key
 {
     if ( !d->arrayHash.contains( key ) ) return 0;
     return d->arrayHash[ key ];
+}
+
+GeoDataSchemaData& GeoDataExtendedData::schemaData( const QString& schemaUrl ) const
+{
+    return d->schemaDataHash[ schemaUrl ];
+}
+
+void GeoDataExtendedData::addSchemaData( const GeoDataSchemaData& schemaData )
+{
+    d->schemaDataHash.insert( schemaData.schemaUrl(), schemaData );
+    d->schemaDataHash[schemaData.schemaUrl()].setParent( this );
+}
+
+void GeoDataExtendedData::removeSchemaData( const QString& schemaUrl )
+{
+    GeoDataSchemaData schemaData = d->schemaDataHash.take( schemaUrl );
+    schemaData.setParent( 0 );
+}
+
+QList<GeoDataSchemaData> GeoDataExtendedData::schemaDataList() const
+{
+    return d->schemaDataHash.values();
 }
 
 void GeoDataExtendedData::pack( QDataStream& stream ) const
