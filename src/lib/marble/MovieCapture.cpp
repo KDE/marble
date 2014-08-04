@@ -87,7 +87,7 @@ void MovieCapture::recordFrame()
         d->process.start( d->encoderExec, arguments );
         connect(&d->process, SIGNAL(finished(int)), this, SLOT(processWrittenMovie(int)));
     }
-    d->process.write( (char*) screenshot.bits(), screenshot.numBytes() );
+    d->process.write( (char*) screenshot.bits(), screenshot.byteCount() );
 }
 
 void MovieCapture::startRecording()
