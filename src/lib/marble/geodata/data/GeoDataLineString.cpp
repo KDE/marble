@@ -222,6 +222,17 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
     return p()->m_vector.constEnd();
 }
 
+void GeoDataLineString::insert( int index, const GeoDataCoordinates& value )
+{
+    GeoDataGeometry::detach();
+    GeoDataLineStringPrivate* d = p();
+    delete d->m_rangeCorrected;
+    d->m_rangeCorrected = 0;
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
+    d->m_vector.insert( index, value );
+}
+
 void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
