@@ -157,6 +157,7 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
                     bool isRingClockwise = false;
                     GeoDataMultiGeometry *multigeom = new GeoDataMultiGeometry;
                     GeoDataPolygon *poly = 0;
+                    int polygonCount = 0;
                     for( int j=0; j<shape->nParts; ++j ) {
                         GeoDataLinearRing ring;
                         int itStart = shape->panPartStart[j];
@@ -169,8 +170,11 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
                         isRingClockwise = ring.isClockwise();
                         if ( j == 0 || isRingClockwise ) {
                             poly = new GeoDataPolygon;
+                            ++polygonCount;
                             poly->setOuterBoundary( ring );
-                            multigeom->append( poly );
+                            if ( polygonCount > 1 ) {
+                                multigeom->append( poly );
+                            }
                         }
                         else {
                             poly->appendInnerBoundary( ring );
@@ -178,7 +182,14 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
                         // TODO: outer boundary per SHP spec is for the clockwise ring
                         // and inner holes are anticlockwise
                     }
-                    placemark->setGeometry( multigeom );
+                    if ( polygonCount > 1 ) {
+                        placemark->setGeometry( multigeom );
+                    }
+                    else {
+                        placemark->setGeometry( poly );
+                        delete multigeom;
+                        multigeom = 0;
+                    }
                     mDebug() << "donut " << placemark->name() << " " << shape->nParts;
 
                 } else {
