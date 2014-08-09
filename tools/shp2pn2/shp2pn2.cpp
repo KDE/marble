@@ -142,12 +142,16 @@ int main(int argc, char** argv)
     QApplication app(argc,argv);
 
 
-    qDebug( " Syntax: shp2pn2 [-i shp-sourcefile -o pn2-targetfile]" );
+    qDebug() << " Syntax: shp2pn2 [-i shp-sourcefile -o pn2-targetfile]";
 
     QString inputFilename;
     int inputIndex = app.arguments().indexOf( "-i" );
     if ( inputIndex > 0 && inputIndex + 1 < argc )
         inputFilename = app.arguments().at( inputIndex + 1 );
+    else {
+	qWarning() << "Input file missing.";
+	return 1;
+    }
 
     QString outputFilename = "output.pn2";
     int outputIndex = app.arguments().indexOf("-o");
@@ -159,6 +163,10 @@ int main(int argc, char** argv)
     ParsingRunnerManager* manager = new ParsingRunnerManager( model->pluginManager() );
 
     GeoDataDocument* document = manager->openFile( inputFilename );
+    if (!document) { 
+      qWarning() << "Could not parse document (have you installed libshape?) !";
+      return 1;
+    }
 
     QFile file( outputFilename );
     file.open( QIODevice::WriteOnly );
