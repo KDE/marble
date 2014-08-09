@@ -113,6 +113,13 @@ void GeoDataIconStyle::setIcon(const QImage &icon)
 void GeoDataIconStyle::setIconPath( const QString& filename )
 {
     d->m_iconPath = filename;
+
+    /**
+     * Set the m_icon to be a default-constructed icon
+     * so that m_icon is null and icon() doesn't return
+     * prevously loaded icon.
+     */
+    d->m_icon = QImage();
 }
 
 QString GeoDataIconStyle::iconPath() const
