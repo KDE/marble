@@ -22,7 +22,7 @@ class MovieCapturePrivate
 {
 public:
     MovieCapturePrivate(MarbleWidget *widget) :
-        marbleWidget(widget)
+        marbleWidget(widget), method(MovieCapture::TimeDriven)
     {}
 
     QTimer frameTimer;
@@ -30,6 +30,7 @@ public:
     QString encoderExec;
     QString destinationFile;
     QProcess process;
+    MovieCapture::SnapshotMethod method;
 };
 
 MovieCapture::MovieCapture(MarbleWidget *widget, QObject *parent) :
@@ -37,8 +38,10 @@ MovieCapture::MovieCapture(MarbleWidget *widget, QObject *parent) :
     d_ptr(new MovieCapturePrivate(widget))
 {
     Q_D(MovieCapture);
-    d->frameTimer.setInterval(1000/30); // fps = 30 (default)
-    connect(&d->frameTimer, SIGNAL(timeout()), this, SLOT(recordFrame()));
+    if( d->method == MovieCapture::TimeDriven ){
+        d->frameTimer.setInterval(1000/30); // fps = 30 (default)
+        connect(&d->frameTimer, SIGNAL(timeout()), this, SLOT(recordFrame()));
+    }
 }
 
 MovieCapture::~MovieCapture()
@@ -49,13 +52,21 @@ MovieCapture::~MovieCapture()
 void MovieCapture::setFps(int fps)
 {
     Q_D(MovieCapture);
-    d->frameTimer.setInterval(1000/fps);
+    if( d->method == MovieCapture::TimeDriven ){
+        d->frameTimer.setInterval(1000/fps);
+    }
 }
 
-void MovieCapture::setDestination(const QString &path)
+void MovieCapture::setFilename(const QString &path)
 {
     Q_D(MovieCapture);
     d->destinationFile = path;
+}
+
+void MovieCapture::setSnapshotMethod(MovieCapture::SnapshotMethod method)
+{
+    Q_D(MovieCapture);
+    d->method = method;
 }
 
 int MovieCapture::fps() const
@@ -68,6 +79,12 @@ QString MovieCapture::destination() const
 {
     Q_D(const MovieCapture);
     return d->destinationFile;
+}
+
+MovieCapture::SnapshotMethod MovieCapture::snapshotMethod() const
+{
+    Q_D(const MovieCapture);
+    return d->method;
 }
 
 void MovieCapture::recordFrame()
@@ -88,6 +105,18 @@ void MovieCapture::recordFrame()
         connect(&d->process, SIGNAL(finished(int)), this, SLOT(processWrittenMovie(int)));
     }
     d->process.write( (char*) screenshot.bits(), screenshot.byteCount() );
+
+    for (int i=0; i<30 && d->process.bytesToWrite()>0; ++i) {
+        QTime t;
+        int then = d->process.bytesToWrite();
+        t.start();
+        d->process.waitForBytesWritten( 100 );
+        int span = t.elapsed();
+        int now = d->process.bytesToWrite();
+        int bytesWritten = then - now;
+        double rate = ( bytesWritten * 1000.0 ) / ( qMax(1, span) * 1024 );
+        emit rateCalculated( rate );
+    }
 }
 
 void MovieCapture::startRecording()
@@ -112,7 +141,9 @@ void MovieCapture::startRecording()
         }
     }
 
-    d->frameTimer.start();
+    if( d->method == MovieCapture::TimeDriven ){
+        d->frameTimer.start();
+    }
     recordFrame();
 }
 
@@ -121,7 +152,7 @@ void MovieCapture::stopRecording()
     Q_D(MovieCapture);
 
     d->frameTimer.stop();
-    d->process.close();
+    d->process.closeWriteChannel();
 }
 
 void MovieCapture::processWrittenMovie(int exitCode)

@@ -20,11 +20,10 @@
       <string>toolBar</string>
      </property>
      <addaction name="m_actionNewTour"/>
-     <addaction name="separator"/>
      <addaction name="m_actionOpenTour"/>
-     <addaction name="separator"/>
      <addaction name="m_actionSaveTour"/>
      <addaction name="m_actionSaveTourAs"/>
+     <addaction name="m_actionRecord"/>
      <addaction name="separator"/>
      <addaction name="m_actionAddFlyTo"/>
      <addaction name="separator"/>
@@ -181,6 +180,18 @@
    </property>
    <property name="toolTip">
     <string>Stops touring (playing again will start tour from the start)</string>
+   </property>
+  </action>
+  <action name="m_actionRecord">
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/tour-capture.png</normaloff>:/marble/tour-capture.png</iconset>
+   </property>
+   <property name="text">
+    <string>Record tour</string>
+   </property>
+   <property name="toolTip">
+    <string>Converts the loaded tour into a movie</string>
    </property>
   </action>
  </widget>

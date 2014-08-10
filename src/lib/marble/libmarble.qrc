@@ -59,6 +59,7 @@
         <file alias="marble/playback-pause.png">../../apps/marble-ui/icons/16x16/media-playback-pause.png</file>
         <file alias="marble/playback-play.png">../../apps/marble-ui/icons/16x16/media-playback-start.png</file>
         <file alias="marble/playback-stop.png">../../apps/marble-ui/icons/16x16/media-playback-stop.png</file>
+        <file alias="marble/tour-capture.png">../../apps/marble-ui/icons/16x16/tool-animator.png</file>
         <file alias="marble/webpopup/arrow2_topleft.png">../../../data/bitmaps/webpopup/arrow2_topleft.png</file>
         <file alias="marble/webpopup/arrow2_topleft_shadow.png">../../../data/bitmaps/webpopup/arrow2_topleft_shadow.png</file>
         <file alias="marble/webpopup/webpopup2.png">../../../data/bitmaps/webpopup/webpopup2.png</file>
