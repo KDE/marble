@@ -43,8 +43,6 @@ class BBCWeatherService : public AbstractWeatherService
     void createItem( BBCStation station );
 
  private:
-    void setupList();
-
     QList<BBCStation> m_stationList;
     bool m_parsingStarted;
     StationListParser *m_parser;
