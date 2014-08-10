@@ -280,7 +280,7 @@ void RoutingManager::retrieveRoute()
     int realSize = 0;
     for ( int i = 0; i < d->m_routeRequest.size(); ++i ) {
         // Sort out dummy targets
-        if ( d->m_routeRequest.at( i ).longitude() != 0.0 && d->m_routeRequest.at( i ).latitude() != 0.0 ) {
+        if ( d->m_routeRequest.at( i ).isValid() ) {
             ++realSize;
         }
     }
