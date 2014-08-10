@@ -36,9 +36,11 @@ bool KmlLinearRingTagWriter::write( const GeoNode *node, GeoWriter& writer ) con
         writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( ring->extrude() ), "0" );
         writer.writeStartElement( "coordinates" );
 
-        for ( int i = 0; i < ring->size(); ++i )
+        int size = ring->size() >= 3 && ring->first() != ring->last() ? ring->size() + 1 : ring->size();
+
+        for ( int i = 0; i < size; ++i )
         {
-            GeoDataCoordinates coordinates = ring->at( i );
+            GeoDataCoordinates coordinates = ring->at( i % ring->size() );
             if ( i > 0 )
             {
                 writer.writeCharacters( " " );
