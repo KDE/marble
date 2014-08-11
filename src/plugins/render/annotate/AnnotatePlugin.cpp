@@ -48,6 +48,7 @@
 #include "TextureLayer.h"
 #include "SceneGraphicsTypes.h"
 #include "MergingNodesAnimation.h"
+#include "ParsingRunnerManager.h"
 
 
 
@@ -413,29 +414,19 @@ void AnnotatePlugin::saveAnnotationFile()
 
 void AnnotatePlugin::loadAnnotationFile()
 {
-    QString const filename = QFileDialog::getOpenFileName(0, tr("Open Annotation File"),
-                     QString(), tr("All Supported Files (*.kml);;Kml Annotation file (*.kml)"));
-
+    QString const filename = QFileDialog::getOpenFileName( 0,
+                                                           tr("Open Annotation File"),
+                                                           QString(),
+                                                           tr("All Supported Files (*.kml *.osm);;"
+                                                              "Kml Annotation file (*.kml);;"
+                                                              "Open Street Map file (*.osm)") );
     if ( filename.isNull() ) {
         return;
     }
 
-    QFile file( filename );
-    if ( !file.exists() ) {
-        mDebug() << "File " << filename << " does not exist!";
-        return;
-    }
-
-    file.open( QIODevice::ReadOnly );
-    GeoDataParser parser( GeoData_KML );
-    if ( !parser.read( &file ) ) {
-        mDebug() << "Could not parse file " << filename;
-        return;
-    }
-
-    GeoDataDocument *document = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
+    ParsingRunnerManager manager( m_marbleWidget->model()->pluginManager() );
+    GeoDataDocument *document = manager.openFile( filename );
     Q_ASSERT( document );
-    file.close();
 
     foreach ( GeoDataFeature *feature, document->featureList() ) {
         if ( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
