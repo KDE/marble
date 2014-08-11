@@ -42,12 +42,14 @@ public slots:
     void recordFrame();
     void startRecording();
     void stopRecording();
+    void cancelRecording();
 
 private slots:
     void processWrittenMovie(int exitCode);
 
 signals:
     void rateCalculated( double );
+    void errorOccured();
 
 protected:
     MovieCapturePrivate * const d_ptr;

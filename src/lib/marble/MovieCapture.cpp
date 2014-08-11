@@ -155,10 +155,20 @@ void MovieCapture::stopRecording()
     d->process.closeWriteChannel();
 }
 
+void MovieCapture::cancelRecording()
+{
+    Q_D(MovieCapture);
+
+    d->frameTimer.stop();
+    d->process.close();
+    QFile::remove( d->destinationFile );
+}
+
 void MovieCapture::processWrittenMovie(int exitCode)
 {
     if (exitCode != 0) {
-        qDebug() << "[*] avconv finished with" << exitCode;
+        mDebug() << "[*] avconv finished with" << exitCode;
+        emit errorOccured();
     }
 }
 

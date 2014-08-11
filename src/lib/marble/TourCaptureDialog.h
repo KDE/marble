@@ -38,15 +38,20 @@ public slots:
     void stopRecording();
     void setRate( double rate );
     void setTourPlayback( TourPlayback* playback );
+    void handleError();
 
 private slots:
     void loadDestinationFile();
     void updateProgress( double position );
+    void recordNextFrame();
+    void disableStopButton();
 
 private:
     Ui::TourCaptureDialog *ui;
     MovieCapture *m_recorder;
     TourPlayback *m_playback;
+    bool m_writingPossible;
+    double m_current_position;
 };
 
 } // namespace Marble
