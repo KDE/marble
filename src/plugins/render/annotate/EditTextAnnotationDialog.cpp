@@ -150,10 +150,10 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( PlacemarkTextAnnotation *tex
     // Promote "Ok" button to default button.
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
 
-    connect( d->m_browseButton, SIGNAL(clicked()), this, SLOT(loadIconFile()) );
+    connect( d->m_browseButton, SIGNAL(pressed()), this, SLOT(loadIconFile()) );
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
     connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updateTextAnnotation()) );
-    connect( d->buttonBox, SIGNAL(rejected()), this, SLOT(restoreInitial()) );
+    connect( this, SIGNAL(rejected()), this, SLOT(restoreInitial()) );
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or
     // Close).
@@ -259,7 +259,7 @@ void EditTextAnnotationDialog::restoreInitial()
     // Make sure the placemark gets removed if the 'Cancel' button is pressed immediately after
     // the 'Add Placemark' has been clicked.
     if ( d->m_firstEditing ) {
-        emit removeRequested();
+        emit removeRequested( d->m_textAnnotation );
         return;
     }
 

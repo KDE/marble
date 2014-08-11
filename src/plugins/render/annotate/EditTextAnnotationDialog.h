@@ -100,7 +100,7 @@ signals:
      * @brief removeRequested Is the signal emitted when this is the first time for this
      * PlacemarkTextAnnotation instance the dialog pops up and the close button is pressed.
      */
-    void removeRequested();
+    void removeRequested( PlacemarkTextAnnotation *targetedPlacemark );
 
 private:
     class Private;

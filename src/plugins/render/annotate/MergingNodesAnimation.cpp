@@ -23,6 +23,8 @@ namespace Marble {
 
 
 MergingNodesAnimation::MergingNodesAnimation( AreaAnnotation *polygon ) :
+    m_targetedArea( polygon ),
+
     // To avoid long lines and repeated code
     first_i( polygon->m_firstMergedNode.first ),
     first_j( polygon->m_firstMergedNode.second ),
@@ -75,7 +77,7 @@ void MergingNodesAnimation::updateNodes()
             innerRings[second_i].remove( first_j );
         }
 
-        emit animationFinished();
+        emit animationFinished( m_targetedArea );
     } else {
         if ( m_boundary == OuterBoundary ) {
             GeoDataCoordinates first, second;

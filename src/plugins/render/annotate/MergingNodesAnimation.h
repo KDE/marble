@@ -39,12 +39,14 @@ public slots:
 
 signals:
     void nodesMoved();
-    void animationFinished();
+    void animationFinished( AreaAnnotation *targeted );
 
 private slots:
     void updateNodes();
 
 private:
+    AreaAnnotation *m_targetedArea;
+
     qreal nodesDistance();
     GeoDataCoordinates newCoords();
 

@@ -21,6 +21,7 @@ namespace Marble
 {
 
 class GeoDataPlacemark;
+class GeoDataCoordinates;
 
 /**
  * @brief This is the base class for all scene graphics included within the
@@ -76,6 +77,8 @@ public:
      * with (by means of mouse events - so far).
      */
     virtual void dealWithItemChange( const SceneGraphicsItem *other ) = 0;
+
+    virtual void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination ) = 0;
 
     /**
      * @brief Returns the current state.

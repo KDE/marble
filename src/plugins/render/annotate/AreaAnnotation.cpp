@@ -234,6 +234,46 @@ void AreaAnnotation::dealWithItemChange( const SceneGraphicsItem *other )
     }
 }
 
+void AreaAnnotation::move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination )
+{
+    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
+    GeoDataLinearRing outerRing = polygon->outerBoundary();
+    QVector<GeoDataLinearRing> innerRings = polygon->innerBoundaries();
+
+    const qreal bearing = source.bearing( destination );
+    const qreal distance = distanceSphere( destination, source );
+    polygon->outerBoundary().clear();
+    polygon->innerBoundaries().clear();
+
+    for ( int i = 0; i < outerRing.size(); ++i ) {
+        GeoDataCoordinates movedPoint = outerRing.at(i).moveByBearing( bearing, distance );
+        qreal lon = movedPoint.longitude();
+        qreal lat = movedPoint.latitude();
+
+        GeoDataCoordinates::normalizeLonLat( lon, lat );
+        movedPoint.setLongitude( lon );
+        movedPoint.setLatitude( lat );
+
+        polygon->outerBoundary().append( movedPoint );
+    }
+
+    for ( int i = 0; i < innerRings.size(); ++i ) {
+        GeoDataLinearRing newRing( Tessellate );
+        for ( int j = 0; j < innerRings.at(i).size(); ++j ) {
+            GeoDataCoordinates movedPoint = innerRings.at(i).at(j).moveByBearing( bearing, distance );
+            qreal lon = movedPoint.longitude();
+            qreal lat = movedPoint.latitude();
+
+            GeoDataCoordinates::normalizeLonLat( lon, lat );
+            movedPoint.setLongitude( lon );
+            movedPoint.setLatitude( lat );
+
+            newRing.append( movedPoint );
+        }
+        polygon->innerBoundaries().append( newRing );
+    }
+}
+
 void AreaAnnotation::setBusy( bool enabled )
 {
     m_busy = enabled;

@@ -68,6 +68,11 @@ void GroundOverlayFrame::dealWithItemChange( const SceneGraphicsItem *other )
     Q_UNUSED( other );
 }
 
+void GroundOverlayFrame::move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination )
+{
+    // not implemented yet
+}
+
 bool GroundOverlayFrame::mousePressEvent( QMouseEvent *event )
 {
     // React to all ellipse as well as to the polygon.
