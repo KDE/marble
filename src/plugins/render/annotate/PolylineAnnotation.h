@@ -5,15 +5,13 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Andrew Manson  <g.real.ate@gmail.com>
-// Copyright 2013      Thibaut Gridel <tgridel@free.fr>
 // Copyright 2014      Calin Cruceru  <crucerucalincristian@gmail.com>
 //
 
-#ifndef AREAANNOTATION_H
-#define AREAANNOTATION_H
+#ifndef POLYLINEANNOTATION_H
+#define POLYLINEANNOTATION_H
 
-#include <QPointer>
+#include <QColor>
 
 #include "SceneGraphicsItem.h"
 #include "GeoDataCoordinates.h"
@@ -23,21 +21,15 @@ namespace Marble
 {
 
 class PolylineNode;
-class MergingPolygonNodesAnimation;
+class MergingPolylineNodesAnimation;
 
-/**
- * @brief The AreaAnnotation class controls everything related to Polygons Editing Mode.
- * It includes polygons actions implementation and, at the same time, deals with painting
- * polygons on the map according to user's preference or to some particular states.
- */
-class AreaAnnotation : public SceneGraphicsItem
+class PolylineAnnotation : public SceneGraphicsItem
 {
-    friend class MergingPolygonNodesAnimation;
+    friend class MergingPolylineNodesAnimation;
 
 public:
-    explicit AreaAnnotation( GeoDataPlacemark *placemark );
-
-    ~AreaAnnotation();
+    explicit PolylineAnnotation( GeoDataPlacemark *placemark );
+    ~PolylineAnnotation();
 
     /**
      * @brief Paints the nodes on the screen and updates the regions which correspond
@@ -46,14 +38,10 @@ public:
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
 
     /**
-     * @brief Returns true if the given QPoint is contained by the current polygon. Note
-     * that the return value depends on the state (e.g. in the AddingPolylineNodes state a
-     * point is considered to be contained by the polygon if the virtual nodes or the
-     * polygon's interior contain it, while in the Editing state, it is contained by the
-     * polygon if either polygon's interior, the outer nodes or the inner nodes contain
-     * it).
+     * @brief Returns true if either the polyline's associated region or one of its nodes
+     * contains the given QPoint. Note that the return value depends on the state.
      */
-    virtual bool containsPoint( const QPoint &point ) const;
+    virtual bool containsPoint( const QPoint &eventPos ) const;
 
     /**
      * @brief It is used so far to remove the hover effect while being in the
@@ -62,7 +50,7 @@ public:
     virtual void dealWithItemChange( const SceneGraphicsItem *other );
 
     /**
-     * @brief Moves the whole polygon to the destination coordinates.
+     * FIXME: Not implemented yet.
      */
     virtual void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination );
 
@@ -109,7 +97,7 @@ public:
      * @brief Returns the animation to be handled by a QObject which can connect signals
      * and slots.
      */
-    QPointer<MergingPolygonNodesAnimation> animation();
+    QPointer<MergingPolylineNodesAnimation> animation();
 
     /**
      * @brief Provides information for downcasting a SceneGraphicsItem.
@@ -126,26 +114,14 @@ protected:
     virtual bool mouseMoveEvent( QMouseEvent *event );
     virtual bool mouseReleaseEvent( QMouseEvent *event );
 
-    /**
-     * @brief Protected method which applies the Polygons modifications when changing
-     * states.
-     */
     virtual void dealWithStateChange( SceneGraphicsItem::ActionState previousState );
 
 private:
     /**
-     * @brief Returns true if the Polygon has a valid shape (so far, the only times when
-     * it could have an invalid shape would be when deleting/merging nodes from its outer
-     * boundary and it would not contains anymore all the nodes which form its inner
-     * boundaries).
-     */
-    bool isValidPolygon() const;
-
-    /**
-     * @brief It is called when the ::paint method is called for the first time. It
-     * initializes the m_outerNodesList by creating the PolylineNodes.
-     * @see updateRegions() method for more detailed explanation.
-     */
+    * @brief It is called when the ::paint method is called for the first time. It
+    * initializes the m_outerNodesList by creating the PolylineNodes.
+    * @see updateRegions() method for more detailed explanation.
+    */
     void setupRegionsLists( GeoPainter *painter );
 
     /**
@@ -164,20 +140,25 @@ private:
     void drawNodes( GeoPainter *painter );
 
     /**
-     * @brief The following functions test whether the given @p point is contained by
-     * each list.
-     * @return The QPair<int, int> returned by innerNodeContains is extensively used
-     * within the implementation and has the following interpretation: the node which
-     * contains the given point is the '.second'h node from the '.first'h inner boundary.
+     * @brief Tests if the polyline's nodes contain the given point and in case they do, it
+     * returns the index of the first one.
      */
-    int outerNodeContains( const QPoint &point ) const;
-    QPair<int, int> innerNodeContains( const QPoint &point ) const;
-    QPair<int, int> virtualNodeContains( const QPoint &point ) const;
-    int innerBoundsContain( const QPoint &point ) const;
-    bool polygonContains( const QPoint &point ) const;
+    int nodeContains( const QPoint &point ) const;
 
     /**
-     * @brief It is called from processOnMove functions and deals with polygons
+     * @brief Tests if the polyline's virtual nodes contain the given point and in case they
+     * do, it returns the index of the first one.
+     */
+    int virtualNodeContains( const QPoint &point ) const;
+
+    /**
+     * @brief Returns true/false on how the polyline (its 'lines' excepting its nodes) contain
+     * the given point or not.
+     */
+    bool polylineContains( const QPoint &point ) const;
+
+    /**
+     * @brief It is called from processOnMove functions and deals with polylines
      * hovering.
      */
     bool dealWithHovering( QMouseEvent *mouseEvent );
@@ -211,6 +192,8 @@ private:
     bool processAddingNodesOnMove( QMouseEvent *mouseEvent );
     bool processAddingNodesOnRelease( QMouseEvent *mouseEvent );
 
+
+
     /**
      * @brief Since they are used in many functions, the size and color of nodes for each
      * state are static and have class scope.
@@ -225,44 +208,32 @@ private:
     static const QColor hoveredColor;
 
     const ViewportParams *m_viewport;
-    bool                  m_regionsInitialized;
-    bool                  m_busy;
+    bool m_regionsInitialized;
+    bool m_busy;
 
-    QList<PolylineNode>          m_outerNodesList;
-    QList<PolylineNode>          m_outerVirtualNodes;
-    QList< QList<PolylineNode> > m_innerNodesList;
-    QList< QList<PolylineNode> > m_innerVirtualNodes;
-    QList<QRegion>              m_boundariesList;
+    QList<PolylineNode> m_nodesList;
+    QList<PolylineNode> m_virtualNodesList;
+    QRegion             m_polylineRegion;
 
-    // Used in the Editing state
+    // Used in Editing state
     enum EditingInteractingObject {
         InteractingNothing, // e.g. when hovering
         InteractingNode,
-        InteractingPolygon
+        InteractingPolyline
     };
-    GeoDataCoordinates       m_movedPointCoords;
-    QPair<int, int>          m_clickedNodeIndexes;
-    QPair<int, int>          m_hoveredNode;
     EditingInteractingObject m_interactingObj;
+    GeoDataCoordinates m_movedPointCoords;
+    int m_clickedNodeIndex;
+    int m_hoveredNodeIndex;
 
     // Used in Merging Nodes state
-    QPair<int, int>    m_firstMergedNode;
-    QPair<int, int>    m_secondMergedNode;
-    QPointer<MergingPolygonNodesAnimation> m_animation;
+    QPointer<MergingPolylineNodesAnimation> m_animation;
+    int m_firstMergedNode;
+    int m_secondMergedNode;
 
     // Used in Adding Nodes state
-    QPair<int, int> m_virtualHovered;
-
-    // It can have the following values:
-    //     -> -2 - means there is no node being adjusted;
-    //     -> -1 - means the node which is being adjusted is a node from polygon's
-    //             outer boundary (more exactly, the last; see below);
-    //     -> i  - (i >= 0) means the node which is being adjusted is a node from
-    //             the i'th inner boundary (more exactly, the last one; see below).
-    // Due to the way the node appending is done (by rotating the vector which
-    // contains the coordinates), we can be sure that the node we want to adjust
-    // is everytime the last one.
-    int             m_adjustedNode;
+    int m_virtualHoveredNode;
+    int m_adjustedNode;
 };
 
 }

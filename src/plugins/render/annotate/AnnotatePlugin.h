@@ -18,7 +18,6 @@
 #include "SceneGraphicsItem.h"
 #include "GeoDataGroundOverlay.h"
 #include "GroundOverlayFrame.h"
-#include "AreaAnnotation.h"
 
 #include <QObject>
 #include <QMenu>
@@ -33,10 +32,12 @@ namespace Marble
 
 class MarbleWidget;
 class TextureLayer;
-class PlacemarkTextAnnotation;
 class GeoDataDocument;
 class GeoDataLinearRing;
 class GeoDataLineString;
+class AreaAnnotation;
+class PolylineAnnotation;
+class PlacemarkTextAnnotation;
 
 
 /**
@@ -93,33 +94,21 @@ signals:
     void itemRemoved();
     void placemarkMoved();
 
-public slots:
+private slots:
     void enableModel( bool enabled );
+
+    void addTextAnnotation();
+    void editTextAnnotation();
+
+    void addOverlay();
+    void editOverlay();
+    void removeOverlay();
+    void updateOverlayFrame( GeoDataGroundOverlay *overlay );
 
     void setDrawingPolygon( bool );
     void setAddingPolygonHole( bool );
     void setMergingNodes( bool );
     void setAddingNodes( bool );
-    void setRemovingItems( bool );
-
-    void addOverlay();
-    void addTextAnnotation();
-
-    //    void receiveNetworkReply( QNetworkReply* );
-    //    void downloadOsmFile();
-
-    void clearAnnotations();
-    void saveAnnotationFile();
-    void loadAnnotationFile();
-
-private slots:
-    void editTextAnnotationRmbMenu();
-    void removeTextAnnotation( PlacemarkTextAnnotation *targetedPlacemark );
-
-    void editOverlay();
-    void removeOverlay();
-    void updateOverlayFrame( GeoDataGroundOverlay *overlay );
-
     void editPolygon();
     void selectNode();
     void deleteNode();
@@ -127,10 +116,25 @@ private slots:
     void deleteSelectedNodes();
     void setAreaAvailable( AreaAnnotation *targetedArea );
 
+    void addPolyline();
+    void editPolyline();
+    void stopDrawingPolyline();
+    void setPolylineAvailable( PolylineAnnotation *targetedPolyline );
+
     void copyItem();
     void cutItem();
     void pasteItem();
+    void removeNewItem();
     void removeRmbSelectedItem();
+
+    void setRemovingItems( bool );
+    void clearAnnotations();
+    void saveAnnotationFile();
+    void loadAnnotationFile();
+
+    //    void receiveNetworkReply( QNetworkReply* );
+    //    void downloadOsmFile();
+
 protected:
     bool eventFilter( QObject *watched, QEvent *event );
 
@@ -151,13 +155,16 @@ private:
     void setupPolygonRmbMenu();
     void setupNodeRmbMenu();
     void showPolygonRmbMenu( AreaAnnotation *selectedArea, qreal x, qreal y );
-    void showNodeRmbMenu( AreaAnnotation *area, qreal x, qreal y );
+    void showNodeRmbMenu( SceneGraphicsItem *item, qreal x, qreal y );
+
+    void setupPolylineRmbMenu();
+    void showPolylineRmbMenu( PolylineAnnotation *polyline, qreal x, qreal y );
 
     void handleUncaughtEvents( QMouseEvent *mouseEvent );
     void handleReleaseOverlay( QMouseEvent *mouseEvent );
 
-    bool handleAddingPlacemark( QMouseEvent *mouseEvent );
-    bool handleAddingPolygon( QMouseEvent *mouseEvent );
+    bool handleDrawingPolyline( QMouseEvent *mouseEvent );
+    bool handleDrawingPolygon( QMouseEvent *mouseEvent );
     bool handleMovingSelectedItem( QMouseEvent *mouseEvent );
 
     void handleRemovingItem( SceneGraphicsItem *item );
@@ -180,6 +187,7 @@ private:
     QMenu *m_polygonRmbMenu;
     QMenu *m_nodeRmbMenu;
     QMenu *m_textAnnotationRmbMenu;
+    QMenu *m_polylineRmbMenu;
 
     QList<QActionGroup*>    m_actions;
     QList<QActionGroup*>    m_toolbarActions;
@@ -191,10 +199,12 @@ private:
 
     SceneGraphicsItem *m_movedItem;
     SceneGraphicsItem *m_lastItem;
+    SceneGraphicsItem *m_editedItem;
     SceneGraphicsItem *m_rmbSelectedItem;
-
-    GeoDataPlacemark        *m_polygonPlacemark;
     GeoDataGroundOverlay    *m_rmbOverlay;
+
+    GeoDataPlacemark        *m_polylinePlacemark;
+    GeoDataPlacemark        *m_polygonPlacemark;
 
     GeoDataCoordinates m_fromWhereToCopy;
     SceneGraphicsItem  *m_clipboardItem;
@@ -204,10 +214,10 @@ private:
     //    QErrorMessage m_errorMessage;
 
     bool m_drawingPolygon;
+    bool m_drawingPolyline;
     bool m_removingItem;
     bool m_isInitialized;
 };
-
 
 }
 

@@ -5,8 +5,9 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2009      Andrew Manson  <g.real.ate@gmail.com>
 // Copyright 2013      Thibaut Gridel <tgridel@free.fr>
+// Copyright 2014      Calin Cruceru  <crucerucalincristian@gmail.com>
 //
 
 #ifndef SCENEGRAPHICSITEM_H
@@ -41,8 +42,13 @@ public:
         // Polygon specific
         DrawingPolygon,
         AddingPolygonHole,
-        MergingPolygonNodes,
-        AddingPolygonNodes,
+
+        // Polygon/Placemark specific
+        MergingNodes,
+        AddingNodes,
+
+        // Polyline specific
+        DrawingPolyline
     };
 
     /**
@@ -58,11 +64,16 @@ public:
         InvalidShapeWarning,
         ShowPolygonRmbMenu,
         ShowNodeRmbMenu,
-        StartAnimation,
+        StartPolygonAnimation,
         RemovePolygonRequest,
 
         // Placemark specific
-        ShowPlacemarkRmbMenu
+        ShowPlacemarkRmbMenu,
+
+        // Polyline specific
+        RemovePolylineRequest,
+        ShowPolylineRmbMenu,
+        StartPolylineAnimation
     };
 
     /**

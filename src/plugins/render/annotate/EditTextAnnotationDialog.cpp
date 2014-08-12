@@ -29,10 +29,10 @@ namespace Marble {
 class EditTextAnnotationDialog::Private : public Ui::UiEditTextAnnotationDialog
 {
 public:
-    Private( PlacemarkTextAnnotation *textAnnotation );
+    Private( GeoDataPlacemark *placemark );
     ~Private();
 
-    PlacemarkTextAnnotation *m_textAnnotation;
+    GeoDataPlacemark *m_placemark;
 
     // Attached to label/icon color selectors.
     QColorDialog *m_iconColorDialog;
@@ -49,9 +49,9 @@ public:
     GeoDataStyle m_initialStyle;
 };
 
-EditTextAnnotationDialog::Private::Private( PlacemarkTextAnnotation *textAnnotation ) :
+EditTextAnnotationDialog::Private::Private( GeoDataPlacemark *placemark ) :
     Ui::UiEditTextAnnotationDialog(),
-    m_textAnnotation( textAnnotation ),
+    m_placemark( placemark ),
     m_iconColorDialog( 0 ),
     m_labelColorDialog( 0 ),
     m_firstEditing( false )
@@ -65,29 +65,29 @@ EditTextAnnotationDialog::Private::~Private()
     delete m_labelColorDialog;
 }
 
-EditTextAnnotationDialog::EditTextAnnotationDialog( PlacemarkTextAnnotation *textAnnotation, QWidget *parent ) :
+EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
     QDialog( parent ),
-    d( new Private( textAnnotation ) )
+    d( new Private( placemark ) )
 {
     d->setupUi( this );
 
     // Store initial style so that it can be restored if the 'Cancel' button is pressed.
-    d->m_initialStyle = *textAnnotation->placemark()->style();
+    d->m_initialStyle = *placemark->style();
 
 
     // If the placemark has just been created, assign it a default name.
-    if ( textAnnotation->placemark()->name().isNull() ) {
-        textAnnotation->placemark()->setName( tr("Untitled Placemark") );
+    if ( placemark->name().isNull() ) {
+        placemark->setName( tr("Untitled Placemark") );
     }
     // Setup name, icon link and latitude/longitude values.
-    d->m_name->setText( textAnnotation->placemark()->name() );
-    d->m_initialName = textAnnotation->placemark()->name();
+    d->m_name->setText( placemark->name() );
+    d->m_initialName = placemark->name();
     connect( d->m_name, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
 
-    d->m_link->setText( textAnnotation->placemark()->style()->iconStyle().iconPath() );
+    d->m_link->setText( placemark->style()->iconStyle().iconPath() );
     connect( d->m_link, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
 
-    d->m_description->setText( textAnnotation->placemark()->description() );
+    d->m_description->setText( placemark->description() );
     d->m_initialDescription = d->m_description->toPlainText();
 
     // Initialize the range for label/icon size.
@@ -99,9 +99,9 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( PlacemarkTextAnnotation *tex
     d->m_longitude->setRange( -180, 180 );
 
 
-    d->m_latitude->setValue( textAnnotation->placemark()->coordinate().latitude( GeoDataCoordinates::Degree ) );
+    d->m_latitude->setValue( placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
     connect( d->m_latitude, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
-    d->m_longitude->setValue( textAnnotation->placemark()->coordinate().longitude( GeoDataCoordinates::Degree ) );
+    d->m_longitude->setValue( placemark->coordinate().longitude( GeoDataCoordinates::Degree ) );
     connect( d->m_longitude, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
     d->m_initialCoords = GeoDataCoordinates( d->m_longitude->value(),
                                              d->m_latitude->value(),
@@ -110,16 +110,16 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( PlacemarkTextAnnotation *tex
 
 
     // Adjust icon and label scales.
-    d->m_iconScale->setValue( textAnnotation->placemark()->style()->iconStyle().scale() );
+    d->m_iconScale->setValue( placemark->style()->iconStyle().scale() );
     connect( d->m_iconScale, SIGNAL(valueChanged(double)), this, SLOT(updateTextAnnotation()) );
 
-    d->m_labelScale->setValue( textAnnotation->placemark()->style()->labelStyle().scale() );
+    d->m_labelScale->setValue( placemark->style()->labelStyle().scale() );
     connect( d->m_labelScale, SIGNAL(valueChanged(double)), this, SLOT(updateTextAnnotation()) );
 
 
     // Adjust the current color of the two push buttons' pixmap to resemble the label and icon colors.
-    const GeoDataLabelStyle labelStyle = textAnnotation->placemark()->style()->labelStyle();
-    const GeoDataIconStyle iconStyle = textAnnotation->placemark()->style()->iconStyle();
+    const GeoDataLabelStyle labelStyle = placemark->style()->labelStyle();
+    const GeoDataIconStyle iconStyle = placemark->style()->iconStyle();
 
     QPixmap labelPixmap( d->m_labelButton->iconSize().width(),
                          d->m_labelButton->iconSize().height() );
@@ -150,10 +150,10 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( PlacemarkTextAnnotation *tex
     // Promote "Ok" button to default button.
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
 
-    connect( d->m_browseButton, SIGNAL(pressed()), this, SLOT(loadIconFile()) );
+    connect( d->m_browseButton, SIGNAL(clicked()), this, SLOT(loadIconFile()) );
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
     connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updateTextAnnotation()) );
-    connect( this, SIGNAL(rejected()), this, SLOT(restoreInitial()) );
+    connect( d->buttonBox, SIGNAL(rejected()), this, SLOT(restoreInitial()) );
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or
     // Close).
@@ -172,21 +172,21 @@ void EditTextAnnotationDialog::setFirstTimeEditing( bool enabled )
 
 void EditTextAnnotationDialog::updateDialogFields()
 {
-    d->m_latitude->setValue( d->m_textAnnotation->placemark()->coordinate().latitude( GeoDataCoordinates::Degree ) );
-    d->m_longitude->setValue( d->m_textAnnotation->placemark()->coordinate().longitude( GeoDataCoordinates::Degree ) );
+    d->m_latitude->setValue( d->m_placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
+    d->m_longitude->setValue( d->m_placemark->coordinate().longitude( GeoDataCoordinates::Degree ) );
 }
 
 void EditTextAnnotationDialog::updateTextAnnotation()
 {
-    d->m_textAnnotation->placemark()->setDescription( d->m_description->toPlainText() );
-    d->m_textAnnotation->placemark()->setName( d->m_name->text() );
-    d->m_textAnnotation->placemark()->setCoordinate( GeoDataCoordinates( d->m_longitude->value(),
+    d->m_placemark->setDescription( d->m_description->toPlainText() );
+    d->m_placemark->setName( d->m_name->text() );
+    d->m_placemark->setCoordinate( GeoDataCoordinates( d->m_longitude->value(),
                                                                          d->m_latitude->value(),
                                                                          0,
                                                                          GeoDataCoordinates::Degree ) );
 
 
-    GeoDataStyle *newStyle = new GeoDataStyle( *d->m_textAnnotation->placemark()->style() );
+    GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
 
     QFileInfo fileInfo( d->m_link->text() );
     if ( fileInfo.exists() ) {
@@ -199,10 +199,10 @@ void EditTextAnnotationDialog::updateTextAnnotation()
     newStyle->iconStyle().setColor( d->m_iconColorDialog->currentColor() );
     newStyle->labelStyle().setColor( d->m_labelColorDialog->currentColor() );
 
-    d->m_textAnnotation->placemark()->setStyle( newStyle );
+    d->m_placemark->setStyle( newStyle );
 
 
-    emit textAnnotationUpdated( d->m_textAnnotation->placemark() );
+    emit textAnnotationUpdated( d->m_placemark );
 }
 
 void EditTextAnnotationDialog::loadIconFile()
@@ -259,30 +259,30 @@ void EditTextAnnotationDialog::restoreInitial()
     // Make sure the placemark gets removed if the 'Cancel' button is pressed immediately after
     // the 'Add Placemark' has been clicked.
     if ( d->m_firstEditing ) {
-        emit removeRequested( d->m_textAnnotation );
+        emit removeRequested();
         return;
     }
 
-    if ( d->m_textAnnotation->placemark()->name() != d->m_initialName ) {
-        d->m_textAnnotation->placemark()->setName( d->m_initialName );
+    if ( d->m_placemark->name() != d->m_initialName ) {
+        d->m_placemark->setName( d->m_initialName );
     }
 
-    if ( d->m_textAnnotation->placemark()->description() != d->m_initialDescription ) {
-        d->m_textAnnotation->placemark()->setDescription( d->m_initialDescription );
+    if ( d->m_placemark->description() != d->m_initialDescription ) {
+        d->m_placemark->setDescription( d->m_initialDescription );
     }
 
-    if ( d->m_textAnnotation->placemark()->coordinate().latitude( GeoDataCoordinates::Degree ) !=
+    if ( d->m_placemark->coordinate().latitude( GeoDataCoordinates::Degree ) !=
          d->m_initialCoords.latitude( GeoDataCoordinates::Degree ) ||
-         d->m_textAnnotation->placemark()->coordinate().longitude( GeoDataCoordinates::Degree ) !=
+         d->m_placemark->coordinate().longitude( GeoDataCoordinates::Degree ) !=
          d->m_initialCoords.longitude( GeoDataCoordinates::Degree ) ) {
-        d->m_textAnnotation->placemark()->setCoordinate( d->m_initialCoords );
+        d->m_placemark->setCoordinate( d->m_initialCoords );
     }
 
-    if ( *d->m_textAnnotation->placemark()->style() != d->m_initialStyle ) {
-        d->m_textAnnotation->placemark()->setStyle( new GeoDataStyle( d->m_initialStyle ) );
+    if ( *d->m_placemark->style() != d->m_initialStyle ) {
+        d->m_placemark->setStyle( new GeoDataStyle( d->m_initialStyle ) );
     }
 
-    emit textAnnotationUpdated( d->m_textAnnotation->placemark() );
+    emit textAnnotationUpdated( d->m_placemark );
 }
 
 }

@@ -5,8 +5,9 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+// Copyright 2009      Andrew Manson  <g.real.ate@gmail.com>
 // Copyright 2013      Thibaut Gridel <tgridel@free.fr>
+// Copyright 2014      Calin Cruceru  <crucerucalincristian@gmail.com>
 //
 
 // Self

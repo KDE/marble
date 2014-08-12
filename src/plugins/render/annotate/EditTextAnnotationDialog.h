@@ -29,8 +29,7 @@ class EditTextAnnotationDialog : public QDialog
     Q_OBJECT
 
 public:
-    EditTextAnnotationDialog( PlacemarkTextAnnotation *textAnnotation,
-                              QWidget *parent = 0 );
+    EditTextAnnotationDialog( GeoDataPlacemark *placemark, QWidget *parent = 0 );
     ~EditTextAnnotationDialog();
 
     /**
@@ -100,7 +99,7 @@ signals:
      * @brief removeRequested Is the signal emitted when this is the first time for this
      * PlacemarkTextAnnotation instance the dialog pops up and the close button is pressed.
      */
-    void removeRequested( PlacemarkTextAnnotation *targetedPlacemark );
+    void removeRequested();
 
 private:
     class Private;
