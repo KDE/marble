@@ -31,6 +31,7 @@ public:
     QString destinationFile;
     QProcess process;
     MovieCapture::SnapshotMethod method;
+    int fps;
 };
 
 MovieCapture::MovieCapture(MarbleWidget *widget, QObject *parent) :
@@ -42,6 +43,7 @@ MovieCapture::MovieCapture(MarbleWidget *widget, QObject *parent) :
         d->frameTimer.setInterval(1000/30); // fps = 30 (default)
         connect(&d->frameTimer, SIGNAL(timeout()), this, SLOT(recordFrame()));
     }
+    d->fps = 30;
 }
 
 MovieCapture::~MovieCapture()
@@ -55,6 +57,7 @@ void MovieCapture::setFps(int fps)
     if( d->method == MovieCapture::TimeDriven ){
         d->frameTimer.setInterval(1000/fps);
     }
+    d->fps = fps;
 }
 
 void MovieCapture::setFilename(const QString &path)
@@ -72,7 +75,7 @@ void MovieCapture::setSnapshotMethod(MovieCapture::SnapshotMethod method)
 int MovieCapture::fps() const
 {
     Q_D(const MovieCapture);
-    return 1000/d->frameTimer.interval();
+    return d->fps;
 }
 
 QString MovieCapture::destination() const

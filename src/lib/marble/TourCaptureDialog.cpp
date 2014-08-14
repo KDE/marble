@@ -48,9 +48,6 @@ TourCaptureDialog::TourCaptureDialog(MarbleWidget *widget, QWidget *parent) :
     connect(ui->startButton, SIGNAL(clicked()),
             this, SLOT(startRecording()));
 
-    connect(ui->startButton, SIGNAL(clicked()),
-            this, SLOT(disableStopButton()));
-
     connect(ui->openButton, SIGNAL(clicked()),
             this, SLOT(loadDestinationFile()));
 
@@ -77,7 +74,7 @@ void TourCaptureDialog::loadDestinationFile()
     }
 
     QStringList formats;
-    formats << "mp4" << "webm" << "ogg";
+    formats << "mp4" << "webm" << "ogg" << "mkv" << "avi";
 
     bool supported = false;
     foreach(const QString &format, formats) {
@@ -100,6 +97,7 @@ void TourCaptureDialog::startRecording()
 {
     if( ui->startButton->text() == tr("Start") ){
         ui->startButton->setText(tr("Cancel"));
+        ui->closeButton->setDisabled(true);
         const QString path = ui->destinationEdit->text();
 
         if( path.isEmpty() ){
@@ -148,7 +146,7 @@ void TourCaptureDialog::recordNextFrame()
         m_recorder->recordFrame();
         updateProgress( m_current_position * 100 );
         m_current_position += shift;
-        QTimer::singleShot(0, this, SLOT(recordNextFrame()));
+        QTimer::singleShot(1, this, SLOT(recordNextFrame()));
     } else {
         m_recorder->stopRecording();
         ui->progressBar->setValue(duration*100);
@@ -177,11 +175,6 @@ void TourCaptureDialog::setTourPlayback( TourPlayback* playback )
 void TourCaptureDialog::handleError()
 {
     m_writingPossible = false;
-}
-
-void TourCaptureDialog::disableStopButton()
-{
-    ui->closeButton->setDisabled(true);
 }
 
 } // namespace Marble

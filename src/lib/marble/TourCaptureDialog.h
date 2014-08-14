@@ -44,7 +44,6 @@ private slots:
     void loadDestinationFile();
     void updateProgress( double position );
     void recordNextFrame();
-    void disableStopButton();
 
 private:
     Ui::TourCaptureDialog *ui;
