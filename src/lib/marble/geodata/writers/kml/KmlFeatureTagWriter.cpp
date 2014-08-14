@@ -42,6 +42,7 @@ bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer 
         // when a document has only one feature and no styling
         // the document tag is excused
         if( (document->id().isEmpty())
+            && (document->name().isEmpty())
             && (document->targetId().isEmpty())
             && (document->styles().count() == 0)
             && (document->styleMaps().count() == 0)
