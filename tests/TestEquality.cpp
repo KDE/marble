@@ -1371,7 +1371,7 @@ void TestEquality::styleTest()
     style1.setListStyle( listStyle );
 
     style2.setIconStyle( iconStyle );
-    style2.setListStyle( listStyle );
+    style2.setLineStyle( lineStyle );
     style2.setLabelStyle( labelStyle );
     style2.setPolyStyle( polyStyle );
     style2.setBalloonStyle( balloon );
