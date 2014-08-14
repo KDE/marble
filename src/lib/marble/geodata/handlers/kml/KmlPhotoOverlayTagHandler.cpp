@@ -34,7 +34,8 @@ GeoNode* KmlPhotoOverlayTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
+    if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ||
+        parentItem.represents( kmlTag_Change ) || parentItem.represents( kmlTag_Create ) || parentItem.represents( kmlTag_Delete ) ) {
         parentItem.nodeAs<GeoDataContainer>()->append( overlay );
         return overlay;
     } else if ( parentItem.qualifiedName().first == kmlTag_kml ) {
