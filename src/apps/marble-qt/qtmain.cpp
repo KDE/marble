@@ -94,6 +94,7 @@ int main(int argc, char *argv[])
     QString marbleDataPath;
     int dataPathIndex=0;
     QString mapThemeId;
+    QString tour;
     QString coordinatesString;
     QString distanceString;
     QString geoUriString;
@@ -112,6 +113,7 @@ int main(int argc, char *argv[])
         qWarning() << "  --latlon=<coordinates> ..... Show map at given lat lon coordinates";
         qWarning() << "  --distance=<value> ......... Set the distance of the observer to the globe (in km)";
         qWarning() << "  --map=<id> ................. Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")";
+        qWarning() << "  --tour=<file> .............. Load a KML tour from the given file and play it";
         qWarning();
         qWarning() << "debug options:";
         qWarning() << "  --debug-info ............... write (more) debugging information to the console";
@@ -181,6 +183,14 @@ int main(int argc, char *argv[])
             ++i;
             mapThemeId = args.value( i );
         }
+        else if ( arg.startsWith( QLatin1String( "--tour=" ), Qt::CaseInsensitive ) )
+        {
+            tour = arg.mid(7);
+        }
+        else if ( arg.compare( QLatin1String( "--tour" ), Qt::CaseInsensitive ) == 0 && i+1 < args.size() ) {
+            ++i;
+            tour = args.value( i );
+        }
     }
     MarbleGlobal::getInstance()->setProfiles( profiles );
 
@@ -209,6 +219,9 @@ int main(int argc, char *argv[])
         if ( success ) {
             cmdLineSettings.insert( QLatin1String("distance"), QVariant(distance) );
         }
+    }
+    if ( !tour.isEmpty() ) {
+        cmdLineSettings.insert( QLatin1String("tour"), QVariant(tour) );
     }
 
     cmdLineSettings.insert( QLatin1String("geo-uri"), QVariant(geoUriString) );

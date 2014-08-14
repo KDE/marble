@@ -121,6 +121,8 @@ class ControlView : public QWidget
 
     void handleTourLinkClicked( const QString &path );
 
+    void openTour( const QString &filename );
+
 signals:
     void showMapWizard();
     void showUploadDialog();

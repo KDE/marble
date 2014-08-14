@@ -244,6 +244,11 @@ void MainWindow::initObject(const QVariantMap& cmdLineSettings)
     foreach ( const QString &path, m_commandlineFilePaths ) {
         m_controlView->marbleModel()->addGeoDataFile( path );
     }
+
+    if ( cmdLineSettings.contains( "tour" ) ) {
+        QString const tour = cmdLineSettings.value( "tour" ).toString();
+        m_controlView->openTour( tour );
+    }
     m_commandlineFilePaths.clear();
 }
 
