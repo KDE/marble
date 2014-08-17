@@ -693,7 +693,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 }
 
 
-QModelIndex GeoDataTreeModel::index( GeoDataObject *object )
+QModelIndex GeoDataTreeModel::index( GeoDataObject *object ) const
 {
     //It first runs bottom-top, storing every ancestor of the object, and
     //then goes top-down retrieving the QModelIndex of every ancestor until reaching the

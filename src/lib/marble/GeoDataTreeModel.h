@@ -62,7 +62,7 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
     QModelIndex index( int row, int column,
                        const QModelIndex &parent = QModelIndex() ) const;
 
-    QModelIndex index( GeoDataObject* object );
+    QModelIndex index( GeoDataObject *object ) const;
 
     QModelIndex parent( const QModelIndex &index ) const;
 
