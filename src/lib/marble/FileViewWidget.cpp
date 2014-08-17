@@ -142,18 +142,18 @@ void FileViewWidgetPrivate::closeFile()
 
 void FileViewWidgetPrivate::enableFileViewActions()
 {
-    bool tmp = false;
+    bool isUserDocument = false;
     if ( !m_fileViewUi.m_treeView->selectionModel()->selectedRows().isEmpty() ) {
         QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
         GeoDataObject *object
             = index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
         GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
         if ( document ) {
-            tmp = document->documentRole() == Marble::UserDocument;
+            isUserDocument = document->documentRole() == Marble::UserDocument;
         }
     }
-    m_fileViewUi.m_saveButton->setEnabled( tmp );
-    m_fileViewUi.m_closeButton->setEnabled( tmp );
+    m_fileViewUi.m_saveButton->setEnabled( isUserDocument );
+    m_fileViewUi.m_closeButton->setEnabled( isUserDocument );
 }
 
 void FileViewWidget::mapCenterOnTreeViewModel( const QModelIndex &index )
