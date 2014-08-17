@@ -105,7 +105,6 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
 
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
     connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updatePolyline()) );
-    connect( d->buttonBox, SIGNAL(accepted()), this, SIGNAL(editingPolylineEnded()) );
     connect( this, SIGNAL(rejected()), SLOT(restoreInitial()) );
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or

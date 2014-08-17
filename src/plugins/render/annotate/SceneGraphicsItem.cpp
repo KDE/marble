@@ -23,6 +23,7 @@ namespace Marble
 SceneGraphicsItem::SceneGraphicsItem( GeoDataPlacemark *placemark ) :
     GeoGraphicsItem( placemark ),
     m_state( Editing ),
+    m_hasFocus( false ),
     m_request( NoRequest ),
     m_placemark( placemark )
 {
@@ -44,6 +45,16 @@ void SceneGraphicsItem::setState( ActionState state )
     ActionState previousState = m_state;
     m_state = state;
     dealWithStateChange( previousState );
+}
+
+bool SceneGraphicsItem::hasFocus() const
+{
+    return m_hasFocus;
+}
+
+void SceneGraphicsItem::setFocus( bool enabled )
+{
+    m_hasFocus = enabled;
 }
 
 SceneGraphicsItem::MarbleWidgetRequest SceneGraphicsItem::request() const

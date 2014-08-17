@@ -83,8 +83,6 @@ const char *PlacemarkTextAnnotation::graphicType() const
 
 bool PlacemarkTextAnnotation::mousePressEvent( QMouseEvent *event )
 {
-    Q_UNUSED( event );
-
     setRequest( SceneGraphicsItem::NoRequest );
 
     if ( state() == SceneGraphicsItem::Editing ) {

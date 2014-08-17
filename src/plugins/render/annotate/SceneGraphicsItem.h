@@ -89,6 +89,9 @@ public:
      */
     virtual void dealWithItemChange( const SceneGraphicsItem *other ) = 0;
 
+    /**
+     * @brief
+     */
     virtual void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination ) = 0;
 
     /**
@@ -101,6 +104,16 @@ public:
      * a parameter: the previous state.
      */
     void setState( ActionState state );
+
+    /**
+     * @brief
+     */
+    bool hasFocus() const;
+
+    /**
+     * @brief
+     */
+    void setFocus( bool enabled );
 
     /**
      * @brief Returns the widget request.
@@ -148,6 +161,7 @@ protected:
 
 private:
     ActionState         m_state;
+    bool                m_hasFocus;
     MarbleWidgetRequest m_request;
     GeoDataPlacemark   *m_placemark;
 };

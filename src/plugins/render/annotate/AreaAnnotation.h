@@ -67,10 +67,18 @@ public:
     virtual void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination );
 
     /**
-     * @brief Changes the busy state of the object according to @p enabled. It is mostly used
-     * by Annotate Plugin to not send events to this object anymore.
+     * @brief Changes the busy state of the object according to @param enabled. It is mostly
+     * used by Annotate Plugin to not send events to this object anymore but is different than
+     * the focus property (you can have a focused polygon which does not accept events because
+     * is busy).
      */
     void setBusy( bool enabled );
+
+    /**
+     * @brief Returns whether the annotation is 'busy' or not - this usually means that something
+     * is being performed and it does not accept events anymore.
+     */
+    bool isBusy() const;
 
     /**
      * @brief Iterates through all nodes which form the polygon's outer boundary as well
@@ -225,8 +233,8 @@ private:
     static const QColor hoveredColor;
 
     const ViewportParams *m_viewport;
-    bool                  m_regionsInitialized;
-    bool                  m_busy;
+    bool m_regionsInitialized;
+    bool m_busy;
 
     QList<PolylineNode>          m_outerNodesList;
     QList<PolylineNode>          m_outerVirtualNodes;

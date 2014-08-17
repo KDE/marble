@@ -30,7 +30,6 @@ public:
     void setFirstTimeEditing( bool enabled );
 
 signals:
-    void editingPolylineEnded();
     void polylineUpdated( GeoDataFeature *feature );
     void removeRequested();
 

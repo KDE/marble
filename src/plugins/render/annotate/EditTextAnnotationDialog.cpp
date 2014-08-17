@@ -88,7 +88,7 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     connect( d->m_link, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
 
     d->m_description->setText( placemark->description() );
-    d->m_initialDescription = d->m_description->toPlainText();
+    d->m_initialDescription = placemark->description();
 
     // Initialize the range for label/icon size.
     // FIXME: What should be the maximum size?

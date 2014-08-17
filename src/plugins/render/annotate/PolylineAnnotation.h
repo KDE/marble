@@ -50,25 +50,32 @@ public:
     virtual void dealWithItemChange( const SceneGraphicsItem *other );
 
     /**
-     * FIXME: Not implemented yet.
+     * @brief Moves the whole polyline to the destination point.
      */
     virtual void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination );
 
     /**
      * @brief Changes the busy state of the object according to @p enabled. It is mostly used
-     * by Annotate Plugin to not send events to this object anymore.
+     * by Annotate Plugin to not send events to this object anymore but is different than the
+     * focus property (you can have a focused polyline which does not accept events because is
+     * busy).
      */
     void setBusy( bool enabled );
 
     /**
-     * @brief Iterates through all nodes which form the polygon's outer boundary as well
-     * as all its inner boundaries and sets the IsSelected flag to false.
+     * @brief Returns whether the annotation is 'busy' or not - this usually means that something
+     * is being performed and it does not accept events anymore.
+     */
+    bool isBusy() const;
+
+    /**
+     * @brief Iterates through all nodes which form the polyline and sets the IsSelected flag to
+     * false.
      */
     void deselectAllNodes();
 
     /**
-     * @brief Iterates through all nodes which form the polygon's outer boundary as well
-     * as all its inner boundaries and deletes the selected ones.
+     * @brief Iterates through all nodes which form the polyline and deletes the selected ones.
      */
     void deleteAllSelectedNodes();
 
@@ -119,7 +126,7 @@ protected:
 private:
     /**
     * @brief It is called when the ::paint method is called for the first time. It
-    * initializes the m_outerNodesList by creating the PolylineNodes.
+    * initializes the m_nodesList by creating the PolylineNodes.
     * @see updateRegions() method for more detailed explanation.
     */
     void setupRegionsLists( GeoPainter *painter );
@@ -170,13 +177,6 @@ private:
     bool processEditingOnPress( QMouseEvent *mouseEvent );
     bool processEditingOnMove( QMouseEvent *mouseEvent );
     bool processEditingOnRelease( QMouseEvent *mouseEvent );
-
-    /**
-     * @brief These are the event handlers for the AddingPolygonHole state.
-     */
-    bool processAddingHoleOnPress( QMouseEvent *mouseEvent );
-    bool processAddingHoleOnMove( QMouseEvent *mouseEvent );
-    bool processAddingHoleOnRelease( QMouseEvent *mouseEvent );
 
     /**
      * @brief These are the event handlers for the MergingPolylineNodes state.

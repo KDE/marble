@@ -62,19 +62,25 @@ void AreaAnnotation::paint( GeoPainter *painter, const ViewportParams *viewport 
     Q_ASSERT( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType );
 
     painter->save();
-    if ( !m_regionsInitialized ) {
+    if ( state() == SceneGraphicsItem::DrawingPolygon || !m_regionsInitialized ) {
         setupRegionsLists( painter );
         m_regionsInitialized = true;
     } else {
         updateRegions( painter );
     }
 
-    drawNodes( painter );
+    if ( hasFocus() ) {
+        drawNodes( painter );
+    }
     painter->restore();
 }
 
 bool AreaAnnotation::containsPoint( const QPoint &point ) const
 {
+    if ( m_busy ) {
+        return false;
+    }
+
     if ( state() == SceneGraphicsItem::Editing ) {
         return outerNodeContains( point ) != -1 || polygonContains( point ) ||
                innerNodeContains( point ) != QPair<int, int>( -1, -1 );
@@ -181,6 +187,11 @@ void AreaAnnotation::setBusy( bool enabled )
     if ( !enabled ) {
         delete m_animation;
     }
+}
+
+bool AreaAnnotation::isBusy() const
+{
+    return m_busy;
 }
 
 void AreaAnnotation::deselectAllNodes()
@@ -539,21 +550,29 @@ void AreaAnnotation::setupRegionsLists( GeoPainter *painter )
     QVector<GeoDataCoordinates>::ConstIterator itBegin = outerRing.begin();
     QVector<GeoDataCoordinates>::ConstIterator itEnd = outerRing.end();
 
+    m_outerNodesList.clear();
+    m_innerNodesList.clear();
+    m_boundariesList.clear();
+
     for ( ; itBegin != itEnd; ++itBegin ) {
         PolylineNode newNode = PolylineNode( painter->regionFromEllipse( *itBegin, regularDim, regularDim ) );
         m_outerNodesList.append( newNode );
     }
 
+    foreach ( const GeoDataLinearRing &innerRing, innerRings ) {
+        QVector<GeoDataCoordinates>::ConstIterator itBegin = innerRing.begin();
+        QVector<GeoDataCoordinates>::ConstIterator itEnd = innerRing.end();
+        QList<PolylineNode> innerNodes;
+
+        for ( ; itBegin != itEnd; ++itBegin ) {
+            PolylineNode newNode = PolylineNode( painter->regionFromEllipse( *itBegin, regularDim, regularDim ) );
+            innerNodes.append( newNode );
+        }
+        m_innerNodesList.append( innerNodes );
+    }
+
     // Add the outer boundary to the boundaries list.
     m_boundariesList.append( painter->regionFromPolygon( outerRing, Qt::OddEvenFill ) );
-
-    for ( int i = 0; i < innerRings.size(); ++i ) {
-        m_innerNodesList << QList<PolylineNode>();
-        for ( int j = 0; j < innerRings.at(i).size(); ++j ) {
-            const PolylineNode newRegion = PolylineNode( painter->regionFromEllipse(innerRings.at(i).at(j), regularDim, regularDim ) );
-            m_innerNodesList[i] << newRegion;
-        }
-    }
 }
 
 void AreaAnnotation::updateRegions( GeoPainter *painter )
@@ -730,9 +749,7 @@ void AreaAnnotation::drawNodes( GeoPainter *painter )
         }
     }
 
-    Q_ASSERT( innerRings.size() == m_innerNodesList.size() );
     for ( int i = 0; i < innerRings.size(); ++i ) {
-        Q_ASSERT( innerRings.at(i).size() == m_innerNodesList.at(i).size());
         for ( int j = 0; j < innerRings.at(i).size(); ++j ) {
             if ( m_innerNodesList.at(i).at(j).isBeingMerged() ) {
                 painter->setBrush( mergedColor );
@@ -819,6 +836,10 @@ void AreaAnnotation::drawNodes( GeoPainter *painter )
 
 int AreaAnnotation::outerNodeContains( const QPoint &point ) const
 {
+    if ( !hasFocus() ) {
+        return -1;
+    }
+
     for ( int i = 0; i < m_outerNodesList.size(); ++i ) {
         if ( m_outerNodesList.at(i).containsPoint( point ) ) {
             return i;
@@ -830,6 +851,10 @@ int AreaAnnotation::outerNodeContains( const QPoint &point ) const
 
 QPair<int, int> AreaAnnotation::innerNodeContains( const QPoint &point ) const
 {
+    if ( !hasFocus() ) {
+        return QPair<int, int>( -1, -1 );
+    }
+
     for ( int i = 0; i < m_innerNodesList.size(); ++i ) {
         for ( int j = 0; j < m_innerNodesList.at(i).size(); ++j ) {
             if ( m_innerNodesList.at(i).at(j).containsPoint( point ) ) {
@@ -843,6 +868,10 @@ QPair<int, int> AreaAnnotation::innerNodeContains( const QPoint &point ) const
 
 QPair<int, int> AreaAnnotation::virtualNodeContains( const QPoint &point ) const
 {
+    if ( !hasFocus() ) {
+        return QPair<int, int>( -1, -1 );
+    }
+
     for ( int i = 0; i < m_outerVirtualNodes.size(); ++i ) {
         if ( m_outerVirtualNodes.at(i).containsPoint( point ) ) {
             return QPair<int, int>( i, -1 );
@@ -1435,7 +1464,8 @@ bool AreaAnnotation::dealWithHovering( QMouseEvent *mouseEvent )
         return true;
     }
 
-    return false;
+    // This means that the interior of the polygon has been covered so we catch this event too.
+    return true;
 }
 
 }
