@@ -533,6 +533,7 @@ void AreaAnnotation::setupRegionsLists( GeoPainter *painter )
 {
     const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( placemark()->geometry() );
     const GeoDataLinearRing &outerRing = polygon->outerBoundary();
+    const QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
 
     // Add the outer boundary nodes.
     QVector<GeoDataCoordinates>::ConstIterator itBegin = outerRing.begin();
@@ -545,6 +546,14 @@ void AreaAnnotation::setupRegionsLists( GeoPainter *painter )
 
     // Add the outer boundary to the boundaries list.
     m_boundariesList.append( painter->regionFromPolygon( outerRing, Qt::OddEvenFill ) );
+
+    for ( int i = 0; i < innerRings.size(); ++i ) {
+        m_innerNodesList << QList<PolylineNode>();
+        for ( int j = 0; j < innerRings.at(i).size(); ++j ) {
+            const PolylineNode newRegion = PolylineNode( painter->regionFromEllipse(innerRings.at(i).at(j), regularDim, regularDim ) );
+            m_innerNodesList[i] << newRegion;
+        }
+    }
 }
 
 void AreaAnnotation::updateRegions( GeoPainter *painter )
@@ -721,7 +730,9 @@ void AreaAnnotation::drawNodes( GeoPainter *painter )
         }
     }
 
+    Q_ASSERT( innerRings.size() == m_innerNodesList.size() );
     for ( int i = 0; i < innerRings.size(); ++i ) {
+        Q_ASSERT( innerRings.at(i).size() == m_innerNodesList.at(i).size());
         for ( int j = 0; j < innerRings.at(i).size(); ++j ) {
             if ( m_innerNodesList.at(i).at(j).isBeingMerged() ) {
                 painter->setBrush( mergedColor );
