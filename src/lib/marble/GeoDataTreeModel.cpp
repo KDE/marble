@@ -695,6 +695,9 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 
 QModelIndex GeoDataTreeModel::index( GeoDataObject *object ) const
 {
+    if ( object == 0 )
+        return QModelIndex();
+
     //It first runs bottom-top, storing every ancestor of the object, and
     //then goes top-down retrieving the QModelIndex of every ancestor until reaching the
     //index of the requested object.
