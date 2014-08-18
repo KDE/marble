@@ -995,6 +995,8 @@ void AnnotatePlugin::addTextAnnotation()
 
 void AnnotatePlugin::stopEditingTextAnnotation()
 {
+    m_editingDialogIsShown = false;
+
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
