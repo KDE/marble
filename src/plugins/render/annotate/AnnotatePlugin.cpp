@@ -492,6 +492,9 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
 
                 if ( m_focusItem && m_focusItem != item ) {
                     m_focusItem->setFocus( false );
+                    if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicGroundOverlay ) {
+                        clearOverlayFrames();
+                    }
                 }
                 m_focusItem = item;
                 m_marbleWidget->model()->treeModel()->updateFeature( item->placemark() );
@@ -984,6 +987,9 @@ void AnnotatePlugin::addTextAnnotation()
 
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
+        if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicGroundOverlay ) {
+            clearOverlayFrames();
+        }
     }
     m_focusItem = textAnnotation;
     disableActions( m_actions.first() );
@@ -1034,6 +1040,7 @@ void AnnotatePlugin::addOverlay()
     dialog->exec();
     delete dialog;
     m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, overlay );
+    displayOverlayFrame( overlay );
 }
 
 void AnnotatePlugin::showOverlayRmbMenu( GeoDataGroundOverlay *overlay, qreal x, qreal y )
@@ -1200,6 +1207,9 @@ void AnnotatePlugin::addPolygon()
     // that item.
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
+        if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicGroundOverlay ) {
+            clearOverlayFrames();
+        }
     }
     m_focusItem = polygon;
     disableActions( m_actions.first() );
@@ -1438,6 +1448,9 @@ void AnnotatePlugin::addPolyline()
 
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
+        if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicGroundOverlay ) {
+            clearOverlayFrames();
+        }
     }
     m_focusItem = polyline;
     disableActions( m_actions.first() );
