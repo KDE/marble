@@ -18,6 +18,7 @@
 #include <QColor>
 #include <QList>
 #include <QMap>
+#include <QSet>
 
 namespace Marble {
 
@@ -55,7 +56,7 @@ private:
     QMap<quint64, GeoDataPoint *> m_nodes;
     QMap<quint64, GeoDataPolygon *> m_polygons;
     QMap<quint64, GeoDataLineString *> m_ways;
-    QList<QString> m_areaTags;
+    QSet<QString> m_areaTags;
     QList<GeoDataPlacemark *> m_dummyPlacemarks;
 };
 
