@@ -477,6 +477,7 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
             continue;
         }
 
+        // If an edit dialog is visible, do not permit right clicking on items.
         if ( m_editingDialogIsShown && mouseEvent->type() == QEvent::MouseButtonPress &&
              mouseEvent->button() == Qt::RightButton) {
             return true;
@@ -583,8 +584,6 @@ void AnnotatePlugin::handleReleaseOverlay( QMouseEvent *mouseEvent )
                                     GeoDataCoordinates::Radian );
     const GeoDataCoordinates coords( lon, lat );
 
-    // Events caught by ground overlays at mouse release. So far we have: displaying the overlay frame
-    // (marking it as selected), removing it and showing a rmb menu with options.
     for ( int i = 0; i < m_groundOverlayModel.rowCount(); ++i ) {
         const QModelIndex index = m_groundOverlayModel.index( i, 0 );
         GeoDataGroundOverlay *overlay = dynamic_cast<GeoDataGroundOverlay*>(
@@ -603,7 +602,7 @@ void AnnotatePlugin::handleReleaseOverlay( QMouseEvent *mouseEvent )
 bool AnnotatePlugin::handleMovingSelectedItem( QMouseEvent *mouseEvent )
 {
     // Handling easily the mouse move by calling for each scene graphic item their own mouseMoveEvent
-    // handler and updating the placemark geometry.
+    // handler and updating their feature.
     if ( m_movedItem->sceneEvent( mouseEvent ) ) {
         m_marbleWidget->model()->treeModel()->updateFeature( m_movedItem->placemark() );
 
@@ -1171,7 +1170,6 @@ void AnnotatePlugin::addPolygon()
 {
     m_drawingPolygon = true;
 
-    // Setup the geometry
     GeoDataPolygon *poly = new GeoDataPolygon( Tessellate );
     poly->outerBoundary().setTessellate( true );
 
@@ -1198,8 +1196,8 @@ void AnnotatePlugin::addPolygon()
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolygon()) );
 
-    // If we had 'selected' other graphic item when pressing 'Add Polygon', change the focus of that
-    // item.
+    // If there is another graphic item marked as 'selected' when pressing 'Add Polygon', change the focus of
+    // that item.
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
     }
