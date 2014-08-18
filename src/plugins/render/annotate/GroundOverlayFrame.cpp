@@ -131,8 +131,8 @@ bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
             m_overlay->latLonBox().setEast( rotatedLon );
         } else if ( m_movedPoint == Polygon ) {
 
-           qreal centerLonDiff = lon - m_movedPointCoordinates.longitude();
-           qreal centerLatDiff = lat - m_movedPointCoordinates.latitude();
+           const qreal centerLonDiff = lon - m_movedPointCoordinates.longitude();
+           const qreal centerLatDiff = lat - m_movedPointCoordinates.latitude();
 
            m_overlay->latLonBox().setBoundaries( m_overlay->latLonBox().north() + centerLatDiff,
                                                  m_overlay->latLonBox().south() + centerLatDiff,
@@ -161,9 +161,7 @@ bool GroundOverlayFrame::mouseReleaseEvent( QMouseEvent *event )
 void GroundOverlayFrame::update()
 {
     GeoDataLatLonBox overlayLatLonBox = m_overlay->latLonBox();
-
     GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( placemark()->geometry() );
-
     poly->outerBoundary().clear();
 
     qreal rotatedLon;

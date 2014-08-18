@@ -18,7 +18,6 @@
 #include "SceneGraphicsTypes.h"
 #include "GeoPainter.h"
 #include "PolylineNode.h"
-#include "MarbleColors.h"
 #include "MarbleMath.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
@@ -84,12 +83,12 @@ void PolylineAnnotation::setupRegionsLists( GeoPainter *painter )
     const GeoDataLineString line = static_cast<const GeoDataLineString>( *placemark()->geometry() );
 
     // Add poyline nodes.
-    QVector<GeoDataCoordinates>::ConstIterator itBegin = line.begin();
-    QVector<GeoDataCoordinates>::ConstIterator itEnd = line.end();
+    QVector<GeoDataCoordinates>::ConstIterator itBegin = line.constBegin();
+    QVector<GeoDataCoordinates>::ConstIterator itEnd = line.constEnd();
 
     m_nodesList.clear();
     for ( ; itBegin != itEnd; ++itBegin ) {
-        PolylineNode newNode = PolylineNode( painter->regionFromEllipse( *itBegin, regularDim, regularDim ) );
+        const PolylineNode newNode = PolylineNode( painter->regionFromEllipse( *itBegin, regularDim, regularDim ) );
         m_nodesList.append( newNode );
     }
 
@@ -126,12 +125,12 @@ void PolylineAnnotation::updateRegions( GeoPainter *painter )
         // Create and update virtual nodes lists when being in the AddingPolgonNodes state, to
         // avoid overhead in other states.
         m_virtualNodesList.clear();
-        QRegion firstRegion( painter->regionFromEllipse( line.at(0).interpolate( line.last(), 0.5 ),
-                                                         hoveredDim, hoveredDim ) );
+        const QRegion firstRegion( painter->regionFromEllipse( line.at(0).interpolate( line.last(), 0.5 ),
+                                                               hoveredDim, hoveredDim ) );
         m_virtualNodesList.append( PolylineNode( firstRegion ) );
         for ( int i = 0; i < line.size() - 1; ++i ) {
-            QRegion newRegion( painter->regionFromEllipse( line.at(i).interpolate( line.at(i+1), 0.5 ),
-                                                           hoveredDim, hoveredDim ) );
+            const QRegion newRegion( painter->regionFromEllipse( line.at(i).interpolate( line.at(i+1), 0.5 ),
+                                                                 hoveredDim, hoveredDim ) );
             m_virtualNodesList.append( PolylineNode( newRegion ) );
         }
     }
@@ -142,12 +141,9 @@ void PolylineAnnotation::updateRegions( GeoPainter *painter )
 
     // Update the node lists.
     for ( int i = 0; i < m_nodesList.size(); ++i ) {
-        QRegion newRegion;
-        if ( m_nodesList.at(i).isSelected() ) {
-            newRegion = painter->regionFromEllipse( line.at(i), selectedDim, selectedDim );
-        } else {
-            newRegion = painter->regionFromEllipse( line.at(i), regularDim, regularDim );
-        }
+        const QRegion newRegion = m_nodesList.at(i).isSelected() ?
+                                  painter->regionFromEllipse( line.at(i), selectedDim, selectedDim ) :
+                                  painter->regionFromEllipse( line.at(i), regularDim, regularDim );
         m_nodesList[i].setRegion( newRegion );
     }
 }
@@ -178,17 +174,13 @@ void PolylineAnnotation::drawNodes( GeoPainter *painter )
                 QPen defaultPen = painter->pen();
                 QPen newPen;
                 newPen.setWidth( defaultPen.width() + 3 );
-
-                if ( m_nodesList.at(i).isEditingHighlighted() ) {
-                    newPen.setColor( QColor( 0, 255, 255, 120 ) );
-                } else {
-                    newPen.setColor( QColor( 25, 255, 25, 180 ) );
-                }
+                newPen.setColor( m_nodesList.at(i).isEditingHighlighted() ?
+                                 QColor( 0, 255, 255, 120 ) :
+                                 QColor( 25, 255, 25, 180 ) );
 
                 painter->setBrush( Qt::NoBrush );
                 painter->setPen( newPen );
                 painter->drawEllipse( line.at(i), d_selectedDim + 2, d_selectedDim + 2 );
-
                 painter->setPen( defaultPen );
             }
         } else {
@@ -200,17 +192,13 @@ void PolylineAnnotation::drawNodes( GeoPainter *painter )
                 QPen defaultPen = painter->pen();
                 QPen newPen;
                 newPen.setWidth( defaultPen.width() + 3 );
-
-                if ( m_nodesList.at(i).isEditingHighlighted() ) {
-                    newPen.setColor( QColor( 0, 255, 255, 120 ) );
-                } else {
-                    newPen.setColor( QColor( 25, 255, 25, 180 ) );
-                }
+                newPen.setColor( m_nodesList.at(i).isEditingHighlighted() ?
+                                 QColor( 0, 255, 255, 120 ) :
+                                 QColor( 25, 255, 25, 180 ) );
 
                 painter->setPen( newPen );
                 painter->setBrush( Qt::NoBrush );
                 painter->drawEllipse( line.at(i), d_regularDim + 2, d_regularDim + 2 );
-
                 painter->setPen( defaultPen );
             }
         }
@@ -223,7 +211,7 @@ void PolylineAnnotation::drawNodes( GeoPainter *painter )
         if ( m_virtualHoveredNode ) {
             newCoords = line.at(m_virtualHoveredNode).interpolate( line.at(m_virtualHoveredNode-1), 0.5 );
         } else {
-            newCoords = line.at(0).interpolate( line.last(), 0.5 );
+            newCoords = line.first().interpolate( line.last(), 0.5 );
         }
         painter->drawEllipse( newCoords, d_hoveredDim, d_hoveredDim );
     }
@@ -308,8 +296,8 @@ void PolylineAnnotation::move( const GeoDataCoordinates &source, const GeoDataCo
     GeoDataLineString oldLineString = *lineString;
     lineString->clear();
 
-    qreal deltaLat = destination.latitude() - source.latitude();
-    qreal deltaLon = destination.longitude() - source.longitude();
+    const qreal deltaLat = destination.latitude() - source.latitude();
+    const qreal deltaLon = destination.longitude() - source.longitude();
 
     Quaternion latRectAxis = Quaternion::fromEuler( 0, destination.longitude(), 0);
     Quaternion latAxis = Quaternion::fromEuler( -deltaLat, 0, 0);
@@ -592,11 +580,11 @@ bool PolylineAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
         return true;
     } else if ( m_interactingObj == InteractingPolyline ) {
         GeoDataLineString *lineString = static_cast<GeoDataLineString*>( placemark()->geometry() );
-        GeoDataLineString oldLineString = *lineString;
+        const GeoDataLineString oldLineString = *lineString;
         lineString->clear();
 
-        qreal deltaLat = lat - m_movedPointCoords.latitude();
-        qreal deltaLon = lon - m_movedPointCoords.longitude();
+        const qreal deltaLat = lat - m_movedPointCoords.latitude();
+        const qreal deltaLon = lon - m_movedPointCoords.longitude();
 
         Quaternion latRectAxis = Quaternion::fromEuler( 0, lon, 0);
         Quaternion latAxis = Quaternion::fromEuler( -deltaLat, 0, 0);
@@ -630,7 +618,6 @@ bool PolylineAnnotation::processEditingOnRelease( QMouseEvent *mouseEvent )
 
     if ( m_interactingObj == InteractingNode ) {
         qreal x, y;
-
         m_viewport->screenCoordinates( m_movedPointCoords.longitude(),
                                        m_movedPointCoords.latitude(),
                                        x, y );
@@ -662,7 +649,7 @@ bool PolylineAnnotation::processMergingOnPress( QMouseEvent *mouseEvent )
 
     GeoDataLineString line = static_cast<GeoDataLineString>( *placemark()->geometry() );
 
-    int index = nodeContains( mouseEvent->pos() );
+    const int index = nodeContains( mouseEvent->pos() );
     if ( index == -1 ) {
         return false;
     }
@@ -719,22 +706,22 @@ bool PolylineAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
 
     // If a virtual node has just been clicked, add it to the polyline and start 'adjusting'
     // its position.
-    int index = virtualNodeContains( mouseEvent->pos() );
-    if ( index != -1 && m_adjustedNode == -1 ) {
-        Q_ASSERT( m_virtualHoveredNode == index );
+    const int virtualIndex = virtualNodeContains( mouseEvent->pos() );
+    if ( virtualIndex != -1 && m_adjustedNode == -1 ) {
+        Q_ASSERT( m_virtualHoveredNode == virtualIndex );
 
-        line->insert( index, line->at(index-1).interpolate( line->at(index), 0.5 ) );
-        m_nodesList.insert( index, PolylineNode( QRegion() ) );
+        line->insert( virtualIndex, line->at(virtualIndex-1).interpolate( line->at(virtualIndex), 0.5 ) );
+        m_nodesList.insert( virtualIndex, PolylineNode( QRegion() ) );
 
-        m_adjustedNode = index;
+        m_adjustedNode = virtualIndex;
         m_virtualHoveredNode = -1;
         return true;
     }
 
     // If a virtual node which has been previously clicked and selected to become a
     // 'real node' is clicked one more time, it stops from being 'adjusted'.
-    index = nodeContains( mouseEvent->pos() );
-    if ( index != -1 && m_adjustedNode != -1 ) {
+    const int realIndex = nodeContains( mouseEvent->pos() );
+    if ( realIndex != -1 && m_adjustedNode != -1 ) {
         m_adjustedNode = -1;
         return true;
     }
@@ -746,7 +733,7 @@ bool PolylineAnnotation::processAddingNodesOnMove( QMouseEvent *mouseEvent )
 {
     Q_ASSERT( mouseEvent->button() == Qt::NoButton );
 
-    int index = virtualNodeContains( mouseEvent->pos() );
+    const int index = virtualNodeContains( mouseEvent->pos() );
 
     // If we are adjusting a virtual node which has just been clicked and became real, just
     // change its coordinates when moving it, as we do with nodes in Editing state on move.
@@ -782,11 +769,11 @@ bool PolylineAnnotation::processAddingNodesOnRelease( QMouseEvent *mouseEvent )
 
 bool PolylineAnnotation::dealWithHovering( QMouseEvent *mouseEvent )
 {
-    PolylineNode::PolyNodeFlag flag = state() == SceneGraphicsItem::Editing ?
-                                                    PolylineNode::NodeIsEditingHighlighted :
-                                                    PolylineNode::NodeIsMergingHighlighted;
+    const PolylineNode::PolyNodeFlag flag = state() == SceneGraphicsItem::Editing ?
+                                                       PolylineNode::NodeIsEditingHighlighted :
+                                                       PolylineNode::NodeIsMergingHighlighted;
 
-    int index = nodeContains( mouseEvent->pos() );
+    const int index = nodeContains( mouseEvent->pos() );
     if ( index != -1 ) {
         if ( !m_nodesList.at(index).isEditingHighlighted() &&
              !m_nodesList.at(index).isMergingHighlighted() ) {
@@ -807,7 +794,7 @@ bool PolylineAnnotation::dealWithHovering( QMouseEvent *mouseEvent )
         return true;
     }
 
-    // This means that the interior of the polyline has been hovered so we catch this evnt too.
+    // This means that the interior of the polyline has been hovered so we catch this event too.
     return true;
 }
 

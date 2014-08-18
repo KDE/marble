@@ -293,7 +293,7 @@ void AnnotatePlugin::removeFocusItem()
     // Ground Overlays will always be a special case..
     if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicGroundOverlay ) {
         for ( int i = 0; i < m_groundOverlayModel.rowCount(); ++i ) {
-            QModelIndex index = m_groundOverlayModel.index( i, 0 );
+            const QModelIndex index = m_groundOverlayModel.index( i, 0 );
             GeoDataGroundOverlay *overlay = dynamic_cast<GeoDataGroundOverlay*>(
                qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole ) ) );
 
@@ -437,15 +437,15 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
         return false;
     }
 
-    QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>( event );
+    QMouseEvent * const mouseEvent = dynamic_cast<QMouseEvent*>( event );
     Q_ASSERT( mouseEvent );
 
     // Get the geocoordinates from mouse pos screen coordinates.
     qreal lon, lat;
-    bool isOnGlobe = m_marbleWidget->geoCoordinates( mouseEvent->pos().x(),
-                                                     mouseEvent->pos().y(),
-                                                     lon, lat,
-                                                     GeoDataCoordinates::Radian );
+    const bool isOnGlobe = m_marbleWidget->geoCoordinates( mouseEvent->pos().x(),
+                                                           mouseEvent->pos().y(),
+                                                           lon, lat,
+                                                           GeoDataCoordinates::Radian );
     if ( !isOnGlobe ) {
         return false;
     }
@@ -586,7 +586,7 @@ void AnnotatePlugin::handleReleaseOverlay( QMouseEvent *mouseEvent )
     // Events caught by ground overlays at mouse release. So far we have: displaying the overlay frame
     // (marking it as selected), removing it and showing a rmb menu with options.
     for ( int i = 0; i < m_groundOverlayModel.rowCount(); ++i ) {
-        QModelIndex index = m_groundOverlayModel.index( i, 0 );
+        const QModelIndex index = m_groundOverlayModel.index( i, 0 );
         GeoDataGroundOverlay *overlay = dynamic_cast<GeoDataGroundOverlay*>(
            qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole ) ) );
 
@@ -652,7 +652,7 @@ void AnnotatePlugin::handleSuccessfulReleaseEvent( QMouseEvent *mouseEvent, Scen
 void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem *item )
 {
     if ( item->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation ) {
-        AreaAnnotation *area = static_cast<AreaAnnotation*>( item );
+        AreaAnnotation * const area = static_cast<AreaAnnotation*>( item );
 
         if ( area->request() == SceneGraphicsItem::ShowPolygonRmbMenu ) {
             showPolygonRmbMenu( mouseEvent->pos().x(), mouseEvent->pos().y() );
@@ -687,7 +687,7 @@ void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem 
             removeFocusItem();
         }
     } else if ( item->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation ) {
-        PolylineAnnotation *polyline = static_cast<PolylineAnnotation*>( item );
+        PolylineAnnotation * const polyline = static_cast<PolylineAnnotation*>( item );
 
         if ( polyline->request() == SceneGraphicsItem::ShowPolylineRmbMenu ) {
             showPolylineRmbMenu( mouseEvent->x(), mouseEvent->y() );
@@ -706,7 +706,7 @@ void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem 
             removeFocusItem();
         }
     } else if ( item->graphicType() == SceneGraphicsTypes::SceneGraphicTextAnnotation ) {
-        PlacemarkTextAnnotation *textAnnotation = static_cast<PlacemarkTextAnnotation*>( item );
+        PlacemarkTextAnnotation * const textAnnotation = static_cast<PlacemarkTextAnnotation*>( item );
 
         if ( textAnnotation->request() == SceneGraphicsItem::ShowPlacemarkRmbMenu ) {
             showTextAnnotationRmbMenu( mouseEvent->x(), mouseEvent->y() );
@@ -752,7 +752,6 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     if ( !widget ) {
         return;
     }
-
 
     QActionGroup *group = new QActionGroup( 0 );
     group->setExclusive( true );
@@ -899,7 +898,7 @@ void AnnotatePlugin::disableFocusActions()
 
 void AnnotatePlugin::addContextItems()
 {
-    MarbleWidgetPopupMenu *menu = m_marbleWidget->popupMenu();
+    MarbleWidgetPopupMenu * const menu = m_marbleWidget->popupMenu();
 
     m_pasteGraphicItem = new QAction( tr( "Paste Graphic Item" ), this );
     m_pasteGraphicItem->setEnabled( false );
@@ -1225,14 +1224,14 @@ void AnnotatePlugin::stopEditingPolygon()
 void AnnotatePlugin::deselectNodes()
 {
     if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation ) {
-        AreaAnnotation *area = static_cast<AreaAnnotation*>( m_focusItem );
+        AreaAnnotation * const area = static_cast<AreaAnnotation*>( m_focusItem );
         area->deselectAllNodes();
 
         if ( area->request() == SceneGraphicsItem::NoRequest ) {
             m_marbleWidget->model()->treeModel()->updateFeature( area->placemark() );
         }
     } else if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation ) {
-        PolylineAnnotation *polyline = static_cast<PolylineAnnotation*>( m_focusItem );
+        PolylineAnnotation * const polyline = static_cast<PolylineAnnotation*>( m_focusItem );
         polyline->deselectAllNodes();
 
         if ( polyline->request() == SceneGraphicsItem::NoRequest ) {
@@ -1244,10 +1243,10 @@ void AnnotatePlugin::deselectNodes()
 void AnnotatePlugin::deleteSelectedNodes()
 {
     if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation ) {
-        AreaAnnotation *area = static_cast<AreaAnnotation*>( m_focusItem );
+        AreaAnnotation * const area = static_cast<AreaAnnotation*>( m_focusItem );
         area->deleteAllSelectedNodes();
     } else if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation ) {
-        PolylineAnnotation *polyline = static_cast<PolylineAnnotation*>( m_focusItem );
+        PolylineAnnotation * const polyline = static_cast<PolylineAnnotation*>( m_focusItem );
         polyline->deleteAllSelectedNodes();
     }
 
@@ -1297,30 +1296,24 @@ void AnnotatePlugin::showNodeRmbMenu( qreal x, qreal y )
     // Check whether the node is already selected; we change the text of the action
     // accordingly.
     bool isSelected = false;
-    if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation &&
-         static_cast<AreaAnnotation*>( m_focusItem )->clickedNodeIsSelected() ) {
-        isSelected = true;
-    } else if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation &&
-                static_cast<PolylineAnnotation*>( m_focusItem )->clickedNodeIsSelected() ) {
+    if ( ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation &&
+           static_cast<AreaAnnotation*>( m_focusItem )->clickedNodeIsSelected() ) ||
+         ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation &&
+           static_cast<PolylineAnnotation*>( m_focusItem )->clickedNodeIsSelected() ) ) {
         isSelected = true;
     }
 
-    if ( isSelected ) {
-        m_nodeRmbMenu->actions().at(0)->setText( tr("Deselect Node") );
-    } else {
-        m_nodeRmbMenu->actions().at(0)->setText( tr("Select Node") );
-    }
-
+    m_nodeRmbMenu->actions().first()->setText( isSelected ? tr("Deselect Node") : tr("Select Node") );
     m_nodeRmbMenu->popup( m_marbleWidget->mapToGlobal( QPoint( x, y ) ) );
 }
 
 void AnnotatePlugin::selectNode()
 {
     if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation ) {
-        AreaAnnotation *area = static_cast<AreaAnnotation*>( m_focusItem );
+        AreaAnnotation * const area = static_cast<AreaAnnotation*>( m_focusItem );
         area->changeClickedNodeSelection();
     } else if ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation ) {
-        PolylineAnnotation *polyline = static_cast<PolylineAnnotation*>( m_focusItem );
+        PolylineAnnotation *const polyline = static_cast<PolylineAnnotation*>( m_focusItem );
         polyline->changeClickedNodeSelection();
     }
 
@@ -1478,7 +1471,7 @@ void AnnotatePlugin::setupCursor( SceneGraphicsItem *item )
 {
     if ( !item || item->state() == SceneGraphicsItem::AddingNodes ) {
         m_marbleWidget->setCursor( Qt::DragCopyCursor );
-    } else { // Maybe use different cursors, but so far I cannot find anything which fits better.
+    } else {
         m_marbleWidget->setCursor( Qt::PointingHandCursor );
     }
 }
@@ -1530,7 +1523,7 @@ void AnnotatePlugin::copyItem()
 
 void AnnotatePlugin::pasteItem()
 {
-    QPoint eventPoint = m_marbleWidget->popupMenu()->mousePosition();
+    const QPoint eventPoint = m_marbleWidget->popupMenu()->mousePosition();
 
     qreal lon, lat;
     m_marbleWidget->geoCoordinates( eventPoint.x(), eventPoint.y(), lon, lat, GeoDataCoordinates::Radian );

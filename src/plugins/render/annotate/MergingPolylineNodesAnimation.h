@@ -48,13 +48,13 @@ private:
     PolylineAnnotation *m_targetedPolyline;
     QTimer *m_timer;
 
-    int m_firstNodeIndex;
-    int m_secondNodeIndex;
+    const int m_firstNodeIndex;
+    const int m_secondNodeIndex;
 
     GeoDataLineString *m_lineString;
 
-    GeoDataCoordinates m_firstInitialCoords;
-    GeoDataCoordinates m_secondInitialCoords;
+    const GeoDataCoordinates m_firstInitialCoords;
+    const GeoDataCoordinates m_secondInitialCoords;
 };
 
 } // namespace Marble

@@ -80,19 +80,11 @@ void MergingPolygonNodesAnimation::updateNodes()
         emit animationFinished( m_targetedArea );
     } else {
         if ( m_boundary == OuterBoundary ) {
-            GeoDataCoordinates first, second;
-            first = outerRing.at(first_i).interpolate( m_secondInitialCoords, ratio );
-            second = outerRing.at(second_i).interpolate( m_firstInitialCoords, ratio );
-
-            outerRing[first_i] = first;
-            outerRing[second_i] = second;
+            outerRing[first_i] = outerRing.at(first_i).interpolate( m_secondInitialCoords, ratio );
+            outerRing[second_i] = outerRing.at(second_i).interpolate( m_firstInitialCoords, ratio );
         } else {
-            GeoDataCoordinates first, second;
-            first = innerRings.at(first_i).at(first_j).interpolate( m_secondInitialCoords, ratio );
-            second = innerRings.at(second_i).at(second_j).interpolate( m_firstInitialCoords, ratio );
-
-            innerRings[first_i][first_j] = first;
-            innerRings[second_i][second_j] = second;
+            innerRings[first_i][first_j] =  innerRings.at(first_i).at(first_j).interpolate( m_secondInitialCoords, ratio );
+            innerRings[second_i][second_j] =  innerRings.at(second_i).at(second_j).interpolate( m_firstInitialCoords, ratio );
         }
 
         emit nodesMoved();

@@ -30,10 +30,10 @@ MergingPolylineNodesAnimation::MergingPolylineNodesAnimation( PolylineAnnotation
     m_firstNodeIndex( polyline->m_firstMergedNode ),
     m_secondNodeIndex( polyline->m_secondMergedNode ),
 
-    m_lineString( static_cast<GeoDataLineString*>( polyline->placemark()->geometry() ) )
+    m_lineString( static_cast<GeoDataLineString*>( polyline->placemark()->geometry() ) ),
+    m_firstInitialCoords( m_lineString->at( polyline->m_firstMergedNode ) ),
+    m_secondInitialCoords( m_lineString->at( polyline->m_secondMergedNode ) )
 {
-    m_firstInitialCoords = m_lineString->at( polyline->m_firstMergedNode );
-    m_secondInitialCoords = m_lineString->at( polyline->m_secondMergedNode );
     connect( m_timer, SIGNAL(timeout()), this, SLOT(updateNodes()) );
 }
 
@@ -60,13 +60,12 @@ void MergingPolylineNodesAnimation::updateNodes()
 
         emit animationFinished( m_targetedPolyline );
     } else {
-        GeoDataCoordinates first, second;
-        first = m_lineString->at(m_firstNodeIndex).interpolate( m_secondInitialCoords, ratio );
-        second = m_lineString->at(m_secondNodeIndex).interpolate( m_firstInitialCoords, ratio );
-
-        m_lineString->at(m_firstNodeIndex) = first;
-        m_lineString->at(m_secondNodeIndex) = second;
-
+        m_lineString->at(m_firstNodeIndex) =  m_lineString->at(m_firstNodeIndex).interpolate(
+                                                                                m_secondInitialCoords,
+                                                                                ratio );
+        m_lineString->at(m_secondNodeIndex) =  m_lineString->at(m_secondNodeIndex).interpolate(
+                                                                                m_firstInitialCoords,
+                                                                                ratio );
         emit nodesMoved();
     }
 }
