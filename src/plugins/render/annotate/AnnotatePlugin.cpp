@@ -323,18 +323,14 @@ void AnnotatePlugin::clearAnnotations()
                                               QMessageBox::Yes | QMessageBox::Cancel );
 
     if ( result == QMessageBox::Yes ) {
-        m_movedItem = 0;
-
-        delete m_polygonPlacemark;
-        m_polygonPlacemark = 0;
-        delete m_polylinePlacemark;
-        m_polygonPlacemark = 0;
-
         qDeleteAll( m_graphicsItems );
         m_graphicsItems.clear();
         m_marbleWidget->model()->treeModel()->removeDocument( m_annotationDocument );
         m_annotationDocument->clear();
         m_marbleWidget->model()->treeModel()->addDocument( m_annotationDocument );
+
+        m_movedItem = 0;
+        m_focusItem = 0;
     }
 }
 
@@ -1244,7 +1240,6 @@ void AnnotatePlugin::stopEditingPolygon()
 {
     m_editingDialogIsShown = false;
     m_drawingPolygon = false;
-    m_drawingPolygon = 0;
     m_polygonPlacemark = 0;
 
     announceStateChanged( SceneGraphicsItem::Editing );
@@ -1483,11 +1478,10 @@ void AnnotatePlugin::addPolyline()
 
 void AnnotatePlugin::stopEditingPolyline()
 {
+    m_editingDialogIsShown = false;
     m_drawingPolyline = false;
-    m_drawingPolyline = 0;
     m_polylinePlacemark = 0;
 
-    m_editingDialogIsShown = false;
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
