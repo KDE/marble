@@ -92,7 +92,7 @@
        <item row="0" column="1">
         <widget class="QDoubleSpinBox" name="m_latitude">
          <property name="decimals">
-          <number>2</number>
+          <number>4</number>
          </property>
         </widget>
        </item>
@@ -106,7 +106,7 @@
        <item row="1" column="1">
         <widget class="QDoubleSpinBox" name="m_longitude">
          <property name="decimals">
-          <number>2</number>
+          <number>4</number>
          </property>
         </widget>
        </item>
