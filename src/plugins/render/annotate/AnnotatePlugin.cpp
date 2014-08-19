@@ -430,13 +430,32 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
         return false;
     }
 
-    // So far only accept mouse events.
+    // Accept mouse and key press events.
     if ( event->type() != QEvent::MouseButtonPress &&
          event->type() != QEvent::MouseButtonRelease &&
-         event->type() != QEvent::MouseMove ) {
+         event->type() != QEvent::MouseMove &&
+         event->type() != QEvent::KeyPress ) {
         return false;
     }
 
+    // Handle key press events.
+    if ( event->type() == QEvent::KeyPress ) {
+        QKeyEvent * const keyEvent = static_cast<QKeyEvent*>( event );
+        Q_ASSERT( keyEvent );
+
+        // If we have an item which has the focus and the Escape key is pressed, set item's focus
+        // to false.
+        if ( keyEvent->key() == Qt::Key_Escape && m_focusItem ) {
+            disableFocusActions();
+            m_focusItem->setFocus( false );
+            m_marbleWidget->model()->treeModel()->updateFeature( m_focusItem->placemark() );
+            return true;
+        }
+
+        return false;
+    }
+
+    // Handle mouse events.
     QMouseEvent * const mouseEvent = dynamic_cast<QMouseEvent*>( event );
     Q_ASSERT( mouseEvent );
 
