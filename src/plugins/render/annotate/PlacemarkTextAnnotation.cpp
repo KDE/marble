@@ -36,7 +36,7 @@ PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataPlacemark *placemark ) 
     if ( placemark->style()->iconStyle().iconPath().isNull() ) {
         GeoDataStyle *newStyle = new GeoDataStyle( *placemark->style() );
         newStyle->iconStyle().setIcon( QImage() );
-        newStyle->iconStyle().setIconPath( MarbleDirs::path( "bitmaps/default_location.png" ) );
+        newStyle->iconStyle().setIconPath( MarbleDirs::path("bitmaps/redflag_22.png") );
         placemark->setStyle( newStyle );
     }
 }
@@ -50,7 +50,9 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *
 {
     Q_UNUSED( painter );
     m_viewport = viewport;
-    painter->drawImage( placemark()->coordinate(), QImage( placemark()->style()->iconStyle().iconPath() ) );
+    painter->drawImage( placemark()->coordinate(), hasFocus() ?
+                                                   QImage( MarbleDirs::path("bitmaps/redflag_32.png") ) :
+                                                   QImage( MarbleDirs::path("bitmaps/redflag_22.png") ) );
 
     qreal x, y;
     viewport->currentProjection()->screenCoordinates( placemark()->coordinate(), viewport, x, y );

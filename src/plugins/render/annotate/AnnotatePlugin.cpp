@@ -775,44 +775,46 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     group->setExclusive( true );
 
 
-    QAction *selectItem = new QAction( QIcon( ":/icons/hand.png"),
+    QAction *selectItem = new QAction( QIcon(":/icons/hand.png"),
                                        tr("Select Item"),
                                        this );
     selectItem->setCheckable( true );
     selectItem->setChecked( true );
 
-    QAction *drawPolygon = new QAction( QIcon( ":/icons/draw-polygon.png"),
+    QAction *drawPolygon = new QAction( QIcon(":/icons/draw-polygon.png"),
                                         tr("Add Polygon"),
                                         this );
     connect( drawPolygon, SIGNAL(triggered()), this, SLOT(addPolygon()) );
 
-    QAction *addHole = new QAction( QIcon(":/icons/16x16/add-holes.png"),
+    QAction *addHole = new QAction( QIcon(":/icons/polygon-draw-hole.png"),
                                     tr("Add Polygon Hole"),
                                     this );
     addHole->setCheckable( true );
     addHole->setEnabled( false );
     connect( addHole, SIGNAL(toggled(bool)), this, SLOT(setAddingPolygonHole(bool)) );
 
-    QAction *mergeNodes = new QAction( QIcon(":/icons/16x16/merge-nodes.png"),
+    QAction *mergeNodes = new QAction( QIcon(":/icons/polygon-merge-nodes.png"),
                                        tr("Merge Nodes"),
                                        this );
     mergeNodes->setCheckable( true );
     mergeNodes->setEnabled( false );
     connect( mergeNodes, SIGNAL(toggled(bool)), this, SLOT(setMergingNodes(bool)) );
 
-    QAction *addNodes = new QAction( QIcon(":/icons/16x16/add-nodes.png"),
+    QAction *addNodes = new QAction( QIcon(":/icons/polygon-add-nodes.png"),
                                      tr("Add Nodes"),
                                      this );
     addNodes->setCheckable( true );
     addNodes->setEnabled( false );
     connect( addNodes, SIGNAL(toggled(bool)), this, SLOT(setAddingNodes(bool)) );
 
-    QAction *addTextAnnotation = new QAction( QIcon( ":/icons/draw-placemark.png"),
+    QAction *addTextAnnotation = new QAction( QIcon(":/icons/add-placemark.png"),
                                               tr("Add Placemark"),
                                               this );
     connect( addTextAnnotation, SIGNAL(triggered()), this, SLOT(addTextAnnotation()) );
 
-    QAction *addPath = new QAction( tr("Add Path"), this );
+    QAction *addPath = new QAction( QIcon(":/icons/draw-path.png" ),
+                                    tr("Add Path"),
+                                    this );
     connect( addPath, SIGNAL(triggered()), this, SLOT(addPolyline()) );
 
     QAction *addOverlay = new QAction( QIcon( ":/icons/draw-overlay.png"),
@@ -826,12 +828,12 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     removeItem->setEnabled( false );
     connect( removeItem, SIGNAL(triggered()), this, SLOT(askToRemoveFocusItem()) );
 
-    QAction *loadAnnotationFile = new QAction( QIcon( ":/icons/document-import.png"),
+    QAction *loadAnnotationFile = new QAction( QIcon( ":/icons/open-for-editing.png"),
                                                tr("Load Annotation File" ),
                                                this );
     connect( loadAnnotationFile, SIGNAL(triggered()), this, SLOT(loadAnnotationFile()) );
 
-    QAction *saveAnnotationFile = new QAction( QIcon( ":/icons/document-export.png"),
+    QAction *saveAnnotationFile = new QAction( QIcon( ":/icons//document-save-as.png"),
                                                tr("Save Annotation File"),
                                                this );
     connect( saveAnnotationFile, SIGNAL(triggered()), this, SLOT(saveAnnotationFile()) );
