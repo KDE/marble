@@ -488,6 +488,7 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
             if ( mouseEvent->type() == QEvent::MouseButtonPress &&
                  mouseEvent->button() == Qt::LeftButton ) {
                 item->setFocus( true );
+                disableFocusActions();
                 enableActionsOnItemType( item->graphicType() );
 
                 if ( m_focusItem && m_focusItem != item ) {
@@ -878,9 +879,11 @@ void AnnotatePlugin::enableAllActions( QActionGroup *group )
 
 void AnnotatePlugin::enableActionsOnItemType( const QString &type )
 {
-    if ( type == SceneGraphicsTypes::SceneGraphicAreaAnnotation ||
-         type == SceneGraphicsTypes::SceneGraphicPolylineAnnotation ) {
+    if ( type == SceneGraphicsTypes::SceneGraphicAreaAnnotation ) {
         m_actions.first()->actions().at(9)->setEnabled( true );
+        m_actions.first()->actions().at(10)->setEnabled( true );
+        m_actions.first()->actions().at(11)->setEnabled( true );
+    } else if ( type == SceneGraphicsTypes::SceneGraphicPolylineAnnotation ) {
         m_actions.first()->actions().at(10)->setEnabled( true );
         m_actions.first()->actions().at(11)->setEnabled( true );
     }
