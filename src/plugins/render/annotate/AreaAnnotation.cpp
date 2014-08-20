@@ -452,19 +452,11 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         QVector<GeoDataLinearRing> &innerBounds = polygon->innerBoundaries();
 
-        if ( innerBounds.size() && innerBounds.last().size() &&
-             m_innerNodesList.last().last().isInnerTmp() ) {
+        if ( innerBounds.size() && innerBounds.last().size() <= 2 ) {
             // If only two nodes were added, remove this inner boundary entirely.
-            if ( innerBounds.last().size() <= 2 ) {
-                innerBounds.remove( innerBounds.size() - 1 );
-                m_innerNodesList.removeLast();
-                return;
-            }
-
-            // Remove the 'NodeIsInnerTmp' flag, to allow ::draw method to paint the nodes.
-            for ( int i = 0; i < m_innerNodesList.last().size(); ++i ) {
-                m_innerNodesList.last()[i].setFlag( PolylineNode::NodeIsInnerTmp, false );
-            }
+            innerBounds.remove( innerBounds.size() - 1 );
+            m_innerNodesList.removeLast();
+            return;
         }
     } else if ( previousState == SceneGraphicsItem::MergingNodes ) {
         // If there was only a node selected for being merged and the state changed,
@@ -508,6 +500,11 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
         m_hoveredNode = QPair<int, int>( -1, -1 );
     } else if ( state() == SceneGraphicsItem::AddingPolygonHole ) {
         // Nothing to do so far when entering this state.
+        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
+        QVector<GeoDataLinearRing> &innerBounds = polygon->innerBoundaries();
+
+        m_innerNodesList.append( QList<PolylineNode>() );
+        innerBounds.append( GeoDataLinearRing( Tessellate ) );
     } else if ( state() == SceneGraphicsItem::MergingNodes ) {
         m_firstMergedNode = QPair<int, int>( -1, -1 );
         m_secondMergedNode = QPair<int, int>( -1, -1 );
@@ -584,6 +581,7 @@ void AreaAnnotation::updateRegions( GeoPainter *painter )
     const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( placemark()->geometry() );
     const GeoDataLinearRing &outerRing = polygon->outerBoundary();
     const QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
+
 
     if ( state() == SceneGraphicsItem::MergingNodes ) {
         // Update the PolylineNodes lists after the animation has finished its execution.
@@ -754,10 +752,6 @@ void AreaAnnotation::drawNodes( GeoPainter *painter )
                     painter->drawEllipse( innerRings.at(i).at(j), d_selectedDim + 2, d_selectedDim + 2 );
                     painter->setPen( defaultPen );
                 }
-            } else if ( m_innerNodesList.at(i).at(j).isInnerTmp() ) {
-                // Do not draw inner nodes until the 'process' of adding these nodes ends
-                // (aka while being in the 'Adding Polygon Hole').
-                continue;
             } else {
                 painter->setBrush( regularColor );
                 painter->drawEllipse( innerRings.at(i).at(j), d_regularDim, d_regularDim );
@@ -1068,13 +1062,8 @@ bool AreaAnnotation::processAddingHoleOnPress( QMouseEvent *mouseEvent )
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     QVector<GeoDataLinearRing> &innerBounds = polygon->innerBoundaries();
 
-    // Check if this is the first node which is being added as a new polygon inner boundary.
-    if ( !innerBounds.size() || !m_innerNodesList.last().last().isInnerTmp() ) {
-       polygon->innerBoundaries().append( GeoDataLinearRing( Tessellate ) );
-       m_innerNodesList.append( QList<PolylineNode>() );
-    }
     innerBounds.last().append( newCoords );
-    m_innerNodesList.last().append( PolylineNode( QRegion(), PolylineNode::NodeIsInnerTmp ) );
+    m_innerNodesList.last().append( PolylineNode() );
 
     return true;
 }
@@ -1272,7 +1261,10 @@ bool AreaAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
             QList<PolylineNode> newList;
             for ( int k = i; k < i + outerRing.size(); ++k ) {
                 newRing.append( outerRing.at(k % outerRing.size()) );
-                newList.append( PolylineNode( QRegion(), m_outerNodesList.at(k % outerRing.size()).flags() ) );
+
+                PolylineNode newNode;
+                newNode.setFlags( m_outerNodesList.at(k % outerRing.size()).flags() );
+                newList.append( newNode );
             }
             GeoDataCoordinates newCoords = newRing.first().interpolate( newRing.last(), 0.5 );
             newRing.append( newCoords );
@@ -1289,8 +1281,10 @@ bool AreaAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
             QList<PolylineNode> newList;
             for ( int k = j; k < j + innerRings.at(i).size(); ++k ) {
                 newRing.append( innerRings.at(i).at(k % innerRings.at(i).size()) );
-                newList.append( PolylineNode( QRegion(),
-                                             m_innerNodesList.at(i).at(k % innerRings.at(i).size()).flags() ) );
+
+                PolylineNode newNode;
+                newNode.setFlags( m_innerNodesList.at(i).at(k % innerRings.at(i).size()).flags() );
+                newList.append( newNode );
             }
             GeoDataCoordinates newCoords = newRing.first().interpolate( newRing.last(), 0.5 );
             newRing.append( newCoords );

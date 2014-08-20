@@ -711,7 +711,7 @@ bool PolylineAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
         Q_ASSERT( m_virtualHoveredNode == virtualIndex );
 
         line->insert( virtualIndex, line->at(virtualIndex-1).interpolate( line->at(virtualIndex), 0.5 ) );
-        m_nodesList.insert( virtualIndex, PolylineNode( QRegion() ) );
+        m_nodesList.insert( virtualIndex, PolylineNode() );
 
         m_adjustedNode = virtualIndex;
         m_virtualHoveredNode = -1;

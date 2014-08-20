@@ -23,18 +23,16 @@ public:
     enum PolyNodeFlag {
         NoOption = 0x0,
         NodeIsSelected = 0x1,
-        NodeIsInnerTmp = 0x2,
-        NodeIsMerged = 0x4,
-        NodeIsEditingHighlighted = 0x8,
-        NodeIsMergingHighlighted = 0x10
+        NodeIsMerged = 0x2,
+        NodeIsEditingHighlighted = 0x4,
+        NodeIsMergingHighlighted = 0x8
     };
     Q_DECLARE_FLAGS(PolyNodeFlags, PolyNodeFlag)
 
-    explicit PolylineNode( QRegion region, PolyNodeFlags flags = 0 );
+    PolylineNode( QRegion region = QRegion() );
     ~PolylineNode();
 
     bool isSelected() const;
-    bool isInnerTmp() const;
     bool isBeingMerged() const;
     bool isEditingHighlighted() const;
     bool isMergingHighlighted() const;

@@ -323,6 +323,7 @@ void AnnotatePlugin::clearAnnotations()
                                               QMessageBox::Yes | QMessageBox::Cancel );
 
     if ( result == QMessageBox::Yes ) {
+        disableFocusActions();
         qDeleteAll( m_graphicsItems );
         m_graphicsItems.clear();
         m_marbleWidget->model()->treeModel()->removeDocument( m_annotationDocument );

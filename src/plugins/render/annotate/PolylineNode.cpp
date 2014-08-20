@@ -13,9 +13,9 @@
 namespace Marble
 {
 
-PolylineNode::PolylineNode( QRegion region, PolyNodeFlags flags ) :
-    m_region( region ),
-    m_flags( flags )
+PolylineNode::PolylineNode( QRegion region ) :
+    m_region( region  ),
+    m_flags( 0 )
 {
     // nothing to do
 }
@@ -28,11 +28,6 @@ PolylineNode::~PolylineNode()
 bool PolylineNode::isSelected() const
 {
     return m_flags & NodeIsSelected;
-}
-
-bool PolylineNode::isInnerTmp() const
-{
-    return m_flags & NodeIsInnerTmp;
 }
 
 bool PolylineNode::isBeingMerged() const
