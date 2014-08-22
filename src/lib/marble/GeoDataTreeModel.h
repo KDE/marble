@@ -76,6 +76,8 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
 
     QItemSelectionModel *selectionModel();
 
+    GeoDataDocument *rootDocument();
+
 public Q_SLOTS:
 
     /**
@@ -84,7 +86,6 @@ public Q_SLOTS:
       *   i.e. GeoDataTreeModel will not delete the passed document at its destruction.
       */
     void setRootDocument( GeoDataDocument *document );
-    GeoDataDocument* rootDocument();
 
     int addFeature( GeoDataContainer *parent, GeoDataFeature *feature, int row = -1 );
 
