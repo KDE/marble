@@ -608,12 +608,6 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
     return false;
 }
 
-void GeoDataTreeModel::reset()
-{
-    beginResetModel();
-    endResetModel();
-}
-
 Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 {
     if ( !index.isValid() )
@@ -880,13 +874,6 @@ void GeoDataTreeModel::removeDocument( int index )
 void GeoDataTreeModel::removeDocument( GeoDataDocument *document )
 {
     removeFeature( document );
-}
-
-void GeoDataTreeModel::update()
-{
-//    mDebug() << "updating GeoDataTreeModel";
-    beginResetModel();
-    endResetModel();
 }
 
 void GeoDataTreeModel::setRootDocument( GeoDataDocument* document )
