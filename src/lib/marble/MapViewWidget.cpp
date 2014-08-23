@@ -39,6 +39,7 @@
 #include <QToolButton>
 #include <QTextDocument>
 #include <QAbstractTextDocumentLayout>
+#include <QStyledItemDelegate>
 
 using namespace Marble;
 // Ui
@@ -47,7 +48,7 @@ using namespace Marble;
 namespace Marble
 {
 
-class MapViewItemDelegate : public QAbstractItemDelegate
+class MapViewItemDelegate : public QStyledItemDelegate
 {
 public:
     MapViewItemDelegate( QListView* view );
@@ -667,17 +668,24 @@ MapViewItemDelegate::MapViewItemDelegate( QListView *view ) :
 void MapViewItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const
 {
     QStyleOptionViewItemV4 styleOption = option;
+    initStyleOption( &styleOption, index );
     styleOption.text = QString();
-    QApplication::style()->drawControl(QStyle::CE_ItemViewItem, &styleOption, painter);
+    styleOption.icon = QIcon();
 
-    QAbstractTextDocumentLayout::PaintContext paintContext;
-    if (styleOption.state & QStyle::State_Selected) {
-        paintContext.palette.setColor(QPalette::Text,
-            styleOption.palette.color(QPalette::Active, QPalette::HighlightedText));
+    bool const selected = styleOption.state & QStyle::State_Selected;
+    bool const active = styleOption.state & QStyle::State_Active;
+    bool const hover = styleOption.state & QStyle::State_MouseOver;
+    QPalette::ColorGroup const colorGroup = active ? QPalette::Active : QPalette::Inactive;
+    if ( selected || hover ) {
+        styleOption.features &= ~QStyleOptionViewItemV2::Alternate;
+        QPalette::ColorRole colorRole = selected ? QPalette::Highlight : QPalette::Midlight;
+        painter->fillRect( styleOption.rect, styleOption.palette.color( colorGroup, colorRole ) );
     }
+    QStyle* style = styleOption.widget ? styleOption.widget->style() : QApplication::style();
+    style->drawControl( QStyle::CE_ItemViewItem, &styleOption, painter, styleOption.widget );
 
-    QRect const rect = option.rect;
-    QSize const iconSize = option.decorationSize;
+    QRect const rect = styleOption.rect;
+    QSize const iconSize = styleOption.decorationSize;
     QRect const iconRect( rect.topLeft(), iconSize );
     QIcon const icon = index.data( Qt::DecorationRole ).value<QIcon>();
     painter->drawPixmap( iconRect, icon.pixmap( iconSize ) );
@@ -693,13 +701,17 @@ void MapViewItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &
 
     QTextDocument document;
     document.setTextWidth( rect.width() - iconSize.width() - padding );
-    document.setDefaultFont( option.font );
+    document.setDefaultFont( styleOption.font );
     document.setHtml( text( index ) );
 
     QRect textRect = QRect( iconRect.topRight(), QSize( document.textWidth() - padding, rect.height() - padding ) );
     painter->save();
     painter->translate( textRect.topLeft() );
     painter->setClipRect( textRect.translated( -textRect.topLeft() ) );
+    QAbstractTextDocumentLayout::PaintContext paintContext;
+    paintContext.palette = styleOption.palette;
+    QPalette::ColorRole const role = selected && active ? QPalette::HighlightedText : QPalette::Text;
+    paintContext.palette.setColor( QPalette::Text, styleOption.palette.color( colorGroup, role ) );
     document.documentLayout()->draw( painter, paintContext );
     painter->restore();
 }
