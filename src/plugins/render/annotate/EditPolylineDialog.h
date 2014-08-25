@@ -31,12 +31,11 @@ public:
 
 signals:
     void polylineUpdated( GeoDataFeature *feature );
-    void removeRequested();
 
 private slots:
     void updatePolyline();
     void updateLinesDialog( const QColor &color );
-    void restoreInitial();
+    void restoreInitial( int result );
     void checkFields();
 
 private:

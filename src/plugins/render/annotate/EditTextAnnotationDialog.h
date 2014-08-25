@@ -80,12 +80,10 @@ private slots:
     void updateIconDialog( const QColor &color );
 
     /**
-     * @brief restoreInitial restores the settings before the dialog has been shown. In case
-     * this is the first time the dialog is shown for this text annotation instance, the
-     * text annotation graphic item gets removed (a signal is emitted which should be listened
-     * to in AnnotatePlugin).
+     * @brief restoreInitial restores the dialog's previous settings if the dialog closes with
+     * a zero return value.
      */
-    void restoreInitial();
+    void restoreInitial( int result );
 
 signals:
     /**
@@ -94,12 +92,6 @@ signals:
      * @param feature The instance's placemark.
      */
     void textAnnotationUpdated( GeoDataFeature *feature );
-
-    /**
-     * @brief removeRequested Is the signal emitted when this is the first time for this
-     * PlacemarkTextAnnotation instance the dialog pops up and the close button is pressed.
-     */
-    void removeRequested();
 
 private:
     class Private;

@@ -120,8 +120,8 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
 
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
-    connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updatePolygon()) );
-    connect( d->buttonBox, SIGNAL(rejected()), this, SLOT(restoreInitial()) );
+    connect( this, SIGNAL(accepted()), SLOT(updatePolygon()) );
+    connect( this, SIGNAL(finished(int)), SLOT(restoreInitial(int)) );
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or
     // Close).
@@ -186,12 +186,9 @@ void EditPolygonDialog::checkFields()
     }
 }
 
-void EditPolygonDialog::restoreInitial()
+void EditPolygonDialog::restoreInitial( int result )
 {
-    // Make sure the polygon gets removed if the 'Cancel' button is pressed immediately after
-    // the 'Add Placemark' has been clicked.
-    if ( d->m_firstEditing ) {
-        emit removeRequested();
+    if ( result ) {
         return;
     }
 

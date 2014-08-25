@@ -104,8 +104,8 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
 
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
-    connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updatePolyline()) );
-    connect( this, SIGNAL(rejected()), SLOT(restoreInitial()) );
+    connect( this, SIGNAL(accepted()), SLOT(updatePolyline()) );
+    connect( this, SIGNAL(finished(int)), SLOT(restoreInitial(int)) );
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or
     // Close).
@@ -144,12 +144,9 @@ void EditPolylineDialog::updateLinesDialog( const QColor &color )
     d->m_linesColorButton->setIcon( QIcon( linesPixmap ) );
 }
 
-void EditPolylineDialog::restoreInitial()
+void EditPolylineDialog::restoreInitial( int result )
 {
-    // Make sure the polyline gets removed if the 'Cancel' button is pressed immediately after
-    // the 'Add Path' has been clicked.
-    if ( d->m_firstEditing ) {
-        emit removeRequested();
+    if ( result ) {
         return;
     }
 

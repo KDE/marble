@@ -152,8 +152,8 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
 
     connect( d->m_browseButton, SIGNAL(clicked()), this, SLOT(loadIconFile()) );
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
-    connect( d->buttonBox, SIGNAL(accepted()), this, SLOT(updateTextAnnotation()) );
-    connect( d->buttonBox, SIGNAL(rejected()), this, SLOT(restoreInitial()) );
+    connect( this, SIGNAL(accepted()), SLOT(updateTextAnnotation()) );
+    connect( this, SIGNAL(finished(int)), SLOT(restoreInitial(int)) );
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or
     // Close).
@@ -254,12 +254,9 @@ void EditTextAnnotationDialog::updateIconDialog( const QColor &color )
     d->m_iconButton->setIcon( QIcon( iconPixmap ) );
 }
 
-void EditTextAnnotationDialog::restoreInitial()
+void EditTextAnnotationDialog::restoreInitial( int result )
 {
-    // Make sure the placemark gets removed if the 'Cancel' button is pressed immediately after
-    // the 'Add Placemark' has been clicked.
-    if ( d->m_firstEditing ) {
-        emit removeRequested();
+    if ( result ) {
         return;
     }
 

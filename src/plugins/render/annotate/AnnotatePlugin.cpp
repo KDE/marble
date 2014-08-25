@@ -61,6 +61,7 @@ namespace Marble
 
 AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     : RenderPlugin( model ),
+      m_isInitialized( false ),
       m_widgetInitialized( false ),
       m_marbleWidget( 0 ),
       m_overlayRmbMenu( new QMenu( m_marbleWidget ) ),
@@ -76,7 +77,7 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
       m_clipboardItem( 0 ),
       m_drawingPolygon( false ),
       m_drawingPolyline( false ),
-      m_isInitialized( false ),
+      m_addingPlacemark( false ),
       m_editingDialogIsShown( false )
 {
     // Plugin is enabled by default
@@ -186,6 +187,9 @@ void AnnotatePlugin::initialize()
         m_movedItem = 0;
 
         m_drawingPolygon = false;
+        m_drawingPolyline = false;
+        m_addingPlacemark = false;
+
         m_isInitialized = true;
     }
 }
@@ -992,7 +996,7 @@ void AnnotatePlugin::editTextAnnotation()
     connect( this, SIGNAL(placemarkMoved()),
              dialog, SLOT(updateDialogFields()) );
     connect( dialog, SIGNAL(finished(int)),
-             this, SLOT(stopEditingTextAnnotation()) );
+             this, SLOT(stopEditingTextAnnotation(int)) );
 
     disableActions( m_actions.first() );
     dialog->show();
@@ -1001,6 +1005,8 @@ void AnnotatePlugin::editTextAnnotation()
 
 void AnnotatePlugin::addTextAnnotation()
 {
+    m_addingPlacemark = true;
+
     // Get the normalized coordinates of the focus point. There will be automatically added a new
     // placemark.
     qreal lat = m_marbleWidget->focusPoint().latitude();
@@ -1022,10 +1028,8 @@ void AnnotatePlugin::addTextAnnotation()
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( this, SIGNAL(placemarkMoved()),
              dialog, SLOT(updateDialogFields()) );
-    connect( dialog, SIGNAL(removeRequested()),
-             this, SLOT(removeFocusItem()) );
     connect( dialog, SIGNAL(finished(int)),
-             this, SLOT(stopEditingTextAnnotation()) );
+             this, SLOT(stopEditingTextAnnotation(int)) );
 
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
@@ -1041,14 +1045,20 @@ void AnnotatePlugin::addTextAnnotation()
     m_editingDialogIsShown = true;
 }
 
-void AnnotatePlugin::stopEditingTextAnnotation()
+void AnnotatePlugin::stopEditingTextAnnotation( int result )
 {
-    m_editingDialogIsShown = false;
-
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
-    enableActionsOnItemType( SceneGraphicsTypes::SceneGraphicTextAnnotation );
+
+    if ( !result && m_addingPlacemark ) {
+        removeFocusItem();
+    } else {
+        enableActionsOnItemType( SceneGraphicsTypes::SceneGraphicTextAnnotation );
+    }
+
+    m_addingPlacemark = false;
+    m_editingDialogIsShown = false;
 }
 
 void AnnotatePlugin::setupGroundOverlayModel()
@@ -1241,10 +1251,8 @@ void AnnotatePlugin::addPolygon()
 
     connect( dialog, SIGNAL(polygonUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
-    connect( dialog, SIGNAL(removeRequested()),
-             this, SLOT(removeFocusItem()) );
     connect( dialog, SIGNAL(finished(int)),
-             this, SLOT(stopEditingPolygon()) );
+             this, SLOT(stopEditingPolygon(int)) );
 
     // If there is another graphic item marked as 'selected' when pressing 'Add Polygon', change the focus of
     // that item.
@@ -1262,16 +1270,21 @@ void AnnotatePlugin::addPolygon()
     m_editingDialogIsShown = true;
 }
 
-void AnnotatePlugin::stopEditingPolygon()
+void AnnotatePlugin::stopEditingPolygon( int result )
 {
-    m_editingDialogIsShown = false;
-    m_drawingPolygon = false;
-    m_polygonPlacemark = 0;
-
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
-    enableActionsOnItemType( SceneGraphicsTypes::SceneGraphicAreaAnnotation );
+
+    if ( !result && m_drawingPolygon ) {
+        removeFocusItem();
+    } else {
+        enableActionsOnItemType( SceneGraphicsTypes::SceneGraphicAreaAnnotation );
+    }
+
+    m_editingDialogIsShown = false;
+    m_drawingPolygon = false;
+    m_polygonPlacemark = 0;
 }
 
 void AnnotatePlugin::deselectNodes()
@@ -1324,7 +1337,7 @@ void AnnotatePlugin::editPolygon()
     connect( dialog, SIGNAL(polygonUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
-             this, SLOT(stopEditingPolygon()) );
+             this, SLOT(stopEditingPolygon(int)) );
 
     disableActions( m_actions.first() );
 
@@ -1455,7 +1468,7 @@ void AnnotatePlugin::editPolyline()
     connect( dialog, SIGNAL(polylineUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
-             this, SLOT(stopEditingPolyline()) );
+             this, SLOT(stopEditingPolyline(int)) );
 
     disableActions( m_actions.first() );
     dialog->show();
@@ -1484,10 +1497,8 @@ void AnnotatePlugin::addPolyline()
 
     connect( dialog, SIGNAL(polylineUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
-    connect( dialog, SIGNAL(removeRequested()),
-             this, SLOT(removeFocusItem()) );
     connect( dialog, SIGNAL(finished(int)),
-             this, SLOT(stopEditingPolyline()) );
+             this, SLOT(stopEditingPolyline(int)) );
 
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
@@ -1503,16 +1514,21 @@ void AnnotatePlugin::addPolyline()
     m_editingDialogIsShown = true;
 }
 
-void AnnotatePlugin::stopEditingPolyline()
+void AnnotatePlugin::stopEditingPolyline( int result )
 {
-    m_editingDialogIsShown = false;
-    m_drawingPolyline = false;
-    m_polylinePlacemark = 0;
-
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
-    enableActionsOnItemType( SceneGraphicsTypes::SceneGraphicPolylineAnnotation );
+
+    if ( !result && m_drawingPolyline ) {
+        removeFocusItem();
+    } else {
+        enableActionsOnItemType( SceneGraphicsTypes::SceneGraphicPolylineAnnotation );
+    }
+
+    m_editingDialogIsShown = false;
+    m_drawingPolyline = false;
+    m_polylinePlacemark = 0;
 }
 
 void AnnotatePlugin::announceStateChanged( SceneGraphicsItem::ActionState newState )

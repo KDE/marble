@@ -37,14 +37,13 @@ public:
 
 signals:
     void polygonUpdated( GeoDataFeature *feature );
-    void removeRequested();
 
 private slots:
     void updatePolygon();
     void updateLinesDialog( const QColor &color );
     void updatePolyDialog( const QColor &color );
     void checkFields();
-    void restoreInitial();
+    void restoreInitial( int result );
 
 private:
     class Private;

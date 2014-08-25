@@ -105,7 +105,7 @@ private slots:
 
     void addTextAnnotation();
     void editTextAnnotation();
-    void stopEditingTextAnnotation();
+    void stopEditingTextAnnotation( int result );
 
     void addOverlay();
     void editOverlay();
@@ -113,9 +113,9 @@ private slots:
     void updateOverlayFrame( GeoDataGroundOverlay *overlay );
 
     void addPolygon();
-    void stopEditingPolygon();
-    void setAddingPolygonHole( bool );
-    void setAddingNodes( bool );
+    void stopEditingPolygon( int result );
+    void setAddingPolygonHole( bool enabled );
+    void setAddingNodes( bool enabled );
     void editPolygon();
     void selectNode();
     void deleteNode();
@@ -125,7 +125,7 @@ private slots:
 
     void addPolyline();
     void editPolyline();
-    void stopEditingPolyline();
+    void stopEditingPolyline( int result );
     void setPolylineAvailable();
 
 protected:
@@ -171,6 +171,7 @@ private:
     void setupCursor( SceneGraphicsItem *item );
 
 
+    bool m_isInitialized;
     bool m_widgetInitialized;
     MarbleWidget *m_marbleWidget;
 
@@ -201,7 +202,7 @@ private:
 
     bool m_drawingPolygon;
     bool m_drawingPolyline;
-    bool m_isInitialized;
+    bool m_addingPlacemark;
     bool m_editingDialogIsShown;
 };
 
