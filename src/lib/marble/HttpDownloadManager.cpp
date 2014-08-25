@@ -46,13 +46,15 @@ class HttpDownloadManager::Private
     QMap<DownloadUsage, DownloadQueueSet *> m_defaultQueueSets;
     StoragePolicy *const m_storagePolicy;
     QNetworkAccessManager m_networkAccessManager;
+    bool m_acceptJobs;
 
 };
 
 HttpDownloadManager::Private::Private( StoragePolicy *policy )
     : m_requeueTimer(),
       m_storagePolicy( policy ),
-      m_networkAccessManager()
+      m_networkAccessManager(),
+      m_acceptJobs( true )
 {
     // setup default download policy and associated queue set
     DownloadPolicy defaultBrowsePolicy;
@@ -108,6 +110,7 @@ HttpDownloadManager::~HttpDownloadManager()
 void HttpDownloadManager::setDownloadEnabled( const bool enable )
 {
     d->m_networkAccessManager.setNetworkAccessible( enable ? QNetworkAccessManager::Accessible : QNetworkAccessManager::NotAccessible );
+    d->m_acceptJobs = enable;
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator pos = d->m_queueSets.begin();
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator const end = d->m_queueSets.end();
     for (; pos != end; ++pos ) {
@@ -129,14 +132,17 @@ void HttpDownloadManager::addDownloadPolicy( const DownloadPolicy& policy )
 void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFileName,
                                   const QString &id, const DownloadUsage usage )
 {
-    if ( d->m_networkAccessManager.networkAccessible() == QNetworkAccessManager::NotAccessible )
+    if ( !d->m_acceptJobs ) {
+        mDebug() << Q_FUNC_INFO << "Working offline, not adding job";
         return;
+    }
 
     DownloadQueueSet * const queueSet = d->findQueues( sourceUrl.host(), usage );
     if ( queueSet->canAcceptJob( sourceUrl, destFileName )) {
         HttpJob * const job = new HttpJob( sourceUrl, destFileName, id, &d->m_networkAccessManager );
         job->setUserAgentPluginId( "QNamNetworkPlugin" );
         job->setDownloadUsage( usage );
+        mDebug() << "adding job " << sourceUrl;
         queueSet->addJob( job );
     }
 }
