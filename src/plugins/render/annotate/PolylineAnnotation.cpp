@@ -104,24 +104,7 @@ void PolylineAnnotation::updateRegions( GeoPainter *painter )
 
     const GeoDataLineString line = static_cast<const GeoDataLineString>( *placemark()->geometry() );
 
-    if ( state() == SceneGraphicsItem::MergingNodes ) {
-        if ( m_firstMergedNode != -1 && m_secondMergedNode != -1 ) {
-            // Update the PolylineNodes lists after the animation has finished its execution.
-            m_nodesList[m_secondMergedNode].setFlag( PolylineNode::NodeIsMergingHighlighted, false );
-            m_hoveredNodeIndex = -1;
-
-            // Remove the merging node flag and add the NodeIsSelected flag if either one of the
-            // merged nodes had been selected before merging them.
-            m_nodesList[m_secondMergedNode].setFlag( PolylineNode::NodeIsMerged, false );
-            if ( m_nodesList[m_firstMergedNode].isSelected() ) {
-                m_nodesList[m_secondMergedNode].setFlag( PolylineNode::NodeIsSelected );
-            }
-            m_nodesList.removeAt( m_firstMergedNode );
-
-            m_firstMergedNode = -1;
-            m_secondMergedNode = -1;
-        }
-    } else if ( state() == SceneGraphicsItem::AddingNodes ) {
+    if ( state() == SceneGraphicsItem::AddingNodes ) {
         // Create and update virtual nodes lists when being in the AddingPolgonNodes state, to
         // avoid overhead in other states.
         m_virtualNodesList.clear();
@@ -319,7 +302,24 @@ void PolylineAnnotation::setBusy( bool enabled )
 {
     m_busy = enabled;
 
-    if ( !enabled ) {
+    if ( !enabled && m_animation && state() == SceneGraphicsItem::MergingNodes ) {
+        if ( m_firstMergedNode != -1 && m_secondMergedNode != -1 ) {
+            // Update the PolylineNodes lists after the animation has finished its execution.
+            m_nodesList[m_secondMergedNode].setFlag( PolylineNode::NodeIsMergingHighlighted, false );
+            m_hoveredNodeIndex = -1;
+
+            // Remove the merging node flag and add the NodeIsSelected flag if either one of the
+            // merged nodes had been selected before merging them.
+            m_nodesList[m_secondMergedNode].setFlag( PolylineNode::NodeIsMerged, false );
+            if ( m_nodesList[m_firstMergedNode].isSelected() ) {
+                m_nodesList[m_secondMergedNode].setFlag( PolylineNode::NodeIsSelected );
+            }
+            m_nodesList.removeAt( m_firstMergedNode );
+
+            m_firstMergedNode = -1;
+            m_secondMergedNode = -1;
+        }
+
         delete m_animation;
     }
 }

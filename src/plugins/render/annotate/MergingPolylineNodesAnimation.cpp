@@ -23,7 +23,6 @@ namespace Marble {
 
 
 MergingPolylineNodesAnimation::MergingPolylineNodesAnimation( PolylineAnnotation *polyline ) :
-    m_targetedPolyline( polyline ),
     m_timer( new QTimer( this ) ),
 
     // To avoid long lines and repeated code
@@ -58,7 +57,7 @@ void MergingPolylineNodesAnimation::updateNodes()
         m_lineString->at(m_secondNodeIndex) = newCoords();
         m_lineString->remove( m_firstNodeIndex );
 
-        emit animationFinished( m_targetedPolyline );
+        emit animationFinished();
     } else {
         m_lineString->at(m_firstNodeIndex) =  m_lineString->at(m_firstNodeIndex).interpolate(
                                                                                 m_secondInitialCoords,

@@ -185,7 +185,41 @@ void AreaAnnotation::setBusy( bool enabled )
 {
     m_busy = enabled;
 
-    if ( !enabled ) {
+    if ( !enabled && m_animation && state() == SceneGraphicsItem::MergingNodes ) {
+        // Update the PolylineNodes lists after the animation has finished its execution.
+        const int ff = m_firstMergedNode.first;
+        const int fs = m_firstMergedNode.second;
+        const int sf = m_secondMergedNode.first;
+        const int ss = m_secondMergedNode.second;
+
+        if ( ff != -1 && fs == -1 && sf != -1 && ss == -1 ) {
+            m_outerNodesList[sf].setFlag( PolylineNode::NodeIsMergingHighlighted, false );
+            m_hoveredNode = QPair<int, int>( -1, -1 );
+
+            // Remove the merging node flag and add the NodeIsSelected flag if either one of the
+            // merged nodes had been selected before merging them.
+            m_outerNodesList[sf].setFlag( PolylineNode::NodeIsMerged, false );
+            if ( m_outerNodesList.at(ff).isSelected() ) {
+                m_outerNodesList[sf].setFlag( PolylineNode::NodeIsSelected );
+            }
+            m_outerNodesList.removeAt( ff );
+
+            m_firstMergedNode = QPair<int, int>( -1, -1 );
+            m_secondMergedNode = QPair<int, int>( -1, -1 );
+        } else if ( ff != -1 && fs != -1 && sf != -1 && ss != -1 ) {
+            m_innerNodesList[sf][ss].setFlag( PolylineNode::NodeIsMergingHighlighted, false );
+            m_hoveredNode = QPair<int, int>( -1, -1 );
+
+            m_innerNodesList[sf][ss].setFlag( PolylineNode::NodeIsMerged, false );
+            if ( m_innerNodesList.at(ff).at(fs).isSelected() ) {
+                m_innerNodesList[sf][ss].setFlag( PolylineNode::NodeIsSelected );
+            }
+            m_innerNodesList[sf].removeAt( fs );
+
+            m_firstMergedNode = QPair<int, int>( -1, -1 );
+            m_secondMergedNode = QPair<int, int>( -1, -1 );
+        }
+
         delete m_animation;
     }
 }
@@ -584,41 +618,7 @@ void AreaAnnotation::updateRegions( GeoPainter *painter )
     const QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
 
 
-    if ( state() == SceneGraphicsItem::MergingNodes ) {
-        // Update the PolylineNodes lists after the animation has finished its execution.
-        const int ff = m_firstMergedNode.first;
-        const int fs = m_firstMergedNode.second;
-        const int sf = m_secondMergedNode.first;
-        const int ss = m_secondMergedNode.second;
-
-        if ( ff != -1 && fs == -1 && sf != -1 && ss == -1 ) {
-            m_outerNodesList[sf].setFlag( PolylineNode::NodeIsMergingHighlighted, false );
-            m_hoveredNode = QPair<int, int>( -1, -1 );
-
-            // Remove the merging node flag and add the NodeIsSelected flag if either one of the
-            // merged nodes had been selected before merging them.
-            m_outerNodesList[sf].setFlag( PolylineNode::NodeIsMerged, false );
-            if ( m_outerNodesList.at(ff).isSelected() ) {
-                m_outerNodesList[sf].setFlag( PolylineNode::NodeIsSelected );
-            }
-            m_outerNodesList.removeAt( ff );
-
-            m_firstMergedNode = QPair<int, int>( -1, -1 );
-            m_secondMergedNode = QPair<int, int>( -1, -1 );
-        } else if ( ff != -1 && fs != -1 && sf != -1 && ss != -1 ) {
-            m_innerNodesList[sf][ss].setFlag( PolylineNode::NodeIsMergingHighlighted, false );
-            m_hoveredNode = QPair<int, int>( -1, -1 );
-
-            m_innerNodesList[sf][ss].setFlag( PolylineNode::NodeIsMerged, false );
-            if ( m_innerNodesList.at(ff).at(fs).isSelected() ) {
-                m_innerNodesList[sf][ss].setFlag( PolylineNode::NodeIsSelected );
-            }
-            m_innerNodesList[sf].removeAt( fs );
-
-            m_firstMergedNode = QPair<int, int>( -1, -1 );
-            m_secondMergedNode = QPair<int, int>( -1, -1 );
-        }
-    } else if ( state() == SceneGraphicsItem::AddingNodes ) {
+    if ( state() == SceneGraphicsItem::AddingNodes ) {
         // Create and update virtual nodes lists when being in the AddingPolgonNodes state, to
         // avoid overhead in other states.
         m_outerVirtualNodes.clear();
@@ -645,7 +645,6 @@ void AreaAnnotation::updateRegions( GeoPainter *painter )
         }
     }
 
-
     // Update the boundaries list.
     m_boundariesList.clear();
 
@@ -655,6 +654,7 @@ void AreaAnnotation::updateRegions( GeoPainter *painter )
     }
 
     // Update the outer and inner nodes lists.
+    Q_ASSERT( m_outerNodesList.size() == outerRing.size() );
     for ( int i = 0; i < m_outerNodesList.size(); ++i ) {
         const QRegion newRegion = m_outerNodesList.at(i).isSelected() ?
                                   painter->regionFromEllipse( outerRing.at(i), selectedDim, selectedDim ) :
@@ -662,7 +662,9 @@ void AreaAnnotation::updateRegions( GeoPainter *painter )
         m_outerNodesList[i].setRegion( newRegion );
     }
 
+    Q_ASSERT( m_innerNodesList.size() == innerRings.size() );
     for ( int i = 0; i < m_innerNodesList.size(); ++i ) {
+        Q_ASSERT( m_innerNodesList.at(i).size() == innerRings.at(i).size() );
         for ( int j = 0; j < m_innerNodesList.at(i).size(); ++j ) {
             const QRegion newRegion = m_innerNodesList.at(i).at(j).isSelected() ?
                            painter->regionFromEllipse( innerRings.at(i).at(j), selectedDim, selectedDim ) :

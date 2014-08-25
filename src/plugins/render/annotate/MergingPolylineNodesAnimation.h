@@ -36,7 +36,7 @@ public slots:
 
 signals:
     void nodesMoved();
-    void animationFinished( PolylineAnnotation *targeted );
+    void animationFinished();
 
 private slots:
     void updateNodes();
@@ -45,7 +45,6 @@ private:
     qreal nodesDistance();
     GeoDataCoordinates newCoords();
 
-    PolylineAnnotation *m_targetedPolyline;
     QTimer *m_timer;
 
     const int m_firstNodeIndex;

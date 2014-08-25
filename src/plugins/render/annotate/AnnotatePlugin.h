@@ -115,19 +115,18 @@ private slots:
     void addPolygon();
     void stopEditingPolygon();
     void setAddingPolygonHole( bool );
-    void setMergingNodes( bool );
     void setAddingNodes( bool );
     void editPolygon();
     void selectNode();
     void deleteNode();
     void deselectNodes();
     void deleteSelectedNodes();
-    void setAreaAvailable( AreaAnnotation *targetedArea );
+    void setAreaAvailable();
 
     void addPolyline();
     void editPolyline();
     void stopEditingPolyline();
-    void setPolylineAvailable( PolylineAnnotation *targetedPolyline );
+    void setPolylineAvailable();
 
 protected:
     bool eventFilter( QObject *watched, QEvent *event );

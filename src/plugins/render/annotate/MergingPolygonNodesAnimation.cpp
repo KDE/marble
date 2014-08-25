@@ -23,8 +23,6 @@ namespace Marble {
 
 
 MergingPolygonNodesAnimation::MergingPolygonNodesAnimation( AreaAnnotation *polygon ) :
-    m_targetedArea( polygon ),
-
     // To avoid long lines and repeated code
     first_i( polygon->m_firstMergedNode.first ),
     first_j( polygon->m_firstMergedNode.second ),
@@ -77,7 +75,7 @@ void MergingPolygonNodesAnimation::updateNodes()
             innerRings[second_i].remove( first_j );
         }
 
-        emit animationFinished( m_targetedArea );
+        emit animationFinished();
     } else {
         if ( m_boundary == OuterBoundary ) {
             outerRing[first_i] = outerRing.at(first_i).interpolate( m_secondInitialCoords, ratio );

@@ -247,15 +247,6 @@ void AnnotatePlugin::setAddingPolygonHole( bool enabled )
     }
 }
 
-void AnnotatePlugin::setMergingNodes( bool enabled )
-{
-    if ( enabled ) {
-        announceStateChanged( SceneGraphicsItem::MergingNodes );
-    } else {
-        announceStateChanged( SceneGraphicsItem::Editing );
-    }
-}
-
 void AnnotatePlugin::setAddingNodes( bool enabled )
 {
     if ( enabled ) {
@@ -265,15 +256,25 @@ void AnnotatePlugin::setAddingNodes( bool enabled )
     }
 }
 
-void AnnotatePlugin::setAreaAvailable( AreaAnnotation *targetedArea )
+void AnnotatePlugin::setAreaAvailable()
 {
-    targetedArea->setBusy( false );
+    static_cast<AreaAnnotation*>( m_focusItem )->setBusy( false );
+    announceStateChanged( SceneGraphicsItem::Editing );
+
+    enableAllActions( m_actions.first() );
+    disableFocusActions();
+    enableActionsOnItemType( SceneGraphicsTypes::SceneGraphicAreaAnnotation );
     emit repaintNeeded();
 }
 
-void AnnotatePlugin::setPolylineAvailable( PolylineAnnotation *targetedPolyline )
+void AnnotatePlugin::setPolylineAvailable()
 {
-    targetedPolyline->setBusy( false );
+    static_cast<PolylineAnnotation*>( m_focusItem )->setBusy( false );
+    announceStateChanged( SceneGraphicsItem::Editing );
+
+    enableAllActions( m_actions.first() );
+    disableFocusActions();
+    enableActionsOnItemType( SceneGraphicsTypes::SceneGraphicPolylineAnnotation );
     emit repaintNeeded();
 }
 
@@ -431,21 +432,44 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
     if ( event->type() != QEvent::MouseButtonPress &&
          event->type() != QEvent::MouseButtonRelease &&
          event->type() != QEvent::MouseMove &&
-         event->type() != QEvent::KeyPress ) {
+         event->type() != QEvent::KeyPress &&
+         event->type() != QEvent::KeyRelease ) {
         return false;
     }
 
     // Handle key press events.
-    if ( event->type() == QEvent::KeyPress ) {
+    if ( event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease ) {
         QKeyEvent * const keyEvent = static_cast<QKeyEvent*>( event );
         Q_ASSERT( keyEvent );
 
+        if ( m_focusItem &&
+             ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation ||
+               m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation ) ) {
+            if ( keyEvent->type() == QEvent::KeyPress && keyEvent->key() == Qt::Key_Control ) {
+                announceStateChanged( SceneGraphicsItem::MergingNodes );
+            }
+
+            if ( keyEvent->type() == QEvent::KeyRelease && keyEvent->key() == Qt::Key_Control ) {
+                if ( ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation &&
+                       static_cast<AreaAnnotation*>( m_focusItem )->isBusy() ) ||
+                     ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation &&
+                       static_cast<PolylineAnnotation*>( m_focusItem )->isBusy() ) ) {
+                    return true;
+                }
+
+                announceStateChanged( SceneGraphicsItem::Editing );
+            }
+        }
+
         // If we have an item which has the focus and the Escape key is pressed, set item's focus
         // to false.
-        if ( keyEvent->key() == Qt::Key_Escape && m_focusItem ) {
+        if ( m_focusItem &&
+             keyEvent->type() == QEvent::KeyPress && keyEvent->key() == Qt::Key_Escape &&
+             !m_editingDialogIsShown ) {
             disableFocusActions();
             m_focusItem->setFocus( false );
             m_marbleWidget->model()->treeModel()->updateFeature( m_focusItem->placemark() );
+            m_focusItem = 0;
             return true;
         }
 
@@ -455,6 +479,7 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
     // Handle mouse events.
     QMouseEvent * const mouseEvent = dynamic_cast<QMouseEvent*>( event );
     Q_ASSERT( mouseEvent );
+
 
     // Get the geocoordinates from mouse pos screen coordinates.
     qreal lon, lat;
@@ -681,10 +706,11 @@ void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem 
             QPointer<MergingPolygonNodesAnimation> animation = area->animation();
 
             connect( animation, SIGNAL(nodesMoved()), this, SIGNAL(repaintNeeded()) );
-            connect( animation, SIGNAL(animationFinished(AreaAnnotation*)),
-                     this, SLOT(setAreaAvailable(AreaAnnotation*)) );
+            connect( animation, SIGNAL(animationFinished()),
+                     this, SLOT(setAreaAvailable()) );
 
             area->setBusy( true );
+            disableActions( m_actions.first() );
             animation->startAnimation();
       } else if ( area->request() == SceneGraphicsItem::OuterInnerMergingWarning ) {
             QMessageBox::warning( m_marbleWidget,
@@ -716,10 +742,11 @@ void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem 
             QPointer<MergingPolylineNodesAnimation> animation = polyline->animation();
 
             connect( animation, SIGNAL(nodesMoved()), this, SIGNAL(repaintNeeded()) );
-            connect( animation, SIGNAL(animationFinished(PolylineAnnotation*)),
-                     this, SLOT(setPolylineAvailable(PolylineAnnotation*)) );
+            connect( animation, SIGNAL(animationFinished()),
+                     this, SLOT(setPolylineAvailable()) );
 
             polyline->setBusy( true );
+            disableActions( m_actions.first() );
             animation->startAnimation();
         } else if ( polyline->request() == SceneGraphicsItem::RemovePolylineRequest ) {
             removeFocusItem();
@@ -746,16 +773,19 @@ void AnnotatePlugin::handleUncaughtEvents( QMouseEvent *mouseEvent )
 
     if ( m_focusItem && m_focusItem->graphicType() != SceneGraphicsTypes::SceneGraphicGroundOverlay ) {
         if ( ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation &&
-               !static_cast<AreaAnnotation*>( m_focusItem )->isBusy() ) ||
+               static_cast<AreaAnnotation*>( m_focusItem )->isBusy() ) ||
              ( m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation &&
-               !static_cast<PolylineAnnotation*>( m_focusItem )->isBusy() ) ) {
-            m_focusItem->dealWithItemChange( 0 );
-            m_marbleWidget->model()->treeModel()->updateFeature( m_focusItem->placemark() );
+               static_cast<PolylineAnnotation*>( m_focusItem )->isBusy() ) ) {
+            return;
         }
+
+        m_focusItem->dealWithItemChange( 0 );
+        m_marbleWidget->model()->treeModel()->updateFeature( m_focusItem->placemark() );
 
         if ( mouseEvent->type() == QEvent::MouseButtonPress ) {
             m_focusItem->setFocus( false );
             disableFocusActions();
+            announceStateChanged( SceneGraphicsItem::Editing );
             m_marbleWidget->model()->treeModel()->updateFeature( m_focusItem->placemark() );
             m_focusItem = 0;
         }
@@ -793,13 +823,6 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     addHole->setCheckable( true );
     addHole->setEnabled( false );
     connect( addHole, SIGNAL(toggled(bool)), this, SLOT(setAddingPolygonHole(bool)) );
-
-    QAction *mergeNodes = new QAction( QIcon(":/icons/polygon-merge-nodes.png"),
-                                       tr("Merge Nodes"),
-                                       this );
-    mergeNodes->setCheckable( true );
-    mergeNodes->setEnabled( false );
-    connect( mergeNodes, SIGNAL(toggled(bool)), this, SLOT(setMergingNodes(bool)) );
 
     QAction *addNodes = new QAction( QIcon(":/icons/polygon-add-nodes.png"),
                                      tr("Add Nodes"),
@@ -866,7 +889,6 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     group->addAction( sep2 );
     group->addAction( selectItem );
     group->addAction( addHole );
-    group->addAction( mergeNodes );
     group->addAction( addNodes );
     group->addAction( removeItem );
     group->addAction( sep3 );
@@ -884,6 +906,8 @@ void AnnotatePlugin::disableActions( QActionGroup *group )
     for ( int i = 0; i < group->actions().size(); ++i ) {
         if ( group->actions().at(i)->text() != tr("Select Item") ) {
             group->actions().at(i)->setEnabled( false );
+        } else {
+            group->actions().at(i)->setEnabled( true );
         }
     }
 }
@@ -900,13 +924,11 @@ void AnnotatePlugin::enableActionsOnItemType( const QString &type )
     if ( type == SceneGraphicsTypes::SceneGraphicAreaAnnotation ) {
         m_actions.first()->actions().at(9)->setEnabled( true );
         m_actions.first()->actions().at(10)->setEnabled( true );
-        m_actions.first()->actions().at(11)->setEnabled( true );
     } else if ( type == SceneGraphicsTypes::SceneGraphicPolylineAnnotation ) {
         m_actions.first()->actions().at(10)->setEnabled( true );
-        m_actions.first()->actions().at(11)->setEnabled( true );
     }
 
-    m_actions.first()->actions().at(12)->setEnabled( true );
+    m_actions.first()->actions().at(11)->setEnabled( true );
 }
 
 void AnnotatePlugin::disableFocusActions()
@@ -916,7 +938,6 @@ void AnnotatePlugin::disableFocusActions()
     m_actions.first()->actions().at(9)->setEnabled( false );
     m_actions.first()->actions().at(10)->setEnabled( false );
     m_actions.first()->actions().at(11)->setEnabled( false );
-    m_actions.first()->actions().at(12)->setEnabled( false );
 }
 
 void AnnotatePlugin::addContextItems()
@@ -1017,6 +1038,7 @@ void AnnotatePlugin::addTextAnnotation()
 
     dialog->move( m_marbleWidget->mapToGlobal( QPoint( 0, 0 ) ) );
     dialog->show();
+    m_editingDialogIsShown = true;
 }
 
 void AnnotatePlugin::stopEditingTextAnnotation()
@@ -1237,6 +1259,7 @@ void AnnotatePlugin::addPolygon()
 
     dialog->move( m_marbleWidget->mapToGlobal( QPoint( 0, 0 ) ) );
     dialog->show();
+    m_editingDialogIsShown = true;
 }
 
 void AnnotatePlugin::stopEditingPolygon()
@@ -1477,6 +1500,7 @@ void AnnotatePlugin::addPolyline()
 
     dialog->move( m_marbleWidget->mapToGlobal( QPoint( 0, 0 ) ) );
     dialog->show();
+    m_editingDialogIsShown = true;
 }
 
 void AnnotatePlugin::stopEditingPolyline()
