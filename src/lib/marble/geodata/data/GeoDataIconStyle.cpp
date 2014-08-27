@@ -44,16 +44,19 @@ class GeoDataIconStylePrivate
         return GeoDataTypes::GeoDataIconStyleType;
     }
 
+    RemoteIconLoader* remoteIconLoader() const
+    {
+        static RemoteIconLoader *remoteIconLoader = new RemoteIconLoader();
+        return remoteIconLoader;
+    }
+
     float            m_scale;
 
     QImage           m_icon;
     QString          m_iconPath;
     GeoDataHotSpot   m_hotSpot;
     int              m_heading;
-    static RemoteIconLoader *m_remoteIconLoader;
 };
-
-RemoteIconLoader* GeoDataIconStylePrivate::m_remoteIconLoader = new RemoteIconLoader();
 
 GeoDataIconStyle::GeoDataIconStyle() :
     d( new GeoDataIconStylePrivate() )
@@ -139,7 +142,7 @@ QImage GeoDataIconStyle::icon() const
             // at remote location. If yes then go for remote icon loading
             QUrl remoteLocation = QUrl( d->m_iconPath );
             if( remoteLocation.isValid() ) {
-                d->m_icon = d->m_remoteIconLoader->load( d->m_iconPath );
+                d->m_icon = d->remoteIconLoader()->load( d->m_iconPath );
             }
             else {
                 mDebug() << "Unable to open style icon at: " << d->m_iconPath;
@@ -186,7 +189,7 @@ void GeoDataIconStyle::setHeading( int heading )
 
 RemoteIconLoader *GeoDataIconStyle::remoteIconLoader() const
 {
-    return d->m_remoteIconLoader;
+    return d->remoteIconLoader();
 }
 
 void GeoDataIconStyle::pack( QDataStream& stream ) const
