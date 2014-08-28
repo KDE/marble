@@ -26,7 +26,7 @@ namespace Marble
 
 GeoSceneIcon::GeoSceneIcon()
     : m_pixmap( "" ),
-      m_color( "" )
+      m_color()
 {
 }
 

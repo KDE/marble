@@ -337,28 +337,28 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             }
 
             // pixmap and text
-            QString path = "";
+            QString src;
+            QString styleDiv;
             int pixmapWidth = 24;
             int pixmapHeight = 12;
-            // NOTICE. There are some pixmaps without image, so we should
-            //         create just a plain rectangle with set color
             if (!item->icon()->pixmap().isEmpty()) {
-                path = MarbleDirs::path( item->icon()->pixmap() );
+                QString path = MarbleDirs::path( item->icon()->pixmap() );
                 const QPixmap oncePixmap(path);
                 pixmapWidth = oncePixmap.width();
                 pixmapHeight = oncePixmap.height();
-            }
-            QColor color = item->icon()->color();
-            QString styleDiv = "";
-            if (color != Qt::transparent) {
-                styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
-                                    QString::number(pixmapHeight) + "px; background-color: "
-                        + color.name() + ';';
-            } else {
+                src = QUrl::fromLocalFile( path ).toString();
                 styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                         QString::number(pixmapHeight) + "px;";
             }
-            QString src = QUrl::fromLocalFile( path ).toString();
+
+
+            // NOTICE. There are some pixmaps without image, so we should
+            //         create just a plain rectangle with set color
+            QColor color = item->icon()->color();
+            if ( color.isValid() ) {
+                styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
+                        QString::number(pixmapHeight) + "px; background-color: " + color.name() + ';';
+            }
             QString html = ""
                     "<div class=\"legend-entry\">"
                     "  <label>" + checkBoxString +
