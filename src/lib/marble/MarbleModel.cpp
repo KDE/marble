@@ -383,26 +383,26 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
                 style->setPolyStyle( polyStyle );
                 style->setId( "default" );
             }
-                if ( sourceFileMatch && !currentDatasets[datasetIndex].colors().isEmpty() ) {
-                    /**
+            if ( sourceFileMatch && !currentDatasets[datasetIndex].colors().isEmpty() ) {
+                /**
                      * if already parsed sourcefile doesn't contains colorMap
                      * then assignNewStyle otherwise assignFillColors.
                      */
-                    currentDatasets.removeAt( datasetIndex );
-                    if ( data->colors().isEmpty() ) {
-                        qDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
-                        assignNewStyle( filename, style );
-                    }
-                    else {
-                        assignFillColors( data->sourceFile() );
-                    }
+                currentDatasets.removeAt( datasetIndex );
+                if ( data->colors().isEmpty() ) {
+                    qDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
+                    assignNewStyle( filename, style );
                 }
                 else {
-                    fileList << filename;
-                    propertyList << property;
-                    styleList << style;
+                    assignFillColors( data->sourceFile() );
                 }
-         }
+            }
+            else {
+                fileList << filename;
+                propertyList << property;
+                styleList << style;
+            }
+        }
     }
     // unload old currentDatasets which are not part of the new map
     foreach(const GeoSceneGeodata data, currentDatasets) {
