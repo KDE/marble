@@ -107,5 +107,6 @@
         <file>icons/cloud-upload.png</file>
         <file>icons/cloud-download.png</file>
         <file alias="icons/animator.png">icons/16x16/tool-animator.png</file>
+        <file>icons/map-gnomonic.png</file>
     </qresource>
 </RCC>

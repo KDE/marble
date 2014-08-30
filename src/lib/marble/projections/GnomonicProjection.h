@@ -5,21 +5,12 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2007-2012 Torsten Rahn  <rahn@kde.org>
+// Copyright 2013      Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
 //
 
 
-#ifndef MARBLE_SPHERICALPROJECTION_H
-#define MARBLE_SPHERICALPROJECTION_H
-
-
-/** @file
- * This file contains the headers for SphericalProjection.
- *
- * @author Inge Wallin  <inge@lysator.liu.se>
- * @author Torsten Rahn <rahn@kde.org>
- */
+#ifndef MARBLE_GNOMONICPROJECTION_H
+#define MARBLE_GNOMONICPROJECTION_H
 
 
 #include "AbstractProjection.h"
@@ -28,23 +19,23 @@
 namespace Marble
 {
 
-class SphericalProjectionPrivate;
+class GnomonicProjectionPrivate;
 
 /**
  * @short A class to implement the spherical projection used by the "Globe" view.
  */
 
-class SphericalProjection : public AzimuthalProjection
+class GnomonicProjection : public AzimuthalProjection
 {
     // Not a QObject so far because we don't need to send signals.
  public:
 
     /**
-     * @brief Construct a new SphericalProjection.
+     * @brief Construct a new GnomonicProjection.
      */
-    SphericalProjection();
+    GnomonicProjection();
 
-    virtual ~SphericalProjection();
+    virtual ~GnomonicProjection();
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -87,12 +78,14 @@ class SphericalProjection : public AzimuthalProjection
 
     bool  mapCoversViewport( const ViewportParams *viewport ) const;
 
+    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
+
  protected:
-    SphericalProjection(SphericalProjectionPrivate *dd );
+    GnomonicProjection(GnomonicProjectionPrivate *dd );
 
  private:
-    Q_DECLARE_PRIVATE(SphericalProjection)
-    Q_DISABLE_COPY( SphericalProjection )
+    Q_DECLARE_PRIVATE(GnomonicProjection)
+    Q_DISABLE_COPY( GnomonicProjection )
 };
 
 }

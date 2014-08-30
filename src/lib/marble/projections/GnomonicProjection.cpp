@@ -5,14 +5,11 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007        Inge Wallin   <ingwa@kde.org>
-// Copyright 2007-2012   Torsten Rahn  <rahn@kde.org>
-// Copyright 2009        Patrick Spendrin <ps_ml@gmx.de>
-// Copyright 2012        Cezar Mocan   <mocancezar@gmail.com>
+// Copyright 2013      Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
 //
 
 // Local
-#include "SphericalProjection.h"
+#include "GnomonicProjection.h"
 #include "AbstractProjection_p.h"
 
 #include "MarbleDebug.h"
@@ -25,20 +22,17 @@
 #include "MarbleGlobal.h"
 #include "AzimuthalProjection_p.h"
 
+#include <qmath.h>
+
 #define SAFE_DISTANCE
 
 namespace Marble
 {
 
-class SphericalProjectionPrivate : public AzimuthalProjectionPrivate
+class GnomonicProjectionPrivate : public AzimuthalProjectionPrivate
 {
   public:
-    enum LineStringFlag {
-        PlainLineString = 0x00,
-        ClosedLineString = 0x01
-    };
-
-    explicit SphericalProjectionPrivate( SphericalProjection * parent );
+    explicit GnomonicProjectionPrivate( GnomonicProjection * parent );
 
     // This method tessellates a line segment in a way that the line segment
     // follows great circles. The count parameter specifies the
@@ -50,7 +44,6 @@ class SphericalProjectionPrivate : public AzimuthalProjectionPrivate
                                 qreal ax, qreal ay,
                                 const GeoDataCoordinates &bCoords,
                                 qreal bx, qreal by,
-                                LineStringFlag lineStringFlag,
                                 QVector<QPolygonF*> &polygons,
                                 const ViewportParams *viewport,
                                 TessellationFlags f = 0 ) const;
@@ -58,13 +51,11 @@ class SphericalProjectionPrivate : public AzimuthalProjectionPrivate
     void processTessellation(   const GeoDataCoordinates &previousCoords,
                                const GeoDataCoordinates &currentCoords,
                                int count,
-                               LineStringFlag lineStringFlag,
                                QVector<QPolygonF*> &polygons,
                                const ViewportParams *viewport,
                                TessellationFlags f = 0 ) const;
 
     void crossHorizon( const GeoDataCoordinates & bCoord,
-                       LineStringFlag lineStringFlag,
                        QVector<QPolygonF*> &polygons,
                        const ViewportParams *viewport ) const;
 
@@ -83,85 +74,80 @@ class SphericalProjectionPrivate : public AzimuthalProjectionPrivate
                                     TessellationFlags f = 0,
                                     int recursionCounter = 0 ) const;
 
-    static bool globeHidesPoint( const GeoDataCoordinates &coordinates,
-                                 const ViewportParams *viewport );
+    bool globeHidesPoint( const GeoDataCoordinates &coordinates,
+                          const ViewportParams *viewport ) const;
 
-    Q_DECLARE_PUBLIC( SphericalProjection )
+    Q_DECLARE_PUBLIC( GnomonicProjection )
 };
 
-SphericalProjection::SphericalProjection()
-    : AzimuthalProjection( new SphericalProjectionPrivate( this ) )
+GnomonicProjection::GnomonicProjection()
+    : AzimuthalProjection( new GnomonicProjectionPrivate( this ) )
 {
     setMinLat( minValidLat() );
     setMaxLat( maxValidLat() );
 }
 
-SphericalProjection::SphericalProjection( SphericalProjectionPrivate *dd )
+GnomonicProjection::GnomonicProjection( GnomonicProjectionPrivate *dd )
         : AzimuthalProjection( dd )
 {
     setMinLat( minValidLat() );
     setMaxLat( maxValidLat() );
 }
 
-SphericalProjection::~SphericalProjection()
+GnomonicProjection::~GnomonicProjection()
 {
 }
 
 
-SphericalProjectionPrivate::SphericalProjectionPrivate( SphericalProjection * parent )
+GnomonicProjectionPrivate::GnomonicProjectionPrivate( GnomonicProjection * parent )
         : AzimuthalProjectionPrivate( parent )
 {
 
 }
 
-bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates, 
+bool GnomonicProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
                                              const ViewportParams *viewport,
                                              qreal &x, qreal &y, bool &globeHidesPoint ) const
 {
-    qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
-    Quaternion  qpos             = coordinates.quaternion();
+    const qreal lambda = coordinates.longitude();
+    const qreal phi = coordinates.latitude();
+    const qreal lambdaPrime = viewport->centerLongitude();
+    const qreal phi1 = viewport->centerLatitude();
 
-    qpos.rotateAroundAxis( viewport->planetAxisMatrix() );
+    qreal cosC = qSin( phi1 ) * qSin( phi ) + qCos( phi1 ) * qCos( phi ) * qCos( lambda - lambdaPrime );
 
-    qreal      pixelAltitude = ( ( viewport->radius() ) 
-                                  / EARTH_RADIUS * absoluteAltitude );
-    if ( coordinates.altitude() < 10000 ) {
-        // Skip placemarks at the other side of the earth.
-        if ( qpos.v[Q_Z] < 0 ) {
-            globeHidesPoint = true;
-            return false;
-        }
-    }
-    else {
-        qreal  earthCenteredX = pixelAltitude * qpos.v[Q_X];
-        qreal  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
-        qreal  radius         = viewport->radius();
-
-        // Don't draw high placemarks (e.g. satellites) that aren't visible.
-        if ( qpos.v[Q_Z] < 0
-             && ( ( earthCenteredX * earthCenteredX
-                    + earthCenteredY * earthCenteredY )
-                  < radius * radius ) ) {
-            globeHidesPoint = true;
-            return false;
-        }
-    }
+    // Prevent division by zero
+    if (fabs(cosC < 0.0001)) cosC = 0.0001;
 
     // Let (x, y) be the position on the screen of the placemark..
-    x = ((qreal)(viewport->width())  / 2 + pixelAltitude * qpos.v[Q_X]);
-    y = ((qreal)(viewport->height()) / 2 - pixelAltitude * qpos.v[Q_Y]);
+    x = ( qCos( phi ) * qSin( lambda - lambdaPrime ) ) / cosC;
+    y = ( qCos( phi1 ) * qSin( phi ) - qSin( phi1 ) * qCos( phi ) * qCos( lambda - lambdaPrime ) ) / cosC;
 
-    // Skip placemarks that are outside the screen area
-    if ( x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height() ) {
-        globeHidesPoint = false;
+    x *= 2 * viewport->radius() / M_PI;
+    y *= 2 * viewport->radius() / M_PI;
+
+    const qint64  radius  = viewport->radius();
+
+    // Introduce arteficial 10*radius horizon to avoid projection artefacts
+    if (x*x + y*y > 100 * radius * radius) {
+        globeHidesPoint = true;
         return false;
     }
 
     globeHidesPoint = false;
+
+    x += viewport->width() / 2;
+    y = viewport->height() / 2 - y;
+
+    // Skip placemarks that are outside the screen area
+    if ( x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height() ) {
+        return false;
+    }
+
     return true;
 }
 
-bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
+bool GnomonicProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
                                              const ViewportParams *viewport,
                                              qreal *x, qreal &y,
                                              int &pointRepeatNum,
@@ -169,42 +155,46 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
                                              bool &globeHidesPoint ) const
 {
     pointRepeatNum = 0;
+    globeHidesPoint = false;
+
     bool visible = screenCoordinates( coordinates, viewport, *x, y, globeHidesPoint );
 
     // Skip placemarks that are outside the screen area
-    if ( *x + size.width() / 2.0 < 0.0 || *x >= viewport->width() + size.width() / 2.0 
+    if ( *x + size.width() / 2.0 < 0.0 || *x >= viewport->width() + size.width() / 2.0
          || y + size.height() / 2.0 < 0.0 || y >= viewport->height() + size.height() / 2.0 )
     {
-        globeHidesPoint = false;
         return false;
     }
 
-    // This projection doesn't have any repetitions, 
+    // This projection doesn't have any repetitions,
     // so the number of screen points referring to the geopoint is one.
     pointRepeatNum = 1;
     return visible;
 }
 
 
-bool SphericalProjection::geoCoordinates( const int x, const int y,
+bool GnomonicProjection::geoCoordinates( const int x, const int y,
                                           const ViewportParams *viewport,
                                           qreal& lon, qreal& lat,
                                           GeoDataCoordinates::Unit unit ) const
 {
-    const qreal  inverseRadius = 1.0 / (qreal)(viewport->radius());
+    const qint64  radius  = viewport->radius();
+    // Calculate how many degrees are being represented per pixel.
+    const qreal rad2Pixel = ( 2 * radius ) / M_PI;
+    const qreal centerLon = viewport->centerLongitude();
+    const qreal centerLat = viewport->centerLatitude();
+    const qreal rx = ( - viewport->width()  / 2 + x ) / rad2Pixel;
+    const qreal ry = (   viewport->height() / 2 - y ) / rad2Pixel;
+    const qreal p = qSqrt( rx*rx + ry*ry );
+    const qreal c = qAtan( p );
+    const qreal sinc = qSin(c);
 
-    const qreal qx = +(qreal)( x - viewport->width()  / 2 ) * inverseRadius;
-    const qreal qy = -(qreal)( y - viewport->height() / 2 ) * inverseRadius;
+    lon = centerLon + qAtan2( rx*sinc , ( p*qCos( centerLat )*qCos( c ) - ry*qSin( centerLat )*sinc  ) );
 
-    if ( 1 <= qx * qx + qy * qy ) {
-        return false;
-    }
+    while ( lon < -M_PI ) lon += 2 * M_PI;
+    while ( lon >  M_PI ) lon -= 2 * M_PI;
 
-    const qreal qz = sqrt( 1 - qx * qx - qy * qy );
-
-    Quaternion  qpos( 0.0, qx, qy, qz );
-    qpos.rotateAroundAxis( viewport->planetAxis() );
-    qpos.getSpherical( lon, lat );
+    lat = qAsin( qCos(c)*qSin(centerLat) + ry*sinc*qCos(centerLat)/p );
 
     if ( unit == GeoDataCoordinates::Degree ) {
         lon *= RAD2DEG;
@@ -214,31 +204,17 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
     return true;
 }
 
-bool SphericalProjection::mapCoversViewport( const ViewportParams *viewport ) const
+bool GnomonicProjection::mapCoversViewport( const ViewportParams *viewport ) const
 {
-    qint64  radius = viewport->radius();
-    qint64  width  = viewport->width();
-    qint64  height = viewport->height();
-
-    // This first test is a quick one that will catch all really big
-    // radii and prevent overflow in the real test.
-    if ( radius > width + height )
-        return true;
-
-    // This is the real test.  The 4 is because we are really
-    // comparing to width/2 and height/2.
-    if ( 4 * radius * radius >= width * width + height * height )
-        return true;
-
-    return false;
+    return true;
 }
 
-bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString,
+bool GnomonicProjection::screenCoordinates( const GeoDataLineString &lineString,
                                                   const ViewportParams *viewport,
                                                   QVector<QPolygonF *> &polygons ) const
 {
 
-    Q_D( const SphericalProjection );
+    Q_D( const GnomonicProjection );
     // Compare bounding box size of the line string with the angularResolution
     // Immediately return if the latLonAltBox is smaller.
     if ( !viewport->resolves( lineString.latLonAltBox() ) ) {
@@ -250,11 +226,10 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     return true;
 }
 
-void SphericalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates &aCoords,
+void GnomonicProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates &aCoords,
                                                 qreal ax, qreal ay,
                                                 const GeoDataCoordinates &bCoords,
                                                 qreal bx, qreal by,
-                                                LineStringFlag lineStringFlag,
                                                 QVector<QPolygonF*> &polygons,
                                                 const ViewportParams *viewport,
                                                 TessellationFlags f) const
@@ -290,13 +265,12 @@ void SphericalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates
 
             processTessellation( aCoords, bCoords,
                                  tessellatedNodes,
-                                 lineStringFlag,
                                  polygons,
                                  viewport,
                                  f );
         }
         else {
-            crossHorizon( bCoords, lineStringFlag, polygons, viewport );
+            crossHorizon( bCoords, polygons, viewport );
         }
 #ifdef SAFE_DISTANCE
     }
@@ -304,10 +278,9 @@ void SphericalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates
 }
 
 
-void SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &previousCoords,
+void GnomonicProjectionPrivate::processTessellation( const GeoDataCoordinates &previousCoords,
                                                     const GeoDataCoordinates &currentCoords,
                                                     int tessellatedNodes,
-                                                    LineStringFlag lineStringFlag,
                                                     QVector<QPolygonF*> &polygons,
                                                     const ViewportParams *viewport,
                                                     TessellationFlags f) const
@@ -362,7 +335,7 @@ void SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &
         }
 
         const GeoDataCoordinates currentTessellatedCoords( lon, lat, altitude );
-        crossHorizon( currentTessellatedCoords, lineStringFlag, polygons, viewport );
+        crossHorizon( currentTessellatedCoords, polygons, viewport );
         previousTessellatedCoords = currentTessellatedCoords;
     }
 
@@ -371,11 +344,10 @@ void SphericalProjectionPrivate::processTessellation( const GeoDataCoordinates &
     if ( clampToGround ) {
         currentModifiedCoords.setAltitude( 0.0 );
     }
-    crossHorizon( currentModifiedCoords, lineStringFlag, polygons, viewport );
+    crossHorizon( currentModifiedCoords, polygons, viewport );
 }
 
-void SphericalProjectionPrivate::crossHorizon( const GeoDataCoordinates & bCoord,
-                                              LineStringFlag lineStringFlag,
+void GnomonicProjectionPrivate::crossHorizon( const GeoDataCoordinates & bCoord,
                                               QVector<QPolygonF*> &polygons,
                                               const ViewportParams *viewport ) const
 {
@@ -390,18 +362,18 @@ void SphericalProjectionPrivate::crossHorizon( const GeoDataCoordinates & bCoord
         *polygons.last() << QPointF( x, y );
     }
     else {
-        if ( !polygons.last()->isEmpty() && lineStringFlag != ClosedLineString  ) {
+        if ( !polygons.last()->isEmpty() ) {
             QPolygonF *path = new QPolygonF;
             polygons.append( path );
         }
     }
 }
 
-bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &lineString,
+bool GnomonicProjectionPrivate::lineStringToPolygon( const GeoDataLineString &lineString,
                                               const ViewportParams *viewport,
                                               QVector<QPolygonF *> &polygons ) const
 {
-    Q_Q( const SphericalProjection );
+    Q_Q( const GnomonicProjection );
 
     const TessellationFlags f = lineString.tessellationFlags();
 
@@ -482,7 +454,7 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             // Check for the "horizon case" (which is present e.g. for the spherical projection
             const bool isAtHorizon = ( globeHidesPoint || previousGlobeHidesPoint ) &&
                                      ( globeHidesPoint !=  previousGlobeHidesPoint );
-     
+
             if ( isAtHorizon ) {
                 // Handle the "horizon case"
                 horizonCoords = findHorizon( *itPreviousCoords, *itCoords, viewport, f );
@@ -517,27 +489,29 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
             // segments of a linestring. If you are about to learn how the code of
             // this class works you can safely ignore this section for a start.
 
-            if ( lineString.tessellate() ) {
-                LineStringFlag lineStringFlag = lineString.isClosed() ? ClosedLineString : PlainLineString;
+            if ( lineString.tessellate() /* && ( isVisible || previousIsVisible ) */ ) {
+
                 if ( !isAtHorizon ) {
+
                     tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                            *itCoords, x, y,
-                                           lineStringFlag, polygons, viewport,
+                                           polygons, viewport,
                                            f );
+
                 }
                 else {
                     // Connect the interpolated  point at the horizon with the
-                    // current or previous point in the line. 
+                    // current or previous point in the line.
                     if ( previousGlobeHidesPoint ) {
                         tessellateLineSegment( horizonCoords, horizonX, horizonY,
                                                *itCoords, x, y,
-                                               lineStringFlag, polygons, viewport,
+                                               polygons, viewport,
                                                f );
                     }
                     else {
                         tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                                horizonCoords, horizonX, horizonY,
-                                               lineStringFlag, polygons, viewport,
+                                               polygons, viewport,
                                                f );
                     }
                 }
@@ -594,7 +568,7 @@ bool SphericalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     return polygons.isEmpty();
 }
 
-void SphericalProjectionPrivate::horizonToPolygon( const ViewportParams *viewport,
+void GnomonicProjectionPrivate::horizonToPolygon( const ViewportParams *viewport,
                                            const GeoDataCoordinates & disappearCoords,
                                            const GeoDataCoordinates & reappearCoords,
                                            QPolygonF * polygon ) const
@@ -606,7 +580,7 @@ void SphericalProjectionPrivate::horizonToPolygon( const ViewportParams *viewpor
 
     bool dummyGlobeHidesPoint = false;
 
-    Q_Q( const SphericalProjection );
+    Q_Q( const GnomonicProjection );
     // Calculate the angle of the position vectors of both coordinates
     q->screenCoordinates( disappearCoords, viewport, x, y, dummyGlobeHidesPoint );
     qreal alpha = atan2( y - imageHalfHeight,
@@ -621,7 +595,7 @@ void SphericalProjectionPrivate::horizonToPolygon( const ViewportParams *viewpor
 
     qreal sgndiff = diff < 0 ? -1 : 1;
 
-    const qreal arcradius = viewport->radius();
+    const qreal arcradius = 10 * viewport->radius();
     const int itEnd = fabs(diff * RAD2DEG);
 
     // Create a polygon that resembles an arc between the two position vectors
@@ -634,7 +608,7 @@ void SphericalProjectionPrivate::horizonToPolygon( const ViewportParams *viewpor
 }
 
 
-GeoDataCoordinates SphericalProjectionPrivate::findHorizon( const GeoDataCoordinates & previousCoords,
+GeoDataCoordinates GnomonicProjectionPrivate::findHorizon( const GeoDataCoordinates & previousCoords,
                                                     const GeoDataCoordinates & currentCoords,
                                                     const ViewportParams *viewport,
                                                     TessellationFlags f,
@@ -716,39 +690,32 @@ GeoDataCoordinates SphericalProjectionPrivate::findHorizon( const GeoDataCoordin
 }
 
 
-bool SphericalProjectionPrivate::globeHidesPoint( const GeoDataCoordinates &coordinates,
-                                          const ViewportParams *viewport )
+bool GnomonicProjectionPrivate::globeHidesPoint( const GeoDataCoordinates &coordinates,
+                                          const ViewportParams *viewport ) const
 {
-    qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
-    Quaternion  qpos             = coordinates.quaternion();
+    bool globeHidesPoint;
+    qreal dummyX, dummyY;
 
-    qpos.rotateAroundAxis( viewport->planetAxisMatrix() );
-
-    qreal      pixelAltitude = ( ( viewport->radius() )
-                                  / EARTH_RADIUS * absoluteAltitude );
-    if ( coordinates.altitude() < 10000 ) {
-        // Skip placemarks at the other side of the earth.
-        if ( qpos.v[Q_Z] < 0 ) {
-            return true;
-        }
-    }
-    else {
-        qreal  earthCenteredX = pixelAltitude * qpos.v[Q_X];
-        qreal  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
-        qreal  radius         = viewport->radius();
-
-        // Don't draw high placemarks (e.g. satellites) that aren't visible.
-        if ( qpos.v[Q_Z] < 0
-             && ( ( earthCenteredX * earthCenteredX
-                    + earthCenteredY * earthCenteredY )
-                  < radius * radius ) ) {
-            return true;
-        }
-    }
-
-    return false;
+    Q_Q( const GnomonicProjection );
+    q->screenCoordinates(coordinates, viewport, dummyX, dummyY, globeHidesPoint);
+    return globeHidesPoint;
 }
 
+QPainterPath GnomonicProjection::mapShape( const ViewportParams *viewport ) const
+{
+    // Convenience variables
+    int  width  = viewport->width();
+    int  height = viewport->height();
 
+    // Cover the whole screen
+    QPainterPath mapShape;
+    mapShape.addRect(
+                    0,
+                    0,
+                    width,
+                    height );
+
+    return mapShape;
+}
 
 }

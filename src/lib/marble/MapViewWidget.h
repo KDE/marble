@@ -53,6 +53,7 @@ private Q_SLOTS:
     void globeViewRequested();
     void mercatorViewRequested();
     void flatViewRequested();
+    void gnomonicViewRequested();
 
  private:
     Q_PRIVATE_SLOT( d, void celestialBodySelected( int comboIndex ) )

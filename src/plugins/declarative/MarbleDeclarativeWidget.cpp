@@ -194,6 +194,8 @@ QString MarbleWidget::projection( ) const
         return "Mercator";
     case Marble::Spherical:
         return "Spherical";
+    case Marble::Gnomonic:
+        return "Gnomonic";
     }
 
     Q_ASSERT( false && "Marble got a new projection which we do not know about yet" );

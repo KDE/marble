@@ -253,14 +253,12 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     int     bump = 8;
 
     if ( radius * radius > imgradius
-         || viewport->projection() == Equirectangular
-         || viewport->projection() == Mercator )
+         || viewport->projection() != Spherical )
     {
         int yTop = 0;
         int yBottom = imgheight;
 
-        if( viewport->projection() == Equirectangular
-            || viewport->projection() == Mercator )
+        if( viewport->projection() != Spherical )
         {
             // Calculate translation of center point
             const qreal centerLat = viewport->centerLatitude();
@@ -275,6 +273,10 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
                 int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
                 yTop = ( imgry - 2 * radius + yCenterOffset < 0 ) ? 0 : imgry - 2 * radius + yCenterOffset;
                 yBottom = ( imgry + 2 * radius + yCenterOffset > imgheight )? imgheight : imgry + 2 * radius + yCenterOffset;
+            }
+            else {
+                yTop = 0;
+                yBottom = imgheight;
             }
         }
 

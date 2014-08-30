@@ -149,9 +149,11 @@ set(marblewidget_SRCS
     ViewParams.cpp
     projections/AbstractProjection.cpp
     projections/CylindricalProjection.cpp
+    projections/AzimuthalProjection.cpp
     projections/SphericalProjection.cpp
     projections/EquirectProjection.cpp
     projections/MercatorProjection.cpp
+    projections/GnomonicProjection.cpp
     VisiblePlacemark.cpp
     PlacemarkLayout.cpp
     Planet.cpp
@@ -164,6 +166,7 @@ set(marblewidget_SRCS
     EquirectScanlineTextureMapper.cpp
     MercatorScanlineTextureMapper.cpp
     TileScalingTextureMapper.cpp
+    GnomonicScanlineTextureMapper.cpp
     VectorTileModel.cpp
     DiscCache.cpp
     ServerLayout.cpp

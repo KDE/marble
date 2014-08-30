@@ -23,6 +23,7 @@
 #include "SphericalProjection.h"
 #include "EquirectProjection.h"
 #include "MercatorProjection.h"
+#include "GnomonicProjection.h"
 
 
 namespace Marble
@@ -60,6 +61,7 @@ public:
     static const SphericalProjection  s_sphericalProjection;
     static const EquirectProjection   s_equirectProjection;
     static const MercatorProjection   s_mercatorProjection;
+    static const GnomonicProjection   s_gnomonicProjection;
 
     GeoDataCoordinates   m_focusPoint;
 };
@@ -67,6 +69,7 @@ public:
 const SphericalProjection  ViewportParamsPrivate::s_sphericalProjection;
 const EquirectProjection   ViewportParamsPrivate::s_equirectProjection;
 const MercatorProjection   ViewportParamsPrivate::s_mercatorProjection;
+const GnomonicProjection   ViewportParamsPrivate::s_gnomonicProjection;
 
 ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
                                               qreal centerLongitude, qreal centerLatitude,
@@ -95,6 +98,8 @@ const AbstractProjection *ViewportParamsPrivate::abstractProjection(Projection p
         return &s_equirectProjection;
     case Mercator:
         return &s_mercatorProjection;
+    case Gnomonic:
+        return &s_gnomonicProjection;
     }
 
     return 0;
