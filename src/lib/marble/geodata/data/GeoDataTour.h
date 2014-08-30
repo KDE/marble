@@ -26,11 +26,10 @@ class GEODATA_EXPORT GeoDataTour : public GeoDataFeature
 {
 public:
     GeoDataTour();
-    GeoDataTour(const GeoDataTour &other);
-    GeoDataTour& operator=(const GeoDataTour &other);
+    virtual ~GeoDataTour();
+
     bool operator==(const GeoDataTour &other) const;
     bool operator!=(const GeoDataTour &other) const;
-    virtual ~GeoDataTour();
 
     GeoDataPlaylist* playlist();
     const GeoDataPlaylist* playlist() const;
@@ -41,7 +40,8 @@ public:
     static const GeoDataTour null;
 
 private:
-    GeoDataTourPrivate * const d;
+    GeoDataTourPrivate *p();
+    const GeoDataTourPrivate *p() const;
 
 };
 

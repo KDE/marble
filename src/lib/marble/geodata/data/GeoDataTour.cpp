@@ -9,46 +9,39 @@
 //
 
 #include "GeoDataTour.h"
-#include "GeoDataPlaylist.h"
-#include "GeoDataTypes.h"
+#include "GeoDataTour_p.h"
+
 
 namespace Marble
 {
 
-class GeoDataTourPrivate
-{
-public:
-    GeoDataTourPrivate() :
-        m_playlist(0)
-    {}
-    GeoDataPlaylist *m_playlist;
-};
-
 const GeoDataTour GeoDataTour::null;
 
-GeoDataTour::GeoDataTour() :
-    GeoDataFeature(),
-    d(new GeoDataTourPrivate)
+GeoDataTour::GeoDataTour()
+    : GeoDataFeature( new GeoDataTourPrivate )
 {
+    // nothing to do
 }
 
-GeoDataTour::GeoDataTour(const GeoDataTour &other) :
-    GeoDataFeature(),
-    d(new GeoDataTourPrivate(*other.d))
+GeoDataTour::~GeoDataTour()
 {
+    // nothing to do;
 }
 
-GeoDataTour& GeoDataTour::operator=(const GeoDataTour &other)
+GeoDataTourPrivate *GeoDataTour::p()
 {
-    GeoDataFeature::operator=(other);
-    *d = *other.d;
-    return *this;
+    return static_cast<GeoDataTourPrivate*>(d);
+}
+
+const GeoDataTourPrivate *GeoDataTour::p() const
+{
+    return static_cast<GeoDataTourPrivate*>(d);
 }
 
 bool GeoDataTour::operator==(const GeoDataTour& other) const
 {
     return equals( other ) &&
-           *d->m_playlist == *other.d->m_playlist;
+           *p()->m_playlist == *other.p()->m_playlist;
 }
 
 bool GeoDataTour::operator!=(const GeoDataTour& other) const
@@ -56,25 +49,22 @@ bool GeoDataTour::operator!=(const GeoDataTour& other) const
     return !this->operator==(other);
 }
 
-GeoDataTour::~GeoDataTour()
-{
-    delete d;
-}
-
 GeoDataPlaylist* GeoDataTour::playlist()
 {
-    return d->m_playlist;
+    detach();
+    return p()->m_playlist;
 }
 
 const GeoDataPlaylist* GeoDataTour::playlist() const
 {
-    return d->m_playlist;
+    return p()->m_playlist;
 }
 
 void GeoDataTour::setPlaylist(GeoDataPlaylist *playlist)
 {
-    d->m_playlist = playlist;
-    d->m_playlist->setParent( this );
+    detach();
+    p()->m_playlist = playlist;
+    p()->m_playlist->setParent( this );
 }
 
 const char *GeoDataTour::nodeType() const
