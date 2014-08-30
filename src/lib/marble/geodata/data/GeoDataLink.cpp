@@ -60,7 +60,7 @@ GeoDataLink &GeoDataLink::operator=( const GeoDataLink &other )
     return *this;
 }
 
-bool GeoDataLink::operator==( const GeoDataLink& other )
+bool GeoDataLink::operator==( const GeoDataLink& other ) const
 {
     return equals(other) &&
            d->m_href == other.d->m_href &&
@@ -73,7 +73,7 @@ bool GeoDataLink::operator==( const GeoDataLink& other )
            d->m_httpQuery == other.d->m_httpQuery;
 }
 
-bool GeoDataLink::operator!=( const GeoDataLink& other )
+bool GeoDataLink::operator!=( const GeoDataLink& other ) const
 {
     return !this->operator==(other);
 }

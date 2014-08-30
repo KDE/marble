@@ -40,8 +40,8 @@ public:
     GeoDataLink( const GeoDataLink &other );
 
     GeoDataLink& operator=( const GeoDataLink &other );
-    bool operator==( const GeoDataLink &other );
-    bool operator!=( const GeoDataLink &other );
+    bool operator==( const GeoDataLink &other ) const;
+    bool operator!=( const GeoDataLink &other ) const;
 
     ~GeoDataLink();
 
