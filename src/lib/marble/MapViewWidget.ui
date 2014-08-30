@@ -63,6 +63,15 @@
         <normaloff>:/icons/map-mercator.png</normaloff>:/icons/map-mercator.png</iconset>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>Gnomonic</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../../apps/marble-ui/marble.qrc">
+        <normaloff>:/icons/map-gnomonic.png</normaloff>:/icons/map-gnomonic.png</iconset>
+      </property>
+     </item>
     </widget>
    </item>
    <item>
