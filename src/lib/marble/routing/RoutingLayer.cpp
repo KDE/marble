@@ -384,8 +384,8 @@ void RoutingLayerPrivate::renderRequest( GeoPainter *painter )
 {
     m_regions.clear();
     for ( int i = 0; i < m_routeRequest->size(); ++i ) {
-        GeoDataCoordinates pos = m_routeRequest->at( i );
-        if ( pos.longitude() != 0.0 && pos.latitude() != 0.0 ) {
+        const GeoDataCoordinates pos = m_routeRequest->at( i );
+        if ( pos.isValid() ) {
             QPixmap pixmap = m_routeRequest->pixmap( i );
             painter->drawPixmap( pos, pixmap );
             QRegion region = painter->regionFromRect( pos, pixmap.width(), pixmap.height() );
