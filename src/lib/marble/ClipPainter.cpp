@@ -121,13 +121,13 @@ ClipPainter::~ClipPainter()
 }
 
 
-void ClipPainter::setClipping(bool enable)
+void ClipPainter::setScreenClip(bool enable)
 {
     d->m_doClip = enable;
 }
 
 
-bool ClipPainter::isClipping() const
+bool ClipPainter::hasScreenClip() const
 {
     return d->m_doClip;
 }

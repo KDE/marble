@@ -56,8 +56,8 @@ class MARBLE_EXPORT ClipPainter : public QPainter
 
     ~ClipPainter();
 
-    void setClipping( bool enable );
-    bool isClipping() const;
+    void setScreenClip( bool enable );
+    bool hasScreenClip() const;
 
     void drawPolygon( const QPolygonF &, 
                       Qt::FillRule fillRule = Qt::OddEvenFill );
