@@ -95,7 +95,11 @@ class MARBLE_EXPORT AbstractProjection
     // - transverse: orthogonally oriented compared to the Earth's axis
     // - oblique: somewhere in between
 
-    virtual bool   isOrientedNormal() const;
+    virtual bool isOrientedNormal() const;
+
+    virtual bool isClippedToSphere() const;
+
+    virtual qreal clippingRadius() const;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.

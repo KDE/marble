@@ -28,6 +28,7 @@
 #include "TextureColorizer.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
+#include "AbstractProjection.h"
 
 using namespace Marble;
 
@@ -109,28 +110,22 @@ void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, 
     // Initialize needed constants:
 
     const int imageHeight = m_canvasImage.height();
-    const qint64  radius      = viewport->radius();
-    // Calculate how many degrees are being represented per pixel.
-    const float rad2Pixel = (float)( 2 * radius ) / M_PI;
-
-    //mDebug() << "m_maxGlobalX: " << m_maxGlobalX;
-    //mDebug() << "radius      : " << radius << endl;
-
-    // Calculate translation of center point
-    const qreal centerLat = viewport->centerLatitude();
-
-    const int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
 
     // Calculate y-range the represented by the center point, yTop and
     // what actually can be painted
-    const int yTop     = imageHeight / 2 - 2 * radius + yCenterOffset;
-    int yPaintedTop    = imageHeight / 2 - 2 * radius + yCenterOffset;
-    int yPaintedBottom = imageHeight / 2 + 2 * radius + yCenterOffset;
+
+    qreal realYTop, realYBottom, dummyX;
+    GeoDataCoordinates yNorth(0, viewport->currentProjection()->maxLat(), 0);
+    GeoDataCoordinates ySouth(0, viewport->currentProjection()->minLat(), 0);
+    viewport->screenCoordinates(yNorth, dummyX, realYTop );
+    viewport->screenCoordinates(ySouth, dummyX, realYBottom );
+
+    const int yTop     = qBound(0.0, realYTop, (qreal)(imageHeight));
+    int yPaintedTop    = yTop;
+    int yPaintedBottom = qBound(0.0, realYBottom, (qreal)(imageHeight));
  
-    if (yPaintedTop < 0)                yPaintedTop = 0;
-    if (yPaintedTop > imageHeight)    yPaintedTop = imageHeight;
-    if (yPaintedBottom < 0)             yPaintedBottom = 0;
-    if (yPaintedBottom > imageHeight) yPaintedBottom = imageHeight;
+    yPaintedTop = qBound(0, yPaintedTop, imageHeight);
+    yPaintedBottom = qBound(0, yPaintedBottom, imageHeight);
 
     const int numThreads = m_threadPool.maxThreadCount();
     const int yStep = ( yPaintedBottom - yPaintedTop ) / numThreads;

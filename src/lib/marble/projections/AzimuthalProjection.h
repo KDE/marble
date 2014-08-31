@@ -47,6 +47,16 @@ class AzimuthalProjection : public AbstractProjection
 
     virtual PreservationType preservationType() const { return NoPreservation; }
 
+    virtual bool isClippedToSphere() const;
+
+    virtual qreal clippingRadius() const;
+
+    bool  mapCoversViewport( const ViewportParams *viewport ) const;
+
+    virtual bool screenCoordinates( const GeoDataLineString &lineString,
+                            const ViewportParams *viewport,
+                            QVector<QPolygonF*> &polygons ) const;
+
     using AbstractProjection::screenCoordinates;
 
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const;

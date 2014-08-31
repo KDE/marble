@@ -65,10 +65,6 @@ class SphericalProjection : public AzimuthalProjection
                             const QSizeF& size,
                             bool &globeHidesPoint ) const;
 
-    virtual bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const;
-
     using AbstractProjection::screenCoordinates;
 
     /**
@@ -84,8 +80,6 @@ class SphericalProjection : public AzimuthalProjection
                          const ViewportParams *params,
                          qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
-
-    bool  mapCoversViewport( const ViewportParams *viewport ) const;
 
  protected:
     SphericalProjection(SphericalProjectionPrivate *dd );

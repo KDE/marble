@@ -25,6 +25,7 @@
 
 #include "MarbleGlobal.h"
 #include "ViewportParams.h"
+#include "AbstractProjection.h"
 
 // #define MARBLE_DEBUG
 
@@ -165,10 +166,12 @@ GeoDataLinearRing GeoPainterPrivate::createLinearRingFromGeoRect( const GeoDataC
 
 bool GeoPainterPrivate::doClip( const ViewportParams *viewport )
 {
-    if ( viewport->projection() != Spherical )
+    if ( !viewport->currentProjection()->isClippedToSphere() )
         return true;
 
-    return ( viewport->radius() > viewport->width() / 2 || viewport->radius() > viewport->height() / 2 );
+    const qint64  radius = viewport->radius() * viewport->currentProjection()->clippingRadius();
+
+    return ( radius > viewport->width() / 2 || radius > viewport->height() / 2 );
 }
 
 // -------------------------------------------------------------------------------------------------

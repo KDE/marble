@@ -37,6 +37,8 @@ class GnomonicProjection : public AzimuthalProjection
 
     virtual ~GnomonicProjection();
 
+    virtual qreal clippingRadius() const;
+
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param lon    the lon coordinate of the requested pixel position
@@ -56,10 +58,6 @@ class GnomonicProjection : public AzimuthalProjection
                             const QSizeF& size,
                             bool &globeHidesPoint ) const;
 
-    virtual bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const;
-
     using AbstractProjection::screenCoordinates;
 
     /**
@@ -75,10 +73,6 @@ class GnomonicProjection : public AzimuthalProjection
                          const ViewportParams *params,
                          qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
-
-    bool  mapCoversViewport( const ViewportParams *viewport ) const;
-
-    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
  protected:
     GnomonicProjection(GnomonicProjectionPrivate *dd );

@@ -115,6 +115,17 @@ bool AbstractProjection::isOrientedNormal() const
     return true;
 }
 
+bool AbstractProjection::isClippedToSphere() const
+{
+    return false;
+}
+
+qreal AbstractProjection::clippingRadius() const
+{
+    return 0;
+}
+
+
 bool AbstractProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
                                             qreal &x, qreal &y ) const

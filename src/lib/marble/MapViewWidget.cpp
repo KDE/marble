@@ -239,26 +239,12 @@ class MapViewWidget::Private {
         m_globeViewButton->setToolTip( tr("Globe View") );
         m_globeViewButton->setCheckable(true);
         m_globeViewButton->setChecked(false);
-        m_globeViewButton->setPopupMode(QToolButton::MenuButtonPopup);
-
-        m_popupMenuSpherical = new QMenu;
 
         m_globeViewAction = new QAction( QIcon(":/icons/map-globe.png"),
                                              tr( "Spherical view" ),
-                                             m_popupMenuSpherical );
+                                             m_globeViewButton );
         m_globeViewAction->setCheckable( true );
         m_globeViewAction->setChecked( false );
-
-        m_gnomonicViewAction = new QAction( QIcon(":/icons/map-gnomonic.png"),
-                                            tr( "Gnomonic view" ),
-                                            m_popupMenuSpherical);
-        m_gnomonicViewAction->setCheckable( true );
-        m_gnomonicViewAction->setChecked( false );
-
-        m_popupMenuSpherical->addAction( m_globeViewAction );
-        m_popupMenuSpherical->addAction( m_gnomonicViewAction );
-
-        m_globeViewButton->setMenu( m_popupMenuSpherical );
 
         m_mercatorViewButton = new QToolButton;
         m_mercatorViewButton->setIcon( QIcon(":/icons/map-mercator.png") );
@@ -281,8 +267,15 @@ class MapViewWidget::Private {
         m_flatViewAction->setCheckable(true);
         m_flatViewAction->setChecked(false);
 
+        m_gnomonicViewAction = new QAction( QIcon(":/icons/map-gnomonic.png"),
+                                            tr( "Gnomonic view" ),
+                                            m_popupMenuFlat);
+        m_gnomonicViewAction->setCheckable( true );
+        m_gnomonicViewAction->setChecked( false );
+
         m_popupMenuFlat->addAction(m_mercatorViewAction);
         m_popupMenuFlat->addAction(m_flatViewAction);
+        m_popupMenuFlat->addAction(m_gnomonicViewAction);
         m_mercatorViewButton->setMenu(m_popupMenuFlat);
 
         m_toolBar->addWidget(m_globeViewButton);
@@ -347,7 +340,6 @@ class MapViewWidget::Private {
     QToolButton *m_globeViewButton;
     QToolButton *m_mercatorViewButton;
     QMenu *m_popupMenuFlat;
-    QMenu *m_popupMenuSpherical;
     QAction *m_flatViewAction;
     QAction *m_mercatorViewAction;
     QAction *m_celestialBodyAction;

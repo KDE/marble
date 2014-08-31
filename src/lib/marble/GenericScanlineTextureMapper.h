@@ -8,8 +8,8 @@
 // Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#ifndef MARBLE_GNOMONICSCANLINETEXTUREMAPPER_H
-#define MARBLE_GNOMONICSCANLINETEXTUREMAPPER_H
+#ifndef MARBLE_GENERICSCANLINETEXTUREMAPPER_H
+#define MARBLE_GENERICSCANLINETEXTUREMAPPER_H
 
 
 #include "TextureMapperInterface.h"
@@ -25,10 +25,10 @@ namespace Marble
 
 class StackedTileLoader;
 
-class GnomonicScanlineTextureMapper : public TextureMapperInterface
+class GenericScanlineTextureMapper : public TextureMapperInterface
 {
  public:
-    GnomonicScanlineTextureMapper( StackedTileLoader *tileLoader );
+    GenericScanlineTextureMapper( StackedTileLoader *tileLoader );
 
     virtual void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,

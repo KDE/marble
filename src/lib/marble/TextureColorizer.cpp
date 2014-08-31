@@ -33,6 +33,7 @@
 #include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
+#include "AbstractProjection.h"
 
 namespace Marble
 {
@@ -241,7 +242,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
 
     drawTextureMap( &painter );
 
-    const qint64   radius   = viewport->radius();
+    const qint64 radius = viewport->radius() * viewport->currentProjection()->clippingRadius();
 
     const int  imgheight = origimg->height();
     const int  imgwidth  = origimg->width();
@@ -253,31 +254,20 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
     int     bump = 8;
 
     if ( radius * radius > imgradius
-         || viewport->projection() != Spherical )
+         || !viewport->currentProjection()->isClippedToSphere() )
     {
         int yTop = 0;
         int yBottom = imgheight;
 
-        if( viewport->projection() != Spherical )
+        if( !viewport->currentProjection()->isClippedToSphere() && !viewport->currentProjection()->traversablePoles() )
         {
-            // Calculate translation of center point
-            const qreal centerLat = viewport->centerLatitude();
-
-            const float rad2Pixel = (qreal)( 2 * radius ) / M_PI;
-            if ( viewport->projection() == Equirectangular ) {
-                int yCenterOffset = (int)( centerLat * rad2Pixel );
-                yTop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
-                yBottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
-            }
-            else if ( viewport->projection() == Mercator ) {
-                int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
-                yTop = ( imgry - 2 * radius + yCenterOffset < 0 ) ? 0 : imgry - 2 * radius + yCenterOffset;
-                yBottom = ( imgry + 2 * radius + yCenterOffset > imgheight )? imgheight : imgry + 2 * radius + yCenterOffset;
-            }
-            else {
-                yTop = 0;
-                yBottom = imgheight;
-            }
+            qreal realYTop, realYBottom, dummyX;
+            GeoDataCoordinates yNorth(0, viewport->currentProjection()->maxLat(), 0);
+            GeoDataCoordinates ySouth(0, viewport->currentProjection()->minLat(), 0);
+            viewport->screenCoordinates(yNorth, dummyX, realYTop );
+            viewport->screenCoordinates(ySouth, dummyX, realYBottom );
+            yTop = qBound(0.0, realYTop, (qreal)(imgheight));
+            yBottom = qBound(0.0, realYBottom, (qreal)(imgheight));
         }
 
         const int itEnd = yBottom;
