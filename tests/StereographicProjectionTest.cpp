@@ -52,8 +52,8 @@ void StereographicProjectionTest::screenCoordinatesOfCenter()
         const bool retval = viewport.geoCoordinates( screenCoordinates.x(), screenCoordinates.y(), lon, lat, GeoDataCoordinates::Degree );
 
         QVERIFY( retval ); // we want valid coordinates
-        QCOMPARE( lon, expected.longitude( GeoDataCoordinates::Degree ) );
-        QFUZZYCOMPARE( lat, expected.latitude( GeoDataCoordinates::Degree ), 0.0001 );
+        QFUZZYCOMPARE( lon, expected.longitude( GeoDataCoordinates::Degree ), 0.5 );
+        QFUZZYCOMPARE( lat, expected.latitude( GeoDataCoordinates::Degree ), 0.5 );
     }
 }
 
