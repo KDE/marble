@@ -8,6 +8,7 @@
 // Copyright 2008-2009      Patrick Spendrin  <ps_ml@gmx.de>
 // Copyright 2010           Thibaut Gridel <tgridel@free.fr>
 // Copyright 2011-2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2014           Gábor Péterffy   <peterffy95@gmail.com>
 //
 
 #include "GeometryLayer.h"
@@ -25,6 +26,7 @@
 #include "GeoDataStyleMap.h"
 #include "GeoDataTrack.h"
 #include "GeoDataTypes.h"
+#include "GeoDataFeature.h"
 #include "MarbleDebug.h"
 #include "GeoDataFeature.h"
 #include "GeoPainter.h"
@@ -352,7 +354,6 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
     if ( overlay->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
         GeoDataPhotoOverlay const * photoOverlay = static_cast<GeoDataPhotoOverlay const *>( overlay );
         GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem( overlay );
-        photoItem->setPhotoFile( photoOverlay->absoluteIconFile() );
         photoItem->setPoint( photoOverlay->point() );
         item = photoItem;
     } else if ( overlay->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
@@ -429,6 +430,37 @@ void GeometryLayer::resetCacheData()
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );
     emit repaintNeeded();
+}
+
+QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint& curpos , const ViewportParams *viewport)
+{
+    QVector<const GeoDataFeature*> result;
+    int maxZoom = qMin<int>( qMax<int>( qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 ), 1), GeometryLayerPrivate::maximumZoomLevel() );
+    foreach ( GeoGraphicsItem * item, d->m_scene.items( viewport->viewLatLonAltBox(), maxZoom ) ) {
+        if ( item->feature()->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
+            GeoPhotoGraphicsItem* photoItem = dynamic_cast<GeoPhotoGraphicsItem*>( item );
+            qreal x(0.0), y( 0.0 );
+            viewport->screenCoordinates( photoItem->point().coordinates(), x, y );
+
+            if ( photoItem->style() != 0 &&
+                 !photoItem->style()->iconStyle().icon().isNull() ) {
+
+                int halfIconWidth = photoItem->style()->iconStyle().icon().size().width() / 2;
+                int halfIconHeight = photoItem->style()->iconStyle().icon().size().height() / 2;
+
+                if ( x - halfIconWidth < curpos.x() &&
+                     curpos.x() < x + halfIconWidth &&
+                     y - halfIconHeight / 2 < curpos.y() &&
+                     curpos.y() < y + halfIconHeight / 2 ) {
+                    result.push_back( item->feature() );
+                }
+            } else if ( curpos.x() == x && curpos.y() == y ) {
+                result.push_back( item->feature() );
+            }
+        }
+    }
+
+    return result;
 }
 
 }

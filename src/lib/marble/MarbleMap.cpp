@@ -435,9 +435,9 @@ int  MarbleMap::maximumZoom() const
     return 2100;
 }
 
-QVector<const GeoDataPlacemark*> MarbleMap::whichFeatureAt( const QPoint& curpos ) const
+QVector<const GeoDataFeature*> MarbleMap::whichFeatureAt( const QPoint& curpos ) const
 {
-    return d->m_placemarkLayer.whichPlacemarkAt( curpos );
+    return d->m_placemarkLayer.whichPlacemarkAt( curpos ) + d->m_geometryLayer.whichFeatureAt( curpos, viewport() );
 }
 
 void MarbleMap::reload()

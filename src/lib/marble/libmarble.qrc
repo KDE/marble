@@ -96,6 +96,7 @@
         <file alias="city.html">webpopup/city.html</file>
         <file alias="nation.html">webpopup/nation.html</file>
         <file alias="skyplace.html">webpopup/skyplace.html</file>
+        <file alias="photooverlay.html">webpopup/photooverlay.html</file>
     </qresource>
     <qresource prefix="/htmlfeatures">
         <file alias="files/bootstrap.min.css">htmlfeatures/bootstrap.min.css</file>

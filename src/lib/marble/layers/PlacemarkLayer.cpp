@@ -110,7 +110,7 @@ QString PlacemarkLayer::runtimeTrace() const
     return m_layout.runtimeTrace();
 }
 
-QVector<const GeoDataPlacemark *> PlacemarkLayer::whichPlacemarkAt( const QPoint &pos )
+QVector<const GeoDataFeature *> PlacemarkLayer::whichPlacemarkAt( const QPoint &pos )
 {
     return m_layout.whichPlacemarkAt( pos );
 }

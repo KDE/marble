@@ -77,7 +77,7 @@ class PlacemarkLayout : public QObject
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
-    QVector<const GeoDataPlacemark*> whichPlacemarkAt( const QPoint &pos );
+    QVector<const GeoDataFeature *> whichPlacemarkAt( const QPoint &pos );
 
     QString runtimeTrace() const;
 

@@ -29,14 +29,6 @@ public:
 
     GeoDataPoint point() const;
 
-    void setPhoto( const QImage &photo );
-
-    QImage photo() const;
-
-    void setPhotoFile( const QString &filename );
-
-    QString photoPath() const;
-
     virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
 
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
@@ -45,8 +37,6 @@ protected:
     GeoDataPoint m_point;
 
     QImage m_photo;
-
-    QString m_photoPath;
 };
 
 }

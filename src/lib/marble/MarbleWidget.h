@@ -409,7 +409,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /// @name Placemark management
     //@{
 
-    QVector<const GeoDataPlacemark*> whichFeatureAt( const QPoint& ) const;
+    QVector<const GeoDataFeature *> whichFeatureAt( const QPoint& ) const;
 
     //@}
 

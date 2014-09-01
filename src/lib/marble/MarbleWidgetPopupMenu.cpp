@@ -8,6 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn      <tackat@kde.org>
 // Copyright 2007      Inge Wallin       <ingwa@kde.org>
 // Copyright 2012      Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
+// Copyright 2014      Gábor Péterffy    <peterffy95@gmail.com>
 //
 
 // Self
@@ -24,6 +25,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataSnippet.h"
 #include "GeoDataStyle.h"
+#include "GeoDataPhotoOverlay.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "MarbleClock.h"
@@ -56,7 +58,7 @@ public:
     const MarbleModel    *const m_model;
     MarbleWidget   *const m_widget;
 
-    QVector<const GeoDataPlacemark*>  m_featurelist;
+    QVector<const GeoDataFeature*>  m_featurelist;
     QList<AbstractDataPluginItem *> m_itemList;
 
     QMenu m_lmbMenu;
@@ -91,6 +93,7 @@ public:
     static void setupDialogNation( PopupLayer *popup, const GeoDataPlacemark *placemark );
     static void setupDialogGeoPlaces( PopupLayer *popup, const GeoDataPlacemark *placemark );
     static void setupDialogSkyPlaces( PopupLayer *popup, const GeoDataPlacemark *placemark );
+    static void setupDialogPhotoOverlay( PopupLayer *popup, const GeoDataPhotoOverlay *overlay);
 };
 
 MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel *model, MarbleWidgetPopupMenu* parent ) :
@@ -314,6 +317,32 @@ void MarbleWidgetPopupMenu::Private::setupDialogSkyPlaces( PopupLayer *popup, co
     popup->setContent(doc.finalText());
 }
 
+void MarbleWidgetPopupMenu::Private::setupDialogPhotoOverlay( PopupLayer *popup, const GeoDataPhotoOverlay *index )
+{
+    const GeoDataCoordinates location = index->point().coordinates();
+    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/photooverlay.html");
+
+    if ( !descriptionFile.open(QIODevice::ReadOnly) ) {
+        return;
+    }
+
+    const QString description = descriptionFile.readAll();
+    TemplateDocument doc(description);
+    doc["name"] = index->name();
+    doc["latitude"] = location.latToString();
+    doc["longitude"] = location.lonToString();
+    doc["elevation"] = QString::number(location.altitude(), 'f', 2);
+    doc["shortDescription"] = filterEmptyShortDescription(index->description());
+    doc["source"] = index->absoluteIconFile();
+    doc["width"] = QString::number(200);
+    doc["height"] = QString::number(100);
+    QString const basePath = index->resolvePath(".");
+    QUrl const baseUrl = basePath != "." ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
+    popup->setContent(doc.finalText(), baseUrl );
+}
+
 MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
                                          const MarbleModel *model)
     : QObject(widget),
@@ -357,8 +386,8 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     int  actionidx = 1;
 
-    QVector<const GeoDataPlacemark*>::const_iterator it = d->m_featurelist.constBegin();
-    QVector<const GeoDataPlacemark*>::const_iterator const itEnd = d->m_featurelist.constEnd();
+    QVector<const GeoDataFeature*>::const_iterator it = d->m_featurelist.constBegin();
+    QVector<const GeoDataFeature*>::const_iterator const itEnd = d->m_featurelist.constEnd();
     for (; it != itEnd; ++it )
     {
         QString name = (*it)->name();
@@ -441,17 +470,28 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
     int actionidx = action->data().toInt();
 
     if ( actionidx > 0 ) {
-        const GeoDataPlacemark *placemark = d->m_featurelist.at( actionidx -1 );
+        const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>(d->m_featurelist.at( actionidx -1 ));
+        const GeoDataPhotoOverlay *overlay = dynamic_cast<const GeoDataPhotoOverlay*>(d->m_featurelist.at( actionidx - 1 ));
         PopupLayer* popup = d->m_widget->popupLayer();
-        bool isSatellite = (placemark->visualCategory() == GeoDataFeature::Satellite);
-        bool isCity = (placemark->visualCategory() >= GeoDataFeature::SmallCity &&
-                         placemark->visualCategory() <= GeoDataFeature::LargeNationCapital);
-        bool isNation = (placemark->visualCategory() == GeoDataFeature::Nation);
+        bool isSatellite = false;
+        bool isCity = false;
+        bool isNation = false;
+
+        if ( placemark ) {
+            isSatellite = (placemark->visualCategory() == GeoDataFeature::Satellite);
+            isCity = (placemark->visualCategory() >= GeoDataFeature::SmallCity &&
+                      placemark->visualCategory() <= GeoDataFeature::LargeNationCapital);
+            isNation = (placemark->visualCategory() == GeoDataFeature::Nation);
+        }
+
         bool isSky = false;
+
         if ( d->m_widget->model()->mapTheme() ) {
             isSky = d->m_widget->model()->mapTheme()->head()->target() == "sky";
         }
+
         popup->setSize(QSizeF(400, 400));
+
         if (isSatellite) {
             d->setupDialogSatellite( placemark );
         } else if (isCity) {
@@ -460,36 +500,42 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
             Private::setupDialogNation( popup, placemark );
         } else if (isSky) {
             Private::setupDialogSkyPlaces( popup, placemark );
-        } else if ( placemark->role().isEmpty() ) {
+        } else if ( overlay ) {
+            Private::setupDialogPhotoOverlay( popup, overlay );
+        } else if ( placemark && placemark->role().isEmpty() ) {
             popup->setContent( placemark->description() );
-        } else {
+        } else if ( placemark ) {
             Private::setupDialogGeoPlaces( popup, placemark );
         }
 
-        if (placemark->style() == 0) {
-            popup->setBackgroundColor(QColor(Qt::white));
-            popup->setTextColor(QColor(Qt::black));
-            return;
-        }
-        if (placemark->style()->balloonStyle().displayMode() == GeoDataBalloonStyle::Hide) {
-            popup->setVisible(false);
-            return;
+        if ( placemark ) {
+            if ( placemark->style() == 0 ) {
+                popup->setBackgroundColor(QColor(Qt::white));
+                popup->setTextColor(QColor(Qt::black));
+                return;
+            }
+            if ( placemark->style()->balloonStyle().displayMode() == GeoDataBalloonStyle::Hide ) {
+                popup->setVisible(false);
+                return;
+            }
+
+            QString content = placemark->style()->balloonStyle().text();
+            if (content.length() > 0) {
+                content = content.replace("$[name]", placemark->name(), Qt::CaseInsensitive);
+                content = content.replace("$[description]", placemark->description(), Qt::CaseInsensitive);
+                content = content.replace("$[address]", placemark->address(), Qt::CaseInsensitive);
+                // @TODO: implement the line calculation, so that snippet().maxLines actually has effect.
+                content = content.replace("$[snippet]", placemark->snippet().text(), Qt::CaseInsensitive);
+                content = content.replace("$[id]", placemark->id(), Qt::CaseInsensitive);
+                QString const basePath = placemark->resolvePath(".");
+                QUrl const baseUrl = basePath != "." ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
+                popup->setContent(content, baseUrl );
+            }
+
+            popup->setBackgroundColor(placemark->style()->balloonStyle().backgroundColor());
+            popup->setTextColor(placemark->style()->balloonStyle().textColor());
         }
 
-        QString content = placemark->style()->balloonStyle().text();
-        if (content.length() > 0) {
-            content = content.replace("$[name]", placemark->name(), Qt::CaseInsensitive);
-            content = content.replace("$[description]", placemark->description(), Qt::CaseInsensitive);
-            content = content.replace("$[address]", placemark->address(), Qt::CaseInsensitive);
-            // @TODO: implement the line calculation, so that snippet().maxLines actually has effect.
-            content = content.replace("$[snippet]", placemark->snippet().text(), Qt::CaseInsensitive);
-            content = content.replace("$[id]", placemark->id(), Qt::CaseInsensitive);
-            QString const basePath = placemark->resolvePath(".");
-            QUrl const baseUrl = basePath != "." ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
-            popup->setContent(content, baseUrl );
-        }
-        popup->setBackgroundColor(placemark->style()->balloonStyle().backgroundColor());
-        popup->setTextColor(placemark->style()->balloonStyle().textColor());
         popup->popup();
     }
 }
@@ -599,8 +645,9 @@ GeoDataCoordinates MarbleWidgetPopupMenu::Private::mouseCoordinates( QAction* da
         return GeoDataCoordinates();
     }
 
-    if ( !m_featurelist.isEmpty() ) {
-        return m_featurelist.first()->coordinate( m_model->clock()->dateTime() );
+    const GeoDataPlacemark * placemark =  dynamic_cast<const GeoDataPlacemark*>( m_featurelist.first() );
+    if ( !m_featurelist.isEmpty() && placemark ) {
+        return placemark->coordinate( m_model->clock()->dateTime() );
     } else {
         QPoint p = dataContainer->data().toPoint();
         qreal lat( 0.0 ), lon( 0.0 );

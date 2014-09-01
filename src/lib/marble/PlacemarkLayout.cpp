@@ -226,13 +226,13 @@ void PlacemarkLayout::styleReset()
     m_styleResetRequested = false;
 }
 
-QVector<const GeoDataPlacemark*> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
+QVector<const GeoDataFeature*> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
 {
     if ( m_styleResetRequested ) {
         styleReset();
     }
 
-    QVector<const GeoDataPlacemark*> ret;
+    QVector<const GeoDataFeature*> ret;
 
     foreach( VisiblePlacemark* mark, m_paintOrder ) {
         if ( mark->labelRect().contains( curpos )

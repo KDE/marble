@@ -1,0 +1,32 @@
+<html>
+<head>
+%!{bootstrap}%
+<title>Place information</title>
+<link rel="stylesheet" media="screen" href="qrc:/marble/webpopup/placesscreen.css">
+<link rel="stylesheet" media="print, embossed" href="qrc:/marble/webpopup/placesprint.css"></head>
+<body>
+<div class="name"><h1>%name%</h1></div>
+<br>
+<center><img src="%source%" height="%height%" width="%width%"></center>
+<br>
+<table>
+<tr class="blue">
+  <td colspan="2">Coordinates</td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/Longitude">Longitude</a></td><td>%longitude%</td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/Latitude">Latitude</a></td><td>%latitude%</td>
+</tr>
+<tr>
+  <td><a href="http://en.m.wikipedia.org/wiki/Above_mean_sea_level">Elevation</a></td><td>%elevation% m</td>
+</tr>
+</table>
+
+<h3>Short description:</h3>
+<p>
+%shortDescription%
+</p>
+</body>
+</html>

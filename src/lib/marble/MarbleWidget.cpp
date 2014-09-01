@@ -357,7 +357,7 @@ int  MarbleWidget::maximumZoom() const
     return d->maximumZoom();
 }
 
-QVector<const GeoDataPlacemark*> MarbleWidget::whichFeatureAt( const QPoint &curpos ) const
+QVector<const GeoDataFeature*> MarbleWidget::whichFeatureAt( const QPoint &curpos ) const
 {
     return d->map()->whichFeatureAt( curpos );
 }

@@ -22,6 +22,7 @@ class QModelIndex;
 namespace Marble
 {
 class GeoPainter;
+class GeoDataFeature;
 class ViewportParams;
 class GeometryLayerPrivate;
 
@@ -40,6 +41,8 @@ public:
     RenderState renderState() const;
     
     virtual QString runtimeTrace() const;
+
+    QVector<const GeoDataFeature*> whichFeatureAt( const QPoint& curpos, const ViewportParams * viewport );
 
 public Q_SLOTS:
     void addPlacemarks( QModelIndex index, int first, int last );

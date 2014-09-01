@@ -44,7 +44,7 @@ class MarbleMapPrivate;
 
 // Marble
 class GeoDataLatLonAltBox;
-class GeoDataPlacemark;
+class GeoDataFeature;
 class MarbleModel;
 class ViewportParams;
 class GeoPainter;
@@ -220,7 +220,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     qreal centerLatitude() const;
 
-    QVector<const GeoDataPlacemark*> whichFeatureAt( const QPoint& ) const;
+    QVector<const GeoDataFeature *> whichFeatureAt( const QPoint& ) const;
 
     /**
      * @brief  Return the property value by name.

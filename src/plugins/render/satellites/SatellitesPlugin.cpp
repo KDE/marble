@@ -214,18 +214,21 @@ bool SatellitesPlugin::eventFilter( QObject *object, QEvent *event )
 
     if( mouseEvent->button() == Qt::LeftButton ) {
         m_trackerList.clear();
-        QVector<const GeoDataPlacemark*> vector = widget->whichFeatureAt( mouseEvent->pos() );
-        foreach (const GeoDataPlacemark *placemark, vector) {
-            foreach (TrackerPluginItem *obj, m_satModel->items() ) {
-                if( obj->placemark() == placemark ) {
-                    m_showOrbitAction->data() = m_trackerList.size();
-                    m_showOrbitAction->setChecked( obj->isTrackVisible() );
-                    widget->popupMenu()->addAction( Qt::LeftButton, m_showOrbitAction );
+        QVector<const GeoDataFeature*> vector = widget->whichFeatureAt( mouseEvent->pos() );
+        foreach (const GeoDataFeature *feature, vector) {
+            const GeoDataPlacemark* placemark = dynamic_cast<const GeoDataPlacemark*>(feature);
+            if ( placemark ) {
+                foreach (TrackerPluginItem *obj, m_satModel->items() ) {
+                    if( obj->placemark() == placemark ) {
+                        m_showOrbitAction->data() = m_trackerList.size();
+                        m_showOrbitAction->setChecked( obj->isTrackVisible() );
+                        widget->popupMenu()->addAction( Qt::LeftButton, m_showOrbitAction );
 
-                    m_trackPlacemarkAction->data() = m_trackerList.size();
-                    widget->popupMenu()->addAction( Qt::LeftButton, m_trackPlacemarkAction );
+                        m_trackPlacemarkAction->data() = m_trackerList.size();
+                        widget->popupMenu()->addAction( Qt::LeftButton, m_trackPlacemarkAction );
 
-                    m_trackerList.append( obj );
+                        m_trackerList.append( obj );
+                    }
                 }
             }
         }

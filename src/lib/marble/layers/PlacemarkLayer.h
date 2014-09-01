@@ -73,7 +73,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
-    QVector<const GeoDataPlacemark*> whichPlacemarkAt( const QPoint &pos );
+    QVector<const GeoDataFeature *> whichPlacemarkAt( const QPoint &pos );
 
     static bool m_useXWorkaround;  // Indicates need for an X windows workaround.
  public Q_SLOTS:
