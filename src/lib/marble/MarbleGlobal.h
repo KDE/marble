@@ -44,9 +44,10 @@ Q_DECLARE_FLAGS(TessellationFlags, TessellationFlag)
 enum Projection { 
     Spherical,          ///< Spherical projection
     Equirectangular,    ///< Flat projection ("plate carree")
-    Mercator,            ///< Mercator projection
-    Gnomonic  ///< Gnomonic projection
-    // NOTE: MarbleWidget::setProjection(int) relies on Gnomonic being the last
+    Mercator,           ///< Mercator projection
+    Gnomonic,           ///< Gnomonic projection
+    Stereographic       ///< Stereographic projection
+    // NOTE: MarbleWidget::setProjection(int) relies on Stereographic being the last
     // value above. Adjust that method if you do changes here
 };
 

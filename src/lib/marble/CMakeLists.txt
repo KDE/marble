@@ -154,6 +154,7 @@ set(marblewidget_SRCS
     projections/EquirectProjection.cpp
     projections/MercatorProjection.cpp
     projections/GnomonicProjection.cpp
+    projections/StereographicProjection.cpp
     VisiblePlacemark.cpp
     PlacemarkLayout.cpp
     Planet.cpp

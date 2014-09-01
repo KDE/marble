@@ -195,6 +195,7 @@ class MapViewWidget::Private {
           m_mercatorViewAction( 0 ),
           m_celestialBodyAction( 0 ),
           m_gnomonicViewAction( 0 ),
+          m_stereographicViewAction( 0 ),
           m_globeViewAction( 0 )
     {
         m_mapSortProxy.setDynamicSortFilter( true );
@@ -273,9 +274,17 @@ class MapViewWidget::Private {
         m_gnomonicViewAction->setCheckable( true );
         m_gnomonicViewAction->setChecked( false );
 
+        m_stereographicViewAction = new QAction( QIcon(":/icons/map-globe.png"),
+                                            tr( "Stereographic view" ),
+                                            m_popupMenuFlat);
+        m_stereographicViewAction->setCheckable( true );
+        m_stereographicViewAction->setChecked( false );
+
+
         m_popupMenuFlat->addAction(m_mercatorViewAction);
         m_popupMenuFlat->addAction(m_flatViewAction);
         m_popupMenuFlat->addAction(m_gnomonicViewAction);
+        m_popupMenuFlat->addAction(m_stereographicViewAction);
         m_mercatorViewButton->setMenu(m_popupMenuFlat);
 
         m_toolBar->addWidget(m_globeViewButton);
@@ -295,6 +304,8 @@ class MapViewWidget::Private {
                          q, SLOT(flatViewRequested()));
         QObject::connect(m_gnomonicViewAction, SIGNAL(triggered()),
                          q, SLOT(gnomonicViewRequested()));
+        QObject::connect(m_stereographicViewAction, SIGNAL(triggered()),
+                         q, SLOT(stereographicViewRequested()));
         QObject::connect(m_globeViewAction, SIGNAL(triggered()),
                          q, SLOT(globeViewRequested()));
 
@@ -344,6 +355,7 @@ class MapViewWidget::Private {
     QAction *m_mercatorViewAction;
     QAction *m_celestialBodyAction;
     QAction *m_gnomonicViewAction;
+    QAction *m_stereographicViewAction;
     QAction *m_globeViewAction;
 };
 
@@ -513,6 +525,7 @@ void MapViewWidget::setProjection( Projection projection )
             d->m_mercatorViewAction->setChecked(false);
             d->m_flatViewAction->setChecked(false);
             d->m_gnomonicViewAction->setChecked(false);
+            d->m_stereographicViewAction->setChecked(false);
             break;
         case Marble::Mercator:
             d->m_mercatorViewButton->setChecked(true);
@@ -521,6 +534,7 @@ void MapViewWidget::setProjection( Projection projection )
             d->m_flatViewAction->setChecked(false);
             d->m_gnomonicViewAction->setChecked(false);
             d->m_globeViewAction->setChecked(false);
+            d->m_stereographicViewAction->setChecked(false);
             break;
         case Marble::Equirectangular:
             d->m_flatViewAction->setChecked(true);
@@ -529,6 +543,7 @@ void MapViewWidget::setProjection( Projection projection )
             d->m_mercatorViewAction->setChecked(false);
             d->m_gnomonicViewAction->setChecked(false);
             d->m_globeViewAction->setChecked(false);
+            d->m_stereographicViewAction->setChecked(false);
             break;
         case Marble::Gnomonic:
             d->m_flatViewAction->setChecked(false);
@@ -537,6 +552,16 @@ void MapViewWidget::setProjection( Projection projection )
             d->m_mercatorViewAction->setChecked(false);
             d->m_gnomonicViewAction->setChecked(true);
             d->m_globeViewAction->setChecked(false);
+            d->m_stereographicViewAction->setChecked(false);
+            break;
+        case Marble::Stereographic:
+            d->m_flatViewAction->setChecked(false);
+            d->m_mercatorViewButton->setChecked(false);
+            d->m_globeViewButton->setChecked(true);
+            d->m_mercatorViewAction->setChecked(false);
+            d->m_gnomonicViewAction->setChecked(false);
+            d->m_globeViewAction->setChecked(false);
+            d->m_stereographicViewAction->setChecked(true);
             break;
         }
     }
@@ -560,6 +585,11 @@ void MapViewWidget::mercatorViewRequested()
 void MapViewWidget::gnomonicViewRequested()
 {
     emit projectionChanged(Marble::Gnomonic);
+}
+
+void MapViewWidget::stereographicViewRequested()
+{
+    emit projectionChanged(Marble::Stereographic);
 }
 
 void MapViewWidget::Private::celestialBodySelected( int comboIndex )

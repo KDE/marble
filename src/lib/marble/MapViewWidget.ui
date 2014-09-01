@@ -72,6 +72,15 @@
         <normaloff>:/icons/map-gnomonic.png</normaloff>:/icons/map-gnomonic.png</iconset>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>Stereographic</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../../apps/marble-ui/marble.qrc">
+        <normaloff>:/icons/map-globe.png</normaloff>:/icons/map-globe.png</iconset>
+      </property>
+     </item>
     </widget>
    </item>
    <item>
