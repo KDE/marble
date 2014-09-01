@@ -154,49 +154,49 @@ GeoDataCoordinates RouteRequest::at( int position ) const
 QPixmap RouteRequest::pixmap(int position, int size, int margin ) const
 {
     PixmapElement const element( position, size );
-    if ( d->m_pixmapCache.contains( element ) ) {
-        return d->m_pixmapCache[element];
-    }
 
-    // Transparent background
-    bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    int const imageSize = size > 0 ? size : ( smallScreen ? 32 : 16 );
-    QImage result( imageSize, imageSize, QImage::Format_ARGB32_Premultiplied );
-    result.fill( qRgba( 0, 0, 0, 0 ) );
+    if ( !d->m_pixmapCache.contains( element ) ) {
+        // Transparent background
+        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+        int const imageSize = size > 0 ? size : ( smallScreen ? 32 : 16 );
+        QImage result( imageSize, imageSize, QImage::Format_ARGB32_Premultiplied );
+        result.fill( qRgba( 0, 0, 0, 0 ) );
 
-    // Paint a colored circle
-    QPainter painter( &result );
-    painter.setRenderHint( QPainter::Antialiasing, true );
-    painter.setPen( QColor( Qt::black ) );
-    bool const isVisited = visited( position );
-    QColor const backgroundColor = isVisited ? Oxygen::aluminumGray4 : Oxygen::forestGreen4;
-    painter.setBrush( QBrush( backgroundColor ) );
-    painter.setPen( Qt::black );
-    int const iconSize = imageSize - 2 * margin;
-    painter.drawEllipse( margin, margin, iconSize, iconSize );
+        // Paint a colored circle
+        QPainter painter( &result );
+        painter.setRenderHint( QPainter::Antialiasing, true );
+        painter.setPen( QColor( Qt::black ) );
+        bool const isVisited = visited( position );
+        QColor const backgroundColor = isVisited ? Oxygen::aluminumGray4 : Oxygen::forestGreen4;
+        painter.setBrush( QBrush( backgroundColor ) );
+        painter.setPen( Qt::black );
+        int const iconSize = imageSize - 2 * margin;
+        painter.drawEllipse( margin, margin, iconSize, iconSize );
 
-    char text = char( 'A' + position );
+        char const text = char( 'A' + position );
 
-    // Choose a suitable font size
-    QFont font = painter.font();
-    int fontSize = 20;
-    while ( fontSize-- > 0 ) {
-        font.setPointSize( fontSize );
-        QFontMetrics fontMetric( font );
-        if ( fontMetric.width( text ) <= iconSize && fontMetric.height( ) <= iconSize ) {
-            break;
+        // Choose a suitable font size
+        QFont font = painter.font();
+        int fontSize = 20;
+        while ( fontSize-- > 0 ) {
+            font.setPointSize( fontSize );
+            QFontMetrics const fontMetric( font );
+            if ( fontMetric.width( text ) <= iconSize && fontMetric.height( ) <= iconSize ) {
+                break;
+            }
         }
+
+        Q_ASSERT( fontSize );
+        font.setPointSize( fontSize );
+        painter.setFont( font );
+
+        // Paint a character denoting the position (0=A, 1=B, 2=C, ...)
+        painter.drawText( 0, 0, imageSize, imageSize, Qt::AlignCenter, QString( text ) );
+
+        d->m_pixmapCache.insert( element, QPixmap::fromImage( result ) );
     }
 
-    Q_ASSERT( fontSize );
-    font.setPointSize( fontSize );
-    painter.setFont( font );
-
-    // Paint a character denoting the position (0=A, 1=B, 2=C, ...)
-    painter.drawText( 0, 0, imageSize, imageSize, Qt::AlignCenter, QString( text ) );
-
-    d->m_pixmapCache.insert( element, QPixmap::fromImage( result ) );
-    return pixmap( position, size );
+    return d->m_pixmapCache[element];
 }
 
 void RouteRequest::clear()
