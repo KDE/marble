@@ -196,6 +196,7 @@ class MapViewWidget::Private {
           m_celestialBodyAction( 0 ),
           m_gnomonicViewAction( 0 ),
           m_stereographicViewAction( 0 ),
+          m_verticalPerspectiveViewAction( 0 ),
           m_globeViewAction( 0 )
     {
         m_mapSortProxy.setDynamicSortFilter( true );
@@ -280,11 +281,18 @@ class MapViewWidget::Private {
         m_stereographicViewAction->setCheckable( true );
         m_stereographicViewAction->setChecked( false );
 
+        m_verticalPerspectiveViewAction = new QAction( QIcon(":/icons/map-globe.png"),
+                                            tr( "Perspective Globe view" ),
+                                            m_popupMenuFlat);
+        m_verticalPerspectiveViewAction->setCheckable( true );
+        m_verticalPerspectiveViewAction->setChecked( false );
+
 
         m_popupMenuFlat->addAction(m_mercatorViewAction);
         m_popupMenuFlat->addAction(m_flatViewAction);
         m_popupMenuFlat->addAction(m_gnomonicViewAction);
         m_popupMenuFlat->addAction(m_stereographicViewAction);
+        m_popupMenuFlat->addAction(m_verticalPerspectiveViewAction);
         m_mercatorViewButton->setMenu(m_popupMenuFlat);
 
         m_toolBar->addWidget(m_globeViewButton);
@@ -306,6 +314,8 @@ class MapViewWidget::Private {
                          q, SLOT(gnomonicViewRequested()));
         QObject::connect(m_stereographicViewAction, SIGNAL(triggered()),
                          q, SLOT(stereographicViewRequested()));
+        QObject::connect(m_verticalPerspectiveViewAction, SIGNAL(triggered()),
+                         q, SLOT(verticalPerspectiveViewRequested()));
         QObject::connect(m_globeViewAction, SIGNAL(triggered()),
                          q, SLOT(globeViewRequested()));
 
@@ -356,6 +366,7 @@ class MapViewWidget::Private {
     QAction *m_celestialBodyAction;
     QAction *m_gnomonicViewAction;
     QAction *m_stereographicViewAction;
+    QAction *m_verticalPerspectiveViewAction;
     QAction *m_globeViewAction;
 };
 
@@ -526,6 +537,7 @@ void MapViewWidget::setProjection( Projection projection )
             d->m_flatViewAction->setChecked(false);
             d->m_gnomonicViewAction->setChecked(false);
             d->m_stereographicViewAction->setChecked(false);
+            d->m_verticalPerspectiveViewAction->setChecked(false);
             break;
         case Marble::Mercator:
             d->m_mercatorViewButton->setChecked(true);
@@ -535,6 +547,7 @@ void MapViewWidget::setProjection( Projection projection )
             d->m_gnomonicViewAction->setChecked(false);
             d->m_globeViewAction->setChecked(false);
             d->m_stereographicViewAction->setChecked(false);
+            d->m_verticalPerspectiveViewAction->setChecked(false);
             break;
         case Marble::Equirectangular:
             d->m_flatViewAction->setChecked(true);
@@ -544,24 +557,37 @@ void MapViewWidget::setProjection( Projection projection )
             d->m_gnomonicViewAction->setChecked(false);
             d->m_globeViewAction->setChecked(false);
             d->m_stereographicViewAction->setChecked(false);
+            d->m_verticalPerspectiveViewAction->setChecked(false);
             break;
         case Marble::Gnomonic:
             d->m_flatViewAction->setChecked(false);
-            d->m_mercatorViewButton->setChecked(false);
-            d->m_globeViewButton->setChecked(true);
+            d->m_mercatorViewButton->setChecked(true);
+            d->m_globeViewButton->setChecked(false);
             d->m_mercatorViewAction->setChecked(false);
             d->m_gnomonicViewAction->setChecked(true);
             d->m_globeViewAction->setChecked(false);
             d->m_stereographicViewAction->setChecked(false);
+            d->m_verticalPerspectiveViewAction->setChecked(false);
             break;
         case Marble::Stereographic:
             d->m_flatViewAction->setChecked(false);
-            d->m_mercatorViewButton->setChecked(false);
-            d->m_globeViewButton->setChecked(true);
+            d->m_mercatorViewButton->setChecked(true);
+            d->m_globeViewButton->setChecked(false);
             d->m_mercatorViewAction->setChecked(false);
             d->m_gnomonicViewAction->setChecked(false);
             d->m_globeViewAction->setChecked(false);
             d->m_stereographicViewAction->setChecked(true);
+            d->m_verticalPerspectiveViewAction->setChecked(false);
+            break;
+        case Marble::VerticalPerspective:
+            d->m_flatViewAction->setChecked(false);
+            d->m_mercatorViewButton->setChecked(true);
+            d->m_globeViewButton->setChecked(false);
+            d->m_mercatorViewAction->setChecked(false);
+            d->m_gnomonicViewAction->setChecked(false);
+            d->m_globeViewAction->setChecked(false);
+            d->m_stereographicViewAction->setChecked(false);
+            d->m_verticalPerspectiveViewAction->setChecked(true);
             break;
         }
     }
@@ -590,6 +616,11 @@ void MapViewWidget::gnomonicViewRequested()
 void MapViewWidget::stereographicViewRequested()
 {
     emit projectionChanged(Marble::Stereographic);
+}
+
+void MapViewWidget::verticalPerspectiveViewRequested()
+{
+    emit projectionChanged(Marble::VerticalPerspective);
 }
 
 void MapViewWidget::Private::celestialBodySelected( int comboIndex )

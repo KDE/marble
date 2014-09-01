@@ -55,6 +55,7 @@ private Q_SLOTS:
     void flatViewRequested();
     void gnomonicViewRequested();
     void stereographicViewRequested();
+    void verticalPerspectiveViewRequested();
 
  private:
     Q_PRIVATE_SLOT( d, void celestialBodySelected( int comboIndex ) )

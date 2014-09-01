@@ -46,8 +46,9 @@ enum Projection {
     Equirectangular,    ///< Flat projection ("plate carree")
     Mercator,           ///< Mercator projection
     Gnomonic,           ///< Gnomonic projection
-    Stereographic       ///< Stereographic projection
-    // NOTE: MarbleWidget::setProjection(int) relies on Stereographic being the last
+    Stereographic,      ///< Stereographic projection
+    VerticalPerspective ///< Vertical perspective projection
+    // NOTE: MarbleWidget::setProjection(int) relies on VerticalPerspective being the last
     // value above. Adjust that method if you do changes here
 };
 

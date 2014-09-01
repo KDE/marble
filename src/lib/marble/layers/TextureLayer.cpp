@@ -400,6 +400,7 @@ void TextureLayer::setProjection( Projection projection )
             break;
         case Gnomonic:
         case Stereographic:
+        case VerticalPerspective:
             d->m_texmapper = new GenericScanlineTextureMapper( &d->m_tileLoader );
             break;
         default:

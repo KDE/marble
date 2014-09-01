@@ -786,8 +786,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     QString planetId = marbleModel()->planetId();
     const bool doRender = !viewport->mapCoversViewport() &&
-                             viewport->projection() == Spherical &&
-                             planetId == "earth"; // So far displaying stars is only supported on earth.
+                             ( (viewport->projection() == Spherical || viewport->projection() == VerticalPerspective) &&
+                             planetId == "earth" ); // So far displaying stars is only supported on earth.
 
     if ( doRender != m_doRender ) {
         if ( doRender ) {

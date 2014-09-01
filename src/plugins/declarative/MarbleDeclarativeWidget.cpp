@@ -198,6 +198,8 @@ QString MarbleWidget::projection( ) const
         return "Gnomonic";
     case Marble::Stereographic:
         return "Stereographic";
+    case Marble::VerticalPerspective:
+        return "Perspective Globe";
     }
 
     Q_ASSERT( false && "Marble got a new projection which we do not know about yet" );

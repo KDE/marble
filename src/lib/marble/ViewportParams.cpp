@@ -25,6 +25,7 @@
 #include "MercatorProjection.h"
 #include "GnomonicProjection.h"
 #include "StereographicProjection.h"
+#include "VerticalPerspectiveProjection.h"
 
 
 namespace Marble
@@ -64,6 +65,7 @@ public:
     static const MercatorProjection   s_mercatorProjection;
     static const GnomonicProjection   s_gnomonicProjection;
     static const StereographicProjection   s_stereographicProjection;
+    static const VerticalPerspectiveProjection   s_verticalPerspectiveProjection;
 
     GeoDataCoordinates   m_focusPoint;
 };
@@ -73,6 +75,7 @@ const EquirectProjection   ViewportParamsPrivate::s_equirectProjection;
 const MercatorProjection   ViewportParamsPrivate::s_mercatorProjection;
 const GnomonicProjection   ViewportParamsPrivate::s_gnomonicProjection;
 const StereographicProjection   ViewportParamsPrivate::s_stereographicProjection;
+const VerticalPerspectiveProjection   ViewportParamsPrivate::s_verticalPerspectiveProjection;
 
 ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
                                               qreal centerLongitude, qreal centerLatitude,
@@ -105,6 +108,8 @@ const AbstractProjection *ViewportParamsPrivate::abstractProjection(Projection p
         return &s_gnomonicProjection;
     case Stereographic:
         return &s_stereographicProjection;
+    case VerticalPerspective:
+        return &s_verticalPerspectiveProjection;
     }
 
     return 0;
