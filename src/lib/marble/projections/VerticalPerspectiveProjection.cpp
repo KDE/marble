@@ -71,14 +71,11 @@ bool VerticalPerspectiveProjection::screenCoordinates( const GeoDataCoordinates 
                                              qreal &x, qreal &y, bool &globeHidesPoint ) const
 {
     const qreal P = 5;
-    const qreal lambda = coordinates.longitude();
+    const qreal deltaLambda = coordinates.longitude() - viewport->centerLongitude();
     const qreal phi = coordinates.latitude();
-    const qreal lambdaPrime = viewport->centerLongitude();
     const qreal phi1 = viewport->centerLatitude();
 
-    qreal cosC = qSin( phi1 ) * qSin( phi ) + qCos( phi1 ) * qCos( phi ) * qCos( lambda - lambdaPrime );
-
-    Q_ASSERT(P == 0);
+    qreal cosC = qSin( phi1 ) * qSin( phi ) + qCos( phi1 ) * qCos( phi ) * qCos( deltaLambda );
 
     // Prevent division by zero
     if (cosC < 1/P) {
@@ -89,8 +86,8 @@ bool VerticalPerspectiveProjection::screenCoordinates( const GeoDataCoordinates 
     qreal k = (P - 1) / (P - cosC);
 
     // Let (x, y) be the position on the screen of the placemark..
-    x = ( qCos( phi ) * qSin( lambda - lambdaPrime ) ) * k;
-    y = ( qCos( phi1 ) * qSin( phi ) - qSin( phi1 ) * qCos( phi ) * qCos( lambda - lambdaPrime ) ) * k;
+    x = ( qCos( phi ) * qSin( deltaLambda ) ) * k;
+    y = ( qCos( phi1 ) * qSin( phi ) - qSin( phi1 ) * qCos( phi ) * qCos( deltaLambda ) ) * k;
 
     x *= 4 * viewport->radius() / M_PI;
     y *= 4 * viewport->radius() / M_PI;
@@ -156,10 +153,11 @@ bool VerticalPerspectiveProjection::geoCoordinates( const int x, const int y,
     const qreal rx = ( - viewport->width()  / 2 + x ) / rad2Pixel;
     const qreal ry = (   viewport->height() / 2 - y ) / rad2Pixel;
     const qreal p = qMax( qSqrt( rx*rx + ry*ry ), 0.0001 ); // ensure we don't divide by zero
+    const qreal pP = p*p*(P+1)/(P-1);
 
-    if ( p*p*(P+1)/(P-1) > 1) return false;
+    if ( pP > 1) return false;
 
-    const qreal c = qAsin((P-qSqrt(1-p*p*(P+1)/(P-1)))/((P-1)/p+p/(P-1)));
+    const qreal c = qAsin((P-qSqrt(1-pP))/((P-1)/p+p/(P-1)));
     const qreal sinc = qSin(c);
 
     lon = centerLon + qAtan2( rx*sinc , ( p*qCos( centerLat )*qCos( c ) - ry*qSin( centerLat )*sinc  ) );
@@ -173,8 +171,6 @@ bool VerticalPerspectiveProjection::geoCoordinates( const int x, const int y,
         lon *= RAD2DEG;
         lat *= RAD2DEG;
     }
-
-    if (isnan(lon) || isnan(lat)) qDebug() << "Oh god" << lon << lat;
 
     return true;
 }

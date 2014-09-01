@@ -83,7 +83,7 @@
      </item>
      <item>
       <property name="text">
-       <string>VerticalPerspective</string>
+       <string>Vertical Perspective Globe</string>
       </property>
       <property name="icon">
        <iconset resource="../../apps/marble-ui/marble.qrc">
