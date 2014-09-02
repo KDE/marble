@@ -258,7 +258,7 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
         RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();
         if ( request && request->size() > 0 ) {
             GeoDataCoordinates source = request->source();
-            if ( source.longitude() != 0.0 || source.latitude() != 0.0 ) {
+            if ( source.isValid() ) {
                 GeoDataLookAt view;
                 view.setCoordinates( source );
                 // By happy coincidence this equals OpenStreetMap tile level 15
