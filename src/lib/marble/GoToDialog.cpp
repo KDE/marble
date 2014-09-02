@@ -135,7 +135,7 @@ QVector<GeoDataPlacemark> TargetModel::viaPoints() const
     RouteRequest* request = m_marbleModel->routingManager()->routeRequest();
     QVector<GeoDataPlacemark> result;
     for ( int i = 0; i < request->size(); ++i ) {
-        if ( request->at( i ).longitude() != 0.0 || request->at( i ).latitude() != 0.0 ) {
+        if ( request->at( i ).isValid() ) {
             GeoDataPlacemark placemark;
             placemark.setCoordinate( request->at( i ) );
             placemark.setName( request->name( i ) );
