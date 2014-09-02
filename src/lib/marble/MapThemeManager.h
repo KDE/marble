@@ -26,22 +26,22 @@ namespace Marble
 {
 
 class GeoSceneDocument;
-
+class GeoDataPhotoOverlay;
 /**
  * @short The class that handles map themes that are locally available .
  *
  * This class which is able to check for maps that are locally available.
  * After parsing the data it only stores the name, description and path
  * into a QStandardItemModel.
- * 
- * The MapThemeManager is not owned by the MarbleWidget/Map itself. 
- * Instead it is owned by the widget or application that contains 
+ *
+ * The MapThemeManager is not owned by the MarbleWidget/Map itself.
+ * Instead it is owned by the widget or application that contains
  * MarbleWidget/Map ( usually: the ControlView convenience class )
- * 
- * For convenience MarbleThemeManager provides a static helper class 
- * that loads the properties of a map theme into a GeoSceneDocument 
+ *
+ * For convenience MarbleThemeManager provides a static helper class
+ * that loads the properties of a map theme into a GeoSceneDocument
  * object.
- * 
+ *
  * @see GeoSceneDocument
  */
 
@@ -59,9 +59,9 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     QStringList mapThemeIds() const;
 
     /**
-     * @brief Provides a model of the locally existing themes. 
+     * @brief Provides a model of the locally existing themes.
      *
-     * This method provides a QStandardItemModel of all themes  
+     * This method provides a QStandardItemModel of all themes
      * that are available via MarbleDirs.
      */
     QStandardItemModel* mapThemeModel();
@@ -79,6 +79,11 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      * current theme into memory or by the MapThemeManager.
      */
     static GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
+
+    /**
+     * @brief Returns a map as a GeoSceneDocument object created from a GeoDataPhotoOverlay
+     */
+    static GeoSceneDocument* createMapThemeFromOverlay( GeoDataPhotoOverlay * overlayData);
 
     /**
      * @brief Deletes the map theme with the specified map theme ID.

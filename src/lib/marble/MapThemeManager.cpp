@@ -25,14 +25,25 @@
 #include <QStandardItemModel>
 
 // Local dir
+#include "GeoDataPhotoOverlay.h"
 #include "GeoSceneDocument.h"
+#include "GeoSceneMap.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneIcon.h"
 #include "GeoSceneParser.h"
+#include "GeoSceneLayer.h"
+#include "GeoSceneTiled.h"
+#include "GeoSceneTextureTile.h"
+#include "GeoSceneProperty.h"
+#include "GeoSceneZoom.h"
+#include "GeoSceneSettings.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "Planet.h"
 #include "PlanetFactory.h"
+
+// Std
+#include <limits>
 
 namespace
 {
@@ -165,7 +176,7 @@ void MapThemeManager::deleteMapTheme( const QString &mapThemeId )
 {
     QString dgmlPath = MarbleDirs::localPath() + "/maps/" + mapThemeId;
     QFileInfo dgmlFile(dgmlPath);
-    
+
     QString themeDir = dgmlFile.dir().absolutePath();
     Private::deleteDirectory( themeDir );
 }
@@ -174,31 +185,31 @@ bool MapThemeManager::Private::deleteDirectory( const QString& directory )
 {
     QDir dir( directory );
     bool result = true;
- 
+
     if ( dir.exists() ) {
         Q_FOREACH( const QFileInfo &info, dir.entryInfoList(
             QDir::NoDotAndDotDot | QDir::System | QDir::Hidden |
             QDir::AllDirs | QDir::Files,
             QDir::DirsFirst ) ) {
-            
+
             if ( info.isDir() ) {
                 result = deleteDirectory( info.absoluteFilePath() );
             } else {
                 result = QFile::remove( info.absoluteFilePath() );
             }
- 
+
             if ( !result ) {
                 return result;
             }
         }
-        
+
         result = dir.rmdir( directory );
-        
+
         if( !result ) {
             return result;
         }
     }
-    
+
     return result;
 }
 
@@ -268,7 +279,7 @@ QStringList MapThemeManager::Private::findMapThemes( const QString& basePath )
 
     for ( int planet = 0; planet < mapPaths.size(); ++planet ) {
         QDir themeDir = QDir( mapPathName + '/' + mapPaths.at( planet ) );
-        QStringList themeMapPaths = themeDir.entryList( 
+        QStringList themeMapPaths = themeDir.entryList(
                                      QStringList( "*" ),
                                      QDir::AllDirs |
                                      QDir::NoSymLinks |
@@ -354,7 +365,7 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
     themeIconPixmap.load( MarbleDirs::path( relativePath ) );
 
     if ( themeIconPixmap.isNull() ) {
-        relativePath = "svg/application-x-marble-gray.png"; 
+        relativePath = "svg/application-x-marble-gray.png";
         themeIconPixmap.load( MarbleDirs::path( relativePath ) );
     }
     else {
@@ -479,7 +490,7 @@ void MapThemeManager::Private::fileChanged( const QString& path )
             m_mapThemeModel.insertRow( insertAtRow, newMapThemeRow );
         }
     }
-    
+
     emit q->themesChanged();
 }
 
@@ -519,6 +530,68 @@ void MapThemeManager::Private::addMapThemePaths( const QString& mapPathName, QSt
             }
         }
     }
+}
+
+GeoSceneDocument * MapThemeManager::createMapThemeFromOverlay(GeoDataPhotoOverlay *overlayData)
+{
+    GeoSceneDocument * document = new GeoSceneDocument();
+    document->head()->setDescription( overlayData->description() );
+    document->head()->setName( overlayData->name() );
+    document->head()->setTheme( "photo" );
+    document->head()->setTarget( "panorama" );
+    document->head()->setRadius(36000);
+    document->head()->setVisible(true);
+
+    document->head()->zoom()->setMaximum(3500);
+    document->head()->zoom()->setMinimum(900);
+    document->head()->zoom()->setDiscrete(false);
+
+    GeoSceneLayer * layer = new GeoSceneLayer( "photo" );
+    layer->setBackend("texture");
+
+    GeoSceneTextureTile * texture = new GeoSceneTextureTile( "map" );
+    texture->setExpire(std::numeric_limits<int>::max());
+
+    QString fileName = overlayData->absoluteIconFile();
+    QFileInfo fileInfo( fileName );
+    fileName = fileInfo.fileName();
+
+    QString sourceDir = fileInfo.absoluteDir().path();
+
+    QString extension = fileInfo.suffix();
+
+    texture->setSourceDir( sourceDir );
+    texture->setFileFormat( extension );
+    texture->setInstallMap( fileName );
+    texture->setProjection(GeoSceneTiled::Equirectangular);
+
+    layer->addDataset(texture);
+
+    document->map()->addLayer(layer);
+
+    GeoSceneSettings *settings = document->settings();
+
+    GeoSceneProperty *gridProperty = new GeoSceneProperty( "coordinate-grid" );
+    gridProperty->setValue( false );
+    gridProperty->setAvailable( false );
+    settings->addProperty( gridProperty );
+
+    GeoSceneProperty *overviewmap = new GeoSceneProperty( "overviewmap" );
+    overviewmap->setValue( false );
+    overviewmap->setAvailable( false );
+    settings->addProperty( overviewmap );
+
+    GeoSceneProperty *compass = new GeoSceneProperty( "compass" );
+    compass->setValue( false );
+    compass->setAvailable( false );
+    settings->addProperty( compass );
+
+    GeoSceneProperty *scalebar = new GeoSceneProperty( "scalebar" );
+    scalebar->setValue( true );
+    scalebar->setAvailable( true );
+    settings->addProperty( scalebar );
+
+    return document;
 }
 
 }

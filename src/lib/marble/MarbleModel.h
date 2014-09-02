@@ -140,6 +140,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     GeoSceneDocument *mapTheme();
     const GeoSceneDocument *mapTheme() const;
+    void setMapTheme( GeoSceneDocument * document );
 
     /**
      * @brief Set a new map theme to use.

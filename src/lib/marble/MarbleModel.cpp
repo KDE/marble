@@ -251,6 +251,12 @@ void MarbleModel::setMapThemeId( const QString &mapThemeId )
         return;
 
     GeoSceneDocument *mapTheme = MapThemeManager::loadMapTheme( mapThemeId );
+    setMapTheme( mapTheme );
+}
+
+void MarbleModel::setMapTheme( GeoSceneDocument *document )
+{
+    GeoSceneDocument *mapTheme = document;
     if ( !mapTheme ) {
         // Check whether the previous theme works
         if ( d->m_mapTheme ){
