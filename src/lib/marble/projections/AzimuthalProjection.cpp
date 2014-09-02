@@ -94,6 +94,8 @@ GeoDataLatLonAltBox AzimuthalProjection::latLonAltBox( const QRect& screenRect,
         // Unless the planetaxis is in the screen plane the allowed longitude range
         // covers full -180 deg to +180 deg:
         if ( pitch > 0.0 && pitch < +M_PI ) {
+            latLonAltBox.setWest(  -M_PI );
+            latLonAltBox.setEast(  +M_PI );
             latLonAltBox.setNorth( +fabs( M_PI / 2.0 - fabs( pitch ) ) );
             latLonAltBox.setSouth( -M_PI / 2.0 );
         }
@@ -114,6 +116,8 @@ GeoDataLatLonAltBox AzimuthalProjection::latLonAltBox( const QRect& screenRect,
             latLonAltBox.setNorth( +M_PI / 2.0 );
             latLonAltBox.setSouth( -M_PI / 2.0 );
         }
+
+        return latLonAltBox;
     }
 
     // Now we check whether maxLat (e.g. the north pole) gets displayed

@@ -70,37 +70,40 @@ bool VerticalPerspectiveProjection::screenCoordinates( const GeoDataCoordinates 
                                              const ViewportParams *viewport,
                                              qreal &x, qreal &y, bool &globeHidesPoint ) const
 {
-    const qreal P = 5;
+    const qreal P = 5; // Distance of the point of perspective in earth diameters
     const qreal deltaLambda = coordinates.longitude() - viewport->centerLongitude();
     const qreal phi = coordinates.latitude();
     const qreal phi1 = viewport->centerLatitude();
 
     qreal cosC = qSin( phi1 ) * qSin( phi ) + qCos( phi1 ) * qCos( phi ) * qCos( deltaLambda );
+    qreal k = (P - 1) / (P - cosC); // scale factor
 
-    // Prevent division by zero
-    if (cosC < 1/P) {
+    // Don't display placemarks that are below 10km altitude and
+    // are on the Earth's backside (where cosC < 1/P)
+    if (coordinates.altitude() < 10000 && cosC < 1/P) {
         globeHidesPoint = true;
         return false;
     }
 
-    qreal k = (P - 1) / (P - cosC);
-
-    // Let (x, y) be the position on the screen of the placemark..
+    // Let (x, y) be the position on the screen of the placemark ..
+    // First determine the position in unit coordinates:
     x = ( qCos( phi ) * qSin( deltaLambda ) ) * k;
     y = ( qCos( phi1 ) * qSin( phi ) - qSin( phi1 ) * qCos( phi ) * qCos( deltaLambda ) ) * k;
 
-    x *= 4 * viewport->radius() / M_PI;
-    y *= 4 * viewport->radius() / M_PI;
-
-    const qint64  radius  = clippingRadius() * viewport->radius();
-
-    if (x*x + y*y > radius * radius) {
+    // Don't display satellites that are on the Earth's backside:
+    if (x*x+y*y < 1 && cosC < 1/P) {
         globeHidesPoint = true;
         return false;
     }
-
+    // The remaining placemarks are definetely not on the Earth's backside
     globeHidesPoint = false;
 
+    qreal absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
+    qreal pixelAltitude = absoluteAltitude * viewport->radius() / (EARTH_RADIUS * qSqrt((P-1)/(P+1)));
+
+    // Transformation to screen coordinates
+    x *= pixelAltitude;
+    y *= pixelAltitude;
     x += viewport->width() / 2;
     y = viewport->height() / 2 - y;
 
@@ -145,27 +148,32 @@ bool VerticalPerspectiveProjection::geoCoordinates( const int x, const int y,
 {
     const qreal P = 5;
 
-    const qint64  radius  = 2 * viewport->radius();
-    // Calculate how many degrees are being represented per pixel.
-    const qreal rad2Pixel = ( 2 * radius ) / M_PI;
+    const qint64  radius  = viewport->radius() / qSqrt((P-1)/(P+1));
     const qreal centerLon = viewport->centerLongitude();
     const qreal centerLat = viewport->centerLatitude();
-    const qreal rx = ( - viewport->width()  / 2 + x ) / rad2Pixel;
-    const qreal ry = (   viewport->height() / 2 - y ) / rad2Pixel;
-    const qreal p = qMax( qSqrt( rx*rx + ry*ry ), 0.0001 ); // ensure we don't divide by zero
-    const qreal pP = p*p*(P+1)/(P-1);
+    const qreal rx = ( - viewport->width()  / 2 + x );
+    const qreal ry = (   viewport->height() / 2 - y );
+    const qreal p = qSqrt( rx*rx + ry*ry ); // ensure we don't divide by zero
+
+    if (p == 0) {
+        lon = centerLon;
+        lat = centerLat;
+        return true;
+    }
+
+    const qreal pP = p*p*(P+1)/(radius*radius*(P-1));
 
     if ( pP > 1) return false;
 
-    const qreal c = qAsin((P-qSqrt(1-pP))/((P-1)/p+p/(P-1)));
+    const qreal c = qAsin((P-qSqrt(1-pP))/(radius*(P-1)/p+p/(radius*(P-1))));
     const qreal sinc = qSin(c);
 
-    lon = centerLon + qAtan2( rx*sinc , ( p*qCos( centerLat )*qCos( c ) - ry*qSin( centerLat )*sinc  ) );
+    lon = centerLon + qAtan2(rx*sinc, (p*qCos(centerLat)*qCos(c) - ry*qSin(centerLat)*sinc));
 
     while ( lon < -M_PI ) lon += 2 * M_PI;
     while ( lon >  M_PI ) lon -= 2 * M_PI;
 
-    lat = qAsin( qCos(c)*qSin(centerLat) + (ry*sinc*qCos(centerLat))/p );
+    lat = qAsin(qCos(c)*qSin(centerLat) + (ry*sinc*qCos(centerLat))/p);
 
     if ( unit == GeoDataCoordinates::Degree ) {
         lon *= RAD2DEG;
