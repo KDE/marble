@@ -532,7 +532,7 @@ void MapThemeManager::Private::addMapThemePaths( const QString& mapPathName, QSt
     }
 }
 
-GeoSceneDocument * MapThemeManager::createMapThemeFromOverlay(GeoDataPhotoOverlay *overlayData)
+GeoSceneDocument *MapThemeManager::createMapThemeFromOverlay( const GeoDataPhotoOverlay *overlayData )
 {
     GeoSceneDocument * document = new GeoSceneDocument();
     document->head()->setDescription( overlayData->description() );

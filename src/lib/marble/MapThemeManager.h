@@ -83,7 +83,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     /**
      * @brief Returns a map as a GeoSceneDocument object created from a GeoDataPhotoOverlay
      */
-    static GeoSceneDocument* createMapThemeFromOverlay( GeoDataPhotoOverlay * overlayData);
+    static GeoSceneDocument* createMapThemeFromOverlay( const GeoDataPhotoOverlay *overlayData );
 
     /**
      * @brief Deletes the map theme with the specified map theme ID.
