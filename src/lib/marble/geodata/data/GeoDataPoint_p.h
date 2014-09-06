@@ -17,18 +17,19 @@
 namespace Marble
 {
 
-class GeoDataPointPrivate : public GeoDataGeometryPrivate, public GeoDataCoordinatesPrivate
+class GeoDataPointPrivate : public GeoDataGeometryPrivate,
+                            public GeoDataCoordinatesPrivate
 {
-  public:
+public:
     GeoDataCoordinates m_coordinates;
 
-     GeoDataPointPrivate()
+    GeoDataPointPrivate()
     {
     }
 
     virtual GeoDataGeometryPrivate* copy()
     { 
-         GeoDataPointPrivate* copy = new  GeoDataPointPrivate;
+        GeoDataPointPrivate* copy = new  GeoDataPointPrivate;
         *copy = *this;
         return copy;
     }
@@ -37,7 +38,6 @@ class GeoDataPointPrivate : public GeoDataGeometryPrivate, public GeoDataCoordin
     {
         return GeoDataPointId;
     }
-
 };
 
 } // namespace Marble

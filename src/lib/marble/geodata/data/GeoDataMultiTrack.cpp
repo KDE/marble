@@ -180,6 +180,7 @@ QVector<GeoDataTrack*>::ConstIterator GeoDataMultiTrack::constEnd() const
  */
 GeoDataTrack* GeoDataMultiTrack::child( int i )
 {
+    detach();
     return p()->m_vector.at( i );
 }
 

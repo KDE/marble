@@ -35,10 +35,10 @@ GeoDataPlacemark::GeoDataPlacemark()
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
-: GeoDataFeature( other )
+    : GeoDataFeature( other )
 {
-    // FIXME: violates invariant of this == p()->m_geometry->parent() for other (which could lead to crashes)
-    p()->m_geometry->setParent( this );
+    // FIXME: temporary (until detach() is called) violates invariant of
+    // this == p()->m_geometry->parent() (which could lead to crashes).
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )
@@ -50,6 +50,7 @@ GeoDataPlacemark::GeoDataPlacemark( const QString& name )
 
 GeoDataPlacemark::~GeoDataPlacemark()
 {
+    // nothing to do
 }
 
 bool GeoDataPlacemark::operator==( const GeoDataPlacemark& other ) const
@@ -151,6 +152,8 @@ const GeoDataPlacemarkPrivate* GeoDataPlacemark::p() const
 
 GeoDataGeometry* GeoDataPlacemark::geometry()
 {
+    detach();
+    p()->m_geometry->setParent( this );
     return p()->m_geometry;
 }
 
@@ -243,6 +246,7 @@ qreal GeoDataPlacemark::area() const
 void GeoDataPlacemark::setArea( qreal area )
 {
     detach();
+    p()->m_geometry->setParent( this );
     p()->m_area = area;
 }
 
@@ -254,6 +258,7 @@ qint64 GeoDataPlacemark::population() const
 void GeoDataPlacemark::setPopulation( qint64 population )
 {
     detach();
+    p()->m_geometry->setParent( this );
     p()->m_population = population;
 }
 
@@ -265,6 +270,7 @@ const QString GeoDataPlacemark::state() const
 void GeoDataPlacemark::setState( const QString &state )
 {
     detach();
+    p()->m_geometry->setParent( this );
     p()->m_state = state;
 }
 
@@ -276,6 +282,7 @@ const QString GeoDataPlacemark::countryCode() const
 void GeoDataPlacemark::setCountryCode( const QString &countrycode )
 {
     detach();
+    p()->m_geometry->setParent( this );
     p()->m_countrycode = countrycode;
 }
 
@@ -287,6 +294,7 @@ bool GeoDataPlacemark::isBalloonVisible() const
 void GeoDataPlacemark::setBalloonVisible( bool visible )
 {
     detach();
+    p()->m_geometry->setParent( this );
     p()->m_isBalloonVisible = visible;
 }
 
@@ -325,6 +333,7 @@ QXmlStreamWriter& GeoDataPlacemark::operator <<( QXmlStreamWriter& stream ) cons
 void GeoDataPlacemark::unpack( QDataStream& stream )
 {
     detach();
+    p()->m_geometry->setParent( this );
     GeoDataFeature::unpack( stream );
 
     stream >> p()->m_countrycode;

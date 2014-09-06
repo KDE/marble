@@ -40,7 +40,7 @@ GeoDataStyle* GeoDataFeaturePrivate::s_defaultStyle[GeoDataFeature::LastIndex];
 QMap<QString, GeoDataFeature::GeoDataVisualCategory> GeoDataFeaturePrivate::s_visualCategories;
 
 GeoDataFeature::GeoDataFeature()
-    :d( new GeoDataFeaturePrivate() )
+    : d( new GeoDataFeaturePrivate() )
 {
     d->ref.ref();
 }
@@ -614,6 +614,9 @@ const GeoDataAbstractView* GeoDataFeature::abstractView() const
 
 GeoDataAbstractView *GeoDataFeature::abstractView()
 {
+    // FIXME: Calling detach() doesn't help at all because the m_abstractView
+    // object isn't actually copied in the Private class as well.
+    // detach();
     return d->m_abstractView;
 }
 
@@ -655,7 +658,7 @@ void GeoDataFeature::setStyleUrl( const QString &value)
 
 bool GeoDataFeature::isVisible() const
 {
-        return d->m_visible;
+    return d->m_visible;
 }
 
 void GeoDataFeature::setVisible( bool value )
@@ -676,12 +679,13 @@ bool GeoDataFeature::isGloballyVisible() const
 
 const GeoDataTimeSpan &GeoDataFeature::timeSpan() const
 {
-  return d->m_timeSpan;
+    return d->m_timeSpan;
 }
 
 GeoDataTimeSpan &GeoDataFeature::timeSpan()
 {
-  return d->m_timeSpan;
+    detach();
+    return d->m_timeSpan;
 }
 
 void GeoDataFeature::setTimeSpan( const GeoDataTimeSpan &timeSpan )
@@ -692,12 +696,13 @@ void GeoDataFeature::setTimeSpan( const GeoDataTimeSpan &timeSpan )
 
 const GeoDataTimeStamp &GeoDataFeature::timeStamp() const
 {
-  return d->m_timeStamp;
+    return d->m_timeStamp;
 }
 
 GeoDataTimeStamp &GeoDataFeature::timeStamp()
 {
-  return d->m_timeStamp;
+    detach();
+    return d->m_timeStamp;
 }
 
 void GeoDataFeature::setTimeStamp( const GeoDataTimeStamp &timeStamp )
@@ -742,6 +747,7 @@ void GeoDataFeature::setStyle( GeoDataStyle* style )
 
 GeoDataExtendedData& GeoDataFeature::extendedData() const
 {
+    // FIXME: Should call detach(). Maybe don't return reference.
     return d->m_extendedData;
 }
 
@@ -753,6 +759,7 @@ void GeoDataFeature::setExtendedData( const GeoDataExtendedData& extendedData )
 
 GeoDataRegion& GeoDataFeature::region() const
 {
+    // FIXME: Should call detach(). Maybe don't return reference.
     return d->m_region;
 }
 

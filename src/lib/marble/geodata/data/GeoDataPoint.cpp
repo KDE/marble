@@ -31,14 +31,14 @@ namespace Marble
 
 GeoDataPoint::GeoDataPoint( qreal lon, qreal lat, qreal alt,
                             GeoDataCoordinates::Unit unit )
-  : GeoDataGeometry( new GeoDataPointPrivate )
+    : GeoDataGeometry( new GeoDataPointPrivate )
 {
     p()->m_coordinates = GeoDataCoordinates( lon, lat, alt, unit );
     p()->m_latLonAltBox = GeoDataLatLonAltBox( p()->m_coordinates );
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
-  : GeoDataGeometry( other )
+    : GeoDataGeometry( other )
     
 {
     p()->m_coordinates = other.p()->m_coordinates;
@@ -46,7 +46,7 @@ GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataCoordinates& other )
-  : GeoDataGeometry ( new GeoDataPointPrivate )
+    : GeoDataGeometry ( new GeoDataPointPrivate )
 {
     p()->m_coordinates = other;
     p()->m_latLonAltBox = GeoDataLatLonAltBox( p()->m_coordinates );
@@ -55,10 +55,12 @@ GeoDataPoint::GeoDataPoint( const GeoDataCoordinates& other )
 GeoDataPoint::GeoDataPoint()
     : GeoDataGeometry( new GeoDataPointPrivate )
 {
+    // nothing to do
 }
 
 GeoDataPoint::~GeoDataPoint()
 {
+    // nothing to do
 }
 
 bool GeoDataPoint::operator==( const GeoDataPoint &other ) const
@@ -74,6 +76,7 @@ bool GeoDataPoint::operator!=( const GeoDataPoint &other ) const
 
 void GeoDataPoint::setCoordinates( const GeoDataCoordinates &coordinates )
 {
+    detach();
     p()->m_coordinates = coordinates;
     p()->m_latLonAltBox = GeoDataLatLonAltBox( p()->m_coordinates );
 }

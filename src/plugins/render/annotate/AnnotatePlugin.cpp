@@ -1192,7 +1192,6 @@ void AnnotatePlugin::setupPolygonRmbMenu()
     connect( cutPolygon, SIGNAL(triggered()), this, SLOT(cutItem()) );
 
     QAction *copyPolygon = new QAction( tr( "Copy"), m_polygonRmbMenu );
-    copyPolygon->setEnabled( false ); // FIXME
     m_polygonRmbMenu->addAction( copyPolygon );
     connect( copyPolygon, SIGNAL(triggered()), this, SLOT(copyItem()) );
 
@@ -1429,7 +1428,6 @@ void AnnotatePlugin::setupPolylineRmbMenu()
     connect( cutItem, SIGNAL(triggered()), this, SLOT(cutItem()) );
 
     QAction *copyItem = new QAction( tr( "Copy"), m_polylineRmbMenu );
-    copyItem->setEnabled( false ); // FIXME
     m_polylineRmbMenu->addAction( copyItem );
     connect( copyItem, SIGNAL(triggered()), this, SLOT(copyItem()) );
 

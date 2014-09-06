@@ -158,6 +158,7 @@ QVector<GeoDataGeometry*>::ConstIterator GeoDataMultiGeometry::constEnd() const
  */
 GeoDataGeometry* GeoDataMultiGeometry::child( int i )
 {
+    detach();
     return p()->m_vector.at( i );
 }
 

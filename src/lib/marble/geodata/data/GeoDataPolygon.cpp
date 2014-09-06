@@ -20,13 +20,15 @@ namespace Marble
 {
 
 GeoDataPolygon::GeoDataPolygon( TessellationFlags f )
-  : GeoDataGeometry( new GeoDataPolygonPrivate( f ) )
+    : GeoDataGeometry( new GeoDataPolygonPrivate( f ) )
 {
+    // nothing to do
 }
 
 GeoDataPolygon::GeoDataPolygon( const GeoDataGeometry & other )
-  : GeoDataGeometry( other )
+    : GeoDataGeometry( other )
 {
+    // nothing to do
 }
 
 GeoDataPolygon::~GeoDataPolygon()
@@ -95,7 +97,7 @@ void GeoDataPolygon::setTessellate( bool tessellate )
     // for polygons in Google Earth. Our "Tesselate" flag does this. 
     // Only for pure line strings and linear rings the 
     // latitude circles are followed for subsequent points that share the same latitude.
-    GeoDataGeometry::detach();
+    detach();
 
     if ( tessellate ) {
         p()->m_tessellationFlags |= Tessellate; 
@@ -111,7 +113,7 @@ TessellationFlags GeoDataPolygon::tessellationFlags() const
 
 void GeoDataPolygon::setTessellationFlags( TessellationFlags f )
 {
-    GeoDataGeometry::detach();
+    detach();
     p()->m_tessellationFlags = f;
 }
 
@@ -122,6 +124,7 @@ const GeoDataLatLonAltBox& GeoDataPolygon::latLonAltBox() const
 
 GeoDataLinearRing &GeoDataPolygon::outerBoundary()
 {
+    detach();
     return (p()->outer);
 }
 
@@ -132,12 +135,13 @@ const GeoDataLinearRing &GeoDataPolygon::outerBoundary() const
 
 void GeoDataPolygon::setOuterBoundary( const GeoDataLinearRing& boundary )
 {
-    GeoDataGeometry::detach();
+    detach();
     p()->outer = boundary;
 }
 
 QVector<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries()
 {
+    detach();
     return p()->inner;
 }
 
@@ -148,7 +152,7 @@ const QVector<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries() const
 
 void GeoDataPolygon::appendInnerBoundary( const GeoDataLinearRing& boundary )
 {
-    GeoDataGeometry::detach();
+    detach();
     p()->inner.append( boundary );
 }
 
@@ -173,7 +177,7 @@ void GeoDataPolygon::pack( QDataStream& stream ) const
 
 void GeoDataPolygon::unpack( QDataStream& stream )
 {
-    GeoDataGeometry::detach();
+    detach();
     GeoDataObject::unpack( stream );
 
     p()->outer.unpack( stream );

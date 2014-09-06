@@ -51,7 +51,7 @@ GeoDataGeometry::~GeoDataGeometry()
         delete d;
 }
 
-void  GeoDataGeometry::detach()
+void GeoDataGeometry::detach()
 {
 #if QT_VERSION < 0x050000
     if(d->ref == 1)

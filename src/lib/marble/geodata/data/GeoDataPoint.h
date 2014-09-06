@@ -85,7 +85,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
     virtual void pack( QDataStream& stream ) const;
     // Unserialize the Placemark from @p stream
     virtual void unpack( QDataStream& stream );
-    
+
     virtual void detach();
 
  private:
