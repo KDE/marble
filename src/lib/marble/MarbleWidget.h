@@ -27,7 +27,6 @@
 #include "GeoDataLookAt.h"
 #include "MarbleGlobal.h"             // types needed in all of marble.
 #include "marble_export.h"
-#include "GeoDataFolder.h"
 #include "RenderState.h"
 
 // Qt
@@ -42,6 +41,8 @@ class AbstractDataPluginItem;
 class AbstractFloatItem;
 class GeoDataLatLonAltBox;
 class GeoDataLatLonBox;
+class GeoDataFeature;
+class GeoDataPlacemark;
 class GeoPainter;
 class GeoSceneDocument;
 class LayerInterface;
@@ -49,13 +50,11 @@ class MarbleModel;
 class MarbleWidgetPopupMenu;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
-class Quaternion;
 class RenderPlugin;
 class RoutingLayer;
 class TextureLayer;
 class TileCoordsPyramid;
 class TileCreator;
-class GeoDataPlacemark;
 class ViewportParams;
 class PopupLayer;
 

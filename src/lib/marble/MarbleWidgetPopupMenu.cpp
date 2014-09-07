@@ -22,6 +22,7 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataSnippet.h"
 #include "GeoDataStyle.h"

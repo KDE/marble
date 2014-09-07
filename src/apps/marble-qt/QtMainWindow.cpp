@@ -65,6 +65,7 @@
 #include "NewBookmarkFolderDialog.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoUriParser.h"
 #include "routing/RoutingManager.h"

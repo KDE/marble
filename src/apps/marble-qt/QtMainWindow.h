@@ -30,6 +30,7 @@ class QProgressBar;
 namespace Marble
 {
 
+class GeoDataContainer;
 class MarbleWidget;
 class SunControlWidget;
 class TimeControlWidget;
