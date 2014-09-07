@@ -11,7 +11,6 @@
 #include "RoutingManager.h"
 
 #include "AlternativeRoutesModel.h"
-#include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "RouteRequest.h"
 #include "RoutingModel.h"
@@ -22,6 +21,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 #include "GeoDataFolder.h"
+#include "GeoDataTreeModel.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "PositionTracking.h"
@@ -49,7 +49,11 @@ public:
 
     RoutingProfilesModel m_profilesModel;
 
-    MarbleModel *const m_marbleModel;
+    const PluginManager *const m_pluginManager;
+
+    GeoDataTreeModel *const m_treeModel;
+
+    PositionTracking *const m_positionTracking;
 
     AlternativeRoutesModel m_alternativeRoutesModel;
 
@@ -97,7 +101,9 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_routeRequest( manager ),
         m_routingModel( &m_routeRequest, model, manager ),
         m_profilesModel( model->pluginManager() ),
-        m_marbleModel( model ),
+        m_pluginManager( model->pluginManager() ),
+        m_treeModel( model->treeModel() ),
+        m_positionTracking( model->positionTracking() ),
         m_alternativeRoutesModel( parent ),
         m_runnerManager( model, q ),
         m_haveRoute( false ),
@@ -233,8 +239,9 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
 
     if ( !loaded ) {
         mDebug() << "File " << filename << " is not a valid Marble route .kml file";
-        delete doc;
-        m_marbleModel->addGeoDataFile( filename );
+        if ( container ) {
+            m_treeModel->addDocument( container );
+        }
     }
 }
 
@@ -362,8 +369,7 @@ RoutingProfile RoutingManager::defaultProfile( RoutingProfile::TransportType tra
         break;
     }
 
-    const PluginManager* pluginManager = d->m_marbleModel->pluginManager();
-    foreach( RoutingRunnerPlugin* plugin, pluginManager->routingRunnerPlugins() ) {
+    foreach( RoutingRunnerPlugin* plugin, d->m_pluginManager->routingRunnerPlugins() ) {
         if ( plugin->supportsTemplate( tpl ) ) {
             profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
         }
@@ -406,19 +412,17 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
         d->loadRoute( d->stateFile( "guidance.kml" ) );
     }
 
-    PositionTracking* tracking = d->m_marbleModel->positionTracking();
-    PositionProviderPlugin* positionProvider = tracking->positionProviderPlugin();
+    PositionProviderPlugin* positionProvider = d->m_positionTracking->positionProviderPlugin();
     if ( !positionProvider && enabled ) {
-        const PluginManager* pluginManager = d->m_marbleModel->pluginManager();
-        QList<const PositionProviderPlugin*> plugins = pluginManager->positionProviderPlugins();
+        QList<const PositionProviderPlugin*> plugins = d->m_pluginManager->positionProviderPlugins();
         if ( plugins.size() > 0 ) {
             positionProvider = plugins.first()->newInstance();
         }
-        tracking->setPositionProviderPlugin( positionProvider );
+        d->m_positionTracking->setPositionProviderPlugin( positionProvider );
         d->m_shutdownPositionTracking = true;
     } else if ( positionProvider && !enabled && d->m_shutdownPositionTracking ) {
         d->m_shutdownPositionTracking = false;
-        tracking->setPositionProviderPlugin( 0 );
+        d->m_positionTracking->setPositionProviderPlugin( 0 );
     }
 
     if ( d->m_adjustNavigation ) {
@@ -437,10 +441,10 @@ void RoutingManagerPrivate::recalculateRoute( bool deviated )
         }
 
         if ( m_routeRequest.size() == 2 && m_routeRequest.visited( 0 ) && !m_routeRequest.visited( 1 ) ) {
-            m_routeRequest.setPosition( 0, m_marbleModel->positionTracking()->currentLocation(), QObject::tr( "Current Location" ) );
+            m_routeRequest.setPosition( 0, m_positionTracking->currentLocation(), QObject::tr( "Current Location" ) );
             q->retrieveRoute();
         } else if ( m_routeRequest.size() != 0 && !m_routeRequest.visited( m_routeRequest.size()-1 ) ) {
-            m_routeRequest.insert( 0, m_marbleModel->positionTracking()->currentLocation(), QObject::tr( "Current Location" ) );
+            m_routeRequest.insert( 0, m_positionTracking->currentLocation(), QObject::tr( "Current Location" ) );
             q->retrieveRoute();
         }
     }
