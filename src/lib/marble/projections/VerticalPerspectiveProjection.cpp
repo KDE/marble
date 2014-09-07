@@ -122,18 +122,20 @@ bool VerticalPerspectiveProjection::screenCoordinates( const GeoDataCoordinates 
     x = ( qCos( phi ) * qSin( deltaLambda ) ) * k;
     y = ( qCos( phi1 ) * qSin( phi ) - qSin( phi1 ) * qCos( phi ) * qCos( deltaLambda ) ) * k;
 
+    // Transform to screen coordinates
+    qreal pixelAltitude = (coordinates.altitude() + EARTH_RADIUS) * d->m_altitudeToPixel;
+    x *= pixelAltitude;
+    y *= pixelAltitude;
+
+
     // Don't display satellites that are on the Earth's backside:
-    if (cosC < 1/P && x*x+y*y < 1) {
+    if (cosC < 1/P && x*x+y*y < viewport->radius() * viewport->radius()) {
         globeHidesPoint = true;
         return false;
     }
     // The remaining placemarks are definetely not on the Earth's backside
     globeHidesPoint = false;
 
-    // Transform to screen coordinates
-    qreal pixelAltitude = (coordinates.altitude() + EARTH_RADIUS) * d->m_altitudeToPixel;
-    x *= pixelAltitude;
-    y *= pixelAltitude;
     x += viewport->width() / 2;
     y = viewport->height() / 2 - y;
 
