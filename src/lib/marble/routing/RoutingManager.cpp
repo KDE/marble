@@ -158,6 +158,7 @@ void RoutingManagerPrivate::saveRoute(const QString &filename)
     }
 
     GeoDataDocument container;
+    container.setName( "Route" );
     GeoDataFolder* request = routeRequest();
     if ( request ) {
         container.append( request );
