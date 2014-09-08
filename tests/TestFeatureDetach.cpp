@@ -88,7 +88,7 @@ void TestFeatureDetach::testContainer()
     GeoDataContainer cont1;
     GeoDataFeature *feat1 = new GeoDataFeature();
     feat1->setName("Feat1");
-    cont1.insert(feat1, 0);
+    cont1.insert(0, feat1);
 
     GeoDataContainer cont2 = cont1;
     cont2.child(0)->setName("Feat2");

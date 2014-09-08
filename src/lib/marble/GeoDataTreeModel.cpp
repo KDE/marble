@@ -802,7 +802,7 @@ int GeoDataTreeModel::addFeature( GeoDataContainer *parent, GeoDataFeature *feat
                 row = parent->size();
             }
             beginInsertRows( modelindex , row , row );
-            parent->insert( feature, row );
+            parent->insert( row, feature );
             d->checkParenting( parent );
             endInsertRows();
             emit added(feature);
