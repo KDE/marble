@@ -13,7 +13,8 @@
 
 #include <QThread>
 #include <QMutex>
-#include <QSet>
+#include <QMultiMap>
+#include <QDateTime>
 
 namespace Marble
 {
@@ -54,14 +55,6 @@ class FileStorageWatcherThread : public QObject
 	void resetCurrentSize();
 	
 	/**
-	 * Updates the name of the theme.
-	 * Important for deleting behavior.
-	 *
-	 * @param mapTheme The identifier of the new theme.
-	 */
-	void updateTheme( const QString &mapTheme );
-	
-	/**
 	 * Stop doing things that take a long time to quit.
 	 */
 	void prepareQuit();
@@ -81,30 +74,18 @@ class FileStorageWatcherThread : public QObject
 	Q_DISABLE_COPY( FileStorageWatcherThread )
 	
 	/**
-	 * Deletes files of a planet if needed
-	 */
-	void ensureSizePerPlanet( const QString &planetDirectory, const QString &currentTheme = QString() );
-	
-	/**
-	 * Deletes files of a theme if needed
-	 */
-	void ensureSizePerTheme( const QString &themeDirectory );
-	
-	/**
 	 * Returns true if it is necessary to delete files.
 	 */
 	bool keepDeleting() const;
 	
 	QString m_dataDirectory;
-	
-        quint64 m_cacheLimit;
+    QMultiMap<QDateTime,QString> m_filesCache;
+    quint64 m_cacheLimit;
 	quint64 m_cacheSoftLimit;
-        quint64 m_currentCacheSize;
+    quint64 m_currentCacheSize;
 	int     m_filesDeleted;
 	bool 	m_deleting;
-	QString m_mapThemeId;
 	QMutex	m_limitMutex;
-	QMutex	m_themeMutex;
 	bool	m_willQuit;
 };
 
@@ -148,14 +129,7 @@ class FileStorageWatcher : public QThread
 	 */
 	void resetCurrentSize();
 	
-	/**
-	 * Updates the name of the theme.
-	 * Important for deleting behavior.
-	 *
-	 * @param mapTheme The identifier of the new theme.
-	 */
-	void updateTheme( const QString &mapTheme );
-	
+
     Q_SIGNALS:
 	void sizeChanged( qint64 bytes );
 	void cleared();
@@ -172,8 +146,7 @@ class FileStorageWatcher : public QThread
 	
 	QString m_dataDirectory;
 	FileStorageWatcherThread *m_thread;
-	QMutex *m_themeLimitMutex;
-	QString m_theme;
+    QMutex *m_limitMutex;
 	quint64 m_limit;
 	bool m_started;
 	bool m_quitting;
