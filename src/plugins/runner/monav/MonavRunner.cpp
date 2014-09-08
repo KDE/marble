@@ -19,6 +19,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataPlacemark.h"
 
 #include <QProcess>
 #include <QTime>

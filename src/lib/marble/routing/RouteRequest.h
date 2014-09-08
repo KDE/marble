@@ -13,7 +13,6 @@
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
-#include "GeoDataPlacemark.h"
 #include "RoutingProfile.h"
 
 #include <QFlags>
@@ -21,6 +20,7 @@
 namespace Marble
 {
 
+class GeoDataPlacemark;
 class RouteRequestPrivate;
 
 /**
