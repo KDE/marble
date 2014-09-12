@@ -1403,8 +1403,6 @@ void EclSolar::eclStart()
             else break;
             jd2 = jd2 - 1.0/86400.0;  // go in seconds steps
         };
-        pcur = pold;
-
        }
      }
     else if (eclstarted && (pcur < pold))
@@ -1476,7 +1474,6 @@ void EclSolar::eclStart()
                };
           }
       }
-      jd = eb_jdmaxps;
       eb_maxelv = elev / degrad;
       eb_cmxlat = phi / degrad;
       eb_cmxlng = lamda / degrad;
@@ -1509,7 +1506,7 @@ void EclSolar::calcMaxPos(double &lat, double &lng)
 
   if (eb_lunactive)
   {
-      p = eclp.lunar(t, eb_del_tdut);
+      eclp.lunar(t, eb_del_tdut);
       rm = eclp.GetRMoon();
 
       // get sub lunar point at maximum
@@ -1623,7 +1620,6 @@ int EclSolar::eclPltCentral(bool firstc, double &lat, double &lng)
         kp2 = eclp.solar (jd2, eb_del_tdut,d1, d2);
         if (kp2 == kp)
         {
-            jd = jd2;
             phi = d1;
             lamda = d2;
         }
@@ -2472,12 +2468,9 @@ void EclSolar::getLocalDetails(char *otxt)
     i = mnt / eb_cstep;
     mnt = i* int(eb_cstep);   // cut to proper time step
     hh = ddd (deg, mnt, sec);
-    jd = mjd (dd, mm, yy, hh);
     jdf = ept[nump-1];
     for (i=0; i<nump; i++)
      if ((ept[i] > jdf) && (spp[i] > 3)) jdf = ept[i]; // end of central phase
-
-    jd += eb_cstep / (24.0*60.0);
    }
 
   // local circumstances
@@ -2652,7 +2645,6 @@ int EclSolar::centralBound(bool firstc, double& lat1, double& lng1, double& lat2
   if (firstc)
   {
    k = eclPltCentral(true, lt1, ln1);
-   firstc = false;
   }
   else k = eclPltCentral(false, lt1, ln1);
   t = eb_lastjd;

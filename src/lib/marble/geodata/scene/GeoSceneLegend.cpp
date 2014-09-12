@@ -70,7 +70,7 @@ void GeoSceneLegend::addSection( const GeoSceneSection* section )
         const GeoSceneSection* currentSection = *it;
         if ( currentSection->name() == section->name() ) {
             delete currentSection;
-            it = d->m_sections.erase(it);
+            d->m_sections.erase(it);
             break;
         }
         else {

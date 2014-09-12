@@ -148,9 +148,6 @@ void GenericScanlineTextureMapper::RenderJob::run()
     const int imageWidth  = m_canvasImage->width();
     const int imageHeight  = m_canvasImage->height();
     const qint64  radius  = m_viewport->radius();
-    // Calculate how many degrees are being represented per pixel.
-    const qreal rad2Pixel = ( 2 * radius ) / M_PI;
-    const qreal pixel2Rad = 1.0/rad2Pixel;
 
     const bool interlaced   = ( m_mapQuality == LowQuality );
     const bool highQuality  = ( m_mapQuality == HighQuality
@@ -264,7 +261,6 @@ void GenericScanlineTextureMapper::RenderJob::run()
             }
 
             ++scanLine;
-            lon += pixel2Rad;
         }
 
         // copy scanline to improve performance

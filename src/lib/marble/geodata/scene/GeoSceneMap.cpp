@@ -86,7 +86,7 @@ void GeoSceneMap::addLayer( GeoSceneLayer* layer )
         GeoSceneLayer* currentLayer = *it;
         if ( currentLayer->name() == layer->name() ) {
             delete currentLayer;
-            it = d->m_layers.erase(it);
+            d->m_layers.erase(it);
             break;
         }
         else {
@@ -148,7 +148,7 @@ void GeoSceneMap::addFilter( GeoSceneFilter* filter )
         GeoSceneFilter* currentFilter = *it;
         if ( currentFilter->name() == filter->name() ) {
             delete currentFilter;
-            it = d->m_filters.erase(it);
+            d->m_filters.erase(it);
             break;
         }
         else {

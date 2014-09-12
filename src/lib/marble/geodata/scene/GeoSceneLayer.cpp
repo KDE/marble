@@ -69,7 +69,7 @@ void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )
         GeoSceneAbstractDataset * currentAbstractDataset = *it;
         if ( currentAbstractDataset->name() == dataset->name() ) {
             delete currentAbstractDataset;
-            it = m_datasets.erase(it);
+            m_datasets.erase(it);
             break;
         }
         else {

@@ -57,7 +57,7 @@ void GeoSceneSection::addItem( GeoSceneItem* item )
         GeoSceneItem* currentItem = *it;
         if ( currentItem->name() == item->name() ) {
             delete currentItem;
-            it = m_items.erase(it);
+            m_items.erase(it);
             break;
         }
         else {

@@ -180,7 +180,7 @@ void GeoSceneSettings::addGroup( GeoSceneGroup* group )
         GeoSceneGroup* currentGroup = *it;
         if ( currentGroup->name() == group->name() ) {
             delete currentGroup;
-            it = d->m_groups.erase(it);
+            d->m_groups.erase(it);
             break;
         }
         else {
@@ -228,7 +228,7 @@ void GeoSceneSettings::addProperty( GeoSceneProperty* property )
         GeoSceneProperty* currentProperty = *it;
         if ( currentProperty->name() == property->name() ) {
             delete currentProperty;
-            it = d->m_properties.erase(it);
+            d->m_properties.erase(it);
             break;
         }
         else {
