@@ -94,6 +94,7 @@ marble_add_test( AbstractDataPluginTest )
 marble_add_test( AbstractFloatItemTest )
 marble_add_test( RenderPluginModelTest )
 marble_add_test( GeoDataTreeModelTest )
+marble_add_test( RouteRequestTest )
 
 ## GeoData Classes tests
 marble_add_test( TestCamera )
