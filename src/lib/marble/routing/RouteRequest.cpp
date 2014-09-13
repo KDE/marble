@@ -210,8 +210,8 @@ void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates, con
 {
     GeoDataPlacemark placemark;
     placemark.setCoordinate( coordinates );
+    placemark.setName( name );
     d->m_route.insert( index, placemark );
-    setName( index, name );
     emit positionAdded( index );
 }
 
@@ -249,10 +249,8 @@ void RouteRequest::addVia( const GeoDataCoordinates &position )
 void RouteRequest::setPosition( int index, const GeoDataCoordinates &position, const QString &name )
 {
     if ( index >= 0 && index < d->m_route.size() ) {
-        GeoDataPlacemark placemark;
-        placemark.setCoordinate( position );
-        d->m_route[index] = placemark;
-        setName( index, name );
+        d->m_route[index].setCoordinate( position );
+        d->m_route[index].setName( name );
         setVisited( index, false );
         emit positionChanged( index, position );
     }
