@@ -249,10 +249,12 @@ void RouteRequest::addVia( const GeoDataCoordinates &position )
 void RouteRequest::setPosition( int index, const GeoDataCoordinates &position, const QString &name )
 {
     if ( index >= 0 && index < d->m_route.size() ) {
-        d->m_route[index].setCoordinate( position );
         d->m_route[index].setName( name );
-        setVisited( index, false );
-        emit positionChanged( index, position );
+        if ( d->m_route[index].coordinate() != position ) {
+            d->m_route[index].setCoordinate( position );
+            setVisited( index, false );
+            emit positionChanged( index, position );
+        }
     }
 }
 
