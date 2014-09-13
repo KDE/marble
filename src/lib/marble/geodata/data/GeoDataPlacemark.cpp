@@ -53,6 +53,13 @@ GeoDataPlacemark::~GeoDataPlacemark()
     // nothing to do
 }
 
+GeoDataPlacemark &GeoDataPlacemark::operator=( const GeoDataPlacemark &other )
+{
+    *p() = *other.p();
+
+    return *this;
+}
+
 bool GeoDataPlacemark::operator==( const GeoDataPlacemark& other ) const
 { 
     if ( !equals(other) ||

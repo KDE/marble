@@ -74,6 +74,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     */
     ~GeoDataPlacemark();
 
+    GeoDataPlacemark &operator=( const GeoDataPlacemark &other );
+
     /**
     * Equality operators.
     */
