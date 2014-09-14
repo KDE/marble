@@ -85,6 +85,7 @@
 #include "cloudsync/BookmarkSyncManager.h"
 #include "cloudsync/RouteSyncManager.h"
 #include "MovieCaptureDialog.h"
+#include "DataMigration.h"
 
 namespace
 {
@@ -172,6 +173,11 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     QString selectedPath = marbleDataPath.isEmpty() ? readMarbleDataPath() : marbleDataPath;
     if ( !selectedPath.isEmpty() )
         MarbleDirs::setMarbleDataPath( selectedPath );
+
+#ifdef Q_OS_WIN
+	DataMigration* migration = new DataMigration(this);
+	migration->exec();
+#endif
 
     m_controlView = new ControlView( this );
 
