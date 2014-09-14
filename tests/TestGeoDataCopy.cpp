@@ -384,9 +384,18 @@ void TestGeoDataCopy::copyFolder()
     folder.append(new GeoDataPlacemark(pl3));
 
     QCOMPARE(folder.size(), 3);
+    QCOMPARE(folder.child(0)->parent(), &folder);
+    QCOMPARE(folder.child(1)->parent(), &folder);
+    QCOMPARE(folder.child(2)->parent(), &folder);
 
     GeoDataFolder other = folder;
     QCOMPARE(other.size(), 3);
+    QEXPECT_FAIL("", "FIXME", Continue);
+    QCOMPARE(other.child(0)->parent(), &other);
+    QEXPECT_FAIL("", "FIXME", Continue);
+    QCOMPARE(other.child(1)->parent(), &other);
+    QEXPECT_FAIL("", "FIXME", Continue);
+    QCOMPARE(other.child(2)->parent(), &other);
     testCoordinate(static_cast<GeoDataPlacemark*>(other.child(0))->coordinate(), 123.4, 2, coordString[0]);
     testCoordinate(static_cast<GeoDataPlacemark*>(other.child(1))->coordinate(), 133.4, 3, coordString[1]);
     testCoordinate(static_cast<GeoDataPlacemark*>(other.child(2))->coordinate(), 143.4, 4, coordString[2]);
@@ -420,6 +429,7 @@ void TestGeoDataCopy::copyPlacemark()
     QCOMPARE(placemark.population(), (qint64)123456789);
     QCOMPARE(placemark.id(), QString("281012"));
     QCOMPARE(placemark.name(), QString::fromLatin1("Patrick Spendrin"));
+    QCOMPARE(placemark.geometry()->parent(), &placemark);
 
     GeoDataPlacemark other = placemark;
     
@@ -429,6 +439,7 @@ void TestGeoDataCopy::copyPlacemark()
     QCOMPARE(other.population(), (qint64)123456789);
     QCOMPARE(other.id(), QString("281012"));
     QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
+    QCOMPARE(other.geometry()->parent(), &other);
 
     other.setPopulation(987654321);
 
