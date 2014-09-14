@@ -416,12 +416,14 @@ void TestGeoDataCopy::copyPlacemark()
     testCoordinate(point->coordinates(), 123.4, 2, coordString[0]);
     QCOMPARE(point->extrude(), true);
 
+    GeoDataFolder folder;
     GeoDataPlacemark placemark;
     placemark.setName("Patrick Spendrin");
     placemark.setGeometry(point);
     placemark.setArea(12345678.0);
     placemark.setPopulation(123456789);
     placemark.setId("281012");
+    placemark.setParent(&folder);
 
     testCoordinate(placemark.coordinate(), 123.4, 2, coordString[0]);
     testCoordinate(static_cast<GeoDataPoint*>(placemark.geometry())->coordinates(), 123.4, 2, coordString[0]);
@@ -430,26 +432,74 @@ void TestGeoDataCopy::copyPlacemark()
     QCOMPARE(placemark.id(), QString("281012"));
     QCOMPARE(placemark.name(), QString::fromLatin1("Patrick Spendrin"));
     QCOMPARE(placemark.geometry()->parent(), &placemark);
+    QCOMPARE(placemark.parent(), &folder);
 
-    GeoDataPlacemark other = placemark;
-    
-    testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-    testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
-    QCOMPARE(other.area(), 12345678.0);
-    QCOMPARE(other.population(), (qint64)123456789);
-    QCOMPARE(other.id(), QString("281012"));
-    QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
-    QCOMPARE(other.geometry()->parent(), &other);
+    {
+        GeoDataPlacemark other(placemark);
 
-    other.setPopulation(987654321);
+        QEXPECT_FAIL("", "an ID is unique in the context of a document, so shouldn't be copied", Continue);
+        QCOMPARE(other.id(), QString());
+        QEXPECT_FAIL("", "similar case like for ID, so shouldn't be copied", Continue);
+        QCOMPARE(other.parent(), static_cast<GeoDataObject *>(0));
+        testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
+        testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
+        QCOMPARE(other.area(), 12345678.0);
+        QCOMPARE(other.population(), (qint64)123456789);
+        QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
+        QCOMPARE(other.geometry()->parent(), &other);
 
-    testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-    testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
-    QCOMPARE(other.area(), 12345678.0);
-    QCOMPARE(other.population(), (qint64)987654321);
-    QCOMPARE(placemark.population(), (qint64)123456789);
-    QCOMPARE(placemark.name(), QString::fromLatin1("Patrick Spendrin"));
-    QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
+        other.setPopulation(987654321);
+
+        testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
+        testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
+        QCOMPARE(other.area(), 12345678.0);
+        QCOMPARE(other.population(), (qint64)987654321);
+        QCOMPARE(placemark.population(), (qint64)123456789);
+        QCOMPARE(placemark.name(), QString::fromLatin1("Patrick Spendrin"));
+        QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
+    }
+
+    {
+        GeoDataPlacemark other;
+
+        QCOMPARE(other.parent(), static_cast<GeoDataObject *>(0)); // add a check before assignment to avoid compiler optimizing to copy c'tor
+
+        other = placemark;
+
+        QEXPECT_FAIL("", "an ID is unique in the context of a document, so shouldn't be copied", Continue);
+        QCOMPARE(other.id(), QString());
+        QEXPECT_FAIL("", "similar case like for ID, so shouldn't be copied", Continue);
+        QCOMPARE(other.parent(), static_cast<GeoDataObject *>(0));
+        testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
+        testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
+        QCOMPARE(other.area(), 12345678.0);
+        QCOMPARE(other.population(), (qint64)123456789);
+        QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
+        QCOMPARE(other.geometry()->parent(), &other);
+
+        other.setPopulation(987654321);
+
+        testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
+        testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
+        QCOMPARE(other.area(), 12345678.0);
+        QCOMPARE(other.population(), (qint64)987654321);
+        QCOMPARE(placemark.population(), (qint64)123456789);
+        QCOMPARE(placemark.name(), QString::fromLatin1("Patrick Spendrin"));
+        QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
+    }
+
+    {
+        GeoDataFolder otherFolder;
+        GeoDataPlacemark other;
+        other.setParent(&otherFolder);
+
+        QCOMPARE(other.parent(), &otherFolder);
+
+        other = placemark;
+
+        QEXPECT_FAIL("", "similar case like for ID, so shouldn't be copied", Continue);
+        QCOMPARE(other.parent(), &otherFolder);
+    }
 }
 
 void TestGeoDataCopy::copyHotSpot()
