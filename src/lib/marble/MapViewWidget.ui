@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>222</width>
+    <width>251</width>
     <height>426</height>
    </rect>
   </property>
@@ -75,6 +75,15 @@
      <item>
       <property name="text">
        <string>Stereographic</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../../apps/marble-ui/marble.qrc">
+        <normaloff>:/icons/map-globe.png</normaloff>:/icons/map-globe.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Lambert Azimuthal Equal Area</string>
       </property>
       <property name="icon">
        <iconset resource="../../apps/marble-ui/marble.qrc">

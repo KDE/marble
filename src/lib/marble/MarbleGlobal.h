@@ -42,11 +42,12 @@ Q_DECLARE_FLAGS(TessellationFlags, TessellationFlag)
  * @brief This enum is used to choose the projection shown in the view.
  */
 enum Projection { 
-    Spherical,          ///< Spherical projection
+    Spherical,          ///< Spherical projection ("Orthographic")
     Equirectangular,    ///< Flat projection ("plate carree")
     Mercator,           ///< Mercator projection
     Gnomonic,           ///< Gnomonic projection
     Stereographic,      ///< Stereographic projection
+    LambertAzimuthal,   ///< Lambert Azimuthal Equal-Area
     VerticalPerspective ///< Vertical perspective projection
     // NOTE: MarbleWidget::setProjection(int) relies on VerticalPerspective being the last
     // value above. Adjust that method if you do changes here
