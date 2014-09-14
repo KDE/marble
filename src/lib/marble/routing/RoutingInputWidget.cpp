@@ -120,7 +120,12 @@ void RoutingInputWidgetPrivate::updateDescription()
     }
     else if ( m_route->name( m_index ).isEmpty() )
     {
-        m_lineEdit->setText( placemark.coordinate().toString().trimmed() );
+        if ( !placemark.address().isEmpty() ) {
+            m_lineEdit->setText( placemark.address() );
+        }
+        else {
+            m_lineEdit->setText( placemark.coordinate().toString().trimmed() );
+        }
     }
     else
     {
