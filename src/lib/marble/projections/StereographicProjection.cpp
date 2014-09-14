@@ -88,8 +88,8 @@ bool StereographicProjection::screenCoordinates( const GeoDataCoordinates &coord
     x = ( qCos( phi ) * qSin( lambda - lambdaPrime ) ) * k;
     y = ( qCos( phi1 ) * qSin( phi ) - qSin( phi1 ) * qCos( phi ) * qCos( lambda - lambdaPrime ) ) * k;
 
-    x *= 4 * viewport->radius() / M_PI;
-    y *= 4 * viewport->radius() / M_PI;
+    x *= viewport->radius();
+    y *= viewport->radius();
 
     const qint64  radius  = clippingRadius() * viewport->radius();
 
@@ -144,13 +144,12 @@ bool StereographicProjection::geoCoordinates( const int x, const int y,
 {
     const qint64  radius  = viewport->radius();
     // Calculate how many degrees are being represented per pixel.
-    const qreal rad2Pixel = ( 2 * radius ) / M_PI;
     const qreal centerLon = viewport->centerLongitude();
     const qreal centerLat = viewport->centerLatitude();
-    const qreal rx = ( - viewport->width()  / 2 + x ) / rad2Pixel;
-    const qreal ry = (   viewport->height() / 2 - y ) / rad2Pixel;
+    const qreal rx = ( - viewport->width()  / 2 + x );
+    const qreal ry = (   viewport->height() / 2 - y );
     const qreal p = qMax( qSqrt( rx*rx + ry*ry ), 0.0001 ); // ensure we don't divide by zero
-    const qreal c = 2 * qAtan2( p , 2 );
+    const qreal c = 2 * qAtan2( p , radius );
     const qreal sinc = qSin(c);
 
     lon = centerLon + qAtan2( rx*sinc , ( p*qCos( centerLat )*qCos( c ) - ry*qSin( centerLat )*sinc  ) );
