@@ -11,12 +11,13 @@
 #ifndef MARBLE_DATAMIGRATION_H
 #define MARBLE_DATAMIGRATION_H
 
+#include "marble_export.h"
 #include <QObject>
 
 namespace Marble
 {
 
-class DataMigration : public QObject
+class MARBLE_EXPORT DataMigration : public QObject
 {
     Q_OBJECT
 

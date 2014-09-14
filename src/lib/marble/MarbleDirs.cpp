@@ -21,9 +21,10 @@
 
 #include <stdlib.h>
 
-#ifdef Q_OS_MACX
-//for getting app bundle path
-#include <ApplicationServices/ApplicationServices.h>
+#if QT_VERSION >= 0x050000
+#include <QStandardPaths>
+#else
+#include <QDesktopServices>
 #endif
 
 #ifdef Q_OS_WIN
@@ -31,6 +32,11 @@
 //mingw-w64 Internet Explorer 5.01
 #define _WIN32_IE 0x0501
 #include <shlobj.h>
+#endif
+
+#ifdef Q_OS_MACX
+//for getting app bundle path
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #include <config-marble.h>
@@ -223,13 +229,11 @@ QString MarbleDirs::localPath()
 
     return dataHome + "/marble"; // local path
 #else
-    HWND hwnd = 0;
-    WCHAR *appdata_path = new WCHAR[MAX_PATH+1];
-    
-    SHGetSpecialFolderPathW( hwnd, appdata_path, CSIDL_APPDATA, 0 );
-    QString appdata = QString::fromUtf16( reinterpret_cast<ushort*>( appdata_path ) );
-    delete[] appdata_path;
-    return QString( QDir::fromNativeSeparators( appdata ) + "/.marble/data" ); // local path
+#if QT_VERSION >= 0x050000
+	return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/.marble/data";
+#else
+	return QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/.marble/data";
+#endif
 #endif
 }
 
@@ -248,6 +252,17 @@ QStringList MarbleDirs::oldLocalPaths()
     xdg += "/marble/";
     possibleOldPaths.append( xdg );
 #endif
+
+#ifdef Q_OS_WIN
+	HWND hwnd = 0;
+	WCHAR *appdata_path = new WCHAR[MAX_PATH + 1];
+
+	SHGetSpecialFolderPathW(hwnd, appdata_path, CSIDL_APPDATA, 0);
+	QString appdata = QString::fromUtf16(reinterpret_cast<ushort*>(appdata_path));
+	delete[] appdata_path;
+	possibleOldPaths << QString(QDir::fromNativeSeparators(appdata) + "/.marble/data"); // local path
+#endif
+
     QString currentLocalPath = QDir( MarbleDirs::localPath() ).canonicalPath();
     QStringList oldPaths;
     foreach( const QString& possibleOldPath, possibleOldPaths ) {
@@ -271,13 +286,11 @@ QString MarbleDirs::pluginLocalPath()
 #ifndef Q_OS_WIN
     return QString( QDir::homePath() + "/.marble/plugins" ); // local path
 #else
-    HWND hwnd = 0;
-    WCHAR *appdata_path = new WCHAR[MAX_PATH+1];
-    
-    SHGetSpecialFolderPathW( hwnd, appdata_path, CSIDL_APPDATA, 0 );
-    QString appdata = QString::fromUtf16( reinterpret_cast<ushort*>( appdata_path ) );
-    delete[] appdata_path;
-    return QString( QDir::fromNativeSeparators( appdata ) + "/.marble/plugins" ); // local path
+#if QT_VERSION >= 0x050000
+	return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/.marble/plugins";
+#else
+	return QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/.marble/plugins";
+#endif
 #endif
 }
 
