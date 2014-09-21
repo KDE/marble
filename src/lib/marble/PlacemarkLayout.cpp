@@ -320,7 +320,7 @@ QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport )
 {
     int zoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
 
-    /**
+    /*
      * rely on m_placemarkCache to find the placemarks for the tiles which
      * matter. The top level tiles have the more popular placemarks,
      * the bottom level tiles have the smaller ones, and we only get the ones
@@ -389,9 +389,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
     m_paintOrder.clear();
     m_labelArea = 0;
 
-    /**
-     * First handle the selected placemarks, as they have the highest priority.
-     */
+    // First handle the selected placemarks as they have the highest priority.
 
     const QModelIndexList selectedIndexes = m_selectionModel->selection().indexes();
 
@@ -424,9 +422,8 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
 
     }
 
-    /**
-     * Now handle all other placemarks...
-     */
+    // Now handle all other placemarks...
+
     const QItemSelection selection = m_selectionModel->selection();
 
     QList<TileId> tileIdList = visibleTiles( viewport ).toList();
@@ -501,11 +498,9 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
              && visualCategory <= GeoDataFeature::Observatory )
             continue;
 
-        /**
-         * We handled selected placemarks already, so we skip them here...
-         * Assuming that only a small amount of places is selected
-         * we check for the selected state after all other filters
-         */
+        // We handled selected placemarks already, so we skip them here...
+        // Assuming that only a small amount of places is selected
+        // we check for the selected state after all other filters
         bool isSelected = false;
         foreach ( const QModelIndex &index, selection.indexes() ) {
             const GeoDataPlacemark *mark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
