@@ -78,7 +78,9 @@ bool GnomonicProjection::screenCoordinates( const GeoDataCoordinates &coordinate
     qreal cosC = qSin( phi1 ) * qSin( phi ) + qCos( phi1 ) * qCos( phi ) * qCos( lambda - lambdaPrime );
 
     // Prevent division by zero
-    if (fabs(cosC < 0.0001)) cosC = 0.0001;
+    if (fabs(cosC) < 0.0001) {
+        cosC = 0.0001;
+    }
 
     // Let (x, y) be the position on the screen of the placemark..
     x = ( qCos( phi ) * qSin( lambda - lambdaPrime ) ) / cosC;
