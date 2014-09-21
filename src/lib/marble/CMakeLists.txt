@@ -156,6 +156,7 @@ set(marblewidget_SRCS
     projections/GnomonicProjection.cpp
     projections/StereographicProjection.cpp
     projections/LambertAzimuthalProjection.cpp
+    projections/AzimuthalEquidistantProjection.cpp
     projections/VerticalPerspectiveProjection.cpp
     VisiblePlacemark.cpp
     PlacemarkLayout.cpp

@@ -47,7 +47,8 @@ enum Projection {
     Mercator,           ///< Mercator projection
     Gnomonic,           ///< Gnomonic projection
     Stereographic,      ///< Stereographic projection
-    LambertAzimuthal,   ///< Lambert Azimuthal Equal-Area
+    LambertAzimuthal,   ///< Lambert Azimuthal Equal-Area projection
+    AzimuthalEquidistant,   ///< Azimuthal Equidistant projection
     VerticalPerspective ///< Vertical perspective projection
     // NOTE: MarbleWidget::setProjection(int) relies on VerticalPerspective being the last
     // value above. Adjust that method if you do changes here

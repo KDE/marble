@@ -200,6 +200,8 @@ QString MarbleWidget::projection( ) const
         return "Stereographic";
     case Marble::LambertAzimuthal:
         return "Lambert Azimuthal Equal-Area";
+    case Marble::AzimuthalEquidistant:
+        return "Azimuthal Equidistant";
     case Marble::VerticalPerspective:
         return "Perspective Globe";
     }

@@ -401,6 +401,7 @@ void TextureLayer::setProjection( Projection projection )
         case Gnomonic:
         case Stereographic:
         case LambertAzimuthal:
+        case AzimuthalEquidistant:
         case VerticalPerspective:
             d->m_texmapper = new GenericScanlineTextureMapper( &d->m_tileLoader );
             break;

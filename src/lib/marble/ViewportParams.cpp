@@ -25,6 +25,7 @@
 #include "MercatorProjection.h"
 #include "GnomonicProjection.h"
 #include "LambertAzimuthalProjection.h"
+#include "AzimuthalEquidistantProjection.h"
 #include "StereographicProjection.h"
 #include "VerticalPerspectiveProjection.h"
 
@@ -67,6 +68,7 @@ public:
     static const GnomonicProjection   s_gnomonicProjection;
     static const StereographicProjection   s_stereographicProjection;
     static const LambertAzimuthalProjection   s_lambertAzimuthalProjection;
+    static const AzimuthalEquidistantProjection   s_azimuthalEquidistantProjection;
     static const VerticalPerspectiveProjection   s_verticalPerspectiveProjection;
 
     GeoDataCoordinates   m_focusPoint;
@@ -78,6 +80,7 @@ const MercatorProjection   ViewportParamsPrivate::s_mercatorProjection;
 const GnomonicProjection   ViewportParamsPrivate::s_gnomonicProjection;
 const StereographicProjection   ViewportParamsPrivate::s_stereographicProjection;
 const LambertAzimuthalProjection   ViewportParamsPrivate::s_lambertAzimuthalProjection;
+const AzimuthalEquidistantProjection   ViewportParamsPrivate::s_azimuthalEquidistantProjection;
 const VerticalPerspectiveProjection   ViewportParamsPrivate::s_verticalPerspectiveProjection;
 
 ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
@@ -113,6 +116,8 @@ const AbstractProjection *ViewportParamsPrivate::abstractProjection(Projection p
         return &s_stereographicProjection;
     case LambertAzimuthal:
         return &s_lambertAzimuthalProjection;
+    case AzimuthalEquidistant:
+        return &s_azimuthalEquidistantProjection;
     case VerticalPerspective:
         return &s_verticalPerspectiveProjection;
     }

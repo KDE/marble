@@ -56,6 +56,7 @@ private Q_SLOTS:
     void gnomonicViewRequested();
     void stereographicViewRequested();
     void lambertAzimuthalViewRequested();
+    void azimuthalEquidistantViewRequested(); 
     void verticalPerspectiveViewRequested();
 
  private:
