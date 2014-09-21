@@ -27,8 +27,6 @@ using namespace Marble;
 // Only remove 20 files without checking
 // changed cacheLimits and changed themes etc.
 static const int maxFilesDelete = 20;
-// Delete only files that are older than 120 Seconds
-static const int deleteOnlyFilesOlderThan = 120;
 static const int softLimitPercent = 5;
 
 
