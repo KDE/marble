@@ -5,7 +5,7 @@
 # find a copy of this license in LICENSE.txt in the top directory of
 # the source code.
 #
-# Copyright 2012 Rene Kuettner <rene@bitkanal.net>
+# Copyright 2012-2014 Rene Kuettner <rene@bitkanal.net>
 #
 
 from __future__ import print_function
@@ -13,13 +13,13 @@ from __future__ import print_function
 import time
 import calendar
 
+from lxml import etree
+from lxml.builder import ElementMaker
+
+
 class SpaceObject(object):
 
     DATE_FORMAT             = '%Y-%m-%d %H:%M'
-
-    # data sources
-    DATASOURCE_HORIZONS     = 1
-    DATASOURCE_TASC         = 2
 
     # object catagories 
     CATEGORY_SPACECRAFTS    = "Spacecrafts"
@@ -49,23 +49,17 @@ class SpaceObject(object):
         self._data_from = None
         self._data_until = None
         self._data_interval_days = 31
-        self._tasc_mission = None
-        self._horizons_id = None
         for prop in kwargs.keys():
-            if(hasattr(self, prop)):
+            if hasattr(self, prop):
                 setattr(self, prop, kwargs[prop])
 
     @property
     def data_source(self):
         return self._data_source
 
-    @data_source.setter
-    def data_source(self, value):
-        self._data_source = int(value)
-
     @property
     def filename_prefix(self):
-        if(self._filename_prefix is None):
+        if self._filename_prefix is None:
             # let's hope this is valid:
             return self.name.replace(' ', '_').lower()
         return self._filename_prefix
@@ -134,7 +128,7 @@ class SpaceObject(object):
     def data_until(self):
         if self._data_until is None:
             if self.mission_end is None:
-                return time.time() - (time.time() % (3600*24)) + 61 
+                return time.time()
             else:
                 return self.mission_end - (24*3600)
         return self._data_until
@@ -163,11 +157,16 @@ class SpaceObject(object):
     def data_interval_days(self, value):
         self._data_interval_days = int(value)
 
-    ### ESA TASC properties
+
+class TASCSpaceObject(SpaceObject):
+
+    def __init__(self, **kwargs):
+        super(TASCSpaceObject, self).__init__(**kwargs)
+        self._tasc_mission = None
 
     @property
     def tasc_mission(self):
-        if(self._tasc_mission is None):
+        if self._tasc_mission is None:
             return self.name
         return self._tasc_mission
 
@@ -175,11 +174,16 @@ class SpaceObject(object):
     def tasc_mission(self, value):
         self._tasc_mission = value
 
-    ### NASA Horizons properties
+
+class HorizonsSpaceObject(SpaceObject):
+
+    def __init__(self, **kwargs):
+        super(HorizonsSpaceObject, self).__init__(**kwargs)
+        self._horizons_id = None
 
     @property
     def horizons_id(self):
-        if(self._horizons_id is None):
+        if self._horizons_id is None:
             return self.name
         return self._horizons_id
 
@@ -188,3 +192,68 @@ class SpaceObject(object):
         self._horizons_id = value
 
 
+class SpaceObjectCatalog(object):
+
+    def __init__(self, filename, baseURL):
+        super(SpaceObjectCatalog, self).__init__()
+        self._filename = filename;
+        self._baseURL = baseURL
+        self._file = None
+        self._open()
+        self._initXML();
+
+    def __del__(self):
+        self._close()
+
+    def add(self, space_obj, latest_vector):
+        #url  = self._baseURL + "/" + space_obj.filename_prefix + '.txt'
+        #icon = self._baseURL + "/" + space_obj.filename_prefix + '.png'
+        satellite = self._E.satellite(
+            self._E.name(space_obj.name),
+            self._E.category(space_obj._category),
+            self._E.relatedBody(space_obj.related_body),
+            self._E.stateVector(
+                self._E.position(
+                    x=str(latest_vector[1]),
+                    y=str(latest_vector[2]),
+                    z=str(latest_vector[3])
+                ),
+                self._E.velocity(
+                    x=str(latest_vector[4]),
+                    y=str(latest_vector[5]),
+                    z=str(latest_vector[6])
+                ),
+            mjd=str(latest_vector[0])
+            ),
+            #allvectors=url,
+            #icon=icon,
+        )
+        mission = self._E.mission()
+        if space_obj.mission_start is not None:
+            mission.append(self._E.start(str(space_obj.mission_start)))
+        if space_obj.mission_end is not None:
+            mission.append(self._E.end(str(space_obj.mission_end)))
+        if len(mission):
+            satellite.append(mission)
+        self._xml.append(satellite)
+        print(space_obj.name + " added to object catalog.")
+
+    def write(self):
+        print("Writing catalog to file: " + self._filename)
+        self._file.write(etree.tostring(self._xml,
+                                        pretty_print=True,
+                                        xml_declaration=True,
+                                        encoding='utf-8'))
+
+    def _initXML(self):
+        self._E = ElementMaker(
+            namespace="http://marble.kde.org/satellitecatalog",
+            nsmap={'msc' : "http://marble.kde.org/satellitecatalog"})
+        self._xml = self._E.MarbleSatelliteCatalog()
+
+    def _open(self):
+        self._file = open(self._filename, 'w+')
+        self._file.truncate()
+
+    def _close(self):
+        self._file.close()

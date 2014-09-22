@@ -6,7 +6,7 @@
 # find a copy of this license in LICENSE.txt in the top directory of
 # the source code.
 #
-# Copyright 2012 Rene Kuettner <rene@bitkanal.net>
+# Copyright 2012-2014 Rene Kuettner <rene@bitkanal.net>
 #
 
 # Create a Marble Satellite Catalog file with data from various sources.
@@ -14,68 +14,74 @@
 
 from __future__ import print_function
 
-from lib.SpaceObject import SpaceObject
-from lib.HorizonsClient import HorizonsClient
-from lib.TASCClient import TASCClient
-from lib.ObjectCatalog import ObjectCatalog
+from lib.SpaceObjectCatalog import (SpaceObject, HorizonsSpaceObject,
+                                   TASCSpaceObject, SpaceObjectCatalog)
+from lib.DataDownloader import DataDownloader
 
 ####[ Configuration ]#########################################################
 
-object_catalog_file   = "PlanetarySatellites.xml"
+object_catalog_file     = "PlanetarySatellites.xml"
 data_file_base_url      = "http://files.kde.org/marble/satellites"
 
 # define all interesting objects
 # FIXME: document possible values
 OBJECTS = [
     # Mars Express
-    SpaceObject( data_source        = SpaceObject.DATASOURCE_HORIZONS,
-                 name               = 'Mars Express',
-                 horizons_id        = -41,
-                 category           = SpaceObject.CATEGORY_SPACEPROBES,
-                 related_body       = SpaceObject.BODY_MARS,
-                 mission_start      = '2003-12-23 00:00' ),
+    HorizonsSpaceObject(
+        name            = 'Mars Express',
+        horizons_id     = -41,
+        category        = SpaceObject.CATEGORY_SPACEPROBES,
+        related_body    = SpaceObject.BODY_MARS,
+        mission_start   = '2003-12-23 00:00',
+        ),
     # Mars Odyssey
-    #SpaceObject( data_source        = SpaceObject.DATASOURCE_HORIZONS,
-    #             name               = 'Mars Odyssey',
-    #             horizons_id        = -53,
-    #             category           = SpaceObject.CATEGORY_SPACEPROBES,
-    #             related_body       = SpaceObject.BODY_MARS,
-    #             mission_start      = '2001-11-02 00:00' ),
+    #HorizonsSpaceObject(
+    #    name            = 'Mars Odyssey',
+    #    horizons_id     = -53,
+    #    category        = SpaceObject.CATEGORY_SPACEPROBES,
+    #    related_body    = SpaceObject.BODY_MARS,
+    #    mission_start   = '2001-11-02 00:00',
+    #    ),
     # Mars Reconnaisance
-    #SpaceObject( data_source        = SpaceObject.DATASOURCE_HORIZONS,
-    #             name               = 'Mars Reconnaisance',
-    #             horizons_id        = -74,
-    #             category           = SpaceObject.CATEGORY_SPACEPROBES,
-    #             related_body       = SpaceObject.BODY_MARS,
-    #             mission_start      = '2005-08-12 11:43' ),
+    #HorizonsSpaceObject(
+    #    name            = 'Mars Reconnaisance',
+    #    horizons_id     = -74,
+    #    category        = SpaceObject.CATEGORY_SPACEPROBES,
+    #    related_body    = SpaceObject.BODY_MARS,
+    #    mission_start   = '2005-08-12 11:43',
+    #    ),
     # Venus Express
-    SpaceObject( data_source        = SpaceObject.DATASOURCE_HORIZONS,
-                 name               = 'Venus Express',
-                 horizons_id        = -248,
-                 category           = SpaceObject.CATEGORY_SPACEPROBES,
-                 related_body       = SpaceObject.BODY_VENUS,
-                 mission_start      = '2006-04-11 00:00' ),
+    HorizonsSpaceObject(
+        name            = 'Venus Express',
+        horizons_id     = -248,
+        category        = SpaceObject.CATEGORY_SPACEPROBES,
+        related_body    = SpaceObject.BODY_VENUS,
+        mission_start   = '2006-04-11 00:00',
+        ),
     # Phobos
-    SpaceObject( data_source        = SpaceObject.DATASOURCE_HORIZONS,
-                 name               = 'Phobos',
-                 horizons_id        = 401,
-                 category           = SpaceObject.CATEGORY_MOONS,
-                 related_body       = SpaceObject.BODY_MARS ),
+    HorizonsSpaceObject(
+        name            = 'Phobos',
+        horizons_id     = 401,
+        category        = SpaceObject.CATEGORY_MOONS,
+        related_body    = SpaceObject.BODY_MARS,
+        ),
     # Deimos
-    SpaceObject( data_source        = SpaceObject.DATASOURCE_HORIZONS,
-                 name               = 'Deimos',
-                 horizons_id        = 402,
-                 category           = SpaceObject.CATEGORY_MOONS,
-                 related_body       = SpaceObject.BODY_MARS ),
+    HorizonsSpaceObject(
+        name            = 'Deimos',
+        horizons_id     = 402,
+        category        = SpaceObject.CATEGORY_MOONS,
+        related_body    = SpaceObject.BODY_MARS,
+        ),
     # Smart-1
-    SpaceObject( data_source        = SpaceObject.DATASOURCE_TASC,
-                 name               = "Smart-1",
-                 tasc_mission       = "SM1",
-                 category           = SpaceObject.CATEGORY_SPACEPROBES,
-                 related_body       = SpaceObject.BODY_MOON,
-                 mission_start      = '2003-09-28 00:00',
-                 mission_end        = '2006-09-03 00:00',
-                 data_for_day       = '2005-02-28 00:00'),
+    TASCSpaceObject(
+        name            = "Smart-1",
+        tasc_mission    = "SM1",
+        category        = SpaceObject.CATEGORY_SPACEPROBES,
+        related_body    = SpaceObject.BODY_MOON,
+        mission_start   = '2003-09-28 00:00',
+        mission_end     = '2006-09-03 00:00',
+        data_for_day    = '2005-02-28 00:00',
+        ),
 ]
 
 ##############################################################################
@@ -85,36 +91,19 @@ class OrbitDataFetcher(object):
     def __init__(self, object_catalog):
         super(OrbitDataFetcher, self).__init__()
         self._object_catalog = object_catalog
-        self._horizons_client = HorizonsClient()
-        self._horizons_client.connect()
-        self._tasc_client = TASCClient()
-
-    def __del__(self):
-        self._horizons_client.disconnect()
+        self._downloader = DataDownloader()
 
     def fetch(self, objects):
         vecs = []
         for obj in list(objects):
-            if(obj.data_source is SpaceObject.DATASOURCE_HORIZONS):
-                vecs = self._fetch_from_horizons(obj)
-            elif(obj.data_source is SpaceObject.DATASOURCE_TASC):
-                vecs = self._fetch_from_tasc(obj)
-            else:
-                print("Unsupported data source for " + obj.name)
-            if(len(vecs) < 1):
+            vecs = self._downloader.download_state_vectors(obj)
+            if len(vecs) < 1:
                 print("No data found! Skipping.")
                 continue
             self._object_catalog.add(obj, vecs[-1])
 
-    def _fetch_from_horizons(self, space_object):
-        return self._horizons_client.get_state_vectors_for_object(space_object)
-
-    def _fetch_from_tasc(self, space_object):
-        return self._tasc_client.get_state_vectors_for_object(space_object)
-
 # let's start fetching...
-object_catalog = ObjectCatalog(object_catalog_file, data_file_base_url)
+object_catalog = SpaceObjectCatalog(object_catalog_file, data_file_base_url)
 orbit_data_fetcher = OrbitDataFetcher(object_catalog)
 orbit_data_fetcher.fetch(OBJECTS)
-object_catalog.write() # finally, write data to file
-
+object_catalog.write()
