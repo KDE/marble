@@ -75,6 +75,22 @@ VerticalPerspectiveProjectionPrivate::VerticalPerspectiveProjectionPrivate( Vert
 {
 }
 
+
+QString VerticalPerspectiveProjection::name() const
+{
+    return QObject::tr( "Vertical Perspective Projection" );
+}
+
+QString VerticalPerspectiveProjection::description() const
+{
+    return QObject::tr( "<p><b>Vertical Perspective Projection</b> (\"orthogonal\")</p><p> Shows the earth as it appears from a relatively short distance above the surface. Applications: Used for Virtual Globes.</p>" );
+}
+
+QIcon VerticalPerspectiveProjection::icon() const
+{
+    return QIcon(":/icons/map-globe.png");
+}
+
 void VerticalPerspectiveProjectionPrivate::calculateConstants(qreal radius) const
 {
     if (radius == m_previousRadius)  return;

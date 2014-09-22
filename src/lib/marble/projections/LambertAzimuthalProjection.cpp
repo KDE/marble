@@ -61,6 +61,21 @@ LambertAzimuthalProjectionPrivate::LambertAzimuthalProjectionPrivate( LambertAzi
 {
 }
 
+QString LambertAzimuthalProjection::name() const
+{
+    return QObject::tr( "Lambert Azimuthal Equal-Area" );
+}
+
+QString LambertAzimuthalProjection::description() const
+{
+    return QObject::tr( "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used in structural geology to plot directional data.</p>" );
+}
+
+QIcon LambertAzimuthalProjection::icon() const
+{
+    return QIcon(":/icons/map-globe.png");
+}
+
 qreal LambertAzimuthalProjection::clippingRadius() const
 {
     return 1;

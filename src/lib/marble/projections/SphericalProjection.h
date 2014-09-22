@@ -47,6 +47,22 @@ class SphericalProjection : public AzimuthalProjection
     virtual ~SphericalProjection();
 
     /**
+     * @brief Returns the user-visible name of the projection.
+     */
+    QString name() const;
+
+    /**
+     * @brief Returns a short user description of the projection
+     * that can be used in tooltips or dialogs.
+     */
+    QString description() const;
+
+    /**
+     * @brief Returns an icon for the projection.
+     */
+    QIcon icon() const;
+
+    /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param lon    the lon coordinate of the requested pixel position
      * @param lat    the lat coordinate of the requested pixel position

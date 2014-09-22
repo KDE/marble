@@ -44,6 +44,22 @@ class EquirectProjection : public CylindricalProjection
 
     virtual ~EquirectProjection();
 
+    /**
+     * @brief Returns the user-visible name of the projection.
+     */
+    QString name() const;
+
+    /**
+     * @brief Returns a short user description of the projection
+     * that can be used in tooltips or dialogs.
+     */
+    QString description() const;
+
+    /**
+     * @brief Returns an icon for the projection.
+     */
+    QIcon icon() const;
+
     virtual qreal  maxValidLat() const;
     virtual qreal  minValidLat() const;
 

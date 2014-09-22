@@ -61,6 +61,21 @@ StereographicProjectionPrivate::StereographicProjectionPrivate( StereographicPro
 {
 }
 
+QString StereographicProjection::name() const
+{
+    return QObject::tr( "Stereographic" );
+}
+
+QString StereographicProjection::description() const
+{
+    return QObject::tr( "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used for planetary cartography, geology and panorama photography.</p>" );
+}
+
+QIcon StereographicProjection::icon() const
+{
+    return QIcon(":/icons/map-globe.png");
+}
+
 qreal StereographicProjection::clippingRadius() const
 {
     return 1;

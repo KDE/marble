@@ -62,6 +62,21 @@ SphericalProjectionPrivate::SphericalProjectionPrivate( SphericalProjection * pa
 {
 }
 
+QString SphericalProjection::name() const
+{
+    return QObject::tr( "Globe" );
+}
+
+QString SphericalProjection::description() const
+{
+    return QObject::tr( "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A perspective projection that is used to display the hemisphere of a globe as it appears from outer space.</p>" );
+}
+
+QIcon SphericalProjection::icon() const
+{
+    return QIcon(":/icons/map-globe.png");
+}
+
 bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates, 
                                              const ViewportParams *viewport,
                                              qreal &x, qreal &y, bool &globeHidesPoint ) const

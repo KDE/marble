@@ -61,6 +61,21 @@ GnomonicProjectionPrivate::GnomonicProjectionPrivate( GnomonicProjection * paren
 {
 }
 
+QString GnomonicProjection::name() const
+{
+    return QObject::tr( "Gnomonic" );
+}
+
+QString GnomonicProjection::description() const
+{
+    return QObject::tr( "<p><b>Gnomonic Projection</b> (\"rectilinear\")</p><p>Applications: Used for displaying panorama photography. Also used for navigation, radio and seismic work.</p>" );
+}
+
+QIcon GnomonicProjection::icon() const
+{
+    return QIcon(":/icons/map-gnomonic.png");
+}
+
 qreal GnomonicProjection::clippingRadius() const
 {
     return 1;

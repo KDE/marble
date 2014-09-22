@@ -35,6 +35,21 @@ MercatorProjection::~MercatorProjection()
 {
 }
 
+QString MercatorProjection::name() const
+{
+    return QObject::tr( "Mercator" );
+}
+
+QString MercatorProjection::description() const
+{
+    return QObject::tr( "<p><b>Mercator Projection</b></p><p>Applications: popular standard map projection for navigation.</p>" );
+}
+
+QIcon MercatorProjection::icon() const
+{
+    return QIcon(":/icons/map-mercator.png");
+}
+
 qreal MercatorProjection::maxValidLat() const
 {
     // This is the max value where atanh( sin( lat ) ) is defined.

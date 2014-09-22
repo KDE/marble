@@ -21,6 +21,9 @@
  * @author Torsten Rahn <rahn@kde.org>
  */
 
+#include <QObject> // for QObject::tr()
+#include <QString>
+#include <QIcon>
 #include <QRect>
 #include <QVector>
 #include <QPainterPath>
@@ -71,6 +74,24 @@ class MARBLE_EXPORT AbstractProjection
     AbstractProjection();
 
     virtual ~AbstractProjection();
+
+    /**
+     * @brief Returns the user-visible name of the projection.
+     *
+     * Example: "Mercator"
+     */
+    virtual QString name() const = 0;
+
+    /**
+     * @brief Returns a short user description of the projection
+     * that can be used in tooltips or dialogs.
+     */
+    virtual QString description() const = 0;
+
+    /**
+     * @brief Returns an icon for the projection.
+     */
+    virtual QIcon icon() const = 0;
 
     virtual qreal  maxValidLat() const;
 

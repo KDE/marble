@@ -32,6 +32,21 @@ EquirectProjection::~EquirectProjection()
 {
 }
 
+QString EquirectProjection::name() const
+{
+    return QObject::tr( "Flat Map" );
+}
+
+QString EquirectProjection::description() const
+{
+    return QObject::tr( "<p><b>Equirectangular Projection</b> (\"Plate carrée\")</p><p>Applications: De factor standard for global texture data sets for computer software.</p>" );
+}
+
+QIcon EquirectProjection::icon() const
+{
+    return QIcon(":/icons/map-flat.png");
+}
+
 qreal EquirectProjection::maxValidLat() const
 {
     return +90.0 * DEG2RAD;
