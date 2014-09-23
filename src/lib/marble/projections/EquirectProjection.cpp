@@ -39,7 +39,7 @@ QString EquirectProjection::name() const
 
 QString EquirectProjection::description() const
 {
-    return QObject::tr( "<p><b>Equirectangular Projection</b> (\"Plate carrée\")</p><p>Applications: De factor standard for global texture data sets for computer software.</p>" );
+    return QObject::tr( "<p><b>Equirectangular Projection</b> (\"Plate carrée\")</p><p>Applications: De facto standard for global texture data sets for computer software.</p>" );
 }
 
 QIcon EquirectProjection::icon() const
