@@ -32,8 +32,8 @@ void GnomonicProjectionTest::screenCoordinatesOfCenter_data()
     QTest::addColumn<QPoint>( "screenCoordinates" );
     QTest::addColumn<GeoDataCoordinates>( "expected" );
 
-    addRow() << QPoint( 5, 15 ) << GeoDataCoordinates( -45, 76.135, 0, GeoDataCoordinates::Degree );
-    addRow() << QPoint( 15, 5 ) << GeoDataCoordinates( 135, 76.135, 0, GeoDataCoordinates::Degree );
+    addRow() << QPoint( 5, 15 ) << GeoDataCoordinates( -45, 72.5536, 0, GeoDataCoordinates::Degree );
+    addRow() << QPoint( 15, 5 ) << GeoDataCoordinates( 135, 72.5536, 0, GeoDataCoordinates::Degree );
 }
 
 void GnomonicProjectionTest::screenCoordinatesOfCenter()

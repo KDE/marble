@@ -11,6 +11,7 @@
 #include "StereographicProjection.h"
 #include "ViewportParams.h"
 #include "TestUtils.h"
+#include <QDebug>
 
 namespace Marble
 {
@@ -32,8 +33,8 @@ void StereographicProjectionTest::screenCoordinatesOfCenter_data()
     QTest::addColumn<QPoint>( "screenCoordinates" );
     QTest::addColumn<GeoDataCoordinates>( "expected" );
 
-    addRow() << QPoint( 5, 15 ) << GeoDataCoordinates( -45, 76.135, 0, GeoDataCoordinates::Degree );
-    addRow() << QPoint( 15, 5 ) << GeoDataCoordinates( 135, 76.135, 0, GeoDataCoordinates::Degree );
+    addRow() << QPoint( 5, 15 ) << GeoDataCoordinates( -45, 72.1397, 0, GeoDataCoordinates::Degree );
+    addRow() << QPoint( 15, 5 ) << GeoDataCoordinates( 135, 72.1397, 0, GeoDataCoordinates::Degree );
 }
 
 void StereographicProjectionTest::screenCoordinatesOfCenter()
@@ -52,8 +53,8 @@ void StereographicProjectionTest::screenCoordinatesOfCenter()
         const bool retval = viewport.geoCoordinates( screenCoordinates.x(), screenCoordinates.y(), lon, lat, GeoDataCoordinates::Degree );
 
         QVERIFY( retval ); // we want valid coordinates
-        QFUZZYCOMPARE( lon, expected.longitude( GeoDataCoordinates::Degree ), 0.5 );
-        QFUZZYCOMPARE( lat, expected.latitude( GeoDataCoordinates::Degree ), 0.5 );
+        QFUZZYCOMPARE( lon, expected.longitude( GeoDataCoordinates::Degree ), 0.0001  );
+        QFUZZYCOMPARE( lat, expected.latitude( GeoDataCoordinates::Degree ), 0.0001  );
     }
 }
 
