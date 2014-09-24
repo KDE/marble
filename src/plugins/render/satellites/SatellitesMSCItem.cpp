@@ -55,6 +55,9 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
     m_planSat->getKeplerElements(
         m_perc, m_apoc, m_inc, m_ecc, m_ra, m_tano, m_m0, m_a, m_n0 );
 
+    m_period = 86400. / m_n0;
+    m_step_secs = m_period / 500;
+
     setDescription();
     update();
 }
@@ -145,26 +148,24 @@ void SatellitesMSCItem::update()
         return;
     }
 
-    double period = 24  * 3600 / m_n0;
-    QDateTime startTime = m_clock->dateTime();
-    QDateTime endTime = startTime;
+    QDateTime t = m_clock->dateTime();
+    QDateTime endTime = t;
     if( isTrackVisible() ) {
-        startTime = startTime.addSecs( - period / 2. );
-        endTime = startTime.addSecs( period );
-    }
+        t = t.addSecs( - m_period / 2. );
+        endTime = t.addSecs( m_period );
 
-    m_track->removeBefore( startTime );
-    m_track->removeAfter( endTime );
+        m_track->removeBefore( t );
+        m_track->removeAfter( endTime );
 
-    double step = period / 500.;
-
-    for( double i = startTime.toTime_t(); i < endTime.toTime_t(); i += step ) {
-
-        if ( i >= m_track->firstWhen().toTime_t() ) {
-            i = m_track->lastWhen().toTime_t() + step;
+        if( m_track->firstWhen().isValid() && m_track->firstWhen() < t) {
+            t = m_track->firstWhen().addSecs( m_step_secs );
         }
 
-        addTrackPointAt( QDateTime::fromTime_t( i ) );
+        for(; t < endTime; t = t.addSecs(m_step_secs)) {
+            addTrackPointAt( t );
+        }
+    } else {
+        m_track->clear();
     }
 
     addTrackPointAt( m_clock->dateTime() );

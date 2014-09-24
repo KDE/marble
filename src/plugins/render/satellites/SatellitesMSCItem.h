@@ -73,6 +73,8 @@ private:
     double m_m0;
     double m_a;
     double m_n0;
+    double m_period;
+    int m_step_secs;
 
     const QDateTime m_missionStart;
     const QDateTime m_missionEnd;
