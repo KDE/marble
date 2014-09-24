@@ -59,6 +59,15 @@ OBJECTS = [
         mission_start   = '2013-11-18 18:28',
         data_from       = '2014-09-22 04:00'
         ),
+    # Mangalyaan
+    HorizonsSpaceObject(
+        name            = 'Mangalyaan',
+        horizons_id     = -3,
+        category        = SpaceObject.CATEGORY_SPACEPROBES,
+        related_body    = SpaceObject.BODY_MARS,
+        mission_start   = '2013-11-05 09:08',
+        data_from       = '2014-09-24 09:00'
+        ),
     # Venus Express
     HorizonsSpaceObject(
         name            = 'Venus Express',
