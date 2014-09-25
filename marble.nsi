@@ -21,34 +21,29 @@
 
 !include "FileAssociation.nsh"
 
-!ifndef setup
-!define setup "marble-setup.exe"
-!endif
- 
-; change this to wherever the files to be packaged reside
-!ifndef srcdir
-!define srcdir "C:\Program Files\marble"
-!endif
+!define architecture "x86" ; 32 or 64 bit build? x86 or x64
 
-; change this to wherever Qt is installed
-!ifndef qtdir
-!define qtdir "C:\Qt\4.8.6\bin"
-!endif
+!define version "1.9.1" ; current Marble version
+!define VCREDIST_DIR "C:\marble" ; where do visual studio redistributable packages lie?
 
- 
+!define setup "marble-setup_${version}_${architecture}.exe"
+!define VCREDIST_FILE "vcredist_${architecture}.exe"
+
 !define company "KDE"
- 
-!ifndef prodname
 !define prodname "Marble"
-!endif
-
 !define exec "marble-qt.exe"
- 
+
+; x64
+;  !define qtdir "C:\Qt\5.3\5.3\msvc2013_64_opengl"
+;  !define srcdir "C:\marble\export64" ; where did you install Marble (CMAKE_INSTALL_PREFIX)?
+;  InstallDir "$PROGRAMFILES64\${prodname}"
+; x86
+  !define qtdir "C:\Qt\5.3\5.3\msvc2013_opengl"
+  !define srcdir "C:\marble\export32" ; where did you install Marble (CMAKE_INSTALL_PREFIX)?
+  InstallDir "$PROGRAMFILES\${prodname}"
+  
 ; optional stuff
- 
-; text file to open in notepad after installation
-; !define notefile "README.txt"
- 
+  
 ; license text file
 !define licensefile lgpl2.txt
  
@@ -57,13 +52,7 @@
  
 ; installer background screen
 ; !define screenimage background.bmp
- 
-; file containing list of file-installation commands
-;!define files "files.nsi"
- 
-; file containing list of file-uninstall commands
-;!define unfiles "unfiles.nsi"
- 
+  
 ; registry stuff
  
 !define regkey "Software\${company}\${prodname}"
@@ -73,8 +62,8 @@
 !define uninstaller "uninstall.exe"
  
 ;--------------------------------
- 
-XPStyle on
+   
+;XPStyle on
 ShowInstDetails hide
 ShowUninstDetails hide
  
@@ -92,7 +81,6 @@ SetDatablockOptimize on
 CRCCheck on
 SilentInstall normal
  
-InstallDir "$PROGRAMFILES\${prodname}"
 InstallDirRegKey HKLM "${regkey}" ""
  
 !ifdef licensefile
@@ -117,8 +105,7 @@ UninstPage instfiles
 ;--------------------------------
  
 AutoCloseWindow false
-ShowInstDetails show
- 
+;ShowInstDetails show
  
 !ifdef screenimage
  
@@ -162,7 +149,11 @@ Section
 !endif
  
   SetOutPath $INSTDIR
- 
+
+ReadRegDword $0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A749D8E6-B613-3BE3-8F5F-045C84EBA29B}" "Version"
+IntCmp $0 0 0 +3
+  File "${VCREDIST_DIR}\${VCREDIST_FILE}" 	
+  ExecWait '"$INSTDIR\${VCREDIST_FILE}" /q /norestart'	
  
 ; package all files, recursively, preserving attributes
 ; assume files are in the correct places
@@ -173,18 +164,48 @@ File /a /r \
   /x "marble-touch.exe" \
   /x "marble-mobile.exe" \
   /x "RoutinoPlugin.dll" \
-  "${srcdir}\*.*" \
-  "${qtdir}\QtCore4.dll" \
-  "${qtdir}\QtDeclarative4.dll" \
-  "${qtdir}\QtGui4.dll" \
-  "${qtdir}\QtNetwork4.dll" \
-  "${qtdir}\QtScript4.dll" \
-  "${qtdir}\QtSql4.dll" \
-  "${qtdir}\QtSvg4.dll" \
-  "${qtdir}\QtWebkit4.dll" \
-  "${qtdir}\QtXml4.dll" \
-  "${qtdir}\QtXmlPatterns4.dll" \
-  "${qtdir}\phonon4.dll"
+  "${srcdir}\*.*"    
+  
+File /a /r \
+  "${qtdir}\bin\ICUDT52.DLL" \
+  "${qtdir}\bin\ICUIN52.DLL" \
+  "${qtdir}\bin\ICUUC52.DLL" \
+  "${qtdir}\bin\QT5CORE.DLL" \
+  "${qtdir}\bin\QT5GUI.DLL" \
+  "${qtdir}\bin\QT5MULTIMEDIA.DLL" \
+  "${qtdir}\bin\QT5MULTIMEDIAWIDGETS.DLL" \
+  "${qtdir}\bin\QT5NETWORK.DLL" \
+  "${qtdir}\bin\QT5OPENGL.DLL" \
+  "${qtdir}\bin\QT5POSITIONING.DLL" \
+  "${qtdir}\bin\QT5PRINTSUPPORT.DLL" \
+  "${qtdir}\bin\QT5QML.DLL" \
+  "${qtdir}\bin\QT5QUICK.DLL" \
+  "${qtdir}\bin\QT5SCRIPT.DLL" \
+  "${qtdir}\bin\QT5SENSORS.DLL" \
+  "${qtdir}\bin\QT5SQL.DLL" \
+  "${qtdir}\bin\QT5SVG.DLL" \
+  "${qtdir}\bin\QT5WEBKIT.DLL" \
+  "${qtdir}\bin\QT5WEBKITWIDGETS.DLL" \
+  "${qtdir}\bin\QT5WIDGETS.DLL" \
+  "${qtdir}\bin\QT5XML.DLL"
+
+
+SetOutPath $INSTDIR\platforms
+File /a "${qtdir}\plugins\platforms\qminimal.dll" \
+        "${qtdir}\plugins\platforms\qwindows.dll"
+SetOutPath $INSTDIR\imageformats
+File /a "${qtdir}\plugins\imageformats\qjpeg.dll" \
+        "${qtdir}\plugins\imageformats\qsvg.dll" \
+        "${qtdir}\plugins\imageformats\qtiff.dll" \
+        "${qtdir}\plugins\imageformats\qgif.dll"
+SetOutPath $INSTDIR\bearer
+File /a "${qtdir}\plugins\bearer\qgenericbearer.dll" \
+        "${qtdir}\plugins\bearer\qnativewifibearer.dll"
+SetOutPath $INSTDIR\printsupport
+File /a "${qtdir}\plugins\printsupport\windowsprintersupport.dll"
+SetOutPath $INSTDIR\sqldrivers
+File /a "${qtdir}\plugins\sqldrivers\qsqlite.dll"
+SetOutPath $INSTDIR
   
 !ifdef licensefile
 File /a "${srcdir}\data\licenses\${licensefile}"
@@ -246,7 +267,7 @@ UninstallText "This will uninstall ${prodname}."
 !ifdef icon
 UninstallIcon "${icon}"
 !endif
- 
+
 Section "Uninstall"
  
 DeleteRegKey HKLM "${uninstkey}"
@@ -262,4 +283,3 @@ DeleteRegKey HKCU "Software\${company}\Marble Desktop Globe"
 RMDir /r "$%USERPROFILE%\.marble"
 
 SectionEnd
-
