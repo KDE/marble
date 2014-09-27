@@ -37,8 +37,12 @@ GeoDataPlacemark::GeoDataPlacemark()
 GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
     : GeoDataFeature( other )
 {
-    // FIXME: temporary (until detach() is called) violates invariant of
-    // this == p()->m_geometry->parent() (which could lead to crashes).
+    // FIXME: temporary (until detach() is called) violates following invariant
+    // which could lead to crashes
+//    Q_ASSERT( this == p()->m_geometry->parent() );
+
+    // FIXME: fails as well when "other" is a copy where detach wasn't called
+//    Q_ASSERT( other.p()->m_geometry == 0 || &other == other.p()->m_geometry->parent() );
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )

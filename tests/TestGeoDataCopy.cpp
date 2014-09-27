@@ -497,6 +497,33 @@ void TestGeoDataCopy::copyPlacemark()
 
         QCOMPARE(other.parent(), &otherFolder);
     }
+
+    {
+        const GeoDataPlacemark other(placemark);
+        const GeoDataPlacemark other2(other);
+
+        QCOMPARE(placemark.geometry()->parent(), &placemark);
+        QEXPECT_FAIL("", "geometry needs to be detach()ed", Continue);
+        QCOMPARE(other.geometry()->parent(), &other);
+        QEXPECT_FAIL("", "geometry needs to be detach()ed", Continue);
+        QCOMPARE(other2.geometry()->parent(), &other2);
+    }
+
+    {
+        GeoDataPlacemark other;
+        GeoDataPlacemark other2;
+
+        QCOMPARE(placemark.geometry()->parent(), &placemark);
+        QCOMPARE(other.geometry()->parent(), &other);
+        QCOMPARE(other2.geometry()->parent(), &other2);
+
+        other = placemark;
+        other2 = other;
+
+        QCOMPARE(placemark.geometry()->parent(), &placemark);
+        QCOMPARE(other.geometry()->parent(), &other);
+        QCOMPARE(other2.geometry()->parent(), &other2);
+    }
 }
 
 void TestGeoDataCopy::copyHotSpot()
