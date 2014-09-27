@@ -59,7 +59,7 @@ GeoDataPlacemark::~GeoDataPlacemark()
 
 GeoDataPlacemark &GeoDataPlacemark::operator=( const GeoDataPlacemark &other )
 {
-    *p() = *other.p();
+    GeoDataFeature::operator=( other );
 
     return *this;
 }

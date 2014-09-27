@@ -437,9 +437,7 @@ void TestGeoDataCopy::copyPlacemark()
     {
         GeoDataPlacemark other(placemark);
 
-        QEXPECT_FAIL("", "an ID is unique in the context of a document, so shouldn't be copied", Continue);
         QCOMPARE(other.id(), QString());
-        QEXPECT_FAIL("", "similar case like for ID, so shouldn't be copied", Continue);
         QCOMPARE(other.parent(), static_cast<GeoDataObject *>(0));
         testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
         testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);

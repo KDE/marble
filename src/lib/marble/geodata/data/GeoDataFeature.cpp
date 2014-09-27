@@ -46,7 +46,7 @@ GeoDataFeature::GeoDataFeature()
 }
 
 GeoDataFeature::GeoDataFeature( const GeoDataFeature& other )
-    : GeoDataObject( other ),
+    : GeoDataObject(),
       d( other.d )
 {
     d->ref.ref();
@@ -79,8 +79,6 @@ GeoDataFeaturePrivate* GeoDataFeature::p() const
 
 GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
 {
-    GeoDataObject::operator=( other );
-    
     if (!d->ref.deref()) {
         delete d;
     }
