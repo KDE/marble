@@ -26,6 +26,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataSnippet.h"
 #include "GeoDataStyle.h"
+#include "GeoDataTypes.h"
 #include "GeoDataPhotoOverlay.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -646,8 +647,8 @@ GeoDataCoordinates MarbleWidgetPopupMenu::Private::mouseCoordinates( QAction* da
         return GeoDataCoordinates();
     }
 
-    const GeoDataPlacemark * placemark =  dynamic_cast<const GeoDataPlacemark*>( m_featurelist.first() );
-    if ( !m_featurelist.isEmpty() && placemark ) {
+    if ( !m_featurelist.isEmpty() && m_featurelist.first()->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        const GeoDataPlacemark * placemark =  static_cast<const GeoDataPlacemark*>( m_featurelist.first() );
         return placemark->coordinate( m_model->clock()->dateTime() );
     } else {
         QPoint p = dataContainer->data().toPoint();
