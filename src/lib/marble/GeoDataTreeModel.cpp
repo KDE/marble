@@ -413,7 +413,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                  ( placemark->parent()->nodeType() == GeoDataTypes::GeoDataFolderType ||
                    placemark->parent()->nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
                 GeoDataContainer *container = static_cast<GeoDataContainer *>( placemark->parent() );
-                return QVariant( QBrush( container->style()->listStyle().backgroundColor() ));
+                return container->customStyle() ? QVariant( QBrush( container->customStyle()->listStyle().backgroundColor() )) : QVariant();
             }
         }
     }
