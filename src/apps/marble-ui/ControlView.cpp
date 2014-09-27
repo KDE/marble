@@ -108,7 +108,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "1.9.1 (stable release)";
+    return "1.9.2 (stable release)";
 }
 
 MapThemeManager *ControlView::mapThemeManager()
