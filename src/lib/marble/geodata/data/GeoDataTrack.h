@@ -58,6 +58,8 @@ public:
     GeoDataTrack();
     explicit GeoDataTrack( const GeoDataTrack &other );
 
+    GeoDataTrack &operator=( const GeoDataTrack &other );
+
     /**
      * Returns the number of points in the track
      */
@@ -179,14 +181,12 @@ public:
      */
     void setExtendedData( const GeoDataExtendedData& extendedData );
 
-    virtual const char* nodeType() const;
-    virtual EnumGeometryId geometryId() const;
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
     virtual void pack( QDataStream& stream ) const;
     virtual void unpack( QDataStream& stream );
 
 private:
-    GeoDataTrackPrivate *d;
+    GeoDataTrackPrivate *p() const;
 };
 
 }

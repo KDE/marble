@@ -40,9 +40,6 @@ public:
 
     ~GeoDataModel();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
-
     const GeoDataLink& link() const;
     GeoDataLink& link();
     void setLink( const GeoDataLink &link );
@@ -73,7 +70,7 @@ public:
     void setTargetHref(const QString &targetHref);
 
 private:
-    GeoDataModelPrivate* const d;
+    GeoDataModelPrivate *p() const;
 };
 
 }
