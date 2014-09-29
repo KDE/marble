@@ -69,19 +69,14 @@ void GeoDataGeometry::detach()
     d->ref.ref();
 }
 
-GeoDataGeometryPrivate* GeoDataGeometry::p() const
-{
-    return static_cast<GeoDataGeometryPrivate*>(d);
-}
-
 const char* GeoDataGeometry::nodeType() const
 {
-    return p()->nodeType();
+    return d->nodeType();
 }
 
 EnumGeometryId GeoDataGeometry::geometryId() const
 {
-    return p()->geometryId();
+    return d->geometryId();
 }
 
 GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )

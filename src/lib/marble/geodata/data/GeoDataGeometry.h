@@ -46,12 +46,6 @@ class GeoDataOrientation;
 
 class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 {
-    friend class GeoDataPoint;
-    friend class GeoDataPolygon;
-    friend class GeoDataLineString;
-    friend class GeoDataMultiGeometry;
-    friend class GeoDataMultiTrack;
-    friend class GeoDataOrientation;
  public:
     GeoDataGeometry();
     GeoDataGeometry( const GeoDataGeometry& other );
@@ -77,15 +71,16 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     virtual void unpack( QDataStream& stream );
 
     void detach();
- private:
-    GeoDataGeometryPrivate* p() const;
-    GeoDataGeometryPrivate* d;
-    explicit GeoDataGeometry( GeoDataGeometryPrivate* priv );
 
  protected:
+    explicit GeoDataGeometry( GeoDataGeometryPrivate* priv );
+
     bool equals(const GeoDataGeometry &other) const;
 
     using GeoDataObject::equals;
+
+ protected:
+    GeoDataGeometryPrivate *d;
 };
 
 }
