@@ -59,7 +59,7 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
                 // GeoDataGeometry so cast is needed.
                 newGeometry = new GeoDataModel( *static_cast<GeoDataModel*>( geometry ) );
             } else if ( geometry->nodeType() == GeoDataTypes::GeoDataTrackType ) {
-                newGeometry = new GeoDataTrack( *geometry );
+                newGeometry = new GeoDataTrack( *static_cast<GeoDataTrack*>( geometry ) );
             } else if ( geometry->nodeType() == GeoDataTypes::GeoDataMultiTrackType ) {
                 newGeometry = new GeoDataMultiTrack( *geometry );
             } else if ( geometry->nodeType() == GeoDataTypes::GeoDataPolygonType ) {

@@ -57,7 +57,7 @@ GeoDataTrack::GeoDataTrack()
 
 }
 
-GeoDataTrack::GeoDataTrack( const GeoDataGeometry &other )
+GeoDataTrack::GeoDataTrack( const GeoDataTrack &other )
     : GeoDataGeometry( other )
 {
 

@@ -56,7 +56,7 @@ class GEODATA_EXPORT GeoDataTrack : public GeoDataGeometry
 
 public:
     GeoDataTrack();
-    explicit GeoDataTrack( const GeoDataGeometry &other );
+    explicit GeoDataTrack( const GeoDataTrack &other );
 
     /**
      * Returns the number of points in the track
