@@ -86,8 +86,6 @@ public:
 
     QItemSelectionModel *m_selectionModel;
 
-    bool m_routeDirty;
-
     QSize m_pixmapSize;
 
     RouteRequest *const m_routeRequest;
@@ -140,9 +138,6 @@ public:
     /** Paint icons for trip points etc */
     inline void renderRequest( GeoPainter *painter );
 
-    /** The route is dirty (needs an update) and should be painted to indicate that */
-    void setRouteDirty( bool dirty );
-
     /** Insert via points or emit position signal, if appropriate */
     inline bool handleMouseButtonRelease( QMouseEvent *e );
 
@@ -169,7 +164,9 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         q( parent ), m_movingIndex( -1 ), m_marbleWidget( widget ),
         m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
         m_routingModel( widget->model()->routingManager()->routingModel() ),
-        m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
+        m_placemarkModel( 0 ),
+        m_selectionModel( 0 ),
+        m_pixmapSize( 22, 22 ),
         m_routeRequest( widget->model()->routingManager()->routeRequest() ),
         m_activeMenuIndex( -1 ),
         m_alternativeRoutesModel( widget->model()->routingManager()->alternativeRoutesModel() ),
@@ -256,7 +253,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
     QPen standardRoutePen( m_marbleWidget->model()->routingManager()->routeColorStandard() );
     standardRoutePen.setWidth( 5 );
-    if ( m_routeDirty ) {
+    if ( m_marbleWidget->model()->routingManager()->state() == RoutingManager::Downloading ) {
         standardRoutePen.setStyle( Qt::DotLine );
     }
     painter->setPen( standardRoutePen );
@@ -329,7 +326,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                     QPen activeRouteSegmentPen( m_marbleWidget->model()->routingManager()->routeColorHighlighted() );
 
                     activeRouteSegmentPen.setWidth( 6 );
-                    if ( m_routeDirty ) {
+                    if ( m_marbleWidget->model()->routingManager()->state() == RoutingManager::Downloading ) {
                         activeRouteSegmentPen.setStyle( Qt::DotLine );
                     }
                     painter->setPen( activeRouteSegmentPen );
@@ -618,7 +615,7 @@ RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
         QObject( parent ), d( new RoutingLayerPrivate( this, widget ) )
 {
     connect( widget->model()->routingManager(), SIGNAL(stateChanged(RoutingManager::State)),
-             this, SLOT(updateRouteState(RoutingManager::State)) );
+             this, SLOT(updateRouteState()) );
     connect( widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
             this, SLOT(setViewportChanged()) );
     connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL(currentRouteChanged(GeoDataDocument*)),
@@ -678,7 +675,7 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
 RenderState RoutingLayer::renderState() const
 {
-    return RenderState( "Routing", d->m_routeDirty ? WaitingForUpdate : Complete );
+    return RenderState( "Routing", d->m_marbleWidget->model()->routingManager()->state() == RoutingManager::Downloading ? WaitingForUpdate : Complete );
 }
 
 bool RoutingLayer::eventFilter( QObject *obj, QEvent *event )
@@ -718,23 +715,12 @@ void RoutingLayer::synchronizeWith( QItemSelectionModel *selection )
     d->m_selectionModel = selection;
 }
 
-void RoutingLayerPrivate::setRouteDirty( bool dirty )
-{
-    m_routeDirty = dirty;
-
-    /** @todo: The full repaint can be avoided. The route however has changed
-      * and the exact bounding box needs to be recalculated before doing
-      * a partly repaint, otherwise we might end up repainting only parts of the route
-      */
-    emit q->repaintNeeded();
-}
-
 void RoutingLayer::removeViaPoint()
 {
     if ( d->m_activeMenuIndex >= 0 ) {
         d->m_routeRequest->remove( d->m_activeMenuIndex );
         d->m_activeMenuIndex = -1;
-        d->setRouteDirty( true );
+        emit repaintNeeded();
         d->m_marbleWidget->model()->routingManager()->retrieveRoute();
     }
 }
@@ -765,10 +751,10 @@ void RoutingLayer::exportRoute()
     }
 }
 
-void RoutingLayer::updateRouteState( RoutingManager::State state )
+void RoutingLayer::updateRouteState()
 {
-    d->setRouteDirty( state == RoutingManager::Downloading );
     setViewportChanged();
+    emit repaintNeeded();
 }
 
 void RoutingLayer::setViewportChanged()
