@@ -55,7 +55,6 @@ public:
     RouteDeviation m_deviation;
     PositionTracking* m_positionTracking;
     RouteRequest* const m_request;
-    GeoDataCoordinates m_position;
 #if QT_VERSION >= 0x050000
     QHash<int, QByteArray> m_roleNames;
 #endif
@@ -406,10 +405,9 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
 
 void RoutingModel::updatePosition( GeoDataCoordinates location, qreal /*speed*/ )
 {
-    d->m_position = location;
     d->m_route.setPosition( location );
 
-    d->updateViaPoints( d->m_position );
+    d->updateViaPoints( location );
     qreal distance = EARTH_RADIUS * distanceSphere( location, d->m_route.positionOnRoute() );
     emit positionChanged();
 
