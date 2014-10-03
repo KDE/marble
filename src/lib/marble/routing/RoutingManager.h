@@ -37,6 +37,7 @@ class RoutingProfilesModel;
 class MARBLE_EXPORT RoutingManager : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY( State state READ state NOTIFY stateChanged )
 
 public:
     enum State {
@@ -84,6 +85,12 @@ public:
       * Returns the current route request
       */
     RouteRequest* routeRequest();
+
+    /**
+     * @brief Returns whether a route is being downloaded
+     * @return
+     */
+    State state() const;
 
     /**
       * Saves the current route request and the current route to disk

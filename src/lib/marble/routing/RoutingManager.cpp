@@ -50,6 +50,8 @@ public:
 
     RoutingProfilesModel m_profilesModel;
 
+    RoutingManager::State m_state;
+
     const PluginManager *const m_pluginManager;
 
     GeoDataTreeModel *const m_treeModel;
@@ -102,6 +104,7 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_routeRequest( manager ),
         m_routingModel( &m_routeRequest, model, manager ),
         m_profilesModel( model->pluginManager() ),
+        m_state( RoutingManager::Retrieved ),
         m_pluginManager( model->pluginManager() ),
         m_treeModel( model->treeModel() ),
         m_positionTracking( model->positionTracking() ),
@@ -231,7 +234,8 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
             m_alternativeRoutesModel.clear();
             m_alternativeRoutesModel.addRoute( route, AlternativeRoutesModel::Instant );
             m_alternativeRoutesModel.setCurrentRoute( 0 );
-            emit q->stateChanged( RoutingManager::Retrieved );
+            m_state = RoutingManager::Retrieved;
+            emit q->stateChanged( m_state );
             emit q->routeRetrieved( route );
         } else {
             mDebug() << "Expected a GeoDataDocument child, didn't get one though";
@@ -282,6 +286,11 @@ RouteRequest* RoutingManager::routeRequest()
     return &d->m_routeRequest;
 }
 
+RoutingManager::State RoutingManager::state() const
+{
+    return d->m_state;
+}
+
 void RoutingManager::retrieveRoute()
 {
     d->m_haveRoute = false;
@@ -296,12 +305,13 @@ void RoutingManager::retrieveRoute()
 
     d->m_alternativeRoutesModel.newRequest( &d->m_routeRequest );
     if ( realSize > 1 ) {
-        emit stateChanged( RoutingManager::Downloading );
+        d->m_state = RoutingManager::Downloading;
         d->m_runnerManager.retrieveRoute( &d->m_routeRequest );
     } else {
         d->m_routingModel.clear();
-        emit stateChanged( RoutingManager::Retrieved );
+        d->m_state = RoutingManager::Retrieved;
     }
+    emit stateChanged( d->m_state );
 }
 
 void RoutingManagerPrivate::addRoute( GeoDataDocument* route )
@@ -312,7 +322,8 @@ void RoutingManagerPrivate::addRoute( GeoDataDocument* route )
 
     if ( !m_haveRoute ) {
         m_haveRoute = route != 0;
-        emit q->stateChanged( RoutingManager::Retrieved );
+        m_state = RoutingManager::Retrieved;
+        emit q->stateChanged( m_state );
     }
 
     emit q->routeRetrieved( route );
