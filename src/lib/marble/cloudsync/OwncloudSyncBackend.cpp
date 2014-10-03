@@ -16,6 +16,7 @@
 #include "GeoDocument.h"
 #include "MarbleWidget.h"
 #include "RenderPlugin.h"
+#include "Route.h"
 #include "RoutingModel.h"
 #include "GeoDataParser.h"
 #include "GeoDataFolder.h"

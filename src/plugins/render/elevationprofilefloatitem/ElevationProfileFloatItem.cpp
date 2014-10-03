@@ -25,6 +25,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
 #include "ViewportParams.h"
+#include "routing/Route.h"
 #include "routing/RoutingModel.h"
 #include "routing/RoutingManager.h"
 #include "MarbleDirs.h"

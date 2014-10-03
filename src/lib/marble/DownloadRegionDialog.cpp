@@ -42,6 +42,7 @@
 #include "DownloadRegion.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneMap.h"
+#include "Route.h"
 
 namespace Marble
 {

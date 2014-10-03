@@ -17,6 +17,7 @@
 #include "MarbleWidget.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "RoutingModel.h"
+#include "Route.h"
 #include "RouteRequest.h"
 #include "MarbleModel.h"
 #include "AlternativeRoutesModel.h"

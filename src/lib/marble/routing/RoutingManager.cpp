@@ -19,6 +19,7 @@
 #include "AutoNavigation.h"
 #include "GeoWriter.h"
 #include "GeoDataDocument.h"
+#include "GeoDataExtendedData.h"
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
@@ -28,6 +29,7 @@
 #include "PositionTracking.h"
 #include "PluginManager.h"
 #include "PositionProviderPlugin.h"
+#include "Route.h"
 #include "RoutingRunnerManager.h"
 #include <KmlElementDictionary.h>
 
@@ -96,7 +98,11 @@ public:
 
     void addRoute( GeoDataDocument* route );
 
+    void setCurrentRoute( GeoDataDocument *route );
+
     void recalculateRoute( bool deviated );
+
+    static void importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark );
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
@@ -256,7 +262,7 @@ RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QO
     connect( &d->m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument*)),
              this, SLOT(addRoute(GeoDataDocument*)) );
     connect( &d->m_alternativeRoutesModel, SIGNAL(currentRouteChanged(GeoDataDocument*)),
-             &d->m_routingModel, SLOT(setCurrentRoute(GeoDataDocument*)) );
+             this, SLOT(setCurrentRoute(GeoDataDocument*)) );
     connect( &d->m_routingModel, SIGNAL(deviatedFromRoute(bool)),
              this, SLOT(recalculateRoute(bool)) );
 }
@@ -327,6 +333,104 @@ void RoutingManagerPrivate::addRoute( GeoDataDocument* route )
     }
 
     emit q->routeRetrieved( route );
+}
+
+void RoutingManagerPrivate::setCurrentRoute( GeoDataDocument *document )
+{
+    Route route;
+    QVector<RouteSegment> segments;
+    RouteSegment outline;
+
+    QVector<GeoDataFolder*> folders = document->folderList();
+    foreach( const GeoDataFolder *folder, folders ) {
+        foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
+            importPlacemark( outline, segments, placemark );
+        }
+    }
+
+    foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
+        importPlacemark( outline, segments, placemark );
+    }
+
+    if ( segments.isEmpty() ) {
+        segments << outline;
+    }
+
+    // Map via points onto segments
+    if ( m_routeRequest.size() > 1 && segments.size() > 1 ) {
+        int index = 0;
+        for ( int j = 0; j < m_routeRequest.size(); ++j ) {
+            QPair<int, qreal> minimum( -1, -1.0 );
+            int viaIndex = -1;
+            for ( int i = index; i < segments.size(); ++i ) {
+                const RouteSegment &segment = segments[i];
+                GeoDataCoordinates closest;
+                const qreal distance = segment.distanceTo( m_routeRequest.at( j ), closest, closest );
+                if ( minimum.first < 0 || distance < minimum.second ) {
+                    minimum.first = i;
+                    minimum.second = distance;
+                    viaIndex = j;
+                }
+            }
+
+            if ( minimum.first >= 0 ) {
+                index = minimum.first;
+                Maneuver viaPoint = segments[ minimum.first ].maneuver();
+                viaPoint.setWaypoint( m_routeRequest.at( viaIndex ), viaIndex );
+                segments[ minimum.first ].setManeuver( viaPoint );
+            }
+        }
+    }
+
+    if ( segments.size() > 0 ) {
+        foreach( const RouteSegment &segment, segments ) {
+            route.addRouteSegment( segment );
+        }
+    }
+
+    m_routingModel.setRoute( route );
+}
+
+void RoutingManagerPrivate::importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark )
+{
+    const GeoDataGeometry* geometry = placemark->geometry();
+    const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
+    QStringList blacklist = QStringList() << "" << "Route" << "Tessellated";
+    RouteSegment segment;
+    bool isOutline = true;
+    if ( !blacklist.contains( placemark->name() ) ) {
+        if( lineString ) {
+            Maneuver maneuver;
+            maneuver.setInstructionText( placemark->name() );
+            maneuver.setPosition( lineString->at( 0 ) );
+
+            if ( placemark->extendedData().contains( "turnType" ) ) {
+                QVariant turnType = placemark->extendedData().value( "turnType" ).value();
+                // The enum value is converted to/from an int in the QVariant
+                // because only a limited set of data types can be serialized with QVariant's
+                // toString() method (which is used to serialize <ExtendedData>/<Data> values)
+                maneuver.setDirection( Maneuver::Direction( turnType.toInt() ) );
+            }
+
+            if ( placemark->extendedData().contains( "roadName" ) ) {
+                QVariant roadName = placemark->extendedData().value( "roadName" ).value();
+                maneuver.setRoadName( roadName.toString() );
+            }
+
+            segment.setManeuver( maneuver );
+            isOutline = false;
+        }
+    }
+
+    if ( lineString ) {
+        segment.setPath( *lineString );
+
+        if ( isOutline ) {
+            outline = segment;
+        } else {
+            segments.push_back( segment );
+        }
+    }
 }
 
 AlternativeRoutesModel* RoutingManager::alternativeRoutesModel()

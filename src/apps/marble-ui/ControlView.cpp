@@ -47,6 +47,7 @@
 #include "PrintOptionsWidget.h"
 #include "ViewportParams.h"
 #include "ViewParams.h"
+#include "routing/Route.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"

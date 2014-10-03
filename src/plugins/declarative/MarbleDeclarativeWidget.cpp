@@ -28,6 +28,7 @@
 #include "ViewportParams.h"
 #include "DownloadRegion.h"
 #include "BookmarkManager.h"
+#include "routing/Route.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RoutingProfilesModel.h"
