@@ -13,10 +13,7 @@
 #include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
-#include "GeoDataCamera.h"
-#include "GeoDataIconStyle.h"
 #include "GeoParser.h"
-#include "GeoDataModel.h"
 #include "GeoDataScale.h"
 
 

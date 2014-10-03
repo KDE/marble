@@ -10,13 +10,9 @@
 
 #include "KmlAliasTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "KmlElementDictionary.h"
 #include "GeoDataAlias.h"
 #include "GeoDataResourceMap.h"
-#include "GeoDataGeometry.h"
-#include "GeoDataModel.h"
 #include "GeoDataParser.h"
 
 namespace Marble
