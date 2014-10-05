@@ -40,7 +40,7 @@ public:
 
     Marble::RouteSegment nextRouteSegment();
 
-    void updateNextInstructionDistance( const Marble::RoutingModel *model );
+    void updateNextInstructionDistance( const Marble::Route &route );
 };
 
 NavigationPrivate::NavigationPrivate() :
@@ -50,14 +50,14 @@ NavigationPrivate::NavigationPrivate() :
     // nothing to do
 }
 
-void NavigationPrivate::updateNextInstructionDistance( const Marble::RoutingModel *model )
+void NavigationPrivate::updateNextInstructionDistance( const Marble::Route &route )
 {
-    Marble::GeoDataCoordinates position = model->route().position();
-    Marble::GeoDataCoordinates interpolated = model->route().positionOnRoute();
-    Marble::GeoDataCoordinates onRoute = model->route().currentWaypoint();
+    const Marble::GeoDataCoordinates position = route.position();
+    const Marble::GeoDataCoordinates interpolated = route.positionOnRoute();
+    const Marble::GeoDataCoordinates onRoute = route.currentWaypoint();
     qreal distance = Marble::EARTH_RADIUS * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
     qreal remaining = 0.0;
-    const Marble::RouteSegment &segment = model->route().currentSegment();
+    const Marble::RouteSegment &segment = route.currentSegment();
     for ( int i=0; i<segment.path().size(); ++i ) {
         if ( segment.path()[i] == onRoute ) {
             distance += segment.path().length( Marble::EARTH_RADIUS, i );
@@ -66,14 +66,14 @@ void NavigationPrivate::updateNextInstructionDistance( const Marble::RoutingMode
     }
 
     bool upcoming = false;
-    for ( int i=0; i<model->route().size(); ++i ) {
-        const Marble::RouteSegment &segment = model->route().at( i );
+    for ( int i=0; i<route.size(); ++i ) {
+        const Marble::RouteSegment &segment = route.at( i );
 
         if ( upcoming ) {
             remaining += segment.path().length( Marble::EARTH_RADIUS );
         }
 
-        if ( segment == model->route().currentSegment() ) {
+        if ( segment == route.currentSegment() ) {
             upcoming = true;
         }
     }
@@ -244,7 +244,7 @@ bool Navigation::deviated() const
 void Navigation::update()
 {
     Marble::RoutingModel const * model = d->m_marbleWidget->model()->routingManager()->routingModel();
-    d->updateNextInstructionDistance( model );
+    d->updateNextInstructionDistance( model->route() );
     emit nextInstructionDistanceChanged();
     emit destinationDistanceChanged();
     Marble::RouteSegment segment = model->route().currentSegment();
