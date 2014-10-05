@@ -26,7 +26,6 @@
 #include <MarbleMap.h>
 #include <MarbleModel.h>
 #include <routing/RoutingManager.h>
-#include <routing/RoutingModel.h>
 #include <routing/RoutingProfilesModel.h>
 
 namespace Marble

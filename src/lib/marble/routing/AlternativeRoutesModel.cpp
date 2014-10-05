@@ -15,7 +15,6 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleMath.h"
-#include "RoutingModel.h"
 
 #include <QTimer>
 #include <QPainter>
