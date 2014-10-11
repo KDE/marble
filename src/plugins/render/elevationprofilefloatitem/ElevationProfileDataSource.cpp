@@ -132,7 +132,7 @@ void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *object)
         }
         for (int i = 0; i<multiGeometry->size(); i++) {
             const GeoDataTrack *track = dynamic_cast<const GeoDataTrack *>(multiGeometry->child(i));
-            if (track) {
+            if (track && track->size() > 1) {
                 mDebug() << "new GeoDataTrack for ElevationProfile detected";
                 trackList.append(track);
             }
