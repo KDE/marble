@@ -24,7 +24,6 @@
 #include "MarbleModel.h"
 #include "routing/Route.h"
 #include "routing/RoutingModel.h"
-#include "routing/RoutingManager.h"
 
 #include <QFileInfo>
 
@@ -60,12 +59,12 @@ QList<QPointF> ElevationProfileDataSource::calculateElevationData( const GeoData
 }
 // end of impl of ElevationProfileDataSource
 
-ElevationProfileTrackDataSource::ElevationProfileTrackDataSource( const MarbleModel *marbleModel, QObject *parent ) :
+ElevationProfileTrackDataSource::ElevationProfileTrackDataSource( const GeoDataTreeModel *treeModel, QObject *parent ) :
     ElevationProfileDataSource( parent )
 {
-    if ( marbleModel ) {
-        connect( marbleModel->treeModel(), SIGNAL(added(GeoDataObject*)), this, SLOT(handleObjectAdded(GeoDataObject*)) );
-        connect( marbleModel->treeModel(), SIGNAL(removed(GeoDataObject*)), this, SLOT(handleObjectRemoved(GeoDataObject*)) );
+    if ( treeModel ) {
+        connect( treeModel, SIGNAL(added(GeoDataObject*)), SLOT(handleObjectAdded(GeoDataObject*)) );
+        connect( treeModel, SIGNAL(removed(GeoDataObject*)), SLOT(handleObjectRemoved(GeoDataObject*)) );
     }
 }
 
@@ -197,10 +196,10 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *object)
 
 // end of impl of ElevationProfileTrackDataSource
 
-ElevationProfileRouteDataSource::ElevationProfileRouteDataSource( const MarbleModel *marbleModel, QObject *parent ) :
+ElevationProfileRouteDataSource::ElevationProfileRouteDataSource( const RoutingModel *routingModel, const ElevationModel *elevationModel, QObject *parent ) :
     ElevationProfileDataSource( parent ),
-    m_routingModel( marbleModel ? marbleModel->routingManager()->routingModel() : 0 ),
-    m_elevationModel( marbleModel ? marbleModel->elevationModel() : 0 )
+    m_routingModel( routingModel ),
+    m_elevationModel( elevationModel )
 {
     if ( m_elevationModel ) {
         connect( m_elevationModel, SIGNAL(updateAvailable()), SLOT(requestUpdate()) );

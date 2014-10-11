@@ -16,6 +16,7 @@
 #include "AbstractFloatItem.h"
 #include "DialogConfigurationInterface.h"
 
+#include "ElevationProfileDataSource.h"
 #include "ElevationProfilePlotAxis.h"
 
 #include "GeoDataDocument.h"
@@ -110,8 +111,8 @@ Q_SIGNALS:
 
  private:
     ElevationProfileDataSource* m_activeDataSource;
-    ElevationProfileRouteDataSource* m_routeDataSource;
-    ElevationProfileTrackDataSource* m_trackDataSource;
+    ElevationProfileRouteDataSource m_routeDataSource;
+    ElevationProfileTrackDataSource m_trackDataSource;
     QDialog *m_configDialog;
     Ui::ElevationProfileConfigWidget *ui_configWidget;
 

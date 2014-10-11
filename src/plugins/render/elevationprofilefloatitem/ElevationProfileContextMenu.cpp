@@ -68,23 +68,23 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
     m_selectionActions.clear();
 
     // add route data source (if available)
-    if ( m_floatItem->m_routeDataSource->isDataAvailable()) {
+    if ( m_floatItem->m_routeDataSource.isDataAvailable()) {
         QAction *route = new QAction( tr( "Route" ), m_contextMenu );
         route->setActionGroup(m_sourceGrp);
         route->setCheckable(true);
-        route->setChecked(m_floatItem->m_activeDataSource == m_floatItem->m_routeDataSource);
+        route->setChecked(m_floatItem->m_activeDataSource == &m_floatItem->m_routeDataSource);
         connect( route, SIGNAL(triggered()), m_floatItem, SLOT(switchToRouteDataSource()) );
         m_selectionActions.append(route);
     }
 
     // add tracks (if available)
-    if ( m_floatItem->m_trackDataSource->isDataAvailable()) {
-        QStringList sources = m_floatItem->m_trackDataSource->sourceDescriptions();
+    if ( m_floatItem->m_trackDataSource.isDataAvailable()) {
+        QStringList sources = m_floatItem->m_trackDataSource.sourceDescriptions();
         for (int i = 0; i<sources.size(); ++i) {
             QAction *track = new QAction( tr("Track: ") + sources[i], m_contextMenu);
             connect(track, SIGNAL(triggered()), m_trackMapper, SLOT(map()));
             track->setCheckable(true);
-            track->setChecked(m_floatItem->m_activeDataSource == m_floatItem->m_trackDataSource && m_floatItem->m_trackDataSource->currentSourceIndex() == i);
+            track->setChecked(m_floatItem->m_activeDataSource == &m_floatItem->m_trackDataSource && m_floatItem->m_trackDataSource.currentSourceIndex() == i);
             track->setActionGroup(m_sourceGrp);
             m_selectionActions.append(track);
             m_trackMapper->setMapping(track, i);

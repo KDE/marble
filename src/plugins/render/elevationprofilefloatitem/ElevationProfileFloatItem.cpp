@@ -13,7 +13,6 @@
 #include "ElevationProfileFloatItem.h"
 
 #include "ElevationProfileContextMenu.h"
-#include "ElevationProfileDataSource.h"
 #include "ui_ElevationProfileConfigWidget.h"
 
 #include "MarbleLocale.h"
@@ -27,6 +26,7 @@
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
+#include "routing/RoutingManager.h"
 
 #include <QContextMenuEvent>
 #include <QRect>
@@ -41,8 +41,8 @@ namespace Marble
 ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleModel )
         : AbstractFloatItem( marbleModel, QPointF( 220, 10.5 ), QSizeF( 0.0, 50.0 ) ),
         m_activeDataSource(0),
-        m_routeDataSource(0),
-        m_trackDataSource(0),
+        m_routeDataSource( marbleModel ? marbleModel->routingManager()->routingModel() : 0, marbleModel ? marbleModel->elevationModel() : 0, this ),
+        m_trackDataSource( marbleModel ? marbleModel->treeModel() : 0, this ),
         m_configDialog( 0 ),
         ui_configWidget( 0 ),
         m_leftGraphMargin( 0 ),
@@ -77,12 +77,9 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
     m_markerPlacemark->setVisible( false );
     m_markerDocument.append( m_markerPlacemark );
 
-    // initialize already here, otherwise we won't get notified for new files when not initialized
-    m_routeDataSource = new ElevationProfileRouteDataSource( marbleModel, this );
-    m_trackDataSource = new ElevationProfileTrackDataSource( marbleModel, this );
     m_contextMenu = new ElevationProfileContextMenu(this);
-    connect(m_trackDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()));
-    connect(m_routeDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()));
+    connect( &m_trackDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()) );
+    connect( &m_routeDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()) );
 }
 
 ElevationProfileFloatItem::~ElevationProfileFloatItem()
@@ -145,7 +142,7 @@ QIcon ElevationProfileFloatItem::icon () const
 void ElevationProfileFloatItem::initialize ()
 {
     connect( this, SIGNAL(dataUpdated()), SLOT(forceRepaint()) );
-    switchDataSource(m_routeDataSource);
+    switchDataSource(&m_routeDataSource);
 
     m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
     m_leftGraphMargin = QFontMetricsF( font() ).width( "0000 m" ); /// TODO make this dynamic according to actual need
@@ -662,13 +659,13 @@ void ElevationProfileFloatItem::toggleZoomToViewport()
 
 void ElevationProfileFloatItem::switchToRouteDataSource()
 {
-    switchDataSource(m_routeDataSource);
+    switchDataSource(&m_routeDataSource);
 }
 
 void ElevationProfileFloatItem::switchToTrackDataSource(int index)
 {
-    m_trackDataSource->setSourceIndex(index);
-    switchDataSource(m_trackDataSource);
+    m_trackDataSource.setSourceIndex(index);
+    switchDataSource(&m_trackDataSource);
 }
 
 void ElevationProfileFloatItem::switchDataSource(ElevationProfileDataSource* source)

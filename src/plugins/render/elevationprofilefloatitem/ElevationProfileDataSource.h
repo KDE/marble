@@ -28,6 +28,7 @@ class GeoDataCoordinates;
 class GeoDataLineString;
 class GeoDataObject;
 class GeoDataTrack;
+class GeoDataTreeModel;
 class MarbleModel;
 class RoutingModel;
 
@@ -64,7 +65,7 @@ class ElevationProfileTrackDataSource : public ElevationProfileDataSource
     Q_OBJECT
 
 public:
-    ElevationProfileTrackDataSource( const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit ElevationProfileTrackDataSource( const GeoDataTreeModel *treeModel, QObject *parent = 0 );
 
     virtual bool isDataAvailable() const;
 
@@ -99,7 +100,7 @@ class ElevationProfileRouteDataSource : public ElevationProfileDataSource
     Q_OBJECT
 
 public:
-    ElevationProfileRouteDataSource( const MarbleModel *marbleModel, QObject *parent = 0 );
+    ElevationProfileRouteDataSource( const RoutingModel *routingModel, const ElevationModel *elevationModel, QObject *parent = 0 );
 
     virtual bool isDataAvailable() const;
 
