@@ -25,17 +25,8 @@
 namespace Marble
 {
 
-/*
- * ElevationProfileDataSource
- */
-const MarbleModel *ElevationProfileDataSource::marbleModel() const
-{
-    return m_marbleModel;
-}
-
-ElevationProfileDataSource::ElevationProfileDataSource( const MarbleModel *marbleModel, QObject *parent ) :
-    QObject(parent),
-    m_marbleModel(marbleModel)
+ElevationProfileDataSource::ElevationProfileDataSource( QObject *parent ) :
+    QObject( parent )
 {
     // nothing to do
 }
@@ -67,7 +58,7 @@ QList<QPointF> ElevationProfileDataSource::calculateElevationData( const GeoData
  * ElevationProfileTrackDataSource
  */
 ElevationProfileTrackDataSource::ElevationProfileTrackDataSource( const MarbleModel *marbleModel, QObject *parent ) :
-    ElevationProfileDataSource(marbleModel, parent)
+    ElevationProfileDataSource( parent )
 {
     if ( marbleModel ) {
         connect( marbleModel->treeModel(), SIGNAL(added(GeoDataObject*)), this, SLOT(handleObjectAdded(GeoDataObject*)) );
@@ -205,14 +196,16 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *obj)
   * ElevationProfileRouteDataSource
   */
 ElevationProfileRouteDataSource::ElevationProfileRouteDataSource( const MarbleModel *marbleModel, QObject *parent ) :
-    ElevationProfileDataSource(marbleModel, parent),
-    m_routingModel( marbleModel ? marbleModel->routingManager()->routingModel() : 0 )
+    ElevationProfileDataSource( parent ),
+    m_routingModel( marbleModel ? marbleModel->routingManager()->routingModel() : 0 ),
+    m_elevationModel( marbleModel ? marbleModel->elevationModel() : 0 )
 {
-    if ( marbleModel ) {
-        connect( marbleModel->elevationModel(), SIGNAL(updateAvailable()), SLOT(requestUpdate()) );
+    if ( m_elevationModel ) {
+        connect( m_elevationModel, SIGNAL(updateAvailable()), SLOT(requestUpdate()) );
+    }
+    if ( m_routingModel ) {
         connect( m_routingModel, SIGNAL(currentRouteChanged()), this, SLOT(requestUpdate()) );
     }
-
     m_routeAvailable = isDataAvailable();
 }
 
@@ -238,7 +231,7 @@ qreal ElevationProfileRouteDataSource::getElevation(const GeoDataCoordinates &co
 {
     const qreal lat = coordinates.latitude ( GeoDataCoordinates::Degree );
     const qreal lon = coordinates.longitude( GeoDataCoordinates::Degree );
-    qreal ele = marbleModel()->elevationModel()->height( lon, lat );
+    qreal ele = m_elevationModel->height( lon, lat );
     if ( ele == invalidElevationData ) { // no data
         ele = 0;
     }

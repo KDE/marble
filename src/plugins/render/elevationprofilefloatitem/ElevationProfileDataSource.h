@@ -24,6 +24,7 @@
 namespace Marble
 {
 
+class ElevationModel;
 class RoutingModel;
 
 class ElevationProfileDataSource : public QObject
@@ -34,7 +35,7 @@ signals:
 public slots:
     virtual void requestUpdate() = 0;
 public:
-    ElevationProfileDataSource( const MarbleModel *marbleModel, QObject *parent = 0 );
+    ElevationProfileDataSource( QObject *parent = 0 );
 
     /**
      * @brief isDataAvailable
@@ -46,10 +47,6 @@ signals:
 protected:
     QList<QPointF> calculateElevationData(const GeoDataLineString &lineString) const;
     virtual qreal getElevation(const GeoDataCoordinates &coordinates) const = 0;
-
-    const MarbleModel *marbleModel() const;
-private:
-    const MarbleModel *const m_marbleModel;
 };
 
 /**
@@ -98,6 +95,7 @@ protected:
 private slots:
 private:
     const RoutingModel *const m_routingModel;
+    const ElevationModel *const m_elevationModel;
     bool m_routeAvailable; // save state if route is available to notify FloatItem when this changes
 
 
