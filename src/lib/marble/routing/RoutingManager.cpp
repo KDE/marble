@@ -501,6 +501,10 @@ void RoutingManager::readSettings()
 
 void RoutingManager::setGuidanceModeEnabled( bool enabled )
 {
+    if ( d->m_guidanceModeEnabled == enabled ) {
+        return;
+    }
+
     d->m_guidanceModeEnabled = enabled;
 
     if ( enabled ) {
@@ -545,6 +549,8 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
         d->m_adjustNavigation->setAutoZoom( enabled );
         d->m_adjustNavigation->setRecenter( enabled ? AutoNavigation::RecenterOnBorder : AutoNavigation::DontRecenter );
     }
+
+    emit guidanceModeEnabledChanged( d->m_guidanceModeEnabled );
 }
 
 void RoutingManagerPrivate::recalculateRoute( bool deviated )

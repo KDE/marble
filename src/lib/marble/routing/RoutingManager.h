@@ -38,6 +38,7 @@ class MARBLE_EXPORT RoutingManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY( State state READ state NOTIFY stateChanged )
+    Q_PROPERTY( bool guidanceModeEnabled READ guidanceModeEnabled WRITE setGuidanceModeEnabled NOTIFY guidanceModeEnabledChanged )
 
 public:
     enum State {
@@ -203,6 +204,8 @@ Q_SIGNALS:
     void stateChanged( RoutingManager::State newState );
 
     void routeRetrieved( GeoDataDocument* route );
+
+    void guidanceModeEnabledChanged( bool enabled );
 
 private:
     Q_PRIVATE_SLOT( d, void addRoute( GeoDataDocument* route ) )
