@@ -69,8 +69,10 @@ QList<QPointF> ElevationProfileDataSource::calculateElevationData( const GeoData
 ElevationProfileTrackDataSource::ElevationProfileTrackDataSource(MarbleModel *marbleModel, QObject *parent):
     ElevationProfileDataSource(marbleModel, parent)
 {
-    connect( marbleModel->treeModel(), SIGNAL(added(GeoDataObject*)), this, SLOT(handleObjectAdded(GeoDataObject*)) );
-    connect( marbleModel->treeModel(), SIGNAL(removed(GeoDataObject*)), this, SLOT(handleObjectRemoved(GeoDataObject*)) );
+    if ( marbleModel ) {
+        connect( marbleModel->treeModel(), SIGNAL(added(GeoDataObject*)), this, SLOT(handleObjectAdded(GeoDataObject*)) );
+        connect( marbleModel->treeModel(), SIGNAL(removed(GeoDataObject*)), this, SLOT(handleObjectRemoved(GeoDataObject*)) );
+    }
 }
 
 QStringList ElevationProfileTrackDataSource::sourceDescriptions() const
@@ -203,12 +205,16 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *obj)
   * ElevationProfileRouteDataSource
   */
 ElevationProfileRouteDataSource::ElevationProfileRouteDataSource(MarbleModel *marbleModel, QObject *parent):
-    ElevationProfileDataSource(marbleModel, parent)
+    ElevationProfileDataSource(marbleModel, parent),
+    m_routingModel( 0 )
 {
-    connect( this->marbleModel()->elevationModel(), SIGNAL(updateAvailable()), SLOT(requestUpdate()) );
+    if ( marbleModel ) {
+        connect( marbleModel->elevationModel(), SIGNAL(updateAvailable()), SLOT(requestUpdate()) );
 
-    m_routingModel = this->marbleModel()->routingManager()->routingModel();
-    connect( m_routingModel, SIGNAL(currentRouteChanged()), this, SLOT(requestUpdate()) );
+        m_routingModel = marbleModel->routingManager()->routingModel();
+        connect( m_routingModel, SIGNAL(currentRouteChanged()), this, SLOT(requestUpdate()) );
+    }
+
     m_routeAvailable = isDataAvailable();
 }
 
