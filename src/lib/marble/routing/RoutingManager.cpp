@@ -16,7 +16,6 @@
 #include "RoutingModel.h"
 #include "RoutingProfilesModel.h"
 #include "RoutingRunnerPlugin.h"
-#include "AutoNavigation.h"
 #include "GeoWriter.h"
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
@@ -65,8 +64,6 @@ public:
     RoutingRunnerManager m_runnerManager;
 
     bool m_haveRoute;
-
-    AutoNavigation *m_adjustNavigation;
 
     bool m_guidanceModeEnabled;
 
@@ -117,7 +114,6 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_alternativeRoutesModel( parent ),
         m_runnerManager( model, q ),
         m_haveRoute( false ),
-        m_adjustNavigation( 0 ),
         m_guidanceModeEnabled( false ),
         m_shutdownPositionTracking( false ),
         m_guidanceModeWarning( true ),
@@ -438,16 +434,6 @@ AlternativeRoutesModel* RoutingManager::alternativeRoutesModel()
     return &d->m_alternativeRoutesModel;
 }
 
-void RoutingManager::setAutoNavigation( AutoNavigation* adjustNavigation )
-{
-    d->m_adjustNavigation = adjustNavigation;
-}
-
-const AutoNavigation* RoutingManager::adjustNavigation() const
-{
-    return d->m_adjustNavigation;
-}
-
 void RoutingManager::writeSettings() const
 {
     d->saveRoute( d->stateFile() );
@@ -543,11 +529,6 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
     } else if ( positionProvider && !enabled && d->m_shutdownPositionTracking ) {
         d->m_shutdownPositionTracking = false;
         d->m_positionTracking->setPositionProviderPlugin( 0 );
-    }
-
-    if ( d->m_adjustNavigation ) {
-        d->m_adjustNavigation->setAutoZoom( enabled );
-        d->m_adjustNavigation->setRecenter( enabled ? AutoNavigation::RecenterOnBorder : AutoNavigation::DontRecenter );
     }
 
     emit guidanceModeEnabledChanged( d->m_guidanceModeEnabled );

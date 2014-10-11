@@ -117,6 +117,7 @@ void Navigation::setMap( MarbleWidget* widget )
         connect( d->m_marbleWidget->model()->routingManager()->routingModel(),
                 SIGNAL(positionChanged()), this, SLOT(update()) );
 
+        delete d->m_autoNavigation;
         d->m_autoNavigation = new Marble::AutoNavigation( d->m_marbleWidget->model(), d->m_marbleWidget->viewport(), this );
         connect( d->m_autoNavigation, SIGNAL(zoomIn(FlyToMode)),
                  d->m_marbleWidget, SLOT(zoomIn()) );
@@ -129,8 +130,6 @@ void Navigation::setMap( MarbleWidget* widget )
                  d->m_autoNavigation, SLOT(inhibitAutoAdjustments()) );
         connect( d->m_marbleWidget->model()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
                  &d->m_voiceNavigation, SLOT(handleTrackingStatusChange(PositionProviderStatus)) );
-
-        d->m_marbleWidget->model()->routingManager()->setAutoNavigation( d->m_autoNavigation );
     }
     emit mapChanged();
 }
@@ -144,6 +143,8 @@ void Navigation::setGuidanceModeEnabled( bool enabled )
 {
     if ( d->m_marbleWidget ) {
         d->m_marbleWidget->model()->routingManager()->setGuidanceModeEnabled( enabled );
+        d->m_autoNavigation->setAutoZoom( enabled );
+        d->m_autoNavigation->setRecenter( enabled ? Marble::AutoNavigation::RecenterOnBorder : Marble::AutoNavigation::DontRecenter );
 
         if ( enabled && !d->m_muted ) {
             //d->m_audio.announceStart();
