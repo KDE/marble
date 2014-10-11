@@ -28,12 +28,12 @@ namespace Marble
 /*
  * ElevationProfileDataSource
  */
-MarbleModel *ElevationProfileDataSource::marbleModel() const
+const MarbleModel *ElevationProfileDataSource::marbleModel() const
 {
     return m_marbleModel;
 }
 
-ElevationProfileDataSource::ElevationProfileDataSource(MarbleModel *marbleModel, QObject *parent):
+ElevationProfileDataSource::ElevationProfileDataSource( const MarbleModel *marbleModel, QObject *parent ) :
     QObject(parent),
     m_marbleModel(marbleModel)
 {
@@ -66,7 +66,7 @@ QList<QPointF> ElevationProfileDataSource::calculateElevationData( const GeoData
 /*
  * ElevationProfileTrackDataSource
  */
-ElevationProfileTrackDataSource::ElevationProfileTrackDataSource(MarbleModel *marbleModel, QObject *parent):
+ElevationProfileTrackDataSource::ElevationProfileTrackDataSource( const MarbleModel *marbleModel, QObject *parent ) :
     ElevationProfileDataSource(marbleModel, parent)
 {
     if ( marbleModel ) {
@@ -105,14 +105,14 @@ bool ElevationProfileTrackDataSource::isDataAvailable() const
     return !m_trackHash.isEmpty();
 }
 
-qreal ElevationProfileTrackDataSource::getElevation(GeoDataCoordinates coord) const
+qreal ElevationProfileTrackDataSource::getElevation(const GeoDataCoordinates &coordinates) const
 {
-    return coord.altitude();
+    return coordinates.altitude();
 }
 
 void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *obj)
 {
-    GeoDataDocument *doc = dynamic_cast<GeoDataDocument*>(obj);
+    const GeoDataDocument *doc = dynamic_cast<const GeoDataDocument *>(obj);
     if(!doc){
         return;// don't know what to do if not a document
     }
@@ -176,13 +176,13 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *obj)
         // no track loaded, nothing to remove
         return;
     }
-    GeoDataDocument *topLevelDoc = dynamic_cast<GeoDataDocument*>(obj);
+    const GeoDataDocument *topLevelDoc = dynamic_cast<const GeoDataDocument *>(obj);
     if(!topLevelDoc){
         return;// don't know what to do if not a document
     }
 
-    QString key = topLevelDoc->fileName();
-    QList<const GeoDataTrack *> list = m_trackHash.value(key);
+    const QString key = topLevelDoc->fileName();
+    const QList<const GeoDataTrack *> list = m_trackHash.value(key);
     const GeoDataTrack *selectedTrack = m_trackList[m_currentSourceIndex];
     for(int i = 0; i<list.size(); i++){
         int idx = m_trackList.indexOf(list[i]);
@@ -204,14 +204,12 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *obj)
  /*
   * ElevationProfileRouteDataSource
   */
-ElevationProfileRouteDataSource::ElevationProfileRouteDataSource(MarbleModel *marbleModel, QObject *parent):
+ElevationProfileRouteDataSource::ElevationProfileRouteDataSource( const MarbleModel *marbleModel, QObject *parent ) :
     ElevationProfileDataSource(marbleModel, parent),
-    m_routingModel( 0 )
+    m_routingModel( marbleModel ? marbleModel->routingManager()->routingModel() : 0 )
 {
     if ( marbleModel ) {
         connect( marbleModel->elevationModel(), SIGNAL(updateAvailable()), SLOT(requestUpdate()) );
-
-        m_routingModel = marbleModel->routingManager()->routingModel();
         connect( m_routingModel, SIGNAL(currentRouteChanged()), this, SLOT(requestUpdate()) );
     }
 
@@ -226,9 +224,9 @@ void ElevationProfileRouteDataSource::requestUpdate()
         m_routeAvailable = isDataAvailable();
     }
 
-    GeoDataLineString routePoints = m_routingModel->route().path();
-
-    emit dataUpdated(routePoints, calculateElevationData(routePoints));
+    const GeoDataLineString routePoints = m_routingModel->route().path();
+    const QList<QPointF> elevationData = calculateElevationData( routePoints );
+    emit dataUpdated( routePoints, elevationData );
 }
 
 bool ElevationProfileRouteDataSource::isDataAvailable() const
@@ -236,10 +234,10 @@ bool ElevationProfileRouteDataSource::isDataAvailable() const
     return m_routingModel && m_routingModel->rowCount() > 0;
 }
 
-qreal ElevationProfileRouteDataSource::getElevation(GeoDataCoordinates coord) const
+qreal ElevationProfileRouteDataSource::getElevation(const GeoDataCoordinates &coordinates) const
 {
-    const qreal lat = coord.latitude ( GeoDataCoordinates::Degree );
-    const qreal lon = coord.longitude( GeoDataCoordinates::Degree );
+    const qreal lat = coordinates.latitude ( GeoDataCoordinates::Degree );
+    const qreal lon = coordinates.longitude( GeoDataCoordinates::Degree );
     qreal ele = marbleModel()->elevationModel()->height( lon, lat );
     if ( ele == invalidElevationData ) { // no data
         ele = 0;

@@ -34,7 +34,7 @@ signals:
 public slots:
     virtual void requestUpdate() = 0;
 public:
-    ElevationProfileDataSource( MarbleModel *marbleModel, QObject *parent = 0);
+    ElevationProfileDataSource( const MarbleModel *marbleModel, QObject *parent = 0 );
 
     /**
      * @brief isDataAvailable
@@ -45,11 +45,11 @@ signals:
     void sourceCountChanged();
 protected:
     QList<QPointF> calculateElevationData(const GeoDataLineString &lineString) const;
-    virtual qreal getElevation(GeoDataCoordinates coord) const = 0;
+    virtual qreal getElevation(const GeoDataCoordinates &coordinates) const = 0;
 
-    MarbleModel *marbleModel() const;
+    const MarbleModel *marbleModel() const;
 private:
-    MarbleModel *m_marbleModel;
+    const MarbleModel *const m_marbleModel;
 };
 
 /**
@@ -59,7 +59,7 @@ class ElevationProfileTrackDataSource : public ElevationProfileDataSource
 {
     Q_OBJECT
 public:
-    ElevationProfileTrackDataSource ( MarbleModel* marbleModel, QObject *parent = 0);
+    ElevationProfileTrackDataSource( const MarbleModel *marbleModel, QObject *parent = 0 );
     QStringList sourceDescriptions() const;
     void setSourceIndex(int index);
     int currentSourceIndex() const;
@@ -67,7 +67,7 @@ public:
     virtual void requestUpdate();
     virtual bool isDataAvailable() const;
 protected:
-    virtual qreal getElevation(GeoDataCoordinates coord) const;
+    virtual qreal getElevation(const GeoDataCoordinates &coordinates) const;
 
 private slots:
     void handleObjectAdded(GeoDataObject *obj);
@@ -88,16 +88,16 @@ class ElevationProfileRouteDataSource : public ElevationProfileDataSource
 {
     Q_OBJECT
 public:
-    ElevationProfileRouteDataSource (MarbleModel* marbleMdl, QObject *parent = 0);
+    ElevationProfileRouteDataSource( const MarbleModel *marbleModel, QObject *parent = 0 );
 public slots:
     virtual void requestUpdate();
     virtual bool isDataAvailable() const;
 protected:
-    virtual qreal getElevation(GeoDataCoordinates coord) const;
+    virtual qreal getElevation(const GeoDataCoordinates &coordinates) const;
 
 private slots:
 private:
-    const RoutingModel* m_routingModel;
+    const RoutingModel *const m_routingModel;
     bool m_routeAvailable; // save state if route is available to notify FloatItem when this changes
 
 

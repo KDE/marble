@@ -75,8 +75,8 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
     m_markerDocument.append( m_markerPlacemark );
 
     // initialize already here, otherwise we won't get notified for new files when not initialized
-    m_routeDataSource = new ElevationProfileRouteDataSource(const_cast<MarbleModel*>(marbleModel), this);
-    m_trackDataSource = new ElevationProfileTrackDataSource(const_cast<MarbleModel*>(marbleModel), this);
+    m_routeDataSource = new ElevationProfileRouteDataSource( marbleModel, this );
+    m_trackDataSource = new ElevationProfileTrackDataSource( marbleModel, this );
     m_contextMenu = new ElevationProfileContextMenu(this);
     connect(m_trackDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()));
     connect(m_routeDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()));
