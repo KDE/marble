@@ -173,7 +173,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     connect( d->m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
              d->m_adjustNavigation, SLOT(inhibitAutoAdjustments()) );
     connect( d->m_widget->model()->routingManager(), SIGNAL(guidanceModeEnabledChanged(bool)),
-             this, SLOT(updateGuidaceMode()) );
+             this, SLOT(updateGuidanceMode()) );
 
     connect (d->m_currentLocationUi.showTrackCheckBox, SIGNAL(clicked(bool)),
              d->m_widget->model()->positionTracking(), SLOT(setTrackVisible(bool)));
