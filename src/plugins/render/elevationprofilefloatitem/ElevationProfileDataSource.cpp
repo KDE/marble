@@ -60,7 +60,8 @@ QList<QPointF> ElevationProfileDataSource::calculateElevationData( const GeoData
 // end of impl of ElevationProfileDataSource
 
 ElevationProfileTrackDataSource::ElevationProfileTrackDataSource( const GeoDataTreeModel *treeModel, QObject *parent ) :
-    ElevationProfileDataSource( parent )
+    ElevationProfileDataSource( parent ),
+    m_currentSourceIndex( -1 )
 {
     if ( treeModel ) {
         connect( treeModel, SIGNAL(added(GeoDataObject*)), SLOT(handleObjectAdded(GeoDataObject*)) );
@@ -88,6 +89,14 @@ int ElevationProfileTrackDataSource::currentSourceIndex() const
 
 void ElevationProfileTrackDataSource::requestUpdate()
 {
+    if ( m_currentSourceIndex < 0 ) {
+        return;
+    }
+
+    if ( m_currentSourceIndex >= m_trackList.size() ) {
+        return;
+    }
+
     const GeoDataLineString *routePoints = m_trackList[m_currentSourceIndex]->lineString();
 
     emit dataUpdated(*routePoints, calculateElevationData(*routePoints));
@@ -138,7 +147,7 @@ void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *object)
     m_trackHash.insert(document->fileName(), trackList);
 
     const GeoDataTrack *selectedTrack = 0;
-    if (m_currentSourceIndex < m_trackList.size()) {
+    if ( 0 <= m_currentSourceIndex && m_currentSourceIndex < m_trackList.size() ) {
         selectedTrack = m_trackList[m_currentSourceIndex];
     }
 
@@ -176,8 +185,12 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *object)
     }
 
     const QString key = topLevelDoc->fileName();
+    if ( !m_trackHash.contains( key ) ) {
+        return;
+    }
+
     const QList<const GeoDataTrack *> list = m_trackHash.value(key);
-    const GeoDataTrack *selectedTrack = m_trackList[m_currentSourceIndex];
+    const GeoDataTrack *const selectedTrack = m_currentSourceIndex == -1 ? 0 : m_trackList[m_currentSourceIndex];
     for (int i = 0; i<list.size(); i++) {
         int idx = m_trackList.indexOf(list[i]);
         m_trackList.removeAt(idx);
