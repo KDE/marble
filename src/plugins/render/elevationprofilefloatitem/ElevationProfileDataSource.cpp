@@ -48,7 +48,7 @@ QList<QPointF> ElevationProfileDataSource::calculateElevationData( const GeoData
 
     //GeoDataLineString path;
     for ( int i = 0; i < lineString.size(); i++ ) {
-        qreal ele = getElevation( lineString[i] );
+        const qreal ele = getElevation( lineString[i] );
 
         if ( i ) {
             distance += EARTH_RADIUS * distanceSphere( lineString[i-1], lineString[i] );
@@ -225,9 +225,7 @@ void ElevationProfileRouteDataSource::requestUpdate()
         emit sourceCountChanged();
         m_routeAvailable = isDataAvailable();
     }
-    if(!isDataAvailable()){
-        emit dataUpdated(GeoDataLineString(), QList<QPointF>());
-    }
+
     GeoDataLineString routePoints = m_routingModel->route().path();
 
     emit dataUpdated(routePoints, calculateElevationData(routePoints));
