@@ -86,15 +86,10 @@ AutoNavigation::Private::Private( MarbleModel *model, const ViewportParams *view
 
 void AutoNavigation::Private::moveOnBorderToCenter( const GeoDataCoordinates &position, qreal )
 {
-    qreal lon = 0.0;
-    qreal lat = 0.0;
-
-    position.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
-
     qreal x = 0.0;
     qreal y = 0.0;
     //recenter if initially the gps location is not visible on the screen
-    if(!( m_viewport->screenCoordinates( lon, lat, x, y ) ) ) {
+    if(!( m_viewport->screenCoordinates( position, x, y ) ) ) {
          centerOn( position );
     }
     qreal centerLon = m_viewport->centerLongitude();
