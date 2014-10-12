@@ -750,7 +750,7 @@ void MarblePart::writeSettings()
     QString positionProvider;
     PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
     tracking->writeSettings();
-    if ( tracking && tracking->positionProviderPlugin() ) {
+    if ( tracking->positionProviderPlugin() ) {
         positionProvider = tracking->positionProviderPlugin()->nameId();
     }
     MarbleSettings::setActivePositionTrackingPlugin( positionProvider );

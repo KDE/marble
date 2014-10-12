@@ -1442,7 +1442,7 @@ void MainWindow::writeSettings()
      QString positionProvider;
      PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
      tracking->writeSettings();
-     if ( tracking && tracking->positionProviderPlugin() ) {
+     if ( tracking->positionProviderPlugin() ) {
          positionProvider = tracking->positionProviderPlugin()->nameId();
      }
      settings.setValue( "activePositionTrackingPlugin", positionProvider );

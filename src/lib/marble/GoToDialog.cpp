@@ -161,8 +161,8 @@ int TargetModel::rowCount ( const QModelIndex & parent ) const
 
 QVariant TargetModel::currentLocationData ( int role ) const
 {
-    PositionTracking* tracking = m_marbleModel->positionTracking();
-    if ( tracking && tracking->status() == PositionProviderStatusAvailable ) {
+    const PositionTracking* tracking = m_marbleModel->positionTracking();
+    if ( tracking->status() == PositionProviderStatusAvailable ) {
         GeoDataCoordinates currentLocation = tracking->currentLocation();
         switch( role ) {
         case Qt::DisplayRole: return tr( "Current Location: %1" ).arg( currentLocation.toString() ) ;
