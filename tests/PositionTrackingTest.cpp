@@ -101,6 +101,8 @@ class PositionTrackingTest : public QObject
     PositionTrackingTest();
 
  private Q_SLOTS:
+    void construct();
+
     void statusChanged_data();
     void statusChanged();
 
@@ -113,6 +115,31 @@ PositionTrackingTest::PositionTrackingTest()
 {
     qRegisterMetaType<GeoDataCoordinates>( "GeoDataCoordinates" );
     qRegisterMetaType<PositionProviderStatus>( "PositionProviderStatus" );
+}
+
+void PositionTrackingTest::construct()
+{
+    GeoDataTreeModel treeModel;
+    const PositionTracking tracking( &treeModel );
+
+    QCOMPARE( const_cast<PositionTracking &>( tracking ).positionProviderPlugin(), static_cast<PositionProviderPlugin *>( 0 ) );
+    QCOMPARE( tracking.speed(), qreal( 0 ) );
+    QCOMPARE( tracking.direction(), qreal( 0 ) );
+    QCOMPARE( tracking.timestamp(), QDateTime() );
+    QCOMPARE( tracking.accuracy(), GeoDataAccuracy() );
+    QCOMPARE( tracking.trackVisible(), true );
+    QCOMPARE( tracking.currentLocation(), GeoDataCoordinates() );
+    QCOMPARE( tracking.status(), PositionProviderStatusUnavailable );
+    QCOMPARE( tracking.isTrackEmpty(), true );
+
+    QCOMPARE( treeModel.rowCount(), 1 );
+    const QModelIndex indexPositionTracking = treeModel.index( 0, 0 );
+    QCOMPARE( treeModel.data( indexPositionTracking, Qt::DisplayRole ).toString(), QString( "Position Tracking" ) );
+    QCOMPARE( treeModel.rowCount( indexPositionTracking ), 2 );
+    const QModelIndex indexCurrentPosition = treeModel.index( 0, 0, indexPositionTracking );
+    QCOMPARE( treeModel.data( indexCurrentPosition, Qt::DisplayRole ).toString(), QString( "Current Position" ) );
+    const QModelIndex indexCurrentTrack = treeModel.index( 1, 0, indexPositionTracking );
+    QCOMPARE( treeModel.data( indexCurrentTrack, Qt::DisplayRole ).toString(), QString( "Current Track" ) );
 }
 
 void PositionTrackingTest::statusChanged_data()
@@ -132,8 +159,6 @@ void PositionTrackingTest::statusChanged()
 
     GeoDataTreeModel treeModel;
     PositionTracking tracking( &treeModel );
-
-    QCOMPARE( tracking.status(), PositionProviderStatusUnavailable );
 
     QSignalSpy statusChangedSpy( &tracking, SIGNAL(statusChanged(PositionProviderStatus)) );
 
@@ -156,8 +181,6 @@ void PositionTrackingTest::setPositionProviderPlugin()
 
     GeoDataTreeModel treeModel;
     PositionTracking tracking( &treeModel );
-
-    QCOMPARE( tracking.status(), PositionProviderStatusUnavailable );
 
     QSignalSpy gpsLocationSpy( &tracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)) );
 
