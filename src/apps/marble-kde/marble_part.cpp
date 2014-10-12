@@ -565,9 +565,10 @@ void MarblePart::readSettings()
         m_controlView->marbleModel()->routingManager()->routeRequest()->setRoutingProfile( profile );
     }
 
+    PositionTracking *const tracking = m_controlView->marbleModel()->positionTracking();
+    tracking->readSettings();
     QString positionProvider = MarbleSettings::activePositionTrackingPlugin();
     if ( !positionProvider.isEmpty() ) {
-        PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
         const PluginManager* pluginManager = m_controlView->marbleModel()->pluginManager();
         foreach( const PositionProviderPlugin* plugin, pluginManager->positionProviderPlugins() ) {
             if ( plugin->nameId() == positionProvider ) {
@@ -748,6 +749,7 @@ void MarblePart::writeSettings()
 
     QString positionProvider;
     PositionTracking* tracking = m_controlView->marbleModel()->positionTracking();
+    tracking->writeSettings();
     if ( tracking && tracking->positionProviderPlugin() ) {
         positionProvider = tracking->positionProviderPlugin()->nameId();
     }
