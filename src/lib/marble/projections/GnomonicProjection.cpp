@@ -92,9 +92,9 @@ bool GnomonicProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
     qreal cosC = qSin( phi1 ) * qSin( phi ) + qCos( phi1 ) * qCos( phi ) * qCos( lambda - lambdaPrime );
 
-    // Prevent division by zero
-    if (fabs(cosC) < 0.0001) {
-        cosC = 0.0001;
+    if ( cosC <= 0) {
+        globeHidesPoint = true;
+        return false;
     }
 
     // Let (x, y) be the position on the screen of the placemark..
