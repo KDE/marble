@@ -207,6 +207,8 @@ set(marblewidget_SRCS
     RenderPluginInterface.cpp
     PositionProviderPlugin.cpp
     PositionProviderPluginInterface.cpp
+    PlacemarkPositionProviderPlugin.cpp
+    RouteSimulationPositionProviderPlugin.cpp
     MarblePluginSettingsWidget.cpp
     RenderPluginModel.cpp
     PluginAboutDialog.cpp

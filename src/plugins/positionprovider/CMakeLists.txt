@@ -37,8 +37,5 @@ IF(LIBWLOCATE_FOUND)
      ADD_SUBDIRECTORY( wlocate )
 ENDIF()
 
-ADD_SUBDIRECTORY( routesimulation )
-ADD_SUBDIRECTORY( placemark )
-
 # experimental implementation
 # ADD_SUBDIRECTORY( geoclue )

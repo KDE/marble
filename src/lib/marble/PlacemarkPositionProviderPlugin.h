@@ -22,7 +22,7 @@ namespace Marble
 {
 
 class GeoDataPlacemark;
-
+class MarbleModel;
 
 class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
 {
@@ -31,7 +31,7 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
  public:
-    PlacemarkPositionProviderPlugin();
+    PlacemarkPositionProviderPlugin( MarbleModel *marbleModel );
 
     virtual QString name() const;
     virtual QString nameId() const;
@@ -54,6 +54,7 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     virtual QDateTime timestamp() const;
 
  private:
+    MarbleModel *const m_marbleModel;
     const GeoDataPlacemark *m_placemark;
     GeoDataCoordinates m_coordinates;
     QDateTime m_timestamp;

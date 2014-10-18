@@ -19,6 +19,8 @@
 namespace Marble
 {
 
+class RoutingManager;
+
 class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
 {
     Q_OBJECT
@@ -26,7 +28,7 @@ class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
-    RouteSimulationPositionProviderPlugin();
+    RouteSimulationPositionProviderPlugin( RoutingManager *routingManager );
     virtual ~RouteSimulationPositionProviderPlugin();
 
     // Implementing PluginInterface
@@ -57,6 +59,7 @@ private Q_SLOTS:
     void update();
 
 private:
+    RoutingManager *const m_routingManager;
     int m_currentIndex;
     PositionProviderStatus m_status;
     GeoDataLineString m_lineString;

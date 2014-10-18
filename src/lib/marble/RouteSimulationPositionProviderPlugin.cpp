@@ -19,7 +19,6 @@
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
-#include "MarbleModel.h"
 #include "routing/AlternativeRoutesModel.h"
 #include "routing/RoutingManager.h"
 
@@ -75,7 +74,7 @@ QIcon RouteSimulationPositionProviderPlugin::icon() const
 
 PositionProviderPlugin* RouteSimulationPositionProviderPlugin::newInstance() const
 {
-    return new RouteSimulationPositionProviderPlugin;
+    return new RouteSimulationPositionProviderPlugin( m_routingManager );
 }
 
 PositionProviderStatus RouteSimulationPositionProviderPlugin::status() const
@@ -100,7 +99,9 @@ GeoDataAccuracy RouteSimulationPositionProviderPlugin::accuracy() const
     return result;
 }
 
-RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin() :
+RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin( RoutingManager *routingManager ) :
+    PositionProviderPlugin(),
+    m_routingManager( routingManager ),
     m_currentIndex( -2 ),
     m_status( PositionProviderStatusUnavailable ),
     m_direction( 0.0 )
@@ -118,7 +119,7 @@ void RouteSimulationPositionProviderPlugin::initialize()
 
     m_lineString.clear();
 
-    GeoDataDocument* document = const_cast<MarbleModel *>( marbleModel() )->routingManager()->alternativeRoutesModel()->currentRoute();
+    GeoDataDocument *document = m_routingManager->alternativeRoutesModel()->currentRoute();
     if ( document && document->size() > 0 ) {
         foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
             const GeoDataGeometry* geometry = placemark->geometry();
@@ -187,7 +188,5 @@ void RouteSimulationPositionProviderPlugin::update()
 }
 
 } // namespace Marble
-
-Q_EXPORT_PLUGIN2( RouteSimulationPositionProviderPlugin, Marble::RouteSimulationPositionProviderPlugin )
 
 #include "RouteSimulationPositionProviderPlugin.moc"

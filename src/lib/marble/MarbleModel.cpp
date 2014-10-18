@@ -62,6 +62,7 @@
 #include "MarbleDirs.h"
 #include "FileManager.h"
 #include "GeoDataTreeModel.h"
+#include "PlacemarkPositionProviderPlugin.h"
 #include "Planet.h"
 #include "PlanetFactory.h"
 #include "PluginManager.h"
@@ -71,6 +72,7 @@
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 #include "routing/RoutingManager.h"
+#include "RouteSimulationPositionProviderPlugin.h"
 #include "BookmarkManager.h"
 #include "ElevationModel.h"
 
@@ -197,6 +199,9 @@ MarbleModel::MarbleModel( QObject *parent )
             &d->m_sunLocator, SLOT(update()) );
 
     d->m_elevationModel = new ElevationModel( this );
+
+    d->m_pluginManager.addPositionProviderPlugin( new PlacemarkPositionProviderPlugin( this ) );
+    d->m_pluginManager.addPositionProviderPlugin( new RouteSimulationPositionProviderPlugin( d->m_routingManager ) );
 }
 
 MarbleModel::~MarbleModel()
