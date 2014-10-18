@@ -202,10 +202,10 @@ void CurrentLocationWidgetPrivate::adjustPositionTrackingStatus( PositionProvide
 
     switch ( status ) {
         case PositionProviderStatusUnavailable:
-        html += QObject::tr( "Waiting for current location information..." );
+            html += QObject::tr( "No position available." );
             break;
         case PositionProviderStatusAcquiring:
-            html += QObject::tr( "Initializing current location service..." );
+            html += QObject::tr( "Waiting for current location information..." );
             break;
         case PositionProviderStatusAvailable:
             Q_ASSERT( false );

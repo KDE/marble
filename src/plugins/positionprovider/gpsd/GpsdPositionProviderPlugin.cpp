@@ -77,7 +77,7 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
     PositionProviderStatus oldStatus = m_status;
     GeoDataCoordinates oldPosition = m_position;
     if ( data.status == STATUS_NO_FIX || isnan( data.fix.longitude ) || isnan( data.fix.latitude ) )
-        m_status = PositionProviderStatusUnavailable;
+        m_status = PositionProviderStatusAcquiring;
     else {
         m_status = PositionProviderStatusAvailable;
         m_position.set( data.fix.longitude, data.fix.latitude,

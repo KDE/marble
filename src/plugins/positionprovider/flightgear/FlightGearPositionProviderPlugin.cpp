@@ -152,7 +152,7 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence( const QString &sentenc
         QStringList const values = sentence.split( ',' );
         if ( values.size() > 10 ) {
             if ( values[6] == 0 ) {
-                m_status = PositionProviderStatusUnavailable; // no fix
+                m_status = PositionProviderStatusAcquiring; // no fix
             } else {
                 double const lat = parsePosition( values[2], values[3] == "S" );
                 double const lon = parsePosition( values[4], values[5] == "W" );

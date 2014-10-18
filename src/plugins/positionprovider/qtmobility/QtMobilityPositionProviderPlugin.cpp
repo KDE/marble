@@ -186,7 +186,7 @@ void QtMobilityPositionProviderPlugin::update()
             newStatus = PositionProviderStatusAvailable;
         }
         else {
-            newStatus = PositionProviderStatusUnavailable;
+            newStatus = PositionProviderStatusError;
         }
     }
 
