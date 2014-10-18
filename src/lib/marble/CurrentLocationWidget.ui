@@ -66,7 +66,7 @@
         <string>Clear Track</string>
        </property>
        <property name="icon">
-        <iconset resource="../marble.qrc">
+        <iconset resource="../../apps/marble-ui/marble.qrc">
          <normaloff>:/icons/16x16/edit-clear-list.png</normaloff>:/icons/16x16/edit-clear-list.png</iconset>
        </property>
        <property name="toolButtonStyle">
@@ -80,7 +80,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../marble.qrc">
+        <iconset resource="../../apps/marble-ui/marble.qrc">
          <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
        </property>
       </widget>
@@ -91,7 +91,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../marble.qrc">
+        <iconset resource="../../apps/marble-ui/marble.qrc">
          <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
        </property>
       </widget>
@@ -193,7 +193,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../marble.qrc"/>
+  <include location="../../apps/marble-ui/marble.qrc"/>
  </resources>
  <connections/>
 </ui>
