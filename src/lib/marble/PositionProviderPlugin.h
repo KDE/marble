@@ -17,8 +17,7 @@
 
 namespace Marble
 {
-    class MarbleModel;
-    class PositionProviderPluginPrivate;
+class PositionProviderPluginPrivate;
 
 /**
  * @short The abstract class that provides position information.
@@ -29,9 +28,6 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
 
  public:
     virtual ~PositionProviderPlugin();
-
-    const MarbleModel* marbleModel() const;
-    void  setMarbleModel( const MarbleModel* );
 
     /**
      * @brief Returns the string that should appear in the user interface.

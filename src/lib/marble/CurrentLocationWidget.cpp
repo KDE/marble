@@ -323,7 +323,6 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
             m_currentLocationUi.locationLabel->setEnabled( true );
             PositionProviderPlugin* instance = plugin->newInstance();
             PositionTracking *tracking = m_widget->model()->positionTracking();
-            instance->setMarbleModel( m_widget->model() );
             tracking->setPositionProviderPlugin( instance );
             m_widget->update();
             return;

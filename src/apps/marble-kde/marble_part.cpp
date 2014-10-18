@@ -573,7 +573,6 @@ void MarblePart::readSettings()
         foreach( const PositionProviderPlugin* plugin, pluginManager->positionProviderPlugins() ) {
             if ( plugin->nameId() == positionProvider ) {
                 PositionProviderPlugin* instance = plugin->newInstance();
-                instance->setMarbleModel( m_controlView->marbleModel() );
                 tracking->setPositionProviderPlugin( instance );
                 break;
             }

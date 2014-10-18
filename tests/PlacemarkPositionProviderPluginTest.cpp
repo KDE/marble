@@ -84,7 +84,6 @@ PositionProviderPlugin *PlacemarkPositionProviderPluginTest::createInitializedPl
         return 0;
     }
 
-    plugin->setMarbleModel( model );
     plugin->initialize();
 
     return plugin;
@@ -121,7 +120,6 @@ void PlacemarkPositionProviderPluginTest::initialize()
     QSignalSpy statusChangedSpy( plugin, SIGNAL(statusChanged(PositionProviderStatus)) );
     QSignalSpy positionChangedSpy( plugin, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)) );
 
-    plugin->setMarbleModel( &model );
     plugin->initialize();
 
     QCOMPARE( plugin->status(), expectedStatus );
