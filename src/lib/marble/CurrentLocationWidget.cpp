@@ -342,7 +342,7 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
 
 void CurrentLocationWidgetPrivate::trackPlacemark()
 {
-    changePositionProvider( "Placemark" );
+    changePositionProvider( QObject::tr( "Placemark" ) );
     m_adjustNavigation->setRecenter( AutoNavigation::AlwaysRecenter );
 }
 
