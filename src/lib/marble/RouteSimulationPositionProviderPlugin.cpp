@@ -14,13 +14,9 @@
 
 #include <QTimer>
 
-#include "GeoDataCoordinates.h"
-#include "GeoDataDocument.h"
-#include "GeoDataFolder.h"
-#include "GeoDataPlacemark.h"
-#include "MarbleDebug.h"
-#include "routing/AlternativeRoutesModel.h"
+#include "routing/Route.h"
 #include "routing/RoutingManager.h"
+#include "routing/RoutingModel.h"
 
 namespace Marble
 {
@@ -117,18 +113,7 @@ void RouteSimulationPositionProviderPlugin::initialize()
 {
     m_currentIndex = -1;
 
-    m_lineString.clear();
-
-    GeoDataDocument *document = m_routingManager->alternativeRoutesModel()->currentRoute();
-    if ( document && document->size() > 0 ) {
-        foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
-            const GeoDataGeometry* geometry = placemark->geometry();
-            const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
-            if ( lineString ) {
-                m_lineString << *lineString;
-            }
-        }
-    }
+    m_lineString = m_routingManager->routingModel()->route().path();
 
     m_status = m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
 

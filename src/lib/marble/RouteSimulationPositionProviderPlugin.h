@@ -14,6 +14,8 @@
 #define MARBLE_ROUTESIMULATIONPOSITIONPROVIDERPLUGIN_H
 
 #include "PositionProviderPlugin.h"
+
+#include "GeoDataLineString.h"
 #include "GeoDataLineString.h"
 
 namespace Marble
