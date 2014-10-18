@@ -82,8 +82,8 @@ class MarbleModelPrivate
  public:
     MarbleModelPrivate()
         : m_clock(),
-          m_planet( new Planet( PlanetFactory::construct( "earth" ) ) ),
-          m_sunLocator( &m_clock, m_planet ),
+          m_planet( PlanetFactory::construct( "earth" ) ),
+          m_sunLocator( &m_clock, &m_planet ),
           m_pluginManager(),
           m_homePoint( -9.4, 54.8, 0.0, GeoDataCoordinates::Degree ),  // Some point that tackat defined. :-)
           m_homeZoom( 1050 ),
@@ -119,12 +119,11 @@ class MarbleModelPrivate
     {
         delete m_fileManager;
         delete m_mapTheme;
-        delete m_planet;
     }
 
     // Misc stuff.
     MarbleClock              m_clock;
-    Planet                  *m_planet;
+    Planet                   m_planet;
     SunLocator               m_sunLocator;
 
     PluginManager            m_pluginManager;
@@ -313,13 +312,13 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
 */
     //Don't change the planet unless we have to...
     qreal const radiusAttributeValue = d->m_mapTheme->head()->radius();
-    if( d->m_mapTheme->head()->target().toLower() != d->m_planet->id() || radiusAttributeValue != d->m_planet->radius() ) {
+    if( d->m_mapTheme->head()->target().toLower() != d->m_planet.id() || radiusAttributeValue != d->m_planet.radius() ) {
         mDebug() << "Changing Planet";
-        *(d->m_planet) = Magrathea::construct( d->m_mapTheme->head()->target().toLower() );
+        d->m_planet = Magrathea::construct( d->m_mapTheme->head()->target().toLower() );
         if ( radiusAttributeValue > 0.0 ) {
-		    d->m_planet->setRadius( radiusAttributeValue );
+            d->m_planet.setRadius( radiusAttributeValue );
         }
-        sunLocator()->setPlanet(d->m_planet);
+        sunLocator()->setPlanet( &d->m_planet );
     }
 
     QStringList fileList;
@@ -524,17 +523,17 @@ FileManager *MarbleModel::fileManager()
 
 qreal MarbleModel::planetRadius()   const
 {
-    return d->m_planet->radius();
+    return d->m_planet.radius();
 }
 
 QString MarbleModel::planetName()   const
 {
-    return d->m_planet->name();
+    return d->m_planet.name();
 }
 
 QString MarbleModel::planetId() const
 {
-    return d->m_planet->id();
+    return d->m_planet.id();
 }
 
 MarbleClock *MarbleModel::clock()
@@ -646,7 +645,7 @@ PluginManager* MarbleModel::pluginManager()
 
 const Planet *MarbleModel::planet() const
 {
-    return d->m_planet;
+    return &d->m_planet;
 }
 
 void MarbleModel::addDownloadPolicies( const GeoSceneDocument *mapTheme )
