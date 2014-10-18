@@ -21,7 +21,6 @@ class QTime;
 namespace Marble
 {
 
-class MarbleModel;
 class GeoDataDocument;
 class RouteRequest;
 
@@ -31,11 +30,6 @@ class MARBLE_EXPORT RoutingRunner : public QObject
 
 public:
     explicit RoutingRunner( QObject *parent );
-
-    /**
-     * Stores a pointer to the currently used model
-     */
-    void setModel( const MarbleModel *model );
 
     /**
      * Start a route download orw calculation. Called by MarbleRunnerManager, runners
@@ -53,18 +47,10 @@ Q_SIGNALS:
     void routeCalculated( GeoDataDocument* route );
 
 protected:
-    /**
-     * Access to the currently used model, or null if no was set with @see setModel
-     */
-    const MarbleModel *model() const;
-
     const QString nameString( const QString &name, qreal length, const QTime &duration ) const;
     const QString lengthString( qreal length ) const;
     const QString durationString( const QTime &duration ) const;
     const GeoDataExtendedData routeData( qreal length, const QTime &duration ) const;
-
-private:
-    const MarbleModel *m_model;
 };
 
 }

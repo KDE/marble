@@ -64,14 +64,13 @@ void ReverseGeocodingTask::run()
     emit finished( this );
 }
 
-RoutingTask::RoutingTask( RoutingRunner *runner, RoutingRunnerManager *manager, const MarbleModel *model, const RouteRequest* routeRequest ) :
+RoutingTask::RoutingTask( RoutingRunner *runner, RoutingRunnerManager *manager, const RouteRequest* routeRequest ) :
     QObject(),
     m_runner( runner ),
     m_routeRequest( routeRequest )
 {
     connect( m_runner, SIGNAL(routeCalculated(GeoDataDocument*)),
              manager, SLOT(addRoutingResult(GeoDataDocument*)) );
-    m_runner->setModel( model );
 }
 
 void RoutingTask::run()

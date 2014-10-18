@@ -18,19 +18,8 @@ namespace Marble
 {
 
 RoutingRunner::RoutingRunner( QObject *parent ) :
-    QObject( parent ),
-    m_model( 0 )
+    QObject( parent )
 {
-}
-
-void RoutingRunner::setModel( const MarbleModel *model )
-{
-    m_model = model;
-}
-
-const MarbleModel *RoutingRunner::model() const
-{
-    return m_model;
 }
 
 const QString RoutingRunner::lengthString(qreal length) const

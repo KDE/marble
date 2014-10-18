@@ -82,7 +82,7 @@ class RoutingTask : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    RoutingTask( RoutingRunner *runner, RoutingRunnerManager *manager, const MarbleModel *model, const RouteRequest* routeRequest );
+    RoutingTask( RoutingRunner *runner, RoutingRunnerManager *manager, const RouteRequest* routeRequest );
 
     /**
      * @reimp
