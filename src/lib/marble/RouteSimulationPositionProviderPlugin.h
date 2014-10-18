@@ -18,10 +18,12 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLineString.h"
 
+#include <QDateTime>
+
 namespace Marble
 {
 
-class RoutingManager;
+class MarbleModel;
 
 class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
 {
@@ -30,7 +32,7 @@ class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
-    RouteSimulationPositionProviderPlugin( RoutingManager *routingManager );
+    RouteSimulationPositionProviderPlugin( MarbleModel *marbleModel );
     virtual ~RouteSimulationPositionProviderPlugin();
 
     // Implementing PluginInterface
@@ -61,11 +63,13 @@ private Q_SLOTS:
     void update();
 
 private:
-    RoutingManager *const m_routingManager;
+    MarbleModel *const m_marbleModel;
     int m_currentIndex;
     PositionProviderStatus m_status;
     GeoDataLineString m_lineString;
     GeoDataCoordinates m_currentPosition;
+    QDateTime m_currentDateTime;
+    qreal m_speed;
     qreal m_direction;
 };
 

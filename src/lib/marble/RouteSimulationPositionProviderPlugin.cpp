@@ -14,6 +14,8 @@
 
 #include <QTimer>
 
+#include "MarbleMath.h"
+#include "MarbleModel.h"
 #include "routing/Route.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
@@ -70,7 +72,7 @@ QIcon RouteSimulationPositionProviderPlugin::icon() const
 
 PositionProviderPlugin* RouteSimulationPositionProviderPlugin::newInstance() const
 {
-    return new RouteSimulationPositionProviderPlugin( m_routingManager );
+    return new RouteSimulationPositionProviderPlugin( m_marbleModel );
 }
 
 PositionProviderStatus RouteSimulationPositionProviderPlugin::status() const
@@ -95,11 +97,13 @@ GeoDataAccuracy RouteSimulationPositionProviderPlugin::accuracy() const
     return result;
 }
 
-RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin( RoutingManager *routingManager ) :
+RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin( MarbleModel *marbleModel ) :
     PositionProviderPlugin(),
-    m_routingManager( routingManager ),
+    m_marbleModel( marbleModel ),
     m_currentIndex( -2 ),
     m_status( PositionProviderStatusUnavailable ),
+    m_currentDateTime(),
+    m_speed( 0.0 ),
     m_direction( 0.0 )
 {
     // nothing to do
@@ -113,7 +117,7 @@ void RouteSimulationPositionProviderPlugin::initialize()
 {
     m_currentIndex = -1;
 
-    m_lineString = m_routingManager->routingModel()->route().path();
+    m_lineString = m_marbleModel->routingManager()->routingModel()->route().path();
 
     m_status = m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
 
@@ -129,8 +133,7 @@ bool RouteSimulationPositionProviderPlugin::isInitialized() const
 
 qreal RouteSimulationPositionProviderPlugin::speed() const
 {
-    /** @todo: calculate speed */
-    return 0.0;
+    return m_speed;
 }
 
 qreal RouteSimulationPositionProviderPlugin::direction() const
@@ -140,7 +143,7 @@ qreal RouteSimulationPositionProviderPlugin::direction() const
 
 QDateTime RouteSimulationPositionProviderPlugin::timestamp() const
 {
-    return QDateTime::currentDateTime();
+    return m_currentDateTime;
 }
 
 void RouteSimulationPositionProviderPlugin::update()
@@ -154,10 +157,13 @@ void RouteSimulationPositionProviderPlugin::update()
         }
 
         GeoDataCoordinates newPosition = m_lineString.at( m_currentIndex );
+        const QDateTime newDateTime = QDateTime::currentDateTime();
         if ( m_currentPosition.isValid() ) {
+            m_speed = distanceSphere( m_currentPosition, newPosition ) * m_marbleModel->planetRadius() / ( m_currentDateTime.msecsTo( newDateTime ) ) * 1000;
             m_direction = m_currentPosition.bearing( newPosition, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
         }
         m_currentPosition = newPosition;
+        m_currentDateTime = newDateTime;
         emit positionChanged( position(), accuracy() );
     }
     else {

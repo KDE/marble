@@ -201,7 +201,7 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_elevationModel = new ElevationModel( this );
 
     d->m_pluginManager.addPositionProviderPlugin( new PlacemarkPositionProviderPlugin( this ) );
-    d->m_pluginManager.addPositionProviderPlugin( new RouteSimulationPositionProviderPlugin( d->m_routingManager ) );
+    d->m_pluginManager.addPositionProviderPlugin( new RouteSimulationPositionProviderPlugin( this ) );
 }
 
 MarbleModel::~MarbleModel()
