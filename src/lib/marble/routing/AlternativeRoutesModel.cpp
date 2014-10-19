@@ -54,7 +54,7 @@ public:
     /**
       * Returns the distance between the given polygon and the given point
       */
-    static qreal distance( const GeoDataLineString* wayPoints, const GeoDataCoordinates &position );
+    static qreal distance( const GeoDataLineString &wayPoints, const GeoDataCoordinates &position );
 
     /**
       * Returns the bearing of the great circle path defined by the coordinates one and two
@@ -93,7 +93,7 @@ public:
 
     static int nonZero( const QImage &image );
 
-    static QPolygonF polygon( const GeoDataLineString* lineString, qreal x, qreal y, qreal sx, qreal sy );
+    static QPolygonF polygon( const GeoDataLineString &lineString, qreal x, qreal y, qreal sx, qreal sy );
 };
 
 
@@ -116,12 +116,12 @@ int AlternativeRoutesModelPrivate::nonZero( const QImage &image )
   return count;
 }
 
-QPolygonF AlternativeRoutesModelPrivate::polygon( const GeoDataLineString* lineString, qreal x, qreal y, qreal sx, qreal sy )
+QPolygonF AlternativeRoutesModelPrivate::polygon( const GeoDataLineString &lineString, qreal x, qreal y, qreal sx, qreal sy )
 {
     QPolygonF poly;
-    for ( int i=0; i<lineString->size(); ++i ) {
-        poly << QPointF( qAbs( ( *lineString)[i].longitude() - x ) * sx,
-                         qAbs( ( *lineString)[i].latitude()  - y ) * sy );
+    for ( int i = 0; i < lineString.size(); ++i ) {
+        poly << QPointF( qAbs( ( lineString)[i].longitude() - x ) * sx,
+                         qAbs( ( lineString)[i].latitude()  - y ) * sy );
     }
     return poly;
 }
@@ -144,12 +144,12 @@ qreal AlternativeRoutesModelPrivate::similarity( const GeoDataDocument* routeA, 
                         unidirectionalSimilarity( routeB, routeA ) );
 }
 
-qreal AlternativeRoutesModelPrivate::distance( const GeoDataLineString* wayPoints, const GeoDataCoordinates &position )
+qreal AlternativeRoutesModelPrivate::distance( const GeoDataLineString &wayPoints, const GeoDataCoordinates &position )
 {
-    Q_ASSERT( wayPoints && !wayPoints->isEmpty() );
+    Q_ASSERT( !wayPoints.isEmpty() );
     qreal minDistance = 0;
-    for ( int i=1; i<wayPoints->size(); ++i ) {
-        qreal dist = distance( position, wayPoints->at( i-1 ), wayPoints->at( i ) );
+    for ( int i = 1; i < wayPoints.size(); ++i ) {
+        qreal dist = distance( position, wayPoints.at( i-1 ), wayPoints.at( i ) );
         if ( minDistance <= 0 || dist < minDistance ) {
             minDistance = dist;
         }
@@ -218,10 +218,10 @@ qreal AlternativeRoutesModelPrivate::unidirectionalSimilarity( const GeoDataDocu
     QPainter painter( &image );
     painter.setPen( QColor( Qt::white ) );
 
-    painter.drawPoints( AlternativeRoutesModelPrivate::polygon( waypointsA, box.west(), box.north(), sw, sh ) );
+    painter.drawPoints( AlternativeRoutesModelPrivate::polygon( *waypointsA, box.west(), box.north(), sw, sh ) );
     int const countA = AlternativeRoutesModelPrivate::nonZero( image );
 
-    painter.drawPoints( AlternativeRoutesModelPrivate::polygon( waypointsB, box.west(), box.north(), sw, sh ) );
+    painter.drawPoints( AlternativeRoutesModelPrivate::polygon( *waypointsB, box.west(), box.north(), sw, sh ) );
     int const countB = AlternativeRoutesModelPrivate::nonZero( image );
     Q_ASSERT( countA <= countB );
     return countB ? 1.0 - qreal( countB - countA ) / countB : 0;
@@ -414,7 +414,7 @@ QVector<qreal> AlternativeRoutesModel::deviation( const GeoDataDocument* routeA,
     const GeoDataLineString* waypointsB = waypoints( routeB );
     QVector<qreal> result;
     for ( int a=0; a<waypointsA->size(); ++a ) {
-        result.push_back( AlternativeRoutesModelPrivate::distance( waypointsB, waypointsA->at( a ) ) );
+        result.push_back( AlternativeRoutesModelPrivate::distance( *waypointsB, waypointsA->at( a ) ) );
     }
     return result;
 }
