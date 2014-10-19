@@ -123,7 +123,7 @@ class MarbleModelPrivate
         delete m_mapTheme;
     }
 
-    void assignNewStyle( const QString &filePath, GeoDataStyle *style );
+    void assignNewStyle( const QString &filePath, const GeoDataStyle &style );
 
     void assignFillColors( const QString &filePath );
 
@@ -397,9 +397,11 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                      * then assignNewStyle otherwise assignFillColors.
                      */
                 currentDatasets.removeAt( datasetIndex );
-                if ( data->colors().isEmpty() ) {
+                if ( style ) {
                     qDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
-                    d->assignNewStyle( filename, style );
+                    d->assignNewStyle( filename, *style );
+                    delete style;
+                    style = 0;
                 }
                 else {
                     d->assignFillColors( data->sourceFile() );
@@ -425,15 +427,15 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     emit themeChanged( mapTheme->head()->mapThemeId() );
 }
 
-void MarbleModelPrivate::assignNewStyle( const QString &filePath, GeoDataStyle *style )
+void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataStyle &style )
 {
         GeoDataDocument *doc = m_fileManager->at( filePath );
         Q_ASSERT( doc );
         GeoDataStyleMap styleMap;
         styleMap.setId("default-map");
-        styleMap.insert( "normal", QString("#").append(style->id()) );
+        styleMap.insert( "normal", QString("#").append(style.id()) );
         doc->addStyleMap( styleMap );
-        doc->addStyle( *style );
+        doc->addStyle( style );
 
         QVector<GeoDataFeature*>::iterator iter = doc->begin();
         QVector<GeoDataFeature*>::iterator const end = doc->end();
@@ -445,13 +447,11 @@ void MarbleModelPrivate::assignNewStyle( const QString &filePath, GeoDataStyle *
                     if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
                         placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType )
                     {
-                        placemark->setStyleUrl( QString("#").append( style->id() ) );
+                        placemark->setStyleUrl( QString("#").append( style.id() ) );
                     }
                 }
             }
         }
-        delete style;
-        style = 0;
 }
 
 void MarbleModel::home( qreal &lon, qreal &lat, int& zoom ) const
