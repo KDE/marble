@@ -20,15 +20,15 @@ namespace Marble
 {
 class GeoDataContainer;
 class FileLoaderPrivate;
-class MarbleModel;
+class PluginManager;
 
 class FileLoader : public QThread
 {
     Q_OBJECT
     public:
-        FileLoader( QObject* parent, MarbleModel *model, bool recenter,
+        FileLoader( QObject* parent, const PluginManager *pluginManager, bool recenter,
                     const QString& file, const QString& property, const GeoDataStyle* style, DocumentRole role );
-        FileLoader( QObject* parent, MarbleModel *model,
+        FileLoader( QObject* parent, const PluginManager *pluginManager,
                     const QString& contents, const QString& name, DocumentRole role );
         virtual ~FileLoader();
 

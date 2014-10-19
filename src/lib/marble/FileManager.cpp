@@ -35,9 +35,10 @@ namespace Marble
 class FileManagerPrivate
 {
 public:
-    FileManagerPrivate( MarbleModel* model, FileManager* parent )
-        : m_model( model ),
-          q( parent )
+    FileManagerPrivate( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, FileManager* parent ) :
+        q( parent ),
+        m_treeModel( treeModel ),
+        m_pluginManager( pluginManager )
     {
     }
 
@@ -54,9 +55,10 @@ public:
     void closeFile( const QString &key );
     void cleanupLoader( FileLoader *loader );
 
-    MarbleModel* const m_model;
+    FileManager *const q;
+    GeoDataTreeModel *const m_treeModel;
+    const PluginManager *const m_pluginManager;
 
-    FileManager * const q;
     QList<FileLoader*> m_loaderList;
     QHash < QString, GeoDataDocument* > m_fileItemHash;
     GeoDataLatLonBox m_latLonBox;
@@ -64,9 +66,9 @@ public:
 };
 }
 
-FileManager::FileManager( MarbleModel *model, QObject *parent )
+FileManager::FileManager( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, QObject *parent )
     : QObject( parent )
-    , d( new FileManagerPrivate( model, this ) )
+    , d( new FileManagerPrivate( treeModel, pluginManager, this ) )
 {
 }
 
@@ -90,13 +92,13 @@ void FileManager::addFile( const QString& filepath, const QString& property, con
     mDebug() << "adding container:" << filepath;
     mDebug() << "Starting placemark loading timer";
     d->m_timer.start();
-    FileLoader* loader = new FileLoader( this, d->m_model, recenter, filepath, property, style, role );
+    FileLoader* loader = new FileLoader( this, d->m_pluginManager, recenter, filepath, property, style, role );
     d->appendLoader( loader );
 }
 
 void FileManager::addData( const QString &name, const QString &data, DocumentRole role )
 {
-    FileLoader* loader = new FileLoader( this, d->m_model, data, name, role );
+    FileLoader* loader = new FileLoader( this, d->m_pluginManager, data, name, role );
     d->appendLoader( loader );
 }
 
@@ -133,7 +135,7 @@ void FileManagerPrivate::closeFile( const QString& key )
     mDebug() << "FileManager::closeFile " << key;
     if( m_fileItemHash.contains( key ) ) {
         GeoDataDocument *doc = m_fileItemHash.value( key );
-        m_model->treeModel()->removeDocument( doc );
+        m_treeModel->removeDocument( doc );
         emit q->fileRemoved( key );
         delete doc;
         m_fileItemHash.remove( key );
@@ -195,7 +197,7 @@ void FileManagerPrivate::cleanupLoader( FileLoader* loader )
                 QFileInfo file( doc->fileName() );
                 doc->setName( file.baseName() );
             }
-            m_model->treeModel()->addDocument( doc );
+            m_treeModel->addDocument( doc );
             m_fileItemHash.insert( loader->path(), doc );
             emit q->fileAdded( loader->path() );
             if( loader->recenter() ) {

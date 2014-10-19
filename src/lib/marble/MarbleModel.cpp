@@ -93,11 +93,11 @@ class MarbleModelPrivate
           m_storagePolicy( MarbleDirs::localPath() ),
           m_downloadManager( &m_storagePolicy ),
           m_storageWatcher( MarbleDirs::localPath() ),
-          m_fileManager( 0 ),
           m_treeModel(),
           m_descendantProxy(),
           m_placemarkProxyModel(),
           m_placemarkSelectionModel( 0 ),
+          m_fileManager( &m_treeModel, &m_pluginManager ),
           m_positionTracking( &m_treeModel ),
           m_trackedPlacemark( 0 ),
           m_bookmarkManager( &m_treeModel ),
@@ -119,7 +119,6 @@ class MarbleModelPrivate
 
     ~MarbleModelPrivate()
     {
-        delete m_fileManager;
         delete m_mapTheme;
     }
 
@@ -148,8 +147,6 @@ class MarbleModelPrivate
     FileStorageWatcher       m_storageWatcher;
 
     // Places on the map
-    FileManager             *m_fileManager;
-
     GeoDataTreeModel         m_treeModel;
     KDescendantsProxyModel   m_descendantProxy;
     QSortFilterProxyModel    m_placemarkProxyModel;
@@ -157,6 +154,8 @@ class MarbleModelPrivate
 
     // Selection handling
     QItemSelectionModel      m_placemarkSelectionModel;
+
+    FileManager              m_fileManager;
 
     //Gps Stuff
     PositionTracking         m_positionTracking;
@@ -193,8 +192,7 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( &d->m_storagePolicy, SIGNAL(sizeChanged(qint64)),
              &d->m_storageWatcher, SLOT(addToCurrentSize(qint64)) );
 
-    d->m_fileManager = new FileManager( this );
-    connect( d->m_fileManager, SIGNAL(fileAdded( QString)),
+    connect( &d->m_fileManager, SIGNAL(fileAdded( QString)),
              this, SLOT(assignFillColors( QString)) );
 
     d->m_routingManager = new RoutingManager( this, this );
@@ -416,11 +414,11 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     }
     // unload old currentDatasets which are not part of the new map
     foreach(const GeoSceneGeodata data, currentDatasets) {
-        d->m_fileManager->removeFile( data.sourceFile() );
+        d->m_fileManager.removeFile( data.sourceFile() );
     }
     // load new datasets
     for ( int i = 0 ; i < fileList.size(); ++i ) {
-        d->m_fileManager->addFile( fileList.at(i), propertyList.at(i), styleList.at(i), MapDocument );
+        d->m_fileManager.addFile( fileList.at(i), propertyList.at(i), styleList.at(i), MapDocument );
     }
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
@@ -429,7 +427,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
 
 void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataStyle &style )
 {
-        GeoDataDocument *doc = m_fileManager->at( filePath );
+        GeoDataDocument *doc = m_fileManager.at( filePath );
         Q_ASSERT( doc );
         GeoDataStyleMap styleMap;
         styleMap.setId("default-map");
@@ -527,7 +525,7 @@ PositionTracking *MarbleModel::positionTracking() const
 
 FileManager *MarbleModel::fileManager()
 {
-    return d->m_fileManager;
+    return &d->m_fileManager;
 }
 
 qreal MarbleModel::planetRadius()   const
@@ -736,17 +734,17 @@ void MarbleModel::setLegend( QTextDocument * legend )
 void MarbleModel::addGeoDataFile( const QString& filename )
 {
     GeoDataStyle* dummyStyle = new GeoDataStyle;
-    d->m_fileManager->addFile( filename, filename, dummyStyle, UserDocument, true );
+    d->m_fileManager.addFile( filename, filename, dummyStyle, UserDocument, true );
 }
 
 void MarbleModel::addGeoDataString( const QString& data, const QString& key )
 {
-    d->m_fileManager->addData( key, data, UserDocument );
+    d->m_fileManager.addData( key, data, UserDocument );
 }
 
 void MarbleModel::removeGeoData( const QString& fileName )
 {
-    d->m_fileManager->removeFile( fileName );
+    d->m_fileManager.removeFile( fileName );
 }
 
 void MarbleModel::updateProperty( const QString &property, bool value )
@@ -771,7 +769,7 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
                 GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
                 if ( data ) {
                     if ( data->sourceFile() == filePath ) {
-                        GeoDataDocument *doc = m_fileManager->at( filePath );
+                        GeoDataDocument *doc = m_fileManager.at( filePath );
                         Q_ASSERT( doc );
                         QPen pen = data->pen();
                         QBrush brush = data->brush();

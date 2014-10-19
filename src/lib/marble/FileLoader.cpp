@@ -38,10 +38,10 @@ namespace Marble
 class FileLoaderPrivate
 {
 public:
-    FileLoaderPrivate( FileLoader* parent, MarbleModel *model, bool recenter,
+    FileLoaderPrivate( FileLoader* parent, const PluginManager *pluginManager, bool recenter,
                        const QString& file, const QString& property, const GeoDataStyle* style, DocumentRole role )
         : q( parent),
-          m_runner( model->pluginManager() ),
+          m_runner( pluginManager ),
           m_recenter( recenter ),
           m_filepath ( file ),
           m_property( property ),
@@ -56,10 +56,10 @@ public:
         }
     }
 
-    FileLoaderPrivate( FileLoader* parent, MarbleModel *model,
+    FileLoaderPrivate( FileLoader* parent, const PluginManager *pluginManager,
                        const QString& contents, const QString& file, DocumentRole role )
         : q( parent ),
-          m_runner( model->pluginManager() ),
+          m_runner( pluginManager ),
           m_recenter( false ),
           m_filepath ( file ),
           m_contents ( contents ),
@@ -96,17 +96,17 @@ public:
     QString m_error;
 };
 
-FileLoader::FileLoader( QObject* parent, MarbleModel *model, bool recenter,
+FileLoader::FileLoader( QObject* parent, const PluginManager *pluginManager, bool recenter,
                        const QString& file, const QString& property, const GeoDataStyle* style, DocumentRole role )
     : QThread( parent ),
-      d( new FileLoaderPrivate( this, model, recenter, file, property, style, role ) )
+      d( new FileLoaderPrivate( this, pluginManager, recenter, file, property, style, role ) )
 {
 }
 
-FileLoader::FileLoader( QObject* parent, MarbleModel *model,
+FileLoader::FileLoader( QObject* parent, const PluginManager *pluginManager,
                         const QString& contents, const QString& file, DocumentRole role )
     : QThread( parent ),
-      d( new FileLoaderPrivate( this, model, contents, file, role ) )
+      d( new FileLoaderPrivate( this, pluginManager, contents, file, role ) )
 {
 }
 
