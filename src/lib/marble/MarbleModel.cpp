@@ -417,7 +417,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
         d->m_fileManager->removeFile( data.sourceFile() );
     }
     // load new datasets
-    d->m_fileManager->addFile( fileList, propertyList, styleList, MapDocument );
+    for ( int i = 0 ; i < fileList.size(); ++i ) {
+        d->m_fileManager->addFile( fileList.at(i), propertyList.at(i), styleList.at(i), MapDocument );
+    }
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );

@@ -57,12 +57,6 @@ class FileManager : public QObject
 
 
     /**
-     * Loads multiple files into the manager.
-     */
-    void addFile( const QStringList &fileNames, const QStringList &propertyList, const QList<const GeoDataStyle*> &styles, DocumentRole role );
-
-
-    /**
     * removes an existing file from the manager
     */
     void removeFile( const QString &fileName );

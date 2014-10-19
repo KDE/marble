@@ -94,13 +94,6 @@ void FileManager::addFile( const QString& filepath, const QString& property, con
     d->appendLoader( loader );
 }
 
-void FileManager::addFile( const QStringList& filepaths, const QStringList& propertyList, const QList<const GeoDataStyle*>& styles, DocumentRole role )
-{
-    for (int i = 0 ; i < filepaths.size(); ++i ) {
-        addFile( filepaths.at(i), propertyList.at(i), styles.at(i), role );
-    }
-}
-
 void FileManager::addData( const QString &name, const QString &data, DocumentRole role )
 {
     FileLoader* loader = new FileLoader( this, d->m_model, data, name, role );
