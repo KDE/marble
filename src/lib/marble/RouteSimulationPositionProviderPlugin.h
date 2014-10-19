@@ -28,7 +28,6 @@ class MarbleModel;
 class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.RouteSimulationPositionProviderPlugin" )
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
