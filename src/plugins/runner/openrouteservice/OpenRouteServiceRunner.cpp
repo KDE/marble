@@ -252,8 +252,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     QDomNodeList summary = root.elementsByTagName( "xls:RouteSummary" );
     if ( summary.size() > 0 ) {
         QDomNodeList timeNodeList = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalTime" );
-        QDomNodeList distance = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalDistance" );
-        if ( timeNodeList.size() == 1 && distance.size() == 1 ) {
+        if ( timeNodeList.size() == 1 ) {
             QRegExp regexp = QRegExp( "^P(?:(\\d+)D)?T(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S" );
             if ( regexp.indexIn( timeNodeList.item( 0 ).toElement().text() ) == 0 ) {
                 QStringList matches = regexp.capturedTexts();
@@ -276,17 +275,6 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
                 }
 
                 time = QTime( hours, minutes, seconds, 0 );
-                qreal totalDistance = distance.item( 0 ).attributes().namedItem( "value" ).nodeValue().toDouble();
-                QString unit = distance.item( 0 ).attributes().namedItem( "uom" ).nodeValue();
-                if ( unit == "M" ) {
-                    totalDistance *= METER2KM;
-                }
-                else if ( unit != "KM" ) {
-                    mDebug() << "Cannot parse distance unit " << unit << ", treated as km.";
-                }
-
-                QString description = "";
-                routePlacemark->setDescription( description );
             }
         }
     }
