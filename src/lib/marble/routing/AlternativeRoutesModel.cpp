@@ -419,15 +419,6 @@ QVector<qreal> AlternativeRoutesModel::deviation( const GeoDataDocument* routeA,
     return result;
 }
 
-void AlternativeRoutesModel::update( GeoDataDocument* route )
-{
-    for ( int i=0; i<d->m_routes.size(); ++i ) {
-        if ( d->m_routes[i] == route ) {
-            emit dataChanged( index( i), index( i ) );
-        }
-    }
-}
-
 const GeoDataLineString* AlternativeRoutesModel::waypoints( const GeoDataDocument* document )
 {
     return AlternativeRoutesModelPrivate::waypoints( document );

@@ -96,8 +96,6 @@ Q_SIGNALS:
 private Q_SLOTS:
     void addRestrainedRoutes();
 
-    void update( GeoDataDocument* route );
-
 private:
     AlternativeRoutesModelPrivate *const d;
 };
