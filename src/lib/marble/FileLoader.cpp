@@ -27,7 +27,6 @@
 #include "GeoDataLineStyle.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
-#include "MarbleClock.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
@@ -49,8 +48,7 @@ public:
           m_style( style ),
           m_documentRole ( role ),
           m_styleMap( new GeoDataStyleMap ),
-          m_document( 0 ),
-          m_clock( model->clock() )
+          m_document( 0 )
     {
         if( m_style ) {
             m_styleMap->setId("default-map");
@@ -68,8 +66,7 @@ public:
           m_style( 0 ),
           m_documentRole ( role ),
           m_styleMap( 0 ),
-          m_document( 0 ),
-          m_clock( model->clock() )
+          m_document( 0 )
     {
     }
 
@@ -97,8 +94,6 @@ public:
     GeoDataStyleMap* m_styleMap;
     GeoDataDocument *m_document;
     QString m_error;
-
-    const MarbleClock *m_clock;
 };
 
 FileLoader::FileLoader( QObject* parent, MarbleModel *model, bool recenter,
