@@ -27,14 +27,14 @@ namespace {
 }
 
 class TileId;
-class MarbleModel;
 class ElevationModelPrivate;
+class HttpDownloadManager;
 
 class MARBLE_EXPORT ElevationModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit ElevationModel( MarbleModel * const model );
+    explicit ElevationModel( HttpDownloadManager *downloadManager, QObject *parent = 0 );
 
     qreal height( qreal lon, qreal lat ) const;
     QList<GeoDataCoordinates> heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const;

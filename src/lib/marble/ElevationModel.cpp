@@ -14,10 +14,10 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneTextureTile.h"
+#include "HttpDownloadManager.h"
 #include "Tile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
-#include "MarbleModel.h"
 #include "MarbleDebug.h"
 #include "MapThemeManager.h"
 #include "TileId.h"
@@ -31,9 +31,9 @@ namespace Marble
 class ElevationModelPrivate
 {
 public:
-    ElevationModelPrivate( ElevationModel *_q, MarbleModel *const model )
+    ElevationModelPrivate( ElevationModel *_q, HttpDownloadManager *downloadManager )
         : q( _q ),
-          m_tileLoader( model->downloadManager(), model->pluginManager() ),
+          m_tileLoader( downloadManager, 0 ),
           m_textureLayer( 0 )
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
@@ -71,9 +71,9 @@ public:
     QCache<TileId, const QImage> m_cache;
 };
 
-ElevationModel::ElevationModel( MarbleModel *const model )
-    : QObject( 0 ),
-      d( new ElevationModelPrivate( this, model ) )
+ElevationModel::ElevationModel( HttpDownloadManager *downloadManager, QObject *parent ) :
+    QObject( parent ),
+    d( new ElevationModelPrivate( this, downloadManager ) )
 {
     connect( &d->m_tileLoader, SIGNAL(tileCompleted(TileId,QImage)),
              this, SLOT(tileCompleted(TileId,QImage)) );
