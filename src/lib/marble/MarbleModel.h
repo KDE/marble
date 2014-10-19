@@ -282,8 +282,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     const GeoDataPlacemark *trackedPlacemark() const;
 
-    void assignNewStyle( const QString &filePath, GeoDataStyle *style );
-
  public Q_SLOTS:
     void clearPersistentTileCache();
 
@@ -300,8 +298,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void setTrackedPlacemark( const GeoDataPlacemark *placemark );
 
     void updateProperty( const QString &property, bool value );
-
-    void assignFillColors( const QString &filePath );
 
  Q_SIGNALS:
 
@@ -334,6 +330,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
     
  private:
     Q_DISABLE_COPY( MarbleModel )
+
+    Q_PRIVATE_SLOT( d, void assignFillColors( const QString &filePath ) )
 
     void addDownloadPolicies( const GeoSceneDocument *mapTheme );
     MarbleModelPrivate  * const d;

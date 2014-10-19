@@ -123,6 +123,10 @@ class MarbleModelPrivate
         delete m_mapTheme;
     }
 
+    void assignNewStyle( const QString &filePath, GeoDataStyle *style );
+
+    void assignFillColors( const QString &filePath );
+
     // Misc stuff.
     MarbleClock              m_clock;
     Planet                   m_planet;
@@ -395,10 +399,10 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                 currentDatasets.removeAt( datasetIndex );
                 if ( data->colors().isEmpty() ) {
                     qDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
-                    assignNewStyle( filename, style );
+                    d->assignNewStyle( filename, style );
                 }
                 else {
-                    assignFillColors( data->sourceFile() );
+                    d->assignFillColors( data->sourceFile() );
                 }
             }
             else {
@@ -419,9 +423,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     emit themeChanged( mapTheme->head()->mapThemeId() );
 }
 
-void MarbleModel::assignNewStyle( const QString &filePath, GeoDataStyle *style )
+void MarbleModelPrivate::assignNewStyle( const QString &filePath, GeoDataStyle *style )
 {
-        GeoDataDocument *doc = d->m_fileManager->at( filePath );
+        GeoDataDocument *doc = m_fileManager->at( filePath );
         Q_ASSERT( doc );
         GeoDataStyleMap styleMap;
         styleMap.setId("default-map");
@@ -756,8 +760,8 @@ void MarbleModel::updateProperty( const QString &property, bool value )
     }
 }
 
-void MarbleModel::assignFillColors( const QString &filePath ) {
-    foreach( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
+void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
+    foreach( GeoSceneLayer *layer, m_mapTheme->map()->layers() ) {
         if ( layer->backend() == dgml::dgmlValue_geodata 
              || layer->backend() == dgml::dgmlValue_vector )
         {
@@ -765,7 +769,7 @@ void MarbleModel::assignFillColors( const QString &filePath ) {
                 GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
                 if ( data ) {
                     if ( data->sourceFile() == filePath ) {
-                        GeoDataDocument *doc = d->m_fileManager->at( filePath );
+                        GeoDataDocument *doc = m_fileManager->at( filePath );
                         Q_ASSERT( doc );
                         QPen pen = data->pen();
                         QBrush brush = data->brush();
