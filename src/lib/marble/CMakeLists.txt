@@ -369,6 +369,8 @@ else()
     ${Qt5WebKitWidgets_LIBRARIES}
     ${Qt5Svg_LIBRARIES}
     ${Qt5Script_LIBRARIES}
+    ${Qt5Quick_LIBRARIES}
+    ${Qt5PrintSupport_LIBRARIES}
     )
 endif()
 
