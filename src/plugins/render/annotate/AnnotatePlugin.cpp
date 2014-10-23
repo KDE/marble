@@ -867,7 +867,7 @@ bool AnnotatePlugin::handleMergingNodes( QMouseEvent *mouseEvent, SceneGraphicsI
                     // Decrement the indexes of selected nodes from other inner boundaries which have
                     // been drawn after this one.
                     QList<int>::iterator itBegin = selectedNodes.begin();
-                    QList<int>::const_iterator itEnd = selectedNodes.constEnd();
+                    QList<int>::iterator itEnd = selectedNodes.end();
 
                     for ( ; itBegin != itEnd; ++itBegin ) {
                         if ( *itBegin > sizeOffset + 2 ) {
@@ -944,7 +944,7 @@ bool AnnotatePlugin::handleMergingNodes( QMouseEvent *mouseEvent, SceneGraphicsI
     }
 
     QList<int>::iterator itBegin = selectedNodes.begin();
-    QList<int>::const_iterator itEnd = selectedNodes.constEnd();
+    QList<int>::iterator itEnd = selectedNodes.end();
 
     // Decrement the indexes of the selected nodes which have bigger indexes than the
     // node with a smaller index.
@@ -1492,7 +1492,7 @@ void AnnotatePlugin::deleteNode()
     m_rmbSelectedArea->selectedNodes().removeAll( m_rmbSelectedArea->rightClickedNode() );
 
     QList<int>::iterator itBegin = m_rmbSelectedArea->selectedNodes().begin();
-    QList<int>::const_iterator itEnd = m_rmbSelectedArea->selectedNodes().constEnd();
+    QList<int>::iterator itEnd = m_rmbSelectedArea->selectedNodes().end();
 
     // Decrement the indexes of the selected nodes which have bigger indexes than the
     // removed one's.
