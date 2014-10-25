@@ -27,6 +27,7 @@
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
 #include "routing/RoutingManager.h"
+#include "routing/RoutingModel.h"
 
 #include <QContextMenuEvent>
 #include <QRect>
@@ -141,6 +142,8 @@ QIcon ElevationProfileFloatItem::icon () const
 
 void ElevationProfileFloatItem::initialize ()
 {
+    connect( marbleModel()->elevationModel(), SIGNAL(updateAvailable()), &m_routeDataSource, SLOT(requestUpdate()) );
+    connect( marbleModel()->routingManager()->routingModel(), SIGNAL(currentRouteChanged()), this, SLOT(requestUpdate()) );
     connect( this, SIGNAL(dataUpdated()), SLOT(forceRepaint()) );
     switchDataSource(&m_routeDataSource);
 

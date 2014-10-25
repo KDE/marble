@@ -212,15 +212,9 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *object)
 ElevationProfileRouteDataSource::ElevationProfileRouteDataSource( const RoutingModel *routingModel, const ElevationModel *elevationModel, QObject *parent ) :
     ElevationProfileDataSource( parent ),
     m_routingModel( routingModel ),
-    m_elevationModel( elevationModel )
+    m_elevationModel( elevationModel ),
+    m_routeAvailable( false )
 {
-    if ( m_elevationModel ) {
-        connect( m_elevationModel, SIGNAL(updateAvailable()), SLOT(requestUpdate()) );
-    }
-    if ( m_routingModel ) {
-        connect( m_routingModel, SIGNAL(currentRouteChanged()), this, SLOT(requestUpdate()) );
-    }
-    m_routeAvailable = isDataAvailable();
 }
 
 void ElevationProfileRouteDataSource::requestUpdate()
