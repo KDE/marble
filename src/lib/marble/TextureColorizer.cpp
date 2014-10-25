@@ -266,8 +266,8 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
             GeoDataCoordinates ySouth(0, viewport->currentProjection()->minLat(), 0);
             viewport->screenCoordinates(yNorth, dummyX, realYTop );
             viewport->screenCoordinates(ySouth, dummyX, realYBottom );
-            yTop = qBound(0.0, realYTop, (qreal)(imgheight));
-            yBottom = qBound(0.0, realYBottom, (qreal)(imgheight));
+            yTop = qBound(qreal(0.0), realYTop, qreal(imgheight));
+            yBottom = qBound(qreal(0.0), realYBottom, qreal(imgheight));
         }
 
         const int itEnd = yBottom;

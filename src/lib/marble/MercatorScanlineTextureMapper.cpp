@@ -120,9 +120,9 @@ void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, 
     viewport->screenCoordinates(yNorth, dummyX, realYTop );
     viewport->screenCoordinates(ySouth, dummyX, realYBottom );
 
-    const int yTop     = qBound(0.0, realYTop, (qreal)(imageHeight));
+    const int yTop     = qBound(qreal(0.0), realYTop, qreal(imageHeight));
     int yPaintedTop    = yTop;
-    int yPaintedBottom = qBound(0.0, realYBottom, (qreal)(imageHeight));
+    int yPaintedBottom = qBound(qreal(0.0), realYBottom, qreal(imageHeight));
  
     yPaintedTop = qBound(0, yPaintedTop, imageHeight);
     yPaintedBottom = qBound(0, yPaintedBottom, imageHeight);

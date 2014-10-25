@@ -18,6 +18,7 @@
 
 class QAbstractItemModel;
 class QModelIndex;
+class QPoint;
 
 namespace Marble
 {

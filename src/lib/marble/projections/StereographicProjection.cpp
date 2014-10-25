@@ -163,7 +163,7 @@ bool StereographicProjection::geoCoordinates( const int x, const int y,
     const qreal centerLat = viewport->centerLatitude();
     const qreal rx = ( - viewport->width()  / 2 + x );
     const qreal ry = (   viewport->height() / 2 - y );
-    const qreal p = qMax( qSqrt( rx*rx + ry*ry ), 0.0001 ); // ensure we don't divide by zero
+    const qreal p = qMax( qSqrt( rx*rx + ry*ry ), qreal(0.0001) ); // ensure we don't divide by zero
     const qreal c = 2 * qAtan2( p , radius );
     const qreal sinc = qSin(c);
 

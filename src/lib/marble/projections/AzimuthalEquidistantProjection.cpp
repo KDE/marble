@@ -165,7 +165,7 @@ bool AzimuthalEquidistantProjection::geoCoordinates( const int x, const int y,
     const qreal centerLat = viewport->centerLatitude();
     const qreal rx = ( - viewport->width()  / 2 + x ) / rad2Pixel;
     const qreal ry = (   viewport->height() / 2 - y ) / rad2Pixel;
-    const qreal c = qMax( qSqrt( rx*rx + ry*ry ), 0.0001 ); // ensure we don't divide by zero
+    const qreal c = qMax( qSqrt( rx*rx + ry*ry ), qreal(0.0001) ); // ensure we don't divide by zero
     const qreal sinc = qSin(c);
 
     lon = centerLon + qAtan2( rx*sinc , ( c*qCos( centerLat )*qCos( c ) - ry*qSin( centerLat )*sinc  ) );
