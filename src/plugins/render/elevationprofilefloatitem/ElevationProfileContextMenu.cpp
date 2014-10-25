@@ -105,3 +105,5 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
 }
 
 }
+
+#include "ElevationProfileContextMenu.moc"

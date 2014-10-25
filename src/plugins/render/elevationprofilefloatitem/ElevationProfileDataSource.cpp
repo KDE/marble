@@ -249,3 +249,5 @@ qreal ElevationProfileRouteDataSource::getElevation(const GeoDataCoordinates &co
 
 }
 
+#include "ElevationProfileDataSource.moc"
+
