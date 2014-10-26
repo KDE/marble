@@ -153,7 +153,6 @@ int main(int argc, char *argv[])
     	    Quaternion lastPos = Quaternion::fromSpherical((lastlon/60.0) * deg2rad , (lastlat/60.0) * -deg2rad  );
             Quaternion currentPos = Quaternion::fromSpherical((lon/60.0) * deg2rad , (lat/60.0) * -deg2rad  );
 //	    qDebug() << "lastPos: " << lastPos << "currentPos: " << currentPos;
-            Quaternion itPos = currentPos;
 
             float distance =   sqrt( ( lon - lastlon ) * ( lon - lastlon ) 
                              + ( lat - lastlat ) * ( lat - lastlat ) );
@@ -161,7 +160,7 @@ int main(int argc, char *argv[])
 
             for ( int i = 1; i < numsteps; ++i )
             {
-                itPos = itPos.slerp( lastPos, currentPos, (double)(i)/(double)(numsteps) );
+                const Quaternion itPos = Quaternion::slerp( lastPos, currentPos, (double)(i)/(double)(numsteps) );
 //		qDebug() << "itPos: " << itPos; 
                 double alpha = 0;
                 double beta = 0;

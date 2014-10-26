@@ -182,8 +182,7 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
     int position = previousWhen.msecsTo( when );
     qreal t = (qreal)position / (qreal)interval;
 
-    Quaternion interpolated;
-    interpolated.slerp( previousCoord.quaternion(), nextCoord.quaternion(), t );
+    const Quaternion interpolated = Quaternion::slerp( previousCoord.quaternion(), nextCoord.quaternion(), t );
     qreal lon, lat;
     interpolated.getSpherical( lon, lat );
 

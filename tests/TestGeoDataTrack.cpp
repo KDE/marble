@@ -21,6 +21,8 @@
 #include <GeoDataSimpleArrayData.h>
 #include "TestUtils.h"
 
+#include <QDateTime>
+
 using namespace Marble;
 
 
@@ -30,6 +32,7 @@ class TestGeoDataTrack : public QObject
 private slots:
     void initTestCase();
     void defaultConstructor();
+    void interpolate();
     void simpleParseTest();
     void removeBeforeTest();
     void removeAfterTest();
@@ -52,6 +55,23 @@ void TestGeoDataTrack::defaultConstructor()
     QCOMPARE( track.whenList().size(), 0 );
     QCOMPARE( track.lineString()->size(), 0 );
     QCOMPARE( track.latLonAltBox(), GeoDataLatLonAltBox() );
+}
+
+void TestGeoDataTrack::interpolate()
+{
+    GeoDataTrack track;
+    track.setInterpolate( true );
+
+    const QDateTime date1( QDate( 2014, 8, 16 ), QTime( 4, 57, 26 ) );
+    const QDateTime date2( QDate( 2014, 8, 16 ), QTime( 12, 47, 16 ) );
+    const GeoDataCoordinates coordinates1( 13.592294, 52.675926, 71, GeoDataCoordinates::Degree );
+    const GeoDataCoordinates coordinates2( 13.572776, 53.517952, 97, GeoDataCoordinates::Degree );
+    track.addPoint( date1, coordinates1 );
+    track.addPoint( date2, coordinates2 );
+
+    const GeoDataCoordinates interpolated = track.coordinatesAt( QDateTime( QDate( 2014, 8, 16 ), QTime( 8, 0, 0 ) ) );
+    QCOMPARE( interpolated.longitude( GeoDataCoordinates::Degree ), 13.5848002666755789391572761815 );
+    QCOMPARE( interpolated.latitude( GeoDataCoordinates::Degree ), 53.0031187444621139093214878812 );
 }
 
     //"Simple Example" from kmlreference
