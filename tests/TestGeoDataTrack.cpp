@@ -29,6 +29,7 @@ class TestGeoDataTrack : public QObject
     Q_OBJECT
 private slots:
     void initTestCase();
+    void defaultConstructor();
     void simpleParseTest();
     void removeBeforeTest();
     void removeAfterTest();
@@ -39,6 +40,18 @@ private slots:
 void TestGeoDataTrack::initTestCase()
 {
     MarbleDebug::setEnabled( true );
+}
+
+void TestGeoDataTrack::defaultConstructor()
+{
+    const GeoDataTrack track;
+
+    QCOMPARE( track.size(), 0 );
+    QCOMPARE( track.interpolate(), false );
+    QCOMPARE( track.coordinatesList().size(), 0 );
+    QCOMPARE( track.whenList().size(), 0 );
+    QCOMPARE( track.lineString()->size(), 0 );
+    QCOMPARE( track.latLonAltBox(), GeoDataLatLonAltBox() );
 }
 
     //"Simple Example" from kmlreference
