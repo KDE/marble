@@ -171,6 +171,11 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
         return GeoDataCoordinates();
     }
 
+    if ( nextEntry == pointMap.constEnd() ) {
+        mDebug() << "No track point after" << when;
+        return GeoDataCoordinates();
+    }
+
     QMap<QDateTime, GeoDataCoordinates>::const_iterator previousEntry = nextEntry - 1;
     GeoDataCoordinates previousCoord = previousEntry.value();
 

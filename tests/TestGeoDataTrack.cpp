@@ -76,6 +76,9 @@ void TestGeoDataTrack::interpolate()
 
     const GeoDataCoordinates beforeStart = track.coordinatesAt( QDateTime( QDate( 2014, 8, 16 ), QTime( 0, 0, 0 ) ) );
     QCOMPARE( beforeStart, GeoDataCoordinates() );
+
+    const GeoDataCoordinates afterEnd = track.coordinatesAt( QDateTime( QDate( 2014, 8, 16 ), QTime( 23, 0, 0 ) ) );
+    QCOMPARE( afterEnd, GeoDataCoordinates() );
 }
 
     //"Simple Example" from kmlreference
