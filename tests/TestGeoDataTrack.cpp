@@ -55,6 +55,7 @@ void TestGeoDataTrack::defaultConstructor()
     QCOMPARE( track.whenList().size(), 0 );
     QCOMPARE( track.lineString()->size(), 0 );
     QCOMPARE( track.latLonAltBox(), GeoDataLatLonAltBox() );
+    QCOMPARE( track.coordinatesAt( QDateTime( QDate( 2014, 8, 16 ), QTime( 8, 0, 0 ) ) ), GeoDataCoordinates() );
 }
 
 void TestGeoDataTrack::interpolate()
@@ -72,6 +73,9 @@ void TestGeoDataTrack::interpolate()
     const GeoDataCoordinates interpolated = track.coordinatesAt( QDateTime( QDate( 2014, 8, 16 ), QTime( 8, 0, 0 ) ) );
     QCOMPARE( interpolated.longitude( GeoDataCoordinates::Degree ), 13.5848002666755789391572761815 );
     QCOMPARE( interpolated.latitude( GeoDataCoordinates::Degree ), 53.0031187444621139093214878812 );
+
+    const GeoDataCoordinates beforeStart = track.coordinatesAt( QDateTime( QDate( 2014, 8, 16 ), QTime( 0, 0, 0 ) ) );
+    QCOMPARE( beforeStart, GeoDataCoordinates() );
 }
 
     //"Simple Example" from kmlreference
