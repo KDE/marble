@@ -356,6 +356,9 @@ void PositionTracking::readSettings()
 
     d->m_treeModel->addDocument( &d->m_document );
     d->m_length = 0.0;
+    for ( int i = 0; i < d->m_trackSegments->size(); ++i ) {
+        d->m_length += d->m_trackSegments->at( i ).lineString()->length( 1 );
+    }
 }
 
 void PositionTracking::writeSettings()
