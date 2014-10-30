@@ -1,7 +1,6 @@
 PROJECT( OpenCachingComPlugin )
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/opencachingcom
  ${CMAKE_BINARY_DIR}/src/plugins/render/opencachingcom
  ${QT_INCLUDE_DIR}
 )
