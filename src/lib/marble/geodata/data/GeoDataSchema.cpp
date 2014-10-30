@@ -100,8 +100,8 @@ void GeoDataSchema::pack( QDataStream& stream ) const
 {
     stream << d->m_simpleField.size();
 
-    QHash<QString, GeoDataSimpleField>::const_iterator begin = d->m_simpleField.begin();
-    QHash<QString, GeoDataSimpleField>::const_iterator end = d->m_simpleField.end();
+    QHash<QString, GeoDataSimpleField>::const_iterator begin = d->m_simpleField.constBegin();
+    QHash<QString, GeoDataSimpleField>::const_iterator end = d->m_simpleField.constEnd();
 
     for( ; begin != end; ++begin ) {
         begin.value().pack( stream );

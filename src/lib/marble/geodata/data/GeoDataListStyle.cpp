@@ -59,9 +59,9 @@ bool GeoDataListStyle::operator==( const GeoDataListStyle &other ) const
         return false;
     }
 
-    QVector<GeoDataItemIcon*>::const_iterator begin = d->m_vector.begin();
-    QVector<GeoDataItemIcon*>::const_iterator end = d->m_vector.end();
-    QVector<GeoDataItemIcon*>::const_iterator otherBegin = other.d->m_vector.begin();
+    QVector<GeoDataItemIcon*>::const_iterator begin = d->m_vector.constBegin();
+    QVector<GeoDataItemIcon*>::const_iterator end = d->m_vector.constEnd();
+    QVector<GeoDataItemIcon*>::const_iterator otherBegin = other.d->m_vector.constBegin();
 
     for( ; begin != end; ++begin, ++otherBegin ) {
         if ( **begin != **otherBegin ) {

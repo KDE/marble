@@ -131,8 +131,8 @@ void GeoDataSchemaData::pack( QDataStream &stream ) const
     stream << d->m_schemaUrl;
     stream << d->m_simpleData.size();
 
-    QHash<QString, GeoDataSimpleData>::const_iterator begin = d->m_simpleData.begin();
-    QHash<QString, GeoDataSimpleData>::const_iterator end = d->m_simpleData.end();
+    QHash<QString, GeoDataSimpleData>::const_iterator begin = d->m_simpleData.constBegin();
+    QHash<QString, GeoDataSimpleData>::const_iterator end = d->m_simpleData.constEnd();
 
     for( ; begin != end; begin++ ) {
         begin.value().pack( stream );
