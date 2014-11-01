@@ -19,6 +19,7 @@
 #include <GeoDataLineString.h>
 #include <marble/RenderPlugin.h>
 #include <marble/MarbleModel.h>
+#include <marble/routing/Route.h>
 #include <marble/routing/RoutingManager.h>
 #include <marble/routing/RoutingModel.h>
 #include <marble/TourPlayback.h>
