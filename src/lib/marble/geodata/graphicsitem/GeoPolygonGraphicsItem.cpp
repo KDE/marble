@@ -61,7 +61,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
         }
         else {
             if ( currentPen.color() != style()->lineStyle().paintedColor() ||
-                    currentPen.widthF() != style()->lineStyle().width() ) {
+                currentPen.widthF() != style()->lineStyle().width() ) {
                 currentPen.setColor( style()->lineStyle().paintedColor() );
                 currentPen.setWidthF( style()->lineStyle().width() );
             }

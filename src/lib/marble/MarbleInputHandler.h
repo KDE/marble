@@ -18,6 +18,7 @@
 #include <QRect>
 
 #include "marble_export.h"
+#include "GeoDataCoordinates.h"
 
 class QEvent;
 class QKeyEvent;
@@ -86,6 +87,12 @@ class MARBLE_EXPORT MarbleInputHandler  : public QObject
     //Gps coordinates
     void mouseClickScreenPosition( int, int );
     void mouseMoveGeoPosition( QString );
+
+    /*
+     * To detect mouse click followed by mouse move
+     * with no mouse move in between
+     */
+    void mouseClickGeoPosition( qreal, qreal, GeoDataCoordinates::Unit );
 
  protected Q_SLOTS:
     void restoreViewContext();

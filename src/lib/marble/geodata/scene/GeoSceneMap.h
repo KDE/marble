@@ -54,6 +54,11 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode
     QColor labelColor() const;
     void setLabelColor( const QColor& );
 
+    QColor highlightBrushColor() const;
+    void setHighlightBrushColor( const QColor& );
+
+    QColor highlightPenColor() const;
+    void setHighlightPenColor( const QColor& );
     /**
      * @brief  Add a new layer to the map
      * @param  section  The new layer

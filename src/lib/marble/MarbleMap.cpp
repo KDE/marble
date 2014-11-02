@@ -57,6 +57,10 @@
 #include "GeoSceneVectorTile.h"
 #include "GeoSceneZoom.h"
 #include "GeoDataDocument.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataFeature.h"
+#include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
 #include "LayerManager.h"
 #include "MapThemeManager.h"
 #include "MarbleDebug.h"
@@ -189,6 +193,18 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
 
     QObject::connect( &m_geometryLayer, SIGNAL(repaintNeeded()),
                       parent, SIGNAL(repaintNeeded()));
+
+    /**
+     * Slot handleHighlight finds all placemarks
+     * that contain the clicked point.
+     * The placemarks under the clicked position may
+     * have their styleUrl set to a style map which
+     * doesn't specify any highlight styleId. Such
+     * placemarks will be fletered out in GeoGraphicsScene
+     * and will not be highlighted.
+     */
+    QObject::connect( parent, SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)),
+                      &m_geometryLayer, SLOT(handleHighlight(qreal,qreal,GeoDataCoordinates::Unit)) );
 
     QObject::connect( &m_textureLayer, SIGNAL(tileLevelChanged(int)),
                       parent, SIGNAL(tileLevelChanged(int)) );

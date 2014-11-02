@@ -229,7 +229,22 @@ void MarbleDefaultInputHandler::lmbTimeout()
 {
     if (!selectionRubber()->isVisible())
     {
+        qreal clickedLon = 0;
+        qreal clickedLat = 0;
+
+        bool isPointOnGlobe = MarbleInputHandler::d->m_marblePresenter->map()->geoCoordinates( d->m_leftPressedX, d->m_leftPressedY,
+                                                                        clickedLon, clickedLat,
+                                                                        GeoDataCoordinates::Degree );
         emit lmbRequest(d->m_leftPressedX, d->m_leftPressedY);
+
+        /**
+         * emit mouse click only when the clicked
+         * position is within the globe.
+         */
+        if ( isPointOnGlobe ) {
+            emit mouseClickGeoPosition( clickedLon, clickedLat,
+                                        GeoDataCoordinates::Degree );
+        }
     }
 }
 

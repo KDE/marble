@@ -101,6 +101,14 @@ class MARBLE_EXPORT GeoGraphicsItem
     void setStyle( const GeoDataStyle* style );
 
     /**
+     * Set the style which will be used when
+     * placemark is highlighted.
+     * GeoGraphicsItem takes ownership of the
+     * passed style and deletes it when appropriate.
+     */
+    void setHighlightStyle( GeoDataStyle *highlightStyle );
+
+    /**
      * Returns the z value of the item
      */
     qreal zValue() const;
@@ -117,6 +125,10 @@ class MARBLE_EXPORT GeoGraphicsItem
      * which is taken care of by GeoPainter.
      */
     virtual void paint( GeoPainter *painter, const ViewportParams *viewport ) = 0;
+
+    void setHighlighted( bool highlight );
+
+    bool isHighlighted() const;
 
  protected:
     GeoGraphicsItemPrivate *const d;

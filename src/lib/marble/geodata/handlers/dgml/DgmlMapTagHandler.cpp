@@ -24,8 +24,6 @@
 
 #include <QColor>
 
-#include "MarbleDebug.h"
-
 #include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
 #include "GeoParser.h"
@@ -44,8 +42,11 @@ GeoNode* DgmlMapTagHandler::parse(GeoParser& parser) const
 
     QColor  labelColor  = parser.attribute(dgmlAttr_labelColor).trimmed();
 
-    if ( !labelColor.isValid() ) 
+    if ( !labelColor.isValid() )
         labelColor = Qt::black;
+
+    QColor highlightBrushColor = QColor ( parser.attribute(dgmlAttr_highlightBrush).trimmed() );
+    QColor highlightPenColor = QColor ( parser.attribute(dgmlAttr_highlightPen).trimmed() );
 
     GeoSceneMap* map = 0;
 
@@ -55,6 +56,8 @@ GeoNode* DgmlMapTagHandler::parse(GeoParser& parser) const
         map = parentItem.nodeAs<GeoSceneDocument>()->map();
         map->setBackgroundColor( QColor( parser.attribute( dgmlAttr_bgcolor ).trimmed() ) );
         map->setLabelColor( labelColor );
+        map->setHighlightBrushColor( highlightBrushColor );
+        map->setHighlightPenColor( highlightPenColor );
     }
 
     return map;

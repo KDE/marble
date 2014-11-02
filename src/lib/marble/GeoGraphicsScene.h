@@ -17,6 +17,7 @@
 
 #include <QObject>
 #include <QList>
+#include <QColor>
 
 namespace Marble
 {
@@ -25,6 +26,9 @@ class GeoGraphicsItem;
 class GeoDataFeature;
 class GeoDataLatLonBox;
 class GeoGraphicsScenePrivate;
+class GeoDataDocument;
+class GeoDataStyleMap;
+class GeoDataPlacemark;
 
 /**
  * @short This is the home of all GeoGraphicsItems to be shown on the map.
@@ -76,6 +80,28 @@ public:
      * @return The list of items in the specified box in no specific order.
      */
     QList<GeoGraphicsItem *> items( const GeoDataLatLonBox &box, int maxZoomLevel ) const;
+
+    /**
+     * @brief Get the list of items which belong to a placemark
+     * that has been clicked.
+     * @return Returns a list of selected Items
+     */
+    QList<GeoGraphicsItem*> selectedItems() const;
+
+    /**
+     * @brief Set the GeoGraphicsItem @p graphicsItem
+     * to use highlight style.
+     * @return Returns true if highlight style is
+     * successfully applied to item @p item .
+     */
+    bool setHighlightStyle( GeoGraphicsItem *item, const GeoDataDocument *document,
+                            const GeoDataStyleMap &styleMap );
+
+public Q_SLOTS:
+    void applyHighlight( const QVector<GeoDataPlacemark*>& );
+
+Q_SIGNALS:
+    void repaintNeeded();
 
 private:
     GeoGraphicsScenePrivate * const d;

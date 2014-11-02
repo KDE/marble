@@ -46,6 +46,8 @@ namespace dgml
     extern const char* dgmlAttr_feature;
     extern const char* dgmlAttr_format;
     extern const char* dgmlAttr_height;
+    extern const char* dgmlAttr_highlightBrush;
+    extern const char* dgmlAttr_highlightPen;
     extern const char* dgmlAttr_host;
     extern const char* dgmlAttr_labelColor;
     extern const char* dgmlAttr_levelZeroColumns;

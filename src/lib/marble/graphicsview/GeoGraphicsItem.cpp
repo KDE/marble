@@ -17,6 +17,8 @@
 // Qt
 #include "MarbleDebug.h"
 
+#include <QColor>
+
 using namespace Marble;
 
 GeoGraphicsItem::GeoGraphicsItem( const GeoDataFeature *feature )
@@ -27,6 +29,7 @@ GeoGraphicsItem::GeoGraphicsItem( const GeoDataFeature *feature )
 
 GeoGraphicsItem::~GeoGraphicsItem()
 {
+    delete p()->m_highlightStyle;
     delete d;
 }
 
@@ -79,8 +82,25 @@ void GeoGraphicsItem::setStyle( const GeoDataStyle* style )
     p()->m_style = style;
 }
 
+void GeoGraphicsItem::setHighlightStyle( GeoDataStyle* highlightStyle)
+{
+    /**
+     * Delete any previously set style
+     * and assign the new style @highlightStyle
+     */
+    delete p()->m_highlightStyle;
+    p()->m_highlightStyle = highlightStyle;
+}
+
 const GeoDataStyle* GeoGraphicsItem::style() const
 {
+    /**
+     * m_isHighlight is set true when the item is
+     * supposed to be colored highlighted
+     */
+    if ( p()->m_highlighted && p()->m_highlightStyle ) {
+        return p()->m_highlightStyle;
+    }
     return p()->m_style;
 }
 
@@ -92,6 +112,16 @@ qreal GeoGraphicsItem::zValue() const
 void GeoGraphicsItem::setZValue( qreal z )
 {
     p()->m_zValue = z;
+}
+
+void GeoGraphicsItem::setHighlighted( bool highlight )
+{
+    p()->m_highlighted = highlight;
+}
+
+bool GeoGraphicsItem::isHighlighted() const
+{
+    return p()->m_highlighted;
 }
 
 GeoGraphicsItemPrivate *GeoGraphicsItem::p()

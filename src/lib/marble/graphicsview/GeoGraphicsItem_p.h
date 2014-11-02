@@ -28,10 +28,12 @@ class GeoGraphicsItemPrivate
           m_minZoomLevel( 0 ),
           m_feature( feature ),
           m_latLonAltBox(),
-          m_style( 0 )
+          m_style( 0 ),
+          m_highlightStyle( 0 ),
+          m_highlighted( false )
     {
     }
-    
+
     virtual ~GeoGraphicsItemPrivate()
     {
     }
@@ -43,6 +45,10 @@ class GeoGraphicsItemPrivate
     const GeoDataFeature *m_feature;
     GeoDataLatLonAltBox m_latLonAltBox;
     const GeoDataStyle *m_style;
+
+    // To highlight a placemark
+    bool m_highlighted;
+    GeoDataStyle *m_highlightStyle;
 };
 
 }

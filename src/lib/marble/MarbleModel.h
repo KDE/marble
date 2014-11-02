@@ -36,6 +36,7 @@
 #include <QVector>
 
 #include "MarbleGlobal.h"
+#include "GeoDataCoordinates.h"
 
 class QItemSelectionModel;
 class QAbstractItemModel;
@@ -327,7 +328,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @see home(), setHome()
      */
     void homeChanged( const GeoDataCoordinates &newHomePoint );
-    
+
  private:
     Q_DISABLE_COPY( MarbleModel )
 

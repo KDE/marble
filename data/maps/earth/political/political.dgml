@@ -27,7 +27,7 @@
             <!-- Now we create the layer structure that gets handled by the
     layer management class -->
 
-        <map bgcolor="#d3d7cf">
+        <map bgcolor="#d3d7cf" highlightBrush="#007880" highlightPen="#00484d">
             <canvas/>
             <target/>
 

@@ -60,6 +60,11 @@ class GeoSceneMapPrivate
 
     QColor m_backgroundColor;
     QColor m_labelColor;
+
+    /// This color will be used to highlight
+    /// a region when it's clicked on.
+    QColor m_highlightBrushColor;
+    QColor m_highlightPenColor;
 };
 
 
@@ -231,6 +236,26 @@ QColor GeoSceneMap::labelColor() const
 void GeoSceneMap::setLabelColor( const QColor& backgroundColor )
 {
     d->m_labelColor = backgroundColor;
+}
+
+QColor GeoSceneMap::highlightBrushColor() const
+{
+    return d->m_highlightBrushColor;
+}
+
+void GeoSceneMap::setHighlightBrushColor( const QColor & highlightBrushColor )
+{
+    d->m_highlightBrushColor = highlightBrushColor;
+}
+
+QColor GeoSceneMap::highlightPenColor() const
+{
+    return d->m_highlightPenColor;
+}
+
+void GeoSceneMap::setHighlightPenColor( const QColor &highlightPenColor )
+{
+    d->m_highlightPenColor = highlightPenColor;
 }
 
 }

@@ -251,6 +251,11 @@ void MarbleWidgetPrivate::construct()
     m_widget->setMouseTracking( true );
 
     map()->addLayer( &m_customPaintLayer );
+
+    m_widget->connect( m_inputhandler, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)),
+                       m_widget, SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)) );
+    m_widget->setHighlightEnabled( true );
+
 }
 
 void MarbleWidgetPrivate::setInputHandler()
@@ -395,6 +400,19 @@ RenderStatus MarbleWidget::renderStatus() const
 RenderState MarbleWidget::renderState() const
 {
     return d->map()->renderState();
+}
+
+void MarbleWidget::setHighlightEnabled(bool enabled)
+{
+    if ( enabled ) {
+        connect( this, SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)),
+                 d->map(), SIGNAL(highlightedPlacemarksChanged(qreal, qreal, GeoDataCoordinates::Unit)),
+                 Qt::UniqueConnection );
+    }
+    else {
+        disconnect( this, SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)),
+                 d->map(), SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)) );
+    }
 }
 
 bool MarbleWidget::showOverviewMap() const

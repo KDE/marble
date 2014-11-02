@@ -15,10 +15,12 @@
 
 #include <QObject>
 #include "LayerInterface.h"
+#include "GeoDataCoordinates.h"
 
 class QAbstractItemModel;
 class QModelIndex;
 class QPoint;
+class QColor;
 
 namespace Marble
 {
@@ -26,6 +28,7 @@ class GeoPainter;
 class GeoDataFeature;
 class ViewportParams;
 class GeometryLayerPrivate;
+class GeoDataPlacemark;
 
 class GeometryLayer : public QObject, public LayerInterface
 {
@@ -40,7 +43,7 @@ public:
                          const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
 
     RenderState renderState() const;
-    
+
     virtual QString runtimeTrace() const;
 
     QVector<const GeoDataFeature*> whichFeatureAt( const QPoint& curpos, const ViewportParams * viewport );
@@ -49,9 +52,11 @@ public Q_SLOTS:
     void addPlacemarks( QModelIndex index, int first, int last );
     void removePlacemarks( QModelIndex index, int first, int last );
     void resetCacheData();
+    void handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::Unit unit );
 
 Q_SIGNALS:
     void repaintNeeded();
+    void highlightedPlacemarksChanged( const QVector<GeoDataPlacemark*>& clickedPlacemarks );
 
 private:
     GeometryLayerPrivate *d;
