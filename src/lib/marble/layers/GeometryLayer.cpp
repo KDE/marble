@@ -483,21 +483,20 @@ void GeometryLayer::handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::U
             if ( doc ) {
                 bool isHighlight = false;
 
-                /**
-                 * If a document doesn't specify any highlight
-                 * styleId in its style maps then there is no need
-                 * to further check that document for placemarks
-                 * which have been clicked because we won't
-                 * highlight them.
-                 * @p isHighlight is true when any of style map in
-                 * GeoDataDocument specifies a highlight styleId.
-                 */
                 foreach ( const GeoDataStyleMap &styleMap, doc->styleMaps() ) {
                     if ( styleMap.contains( QString("highlight") ) ) {
                         isHighlight = true;
                         break;
                     }
                 }
+
+                /*
+                 * If a document doesn't specify any highlight
+                 * styleId in its style maps then there is no need
+                 * to further check that document for placemarks
+                 * which have been clicked because we won't
+                 * highlight them.
+                 */
                 if ( isHighlight ) {
                     QVector<GeoDataFeature*>::Iterator iter = doc->begin();
                     QVector<GeoDataFeature*>::Iterator const end = doc->end();
@@ -556,13 +555,6 @@ void GeometryLayer::handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::U
         }
     }
 
-    /**
-     * @p selectedPlacemarks may contain placemarks which don't have
-     * their styleUrl set to id of the style map which specifies
-     * a highlight styleId. Such placemarks will be filtered out
-     * in GeoGraphicsScene which will query for placemark->styleUrl()
-     * to decide whether the placemark should be highlighted ot not.
-     */
     emit highlightedPlacemarksChanged( selectedPlacemarks );
 }
 

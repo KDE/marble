@@ -52,10 +52,28 @@ public Q_SLOTS:
     void addPlacemarks( QModelIndex index, int first, int last );
     void removePlacemarks( QModelIndex index, int first, int last );
     void resetCacheData();
+
+    /**
+     * Finds all placemarks that contain the clicked point.
+     *
+     * The placemarks under the clicked position may
+     * have their styleUrl set to a style map which
+     * doesn't specify any highlight styleId. Such
+     * placemarks will be fletered out in GeoGraphicsScene
+     * and will not be highlighted.
+     */
     void handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::Unit unit );
 
 Q_SIGNALS:
     void repaintNeeded();
+
+    /**
+     * @p selectedPlacemarks may contain placemarks which don't have
+     * their styleUrl set to id of the style map which specifies
+     * a highlight styleId. Such placemarks will be filtered out
+     * in GeoGraphicsScene which will query for placemark->styleUrl()
+     * to decide whether the placemark should be highlighted ot not.
+     */
     void highlightedPlacemarksChanged( const QVector<GeoDataPlacemark*>& clickedPlacemarks );
 
 private:
