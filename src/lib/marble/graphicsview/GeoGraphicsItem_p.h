@@ -29,8 +29,8 @@ class GeoGraphicsItemPrivate
           m_feature( feature ),
           m_latLonAltBox(),
           m_style( 0 ),
-          m_highlightStyle( 0 ),
-          m_highlighted( false )
+          m_highlighted( false ),
+          m_highlightStyle( 0 )
     {
     }
 
