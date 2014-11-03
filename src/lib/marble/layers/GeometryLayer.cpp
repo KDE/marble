@@ -474,11 +474,8 @@ void GeometryLayer::handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::U
     GeoDataCoordinates clickedPoint( lon, lat, 0, unit );
     QVector<GeoDataPlacemark*> selectedPlacemarks;
 
-    const GeoDataTreeModel *const tree = dynamic_cast<const GeoDataTreeModel *const>( d->m_model );
-    Q_ASSERT( tree );
-
-    for ( int i = 0; i < tree->rowCount(); ++i ) {
-        QVariant const data = tree->data ( tree->index ( i, 0 ), MarblePlacemarkModel::ObjectPointerRole );
+    for ( int i = 0; i < d->m_model->rowCount(); ++i ) {
+        QVariant const data = d->m_model->data ( d->m_model->index ( i, 0 ), MarblePlacemarkModel::ObjectPointerRole );
         GeoDataObject *object = qvariant_cast<GeoDataObject*> ( data );
         Q_ASSERT ( object );
         if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
