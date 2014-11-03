@@ -460,7 +460,7 @@ void MarbleDefaultInputHandler::handleLeftMouseButtonPress(QMouseEvent *event)
 
     if (event->modifiers() & Qt::ControlModifier)
     {
-        qDebug("Marble: Starting selection");
+        mDebug() << Q_FUNC_INFO << "Starting selection";
         d->m_lmbTimer.stop();
         d->m_selectionOrigin = event->pos();
         selectionRubber()->setGeometry(QRect(d->m_selectionOrigin, QSize()));
@@ -522,7 +522,7 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
     if (event->type() == QEvent::MouseButtonRelease && event->button() == Qt::LeftButton
          && selectionRubber()->isVisible())
     {
-        qDebug("Marble: Leaving selection");
+        mDebug() << Q_FUNC_INFO << "Leaving selection";
         MarbleInputHandler::d->m_marblePresenter->setSelection(selectionRubber()->geometry());
         selectionRubber()->hide();
     }
