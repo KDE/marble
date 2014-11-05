@@ -479,8 +479,8 @@ void GeometryLayer::handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::U
         GeoDataObject *object = qvariant_cast<GeoDataObject*> ( data );
         Q_ASSERT ( object );
         if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+            Q_ASSERT( dynamic_cast<const GeoDataDocument *>( object ) != 0 );
             GeoDataDocument* doc = static_cast<GeoDataDocument*> ( object );
-            if ( doc ) {
                 bool isHighlight = false;
 
                 foreach ( const GeoDataStyleMap &styleMap, doc->styleMaps() ) {
@@ -551,7 +551,6 @@ void GeometryLayer::handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::U
                         }
                     }
                 }
-            }
         }
     }
 
