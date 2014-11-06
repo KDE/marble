@@ -21,6 +21,15 @@
 # endif
 #endif
 
+#ifdef __GNUC__
+#define MARBLE_DEPRECATED(func) func __attribute__ ((deprecated))
+#elif defined(_MSC_VER)
+#define MARBLE_DEPRECATED(func) __declspec(deprecated) func
+#else
+#pragma message("WARNING: You need to implement MARBLE_DEPRECATED for this compiler in marble_export.h")
+#define MARBLE_DEPRECATED(func) func
+#endif
+
 
 #include <QtPlugin>
 

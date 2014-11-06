@@ -23,4 +23,13 @@
 # endif
 #endif
 
+#ifdef __GNUC__
+#define GEODATA_DEPRECATED(func) func __attribute__ ((deprecated))
+#elif defined(_MSC_VER)
+#define GEODATA_DEPRECATED(func) __declspec(deprecated) func
+#else
+#pragma message("WARNING: You need to implement GEODATA_DEPRECATED for this compiler in geodata_export.h")
+#define GEODATA_DEPRECATED(func) func
+#endif
+
 #endif // GEODATA_EXPORT_H

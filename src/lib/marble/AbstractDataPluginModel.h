@@ -17,7 +17,6 @@
 #include <QString>
 
 #include "marble_export.h"
-#include "MarbleGlobal.h"
 
 class QPoint;
 class QUrl;

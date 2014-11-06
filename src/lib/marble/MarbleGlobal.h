@@ -270,15 +270,6 @@ const unsigned int c_defaultTileSize = 675;
 class MarbleGlobalPrivate;
 class MarbleLocale;
 
-#ifdef __GNUC__
-#define MARBLE_DEPRECATED(func) func __attribute__ ((deprecated))
-#elif defined(_MSC_VER)
-#define MARBLE_DEPRECATED(func) __declspec(deprecated) func
-#else
-#pragma message("WARNING: You need to implement MARBLE_DEPRECATED for this compiler in MarbleGlobal.h")
-#define MARBLE_DEPRECATED(func) func
-#endif
-
 class  MARBLE_EXPORT MarbleGlobal
 {
  public:

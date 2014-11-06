@@ -13,6 +13,7 @@
 #include "PlanetFactory.h"
 #include "Planet.h"
 #include "MarbleDebug.h"
+#include "MarbleGlobal.h"
 
 namespace Marble {
 

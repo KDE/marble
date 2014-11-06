@@ -13,7 +13,6 @@
 #define MARBLE_PLANET_H
 
 #include "marble_export.h"
-#include "MarbleGlobal.h"
 
 #include <QStringList>
 #include <QColor>

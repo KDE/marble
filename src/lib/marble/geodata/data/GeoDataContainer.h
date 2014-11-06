@@ -19,7 +19,6 @@
 #include "geodata_export.h"
 
 #include "GeoDataFeature.h"
-#include "MarbleGlobal.h"
 
 namespace Marble
 {
@@ -108,7 +107,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      */
     void insert( int index, GeoDataFeature *feature );
 
-    MARBLE_DEPRECATED( void insert( GeoDataFeature *other, int index ) );
+    GEODATA_DEPRECATED( void insert( GeoDataFeature *other, int index ) );
 
     /**
     * @brief add an element
