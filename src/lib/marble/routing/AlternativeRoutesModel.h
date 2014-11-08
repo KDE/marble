@@ -24,7 +24,6 @@
 namespace Marble
 {
 
-class AlternativeRoutesModelPrivate;
 class RouteRequest;
 class GeoDataDocument;
 
@@ -97,7 +96,8 @@ private Q_SLOTS:
     void addRestrainedRoutes();
 
 private:
-    AlternativeRoutesModelPrivate *const d;
+    class Private;
+    Private *const d;
 };
 
 } // namespace Marble
