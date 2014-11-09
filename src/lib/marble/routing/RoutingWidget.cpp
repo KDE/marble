@@ -583,6 +583,7 @@ void RoutingWidget::updateRouteState( RoutingManager::State state )
         d->m_ui.routeComboBox->setVisible( false );
         d->m_ui.routeComboBox->clear();
         d->m_progressTimer.start();
+        d->m_ui.resultLabel->setVisible( false );
     break;
     case RoutingManager::Retrieved: {
         d->m_progressTimer.stop();
@@ -652,7 +653,6 @@ void RoutingWidget::updateProgress()
         d->m_currentFrame = ( d->m_currentFrame + 1 ) % d->m_progressAnimation.size();
         QIcon frame = d->m_progressAnimation[d->m_currentFrame];
         d->m_ui.searchButton->setIcon( frame );
-        d->m_ui.resultLabel->setVisible( false );
     }
 }
 
