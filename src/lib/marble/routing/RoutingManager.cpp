@@ -95,6 +95,8 @@ public:
 
     void addRoute( GeoDataDocument* route );
 
+    void routingFinished();
+
     void setCurrentRoute( GeoDataDocument *route );
 
     void recalculateRoute( bool deviated );
@@ -257,6 +259,8 @@ RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QO
 {
     connect( &d->m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument*)),
              this, SLOT(addRoute(GeoDataDocument*)) );
+    connect( &d->m_runnerManager, SIGNAL(routingFinished()),
+             this, SLOT(routingFinished()) );
     connect( &d->m_alternativeRoutesModel, SIGNAL(currentRouteChanged(GeoDataDocument*)),
              this, SLOT(setCurrentRoute(GeoDataDocument*)) );
     connect( &d->m_routingModel, SIGNAL(deviatedFromRoute(bool)),
@@ -324,11 +328,15 @@ void RoutingManagerPrivate::addRoute( GeoDataDocument* route )
 
     if ( !m_haveRoute ) {
         m_haveRoute = route != 0;
-        m_state = RoutingManager::Retrieved;
-        emit q->stateChanged( m_state );
     }
 
     emit q->routeRetrieved( route );
+}
+
+void RoutingManagerPrivate::routingFinished()
+{
+    m_state = RoutingManager::Retrieved;
+    emit q->stateChanged( m_state );
 }
 
 void RoutingManagerPrivate::setCurrentRoute( GeoDataDocument *document )
