@@ -337,8 +337,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT(activatePlacemark(QModelIndex)) );
     connect( d->m_routingManager, SIGNAL(stateChanged(RoutingManager::State)),
              this, SLOT(updateRouteState(RoutingManager::State)) );
-    connect( d->m_routingManager, SIGNAL(routeRetrieved(GeoDataDocument*)),
-             this, SLOT(indicateRoutingFailure(GeoDataDocument*)) );
     connect( d->m_routeRequest, SIGNAL(positionAdded(int)),
              this, SLOT(insertInputWidget(int)) );
     connect( d->m_routeRequest, SIGNAL(positionRemoved(int)),
@@ -586,7 +584,15 @@ void RoutingWidget::updateRouteState( RoutingManager::State state )
         d->m_ui.routeComboBox->clear();
         d->m_progressTimer.start();
     break;
-    case RoutingManager::Retrieved:
+    case RoutingManager::Retrieved: {
+        d->m_progressTimer.stop();
+        d->m_ui.searchButton->setIcon( QIcon() );
+        if ( d->m_routingManager->routingModel()->rowCount() == 0 ) {
+            const QString results = tr( "No route found" );
+            d->m_ui.resultLabel->setText( "<font color=\"red\">" + results + "</font>" );
+            d->m_ui.resultLabel->setVisible( true );
+        }
+    }
     break;
     }
 
@@ -769,17 +775,6 @@ void RoutingWidget::openCloudRoutesDialog()
     connect( dialog, SIGNAL(uploadToCloudButtonClicked(QString)), d->m_routeSyncManager, SLOT(uploadRoute(QString)) );
     dialog->exec();
     delete dialog;
-}
-
-void RoutingWidget::indicateRoutingFailure( GeoDataDocument* route )
-{
-    if ( !route ) {
-        d->m_progressTimer.stop();
-        d->m_ui.searchButton->setIcon( QIcon() );
-        QString const results = tr( "No route found" );
-        d->m_ui.resultLabel->setText( "<font color=\"red\">" + results + "</font>" );
-        d->m_ui.resultLabel->setVisible( true );
-    }
 }
 
 void RoutingWidget::updateActiveRoutingProfile()
