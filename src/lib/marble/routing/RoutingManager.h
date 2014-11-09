@@ -200,6 +200,8 @@ Q_SIGNALS:
 private:
     Q_PRIVATE_SLOT( d, void addRoute( GeoDataDocument* route ) )
 
+    Q_PRIVATE_SLOT( d, void routingFinished() )
+
     Q_PRIVATE_SLOT( d, void setCurrentRoute( GeoDataDocument *route ) )
 
     Q_PRIVATE_SLOT( d, void recalculateRoute( bool deviated ) )
