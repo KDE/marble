@@ -127,9 +127,6 @@ private Q_SLOTS:
     /** Update the route request with the given profile */
     void setRoutingProfile( int index );
 
-    /** Determine route retrieval failures and inform the user */
-    void indicateRoutingFailure( GeoDataDocument* route );
-
     /** Change selected routing profile to the one set in the shared request */
     void updateActiveRoutingProfile();
 
