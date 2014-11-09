@@ -672,9 +672,6 @@ void RoutingWidget::updateAlternativeRoutes()
         d->m_ui.routeComboBox->setCurrentIndex( 0 );
     }
 
-    d->m_progressTimer.stop();
-    d->m_ui.searchButton->setIcon( QIcon() );
-
     QString const results = tr( "routes found: %1" ).arg( d->m_ui.routeComboBox->count() );
     d->m_ui.resultLabel->setText( results );
     d->m_ui.resultLabel->setVisible( true );
