@@ -579,13 +579,15 @@ void RoutingWidget::removeInputWidget( int index )
 void RoutingWidget::updateRouteState( RoutingManager::State state )
 {
     clearTour();
-    if ( state != RoutingManager::Retrieved ) {
+
+    switch ( state ) {
+    case RoutingManager::Downloading:
         d->m_ui.routeComboBox->setVisible( false );
         d->m_ui.routeComboBox->clear();
-    }
-
-    if ( state == RoutingManager::Downloading ) {
         d->m_progressTimer.start();
+    break;
+    case RoutingManager::Retrieved:
+    break;
     }
 
     d->m_saveRouteButton->setEnabled( d->m_routingManager->routingModel()->rowCount() > 0 );
