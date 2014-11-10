@@ -20,6 +20,7 @@
   <name xml:lang="sk">Marble</name>
   <name xml:lang="sl">Marble</name>
   <name xml:lang="sv">Marble</name>
+  <name xml:lang="tr">Marble</name>
   <name xml:lang="uk">Marble</name>
   <name xml:lang="x-test">xxMarblexx</name>
   <name xml:lang="zh-TW">地球儀_Marble</name>
@@ -40,6 +41,7 @@
   <summary xml:lang="sk">Virtuálny glóbus</summary>
   <summary xml:lang="sl">Navidezni globus</summary>
   <summary xml:lang="sv">Virtuell glob</summary>
+  <summary xml:lang="tr">Sanal Küre</summary>
   <summary xml:lang="uk">Віртуальний глобус</summary>
   <summary xml:lang="x-test">xxVirtual Globexx</summary>
   <summary xml:lang="zh-TW">虛擬地球儀</summary>
@@ -59,6 +61,7 @@
     <p xml:lang="sk">Marble je virtuálny glóbus a atlas sveta - váš švajčiarsky nožík pre mapy.</p>
     <p xml:lang="sl">Marble je navidezni globus in atlas sveta - vaš švicarski nož za zemljevide.</p>
     <p xml:lang="sv">Marble är en virtuell jordglob och världsatlas - det generella kartverktyget.</p>
+    <p xml:lang="tr">Marble bir sanal küre ve dünya atlasıdır — haritalar için İsviçre çakısıdır.</p>
     <p xml:lang="uk">Marble — віртуальний глобус та атлас світу, — ваш універсальний інструмент для роботи з картами.</p>
     <p xml:lang="x-test">xxMarble is a virtual globe and world atlas — your swiss army knife for maps.xx</p>
     <p xml:lang="zh-TW">Marble 是一套虛擬地球儀與世界地圖集。</p>
