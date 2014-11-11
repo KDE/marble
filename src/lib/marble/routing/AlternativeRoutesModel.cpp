@@ -403,22 +403,6 @@ void AlternativeRoutesModel::addRoute( GeoDataDocument* document, WritePolicy po
     }
 }
 
-qreal AlternativeRoutesModel::distance( const GeoDataCoordinates &satellite, const GeoDataCoordinates &lineA, const GeoDataCoordinates &lineB )
-{
-    return Private::distance( satellite, lineA, lineB );
-}
-
-QVector<qreal> AlternativeRoutesModel::deviation( const GeoDataDocument* routeA, const GeoDataDocument* routeB )
-{
-    const GeoDataLineString* waypointsA = waypoints( routeA );
-    const GeoDataLineString* waypointsB = waypoints( routeB );
-    QVector<qreal> result;
-    for ( int a=0; a<waypointsA->size(); ++a ) {
-        result.push_back( Private::distance( *waypointsB, waypointsA->at( a ) ) );
-    }
-    return result;
-}
-
 const GeoDataLineString* AlternativeRoutesModel::waypoints( const GeoDataDocument* document )
 {
     return Private::waypoints( document );
