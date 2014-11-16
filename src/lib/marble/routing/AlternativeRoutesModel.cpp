@@ -429,12 +429,12 @@ GeoDataDocument * AlternativeRoutesModel::currentRoute()
 
 void AlternativeRoutesModel::clear()
 {
+    beginResetModel();
     QVector<GeoDataDocument*> routes = d->m_routes;
     d->m_currentIndex = -1;
     d->m_routes.clear();
-    beginResetModel();
-    endResetModel();
     qDeleteAll(routes);
+    endResetModel();
 }
 
 } // namespace Marble
