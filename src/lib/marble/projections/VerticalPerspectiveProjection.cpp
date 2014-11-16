@@ -35,9 +35,8 @@ class VerticalPerspectiveProjectionPrivate : public AzimuthalProjectionPrivate
     explicit VerticalPerspectiveProjectionPrivate( VerticalPerspectiveProjection * parent );
 
     void calculateConstants(qreal radius) const;
-    qreal getPfromDistance(qreal radius) const;
 
-    mutable qreal m_P;
+    mutable qreal m_P; ///< Distance of the point of perspective in earth diameters
     mutable qreal m_previousRadius;
     mutable qreal m_altitudeToPixel;
     mutable qreal m_perspectiveRadius;
@@ -95,16 +94,10 @@ void VerticalPerspectiveProjectionPrivate::calculateConstants(qreal radius) cons
 {
     if (radius == m_previousRadius)  return;
     m_previousRadius = radius;
-    m_P = getPfromDistance(radius);
+    m_P = 1.5 + 3 * 1000 * 0.4 / radius / qTan(0.5 * 110 * DEG2RAD);
     m_altitudeToPixel = radius / (EARTH_RADIUS * qSqrt((m_P-1)/(m_P+1)));
     m_perspectiveRadius = radius / qSqrt((m_P-1)/(m_P+1));
     m_pPfactor = (m_P+1)/(m_perspectiveRadius*m_perspectiveRadius*(m_P-1));
-}
-
-qreal VerticalPerspectiveProjectionPrivate::getPfromDistance(qreal radius) const {
-    // Return the Distance of the point of perspective in earth diameters
-    qreal distance = 3 * 1000 * EARTH_RADIUS * 0.4 / radius / qTan(0.5 * 110 * DEG2RAD);
-    return 1.5 + distance / EARTH_RADIUS;
 }
 
 qreal VerticalPerspectiveProjection::clippingRadius() const
@@ -118,7 +111,7 @@ bool VerticalPerspectiveProjection::screenCoordinates( const GeoDataCoordinates 
 {
     Q_D(const VerticalPerspectiveProjection);
     d->calculateConstants(viewport->radius());
-    const qreal P =  d->m_P; // Distance of the point of perspective in earth diameters
+    const qreal P =  d->m_P;
     const qreal deltaLambda = coordinates.longitude() - viewport->centerLongitude();
     const qreal phi = coordinates.latitude();
     const qreal phi1 = viewport->centerLatitude();
