@@ -26,7 +26,7 @@ namespace Marble
 class GeoDataStyleSelectorPrivate;
 
 /**
- * @short a base class for the style classes
+ * @short an abstract base class for the style classes
  *
  * A GeoDataStyleSelector is a base class for the style classes Style
  * and StyleMap classes. The StyleMap class selects a style based on
@@ -40,8 +40,7 @@ class GeoDataStyleSelectorPrivate;
 class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
 {
   public:
-    /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+    ~GeoDataStyleSelector();
 
     /**
     * @brief assignment operator
@@ -56,16 +55,18 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
      * @param  stream  the stream
      */
     virtual void pack( QDataStream& stream ) const;
+
     /**
      * @brief  Unserialize the styleselector from a stream
      * @param  stream  the stream
      */
     virtual void unpack( QDataStream& stream );
 
+ protected:
     GeoDataStyleSelector();
     GeoDataStyleSelector( const GeoDataStyleSelector& other );
-    ~GeoDataStyleSelector();
-private:
+
+ private:
     GeoDataStyleSelectorPrivate * const d;
 };
 

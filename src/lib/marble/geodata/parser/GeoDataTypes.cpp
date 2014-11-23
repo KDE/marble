@@ -75,7 +75,6 @@ const char* GeoDataSchemaDataType = "GeoDataSchemaData";
 const char* GeoDataSimpleDataType = "GeoDataSimpleData";
 const char* GeoDataSimpleFieldType = "GeoDataSimpleField";
 const char* GeoDataSimpleArrayDataType = "GeoDataSimpleArrayData";
-const char* GeoDataStyleSelectorType = "GeoDataStyleSelector";
 const char* GeoDataStyleType = "GeoDataStyle";
 const char* GeoDataStyleMapType = "GeoDataStyleMap";
 const char* GeoDataSoundCueType = "GeoDataSoundCue";

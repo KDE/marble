@@ -21,13 +21,15 @@ class GeoDataStyleSelectorPrivate
 {
 };
 
-GeoDataStyleSelector::GeoDataStyleSelector()
-    : d( new GeoDataStyleSelectorPrivate )
+GeoDataStyleSelector::GeoDataStyleSelector() :
+    GeoDataObject(),
+    d( 0 )
 {
 }
 
-GeoDataStyleSelector::GeoDataStyleSelector( const GeoDataStyleSelector& other )
-    : GeoDataObject( other ), d( new GeoDataStyleSelectorPrivate( *other.d ) )
+GeoDataStyleSelector::GeoDataStyleSelector( const GeoDataStyleSelector& other ) :
+    GeoDataObject( other ),
+    d( 0 )
 {
 }
 
@@ -39,7 +41,6 @@ GeoDataStyleSelector::~GeoDataStyleSelector()
 GeoDataStyleSelector& GeoDataStyleSelector::operator=( const GeoDataStyleSelector& other )
 {
     GeoDataObject::operator=( other );
-    *d = *other.d;
     return *this;
 }
 
@@ -51,11 +52,6 @@ bool GeoDataStyleSelector::operator==( const GeoDataStyleSelector &other ) const
 bool GeoDataStyleSelector::operator!=( const GeoDataStyleSelector &other ) const
 {
     return !this->operator==( other );
-}
-
-const char* GeoDataStyleSelector::nodeType() const
-{
-    return GeoDataTypes::GeoDataStyleSelectorType;
 }
 
 void GeoDataStyleSelector::pack( QDataStream& stream ) const
