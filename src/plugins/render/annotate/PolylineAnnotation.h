@@ -133,7 +133,7 @@ private:
 
     /**
      * @brief As briefly mentioned above, the PolylineNodes instances are not created at
-     * each ::paint call, but only at its first call. Everytime the ::paint method is
+     * each ::paint call, but only at its first call. Every time the ::paint method is
      * called after that, each node from the lists of PolylineNodes gets its setRegion()
      * method called. We need the GeoPainter for doing this because we have to get the
      * ellipse around the GeoDataCoordinates.
@@ -141,7 +141,7 @@ private:
     void updateRegions( GeoPainter *painter );
 
     /**
-     * @brief It iterates throught all nodes and paints them on the map. It takes into
+     * @brief It iterates through all nodes and paints them on the map. It takes into
      * consideration the active flags of each PolylineNode.
      */
     void drawNodes( GeoPainter *painter );

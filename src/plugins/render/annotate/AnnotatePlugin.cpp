@@ -673,7 +673,7 @@ void AnnotatePlugin::handleSuccessfulPressEvent( QMouseEvent *mouseEvent, SceneG
     m_marbleWidget->model()->treeModel()->updateFeature( item->placemark() );
 
     // Store a pointer to the item for possible following move events only if its state is
-    // either 'Editing' or 'AddingNodes' and the the mouse left button has been used.
+    // either 'Editing' or 'AddingNodes' and the mouse left button has been used.
     if ( ( item->state() == SceneGraphicsItem::Editing ||
            item->state() == SceneGraphicsItem::AddingNodes ) &&
          mouseEvent->button() == Qt::LeftButton ) {

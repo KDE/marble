@@ -119,8 +119,8 @@ void FlightGearPositionProviderPlugin::readPendingDatagrams()
 
         m_socket->readDatagram(datagram.data(), datagram.size(), &sender, &senderPort);
         typedef QList<QByteArray>::Iterator Iterator;
-        QList<QByteArray> splitted = datagram.split('\n');
-        for (Iterator i = splitted.begin(); i != splitted.end(); i++) {
+        QList<QByteArray> split = datagram.split('\n');
+        for (Iterator i = split.begin(); i != split.end(); i++) {
             fixBadGPRMC(*i);
             i->append( "\n" );
             parseNmeaSentence( *i );

@@ -775,7 +775,7 @@ void EclSolar::setPenumbraAngle(double pa, int mode)
        (pa < 1.0). Set pa = 1 for the normal penumbra boundaries
 
        if mode == 1 the angle will be set such that the penumbra line
-       markes magnitude pa. pa == 0 will mark normal penumbra boudaries
+       markes magnitude pa. pa == 0 will mark normal penumbra boundaries
 
        if mode == 2 the angle will be set such that the penumbra line
        markes the obscuration pa. pa == 0.5 will mean that 50% of the Sun's
@@ -1082,7 +1082,7 @@ void EclSolar::ckphase (double minmjd, double maxmjd, double yr,
      Use yr as the year.fraction close to the desired date.
      If the date is within the limits store the result in the
      respective array.
-     Also check for possible occurences of eclipses and store the
+     Also check for possible occurrences of eclipses and store the
      respective data in an array
   */
  {
@@ -1601,7 +1601,7 @@ int EclSolar::eclPltCentral(bool firstc, double &lat, double &lng)
 
   eb_cphs = 0;
 
-  if (firstc)   // find the first occurence compliant with the step width
+  if (firstc)   // find the first occurrence compliant with the step width
    {
     jd = eb_jdstart;
     kp = eclp.solar(jd, eb_del_tdut, phi, lamda);
