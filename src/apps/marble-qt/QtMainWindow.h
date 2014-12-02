@@ -84,6 +84,8 @@ private Q_SLOTS:
 
     void  changeRecordingState();
 
+    void  updateApplicationTitle(const QString&);
+
     // File Menu
     void  openFile();
     void  openMapDialog();

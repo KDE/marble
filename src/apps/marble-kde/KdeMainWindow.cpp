@@ -135,7 +135,7 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     setAutoSaveSettings();
 
-    connect( marbleWidget(), SIGNAL(themeChanged(QString)), 
+    connect( marbleWidget(), SIGNAL(themeChanged(QString)),
             this, SLOT(setMapTitle()));
 }
 
@@ -159,7 +159,7 @@ void MainWindow::setMapTitle()
 {
     GeoSceneDocument *mapTheme = marbleWidget()->mapTheme();
     if ( mapTheme ) {
-        setCaption( tr( mapTheme->head()->name().toLatin1() ) );
+        setWindowTitle(tr("Marble Virtual Globe") + " - " + mapTheme->head()->name());
     }
 }
 
