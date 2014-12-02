@@ -54,11 +54,14 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void save();
+    void updateCoordinates();
 
 private:
     GeoDataFlyTo* flyToElement();
     MarbleWidget* m_widget;
     QModelIndex m_index;
+    QDoubleSpinBox *m_waitSpin;
+    GeoDataCoordinates m_coord;
 };
 
 class TourControlEditWidget: public QWidget

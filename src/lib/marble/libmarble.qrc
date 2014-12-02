@@ -43,6 +43,7 @@
         <file alias="marble/turn-exit-left.svg">../../../data/svg/turn-exit-left.svg</file>
         <file alias="marble/turn-exit-right.svg">../../../data/svg/turn-exit-right.svg</file>
         <file alias="marble/flag-green.svg">../../../data/svg/flag-green.svg</file>
+        <file alias="marble/places.png">../../apps/marble-ui/icons/places.png</file>
         <file alias="marble/edit-clear.png">../../apps/marble-ui/icons/16x16/edit-clear.png</file>
         <file alias="marble/list-add.png">../../apps/marble-ui/icons/16x16/list-add.png</file>
         <file alias="marble/list-remove.png">../../apps/marble-ui/icons/16x16/list-remove.png</file>

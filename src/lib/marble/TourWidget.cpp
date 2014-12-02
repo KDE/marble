@@ -813,9 +813,19 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
     iconLabel->setPixmap( QPixmap( ":/marble/flag.png" ) );
     layout->addWidget( iconLabel );
 
-    QLabel* flyToLabel = new QLabel;
-    flyToLabel->setText( tr( "Current map center" ) );
-    layout->addWidget( flyToLabel );
+    QLabel *waitLabel = new QLabel;
+    waitLabel->setText(tr("Wait duration:"));
+    layout->addWidget(waitLabel);
+
+    m_waitSpin = new QDoubleSpinBox;
+    layout->addWidget(m_waitSpin);
+    m_waitSpin->setValue(flyToElement()->duration());
+
+    QToolButton* flyToPinCenter = new QToolButton;
+    flyToPinCenter->setIcon(QIcon(":/marble/places.png"));
+    flyToPinCenter->setToolTip(tr("Current map center"));
+    connect(flyToPinCenter, SIGNAL(clicked()), this, SLOT(updateCoordinates()));
+    layout->addWidget(flyToPinCenter);
 
     QToolButton *button = new QToolButton;
     button->setIcon( QIcon( ":/marble/document-save.png" ) );
@@ -825,22 +835,30 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
     setLayout( layout );
 }
 
+void FlyToEditWidget::updateCoordinates()
+{
+    m_coord = m_widget->focusPoint();
+}
+
 void FlyToEditWidget::save()
 {
-    if(flyToElement()->view()!=0){
-        GeoDataCoordinates coords = m_widget->focusPoint();
+    if (flyToElement()->view() != 0 && m_coord != GeoDataCoordinates()) {
+        GeoDataCoordinates coords = m_coord;
         if ( flyToElement()->view()->nodeType() == GeoDataTypes::GeoDataCameraType ) {
             GeoDataCamera* camera = dynamic_cast<GeoDataCamera*>( flyToElement()->view() );
             camera->setCoordinates( coords );
-        }else if ( flyToElement()->view()->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
+        } else if ( flyToElement()->view()->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
             GeoDataLookAt* lookAt = dynamic_cast<GeoDataLookAt*>( flyToElement()->view() );
             lookAt->setCoordinates( coords );
-        }else{
+        } else{
             GeoDataLookAt* lookAt = new GeoDataLookAt;
             lookAt->setCoordinates( coords );
             flyToElement()->setView( lookAt );
         }
     }
+
+    flyToElement()->setDuration(m_waitSpin->value());
+
     emit editingDone(m_index);
 }
 
