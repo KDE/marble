@@ -90,8 +90,8 @@ bool Pn2Runner::importPolygon( QDataStream &stream, GeoDataLineString* linestrin
         qreal degLat = ( 1.0 * lat / 120.0 );
         qreal degLon = ( 1.0 * lon / 120.0 );
 
-        GeoDataCoordinates *coord = new GeoDataCoordinates( degLon / 180 * M_PI, degLat / 180 * M_PI );
-        linestring->append( *coord );
+        GeoDataCoordinates coord( degLon / 180 * M_PI, degLat / 180 * M_PI );
+        linestring->append( coord );
 
         for ( qint16 relativeNode = 1; relativeNode <= nrRelativeNodes; ++relativeNode ) {
             stream >> relativeLat >> relativeLon;
@@ -106,8 +106,8 @@ bool Pn2Runner::importPolygon( QDataStream &stream, GeoDataLineString* linestrin
             qreal currDegLon = ( 1.0 * currLon / 120.0 );
 
 
-            GeoDataCoordinates *currCoord = new GeoDataCoordinates( currDegLon / 180 * M_PI, currDegLat / 180 * M_PI );
-            linestring->append( *currCoord );
+            GeoDataCoordinates currCoord( currDegLon / 180 * M_PI, currDegLat / 180 * M_PI );
+            linestring->append( currCoord );
         }
     }
 
@@ -310,21 +310,23 @@ void Pn2Runner::parseForVersion2( const QString &fileName, DocumentRole role )
 
             if ( ( flag == LINEARRING ) || ( flag == OUTERBOUNDARY ) || ( flag == INNERBOUNDARY ) ) {
                 GeoDataLinearRing* linearring = new GeoDataLinearRing;
-                error = error | importPolygon( m_stream, linearring, nrAbsoluteNodes );
+                error = error || importPolygon( m_stream, linearring, nrAbsoluteNodes );
 
                 if ( flag == LINEARRING ) {
                     if ( placemark ) {
                         placemark->setGeometry( linearring );
                     }
-                }
+                } else {
+                    if ( flag == OUTERBOUNDARY ) {
+                        polygon = new GeoDataPolygon;
+                        polygon->setOuterBoundary( *linearring );
+                    }
 
-                if ( flag == OUTERBOUNDARY ) {
-                    polygon = new GeoDataPolygon;
-                    polygon->setOuterBoundary( *linearring );
-                }
+                    if ( flag == INNERBOUNDARY ) {
+                        polygon->appendInnerBoundary( *linearring );
+                    }
 
-                if ( flag == INNERBOUNDARY ) {
-                    polygon->appendInnerBoundary( *linearring );
+                    delete linearring;
                 }
             }
             prevFlag = flag;
@@ -351,7 +353,7 @@ void Pn2Runner::parseForVersion2( const QString &fileName, DocumentRole role )
 
                 if ( flagInMulti == LINESTRING ) {
                     GeoDataLineString *linestring = new GeoDataLineString;
-                    error = error | importPolygon( m_stream, linestring, nrAbsoluteNodes );
+                    error = error || importPolygon( m_stream, linestring, nrAbsoluteNodes );
                     multigeom->append( linestring );
                 }
 
@@ -361,15 +363,17 @@ void Pn2Runner::parseForVersion2( const QString &fileName, DocumentRole role )
 
                     if ( flagInMulti == LINEARRING ) {
                         multigeom->append( linearring );
-                    }
+                    } else {
+                        if ( flagInMulti == OUTERBOUNDARY ) {
+                            polygon = new GeoDataPolygon;
+                            polygon->setOuterBoundary( *linearring );
+                        }
 
-                    if ( flagInMulti == OUTERBOUNDARY ) {
-                        polygon = new GeoDataPolygon;
-                        polygon->setOuterBoundary( *linearring );
-                    }
+                        if ( flagInMulti == INNERBOUNDARY ) {
+                            polygon->appendInnerBoundary( *linearring );
+                        }
 
-                    if ( flagInMulti == INNERBOUNDARY ) {
-                        polygon->appendInnerBoundary( *linearring );
+                        delete linearring;
                     }
                 }
                 prevFlagInMulti = flagInMulti;
