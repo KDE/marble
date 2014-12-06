@@ -23,6 +23,14 @@ print "//
 
 print "    // Generated automatically by $0\n";
 
+print "#include \"AprsGatherer.h\"
+
+using namespace Marble;
+
+void AprsGatherer::initMicETables()
+{
+";
+
 foreach my $c ('0'..'9') {
     print "    m_dstCallDigits['$c']          = $c;\n";
     print "    m_dstCallSouthEast['$c']       = true;\n";
@@ -102,3 +110,5 @@ foreach my $chr (ord('!') .. ord('~')) {
     printf ("    m_pixmaps[QPair<QChar, QChar>('\\\\','%s')] = " .
 	    "\"aprs/secondary/%02d.png\";\n", $str, $chr-ord('!'));
 }
+
+print "}\n";

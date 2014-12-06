@@ -232,11 +232,6 @@ AprsGatherer::addObject( const QString &callSign,
     }
 }
 
-void AprsGatherer::initMicETables()
-{
-#include "AprsGatherer_mic_e.h"
-}
-
 qreal AprsGatherer::calculateLongitude( const QString &threeBytes, int offset,
                                          bool isEast )
 {

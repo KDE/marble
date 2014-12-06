@@ -9,6 +9,12 @@
 //
 
     // Generated automatically by AprsGatherGen.pl
+#include "AprsGatherer.h"
+
+using namespace Marble;
+
+void AprsGatherer::initMicETables()
+{
     m_dstCallDigits['0']          = 0;
     m_dstCallSouthEast['0']       = true;
     m_dstCallLongitudeOffset['0'] = 0;
@@ -542,3 +548,4 @@
     m_pixmaps[QPair<QChar, QChar>('\\','}')] = "aprs/secondary/92.png";
     m_pixmaps[QPair<QChar, QChar>('/','~')] = "aprs/primary/93.png";
     m_pixmaps[QPair<QChar, QChar>('\\','~')] = "aprs/secondary/93.png";
+}

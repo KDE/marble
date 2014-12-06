@@ -25,6 +25,7 @@ set( aprs_SRCS AprsPlugin.cpp
                AprsObject.cpp
 	       AprsGatherer.cpp
 	       GeoAprsCoordinates.cpp
+	       AprsGatherer_mic_e.cpp
 
 	       AprsSource.cpp
 	       AprsTCPIP.cpp
