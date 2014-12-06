@@ -95,6 +95,11 @@ set(marblewidget_SRCS
     MapViewWidget.cpp
     FileViewWidget.cpp
     TourWidget.cpp
+    FlyToEditWidget.cpp
+    TourControlEditWidget.cpp
+    WaitEditWidget.cpp
+    SoundCueEditWidget.cpp
+    TourItemDelegate.cpp
     TourPlayback.cpp
     LegendWidget.cpp
     PlaybackItem.cpp
@@ -444,6 +449,11 @@ install( FILES
     LegendWidget.h
     FileViewWidget.h
     TourWidget.h
+    FlyToEditWidget.h
+    TourControlEditWidget.h
+    WaitEditWidget.h
+    SoundCueEditWidget.h
+    TourItemDelegate.h
     TourPlayback.h
     CurrentLocationWidget.h
     MarbleNavigator.h
