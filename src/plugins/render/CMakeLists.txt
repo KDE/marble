@@ -46,4 +46,9 @@ add_subdirectory( weather )
 # It should be moved to a new plugin type later.
 add_subdirectory( inhibit-screensaver )
 
-add_subdirectory( aprs )
+find_package( Perl )
+marble_set_package_properties( Perl PROPERTIES URL "http://www.perl.org" )
+marble_set_package_properties( Perl PROPERTIES TYPE OPTIONAL PURPOSE "generation of sources in the APRS plugin" )
+if( PERL_FOUND )
+    add_subdirectory( aprs )
+endif()
