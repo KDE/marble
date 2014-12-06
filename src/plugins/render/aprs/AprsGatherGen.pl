@@ -93,8 +93,12 @@ print "    m_customMessageText[7] = \"M7: EMERGENCY\";\n";
 print "\n";
 
 foreach my $chr (ord('!') .. ord('~')) {
-    printf ("    m_pixmaps[QPair<QChar, QChar>('/','%c')] = " .
-	    "\"aprs/primary/%02d.png\";\n", $chr, $chr-ord('!'));
-    printf ("    m_pixmaps[QPair<QChar, QChar>('\\\\','%c')] = " .
-	    "\"aprs/secondary/%02d.png\";\n", $chr, $chr-ord('!'));
+    my $str = chr($chr);
+    if ($chr eq ord('\'') or $chr eq ord('\\')) {
+        $str = "\\$str";
+    }
+    printf ("    m_pixmaps[QPair<QChar, QChar>('/','%s')] = " .
+	    "\"aprs/primary/%02d.png\";\n", $str, $chr-ord('!'));
+    printf ("    m_pixmaps[QPair<QChar, QChar>('\\\\','%s')] = " .
+	    "\"aprs/secondary/%02d.png\";\n", $str, $chr-ord('!'));
 }
