@@ -60,13 +60,11 @@ namespace Marble
         Quaternion rotTheta(1.0, 0.0, deltaLon / 180.0, 0.0);
 
         Quaternion axis = map()->viewport()->planetAxis();
-        qreal lon(0.0), lat(0.0);
-        axis.getSpherical(lon, lat);
         axis = rotTheta * axis;
         axis *= rotPhi;
         axis.normalize();
-        lat = -axis.pitch();
-        lon = axis.yaw();
+        const qreal lat = -axis.pitch();
+        const qreal lon = axis.yaw();
 
         GeoDataLookAt target = lookAt();
         target.setLongitude(lon);
