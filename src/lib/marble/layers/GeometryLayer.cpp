@@ -429,9 +429,10 @@ void GeometryLayer::removePlacemarks( QModelIndex parent, int first, int last )
 
 void GeometryLayer::resetCacheData()
 {
-    d->m_scene.eraseAll();
+    d->m_scene.clear();
     qDeleteAll( d->m_items );
     d->m_items.clear();
+
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
         d->createGraphicsItems( object->parent() );

@@ -267,6 +267,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     QTextDocument * legend();
 
+    /**
+     * @brief Uses the given text document as the new content of the legend
+     * Any previous legend content is overwritten. MarbleModel takes ownership
+     * of the passed document.
+     */
     void setLegend( QTextDocument * document );
 
     bool workOffline() const;

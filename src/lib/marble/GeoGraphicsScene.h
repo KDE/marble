@@ -59,18 +59,8 @@ public:
 
     /**
      * @brief Remove all items from the GeoGraphicsScene
-     * Removes all items from the GeoGraphicsScene
      */
     void clear();
-
-    /**
-     * @brief Get all items in the GeoGraphicsScene
-     * Returns all items in the GeoGraphicsScene.
-     * The items will be returned in no specific order.
-     *
-     * @return The list of all GeoGraphicsItems
-     */
-    void eraseAll();
 
     /**
      * @brief Get the list of items in the specified Box

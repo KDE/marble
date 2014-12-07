@@ -121,6 +121,7 @@ class MarbleModelPrivate
     ~MarbleModelPrivate()
     {
         delete m_mapTheme;
+        delete m_legend;
     }
 
     /**
@@ -788,6 +789,7 @@ QTextDocument * MarbleModel::legend()
 
 void MarbleModel::setLegend( QTextDocument * legend )
 {
+    delete d->m_legend;
     d->m_legend = legend;
 }
 

@@ -54,7 +54,7 @@ class MarbleLegendBrowserPrivate
     MarbleModel        *m_marbleModel;
     QMap<QString, bool>     m_checkBoxMap;
     QMap<QString, QPixmap>  m_symbolMap;
-    bool                 m_isLegendLoaded;
+    QString                 m_currentThemeId;
 #ifdef Q_WS_MAEMO_5
     bool m_suppressSelection;
 #endif // Q_WS_MAEMO_5
@@ -68,7 +68,6 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     : MarbleWebView( parent ),
       d( new MarbleLegendBrowserPrivate )
 {
-    d->m_isLegendLoaded = false;
     d->m_marbleModel = 0;
 #ifdef Q_WS_MAEMO_5
     d->m_suppressSelection = false;
@@ -125,13 +124,15 @@ void MarbleLegendBrowser::initTheme()
     if ( isVisible() ) {
         loadLegend();
     }
-    else {
-        d->m_isLegendLoaded = false;
-    }
 }
 
 void MarbleLegendBrowser::loadLegend()
 {
+    if (d->m_currentThemeId != d->m_marbleModel->mapThemeId()) {
+        d->m_currentThemeId = d->m_marbleModel->mapThemeId();
+    } else {
+        return;
+    }
 
     // Read the html string.
     QString legendPath;
@@ -194,10 +195,8 @@ bool MarbleLegendBrowser::event( QEvent * event )
 {
     // "Delayed initialization": legend gets created only 
     if ( event->type() == QEvent::Show ) {
-        if ( !d->m_isLegendLoaded ) {
-            loadLegend();
-            return true;
-        }
+        loadLegend();
+        return true;
     }
 #ifdef Q_WS_MAEMO_5
     else if ( event->type() == QEvent::MouseButtonPress ) {

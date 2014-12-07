@@ -36,6 +36,16 @@ bool zValueLessThan( GeoGraphicsItem* i1, GeoGraphicsItem* i2 )
 class GeoGraphicsScenePrivate
 {
 public:
+    GeoGraphicsScene *q;
+    GeoGraphicsScenePrivate(GeoGraphicsScene *parent) :
+        q(parent)
+    {
+    }
+
+    ~GeoGraphicsScenePrivate()
+    {
+        q->clear();
+    }
 
     void addItems(const TileId &tileId, QList<GeoGraphicsItem*> &result, int maxZoomLevel ) const;
 
@@ -77,7 +87,9 @@ void GeoGraphicsScenePrivate::applyHighlightStyle(GeoGraphicsItem* item, GeoData
     item->setHighlighted( true );
 }
 
-GeoGraphicsScene::GeoGraphicsScene( QObject* parent ): QObject( parent ), d( new GeoGraphicsScenePrivate() )
+GeoGraphicsScene::GeoGraphicsScene( QObject* parent ):
+    QObject( parent ),
+    d( new GeoGraphicsScenePrivate(this) )
 {
 
 }
@@ -85,17 +97,6 @@ GeoGraphicsScene::GeoGraphicsScene( QObject* parent ): QObject( parent ), d( new
 GeoGraphicsScene::~GeoGraphicsScene()
 {
     delete d;
-}
-
-void GeoGraphicsScene::eraseAll()
-{
-    for( QMap< TileId, QList< GeoGraphicsItem* > >::const_iterator i = d->m_items.constBegin();
-         i != d->m_items.constEnd(); ++i )
-    {
-        qDeleteAll(*i);
-    }
-    d->m_items.clear();
-    d->m_features.clear();
 }
 
 QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, int zoomLevel ) const
@@ -231,6 +232,7 @@ void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
             if( item->feature() == feature ) {
                 d->m_features.remove( feature );
                 tileList.removeAll( item );
+                delete item;
                 break;
             }
         }
@@ -239,7 +241,11 @@ void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 
 void GeoGraphicsScene::clear()
 {
+    foreach(const QList<GeoGraphicsItem*> &list, d->m_items.values()) {
+        qDeleteAll(list);
+    }
     d->m_items.clear();
+    d->m_features.clear();
 }
 
 void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
