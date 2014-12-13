@@ -37,6 +37,43 @@
       </widget>
      </item>
      <item row="1" column="0">
+      <widget class="QLabel" name="iconLink_lbl">
+       <property name="text">
+        <string>Icon Link</string>
+       </property>
+       <property name="buddy">
+        <cstring>m_iconLink</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <layout class="QHBoxLayout" name="browseIconLayout">
+       <item>
+        <widget class="QLineEdit" name="m_iconLink">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="m_browseIconButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>&amp;Browse...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0">
       <widget class="QLabel" name="position_lbl">
        <property name="text">
         <string>&amp;Position</string>
@@ -46,7 +83,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="2" column="1">
       <layout class="QHBoxLayout" name="latLonLayout" >
        <property name="margin">
         <number>0</number>
@@ -61,7 +98,7 @@
        </item>
       </layout>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="description_lbl">
        <property name="text">
         <string>&amp;Description</string>
@@ -71,7 +108,7 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="QTextEdit" name="m_description">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -92,7 +129,7 @@ p, li { white-space: pre-wrap; }
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="folder_lbl">
        <property name="text">
         <string>&amp;Folder</string>
@@ -102,7 +139,7 @@ p, li { white-space: pre-wrap; }
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QComboBox" name="m_folders">
@@ -143,6 +180,7 @@ p, li { white-space: pre-wrap; }
  </customwidgets>
 <tabstops>
   <tabstop>m_name</tabstop>
+  <tabstop>m_iconLink</tabstop>
   <tabstop>m_latitude</tabstop>
   <tabstop>m_longitude</tabstop>
   <tabstop>m_description</tabstop>

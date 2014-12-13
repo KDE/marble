@@ -20,12 +20,14 @@
 #include "GeoDataFolder.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataExtendedData.h"
+#include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "NewBookmarkFolderDialog.h"
 #include "ReverseGeocodingRunnerManager.h"
 
 #include <QPointer>
+#include <QFileDialog>
 
 namespace Marble {
 
@@ -50,6 +52,8 @@ public:
 
     void openNewFolderDialog();
 
+    void loadIconFile();
+
     void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
 
     void updateCoordinates();
@@ -73,7 +77,9 @@ void EditBookmarkDialogPrivate::initialize()
     m_ui.position_lbl->setVisible( !smallScreen );
     m_ui.m_latitude->setVisible( !smallScreen );
     m_ui.m_longitude->setVisible( !smallScreen );
+    m_ui.m_iconLink->setText( MarbleDirs::path( "bitmaps/bookmark.png" ));
     QObject::connect( m_ui.m_newFolderButton, SIGNAL(clicked()), q, SLOT(openNewFolderDialog()) );
+    QObject::connect( m_ui.m_browseIconButton, SIGNAL(clicked()), q, SLOT(loadIconFile()) );
     QObject::connect( m_ui.m_longitude, SIGNAL(valueChanged(qreal)), q, SLOT(updateCoordinates()) );
     QObject::connect( m_ui.m_latitude, SIGNAL(valueChanged(qreal)), q, SLOT(updateCoordinates()) );
 
@@ -226,6 +232,19 @@ void EditBookmarkDialogPrivate::openNewFolderDialog()
         setFolderName( dialog->folderName() );
     }
     delete dialog;
+}
+
+void EditBookmarkDialogPrivate::loadIconFile()
+{
+    const QString filename = QFileDialog::getOpenFileName( q,
+                                                           QObject::tr( "Open Icon File" ),
+                                                           QString(),
+                                                           QObject::tr( "All Supported Files (*.png)" ) );
+    if ( filename.isNull() ) {
+        return;
+    }
+
+    m_ui.m_iconLink->setText( filename );
 }
 
 void EditBookmarkDialogPrivate::updateCoordinates()
