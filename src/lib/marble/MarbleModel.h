@@ -201,7 +201,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param data the raw data to load
      * @param key the name to remove this raw data later
      */
-    void addGeoDataString( const QString& data, const QString& key = "data" );
+    void addGeoDataString( const QString& data, const QString& key = QLatin1String("data") );
 
     /**
      * @brief Remove the file or raw data from the treeModel

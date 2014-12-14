@@ -64,7 +64,8 @@ class PlacemarkLayer : public QObject, public LayerInterface
      * @reimp
      */
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
+                 const QString &renderPos = QLatin1String("NONE"),
+                 GeoSceneLayer *layer = 0 );
 
     RenderState renderState() const;
 

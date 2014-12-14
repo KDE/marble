@@ -29,7 +29,8 @@ class GroundLayer : public LayerInterface
     virtual QStringList renderPosition() const;
 
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-    const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+                         const QString& renderPos = QLatin1String("NONE"),
+                         GeoSceneLayer * layer = 0 );
 
     virtual qreal zValue() const;
 

@@ -74,7 +74,7 @@ private:
 
     GeoSceneDocument* createDocument();
     bool createFiles( const GeoSceneDocument* head );
-    static QString createLegendHtml( const QString& image = "./legend/legend.png" );
+    static QString createLegendHtml( const QString& image = QLatin1String("./legend/legend.png") );
     void createLegendFile( const QString& legendHtml );
     void createLegend();
     void downloadLegend( const QString& url );

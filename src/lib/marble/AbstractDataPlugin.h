@@ -78,7 +78,7 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      * @return @c true  Returns whether the rendering has been successful
      */
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+                 const QString& renderPos = QLatin1String("NONE"), GeoSceneLayer * layer = 0 );
 
     /**
      * @return The model associated with the plugin.
