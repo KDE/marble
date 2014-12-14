@@ -96,8 +96,8 @@ void MovieCaptureDialog::startRecording()
     hide();
 
     m_recorder->setFps(ui->fpsSlider->value());
-    m_recorder->startRecording();
-    emit started();
+    if (m_recorder->startRecording())
+        emit started();
 }
 
 void MovieCaptureDialog::stopRecording()

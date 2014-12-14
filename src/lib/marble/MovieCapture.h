@@ -40,7 +40,7 @@ public slots:
     void setFilename(const QString &path);
     void setSnapshotMethod(MovieCapture::SnapshotMethod method);
     void recordFrame();
-    void startRecording();
+    bool startRecording();
     void stopRecording();
     void cancelRecording();
 

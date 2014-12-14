@@ -14,6 +14,7 @@
 #include "MarbleDebug.h"
 
 #include <QProcess>
+#include <QMessageBox>
 
 namespace Marble
 {
@@ -24,6 +25,19 @@ public:
     MovieCapturePrivate(MarbleWidget *widget) :
         marbleWidget(widget), method(MovieCapture::TimeDriven)
     {}
+
+    /**
+     * @brief This gets called when user doesn't have avconv/ffmpeg installed
+     */
+    void missingToolsWarning() {
+        QMessageBox::warning(marbleWidget,
+                             QObject::tr("Missing encoding tools"),
+                             QObject::tr("Marble requires additional software in order to "
+                                         "create movies. Please get %1 "
+                                        ).arg("<a href=\"https://libav.org/"
+                                               "download.html\">avconv</a>"),
+                             QMessageBox::Ok);
+    }
 
     QTimer frameTimer;
     MarbleWidget *marbleWidget;
@@ -122,7 +136,7 @@ void MovieCapture::recordFrame()
     }
 }
 
-void MovieCapture::startRecording()
+bool MovieCapture::startRecording()
 {
     Q_D(MovieCapture);
 
@@ -133,13 +147,16 @@ void MovieCapture::startRecording()
         encoder.waitForFinished();
         if ( !encoder.readAll().isEmpty() ) { // avconv have output when it's here
             d->encoderExec = "avconv";
+            toolsAvailable = true;
         } else {
             encoder.start("ffmpeg -version");
             encoder.waitForFinished();
             if ( !encoder.readAll().isEmpty() ) {
                 d->encoderExec = "ffmpeg";
+                toolsAvailable = true;
             } else {
-                return;
+                d->missingToolsWarning();
+                return false;
             }
         }
     }
@@ -148,6 +165,7 @@ void MovieCapture::startRecording()
         d->frameTimer.start();
     }
     recordFrame();
+    return true;
 }
 
 void MovieCapture::stopRecording()
