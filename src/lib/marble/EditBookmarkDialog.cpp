@@ -78,6 +78,7 @@ void EditBookmarkDialogPrivate::initialize()
     m_ui.m_latitude->setVisible( !smallScreen );
     m_ui.m_longitude->setVisible( !smallScreen );
     m_ui.m_iconLink->setText( MarbleDirs::path( "bitmaps/bookmark.png" ));
+    m_ui.m_browseIconButton->setIcon( QIcon(MarbleDirs::path( "bitmaps/bookmark.png" )) );
     QObject::connect( m_ui.m_newFolderButton, SIGNAL(clicked()), q, SLOT(openNewFolderDialog()) );
     QObject::connect( m_ui.m_browseIconButton, SIGNAL(clicked()), q, SLOT(loadIconFile()) );
     QObject::connect( m_ui.m_longitude, SIGNAL(valueChanged(qreal)), q, SLOT(updateCoordinates()) );
@@ -245,6 +246,7 @@ void EditBookmarkDialogPrivate::loadIconFile()
     }
 
     m_ui.m_iconLink->setText( filename );
+    m_ui.m_browseIconButton->setIcon( QIcon(filename) );
 }
 
 void EditBookmarkDialogPrivate::updateCoordinates()
