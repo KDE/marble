@@ -102,6 +102,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
 
     // The line strings in the distance path.
     GeoDataLineString m_measureLineString;
+    GeoDataLatLonAltBox m_latLonAltBox;
 
     const QPixmap m_mark;
     QFont   m_font_regular;
@@ -120,6 +121,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     Ui::MeasureConfigWidget * m_uiConfigWidget;
     bool m_showDistanceLabel;
     bool m_showBearingLabel;
+    bool m_showBearingChangeLabel;
 };
 
 }

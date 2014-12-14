@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>263</height>
+    <height>313</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,6 +34,16 @@
        <widget class="QCheckBox" name="m_showBearingLabelsCheckBox">
         <property name="text">
          <string>Bearing</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_showBearingLabelChangeCheckBox">
+        <property name="text">
+         <string>Bearing Change</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
         </property>
        </widget>
       </item>

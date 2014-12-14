@@ -17,10 +17,12 @@
 #include "ui_MeasureConfigWidget.h"
 
 #include "GeoPainter.h"
+#include "GeoDataLinearRing.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "MarbleLocale.h"
+#include "ViewportParams.h"
 #include "Planet.h"
 
 #include <QColor>
@@ -51,7 +53,8 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 ),
       m_showDistanceLabel( true ),
-      m_showBearingLabel( true )
+      m_showBearingLabel( true ),
+      m_showBearingChangeLabel( true )
 {
     m_pen.setWidthF( 2.0 );
 }
@@ -142,6 +145,7 @@ QDialog *MeasureToolPlugin::configDialog()
 
     m_uiConfigWidget->m_showDistanceLabelsCheckBox->setChecked( m_showDistanceLabel );
     m_uiConfigWidget->m_showBearingLabelsCheckBox->setChecked( m_showBearingLabel );
+    m_uiConfigWidget->m_showBearingLabelChangeCheckBox->setChecked( m_showBearingChangeLabel );
 
     return m_configDialog;
 }
@@ -152,6 +156,7 @@ QHash<QString,QVariant> MeasureToolPlugin::settings() const
 
     settings.insert( "showDistanceLabel", m_showDistanceLabel );
     settings.insert( "showBearingLabel", m_showBearingLabel );
+    settings.insert( "showBearingChangeLabel", m_showBearingChangeLabel);
 
     return settings;
 }
@@ -162,12 +167,14 @@ void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
 
     m_showDistanceLabel = settings.value( "showDistanceLabel", true ).toBool();
     m_showBearingLabel = settings.value( "showBearingLabel", true ).toBool();
+    m_showBearingChangeLabel = settings.value( "showBearingChangeLabel", true ).toBool();
 }
 
 void MeasureToolPlugin::writeSettings()
 {
     m_showDistanceLabel = m_uiConfigWidget->m_showDistanceLabelsCheckBox->isChecked();
     m_showBearingLabel = m_uiConfigWidget->m_showBearingLabelsCheckBox->isChecked();
+    m_showBearingChangeLabel = m_uiConfigWidget->m_showBearingLabelChangeCheckBox->isChecked();
 
     emit settingsChanged( nameId() );
     emit repaintNeeded();
@@ -178,9 +185,10 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
                           const QString& renderPos,
                           GeoSceneLayer * layer )
 {
-    Q_UNUSED(viewport)
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
+
+    m_latLonAltBox = viewport->viewLatLonAltBox();
 
     // No way to paint anything if the list is empty.
     if ( m_measureLineString.isEmpty() )
@@ -191,7 +199,7 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
     // Prepare for painting the measure line string and paint it.
     painter->setPen( m_pen );
 
-    if ( m_showDistanceLabel || m_showBearingLabel) {
+    if ( m_showDistanceLabel || m_showBearingLabel || m_showBearingChangeLabel ) {
         drawSegments( painter );
     } else {
         painter->drawPolyline( m_measureLineString );
@@ -249,6 +257,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         if ( m_showBearingLabel ) {
             GeoDataCoordinates coordinates = segment.first();
             qreal bearing = coordinates.bearing( segment.last(), GeoDataCoordinates::Degree );
+
             if ( bearing < 0 ) {
                 bearing += 360;
             }
@@ -259,7 +268,47 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             infoString.append( bearingString );
         }
 
-        if ( !infoString.isEmpty() ) {
+        if ( m_showBearingChangeLabel && segmentIndex != 0 ) {
+            GeoDataCoordinates currentCoordinates = m_measureLineString[segmentIndex];
+            qreal currentBearing = currentCoordinates.bearing(m_measureLineString[segmentIndex+1]);
+            qreal previousBearing = currentCoordinates.bearing( m_measureLineString[segmentIndex-1]);
+
+            GeoDataLinearRing ring;
+            painter->setPen( Qt::NoPen );
+            painter->setBrush( QBrush ( QColor ( 127, 127, 127, 127 ) ) );
+
+            if (currentBearing < previousBearing) currentBearing += 2 * M_PI;
+            ring << currentCoordinates;
+
+            qreal angleLength = qAbs(m_latLonAltBox.north() - m_latLonAltBox.south()) / 20;
+
+            qreal iterBearing = previousBearing;
+            while ( iterBearing < currentBearing ) {
+                ring << currentCoordinates.moveByBearing( iterBearing, angleLength );;
+                iterBearing += 0.1;
+            }
+
+            ring << currentCoordinates.moveByBearing( currentBearing, angleLength );;
+
+            painter->drawPolygon( ring );
+
+            qreal currentBearingChange = (currentBearing - previousBearing) * RAD2DEG;
+            if (currentBearingChange < 0) currentBearingChange += 360;
+            QString bearingChangedString = QString::fromUtf8( "%1°" ).arg( currentBearingChange, 0, 'f', 2 );
+            painter->setPen( Qt::black );
+            GeoDataCoordinates textPosition = ring.latLonAltBox().center();
+            qreal deltaEast = ring.latLonAltBox().east() - currentCoordinates.longitude();
+            qreal deltaWest = currentCoordinates.longitude() - ring.latLonAltBox().west();
+            if (deltaEast > deltaWest) {
+                textPosition.setLongitude(currentCoordinates.longitude() + deltaEast / 2);
+            }
+            else {
+                textPosition.setLongitude(currentCoordinates.longitude() - deltaWest);
+            }
+            painter->drawText(textPosition, bearingChangedString );
+       }
+
+       if ( !infoString.isEmpty() ) {
             QPen linePen;
 
             // have three alternating colors for the segments
@@ -281,7 +330,6 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         }
     }
 }
-
 void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter ) const
 {
     // Paint the marks.
