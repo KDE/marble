@@ -23,7 +23,6 @@
 #include "GeoDataPlacemark.h"
 #include "PlacemarkTextAnnotation.h"
 
-
 namespace Marble {
 
 class EditTextAnnotationDialog::Private : public Ui::UiEditTextAnnotationDialog
@@ -85,6 +84,7 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     connect( d->m_name, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
 
     d->m_link->setText( placemark->style()->iconStyle().iconPath() );
+    d->m_browseButton->setIcon( QIcon(placemark->style()->iconStyle().iconPath()) );
     connect( d->m_link, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
 
     d->m_description->setText( placemark->description() );
@@ -216,6 +216,7 @@ void EditTextAnnotationDialog::loadIconFile()
     }
 
     d->m_link->setText( filename );
+    d->m_browseButton->setIcon( QIcon(filename) );
 }
 
 void EditTextAnnotationDialog::checkFields()
