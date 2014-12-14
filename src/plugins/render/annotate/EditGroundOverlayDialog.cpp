@@ -56,6 +56,7 @@ EditGroundOverlayDialog::EditGroundOverlayDialog( GeoDataGroundOverlay *overlay,
 
     d->m_name->setText( overlay->name() );
     d->m_link->setText( overlay->absoluteIconFile() );
+    d->m_browseButton->setIcon( QIcon( overlay->absoluteIconFile() ) );
     d->m_description->setText( overlay->description() );
 
     d->m_north->setRange( -90, 90 );
@@ -94,6 +95,7 @@ void EditGroundOverlayDialog::loadPicture()
     }
 
     d->m_link->setText( filename );
+    d->m_browseButton->setIcon( QIcon( filename ) );
 }
 
 void EditGroundOverlayDialog::updateGroundOverlay()
