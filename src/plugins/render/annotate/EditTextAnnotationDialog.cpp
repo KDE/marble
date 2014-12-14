@@ -21,6 +21,7 @@
 // Marble
 #include "GeoDataStyle.h"
 #include "GeoDataPlacemark.h"
+#include "MarbleWidget.h"
 #include "PlacemarkTextAnnotation.h"
 
 namespace Marble {
@@ -79,32 +80,27 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
         placemark->setName( tr("Untitled Placemark") );
     }
     // Setup name, icon link and latitude/longitude values.
-    d->m_name->setText( placemark->name() );
+    d->m_header->setName( placemark->name() );
     d->m_initialName = placemark->name();
-    connect( d->m_name, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
-
-    d->m_link->setText( placemark->style()->iconStyle().iconPath() );
-    d->m_browseButton->setIcon( QIcon(placemark->style()->iconStyle().iconPath()) );
-    connect( d->m_link, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
+    d->m_header->setIconLink( placemark->style()->iconStyle().iconPath() );
+    MarbleWidget* marbleWidget = dynamic_cast<MarbleWidget*>( parent );
+    if( marbleWidget != 0 ) {
+        const AngleUnit defaultAngleUnit = marbleWidget->defaultAngleUnit();
+        const GeoDataCoordinates::Notation notation =
+            (defaultAngleUnit == DecimalDegree) ? GeoDataCoordinates::Decimal :
+            (defaultAngleUnit == DMSDegree) ?     GeoDataCoordinates::DMS :
+            /* else, UTM */                       GeoDataCoordinates::DMS;
+        d->m_header->setNotation( notation );
+    }
+    connect( d->m_header, SIGNAL(valueChanged()), this, SLOT(updateTextAnnotation()) );
 
     d->m_description->setText( placemark->description() );
     d->m_initialDescription = placemark->description();
 
-    // Initialize the range for label/icon size.
-    // FIXME: What should be the maximum size?
-    d->m_labelScale->setRange( 1.0, 5.0 );
-    d->m_iconScale->setRange( 1.0, 5.0 );
-    // Initialize the range for latitude/longitude.
-    d->m_latitude->setRange( -90, 90 );
-    d->m_longitude->setRange( -180, 180 );
-
-
-    d->m_latitude->setValue( placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
-    connect( d->m_latitude, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
-    d->m_longitude->setValue( placemark->coordinate().longitude( GeoDataCoordinates::Degree ) );
-    connect( d->m_longitude, SIGNAL(editingFinished()), this, SLOT(updateTextAnnotation()) );
-    d->m_initialCoords = GeoDataCoordinates( d->m_longitude->value(),
-                                             d->m_latitude->value(),
+    d->m_header->setLatitude( placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
+    d->m_header->setLongitude( placemark->coordinate().longitude( GeoDataCoordinates::Degree ) );
+    d->m_initialCoords = GeoDataCoordinates( d->m_header->longitude(),
+                                             d->m_header->latitude(),
                                              0,
                                              GeoDataCoordinates::Degree );
 
@@ -150,7 +146,6 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     // Promote "Ok" button to default button.
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
 
-    connect( d->m_browseButton, SIGNAL(clicked()), this, SLOT(loadIconFile()) );
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
     connect( this, SIGNAL(accepted()), SLOT(updateTextAnnotation()) );
     connect( this, SIGNAL(finished(int)), SLOT(restoreInitial(int)) );
@@ -172,25 +167,25 @@ void EditTextAnnotationDialog::setFirstTimeEditing( bool enabled )
 
 void EditTextAnnotationDialog::updateDialogFields()
 {
-    d->m_latitude->setValue( d->m_placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
-    d->m_longitude->setValue( d->m_placemark->coordinate().longitude( GeoDataCoordinates::Degree ) );
+    d->m_header->setLatitude( d->m_placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
+    d->m_header->setLongitude( d->m_placemark->coordinate().longitude( GeoDataCoordinates::Degree ) );
 }
 
 void EditTextAnnotationDialog::updateTextAnnotation()
 {
     d->m_placemark->setDescription( d->m_description->toPlainText() );
-    d->m_placemark->setName( d->m_name->text() );
-    d->m_placemark->setCoordinate( GeoDataCoordinates( d->m_longitude->value(),
-                                                                         d->m_latitude->value(),
+    d->m_placemark->setName( d->m_header->name() );
+    d->m_placemark->setCoordinate( GeoDataCoordinates( d->m_header->longitude(),
+                                                                         d->m_header->latitude(),
                                                                          0,
                                                                          GeoDataCoordinates::Degree ) );
 
 
     GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
 
-    QFileInfo fileInfo( d->m_link->text() );
+    QFileInfo fileInfo( d->m_header->iconLink() );
     if ( fileInfo.exists() ) {
-        newStyle->iconStyle().setIconPath( d->m_link->text() );
+        newStyle->iconStyle().setIconPath( d->m_header->iconLink() );
     }
 
     newStyle->iconStyle().setScale( d->m_iconScale->value() );
@@ -205,32 +200,18 @@ void EditTextAnnotationDialog::updateTextAnnotation()
     emit textAnnotationUpdated( d->m_placemark );
 }
 
-void EditTextAnnotationDialog::loadIconFile()
-{
-    const QString filename = QFileDialog::getOpenFileName( this,
-                                                           tr( "Open Annotation File" ),
-                                                           QString(),
-                                                           tr( "All Supported Files (*.png)" ) );
-    if ( filename.isNull() ) {
-        return;
-    }
-
-    d->m_link->setText( filename );
-    d->m_browseButton->setIcon( QIcon(filename) );
-}
-
 void EditTextAnnotationDialog::checkFields()
 {
-    if ( d->m_name->text().isEmpty() ) {
+    if ( d->m_header->name().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No name specified" ),
                               tr( "Please specify a name for this placemark." ) );
-    } else if ( d->m_link->text().isEmpty() ) {
+    } else if ( d->m_header->iconLink().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No image specified" ),
                               tr( "Please specify an icon for this placemark." ) );
     } else {
-        QFileInfo fileInfo( d->m_link->text() );
+        QFileInfo fileInfo( d->m_header->iconLink() );
         if ( !fileInfo.exists() ) {
             QMessageBox::warning( this,
                                   tr( "Invalid icon path" ),

@@ -227,6 +227,7 @@ set(marblewidget_SRCS
     MathHelper.cpp
 
     LatLonEdit.cpp
+    PlacemarkEditHeader.cpp
 
     MapThemeSortFilterProxyModel.cpp
 
@@ -322,6 +323,7 @@ set (marblewidget_UI
     MarbleAboutDialog.ui
     SunControlWidget.ui
     LatLonEdit.ui
+    PlacemarkEditHeader.ui
     routing/RoutingWidget.ui
     DataMigrationWidget.ui
     EditBookmarkDialog.ui
@@ -563,6 +565,7 @@ install( FILES
     AbstractWorkerThread.h
 
     LatLonEdit.h
+    PlacemarkEditHeader.h
     MapWizard.h
     MapThemeDownloadDialog.h
     ElevationModel.h

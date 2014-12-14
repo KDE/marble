@@ -68,8 +68,6 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog
  private:
     Q_PRIVATE_SLOT( d, void openNewFolderDialog() )
 
-    Q_PRIVATE_SLOT( d, void loadIconFile() )
-
     Q_PRIVATE_SLOT( d, void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark) )
 
     Q_PRIVATE_SLOT( d, void updateCoordinates() )

@@ -28,7 +28,6 @@ public:
     ~EditGroundOverlayDialog();
 
 private slots:
-    void loadPicture();
     void updateGroundOverlay();
     void setGroundOverlayUpdated();
     void checkFields();

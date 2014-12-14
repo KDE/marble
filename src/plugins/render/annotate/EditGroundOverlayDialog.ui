@@ -6,73 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>345</width>
-    <height>422</height>
+    <width>339</width>
+    <height>328</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Edit ground overlay</string>
   </property>
-  <layout class="QFormLayout" name="formLayout_2">
-   <item row="0" column="0">
-    <widget class="QPushButton" name="m_browseButton">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>85</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>85</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>75</width>
-       <height>75</height>
-      </size>
-     </property>
-    </widget>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="Marble::PlacemarkEditHeader" name="m_header" native="true"/>
    </item>
-   <item row="0" column="1">
-    <layout class="QFormLayout" name="formLayout">
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="m_name"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="link_lbl">
-       <property name="text">
-        <string>Link</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="m_link"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="name_lbl">
-       <property name="text">
-        <string>Na&amp;me</string>
-       </property>
-       <property name="buddy">
-        <cstring>m_name</cstring>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="0" colspan="2">
+   <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
       <number>1</number>
@@ -573,7 +518,7 @@
      </widget>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
+   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -584,10 +529,14 @@
     </widget>
    </item>
   </layout>
-  <zorder>tabWidget</zorder>
-  <zorder>buttonBox</zorder>
-  <zorder></zorder>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Marble::PlacemarkEditHeader</class>
+   <extends>QWidget</extends>
+   <header>PlacemarkEditHeader.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

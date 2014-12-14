@@ -15,7 +15,7 @@
 // Qt
 #include <QFileDialog>
 #include <QMessageBox>
-
+#include <QPushButton>
 
 namespace Marble
 {
@@ -54,9 +54,9 @@ EditGroundOverlayDialog::EditGroundOverlayDialog( GeoDataGroundOverlay *overlay,
 {
     d->setupUi( this );
 
-    d->m_name->setText( overlay->name() );
-    d->m_link->setText( overlay->absoluteIconFile() );
-    d->m_browseButton->setIcon( QIcon( overlay->absoluteIconFile() ) );
+    d->m_header->setName( overlay->name() );
+    d->m_header->setIconLink( overlay->absoluteIconFile() );
+    d->m_header->setPositionVisible(false);
     d->m_description->setText( overlay->description() );
 
     d->m_north->setRange( -90, 90 );
@@ -72,7 +72,6 @@ EditGroundOverlayDialog::EditGroundOverlayDialog( GeoDataGroundOverlay *overlay,
     d->m_east->setValue( latLonBox.east( GeoDataCoordinates::Degree ) );
     d->m_rotation->setValue( latLonBox.rotation( GeoDataCoordinates::Degree ) );
 
-    connect( d->m_browseButton, SIGNAL(clicked()), this, SLOT(loadPicture()) );
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(clicked()), this, SLOT(updateGroundOverlay()) );
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(clicked()), this, SLOT(setGroundOverlayUpdated()) );
@@ -84,24 +83,10 @@ EditGroundOverlayDialog::~EditGroundOverlayDialog()
     delete d;
 }
 
-void EditGroundOverlayDialog::loadPicture()
-{
-    const QString filename = QFileDialog::getOpenFileName( this,
-                                                           tr( "Open Annotation File" ),
-                                                           QString(),
-                                                           tr( "All Supported Files (*.jpg *.png)" ) );
-    if ( filename.isNull() ) {
-        return;
-    }
-
-    d->m_link->setText( filename );
-    d->m_browseButton->setIcon( QIcon( filename ) );
-}
-
 void EditGroundOverlayDialog::updateGroundOverlay()
 {
-    d->m_overlay->setName( d->m_name->text() );
-    d->m_overlay->setIconFile( d->m_link->text() );
+    d->m_overlay->setName( d->m_header->name() );
+    d->m_overlay->setIconFile( d->m_header->iconLink() );
     d->m_overlay->setDescription( d->m_description->toPlainText() );
 
     d->m_overlay->latLonBox().setBoundaries( d->m_north->value(),
@@ -120,16 +105,16 @@ void EditGroundOverlayDialog::setGroundOverlayUpdated()
 
 void EditGroundOverlayDialog::checkFields()
 {
-    if ( d->m_name->text().isEmpty() ) {
+    if ( d->m_header->name().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No name specified" ),
                               tr( "Please specify a name for this ground overlay." ) );
-    } else if ( d->m_link->text().isEmpty() ) {
+    } else if ( d->m_header->iconLink().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No image specified" ),
                               tr( "Please specify an image file." ) );
     } else {
-        QFileInfo fileInfo( d->m_link->text() );
+        QFileInfo fileInfo( d->m_header->iconLink() );
         if ( !fileInfo.exists() ) {
             QMessageBox::warning( this,
                                   tr( "Invalid image path" ),

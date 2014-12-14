@@ -28,7 +28,6 @@
 
 #include <QPointer>
 #include <QFileDialog>
-
 namespace Marble {
 
 class EditBookmarkDialogPrivate {
@@ -52,8 +51,6 @@ public:
 
     void openNewFolderDialog();
 
-    void loadIconFile();
-
     void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
 
     void updateCoordinates();
@@ -71,18 +68,11 @@ EditBookmarkDialogPrivate::EditBookmarkDialogPrivate( EditBookmarkDialog* q_, Bo
 void EditBookmarkDialogPrivate::initialize()
 {
     m_ui.setupUi( q );
-    m_ui.m_longitude->setDimension( Longitude );
-    m_ui.m_latitude->setDimension( Latitude );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    m_ui.position_lbl->setVisible( !smallScreen );
-    m_ui.m_latitude->setVisible( !smallScreen );
-    m_ui.m_longitude->setVisible( !smallScreen );
-    m_ui.m_iconLink->setText( MarbleDirs::path( "bitmaps/bookmark.png" ));
-    m_ui.m_browseIconButton->setIcon( QIcon(MarbleDirs::path( "bitmaps/bookmark.png" )) );
+    m_ui.m_header->setPositionVisible(!smallScreen);
+    m_ui.m_header->setIconLink( MarbleDirs::path( "bitmaps/bookmark.png" ) );
     QObject::connect( m_ui.m_newFolderButton, SIGNAL(clicked()), q, SLOT(openNewFolderDialog()) );
-    QObject::connect( m_ui.m_browseIconButton, SIGNAL(clicked()), q, SLOT(loadIconFile()) );
-    QObject::connect( m_ui.m_longitude, SIGNAL(valueChanged(qreal)), q, SLOT(updateCoordinates()) );
-    QObject::connect( m_ui.m_latitude, SIGNAL(valueChanged(qreal)), q, SLOT(updateCoordinates()) );
+    QObject::connect( m_ui.m_header, SIGNAL(valueChanged()), q, SLOT(updateCoordinates()) );
 
     m_ui.m_folders->clear();
     initComboBox( m_bookmarkManager->document() );
@@ -121,13 +111,12 @@ void EditBookmarkDialog::setCoordinates( const GeoDataCoordinates &coordinates )
 {
     d->m_bookmarkCoordinates = coordinates;
 
-    if ( d->m_ui.m_name->text().isEmpty() ) {
-        d->m_ui.m_name->setText( coordinates.toString() );
-        d->m_ui.m_name->selectAll();
+    if ( d->m_ui.m_header->name().isEmpty() ) {
+        d->m_ui.m_header->setName( coordinates.toString() );
     }
 
-    d->m_ui.m_longitude->setValue( coordinates.longitude(GeoDataCoordinates::Degree) );
-    d->m_ui.m_latitude->setValue( coordinates.latitude(GeoDataCoordinates::Degree) );
+    d->m_ui.m_header->setLongitude( coordinates.longitude(GeoDataCoordinates::Degree) );
+    d->m_ui.m_header->setLatitude( coordinates.latitude(GeoDataCoordinates::Degree) );
 }
 
 void EditBookmarkDialog::setRange( qreal range ) {
@@ -136,7 +125,8 @@ void EditBookmarkDialog::setRange( qreal range ) {
 
 void EditBookmarkDialog::setName( const QString &text )
 {
-    d->m_ui.m_name->setText( text );
+    d->m_ui.m_header->setName( text );
+    d->m_ui.m_header->selectAll();
 }
 
 void EditBookmarkDialog::setDescription( const QString &text )
@@ -157,8 +147,7 @@ void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
         (defaultAngleUnit == DecimalDegree) ? GeoDataCoordinates::Decimal :
         (defaultAngleUnit == DMSDegree) ?     GeoDataCoordinates::DMS :
         /* else, UTM */                       GeoDataCoordinates::DMS;
-    d->m_ui.m_longitude->setNotation( notation );
-    d->m_ui.m_latitude->setNotation( notation );
+    d->m_ui.m_header->setNotation(notation);
 
     d->m_manager = new ReverseGeocodingRunnerManager( d->m_widget->model(), this );
     QObject::connect( d->m_manager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
@@ -205,8 +194,8 @@ void EditBookmarkDialogPrivate::retrieveGeocodeResult( const GeoDataCoordinates 
         bookmarkName = placemark.address();
     }
 
-    m_ui.m_name->setText( bookmarkName );
-    m_ui.m_name->selectAll();
+    m_ui.m_header->setName( bookmarkName );
+    m_ui.m_header->selectAll();
 }
 
 QString EditBookmarkDialogPrivate::append( const QString &bookmark, const QString &text)
@@ -235,24 +224,10 @@ void EditBookmarkDialogPrivate::openNewFolderDialog()
     delete dialog;
 }
 
-void EditBookmarkDialogPrivate::loadIconFile()
-{
-    const QString filename = QFileDialog::getOpenFileName( q,
-                                                           QObject::tr( "Open Icon File" ),
-                                                           QString(),
-                                                           QObject::tr( "All Supported Files (*.png)" ) );
-    if ( filename.isNull() ) {
-        return;
-    }
-
-    m_ui.m_iconLink->setText( filename );
-    m_ui.m_browseIconButton->setIcon( QIcon(filename) );
-}
-
 void EditBookmarkDialogPrivate::updateCoordinates()
 {
-    m_bookmarkCoordinates.setLongitude( m_ui.m_longitude->value(), GeoDataCoordinates::Degree );
-    m_bookmarkCoordinates.setLatitude( m_ui.m_latitude->value(), GeoDataCoordinates::Degree );
+    m_bookmarkCoordinates.setLongitude( m_ui.m_header->longitude(), GeoDataCoordinates::Degree );
+    m_bookmarkCoordinates.setLatitude( m_ui.m_header->latitude(), GeoDataCoordinates::Degree );
 }
 
 GeoDataPlacemark EditBookmarkDialog::bookmark() const
@@ -285,7 +260,7 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
 
 QString EditBookmarkDialog::name() const
 {
-    return d->m_ui.m_name->text();
+    return d->m_ui.m_header->name();
 }
 
 GeoDataFolder *EditBookmarkDialog::folder() const
