@@ -47,11 +47,6 @@ public slots:
     void updateDialogFields();
 
 private slots:
-    /**
-     * @brief loadIconFile deals with showing the file dialog and making sure only
-     * supported icon files are loaded.
-     */
-    void loadIconFile();
 
     /**
      * @brief checkFields shows warnings if there are important fields which don't hold

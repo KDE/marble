@@ -101,7 +101,6 @@ p, li { white-space: pre-wrap; }
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>m_latitude</tabstop>
   <tabstop>m_description</tabstop>
   <tabstop>m_folders</tabstop>
  </tabstops>
