@@ -212,10 +212,10 @@ class WeatherDataPrivate
                 string += " K";
                 break;
             case WeatherData::Celsius:
-                string += " \xb0 C";
+                string += QString::fromUtf8("°C");
                 break;
             case WeatherData::Fahrenheit:
-                string += " \xb0 F";
+                string += QString::fromUtf8("°F");
                 break;
         }
         return string;

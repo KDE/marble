@@ -60,14 +60,14 @@ p.gray {
 p {
     color: black;
     font-size: 12px;
-    margin-top: 20px;
+    margin-top: 5px;
     font: 11px/24px Tahoma, Arial, Helvetica, sans-serif;
 }
 
 hr {
     margin-left: 0px;
     width: 400px;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 
 a { color: #2c72c7 }

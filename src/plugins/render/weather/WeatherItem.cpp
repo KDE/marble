@@ -503,7 +503,14 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
     QString html = templateHtml;
     QLocale locale = QLocale::system();
     html.replace("%city_name%", stationName());
-    html.replace("%weather_situation%", "file://"+d->m_currentWeather.iconSource());
+
+    if (!d->m_currentWeather.iconSource().isEmpty()) {
+        html.replace("%weather_situation%",
+                     "<img src=\"file://"+d->m_currentWeather.iconSource()+"\" />");
+    } else {
+        html.replace("%weather_situation%", "");
+    }
+
     html.replace("%current_temp%", d->temperatureString());
     html.replace("%current_condition%", d->m_currentWeather.conditionString());
     html.replace("%wind_direction%", d->m_currentWeather.windDirectionString());
