@@ -50,9 +50,6 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *
 {
     Q_UNUSED( painter );
     m_viewport = viewport;
-    painter->drawImage( placemark()->coordinate(), hasFocus() ?
-                                                   QImage( MarbleDirs::path("bitmaps/redflag_32.png") ) :
-                                                   QImage( MarbleDirs::path("bitmaps/redflag_22.png") ) );
 
     qreal x, y;
     viewport->currentProjection()->screenCoordinates( placemark()->coordinate(), viewport, x, y );
