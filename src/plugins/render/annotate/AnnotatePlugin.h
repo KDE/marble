@@ -84,7 +84,6 @@ public:
     virtual QString runtimeTrace() const;
 
     virtual const QList<QActionGroup*> *actionGroups() const;
-    virtual const QList<QActionGroup*> *toolbarActionGroups() const;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos, GeoSceneLayer *layer = 0 );
@@ -182,7 +181,6 @@ private:
     QMenu *m_polylineRmbMenu;
 
     QList<QActionGroup*> m_actions;
-    QList<QActionGroup*> m_toolbarActions;
     QSortFilterProxyModel m_groundOverlayModel;
     QMap<GeoDataGroundOverlay*, SceneGraphicsItem*> m_groundOverlayFrames;
 

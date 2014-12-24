@@ -743,7 +743,7 @@ void MainWindow::createPluginMenus()
 
         // menus
         const QList<QActionGroup*> *tmp_actionGroups = (*i)->actionGroups();
-        if( (*i)->enabled() && tmp_actionGroups ) {
+        if( (*i)->enabled() && tmp_actionGroups && (*i)->nameId() != "annotation" ) {
            foreach( QActionGroup *ag, *tmp_actionGroups ) {
                if( !ag->actions().isEmpty() ) {
                    m_pluginMenus.append( m_viewMenu->addSeparator() );

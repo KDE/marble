@@ -132,6 +132,8 @@ private Q_SLOTS:
     void showSearch();
     // Bookmark sync slots
     void showConflictDialog( MergeItem *item );
+    void updateAnnotationDockVisibility();
+    void updateAnnotationDock();
     
  private:
     /**
@@ -162,6 +164,8 @@ private Q_SLOTS:
     QList<bool>      m_panelVisibility;
     bool             m_isPanelVisible;
     TourWidget      *m_tourWidget;
+    QDockWidget     *m_annotationDock;
+    RenderPlugin    *m_annotationPlugin;
 };
 
 }

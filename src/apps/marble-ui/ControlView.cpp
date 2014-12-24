@@ -34,6 +34,7 @@
 #include <QDockWidget>
 #include <QShortcut>
 #include <QMenu>
+#include <QToolBar>
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -65,6 +66,7 @@
 #include "cloudsync/RouteSyncManager.h"
 #include "cloudsync/ConflictDialog.h"
 #include "cloudsync/MergeItem.h"
+#include "RenderPlugin.h"
 
 namespace Marble
 {
@@ -77,7 +79,9 @@ ControlView::ControlView( QWidget *parent )
      m_conflictDialog( 0 ),
      m_togglePanelVisibilityAction( 0 ),
      m_isPanelVisible( true ),
-     m_tourWidget( 0 )
+     m_tourWidget( 0 ),
+     m_annotationDock( 0 ),
+     m_annotationPlugin( 0 )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
 
@@ -618,12 +622,37 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     mainWindow->tabifyDockWidget( mapViewDock, legendDock );
     mapViewDock->raise();
 
+    m_annotationDock = new QDockWidget( QObject::tr( "Edit Maps" ) );
+    m_annotationDock->setObjectName( "annotateDock" );
+    m_annotationDock->hide();
+    m_annotationDock->toggleViewAction()->setVisible( false );
+
+    QList<RenderPlugin *> renderPluginList = marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
+
+    for (; i != end; ++i ) {
+        if( (*i)->nameId() == "annotation" ) {
+            m_annotationPlugin = *i;
+            QObject::connect(m_annotationPlugin, SIGNAL(enabledChanged(bool)),
+                             this, SLOT(updateAnnotationDockVisibility()));
+            QObject::connect(m_annotationPlugin, SIGNAL(visibilityChanged(bool,QString)),
+                             this, SLOT(updateAnnotationDockVisibility()));
+            QObject::connect(m_annotationPlugin, SIGNAL(actionGroupsChanged()),
+                             this, SLOT(updateAnnotationDock()));
+            updateAnnotationDock();
+            updateAnnotationDockVisibility();
+            mainWindow->addDockWidget( Qt::LeftDockWidgetArea, m_annotationDock );
+        }
+    }
+
     QList<QAction*> panelActions;
     panelActions << routingDock->toggleViewAction();
     panelActions << locationDock->toggleViewAction();
     panelActions << m_searchDock->toggleViewAction();
     panelActions << mapViewDock->toggleViewAction();
     panelActions << fileViewDock->toggleViewAction();
+    panelActions << m_annotationDock->toggleViewAction();
     panelActions << legendDock->toggleViewAction();
     panelActions << tourDock->toggleViewAction();
 
@@ -633,6 +662,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     m_panelActions << m_searchDock->toggleViewAction();
     m_panelActions << mapViewDock->toggleViewAction();
     m_panelActions << fileViewDock->toggleViewAction();
+    m_panelActions << m_annotationDock->toggleViewAction();
     m_panelActions << legendDock->toggleViewAction();
     m_panelActions << tourDock->toggleViewAction();
     foreach( QAction* action, m_panelActions ) {
@@ -710,6 +740,47 @@ void ControlView::showConflictDialog( MergeItem *item )
     Q_ASSERT( m_conflictDialog );
     m_conflictDialog->setMergeItem( item );
     m_conflictDialog->open();
+}
+
+void ControlView::updateAnnotationDockVisibility()
+{
+    if( m_annotationPlugin != 0 && m_annotationDock != 0 ) {
+        if( m_annotationPlugin->visible() && m_annotationPlugin->enabled() ) {
+            m_annotationDock->toggleViewAction()->setVisible( true );
+        } else {
+            m_annotationDock->setVisible( false );
+            m_annotationDock->toggleViewAction()->setVisible( false );
+        }
+    }
+}
+
+void ControlView::updateAnnotationDock()
+{
+    const QList<QActionGroup*> *tmp_actionGroups = m_annotationPlugin->actionGroups();
+    QWidget *widget = new QWidget( m_annotationDock );
+    QVBoxLayout *layout = new QVBoxLayout;
+    QToolBar *firstToolbar = new QToolBar( widget );
+    QToolBar *secondToolbar = new QToolBar( widget );
+    QSpacerItem *spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
+    bool firstToolbarFilled = false;
+    if( !tmp_actionGroups->isEmpty() ) {
+        foreach( QAction *action, tmp_actionGroups->first()->actions() ) {
+            if( action->objectName() == "toolbarSeparator" ) {
+                firstToolbarFilled = true;
+            } else {
+                if( !firstToolbarFilled ) {
+                    firstToolbar->addAction( action );
+                } else {
+                    secondToolbar->addAction( action );
+                }
+            }
+        }
+    }
+    layout->addWidget( firstToolbar );
+    layout->addWidget( secondToolbar );
+    layout->addSpacerItem( spacer );
+    widget->setLayout( layout );
+    m_annotationDock->setWidget( widget );
 }
 
 void ControlView::togglePanelVisibility()

@@ -83,7 +83,7 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     // Plugin is enabled by default
     setEnabled( true );
     // Plugin is not visible by default
-    setVisible( false );
+    setVisible( true );
     connect( this, SIGNAL(visibilityChanged(bool, QString)), SLOT(enableModel(bool)) );
 
     m_annotationDocument->setName( tr("Annotations") );
@@ -207,11 +207,6 @@ QString AnnotatePlugin::runtimeTrace() const
 const QList<QActionGroup*> *AnnotatePlugin::actionGroups() const
 {
     return &m_actions;
-}
-
-const QList<QActionGroup*> *AnnotatePlugin::toolbarActionGroups() const
-{
-    return &m_toolbarActions;
 }
 
 bool AnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
@@ -800,7 +795,6 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
 {
     qDeleteAll( m_actions );
     m_actions.clear();
-    m_toolbarActions.clear();
 
     if ( !widget ) {
         return;
@@ -877,6 +871,7 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     sep1->setSeparator( true );
     QAction *sep2 = new QAction( this );
     sep2->setSeparator( true );
+    sep2->setObjectName( "toolbarSeparator" );
     QAction *sep3 = new QAction( this );
     sep3->setSeparator( true );
     QAction *sep4 = new QAction( this );
@@ -900,7 +895,6 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     group->addAction( sep4 );
 
     m_actions.append( group );
-    m_toolbarActions.append( group );
 
     emit actionGroupsChanged();
 }
