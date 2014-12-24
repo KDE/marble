@@ -53,6 +53,8 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog
 
     qreal range() const;
 
+    QString iconLink() const;
+
     void setName( const QString &name );
     void setReverseGeocodeName();
 
@@ -63,6 +65,8 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog
     void setDescription( const QString &text );
 
     void setFolderName( const QString &name );
+
+    void setIconLink( const QString &iconLink );
 
 
  private:

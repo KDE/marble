@@ -17,6 +17,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
+#include "GeoDataStyle.h"
 #include "GeoDataFolder.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataExtendedData.h"
@@ -139,6 +140,11 @@ void EditBookmarkDialog::setFolderName( const QString &name )
     d->setFolderName( name );
 }
 
+void EditBookmarkDialog::setIconLink(const QString &iconLink)
+{
+    d->m_ui.m_header->setIconLink( iconLink );
+}
+
 void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
 {
     d->m_widget = widget;
@@ -236,6 +242,10 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
     GeoDataPlacemark bookmark;
     bookmark.setName( name() );
     bookmark.setDescription( description() );
+    GeoDataStyle *newStyle = new GeoDataStyle( *bookmark.style() );
+    newStyle->iconStyle().setIcon( QImage() );
+    newStyle->iconStyle().setIconPath( iconLink() );
+    bookmark.setStyle( newStyle );
     //allow for HTML in the description
     bookmark.setDescriptionCDATA( true );
     bookmark.setCoordinate( coordinates() );
@@ -280,6 +290,11 @@ GeoDataCoordinates EditBookmarkDialog::coordinates() const
 
 qreal EditBookmarkDialog::range() const {
     return d->m_range;
+}
+
+QString EditBookmarkDialog::iconLink() const
+{
+    return d->m_ui.m_header->iconLink();
 }
 
 }

@@ -21,6 +21,7 @@
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
+#include "GeoDataStyle.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
@@ -213,10 +214,15 @@ void BookmarkManagerDialogPrivate::editBookmark()
         dialog->setCoordinates( bookmark->coordinate() );
         dialog->setDescription( bookmark->description() );
         dialog->setFolderName( folder->name() );
+        dialog->setIconLink( bookmark->style()->iconStyle().iconPath() );
         if ( dialog->exec() == QDialog::Accepted ) {
             bookmark->setName( dialog->name() );
             bookmark->setDescription( dialog->description() );
             bookmark->setCoordinate( dialog->coordinates() );
+            GeoDataStyle *newStyle = new GeoDataStyle( *bookmark->style() );
+            newStyle->iconStyle().setIcon( QImage() );
+            newStyle->iconStyle().setIconPath( dialog->iconLink() );
+            bookmark->setStyle( newStyle );
             if ( bookmark->lookAt() ) {
                 bookmark->lookAt()->setCoordinates( dialog->coordinates() );
                 bookmark->lookAt()->setRange( dialog->range() );
