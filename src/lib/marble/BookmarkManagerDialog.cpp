@@ -59,9 +59,9 @@ class BookmarkManagerDialogPrivate {
 public:
     BookmarkManagerDialog *m_parent;
 
-    BookmarkManager *m_manager;
+    BookmarkManager *const m_manager;
 
-    GeoDataTreeModel* m_treeModel;
+    GeoDataTreeModel *const m_treeModel;
 
     QSortFilterProxyModel *m_folderFilterModel;
 
@@ -69,7 +69,7 @@ public:
 
     BranchFilterProxyModel *m_branchFilterModel;
 
-    BookmarkManagerDialogPrivate( BookmarkManagerDialog* parent, BookmarkManager* manager );
+    BookmarkManagerDialogPrivate( BookmarkManagerDialog* parent, MarbleModel *model );
 
     void initializeFoldersView( GeoDataTreeModel* treeModel );
 
@@ -99,8 +99,12 @@ public:
     void selectFolder( const QString &name = QString(), const QModelIndex &index = QModelIndex() );
 };
 
-BookmarkManagerDialogPrivate::BookmarkManagerDialogPrivate( BookmarkManagerDialog* parent, BookmarkManager* manager ) :
-    m_parent( parent ), m_manager( manager ), m_treeModel( 0 ), m_folderFilterModel( 0 ), m_branchFilterModel( 0 )
+BookmarkManagerDialogPrivate::BookmarkManagerDialogPrivate( BookmarkManagerDialog* parent, MarbleModel *model ) :
+    m_parent( parent ),
+    m_manager( model->bookmarkManager() ),
+    m_treeModel( model->treeModel() ),
+    m_folderFilterModel( 0 ),
+    m_branchFilterModel( 0 )
 {
     // nothing to do
 }
@@ -369,7 +373,7 @@ void BookmarkManagerDialogPrivate::initializeBookmarksView( GeoDataTreeModel* tr
 
 BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *parent )
     : QDialog( parent ),
-      d( new BookmarkManagerDialogPrivate( this, model->bookmarkManager() ) )
+      d( new BookmarkManagerDialogPrivate( this, model ) )
 {
     setupUi( this );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -377,8 +381,6 @@ BookmarkManagerDialog::BookmarkManagerDialog( MarbleModel* model, QWidget *paren
     exportButton->setVisible( !smallScreen );
     foldersLabel->setVisible( !smallScreen );
     bookmarkLabel->setVisible( !smallScreen );
-
-    d->m_treeModel = model->treeModel();
 
     d->initializeFoldersView( d->m_treeModel );
     d->initializeBookmarksView( d->m_treeModel );
