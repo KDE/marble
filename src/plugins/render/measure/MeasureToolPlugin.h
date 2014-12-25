@@ -46,6 +46,11 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
  public:
     explicit MeasureToolPlugin( const MarbleModel *marbleModel = 0 );
 
+    enum PaintMode {
+        Polygon = 0,
+        Circular
+    };
+
     QStringList backendTypes() const;
     QString renderPolicy() const;
     QStringList renderPosition() const;
@@ -122,6 +127,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     bool m_showDistanceLabel;
     bool m_showBearingLabel;
     bool m_showBearingChangeLabel;
+    PaintMode m_paintMode;
 };
 
 }

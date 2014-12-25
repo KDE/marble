@@ -30,6 +30,7 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QCheckBox>
+#include <QtMath>
 
 namespace Marble
 {
@@ -113,7 +114,8 @@ QList<PluginAuthor> MeasureToolPlugin::pluginAuthors() const
             << PluginAuthor( "Carlos Licea", "carlos.licea@kdemail.net" )
             << PluginAuthor( "Michael Henning", "mikehenning@eclipse.net" )
             << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" )
-            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
+            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" )
+            << PluginAuthor( "Illya Kovalevskyy", "illya.kovalevskyy@gmail.com" );
 }
 
 QIcon MeasureToolPlugin::icon () const
@@ -146,6 +148,7 @@ QDialog *MeasureToolPlugin::configDialog()
     m_uiConfigWidget->m_showDistanceLabelsCheckBox->setChecked( m_showDistanceLabel );
     m_uiConfigWidget->m_showBearingLabelsCheckBox->setChecked( m_showBearingLabel );
     m_uiConfigWidget->m_showBearingLabelChangeCheckBox->setChecked( m_showBearingChangeLabel );
+    m_uiConfigWidget->m_modeCombo->setCurrentIndex( (int)m_paintMode );
 
     return m_configDialog;
 }
@@ -157,6 +160,7 @@ QHash<QString,QVariant> MeasureToolPlugin::settings() const
     settings.insert( "showDistanceLabel", m_showDistanceLabel );
     settings.insert( "showBearingLabel", m_showBearingLabel );
     settings.insert( "showBearingChangeLabel", m_showBearingChangeLabel);
+    settings.insert( "paintMode", (int)m_paintMode );
 
     return settings;
 }
@@ -168,6 +172,7 @@ void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
     m_showDistanceLabel = settings.value( "showDistanceLabel", true ).toBool();
     m_showBearingLabel = settings.value( "showBearingLabel", true ).toBool();
     m_showBearingChangeLabel = settings.value( "showBearingChangeLabel", true ).toBool();
+    m_paintMode = (PaintMode)settings.value( "paintMode", 0 ).toInt();
 }
 
 void MeasureToolPlugin::writeSettings()
@@ -175,6 +180,19 @@ void MeasureToolPlugin::writeSettings()
     m_showDistanceLabel = m_uiConfigWidget->m_showDistanceLabelsCheckBox->isChecked();
     m_showBearingLabel = m_uiConfigWidget->m_showBearingLabelsCheckBox->isChecked();
     m_showBearingChangeLabel = m_uiConfigWidget->m_showBearingLabelChangeCheckBox->isChecked();
+    m_paintMode = (PaintMode)m_uiConfigWidget->m_modeCombo->currentIndex();
+
+    if (m_paintMode == Circular) {
+        if (m_measureLineString.size() < 2) {
+            m_addMeasurePointAction->setEnabled(true);
+        } else {
+            m_addMeasurePointAction->setEnabled(false);
+            while (m_measureLineString.size() > 2)
+                m_measureLineString.remove(m_measureLineString.size()-1);
+        }
+    } else {
+        m_addMeasurePointAction->setEnabled(true);
+    }
 
     emit settingsChanged( nameId() );
     emit repaintNeeded();
@@ -308,7 +326,35 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             painter->drawText(textPosition, bearingChangedString );
        }
 
-       if ( !infoString.isEmpty() ) {
+        // Drawing ellipse around 1st point towards the 2nd
+        if ( m_paintMode == Circular ) {
+            GeoDataCoordinates currentCoordinates = m_measureLineString[segmentIndex];
+
+            GeoDataLinearRing ring;
+
+            // R - planet radius
+            // d - distance between points
+            // S - area of the painted circle
+            qreal R = marbleModel()->planet()->radius();
+            qreal d = m_measureLineString.length(1);
+            qreal S = 2 * M_PI * R*R * (1 - qCos(d));
+
+            qreal iterBearing = 0;
+            while ( iterBearing < 2 * M_PI ) {
+                ring << currentCoordinates.moveByBearing(iterBearing, d);
+                iterBearing += 0.1;
+            }
+
+            painter->setPen( Qt::NoPen );
+            painter->setBrush( QBrush ( QColor ( 127, 127, 127, 127 ) ) );
+            painter->drawPolygon(ring);
+
+            painter->setPen(Qt::white);
+            GeoDataCoordinates textPosition = ring.latLonAltBox().center();
+            painter->drawText(textPosition, tr("Circular area: %1 km^2").arg(S/1000000));
+        }
+
+        if ( !infoString.isEmpty() ) {
             QPen linePen;
 
             // have three alternating colors for the segments
@@ -330,6 +376,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         }
     }
 }
+
 void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter ) const
 {
     // Paint the marks.
@@ -445,6 +492,14 @@ void MeasureToolPlugin::setNumberOfMeasurePoints( int newNumber )
     const bool enableMeasureActions = ( newNumber > 0 );
     m_removeMeasurePointsAction->setEnabled(enableMeasureActions);
     m_removeLastMeasurePointAction->setEnabled(enableMeasureActions);
+
+    if (m_paintMode == Circular) {
+        if (newNumber >= 2) {
+            m_addMeasurePointAction->setEnabled(false);
+        } else {
+            m_addMeasurePointAction->setEnabled(true);
+        }
+    }
 }
 
 bool MeasureToolPlugin::eventFilter( QObject *object, QEvent *e )
