@@ -54,6 +54,7 @@
 #include "PolylineAnnotation.h"
 #include "EditPolylineDialog.h"
 #include "ParsingRunnerManager.h"
+#include "ViewportParams.h"
 
 
 namespace Marble
@@ -1080,6 +1081,18 @@ void AnnotatePlugin::setupOverlayRmbMenu()
 void AnnotatePlugin::addOverlay()
 {
     GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay();
+    qreal centerLongitude = m_marbleWidget->viewport()->centerLongitude()*RAD2DEG;
+    qreal centerLatitude = m_marbleWidget->viewport()->centerLatitude()*RAD2DEG;
+    GeoDataLatLonAltBox box  = m_marbleWidget->viewport()->viewLatLonAltBox();
+    qreal maxDelta = 20;
+    qreal deltaLongitude = qMin(box.width(GeoDataCoordinates::Degree), maxDelta);
+    qreal deltaLatitude = qMin(box.height(GeoDataCoordinates::Degree), maxDelta);
+    qreal north = centerLatitude + deltaLatitude/4;
+    qreal south = centerLatitude - deltaLatitude/4;
+    qreal west = centerLongitude - deltaLongitude/4;
+    qreal east = centerLongitude + deltaLongitude/4;
+    overlay->latLonBox().setBoundaries( north, south, east, west, GeoDataCoordinates::Degree );
+    overlay->setName( tr( "Untitled Ground Overlay" ) );
     QPointer<EditGroundOverlayDialog> dialog = new EditGroundOverlayDialog(
                                                                  overlay,
                                                                  m_marbleWidget->textureLayer(),
