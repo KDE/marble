@@ -63,11 +63,11 @@ public:
 
     GeoDataTreeModel *const m_treeModel;
 
-    QSortFilterProxyModel *m_folderFilterModel;
+    QSortFilterProxyModel m_folderFilterModel;
 
     QPersistentModelIndex m_selectedFolder;
 
-    BranchFilterProxyModel *m_branchFilterModel;
+    BranchFilterProxyModel m_branchFilterModel;
 
     BookmarkManagerDialogPrivate( BookmarkManagerDialog* parent, MarbleModel *model );
 
@@ -103,8 +103,8 @@ BookmarkManagerDialogPrivate::BookmarkManagerDialogPrivate( BookmarkManagerDialo
     m_parent( parent ),
     m_manager( model->bookmarkManager() ),
     m_treeModel( model->treeModel() ),
-    m_folderFilterModel( 0 ),
-    m_branchFilterModel( 0 )
+    m_folderFilterModel(),
+    m_branchFilterModel()
 {
     // nothing to do
 }
@@ -117,7 +117,7 @@ void BookmarkManagerDialogPrivate::handleFolderSelection( const QModelIndex &ind
         return;
     }
     Q_ASSERT( index.isValid() );
-    Q_ASSERT( index.model() == m_folderFilterModel );
+    Q_ASSERT( index.model() == &m_folderFilterModel );
     if( m_selectedFolder.isValid() &&
         m_parent->foldersTreeView->selectionModel()->selectedIndexes().contains( m_selectedFolder ) ) {
         m_selectedFolder = QModelIndex();
@@ -125,9 +125,9 @@ void BookmarkManagerDialogPrivate::handleFolderSelection( const QModelIndex &ind
         selectFolder();
     } else {
         m_selectedFolder = index;
-        m_branchFilterModel->setBranchIndex( m_treeModel, folderTreeIndex( index ) );
+        m_branchFilterModel.setBranchIndex( m_treeModel, folderTreeIndex( index ) );
         m_parent->bookmarksListView->setRootIndex(
-                    m_branchFilterModel->mapFromSource( folderTreeIndex( index ) ) );
+                    m_branchFilterModel.mapFromSource( folderTreeIndex( index ) ) );
         m_parent->bookmarksListView->selectionModel()->clear();
     }
 }
@@ -191,7 +191,7 @@ void BookmarkManagerDialogPrivate::editBookmark()
 {
     QModelIndexList selection = m_parent->bookmarksListView->selectionModel()->selectedIndexes();
     if ( selection.size() == 1 ) {
-        QModelIndex index = m_branchFilterModel->mapToSource( selection.first() );
+        QModelIndex index = m_branchFilterModel.mapToSource( selection.first() );
         Q_ASSERT( index.isValid() );
         GeoDataObject* object = qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole ) );
         Q_ASSERT( object );
@@ -252,7 +252,7 @@ void BookmarkManagerDialogPrivate::deleteBookmark()
 {
     QModelIndexList selection = m_parent->bookmarksListView->selectionModel()->selectedIndexes();
     if ( selection.size() == 1 ) {
-        QModelIndex bookmarkIndex = m_branchFilterModel->mapToSource( selection.first() );
+        QModelIndex bookmarkIndex = m_branchFilterModel.mapToSource( selection.first() );
         GeoDataFolder* folder = dynamic_cast<GeoDataFolder*>( selectedFolder() );
         if ( folder ) {
             GeoDataPlacemark* bookmark = dynamic_cast<GeoDataPlacemark*>( folder->child( bookmarkIndex.row() ) );
@@ -272,27 +272,27 @@ void BookmarkManagerDialogPrivate::discardChanges()
 void BookmarkManagerDialogPrivate::selectFolder( const QString &name, const QModelIndex &parent )
 {
     if ( parent.isValid() ) {
-        Q_ASSERT( parent.model() == m_folderFilterModel );
+        Q_ASSERT( parent.model() == &m_folderFilterModel );
     }
 
     if ( name.isEmpty() ) {
         QModelIndex documentTreeIndex = m_treeModel->index( m_parent->bookmarkDocument() );
-        QModelIndex folderFilterIndex = m_folderFilterModel->mapFromSource( documentTreeIndex );
+        QModelIndex folderFilterIndex = m_folderFilterModel.mapFromSource( documentTreeIndex );
         Q_ASSERT( folderFilterIndex.isValid() );
         m_parent->foldersTreeView->setCurrentIndex( folderFilterIndex );
         handleFolderSelection( folderFilterIndex );
         return;
     }
 
-    for ( int i=0; i < m_folderFilterModel->rowCount( parent ); ++i ) {
-        QModelIndex childIndex = m_folderFilterModel->index( i, 0, parent );
+    for ( int i=0; i < m_folderFilterModel.rowCount( parent ); ++i ) {
+        QModelIndex childIndex = m_folderFilterModel.index( i, 0, parent );
         if ( childIndex.data().toString() == name
             && m_selectedFolder != childIndex ) {
             m_parent->foldersTreeView->setCurrentIndex( childIndex );
             handleFolderSelection( childIndex );
             return;
         }
-        if ( m_folderFilterModel->hasChildren( childIndex ) ) {
+        if ( m_folderFilterModel.hasChildren( childIndex ) ) {
             selectFolder( name, childIndex );
         }
     }
@@ -301,8 +301,8 @@ void BookmarkManagerDialogPrivate::selectFolder( const QString &name, const QMod
 QModelIndex BookmarkManagerDialogPrivate::folderTreeIndex( const QModelIndex &index ) const
 {
     Q_ASSERT( index.isValid() );
-    Q_ASSERT( index.model() == m_folderFilterModel );
-    QModelIndex const treeModelIndex = m_folderFilterModel->mapToSource( index );
+    Q_ASSERT( index.model() == &m_folderFilterModel );
+    QModelIndex const treeModelIndex = m_folderFilterModel.mapToSource( index );
     Q_ASSERT( treeModelIndex.isValid() );
     Q_ASSERT( treeModelIndex.model() == m_treeModel );
     return treeModelIndex;
@@ -323,21 +323,20 @@ GeoDataContainer *BookmarkManagerDialogPrivate::selectedFolder()
 
 void BookmarkManagerDialogPrivate::initializeFoldersView( GeoDataTreeModel* treeModel )
 {
-    m_folderFilterModel = new QSortFilterProxyModel( m_parent );
-    m_folderFilterModel->setFilterKeyColumn( 1 );
+    m_folderFilterModel.setFilterKeyColumn( 1 );
     QString regexp = GeoDataTypes::GeoDataFolderType;
     regexp += '|';
     regexp += GeoDataTypes::GeoDataDocumentType;
-    m_folderFilterModel->setFilterRegExp( regexp );
-    m_folderFilterModel->setSourceModel( treeModel );
+    m_folderFilterModel.setFilterRegExp( regexp );
+    m_folderFilterModel.setSourceModel( treeModel );
 
-    m_parent->foldersTreeView->setModel( m_folderFilterModel );
+    m_parent->foldersTreeView->setModel( &m_folderFilterModel );
     m_parent->foldersTreeView->setEditTriggers( QAbstractItemView::NoEditTriggers );
     m_parent->foldersTreeView->setHeaderHidden( true );
     for ( int i=1; i<m_treeModel->columnCount(); ++i ) {
         m_parent->foldersTreeView->hideColumn( i );
     }
-    m_parent->foldersTreeView->setRootIndex( m_folderFilterModel->mapFromSource(
+    m_parent->foldersTreeView->setRootIndex( m_folderFilterModel.mapFromSource(
                                                  m_treeModel->index( m_parent->bookmarkDocument() )));
 
     m_parent->connect( m_parent->foldersTreeView,
@@ -356,10 +355,9 @@ void BookmarkManagerDialogPrivate::initializeFoldersView( GeoDataTreeModel* tree
 
 void BookmarkManagerDialogPrivate::initializeBookmarksView( GeoDataTreeModel* treeModel )
 {
-    m_branchFilterModel = new BranchFilterProxyModel( m_parent );
-    m_branchFilterModel->setSourceModel( treeModel );
+    m_branchFilterModel.setSourceModel( treeModel );
 
-    m_parent->bookmarksListView->setModel( m_branchFilterModel );
+    m_parent->bookmarksListView->setModel( &m_branchFilterModel );
     m_parent->bookmarksListView->setEditTriggers( QAbstractItemView::NoEditTriggers );
 
     m_parent->connect( m_parent->bookmarksListView->selectionModel(),
