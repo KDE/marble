@@ -30,7 +30,7 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QCheckBox>
-#include <QtMath>
+#include <qmath.h>
 
 namespace Marble
 {
