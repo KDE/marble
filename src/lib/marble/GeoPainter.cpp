@@ -265,7 +265,7 @@ QRegion GeoPainter::regionFromPoint ( const GeoDataPoint & point,
 
 
 void GeoPainter::drawText ( const GeoDataCoordinates & position,
-                            const QString & text, qreal xOffset, qreal yOffset )
+                            const QString & text, int xOffset, int yOffset )
 {
     // Of course in theory we could have the "isGeoProjected" parameter used
     // for drawText as well. However this would require us to convert all
