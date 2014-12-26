@@ -42,6 +42,7 @@ WaitEditWidget::WaitEditWidget( const QModelIndex &index, QWidget *parent ) :
 
     layout->addWidget( m_spinBox );
     m_spinBox->setValue( waitElement()->duration() );
+    m_spinBox->setSuffix( tr(" s", "seconds") );
 
     QToolButton *button = new QToolButton;
     button->setIcon( QIcon( ":/marble/document-save.png" ) );

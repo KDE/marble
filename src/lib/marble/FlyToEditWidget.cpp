@@ -44,6 +44,7 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
     m_waitSpin = new QDoubleSpinBox;
     layout->addWidget(m_waitSpin);
     m_waitSpin->setValue(flyToElement()->duration());
+    m_waitSpin->setSuffix( tr(" s", "seconds") );
 
     QToolButton* flyToPinCenter = new QToolButton;
     flyToPinCenter->setIcon(QIcon(":/marble/places.png"));
