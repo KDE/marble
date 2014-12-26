@@ -265,7 +265,7 @@ QRegion GeoPainter::regionFromPoint ( const GeoDataPoint & point,
 
 
 void GeoPainter::drawText ( const GeoDataCoordinates & position,
-                            const QString & text )
+                            const QString & text, qreal xOffset, qreal yOffset )
 {
     // Of course in theory we could have the "isGeoProjected" parameter used
     // for drawText as well. However this would require us to convert all
@@ -283,7 +283,7 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position,
     if ( visible ) {
         // Draw all the x-repeat-instances of the point on the screen
         for( int it = 0; it < pointRepeatNum; ++it ) {
-            QPainter::drawText( d->m_x[it], y, text );
+            QPainter::drawText( d->m_x[it] + xOffset, y + yOffset, text );
         }
     }
 }

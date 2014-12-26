@@ -221,7 +221,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     font property. The text rendering is performed in screen coordinates and is
     not subject to the current projection.
 */
-    void drawText ( const GeoDataCoordinates & position, const QString & text );
+    void drawText ( const GeoDataCoordinates & position, const QString & text,
+                    int xOffset = 0, int yOffset = 0 );
 
     
 /*!
