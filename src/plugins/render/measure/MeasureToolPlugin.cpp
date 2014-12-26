@@ -14,7 +14,7 @@
 //
 
 #include "MeasureToolPlugin.h"
-#include "ui_MeasureConfigWidget.h"
+#include "MeasureConfigDialog.h"
 
 #include "GeoPainter.h"
 #include "GeoDataLinearRing.h"
@@ -25,6 +25,7 @@
 #include "ViewportParams.h"
 #include "Planet.h"
 
+#include <QDialog>
 #include <QColor>
 #include <QPen>
 #include <QPixmap>
@@ -52,7 +53,6 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
       m_separator( 0 ),
       m_marbleWidget( 0 ),
       m_configDialog( 0 ),
-      m_uiConfigWidget( 0 ),
       m_showDistanceLabel( true ),
       m_showBearingLabel( true ),
       m_showBearingChangeLabel( true )
@@ -135,20 +135,20 @@ bool MeasureToolPlugin::isInitialized () const
 QDialog *MeasureToolPlugin::configDialog()
 {
     if ( !m_configDialog ) {
-        m_configDialog = new QDialog();
-        m_uiConfigWidget = new Ui::MeasureConfigWidget;
-        m_uiConfigWidget->setupUi( m_configDialog );
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()),
-                SLOT(writeSettings()) );
-        QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL(clicked()),
-                 this,        SLOT(writeSettings()) );
+        m_configDialog = new MeasureConfigDialog(m_configDialog);
+        connect( m_configDialog, SIGNAL(accepted()),
+                 SLOT(writeSettings()) );
+        connect( m_configDialog, SIGNAL(applied()),
+                 this, SLOT(writeSettings()) );
     }
 
-    m_uiConfigWidget->m_showDistanceLabelsCheckBox->setChecked( m_showDistanceLabel );
-    m_uiConfigWidget->m_showBearingLabelsCheckBox->setChecked( m_showBearingLabel );
-    m_uiConfigWidget->m_showBearingLabelChangeCheckBox->setChecked( m_showBearingChangeLabel );
-    m_uiConfigWidget->m_modeCombo->setCurrentIndex( (int)m_paintMode );
+    m_configDialog->setShowDistanceLabels( m_showDistanceLabel );
+    m_configDialog->setShowBearingLabel( m_showBearingLabel );
+    m_configDialog->setShowBearingLabelChange( m_showBearingChangeLabel );
+    m_configDialog->setShowPolygonArea( m_showPolygonArea );
+    m_configDialog->setShowCircularArea( m_showCircularArea );
+    m_configDialog->setShowRadius( m_showRadius );
+    m_configDialog->setPaintMode( m_paintMode );
 
     return m_configDialog;
 }
@@ -159,7 +159,10 @@ QHash<QString,QVariant> MeasureToolPlugin::settings() const
 
     settings.insert( "showDistanceLabel", m_showDistanceLabel );
     settings.insert( "showBearingLabel", m_showBearingLabel );
-    settings.insert( "showBearingChangeLabel", m_showBearingChangeLabel);
+    settings.insert( "showBearingChangeLabel", m_showBearingChangeLabel );
+    settings.insert( "showPolygonArea", m_showPolygonArea );
+    settings.insert( "showCircularArea", m_showCircularArea );
+    settings.insert( "showRadius", m_showRadius );
     settings.insert( "paintMode", (int)m_paintMode );
 
     return settings;
@@ -172,15 +175,21 @@ void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
     m_showDistanceLabel = settings.value( "showDistanceLabel", true ).toBool();
     m_showBearingLabel = settings.value( "showBearingLabel", true ).toBool();
     m_showBearingChangeLabel = settings.value( "showBearingChangeLabel", true ).toBool();
+    m_showPolygonArea = settings.value( "showPolygonArea", false ).toBool();
+    m_showCircularArea = settings.value( "showCircularArea", true ).toBool();
+    m_showRadius = settings.value( "showRadius", true ).toBool();
     m_paintMode = (PaintMode)settings.value( "paintMode", 0 ).toInt();
 }
 
 void MeasureToolPlugin::writeSettings()
 {
-    m_showDistanceLabel = m_uiConfigWidget->m_showDistanceLabelsCheckBox->isChecked();
-    m_showBearingLabel = m_uiConfigWidget->m_showBearingLabelsCheckBox->isChecked();
-    m_showBearingChangeLabel = m_uiConfigWidget->m_showBearingLabelChangeCheckBox->isChecked();
-    m_paintMode = (PaintMode)m_uiConfigWidget->m_modeCombo->currentIndex();
+    m_showDistanceLabel = m_configDialog->showDistanceLabels();
+    m_showBearingLabel = m_configDialog->showBearingLabel();
+    m_showBearingChangeLabel = m_configDialog->showBearingLabelChange();
+    m_showPolygonArea = m_configDialog->showPolygonArea();
+    m_showCircularArea = m_configDialog->showCircularArea();
+    m_showRadius = m_configDialog->showRadius();
+    m_paintMode = (PaintMode)m_configDialog->paintMode();
 
     if (m_paintMode == Circular) {
         if (m_measureLineString.size() < 2) {
@@ -251,7 +260,8 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
 
         QString infoString;
 
-        if ( m_showDistanceLabel ) {
+        if ( (m_paintMode == Polygon && m_showDistanceLabel)
+             || (m_paintMode == Circular && m_showRadius) ) {
 
             const MarbleLocale::MeasurementSystem measurementSystem =
                     MarbleGlobal::getInstance()->locale()->measurementSystem();
@@ -272,7 +282,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             }
         }
 
-        if ( m_showBearingLabel ) {
+        if ( m_showBearingLabel && m_paintMode != Circular ) {
             GeoDataCoordinates coordinates = segment.first();
             qreal bearing = coordinates.bearing( segment.last(), GeoDataCoordinates::Degree );
 
@@ -349,9 +359,11 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             painter->setBrush( QBrush ( QColor ( 127, 127, 127, 127 ) ) );
             painter->drawPolygon(ring);
 
-            painter->setPen(Qt::white);
-            GeoDataCoordinates textPosition = ring.latLonAltBox().center();
-            painter->drawText(textPosition, tr("Circular area: %1 km^2").arg(S/1000000));
+            if ( m_showCircularArea ) {
+                painter->setPen(Qt::white);
+                GeoDataCoordinates textPosition = ring.latLonAltBox().center();
+                painter->drawText(textPosition, tr("Circular area: %1 km^2").arg(S/1000000));
+            }
         }
 
         if ( !infoString.isEmpty() ) {

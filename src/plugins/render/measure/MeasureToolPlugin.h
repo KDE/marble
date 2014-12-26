@@ -28,13 +28,10 @@
 #include <QPen>
 #include <QAction>
 
-namespace Ui {
-    class MeasureConfigWidget;
-}
-
 namespace Marble
 {
 
+class MeasureConfigDialog;
 class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
@@ -122,11 +119,13 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
 
     MarbleWidget* m_marbleWidget;
 
-    QDialog * m_configDialog;
-    Ui::MeasureConfigWidget * m_uiConfigWidget;
+    MeasureConfigDialog *m_configDialog;
     bool m_showDistanceLabel;
     bool m_showBearingLabel;
     bool m_showBearingChangeLabel;
+    bool m_showPolygonArea;
+    bool m_showCircularArea;
+    bool m_showRadius;
     PaintMode m_paintMode;
 };
 
