@@ -55,7 +55,10 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
       m_configDialog( 0 ),
       m_showDistanceLabel( true ),
       m_showBearingLabel( true ),
-      m_showBearingChangeLabel( true )
+      m_showBearingChangeLabel( true ),
+      m_showPolygonArea(false),
+      m_showRadius(true),
+      m_showCircularArea(true)
 {
     m_pen.setWidthF( 2.0 );
 }
