@@ -362,7 +362,38 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             if ( m_showCircularArea ) {
                 painter->setPen(Qt::white);
                 GeoDataCoordinates textPosition = ring.latLonAltBox().center();
-                painter->drawText(textPosition, tr("Circular area: %1 km^2").arg(S/1000000));
+
+                const MarbleLocale::MeasurementSystem measurementSystem =
+                        MarbleGlobal::getInstance()->locale()->measurementSystem();
+
+                S /= 1000000; // S is now in km²
+                QString areaUnit;
+                switch (measurementSystem) {
+                case MarbleLocale::ImperialSystem:
+                    areaUnit = "mi";
+                    S *= KM2MI*KM2MI;
+                    break;
+                case MarbleLocale::NauticalSystem:
+                    areaUnit = "nm";
+                    S *= KM2NM*KM2NM;
+                    break;
+                default:
+                    areaUnit = "km";
+                    break;
+                }
+
+                QString areaText = tr("Area:\n%1 %2²").arg(
+                            QString::number(S, 'f', 2),
+                            areaUnit);
+
+                QFontMetrics fontMetrics = painter->fontMetrics();
+                QRect boundingRect = fontMetrics.boundingRect(QRect(), Qt::AlignCenter, areaText);
+
+                painter->drawText(textPosition,
+                                  areaText,
+                                  -boundingRect.width()/2, -boundingRect.height()*1.5,
+                                  boundingRect.width(), boundingRect.height(),
+                                  QTextOption(Qt::AlignCenter));
             }
         }
 
