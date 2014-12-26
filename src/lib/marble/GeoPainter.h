@@ -220,9 +220,15 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     The \a text is drawn starting at the given \a position using the painter's
     font property. The text rendering is performed in screen coordinates and is
     not subject to the current projection.
+    An offset given in screenPixels can be provided via xOffset and yOffset
+    in order to tweak the text position.
+    By optionally adding a width, height and text options the text flow can be
+    further influenced.
 */
     void drawText ( const GeoDataCoordinates & position, const QString & text,
-                    int xOffset = 0, int yOffset = 0 );
+                    int xOffset = 0, int yOffset = 0,
+                    int width = 0, int height = 0,
+                    const QTextOption & option = QTextOption() );
 
     
 /*!
