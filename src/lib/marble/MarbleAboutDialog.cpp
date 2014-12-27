@@ -144,7 +144,7 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr("<p><i>Artwork:</i> Nuno Pinheiro, Torsten Rahn</p>")+
         QObject::tr("<b>Join us</b>")+
         QObject::tr("<p>You can reach the developers of the Marble Project at <a href=\"mailto:marble-devel@kde.org\">marble-devel@kde.org</a></p>")+
-        QObject::tr("<b>ESA - Summer of Code in Space 2011</b>")+
+        QObject::tr("<b>ESA - Summer of Code in Space</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in ESA SoCiS for their successful work on Marble:</p>")+
         QObject::tr("<p><b>2014</b></p>")+
@@ -152,7 +152,7 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
                                                                  "<i>Project: Panoramic Picture Support for celestial bodies in Marble   </i></p>")+
         QObject::tr("<p><b>2013</b></p>")+
         QObject::tr("<p>Marek Hakala, <a href=\"mailto:hakala.marek@gmail.com\">hakala.marek@gmail.com</a><br />"
-                                               "<i>Project:  Move SolarSystem 2013 libs into marble central place </i></p>")+
+                                               "<i>Project: Displaying Solar / Lunar Eclipses in Marble </i></p>")+
         QObject::tr("<p><b>2012</b></p>")+
         QObject::tr("<p>Rene Kuettner, <a href=\"mailto:rene@bitkanal.net\">rene@bitkanal.net</a><br />"
            "<i>Project: Visualization of planetary satellites</i></p>")+
