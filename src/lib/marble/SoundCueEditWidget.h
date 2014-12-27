@@ -17,6 +17,7 @@
 #include <QModelIndex>
 
 class QLineEdit;
+class QToolButton;
 
 namespace Marble
 {
@@ -29,9 +30,13 @@ class SoundCueEditWidget: public QWidget
 
 public:
     SoundCueEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    bool editable() const;
 
 Q_SIGNALS:
     void editingDone( const QModelIndex& index );
+
+public Q_SLOTS:
+    void setEditable( bool editable );
 
 private Q_SLOTS:
     void save();
@@ -40,6 +45,7 @@ private:
     GeoDataSoundCue* soundCueElement();
     QModelIndex m_index;
     QLineEdit* m_lineEdit;
+    QToolButton *m_button;
 };
 
 } // namespace Marble

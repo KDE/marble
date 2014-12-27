@@ -28,7 +28,8 @@ namespace Marble
 FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget, QWidget *parent ) :
     QWidget( parent ),
     m_widget( widget ),
-    m_index( index )
+    m_index( index ),
+    m_button( new QToolButton )
 {
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setSpacing( 5 );
@@ -52,12 +53,21 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
     connect(flyToPinCenter, SIGNAL(clicked()), this, SLOT(updateCoordinates()));
     layout->addWidget(flyToPinCenter);
 
-    QToolButton *button = new QToolButton;
-    button->setIcon( QIcon( ":/marble/document-save.png" ) );
-    connect(button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( button );
+    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    layout->addWidget( m_button );
 
     setLayout( layout );
+}
+
+bool FlyToEditWidget::editable() const
+{
+    return m_button->isEnabled();
+}
+
+void FlyToEditWidget::setEditable( bool editable )
+{
+    m_button->setEnabled( editable );
 }
 
 void FlyToEditWidget::updateCoordinates()

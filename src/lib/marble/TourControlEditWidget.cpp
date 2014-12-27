@@ -27,7 +27,8 @@ TourControlEditWidget::TourControlEditWidget( const QModelIndex &index, QWidget 
     QWidget( parent ),
     m_index( index ),
     m_radio_play( new QRadioButton ),
-    m_radio_pause( new QRadioButton )
+    m_radio_pause( new QRadioButton ),
+    m_button( new QToolButton )
 {
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setSpacing( 5 );
@@ -48,12 +49,21 @@ TourControlEditWidget::TourControlEditWidget( const QModelIndex &index, QWidget 
         m_radio_pause->setChecked( true );
     }
 
-    QToolButton *button = new QToolButton;
-    button->setIcon( QIcon( ":/marble/document-save.png" ) );
-    connect(button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( button );
+    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    layout->addWidget( m_button );
 
     setLayout( layout );
+}
+
+bool TourControlEditWidget::editable() const
+{
+    return m_button->isEnabled();
+}
+
+void TourControlEditWidget::setEditable( bool editable )
+{
+    m_button->setEnabled( editable );
 }
 
 void TourControlEditWidget::save()

@@ -17,6 +17,7 @@
 #include <QModelIndex>
 
 class QRadioButton;
+class QToolButton;
 
 namespace Marble
 {
@@ -29,9 +30,13 @@ class TourControlEditWidget: public QWidget
 
 public:
     TourControlEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    bool editable() const;
 
 Q_SIGNALS:
     void editingDone( const QModelIndex& index );
+
+public Q_SLOTS:
+    void setEditable( bool editable );
 
 private Q_SLOTS:
     void save();
@@ -41,6 +46,7 @@ private:
     QModelIndex m_index;
     QRadioButton *m_radio_play;
     QRadioButton *m_radio_pause;
+    QToolButton *m_button;
 };
 
 } // namespace Marble

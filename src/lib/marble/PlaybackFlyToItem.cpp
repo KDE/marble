@@ -23,7 +23,6 @@ PlaybackFlyToItem::PlaybackFlyToItem( const GeoDataFlyTo* flyTo ):
         m_flyTo( flyTo ),
         m_before( 0 ),
         m_next( 0 ),
-        m_duration( flyTo->duration() ),
         m_isPlaying( false )
 {
     //do nothing
@@ -62,7 +61,7 @@ void PlaybackFlyToItem::playNext()
     }
     double const progress = m_start.msecsTo( QDateTime::currentDateTime() ) / 1000.0;
     Q_ASSERT( progress >= 0.0 );
-    double const t = progress / m_duration;
+    double const t = progress / duration();
     if( t <= 1 ){
         if( m_isPlaying ){
             center( t );
@@ -84,7 +83,7 @@ void PlaybackFlyToItem::pause()
 
 void PlaybackFlyToItem::seek( double t )
 {
-    m_start = QDateTime::currentDateTime().addMSecs( -t * m_duration * 1000 );
+    m_start = QDateTime::currentDateTime().addMSecs( -t * duration() * 1000 );
     m_pause = QDateTime::currentDateTime();
     center( t );
 }

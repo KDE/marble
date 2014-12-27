@@ -42,7 +42,6 @@ private:
     PlaybackFlyToItem* m_next;
     QDateTime m_start;
     QDateTime m_pause;
-    double m_duration;
     bool m_isPlaying;
 };
 

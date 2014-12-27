@@ -30,9 +30,13 @@ public:
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QWidget* createEditor ( QWidget * parent, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
+    bool editable() const;
+    void setEditable( bool editable );
 
 Q_SIGNALS:
     void editingChanged( QModelIndex index );
+    void edited( QModelIndex index );
+    void editableChanged( bool editable );
 
 public:
 
@@ -54,6 +58,7 @@ private:
     QList<QPersistentModelIndex> m_editingIndices;
     QListView* m_listView;
     MarbleWidget *m_widget;
+    bool m_editable;
 };
 
 } // namespace Marble

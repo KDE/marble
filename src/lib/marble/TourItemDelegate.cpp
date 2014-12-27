@@ -33,7 +33,7 @@ namespace Marble
 {
 
 TourItemDelegate::TourItemDelegate( QListView* view, MarbleWidget* widget ):
-                    m_listView( view ), m_widget( widget )
+                    m_listView( view ), m_widget( widget ), m_editable( true )
 {
     QObject::connect( this, SIGNAL( editingChanged( QModelIndex ) ), m_listView, SLOT( update( QModelIndex ) ) );
     m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
@@ -62,6 +62,9 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
     button.features = QStyleOptionButton::None;
     button.iconSize = QSize( 16, 16 );
     button.state &= ~QStyle::State_HasFocus;
+    if( !editable() ) {
+        button.state &= ~QStyle::State_Enabled;
+    }
 
     QRect const iconRect = position( GeoDataElementIcon, option );
 
@@ -209,31 +212,48 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
     if ( object->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
         FlyToEditWidget* widget = new FlyToEditWidget(index, m_widget, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
+        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataTourControlType ) {
         TourControlEditWidget* widget = new TourControlEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
+        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataWaitType ) {
         WaitEditWidget* widget = new WaitEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
+        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataSoundCueType ) {
         SoundCueEditWidget* widget = new SoundCueEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
+        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
         return widget;
 
     }
     return 0;
 }
 
+bool TourItemDelegate::editable() const
+{
+    return m_editable;
+}
+
+void TourItemDelegate::setEditable( bool editable )
+{
+    if( m_editable != editable ) {
+        m_editable = editable;
+        emit editableChanged( m_editable );
+    }
+}
+
 bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index )
 {
     Q_UNUSED( model );
-    if ( ( event->type() == QEvent::MouseButtonRelease ) ) {
+    if ( ( event->type() == QEvent::MouseButtonRelease ) && editable() ) {
         QMouseEvent *mouseEvent = static_cast<QMouseEvent*>( event );
         QRect editRect = position( EditButton, option );
         if ( editRect.contains( mouseEvent->pos() ) ) {
@@ -254,6 +274,7 @@ bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, co
 
 void TourItemDelegate::closeEditor( const QModelIndex &index )
 {
+    emit edited( index );
     m_listView->closePersistentEditor( index );
     m_editingIndices.removeOne( index );
 }

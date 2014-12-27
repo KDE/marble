@@ -150,6 +150,7 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
     d->m_delegate = new TourItemDelegate( d->m_tourUi.m_listView, d->m_widget );
+    QObject::connect( d->m_delegate, SIGNAL( edited( QModelIndex ) ), this, SLOT( updateDuration() ) );
     d->m_tourUi.m_listView->setItemDelegate( d->m_delegate );
 }
 
@@ -170,6 +171,7 @@ void TourWidget::startPlaying()
     d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-pause.png" ) );
     d->m_tourUi.actionPlay->setEnabled( true );
     d->m_tourUi.actionStop->setEnabled( true );
+    d->m_delegate->setEditable( false );
 }
 
 void TourWidget::pausePlaying()
@@ -187,6 +189,7 @@ void TourWidget::stopPlaying()
     d->m_tourUi.actionPlay->setEnabled( true );
     d->m_tourUi.actionStop->setEnabled( false );
     d->m_playState = false;
+    d->m_delegate->setEditable( true );
 }
 
 void TourWidget::handleSliderMove( int value )
@@ -254,6 +257,7 @@ void TourWidgetPrivate::addFlyTo()
     GeoDataLookAt *lookat = new GeoDataLookAt( m_widget->lookAt() );
     lookat->setAltitude( lookat->range() );
     flyTo->setView( lookat );
+    flyTo->setDuration( 1.0 );
     GeoDataObject *rootObject =  rootIndexObject();
     if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
@@ -406,6 +410,12 @@ void TourWidget::deleteSelected()
         emit featureUpdated( feature );
         d->updateRootIndex();
     }
+}
+
+void TourWidget::updateDuration()
+{
+    d->m_tourUi.m_slider->setMaximum( d->m_playback.duration() * 100 );
+    d->m_tourUi.m_slider->setValue( 0 );
 }
 
 void TourWidget::moveDown()

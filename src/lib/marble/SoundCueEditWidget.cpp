@@ -26,7 +26,8 @@ namespace Marble {
 SoundCueEditWidget::SoundCueEditWidget( const QModelIndex &index, QWidget *parent ) :
     QWidget( parent ),
     m_index( index ),
-    m_lineEdit( new QLineEdit )
+    m_lineEdit( new QLineEdit ),
+    m_button( new QToolButton )
 {
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setSpacing( 5 );
@@ -38,12 +39,21 @@ SoundCueEditWidget::SoundCueEditWidget( const QModelIndex &index, QWidget *paren
     m_lineEdit->setPlaceholderText( "Audio location" );
     layout->addWidget( m_lineEdit );
 
-    QToolButton *button = new QToolButton;
-    button->setIcon( QIcon( ":/marble/document-save.png" ) );
-    connect(button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( button );
+    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    layout->addWidget( m_button );
 
     setLayout( layout );
+}
+
+bool SoundCueEditWidget::editable() const
+{
+    return m_button->isEnabled();
+}
+
+void SoundCueEditWidget::setEditable( bool editable )
+{
+    m_button->setEnabled( editable );
 }
 
 void SoundCueEditWidget::save()

@@ -17,6 +17,7 @@
 #include <QModelIndex>
 
 class QDoubleSpinBox;
+class QToolButton;
 
 namespace Marble
 {
@@ -29,9 +30,13 @@ class WaitEditWidget: public QWidget
 
 public:
     WaitEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    bool editable() const;
 
 Q_SIGNALS:
     void editingDone( const QModelIndex& index );
+
+public Q_SLOTS:
+    void setEditable( bool editable );
 
 private Q_SLOTS:
     void save();
@@ -40,6 +45,7 @@ private:
     GeoDataWait* waitElement();
     QModelIndex m_index;
     QDoubleSpinBox *m_spinBox;
+    QToolButton *m_button;
 };
 
 } // namespace Marble

@@ -18,6 +18,7 @@
 #include "GeoDataCoordinates.h"
 
 class QDoubleSpinBox;
+class QToolButton;
 
 namespace Marble
 {
@@ -31,9 +32,13 @@ class FlyToEditWidget: public QWidget
 
 public:
     FlyToEditWidget( const QModelIndex& index, MarbleWidget* widget, QWidget* parent=0 );
+    bool editable() const;
 
 Q_SIGNALS:
     void editingDone( const QModelIndex& index );
+
+public Q_SLOTS:
+    void setEditable( bool editable );
 
 private Q_SLOTS:
     void save();
@@ -45,6 +50,7 @@ private:
     QModelIndex m_index;
     QDoubleSpinBox *m_waitSpin;
     GeoDataCoordinates m_coord;
+    QToolButton *m_button;
 };
 
 } // namespace Marble

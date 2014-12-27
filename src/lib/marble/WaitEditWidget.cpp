@@ -27,7 +27,8 @@ namespace Marble
 WaitEditWidget::WaitEditWidget( const QModelIndex &index, QWidget *parent ) :
     QWidget( parent ),
     m_index( index ),
-    m_spinBox( new QDoubleSpinBox )
+    m_spinBox( new QDoubleSpinBox ),
+    m_button( new QToolButton )
 {
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setSpacing( 5 );
@@ -44,12 +45,21 @@ WaitEditWidget::WaitEditWidget( const QModelIndex &index, QWidget *parent ) :
     m_spinBox->setValue( waitElement()->duration() );
     m_spinBox->setSuffix( tr(" s", "seconds") );
 
-    QToolButton *button = new QToolButton;
-    button->setIcon( QIcon( ":/marble/document-save.png" ) );
-    connect(button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( button );
+    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    layout->addWidget( m_button );
 
     setLayout( layout );
+}
+
+bool WaitEditWidget::editable() const
+{
+    return m_button->isEnabled();
+}
+
+void WaitEditWidget::setEditable( bool editable )
+{
+    m_button->setEnabled( editable );
 }
 
 void WaitEditWidget::save()
