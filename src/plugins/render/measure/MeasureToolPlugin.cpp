@@ -421,6 +421,88 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             painter->drawPolyline( segment, infoString, LineCenter );
         }
     }
+
+    if (m_paintMode == Polygon && m_measureLineString.size() > 2 && m_showPolygonArea) {
+        painter->setPen( Qt::NoPen );
+        painter->setBrush( QBrush ( QColor ( 127, 127, 127, 127 ) ) );
+        GeoDataLinearRing measureRing = m_measureLineString;
+        painter->drawPolygon(measureRing);
+
+        qreal theta1 = 0.0;
+        qreal n = m_measureLineString.size();
+
+        for (int segmentIndex = 1; segmentIndex < m_measureLineString.size()-1; segmentIndex++) {
+            GeoDataCoordinates current = m_measureLineString[segmentIndex];
+            qreal prevBearing = current.bearing(m_measureLineString[segmentIndex-1]);
+            qreal nextBearing = current.bearing(m_measureLineString[segmentIndex+1]);
+            if (nextBearing < prevBearing)
+                nextBearing += 2 * M_PI;
+
+            qreal angle = nextBearing - prevBearing;
+            theta1 += angle;
+        }
+
+        // Traversing first vertex
+        GeoDataCoordinates current = m_measureLineString[0];
+        qreal prevBearing = current.bearing(m_measureLineString[n-1]);
+        qreal nextBearing = current.bearing(m_measureLineString[1]);
+        if (nextBearing < prevBearing)
+            nextBearing += 2 * M_PI;
+        qreal angle = nextBearing - prevBearing;
+        theta1 += angle;
+
+        // And the last one
+        current = m_measureLineString[n-1];
+        prevBearing = current.bearing(m_measureLineString[n-2]);
+        nextBearing = current.bearing(m_measureLineString[0]);
+        if (nextBearing < prevBearing)
+            nextBearing += 2 * M_PI;
+        angle = nextBearing - prevBearing;
+        theta1 += angle;
+
+        qreal theta2 = 2 * M_PI * n - theta1;
+
+        // theta = smaller of theta1 and theta2
+        qreal theta = (theta1 < theta2) ? theta1 : theta2;
+
+        qreal R = marbleModel()->planet()->radius();
+        qreal S = qAbs((theta - (n-2) * M_PI) * R * R);
+
+        painter->setPen(Qt::white);
+        GeoDataCoordinates textPosition = measureRing.latLonAltBox().center();
+
+        const MarbleLocale::MeasurementSystem measurementSystem =
+                MarbleGlobal::getInstance()->locale()->measurementSystem();
+
+        S /= 1000000; // S is now in km²
+        QString areaUnit;
+        switch (measurementSystem) {
+        case MarbleLocale::ImperialSystem:
+            areaUnit = "mi";
+            S *= KM2MI*KM2MI;
+            break;
+        case MarbleLocale::NauticalSystem:
+            areaUnit = "nm";
+            S *= KM2NM*KM2NM;
+            break;
+        default:
+            areaUnit = "km";
+            break;
+        }
+
+        QString areaText = tr("Area:\n%1 %2²").arg(
+                    QString::number(S, 'f', 2),
+                    areaUnit);
+
+        QFontMetrics fontMetrics = painter->fontMetrics();
+        QRect boundingRect = fontMetrics.boundingRect(QRect(), Qt::AlignCenter, areaText);
+
+        painter->drawText(textPosition,
+                          areaText,
+                          -boundingRect.width()/2, -boundingRect.height()*1.5,
+                          boundingRect.width(), boundingRect.height(),
+                          QTextOption(Qt::AlignCenter));
+    }
 }
 
 void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter ) const
