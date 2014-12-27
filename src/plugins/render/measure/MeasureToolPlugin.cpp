@@ -586,14 +586,14 @@ void MeasureToolPlugin::drawInfobox( GeoPainter *painter ) const
 
     painter->setPen( QColor( Qt::black ) );
     painter->setBrush( QColor( 192, 192, 192, 192 ) );
-    painter->setFont( m_font_regular );
 
     QTextDocument doc;
     doc.setHtml(boxContent);
+    doc.setDefaultFont(m_font_regular);
     doc.adjustSize();
     QSizeF pageSize = doc.size();
 
-    painter->drawRect( 10, 105, 10 + pageSize.width(), pageSize.height()-10 );
+    painter->drawRect( 10, 105, 10 + pageSize.width(), pageSize.height() );
     QTransform transform;
     transform.translate(15, 110);
     painter->setTransform(transform);
