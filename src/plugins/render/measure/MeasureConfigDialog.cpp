@@ -51,6 +51,16 @@ bool MeasureConfigDialog::showRadius() const
     return ui->m_showRadiusLabelsCheckBox->isChecked();
 }
 
+bool MeasureConfigDialog::showPerimeter() const
+{
+    return ui->m_showPerimeter->isChecked();
+}
+
+bool MeasureConfigDialog::showCircumference() const
+{
+    return ui->m_showCircumference->isChecked();
+}
+
 bool MeasureConfigDialog::showPolygonArea() const
 {
     return ui->m_showPolygonAreaLabelChangeCheckBox->isChecked();
@@ -84,6 +94,16 @@ void MeasureConfigDialog::setShowDistanceLabels(bool show)
 void MeasureConfigDialog::setShowRadius(bool show)
 {
     ui->m_showRadiusLabelsCheckBox->setChecked(show);
+}
+
+void MeasureConfigDialog::setShowPerimeter(bool show)
+{
+    ui->m_showPerimeter->setChecked(show);
+}
+
+void MeasureConfigDialog::setShowCircumference(bool show)
+{
+    ui->m_showCircumference->setChecked(show);
 }
 
 void MeasureConfigDialog::setShowPolygonArea(bool show)

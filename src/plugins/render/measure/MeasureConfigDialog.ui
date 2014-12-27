@@ -85,6 +85,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="m_showPerimeter">
+            <property name="text">
+             <string>Perimeter</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="m_showPolygonAreaLabelChangeCheckBox">
             <property name="enabled">
              <bool>true</bool>
@@ -136,6 +143,13 @@
             </property>
             <property name="checked">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_showCircumference">
+            <property name="text">
+             <string>Circumference</string>
             </property>
            </widget>
           </item>

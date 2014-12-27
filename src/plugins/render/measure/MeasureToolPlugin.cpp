@@ -31,6 +31,7 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QCheckBox>
+#include <QTextDocument>
 #include <qmath.h>
 
 namespace Marble
@@ -57,8 +58,16 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
       m_showBearingLabel( true ),
       m_showBearingChangeLabel( true ),
       m_showPolygonArea(false),
+      m_showCircularArea(true),
       m_showRadius(true),
-      m_showCircularArea(true)
+      m_showPerimeter(true),
+      m_showCircumference(true),
+      m_totalDistance(0.0),
+      m_polygonArea(0.0),
+      m_circularArea(0.0),
+      m_radius(0.0),
+      m_perimeter(0.0),
+      m_circumference(0.0)
 {
     m_pen.setWidthF( 2.0 );
 }
@@ -75,7 +84,7 @@ QString MeasureToolPlugin::renderPolicy() const
 
 QStringList MeasureToolPlugin::renderPosition() const
 {
-    return QStringList() << "USER_TOOLS";
+    return QStringList() << "ATMOSPHERE";
 }
 
 QString MeasureToolPlugin::name() const
@@ -151,6 +160,8 @@ QDialog *MeasureToolPlugin::configDialog()
     m_configDialog->setShowPolygonArea( m_showPolygonArea );
     m_configDialog->setShowCircularArea( m_showCircularArea );
     m_configDialog->setShowRadius( m_showRadius );
+    m_configDialog->setShowPerimeter( m_showPerimeter );
+    m_configDialog->setShowCircumference( m_showCircumference );
     m_configDialog->setPaintMode( m_paintMode );
 
     return m_configDialog;
@@ -166,6 +177,8 @@ QHash<QString,QVariant> MeasureToolPlugin::settings() const
     settings.insert( "showPolygonArea", m_showPolygonArea );
     settings.insert( "showCircularArea", m_showCircularArea );
     settings.insert( "showRadius", m_showRadius );
+    settings.insert( "showPerimeter", m_showPerimeter );
+    settings.insert( "showCircumference", m_showCircumference );
     settings.insert( "paintMode", (int)m_paintMode );
 
     return settings;
@@ -181,6 +194,8 @@ void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
     m_showPolygonArea = settings.value( "showPolygonArea", false ).toBool();
     m_showCircularArea = settings.value( "showCircularArea", true ).toBool();
     m_showRadius = settings.value( "showRadius", true ).toBool();
+    m_showPerimeter = settings.value( "showPerimeter", true ).toBool();
+    m_showCircumference = settings.value( "showCircumference", true ).toBool();
     m_paintMode = (PaintMode)settings.value( "paintMode", 0 ).toInt();
 }
 
@@ -192,6 +207,8 @@ void MeasureToolPlugin::writeSettings()
     m_showPolygonArea = m_configDialog->showPolygonArea();
     m_showCircularArea = m_configDialog->showCircularArea();
     m_showRadius = m_configDialog->showRadius();
+    m_showPerimeter = m_configDialog->showPerimeter();
+    m_showCircumference = m_configDialog->showCircumference();
     m_paintMode = (PaintMode)m_configDialog->paintMode();
 
     if (m_paintMode == Circular) {
@@ -238,11 +255,10 @@ bool MeasureToolPlugin::render( GeoPainter *painter,
     // Paint the nodes of the paths.
     drawMeasurePoints( painter );
 
-    // Paint the total distance in the upper left corner.
-    qreal totalDistance = m_measureLineString.length( marbleModel()->planet()->radius() );
+    m_totalDistance = m_measureLineString.length( marbleModel()->planet()->radius() );
 
     if ( m_measureLineString.size() > 1 )
-        drawTotalDistanceLabel( painter, totalDistance );
+        drawInfobox(painter);
 
     painter->restore();
 
@@ -265,24 +281,10 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
 
         if ( (m_paintMode == Polygon && m_showDistanceLabel)
              || (m_paintMode == Circular && m_showRadius) ) {
-
-            const MarbleLocale::MeasurementSystem measurementSystem =
-                    MarbleGlobal::getInstance()->locale()->measurementSystem();
-
             const qreal segmentLength = segment.length( marbleModel()->planet()->radius() );
+            m_radius = segmentLength;
 
-            if ( measurementSystem == MarbleLocale::MetricSystem ) {
-                if ( segmentLength >= 1000.0 ) {
-                    infoString = tr("%1 km").arg( segmentLength / 1000.0, 0, 'f', 2 );
-                }
-                else {
-                    infoString = tr("%1 m").arg( segmentLength, 0, 'f', 2 );
-                }
-            } else if (measurementSystem == MarbleLocale::ImperialSystem) {
-                infoString = QString("%1 mi").arg( segmentLength / 1000.0 * KM2MI, 0, 'f', 2 );
-            } else if (measurementSystem == MarbleLocale::NauticalSystem) {
-                infoString = QString("%1 nm").arg( segmentLength / 1000.0 * KM2NM, 0, 'f', 2 );
-            }
+            infoString = meterToPreferredUnit(segmentLength);
         }
 
         if ( m_showBearingLabel && m_paintMode != Circular ) {
@@ -350,7 +352,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             // S - area of the painted circle
             qreal R = marbleModel()->planet()->radius();
             qreal d = m_measureLineString.length(1);
-            qreal S = 2 * M_PI * R*R * (1 - qCos(d));
+            m_circularArea = 2 * M_PI * R*R * (1 - qCos(d));
 
             qreal iterBearing = 0;
             while ( iterBearing < 2 * M_PI ) {
@@ -366,28 +368,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
                 painter->setPen(Qt::white);
                 GeoDataCoordinates textPosition = ring.latLonAltBox().center();
 
-                const MarbleLocale::MeasurementSystem measurementSystem =
-                        MarbleGlobal::getInstance()->locale()->measurementSystem();
-
-                S /= 1000000; // S is now in km²
-                QString areaUnit;
-                switch (measurementSystem) {
-                case MarbleLocale::ImperialSystem:
-                    areaUnit = "mi";
-                    S *= KM2MI*KM2MI;
-                    break;
-                case MarbleLocale::NauticalSystem:
-                    areaUnit = "nm";
-                    S *= KM2NM*KM2NM;
-                    break;
-                default:
-                    areaUnit = "km";
-                    break;
-                }
-
-                QString areaText = tr("Area:\n%1 %2²").arg(
-                            QString::number(S, 'f', 2),
-                            areaUnit);
+                QString areaText = tr("Area:\n%1").arg(meterToPreferredUnit(m_circularArea, true));
 
                 QFontMetrics fontMetrics = painter->fontMetrics();
                 QRect boundingRect = fontMetrics.boundingRect(QRect(), Qt::AlignCenter, areaText);
@@ -395,6 +376,25 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
                 painter->drawText(textPosition,
                                   areaText,
                                   -boundingRect.width()/2, -boundingRect.height()*1.5,
+                                  boundingRect.width(), boundingRect.height(),
+                                  QTextOption(Qt::AlignCenter));
+            }
+
+            if ( m_showCircumference ) {
+                painter->setPen(Qt::white);
+                GeoDataCoordinates textPosition = ring.latLonAltBox().center();
+
+                m_circumference = 2 * M_PI * R * qSin(d);
+
+                QString circumferenceText = tr("Circumference:\n%1").arg(meterToPreferredUnit(m_circumference));
+
+                QFontMetrics fontMetrics = painter->fontMetrics();
+                QRect boundingRect = fontMetrics.boundingRect(QRect(),Qt::AlignCenter,
+                                                              circumferenceText);
+
+                painter->drawText(textPosition,
+                                  circumferenceText,
+                                  -boundingRect.width()/2, boundingRect.height(),
                                   boundingRect.width(), boundingRect.height(),
                                   QTextOption(Qt::AlignCenter));
             }
@@ -422,87 +422,131 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         }
     }
 
-    if (m_paintMode == Polygon && m_measureLineString.size() > 2 && m_showPolygonArea) {
-        painter->setPen( Qt::NoPen );
-        painter->setBrush( QBrush ( QColor ( 127, 127, 127, 127 ) ) );
+    if (m_paintMode == Polygon && m_measureLineString.size() > 2) {
         GeoDataLinearRing measureRing = m_measureLineString;
-        painter->drawPolygon(measureRing);
 
-        qreal theta1 = 0.0;
-        qreal n = m_measureLineString.size();
+        if (m_showPolygonArea || m_showPerimeter) {
+            painter->setPen( Qt::NoPen );
+            painter->setBrush( QBrush ( QColor ( 127, 127, 127, 127 ) ) );
+            painter->drawPolygon(measureRing);
 
-        for (int segmentIndex = 1; segmentIndex < m_measureLineString.size()-1; segmentIndex++) {
-            GeoDataCoordinates current = m_measureLineString[segmentIndex];
-            qreal prevBearing = current.bearing(m_measureLineString[segmentIndex-1]);
-            qreal nextBearing = current.bearing(m_measureLineString[segmentIndex+1]);
+            QPen shadowPen( Oxygen::aluminumGray5 );
+            shadowPen.setStyle(Qt::DashLine);
+            shadowPen.setWidthF(3.0);
+            painter->setPen( shadowPen );
+            painter->drawPolyline(GeoDataLineString() << m_measureLineString.first()
+                                                      << m_measureLineString.last());
+        }
+
+        if (m_showPolygonArea) {
+            qreal theta1 = 0.0;
+            qreal n = m_measureLineString.size();
+
+            for (int segmentIndex = 1; segmentIndex < m_measureLineString.size()-1; segmentIndex++) {
+                GeoDataCoordinates current = m_measureLineString[segmentIndex];
+                qreal prevBearing = current.bearing(m_measureLineString[segmentIndex-1]);
+                qreal nextBearing = current.bearing(m_measureLineString[segmentIndex+1]);
+                if (nextBearing < prevBearing)
+                    nextBearing += 2 * M_PI;
+
+                qreal angle = nextBearing - prevBearing;
+                theta1 += angle;
+            }
+
+            // Traversing first vertex
+            GeoDataCoordinates current = m_measureLineString[0];
+            qreal prevBearing = current.bearing(m_measureLineString[n-1]);
+            qreal nextBearing = current.bearing(m_measureLineString[1]);
             if (nextBearing < prevBearing)
                 nextBearing += 2 * M_PI;
-
             qreal angle = nextBearing - prevBearing;
             theta1 += angle;
+
+            // And the last one
+            current = m_measureLineString[n-1];
+            prevBearing = current.bearing(m_measureLineString[n-2]);
+            nextBearing = current.bearing(m_measureLineString[0]);
+            if (nextBearing < prevBearing)
+                nextBearing += 2 * M_PI;
+            angle = nextBearing - prevBearing;
+            theta1 += angle;
+
+            qreal theta2 = 2 * M_PI * n - theta1;
+
+            // theta = smaller of theta1 and theta2
+            qreal theta = (theta1 < theta2) ? theta1 : theta2;
+
+            qreal R = marbleModel()->planet()->radius();
+            qreal S = qAbs((theta - (n-2) * M_PI) * R * R);
+            m_polygonArea = S;
+
+            painter->setPen(Qt::white);
+            GeoDataCoordinates textPosition = measureRing.latLonAltBox().center();
+
+            QString areaText = tr("Area:\n%1").arg(meterToPreferredUnit(S, true));
+
+            QFontMetrics fontMetrics = painter->fontMetrics();
+            QRect boundingRect = fontMetrics.boundingRect(QRect(), Qt::AlignCenter, areaText);
+
+            painter->drawText(textPosition,
+                              areaText,
+                              -boundingRect.width()/2, -(boundingRect.height()+fontMetrics.height()*0.25),
+                              boundingRect.width(), boundingRect.height(),
+                              QTextOption(Qt::AlignCenter));
         }
 
-        // Traversing first vertex
-        GeoDataCoordinates current = m_measureLineString[0];
-        qreal prevBearing = current.bearing(m_measureLineString[n-1]);
-        qreal nextBearing = current.bearing(m_measureLineString[1]);
-        if (nextBearing < prevBearing)
-            nextBearing += 2 * M_PI;
-        qreal angle = nextBearing - prevBearing;
-        theta1 += angle;
+        if (m_showPerimeter) {
+            painter->setPen(Qt::white);
+            GeoDataCoordinates textPosition = measureRing.latLonAltBox().center();
 
-        // And the last one
-        current = m_measureLineString[n-1];
-        prevBearing = current.bearing(m_measureLineString[n-2]);
-        nextBearing = current.bearing(m_measureLineString[0]);
-        if (nextBearing < prevBearing)
-            nextBearing += 2 * M_PI;
-        angle = nextBearing - prevBearing;
-        theta1 += angle;
+            qreal P = measureRing.length(marbleModel()->planet()->radius());
+            m_perimeter = P;
+            QString perimeterText = tr("Perimeter:\n%1").arg(meterToPreferredUnit(P));
 
-        qreal theta2 = 2 * M_PI * n - theta1;
+            QFontMetrics fontMetrics = painter->fontMetrics();
+            QRect boundingRect = fontMetrics.boundingRect(QRect(),Qt::AlignCenter,
+                                                          perimeterText);
 
-        // theta = smaller of theta1 and theta2
-        qreal theta = (theta1 < theta2) ? theta1 : theta2;
-
-        qreal R = marbleModel()->planet()->radius();
-        qreal S = qAbs((theta - (n-2) * M_PI) * R * R);
-
-        painter->setPen(Qt::white);
-        GeoDataCoordinates textPosition = measureRing.latLonAltBox().center();
-
-        const MarbleLocale::MeasurementSystem measurementSystem =
-                MarbleGlobal::getInstance()->locale()->measurementSystem();
-
-        S /= 1000000; // S is now in km²
-        QString areaUnit;
-        switch (measurementSystem) {
-        case MarbleLocale::ImperialSystem:
-            areaUnit = "mi";
-            S *= KM2MI*KM2MI;
-            break;
-        case MarbleLocale::NauticalSystem:
-            areaUnit = "nm";
-            S *= KM2NM*KM2NM;
-            break;
-        default:
-            areaUnit = "km";
-            break;
+            painter->drawText(textPosition,
+                              perimeterText,
+                              -boundingRect.width()/2, 0,
+                              boundingRect.width(), boundingRect.height(),
+                              QTextOption(Qt::AlignCenter));
         }
-
-        QString areaText = tr("Area:\n%1 %2²").arg(
-                    QString::number(S, 'f', 2),
-                    areaUnit);
-
-        QFontMetrics fontMetrics = painter->fontMetrics();
-        QRect boundingRect = fontMetrics.boundingRect(QRect(), Qt::AlignCenter, areaText);
-
-        painter->drawText(textPosition,
-                          areaText,
-                          -boundingRect.width()/2, -boundingRect.height()*1.5,
-                          boundingRect.width(), boundingRect.height(),
-                          QTextOption(Qt::AlignCenter));
     }
+}
+
+QString MeasureToolPlugin::meterToPreferredUnit(qreal g, bool isSquare) const
+{
+    const MarbleLocale::MeasurementSystem measurementSystem =
+            MarbleGlobal::getInstance()->locale()->measurementSystem();
+
+    if (isSquare) {
+        g /= 1000000; // meters is now in km²
+    } else {
+        g /= 1000; // meters is now in km
+    }
+
+    QString unit;
+    switch (measurementSystem) {
+    case MarbleLocale::ImperialSystem:
+        unit = "mi";
+
+        g *= (isSquare) ? KM2MI*KM2MI : KM2MI;
+        break;
+    case MarbleLocale::NauticalSystem:
+        unit = "nm";
+        g *= (isSquare) ? KM2NM*KM2NM : KM2NM;
+        break;
+    default:
+        unit = "km";
+        break;
+    }
+
+    if (isSquare)
+        unit.append(QChar(0xB2));
+
+    return QString::number(g, 'f', 2) + " " + unit;
 }
 
 void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter ) const
@@ -516,34 +560,45 @@ void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter ) const
     }
 }
 
-void MeasureToolPlugin::drawTotalDistanceLabel( GeoPainter *painter,
-                                          qreal totalDistance ) const
+void MeasureToolPlugin::drawInfobox( GeoPainter *painter ) const
 {
-    QString  distanceString;
+    QString boxContent;
 
-    MarbleLocale::MeasurementSystem measurementSystem;
-    measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
-
-    if ( measurementSystem == MarbleLocale::MetricSystem ) {
-        if ( totalDistance >= 1000.0 ) {
-            distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
-        }
-        else {
-            distanceString = tr("Total Distance: %1 m").arg( totalDistance );
-        }
+    if (m_paintMode == Polygon) {
+        boxContent += "<strong>" + tr("Polygon Ruler") + ":</strong><br/>\n";
+    } else /* Circular */ {
+        boxContent += "<strong>" + tr("Circle Ruler") + ":</strong><br/>\n";
     }
-    else if (measurementSystem == MarbleLocale::ImperialSystem) {
-        distanceString = QString("Total Distance: %1 mi").arg( totalDistance/1000.0 * KM2MI );
-    } else if (measurementSystem == MarbleLocale::NauticalSystem) {
-        distanceString = QString("Total Distance: %1 nm").arg( totalDistance/1000.0 * KM2NM );
+    if (m_paintMode == Polygon) {
+        boxContent += tr("Total Distance: %1<br/>\n").arg( meterToPreferredUnit(m_totalDistance) );
+        if (m_showPolygonArea)
+            boxContent += tr("Area: %1<br/>\n").arg( meterToPreferredUnit(m_polygonArea, true) );
+        if (m_showPerimeter)
+            boxContent += tr("Perimeter: %1<br/>\n").arg( meterToPreferredUnit(m_perimeter) );
+    } else /* Circular */ {
+        if (m_showRadius)
+            boxContent += tr("Radius: %1<br/>\n").arg( meterToPreferredUnit(m_radius) );
+        if (m_showCircumference)
+            boxContent += tr("Circumference: %1<br/>\n").arg( meterToPreferredUnit(m_circumference) );
+        if (m_showCircularArea)
+            boxContent += tr("Area: %1<br/>\n").arg( meterToPreferredUnit(m_circularArea, true) );
     }
 
     painter->setPen( QColor( Qt::black ) );
     painter->setBrush( QColor( 192, 192, 192, 192 ) );
-
-    painter->drawRect( 10, 105, 10 + QFontMetrics( m_font_regular ).boundingRect( distanceString ).width() + 5, 10 + m_fontascent + 2 );
     painter->setFont( m_font_regular );
-    painter->drawText( 15, 110 + m_fontascent, distanceString );
+
+    QTextDocument doc;
+    doc.setHtml(boxContent);
+    doc.adjustSize();
+    QSizeF pageSize = doc.size();
+
+    painter->drawRect( 10, 105, 10 + pageSize.width(), pageSize.height()-10 );
+    QTransform transform;
+    transform.translate(15, 110);
+    painter->setTransform(transform);
+    doc.drawContents(painter);
+    painter->setTransform(QTransform());
 }
 
 

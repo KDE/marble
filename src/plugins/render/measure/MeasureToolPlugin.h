@@ -83,8 +83,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
 
  private:
     void  drawMeasurePoints( GeoPainter *painter ) const;
-    void  drawTotalDistanceLabel( GeoPainter *painter,
-                                  qreal totalDistance ) const;
+    void  drawInfobox( GeoPainter *painter ) const;
     void  drawSegments( GeoPainter *painter );
     void  addContextItems();
     void  removeContextItems();
@@ -101,6 +100,8 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
 
  private:
     Q_DISABLE_COPY( MeasureToolPlugin )
+
+    QString meterToPreferredUnit(qreal g, bool isSquare = false) const;
 
     // The line strings in the distance path.
     GeoDataLineString m_measureLineString;
@@ -120,12 +121,24 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     MarbleWidget* m_marbleWidget;
 
     MeasureConfigDialog *m_configDialog;
+
     bool m_showDistanceLabel;
     bool m_showBearingLabel;
     bool m_showBearingChangeLabel;
+
     bool m_showPolygonArea;
     bool m_showCircularArea;
     bool m_showRadius;
+    bool m_showPerimeter;
+    bool m_showCircumference;
+
+    qreal m_totalDistance;
+    qreal m_polygonArea;
+    qreal m_circularArea;
+    qreal m_radius;
+    qreal m_perimeter;
+    qreal m_circumference;
+
     PaintMode m_paintMode;
 };
 

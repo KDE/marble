@@ -28,6 +28,8 @@ public:
     bool showBearingLabelChange() const;
     bool showDistanceLabels() const;
     bool showRadius() const;
+    bool showPerimeter() const;
+    bool showCircumference() const;
     bool showPolygonArea() const;
     bool showCircularArea() const;
     MeasureToolPlugin::PaintMode paintMode() const;
@@ -36,6 +38,8 @@ public:
     void setShowBearingLabelChange(bool);
     void setShowDistanceLabels(bool);
     void setShowRadius(bool);
+    void setShowPerimeter(bool);
+    void setShowCircumference(bool);
     void setShowPolygonArea(bool);
     void setShowCircularArea(bool);
     void setPaintMode(MeasureToolPlugin::PaintMode);
