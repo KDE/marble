@@ -434,7 +434,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             shadowPen.setStyle(Qt::DashLine);
             shadowPen.setWidthF(3.0);
             painter->setPen( shadowPen );
-            painter->drawPolyline(GeoDataLineString() << m_measureLineString.first()
+            painter->drawPolyline(GeoDataLineString( Tessellate ) << m_measureLineString.first()
                                                       << m_measureLineString.last());
         }
 
