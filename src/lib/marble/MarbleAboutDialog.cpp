@@ -147,6 +147,12 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr("<b>ESA - Summer of Code in Space 2011</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in ESA SoCiS for their successful work on Marble:</p>")+
+        QObject::tr("<p><b>2014</b></p>")+
+        QObject::tr("<p>G&#xE1;bor P&#xE9;terffy, <a href=\"mailto:peterffy95@gmail.com\"> peterffy95@gmail.com </a><br />"
+                                                                 "<i>Project: Panoramic Picture Support for celestial bodies in Marble   </i></p>")+
+        QObject::tr("<p><b>2013</b></p>")+
+        QObject::tr("<p>Marek Hakala, <a href=\"mailto:hakala.marek@gmail.com\">hakala.marek@gmail.com</a><br />"
+                                               "<i>Project:  Move SolarSystem 2013 libs into marble central place </i></p>")+
         QObject::tr("<p><b>2012</b></p>")+
         QObject::tr("<p>Rene Kuettner, <a href=\"mailto:rene@bitkanal.net\">rene@bitkanal.net</a><br />"
            "<i>Project: Visualization of planetary satellites</i></p>")+
