@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>286</width>
-    <height>277</height>
+    <width>296</width>
+    <height>304</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -42,71 +42,59 @@
           <attribute name="title">
            <string>Configure</string>
           </attribute>
-          <widget class="QLabel" name="label_2">
-           <property name="geometry">
-            <rect>
-             <x>4</x>
-             <y>4</y>
-             <width>86</width>
-             <height>24</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Transport Type:</string>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="m_transportTypeComboBox">
-           <property name="geometry">
-            <rect>
-             <x>94</x>
-             <y>4</y>
-             <width>57</width>
-             <height>24</height>
-            </rect>
-           </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QComboBox::AdjustToContents</enum>
-           </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
-            <property name="text">
-             <string>Any</string>
-            </property>
+            <layout class="QFormLayout" name="formLayout_2">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Transport Type:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="m_transportTypeComboBox">
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContents</enum>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Any</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
            </item>
-          </widget>
-          <widget class="QTableView" name="m_configureMapsListView">
-           <property name="geometry">
-            <rect>
-             <x>4</x>
-             <y>32</y>
-             <width>254</width>
-             <height>195</height>
-            </rect>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="horizontalScrollBarPolicy">
-            <enum>Qt::ScrollBarAlwaysOff</enum>
-           </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
-           </property>
-           <attribute name="horizontalHeaderVisible">
-            <bool>true</bool>
-           </attribute>
-           <attribute name="horizontalHeaderStretchLastSection">
-            <bool>false</bool>
-           </attribute>
-           <attribute name="verticalHeaderVisible">
-            <bool>false</bool>
-           </attribute>
-           <attribute name="verticalHeaderStretchLastSection">
-            <bool>false</bool>
-           </attribute>
-          </widget>
+           <item>
+            <widget class="QTableView" name="m_configureMapsListView">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+             <attribute name="horizontalHeaderVisible">
+              <bool>true</bool>
+             </attribute>
+             <attribute name="horizontalHeaderStretchLastSection">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderStretchLastSection">
+              <bool>false</bool>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
          </widget>
          <widget class="QWidget" name="tab_3">
           <property name="sizePolicy">
