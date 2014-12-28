@@ -199,8 +199,8 @@ void MercatorScanlineTextureMapper::RenderJob::run()
         QRgb * scanLine = (QRgb*)( m_canvasImage->scanLine( y ) );
 
         qreal lon = leftLon;
-        const qreal lat = atan( sinh( ( (imageHeight / 2 + yCenterOffset) - y )
-                    * pixel2Rad ) );
+        const qreal lat = gd ( ( (imageHeight / 2 + yCenterOffset) - y )
+                    * pixel2Rad );
 
         for ( int x = 0; x < imageWidth; ++x ) {
             // Prepare for interpolation

@@ -243,10 +243,23 @@ void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, con
         const qreal latToPixel = overlay->icon().height() / overlayLatLonBox.height();
         const qreal lonToPixel = overlay->icon().width() / overlayLatLonBox.width();
 
+        const qreal  global_height = tileImage->height()
+                * TileLoaderHelper::levelToRow( m_levelZeroRows, tileId.zoomLevel() );
+        const qreal pixel2Rad = M_PI / global_height;
+        const qreal rad2Pixel = global_height / M_PI;
+
+        qreal latPixelPosition = rad2Pixel/2 * gdInv(tileLatLonBox.north());
+
         for ( int y = 0; y < tileImage->height(); ++y ) {
              QRgb *scanLine = ( QRgb* ) ( tileImage->scanLine( y ) );
+             qreal lat = 0;
 
-             qreal lat = tileLatLonBox.north() - y * pixelToLat;
+             if (m_textureLayers.at( 0 )->projection() ==  GeoSceneTiled::Mercator) {
+                  lat = gd(2 * (latPixelPosition - y) * pixel2Rad );
+             }
+             else {
+                  lat = tileLatLonBox.north() - y * pixelToLat;
+             }
 
              for ( int x = 0; x < tileImage->width(); ++x, ++scanLine ) {
                  qreal lon = GeoDataCoordinates::normalizeLon( tileLatLonBox.west() + x * pixelToLon );
