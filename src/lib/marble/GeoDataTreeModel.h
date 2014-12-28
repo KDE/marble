@@ -23,6 +23,7 @@ class GeoDataObject;
 class GeoDataDocument;
 class GeoDataFeature;
 class GeoDataContainer;
+class GeoDataTourPrimitive;
 
 
 /**
@@ -98,6 +99,10 @@ public Q_SLOTS:
     void removeDocument( int index );
 
     void removeDocument( GeoDataDocument* document );
+
+    int addTourPrimitive( const QModelIndex &parent, GeoDataTourPrimitive *primitive, int row = -1 );
+    bool removeTourPrimitive( const QModelIndex &parent, int index );
+    bool swapTourPrimitives( const QModelIndex &parent, int indexA, int indexB );
 
 Q_SIGNALS:
     /// insert and remove row don't trigger any signal that proxies forward

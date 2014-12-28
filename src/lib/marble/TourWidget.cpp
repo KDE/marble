@@ -262,11 +262,9 @@ void TourWidgetPrivate::addFlyTo()
     if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
         QModelIndex currentIndex = m_tourUi.m_listView->currentIndex();
-        if ( currentIndex.isValid() ) {
-            playlist->insertPrimitive( currentIndex.row()+1, flyTo );
-        } else {
-            playlist->addPrimitive( flyTo );
-        }
+        QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
+        int row = currentIndex.isValid() ? currentIndex.row()+1 : playlist->size();
+        m_widget->model()->treeModel()->addTourPrimitive( playlistIndex, flyTo, row );
         m_isChanged = true;
         m_tourUi.m_actionSaveTour->setEnabled( true );
     }
@@ -282,12 +280,13 @@ void TourWidgetPrivate::deleteSelected()
         GeoDataObject *rootObject =  rootIndexObject();
         if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
             GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+            QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
             QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
             qSort( selected.begin(), selected.end(), qGreater<QModelIndex>() );
             QModelIndexList::iterator end = selected.end();
             QModelIndexList::iterator iter = selected.begin();
             for( ; iter != end; ++iter ) {
-                playlist->removePrimitiveAt( iter->row() );
+                m_widget->model()->treeModel()->removeTourPrimitive( playlistIndex, iter->row() );
             }
             m_isChanged = true;
             m_tourUi.m_actionSaveTour->setEnabled( true );
@@ -322,6 +321,7 @@ void TourWidgetPrivate::moveUp()
     GeoDataObject *rootObject =  rootIndexObject();
     if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+        QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
         qSort( selected.begin(), selected.end(), qLess<QModelIndex>() );
         QModelIndexList::iterator end = selected.end();
@@ -329,7 +329,7 @@ void TourWidgetPrivate::moveUp()
         for( ; iter != end; ++iter ) {
             int const index = iter->row();
             Q_ASSERT( index > 0 );
-            playlist->swapPrimitives( index-1, index );
+            m_widget->model()->treeModel()->swapTourPrimitives( playlistIndex, index-1, index );
         }
         m_isChanged = true;
         m_tourUi.m_actionSaveTour->setEnabled( true );
@@ -341,6 +341,7 @@ void TourWidgetPrivate::moveDown()
     GeoDataObject *rootObject = rootIndexObject();
     if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+        QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
         qSort( selected.begin(), selected.end(), qGreater<QModelIndex>() );
         QModelIndexList::iterator end = selected.end();
@@ -348,7 +349,7 @@ void TourWidgetPrivate::moveDown()
         for( ; iter != end; ++iter ) {
             int const index = iter->row();
             Q_ASSERT( index < playlist->size()-1 );
-            playlist->swapPrimitives( index, index+1 );
+            m_widget->model()->treeModel()->swapTourPrimitives( playlistIndex, index, index+1 );
         }
         m_isChanged = true;
         m_tourUi.m_actionSaveTour->setEnabled( true );
