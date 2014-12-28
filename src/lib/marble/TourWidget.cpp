@@ -75,6 +75,8 @@ public:
     void saveTourAs();
     void mapCenterOn(const QModelIndex &index );
     void addFlyTo();
+    void addWait();
+    void addTourPrimitive(GeoDataTourPrimitive *primitive );
     void deleteSelected();
     void updateButtonsStates();
     void moveUp();
@@ -115,6 +117,7 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
 
     QObject::connect( m_tourUi.m_listView, SIGNAL( activated( QModelIndex ) ), q, SLOT( mapCenterOn( QModelIndex ) ) );
     QObject::connect( m_tourUi.m_actionAddFlyTo, SIGNAL( triggered() ), q, SLOT( addFlyTo() ) );
+    QObject::connect( m_tourUi.m_actionAddWait, SIGNAL( triggered() ), q, SLOT( addWait() ) );
     QObject::connect( m_tourUi.m_actionDelete, SIGNAL( triggered() ), q, SLOT( deleteSelected() ) );
     QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( triggered() ), q, SLOT( moveUp() ) );
     QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( triggered() ), q, SLOT( moveDown() ) );
@@ -258,13 +261,25 @@ void TourWidgetPrivate::addFlyTo()
     lookat->setAltitude( lookat->range() );
     flyTo->setView( lookat );
     flyTo->setDuration( 1.0 );
+    addTourPrimitive( flyTo );
+}
+
+void TourWidgetPrivate::addWait()
+{
+    GeoDataWait *wait = new GeoDataWait();
+    wait->setDuration( 1.0 );
+    addTourPrimitive( wait );
+}
+
+void TourWidgetPrivate::addTourPrimitive( GeoDataTourPrimitive *primitive )
+{
     GeoDataObject *rootObject =  rootIndexObject();
     if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
         QModelIndex currentIndex = m_tourUi.m_listView->currentIndex();
         QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         int row = currentIndex.isValid() ? currentIndex.row()+1 : playlist->size();
-        m_widget->model()->treeModel()->addTourPrimitive( playlistIndex, flyTo, row );
+        m_widget->model()->treeModel()->addTourPrimitive( playlistIndex, primitive, row );
         m_isChanged = true;
         m_tourUi.m_actionSaveTour->setEnabled( true );
     }
@@ -396,11 +411,13 @@ void TourWidgetPrivate::updateRootIndex()
 void TourWidget::addFlyTo()
 {
     d->addFlyTo();
-    GeoDataFeature *feature = d->getPlaylistFeature();
-    if ( feature ){
-        emit featureUpdated( feature );
-        d->updateRootIndex();
-    }
+    finishAddingItem();
+}
+
+void TourWidget::addWait()
+{
+    d->addWait();
+    finishAddingItem();
 }
 
 void TourWidget::deleteSelected()
@@ -417,6 +434,15 @@ void TourWidget::updateDuration()
 {
     d->m_tourUi.m_slider->setMaximum( d->m_playback.duration() * 100 );
     d->m_tourUi.m_slider->setValue( 0 );
+}
+
+void TourWidget::finishAddingItem()
+{
+    GeoDataFeature *feature = d->getPlaylistFeature();
+    if ( feature ) {
+        emit featureUpdated( feature );
+        d->updateRootIndex();
+    }
 }
 
 void TourWidget::moveDown()
@@ -474,6 +500,7 @@ bool TourWidgetPrivate::openDocument(GeoDataDocument* document)
         m_isChanged = false;
         updateRootIndex();
         m_tourUi.m_actionAddFlyTo->setEnabled( true );
+        m_tourUi.m_actionAddWait->setEnabled( true );
         m_tourUi.m_actionSaveTourAs->setEnabled( true );
         m_tourUi.m_actionSaveTour->setEnabled( false );
         m_tourUi.m_slider->setEnabled( true );

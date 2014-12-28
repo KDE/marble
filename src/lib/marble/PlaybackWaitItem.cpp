@@ -18,7 +18,6 @@ namespace Marble
 PlaybackWaitItem::PlaybackWaitItem( const GeoDataWait* wait )
 {
     m_wait = wait;
-    m_duration = wait->duration();
     m_isPlaying = false;
 }
 const GeoDataWait* PlaybackWaitItem::wait() const
@@ -27,7 +26,7 @@ const GeoDataWait* PlaybackWaitItem::wait() const
 }
 double PlaybackWaitItem::duration() const
 {
-    return m_duration;
+    return m_wait->duration();
 }
 
 void PlaybackWaitItem::play()
@@ -53,7 +52,7 @@ void PlaybackWaitItem::playNext()
     }
     double const progress = m_start.msecsTo( QDateTime::currentDateTime() ) / 1000.0;
     Q_ASSERT( progress >= 0.0 );
-    double const t = progress / m_duration;
+    double const t = progress / m_wait->duration();
     if( t <= 1 ){
         if( m_isPlaying ){
             emit progressChanged( progress );
@@ -73,7 +72,7 @@ void PlaybackWaitItem::pause()
 
 void PlaybackWaitItem::seek( double t )
 {
-    m_start = QDateTime::currentDateTime().addMSecs( -t * m_duration * 1000 );
+    m_start = QDateTime::currentDateTime().addMSecs( -t * m_wait->duration() * 1000 );
     m_pause = QDateTime::currentDateTime();
 }
 

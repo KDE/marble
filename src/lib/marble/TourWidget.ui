@@ -26,6 +26,7 @@
      <addaction name="m_actionRecord"/>
      <addaction name="separator"/>
      <addaction name="m_actionAddFlyTo"/>
+     <addaction name="m_actionAddWait"/>
      <addaction name="separator"/>
      <addaction name="m_actionMoveUp"/>
      <addaction name="m_actionMoveDown"/>
@@ -68,10 +69,22 @@
    </property>
    <property name="icon">
     <iconset resource="libmarble.qrc">
-     <normaloff>:/marble/list-add.png</normaloff>:/marble/list-add.png</iconset>
+     <normaloff>:/marble/flag.png</normaloff>:/marble/flag.png</iconset>
    </property>
    <property name="text">
     <string>Add FlyTo</string>
+   </property>
+  </action>
+  <action name="m_actionAddWait">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/player-time.png</normaloff>:/marble/player-time.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Wait</string>
    </property>
   </action>
   <action name="m_actionMoveUp">

@@ -69,8 +69,10 @@ private Q_SLOTS:
     void moveUp();
     void moveDown();
     void addFlyTo();
+    void addWait();
     void deleteSelected();
     void updateDuration();
+    void finishAddingItem();
 
  private:
     Q_PRIVATE_SLOT( d, void openFile() )
