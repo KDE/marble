@@ -22,6 +22,7 @@
 #include <QMessageBox>
 #include <QtAlgorithms>
 #include <QColor>
+#include <QApplication>
 
 // Marble
 #include "MarbleDebug.h"
@@ -93,7 +94,9 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     GeoDataStyle style;
     GeoDataPolyStyle polyStyle;
 
-    polyStyle.setColor( QColor( 0, 255, 255, 80 ) );
+    QColor highlightedColor = QApplication::palette().highlight().color();
+    highlightedColor.setAlpha(80);
+    polyStyle.setColor(highlightedColor);
     style.setId( "polygon" );
     style.setPolyStyle( polyStyle );
     m_annotationDocument->addStyle( style );

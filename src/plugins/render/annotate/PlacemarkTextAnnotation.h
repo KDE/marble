@@ -13,9 +13,8 @@
 #ifndef PLACEMARKTEXTANNOTATION_H
 #define PLACEMARKTEXTANNOTATION_H
 
-
+#include <QColor>
 #include "SceneGraphicsItem.h"
-
 
 namespace Marble
 {
@@ -49,6 +48,7 @@ protected:
 private:
     const ViewportParams *m_viewport;
     bool m_movingPlacemark;
+    QColor m_labelColor;
 
     QRegion m_region;
 };

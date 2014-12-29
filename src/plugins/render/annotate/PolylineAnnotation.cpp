@@ -12,6 +12,8 @@
 #include "PolylineAnnotation.h"
 
 // Qt
+#include <QApplication>
+#include <QPalette>
 #include <qmath.h>
 
 // Marble
@@ -34,9 +36,9 @@ const int PolylineAnnotation::selectedDim = 15;
 const int PolylineAnnotation::mergedDim = 20;
 const int PolylineAnnotation::hoveredDim = 20;
 const QColor PolylineAnnotation::regularColor = Oxygen::aluminumGray3;
-const QColor PolylineAnnotation::selectedColor = Oxygen::aluminumGray6;
+const QColor PolylineAnnotation::selectedColor = QApplication::palette().highlight().color();
 const QColor PolylineAnnotation::mergedColor = Oxygen::emeraldGreen6;
-const QColor PolylineAnnotation::hoveredColor = Oxygen::grapeViolet6;
+const QColor PolylineAnnotation::hoveredColor = QApplication::palette().highlight().color();
 
 
 PolylineAnnotation::PolylineAnnotation( GeoDataPlacemark *placemark ) :
@@ -143,6 +145,9 @@ void PolylineAnnotation::drawNodes( GeoPainter *painter )
 
     const GeoDataLineString line = static_cast<const GeoDataLineString>( *placemark()->geometry() );
 
+    QColor glowColor = QApplication::palette().highlightedText().color();
+    glowColor.setAlpha(120);
+
     for ( int i = 0; i < line.size(); ++i ) {
         // The order here is important, because a merged node can be at the same time selected.
         if ( m_nodesList.at(i).isBeingMerged() ) {
@@ -157,9 +162,7 @@ void PolylineAnnotation::drawNodes( GeoPainter *painter )
                 QPen defaultPen = painter->pen();
                 QPen newPen;
                 newPen.setWidth( defaultPen.width() + 3 );
-                newPen.setColor( m_nodesList.at(i).isEditingHighlighted() ?
-                                 QColor( 0, 255, 255, 120 ) :
-                                 QColor( 25, 255, 25, 180 ) );
+                newPen.setColor( glowColor );
 
                 painter->setBrush( Qt::NoBrush );
                 painter->setPen( newPen );
@@ -175,9 +178,7 @@ void PolylineAnnotation::drawNodes( GeoPainter *painter )
                 QPen defaultPen = painter->pen();
                 QPen newPen;
                 newPen.setWidth( defaultPen.width() + 3 );
-                newPen.setColor( m_nodesList.at(i).isEditingHighlighted() ?
-                                 QColor( 0, 255, 255, 120 ) :
-                                 QColor( 25, 255, 25, 180 ) );
+                newPen.setColor( glowColor );
 
                 painter->setPen( newPen );
                 painter->setBrush( Qt::NoBrush );
