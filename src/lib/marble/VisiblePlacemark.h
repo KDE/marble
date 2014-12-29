@@ -16,19 +16,18 @@
 #ifndef MARBLE_VISIBLEPLACEMARK_H
 #define MARBLE_VISIBLEPLACEMARK_H
 
-#include "GeoDataPlacemark.h"
-
 #include <QObject>
 #include <QPixmap>
 #include <QPoint>
-#include <QRect>
+#include <QRectF>
 #include <QString>
 
 namespace Marble
 {
 
-static const qreal s_labelOutlineWidth = 2.5;
+class GeoDataPlacemark;
 
+static const qreal s_labelOutlineWidth = 2.5;
 
 /**
  * @short A class which represents the visible place marks on a map.

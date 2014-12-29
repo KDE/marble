@@ -14,13 +14,13 @@
 #include "MarbleDebug.h"
 #include "RemoteIconLoader.h"
 
+#include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "PlacemarkLayer.h"
 
 #include <QApplication>
 #include <QPainter>
 #include <QPalette>
-#include <QPixmap>
 
 using namespace Marble;
 

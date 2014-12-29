@@ -20,6 +20,7 @@
 #include "AbstractProjection.h"
 #include "GeoDataStyle.h"
 #include "GeoPainter.h"
+#include "GeoDataPlacemark.h"
 #include "ViewportParams.h"
 #include "VisiblePlacemark.h"
 
