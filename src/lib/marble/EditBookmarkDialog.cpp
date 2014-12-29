@@ -111,6 +111,7 @@ EditBookmarkDialog::EditBookmarkDialog( BookmarkManager *bookmarkManager, QWidge
 void EditBookmarkDialog::setCoordinates( const GeoDataCoordinates &coordinates )
 {
     d->m_bookmarkCoordinates = coordinates;
+    QObject::disconnect( d->m_ui.m_header, SIGNAL(valueChanged()), this, SLOT(updateCoordinates()) );
 
     if ( d->m_ui.m_header->name().isEmpty() ) {
         d->m_ui.m_header->setName( coordinates.toString() );
@@ -118,6 +119,7 @@ void EditBookmarkDialog::setCoordinates( const GeoDataCoordinates &coordinates )
 
     d->m_ui.m_header->setLongitude( coordinates.longitude(GeoDataCoordinates::Degree) );
     d->m_ui.m_header->setLatitude( coordinates.latitude(GeoDataCoordinates::Degree) );
+    QObject::connect( d->m_ui.m_header, SIGNAL(valueChanged()), this, SLOT(updateCoordinates()) );
 }
 
 void EditBookmarkDialog::setRange( qreal range ) {
@@ -126,13 +128,17 @@ void EditBookmarkDialog::setRange( qreal range ) {
 
 void EditBookmarkDialog::setName( const QString &text )
 {
+    QObject::disconnect( d->m_ui.m_header, SIGNAL(valueChanged()), this, SLOT(updateCoordinates()) );
     d->m_ui.m_header->setName( text );
     d->m_ui.m_header->selectAll();
+    QObject::connect( d->m_ui.m_header, SIGNAL(valueChanged()), this, SLOT(updateCoordinates()) );
 }
 
 void EditBookmarkDialog::setDescription( const QString &text )
 {
+    QObject::disconnect( d->m_ui.m_header, SIGNAL(valueChanged()), this, SLOT(updateCoordinates()) );
     d->m_ui.m_description->setText( text );
+    QObject::connect( d->m_ui.m_header, SIGNAL(valueChanged()), this, SLOT(updateCoordinates()) );
 }
 
 void EditBookmarkDialog::setFolderName( const QString &name )
@@ -142,7 +148,9 @@ void EditBookmarkDialog::setFolderName( const QString &name )
 
 void EditBookmarkDialog::setIconLink(const QString &iconLink)
 {
+    QObject::disconnect( d->m_ui.m_header, SIGNAL(valueChanged()), this, SLOT(updateCoordinates()) );
     d->m_ui.m_header->setIconLink( iconLink );
+    QObject::connect( d->m_ui.m_header, SIGNAL(valueChanged()), this, SLOT(updateCoordinates()) );
 }
 
 void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
