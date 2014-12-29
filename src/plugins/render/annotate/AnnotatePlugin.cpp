@@ -805,7 +805,7 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     group->setExclusive( true );
 
 
-    QAction *selectItem = new QAction( QIcon(":/icons/hand.png"),
+    QAction *selectItem = new QAction( QIcon(":/icons/edit-select.png"),
                                        tr("Select Item"),
                                        this );
     selectItem->setCheckable( true );
