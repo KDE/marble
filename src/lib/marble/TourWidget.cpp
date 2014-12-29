@@ -76,6 +76,7 @@ public:
     void mapCenterOn(const QModelIndex &index );
     void addFlyTo();
     void addWait();
+    void addSoundCue();
     void addTourPrimitive(GeoDataTourPrimitive *primitive );
     void deleteSelected();
     void updateButtonsStates();
@@ -118,6 +119,7 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_tourUi.m_listView, SIGNAL( activated( QModelIndex ) ), q, SLOT( mapCenterOn( QModelIndex ) ) );
     QObject::connect( m_tourUi.m_actionAddFlyTo, SIGNAL( triggered() ), q, SLOT( addFlyTo() ) );
     QObject::connect( m_tourUi.m_actionAddWait, SIGNAL( triggered() ), q, SLOT( addWait() ) );
+    QObject::connect( m_tourUi.m_actionAddSoundCue, SIGNAL( triggered() ), q, SLOT( addSoundCue() ) );
     QObject::connect( m_tourUi.m_actionDelete, SIGNAL( triggered() ), q, SLOT( deleteSelected() ) );
     QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( triggered() ), q, SLOT( moveUp() ) );
     QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( triggered() ), q, SLOT( moveDown() ) );
@@ -153,7 +155,8 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
     d->m_delegate = new TourItemDelegate( d->m_tourUi.m_listView, d->m_widget );
-    QObject::connect( d->m_delegate, SIGNAL( edited( QModelIndex ) ), this, SLOT( updateDuration() ) );
+    connect( d->m_delegate, SIGNAL( edited( QModelIndex ) ), this, SLOT( updateDuration() ) );
+    connect( d->m_delegate, SIGNAL( edited( QModelIndex ) ), &d->m_playback, SLOT( updateTracks() ) );
     d->m_tourUi.m_listView->setItemDelegate( d->m_delegate );
 }
 
@@ -269,6 +272,12 @@ void TourWidgetPrivate::addWait()
     GeoDataWait *wait = new GeoDataWait();
     wait->setDuration( 1.0 );
     addTourPrimitive( wait );
+}
+
+void TourWidgetPrivate::addSoundCue()
+{
+    GeoDataSoundCue *soundCue = new GeoDataSoundCue();
+    addTourPrimitive( soundCue );
 }
 
 void TourWidgetPrivate::addTourPrimitive( GeoDataTourPrimitive *primitive )
@@ -420,6 +429,12 @@ void TourWidget::addWait()
     finishAddingItem();
 }
 
+void TourWidget::addSoundCue()
+{
+    d->addSoundCue();
+    finishAddingItem();
+}
+
 void TourWidget::deleteSelected()
 {
     d->deleteSelected();
@@ -501,6 +516,7 @@ bool TourWidgetPrivate::openDocument(GeoDataDocument* document)
         updateRootIndex();
         m_tourUi.m_actionAddFlyTo->setEnabled( true );
         m_tourUi.m_actionAddWait->setEnabled( true );
+        m_tourUi.m_actionAddSoundCue->setEnabled( true );
         m_tourUi.m_actionSaveTourAs->setEnabled( true );
         m_tourUi.m_actionSaveTour->setEnabled( false );
         m_tourUi.m_slider->setEnabled( true );

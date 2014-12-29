@@ -37,6 +37,7 @@ public:
     void stop();
 private:
     const GeoDataSoundCue* m_soundCue;
+    QString m_href;
 #ifdef HAVE_PHONON
     Phonon::MediaObject m_mediaObject;
 #endif

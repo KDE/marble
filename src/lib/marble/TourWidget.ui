@@ -27,6 +27,7 @@
      <addaction name="separator"/>
      <addaction name="m_actionAddFlyTo"/>
      <addaction name="m_actionAddWait"/>
+     <addaction name="m_actionAddSoundCue"/>
      <addaction name="separator"/>
      <addaction name="m_actionMoveUp"/>
      <addaction name="m_actionMoveDown"/>
@@ -85,6 +86,18 @@
    </property>
    <property name="text">
     <string>Add Wait</string>
+   </property>
+  </action>
+  <action name="m_actionAddSoundCue">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="libmarble.qrc">
+     <normaloff>:/marble/audio-x-generic.png</normaloff>:/marble/audio-x-generic.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add SoundCue</string>
    </property>
   </action>
   <action name="m_actionMoveUp">

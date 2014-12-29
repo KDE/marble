@@ -37,6 +37,7 @@ SoundCueEditWidget::SoundCueEditWidget( const QModelIndex &index, QWidget *paren
     layout->addWidget( iconLabel );
 
     m_lineEdit->setPlaceholderText( "Audio location" );
+    m_lineEdit->setText( soundCueElement()->href() );
     layout->addWidget( m_lineEdit );
 
     m_button->setIcon( QIcon( ":/marble/document-save.png" ) );

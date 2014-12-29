@@ -51,6 +51,10 @@ public:
      */
     void seek( double offset );
 
+public Q_SLOTS:
+    void updateTracks();
+    void clearTracks();
+
 Q_SIGNALS:
     void finished();
     void paused();

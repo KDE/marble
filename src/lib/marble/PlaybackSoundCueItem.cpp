@@ -20,12 +20,13 @@
 
 namespace Marble
 {
-PlaybackSoundCueItem::PlaybackSoundCueItem( const GeoDataSoundCue* soundCue )
+PlaybackSoundCueItem::PlaybackSoundCueItem( const GeoDataSoundCue* soundCue ) :
+    m_soundCue( soundCue ),
+    m_href( soundCue->href() )
 {
-    m_soundCue = soundCue;
 #ifdef HAVE_PHONON
     Phonon::createPath( &m_mediaObject, new Phonon::AudioOutput( Phonon::MusicCategory, this ) );
-    m_mediaObject.setCurrentSource( QUrl( soundCue->href() ) );
+    m_mediaObject.setCurrentSource( QUrl( m_href ) );
 #endif
 }
 
@@ -46,7 +47,12 @@ double PlaybackSoundCueItem::duration() const
 void PlaybackSoundCueItem::play()
 {
 #ifdef HAVE_PHONON
-    m_mediaObject.play();
+    if( m_href != m_soundCue->href() ) {
+        m_mediaObject.setCurrentSource( QUrl( soundCue()->href() ) );
+    }
+    if( m_mediaObject.isValid() ) {
+        m_mediaObject.play();
+    }
 #endif
 }
 
