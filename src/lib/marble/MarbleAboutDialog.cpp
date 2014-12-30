@@ -163,8 +163,17 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr("<b>Google Code-in</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in the Google Code-in for their successful work on Marble:</p>")+
+        QObject::tr("<p><b>2014</b></p>")+
+        QObject::tr( "Ilya Kowalewski <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya.kovalevskyy@gmail.com</a><br />" ) +
+        QObject::tr( "Mikhail Ivchenko <a href=\"mailto:ematirov@gmail.com\">ematirov@gmail.com</a><br />" ) +
+        QObject::tr( "Sergey Popov <a href=\"mailto:sergobot256@gmail.com\">sergobot256@gmail.com</a><br />" ) +
+        QObject::tr("<p><b>2013</b></p>")+
+        QObject::tr( "Ilya Kowalewski <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya.kovalevskyy@gmail.com</a><br />" ) +
+        QObject::tr( "Mikhail Ivchenko <a href=\"mailto:ematirov@gmail.com\">ematirov@gmail.com</a><br />" ) +
+        QObject::tr( "Levente Kurusa <a href=\"mailto:levex@linux.com\">levex@linux.com</a><br />" ) +
+        QObject::tr( "Benjamin Kaiser <a href=\"mailto:benjaminjkaiser@gmail.com\">benjaminjkaiser@gmail.com</a><br />" ) +
         QObject::tr( "<p><b>2012</b></p>" ) +
-        QObject::tr( "Illya Kovalevskyy <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya.kovalevskyy@gmail.com</a><br />" ) +
+        QObject::tr( "Ilya Kowalewski <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya.kovalevskyy@gmail.com</a><br />" ) +
         QObject::tr( "Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees.technocool@gmail.com</a></p><br />" ) +
         QObject::tr( "Mayank Madan <a href=\"mailto:maddiemadan@gmail.com\">maddiemadan@gmail.com</a><br />" ) +
         QObject::tr( "Timothy Lanzi <a href=\"mailto:trlanzi@gmail.com\">trlanzi@gmail.com</a></p>" ) +

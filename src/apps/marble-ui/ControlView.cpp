@@ -646,6 +646,9 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
         }
     }
 
+    mainWindow->tabifyDockWidget( tourDock, m_annotationDock );
+    mainWindow->tabifyDockWidget( m_annotationDock, fileViewDock );
+
     QList<QAction*> panelActions;
     panelActions << routingDock->toggleViewAction();
     panelActions << locationDock->toggleViewAction();
