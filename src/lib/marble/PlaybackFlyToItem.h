@@ -32,6 +32,7 @@ public:
     void setBefore(PlaybackFlyToItem* before);
     void setNext(PlaybackFlyToItem* next);
     void setStartCoordinates( const GeoDataCoordinates &coordinates );
+    void setFirst( bool isFirst );
 
 private Q_SLOTS:
     void playNext();
@@ -43,6 +44,7 @@ private:
     QDateTime m_start;
     QDateTime m_pause;
     bool m_isPlaying;
+    bool m_isFirst;
 };
 
 }

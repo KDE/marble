@@ -43,7 +43,7 @@ private Q_SLOTS:
 
 private:
     GeoDataWait* waitElement();
-    QModelIndex m_index;
+    QPersistentModelIndex m_index;
     QDoubleSpinBox *m_spinBox;
     QToolButton *m_button;
 };

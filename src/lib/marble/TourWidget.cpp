@@ -37,6 +37,7 @@
 #include "MovieCapture.h"
 #include "TourCaptureDialog.h"
 #include "MarbleDebug.h"
+#include "PlaybackFlyToItem.h"
 
 #include <QFileDialog>
 #include <QDir>
@@ -55,6 +56,8 @@
 #include <QLineEdit>
 #include <QProcess>
 #include <QProgressBar>
+#include <QToolBar>
+#include <QMenu>
 
 namespace Marble
 {
@@ -84,6 +87,7 @@ public:
     void moveDown();
     void captureTour();
     void handlePlaybackProgress( const double position );
+    void handlePlaybackFinish();
 
 private:
     GeoDataTour* findTour( GeoDataFeature* feature ) const;
@@ -102,6 +106,10 @@ public:
     TourItemDelegate *m_delegate;
     bool m_playState;
     GeoDataDocument* m_document;
+    QToolButton *m_addPrimitiveButton;
+    QAction *m_actionAddFlyTo;
+    QAction *m_actionAddWait;
+    QAction *m_actionAddSoundCue;
 };
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
@@ -111,15 +119,37 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
       m_playback( 0 ),
       m_delegate( 0 ),
       m_playState( false ),
-      m_document( 0 )
+      m_document( 0 ),
+      m_addPrimitiveButton( new QToolButton )
 {
     m_tourUi.setupUi( parent );
     m_tourUi.m_actionRecord->setEnabled( false );
 
+    QAction *separator = m_tourUi.m_toolBarControl->insertSeparator( m_tourUi.m_actionMoveUp );
+
+    m_addPrimitiveButton->setIcon( QIcon( ":/marble/flag.png" ) );
+    m_addPrimitiveButton->setToolTip( QObject::tr( "Add FlyTo" ) );
+    m_addPrimitiveButton->setPopupMode( QToolButton::MenuButtonPopup );
+
+    QMenu *addPrimitiveMenu = new QMenu;
+
+    m_actionAddFlyTo = new QAction( QIcon( ":/marble/flag.png" ), QObject::tr( "Add FlyTo" ), addPrimitiveMenu );
+    addPrimitiveMenu->addAction( m_actionAddFlyTo );
+    m_actionAddWait = new QAction( QIcon( ":/marble/player-time.png" ), QObject::tr( "Add Wait" ), addPrimitiveMenu );
+    addPrimitiveMenu->addAction( m_actionAddWait );
+    m_actionAddSoundCue = new QAction( QIcon( ":/marble/audio-x-generic.png" ), QObject::tr( "Add SoundCue" ), addPrimitiveMenu );
+    addPrimitiveMenu->addAction( m_actionAddSoundCue );
+
+    m_addPrimitiveButton->setMenu( addPrimitiveMenu );
+    m_addPrimitiveButton->setEnabled( false );
+
+    m_tourUi.m_toolBarControl->insertWidget( separator, m_addPrimitiveButton );
+
     QObject::connect( m_tourUi.m_listView, SIGNAL( activated( QModelIndex ) ), q, SLOT( mapCenterOn( QModelIndex ) ) );
-    QObject::connect( m_tourUi.m_actionAddFlyTo, SIGNAL( triggered() ), q, SLOT( addFlyTo() ) );
-    QObject::connect( m_tourUi.m_actionAddWait, SIGNAL( triggered() ), q, SLOT( addWait() ) );
-    QObject::connect( m_tourUi.m_actionAddSoundCue, SIGNAL( triggered() ), q, SLOT( addSoundCue() ) );
+    QObject::connect( m_addPrimitiveButton, SIGNAL( clicked() ), q, SLOT( addFlyTo() ) );
+    QObject::connect( m_actionAddFlyTo, SIGNAL( triggered() ), q, SLOT( addFlyTo() ) );
+    QObject::connect( m_actionAddWait, SIGNAL( triggered() ), q, SLOT( addWait() ) );
+    QObject::connect( m_actionAddSoundCue, SIGNAL( triggered() ), q, SLOT( addSoundCue() ) );
     QObject::connect( m_tourUi.m_actionDelete, SIGNAL( triggered() ), q, SLOT( deleteSelected() ) );
     QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( triggered() ), q, SLOT( moveUp() ) );
     QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( triggered() ), q, SLOT( moveDown() ) );
@@ -128,6 +158,7 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL( triggered() ), q, SLOT( saveTour() ) );
     QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( triggered() ), q, SLOT( saveTourAs() ) );
     QObject::connect( m_tourUi.m_actionRecord, SIGNAL(triggered()), q, SLOT( captureTour()) );
+    QObject::connect( &m_playback, SIGNAL( finished() ), q, SLOT( stopPlaying() ) );
 }
 
 TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
@@ -177,7 +208,9 @@ void TourWidget::startPlaying()
     d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-pause.png" ) );
     d->m_tourUi.actionPlay->setEnabled( true );
     d->m_tourUi.actionStop->setEnabled( true );
+    d->m_tourUi.m_actionRecord->setEnabled( false );
     d->m_delegate->setEditable( false );
+    d->m_addPrimitiveButton->setEnabled( false );
 }
 
 void TourWidget::pausePlaying()
@@ -193,9 +226,11 @@ void TourWidget::stopPlaying()
     d->m_playback.stop();
     d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-play.png" ) );
     d->m_tourUi.actionPlay->setEnabled( true );
+    d->m_tourUi.m_actionRecord->setEnabled( true );
     d->m_tourUi.actionStop->setEnabled( false );
     d->m_playState = false;
     d->m_delegate->setEditable( true );
+    d->m_addPrimitiveButton->setEnabled( true );
 }
 
 void TourWidget::handleSliderMove( int value )
@@ -253,7 +288,10 @@ void TourWidgetPrivate::mapCenterOn( const QModelIndex &index )
     QVariant coordinatesVariant = m_widget->model()->treeModel()->data( index, MarblePlacemarkModel::CoordinateRole );
     if ( !coordinatesVariant.isNull() ) {
         GeoDataCoordinates const coordinates = coordinatesVariant.value<GeoDataCoordinates>();
-        m_widget->centerOn( coordinates );
+        GeoDataLookAt lookat;
+        lookat.setCoordinates( coordinates );
+        lookat.setRange( coordinates.altitude() );
+        m_widget->flyTo( lookat, Instant );
     }
 }
 
@@ -263,7 +301,8 @@ void TourWidgetPrivate::addFlyTo()
     GeoDataLookAt *lookat = new GeoDataLookAt( m_widget->lookAt() );
     lookat->setAltitude( lookat->range() );
     flyTo->setView( lookat );
-    flyTo->setDuration( 1.0 );
+    bool isMainTrackEmpty = m_playback.mainTrackSize() == 0;
+    flyTo->setDuration( isMainTrackEmpty ? 0.0 : 1.0 );
     addTourPrimitive( flyTo );
 }
 
@@ -357,6 +396,7 @@ void TourWidgetPrivate::moveUp()
         }
         m_isChanged = true;
         m_tourUi.m_actionSaveTour->setEnabled( true );
+        updateButtonsStates();
     }
 }
 
@@ -377,6 +417,7 @@ void TourWidgetPrivate::moveDown()
         }
         m_isChanged = true;
         m_tourUi.m_actionSaveTour->setEnabled( true );
+        updateButtonsStates();
     }
 }
 
@@ -411,9 +452,15 @@ void TourWidgetPrivate::updateRootIndex()
                          q, SLOT( handlePlaybackProgress( double ) ) );
         q->stopPlaying();
         m_tourUi.m_toolBarPlayback->setEnabled( true );
-        m_tourUi.actionPlay->setEnabled( true );
+        bool isPlaybackEmpty = m_playback.mainTrackSize() != 0;
+        m_tourUi.actionPlay->setEnabled( isPlaybackEmpty );
+        m_tourUi.m_slider->setEnabled( isPlaybackEmpty );
+        m_tourUi.m_actionRecord->setEnabled( isPlaybackEmpty );
         m_tourUi.actionStop->setEnabled( false );
-        m_tourUi.m_actionRecord->setEnabled( true );
+        if( m_playback.mainTrackSize() > 0 ) {
+            QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
+            m_delegate->setFirstFlyTo( m_widget->model()->treeModel()->index( 0, 0, playlistIndex ) );
+        }
     }
 }
 
@@ -514,12 +561,9 @@ bool TourWidgetPrivate::openDocument(GeoDataDocument* document)
         m_widget->model()->treeModel()->addDocument( m_document );
         m_isChanged = false;
         updateRootIndex();
-        m_tourUi.m_actionAddFlyTo->setEnabled( true );
-        m_tourUi.m_actionAddWait->setEnabled( true );
-        m_tourUi.m_actionAddSoundCue->setEnabled( true );
+        m_addPrimitiveButton->setEnabled( true );
         m_tourUi.m_actionSaveTourAs->setEnabled( true );
         m_tourUi.m_actionSaveTour->setEnabled( false );
-        m_tourUi.m_slider->setEnabled( true );
         m_isChanged = false;
         return true;
     }
@@ -600,11 +644,7 @@ void TourWidgetPrivate::captureTour()
     delete playback;
     widget->model()->treeModel()->removeDocument(m_document);
     m_widget->model()->treeModel()->addDocument(m_document);
-    m_tourUi.m_listView->setModel( m_widget->model()->treeModel() );
-    if( tour ){
-        m_tourUi.m_listView->setRootIndex( m_widget->model()->treeModel()->index( tour->playlist() ) );
-        m_tourUi.m_listView->repaint();
-    }
+    updateRootIndex();
     delete widget;
 }
 

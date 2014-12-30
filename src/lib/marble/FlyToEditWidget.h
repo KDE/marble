@@ -40,6 +40,9 @@ Q_SIGNALS:
 public Q_SLOTS:
     void setEditable( bool editable );
 
+    /** We disable editing of wait duration for first flyto in playlist. */
+    void setFirstFlyTo( const QModelIndex &index );
+
 private Q_SLOTS:
     void save();
     void updateCoordinates();
@@ -47,7 +50,7 @@ private Q_SLOTS:
 private:
     GeoDataFlyTo* flyToElement();
     MarbleWidget* m_widget;
-    QModelIndex m_index;
+    QPersistentModelIndex m_index;
     QDoubleSpinBox *m_waitSpin;
     GeoDataCoordinates m_coord;
     QToolButton *m_button;

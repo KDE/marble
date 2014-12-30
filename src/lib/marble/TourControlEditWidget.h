@@ -43,7 +43,7 @@ private Q_SLOTS:
 
 private:
     GeoDataTourControl* tourControlElement();
-    QModelIndex m_index;
+    QPersistentModelIndex m_index;
     QRadioButton *m_radio_play;
     QRadioButton *m_radio_pause;
     QToolButton *m_button;

@@ -42,6 +42,12 @@ void SerialTrack::append(PlaybackItem* item)
     connect( item, SIGNAL( finished() ), this, SLOT( handleFinishedItem() ) ) ;
     connect( item, SIGNAL( paused() ), this, SLOT( pause() ) ) ;
     m_items.append( item );
+    if( m_items.size() == 1 ) {
+        PlaybackFlyToItem *flyTo = dynamic_cast<PlaybackFlyToItem*>( item );
+        if( flyTo != 0 ) {
+            flyTo->setFirst( true )
+;        }
+    }
 }
 
 void SerialTrack::play()

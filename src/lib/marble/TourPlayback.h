@@ -24,6 +24,7 @@ class GeoDataTour;
 class GeoDataPlacemark;
 class GeoDataFeature;
 class GeoDataContainer;
+class PlaybackItem;
 
 class TourPlaybackPrivate;
 
@@ -50,6 +51,14 @@ public:
      * @param offset Target timestamp in seconds in the range 0..duration()
      */
     void seek( double offset );
+
+    /** Size of main track (flyto, wait, tourcontrol primitives) **/
+    int mainTrackSize();
+    /**
+     * Element of main track (flyto, wait, tourcontrol primitives)
+     * @param i Position of element.
+     */
+    PlaybackItem* mainTrackItemAt( int i );
 
 public Q_SLOTS:
     void updateTracks();

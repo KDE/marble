@@ -43,7 +43,7 @@ private Q_SLOTS:
 
 private:
     GeoDataSoundCue* soundCueElement();
-    QModelIndex m_index;
+    QPersistentModelIndex m_index;
     QLineEdit* m_lineEdit;
     QToolButton *m_button;
 };

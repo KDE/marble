@@ -217,6 +217,16 @@ void TourPlayback::seek( double value )
     }
 }
 
+int TourPlayback::mainTrackSize()
+{
+    return d->m_mainTrack.size();
+}
+
+PlaybackItem* TourPlayback::mainTrackItemAt( int i )
+{
+    return d->m_mainTrack.at( i );
+}
+
 void TourPlayback::updateTracks()
 {
     clearTracks();

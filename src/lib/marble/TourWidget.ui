@@ -23,11 +23,6 @@
      <addaction name="m_actionOpenTour"/>
      <addaction name="m_actionSaveTour"/>
      <addaction name="m_actionSaveTourAs"/>
-     <addaction name="m_actionRecord"/>
-     <addaction name="separator"/>
-     <addaction name="m_actionAddFlyTo"/>
-     <addaction name="m_actionAddWait"/>
-     <addaction name="m_actionAddSoundCue"/>
      <addaction name="separator"/>
      <addaction name="m_actionMoveUp"/>
      <addaction name="m_actionMoveDown"/>
@@ -52,6 +47,8 @@
        <addaction name="actionPlay"/>
        <addaction name="separator"/>
        <addaction name="actionStop"/>
+       <addaction name="separator"/>
+       <addaction name="m_actionRecord"/>
       </widget>
      </item>
      <item>
@@ -64,42 +61,6 @@
     </layout>
    </item>
   </layout>
-  <action name="m_actionAddFlyTo">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="libmarble.qrc">
-     <normaloff>:/marble/flag.png</normaloff>:/marble/flag.png</iconset>
-   </property>
-   <property name="text">
-    <string>Add FlyTo</string>
-   </property>
-  </action>
-  <action name="m_actionAddWait">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="libmarble.qrc">
-     <normaloff>:/marble/player-time.png</normaloff>:/marble/player-time.png</iconset>
-   </property>
-   <property name="text">
-    <string>Add Wait</string>
-   </property>
-  </action>
-  <action name="m_actionAddSoundCue">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="libmarble.qrc">
-     <normaloff>:/marble/audio-x-generic.png</normaloff>:/marble/audio-x-generic.png</iconset>
-   </property>
-   <property name="text">
-    <string>Add SoundCue</string>
-   </property>
-  </action>
   <action name="m_actionMoveUp">
    <property name="enabled">
     <bool>false</bool>

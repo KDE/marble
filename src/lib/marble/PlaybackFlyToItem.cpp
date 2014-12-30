@@ -23,7 +23,8 @@ PlaybackFlyToItem::PlaybackFlyToItem( const GeoDataFlyTo* flyTo ):
         m_flyTo( flyTo ),
         m_before( 0 ),
         m_next( 0 ),
-        m_isPlaying( false )
+        m_isPlaying( false ),
+        m_isFirst( false )
 {
     //do nothing
 }
@@ -35,7 +36,8 @@ const GeoDataFlyTo* PlaybackFlyToItem::flyTo() const
 
 double PlaybackFlyToItem::duration() const
 {
-    return m_flyTo->duration();
+    // We use duration 0 for first FlyTo for instantly flight to it.
+    return m_isFirst ? 0 : m_flyTo->duration();
 }
 
 void PlaybackFlyToItem::play()
@@ -121,6 +123,11 @@ void PlaybackFlyToItem::setBefore( PlaybackFlyToItem *before )
 void PlaybackFlyToItem::setNext( PlaybackFlyToItem *next )
 {
     m_next = next;
+}
+
+void PlaybackFlyToItem::setFirst(bool isFirst)
+{
+    m_isFirst = isFirst;
 }
 
 }

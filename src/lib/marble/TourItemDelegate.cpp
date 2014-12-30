@@ -211,8 +211,10 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
     GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
     if ( object->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
         FlyToEditWidget* widget = new FlyToEditWidget(index, m_widget, parent);
+        widget->setFirstFlyTo( m_firstFlyTo );
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
         connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
+        connect( this, SIGNAL( firstFlyToChanged( QModelIndex ) ), widget, SLOT( setFirstFlyTo( QModelIndex ) ) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataTourControlType ) {
@@ -248,6 +250,17 @@ void TourItemDelegate::setEditable( bool editable )
         m_editable = editable;
         emit editableChanged( m_editable );
     }
+}
+
+QModelIndex TourItemDelegate::firstFlyTo() const
+{
+    return m_firstFlyTo;
+}
+
+void TourItemDelegate::setFirstFlyTo( const QModelIndex &index )
+{
+    m_firstFlyTo = index;
+    emit firstFlyToChanged( m_firstFlyTo );
 }
 
 bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index )

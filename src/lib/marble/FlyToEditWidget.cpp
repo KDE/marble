@@ -70,9 +70,22 @@ void FlyToEditWidget::setEditable( bool editable )
     m_button->setEnabled( editable );
 }
 
+void FlyToEditWidget::setFirstFlyTo(const QModelIndex &index)
+{
+    if( m_index.internalPointer() == index.internalPointer() ) {
+        m_waitSpin->setEnabled( false );
+    } else {
+        if( !m_waitSpin->isEnabled() )
+        {
+            m_waitSpin->setEnabled( true );
+        }
+    }
+}
+
 void FlyToEditWidget::updateCoordinates()
 {
     m_coord = m_widget->focusPoint();
+    m_coord.setAltitude( m_widget->lookAt().range() );
 }
 
 void FlyToEditWidget::save()
