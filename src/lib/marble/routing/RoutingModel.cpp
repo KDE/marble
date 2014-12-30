@@ -10,6 +10,7 @@
 
 #include "RoutingModel.h"
 
+#include "Planet.h"
 #include "MarbleMath.h"
 #include "Route.h"
 #include "RouteRequest.h"
@@ -33,6 +34,7 @@ public:
     };
 
     RoutingModelPrivate( RouteRequest* request );
+    MarbleModel *m_marbleModel;
 
     Route m_route;
 
@@ -70,12 +72,10 @@ void RoutingModelPrivate::updateViaPoints( const GeoDataCoordinates &position )
 RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent ) :
         QAbstractListModel( parent ), d( new RoutingModelPrivate( request ) )
 {
-   if( model )
-    {
-        d->m_positionTracking = model->positionTracking();
-        QObject::connect( d->m_positionTracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
-                 this, SLOT(updatePosition(GeoDataCoordinates,qreal)) );
-    }
+    d->m_marbleModel = model;
+    d->m_positionTracking = model->positionTracking();
+    QObject::connect( d->m_positionTracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+             this, SLOT(updatePosition(GeoDataCoordinates,qreal)) );
 
    QHash<int, QByteArray> roles;
    roles.insert( Qt::DisplayRole, "display" );
@@ -297,7 +297,8 @@ void RoutingModel::updatePosition( GeoDataCoordinates location, qreal /*speed*/ 
     d->m_route.setPosition( location );
 
     d->updateViaPoints( location );
-    qreal distance = EARTH_RADIUS * distanceSphere( location, d->m_route.positionOnRoute() );
+    qreal planetRadius = d->m_marbleModel->planet()->radius();
+    qreal distance = planetRadius * distanceSphere( location, d->m_route.positionOnRoute() );
     emit positionChanged();
 
     qreal deviation = 0.0;

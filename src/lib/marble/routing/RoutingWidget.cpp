@@ -38,6 +38,7 @@
 #include "PlaybackAnimatedUpdateItem.h"
 #include "GeoDataAnimatedUpdate.h"
 #include "MarbleMath.h"
+#include "Planet.h"
 
 #include <QTime>
 #include <QTimer>
@@ -903,9 +904,10 @@ void RoutingWidget::initializeTour()
     totalDistance = 0.0;
     GeoDataCoordinates last = path.at( 0 );
     int j=0; // next waypoint
+    qreal planetRadius = d->m_widget->model()->planet()->radius();
     for( int i=1; i<path.size(); ++i ){
         GeoDataCoordinates coordinates = path.at( i );
-        totalDistance += EARTH_RADIUS * distanceSphere( path.at( i-1 ), coordinates ); // Distance to route start
+        totalDistance += planetRadius * distanceSphere( path.at( i-1 ), coordinates ); // Distance to route start
         while (totalDistance >= allWaypoints[j].distance && j+1<allWaypoints.size()) {
             ++j;
         }
@@ -915,7 +917,7 @@ void RoutingWidget::initializeTour()
         double const waypointDistance = qMin( lastDistance, nextDistance ); // distance to closest waypoint
         double const step = qBound( 100.0, waypointDistance*2, 1000.0 ); // support point distance (higher density close to waypoints)
 
-        double const distance = EARTH_RADIUS * distanceSphere( last, coordinates );
+        double const distance = planetRadius * distanceSphere( last, coordinates );
         if( i > 1 && distance < step ){
             continue;
         }

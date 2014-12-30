@@ -40,7 +40,7 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( PositionMarker )
  public:
-    explicit PositionMarker( const MarbleModel *marbleModel = 0 );
+    explicit PositionMarker(const MarbleModel *marbleModel = 0 );
     ~PositionMarker ();
 
     QStringList renderPosition() const;
@@ -102,6 +102,8 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
 
     void loadCustomCursor( const QString& filename, bool useCursor );
     void loadDefaultCursor();
+
+    const MarbleModel *m_marbleModel;
 
     bool           m_isInitialized;
     bool           m_useCustomCursor;

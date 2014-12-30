@@ -86,7 +86,7 @@ public:
 
     /**
      * @brief Returns the total track length
-     * @param planetRadius Scale factor, usually the radius of the underlying planet, e.g. EARTH_RADIUS
+     * @param planetRadius Scale factor, usually the radius of the underlying planet
      * @return Length of all track segments on the unit sphere scaled by planetRadius
      */
     qreal length( qreal planetRadius ) const;

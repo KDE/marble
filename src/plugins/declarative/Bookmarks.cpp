@@ -10,6 +10,7 @@
 
 #include "Bookmarks.h"
 
+#include "Planet.h"
 #include "MarbleDeclarativeWidget.h"
 #include "MarbleModel.h"
 #include "MarbleMath.h"
@@ -50,9 +51,11 @@ bool Bookmarks::isBookmark( qreal longitude, qreal latitude ) const
     Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
     Marble::GeoDataDocument *bookmarks = manager->document();
     Marble::GeoDataCoordinates const compareTo( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
+
+    qreal planetRadius = m_marbleWidget->model()->planet()->radius();
     foreach( const Marble::GeoDataFolder* folder, bookmarks->folderList() ) {
         foreach( const Marble::GeoDataPlacemark * const placemark, folder->placemarkList() ) {
-            if ( distanceSphere( placemark->coordinate(), compareTo ) * Marble::EARTH_RADIUS < 5 ) {
+            if ( distanceSphere( placemark->coordinate(), compareTo ) * planetRadius < 5 ) {
                 return true;
             }
         }
@@ -111,9 +114,11 @@ void Bookmarks::removeBookmark( qreal longitude, qreal latitude )
     Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
     Marble::GeoDataDocument *bookmarks = manager->document();
     Marble::GeoDataCoordinates const compareTo( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
+
+    qreal planetRadius = m_marbleWidget->model()->planet()->radius();
     foreach( const Marble::GeoDataFolder* folder, bookmarks->folderList() ) {
         foreach( Marble::GeoDataPlacemark * placemark, folder->placemarkList() ) {
-            if ( distanceSphere( placemark->coordinate(), compareTo ) * Marble::EARTH_RADIUS < 5 ) {
+            if ( distanceSphere( placemark->coordinate(), compareTo ) * planetRadius < 5 ) {
                 manager->removeBookmark( placemark );
                 return;
             }

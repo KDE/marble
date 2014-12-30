@@ -10,6 +10,7 @@
 
 #include "Navigation.h"
 
+#include "Planet.h"
 #include "MarbleDeclarativeWidget.h"
 #include "MarbleModel.h"
 #include "routing/RoutingManager.h"
@@ -55,12 +56,14 @@ void NavigationPrivate::updateNextInstructionDistance( const Marble::Route &rout
     const Marble::GeoDataCoordinates position = route.position();
     const Marble::GeoDataCoordinates interpolated = route.positionOnRoute();
     const Marble::GeoDataCoordinates onRoute = route.currentWaypoint();
-    qreal distance = Marble::EARTH_RADIUS * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
+
+    qreal planetRadius = m_marbleWidget->model()->planet()->radius();
+    qreal distance = planetRadius * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
     qreal remaining = 0.0;
     const Marble::RouteSegment &segment = route.currentSegment();
     for ( int i=0; i<segment.path().size(); ++i ) {
         if ( segment.path()[i] == onRoute ) {
-            distance += segment.path().length( Marble::EARTH_RADIUS, i );
+            distance += segment.path().length( planetRadius, i );
             break;
         }
     }
@@ -70,7 +73,7 @@ void NavigationPrivate::updateNextInstructionDistance( const Marble::Route &rout
         const Marble::RouteSegment &segment = route.at( i );
 
         if ( upcoming ) {
-            remaining += segment.path().length( Marble::EARTH_RADIUS );
+            remaining += segment.path().length( planetRadius );
         }
 
         if ( segment == route.currentSegment() ) {

@@ -29,6 +29,7 @@
 #include "GeoPainter.h"
 #include "PositionTracking.h"
 #include "ViewportParams.h"
+#include "Planet.h"
 
 namespace Marble
 {
@@ -39,6 +40,7 @@ const int PositionMarker::sm_numResizeSteps = sizeof( sm_resizeSteps ) / sizeof(
 
 PositionMarker::PositionMarker( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
+      m_marbleModel( marbleModel ),
       m_isInitialized( false ),
       m_useCustomCursor( false ),
       m_defaultCursorPath( MarbleDirs::path( "svg/track_turtle.svg" ) ),
@@ -221,7 +223,8 @@ bool PositionMarker::render( GeoPainter *painter,
         if ( accuracy.horizontal > 0 && accuracy.horizontal < 1000 ) {
             // Paint a circle indicating the position accuracy
             painter->setPen( Qt::transparent );
-            int width = qRound( accuracy.horizontal * viewport->radius() / EARTH_RADIUS );
+            qreal planetRadius = m_marbleModel->planet()->radius();
+            int width = qRound( accuracy.horizontal * viewport->radius() / planetRadius );
             if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
                 int arrowSize = qMax<int>( m_arrow.boundingRect().width(), m_arrow.boundingRect().height() );
                 width = qMax<int>( width, arrowSize + 10 );

@@ -347,12 +347,12 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
 
             GeoDataLinearRing ring;
 
-            // R - planet radius
+            // planetRadius - planet radius
             // d - distance between points
             // S - area of the painted circle
-            qreal R = marbleModel()->planet()->radius();
+            qreal planetRadius = marbleModel()->planet()->radius();
             qreal d = m_measureLineString.length(1);
-            m_circularArea = 2 * M_PI * R*R * (1 - qCos(d));
+            m_circularArea = 2 * M_PI * planetRadius * planetRadius * (1 - qCos(d));
 
             qreal iterBearing = 0;
             while ( iterBearing < 2 * M_PI ) {
@@ -384,7 +384,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
                 painter->setPen(Qt::white);
                 GeoDataCoordinates textPosition = ring.latLonAltBox().center();
 
-                m_circumference = 2 * M_PI * R * qSin(d);
+                m_circumference = 2 * M_PI * planetRadius * qSin(d);
 
                 QString circumferenceText = tr("Circumference:\n%1").arg(meterToPreferredUnit(m_circumference));
 
@@ -476,8 +476,8 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             // theta = smaller of theta1 and theta2
             qreal theta = (theta1 < theta2) ? theta1 : theta2;
 
-            qreal R = marbleModel()->planet()->radius();
-            qreal S = qAbs((theta - (n-2) * M_PI) * R * R);
+            qreal planetRadius = marbleModel()->planet()->radius();
+            qreal S = qAbs((theta - (n-2) * M_PI) * planetRadius * planetRadius);
             m_polygonArea = S;
 
             painter->setPen(Qt::white);

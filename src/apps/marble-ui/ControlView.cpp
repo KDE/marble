@@ -415,7 +415,8 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
         text += QString::number( i+1 );
         text += "</td><td align=\"right\" valign=\"middle\">";
 
-        text += QString::number( accumulator.length( EARTH_RADIUS ) * METER2KM, 'f', 1 );
+        qreal planetRadius = marbleModel()->planet()->radius();
+        text += QString::number( accumulator.length( planetRadius ) * METER2KM, 'f', 1 );
         /** @todo: support localization */
         text += " km</td><td valign=\"middle\">";
 

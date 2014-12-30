@@ -185,15 +185,15 @@ GeoDataCoordinates SatellitesTLEItem::fromTEME( double x,
     // Algorithm from http://celestrak.com/columns/v02n03/
     //TODO: demonstrate it.
     double a = m_earthSemiMajorAxis;
-    double R = sqrt( x*x + y*y );
+    double planetRadius = sqrt( x*x + y*y );
     double latp = lat;
     double C;
     for ( int i = 0; i < 3; i++ ) {
         C = 1 / sqrt( 1 - square( m_satrec.ecco * sin( latp ) ) );
-        lat = atan2( z + a * C * square( m_satrec.ecco ) * sin( latp ), R );
+        lat = atan2( z + a * C * square( m_satrec.ecco ) * sin( latp ), planetRadius );
     }
 
-    double alt = R / cos( lat ) - a * C;
+    double alt = planetRadius / cos( lat ) - a * C;
 
     lat = GeoDataCoordinates::normalizeLat( lat );
 

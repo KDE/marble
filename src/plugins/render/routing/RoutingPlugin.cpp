@@ -14,6 +14,7 @@
 #include "ui_RoutingPlugin.h"
 #include "ui_RoutingConfigDialog.h"
 
+#include "Planet.h"
 #include "AudioOutput.h"
 #include "GeoDataCoordinates.h"
 #include "GeoPainter.h"
@@ -298,9 +299,10 @@ void RoutingPluginPrivate::updateDestinationInformation()
         QString pixmap = MarbleDirs::path( "bitmaps/routing_step.png" );
         pixmapHtml = QString( "<img src=\"%1\" />" ).arg( pixmap );
 
+        qreal planetRadius = m_marbleWidget->model()->planet()->radius();
         GeoDataCoordinates const onRoute = m_routingModel->route().positionOnRoute();
         GeoDataCoordinates const ego = m_routingModel->route().position();
-        qreal const distanceToRoute = EARTH_RADIUS * distanceSphere( ego, onRoute );
+        qreal const distanceToRoute = planetRadius * distanceSphere( ego, onRoute );
 
         if ( !m_routingModel->route().currentSegment().isValid() ) {
             m_widget.instructionLabel->setText( richText( QObject::tr( "Calculate a route to get directions." ) ) );
@@ -379,11 +381,12 @@ qreal RoutingPluginPrivate::nextInstructionDistance() const
     GeoDataCoordinates position = m_routingModel->route().position();
     GeoDataCoordinates interpolated = m_routingModel->route().positionOnRoute();
     GeoDataCoordinates onRoute = m_routingModel->route().currentWaypoint();
-    qreal distance = EARTH_RADIUS * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
+    qreal planetRadius = m_marbleWidget->model()->planet()->radius();
+    qreal distance = planetRadius * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
     const RouteSegment &segment = m_routingModel->route().currentSegment();
     for (int i=0; i<segment.path().size(); ++i) {
         if (segment.path()[i] == onRoute) {
-            return distance + segment.path().length( EARTH_RADIUS, i );
+            return distance + segment.path().length( planetRadius, i );
         }
     }
 
