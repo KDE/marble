@@ -167,6 +167,8 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr( "Ilya Kowalewski <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya.kovalevskyy@gmail.com</a><br />" ) +
         QObject::tr( "Mikhail Ivchenko <a href=\"mailto:ematirov@gmail.com\">ematirov@gmail.com</a><br />" ) +
         QObject::tr( "Sergey Popov <a href=\"mailto:sergobot256@gmail.com\">sergobot256@gmail.com</a><br />" ) +
+        QObject::tr( "Daniel Pastushchak <a href=\"mailto:danikpastushchak90@gmail.com\">danikpastushchak90@gmail.com</a><br />" ) +
+
         QObject::tr("<p><b>2013</b></p>")+
         QObject::tr( "Ilya Kowalewski <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya.kovalevskyy@gmail.com</a><br />" ) +
         QObject::tr( "Mikhail Ivchenko <a href=\"mailto:ematirov@gmail.com\">ematirov@gmail.com</a><br />" ) +
