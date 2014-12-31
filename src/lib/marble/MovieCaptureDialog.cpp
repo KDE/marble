@@ -53,27 +53,42 @@ MovieCaptureDialog::~MovieCaptureDialog()
 
 void MovieCaptureDialog::loadDestinationFile()
 {
+    QList<MovieFormat> formats = m_recorder->availableFormats();
+    if( formats.isEmpty() ) {
+        QMessageBox::warning( this, tr( "Codecs are unavailiable" ), tr( "Supported codecs are not found." ) );
+        return;
+    }
+    QString filter = formats.first().name() + " (*."+formats.first().extension() + ")";
+    for( int i = 1; i < formats.size(); i++ )
+    {
+        filter.append( ";;"+formats.at( i ).name() + " (*."+formats.at( i ).extension() + ")" );
+    }
+    const QString defaultFileName =
+            ui->destinationEdit->text().isEmpty() ? "" : ui->destinationEdit->text();
+
     const QString destination =
-            QFileDialog::getSaveFileName(this, tr("Save video file"), "",
-                                         tr("Supported video (*.mp4 *.webm *.ogg)"));
+            QFileDialog::getSaveFileName(this, tr("Save video file"), defaultFileName,
+                                         filter );
 
     if (destination.isEmpty()) {
         return;
     }
 
-    QStringList formats;
-    formats << "mp4" << "webm" << "ogg";
-
     bool supported = false;
-    foreach(const QString &format, formats) {
-        if (destination.endsWith('.'+format))
+    foreach(const MovieFormat &format, formats) {
+        if (destination.endsWith('.'+format.extension()))
             supported = true;
     }
 
     if (!supported) {
+        QString formatsExtensions = "."+formats.at( 0 ).extension();
+        for( int i = 1; i < formats.size(); ++i )
+        {
+            formatsExtensions.append( ", ."+formats.at( i ).extension() );
+        }
         QMessageBox::warning(this, tr("Filename is not valid"),
                              tr("This file format is not supported. "
-                                "Please, use .ogg, .mp4 or .webm instead"));
+                                "Please, use %1 instead").arg( formatsExtensions ) );
         return;
     }
 

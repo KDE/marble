@@ -637,6 +637,7 @@ void TourWidgetPrivate::captureTour()
         m_tourUi.m_listView->repaint();
 
         TourCaptureDialog* tourCaptureDialog = new TourCaptureDialog( widget, m_widget );
+        tourCaptureDialog->setDefaultFilename( tour->name() );
         tourCaptureDialog->setTourPlayback( playback );
         tourCaptureDialog->exec();
     }

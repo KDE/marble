@@ -38,6 +38,7 @@ public slots:
     void stopRecording();
     void setRate( double rate );
     void setTourPlayback( TourPlayback* playback );
+    void setDefaultFilename( const QString &filename );
     void handleError();
 
 private slots:
@@ -51,6 +52,7 @@ private:
     TourPlayback *m_playback;
     bool m_writingPossible;
     double m_current_position;
+    QString m_defaultFileName;
 };
 
 } // namespace Marble
