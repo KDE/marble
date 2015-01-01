@@ -114,6 +114,7 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL( triggered() ), q, SLOT( saveTour() ) );
     QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( triggered() ), q, SLOT( saveTourAs() ) );
     QObject::connect( &m_playback, SIGNAL(centerOn(GeoDataCoordinates)), q, SLOT(centerOn(GeoDataCoordinates)) );
+    QObject::connect( &m_playback, SIGNAL( finished() ), q, SLOT( stopPlaying() ) );
 }
 
 TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
@@ -133,7 +134,7 @@ TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
 }
 
 TourItemDelegate::TourItemDelegate( QListView* view, MarbleWidget* widget ):
-                    m_listView( view ), m_widget( widget )
+                    m_listView( view ), m_widget( widget ), m_editable( true )
 {
     QObject::connect( this, SIGNAL( editingChanged( QModelIndex ) ), m_listView, SLOT( update( QModelIndex ) ) );
     m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
@@ -162,6 +163,9 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
     button.features = QStyleOptionButton::None;
     button.iconSize = QSize( 16, 16 );
     button.state &= ~QStyle::State_HasFocus;
+    if( !editable() ) {
+        button.state &= ~QStyle::State_Enabled;
+    }
 
     QRect const iconRect = position( GeoDataElementIcon, option );
 
@@ -288,31 +292,48 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
     if ( object->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
         FlyToEditWidget* widget = new FlyToEditWidget(index, m_widget, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
+        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataTourControlType ) {
         TourControlEditWidget* widget = new TourControlEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
+        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataWaitType ) {
         WaitEditWidget* widget = new WaitEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
+        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataSoundCueType ) {
         SoundCueEditWidget* widget = new SoundCueEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
+        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
         return widget;
 
     }
     return 0;
 }
 
+bool TourItemDelegate::editable() const
+{
+    return m_editable;
+}
+
+void TourItemDelegate::setEditable( bool editable )
+{
+    if( m_editable != editable ) {
+        m_editable = editable;
+        emit editableChanged( m_editable );
+    }
+}
+
 bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index )
 {
     Q_UNUSED( model );
-    if ( ( event->type() == QEvent::MouseButtonRelease ) ) {
+    if ( ( event->type() == QEvent::MouseButtonRelease ) && editable() ) {
         QMouseEvent *mouseEvent = static_cast<QMouseEvent*>( event );
         QRect editRect = position( EditButton, option );
         if ( editRect.contains( mouseEvent->pos() ) ) {
@@ -333,6 +354,7 @@ bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, co
 
 void TourItemDelegate::closeEditor( const QModelIndex &index )
 {
+    emit edited( index );
     m_listView->closePersistentEditor( index );
     m_editingIndices.removeOne( index );
 }
@@ -346,6 +368,7 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
     d->m_delegate = new TourItemDelegate( d->m_tourUi.m_listView, d->m_widget );
+    QObject::connect( d->m_delegate, SIGNAL( edited( QModelIndex ) ), this, SLOT( updateDuration() ) );
     d->m_tourUi.m_listView->setItemDelegate( d->m_delegate );
 }
 
@@ -366,6 +389,7 @@ void TourWidget::startPlaying()
     d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-pause.png" ) );
     d->m_tourUi.actionPlay->setEnabled( true );
     d->m_tourUi.actionStop->setEnabled( true );
+    d->m_delegate->setEditable( false );
 }
 
 void TourWidget::pausePlaying()
@@ -383,6 +407,7 @@ void TourWidget::stopPlaying()
     d->m_tourUi.actionPlay->setEnabled( true );
     d->m_tourUi.actionStop->setEnabled( false );
     d->m_playState = false;
+    d->m_delegate->setEditable( true );
 }
 
 void TourWidget::handleSliderMove( int value )
@@ -440,7 +465,10 @@ void TourWidgetPrivate::mapCenterOn( const QModelIndex &index )
     QVariant coordinatesVariant = m_model.data( index, MarblePlacemarkModel::CoordinateRole );
     if ( !coordinatesVariant.isNull() ) {
         GeoDataCoordinates const coordinates = coordinatesVariant.value<GeoDataCoordinates>();
-        m_widget->centerOn( coordinates );
+        GeoDataLookAt lookat;
+        lookat.setCoordinates( coordinates );
+        lookat.setRange( coordinates.altitude() );
+        m_widget->flyTo( lookat, Instant );
     }
 }
 
@@ -448,6 +476,9 @@ void TourWidgetPrivate::addFlyTo()
 {
     GeoDataFlyTo *flyTo = new GeoDataFlyTo();
     flyTo->setView( new GeoDataLookAt( m_widget->lookAt() ) );
+    GeoDataLookAt *lookat = new GeoDataLookAt( m_widget->lookAt() );
+    lookat->setAltitude( lookat->range() );
+    flyTo->setView( lookat );
     GeoDataObject *rootObject =  rootIndexObject();
     if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
@@ -598,6 +629,11 @@ void TourWidget::deleteSelected()
         emit featureUpdated( feature );
         d->updateRootIndex();
     }
+}
+
+void TourWidget::updateDuration()
+{
+    d->m_tourUi.m_slider->setMaximum( d->m_playback.duration() * 100 );
 }
 
 void TourWidget::centerOn( const GeoDataCoordinates &coordinates )
@@ -756,7 +792,8 @@ void TourWidgetPrivate::handlePlaybackProgress(const double position)
 FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget, QWidget *parent ) :
     QWidget( parent ),
     m_widget( widget ),
-    m_index( index )
+    m_index( index ),
+    m_button( new QToolButton )
 {
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setSpacing( 5 );
@@ -769,18 +806,23 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
     flyToLabel->setText( tr( "Current map center" ) );
     layout->addWidget( flyToLabel );
 
-    QToolButton *button = new QToolButton;
-    button->setIcon( QIcon( ":/marble/document-save.png" ) );
-    connect(button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( button );
+    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    layout->addWidget( m_button );
 
     setLayout( layout );
+}
+
+bool FlyToEditWidget::editable() const
+{
+    return m_button->isEnabled();
 }
 
 void FlyToEditWidget::save()
 {
     if(flyToElement()->view()!=0){
         GeoDataCoordinates coords = m_widget->focusPoint();
+        coords.setAltitude( m_widget->lookAt().range() );
         if ( flyToElement()->view()->nodeType() == GeoDataTypes::GeoDataCameraType ) {
             GeoDataCamera* camera = dynamic_cast<GeoDataCamera*>( flyToElement()->view() );
             camera->setCoordinates( coords );
@@ -796,6 +838,11 @@ void FlyToEditWidget::save()
     emit editingDone(m_index);
 }
 
+void FlyToEditWidget::setEditable( bool editable )
+{
+    m_button->setEnabled( editable );
+}
+
 GeoDataFlyTo* FlyToEditWidget::flyToElement()
 {
     GeoDataObject *object = qvariant_cast<GeoDataObject*>(m_index.data( MarblePlacemarkModel::ObjectPointerRole ) );
@@ -807,6 +854,7 @@ GeoDataFlyTo* FlyToEditWidget::flyToElement()
 TourControlEditWidget::TourControlEditWidget( const QModelIndex &index, QWidget *parent ) :
     QWidget( parent ),
     m_index( index ),
+    m_button( new QToolButton ),
     m_radio_play( new QRadioButton ),
     m_radio_pause( new QRadioButton )
 {
@@ -829,12 +877,16 @@ TourControlEditWidget::TourControlEditWidget( const QModelIndex &index, QWidget 
         m_radio_pause->setChecked( true );
     }
 
-    QToolButton *button = new QToolButton;
-    button->setIcon( QIcon( ":/marble/document-save.png" ) );
-    connect(button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( button );
+    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    layout->addWidget( m_button );
 
     setLayout( layout );
+}
+
+bool TourControlEditWidget::editable() const
+{
+    return m_button->isEnabled();
 }
 
 void TourControlEditWidget::save()
@@ -845,6 +897,11 @@ void TourControlEditWidget::save()
         tourControlElement()->setPlayMode( GeoDataTourControl::Pause );
     }
     emit editingDone(m_index);
+}
+
+void TourControlEditWidget::setEditable( bool editable )
+{
+    m_button->setEnabled( editable );
 }
 
 GeoDataTourControl* TourControlEditWidget::tourControlElement()
@@ -858,6 +915,7 @@ GeoDataTourControl* TourControlEditWidget::tourControlElement()
 WaitEditWidget::WaitEditWidget( const QModelIndex &index, QWidget *parent ) :
     QWidget( parent ),
     m_index( index ),
+    m_button( new QToolButton ),
     m_spinBox( new QDoubleSpinBox )
 {
     QHBoxLayout *layout = new QHBoxLayout;
@@ -874,18 +932,27 @@ WaitEditWidget::WaitEditWidget( const QModelIndex &index, QWidget *parent ) :
     layout->addWidget( m_spinBox );
     m_spinBox->setValue( waitElement()->duration() );
 
-    QToolButton *button = new QToolButton;
-    button->setIcon( QIcon( ":/marble/document-save.png" ) );
-    connect(button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( button );
+    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    layout->addWidget( m_button );
 
     setLayout( layout );
+}
+
+bool WaitEditWidget::editable() const
+{
+    return m_button->isEnabled();
 }
 
 void WaitEditWidget::save()
 {
     waitElement()->setDuration( m_spinBox->value() );
     emit editingDone(m_index);
+}
+
+void WaitEditWidget::setEditable( bool editable )
+{
+    m_button->setEnabled( editable );
 }
 
 GeoDataWait* WaitEditWidget::waitElement()
@@ -899,6 +966,7 @@ GeoDataWait* WaitEditWidget::waitElement()
 SoundCueEditWidget::SoundCueEditWidget( const QModelIndex &index, QWidget *parent ) :
     QWidget( parent ),
     m_index( index ),
+    m_button( new QToolButton ),
     m_lineEdit( new QLineEdit )
 {
     QHBoxLayout *layout = new QHBoxLayout;
@@ -911,18 +979,27 @@ SoundCueEditWidget::SoundCueEditWidget( const QModelIndex &index, QWidget *paren
     m_lineEdit->setPlaceholderText( "Audio location" );
     layout->addWidget( m_lineEdit );
 
-    QToolButton *button = new QToolButton;
-    button->setIcon( QIcon( ":/marble/document-save.png" ) );
-    connect(button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( button );
+    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    layout->addWidget( m_button );
 
     setLayout( layout );
+}
+
+bool SoundCueEditWidget::editable() const
+{
+    return m_button->isEnabled();
 }
 
 void SoundCueEditWidget::save()
 {
     soundCueElement()->setHref( m_lineEdit->text() );
     emit editingDone(m_index);
+}
+
+void SoundCueEditWidget::setEditable( bool editable )
+{
+    m_button->setEnabled( editable );
 }
 
 GeoDataSoundCue* SoundCueEditWidget::soundCueElement()

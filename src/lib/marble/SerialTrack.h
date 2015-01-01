@@ -50,7 +50,6 @@ public Q_SLOTS:
 private:
     QList<PlaybackItem*> m_items;
     int m_currentIndex;
-    double m_duration;
     double m_finishedPosition;
     double m_currentPosition;
     bool m_paused;

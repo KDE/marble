@@ -24,6 +24,7 @@ class QModelIndex;
 class QDoubleSpinBox;
 class QRadioButton;
 class QLineEdit;
+class QToolButton;
 
 namespace Marble
 {
@@ -47,6 +48,7 @@ class FlyToEditWidget: public QWidget
 
 public:
     FlyToEditWidget( const QModelIndex& index, MarbleWidget* widget, QWidget* parent=0 );
+    bool editable() const;
 
 Q_SIGNALS:
     void editingDone( const QModelIndex& index );
@@ -54,10 +56,14 @@ Q_SIGNALS:
 private Q_SLOTS:
     void save();
 
+public Q_SLOTS:
+    void setEditable( bool editable );
+
 private:
     GeoDataFlyTo* flyToElement();
     MarbleWidget* m_widget;
     QModelIndex m_index;
+    QToolButton *m_button;
 };
 
 class TourControlEditWidget: public QWidget
@@ -66,6 +72,7 @@ class TourControlEditWidget: public QWidget
 
 public:
     TourControlEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    bool editable() const;
 
 Q_SIGNALS:
     void editingDone( const QModelIndex& index );
@@ -73,9 +80,13 @@ Q_SIGNALS:
 private Q_SLOTS:
     void save();
 
+public Q_SLOTS:
+    void setEditable( bool editable );
+
 private:
     GeoDataTourControl* tourControlElement();
     QModelIndex m_index;
+    QToolButton *m_button;
     QRadioButton *m_radio_play;
     QRadioButton *m_radio_pause;
 };
@@ -86,6 +97,7 @@ class WaitEditWidget: public QWidget
 
 public:
     WaitEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    bool editable() const;
 
 Q_SIGNALS:
     void editingDone( const QModelIndex& index );
@@ -93,9 +105,13 @@ Q_SIGNALS:
 private Q_SLOTS:
     void save();
 
+public Q_SLOTS:
+    void setEditable( bool editable );
+
 private:
     GeoDataWait* waitElement();
     QModelIndex m_index;
+    QToolButton *m_button;
     QDoubleSpinBox *m_spinBox;
 };
 
@@ -105,6 +121,7 @@ class SoundCueEditWidget: public QWidget
 
 public:
     SoundCueEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    bool editable() const;
 
 Q_SIGNALS:
     void editingDone( const QModelIndex& index );
@@ -112,9 +129,13 @@ Q_SIGNALS:
 private Q_SLOTS:
     void save();
 
+public Q_SLOTS:
+    void setEditable( bool editable );
+
 private:
     GeoDataSoundCue* soundCueElement();
     QModelIndex m_index;
+    QToolButton *m_button;
     QLineEdit* m_lineEdit;
 };
 
@@ -144,6 +165,7 @@ private Q_SLOTS:
     void moveDown();
     void addFlyTo();
     void deleteSelected();
+    void updateDuration();
     void centerOn( const GeoDataCoordinates &coordinates );
 
  private:
@@ -169,9 +191,13 @@ public:
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QWidget* createEditor ( QWidget * parent, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
+    bool editable() const;
+    void setEditable( bool editable );
 
 Q_SIGNALS:
     void editingChanged( QModelIndex index );
+    void edited( QModelIndex index );
+    void editableChanged( bool editable );
 
 public:
 
@@ -193,6 +219,7 @@ private:
     QList<QPersistentModelIndex> m_editingIndices;
     QListView* m_listView;
     MarbleWidget *m_widget;
+    bool m_editable;
 };
 
 }
