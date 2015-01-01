@@ -198,6 +198,7 @@ set(marblewidget_SRCS
     MovieCapture.cpp
     MovieCaptureDialog.cpp
     TourCaptureDialog.cpp
+    EditTextAnnotationDialog.cpp
 
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp
@@ -341,6 +342,7 @@ set (marblewidget_UI
     MarbleCloudSyncSettingsWidget.ui
     MovieCaptureDialog.ui
     TourCaptureDialog.ui
+    EditTextAnnotationDialog.ui
 )
 
 # FIXME: cleaner approach of src/lib/marblwidget/MarbleControlBox.* vs. marble.qrc
@@ -558,6 +560,7 @@ install( FILES
     marble_export.h
     Planet.h
     PlanetFactory.h
+    EditTextAnnotationDialog.h
 
     AbstractDataPlugin.h
     AbstractDataPluginModel.h

@@ -18,7 +18,6 @@ namespace Marble {
 
 class GeoDataFeature;
 class GeoDataPlacemark;
-class PlacemarkTextAnnotation;
 
 
 /**

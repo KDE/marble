@@ -22,7 +22,6 @@
 #include "GeoDataStyle.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleWidget.h"
-#include "PlacemarkTextAnnotation.h"
 
 namespace Marble {
 

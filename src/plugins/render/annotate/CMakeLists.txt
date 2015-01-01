@@ -13,7 +13,6 @@ endif()
 
 set( annotate_UI
   EditGroundOverlayDialog.ui
-  EditTextAnnotationDialog.ui
   EditPolygonDialog.ui
   EditPolylineDialog.ui
 )
@@ -22,7 +21,6 @@ set( annotate_SRCS
   AnnotatePlugin.cpp
   AreaAnnotation.cpp
   EditGroundOverlayDialog.cpp
-  EditTextAnnotationDialog.cpp
   EditPolygonDialog.cpp
   EditPolylineDialog.cpp
   GroundOverlayFrame.cpp
