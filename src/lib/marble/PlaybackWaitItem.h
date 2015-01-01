@@ -36,7 +36,6 @@ private:
     const GeoDataWait* m_wait;
     QDateTime m_start;
     QDateTime m_pause;
-    double m_duration;
     bool m_isPlaying;
 };
 }

@@ -409,15 +409,20 @@ void GeometryLayer::addPlacemarks( QModelIndex parent, int first, int last )
 void GeometryLayer::removePlacemarks( QModelIndex parent, int first, int last )
 {
     Q_ASSERT( last < d->m_model->rowCount( parent ) );
+    bool isRepaintNeeded = false;
     for( int i=first; i<=last; ++i ) {
         QModelIndex index = d->m_model->index( i, 0, parent );
         Q_ASSERT( index.isValid() );
         const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
         const GeoDataFeature *feature = dynamic_cast<const GeoDataFeature*>( object );
-        Q_ASSERT( feature );
-        d->removeGraphicsItems( feature );
+        if( feature != 0 ) {
+            d->removeGraphicsItems( feature );
+            isRepaintNeeded = true;
+        }
     }
-    emit repaintNeeded();
+    if( isRepaintNeeded ) {
+        emit repaintNeeded();
+    }
 
 }
 
