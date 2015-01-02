@@ -55,7 +55,7 @@ void MovieCaptureDialog::loadDestinationFile()
 {
     QList<MovieFormat> formats = m_recorder->availableFormats();
     if( formats.isEmpty() ) {
-        QMessageBox::warning( this, tr( "Codecs are unavailiable" ), tr( "Supported codecs are not found." ) );
+        QMessageBox::warning( this, tr( "Codecs are unavailable" ), tr( "Supported codecs are not found." ) );
         return;
     }
     QString filter = formats.first().name() + " (*."+formats.first().extension() + ")";
