@@ -20,6 +20,7 @@ namespace Marble
 {
 
 class MarbleWidget;
+class GeoDataAnimatedUpdate;
 
 class TourItemDelegate : public QStyledItemDelegate
 {
@@ -33,6 +34,7 @@ public:
     bool editable() const;
     void setEditable( bool editable );
     QModelIndex firstFlyTo() const;
+    bool editAnimatedUpdate( GeoDataAnimatedUpdate *animatedUpdate );
 
 public Q_SLOTS:
     /** Editing duration for first flyTo element in playlist will be disabled.  */

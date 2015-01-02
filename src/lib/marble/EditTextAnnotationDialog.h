@@ -37,6 +37,12 @@ public:
      */
     void setFirstTimeEditing( bool enabled );
 
+    /**
+     * @brief idFilter gets filter for id of placemark
+     * @return QStringList of ids which could not be used as id.
+     */
+    QStringList idFilter() const;
+
 public slots:
     /**
      * @brief updateDialogFields is connected to a signal from AnnotatePlugin in order
@@ -44,6 +50,12 @@ public slots:
      * annotation item.
      */
     void updateDialogFields();
+
+    /**
+     * @brief setIdFilter sets filter for id of placemark.
+     * @param filter QStringList with ids which could not be used as id.
+     */
+    void setIdFilter( const QStringList &filter );
 
 private slots:
 

@@ -38,6 +38,9 @@
 #include "TourCaptureDialog.h"
 #include "MarbleDebug.h"
 #include "PlaybackFlyToItem.h"
+#include "EditTextAnnotationDialog.h"
+#include "MarbleDirs.h"
+#include "GeoDataStyle.h"
 
 #include <QFileDialog>
 #include <QDir>
@@ -80,6 +83,7 @@ public:
     void addFlyTo();
     void addWait();
     void addSoundCue();
+    void addPlacemark();
     void addTourPrimitive(GeoDataTourPrimitive *primitive );
     void deleteSelected();
     void updateButtonsStates();
@@ -110,6 +114,7 @@ public:
     QAction *m_actionAddFlyTo;
     QAction *m_actionAddWait;
     QAction *m_actionAddSoundCue;
+    QAction *m_actionAddPlacemark;
 };
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
@@ -139,6 +144,8 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     addPrimitiveMenu->addAction( m_actionAddWait );
     m_actionAddSoundCue = new QAction( QIcon( ":/marble/audio-x-generic.png" ), QObject::tr( "Add SoundCue" ), addPrimitiveMenu );
     addPrimitiveMenu->addAction( m_actionAddSoundCue );
+    m_actionAddPlacemark = new QAction( QIcon( ":/icons/add-placemark.png" ), QObject::tr( "Add Placemark" ), addPrimitiveMenu );
+    addPrimitiveMenu->addAction( m_actionAddPlacemark );
 
     m_addPrimitiveButton->setMenu( addPrimitiveMenu );
     m_addPrimitiveButton->setEnabled( false );
@@ -150,6 +157,7 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_actionAddFlyTo, SIGNAL( triggered() ), q, SLOT( addFlyTo() ) );
     QObject::connect( m_actionAddWait, SIGNAL( triggered() ), q, SLOT( addWait() ) );
     QObject::connect( m_actionAddSoundCue, SIGNAL( triggered() ), q, SLOT( addSoundCue() ) );
+    QObject::connect( m_actionAddPlacemark, SIGNAL( triggered() ), q, SLOT( addPlacemark() ) );
     QObject::connect( m_tourUi.m_actionDelete, SIGNAL( triggered() ), q, SLOT( deleteSelected() ) );
     QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( triggered() ), q, SLOT( moveUp() ) );
     QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( triggered() ), q, SLOT( moveDown() ) );
@@ -319,6 +327,36 @@ void TourWidgetPrivate::addSoundCue()
     addTourPrimitive( soundCue );
 }
 
+void TourWidgetPrivate::addPlacemark()
+{
+
+    // Get the normalized coordinates of the focus point. There will be automatically added a new
+    // placemark.
+    qreal lat = m_widget->focusPoint().latitude();
+    qreal lon = m_widget->focusPoint().longitude();
+    GeoDataCoordinates::normalizeLonLat( lon, lat );
+
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    placemark->setCoordinate( lon, lat );
+    placemark->setVisible( true );
+    placemark->setBalloonVisible( true );
+    GeoDataStyle *newStyle = new GeoDataStyle( *placemark->style() );
+    newStyle->iconStyle().setIcon( QImage() );
+    newStyle->iconStyle().setIconPath( MarbleDirs::path("bitmaps/redflag_22.png") );
+    placemark->setStyle( newStyle );
+
+    GeoDataCreate *create = new GeoDataCreate;
+    create->append( placemark );
+    GeoDataUpdate *update = new GeoDataUpdate;
+    update->setCreate( create );
+    GeoDataAnimatedUpdate *animatedUpdate = new GeoDataAnimatedUpdate;
+    animatedUpdate->setUpdate( update );
+
+    if( m_delegate->editAnimatedUpdate( animatedUpdate ) ) {
+        addTourPrimitive( animatedUpdate );
+    }
+}
+
 void TourWidgetPrivate::addTourPrimitive( GeoDataTourPrimitive *primitive )
 {
     GeoDataObject *rootObject =  rootIndexObject();
@@ -479,6 +517,12 @@ void TourWidget::addWait()
 void TourWidget::addSoundCue()
 {
     d->addSoundCue();
+    finishAddingItem();
+}
+
+void TourWidget::addPlacemark()
+{
+    d->addPlacemark();
     finishAddingItem();
 }
 

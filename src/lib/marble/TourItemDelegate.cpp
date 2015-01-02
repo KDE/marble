@@ -28,6 +28,9 @@
 #include "SoundCueEditWidget.h"
 #include "WaitEditWidget.h"
 #include "GeoDataTypes.h"
+#include "EditTextAnnotationDialog.h"
+#include "MarbleWidget.h"
+#include "GeoDataPlaylist.h"
 
 namespace Marble
 {
@@ -153,8 +156,11 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         GeoDataAnimatedUpdate *animUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
         GeoDataUpdate *update = animUpdate->update();
         QString text;
-        if( update ){
+        if( update && update->create() && update->create()->size() != 0 ){
+            label.setHtml( tr( "Create item %1" ).arg( update->create()->first().id() ) );
+        } else if( update ) {
             label.setHtml( tr( "Update items" ) );
+            button.state &= ~QStyle::State_Enabled & ~QStyle::State_Sunken;
         }
 
         painter->save();
@@ -166,7 +172,6 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         button.icon = QIcon( ":/marble/document-edit.png" );
         QRect const buttonRect = position( EditButton, option );
         button.rect = buttonRect;
-        button.state &= ~QStyle::State_Enabled & ~QStyle::State_Sunken;
 
         QIcon const icon = QIcon( ":/marble/player-time.png" );
         painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
@@ -257,6 +262,84 @@ QModelIndex TourItemDelegate::firstFlyTo() const
     return m_firstFlyTo;
 }
 
+bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate)
+{
+    if( animatedUpdate->update() == 0 || animatedUpdate->update()->create() == 0
+            || animatedUpdate->update()->create()->placemarkList().isEmpty() ) {
+        return false;
+    }
+    GeoDataFeature *feature = animatedUpdate->update()->create()->placemarkList().first();
+    if( feature->nodeType() != GeoDataTypes::GeoDataPlacemarkType ) {
+        return false;
+    }
+
+    QStringList filter;
+
+    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
+
+    QPointer<EditTextAnnotationDialog> dialog = new EditTextAnnotationDialog( placemark, m_widget );
+    dialog->setWindowTitle( QObject::tr( "Add Placemark to Tour" ) );
+
+    QModelIndex const rootIndex = m_listView->rootIndex();
+    if( rootIndex.isValid() ) {
+        GeoDataObject *rootObject = static_cast<GeoDataObject*>( rootIndex.internalPointer() );
+        if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
+            GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+            if( !playlist->id().isEmpty() ) {
+                filter << playlist->id();
+            }
+            for( int i = 0; i < playlist->size(); ++i ) {
+                GeoDataTourPrimitive *primitive = playlist->primitive( i );
+                if( !primitive->id().isEmpty() ) {
+                    filter << primitive->id();
+                }
+                if( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
+                    GeoDataAnimatedUpdate *animatedUpdate = static_cast<GeoDataAnimatedUpdate*>( primitive );
+                    if( animatedUpdate->update() != 0 ) {
+                        GeoDataUpdate *update = animatedUpdate->update();
+                        if( !update->id().isEmpty() ) {
+                            filter << update->id();
+                        }
+                        if( update->create() != 0 ) {
+                            if( !update->create()->id().isEmpty() ) {
+                                filter << update->create()->id();
+                            }
+                            for( int j = 0; j < update->create()->size(); ++j ) {
+                                if( !update->create()->at( j ).id().isEmpty() ) {
+                                    filter << update->create()->at( j ).id();
+                                }
+                            }
+                        }
+                        if( update->change() != 0 ) {
+                            if( !update->change()->id().isEmpty() ) {
+                                filter << update->change()->id();
+                            }
+                            for( int j = 0; j < update->change()->size(); ++j ) {
+                                if( !update->change()->at( j ).id().isEmpty() ) {
+                                    filter << update->change()->at( j ).id();
+                                }
+                            }
+                        }
+                        if( update->getDelete() != 0 ) {
+                            if( !update->getDelete()->id().isEmpty() ) {
+                                filter << update->getDelete()->id();
+                            }
+                            for( int j = 0; j < update->getDelete()->size(); ++j ) {
+                                if( !update->getDelete()->at( j ).id().isEmpty() ) {
+                                    filter << update->getDelete()->at( j ).id();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    filter.removeOne( placemark->id() );
+    dialog->setIdFilter( filter );
+    return dialog->exec();
+}
+
 void TourItemDelegate::setFirstFlyTo( const QModelIndex &index )
 {
     m_firstFlyTo = index;
@@ -275,8 +358,14 @@ bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, co
                 emit editingChanged( index );
                 return true;
             }else{
-                m_editingIndices.append( index );
-                m_listView->openPersistentEditor( index );
+                GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
+                if( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
+                    GeoDataAnimatedUpdate *animatedUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
+                    editAnimatedUpdate( animatedUpdate );
+                } else {
+                    m_editingIndices.append( index );
+                    m_listView->openPersistentEditor( index );
+                }
             }
             emit editingChanged( index );
             return true;

@@ -46,6 +46,10 @@ public:
     QString m_initialName;
     GeoDataCoordinates m_initialCoords;
     GeoDataStyle m_initialStyle;
+    QString m_styleColorTabName;
+    bool m_initialIsPlacemarkVisible;
+    bool m_initialIsBaloonVisible;
+    QString m_initialId;
 };
 
 EditTextAnnotationDialog::Private::Private( GeoDataPlacemark *placemark ) :
@@ -78,9 +82,13 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     if ( placemark->name().isNull() ) {
         placemark->setName( tr("Untitled Placemark") );
     }
-    // Setup name, icon link and latitude/longitude values.
+    // Setup id, name, icon link and latitude/longitude values.
+    d->m_header->setId( placemark->id() );
+    d->m_initialId = placemark->id();
     d->m_header->setName( placemark->name() );
     d->m_initialName = placemark->name();
+    d->m_isPlacemarkVisible->setChecked( placemark->isVisible() );
+    d->m_initialIsPlacemarkVisible = placemark->isVisible();
     d->m_header->setIconLink( placemark->style()->iconStyle().iconPath() );
     MarbleWidget* marbleWidget = dynamic_cast<MarbleWidget*>( parent );
     if( marbleWidget != 0 ) {
@@ -95,6 +103,8 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
 
     d->m_description->setText( placemark->description() );
     d->m_initialDescription = placemark->description();
+    d->m_isBalloonVisible->setChecked( placemark->isBalloonVisible() );
+    d->m_initialIsBaloonVisible = placemark->isBalloonVisible();
 
     d->m_header->setLatitude( placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
     d->m_header->setLongitude( placemark->coordinate().longitude( GeoDataCoordinates::Degree ) );
@@ -164,10 +174,20 @@ void EditTextAnnotationDialog::setFirstTimeEditing( bool enabled )
     d->m_firstEditing = enabled;
 }
 
+QStringList EditTextAnnotationDialog::idFilter() const
+{
+    return d->m_header->idFilter();
+}
+
 void EditTextAnnotationDialog::updateDialogFields()
 {
     d->m_header->setLatitude( d->m_placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
     d->m_header->setLongitude( d->m_placemark->coordinate().longitude( GeoDataCoordinates::Degree ) );
+}
+
+void EditTextAnnotationDialog::setIdFilter(const QStringList &filter)
+{
+    d->m_header->setIdFilter( filter );
 }
 
 void EditTextAnnotationDialog::updateTextAnnotation()
@@ -179,6 +199,9 @@ void EditTextAnnotationDialog::updateTextAnnotation()
                                                                          0,
                                                                          GeoDataCoordinates::Degree ) );
 
+    d->m_placemark->setVisible( d->m_isPlacemarkVisible->isChecked() );
+    d->m_placemark->setBalloonVisible( d->m_isBalloonVisible->isChecked() );
+    d->m_placemark->setId( d->m_header->id() );
 
     GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
 
@@ -195,7 +218,6 @@ void EditTextAnnotationDialog::updateTextAnnotation()
 
     d->m_placemark->setStyle( newStyle );
 
-
     emit textAnnotationUpdated( d->m_placemark );
 }
 
@@ -205,6 +227,14 @@ void EditTextAnnotationDialog::checkFields()
         QMessageBox::warning( this,
                               tr( "No name specified" ),
                               tr( "Please specify a name for this placemark." ) );
+    } else if ( d->m_header->id().isEmpty() ) {
+        QMessageBox::warning( this,
+                              tr( "No ID specified" ),
+                              tr( "Please specify a ID for this placemark." ) );
+    } else if ( !d->m_header->isIdValid() ) {
+        QMessageBox::warning( this,
+                              tr( "ID is invalid" ),
+                              tr( "Please specify a valid ID for this placemark." ) );
     } else if ( d->m_header->iconLink().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No image specified" ),
@@ -245,6 +275,10 @@ void EditTextAnnotationDialog::restoreInitial( int result )
         d->m_placemark->setName( d->m_initialName );
     }
 
+    if ( d->m_placemark->id() != d->m_initialId ) {
+        d->m_placemark->setId( d->m_initialId );
+    }
+
     if ( d->m_placemark->description() != d->m_initialDescription ) {
         d->m_placemark->setDescription( d->m_initialDescription );
     }
@@ -258,6 +292,14 @@ void EditTextAnnotationDialog::restoreInitial( int result )
 
     if ( *d->m_placemark->style() != d->m_initialStyle ) {
         d->m_placemark->setStyle( new GeoDataStyle( d->m_initialStyle ) );
+    }
+
+    if( d->m_placemark->isVisible() != d->m_initialIsPlacemarkVisible ) {
+        d->m_placemark->setVisible( d->m_initialIsPlacemarkVisible );
+    }
+
+    if( d->m_placemark->isBalloonVisible() != d->m_initialIsBaloonVisible ) {
+        d->m_placemark->setVisible( d->m_initialIsBaloonVisible );
     }
 
     emit textAnnotationUpdated( d->m_placemark );

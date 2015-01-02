@@ -1013,6 +1013,8 @@ void AnnotatePlugin::addTextAnnotation()
 
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
     placemark->setCoordinate( lon, lat );
+    placemark->setVisible( true );
+    placemark->setBalloonVisible( false );
     m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, placemark );
 
     PlacemarkTextAnnotation *textAnnotation = new PlacemarkTextAnnotation( placemark );

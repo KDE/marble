@@ -29,7 +29,7 @@ class MARBLE_EXPORT PlacemarkEditHeader : public QWidget
 public:
     explicit PlacemarkEditHeader(QWidget *parent = 0,
                         GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS,
-                        QString name = "", QString iconLink = "");
+                        QString name = "", QString iconLink = "", QString id = "", const QStringList &idFilter = QStringList() );
     ~PlacemarkEditHeader();
     QString name() const;
     QString iconLink() const;
@@ -37,6 +37,10 @@ public:
     qreal longitude() const;
     GeoDataCoordinates::Notation notation() const;
     bool positionVisible() const;
+    QString id() const;
+    QStringList idFilter() const;
+    bool isIdVisible() const;
+    bool isIdValid() const;
 public Q_SLOTS:
     void setName(const QString &name);
     void setIconLink(const QString &iconLink);
@@ -44,6 +48,9 @@ public Q_SLOTS:
     void setLongitude(qreal longitude);
     void setNotation(GeoDataCoordinates::Notation notation);
     void setPositionVisible( bool visible );
+    QString setId( const QString &id );
+    void setIdFilter( QStringList filter );
+    void setIdVisible( bool visible );
     void selectAll();
 Q_SIGNALS:
     void valueChanged();

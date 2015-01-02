@@ -75,8 +75,8 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void stopTour();
-    void hideBalloon();
     void showBalloon( GeoDataPlacemark* );
+    void hideBalloon();
     void centerOn( const GeoDataCoordinates &coordinates );
 
 private:

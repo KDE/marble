@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>124</height>
+    <width>302</width>
+    <height>126</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,58 +17,75 @@
    </sizepolicy>
   </property>
   <layout class="QFormLayout" name="formLayout_2">
-   <item row="0" column="0">
-    <widget class="QPushButton" name="iconLinkButton">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>85</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>85</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Browse...</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>75</width>
-       <height>75</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="nameLabel">
+   <item row="0" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="iconLinkButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>85</width>
+         <height>85</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>85</width>
+         <height>85</height>
+        </size>
+       </property>
        <property name="text">
-        <string>Name:</string>
+        <string>Browse...</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>75</width>
+         <height>75</height>
+        </size>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="m_name"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="iconLinkLabel">
-       <property name="text">
-        <string>Icon Link:</string>
+     <item>
+      <layout class="QFormLayout" name="formLayout">
+       <property name="fieldGrowthPolicy">
+        <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
        </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="m_iconLink"/>
+       <item row="0" column="0">
+        <widget class="QLabel" name="nameLabel">
+         <property name="text">
+          <string>Name:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="m_name"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="iconLinkLabel">
+         <property name="text">
+          <string>Icon Link:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="m_iconLink"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="idLabel">
+         <property name="text">
+          <string>ID:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="m_id"/>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
