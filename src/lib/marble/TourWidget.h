@@ -73,6 +73,7 @@ private Q_SLOTS:
     void addWait();
     void addSoundCue();
     void addPlacemark();
+    void addRemoveItem();
     void deleteSelected();
     void updateDuration();
     void finishAddingItem();

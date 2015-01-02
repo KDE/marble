@@ -21,6 +21,7 @@ namespace Marble
 
 class MarbleWidget;
 class GeoDataAnimatedUpdate;
+class GeoDataPlaylist;
 
 class TourItemDelegate : public QStyledItemDelegate
 {
@@ -35,16 +36,21 @@ public:
     void setEditable( bool editable );
     QModelIndex firstFlyTo() const;
     bool editAnimatedUpdate( GeoDataAnimatedUpdate *animatedUpdate );
+    QString defaultFeatureId() const;
 
 public Q_SLOTS:
     /** Editing duration for first flyTo element in playlist will be disabled.  */
     void setFirstFlyTo( const QModelIndex &index );
+    /** Sets id of default feature for Remove Item */
+    void setDefaultFeatureId( const QString &id );
 
 Q_SIGNALS:
     void editingChanged( QModelIndex index );
     void edited( QModelIndex index );
     void editableChanged( bool editable );
     void firstFlyToChanged( const QModelIndex &newFirstFlyTo );
+    void featureIdsChanged( QStringList ids );
+    void defaultFeatureIdChanged( QString id );
 
 public:
 
@@ -63,11 +69,14 @@ private Q_SLOTS:
 
 private:
     static QRect position( Element element, const QStyleOptionViewItem &option );
+    QStringList findIds( GeoDataPlaylist *playlist, bool onlyFeatures = false ) const;
+    GeoDataPlaylist *playlist() const;
     QList<QPersistentModelIndex> m_editingIndices;
     QListView* m_listView;
     MarbleWidget *m_widget;
     bool m_editable;
     QPersistentModelIndex m_firstFlyTo;
+    QString m_defaultFeatureId;
 };
 
 } // namespace Marble

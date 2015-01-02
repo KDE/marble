@@ -27,6 +27,7 @@
 #include "TourControlEditWidget.h"
 #include "SoundCueEditWidget.h"
 #include "WaitEditWidget.h"
+#include "RemoveItemEditWidget.h"
 #include "GeoDataTypes.h"
 #include "EditTextAnnotationDialog.h"
 #include "MarbleWidget.h"
@@ -152,12 +153,14 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
 
         QIcon const icon = QIcon( ":/marble/audio-x-generic.png" );
         painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ){
+    } else if ( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType && !m_editingIndices.contains( index ) ){
         GeoDataAnimatedUpdate *animUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
         GeoDataUpdate *update = animUpdate->update();
         QString text;
         if( update && update->create() && update->create()->size() != 0 ){
             label.setHtml( tr( "Create item %1" ).arg( update->create()->first().id() ) );
+        } else if( update && update->getDelete() && update->getDelete()->size() != 0 ){
+            label.setHtml( tr( "Remove item %1" ).arg( update->getDelete()->first().targetId() ) );
         } else if( update ) {
             label.setHtml( tr( "Update items" ) );
             button.state &= ~QStyle::State_Enabled & ~QStyle::State_Sunken;
@@ -202,6 +205,73 @@ QRect TourItemDelegate::position( Element element, const QStyleOptionViewItem &o
     return QRect();
 }
 
+QStringList TourItemDelegate::findIds(GeoDataPlaylist *playlist, bool onlyFeatures) const
+{
+    if( playlist == 0 ) {
+        return QStringList();
+    }
+    QStringList result;
+    for( int i = 0; i < playlist->size(); ++i ) {
+        GeoDataTourPrimitive *primitive = playlist->primitive( i );
+        if( !primitive->id().isEmpty() && !onlyFeatures ) {
+            result << primitive->id();
+        }
+        if( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
+            GeoDataAnimatedUpdate *animatedUpdate = static_cast<GeoDataAnimatedUpdate*>( primitive );
+            if( animatedUpdate->update() != 0 ) {
+                GeoDataUpdate *update = animatedUpdate->update();
+                if( !update->id().isEmpty() && !onlyFeatures ) {
+                    result << update->id();
+                }
+                if( update->create() != 0 ) {
+                    if( !update->create()->id().isEmpty() && !onlyFeatures ) {
+                        result << update->create()->id();
+                    }
+                    for( int j = 0; j < update->create()->size(); ++j ) {
+                        if( !update->create()->at( j ).id().isEmpty() ) {
+                            result << update->create()->at( j ).id();
+                        }
+                    }
+                }
+                if( update->change() != 0 ) {
+                    if( !update->change()->id().isEmpty() && !onlyFeatures ) {
+                        result << update->change()->id();
+                    }
+                    for( int j = 0; j < update->change()->size(); ++j ) {
+                        if( !update->change()->at( j ).id().isEmpty() ) {
+                            result << update->change()->at( j ).id();
+                        }
+                    }
+                }
+                if( update->getDelete() != 0 ) {
+                    if( !update->getDelete()->id().isEmpty() && !onlyFeatures ) {
+                        result << update->getDelete()->id();
+                    }
+                    for( int j = 0; j < update->getDelete()->size(); ++j ) {
+                        if( !update->getDelete()->at( j ).id().isEmpty() ) {
+                            result << update->getDelete()->at( j ).id();
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return result;
+}
+
+GeoDataPlaylist *TourItemDelegate::playlist() const
+{
+    QModelIndex const rootIndex = m_listView->rootIndex();
+    if( rootIndex.isValid() ) {
+        GeoDataObject *rootObject = static_cast<GeoDataObject*>( rootIndex.internalPointer() );
+        if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
+            GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+            return playlist;
+        }
+    }
+    return 0;
+}
+
 
 QSize TourItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -238,6 +308,18 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
         SoundCueEditWidget* widget = new SoundCueEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
         connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
+        return widget;
+
+    } else if ( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
+        RemoveItemEditWidget* widget = new RemoveItemEditWidget(index, parent);
+        GeoDataPlaylist *playlistObject = playlist();
+        if( playlistObject != 0 ) {
+            widget->setFeatureIds( findIds( playlistObject ) );
+        }
+        connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
+        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
+        connect( this, SIGNAL( featureIdsChanged( QStringList ) ), widget, SLOT( setFeatureIds( QStringList ) ) );
+        connect( this, SIGNAL( defaultFeatureIdChanged( QString ) ), widget, SLOT( setDefaultFeatureId( QString ) ) );
         return widget;
 
     }
@@ -280,70 +362,35 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate)
     QPointer<EditTextAnnotationDialog> dialog = new EditTextAnnotationDialog( placemark, m_widget );
     dialog->setWindowTitle( QObject::tr( "Add Placemark to Tour" ) );
 
-    QModelIndex const rootIndex = m_listView->rootIndex();
-    if( rootIndex.isValid() ) {
-        GeoDataObject *rootObject = static_cast<GeoDataObject*>( rootIndex.internalPointer() );
-        if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-            GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
-            if( !playlist->id().isEmpty() ) {
-                filter << playlist->id();
-            }
-            for( int i = 0; i < playlist->size(); ++i ) {
-                GeoDataTourPrimitive *primitive = playlist->primitive( i );
-                if( !primitive->id().isEmpty() ) {
-                    filter << primitive->id();
-                }
-                if( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
-                    GeoDataAnimatedUpdate *animatedUpdate = static_cast<GeoDataAnimatedUpdate*>( primitive );
-                    if( animatedUpdate->update() != 0 ) {
-                        GeoDataUpdate *update = animatedUpdate->update();
-                        if( !update->id().isEmpty() ) {
-                            filter << update->id();
-                        }
-                        if( update->create() != 0 ) {
-                            if( !update->create()->id().isEmpty() ) {
-                                filter << update->create()->id();
-                            }
-                            for( int j = 0; j < update->create()->size(); ++j ) {
-                                if( !update->create()->at( j ).id().isEmpty() ) {
-                                    filter << update->create()->at( j ).id();
-                                }
-                            }
-                        }
-                        if( update->change() != 0 ) {
-                            if( !update->change()->id().isEmpty() ) {
-                                filter << update->change()->id();
-                            }
-                            for( int j = 0; j < update->change()->size(); ++j ) {
-                                if( !update->change()->at( j ).id().isEmpty() ) {
-                                    filter << update->change()->at( j ).id();
-                                }
-                            }
-                        }
-                        if( update->getDelete() != 0 ) {
-                            if( !update->getDelete()->id().isEmpty() ) {
-                                filter << update->getDelete()->id();
-                            }
-                            for( int j = 0; j < update->getDelete()->size(); ++j ) {
-                                if( !update->getDelete()->at( j ).id().isEmpty() ) {
-                                    filter << update->getDelete()->at( j ).id();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    GeoDataPlaylist* playlistObject = playlist();
+    if( playlistObject != 0 ) {
+        if( !playlistObject->id().isEmpty() ) {
+            filter << playlistObject->id();
         }
+        filter.append( findIds( playlistObject ) );
     }
     filter.removeOne( placemark->id() );
     dialog->setIdFilter( filter );
     return dialog->exec();
 }
 
+QString TourItemDelegate::defaultFeatureId() const
+{
+    return m_defaultFeatureId;
+}
+
 void TourItemDelegate::setFirstFlyTo( const QModelIndex &index )
 {
     m_firstFlyTo = index;
     emit firstFlyToChanged( m_firstFlyTo );
+}
+
+void TourItemDelegate::setDefaultFeatureId(const QString &id)
+{
+    m_defaultFeatureId = id;
+    QStringList ids = findIds( playlist() );
+    emit featureIdsChanged( ids );
+    emit defaultFeatureIdChanged( id );
 }
 
 bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index )
@@ -361,7 +408,14 @@ bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, co
                 GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
                 if( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
                     GeoDataAnimatedUpdate *animatedUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
-                    editAnimatedUpdate( animatedUpdate );
+                    if( animatedUpdate->update() && animatedUpdate->update()->create() ) {
+                        if( editAnimatedUpdate( animatedUpdate ) ) {
+                            setDefaultFeatureId( m_defaultFeatureId );
+                        }
+                    } else if ( animatedUpdate->update() && animatedUpdate->update()->getDelete() ) {
+                        m_editingIndices.append( index );
+                        m_listView->openPersistentEditor( index );
+                    }
                 } else {
                     m_editingIndices.append( index );
                     m_listView->openPersistentEditor( index );

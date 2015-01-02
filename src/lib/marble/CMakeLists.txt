@@ -99,6 +99,7 @@ set(marblewidget_SRCS
     TourControlEditWidget.cpp
     WaitEditWidget.cpp
     SoundCueEditWidget.cpp
+    RemoveItemEditWidget.cpp
     TourItemDelegate.cpp
     TourPlayback.cpp
     LegendWidget.cpp
@@ -457,6 +458,7 @@ install( FILES
     TourControlEditWidget.h
     WaitEditWidget.h
     SoundCueEditWidget.h
+    RemoveItemEditWidget.h
     TourItemDelegate.h
     TourPlayback.h
     CurrentLocationWidget.h
