@@ -316,6 +316,7 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
         if( playlistObject != 0 ) {
             widget->setFeatureIds( findIds( playlistObject ) );
         }
+        widget->setDefaultFeatureId( m_defaultFeatureId );
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
         connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
         connect( this, SIGNAL( featureIdsChanged( QStringList ) ), widget, SLOT( setFeatureIds( QStringList ) ) );
