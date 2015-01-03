@@ -11,6 +11,8 @@
 #ifndef EDITPLACEMARKDIALOG_H
 #define EDITPLACEMARKDIALOG_H
 
+#include "marble_export.h"
+
 #include <QDialog>
 
 
@@ -23,7 +25,7 @@ class GeoDataPlacemark;
 /**
  * @brief The EditTextAnnotationDialog class deals with customizing placemarks.
  */
-class EditTextAnnotationDialog : public QDialog
+class MARBLE_EXPORT EditTextAnnotationDialog : public QDialog
 {
     Q_OBJECT
 
