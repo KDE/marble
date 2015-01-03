@@ -25,6 +25,7 @@
 #include <QSet>
 #include <QItemSelectionModel>
 #include <QSortFilterProxyModel>
+#include <QTextDocument>
 
 #if (QT_VERSION < 0x040800)
 // See comment below why this is needed
