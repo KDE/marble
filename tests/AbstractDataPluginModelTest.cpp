@@ -125,19 +125,16 @@ void AbstractDataPluginModelTest::destructor()
 void AbstractDataPluginModelTest::addItemToList_data()
 {
     QTest::addColumn<bool>( "initialized" );
-    QTest::addColumn<QString>( "planetId" );
 
     const bool isInitialized = true;
 
-    addRow() << isInitialized << m_marbleModel.planetId();
-    addRow() << !isInitialized << m_marbleModel.planetId();
-    addRow() << isInitialized << QString( "Saturn" );
+    addRow() << isInitialized;
+    addRow() << !isInitialized;
 }
 
 void AbstractDataPluginModelTest::addItemToList()
 {
     QFETCH( bool, initialized );
-    QFETCH( QString, planetId );
 
     TestDataPluginModel model( &m_marbleModel );
 
@@ -156,10 +153,7 @@ void AbstractDataPluginModelTest::addItemToList()
     QVERIFY( model.itemExists( "foo" ) );
     QCOMPARE( model.findItem( "foo" ), item );
     QCOMPARE( itemsUpdatedSpy.count() == 1, initialized );
-
-    const bool visible = initialized && ( m_marbleModel.planetId() == planetId );
-
-    QCOMPARE( static_cast<bool>( model.items( &fullViewport, 1 ).contains( item ) ), visible );
+    QCOMPARE( static_cast<bool>( model.items( &fullViewport, 1 ).contains( item ) ), initialized );
 }
 
 void AbstractDataPluginModelTest::addItemToList_keepExisting_data()
