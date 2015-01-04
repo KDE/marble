@@ -214,8 +214,12 @@ set (ENABLE_TESTS FALSE CACHE BOOL "Build unit tests?")
 set (WITH_DESIGNER_PLUGIN TRUE CACHE BOOL "Build plugins for Qt Designer")
 add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget support in Qt Designer. Toggle with WITH_DESIGNER_PLUGIN=YES/NO")
 if (QTONLY)
+    # TODO: this could use GNUInstallDirs or ECM, so e.g. LIB_SUFFIX is automatically set
     set(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" )
     set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
+    if (QT5BUILD)
+       set(QT_PLUGINS_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/plugins)
+    endif()
 endif (QTONLY)
 ####################################################
 # Detect default for the user configurable MARBLE_DATA_PATH option
