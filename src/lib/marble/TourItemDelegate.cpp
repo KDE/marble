@@ -161,6 +161,8 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             label.setHtml( tr( "Create item %1" ).arg( update->create()->first().id() ) );
         } else if( update && update->getDelete() && update->getDelete()->size() != 0 ){
             label.setHtml( tr( "Remove item %1" ).arg( update->getDelete()->first().targetId() ) );
+        } else if( update && update->change() && update->change()->size() != 0 ){
+            label.setHtml( tr( "Change item %1" ).arg( update->change()->first().targetId() ) );
         } else if( update ) {
             label.setHtml( tr( "Update items" ) );
             button.state &= ~QStyle::State_Enabled & ~QStyle::State_Sunken;
@@ -345,39 +347,110 @@ QModelIndex TourItemDelegate::firstFlyTo() const
     return m_firstFlyTo;
 }
 
-bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate)
+bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate, bool create)
 {
-    if( animatedUpdate->update() == 0 || animatedUpdate->update()->create() == 0
-            || animatedUpdate->update()->create()->placemarkList().isEmpty() ) {
+    if( animatedUpdate->update() == 0 ) {
         return false;
     }
-    GeoDataFeature *feature = animatedUpdate->update()->create()->placemarkList().first();
-    if( feature->nodeType() != GeoDataTypes::GeoDataPlacemarkType ) {
+    GeoDataFeature *feature = 0;
+    if( create && !( animatedUpdate->update()->create() == 0 || animatedUpdate->update()->create()->placemarkList().isEmpty() ) ) {
+        feature = animatedUpdate->update()->create()->placemarkList().first();
+    } else if ( !create && !( animatedUpdate->update()->change() == 0 || animatedUpdate->update()->change()->placemarkList().isEmpty() ) ) {
+        feature = animatedUpdate->update()->change()->placemarkList().first();
+    }
+    if( feature == 0 ) {
         return false;
     }
 
-    QStringList filter;
+    QStringList ids;
 
     GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
 
-    QPointer<EditTextAnnotationDialog> dialog = new EditTextAnnotationDialog( placemark, m_widget );
-    dialog->setWindowTitle( QObject::tr( "Add Placemark to Tour" ) );
+    if( !create ) {
+        if( placemark->targetId().isEmpty() && !defaultFeatureId().isEmpty() ) {
+            GeoDataFeature *feature = findFeature( defaultFeatureId() );
+            if( feature != 0 && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+                GeoDataPlacemark *targetPlacemark = static_cast<GeoDataPlacemark*>( feature );
+                animatedUpdate->update()->change()->placemarkList().remove( 0 );
+                delete placemark;
+                placemark = new GeoDataPlacemark( *targetPlacemark );
+                animatedUpdate->update()->change()->placemarkList().insert( 0, placemark );
+                placemark->setTargetId( defaultFeatureId() );
+                placemark->setId( "" );
+            }
+        }
+    }
 
+    QPointer<EditTextAnnotationDialog> dialog = new EditTextAnnotationDialog( placemark, m_widget );
+    if( create ) {
+        dialog->setWindowTitle( QObject::tr( "Add Placemark to Tour" ) );
+    } else {
+        dialog->setWindowTitle( QObject::tr( "Change Placemark in Tour" ) );
+        dialog->setTargetIdFieldVisible( true );
+        dialog->setIdFieldVisible( false );
+    }
     GeoDataPlaylist* playlistObject = playlist();
     if( playlistObject != 0 ) {
-        if( !playlistObject->id().isEmpty() ) {
-            filter << playlistObject->id();
-        }
-        filter.append( findIds( playlistObject ) );
+        ids.append( findIds( playlistObject, true ) );
     }
-    filter.removeOne( placemark->id() );
-    dialog->setIdFilter( filter );
-    return dialog->exec();
+    ids.removeOne( placemark->id() );
+    if( create ) {
+        dialog->setIdFilter( ids );
+    } else {
+        dialog->setTargetIds( ids );
+    }
+    bool status = dialog->exec();
+    if( !create ) {
+        placemark->setId("");
+    }
+    return status;
 }
 
 QString TourItemDelegate::defaultFeatureId() const
 {
     return m_defaultFeatureId;
+}
+
+
+
+GeoDataFeature *TourItemDelegate::findFeature(const QString &id) const
+{
+    GeoDataPlaylist *playlistObject = playlist();
+    if( playlistObject == 0 ) {
+        return 0;
+    }
+    GeoDataFeature *result = 0;
+    for( int i = 0; i < playlistObject->size(); ++i ) {
+        GeoDataTourPrimitive *primitive = playlistObject->primitive( i );
+        if( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
+            GeoDataAnimatedUpdate *animatedUpdate = static_cast<GeoDataAnimatedUpdate*>( primitive );
+            if( animatedUpdate->update() != 0 ) {
+                GeoDataUpdate *update = animatedUpdate->update();
+                if( update->create() != 0 ) {
+                    for( int j = 0; j < update->create()->featureList().size(); ++j ) {
+                        if( update->create()->at( j ).id() == id ) {
+                            result = update->create()->featureList().at( j );
+                        }
+                    }
+                }
+                if( update->change() != 0 ) {
+                    for( int j = 0; j < update->change()->featureList().size(); ++j ) {
+                        if( update->change()->at( j ).id() == id ) {
+                            result = update->change()->featureList().at( j );
+                        }
+                    }
+                }
+                if( update->getDelete() != 0 ) {
+                    for( int j = 0; j < update->getDelete()->featureList().size(); ++j ) {
+                        if( update->getDelete()->at( j ).id() == id ) {
+                            result = update->getDelete()->featureList().at( j );
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return result;
 }
 
 void TourItemDelegate::setFirstFlyTo( const QModelIndex &index )
@@ -413,6 +486,8 @@ bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, co
                         if( editAnimatedUpdate( animatedUpdate ) ) {
                             setDefaultFeatureId( m_defaultFeatureId );
                         }
+                    } else if( animatedUpdate->update() && animatedUpdate->update()->change() ) {
+                        editAnimatedUpdate( animatedUpdate, false );
                     } else if ( animatedUpdate->update() && animatedUpdate->update()->getDelete() ) {
                         m_editingIndices.append( index );
                         m_listView->openPersistentEditor( index );

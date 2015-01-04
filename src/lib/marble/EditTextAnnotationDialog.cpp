@@ -50,6 +50,7 @@ public:
     bool m_initialIsPlacemarkVisible;
     bool m_initialIsBaloonVisible;
     QString m_initialId;
+    QString m_initialTargetId;
 };
 
 EditTextAnnotationDialog::Private::Private( GeoDataPlacemark *placemark ) :
@@ -90,6 +91,8 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     d->m_isPlacemarkVisible->setChecked( placemark->isVisible() );
     d->m_initialIsPlacemarkVisible = placemark->isVisible();
     d->m_header->setIconLink( placemark->style()->iconStyle().iconPath() );
+    d->m_header->setTargetId( placemark->targetId() );
+    d->m_initialTargetId = placemark->targetId();
     MarbleWidget* marbleWidget = dynamic_cast<MarbleWidget*>( parent );
     if( marbleWidget != 0 ) {
         const AngleUnit defaultAngleUnit = marbleWidget->defaultAngleUnit();
@@ -179,6 +182,21 @@ QStringList EditTextAnnotationDialog::idFilter() const
     return d->m_header->idFilter();
 }
 
+QStringList EditTextAnnotationDialog::targetIds() const
+{
+    return d->m_header->targetIdList();
+}
+
+bool EditTextAnnotationDialog::isTargetIdFieldVisible() const
+{
+    return d->m_header->isTargetIdVisible();
+}
+
+bool EditTextAnnotationDialog::isIdFieldVisible() const
+{
+    return d->m_header->isIdVisible();
+}
+
 void EditTextAnnotationDialog::updateDialogFields()
 {
     d->m_header->setLatitude( d->m_placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
@@ -188,6 +206,21 @@ void EditTextAnnotationDialog::updateDialogFields()
 void EditTextAnnotationDialog::setIdFilter(const QStringList &filter)
 {
     d->m_header->setIdFilter( filter );
+}
+
+void EditTextAnnotationDialog::setTargetIds(const QStringList &targetIds)
+{
+    d->m_header->setTargetIdList( targetIds );
+}
+
+void EditTextAnnotationDialog::setTargetIdFieldVisible(bool visible)
+{
+    d->m_header->setTargetIdVisible( visible );
+}
+
+void EditTextAnnotationDialog::setIdFieldVisible(bool visible)
+{
+    d->m_header->setIdVisible( visible );
 }
 
 void EditTextAnnotationDialog::updateTextAnnotation()
@@ -202,6 +235,7 @@ void EditTextAnnotationDialog::updateTextAnnotation()
     d->m_placemark->setVisible( d->m_isPlacemarkVisible->isChecked() );
     d->m_placemark->setBalloonVisible( d->m_isBalloonVisible->isChecked() );
     d->m_placemark->setId( d->m_header->id() );
+    d->m_placemark->setTargetId( d->m_header->targetId() );
 
     GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
 
@@ -227,11 +261,11 @@ void EditTextAnnotationDialog::checkFields()
         QMessageBox::warning( this,
                               tr( "No name specified" ),
                               tr( "Please specify a name for this placemark." ) );
-    } else if ( d->m_header->id().isEmpty() ) {
+    } else if ( isIdFieldVisible() && d->m_header->id().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No ID specified" ),
                               tr( "Please specify a ID for this placemark." ) );
-    } else if ( !d->m_header->isIdValid() ) {
+    } else if ( isIdFieldVisible() && !d->m_header->isIdValid() ) {
         QMessageBox::warning( this,
                               tr( "ID is invalid" ),
                               tr( "Please specify a valid ID for this placemark." ) );
@@ -275,8 +309,12 @@ void EditTextAnnotationDialog::restoreInitial( int result )
         d->m_placemark->setName( d->m_initialName );
     }
 
-    if ( d->m_placemark->id() != d->m_initialId ) {
+    if ( isIdFieldVisible() && d->m_placemark->id() != d->m_initialId ) {
         d->m_placemark->setId( d->m_initialId );
+    }
+
+    if ( isTargetIdFieldVisible() && d->m_placemark->targetId() != d->m_initialTargetId ) {
+        d->m_placemark->setTargetId( d->m_initialTargetId );
     }
 
     if ( d->m_placemark->description() != d->m_initialDescription ) {

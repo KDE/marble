@@ -17,6 +17,9 @@
    </sizepolicy>
   </property>
   <layout class="QFormLayout" name="formLayout_2">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+   </property>
    <item row="0" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -91,6 +94,16 @@
        </item>
        <item row="2" column="1">
         <widget class="QLineEdit" name="m_id"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="m_targetId"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="targetIdLabel">
+         <property name="text">
+          <string>Target ID:</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

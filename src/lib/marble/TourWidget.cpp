@@ -85,6 +85,7 @@ public:
     void addSoundCue();
     void addPlacemark();
     void addRemovePlacemark();
+    void addChangePlacemark();
     void addTourPrimitive(GeoDataTourPrimitive *primitive );
     void deleteSelected();
     void updateButtonsStates();
@@ -117,6 +118,7 @@ public:
     QAction *m_actionAddSoundCue;
     QAction *m_actionAddPlacemark;
     QAction *m_actionAddRemovePlacemark;
+    QAction *m_actionAddChangePlacemark;
 };
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
@@ -151,6 +153,8 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     addPrimitiveMenu->addAction( m_actionAddPlacemark );
     m_actionAddRemovePlacemark = new QAction( QIcon( ":/icons/remove.png" ), QObject::tr( "Remove placemark" ), addPrimitiveMenu );
     addPrimitiveMenu->addAction( m_actionAddRemovePlacemark );
+    m_actionAddChangePlacemark = new QAction( QIcon( ":/marble/document-edit.png" ), QObject::tr( "Change placemark" ), addPrimitiveMenu );
+    addPrimitiveMenu->addAction( m_actionAddChangePlacemark );
 
     m_addPrimitiveButton->setMenu( addPrimitiveMenu );
     m_addPrimitiveButton->setEnabled( false );
@@ -164,6 +168,7 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_actionAddSoundCue, SIGNAL( triggered() ), q, SLOT( addSoundCue() ) );
     QObject::connect( m_actionAddPlacemark, SIGNAL( triggered() ), q, SLOT( addPlacemark() ) );
     QObject::connect( m_actionAddRemovePlacemark, SIGNAL( triggered() ), q, SLOT( addRemovePlacemark() ) );
+    QObject::connect( m_actionAddChangePlacemark, SIGNAL( triggered() ), q, SLOT( addChangePlacemark() ) );
     QObject::connect( m_tourUi.m_actionDelete, SIGNAL( triggered() ), q, SLOT( deleteSelected() ) );
     QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( triggered() ), q, SLOT( moveUp() ) );
     QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( triggered() ), q, SLOT( moveDown() ) );
@@ -379,6 +384,27 @@ void TourWidgetPrivate::addRemovePlacemark()
     addTourPrimitive( animatedUpdate );
 }
 
+void TourWidgetPrivate::addChangePlacemark()
+{
+    GeoDataChange *change = new GeoDataChange;
+    GeoDataPlacemark *placemark = 0;
+    GeoDataFeature *lastFeature = m_delegate->findFeature( m_delegate->defaultFeatureId() );
+    if( lastFeature != 0 && lastFeature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        GeoDataPlacemark *target = static_cast<GeoDataPlacemark*>( lastFeature );
+        placemark = new GeoDataPlacemark( *target );
+        placemark->setTargetId( m_delegate->defaultFeatureId() );
+        placemark->setId( "" );
+    } else {
+        placemark = new GeoDataPlacemark;
+    }
+    change->append( placemark );
+    GeoDataUpdate *update = new GeoDataUpdate;
+    update->setChange( change );
+    GeoDataAnimatedUpdate *animatedUpdate = new GeoDataAnimatedUpdate;
+    animatedUpdate->setUpdate( update );
+    addTourPrimitive( animatedUpdate );
+}
+
 void TourWidgetPrivate::addTourPrimitive( GeoDataTourPrimitive *primitive )
 {
     GeoDataObject *rootObject =  rootIndexObject();
@@ -551,6 +577,12 @@ void TourWidget::addPlacemark()
 void TourWidget::addRemovePlacemark()
 {
     d->addRemovePlacemark();
+    finishAddingItem();
+}
+
+void TourWidget::addChangePlacemark()
+{
+    d->addChangePlacemark();
     finishAddingItem();
 }
 

@@ -14,6 +14,8 @@
 #include <QWidget>
 #include <QFileDialog>
 #include <QLineEdit>
+#include <QLabel>
+#include <QComboBox>
 #include "MarbleDebug.h"
 
 #include "MarbleGlobal.h"
@@ -49,6 +51,12 @@ public:
     void loadIconFile();
     bool positionVisible() const;
     void setPositionVisible( bool visible );
+    QString targetId() const;
+    void setTargetId( const QString &targetId );
+    QStringList targetIdList() const;
+    void setTargetIdList( const QStringList &targetIdList );
+    bool isTargetIdVisible() const;
+    void setTargetIdVisible( bool visible );
     void updateValues();
     void selectAll();
 private:
@@ -58,6 +66,7 @@ private:
     bool m_idWasEdited;
     bool m_idValid;
     QString m_idString;
+    QString m_targetIdString;
 };
 
 PlacemarkEditHeaderPrivate::PlacemarkEditHeaderPrivate(PlacemarkEditHeader* _q)
@@ -74,6 +83,8 @@ void PlacemarkEditHeaderPrivate::init(QWidget* parent)
     setupUi(parent);
     m_longitude->setDimension( Longitude );
     m_latitude->setDimension( Latitude );
+    m_targetId->setVisible(false);
+    targetIdLabel->setVisible(false);
     setNotation(GeoDataCoordinates::DMS);
     QObject::connect( iconLinkButton, SIGNAL(clicked()), q, SLOT(loadIconFile()) );
 }
@@ -230,12 +241,56 @@ void PlacemarkEditHeaderPrivate::setPositionVisible(bool visible)
     m_positionVisible = visible;
 }
 
+QString PlacemarkEditHeaderPrivate::targetId() const
+{
+    return m_targetId->currentText();
+}
+
+void PlacemarkEditHeaderPrivate::setTargetId(const QString &targetId)
+{
+    m_targetId->setCurrentIndex( m_targetId->findText( targetId ) );
+    m_targetIdString = targetId;
+}
+
+QStringList PlacemarkEditHeaderPrivate::targetIdList() const
+{
+    QStringList result;
+    for( int i = 0; i < m_targetId->count(); ++i ) {
+        result.append( m_targetId->itemText( i ) );
+    }
+    return result;
+}
+
+void PlacemarkEditHeaderPrivate::setTargetIdList(const QStringList &targetIdList)
+{
+    QString current;
+    if( m_targetId->currentIndex() != -1 ) {
+        current = m_targetId->currentText();
+    } else {
+        current = m_targetIdString;
+    }
+    m_targetId->clear();
+    m_targetId->addItems( targetIdList );
+    setTargetId( current );
+}
+
+bool PlacemarkEditHeaderPrivate::isTargetIdVisible() const
+{
+    return m_targetId->isVisible() && targetIdLabel->isVisible();
+}
+
+void PlacemarkEditHeaderPrivate::setTargetIdVisible(bool visible)
+{
+    m_targetId->setVisible( visible );
+    targetIdLabel->setVisible( visible );
+}
+
 void PlacemarkEditHeaderPrivate::updateValues()
 {
     if( m_idString != id() ) {
         setId( id() );
         m_idWasEdited = true;
-    } else if( !m_idWasEdited ){
+    } else if( !m_idWasEdited && isIdVisible() ){
         setId( name() );
     }
 }
@@ -322,6 +377,21 @@ bool PlacemarkEditHeader::isIdValid() const
     return d->isIdValid();
 }
 
+QString PlacemarkEditHeader::targetId() const
+{
+    return d->targetId();
+}
+
+QStringList PlacemarkEditHeader::targetIdList() const
+{
+    return d->targetIdList();
+}
+
+bool PlacemarkEditHeader::isTargetIdVisible() const
+{
+    return d->isTargetIdVisible();
+}
+
 void PlacemarkEditHeader::setName(const QString &name)
 {
     d->setName(name);
@@ -357,7 +427,7 @@ QString PlacemarkEditHeader::setId( const QString &id)
     return d->setId( id );
 }
 
-void PlacemarkEditHeader::setIdFilter(QStringList filter)
+void PlacemarkEditHeader::setIdFilter( const QStringList &filter )
 {
     d->setIdFilter( filter );
 }
@@ -365,6 +435,21 @@ void PlacemarkEditHeader::setIdFilter(QStringList filter)
 void PlacemarkEditHeader::setIdVisible(bool visible)
 {
     d->setIdVisible( visible );
+}
+
+void PlacemarkEditHeader::setTargetId(const QString &targetId)
+{
+    d->setTargetId( targetId );
+}
+
+void PlacemarkEditHeader::setTargetIdList(const QStringList &targetIdList)
+{
+    d->setTargetIdList( targetIdList );
+}
+
+void PlacemarkEditHeader::setTargetIdVisible(bool visible)
+{
+    d->setTargetIdVisible( visible );
 }
 
 void PlacemarkEditHeader::selectAll()

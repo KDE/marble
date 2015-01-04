@@ -74,6 +74,7 @@ private Q_SLOTS:
     void addSoundCue();
     void addPlacemark();
     void addRemovePlacemark();
+    void addChangePlacemark();
     void deleteSelected();
     void updateDuration();
     void finishAddingItem();

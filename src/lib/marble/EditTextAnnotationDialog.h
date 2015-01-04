@@ -45,6 +45,22 @@ public:
      */
     QStringList idFilter() const;
 
+    /**
+     * @brief targetIds gets ids which could be target of placemark.
+     * @return QStringList of ids which could be target of placemark.
+     */
+    QStringList targetIds() const;
+
+    /**
+     * @brief isTargetIdFieldVisible tells if targetId field is shown.
+     */
+    bool isTargetIdFieldVisible() const;
+
+    /**
+     * @brief isIdFieldVisible tells if targetId field is shown.
+     */
+    bool isIdFieldVisible() const;
+
 public slots:
     /**
      * @brief updateDialogFields is connected to a signal from AnnotatePlugin in order
@@ -58,6 +74,22 @@ public slots:
      * @param filter QStringList with ids which could not be used as id.
      */
     void setIdFilter( const QStringList &filter );
+
+    /**
+     * @brief setTargetIds sets ids which could be target of placemark.
+     * @param targetIds QStringList with ids which could be target of placemark.
+     */
+    void setTargetIds( const QStringList &targetIds );
+
+    /**
+     * @brief setTargetIdFieldVisible tells the dialog wheter targetId field should be shown.
+     */
+    void setTargetIdFieldVisible( bool visible );
+
+    /**
+     * @brief setIdFieldVisible tells the dialog wheter id field should be shown.
+     */
+    void setIdFieldVisible( bool visible );
 
 private slots:
 

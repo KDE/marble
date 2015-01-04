@@ -41,6 +41,9 @@ public:
     QStringList idFilter() const;
     bool isIdVisible() const;
     bool isIdValid() const;
+    QString targetId() const;
+    QStringList targetIdList() const;
+    bool isTargetIdVisible() const;
 public Q_SLOTS:
     void setName(const QString &name);
     void setIconLink(const QString &iconLink);
@@ -49,8 +52,11 @@ public Q_SLOTS:
     void setNotation(GeoDataCoordinates::Notation notation);
     void setPositionVisible( bool visible );
     QString setId( const QString &id );
-    void setIdFilter( QStringList filter );
+    void setIdFilter( const QStringList &filter );
     void setIdVisible( bool visible );
+    void setTargetId( const QString &targetId );
+    void setTargetIdList( const QStringList &targetIdList );
+    void setTargetIdVisible( bool visible );
     void selectAll();
 Q_SIGNALS:
     void valueChanged();
