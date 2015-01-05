@@ -16,6 +16,7 @@
 
 // Marble
 #include "GeoDataLatLonAltBox.h"
+#include "MarbleModel.h"
 
 // Qt
 #include <QUrl>
@@ -36,6 +37,10 @@ void PanoramioModel::setMarbleWidget( MarbleWidget *widget )
 
 void PanoramioModel::getAdditionalItems( const GeoDataLatLonAltBox &box, qint32 number )
 {
+    if ( marbleModel()->planetId() != "earth" ) {
+        return;
+    }
+
     // FIXME: Download a list of constant number, because the parser doesn't support
     // loading a file of an unknown length.
     QUrl jsonUrl( "http://www.panoramio.com/map/get_panoramas.php?from="
@@ -73,23 +78,14 @@ void PanoramioModel::parseFile( const QByteArray &file )
         }
         
         PanoramioItem *item = new PanoramioItem( m_marbleWidget, this );
-        item->setTarget( "earth" );
         item->setCoordinate( coordinates );
         item->setId( QString::number( (*it).photo_id ) );
         item->setPhotoUrl( (*it).photo_url );
         item->setUploadDate( (*it).upload_date );
-        
-        // We need to download the file from Panoramio if it doesn't exist already
-        if ( !fileExists( item->id(), standardImageSize ) ) {
-            downloadItem( QUrl( (*it).photo_file_url ),
-                                standardImageSize,
-                                item );
-        }
-        else {
-            // If the file does exist, we can simply load it to our widget.
-            const QString filename = generateFilepath( item->id(), standardImageSize );
-            item->addDownloadedFile( filename, standardImageSize );
-        }
+
+        downloadItem( QUrl( (*it).photo_file_url ),
+                            standardImageSize,
+                            item );
 
         addItemToList( item );
     }
