@@ -46,7 +46,7 @@ QUrl PhotoPluginModel::generateUrl( const QString& service,
     QString url( "" );
     
     if( service == "flickr" )
-        url += "http://www.flickr.com/services/rest/";
+        url += "https://www.flickr.com/services/rest/";
     else
         return QUrl();
     
