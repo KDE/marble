@@ -255,6 +255,9 @@ void TourWidget::stopPlaying()
 void TourWidget::handleSliderMove( int value )
 {
     d->m_playback.seek( value / 100.0 );
+    QTime nullTime( 0, 0, 0 );
+    QTime time = nullTime.addSecs(  value / 100.0 );
+    d->m_tourUi.m_elapsedTime->setText( QString("%L1:%L2").arg( time.minute(), 2, 10, QChar('0') ).arg( time.second(), 2, 10, QChar('0') ) );
 }
 
 void TourWidgetPrivate::openFile()
@@ -534,6 +537,9 @@ void TourWidgetPrivate::updateRootIndex()
         m_playback.setMarbleWidget( m_widget );
         m_playback.setTour( tour );
         m_tourUi.m_slider->setMaximum( m_playback.duration() * 100 );
+        QTime nullTime( 0, 0, 0 );
+        QTime time = nullTime.addSecs( m_playback.duration() );
+        m_tourUi.m_totalTime->setText( QString("%L1:%L2").arg( time.minute(), 2, 10, QChar('0') ).arg( time.second(), 2, 10, QChar('0') ) );
         QObject::connect( &m_playback, SIGNAL( progressChanged( double ) ),
                          q, SLOT( handlePlaybackProgress( double ) ) );
         q->stopPlaying();
@@ -599,7 +605,11 @@ void TourWidget::deleteSelected()
 void TourWidget::updateDuration()
 {
     d->m_tourUi.m_slider->setMaximum( d->m_playback.duration() * 100 );
+    QTime nullTime( 0, 0, 0 );
+    QTime totalTime = nullTime.addSecs( d->m_playback.duration() );
+    d->m_tourUi.m_totalTime->setText( QString("%L1:%L2").arg( totalTime.minute(), 2, 10, QChar('0') ).arg( totalTime.second(), 2, 10, QChar('0') ) );
     d->m_tourUi.m_slider->setValue( 0 );
+    d->m_tourUi.m_elapsedTime->setText( QString("%L1:%L2").arg( 0, 2, 10, QChar('0') ).arg( 0, 2, 10, QChar('0') ) );
 }
 
 void TourWidget::finishAddingItem()
@@ -778,6 +788,9 @@ void TourWidgetPrivate::handlePlaybackProgress(const double position)
 {
     if( !m_tourUi.m_slider->isSliderDown() ){
         m_tourUi.m_slider->setValue( position * 100 );
+        QTime nullTime( 0, 0, 0 );
+        QTime time = nullTime.addSecs( position );
+        m_tourUi.m_elapsedTime->setText( QString("%L1:%L2").arg( time.minute(), 2, 10, QChar('0') ).arg( time.second(), 2, 10, QChar('0') ) );
     }
 }
 
