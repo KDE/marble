@@ -39,7 +39,6 @@ private:
     GeoDataDocument* rootDocument( GeoDataObject *object ) const;
     GeoDataFeature* findFeature( GeoDataFeature* feature, const QString& id ) const;
     GeoDataAnimatedUpdate* m_animatedUpdate;
-    QList<GeoDataFeature*> m_createdObjects;
     QList<GeoDataFeature*> m_deletedObjects;
     GeoDataDocument* m_rootDocument;
     bool m_playing;

@@ -66,7 +66,7 @@ void PlaybackAnimatedUpdateItem::play()
 
     // Create new elements
     if( m_animatedUpdate->update()->create() ){
-        for( int index = 0; index < m_animatedUpdate->update()->create()->size(); ) {
+        for( int index = 0; index < m_animatedUpdate->update()->create()->size(); ++index ) {
             GeoDataFeature* child = m_animatedUpdate->update()->create()->child( index );
             QString targetId = child->targetId();
             GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
@@ -75,13 +75,8 @@ void PlaybackAnimatedUpdateItem::play()
                       feature->nodeType() == GeoDataTypes::GeoDataFolderType ) ) {
                 GeoDataContainer* container = static_cast<GeoDataContainer*>( feature );
                 emit added( container, child, -1 );
-                m_animatedUpdate->update()->create()->remove( index );
-                m_createdObjects.append( child );
-            } else {
-                ++index;
             }
         }
-        m_animatedUpdate->update()->create()->clear();
     }
 
     // Delete elements
@@ -163,13 +158,12 @@ void PlaybackAnimatedUpdateItem::stop()
         }
     }
 
-    foreach( GeoDataFeature* feature, m_createdObjects ) {
-        // remove from its new place
-        emit removed( feature );
-        // bring back into its old place
-        m_animatedUpdate->update()->create()->append( feature );
+    if( m_animatedUpdate->update()->create() ){
+        for( int index = 0; index < m_animatedUpdate->update()->create()->size(); ++index ) {
+            GeoDataFeature* feature = m_animatedUpdate->update()->create()->child( index );
+            emit removed( feature );
+        }
     }
-    m_createdObjects.clear();
 
     foreach( GeoDataFeature* feature, m_deletedObjects ) {
         GeoDataFeature* target = findFeature( m_rootDocument, feature->targetId() );
