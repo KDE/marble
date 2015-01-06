@@ -93,7 +93,9 @@ void WeatherModel::downloadItemData( const QUrl& url,
 void WeatherModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                qint32 number )
 {
-    emit additionalItemsRequested( box, number );
+    foreach ( AbstractWeatherService *service, m_services ) {
+        service->getAdditionalItems( box, number );
+    }
 }
 
 void WeatherModel::getItem( const QString &id )
@@ -105,7 +107,9 @@ void WeatherModel::getItem( const QString &id )
 
 void WeatherModel::parseFile( const QByteArray& file )
 {
-    emit parseFileRequested( file );
+    foreach ( AbstractWeatherService *service, m_services ) {
+        service->parseFile( file );
+    }
 }
 
 void WeatherModel::downloadDescriptionFileRequested( const QUrl& url )
@@ -130,11 +134,6 @@ void WeatherModel::addService( AbstractWeatherService *service )
              this, SLOT(downloadItemData(QUrl,QString,AbstractDataPluginItem*)) );
     connect( service, SIGNAL(downloadDescriptionFileRequested(QUrl)),
              this, SLOT(downloadDescriptionFileRequested(QUrl)) );
-
-    connect( this, SIGNAL(additionalItemsRequested(GeoDataLatLonAltBox,qint32)),
-             service, SLOT(getAdditionalItems(GeoDataLatLonAltBox,qint32)) );
-    connect( this, SIGNAL(parseFileRequested(QByteArray)),
-             service, SLOT(parseFile(QByteArray)) );
 
     m_services.append( service );
 }
