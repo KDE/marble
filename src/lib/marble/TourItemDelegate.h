@@ -42,7 +42,7 @@ public:
 
 public Q_SLOTS:
     /** Editing duration for first flyTo element in playlist will be disabled.  */
-    void setFirstFlyTo( const QModelIndex &index );
+    void setFirstFlyTo( const QPersistentModelIndex &index );
     /** Sets id of default feature for Remove Item */
     void setDefaultFeatureId( const QString &id );
 
@@ -50,7 +50,7 @@ Q_SIGNALS:
     void editingChanged( QModelIndex index );
     void edited( QModelIndex index );
     void editableChanged( bool editable );
-    void firstFlyToChanged( const QModelIndex &newFirstFlyTo );
+    void firstFlyToChanged( const QPersistentModelIndex &newFirstFlyTo );
     void featureIdsChanged( QStringList ids );
     void defaultFeatureIdChanged( QString id );
 

@@ -41,7 +41,7 @@ public Q_SLOTS:
     void setEditable( bool editable );
 
     /** We disable editing of wait duration for first flyto in playlist. */
-    void setFirstFlyTo( const QModelIndex &index );
+    void setFirstFlyTo(const QPersistentModelIndex &index );
 
 private Q_SLOTS:
     void save();

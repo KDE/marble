@@ -550,8 +550,17 @@ void TourWidgetPrivate::updateRootIndex()
         m_tourUi.m_actionRecord->setEnabled( isPlaybackEmpty );
         m_tourUi.actionStop->setEnabled( false );
         if( m_playback.mainTrackSize() > 0 ) {
-            QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
-            m_delegate->setFirstFlyTo( m_widget->model()->treeModel()->index( 0, 0, playlistIndex ) );
+            if( dynamic_cast<PlaybackFlyToItem*>( m_playback.mainTrackItemAt( 0 ) ) ) {
+                QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
+                for( int i = 0; i < playlist->size(); ++i ) {
+                    if( playlist->primitive( i )->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
+                        m_delegate->setFirstFlyTo( m_widget->model()->treeModel()->index( i, 0, playlistIndex ) );
+                        break;
+                    }
+                }
+            } else {
+                m_delegate->setFirstFlyTo( QPersistentModelIndex() );
+            }
         }
     }
 }

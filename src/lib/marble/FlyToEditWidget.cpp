@@ -70,7 +70,7 @@ void FlyToEditWidget::setEditable( bool editable )
     m_button->setEnabled( editable );
 }
 
-void FlyToEditWidget::setFirstFlyTo(const QModelIndex &index)
+void FlyToEditWidget::setFirstFlyTo(const QPersistentModelIndex &index)
 {
     if( m_index.internalPointer() == index.internalPointer() ) {
         m_waitSpin->setEnabled( false );

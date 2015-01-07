@@ -291,7 +291,7 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
         widget->setFirstFlyTo( m_firstFlyTo );
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
         connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
-        connect( this, SIGNAL( firstFlyToChanged( QModelIndex ) ), widget, SLOT( setFirstFlyTo( QModelIndex ) ) );
+        connect( this, SIGNAL( firstFlyToChanged( QPersistentModelIndex ) ), widget, SLOT( setFirstFlyTo( QPersistentModelIndex ) ) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataTourControlType ) {
@@ -453,7 +453,7 @@ GeoDataFeature *TourItemDelegate::findFeature(const QString &id) const
     return result;
 }
 
-void TourItemDelegate::setFirstFlyTo( const QModelIndex &index )
+void TourItemDelegate::setFirstFlyTo(const QPersistentModelIndex &index )
 {
     m_firstFlyTo = index;
     emit firstFlyToChanged( m_firstFlyTo );
