@@ -75,6 +75,13 @@ void PlaybackAnimatedUpdateItem::play()
                       feature->nodeType() == GeoDataTypes::GeoDataFolderType ) ) {
                 GeoDataContainer* container = static_cast<GeoDataContainer*>( feature );
                 emit added( container, child, -1 );
+                if( child->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+                {
+                    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( child );
+                    if( placemark->isBalloonVisible() ) {
+                        emit balloonShown( placemark );
+                    }
+                }
             }
         }
     }
@@ -88,6 +95,13 @@ void PlaybackAnimatedUpdateItem::play()
             if( feature && canDelete( feature->nodeType() ) ) {
                 m_deletedObjects.append( feature );
                 emit removed( feature );
+                if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+                {
+                    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
+                    if( placemark->isBalloonVisible() ) {
+                        emit balloonHidden();
+                    }
+                }
             }
         }
     }
@@ -162,6 +176,13 @@ void PlaybackAnimatedUpdateItem::stop()
         for( int index = 0; index < m_animatedUpdate->update()->create()->size(); ++index ) {
             GeoDataFeature* feature = m_animatedUpdate->update()->create()->child( index );
             emit removed( feature );
+            if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+            {
+                GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
+                if( placemark->isBalloonVisible() ) {
+                    emit balloonHidden();
+                }
+            }
         }
     }
 
@@ -171,6 +192,13 @@ void PlaybackAnimatedUpdateItem::stop()
             /** @todo Do we have to note the original row position and restore it? */
             Q_ASSERT( dynamic_cast<GeoDataContainer*>( target ) );
             emit added( static_cast<GeoDataContainer*>( target ), feature, -1 );
+            if( target->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+            {
+                GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( target );
+                if( placemark->isBalloonVisible() ) {
+                    emit balloonShown( placemark );
+                }
+            }
         } // else the root document was modified in an unfortunate way and we cannot restore it at this point
     }
     m_deletedObjects.clear();
