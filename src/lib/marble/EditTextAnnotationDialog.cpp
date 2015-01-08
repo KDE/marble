@@ -49,6 +49,7 @@ public:
     QString m_styleColorTabName;
     bool m_initialIsPlacemarkVisible;
     bool m_initialIsBaloonVisible;
+    bool m_initialDescriptionIsCDATA;
     QString m_initialId;
     QString m_initialTargetId;
 };
@@ -104,8 +105,9 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     }
     connect( d->m_header, SIGNAL(valueChanged()), this, SLOT(updateTextAnnotation()) );
 
-    d->m_description->setText( placemark->description() );
+    d->m_description->setPlainText( placemark->description() );
     d->m_initialDescription = placemark->description();
+    d->m_initialDescriptionIsCDATA = placemark->descriptionIsCDATA();
     d->m_isBalloonVisible->setChecked( placemark->isBalloonVisible() );
     d->m_initialIsBaloonVisible = placemark->isBalloonVisible();
 
@@ -226,6 +228,8 @@ void EditTextAnnotationDialog::setIdFieldVisible(bool visible)
 void EditTextAnnotationDialog::updateTextAnnotation()
 {
     d->m_placemark->setDescription( d->m_description->toPlainText() );
+    //allow for HTML in the description
+    d->m_placemark->setDescriptionCDATA( true );
     d->m_placemark->setName( d->m_header->name() );
     d->m_placemark->setCoordinate( GeoDataCoordinates( d->m_header->longitude(),
                                                                          d->m_header->latitude(),
@@ -319,6 +323,10 @@ void EditTextAnnotationDialog::restoreInitial( int result )
 
     if ( d->m_placemark->description() != d->m_initialDescription ) {
         d->m_placemark->setDescription( d->m_initialDescription );
+    }
+
+    if ( d->m_placemark->descriptionIsCDATA() != d->m_initialDescriptionIsCDATA ) {
+        d->m_placemark->setDescriptionCDATA( d->m_initialDescriptionIsCDATA );
     }
 
     if ( d->m_placemark->coordinate().latitude( GeoDataCoordinates::Degree ) !=
