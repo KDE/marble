@@ -54,6 +54,7 @@ public:
     QList<AnimatedUpdateTrack*> m_animatedUpdateTracks;
     GeoDataFlyTo m_mapCenter;
     MarbleWidget *m_widget;
+    QUrl m_baseUrl;
 };
 
 TourPlaybackPrivate::TourPlaybackPrivate() :
@@ -103,7 +104,7 @@ void TourPlayback::showBalloon( GeoDataPlacemark* placemark )
 {
     GeoDataPoint* point = static_cast<GeoDataPoint*>( placemark->geometry() );
     d->m_widget->popupLayer()->setCoordinates( point->coordinates(), Qt::AlignRight | Qt::AlignVCenter );
-    d->m_widget->popupLayer()->setContent( placemark->description() );
+    d->m_widget->popupLayer()->setContent( placemark->description(), d->m_baseUrl );
     d->m_widget->popupLayer()->setVisible( true );
     d->m_widget->popupLayer()->setSize( QSizeF( 480, 500 ) );
 }
@@ -130,6 +131,16 @@ void TourPlayback::setMarbleWidget(MarbleWidget* widget)
                       d->m_widget->model()->treeModel(), SLOT(removeFeature(const GeoDataFeature*)) );
     connect( this, SIGNAL(updated(GeoDataFeature*)),
                       d->m_widget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
+}
+
+void TourPlayback::setBaseUrl( const QUrl &baseUrl )
+{
+    d->m_baseUrl = baseUrl;
+}
+
+QUrl TourPlayback::baseUrl() const
+{
+    return d->m_baseUrl;
 }
 
 void TourPlayback::centerOn( const GeoDataCoordinates &coordinates )

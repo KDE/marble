@@ -15,6 +15,8 @@
 
 #include "marble_export.h"
 
+class QUrl;
+
 namespace Marble
 {
 
@@ -37,6 +39,16 @@ public:
 
     void setTour(GeoDataTour *tour);
     void setMarbleWidget( MarbleWidget *widget );
+
+    /**
+     * @brief setBaseUrl - sets base url for using in QWebView.
+     */
+    void setBaseUrl( const QUrl &baseUrl );
+
+    /**
+     * @brief baseUrl - gets base url which is using in QWebView.
+     */
+    QUrl baseUrl() const;
 
     /** Tour duration in seconds */
     double duration() const;
