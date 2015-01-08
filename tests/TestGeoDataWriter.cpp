@@ -144,12 +144,8 @@ void TestGeoDataWriter::saveAndCompare_data()
     QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
     QTest::addColumn<QString>("original");
 
-    /** @todo Look into why these two files fail */
-    QStringList const blacklist = QStringList() << "CDATATest.kml" << "TimeStamp.kml";
     foreach( const QString &file, m_testFiles ) {
-        if ( !blacklist.contains( file ) ) {
-            QTest::newRow(file.toStdString().c_str()) << parsers.value(file) << file;
-        }
+        QTest::newRow(file.toStdString().c_str()) << parsers.value(file) << file;
     }
 }
 
@@ -184,12 +180,8 @@ void TestGeoDataWriter::saveAndCompareEquality_data()
     QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
     QTest::addColumn<QString>("original");
 
-    /** @todo Look into why these two files fail */
-    QStringList const blacklist = QStringList() << "CDATATest.kml" << "TimeStamp.kml";
     foreach( const QString &file, m_testFiles ) {
-        if ( !blacklist.contains( file ) ) {
-            QTest::newRow(file.toStdString().c_str()) << parsers.value(file) << file;
-        }
+        QTest::newRow(file.toStdString().c_str()) << parsers.value(file) << file;
     }
 }
 
