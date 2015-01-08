@@ -12,13 +12,12 @@
 
 #include "DeclarativeDataPlugin.h"
 #include "DeclarativeDataPluginModel.h"
-#include "MarbleDeclarativeWidget.h"
 #include "DeclarativeDataPluginItem.h"
 
 #include "MarbleDebug.h"
-#include "MarbleWidget.h"
 #include "MarbleModel.h"
 
+#include <QAbstractListModel>
 #include <QMetaObject>
 #include <QMetaProperty>
 #include <QScriptValue>
