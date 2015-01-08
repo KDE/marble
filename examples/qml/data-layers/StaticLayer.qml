@@ -20,7 +20,7 @@ MarbleWidget {
             // The model defines the data that will appear. The lon and lat
             // property of its items define their position
             // See SevenWondersOfTheAncientWorld.qml for details
-            model: SevenWondersOfTheAncientWorld {}
+            model: SevenWondersOfTheAncientWorldModel {}
 
             // The delegate is the component that shows the items from the
             // model on top of the map. Their position and visibility is managed
