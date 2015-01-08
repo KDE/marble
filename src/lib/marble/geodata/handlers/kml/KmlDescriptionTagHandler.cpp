@@ -41,10 +41,36 @@ GeoNode* KmldescriptionTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     if( parentItem.is<GeoDataFeature>() ) {
-        QString description = parser.readElementText().trimmed();
+
+        QString result;
+        bool finished = false;
+        bool isCDATA = false;
+        while( !finished ) {
+            switch ( parser.readNext() ) {
+            case QXmlStreamReader::Characters:
+            case QXmlStreamReader::EntityReference: {
+                result.append( parser.text() );
+                if( parser.isCDATA() ) {
+                    isCDATA = true;
+                }
+                break;
+            }
+            case QXmlStreamReader::EndElement:
+                finished = true;
+                break;
+            case QXmlStreamReader::ProcessingInstruction:
+            case QXmlStreamReader::Comment:
+                break;
+            default:
+                finished = true;
+                break;
+            }
+        }
+
+        QString description = result.trimmed();
         
         parentItem.nodeAs<GeoDataFeature>()->setDescription( description );
-        parentItem.nodeAs<GeoDataFeature>()->setDescriptionCDATA( parser.isCDATA() );
+        parentItem.nodeAs<GeoDataFeature>()->setDescriptionCDATA( isCDATA );
     }
 
     return 0;
