@@ -90,6 +90,8 @@ public:
 
     void itemsVersusAddedAngularResolution();
 
+    void itemsVersusSetSticky();
+
  private:
     const MarbleModel m_marbleModel;
     static const ViewportParams fullViewport;
@@ -312,6 +314,31 @@ void AbstractDataPluginModelTest::itemsVersusAddedAngularResolution()
 
     QVERIFY( model.items( &zoomedViewport, 1 ).contains( item ) ); // calls setAddedAngularResolution()
     QVERIFY( !model.items( &fullViewport, 1 ).contains( item ) ); // addedAngularResolution() is too low
+}
+
+void AbstractDataPluginModelTest::itemsVersusSetSticky()
+{
+    const ViewportParams zoomedViewport( Equirectangular, 0, 0, 10000, QSize( 230, 230 ) );
+
+    TestDataPluginItem *item = new TestDataPluginItem;
+    item->setInitialized( true );
+    item->setSticky( false );
+
+    TestDataPluginModel model( &m_marbleModel );
+    model.addItemToList( item );
+
+    QVERIFY( model.items( &zoomedViewport, 1 ).contains( item ) );
+    QVERIFY( !model.items( &fullViewport, 1 ).contains( item ) );
+
+    item->setSticky( true );
+
+    QVERIFY( model.items( &zoomedViewport, 1 ).contains( item ) );
+    QVERIFY( model.items( &fullViewport, 1 ).contains( item ) );
+
+    item->setSticky( false );
+
+    QVERIFY( model.items( &zoomedViewport, 1 ).contains( item ) );
+    QVERIFY( !model.items( &fullViewport, 1 ).contains( item ) );
 }
 
 QTEST_MAIN( AbstractDataPluginModelTest )

@@ -331,7 +331,7 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
         // If the item was added initially at a nearer position, they don't have priority,
         // because we zoomed out since then.
         bool const alreadyDisplayed = d->m_displayedItems.contains( *i );
-        if ( !alreadyDisplayed || (*i)->addedAngularResolution() >= viewport->angularResolution() ) {
+        if ( !alreadyDisplayed || (*i)->addedAngularResolution() >= viewport->angularResolution() || (*i)->isSticky() ) {
             bool collides = false;
             int const length = list.length();
             for ( int j=0; !collides && j<length; ++j ) {
