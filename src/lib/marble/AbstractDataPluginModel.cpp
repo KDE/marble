@@ -73,7 +73,7 @@ public:
     GeoDataLatLonAltBox m_downloadedBox;
     qint32 m_lastNumber;
     qint32 m_downloadedNumber;
-    QString m_downloadedTarget;
+    QString m_currentPlanetId;
     QList<AbstractDataPluginItem*> m_itemSet;
     QHash<QString, AbstractDataPluginItem*> m_downloadingItems;
     QList<AbstractDataPluginItem*> m_displayedItems;
@@ -122,6 +122,7 @@ AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& n
       m_downloadedBox(),
       m_lastNumber( 0 ),
       m_downloadedNumber( 0 ),
+      m_currentPlanetId( marbleModel->planetId() ),
       m_downloadTimer( m_parent ),
       m_descriptionFileNumber( 0 ),
       m_itemSettings(),
@@ -163,8 +164,9 @@ void AbstractDataPluginModelPrivate::updateFavoriteItems()
 
 void AbstractDataPluginModel::themeChanged()
 {
-    if ( d->m_downloadedTarget != d->m_marbleModel->planetId() ) {
+    if ( d->m_currentPlanetId != d->m_marbleModel->planetId() ) {
         clear();
+        d->m_currentPlanetId = d->m_marbleModel->planetId();
     }
 }
 
@@ -577,8 +579,7 @@ void AbstractDataPluginModel::handleChangedViewport()
     if( d->m_lastNumber != 0
             // We don't need to download if nothing changed
             && ( !( d->m_downloadedBox == d->m_lastBox )
-                 || d->m_downloadedNumber != d->m_lastNumber
-                 || d->m_downloadedTarget != d->m_marbleModel->planetId() )
+                 || d->m_downloadedNumber != d->m_lastNumber )
             // We try to filter little changes of the bounding box
             && ( fabs( d->m_downloadedBox.east() - d->m_lastBox.east() ) * boxComparisonFactor
                  > d->m_lastBox.width()
@@ -596,8 +597,7 @@ void AbstractDataPluginModel::handleChangedViewport()
         // Save the download parameter
         d->m_downloadedBox = d->m_lastBox;
         d->m_downloadedNumber = d->m_lastNumber;
-        d->m_downloadedTarget = d->m_marbleModel->planetId();
-        
+
         // Get items
         getAdditionalItems( d->m_lastBox, d->m_lastNumber );
     }
@@ -669,7 +669,6 @@ void AbstractDataPluginModel::clear()
     d->m_lastBox = GeoDataLatLonAltBox();
     d->m_downloadedBox = GeoDataLatLonAltBox();
     d->m_downloadedNumber = 0;
-    d->m_downloadedTarget.clear();
     emit itemsUpdated();
 }
 

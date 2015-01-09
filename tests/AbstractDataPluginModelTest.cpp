@@ -79,6 +79,9 @@ public:
     void addItemToList_keepExisting_data();
     void addItemToList_keepExisting();
 
+    void switchMapTheme_data();
+    void switchMapTheme();
+
     void setFavoriteItemsOnly_data();
     void setFavoriteItemsOnly();
 
@@ -199,6 +202,44 @@ void AbstractDataPluginModelTest::addItemToList_keepExisting()
     QVERIFY( rejectedItem.isNull() );
     QCOMPARE( model.findItem( item->id() ), item.data() );
     QCOMPARE( itemsUpdatedSpy.count(), 0 );
+}
+
+void AbstractDataPluginModelTest::switchMapTheme_data()
+{
+    QTest::addColumn<QString>( "mapThemeId" );
+    QTest::addColumn<bool>( "planetChanged" );
+
+    addRow() << "earth/bluemarble/bluemarble.dgml" << false;
+    addRow() << "moon/clementine/clementine.dgml" << true;
+}
+
+void AbstractDataPluginModelTest::switchMapTheme()
+{
+    QFETCH( QString, mapThemeId );
+    QFETCH( bool, planetChanged );
+
+    MarbleModel marbleModel;
+
+    marbleModel.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    QCOMPARE( marbleModel.mapThemeId(), QString( "earth/openstreetmap/openstreetmap.dgml" ) );
+
+    TestDataPluginModel model( &marbleModel );
+
+    TestDataPluginItem *const item = new TestDataPluginItem();
+    item->setId( "foo" );
+    model.addItemToList( item );
+
+    QCOMPARE( model.findItem( "foo" ), item );
+
+    marbleModel.setMapThemeId( mapThemeId );
+    QCOMPARE( marbleModel.mapThemeId(), mapThemeId );
+
+    if ( planetChanged ) {
+        QCOMPARE( model.findItem( "foo" ), static_cast<AbstractDataPluginItem *>( 0 ) );
+    }
+    else {
+        QCOMPARE( model.findItem( "foo" ), item );
+    }
 }
 
 void AbstractDataPluginModelTest::setFavoriteItemsOnly_data()
