@@ -17,6 +17,9 @@
         <file>icons/document-save-as.png</file>
         <file>icons/edit-copy.png</file>
         <file>icons/folder-bookmark.png</file>
+        <file>icons/format-text-bold.png</file>
+        <file>icons/format-text-italic.png</file>
+        <file>icons/format-text-underline.png</file>
         <file>icons/go-home.png</file>
         <file>icons/go-home-large.png</file>
         <file>icons/get-hot-new-stuff.png</file>

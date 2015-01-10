@@ -136,6 +136,22 @@ private slots:
      */
     void restoreInitial( int result );
 
+    /**
+     * @brief toogleDescriptionEditMode toggles edit mode for description field.
+     */
+    void toggleDescriptionEditMode( bool isFormattedTextMode = false );
+
+    /**
+     * @brief setBold sets bold style for selected text in description field.
+     * @param bold
+     */
+    void setBold( bool bold );
+
+    /**
+     * @brief updateDescriptionEditButtons updates stated of buttons for editing description field.
+     */
+    void updateDescriptionEditButtons();
+
 signals:
     /**
      * @brief textAnnotationUpdated signals that some property of the PlacemarkTextAnnotation

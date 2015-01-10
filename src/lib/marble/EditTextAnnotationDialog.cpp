@@ -19,6 +19,9 @@
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QColorDialog>
+#include <QCheckBox>
+#include <QToolBar>
+#include <QTextEdit>
 
 // Marble
 #include "GeoDataStyle.h"
@@ -190,6 +193,10 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     connect( d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateIconDialog(const QColor&)) );
     connect( d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateTextAnnotation()) );
 
+    d->m_formattedTextToolBar->setVisible( false );
+    connect( d->m_isFormattedTextMode, SIGNAL( toggled( bool ) ), this, SLOT( toggleDescriptionEditMode( bool ) ) );
+    connect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setBold( bool ) ) );
+    connect( d->m_description, SIGNAL( selectionChanged() ), this, SLOT( updateDescriptionEditButtons() ) );
 
     // Promote "Ok" button to default button.
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
@@ -433,6 +440,42 @@ void EditTextAnnotationDialog::restoreInitial( int result )
     }
 
     emit textAnnotationUpdated( d->m_placemark );
+}
+
+void EditTextAnnotationDialog::toggleDescriptionEditMode(bool isFormattedTextMode)
+{
+    d->m_formattedTextToolBar->setVisible( isFormattedTextMode );
+    if( isFormattedTextMode ) {
+        d->m_description->setHtml( d->m_description->toPlainText() );
+    } else {
+        d->m_description->setPlainText( d->m_description->toHtml() );
+        QTextCursor cursor = d->m_description->textCursor();
+        QTextCharFormat format = cursor.charFormat();
+        format.setFontWeight( QFont::Normal );
+        cursor.setCharFormat( format );
+        d->m_description->setTextCursor( cursor );
+    }
+}
+
+void EditTextAnnotationDialog::setBold( bool bold )
+{
+    QTextCursor cursor = d->m_description->textCursor();
+    QTextCharFormat format = cursor.charFormat();
+    format.setFontWeight( bold ? QFont::Bold : QFont::Normal );
+    cursor.setCharFormat( format );
+    d->m_description->setTextCursor( cursor );
+}
+
+void EditTextAnnotationDialog::updateDescriptionEditButtons()
+{
+    disconnect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setBold( bool ) ) );
+    QTextCharFormat format = d->m_description->textCursor().charFormat();
+    if( format.fontWeight() == QFont::Bold ) {
+        d->m_actionBold->setChecked( true );
+    } else if ( format.fontWeight() == QFont::Normal ) {
+        d->m_actionBold->setChecked( false );
+    }
+    connect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setBold( bool ) ) );
 }
 
 }

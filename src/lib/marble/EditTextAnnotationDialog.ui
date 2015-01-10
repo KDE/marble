@@ -31,7 +31,53 @@
       <attribute name="title">
        <string>Description</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QCheckBox" name="m_isFormattedTextMode">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Formatted text</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolBar" name="m_formattedTextToolBar">
+           <property name="windowTitle">
+            <string>toolBar</string>
+           </property>
+           <addaction name="m_actionBold"/>
+           <addaction name="m_actionItalics"/>
+           <addaction name="m_actionUnderlined"/>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
        <item>
         <widget class="QTextEdit" name="m_description"/>
        </item>
@@ -296,6 +342,51 @@
     </widget>
    </item>
   </layout>
+  <action name="m_actionBold">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../apps/marble-ui/marble.qrc">
+     <normaloff>:/icons/format-text-bold.png</normaloff>:/icons/format-text-bold.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bold</string>
+   </property>
+   <property name="toolTip">
+    <string>Bold</string>
+   </property>
+  </action>
+  <action name="m_actionItalics">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../apps/marble-ui/marble.qrc">
+     <normaloff>:/icons/format-text-italic.png</normaloff>:/icons/format-text-italic.png</iconset>
+   </property>
+   <property name="text">
+    <string>Italics</string>
+   </property>
+   <property name="toolTip">
+    <string>Italics</string>
+   </property>
+  </action>
+  <action name="m_actionUnderlined">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../apps/marble-ui/marble.qrc">
+     <normaloff>:/icons/format-text-underline.png</normaloff>:/icons/format-text-underline.png</iconset>
+   </property>
+   <property name="text">
+    <string>Underlined</string>
+   </property>
+   <property name="toolTip">
+    <string>Underlined</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -304,7 +395,9 @@
    <header>PlacemarkEditHeader.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="libmarble.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
