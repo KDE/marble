@@ -18,6 +18,7 @@
 
 // Marble
 #include "GeoDataStyle.h"
+#include "GeoDataTypes.h"
 
 
 namespace Marble {
@@ -183,6 +184,15 @@ void EditPolygonDialog::checkFields()
         QMessageBox::warning( this,
                               tr( "No name specified" ),
                               tr( "Please specify a name for this polygon." ) );
+    } else {
+        if ( d->m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+            GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( d->m_placemark->geometry() );
+            if( polygon->outerBoundary().size() < 3 ) {
+                QMessageBox::warning( this,
+                                      tr( "Not enough nodes specified." ),
+                                      tr( "Please specify at least 3 nodes for the polygon by clicking on the map." ) );
+            }
+        }
     }
 }
 
