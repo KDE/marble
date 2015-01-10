@@ -398,6 +398,11 @@ void AnnotatePlugin::loadAnnotationFile()
                 m_graphicsItems.append( polylineAnnotation );
             }
             m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, newPlacemark );
+        } else if ( feature->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
+            GeoDataGroundOverlay *overlay = static_cast<GeoDataGroundOverlay*>( feature );
+            GeoDataGroundOverlay *newOverlay = new GeoDataGroundOverlay( *overlay );
+            m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, newOverlay );
+            displayOverlayFrame( newOverlay );
         }
     }
     m_marbleWidget->centerOn( document->latLonAltBox() );
