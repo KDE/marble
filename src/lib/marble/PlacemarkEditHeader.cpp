@@ -457,6 +457,21 @@ void PlacemarkEditHeader::selectAll()
     d->selectAll();
 }
 
+void PlacemarkEditHeader::setReadOnly(bool state)
+{
+    d->m_longitude->setDisabled(state);
+    d->m_latitude->setDisabled(state);
+    d->m_name->setReadOnly(state);
+    d->m_iconLink->setReadOnly(state);
+    d->iconLinkButton->setDisabled(state);
+    d->m_id->setReadOnly(state);
+    d->m_targetId->setDisabled(state);
+    d->m_iconLink->setReadOnly(state);
+
+    d->idLabel->setVisible(!state);
+    d->m_id->setVisible(!state);
+}
+
 void PlacemarkEditHeader::updateValues()
 {
     disconnect(d->m_id,  SIGNAL(textChanged(QString)),    this, SLOT(updateValues()));

@@ -91,6 +91,11 @@ public slots:
      */
     void setIdFieldVisible( bool visible );
 
+    /**
+     * @brief Protecting data from input fields changes
+     */
+    void setReadOnly( bool state );
+
 private slots:
 
     /**

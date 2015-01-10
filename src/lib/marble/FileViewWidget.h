@@ -52,6 +52,8 @@ class MARBLE_EXPORT FileViewWidget : public QWidget
     Q_PRIVATE_SLOT( d, void enableFileViewActions() )
     Q_PRIVATE_SLOT( d, void saveFile() )
     Q_PRIVATE_SLOT( d, void closeFile() )
+    Q_PRIVATE_SLOT( d, void contextMenu(const QPoint&) )
+    Q_PRIVATE_SLOT( d, void showPlacemarkDialog() )
     Q_DISABLE_COPY( FileViewWidget )
 
     FileViewWidgetPrivate * const d;

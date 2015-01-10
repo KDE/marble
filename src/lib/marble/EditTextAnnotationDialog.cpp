@@ -260,6 +260,15 @@ void EditTextAnnotationDialog::setIdFieldVisible(bool visible)
     d->m_header->setIdVisible( visible );
 }
 
+void EditTextAnnotationDialog::setReadOnly(bool state)
+{
+    d->m_header->setReadOnly(state);
+    d->m_description->setReadOnly(state);
+    d->m_isBalloonVisible->setDisabled(state);
+    d->m_isPlacemarkVisible->setDisabled(state);
+    d->style_color_tab->setDisabled(state);
+}
+
 void EditTextAnnotationDialog::updateTextAnnotation()
 {
     d->m_placemark->setDescription( d->m_description->toPlainText() );

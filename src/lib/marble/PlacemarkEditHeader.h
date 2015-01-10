@@ -58,6 +58,7 @@ public Q_SLOTS:
     void setTargetIdList( const QStringList &targetIdList );
     void setTargetIdVisible( bool visible );
     void selectAll();
+    void setReadOnly(bool state);
 Q_SIGNALS:
     void valueChanged();
 private Q_SLOTS:

@@ -14,6 +14,8 @@
 // Qt
 #include <QSortFilterProxyModel>
 #include <QFileDialog>
+#include <QMenu>
+#include <QAction>
 
 // Marble
 #include "GeoDataContainer.h"
@@ -25,6 +27,7 @@
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "TreeViewDecoratorModel.h"
+#include "EditTextAnnotationDialog.h"
 
 using namespace Marble;
 // Ui
@@ -46,6 +49,8 @@ class FileViewWidgetPrivate
     void saveFile();
     void closeFile();
     void enableFileViewActions();
+    void contextMenu(const QPoint &pt);
+    void showPlacemarkDialog();
 
  public:
     FileViewWidget *q;
@@ -53,6 +58,9 @@ class FileViewWidgetPrivate
     MarbleWidget *m_widget;
     TreeViewDecoratorModel m_treeSortProxy;
     FileManager *m_fileManager;
+
+    QMenu *m_contextMenu;
+    QAction *m_viewPropertiesAction;
 };
 
 FileViewWidgetPrivate::FileViewWidgetPrivate( FileViewWidget *parent )
@@ -60,6 +68,12 @@ FileViewWidgetPrivate::FileViewWidgetPrivate( FileViewWidget *parent )
     m_widget( 0 ),
     m_fileManager( 0 )
 {
+    m_contextMenu = new QMenu(q);
+    m_viewPropertiesAction = new QAction(q);
+    m_viewPropertiesAction->setText(QObject::tr("View Properties"));
+    m_contextMenu->addAction(m_viewPropertiesAction);
+    QObject::connect(m_viewPropertiesAction, SIGNAL(triggered()),
+                     q, SLOT(showPlacemarkDialog()));
 }
 
 FileViewWidget::FileViewWidget( QWidget *parent, Qt::WindowFlags f )
@@ -96,6 +110,8 @@ void FileViewWidgetPrivate::setTreeModel( GeoDataTreeModel *model )
     m_fileViewUi.m_treeView->sortByColumn( 0, Qt::AscendingOrder );
     m_fileViewUi.m_treeView->resizeColumnToContents( 0 );
     m_fileViewUi.m_treeView->resizeColumnToContents( 1 );
+    m_fileViewUi.m_treeView->setContextMenuPolicy(Qt::CustomContextMenu);
+
     QObject::connect( m_fileViewUi.m_treeView,
              SIGNAL(expanded(QModelIndex)),
              &m_treeSortProxy, SLOT(trackExpandedState(QModelIndex)) );
@@ -107,6 +123,8 @@ void FileViewWidgetPrivate::setTreeModel( GeoDataTreeModel *model )
              q, SLOT(enableFileViewActions()) );
     QObject::connect( m_fileViewUi.m_treeView, SIGNAL(activated(QModelIndex)),
              q, SLOT(mapCenterOnTreeViewModel(QModelIndex)) );
+    QObject::connect( m_fileViewUi.m_treeView, SIGNAL(customContextMenuRequested(QPoint)),
+                      q, SLOT(contextMenu(QPoint)) );
 }
 
 void FileViewWidgetPrivate::setFileManager( FileManager *manager )
@@ -154,6 +172,35 @@ void FileViewWidgetPrivate::enableFileViewActions()
     }
     m_fileViewUi.m_saveButton->setEnabled( isUserDocument );
     m_fileViewUi.m_closeButton->setEnabled( isUserDocument );
+}
+
+void FileViewWidgetPrivate::contextMenu(const QPoint &pt)
+{
+    const QModelIndex index = m_fileViewUi.m_treeView->indexAt(pt);
+    const QAbstractItemModel *model = m_fileViewUi.m_treeView->model();
+    if (index.isValid()) {
+        GeoDataObject *obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject*>();
+        const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(obj);
+
+        if (placemark) {
+            m_contextMenu->popup(m_fileViewUi.m_treeView->mapToGlobal(pt));
+        }
+    }
+}
+
+void FileViewWidgetPrivate::showPlacemarkDialog()
+{
+    const QModelIndex index = m_fileViewUi.m_treeView->currentIndex();
+    const QAbstractItemModel *model = m_fileViewUi.m_treeView->model();
+
+    GeoDataObject *obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject*>();
+    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(obj);
+    if (placemark) {
+        QPointer<EditTextAnnotationDialog> dialog = new EditTextAnnotationDialog(placemark, q);
+        dialog->setReadOnly(true);
+        dialog->exec();
+        delete dialog;
+    }
 }
 
 void FileViewWidget::mapCenterOnTreeViewModel( const QModelIndex &index )
