@@ -110,7 +110,7 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
         d->m_header->setNotation( notation );
     }
     connect( d->m_header, SIGNAL(valueChanged()), this, SLOT(
-                 TextAnnotation()) );
+                 updateTextAnnotation()) );
 
     d->m_description->setPlainText( placemark->description() );
     d->m_initialDescription = placemark->description();
