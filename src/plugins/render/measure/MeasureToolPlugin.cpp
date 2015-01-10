@@ -516,37 +516,28 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
     }
 }
 
-QString MeasureToolPlugin::meterToPreferredUnit(qreal g, bool isSquare) const
+QString MeasureToolPlugin::meterToPreferredUnit(qreal meters, bool isSquare) const
 {
-    const MarbleLocale::MeasurementSystem measurementSystem =
-            MarbleGlobal::getInstance()->locale()->measurementSystem();
+    MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
+    const MarbleLocale::MeasurementSystem measurementSystem = locale->measurementSystem();
+    MarbleLocale::MeasureUnit unit;
+    qreal convertedMeters;
+    if (isSquare)
+        meters = qSqrt(meters);
+
+    locale->meterToTargetUnit(meters, measurementSystem, convertedMeters, unit);
+    QString unitString = locale->unitAbbreviation(unit);
 
     if (isSquare) {
-        g /= 1000000; // meters is now in km²
-    } else {
-        g /= 1000; // meters is now in km
+        qreal k = convertedMeters/meters;
+        convertedMeters *= k;
+        convertedMeters *= meters;
+
+        unitString.append(QChar(0xB2));
     }
 
-    QString unit;
-    switch (measurementSystem) {
-    case MarbleLocale::ImperialSystem:
-        unit = "mi";
-
-        g *= (isSquare) ? KM2MI*KM2MI : KM2MI;
-        break;
-    case MarbleLocale::NauticalSystem:
-        unit = "nm";
-        g *= (isSquare) ? KM2NM*KM2NM : KM2NM;
-        break;
-    default:
-        unit = "km";
-        break;
-    }
-
-    if (isSquare)
-        unit.append(QChar(0xB2));
-
-    return QString::number(g, 'f', 2) + " " + unit;
+    return QString("%L1 %2").arg(convertedMeters, 8, 'f', 1, QChar(' '))
+                            .arg(unitString);
 }
 
 void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter ) const

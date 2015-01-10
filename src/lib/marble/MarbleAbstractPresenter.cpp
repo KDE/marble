@@ -102,28 +102,16 @@ namespace Marble
 
     QString MarbleAbstractPresenter::distanceString() const
     {
-        qreal dist = distance();
-        QString distanceUnitString;
+        qreal dist = distance(), convertedDistance;
 
-        const MarbleLocale::MeasurementSystem measurementSystem =
-                MarbleGlobal::getInstance()->locale()->measurementSystem();
+        MarbleLocale::MeasureUnit unit;
+        MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
+        locale->meterToTargetUnit(dist, locale->measurementSystem(),
+                                  convertedDistance, unit);
+        QString unitString = locale->unitAbbreviation(unit);
 
-        switch (measurementSystem)
-        {
-        case MarbleLocale::MetricSystem:
-            distanceUnitString = tr("km");
-            break;
-        case MarbleLocale::ImperialSystem:
-            dist *= KM2MI;
-            distanceUnitString = tr("mi");
-            break;
-        case MarbleLocale::NauticalSystem:
-            dist *= KM2NM;
-            distanceUnitString = tr("nm");
-            break;
-        }
-
-        return QString("%L1 %2").arg(dist, 8, 'f', 1, QChar(' ')).arg(distanceUnitString);
+        return QString("%L1 %2").arg(convertedDistance, 8, 'f', 1, QChar(' '))
+                                .arg(unitString);
     }
 
     GeoDataLookAt MarbleAbstractPresenter::lookAt() const

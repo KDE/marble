@@ -347,25 +347,16 @@ const QString OpenCachingComItem::ratingNumberString(QVariant number)
 QString OpenCachingComItem::formatDistance(qreal spheredistance) const
 {
     qreal distance = m_model->marbleModel()->planet()->radius() * spheredistance;
-    QString distanceString;
-    MarbleLocale::MeasurementSystem measurementSystem;
-    measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
 
-    if ( measurementSystem == MarbleLocale::MetricSystem ) {
-        if ( distance >= 1000.0 ) {
-            distanceString = tr("%1 km").arg( distance / 1000.0, 0, 'f', 2 );
-        }
-        else {
-            distanceString = tr("%1 m").arg( distance, 0, 'f', 2 );
-        }
-    }
-    else if (measurementSystem == MarbleLocale::ImperialSystem) {
-        distanceString = QString("%1 mi").arg( distance / 1000.0 * KM2MI, 0, 'f', 2 );
-    } else if (measurementSystem == MarbleLocale::NauticalSystem) {
-        distanceString = QString("%1 nm").arg( distance / 1000.0 * KM2NM, 0, 'f', 2 );
-    }
+    MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
+    const MarbleLocale::MeasurementSystem measurementSystem = locale->measurementSystem();
+    MarbleLocale::MeasureUnit unit;
+    qreal convertedMeters;
+    locale->meterToTargetUnit(distance, measurementSystem, convertedMeters, unit);
+    QString unitString = locale->unitAbbreviation(unit);
 
-    return distanceString;
+    return QString("%L1 %2").arg(convertedMeters, 8, 'f', 1, QChar(' '))
+                            .arg(unitString);
 }
 
 void OpenCachingComItem::fillDialogTabs()
