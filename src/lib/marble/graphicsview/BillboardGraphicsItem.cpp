@@ -48,36 +48,34 @@ class BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
         int pointRepeatNumber = 0;
         bool globeHidesPoint;
 
-        QRect const viewportRect = viewport->mapRegion().boundingRect();
         viewport->screenCoordinates( m_coordinates, x, y, pointRepeatNumber,
                                          m_size, globeHidesPoint );
-        if ( !globeHidesPoint ) {
-            for( int i = 0; i < pointRepeatNumber; ++i ) {
-                // Handle vertical alignment
-                qint32 topY =  ( viewport->height() -  m_size.height() ) / 2;
-                if ( m_alignment & Qt::AlignTop ) {
-                  topY = y - m_size.height();
-                } else if ( m_alignment & Qt::AlignVCenter ) {
-                  topY = y - ( m_size.height() / 2 );
-                } else if ( m_alignment & Qt::AlignBottom ) {
-                  topY = y;
-                }
-
-                // Handle horizontal alignment
-                qint32 leftX = ( viewport->width() - m_size.width() ) / 2;
-                if ( m_alignment & Qt::AlignLeft ) {
-                  leftX =  x[i] - m_size.width();
-                } else if ( m_alignment & Qt::AlignHCenter ) {
-                  leftX = x[i] - ( m_size.width() / 2 );
-                } else if ( m_alignment & Qt::AlignRight ) {
-                  leftX = x[i];
-                }
-
-                QRect const position = QRect( QPoint ( leftX, topY ), m_size.toSize() );
-                if ( position.intersects( viewportRect ) ) {
-                  m_positions.append( QPoint( leftX, topY ) );
-                }
+        for ( int i = 0; i < pointRepeatNumber; ++i ) {
+            // handle vertical alignment
+            qint32 topY = ( viewport->height() - m_size.height() ) / 2;
+            if ( m_alignment & Qt::AlignTop ) {
+                topY = y - m_size.height();
             }
+            else if ( m_alignment & Qt::AlignVCenter ) {
+                topY = y - ( m_size.height() / 2 );
+            }
+            else if ( m_alignment & Qt::AlignBottom ) {
+                topY = y;
+            }
+
+            // handle horizontal alignment
+            qint32 leftX = ( viewport->width() - m_size.width() ) / 2;
+            if ( m_alignment & Qt::AlignLeft ) {
+                leftX =  x[i] - m_size.width();
+            }
+            else if ( m_alignment & Qt::AlignHCenter ) {
+                leftX = x[i] - ( m_size.width() / 2 );
+            }
+            else if ( m_alignment & Qt::AlignRight ) {
+                leftX = x[i];
+            }
+
+            m_positions.append( QPoint( leftX, topY ) );
         }
     }
 
