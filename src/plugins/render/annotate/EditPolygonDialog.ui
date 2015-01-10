@@ -227,8 +227,9 @@
            </spacer>
           </item>
          </layout>
-         <zorder></zorder>
-         <zorder></zorder>
+         <zorder>m_filledColor</zorder>
+         <zorder>label_7</zorder>
+         <zorder>m_polyColorButton</zorder>
          <zorder>horizontalSpacer</zorder>
         </widget>
        </item>
@@ -244,6 +245,16 @@
           </size>
          </property>
         </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Nodes</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QListWidget" name="listWidget"/>
        </item>
       </layout>
      </widget>

@@ -350,7 +350,7 @@ namespace Marble
         }
 
         ViewportParams soon;
-        soon.setProjection(now->projection(), m_model.planetRadius());
+        soon.setProjection(now->projection());
         soon.centerOn(now->centerLongitude(), now->centerLatitude());
         soon.setSize(now->size());
 

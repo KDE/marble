@@ -68,18 +68,6 @@ void AbstractProjection::setMaxLat( qreal maxLat )
     d->m_maxLat = maxLat;
 }
 
-qreal AbstractProjection::planetRadius() const
-{
-    Q_D(const AbstractProjection);
-    return d->m_planetRadius;
-}
-
-void AbstractProjection::setPlanetRadius(qreal radius)
-{
-    Q_D(AbstractProjection);
-    d->m_planetRadius = radius;
-}
-
 qreal AbstractProjection::minValidLat() const
 {
     return -90.0 * DEG2RAD;
