@@ -57,13 +57,6 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
     void setSticky( bool sticky );
 
     /**
-      * Returning the angular resolution of the viewport when the item was added to it the last
-      * time.
-      */
-    qreal addedAngularResolution() const;
-    void setAddedAngularResolution( qreal resolution );
-
-    /**
      * @brief Set the settings of the item.
      * This is usually called automatically before painting. If you reimplement this it would be
      * useful to check for changes before copying.
@@ -93,6 +86,15 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
    void toggleFavorite();
 
  private:
+    friend class AbstractDataPluginModel;
+
+    /**
+     * Returning the angular resolution of the viewport when the item was added to it the last
+     * time.
+     */
+    qreal addedAngularResolution() const;
+    void setAddedAngularResolution( qreal resolution );
+
     AbstractDataPluginItemPrivate * const d;
 };
 
