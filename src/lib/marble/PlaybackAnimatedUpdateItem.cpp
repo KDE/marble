@@ -192,9 +192,9 @@ void PlaybackAnimatedUpdateItem::stop()
             /** @todo Do we have to note the original row position and restore it? */
             Q_ASSERT( dynamic_cast<GeoDataContainer*>( target ) );
             emit added( static_cast<GeoDataContainer*>( target ), feature, -1 );
-            if( target->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+            if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
             {
-                GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( target );
+                GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
                 if( placemark->isBalloonVisible() ) {
                     emit balloonShown( placemark );
                 }

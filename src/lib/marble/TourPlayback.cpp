@@ -207,24 +207,12 @@ void TourPlayback::stop()
 void TourPlayback::seek( double value )
 {
     double const offset = qBound( 0.0, value, d->m_mainTrack.duration() );
-    double const currentPosition = d->m_mainTrack.currentPosition();
     d->m_mainTrack.seek( offset );
     foreach( SoundTrack* track, d->m_soundTracks ){
         track->seek( offset );
     }
-    if( offset > currentPosition ){
-        foreach( AnimatedUpdateTrack* track, d->m_animatedUpdateTracks ){
-            track->seek( offset );
-        }
-    }
-    else if( offset < currentPosition ){
-        for( int i = d->m_animatedUpdateTracks.size()-1; i >= 0; i-- ){
-            if( d->m_animatedUpdateTracks[ i ]->delayBeforeTrackStarts() < offset ){
-                d->m_animatedUpdateTracks[ i ]->play();
-            } else {
-                d->m_animatedUpdateTracks[ i ]->stop();
-            }
-        }
+    foreach( AnimatedUpdateTrack* track, d->m_animatedUpdateTracks ){
+        track->seek( offset );
     }
 }
 

@@ -59,7 +59,7 @@ void AnimatedUpdateTrack::pause()
 {
     m_paused = true;
     m_pauseTime = QDateTime::currentDateTime();
-    m_progress += m_playTime.msecsTo( m_pauseTime );
+    m_progress += m_playTime.secsTo( m_pauseTime );
     if( m_timer.isActive() ){
         m_timer.stop();
     } else {
@@ -80,6 +80,7 @@ void AnimatedUpdateTrack::seek( double offset )
             m_timer.start( ( m_delayBeforeTrackStarts - m_progress ) * 1000 );
         } else {
             m_pauseTime = QDateTime::currentDateTime();
+            m_item->stop();
         }
     } else {
         if( !m_paused ){
@@ -87,6 +88,7 @@ void AnimatedUpdateTrack::seek( double offset )
             m_item->seek( offset - m_delayBeforeTrackStarts );
         } else {
             m_pauseTime = QDateTime::currentDateTime();
+            m_item->stop();
             m_item->seek( offset - m_delayBeforeTrackStarts );
         }
     }
