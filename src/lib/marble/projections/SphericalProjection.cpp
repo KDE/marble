@@ -81,13 +81,13 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
                                              const ViewportParams *viewport,
                                              qreal &x, qreal &y, bool &globeHidesPoint ) const
 {
-    qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
+    qreal       absoluteAltitude = coordinates.altitude() + planetRadius();
     Quaternion  qpos             = coordinates.quaternion();
 
     qpos.rotateAroundAxis( viewport->planetAxisMatrix() );
 
     qreal      pixelAltitude = ( ( viewport->radius() ) 
-                                  / EARTH_RADIUS * absoluteAltitude );
+                                  / planetRadius() * absoluteAltitude );
     if ( coordinates.altitude() < 10000 ) {
         // Skip placemarks at the other side of the earth.
         if ( qpos.v[Q_Z] < 0 ) {

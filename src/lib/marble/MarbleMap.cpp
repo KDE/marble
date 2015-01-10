@@ -685,7 +685,7 @@ void MarbleMap::setProjection( Projection projection )
 
     emit projectionChanged( projection );
 
-    d->m_viewport.setProjection( projection );
+    d->m_viewport.setProjection( projection, d->m_model->planetRadius() );
 
     d->m_textureLayer.setProjection( projection );
 

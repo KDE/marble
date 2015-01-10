@@ -103,6 +103,9 @@ class MARBLE_EXPORT AbstractProjection
     qreal  minLat()  const;
     void setMinLat( qreal minLat );
 
+    qreal planetRadius() const;
+    void setPlanetRadius( qreal radius );
+
     virtual bool   repeatableX() const;
     virtual bool   traversablePoles()  const;
     virtual bool   traversableDateLine()  const;

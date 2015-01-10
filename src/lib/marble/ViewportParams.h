@@ -54,7 +54,7 @@ class MARBLE_EXPORT ViewportParams
     // Getters and setters
     Projection projection() const;
     const AbstractProjection *currentProjection() const;
-    void setProjection(Projection newProjection);
+    void setProjection(Projection newProjection, qreal planetRadius = EARTH_RADIUS);
 
     int polarity() const;
 

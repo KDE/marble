@@ -95,7 +95,7 @@ void VerticalPerspectiveProjectionPrivate::calculateConstants(qreal radius) cons
     if (radius == m_previousRadius)  return;
     m_previousRadius = radius;
     m_P = 1.5 + 3 * 1000 * 0.4 / radius / qTan(0.5 * 110 * DEG2RAD);
-    m_altitudeToPixel = radius / (EARTH_RADIUS * qSqrt((m_P-1)/(m_P+1)));
+    m_altitudeToPixel = radius / (q_ptr->planetRadius() * qSqrt((m_P-1)/(m_P+1)));
     m_perspectiveRadius = radius / qSqrt((m_P-1)/(m_P+1));
     m_pPfactor = (m_P+1)/(m_perspectiveRadius*m_perspectiveRadius*(m_P-1));
 }
@@ -132,7 +132,7 @@ bool VerticalPerspectiveProjection::screenCoordinates( const GeoDataCoordinates 
     y = ( qCos( phi1 ) * qSin( phi ) - qSin( phi1 ) * qCos( phi ) * qCos( deltaLambda ) ) * k;
 
     // Transform to screen coordinates
-    qreal pixelAltitude = (coordinates.altitude() + EARTH_RADIUS) * d->m_altitudeToPixel;
+    qreal pixelAltitude = (coordinates.altitude() + planetRadius()) * d->m_altitudeToPixel;
     x *= pixelAltitude;
     y *= pixelAltitude;
 

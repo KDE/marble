@@ -41,12 +41,12 @@ public:
                            int radius,
                            const QSize &size );
 
-    static const AbstractProjection *abstractProjection( Projection projection );
+    AbstractProjection *abstractProjection( Projection projection );
 
     // These two go together.  m_currentProjection points to one of
     // the static Projection classes at the bottom.
     Projection           m_projection;
-    const AbstractProjection *m_currentProjection;
+    AbstractProjection *m_currentProjection;
 
     // Parameters that determine the painting
     qreal                m_centerLongitude;
@@ -62,26 +62,17 @@ public:
     bool                 m_dirtyBox;
     GeoDataLatLonAltBox  m_viewLatLonAltBox;
 
-    static const SphericalProjection  s_sphericalProjection;
-    static const EquirectProjection   s_equirectProjection;
-    static const MercatorProjection   s_mercatorProjection;
-    static const GnomonicProjection   s_gnomonicProjection;
-    static const StereographicProjection   s_stereographicProjection;
-    static const LambertAzimuthalProjection   s_lambertAzimuthalProjection;
-    static const AzimuthalEquidistantProjection   s_azimuthalEquidistantProjection;
-    static const VerticalPerspectiveProjection   s_verticalPerspectiveProjection;
+    SphericalProjection  s_sphericalProjection;
+    EquirectProjection   s_equirectProjection;
+    MercatorProjection   s_mercatorProjection;
+    GnomonicProjection   s_gnomonicProjection;
+    StereographicProjection   s_stereographicProjection;
+    LambertAzimuthalProjection   s_lambertAzimuthalProjection;
+    AzimuthalEquidistantProjection   s_azimuthalEquidistantProjection;
+    VerticalPerspectiveProjection   s_verticalPerspectiveProjection;
 
     GeoDataCoordinates   m_focusPoint;
 };
-
-const SphericalProjection  ViewportParamsPrivate::s_sphericalProjection;
-const EquirectProjection   ViewportParamsPrivate::s_equirectProjection;
-const MercatorProjection   ViewportParamsPrivate::s_mercatorProjection;
-const GnomonicProjection   ViewportParamsPrivate::s_gnomonicProjection;
-const StereographicProjection   ViewportParamsPrivate::s_stereographicProjection;
-const LambertAzimuthalProjection   ViewportParamsPrivate::s_lambertAzimuthalProjection;
-const AzimuthalEquidistantProjection   ViewportParamsPrivate::s_azimuthalEquidistantProjection;
-const VerticalPerspectiveProjection   ViewportParamsPrivate::s_verticalPerspectiveProjection;
 
 ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
                                               qreal centerLongitude, qreal centerLatitude,
@@ -101,7 +92,7 @@ ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
 {
 }
 
-const AbstractProjection *ViewportParamsPrivate::abstractProjection(Projection projection)
+AbstractProjection *ViewportParamsPrivate::abstractProjection(Projection projection)
 {
     switch ( projection ) {
     case Spherical:
@@ -161,10 +152,11 @@ const AbstractProjection *ViewportParams::currentProjection() const
     return d->m_currentProjection;
 }
 
-void ViewportParams::setProjection(Projection newProjection)
+void ViewportParams::setProjection(Projection newProjection, qreal planetRadius)
 {
     d->m_projection = newProjection;
-    d->m_currentProjection = ViewportParamsPrivate::abstractProjection( newProjection );
+    d->m_currentProjection = d->abstractProjection( newProjection );
+    d->m_currentProjection->setPlanetRadius(planetRadius);
 
     // We now need to reset the planetAxis to make sure
     // that it's a valid axis orientation!

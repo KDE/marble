@@ -28,6 +28,8 @@ class AbstractProjectionPrivate
     qreal  m_maxLat;
     qreal  m_minLat;
 
+    qreal  m_planetRadius;
+
     AbstractProjection * const q_ptr;
     Q_DECLARE_PUBLIC( AbstractProjection )
 };
