@@ -344,6 +344,7 @@ set (marblewidget_UI
     MovieCaptureDialog.ui
     TourCaptureDialog.ui
     EditTextAnnotationDialog.ui
+    ElevationWidget.ui
 )
 
 # FIXME: cleaner approach of src/lib/marblwidget/MarbleControlBox.* vs. marble.qrc

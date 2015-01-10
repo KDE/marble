@@ -69,6 +69,7 @@ marble_add_test( MarbleWidgetSpeedTest )
 add_definitions( -DDGML_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../data/maps/earth\\\"" )
 marble_add_test( TestGeoSceneWriter )
 
+marble_add_test( LocaleTest )               # Check MarbleLocale functionality
 marble_add_test( QuaternionTest )           # Check Quaternion arithmetic
 marble_add_test( TileIdTest )               # Check TileId arithmetic
 marble_add_test( ViewportParamsTest )

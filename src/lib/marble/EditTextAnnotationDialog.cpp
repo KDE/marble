@@ -5,12 +5,14 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2014      Calin Cruceru <crucerucalincristian@gmail.com>
+// Copyright 2014      Calin Cruceru   <crucerucalincristian@gmail.com>
+// Copyright 2015      Ilya Kowalewski <illya.kovalevskyy@gmail.com>
 //
 
 // self
 #include "EditTextAnnotationDialog.h"
 #include "ui_EditTextAnnotationDialog.h"
+#include "ui_ElevationWidget.h"
 
 // Qt
 #include <QFileDialog>
@@ -22,6 +24,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleWidget.h"
+#include "MarbleLocale.h"
 
 namespace Marble {
 
@@ -51,6 +54,8 @@ public:
     bool m_initialIsBaloonVisible;
     bool m_initialDescriptionIsCDATA;
     QString m_initialId;
+    Ui::ElevationWidget *m_elevationWidget;
+    MarbleLocale::MeasureUnit m_elevationUnit;
     QString m_initialTargetId;
 };
 
@@ -66,6 +71,7 @@ EditTextAnnotationDialog::Private::Private( GeoDataPlacemark *placemark ) :
 
 EditTextAnnotationDialog::Private::~Private()
 {
+    delete m_elevationWidget;
     delete m_iconColorDialog;
     delete m_labelColorDialog;
 }
@@ -103,7 +109,8 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
             /* else, UTM */                       GeoDataCoordinates::DMS;
         d->m_header->setNotation( notation );
     }
-    connect( d->m_header, SIGNAL(valueChanged()), this, SLOT(updateTextAnnotation()) );
+    connect( d->m_header, SIGNAL(valueChanged()), this, SLOT(
+                 TextAnnotation()) );
 
     d->m_description->setPlainText( placemark->description() );
     d->m_initialDescription = placemark->description();
@@ -118,6 +125,33 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
                                              0,
                                              GeoDataCoordinates::Degree );
 
+    d->m_elevationWidget = new Ui::ElevationWidget;
+    QWidget *elevationTab = new QWidget;
+    d->m_elevationWidget->setupUi( elevationTab );
+    d->tabWidget->addTab( elevationTab, tr("Elevation") );
+    qreal altitude = d->m_placemark->coordinate().altitude();
+    MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
+    if ( altitude == 0.0 ) {
+        switch ( locale->measurementSystem() ) {
+        case MarbleLocale::MetricSystem:
+            d->m_elevationUnit = MarbleLocale::Meter;
+            break;
+        case MarbleLocale::ImperialSystem:
+            d->m_elevationUnit = MarbleLocale::Foot;
+            break;
+        case MarbleLocale::NauticalSystem:
+            d->m_elevationUnit = MarbleLocale::NauticalMile;
+            break;
+        }
+
+        d->m_elevationWidget->elevationSpinBox->setSuffix( locale->unitAbbreviation((d->m_elevationUnit)) );
+    } else {
+        qreal convertedAltitude;
+        const MarbleLocale::MeasurementSystem currentSystem = locale->measurementSystem();
+        locale->meterToTargetUnit( altitude, currentSystem, convertedAltitude, d->m_elevationUnit );
+        d->m_elevationWidget->elevationSpinBox->setValue( convertedAltitude );
+        d->m_elevationWidget->elevationSpinBox->setSuffix( locale->unitAbbreviation(d->m_elevationUnit) );
+    }
 
     // Adjust icon and label scales.
     d->m_iconScale->setValue( placemark->style()->iconStyle().scale() );
@@ -162,6 +196,7 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
 
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
     connect( this, SIGNAL(accepted()), SLOT(updateTextAnnotation()) );
+    connect( this, SIGNAL(accepted()), SLOT(updatePlacemarkAltitude()) );
     connect( this, SIGNAL(finished(int)), SLOT(restoreInitial(int)) );
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or
@@ -301,6 +336,46 @@ void EditTextAnnotationDialog::updateIconDialog( const QColor &color )
                         d->m_iconButton->iconSize().height() );
     iconPixmap.fill( color );
     d->m_iconButton->setIcon( QIcon( iconPixmap ) );
+}
+
+void EditTextAnnotationDialog::updatePlacemarkAltitude()
+{
+    GeoDataCoordinates coord = d->m_placemark->coordinate();
+    qreal altitude = d->m_elevationWidget->elevationSpinBox->value();
+
+    switch (d->m_elevationUnit) {
+    case MarbleLocale::Meter:
+        break;
+    case MarbleLocale::Milimeter:
+        altitude *= MM2M;
+        break;
+    case MarbleLocale::Kilometer:
+        altitude *= KM2METER;
+        break;
+    case MarbleLocale::Centimeter:
+        altitude *= CM2M;
+        break;
+    case MarbleLocale::Foot:
+        altitude *= FT2M;
+        break;
+    case MarbleLocale::Inch:
+        altitude *= IN2M;
+        break;
+    case MarbleLocale::Yard:
+        altitude *= YD2M;
+        break;
+    case MarbleLocale::Mile:
+        altitude *= MI2KM * KM2METER;
+        break;
+    case MarbleLocale::NauticalMile:
+        altitude *= NM2KM * KM2METER;
+        break;
+    default:
+        break;
+    }
+
+    coord.setAltitude(altitude);
+    d->m_placemark->setCoordinate(coord);
 }
 
 void EditTextAnnotationDialog::restoreInitial( int result )

@@ -120,6 +120,12 @@ private slots:
     void updateIconDialog( const QColor &color );
 
     /**
+     * @brief updatePlacemarkAltitude changes an actual elevation value of placemark instance
+     * according to the value/unit of elevation widget spin box representing it
+     */
+    void updatePlacemarkAltitude();
+
+    /**
      * @brief restoreInitial restores the dialog's previous settings if the dialog closes with
      * a zero return value.
      */
