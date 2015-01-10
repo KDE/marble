@@ -85,6 +85,11 @@ public:
     void setFavoriteItemsOnly_data();
     void setFavoriteItemsOnly();
 
+    void itemsVersusInitialized_data();
+    void itemsVersusInitialized();
+
+    void itemsVersusAddedAngularResolution();
+
  private:
     const MarbleModel m_marbleModel;
     static const ViewportParams fullViewport;
@@ -272,6 +277,41 @@ void AbstractDataPluginModelTest::setFavoriteItemsOnly()
     const bool visible = !favoriteItemsOnly || itemIsFavorite;
 
     QCOMPARE( static_cast<bool>( model.items( &fullViewport, 1 ).contains( item ) ), visible );
+}
+
+void AbstractDataPluginModelTest::itemsVersusInitialized_data()
+{
+    QTest::addColumn<bool>( "initialized" );
+
+    addRow() << true;
+    addRow() << false;
+}
+
+void AbstractDataPluginModelTest::itemsVersusInitialized()
+{
+    QFETCH( bool, initialized );
+
+    TestDataPluginItem *item = new TestDataPluginItem;
+    item->setInitialized( initialized );
+
+    TestDataPluginModel model( &m_marbleModel );
+    model.addItemToList( item );
+
+    QCOMPARE( static_cast<bool>( model.items( &fullViewport, 1 ).contains( item ) ), initialized );
+}
+
+void AbstractDataPluginModelTest::itemsVersusAddedAngularResolution()
+{
+    const ViewportParams zoomedViewport( Equirectangular, 0, 0, 10000, QSize( 230, 230 ) );
+
+    TestDataPluginItem *item = new TestDataPluginItem;
+    item->setInitialized( true );
+
+    TestDataPluginModel model( &m_marbleModel );
+    model.addItemToList( item );
+
+    QVERIFY( model.items( &zoomedViewport, 1 ).contains( item ) ); // calls setAddedAngularResolution()
+    QVERIFY( !model.items( &fullViewport, 1 ).contains( item ) ); // addedAngularResolution() is too low
 }
 
 QTEST_MAIN( AbstractDataPluginModelTest )
