@@ -183,6 +183,16 @@ private slots:
     void setTextCursorFontSize( const QString &fontSize );
 
     /**
+     * @brief addImageToDescription adds image to description field.
+     */
+    void addImageToDescription();
+
+    /**
+     * @brief addLinkToDescription adds link to description field.
+     */
+    void addLinkToDescription();
+
+    /**
      * @brief updateDescriptionEditButtons updates stated of buttons for editing description field.
      */
     void updateDescriptionEditButtons();

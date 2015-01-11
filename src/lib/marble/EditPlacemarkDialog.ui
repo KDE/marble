@@ -486,9 +486,6 @@
    </property>
   </action>
   <action name="m_actionAddImage">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
    <property name="icon">
     <iconset resource="libmarble.qrc">
      <normaloff>:/icons/insert-image.png</normaloff>:/icons/insert-image.png</iconset>
@@ -501,9 +498,6 @@
    </property>
   </action>
   <action name="m_actionAddLink">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
    <property name="icon">
     <iconset resource="libmarble.qrc">
      <normaloff>:/icons/insert-link.png</normaloff>:/icons/insert-link.png</iconset>

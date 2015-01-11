@@ -31,6 +31,7 @@
 #include "GeoDataPlacemark.h"
 #include "MarbleWidget.h"
 #include "MarbleLocale.h"
+#include "AddLinkDialog.h"
 
 namespace Marble {
 
@@ -233,6 +234,8 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *
     connect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorBold( bool ) ) );
     connect( d->m_actionItalics, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorItalic( bool ) ) );
     connect( d->m_actionUnderlined, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorUnderlined( bool ) ) );
+    connect( d->m_actionAddImage, SIGNAL( triggered() ), this, SLOT( addImageToDescription() ) );
+    connect( d->m_actionAddLink, SIGNAL( triggered() ), this, SLOT( addLinkToDescription() ) );
     connect( d->m_description, SIGNAL( cursorPositionChanged() ), this, SLOT( updateDescriptionEditButtons() ) );
 
     // Promote "Ok" button to default button.
@@ -571,6 +574,34 @@ void EditPlacemarkDialog::setTextCursorFontSize(const QString &fontSize)
         format.setFontPointSize( size );
         cursor.mergeCharFormat( format );
         d->m_description->setTextCursor( cursor );
+    }
+}
+
+void EditPlacemarkDialog::addImageToDescription()
+{
+    QString filename = QFileDialog::getOpenFileName( this, tr( "Choose image" ), tr( "All Supported Files (*.png *.jpg *.jpeg)" )  );
+    QImage image( filename );
+    if( !image.isNull() ) {
+        QTextCursor cursor = d->m_description->textCursor();
+        cursor.insertImage( image, filename );
+    }
+}
+
+void EditPlacemarkDialog::addLinkToDescription()
+{
+    QPointer<AddLinkDialog> dialog = new AddLinkDialog( this );
+    if( dialog->exec() ) {
+        QTextCharFormat oldFormat = d->m_description->textCursor().charFormat();
+        QTextCharFormat linkFormat = oldFormat;
+        linkFormat.setAnchor( true );
+        linkFormat.setFontUnderline( true );
+        linkFormat.setForeground( QApplication::palette().link() );
+        linkFormat.setAnchorHref( dialog->url() );
+        d->m_description->textCursor().insertText( dialog->name(), linkFormat );
+        QTextCursor cursor =  d->m_description->textCursor();
+        cursor.setCharFormat( oldFormat );
+        d->m_description->setTextCursor( cursor );
+        d->m_description->textCursor().insertText( " " );
     }
 }
 
