@@ -378,13 +378,12 @@ void EditPlacemarkDialog::checkFields()
         QMessageBox::warning( this,
                               tr( "No image specified" ),
                               tr( "Please specify an icon for this placemark." ) );
+    } else if( !QFileInfo( d->m_header->iconLink() ).exists() ) {
+        QMessageBox::warning( this,
+                              tr( "Invalid icon path" ),
+                              tr( "Please specify a valid path for the icon file." ) );
     } else {
-        QFileInfo fileInfo( d->m_header->iconLink() );
-        if ( !fileInfo.exists() ) {
-            QMessageBox::warning( this,
-                                  tr( "Invalid icon path" ),
-                                  tr( "Please specify a valid path for the icon file." ) );
-        }
+        accept();
     }
 }
 

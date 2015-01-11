@@ -173,6 +173,8 @@ void EditPolylineDialog::checkFields()
         QMessageBox::warning( this,
                               tr( "No name specified" ),
                               tr( "Please specify a name for this polyline." ) );
+    } else {
+        accept();
     }
 }
 

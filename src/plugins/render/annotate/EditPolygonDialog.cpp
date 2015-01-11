@@ -180,10 +180,12 @@ void EditPolygonDialog::updatePolyDialog( const QColor &color )
 
 void EditPolygonDialog::checkFields()
 {
+    bool ok = true;
     if ( d->m_name->text().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No name specified" ),
                               tr( "Please specify a name for this polygon." ) );
+        ok = false;
     } else {
         if ( d->m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
             GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( d->m_placemark->geometry() );
@@ -191,8 +193,12 @@ void EditPolygonDialog::checkFields()
                 QMessageBox::warning( this,
                                       tr( "Not enough nodes specified." ),
                                       tr( "Please specify at least 3 nodes for the polygon by clicking on the map." ) );
+                ok = false;
             }
         }
+    }
+    if( ok ) {
+        accept();
     }
 }
 

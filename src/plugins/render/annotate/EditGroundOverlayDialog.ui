@@ -541,22 +541,6 @@
  <connections>
   <connection>
    <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>UiEditGroundOverlayDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>240</x>
-     <y>268</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>253</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
    <signal>rejected()</signal>
    <receiver>UiEditGroundOverlayDialog</receiver>
    <slot>reject()</slot>
