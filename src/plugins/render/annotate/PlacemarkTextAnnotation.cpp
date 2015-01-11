@@ -99,6 +99,11 @@ const char *PlacemarkTextAnnotation::graphicType() const
     return SceneGraphicsTypes::SceneGraphicTextAnnotation;
 }
 
+QColor PlacemarkTextAnnotation::labelColor() const
+{
+    return m_labelColor;
+}
+
 bool PlacemarkTextAnnotation::mousePressEvent( QMouseEvent *event )
 {
     setRequest( SceneGraphicsItem::NoRequest );

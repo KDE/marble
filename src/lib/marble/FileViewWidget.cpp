@@ -27,7 +27,7 @@
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "TreeViewDecoratorModel.h"
-#include "EditTextAnnotationDialog.h"
+#include "EditPlacemarkDialog.h"
 
 using namespace Marble;
 // Ui
@@ -196,7 +196,7 @@ void FileViewWidgetPrivate::showPlacemarkDialog()
     GeoDataObject *obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject*>();
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(obj);
     if (placemark) {
-        QPointer<EditTextAnnotationDialog> dialog = new EditTextAnnotationDialog(placemark, q);
+        QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog(placemark, q);
         dialog->setReadOnly(true);
         dialog->exec();
         delete dialog;

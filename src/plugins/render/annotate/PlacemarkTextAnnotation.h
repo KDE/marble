@@ -38,6 +38,11 @@ public:
      */
     virtual const char *graphicType() const;
 
+    /**
+     * @brief Real label color, which is being hidden when placemark has focus
+     */
+    QColor labelColor() const;
+
 protected:
     virtual bool mousePressEvent( QMouseEvent *event );
     virtual bool mouseMoveEvent( QMouseEvent *event );

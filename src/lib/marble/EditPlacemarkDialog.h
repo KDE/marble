@@ -23,21 +23,26 @@ class GeoDataPlacemark;
 
 
 /**
- * @brief The EditTextAnnotationDialog class deals with customizing placemarks.
+ * @brief The EditPlacemarkDialog class deals with customizing placemarks.
  */
-class MARBLE_EXPORT EditTextAnnotationDialog : public QDialog
+class MARBLE_EXPORT EditPlacemarkDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    EditTextAnnotationDialog( GeoDataPlacemark *placemark, QWidget *parent = 0 );
-    ~EditTextAnnotationDialog();
+    EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *parent = 0 );
+    ~EditPlacemarkDialog();
 
     /**
      * @brief setFirstTimeEditing tells the dialog whether this is the first time it
      * pops up for this PlacemarkTextAnnotation instance or not.
      */
     void setFirstTimeEditing( bool enabled );
+
+    /**
+     * @brief setLabelColor tells the dialog what the label color is
+     */
+    void setLabelColor( const QColor &color );
 
     /**
      * @brief idFilter gets filter for id of placemark

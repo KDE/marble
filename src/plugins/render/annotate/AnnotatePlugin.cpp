@@ -28,7 +28,7 @@
 #include "MarbleDebug.h"
 #include "AbstractProjection.h"
 #include "EditGroundOverlayDialog.h"
-#include "EditTextAnnotationDialog.h"
+#include "EditPlacemarkDialog.h"
 #include "EditPolygonDialog.h"
 #include "GeoDataDocument.h"
 #include "GeoDataGroundOverlay.h"
@@ -992,14 +992,16 @@ void AnnotatePlugin::showTextAnnotationRmbMenu( qreal x, qreal y )
 
 void AnnotatePlugin::editTextAnnotation()
 {
-    QPointer<EditTextAnnotationDialog> dialog = new EditTextAnnotationDialog( m_focusItem->placemark(),
-                                                                              m_marbleWidget );
+    QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog( m_focusItem->placemark(),
+                                                                    m_marbleWidget );
     connect( dialog, SIGNAL(textAnnotationUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( this, SIGNAL(placemarkMoved()),
              dialog, SLOT(updateDialogFields()) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingTextAnnotation(int)) );
+
+    dialog->setLabelColor(dynamic_cast<PlacemarkTextAnnotation*>(m_focusItem)->labelColor());
 
     disableActions( m_actions.first() );
     dialog->show();
@@ -1026,7 +1028,7 @@ void AnnotatePlugin::addTextAnnotation()
     textAnnotation->setFocus( true );
     m_graphicsItems.append( textAnnotation );
 
-    QPointer<EditTextAnnotationDialog> dialog = new EditTextAnnotationDialog( placemark, m_marbleWidget );
+    QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog( placemark, m_marbleWidget );
     dialog->setFirstTimeEditing( true );
 
     connect( dialog, SIGNAL(textAnnotationUpdated(GeoDataFeature*)),

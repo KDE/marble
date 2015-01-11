@@ -38,7 +38,7 @@
 #include "TourCaptureDialog.h"
 #include "MarbleDebug.h"
 #include "PlaybackFlyToItem.h"
-#include "EditTextAnnotationDialog.h"
+#include "EditPlacemarkDialog.h"
 #include "MarbleDirs.h"
 #include "GeoDataStyle.h"
 

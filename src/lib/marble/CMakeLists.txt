@@ -199,7 +199,7 @@ set(marblewidget_SRCS
     MovieCapture.cpp
     MovieCaptureDialog.cpp
     TourCaptureDialog.cpp
-    EditTextAnnotationDialog.cpp
+    EditPlacemarkDialog.cpp
 
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp
@@ -343,7 +343,7 @@ set (marblewidget_UI
     MarbleCloudSyncSettingsWidget.ui
     MovieCaptureDialog.ui
     TourCaptureDialog.ui
-    EditTextAnnotationDialog.ui
+    EditPlacemarkDialog.ui
     ElevationWidget.ui
 )
 
@@ -563,7 +563,7 @@ install( FILES
     marble_export.h
     Planet.h
     PlanetFactory.h
-    EditTextAnnotationDialog.h
+    EditPlacemarkDialog.h
 
     AbstractDataPlugin.h
     AbstractDataPluginModel.h

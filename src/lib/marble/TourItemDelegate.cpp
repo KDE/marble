@@ -29,7 +29,7 @@
 #include "WaitEditWidget.h"
 #include "RemoveItemEditWidget.h"
 #include "GeoDataTypes.h"
-#include "EditTextAnnotationDialog.h"
+#include "EditPlacemarkDialog.h"
 #include "MarbleWidget.h"
 #include "GeoDataPlaylist.h"
 
@@ -381,7 +381,7 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate,
         }
     }
 
-    QPointer<EditTextAnnotationDialog> dialog = new EditTextAnnotationDialog( placemark, m_widget );
+    QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog( placemark, m_widget );
     if( create ) {
         dialog->setWindowTitle( QObject::tr( "Add Placemark to Tour" ) );
     } else {

@@ -10,8 +10,8 @@
 //
 
 // self
-#include "EditTextAnnotationDialog.h"
-#include "ui_EditTextAnnotationDialog.h"
+#include "EditPlacemarkDialog.h"
+#include "ui_EditPlacemarkDialog.h"
 #include "ui_ElevationWidget.h"
 
 // Qt
@@ -34,7 +34,7 @@
 
 namespace Marble {
 
-class EditTextAnnotationDialog::Private : public Ui::UiEditTextAnnotationDialog
+class EditPlacemarkDialog::Private : public Ui::UiEditPlacemarkDialog
 {
 public:
     Private( GeoDataPlacemark *placemark );
@@ -67,8 +67,8 @@ public:
     QPushButton *m_textColorButton;
 };
 
-EditTextAnnotationDialog::Private::Private( GeoDataPlacemark *placemark ) :
-    Ui::UiEditTextAnnotationDialog(),
+EditPlacemarkDialog::Private::Private( GeoDataPlacemark *placemark ) :
+    Ui::UiEditPlacemarkDialog(),
     m_placemark( placemark ),
     m_iconColorDialog( 0 ),
     m_labelColorDialog( 0 ),
@@ -78,7 +78,7 @@ EditTextAnnotationDialog::Private::Private( GeoDataPlacemark *placemark ) :
     // nothing to do
 }
 
-EditTextAnnotationDialog::Private::~Private()
+EditPlacemarkDialog::Private::~Private()
 {
     delete m_elevationWidget;
     delete m_iconColorDialog;
@@ -86,7 +86,7 @@ EditTextAnnotationDialog::Private::~Private()
     delete m_textColorDialog;
 }
 
-EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
+EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
     QDialog( parent ),
     d( new Private( placemark ) )
 {
@@ -248,63 +248,69 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     connect( this, SIGNAL(finished(int)), SLOT(deleteLater()) );
 }
 
-EditTextAnnotationDialog::~EditTextAnnotationDialog()
+EditPlacemarkDialog::~EditPlacemarkDialog()
 {
     delete d;
 }
 
-void EditTextAnnotationDialog::setFirstTimeEditing( bool enabled )
+void EditPlacemarkDialog::setFirstTimeEditing( bool enabled )
 {
     d->m_firstEditing = enabled;
 }
 
-QStringList EditTextAnnotationDialog::idFilter() const
+void EditPlacemarkDialog::setLabelColor( const QColor &color )
+{
+    d->m_labelColorDialog->setCurrentColor(color);
+    updateLabelDialog(color);
+}
+
+QStringList EditPlacemarkDialog::idFilter() const
 {
     return d->m_header->idFilter();
 }
 
-QStringList EditTextAnnotationDialog::targetIds() const
+QStringList EditPlacemarkDialog::targetIds() const
 {
     return d->m_header->targetIdList();
 }
 
-bool EditTextAnnotationDialog::isTargetIdFieldVisible() const
+bool EditPlacemarkDialog::isTargetIdFieldVisible() const
 {
     return d->m_header->isTargetIdVisible();
 }
 
-bool EditTextAnnotationDialog::isIdFieldVisible() const
+bool EditPlacemarkDialog::isIdFieldVisible() const
 {
     return d->m_header->isIdVisible();
 }
 
-void EditTextAnnotationDialog::updateDialogFields()
+void EditPlacemarkDialog::updateDialogFields()
 {
     d->m_header->setLatitude( d->m_placemark->coordinate().latitude( GeoDataCoordinates::Degree ) );
     d->m_header->setLongitude( d->m_placemark->coordinate().longitude( GeoDataCoordinates::Degree ) );
 }
 
-void EditTextAnnotationDialog::setIdFilter(const QStringList &filter)
+void EditPlacemarkDialog::setIdFilter(const QStringList &filter)
 {
     d->m_header->setIdFilter( filter );
 }
 
-void EditTextAnnotationDialog::setTargetIds(const QStringList &targetIds)
+void EditPlacemarkDialog::setTargetIds(const QStringList &targetIds)
 {
     d->m_header->setTargetIdList( targetIds );
 }
 
-void EditTextAnnotationDialog::setTargetIdFieldVisible(bool visible)
+void EditPlacemarkDialog::setTargetIdFieldVisible(bool visible)
 {
     d->m_header->setTargetIdVisible( visible );
 }
 
-void EditTextAnnotationDialog::setIdFieldVisible(bool visible)
+void EditPlacemarkDialog::setIdFieldVisible(bool visible)
 {
     d->m_header->setIdVisible( visible );
 }
 
-void EditTextAnnotationDialog::setReadOnly(bool state)
+void EditPlacemarkDialog::setReadOnly(bool state)
 {
     d->m_header->setReadOnly(state);
     d->m_description->setReadOnly(state);
@@ -313,7 +319,7 @@ void EditTextAnnotationDialog::setReadOnly(bool state)
     d->style_color_tab->setDisabled(state);
 }
 
-void EditTextAnnotationDialog::updateTextAnnotation()
+void EditPlacemarkDialog::updateTextAnnotation()
 {
     if( d->m_isFormattedTextMode->isChecked() ) {
         d->m_placemark->setDescription( d->m_description->toHtml() );
@@ -351,7 +357,7 @@ void EditTextAnnotationDialog::updateTextAnnotation()
     emit textAnnotationUpdated( d->m_placemark );
 }
 
-void EditTextAnnotationDialog::checkFields()
+void EditPlacemarkDialog::checkFields()
 {
     if ( d->m_header->name().isEmpty() ) {
         QMessageBox::warning( this,
@@ -379,7 +385,7 @@ void EditTextAnnotationDialog::checkFields()
     }
 }
 
-void EditTextAnnotationDialog::updateLabelDialog( const QColor &color )
+void EditPlacemarkDialog::updateLabelDialog( const QColor &color )
 {
     QPixmap labelPixmap( d->m_labelButton->iconSize().width(),
                          d->m_labelButton->iconSize().height() );
@@ -387,7 +393,7 @@ void EditTextAnnotationDialog::updateLabelDialog( const QColor &color )
     d->m_labelButton->setIcon( QIcon( labelPixmap ) );
 }
 
-void EditTextAnnotationDialog::updateIconDialog( const QColor &color )
+void EditPlacemarkDialog::updateIconDialog( const QColor &color )
 {
     QPixmap iconPixmap( d->m_iconButton->iconSize().width(),
                         d->m_iconButton->iconSize().height() );
@@ -395,7 +401,7 @@ void EditTextAnnotationDialog::updateIconDialog( const QColor &color )
     d->m_iconButton->setIcon( QIcon( iconPixmap ) );
 }
 
-void EditTextAnnotationDialog::updatePlacemarkAltitude()
+void EditPlacemarkDialog::updatePlacemarkAltitude()
 {
     GeoDataCoordinates coord = d->m_placemark->coordinate();
     qreal altitude = d->m_elevationWidget->elevationSpinBox->value();
@@ -435,7 +441,7 @@ void EditTextAnnotationDialog::updatePlacemarkAltitude()
     d->m_placemark->setCoordinate(coord);
 }
 
-void EditTextAnnotationDialog::restoreInitial( int result )
+void EditPlacemarkDialog::restoreInitial( int result )
 {
     if ( result ) {
         return;
@@ -483,7 +489,7 @@ void EditTextAnnotationDialog::restoreInitial( int result )
     emit textAnnotationUpdated( d->m_placemark );
 }
 
-void EditTextAnnotationDialog::toggleDescriptionEditMode(bool isFormattedTextMode)
+void EditPlacemarkDialog::toggleDescriptionEditMode(bool isFormattedTextMode)
 {
     d->m_formattedTextToolBar->setVisible( isFormattedTextMode );
     d->m_fontSize->setVisible( isFormattedTextMode );
@@ -504,7 +510,7 @@ void EditTextAnnotationDialog::toggleDescriptionEditMode(bool isFormattedTextMod
     }
 }
 
-void EditTextAnnotationDialog::setTextCursorBold( bool bold )
+void EditPlacemarkDialog::setTextCursorBold( bool bold )
 {
     QTextCursor cursor = d->m_description->textCursor();
     QTextCharFormat format;
@@ -513,7 +519,7 @@ void EditTextAnnotationDialog::setTextCursorBold( bool bold )
     d->m_description->setTextCursor( cursor );
 }
 
-void EditTextAnnotationDialog::setTextCursorItalic( bool italic )
+void EditPlacemarkDialog::setTextCursorItalic( bool italic )
 {
     QTextCursor cursor = d->m_description->textCursor();
     QTextCharFormat format;
@@ -522,7 +528,7 @@ void EditTextAnnotationDialog::setTextCursorItalic( bool italic )
     d->m_description->setTextCursor( cursor );
 }
 
-void EditTextAnnotationDialog::setTextCursorUnderlined( bool underlined )
+void EditPlacemarkDialog::setTextCursorUnderlined( bool underlined )
 {
     QTextCursor cursor = d->m_description->textCursor();
     QTextCharFormat format;
@@ -531,7 +537,7 @@ void EditTextAnnotationDialog::setTextCursorUnderlined( bool underlined )
     d->m_description->setTextCursor( cursor );
 }
 
-void EditTextAnnotationDialog::setTextCursorColor( const QColor &color )
+void EditPlacemarkDialog::setTextCursorColor( const QColor &color )
 {
     QTextCursor cursor = d->m_description->textCursor();
     QTextCharFormat format;
@@ -546,7 +552,7 @@ void EditTextAnnotationDialog::setTextCursorColor( const QColor &color )
     d->m_textColorDialog->setCurrentColor( format.foreground().color() );
 }
 
-void EditTextAnnotationDialog::setTextCursorFont( const QFont &font )
+void EditPlacemarkDialog::setTextCursorFont( const QFont &font )
 {
     QTextCursor cursor = d->m_description->textCursor();
     QTextCharFormat format;
@@ -555,7 +561,7 @@ void EditTextAnnotationDialog::setTextCursorFont( const QFont &font )
     d->m_description->setTextCursor( cursor );
 }
 
-void EditTextAnnotationDialog::setTextCursorFontSize(const QString &fontSize)
+void EditPlacemarkDialog::setTextCursorFontSize(const QString &fontSize)
 {
     bool ok = false;
     int size = fontSize.toInt( &ok );
@@ -568,7 +574,7 @@ void EditTextAnnotationDialog::setTextCursorFontSize(const QString &fontSize)
     }
 }
 
-void EditTextAnnotationDialog::updateDescriptionEditButtons()
+void EditPlacemarkDialog::updateDescriptionEditButtons()
 {
     disconnect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorBold( bool ) ) );
     disconnect( d->m_actionItalics, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorItalic( bool ) ) );
@@ -609,4 +615,4 @@ void EditTextAnnotationDialog::updateDescriptionEditButtons()
 
 }
 
-#include "EditTextAnnotationDialog.moc"
+#include "EditPlacemarkDialog.moc"
