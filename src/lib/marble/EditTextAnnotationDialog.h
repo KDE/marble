@@ -142,10 +142,40 @@ private slots:
     void toggleDescriptionEditMode( bool isFormattedTextMode = false );
 
     /**
-     * @brief setBold sets bold style for selected text in description field.
+     * @brief setTextCursorBold sets bold style for selected text in description field.
      * @param bold
      */
-    void setBold( bool bold );
+    void setTextCursorBold( bool bold );
+
+    /**
+     * @brief setTextCursorItalic sets italic style for selected text in description field.
+     * @param italic
+     */
+    void setTextCursorItalic( bool italic );
+
+    /**
+     * @brief setTextCursorUnderlined sets underlined style for selected text in description field.
+     * @param underlined
+     */
+    void setTextCursorUnderlined( bool underlined );
+
+    /**
+     * @brief setTextCursorColor sets color for selected text in description field.
+     * @param color
+     */
+    void setTextCursorColor( const QColor &color );
+
+    /**
+     * @brief setTextCursorFont sets font for selected text in description field.
+     * @param font
+     */
+    void setTextCursorFont( const QFont &font );
+
+    /**
+     * @brief setTextCursorFontSize sets font's size for selected text in description field.
+     * @param font
+     */
+    void setTextCursorFontSize( const QString &fontSize );
 
     /**
      * @brief updateDescriptionEditButtons updates stated of buttons for editing description field.

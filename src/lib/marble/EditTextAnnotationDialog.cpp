@@ -22,6 +22,9 @@
 #include <QCheckBox>
 #include <QToolBar>
 #include <QTextEdit>
+#include <QFontComboBox>
+#include <QPushButton>
+#include <QLineEdit>
 
 // Marble
 #include "GeoDataStyle.h"
@@ -39,9 +42,10 @@ public:
 
     GeoDataPlacemark *m_placemark;
 
-    // Attached to label/icon color selectors.
+    // Attached to label/icon/text color selectors.
     QColorDialog *m_iconColorDialog;
     QColorDialog *m_labelColorDialog;
+    QColorDialog *m_textColorDialog;
 
     // Used to tell whether the settings before showing the dialog should be restored on
     // pressing the 'Cancel' button or not.
@@ -60,6 +64,7 @@ public:
     Ui::ElevationWidget *m_elevationWidget;
     MarbleLocale::MeasureUnit m_elevationUnit;
     QString m_initialTargetId;
+    QPushButton *m_textColorButton;
 };
 
 EditTextAnnotationDialog::Private::Private( GeoDataPlacemark *placemark ) :
@@ -67,7 +72,8 @@ EditTextAnnotationDialog::Private::Private( GeoDataPlacemark *placemark ) :
     m_placemark( placemark ),
     m_iconColorDialog( 0 ),
     m_labelColorDialog( 0 ),
-    m_firstEditing( false )
+    m_firstEditing( false ),
+    m_textColorButton( new QPushButton )
 {
     // nothing to do
 }
@@ -77,6 +83,7 @@ EditTextAnnotationDialog::Private::~Private()
     delete m_elevationWidget;
     delete m_iconColorDialog;
     delete m_labelColorDialog;
+    delete m_textColorDialog;
 }
 
 EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
@@ -115,6 +122,11 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     connect( d->m_header, SIGNAL(valueChanged()), this, SLOT(
                  updateTextAnnotation()) );
 
+    if( d->m_isFormattedTextMode->isChecked() ) {
+        d->m_description->setHtml( placemark->description() );
+    } else {
+        d->m_description->setPlainText( placemark->description() );
+    }
     d->m_description->setPlainText( placemark->description() );
     d->m_initialDescription = placemark->description();
     d->m_initialDescriptionIsCDATA = placemark->descriptionIsCDATA();
@@ -194,9 +206,34 @@ EditTextAnnotationDialog::EditTextAnnotationDialog( GeoDataPlacemark *placemark,
     connect( d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateTextAnnotation()) );
 
     d->m_formattedTextToolBar->setVisible( false );
+    d->m_fontSize->setVisible( false );
+    d->m_fontFamily->setVisible( false );
+    QAction *separator = d->m_formattedTextToolBar->insertSeparator( d->m_actionAddImage );
+    d->m_formattedTextToolBar->insertWidget( separator, d->m_textColorButton );
+    d->m_textColorButton->setMaximumSize( 24, 24 );
+    QPixmap textColorPixmap( d->m_textColorButton->iconSize().width(),
+                        d->m_textColorButton->iconSize().height() );
+    textColorPixmap.fill( d->m_description->textCursor().charFormat().foreground().color() );
+    d->m_textColorButton->setIcon( QIcon( textColorPixmap ) );
+    d->m_textColorDialog = new QColorDialog( this );
+    d->m_textColorDialog->setOption( QColorDialog::ShowAlphaChannel );
+    d->m_textColorDialog->setCurrentColor( d->m_description->textCursor().charFormat().foreground().color() );
+    d->m_fontSize->setValidator( new QIntValidator( 1, 9000, this ) );
+    int index = d->m_fontSize->findText( QString::number( d->m_description->textCursor().charFormat().font().pointSize() ) );
+    if( index != -1 ) {
+        d->m_fontSize->setCurrentIndex( index );
+    } else {
+        d->m_fontSize->lineEdit()->setText( QString::number( d->m_description->textCursor().charFormat().font().pointSize() ) );
+    }
+    connect( d->m_textColorButton, SIGNAL( clicked() ), d->m_textColorDialog, SLOT( exec() ) );
+    connect( d->m_textColorDialog, SIGNAL( colorSelected( QColor ) ), this, SLOT( setTextCursorColor( const QColor& ) ) );
     connect( d->m_isFormattedTextMode, SIGNAL( toggled( bool ) ), this, SLOT( toggleDescriptionEditMode( bool ) ) );
-    connect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setBold( bool ) ) );
-    connect( d->m_description, SIGNAL( selectionChanged() ), this, SLOT( updateDescriptionEditButtons() ) );
+    connect( d->m_fontFamily, SIGNAL( currentFontChanged( QFont ) ), this, SLOT( setTextCursorFont( QFont ) ) );
+    connect( d->m_fontSize, SIGNAL( editTextChanged( QString ) ), this, SLOT( setTextCursorFontSize( QString ) ) );
+    connect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorBold( bool ) ) );
+    connect( d->m_actionItalics, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorItalic( bool ) ) );
+    connect( d->m_actionUnderlined, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorUnderlined( bool ) ) );
+    connect( d->m_description, SIGNAL( cursorPositionChanged() ), this, SLOT( updateDescriptionEditButtons() ) );
 
     // Promote "Ok" button to default button.
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
@@ -278,7 +315,11 @@ void EditTextAnnotationDialog::setReadOnly(bool state)
 
 void EditTextAnnotationDialog::updateTextAnnotation()
 {
-    d->m_placemark->setDescription( d->m_description->toPlainText() );
+    if( d->m_isFormattedTextMode->isChecked() ) {
+        d->m_placemark->setDescription( d->m_description->toHtml() );
+    } else {
+        d->m_placemark->setDescription( d->m_description->toPlainText() );
+    }
     //allow for HTML in the description
     d->m_placemark->setDescriptionCDATA( true );
     d->m_placemark->setName( d->m_header->name() );
@@ -445,37 +486,125 @@ void EditTextAnnotationDialog::restoreInitial( int result )
 void EditTextAnnotationDialog::toggleDescriptionEditMode(bool isFormattedTextMode)
 {
     d->m_formattedTextToolBar->setVisible( isFormattedTextMode );
+    d->m_fontSize->setVisible( isFormattedTextMode );
+    d->m_fontFamily->setVisible( isFormattedTextMode );
     if( isFormattedTextMode ) {
         d->m_description->setHtml( d->m_description->toPlainText() );
     } else {
-        d->m_description->setPlainText( d->m_description->toHtml() );
         QTextCursor cursor = d->m_description->textCursor();
-        QTextCharFormat format = cursor.charFormat();
+        QTextCharFormat format;
+        format.setFont( QFont() );
         format.setFontWeight( QFont::Normal );
+        format.setFontItalic( false );
+        format.setFontUnderline( false );
+        format.clearForeground();
         cursor.setCharFormat( format );
+        d->m_description->setTextCursor( cursor );
+        d->m_description->setPlainText( d->m_description->toHtml() );
+    }
+}
+
+void EditTextAnnotationDialog::setTextCursorBold( bool bold )
+{
+    QTextCursor cursor = d->m_description->textCursor();
+    QTextCharFormat format;
+    format.setFontWeight( bold ? QFont::Bold : QFont::Normal );
+    cursor.mergeCharFormat( format );
+    d->m_description->setTextCursor( cursor );
+}
+
+void EditTextAnnotationDialog::setTextCursorItalic( bool italic )
+{
+    QTextCursor cursor = d->m_description->textCursor();
+    QTextCharFormat format;
+    format.setFontItalic( italic );
+    cursor.mergeCharFormat( format );
+    d->m_description->setTextCursor( cursor );
+}
+
+void EditTextAnnotationDialog::setTextCursorUnderlined( bool underlined )
+{
+    QTextCursor cursor = d->m_description->textCursor();
+    QTextCharFormat format;
+    format.setFontUnderline( underlined );
+    cursor.mergeCharFormat( format );
+    d->m_description->setTextCursor( cursor );
+}
+
+void EditTextAnnotationDialog::setTextCursorColor( const QColor &color )
+{
+    QTextCursor cursor = d->m_description->textCursor();
+    QTextCharFormat format;
+    QBrush brush( color );
+    format.setForeground( brush );
+    cursor.mergeCharFormat( format );
+    d->m_description->setTextCursor( cursor );
+    QPixmap textColorPixmap( d->m_textColorButton->iconSize().width(),
+                        d->m_textColorButton->iconSize().height() );
+    textColorPixmap.fill( format.foreground().color() );
+    d->m_textColorButton->setIcon( QIcon( textColorPixmap ) );
+    d->m_textColorDialog->setCurrentColor( format.foreground().color() );
+}
+
+void EditTextAnnotationDialog::setTextCursorFont( const QFont &font )
+{
+    QTextCursor cursor = d->m_description->textCursor();
+    QTextCharFormat format;
+    format.setFontFamily( font.family() );
+    cursor.mergeCharFormat( format );
+    d->m_description->setTextCursor( cursor );
+}
+
+void EditTextAnnotationDialog::setTextCursorFontSize(const QString &fontSize)
+{
+    bool ok = false;
+    int size = fontSize.toInt( &ok );
+    if( ok ) {
+        QTextCursor cursor = d->m_description->textCursor();
+        QTextCharFormat format;
+        format.setFontPointSize( size );
+        cursor.mergeCharFormat( format );
         d->m_description->setTextCursor( cursor );
     }
 }
 
-void EditTextAnnotationDialog::setBold( bool bold )
-{
-    QTextCursor cursor = d->m_description->textCursor();
-    QTextCharFormat format = cursor.charFormat();
-    format.setFontWeight( bold ? QFont::Bold : QFont::Normal );
-    cursor.setCharFormat( format );
-    d->m_description->setTextCursor( cursor );
-}
-
 void EditTextAnnotationDialog::updateDescriptionEditButtons()
 {
-    disconnect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setBold( bool ) ) );
+    disconnect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorBold( bool ) ) );
+    disconnect( d->m_actionItalics, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorItalic( bool ) ) );
+    disconnect( d->m_actionUnderlined, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorUnderlined( bool ) ) );
+    disconnect( d->m_fontFamily, SIGNAL( currentFontChanged( QFont ) ), this, SLOT( setTextCursorFont( QFont ) ) );
+    disconnect( d->m_fontSize, SIGNAL( editTextChanged( QString ) ), this, SLOT( setTextCursorFontSize( QString ) ) );
+
     QTextCharFormat format = d->m_description->textCursor().charFormat();
+
+    d->m_fontFamily->setCurrentFont( format.font() );
+
     if( format.fontWeight() == QFont::Bold ) {
         d->m_actionBold->setChecked( true );
     } else if ( format.fontWeight() == QFont::Normal ) {
         d->m_actionBold->setChecked( false );
     }
-    connect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setBold( bool ) ) );
+    d->m_actionItalics->setChecked( format.fontItalic() );
+    d->m_actionUnderlined->setChecked( format.fontUnderline() );
+
+    QPixmap textColorPixmap( d->m_textColorButton->iconSize().width(),
+                        d->m_textColorButton->iconSize().height() );
+    textColorPixmap.fill( format.foreground().color() );
+    d->m_textColorButton->setIcon( QIcon( textColorPixmap ) );
+    d->m_textColorDialog->setCurrentColor( format.foreground().color() );
+
+    int index = d->m_fontSize->findText( QString::number( d->m_description->textCursor().charFormat().font().pointSize() ) );
+    if( index != -1 ) {
+        d->m_fontSize->setCurrentIndex( index );
+    } else {
+        d->m_fontSize->lineEdit()->setText( QString::number( d->m_description->textCursor().charFormat().font().pointSize() ) );
+    }
+    connect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorBold( bool ) ) );
+    connect( d->m_actionItalics, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorItalic( bool ) ) );
+    connect( d->m_actionUnderlined, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorUnderlined( bool ) ) );
+    connect( d->m_fontFamily, SIGNAL( currentFontChanged( QFont ) ), this, SLOT( setTextCursorFont( QFont ) ) );
+    connect( d->m_fontSize, SIGNAL( editTextChanged( QString ) ), this, SLOT( setTextCursorFontSize( QString ) ) );
 }
 
 }

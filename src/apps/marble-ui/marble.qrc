@@ -26,6 +26,8 @@
         <file>icons/help-about.png</file>
         <file>icons/help-contents.png</file>
         <file>icons/help-whatsthis.png</file>
+        <file>icons/insert-image.png</file>
+        <file>icons/insert-link.png</file>
         <file>icons/map-flat.png</file>
         <file>icons/map-globe.png</file>
         <file>icons/map-mercator.png</file>
