@@ -523,7 +523,7 @@
  <connections>
   <connection>
    <sender>buttonBox</sender>
-   <signal>accepted()</signal>
+   <signal>rejected()</signal>
    <receiver>UiEditPlacemarkDialog</receiver>
    <slot>reject()</slot>
    <hints>
