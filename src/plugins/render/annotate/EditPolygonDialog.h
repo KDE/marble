@@ -35,6 +35,10 @@ public:
 
     void setFirstTimeEditing( bool enabled );
 
+public slots:
+    void handleAddingNode( const GeoDataCoordinates &node );
+    void handleItemMoving( GeoDataPlacemark *item );
+
 signals:
     void polygonUpdated( GeoDataFeature *feature );
 

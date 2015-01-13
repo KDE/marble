@@ -19,6 +19,8 @@
 // Marble
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataTypes.h"
+#include "NodeModel.h"
 
 
 namespace Marble
@@ -41,13 +43,16 @@ public:
     QString m_initialName;
     QString m_initialDescription;
     GeoDataLineStyle m_initialLineStyle;
+
+    NodeModel *m_nodeModel;
 };
 
 EditPolylineDialog::Private::Private( GeoDataPlacemark *placemark ) :
     Ui::UiEditPolylineDialog(),
     m_firstEditing( false ),
     m_linesDialog( 0 ),
-    m_placemark( placemark )
+    m_placemark( placemark ),
+    m_nodeModel( new NodeModel )
 {
     // nothing to do
 }
@@ -55,6 +60,7 @@ EditPolylineDialog::Private::Private( GeoDataPlacemark *placemark ) :
 EditPolylineDialog::Private::~Private()
 {
     delete m_linesDialog;
+    delete m_nodeModel;
 }
 
 EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
@@ -100,6 +106,17 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
     connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLinesDialog(const QColor&)) );
     connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolyline()) );
 
+    if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+        GeoDataLineString *lineString = static_cast<GeoDataLineString*>( placemark->geometry() );
+        for( int i = 0; i < lineString->size(); ++i ) {
+            d->m_nodeModel->addNode( lineString->at( i ) );
+        }
+    }
+    d->m_nodeView->setModel( d->m_nodeModel );
+
+    // Resize column to contents size for better UI.
+    d->m_nodeView->resizeColumnToContents( 0 );
+
     // Promote "Ok" button to default button.
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
 
@@ -120,6 +137,24 @@ EditPolylineDialog::~EditPolylineDialog()
 void EditPolylineDialog::setFirstTimeEditing( bool enabled )
 {
     d->m_firstEditing = enabled;
+}
+
+void EditPolylineDialog::handleAddingNode( const GeoDataCoordinates &node )
+{
+    d->m_nodeModel->addNode( node );
+}
+
+void EditPolylineDialog::handleItemMoving( GeoDataPlacemark *item )
+{
+    if( item == d->m_placemark ) {
+        d->m_nodeModel->clear();
+        if( d->m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+            GeoDataLineString *lineString = static_cast<GeoDataLineString*>( d->m_placemark->geometry() );
+            for( int i = 0; i < lineString->size(); ++i ) {
+                d->m_nodeModel->addNode( lineString->at( i ) );
+            }
+        }
+    }
 }
 
 void EditPolylineDialog::updatePolyline()

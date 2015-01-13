@@ -18,6 +18,7 @@ namespace Marble {
 
 class GeoDataPlacemark;
 class GeoDataFeature;
+class GeoDataCoordinates;
 
 class EditPolylineDialog : public QDialog
 {
@@ -28,6 +29,10 @@ public:
     ~EditPolylineDialog();
 
     void setFirstTimeEditing( bool enabled );
+
+public slots:
+    void handleAddingNode( const GeoDataCoordinates &node );
+    void handleItemMoving( GeoDataPlacemark *item );
 
 signals:
     void polylineUpdated( GeoDataFeature *feature );

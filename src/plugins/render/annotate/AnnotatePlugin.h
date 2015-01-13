@@ -90,6 +90,8 @@ public:
 
 signals:
     void placemarkMoved();
+    void nodeAdded( const GeoDataCoordinates &coordinates );
+    void itemMoved( GeoDataPlacemark *placemark );
 
 private slots:
     void enableModel( bool enabled );

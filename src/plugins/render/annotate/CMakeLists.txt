@@ -31,6 +31,7 @@ set( annotate_SRCS
   PolylineNode.cpp
   SceneGraphicsItem.cpp
   SceneGraphicsTypes.cpp
+  NodeModel.cpp
 )
 
 qt_wrap_ui(annotate_SRCS ${annotate_UI})

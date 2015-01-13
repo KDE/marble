@@ -596,6 +596,7 @@ bool AnnotatePlugin::handleDrawingPolygon( QMouseEvent *mouseEvent )
         GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( m_polygonPlacemark->geometry() );
         poly->outerBoundary().append( coords );
         m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polygonPlacemark );
+        emit nodeAdded( coords );
 
         return true;
     }
@@ -621,6 +622,7 @@ bool AnnotatePlugin::handleDrawingPolyline( QMouseEvent *mouseEvent )
         GeoDataLineString *line = dynamic_cast<GeoDataLineString*>( m_polylinePlacemark->geometry() );
         line->append( coords );
         m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polylinePlacemark );
+        emit nodeAdded( coords );
 
         return true;
     }
@@ -658,7 +660,7 @@ bool AnnotatePlugin::handleMovingSelectedItem( QMouseEvent *mouseEvent )
     // handler and updating their feature.
     if ( m_movedItem->sceneEvent( mouseEvent ) ) {
         m_marbleWidget->model()->treeModel()->updateFeature( m_movedItem->placemark() );
-
+        emit itemMoved( m_movedItem->placemark() );
         if ( m_movedItem->graphicType() == SceneGraphicsTypes::SceneGraphicTextAnnotation ) {
             emit placemarkMoved();
         }
@@ -1271,6 +1273,7 @@ void AnnotatePlugin::addPolygon()
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolygon(int)) );
+    connect( this, SIGNAL( nodeAdded( GeoDataCoordinates ) ), dialog, SLOT( handleAddingNode( GeoDataCoordinates ) ) );
 
     // If there is another graphic item marked as 'selected' when pressing 'Add Polygon', change the focus of
     // that item.
@@ -1356,6 +1359,7 @@ void AnnotatePlugin::editPolygon()
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolygon(int)) );
+    connect( this, SIGNAL( itemMoved( GeoDataPlacemark* ) ), dialog, SLOT( handleItemMoving( GeoDataPlacemark * ) ) );
 
     disableActions( m_actions.first() );
 
@@ -1486,6 +1490,7 @@ void AnnotatePlugin::editPolyline()
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolyline(int)) );
+    connect( this, SIGNAL( itemMoved( GeoDataPlacemark* ) ), dialog, SLOT( handleItemMoving( GeoDataPlacemark * ) ) );
 
     disableActions( m_actions.first() );
     dialog->show();
@@ -1516,6 +1521,7 @@ void AnnotatePlugin::addPolyline()
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolyline(int)) );
+    connect( this, SIGNAL( nodeAdded( GeoDataCoordinates ) ), dialog, SLOT( handleAddingNode( GeoDataCoordinates ) ) );
 
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
