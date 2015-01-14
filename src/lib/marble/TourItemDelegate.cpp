@@ -157,13 +157,23 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         GeoDataAnimatedUpdate *animUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
         GeoDataUpdate *update = animUpdate->update();
         QString text;
-        if( update && update->create() && update->create()->size() != 0 ){
-            label.setHtml( tr( "Create item %1" ).arg( update->create()->first().id() ) );
+        bool ok = false;
+        if( update && update->create() && update->create()->size() != 0
+                   && ( update->create()->first().nodeType() == GeoDataTypes::GeoDataFolderType ||
+                        update->create()->first().nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
+            GeoDataContainer *container = static_cast<GeoDataContainer*>( update->create()->child( 0 ) );
+            if( container->size() > 0 ) {
+                label.setHtml( tr( "Create item %1" ).arg( container->first().id() ) );
+                ok = true;
+            }
         } else if( update && update->getDelete() && update->getDelete()->size() != 0 ){
             label.setHtml( tr( "Remove item %1" ).arg( update->getDelete()->first().targetId() ) );
+            ok = true;
         } else if( update && update->change() && update->change()->size() != 0 ){
             label.setHtml( tr( "Change item %1" ).arg( update->change()->first().targetId() ) );
-        } else if( update ) {
+            ok = true;
+        }
+        if( update && !ok ) {
             label.setHtml( tr( "Update items" ) );
             button.state &= ~QStyle::State_Enabled & ~QStyle::State_Sunken;
         }
@@ -353,10 +363,16 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate,
         return false;
     }
     GeoDataFeature *feature = 0;
-    if( create && !( animatedUpdate->update()->create() == 0 || animatedUpdate->update()->create()->placemarkList().isEmpty() ) ) {
-        feature = animatedUpdate->update()->create()->placemarkList().first();
-    } else if ( !create && !( animatedUpdate->update()->change() == 0 || animatedUpdate->update()->change()->placemarkList().isEmpty() ) ) {
-        feature = animatedUpdate->update()->change()->placemarkList().first();
+    if( create && !( animatedUpdate->update()->create() == 0 || animatedUpdate->update()->create()->size() == 0 ) ) {
+        GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( animatedUpdate->update()->create()->child( 0 ) );
+        if( container != 0 && container->size() ) {
+            feature = container->child( 0 );
+        }
+    } else if ( !create && !( animatedUpdate->update()->change() == 0 || animatedUpdate->update()->change()->size() == 0 ) ) {
+        GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( animatedUpdate->update()->change()->child( 0 ) );
+        if( container != 0 && container->size() ) {
+            feature = container->child( 0 );
+        }
     }
     if( feature == 0 ) {
         return false;

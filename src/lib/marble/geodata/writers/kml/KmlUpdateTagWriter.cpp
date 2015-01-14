@@ -27,7 +27,7 @@ bool KmlUpdateTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     const GeoDataUpdate *update = static_cast<const GeoDataUpdate*>( node );
     KmlObjectTagWriter::writeIdentifiers( writer, update );
     writer.writeStartElement( kml::kmlTag_Update );
-    writer.writeOptionalElement( kml::kmlTag_targetHref, update->targetHref() );
+    writer.writeElement( kml::kmlTag_targetHref, update->targetHref() );
 
     if( update->change() && update->change()->size() > 0 ){
         writer.writeStartElement( kml::kmlTag_Change );

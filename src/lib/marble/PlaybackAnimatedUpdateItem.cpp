@@ -68,20 +68,28 @@ void PlaybackAnimatedUpdateItem::play()
     if( m_animatedUpdate->update()->create() ){
         for( int index = 0; index < m_animatedUpdate->update()->create()->size(); ++index ) {
             GeoDataFeature* child = m_animatedUpdate->update()->create()->child( index );
-            QString targetId = child->targetId();
-            GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
-            if( feature &&
-                    ( feature->nodeType() == GeoDataTypes::GeoDataDocumentType ||
-                      feature->nodeType() == GeoDataTypes::GeoDataFolderType ) ) {
-                GeoDataContainer* container = static_cast<GeoDataContainer*>( feature );
-                emit added( container, child, -1 );
-                if( child->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
-                {
-                    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( child );
-                    if( placemark->isBalloonVisible() ) {
-                        emit balloonShown( placemark );
+            if( child &&
+                    ( child->nodeType() == GeoDataTypes::GeoDataDocumentType ||
+                      child->nodeType() == GeoDataTypes::GeoDataFolderType ) ) {
+                GeoDataContainer *addContainer = static_cast<GeoDataContainer*>( child );
+                QString targetId = addContainer->targetId();
+                GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
+                if( feature &&
+                        ( feature->nodeType() == GeoDataTypes::GeoDataDocumentType ||
+                          feature->nodeType() == GeoDataTypes::GeoDataFolderType ) ) {
+                    GeoDataContainer* container = static_cast<GeoDataContainer*>( feature );
+                    for( int i = 0; i < addContainer->size(); ++i ) {
+                        emit added( container, addContainer->child( i ), -1 );
+                        if( addContainer->child( i )->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+                        {
+                            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( addContainer->child( i ) );
+                            if( placemark->isBalloonVisible() ) {
+                                emit balloonShown( placemark );
+                            }
+                        }
                     }
                 }
+
             }
         }
     }
@@ -175,12 +183,20 @@ void PlaybackAnimatedUpdateItem::stop()
     if( m_animatedUpdate->update()->create() ){
         for( int index = 0; index < m_animatedUpdate->update()->create()->size(); ++index ) {
             GeoDataFeature* feature = m_animatedUpdate->update()->create()->child( index );
-            emit removed( feature );
-            if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
-            {
-                GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
-                if( placemark->isBalloonVisible() ) {
-                    emit balloonHidden();
+            if( feature &&
+                    ( feature->nodeType() == GeoDataTypes::GeoDataDocumentType ||
+                      feature->nodeType() == GeoDataTypes::GeoDataFolderType ) ) {
+                GeoDataContainer* container = static_cast<GeoDataContainer*>( feature );
+                for( int i = 0; i < container->size(); ++i ) {
+
+                    emit removed( container->child( i ) );
+                    if( container->child( i )->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+                    {
+                        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( container->child( i ) );
+                        if( placemark->isBalloonVisible() ) {
+                            emit balloonHidden();
+                        }
+                    }
                 }
             }
         }

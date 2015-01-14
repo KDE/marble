@@ -346,12 +346,21 @@ void TourWidgetPrivate::addSoundCue()
 
 void TourWidgetPrivate::addPlacemark()
 {
-
     // Get the normalized coordinates of the focus point. There will be automatically added a new
     // placemark.
     qreal lat = m_widget->focusPoint().latitude();
     qreal lon = m_widget->focusPoint().longitude();
     GeoDataCoordinates::normalizeLonLat( lon, lat );
+
+    GeoDataDocument *document = new GeoDataDocument;
+    if( m_document->id().isEmpty() ) {
+        if( m_document->name().isEmpty() ) {
+            m_document->setId( "untitled_tour" );
+        } else {
+            m_document->setId( m_document->name().trimmed().replace( " ", "_" ).toLower() );
+        }
+    }
+    document->setTargetId( m_document->id() );
 
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
     placemark->setCoordinate( lon, lat );
@@ -362,8 +371,10 @@ void TourWidgetPrivate::addPlacemark()
     newStyle->iconStyle().setIconPath( MarbleDirs::path("bitmaps/redflag_22.png") );
     placemark->setStyle( newStyle );
 
+    document->append( placemark );
+
     GeoDataCreate *create = new GeoDataCreate;
-    create->append( placemark );
+    create->append( document );
     GeoDataUpdate *update = new GeoDataUpdate;
     update->setCreate( create );
     GeoDataAnimatedUpdate *animatedUpdate = new GeoDataAnimatedUpdate;
@@ -665,6 +676,7 @@ void TourWidgetPrivate::createTour()
         GeoDataDocument *document = new GeoDataDocument();
         document->setDocumentRole( UserDocument );
         document->setName( "New Tour" );
+        document->setId( "new_tour" );
         GeoDataTour *tour = new GeoDataTour();
         tour->setName( "New Tour" );
         GeoDataPlaylist *playlist = new GeoDataPlaylist;
