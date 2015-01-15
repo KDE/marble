@@ -204,11 +204,24 @@ void EditPolylineDialog::restoreInitial( int result )
 
 void EditPolylineDialog::checkFields()
 {
+    bool ok = true;
     if ( d->m_name->text().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No name specified" ),
                               tr( "Please specify a name for this polyline." ) );
+        ok = false;
     } else {
+        if ( d->m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+            GeoDataLineString *lineString = static_cast<GeoDataLineString*>( d->m_placemark->geometry() );
+            if( lineString->size() < 2 ) {
+                QMessageBox::warning( this,
+                                      tr( "Not enough nodes specified." ),
+                                      tr( "Please specify at least 2 nodes for the path by clicking on the map." ) );
+                ok = false;
+            }
+        }
+    }
+    if( ok ) {
         accept();
     }
 }

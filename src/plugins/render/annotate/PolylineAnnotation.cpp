@@ -110,9 +110,6 @@ void PolylineAnnotation::updateRegions( GeoPainter *painter )
         // Create and update virtual nodes lists when being in the AddingPolgonNodes state, to
         // avoid overhead in other states.
         m_virtualNodesList.clear();
-        const QRegion firstRegion( painter->regionFromEllipse( line.at(0).interpolate( line.last(), 0.5 ),
-                                                               hoveredDim, hoveredDim ) );
-        m_virtualNodesList.append( PolylineNode( firstRegion ) );
         for ( int i = 0; i < line.size() - 1; ++i ) {
             const QRegion newRegion( painter->regionFromEllipse( line.at(i).interpolate( line.at(i+1), 0.5 ),
                                                                  hoveredDim, hoveredDim ) );
@@ -192,8 +189,8 @@ void PolylineAnnotation::drawNodes( GeoPainter *painter )
         painter->setBrush( hoveredColor );
 
         GeoDataCoordinates newCoords;
-        if ( m_virtualHoveredNode ) {
-            newCoords = line.at(m_virtualHoveredNode).interpolate( line.at(m_virtualHoveredNode-1), 0.5 );
+        if ( m_virtualHoveredNode + 1 ) {
+            newCoords = line.at( m_virtualHoveredNode + 1 ).interpolate( line.at( m_virtualHoveredNode ), 0.5 );
         } else {
             newCoords = line.first().interpolate( line.last(), 0.5 );
         }
@@ -711,10 +708,10 @@ bool PolylineAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
     if ( virtualIndex != -1 && m_adjustedNode == -1 ) {
         Q_ASSERT( m_virtualHoveredNode == virtualIndex );
 
-        line->insert( virtualIndex, line->at(virtualIndex-1).interpolate( line->at(virtualIndex), 0.5 ) );
-        m_nodesList.insert( virtualIndex, PolylineNode() );
+        line->insert( virtualIndex + 1, line->at( virtualIndex ).interpolate( line->at( virtualIndex + 1 ), 0.5 ) );
+        m_nodesList.insert( virtualIndex + 1, PolylineNode() );
 
-        m_adjustedNode = virtualIndex;
+        m_adjustedNode = virtualIndex + 1;
         m_virtualHoveredNode = -1;
         return true;
     }
