@@ -53,6 +53,9 @@ void PlaybackAnimatedUpdateItem::play()
         for( int i = 0; i < placemarkList.size(); i++ ){
             GeoDataPlacemark* placemark = placemarkList.at( i );
             QString targetId = placemark->targetId();
+            if( targetId.isEmpty() ) {
+                continue;
+            }
             if( placemark->isBalloonVisible() ){
                 GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
                 if( feature && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ){
@@ -99,6 +102,9 @@ void PlaybackAnimatedUpdateItem::play()
         for( int index = 0; index < m_animatedUpdate->update()->getDelete()->size(); ++index ) {
             GeoDataFeature* child = m_animatedUpdate->update()->getDelete()->child( index );
             QString targetId = child->targetId();
+            if( targetId.isEmpty() ) {
+                continue;
+            }
             GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
             if( feature && canDelete( feature->nodeType() ) ) {
                 m_deletedObjects.append( feature );
@@ -169,6 +175,9 @@ void PlaybackAnimatedUpdateItem::stop()
         for( int i = 0; i < placemarkList.size(); i++ ){
             GeoDataPlacemark* placemark = placemarkList.at( i );
             QString targetId = placemark->targetId();
+            if( targetId.isEmpty() ) {
+                continue;
+            }
             GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
             if( placemark->isBalloonVisible() ){
                 if( feature && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ){
@@ -203,6 +212,9 @@ void PlaybackAnimatedUpdateItem::stop()
     }
 
     foreach( GeoDataFeature* feature, m_deletedObjects ) {
+        if( feature->targetId().isEmpty() ) {
+            continue;
+        }
         GeoDataFeature* target = findFeature( m_rootDocument, feature->targetId() );
         if ( target ) {
             /** @todo Do we have to note the original row position and restore it? */
