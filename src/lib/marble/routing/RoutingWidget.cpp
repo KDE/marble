@@ -439,7 +439,7 @@ void RoutingWidget::retrieveRoute()
         d->m_routingLayer->synchronizeWith( d->m_ui.directionsListView->selectionModel() );
     }
 
-    if( d->m_playback ){
+    if( d->m_playback ) {
         d->m_playback->stop();
     }
 }
@@ -854,6 +854,9 @@ void RoutingWidget::resizeEvent(QResizeEvent *e)
 
 void RoutingWidget::toggleRoutePlay()
 {
+    if (!d->m_playback)
+        return;
+
     if( !d->m_playing ){
         d->m_playing = true;
         d->m_playButton->setIcon( QIcon( ":/marble/playback-pause.png" ) );
