@@ -102,7 +102,8 @@ namespace Marble
 
     QString MarbleAbstractPresenter::distanceString() const
     {
-        qreal dist = distance(), convertedDistance;
+        // distance() returns data in km, so translating to meters
+        qreal dist = distance() * KM2METER, convertedDistance;
 
         MarbleLocale::MeasureUnit unit;
         MarbleLocale *locale = MarbleGlobal::getInstance()->locale();

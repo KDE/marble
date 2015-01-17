@@ -47,9 +47,23 @@ namespace Marble
         int radius() const;
 
         GeoDataLookAt lookAt() const;
-        qreal distance() const;
-        qreal distanceFromRadius(qreal radius) const;
+
         QString distanceString() const;
+
+        /**
+         * @brief Approximated altitude of the camera in km
+         */
+        qreal distance() const;
+
+        /**
+         * @brief An approximate distance from @p radius
+         * @param radius radius of planet disc in screen pixels
+         */
+        qreal distanceFromRadius(qreal radius) const;
+
+        /**
+         * @brief The radius of the rendered planet disc derived from the approximate apparent @p distance
+         */
         qreal radiusFromDistance(qreal distance) const;
 
         /**
