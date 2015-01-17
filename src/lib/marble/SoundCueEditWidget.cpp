@@ -14,6 +14,7 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QLineEdit>
+#include <QFileDialog>
 
 #include "SoundCueEditWidget.h"
 #include "MarbleWidget.h"
@@ -27,7 +28,8 @@ SoundCueEditWidget::SoundCueEditWidget( const QModelIndex &index, QWidget *paren
     QWidget( parent ),
     m_index( index ),
     m_lineEdit( new QLineEdit ),
-    m_button( new QToolButton )
+    m_button( new QToolButton ),
+    m_button2( new QToolButton )
 {
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setSpacing( 5 );
@@ -39,6 +41,10 @@ SoundCueEditWidget::SoundCueEditWidget( const QModelIndex &index, QWidget *paren
     m_lineEdit->setPlaceholderText( "Audio location" );
     m_lineEdit->setText( soundCueElement()->href() );
     layout->addWidget( m_lineEdit );
+
+    m_button2->setIcon( QIcon( ":/marble/document-open.png" ) );
+    connect(m_button2, SIGNAL(clicked()), this, SLOT(open()));
+    layout->addWidget( m_button2 );
 
     m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
     connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
@@ -61,6 +67,12 @@ void SoundCueEditWidget::save()
 {
     soundCueElement()->setHref( m_lineEdit->text() );
     emit editingDone(m_index);
+}
+void SoundCueEditWidget::open()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select sound files..."), QDir::homePath(), tr("Supported Sound Files (*.mp3 *.ogg *.wav)"));
+    m_lineEdit->setText(fileName);
+    soundCueElement()->setHref( m_lineEdit->text() );
 }
 
 GeoDataSoundCue* SoundCueEditWidget::soundCueElement()

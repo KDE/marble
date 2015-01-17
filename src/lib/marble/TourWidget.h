@@ -25,6 +25,7 @@ class QDoubleSpinBox;
 class QRadioButton;
 class QLineEdit;
 class QToolButton;
+class QLabel;
 
 namespace Marble
 {

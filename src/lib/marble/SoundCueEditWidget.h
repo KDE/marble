@@ -40,12 +40,14 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void save();
+    void open();
 
 private:
     GeoDataSoundCue* soundCueElement();
     QPersistentModelIndex m_index;
     QLineEdit* m_lineEdit;
     QToolButton *m_button;
+    QToolButton *m_button2;
 };
 
 } // namespace Marble

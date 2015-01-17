@@ -104,6 +104,14 @@
       </group>
     </settings>
     <legend>
+
+    <section name="Tours">
+        <heading>Explore the Earth</heading>
+        <item name="earthlandingsites">
+            <text><![CDATA[<a href="tour://earth/openstreetmap/tour.kml">Play a tour of popular places.</a>]]></text>
+        </item>
+    </section>
+
       <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
         <heading>Coordinate Grid</heading>
       </section>
