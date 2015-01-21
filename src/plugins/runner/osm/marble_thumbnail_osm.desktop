@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=OSM Data
+Name[bg]=Данни OSM
 Name[ca]=Dades OSM
 Name[da]=OSM-data
 Name[de]=OSM-Daten
