@@ -1498,7 +1498,7 @@ void MarblePart::editSettings()
     #ifdef Q_WS_X11
     nativeString = i18n( "Native (X11)" );
     #endif
-    #ifdef Q_WS_MAC
+    #ifdef Q_OS_MAC
     nativeString = i18n( "Native (Mac OS X Core Graphics)" );
     #endif
 
