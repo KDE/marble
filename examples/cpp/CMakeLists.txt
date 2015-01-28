@@ -16,7 +16,10 @@ add_subdirectory( basic-routing )
 add_subdirectory( reverse-geocoding )
 add_subdirectory( vehicletracking )
 add_subdirectory( search )
-add_subdirectory( marble-game )
+
+if(QT5BUILD)
+    add_subdirectory( marble-game )
+endif()
 
 if(NOT QT4_FOUND)
     add_subdirectory( marbleQuick2 )
