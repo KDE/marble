@@ -42,8 +42,8 @@ class CountryByShapePrivate
 {
 public:
     CountryByShapePrivate( MarbleWidget *marbleWidget )
-    : m_marbleWidget( marbleWidget ),
-      m_parent( 0 ),
+    : m_parent( 0 ),
+      m_marbleWidget( marbleWidget ),
       m_countryNames( 0 ),
       m_countryBoundaries( 0 )
     {

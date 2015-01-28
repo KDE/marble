@@ -11,7 +11,7 @@ if( QT4_FOUND )
   include( ${QT_USE_FILE} )
 endif()
 
-set(${TARGET}_SRC
+set(${TARGET}_SRCS
     gamemain.cpp 
     GameMainWindow.cpp
     CountryByShape.cpp
@@ -21,12 +21,12 @@ set(${TARGET}_SRC
 
 FILE (GLOB QML_FILES *.qml)
 marble_add_project_resources(${QML_FILES})
-qt_add_resources(${TARGET}_SRC marbleGame.qrc)
+qt_add_resources(${TARGET}_SRCS marbleGame.qrc)
 
 qt_wrap_ui(${TARGET}_SRCS game.ui)
 marble_qt4_automoc(${${TARGET}_SRCS})
 
-add_executable( ${TARGET} ${${TARGET}_SRC} )
+add_executable( ${TARGET} ${${TARGET}_SRCS} )
 
 target_link_libraries(
     ${TARGET}
@@ -40,6 +40,6 @@ else()
 endif()
 
 install( TARGETS ${TARGET} RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
-install( FILES ${${TARGET}_SRC} DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
+install( FILES ${${TARGET}_SRCS} DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
 install( FILES CMakeLists.txt.external DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} RENAME CMakeLists.txt )
 install( FILES MapTackRoundHeadRed.png MapTackRoundHeadGreen.png DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
