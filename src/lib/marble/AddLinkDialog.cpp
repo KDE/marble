@@ -68,8 +68,8 @@ void AddLinkDialog::checkFields()
 {
     if ( d->m_url->text().isEmpty() ) {
             QMessageBox::warning( this,
-                                  tr( "No url specified" ),
-                                  tr( "Please specify a name url this link." ) );
+                                  tr( "No URL specified" ),
+                                  tr( "Please specify a URL for this link." ) );
     } else if ( d->m_name->text().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No name specified" ),
