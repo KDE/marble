@@ -13,7 +13,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 
-Button {
+Rectangle {
     signal buttonClick()
 
     property int buttonWidth: 150
@@ -29,31 +29,41 @@ Button {
     id: button
     width: buttonWidth
     height: buttonHeight
+    border.width: 1
+    border.color: borderColor
+    radius: 6
+    scale: clickArea.pressed ? 1.1 : 1.0
+    color: clickArea.pressed ? Qt.darker( normalColor, 1.5 ) : normalColor
 
-    text: labelText
+    Behavior on color { ColorAnimation{ duration: 50 } }
+    Behavior on scale { NumberAnimation{ duration: 50 } }
 
-    style: ButtonStyle {
-        background: Rectangle {
-            implicitWidth: control.buttonWidth
-            implicitHeight: control.buttonHeight
-            border.width: control.hovered ? 2 : 1
-            border.color: control.hovered ? control.onHoverColor : control.borderColor
-            color: control.pressed ? Qt.darker( control.normalColor, 1.5 ) : control.normalColor
-            Behavior on color { ColorAnimation{ duration: 50 } }
-            radius: 6
-            scale: control.pressed ? 1.1 : 1.0
-            Behavior on scale { NumberAnimation{ duration: 50 } }
-        }
+    Text {
+        id: buttonLabel
 
-        label: Text {
-            font.pixelSize: labelSize
-            color: labelColor
-            text: labelText
-            wrapMode: Text.WordWrap
-        }
+        text: labelText
+        color: labelColor
+        font.pixelSize: labelSize
+        width: parent.width
+        horizontalAlignment: Text.AlignHCenter
+        anchors.verticalCenter: parent.verticalCenter
+        wrapMode: Text.WordWrap
     }
-    onClicked: {
-        buttonClick()
+
+    MouseArea {
+        id: clickArea
+        anchors.fill: parent
+        hoverEnabled: true
+        onClicked: {
+            buttonClick()
+        }
+        onEntered: {
+            button.border.color = onHoverColor
+            button.border.width = 2
+        }
+        onExited: {
+            button.border.color = borderColor
+            button.border.width = 1
+        }
     }
 }
-
