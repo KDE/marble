@@ -99,7 +99,8 @@ qint64 TileCoordsPyramid::tilesCount() const
     qint64 result = 0;
     for ( int level = d->m_topLevel; level <= d->m_bottomLevel; ++level ) {
         QRect const levelCoords = coords( level );
-        result += levelCoords.width() * levelCoords.height();
+        // w*h can exceed 32 bit range, so force 64 bit calculation; see bug 342397
+        result += qint64( levelCoords.width() ) * levelCoords.height();
     }
     return result;
 }
