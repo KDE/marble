@@ -231,6 +231,7 @@ void TourWidget::startPlaying()
     d->m_tourUi.m_actionRecord->setEnabled( false );
     d->m_delegate->setEditable( false );
     d->m_addPrimitiveButton->setEnabled( false );
+    d->m_playState = true;
 }
 
 void TourWidget::pausePlaying()
