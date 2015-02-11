@@ -28,8 +28,6 @@ public:
     EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *parent = 0 );
     ~EditPolylineDialog();
 
-    void setFirstTimeEditing( bool enabled );
-
 public slots:
     void handleAddingNode( const GeoDataCoordinates &node );
     void handleItemMoving( GeoDataPlacemark *item );

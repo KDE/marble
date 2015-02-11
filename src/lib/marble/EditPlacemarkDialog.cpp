@@ -48,9 +48,6 @@ public:
     QColorDialog *m_labelColorDialog;
     QColorDialog *m_textColorDialog;
 
-    // Used to tell whether the settings before showing the dialog should be restored on
-    // pressing the 'Cancel' button or not.
-    bool m_firstEditing;
 
     // Used to restore if the Cancel button is pressed.
     QString m_initialDescription;
@@ -73,7 +70,6 @@ EditPlacemarkDialog::Private::Private( GeoDataPlacemark *placemark ) :
     m_placemark( placemark ),
     m_iconColorDialog( 0 ),
     m_labelColorDialog( 0 ),
-    m_firstEditing( false ),
     m_textColorButton( new QPushButton )
 {
     // nothing to do
@@ -254,11 +250,6 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *
 EditPlacemarkDialog::~EditPlacemarkDialog()
 {
     delete d;
-}
-
-void EditPlacemarkDialog::setFirstTimeEditing( bool enabled )
-{
-    d->m_firstEditing = enabled;
 }
 
 void EditPlacemarkDialog::setLabelColor( const QColor &color )

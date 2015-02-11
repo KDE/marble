@@ -31,7 +31,6 @@ public:
     ~Private();
 
     GeoDataPlacemark *m_placemark;
-    bool m_firstEditing;
 
     QColorDialog *m_linesDialog;
     QColorDialog *m_polyDialog;
@@ -46,7 +45,6 @@ public:
 EditPolygonDialog::Private::Private( GeoDataPlacemark *placemark ) :
     Ui::UiEditPolygonDialog(),
     m_placemark( placemark ),
-    m_firstEditing( false ),
     m_linesDialog( 0 ),
     m_polyDialog( 0 ),
     m_nodeModel( new NodeModel )
@@ -149,11 +147,6 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
 EditPolygonDialog::~EditPolygonDialog()
 {
     delete d;
-}
-
-void EditPolygonDialog::setFirstTimeEditing( bool enabled )
-{
-    d->m_firstEditing = enabled;
 }
 
 void EditPolygonDialog::handleAddingNode( const GeoDataCoordinates &node )

@@ -33,8 +33,6 @@ public:
     EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *parent = 0 );
     ~EditPolygonDialog();
 
-    void setFirstTimeEditing( bool enabled );
-
 public slots:
     void handleAddingNode( const GeoDataCoordinates &node );
     void handleItemMoving( GeoDataPlacemark *item );

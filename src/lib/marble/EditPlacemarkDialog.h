@@ -34,12 +34,6 @@ public:
     ~EditPlacemarkDialog();
 
     /**
-     * @brief setFirstTimeEditing tells the dialog whether this is the first time it
-     * pops up for this PlacemarkTextAnnotation instance or not.
-     */
-    void setFirstTimeEditing( bool enabled );
-
-    /**
      * @brief setLabelColor tells the dialog what the label color is
      */
     void setLabelColor( const QColor &color );

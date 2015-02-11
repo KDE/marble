@@ -32,10 +32,6 @@ public:
     Private( GeoDataPlacemark *placemark);
     ~Private();
 
-    // Used to tell whether the settings before showing the dialog should be restored on
-    // pressing the 'Cancel' button or not.
-    bool m_firstEditing;
-
     QColorDialog *m_linesDialog;
     GeoDataPlacemark *m_placemark;
 
@@ -49,7 +45,6 @@ public:
 
 EditPolylineDialog::Private::Private( GeoDataPlacemark *placemark ) :
     Ui::UiEditPolylineDialog(),
-    m_firstEditing( false ),
     m_linesDialog( 0 ),
     m_placemark( placemark ),
     m_nodeModel( new NodeModel )
@@ -132,11 +127,6 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
 EditPolylineDialog::~EditPolylineDialog()
 {
     delete d;
-}
-
-void EditPolylineDialog::setFirstTimeEditing( bool enabled )
-{
-    d->m_firstEditing = enabled;
 }
 
 void EditPolylineDialog::handleAddingNode( const GeoDataCoordinates &node )
