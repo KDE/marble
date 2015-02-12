@@ -19,6 +19,8 @@ Rectangle {
 
     //property real nItemInColumn: gameOptionsPanelLayout.children.size
     property real nItemInColumn: 3
+    
+    property string bcgColor: "#2ecc71"
 
     signal nextButtonClicked()
     signal gameClosed()
@@ -33,8 +35,10 @@ Rectangle {
 
     id: gameOptionsPanel
     objectName: "gameOptionsPanel"
-    width: 300
+    width: 200
     height: 600
+    
+    color: "#d3d7cf"
 
     state: "GAMES_VIEW_HIDDEN"
 
@@ -46,10 +50,11 @@ Rectangle {
         CustomButton {
             id: countryByShape
             buttonWidth: gameOptionsPanel.width*4/5
-            buttonHeight: gameOptionsPanel.height*2/( nItemInColumn * 4 )
-            normalColor: "#2ecc71"
+            buttonHeight: gameOptionsPanel.height*2/( nItemInColumn * 5 )
+            normalColor: "#c266e0"
             labelText: qsTr("Identify The Country Shape")
-            labelColor: "white"
+            labelColor: "#FFFFFF"
+            borderColor: "#000000"
             onButtonClick: {
                 gamesView.currentIndex = 0;
                 slider.value = 0;
@@ -60,25 +65,26 @@ Rectangle {
         CustomButton {
             id: countryByFlag
             buttonWidth: gameOptionsPanel.width*4/5
-            buttonHeight: gameOptionsPanel.height*2/( nItemInColumn * 4 )
-            normalColor: "#2980b9"
+            buttonHeight: gameOptionsPanel.height*2/( nItemInColumn * 5 )
+            normalColor: "#D68533"
             labelText: qsTr("Identify The Flag")
-            labelColor: "white"
+            labelColor: "#FFFFFF"
+            borderColor: "#000000"
             onButtonClick: {
                 gamesView.currentIndex = 1;
                 slider.value = 0;
                 gameOptionsPanel.state = "QUESTION_COUNT_QUERY";
             }
         }
-        
 
         CustomButton {
             id: clickOnThat
             buttonWidth: gameOptionsPanel.width*4/5
-            buttonHeight: gameOptionsPanel.height*2/( nItemInColumn * 4 )
-            normalColor: "#8e44ad"
+            buttonHeight: gameOptionsPanel.height*2/( nItemInColumn * 5 )
+            normalColor: "#5C8533"
             labelText: qsTr("Identify The Location of Country")
-            labelColor: "white"
+            labelColor: "#FFFFFF"
+            borderColor: "#000000"
             onButtonClick: {
                 gamesView.currentIndex = 2;
                 slider.value = 0;
@@ -89,10 +95,11 @@ Rectangle {
         CustomButton {
             id: backButton
             buttonWidth: gameOptionsPanel.width*4/5
-            buttonHeight: gameOptionsPanel.height*2/( nItemInColumn * 4 )
-            normalColor: "#d35400" //"#3498db"
+            buttonHeight: gameOptionsPanel.height*2/( nItemInColumn * 5 )
+            normalColor: "#4D7094"
             labelText: qsTr("Main Menu")
-            labelColor: "white"
+            labelColor: "#FFFFFF"
+            borderColor: "#000000"
 
             onButtonClick: {
                 backButtonClick()
@@ -121,39 +128,29 @@ Rectangle {
         id: questionsCountInput
         objectName: "questionsCountInput"
         width: parent.width
-        height: parent.height/9
+        height: parent.height
         anchors.centerIn: parent
 
-        Text {
-            id: description
-            objectName: "description"
-            width: parent.width
-            height: parent.height
-            anchors.top: questionsCountInput.bottom
-            anchors.topMargin: 10
+        color: "#E0FFD1"
+
+        Slider {
+            id: slider
             anchors.left: parent.left
             anchors.leftMargin: 10
             anchors.right: parent.right
             anchors.rightMargin: 10
-
-            color: "gray"
-
-            text: {
-                "Total Questions: " + slider.value
-            }
-        }
-
-        Slider {
-            id: slider
+            anchors.top: parent.top
+            anchors.topMargin: parent.height/3
+            height: parent.height/10
             stepSize: 1
             minimumValue: 0
-            maximumValue: 40
+            maximumValue: 50
 
             style: SliderStyle {
                 groove: Rectangle {
                     implicitWidth: 200
                     implicitHeight: 8
-                    color: "gray"
+                    color: "#6B6B6B"
                     radius: 8
                 }
                 handle: Rectangle {
@@ -161,9 +158,9 @@ Rectangle {
                     color: control.pressed ? "white" : "lightgray"
                     border.color: "gray"
                     border.width: 2
-                    implicitWidth: 34
-                    implicitHeight: 34
-                    radius: 12
+                    implicitWidth: 30
+                    implicitHeight: 30
+                    radius: 15
                 }
             }
         }
@@ -171,16 +168,12 @@ Rectangle {
         Text {
             id: numberOfQuestions
             objectName: "numberOfQuestions"
+            anchors.top: slider.bottom
+            anchors.topMargin: 20
             width: parent.width
-            height: parent.height
-            anchors.top: questionsCountInput.bottom
-            anchors.topMargin: 10
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            anchors.right: parent.right
-            anchors.rightMargin: 10
-
-            color: "gray"
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: parent.height/35
+            color: "#666666"
 
             text: {
                 "Total Questions: " + slider.value
@@ -190,18 +183,19 @@ Rectangle {
         CustomButton {
             id: okButton
             objectName: "okButton"
-            normalColor: "yellow"
-            labelColor: "blue"
-            buttonWidth: parent.width/2
-            buttonHeight: parent.height
+            anchors.top: numberOfQuestions.bottom
+            anchors.topMargin: 20
+            anchors.left: parent.left
+            anchors.leftMargin: 15
+            anchors.right: parent.right
+            anchors.rightMargin: 15
+
+            normalColor: "gray"
+            labelColor: "white"
+            borderColor: "#000000"
+            buttonHeight: parent.height/14
             labelText: qsTr("OK")
             labelSize: parent.width/8
-            anchors.top: numberOfQuestions.bottom
-            anchors.topMargin: 10
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            anchors.right: parent.right
-            anchors.rightMargin: 10
 
             onButtonClick: {
                 gamesView.setMaximumQuestionsCounts( slider.value );
@@ -225,7 +219,6 @@ Rectangle {
             }
         }
     }
-
 
     /*
      * This function quits a particular game
@@ -294,7 +287,7 @@ Rectangle {
         State {
             name: "QUESTION_COUNT_QUERY"
             PropertyChanges { target: questionsCountInput; width: gameOptionsPanel.width; 
-                              height: gameOptionsPanel.height/9; visible: true }
+                              height: gameOptionsPanel.height; visible: true }
             PropertyChanges { target: gameOptionsPanelLayout; width: 0; height: 0; visible: false }
             PropertyChanges { target: gamesView; width: 0; height: 0; visible: false }
         }

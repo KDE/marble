@@ -18,6 +18,8 @@ Rectangle {
     id: countryByShape
     objectName: "countryByShape"
 
+    color: "#D6ADFF"
+
     signal nextQuestionRequested()
     signal gameQuitRequested()
     signal questionsTimeout()
@@ -28,16 +30,12 @@ Rectangle {
     width: panelWidth
     height: panelHeight
 
-    property color normalColor: "lightblue"
-    property color onHoverColor: "crimson"
-    property color borderColor: "transparent"
-
     // No. of radio buttons in Column element
     property real nItemsInColumn: 4
 
     // Button Width and Height
     property real labelWidth: countryByShape.panelWidth*4/5
-    property real labelHeight: countryByShape.panelHeight/15 //countryByShape.panelHeight*5*6/( 9 * nItemsInColumn * 10 )
+    property real labelHeight: countryByShape.panelHeight/16
 
     // Result Display
     property bool showResult: false
@@ -62,6 +60,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 5
         anchors.bottomMargin: 5
+        color: "#D6ADFF"
 
         Rectangle {
             id: gameName
@@ -70,16 +69,20 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 5
 
+            border.width: 1
+            border.color: "#000000"
             radius: 6
-            color: "#2c3e50"
+            smooth: true
+            color: "#696969"
 
             Text {
-                text: qsTr("Identify The Highlighted Country")
+                width: parent.width
                 wrapMode: Text.WordWrap
-                anchors.right: parent.right
-                anchors.left: parent.left
+                horizontalAlignment: Text.AlignHCenter
                 anchors.verticalCenter: parent.verticalCenter
                 color: "white"
+
+                text: qsTr("Identify The Highlighted Country")
             }
         }
 
@@ -87,6 +90,9 @@ Rectangle {
             id: quitGameButton
             buttonWidth: parent.width/2
             buttonHeight: parent.height
+
+            normalColor: "#696969"
+            borderColor: "#000000"
 
             labelColor: "white"
             labelText: qsTr("Quit Game")
@@ -110,8 +116,7 @@ Rectangle {
         id: buttonArea
         anchors.top: gameDescription.bottom
         anchors.topMargin: 20
-        //y: countryByShape.height*2/( ( nItemsInColumn + 2) * 3 )
-        spacing: 5 //buttonHeight/7
+        spacing: 5
 
         ExclusiveGroup { id: group }
         CustomRadioButton {
@@ -119,8 +124,8 @@ Rectangle {
             radioButtonWidth: labelWidth
             radioButtonHeight: labelHeight
 
-            normalColor: "#f1c40f"
-            labelColor: "blue"
+            normalColor: "#A9A9A9"
+            labelColor: "white"
 
             labelText: qsTr("Option1")
             buttonGroup: group
@@ -135,7 +140,7 @@ Rectangle {
                     result = "<font face=\"verdana\" size=\"4\" color=\"#00ff00\"><b>Hooray !! Right Answer</b></font>";
                     if ( !scoreDetermined &&
                         !showCorrectAnswer )
-                    {                        
+                    {
                         ++score;
                         scoreDetermined = true;
                     }
@@ -163,8 +168,8 @@ Rectangle {
             radioButtonWidth: labelWidth
             radioButtonHeight: labelHeight
 
-            normalColor: "#f1c40f"
-            labelColor: "blue"
+            normalColor: "#A9A9A9"
+            labelColor: "white"
 
             labelText: qsTr("Option2")
             buttonGroup: group
@@ -179,7 +184,7 @@ Rectangle {
                     result = "<font face=\"verdana\" size=\"4\" color=\"#00ff00\"><b>Hooray !! Right Answer</b></font>";
                     if ( !scoreDetermined &&
                         !showCorrectAnswer )
-                    {                        
+                    {
                         ++score;
                         scoreDetermined = true;
                     }
@@ -208,8 +213,8 @@ Rectangle {
             radioButtonWidth: labelWidth
             radioButtonHeight: labelHeight
 
-            normalColor: "#f1c40f"
-            labelColor: "blue"
+            normalColor: "#A9A9A9"
+            labelColor: "white"
 
             labelText: qsTr("Option3")
             buttonGroup: group
@@ -252,8 +257,8 @@ Rectangle {
             radioButtonWidth: labelWidth
             radioButtonHeight: labelHeight
 
-            normalColor: "#f1c40f"
-            labelColor: "blue"
+            normalColor: "#A9A9A9"
+            labelColor: "white"
 
             labelText: qsTr("Option4")
             buttonGroup: group
@@ -298,9 +303,10 @@ Rectangle {
         anchors.topMargin: 20
         anchors.horizontalCenter: parent.horizontalCenter
         buttonWidth: labelWidth
-        buttonHeight: labelHeight*6/7
+        buttonHeight: labelHeight
 
-        normalColor: "#3498db"
+        normalColor: "#696969"
+        borderColor: "#000000"
 
         labelText: qsTr("Next")
         labelColor: "white"
@@ -319,18 +325,19 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.top: nextButton.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: 15
 
         height: panelHeight/6
 
-        color: "yellow"
+        color: "#80FFFF"
+        border.width: 1
+        border.color: "#696969"
         radius: 40
 
         visible: showResult
 
         Text {
             id: resultContent
-            color: "yellow"
 
             anchors.left: parent.left
             anchors.leftMargin: 25
@@ -347,13 +354,14 @@ Rectangle {
          id: viewCorrectAnswer
 
          anchors.top: resultDisplay.bottom
-         anchors.topMargin: 20
+         anchors.topMargin: 15
          anchors.left: parent.left
          anchors.leftMargin: 20
          anchors.right: parent.right
          anchors.rightMargin: 20
 
-         buttonHeight: labelHeight*5/6
+         buttonHeight: labelHeight
+         borderColor: "#696969"
          labelColor: "green"
          labelText: answerToShow
 
@@ -368,24 +376,26 @@ Rectangle {
         id: scoreDisplay
 
         anchors.left: parent.left
-        anchors.leftMargin:20
+        anchors.leftMargin:10
         anchors.right: parent.right
-        anchors.rightMargin: 20
+        anchors.rightMargin: 10
         anchors.top: viewCorrectAnswer.bottom
-        anchors.topMargin: 10
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 20
+        anchors.topMargin: 20
 
-        height: labelHeight
+        height: 2*labelHeight
 
+        border.width: 1
+        border.color: "#696969"
         color: "darkgrey"
 
         Text {
             id: scoreContent
             color: "white"
-            anchors.centerIn: parent
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 18
             text: {
-                qsTr("Your Progress \n" + score + "/" + ( totalQuestionsAsked - 1 ))
+                qsTr("Your Progress \n\n" + score + "/" + totalQuestionsAsked)
             }
         }
     }

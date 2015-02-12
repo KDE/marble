@@ -19,7 +19,7 @@ Rectangle {
     property bool showGameOptions: false
 
     property int leftPanelWidth: 200
-    property int leftPanelHeight: 550
+    property int leftPanelHeight: 600
     signal browseMapButtonClicked()
 
     id: leftPanel
@@ -38,6 +38,7 @@ Rectangle {
         objectName: "buttonArea"
         width: leftPanelWidth
         height: leftPanelHeight
+        color: "#d3d7cf"
 
         anchors.centerIn:leftPanel
 
@@ -50,7 +51,8 @@ Rectangle {
             CustomButton {
                 id: browseMapButton
                 buttonWidth: leftPanel.width*4/5
-                normalColor: "#f39c12"
+                normalColor: "#114269"
+                borderColor: "#000000"
                 labelText: qsTr("Browse Map")
                 labelColor: "white"
 
@@ -62,7 +64,8 @@ Rectangle {
             CustomButton {
                 id: gameButton
                 buttonWidth: leftPanel.width*4/5
-                normalColor: "#1abc9c"
+                normalColor: "#114730"
+                borderColor: "#000000"
                 labelText: qsTr("Play Game")
                 labelColor: "white"
 

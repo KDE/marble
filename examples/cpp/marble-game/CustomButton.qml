@@ -15,7 +15,7 @@ import QtQuick.Controls.Styles 1.2
 
 Rectangle {
     signal buttonClick()
-
+    
     property int buttonWidth: 150
     property int buttonHeight: 75
     property string labelText: qsTr("Button")
@@ -32,6 +32,7 @@ Rectangle {
     border.width: 1
     border.color: borderColor
     radius: 6
+    smooth: true
     scale: clickArea.pressed ? 1.1 : 1.0
     color: clickArea.pressed ? Qt.darker( normalColor, 1.5 ) : normalColor
 

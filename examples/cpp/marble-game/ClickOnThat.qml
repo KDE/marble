@@ -17,6 +17,8 @@ Rectangle {
     id: clickOnThat
     objectName: "clickOnThat"
 
+    color: "#C2D1B2"
+
     signal nextQuestionRequested()
     signal gameQuitRequested()
     signal answerDisplayRequested()
@@ -27,10 +29,6 @@ Rectangle {
 
     width: panelWidth
     height: panelHeight
-
-    property color normalColor: "lightblue"
-    property color onHoverColor: "crimson"
-    property color borderColor: "transparent"
 
     // Display the button to show correct Answer
     property bool showCorrectAnswer: false
@@ -53,23 +51,29 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 10
 
+        color: "#C2D1B2"
+
         Rectangle {
             id: gameName
             width: parent.width/2
             height: parent.height
             anchors.left: parent.left
             anchors.leftMargin: 5
+            border.width: 1
+            border.color: "#000000"
 
             radius: 6
-            color: "#e74c3c"
+            smooth: true
+            color: "#696969"
 
             Text {
-                text: qsTr("Click On That Country")
+                width: parent.width
                 wrapMode: Text.WordWrap
-                anchors.right: parent.right
-                anchors.left: parent.left
+                horizontalAlignment: Text.AlignHCenter
                 anchors.verticalCenter: parent.verticalCenter
                 color: "white"
+
+                text: qsTr("Click On That Country")
             }
         }
 
@@ -77,6 +81,9 @@ Rectangle {
             id: quitGameButton
             buttonWidth: parent.width/2
             buttonHeight: parent.height
+
+            normalColor: "#696969"
+            borderColor: "#000000"
 
             labelText: qsTr("Quit Game")
             labelSize: parent.width/15
@@ -100,10 +107,17 @@ Rectangle {
         id: question
 
         anchors.top: gameDescription.bottom
-        anchors.topMargin: 30
-        width: panelWidth
+        anchors.topMargin: parent.height/17
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
         height: panelHeight/8
-        color: "#2ecc71"
+        color: "#A9A9A9"
+        radius: width*0.5
+        smooth: true
+        border.width: 1
+        border.color: "#696969"
 
         visible: true
 
@@ -112,7 +126,8 @@ Rectangle {
             color: "white"
             width: parent.width
             height: parent.height/2
-
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: parent.height/5
             text: qsTr("Click on")
         }
 
@@ -122,9 +137,11 @@ Rectangle {
             anchors.topMargin: 5
             width: parent.width
             height: parent.height/2
+            horizontalAlignment: Text.AlignHCenter
 
+            font.pixelSize: parent.height/5
             font.bold: true
-            color: "#d35400"
+            color: "white"
             text: qsTr(countryName)
         }
     }
@@ -135,8 +152,9 @@ Rectangle {
         anchors.topMargin: 20
         anchors.horizontalCenter: parent.horizontalCenter
         buttonWidth: panelWidth*4/5
-        buttonHeight: panelHeight/10
-        normalColor: "#3498db"
+        buttonHeight: panelHeight/14
+        normalColor: "#696969"
+        borderColor: "#000000"
 
         labelText: qsTr("Next")
         labelColor: "#ffffff";
@@ -153,18 +171,20 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.top: nextButton.bottom
-        anchors.topMargin: 10
+        anchors.topMargin: 20
 
-        color: "yellow"
+        color: "#80FFFF"
+        border.width: 1
+        border.color: "#262626"
         radius: 40
+        smooth: true
 
-        height: panelHeight*1/6
+        height: panelHeight/6
 
         visible: showResult
 
         Text {
             id: text
-            color: "yellow"
             anchors.left: parent.left
             anchors.leftMargin: 25
             anchors.right: parent.right
@@ -182,11 +202,12 @@ Rectangle {
         anchors.top: resultDisplay.bottom
         anchors.topMargin: 20
         anchors.left: parent.left
-        anchors.leftMargin: 20
+        anchors.leftMargin: 10
         anchors.right: parent.right
-        anchors.rightMargin: 20
+        anchors.rightMargin: 10
 
         buttonHeight: panelHeight*5/(6*14)
+        borderColor: "#696969"
         labelColor: "green"
         labelText: qsTr("View Answer")
 
@@ -201,24 +222,26 @@ Rectangle {
         id: scoreDisplay
 
         anchors.left: parent.left
-        anchors.leftMargin:20
+        anchors.leftMargin:10
         anchors.right: parent.right
-        anchors.rightMargin: 20
+        anchors.rightMargin: 10
         anchors.top: viewCorrectAnswer.bottom
-        anchors.topMargin: 10
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 20
+        anchors.topMargin: 20
+        border.width: 1
+        border.color: "#696969"
 
-        height: panelHeight/10
+        height: panelHeight/8
 
-        color: "darkgrey"
+        color: "#808080"
 
         Text {
             id: scoreContent
             color: "white"
-            anchors.centerIn: parent
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 18
             text: {
-                qsTr("Your Progress \n" + score + "/" + totalQuestionsAsked)
+                qsTr("Your Progress \n\n" + score + "/" + totalQuestionsAsked)
             }
         }
     }

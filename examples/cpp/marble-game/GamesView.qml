@@ -17,7 +17,7 @@ Rectangle {
     id: gamesDisplayPanel
     objectName: "gamesDisplayPanel"
 
-    signal quitGame()
+    signal quitGame(int score)
     signal requestNextQuestion()
     signal requestAnswerDisplay()
 
@@ -44,7 +44,7 @@ Rectangle {
             panelWidth: gamesDisplayPanel.width
             panelHeight: gamesDisplayPanel.height
             onGameQuitRequested: {
-                quitGame();
+                quitGame(score);
             }
             onNextQuestionRequested: {
                 requestNextQuestion();
@@ -56,7 +56,7 @@ Rectangle {
             panelWidth: gamesDisplayPanel.width
             panelHeight: gamesDisplayPanel.height
             onGameQuitRequested: {
-                quitGame();
+                quitGame(score);
             }
             onNextQuestionRequested: {
                 requestNextQuestion();
@@ -68,7 +68,7 @@ Rectangle {
             panelWidth: gamesDisplayPanel.width
             panelHeight: gamesDisplayPanel.height
             onGameQuitRequested: {
-                quitGame();
+                quitGame(score);
             }
             onNextQuestionRequested: {
                 requestNextQuestion();
