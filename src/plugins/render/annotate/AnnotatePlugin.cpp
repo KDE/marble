@@ -481,6 +481,13 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
             return true;
         }
 
+        // If we have an item which has the focus and the Delete key is pressed, delete the item
+        if ( m_focusItem && keyEvent->type() == QEvent::KeyPress && keyEvent->key() == Qt::Key_Delete &&
+             !m_editingDialogIsShown ) {
+            askToRemoveFocusItem();
+            return true;
+        }
+
         return false;
     }
 
