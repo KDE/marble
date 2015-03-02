@@ -194,7 +194,8 @@ TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
     connect( d->m_tourUi.m_slider, SIGNAL( sliderMoved( int ) ),
              this, SLOT( handleSliderMove( int ) ) );
 
-    d->m_tourUi.m_toolBarPlayback->setDisabled(true);
+    d->m_tourUi.m_toolBarPlayback->setDisabled( true );
+    d->m_tourUi.m_slider->setDisabled( true );
 }
 
 TourWidget::~TourWidget()
@@ -687,6 +688,7 @@ void TourWidgetPrivate::createTour()
         openDocument( document );
         m_isChanged = true;
         m_tourUi.m_actionSaveTour->setEnabled( true );
+        m_tourUi.m_slider->setEnabled( true );
     }
 }
 
