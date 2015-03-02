@@ -102,7 +102,7 @@ void SerialTrack::seek( double offset )
             m_finishedPosition += m_items[ i ]->duration();
         }
     }else{
-        for( int i = m_currentIndex - 1; i >= index ; i-- ){
+        for( int i = m_currentIndex - 1; i >= index && i >= 0; i-- ){
             m_finishedPosition -= m_items[ i ]->duration();
         }
     }
