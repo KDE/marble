@@ -233,6 +233,8 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *
     connect( d->m_actionAddImage, SIGNAL( triggered() ), this, SLOT( addImageToDescription() ) );
     connect( d->m_actionAddLink, SIGNAL( triggered() ), this, SLOT( addLinkToDescription() ) );
     connect( d->m_description, SIGNAL( cursorPositionChanged() ), this, SLOT( updateDescriptionEditButtons() ) );
+    connect( d->m_isPlacemarkVisible, SIGNAL( toggled(bool) ), this, SLOT( updateTextAnnotation() ) );
+    connect( d->m_isBalloonVisible, SIGNAL( toggled(bool) ), this, SLOT( updateTextAnnotation() ) );
 
     // Promote "Ok" button to default button.
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
