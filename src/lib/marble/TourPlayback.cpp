@@ -33,7 +33,6 @@
 #include "PlaybackWaitItem.h"
 #include "PlaybackTourControlItem.h"
 #include "PlaybackSoundCueItem.h"
-#include "PlaybackAnimatedUpdateItem.h"
 #include "SerialTrack.h"
 #include "SoundTrack.h"
 #include "AnimatedUpdateTrack.h"

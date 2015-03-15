@@ -25,8 +25,6 @@
 #include "CloudRouteModel.h"
 #include "GeoDataPlacemark.h"
 #include "CloudSyncManager.h"
-#include "GeoDataDocument.h"
-#include "GeoDocument.h"
 #include "GeoDataTypes.h"
 #include "GeoDataExtendedData.h"
 

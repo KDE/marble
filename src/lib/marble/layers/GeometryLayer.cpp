@@ -28,7 +28,6 @@
 #include "GeoDataTypes.h"
 #include "GeoDataFeature.h"
 #include "MarbleDebug.h"
-#include "GeoDataFeature.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "GeoGraphicsScene.h"

@@ -81,12 +81,12 @@ public slots:
     void setTargetIds( const QStringList &targetIds );
 
     /**
-     * @brief setTargetIdFieldVisible tells the dialog wheter targetId field should be shown.
+     * @brief setTargetIdFieldVisible tells the dialog whether targetId field should be shown.
      */
     void setTargetIdFieldVisible( bool visible );
 
     /**
-     * @brief setIdFieldVisible tells the dialog wheter id field should be shown.
+     * @brief setIdFieldVisible tells the dialog whether id field should be shown.
      */
     void setIdFieldVisible( bool visible );
 

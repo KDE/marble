@@ -28,7 +28,6 @@
 #include <QStandardItemModel>
 #include <QShortcut>
 #include <QNetworkProxy>
-#include <QLabel>
 
 // KDE
 #include <kaboutdata.h>

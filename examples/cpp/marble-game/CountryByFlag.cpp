@@ -62,7 +62,7 @@ public:
      * When I select a random placemark form boundaryplacemarks.cache
      * it may represent a continent. Since there is no flag
      * for a continent, we will not use this placemark to post question.
-     * This list will help checking whether the placemark choosen to
+     * This list will help checking whether the placemark chosen to
      * post question is a continent/ocean .
      */
     QStringList m_continentsAndOceans;

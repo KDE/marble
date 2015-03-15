@@ -16,7 +16,6 @@
 #include "PositionProviderPlugin.h"
 
 #include "GeoDataLineString.h"
-#include "GeoDataLineString.h"
 
 #include <QDateTime>
 

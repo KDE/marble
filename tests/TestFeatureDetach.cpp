@@ -14,7 +14,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataCamera.h"
 #include "MarbleGlobal.h"
-#include "GeoDataContainer.h"
 #include "GeoDataPlaylist.h"
 #include "GeoDataTour.h"
 #include "TestUtils.h"

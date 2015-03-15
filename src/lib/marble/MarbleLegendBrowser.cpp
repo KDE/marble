@@ -26,7 +26,6 @@
 #include <QScrollBar>
 #include <QStyle>
 #include <QStyleOptionButton>
-#include <QDesktopServices>
 #include <QRegExp>
 #include <QWebFrame>
 #include <QWebElement>

@@ -57,4 +57,3 @@ private:
 }   // namespace Marble
 
 #endif  // MARBLE_CLICK_ON_THAT
-    

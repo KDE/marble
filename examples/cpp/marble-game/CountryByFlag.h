@@ -50,4 +50,3 @@ private:
 }   // namespace Marble
 
 #endif   // MARBLE_COUNTRY_BY_FLAG
-    

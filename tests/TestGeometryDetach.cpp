@@ -14,7 +14,6 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataTrack.h"
-#include "GeoDataMultiTrack.h"
 #include "GeoDataMultiGeometry.h"
 #include "TestUtils.h"
 

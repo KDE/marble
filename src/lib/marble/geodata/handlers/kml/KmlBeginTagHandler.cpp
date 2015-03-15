@@ -11,13 +11,12 @@
 #include "KmlBeginTagHandler.h"
 
 #include "MarbleDebug.h"
-#include <QDateTime> 
+#include <QDateTime>
 
 #include "KmlWhenTagHandler.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataTimeSpan.h"
 #include "GeoParser.h"
-#include "KmlWhenTagHandler.h"
 
 namespace Marble
 {
