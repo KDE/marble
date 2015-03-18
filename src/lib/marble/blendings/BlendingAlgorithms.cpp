@@ -307,7 +307,7 @@ qreal DifferenceBlending::blendChannel( qreal const bottomColorIntensity,
 qreal EquivalenceBlending::blendChannel( qreal const bottomColorIntensity,
                                          qreal const topColorIntensity ) const
 {
-    return 1.0 - abs( bottomColorIntensity - topColorIntensity );
+    return 1.0 - qAbs( bottomColorIntensity - topColorIntensity );
 }
 
 qreal HalfDifferenceBlending::blendChannel( qreal const bottomColorIntensity,

@@ -25,7 +25,7 @@ MapThemeImageProvider::MapThemeImageProvider() :
 
 QPixmap MapThemeImageProvider::requestPixmap( const QString &id, QSize *size, const QSize &requestedSize )
 {
-    QSize const resultSize = requestedSize.isValid() ? resultSize : QSize( 128, 128 );
+    QSize const resultSize = requestedSize.isValid() ? requestedSize : QSize( 128, 128 );
     if ( size ) {
         *size = resultSize;
     }

@@ -14,7 +14,6 @@
 #include <QWidget>
 #include <QModelIndex>
 
-class QLineEdit;
 class QToolButton;
 class QComboBox;
 
@@ -45,7 +44,6 @@ private Q_SLOTS:
 private:
     GeoDataAnimatedUpdate* animatedUpdateElement();
     QPersistentModelIndex m_index;
-    QLineEdit* m_lineEdit;
     QToolButton *m_button;
     QComboBox* m_comboBox;
 };
