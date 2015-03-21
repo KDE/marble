@@ -67,7 +67,7 @@ bool GeoDataPolygon::operator==( const GeoDataPolygon &other ) const
     QVector<GeoDataLinearRing>::const_iterator otherItEnd= other_d->inner.constEnd();
 
     for ( ; itBound != itEnd && otherItBound != otherItEnd; ++itBound, ++otherItBound ) {
-        if ( *itBound != *itBound) {
+        if ( *itBound != *otherItBound) {
             return false;
         }
     }

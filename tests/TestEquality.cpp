@@ -895,6 +895,23 @@ void TestEquality::polygonTest()
     QVERIFY( polygon1 != polygon2 );
 
     QCOMPARE( polygon1 == polygon2, false );
+
+    /* Prepare for unequality test */
+    polygon2.appendInnerBoundary(innerBoundary11);
+    QVERIFY( polygon1 == polygon2 );
+
+    /* Test for unequality: make sure polygon's coordinates are not equal */
+    polygon2.appendInnerBoundary(innerBoundary11);
+    coord111.set(100,1);
+    innerBoundary11.clear();
+    innerBoundary11.append(coord111);
+    innerBoundary11.append(coord112);
+    innerBoundary11.append(coord113);
+    innerBoundary11.setTessellate(true);
+    polygon1.appendInnerBoundary(innerBoundary11);
+
+    QVERIFY( polygon1 != polygon2 );
+    QCOMPARE( polygon1 == polygon2, false );
 }
 
 void TestEquality::latLonQuadTest()
