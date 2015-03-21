@@ -73,9 +73,6 @@ EditGroundOverlayDialog::EditGroundOverlayDialog( GeoDataGroundOverlay *overlay,
     d->m_rotation->setValue( latLonBox.rotation( GeoDataCoordinates::Degree ) );
 
     connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
-    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(clicked()), this, SLOT(updateGroundOverlay()) );
-    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(clicked()), this, SLOT(setGroundOverlayUpdated()) );
-    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(clicked()), d->m_textureLayer, SLOT(reset()) );
 }
 
 EditGroundOverlayDialog::~EditGroundOverlayDialog()
@@ -118,6 +115,9 @@ void EditGroundOverlayDialog::checkFields()
                               tr( "Invalid image path" ),
                               tr( "Please specify a valid path for the image file." ) );
     } else {
+        this->updateGroundOverlay();
+        this->setGroundOverlayUpdated();
+        d->m_textureLayer->reset();
         accept();
     }
 }
