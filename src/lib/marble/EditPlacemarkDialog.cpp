@@ -119,12 +119,7 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *
     connect( d->m_header, SIGNAL(valueChanged()), this, SLOT(
                  updateTextAnnotation()) );
 
-    if( d->m_isFormattedTextMode->isChecked() ) {
-        d->m_description->setHtml( placemark->description() );
-    } else {
-        d->m_description->setPlainText( placemark->description() );
-    }
-    d->m_description->setPlainText( placemark->description() );
+    d->m_description->setHtml( placemark->description() );
     d->m_initialDescription = placemark->description();
     d->m_initialDescriptionIsCDATA = placemark->descriptionIsCDATA();
     d->m_isBalloonVisible->setChecked( placemark->isBalloonVisible() );
@@ -202,9 +197,9 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *
     connect( d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateIconDialog(const QColor&)) );
     connect( d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateTextAnnotation()) );
 
-    d->m_formattedTextToolBar->setVisible( false );
-    d->m_fontSize->setVisible( false );
-    d->m_fontFamily->setVisible( false );
+    d->m_formattedTextToolBar->setVisible( true );
+    d->m_fontSize->setVisible( true );
+    d->m_fontFamily->setVisible( true );
     QAction *separator = d->m_formattedTextToolBar->insertSeparator( d->m_actionAddImage );
     d->m_formattedTextToolBar->insertWidget( separator, d->m_textColorButton );
     d->m_textColorButton->setMaximumSize( 24, 24 );

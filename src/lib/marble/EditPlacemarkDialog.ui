@@ -25,7 +25,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="m_descriptionTab">
       <attribute name="title">
@@ -50,6 +50,9 @@
            </property>
            <property name="text">
             <string>Formatted text</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
