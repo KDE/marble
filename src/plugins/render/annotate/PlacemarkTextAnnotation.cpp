@@ -134,6 +134,9 @@ bool PlacemarkTextAnnotation::mouseMoveEvent( QMouseEvent *event )
     if ( m_movingPlacemark ) {
         placemark()->setCoordinate( lon, lat );
         return true;
+    } else {
+        setRequest( SceneGraphicsItem::ChangeCursorPlacemarkHover );
+        return true;
     }
 
     return false;

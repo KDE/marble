@@ -747,6 +747,10 @@ void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem 
                                       "contain all its inner boundary nodes." ) );
         } else if ( area->request() == SceneGraphicsItem::RemovePolygonRequest ) {
             removeFocusItem();
+        } else if ( area->request() == SceneGraphicsItem::ChangeCursorPolygonNodeHover ) {
+            m_marbleWidget->setCursor( Qt::PointingHandCursor );
+        } else if ( area->request() == SceneGraphicsItem::ChangeCursorPolygonBodyHover ) {
+            m_marbleWidget->setCursor( Qt::SizeAllCursor );
         }
     } else if ( item->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation ) {
         PolylineAnnotation * const polyline = static_cast<PolylineAnnotation*>( item );
@@ -767,12 +771,28 @@ void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem 
             animation->startAnimation();
         } else if ( polyline->request() == SceneGraphicsItem::RemovePolylineRequest ) {
             removeFocusItem();
+        } else if ( polyline->request() == SceneGraphicsItem::ChangeCursorPolylineNodeHover ) {
+            m_marbleWidget->setCursor( Qt::PointingHandCursor );
+        } else if ( polyline->request() == SceneGraphicsItem::ChangeCursorPolylineLineHover ) {
+            m_marbleWidget->setCursor( Qt::SizeAllCursor );
         }
     } else if ( item->graphicType() == SceneGraphicsTypes::SceneGraphicTextAnnotation ) {
         PlacemarkTextAnnotation * const textAnnotation = static_cast<PlacemarkTextAnnotation*>( item );
 
         if ( textAnnotation->request() == SceneGraphicsItem::ShowPlacemarkRmbMenu ) {
             showTextAnnotationRmbMenu( mouseEvent->x(), mouseEvent->y() );
+        } else if ( textAnnotation->request() == SceneGraphicsItem::ChangeCursorPlacemarkHover ) {
+            m_marbleWidget->setCursor( Qt::SizeAllCursor );
+        }
+    } else if ( item->graphicType() == SceneGraphicsTypes::SceneGraphicGroundOverlay ){
+        GroundOverlayFrame * const groundOverlay = static_cast<GroundOverlayFrame*>( item );
+
+        if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayBDiagHover ) {
+            m_marbleWidget->setCursor( Qt::SizeBDiagCursor );
+        } else if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayFDiagHover ) {
+            m_marbleWidget->setCursor( Qt::SizeFDiagCursor );
+        } else if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayBodyHover ) {
+            m_marbleWidget->setCursor( Qt::SizeAllCursor );
         }
     }
 }
@@ -1571,7 +1591,7 @@ void AnnotatePlugin::setupCursor( SceneGraphicsItem *item )
     if ( !item || item->state() == SceneGraphicsItem::AddingNodes ) {
         m_marbleWidget->setCursor( Qt::DragCopyCursor );
     } else {
-        m_marbleWidget->setCursor( Qt::PointingHandCursor );
+        // Nothing to do. The other cursor changes were moved to the handleRequests() section.
     }
 }
 

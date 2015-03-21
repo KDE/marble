@@ -103,7 +103,20 @@ bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
 
     // Catch hover events.
     if ( m_movedPoint < 0 ) {
-        return true;
+        for ( int i = 0; i < m_regionList.size(); ++i ) {
+        if ( m_regionList.at(i).contains( event->pos() ) ) {
+            if ( i == NorthWest || i == SouthEast) {
+                setRequest( ChangeCursorOverlayFDiagHover );
+            } else if ( i == SouthWest || i == NorthEast) {
+                setRequest( ChangeCursorOverlayBDiagHover );
+            } else if ( i == Polygon){
+                setRequest( ChangeCursorOverlayBodyHover );
+            }
+
+            return true;
+        }
+    }
+    return true;
     }
 
     if ( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {

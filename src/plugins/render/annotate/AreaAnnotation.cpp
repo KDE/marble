@@ -1387,6 +1387,7 @@ bool AreaAnnotation::dealWithHovering( QMouseEvent *mouseEvent )
 
             m_hoveredNode = QPair<int, int>( outerIndex, -1 );
             m_outerNodesList[outerIndex].setFlag( flag );
+            setRequest( ChangeCursorPolygonNodeHover );
         }
 
         return true;
@@ -1415,6 +1416,7 @@ bool AreaAnnotation::dealWithHovering( QMouseEvent *mouseEvent )
 
             m_hoveredNode = innerIndex;
             m_innerNodesList[innerIndex.first][innerIndex.second].setFlag( flag );
+            setRequest( ChangeCursorPolygonNodeHover );
         }
 
         return true;
@@ -1426,6 +1428,7 @@ bool AreaAnnotation::dealWithHovering( QMouseEvent *mouseEvent )
     }
 
     // This means that the interior of the polygon has been covered so we catch this event too.
+    setRequest( ChangeCursorPolygonBodyHover );
     return true;
 }
 

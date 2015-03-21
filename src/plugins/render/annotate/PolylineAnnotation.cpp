@@ -782,6 +782,7 @@ bool PolylineAnnotation::dealWithHovering( QMouseEvent *mouseEvent )
 
             m_hoveredNodeIndex = index;
             m_nodesList[index].setFlag( flag );
+            setRequest( ChangeCursorPolylineNodeHover );
         }
 
         return true;
@@ -793,6 +794,7 @@ bool PolylineAnnotation::dealWithHovering( QMouseEvent *mouseEvent )
     }
 
     // This means that the interior of the polyline has been hovered so we catch this event too.
+    setRequest( ChangeCursorPolylineLineHover );
     return true;
 }
 
