@@ -573,44 +573,88 @@ void ElevationProfileFloatItem::updateVisiblePoints()
 
 void ElevationProfileFloatItem::calculateStatistics( const QList<QPointF> &eleData )
 {
+    // This basically calculates the important peaks of the moving average filtered elevation and
+    // calculates the elevation data based on this points.
+    // This is done by always placing the averaging window in a way that it starts or ends at an
+    // original data point. This should ensure that all minima/maxima of the moving average
+    // filtered data are covered.
     const qreal averageDistance = 200.0;
 
     m_maxElevation = 0.0;
     m_minElevation = invalidElevationData;
-    m_gain = 0;
-    m_loss = 0;
+    m_gain = 0.0;
+    m_loss = 0.0;
     const int start = m_zoomToViewport ? m_firstVisiblePoint : 0;
-    const int end = m_zoomToViewport ? m_lastVisiblePoint : eleData.size();
+    const int end = m_zoomToViewport ? m_lastVisiblePoint + 1 : eleData.size();
 
     if( start < end ) {
-        qreal lastAverage = eleData.value( start ).y();
-        m_maxElevation = lastAverage;
-        m_minElevation = lastAverage;
+        qreal lastX = eleData.value( start ).x();
+        qreal lastY = eleData.value( start ).y();
+        qreal nextX = eleData.value( start + 1 ).x();
+        qreal nextY = eleData.value( start + 1 ).y();
+
+        m_maxElevation = qMax( lastY, nextY );
+        m_minElevation = qMin( lastY, nextY );
 
         int averageStart = start;
-        for ( int index = start + 1; index <= end; ++index ) {
-            m_maxElevation = qMax( m_maxElevation, eleData.value( index ).y() );
-            m_minElevation = qMin( m_minElevation, eleData.value( index ).y() );
+        if(lastX + averageDistance < eleData.value( start + 2 ).x())
+            ++averageStart;
+
+        for ( int index = start + 2; index <= end; ++index ) {
+            qreal indexX = index < end ? eleData.value( index ).x() : eleData.value( end - 1 ).x() + averageDistance;
+            qreal indexY = eleData.value( qMin( index, end - 1 ) ).y();
+            m_maxElevation = qMax( m_maxElevation, indexY );
+            m_minElevation = qMin( m_minElevation, indexY );
 
             // Low-pass filtering (moving average) of the elevation profile to calculate gain and loss values
             // not always the best method, see for example
             // http://www.ikg.uni-hannover.de/fileadmin/ikg/staff/thesis/finished/documents/StudArb_Schulze.pdf
             // (German), chapter 4.2
 
-            qreal average = 0;
-            while( eleData.value( index ).x() - eleData.value( averageStart ).x() > averageDistance && averageStart < index ) {
+            // Average over the part ending with the previous point.
+            // Do complete recalculation to avoid accumulation of floating point artifacts.
+            nextY = 0;
+            qreal averageX = nextX - averageDistance;
+            for( int averageIndex = averageStart; averageIndex < index; ++averageIndex ) {
+                qreal nextAverageX = eleData.value( averageIndex ).x();
+                qreal ratio = ( nextAverageX - averageX ) / averageDistance; // Weighting of original data based on covered distance
+                nextY += eleData.value( qMax( averageIndex - 1, 0 ) ).y() * ratio;
+                averageX = nextAverageX;
+            }
+
+            while( averageStart < index ) {
+                // This handles the part ending with the previous point on the first iteration and the parts starting with averageStart afterwards
+                if ( nextY > lastY ) {
+                    m_gain += nextY - lastY;
+                } else {
+                    m_loss += lastY - nextY;
+                }
+
+                // Here we split the data into parts that average over the same data points
+                // As soon as the end of the averaging window reaches the current point we reached the end of the current part
+                lastX = nextX;
+                lastY = nextY;
+                nextX = eleData.value( averageStart ).x() + averageDistance;
+                if( nextX >= indexX ) {
+                    break;
+                }
+
+                // We don't need to recalculate the average completely, just remove the reached point
+                qreal ratio = (nextX - lastX) / averageDistance;
+                nextY += ( eleData.value( index - 1 ).y() - eleData.value( qMax( averageStart - 1, 0 ) ).y() ) * ratio;
                 ++averageStart;
             }
-            for( int averageIndex = averageStart; averageIndex <= index; ++averageIndex ) {
-                average += eleData.value( averageIndex ).y();
-            }
-            average /= (index - averageStart + 1);
-            if ( average > lastAverage ) {
-                m_gain += average - lastAverage;
-            } else {
-                m_loss += lastAverage - average;
-            }
-            lastAverage = average;
+
+            // This is for the next part already, the end of the averaging window is at the following point
+            nextX = indexX;
+        }
+
+        // Also include the last point
+        nextY = eleData.value( end - 1 ).y();
+        if ( nextY > lastY ) {
+            m_gain += nextY - lastY;
+        } else {
+            m_loss += lastY - nextY;
         }
     }
 }
