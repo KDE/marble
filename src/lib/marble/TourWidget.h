@@ -54,6 +54,7 @@ class MARBLE_EXPORT TourWidget : public QWidget
 
     void setMarbleWidget( MarbleWidget *widget );
     bool openTour( const QString &filename );
+    bool isPlaying() const;
 
 public Q_SLOTS:
     void startPlaying();
@@ -61,6 +62,10 @@ public Q_SLOTS:
     void togglePlaying();
     void stopPlaying();
     void handleSliderMove( int );
+    /**
+     * Highlights the item curently being played.
+     */
+    void setHighlightedItemIndex( int index );
 
 Q_SIGNALS:
     void featureUpdated( GeoDataFeature *feature );
@@ -91,6 +96,7 @@ private Q_SLOTS:
     Q_PRIVATE_SLOT( d, void handlePlaybackProgress( const double position ) )
     Q_DISABLE_COPY( TourWidget )
 
+    void removeHighlight();
     TourWidgetPrivate * const d;
 };
 

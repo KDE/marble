@@ -23,13 +23,14 @@ class MarbleWidget;
 class GeoDataAnimatedUpdate;
 class GeoDataPlaylist;
 class GeoDataFeature;
+class TourWidget;
 
 class TourItemDelegate : public QStyledItemDelegate
 {
 Q_OBJECT
 
 public:
-    TourItemDelegate( QListView* view, MarbleWidget* widget );
+    TourItemDelegate( QListView* view, MarbleWidget* widget, TourWidget* tour );
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QWidget* createEditor ( QWidget * parent, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
@@ -79,6 +80,7 @@ private:
     bool m_editable;
     QPersistentModelIndex m_firstFlyTo;
     QString m_defaultFeatureId;
+    TourWidget* m_tourWidget;
 };
 
 } // namespace Marble

@@ -147,6 +147,8 @@ void SerialTrack::handleFinishedItem()
         m_finishedPosition += m_items[m_currentIndex]->duration();
         m_currentIndex++;
         m_items[m_currentIndex]->play();
+        emit itemFinished( m_currentIndex + 1 );
+
     } else {
         emit finished();
     }

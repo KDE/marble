@@ -41,6 +41,7 @@ Q_SIGNALS:
     void progressChanged( double );
     void finished();
     void paused();
+    void itemFinished( int index );
 
 public Q_SLOTS:
     void handleFinishedItem();

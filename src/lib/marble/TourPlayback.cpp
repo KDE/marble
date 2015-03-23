@@ -78,12 +78,20 @@ TourPlayback::TourPlayback(QObject *parent) :
     connect( &d->m_mainTrack, SIGNAL( centerOn( GeoDataCoordinates ) ), this, SLOT( centerOn( GeoDataCoordinates ) ) );
     connect( &d->m_mainTrack, SIGNAL( progressChanged( double ) ), this, SIGNAL( progressChanged( double ) ) );
     connect( &d->m_mainTrack, SIGNAL( finished() ), this, SLOT( stopTour() ) );
+    connect( &d->m_mainTrack, SIGNAL( itemFinished( int ) ), this, SLOT( handleFinishedItem( int ) ) );
+
+
 }
 
 TourPlayback::~TourPlayback()
 {
     stop();
     delete d;
+}
+
+void TourPlayback::handleFinishedItem( int index )
+{
+    emit itemFinished( index );
 }
 
 void TourPlayback::stopTour()

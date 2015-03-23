@@ -95,10 +95,10 @@ public:
     void captureTour();
     void handlePlaybackProgress( const double position );
     void handlePlaybackFinish();
+    GeoDataObject *rootIndexObject() const;
 
 private:
     GeoDataTour* findTour( GeoDataFeature* feature ) const;
-    GeoDataObject *rootIndexObject() const;
     bool openDocument( GeoDataDocument *document );
     bool saveTourAs( const QString &filename );
     bool overrideModifications();
@@ -179,6 +179,8 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( triggered() ), q, SLOT( saveTourAs() ) );
     QObject::connect( m_tourUi.m_actionRecord, SIGNAL(triggered()), q, SLOT( captureTour()) );
     QObject::connect( &m_playback, SIGNAL( finished() ), q, SLOT( stopPlaying() ) );
+    QObject::connect( &m_playback, SIGNAL( itemFinished( int ) ), q, SLOT( setHighlightedItemIndex( int ) ) );
+
 }
 
 TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
@@ -206,7 +208,7 @@ TourWidget::~TourWidget()
 void TourWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
-    d->m_delegate = new TourItemDelegate( d->m_tourUi.m_listView, d->m_widget );
+    d->m_delegate = new TourItemDelegate( d->m_tourUi.m_listView, d->m_widget, this );
     connect( d->m_delegate, SIGNAL( edited( QModelIndex ) ), this, SLOT( updateDuration() ) );
     connect( d->m_delegate, SIGNAL( edited( QModelIndex ) ), &d->m_playback, SLOT( updateTracks() ) );
     d->m_tourUi.m_listView->setItemDelegate( d->m_delegate );
@@ -225,6 +227,7 @@ void TourWidget::togglePlaying()
 
 void TourWidget::startPlaying()
 {
+    setHighlightedItemIndex( 0 );
     d->m_playback.play();
     d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-pause.png" ) );
     d->m_tourUi.actionPlay->setEnabled( true );
@@ -245,6 +248,7 @@ void TourWidget::pausePlaying()
 
 void TourWidget::stopPlaying()
 {
+    removeHighlight();
     d->m_playback.stop();
     d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-play.png" ) );
     d->m_tourUi.actionPlay->setEnabled( true );
@@ -257,6 +261,7 @@ void TourWidget::stopPlaying()
 
 void TourWidget::handleSliderMove( int value )
 {
+    removeHighlight();
     d->m_playback.seek( value / 100.0 );
     QTime nullTime( 0, 0, 0 );
     QTime time = nullTime.addSecs(  value / 100.0 );
@@ -828,6 +833,54 @@ void TourWidgetPrivate::handlePlaybackProgress(const double position)
         QTime time = nullTime.addSecs( position );
         m_tourUi.m_elapsedTime->setText( QString("%L1:%L2").arg( time.minute(), 2, 10, QChar('0') ).arg( time.second(), 2, 10, QChar('0') ) );
     }
+}
+
+void TourWidget::setHighlightedItemIndex( int index )
+{
+    GeoDataObject* rootObject =  d->rootIndexObject();
+    GeoDataPlaylist* playlist = static_cast<GeoDataPlaylist*>( rootObject );
+    QModelIndex playlistIndex = d->m_widget->model()->treeModel()->index( playlist );
+
+    // Only flyTo and wait items have duration, so the other types have to be skipped.
+    int searchedIndex = 0;
+    for ( int  i = 0; i < playlist->size(); i++ ) {
+
+        QModelIndex currentIndex = d->m_widget->model()->treeModel()->index( i, 0, playlistIndex );
+        GeoDataObject* object = qvariant_cast<GeoDataObject*>(currentIndex.data( MarblePlacemarkModel::ObjectPointerRole ) );
+
+        if ( object->nodeType() == GeoDataTypes::GeoDataFlyToType
+          || object->nodeType() == GeoDataTypes::GeoDataWaitType )
+                ++searchedIndex;
+
+        if ( index == searchedIndex ) {
+            d->m_tourUi.m_listView->selectionModel()->setCurrentIndex( currentIndex, QItemSelectionModel::NoUpdate );
+            d->m_tourUi.m_listView->scrollTo( currentIndex );
+            break;
+        }
+    }
+    d->m_tourUi.m_listView->viewport()->update();
+}
+
+void TourWidget::removeHighlight()
+{
+    QModelIndex index;
+
+    // Restoring the CurrentIndex to the previously selected item
+    // or clearing it if there was no selected item.
+    if ( d->m_tourUi.m_listView->selectionModel()->hasSelection() ) {
+        index = d->m_tourUi.m_listView->selectionModel()->selectedIndexes().last();
+    }
+    else {
+        index = QModelIndex();
+    }
+
+    d->m_tourUi.m_listView->selectionModel()->setCurrentIndex( index, QItemSelectionModel::NoUpdate );
+    d->m_tourUi.m_listView->viewport()->update();
+}
+
+bool TourWidget::isPlaying() const
+{
+    return d->m_playState;
 }
 
 }

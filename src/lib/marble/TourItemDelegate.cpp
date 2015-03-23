@@ -32,12 +32,13 @@
 #include "EditPlacemarkDialog.h"
 #include "MarbleWidget.h"
 #include "GeoDataPlaylist.h"
+#include "TourWidget.h"
 
 namespace Marble
 {
 
-TourItemDelegate::TourItemDelegate( QListView* view, MarbleWidget* widget ):
-                    m_listView( view ), m_widget( widget ), m_editable( true )
+TourItemDelegate::TourItemDelegate( QListView* view, MarbleWidget* widget, TourWidget* tour ):
+                    m_listView( view ), m_widget( widget ), m_editable( true ), m_tourWidget( tour )
 {
     QObject::connect( this, SIGNAL( editingChanged( QModelIndex ) ), m_listView, SLOT( update( QModelIndex ) ) );
     m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
@@ -53,6 +54,11 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
     if (styleOption.state & QStyle::State_Selected) {
         paintContext.palette.setColor(QPalette::Text,
             styleOption.palette.color(QPalette::Active, QPalette::HighlightedText));
+    }
+
+    if ( m_listView->currentIndex() == index && m_tourWidget->isPlaying() ) {
+        painter->fillRect( option.rect, paintContext.palette.color( QPalette::Midlight ) );
+        QStyledItemDelegate::paint( painter, option, index );
     }
 
     QTextDocument label;
