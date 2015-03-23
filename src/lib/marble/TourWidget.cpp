@@ -435,6 +435,14 @@ void TourWidgetPrivate::addTourPrimitive( GeoDataTourPrimitive *primitive )
         m_widget->model()->treeModel()->addTourPrimitive( playlistIndex, primitive, row );
         m_isChanged = true;
         m_tourUi.m_actionSaveTour->setEnabled( true );
+
+        // Scrolling to the inserted item.
+        if ( currentIndex.isValid() ) {
+            m_tourUi.m_listView->scrollTo( currentIndex );
+        }
+        else {
+            m_tourUi.m_listView->scrollToBottom();
+        }
     }
 }
 
