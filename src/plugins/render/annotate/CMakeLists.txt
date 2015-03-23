@@ -22,6 +22,7 @@ set( annotate_SRCS
   AreaAnnotation.cpp
   EditGroundOverlayDialog.cpp
   EditPolygonDialog.cpp
+  NodeItemDelegate.cpp
   EditPolylineDialog.cpp
   GroundOverlayFrame.cpp
   MergingPolygonNodesAnimation.cpp

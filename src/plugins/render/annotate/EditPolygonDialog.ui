@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
+    <width>403</width>
     <height>390</height>
    </rect>
   </property>
@@ -38,7 +38,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="m_descriptionTab">
       <attribute name="title">
@@ -230,7 +230,6 @@
          <zorder>m_filledColor</zorder>
          <zorder>label_7</zorder>
          <zorder>m_polyColorButton</zorder>
-         <zorder>horizontalSpacer</zorder>
         </widget>
        </item>
        <item>

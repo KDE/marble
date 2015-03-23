@@ -112,6 +112,15 @@ int NodeModel::addNode( const GeoDataCoordinates &node )
     return row;
 }
 
+Qt::ItemFlags NodeModel::flags(const QModelIndex & index) const
+{
+    if ( index.column() == 1 || index.column() == 2 ) {
+        return Qt::ItemIsSelectable |  Qt::ItemIsEditable | Qt::ItemIsEnabled;
+    }
+    else
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}
+
 }
 
 #include "NodeModel.moc"

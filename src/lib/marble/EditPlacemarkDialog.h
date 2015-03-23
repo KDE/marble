@@ -15,12 +15,10 @@
 
 #include <QDialog>
 
-
 namespace Marble {
 
 class GeoDataFeature;
 class GeoDataPlacemark;
-
 
 /**
  * @brief The EditPlacemarkDialog class deals with customizing placemarks.
