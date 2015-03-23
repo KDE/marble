@@ -374,7 +374,12 @@ void AnnotatePlugin::loadAnnotationFile()
 
     ParsingRunnerManager manager( m_marbleWidget->model()->pluginManager() );
     GeoDataDocument *document = manager.openFile( filename );
-    Q_ASSERT( document );
+
+    if( !document ) {
+        QMessageBox messageBox;
+        messageBox.critical( 0, "Error", "Invalid file!" );
+        return;
+    }
 
     // FIXME: The same problem as in the case of copying/cutting graphic items applies here:
     // the files do not load properly because the geometry copy is not a deep copy.
