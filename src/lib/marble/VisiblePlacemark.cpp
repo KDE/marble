@@ -111,22 +111,8 @@ const QPixmap& VisiblePlacemark::labelPixmap() const
 void VisiblePlacemark::setSymbolPixmap()
 {
     const GeoDataStyle *style = m_placemark->style();
-
-    // Scaling icon
-    float scale = m_placemark->style()->iconStyle().scale();
-    QSize size = m_placemark->style()->iconStyle().icon().size();
-
-    if ( size.rheight() * scale < maxIconSize && size.rwidth() * scale < maxIconSize ) {
-        size *= scale;
-    }
-    else {
-        size = QSize( maxIconSize, maxIconSize );
-    }
-
-    if (  style != NULL  && !(style->iconStyle().icon().isNull()) ) {
-
-        QImage scaledIcon = style->iconStyle().icon().scaled( size, Qt::KeepAspectRatio );
-        m_symbolPixmap = QPixmap::fromImage( scaledIcon );
+    if ( style ) {
+        m_symbolPixmap = QPixmap::fromImage( style->iconStyle().icon() );
         emit updateNeeded();
     }
     else {
@@ -156,9 +142,6 @@ void VisiblePlacemark::drawLabelPixmap()
 
     QFont  labelFont  = style->labelStyle().font();
     QColor labelColor = style->labelStyle().color();
-
-    float scale = style->labelStyle().scale();
-    labelFont.setPointSize( labelFont.pointSize() * scale );
 
     LabelStyle labelStyle = Normal;
     if ( m_selected ) {
