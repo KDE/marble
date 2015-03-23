@@ -112,7 +112,9 @@ public:
     TourPlayback m_playback;
     TourItemDelegate *m_delegate;
     bool m_playState;
+    bool m_isLoopingStopped;
     GeoDataDocument* m_document;
+    QAction *m_actionToggleLoopPlay;
     QToolButton *m_addPrimitiveButton;
     QAction *m_actionAddFlyTo;
     QAction *m_actionAddWait;
@@ -156,6 +158,11 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     addPrimitiveMenu->addAction( m_actionAddRemovePlacemark );
     m_actionAddChangePlacemark = new QAction( QIcon( ":/marble/document-edit.png" ), QObject::tr( "Change placemark" ), addPrimitiveMenu );
     addPrimitiveMenu->addAction( m_actionAddChangePlacemark );
+    m_actionToggleLoopPlay = new QAction( QObject::tr( "Loop" ), m_tourUi.m_slider );
+    m_actionToggleLoopPlay->setCheckable( true );
+    m_actionToggleLoopPlay->setChecked( false );
+    m_tourUi.m_slider->setContextMenuPolicy( Qt::ActionsContextMenu );
+    m_tourUi.m_slider->addAction( m_actionToggleLoopPlay );
 
     m_addPrimitiveButton->setMenu( addPrimitiveMenu );
     m_addPrimitiveButton->setEnabled( false );
@@ -191,6 +198,8 @@ TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
 
     connect( d->m_tourUi.actionPlay, SIGNAL( triggered() ),
             this, SLOT( togglePlaying() ) );
+    connect( d->m_tourUi.actionStop, SIGNAL( triggered() ),
+            this, SLOT( stopLooping() ) );
     connect( d->m_tourUi.actionStop, SIGNAL( triggered() ),
             this, SLOT( stopPlaying() ) );
     connect( d->m_tourUi.m_slider, SIGNAL( sliderMoved( int ) ),
@@ -228,6 +237,7 @@ void TourWidget::togglePlaying()
 void TourWidget::startPlaying()
 {
     setHighlightedItemIndex( 0 );
+    d->m_isLoopingStopped = false;
     d->m_playback.play();
     d->m_tourUi.actionPlay->setIcon( QIcon( ":/marble/playback-pause.png" ) );
     d->m_tourUi.actionPlay->setEnabled( true );
@@ -257,6 +267,16 @@ void TourWidget::stopPlaying()
     d->m_playState = false;
     d->m_delegate->setEditable( true );
     d->m_addPrimitiveButton->setEnabled( true );
+
+    // Loop if the option ( m_actionLoopPlay ) is checked
+    if ( d->m_actionToggleLoopPlay->isChecked() && !d->m_isLoopingStopped ) {
+        startPlaying();
+    }
+}
+
+void TourWidget::stopLooping()
+{
+    d->m_isLoopingStopped = true;
 }
 
 void TourWidget::handleSliderMove( int value )

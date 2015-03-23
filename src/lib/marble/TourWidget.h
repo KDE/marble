@@ -84,6 +84,7 @@ private Q_SLOTS:
     void deleteSelected();
     void updateDuration();
     void finishAddingItem();
+    void stopLooping();
 
  private:
     Q_PRIVATE_SLOT( d, void openFile() )
