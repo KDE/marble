@@ -28,6 +28,7 @@ namespace Marble
 class GeoDataPlacemark;
 
 static const qreal s_labelOutlineWidth = 2.5;
+static const  int  maxIconSize = 40;
 
 /**
  * @short A class which represents the visible place marks on a map.

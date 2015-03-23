@@ -254,7 +254,8 @@ int PlacemarkLayout::maxLabelHeight() const
         if ( placemark ) {
             const GeoDataStyle* style = placemark->style();
             QFont labelFont = style->labelStyle().font();
-            int textHeight = QFontMetrics( labelFont ).height();
+            float scale = style->labelStyle().scale();
+            float textHeight = QFontMetrics( labelFont ).height() * scale;
             if ( textHeight > maxLabelHeight )
                 maxLabelHeight = textHeight;
         }
@@ -602,21 +603,25 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                                       const QString &labelText ) const
 {
     QFont labelFont = style->labelStyle().font();
-    int textHeight = QFontMetrics( labelFont ).height();
+    float labelScale = style->labelStyle().scale();
+    float iconScale = style->labelStyle().scale();
 
-    int textWidth;
+    float textHeight = QFontMetrics( labelFont ).height() * labelScale;
+    float textWidth;
+
     if ( style->labelStyle().glow() ) {
         labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
         textWidth = ( QFontMetrics( labelFont ).width( labelText )
+            * labelScale
             + qRound( 2 * s_labelOutlineWidth ) );
     } else {
-        textWidth = ( QFontMetrics( labelFont ).width( labelText ) );
+        textWidth = ( QFontMetrics( labelFont ).width( labelText ) * labelScale );
     }
 
     const QVector<VisiblePlacemark*> currentsec = m_rowsection.at( y / m_maxLabelHeight );
 
     if ( style->labelStyle().alignment() == GeoDataLabelStyle::Corner ) {
-        const int symbolWidth = style->iconStyle().icon().width();
+        const int symbolWidth = style->iconStyle().icon().width() * iconScale;
 
         // Check the four possible positions by going through all of them
         for( int i=0; i<4; ++i ) {

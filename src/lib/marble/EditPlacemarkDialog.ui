@@ -264,7 +264,7 @@
             <item>
              <widget class="QLabel" name="m_labelScaleField">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="text">
                <string>Scale:</string>
@@ -274,10 +274,19 @@
             <item>
              <widget class="QDoubleSpinBox" name="m_labelScale">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="decimals">
                <number>1</number>
+              </property>
+              <property name="minimum">
+               <double>0.500000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>2.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -373,7 +382,7 @@
             <item>
              <widget class="QLabel" name="m_iconScaleField">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="text">
                <string>Scale:</string>
@@ -383,10 +392,19 @@
             <item>
              <widget class="QDoubleSpinBox" name="m_iconScale">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="decimals">
                <number>1</number>
+              </property>
+              <property name="minimum">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>5.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -448,7 +466,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="libmarble.qrc">
+    <iconset resource="../../apps/marble-ui/marble.qrc">
      <normaloff>:/icons/format-text-bold.png</normaloff>:/icons/format-text-bold.png</iconset>
    </property>
    <property name="text">
@@ -463,7 +481,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="libmarble.qrc">
+    <iconset resource="../../apps/marble-ui/marble.qrc">
      <normaloff>:/icons/format-text-italic.png</normaloff>:/icons/format-text-italic.png</iconset>
    </property>
    <property name="text">
@@ -478,7 +496,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="libmarble.qrc">
+    <iconset resource="../../apps/marble-ui/marble.qrc">
      <normaloff>:/icons/format-text-underline.png</normaloff>:/icons/format-text-underline.png</iconset>
    </property>
    <property name="text">
@@ -490,7 +508,7 @@
   </action>
   <action name="m_actionAddImage">
    <property name="icon">
-    <iconset resource="libmarble.qrc">
+    <iconset resource="../../apps/marble-ui/marble.qrc">
      <normaloff>:/icons/insert-image.png</normaloff>:/icons/insert-image.png</iconset>
    </property>
    <property name="text">
@@ -502,7 +520,7 @@
   </action>
   <action name="m_actionAddLink">
    <property name="icon">
-    <iconset resource="libmarble.qrc">
+    <iconset resource="../../apps/marble-ui/marble.qrc">
      <normaloff>:/icons/insert-link.png</normaloff>:/icons/insert-link.png</iconset>
    </property>
    <property name="text">
@@ -521,7 +539,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="libmarble.qrc"/>
+  <include location="../../apps/marble-ui/marble.qrc"/>
  </resources>
  <connections>
   <connection>
