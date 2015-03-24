@@ -50,6 +50,10 @@ class BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
 
         viewport->screenCoordinates( m_coordinates, x, y, pointRepeatNumber,
                                          m_size, globeHidesPoint );
+
+        // Don't display items if they are on the far side of the globe.
+        if (globeHidesPoint) return;
+
         for ( int i = 0; i < pointRepeatNumber; ++i ) {
             // handle vertical alignment
             qint32 topY = ( viewport->height() - m_size.height() ) / 2;
