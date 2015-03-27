@@ -20,6 +20,7 @@
 #include <QPixmap>
 #include <QGestureEvent>
 #include <QPinchGesture>
+#include <QDebug> //removethis
 
 #include "kineticmodel.h"
 #include "MarbleGlobal.h"
@@ -273,9 +274,16 @@ void MarbleDefaultInputHandler::hideSelectionIfCtrlReleased(QEvent *e)
 
 bool MarbleDefaultInputHandler::handleDoubleClick(QMouseEvent *event)
 {
-    d->m_lmbTimer.stop();
-    MarbleInputHandler::d->m_marblePresenter->moveTo(event->pos(), 0.67);
-    MarbleInputHandler::d->m_mouseWheelTimer->start(400);
+    qreal mouseLon;
+    qreal mouseLat;
+    const bool isMouseAboveMap = MarbleInputHandler::d->m_marblePresenter->map()->geoCoordinates(event->x(), event->y(),
+                                             mouseLon, mouseLat, GeoDataCoordinates::Radian);
+    if(isMouseAboveMap)
+    {
+        d->m_lmbTimer.stop();
+        MarbleInputHandler::d->m_marblePresenter->moveTo(event->pos(), 0.67);
+        MarbleInputHandler::d->m_mouseWheelTimer->start(400);
+    }
     return acceptMouse();
 }
 
@@ -658,7 +666,7 @@ QPoint MarbleDefaultInputHandler::mouseMovedOutside(QMouseEvent *event)
     }
 
     if (event->button() == Qt::LeftButton && event->type() == QEvent::MouseButtonPress
-            && panViaArrowsEnabled())
+            && panViaArrowsEnabled() && !d->m_kineticSpinning.hasVelocity())
     {
         d->m_lmbTimer.stop();
         qreal moveStep = MarbleInputHandler::d->m_marblePresenter->moveStep();

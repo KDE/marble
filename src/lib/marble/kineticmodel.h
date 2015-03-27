@@ -50,6 +50,7 @@ public:
     int duration() const;
     QPointF position() const;
     int updateInterval() const;
+    bool hasVelocity() const;
 
 public slots:
     void setDuration(int ms);
