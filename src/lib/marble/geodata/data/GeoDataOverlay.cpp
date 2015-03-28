@@ -94,6 +94,7 @@ void GeoDataOverlay::setIcon( const QImage &icon )
 void GeoDataOverlay::setIconFile( const QString &path )
 {
     d->m_iconPath = path;
+    d->m_image = QImage( path );
 }
 
 QString GeoDataOverlay::iconFile() const
