@@ -81,6 +81,8 @@ public:
         ChangeCursorPolylineLineHover,
 
         // GroundOverlay specific
+        ChangeCursorOverlayVerticalHover,
+        ChangeCursorOverlayHorizontalHover,
         ChangeCursorOverlayBDiagHover,
         ChangeCursorOverlayFDiagHover,
         ChangeCursorOverlayBodyHover

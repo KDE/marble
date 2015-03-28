@@ -374,12 +374,7 @@ void AnnotatePlugin::loadAnnotationFile()
 
     ParsingRunnerManager manager( m_marbleWidget->model()->pluginManager() );
     GeoDataDocument *document = manager.openFile( filename );
-
-    if( !document ) {
-        QMessageBox messageBox;
-        messageBox.critical( 0, "Error", "Invalid file!" );
-        return;
-    }
+    Q_ASSERT( document );
 
     // FIXME: The same problem as in the case of copying/cutting graphic items applies here:
     // the files do not load properly because the geometry copy is not a deep copy.
@@ -792,7 +787,11 @@ void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem 
     } else if ( item->graphicType() == SceneGraphicsTypes::SceneGraphicGroundOverlay ){
         GroundOverlayFrame * const groundOverlay = static_cast<GroundOverlayFrame*>( item );
 
-        if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayBDiagHover ) {
+        if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayVerticalHover ) {
+            m_marbleWidget->setCursor( Qt::SizeVerCursor );
+        } else if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayHorizontalHover ) {
+            m_marbleWidget->setCursor( Qt::SizeHorCursor );
+        } else if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayBDiagHover ) {
             m_marbleWidget->setCursor( Qt::SizeBDiagCursor );
         } else if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayFDiagHover ) {
             m_marbleWidget->setCursor( Qt::SizeFDiagCursor );
@@ -1143,15 +1142,9 @@ void AnnotatePlugin::addOverlay()
                                                                  m_marbleWidget->textureLayer(),
                                                                  m_marbleWidget );
     dialog->exec();
-
-    if( dialog->result() ) {
-        m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, overlay );
-        displayOverlayFrame( overlay );
-    }
-    else {
-            delete overlay;
-    }
     delete dialog;
+    m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, overlay );
+    displayOverlayFrame( overlay );
 }
 
 void AnnotatePlugin::showOverlayRmbMenu( GeoDataGroundOverlay *overlay, qreal x, qreal y )

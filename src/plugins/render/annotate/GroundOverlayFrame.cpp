@@ -44,9 +44,20 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
     if ( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing &ring = polygon->outerBoundary();
+        GeoDataLineString northernBorder, southernBorder, easternBorder, westernBorder;
+        northernBorder << ring.at( NorthWest ) << ring.at( NorthEast );
+        southernBorder << ring.at( SouthWest ) << ring.at( SouthEast );
+        easternBorder  << ring.at( NorthEast ) << ring.at( SouthEast );
+        westernBorder  << ring.at( NorthWest ) << ring.at( SouthWest );
+
         for ( int i = 0; i < ring.size(); ++i ) {
             m_regionList.append( painter->regionFromEllipse( ring.at(i), 10, 10 ) );
+            painter->drawEllipse( ring.at(i), 10, 10 );
         }
+        m_regionList.append( painter->regionFromPolyline( northernBorder, 10 ) );
+        m_regionList.append( painter->regionFromPolyline( southernBorder, 10 ) );
+        m_regionList.append( painter->regionFromPolyline( easternBorder, 10 ) );
+        m_regionList.append( painter->regionFromPolyline( westernBorder, 10 ) );
         m_regionList.append( painter->regionFromPolygon( ring, Qt::OddEvenFill ) );
     }
     painter->restore();
@@ -109,6 +120,10 @@ bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
                 setRequest( ChangeCursorOverlayFDiagHover );
             } else if ( i == SouthWest || i == NorthEast) {
                 setRequest( ChangeCursorOverlayBDiagHover );
+            } else if ( i == North || i == South ) {
+                setRequest( ChangeCursorOverlayVerticalHover );
+            } else if ( i == West || i == East ) {
+                setRequest( ChangeCursorOverlayHorizontalHover );
             } else if ( i == Polygon){
                 setRequest( ChangeCursorOverlayBodyHover );
             }
@@ -142,6 +157,14 @@ bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
         } else if ( m_movedPoint == NorthEast ) {
             m_overlay->latLonBox().setNorth( rotatedLat );
             m_overlay->latLonBox().setEast( rotatedLon );
+        } else if ( m_movedPoint == North ) {
+            m_overlay->latLonBox().setNorth( rotatedLat );
+        } else if ( m_movedPoint == South ) {
+            m_overlay->latLonBox().setSouth( rotatedLat );
+        } else if ( m_movedPoint == East ) {
+            m_overlay->latLonBox().setEast( rotatedLon );
+        } else if ( m_movedPoint == West ) {
+            m_overlay->latLonBox().setWest( rotatedLon );
         } else if ( m_movedPoint == Polygon ) {
 
            const qreal centerLonDiff = lon - m_movedPointCoordinates.longitude();

@@ -28,6 +28,10 @@ public:
         SouthWest,
         SouthEast,
         NorthEast,
+        North,
+        South,
+        East,
+        West,
         Polygon
     };
 
