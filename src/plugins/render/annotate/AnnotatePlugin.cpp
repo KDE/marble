@@ -1142,9 +1142,14 @@ void AnnotatePlugin::addOverlay()
                                                                  m_marbleWidget->textureLayer(),
                                                                  m_marbleWidget );
     dialog->exec();
+    if( dialog->result() ) {
+        m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, overlay );
+        displayOverlayFrame( overlay );
+    }
+    else {
+        delete overlay;
+    }
     delete dialog;
-    m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, overlay );
-    displayOverlayFrame( overlay );
 }
 
 void AnnotatePlugin::showOverlayRmbMenu( GeoDataGroundOverlay *overlay, qreal x, qreal y )
