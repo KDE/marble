@@ -225,6 +225,9 @@ void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, con
     for ( int i =  0; i < m_groundOverlays.size(); ++i ) {
 
         const GeoDataGroundOverlay* overlay = m_groundOverlays.at( i );
+        if ( !overlay->isGloballyVisible() ) {
+            continue;
+        }
 
         const GeoDataLatLonBox overlayLatLonBox = overlay->latLonBox();
 
