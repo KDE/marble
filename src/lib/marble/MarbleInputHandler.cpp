@@ -464,8 +464,6 @@ void MarbleDefaultInputHandler::handleLeftMouseButtonPress(QMouseEvent *event)
         }
     }
 
-    MarbleInputHandler::d->m_marblePresenter->setViewContext(Animation);
-
     if (event->modifiers() & Qt::ControlModifier)
     {
         mDebug() << Q_FUNC_INFO << "Starting selection";
@@ -742,6 +740,8 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
                  || abs(deltay) > d->m_dragThreshold
                  || !d->m_lmbTimer.isActive())
             {
+                MarbleInputHandler::d->m_marblePresenter->setViewContext(Animation);
+
                 d->m_lmbTimer.stop();
 
                 const qreal posLon = d->m_leftPressedLon - 90.0 * d->m_leftPressedDirection * deltax / radius;
