@@ -178,7 +178,6 @@ namespace Marble
         {
             painter->end();
             GeoPainter geoPainter(paintDevice, d->map()->viewport(), d->map()->mapQuality());
-            geoPainter.setOpacity(0.9);
             d->map()->paint(geoPainter, rect);
         }
         painter->begin(paintDevice);
