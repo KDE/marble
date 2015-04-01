@@ -311,12 +311,6 @@ void AzimuthalProjectionPrivate::crossHorizon( const GeoDataCoordinates & bCoord
     if( !globeHidesPoint ) {
         *polygons.last() << QPointF( x, y );
     }
-    else {
-        if ( !polygons.last()->isEmpty() ) {
-            QPolygonF *path = new QPolygonF;
-            polygons.append( path );
-        }
-    }
 }
 
 bool AzimuthalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &lineString,
