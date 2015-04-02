@@ -46,19 +46,16 @@
                     <blending name="SunLightBlending" />
                 </texture>
             </layer>
-
-            <layer name="mwdbii" backend="vector">
-                <vector name="pcoast" feature="coastlines">
-                    <sourcefile> mwdbii/PCOAST.PNT </sourcefile>
-                    <pen color="#ffff00" />
-                    <brush color="transparent" />
-                </vector>
-                <vector name="rivers" feature="waterbodies">
-                    <sourcefile> mwdbii/RIVER.PNT </sourcefile>
-                    <pen color="#ffffff" />
-                </vector>
+            <layer name="naturalearth" backend="geodata">
+                <geodata name="coast" property="coastlines">
+                    <sourcefile> naturalearth/ne_50m_land.pn2 </sourcefile>
+                    <pen color="#ffff00" width="1.5"/>
+                </geodata>
+                <geodata name="lake" property="coastlines">
+                    <sourcefile> naturalearth/ne_50m_lakes.pn2 </sourcefile>
+                    <pen color="#ffff00" width="1.5"/>
+                </geodata>
             </layer>
-                            
             <layer name="standardplaces" backend="geodata">
                 <geodata name="cityplacemarks">
                     <sourcefile>cityplacemarks.cache</sourcefile>

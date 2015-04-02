@@ -38,7 +38,7 @@
                     <pen color="transparent" style="nopen"/>
                     <brush color="#f2efe9" />
                 </geodata>
-                <geodata name="lake" property="waterbodies" colorize="sea">
+                <geodata name="lake" property="waterbodies">
                     <sourcefile> naturalearth/ne_50m_lakes.pn2 </sourcefile>
                     <brush color="#99b3cc" />
                     <pen color="transparent" style="nopen"/>
