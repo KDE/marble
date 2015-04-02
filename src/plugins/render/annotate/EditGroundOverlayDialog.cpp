@@ -16,6 +16,10 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QVBoxLayout>
+
+//Marble
+#include "FormattedTextWidget.h"
 
 namespace Marble
 {
@@ -26,6 +30,7 @@ class EditGroundOverlayDialog::Private : public Ui::UiEditGroundOverlayDialog
 public:
     GeoDataGroundOverlay *m_overlay;
     TextureLayer         *m_textureLayer;
+    FormattedTextWidget *m_formattedTextWidget;
 
     Private( GeoDataGroundOverlay *overlay, TextureLayer *textureLayer );
     ~Private();
@@ -54,10 +59,16 @@ EditGroundOverlayDialog::EditGroundOverlayDialog( GeoDataGroundOverlay *overlay,
 {
     d->setupUi( this );
 
+    d->m_formattedTextWidget = new FormattedTextWidget( d->m_descriptionTab );
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget( d->m_formattedTextWidget );
+    d->m_descriptionTab->setLayout( layout );
+
     d->m_header->setName( overlay->name() );
     d->m_header->setIconLink( overlay->absoluteIconFile() );
     d->m_header->setPositionVisible(false);
-    d->m_description->setText( overlay->description() );
+    d->m_formattedTextWidget->setText( overlay->description() );
 
     d->m_north->setRange( -90, 90 );
     d->m_south->setRange( -90, 90 );
@@ -84,7 +95,7 @@ void EditGroundOverlayDialog::updateGroundOverlay()
 {
     d->m_overlay->setName( d->m_header->name() );
     d->m_overlay->setIconFile( d->m_header->iconLink() );
-    d->m_overlay->setDescription( d->m_description->toPlainText() );
+    d->m_overlay->setDescription( d->m_formattedTextWidget->text() );
 
     d->m_overlay->latLonBox().setBoundaries( d->m_north->value(),
                                              d->m_south->value(),

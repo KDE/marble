@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>403</width>
+    <width>323</width>
     <height>390</height>
    </rect>
   </property>
@@ -38,17 +38,12 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="m_descriptionTab">
       <attribute name="title">
        <string>Description</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QTextEdit" name="m_description"/>
-       </item>
-      </layout>
      </widget>
      <widget class="QWidget" name="m_styleTab">
       <attribute name="title">
@@ -258,7 +253,7 @@
           <bool>false</bool>
          </property>
          <attribute name="headerStretchLastSection">
-          <bool>false</bool>
+          <bool>true</bool>
          </attribute>
         </widget>
        </item>

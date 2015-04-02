@@ -15,12 +15,14 @@
 // Qt
 #include <QColorDialog>
 #include <QMessageBox>
+#include <QVBoxLayout>
 
 // Marble
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "NodeModel.h"
 #include "NodeItemDelegate.h"
+#include "FormattedTextWidget.h"
 
 namespace Marble {
 
@@ -42,6 +44,7 @@ public:
 
     NodeModel *m_nodeModel;
     NodeItemDelegate *m_delegate;
+    FormattedTextWidget *m_formattedTextWidget;
 };
 
 EditPolygonDialog::Private::Private( GeoDataPlacemark *placemark ) :
@@ -68,6 +71,12 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
 {
     d->setupUi( this );
 
+    d->m_formattedTextWidget = new FormattedTextWidget( d->m_descriptionTab );
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(d->m_formattedTextWidget);
+    d->m_descriptionTab->setLayout(layout);
+
     d->m_initialStyle = *placemark->style();
 
     // If the polygon has just been drawn, assign it a default name.
@@ -78,7 +87,7 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     d->m_initialName = placemark->name();
     connect( d->m_name, SIGNAL(editingFinished()), this, SLOT(updatePolygon()) );
 
-    d->m_description->setText( placemark->description() );
+    d->m_formattedTextWidget->setText( placemark->description() );
     d->m_initialDescription = placemark->description();
 
     // Get the current style properties.
@@ -185,7 +194,7 @@ void EditPolygonDialog::updatePolygon()
     GeoDataStyle *style = new GeoDataStyle( *d->m_placemark->style() );
 
     d->m_placemark->setName( d->m_name->text() );
-    d->m_placemark->setDescription( d->m_description->toPlainText() );
+    d->m_placemark->setDescription( d->m_formattedTextWidget->text() );
 
     style->lineStyle().setWidth( d->m_linesWidth->value() );
     // 0 corresponds to "Filled" and 1 corresponds to "Not Filled".

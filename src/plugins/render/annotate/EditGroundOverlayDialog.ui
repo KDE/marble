@@ -26,11 +26,6 @@
       <attribute name="title">
        <string>Description</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <widget class="QTextEdit" name="m_description"/>
-       </item>
-      </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">

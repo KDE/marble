@@ -201,6 +201,7 @@ set(marblewidget_SRCS
     TourCaptureDialog.cpp
     EditPlacemarkDialog.cpp
     AddLinkDialog.cpp
+    FormattedTextWidget.cpp
 
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp
@@ -346,6 +347,7 @@ set (marblewidget_UI
     TourCaptureDialog.ui
     EditPlacemarkDialog.ui
     AddLinkDialog.ui
+    FormattedTextWidget.ui
     ElevationWidget.ui
 )
 
@@ -567,6 +569,7 @@ install( FILES
     PlanetFactory.h
     EditPlacemarkDialog.h
     AddLinkDialog.h
+    FormattedTextWidget.h
 
     AbstractDataPlugin.h
     AbstractDataPluginModel.h

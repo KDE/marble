@@ -15,12 +15,14 @@
 // Qt
 #include <QColorDialog>
 #include <QMessageBox>
+#include <QVBoxLayout>
 
 // Marble
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "NodeModel.h"
+#include "FormattedTextWidget.h"
 
 
 namespace Marble
@@ -39,6 +41,7 @@ public:
     QString m_initialName;
     QString m_initialDescription;
     GeoDataLineStyle m_initialLineStyle;
+    FormattedTextWidget *m_formattedTextWidget;
 
     NodeModel *m_nodeModel;
 };
@@ -64,6 +67,12 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
 {
     d->setupUi( this );
 
+    d->m_formattedTextWidget = new FormattedTextWidget( d->m_descriptionTab );
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget( d->m_formattedTextWidget );
+    d->m_descriptionTab->setLayout( layout );
+
     // If the polygon has just been drawn, assign it a default name.
     if ( d->m_placemark->name().isNull() ) {
         d->m_placemark->setName( tr("Untitled Path") );
@@ -74,8 +83,8 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
     d->m_initialName = d->m_name->text();
     connect( d->m_name, SIGNAL(editingFinished()), this, SLOT(updatePolyline()) );
 
-    d->m_description->setText( placemark->description() );
-    d->m_initialDescription = d->m_description->toPlainText();
+    d->m_formattedTextWidget->setText( placemark->description() );
+    d->m_initialDescription = d->m_formattedTextWidget->text();
 
     d->m_linesWidth->setRange( 0.1, 5.0 );
 
@@ -149,7 +158,7 @@ void EditPolylineDialog::handleItemMoving( GeoDataPlacemark *item )
 
 void EditPolylineDialog::updatePolyline()
 {
-    d->m_placemark->setDescription( d->m_description->toPlainText() );
+    d->m_placemark->setDescription( d->m_formattedTextWidget->text() );
     d->m_placemark->setName( d->m_name->text() );
 
 
