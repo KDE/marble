@@ -182,7 +182,8 @@ void AzimuthalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates
                                                 qreal bx, qreal by,
                                                 QVector<QPolygonF*> &polygons,
                                                 const ViewportParams *viewport,
-                                                TessellationFlags f) const
+                                                TessellationFlags f,
+                                                bool allowLatePolygonCut ) const
 {
     // We take the manhattan length as a distance approximation
     // that can be too big by a factor of sqrt(2)
@@ -217,10 +218,11 @@ void AzimuthalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates
                                  tessellatedNodes,
                                  polygons,
                                  viewport,
-                                 f );
+                                 f,
+                                 allowLatePolygonCut);
         }
         else {
-            crossHorizon( bCoords, polygons, viewport );
+            crossHorizon( bCoords, polygons, viewport, allowLatePolygonCut );
         }
 #ifdef SAFE_DISTANCE
     }
@@ -233,7 +235,8 @@ void AzimuthalProjectionPrivate::processTessellation( const GeoDataCoordinates &
                                                     int tessellatedNodes,
                                                     QVector<QPolygonF*> &polygons,
                                                     const ViewportParams *viewport,
-                                                    TessellationFlags f) const
+                                                    TessellationFlags f,
+                                                    bool allowLatePolygonCut ) const
 {
 
     const bool clampToGround = f.testFlag( FollowGround );
@@ -285,7 +288,7 @@ void AzimuthalProjectionPrivate::processTessellation( const GeoDataCoordinates &
         }
 
         const GeoDataCoordinates currentTessellatedCoords( lon, lat, altitude );
-        crossHorizon( currentTessellatedCoords, polygons, viewport );
+        crossHorizon( currentTessellatedCoords, polygons, viewport, allowLatePolygonCut );
         previousTessellatedCoords = currentTessellatedCoords;
     }
 
@@ -294,12 +297,14 @@ void AzimuthalProjectionPrivate::processTessellation( const GeoDataCoordinates &
     if ( clampToGround ) {
         currentModifiedCoords.setAltitude( 0.0 );
     }
-    crossHorizon( currentModifiedCoords, polygons, viewport );
+    crossHorizon( currentModifiedCoords, polygons, viewport, allowLatePolygonCut );
 }
 
 void AzimuthalProjectionPrivate::crossHorizon( const GeoDataCoordinates & bCoord,
                                               QVector<QPolygonF*> &polygons,
-                                              const ViewportParams *viewport ) const
+                                              const ViewportParams *viewport,
+                                              bool allowLatePolygonCut
+                                             ) const
 {
     qreal x, y;
     bool globeHidesPoint;
@@ -310,6 +315,12 @@ void AzimuthalProjectionPrivate::crossHorizon( const GeoDataCoordinates & bCoord
 
     if( !globeHidesPoint ) {
         *polygons.last() << QPointF( x, y );
+    }
+    else {
+        if ( allowLatePolygonCut && !polygons.last()->isEmpty() ) {
+            QPolygonF *path = new QPolygonF;
+            polygons.append( path );
+        }
     }
 }
 
@@ -440,7 +451,7 @@ bool AzimuthalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
                     tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                            *itCoords, x, y,
                                            polygons, viewport,
-                                           f );
+                                           f, !lineString.isClosed() );
 
                 }
                 else {
@@ -450,13 +461,13 @@ bool AzimuthalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
                         tessellateLineSegment( horizonCoords, horizonX, horizonY,
                                                *itCoords, x, y,
                                                polygons, viewport,
-                                               f );
+                                               f, !lineString.isClosed() );
                     }
                     else {
                         tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                                horizonCoords, horizonX, horizonY,
                                                polygons, viewport,
-                                               f );
+                                               f, !lineString.isClosed() );
                     }
                 }
             }

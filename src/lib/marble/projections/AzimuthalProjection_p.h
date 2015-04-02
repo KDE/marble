@@ -40,24 +40,40 @@ public:
     // clampToGround flag is added the polygon contains count + 2
     // nodes as the clamped down start and end node get added.
 
+    // In order to ensure proper performance the current algorithm
+    // determines whether the linestring disappears
+    // behind the horizon by evaluating the actual node coordinates of the
+    // linestring.
+    // However in some cases only a tessellated portion of the linestring
+    // disappears behind the globe. In this case non-closed linestrings
+    // can still be cut into separate polygons without problems.
+    // But for linearrings the horizon detection at this stage happens too
+    // late already to be taken into account for rendering.
+    // The allowLatePolygonCut parameter allows to split at least
+    // non-closed linestrings properly at this point.
+
     void tessellateLineSegment(  const GeoDataCoordinates &aCoords,
                                 qreal ax, qreal ay,
                                 const GeoDataCoordinates &bCoords,
                                 qreal bx, qreal by,
                                 QVector<QPolygonF*> &polygons,
                                 const ViewportParams *viewport,
-                                TessellationFlags f = 0 ) const;
+                                TessellationFlags f = 0,
+                                bool allowLatePolygonCut = false ) const;
 
     void processTessellation(   const GeoDataCoordinates &previousCoords,
                                const GeoDataCoordinates &currentCoords,
                                int count,
                                QVector<QPolygonF*> &polygons,
                                const ViewportParams *viewport,
-                               TessellationFlags f = 0 ) const;
+                               TessellationFlags f = 0,
+                               bool allowLatePolygonCut = false ) const;
 
     void crossHorizon( const GeoDataCoordinates & bCoord,
                        QVector<QPolygonF*> &polygons,
-                       const ViewportParams *viewport ) const;
+                       const ViewportParams *viewport,
+                       bool allowLatePolygonCut = false
+                     ) const;
 
     virtual bool lineStringToPolygon( const GeoDataLineString &lineString,
                               const ViewportParams *viewport,

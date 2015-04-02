@@ -36,6 +36,8 @@ class ViewportParamsTest : public QObject
 
     void screenCoordinates_GeoDataLineString2();
 
+    void screenCoordinates_GeoDataLinearRing();
+
     void geoDataLinearRing_data();
     void geoDataLinearRing();
 
@@ -295,6 +297,40 @@ void ViewportParamsTest::screenCoordinates_GeoDataLineString2()
     viewport.screenCoordinates( line, polys );
 
     QCOMPARE( polys.size(), 2 );
+}
+
+void ViewportParamsTest::screenCoordinates_GeoDataLinearRing()
+{
+    // Creates a Rectangle on the eastern southern hemisphere
+    // with the planet rotated so that only the western half
+    // of the rectangle is visible. As a result only a single
+    // screen polygon should be rendered.
+
+    const ViewportParams viewport( Spherical, -15 * DEG2RAD, 0 * DEG2RAD, 350, QSize( 1000, 750 ) );
+
+    GeoDataLinearRing line( Tessellate );
+    GeoDataCoordinates coord1 ( 30, -10, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates coord2 ( 30, -45, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates coord3 ( 100, -45, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates coord4 ( 100, -10, 0.0, GeoDataCoordinates::Degree );
+
+    qreal x, y;
+    bool globeHidesPoint;
+    viewport.screenCoordinates( coord1, x, y, globeHidesPoint );
+    QCOMPARE( globeHidesPoint, false );
+    viewport.screenCoordinates( coord2, x, y, globeHidesPoint );
+    QCOMPARE( globeHidesPoint, false );
+    viewport.screenCoordinates( coord3, x, y, globeHidesPoint );
+    QCOMPARE( globeHidesPoint, true );
+    viewport.screenCoordinates( coord4, x, y, globeHidesPoint );
+    QCOMPARE( globeHidesPoint, true );
+
+    line << coord1 << coord2 << coord3 << coord4;
+
+    QVector<QPolygonF*> polys;
+    viewport.screenCoordinates( line, polys );
+
+    QCOMPARE( polys.size(), 1 );
 }
 
 void ViewportParamsTest::geoDataLinearRing_data()
