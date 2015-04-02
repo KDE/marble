@@ -235,9 +235,14 @@ void GeoDataLatLonBox::setBoundaries( qreal north, qreal south, qreal east, qrea
 
 qreal GeoDataLatLonBox::width( GeoDataCoordinates::Unit unit ) const
 {
-    qreal width = fabs( (qreal)( crossesDateLine() 
-                                     ? 2 * M_PI - d->m_west + d->m_east
-                                     : d->m_east - d->m_west ) );
+    return GeoDataLatLonBox::width( d->m_east, d->m_west, unit );
+}
+
+qreal GeoDataLatLonBox::width( qreal east, qreal west, GeoDataCoordinates::Unit unit )
+{
+    qreal width = fabs( (qreal)( GeoDataLatLonBox::crossesDateLine(east, west)
+                                     ? 2 * M_PI - west + east
+                                     : east - west ) );
 
     // This also covers the case where this bounding box covers the whole
     // longitude range ( -180 <= lon <= + 180 ).
@@ -254,7 +259,12 @@ qreal GeoDataLatLonBox::width( GeoDataCoordinates::Unit unit ) const
 
 qreal GeoDataLatLonBox::height( GeoDataCoordinates::Unit unit ) const
 {
-    qreal height = fabs( (qreal)( d->m_south - d->m_north ) );
+    return GeoDataLatLonBox::height(d->m_north, d->m_south, unit);
+}
+
+qreal GeoDataLatLonBox::height(qreal north, qreal south, GeoDataCoordinates::Unit unit)
+{
+    qreal height = fabs( (qreal)( south - north ) );
 
     if ( unit == GeoDataCoordinates::Degree ) {
         return height * RAD2DEG;
@@ -265,11 +275,14 @@ qreal GeoDataLatLonBox::height( GeoDataCoordinates::Unit unit ) const
 
 bool GeoDataLatLonBox::crossesDateLine() const
 {
-    if ( d->m_east < d->m_west ||
-         ( d->m_east == M_PI && d->m_west == -M_PI ) ) {
+    return GeoDataLatLonBox::crossesDateLine(d->m_east, d->m_west);
+}
+
+bool GeoDataLatLonBox::crossesDateLine(qreal east, qreal west)
+{
+    if ( east < west || ( east == M_PI && west == -M_PI ) ) {
         return true;
     }
-
     return false;
 }
 
@@ -306,22 +319,27 @@ bool GeoDataLatLonBox::containsPole( Pole pole ) const
     return false;
 }
 
+bool GeoDataLatLonBox::contains(qreal lon, qreal lat) const
+{
+    // We need to take care of the normal case ...
+    if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
+    // ... and the case where the bounding box crosses the date line:
+         ( ( lon < d->m_west && lon > d->m_east ) && ( d->m_west > d->m_east ) ) )
+        return false;
+
+    if ( lat < d->m_south || lat > d->m_north )
+        return false;
+
+    return true;
+}
+
 bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point ) const
 {
     qreal lon, lat;
 
     point.geoCoordinates( lon, lat );
 
-    // We need to take care of the normal case ...
-    if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
-    // ... and the case where the bounding box crosses the date line:
-         ( ( lon < d->m_west && lon > d->m_east ) && ( d->m_west > d->m_east ) ) )
-        return false;
-    
-    if ( lat < d->m_south || lat > d->m_north )
-        return false;
-
-    return true;
+    return contains(lon, lat);
 }
 
 bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other ) const

@@ -109,10 +109,22 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     qreal width( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
 
     /**
+     * @brief Get the width of the longitude interval. East and west parameters are in radians.
+     * @return the angle covered by the longitude range in given unit.
+     */
+    static qreal width( qreal east, qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+
+    /**
      * @brief Get the height of the latitude interval
      * @return the angle covered by the latitude range.
      */
     qreal height( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+
+    /**
+     * @brief Get the height of the latitude interval. North and south parameters are in radians.
+     * @return the angle covered by the latitude range in given unit.
+     */
+    static qreal height( qreal north, qreal south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Detect whether the bounding box crosses the IDL.
@@ -120,6 +132,15 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      *         @c false the bounding box doesn't cross the +/-180 deg longitude.
      */
     bool     crossesDateLine() const;
+
+    /**
+     * @brief Detect whether the bounding box crosses the IDL.
+     * @param east radians east.
+     * @param west radians west.
+     * @return @c true  the bounding box crosses the +/-180 deg longitude.
+     *         @c false the bounding box doesn't cross the +/-180 deg longitude.
+     */
+    static bool crossesDateLine(qreal east, qreal west);
 
     /**
      * @brief returns the center of this box
@@ -136,6 +157,14 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
 
     virtual bool contains( const GeoDataCoordinates & ) const;
     bool     contains( const GeoDataLatLonBox & ) const;
+
+    /**
+     * @brief Detect whether the bounding box contains a point of given lon and lat.
+     * @param lon longitude in radians.
+     * @param lat latitude in radians.
+     * @return true if the box contains given point, false otherwise
+     */
+    bool contains(qreal lon, qreal lat) const; //Optimized version for overlay painting
 
     virtual bool intersects( const GeoDataLatLonBox & ) const;
 
