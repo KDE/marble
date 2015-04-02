@@ -34,6 +34,7 @@ bool KmlLinearRingTagWriter::write( const GeoNode *node, GeoWriter& writer ) con
         writer.writeStartElement( kml::kmlTag_LinearRing );
         KmlObjectTagWriter::writeIdentifiers( writer, ring );
         writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( ring->extrude() ), "0" );
+        writer.writeOptionalElement( kml::kmlTag_tessellate, QString::number( ring->tessellate() ), "0" );
         writer.writeStartElement( "coordinates" );
 
         int size = ring->size() >= 3 && ring->first() != ring->last() ? ring->size() + 1 : ring->size();
