@@ -8,7 +8,7 @@ set(marblepart_SRCS marble_part.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui ${KDE4_INCLUDES})
 kde4_add_kcfg_files(marblepart_SRCS settings.kcfgc)
 kde4_add_plugin(marble_part WITH_PREFIX ${marblepart_SRCS})
-target_link_libraries(marble_part ${KDE4_KPARTS_LIBS} ${KDE4_KNEWSTUFF3_LIBS} marbleui marblewidget)
+target_link_libraries(marble_part ${KDE4_KPARTS_LIBS} ${KDE4_KNEWSTUFF3_LIBS} marbleui ${MARBLEWIDGET})
 
 install(TARGETS marble_part DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES marble_part.desktop DESTINATION ${SERVICES_INSTALL_DIR})
@@ -27,7 +27,7 @@ target_link_libraries (
     ${KDE4_KPARTS_LIBS} 
     ${KDE4_KNEWSTUFF3_LIBS}
     marbleui
-    marblewidget
+    ${MARBLEWIDGET}
     astro
     )
 

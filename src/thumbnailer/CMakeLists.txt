@@ -10,7 +10,7 @@ set(marblethumbnail_SRCS
 )
 kde4_add_plugin(marblethumbnail ${marblethumbnail_SRCS})
 target_link_libraries(marblethumbnail
-  marblewidget
+  ${MARBLEWIDGET}
   ${KDE4_KIO_LIBS}
 )
 install(TARGETS marblethumbnail  DESTINATION ${PLUGIN_INSTALL_DIR})

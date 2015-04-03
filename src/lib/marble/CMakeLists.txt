@@ -357,14 +357,14 @@ qt_add_resources(marblewidget_SRCS libmarble.qrc ../../apps/marble-ui/marble.qrc
 qt_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
 marble_qt4_automoc(${marblewidget_SRCS})
 
-ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
+ADD_LIBRARY(${MARBLEWIDGET} SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 
 # link with libastro
-TARGET_LINK_LIBRARIES (marblewidget astro)
+TARGET_LINK_LIBRARIES (${MARBLEWIDGET} astro)
 
 # link with release version of Qt libs
 if( QT4_FOUND )
-  TARGET_LINK_LIBRARIES (marblewidget
+  TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
     ${QT_QTCORE_LIBRARY}
     ${QT_QTDBUS_LIBRARY}
     ${QT_QTGUI_LIBRARY}
@@ -377,7 +377,7 @@ if( QT4_FOUND )
     ${QT_QTDECLARATIVE_LIBRARY}
   )
 else()
-  TARGET_LINK_LIBRARIES (marblewidget
+  TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
     ${Qt5Core_LIBRARIES}
     ${Qt5Xml_LIBRARIES}
     ${Qt5Widgets_LIBRARIES}
@@ -391,46 +391,46 @@ endif()
 
 if( PHONON_FOUND AND NOT QT5BUILD )
   INCLUDE_DIRECTORIES( ${PHONON_INCLUDES} )
-  TARGET_LINK_LIBRARIES(marblewidget ${PHONON_LIBS} )
+  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} ${PHONON_LIBS} )
   set (HAVE_PHONON TRUE)
 endif( PHONON_FOUND AND NOT QT5BUILD )
 
 if (APPLE)
   #defined in top level makefile
-  TARGET_LINK_LIBRARIES(marblewidget ${MAC_EXTRA_LIBS} )
+  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} ${MAC_EXTRA_LIBS} )
 endif (APPLE)
 
 if (CMAKE_SYSTEM_NAME MATCHES "SunOS")
-  TARGET_LINK_LIBRARIES(marblewidget m)
+  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} m)
 endif (CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
 if(WIN32)
-  TARGET_LINK_LIBRARIES(marblewidget ws2_32 imm32 winmm)
+  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} ws2_32 imm32 winmm)
 endif(WIN32)
 
 
-set_target_properties(marblewidget  PROPERTIES
+set_target_properties(${MARBLEWIDGET}  PROPERTIES
                                     VERSION ${GENERIC_LIB_VERSION}
                                     SOVERSION ${GENERIC_LIB_SOVERSION}
                                     COMPILE_FLAGS "-DKML_LAZY_IMP")
 # needed for marble_export.h
-set_target_properties(marblewidget PROPERTIES
+set_target_properties(${MARBLEWIDGET} PROPERTIES
   DEFINE_SYMBOL MAKE_MARBLE_LIB
 )
 
 # choose the correct target install library path
 if(WIN32 AND QTONLY)
-  install(TARGETS marblewidget RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+  install(TARGETS ${MARBLEWIDGET} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
 else(WIN32 AND QTONLY)
   if(APPLE AND QTONLY)
-    install (TARGETS marblewidget LIBRARY DESTINATION
+    install (TARGETS ${MARBLEWIDGET} LIBRARY DESTINATION
       ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 
   else(APPLE AND QTONLY)
     if(QTONLY)
-      install(TARGETS marblewidget LIBRARY DESTINATION ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX})
+      install(TARGETS ${MARBLEWIDGET} LIBRARY DESTINATION ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX})
     else(QTONLY)
-        install(TARGETS marblewidget  ${INSTALL_TARGETS_DEFAULT_ARGS})
+        install(TARGETS ${MARBLEWIDGET} ${INSTALL_TARGETS_DEFAULT_ARGS})
     endif(QTONLY)
   endif(APPLE AND QTONLY)
 endif(WIN32 AND QTONLY)

@@ -66,7 +66,7 @@ if( QTONLY )
                                            ${QT_QTNETWORK_LIBRARY}
                                            ${QT_QTMAIN_LIBRARY}
                                            ${${_target_name}_LIBS}
-                                           marblewidget )
+                                           ${MARBLEWIDGET} )
     install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH} )
 else( QTONLY )
     kde4_add_plugin( ${_target_name} ${_src} )
@@ -81,7 +81,7 @@ else( QTONLY )
                                            ${KDE4_KIO_LIBRARY}
                                            ${QT_QTMAIN_LIBRARY}
                                            ${${_target_name}_LIBS}
-                                           marblewidget )
+                                           ${MARBLEWIDGET} )
     install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH} )
 endif( QTONLY )
 
@@ -111,7 +111,7 @@ if( QTONLY )
                                            ${QT_QTNETWORK_LIBRARY}
                                            ${QT_QTMAIN_LIBRARY}
                                            ${${_target_name}_LIBS}
-                                           marblewidget )
+                                           ${MARBLEWIDGET} )
     install( TARGETS ${_target_name} DESTINATION ${QT_PLUGINS_DIR}/designer )
 else( QTONLY )
     kde4_add_plugin( ${_target_name} ${_src} )
@@ -126,7 +126,7 @@ else( QTONLY )
                                            ${KDE4_KIO_LIBRARY}
                                            ${QT_QTMAIN_LIBRARY}
                                            ${${_target_name}_LIBS}
-                                           marblewidget )
+                                           ${MARBLEWIDGET} )
     install( TARGETS ${_target_name} DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 endif( QTONLY )
 
@@ -150,7 +150,7 @@ target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
                                            ${QT_QTNETWORK_LIBRARY}
                                            ${QT_QTMAIN_LIBRARY}
                                            ${${_target_name}_LIBS}
-                                           marblewidget )
+                                           ${MARBLEWIDGET} )
 install( TARGETS ${_target_name} DESTINATION ${MARBLE_QT_IMPORTS_DIR}/org/kde/edu/marble/${_install_path} )
 
 set_target_properties( ${_target_name} PROPERTIES
@@ -186,7 +186,7 @@ macro( marble_add_test TEST_NAME )
                                             ${QT_QTGUI_LIBRARY} 
                                             ${QT_QTTEST_LIBRARY} 
                                             ${Qt5Test_LIBRARIES}
-                                            marblewidget )
+                                            ${MARBLEWIDGET} )
         set_target_properties( ${TEST_NAME} PROPERTIES 
                                COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
         add_test( ${TEST_NAME} ${TEST_NAME} )

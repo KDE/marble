@@ -12,7 +12,7 @@ ELSE()
   INCLUDE_DIRECTORIES(${Qt5Designer_INCLUDE_DIRS})
 ENDIF()
 
-#target_link_libraries( marblewidget )
+#target_link_libraries( ${MARBLEWIDGET} )
 
 set( latloneditplugin_SRCS LatLonEditPlugin.cpp )
 

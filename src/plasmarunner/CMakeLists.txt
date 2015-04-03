@@ -12,7 +12,7 @@ set(plasmaRunner_SRCS
 kde4_add_plugin(plasma_runner_marble ${plasmaRunner_SRCS})
 target_link_libraries(plasma_runner_marble
   ${KDE4_PLASMA_LIBS}
-  marblewidget
+  ${MARBLEWIDGET}
 )
 
 install(TARGETS plasma_runner_marble DESTINATION ${PLUGIN_INSTALL_DIR})

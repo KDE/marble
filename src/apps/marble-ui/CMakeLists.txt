@@ -27,7 +27,7 @@ target_link_libraries (
   ${QT_QTNETWORK_LIBRARY}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTMAIN_LIBRARY}
-  marblewidget)
+  ${MARBLEWIDGET})
 else()
 target_link_libraries (
     marbleui
@@ -38,7 +38,7 @@ target_link_libraries (
     ${Qt5Network_LIBRARIES}
     ${Qt5WebKitWidgets_LIBRARIES}
     ${Qt5WebKit_LIBRARIES}
-    marblewidget)
+    ${MARBLEWIDGET})
 endif()
 
 if(WIN32)

@@ -40,7 +40,7 @@ if (QT4_FOUND)
     ${QT_QTSCRIPT_LIBRARY}
     ${QT_QTMAIN_LIBRARY}
     marbleui
-    marblewidget
+    ${MARBLEWIDGET}
     astro)
 else()
   target_link_libraries (
@@ -53,7 +53,7 @@ else()
     ${Qt5WebKitWidgets_LIBRARIES}
     ${Qt5WebKit_LIBRARIES}
     marbleui
-    marblewidget
+    ${MARBLEWIDGET}
     astro)
 endif()
 

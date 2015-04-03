@@ -55,6 +55,7 @@ if(QT4_FOUND)
     FIND_PACKAGE(QtDeclarative)
     include_directories(${QT_QTDECLARATIVE_INCLUDE_DIR})
   ENDIF()
+  set(MARBLEWIDGET marblewidget)
 else()
   set( QT5BUILD TRUE )
   IF( NOT QTONLY )
@@ -85,6 +86,7 @@ else()
   include_directories( ${Qt5Xml_INCLUDE_DIRS} )
   include_directories( ${Qt5Sql_INCLUDE_DIRS} )
 
+  set(MARBLEWIDGET marblewidget-qt5)
   SET(CMAKE_AUTOMOC TRUE)
   SET(CMAKE_AUTOMOC_RELAXED_MODE TRUE)
 endif()
@@ -397,8 +399,14 @@ install(FILES marble.appdata.xml DESTINATION ${CMAKE_INSTALL_PREFIX}/share/appda
 
 ####################################################
 # Install CMake module
+
+CONFIGURE_FILE(
+    ${CMAKE_CURRENT_SOURCE_DIR}/FindMarble.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/FindMarble.cmake
+)
+
 if( CMAKE_MODULES_INSTALL_PATH AND NOT WIN32 )
-  install( FILES FindMarble.cmake
+  install( FILES ${CMAKE_CURRENT_BINARY_DIR}/FindMarble.cmake
            DESTINATION ${CMAKE_MODULES_INSTALL_PATH}  )
 endif()
 

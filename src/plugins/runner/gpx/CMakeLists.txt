@@ -72,7 +72,7 @@ if( BUILD_MARBLE_TESTS )
                                      ${QT_QTGUI_LIBRARY}
                                      ${QT_QTTEST_LIBRARY}
                                      ${Qt5Test_LIBRARIES}
-                                     marblewidget )
+                                     ${MARBLEWIDGET} )
     set_target_properties( TestTrack PROPERTIES
                             COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
     add_test( TestTrack TestTrack )

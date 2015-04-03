@@ -17,7 +17,7 @@ FILE(GLOB extra_files_sip sip/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${extra_files_sip})
 
 add_sip_python_module(PyKDE4.marble sip/marblemod.sip
-    marblewidget
+    ${MARBLEWIDGET}
     ${QT_QTCORE_LIBRARY}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTUITOOLS_LIBRARY}
