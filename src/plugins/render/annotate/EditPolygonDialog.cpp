@@ -96,7 +96,7 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
 
     d->m_linesWidth->setRange( 0.1, 5.0 );
     d->m_linesWidth->setValue( lineStyle.width() );
-    connect( d->m_linesWidth, SIGNAL(editingFinished()), this, SLOT(updatePolygon()) );
+    connect( d->m_linesWidth, SIGNAL(valueChanged(double)), this, SLOT(updatePolygon()) );
 
     // Adjust the "Filled"/"Not Filled" option according to its current fill.
     if ( polyStyle.fill() ) {

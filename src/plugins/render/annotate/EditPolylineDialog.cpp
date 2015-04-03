@@ -94,7 +94,7 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
     d->m_initialLineStyle = lineStyle;
 
     d->m_linesWidth->setValue( lineStyle.width() );
-    connect( d->m_linesWidth, SIGNAL(editingFinished()), this, SLOT(updatePolyline()) );
+    connect( d->m_linesWidth, SIGNAL(valueChanged(double)), this, SLOT(updatePolyline()) );
 
     // Adjust the color button's icon to the current lines color.
     QPixmap linesPixmap( d->m_linesColorButton->iconSize().width(),
