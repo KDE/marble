@@ -151,6 +151,7 @@
        <addaction name="m_actionBold"/>
        <addaction name="m_actionItalics"/>
        <addaction name="m_actionUnderlined"/>
+       <addaction name="m_actionColor"/>
        <addaction name="m_actionAddImage"/>
        <addaction name="m_actionAddLink"/>
       </widget>
@@ -244,6 +245,11 @@
    </property>
    <property name="toolTip">
     <string>Add link</string>
+   </property>
+  </action>
+  <action name="m_actionColor">
+   <property name="text">
+    <string>Color</string>
    </property>
   </action>
  </widget>

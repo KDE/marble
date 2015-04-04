@@ -38,13 +38,11 @@ public:
     ~Private();
 
     QColorDialog *m_textColorDialog;
-    QPushButton *m_textColorButton;
 };
 
 FormattedTextWidget::Private::Private() :
     Ui::FormattedTextWidget(),
-    m_textColorDialog( 0 ),
-    m_textColorButton( new QPushButton )
+    m_textColorDialog( 0 )
 {
     //nothing to do
 }
@@ -52,7 +50,6 @@ FormattedTextWidget::Private::Private() :
 FormattedTextWidget::Private::~Private()
 {
     delete m_textColorDialog;
-    delete m_textColorButton;
 }
 
 FormattedTextWidget::FormattedTextWidget( QWidget *parent ) :
@@ -61,13 +58,10 @@ FormattedTextWidget::FormattedTextWidget( QWidget *parent ) :
 {
     d->setupUi( this );
 
-    QAction *separator = d->m_formattedTextToolBar->insertSeparator( d->m_actionAddImage );
-    d->m_formattedTextToolBar->insertWidget( separator, d->m_textColorButton );
-    d->m_textColorButton->setMaximumSize( 24, 24 );
-    QPixmap textColorPixmap( d->m_textColorButton->iconSize().width(),
-                        d->m_textColorButton->iconSize().height() );
+    d->m_formattedTextToolBar->insertSeparator( d->m_actionAddImage );
+    QPixmap textColorPixmap(20, 20);
     textColorPixmap.fill( d->m_description->textCursor().charFormat().foreground().color() );
-    d->m_textColorButton->setIcon( QIcon( textColorPixmap ) );
+    d->m_actionColor->setIcon( textColorPixmap );
     d->m_textColorDialog = new QColorDialog( this );
     d->m_textColorDialog->setOption( QColorDialog::ShowAlphaChannel );
     d->m_textColorDialog->setCurrentColor( d->m_description->textCursor().charFormat().foreground().color() );
@@ -78,7 +72,7 @@ FormattedTextWidget::FormattedTextWidget( QWidget *parent ) :
     } else {
         d->m_fontSize->lineEdit()->setText( QString::number( d->m_description->textCursor().charFormat().font().pointSize() ) );
     }
-    connect( d->m_textColorButton, SIGNAL( clicked() ), d->m_textColorDialog, SLOT( exec() ) );
+    connect( d->m_actionColor, SIGNAL( triggered() ), d->m_textColorDialog, SLOT( exec() ) );
     connect( d->m_textColorDialog, SIGNAL( colorSelected( QColor ) ), this, SLOT( setTextCursorColor( const QColor& ) ) );
     connect( d->m_isFormattedTextMode, SIGNAL( toggled( bool ) ), this, SLOT( toggleDescriptionEditMode( bool ) ) );
     connect( d->m_fontFamily, SIGNAL( currentFontChanged( QFont ) ), this, SLOT( setTextCursorFont( QFont ) ) );
@@ -162,10 +156,9 @@ void FormattedTextWidget::setTextCursorColor( const QColor &color )
     format.setForeground( brush );
     cursor.mergeCharFormat( format );
     d->m_description->setTextCursor( cursor );
-    QPixmap textColorPixmap( d->m_textColorButton->iconSize().width(),
-                        d->m_textColorButton->iconSize().height() );
+    QPixmap textColorPixmap(22, 22);
     textColorPixmap.fill( format.foreground().color() );
-    d->m_textColorButton->setIcon( QIcon( textColorPixmap ) );
+    d->m_actionColor->setIcon( QIcon( textColorPixmap ) );
     d->m_textColorDialog->setCurrentColor( format.foreground().color() );
 }
 
@@ -239,10 +232,9 @@ void FormattedTextWidget::updateDescriptionEditButtons()
     d->m_actionItalics->setChecked( format.fontItalic() );
     d->m_actionUnderlined->setChecked( format.fontUnderline() );
 
-    QPixmap textColorPixmap( d->m_textColorButton->iconSize().width(),
-                        d->m_textColorButton->iconSize().height() );
+    QPixmap textColorPixmap(22, 22);
     textColorPixmap.fill( format.foreground().color() );
-    d->m_textColorButton->setIcon( QIcon( textColorPixmap ) );
+    d->m_actionColor->setIcon( QIcon( textColorPixmap ) );
     d->m_textColorDialog->setCurrentColor( format.foreground().color() );
 
     int index = d->m_fontSize->findText( QString::number( d->m_description->textCursor().charFormat().font().pointSize() ) );
@@ -264,6 +256,7 @@ void FormattedTextWidget::setReadOnly( bool state )
     d->m_formattedTextToolBar->setDisabled( state );
     d->m_fontFamily->setDisabled( state );
     d->m_fontSize->setDisabled( state );
+    d->m_actionColor->setDisabled( state );
 }
 
 }
