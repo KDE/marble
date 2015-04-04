@@ -56,6 +56,8 @@ class MARBLE_EXPORT TourWidget : public QWidget
     bool openTour( const QString &filename );
     bool isPlaying() const;
 
+    bool eventFilter( QObject *watched, QEvent *event );
+
 public Q_SLOTS:
     void startPlaying();
     void pausePlaying();

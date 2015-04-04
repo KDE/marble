@@ -207,11 +207,62 @@ TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
 
     d->m_tourUi.m_toolBarPlayback->setDisabled( true );
     d->m_tourUi.m_slider->setDisabled( true );
+    d->m_tourUi.m_listView->installEventFilter( this );
 }
 
 TourWidget::~TourWidget()
 {
     delete d;
+}
+
+bool TourWidget::eventFilter( QObject *watched, QEvent *event )
+{
+    Q_UNUSED(watched);
+
+    Q_ASSERT( watched == d->m_tourUi.m_listView );
+    GeoDataObject *rootObject =  d->rootIndexObject();
+
+    if ( !rootObject ) {
+        return false;
+    }
+
+    if ( event->type() == QEvent::KeyPress ) {
+        QKeyEvent *key = static_cast<QKeyEvent*>( event );
+        QModelIndexList selectedIndexes = d->m_tourUi.m_listView->selectionModel()->selectedIndexes();
+
+        if ( key->key() == Qt::Key_Delete ) {
+            if ( !selectedIndexes.isEmpty() ) {
+                deleteSelected();
+            }
+            return true;
+        }
+
+        if ( key->key() == Qt::Key_PageDown && key->modifiers().testFlag( Qt::ControlModifier )
+             && !selectedIndexes.isEmpty() )
+        {
+            QModelIndexList::iterator end = selectedIndexes.end() - 1;
+            if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
+                GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+
+                if ( end->row() != playlist->size() - 1 ) {
+                    moveDown();
+                }
+            }
+            return true;
+        }
+
+        if ( key->key() == Qt::Key_PageUp && key->modifiers().testFlag( Qt::ControlModifier )
+             && !selectedIndexes.isEmpty() )
+        {
+            QModelIndexList::iterator start = selectedIndexes.begin();
+            if ( start->row() != 0 ) {
+                moveUp();
+            }
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void TourWidget::setMarbleWidget( MarbleWidget *widget )
