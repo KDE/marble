@@ -79,7 +79,7 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 
     // Please refrain from making this URI public. To use it outside the scope
     // of marble you need permission from the openrouteservice.org team.
-    QUrl url = QUrl( "http://openls.geog.uni-heidelberg.de/osm/eu/routing" );
+    QUrl url = QUrl( "http://openls.geog.uni-heidelberg.de/osm/routing" );
     m_request = QNetworkRequest( url );
     m_request.setHeader( QNetworkRequest::ContentTypeHeader, "application/xml" );
     m_requestData = request.toLatin1();
@@ -368,7 +368,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
 
 RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QString &text, QString *road )
 {
-    QRegExp syntax( "^(Go|Drive) (half left|left|sharp left|straight forward|half right|right|sharp right)( on )?(.*)?$", Qt::CaseSensitive, QRegExp::RegExp2 );
+    QRegExp syntax( "^(Go|Drive|Turn) (half left|left|sharp left|straight forward|half right|right|sharp right)( on )?(.*)?$", Qt::CaseSensitive, QRegExp::RegExp2 );
     QString instruction;
     if ( syntax.indexIn( text ) == 0 ) {
         if ( syntax.captureCount() > 1 ) {
