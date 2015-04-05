@@ -103,7 +103,7 @@ replaceInFile(libFileName,
 libVersionOld = 'const QString MARBLE_VERSION_STRING = QString::fromLatin1\( ".*" \);'
 libVersionNew = 'const QString MARBLE_VERSION_STRING = QString::fromLatin1( "{}" );'.format(generateVersionString(major, minor, patch))
 replaceInFile(libVersionFile, libVersionOld, libVersionNew)
-libVersionHexOld = '#define MARBLE_VERSION 0x[0-9]{6}'
+libVersionHexOld = '#define MARBLE_VERSION 0x[0-9a-f]{6}'
 libVersionHexNew = '#define MARBLE_VERSION 0x{:02x}{:02x}{:02x}'.format(major, minor, patch)
 replaceInFile(libVersionFile, libVersionHexOld, libVersionHexNew)
 
