@@ -113,7 +113,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "1.9.20 (1.10 Alpha)";
+    return "1.10.97 (1.11 Release Candidate)";
 }
 
 MapThemeManager *ControlView::mapThemeManager()
