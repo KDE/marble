@@ -984,8 +984,8 @@ void AnnotatePlugin::addContextItems()
 {
     MarbleWidgetPopupMenu * const menu = m_marbleWidget->popupMenu();
 
-    m_pasteGraphicItem = new QAction( tr( "Paste Graphic Item" ), this );
-    m_pasteGraphicItem->setEnabled( false );
+    m_pasteGraphicItem = new QAction( tr( "Paste" ), this );
+    m_pasteGraphicItem->setVisible( false );
     connect( m_pasteGraphicItem, SIGNAL(triggered()), SLOT(pasteItem()) );
 
     QAction *separator = new QAction( this );
@@ -1617,7 +1617,7 @@ void AnnotatePlugin::cutItem()
     }
 
     m_clipboardItem = m_focusItem;
-    m_pasteGraphicItem->setEnabled( true );
+    m_pasteGraphicItem->setVisible( true );
 
     m_graphicsItems.removeAll( m_focusItem );
     m_marbleWidget->model()->treeModel()->removeFeature( m_focusItem->feature() );
@@ -1646,7 +1646,7 @@ void AnnotatePlugin::copyItem()
         m_clipboardItem = new PolylineAnnotation( placemark );
     }
 
-    m_pasteGraphicItem->setEnabled( true );
+    m_pasteGraphicItem->setVisible( true );
 }
 
 void AnnotatePlugin::pasteItem()
@@ -1666,7 +1666,7 @@ void AnnotatePlugin::pasteItem()
     m_focusItem = m_clipboardItem;
     m_clipboardItem = 0;
 
-    m_pasteGraphicItem->setEnabled( false );
+    m_pasteGraphicItem->setVisible( false );
 }
 
 }
