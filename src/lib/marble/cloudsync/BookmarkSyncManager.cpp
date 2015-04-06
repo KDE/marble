@@ -722,10 +722,6 @@ void BookmarkSyncManager::Private::copyLocalToCache()
 
     QFile bookmarksFile( m_localBookmarksPath );
     bookmarksFile.copy( QString( "%0/%1.kml" ).arg( m_cachePath, m_cloudTimestamp ) );
-    /** @todo FIXME use memory, not files */
-    disconnect( m_bookmarkManager, SIGNAL(bookmarksChanged()), m_q, SLOT(startBookmarkSync()) );
-    m_bookmarkManager->loadFile( "bookmarks/bookmarks.kml" );
-    connect( m_bookmarkManager, SIGNAL(bookmarksChanged()), m_q, SLOT(startBookmarkSync()) );
 }
 
 // Bookmark synchronization steps
