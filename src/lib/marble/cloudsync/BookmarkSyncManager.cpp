@@ -267,7 +267,7 @@ void BookmarkSyncManager::setBookmarkManager(BookmarkManager *manager)
 
 void BookmarkSyncManager::startBookmarkSync()
 {
-    if ( !isBookmarkSyncEnabled() )
+    if ( !d->m_cloudSyncManager->isSyncEnabled() || !isBookmarkSyncEnabled() )
     {
         return;
     }
