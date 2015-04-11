@@ -17,6 +17,8 @@
 
 // Marble
 #include "LatLonEdit.h"
+#include "GeoDataTypes.h"
+#include "GeoDataLineString.h"
 
 namespace  Marble
 {
@@ -28,8 +30,8 @@ QSize NodeItemDelegate::sizeHint( const QStyleOptionViewItem &option, const QMod
     return QSize( 25, 25 );
 }
 
-NodeItemDelegate::NodeItemDelegate( GeoDataPlacemark* placemark, EditPolygonDialog* dialog, QTreeView* view ):
-    m_placemark( placemark ), m_dialog( dialog ), m_view( view )
+NodeItemDelegate::NodeItemDelegate( GeoDataPlacemark* placemark, QTreeView* view ):
+    m_placemark( placemark ), m_view( view )
 {
 }
 
@@ -45,20 +47,39 @@ QWidget* NodeItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
 
 void NodeItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
+
     LatLonEdit *latLonEditWidget = static_cast<LatLonEdit*>(editor);
+    qreal value = 0;
 
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
-    GeoDataLinearRing outerBoundary = polygon->outerBoundary();
-    qreal value;
+    if( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
 
-    // Setting the latlonedit spinboxes values
-    if( index.column() == 1 ) {
-        latLonEditWidget->setDimension( Marble::Latitude );
-        value = outerBoundary.at( index.row() ).longitude( GeoDataCoordinates::Degree );
+        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
+
+        GeoDataLinearRing outerBoundary = polygon->outerBoundary();
+
+        // Setting the latlonedit spinboxes values
+        if( index.column() == 1 ) {
+            latLonEditWidget->setDimension( Marble::Longitude );
+            value = outerBoundary.at( index.row() ).longitude( GeoDataCoordinates::Degree );
+        }
+        else {
+            latLonEditWidget->setDimension( Marble::Latitude );
+            value = outerBoundary.at( index.row() ).latitude( GeoDataCoordinates::Degree );
+        }
     }
-    else {
-        latLonEditWidget->setDimension( Marble::Longitude );
-        value = outerBoundary.at( index.row() ).latitude(GeoDataCoordinates::Degree );
+    else if ( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+
+        GeoDataLineString *lineString = static_cast<GeoDataLineString*>( m_placemark->geometry() );
+
+        // Setting the latlonedit spinboxes values
+        if( index.column() == 1 ) {
+            latLonEditWidget->setDimension( Marble::Longitude );
+            value = lineString->at( index.row() ).longitude( GeoDataCoordinates::Degree );
+        }
+        else {
+            latLonEditWidget->setDimension( Marble::Latitude );
+            value = lineString->at( index.row() ).latitude(GeoDataCoordinates::Degree );
+        }
     }
 
     latLonEditWidget->setValue( value );
@@ -74,31 +95,47 @@ void NodeItemDelegate::setModelData( QWidget* editor, QAbstractItemModel *model,
     Q_UNUSED( editor );
     Q_UNUSED( model );
     Q_UNUSED( index );
-    // The EditPolygonDialog already has a function that updates the NodeModel
-    m_dialog->handleItemMoving( m_placemark );
+
+    // The dialogs already have a function that updates the NodeModel
+    emit modelChanged( m_placemark );
 }
 
 void NodeItemDelegate::previewNodeMove( qreal value )
 {
+    if( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
+        GeoDataLinearRing outerBoundary = polygon->outerBoundary();
 
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
-    GeoDataLinearRing outerBoundary = polygon->outerBoundary();
+        GeoDataCoordinates* coordinates = new GeoDataCoordinates( outerBoundary[m_indexBeingEdited.row()] );
 
-    GeoDataCoordinates* coordinates = new GeoDataCoordinates( outerBoundary[m_indexBeingEdited.row()] );
+        if( m_indexBeingEdited.column() == 1) {
+            coordinates->setLongitude( value, GeoDataCoordinates::Degree );
+        }
+        else {
+            coordinates->setLatitude( value, GeoDataCoordinates::Degree );
+        }
 
-    if( m_indexBeingEdited.column() == 1) {
-        coordinates->setLongitude( value, GeoDataCoordinates::Degree );
+        outerBoundary[ m_indexBeingEdited.row() ] = *coordinates;
+        polygon->setOuterBoundary( outerBoundary );
     }
-    else {
-        coordinates->setLatitude( value, GeoDataCoordinates::Degree );
-    }
+    else if ( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
 
-    outerBoundary[ m_indexBeingEdited.row() ] = *coordinates;
-    polygon->setOuterBoundary( outerBoundary );
+        GeoDataLineString *lineString = static_cast<GeoDataLineString*>( m_placemark->geometry() );
+        GeoDataCoordinates* coordinates = new GeoDataCoordinates( lineString->at( m_indexBeingEdited.row() ) );
+
+        if( m_indexBeingEdited.column() == 1) {
+            coordinates->setLongitude( value, GeoDataCoordinates::Degree );
+        }
+        else {
+            coordinates->setLatitude( value, GeoDataCoordinates::Degree );
+        }
+
+        lineString->at( m_indexBeingEdited.row() ) = *coordinates;
+
+    }
 
     // Updating chagnes ( repainting graphics )
-
-    m_dialog->updatePolygon();
+    emit geometryChanged();
 }
 
 void NodeItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const

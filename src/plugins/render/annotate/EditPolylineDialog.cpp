@@ -23,6 +23,7 @@
 #include "GeoDataTypes.h"
 #include "NodeModel.h"
 #include "FormattedTextWidget.h"
+#include "NodeItemDelegate.h"
 
 
 namespace Marble
@@ -42,7 +43,9 @@ public:
     QString m_initialDescription;
     GeoDataLineStyle m_initialLineStyle;
     FormattedTextWidget *m_formattedTextWidget;
+    GeoDataLineString m_initialLineString;
 
+    NodeItemDelegate *m_delegate;
     NodeModel *m_nodeModel;
 };
 
@@ -59,6 +62,7 @@ EditPolylineDialog::Private::~Private()
 {
     delete m_linesDialog;
     delete m_nodeModel;
+    delete m_delegate;
 }
 
 EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
@@ -78,7 +82,7 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
         d->m_placemark->setName( tr("Untitled Path") );
     }
 
-
+    d->m_initialLineString = *(static_cast<GeoDataLineString*>( placemark->geometry() ) );
     d->m_name->setText( placemark->name() );
     d->m_initialName = d->m_name->text();
     connect( d->m_name, SIGNAL(editingFinished()), this, SLOT(updatePolyline()) );
@@ -101,6 +105,17 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
                          d->m_linesColorButton->iconSize().height() );
     linesPixmap.fill( lineStyle.color() );
     d->m_linesColorButton->setIcon( QIcon( linesPixmap ) );
+
+    // Setting the NodeView's delegate: mainly used for the editing the polyline's nodes
+    d->m_delegate = new NodeItemDelegate( d->m_placemark, d->m_nodeView );
+
+    connect( d->m_delegate, SIGNAL( modelChanged( GeoDataPlacemark* ) ),
+             this, SLOT( handleItemMoving( GeoDataPlacemark* ) ) );
+    connect( d->m_delegate, SIGNAL( geometryChanged() ),
+             this, SLOT( updatePolyline() ) );
+
+    d->m_nodeView->setItemDelegate( d->m_delegate );
+    d->m_nodeView->setEditTriggers( QAbstractItemView::AllEditTriggers );
 
     // Setup the color dialogs.
     d->m_linesDialog = new QColorDialog( this );
@@ -182,6 +197,12 @@ void EditPolylineDialog::restoreInitial( int result )
 {
     if ( result ) {
         return;
+    }
+
+    GeoDataLineString* currentLineString = static_cast<GeoDataLineString*>( d->m_placemark->geometry() );
+
+    if( *currentLineString != d->m_initialLineString ) {
+        d->m_placemark->setGeometry( new GeoDataLineString( d->m_initialLineString ) );
     }
 
     if ( d->m_placemark->name() != d->m_initialName ) {

@@ -133,7 +133,12 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolygon()) );
 
     // Setting the NodeView's delegate: mainly used for the editing the polygon's nodes
-    d->m_delegate = new NodeItemDelegate( d->m_placemark, this, d->m_nodeView );
+    d->m_delegate = new NodeItemDelegate( d->m_placemark, d->m_nodeView );
+
+    connect( d->m_delegate, SIGNAL( modelChanged( GeoDataPlacemark* ) ),
+             this, SLOT( handleItemMoving( GeoDataPlacemark* ) ) );
+    connect( d->m_delegate, SIGNAL( geometryChanged() ),
+             this, SLOT( updatePolygon() ) );
 
     d->m_nodeView->setItemDelegate( d->m_delegate );
     d->m_nodeView->setEditTriggers( QAbstractItemView::AllEditTriggers );

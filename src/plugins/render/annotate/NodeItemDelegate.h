@@ -22,13 +22,18 @@
 namespace Marble
 {
 
+/**
+ * @brief The NodeItemDelegate class handles the NodeModel view for both the EditPolygonDialog
+ * and EditPolylineDialog. It manages editing and updating the NodeModel and triggers drawing
+ * updates when changes are made.
+ */
 class NodeItemDelegate : public QItemDelegate
 {
 
 Q_OBJECT
 
 public:
-    NodeItemDelegate( GeoDataPlacemark* placemark, EditPolygonDialog* dialog, QTreeView* view );
+    NodeItemDelegate( GeoDataPlacemark* placemark, QTreeView* view );
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;
@@ -38,13 +43,16 @@ public:
 
 private:
     GeoDataPlacemark* m_placemark;
-    EditPolygonDialog* m_dialog;
     mutable QModelIndex m_indexBeingEdited;
     QTreeView* m_view;
 
 private slots:
     void previewNodeMove( qreal value);
     void unsetCurrentEditor( QWidget* widget );
+
+signals:
+    void modelChanged( GeoDataPlacemark* placemark ) const;
+    void geometryChanged() const;
 };
 
 }
