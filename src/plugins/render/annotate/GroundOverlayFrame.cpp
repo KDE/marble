@@ -108,8 +108,18 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
         coordinateList.append( ring.at( SouthWest ) );
         coordinateList.append( ring.at( SouthEast ) );
         coordinateList.append( ring.at( NorthEast ) );
-        coordinateList.append( ring.at( NorthEast ).interpolate( ring.at( NorthWest ), 0.5 ) );
-        coordinateList.append( ring.at( SouthEast ).interpolate( ring.at( SouthWest ), 0.5 ) );
+
+        GeoDataCoordinates northernHandle = ring.at( NorthEast ).interpolate( ring.at( NorthWest ), 0.5 );
+        GeoDataCoordinates southernHandle = ring.at( SouthEast ).interpolate( ring.at( SouthWest ), 0.5 );
+        // Special case handle position to take tessellation
+        // along latitude circles into account
+        if (m_overlay->latLonBox().rotation() == 0) {
+            northernHandle.setLatitude(ring.at( NorthEast ).latitude());
+            southernHandle.setLatitude(ring.at( SouthEast ).latitude());
+        }
+        coordinateList.append( northernHandle );
+        coordinateList.append( southernHandle );
+
         coordinateList.append( ring.at( NorthEast ).interpolate( ring.at( SouthEast ), 0.5 ) );
         coordinateList.append( ring.at( NorthWest ).interpolate( ring.at( SouthWest ), 0.5 ) );
 
