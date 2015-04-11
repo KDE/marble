@@ -133,14 +133,36 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
         m_regionList.append( painter->regionFromEllipse( coordinateList.at( West ),  16, 16 ) );
         m_regionList.append( painter->regionFromPolygon( ring, Qt::OddEvenFill ) );
 
+        // Calculate handle icon orientation due to the projection
+        qreal xNW, yNW, xSW, ySW;
+        viewport->screenCoordinates(ring.at( NorthWest ), xNW, yNW);
+        viewport->screenCoordinates(ring.at( SouthWest ), xSW, ySW);
+        qreal westernAngle = qAtan2(ySW - yNW, xSW - xNW) - M_PI/2;
+        qreal xNE, yNE, xSE, ySE;
+        viewport->screenCoordinates(ring.at( NorthEast ), xNE, yNE);
+        viewport->screenCoordinates(ring.at( SouthEast ), xSE, ySE);
+        qreal easternAngle = qAtan2(ySE - yNE, xSE - xNE) - M_PI/2;
+
         painter->setPen( Qt::DashLine );
         painter->setBrush( Qt::NoBrush );
         painter->drawPolygon( ring );
 
-        QTransform trans;
-        trans.rotateRadians( -m_overlay->latLonBox().rotation() );
+        qreal projectedAngle = 0;
 
         for( int i = NorthWest; i != Polygon; ++i ) {
+
+            // Assign handle icon orientation due to the projection
+            if (i == NorthWest || i == West || i == SouthWest) {
+                projectedAngle = westernAngle;
+            }
+            else if (i == NorthEast || i == East || i == SouthEast) {
+                projectedAngle = easternAngle;
+            }
+            else if (i == North || i == South) {
+                projectedAngle = (westernAngle + easternAngle) / 2;
+            }
+            QTransform trans;
+            trans.rotateRadians( -m_overlay->latLonBox().rotation() + projectedAngle );
             if ( m_editStatus == Resize ){
                 if( m_hoveredHandle != i ) {
                     painter->drawImage( coordinateList.at( i ),
