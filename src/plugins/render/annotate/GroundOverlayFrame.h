@@ -24,7 +24,8 @@ public:
     GroundOverlayFrame( GeoDataPlacemark *placemark, GeoDataGroundOverlay *overlay, TextureLayer *textureLayer );
 
     enum MovedRegion {
-        NorthWest,
+        NoRegion = -1,
+        NorthWest = 0,
         SouthWest,
         SouthEast,
         NorthEast,
@@ -33,6 +34,11 @@ public:
         East,
         West,
         Polygon
+    };
+
+    enum EditStatus {
+        Resize,
+        Rotate
     };
 
     void update();
@@ -60,8 +66,16 @@ private:
     TextureLayer         *m_textureLayer;
 
     QList<QRegion>     m_regionList;
-    GeoDataCoordinates m_movedPointCoordinates;
-    int                m_movedPoint;
+    GeoDataCoordinates m_movedHandleGeoCoordinates;
+    QPoint             m_movedHandleScreenCoordinates;
+    int                m_movedHandle;
+    int                m_hoveredHandle;
+    int                m_editStatus;
+    bool               m_editStatusChangeNeeded;
+    qreal              m_previousRotation;
+
+    QList<QImage>      m_resizeIcons;
+    QList<QImage>      m_rotateIcons;
 
     const ViewportParams *m_viewport;
 

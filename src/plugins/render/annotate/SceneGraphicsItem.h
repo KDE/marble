@@ -85,7 +85,8 @@ public:
         ChangeCursorOverlayHorizontalHover,
         ChangeCursorOverlayBDiagHover,
         ChangeCursorOverlayFDiagHover,
-        ChangeCursorOverlayBodyHover
+        ChangeCursorOverlayBodyHover,
+        ChangeCursorOverlayRotateHover
     };
 
     /**

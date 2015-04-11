@@ -797,6 +797,8 @@ void AnnotatePlugin::handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem 
             m_marbleWidget->setCursor( Qt::SizeFDiagCursor );
         } else if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayBodyHover ) {
             m_marbleWidget->setCursor( Qt::SizeAllCursor );
+        } else if ( groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayRotateHover ) {
+            m_marbleWidget->setCursor( Qt::CrossCursor );
         }
     }
 }
