@@ -65,7 +65,7 @@ const QPoint& VisiblePlacemark::symbolPosition() const
 
 const QPointF VisiblePlacemark::hotSpot() const
 {
-    const QSize iconSize = m_placemark->style()->iconStyle().icon().size();
+    const QSize iconSize = m_placemark->style()->iconStyle().scaledIcon().size();
 
     GeoDataHotSpot::Units xunits;
     GeoDataHotSpot::Units yunits;
@@ -112,7 +112,8 @@ void VisiblePlacemark::setSymbolPixmap()
 {
     const GeoDataStyle *style = m_placemark->style();
     if ( style ) {
-        m_symbolPixmap = QPixmap::fromImage( style->iconStyle().icon() );
+
+        m_symbolPixmap = QPixmap::fromImage( style->iconStyle().scaledIcon() );
         emit updateNeeded();
     }
     else {
@@ -140,7 +141,7 @@ void VisiblePlacemark::drawLabelPixmap()
         return;
     }
 
-    QFont  labelFont  = style->labelStyle().font();
+    QFont  labelFont  = style->labelStyle().scaledFont();
     QColor labelColor = style->labelStyle().color();
 
     LabelStyle labelStyle = Normal;

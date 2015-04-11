@@ -93,6 +93,12 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     QFont font() const;
 
     /**
+     * @brief Return the scaled font of the label
+     * @return  the scaled font
+     */
+    QFont scaledFont() const;
+
+    /**
      * @brief Return true if the text of the label should glow, false otherwise
      * @see setGlow
      */

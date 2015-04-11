@@ -253,7 +253,7 @@ int PlacemarkLayout::maxLabelHeight() const
         const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         if ( placemark ) {
             const GeoDataStyle* style = placemark->style();
-            QFont labelFont = style->labelStyle().font();
+            QFont labelFont = style->labelStyle().scaledFont();
             int textHeight = QFontMetrics( labelFont ).height();
             if ( textHeight > maxLabelHeight )
                 maxLabelHeight = textHeight;
@@ -601,7 +601,7 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
                                       const qreal x, const qreal y,
                                       const QString &labelText ) const
 {
-    QFont labelFont = style->labelStyle().font();
+    QFont labelFont = style->labelStyle().scaledFont();
     int textHeight = QFontMetrics( labelFont ).height();
 
     int textWidth;
@@ -616,7 +616,7 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
     const QVector<VisiblePlacemark*> currentsec = m_rowsection.at( y / m_maxLabelHeight );
 
     if ( style->labelStyle().alignment() == GeoDataLabelStyle::Corner ) {
-        const int symbolWidth = style->iconStyle().icon().width();
+        const int symbolWidth = style->iconStyle().scaledIcon().size().width();
 
         // Check the four possible positions by going through all of them
         for( int i=0; i<4; ++i ) {

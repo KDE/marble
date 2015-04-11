@@ -177,6 +177,31 @@ float GeoDataIconStyle::scale() const
     return d->m_scale;
 }
 
+QImage GeoDataIconStyle::scaledIcon() const
+{
+    // Scale shouldn't be 0, but if it is, returning regular icon.
+    if( scale() <= 0 || icon().isNull() ) {
+        return icon();
+    }
+
+    QSize iconSize = icon().size();
+
+    // Scaling the placemark's icon based on its size, scale, and maximum icon size.
+
+    if ( iconSize.width()*scale() > s_maximumIconSize.width()
+         || iconSize.height()*scale() > s_maximumIconSize.height() ) {
+       iconSize.scale( s_maximumIconSize, Qt::KeepAspectRatio );
+    }
+    else if ( iconSize.width()*scale() < s_minimumIconSize.width()
+              || iconSize.height()*scale() < s_minimumIconSize.width() ) {
+       iconSize.scale( s_maximumIconSize, Qt::KeepAspectRatio );
+    }
+    else {
+       iconSize *= scale();
+    }
+    return icon().scaled( iconSize ) ;
+}
+
 int GeoDataIconStyle::heading() const
 {
     return d->m_heading;

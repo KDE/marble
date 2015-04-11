@@ -139,6 +139,19 @@ QFont GeoDataLabelStyle::font() const
     return d->m_font;
 }
 
+QFont GeoDataLabelStyle::scaledFont() const
+{
+   // Font shouldn't be smaller (or equal to) than 0, but if it is, regular font is returned
+   // setPointSize() takes an integer as parameter, so rounded value should be checked
+   if( qRound( font().pointSize() * scale() ) <= 0 ) {
+       return font();
+   }
+
+   QFont scaledFont = font();
+   scaledFont.setPointSize( qRound( scaledFont.pointSize() * scale() ));
+   return scaledFont;
+}
+
 bool GeoDataLabelStyle::glow() const
 {
     return d->m_glow;
