@@ -1210,6 +1210,19 @@ void GeoDataCoordinates::setDetail( const int det )
     d->m_detail = det;
 }
 
+GeoDataCoordinates GeoDataCoordinates::rotateAround( const GeoDataCoordinates &axis, qreal angle, Unit unit ) const
+{
+    const Quaternion quatAxis = Quaternion::fromEuler( -axis.latitude() , axis.longitude(), 0 );
+    const Quaternion rotationAmount = Quaternion::fromEuler( 0, 0, unit == Radian ? angle : angle * DEG2RAD );
+    const Quaternion resultAxis = quatAxis * rotationAmount * quatAxis.inverse();
+
+    Quaternion rotatedQuat = quaternion();
+    rotatedQuat.rotateAroundAxis(resultAxis);
+    qreal rotatedLon, rotatedLat;
+    rotatedQuat.getSpherical(rotatedLon, rotatedLat);
+    return GeoDataCoordinates(rotatedLon, rotatedLat, altitude());
+}
+
 qreal GeoDataCoordinates::bearing( const GeoDataCoordinates &other, Unit unit, BearingType type ) const
 {
     if ( type == FinalBearing ) {

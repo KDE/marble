@@ -78,9 +78,6 @@ private:
     QList<QImage>      m_rotateIcons;
 
     const ViewportParams *m_viewport;
-
-    static void rotateAroundCenter( qreal lon, qreal lat, qreal &rotatedLon, qreal &rotatedLat,
-                                    GeoDataLatLonBox &box, bool inverse = false );
 };
 
 }

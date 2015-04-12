@@ -233,6 +233,15 @@ class GEODATA_EXPORT GeoDataCoordinates
     void setDetail( const int det );
 
     /**
+     * @brief Rotates one coordinate around another.
+     * @param axis The coordinate that serves as a rotation axis
+     * @param angle Rotation angle
+     * @param unit Unit of the result
+     * @return The coordinate rotated in anticlockwise direction
+     */
+    GeoDataCoordinates rotateAround( const GeoDataCoordinates &axis, qreal angle, Unit unit = Radian ) const;
+
+    /**
      * @brief Returns the bearing (true bearing, the angle between the line defined
      * by this point and the other and the prime meridian)
      * @param other The second point that, together with this point, defines a line

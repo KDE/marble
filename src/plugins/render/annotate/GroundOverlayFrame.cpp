@@ -162,7 +162,7 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
                 projectedAngle = (westernAngle + easternAngle) / 2;
             }
             QTransform trans;
-            trans.rotateRadians( -m_overlay->latLonBox().rotation() + projectedAngle );
+            trans.rotateRadians( projectedAngle );
             if ( m_editStatus == Resize ){
                 if( m_hoveredHandle != i ) {
                     painter->drawImage( coordinateList.at( i ),
@@ -276,30 +276,35 @@ bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
                                     GeoDataCoordinates::Radian );
 
         if ( m_editStatus == Resize ) {
-            qreal rotatedLon;
-            qreal rotatedLat;
-            rotateAroundCenter( lon, lat, rotatedLon, rotatedLat, m_overlay->latLonBox(), true );
+
+            GeoDataCoordinates coord(lon, lat);
+            GeoDataCoordinates rotatedCoord(coord);
+
+            if (m_overlay->latLonBox().rotation() != 0) {
+                rotatedCoord = coord.rotateAround(m_overlay->latLonBox().center(),
+                                                 -m_overlay->latLonBox().rotation());
+            }
 
             if ( m_movedHandle == NorthWest ) {
-                m_overlay->latLonBox().setNorth( rotatedLat );
-                m_overlay->latLonBox().setWest( rotatedLon );
+                m_overlay->latLonBox().setNorth( rotatedCoord.latitude() );
+                m_overlay->latLonBox().setWest( rotatedCoord.longitude() );
             } else if ( m_movedHandle == SouthWest ) {
-                m_overlay->latLonBox().setSouth( rotatedLat );
-                m_overlay->latLonBox().setWest( rotatedLon );
+                m_overlay->latLonBox().setSouth( rotatedCoord.latitude() );
+                m_overlay->latLonBox().setWest( rotatedCoord.longitude() );
             } else if ( m_movedHandle == SouthEast ) {
-                m_overlay->latLonBox().setSouth( rotatedLat );
-                m_overlay->latLonBox().setEast( rotatedLon );
+                m_overlay->latLonBox().setSouth( rotatedCoord.latitude() );
+                m_overlay->latLonBox().setEast( rotatedCoord.longitude() );
             } else if ( m_movedHandle == NorthEast ) {
-                m_overlay->latLonBox().setNorth( rotatedLat );
-                m_overlay->latLonBox().setEast( rotatedLon );
+                m_overlay->latLonBox().setNorth( rotatedCoord.latitude() );
+                m_overlay->latLonBox().setEast( rotatedCoord.longitude() );
             } else if ( m_movedHandle == North ) {
-                m_overlay->latLonBox().setNorth( rotatedLat );
+                m_overlay->latLonBox().setNorth( rotatedCoord.latitude() );
             } else if ( m_movedHandle == South ) {
-                m_overlay->latLonBox().setSouth( rotatedLat );
+                m_overlay->latLonBox().setSouth( rotatedCoord.latitude() );
             } else if ( m_movedHandle == East ) {
-                m_overlay->latLonBox().setEast( rotatedLon );
+                m_overlay->latLonBox().setEast( rotatedCoord.longitude() );
             } else if ( m_movedHandle == West ) {
-                m_overlay->latLonBox().setWest( rotatedLon );
+                m_overlay->latLonBox().setWest( rotatedCoord.longitude() );
             }
 
         } else if ( m_editStatus == Rotate ) {
@@ -355,49 +360,23 @@ void GroundOverlayFrame::update()
     GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( placemark()->geometry() );
     poly->outerBoundary().clear();
 
-    qreal rotatedLon;
-    qreal rotatedLat;
+    GeoDataCoordinates rotatedCoord;
 
-    rotateAroundCenter( overlayLatLonBox.west(), overlayLatLonBox.north(), rotatedLon, rotatedLat, overlayLatLonBox );
-    poly->outerBoundary().append( GeoDataCoordinates( rotatedLon, rotatedLat ) );
+    GeoDataCoordinates northWest(overlayLatLonBox.west(), overlayLatLonBox.north());
+    rotatedCoord = northWest.rotateAround(overlayLatLonBox.center(), overlayLatLonBox.rotation());
+    poly->outerBoundary().append( rotatedCoord );
 
-    rotateAroundCenter( overlayLatLonBox.west(), overlayLatLonBox.south(), rotatedLon, rotatedLat, overlayLatLonBox );
-    poly->outerBoundary().append( GeoDataCoordinates( rotatedLon, rotatedLat ) );
+    GeoDataCoordinates southWest(overlayLatLonBox.west(), overlayLatLonBox.south());
+    rotatedCoord = southWest.rotateAround(overlayLatLonBox.center(), overlayLatLonBox.rotation());
+    poly->outerBoundary().append( rotatedCoord );
 
-    rotateAroundCenter( overlayLatLonBox.east(), overlayLatLonBox.south(), rotatedLon, rotatedLat, overlayLatLonBox );
-    poly->outerBoundary().append( GeoDataCoordinates( rotatedLon, rotatedLat ) );
+    GeoDataCoordinates southEast(overlayLatLonBox.east(), overlayLatLonBox.south());
+    rotatedCoord = southEast.rotateAround(overlayLatLonBox.center(), overlayLatLonBox.rotation());
+    poly->outerBoundary().append( rotatedCoord );
 
-    rotateAroundCenter( overlayLatLonBox.east(), overlayLatLonBox.north(), rotatedLon, rotatedLat, overlayLatLonBox );
-    poly->outerBoundary().append( GeoDataCoordinates( rotatedLon, rotatedLat ) );
-}
-
-void GroundOverlayFrame::rotateAroundCenter( qreal lon, qreal lat, qreal &rotatedLon, qreal &rotatedLat, GeoDataLatLonBox &box, bool inverse )
-{
-    const qreal angle = ( inverse ? ( -1 ) : 1 ) * box.rotation();
-    const qreal sinRotation = sin( angle );
-    const qreal cosRotation = cos( angle );
-
-    const qreal centerLat = box.center().latitude();
-    qreal centerLon = box.center().longitude();
-
-    if ( box.crossesDateLine() ) {
-        if ( lon < 0 && centerLon > 0 ) {
-            centerLon -= 2 * M_PI;
-        }
-        if ( lon > 0 && centerLon < 0  ) {
-            centerLon += 2 * M_PI;
-        }
-        if ( box.west() > 0 && box.east() > 0 && box.west() > box.east() && lon > 0 && lon < box.west() ) {
-            if ( ! ( lon < box.west() && lon > box.toCircumscribedRectangle().west() ) ) {
-               centerLon -= 2 * M_PI;
-            }
-        }
-    }
-
-    rotatedLon = ( lon - centerLon ) * cosRotation - ( lat - centerLat ) * sinRotation + centerLon;
-    rotatedLat = ( lon - centerLon ) * sinRotation + ( lat - centerLat ) * cosRotation + centerLat;
-
-    GeoDataCoordinates::normalizeLonLat( rotatedLon, rotatedLat );
+    GeoDataCoordinates northEast(overlayLatLonBox.east(), overlayLatLonBox.north());
+    rotatedCoord = northEast.rotateAround(overlayLatLonBox.center(), overlayLatLonBox.rotation());
+    poly->outerBoundary().append( rotatedCoord );
 }
 
 void GroundOverlayFrame::dealWithStateChange( SceneGraphicsItem::ActionState previousState )
