@@ -92,6 +92,7 @@ signals:
     void placemarkMoved();
     void nodeAdded( const GeoDataCoordinates &coordinates );
     void itemMoved( GeoDataPlacemark *placemark );
+    void mouseMoveGeoPosition( const QString& );
 
 private slots:
     void enableModel( bool enabled );
@@ -171,6 +172,7 @@ private:
     void announceStateChanged( SceneGraphicsItem::ActionState newState );
     void setupCursor( SceneGraphicsItem *item );
 
+    const GeoDataCoordinates mouseGeoDataCoordinates( QMouseEvent *mouseEvent );
 
     bool m_isInitialized;
     bool m_widgetInitialized;
