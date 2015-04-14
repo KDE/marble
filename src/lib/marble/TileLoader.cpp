@@ -78,6 +78,7 @@ QImage TileLoader::loadTileImage( GeoSceneTextureTile const *textureLayer, TileI
 
     // tile was not locally available => trigger download and look for tiles in other levels
     // for scaling
+
     QImage replacementTile = scaledLowerLevelTile( textureLayer, tileId );
     Q_ASSERT( !replacementTile.isNull() );
 
@@ -242,6 +243,7 @@ QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTile * textureLaye
 
     for ( int level = qMax<int>( 0, id.zoomLevel() - 1 ); level >= 0; --level ) {
         int const deltaLevel = id.zoomLevel() - level;
+
         TileId const replacementTileId( id.mapThemeIdHash(), level,
                                         id.x() >> deltaLevel, id.y() >> deltaLevel );
         QString const fileName = tileFileName( textureLayer, replacementTileId );
@@ -260,8 +262,8 @@ QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTile * textureLaye
             // which rect to scale?
             int const restTileX = id.x() % ( 1 << deltaLevel );
             int const restTileY = id.y() % ( 1 << deltaLevel );
-            int const partWidth = toScale.width() >> deltaLevel;
-            int const partHeight = toScale.height() >> deltaLevel;
+            int const partWidth = qMax(1, toScale.width() >> deltaLevel);
+            int const partHeight = qMax(1, toScale.height() >> deltaLevel);
             int const startX = restTileX * partWidth;
             int const startY = restTileY * partHeight;
             mDebug() << "QImage::copy:" << startX << startY << partWidth << partHeight;
