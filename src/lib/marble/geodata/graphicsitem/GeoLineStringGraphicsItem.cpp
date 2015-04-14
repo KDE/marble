@@ -92,6 +92,7 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
         painter->setFont( style()->labelStyle().font() );
         switch ( style()->labelStyle().alignment() ) {
         case GeoDataLabelStyle::Corner:
+        case GeoDataLabelStyle::Right:
             labelPositionFlags |= LineStart;
             break;
         case GeoDataLabelStyle::Center:
