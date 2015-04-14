@@ -578,7 +578,12 @@ QVector<const GeoSceneTextureTile *> MergedLayerDecorator::Private::findRelevant
         // check, if layer provides tiles for the current level
         if ( !candidate->hasMaximumTileLevel() ||
              candidate->maximumTileLevel() >= stackedTileId.zoomLevel() ) {
-            result.append( candidate );
+            //check if the tile intersects with texture bounds
+            if ( candidate->latLonBox().isNull()
+                || candidate->latLonBox().intersects( stackedTileId.toLatLonBox( candidate ) ) )
+            {
+                result.append( candidate );
+            }
         }
     }
 

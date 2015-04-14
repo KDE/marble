@@ -28,4 +28,15 @@ const char* GeoSceneTextureTile::nodeType() const
     return GeoSceneTypes::GeoSceneTextureTileType;
 }
 
+GeoDataLatLonBox GeoSceneTextureTile::latLonBox() const
+{
+    return m_latLonBox;
+}
+
+void GeoSceneTextureTile::setLatLonBox( const GeoDataLatLonBox &box )
+{
+    m_latLonBox = box;
+}
+
+
 }

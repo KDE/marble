@@ -16,6 +16,7 @@
 #define MARBLE_GEOSCENETEXTURETILE_H
 
 #include "GeoSceneTiled.h"
+#include "GeoDataLatLonBox.h"
 
 namespace Marble
 {
@@ -27,6 +28,16 @@ class GeoSceneTextureTile : public GeoSceneTiled
     explicit GeoSceneTextureTile( const QString& name );
 
     virtual const char* nodeType() const;
+
+    /**
+     * @brief set bounds for the texture. Tiles outside of these bounds won't be searched in this texture.
+     * Null box means no bounds.
+     */
+    void setLatLonBox( const GeoDataLatLonBox &box );
+    GeoDataLatLonBox latLonBox() const;
+
+ private:
+    GeoDataLatLonBox m_latLonBox;
 };
 
 }
