@@ -12,6 +12,7 @@
 #define __astr2lib_h
 
 #include "attlib.h"
+#include "astrolib_export.h"
 
 /***********************************************************************
 	Definitions of Astr2lib Functions
@@ -20,7 +21,7 @@
   Author: Gerhard HOLTKAMP                   25-MAR-2014
  ***********************************************************************/
 
-class Plan200      // Calculating the Planets in epoch J2000.0 coordinates
+class ASTROLIB_EXPORT Plan200      // Calculating the Planets in epoch J2000.0 coordinates
  {
   public:
     Plan200();
@@ -50,23 +51,23 @@ class Plan200      // Calculating the Planets in epoch J2000.0 coordinates
     void posvel ();  
  };
 
-  void MarPhobos (double t, Vec3& rs, Vec3& vs); // State vector of Phobos
-  void MarDeimos (double t, Vec3& rs, Vec3& vs); // State vector of Deimos
-  Vec3 PosJIo (double t);      // Position of Io
-  Vec3 PosEuropa (double t);   // Position of Europa
-  Vec3 PosGanymede (double t); // Position of Ganymede
-  Vec3 PosCallisto (double t); // Position of Callisto
-  Vec3 PosSMimas (double t); // Position of Mimas
-  Vec3 PosSEnceladus (double t); // Position of Enceladus
-  Vec3 PosSDione (double t); // Position of Dione
-  void JupIo (double t, Vec3& rs, Vec3& vs);       // state vector of Io
-  void JupEuropa (double t, Vec3& rs, Vec3& vs);   // state vector of Europa
-  void JupGanymede (double t, Vec3& rs, Vec3& vs); // state vector of Ganymede
-  void JupCallisto (double t, Vec3& rs, Vec3& vs); // state vector of Callisto
-  void SatRhea (double t, Vec3& rs, Vec3& vs);   // state vector of Rhea
-  void SatTitan (double t, Vec3& rs, Vec3& vs);  // state vector of Titan
-  void NepTriton (double t, Vec3& rs, Vec3& vs); // state vector of Triton
-  void PluCharon (double t, Vec3& rs, Vec3& vs); // state vector of Charon
+   ASTROLIB_EXPORT void MarPhobos (double t, Vec3& rs, Vec3& vs); // State vector of Phobos
+   ASTROLIB_EXPORT void MarDeimos (double t, Vec3& rs, Vec3& vs); // State vector of Deimos
+   ASTROLIB_EXPORT Vec3 PosJIo (double t);      // Position of Io
+   ASTROLIB_EXPORT Vec3 PosEuropa (double t);   // Position of Europa
+   ASTROLIB_EXPORT Vec3 PosGanymede (double t); // Position of Ganymede
+   ASTROLIB_EXPORT Vec3 PosCallisto (double t); // Position of Callisto
+   ASTROLIB_EXPORT Vec3 PosSMimas (double t); // Position of Mimas
+   ASTROLIB_EXPORT Vec3 PosSEnceladus (double t); // Position of Enceladus
+   ASTROLIB_EXPORT Vec3 PosSDione (double t); // Position of Dione
+   ASTROLIB_EXPORT void JupIo (double t, Vec3& rs, Vec3& vs);       // state vector of Io
+   ASTROLIB_EXPORT void JupEuropa (double t, Vec3& rs, Vec3& vs);   // state vector of Europa
+   ASTROLIB_EXPORT void JupGanymede (double t, Vec3& rs, Vec3& vs); // state vector of Ganymede
+   ASTROLIB_EXPORT void JupCallisto (double t, Vec3& rs, Vec3& vs); // state vector of Callisto
+   ASTROLIB_EXPORT void SatRhea (double t, Vec3& rs, Vec3& vs);   // state vector of Rhea
+   ASTROLIB_EXPORT void SatTitan (double t, Vec3& rs, Vec3& vs);  // state vector of Titan
+   ASTROLIB_EXPORT void NepTriton (double t, Vec3& rs, Vec3& vs); // state vector of Triton
+   ASTROLIB_EXPORT void PluCharon (double t, Vec3& rs, Vec3& vs); // state vector of Charon
 
 #endif         // __astr2lib_h sentry.
 

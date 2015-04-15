@@ -20,10 +20,12 @@
  ***********************************************************************/
 
 #include <iostream>
+#include "astrolib_export.h"
 
-double atan20 (double y, double x);
 
-class Vec3
+ASTROLIB_EXPORT double atan20 (double y, double x);
+
+class ASTROLIB_EXPORT Vec3
 {
  private:
    double v[3];
@@ -59,7 +61,7 @@ class Vec3
 /********************************************************************/
 
 // class Mat3: public Vec3
-class Mat3
+class ASTROLIB_EXPORT Mat3
 {
  public:
    double m[3][3];

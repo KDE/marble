@@ -12,6 +12,7 @@
 #define __astrolib_h
 
 #include "attlib.h"
+#include "astrolib_export.h"
 
 /***********************************************************************
    Definitions of Astrolib Functions
@@ -22,52 +23,52 @@
    Author: Gerhard HOLTKAMP               14-JAN-2012
  ***********************************************************************/
 
-double ddd (int d, int m, double s); // deg, min, sec -> decimal degrees
-void dms (double dd, int &d, int &m, double &s); // dec deg -> deg, min, sec
-double mjd (int day, int month, int year, double hour); // modified Julian date
-double julcent (double mjuld);                // Julian centuries since 2000.0
-void caldat (double mjd, int &day, int &month, int &year, double &hour);
-double DefTdUt (int yr);   // default value for TDT - UT in seconds
-double lsidtim (double jd, double lambda, double ep2);  // Sidereal Time
+ ASTROLIB_EXPORT double ddd (int d, int m, double s); // deg, min, sec -> decimal degrees
+ ASTROLIB_EXPORT void dms (double dd, int &d, int &m, double &s); // dec deg -> deg, min, sec
+ ASTROLIB_EXPORT double mjd (int day, int month, int year, double hour); // modified Julian date
+ ASTROLIB_EXPORT double julcent (double mjuld);                // Julian centuries since 2000.0
+ ASTROLIB_EXPORT void caldat (double mjd, int &day, int &month, int &year, double &hour);
+ ASTROLIB_EXPORT double DefTdUt (int yr);   // default value for TDT - UT in seconds
+ ASTROLIB_EXPORT double lsidtim (double jd, double lambda, double ep2);  // Sidereal Time
 
-double eps (double t);  //   obliquity of ecliptic
-Vec3 eclequ (double t, Vec3& r1);  //  ecliptic -> equatorial
-Vec3 equecl (double t, Vec3& r1);  //  equatorial -> ecliptic
-Mat3 pmatecl (double t1, double t2);  // ecl. precession
-Mat3 pmatequ (double t1, double t2);  // equ. precession
-Mat3 nutmat (double t, double& ep2, bool hipr = false); // nutation (equatorial)
-Mat3 nutecl (double t, double& ep2);  // nutation matrix (ecliptic)
-Mat3 PoleMx (double xp, double yp);   // Polar motion matrix
-Vec3 aberrat (double t, Vec3& ve);   //  aberration
+ ASTROLIB_EXPORT double eps (double t);  //   obliquity of ecliptic
+ ASTROLIB_EXPORT Vec3 eclequ (double t, Vec3& r1);  //  ecliptic -> equatorial
+ ASTROLIB_EXPORT Vec3 equecl (double t, Vec3& r1);  //  equatorial -> ecliptic
+ ASTROLIB_EXPORT Mat3 pmatecl (double t1, double t2);  // ecl. precession
+ ASTROLIB_EXPORT Mat3 pmatequ (double t1, double t2);  // equ. precession
+ ASTROLIB_EXPORT Mat3 nutmat (double t, double& ep2, bool hipr = false); // nutation (equatorial)
+ ASTROLIB_EXPORT Mat3 nutecl (double t, double& ep2);  // nutation matrix (ecliptic)
+ ASTROLIB_EXPORT Mat3 PoleMx (double xp, double yp);   // Polar motion matrix
+ ASTROLIB_EXPORT Vec3 aberrat (double t, Vec3& ve);   //  aberration
 
-Vec3 GeoPos (double jd, double ep2, double lat, double lng, double ht);
-Vec3 GeoPos (double jd, double ep2, double lat, double lng, double ht,
+ ASTROLIB_EXPORT Vec3 GeoPos (double jd, double ep2, double lat, double lng, double ht);
+ ASTROLIB_EXPORT Vec3 GeoPos (double jd, double ep2, double lat, double lng, double ht,
              double xp, double yp);
-Vec3 EquHor (double jd, double ep2, double lat, double lng, Vec3 r);
-Vec3 HorEqu (double jd, double ep2, double lat, double lng, Vec3 r);
-void AppPos (double jd, double ep2, double lat, double lng, double ht,
+ ASTROLIB_EXPORT Vec3 EquHor (double jd, double ep2, double lat, double lng, Vec3 r);
+ ASTROLIB_EXPORT Vec3 HorEqu (double jd, double ep2, double lat, double lng, Vec3 r);
+ ASTROLIB_EXPORT void AppPos (double jd, double ep2, double lat, double lng, double ht,
              int solsys, Vec3 r, double& azim, double& elev, double& dist);
-void AppRADec (double jd, double ep2, double lat, double lng,
+ ASTROLIB_EXPORT void AppRADec (double jd, double ep2, double lat, double lng,
                double azim, double elev, double& ra, double& dec);
-double Refract (double h, double p = 1015.0, double t = 15.0); // refraction  
+ ASTROLIB_EXPORT double Refract (double h, double p = 1015.0, double t = 15.0); // refraction
 
-double eccanom (double man, double ecc);  // eccentric anomaly
-double hypanom (double mh, double ecc);   // hyperbolic anomaly
-void ellip (double gm, double t0, double t, double a, double ecc,
+ ASTROLIB_EXPORT double eccanom (double man, double ecc);  // eccentric anomaly
+ ASTROLIB_EXPORT double hypanom (double mh, double ecc);   // hyperbolic anomaly
+ ASTROLIB_EXPORT void ellip (double gm, double t0, double t, double a, double ecc,
             double m0, Vec3& r1, Vec3& v1); // elliptic state vector
-void hyperb (double gm, double t0, double t, double a, double ecc,
+ ASTROLIB_EXPORT void hyperb (double gm, double t0, double t, double a, double ecc,
              Vec3& r1, Vec3& v1);  // hyperbolic state vector
-void parab (double gm, double t0, double t, double q, double ecc,
+ ASTROLIB_EXPORT void parab (double gm, double t0, double t, double q, double ecc,
             Vec3& r1, Vec3& v1);  // elliptic state vector
-void kepler (double gm, double t0, double t, double m0, double a, double ecc,
+ ASTROLIB_EXPORT void kepler (double gm, double t0, double t, double m0, double a, double ecc,
              double ran, double aper, double inc, Vec3& r1, Vec3& v1);
-void oscelm (double gm, double t, Vec3& r1, Vec3& v1,
+ ASTROLIB_EXPORT void oscelm (double gm, double t, Vec3& r1, Vec3& v1,
              double& t0, double& m0, double& a, double& ecc,
              double& ran, double& aper, double& inc);
 
-Vec3 QuickSun (double t);   // low precision position of the Sun at time t
+ ASTROLIB_EXPORT Vec3 QuickSun (double t);   // low precision position of the Sun at time t
 
-class Sun200      // Calculating the Sun in epoch J2000.0 coordinates
+class ASTROLIB_EXPORT Sun200      // Calculating the Sun in epoch J2000.0 coordinates
  {
   public:
    Sun200();
@@ -92,7 +93,7 @@ class Sun200      // Calculating the Sun in epoch J2000.0 coordinates
    void pertmoo();
  };
 
-class Moon200     // Calculating the position of the Moon in J2000.0
+class ASTROLIB_EXPORT Moon200     // Calculating the position of the Moon in J2000.0
  {
   public:
    Moon200();
@@ -121,7 +122,7 @@ class Moon200     // Calculating the position of the Moon in J2000.0
    void planetary (double t);
  };
 
-class Eclipse      // Eclipse Calculations
+class ASTROLIB_EXPORT Eclipse      // Eclipse Calculations
  {
   public: 
    Eclipse();

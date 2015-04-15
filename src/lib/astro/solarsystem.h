@@ -12,8 +12,9 @@
 #define __solarsystem_h
 
 #include "attlib.h"
+#include "astrolib_export.h"
 
-class SolarSystem     // Calculate Positions of Solar System Bodies
+class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bodies
 {
   public:
     SolarSystem();
