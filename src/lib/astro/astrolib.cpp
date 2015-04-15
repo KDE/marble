@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2013 Gerhard Holtkamp
+// Copyright 2014 Gerhard Holtkamp
 //
 
 /* =========================================================================
@@ -20,12 +20,11 @@
   Copyright : Gerhard HOLTKAMP          28-JAN-2013
   ========================================================================= */
 
-#include "astrolib.h"
-
 #include <cmath>
 using namespace std;
 
 #include "attlib.h"
+#include "astrolib.h"
 
 double frac (double f)
  { return fmod(f,1.0); }
@@ -842,7 +841,7 @@ void AppPos (double jd, double ep2, double lat, double lng, double ht,
 	  ht : height above normal in meters.
 	  solsys : = 1 if object is in solar system and parallax has to be
 						taken into account, 0 otherwise.
-      r = vector of celestial object. The unit of length of this vector
+	  r = vector of celestial object. The unit of lenght of this vector
 			has to be in terms of the equatorial Earth radius (6378.14 km)
 			if solsys = 1, otherwise it's arbitrary.
 	  azim : azimuth in radians (0 is to the North).
@@ -1700,7 +1699,7 @@ void Moon200::minit(double t)
    }
  }
 
-void Moon200::term (int p, int q, int r, int s, double& x, double& y) const
+void Moon200::term (int p, int q, int r, int s, double& x, double& y)
  {
   // calculate x=cos(p*arg1+q*arg2...); y=sin(p*arg1+q*arg2...)
   int i[4];
@@ -1837,13 +1836,13 @@ void Moon200::solar3()
  }
 
 void Moon200::addn (double coeffn, int p, int q, int r, int s,
-                    double& n, double&x, double& y) const
+                    double& n, double&x, double& y)
  {
   term (p,q,r,s,x,y);
   n=n+coeffn*y;
  }
 
-void Moon200::solarn (double& n) const
+void Moon200::solarn (double& n)
  {
   // perturbation N of ecliptic latitude
   double x, y;
@@ -2133,7 +2132,7 @@ void Eclipse::equ_sun_moon(double jd, double tdut)
 	  jd = Modified Julian Date (UT)
 	  tdut = TDT - UT in sec
 	*/
-	const double ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
+	double ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
 	Mat3 mx;
 
 	t = julcent (jd) + tdut / 3.15576e9;  // =(86400.0 * 36525.0);
@@ -2212,17 +2211,17 @@ double Eclipse::duration (double jd, double tdut, double& width)
   return dur;
  }
 
-Vec3 Eclipse::GetRSun () const    // get Earth - Sun vector in Earth radii
+Vec3 Eclipse::GetRSun ()    // get Earth - Sun vector in Earth radii
  {
   return rs;
  }
 
-Vec3 Eclipse::GetRMoon () const   // get Earth - Moon vector in Earth radii
+Vec3 Eclipse::GetRMoon ()   // get Earth - Moon vector in Earth radii
  {
   return rm;
  }
 
-double Eclipse::GetEp2 () const   // get the ep2 value
+double Eclipse::GetEp2 ()   // get the ep2 value
  {
   return ep2;
  }
@@ -2247,6 +2246,7 @@ int Eclipse::lunar (double jd, double tdut)
 	double umbra, penumbra;
 	double r2, s0, sep;
 	int phase;
+	Vec3 v1, v2;
 
 	// get position of Sun and Moon
 	equ_sun_moon(jd, tdut);
@@ -2259,7 +2259,7 @@ int Eclipse::lunar (double jd, double tdut)
 	/* (the factor 1.02 allows for enlargment of shadow due to
 		 Earth's atmosphere) */
 
-    // get angular separation of center of shadow and Moon
+	// get angular seperation of center of shadow and Moon
 	r2 = abs(rm);
 	sep = dot(rs,rm)/(abs(rs)*r2);
 	if (fabs(sep) > 1.0) sep = 1.0;

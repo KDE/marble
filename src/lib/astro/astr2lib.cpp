@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2013 Gerhard Holtkamp
+// Copyright 2014 Gerhard Holtkamp
 //
 
 /* =========================================================================
@@ -15,198 +15,194 @@
   and modified correspondingly.
   The library Astrolib has to be included.
 
-  Copyright :Gerhard HOLTKAMP          21-SEP-2004   18:00
+  Copyright :Gerhard HOLTKAMP          26-MAR-2014   
   ========================================================================= */
 
-#include "astr2lib.h"
 #include <cmath>
 using namespace std;
 
 #include "attlib.h"
 #include "astrolib.h"
+#include "astr2lib.h"
 
 extern double frac (double f);
 extern double atan21 (double y, double x);
 
 
 /*-------------------- Class Plan200 --------------------------------------*/
- /*
-	 Ecliptic coordinates (in A.U.) and velocity (in A.U./day)
-	 of the Planets for Equinox of Date given in Julian centuries since J2000.
-	 ======================================================================
-  */
+/*
+ Ecliptic coordinates (in A.U.) and velocity (in A.U./day)
+ of the Planets for Equinox of Date given in Julian centuries since J2000.
+ ======================================================================
+*/
 Plan200::Plan200 ()
   { }
 
-void Plan200::addthe (double c1, double s1, double c2, double s2,
-							double& cc, double& ss)
- {
-	cc=c1*c2-s1*s2;
-	ss=s1*c2+c1*s2;
- }
+void Plan200::addthe (double c1, double s1, double c2, double s2, 							double& cc, double& ss)
+{
+ cc=c1*c2-s1*s2;
+ ss=s1*c2+c1*s2;
+}
 
 void Plan200::term (int i1, int i, int it, double dlc, double dls, double drc,
 			  double drs, double dbc, double dbs)
- {
-	 if (it == 0) addthe (c3[i1],s3[i1],c[i],s[i],u,v);
-	 else
-	  {
-		u=u*tt;
-		v=v*tt;
-	  }
-	 dl = dl + dlc*u + dls*v;
-	 dr = dr + drc*u + drs*v;
-	 db = db + dbc*u + dbs*v;
- }
+{
+ if (it == 0) addthe (c3[i1],s3[i1],c[i],s[i],u,v);
+ else
+  {
+   u=u*tt;
+   v=v*tt;
+  }
+ dl = dl + dlc*u + dls*v;
+ dr = dr + drc*u + drs*v;
+ db = db + dbc*u + dbs*v;
+}
 
-Vec3 Plan200::velocity() const   // return last calculated planet velocity
- {
-  return vp;
- }
+Vec3 Plan200::velocity()   // return last calculated planet velocity
+{
+ return vp;
+}
 
-void Plan200::state (Vec3& rs, Vec3& vs) const
- {
-  /* State vector rs (position) and vs (velocity) of the Sun in
-	  ecliptic of date coordinates for last calculated planet
-	*/
-  rs = rp;
-  vs = vp;
- }
+void Plan200::state (Vec3& rs, Vec3& vs)
+{
+ /* State vector rs (position) and vs (velocity) of the Sun in
+    ecliptic of date coordinates for last calculated planet
+ */
+ rs = rp;
+ vs = vp;
+}
 
 void Plan200::posvel ()
- {
-  /* auxiliary program to calculate position and velocity
-	  vectors rp, vp.
-	  to be called by the various planet procedures.
-	*/
+{
+ /* auxiliary program to calculate position and velocity
+    vectors rp, vp.
+    to be called by the various planet procedures.
+ */
 
-	double	cl, sl, cb, sb;
+ double	cl, sl, cb, sb;
 
-	cl = cos(l); sl = sin(l); cb = cos(b); sb = sin(b);
-	rp[0] = r*cl*cb; rp[1] = r*sl*cb; rp[2] = r*sb;
+ cl = cos(l); sl = sin(l); cb = cos(b); sb = sin(b);
+ rp[0] = r*cl*cb; rp[1] = r*sl*cb; rp[2] = r*sb;
 
-	// velocity
-	vp[0] = (dr*cl*cb - dl*r*sl*cb - db*r*cl*sb) * 1E-4;
-	vp[1] = (dr*sl*cb + dl*r*cl*cb - db*r*sl*sb) * 1E-4;
-	vp[2] = (dr*sb                 + db*r*cb) * 1E-4;
-
- }
+ // velocity
+ vp[0] = (dr*cl*cb - dl*r*sl*cb - db*r*cl*sb) * 1E-4;
+ vp[1] = (dr*sl*cb + dl*r*cl*cb - db*r*sl*sb) * 1E-4;
+ vp[2] = (dr*sb                 + db*r*cb) * 1E-4;
+}
 
 /*--------------------- Mercury ------------------------------------------*/
 
 Vec3 Plan200::Mercury (double t)   // position of Mercury at time t
- {
+{
  /*
-	 Ecliptic coordinates rp (in A.U.) and velocity vp (in A.U./day)
-	 of Mercury for Equinox of Date.
-	 t is the time in Julian centuries since J2000.
-  */
+   Ecliptic coordinates rp (in A.U.) and velocity vp (in A.U./day)
+   of Mercury for Equinox of Date.
+   t is the time in Julian centuries since J2000.
+ */
 
-	 const double arc = 206264.81;    // 3600*180/pi = ''/r
-	 const double p2 = M_PI * 2.0;
+ const double arc = 206264.81;    // 3600*180/pi = ''/r
+ const double p2 = M_PI * 2.0;
 
-	 int i;
+ int i;
 
-	 tt = t;
-	 dl = 0.0; dr = 0.0; db = 0.0;
-	 m1 = p2 * frac(0.4855407 + 415.2014314*t);
-	 m2 = p2 * frac(0.1394222 + 162.5490444*t);
-	 m3 = p2 * frac(0.9937861 + 99.9978139*t);
-	 m5 = p2 * frac(0.0558417 + 8.4298417*t);
-	 m6 = p2 * frac(0.8823333 + 3.3943333*t);
-	 c3[1] = 1.0; s3[1]= 0.0;
-	 c3[2] = cos(m1); s3[2] = sin(m1); c3[0] = c3[2]; s3[0] = -s3[2];
-	 for (i=3; i<11; i++)
-		addthe(c3[i-1],s3[i-1],c3[2],s3[2],c3[i],s3[i]);
+ tt = t;
+ dl = 0.0; dr = 0.0; db = 0.0;
+ m1 = p2 * frac(0.4855407 + 415.2014314*t);
+ m2 = p2 * frac(0.1394222 + 162.5490444*t);
+ m3 = p2 * frac(0.9937861 + 99.9978139*t);
+ m5 = p2 * frac(0.0558417 + 8.4298417*t);
+ m6 = p2 * frac(0.8823333 + 3.3943333*t);
+ c3[1] = 1.0; s3[1]= 0.0;
+ c3[2] = cos(m1); s3[2] = sin(m1); c3[0] = c3[2]; s3[0] = -s3[2];
+ for (i=3; i<11; i++)
+	addthe(c3[i-1],s3[i-1],c3[2],s3[2],c3[i],s3[i]);
 
-	 // perturbations by Venus
-	 c[5] = 1.0; s[5] = 0.0; c[4] = cos(m2); s[4] = -sin(m2);
-	 for (i=4; i>0; i--)
-		addthe(c[i],s[i],c[4],s[4],c[i-1],s[i-1]);
-	 term(2, 5, 0, 259.74, 84547.39, -78342.34,0.01,11683.22,21203.79);
-	 term(2, 5, 1, 2.3, 5.04, -7.52, 0.02, 138.55, -71.01);
-	 term(2, 5, 2, 0.01, -0.01, 0.01, 0.01, -0.19, -0.54);
-	 term(3, 5, 0, -549.71, 10394.44, -7955.45, 0.0, 2390.29, 4306.79);
-	 term(3, 5, 1, -4.77, 8.97, -1.53, 0.0, 28.49, -14.18);
-	 term(3, 5, 2, 0.0, 0.0, 0.0, 0.0, -0.04, -0.11);
-	 term(4, 5, 0, -234.04, 1748.74, -1212.86, 0.0, 535.41, 984.33);
-	 term(4, 5, 1, -2.03, 3.48, -0.35, 0.0, 6.56, -2.91);
-	 term(5, 5, 0, -77.64, 332.63, -219.23, 0.0, 124.4, 237.03);
-	 term(5, 5, 1, -0.7, 1.1, -0.08, 0.0, 1.59, -0.59);
-	 term(6, 5, 0, -23.59, 67.28, -43.54, 0.0, 29.44, 58.77);
-	 term(6, 5, 1, -0.23, 0.32, -0.02, 0.0, 0.39, -0.11);
-	 term(7, 5, 0, -6.86, 14.06, -9.18, 0.0, 7.03, 14.84);
-	 term(7, 5, 1, -0.07, 0.09, -0.01, 0.0, 0.1, -0.02);
-	 term(8, 5, 0, -1.94, 2.98, -2.02, 0.0, 1.69, 3.8);
-	 term(9, 5, 0, -0.54, 0.63, -0.46, 0.0, 0.41, 0.98);
-	 term(10, 5, 0, -0.15, 0.13, -0.11, 0.0, 0.1, 0.25);
-	 term(0, 3, 0, -0.17, -0.06, -0.05, 0.14, -0.06, -0.07);
-	 term(1, 4, 0, 0.24, -0.16, -0.11, -0.16, 0.04, -0.01);
-	 term(1, 3, 0, -0.68, -0.25, -0.26, 0.73, -0.16, -0.18);
-	 term(1, 0, 0, 0.37, 0.08, 0.06, -0.28, 0.13, 0.12);
-	 term(2, 4, 0, 0.58, -0.41, 0.26, 0.36, 0.01, -0.01);
-	 term(2, 3, 0, -3.51, -1.23, 0.23, -0.63, -0.05, -0.06);
-	 term(2, 2, 0, 0.08, 0.53, -0.11, 0.04, 0.02, -0.09);
-	 term(2, 0, 0, 1.44, 0.31, 0.3, -1.39, 0.34, 0.29);
-	 term(3, 4, 0, 0.15, -0.11, 0.09, 0.12, 0.02, -0.04);
-	 term(3, 3, 0, -1.99, -0.68, 0.65, -1.91, -0.2, 0.03);
-	 term(3, 2, 0, -0.34, -1.28, 0.97, -0.26, 0.03, 0.03);
-	 term(3, 1, 0, -0.33, 0.35, -0.13, -0.13, -0.01, 0.0);
-	 term(3, 0, 0, 7.19, 1.56, -0.05, 0.12, 0.06, 0.05);
-	 term(4, 3, 0, -0.52, -0.18, 0.13, -0.39, -0.16, 0.03);
-	 term(4, 2, 0, -0.11, -0.42, 0.36, -0.1, -0.05, -0.05);
-	 term(4, 1, 0, -0.19, 0.22, -0.23, -0.2, -0.01, 0.02);
-	 term(4, 0, 0, 2.77, 0.49, -0.45, 2.56, 0.4, -0.12);
-	 term(5, 0, 0, 0.67, 0.12, -0.09, 0.47, 0.24, -0.08);
-	 term(6, 0, 0, 0.18, 0.03, -0.02, 0.12, 0.09, -0.03);
+ // perturbations by Venus
+ c[5] = 1.0; s[5] = 0.0; c[4] = cos(m2); s[4] = -sin(m2);
+ for (i=4; i>0; i--)
+	addthe(c[i],s[i],c[4],s[4],c[i-1],s[i-1]);
+ term(2, 5, 0, 259.74, 84547.39, -78342.34,0.01,11683.22,21203.79);
+ term(2, 5, 1, 2.3, 5.04, -7.52, 0.02, 138.55, -71.01);
+ term(2, 5, 2, 0.01, -0.01, 0.01, 0.01, -0.19, -0.54);
+ term(3, 5, 0, -549.71, 10394.44, -7955.45, 0.0, 2390.29, 4306.79);
+ term(3, 5, 1, -4.77, 8.97, -1.53, 0.0, 28.49, -14.18);
+ term(3, 5, 2, 0.0, 0.0, 0.0, 0.0, -0.04, -0.11);
+ term(4, 5, 0, -234.04, 1748.74, -1212.86, 0.0, 535.41, 984.33);
+ term(4, 5, 1, -2.03, 3.48, -0.35, 0.0, 6.56, -2.91);
+ term(5, 5, 0, -77.64, 332.63, -219.23, 0.0, 124.4, 237.03);
+ term(5, 5, 1, -0.7, 1.1, -0.08, 0.0, 1.59, -0.59);
+ term(6, 5, 0, -23.59, 67.28, -43.54, 0.0, 29.44, 58.77);
+ term(6, 5, 1, -0.23, 0.32, -0.02, 0.0, 0.39, -0.11);
+ term(7, 5, 0, -6.86, 14.06, -9.18, 0.0, 7.03, 14.84);
+ term(7, 5, 1, -0.07, 0.09, -0.01, 0.0, 0.1, -0.02);
+ term(8, 5, 0, -1.94, 2.98, -2.02, 0.0, 1.69, 3.8);
+ term(9, 5, 0, -0.54, 0.63, -0.46, 0.0, 0.41, 0.98);
+ term(10, 5, 0, -0.15, 0.13, -0.11, 0.0, 0.1, 0.25);
+ term(0, 3, 0, -0.17, -0.06, -0.05, 0.14, -0.06, -0.07);
+ term(1, 4, 0, 0.24, -0.16, -0.11, -0.16, 0.04, -0.01);
+ term(1, 3, 0, -0.68, -0.25, -0.26, 0.73, -0.16, -0.18);
+ term(1, 0, 0, 0.37, 0.08, 0.06, -0.28, 0.13, 0.12);
+ term(2, 4, 0, 0.58, -0.41, 0.26, 0.36, 0.01, -0.01);
+ term(2, 3, 0, -3.51, -1.23, 0.23, -0.63, -0.05, -0.06);
+ term(2, 2, 0, 0.08, 0.53, -0.11, 0.04, 0.02, -0.09);
+ term(2, 0, 0, 1.44, 0.31, 0.3, -1.39, 0.34, 0.29);
+ term(3, 4, 0, 0.15, -0.11, 0.09, 0.12, 0.02, -0.04);
+ term(3, 3, 0, -1.99, -0.68, 0.65, -1.91, -0.2, 0.03);
+ term(3, 2, 0, -0.34, -1.28, 0.97, -0.26, 0.03, 0.03);
+ term(3, 1, 0, -0.33, 0.35, -0.13, -0.13, -0.01, 0.0);
+ term(3, 0, 0, 7.19, 1.56, -0.05, 0.12, 0.06, 0.05);
+ term(4, 3, 0, -0.52, -0.18, 0.13, -0.39, -0.16, 0.03);
+ term(4, 2, 0, -0.11, -0.42, 0.36, -0.1, -0.05, -0.05);
+ term(4, 1, 0, -0.19, 0.22, -0.23, -0.2, -0.01, 0.02);
+ term(4, 0, 0, 2.77, 0.49, -0.45, 2.56, 0.4, -0.12);
+ term(5, 0, 0, 0.67, 0.12, -0.09, 0.47, 0.24, -0.08);
+ term(6, 0, 0, 0.18, 0.03, -0.02, 0.12, 0.09, -0.03);
 
-	 // perturbations by Earth
-	 c[4] = cos(m3); s[4] = -sin(m3);
-	 for (i=4; i>1; i--)
-		addthe(c[i],s[i],c[4],s[4],c[i-1],s[i-1]);
-	 term(1, 1, 0, -0.11, -0.07, -0.08, 0.11, -0.02, -0.04);
-	 term(2, 4, 0, 0.1, -0.2, 0.15, 0.07, 0.0, 0.0);
-	 term(2, 3, 0, -0.35, 0.28, -0.13, -0.17, -0.01, 0.0);
-	 term(2, 1, 0, -0.67, -0.45, 0.0, 0.01, -0.01, -0.01);
-	 term(3, 3, 0, -0.2, 0.16, -0.16, -0.2, -0.01, 0.02);
-	 term(3, 2, 0, 0.13, -0.02, 0.02, 0.14, 0.01, 0.0);
-	 term(3, 1, 0, -0.33, -0.18, 0.17, -0.31, -0.04, 0.0);
+ // perturbations by Earth
+ c[4] = cos(m3); s[4] = -sin(m3);
+ for (i=4; i>1; i--)
+	addthe(c[i],s[i],c[4],s[4],c[i-1],s[i-1]);
+ term(1, 1, 0, -0.11, -0.07, -0.08, 0.11, -0.02, -0.04);
+ term(2, 4, 0, 0.1, -0.2, 0.15, 0.07, 0.0, 0.0);
+ term(2, 3, 0, -0.35, 0.28, -0.13, -0.17, -0.01, 0.0);
+ term(2, 1, 0, -0.67, -0.45, 0.0, 0.01, -0.01, -0.01);
+ term(3, 3, 0, -0.2, 0.16, -0.16, -0.2, -0.01, 0.02);
+ term(3, 2, 0, 0.13, -0.02, 0.02, 0.14, 0.01, 0.0);
+ term(3, 1, 0, -0.33, -0.18, 0.17, -0.31, -0.04, 0.0);
 
-	 // perturbations by Jupiter
-	 c[4] = cos(m5); s[4] = -sin(m5);
-	 for (i=4; i>2; i--)
-		addthe(c[i],s[i],c[4],s[4],c[i-1],s[i-1]);
-	 term(0, 4, 0, -0.08, 0.16, 0.15, 0.08, -0.04, 0.01);
-	 term(0, 3, 0, 0.1, -0.06, -0.07, -0.12, 0.07, -0.01);
-	 term(1, 4, 0, -0.31, 0.48, -0.02, 0.13, -0.03, -0.02);
-	 term(1, 3, 0, 0.42, -0.26, -0.38, -0.5, 0.2, -0.03);
-	 term(2, 4, 0, -0.7, 0.01, -0.02, -0.63, 0.0, 0.03);
-	 term(2, 3, 0, 2.61, -1.97, 1.74, 2.32, 0.01, 0.01);
-	 term(2, 2, 0, 0.32, -0.15, 0.13, 0.28, 0.0, 0.0);
-	 term(3, 4, 0, -0.18, 0.01, 0.0, -0.13, -0.03, 0.03);
-	 term(3, 3, 0, 0.75, -0.56, 0.45, 0.6, 0.08, -0.17);
-	 term(4, 3, 0, 0.2, -0.15, 0.1, 0.14, 0.04, -0.08);
+ // perturbations by Jupiter
+ c[4] = cos(m5); s[4] = -sin(m5);
+ for (i=4; i>2; i--)
+	addthe(c[i],s[i],c[4],s[4],c[i-1],s[i-1]);
+ term(0, 4, 0, -0.08, 0.16, 0.15, 0.08, -0.04, 0.01);
+ term(0, 3, 0, 0.1, -0.06, -0.07, -0.12, 0.07, -0.01);
+ term(1, 4, 0, -0.31, 0.48, -0.02, 0.13, -0.03, -0.02);
+ term(1, 3, 0, 0.42, -0.26, -0.38, -0.5, 0.2, -0.03);
+ term(2, 4, 0, -0.7, 0.01, -0.02, -0.63, 0.0, 0.03);
+ term(2, 3, 0, 2.61, -1.97, 1.74, 2.32, 0.01, 0.01);
+ term(2, 2, 0, 0.32, -0.15, 0.13, 0.28, 0.0, 0.0);
+ term(3, 4, 0, -0.18, 0.01, 0.0, -0.13, -0.03, 0.03);
+ term(3, 3, 0, 0.75, -0.56, 0.45, 0.6, 0.08, -0.17);
+ term(4, 3, 0, 0.2, -0.15, 0.1, 0.14, 0.04, -0.08);
 
-	 // perturbations by Saturn
-	 c[3] = cos(2*m6); s[3] = -sin(2*m6);
-	 term(2, 3, 0, -0.19, 0.33, 0.0, 0.0, 0.0, 0.0);
+ // perturbations by Saturn
+ c[3] = cos(2*m6); s[3] = -sin(2*m6);
+ term(2, 3, 0, -0.19, 0.33, 0.0, 0.0, 0.0, 0.0);
 
-	 dl = dl + (2.8 + 3.2*t);
-	 l = p2 * frac(0.2151379 + m1/p2 + ((5601.7+1.1*t)*t+dl)/1296.0e3);
-	 b = (-2522.15+(-30.18+0.04*t)*t+db) / arc;
-	 r = 0.3952829 +0.0000016*t + dr*1.0e-6;
+ dl = dl + (2.8 + 3.2*t);
+ l = p2 * frac(0.2151379 + m1/p2 + ((5601.7+1.1*t)*t+dl)/1296.0e3);
+ b = (-2522.15+(-30.18+0.04*t)*t+db) / arc;
+ r = 0.3952829 +0.0000016*t + dr*1.0e-6;
+ dl = 714.0+292.66*cos(m1)+71.96*cos(2*m1)+18.16*cos(3*m1)
+		  +4.61*cos(4*m1)+3.81*sin(2*m1)+2.43*sin(3*m1)+1.08*sin(4*m1);
+ dr = 55.94*sin(m1)+11.36*sin(2*m1)+2.6*sin(3*m1);
+ db = 73.4*cos(m1)+29.82*cos(2*m1)+10.22*cos(3*m1)+3.28*cos(4*m1)
+		  -40.44*sin(m1)-16.55*sin(2*m1)-5.56*sin(3*m1)-1.72*sin(4*m1);
 
-	 dl = 714.0+292.66*cos(m1)+71.96*cos(2*m1)+18.16*cos(3*m1)
-			  +4.61*cos(4*m1)+3.81*sin(2*m1)+2.43*sin(3*m1)+1.08*sin(4*m1);
-	 dr = 55.94*sin(m1)+11.36*sin(2*m1)+2.6*sin(3*m1);
-	 db = 73.4*cos(m1)+29.82*cos(2*m1)+10.22*cos(3*m1)+3.28*cos(4*m1)
-			  -40.44*sin(m1)-16.55*sin(2*m1)-5.56*sin(3*m1)-1.72*sin(4*m1);
+ posvel();
 
-	 posvel();
-
-	return rp;
- }
-
+return rp;
+}
 
 /*--------------------- Venus ------------------------------------------*/
 
@@ -1041,7 +1037,7 @@ Vec3 Plan200::Pluto (double t)   // position of Pluto at time t
   California, 1992. A number of errors in chapter 6 of this book have
   been identified and corrected in the code used here.
 
-  Copyright :Gerhard HOLTKAMP          21-MAY-2000   18:00
+  Copyright :Gerhard HOLTKAMP          25-MAR-2014   
   ========================================================================= */
 
 
@@ -1502,6 +1498,164 @@ Vec3 PosCallisto (double t)
 
  }
 
+/*-------------------- Mimas, Enceladus, Dione ---------------------*/
+Vec3 PosSMimas (double t)
+{
+ /* Ecliptic coordinates (in A.U.) of Mimas with respect to Saturn 
+    for Equinox of Date.
+    t is the time in Julian centuries since J2000.
+  ===================================================================*/
+ const double ie = 28.0771*M_PI/180.0;
+ const double oe = 168.8263*M_PI/180.0;
+
+ double d, dt, tt, a, n, ecc, gam, th1, l1, p, m;
+ Vec3 rs;
+ Mat3 mt1; 
+
+ d = 36525.0*t + 40452.0;
+ dt = d / 365.25;
+ tt = 5.0616*(((36525*t + 18262.577000)/365.25)+1950.0-1866.06);
+ tt = M_PI / 180.0;
+ a = 0.00124171;
+ n = 381.994516;
+ ecc = 0.01986;
+ gam = 0.0274017; // 1.570;
+ th1 = 49.4 - 365.025*dt;
+ l1 = 128.839 + n*d - 43.415*sin(tt) - 0.714*sin(3.0*tt) - 0.020*sin(5.0*tt);
+ p = 107.0 + 365.560*dt;
+
+ // in-orbit-plane position vector
+ m = l1 - p; // mean anomaly
+ m = m * M_PI / 180.0;
+ m = eccanom (m, ecc);  // eccentric anomaly
+ rs.assign (a*(cos(m) - ecc), a*sqrt(1.0 - ecc*ecc)*sin(m), 0);
+
+ // convert to ecliptic coordinates
+ m = p - th1;
+ m = m * M_PI / 180.0;
+ mt1 = zrot (-m);
+ rs = mxvct (mt1, rs);
+ mt1 = xrot (-gam);
+ rs = mxvct (mt1, rs);
+ m = th1*M_PI/180.0 - oe;
+ mt1 = zrot (-m);
+ rs = mxvct (mt1, rs);
+ mt1 = xrot (-ie);
+ rs = mxvct (mt1, rs);
+ mt1 = zrot (-oe);
+ rs = mxvct (mt1, rs);
+
+ // convert to ecliptic coordinates of date
+ mt1 = pmatecl (-0.500002096, t);
+ rs = mxvct (mt1, rs);
+
+ return rs;
+}
+
+Vec3 PosSEnceladus (double t)
+{
+ /* Ecliptic coordinates (in A.U.) of Enceladus with respect to Saturn 
+    for Equinox of Date.
+    t is the time in Julian centuries since J2000.
+  ===================================================================*/
+ const double ie = 28.0771*M_PI/180.0;
+ const double oe = 168.8263*M_PI/180.0;
+
+ double d, dt, tt, a, n, ecc, gam, th1, l1, p, m;
+ Vec3 rs;
+ Mat3 mt1;
+
+ d = 36525.0*t + 40452.0;
+ dt = d / 365.25;
+ a = 0.00158935;
+ n = 262.7319052;
+ ecc = 0.00532;
+ gam = 0.000628319; //  0.036;
+ th1 = 145.0 - 152.7*dt;
+ l1 = 200.155 + n*d + 0.256333 * sin((59.4+32.73*dt)*M_PI/180.0)
+      + 0.217333 * sin((119.2+93.18*dt)*M_PI/180.0); 
+ p = 312.7 + 123.42*dt;
+
+ // in-orbit-plane position vector
+ m = l1 - p; // mean anomaly
+ m = m * M_PI / 180.0;
+ m = eccanom (m, ecc);  // eccentric anomaly
+ rs.assign (a*(cos(m) - ecc), a*sqrt(1.0 - ecc*ecc)*sin(m), 0);
+
+ // convert to ecliptic coordinates
+ m = p - th1;
+ m = m * M_PI / 180.0;
+ mt1 = zrot (-m);
+ rs = mxvct (mt1, rs);
+ mt1 = xrot (-gam);
+ rs = mxvct (mt1, rs);
+ m = th1*M_PI/180.0 - oe;
+ mt1 = zrot (-m);
+ rs = mxvct (mt1, rs);
+ mt1 = xrot (-ie);
+ rs = mxvct (mt1, rs);
+ mt1 = zrot (-oe);
+ rs = mxvct (mt1, rs);
+
+ // convert to ecliptic coordinates of date
+ mt1 = pmatecl (-0.500002096, t);
+ rs = mxvct (mt1, rs);
+
+ return rs;
+}
+ 
+Vec3 PosSDione (double t)
+{
+ /* Ecliptic coordinates (in A.U.) of Dione with respect to Saturn 
+    for Equinox of Date.
+    t is the time in Julian centuries since J2000.
+  ===================================================================*/
+
+ const double ie = 28.0771*M_PI/180.0;
+ const double oe = 168.8263*M_PI/180.0;
+
+ double d, dt, tt, a, n, ecc, gam, th1, l1, p, m;
+ Vec3 rs;
+ Mat3 mt1;
+
+ d = 36525.0*t + 40452.0;
+ dt = d / 365.25;
+ a = 0.00252413;
+ n = 131.534920026;
+ ecc = 0.001715;
+ gam = 0.0005044; // 0.0289;
+ th1 = 228.0 - 30.6197 * dt;
+ l1 = 255.1183 + n*d - 0.0146667 * sin((59.4+32.73*dt)*M_PI/180.0)
+      - 0.0125 * sin((119.2+93.18*dt)*M_PI/180.0);
+ p = 173.6 + 30.8381 * dt;
+
+ // in-orbit-plane position vector
+ m = l1 - p; // mean anomaly
+ m = m * M_PI / 180.0;
+ m = eccanom (m, ecc);  // eccentric anomaly
+ rs.assign (a*(cos(m) - ecc), a*sqrt(1.0 - ecc*ecc)*sin(m), 0);
+
+ // convert to ecliptic coordinates
+ m = p - th1;
+ m = m * M_PI / 180.0;
+ mt1 = zrot (-m);
+ rs = mxvct (mt1, rs);
+ mt1 = xrot (-gam);
+ rs = mxvct (mt1, rs);
+ m = th1*M_PI/180.0 - oe;
+ mt1 = zrot (-m);
+ rs = mxvct (mt1, rs);
+ mt1 = xrot (-ie);
+ rs = mxvct (mt1, rs);
+ mt1 = zrot (-oe);
+ rs = mxvct (mt1, rs);
+
+ // convert to ecliptic coordinates of date
+ mt1 = pmatecl (-0.500002096, t);
+ rs = mxvct (mt1, rs);
+
+ return rs;
+}
 
 /*--------------------- JupIo --------------------------------------*/
 void JupIo (double t, Vec3& rs, Vec3& vs)
@@ -1594,7 +1748,6 @@ void JupCallisto (double t, Vec3& rs, Vec3& vs)
 	 rs = PosCallisto (t);
 
   }
-
 
 /*----------------------- SatRhea ------------------------------------*/
 void SatRhea (double t, Vec3& rs, Vec3& vs)

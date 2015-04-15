@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2013 Gerhard Holtkamp
+// Copyright 2014 Gerhard Holtkamp
 //
 
 /***********************************************************************
@@ -17,9 +17,10 @@
  ***********************************************************************/
 
 //#include <iostream>
-#include "attlib.h"
 #include <cmath>
 using namespace std;
+                       
+#include "attlib.h"
 
 /*********************************************************************/
 double atan20 (double y, double x)
@@ -274,7 +275,7 @@ void Mat3::PutMij (double x, int i, int j)
   if ((i>0) && (i<4) && (j>0) && (j<4)) m[i-1][j-1] = x;
  }
 
-double Mat3::GetMij (int i, int j) const
+double Mat3::GetMij (int i, int j)
  {
   double result;
 

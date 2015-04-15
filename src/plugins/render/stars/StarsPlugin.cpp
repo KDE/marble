@@ -810,7 +810,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 dateTime.time().hour(), dateTime.time().minute(),
                 (double)dateTime.time().second());
     QString const pname = planetId.at(0).toUpper() + planetId.right(planetId.size() - 1);
-    QByteArray const name = pname.toLatin1();
+    QByteArray name = pname.toLatin1();
     sys.setCentralBody( name.data() );
 
     Vec3 skyVector = sys.getPlanetocentric (0.0, 0.0);
