@@ -6,8 +6,13 @@ if(QUAZIP_INCLUDE_DIR AND QUAZIP_LIBRARIES)
   set(QUAZIP_FOUND TRUE)
 else(QUAZIP_INCLUDE_DIR AND QUAZIP_LIBRARIES)
 
+  if(QT5BUILD)
+  find_path(QUAZIP_INCLUDE_DIR NAMES quazip5/quazip.h)
+  find_library(QUAZIP_LIBRARIES NAMES quazip5)
+  else(QT5BUILD)
   find_path(QUAZIP_INCLUDE_DIR NAMES quazip/quazip.h)
   find_library(QUAZIP_LIBRARIES NAMES quazip)
+  endif(QT5BUILD)
 
   include(FindPackageHandleStandardArgs)
   find_package_handle_standard_args(quazip DEFAULT_MSG QUAZIP_INCLUDE_DIR QUAZIP_LIBRARIES)
