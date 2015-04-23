@@ -38,9 +38,9 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
     iconLabel->setPixmap( QPixmap( ":/marble/flag.png" ) );
     layout->addWidget( iconLabel );
 
-    QLabel *waitLabel = new QLabel;
-    waitLabel->setText(tr("Wait duration:"));
-    layout->addWidget(waitLabel);
+    QLabel *durationLabel = new QLabel;
+    durationLabel->setText(tr("Fly duration:"));
+    layout->addWidget(durationLabel);
 
     m_waitSpin = new QDoubleSpinBox;
     layout->addWidget(m_waitSpin);
