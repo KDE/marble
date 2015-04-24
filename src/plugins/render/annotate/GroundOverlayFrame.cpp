@@ -194,7 +194,7 @@ bool GroundOverlayFrame::containsPoint( const QPoint &eventPos ) const
     }
 
     // This is a bugfix to handle the events even if they occur outside of this object,
-    // so when rotating or resizing the mouseReleaseEvent is handled succesfully
+    // so when rotating or resizing the mouseReleaseEvent is handled successfully
     // TODO: maybe find a better way?
     if( m_movedHandle   != NoRegion ||
         m_hoveredHandle != NoRegion ) {
