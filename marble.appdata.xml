@@ -15,6 +15,7 @@
   <name xml:lang="fi">Marble</name>
   <name xml:lang="fr">Marble</name>
   <name xml:lang="it">Marble</name>
+  <name xml:lang="ko">Marble</name>
   <name xml:lang="lt">Marble</name>
   <name xml:lang="nds">Marble</name>
   <name xml:lang="nl">Marble</name>
@@ -40,6 +41,7 @@
   <summary xml:lang="fi">Virtuaalinen maapallo</summary>
   <summary xml:lang="fr">Globe terrestre virtuel</summary>
   <summary xml:lang="it">Globo virtuale</summary>
+  <summary xml:lang="ko">가상 지구본</summary>
   <summary xml:lang="lt">Virtualus gaublys</summary>
   <summary xml:lang="nds">Virtuell Globus</summary>
   <summary xml:lang="nl">Virtuele globe</summary>
