@@ -63,16 +63,15 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
 
     m_modeCombo = new QComboBox;
     modeLayout->addWidget( m_modeCombo );
-    m_modeCombo->addItem( tr("") );
     m_modeCombo->addItem( tr("Smooth") );
     m_modeCombo->addItem( tr("Bounce") );
 
     if( flyToElement()->flyToMode() == GeoDataFlyTo::Smooth ){
-        m_modeCombo->setCurrentIndex( 1 );
-    } else if( flyToElement()->flyToMode() == GeoDataFlyTo::Bounce ){
-        m_modeCombo->setCurrentIndex( 2 );
-    } else {
         m_modeCombo->setCurrentIndex( 0 );
+    } else if( flyToElement()->flyToMode() == GeoDataFlyTo::Bounce ){
+        m_modeCombo->setCurrentIndex( 1 );
+    } else {
+        m_modeCombo->setCurrentIndex( -1 );
     }
 
     pairLayout->addLayout( durationLayout );
