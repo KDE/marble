@@ -164,6 +164,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         GeoDataUpdate *update = animUpdate->update();
         QString text;
         bool ok = false;
+        QString iconString;
         if( update && update->create() && update->create()->size() != 0
                    && ( update->create()->first().nodeType() == GeoDataTypes::GeoDataFolderType ||
                         update->create()->first().nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
@@ -171,13 +172,16 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             if( container->size() > 0 ) {
                 label.setHtml( tr( "Create item %1" ).arg( container->first().id() ) );
                 ok = true;
+                iconString = "/icons/add-placemark.png";
             }
         } else if( update && update->getDelete() && update->getDelete()->size() != 0 ){
             label.setHtml( tr( "Remove item %1" ).arg( update->getDelete()->first().targetId() ) );
             ok = true;
+            iconString = ":/icons/remove.png";
         } else if( update && update->change() && update->change()->size() != 0 ){
             label.setHtml( tr( "Change item %1" ).arg( update->change()->first().targetId() ) );
             ok = true;
+            iconString = ":/marble/document-edit.png";
         }
         if( update && !ok ) {
             label.setHtml( tr( "Update items" ) );
@@ -194,7 +198,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         QRect const buttonRect = position( EditButton, option );
         button.rect = buttonRect;
 
-        QIcon const icon = QIcon( ":/marble/player-time.png" );
+        QIcon const icon = QIcon( iconString );
         painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
     }
     QApplication::style()->drawControl( QStyle::CE_PushButton, &button, painter );

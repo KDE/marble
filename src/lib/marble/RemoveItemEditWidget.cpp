@@ -33,7 +33,7 @@ RemoveItemEditWidget::RemoveItemEditWidget( const QModelIndex &index, QWidget *p
     layout->setSpacing( 5 );
 
     QLabel* iconLabel = new QLabel;
-    iconLabel->setPixmap( QPixmap( ":/marble/player-time.png" ) );
+    iconLabel->setPixmap( QPixmap( ":/icons/remove.png" ) );
     layout->addWidget( iconLabel );
 
     QLabel* comboBoxLabel = new QLabel;
