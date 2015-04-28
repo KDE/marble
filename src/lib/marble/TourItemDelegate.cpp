@@ -172,7 +172,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             if( container->size() > 0 ) {
                 label.setHtml( tr( "Create item %1" ).arg( container->first().id() ) );
                 ok = true;
-                iconString = "/icons/add-placemark.png";
+                iconString = ":/icons/add-placemark.png";
             }
         } else if( update && update->getDelete() && update->getDelete()->size() != 0 ){
             label.setHtml( tr( "Remove item %1" ).arg( update->getDelete()->first().targetId() ) );
