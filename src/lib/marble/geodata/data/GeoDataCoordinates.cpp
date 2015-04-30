@@ -944,7 +944,10 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
                                                     int precision,
                                                     char format )
 {
-    //Q_ASSERT( notation != GeoDataCoordinates::UTM );
+    if( notation == GeoDataCoordinates::UTM ){
+        // Try his best without knowing latitude
+        return lonToUTMString( lon, 0, unit );
+    }
 
     QString weString = ( lon < 0 ) ? tr("W") : tr("E");
 
@@ -1088,7 +1091,10 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
                                                     int precision,
                                                     char format )
 {
-    //Q_ASSERT( notation != GeoDataCoordinates::UTM );
+    if( notation == GeoDataCoordinates::UTM ){
+        // Try his best without knowing longitude
+        return latToUTMString( 0, lat, unit );
+    }
 
     QString pmString;
     QString nsString;
@@ -1184,6 +1190,19 @@ QString GeoDataCoordinates::latToString() const
 QString GeoDataCoordinates::lonLatToUTMString( qreal lon, qreal lat,
                                                     GeoDataCoordinates::Unit unit)
 {
+    return GeoDataCoordinates::lonToUTMString(lon, lat, unit) +
+           QString(", ") +
+           GeoDataCoordinates::latToUTMString(lon, lat, unit);
+}
+
+QString GeoDataCoordinates::lonLatToUTMString() const
+{
+    return GeoDataCoordinates::lonLatToUTMString( d->m_lon, d->m_lat );
+}
+
+QString GeoDataCoordinates::lonToUTMString( qreal lon, qreal lat,
+                                                       GeoDataCoordinates::Unit unit)
+{
     // Converts lon and lat to degrees
     qreal lonDeg = (unit == GeoDataCoordinates::Degree) ? lon : lon*RAD2DEG;
     qreal latDeg = (unit == GeoDataCoordinates::Degree) ? lat : lat*RAD2DEG;
@@ -1211,7 +1230,22 @@ QString GeoDataCoordinates::lonLatToUTMString( qreal lon, qreal lat,
             zoneNumber = 37;
     }
 
+    return QString::number(zoneNumber);
+}
+
+QString GeoDataCoordinates::lonToUTMString()
+{
+    return GeoDataCoordinates::lonToUTMString( d->m_lon , d->m_lat );
+}
+
+QString GeoDataCoordinates::latToUTMString( qreal lon, qreal lat,
+                                                        GeoDataCoordinates::Unit unit)
+{
     // Obtains the latitude bands handling all the so called "exceptions"
+
+    // Converts lon and lat to degrees
+    qreal lonDeg = (unit == GeoDataCoordinates::Degree) ? lon : lon*RAD2DEG;
+    qreal latDeg = (unit == GeoDataCoordinates::Degree) ? lat : lat*RAD2DEG;
 
     // Regular latitude bands between 80 S and 80 N (that is, between 10 and 170 in the [0,180] interval)
     int bandLetterIndex = 24; //Avoids "may be used uninitilized" warning
@@ -1222,22 +1256,19 @@ QString GeoDataCoordinates::lonLatToUTMString( qreal lon, qreal lat,
     }
     else if( latDeg < -80 ){
         // South pole (A for zones 1-30, B for zones 31-60)
-        bandLetterIndex = (zoneNumber < 31) ? 0 : 1;
+        bandLetterIndex = ((lonDeg+180) < 6*31) ? 0 : 1;
     }
     else if( latDeg > 80 ){
         // North pole (Y for zones 1-30, Z for zones 31-60)
-        bandLetterIndex = (zoneNumber < 31) ? 22 : 23;
+        bandLetterIndex = ((lonDeg+180) < 6*31) ? 22 : 23;
     }
 
-    QString latitudeBand = QString( "ABCDEFGHJKLMNPQRSTUVWXYZ?" ).at( bandLetterIndex );
-
-    return QString::number(zoneNumber) + QString(", ") + latitudeBand;
-
+    return QString( "ABCDEFGHJKLMNPQRSTUVWXYZ?" ).at( bandLetterIndex );
 }
 
-QString GeoDataCoordinates::lonLatToUTMString() const
+QString GeoDataCoordinates::latToUTMString()
 {
-    return GeoDataCoordinates::lonLatToUTMString( d->m_lon, d->m_lat );
+    return GeoDataCoordinates::latToUTMString( d->m_lon , d->m_lat );
 }
 
 bool GeoDataCoordinates::operator==( const GeoDataCoordinates &rhs ) const
