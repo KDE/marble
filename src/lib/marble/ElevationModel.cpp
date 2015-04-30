@@ -132,13 +132,12 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
 
         Q_ASSERT( 0 <= dx && dx <= 1 );
         Q_ASSERT( 0 <= dy && dy <= 1 );
-        unsigned int pixel;
-        pixel = image->pixel( x % width, y % height );
-        pixel -= 0xFF000000; //fully opaque
+        unsigned int pixel = image->pixel( x % width, y % height ) & 0xffff; // 16 valid bits
+        short int elevation = (short int) pixel; // and signed type, so just cast it
         //mDebug() << "(1-dx)" << (1-dx) << "(1-dy)" << (1-dy);
         if ( pixel != invalidElevationData ) { //no data?
             //mDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel << "** RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
-            ret += ( qreal )pixel * ( 1 - dx ) * ( 1 - dy );
+            ret += ( qreal )elevation * ( 1 - dx ) * ( 1 - dy );
             hasHeight = true;
         } else {
             //mDebug() << "no data at" <<  x % width << "y" << y % height;
