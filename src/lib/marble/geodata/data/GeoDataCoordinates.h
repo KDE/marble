@@ -375,6 +375,13 @@ class GEODATA_EXPORT GeoDataCoordinates
      * convenience function that uses the default notation
      */
     QString latToString() const;
+
+    static QString lonLatToUTMString( qreal lon, qreal lat,
+                                           GeoDataCoordinates::Unit unit = Radian);
+    /**
+     * @brief return a string representation of UTM longitude
+     */
+    QString lonLatToUTMString() const;
     
     virtual bool operator==( const GeoDataCoordinates& ) const;
     virtual bool operator !=( const GeoDataCoordinates& ) const;
