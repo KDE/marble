@@ -936,7 +936,11 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
                                                     char format )
 {
     if ( notation == UTM ) {
-        int zoneNumber = static_cast<int>( lon / 6.0 ) + 30;
+        //Converts lon from [-180,180] (degree) or [-M_PI,M_PI] (radian) to [0,360]
+        qreal lon360 = (unit == Degree) ? lon+180 : lon*RAD2DEG+180;
+
+        //Divides into 60 zones of 6 degrees.
+        int zoneNumber = static_cast<int>( lon360 / 6.0 ) + 1;
         return QString::number( zoneNumber );
     }
 
@@ -1083,8 +1087,20 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
                                                     char format )
 {
     if ( notation == UTM ) {
-        int bandLetterIndex = static_cast<int>( lat / 8.0 ) + 10;
-        return QString( "CDEFGHJKLMNPQRSTUVWX???" ).at( bandLetterIndex );
+        //Converts lat from [-90,90] (degree) or [-M_PI/2,M_PI/2] (radian) to [0,180]
+        qreal lat180 = (unit == Degree) ? lat+90 : lat*RAD2DEG+90;
+
+        //Regular latitude bands between 80 S and 80 N (that is, between 10 and 170 in the [0,180] interval)
+        int bandLetterIndex;
+
+        if(lat180 >= 10 && lat180 <= 170){
+            bandLetterIndex = static_cast<int>( lat180 / 8.0) - 1;
+        }
+        else{
+            bandLetterIndex = 20;
+        }
+
+        return QString( "CDEFGHJKLMNPQRSTUVWX?" ).at( bandLetterIndex );
     }
 
     QString pmString;
