@@ -305,6 +305,22 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
 {
     GeoDataLatLonAltBox viewLatLonAltBox = viewport->viewLatLonAltBox();
 
+    painter->setPen( equatorCirclePen );
+
+    LabelPositionFlags mainPosition(NoLabel);
+    if ( m_showPrimaryLabels ) {
+        mainPosition = LineCenter;
+    }
+    // Render the equator
+    renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ), mainPosition );
+
+    // Render the Prime Meridian and Antimeridian
+    GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
+    if (marbleModel()->planet()->id() != "sky" && notation != GeoDataCoordinates::Astro) {
+        renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, 0.0, tr( "Prime Meridian" ), mainPosition );
+        renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, 0.0, tr( "Antimeridian" ), mainPosition );
+    }
+
     painter->setPen( gridCirclePen );
     // painter->setPen( QPen( QBrush( Qt::white ), 0.75 ) );
 
@@ -325,7 +341,6 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
 
         renderLatitudeLines( painter, viewLatLonAltBox, 8.0 /*,
                              LineStart | IgnoreYMargin */ );
-
         return;
     }
 
@@ -367,22 +382,6 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
                             );
         renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep,
                             NoLabel );
-    }
-                            
-    painter->setPen( equatorCirclePen );
-
-    LabelPositionFlags mainPosition(NoLabel);
-    if ( m_showPrimaryLabels ) {
-        mainPosition = LineCenter;
-    }
-    // Render the equator
-    renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ), mainPosition );
-
-    // Render the Prime Meridian and Antimeridian
-    GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
-    if (marbleModel()->planet()->id() != "sky" && notation != GeoDataCoordinates::Astro) {
-        renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, 0.0, tr( "Prime Meridian" ), mainPosition );
-        renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, 0.0, tr( "Antimeridian" ), mainPosition );
     }
 
     QPen tropicsPen = tropicsCirclePen;
