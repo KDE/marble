@@ -329,18 +329,19 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
         renderLatitudeLine( painter, 84.0, viewLatLonAltBox );
 
         renderLongitudeLines( painter, viewLatLonAltBox,
-                    6.0, 18.0, 154.0, LineStart | IgnoreXMargin );
+                    6.0, 18.0, 154.0, LineEnd | IgnoreXMargin );
         renderLongitudeLines( painter, viewLatLonAltBox,
                     6.0, 34.0, 10.0, LineStart | IgnoreXMargin );
 
-        // Paint longtudes with exceptions
+        // Paint longitudes with exceptions
         renderLongitudeLines( painter, viewLatLonAltBox,
-                    6.0, 6.0, 162.0 );
+                    6.0, 6.0, 162.0, LineEnd | IgnoreXMargin );
         renderLongitudeLines( painter, viewLatLonAltBox,
-                    6.0, 26.0, 146.0 );
+                    6.0, 26.0, 146.0, LineEnd | IgnoreXMargin  );
 
         renderLatitudeLines( painter, viewLatLonAltBox, 8.0 /*,
                              LineStart | IgnoreYMargin */ );
+
         return;
     }
 
@@ -509,8 +510,8 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
     qreal northLineLat = step * ( static_cast<int>( northLat / step ) + 1 );
     
     if ( m_currentNotation == GeoDataCoordinates::UTM ) {
-    	if ( northLineLat > 84.0 )
-	    	northLineLat = 76.0;
+        if ( northLineLat > 84.0 )
+            northLineLat = 76.0;
 	    	
 	    if ( southLineLat < -80.0 )
 	    	southLineLat = -80.0;
@@ -553,13 +554,13 @@ void GraticulePlugin::renderUtmExceptions( GeoPainter *painter,
             renderLongitudeLine( painter, itStep+3.0, viewLatLonAltBox, northPolarGap,
             southPolarGap, label, labelPositionFlags );
         } else if ( label == "33" ) {
-            renderLongitudeLine( painter, itStep+3.0, viewLatLonAltBox, northPolarGap,
+            renderLongitudeLine( painter, itStep-3.0, viewLatLonAltBox, northPolarGap,
             southPolarGap, label, labelPositionFlags );
         } else if ( label == "35" ) {
-            renderLongitudeLine( painter, itStep+3.0, viewLatLonAltBox, northPolarGap,
+            renderLongitudeLine( painter, itStep-3.0, viewLatLonAltBox, northPolarGap,
             southPolarGap, label, labelPositionFlags );
         } else if ( label == "37" ) {
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
+            renderLongitudeLine( painter, itStep-3.0, viewLatLonAltBox, northPolarGap,
             southPolarGap, label, labelPositionFlags );
         } else if ( label == "32" || label == "34" || label == "36" ) {
             // paint nothing
@@ -569,7 +570,7 @@ void GraticulePlugin::renderUtmExceptions( GeoPainter *painter,
         }
     }
     else if ( northPolarGap == 26.0 && southPolarGap == 146.0 ) {
-        if ( label == "31" ) {
+        if ( label == "32" ) {
             renderLongitudeLine( painter, itStep-3.0, viewLatLonAltBox, northPolarGap,
             southPolarGap, label, labelPositionFlags );
         } else {
@@ -618,7 +619,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             {
                 label.clear();
             }
-
+/*
             // Paint all longitude coordinate lines except for the meridians
             if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
                 // handle exceptions for UTM grid
@@ -629,6 +630,14 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                     renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
                     southPolarGap, label, labelPositionFlags );
                 }
+            }
+*/
+            if (notation == GeoDataCoordinates::UTM ) {
+                renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
+                southPolarGap, label, labelPositionFlags );
+            } else if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
+                renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
+                southPolarGap, label, labelPositionFlags );
             }
             itStep += step;
         }
@@ -649,7 +658,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             {
                 label.clear();
             }
-
+/*
             // Paint all longitude coordinate lines except for the meridians
             if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
                 if (notation == GeoDataCoordinates::UTM ) {
@@ -659,6 +668,14 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                     renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
                     southPolarGap, label, labelPositionFlags );
                 }
+            }
+*/
+            if (notation == GeoDataCoordinates::UTM ) {
+                renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
+                southPolarGap, label, labelPositionFlags );
+            } else if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
+                renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
+                southPolarGap, label, labelPositionFlags );
             }
             itStep += step;
         }
@@ -678,7 +695,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             }
 
             // Paint all longitude coordinate lines except for the meridians
-            if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
+/*            if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
                 if (notation == GeoDataCoordinates::UTM ) {
                     renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
                     southPolarGap, label, labelPositionFlags );
@@ -686,6 +703,14 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                     renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
                     southPolarGap, label, labelPositionFlags );
                 }
+            }
+*/
+            if (notation == GeoDataCoordinates::UTM ) {
+                renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
+                southPolarGap, label, labelPositionFlags );
+            } else if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
+                renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
+                southPolarGap, label, labelPositionFlags );
             }
             itStep += step;
         }

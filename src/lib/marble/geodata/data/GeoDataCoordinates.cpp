@@ -777,7 +777,6 @@ void GeoDataUTM::MapLatLonToXY (qreal phi, qreal lambda, qreal lambda0, qreal *x
 {
     qreal N, nu2, ep2, t, t2, l;
     qreal l3coef, l4coef, l5coef, l6coef, l7coef, l8coef;
-    qreal temp;
 
     /* Precalculate ep2 */
     ep2 = (qPow (GeoDataUTM::sm_a, 2.0) - qPow (GeoDataUTM::sm_b, 2.0)) / qPow (GeoDataUTM::sm_b, 2.0);
@@ -791,7 +790,6 @@ void GeoDataUTM::MapLatLonToXY (qreal phi, qreal lambda, qreal lambda0, qreal *x
     /* Precalculate t */
     t = qTan (phi);
     t2 = t * t;
-    temp = (t2 * t2 * t2) - qPow (t, 6.0);
 
     /* Precalculate l */
     l = lambda - lambda0;
@@ -1541,15 +1539,19 @@ QString GeoDataCoordinates::latToUTMString( qreal lon, qreal lat,
     // Regular latitude bands between 80 S and 80 N (that is, between 10 and 170 in the [0,180] interval)
     int bandLetterIndex = 24; //Avoids "may be used uninitilized" warning
 
-    if( latDeg >= -80 && latDeg <= 80 ){
-        // General (+1 because the general lettering starts in C)
-        bandLetterIndex = static_cast<int>( (latDeg+90) / 8.0) + 1;
-    }
-    else if( latDeg < -80 ){
+    if( latDeg < -80 ){
         // South pole (A for zones 1-30, B for zones 31-60)
         bandLetterIndex = ((lonDeg+180) < 6*31) ? 0 : 1;
     }
-    else if( latDeg > 80 ){
+    else if( latDeg >= -80 && latDeg <= 80 ){
+        // General (+2 because the general lettering starts in C)
+        bandLetterIndex = static_cast<int>( (latDeg+80.0) / 8.0 ) + 2;
+    }
+    else if( latDeg >= 80 && latDeg < 84){
+        // Band X is extended 4 more degrees
+        bandLetterIndex = 21;
+    }
+    else if( latDeg >= 84 ){
         // North pole (Y for zones 1-30, Z for zones 31-60)
         bandLetterIndex = ((lonDeg+180) < 6*31) ? 22 : 23;
     }
