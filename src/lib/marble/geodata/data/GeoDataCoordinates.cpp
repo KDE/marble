@@ -578,21 +578,18 @@ bool LonLatParser::isCorrectDirections(const QString& dir1, const QString& dir2,
          isLonDirection(dir2, isLonDirPosHemisphere));
 }
 
-// Helper class for UTM-related development
+// Helper functions for UTM-related development.
+// Maybe adding them to GeoDataCoordinates class?
 // Based on Chuck Taylor work:
 // http://home.hiwaay.net/~taylorc/toolbox/geography/geoutm.html
-class GeoDataUTM
+namespace GeoDataUTM
 {
-public:
     /* Ellipsoid model constants (actual values here are for WGS84) */
-    static const qreal sm_a = 6378137.0;
-    static const qreal sm_b = 6356752.314;
-    static const qreal sm_EccSquared = 6.69437999013e-03;
+    const qreal sm_a = 6378137.0;
+    const qreal sm_b = 6356752.314;
+    const qreal sm_EccSquared = 6.69437999013e-03;
 
-    static const qreal UTMScaleFactor = 0.9996;
-
-    GeoDataUTM();
-    ~GeoDataUTM();
+    const qreal UTMScaleFactor = 0.9996;
 
     /**
     * Computes the ellipsoidal distance from the equator to a point at a
@@ -604,9 +601,7 @@ public:
     * @param phi Latitude of the point, in radians.
     * @return The ellipsoidal disqTance of the point from the equator, in meters.
     */
-    static qreal ArcLengthOfMeridian (qreal phi);
-
-    qreal ArcLengthOfMeridian ();
+    qreal ArcLengthOfMeridian (qreal phi);
 
     /**
     * Determines the central meridian for the given UTM zone.
@@ -616,9 +611,7 @@ public:
     * if the UTM zone parameter is outside the range [1,60].
     * Range of the central meridian is the radian equivalent of [-177,+177].
     */
-    static qreal UTMCentralMeridian (qreal zone);
-
-    qreal UTMCentralMeridian ();
+    qreal UTMCentralMeridian (qreal zone);
 
 
     /**
@@ -631,9 +624,7 @@ public:
     * @param y The UTM northing coordinate, in meters.
     * @return The footpoint latitude, in radians.
     */
-    static qreal FootpointLatitude (qreal y);
-
-    qreal FootpointLatitude ();
+    qreal FootpointLatitude (qreal y);
 
     /**
     * Converts a latitude/longitude pair to x and y coordinates in the
@@ -650,9 +641,7 @@ public:
     * @return A 2-element array containing the x and y coordinates
     * of the computed point through xy param.
     */
-    static void MapLatLonToXY (qreal lambda, qreal phi, qreal lambda0, qreal *xy);
-
-    void MapLatLonToXY (qreal *xy);
+    void MapLatLonToXY (qreal lambda, qreal phi, qreal lambda0, qreal *xy);
 
     /**
      * Converts a latitude/longitude pair to x and y coordinates in the
@@ -665,17 +654,8 @@ public:
      * @return A 2-element array where the UTM x and y values will be stored
      * through xy param
      */
-    static void LatLonToUTMXY (qreal lon, qreal lat, qreal zone, qreal *xy);
-
-    void LatLonToUTMXY (qreal *xy);
-
-private:
-    GeoDataCoordinates* d;
-    int m_zone;
-    QChar m_latitudeBand;
-    qreal m_eastern;
-    qreal m_northing;
-};
+    void LatLonToUTMXY (qreal lon, qreal lat, qreal zone, qreal *xy);
+}
 
 
 qreal GeoDataUTM::ArcLengthOfMeridian (qreal phi)
@@ -714,19 +694,9 @@ qreal GeoDataUTM::ArcLengthOfMeridian (qreal phi)
     return result;
 }
 
-qreal GeoDataUTM::ArcLengthOfMeridian ()
-{
-    return GeoDataUTM::ArcLengthOfMeridian( d->latitude() );
-}
-
 qreal GeoDataUTM::UTMCentralMeridian (qreal zone)
 {
     return DEG2RAD*(-183.0 + (zone * 6.0));
-}
-
-qreal GeoDataUTM::UTMCentralMeridian ()
-{
-    return GeoDataUTM::UTMCentralMeridian ( m_zone );
 }
 
 qreal GeoDataUTM::FootpointLatitude (qreal y)
@@ -767,10 +737,6 @@ qreal GeoDataUTM::FootpointLatitude (qreal y)
         + (epsilon_ * qSin (8.0 * y_));
 
     return result;
-}
-
-qreal GeoDataUTM::FootpointLatitude(){
-    return GeoDataUTM::FootpointLatitude( m_northing );
 }
 
 void GeoDataUTM::MapLatLonToXY (qreal phi, qreal lambda, qreal lambda0, qreal *xy)
@@ -826,13 +792,6 @@ void GeoDataUTM::MapLatLonToXY (qreal phi, qreal lambda, qreal lambda0, qreal *x
         + (t / 40320.0 * N * qPow (qCos(phi), 8.0) * l8coef * qPow (l, 8.0));
 }
 
-void GeoDataUTM::MapLatLonToXY (qreal *xy){
-    GeoDataUTM::MapLatLonToXY ( d->longitude(),
-                                d->latitude(),
-                                GeoDataUTM::UTMCentralMeridian(),
-                                xy);
-}
-
 void GeoDataUTM::LatLonToUTMXY (qreal lon, qreal lat, qreal zone, qreal *xy)
 {
     GeoDataUTM::MapLatLonToXY (lon, lat, GeoDataUTM::UTMCentralMeridian(zone), xy);
@@ -843,16 +802,6 @@ void GeoDataUTM::LatLonToUTMXY (qreal lon, qreal lat, qreal zone, qreal *xy)
     if (xy[1] < 0.0)
         xy[1] = xy[1] + 10000000.0;
 }
-
-void GeoDataUTM::LatLonToUTMXY (qreal *xy)
-{
-    GeoDataUTM::LatLonToUTMXY ( d->longitude(),
-                                d->latitude(),
-                                m_zone,
-                                xy);
-}
-
-
 
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
