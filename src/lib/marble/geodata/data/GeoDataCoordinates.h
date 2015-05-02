@@ -386,14 +386,14 @@ class GEODATA_EXPORT GeoDataCoordinates
     static QString lonToUTMString( qreal lon, qreal lat,
                                               GeoDataCoordinates::Unit unit = Radian);
     /**
-     * @brief return a string representation of UTM zone / eastern
+     * @brief return a string representation of UTM zone
      */
     QString lonToUTMString();
 
     static QString latToUTMString( qreal lon, qreal lat,
                                               GeoDataCoordinates::Unit unit = Radian);
     /**
-     * @brief return a string representation of UTM zone / eastern
+     * @brief return a string representation of UTM latitude band
      */
     QString latToUTMString();
     
