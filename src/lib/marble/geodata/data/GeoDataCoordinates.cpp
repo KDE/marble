@@ -601,7 +601,7 @@ namespace GeoDataUTM
     * @param phi Latitude of the point, in radians.
     * @return The ellipsoidal disqTance of the point from the equator, in meters.
     */
-    qreal arcLengthOfMeridian (qreal phi);
+    qreal arcLengthOfMeridian( qreal phi );
 
     /**
     * Determines the central meridian for the given UTM zone.
@@ -611,7 +611,7 @@ namespace GeoDataUTM
     * if the UTM zone parameter is outside the range [1,60].
     * Range of the central meridian is the radian equivalent of [-177,+177].
     */
-    qreal centralMeridianUTM (qreal zone);
+    qreal centralMeridianUTM( qreal zone );
 
 
     /**
@@ -624,7 +624,7 @@ namespace GeoDataUTM
     * @param northing The UTM northing coordinate, in meters.
     * @return The footpoint latitude, in radians.
     */
-    qreal footpointLatitude (qreal northing);
+    qreal footpointLatitude( qreal northing );
 
     /**
     * Converts a latitude/longitude pair to x and y coordinates in the
@@ -641,7 +641,7 @@ namespace GeoDataUTM
     * @return A 2-element array containing the x and y coordinates
     * of the computed point through xy param.
     */
-    void mapLatLonToXY (qreal lambda, qreal phi, qreal lambda0, qreal *xy);
+    void mapLatLonToXY( qreal lambda, qreal phi, qreal lambda0, qreal *xy );
 
     /**
      * Converts a latitude/longitude pair to x and y coordinates in the
@@ -654,11 +654,11 @@ namespace GeoDataUTM
      * @return A 2-element array where the UTM x and y values will be stored
      * through xy param
      */
-    void latLonToUTMXY (qreal lon, qreal lat, qreal zone, qreal *xy);
+    void latLonToUTMXY( qreal lon, qreal lat, qreal zone, qreal *xy );
 }
 
 
-qreal GeoDataUTM::arcLengthOfMeridian (qreal phi)
+qreal GeoDataUTM::arcLengthOfMeridian( qreal phi )
 {
     qreal alpha;
     qreal beta;
@@ -699,12 +699,12 @@ qreal GeoDataUTM::arcLengthOfMeridian (qreal phi)
     return result;
 }
 
-qreal GeoDataUTM::centralMeridianUTM (qreal zone)
+qreal GeoDataUTM::centralMeridianUTM( qreal zone )
 {
     return DEG2RAD*(-183.0 + (zone * 6.0));
 }
 
-qreal GeoDataUTM::footpointLatitude (qreal northing)
+qreal GeoDataUTM::footpointLatitude( qreal northing )
 {
     qreal y;
     qreal alpha;
@@ -750,7 +750,7 @@ qreal GeoDataUTM::footpointLatitude (qreal northing)
     return result;
 }
 
-void GeoDataUTM::mapLatLonToXY (qreal phi, qreal lambda, qreal lambda0, qreal *xy)
+void GeoDataUTM::mapLatLonToXY( qreal phi, qreal lambda, qreal lambda0, qreal *xy )
 {
     qreal N;
     qreal nu2;
@@ -810,9 +810,9 @@ void GeoDataUTM::mapLatLonToXY (qreal phi, qreal lambda, qreal lambda0, qreal *x
         + (t / 40320.0 * N * qPow (qCos(phi), 8.0) * l8coef * qPow (l, 8.0));
 }
 
-void GeoDataUTM::latLonToUTMXY (qreal lon, qreal lat, qreal zone, qreal *xy)
+void GeoDataUTM::latLonToUTMXY( qreal lon, qreal lat, qreal zone, qreal *xy )
 {
-    GeoDataUTM::mapLatLonToXY (lon, lat, GeoDataUTM::centralMeridianUTM(zone), xy);
+    GeoDataUTM::mapLatLonToXY(lon, lat, GeoDataUTM::centralMeridianUTM(zone), xy);
 
     // Adjust easting and northing for UTM system.
     xy[0] = xy[0] * GeoDataUTM::UTMScaleFactor + 500000.0;
@@ -1431,7 +1431,7 @@ QString GeoDataCoordinates::latToString() const
 }
 
 QString GeoDataCoordinates::lonLatToUTMString( qreal lon, qreal lat,
-                                                    GeoDataCoordinates::Unit unit)
+                                                    GeoDataCoordinates::Unit unit )
 {
     int zoneNumber = static_cast<int>( ((lon*RAD2DEG)+180) / 6.0 ) + 1;
     qreal xy[2];
@@ -1452,7 +1452,7 @@ QString GeoDataCoordinates::lonLatToUTMString() const
 }
 
 QString GeoDataCoordinates::lonToUTMString( qreal lon, qreal lat,
-                                                       GeoDataCoordinates::Unit unit)
+                                                       GeoDataCoordinates::Unit unit )
 {
     // Converts lon and lat to degrees
     qreal lonDeg = (unit == GeoDataCoordinates::Degree) ? lon : lon*RAD2DEG;
@@ -1496,7 +1496,7 @@ QString GeoDataCoordinates::lonToUTMString()
 }
 
 QString GeoDataCoordinates::latToUTMString( qreal lon, qreal lat,
-                                                        GeoDataCoordinates::Unit unit)
+                                                        GeoDataCoordinates::Unit unit )
 {
     // Obtains the latitude bands handling all the so called "exceptions"
 
