@@ -1296,8 +1296,9 @@ void MarblePart::setupStatusBar()
 {
     QFontMetrics statusBarFontMetrics( m_statusBarExtension->statusBar()->fontMetrics() );
 
+    // UTM syntax is used in the template string, as it is longer than the lon/lat one
     QString templatePositionString =
-        QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
+        QString( "%1 00Z 000000.00 m E, 00000000.00 m N_" ).arg(POSITION_STRING);
     m_positionLabel = setupStatusBarLabel( templatePositionString );
 
     QString templateDistanceString =
