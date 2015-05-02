@@ -1440,10 +1440,10 @@ QString GeoDataCoordinates::lonLatToUTMString( qreal lon, qreal lat,
     return GeoDataCoordinates::lonToUTMString(lon, lat, unit)
            + GeoDataCoordinates::latToUTMString(lon, lat, unit)
            + QString(" ")
-           + QString::number(xy[0], 'g', 9)
-           + QString("mE ")
-           + QString::number(xy[1], 'g', 9)
-           + QString("mN");
+           + QString::number(xy[0], 'f', 2)
+           + QString(" m E, ")
+           + QString::number(xy[1], 'f', 2)
+           + QString(" m N");
 }
 
 QString GeoDataCoordinates::lonLatToUTMString() const
