@@ -619,19 +619,8 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             {
                 label.clear();
             }
-/*
-            // Paint all longitude coordinate lines except for the meridians
-            if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
-                // handle exceptions for UTM grid
-                if (notation == GeoDataCoordinates::UTM ) {
-                    renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
-                    southPolarGap, label, labelPositionFlags );
-                } else {
-                    renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
-                    southPolarGap, label, labelPositionFlags );
-                }
-            }
-*/
+
+            // Paint all longitude coordinate lines (except for the meridians in non-UTM mode)
             if (notation == GeoDataCoordinates::UTM ) {
                 renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
                 southPolarGap, label, labelPositionFlags );
@@ -658,18 +647,8 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             {
                 label.clear();
             }
-/*
-            // Paint all longitude coordinate lines except for the meridians
-            if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
-                if (notation == GeoDataCoordinates::UTM ) {
-                    renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
-                    southPolarGap, label, labelPositionFlags );
-                } else {
-                    renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
-                    southPolarGap, label, labelPositionFlags );
-                }
-            }
-*/
+
+            // Paint all longitude coordinate lines (except for the meridians in non-UTM mode)
             if (notation == GeoDataCoordinates::UTM ) {
                 renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
                 southPolarGap, label, labelPositionFlags );
@@ -694,17 +673,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                 label.clear();
             }
 
-            // Paint all longitude coordinate lines except for the meridians
-/*            if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
-                if (notation == GeoDataCoordinates::UTM ) {
-                    renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
-                    southPolarGap, label, labelPositionFlags );
-                } else {
-                    renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
-                    southPolarGap, label, labelPositionFlags );
-                }
-            }
-*/
+            // Paint all longitude coordinate lines (except for the meridians in non-UTM mode)
             if (notation == GeoDataCoordinates::UTM ) {
                 renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
                 southPolarGap, label, labelPositionFlags );
