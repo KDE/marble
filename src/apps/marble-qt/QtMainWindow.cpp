@@ -1060,8 +1060,9 @@ void MainWindow::setupStatusBar()
 
     m_positionLabel = new QLabel( );
     m_positionLabel->setIndent( 5 );
+    // UTM syntax is used in the template string, as it is longer than the lon/lat one
     QString templatePositionString =
-        QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
+        QString( "%1 000000.00 m E, 0000000.00 m N_" ).arg(POSITION_STRING);
     int maxPositionWidth = fontMetrics().boundingRect(templatePositionString).width()
                             + 2 * m_positionLabel->margin() + 2 * m_positionLabel->indent();
     m_positionLabel->setFixedWidth( maxPositionWidth );
