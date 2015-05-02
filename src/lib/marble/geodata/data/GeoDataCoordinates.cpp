@@ -10,6 +10,7 @@
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2011      Friedrich W. H. Kossebau <kossebau@kde.org>
 // Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2015      Alejandro Garcia Montoro <alejandro.garciamontoro@gmail.com>
 //
 
 
