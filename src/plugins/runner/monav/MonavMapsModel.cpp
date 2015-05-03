@@ -25,7 +25,7 @@ void MonavMapsModel::deleteMapFiles( int row )
     }
 }
 
-void MonavMapsModel::setInstallableVersions( const QMap<QString, QString> remoteMaps )
+void MonavMapsModel::setInstallableVersions( const QMap<QString, QString> &remoteMaps )
 {
     m_remoteMaps = remoteMaps;
     beginResetModel();

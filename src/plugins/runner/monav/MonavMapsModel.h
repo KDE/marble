@@ -39,7 +39,7 @@ public:
 
     QString payload( int index ) const;
 
-    void setInstallableVersions( const QMap<QString, QString> localMaps );
+    void setInstallableVersions( const QMap<QString, QString> &remoteMaps );
 
 private:
     QVector<MonavMap> m_data;
