@@ -44,8 +44,7 @@ namespace Marble
         MARBLE_PLUGIN( AprsPlugin )
 
             public:
-        AprsPlugin();
-        explicit AprsPlugin( const MarbleModel *marbleModel );
+        explicit AprsPlugin( const MarbleModel *marbleModel=0 );
         ~AprsPlugin();
         QStringList backendTypes() const;
         QString renderPolicy() const;

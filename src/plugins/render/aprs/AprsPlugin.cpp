@@ -40,14 +40,6 @@
 using namespace Marble;
 /* TRANSLATOR Marble::AprsPlugin */
 
-AprsPlugin::AprsPlugin()
-    : RenderPlugin( 0 ),
-      m_mutex( 0 ),
-      m_configDialog( 0 ),
-      ui_configWidget( 0 )
-{
-}
-
 AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
       m_mutex( new QMutex ),
