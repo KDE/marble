@@ -1433,17 +1433,18 @@ QString GeoDataCoordinates::latToString() const
 QString GeoDataCoordinates::lonLatToUTMString( qreal lon, qreal lat,
                                                     GeoDataCoordinates::Unit unit )
 {
-    int zoneNumber = static_cast<int>( ((lon*RAD2DEG)+180) / 6.0 ) + 1;
+    QString zoneString = GeoDataCoordinates::lonToUTMString(lon, lat, unit);
+    QString bandString = GeoDataCoordinates::latToUTMString(lon, lat, unit);
+
+    int zoneNumber = zoneString.toInt();
     qreal xy[2];
+
     GeoDataUTM::latLonToUTMXY(lat, lon, zoneNumber, xy);
 
-    return GeoDataCoordinates::lonToUTMString(lon, lat, unit)
-           + GeoDataCoordinates::latToUTMString(lon, lat, unit)
-           + QString(" ")
-           + QString::number(xy[0], 'f', 2)
-           + QString(" m E, ")
-           + QString::number(xy[1], 'f', 2)
-           + QString(" m N");
+    QString easting  = QString::number(xy[0], 'f', 2);
+    QString northing = QString::number(xy[1], 'f', 2);
+
+    return QString("%1%2 %3 m E, %4 m N").arg(zoneString).arg(bandString).arg(easting).arg(northing);
 }
 
 QString GeoDataCoordinates::lonLatToUTMString() const
@@ -1459,11 +1460,11 @@ QString GeoDataCoordinates::lonToUTMString( qreal lon, qreal lat,
     qreal latDeg = (unit == GeoDataCoordinates::Degree) ? lat : lat*RAD2DEG;
 
     if ( latDeg < -80 || latDeg > 84 ) {
-        // There is no lettering associated to the poles
+        // There is no numbering associated to the poles
         return QString("");
     }
 
-    // Obtains the zone number handling all the the so called "exceptions"
+    // Obtains the zone number handling all the so called "exceptions"
     // See problem: http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions
     // See solution: http://gis.stackexchange.com/questions/13291/computing-utm-zone-from-lat-long-point
 
@@ -1506,7 +1507,7 @@ QString GeoDataCoordinates::latToUTMString( qreal lon, qreal lat,
     qreal latDeg = (unit == GeoDataCoordinates::Degree) ? lat : lat*RAD2DEG;
 
     // Regular latitude bands between 80 S and 80 N (that is, between 10 and 170 in the [0,180] interval)
-    int bandLetterIndex = 24; //Avoids "may be used uninitilized" warning
+    int bandLetterIndex = 24; //Avoids "may be used uninitialized" warning
 
     if ( latDeg < -80 ) {
         // South pole (A for zones 1-30, B for zones 31-60)
