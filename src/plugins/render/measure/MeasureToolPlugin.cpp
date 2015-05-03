@@ -67,7 +67,8 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
       m_circularArea(0.0),
       m_radius(0.0),
       m_perimeter(0.0),
-      m_circumference(0.0)
+      m_circumference(0.0),
+      m_paintMode(Polygon)
 {
     m_pen.setWidthF( 2.0 );
 }
