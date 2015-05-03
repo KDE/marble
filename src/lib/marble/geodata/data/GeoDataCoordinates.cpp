@@ -24,6 +24,7 @@
 #include <QStringList>
 #include <QCoreApplication>
 #include <QAtomicInt>
+#include <QPointF>
 
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
@@ -638,11 +639,9 @@ namespace GeoDataUTM
     * @param lambda Longitude of the point, in radians.
     * @param phi Latitude of the point, in radians.
     * @param lambda0 Longitude of the central meridian to be used, in radians.
-    * @param xy Output values
-    * @return A 2-element array containing the x and y coordinates
-    * of the computed point through xy param.
+    * @return The computed point with its x and y coordinates
     */
-    void mapLatLonToXY( qreal lambda, qreal phi, qreal lambda0, qreal *xy );
+    QPointF mapLonLatToXY( qreal lambda, qreal phi, qreal lambda0 );
 
     /**
      * Converts a latitude/longitude pair to x and y coordinates in the
@@ -652,10 +651,10 @@ namespace GeoDataUTM
      * @param lat Latitude of the point, in radians.
      * @param zone UTM zone between 1 and 60 to be used for calculating
      * values for x and y.
-     * @return A 2-element array where the UTM x and y values will be stored
-     * through xy param
+     * @return A point with its x and y coordinates representing
+     * easting and northing of the UTM coordinates computed.
      */
-    void latLonToUTMXY( qreal lon, qreal lat, qreal zone, qreal *xy );
+    QPointF lonLatToUTMXY( qreal lon, qreal lat, qreal zone );
 }
 
 
@@ -751,7 +750,7 @@ qreal GeoDataUTM::footpointLatitude( qreal northing )
     return result;
 }
 
-void GeoDataUTM::mapLatLonToXY( qreal phi, qreal lambda, qreal lambda0, qreal *xy )
+QPointF GeoDataUTM::mapLonLatToXY( qreal lambda, qreal phi, qreal lambda0 )
 {
     qreal N;
     qreal nu2;
@@ -798,29 +797,34 @@ void GeoDataUTM::mapLatLonToXY( qreal phi, qreal lambda, qreal lambda0, qreal *x
     l8coef = 1385.0 - 3111.0 * t2 + 543.0 * (t2 * t2) - (t2 * t2 * t2);
 
     // Calculate easting (x)
-    xy[0] = N * qCos(phi) * l
+    qreal easting = N * qCos(phi) * l
         + (N / 6.0 * qPow (qCos(phi), 3.0) * l3coef * qPow (l, 3.0))
         + (N / 120.0 * qPow (qCos(phi), 5.0) * l5coef * qPow (l, 5.0))
         + (N / 5040.0 * qPow (qCos(phi), 7.0) * l7coef * qPow (l, 7.0));
 
     // Calculate northing (y)
-    xy[1] = arcLengthOfMeridian (phi)
+    qreal northing = arcLengthOfMeridian (phi)
         + (t / 2.0 * N * qPow (qCos(phi), 2.0) * qPow (l, 2.0))
         + (t / 24.0 * N * qPow (qCos(phi), 4.0) * l4coef * qPow (l, 4.0))
         + (t / 720.0 * N * qPow (qCos(phi), 6.0) * l6coef * qPow (l, 6.0))
         + (t / 40320.0 * N * qPow (qCos(phi), 8.0) * l8coef * qPow (l, 8.0));
+
+    return QPointF(easting, northing);
 }
 
-void GeoDataUTM::latLonToUTMXY( qreal lon, qreal lat, qreal zone, qreal *xy )
+QPointF GeoDataUTM::lonLatToUTMXY( qreal lon, qreal lat, qreal zone )
 {
-    GeoDataUTM::mapLatLonToXY(lon, lat, GeoDataUTM::centralMeridianUTM(zone), xy);
+    QPointF coordinates = GeoDataUTM::mapLonLatToXY( lon, lat, GeoDataUTM::centralMeridianUTM(zone) );
 
     // Adjust easting and northing for UTM system.
-    xy[0] = xy[0] * GeoDataUTM::UTMScaleFactor + 500000.0;
-    xy[1] = xy[1] * GeoDataUTM::UTMScaleFactor;
-    if ( xy[1] < 0.0 ) {
-        xy[1] = xy[1] + 10000000.0;
+    coordinates.setX( coordinates.x() * GeoDataUTM::UTMScaleFactor + 500000.0 );
+    coordinates.setY( coordinates.y() * GeoDataUTM::UTMScaleFactor );
+
+    if ( coordinates.y() < 0.0 ) {
+        coordinates.setY( coordinates.y() + 10000000.0 );
     }
+
+    return coordinates;
 }
 
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
@@ -1437,14 +1441,13 @@ QString GeoDataCoordinates::lonLatToUTMString( qreal lon, qreal lat,
     QString bandString = GeoDataCoordinates::latToUTMString(lon, lat, unit);
 
     int zoneNumber = zoneString.toInt();
-    qreal xy[2];
 
-    GeoDataUTM::latLonToUTMXY(lat, lon, zoneNumber, xy);
+    QPointF coordinates = GeoDataUTM::lonLatToUTMXY(lon, lat, zoneNumber);
 
-    QString easting  = QString::number(xy[0], 'f', 2);
-    QString northing = QString::number(xy[1], 'f', 2);
+    QString eastingString  = QString::number(coordinates.x(), 'f', 2);
+    QString northingString = QString::number(coordinates.y(), 'f', 2);
 
-    return QString("%1%2 %3 m E, %4 m N").arg(zoneString).arg(bandString).arg(easting).arg(northing);
+    return QString("%1%2 %3 m E, %4 m N").arg(zoneString).arg(bandString).arg(eastingString).arg(northingString);
 }
 
 QString GeoDataCoordinates::lonLatToUTMString() const
