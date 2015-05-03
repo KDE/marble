@@ -403,11 +403,11 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
         return AbstractFloatItem::eventFilter(object,e);
     }
 
-    bool cursorAboveFloatItem(false);
     if ( e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove ) {
         QMouseEvent *event = static_cast<QMouseEvent*>(e);
         QRectF floatItemRect = QRectF( positivePosition(), size() );
 
+        bool cursorAboveFloatItem(false);
         if ( floatItemRect.contains(event->pos()) ) {
             cursorAboveFloatItem = true;
 
