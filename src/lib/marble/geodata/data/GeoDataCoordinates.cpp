@@ -580,253 +580,6 @@ bool LonLatParser::isCorrectDirections(const QString& dir1, const QString& dir2,
          isLonDirection(dir2, isLonDirPosHemisphere));
 }
 
-// Helper functions for UTM-related development.
-// Maybe adding them to GeoDataCoordinates class?
-// Based on Chuck Taylor work:
-// http://home.hiwaay.net/~taylorc/toolbox/geography/geoutm.html
-namespace GeoDataUTM
-{
-    /* Ellipsoid model constants (actual values here are for WGS84) */
-    const qreal sm_a = 6378137.0;
-    const qreal sm_b = 6356752.314;
-    const qreal sm_EccSquared = 6.69437999013e-03;
-
-    const qreal UTMScaleFactor = 0.9996;
-
-    /**
-    * Computes the ellipsoidal distance from the equator to a point at a
-    * given latitude.
-    *
-    * Reference: Hoffmann-Wellenhof, B., Lichtenegger, H., and Collins, J.,
-    * GPS: Theory and Practice, 3rd ed.  New York: Springer-Verlag Wien, 1994.
-    *
-    * @param phi Latitude of the point, in radians.
-    * @return The ellipsoidal disqTance of the point from the equator, in meters.
-    */
-    qreal arcLengthOfMeridian( qreal phi );
-
-    /**
-    * Determines the central meridian for the given UTM zone.
-    *
-    * @param zone An integer value designating the UTM zone, range [1,60].
-    * @return The central meridian for the given UTM zone, in radians, or zero
-    * if the UTM zone parameter is outside the range [1,60].
-    * Range of the central meridian is the radian equivalent of [-177,+177].
-    */
-    qreal centralMeridianUTM( qreal zone );
-
-
-    /**
-    * Computes the footpoint latitude for use in converting transverse
-    * Mercator coordinates to ellipsoidal coordinates.
-    *
-    * Reference: Hoffmann-Wellenhof, B., Lichtenegger, H., and Collins, J.,
-    *   GPS: Theory and Practice, 3rd ed.  New York: Springer-Verlag Wien, 1994.
-    *
-    * @param northing The UTM northing coordinate, in meters.
-    * @return The footpoint latitude, in radians.
-    */
-    qreal footpointLatitude( qreal northing );
-
-    /**
-    * Converts a latitude/longitude pair to x and y coordinates in the
-    * Transverse Mercator projection.  Note that Transverse Mercator is not
-    * the same as UTM; a scale factor is required to convert between them.
-    *
-    * Reference: Hoffmann-Wellenhof, B., Lichtenegger, H., and Collins, J.,
-    * GPS: Theory and Practice, 3rd ed.  New York: Springer-Verlag Wien, 1994.
-    *
-    * @param lambda Longitude of the point, in radians.
-    * @param phi Latitude of the point, in radians.
-    * @param lambda0 Longitude of the central meridian to be used, in radians.
-    * @return The computed point with its x and y coordinates
-    */
-    QPointF mapLonLatToXY( qreal lambda, qreal phi, qreal lambda0 );
-
-    /**
-     * Converts a latitude/longitude pair to x and y coordinates in the
-     * Universal Transverse Mercator projection.
-     *
-     * @param lon Longitude of the point, in radians.
-     * @param lat Latitude of the point, in radians.
-     * @param zone UTM zone between 1 and 60 to be used for calculating
-     * values for x and y.
-     * @return A point with its x and y coordinates representing
-     * easting and northing of the UTM coordinates computed.
-     */
-    QPointF lonLatToUTMXY( qreal lon, qreal lat, qreal zone );
-}
-
-
-qreal GeoDataUTM::arcLengthOfMeridian( qreal phi )
-{
-    qreal alpha;
-    qreal beta;
-    qreal gamma;
-    qreal delta;
-    qreal epsilon;
-    qreal n;
-    qreal result;
-
-    // Precalculate n
-    n = (GeoDataUTM::sm_a - GeoDataUTM::sm_b) / (GeoDataUTM::sm_a + GeoDataUTM::sm_b);
-
-    // Precalculate alpha
-    alpha = ((GeoDataUTM::sm_a + GeoDataUTM::sm_b) / 2.0)
-       * (1.0 + (qPow (n, 2.0) / 4.0) + (qPow (n, 4.0) / 64.0));
-
-    // Precalculate beta
-    beta = (-3.0 * n / 2.0) + (9.0 * qPow (n, 3.0) / 16.0)
-       + (-3.0 * qPow (n, 5.0) / 32.0);
-
-    // Precalculate gamma
-    gamma = (15.0 * qPow (n, 2.0) / 16.0)
-        + (-15.0 * qPow (n, 4.0) / 32.0);
-
-    // Precalculate delta
-    delta = (-35.0 * qPow (n, 3.0) / 48.0)
-        + (105.0 * qPow (n, 5.0) / 256.0);
-
-    // Precalculate epsilon
-    epsilon = (315.0 * qPow (n, 4.0) / 512.0);
-
-    // Now calculate the sum of the series and return
-    result = alpha * (phi + (beta * qSin (2.0 * phi))
-            + (gamma * qSin (4.0 * phi))
-            + (delta * qSin (6.0 * phi))
-            + (epsilon * qSin (8.0 * phi)));
-
-    return result;
-}
-
-qreal GeoDataUTM::centralMeridianUTM( qreal zone )
-{
-    return DEG2RAD*(-183.0 + (zone * 6.0));
-}
-
-qreal GeoDataUTM::footpointLatitude( qreal northing )
-{
-    qreal y;
-    qreal alpha;
-    qreal beta;
-    qreal gamma;
-    qreal delta;
-    qreal epsilon;
-    qreal n;
-    qreal result;
-
-    // Precalculate n (Eq. 10.18)
-    n = (GeoDataUTM::sm_a - GeoDataUTM::sm_b) / (GeoDataUTM::sm_a + GeoDataUTM::sm_b);
-
-    // Precalculate alpha (Eq. 10.22)
-    // (Same as alpha in Eq. 10.17)
-    alpha = ((GeoDataUTM::sm_a + GeoDataUTM::sm_b) / 2.0)
-        * (1 + (qPow (n, 2.0) / 4) + (qPow (n, 4.0) / 64));
-
-    // Precalculate y (Eq. 10.23)
-    y = northing / alpha;
-
-    // Precalculate beta (Eq. 10.22)
-    beta = (3.0 * n / 2.0) + (-27.0 * qPow (n, 3.0) / 32.0)
-        + (269.0 * qPow (n, 5.0) / 512.0);
-
-    // Precalculate gamma (Eq. 10.22)
-    gamma = (21.0 * qPow (n, 2.0) / 16.0)
-        + (-55.0 * qPow (n, 4.0) / 32.0);
-
-    // Precalculate delta (Eq. 10.22)
-    delta = (151.0 * qPow (n, 3.0) / 96.0)
-        + (-417.0 * qPow (n, 5.0) / 128.0);
-
-    // Precalculate epsilon (Eq. 10.22)
-    epsilon = (1097.0 * qPow (n, 4.0) / 512.0);
-
-    // Now calculate the sum of the series (Eq. 10.21)
-    result = y + (beta * qSin (2.0 * y))
-        + (gamma * qSin (4.0 * y))
-        + (delta * qSin (6.0 * y))
-        + (epsilon * qSin (8.0 * y));
-
-    return result;
-}
-
-QPointF GeoDataUTM::mapLonLatToXY( qreal lambda, qreal phi, qreal lambda0 )
-{
-    qreal N;
-    qreal nu2;
-    qreal ep2;
-    qreal t;
-    qreal t2;
-    qreal l;
-    qreal l3coef, l4coef, l5coef, l6coef, l7coef, l8coef;
-
-    // Precalculate ep2
-    ep2 = (qPow (GeoDataUTM::sm_a, 2.0) - qPow (GeoDataUTM::sm_b, 2.0)) / qPow (GeoDataUTM::sm_b, 2.0);
-
-    // Precalculate nu2
-    nu2 = ep2 * qPow (qCos(phi), 2.0);
-
-    // Precalculate N
-    N = qPow (GeoDataUTM::sm_a, 2.0) / (GeoDataUTM::sm_b * qSqrt (1 + nu2));
-
-    // Precalculate t
-    t = qTan (phi);
-    t2 = t * t;
-
-    // Precalculate l
-    l = lambda - lambda0;
-
-    /*
-     * Precalculate coefficients for l**n in the equations below
-     * so a normal human being can read the expressions for easting
-     * and northing
-     * -- l**1 and l**2 have coefficients of 1.0
-     */
-    l3coef = 1.0 - t2 + nu2;
-
-    l4coef = 5.0 - t2 + 9 * nu2 + 4.0 * (nu2 * nu2);
-
-    l5coef = 5.0 - 18.0 * t2 + (t2 * t2) + 14.0 * nu2
-        - 58.0 * t2 * nu2;
-
-    l6coef = 61.0 - 58.0 * t2 + (t2 * t2) + 270.0 * nu2
-        - 330.0 * t2 * nu2;
-
-    l7coef = 61.0 - 479.0 * t2 + 179.0 * (t2 * t2) - (t2 * t2 * t2);
-
-    l8coef = 1385.0 - 3111.0 * t2 + 543.0 * (t2 * t2) - (t2 * t2 * t2);
-
-    // Calculate easting (x)
-    qreal easting = N * qCos(phi) * l
-        + (N / 6.0 * qPow (qCos(phi), 3.0) * l3coef * qPow (l, 3.0))
-        + (N / 120.0 * qPow (qCos(phi), 5.0) * l5coef * qPow (l, 5.0))
-        + (N / 5040.0 * qPow (qCos(phi), 7.0) * l7coef * qPow (l, 7.0));
-
-    // Calculate northing (y)
-    qreal northing = arcLengthOfMeridian (phi)
-        + (t / 2.0 * N * qPow (qCos(phi), 2.0) * qPow (l, 2.0))
-        + (t / 24.0 * N * qPow (qCos(phi), 4.0) * l4coef * qPow (l, 4.0))
-        + (t / 720.0 * N * qPow (qCos(phi), 6.0) * l6coef * qPow (l, 6.0))
-        + (t / 40320.0 * N * qPow (qCos(phi), 8.0) * l8coef * qPow (l, 8.0));
-
-    return QPointF(easting, northing);
-}
-
-QPointF GeoDataUTM::lonLatToUTMXY( qreal lon, qreal lat, qreal zone )
-{
-    QPointF coordinates = GeoDataUTM::mapLonLatToXY( lon, lat, GeoDataUTM::centralMeridianUTM(zone) );
-
-    // Adjust easting and northing for UTM system.
-    coordinates.setX( coordinates.x() * GeoDataUTM::UTMScaleFactor + 500000.0 );
-    coordinates.setY( coordinates.y() * GeoDataUTM::UTMScaleFactor );
-
-    if ( coordinates.y() < 0.0 ) {
-        coordinates.setY( coordinates.y() + 10000000.0 );
-    }
-
-    return coordinates;
-}
-
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
 const GeoDataCoordinates GeoDataCoordinates::null = GeoDataCoordinates( 0, 0, 0 ); // don't use default constructor!
@@ -1442,7 +1195,7 @@ QString GeoDataCoordinates::lonLatToUTMString( qreal lon, qreal lat,
 
     int zoneNumber = zoneString.toInt();
 
-    QPointF coordinates = GeoDataUTM::lonLatToUTMXY(lon, lat, zoneNumber);
+    QPointF coordinates = GeoDataCoordinatesPrivate::lonLatToUTMXY(lon, lat, zoneNumber);
 
     QString eastingString  = QString::number(coordinates.x(), 'f', 2);
     QString northingString = QString::number(coordinates.y(), 'f', 2);
@@ -1717,6 +1470,163 @@ Quaternion GeoDataCoordinatesPrivate::basePoint( const Quaternion &q1, const Qua
     Quaternion const a = (q2.inverse() * q3).log();
     Quaternion const b = (q2.inverse() * q1).log();
     return q2 * ((a+b)*-0.25).exp();
+}
+
+
+
+qreal GeoDataCoordinatesPrivate::arcLengthOfMeridian( qreal phi )
+{
+    // Precalculate n
+    qreal const n = (GeoDataCoordinatesPrivate::sm_semiMajorAxis - GeoDataCoordinatesPrivate::sm_semiMinorAxis)
+                    / (GeoDataCoordinatesPrivate::sm_semiMajorAxis + GeoDataCoordinatesPrivate::sm_semiMinorAxis);
+
+    // Precalculate alpha
+    qreal const alpha = ( (GeoDataCoordinatesPrivate::sm_semiMajorAxis + GeoDataCoordinatesPrivate::sm_semiMinorAxis) / 2.0)
+                        * (1.0 + (qPow (n, 2.0) / 4.0) + (qPow (n, 4.0) / 64.0) );
+
+    // Precalculate beta
+    qreal const beta = (-3.0 * n / 2.0)
+                        + (9.0 * qPow (n, 3.0) / 16.0)
+                        + (-3.0 * qPow (n, 5.0) / 32.0);
+
+    // Precalculate gamma
+    qreal const gamma = (15.0 * qPow (n, 2.0) / 16.0)
+                        + (-15.0 * qPow (n, 4.0) / 32.0);
+
+    // Precalculate delta
+    qreal const delta = (-35.0 * qPow (n, 3.0) / 48.0)
+                        + (105.0 * qPow (n, 5.0) / 256.0);
+
+    // Precalculate epsilon
+    qreal const epsilon = (315.0 * qPow (n, 4.0) / 512.0);
+
+    // Now calculate the sum of the series and return
+    qreal const result = alpha * (phi + (beta * qSin (2.0 * phi))
+                        + (gamma * qSin (4.0 * phi))
+                        + (delta * qSin (6.0 * phi))
+                        + (epsilon * qSin (8.0 * phi)));
+
+    return result;
+}
+
+qreal GeoDataCoordinatesPrivate::centralMeridianUTM( qreal zone )
+{
+    return DEG2RAD*(-183.0 + (zone * 6.0));
+}
+
+qreal GeoDataCoordinatesPrivate::footpointLatitude( qreal northing )
+{
+    // Precalculate n (Eq. 10.18)
+    qreal const n = (GeoDataCoordinatesPrivate::sm_semiMajorAxis - GeoDataCoordinatesPrivate::sm_semiMinorAxis)
+                    / (GeoDataCoordinatesPrivate::sm_semiMajorAxis + GeoDataCoordinatesPrivate::sm_semiMinorAxis);
+
+    // Precalculate alpha (Eq. 10.22)
+    // (Same as alpha in Eq. 10.17)
+    qreal const alpha = ((GeoDataCoordinatesPrivate::sm_semiMajorAxis + GeoDataCoordinatesPrivate::sm_semiMinorAxis) / 2.0)
+                        * (1 + (qPow (n, 2.0) / 4) + (qPow (n, 4.0) / 64));
+
+    // Precalculate y (Eq. 10.23)
+    qreal const y = northing / alpha;
+
+    // Precalculate beta (Eq. 10.22)
+    qreal const beta = (3.0 * n / 2.0) + (-27.0 * qPow (n, 3.0) / 32.0)
+                        + (269.0 * qPow (n, 5.0) / 512.0);
+
+    // Precalculate gamma (Eq. 10.22)
+    qreal const gamma = (21.0 * qPow (n, 2.0) / 16.0)
+                        + (-55.0 * qPow (n, 4.0) / 32.0);
+
+    // Precalculate delta (Eq. 10.22)
+    qreal const delta = (151.0 * qPow (n, 3.0) / 96.0)
+                        + (-417.0 * qPow (n, 5.0) / 128.0);
+
+    // Precalculate epsilon (Eq. 10.22)
+    qreal const epsilon = (1097.0 * qPow (n, 4.0) / 512.0);
+
+    // Now calculate the sum of the series (Eq. 10.21)
+    qreal const result = y + (beta * qSin (2.0 * y))
+                        + (gamma * qSin (4.0 * y))
+                        + (delta * qSin (6.0 * y))
+                        + (epsilon * qSin (8.0 * y));
+
+    return result;
+}
+
+QPointF GeoDataCoordinatesPrivate::mapLonLatToXY( qreal lambda, qreal phi, qreal lambda0 )
+{
+    qreal N;
+    qreal nu2;
+    qreal ep2;
+    qreal t;
+    qreal t2;
+    qreal l;
+    qreal l3coef, l4coef, l5coef, l6coef, l7coef, l8coef;
+
+    // Precalculate ep2
+    ep2 = (qPow (GeoDataCoordinatesPrivate::sm_semiMajorAxis, 2.0) - qPow (GeoDataCoordinatesPrivate::sm_semiMinorAxis, 2.0)) / qPow (GeoDataCoordinatesPrivate::sm_semiMinorAxis, 2.0);
+
+    // Precalculate nu2
+    nu2 = ep2 * qPow (qCos(phi), 2.0);
+
+    // Precalculate N
+    N = qPow (GeoDataCoordinatesPrivate::sm_semiMajorAxis, 2.0) / (GeoDataCoordinatesPrivate::sm_semiMinorAxis * qSqrt (1 + nu2));
+
+    // Precalculate t
+    t = qTan (phi);
+    t2 = t * t;
+
+    // Precalculate l
+    l = lambda - lambda0;
+
+    /*
+     * Precalculate coefficients for l**n in the equations below
+     * so a normal human being can read the expressions for easting
+     * and northing
+     * -- l**1 and l**2 have coefficients of 1.0
+     */
+    l3coef = 1.0 - t2 + nu2;
+
+    l4coef = 5.0 - t2 + 9 * nu2 + 4.0 * (nu2 * nu2);
+
+    l5coef = 5.0 - 18.0 * t2 + (t2 * t2) + 14.0 * nu2
+        - 58.0 * t2 * nu2;
+
+    l6coef = 61.0 - 58.0 * t2 + (t2 * t2) + 270.0 * nu2
+        - 330.0 * t2 * nu2;
+
+    l7coef = 61.0 - 479.0 * t2 + 179.0 * (t2 * t2) - (t2 * t2 * t2);
+
+    l8coef = 1385.0 - 3111.0 * t2 + 543.0 * (t2 * t2) - (t2 * t2 * t2);
+
+    // Calculate easting (x)
+    qreal easting = N * qCos(phi) * l
+        + (N / 6.0 * qPow (qCos(phi), 3.0) * l3coef * qPow (l, 3.0))
+        + (N / 120.0 * qPow (qCos(phi), 5.0) * l5coef * qPow (l, 5.0))
+        + (N / 5040.0 * qPow (qCos(phi), 7.0) * l7coef * qPow (l, 7.0));
+
+    // Calculate northing (y)
+    qreal northing = arcLengthOfMeridian (phi)
+        + (t / 2.0 * N * qPow (qCos(phi), 2.0) * qPow (l, 2.0))
+        + (t / 24.0 * N * qPow (qCos(phi), 4.0) * l4coef * qPow (l, 4.0))
+        + (t / 720.0 * N * qPow (qCos(phi), 6.0) * l6coef * qPow (l, 6.0))
+        + (t / 40320.0 * N * qPow (qCos(phi), 8.0) * l8coef * qPow (l, 8.0));
+
+    return QPointF(easting, northing);
+}
+
+QPointF GeoDataCoordinatesPrivate::lonLatToUTMXY( qreal lon, qreal lat, qreal zone )
+{
+    QPointF coordinates = GeoDataCoordinatesPrivate::mapLonLatToXY( lon, lat, GeoDataCoordinatesPrivate::centralMeridianUTM(zone) );
+
+    // Adjust easting and northing for UTM system.
+    coordinates.setX( coordinates.x() * GeoDataCoordinatesPrivate::sm_utmScaleFactor + 500000.0 );
+    coordinates.setY( coordinates.y() * GeoDataCoordinatesPrivate::sm_utmScaleFactor );
+
+    if ( coordinates.y() < 0.0 ) {
+        coordinates.setY( coordinates.y() + 10000000.0 );
+    }
+
+    return coordinates;
 }
 
 }
