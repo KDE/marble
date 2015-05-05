@@ -376,27 +376,6 @@ class GEODATA_EXPORT GeoDataCoordinates
      * convenience function that uses the default notation
      */
     QString latToString() const;
-
-    static QString lonLatToUTMString( qreal lon, qreal lat,
-                                                 GeoDataCoordinates::Unit unit = Radian );
-    /**
-     * @brief return a string representation of UTM zone + band / eastern + northing
-     */
-    QString lonLatToUTMString() const;
-
-    static QString lonToUTMString( qreal lon, qreal lat,
-                                              GeoDataCoordinates::Unit unit = Radian );
-    /**
-     * @brief return a string representation of UTM zone
-     */
-    QString lonToUTMString();
-
-    static QString latToUTMString( qreal lon, qreal lat,
-                                              GeoDataCoordinates::Unit unit = Radian );
-    /**
-     * @brief return a string representation of UTM latitude band
-     */
-    QString latToUTMString();
     
     virtual bool operator==( const GeoDataCoordinates& ) const;
     virtual bool operator !=( const GeoDataCoordinates& ) const;

@@ -110,7 +110,7 @@ class GeoDataCoordinatesPrivate
     * GPS: Theory and Practice, 3rd ed.  New York: Springer-Verlag Wien, 1994.
     *
     * @param phi Latitude of the point, in radians.
-    * @return The ellipsoidal disqTance of the point from the equator, in meters.
+    * @return The ellipsoidal distance of the point from the equator, in meters.
     */
     static qreal arcLengthOfMeridian( qreal phi );
 
@@ -164,6 +164,42 @@ class GeoDataCoordinatesPrivate
      * easting and northing of the UTM coordinates computed.
      */
     static QPointF lonLatToUTMXY( qreal lon, qreal lat, qreal zone );
+
+    /**
+    * @brief retrieves the UTM latitude band of a longitude/latitude
+    * pair
+    * @param lon longitude, in radians
+    * @param lat latitude, in radians
+    * @return latitude band
+    */
+    static QString latitudeBand( qreal lon, qreal lat );
+
+    /**
+    * @brief retrieves the northing value of a longitude/latitude
+    * pair
+    * @param lon longitude, in radians
+    * @param lat latitude, in radians
+    * @return UTM northing value
+    */
+    static qreal northing( qreal lon, qreal lat );
+
+    /**
+    * @brief retrieves the UTM zone number of a longitude/latitude
+    * pair
+    * @param lon longitude, in radians
+    * @param lat latitude, in radians
+    * @return UTM zone number
+    */
+    static int zone( qreal lon, qreal lat );
+
+    /**
+    * @brief  retrieves the easting value of a longitude/latitude
+    * pair
+    * @param lon longitude, in radians
+    * @param lat latitude, in radians
+    * @return UTM easting value
+    */
+    static qreal easting( qreal lon, qreal lat );
 
     Quaternion m_q;
     qreal      m_lon;

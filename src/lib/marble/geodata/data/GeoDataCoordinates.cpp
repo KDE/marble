@@ -711,7 +711,6 @@ void GeoDataCoordinates::setLatitude( qreal _lat, GeoDataCoordinates::Unit unit 
     }
 }
 
-
 void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat, 
                                GeoDataCoordinates::Unit unit ) const
 {
@@ -928,7 +927,14 @@ QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation, int
         QString coordString;
 
         if( notation == GeoDataCoordinates::UTM ){
-            coordString = lonLatToUTMString( d->m_lon, d->m_lat );
+
+            QString zoneString = QString::number( GeoDataCoordinatesPrivate::zone(d->m_lon, d->m_lat) );
+            QString bandString = GeoDataCoordinatesPrivate::latitudeBand(d->m_lon, d->m_lat);
+
+            QString eastingString  = QString::number(GeoDataCoordinatesPrivate::easting(d->m_lon, d->m_lat), 'f', 2);
+            QString northingString = QString::number(GeoDataCoordinatesPrivate::northing(d->m_lon, d->m_lat), 'f', 2);
+
+            return QString("%1%2 %3 m E, %4 m N").arg(zoneString).arg(bandString).arg(eastingString).arg(northingString);
         }
         else{
             coordString = lonToString( d->m_lon, notation, Radian, precision )
@@ -945,8 +951,22 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
                                                     char format )
 {
     if( notation == GeoDataCoordinates::UTM ){
-        // Try his best without knowing latitude
-        return lonToUTMString( lon, 0, unit );
+        /**
+         * FIXME: UTM needs lon + lat to know zone number and easting
+         * By now, this code returns the zone+easting of the point
+         * (lon, equator), but this can differ a lot at different locations
+         */
+
+        qreal lonRad = ( unit == Radian ) ? lon : lon * DEG2RAD;
+
+        QString result = QString::number( GeoDataCoordinatesPrivate::zone(lonRad, 0) );
+
+        if(precision > 0){
+            QString eastingString = QString::number( GeoDataCoordinatesPrivate::easting(lonRad, 0), 'f', precision );
+            result + QString(" %1 m E").arg(eastingString);
+        }
+
+        return result;
     }
 
     QString weString = ( lon < 0 ) ? tr("W") : tr("E");
@@ -1092,8 +1112,22 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
                                                     char format )
 {
     if( notation == GeoDataCoordinates::UTM ){
-        // Try his best without knowing longitude
-        return latToUTMString( 0, lat, unit );
+        /**
+         * FIXME: UTM needs lon + lat to know latitude band and northing
+         * By now, this code returns the band+northing of the point
+         * (meridian, lat), but this can differ a lot at different locations
+         */
+
+        qreal latRad = ( unit == Radian ) ? lat : lat * DEG2RAD;
+
+        QString result = GeoDataCoordinatesPrivate::latitudeBand(0, latRad);
+
+        if ( precision > 0 ){
+            QString northingString = QString::number( GeoDataCoordinatesPrivate::northing(0, latRad), 'f', 2 );
+            result += QString(" %1 m N").arg(northingString);
+        }
+
+        return result;
     }
 
     QString pmString;
@@ -1185,106 +1219,6 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
 QString GeoDataCoordinates::latToString() const
 {
     return GeoDataCoordinates::latToString( d->m_lat, s_notation );
-}
-
-QString GeoDataCoordinates::lonLatToUTMString( qreal lon, qreal lat,
-                                                    GeoDataCoordinates::Unit unit )
-{
-    QString zoneString = GeoDataCoordinates::lonToUTMString(lon, lat, unit);
-    QString bandString = GeoDataCoordinates::latToUTMString(lon, lat, unit);
-
-    int zoneNumber = zoneString.toInt();
-
-    QPointF coordinates = GeoDataCoordinatesPrivate::lonLatToUTMXY(lon, lat, zoneNumber);
-
-    QString eastingString  = QString::number(coordinates.x(), 'f', 2);
-    QString northingString = QString::number(coordinates.y(), 'f', 2);
-
-    return QString("%1%2 %3 m E, %4 m N").arg(zoneString).arg(bandString).arg(eastingString).arg(northingString);
-}
-
-QString GeoDataCoordinates::lonLatToUTMString() const
-{
-    return GeoDataCoordinates::lonLatToUTMString( d->m_lon, d->m_lat );
-}
-
-QString GeoDataCoordinates::lonToUTMString( qreal lon, qreal lat,
-                                                       GeoDataCoordinates::Unit unit )
-{
-    // Converts lon and lat to degrees
-    qreal lonDeg = (unit == GeoDataCoordinates::Degree) ? lon : lon*RAD2DEG;
-    qreal latDeg = (unit == GeoDataCoordinates::Degree) ? lat : lat*RAD2DEG;
-
-    if ( latDeg < -80 || latDeg > 84 ) {
-        // There is no numbering associated to the poles
-        return QString("");
-    }
-
-    // Obtains the zone number handling all the so called "exceptions"
-    // See problem: http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions
-    // See solution: http://gis.stackexchange.com/questions/13291/computing-utm-zone-from-lat-long-point
-
-    // General
-    int zoneNumber = static_cast<int>( (lonDeg+180) / 6.0 ) + 1;
-
-    // Southwest Norway
-    if ( latDeg >= 56 && latDeg < 64 && lonDeg >= 3 && lonDeg < 12 ) {
-        zoneNumber = 32;
-    }
-
-    // Svalbard
-    if ( latDeg >= 72 && latDeg < 84 ) {
-        if ( lonDeg >= 0 && lonDeg < 9 ) {
-            zoneNumber = 31;
-        } else if ( lonDeg >= 9 && lonDeg < 21 ) {
-            zoneNumber = 33;
-        } else if ( lonDeg >= 21 && lonDeg < 33 ) {
-            zoneNumber = 35;
-        } else if ( lonDeg >= 33 && lonDeg < 42 ) {
-            zoneNumber = 37;
-        }
-    }
-
-    return QString::number(zoneNumber);
-}
-
-QString GeoDataCoordinates::lonToUTMString()
-{
-    return GeoDataCoordinates::lonToUTMString( d->m_lon , d->m_lat );
-}
-
-QString GeoDataCoordinates::latToUTMString( qreal lon, qreal lat,
-                                                        GeoDataCoordinates::Unit unit )
-{
-    // Obtains the latitude bands handling all the so called "exceptions"
-
-    // Converts lon and lat to degrees
-    qreal lonDeg = (unit == GeoDataCoordinates::Degree) ? lon : lon*RAD2DEG;
-    qreal latDeg = (unit == GeoDataCoordinates::Degree) ? lat : lat*RAD2DEG;
-
-    // Regular latitude bands between 80 S and 80 N (that is, between 10 and 170 in the [0,180] interval)
-    int bandLetterIndex = 24; //Avoids "may be used uninitialized" warning
-
-    if ( latDeg < -80 ) {
-        // South pole (A for zones 1-30, B for zones 31-60)
-        bandLetterIndex = ((lonDeg+180) < 6*31) ? 0 : 1;
-    } else if ( latDeg >= -80 && latDeg <= 80 ) {
-        // General (+2 because the general lettering starts in C)
-        bandLetterIndex = static_cast<int>( (latDeg+80.0) / 8.0 ) + 2;
-    } else if ( latDeg >= 80 && latDeg < 84 ) {
-        // Band X is extended 4 more degrees
-        bandLetterIndex = 21;
-    } else if ( latDeg >= 84 ) {
-        // North pole (Y for zones 1-30, Z for zones 31-60)
-        bandLetterIndex = ((lonDeg+180) < 6*31) ? 22 : 23;
-    }
-
-    return QString( "ABCDEFGHJKLMNPQRSTUVWXYZ?" ).at( bandLetterIndex );
-}
-
-QString GeoDataCoordinates::latToUTMString()
-{
-    return GeoDataCoordinates::latToUTMString( d->m_lon , d->m_lat );
 }
 
 bool GeoDataCoordinates::operator==( const GeoDataCoordinates &rhs ) const
@@ -1617,19 +1551,94 @@ QPointF GeoDataCoordinatesPrivate::mapLonLatToXY( qreal lambda, qreal phi, qreal
     return QPointF(easting, northing);
 }
 
-QPointF GeoDataCoordinatesPrivate::lonLatToUTMXY( qreal lon, qreal lat, qreal zone )
-{
-    QPointF coordinates = GeoDataCoordinatesPrivate::mapLonLatToXY( lon, lat, GeoDataCoordinatesPrivate::centralMeridianUTM(zone) );
+int GeoDataCoordinatesPrivate::zone( qreal lon, qreal lat ){
+    // Converts lon and lat to degrees
+    qreal lonDeg = lon * RAD2DEG;
+    qreal latDeg = lat * RAD2DEG;
 
-    // Adjust easting and northing for UTM system.
-    coordinates.setX( coordinates.x() * GeoDataCoordinatesPrivate::sm_utmScaleFactor + 500000.0 );
-    coordinates.setY( coordinates.y() * GeoDataCoordinatesPrivate::sm_utmScaleFactor );
-
-    if ( coordinates.y() < 0.0 ) {
-        coordinates.setY( coordinates.y() + 10000000.0 );
+    if ( latDeg < -80 || latDeg > 84 ) {
+        // There is no numbering associated to the poles
+        return 0;
     }
 
-    return coordinates;
+    // Obtains the zone number handling all the so called "exceptions"
+    // See problem: http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions
+    // See solution: http://gis.stackexchange.com/questions/13291/computing-utm-zone-from-lat-long-point
+
+    // General
+    int zoneNumber = static_cast<int>( (lonDeg+180) / 6.0 ) + 1;
+
+    // Southwest Norway
+    if ( latDeg >= 56 && latDeg < 64 && lonDeg >= 3 && lonDeg < 12 ) {
+        zoneNumber = 32;
+    }
+
+    // Svalbard
+    if ( latDeg >= 72 && latDeg < 84 ) {
+        if ( lonDeg >= 0 && lonDeg < 9 ) {
+            zoneNumber = 31;
+        } else if ( lonDeg >= 9 && lonDeg < 21 ) {
+            zoneNumber = 33;
+        } else if ( lonDeg >= 21 && lonDeg < 33 ) {
+            zoneNumber = 35;
+        } else if ( lonDeg >= 33 && lonDeg < 42 ) {
+            zoneNumber = 37;
+        }
+    }
+
+    return zoneNumber;
+}
+
+qreal GeoDataCoordinatesPrivate::easting( qreal lon, qreal lat ){
+    int zoneNumber = zone( lon, lat );
+
+    QPointF coordinates = GeoDataCoordinatesPrivate::mapLonLatToXY( lon, lat, GeoDataCoordinatesPrivate::centralMeridianUTM(zoneNumber) );
+
+    // Adjust easting and northing for UTM system
+    qreal easting = coordinates.x() * GeoDataCoordinatesPrivate::sm_utmScaleFactor + 500000.0;
+
+    return easting;
+}
+
+QString GeoDataCoordinatesPrivate::latitudeBand( qreal lon, qreal lat ){
+    // Obtains the latitude bands handling all the so called "exceptions"
+
+    // Converts lon and lat to degrees
+    qreal lonDeg = lon * RAD2DEG;
+    qreal latDeg = lat * RAD2DEG;
+
+    // Regular latitude bands between 80 S and 80 N (that is, between 10 and 170 in the [0,180] interval)
+    int bandLetterIndex = 24; //Avoids "may be used uninitialized" warning
+
+    if ( latDeg < -80 ) {
+        // South pole (A for zones 1-30, B for zones 31-60)
+        bandLetterIndex = ( (lonDeg+180) < 6*31 ) ? 0 : 1;
+    } else if ( latDeg >= -80 && latDeg <= 80 ) {
+        // General (+2 because the general lettering starts in C)
+        bandLetterIndex = static_cast<int>( (latDeg+80.0) / 8.0 ) + 2;
+    } else if ( latDeg >= 80 && latDeg < 84 ) {
+        // Band X is extended 4 more degrees
+        bandLetterIndex = 21;
+    } else if ( latDeg >= 84 ) {
+        // North pole (Y for zones 1-30, Z for zones 31-60)
+        bandLetterIndex = ((lonDeg+180) < 6*31) ? 22 : 23;
+    }
+
+    return QString( "ABCDEFGHJKLMNPQRSTUVWXYZ?" ).at( bandLetterIndex );
+}
+
+qreal GeoDataCoordinatesPrivate::northing( qreal lon, qreal lat ){
+    int zoneNumber = zone( lon, lat );
+
+    QPointF coordinates = GeoDataCoordinatesPrivate::mapLonLatToXY( lon, lat, GeoDataCoordinatesPrivate::centralMeridianUTM(zoneNumber) );
+
+    qreal northing = coordinates.y() * GeoDataCoordinatesPrivate::sm_utmScaleFactor;
+
+    if ( northing < 0.0 ) {
+        northing += 10000000.0;
+    }
+
+    return northing;
 }
 
 }

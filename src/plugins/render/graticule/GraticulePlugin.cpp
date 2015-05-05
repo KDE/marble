@@ -609,9 +609,10 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
         while ( itStep < eastLineLon ) {
             // Create a matching label
+            int precision = (notation == GeoDataCoordinates::UTM) ? 0 : -1;
             QString label = GeoDataCoordinates::lonToString( itStep,
                                   notation, GeoDataCoordinates::Degree,
-                                  -1, 'g' );
+                                  precision, 'g' );
 
             // No additional labels for the prime meridian and the antimeridian
 
