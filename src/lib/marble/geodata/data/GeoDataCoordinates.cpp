@@ -927,12 +927,15 @@ QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation, int
         QString coordString;
 
         if( notation == GeoDataCoordinates::UTM ){
+            int zoneNumber = GeoDataCoordinatesPrivate::lonLatToZone(d->m_lon, d->m_lat);
 
-            QString zoneString = QString::number( GeoDataCoordinatesPrivate::zone(d->m_lon, d->m_lat) );
-            QString bandString = GeoDataCoordinatesPrivate::latitudeBand(d->m_lon, d->m_lat);
+            // Handle lack of UTM zone number in the poles
+            QString zoneString = ( zoneNumber > 0 ) ? QString::number(zoneNumber) : QString("");
 
-            QString eastingString  = QString::number(GeoDataCoordinatesPrivate::easting(d->m_lon, d->m_lat), 'f', 2);
-            QString northingString = QString::number(GeoDataCoordinatesPrivate::northing(d->m_lon, d->m_lat), 'f', 2);
+            QString bandString = GeoDataCoordinatesPrivate::lonLatToLatitudeBand(d->m_lon, d->m_lat);
+
+            QString eastingString  = QString::number(GeoDataCoordinatesPrivate::lonLatToEasting(d->m_lon, d->m_lat), 'f', 2);
+            QString northingString = QString::number(GeoDataCoordinatesPrivate::lonLatToNorthing(d->m_lon, d->m_lat), 'f', 2);
 
             return QString("%1%2 %3 m E, %4 m N").arg(zoneString).arg(bandString).arg(eastingString).arg(northingString);
         }
@@ -959,10 +962,13 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
 
         qreal lonRad = ( unit == Radian ) ? lon : lon * DEG2RAD;
 
-        QString result = QString::number( GeoDataCoordinatesPrivate::zone(lonRad, 0) );
+        int zoneNumber = GeoDataCoordinatesPrivate::lonLatToZone(lonRad, 0);
+
+        // Handle lack of UTM zone number in the poles
+        QString result = ( zoneNumber > 0 ) ? QString::number(zoneNumber) : QString("");
 
         if(precision > 0){
-            QString eastingString = QString::number( GeoDataCoordinatesPrivate::easting(lonRad, 0), 'f', precision );
+            QString eastingString = QString::number( GeoDataCoordinatesPrivate::lonLatToEasting(lonRad, 0), 'f', 2 );
             result + QString(" %1 m E").arg(eastingString);
         }
 
@@ -1120,10 +1126,10 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
 
         qreal latRad = ( unit == Radian ) ? lat : lat * DEG2RAD;
 
-        QString result = GeoDataCoordinatesPrivate::latitudeBand(0, latRad);
+        QString result = GeoDataCoordinatesPrivate::lonLatToLatitudeBand(0, latRad);
 
         if ( precision > 0 ){
-            QString northingString = QString::number( GeoDataCoordinatesPrivate::northing(0, latRad), 'f', 2 );
+            QString northingString = QString::number( GeoDataCoordinatesPrivate::lonLatToNorthing(0, latRad), 'f', 2 );
             result += QString(" %1 m N").arg(northingString);
         }
 
@@ -1240,6 +1246,22 @@ void GeoDataCoordinates::setAltitude( const qreal altitude )
 qreal GeoDataCoordinates::altitude() const
 {
     return d->m_altitude;
+}
+
+int GeoDataCoordinates::utmZone() const{
+    return GeoDataCoordinatesPrivate::lonLatToZone(d->m_lon, d->m_lat);
+}
+
+qreal GeoDataCoordinates::utmEasting() const{
+    return GeoDataCoordinatesPrivate::lonLatToEasting(d->m_lon, d->m_lat);
+}
+
+QString GeoDataCoordinates::utmLatitudeBand() const{
+    return GeoDataCoordinatesPrivate::lonLatToLatitudeBand(d->m_lon, d->m_lat);
+}
+
+qreal GeoDataCoordinates::utmNorthing() const{
+    return GeoDataCoordinatesPrivate::lonLatToNorthing(d->m_lon, d->m_lat);
 }
 
 int GeoDataCoordinates::detail() const
@@ -1551,7 +1573,7 @@ QPointF GeoDataCoordinatesPrivate::mapLonLatToXY( qreal lambda, qreal phi, qreal
     return QPointF(easting, northing);
 }
 
-int GeoDataCoordinatesPrivate::zone( qreal lon, qreal lat ){
+int GeoDataCoordinatesPrivate::lonLatToZone( qreal lon, qreal lat ){
     // Converts lon and lat to degrees
     qreal lonDeg = lon * RAD2DEG;
     qreal latDeg = lat * RAD2DEG;
@@ -1589,8 +1611,8 @@ int GeoDataCoordinatesPrivate::zone( qreal lon, qreal lat ){
     return zoneNumber;
 }
 
-qreal GeoDataCoordinatesPrivate::easting( qreal lon, qreal lat ){
-    int zoneNumber = zone( lon, lat );
+qreal GeoDataCoordinatesPrivate::lonLatToEasting( qreal lon, qreal lat ){
+    int zoneNumber = lonLatToZone( lon, lat );
 
     QPointF coordinates = GeoDataCoordinatesPrivate::mapLonLatToXY( lon, lat, GeoDataCoordinatesPrivate::centralMeridianUTM(zoneNumber) );
 
@@ -1600,7 +1622,7 @@ qreal GeoDataCoordinatesPrivate::easting( qreal lon, qreal lat ){
     return easting;
 }
 
-QString GeoDataCoordinatesPrivate::latitudeBand( qreal lon, qreal lat ){
+QString GeoDataCoordinatesPrivate::lonLatToLatitudeBand( qreal lon, qreal lat ){
     // Obtains the latitude bands handling all the so called "exceptions"
 
     // Converts lon and lat to degrees
@@ -1627,8 +1649,8 @@ QString GeoDataCoordinatesPrivate::latitudeBand( qreal lon, qreal lat ){
     return QString( "ABCDEFGHJKLMNPQRSTUVWXYZ?" ).at( bandLetterIndex );
 }
 
-qreal GeoDataCoordinatesPrivate::northing( qreal lon, qreal lat ){
-    int zoneNumber = zone( lon, lat );
+qreal GeoDataCoordinatesPrivate::lonLatToNorthing( qreal lon, qreal lat ){
+    int zoneNumber = lonLatToZone( lon, lat );
 
     QPointF coordinates = GeoDataCoordinatesPrivate::mapLonLatToXY( lon, lat, GeoDataCoordinatesPrivate::centralMeridianUTM(zoneNumber) );
 

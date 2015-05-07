@@ -222,6 +222,35 @@ class GEODATA_EXPORT GeoDataCoordinates
     void setAltitude( const qreal altitude );
 
     /**
+    * @brief retrieves the UTM zone of the GeoDataCoordinates object.
+    * If the point is located on one of the poles (latitude < 80S or
+    * latitude > 84N) there is no UTM zone associated; in this case,
+    * 0 is returned.
+    * @return UTM zone.
+    */
+    int utmZone() const;
+
+    /**
+    * @brief retrieves the UTM easting of the GeoDataCoordinates object,
+    * in meters.
+    * @return UTM easting
+    */
+    qreal utmEasting() const;
+
+    /**
+    * @brief retrieves the UTM latitude band of the GeoDataCoordinates object
+    * @return UTM latitude band
+    */
+    QString utmLatitudeBand() const;
+
+    /**
+    * @brief retrieves the UTM northing of the GeoDataCoordinates object,
+    * in meters
+    * @return UTM northing
+    */
+    qreal utmNorthing() const;
+
+    /**
     * @brief return the detail flag
     * detail range: 0 for most important points, 5 for least important
     */

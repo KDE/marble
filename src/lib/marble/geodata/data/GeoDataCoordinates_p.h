@@ -172,7 +172,7 @@ class GeoDataCoordinatesPrivate
     * @param lat latitude, in radians
     * @return latitude band
     */
-    static QString latitudeBand( qreal lon, qreal lat );
+    static QString lonLatToLatitudeBand( qreal lon, qreal lat );
 
     /**
     * @brief retrieves the northing value of a longitude/latitude
@@ -181,7 +181,7 @@ class GeoDataCoordinatesPrivate
     * @param lat latitude, in radians
     * @return UTM northing value
     */
-    static qreal northing( qreal lon, qreal lat );
+    static qreal lonLatToNorthing( qreal lon, qreal lat );
 
     /**
     * @brief retrieves the UTM zone number of a longitude/latitude
@@ -190,7 +190,7 @@ class GeoDataCoordinatesPrivate
     * @param lat latitude, in radians
     * @return UTM zone number
     */
-    static int zone( qreal lon, qreal lat );
+    static int lonLatToZone( qreal lon, qreal lat );
 
     /**
     * @brief  retrieves the easting value of a longitude/latitude
@@ -199,7 +199,7 @@ class GeoDataCoordinatesPrivate
     * @param lat latitude, in radians
     * @return UTM easting value
     */
-    static qreal easting( qreal lon, qreal lat );
+    static qreal lonLatToEasting( qreal lon, qreal lat );
 
     Quaternion m_q;
     qreal      m_lon;
