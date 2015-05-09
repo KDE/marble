@@ -955,7 +955,7 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
 {
     if( notation == GeoDataCoordinates::UTM ){
         /**
-         * FIXME: UTM needs lon + lat to know zone number and easting
+         * @FIXME: UTM needs lon + lat to know zone number and easting
          * By now, this code returns the zone+easting of the point
          * (lon, equator), but this can differ a lot at different locations
          */
@@ -969,7 +969,7 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
 
         if(precision > 0){
             QString eastingString = QString::number( GeoDataCoordinatesPrivate::lonLatToEasting(lonRad, 0), 'f', 2 );
-            result + QString(" %1 m E").arg(eastingString);
+            result += QString(" %1 m E").arg(eastingString);
         }
 
         return result;

@@ -596,6 +596,9 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
     GeoDataCoordinates::Notation notation = marbleModel()->planet()->id() == "sky" ? GeoDataCoordinates::Astro :
                                                                                      GeoDataCoordinates::defaultNotation();
 
+    // Set precision to 0 in UTM in order to show only zone number.
+    int precision = (notation == GeoDataCoordinates::UTM) ? 0 : -1;
+
     // Longitude
     qreal westLon = viewLatLonAltBox.west( GeoDataCoordinates::Degree );
     qreal eastLon = viewLatLonAltBox.east( GeoDataCoordinates::Degree );
@@ -607,9 +610,15 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
          ( westLon == -180.0 && eastLon == +180.0 ) ) {
         qreal itStep = westLineLon;
 
+        if (notation == GeoDataCoordinates::UTM ){
+            /* Add 3 degrees (half of a UTM zone) to the actual longitude,
+             * in order to avoid fuzziness like -119.999999999
+             */
+            itStep += 3;
+        }
+
         while ( itStep < eastLineLon ) {
             // Create a matching label
-            int precision = (notation == GeoDataCoordinates::UTM) ? 0 : -1;
             QString label = GeoDataCoordinates::lonToString( itStep,
                                   notation, GeoDataCoordinates::Degree,
                                   precision, 'g' );
@@ -635,12 +644,19 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
     else {
         qreal itStep = eastLineLon;
 
+        if (notation == GeoDataCoordinates::UTM ){
+            /* Add 3 degrees (half of a UTM zone) to the actual longitude,
+             * in order to avoid fuzziness like -119.999999999
+             */
+            itStep += 3;
+        }
+
         while ( itStep < 180.0 ) {
 
             // Create a matching label
             QString label = GeoDataCoordinates::lonToString( itStep,
                                   notation, GeoDataCoordinates::Degree,
-                                  -1, 'g' );
+                                  precision, 'g' );
 
             // No additional labels for the prime meridian and the antimeridian
 
@@ -661,12 +677,20 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         }
 
         itStep = -180.0;
+
+        if (notation == GeoDataCoordinates::UTM ){
+            /* Add 3 degrees (half of a UTM zone) to the actual longitude,
+             * in order to avoid fuzziness like -119.999999999
+             */
+            itStep += 3;
+        }
+
         while ( itStep < westLineLon ) {
 
             // Create a matching label
             QString label = GeoDataCoordinates::lonToString( itStep,
                                   notation, GeoDataCoordinates::Degree,
-                                  -1, 'g' );
+                                  precision, 'g' );
 
             // No additional labels for the prime meridian and the antimeridian
             if ( labelPositionFlags.testFlag( LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
