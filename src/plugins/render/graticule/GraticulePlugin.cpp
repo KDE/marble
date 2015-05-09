@@ -612,7 +612,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
         if (notation == GeoDataCoordinates::UTM ){
             /* Add 3 degrees (half of a UTM zone) to the actual longitude,
-             * in order to avoid fuzziness like -119.999999999
+             * in order to avoid fuzziness like -114.00000001
              */
             itStep += 3;
         }
@@ -646,7 +646,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
         if (notation == GeoDataCoordinates::UTM ){
             /* Add 3 degrees (half of a UTM zone) to the actual longitude,
-             * in order to avoid fuzziness like -119.999999999
+             * in order to avoid fuzziness like -114.00000001
              */
             itStep += 3;
         }
@@ -680,7 +680,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
         if (notation == GeoDataCoordinates::UTM ){
             /* Add 3 degrees (half of a UTM zone) to the actual longitude,
-             * in order to avoid fuzziness like -119.999999999
+             * in order to avoid fuzziness like -114.00000001
              */
             itStep += 3;
         }
