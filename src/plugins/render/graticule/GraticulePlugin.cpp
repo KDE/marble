@@ -550,10 +550,7 @@ void GraticulePlugin::renderUtmExceptions( GeoPainter *painter,
     // This code renders the so called "exceptions" in the UTM coordinate grid
     // See: http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions
     if ( northPolarGap == 6.0 && southPolarGap == 162.0) {
-        if ( label == "31" ) {
-            renderLongitudeLine( painter, itStep+3.0, viewLatLonAltBox, northPolarGap,
-            southPolarGap, label, labelPositionFlags );
-        } else if ( label == "33" ) {
+        if ( label == "33" ) {
             renderLongitudeLine( painter, itStep-3.0, viewLatLonAltBox, northPolarGap,
             southPolarGap, label, labelPositionFlags );
         } else if ( label == "35" ) {
@@ -610,13 +607,6 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
          ( westLon == -180.0 && eastLon == +180.0 ) ) {
         qreal itStep = westLineLon;
 
-        if (notation == GeoDataCoordinates::UTM ){
-            /* Add 3 degrees (half of a UTM zone) to the actual longitude,
-             * in order to avoid fuzziness like -114.00000001
-             */
-            itStep += 3;
-        }
-
         while ( itStep < eastLineLon ) {
             // Create a matching label
             QString label = GeoDataCoordinates::lonToString( itStep,
@@ -644,15 +634,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
     else {
         qreal itStep = eastLineLon;
 
-        if (notation == GeoDataCoordinates::UTM ){
-            /* Add 3 degrees (half of a UTM zone) to the actual longitude,
-             * in order to avoid fuzziness like -114.00000001
-             */
-            itStep += 3;
-        }
-
         while ( itStep < 180.0 ) {
-
             // Create a matching label
             QString label = GeoDataCoordinates::lonToString( itStep,
                                   notation, GeoDataCoordinates::Degree,
@@ -678,15 +660,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
         itStep = -180.0;
 
-        if (notation == GeoDataCoordinates::UTM ){
-            /* Add 3 degrees (half of a UTM zone) to the actual longitude,
-             * in order to avoid fuzziness like -114.00000001
-             */
-            itStep += 3;
-        }
-
         while ( itStep < westLineLon ) {
-
             // Create a matching label
             QString label = GeoDataCoordinates::lonToString( itStep,
                                   notation, GeoDataCoordinates::Degree,

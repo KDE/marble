@@ -1578,8 +1578,22 @@ int GeoDataCoordinatesPrivate::lonLatToZone( qreal lon, qreal lat ){
     qreal lonDeg = lon * RAD2DEG;
     qreal latDeg = lat * RAD2DEG;
 
+    /* Round the value of the longitude when the distance to the nearest integer
+     * is less than 0.0000001. This avoids fuzzy values such as -114.0000000001, which
+     * can produce a misbehaviour when calculating the zone associated at the borders
+     * of the zone intervals (for example, the interval [-114, -108[ is associated with
+     * zone number 12; if the following rounding is not done, the value returned by
+     * lonLatToZone(114,0) is 11 instead of 12, as the function actually receives
+     * -114.0000000001, which is in the interval [-120,-114[, associated to zone 11
+     */
+    qreal precision = 0.0000001;
+
+    if ( qAbs(lonDeg - qFloor(lonDeg)) < precision || qAbs(lonDeg - qCeil(lonDeg)) < precision ){
+        lonDeg = qRound(lonDeg);
+    }
+
+    // There is no numbering associated to the poles, special value 0 is returned.
     if ( latDeg < -80 || latDeg > 84 ) {
-        // There is no numbering associated to the poles
         return 0;
     }
 
@@ -1613,6 +1627,11 @@ int GeoDataCoordinatesPrivate::lonLatToZone( qreal lon, qreal lat ){
 
 qreal GeoDataCoordinatesPrivate::lonLatToEasting( qreal lon, qreal lat ){
     int zoneNumber = lonLatToZone( lon, lat );
+
+    if ( zoneNumber == 0 ){
+        qreal lonDeg = lon * RAD2DEG;
+        zoneNumber = static_cast<int>( (lonDeg+180) / 6.0 ) + 1;
+    }
 
     QPointF coordinates = GeoDataCoordinatesPrivate::mapLonLatToXY( lon, lat, GeoDataCoordinatesPrivate::centralMeridianUTM(zoneNumber) );
 
@@ -1651,6 +1670,11 @@ QString GeoDataCoordinatesPrivate::lonLatToLatitudeBand( qreal lon, qreal lat ){
 
 qreal GeoDataCoordinatesPrivate::lonLatToNorthing( qreal lon, qreal lat ){
     int zoneNumber = lonLatToZone( lon, lat );
+
+    if ( zoneNumber == 0 ){
+        qreal lonDeg = lon * RAD2DEG;
+        zoneNumber = static_cast<int>( (lonDeg+180) / 6.0 ) + 1;
+    }
 
     QPointF coordinates = GeoDataCoordinatesPrivate::mapLonLatToXY( lon, lat, GeoDataCoordinatesPrivate::centralMeridianUTM(zoneNumber) );
 
