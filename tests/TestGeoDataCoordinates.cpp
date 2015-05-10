@@ -66,6 +66,8 @@ private slots:
     void testToString_DM();
     void testPack_data();
     void testPack();
+    void testUTM_data();
+    void testUTM();
 };
 
 void TestGeoDataCoordinates::initTestCase()
@@ -1776,6 +1778,102 @@ void TestGeoDataCoordinates::testPack()
     QCOMPARE(coordinates1.longitude(GeoDataCoordinates::Degree), coordinates2.longitude(GeoDataCoordinates::Degree));
     QCOMPARE(coordinates1.latitude(GeoDataCoordinates::Degree), coordinates2.latitude(GeoDataCoordinates::Degree));
     QCOMPARE(coordinates1.altitude(), coordinates2.altitude());
+}
+
+/*
+ * test data for testUTM()
+ */
+void TestGeoDataCoordinates::testUTM_data()
+{
+    QTest::addColumn<qreal>("lon");
+    QTest::addColumn<qreal>("lat");
+    QTest::addColumn<int>("zone");
+    QTest::addColumn<QString>("latitudeBand");
+    QTest::addColumn<int>("easting");
+    QTest::addColumn<int>("northing");
+
+    /* Randomly selected locations, converted to UTM with the following
+     * tools to check their correctness:
+     * http://home.hiwaay.net/~taylorc/toolbox/geography/geoutm.html
+     * http://www.earthpoint.us/Convert.aspx
+     * http://www.synnatschke.de/geo-tools/coordinate-converter.php
+     * http://www.latlong.net/lat-long-utm.html
+     * http://leware.net/geo/utmgoogle.htm
+     * http://geographiclib.sourceforge.net/cgi-bin/GeoConvert
+     */
+
+    // Equator
+    addRow() << qreal(-180.0)   << qreal(0.0)       << 1  << "N" << 16602144 << 0;
+    addRow() << qreal(0)        << qreal(0.0)       << 31 << "N" << 16602144 << 0;
+    addRow() << qreal(150.567)  << qreal(0.0)       << 56 << "N" << 22918607 << 0;
+
+    // Zone borders
+    int zoneNumber = 1;
+    for ( int i = -180; i <= 180; i += 6 ){
+        addRow() << qreal(i) << qreal(0.0) << zoneNumber << "N" << 16602144 << 0;
+        zoneNumber++;
+    }
+
+    // Northern hemisphere
+    addRow() << qreal(-180.0)   << qreal(15)        << 1  << "P" << 17734904 << 166051369;
+    addRow() << qreal(0)        << qreal(60.5)      << 31 << "V" << 33523714 << 671085271;
+    addRow() << qreal(150.567)  << qreal(75.123)    << 56 << "X" << 43029080 << 833876115;
+
+    // Southern hemisphere
+    addRow() << qreal(-3.5)     << qreal(-50)       << 30 << "F" << 46416654 << 446124952;
+    addRow() << qreal(22.56)    << qreal(-62.456)   << 34 << "E" << 58047905 << 307404780;
+
+    // Exceptions
+
+    // North pole (no zone associated, so it returns 0)
+    addRow() << qreal(-100.0)   << qreal(85.0)      << 0  << "Y" << 49026986 << 943981733;
+    addRow() << qreal(100.0)    << qreal(85.0)      << 0  << "Z" << 50973014 << 943981733;
+
+    // South pole (no zone associated, so it returns 0)
+    addRow() << qreal(-100.0)   << qreal(-85.0)     << 0  << "A" << 49026986 << 56018267;
+    addRow() << qreal(100.0)    << qreal(-85.0)     << 0  << "B" << 50973014 << 56018267;
+
+    // Stavanger, in southwestern Norway, is in zone 32
+    addRow() << qreal(5.73)     << qreal(58.97)     << 32 << "V" << 31201538 << 654131013;
+    // Same longitude, at the equator, is in zone 31
+    addRow() << qreal(5.73)     << qreal(0.0)       << 31 << "N" << 80389643 << 0;
+
+    // Svalbard is in zone 33
+    addRow() << qreal(10.55)    << qreal(78.88)     << 33 << "X" << 40427848 << 876023047;
+    // Same longitude, at the equator, is in zone 32
+    addRow() << qreal(10.55)    << qreal(0.0)       << 32 << "N" << 67249738 << 0;
+}
+
+/*
+ * test UTM-related functions:
+ *     - utmZone()
+ *     - utmLatitudeBand()
+ *     - utmEasting()
+ *     - utmNorthing()
+ */
+void TestGeoDataCoordinates::testUTM(){
+    QFETCH(qreal, lon);
+    QFETCH(qreal, lat);
+    QFETCH(int, zone);
+    QFETCH(QString, latitudeBand);
+    QFETCH(int, easting);
+    QFETCH(int, northing);
+
+    GeoDataCoordinates coordinates;
+    coordinates.set(lon, lat, 0, GeoDataCoordinates::Degree);
+
+    QCOMPARE(coordinates.utmZone(), zone);
+    QCOMPARE(coordinates.utmLatitudeBand(), latitudeBand);
+
+    /* Comparing integers is safer than comparing qreals. As the expected
+     * values are expressed in centimeters, the actual values are converted
+     * to this unit.
+     */
+    int actualEasting = qRound( 100.0 * coordinates.utmEasting() );
+    int actualNorthing = qRound( 100.0 * coordinates.utmNorthing() );
+
+    QCOMPARE( actualEasting, easting );
+    QCOMPARE( actualNorthing, northing );
 }
 
 QTEST_MAIN(TestGeoDataCoordinates)
