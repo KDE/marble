@@ -958,6 +958,7 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
          * @FIXME: UTM needs lon + lat to know zone number and easting
          * By now, this code returns the zone+easting of the point
          * (lon, equator), but this can differ a lot at different locations
+         * See bug 347536 https://bugs.kde.org/show_bug.cgi?id=347536
          */
 
         qreal lonRad = ( unit == Radian ) ? lon : lon * DEG2RAD;
@@ -1119,9 +1120,10 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
 {
     if( notation == GeoDataCoordinates::UTM ){
         /**
-         * FIXME: UTM needs lon + lat to know latitude band and northing
+         * @FIXME: UTM needs lon + lat to know latitude band and northing
          * By now, this code returns the band+northing of the point
          * (meridian, lat), but this can differ a lot at different locations
+         * See bug 347536 https://bugs.kde.org/show_bug.cgi?id=347536
          */
 
         qreal latRad = ( unit == Radian ) ? lat : lat * DEG2RAD;
