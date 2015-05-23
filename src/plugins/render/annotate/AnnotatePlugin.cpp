@@ -993,7 +993,8 @@ void AnnotatePlugin::addContextItems()
     QAction *separator = new QAction( this );
     separator->setSeparator( true );
 
-    if ( ! MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( !smallScreen ) {
         menu->addAction( Qt::RightButton, m_pasteGraphicItem );
         menu->addAction( Qt::RightButton, separator );
     }
