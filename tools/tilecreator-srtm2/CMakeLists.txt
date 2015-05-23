@@ -17,7 +17,7 @@ add_executable( ${TARGET} ${${TARGET}_SRC} )
 if (QT4_FOUND)
   target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget )
 else()
-  target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} marblewidget )
+  target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} marblewidget-qt5 )
 endif()
 
 if (APPLE)

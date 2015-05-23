@@ -13,7 +13,7 @@ endif()
 set( ${TARGET}_SRC main.cpp)
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} marblewidget )
+target_link_libraries( ${TARGET} ${MARBLEWIDGET} )
 if (QT4_FOUND)
   target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} )
 else()

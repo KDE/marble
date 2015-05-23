@@ -11,7 +11,7 @@ set( ${TARGET}_SRC main.cpp)
 
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} ${OpenCV_LIBRARIES} marblewidget )
+target_link_libraries( ${TARGET} ${OpenCV_LIBRARIES} ${MARBLEWIDGET} )
 target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES} ${Qt5Quick_LIBRARIES} ${Qt5Widget_LIBRARIES} )
 
 add_custom_command(TARGET ${TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different

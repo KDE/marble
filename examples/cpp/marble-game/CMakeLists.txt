@@ -30,7 +30,7 @@ add_executable( ${TARGET} ${${TARGET}_SRCS} )
 
 target_link_libraries(
     ${TARGET}
-    marblewidget
+    ${MARBLEWIDGET}
     marbleui)
 
 if (QT4_FOUND)
