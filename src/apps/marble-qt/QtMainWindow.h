@@ -123,7 +123,7 @@ private Q_SLOTS:
     void  enterWhatsThis();
     void  aboutMarble();
     void  handbook();
-    void  forum();
+    void  openForum();
 
     //Bookmark Menu
     void  openEditBookmarkDialog();
@@ -202,6 +202,7 @@ private:
     QAction *m_aboutQtAction;
     QAction *m_lockFloatItemsAction;
     QAction *m_handbookAction;
+    QAction *m_forumAction;
 
     // Status Bar
     QString     m_position;

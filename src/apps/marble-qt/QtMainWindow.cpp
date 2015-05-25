@@ -155,6 +155,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_aboutQtAction( 0 ),
         m_lockFloatItemsAction( 0 ),
         m_handbookAction( 0 ),
+        m_forumAction( 0 ),
 
         // Status Bar
         m_positionLabel( 0 ),
@@ -380,9 +381,9 @@ void MainWindow::createActions()
      m_whatsThisAction->setStatusTip(tr("Show a detailed explanation of the action."));
      connect(m_whatsThisAction, SIGNAL(triggered()), this, SLOT(enterWhatsThis()));
 
-     m_whatsThisAction = new QAction( tr("Marble &Community"), this);
-     m_whatsThisAction->setStatusTip(tr("Visit Marble's Community Forum"));
-     connect(m_whatsThisAction, SIGNAL(triggered()), this, SLOT(forum()));
+     m_forumAction = new QAction( tr("&Community Forum"), this);
+     m_forumAction->setStatusTip(tr("Visit Marble's Community Forum"));
+     connect(m_forumAction, SIGNAL(triggered()), this, SLOT(openForum()));
 
      m_aboutMarbleAction = new QAction( QIcon(":/icons/marble.png"), tr("&About Marble Virtual Globe"), this);
      m_aboutMarbleAction->setStatusTip(tr("Show the application's About Box"));
@@ -543,6 +544,7 @@ void MainWindow::createMenus( const QList<QAction*> &panelActions )
 
         m_helpMenu = menuBar()->addMenu(tr("&Help"));
         m_helpMenu->addAction(m_handbookAction);
+        m_helpMenu->addAction(m_forumAction);
         m_helpMenu->addSeparator();
         m_helpMenu->addAction(m_whatsThisAction);
         m_helpMenu->addSeparator();
@@ -962,12 +964,12 @@ void MainWindow::handbook()
     qDebug() << "URL not opened";
 }
 
-void MainWindow::forum()
+void MainWindow::openForum()
 {
     QUrl forumLocation("https://forum.kde.org/viewforum.php?f=217");
-
-    if( !QDesktopServices::openUrl( forumLocation ) )
-    qDebug() << "URL not opened";
+    if( !QDesktopServices::openUrl( forumLocation ) ) {
+        mDebug() << "Failed to open URL " << forumLocation.toString();
+    }
 }
 
 void MainWindow::showPosition( const QString& position )
