@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document>
+        <name>PlacemarkTest.kml</name>
+        <Style id="sh_ylw-pushpin">
+            <IconStyle>
+                <color>feff651e</color>
+                <scale>4.727270</scale>
+                <Icon>
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+                <hotSpot x="20.000000" y="2.000000" xunits="pixels" yunits="pixels"/>
+            </IconStyle>
+            <LabelStyle>
+                <color>ff35ff38</color>
+                <scale>4.5</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="sn_ylw-pushpin">
+            <IconStyle>
+                <color>feff651e</color>
+                <scale>4.000000</scale>
+                <Icon>
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+                <hotSpot x="20.000000" y="2.000000" xunits="pixels" yunits="pixels"/>
+            </IconStyle>
+            <LabelStyle>
+                <color>ff35ff38</color>
+                <scale>4.5</scale>
+            </LabelStyle>
+        </Style>
+        <StyleMap id="msn_ylw-pushpin">
+            <Pair>
+                <key>highlight</key>
+                <styleUrl>#sh_ylw-pushpin</styleUrl>
+            </Pair>
+            <Pair>
+                <key>normal</key>
+                <styleUrl>#sn_ylw-pushpin</styleUrl>
+            </Pair>
+        </StyleMap>
+        <Folder>
+            <name>Marble test</name>
+            <description>Not a very special description</description>
+            <Placemark>
+                <name>One placemark</name>
+                <description>This is, indeed, a true placemark description.</description>
+                <LookAt>
+                    <longitude>-40.0000003592</longitude>
+                    <latitude>24.9999947791</latitude>
+                    <altitude>0.0000000000</altitude>
+                    <range>25522625.9522628300</range>
+                    <gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+                </LookAt>
+                <styleUrl>#msn_ylw-pushpin</styleUrl>
+                <Point>
+                    <coordinates>-40.0000003592,24.9999947791</coordinates>
+                </Point>
+            </Placemark>
+        </Folder>
+    </Document>
+</kml>

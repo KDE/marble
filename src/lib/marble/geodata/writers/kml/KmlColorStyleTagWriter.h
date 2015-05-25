@@ -34,6 +34,9 @@ protected:
     /** Returns true iff all properties have a default value */
     virtual bool isEmpty( const GeoNode *node ) const = 0;
 
+    /** Returns the default color **/
+    virtual QColor defaultColor() const;
+
 private:
     QString const m_elementName;
 };

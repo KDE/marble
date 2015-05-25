@@ -31,7 +31,7 @@ bool KmlColorStyleTagWriter::write( const Marble::GeoNode *node, GeoWriter &writ
 
     if ( colorStyle->id().isEmpty() &&
          colorStyle->targetId().isEmpty() &&
-         colorStyle->color() == QColor( Qt::white ) &&
+         colorStyle->color() == defaultColor() &&
          colorStyle->colorMode() == GeoDataColorStyle::Normal &&
          isEmpty( node ) ) {
         return true;
@@ -40,7 +40,7 @@ bool KmlColorStyleTagWriter::write( const Marble::GeoNode *node, GeoWriter &writ
     writer.writeStartElement( m_elementName );
 
     KmlObjectTagWriter::writeIdentifiers( writer, colorStyle);
-    writer.writeOptionalElement( kml::kmlTag_color, formatColor( colorStyle->color() ), "ffffffff" );
+    writer.writeOptionalElement( kml::kmlTag_color, formatColor( colorStyle->color() ), formatColor( defaultColor() ) );
     QString const colorMode = colorStyle->colorMode() == GeoDataColorStyle::Random ? "random" : "normal";
     writer.writeOptionalElement( kml::kmlTag_colorMode, colorMode, "normal" );
 
@@ -57,6 +57,11 @@ QString KmlColorStyleTagWriter::formatColor( const QColor &color )
                  .arg( color.blue(), 2, 16, fill )
                  .arg( color.green(), 2, 16, fill )
                  .arg( color.red(), 2, 16, fill );
+}
+
+QColor KmlColorStyleTagWriter::defaultColor() const
+{
+    return QColor( Qt::white );
 }
 
 }
