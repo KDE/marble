@@ -222,7 +222,7 @@ namespace Marble
         }
         else
         {
-            int radiusVal = map()->preferredRadiusCeil(map()->radius() * 1.05);
+            int radiusVal = map()->preferredRadiusCeil(map()->radius() / 0.95);
             radiusVal = qMax<int>(radius(minimumZoom()), qMin<int>(radiusVal, radius(maximumZoom())));
 
             GeoDataLookAt target = lookAt();
