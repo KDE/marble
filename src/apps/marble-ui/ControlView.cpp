@@ -37,6 +37,11 @@
 #include <QMenu>
 #include <QToolBar>
 
+#ifdef MARBLE_DBUS
+#include <QDBusConnection>
+#include "MarbleDBusInterface.h"
+#endif
+
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoUriParser.h"
@@ -91,6 +96,17 @@ ControlView::ControlView( QWidget *parent )
     m_marbleWidget = new MarbleWidget( this );
     m_marbleWidget->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
                                                 QSizePolicy::MinimumExpanding ) );
+#ifdef MARBLE_DBUS
+    new MarbleDBusInterface( m_marbleWidget );
+    QDBusConnection::sessionBus().registerObject( "/Marble", m_marbleWidget );
+    if (!QDBusConnection::sessionBus().registerService( "org.kde.marble" )) {
+        QString const urlWithPid = QString("org.kde.marble-%1").arg( QCoreApplication::applicationPid() );
+        if ( !QDBusConnection::sessionBus().registerService( urlWithPid ) ) {
+            mDebug() << "Failed to register service org.kde.marble and " << urlWithPid << " with the DBus session bus.";
+        }
+    }
+#endif
+
 
     QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget( m_marbleWidget );

@@ -27,10 +27,6 @@
 #include <QSizePolicy>
 #include <QRegion>
 
-#ifdef MARBLE_DBUS
-#include <QDBusConnection>
-#endif
-
 // Marble
 #include "layers/FogLayer.h"
 #include "layers/FpsLayer.h"
@@ -260,24 +256,12 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
 MarbleMap::MarbleMap()
     : d( new MarbleMapPrivate( this, new MarbleModel( this ) ) )
 {
-#ifdef MARBLE_DBUS
-    QDBusConnection::sessionBus().registerObject( "/MarbleMap", this,
-                                                  QDBusConnection::ExportAllSlots
-                                                  | QDBusConnection::ExportAllSignals
-                                                  | QDBusConnection::ExportAllProperties );
-#endif
+    // nothing to do
 }
 
 MarbleMap::MarbleMap(MarbleModel *model)
     : d( new MarbleMapPrivate( this, model ) )
 {
-#ifdef MARBLE_DBUS
-    QDBusConnection::sessionBus().registerObject( "/MarbleMap", this,
-                                                  QDBusConnection::ExportAllSlots
-                                                  | QDBusConnection::ExportAllSignals
-                                                  | QDBusConnection::ExportAllProperties );
-#endif
-
     d->m_modelIsOwned = false;
 }
 

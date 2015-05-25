@@ -24,11 +24,6 @@
 #include <QSizePolicy>
 #include <QNetworkProxy>
 #include <QMetaMethod>
-
-#ifdef MARBLE_DBUS
-#include <QDBusConnection>
-#endif
-
 #include "DataMigration.h"
 #include "FpsLayer.h"
 #include "FileManager.h"
@@ -166,13 +161,6 @@ void MarbleWidgetPrivate::construct()
     QPointer<DataMigration> dataMigration = new DataMigration( m_widget );
     dataMigration->exec();
     delete dataMigration;
-
-#ifdef MARBLE_DBUS
-    QDBusConnection::sessionBus().registerObject( "/MarbleWidget", m_widget,
-                                                  QDBusConnection::ExportAllSlots
-                                                  | QDBusConnection::ExportAllSignals
-                                                  | QDBusConnection::ExportAllProperties );
-#endif
 
     // Widget settings
     m_widget->setMinimumSize( 200, 300 );
