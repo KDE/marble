@@ -358,18 +358,18 @@ QHash<QString,QVariant> AprsPlugin::settings() const
 {
     QHash<QString, QVariant> result = RenderPlugin::settings();
 
-    result.insert( "useInternet", true );
-    result.insert( "useTTY", false );
-    result.insert( "useFile", false );
-    result.insert( "APRSHost", "rotate.aprs.net" );
-    result.insert( "APRSPort", "10253" );
-    result.insert( "TNCTTY", "/dev/ttyUSB0" );
-    result.insert( "FileName", "" );
-    result.insert( "TCPIPDump", false );
-    result.insert( "TTYDump", false );
-    result.insert( "FileDump", false );
-    result.insert( "fadeTime", 10 );
-    result.insert( "hideTime", 45 );
+    result.insert( "useInternet", m_useInternet );
+    result.insert( "useTTY", m_useTty );
+    result.insert( "useFile", m_useFile );
+    result.insert( "APRSHost", m_aprsHost );
+    result.insert( "APRSPort", m_aprsPort );
+    result.insert( "TNCTTY", m_tncTty );
+    result.insert( "FileName", m_aprsFile );
+    result.insert( "TCPIPDump", m_dumpTcpIp );
+    result.insert( "TTYDump", m_dumpTty );
+    result.insert( "FileDump", m_dumpFile );
+    result.insert( "fadeTime", m_fadeTime );
+    result.insert( "hideTime", m_hideTime );
 
     return result;
 }
