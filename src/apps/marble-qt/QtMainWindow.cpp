@@ -380,6 +380,10 @@ void MainWindow::createActions()
      m_whatsThisAction->setStatusTip(tr("Show a detailed explanation of the action."));
      connect(m_whatsThisAction, SIGNAL(triggered()), this, SLOT(enterWhatsThis()));
 
+     m_whatsThisAction = new QAction( tr("Marble &Community"), this);
+     m_whatsThisAction->setStatusTip(tr("Visit Marble's Community Forum"));
+     connect(m_whatsThisAction, SIGNAL(triggered()), this, SLOT(forum()));
+
      m_aboutMarbleAction = new QAction( QIcon(":/icons/marble.png"), tr("&About Marble Virtual Globe"), this);
      m_aboutMarbleAction->setStatusTip(tr("Show the application's About Box"));
      connect(m_aboutMarbleAction, SIGNAL(triggered()), this, SLOT(aboutMarble()));
@@ -955,6 +959,14 @@ void MainWindow::handbook()
         handbookLocation = QUrl("http://docs.kde.org/stable/en/kdeedu/marble/index.html");
 
     if( !QDesktopServices::openUrl( handbookLocation ) )
+    qDebug() << "URL not opened";
+}
+
+void MainWindow::forum()
+{
+    QUrl forumLocation("https://forum.kde.org/viewforum.php?f=217");
+
+    if( !QDesktopServices::openUrl( forumLocation ) )
     qDebug() << "URL not opened";
 }
 

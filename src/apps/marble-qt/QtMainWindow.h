@@ -123,6 +123,7 @@ private Q_SLOTS:
     void  enterWhatsThis();
     void  aboutMarble();
     void  handbook();
+    void  forum();
 
     //Bookmark Menu
     void  openEditBookmarkDialog();
