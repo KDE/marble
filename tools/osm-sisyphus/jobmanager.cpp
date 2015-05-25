@@ -53,7 +53,7 @@ void JobManager::setRegionsFile(const QString &filename)
 
     QDomElement root = xml.documentElement();
     QDomNodeList regions = root.elementsByTagName( "region" );
-    for ( unsigned int i = 0; i < regions.length(); ++i ) {
+    for ( int i = 0; i < int(regions.length()); ++i ) {
         Region region;
         QDomNode node = regions.item( i );
         if (!node.namedItem("continent").isNull()) {

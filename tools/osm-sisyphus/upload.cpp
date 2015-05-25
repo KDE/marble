@@ -128,7 +128,7 @@ bool Upload::adjustNewstuffFile(const Package &package)
 
     QDomElement root = m_xml.documentElement();
     QDomNodeList regions = root.elementsByTagName( "stuff" );
-    for ( unsigned int i = 0; i < regions.length(); ++i ) {
+    for ( int i = 0; i < int(regions.length()); ++i ) {
         QDomNode node = regions.item( i );
         if (!node.namedItem("payload").isNull()) {
             QUrl url = node.namedItem("payload").toElement().text();
