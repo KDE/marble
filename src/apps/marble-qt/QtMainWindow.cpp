@@ -1128,10 +1128,18 @@ void MainWindow::removeProgressItem(){
     m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
-void MainWindow::closeEvent(QCloseEvent *event)
+void MainWindow::closeEvent( QCloseEvent *event )
 {
     writeSettings();
-    event->accept();
+
+    QCloseEvent newEvent;
+    QCoreApplication::sendEvent( m_controlView, &newEvent );
+
+    if ( newEvent.isAccepted() ) {
+        event->accept();
+    } else {
+        event->ignore();
+    }
 }
 
 QString MainWindow::readMarbleDataPath()

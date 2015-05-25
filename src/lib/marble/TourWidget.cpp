@@ -102,7 +102,6 @@ private:
     bool openDocument( GeoDataDocument *document );
     bool saveTourAs( const QString &filename );
     bool overrideModifications();
-    bool m_isChanged;
 
 public:
     TourWidget *q;
@@ -111,6 +110,7 @@ public:
     TourCaptureDialog *m_tourCaptureDialog;
     TourPlayback m_playback;
     TourItemDelegate *m_delegate;
+    bool m_isChanged;
     bool m_playState;
     bool m_isLoopingStopped;
     GeoDataDocument* m_document;
@@ -125,11 +125,11 @@ public:
 };
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
-    : m_isChanged( false ),
-      q( parent ),
+    : q( parent ),
       m_widget( 0 ),
       m_playback( 0 ),
       m_delegate( 0 ),
+      m_isChanged( false ),
       m_playState( false ),
       m_document( 0 ),
       m_addPrimitiveButton( new QToolButton )
@@ -328,6 +328,31 @@ void TourWidget::stopPlaying()
 void TourWidget::stopLooping()
 {
     d->m_isLoopingStopped = true;
+}
+
+void TourWidget::closeEvent( QCloseEvent *event )
+{
+    if ( !d->m_document || !d->m_isChanged ) {
+        event->accept();
+        return;
+    }
+
+    const int result = QMessageBox::question( d->m_widget,
+                                             QObject::tr( "Save tour" ),
+                                             QObject::tr( "There are unsaved Tours. Do you want to save your changes?" ),
+                                             QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel );
+
+    switch ( result ) {
+    case QMessageBox::Save:
+        d->saveTour();
+        event->accept();
+        break;
+    case QMessageBox::Discard:
+        event->accept();
+        break;
+    case QMessageBox::Cancel:
+        event->ignore();
+    }
 }
 
 void TourWidget::handleSliderMove( int value )

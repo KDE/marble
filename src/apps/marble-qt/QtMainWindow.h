@@ -59,7 +59,7 @@ public:
     void addGeoDataFile( const QString &fileName );
 
 protected:
-    void  closeEvent(QCloseEvent *event);
+    void  closeEvent( QCloseEvent *event );
 
 private:
     void  createActions();

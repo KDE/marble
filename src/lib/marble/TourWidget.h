@@ -48,7 +48,7 @@ class MARBLE_EXPORT TourWidget : public QWidget
 {
     Q_OBJECT
 
- public:
+public:
     explicit TourWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     ~TourWidget();
 
@@ -88,7 +88,10 @@ private Q_SLOTS:
     void finishAddingItem();
     void stopLooping();
 
- private:
+protected:
+    void closeEvent( QCloseEvent *event );
+
+private:
     Q_PRIVATE_SLOT( d, void openFile() )
     Q_PRIVATE_SLOT( d, void createTour() )
     Q_PRIVATE_SLOT( d, void saveTour() )

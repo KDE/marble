@@ -12,6 +12,7 @@
 
 #include "ControlView.h"
 
+#include <QCloseEvent>
 #include <QLayout>
 #include <QSplitter>
 #include <QStringListModel>
@@ -830,6 +831,18 @@ void ControlView::openTour( const QString &filename )
 {
     if ( m_tourWidget->openTour( filename ) ) {
         m_tourWidget->startPlaying();
+    }
+}
+
+void ControlView::closeEvent( QCloseEvent *event )
+{
+    QCloseEvent newEvent;
+    QCoreApplication::sendEvent( m_tourWidget, &newEvent );
+
+    if ( newEvent.isAccepted() ) {
+        event->accept();
+    } else {
+        event->ignore();
     }
 }
 

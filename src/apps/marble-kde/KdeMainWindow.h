@@ -42,6 +42,9 @@ class MainWindow : public KXmlGuiWindow
     void setMapTitle();
     void changeViewSize( QAction* );
 
+ protected:
+    void closeEvent( QCloseEvent *event );
+
  private:
     QSize m_savedSize;
     MarblePart *m_part;
