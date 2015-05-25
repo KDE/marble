@@ -1561,7 +1561,7 @@ Vec3 PosSEnceladus (double t)
  const double ie = 28.0771*M_PI/180.0;
  const double oe = 168.8263*M_PI/180.0;
 
- double d, dt, tt, a, n, ecc, gam, th1, l1, p, m;
+ double d, dt, /*tt,*/ a, n, ecc, gam, th1, l1, p, m;
  Vec3 rs;
  Mat3 mt1;
 
@@ -1614,7 +1614,7 @@ Vec3 PosSDione (double t)
  const double ie = 28.0771*M_PI/180.0;
  const double oe = 168.8263*M_PI/180.0;
 
- double d, dt, tt, a, n, ecc, gam, th1, l1, p, m;
+ double d, dt, /*tt,*/ a, n, ecc, gam, th1, l1, p, m;
  Vec3 rs;
  Mat3 mt1;
 

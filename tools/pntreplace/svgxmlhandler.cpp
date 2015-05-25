@@ -20,8 +20,8 @@ SVGXmlHandler::SVGXmlHandler( QDataStream * out, const QString & path, int heade
 {
 }
 
-bool SVGXmlHandler::startElement(const QString& nspace,
-                                 const QString& localName,
+bool SVGXmlHandler::startElement(const QString& /*nspace*/,
+                                 const QString& /*localName*/,
                                  const QString& qName,
                                  const QXmlAttributes &atts)
 {
