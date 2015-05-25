@@ -90,7 +90,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setEpsilon( 23.45*DEG2RAD );
         planet.setTheta_0( 280.1600*DEG2RAD );
         planet.setTheta_1( 360.9856235*DEG2RAD );
-        planet.setRadius( 6378000.0 );
+        planet.setRadius( 6378137.0 );
         planet.setName( "Earth" );
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Qt::white );

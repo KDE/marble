@@ -271,7 +271,7 @@ const int tileDigits = 6;
 
 // Average earth radius in m
 // Deprecated: Please use model()->planetRadius() instead.
-const qreal EARTH_RADIUS = 6378000.0;
+const qreal EARTH_RADIUS = 6378137.0;
 
 // Maximum level of base tiles
 const int maxBaseTileLevel = 4;

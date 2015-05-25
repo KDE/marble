@@ -49,7 +49,7 @@ qreal RoutingPoint::distance( const RoutingPoint &other ) const
     qreal h2 = sin( 0.5 * ( other.m_lonRad - m_lonRad ) );
     qreal d = h1 * h1 + cos( m_latRad ) * cos( other.m_latRad ) * h2 * h2;
 
-    return 6378000.0 * 2.0 * atan2( sqrt( d ), sqrt( 1.0 - d ) );
+    return 6378137.0 * 2.0 * atan2( sqrt( d ), sqrt( 1.0 - d ) );
 }
 
 QTextStream& operator<<( QTextStream& stream, const RoutingPoint &p )
