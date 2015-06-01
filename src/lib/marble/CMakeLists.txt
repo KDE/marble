@@ -386,6 +386,7 @@ else()
     ${Qt5Script_LIBRARIES}
     ${Qt5Quick_LIBRARIES}
     ${Qt5PrintSupport_LIBRARIES}
+    ${Qt5DBus_LIBRARIES}
     )
 endif()
 
