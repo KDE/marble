@@ -209,10 +209,10 @@ class GeoDataCoordinatesPrivate
     QAtomicInt ref;
 
     /* UTM Ellipsoid model constants (actual values here are for WGS84) */
-    static const qreal sm_semiMajorAxis = 6378137.0;
-    static const qreal sm_semiMinorAxis = 6356752.314;
-    static const qreal sm_eccentricitySquared = 6.69437999013e-03;
-    static const qreal sm_utmScaleFactor = 0.9996;
+    static const qreal sm_semiMajorAxis;
+    static const qreal sm_semiMinorAxis;
+    static const qreal sm_eccentricitySquared;
+    static const qreal sm_utmScaleFactor;
 
 };
 

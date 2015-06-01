@@ -580,6 +580,10 @@ bool LonLatParser::isCorrectDirections(const QString& dir1, const QString& dir2,
          isLonDirection(dir2, isLonDirPosHemisphere));
 }
 
+const qreal GeoDataCoordinatesPrivate::sm_semiMajorAxis = 6378137.0;
+const qreal GeoDataCoordinatesPrivate::sm_semiMinorAxis = 6356752.314;
+const qreal GeoDataCoordinatesPrivate::sm_eccentricitySquared = 6.69437999013e-03;
+const qreal GeoDataCoordinatesPrivate::sm_utmScaleFactor = 0.9996;
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
 const GeoDataCoordinates GeoDataCoordinates::null = GeoDataCoordinates( 0, 0, 0 ); // don't use default constructor!
