@@ -13,7 +13,7 @@ endif()
 set( ${TARGET}_SRC tour-preview.cpp)
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} ${OpenCV_LIBS} marblewidget )
+target_link_libraries( ${TARGET} ${OpenCV_LIBS} ${MARBLEWIDGET} )
 if (QT4BUILD)
   target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} )
 else()
