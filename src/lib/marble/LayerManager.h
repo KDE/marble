@@ -45,7 +45,7 @@ class LayerManager : public QObject
     Q_OBJECT
 
  public:
-    explicit LayerManager( const MarbleModel *model, QObject *parent = 0);
+    explicit LayerManager( const MarbleModel *model, QObject *parent = nullptr);
     ~LayerManager();
 
     void renderLayers( GeoPainter *painter, ViewportParams *viewport );
