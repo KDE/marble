@@ -7,10 +7,10 @@ if(QUAZIP_INCLUDE_DIR AND QUAZIP_LIBRARIES)
 else(QUAZIP_INCLUDE_DIR AND QUAZIP_LIBRARIES)
 
   if(QT5BUILD)
-  find_path(QUAZIP_INCLUDE_DIR NAMES quazip5/quazip.h)
+  find_path(QUAZIP_INCLUDE_DIR NAMES quazip.h PATH_SUFFIXES quazip5)
   find_library(QUAZIP_LIBRARIES NAMES quazip5)
   else(QT5BUILD)
-  find_path(QUAZIP_INCLUDE_DIR NAMES quazip/quazip.h)
+  find_path(QUAZIP_INCLUDE_DIR NAMES quazip.h PATH_SUFFIXES quazip)
   find_library(QUAZIP_LIBRARIES NAMES quazip)
   endif(QT5BUILD)
 

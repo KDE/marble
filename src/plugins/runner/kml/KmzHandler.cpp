@@ -13,8 +13,8 @@
 #include <QTemporaryFile>
 #include <QDir>
 
-#include <quazip/quazip.h>
-#include <quazip/quazipfile.h>
+#include <quazip.h>
+#include <quazipfile.h>
 
 namespace Marble {
 
