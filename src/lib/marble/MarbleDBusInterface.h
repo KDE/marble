@@ -8,6 +8,9 @@
 // Copyright 2015      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
+#ifndef MARBLE_DBUSINTERFACE_H
+#define MARBLE_DBUSINTERFACE_H
+
 namespace Marble
 {
     class MarbleWidget;
@@ -69,3 +72,5 @@ private:
 };
 
 }
+
+#endif
