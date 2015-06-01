@@ -4,10 +4,10 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
  <kcfgfile name="marblerc" />
- <include>kglobalsettings.h</include>
  <include>"../../lib/marble/MarbleGlobal.h"</include>
  <include>QtCore/QDir</include>
  <include>QtCore/QLocale</include>
+ <include>QFontDatabase</include>
  <group name="MarbleWidget" >
   <entry key="homeLongitude" type="Double" >
    <default>9.4</default>
@@ -161,7 +161,7 @@
   </entry>
   <entry name="mapFont" type="Font">
    <label>The general font used on the map.</label>
-   <default code="true">KGlobalSettings::generalFont()</default>
+   <default code="true">QFontDatabase::systemFont(QFontDatabase::GeneralFont)</default>
   </entry>
   <entry name="lastFileOpenDir" type="String">
     <label>The last directory that was opened by File->Open.</label>

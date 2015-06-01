@@ -18,8 +18,8 @@
 #define WORLDCLOCK_H
 
 
-#include <Plasma/Applet>
-#include <Plasma/DataEngine>
+#include <Applet>
+#include <DataEngine>
 #include "ui_worldclockConfig.h"
 
 

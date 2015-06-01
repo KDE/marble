@@ -1,3 +1,15 @@
+set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
+find_package(ECM QUIET)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+if(ECM_FOUND)
+  include(KDEInstallDirs)
+endif()
+macro_optional_find_package(KF5 QUIET COMPONENTS Config Plasma Service)
+
+if (NOT KF5_FOUND)
+  return()
+endif()
+
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
    ${CMAKE_CURRENT_SOURCE_DIR}/../lib
@@ -7,19 +19,22 @@ include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}/../lib/geodata/parser
    ${CMAKE_CURRENT_SOURCE_DIR}/../lib/geodata/scene
    ${CMAKE_SOURCE_DIR}
+   ${CMAKE_CURRENT_BINARY_DIR}
    ${CMAKE_BINARY_DIR}
    ${KDE4_INCLUDES}
    )
 
 set(worldclock_SRCS worldclock.cpp )
 
-qt4_add_resources(worldclock_SRCS ../apps/marble-ui/marble.qrc)
+qt_add_resources(worldclock_SRCS ../apps/marble-ui/marble.qrc)
 
-kde4_add_ui_files( worldclock_SRCS worldclockConfig.ui )
+qt_wrap_ui( worldclock_SRCS worldclockConfig.ui )
 
-kde4_add_plugin(plasma_applet_worldclock ${worldclock_SRCS})
+add_library(plasma_applet_worldclock MODULE ${worldclock_SRCS})
 target_link_libraries(plasma_applet_worldclock
-                      ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS}
+                      KF5::ConfigCore
+                      KF5::Plasma
+                      KF5::Service
                       ${MARBLEWIDGET} )
 
 install(TARGETS plasma_applet_worldclock

@@ -256,6 +256,35 @@ void ControlView::openGeoUri( const QString& geoUriString )
     }
 }
 
+QActionGroup *ControlView::createViewSizeActionGroup( QObject* parent )
+{
+    QActionGroup* actionGroup = new QActionGroup( parent );
+
+    QAction *defaultAction = new QAction( tr( "Default (Resizable)" ), parent );
+    defaultAction->setCheckable( true );
+    defaultAction->setChecked( true );
+    actionGroup->addAction(defaultAction);
+
+    QAction *separator = new QAction( parent );
+    separator->setSeparator( true );
+    actionGroup->addAction(separator);
+
+    addViewSizeAction( actionGroup, tr("NTSC (%1x%2)"), 720, 486 );
+    addViewSizeAction( actionGroup, tr("PAL (%1x%2)"), 720, 576 );
+    addViewSizeAction( actionGroup, tr("NTSC 16:9 (%1x%2)"), 864, 486 );
+    addViewSizeAction( actionGroup, tr("PAL 16:9 (%1x%2)"), 1024, 576 );
+    addViewSizeAction( actionGroup, tr("DVD (%1x%2p)"), 852, 480 );
+    addViewSizeAction( actionGroup, tr("HD (%1x%2p)"), 1280, 720 );
+    addViewSizeAction( actionGroup, tr("Full HD (%1x%2p)"), 1920, 1080 );
+    addViewSizeAction( actionGroup, tr("Digital Cinema (%1x%2)"), 2048, 1536 );
+    /** FIXME: Needs testing, worked with errors.
+    addViewSizeAction(actionGroup, "4K UHD (%1x%2)", 3840, 2160);
+    addViewSizeAction(actionGroup, "4K (%1x%2)", 4096, 3072);
+    */
+
+    return actionGroup;
+}
+
 void ControlView::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
 {
 #ifndef QT_NO_PRINTER
@@ -443,6 +472,15 @@ void ControlView::printDrivingInstructionsAdvice( QTextDocument &, QString &text
     text += ' ' + tr( "Road construction, weather and other unforeseen variables can result in this suggested route not to be the most expedient or safest route to your destination." );
     text += ' ' + tr( "Please use common sense while navigating." ) + "</p>";
 #endif
+}
+
+void ControlView::addViewSizeAction( QActionGroup* actionGroup, const QString &nameTemplate, int width, int height )
+{
+    QString const name = nameTemplate.arg( width ).arg( height );
+    QAction *action = new QAction( name, actionGroup->parent() );
+    action->setCheckable( true );
+    action->setData( QSize( width, height ) );
+    actionGroup->addAction( action );
 }
 
 

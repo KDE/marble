@@ -21,7 +21,7 @@ if(QT5BUILD)
     add_subdirectory( marble-game )
 endif()
 
-if(NOT QT4_FOUND)
+if(NOT QT4BUILD)
     add_subdirectory( marbleQuick2 )
 endif()
 

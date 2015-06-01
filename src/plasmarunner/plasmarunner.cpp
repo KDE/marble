@@ -24,10 +24,7 @@
 
 // KDE
 #include <KProcess>
-#include <KIcon>
-#include <KLocale>
-#include <KGlobal>
-
+#include <KLocalizedString>
 
 namespace Marble
 {
@@ -38,12 +35,11 @@ static const int minContainsMatchLength = 3;
 PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
   : AbstractRunner(parent, args)
 {
-    KLocale* locale = KGlobal::locale();
-    locale->insertCatalog(QLatin1String("marble"));
-    locale->insertCatalog(QLatin1String("marble_qt"));
+    KLocalizedString::setApplicationDomain("marble");
+    KLocalizedString::setApplicationDomain("marble_qt");
     // load catalog manually, as it does not (yet) match the name of the plugin lib
     // TODO: fix catalog name after branching of 1.4
-    locale->insertCatalog(QLatin1String("plasma_runner_marblerunner"));
+    KLocalizedString::setApplicationDomain("plasma_runner_marblerunner");
 
     setIgnoredTypes(Plasma::RunnerContext::NetworkLocation |
                     Plasma::RunnerContext::FileSystem |
@@ -74,7 +70,7 @@ void PlasmaRunner::match(Plasma::RunnerContext &context)
             << QVariant(0.1); // TODO: make this distance value configurable
 
         Plasma::QueryMatch match(this);
-        match.setIcon(KIcon(QLatin1String("marble")));
+        match.setIcon(QIcon::fromTheme(QLatin1String("marble")));
         match.setText(i18n("Show the coordinates %1 in OpenStreetMap with Marble", query));
         match.setData(coordinatesData);
         match.setId(query);
@@ -94,7 +90,7 @@ void PlasmaRunner::match(Plasma::RunnerContext &context)
     }
 
     if ( ! matches.isEmpty() ) {
-        context.addMatches(query, matches);
+        context.addMatches(matches);
     }
 }
 
@@ -139,7 +135,7 @@ void PlasmaRunner::collectMatches(QList<Plasma::QueryMatch> &matches,
                 << QVariant(placemark->lookAt()->range()*METER2KM);
 
             Plasma::QueryMatch match(this);
-            match.setIcon(KIcon(QLatin1String("marble")));
+            match.setIcon(QIcon::fromTheme(QLatin1String("marble")));
             match.setText(placemark->name());
             match.setSubtext(i18n("Show in OpenStreetMap with Marble"));
             match.setData(coordinatesData);

@@ -4,12 +4,14 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
- ${Qt5Concurrent_INCLUDE_DIRS}
  ${liblocation_INCLUDE_DIRS}
 )
 
-if( QT4_FOUND )
+if( QT4BUILD )
   include(${QT_USE_FILE})
+else()
+  INCLUDE_DIRECTORIES(
+   ${Qt5Concurrent_INCLUDE_DIRS})
 endif()
 
 set( wlocate_SRCS

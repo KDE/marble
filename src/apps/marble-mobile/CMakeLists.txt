@@ -7,7 +7,7 @@ include_directories(
  ${QT_INCLUDE_DIR}
  ${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui
 )
-if( QT4_FOUND )
+if( QT4BUILD )
   include(${QT_USE_FILE})
 else()
   INCLUDE_DIRECTORIES(

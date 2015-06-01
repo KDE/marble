@@ -14,7 +14,7 @@
 #define MARBLE_MAINWINDOW_H
  
 
-#include <KDE/KXmlGuiWindow>
+#include <KXmlGui/KXmlGuiWindow>
 
 class QActionGroup;
 class QAction;

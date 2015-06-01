@@ -1,5 +1,3 @@
 
 #define MARBLE_PLUGIN_PATH "${MARBLE_PLUGIN_PATH}"
 #define MARBLE_DATA_PATH "${MARBLE_DATA_PATH}"
-
-#cmakedefine QTONLY 1

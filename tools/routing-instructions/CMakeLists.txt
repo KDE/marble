@@ -4,7 +4,7 @@ include_directories(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-if( QT4_FOUND )
+if( QT4BUILD )
   include( ${QT_USE_FILE} )
 endif()
 
@@ -22,7 +22,7 @@ marble_qt4_automoc( ${routing-instructions_SRC} )
 add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( routing-instructions ${routing-instructions_SRC} )
 
-if (QT4_FOUND)
+if (QT4BUILD)
   target_link_libraries( routing-instructions ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} )
 else()
   target_link_libraries( routing-instructions ${Qt5Core_LIBRARIES} )

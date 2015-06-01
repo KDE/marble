@@ -10,7 +10,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-if( QT4_FOUND )
+if( QT4BUILD )
   INCLUDE(${QT_USE_FILE})
 endif()
 
@@ -36,9 +36,7 @@ set( aprs_SRCS AprsPlugin.cpp
 set( aprs_UI AprsConfigWidget.ui )
 qt_wrap_ui( aprs_SRCS ${aprs_UI} )
 
-if (QTONLY)
 marble_qt4_automoc( ${aprs_SRCS} )
-endif (QTONLY)
 
 add_custom_command(
   OUTPUT AprsGatherer_mic_e.cpp

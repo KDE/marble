@@ -1,7 +1,7 @@
 if (WITH_DESIGNER_PLUGIN)
 
   if(QT5BUILD)
-    find_package(Qt5Designer REQUIRED)
+    find_package(Qt5Designer)
   endif()
 
   add_subdirectory( marblewidget )

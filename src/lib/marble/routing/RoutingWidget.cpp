@@ -63,7 +63,7 @@ struct WaypointInfo
     double distance; // distance to route start
     GeoDataCoordinates coordinates;
     Maneuver maneuver;
-    const QString info;
+    QString info;
 
     WaypointInfo( int index_, double distance_, const GeoDataCoordinates &coordinates_, Maneuver maneuver_, const QString& info_ ) :
         index( index_ ),

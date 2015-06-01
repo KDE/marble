@@ -30,8 +30,6 @@
 
 static const int timeoutTime = 5000; // in msec
 
-#include <KDebug>
-
 namespace Marble {
 
 GeoDataThumbnailer::GeoDataThumbnailer()

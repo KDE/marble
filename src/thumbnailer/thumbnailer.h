@@ -21,7 +21,7 @@
 #include "MarbleMap.h"
 
 // KDE
-#include <kio/thumbcreator.h>
+#include <KIOWidgets/kio/thumbcreator.h>
 
 // Qt
 #include <QEventLoop>

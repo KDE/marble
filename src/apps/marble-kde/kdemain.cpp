@@ -10,15 +10,15 @@
 // Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-#include <KDE/KApplication>
-#include <KDE/KLocale>
-#include <KDE/KAboutData>
-#include <KDE/KCmdLineArgs>
-#include <KDE/KConfig>
-#include <KDE/KConfigGroup>
-#include <KDE/KGlobal>
+#include <kaboutdata.h>
+#include <KConfig>
+#include <KConfigGroup>
+#include <klocalizedstring.h>
+#include <KSharedConfig>
 
 #include <QFile>
+#include <QCommandLineParser>
+#include <QApplication>
  
 #include "ControlView.h"
 #include "KdeMainWindow.h"
@@ -36,306 +36,284 @@
 
 using namespace Marble;
 
-// The GraphicsSystem needs to be set before the instantiation of the 
-// QApplication. Therefore we need to parse the current setting 
-// in this unusual place :-/
-
-QString readGraphicsSystem( int argc, char *argv[], const KAboutData& aboutData )
-{    
-    QCoreApplication app( argc, argv );
-    KComponentData componentData( aboutData, KComponentData::SkipMainComponentRegistration );
-
-    KConfigGroup viewGroup( componentData.config(), "View" );
-    QString graphicsSystem = viewGroup.readEntry( "graphicsSystem", "RasterGraphics" );
-
-    QString graphicsString( "native" );
-    if ( graphicsSystem == QString( "RasterGraphics" ) ) {
-        graphicsString = QString( "raster" );
-    }
-    if ( graphicsSystem == QString( "OpenGLGraphics" ) ) {
-        graphicsString = QString( "opengl" );
-    }
-
-    return graphicsString;
-}
-
 int main ( int argc, char *argv[] )
 {
-    KAboutData aboutData( "marble", 0,
-                          ki18n( "Marble Virtual Globe" ),
-                          ControlView::applicationVersion().toLatin1(),
-                          ki18n( "A World Atlas." ),
-                          KAboutData::License_LGPL,
-                          ki18n( "(c) 2007-2014" ), // FIXME: use subs() here and replace 2012 by %1
-                          KLocalizedString(),
-                          "http://edu.kde.org/marble" );
+    KAboutData aboutData( "marble",
+                          i18n( "Marble Virtual Globe" ),
+                          ControlView::applicationVersion(),
+                          i18n( "A World Atlas." ),
+                          KAboutLicense::LGPL_V2,
+                          i18n( "(c) 2007-2014" ), // FIXME: use subs() here and replace 2014 by %1
+                          QString(),
+                          "http://marble.kde.org/" );
 
     // Active Development Team of Marble
-    aboutData.addAuthor( ki18n( "Torsten Rahn" ),
-                         ki18n( "Developer and Original Author" ),
+    aboutData.addAuthor( i18n( "Torsten Rahn" ),
+                         i18n( "Developer and Original Author" ),
                          "rahn@kde.org" );
-    aboutData.addAuthor( ki18n( "Bernhard Beschow" ),
-                         ki18n( "WMS Support, Mobile, Performance" ),
+    aboutData.addAuthor( i18n( "Bernhard Beschow" ),
+                         i18n( "WMS Support, Mobile, Performance" ),
                          "bbeschow@cs.tu-berlin.de" );
-    aboutData.addAuthor( ki18n( "Thibaut Gridel" ),
-                         ki18n( "Geodata" ),
+    aboutData.addAuthor( i18n( "Thibaut Gridel" ),
+                         i18n( "Geodata" ),
                          "tgridel@free.fr" );
-    aboutData.addAuthor( ki18n( "Jens-Michael Hoffmann" ),
-                         ki18n( "OpenStreetMap Integration, OSM Namefinder, Download Management" ),
+    aboutData.addAuthor( i18n( "Jens-Michael Hoffmann" ),
+                         i18n( "OpenStreetMap Integration, OSM Namefinder, Download Management" ),
                          "jmho@c-xx.com", "http://www.c-xx.com" );
-    aboutData.addAuthor( ki18n( "Florian E&szlig;er" ),
-                         ki18n( "Elevation Profile" ),
+    aboutData.addAuthor( i18n( "Florian E&szlig;er" ),
+                         i18n( "Elevation Profile" ),
                          "f.esser@rwth-aachen.de" );
-    aboutData.addAuthor( ki18n( "Wes Hardaker" ),
-                         ki18n( "APRS Plugin" ),
+    aboutData.addAuthor( i18n( "Wes Hardaker" ),
+                         i18n( "APRS Plugin" ),
                          "marble@hardakers.net" );
-    aboutData.addAuthor( ki18n( "Bastian Holst" ),
-                         ki18n( "Online Services support" ),
+    aboutData.addAuthor( i18n( "Bastian Holst" ),
+                         i18n( "Online Services support" ),
                          "bastianholst@gmx.de" );
-    aboutData.addAuthor( ki18n( "Guillaume Martres" ),
-                         ki18n( "Satellites" ),
+    aboutData.addAuthor( i18n( "Guillaume Martres" ),
+                         i18n( "Satellites" ),
                          "smarter@ubuntu.com" );
-    aboutData.addAuthor( ki18n( "Rene Kuettner" ),
-                         ki18n( "Satellites, Eclipses" ),
+    aboutData.addAuthor( i18n( "Rene Kuettner" ),
+                         i18n( "Satellites, Eclipses" ),
                          "rene@bitkanal.net" );
-    aboutData.addAuthor( ki18n( "Friedrich W. H. Kossebau" ),
-                         ki18n( "Plasma Integration, Bugfixes" ),
+    aboutData.addAuthor( i18n( "Friedrich W. H. Kossebau" ),
+                         i18n( "Plasma Integration, Bugfixes" ),
                          "kossebau@kde.org" );
-    aboutData.addAuthor( ki18n( "Dennis Nienhüser" ),
-                         ki18n( "Routing, Navigation, Mobile" ),
+    aboutData.addAuthor( i18n( "Dennis Nienhüser" ),
+                         i18n( "Routing, Navigation, Mobile" ),
                          "earthwings@gentoo.org" );
-    aboutData.addAuthor( ki18n( "Niko Sams" ),
-                         ki18n( "Routing, Elevation Profile" ),
+    aboutData.addAuthor( i18n( "Niko Sams" ),
+                         i18n( "Routing, Elevation Profile" ),
                          "niko.sams@gmail.com" );
-    aboutData.addAuthor( ki18n( "Patrick Spendrin" ),
-                         ki18n( "Core Developer: KML and Windows support" ),
+    aboutData.addAuthor( i18n( "Patrick Spendrin" ),
+                         i18n( "Core Developer: KML and Windows support" ),
                          "pspendrin@gmail.com" );
-    aboutData.addAuthor( ki18n( "Eckhart Wörner" ),
-                         ki18n( "Bugfixes" ),
+    aboutData.addAuthor( i18n( "Eckhart Wörner" ),
+                         i18n( "Bugfixes" ),
                          "kde@ewsoftware.de" );
     
     // Developers:    
     
-    aboutData.addAuthor( ki18n( "Inge Wallin" ),
-                         ki18n( "Core Developer and Co-Maintainer" ),
+    aboutData.addAuthor( i18n( "Inge Wallin" ),
+                         i18n( "Core Developer and Co-Maintainer" ),
                          "inge@lysator.liu.se" );
-    aboutData.addAuthor( ki18n( "Henry de Valence" ),
-                         ki18n( "Core Developer: Marble Runners, World-Clock Plasmoid" ),
+    aboutData.addAuthor( i18n( "Henry de Valence" ),
+                         i18n( "Core Developer: Marble Runners, World-Clock Plasmoid" ),
                          "hdevalence@gmail.com" );
-    aboutData.addAuthor( ki18n( "Pino Toscano" ),
-                         ki18n( "Network plugins" ),
+    aboutData.addAuthor( i18n( "Pino Toscano" ),
+                         i18n( "Network plugins" ),
                          "pino@kde.org" );
-    aboutData.addAuthor( ki18n( "Harshit Jain" ),
-                         ki18n( "Planet filter" ),
+    aboutData.addAuthor( i18n( "Harshit Jain" ),
+                         i18n( "Planet filter" ),
                          "sonu.itbhu@googlemail.com" );
-    aboutData.addAuthor( ki18n( "Simon Edwards" ),
-                         ki18n( "Marble Python Bindings" ),
+    aboutData.addAuthor( i18n( "Simon Edwards" ),
+                         i18n( "Marble Python Bindings" ),
                          "simon@simonzone.com" );
-    aboutData.addAuthor( ki18n( "Magnus Valle" ),
-                         ki18n( "Historical Maps" ),
+    aboutData.addAuthor( i18n( "Magnus Valle" ),
+                         i18n( "Historical Maps" ),
                          "" );
-    aboutData.addAuthor( ki18n( "Médéric Boquien" ),
-                         ki18n( "Astronomical Observatories" ),
+    aboutData.addAuthor( i18n( "Médéric Boquien" ),
+                         i18n( "Astronomical Observatories" ),
                          "mboquien@free.fr" );
 
     // ESA Summer of Code in Space
-    aboutData.addAuthor( ki18n( "Rene Kuettner" ),
-                         ki18n( "ESA Summer of Code in Space 2012 Project:"
+    aboutData.addAuthor( i18n( "Rene Kuettner" ),
+                         i18n( "ESA Summer of Code in Space 2012 Project:"
                                 " Visualization of planetary satellites" ),
                          "rene@bitkanal.net" );
-    aboutData.addAuthor( ki18n( "Guillaume Martres" ),
-                         ki18n( "ESA Summer of Code in Space 2011 Project:"
+    aboutData.addAuthor( i18n( "Guillaume Martres" ),
+                         i18n( "ESA Summer of Code in Space 2011 Project:"
                                 " Visualization of Satellite Orbits" ),
                          "smarter@ubuntu.com" );
 
     // Google Summer of Code
-    aboutData.addAuthor( ki18n( "Konstantin Oblaukhov" ),
-                         ki18n( "Google Summer of Code 2011 Project:"
+    aboutData.addAuthor( i18n( "Konstantin Oblaukhov" ),
+                         i18n( "Google Summer of Code 2011 Project:"
                                 " OpenStreetMap Vector Rendering" ),
                          "oblaukhov.konstantin@gmail.com" );
-    aboutData.addAuthor( ki18n( "Daniel Marth" ),
-                         ki18n( "Google Summer of Code 2011 Project:"
+    aboutData.addAuthor( i18n( "Daniel Marth" ),
+                         i18n( "Google Summer of Code 2011 Project:"
                                 " Marble Touch on MeeGo" ),
                          "danielmarth@gmx.at" );
-    aboutData.addAuthor( ki18n( "Gaurav Gupta" ),
-                         ki18n( "Google Summer of Code 2010 Project:"
+    aboutData.addAuthor( i18n( "Gaurav Gupta" ),
+                         i18n( "Google Summer of Code 2010 Project:"
                                 " Bookmarks" ),
                          "1989.gaurav@gmail.com" );
-    aboutData.addAuthor( ki18n( "Harshit Jain " ),
-                         ki18n( "Google Summer of Code 2010 Project:"
+    aboutData.addAuthor( i18n( "Harshit Jain " ),
+                         i18n( "Google Summer of Code 2010 Project:"
                                 " Time Support" ),
                          "hjain.itbhu@gmail.com" );
-    aboutData.addAuthor( ki18n( "Siddharth Srivastava" ),
-                         ki18n( "Google Summer of Code 2010 Project:"
+    aboutData.addAuthor( i18n( "Siddharth Srivastava" ),
+                         i18n( "Google Summer of Code 2010 Project:"
                                 " Turn-by-turn Navigation" ),
                          "akssps011@gmail.com" );
-    aboutData.addAuthor( ki18n( "Andrew Manson" ),
-                         ki18n( "Google Summer of Code 2009 Project:"
+    aboutData.addAuthor( i18n( "Andrew Manson" ),
+                         i18n( "Google Summer of Code 2009 Project:"
                                 " OSM Annotation" ),
                          "g.real.ate@gmail.com" );
-    aboutData.addAuthor( ki18n( "Bastian Holst" ),
-                         ki18n( "Google Summer of Code 2009 Project:"
+    aboutData.addAuthor( i18n( "Bastian Holst" ),
+                         i18n( "Google Summer of Code 2009 Project:"
                                 " Online Services" ),
                          "bastianholst@gmx.de" );
-    aboutData.addAuthor( ki18n( "Patrick Spendrin" ),
-                         ki18n( "Google Summer of Code 2008 Project:"
+    aboutData.addAuthor( i18n( "Patrick Spendrin" ),
+                         i18n( "Google Summer of Code 2008 Project:"
                                 " Vector Tiles for Marble" ),
                          "pspendrin@gmail.com" );
-    aboutData.addAuthor( ki18n( "Shashank Singh" ),
-                         ki18n( "Google Summer of Code 2008 Project:"
+    aboutData.addAuthor( i18n( "Shashank Singh" ),
+                         i18n( "Google Summer of Code 2008 Project:"
                                 " Panoramio / Wikipedia -photo support for Marble" ),
                          "shashank.personal@gmail.com" );
-    aboutData.addAuthor( ki18n( "Carlos Licea" ),
-                         ki18n( "Google Summer of Code 2007 Project:"
+    aboutData.addAuthor( i18n( "Carlos Licea" ),
+                         i18n( "Google Summer of Code 2007 Project:"
                                 " Equirectangular Projection (\"Flat Map\")" ),
                          "carlos.licea@kdemail.net" );
-    aboutData.addAuthor( ki18n( "Andrew Manson" ),
-                         ki18n( "Google Summer of Code 2007 Project:"
+    aboutData.addAuthor( i18n( "Andrew Manson" ),
+                         i18n( "Google Summer of Code 2007 Project:"
                                 " GPS Support for Marble" ),
                          "g.real.ate@gmail.com" );
-    aboutData.addAuthor( ki18n( "Murad Tagirov" ),
-                         ki18n( "Google Summer of Code 2007 Project:"
+    aboutData.addAuthor( i18n( "Murad Tagirov" ),
+                         i18n( "Google Summer of Code 2007 Project:"
                                 " KML Support for Marble" ),
                          "tmurad@gmail.com" );
 
     // Developers
-    aboutData.addAuthor( ki18n( "Simon Schmeisser" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Claudiu Covaci" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "David Roberts" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Nikolas Zimmermann" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Jan Becker" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Stefan Asserhäll" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Laurent Montel" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Mayank Madan" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Prashanth Udupa" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Anne-Marie Mahfouf" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Josef Spillner" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Frerich Raabe" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Frederik Gladhorn" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Fredrik Höglund" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Albert Astals Cid" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Thomas Zander" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Joseph Wenninger" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Kris Thomsen" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Daniel Molkentin" ),
-                         ki18n( "Development & Patches" ));
-    aboutData.addAuthor( ki18n( "Christophe Leske" ),
-                         ki18n( "Platforms & Distributions" ));
-    aboutData.addAuthor( ki18n( "Sebastian Wiedenroth" ),
-                         ki18n( "Platforms & Distributions" ));
-    aboutData.addAuthor( ki18n( "Tim Sutton" ),
-                         ki18n( "Platforms & Distributions" ));
-    aboutData.addAuthor( ki18n( "Christian Ehrlicher" ),
-                         ki18n( "Platforms & Distributions" ));
-    aboutData.addAuthor( ki18n( "Ralf Habacker" ),
-                         ki18n( "Platforms & Distributions" ));
-    aboutData.addAuthor( ki18n( "Steffen Joeris" ),
-                         ki18n( "Platforms & Distributions" ));
-    aboutData.addAuthor( ki18n( "Marcus Czeslinski" ),
-                         ki18n( "Platforms & Distributions" ));
-    aboutData.addAuthor( ki18n( "Marcus D. Hanwell" ),
-                         ki18n( "Platforms & Distributions" ));
-    aboutData.addAuthor( ki18n( "Chitlesh Goorah" ),
-                         ki18n( "Platforms & Distributions" ));
-    aboutData.addAuthor( ki18n( "Nuno Pinheiro" ),
-                         ki18n( "Artwork" ));
-    aboutData.addAuthor( ki18n( "Torsten Rahn" ),
-                         ki18n( "Artwork" ));
+    aboutData.addAuthor( i18n( "Simon Schmeisser" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Claudiu Covaci" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "David Roberts" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Nikolas Zimmermann" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Jan Becker" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Stefan Asserhäll" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Laurent Montel" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Mayank Madan" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Prashanth Udupa" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Anne-Marie Mahfouf" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Josef Spillner" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Frerich Raabe" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Frederik Gladhorn" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Fredrik Höglund" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Albert Astals Cid" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Thomas Zander" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Joseph Wenninger" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Kris Thomsen" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Daniel Molkentin" ),
+                         i18n( "Development & Patches" ));
+    aboutData.addAuthor( i18n( "Christophe Leske" ),
+                         i18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( i18n( "Sebastian Wiedenroth" ),
+                         i18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( i18n( "Tim Sutton" ),
+                         i18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( i18n( "Christian Ehrlicher" ),
+                         i18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( i18n( "Ralf Habacker" ),
+                         i18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( i18n( "Steffen Joeris" ),
+                         i18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( i18n( "Marcus Czeslinski" ),
+                         i18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( i18n( "Marcus D. Hanwell" ),
+                         i18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( i18n( "Chitlesh Goorah" ),
+                         i18n( "Platforms & Distributions" ));
+    aboutData.addAuthor( i18n( "Nuno Pinheiro" ),
+                         i18n( "Artwork" ));
+    aboutData.addAuthor( i18n( "Torsten Rahn" ),
+                         i18n( "Artwork" ));
 
     // Credits
-    aboutData.addCredit( ki18n( "Luis Silva" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Stefan Jordan" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Robert Scott" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Lubos Petrovic" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Benoit Sigoure" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Martin Konold" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Matthias Welwarsky" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Rainer Endres" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Ralf Gesellensetter" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Tim Alder" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "John Layt" ),
-                         ki18n( "Special thanks for providing an"
+    aboutData.addCredit( i18n( "Luis Silva" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "Stefan Jordan" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "Robert Scott" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "Lubos Petrovic" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "Benoit Sigoure" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "Martin Konold" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "Matthias Welwarsky" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "Rainer Endres" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "Ralf Gesellensetter" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "Tim Alder" ),
+                         i18n( "Various Suggestions & Testing" ));
+    aboutData.addCredit( i18n( "John Layt" ),
+                         i18n( "Special thanks for providing an"
                                 " important source of inspiration by creating"
                                 " Marble's predecessor \"Kartographer\"." ));
+    KAboutData::setApplicationData(aboutData);
 
-    QApplication::setGraphicsSystem( readGraphicsSystem( argc, argv, aboutData ) );
-
-    KCmdLineArgs::init( argc, argv, &aboutData );
+    QApplication app( argc, argv );
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
 
     // Autodetect profiles
     MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
 
-    KCmdLineOptions  options;
-    options.add( "debug-info", ki18n( "Enable debug output" ) );
-    options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
-    options.add( "fps", ki18n( "Show frame rate" ) );
-    options.add( "tile-id", ki18n( "Show tile IDs" ) );
-    options.add( "runtimeTrace", ki18n( "Show time spent in each layer" ) );
-    options.add( "marbledatapath <data path>", ki18n( "Use a different directory which contains map data" ) );
-    if( profiles & MarbleGlobal::SmallScreen ) {
-        options.add( "nosmallscreen", ki18n( "Do not use the interface optimized for small screens" ) );
-    }
-    else {
-        options.add( "smallscreen", ki18n( "Use the interface optimized for small screens" ) );
-    }
-    if( profiles & MarbleGlobal::HighResolution ) {
-        options.add( "nohighresolution", ki18n( "Do not use the interface optimized for high resolutions" ) );
-    }
-    else {
-        options.add( "highresolution", ki18n( "Use the interface optimized for high resolutions" ) );
-    }
-    options.add( "latlon <coordinates>", ki18n( "Show map at given lat lon coordinates" ) );
-    options.add( "geo-uri <uri>", ki18n( "Show map at given geo uri" ) );
-    options.add( "distance <value>", ki18n( "Set the distance of the observer to the globe (in km)" ) );
-    options.add( "map <id>", ki18n( "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")" ) );
-    options.add( "+[file]", ki18n( "One or more placemark files to be opened" ) );
+    QCommandLineOption debugOption( "debug-info", i18n( "Enable debug output" ) );
+    parser.addOption( debugOption );
+    QCommandLineOption timeOption( "timedemo", i18n( "Make a time measurement to check performance" ) );
+    parser.addOption( timeOption );
+    QCommandLineOption fpsOption( "fps", i18n( "Show frame rate" ) );
+    parser.addOption( fpsOption );
+    QCommandLineOption tileOption( "tile-id", i18n( "Show tile IDs" ) );
+    parser.addOption( tileOption );
+    QCommandLineOption traceOption( "runtimeTrace", i18n( "Show time spent in each layer" ) );
+    parser.addOption( traceOption );
+    QCommandLineOption dataPathOption("marbledatapath", i18n("Use a different directory <directory> which contains map data."), "directory");
+    parser.addOption( dataPathOption );
+    QCommandLineOption noSmallScreenOption( "nosmallscreen", i18n( "Do not use the interface optimized for small screens" ) );
+    QCommandLineOption smallScreenOption( "smallscreen", i18n( "Use the interface optimized for small screens" ) );
+    parser.addOption( (profiles & MarbleGlobal::SmallScreen) ? noSmallScreenOption : smallScreenOption );
+    QCommandLineOption noHighResOption( "nohighresolution", i18n( "Do not use the interface optimized for high resolutions" ) );
+    QCommandLineOption highResOption( "highresolution", i18n( "Use the interface optimized for high resolutions" ) );
+    parser.addOption( (profiles & MarbleGlobal::HighResolution) ? noHighResOption : highResOption );
+    QCommandLineOption coordinatesOption("latlon", "coordinates", i18n("Show map at given lat lon <coordinates>"), "coordinates");
+    parser.addOption( coordinatesOption );
+    QCommandLineOption geoUriOption("geo-uri", i18n("Show map at given geo <uri>"), "uri");
+    parser.addOption( geoUriOption );
+    QCommandLineOption distanceOption("distance", i18n("Set the distance of the observer to the globe (in km)"), "distance");
+    parser.addOption( distanceOption );
+    QCommandLineOption mapIdOption("map", i18n("Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"), "id");
+    parser.addOption( mapIdOption );
+    parser.addPositionalArgument("file", i18n( "One or more placemark files to be opened") );
 
-    KCmdLineArgs::addCmdLineOptions( options );
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    parser.process( app );
 
-    KApplication app;
-    KGlobal::locale()->insertCatalog( "marble_qt" );
+    KLocalizedString::setApplicationDomain("marble_qt");
 
-    
+    MarbleDebug::setEnabled( parser.isSet( debugOption ) );
 
-    MarbleDebug::setEnabled( args->isSet( "debug-info" ) );
-
-    if ( args->isSet( "smallscreen" ) ) {
+    if ( parser.isSet( smallScreenOption ) ) {
         profiles |= MarbleGlobal::SmallScreen;
     }
     else {
         profiles &= ~MarbleGlobal::SmallScreen;
     }
 
-    if ( args->isSet( "highresolution" ) ) {
+    if ( parser.isSet( highResOption ) ) {
         profiles |= MarbleGlobal::HighResolution;
     }
     else {
@@ -344,35 +322,32 @@ int main ( int argc, char *argv[] )
 
     MarbleGlobal::getInstance()->setProfiles( profiles );
 
-    QString marbleDataPath = args->getOption( "marbledatapath" );
-    if( marbleDataPath.isEmpty() ) {
-        marbleDataPath.clear(); /** @todo: why is this done? */
-    }
+    QString marbleDataPath = parser.value( dataPathOption );
     MainWindow *window = new MainWindow( marbleDataPath );
     window->setAttribute( Qt::WA_DeleteOnClose, true );
     window->show();
 
-    if ( args->isSet( "timedemo" ) ) {
+    if ( parser.isSet( timeOption ) ) {
         window->resize(900, 640);
         MarbleTest test( window->marbleWidget() );
         test.timeDemo();
         return 0;
     }
 
-    if ( args->isSet( "fps" ) ) {
+    if ( parser.isSet( fpsOption ) ) {
         window->marbleControl()->marbleWidget()->setShowFrameRate( true );
     }
 
-    if ( args->isSet( "tile-id" ) ) {
+    if ( parser.isSet( tileOption ) ) {
         window->marbleControl()->marbleWidget()->setShowTileId( true );
     }
 
-    const QString map = args->getOption( "map" );
+    const QString map = parser.value( mapIdOption );
     if ( !map.isEmpty() ) {
         window->marbleWidget()->setMapThemeId(map);
     }
 
-    const QString coordinatesString = args->getOption( "latlon" );
+    const QString coordinatesString = parser.value( coordinatesOption );
     if ( !coordinatesString.isEmpty() ) {
         bool success = false;
         const GeoDataCoordinates coordinates = GeoDataCoordinates::fromString(coordinatesString, success);
@@ -383,12 +358,12 @@ int main ( int argc, char *argv[] )
         }
     }
 
-    const QString geoUriString = args->getOption( "geo-uri" );
+    const QString geoUriString = parser.value( geoUriOption );
     if ( !geoUriString.isEmpty() ) {
         window->marbleControl()->openGeoUri( geoUriString );
     }
 
-    const QString distance = args->getOption( "distance" );
+    const QString distance = parser.value( distanceOption );
     if ( !distance.isEmpty() ) {
         bool success = false;
         const qreal distanceValue = distance.toDouble(&success);
@@ -397,11 +372,11 @@ int main ( int argc, char *argv[] )
     }
 
     // Read the files that are given on the command line.
-    for ( int i = 0; i < args->count(); ++i ) {
-
+    foreach( QString const &file, parser.positionalArguments() ) {
         // FIXME: Use openUrl( args->url(i) ) instead?
-        if ( QFile::exists( args->arg( i ) ) )
-            window->marbleControl()->addGeoDataFile( args->arg( i ) );
+        if ( QFile::exists( file ) ) {
+            window->marbleControl()->addGeoDataFile( file );
+        }
     }
 
     return app.exec();

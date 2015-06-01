@@ -20,7 +20,7 @@ else()
 endif()
 
 macro( marble_qt4_automoc )
-  if( ${CMAKE_VERSION} STRLESS "2.8" OR QT4_FOUND)
+  if( ${CMAKE_VERSION} STRLESS "2.8" OR QT4BUILD)
     qt4_automoc( ${ARGN} )
   else()
     # Just ignore it
@@ -28,7 +28,7 @@ macro( marble_qt4_automoc )
 endmacro()
 
 macro(qt_add_resources)
-  if( QT4_FOUND )
+  if( QT4BUILD )
     qt4_add_resources(${ARGN})
   else()
     qt5_add_resources(${ARGN})
@@ -36,7 +36,7 @@ macro(qt_add_resources)
 endmacro()
 
 macro(qt_wrap_ui)
-  if( QT4_FOUND )
+  if( QT4BUILD )
     qt4_wrap_ui(${ARGN})
   else()
     qt5_wrap_ui(${ARGN})
@@ -44,7 +44,7 @@ macro(qt_wrap_ui)
 endmacro()
 
 macro(qt_generate_moc)
-  if( QT4_FOUND )
+  if( QT4BUILD )
     qt4_generate_moc(${ARGN})
   else()
     qt5_generate_moc(${ARGN})
@@ -55,35 +55,18 @@ endmacro()
 # this is needed to minimize the amount of errors to do
 macro( marble_add_plugin _target_name )
 set( _src ${ARGN} )
-if( QTONLY )
-    marble_qt4_automoc( ${_src} )
-    add_library( ${_target_name} MODULE ${_src} )
-    target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
-                                           ${QT_QTDBUS_LIBRARY}
-                                           ${QT_QTGUI_LIBRARY}
-                                           ${QT_QTXML_LIBRARY}
-                                           ${QT_QTSVG_LIBRARY}
-                                           ${QT_QTNETWORK_LIBRARY}
-                                           ${QT_QTMAIN_LIBRARY}
-                                           ${${_target_name}_LIBS}
-                                           ${MARBLEWIDGET} )
-    install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH} )
-else( QTONLY )
-    kde4_add_plugin( ${_target_name} ${_src} )
-    target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
-                                           ${QT_QTDBUS_LIBRARY}
-                                           ${QT_QTGUI_LIBRARY}
-                                           ${QT_QTXML_LIBRARY}
-                                           ${QT_QTSVG_LIBRARY}
-                                           ${QT_QTNETWORK_LIBRARY}
-                                           ${KDE4_KDECORE_LIBRARY}
-                                           ${KDE4_KDEUI_LIBRARY}
-                                           ${KDE4_KIO_LIBRARY}
-                                           ${QT_QTMAIN_LIBRARY}
-                                           ${${_target_name}_LIBS}
-                                           ${MARBLEWIDGET} )
-    install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH} )
-endif( QTONLY )
+marble_qt4_automoc( ${_src} )
+add_library( ${_target_name} MODULE ${_src} )
+target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
+                                       ${QT_QTDBUS_LIBRARY}
+                                       ${QT_QTGUI_LIBRARY}
+                                       ${QT_QTXML_LIBRARY}
+                                       ${QT_QTSVG_LIBRARY}
+                                       ${QT_QTNETWORK_LIBRARY}
+                                       ${QT_QTMAIN_LIBRARY}
+                                       ${${_target_name}_LIBS}
+                                       ${MARBLEWIDGET} )
+install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH} )
 
 set_target_properties( ${_target_name} PROPERTIES 
                        INSTALL_RPATH_USE_LINK_PATH TRUE  
@@ -100,35 +83,18 @@ set( _src ${ARGN} )
 
 qt_add_resources( _src ../../../apps/marble-ui/marble.qrc )
 
-if( QTONLY )
-    marble_qt4_automoc( ${_src} )
-    add_library( ${_target_name} MODULE ${_src} )
-    target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
-                                           ${QT_QTDBUS_LIBRARY}
-                                           ${QT_QTGUI_LIBRARY}
-                                           ${QT_QTXML_LIBRARY}
-                                           ${QT_QTSVG_LIBRARY}
-                                           ${QT_QTNETWORK_LIBRARY}
-                                           ${QT_QTMAIN_LIBRARY}
-                                           ${${_target_name}_LIBS}
-                                           ${MARBLEWIDGET} )
-    install( TARGETS ${_target_name} DESTINATION ${QT_PLUGINS_DIR}/designer )
-else( QTONLY )
-    kde4_add_plugin( ${_target_name} ${_src} )
-    target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
-                                           ${QT_QTDBUS_LIBRARY}
-                                           ${QT_QTGUI_LIBRARY}
-                                           ${QT_QTXML_LIBRARY}
-                                           ${QT_QTSVG_LIBRARY}
-                                           ${QT_QTNETWORK_LIBRARY}
-                                           ${KDE4_KDECORE_LIBRARY}
-                                           ${KDE4_KDEUI_LIBRARY}
-                                           ${KDE4_KIO_LIBRARY}
-                                           ${QT_QTMAIN_LIBRARY}
-                                           ${${_target_name}_LIBS}
-                                           ${MARBLEWIDGET} )
-    install( TARGETS ${_target_name} DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
-endif( QTONLY )
+marble_qt4_automoc( ${_src} )
+add_library( ${_target_name} MODULE ${_src} )
+target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
+                                       ${QT_QTDBUS_LIBRARY}
+                                       ${QT_QTGUI_LIBRARY}
+                                       ${QT_QTXML_LIBRARY}
+                                       ${QT_QTSVG_LIBRARY}
+                                       ${QT_QTNETWORK_LIBRARY}
+                                       ${QT_QTMAIN_LIBRARY}
+                                       ${${_target_name}_LIBS}
+                                       ${MARBLEWIDGET} )
+install( TARGETS ${_target_name} DESTINATION ${QT_PLUGINS_DIR}/designer )
 
 set_target_properties( ${_target_name} PROPERTIES 
                        INSTALL_RPATH_USE_LINK_PATH TRUE  
@@ -172,21 +138,22 @@ endif( WIN32 )
 macro( marble_add_test TEST_NAME )
     if( BUILD_MARBLE_TESTS )
         set( ${TEST_NAME}_SRCS ${TEST_NAME}.cpp ${ARGN} )
-        if( QTONLY )
-            qt_generate_moc( ${TEST_NAME}.cpp ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc )
-            include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
-            set( ${TEST_NAME}_SRCS ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc ${${TEST_NAME}_SRCS} )
-          
-            add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
-        else( QTONLY )
-            kde4_add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
-        endif( QTONLY )
-        target_link_libraries( ${TEST_NAME} ${QT_QTMAIN_LIBRARY}
-                                            ${QT_QTCORE_LIBRARY} 
-                                            ${QT_QTGUI_LIBRARY} 
-                                            ${QT_QTTEST_LIBRARY} 
-                                            ${Qt5Test_LIBRARIES}
-                                            ${MARBLEWIDGET} )
+        qt_generate_moc( ${TEST_NAME}.cpp ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc )
+        include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
+        set( ${TEST_NAME}_SRCS ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc ${${TEST_NAME}_SRCS} )
+
+        add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
+        target_link_libraries( ${TEST_NAME} ${MARBLEWIDGET} )
+        if( QT4BUILD )
+          target_link_libraries( ${TEST_NAME} ${QT_QTMAIN_LIBRARY}
+                                              ${QT_QTCORE_LIBRARY}
+                                              ${QT_QTGUI_LIBRARY}
+                                              ${QT_QTTEST_LIBRARY} )
+        else()
+          target_link_libraries( ${TEST_NAME} ${Qt5Test_LIBRARIES}
+                                              ${Qt5DBus_LIBRARIES} )
+        endif()
+
         set_target_properties( ${TEST_NAME} PROPERTIES 
                                COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
         add_test( ${TEST_NAME} ${TEST_NAME} )
@@ -257,3 +224,35 @@ macro(ADD_FEATURE_INFO)
   # just ignore it
 endmacro()
 endif()
+
+# FIXME: The original QT4_ADD_RESOURCES should be extended to support this filetype too
+#
+# QT4_ADD_RESOURCE2(outfiles inputfile ... )
+# TODO  perhaps consider adding support for compression and root options to rcc
+
+if (MINGW)
+MACRO (QT4_ADD_RESOURCES2 outfiles )
+
+FOREACH (it ${ARGN})
+  GET_FILENAME_COMPONENT(outfilename ${it} NAME_WE)
+  GET_FILENAME_COMPONENT(infile ${it} ABSOLUTE)
+  GET_FILENAME_COMPONENT(rc_path ${infile} PATH)
+  SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${outfilename}_res.o)
+  #  parse file for dependencies
+  FILE(READ "${infile}" _RC_FILE_CONTENTS)
+  STRING(REGEX MATCHALL "<file>[^<]*" _RC_FILES "${_RC_FILE_CONTENTS}")
+  SET(_RC_DEPENDS)
+  FOREACH(_RC_FILE ${_RC_FILES})
+    STRING(REGEX REPLACE "^<file>" "" _RC_FILE "${_RC_FILE}")
+    SET(_RC_DEPENDS ${_RC_DEPENDS} "${rc_path}/${_RC_FILE}")
+  ENDFOREACH(_RC_FILE)
+  ADD_CUSTOM_COMMAND(OUTPUT ${outfile}
+    COMMAND windres
+    ARGS -i ${infile} -o ${outfile} --include-dir=${CMAKE_CURRENT_SOURCE_DIR}
+    MAIN_DEPENDENCY ${infile}
+    DEPENDS ${_RC_DEPENDS})
+  SET(${outfiles} ${${outfiles}} ${outfile})
+ENDFOREACH (it)
+
+ENDMACRO (QT4_ADD_RESOURCES2)
+ENDIF(MINGW)

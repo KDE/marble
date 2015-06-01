@@ -5,9 +5,9 @@ if(MSVC)
   set(marble_SRCS ${marble_SRCS} marble.qrc)
 endif(MSVC)
 
-if(MINGW AND QT4_FOUND)
+if(MINGW AND QT4BUILD)
    QT4_ADD_RESOURCES2(marble_SRCS marble.qrc)
-endif(MINGW AND QT4_FOUND)
+endif(MINGW AND QT4BUILD)
 
 qt_add_resources(marble_SRCS marble.qrc)
 
@@ -16,7 +16,7 @@ marble_qt4_automoc(${marble_SRCS})
 
 add_library (marbleui STATIC ${marble_SRCS})
 
-if( QT4_FOUND )
+if( QT4BUILD )
 target_link_libraries (
   marbleui
   ${QT_QTCORE_LIBRARY}

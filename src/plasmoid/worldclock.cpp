@@ -156,8 +156,8 @@ void WorldClock::resizeMap(bool changeAspect)
     double ratio = static_cast<double>(m_lastRect.width()) /
                    static_cast<double>(m_lastRect.height());
     if( m_map->projection() == Equirectangular ) {
-        kDebug() << "equirectangular with rect" << m_lastRect;
-        kDebug() << "w/h ratio:" << ratio;
+        qDebug() << "equirectangular with rect" << m_lastRect;
+        qDebug() << "w/h ratio:" << ratio;
         if( ratio > 2 ) {
             height = m_lastRect.height();
             width = height*2;
@@ -168,8 +168,8 @@ void WorldClock::resizeMap(bool changeAspect)
             radius = static_cast<int>(width/4);
         }
     } else if( m_map->projection() == Mercator ) {
-        kDebug() << "mercator with rect" << m_lastRect;
-        kDebug() << "w/h ratio:" << ratio;
+        qDebug() << "mercator with rect" << m_lastRect;
+        qDebug() << "w/h ratio:" << ratio;
         if( ratio > 1 ) {
             height = m_lastRect.height();
             width = height;
@@ -180,7 +180,7 @@ void WorldClock::resizeMap(bool changeAspect)
             radius = static_cast<int>(width/4);
         }
     }
-    kDebug() << "width, height, radius:" << width << height << radius;
+    qDebug() << "width, height, radius:" << width << height << radius;
 
     m_map->setSize(width, height);
     m_map->setRadius( radius );
@@ -201,11 +201,11 @@ void WorldClock::dataUpdated(const QString &source,
                              const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source)
-    //kDebug() << "Time = " << data["Time"].toTime();
+    //qDebug() << "Time = " << data["Time"].toTime();
     m_localtime = QDateTime( QDate::currentDate(), data["Time"].toTime() );
     m_time = KSystemTimeZones::local().convert(m_locations.value(m_locationkey),
                                                m_localtime );
-    //kDebug() << "Adjusted Time = " << m_time;
+    //qDebug() << "Adjusted Time = " << m_time;
     update();
 }
 
@@ -456,8 +456,8 @@ void WorldClock::configAccepted()
 
     if(m_customTz) {
         QStringList tzlist = ui.tzWidget->selection();
-        kDebug() << "\tSetting TZLIST";
-        kDebug() << tzlist;
+        qDebug() << "\tSetting TZLIST";
+        qDebug() << tzlist;
         QMap<QString, KTimeZone> selectedZones;
         selectedZones.insert(KSystemTimeZones::local().name(),
                                 KSystemTimeZones::local());
@@ -476,7 +476,7 @@ void WorldClock::configAccepted()
     {
         switch ( ui.projection->currentIndex() ) {
             case 1:
-                //kDebug() << "case 1, setting proj to mercator";
+                //qDebug() << "case 1, setting proj to mercator";
                 m_map->setProjection(Mercator);
                 update();
                 resizeMap(true);
@@ -484,7 +484,7 @@ void WorldClock::configAccepted()
                 break;
             //case 0 (and anything else that pops up)
             default:
-                //kDebug() << "case default, setting proj to Equirectangular";
+                //qDebug() << "case default, setting proj to Equirectangular";
                 m_map->setProjection(Equirectangular);
                 update();
                 resizeMap(true);

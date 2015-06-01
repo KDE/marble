@@ -43,29 +43,17 @@ SET_TARGET_PROPERTIES(astro PROPERTIES
   )
 
 # choose the correct target install library path
-if(WIN32 AND QTONLY)
+if(WIN32)
   INSTALL(TARGETS astro RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
-else(WIN32 AND QTONLY)
-  if(APPLE AND QTONLY)
-    INSTALL(TARGETS astro LIBRARY DESTINATION
-      ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
-
-  else(APPLE AND QTONLY)
-    if(QTONLY)
-      INSTALL(TARGETS astro LIBRARY DESTINATION
-        ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX})
-    else(QTONLY)
-      INSTALL(TARGETS astro ${INSTALL_TARGETS_DEFAULT_ARGS})
-    endif(QTONLY)
-  endif(APPLE AND QTONLY)
-endif(WIN32 AND QTONLY)
+elseif(APPLE)
+  INSTALL(TARGETS astro LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
+else()
+  INSTALL(TARGETS astro LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX})
+endif()
 
 ########### install files ###############
 
-if (APPLE AND QTONLY)
-  # do nothing because we don't put .h files in the bundle
-else (APPLE AND QTONLY)
-  INSTALL(FILES
+ INSTALL(FILES
     astrolib.h
     astr2lib.h
     attlib.h
@@ -76,4 +64,3 @@ else (APPLE AND QTONLY)
 
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/astro
 )
-endif (APPLE AND QTONLY)

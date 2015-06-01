@@ -1,16 +1,24 @@
 project(MarbleThumbnailer)
 
-include_directories(
-  ${KDE4_INCLUDES}
-)
+set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
+find_package(ECM QUIET)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+if(ECM_FOUND)
+  include(KDEInstallDirs)
+endif()
+macro_optional_find_package(KF5 QUIET COMPONENTS KIO)
+
+if (NOT KF5_FOUND)       
+  return()
+endif()
 
 set(marblethumbnail_SRCS
   thumbnailer.cpp
   main.cpp
 )
-kde4_add_plugin(marblethumbnail ${marblethumbnail_SRCS})
+add_library(marblethumbnail MODULE ${marblethumbnail_SRCS})
 target_link_libraries(marblethumbnail
   ${MARBLEWIDGET}
-  ${KDE4_KIO_LIBS}
+  KF5::KIOWidgets
 )
 install(TARGETS marblethumbnail  DESTINATION ${PLUGIN_INSTALL_DIR})

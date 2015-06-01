@@ -19,7 +19,7 @@
 extern "C"
 {
 
-KDE_EXPORT ThumbCreator *new_creator()
+Q_DECL_EXPORT ThumbCreator *new_creator()
 {
     return new Marble::GeoDataThumbnailer;
 }

@@ -24,7 +24,6 @@ public:
 
 Q_SIGNALS:
     void repaintNeeded();
-    void clicked();
 
 protected:
     void mousePressEvent ( QMouseEvent *mouseEvent );

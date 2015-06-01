@@ -21,10 +21,8 @@
 #include <QCloseEvent>
 
 // KDE
-#include <kaction.h>
 #include <kactioncollection.h>
 #include <kparts/part.h>
-#include <kparts/componentfactory.h>
 #include <kxmlguifactory.h>
 
 // GeoData
@@ -49,83 +47,17 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     insertChildClient( m_part );
 
-    setXMLFile( "marbleui.rc" );
-
+    setupGUI( Default, "marbleui.rc" );
     setStandardToolBarMenuEnabled( true );
 
-    createGUI( 0 );
     QList<QAction*> panelActions = m_part->controlView()->setupDockWidgets( this );
     m_part->readTrackingSettings();
     m_part->unplugActionList( "panels_actionlist" );
     m_part->plugActionList( "panels_actionlist", panelActions );
 
     // View size actions
-    m_viewSizeActsGroup = new QActionGroup( this );
-
-    QAction *actDefault = new QAction( tr( "Default (Resizable)" ), this );
-    actDefault->setCheckable(true);
-    m_viewSizeActsGroup->addAction(actDefault);
-
-    QAction *actSeparator = new QAction(this);
-    actSeparator->setSeparator(true);
-    m_viewSizeActsGroup->addAction(actSeparator);
-
-    QAction *actNtsc = new QAction( tr( "NTSC (720x486)" ), this );
-    actNtsc->setData( QSize( 720, 486 ) );
-    actNtsc->setCheckable(true);
-    m_viewSizeActsGroup->addAction(actNtsc);
-
-    QAction *actPal = new QAction( tr( "PAL (720x576)" ), this );
-    actPal->setData( QSize( 720, 576 ) );
-    actPal->setCheckable(true);
-    m_viewSizeActsGroup->addAction(actPal);
-
-    QAction *actNtsc16x9 = new QAction( tr( "NTSC 16:9 (864x486)" ), this );
-    actNtsc16x9->setData( QSize( 864, 486 ) );
-    actNtsc16x9->setCheckable(true);
-    m_viewSizeActsGroup->addAction(actNtsc16x9);
-
-    QAction *actPal16x9 = new QAction( tr( "PAL 16:9 (1024x576)" ), this );
-    actPal16x9->setData( QSize( 1024, 576 ) );
-    actPal16x9->setCheckable(true);
-    m_viewSizeActsGroup->addAction(actPal16x9);
-
-    QAction *actDvd = new QAction( tr( "DVD (852x480p)" ), this );
-    actDvd->setData( QSize( 852, 480 ) );
-    actDvd->setCheckable(true);
-    m_viewSizeActsGroup->addAction(actDvd);
-
-    QAction *actHd = new QAction( tr( "HD (1280x720p)" ), this );
-    actHd->setData( QSize( 1280, 720 ) );
-    actHd->setCheckable(true);
-    m_viewSizeActsGroup->addAction(actHd);
-
-    QAction *actFullhd = new QAction( tr( "Full HD (1920x1080p)" ), this );
-    actFullhd->setData( QSize( 1920, 1080 ) );
-    actFullhd->setCheckable(true);
-    m_viewSizeActsGroup->addAction(actFullhd);
-
-    QAction *actDc = new QAction( tr( "Digital Cinema (2048x1536)" ), this );
-    actDc->setData( QSize( 2048, 1536 ) );
-    actDc->setCheckable(true);
-    m_viewSizeActsGroup->addAction(actDc);
-
-    /**
-     * FIXME: Needs testing, worked with errors.
-    QAction *act4kuhd = new QAction( tr( "4K UHD (3840x2160)" ), this );
-    act4kuhd->setData( QSize( 3840, 2160 ) );
-    act4kuhd->setCheckable(true);
-    m_viewSizeActsGroup->addAction(act4kuhd);
-
-    QAction *act4k = new QAction( tr( "4K (4096x3072)" ), this );
-    act4k->setData( QSize( 4096, 3072 ) );
-    act4k->setCheckable(true);
-    m_viewSizeActsGroup->addAction(act4k);
-    */
-
+    m_viewSizeActsGroup = ControlView::createViewSizeActionGroup( this );
     connect( m_viewSizeActsGroup, SIGNAL(triggered(QAction*)), this, SLOT(changeViewSize(QAction*)) );
-
-    actDefault->setChecked( true );
 
     m_part->plugActionList( "viewSize_actionlist", m_viewSizeActsGroup->actions() );
 

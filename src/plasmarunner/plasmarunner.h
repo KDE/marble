@@ -18,7 +18,7 @@
 #define PLASMARUNNER_H
 
 // Plasma
-#include <Plasma/AbstractRunner>
+#include <KRunner/AbstractRunner>
 
 
 namespace Marble

@@ -14,20 +14,19 @@
 #ifndef MARBLE_MARBLEPART_H
 #define MARBLE_MARBLEPART_H
 
-#include <kparts/part.h>
+#include <kparts/readonlypart.h>
 #include <QHash>
 #include <QDateTime>
-#include <kmenu.h>
-#include <kurl.h>
 #include "MarbleGlobal.h"
 #include "cloudsync/CloudSyncManager.h"
 #include <krecentfilesaction.h>
-#include <KDE/KWallet/Wallet>
+#include <KWallet/kwallet.h>
+#include <QDomNode>
 
 #include "ui_MarbleCloudSyncSettingsWidget.h"
 
 class KAboutData;
-class KAction;
+class QAction;
 class KToggleAction;
 class KConfigDialog;
 class KToolBar;
@@ -73,7 +72,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void initializeCustomTimezone();
 
   public Q_SLOTS:
-    bool  openUrl( const KUrl &url );
+    bool  openUrl( const QUrl &url );
     bool  openFile();
     void  showPosition( const QString& position);
     void  showZoomLevel( const int );
@@ -208,37 +207,37 @@ class MarblePart: public KParts::ReadOnlyPart
     MovieCaptureDialog *m_movieCaptureDialog;
 
     // Actions for the GUI.
-    KAction      *m_exportMapAction;
-    KAction      *m_printMapAction;
-    KAction      *m_printPreviewAction;
-    KAction      *m_workOfflineAction;
-    KAction      *m_copyMapAction;
-    KAction      *m_copyCoordinatesAction;
-    KAction      *m_showCloudsAction;
-    KAction      *m_fullScreenAct;
-    KAction      *m_openAct;
-    KAction      *m_newStuffAction;
-    KAction      *m_downloadRegionAction;
-    KAction      *m_controlSunAction;
-    KAction      *m_controlTimeAction;
-    KAction      *m_lockFloatItemsAct;
-    KAction      *m_mapWizardAct;
-    KAction      *m_externalMapEditorAction;
-    KAction      *m_recordMovieAction;
-    KAction      *m_stopRecordingAction;
+    QAction      *m_exportMapAction;
+    QAction      *m_printMapAction;
+    QAction      *m_printPreviewAction;
+    QAction      *m_workOfflineAction;
+    QAction      *m_copyMapAction;
+    QAction      *m_copyCoordinatesAction;
+    QAction      *m_showCloudsAction;
+    QAction      *m_fullScreenAct;
+    QAction      *m_openAct;
+    QAction      *m_newStuffAction;
+    QAction      *m_downloadRegionAction;
+    QAction      *m_controlSunAction;
+    QAction      *m_controlTimeAction;
+    QAction      *m_lockFloatItemsAct;
+    QAction      *m_mapWizardAct;
+    QAction      *m_externalMapEditorAction;
+    QAction      *m_recordMovieAction;
+    QAction      *m_stopRecordingAction;
     KRecentFilesAction *m_recentFilesAction;
 
     //Bookmark Menu
-    KAction *m_addBookmarkAction;
-    KAction *m_toggleBookmarkDisplayAction;
-    KAction *m_setHomeAction;
-    KAction *m_manageBookmarksAction;
+    QAction *m_addBookmarkAction;
+    QAction *m_toggleBookmarkDisplayAction;
+    QAction *m_setHomeAction;
+    QAction *m_manageBookmarksAction;
     // Actions for the status bar
-    KAction      *m_showPositionAction;
-    KAction      *m_showDateTimeAction;
-    KAction      *m_showAltitudeAction;
-    KAction      *m_showTileZoomLevelAction;
-    KAction      *m_showDownloadProgressAction;
+    QAction      *m_showPositionAction;
+    QAction      *m_showDateTimeAction;
+    QAction      *m_showAltitudeAction;
+    QAction      *m_showTileZoomLevelAction;
+    QAction      *m_showDownloadProgressAction;
 
     // Action for the tool bar
     KToggleAction *m_showShadow;
@@ -254,7 +253,7 @@ class MarblePart: public KParts::ReadOnlyPart
     QString m_position;
     QString m_clock;
     QString m_tileZoomLevel;
-    KUrl m_lastFileOpenPath;
+    QString m_lastFileOpenPath;
 
     // Items for the statusbar.
     QLabel       *m_positionLabel;
