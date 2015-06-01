@@ -18,6 +18,11 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 
+Q_DECLARE_METATYPE( Marble::GeoDataLinearRing )
+Q_DECLARE_METATYPE( Marble::Projection )
+Q_DECLARE_METATYPE( Marble::TessellationFlag )
+Q_DECLARE_METATYPE( Marble::TessellationFlags )
+
 namespace Marble
 {
 
@@ -535,10 +540,6 @@ void ViewportParamsTest::setFocusPoint()
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataLinearRing )
-Q_DECLARE_METATYPE( Marble::Projection )
-Q_DECLARE_METATYPE( Marble::TessellationFlag )
-Q_DECLARE_METATYPE( Marble::TessellationFlags )
 QTEST_MAIN( Marble::ViewportParamsTest )
 
 #include "ViewportParamsTest.moc"

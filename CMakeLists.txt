@@ -7,6 +7,21 @@ SET(CMAKE_COLOR_MAKEFILE ON)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+# Taken from KDECompilerSettings.cmake:
+# Pick sensible versions of the C and C++ standards.
+# Note that MSVC does not have equivalent flags; the features are either
+# supported or they are not.
+if ("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU" OR "${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
+    # We use the C89 standard because that is what is common to all our
+    # compilers (in particular, MSVC 2010 does not support C99)
+    set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} -std=iso9899:1990")
+endif()
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel" AND NOT WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+endif()
+
 ####################################################
 # Where to look first for cmake modules,
 # before ${CMAKE_ROOT}/Modules/ is checked
