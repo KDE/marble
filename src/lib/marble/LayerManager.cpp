@@ -29,16 +29,6 @@
 namespace Marble
 {
 
-/**
-  * Returns true if the zValue of one is lower than that of two. Null must not be passed
-  * as parameter.
-  */
-bool zValueLessThan( const LayerInterface * const one, const LayerInterface * const two )
-{
-    Q_ASSERT( one && two );
-    return one->zValue() < two->zValue();
-}
-
 class LayerManager::Private
 {
  public:
@@ -165,7 +155,10 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         }
 
         // sort them according to their zValue()s
-        qSort( layers.begin(), layers.end(), zValueLessThan );
+        qSort( layers.begin(), layers.end(), [] ( const LayerInterface * const one, const LayerInterface * const two ) {
+            Q_ASSERT( one && two );
+            return one->zValue() < two->zValue();
+        } );
 
         // render the layers of the current renderPosition
         QTime timer;
