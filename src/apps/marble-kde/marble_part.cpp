@@ -1565,15 +1565,11 @@ void MarblePart::editSettings()
                                SLOT(enableApplyButton()) );
     connect( m_configDialog,   SIGNAL(settingsChanged(QString)),
                                SLOT(updateSettings()) );
-    connect( m_configDialog,   SIGNAL(applyClicked()),
+    connect( m_configDialog,   SIGNAL(accepted()),
                                SLOT(applyPluginState()) );
-    connect( m_configDialog,   SIGNAL(okClicked()),
-                               SLOT(applyPluginState()) );
-    connect( m_configDialog,   SIGNAL(applyClicked()),
+    connect( m_configDialog,   SIGNAL(accepted()),
              pluginModel,      SLOT(applyPluginState()) );
-    connect( m_configDialog,   SIGNAL(okClicked()),
-             pluginModel,      SLOT(applyPluginState()) );
-    connect( m_configDialog,   SIGNAL(cancelClicked()),
+    connect( m_configDialog,   SIGNAL(rejected()),
              pluginModel,      SLOT(retrievePluginState()) );
 
     m_configDialog->show();
