@@ -170,8 +170,8 @@ AprsGatherer::run()
 
             qreal longitude =
                 calculateLongitude( QString ( mic_e_matcher.cap( 4 ) ),
-                                    m_dstCallLongitudeOffset[dstCall[5]],
-                                    m_dstCallSouthEast[dstCall[6]] );
+                                    m_dstCallLongitudeOffset[dstCall[4]],
+                                    m_dstCallSouthEast[dstCall[5]] );
 
 //           mDebug() << "  MIC-E: " << line.toLocal8Bit().data();
 //           mDebug() << "    lat: " << latitude;
