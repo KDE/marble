@@ -297,7 +297,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
              * This is only one way to handle checkbox changes we see, so
              * Marble.setCheckedProperty is a function that does it
              */
-            if(section->radio()!="") {
+            if(!section->radio().isEmpty()) {
                 checkBoxString = ""
                         "<label class=\"section-head\">"
                         "<input type=\"radio\" "

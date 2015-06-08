@@ -49,7 +49,7 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser &geoParser ) const
         if (parser.attribute( "type" ) == "way")
         {
             // Outer poligons (sometimes the role is empty)
-            if (parser.attribute( "role" ) == "outer" || parser.attribute( "role" ) == "")
+            if (parser.attribute( "role" ) == "outer" || parser.attribute( "role" ).isEmpty() )
             {
 
                 GeoDataPolygon *polygon = parentItem.nodeAs<GeoDataPolygon>();
@@ -165,7 +165,7 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser &geoParser ) const
             // Subarea is mainly used for administrative boundaries
             else if (parser.attribute( "role" ) == "inner"
                      || parser.attribute( "role" ) == "subarea"
-                     || parser.attribute( "role" ) == "")
+                     || parser.attribute( "role" ).isEmpty() )
             {
                 GeoDataPolygon *polygon = parentItem.nodeAs<GeoDataPolygon>();
                 Q_ASSERT( polygon );

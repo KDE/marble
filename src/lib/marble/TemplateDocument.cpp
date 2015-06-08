@@ -95,7 +95,7 @@ QString TemplateDocument::finalText() const
     typedef QMap<QString, QString>::ConstIterator ConstIterator;
     ConstIterator end = d->templateEntries.constEnd();
     for (ConstIterator i = d->templateEntries.constBegin(); i != end; i++) {
-        ready.replace("%" + i.key() + "%", i.value());
+        ready.replace('%' + i.key() + '%', i.value());
     }
     d->processTemplateIncludes(ready);
     return ready;

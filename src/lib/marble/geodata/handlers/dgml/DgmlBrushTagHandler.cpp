@@ -62,7 +62,7 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
         geodata->setBrush( brush );
         QList<QColor> colorList;
         if ( !colorMap.isEmpty() ) {
-            QStringList colorString = colorMap.split(",");
+            QStringList colorString = colorMap.split(',');
             for ( int i = 0; i < colorString.size(); ++i ) {
                 colorList.append( QColor( colorString[i] ) );
            }

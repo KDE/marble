@@ -58,10 +58,10 @@ void MovieCaptureDialog::loadDestinationFile()
         QMessageBox::warning( this, tr( "Codecs are unavailable" ), tr( "Supported codecs are not found." ) );
         return;
     }
-    QString filter = formats.first().name() + " (*."+formats.first().extension() + ")";
+    QString filter = formats.first().name() + " (*." + formats.first().extension() + ')';
     for( int i = 1; i < formats.size(); i++ )
     {
-        filter.append( ";;"+formats.at( i ).name() + " (*."+formats.at( i ).extension() + ")" );
+        filter.append( ";;"+formats.at( i ).name() + " (*." + formats.at( i ).extension() + ')' );
     }
     const QString defaultFileName =
             ui->destinationEdit->text().isEmpty() ? "" : ui->destinationEdit->text();
@@ -81,7 +81,7 @@ void MovieCaptureDialog::loadDestinationFile()
     }
 
     if (!supported) {
-        QString formatsExtensions = "."+formats.at( 0 ).extension();
+        QString formatsExtensions = '.' + formats.at( 0 ).extension();
         for( int i = 1; i < formats.size(); ++i )
         {
             formatsExtensions.append( ", ."+formats.at( i ).extension() );

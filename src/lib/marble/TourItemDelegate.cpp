@@ -138,7 +138,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataSoundCueType && !m_editingIndices.contains( index ) ) {
         GeoDataSoundCue *soundCue = static_cast<GeoDataSoundCue*>( object );
-        label.setHtml( soundCue->href().section("/", -1) );
+        label.setHtml( soundCue->href().section('/', -1) );
 
         painter->save();
         painter->translate( labelRect.topLeft() );
