@@ -22,8 +22,13 @@ macro(_phonon_find_version)
 endmacro(_phonon_find_version)
 
 # the dirs listed with HINTS are searched before the default sets of dirs
-find_library(PHONON_LIBRARY NAMES phonon HINTS ${KDE4_LIB_INSTALL_DIR} ${QT_LIBRARY_DIR})
-find_path(PHONON_INCLUDE_DIR NAMES phonon/phonon_export.h HINTS ${KDE4_INCLUDE_INSTALL_DIR} ${QT_INCLUDE_DIR} ${INCLUDE_INSTALL_DIR} ${QT_LIBRARY_DIR})
+if(QT5BUILD)
+  find_library(PHONON_LIBRARY NAMES phonon4qt5)
+  find_path(PHONON_INCLUDE_DIR NAMES phonon/phonon_export.h PATH_SUFFIXES phonon4qt5)
+else()
+  find_library(PHONON_LIBRARY NAMES phonon HINTS ${KDE4_LIB_INSTALL_DIR} ${QT_LIBRARY_DIR})
+  find_path(PHONON_INCLUDE_DIR NAMES phonon/phonon_export.h HINTS ${KDE4_INCLUDE_INSTALL_DIR} ${QT_INCLUDE_DIR} ${INCLUDE_INSTALL_DIR} ${QT_LIBRARY_DIR})
+endif()
 
 if(PHONON_INCLUDE_DIR AND PHONON_LIBRARY)
    set(PHONON_LIBS ${phonon_LIB_DEPENDS} ${PHONON_LIBRARY})
