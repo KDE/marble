@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Siddharth Srivastava <akssps011@gmail.com>
-// Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "RoutingPlugin.h"
@@ -489,7 +489,7 @@ QList<PluginAuthor> RoutingPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Siddharth Srivastava", "akssps011@gmail.com" )
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 
 QIcon RoutingPlugin::icon() const

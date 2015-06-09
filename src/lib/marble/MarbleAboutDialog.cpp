@@ -113,7 +113,7 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
            "<i>Plasma Integration, Bugfixes</i></p>")+
         QObject::tr("<p>Ren&#xE9; K&#xFC;ttner, <a href=\"mailto:rene@bitkanal.net\">rene@bitkanal.net</a><br />"
            "<i>Planetary Satellites</i></p>")+
-        QObject::tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:earthwings@gentoo.org\">earthwings@gentoo.org</a><br />"
+        QObject::tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:nienhueser@kde.org\">nienhueser@kde.org</a><br />"
            "<i>Routing, Navigation, Mobile</i></p>")+
         QObject::tr("<p>Niko Sams <a href=\"mailto:niko.sams@gmail.com\">niko.sams@gmail.com</a><br />"
            "<i>Routing, Elevation Profile</i></p>")+

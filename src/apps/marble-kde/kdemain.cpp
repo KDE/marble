@@ -80,7 +80,7 @@ int main ( int argc, char *argv[] )
                          "kossebau@kde.org" );
     aboutData.addAuthor( i18n( "Dennis Nienhüser" ),
                          i18n( "Routing, Navigation, Mobile" ),
-                         "earthwings@gentoo.org" );
+                         "nienhueser@kde.org" );
     aboutData.addAuthor( i18n( "Niko Sams" ),
                          i18n( "Routing, Elevation Profile" ),
                          "niko.sams@gmail.com" );

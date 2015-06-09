@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 // Copyright 2012,2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 

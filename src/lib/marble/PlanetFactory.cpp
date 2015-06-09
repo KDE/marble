@@ -8,7 +8,7 @@
 // Copyright 2009 Henry de Valence <hdevalence@gmail.com>
 // Copyright 2009 David Roberts <dvdr18@gmail.com>
 // Copyright 2012 Mohammed Nafees <nafees.technocool@gmail.com>
-// Copyright 2014 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2014 Dennis Nienhüser <nienhueser@kde.org>
 
 #include "PlanetFactory.h"
 #include "Planet.h"

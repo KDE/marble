@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Mayank Madan <maddiemadan@gmail.com>
-// Copyright 2013      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "KmlBalloonStyleTagWriter.h"

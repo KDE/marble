@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Gaurav Gupta <1989.gaurav@googlemail.com>
-// Copyright 2013      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "GeoDataAbstractView.h"

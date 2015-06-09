@@ -7,7 +7,7 @@
 //
 // Copyright 2012   Torsten Rahn      <tackat@kde.org>
 // Copyright 2013   Mohammed Nafees   <nafees.technocool@gmail.com>
-// Copyright 2012   Dennis Nienhüser  <earthwings@gentoo.org>
+// Copyright 2012   Dennis Nienhüser  <nienhueser@kde.org>
 // Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 

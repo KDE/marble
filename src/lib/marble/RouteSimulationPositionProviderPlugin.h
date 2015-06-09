@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2011      Konrad Enzensberger <e.konrad@mpegcode.com>
-// Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011      Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 

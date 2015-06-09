@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010      Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
@@ -59,7 +59,7 @@ QString GosmorePlugin::copyrightYears() const
 QList<PluginAuthor> GosmorePlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 

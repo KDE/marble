@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Shou Ya <shouyatf@gmail.com>
-// Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "KmlGroundOverlayWriter.h"

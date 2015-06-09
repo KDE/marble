@@ -1,5 +1,5 @@
 
-2011-01-10  Dennis Nienhüser <earthwings@gentoo.org>
+2011-01-10  Dennis Nienhüser <nienhueser@kde.org>
 
 * Change the methods
    virtual QDialog *RenderPlugin::aboutDialog() const;

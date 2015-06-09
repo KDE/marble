@@ -66,7 +66,7 @@ QString FoursquarePlugin::copyrightYears() const
 QList<PluginAuthor> FoursquarePlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( QString::fromUtf8( "Utku Aydın" ), "utkuaydin34@gmail.com" );
 }
 

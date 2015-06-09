@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Siddharth Srivastava <akssps011@gmail.com>
-// Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #ifndef MARBLE_ROUTINGPLUGIN_H

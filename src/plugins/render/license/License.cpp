@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
@@ -123,7 +123,7 @@ QString License::copyrightYears() const
 QList<PluginAuthor> License::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-           << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+           << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
            << PluginAuthor( "Illya Kovalevskyy", "illya.kovalevskyy@gmail.com" );
 }
 

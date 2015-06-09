@@ -2,7 +2,7 @@
 #
 # This module determines whether Maemo's liblocation is installed.
 #
-# Copyright (c) 2010, Dennis Nienhüser, <earthwings@gentoo.org>
+# Copyright (c) 2010, Dennis Nienhüser, <nienhueser@kde.org>
 #
 
 include(FindPkgConfig)

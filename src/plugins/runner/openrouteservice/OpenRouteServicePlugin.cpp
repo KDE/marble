@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "OpenRouteServicePlugin.h"
@@ -57,7 +57,7 @@ QString OpenRouteServicePlugin::copyrightYears() const
 QList<PluginAuthor> OpenRouteServicePlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 
 RoutingRunner *OpenRouteServicePlugin::newRunner() const

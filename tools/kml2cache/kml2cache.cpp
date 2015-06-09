@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
-// Copyright 2013      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 // A simple tool to read a .kml file and write it back to a .cache file

@@ -7,7 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2014      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2014      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "GameMainWindow.h"

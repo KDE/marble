@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
-// Copyright 2013 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2013 Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #ifndef MARBLE_MAPTHEMEDOWNLOADDIALOG_H

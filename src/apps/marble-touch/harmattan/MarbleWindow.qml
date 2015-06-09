@@ -5,7 +5,7 @@
 // the source code.
 //
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
-// Copyright 2012 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012 Dennis Nienhüser <nienhueser@kde.org>
 
 import QtQuick 1.0
 import com.nokia.meego 1.0

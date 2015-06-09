@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2011      Konrad Enzensberger <e.konrad@mpegcode.com>
-// Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011      Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
@@ -61,7 +61,7 @@ QList<PluginAuthor> RouteSimulationPositionProviderPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Konrad Enzensberger", "e.konrad@mpegcode.com" )
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 

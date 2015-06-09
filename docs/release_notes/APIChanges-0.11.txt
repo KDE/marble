@@ -23,7 +23,7 @@
 * Remove MarbleMap::goHome().
   Use MarbleMap::flyTo(home), where home is the home position.
 
-2010-10-01 Dennis Nienhüser <earthwings@gentoo.org>
+2010-10-01 Dennis Nienhüser <nienhueser@kde.org>
 
 * RenderPlugin::pluginInstance() has been renamed RenderPlugin::newInstance to be consistent with other plugin types.
   You only need to change your code if you're not using the MARBLE_PLUGIN macro in custom RenderPlugins.

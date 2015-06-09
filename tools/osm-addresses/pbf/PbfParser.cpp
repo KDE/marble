@@ -6,7 +6,7 @@
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011      Dennis Nienhüser <nienhueser@kde.org>
 //
 // This file originates from the MoNav project where it was named pbfreader.h and
 // Copyright 2010  Christian Vetter veaac.fdirct@gmail.com

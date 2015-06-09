@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
-// Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "ScreenOverlayGraphicsItem.h"

@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
-// Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "CompassFloatItem.h"
@@ -91,7 +91,7 @@ QString CompassFloatItem::copyrightYears() const
 QList<PluginAuthor> CompassFloatItem::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 

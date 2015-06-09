@@ -121,7 +121,7 @@ QString MeasureToolPlugin::copyrightYears() const
 QList<PluginAuthor> MeasureToolPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" )
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
             << PluginAuthor( "Inge Wallin", "ingwa@kde.org" )
             << PluginAuthor( "Carlos Licea", "carlos.licea@kdemail.net" )

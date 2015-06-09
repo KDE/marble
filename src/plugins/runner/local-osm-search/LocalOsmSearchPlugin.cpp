@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2011      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2011      Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
@@ -73,7 +73,7 @@ QString LocalOsmSearchPlugin::copyrightYears() const
 QList<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "earthwings@gentoo.org" );
+            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 
 SearchRunner* LocalOsmSearchPlugin::newRunner() const

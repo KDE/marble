@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 // A simple tool to read a .kml file and write it back to a new .kml file

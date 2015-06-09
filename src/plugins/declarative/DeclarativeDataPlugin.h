@@ -7,7 +7,7 @@
 //
 // Copyright 2012      Anton Chernov <chernov.anton.mail@gmail.com>
 // Copyright 2012      "LOTES TM" LLC <lotes.sis@gmail.com>
-// Copyright 2012      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2012      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #ifndef DECLARATIVEDATAPLUGIN_H

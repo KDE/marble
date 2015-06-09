@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Niko Sams <niko.sams@gmail.com>
-// Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "RoutingProfile.h"
