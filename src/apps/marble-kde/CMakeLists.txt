@@ -41,12 +41,12 @@ qt5_wrap_ui(marble_kde_SRCS ${marble_UI})
 kconfig_add_kcfg_files(marble_kde_SRCS settings.kcfgc)
 
 ecm_install_icons(ICONS
-  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/hi128-apps-marble.png"
-  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/hi16-apps-marble.png"
-  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/hi22-apps-marble.png"
-  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/hi32-apps-marble.png"
-  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/hi48-apps-marble.png"
-  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/hi64-apps-marble.png"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/128-apps-marble.png"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/16-apps-marble.png"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/22-apps-marble.png"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/32-apps-marble.png"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/48-apps-marble.png"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../../data/icons/64-apps-marble.png"
   DESTINATION ${ICON_INSTALL_DIR})
 add_executable (marble ${marble_kde_SRCS})
 
