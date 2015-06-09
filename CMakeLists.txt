@@ -188,13 +188,15 @@ else() # Linux / bsd etc...
       set(data_dir ${CMAKE_INSTALL_PREFIX}/share/marble/data)
       set(plugin_dir ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/marble/plugins)
       set(CMAKE_MODULES_INSTALL_PATH ${CMAKE_INSTALL_PREFIX}/share/marble/cmake)
-      if(NOT ICON_INSTALL_DIR)
-        set(ICON_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/icons)
-      endif(NOT ICON_INSTALL_DIR)
-      if(NOT APPS_INSTALL_DIR)
-        set(APPS_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/applications)
-      endif(NOT APPS_INSTALL_DIR)
 endif()
+
+if(NOT ICON_INSTALL_DIR)
+  set(ICON_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/icons)
+endif(NOT ICON_INSTALL_DIR)
+
+if(NOT APPS_INSTALL_DIR)
+  set(APPS_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/applications)
+endif(NOT APPS_INSTALL_DIR)
 
 if (NOT MARBLE_DATA_PATH)
   set (MARBLE_DATA_PATH ${data_dir})
