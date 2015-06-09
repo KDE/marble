@@ -82,9 +82,7 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
       m_addingPlacemark( false ),
       m_editingDialogIsShown( false )
 {
-    // Plugin is enabled by default
     setEnabled( true );
-    // Plugin is not visible by default
     setVisible( true );
     connect( this, SIGNAL(visibilityChanged(bool, QString)), SLOT(enableModel(bool)) );
 
