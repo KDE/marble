@@ -15,7 +15,7 @@ if( QT4BUILD )
   INCLUDE(${QT_USE_FILE})
 endif()
 
-IF( PHONON_FOUND AND NOT QT5BUILD )
+IF( PHONON_FOUND )
   set( routing_SRCS RoutingPlugin.cpp AudioOutput.cpp )
 ELSE()
   set( routing_SRCS RoutingPlugin.cpp NullAudioOutput.cpp )
