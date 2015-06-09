@@ -141,8 +141,7 @@ class WeatherItemPrivate
         if ( !m_forecastWeather.isEmpty() ) {
             toolTip += '\n';
 
-            QDate minDate = QDate::currentDate();
-            minDate.addDays( -1 );
+            QDate const minDate = QDate::currentDate();
             foreach( const WeatherData& data, m_forecastWeather ) {
                 QDate date = data.dataDate();
                 if( date >= minDate
@@ -436,16 +435,16 @@ void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts )
     }
 
     // Remove old items
-    QDate minDate = QDate::currentDate();
-    minDate.addDays( -1 );
+    QDate const minDate = QDate::currentDate();
 
     QMap<QDate, WeatherData>::iterator it = d->m_forecastWeather.begin();
 
     while( it != d->m_forecastWeather.end() ) {
         if ( it.key() < minDate ) {
-            d->m_forecastWeather.remove( it.key() );
+            it = d->m_forecastWeather.erase( it );
+        } else {
+            ++it;
         }
-        ++it;
     }
 
     d->updateToolTip();
