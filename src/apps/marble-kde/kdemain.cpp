@@ -43,7 +43,7 @@ int main ( int argc, char *argv[] )
                           ControlView::applicationVersion(),
                           i18n( "A World Atlas." ),
                           KAboutLicense::LGPL_V2,
-                          i18n( "(c) 2007-2014" ), // FIXME: use subs() here and replace 2014 by %1
+                          i18n( "(c) 2007-%1" ).arg( 2015 ),
                           QString(),
                           "http://marble.kde.org/" );
 
