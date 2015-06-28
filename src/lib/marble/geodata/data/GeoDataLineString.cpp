@@ -18,6 +18,8 @@
 #include "Quaternion.h"
 #include "MarbleDebug.h"
 
+#include <QDataStream>
+
 
 namespace Marble
 {

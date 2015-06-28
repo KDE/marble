@@ -12,6 +12,7 @@
 
 #include "svgxmlhandler.h"
 #include <QDebug>
+#include <QDataStream>
 
 SVGXmlHandler::SVGXmlHandler(const QString& targetfile)
 {

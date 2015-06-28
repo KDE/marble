@@ -19,6 +19,7 @@
 #include <QApplication>
 #include <QFile>
 #include <QDebug>
+#include <QDataStream>
 
 using namespace std;
 using namespace Marble;

@@ -13,6 +13,7 @@
 
 #include "marble_export.h"
 #include <QAbstractListModel>
+#include <QIODevice>
 
 #include "GeoDataCoordinates.h"
 

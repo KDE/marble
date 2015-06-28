@@ -13,6 +13,8 @@
 
 #include <QVector>
 #include <QStringList>
+#include <QHash>
+#include <QVariant>
 
 namespace Marble
 {

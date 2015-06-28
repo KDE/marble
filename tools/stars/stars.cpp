@@ -16,6 +16,7 @@
 #include <QApplication>
 #include <QStringList>
 #include <QFileInfo>
+#include <QDataStream>
 
 #include <cmath>
 #include <iostream>

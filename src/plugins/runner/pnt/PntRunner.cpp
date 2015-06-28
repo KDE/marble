@@ -19,6 +19,7 @@
 #include <qmath.h>
 #include <QFile>
 #include <QFileInfo>
+#include <QDataStream>
 
 namespace Marble
 {

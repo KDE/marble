@@ -15,6 +15,8 @@
 
 #include "MarbleDebug.h"
 
+#include <QDataStream>
+
 
 namespace Marble
 {

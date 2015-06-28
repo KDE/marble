@@ -23,6 +23,7 @@
 #include <QStringList>
 #include <QCoreApplication>
 #include <QAtomicInt>
+#include <QDataStream>
 
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
