@@ -16,6 +16,7 @@
 #include <QScriptEngine>
 #include <QScriptValue>
 #include <QScriptValueIterator>
+#include <QIODevice>
 
 namespace Marble {
 

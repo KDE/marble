@@ -16,6 +16,7 @@
 #include <QtGlobal>
 #include <QFile>
 #include <QDirIterator>
+#include <QDataStream>
 
 using namespace Marble;
 

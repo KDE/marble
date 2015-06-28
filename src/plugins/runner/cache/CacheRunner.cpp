@@ -14,6 +14,7 @@
 #include "GeoDataPlacemark.h"
 
 #include <QFile>
+#include <QDataStream>
 
 namespace Marble
 {

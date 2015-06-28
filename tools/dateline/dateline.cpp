@@ -17,6 +17,7 @@
 #include <QFile>
 #include <QVector>
 #include <QStringList>
+#include <QDataStream>
 #include "Quaternion.h"
 
 using namespace Marble;

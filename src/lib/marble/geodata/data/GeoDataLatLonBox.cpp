@@ -18,6 +18,8 @@
 
 #include "GeoDataTypes.h"
 
+#include <QDataStream>
+
 namespace Marble
 {
 

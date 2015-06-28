@@ -24,6 +24,7 @@
 #include <QStringList>
 #include <QCoreApplication>
 #include <QAtomicInt>
+#include <QDataStream>
 #include <QPointF>
 
 #include "MarbleGlobal.h"

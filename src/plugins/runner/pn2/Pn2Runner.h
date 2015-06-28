@@ -12,6 +12,8 @@
 
 #include "ParsingRunner.h"
 
+#include <QDataStream>
+
 class QDataStream;
 
 namespace Marble
