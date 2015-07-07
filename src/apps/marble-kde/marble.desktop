@@ -96,5 +96,5 @@ GenericName[x-test]=xxVirtual Globexx
 GenericName[zh_TW]=虛擬地球儀
 Icon=marble
 Terminal=false
-Categories=Qt;KDE;Education;Geography;
+Categories=Qt;KDE;Education;Geoscience;Geography;Science;
 X-DocPath=marble/index.html
