@@ -1040,6 +1040,7 @@ void AnnotatePlugin::editTextAnnotation()
     disableActions( m_actions.first() );
     dialog->show();
     m_editingDialogIsShown = true;
+    m_editedItem = m_focusItem;
 }
 
 void AnnotatePlugin::addTextAnnotation()
@@ -1078,6 +1079,7 @@ void AnnotatePlugin::addTextAnnotation()
         }
     }
     m_focusItem = textAnnotation;
+    m_editedItem = textAnnotation;
     disableActions( m_actions.first() );
 
     dialog->move( m_marbleWidget->mapToGlobal( QPoint( 0, 0 ) ) );
@@ -1087,6 +1089,8 @@ void AnnotatePlugin::addTextAnnotation()
 
 void AnnotatePlugin::stopEditingTextAnnotation( int result )
 {
+    m_focusItem = m_editedItem;
+    m_editedItem = 0;
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
@@ -1319,6 +1323,7 @@ void AnnotatePlugin::addPolygon()
         }
     }
     m_focusItem = polygon;
+    m_editedItem = polygon;
     disableActions( m_actions.first() );
 
     dialog->move( m_marbleWidget->mapToGlobal( QPoint( 0, 0 ) ) );
@@ -1328,6 +1333,8 @@ void AnnotatePlugin::addPolygon()
 
 void AnnotatePlugin::stopEditingPolygon( int result )
 {
+    m_focusItem = m_editedItem;
+    m_editedItem = 0;
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
@@ -1401,6 +1408,7 @@ void AnnotatePlugin::editPolygon()
     dialog->move( m_marbleWidget->mapToGlobal( QPoint( 0, 0 ) ) );
     dialog->show();
     m_editingDialogIsShown = true;
+    m_editedItem = m_focusItem;
 }
 
 void AnnotatePlugin::setupNodeRmbMenu()
@@ -1530,6 +1538,7 @@ void AnnotatePlugin::editPolyline()
     disableActions( m_actions.first() );
     dialog->show();
     m_editingDialogIsShown = true;
+    m_editedItem = m_focusItem;
 }
 
 void AnnotatePlugin::addPolyline()
@@ -1564,6 +1573,7 @@ void AnnotatePlugin::addPolyline()
         }
     }
     m_focusItem = polyline;
+    m_editedItem = m_focusItem;
     disableActions( m_actions.first() );
 
     dialog->move( m_marbleWidget->mapToGlobal( QPoint( 0, 0 ) ) );
@@ -1573,6 +1583,8 @@ void AnnotatePlugin::addPolyline()
 
 void AnnotatePlugin::stopEditingPolyline( int result )
 {
+    m_focusItem = m_editedItem;
+    m_editedItem = 0;
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();

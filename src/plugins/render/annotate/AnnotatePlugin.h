@@ -193,6 +193,7 @@ private:
 
     SceneGraphicsItem *m_movedItem;
     SceneGraphicsItem *m_focusItem;
+    SceneGraphicsItem *m_editedItem;
     GeoDataGroundOverlay *m_rmbOverlay;
 
     GeoDataPlacemark *m_polylinePlacemark;
