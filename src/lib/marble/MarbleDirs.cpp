@@ -149,6 +149,11 @@ QString MarbleDirs::systemPath()
     }
 #endif   // mac bundle
 
+#ifdef ANDROID
+    systempath = "assets:/data";
+    return systempath;
+#endif
+
 // Should this happen before the Mac bundle already?
 if ( !runTimeMarbleDataPath.isEmpty() )
     return runTimeMarbleDataPath;
