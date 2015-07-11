@@ -289,8 +289,11 @@ QActionGroup *ControlView::createViewSizeActionGroup( QObject* parent )
     addViewSizeAction( actionGroup, tr("PAL (%1x%2)"), 720, 576 );
     addViewSizeAction( actionGroup, tr("NTSC 16:9 (%1x%2)"), 864, 486 );
     addViewSizeAction( actionGroup, tr("PAL 16:9 (%1x%2)"), 1024, 576 );
+    // xgettext:no-c-format
     addViewSizeAction( actionGroup, tr("DVD (%1x%2p)"), 852, 480 );
+    // xgettext:no-c-format
     addViewSizeAction( actionGroup, tr("HD (%1x%2p)"), 1280, 720 );
+    // xgettext:no-c-format
     addViewSizeAction( actionGroup, tr("Full HD (%1x%2p)"), 1920, 1080 );
     addViewSizeAction( actionGroup, tr("Digital Cinema (%1x%2)"), 2048, 1536 );
     /** FIXME: Needs testing, worked with errors.
