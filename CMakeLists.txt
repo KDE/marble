@@ -45,21 +45,51 @@ option(MOBILE "Create a Marble version optimized for handheld devices")
 ####################################################
 # Specific options for building with Qt 4 vs 5
 
+if(ANDROID)
+   if (NOT DEFINED ENV{Qt5_host})
+      message(FATAL_ERROR "Configure the env variable Qt5_host to point to your host Qt5 installation.")
+   else()
+      message(STATUS "Qt5 host installation dir: $ENV{Qt5_host}")
+   endif()
+
+   if (NOT DEFINED ENV{Qt5_android})
+      message(FATAL_ERROR "Configure the env variable Qt5_android to point to your android Qt5 installation.")
+   else()
+      message(STATUS "Qt5 android installation dir: $ENV{Qt5_android}")
+   endif()
+   
+   if(NOT DEFINED ENV{ANDROID_PLATFORM})
+      message(FATAL_ERROR "Configure the env variable ANDROID_PLATFORM to specify your target platform (e.g.: android-18).")
+   else()
+      message(STATUS "Android target platform: $ENV{ANDROID_PLATFORM}")
+   endif()
+
+   # Minimum Qt version
+   set(QT_REQUIRED_VERSION 5.3.0)
+
+   SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
+   SET(CMAKE_PREFIX_PATH "$ENV{Qt5_android}/lib/cmake")
+   
+   include_directories(SYSTEM "$ENV{ANDROID_NDK}/platforms/$ENV{ANDROID_PLATFORM}/arch-arm/usr/include")
+   message(STATUS "Include directories: " "$ENV{ANDROID_NDK}/platforms/$ENV{ANDROID_PLATFORM}/arch-arm/usr/include")
+else()
+   find_package(Qt5WebKitWidgets)
+   find_package(Qt5DBus)
+endif()
+
 find_package(Qt5Core)
 find_package(Qt5Xml)
 find_package(Qt5Network)
 find_package(Qt5Test)
 find_package(Qt5Script)
 find_package(Qt5Widgets)
-find_package(Qt5WebKitWidgets)
 find_package(Qt5Svg)
 find_package(Qt5Sql)
 find_package(Qt5Concurrent)
-find_package(Qt5PrintSupport)
 find_package(Qt5Quick)
 find_package(Qt5OpenGL)
 find_package(Qt5PrintSupport)
-find_package(Qt5DBus)
+
 
 if(QTONLY)
   # Forward the old QTONLY=TRUE option to the new WITH_KDE=FALSE
@@ -129,7 +159,7 @@ endif( WIN32 )
 ####################################################
 # Build a D-Bus interface for marble
 # This is disabled by default for all win32, apple and Qt-Only builds
-if(WIN32 OR APPLE)
+if(WIN32 OR APPLE OR ANDROID)
     option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" OFF)
 else()
     option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)

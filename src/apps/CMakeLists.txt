@@ -2,6 +2,7 @@ add_subdirectory(marble-ui)
 add_subdirectory(marble-qt)
 add_subdirectory(marble-mobile)
 add_subdirectory(marble-kde)
+add_subdirectory(marble_android)
 
 if( QT_QTDECLARATIVE_FOUND OR Qt5Quick_FOUND )
     add_subdirectory(marble-touch)
