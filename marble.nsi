@@ -23,7 +23,7 @@
 
 !define architecture "x86" ; 32 or 64 bit build? x86 or x64
 
-!define version "1.9.1" ; current Marble version
+!define version "1.11.3" ; current Marble version
 !define VCREDIST_DIR "C:\marble" ; where do visual studio redistributable packages lie?
 
 !define setup "marble-setup_${version}_${architecture}.exe"
@@ -34,12 +34,12 @@
 !define exec "marble-qt.exe"
 
 ; x64
-;  !define qtdir "C:\Qt\5.3\5.3\msvc2013_64_opengl"
-;  !define srcdir "C:\marble\export64" ; where did you install Marble (CMAKE_INSTALL_PREFIX)?
+;  !define qtdir "C:\Qt\5.5\msvc2013_64"
+;  !define srcdir "C:\marble\export-64bit" ; where did you install Marble (CMAKE_INSTALL_PREFIX)?
 ;  InstallDir "$PROGRAMFILES64\${prodname}"
 ; x86
-  !define qtdir "C:\Qt\5.3\5.3\msvc2013_opengl"
-  !define srcdir "C:\marble\export32" ; where did you install Marble (CMAKE_INSTALL_PREFIX)?
+  !define qtdir "C:\Qt\5.5\msvc2013"
+  !define srcdir "C:\marble\export-32bit" ; where did you install Marble (CMAKE_INSTALL_PREFIX)?
   InstallDir "$PROGRAMFILES\${prodname}"
   
 ; optional stuff
@@ -167,9 +167,9 @@ File /a /r \
   "${srcdir}\*.*"    
   
 File /a /r \
-  "${qtdir}\bin\ICUDT52.DLL" \
-  "${qtdir}\bin\ICUIN52.DLL" \
-  "${qtdir}\bin\ICUUC52.DLL" \
+  "${qtdir}\bin\ICUDT54.DLL" \
+  "${qtdir}\bin\ICUIN54.DLL" \
+  "${qtdir}\bin\ICUUC54.DLL" \
   "${qtdir}\bin\QT5CORE.DLL" \
   "${qtdir}\bin\QT5GUI.DLL" \
   "${qtdir}\bin\QT5MULTIMEDIA.DLL" \
