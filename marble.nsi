@@ -184,6 +184,7 @@ File /a /r \
   "${qtdir}\bin\QT5SENSORS.DLL" \
   "${qtdir}\bin\QT5SQL.DLL" \
   "${qtdir}\bin\QT5SVG.DLL" \
+  "${qtdir}\bin\QT5WEBCHANNEL.DLL" \
   "${qtdir}\bin\QT5WEBKIT.DLL" \
   "${qtdir}\bin\QT5WEBKITWIDGETS.DLL" \
   "${qtdir}\bin\QT5WIDGETS.DLL" \
