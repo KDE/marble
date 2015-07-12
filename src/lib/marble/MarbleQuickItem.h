@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2014      Adam Dabrowski <adamdbrw@gmail.com>
+// Copyright 2014      Adam Dabrowski <adabrowski@piap.pl> <adamdbrw@gmail.com>
 //
 
 #ifndef MARBLEQUICKITEM_H
@@ -20,6 +20,7 @@ namespace Marble
 {
     class MarbleModel;
     class MarbleMap;
+    class MarbleInputHandler;
     class MarbleQuickItemPrivate;
 
     //Class is still being developed
@@ -29,6 +30,8 @@ namespace Marble
 
     public:
         MarbleQuickItem(QQuickItem *parent = 0);
+        MarbleInputHandler *inputHandler();
+        int zoom() const;
 
     public slots:
         void goHome();
@@ -47,6 +50,7 @@ namespace Marble
     public:
         void classBegin();
         void componentComplete();
+        virtual bool layersEventFilter(QObject *o, QEvent *e);
 
     protected:
         MarbleModel* model();

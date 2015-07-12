@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2014      Adam Dabrowski <adamdbrw@gmail.com>
+// Copyright 2014      Adam Dabrowski <adabrowski@piap.pl> <adamdbrw@gmail.com>
 //
 
 
@@ -74,9 +74,9 @@ namespace Marble
         void installPluginEventFilter(RenderPlugin *) {}
 
     private:
-        bool layersEventFilter(QObject *, QEvent *)
+        bool layersEventFilter(QObject *o, QEvent *e)
         {
-            return false;
+            return m_marbleQuick->layersEventFilter(o, e);
         }
 
         //empty - don't check. It would be invalid with quick items
@@ -249,5 +249,20 @@ namespace Marble
     void MarbleQuickItem::pinch(QPointF center, qreal scale, Qt::GestureState state)
     {
         d->m_inputHandler.pinch(center, scale, state);
+    }
+
+    MarbleInputHandler *MarbleQuickItem::inputHandler()
+    {
+        return &d->m_inputHandler;
+    }
+
+    int MarbleQuickItem::zoom() const
+    {
+        return d->logzoom();
+    }
+
+    bool MarbleQuickItem::layersEventFilter(QObject *, QEvent *)
+    {   //Does nothing, but can be reimplemented in a subclass
+        return false;
     }
 }
