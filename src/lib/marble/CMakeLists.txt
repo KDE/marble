@@ -50,6 +50,10 @@ if( QT5BUILD )
     set(marblequick_SRCS MarbleQuickItem.cpp)
 endif()
 
+if(QT_NO_WEBKIT)
+add_definitions(-DQT_NO_WEBKIT)
+endif()
+
 set(marblewidget_SRCS
     ${geodata_SRCS}
     ${graphicsview_SRCS}
@@ -64,12 +68,10 @@ set(marblewidget_SRCS
     LatLonBoxWidget.cpp
     MarbleWidget.cpp
     MarbleAbstractPresenter.cpp
-    MarbleWebView.cpp
     MarbleModel.cpp
     MarbleMap.cpp
     MarbleControlBox.cpp
     MarbleColors.cpp
-    MarbleDBusInterface.cpp
     NavigationWidget.cpp
     MapViewWidget.cpp
     FileViewWidget.cpp
@@ -168,7 +170,6 @@ set(marblewidget_SRCS
     StackedTileLoader.cpp
     TileLoaderHelper.cpp
     TileCreator.cpp
-    TinyWebBrowser.cpp
     #jsonparser.cpp
     FileLoader.cpp
     FileManager.cpp
@@ -286,10 +287,28 @@ set(marblewidget_SRCS
     cloudsync/ConflictDialog.cpp
 )
 
+
+if (QT_NO_WEBKIT)
+    LIST(APPEND marblewidget_SRCS
+        NullMarbleWebView.cpp
+        NullTinyWebBrowser.cpp
+        )
+else()
+    LIST(APPEND marblewidget_SRCS
+        MarbleWebView.cpp
+        TinyWebBrowser.cpp
+        )
+endif()
+
+if (NOT QT_NO_DBUS)
+    LIST(APPEND marblewidget_SRCS
+        MarbleDBusInterface.cpp
+        )
+endif()
+
 set (marblewidget_UI
     LatLonBoxWidget.ui
     NavigationWidget.ui
-    LegendWidget.ui
     MapViewWidget.ui
     CurrentLocationWidget.ui
     FileViewWidget.ui
@@ -319,7 +338,6 @@ set (marblewidget_UI
     routing/RoutingProfileSettingsDialog.ui
     MapWizard.ui
     MapThemeDownloadDialog.ui
-    WebPopupWidget.ui
     cloudsync/CloudRoutesDialog.ui
     MarbleCloudSyncSettingsWidget.ui
     MovieCaptureDialog.ui
@@ -329,6 +347,17 @@ set (marblewidget_UI
     FormattedTextWidget.ui
     ElevationWidget.ui
 )
+if (QT_NO_WEBKIT)
+    LIST(APPEND marblewidget_UI
+        NullLegendWidget.ui
+        NullWebPopupWidget.ui
+        )
+else()
+    LIST(APPEND marblewidget_UI
+        LegendWidget.ui
+        WebPopupWidget.ui
+        )
+endif()
 
 # FIXME: cleaner approach of src/lib/marblwidget/MarbleControlBox.* vs. marble.qrc
 qt_add_resources(marblewidget_SRCS libmarble.qrc ../../apps/marble-ui/marble.qrc)
@@ -415,16 +444,28 @@ if( QT5BUILD )
     set(marblequick_HDRS MarbleQuickItem.h)
 endif()
 
+if (QT_NO_WEBKIT)
+    set(marble_WebKit
+        NullMarbleWebView.h
+        NullTinyWebBrowser.h
+        )
+else()
+    set(marble_WebKit
+        MarbleWebView.h
+        TinyWebBrowser.h
+        )
+endif()
+
 install( FILES
     ${graphicsview_HDRS}
     ${marblequick_HDRS}
+    ${marble_WebKit}
     AutoNavigation.h
     BookmarkManager.h
     DownloadRegion.h
     DownloadRegionDialog.h
     LatLonBoxWidget.h
     MarbleWidget.h
-    MarbleWebView.h
     MarbleMap.h
     MarbleModel.h
     MarbleControlBox.h
@@ -451,7 +492,6 @@ install( FILES
     TileId.h
     TileCoordsPyramid.h
     TileLevelRangeWidget.h
-    TinyWebBrowser.h
     QtMarbleConfigDialog.h
     global.h
     MarbleColors.h

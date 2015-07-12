@@ -5,10 +5,11 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2015 Gábor Péterffy <peterffy95@gmail.org>
+// Copyright 2015 Gábor Péterffy <peterffy95@gmail.com>
 //
 
-#include <QtGui/QApplication>
+#include <QApplication>
+
 #include "MarbleWidget.h"
 
 int main(int argc, char ** argv)

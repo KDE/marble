@@ -16,7 +16,11 @@
 
 using namespace Marble;
 // Ui
+#ifdef QT_NO_WEBKIT
+#include "ui_NullLegendWidget.h"
+#else
 #include "ui_LegendWidget.h"
+#endif
 
 #include "MarbleLegendBrowser.h"
 

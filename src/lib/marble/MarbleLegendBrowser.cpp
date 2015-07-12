@@ -27,8 +27,12 @@
 #include <QStyle>
 #include <QStyleOptionButton>
 #include <QRegExp>
+
+#ifndef QT_NO_WEBKIT
 #include <QWebFrame>
 #include <QWebElement>
+#endif
+
 #include <QTextDocument>
 
 #include "GeoSceneDocument.h"
@@ -72,11 +76,13 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     d->m_suppressSelection = false;
 #endif // Q_WS_MAEMO_5
 
+#ifndef QT_NO_WEBKIT
     QWebFrame *frame = page()->mainFrame();
     connect(frame, SIGNAL(javaScriptWindowObjectCleared()),
             this, SLOT(injectCheckBoxChecker()));
     page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
     connect( this, SIGNAL(linkClicked(QUrl)), this, SLOT(openLinkExternally(QUrl)) );
+#endif
 }
 
 MarbleLegendBrowser::~MarbleLegendBrowser()
@@ -127,6 +133,7 @@ void MarbleLegendBrowser::initTheme()
 
 void MarbleLegendBrowser::loadLegend()
 {
+#ifndef QT_NO_WEBKIT
     if (d->m_currentThemeId != d->m_marbleModel->mapThemeId()) {
         d->m_currentThemeId = d->m_marbleModel->mapThemeId();
     } else {
@@ -173,12 +180,15 @@ void MarbleLegendBrowser::loadLegend()
         QTextDocument *document = new QTextDocument(page()->mainFrame()->toHtml());
         d->m_marbleModel->setLegend( document );
     }
+#endif
 }
 
 void MarbleLegendBrowser::injectCheckBoxChecker()
 {
+#ifndef QT_NO_WEBKIT
     QWebFrame *frame = page()->mainFrame();
     frame->addToJavaScriptWindowObject( "Marble", this );
+#endif
 }
 
 void MarbleLegendBrowser::openLinkExternally( const QUrl &url )
@@ -374,6 +384,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
 void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
 {
+#ifndef QT_NO_WEBKIT
     QWebElement box = page()->mainFrame()->findFirstElement("input[name="+name+']');
     if (!box.isNull()) {
         if (checked != d->m_checkBoxMap[name]) {
@@ -383,10 +394,12 @@ void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked 
     }
 
     update();
+#endif
 }
 
 void MarbleLegendBrowser::setRadioCheckedProperty( const QString& value, const QString& name , bool checked )
 {
+#ifndef QT_NO_WEBKIT
     QWebElement box = page()->mainFrame()->findFirstElement("input[value="+value+']');
     QWebElementCollection boxes = page()->mainFrame()->findAllElements("input[name="+name+']');
     QString currentValue="";
@@ -403,6 +416,7 @@ void MarbleLegendBrowser::setRadioCheckedProperty( const QString& value, const Q
     }
 
     update();
+#endif
 }
 
 }

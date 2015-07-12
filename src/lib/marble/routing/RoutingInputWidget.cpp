@@ -14,7 +14,13 @@
 #include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
 #include "RouteRequest.h"
+
+#ifdef QT_NO_WEBKIT
+#include "NullTinyWebBrowser.h"
+#else
 #include "TinyWebBrowser.h"
+#endif
+
 #include "BookmarkManager.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
@@ -36,6 +42,7 @@
 #include <QToolButton>
 #include <QKeyEvent>
 #include <QDomDocument>
+#include <QPainter>
 
 namespace Marble
 {

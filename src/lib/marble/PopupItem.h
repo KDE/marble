@@ -18,7 +18,12 @@
 #include <QLabel>
 
 #include "BillboardGraphicsItem.h"
+
+#ifdef QT_NO_WEBKIT
+#include "ui_NullWebPopupWidget.h"
+#else
 #include "ui_WebPopupWidget.h"
+#endif
 
 class QPainter;
 

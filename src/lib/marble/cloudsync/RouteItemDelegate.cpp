@@ -1,9 +1,16 @@
 #include "RouteItemDelegate.h"
 
 #include <QPainter>
+
+#ifdef QT_NO_WEBKIT
+#include <QWidget>
+#else
 #include <QWebView>
+#endif
+
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
+#include <QPainter>
 
 namespace Marble {
 

@@ -90,7 +90,6 @@ find_package(Qt5Quick)
 find_package(Qt5OpenGL)
 find_package(Qt5PrintSupport)
 
-
 if(QTONLY)
   # Forward the old QTONLY=TRUE option to the new WITH_KDE=FALSE
   set(WITH_KF5 FALSE)

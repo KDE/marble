@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WebPopupWidget</class>
+ <widget class="QWidget" name="WebPopupWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1">
+    <widget class="QLabel" name="titleText">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="4">
+    <widget class="MarbleWebView" name="webView" native="true"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QToolButton" name="goBackButton">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="libmarble.qrc">
+       <normaloff>:/marble/webpopup/icon-arrow-back.png</normaloff>:/marble/webpopup/icon-arrow-back.png</iconset>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QToolButton" name="printButton">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="libmarble.qrc">
+       <normaloff>:/marble/webpopup/icon-print.png</normaloff>:/marble/webpopup/icon-print.png</iconset>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QToolButton" name="hideButton">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="libmarble.qrc">
+       <normaloff>:/marble/webpopup/icon-remove.png</normaloff>:/marble/webpopup/icon-remove.png</iconset>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MarbleWebView</class>
+   <extends>QWidget</extends>
+   <header>NullMarbleWebView.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="libmarble.qrc"/>
+ </resources>
+ <connections/>
+</ui>

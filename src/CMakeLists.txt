@@ -49,7 +49,12 @@ endif()
 
 add_subdirectory( lib/marble )
 add_subdirectory( lib/astro )
+
+#FIXME: Port to Android
+if(NOT ANDROID)
 add_subdirectory( plugins )
+endif()
+
 add_subdirectory( bindings )
 
 configure_file(
