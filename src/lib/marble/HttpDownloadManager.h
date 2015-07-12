@@ -66,6 +66,8 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     void setDownloadEnabled( const bool enable );
     void addDownloadPolicy( const DownloadPolicy& );
 
+    static QByteArray userAgent(const QString &platform, const QString &plugin);
+
  public Q_SLOTS:
 
     /**

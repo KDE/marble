@@ -215,4 +215,13 @@ bool HttpDownloadManager::hasDownloadPolicy( const DownloadPolicy& policy ) cons
     return found;
 }
 
+QByteArray HttpDownloadManager::userAgent(const QString &platform, const QString &component)
+{
+    QString result( "Mozilla/5.0 (compatible; Marble/%1; %2; %3; %4)" );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    QString const device = smallScreen ? "MobileDevice" : "DesktopDevice";
+    result = result.arg( MARBLE_VERSION_STRING, device, platform, component);
+    return result.toLatin1();
+}
+
 #include "HttpDownloadManager.moc"

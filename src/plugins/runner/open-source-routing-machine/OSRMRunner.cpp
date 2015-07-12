@@ -17,7 +17,7 @@
 #include "GeoDataExtendedData.h"
 #include "routing/Maneuver.h"
 #include "routing/RouteRequest.h"
-#include "TinyWebBrowser.h"
+#include "HttpDownloadManager.h"
 
 #include <QString>
 #include <QVector>
@@ -82,7 +82,7 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
     m_hintChecksum = invalidEntry;
 
     m_request = QNetworkRequest( QUrl( url ) );
-    m_request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "OSRMRunner" ) );
+    m_request.setRawHeader( "User-Agent", HttpDownloadManager::userAgent( "Browser", "OSRMRunner" ) );
 
     QEventLoop eventLoop;
 

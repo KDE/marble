@@ -14,7 +14,7 @@
 #include "HttpJob.h"
 
 #include "MarbleDebug.h"
-#include "TinyWebBrowser.h"
+#include "HttpDownloadManager.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -123,14 +123,14 @@ QByteArray HttpJob::userAgent() const
 {
     switch ( d->m_downloadUsage ) {
     case DownloadBrowse:
-        return TinyWebBrowser::userAgent("Browser", d->m_userAgent);
+        return HttpDownloadManager::userAgent("Browser", d->m_userAgent);
         break;
     case DownloadBulk:
-        return TinyWebBrowser::userAgent("BulkDownloader", d->m_userAgent);
+        return HttpDownloadManager::userAgent("BulkDownloader", d->m_userAgent);
         break;
     default:
         qCritical() << "Unknown download usage value:" << d->m_downloadUsage;
-        return TinyWebBrowser::userAgent("unknown", d->m_userAgent);
+        return HttpDownloadManager::userAgent("unknown", d->m_userAgent);
     }
 }
 

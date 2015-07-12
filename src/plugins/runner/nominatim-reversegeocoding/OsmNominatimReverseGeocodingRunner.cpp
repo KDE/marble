@@ -15,7 +15,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
-#include "TinyWebBrowser.h"
+#include "HttpDownloadManager.h"
 
 #include <QString>
 #include <QVector>
@@ -58,7 +58,7 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
     QString url = QString( base + query ).arg( lon ).arg( lat ).arg( MarbleLocale::languageCode() );
 
     m_request.setUrl(QUrl(url));
-    m_request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
+    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent("Browser", "OsmNominatimRunner") );
 
     QEventLoop eventLoop;
 
