@@ -221,6 +221,11 @@ namespace Marble
         d->centerOn(placemark, animated);
     }
 
+    void MarbleQuickItem::centerOn(const GeoDataLatLonBox& box, bool animated)
+    {
+        d->centerOn(box, animated);
+    }
+
     void MarbleQuickItem::goHome()
     {
         d->goHome();

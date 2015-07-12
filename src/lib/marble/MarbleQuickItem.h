@@ -34,6 +34,7 @@ namespace Marble
         void goHome();
         void setZoom(int zoom, FlyToMode mode = Instant);
         void centerOn(const GeoDataPlacemark& placemark, bool animated = false);
+        void centerOn(const GeoDataLatLonBox& box, bool animated = false);
 
         void zoomIn(FlyToMode mode = Automatic);
         void zoomOut(FlyToMode mode = Automatic);
