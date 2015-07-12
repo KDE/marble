@@ -11,9 +11,10 @@
 
 #include "GeoDataColorStyle.h"
 
-#include "cstdlib"
-
 #include "GeoDataTypes.h"
+
+#include <cstdlib>
+#include <QDataStream>
 
 namespace Marble
 {
