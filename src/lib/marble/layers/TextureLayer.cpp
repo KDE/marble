@@ -59,6 +59,7 @@ public:
     void resetGroundOverlaysCache();
 
     void updateGroundOverlays();
+    void addCustomTextures();
 
     static bool drawOrderLessThan( const GeoDataGroundOverlay* o1, const GeoDataGroundOverlay* o2 );
 
@@ -77,6 +78,7 @@ public:
     QString m_runtimeTrace;
     QSortFilterProxyModel m_groundOverlayModel;
     QList<const GeoDataGroundOverlay *> m_groundOverlayCache;
+    QMap<QString, GeoSceneTextureTile *> m_customTextures;
     // For scheduling repaints
     QTimer           m_repaintTimer;
     RenderState m_renderState;
@@ -225,6 +227,13 @@ void TextureLayer::Private::updateGroundOverlays()
     }
 }
 
+void TextureLayer::Private::addCustomTextures()
+{
+    foreach (GeoSceneTextureTile *t, m_customTextures)
+    {
+        m_textures.append(t);
+    }
+}
 
 TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
                             const SunLocator *sunLocator,
@@ -244,6 +253,7 @@ TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
 
 TextureLayer::~TextureLayer()
 {
+    qDeleteAll(d->m_customTextures);
     delete d->m_texmapper;
     delete d->m_texcolorizer;
     delete d;
@@ -458,6 +468,7 @@ void TextureLayer::setMapTheme( const QVector<const GeoSceneTextureTile *> &text
     }
 
     d->m_textures = textures;
+    d->addCustomTextures();
     d->m_textureLayerSettings = textureLayerSettings;
 
     if ( d->m_textureLayerSettings ) {
@@ -529,6 +540,33 @@ int TextureLayer::preferredRadiusFloor( int radius ) const
 RenderState TextureLayer::renderState() const
 {
     return d->m_renderState;
+}
+
+QString TextureLayer::addTextureLayer(GeoSceneTextureTile* texture)
+{
+    if (!texture)
+        return QString(); //Not a sane call
+
+    QString sourceDir = texture->sourceDir();
+    if (!d->m_customTextures.contains(sourceDir))
+    {   // Add if not present. For update, remove the old texture first.
+        d->m_customTextures.insert(sourceDir, texture);
+        d->m_textures.append(texture);
+        d->updateTextureLayers();
+    }
+    return sourceDir;
+}
+
+void TextureLayer::removeTextureLayer(const QString &key)
+{
+    if (d->m_customTextures.contains(key))
+    {
+        GeoSceneTextureTile *texture = d->m_customTextures.value(key);
+        d->m_customTextures.remove(key);
+        d->m_textures.remove(d->m_textures.indexOf(texture));
+        delete texture;
+        d->updateTextureLayers();
+    }
 }
 
 }

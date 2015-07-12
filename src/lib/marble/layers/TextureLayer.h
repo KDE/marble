@@ -52,6 +52,21 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 
     void addLandDocument( const GeoDataDocument *landDocument );
 
+    /**
+     * @brief Adds texture sublayer, taking ownership of the object's memory
+     *        Does nothing if a texture with the same source directory was already
+     *        added with this method.
+     * @return returned string is the key for the texture that can be later used to remove it
+     */
+    QString addTextureLayer(GeoSceneTextureTile *texture);
+
+    /**
+     * @brief Removes texture sublayer identified by a key.
+     *        Deletes the texture object. Does nothing if key is not found.
+     * @param A key to identify the texture, returned from addTextureLayer
+     */
+    void removeTextureLayer(const QString &key);
+
     bool showSunShading() const;
     bool showCityLights() const;
 

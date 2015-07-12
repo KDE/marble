@@ -56,6 +56,7 @@ class AbstractDataPluginItem;
 class AbstractFloatItem;
 class TextureLayer;
 class TileCoordsPyramid;
+class GeoSceneTextureTile;
 
 /**
  * @short A class that can paint a view of the earth.
@@ -396,6 +397,18 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Add a layer to be included in rendering.
      */
     void addLayer( LayerInterface *layer );
+
+    /**
+     * @brief Adds a texture sublayer
+     * @return Returns a key that identifies the texture sublayer
+     */
+    QString addTextureLayer(GeoSceneTextureTile *texture);
+
+    /**
+     * @brief Removes a texture sublayer
+     * @param Key that was returned from corresponding addTextureLayer
+     */
+    void removeTextureLayer(const QString &key);
 
     /**
      * @brief Remove a layer from being included in rendering.

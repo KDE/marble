@@ -1254,6 +1254,16 @@ RenderState MarbleMap::renderState() const
     return d->m_layerManager.renderState();
 }
 
+QString MarbleMap::addTextureLayer(GeoSceneTextureTile *texture)
+{
+    return textureLayer()->addTextureLayer(texture);
+}
+
+void  MarbleMap::removeTextureLayer(const QString &key)
+{
+    textureLayer()->removeTextureLayer(key);
+}
+
 // this method will only temporarily "pollute" the MarbleModel class
 TextureLayer *MarbleMap::textureLayer() const
 {
