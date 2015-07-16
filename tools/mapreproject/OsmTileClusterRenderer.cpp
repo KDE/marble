@@ -157,4 +157,4 @@ inline double OsmTileClusterRenderer::osmPixelYtoLatRad( int const pixelY ) cons
     return -atan( sinh(( pixelYd - 0.5 * osmMapEdgeLengthPixeld ) * 2.0 * M_PI / osmMapEdgeLengthPixeld ));
 }
 
-#include "OsmTileClusterRenderer.moc"
+#include "moc_OsmTileClusterRenderer.cpp"

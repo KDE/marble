@@ -407,4 +407,4 @@ void Pn2Runner::parseForVersion2( const QString &fileName, DocumentRole role )
 }
 
 
-#include "Pn2Runner.moc"
+#include "moc_Pn2Runner.cpp"

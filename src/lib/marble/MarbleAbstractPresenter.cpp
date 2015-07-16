@@ -595,5 +595,5 @@ namespace Marble
 
 }
 
-#include "MarbleAbstractPresenter.moc"
+#include "moc_MarbleAbstractPresenter.cpp"
 

@@ -36,6 +36,5 @@ set( annotate_SRCS
 )
 
 qt_wrap_ui(annotate_SRCS ${annotate_UI})
-marble_qt4_automoc(${annotate_SRCS})
 
 marble_add_plugin( AnnotatePlugin ${annotate_SRCS} )

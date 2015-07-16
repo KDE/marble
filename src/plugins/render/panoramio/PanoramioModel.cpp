@@ -91,4 +91,4 @@ void PanoramioModel::parseFile( const QByteArray &file )
     }
 }
 
-#include "PanoramioModel.moc"
+#include "moc_PanoramioModel.cpp"

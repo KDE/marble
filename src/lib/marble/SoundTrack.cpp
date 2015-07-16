@@ -104,4 +104,4 @@ void SoundTrack::setPaused( bool pause )
 
 }
 
-#include "SoundTrack.moc"
+#include "moc_SoundTrack.cpp"

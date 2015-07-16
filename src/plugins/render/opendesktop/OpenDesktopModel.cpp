@@ -103,4 +103,4 @@ void OpenDesktopModel::parseFile( const QByteArray& file )
     }
 }
  
-#include "OpenDesktopModel.moc"
+#include "moc_OpenDesktopModel.cpp"

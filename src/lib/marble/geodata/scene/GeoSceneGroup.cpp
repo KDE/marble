@@ -158,4 +158,4 @@ QString GeoSceneGroup::name() const
 
 }
 
-#include "GeoSceneGroup.moc"
+#include "moc_GeoSceneGroup.cpp"

@@ -268,4 +268,4 @@ void RoutinoRunner::retrieveRoute( const RouteRequest *route )
 
 } // namespace Marble
 
-#include "RoutinoRunner.moc"
+#include "moc_RoutinoRunner.cpp"

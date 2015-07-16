@@ -104,4 +104,4 @@ void MarbleNavigator::resizeEvent ( QResizeEvent * )
 
 }
 
-#include "MarbleNavigator.moc"
+#include "moc_MarbleNavigator.cpp"

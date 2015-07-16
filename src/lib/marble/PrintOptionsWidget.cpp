@@ -96,4 +96,4 @@ void PrintOptionsWidget::setPrintDrivingInstructionsAdvice( bool enabled )
 
 }
 
-#include "PrintOptionsWidget.moc"
+#include "moc_PrintOptionsWidget.cpp"

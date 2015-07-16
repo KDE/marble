@@ -54,4 +54,4 @@ void FakeWeatherService::getItem( const QString & )
     getAdditionalItems( GeoDataLatLonAltBox(), 1 );
 }
 
-#include "FakeWeatherService.moc"
+#include "moc_FakeWeatherService.cpp"

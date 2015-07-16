@@ -36,8 +36,6 @@ set( aprs_SRCS AprsPlugin.cpp
 set( aprs_UI AprsConfigWidget.ui )
 qt_wrap_ui( aprs_SRCS ${aprs_UI} )
 
-marble_qt4_automoc( ${aprs_SRCS} )
-
 add_custom_command(
   OUTPUT AprsGatherer_mic_e.cpp
   COMMAND ${PERL_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/AprsGatherGen.pl > AprsGatherer_mic_e.cpp

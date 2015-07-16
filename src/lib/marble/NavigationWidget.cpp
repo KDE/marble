@@ -332,4 +332,4 @@ void NavigationWidget::resizeEvent ( QResizeEvent * )
 
 }
 
-#include "NavigationWidget.moc"
+#include "moc_NavigationWidget.cpp"

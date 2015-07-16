@@ -75,4 +75,4 @@ void CloudRoutesDialog::updateNoRouteLabel() {
 
 }
 
-#include "CloudRoutesDialog.moc"
+#include "moc_CloudRoutesDialog.cpp"

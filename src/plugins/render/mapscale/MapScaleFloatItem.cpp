@@ -460,4 +460,4 @@ void MapScaleFloatItem::toggleMinimized()
 
 Q_EXPORT_PLUGIN2(MapScaleFloatItem, Marble::MapScaleFloatItem)
 
-#include "MapScaleFloatItem.moc"
+#include "moc_MapScaleFloatItem.cpp"

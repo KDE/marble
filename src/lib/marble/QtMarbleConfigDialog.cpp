@@ -713,4 +713,4 @@ QString QtMarbleConfigDialog::owncloudPassword() const
 
 }
 
-#include "QtMarbleConfigDialog.moc"
+#include "moc_QtMarbleConfigDialog.cpp"

@@ -17,8 +17,6 @@ set( routing-instructions_SRC
         main.cpp
 )
 
-marble_qt4_automoc( ${routing-instructions_SRC} )
-
 add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( routing-instructions ${routing-instructions_SRC} )
 

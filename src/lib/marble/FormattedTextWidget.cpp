@@ -261,4 +261,4 @@ void FormattedTextWidget::setReadOnly( bool state )
 
 }
 
-#include "FormattedTextWidget.moc"
+#include "moc_FormattedTextWidget.cpp"

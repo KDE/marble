@@ -318,4 +318,4 @@ QString VoiceNavigationModel::instruction() const
 
 }
 
-#include "VoiceNavigationModel.moc"
+#include "moc_VoiceNavigationModel.cpp"

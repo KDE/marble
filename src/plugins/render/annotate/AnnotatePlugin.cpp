@@ -1696,4 +1696,4 @@ const GeoDataCoordinates AnnotatePlugin::mouseGeoDataCoordinates( QMouseEvent *m
 
 Q_EXPORT_PLUGIN2( AnnotatePlugin, Marble::AnnotatePlugin )
 
-#include "AnnotatePlugin.moc"
+#include "moc_AnnotatePlugin.cpp"

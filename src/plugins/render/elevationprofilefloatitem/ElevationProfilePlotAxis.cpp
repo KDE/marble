@@ -166,4 +166,4 @@ void ElevationProfilePlotAxis::updateScale()
 
 }
 
-#include "ElevationProfilePlotAxis.moc"
+#include "moc_ElevationProfilePlotAxis.cpp"

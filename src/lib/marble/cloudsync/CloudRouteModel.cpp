@@ -184,4 +184,4 @@ void CloudRouteModel::updateProgress( qint64 currentSize, qint64 totalSize )
 
 }
 
-#include "CloudRouteModel.moc"
+#include "moc_CloudRouteModel.cpp"

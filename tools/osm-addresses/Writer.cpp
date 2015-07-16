@@ -20,4 +20,4 @@ Writer::Writer( QObject* parent ) : QObject( parent )
 
 }
 
-#include "Writer.moc"
+#include "moc_Writer.cpp"

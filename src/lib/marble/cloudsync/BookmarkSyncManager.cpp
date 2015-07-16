@@ -807,4 +807,4 @@ void BookmarkSyncManager::Private::completeUpload()
 
 }
 
-#include "BookmarkSyncManager.moc"
+#include "moc_BookmarkSyncManager.cpp"

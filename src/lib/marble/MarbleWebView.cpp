@@ -55,4 +55,4 @@ void MarbleWebView::keyPressEvent(QKeyEvent *event)
     QWebView::keyPressEvent(event);
 }
 
-#include "MarbleWebView.moc"
+#include "moc_MarbleWebView.cpp"

@@ -86,4 +86,4 @@ void Logger::setStatus(const QString &id, const QString &name, const QString &st
     }
 }
 
-#include "logger.moc"
+#include "moc_logger.cpp"

@@ -61,4 +61,4 @@ void JsonRunner::parseFile( const QString &fileName, DocumentRole role = Unknown
 
 }
 
-#include "JsonRunner.moc"
+#include "moc_JsonRunner.cpp"

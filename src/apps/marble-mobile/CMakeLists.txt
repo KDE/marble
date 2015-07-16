@@ -23,7 +23,6 @@ set( marblemobile_SRCS
 
 add_definitions(-DMARBLE_MOBILE_VERSION_STRING="1.7.20")
 
-marble_qt4_automoc( ${marblemobile_SRCS} )
 add_executable( marble-mobile ${marblemobile_SRCS} )
 target_link_libraries( marble-mobile ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTMAIN_LIBRARY} marbleui ${MARBLEWIDGET})
 install( TARGETS marble-mobile RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )

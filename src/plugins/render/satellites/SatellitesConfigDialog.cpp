@@ -380,5 +380,5 @@ QString SatellitesConfigDialog::translation( const QString &from ) const
 
 } // namespace Marble
 
-#include "SatellitesConfigDialog.moc"
+#include "moc_SatellitesConfigDialog.cpp"
 

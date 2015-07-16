@@ -70,4 +70,4 @@ QDateTime MapThemeSortFilterProxyModel::favoriteDateTime( const QModelIndex& ind
 
 }
 
-#include "MapThemeSortFilterProxyModel.moc"
+#include "moc_MapThemeSortFilterProxyModel.cpp"

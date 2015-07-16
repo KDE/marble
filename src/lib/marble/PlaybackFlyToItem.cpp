@@ -132,4 +132,4 @@ void PlaybackFlyToItem::setFirst(bool isFirst)
 
 }
 
-#include "PlaybackFlyToItem.moc"
+#include "moc_PlaybackFlyToItem.cpp"

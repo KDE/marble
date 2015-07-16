@@ -559,5 +559,5 @@ void EclipsesItem::calculate()
 
 } // Namespace Marble
 
-#include "EclipsesItem.moc"
+#include "moc_EclipsesItem.cpp"
 

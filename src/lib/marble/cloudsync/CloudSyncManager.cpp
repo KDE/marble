@@ -215,4 +215,4 @@ BookmarkSyncManager *CloudSyncManager::bookmarkSyncManager()
 
 }
 
-#include "CloudSyncManager.moc"
+#include "moc_CloudSyncManager.cpp"

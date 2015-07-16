@@ -135,4 +135,4 @@ GeoDataDocument *ParsingRunnerManager::openFile( const QString &fileName, Docume
 
 }
 
-#include "ParsingRunnerManager.moc"
+#include "moc_ParsingRunnerManager.cpp"

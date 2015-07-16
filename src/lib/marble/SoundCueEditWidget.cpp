@@ -85,4 +85,4 @@ GeoDataSoundCue* SoundCueEditWidget::soundCueElement()
 
 } // namespace Marble
 
-#include "SoundCueEditWidget.moc"
+#include "moc_SoundCueEditWidget.cpp"

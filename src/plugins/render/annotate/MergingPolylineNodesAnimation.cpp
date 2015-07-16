@@ -81,4 +81,4 @@ qreal MergingPolylineNodesAnimation::nodesDistance()
 
 } // namespace Marble
 
-#include "MergingPolylineNodesAnimation.moc"
+#include "moc_MergingPolylineNodesAnimation.cpp"

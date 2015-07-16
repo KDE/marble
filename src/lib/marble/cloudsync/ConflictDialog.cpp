@@ -184,4 +184,4 @@ void ConflictDialog::prepareLayout()
 
 }
 
-#include "ConflictDialog.moc"
+#include "moc_ConflictDialog.cpp"

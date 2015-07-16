@@ -81,4 +81,4 @@ void AddLinkDialog::checkFields()
 
 }
 
-#include "AddLinkDialog.moc"
+#include "moc_AddLinkDialog.cpp"

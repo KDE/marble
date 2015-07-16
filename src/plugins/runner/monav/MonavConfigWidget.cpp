@@ -694,4 +694,4 @@ void MonavConfigWidgetPrivate::setBusy( bool busy, const QString &message ) cons
 
 }
 
-#include "MonavConfigWidget.moc"
+#include "moc_MonavConfigWidget.cpp"

@@ -260,4 +260,4 @@ void CountryByShape::postQuestion( QObject *gameObject )
 
 }   // namespace Marble
 
-#include "CountryByShape.moc"
+#include "moc_CountryByShape.cpp"

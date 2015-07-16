@@ -445,4 +445,4 @@ void OwncloudSyncBackend::removeFromCache( const QDir &cacheDir, const QString &
 
 }
 
-#include "OwncloudSyncBackend.moc"
+#include "moc_OwncloudSyncBackend.cpp"

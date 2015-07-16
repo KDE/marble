@@ -877,5 +877,5 @@ QPoint MarbleDefaultInputHandler::toolTipPosition()
 
 }
 
-#include "MarbleInputHandler.moc"
+#include "moc_MarbleInputHandler.cpp"
 

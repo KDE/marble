@@ -308,4 +308,4 @@ QString EditBookmarkDialog::iconLink() const
 
 }
 
-#include "EditBookmarkDialog.moc"
+#include "moc_EditBookmarkDialog.cpp"

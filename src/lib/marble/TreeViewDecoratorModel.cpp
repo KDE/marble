@@ -88,5 +88,5 @@ void TreeViewDecoratorModel::trackCollapsedState( const QModelIndex &index )
 }
 
 }
-#include "TreeViewDecoratorModel.moc"
+#include "moc_TreeViewDecoratorModel.cpp"
 

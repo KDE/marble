@@ -123,4 +123,4 @@ void MarbleDBusInterface::handleVisibleLatLonAltBoxChange()
 
 }
 
-#include "MarbleDBusInterface.moc"
+#include "moc_MarbleDBusInterface.cpp"

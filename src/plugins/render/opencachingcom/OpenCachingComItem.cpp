@@ -414,4 +414,4 @@ void OpenCachingComItem::openWww()
 
 } // namespace Marble
 
-#include "OpenCachingComItem.moc"
+#include "moc_OpenCachingComItem.cpp"

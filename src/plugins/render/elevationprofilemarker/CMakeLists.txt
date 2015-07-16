@@ -14,6 +14,5 @@ set( my_SRCS
  )
 
 qt_add_resources( my_SRCS elevationprofile.qrc)
-marble_qt4_automoc( ${my_SRCS} )
 
 marble_add_plugin( ElevationProfileMarker ${my_SRCS} )

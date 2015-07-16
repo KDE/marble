@@ -86,4 +86,4 @@ void LatLonBoxWidget::updateLonSingleStep()
 
 }
 
-#include "LatLonBoxWidget.moc"
+#include "moc_LatLonBoxWidget.cpp"

@@ -564,4 +564,4 @@ void GeometryLayer::handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::U
 
 }
 
-#include "GeometryLayer.moc"
+#include "moc_GeometryLayer.cpp"

@@ -105,4 +105,4 @@ qreal MergingPolygonNodesAnimation::nodesDistance()
 
 } // namespace Marble
 
-#include "MergingPolygonNodesAnimation.moc"
+#include "moc_MergingPolygonNodesAnimation.cpp"

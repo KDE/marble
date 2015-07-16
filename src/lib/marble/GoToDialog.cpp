@@ -444,4 +444,4 @@ void GoToDialogPrivate::updateResultMessage( int results )
 
 }
 
-#include "GoToDialog.moc"
+#include "moc_GoToDialog.cpp"

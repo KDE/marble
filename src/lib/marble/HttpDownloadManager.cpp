@@ -224,4 +224,4 @@ QByteArray HttpDownloadManager::userAgent(const QString &platform, const QString
     return result.toLatin1();
 }
 
-#include "HttpDownloadManager.moc"
+#include "moc_HttpDownloadManager.cpp"

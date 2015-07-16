@@ -185,4 +185,4 @@ void PopupLayer::hidePopupItem()
 
 }
 
-#include "PopupLayer.moc"
+#include "moc_PopupLayer.cpp"

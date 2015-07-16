@@ -133,4 +133,4 @@ void MainWindow::closeEvent( QCloseEvent *event )
 }
 
 }
-#include "KdeMainWindow.moc"
+#include "moc_KdeMainWindow.cpp"

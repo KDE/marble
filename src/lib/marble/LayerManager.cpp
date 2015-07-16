@@ -264,4 +264,4 @@ RenderState LayerManager::renderState() const
 
 }
 
-#include "LayerManager.moc"
+#include "moc_LayerManager.cpp"

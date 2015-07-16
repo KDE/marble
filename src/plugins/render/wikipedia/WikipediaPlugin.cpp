@@ -209,4 +209,4 @@ void WikipediaPlugin::checkNumberOfItems( quint32 number ) {
 
 Q_EXPORT_PLUGIN2(WikipediaPlugin, Marble::WikipediaPlugin)
 
-#include "WikipediaPlugin.moc"
+#include "moc_WikipediaPlugin.cpp"

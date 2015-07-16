@@ -198,4 +198,4 @@ void HttpJob::finished()
     d->m_networkReply = 0;
 }
 
-#include "HttpJob.moc"
+#include "moc_HttpJob.cpp"

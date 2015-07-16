@@ -242,4 +242,4 @@ void PluginManagerPrivate::loadPlugins()
 
 }
 
-#include "PluginManager.moc"
+#include "moc_PluginManager.cpp"

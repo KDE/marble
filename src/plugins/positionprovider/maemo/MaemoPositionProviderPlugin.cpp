@@ -211,4 +211,4 @@ void MaemoPositionProviderPlugin::update()
 
 Q_EXPORT_PLUGIN2( Marble::MaemoPositionProviderPlugin, Marble::MaemoPositionProviderPlugin )
 
-#include "MaemoPositionProviderPlugin.moc"
+#include "moc_MaemoPositionProviderPlugin.cpp"

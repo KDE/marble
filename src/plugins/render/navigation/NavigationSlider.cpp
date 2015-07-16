@@ -115,4 +115,4 @@ void NavigationSlider::paintEvent( QPaintEvent * )
 
 }
 
-#include "NavigationSlider.moc"
+#include "moc_NavigationSlider.cpp"

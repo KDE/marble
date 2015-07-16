@@ -263,4 +263,4 @@ void Navigation::update()
     }
 }
 
-#include "Navigation.moc"
+#include "moc_Navigation.cpp"

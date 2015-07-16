@@ -123,4 +123,4 @@ bool SunPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
 Q_EXPORT_PLUGIN2( SunPlugin, Marble::SunPlugin )
 
-#include "SunPlugin.moc"
+#include "moc_SunPlugin.cpp"

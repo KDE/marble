@@ -184,4 +184,4 @@ void PlacemarkPositionProviderPlugin::updatePosition()
     emit positionChanged( m_coordinates, m_accuracy );
 }
 
-#include "PlacemarkPositionProviderPlugin.moc"
+#include "moc_PlacemarkPositionProviderPlugin.cpp"

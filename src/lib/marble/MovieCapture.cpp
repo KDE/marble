@@ -232,4 +232,4 @@ void MovieCapture::processWrittenMovie(int exitCode)
 
 } // namespace Marble
 
-#include "MovieCapture.moc"
+#include "moc_MovieCapture.cpp"

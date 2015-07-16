@@ -68,4 +68,4 @@ ParsingRunner* OsmPlugin::newRunner() const
 
 Q_EXPORT_PLUGIN2( OsmPlugin, Marble::OsmPlugin )
 
-#include "OsmPlugin.moc"
+#include "moc_OsmPlugin.cpp"

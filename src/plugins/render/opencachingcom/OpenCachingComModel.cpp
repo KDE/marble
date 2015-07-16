@@ -124,4 +124,4 @@ const GeoDataCoordinates OpenCachingComModel::home() const
 
 } // namespace Marble
 
-#include "OpenCachingComModel.moc"
+#include "moc_OpenCachingComModel.cpp"

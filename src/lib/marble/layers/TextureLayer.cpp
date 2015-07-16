@@ -571,4 +571,4 @@ void TextureLayer::removeTextureLayer(const QString &key)
 
 }
 
-#include "TextureLayer.moc"
+#include "moc_TextureLayer.cpp"

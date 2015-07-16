@@ -56,4 +56,4 @@ bool MarbleDeclarativeObject::canExecute(const QString &program) const
     return false;
 }
 
-#include "MarbleDeclarativeObject.moc"
+#include "moc_MarbleDeclarativeObject.cpp"

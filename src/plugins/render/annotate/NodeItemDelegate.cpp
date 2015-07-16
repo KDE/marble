@@ -172,4 +172,4 @@ void NodeItemDelegate::unsetCurrentEditor(QWidget* widget)
 
 }
 
-#include "NodeItemDelegate.moc"
+#include "moc_NodeItemDelegate.cpp"

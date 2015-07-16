@@ -141,4 +141,4 @@ QString GpsdConnection::error() const
     return m_error;
 }
 
-#include "GpsdConnection.moc"
+#include "moc_GpsdConnection.cpp"

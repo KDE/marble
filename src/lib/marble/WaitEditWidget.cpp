@@ -78,4 +78,4 @@ GeoDataWait* WaitEditWidget::waitElement()
 
 } // namespace Marble
 
-#include "WaitEditWidget.moc"
+#include "moc_WaitEditWidget.cpp"

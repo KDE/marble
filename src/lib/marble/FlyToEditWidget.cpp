@@ -158,4 +158,4 @@ GeoDataFlyTo* FlyToEditWidget::flyToElement()
 
 } // namespace Marble
 
-#include "FlyToEditWidget.moc"
+#include "moc_FlyToEditWidget.cpp"

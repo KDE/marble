@@ -780,4 +780,4 @@ bool RoutingLayer::isInteractive() const
 
 } // namespace Marble
 
-#include "RoutingLayer.moc"
+#include "moc_RoutingLayer.cpp"

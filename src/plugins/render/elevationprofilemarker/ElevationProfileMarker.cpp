@@ -228,4 +228,4 @@ void ElevationProfileMarker::onGeoObjectRemoved( GeoDataObject *object )
 
 Q_EXPORT_PLUGIN2(ElevationProfileMarker, Marble::ElevationProfileMarker)
 
-#include "ElevationProfileMarker.moc"
+#include "moc_ElevationProfileMarker.cpp"

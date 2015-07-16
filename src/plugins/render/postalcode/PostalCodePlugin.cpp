@@ -74,4 +74,4 @@ QIcon PostalCodePlugin::icon() const
 
 Q_EXPORT_PLUGIN2( PostalCodePlugin, Marble::PostalCodePlugin )
 
-#include "PostalCodePlugin.moc"
+#include "moc_PostalCodePlugin.cpp"

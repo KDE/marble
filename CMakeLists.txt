@@ -113,11 +113,8 @@ if(Qt5Core_FOUND)
   include_directories( ${Qt5Test_INCLUDE_DIRS} )
   include_directories( ${Qt5Xml_INCLUDE_DIRS} )
   include_directories( ${Qt5Sql_INCLUDE_DIRS} )
-
-  SET(CMAKE_AUTOMOC TRUE)
-  SET(CMAKE_AUTOMOC_RELAXED_MODE TRUE)
 else()
-  cmake_minimum_required(VERSION 2.6)
+  cmake_minimum_required(VERSION 2.8.6)
   unset(QT_MOC_EXECUTABLE) # somehow the qt5 check sneaks in moc for qt5 even if qmake points to qt4
   set(QT5BUILD FALSE)
   set(WITH_KF5 FALSE)
@@ -145,10 +142,7 @@ else()
   endif()
 endif()
 
-if( NOT ${CMAKE_VERSION} STRLESS "2.8" AND NOT QT4BUILD)
-  SET(CMAKE_AUTOMOC TRUE)
-  SET(CMAKE_AUTOMOC_RELAXED_MODE TRUE)
-endif()
+SET(CMAKE_AUTOMOC TRUE)
 
 # Use M_PI under Windows
 if( WIN32 )

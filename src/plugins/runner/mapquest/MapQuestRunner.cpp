@@ -307,4 +307,4 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
 
 } // namespace Marble
 
-#include "MapQuestRunner.moc"
+#include "moc_MapQuestRunner.cpp"

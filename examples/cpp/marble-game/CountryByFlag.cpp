@@ -167,4 +167,4 @@ void CountryByFlag::postQuestion( QObject *gameObject )
 
 }   // namespace Marble
 
-#include "CountryByFlag.moc"
+#include "moc_CountryByFlag.cpp"

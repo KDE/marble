@@ -285,4 +285,4 @@ void EditPolygonDialog::restoreInitial( int result )
 }
 
 }
-#include "EditPolygonDialog.moc"
+#include "moc_EditPolygonDialog.cpp"

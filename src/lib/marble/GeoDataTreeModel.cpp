@@ -948,4 +948,4 @@ bool GeoDataTreeModel::swapTourPrimitives( const QModelIndex &parent, int indexA
     return false;
 }
 
-#include "GeoDataTreeModel.moc"
+#include "moc_GeoDataTreeModel.cpp"

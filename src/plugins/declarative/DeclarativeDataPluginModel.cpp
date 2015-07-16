@@ -33,4 +33,4 @@ void DeclarativeDataPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& 
     emit dataRequest( box.north( degree ), box.south( degree ), box.east( degree ), box.west( degree ) );
 }
 
-#include "DeclarativeDataPluginModel.moc"
+#include "moc_DeclarativeDataPluginModel.cpp"

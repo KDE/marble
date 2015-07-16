@@ -208,5 +208,5 @@ void EclipsesModel::update()
 
 } // namespace Marble
 
-#include "EclipsesModel.moc"
+#include "moc_EclipsesModel.cpp"
 

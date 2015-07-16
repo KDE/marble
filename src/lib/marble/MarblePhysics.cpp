@@ -206,4 +206,4 @@ void MarblePhysics::startStillMode()
 
 }
 
-#include "MarblePhysics.moc"
+#include "moc_MarblePhysics.cpp"

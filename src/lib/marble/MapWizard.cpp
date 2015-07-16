@@ -1137,4 +1137,4 @@ void MapWizard::showPreview()
 
 }
 
-#include "MapWizard.moc"
+#include "moc_MapWizard.cpp"

@@ -249,4 +249,4 @@ bool PlaybackAnimatedUpdateItem::canDelete(const char *nodeType) const
 
 }
 
-#include "PlaybackAnimatedUpdateItem.moc"
+#include "moc_PlaybackAnimatedUpdateItem.cpp"

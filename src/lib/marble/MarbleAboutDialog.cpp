@@ -383,4 +383,4 @@ void MarbleAboutDialog::setInitialTab( MarbleAboutDialog::Tab tab )
 
 }
 
-#include "MarbleAboutDialog.moc"
+#include "moc_MarbleAboutDialog.cpp"

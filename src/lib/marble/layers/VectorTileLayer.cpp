@@ -163,4 +163,4 @@ void VectorTileLayer::setMapTheme( const QVector<const GeoSceneVectorTile *> &te
 
 }
 
-#include "VectorTileLayer.moc"
+#include "moc_VectorTileLayer.cpp"

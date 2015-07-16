@@ -128,4 +128,4 @@ void SunControlWidget::showEvent( QShowEvent* event )
     }
 }
 
-#include "SunControlWidget.moc"
+#include "moc_SunControlWidget.cpp"

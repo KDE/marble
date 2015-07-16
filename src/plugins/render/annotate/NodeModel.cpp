@@ -123,4 +123,4 @@ Qt::ItemFlags NodeModel::flags(const QModelIndex & index) const
 
 }
 
-#include "NodeModel.moc"
+#include "moc_NodeModel.cpp"

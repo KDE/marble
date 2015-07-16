@@ -684,4 +684,4 @@ void AbstractDataPluginModel::registerItemProperties( const QMetaObject &item )
 
 } // namespace Marble
 
-#include "AbstractDataPluginModel.moc"
+#include "moc_AbstractDataPluginModel.cpp"

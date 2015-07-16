@@ -318,4 +318,4 @@ QFileInfo Job::searchFile()
     return result;
 }
 
-#include "job.moc"
+#include "moc_job.cpp"

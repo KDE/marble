@@ -160,4 +160,4 @@ void RemoteIconLoader::storeIcon( const QByteArray &data, const QString &fileNam
 
 }
 
-#include "RemoteIconLoader.moc"
+#include "moc_RemoteIconLoader.cpp"

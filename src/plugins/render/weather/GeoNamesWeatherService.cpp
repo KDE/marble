@@ -283,4 +283,4 @@ void GeoNamesWeatherService::setupHashes()
     windDirections[15] = WeatherData::NNW;
 }
 
-#include "GeoNamesWeatherService.moc"
+#include "moc_GeoNamesWeatherService.cpp"

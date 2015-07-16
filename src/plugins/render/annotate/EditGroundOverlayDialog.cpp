@@ -135,4 +135,4 @@ void EditGroundOverlayDialog::checkFields()
 
 }
 
-#include "EditGroundOverlayDialog.moc"
+#include "moc_EditGroundOverlayDialog.cpp"

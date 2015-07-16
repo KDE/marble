@@ -363,7 +363,6 @@ endif()
 qt_add_resources(marblewidget_SRCS libmarble.qrc ../../apps/marble-ui/marble.qrc)
 
 qt_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
-marble_qt4_automoc(${marblewidget_SRCS})
 
 ADD_LIBRARY(${MARBLEWIDGET} SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 

@@ -100,4 +100,4 @@ void PanoramioItem::openBrowser()
     }
 }
 
-#include "PanoramioItem.moc"
+#include "moc_PanoramioItem.cpp"

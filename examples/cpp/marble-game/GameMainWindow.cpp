@@ -288,4 +288,4 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 
 }   // namespace Marble
 
-#include "GameMainWindow.moc"
+#include "moc_GameMainWindow.cpp"

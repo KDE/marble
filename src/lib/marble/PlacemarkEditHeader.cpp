@@ -482,4 +482,4 @@ void PlacemarkEditHeader::updateValues()
 
 
 
-#include "PlacemarkEditHeader.moc"
+#include "moc_PlacemarkEditHeader.cpp"

@@ -204,4 +204,4 @@ QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLon, qreal fr
 
 
 
-#include "ElevationModel.moc"
+#include "moc_ElevationModel.cpp"

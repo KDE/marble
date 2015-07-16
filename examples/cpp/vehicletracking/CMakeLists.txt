@@ -11,7 +11,6 @@ if( QT4BUILD )
 endif()
 
 set( ${TARGET}_SRC vehicletracking.cpp)
-marble_qt4_automoc( ${${TARGET}_SRC} )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
 target_link_libraries( ${TARGET} ${MARBLEWIDGET} )

@@ -766,4 +766,4 @@ Coordinate::Coordinate(float lon_, float lat_) : lon(lon_), lat(lat_)
 
 }
 
-#include "OsmParser.moc"
+#include "moc_OsmParser.cpp"

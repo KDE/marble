@@ -133,4 +133,4 @@ void JobManager::addJob(const PendingJob &job)
     m_queue.addJob(countryJob);
 }
 
-#include "jobmanager.moc"
+#include "moc_jobmanager.cpp"

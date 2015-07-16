@@ -217,4 +217,4 @@ QVector<GeoDataPlacemark *> SearchRunnerManager::searchPlacemarks( const QString
 
 }
 
-#include "SearchRunnerManager.moc"
+#include "moc_SearchRunnerManager.cpp"

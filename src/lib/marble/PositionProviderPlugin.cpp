@@ -33,4 +33,4 @@ PositionProviderPlugin::~PositionProviderPlugin()
 
 }
 
-#include "PositionProviderPlugin.moc"
+#include "moc_PositionProviderPlugin.cpp"

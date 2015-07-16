@@ -596,4 +596,4 @@ GeoSceneDocument *MapThemeManager::createMapThemeFromOverlay( const GeoDataPhoto
 
 }
 
-#include "MapThemeManager.moc"
+#include "moc_MapThemeManager.cpp"

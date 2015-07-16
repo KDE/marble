@@ -621,4 +621,4 @@ bool TileCreator::verifyExactResult() const
 
 }
 
-#include "TileCreator.moc"
+#include "moc_TileCreator.cpp"

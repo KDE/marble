@@ -159,4 +159,4 @@ QString ReverseGeocodingRunnerManager::searchReverseGeocoding( const GeoDataCoor
 
 }
 
-#include "ReverseGeocodingRunnerManager.moc"
+#include "moc_ReverseGeocodingRunnerManager.cpp"

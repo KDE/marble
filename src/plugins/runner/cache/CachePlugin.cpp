@@ -68,4 +68,4 @@ ParsingRunner* CachePlugin::newRunner() const
 
 Q_EXPORT_PLUGIN2( CachePlugin, Marble::CachePlugin )
 
-#include "CachePlugin.moc"
+#include "moc_CachePlugin.cpp"

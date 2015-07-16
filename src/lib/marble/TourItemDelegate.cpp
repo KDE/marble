@@ -539,4 +539,4 @@ void TourItemDelegate::closeEditor( const QModelIndex &index )
 
 }
 
-#include "TourItemDelegate.moc"
+#include "moc_TourItemDelegate.cpp"

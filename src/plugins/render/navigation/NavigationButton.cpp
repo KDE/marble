@@ -74,4 +74,4 @@ void NavigationButton::paintEvent( QPaintEvent * )
 
 }
 
-#include "NavigationButton.moc"
+#include "moc_NavigationButton.cpp"

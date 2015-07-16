@@ -119,4 +119,4 @@ void EarthquakeModel::parseFile( const QByteArray& file )
 
 }
 
-#include "EarthquakeModel.moc"
+#include "moc_EarthquakeModel.cpp"

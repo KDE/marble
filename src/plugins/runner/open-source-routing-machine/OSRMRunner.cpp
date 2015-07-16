@@ -301,4 +301,4 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
 
 } // namespace Marble
 
-#include "OSRMRunner.moc"
+#include "moc_OSRMRunner.cpp"

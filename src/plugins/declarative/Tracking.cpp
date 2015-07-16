@@ -305,4 +305,4 @@ void Tracking::clearTrack()
     }
 }
 
-#include "Tracking.moc"
+#include "moc_Tracking.cpp"

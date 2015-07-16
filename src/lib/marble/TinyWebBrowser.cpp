@@ -106,4 +106,4 @@ void TinyWebBrowser::openExternalLink( QUrl url )
 
 } // namespace Marble
 
-#include "TinyWebBrowser.moc"
+#include "moc_TinyWebBrowser.cpp"

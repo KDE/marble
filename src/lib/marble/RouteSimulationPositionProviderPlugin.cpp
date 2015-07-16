@@ -180,4 +180,4 @@ void RouteSimulationPositionProviderPlugin::update()
 
 } // namespace Marble
 
-#include "RouteSimulationPositionProviderPlugin.moc"
+#include "moc_RouteSimulationPositionProviderPlugin.cpp"

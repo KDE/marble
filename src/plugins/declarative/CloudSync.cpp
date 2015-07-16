@@ -145,4 +145,4 @@ void CloudSync::resolveConflict( Marble::MergeItem *item )
     d->m_cloudSyncManager.bookmarkSyncManager()->resolveConflict( item );
 }
 
-#include "CloudSync.moc"
+#include "moc_CloudSync.cpp"

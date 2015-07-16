@@ -439,4 +439,4 @@ void AlternativeRoutesModel::clear()
 
 } // namespace Marble
 
-#include "AlternativeRoutesModel.moc"
+#include "moc_AlternativeRoutesModel.cpp"

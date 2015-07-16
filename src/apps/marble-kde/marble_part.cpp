@@ -1930,4 +1930,4 @@ void MarblePart::changeRecordingState()
 
 }
 
-#include "marble_part.moc"
+#include "moc_marble_part.cpp"

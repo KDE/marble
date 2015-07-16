@@ -96,4 +96,4 @@ const GeoDataExtendedData RoutingRunner::routeData(qreal length, const QTime& du
 
 }
 
-#include "RoutingRunner.moc"
+#include "moc_RoutingRunner.cpp"

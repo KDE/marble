@@ -14,6 +14,5 @@ set (navigation_UI navigation.ui)
 
 qt_add_resources(navigation_SRCS navigation.qrc)
 qt_wrap_ui(navigation_SRCS ${navigation_UI})
-marble_qt4_automoc( ${navigation_SRCS} )
 
 marble_add_plugin( NavigationFloatItem ${navigation_SRCS} )

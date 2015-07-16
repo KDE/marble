@@ -202,4 +202,4 @@ void PhotoPluginItem::openBrowser()
     }
 }
 
-#include "PhotoPluginItem.moc"
+#include "moc_PhotoPluginItem.cpp"

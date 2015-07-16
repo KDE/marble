@@ -21,6 +21,5 @@ set( earthquake_UI EarthquakeConfigWidget.ui )
 
 qt_wrap_ui(my_SRCS ${earthquake_UI})
 qt_add_resources(my_SRCS earthquake.qrc)
-marble_qt4_automoc( ${my_SRCS} )
 
 marble_add_plugin( EarthquakePlugin ${my_SRCS} )

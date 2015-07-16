@@ -253,4 +253,4 @@ void CycleStreetsRunner::handleError( QNetworkReply::NetworkError error )
 
 } // namespace Marble
 
-#include "CycleStreetsRunner.moc"
+#include "moc_CycleStreetsRunner.cpp"

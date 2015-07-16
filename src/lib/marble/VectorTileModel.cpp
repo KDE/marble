@@ -200,4 +200,4 @@ unsigned int VectorTileModel::lat2tileY( qreal lat, unsigned int maxTileY )
     return (unsigned int)floor((1.0 - log( tan(lat * M_PI/180.0) + 1.0 / cos(lat * M_PI/180.0)) / M_PI) / 2.0 * maxTileY);
 }
 
-#include "VectorTileModel.moc"
+#include "moc_VectorTileModel.cpp"

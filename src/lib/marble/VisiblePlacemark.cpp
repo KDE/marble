@@ -233,4 +233,4 @@ void VisiblePlacemark::drawLabelText(QPainter &labelPainter, const QString &text
     }
 }
 
-#include "VisiblePlacemark.moc"
+#include "moc_VisiblePlacemark.cpp"

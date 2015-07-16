@@ -153,4 +153,4 @@ void MarbleWidgetInputHandler::openItemToolTip()
 
 }
 
-#include "MarbleWidgetInputHandler.moc"
+#include "moc_MarbleWidgetInputHandler.cpp"

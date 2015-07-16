@@ -78,4 +78,4 @@ bool SearchRunnerPlugin::canWork() const
 
 }
 
-#include "SearchRunnerPlugin.moc"
+#include "moc_SearchRunnerPlugin.cpp"

@@ -19,6 +19,5 @@ set( my_SRCS
 
 set( opendesktop_UI OpenDesktopConfigWidget.ui )
 qt_wrap_ui( my_SRCS ${opendesktop_UI} )
-marble_qt4_automoc( ${my_SRCS} )
 
 marble_add_plugin( OpenDesktopPlugin ${my_SRCS} )

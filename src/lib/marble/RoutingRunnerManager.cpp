@@ -172,4 +172,4 @@ QVector<GeoDataDocument*> RoutingRunnerManager::searchRoute( const RouteRequest 
 
 }
 
-#include "RoutingRunnerManager.moc"
+#include "moc_RoutingRunnerManager.cpp"

@@ -138,4 +138,4 @@ void WeatherModel::addService( AbstractWeatherService *service )
     m_services.append( service );
 }
 
-#include "WeatherModel.moc"
+#include "moc_WeatherModel.cpp"

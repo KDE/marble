@@ -98,4 +98,4 @@ QString MarbleWidgetPlugin::includeFile() const
 
 Q_EXPORT_PLUGIN2(MarbleWidgetPlugin, MarbleWidgetPlugin)
 
-#include "MarbleWidgetPlugin.moc"
+#include "moc_MarbleWidgetPlugin.cpp"

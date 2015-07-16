@@ -34,4 +34,4 @@ QString Placemark::name() const
     return m_placemark.name();
 }
 
-#include "Placemark.moc"
+#include "moc_Placemark.cpp"

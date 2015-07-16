@@ -177,4 +177,4 @@ double SerialTrack::currentPosition()
 
 }
 
-#include "SerialTrack.moc"
+#include "moc_SerialTrack.cpp"

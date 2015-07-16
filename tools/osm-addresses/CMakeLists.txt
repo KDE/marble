@@ -31,7 +31,6 @@ pbf/osmformat.proto
 )
 add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} ${PROTO_SRCS} ${PROTO_HDRS} )
-marble_qt4_automoc( ${${TARGET}_SRC} )
 
 target_link_libraries( ${TARGET} ${PROTOBUF_LIBRARIES} ${ZLIB_LIBRARIES} )
 if(QT4BUILD)

@@ -86,4 +86,4 @@ GeoDataTourControl* TourControlEditWidget::tourControlElement()
 
 } // namespace Marble
 
-#include "TourControlEditWidget.moc"
+#include "moc_TourControlEditWidget.cpp"

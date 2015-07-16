@@ -1010,4 +1010,4 @@ void RoutingWidget::seekTourToStart()
 
 } // namespace Marble
 
-#include "RoutingWidget.moc"
+#include "moc_RoutingWidget.cpp"

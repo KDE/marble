@@ -908,4 +908,4 @@ QString MapViewItemDelegate::text( const QModelIndex &index )
 
 }
 
-#include "MapViewWidget.moc"
+#include "moc_MapViewWidget.cpp"

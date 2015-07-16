@@ -57,4 +57,4 @@ void LatLonRunner::search( const QString &searchTerm, const GeoDataLatLonBox & )
 
 }
 
-#include "LatLonRunner.moc"
+#include "moc_LatLonRunner.cpp"

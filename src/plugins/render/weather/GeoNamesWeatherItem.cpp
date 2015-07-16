@@ -37,4 +37,4 @@ QString GeoNamesWeatherItem::creditHtml() const
     return tr( "Supported by <a href=\"http://www.geonames.org/export/JSON-webservices.html\" target=\"_BLANK\">geonames.org</a>" );
 }
 
-#include "GeoNamesWeatherItem.moc"
+#include "moc_GeoNamesWeatherItem.cpp"

@@ -302,4 +302,4 @@ QString Upload::releaseDate() const
     return QDateTime::currentDateTime().toString("MM/dd/yy");
 }
 
-#include "upload.moc"
+#include "moc_upload.cpp"

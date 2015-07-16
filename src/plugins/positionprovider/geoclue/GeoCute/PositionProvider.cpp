@@ -80,4 +80,4 @@ Position PositionProvider::position() const
 
 
 
-#include "PositionProvider.moc"
+#include "moc_PositionProvider.cpp"

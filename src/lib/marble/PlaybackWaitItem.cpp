@@ -85,4 +85,4 @@ void PlaybackWaitItem::stop()
 
 }
 
-#include "PlaybackWaitItem.moc"
+#include "moc_PlaybackWaitItem.cpp"

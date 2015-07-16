@@ -135,4 +135,4 @@ void RoutingProfilesWidget::Private::updateButtons()
 
 }
 
-#include "RoutingProfilesWidget.moc"
+#include "moc_RoutingProfilesWidget.cpp"

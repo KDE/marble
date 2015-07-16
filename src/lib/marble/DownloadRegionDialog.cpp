@@ -509,4 +509,4 @@ void DownloadRegionDialog::setOffsetUnit()
 
 }
 
-#include "DownloadRegionDialog.moc"
+#include "moc_DownloadRegionDialog.cpp"

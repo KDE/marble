@@ -224,4 +224,4 @@ void FileViewWidget::mapCenterOnTreeViewModel( const QModelIndex &index )
 
 }
 
-#include "FileViewWidget.moc"
+#include "moc_FileViewWidget.cpp"

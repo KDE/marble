@@ -778,4 +778,4 @@ void GraticulePlugin::initLineMaps( GeoDataCoordinates::Notation notation)
 
 Q_EXPORT_PLUGIN2(GraticulePlugin, Marble::GraticulePlugin)
 
-#include "GraticulePlugin.moc"
+#include "moc_GraticulePlugin.cpp"

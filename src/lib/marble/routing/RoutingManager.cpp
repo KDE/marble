@@ -640,4 +640,4 @@ bool RoutingManager::guidanceModeEnabled() const
 
 } // namespace Marble
 
-#include "RoutingManager.moc"
+#include "moc_RoutingManager.cpp"

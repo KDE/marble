@@ -47,4 +47,4 @@ QString GpsdThread::error() const
 
 } // namespace Marble
 
-#include "GpsdThread.moc"
+#include "moc_GpsdThread.cpp"

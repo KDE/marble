@@ -225,4 +225,4 @@ void FileManagerPrivate::cleanupLoader( FileLoader* loader )
     }
 }
 
-#include "FileManager.moc"
+#include "moc_FileManager.cpp"

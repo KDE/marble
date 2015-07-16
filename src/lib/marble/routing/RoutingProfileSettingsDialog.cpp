@@ -171,4 +171,4 @@ void RoutingProfileSettingsDialog::openConfigDialog()
 
 }
 
-#include "RoutingProfileSettingsDialog.moc"
+#include "moc_RoutingProfileSettingsDialog.cpp"

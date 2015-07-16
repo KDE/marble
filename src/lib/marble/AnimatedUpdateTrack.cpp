@@ -111,4 +111,4 @@ void AnimatedUpdateTrack::setPaused( bool pause )
 
 }
 
-#include "AnimatedUpdateTrack.moc"
+#include "moc_AnimatedUpdateTrack.cpp"

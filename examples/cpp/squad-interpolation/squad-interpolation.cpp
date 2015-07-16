@@ -238,4 +238,4 @@ int main ( int argc, char** argv )
     return app.exec();
 }
 
-#include "squad-interpolation.moc"
+#include "moc_squad-interpolation.cpp"

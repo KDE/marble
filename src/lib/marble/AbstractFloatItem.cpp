@@ -254,4 +254,4 @@ QMenu* AbstractFloatItem::contextMenu()
 
 }
 
-#include "AbstractFloatItem.moc"
+#include "moc_AbstractFloatItem.cpp"

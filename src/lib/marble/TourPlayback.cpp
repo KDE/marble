@@ -314,4 +314,4 @@ double TourPlayback::duration() const
 
 } // namespace Marble
 
-#include "TourPlayback.moc"
+#include "moc_TourPlayback.cpp"

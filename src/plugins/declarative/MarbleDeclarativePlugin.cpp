@@ -86,6 +86,6 @@ void MarbleDeclarativePlugin::initializeEngine( QQmlEngine *engine, const char *
     }
 }
 
-#include "MarbleDeclarativePlugin.moc"
+#include "moc_MarbleDeclarativePlugin.cpp"
 
 Q_EXPORT_PLUGIN2( MarbleDeclarativePlugin, MarbleDeclarativePlugin )

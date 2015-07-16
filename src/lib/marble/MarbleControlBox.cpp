@@ -253,4 +253,4 @@ void MarbleControlBox::search(const QString &searchTerm, SearchMode searchMode )
 
 }
 
-#include "MarbleControlBox.moc"
+#include "moc_MarbleControlBox.cpp"

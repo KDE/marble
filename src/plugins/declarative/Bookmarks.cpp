@@ -193,4 +193,4 @@ QString BookmarksModel::name( int idx ) const
     return QString();
 }
 
-#include "Bookmarks.moc"
+#include "moc_Bookmarks.cpp"

@@ -716,4 +716,4 @@ QPoint MarbleWidgetPopupMenu::mousePosition() const
 
 }
 
-#include "MarbleWidgetPopupMenu.moc"
+#include "moc_MarbleWidgetPopupMenu.cpp"

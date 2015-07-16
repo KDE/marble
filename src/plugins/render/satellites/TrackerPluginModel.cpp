@@ -171,4 +171,4 @@ void TrackerPluginModel::parseFile( const QString &id, const QByteArray &file )
 
 } // namespace Marble
 
-#include "TrackerPluginModel.moc"
+#include "moc_TrackerPluginModel.cpp"

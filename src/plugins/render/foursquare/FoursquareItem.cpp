@@ -171,4 +171,4 @@ void FoursquareItem::paint( QPainter* painter )
 
 }
 
-#include "FoursquareItem.moc"
+#include "moc_FoursquareItem.cpp"

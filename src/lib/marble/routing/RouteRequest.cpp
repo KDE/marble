@@ -335,4 +335,4 @@ const GeoDataPlacemark &RouteRequest::operator [](int index) const
 
 } // namespace Marble
 
-#include "RouteRequest.moc"
+#include "moc_RouteRequest.cpp"

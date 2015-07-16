@@ -91,4 +91,4 @@ GeoDataAnimatedUpdate* RemoveItemEditWidget::animatedUpdateElement()
 
 } // namespace Marble
 
-#include "RemoveItemEditWidget.moc"
+#include "moc_RemoveItemEditWidget.cpp"

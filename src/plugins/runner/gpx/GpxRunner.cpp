@@ -56,4 +56,4 @@ void GpxRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
 }
 
-#include "GpxRunner.moc"
+#include "moc_GpxRunner.cpp"

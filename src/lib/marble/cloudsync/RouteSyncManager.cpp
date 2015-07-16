@@ -281,4 +281,4 @@ void RouteSyncManager::setRouteModelItems( const QVector<RouteItem> &routeList )
 
 }
 
-#include "RouteSyncManager.moc"
+#include "moc_RouteSyncManager.cpp"

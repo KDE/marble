@@ -122,4 +122,4 @@ void MovieCaptureDialog::stopRecording()
 
 } // namespace Marble
 
-#include "MovieCaptureDialog.moc"
+#include "moc_MovieCaptureDialog.cpp"

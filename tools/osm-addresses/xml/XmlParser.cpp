@@ -144,4 +144,4 @@ bool XmlParser::endElement ( const QString & /*namespaceURI*/, const QString & /
 
 }
 
-#include "XmlParser.moc"
+#include "moc_XmlParser.cpp"

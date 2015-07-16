@@ -154,4 +154,4 @@ void OpenDesktopPlugin::writeSettings()
 // Because we want to create a plugin, we have to do the following line.
 Q_EXPORT_PLUGIN2( OpenDesktopPlugin, Marble::OpenDesktopPlugin )
 
-#include "OpenDesktopPlugin.moc"
+#include "moc_OpenDesktopPlugin.cpp"

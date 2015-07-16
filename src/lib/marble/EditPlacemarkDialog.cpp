@@ -452,4 +452,4 @@ void EditPlacemarkDialog::restoreInitial( int result )
 
 }
 
-#include "EditPlacemarkDialog.moc"
+#include "moc_EditPlacemarkDialog.cpp"

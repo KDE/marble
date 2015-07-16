@@ -222,4 +222,4 @@ qreal SunLocator::getLat() const
 
 }
 
-#include "SunLocator.moc"
+#include "moc_SunLocator.cpp"

@@ -11,6 +11,4 @@ endif()
 
 set( license_SRCS License.cpp )
 
-marble_qt4_automoc( ${license_SRCS} )
-
 marble_add_plugin( License ${license_SRCS} )

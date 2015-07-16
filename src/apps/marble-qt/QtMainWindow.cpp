@@ -1632,4 +1632,4 @@ void MainWindow::changeViewSize( QAction* action )
     }
 }
 
-#include "QtMainWindow.moc"
+#include "moc_QtMainWindow.cpp"

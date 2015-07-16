@@ -22,7 +22,6 @@ main.cpp
 )
 add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
-marble_qt4_automoc( ${${TARGET}_SRC} )
 
 if(QT4BUILD)
    target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} ${QT_QTSQL_LIBRARY} marblewidget )

@@ -36,4 +36,4 @@ bool DeclarativeDataPluginItem::operator<( const AbstractDataPluginItem *other )
 
 }
 
-#include "DeclarativeDataPluginItem.moc"
+#include "moc_DeclarativeDataPluginItem.cpp"

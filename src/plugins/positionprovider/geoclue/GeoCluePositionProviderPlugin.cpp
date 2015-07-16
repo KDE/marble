@@ -108,4 +108,4 @@ Q_EXPORT_PLUGIN2( GeoCluePositionProviderPlugin, Marble::GeoCluePositionProvider
 
 
 
-#include "GeoCluePositionProviderPlugin.moc"
+#include "moc_GeoCluePositionProviderPlugin.cpp"

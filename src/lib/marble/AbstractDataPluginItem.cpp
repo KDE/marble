@@ -148,4 +148,4 @@ QList<QAction*> AbstractDataPluginItem::actions()
 
 } // Marble namespace
 
-#include "AbstractDataPluginItem.moc"
+#include "moc_AbstractDataPluginItem.cpp"

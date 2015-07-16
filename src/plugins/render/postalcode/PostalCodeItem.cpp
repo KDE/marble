@@ -82,4 +82,4 @@ void PostalCodeItem::paint( QPainter *painter )
     painter->restore();
 }
 
-#include "PostalCodeItem.moc"
+#include "moc_PostalCodeItem.cpp"

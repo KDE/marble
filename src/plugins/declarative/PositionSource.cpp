@@ -156,4 +156,4 @@ void PositionSource::updatePosition()
     }
 }
 
-#include "PositionSource.moc"
+#include "moc_PositionSource.cpp"

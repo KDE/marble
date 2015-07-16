@@ -93,4 +93,4 @@ void BBCItemGetter::work()
     }
 }
 
-#include "BBCItemGetter.moc"
+#include "moc_BBCItemGetter.cpp"

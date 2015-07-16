@@ -981,4 +981,4 @@ bool TourWidget::isPlaying() const
 
 }
 
-#include "TourWidget.moc"
+#include "moc_TourWidget.cpp"

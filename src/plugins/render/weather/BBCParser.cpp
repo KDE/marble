@@ -564,4 +564,4 @@ void BBCParser::readPubDate( WeatherData *data )
     }
 }
 
-#include "BBCParser.moc"
+#include "moc_BBCParser.cpp"

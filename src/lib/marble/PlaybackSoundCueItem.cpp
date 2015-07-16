@@ -81,4 +81,4 @@ void PlaybackSoundCueItem::stop()
 
 }
 
-#include "PlaybackSoundCueItem.moc"
+#include "moc_PlaybackSoundCueItem.cpp"

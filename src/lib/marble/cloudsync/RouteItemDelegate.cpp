@@ -293,4 +293,4 @@ QRect RouteItemDelegate::position( Element element, const QStyleOptionViewItem& 
 
 }
 
-#include "RouteItemDelegate.moc"
+#include "moc_RouteItemDelegate.cpp"

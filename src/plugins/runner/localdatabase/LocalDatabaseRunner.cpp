@@ -71,4 +71,4 @@ void LocalDatabaseRunner::search( const QString &searchTerm, const GeoDataLatLon
 
 }
 
-#include "LocalDatabaseRunner.moc"
+#include "moc_LocalDatabaseRunner.cpp"

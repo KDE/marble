@@ -248,4 +248,4 @@ void EditPolylineDialog::checkFields()
 
 }
 
-#include "EditPolylineDialog.moc"
+#include "moc_EditPolylineDialog.cpp"

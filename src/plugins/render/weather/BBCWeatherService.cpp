@@ -116,4 +116,4 @@ void BBCWeatherService::createItem( BBCStation station )
     emit requestedDownload( item->forecastUrl(),    "bbcforecast",    item );
 }
 
-#include "BBCWeatherService.moc"
+#include "moc_BBCWeatherService.cpp"

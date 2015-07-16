@@ -141,4 +141,4 @@ int main(int argc, char** argv)
     return app.exec();
 }
 
-#include "vehicletracking.moc"
+#include "moc_vehicletracking.cpp"

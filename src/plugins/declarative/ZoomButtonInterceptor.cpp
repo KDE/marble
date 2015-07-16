@@ -102,4 +102,4 @@ ZoomButtonInterceptor::~ZoomButtonInterceptor()
     delete d;
 }
 
-#include "ZoomButtonInterceptor.moc"
+#include "moc_ZoomButtonInterceptor.cpp"

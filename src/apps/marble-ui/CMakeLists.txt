@@ -12,7 +12,6 @@ endif(MINGW AND QT4BUILD)
 qt_add_resources(marble_SRCS marble.qrc)
 
 qt_wrap_ui(marble_SRCS ${marble_UI})
-marble_qt4_automoc(${marble_SRCS})
 
 add_library (marbleui STATIC ${marble_SRCS})
 

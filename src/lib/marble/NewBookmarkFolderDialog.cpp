@@ -40,4 +40,4 @@ void NewBookmarkFolderDialog::setFolderName( const QString &name )
 
 }
 
-#include "NewBookmarkFolderDialog.moc"
+#include "moc_NewBookmarkFolderDialog.cpp"

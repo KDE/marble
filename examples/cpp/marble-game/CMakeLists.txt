@@ -24,7 +24,6 @@ marble_add_project_resources(${QML_FILES})
 qt_add_resources(${TARGET}_SRCS marbleGame.qrc)
 
 qt_wrap_ui(${TARGET}_SRCS game.ui)
-marble_qt4_automoc(${${TARGET}_SRCS})
 
 add_executable( ${TARGET} ${${TARGET}_SRCS} )
 

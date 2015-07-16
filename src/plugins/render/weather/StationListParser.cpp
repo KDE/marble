@@ -194,4 +194,4 @@ void StationListParser::readPoint( BBCStation *station )
     }
 }
 
-#include "StationListParser.moc"
+#include "moc_StationListParser.cpp"

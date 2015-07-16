@@ -56,4 +56,4 @@ void OsmRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
 }
 
-#include "OsmRunner.moc"
+#include "moc_OsmRunner.cpp"

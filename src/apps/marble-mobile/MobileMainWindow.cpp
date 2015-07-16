@@ -707,4 +707,4 @@ void MainWindow::fallBackToDefaultTheme()
     }
 }
 
-#include "MobileMainWindow.moc"
+#include "moc_MobileMainWindow.cpp"

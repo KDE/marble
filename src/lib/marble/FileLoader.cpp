@@ -466,5 +466,5 @@ int FileLoaderPrivate::areaPopIdx( qreal area )
 
 
 
-#include "FileLoader.moc"
+#include "moc_FileLoader.cpp"
 } // namespace Marble

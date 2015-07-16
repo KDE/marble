@@ -213,4 +213,4 @@ void TileScalingTextureMapper::clearPixmaps()
     m_cache.clear();
 }
 
-#include "TileScalingTextureMapper.moc"
+#include "moc_TileScalingTextureMapper.cpp"

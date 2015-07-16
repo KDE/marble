@@ -268,4 +268,4 @@ void PhotoPlugin::checkNumberOfItems( quint32 number ) {
 
 Q_EXPORT_PLUGIN2(PhotoPlugin, Marble::PhotoPlugin)
 
-#include "PhotoPlugin.moc"
+#include "moc_PhotoPlugin.cpp"

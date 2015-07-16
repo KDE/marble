@@ -252,4 +252,4 @@ QVector<TileCoordsPyramid> DownloadRegion::fromPath( const TextureLayer *texture
 
 }
 
-#include "DownloadRegion.moc"
+#include "moc_DownloadRegion.cpp"

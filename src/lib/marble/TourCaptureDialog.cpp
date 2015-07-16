@@ -199,4 +199,4 @@ void TourCaptureDialog::handleError()
 
 } // namespace Marble
 
-#include "TourCaptureDialog.moc"
+#include "moc_TourCaptureDialog.cpp"

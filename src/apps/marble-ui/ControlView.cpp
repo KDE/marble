@@ -905,4 +905,4 @@ void ControlView::closeEvent( QCloseEvent *event )
 
 }
 
-#include "ControlView.moc"
+#include "moc_ControlView.cpp"

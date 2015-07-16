@@ -88,4 +88,4 @@ void TileLevelRangeWidget::setMinimumBottomLevel( int const level )
 
 }
 
-#include "TileLevelRangeWidget.moc"
+#include "moc_TileLevelRangeWidget.cpp"

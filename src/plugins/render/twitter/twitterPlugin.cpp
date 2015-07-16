@@ -165,4 +165,4 @@ mDebug()<<"::::::::::::::::::::twitter count has value == " << localCountOfTwitt
 
 Q_EXPORT_PLUGIN2(twitterPlugin, Marble::twitterPlugin)
 
- #include "twitterPlugin.moc"
+ #include "moc_twitterPlugin.cpp"

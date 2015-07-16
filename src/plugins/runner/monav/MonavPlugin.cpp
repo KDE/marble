@@ -415,4 +415,4 @@ MonavPlugin::MonavRoutingDaemonVersion MonavPlugin::monavVersion() const
 
 Q_EXPORT_PLUGIN2( MonavPlugin, Marble::MonavPlugin )
 
-#include "MonavPlugin.moc"
+#include "moc_MonavPlugin.cpp"

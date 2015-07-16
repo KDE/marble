@@ -282,4 +282,4 @@ AprsGatherer::sleepFor(int seconds)
     sleep(seconds);
 }
 
-#include "AprsGatherer.moc"
+#include "moc_AprsGatherer.cpp"

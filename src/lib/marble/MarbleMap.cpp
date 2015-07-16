@@ -1272,4 +1272,4 @@ TextureLayer *MarbleMap::textureLayer() const
 
 }
 
-#include "MarbleMap.moc"
+#include "moc_MarbleMap.cpp"

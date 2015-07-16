@@ -124,4 +124,4 @@ void LocalOsmSearchPlugin::updateDatabase()
 
 Q_EXPORT_PLUGIN2( LocalOsmSearchPlugin, Marble::LocalOsmSearchPlugin )
 
-#include "LocalOsmSearchPlugin.moc"
+#include "moc_LocalOsmSearchPlugin.cpp"

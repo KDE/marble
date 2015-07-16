@@ -473,4 +473,4 @@ qreal PositionMarker::zValue() const
 
 Q_EXPORT_PLUGIN2( PositionMarker, Marble::PositionMarker )
 
-#include "PositionMarker.moc"
+#include "moc_PositionMarker.cpp"

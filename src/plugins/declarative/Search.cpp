@@ -189,4 +189,4 @@ void Search::handleSearchResult()
     emit searchFinished();
 }
 
-#include "Search.moc"
+#include "moc_Search.cpp"

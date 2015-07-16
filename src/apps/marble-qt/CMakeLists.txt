@@ -11,7 +11,6 @@ if(MINGW AND QT4BUILD)
 endif(MINGW AND QT4BUILD)
 
 qt_wrap_ui(marble_SRCS ${marble_UI})
-marble_qt4_automoc(${marble_SRCS})
 
 if (WIN32)
     add_executable (marble-qt WIN32 ${marble_SRCS})

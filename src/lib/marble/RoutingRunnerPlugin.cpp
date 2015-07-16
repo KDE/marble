@@ -105,4 +105,4 @@ void RoutingRunnerPlugin::setStatusMessage( const QString &message )
 
 }
 
-#include "RoutingRunnerPlugin.moc"
+#include "moc_RoutingRunnerPlugin.cpp"

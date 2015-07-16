@@ -115,5 +115,5 @@ void EclipsesBrowserDialog::initialize()
 
 } // namespace Marble
 
-#include "EclipsesBrowserDialog.moc"
+#include "moc_EclipsesBrowserDialog.cpp"
 

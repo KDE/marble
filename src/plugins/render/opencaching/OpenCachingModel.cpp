@@ -202,4 +202,4 @@ void OpenCachingModel::parseFile( const QByteArray& file )
 
 }
 
-#include "OpenCachingModel.moc"
+#include "moc_OpenCachingModel.cpp"

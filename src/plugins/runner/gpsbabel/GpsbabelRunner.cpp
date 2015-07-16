@@ -85,4 +85,4 @@ void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role )
 
 }
 
-#include "GpsbabelRunner.moc"
+#include "moc_GpsbabelRunner.cpp"

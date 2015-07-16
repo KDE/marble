@@ -290,4 +290,4 @@ void GeoGraphicsScenePrivate::mergeItems( QList<GeoGraphicsItem *> &result, cons
 
 }
 
-#include "GeoGraphicsScene.moc"
+#include "moc_GeoGraphicsScene.cpp"

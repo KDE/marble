@@ -953,4 +953,4 @@ bool NewstuffModelPrivate::isTransitioning( int index ) const
 
 }
 
-#include "NewstuffModel.moc"
+#include "moc_NewstuffModel.cpp"

@@ -193,4 +193,4 @@ Q_EXPORT_PLUGIN2( GpsdPositionProviderPlugin, Marble::GpsdPositionProviderPlugin
 
 
 
-#include "GpsdPositionProviderPlugin.moc"
+#include "moc_GpsdPositionProviderPlugin.cpp"

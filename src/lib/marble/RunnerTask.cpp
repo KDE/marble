@@ -101,4 +101,4 @@ void ParsingTask::run()
 
 }
 
-#include "RunnerTask.moc"
+#include "moc_RunnerTask.cpp"

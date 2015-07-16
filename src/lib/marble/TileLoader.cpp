@@ -279,4 +279,4 @@ QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTile * textureLaye
 
 }
 
-#include "TileLoader.moc"
+#include "moc_TileLoader.cpp"

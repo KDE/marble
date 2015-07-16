@@ -1517,4 +1517,4 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
 
 Q_EXPORT_PLUGIN2( StarsPlugin, Marble::StarsPlugin )
 
-#include "StarsPlugin.moc"
+#include "moc_StarsPlugin.cpp"

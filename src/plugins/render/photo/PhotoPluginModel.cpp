@@ -157,4 +157,4 @@ void PhotoPluginModel::setLicenseValues( const QString &licenses )
     m_licenses = licenses;
 }
 
-#include "PhotoPluginModel.moc"
+#include "moc_PhotoPluginModel.cpp"

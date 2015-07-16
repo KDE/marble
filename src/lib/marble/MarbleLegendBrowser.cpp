@@ -421,4 +421,4 @@ void MarbleLegendBrowser::setRadioCheckedProperty( const QString& value, const Q
 
 }
 
-#include "MarbleLegendBrowser.moc"
+#include "moc_MarbleLegendBrowser.cpp"
