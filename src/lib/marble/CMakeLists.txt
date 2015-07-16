@@ -40,7 +40,7 @@ INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 
-set(GENERIC_LIB_VERSION "0.21.23")
+set(GENERIC_LIB_VERSION "0.21.80")
 set(GENERIC_LIB_SOVERSION "22")
 
 # link_directories (${QT_LIBRARY_DIR})
