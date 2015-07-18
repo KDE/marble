@@ -191,6 +191,76 @@ namespace Marble
     {
     }
 
+    int MarbleQuickItem::mapWidth() const
+    {
+       return d->map()->width();
+    }
+
+    int MarbleQuickItem::mapHeight() const
+    {
+        return d->map()->height();
+    }
+
+    bool MarbleQuickItem::showFrameRate() const
+    {
+        return d->map()->showFrameRate();
+    }
+
+    MarbleQuickItem::Projection MarbleQuickItem::projection() const
+    {
+        return (Projection)d->map()->projection();
+    }
+
+    QString MarbleQuickItem::mapThemeId() const
+    {
+        return d->map()->mapThemeId();
+    }
+
+    bool MarbleQuickItem::showAtmosphere() const
+    {
+        return d->map()->showAtmosphere();
+    }
+
+    bool MarbleQuickItem::showCompass() const
+    {
+        return d->map()->showCompass();
+    }
+
+    bool MarbleQuickItem::showClouds() const
+    {
+        return d->map()->showClouds();
+    }
+
+    bool MarbleQuickItem::showCrosshairs() const
+    {
+        return d->map()->showCrosshairs();
+    }
+
+    bool MarbleQuickItem::showGrid() const
+    {
+        return d->map()->showGrid();
+    }
+
+    bool MarbleQuickItem::showOverviewMap() const
+    {
+        return d->map()->showOverviewMap();
+    }
+
+    bool MarbleQuickItem::showOtherPlaces() const
+    {
+        return d->map()->showOtherPlaces();
+    }
+
+    bool MarbleQuickItem::showScaleBar() const
+    {
+        return d->map()->showScaleBar();
+    }
+
+    bool MarbleQuickItem::showBackground() const
+    {
+        return d->map()->showBackground();
+    }
+
     MarbleModel* MarbleQuickItem::model()
     {
         return d->model();
@@ -239,6 +309,146 @@ namespace Marble
     void MarbleQuickItem::zoomOut(FlyToMode mode)
     {
         d->zoomOut(mode);
+    }
+
+    void MarbleQuickItem::setMapWidth(int mapWidth)
+    {
+        if (d->map()->width() == mapWidth) {
+            return;
+        }
+
+        d->map()->setSize(mapWidth, mapHeight());
+        emit mapWidthChanged(mapWidth);
+    }
+
+    void MarbleQuickItem::setMapHeight(int mapHeight)
+    {
+        if (this->mapHeight() == mapHeight) {
+            return;
+        }
+
+        d->map()->setSize(mapWidth(), mapHeight);
+        emit mapHeightChanged(mapHeight);
+    }
+
+    void MarbleQuickItem::setShowFrameRate(bool showFrameRate)
+    {
+        if (this->showFrameRate() == showFrameRate) {
+            return;
+        }
+
+        d->map()->setShowFrameRate(showFrameRate);
+        emit showFrameRateChanged(showFrameRate);
+    }
+
+    void MarbleQuickItem::setProjection(Projection projection)
+    {
+        if (this->projection() == projection) {
+            return;
+        }
+
+        d->map()->setProjection((Marble::Projection)projection);
+        emit projectionChanged(projection);
+    }
+
+    void MarbleQuickItem::setMapThemeId(QString mapThemeId)
+    {
+        if (this->mapThemeId() == mapThemeId) {
+            return;
+        }
+
+        d->map()->setMapThemeId(mapThemeId);
+        emit mapThemeIdChanged(mapThemeId);
+    }
+
+    void MarbleQuickItem::setShowAtmosphere(bool showAtmosphere)
+    {
+        if (this->showAtmosphere() == showAtmosphere) {
+            return;
+        }
+
+        d->map()->setShowAtmosphere(showAtmosphere);
+        emit showAtmosphereChanged(showAtmosphere);
+    }
+
+    void MarbleQuickItem::setShowCompass(bool showCompass)
+    {
+        if (this->showCompass() == showCompass) {
+            return;
+        }
+
+        d->map()->setShowCompass(showCompass);
+        emit showCompassChanged(showCompass);
+    }
+
+    void MarbleQuickItem::setShowClouds(bool showClouds)
+    {
+        if (this->showClouds() == showClouds) {
+            return;
+        }
+
+        d->map()->setShowClouds(showClouds);
+        emit showCloudsChanged(showClouds);
+    }
+
+    void MarbleQuickItem::setShowCrosshairs(bool showCrosshairs)
+    {
+        if (this->showCrosshairs() == showCrosshairs) {
+            return;
+        }
+
+        d->map()->setShowCrosshairs(showCrosshairs);
+        emit showCrosshairsChanged(showCrosshairs);
+    }
+
+    void MarbleQuickItem::setShowGrid(bool showGrid)
+    {
+        if (this->showGrid() == showGrid) {
+            return;
+        }
+
+        d->map()->setShowGrid(showGrid);
+        emit showGridChanged(showGrid);
+    }
+
+    void MarbleQuickItem::setShowOverviewMap(bool showOverviewMap)
+    {
+        if (this->showOverviewMap() == showOverviewMap) {
+            return;
+        }
+
+        d->map()->setShowOverviewMap(showOverviewMap);
+        emit showOverviewMapChanged(showOverviewMap);
+    }
+
+    void MarbleQuickItem::setShowOtherPlaces(bool showOtherPlaces)
+    {
+        if (this->showOtherPlaces() == showOtherPlaces) {
+            return;
+        }
+
+        d->map()->setShowOtherPlaces(showOtherPlaces);
+        emit showOtherPlacesChanged(showOtherPlaces);
+    }
+
+    void MarbleQuickItem::setShowScaleBar(bool showScaleBar)
+    {
+        if (this->showScaleBar() == showScaleBar) {
+            return;
+        }
+
+        d->map()->setShowScaleBar(showScaleBar);
+        emit showScaleBarChanged(showScaleBar);
+    }
+
+    void MarbleQuickItem::setShowBackground(bool showBackground)
+    {
+        if (this->showBackground() == showBackground) {
+            return;
+        }
+
+        d->map()->setShowBackground(showBackground);
+        emit showBackgroundChanged(showBackground);
     }
 
     QObject *MarbleQuickItem::getEventFilter() const

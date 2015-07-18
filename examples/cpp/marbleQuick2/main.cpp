@@ -26,7 +26,7 @@ public:
     {   //TODO: setters -> properties
         map()->setSize(width(), height());
         map()->setShowFrameRate(false);
-        map()->setProjection(Spherical);
+        map()->setProjection(Marble::Spherical);
         map()->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
         map()->setShowAtmosphere(false);
         map()->setShowCompass(false);
