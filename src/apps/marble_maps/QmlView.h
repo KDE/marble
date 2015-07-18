@@ -8,18 +8,24 @@
 // Copyright 2015      Gábor Péterffy <peterffy95@gmail.com>
 //
 
-#include <QApplication>
+#ifndef MARBLE_QMLVIEW_H
+#define MARBLE_QMLVIEW_H 
 
-#include "QmlView.h"
+#include <QQuickView>
 
-using namespace Marble;
-
-int main(int argc, char ** argv)
+namespace Marble
 {
-    QApplication app(argc, argv);
 
-    QmlView marbleMaps;
-    marbleMaps.start();
+class QmlView : public QQuickView
+{
+public:
+    QmlView();
 
-    return app.exec();
+    /**
+     * @brief It loads the main qml file, and it inits the qml application.
+     */
+    void start();
+};
+
 }
+#endif

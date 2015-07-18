@@ -1,7 +1,7 @@
-set(marble_SRCS main.cpp)
-marble_qt4_automoc(${marble_SRCS})
+set(marble_SRCS main.cpp QmlView.cpp)
+qt5_add_resources(marble_QRCS MarbleMaps.qrc)
 
-add_library (Marble SHARED ${marble_SRCS})
+add_library (Marble SHARED ${marble_SRCS} ${marble_QRCS})
 set_target_properties(Marble PROPERTIES VERSION 1.0)
 
 target_link_libraries (
