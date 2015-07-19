@@ -499,6 +499,7 @@ install( FILES
     MarbleDebug.h
     MarbleDirs.h
     GeoPainter.h
+    HttpDownloadManager.h
     TileCreatorDialog.h
     ViewportParams.h
     projections/AbstractProjection.h
