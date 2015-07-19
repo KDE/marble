@@ -103,20 +103,15 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
       */
     void progressChanged( int active, int queued );
 
- private Q_SLOTS:
-    void finishJob( const QByteArray& data, const QString& destinationFileName,
-		    const QString& id );
-    void requeue();
-    void startRetryTimer();
-
  private:
     Q_DISABLE_COPY( HttpDownloadManager )
 
-    void connectDefaultQueueSets();
-    void connectQueueSet( DownloadQueueSet * );
-    bool hasDownloadPolicy( const DownloadPolicy& policy ) const;
     class Private;
     Private * const d;
+
+    Q_PRIVATE_SLOT( d, void finishJob( const QByteArray&, const QString&, const QString& id ) )
+    Q_PRIVATE_SLOT( d, void requeue() )
+    Q_PRIVATE_SLOT( d, void startRetryTimer() )
 };
 
 }
