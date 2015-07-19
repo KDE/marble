@@ -6,15 +6,24 @@
 // the source code.
 //
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
+// Copyright 2015      Marius-Valeriu Stanciu <stanciumarius94@gmail.com>
 //
 
+// Self
 #include "OsmNodeTagHandler.h"
 
+// Osm plugin
 #include "OsmElementDictionary.h"
 #include "OsmParser.h"
 
+// Marble
 #include "GeoDataCoordinates.h"
 #include "GeoDataPoint.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataExtendedData.h"
+#include "GeoDataGeometry.h"
+#include "GeoDataData.h"
+#include "osm/OsmPlacemarkData.h"
 
 namespace Marble
 {
@@ -35,9 +44,25 @@ GeoNode* OsmNodeTagHandler::parse( GeoParser &geoParser ) const
 
     qreal lon = parser.attribute( "lon" ).toDouble();
     qreal lat = parser.attribute( "lat" ).toDouble();
+    qint64 id = parser.attribute( "id" ).toLongLong();
 
+    GeoDataPlacemark *placemark = new GeoDataPlacemark();
     GeoDataPoint *point = new GeoDataPoint( lon, lat, 0, GeoDataCoordinates::Degree );
-    parser.setNode( parser.attribute( "id" ).toULongLong(), point );
+    point->setParent( placemark );
+    placemark->setZoomLevel( 18 ); // Not really sure it's the right thing?
+
+    // Saving osm server generated data
+    OsmPlacemarkData osmData = parser.osmAttributeData();
+    GeoDataExtendedData extendedData;
+    extendedData.addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( osmData ) ) );
+    placemark->setExtendedData( extendedData );
+    parser.addDummyPlacemark( placemark );
+
+    // Initially, it is not visible. If a tag is found, this will change.
+    placemark->setVisible( false );
+
+    // Adding the node to the parser's hash ( in case we need to ref it )
+    parser.setNode( id, point );
     return point;
 }
 

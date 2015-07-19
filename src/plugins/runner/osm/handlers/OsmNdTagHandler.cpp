@@ -6,16 +6,25 @@
 // the source code.
 //
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
+// Copyright 2015      Marius-Valeriu Stanciu <stanciumarius94@gmail.com>
 //
 
-#include "OsmNdTagHandler.h"
+#include <QHash>
+#include <QVariant>
+#include <QThread>
 
+#include "OsmNdTagHandler.h"
 #include "OsmElementDictionary.h"
 #include "OsmParser.h"
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPoint.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataExtendedData.h"
+#include "GeoDataData.h"
+#include "GeoDataTypes.h"
+#include "osm/OsmPlacemarkData.h"
 
 namespace Marble
 {
@@ -24,7 +33,7 @@ namespace osm
 {
 
 static GeoTagHandlerRegistrar osmNdTagHandler( GeoParser::QualifiedName( osmTag_nd, "" ),
-        new OsmNdTagHandler() );
+                                               new OsmNdTagHandler() );
 
 GeoNode* OsmNdTagHandler::parse( GeoParser &geoParser ) const
 {
@@ -39,9 +48,26 @@ GeoNode* OsmNdTagHandler::parse( GeoParser &geoParser ) const
     {
         GeoDataLineString *s = parentItem.nodeAs<GeoDataLineString>();
         Q_ASSERT( s );
-        quint64 id = parser.attribute( "ref" ).toULongLong();
+        qint64 id = parser.attribute( "ref" ).toLongLong();
+
         if ( GeoDataPoint *p = parser.node( id ) ) {
-            s->append( GeoDataCoordinates( p->coordinates().longitude(), p->coordinates().latitude() ) );
+
+            const GeoDataCoordinates coordinates = p->coordinates();
+            s->append( coordinates );
+
+            GeoDataPlacemark *nodePlacemark = dynamic_cast<GeoDataPlacemark *> ( p->parent() );
+            GeoDataPlacemark *wayPlacemark = dynamic_cast<GeoDataPlacemark *> ( s->parent() );
+            Q_ASSERT( nodePlacemark );
+            Q_ASSERT( wayPlacemark );
+
+            // Getting the node's osmData
+            OsmPlacemarkData &nodeOsmData = nodePlacemark->osmData();
+
+            // Getting the line's osmData
+            OsmPlacemarkData &wayOsmData = wayPlacemark->osmData();
+
+            // Inserting the point's osmData in the line osmData's reference hash map
+            wayOsmData.addReference( coordinates, nodeOsmData );
         }
 
         return 0;

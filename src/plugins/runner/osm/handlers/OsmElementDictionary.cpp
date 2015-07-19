@@ -13,9 +13,16 @@ namespace Marble
 namespace osm
 {
 
-// OSM data primitives and what do they represent
+// OSM data primitives and what they represent
 // http://wiki.openstreetmap.org/wiki/Elements
+const char* osmTag_version06 = "0.6";
 
+// KML to OSM translators
+const char* osmTranslate_document = "document";
+const char* osmTranslate_feature = "feature";
+const char* osmTranslate_placemark = "placemark";
+
+// OSM writers
 const char* osmTag_osm = "osm";
 const char* osmTag_bound = "bound";
 const char* osmTag_bounds = "bounds";

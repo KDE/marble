@@ -16,6 +16,13 @@ namespace Marble
 {
 namespace osm
 {
+
+extern const char* osmTag_version06;
+
+extern const char* osmTranslate_document;
+extern const char* osmTranslate_feature;
+extern const char* osmTranslate_placemark;
+
 extern const char* osmTag_osm;
 extern const char* osmTag_bound;
 extern const char* osmTag_bounds;

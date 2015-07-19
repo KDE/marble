@@ -10,15 +10,23 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
+// Self
 #include "OsmRelationTagHandler.h"
 
+// Qt
+#include <QVariant>
+
+// Osm plugin
 #include "OsmParser.h"
 #include "OsmElementDictionary.h"
 
+// Marble
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 #include "GeoDataPolygon.h"
+#include "osm/OsmPlacemarkData.h"
+#include "GeoDataExtendedData.h"
 
 namespace Marble
 {
@@ -44,13 +52,21 @@ GeoNode* OsmRelationTagHandler::parse( GeoParser &geoParser ) const
     GeoDataPolygon *polygon = new GeoDataPolygon();
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setGeometry( polygon );
+    qint64 id = parser.attribute( "id" ).toLongLong();
 
-    // In the beginning visibility = false. Afterwards when it parses
+
+    // Saving osm server generated data
+    OsmPlacemarkData osmData = parser.osmAttributeData();
+    GeoDataExtendedData extendedData;
+    extendedData.addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( osmData ) ) );
+    placemark->setExtendedData( extendedData );
+
+    // At the beginning visibility = false. Afterwards when parsing
     // the tags for the placemark it will decide if it should be displayed or not
     placemark->setVisible( false );
     doc->append( placemark );
 
-    parser.setPolygon( parser.attribute( "id" ).toULongLong(), polygon );
+    parser.setPolygon( id, polygon );
 
     return polygon;
 }

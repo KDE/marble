@@ -12,6 +12,7 @@
 
 #include "OsmParser.h"
 #include "OsmElementDictionary.h"
+#include "osm/OsmPlacemarkData.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
@@ -63,32 +64,32 @@ OsmParser::~OsmParser()
     qDeleteAll( m_nodes );
 }
 
-void OsmParser::setNode( quint64 id, GeoDataPoint *point )
+void OsmParser::setNode( qint64 id, GeoDataPoint *point )
 {
     m_nodes[id] = point;
 }
 
-GeoDataPoint *OsmParser::node( quint64 id )
+GeoDataPoint *OsmParser::node( qint64 id )
 {
     return m_nodes.value( id );
 }
 
-void OsmParser::setWay( quint64 id, GeoDataLineString *way )
+void OsmParser::setWay( qint64 id, GeoDataLineString *way )
 {
     m_ways[id] = way;
 }
 
-GeoDataLineString *OsmParser::way( quint64 id )
+GeoDataLineString *OsmParser::way( qint64 id )
 {
     return m_ways.value( id );
 }
 
-void OsmParser::setPolygon( quint64 id, GeoDataPolygon *polygon )
+void OsmParser::setPolygon( qint64 id, GeoDataPolygon *polygon )
 {
     m_polygons[id] = polygon;
 }
 
-GeoDataPolygon *OsmParser::polygon( quint64 id )
+GeoDataPolygon *OsmParser::polygon( qint64 id )
 {
     return m_polygons.value( id );
 }
@@ -101,6 +102,20 @@ bool OsmParser::tagNeedArea( const QString &keyValue ) const
 void OsmParser::addDummyPlacemark( GeoDataPlacemark *placemark )
 {
     m_dummyPlacemarks << placemark;
+}
+
+OsmPlacemarkData OsmParser::osmAttributeData() const
+{
+    OsmPlacemarkData osmData;
+    osmData.setId( attribute( "id" ).toLongLong() );
+    osmData.setVersion( attribute( "version" ) );
+    osmData.setChangeset( attribute( "changeset" ) );
+    osmData.setUser( attribute( "user" ) );
+    osmData.setUid( attribute( "uid" ) );
+    osmData.setVisible( attribute( "visible" ) );
+    osmData.setTimestamp( attribute( "timestamp" ) );
+    osmData.setAction( attribute( "action" ) );
+    return osmData;
 }
 
 bool OsmParser::isValidRootElement()

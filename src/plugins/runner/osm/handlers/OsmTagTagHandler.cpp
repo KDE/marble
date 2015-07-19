@@ -18,6 +18,8 @@
 #include "GeoDataParser.h"
 #include "GeoDataLineString.h"
 #include "GeoDataStyle.h"
+#include "GeoDataExtendedData.h"
+#include "osm/OsmPlacemarkData.h"
 
 #include "MarbleDebug.h"
 
@@ -27,7 +29,7 @@ namespace Marble
 namespace osm
 {
 static GeoTagHandlerRegistrar osmTagTagHandler( GeoParser::QualifiedName( osmTag_tag, "" ),
-        new OsmTagTagHandler() );
+                                                new OsmTagTagHandler() );
 
 static QStringList tagBlackList = QStringList() << "created_by";
 
@@ -43,6 +45,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
     QString key = parser.attribute( "k" );
     QString value = parser.attribute( "v" );
 
+
     if ( tagBlackList.contains( key ) )
         return 0;
 
@@ -51,36 +54,45 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
         return 0;
 
     GeoDataGeometry *placemarkGeometry = geometry;
-    
+
     //If node geometry is part of multigeometry -> go up to placemark geometry.
     while( dynamic_cast<GeoDataMultiGeometry*>(placemarkGeometry->parent()) )
         placemarkGeometry = dynamic_cast<GeoDataMultiGeometry*>(placemarkGeometry->parent());
-
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(placemarkGeometry->parent());
+    Q_ASSERT( placemark );
 
-    if ( key == "name" )
-    {
-        if ( !placemark )
-        {
-            if ( parentItem.represents( osmTag_node ) )
-                placemark = createPOI( doc, geometry );
-            else
+    // Getting the placemark's osm data
+    OsmPlacemarkData &osmData =  placemark->osmData();
+
+    // Inserting the tag into the placemark's tag hash
+    osmData.addTag( key, value );
+
+    if ( key == "name" ) {
+        // If placemark is not in the document, add it.
+        if ( !placemark->parent() ) {
+            if ( parentItem.represents( osmTag_node ) ) {
+                placemark = createPOI( doc, geometry, placemark->extendedData() );
+            }
+            else if ( parentItem.represents( osmTag_way ) ) {
+                doc->append( placemark );
+            }
+            else {
                 return 0;
+            }
         }
         placemark->setName( value );
         return 0;
     }
 
     // Ways or relations can represent closed areas such as buildings
-    if ( parentItem.represents( osmTag_way ) || parentItem.represents( osmTag_relation ) )
-    {
-        Q_ASSERT( placemark );
-
+    if ( parentItem.represents( osmTag_way ) || parentItem.represents( osmTag_relation ) ) {
         if( !dynamic_cast<GeoDataPolygon*>( geometry ) && parser.tagNeedArea( key + '=' + value ) ) {
             //Convert area ways or relations to polygons
             GeoDataLineString *polyline = dynamic_cast<GeoDataLineString *>( geometry );
             Q_ASSERT( polyline );
-            doc->remove( doc->childPosition( placemark ) );
+            if ( placemark->parent() ) {
+                doc->remove( doc->childPosition( placemark ) );
+            }
             parser.addDummyPlacemark( placemark );
             placemark = new GeoDataPlacemark( *placemark );
             GeoDataPolygon *polygon = new GeoDataPolygon;
@@ -103,9 +115,10 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
         //Placemark is an accepted POI
         if ( poiCategory )
         {
-            if ( !placemark )
-                placemark = createPOI( doc, geometry );
-
+            // If placemark is not in the document, add it.
+            if ( !placemark->parent() ) {
+                placemark = createPOI( doc, geometry, placemark->extendedData() );
+            }
             placemark->setVisible( true );
         }
     }
@@ -113,10 +126,9 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
     if ( placemark )
     {
         GeoDataFeature::GeoDataVisualCategory category;
-
         if ( ( category = GeoDataFeature::OsmVisualCategory( key + '=' + value ) ) )
         {
-            if( placemark->visualCategory() != GeoDataFeature::Default 
+            if( placemark->visualCategory() != GeoDataFeature::Default
              && placemark->visualCategory() != GeoDataFeature::Building )
             {
                 GeoDataPlacemark* newPlacemark = new GeoDataPlacemark( *placemark );
@@ -156,17 +168,22 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
     return 0;
 }
 
-GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeometry* geometry )
+GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeometry *geometry, const GeoDataExtendedData &extendedData )
 {
     GeoDataPoint *point = dynamic_cast<GeoDataPoint *>( geometry );
-    Q_ASSERT( point );
-    GeoDataPlacemark *placemark = new GeoDataPlacemark();
-    placemark->setGeometry( new GeoDataPoint( *point ) );
-    point->setParent( placemark );
-    placemark->setVisible( false );
-    placemark->setZoomLevel( 18 );
-    doc->append( placemark );
-    return placemark;
+
+    if ( !point ) {
+        return 0;
+    }
+
+    GeoDataPlacemark *newPlacemark = new GeoDataPlacemark();
+    newPlacemark->setGeometry( new GeoDataPoint( *point ) );
+    newPlacemark->setExtendedData( extendedData );
+    point->setParent( newPlacemark );
+    newPlacemark->setVisible( false );
+    newPlacemark->setZoomLevel( 18 );
+    doc->append( newPlacemark );
+    return newPlacemark;
 }
 
 }

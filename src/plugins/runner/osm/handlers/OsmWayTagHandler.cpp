@@ -8,15 +8,24 @@
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 //
 
+// Self
 #include "OsmWayTagHandler.h"
 
+// Qt
+#include <QVariant>
+
+// Osm plugin
 #include "OsmParser.h"
 #include "OsmElementDictionary.h"
 
+// Marble
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 #include "GeoDataLineString.h"
+#include "GeoDataExtendedData.h"
+#include "GeoDataData.h"
+#include "osm/OsmPlacemarkData.h"
 
 namespace Marble
 {
@@ -42,13 +51,20 @@ GeoNode* OsmWayTagHandler::parse( GeoParser &geoParser ) const
     GeoDataLineString *polyline = new GeoDataLineString();
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setGeometry( polyline );
+    qint64 id = parser.attribute( "id" ).toLongLong();
+
+    // Saving osm server generated data
+    OsmPlacemarkData osmData = parser.osmAttributeData();
+    GeoDataExtendedData extendedData;
+    extendedData.addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( osmData ) ) );
+    placemark->setExtendedData( extendedData );
 
     // At the beginning visibility = false. Afterwards when parsing
     // the tags for the placemark it will decide if it should be displayed or not
     placemark->setVisible( false );
-    doc->append( placemark );
 
-    parser.setWay( parser.attribute( "id" ).toULongLong(), polyline );
+    // Adding the way to the parser's hash ( in case we need to ref it )
+    parser.setWay( id, polyline );
 
     return polyline;
 }
