@@ -169,7 +169,7 @@ QString PlacemarkEditHeaderPrivate::setId( const QString &id, bool isNew )
         m_idValid = true;
         if ( m_idFilter.contains( newId ) ) {
             QStringList filter;
-            foreach ( QString filterString , m_idFilter ) {
+            foreach ( const QString &filterString , m_idFilter ) {
                 if( filterString.startsWith( newId ) ) {
                     filter.append( filterString );
                 }

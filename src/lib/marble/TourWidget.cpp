@@ -460,7 +460,7 @@ void TourWidgetPrivate::addPlacemark()
         if( m_document->name().isEmpty() ) {
             m_document->setId( "untitled_tour" );
         } else {
-            m_document->setId( m_document->name().trimmed().replace( " ", "_" ).toLower() );
+            m_document->setId( m_document->name().trimmed().replace( QLatin1Char(' '), QLatin1Char('_') ).toLower() );
         }
     }
     document->setTargetId( m_document->id() );
@@ -887,7 +887,7 @@ void TourWidgetPrivate::captureTour()
         m_tourUi.m_listView->setRootIndex( widget->model()->treeModel()->index( tour->playlist() ) );
         m_tourUi.m_listView->repaint();
 
-        TourCaptureDialog* tourCaptureDialog = new TourCaptureDialog( widget, m_widget );
+        QPointer<TourCaptureDialog> tourCaptureDialog = new TourCaptureDialog( widget, m_widget );
         tourCaptureDialog->setDefaultFilename( tour->name() );
         tourCaptureDialog->setTourPlayback( playback );
         tourCaptureDialog->exec();

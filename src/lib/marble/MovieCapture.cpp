@@ -112,7 +112,7 @@ QList<MovieFormat> MovieCapture::availableFormats()
     static QList<MovieFormat> availableFormats;
     if ( availableFormats.isEmpty() && checkToolsAvailability() ) {
         QProcess encoder(this);
-        foreach ( MovieFormat format, m_supportedFormats ) {
+        foreach ( const MovieFormat &format, m_supportedFormats ) {
             QString type = format.type();
             QStringList args;
             args << "-h" << "muxer=" + type;

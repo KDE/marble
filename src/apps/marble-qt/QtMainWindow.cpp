@@ -178,7 +178,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         MarbleDirs::setMarbleDataPath( selectedPath );
 
 #ifdef Q_OS_WIN
-	DataMigration* migration = new DataMigration(this);
+	QPointer<DataMigration> migration = new DataMigration(this);
 	migration->exec();
 #endif
 

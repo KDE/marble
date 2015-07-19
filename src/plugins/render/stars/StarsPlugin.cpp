@@ -243,7 +243,7 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderPlanet.clear();
     const QString renderPlanet = readSetting<QString>( settings, "renderPlanet", "" );
     const QStringList renderStates = renderPlanet.split(QChar('|'));
-    foreach(const QString state, renderStates) {
+    foreach(const QString &state, renderStates) {
         const QStringList stateList = state.split(QChar(':'));
         if (stateList.size() == 2)
             m_renderPlanet[stateList[0]] = (bool)stateList[1].toInt();

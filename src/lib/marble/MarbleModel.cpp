@@ -439,7 +439,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
         }
     }
     // unload old currentDatasets which are not part of the new map
-    foreach(const GeoSceneGeodata data, currentDatasets) {
+    foreach(const GeoSceneGeodata &data, currentDatasets) {
         d->m_fileManager.removeFile( data.sourceFile() );
     }
     // load new datasets

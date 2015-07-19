@@ -372,7 +372,7 @@ int main ( int argc, char *argv[] )
     }
 
     // Read the files that are given on the command line.
-    foreach( QString const &file, parser.positionalArguments() ) {
+    foreach( const QString &file, parser.positionalArguments() ) {
         // FIXME: Use openUrl( args->url(i) ) instead?
         if ( QFile::exists( file ) ) {
             window->marbleControl()->addGeoDataFile( file );
