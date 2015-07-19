@@ -56,7 +56,7 @@
 #include "EditPolylineDialog.h"
 #include "ParsingRunnerManager.h"
 #include "ViewportParams.h"
-
+#include "osm/OsmPlacemarkData.h"
 
 namespace Marble
 {
@@ -341,6 +341,7 @@ void AnnotatePlugin::clearAnnotations()
 
 void AnnotatePlugin::saveAnnotationFile()
 {
+
     const QString filename = QFileDialog::getSaveFileName( 0,
                                                            tr("Save Annotation File"),
                                                            QString(),
@@ -350,7 +351,15 @@ void AnnotatePlugin::saveAnnotationFile()
     if ( !filename.isNull() ) {
         GeoWriter writer;
         // FIXME: This should be consistent with the way the loading is done.
-        writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
+        if ( filename.endsWith( ".kml", Qt::CaseInsensitive ) ) {
+            writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
+        }
+        else if ( filename.endsWith( ".osm", Qt::CaseInsensitive ) ) {
+            // "0.6" is the current version of osm, it is used to identify the osm writer
+            // The reference value is kept in plugins/runner/osm/OsmElementDictionary.hz
+            writer.setDocumentType( "0.6" );
+        }
+
         QFile file( filename );
         file.open( QIODevice::WriteOnly );
         if ( !writer.write( &file, m_annotationDocument ) ) {
@@ -379,10 +388,11 @@ void AnnotatePlugin::loadAnnotationFile()
     // FIXME: The same problem as in the case of copying/cutting graphic items applies here:
     // the files do not load properly because the geometry copy is not a deep copy.
     foreach ( GeoDataFeature *feature, document->featureList() ) {
+
         if ( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
             GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
-
             GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
+
             if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
                 PlacemarkTextAnnotation *placemark = new PlacemarkTextAnnotation( newPlacemark );
                 m_graphicsItems.append( placemark );

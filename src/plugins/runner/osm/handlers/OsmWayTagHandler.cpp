@@ -15,6 +15,7 @@
 #include <QVariant>
 
 // Osm plugin
+#include "OsmObjectManager.h"
 #include "OsmParser.h"
 #include "OsmElementDictionary.h"
 
@@ -58,6 +59,7 @@ GeoNode* OsmWayTagHandler::parse( GeoParser &geoParser ) const
     GeoDataExtendedData extendedData;
     extendedData.addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( osmData ) ) );
     placemark->setExtendedData( extendedData );
+    OsmObjectManager::registerId( id );
 
     // At the beginning visibility = false. Afterwards when parsing
     // the tags for the placemark it will decide if it should be displayed or not

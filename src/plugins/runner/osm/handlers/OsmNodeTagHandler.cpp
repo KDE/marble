@@ -13,6 +13,7 @@
 #include "OsmNodeTagHandler.h"
 
 // Osm plugin
+#include "OsmObjectManager.h"
 #include "OsmElementDictionary.h"
 #include "OsmParser.h"
 
@@ -57,6 +58,7 @@ GeoNode* OsmNodeTagHandler::parse( GeoParser &geoParser ) const
     extendedData.addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( osmData ) ) );
     placemark->setExtendedData( extendedData );
     parser.addDummyPlacemark( placemark );
+    OsmObjectManager::registerId( id );
 
     // Initially, it is not visible. If a tag is found, this will change.
     placemark->setVisible( false );
