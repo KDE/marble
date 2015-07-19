@@ -11,7 +11,7 @@
 #ifndef MARBLE_OSMOBJECTMANAGER_H
 #define MARBLE_OSMOBJECTMANAGER_H
 
-#include <QtNumeric>
+#include <QtGlobal>
 
 namespace Marble
 {
