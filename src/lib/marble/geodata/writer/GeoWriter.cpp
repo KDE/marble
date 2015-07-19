@@ -102,4 +102,11 @@ void GeoWriter::writeOptionalElement( const QString &key, const QString &value, 
     }
 }
 
+void GeoWriter::writeOptionalAttribute( const QString &key, const QString &value, const QString &defaultValue )
+{
+    if( value != defaultValue ) {
+        writeAttribute( key, value );
+    }
+}
+
 }

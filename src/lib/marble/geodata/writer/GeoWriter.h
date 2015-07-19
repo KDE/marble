@@ -67,6 +67,12 @@ public:
      **/
     void writeOptionalElement(const QString &key, const QString &value , const QString &defaultValue = QString() );
 
+    /**
+     * @brief writeOptionalAttribute Convenience method to write k=v attributes
+     * if value is not equal to defaultValue
+     */
+    void writeOptionalAttribute( const QString &key, const QString &value, const QString &defaultValue = QString() );
+
     template<class T>
     void writeOptionalElement( const QString &key, const T &value , const T &defaultValue = T() )
     {
