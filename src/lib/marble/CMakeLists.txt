@@ -20,7 +20,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
  ${CMAKE_CURRENT_SOURCE_DIR}/graphicsview
  ${CMAKE_CURRENT_SOURCE_DIR}/layers
- ${CMAKE_CURRENT_SOURCE_DIR}/osm
  ${CMAKE_CURRENT_SOURCE_DIR}/cloudsync
  ${CMAKE_SOURCE_DIR}/src/lib/astro
  ${QT_INCLUDE_DIR}
@@ -40,7 +39,6 @@ endif()
 INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
-INCLUDE(osm/CMakeLists.txt)
 
 set(GENERIC_LIB_VERSION "0.21.80")
 set(GENERIC_LIB_SOVERSION "22")
@@ -60,7 +58,6 @@ set(marblewidget_SRCS
     ${geodata_SRCS}
     ${graphicsview_SRCS}
     ${layers_SRCS}
-    ${osm_SRCS}
     ${marblequick_SRCS}
     blendings/Blending.cpp
     blendings/BlendingAlgorithms.cpp
