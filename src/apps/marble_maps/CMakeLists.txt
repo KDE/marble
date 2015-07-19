@@ -25,10 +25,16 @@ file(COPY "../../../data/android/drawable-xxhdpi" DESTINATION "${CMAKE_BINARY_DI
 file(COPY "../../../data/android/drawable-xxxhdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")
 
 include("$ENV{Qt5_android_cmake}/AddQtAndroidApk.cmake")
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Marble.keystore")
+    set(KEYSTORE_OPTIONS KEYSTORE ${CMAKE_CURRENT_SOURCE_DIR}/Marble.keystore Marble)
+endif()
 add_qt_android_apk(Marble_apk Marble
-  PACKAGE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/package"
-  DEPENDS "${PROJECT_BINARY_DIR}/lib/libmarblewidget-qt5.so" "${PROJECT_BINARY_DIR}/lib/libastro.so"
+    PACKAGE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/package"
+    PACKAGE_NAME org.kde.marble.maps
+    ${KEYSTORE_OPTIONS}
+    DEPENDS "${PROJECT_BINARY_DIR}/lib/libmarblewidget-qt5.so" "${PROJECT_BINARY_DIR}/lib/libastro.so"
 )
+
 # Move target from default build to install phase so we can create everything in one go
 set_target_properties(Marble_apk PROPERTIES EXCLUDE_FROM_ALL TRUE)
 install(CODE "execute_process(COMMAND \"${CMAKE_COMMAND}\" --build \"${CMAKE_BINARY_DIR}\" --target Marble_apk)")
