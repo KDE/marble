@@ -57,6 +57,12 @@ if(ANDROID)
    else()
       message(STATUS "Qt5 android installation dir: $ENV{Qt5_android}")
    endif()
+
+   if (NOT DEFINED ENV{Qt5_android_cmake})
+      message(FATAL_ERROR "Configure the env variable Qt5_android_cmake to point to your qt-android-cmake installation.")
+   else()
+      message(STATUS "Qt5 android cmake installation dir: $ENV{Qt5_android_cmake}")
+   endif()
    
    if(NOT DEFINED ENV{ANDROID_PLATFORM})
       message(FATAL_ERROR "Configure the env variable ANDROID_PLATFORM to specify your target platform (e.g.: android-18).")
