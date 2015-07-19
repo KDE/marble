@@ -388,12 +388,16 @@ void AnnotatePlugin::loadAnnotationFile()
                 m_graphicsItems.append( placemark );
             } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
                 newPlacemark->setParent( m_annotationDocument );
-                newPlacemark->setStyleUrl( placemark->styleUrl() );
+                if ( !placemark->styleUrl().isEmpty() ) {
+                    newPlacemark->setStyleUrl( placemark->styleUrl() );
+                }
                 AreaAnnotation *polygonAnnotation = new AreaAnnotation( newPlacemark );
                 m_graphicsItems.append( polygonAnnotation );
             } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
                 newPlacemark->setParent( m_annotationDocument );
-                newPlacemark->setStyleUrl( placemark->styleUrl() );
+                if ( !placemark->styleUrl().isEmpty() ) {
+                    newPlacemark->setStyleUrl( placemark->styleUrl() );
+                }
                 PolylineAnnotation *polylineAnnotation = new PolylineAnnotation( newPlacemark );
                 m_graphicsItems.append( polylineAnnotation );
             }
