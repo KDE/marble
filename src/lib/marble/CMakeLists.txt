@@ -74,6 +74,7 @@ set(marblewidget_SRCS
     MarbleColors.cpp
     NavigationWidget.cpp
     MapViewWidget.cpp
+    CelestialSortFilterProxyModel.cpp
     FileViewWidget.cpp
     TourWidget.cpp
     FlyToEditWidget.cpp
@@ -82,6 +83,7 @@ set(marblewidget_SRCS
     SoundCueEditWidget.cpp
     RemoveItemEditWidget.cpp
     TourItemDelegate.cpp
+    MapViewItemDelegate.cpp
     TourPlayback.cpp
     LegendWidget.cpp
     PlaybackItem.cpp
@@ -470,6 +472,7 @@ install( FILES
     MarbleControlBox.h
     NavigationWidget.h
     MapViewWidget.h
+    CelestialSortFilterProxyModel.h
     LegendWidget.h
     FileViewWidget.h
     TourWidget.h
@@ -479,6 +482,7 @@ install( FILES
     SoundCueEditWidget.h
     RemoveItemEditWidget.h
     TourItemDelegate.h
+    MapViewItemDelegate.h
     TourPlayback.h
     CurrentLocationWidget.h
     MarbleNavigator.h
