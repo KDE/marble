@@ -317,7 +317,7 @@ void MainWindow::createActions()
      connect(m_recordMovieAction, SIGNAL(triggered()),
              this, SLOT(showMovieCaptureDialog()));
 
-     m_stopRecordingAction = new QAction( tr("&Stop recording"), this );
+     m_stopRecordingAction = new QAction( tr("&Stop Recording"), this );
      m_stopRecordingAction->setStatusTip( tr("Stop recording a movie of the globe") );
      m_stopRecordingAction->setShortcut(QKeySequence( "Ctrl+Shift+S" ));
      m_stopRecordingAction->setEnabled( false );
@@ -431,6 +431,10 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus( const QList<QAction*> &panelActions )
 {
+#ifdef Q_OS_WIN
+        m_downloadAction.setEnabled( false );
+#endif
+
         m_fileMenu = menuBar()->addMenu(tr("&File"));
         m_fileMenu->addAction(m_openAction);
         m_fileMenu->addAction(m_downloadAction);
