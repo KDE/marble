@@ -19,6 +19,7 @@
 
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataCoordinates.h"
+#include "osm/OsmPlacemarkData.h"
 
 // Qt
 #include <QDataStream>
@@ -171,6 +172,29 @@ GeoDataGeometry* GeoDataPlacemark::geometry()
 const GeoDataGeometry* GeoDataPlacemark::geometry() const
 {
     return p()->m_geometry;
+}
+
+const OsmPlacemarkData& GeoDataPlacemark::osmData() const
+{
+    QVariant &placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
+    if ( !placemarkVariantData.canConvert<OsmPlacemarkData>() ) {
+        extendedData().addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( OsmPlacemarkData() ) ) );
+        placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
+    }
+
+    OsmPlacemarkData &osmData = *reinterpret_cast<OsmPlacemarkData*>( placemarkVariantData.data() );
+    return osmData;
+}
+
+OsmPlacemarkData& GeoDataPlacemark::osmData()
+{
+    return const_cast<OsmPlacemarkData&>( (static_cast<const GeoDataPlacemark*>(this) )->osmData() );
+}
+
+bool GeoDataPlacemark::hasOsmData() const
+{
+    QVariant &placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
+    return placemarkVariantData.canConvert<OsmPlacemarkData>();
 }
 
 const GeoDataLookAt *GeoDataPlacemark::lookAt() const

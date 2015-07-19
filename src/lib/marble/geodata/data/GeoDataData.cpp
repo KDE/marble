@@ -14,6 +14,7 @@
 #include <QDataStream>
 
 #include "GeoDataTypes.h"
+#include "osm/OsmPlacemarkData.h"
 
 namespace Marble
 {
@@ -66,6 +67,16 @@ const char* GeoDataData::nodeType() const
 }
 
 QVariant GeoDataData::value() const
+{
+    return d->m_value;
+}
+
+QVariant& GeoDataData::valueRef()
+{
+    return d->m_value;
+}
+
+const QVariant& GeoDataData::valueRef() const
 {
     return d->m_value;
 }

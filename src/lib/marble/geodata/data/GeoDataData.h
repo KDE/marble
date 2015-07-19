@@ -43,7 +43,13 @@ class GEODATA_EXPORT GeoDataData : public GeoDataObject
 
     /// Provides type information for downcasting a GeoData
     virtual const char* nodeType() const;
-    
+
+    /**
+    * @brief return a reference to the value of data;
+    */
+    QVariant& valueRef();
+    const QVariant& valueRef() const;
+
     /**
     * @brief return the value of data
     */

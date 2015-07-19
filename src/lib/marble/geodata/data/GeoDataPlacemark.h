@@ -33,6 +33,7 @@ namespace Marble
 {
 
 class GeoDataPlacemarkPrivate;
+class OsmPlacemarkData;
 
 /**
  * @short a class representing a point of interest on the map
@@ -110,6 +111,16 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * @p latitude and @p altitude.
      */
     void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
+
+    /**
+      * Quick, safe accessor to the placemark's OsmPlacemarkData stored within it's
+      * ExtendedData. If the extendedData does not contain osmData, the function
+      * inserts a default-constructed one, and returns a reference to it.
+      */
+    OsmPlacemarkData &osmData();
+    const OsmPlacemarkData &osmData() const;
+
+    bool hasOsmData() const;
 
     /**
      * Set the coordinate of the placemark in @p longitude and
