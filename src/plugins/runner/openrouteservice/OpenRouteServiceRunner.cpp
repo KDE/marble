@@ -13,7 +13,6 @@
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
-#include "TinyWebBrowser.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
 #include "routing/RouteRequest.h"

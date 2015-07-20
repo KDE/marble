@@ -14,7 +14,6 @@
 #include "MarbleLocale.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
-#include "TinyWebBrowser.h"
 #include "GeoDataParser.h"
 #include "GeoDataFolder.h"
 #include "routing/RouteRequest.h"
