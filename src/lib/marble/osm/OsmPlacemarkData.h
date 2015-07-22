@@ -18,6 +18,7 @@
 
 // Marble
 #include "GeoDataCoordinates.h"
+#include <marble_export.h>
 
 namespace Marble
 {
@@ -49,7 +50,7 @@ class GeoWriter;
  * ( these are usually newly created placemarks within the editor, or placemarks loaded from
  * ".kml" files ). Placemarks that already have it, are simply written as-is.
  */
-class OsmPlacemarkData
+class MARBLE_EXPORT OsmPlacemarkData
 {
 
 public:

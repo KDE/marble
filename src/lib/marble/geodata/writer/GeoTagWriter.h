@@ -15,6 +15,8 @@
 #include <QPair>
 #include <QHash>
 
+#include <marble_export.h>
+
 namespace Marble
 {
 
@@ -28,7 +30,7 @@ class GeoWriter;
  * XML formats. The system used to implement this writing system is very strongly
  * based on the @see GeoTagHandler system.
  */
-class GeoTagWriter
+class MARBLE_EXPORT GeoTagWriter
 {
 public:
     virtual bool write( const GeoNode *node, GeoWriter& writer ) const = 0;
