@@ -432,7 +432,7 @@ void MainWindow::createActions()
 void MainWindow::createMenus( const QList<QAction*> &panelActions )
 {
 #ifdef Q_OS_WIN
-        m_downloadAction.setEnabled( false );
+        m_downloadAction->setEnabled( false );
 #endif
 
         m_fileMenu = menuBar()->addMenu(tr("&File"));
