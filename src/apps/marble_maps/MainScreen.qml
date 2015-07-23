@@ -8,9 +8,26 @@ Rectangle {
 
     MarbleItem
     {
-        anchors.fill: parent
         id: marbleMaps
+
+        anchors.fill: parent
         visible: true
         focus: true
+
+        // Theme settings.
+        projection: MarbleItem.Mercator
+        mapThemeId: "earth/openstreetmap/openstreetmap.dgml"
+
+        // Visibility of layers/plugins.
+        showFrameRate: false
+        showAtmosphere: false
+        showCompass: false
+        showClouds: false
+        showCrosshairs: false
+        showGrid: false
+        showOverviewMap: false
+        showOtherPlaces: false
+        showScaleBar: false
+        showBackground: false
     }
 }
