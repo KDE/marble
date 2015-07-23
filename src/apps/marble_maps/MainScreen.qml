@@ -1,14 +1,37 @@
 import QtQuick 2.3
+import QtQuick.Controls 1.4
+import QtQuick.Window 2.2
+
 import MarbleItem 1.0
 
-Rectangle {
-    id: mainRect
-    anchors.fill: parent
-    color: "black"
+ApplicationWindow {
+    id: root
+    title: qsTr("Marble Maps")
+    visible: true
+
+    menuBar: MenuBar {
+        id: menuBar
+        Menu {
+            MenuItem{
+                text: qsTr("Search")
+            }
+        }
+    }
+
+    toolBar: ToolBar {
+        id: toolBar
+    }
+
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        color: "black"
+    }
 
     PinchArea {
         anchors.fill: parent
         enabled: true
+
         onPinchStarted: marbleMaps.handlePinchStarted(pinch.center)
         onPinchFinished: marbleMaps.handlePinchFinished(pinch.center)
         onPinchUpdated: marbleMaps.handlePinchUpdated(pinch.center, pinch.scale)

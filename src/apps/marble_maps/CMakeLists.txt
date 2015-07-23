@@ -1,4 +1,4 @@
-set(marble_SRCS main.cpp QmlView.cpp)
+set(marble_SRCS main.cpp)
 qt5_add_resources(marble_QRCS MarbleMaps.qrc)
 
 add_library (Marble SHARED ${marble_SRCS} ${marble_QRCS})

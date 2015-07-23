@@ -9,17 +9,17 @@
 //
 
 #include <QApplication>
+#include <QQmlApplicationEngine>
 
-#include "QmlView.h"
+#include "MarbleQuickItem.h"
 
 using namespace Marble;
 
 int main(int argc, char ** argv)
 {
     QApplication app(argc, argv);
-
-    QmlView marbleMaps;
-    marbleMaps.start();
+    qmlRegisterType<MarbleQuickItem>("MarbleItem", 1, 0, "MarbleItem");
+    QQmlApplicationEngine engine(QUrl("qrc:/MainScreen.qml"));
 
     return app.exec();
 }
