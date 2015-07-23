@@ -311,6 +311,23 @@ namespace Marble
         d->zoomOut(mode);
     }
 
+    void MarbleQuickItem::handlePinchStarted(const QPointF &point)
+    {
+        pinch(point, 1, Qt::GestureStarted);
+    }
+
+    void MarbleQuickItem::handlePinchFinished(const QPointF &point)
+    {
+        pinch(point, 1, Qt::GestureFinished);
+    }
+
+    void MarbleQuickItem::handlePinchUpdated(const QPointF &point, qreal scale)
+    {
+        scale = sqrt(sqrt(scale));
+        scale = qBound(0.5, scale, 2.0);
+        pinch(point, scale, Qt::GestureUpdated);
+    }
+
     void MarbleQuickItem::setMapWidth(int mapWidth)
     {
         if (d->map()->width() == mapWidth) {

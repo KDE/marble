@@ -72,6 +72,10 @@ namespace Marble
         void zoomIn(FlyToMode mode = Automatic);
         void zoomOut(FlyToMode mode = Automatic);
 
+        Q_INVOKABLE void handlePinchStarted(const QPointF &point);
+        Q_INVOKABLE void handlePinchFinished(const QPointF &point);
+        Q_INVOKABLE void handlePinchUpdated(const QPointF &point, qreal scale);
+
         void setMapWidth(int mapWidth);
         void setMapHeight(int mapHeight);
         void setShowFrameRate(bool showFrameRate);
