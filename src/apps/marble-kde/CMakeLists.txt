@@ -37,7 +37,7 @@ install(FILES marble_geo.desktop DESTINATION ${APPS_INSTALL_DIR})
 install(FILES marble_worldwind.desktop DESTINATION ${APPS_INSTALL_DIR})
 install(FILES marble_part.rc marbleui.rc marble.knsrc DESTINATION ${KXMLGUI_INSTALL_DIR}/marble)
 
-qt5_wrap_ui(marble_kde_SRCS ${marble_UI})
+ki18n_wrap_ui(marble_kde_SRCS ${marble_UI})
 kconfig_add_kcfg_files(marble_kde_SRCS settings.kcfgc)
 
 ecm_install_icons(ICONS
