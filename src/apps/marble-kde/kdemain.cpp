@@ -302,7 +302,10 @@ int main ( int argc, char *argv[] )
 
     parser.process( app );
 
-    KLocalizedString::setApplicationDomain("marble_qt");
+    KLocalizedString::setApplicationDomain("marble");
+
+    // use ecm_create_qm_loader(marblewidget_SRCS marble_qt)
+    // in the library src/lib/marble/CMakeList.txt to load the second catalog
 
     MarbleDebug::setEnabled( parser.isSet( debugOption ) );
 
