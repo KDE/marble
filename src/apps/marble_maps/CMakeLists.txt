@@ -26,12 +26,15 @@ file(COPY "../../../data/android/drawable-xxxhdpi" DESTINATION "${CMAKE_BINARY_D
 
 include("$ENV{Qt5_android_cmake}/AddQtAndroidApk.cmake")
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Marble.keystore")
-    set(KEYSTORE_OPTIONS KEYSTORE ${CMAKE_CURRENT_SOURCE_DIR}/Marble.keystore Marble)
+    FILE(COPY "${CMAKE_CURRENT_SOURCE_DIR}/package" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+    FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/package/project.properties" "key.store=${CMAKE_CURRENT_SOURCE_DIR}/Marble.keystore\nkey.alias=Marble\n")
+    set(ANDROID_APK_OPTIONS KEYSTORE ${CMAKE_CURRENT_SOURCE_DIR}/Marble.keystore Marble PACKAGE_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/package")
+else()
+    set(ANDROID_APK_OPTIONS PACKAGE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/package")
 endif()
 add_qt_android_apk(Marble_apk Marble
-    PACKAGE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/package"
     PACKAGE_NAME org.kde.marble.maps
-    ${KEYSTORE_OPTIONS}
+    ${ANDROID_APK_OPTIONS}
     DEPENDS "${PROJECT_BINARY_DIR}/lib/libmarblewidget-qt5.so" "${PROJECT_BINARY_DIR}/lib/libastro.so"
 )
 
