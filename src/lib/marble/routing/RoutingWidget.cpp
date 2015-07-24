@@ -854,6 +854,12 @@ void RoutingWidget::resizeEvent(QResizeEvent *e)
 
 void RoutingWidget::toggleRoutePlay()
 {
+    if( !d->m_playback ){
+        if( d->m_routingModel->rowCount() != 0 ){
+            initializeTour();
+	}
+    }
+
     if (!d->m_playback)
         return;
 
@@ -861,9 +867,6 @@ void RoutingWidget::toggleRoutePlay()
         d->m_playing = true;
         d->m_playButton->setIcon( QIcon( ":/marble/playback-pause.png" ) );
 
-        if( !d->m_playback ){
-            initializeTour();
-        }
         if( d->m_playback ){
             d->m_playback->play();
         }
