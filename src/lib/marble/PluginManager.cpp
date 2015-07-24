@@ -61,6 +61,10 @@ PluginManagerPrivate::~PluginManagerPrivate()
 PluginManager::PluginManager( QObject *parent ) : QObject( parent ),
     d( new PluginManagerPrivate() )
 {
+    //Checking assets:/plugins for uninstalled plugins
+#ifdef ANDROID
+        installPluginsFromAssets();
+#endif
 }
 
 PluginManager::~PluginManager()
@@ -239,6 +243,25 @@ void PluginManagerPrivate::loadPlugins()
 
     mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
+
+#ifdef ANDROID
+    void PluginManager::installPluginsFromAssets() const
+    {
+        QStringList copyList = MarbleDirs::pluginEntryList(QString());
+        QDir pluginHome(MarbleDirs::localPath());
+        pluginHome.mkpath(MarbleDirs::pluginLocalPath());
+        pluginHome.setCurrent(MarbleDirs::pluginLocalPath());
+        foreach (const QString & file, copyList) {
+            if (QFileInfo(MarbleDirs::pluginSystemPath() + '/' + file).isDir()) {
+                pluginHome.mkpath(MarbleDirs::pluginLocalPath() + '/' + file);
+            }
+            else{
+                QFile temporaryFile(MarbleDirs::pluginSystemPath() + '/' + file);
+                temporaryFile.copy(MarbleDirs::pluginLocalPath() + '/' + file);
+            }
+        }
+    }
+#endif
 
 }
 

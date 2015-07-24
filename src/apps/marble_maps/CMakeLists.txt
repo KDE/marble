@@ -13,10 +13,10 @@ target_link_libraries (
       ${Qt5Network_LIBRARIES}
       ${Qt5WebKitWidgets_LIBRARIES}
       ${Qt5WebKit_LIBRARIES}
+      ${Qt5Sql_LIBRARIES}
       ${MARBLEWIDGET}
       astro)
-    
-file(COPY "../../../data" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/assets")
+
 file(COPY "../../../data/android/drawable-ldpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")
 file(COPY "../../../data/android/drawable-mdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")
 file(COPY "../../../data/android/drawable-hdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")

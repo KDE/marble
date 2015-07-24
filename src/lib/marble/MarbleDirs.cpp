@@ -207,6 +207,10 @@ QString MarbleDirs::pluginSystemPath()
 if ( !runTimeMarblePluginPath.isEmpty() )
     return runTimeMarblePluginPath;
 
+#ifdef ANDROID
+    return "assets:/plugins";
+#endif
+
 #ifdef MARBLE_PLUGIN_PATH
     //MARBLE_PLUGIN_PATH is a compiler define set by cmake
     QString compileTimeMarblePluginPath(MARBLE_PLUGIN_PATH);
