@@ -23,20 +23,8 @@ Q_OBJECT
 
 public:
     MarbleDemoItem(QQuickItem *parent = 0) : MarbleQuickItem(parent)
-    {   //TODO: setters -> properties
-        map()->setSize(width(), height());
-        map()->setShowFrameRate(false);
-        map()->setProjection(Marble::Spherical);
-        map()->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
-        map()->setShowAtmosphere(false);
-        map()->setShowCompass(false);
-        map()->setShowClouds(false);
-        map()->setShowCrosshairs(false);
-        map()->setShowGrid(false);
-        map()->setShowOverviewMap(false);
-        map()->setShowOtherPlaces(false);
-        map()->setShowScaleBar(false);
-        map()->setShowBackground(false);
+    {
+        // nothing to do
     }
 
     void componentComplete()

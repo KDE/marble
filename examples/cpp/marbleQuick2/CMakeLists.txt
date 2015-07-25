@@ -9,7 +9,8 @@ include_directories(
 
 set( ${TARGET}_SRC main.cpp)
 
-add_executable( ${TARGET} ${${TARGET}_SRC} )
+qt5_add_resources(marble_QRCS marbleQuick2.qrc)
+add_executable( ${TARGET} ${${TARGET}_SRC} ${marble_QRCS} )
 
 target_link_libraries( ${TARGET} ${OpenCV_LIBRARIES} ${MARBLEWIDGET} )
 target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES} ${Qt5Quick_LIBRARIES} ${Qt5Widget_LIBRARIES} )
