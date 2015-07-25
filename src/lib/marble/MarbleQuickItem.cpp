@@ -374,7 +374,21 @@ namespace Marble
             return;
         }
 
+        bool const showCompass = d->map()->showCompass();
+        bool const showOverviewMap = d->map()->showOverviewMap();
+        bool const showOtherPlaces = d->map()->showOtherPlaces();
+        bool const showGrid = d->map()->showGrid();
+        bool const showScaleBar = d->map()->showScaleBar();
+
         d->map()->setMapThemeId(mapThemeId);
+
+        // Map themes are allowed to change properties. Enforce ours.
+        d->map()->setShowCompass(showCompass);
+        d->map()->setShowOverviewMap(showOverviewMap);
+        d->map()->setShowOtherPlaces(showOtherPlaces);
+        d->map()->setShowGrid(showGrid);
+        d->map()->setShowScaleBar(showScaleBar);
+
         emit mapThemeIdChanged(mapThemeId);
     }
 
