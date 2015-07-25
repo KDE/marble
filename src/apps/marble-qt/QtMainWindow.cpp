@@ -164,6 +164,10 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
         m_clockLabel( 0 ),
         m_downloadProgressBar( 0 ),
         m_toggleTileLevelAction( 0 ),
+        m_angleDisplayUnitActionGroup( 0 ),
+        m_dmsDegreeAction( 0 ),
+        m_decimalDegreeAction( 0 ),
+        m_utmAction( 0 ),
 
         //Bookmark Menu
         m_addBookmarkAction( 0 ),
@@ -423,6 +427,26 @@ void MainWindow::createActions()
      m_toggleTileLevelAction->setChecked( false );
      connect( m_toggleTileLevelAction, SIGNAL(triggered(bool)),
               this, SLOT(showZoomLevel(bool)) );
+
+     m_angleDisplayUnitActionGroup = new QActionGroup( statusBar() );
+
+     m_dmsDegreeAction = new QAction( tr( "Degree (DMS)" ), statusBar() );
+     m_dmsDegreeAction->setCheckable( true );
+     m_dmsDegreeAction->setData( (int)DMSDegree );
+     m_angleDisplayUnitActionGroup->addAction(m_dmsDegreeAction);
+
+     m_decimalDegreeAction = new QAction( tr( "Degree (Decimal)" ), statusBar() );
+     m_decimalDegreeAction->setCheckable( true );
+     m_decimalDegreeAction->setData( (int)DecimalDegree );
+     m_angleDisplayUnitActionGroup->addAction(m_decimalDegreeAction);
+
+     m_utmAction = new QAction( tr( "Universal Transverse Mercator (UTM)" ), statusBar() );
+     m_utmAction->setCheckable( true );
+     m_utmAction->setData( (int)UTM );
+     m_angleDisplayUnitActionGroup->addAction(m_utmAction);
+
+     connect( m_angleDisplayUnitActionGroup, SIGNAL(triggered(QAction*)),
+              this, SLOT(changeAngleDisplayUnit(QAction*)) );
 
      // View size actions
      m_viewSizeActsGroup = ControlView::createViewSizeActionGroup( this );
@@ -953,6 +977,18 @@ void MainWindow::updateStatusBar()
     if ( m_clockLabel )
         m_clockLabel->setText( QString( "%1 %2" )
         .arg( tr( DATETIME_STRING ) ).arg( m_clock ) );
+
+    switch ( m_configDialog->angleUnit() ) {
+    case DMSDegree:
+        m_dmsDegreeAction->setChecked( true );
+        break;
+    case DecimalDegree:
+        m_decimalDegreeAction->setChecked( true );
+        break;
+    case UTM:
+        m_utmAction->setChecked( true );
+        break;
+    }
 }
 
 void MainWindow::openFile()
@@ -996,6 +1032,13 @@ void MainWindow::setupStatusBar()
     statusBar()->setContextMenuPolicy( Qt::ActionsContextMenu );
 
     statusBar()->addAction( m_toggleTileLevelAction );
+
+    QMenu *angleDisplayUnitMenu = new QMenu( );
+    angleDisplayUnitMenu->addActions( m_angleDisplayUnitActionGroup->actions() );
+    QAction *angleDisplayUnitMenuAction = new QAction( tr("&Angle Display Unit"), statusBar() );
+    angleDisplayUnitMenuAction->setMenu( angleDisplayUnitMenu );
+    statusBar()->addAction( angleDisplayUnitMenuAction );
+
     setupDownloadProgressBar();
 
     m_positionLabel = new QLabel( );
@@ -1610,6 +1653,11 @@ void MainWindow::showZoomLevel(bool show)
     }
     // update from last modification
     m_toggleTileLevelAction->setChecked( show );
+}
+
+void MainWindow::changeAngleDisplayUnit( QAction *action )
+{
+    m_configDialog->setAngleUnit((Marble::AngleUnit)action->data().toInt());
 }
 
 void MainWindow::fallBackToDefaultTheme()

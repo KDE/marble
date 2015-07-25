@@ -516,6 +516,13 @@ Marble::AngleUnit QtMarbleConfigDialog::angleUnit() const
     return (Marble::AngleUnit) d->m_settings.value( "View/angleUnit", Marble::DMSDegree ).toInt();
 }
 
+void QtMarbleConfigDialog::setAngleUnit(Marble::AngleUnit unit)
+{
+    d->m_settings.setValue( "View/angleUnit", (int)unit );
+    d->ui_viewSettings.kcfg_angleUnit->setCurrentIndex( angleUnit() );
+    emit settingsChanged();
+}
+
 Marble::MapQuality QtMarbleConfigDialog::stillQuality() const
 {
     return (Marble::MapQuality) d->m_settings.value( "View/stillQuality",

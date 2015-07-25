@@ -139,6 +139,7 @@ private Q_SLOTS:
     void  downloadRegion();
 
     void showZoomLevel( bool show );
+    void changeAngleDisplayUnit( QAction *action );
 
     void handleProgress( int, int );
     void removeProgressItem();
@@ -215,6 +216,10 @@ private:
     QLabel      *m_clockLabel;
     QProgressBar *m_downloadProgressBar;
     QAction     *m_toggleTileLevelAction;
+    QActionGroup *m_angleDisplayUnitActionGroup;
+    QAction     *m_dmsDegreeAction;
+    QAction     *m_decimalDegreeAction;
+    QAction     *m_utmAction;
     void updateStatusBar();
 
     //Bookmark Menu
