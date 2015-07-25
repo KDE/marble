@@ -32,15 +32,19 @@ add_subdirectory(foursquare)
 # Disabled for now until legal issues wrt to the API
 # and terms of service of opencaching are cleared up.
 #add_subdirectory( opencaching )
+if(NOT QT_NO_WEBKIT)
 add_subdirectory( opencachingcom )
 add_subdirectory( opendesktop )
-# add_subdirectory( panoramio )
 add_subdirectory( photo )
+endif()
+# add_subdirectory( panoramio )
 add_subdirectory( postalcode )
 add_subdirectory( satellites )
 # add_subdirectory ( twitter )
+if(NOT QT_NO_WEBKIT)
 add_subdirectory( wikipedia )
 add_subdirectory( weather )
+endif()
 
 # FIXME: The inhibit-screensaver plugin stresses the term render plugin a bit far.
 # It should be moved to a new plugin type later.
