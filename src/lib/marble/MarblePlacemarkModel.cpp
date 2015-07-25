@@ -52,6 +52,23 @@ MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
 {
     QHash<int,QByteArray> roles;
     roles[DescriptionRole] = "description";
+    roles[Qt::DisplayRole] = "name";
+    roles[Qt::DecorationRole] = "icon";
+    roles[PopularityIndexRole] = "zoomLevel";
+    roles[VisualCategoryRole] = "visualCategory";
+    roles[AreaRole] = "area";
+    roles[PopulationRole] = "population";
+    roles[CountryCodeRole] = "countryCode";
+    roles[StateRole] = "state";
+    roles[PopularityRole] = "popularity";
+    roles[DescriptionRole] = "description";
+    roles[GeoTypeRole] = "role";
+    roles[CoordinateRole] = "coordinate";
+    roles[StyleRole] = "style";
+    roles[GmtRole] = "gmt";
+    roles[DstRole] = "dst";
+    roles[GeometryRole] = "geometry";
+    roles[ObjectPointerRole] = "objectPointer";
     roles[LongitudeRole] = "longitude";
     roles[LatitudeRole] = "latitude";
 #if QT_VERSION < 0x050000

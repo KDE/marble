@@ -1,4 +1,4 @@
-set(marble_SRCS main.cpp)
+set(marble_SRCS main.cpp SearchBackend.cpp)
 qt5_add_resources(marble_QRCS MarbleMaps.qrc)
 
 if (ANDROID)
@@ -29,7 +29,8 @@ file(COPY "../../../data/android/drawable-xhdpi" DESTINATION "${CMAKE_BINARY_DIR
 file(COPY "../../../data/android/drawable-xxhdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble-maps/res")
 file(COPY "../../../data/android/drawable-xxxhdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble-maps/res")
 
-add_custom_target(marble-maps_resources ALL SOURCES MainScreen.qml package/AndroidManifest.xml)
+FILE(GLOB QML_FILES *.qml)
+add_custom_target(marble-maps_resources ALL SOURCES ${QML_FILES} package/AndroidManifest.xml)
 
 if (ANDROID)
     include("$ENV{Qt5_android_cmake}/AddQtAndroidApk.cmake")

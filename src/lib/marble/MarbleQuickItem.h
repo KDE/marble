@@ -118,6 +118,12 @@ namespace Marble
         bool showScaleBar() const;
         bool showBackground() const;
 
+        MarbleModel* model();
+        const MarbleModel* model() const;
+
+        MarbleMap* map();
+        const MarbleMap* map() const;
+
     signals:
         void mapWidthChanged(int mapWidth);
         void mapHeightChanged(int mapHeight);
@@ -135,12 +141,6 @@ namespace Marble
         void showBackgroundChanged(bool showBackground);
 
     protected:
-        MarbleModel* model();
-        const MarbleModel* model() const;
-
-        MarbleMap* map();
-        const MarbleMap* map() const;
-
         QObject *getEventFilter() const;
         void pinch(QPointF center, qreal scale, Qt::GestureState state);
 

@@ -1,6 +1,11 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file>MainScreen.qml</file>
+    <file>SearchResults.qml</file>
+    <file>SearchField.qml</file>
+    <file>Search.qml</file>
+    <file>Theme.qml</file>
+    <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
 </qresource>
 </RCC>
 
