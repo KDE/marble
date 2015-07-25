@@ -615,7 +615,7 @@ install( FILES
 
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
-endif(ANDROID)
+endif()
 
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config-phonon.h.cmake
                ${CMAKE_CURRENT_BINARY_DIR}/config-phonon.h)
