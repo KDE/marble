@@ -12,6 +12,7 @@ ApplicationWindow {
     menuBar: MenuBar {
         id: menuBar
         Menu {
+            title: "Marble Maps"
             MenuItem{
                 text: qsTr("Search")
             }
