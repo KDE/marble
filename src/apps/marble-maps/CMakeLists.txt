@@ -17,13 +17,14 @@ target_link_libraries (
       ${MARBLEWIDGET}
       astro)
 
-file(COPY "../../../data/android/drawable-ldpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")
-file(COPY "../../../data/android/drawable-mdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")
-file(COPY "../../../data/android/drawable-hdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")
-file(COPY "../../../data/android/drawable-xhdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")
-file(COPY "../../../data/android/drawable-xxhdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")
-file(COPY "../../../data/android/drawable-xxxhdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble_maps/res")
+file(COPY "../../../data/android/drawable-ldpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble-maps/res")
+file(COPY "../../../data/android/drawable-mdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble-maps/res")
+file(COPY "../../../data/android/drawable-hdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble-maps/res")
+file(COPY "../../../data/android/drawable-xhdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble-maps/res")
+file(COPY "../../../data/android/drawable-xxhdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble-maps/res")
+file(COPY "../../../data/android/drawable-xxxhdpi" DESTINATION "${CMAKE_BINARY_DIR}/src/apps/marble-maps/res")
 
+add_custom_target(marble-maps_resources ALL SOURCES MainScreen.qml)
 include("$ENV{Qt5_android_cmake}/AddQtAndroidApk.cmake")
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Marble.keystore")
     FILE(COPY "${CMAKE_CURRENT_SOURCE_DIR}/package" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
