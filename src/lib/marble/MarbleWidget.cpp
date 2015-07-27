@@ -394,7 +394,7 @@ void MarbleWidget::setHighlightEnabled(bool enabled)
 {
     if ( enabled ) {
         connect( this, SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)),
-                 d->map(), SIGNAL(highlightedPlacemarksChanged(qreal, qreal, GeoDataCoordinates::Unit)),
+                 d->map(), SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)),
                  Qt::UniqueConnection );
     }
     else {

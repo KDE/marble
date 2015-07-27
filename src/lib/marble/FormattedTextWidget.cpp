@@ -72,17 +72,17 @@ FormattedTextWidget::FormattedTextWidget( QWidget *parent ) :
     } else {
         d->m_fontSize->lineEdit()->setText( QString::number( d->m_description->textCursor().charFormat().font().pointSize() ) );
     }
-    connect( d->m_actionColor, SIGNAL( triggered() ), d->m_textColorDialog, SLOT( exec() ) );
-    connect( d->m_textColorDialog, SIGNAL( colorSelected( QColor ) ), this, SLOT( setTextCursorColor( const QColor& ) ) );
-    connect( d->m_isFormattedTextMode, SIGNAL( toggled( bool ) ), this, SLOT( toggleDescriptionEditMode( bool ) ) );
-    connect( d->m_fontFamily, SIGNAL( currentFontChanged( QFont ) ), this, SLOT( setTextCursorFont( QFont ) ) );
-    connect( d->m_fontSize, SIGNAL( editTextChanged( QString ) ), this, SLOT( setTextCursorFontSize( QString ) ) );
-    connect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorBold( bool ) ) );
-    connect( d->m_actionItalics, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorItalic( bool ) ) );
-    connect( d->m_actionUnderlined, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorUnderlined( bool ) ) );
-    connect( d->m_actionAddImage, SIGNAL( triggered() ), this, SLOT( addImageToDescription() ) );
-    connect( d->m_actionAddLink, SIGNAL( triggered() ), this, SLOT( addLinkToDescription() ) );
-    connect( d->m_description, SIGNAL( cursorPositionChanged() ), this, SLOT( updateDescriptionEditButtons() ) );
+    connect( d->m_actionColor, SIGNAL(triggered()), d->m_textColorDialog, SLOT(exec()) );
+    connect( d->m_textColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(setTextCursorColor(QColor)) );
+    connect( d->m_isFormattedTextMode, SIGNAL(toggled(bool)), this, SLOT(toggleDescriptionEditMode(bool)) );
+    connect( d->m_fontFamily, SIGNAL(currentFontChanged(QFont)), this, SLOT(setTextCursorFont(QFont)) );
+    connect( d->m_fontSize, SIGNAL(editTextChanged(QString)), this, SLOT(setTextCursorFontSize(QString)) );
+    connect( d->m_actionBold, SIGNAL(toggled(bool)), this, SLOT(setTextCursorBold(bool)) );
+    connect( d->m_actionItalics, SIGNAL(toggled(bool)), this, SLOT(setTextCursorItalic(bool)) );
+    connect( d->m_actionUnderlined, SIGNAL(toggled(bool)), this, SLOT(setTextCursorUnderlined(bool)) );
+    connect( d->m_actionAddImage, SIGNAL(triggered()), this, SLOT(addImageToDescription()) );
+    connect( d->m_actionAddLink, SIGNAL(triggered()), this, SLOT(addLinkToDescription()) );
+    connect( d->m_description, SIGNAL(cursorPositionChanged()), this, SLOT(updateDescriptionEditButtons()) );
 }
 
 FormattedTextWidget::~FormattedTextWidget()
@@ -214,11 +214,11 @@ void FormattedTextWidget::addLinkToDescription()
 
 void FormattedTextWidget::updateDescriptionEditButtons()
 {
-    disconnect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorBold( bool ) ) );
-    disconnect( d->m_actionItalics, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorItalic( bool ) ) );
-    disconnect( d->m_actionUnderlined, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorUnderlined( bool ) ) );
-    disconnect( d->m_fontFamily, SIGNAL( currentFontChanged( QFont ) ), this, SLOT( setTextCursorFont( QFont ) ) );
-    disconnect( d->m_fontSize, SIGNAL( editTextChanged( QString ) ), this, SLOT( setTextCursorFontSize( QString ) ) );
+    disconnect( d->m_actionBold, SIGNAL(toggled(bool)), this, SLOT(setTextCursorBold(bool)) );
+    disconnect( d->m_actionItalics, SIGNAL(toggled(bool)), this, SLOT(setTextCursorItalic(bool)) );
+    disconnect( d->m_actionUnderlined, SIGNAL(toggled(bool)), this, SLOT(setTextCursorUnderlined(bool)) );
+    disconnect( d->m_fontFamily, SIGNAL(currentFontChanged(QFont)), this, SLOT(setTextCursorFont(QFont)) );
+    disconnect( d->m_fontSize, SIGNAL(editTextChanged(QString)), this, SLOT(setTextCursorFontSize(QString)) );
 
     QTextCharFormat format = d->m_description->textCursor().charFormat();
 
@@ -243,11 +243,11 @@ void FormattedTextWidget::updateDescriptionEditButtons()
     } else {
         d->m_fontSize->lineEdit()->setText( QString::number( d->m_description->textCursor().charFormat().font().pointSize() ) );
     }
-    connect( d->m_actionBold, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorBold( bool ) ) );
-    connect( d->m_actionItalics, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorItalic( bool ) ) );
-    connect( d->m_actionUnderlined, SIGNAL( toggled( bool ) ), this, SLOT( setTextCursorUnderlined( bool ) ) );
-    connect( d->m_fontFamily, SIGNAL( currentFontChanged( QFont ) ), this, SLOT( setTextCursorFont( QFont ) ) );
-    connect( d->m_fontSize, SIGNAL( editTextChanged( QString ) ), this, SLOT( setTextCursorFontSize( QString ) ) );
+    connect( d->m_actionBold, SIGNAL(toggled(bool)), this, SLOT(setTextCursorBold(bool)) );
+    connect( d->m_actionItalics, SIGNAL(toggled(bool)), this, SLOT(setTextCursorItalic(bool)) );
+    connect( d->m_actionUnderlined, SIGNAL(toggled(bool)), this, SLOT(setTextCursorUnderlined(bool)) );
+    connect( d->m_fontFamily, SIGNAL(currentFontChanged(QFont)), this, SLOT(setTextCursorFont(QFont)) );
+    connect( d->m_fontSize, SIGNAL(editTextChanged(QString)), this, SLOT(setTextCursorFontSize(QString)) );
 }
 
 void FormattedTextWidget::setReadOnly( bool state )

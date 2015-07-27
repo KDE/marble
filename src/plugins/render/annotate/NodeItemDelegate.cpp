@@ -40,8 +40,8 @@ QWidget* NodeItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
     Q_UNUSED( option );
     Q_UNUSED( index );
     LatLonEdit *editor = new LatLonEdit( parent );
-    connect( this, SIGNAL( closeEditor( QWidget* )  ),
-             this, SLOT( unsetCurrentEditor(QWidget*) ) );
+    connect( this, SIGNAL(closeEditor(QWidget*)),
+             this, SLOT(unsetCurrentEditor(QWidget*)) );
     return editor;
 }
 
@@ -84,8 +84,8 @@ void NodeItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) 
 
     latLonEditWidget->setValue( value );
 
-    connect( latLonEditWidget, SIGNAL( valueChanged( qreal ) ),
-             this, SLOT( previewNodeMove( qreal ) ) );
+    connect( latLonEditWidget, SIGNAL(valueChanged(qreal)),
+             this, SLOT(previewNodeMove(qreal)) );
     m_indexBeingEdited = index;
 
 }

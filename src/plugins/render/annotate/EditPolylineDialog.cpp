@@ -109,10 +109,10 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
     // Setting the NodeView's delegate: mainly used for the editing the polyline's nodes
     d->m_delegate = new NodeItemDelegate( d->m_placemark, d->m_nodeView );
 
-    connect( d->m_delegate, SIGNAL( modelChanged( GeoDataPlacemark* ) ),
-             this, SLOT( handleItemMoving( GeoDataPlacemark* ) ) );
-    connect( d->m_delegate, SIGNAL( geometryChanged() ),
-             this, SLOT( updatePolyline() ) );
+    connect( d->m_delegate, SIGNAL(modelChanged(GeoDataPlacemark*)),
+             this, SLOT(handleItemMoving(GeoDataPlacemark*)) );
+    connect( d->m_delegate, SIGNAL(geometryChanged()),
+             this, SLOT(updatePolyline()) );
 
     d->m_nodeView->setItemDelegate( d->m_delegate );
     d->m_nodeView->setEditTriggers( QAbstractItemView::AllEditTriggers );
@@ -122,7 +122,7 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
     d->m_linesDialog->setOption( QColorDialog::ShowAlphaChannel );
     d->m_linesDialog->setCurrentColor( lineStyle.color() );
     connect( d->m_linesColorButton, SIGNAL(clicked()), d->m_linesDialog, SLOT(exec()) );
-    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLinesDialog(const QColor&)) );
+    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLinesDialog(QColor)) );
     connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolyline()) );
 
     if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {

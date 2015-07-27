@@ -37,10 +37,10 @@ SerialTrack::~SerialTrack()
 
 void SerialTrack::append(PlaybackItem* item)
 {
-    connect( item, SIGNAL( progressChanged( double ) ), this, SLOT( changeProgress( double ) ) );
-    connect( item, SIGNAL( centerOn( GeoDataCoordinates ) ), this, SIGNAL( centerOn( GeoDataCoordinates ) ) );
-    connect( item, SIGNAL( finished() ), this, SLOT( handleFinishedItem() ) ) ;
-    connect( item, SIGNAL( paused() ), this, SLOT( pause() ) ) ;
+    connect( item, SIGNAL(progressChanged(double)), this, SLOT(changeProgress(double)) );
+    connect( item, SIGNAL(centerOn(GeoDataCoordinates)), this, SIGNAL(centerOn(GeoDataCoordinates)) );
+    connect( item, SIGNAL(finished()), this, SLOT(handleFinishedItem()) ) ;
+    connect( item, SIGNAL(paused()), this, SLOT(pause()) ) ;
     m_items.append( item );
     if( m_items.size() == 1 ) {
         PlaybackFlyToItem *flyTo = dynamic_cast<PlaybackFlyToItem*>( item );

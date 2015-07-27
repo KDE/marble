@@ -194,17 +194,17 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *
     d->m_labelColorDialog->setOption( QColorDialog::ShowAlphaChannel );
     d->m_labelColorDialog->setCurrentColor( labelStyle.color() );
     connect( d->m_labelButton, SIGNAL(clicked()), d->m_labelColorDialog, SLOT(exec()) );
-    connect( d->m_labelColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLabelDialog(const QColor&)) );
+    connect( d->m_labelColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLabelDialog(QColor)) );
     connect( d->m_labelColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateTextAnnotation()) );
 
     d->m_iconColorDialog = new QColorDialog( this );
     d->m_iconColorDialog->setOption( QColorDialog::ShowAlphaChannel );
     d->m_iconColorDialog->setCurrentColor( iconStyle.color() );
     connect( d->m_iconButton, SIGNAL(clicked()), d->m_iconColorDialog, SLOT(exec()) );
-    connect( d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateIconDialog(const QColor&)) );
+    connect( d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateIconDialog(QColor)) );
     connect( d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateTextAnnotation()) );
 
-    connect( d->m_isBalloonVisible, SIGNAL( toggled(bool) ), this, SLOT( updateTextAnnotation() ) );
+    connect( d->m_isBalloonVisible, SIGNAL(toggled(bool)), this, SLOT(updateTextAnnotation()) );
 
     // Promote "Ok" button to default button.
     d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );

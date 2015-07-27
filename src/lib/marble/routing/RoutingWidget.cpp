@@ -974,8 +974,8 @@ void RoutingWidget::initializeTour()
     d->m_playback->setMarbleWidget( d->m_widget );
     d->m_playback->setTour( d->m_tour );
     d->m_widget->model()->treeModel()->addDocument( d->m_document );
-    QObject::connect( d->m_playback, SIGNAL( finished() ),
-                  this, SLOT( seekTourToStart() ) );
+    QObject::connect( d->m_playback, SIGNAL(finished()),
+                  this, SLOT(seekTourToStart()) );
 }
 
 void RoutingWidget::centerOn( const GeoDataCoordinates &coordinates )

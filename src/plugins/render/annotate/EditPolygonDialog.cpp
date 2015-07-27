@@ -122,23 +122,23 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     d->m_linesDialog->setOption( QColorDialog::ShowAlphaChannel );
     d->m_linesDialog->setCurrentColor( lineStyle.color() );
     connect( d->m_linesColorButton, SIGNAL(clicked()), d->m_linesDialog, SLOT(exec()) );
-    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLinesDialog(const QColor&)) );
+    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLinesDialog(QColor)) );
     connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolygon()) );
 
     d->m_polyDialog = new QColorDialog( this );
     d->m_polyDialog->setOption( QColorDialog::ShowAlphaChannel );
     d->m_polyDialog->setCurrentColor( polyStyle.color() );
     connect( d->m_polyColorButton, SIGNAL(clicked()), d->m_polyDialog, SLOT(exec()) );
-    connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolyDialog(const QColor&)) );
+    connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolyDialog(QColor)) );
     connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolygon()) );
 
     // Setting the NodeView's delegate: mainly used for the editing the polygon's nodes
     d->m_delegate = new NodeItemDelegate( d->m_placemark, d->m_nodeView );
 
-    connect( d->m_delegate, SIGNAL( modelChanged( GeoDataPlacemark* ) ),
-             this, SLOT( handleItemMoving( GeoDataPlacemark* ) ) );
-    connect( d->m_delegate, SIGNAL( geometryChanged() ),
-             this, SLOT( updatePolygon() ) );
+    connect( d->m_delegate, SIGNAL(modelChanged(GeoDataPlacemark*)),
+             this, SLOT(handleItemMoving(GeoDataPlacemark*)) );
+    connect( d->m_delegate, SIGNAL(geometryChanged()),
+             this, SLOT(updatePolygon()) );
 
     d->m_nodeView->setItemDelegate( d->m_delegate );
     d->m_nodeView->setEditTriggers( QAbstractItemView::AllEditTriggers );

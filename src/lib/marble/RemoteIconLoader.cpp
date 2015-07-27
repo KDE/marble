@@ -111,8 +111,8 @@ RemoteIconLoader::RemoteIconLoader( QObject *parent )
     : QObject( parent ),
       d ( new RemoteIconLoaderPrivate() )
 {
-    connect( &d->m_downloadManager, SIGNAL(downloadComplete(QByteArray, QString)), this,
-            SLOT(storeIcon(QByteArray, QString)) );
+    connect( &d->m_downloadManager, SIGNAL(downloadComplete(QByteArray,QString)), this,
+            SLOT(storeIcon(QByteArray,QString)) );
 }
 
 RemoteIconLoader::~RemoteIconLoader()

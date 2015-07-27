@@ -218,8 +218,8 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( &d->m_storagePolicy, SIGNAL(sizeChanged(qint64)),
              &d->m_storageWatcher, SLOT(addToCurrentSize(qint64)) );
 
-    connect( &d->m_fileManager, SIGNAL(fileAdded( QString)),
-             this, SLOT(assignFillColors( QString)) );
+    connect( &d->m_fileManager, SIGNAL(fileAdded(QString)),
+             this, SLOT(assignFillColors(QString)) );
 
     d->m_routingManager = new RoutingManager( this, this );
 

@@ -40,7 +40,7 @@ namespace Marble
 TourItemDelegate::TourItemDelegate( QListView* view, MarbleWidget* widget, TourWidget* tour ):
                     m_listView( view ), m_widget( widget ), m_editable( true ), m_tourWidget( tour )
 {
-    QObject::connect( this, SIGNAL( editingChanged( QModelIndex ) ), m_listView, SLOT( update( QModelIndex ) ) );
+    QObject::connect( this, SIGNAL(editingChanged(QModelIndex)), m_listView, SLOT(update(QModelIndex)) );
     m_listView->setEditTriggers( QAbstractItemView::NoEditTriggers );
 }
 
@@ -310,26 +310,26 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
         FlyToEditWidget* widget = new FlyToEditWidget(index, m_widget, parent);
         widget->setFirstFlyTo( m_firstFlyTo );
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
-        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
-        connect( this, SIGNAL( firstFlyToChanged( QPersistentModelIndex ) ), widget, SLOT( setFirstFlyTo( QPersistentModelIndex ) ) );
+        connect( this, SIGNAL(editableChanged(bool)), widget, SLOT(setEditable(bool)) );
+        connect( this, SIGNAL(firstFlyToChanged(QPersistentModelIndex)), widget, SLOT(setFirstFlyTo(QPersistentModelIndex)) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataTourControlType ) {
         TourControlEditWidget* widget = new TourControlEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
-        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
+        connect( this, SIGNAL(editableChanged(bool)), widget, SLOT(setEditable(bool)) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataWaitType ) {
         WaitEditWidget* widget = new WaitEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
-        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
+        connect( this, SIGNAL(editableChanged(bool)), widget, SLOT(setEditable(bool)) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataSoundCueType ) {
         SoundCueEditWidget* widget = new SoundCueEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
-        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
+        connect( this, SIGNAL(editableChanged(bool)), widget, SLOT(setEditable(bool)) );
         return widget;
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
@@ -340,9 +340,9 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
         }
         widget->setDefaultFeatureId( m_defaultFeatureId );
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
-        connect( this, SIGNAL( editableChanged( bool) ), widget, SLOT( setEditable( bool ) ) );
-        connect( this, SIGNAL( featureIdsChanged( QStringList ) ), widget, SLOT( setFeatureIds( QStringList ) ) );
-        connect( this, SIGNAL( defaultFeatureIdChanged( QString ) ), widget, SLOT( setDefaultFeatureId( QString ) ) );
+        connect( this, SIGNAL(editableChanged(bool)), widget, SLOT(setEditable(bool)) );
+        connect( this, SIGNAL(featureIdsChanged(QStringList)), widget, SLOT(setFeatureIds(QStringList)) );
+        connect( this, SIGNAL(defaultFeatureIdChanged(QString)), widget, SLOT(setDefaultFeatureId(QString)) );
         return widget;
 
     }

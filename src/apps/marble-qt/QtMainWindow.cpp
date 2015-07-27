@@ -1098,7 +1098,7 @@ void MainWindow::setupDownloadProgressBar()
     HttpDownloadManager * const downloadManager =
         m_controlView->marbleModel()->downloadManager();
     Q_ASSERT( downloadManager );
-    connect( downloadManager, SIGNAL(progressChanged( int, int )), SLOT(handleProgress( int, int )) );
+    connect( downloadManager, SIGNAL(progressChanged(int,int)), SLOT(handleProgress(int,int)) );
     connect( downloadManager, SIGNAL(jobRemoved()), SLOT(removeProgressItem()) );
 }
 

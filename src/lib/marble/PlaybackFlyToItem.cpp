@@ -68,7 +68,7 @@ void PlaybackFlyToItem::playNext()
         if( m_isPlaying ){
             center( t );
             emit progressChanged( progress );
-            QTimer::singleShot( 5, this, SLOT( playNext() ) );
+            QTimer::singleShot( 5, this, SLOT(playNext()) );
         }
     } else {
         center( 1.0 );

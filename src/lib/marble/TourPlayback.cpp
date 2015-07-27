@@ -75,10 +75,10 @@ TourPlayback::TourPlayback(QObject *parent) :
     QObject(parent),
     d(new TourPlaybackPrivate())
 {
-    connect( &d->m_mainTrack, SIGNAL( centerOn( GeoDataCoordinates ) ), this, SLOT( centerOn( GeoDataCoordinates ) ) );
-    connect( &d->m_mainTrack, SIGNAL( progressChanged( double ) ), this, SIGNAL( progressChanged( double ) ) );
-    connect( &d->m_mainTrack, SIGNAL( finished() ), this, SLOT( stopTour() ) );
-    connect( &d->m_mainTrack, SIGNAL( itemFinished( int ) ), this, SLOT( handleFinishedItem( int ) ) );
+    connect( &d->m_mainTrack, SIGNAL(centerOn(GeoDataCoordinates)), this, SLOT(centerOn(GeoDataCoordinates)) );
+    connect( &d->m_mainTrack, SIGNAL(progressChanged(double)), this, SIGNAL(progressChanged(double)) );
+    connect( &d->m_mainTrack, SIGNAL(finished()), this, SLOT(stopTour()) );
+    connect( &d->m_mainTrack, SIGNAL(itemFinished(int)), this, SLOT(handleFinishedItem(int)) );
 
 
 }
@@ -268,9 +268,9 @@ void TourPlayback::updateTracks()
             AnimatedUpdateTrack *track = new AnimatedUpdateTrack( item );
             track->setDelayBeforeTrackStarts( delay + animatedUpdate->delayedStart() );
             d->m_animatedUpdateTracks.append( track );
-            connect( track, SIGNAL( balloonHidden()), this, SLOT( hideBalloon() ) );
-            connect( track, SIGNAL( balloonShown( GeoDataPlacemark* ) ), this, SLOT( showBalloon( GeoDataPlacemark* ) ) );
-            connect( track, SIGNAL( updated( GeoDataFeature* ) ), this, SIGNAL( updated( GeoDataFeature* ) ) );
+            connect( track, SIGNAL(balloonHidden()), this, SLOT(hideBalloon()) );
+            connect( track, SIGNAL(balloonShown(GeoDataPlacemark*)), this, SLOT(showBalloon(GeoDataPlacemark*)) );
+            connect( track, SIGNAL(updated(GeoDataFeature*)), this, SIGNAL(updated(GeoDataFeature*)) );
             connect( track, SIGNAL(added(GeoDataContainer*,GeoDataFeature*,int)), this, SIGNAL(added(GeoDataContainer*,GeoDataFeature*,int)) );
             connect( track, SIGNAL(removed(const GeoDataFeature*)), this, SIGNAL(removed(const GeoDataFeature*)) );
         }

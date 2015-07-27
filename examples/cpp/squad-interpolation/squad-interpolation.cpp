@@ -209,7 +209,7 @@ void MyPaintLayer::addInterpolatedPoint()
     }
 
     int const timeout = qBound( 0, 150 - 50 * m_index, 150 );
-    QTimer::singleShot ( timeout, this, SLOT ( addInterpolatedPoint() ) );
+    QTimer::singleShot ( timeout, this, SLOT (addInterpolatedPoint()) );
 }
 
 }

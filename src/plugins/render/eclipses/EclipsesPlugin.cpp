@@ -176,7 +176,7 @@ void EclipsesPlugin::initialize()
              SIGNAL(clicked()), this, SLOT(updateEclipses()) );
 
     m_browserDialog = new EclipsesBrowserDialog( marbleModel() );
-    connect( m_browserDialog, SIGNAL(buttonShowClicked(int, int)),
+    connect( m_browserDialog, SIGNAL(buttonShowClicked(int,int)),
              this, SLOT(showEclipse(int,int)) );
     connect( m_browserDialog, SIGNAL(buttonSettingsClicked()),
              m_configDialog, SLOT(show()) );

@@ -72,7 +72,7 @@ RouteSyncManager::RouteSyncManager(CloudSyncManager *cloudSyncManager) :
     connect( &d->m_owncloudBackend, SIGNAL(routeDownloadProgress(qint64,qint64)), d->m_model, SLOT(updateProgress(qint64,qint64)) );
     connect( &d->m_owncloudBackend, SIGNAL(routeDownloaded()), this, SLOT(prepareRouteList()) );
     connect( &d->m_owncloudBackend, SIGNAL(routeDeleted()), this, SLOT(prepareRouteList()) );
-    connect( &d->m_owncloudBackend, SIGNAL(removedFromCache( QString )), this, SLOT(prepareRouteList()) );
+    connect( &d->m_owncloudBackend, SIGNAL(removedFromCache(QString)), this, SLOT(prepareRouteList()) );
 }
 
 RouteSyncManager::~RouteSyncManager()

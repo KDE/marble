@@ -106,8 +106,8 @@ void animatedFlight( MarbleWidget *mapWidget, GeoDataTour* tour )
     TourPlayback* playback = new TourPlayback;
     playback->setMarbleWidget( mapWidget );
     playback->setTour( tour );
-    QObject::connect( playback, SIGNAL( centerOn( GeoDataCoordinates ) ),
-                      mapWidget, SLOT( centerOn( GeoDataCoordinates ) ) );
+    QObject::connect( playback, SIGNAL(centerOn(GeoDataCoordinates)),
+                      mapWidget, SLOT(centerOn(GeoDataCoordinates)) );
 
     double const shift = 1.0 / fps;
     double const duration = playback->duration();

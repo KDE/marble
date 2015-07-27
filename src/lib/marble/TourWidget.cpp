@@ -169,24 +169,24 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
 
     m_tourUi.m_toolBarControl->insertWidget( separator, m_addPrimitiveButton );
 
-    QObject::connect( m_tourUi.m_listView, SIGNAL( activated( QModelIndex ) ), q, SLOT( mapCenterOn( QModelIndex ) ) );
-    QObject::connect( m_addPrimitiveButton, SIGNAL( clicked() ), q, SLOT( addFlyTo() ) );
-    QObject::connect( m_actionAddFlyTo, SIGNAL( triggered() ), q, SLOT( addFlyTo() ) );
-    QObject::connect( m_actionAddWait, SIGNAL( triggered() ), q, SLOT( addWait() ) );
-    QObject::connect( m_actionAddSoundCue, SIGNAL( triggered() ), q, SLOT( addSoundCue() ) );
-    QObject::connect( m_actionAddPlacemark, SIGNAL( triggered() ), q, SLOT( addPlacemark() ) );
-    QObject::connect( m_actionAddRemovePlacemark, SIGNAL( triggered() ), q, SLOT( addRemovePlacemark() ) );
-    QObject::connect( m_actionAddChangePlacemark, SIGNAL( triggered() ), q, SLOT( addChangePlacemark() ) );
-    QObject::connect( m_tourUi.m_actionDelete, SIGNAL( triggered() ), q, SLOT( deleteSelected() ) );
-    QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL( triggered() ), q, SLOT( moveUp() ) );
-    QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL( triggered() ), q, SLOT( moveDown() ) );
-    QObject::connect( m_tourUi.m_actionNewTour, SIGNAL( triggered() ), q, SLOT( createTour() ) );
-    QObject::connect( m_tourUi.m_actionOpenTour, SIGNAL( triggered() ), q, SLOT( openFile() ) );
-    QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL( triggered() ), q, SLOT( saveTour() ) );
-    QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL( triggered() ), q, SLOT( saveTourAs() ) );
-    QObject::connect( m_tourUi.m_actionRecord, SIGNAL(triggered()), q, SLOT( captureTour()) );
-    QObject::connect( &m_playback, SIGNAL( finished() ), q, SLOT( stopPlaying() ) );
-    QObject::connect( &m_playback, SIGNAL( itemFinished( int ) ), q, SLOT( setHighlightedItemIndex( int ) ) );
+    QObject::connect( m_tourUi.m_listView, SIGNAL(activated(QModelIndex)), q, SLOT(mapCenterOn(QModelIndex)) );
+    QObject::connect( m_addPrimitiveButton, SIGNAL(clicked()), q, SLOT(addFlyTo()) );
+    QObject::connect( m_actionAddFlyTo, SIGNAL(triggered()), q, SLOT(addFlyTo()) );
+    QObject::connect( m_actionAddWait, SIGNAL(triggered()), q, SLOT(addWait()) );
+    QObject::connect( m_actionAddSoundCue, SIGNAL(triggered()), q, SLOT(addSoundCue()) );
+    QObject::connect( m_actionAddPlacemark, SIGNAL(triggered()), q, SLOT(addPlacemark()) );
+    QObject::connect( m_actionAddRemovePlacemark, SIGNAL(triggered()), q, SLOT(addRemovePlacemark()) );
+    QObject::connect( m_actionAddChangePlacemark, SIGNAL(triggered()), q, SLOT(addChangePlacemark()) );
+    QObject::connect( m_tourUi.m_actionDelete, SIGNAL(triggered()), q, SLOT(deleteSelected()) );
+    QObject::connect( m_tourUi.m_actionMoveUp, SIGNAL(triggered()), q, SLOT(moveUp()) );
+    QObject::connect( m_tourUi.m_actionMoveDown, SIGNAL(triggered()), q, SLOT(moveDown()) );
+    QObject::connect( m_tourUi.m_actionNewTour, SIGNAL(triggered()), q, SLOT(createTour()) );
+    QObject::connect( m_tourUi.m_actionOpenTour, SIGNAL(triggered()), q, SLOT(openFile()) );
+    QObject::connect( m_tourUi.m_actionSaveTour, SIGNAL(triggered()), q, SLOT(saveTour()) );
+    QObject::connect( m_tourUi.m_actionSaveTourAs, SIGNAL(triggered()), q, SLOT(saveTourAs()) );
+    QObject::connect( m_tourUi.m_actionRecord, SIGNAL(triggered()), q, SLOT(captureTour()) );
+    QObject::connect( &m_playback, SIGNAL(finished()), q, SLOT(stopPlaying()) );
+    QObject::connect( &m_playback, SIGNAL(itemFinished(int)), q, SLOT(setHighlightedItemIndex(int)) );
 
 }
 
@@ -196,14 +196,14 @@ TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
 {
     layout()->setMargin( 0 );
 
-    connect( d->m_tourUi.actionPlay, SIGNAL( triggered() ),
-            this, SLOT( togglePlaying() ) );
-    connect( d->m_tourUi.actionStop, SIGNAL( triggered() ),
-            this, SLOT( stopLooping() ) );
-    connect( d->m_tourUi.actionStop, SIGNAL( triggered() ),
-            this, SLOT( stopPlaying() ) );
-    connect( d->m_tourUi.m_slider, SIGNAL( sliderMoved( int ) ),
-             this, SLOT( handleSliderMove( int ) ) );
+    connect( d->m_tourUi.actionPlay, SIGNAL(triggered()),
+            this, SLOT(togglePlaying()) );
+    connect( d->m_tourUi.actionStop, SIGNAL(triggered()),
+            this, SLOT(stopLooping()) );
+    connect( d->m_tourUi.actionStop, SIGNAL(triggered()),
+            this, SLOT(stopPlaying()) );
+    connect( d->m_tourUi.m_slider, SIGNAL(sliderMoved(int)),
+             this, SLOT(handleSliderMove(int)) );
 
     d->m_tourUi.m_toolBarPlayback->setDisabled( true );
     d->m_tourUi.m_slider->setDisabled( true );
@@ -269,8 +269,8 @@ void TourWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
     d->m_delegate = new TourItemDelegate( d->m_tourUi.m_listView, d->m_widget, this );
-    connect( d->m_delegate, SIGNAL( edited( QModelIndex ) ), this, SLOT( updateDuration() ) );
-    connect( d->m_delegate, SIGNAL( edited( QModelIndex ) ), &d->m_playback, SLOT( updateTracks() ) );
+    connect( d->m_delegate, SIGNAL(edited(QModelIndex)), this, SLOT(updateDuration()) );
+    connect( d->m_delegate, SIGNAL(edited(QModelIndex)), &d->m_playback, SLOT(updateTracks()) );
     d->m_tourUi.m_listView->setItemDelegate( d->m_delegate );
 }
 
@@ -656,8 +656,8 @@ void TourWidgetPrivate::updateRootIndex()
         if ( playlist ) {
             m_tourUi.m_listView->setModel( m_widget->model()->treeModel() );
             m_tourUi.m_listView->setRootIndex( m_widget->model()->treeModel()->index( playlist ) );
-            QObject::connect( m_tourUi.m_listView->selectionModel(), SIGNAL( selectionChanged( QItemSelection, QItemSelection ) ),
-                              q, SLOT( updateButtonsStates() ) );
+            QObject::connect( m_tourUi.m_listView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+                              q, SLOT(updateButtonsStates()) );
         }
         m_playback.setMarbleWidget( m_widget );
         m_playback.setTour( tour );
@@ -665,8 +665,8 @@ void TourWidgetPrivate::updateRootIndex()
         QTime nullTime( 0, 0, 0 );
         QTime time = nullTime.addSecs( m_playback.duration() );
         m_tourUi.m_totalTime->setText( QString("%L1:%L2").arg( time.minute(), 2, 10, QChar('0') ).arg( time.second(), 2, 10, QChar('0') ) );
-        QObject::connect( &m_playback, SIGNAL( progressChanged( double ) ),
-                         q, SLOT( handlePlaybackProgress( double ) ) );
+        QObject::connect( &m_playback, SIGNAL(progressChanged(double)),
+                         q, SLOT(handlePlaybackProgress(double)) );
         q->stopPlaying();
         m_tourUi.m_toolBarPlayback->setEnabled( true );
         bool isPlaybackEmpty = m_playback.mainTrackSize() != 0;

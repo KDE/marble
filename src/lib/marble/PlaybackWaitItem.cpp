@@ -56,7 +56,7 @@ void PlaybackWaitItem::playNext()
     if( t <= 1 ){
         if( m_isPlaying ){
             emit progressChanged( progress );
-            QTimer::singleShot( 20, this, SLOT( playNext() ) );
+            QTimer::singleShot( 20, this, SLOT(playNext()) );
         }
     } else {
         stop();
