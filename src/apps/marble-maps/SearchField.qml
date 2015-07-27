@@ -36,6 +36,7 @@ Item {
         placeholderText: qsTr("Search")
         font.pointSize: 18
         textColor: theme.textColor
+        inputMethodHints: Qt.ImhNoPredictiveText
         onAccepted: root.search(text)
     }
 
