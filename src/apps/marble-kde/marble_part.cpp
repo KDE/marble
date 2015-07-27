@@ -116,8 +116,8 @@ namespace
     const char* DATETIME_STRING = I18N_NOOP( "Time: %1" );
 }
 
-// FIXME: do we need it?
-//K_PLUGIN_FACTORY(MarblePartFactory, registerPlugin<MarblePart>();)
+K_PLUGIN_FACTORY(MarblePartFactory, registerPlugin<MarblePart>();)
+K_EXPORT_PLUGIN(MarblePartFactory("marble"))
 
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantList &arguments )
   : KParts::ReadOnlyPart( parent ),
@@ -1931,3 +1931,4 @@ void MarblePart::changeRecordingState()
 }
 
 #include "moc_marble_part.cpp"
+#include "marble_part.moc"
