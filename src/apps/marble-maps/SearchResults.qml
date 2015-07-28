@@ -8,14 +8,15 @@ Item {
 
     signal itemSelected(int index, string name)
 
-    Theme {
-        id: theme
+    SystemPalette{
+        id: palette
+        colorGroup: SystemPalette.Active
     }
 
     Rectangle {
         id: background
         anchors.fill: parent
-        color: theme.backgroundColor
+        color: palette.window
     }
 
     ListView {
@@ -30,7 +31,7 @@ Item {
             Rectangle {
                 id: delegateBackground
                 anchors.fill: parent
-                color: mouseArea.pressed ? theme.pressedColor : theme.backgroundColor
+                color: mouseArea.pressed ? palette.highlight : palette.window
             }
 
             Text {
@@ -39,7 +40,7 @@ Item {
                 anchors.leftMargin: 10
                 anchors.verticalCenter: parent.verticalCenter
                 font.pointSize: 18
-                color: theme.textColor
+                color: palette.text
                 text: name
             }
 

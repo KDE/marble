@@ -24,14 +24,15 @@ ApplicationWindow {
         id: toolBar
     }
 
-    Theme {
-        id: theme
+    SystemPalette{
+        id: palette
+        colorGroup: SystemPalette.Active
     }
 
     Rectangle {
         id: background
         anchors.fill: parent
-        color: theme.backgroundColor
+        color: palette.window
     }
 
     PinchArea {

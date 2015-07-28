@@ -17,13 +17,14 @@ Item {
         }
     }
 
-    Theme {
-        id: theme
+    SystemPalette{
+        id: palette
+        colorGroup: SystemPalette.Active
     }
 
     Rectangle {
         anchors.fill: parent
-        color: theme.backgroundColor
+        color: palette.window
     }
 
     TextField {
@@ -35,7 +36,7 @@ Item {
         }
         placeholderText: qsTr("Search")
         font.pointSize: 18
-        textColor: theme.textColor
+        textColor: palette.text
         inputMethodHints: Qt.ImhNoPredictiveText
         onAccepted: root.search(text)
     }
@@ -57,7 +58,7 @@ Item {
         style: ButtonStyle {
             background: Rectangle {
                 anchors.fill: parent
-                color: searchButton.pressed ? theme.pressedColor : theme.backgroundColor
+                color: searchButton.pressed ? palette.highlight : palette.window
                 Image {
                     anchors.fill: parent
                     source: searchButton.imageSource
