@@ -513,11 +513,9 @@ namespace Marble
         }
 
         QList<RenderPlugin *> plugins = d->map()->renderPlugins();
-        bool pluginExists = false;
         foreach ( RenderPlugin * plugin, plugins ) {
             if ( plugin->nameId() == "positionMarker" ) {
                 plugin->setVisible(showPositionMarker);
-                pluginExists = true;
                 break;
             }
         }
