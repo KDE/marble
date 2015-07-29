@@ -30,7 +30,8 @@ Item {
         onItemSelected: {
             searchField.query = name;
             backend.updateMap(index);
-            searchResults.visible = false
+            searchResults.visible = false;
+            searchField.focus = true;
         }
     }
 
