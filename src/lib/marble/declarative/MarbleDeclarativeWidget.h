@@ -39,7 +39,6 @@ class ViewportParams;
 }
 
 class DeclarativeDataPlugin;
-class ZoomButtonInterceptor;
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
   *
@@ -237,8 +236,6 @@ private:
     bool m_inputEnabled;
 
     Coordinate m_center;
-
-    ZoomButtonInterceptor *const m_interceptor;
 
     QList<DeclarativeDataPlugin*> m_dataLayers;
 

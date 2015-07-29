@@ -11,7 +11,6 @@
 #include "MarbleDeclarativeWidget.h"
 
 #include "Coordinate.h"
-#include "ZoomButtonInterceptor.h"
 
 #include "GeoDataCoordinates.h"
 #include "MarbleWidget.h"
@@ -45,8 +44,7 @@
 MarbleWidget::MarbleWidget( QGraphicsItem *parent , Qt::WindowFlags flags ) :
     QGraphicsProxyWidget( parent, flags ),
     m_marbleWidget( new Marble::MarbleWidget ),
-    m_inputEnabled( true ),
-    m_interceptor( new ZoomButtonInterceptor( this, this ) )
+    m_inputEnabled( true )
 {
     m_marbleWidget->setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
     QSettings settings;
