@@ -9,25 +9,25 @@
 // Copyright 2012        Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#ifndef QT_MOBILITY_POSITION_PROVIDER_PLUGIN_H
-#define QT_MOBILITY_POSITION_PROVIDER_PLUGIN_H
+#ifndef QT_POSITIONING_POSITION_PROVIDER_PLUGIN_H
+#define QT_POSITIONING_POSITION_PROVIDER_PLUGIN_H
 
 #include "PositionProviderPlugin.h"
 
 namespace Marble
 {
 
-class QtMobilityPositionProviderPluginPrivate;
+class QtPositioningPositionProviderPluginPrivate;
 
-class QtMobilityPositionProviderPlugin: public PositionProviderPlugin
+class QtPositioningPositionProviderPlugin: public PositionProviderPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.QtMobilityPositionProviderPlugin" )
+    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.QtPositioningPositionProviderPlugin" )
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
-    QtMobilityPositionProviderPlugin();
-    virtual ~QtMobilityPositionProviderPlugin();
+    QtPositioningPositionProviderPlugin();
+    virtual ~QtPositioningPositionProviderPlugin();
 
     // Implementing PluginInterface
     virtual QString name() const;
@@ -57,7 +57,7 @@ private Q_SLOTS:
     void update();
 
 private:
-    QtMobilityPositionProviderPluginPrivate* const d;
+    QtPositioningPositionProviderPluginPrivate* const d;
 
 };
 

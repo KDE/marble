@@ -78,6 +78,9 @@ if(ANDROID)
    
    include_directories(SYSTEM "$ENV{ANDROID_NDK}/platforms/$ENV{ANDROID_PLATFORM}/arch-arm/usr/include")
    message(STATUS "Include directories: " "$ENV{ANDROID_NDK}/platforms/$ENV{ANDROID_PLATFORM}/arch-arm/usr/include")
+
+   find_package(Qt5Location)
+   find_package(Qt5Positioning)
 else()
    find_package(Qt5WebKitWidgets)
    find_package(Qt5DBus)

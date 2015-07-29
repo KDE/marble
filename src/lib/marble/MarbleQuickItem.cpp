@@ -23,6 +23,10 @@
 #include <MarbleAbstractPresenter.h>
 #include <AbstractFloatItem.h>
 #include <MarbleInputHandler.h>
+#include <PositionTracking.h>
+#include <PositionProviderPlugin.h>
+#include <PluginManager.h>
+#include <RenderPlugin.h>
 
 namespace Marble
 {
@@ -261,6 +265,26 @@ namespace Marble
         return d->map()->showBackground();
     }
 
+    bool MarbleQuickItem::showPositionMarker() const
+    {
+        QList<RenderPlugin *> plugins = d->map()->renderPlugins();
+        foreach (const RenderPlugin * plugin, plugins) {
+            if (plugin->nameId() == "positionMarker") {
+                return plugin->visible();
+            }
+        }
+        return false;
+    }
+
+    QString MarbleQuickItem::positionProvider() const
+    {
+        if ( this->model()->positionTracking()->positionProviderPlugin() ) {
+            return this->model()->positionTracking()->positionProviderPlugin()->nameId();
+        }
+
+        return "";
+    }
+
     MarbleModel* MarbleQuickItem::model()
     {
         return d->model();
@@ -480,6 +504,45 @@ namespace Marble
 
         d->map()->setShowBackground(showBackground);
         emit showBackgroundChanged(showBackground);
+    }
+
+    void MarbleQuickItem::setShowPositionMarker(bool showPositionMarker)
+    {
+        if (this->showPositionMarker() == showPositionMarker) {
+            return;
+        }
+
+        QList<RenderPlugin *> plugins = d->map()->renderPlugins();
+        bool pluginExists = false;
+        foreach ( RenderPlugin * plugin, plugins ) {
+            if ( plugin->nameId() == "positionMarker" ) {
+                plugin->setVisible(showPositionMarker);
+                pluginExists = true;
+                break;
+            }
+        }
+
+        emit showPositionMarkerChanged(showPositionMarker);
+    }
+
+    void MarbleQuickItem::setPositionProvider(const QString &positionProvider)
+    {
+        QString name = "";
+        if ( this->model()->positionTracking()->positionProviderPlugin() ) {
+            name = this->model()->positionTracking()->positionProviderPlugin()->nameId();
+            if ( name == positionProvider ) {
+                return;
+            }
+        }
+
+        QList<const PositionProviderPlugin*> plugins = model()->pluginManager()->positionProviderPlugins();
+        foreach (const PositionProviderPlugin* plugin, plugins) {
+            if ( plugin->nameId() == positionProvider) {
+                model()->positionTracking()->setPositionProviderPlugin(plugin->newInstance());
+                emit positionProviderChanged(positionProvider);
+                break;
+            }
+        }
     }
 
     QObject *MarbleQuickItem::getEventFilter() const

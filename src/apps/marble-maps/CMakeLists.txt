@@ -19,6 +19,8 @@ target_link_libraries (
       ${Qt5WebKitWidgets_LIBRARIES}
       ${Qt5WebKit_LIBRARIES}
       ${Qt5Sql_LIBRARIES}
+      ${Qt5Location_LIBRARIES}
+      ${Qt5Positioning_LIBRARIES}
       ${MARBLEWIDGET}
       astro)
 

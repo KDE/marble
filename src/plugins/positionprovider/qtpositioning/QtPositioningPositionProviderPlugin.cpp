@@ -9,83 +9,87 @@
 // Copyright 2012        Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-#include "QtMobilityPositionProviderPlugin.h"
+#include "QtPositioningPositionProviderPlugin.h"
 
 #include <QGeoPositionInfoSource>
 #include <QGeoPositionInfo>
 #include <QGeoCoordinate>
 
+#if QT_VERSION < 0x050000
+
 QTM_USE_NAMESPACE
+
+#endif
 
 namespace Marble {
 
-class QtMobilityPositionProviderPluginPrivate
+class QtPositioningPositionProviderPluginPrivate
 {
 public:
-    QtMobilityPositionProviderPluginPrivate();
+    QtPositioningPositionProviderPluginPrivate();
 
     QGeoPositionInfoSource *const m_source;
     PositionProviderStatus m_status;
 };
 
-QtMobilityPositionProviderPluginPrivate::QtMobilityPositionProviderPluginPrivate() :
+QtPositioningPositionProviderPluginPrivate::QtPositioningPositionProviderPluginPrivate() :
     m_source( QGeoPositionInfoSource::createDefaultSource( 0 ) ),
     m_status( PositionProviderStatusAcquiring )
 {
 }
 
-QString QtMobilityPositionProviderPlugin::name() const
+QString QtPositioningPositionProviderPlugin::name() const
 {
-    return tr( "Qt Mobility Position Provider Plugin" );
+    return tr( "Qt Psoitioning Position Provider Plugin" );
 }
 
-QString QtMobilityPositionProviderPlugin::nameId() const
+QString QtPositioningPositionProviderPlugin::nameId() const
 {
-    return "QtMobilityPositionProviderPlugin";
+    return "QtPositioning";
 }
 
-QString QtMobilityPositionProviderPlugin::guiString() const
+QString QtPositioningPositionProviderPlugin::guiString() const
 {
-    return tr( "Qt Mobility Location" );
+    return tr( "Qt Positioning Location" );
 }
 
-QString QtMobilityPositionProviderPlugin::version() const
+QString QtPositioningPositionProviderPlugin::version() const
 {
     return "1.0";
 }
 
-QString QtMobilityPositionProviderPlugin::description() const
+QString QtPositioningPositionProviderPlugin::description() const
 {
-    return tr( "Reports the GPS position of a QtMobility compatible device." );
+    return tr( "Reports the GPS position of a QtPositioning compatible device." );
 }
 
-QString QtMobilityPositionProviderPlugin::copyrightYears() const
+QString QtPositioningPositionProviderPlugin::copyrightYears() const
 {
     return "2011";
 }
 
-QList<PluginAuthor> QtMobilityPositionProviderPlugin::pluginAuthors() const
+QList<PluginAuthor> QtPositioningPositionProviderPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Daniel Marth", "danielmarth@gmx.at" );
 }
 
-QIcon QtMobilityPositionProviderPlugin::icon() const
+QIcon QtPositioningPositionProviderPlugin::icon() const
 {
     return QIcon();
 }
 
-PositionProviderPlugin* QtMobilityPositionProviderPlugin::newInstance() const
+PositionProviderPlugin* QtPositioningPositionProviderPlugin::newInstance() const
 {
-    return new QtMobilityPositionProviderPlugin;
+    return new QtPositioningPositionProviderPlugin;
 }
 
-PositionProviderStatus QtMobilityPositionProviderPlugin::status() const
+PositionProviderStatus QtPositioningPositionProviderPlugin::status() const
 {
     return d->m_status;
 }
 
-GeoDataCoordinates QtMobilityPositionProviderPlugin::position() const
+GeoDataCoordinates QtPositioningPositionProviderPlugin::position() const
 {
     if ( d->m_source == 0 ) {
         return GeoDataCoordinates();
@@ -100,7 +104,7 @@ GeoDataCoordinates QtMobilityPositionProviderPlugin::position() const
                                p.altitude(), GeoDataCoordinates::Degree );
 }
 
-GeoDataAccuracy QtMobilityPositionProviderPlugin::accuracy() const
+GeoDataAccuracy QtPositioningPositionProviderPlugin::accuracy() const
 {
     if ( d->m_source == 0 ) {
         return GeoDataAccuracy();
@@ -119,17 +123,17 @@ GeoDataAccuracy QtMobilityPositionProviderPlugin::accuracy() const
     return GeoDataAccuracy( GeoDataAccuracy::Detailed, horizontal, vertical );
 }
 
-QtMobilityPositionProviderPlugin::QtMobilityPositionProviderPlugin() :
-        d( new QtMobilityPositionProviderPluginPrivate )
+QtPositioningPositionProviderPlugin::QtPositioningPositionProviderPlugin() :
+        d( new QtPositioningPositionProviderPluginPrivate )
 {
 }
 
-QtMobilityPositionProviderPlugin::~QtMobilityPositionProviderPlugin()
+QtPositioningPositionProviderPlugin::~QtPositioningPositionProviderPlugin()
 {
     delete d;
 }
 
-void QtMobilityPositionProviderPlugin::initialize()
+void QtPositioningPositionProviderPlugin::initialize()
 {
     if( d->m_source ) {
         connect( d->m_source, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(update()) );
@@ -138,12 +142,12 @@ void QtMobilityPositionProviderPlugin::initialize()
     }
 }
 
-bool QtMobilityPositionProviderPlugin::isInitialized() const
+bool QtPositioningPositionProviderPlugin::isInitialized() const
 {
     return d->m_source != 0;
 }
 
-qreal QtMobilityPositionProviderPlugin::speed() const
+qreal QtPositioningPositionProviderPlugin::speed() const
 {
     if ( d->m_source == 0 ) {
         return 0.0;
@@ -156,7 +160,7 @@ qreal QtMobilityPositionProviderPlugin::speed() const
     return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::GroundSpeed );
 }
 
-qreal QtMobilityPositionProviderPlugin::direction() const
+qreal QtPositioningPositionProviderPlugin::direction() const
 {
     if ( d->m_source == 0 ) {
         return 0.0;
@@ -169,7 +173,7 @@ qreal QtMobilityPositionProviderPlugin::direction() const
     return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::Direction );
 }
 
-QDateTime QtMobilityPositionProviderPlugin::timestamp() const
+QDateTime QtPositioningPositionProviderPlugin::timestamp() const
 {
     if ( d->m_source == 0 ) {
         return QDateTime();
@@ -178,7 +182,7 @@ QDateTime QtMobilityPositionProviderPlugin::timestamp() const
     return d->m_source->lastKnownPosition().timestamp();
 }
 
-void QtMobilityPositionProviderPlugin::update()
+void QtPositioningPositionProviderPlugin::update()
 {
     PositionProviderStatus newStatus = PositionProviderStatusAcquiring;
     if ( d->m_source ) {
@@ -204,4 +208,4 @@ void QtMobilityPositionProviderPlugin::update()
 
 Q_EXPORT_PLUGIN2( Marble::QtMobilityPositionProviderPlugin, Marble::QtMobilityPositionProviderPlugin )
 
-#include "moc_QtMobilityPositionProviderPlugin.cpp"
+#include "moc_QtPositioningPositionProviderPlugin.cpp"

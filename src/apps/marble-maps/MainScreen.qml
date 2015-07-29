@@ -65,6 +65,8 @@ ApplicationWindow {
             showOtherPlaces: false
             showScaleBar: false
             showBackground: false
+            positionProvider: "QtPositioning"
+            showPositionMarker: true
         }
     }
 

@@ -56,7 +56,8 @@ class Filter(object):
             routing = ['CycleStreetsPlugin', 'OSRMPlugin', 'OpenRouteServicePlugin', 'NominatimReverseGeocodingPlugin', 'RoutingPlugin']
             fileFormats = ['CachePlugin', 'GpxPlugin', 'KmlPlugin', 'OsmPlugin']
             floatItems = ['ElevationProfileFloatItem', 'ElevationProfileMarker', 'PositionMarker', 'ProgressFloatItem', 'License']
-            plugins = search + routing + fileFormats + floatItems
+            positioning = ['QtPositioningPositionProviderPlugin']
+            plugins = search + routing + fileFormats + floatItems + positioning
             whitelist = set(['lib{}.so'.format(plugin) for plugin in plugins])
             masked = [item for item in files if item not in whitelist]
             if len(files) - len(masked) != len(whitelist):

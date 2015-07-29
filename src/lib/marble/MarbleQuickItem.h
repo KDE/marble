@@ -44,6 +44,8 @@ namespace Marble
         Q_PROPERTY(bool showOtherPlaces READ showOtherPlaces WRITE setShowOtherPlaces NOTIFY showOtherPlacesChanged)
         Q_PROPERTY(bool showScaleBar READ showScaleBar WRITE setShowScaleBar NOTIFY showScaleBarChanged)
         Q_PROPERTY(bool showBackground READ showBackground WRITE setShowBackground NOTIFY showBackgroundChanged)
+        Q_PROPERTY(bool showPositionMarker READ showPositionMarker WRITE setShowPositionMarker NOTIFY showPositionMarkerChanged)
+        Q_PROPERTY(QString positionProvider READ positionProvider WRITE setPositionProvider NOTIFY positionProviderChanged)
 
     public:
         MarbleQuickItem(QQuickItem *parent = 0);
@@ -90,6 +92,8 @@ namespace Marble
         void setShowOtherPlaces(bool showOtherPlaces);
         void setShowScaleBar(bool showScaleBar);
         void setShowBackground(bool showBackground);
+        void setShowPositionMarker(bool showPositionMarker);
+        void setPositionProvider(const QString & positionProvider);
 
     // QQuickPaintedItem interface
     public:
@@ -117,6 +121,8 @@ namespace Marble
         bool showOtherPlaces() const;
         bool showScaleBar() const;
         bool showBackground() const;
+        bool showPositionMarker() const;
+        QString positionProvider() const;
 
         MarbleModel* model();
         const MarbleModel* model() const;
@@ -139,6 +145,8 @@ namespace Marble
         void showOtherPlacesChanged(bool showOtherPlaces);
         void showScaleBarChanged(bool showScaleBar);
         void showBackgroundChanged(bool showBackground);
+        void showPositionMarkerChanged(bool showPositionMarker);
+        void positionProviderChanged(const QString & positionProvider);
 
     protected:
         QObject *getEventFilter() const;
