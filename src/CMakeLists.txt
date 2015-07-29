@@ -43,6 +43,9 @@ ENDIF()
 
 add_subdirectory( lib/marble )
 add_subdirectory( lib/astro )
+if (QT5BUILD)
+  add_subdirectory( lib/marble/declarative )
+endif()
 
 add_subdirectory( plugins )
 

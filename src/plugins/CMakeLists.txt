@@ -1,6 +1,5 @@
 if(NOT ANDROID)
     add_subdirectory( designer )
-    add_subdirectory( declarative )
     add_subdirectory( templates )
 endif()
 
