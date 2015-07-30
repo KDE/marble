@@ -68,6 +68,15 @@ ApplicationWindow {
             positionProvider: "QtPositioning"
             showPositionMarker: true
         }
+
+        MouseArea{
+            anchors.fill: parent
+            propagateComposedEvents: true
+            onPressed: {
+                search.focus = true;
+                mouse.accepted = false;
+            }
+        }
     }
 
     Search {

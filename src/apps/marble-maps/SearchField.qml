@@ -8,12 +8,16 @@ Item {
 
     property alias query: field.text
 
+    property alias completionModel: completion.model
+
     signal searchRequested(string query)
+    signal completionRequested(string query)
 
     function search(query) {
         query = query.trim();
         if(query !== "") {
             searchRequested(query);
+            field.focus = false;
         }
     }
 
@@ -24,7 +28,9 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: palette.window
+        color: palette.base
+        border.color: palette.shadow
+        border.width: 1
     }
 
     TextField {
@@ -32,13 +38,14 @@ Item {
         anchors {
             left: parent.left
             right: searchButton.left
-            margins: 10
+            margins: 5
         }
         placeholderText: qsTr("Search")
         font.pointSize: 18
         textColor: palette.text
         inputMethodHints: Qt.ImhNoPredictiveText
         onAccepted: root.search(text)
+        onTextChanged: root.completionRequested(text)
     }
 
     Button {
@@ -58,12 +65,27 @@ Item {
         style: ButtonStyle {
             background: Rectangle {
                 anchors.fill: parent
-                color: searchButton.pressed ? palette.highlight : palette.window
+                color: searchButton.pressed ? palette.highlight : palette.base
                 Image {
                     anchors.fill: parent
                     source: searchButton.imageSource
                 }
             }
+        }
+    }
+
+    Completion {
+        id: completion
+        anchors {
+            top: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+        height: delegateHeight * Math.min(2,count)
+        visible: count > 0 && field.activeFocus
+        onItemSelected: {
+            field.text = name;
+            search(name);
         }
     }
 }

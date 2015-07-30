@@ -14,8 +14,26 @@ Item {
     onVisibleChanged: {
         if( !visible ) {
             searchResults.visible = false;
+            background.visible = false;
             searchField.query = "";
         }
+    }
+
+    SystemPalette{
+        id: palette
+        colorGroup: SystemPalette.Active
+    }
+
+    Rectangle {
+        id: background
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        visible: false
+        color: palette.window
     }
 
     SearchResults {
@@ -23,7 +41,7 @@ Item {
         anchors {
             top: searchField.bottom
             bottom: parent.bottom
-            left: parent.left
+            left: searchField.left
             right: parent.right
         }
         visible: false
@@ -31,7 +49,16 @@ Item {
             searchField.query = name;
             backend.updateMap(index);
             searchResults.visible = false;
+            background.visible = false;
             searchField.focus = true;
+        }
+        MouseArea{
+            anchors.fill: parent
+            propagateComposedEvents: true
+            onPressed: {
+                searchField.focus = true;
+                mouse.accepted = false;
+            }
         }
     }
 
@@ -41,6 +68,8 @@ Item {
         onUpdateSearchResults: {
             searchResults.model = model;
             searchResults.visible = true;
+            background.visible = true;
+            searchField.focus = true;
         }
     }
 
@@ -50,7 +79,10 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
+            margins: Screen.pixelDensity * 3
         }
+        completionModel: backend.completionModel
         onSearchRequested: backend.search(query)
+        onCompletionRequested: backend.setCompletionPrefix(query)
     }
 }

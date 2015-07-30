@@ -6,6 +6,12 @@ Item {
 
     property var model: []
 
+    property color background: palette.window
+
+    property alias count: view.count
+
+    property int delegateHeight: 0
+
     signal itemSelected(int index, string name)
 
     SystemPalette{
@@ -16,7 +22,7 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: palette.window
+        color: root.background
     }
 
     ListView {
@@ -26,12 +32,12 @@ Item {
         model: root.model
         delegate: Item {
             width: view.width
-            height: placemarkName.height + 30
+            height: placemarkName.height + 20
 
             Rectangle {
                 id: delegateBackground
                 anchors.fill: parent
-                color: mouseArea.pressed ? palette.highlight : palette.window
+                color: mouseArea.pressed ? palette.highlight : root.background
             }
 
             Text {
@@ -49,6 +55,12 @@ Item {
                 anchors.fill: parent
                 onClicked: {
                     root.itemSelected(index, name);
+                }
+            }
+
+            Component.onCompleted: {
+                if( root.delegateHeight != height ) {
+                    root.delegateHeight = height;
                 }
             }
         }

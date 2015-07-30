@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
+    <file>Completion.qml</file>
     <file>MainScreen.qml</file>
     <file>SearchResults.qml</file>
     <file>SearchField.qml</file>
