@@ -2,7 +2,7 @@
 
 #include <QPainter>
 
-#ifdef QT_NO_WEBKIT
+#ifdef MARBLE_NO_WEBKIT
 #include <QWidget>
 #else
 #include <QWebView>

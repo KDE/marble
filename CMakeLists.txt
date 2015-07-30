@@ -81,9 +81,14 @@ if(ANDROID)
 
    find_package(Qt5Location)
    find_package(Qt5Positioning)
+   set ( MARBLE_NO_WEBKIT TRUE )
 else()
    find_package(Qt5WebKitWidgets)
    find_package(Qt5DBus)
+
+   if ( NOT Qt5Webkit_FOUND )
+     set ( MARBLE_NO_WEBKIT TRUE )
+   endif()
 endif()
 
 find_package(Qt5Core)
@@ -148,6 +153,9 @@ else()
     # but the library may still be available
     FIND_PACKAGE(QtDeclarative)
     include_directories(${QT_QTDECLARATIVE_INCLUDE_DIR})
+  endif()
+  if ( NOT QT_QTWEBKIT_FOUND )
+    set ( MARBLE_NO_WEBKIT TRUE )
   endif()
 endif()
 
