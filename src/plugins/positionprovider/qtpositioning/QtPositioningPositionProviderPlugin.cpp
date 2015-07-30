@@ -40,7 +40,7 @@ QtPositioningPositionProviderPluginPrivate::QtPositioningPositionProviderPluginP
 
 QString QtPositioningPositionProviderPlugin::name() const
 {
-    return tr( "Qt Psoitioning Position Provider Plugin" );
+    return tr( "Qt Positioning Position Provider Plugin" );
 }
 
 QString QtPositioningPositionProviderPlugin::nameId() const
