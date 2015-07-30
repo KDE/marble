@@ -77,30 +77,27 @@ Item {
             id: routingTypeOptions
             width: parent.width - 20
             ExclusiveGroup { id: routingGroup }
-            property string routingType: checkedButton.routingType
+            property string routingType: "Motorcar"
             RadioButton {
-                id: routingMotorcarButton
                 exclusiveGroup: routingGroup
                 checked: true
                 //iconSource: "qrc:/icons/routing-motorcar.svg"
                 text: "Car"
-                property string routingType: "Motorcar"
+                onCheckedChanged: { if(checked) { routingTypeOptions.routingType = "Motorcar" } }
             }
 
             RadioButton {
-                id: routingBikeButton
                 exclusiveGroup: routingGroup
                 //iconSource: "qrc:/icons/routing-bike.svg"
                 text: "Bike"
-                property string routingType: "Bicycle"
+                onCheckedChanged: { if(checked) { routingTypeOptions.routingType = "Bicycle" } }
             }
 
             RadioButton {
-                id: routingPedestrianButton
                 exclusiveGroup: routingGroup
                 //iconSource: "qrc:/icons/routing-pedestrian.svg"
                 text: "Foot"
-                property string routingType: "Pedestrian"
+                onCheckedChanged: { if(checked) { routingTypeOptions.routingType = "Pedestrian" } }
             }
         }
     }

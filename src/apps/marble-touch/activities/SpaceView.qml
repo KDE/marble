@@ -142,6 +142,7 @@ Item {
 
             Row {
                 id: row
+                spacing: 5
                 Image {
                     id: mapImage
                     source: "image://maptheme/" + mapThemeId
@@ -152,7 +153,8 @@ Item {
                 Label {
                     id: themeLabel
                     text: display
-                    color: index === themeDialog.currentIndex ? "black" : "white"
+                    font.pointSize: 18
+                    color: "black"
                     anchors.verticalCenter: parent.verticalCenter
                 }
             }

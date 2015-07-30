@@ -285,6 +285,7 @@ Item {
                         anchors.right: parent.right
                         anchors.margins: 5
                         visible: !settings.voiceNavigationMuted
+                        text: "Test"
                         iconSource: main.icon( "actions/media-playback-start", 48 );
                         checkable: true
                         checked: false

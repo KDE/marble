@@ -130,7 +130,8 @@ Item {
                     id: themeLabel
                     width: 400
                     text: display
-                    color: index === themeDialog.currentIndex ? "black" : "gray"
+                    font.pointSize: 18
+                    color: "black"
                     anchors.verticalCenter: parent.verticalCenter
                 }
             }

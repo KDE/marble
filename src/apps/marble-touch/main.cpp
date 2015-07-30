@@ -25,8 +25,9 @@ int main( int argc, char *argv[] )
     app.setOrganizationDomain( "kde.org" );
 
     app.setProperty( "NoMStyle", true );
+    const char* pluginUri = "org.kde.edu.marble";
     MarbleDeclarativePlugin plugin;
-    plugin.registerTypes("org.kde.edu.marble");
+    plugin.registerTypes(pluginUri);
 
 
     //MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
@@ -72,7 +73,9 @@ int main( int argc, char *argv[] )
     MarbleGlobal::getInstance()->setProfiles( profiles );
 
     // Create main window based on QML.
-    QQmlApplicationEngine engine(QUrl("qrc:/main.qml"));
+    QQmlApplicationEngine engine;
+    plugin.initializeEngine( &engine, pluginUri );
+    engine.load(QUrl("qrc:/main.qml"));
 
     return app.exec();
 }
