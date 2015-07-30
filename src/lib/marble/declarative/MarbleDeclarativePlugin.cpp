@@ -45,10 +45,8 @@
   #include <QQmlContext>
 #endif
 
-void MarbleDeclarativePlugin::registerTypes( const char * )
+void MarbleDeclarativePlugin::registerTypes( const char *uri )
 {
-    const char* uri = "org.kde.edu.marble";
-
     //@uri org.kde.edu.marble
     qmlRegisterType<Coordinate>( uri, 0, 11, "Coordinate" );
     qmlRegisterType<Placemark>( uri, 0, 11, "Placemark" );
@@ -57,7 +55,7 @@ void MarbleDeclarativePlugin::registerTypes( const char * )
     qmlRegisterType<Tracking>( uri, 0, 11, "Tracking" );
     qmlRegisterType<Routing>( uri, 0, 11, "Routing" );
     qmlRegisterType<Navigation>( uri, 0, 11, "Navigation" );
-    qmlRegisterType<Search>( uri, 0, 11, "Search" );
+    //qmlRegisterType<Search>( uri, 0, 11, "Search" );
     qmlRegisterType<CloudSync>( uri, 0, 11, "CloudSync" );
     qmlRegisterType<Marble::MergeItem>( uri, 0, 11, "MergeItem" );
     qmlRegisterType<RouteRequestModel>( uri, 0, 11, "RouteRequestModel" );
