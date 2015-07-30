@@ -17,12 +17,7 @@
 #include "ViewportParams.h"
 #include "AutoNavigation.h"
 
-#if QT_VERSION < 0x050000
-  #include <QDeclarativeItem>
-  typedef QDeclarativeItem QQuickItem;
-#else
-  #include <QQuickItem>
-#endif
+#include <QQuickItem>
 
 Tracking::Tracking( QObject* parent) : QObject( parent ),
     m_showTrack( true ),

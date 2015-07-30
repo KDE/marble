@@ -42,9 +42,7 @@ public:
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
     int count() const;
 
-#if QT_VERSION >= 0x050000
     QHash<int, QByteArray> roleNames() const;
-#endif
 
     Q_INVOKABLE QString name( const QString &id ) const;
 
@@ -74,9 +72,7 @@ private:
 
     MapThemeFilters m_mapThemeFilters;
 
-#if QT_VERSION >= 0x050000
     QHash<int, QByteArray> m_roleNames;
-#endif
 };
 
 #endif

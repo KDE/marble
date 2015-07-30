@@ -16,14 +16,7 @@
 #include "SearchRunnerManager.h"
 #include "ViewportParams.h"
 
-#if QT_VERSION < 0x050000
-  #include <QDeclarativeContext>
-  typedef QDeclarativeItem QQuickItem;
-  typedef QDeclarativeContext QQmlContext;
-  typedef QDeclarativeComponent QQmlComponent;
-#else
-  #include <QQmlContext>
-#endif
+#include <QQmlContext>
 
 Search::Search( QObject* parent ) : QObject( parent ),
     m_marbleWidget( 0 ), m_runnerManager( 0 ),

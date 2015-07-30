@@ -17,11 +17,7 @@
 
 #include <QObject>
 #include <QAbstractListModel>
-#if QT_VERSION < 0x050000
-  #include <QDeclarativeComponent>
-#else
-  #include <QQmlComponent>
-#endif
+#include <QQmlComponent>
 
 /**
   * Wraps a GeoDataPlacemark for QML access

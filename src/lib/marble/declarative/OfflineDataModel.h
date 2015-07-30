@@ -39,9 +39,7 @@ public:
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
     int count() const;
 
-#if QT_VERSION >= 0x050000
     QHash<int, QByteArray> roleNames() const;
-#endif
 
     virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
 
@@ -86,9 +84,7 @@ private:
 
     VehicleTypes m_vehicleTypeFilter;
 
-#if QT_VERSION >= 0x050000
     QHash<int, QByteArray> m_roleNames;
-#endif
 };
 
 #endif

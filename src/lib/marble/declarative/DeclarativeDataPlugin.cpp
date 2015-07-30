@@ -23,10 +23,6 @@
 #include <QScriptValue>
 #include <QScriptValueIterator>
 
-#if QT_VERSION < 0x050000
-  typedef QDeclarativeComponent QQmlComponent;
-#endif
-
 using namespace Marble;
 
 class DeclarativeDataPluginPrivate {
@@ -124,11 +120,7 @@ void DeclarativeDataPluginPrivate::parseObject( QObject *object )
     }
 
     for( int i = 0; i < meta->methodCount(); ++i ) {
-#if QT_VERSION < 0x050000
-        if( qstrcmp( meta->method(i).signature(), "get(int)" ) == 0 ) {
-#else
         if( meta->method(i).methodSignature() == "get(int)" ) {
-#endif
             for( int j=0; j < count; ++j ) {
                 QScriptValue value;
                 meta->method(i).invoke( object, Qt::AutoConnection, Q_RETURN_ARG( QScriptValue , value), Q_ARG( int, j ) );
