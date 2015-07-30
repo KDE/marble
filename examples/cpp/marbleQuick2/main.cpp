@@ -12,8 +12,9 @@
 #include <QtQuick/QQuickView>
 #include <QFileInfo>
 
-#include <marble/MarbleQuickItem.h>
+#include <marble/declarative/MarbleQuickItem.h>
 #include <marble/MarbleMap.h>
+#include <marble/declarative/MarbleDeclarativePlugin.h>
 
 using namespace Marble;
 
@@ -67,7 +68,8 @@ class MapTestWrap : public QQuickView
 public:
     void start()
     {
-        qmlRegisterType<MarbleDemoItem>("MarbleItem", 1, 0, "MarbleItem");
+        MarbleDeclarativePlugin plugin;
+        plugin.registerTypes("org.kde.edu.marble");
         setSource(QUrl("qrc:/main.qml"));
 
         if(status()!=QQuickView::Ready)

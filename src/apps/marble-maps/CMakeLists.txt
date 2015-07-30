@@ -1,4 +1,4 @@
-set(marble_SRCS main.cpp SearchBackend.cpp)
+set(marble_SRCS main.cpp)
 qt5_add_resources(marble_QRCS MarbleMaps.qrc)
 
 if (ANDROID)
@@ -22,6 +22,7 @@ target_link_libraries (
       ${Qt5Location_LIBRARIES}
       ${Qt5Positioning_LIBRARIES}
       ${MARBLEWIDGET}
+      marbledeclarative
       astro)
 
 FILE(GLOB QML_FILES *.qml)

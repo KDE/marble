@@ -32,7 +32,10 @@
 #include "routing/VoiceNavigationModel.h"
 #include "AbstractFloatItem.h"
 #include "RenderPlugin.h"
+#include "MarblePlacemarkModel.h"
 #include "DeclarativeDataPlugin.h"
+#include "SearchBackend.h"
+#include "MarbleQuickItem.h"
 
 #if QT_VERSION < 0x050000
   #include <qdeclarative.h>
@@ -48,31 +51,35 @@
 void MarbleDeclarativePlugin::registerTypes( const char *uri )
 {
     //@uri org.kde.edu.marble
-    qmlRegisterType<Coordinate>( uri, 0, 11, "Coordinate" );
-    qmlRegisterType<Placemark>( uri, 0, 11, "Placemark" );
-    qmlRegisterType<PositionSource>( uri, 0, 11, "PositionSource" );
-    qmlRegisterType<Bookmarks>( uri, 0, 11, "Bookmarks" );
-    qmlRegisterType<Tracking>( uri, 0, 11, "Tracking" );
-    qmlRegisterType<Routing>( uri, 0, 11, "Routing" );
-    qmlRegisterType<Navigation>( uri, 0, 11, "Navigation" );
-    //qmlRegisterType<Search>( uri, 0, 11, "Search" );
-    qmlRegisterType<CloudSync>( uri, 0, 11, "CloudSync" );
-    qmlRegisterType<Marble::MergeItem>( uri, 0, 11, "MergeItem" );
-    qmlRegisterType<RouteRequestModel>( uri, 0, 11, "RouteRequestModel" );
-    qmlRegisterType<Settings>( uri, 0, 11, "Settings" );
+    qmlRegisterType<Coordinate>( uri, 0, 20, "Coordinate" );
+    qmlRegisterType<Placemark>( uri, 0, 20, "Placemark" );
+    qmlRegisterType<PositionSource>( uri, 0, 20, "PositionSource" );
+    qmlRegisterType<Bookmarks>( uri, 0, 20, "Bookmarks" );
+    qmlRegisterType<Tracking>( uri, 0, 20, "Tracking" );
+    qmlRegisterType<Routing>( uri, 0, 20, "Routing" );
+    qmlRegisterType<Navigation>( uri, 0, 20, "Navigation" );
+    //qmlRegisterType<Search>( uri, 0, 20, "Search" );
+    qmlRegisterType<CloudSync>( uri, 0, 20, "CloudSync" );
+    qmlRegisterType<Marble::MergeItem>( uri, 0, 20, "MergeItem" );
+    qmlRegisterType<RouteRequestModel>( uri, 0, 20, "RouteRequestModel" );
+    qmlRegisterType<Settings>( uri, 0, 20, "Settings" );
 
-    qmlRegisterType<MarbleWidget>( uri, 0, 11, "MarbleWidget" );
-    qmlRegisterType<MapThemeManager>( uri, 0, 11, "MapThemeManager" );
-    qmlRegisterType<Marble::SpeakersModel>( uri, 0, 11, "SpeakersModel" );
-    qmlRegisterType<Marble::VoiceNavigationModel>( uri, 0, 11, "VoiceNavigation" );
-    qmlRegisterType<Marble::NewstuffModel>( uri, 0, 11, "NewstuffModel" );
-    qmlRegisterType<OfflineDataModel>( uri, 0, 11, "OfflineDataModel" );
-    qmlRegisterType<MapThemeModel>( uri, 0, 11, "MapThemeModel" );
-    qmlRegisterType<DeclarativeDataPlugin>( uri, 0, 11, "DataLayer" );
+    qmlRegisterType<MarbleWidget>( uri, 0, 20, "MarbleWidget" );
+    qmlRegisterType<MapThemeManager>( uri, 0, 20, "MapThemeManager" );
+    qmlRegisterType<Marble::SpeakersModel>( uri, 0, 20, "SpeakersModel" );
+    qmlRegisterType<Marble::VoiceNavigationModel>( uri, 0, 20, "VoiceNavigation" );
+    qmlRegisterType<Marble::NewstuffModel>( uri, 0, 20, "NewstuffModel" );
+    qmlRegisterType<OfflineDataModel>( uri, 0, 20, "OfflineDataModel" );
+    qmlRegisterType<MapThemeModel>( uri, 0, 20, "MapThemeModel" );
+    qmlRegisterType<DeclarativeDataPlugin>( uri, 0, 20, "DataLayer" );
 
-    qmlRegisterUncreatableType<BookmarksModel>( uri, 0, 11, "BookmarksModel", "Do not create" );
-    qmlRegisterUncreatableType<Marble::AbstractFloatItem>( uri, 0, 11, "FloatItem", "Do not create" );
-    qmlRegisterUncreatableType<Marble::RenderPlugin>( uri, 0, 11, "RenderPlugin", "Do not create" );
+    qmlRegisterType<Marble::SearchBarBackend>(uri, 0, 20, "SearchBackend");
+    qmlRegisterType<Marble::MarbleQuickItem>(uri, 0, 20, "MarbleItem");
+
+    qmlRegisterUncreatableType<Marble::MarblePlacemarkModel>(uri, 1, 0, "MarblePlacemarkModel", "MarblePlacemarkModel is not instantiable");
+    qmlRegisterUncreatableType<BookmarksModel>( uri, 0, 20, "BookmarksModel", "Do not create" );
+    qmlRegisterUncreatableType<Marble::AbstractFloatItem>( uri, 0, 20, "FloatItem", "Do not create" );
+    qmlRegisterUncreatableType<Marble::RenderPlugin>( uri, 0, 20, "RenderPlugin", "Do not create" );
 }
 
 void MarbleDeclarativePlugin::initializeEngine( QQmlEngine *engine, const char *)

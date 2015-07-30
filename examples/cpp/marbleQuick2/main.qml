@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import MarbleItem 1.0
+import org.kde.edu.marble 0.20
 
 Rectangle {
     id: mainRect

@@ -8,33 +8,34 @@ INCLUDE_DIRECTORIES(
     ${Qt5Quick_INCLUDE_DIRS}
 )
 
-set( marbleplugin_SRCS
+add_library( marbledeclarative SHARED
     Bookmarks.cpp
+    CloudSync.cpp
     Coordinate.cpp
     DeclarativeDataPluginModel.cpp
     DeclarativeDataPlugin.cpp
     DeclarativeDataPluginItem.cpp
     DeclarativeMapThemeManager.cpp
+    MapThemeModel.cpp
     MarbleDeclarativeObject.cpp
     MarbleDeclarativePlugin.cpp
     MarbleDeclarativeWidget.cpp
+    MarbleQuickItem.cpp
     Placemark.cpp
     PositionSource.cpp
+    Search.cpp
+    SearchBackend.cpp
     Tracking.cpp
     Routing.cpp
     Navigation.cpp
     OfflineDataModel.cpp
-    Search.cpp
     RouteRequestModel.cpp
     Settings.cpp
-    MapThemeModel.cpp
-    CloudSync.cpp
 )
 
 marble_add_project_resources(qmldir)
 
-add_library( MarbleDeclarative ${marbleplugin_SRCS} )
-target_link_libraries( MarbleDeclarative
+target_link_libraries( marbledeclarative
     ${QT_QTCORE_LIBRARY}
     ${QT_QTDBUS_LIBRARY}
     ${QT_QTGUI_LIBRARY}
@@ -43,13 +44,13 @@ target_link_libraries( MarbleDeclarative
     ${QT_QTNETWORK_LIBRARY}
     ${QT_QTMAIN_LIBRARY}
     ${QT_QTDECLARATIVE_LIBRARY}
-    ${${_target_name}_LIBS}
+    ${Qt5Quick_LIBRARIES}
     ${MARBLEWIDGET}
 )
 
-set_target_properties( MarbleDeclarative PROPERTIES
+set_target_properties( marbledeclarative PROPERTIES
     INSTALL_RPATH_USE_LINK_PATH TRUE
     SKIP_BUILD_RPATH TRUE
     BUILD_WITH_INSTALL_RPATH TRUE
 )
-install( TARGETS MarbleDeclarative LIBRARY DESTINATION lib${LIB_SUFFIX} )
+install( TARGETS marbledeclarative LIBRARY DESTINATION lib${LIB_SUFFIX} )

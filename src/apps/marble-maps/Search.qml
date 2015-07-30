@@ -2,7 +2,7 @@ import QtQuick 2.3
 import QtQuick.Controls 1.4
 import QtQuick.Window 2.2
 
-import Marble 1.0
+import org.kde.edu.marble 0.20
 
 Item {
     id: root

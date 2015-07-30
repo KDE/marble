@@ -48,10 +48,6 @@ set(GENERIC_LIB_SOVERSION "22")
 # link_directories (${QT_LIBRARY_DIR})
 ########### next target ###############
 
-if( QT5BUILD )
-    set(marblequick_SRCS MarbleQuickItem.cpp)
-endif()
-
 if(MARBLE_NO_WEBKIT)
 add_definitions(-DMARBLE_NO_WEBKIT)
 endif()
@@ -61,7 +57,6 @@ set(marblewidget_SRCS
     ${graphicsview_SRCS}
     ${layers_SRCS}
     ${osm_SRCS}
-    ${marblequick_SRCS}
     blendings/Blending.cpp
     blendings/BlendingAlgorithms.cpp
     blendings/BlendingFactory.cpp
@@ -444,10 +439,6 @@ endif()
 
 ########### install files ###############
 
-if( QT5BUILD )
-    set(marblequick_HDRS MarbleQuickItem.h)
-endif()
-
 if (MARBLE_NO_WEBKIT)
     set(marble_WebKit
         NullMarbleWebView.h
@@ -462,7 +453,6 @@ endif()
 
 install( FILES
     ${graphicsview_HDRS}
-    ${marblequick_HDRS}
     ${marble_WebKit}
     AutoNavigation.h
     BookmarkManager.h

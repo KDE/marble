@@ -11,18 +11,15 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 
-#include "MarbleQuickItem.h"
-#include "MarblePlacemarkModel.h"
-#include "SearchBackend.h"
-
-using namespace Marble;
+#include "declarative/MarbleDeclarativePlugin.h"
 
 int main(int argc, char ** argv)
 {
     QApplication app(argc, argv);
-    qmlRegisterUncreatableType<MarblePlacemarkModel>("Marble", 1, 0, "MarblePlacemarkModel", "MarblePlacemarkModel is not instantiable");
-    qmlRegisterType<SearchBarBackend>("Marble", 1, 0, "SearchBackend");
-    qmlRegisterType<MarbleQuickItem>("Marble", 1, 0, "MarbleItem");
+
+    MarbleDeclarativePlugin declarativePlugin;
+    declarativePlugin.registerTypes("org.kde.edu.marble");
+
     QQmlApplicationEngine engine(QUrl("qrc:/MainScreen.qml"));
 
     return app.exec();

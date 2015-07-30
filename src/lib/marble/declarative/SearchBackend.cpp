@@ -87,3 +87,5 @@ void SearchBarBackend::searchFinished(QAbstractItemModel *result)
     m_placemarkModel = qobject_cast<MarblePlacemarkModel*>(result);
     emit updateSearchResults(m_placemarkModel);
 }
+
+#include "moc_SearchBackend.cpp"
