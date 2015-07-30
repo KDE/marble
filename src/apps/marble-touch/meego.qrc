@@ -51,9 +51,6 @@
         <file>CloudSyncPage.qml</file>
         <file>MarbleTouch.qml</file>
         <file>PositionIndicator.qml</file>
-        <file>FileDialog.qml</file>
-        <file>FileOpenDialog.qml</file>
-        <file>FileSaveDialog.qml</file>
         <file>PlacemarkEditor.qml</file>
         <file>RouteEditor.qml</file>
         <file>SearchField.qml</file>

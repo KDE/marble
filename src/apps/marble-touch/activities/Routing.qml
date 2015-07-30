@@ -11,6 +11,7 @@ import QtQuick 2.3
 import org.kde.edu.marble 0.20
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.2
+import QtQuick.Dialogs 1.2
 import ".."
 
 /*
@@ -184,7 +185,7 @@ Item {
         }
     }
 
-    FileSaveDialog {
+    FileDialog {
         id: saveRouteDialog
         folder: "/home/user/MyDocs"
         nameFilters: [ "*.kml" ]
@@ -192,7 +193,7 @@ Item {
         onAccepted: { marbleWidget.routing.saveRoute( folder + "/" + filename ); }
     }
 
-    FileOpenDialog {
+    FileDialog {
         id: openRouteDialog
         folder: "/home/user/MyDocs"
         nameFilters: [ "*.kml", "*.gpx" ]
