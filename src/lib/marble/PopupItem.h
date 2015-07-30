@@ -19,7 +19,7 @@
 
 #include "BillboardGraphicsItem.h"
 
-#ifdef QT_NO_WEBKIT
+#ifdef MARBLE_NO_WEBKIT
 #include "ui_NullWebPopupWidget.h"
 #else
 #include "ui_WebPopupWidget.h"

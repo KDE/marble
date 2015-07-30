@@ -52,8 +52,8 @@ if( QT5BUILD )
     set(marblequick_SRCS MarbleQuickItem.cpp)
 endif()
 
-if(QT_NO_WEBKIT)
-add_definitions(-DQT_NO_WEBKIT)
+if(MARBLE_NO_WEBKIT)
+add_definitions(-DMARBLE_NO_WEBKIT)
 endif()
 
 set(marblewidget_SRCS
@@ -293,7 +293,7 @@ set(marblewidget_SRCS
 )
 
 
-if (QT_NO_WEBKIT)
+if (MARBLE_NO_WEBKIT)
     LIST(APPEND marblewidget_SRCS
         NullMarbleWebView.cpp
         NullTinyWebBrowser.cpp
@@ -352,7 +352,7 @@ set (marblewidget_UI
     FormattedTextWidget.ui
     ElevationWidget.ui
 )
-if (QT_NO_WEBKIT)
+if (MARBLE_NO_WEBKIT)
     LIST(APPEND marblewidget_UI
         NullLegendWidget.ui
         NullWebPopupWidget.ui
@@ -448,7 +448,7 @@ if( QT5BUILD )
     set(marblequick_HDRS MarbleQuickItem.h)
 endif()
 
-if (QT_NO_WEBKIT)
+if (MARBLE_NO_WEBKIT)
     set(marble_WebKit
         NullMarbleWebView.h
         NullTinyWebBrowser.h
