@@ -6,18 +6,20 @@
 //
 // Copyright 2012 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.0
-import QtMultimediaKit 1.1
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 
-Page {
+Item {
     id: preferencesPage
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-previous-view", 48 );
-            onClicked: pageStack.pop()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
     }
 
@@ -37,10 +39,6 @@ Page {
         highlightMoveDuration: 200
         spacing: 10
         currentIndex: -1
-    }
-
-    ScrollDecorator {
-        flickableItem: themeView
     }
 
     Component {
@@ -188,7 +186,6 @@ Page {
                         anchors.verticalCenter: progressBar.verticalCenter
                         visible: delegateRoot.installing
                         width: 40
-                        flat: true
                         iconSource: main.icon( "actions/dialog-cancel", 32 );
                         onClicked: {
                             progressBar.indeterminate = true

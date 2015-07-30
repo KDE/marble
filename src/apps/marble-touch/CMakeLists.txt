@@ -18,23 +18,22 @@ set( my_SRCS
   main.cpp
  )
 
-FILE (GLOB QML_FILES *.qml activities/*.qml plasma/*.qml harmattan/*.qml)
+FILE (GLOB QML_FILES *.qml activities/*.qml)
 marble_add_project_resources(${QML_FILES})
 
-qt_add_resources(my_SRCS meego.qrc harmattan/harmattan.qrc)
+qt_add_resources(my_SRCS meego.qrc)
 add_executable( marble-touch ${my_SRCS} )
-if (QT4BUILD)
-  target_link_libraries( marble-touch ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTMAIN_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${MARBLEWIDGET} )
-else() 
-  target_link_libraries (
+target_link_libraries (
     marble-touch
     ${Qt5Core_LIBRARIES}
     ${Qt5Widgets_LIBRARIES}
     ${Qt5Network_LIBRARIES}
     ${Qt5WebKitWidgets_LIBRARIES}
     ${Qt5WebKit_LIBRARIES}
-    ${MARBLEWIDGET})
-endif()
+    ${MARBLEWIDGET}
+    marbledeclarative
+)
+
 install( TARGETS marble-touch RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
 if(APPS_INSTALL_DIR)
   install(PROGRAMS marble-touch.desktop DESTINATION ${APPS_INSTALL_DIR})

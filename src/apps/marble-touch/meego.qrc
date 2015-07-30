@@ -45,6 +45,7 @@
         <file>icons/placemark.svg</file>
         <file>MapThemeSelectionPage.qml</file>
         <file>MapThemePage.qml</file>
+        <file>MarbleWindow.qml</file>
         <file>PreferencesPage.qml</file>
         <file>OfflineDataPage.qml</file>
         <file>CloudSyncPage.qml</file>
@@ -56,6 +57,8 @@
         <file>PlacemarkEditor.qml</file>
         <file>RouteEditor.qml</file>
         <file>SearchField.qml</file>
+        <file>SelectionDialog.qml</file>
         <file>ViaPointEditor.qml</file>
+        <file>MarbleSettings.qml</file>
     </qresource>
 </RCC>

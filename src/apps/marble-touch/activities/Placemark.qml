@@ -6,9 +6,9 @@
 //
 // Copyright 2012 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.0
+import QtQuick 2.3
 import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import org.kde.edu.marble 0.20
 import ".."
 
 Page {

@@ -12,4 +12,8 @@
  */
 MarbleWindow {
     id: main
+
+    visible: true
+    width: 600
+    height: 800
 }

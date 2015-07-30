@@ -6,70 +6,24 @@
 //
 // Copyright 2012 Utku Aydın <utkuaydin34@gmail.com>
 
-import QtQuick 1.0
-import QtWebKit 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
+import org.kde.edu.marble 0.20
 import ".."
 
-Page {
+Item {
     id: exploreActivityPage
     anchors.fill: parent
 
     property bool horizontal: width / height > 1.20
     
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.navigationMenu.open()
-        }
-
-        MarbleToolIcon {
-            id: menuIcon
-            iconSource: main.icon( "actions/show-menu", 48 );
-            onClicked: {
-                if (main.components === "plasma") {
-                    pageMenu.visualParent = menuIcon
-                }
-                pageMenu.open()
-            }
-        }
-    }
-
-    Menu {
-        id: pageMenu
-        content: MarbleMenuLayout {
-            MenuItem {
-                text: "Login"
-                onClicked: pageStack.push(authPage)
-            }
-        }
-    }
-    
-    Page {
-        id: authPage
-        WebView {
-            id: authWebView
-            anchors.fill: parent
-
-            property string authUrl: "https://foursquare.com/oauth2/authenticate?response_type=token"
-            property string redirectUri: "http://edu.kde.org/marble/dummy"
-            property string clientId: "YPRWSYFW1RVL4PJQ2XS5G14RTOGTHOKZVHC1EP5KCCCYQPZF"
-
-            url: authUrl + "&redirect_uri=" + redirectUri + "&client_id=" + clientId
-            onLoadFinished: {
-                if( marbleWidget.renderPlugin( "foursquare" ).storeAccessToken( url ) ) {
-                    stop.trigger()
-                    authButton.checked = false
-                }
-            }
-        }
-
-        tools: ToolBarLayout {
-            MarbleToolIcon {
-                iconSource: main.icon( "actions/go-previous-view", 48 );
-                onClicked: pageStack.pop()
-            }
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
     }
 
@@ -104,10 +58,9 @@ Page {
         }
     }
 
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
-            mapContainer.embedMarbleWidget()
-        }
+    Component.onCompleted: {
+        mapContainer.embedMarbleWidget()
+        mainWindow.toolBar.replaceWith(toolBar)
     }
     
     Component {

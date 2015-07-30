@@ -6,136 +6,98 @@
 //
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.1
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 import ".."
 
 /*
  * Page for the space view activity.
  */
-Page {
+Item {
     id: spaceViewActivityPage
     anchors.fill: parent
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
 
-        ButtonRow {
-            Button {
+        RowLayout {
+            ExclusiveGroup { id: planetGroup }
+
+            RadioButton {
                 id: earthButton
+                exclusiveGroup: planetGroup
                 text: "Earth"
+                checked: true
                 onCheckedChanged: { if ( checked ) spaceViewActivityPage.setEarthSettings() }
             }
-            Button {
+            RadioButton {
+                exclusiveGroup: planetGroup
                 text: "Moon"
                 onCheckedChanged: { if ( checked ) settings.mapTheme = "moon/clementine/clementine.dgml" }
             }
-            Button {
-                text: "More"
+            RadioButton {
+                exclusiveGroup: planetGroup
+                text: "Other..."
                 onCheckedChanged: { if ( checked ) themeDialog.open() }
-
-                MapThemeModel {
-                    id: mapThemeModel
-                    mapThemeFilter: MapThemeModel.Terrestrial
-                }
-
-                SelectionDialog {
-                    id: themeDialog
-                    titleText: "Select Map Theme"
-                    selectedIndex: mapThemeModel.indexOf(settings.mapTheme)
-                    model: mapThemeModel
-                    delegate:
-                        Rectangle {
-                        id: delegate
-                        width: row.width
-                        height: row.height
-
-                        color: index === themeDialog.selectedIndex ? "lightsteelblue" : "#00ffffff"
-
-                        Row {
-                            id: row
-                            Image {
-                                id: mapImage
-                                source: "image://maptheme/" + mapThemeId
-                                smooth: true
-                                width: 68
-                                height: 68
-                            }
-                            Label {
-                                id: themeLabel
-                                text: display
-                                color: index === themeDialog.selectedIndex ? "black" : "white"
-                                anchors.verticalCenter: parent.verticalCenter
-                            }
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                themeDialog.selectedIndex = index
-                                themeDialog.accept()
-                                delayedMapThemeSwitch.theme = mapThemeId
-                                delayedMapThemeSwitch.start()
-                            }
-                        }
-                    }
-                }
             }
         }
 
-        MarbleToolIcon {
-            id: menuIcon
-            iconSource: main.icon( "actions/show-menu", 48 );
-            visible: earthButton.checked
-            onClicked: {
-                if (main.components === "plasma") {
-                    pageMenu.visualParent = menuIcon
-                }
-                pageMenu.open()
+        ToolButton {
+            id: satellitesSwitch
+            text: "Satellites"
+            checkable: true
+            checked: false
+            onCheckedChanged: spaceViewActivityPage.setEarthSettings()
+        }
+
+        ToolButton {
+            id: cloudsSwitch
+            text: "Clouds"
+            checkable: true
+            checked: false
+            onCheckedChanged: spaceViewActivityPage.setEarthSettings()
+        }
+
+        RowLayout {
+            ExclusiveGroup { id: lightingGroup }
+
+            RadioButton {
+                id: dayView
+                text: "Day"
+                checked: true
+                exclusiveGroup: lightingGroup
+                onCheckedChanged: spaceViewActivityPage.setEarthSettings()
+            }
+
+            RadioButton {
+                id: nightView
+                text: "Night"
+                checked: false
+                exclusiveGroup: lightingGroup
+                onCheckedChanged: spaceViewActivityPage.setEarthSettings()
+            }
+
+            RadioButton {
+                id: realtimeView
+                text: "Realtime"
+                checked: false
+                exclusiveGroup: lightingGroup
+                onCheckedChanged: spaceViewActivityPage.setEarthSettings()
             }
         }
+        Item { Layout.fillWidth: true }
     }
 
-    Menu {
-        id: pageMenu
-        content: MarbleMenuLayout {
-            MenuItemSwitch {
-                id: satellitesSwitch
-                text: "Satellites"
-                checked: false
-                onCheckedChanged: spaceViewActivityPage.setEarthSettings()
-            }
-
-            MenuItemSwitch {
-                id: cloudsSwitch
-                text: "Clouds"
-                checked: false
-                onCheckedChanged: spaceViewActivityPage.setEarthSettings()
-            }
-
-            MenuItem {
-                id: dayNightMode
-                text: "Day/Night"
-                onClicked: dayNightInput.open()
-
-                SelectionDialog {
-                    id: dayNightInput
-                    titleText: "Select sun light view"
-                    selectedIndex: 0
-                    model: ListModel {
-                        ListElement { name: "Day" }
-                        ListElement { name: "Night" }
-                        ListElement { name: "Realistic" }
-                    }
-
-                    onAccepted: spaceViewActivityPage.setEarthSettings()
-                }
-            }
-        }
+    MapThemeModel {
+        id: mapThemeModel
+        mapThemeFilter: MapThemeModel.Terrestrial
     }
 
     Item {
@@ -165,6 +127,48 @@ Page {
         }
     }
 
+    SelectionDialog {
+        id: themeDialog
+        titleText: "Select Map Theme"
+        currentIndex: mapThemeModel.indexOf(settings.mapTheme)
+        model: mapThemeModel
+        delegate:
+            Rectangle {
+            id: delegate
+            width: row.width
+            height: row.height
+
+            color: index === themeDialog.currentIndex ? "lightsteelblue" : "#00ffffff"
+
+            Row {
+                id: row
+                Image {
+                    id: mapImage
+                    source: "image://maptheme/" + mapThemeId
+                    smooth: true
+                    width: 68
+                    height: 68
+                }
+                Label {
+                    id: themeLabel
+                    text: display
+                    color: index === themeDialog.currentIndex ? "black" : "white"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    themeDialog.currentIndex = index
+                    themeDialog.visible = false
+                    delayedMapThemeSwitch.theme = mapThemeId
+                    delayedMapThemeSwitch.start()
+                }
+            }
+        }
+    }
+
     Timer {
         id: delayedMapThemeSwitch
         property string theme: "earth/bluemarble/bluemarble.dgml"
@@ -172,18 +176,17 @@ Page {
         onTriggered: settings.mapTheme = theme
     }
 
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
-            mapContainer.embedMarbleWidget()
-        }
+    Component.onCompleted: {
+        mapContainer.embedMarbleWidget()
+        mainWindow.toolBar.replaceWith(toolBar)
     }
 
     function setEarthSettings() {
-        if (dayNightInput === null || dayNightInput.selectedIndex === 0) {
+        if (dayView.checked) {
             settings.mapTheme = "earth/bluemarble/bluemarble.dgml"
             marbleWidget.setGeoSceneProperty( "citylights", false )
-            marbleWidget.setGeoSceneProperty( "clouds_data", cloudsSwitch === null || cloudsSwitch.checked )
-        } else if (dayNightInput.selectedIndex === 1) {
+            marbleWidget.setGeoSceneProperty( "clouds_data", cloudsSwitch.checked )
+        } else if (nightView.checked) {
             settings.mapTheme = "earth/citylights/citylights.dgml"
             marbleWidget.setGeoSceneProperty( "citylights", false )
             marbleWidget.setGeoSceneProperty( "clouds_data", cloudsSwitch.checked )

@@ -7,24 +7,27 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2013 Andrei Duma <andrei.duma.dorian@gmail.com>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 import ".."
 
 /*
  * Page for routing activity.
  */
-Page {
+Item {
     id: routingActivityPage
     anchors.fill: parent
 
     property bool horizontal: width / height > 1.20
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
         ToolButton {
             id: minimizeButton
@@ -32,9 +35,9 @@ Page {
             checkable: true
             checked: true
             width: 60
-            flat: true
         }
-        MarbleToolIcon {
+        ToolButton {
+            text: "My Position"
             iconSource: main.icon( "places/user-identity", 48 );
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
@@ -49,73 +52,57 @@ Page {
             checked: !settings.workOffline
             onCheckedChanged: settings.workOffline = !checked
             width: 60
-            flat: true
         }
-        MarbleToolIcon {
-            id: menuIcon
-            iconSource: main.icon( "actions/show-menu", 48 );
+
+        ToolButton {
+            text: "Start Navigation"
+            onClicked: openActivity( "Navigation" )
+        }
+
+        // @TODO FIXME Port to QtQuick 2
+        /*
+        ToolButton {
+            text: "Prepare Offline Usage"
+            onClicked: downloadSheet.open()
+        }
+        */
+
+        ToolButton {
+            text: "Save Route"
             onClicked: {
-                if (main.components === "plasma") {
-                    pageMenu.visualParent = menuIcon
-                }
-                pageMenu.open()
+                saveRouteDialog.filename = "route-" + Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
+                saveRouteDialog.open()
             }
         }
-    }
 
-    Menu {
-        id: pageMenu
-        content: MarbleMenuLayout {
-            MenuItem {
-                text: "Start Navigation"
-                onClicked: openActivity( "Navigation" )
-            }
+        ToolButton {
+            text: "Save Route to Cloud"
+            onClicked: marbleWidget.cloudSync.uploadRoute()
+            visible: settings.owncloudSync
+        }
 
-            MenuItem {
-                text: "Prepare Offline Usage"
-                onClicked: downloadSheet.open()
-            }
+        ToolButton {
+            text: "Open Route"
+            onClicked: openRouteDialog.open()
+        }
 
-            MenuItem {
-                text: "Save Route"
-                onClicked: {
-                    saveRouteDialog.filename = "route-" + Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
-                    saveRouteDialog.open()
+        ToolButton {
+            text: "Elevation Profile"
+            checkable: true
+            checked: false
+            onCheckedChanged: {
+                var plugins = settings.activeRenderPlugins
+                if ( checked ) {
+                    plugins.push("elevationprofile")
+                } else {
+                    settings.removeElementsFromArray(plugins, ["elevationprofile"])
                 }
-            }
-
-            MenuItem {
-                text: "Save Route to Cloud"
-                onClicked: marbleWidget.cloudSync.uploadRoute()
-                visible: settings.owncloudSync
-            }
-
-            MenuItem {
-                text: "Open Route"
-                onClicked: openRouteDialog.open()
-            }
-
-            MenuItem {
-                text: "Cloud Routes"
-                onClicked: manageRoutesSheet.open()
-                visible: settings.owncloudSync
-            }
-
-            MenuItemSwitch {
-                text: "Elevation Profile"
-                checked: false
-                onCheckedChanged: {
-                    var plugins = settings.activeRenderPlugins
-                    if ( checked ) {
-                        plugins.push("elevationprofile")
-                    } else {
-                        settings.removeElementsFromArray(plugins, ["elevationprofile"])
-                    }
-                    settings.activeRenderPlugins = plugins
-                    marbleWidget.setGeoSceneProperty( "hillshading", checked )
-                }
+                settings.activeRenderPlugins = plugins
+                marbleWidget.setGeoSceneProperty( "hillshading", checked )
             }
         }
+
+        Item { Layout.fillWidth: true }
     }
 
     Flickable {
@@ -166,10 +153,6 @@ Page {
         }
     }
 
-    ScrollDecorator {
-        flickableItem: searchResultView
-    }
-
     Item {
         id: mapContainer
         clip: true
@@ -203,9 +186,7 @@ Page {
 
     FileSaveDialog {
         id: saveRouteDialog
-        anchors.fill: parent
         folder: "/home/user/MyDocs"
-        filename: ""
         nameFilters: [ "*.kml" ]
 
         onAccepted: { marbleWidget.routing.saveRoute( folder + "/" + filename ); }
@@ -213,7 +194,6 @@ Page {
 
     FileOpenDialog {
         id: openRouteDialog
-        anchors.fill: parent
         folder: "/home/user/MyDocs"
         nameFilters: [ "*.kml", "*.gpx" ]
 
@@ -262,30 +242,10 @@ Page {
         }
     }
 
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
-            mapContainer.embedMarbleWidget()
-        }
-    }
+    Component.onCompleted: {
+        mapContainer.embedMarbleWidget()
+        mainWindow.toolBar.replaceWith(toolBar)
 
-    Sheet {
-        id: manageRoutesSheet
-        rejectButtonText: "Back"
-
-        content: ListView {
-            id: routeView
-            anchors.fill: parent
-            spacing: 5
-            clip: true
-
-            model: marbleWidget.cloudSync.routeModel
-            delegate: routeViewDelegate
-
-            highlight: Rectangle {
-                color: "lightsteelblue"
-                radius: 5
-            }
-        }
     }
 
     Component {
@@ -346,17 +306,6 @@ Page {
                 anchors.margins: 5
 
                 height: openButton.height
-
-                Button {
-                    id: openButton
-
-                    width: 100
-                    text: "Open"
-                    onClicked: {
-                        marbleWidget.cloudSync.openRoute( identifier )
-                        manageRoutesSheet.close()
-                    }
-                }
 
                 Row {
                     anchors.right: parent.right
@@ -432,13 +381,14 @@ Page {
         }
     }
 
-    Sheet {
+    /*
+    Item {
         id: downloadSheet
+        anchors.fill: parent
 
-        acceptButtonText: "Download"
-        rejectButtonText: "Cancel"
+        //acceptButtonText: "Download"
+        //rejectButtonText: "Cancel"
 
-        content {
             Column {
                 anchors.fill: parent
                 anchors.margins: 10
@@ -523,7 +473,6 @@ Page {
                     width: parent.width
                 }
             }
-        }
 
         onAccepted: {
             if (downloadTypeSwitch.routeMode) {
@@ -533,4 +482,5 @@ Page {
             }
         }
     }
+    */
 }

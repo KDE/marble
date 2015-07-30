@@ -8,8 +8,8 @@
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 // Copyright 2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
-import QtQuick 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
 
 Item {
     property MarbleWidget map

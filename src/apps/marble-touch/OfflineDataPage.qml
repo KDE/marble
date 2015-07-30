@@ -6,18 +6,20 @@
 //
 // Copyright 2012 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.0
-import QtMultimediaKit 1.1
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 
-Page {
+Item {
     id: offlineDataPage
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-previous-view", 48 );
-            onClicked: pageStack.pop()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
     }
 
@@ -34,7 +36,7 @@ Page {
 
         visible: !Marble.canExecute("monav-daemon") && !Marble.canExecute("MoNavD")
 
-        MarbleToolIcon {
+        ToolButton {
             id: statusIcon
             anchors.verticalCenter: parent.verticalCenter
             iconSource: main.icon( "status/task-attention", 48 );
@@ -61,39 +63,48 @@ Page {
         }
     }
 
-    ButtonRow {
+    RowLayout {
         id: filterRow
+        ExclusiveGroup { id: filterGroup }
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: search.bottom
         anchors.topMargin: 10
         anchors.margins: 5
-        checkedButton: noFilter
 
-        Button {
+        RadioButton {
             id: noFilter
+            exclusiveGroup: filterGroup
+            checked: true
             text: "All"
+            onClicked: filterRow.update()
         }
 
         Button {
             id: motorcarFilter
+            exclusiveGroup: filterGroup
             iconSource: "qrc:/icons/routing-motorcar.svg";
             width: 120
+            onClicked: filterRow.update()
         }
 
         Button {
             id: bikeFilter
+            exclusiveGroup: filterGroup
             iconSource: "qrc:/icons/routing-bike.svg";
             width: 80
+            onClicked: filterRow.update()
         }
 
         Button {
             id: pedestrianFilter
+            exclusiveGroup: filterGroup
             iconSource: "qrc:/icons/routing-pedestrian.svg";
             width: 60
+            onClicked: filterRow.update()
         }
 
-        onCheckedButtonChanged: {
+        function update() {
             offlineDataModel.setVehicleTypeFilter(
                         (filterRow.checkedButton === noFilter          ? OfflineDataModel.Any        : OfflineDataModel.None) |
                         (filterRow.checkedButton === motorcarFilter    ? OfflineDataModel.Motorcar   : OfflineDataModel.None) |
@@ -120,10 +131,6 @@ Page {
         section.delegate: sectionDelegate
         currentIndex: -1
         clip: true
-    }
-
-    ScrollDecorator {
-        flickableItem: dataView
     }
 
     Component {
@@ -265,7 +272,6 @@ Page {
                         anchors.verticalCenter: progressBar.verticalCenter
                         visible: delegateRoot.installing
                         width: 40
-                        flat: true
                         iconSource: main.icon( "actions/dialog-cancel", 32 );
                         onClicked: {
                             progressBar.indeterminate = true

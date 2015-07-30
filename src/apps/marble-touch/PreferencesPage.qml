@@ -7,22 +7,30 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.0
-import QtMultimediaKit 1.1
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
+import QtMultimedia 5.4
 
 /*
  * General preferences
  */
-Page {
+Item {
     id: preferencesPage
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: "white"
     }
 
     Flickable {
@@ -140,14 +148,16 @@ Page {
                 width: pageGrid.rightRowWidth
                 height: speakersSwitch.height + speakersItem.height
 
-                ButtonRow {
+                RowLayout {
                     id: speakersSwitch
+                    ExclusiveGroup { id: voiceGroup }
                     width: parent.width
-                    checkedButton: settings.voiceNavigationMuted ? b1 : ( settings.voiceNavigationSoundEnabled ? b2 : b3 )
 
-                    Button {
+                    RadioButton {
                         id: b1
                         text: "Disabled"
+                        checked: true
+                        exclusiveGroup: voiceGroup
                         onCheckedChanged: {
                             if (checked) {
                                 settings.voiceNavigationMuted = true
@@ -156,9 +166,10 @@ Page {
                         }
                     }
 
-                    Button {
+                    RadioButton {
                         id: b2
                         text: "Sound"
+                        exclusiveGroup: voiceGroup
                         onCheckedChanged: {
                             if (checked) {
                                 settings.voiceNavigationMuted = false
@@ -168,9 +179,10 @@ Page {
                         }
                     }
 
-                    Button {
+                    RadioButton {
                         id: b3
                         text: "Speaker"
+                        exclusiveGroup: voiceGroup
                         onCheckedChanged: {
                             if (checked) {
                                 settings.voiceNavigationMuted = false
@@ -191,31 +203,51 @@ Page {
                             SelectionDialog {
                                 id: speakerDialog
                                 titleText: "Voice Navigation Speaker"
-                                selectedIndex: speakers.indexOf(settings.voiceNavigationSpeaker)
+                                currentIndex: speakers.indexOf(settings.voiceNavigationSpeaker)
 
                                 model: SpeakersModel {
                                     id: speakers
-                                    onCountChanged: speakerDialog.selectedIndex = speakers.indexOf(settings.voiceNavigationSpeaker)
+                                    onCountChanged: speakerDialog.currentIndex = speakers.indexOf(settings.voiceNavigationSpeaker)
                                     onInstallationProgressed: {
                                         progressBar.indeterminate = false
                                         progressBar.value = progress
                                     }
                                     onInstallationFinished: {
                                         progressBar.visible = false
-                                        settings.voiceNavigationSpeaker = speakers.path(speakersDialog.selectedIndex)
+                                        settings.voiceNavigationSpeaker = speakers.path(speakersDialog.currentIndex)
                                         voiceNavigationPreviewButton.enabled = true
                                     }
                                 }
 
+                                delegate: Item {
+                                    height: 20
+                                    width: speakerDialog.width
+                                    Text {
+                                        text: name
+                                    }
+                                }
+
                                 onAccepted: {
-                                    if ( speakers.isLocal(selectedIndex) ) {
-                                        settings.voiceNavigationSpeaker = speakers.path(selectedIndex)
+                                    if ( speakers.isLocal(currentIndex) ) {
+                                        settings.voiceNavigationSpeaker = speakers.path(currentIndex)
                                     } else {
                                         voiceNavigationPreviewButton.enabled = false
                                         progressBar.visible = true
-                                        speakers.install(selectedIndex)
+                                        speakers.install(currentIndex)
                                     }
                                 }
+                            }
+                        }
+                    }
+
+                    Component.onCompleted: {
+                        if (settings.voiceNavigationMuted) {
+                            b1.checked = true
+                        } else {
+                            if (settings.voiceNavigationSoundEnabled) {
+                                b2.checked = true
+                            } else {
+                                b3.checked = true
                             }
                         }
                     }
@@ -256,6 +288,13 @@ Page {
                         iconSource: main.icon( "actions/media-playback-start", 48 );
                         checkable: true
                         checked: false
+                        onCheckedChanged: {
+                            if (checked) {
+                                voiceNavigationPreviewPlayer.play()
+                            } else {
+                                voiceNavigationPreviewPlayer.pause()
+                            }
+                        }
                         width: 60
 
                         VoiceNavigation {
@@ -267,9 +306,8 @@ Page {
                         Audio {
                             id: voiceNavigationPreviewPlayer
                             source: "file://" + voiceNavigationPreview.preview
-                            playing: voiceNavigationPreviewButton.checked
-                            onStatusChanged: {
-                                if ( status == Audio.EndOfMedia ) {
+                            onPlaybackStateChanged: {
+                                if ( playbackState == Audio.StoppedState ) {
                                     voiceNavigationPreviewButton.checked = false
                                 }
                             }
@@ -300,7 +338,7 @@ Page {
                     SelectionDialog {
                         id: themeDialog
                         titleText: "Street Map Theme"
-                        selectedIndex: mapThemeModel.indexOf(settings.streetMapTheme)
+                        currentIndex: mapThemeModel.indexOf(settings.streetMapTheme)
 
                         model: mapThemeModel
 
@@ -310,7 +348,7 @@ Page {
                             width: row.width
                             height: row.height
 
-                            color: index === themeDialog.selectedIndex ? "lightsteelblue" : "#00ffffff"
+                            color: index === themeDialog.currentIndex ? "lightsteelblue" : "white"
 
                             Row {
                                 id: row
@@ -324,7 +362,7 @@ Page {
                                 Label {
                                     id: themeLabel
                                     text: display
-                                    color: index === themeDialog.selectedIndex ? "black" : "white"
+                                    color: index === themeDialog.currentIndex ? "black" : "gray"
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
                             }
@@ -332,7 +370,7 @@ Page {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    themeDialog.selectedIndex = index
+                                    themeDialog.currentIndex = index
                                     themeDialog.accept()
                                     settings.streetMapTheme = mapThemeId
                                 }
@@ -383,25 +421,11 @@ Page {
                         OfflineDataPage {  }
                     }
                 }
-
-                Button {
-                    id: manageCloudSyncButton
-                    anchors.top: manageThemeButton.bottom
-                    anchors.topMargin: 5
-                    anchors.left: parent.left;
-                    anchors.right: parent.right;
-                    text: "Manage Cloud Sync"
-                    onClicked: pageStack.push(cloudSyncPage)
-                    Component {
-                        id: cloudSyncPage
-                        CloudSyncPage {  }
-                    }
-                }
             }
         }
     }
 
-    ScrollDecorator {
-        flickableItem: pageFlickable
+    Component.onCompleted: {
+        mainWindow.toolBar.replaceWith(toolBar)
     }
 }

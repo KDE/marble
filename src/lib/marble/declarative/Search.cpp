@@ -83,6 +83,9 @@ void Search::updateSearchModel( QAbstractItemModel *model )
 
     QHash<int,QByteArray> const roles = model->roleNames();
     for ( int i=0; i<m_searchResult->rowCount(); ++i ) {
+
+        // @TODO FIXME Port to QtQuick 2
+        /*
         QQmlContext *context = new QQmlContext( qmlContext( m_placemarkDelegate ) );
         QModelIndex const index = m_searchResult->index( i );
         QHash<int,QByteArray>::const_iterator iter = roles.constBegin();
@@ -99,6 +102,7 @@ void Search::updateSearchModel( QAbstractItemModel *model )
         } else {
             delete component;
         }
+        */
     }
     updatePlacemarks();
 }

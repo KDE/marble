@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>MarbleWindow.qml</file>
-        <file>MarbleMenuLayout.qml</file>
-        <file>MarbleToolIcon.qml</file>
-        <file>MenuItemSwitch.qml</file>
-    </qresource>
-</RCC>

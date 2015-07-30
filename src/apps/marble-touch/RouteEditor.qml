@@ -6,9 +6,10 @@
 //
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 
 Item {
     id: root
@@ -72,26 +73,33 @@ Item {
             }
         }
 
-        ButtonRow {
-            width: parent.width - 20
+        RowLayout {
             id: routingTypeOptions
-            checkedButton: routingMotorcarButton
+            width: parent.width - 20
+            ExclusiveGroup { id: routingGroup }
             property string routingType: checkedButton.routingType
-            Button {
+            RadioButton {
                 id: routingMotorcarButton
-                iconSource: "qrc:/icons/routing-motorcar.svg"
+                exclusiveGroup: routingGroup
+                checked: true
+                //iconSource: "qrc:/icons/routing-motorcar.svg"
+                text: "Car"
                 property string routingType: "Motorcar"
             }
 
-            Button {
+            RadioButton {
                 id: routingBikeButton
-                iconSource: "qrc:/icons/routing-bike.svg"
+                exclusiveGroup: routingGroup
+                //iconSource: "qrc:/icons/routing-bike.svg"
+                text: "Bike"
                 property string routingType: "Bicycle"
             }
 
-            Button {
+            RadioButton {
                 id: routingPedestrianButton
-                iconSource: "qrc:/icons/routing-pedestrian.svg"
+                exclusiveGroup: routingGroup
+                //iconSource: "qrc:/icons/routing-pedestrian.svg"
+                text: "Foot"
                 property string routingType: "Pedestrian"
             }
         }

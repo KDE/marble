@@ -7,9 +7,8 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
 
 /*
  * Page to select activity. This component also contains the model for
@@ -17,6 +16,25 @@ import org.kde.edu.marble 0.11
  */
 Item {
     id: activityPage
+
+    Item {
+        id: pageContainer
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: changelog.visible ? changelog.top : parent.bottom
+        visible: true
+
+        Rectangle {
+            anchors.fill: parent
+            color: "black"
+        }
+
+        Loader {
+            id: pageLoader
+            anchors.fill: parent
+        }
+    }
 
     property alias model: activityView.model
     property bool shown: false
@@ -42,11 +60,11 @@ Item {
     ListView {
         id: activityView
         currentIndex: -1
-        //anchors.top: parent.top
-        //anchors.topMargin: 4
-        //anchors.left: parent.left
-        //anchors.right: parent.right
-        //anchors.bottom: changelog.visible ? changelog.top : parent.bottom
+        anchors.top: parent.top
+        anchors.topMargin: 4
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: changelog.visible ? changelog.top : parent.bottom
         //anchors.margins: 9
         //anchors.leftMargin: 2
         model: activityModel
@@ -91,7 +109,7 @@ Item {
                         smooth: true
                     }
 
-                    Label {
+                    Text {
                         anchors.verticalCenter: parent.verticalCenter
                         color: delegateItem.mouseOver ? "#111111" : "black"
                         text: name
@@ -117,11 +135,7 @@ Item {
         }
     }
 
-    ScrollDecorator {
-        flickableItem: activityView
-    }
-
-    Label {
+    Text {
         id: changelog
         anchors.bottom: parent.bottom
         anchors.left: parent.left
@@ -134,7 +148,7 @@ Item {
         MarbleTouch { id: project }
         MouseArea {
             anchors.fill: parent
-            onClicked: pageStack.push( "qrc:/AboutMarblePage.qml" )
+            onClicked: openActivity( "qrc:/AboutMarblePage.qml" )
         }
     }
 
@@ -210,6 +224,14 @@ Item {
         }
     }
 
+    function showActivities()
+    {
+        pageContainer.visible = false
+        pageLoader.source = ""
+        activityView.visible = true
+        activityPage.shown = true
+    }
+
     function switchTo( name, path ) {
         if ( marbleWidget === null ) {
             lazyLoader.source = "qrc:/MainWidget.qml";
@@ -217,7 +239,10 @@ Item {
         }
 
         settings.lastActivity = name
-        pageStack.replace( path, undefined, true )
+        //pageStack.replace( path, undefined, true )
+        pageLoader.source = path
+        pageContainer.visible = true
+        activityView.visible = false
         activityPage.shown = false
     }
 

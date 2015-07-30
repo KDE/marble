@@ -7,8 +7,8 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
+import QtQuick 2.3
+import QtQuick.Controls 1.4
 
 /*
      * A textfield for searching locations.
@@ -20,7 +20,7 @@ TextField {
 
     placeholderText: "Search..."
     // Icon to clear text in the textfield.
-    MarbleToolIcon {
+    ToolButton {
         id: clearButton
         iconSource: main.icon( "actions/edit-clear-locationbar-rtl", 22 );
         anchors.top: searchField.top

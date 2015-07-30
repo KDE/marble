@@ -7,84 +7,46 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 import ".."
 
 /*
  * Page for the virtual globe activity.
  */
-Page {
+Item {
     id: virtualGlobeActivityPage
     anchors.fill: parent
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.navigationMenu.open()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
         ToolButton {
             id: searchButton
+            text: "Search"
             checkable: true
             width: 60
-            flat: true
             iconSource: main.icon( "actions/edit-find", 48 );
         }
         ToolButton {
             id: themeButton
             width: 60
+            text: "Map Theme"
             iconSource: main.icon( "actions/configure", 48 );
-            flat: true
-            onClicked: themeDialog.open()
+            onClicked: themeDialog.visible = true
 
             MapThemeModel {
                 id: mapThemeModel
                 mapThemeFilter: MapThemeModel.Extraterrestrial
             }
-
-            SelectionDialog {
-                id: themeDialog
-                titleText: "Select Map Theme"
-                selectedIndex: mapThemeModel.indexOf(settings.mapTheme)
-                model: mapThemeModel
-                delegate:
-                    Rectangle {
-                    id: delegate
-                    width: row.width
-                    height: row.height
-
-                    color: index === themeDialog.selectedIndex ? "lightsteelblue" : "#00ffffff"
-
-                    Row {
-                        id: row
-                        Image {
-                            id: mapImage
-                            source: "image://maptheme/" + mapThemeId
-                            smooth: true
-                            width: 68
-                            height: 68
-                        }
-                        Label {
-                            id: themeLabel
-                            text: display
-                            color: index === themeDialog.selectedIndex ? "black" : "white"
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            themeDialog.selectedIndex = index
-                            themeDialog.accept()
-                            delayedMapThemeSwitch.theme = mapThemeId
-                            delayedMapThemeSwitch.start()
-                        }
-                    }
-                }
-            }
         }
+        Item { Layout.fillWidth: true }
     }
 
     SearchField {
@@ -141,9 +103,53 @@ Page {
         onTriggered: settings.mapTheme = theme
     }
 
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
-            mapContainer.embedMarbleWidget()
+    SelectionDialog {
+        id: themeDialog
+        anchors.fill: parent
+        titleText: "Select Map Theme"
+        currentIndex: mapThemeModel.indexOf(settings.mapTheme)
+        model: mapThemeModel
+        delegate:
+            Rectangle {
+            id: delegate
+            width: row.width
+            height: row.height
+
+            color: index === themeDialog.currentIndex ? "lightsteelblue" : "white"
+
+            Row {
+                id: row
+                Image {
+                    id: mapImage
+                    source: "image://maptheme/" + mapThemeId
+                    smooth: true
+                    width: 68
+                    height: 68
+                }
+                Label {
+                    id: themeLabel
+                    width: 400
+                    text: display
+                    color: index === themeDialog.currentIndex ? "black" : "gray"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    themeDialog.currentIndex = index
+                    themeDialog.visible = false
+                    delayedMapThemeSwitch.theme = mapThemeId
+                    delayedMapThemeSwitch.start()
+                }
+            }
         }
+    }
+
+
+    Component.onCompleted: {
+        mapContainer.embedMarbleWidget()
+        mainWindow.toolBar.replaceWith(toolBar)
     }
 }

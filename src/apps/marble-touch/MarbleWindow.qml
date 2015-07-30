@@ -1,46 +1,40 @@
-// This file is part of the Marble Virtual Globe.
-//
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
-//
-// Copyright 2011 Daniel Marth <danielmarth@gmx.at>
-// Copyright 2012 Dennis Nienhüser <nienhueser@kde.org>
+import org.kde.edu.marble 0.20
+import QtQuick 2.3
+import QtQuick.Controls 1.0
+import QtQuick.Layouts 1.2
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+ApplicationWindow {
+    id: mainWindow
 
-PageStackWindow {
-    width: screen.displayWidth
-    height: screen.displayHeight
+    width: 800
+    height: 600
 
     property Item marbleWidget: MainWidget {}
     property bool inPortrait: width < height
-    property string components: "harmattan"
 
-    property alias navigationMenu: navigation
+    toolBar: RowLayout {
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
+        }
 
-    initialPage: "qrc:/activities/VirtualGlobe.qml"
+        function replaceWith( item ) {
+            for(var i = toolBar.children.length; i > 0 ; i--) {
+              toolBar.children[i-1].destroy()
+            }
+            item.parent = toolBar
+        }
+    }
 
     // Stores the settings of the application.
     MarbleSettings {
         id: settings
     }
 
-    // Displays all available activities and starts them if the user clicks on them.
-    Menu {
-        id: navigation
-        content: ActivitySelectionView {
-            id: activitySelection
-            width: pageStack.currentPage.width-50
-            height: 555
-            onItemSelected: navigation.close()
-        }
-    }
-
-    function showNavigation() {
-        navigation.open()
+    ActivitySelectionView {
+        id: activitySelection
+        anchors.fill: parent
     }
 
     function openActivity( activity ) {
@@ -105,3 +99,4 @@ PageStackWindow {
         return name
     }
 }
+

@@ -6,8 +6,10 @@
 //
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 
 Item {
     id: root
@@ -67,7 +69,7 @@ Item {
             onClicked: marbleWidget.centerOn(longitude, latitude)
         }
 
-        MarbleToolIcon {
+        ToolButton {
             id: editIcon
             iconSource: main.icon( "actions/document-edit", 32 );
             width: 32
@@ -84,7 +86,7 @@ Item {
     SelectionDialog {
         id: inputSelectionDialog
         titleText: "Select via point"
-        selectedIndex: -1
+        currentIndex: -1
         model: ListModel {
             ListElement { name: "Current Position" }
             ListElement { name: "Choose Bookmark" }

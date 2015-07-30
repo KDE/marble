@@ -7,26 +7,30 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 import ".."
 
 /*
  * Page for the weather activity.
  */
-Page {
+Item {
     id: weatherActivityPage
     anchors.fill: parent
 
     property bool horizontal: width / height > 1.20
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
-        MarbleToolIcon {
+        ToolButton {
+            text: "My Position"
             iconSource: main.icon( "places/user-identity", 48 );
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
@@ -38,22 +42,23 @@ Page {
 
         ToolButton {
             id: favoriteButton
+            text: "Favorites"
             checkable: true
             checked: marbleWidget.renderPlugin("weather").favoriteItemsOnly
             width: 60
-            flat: true
             iconSource: main.icon( "places/favorites", 48 );
             onCheckedChanged: marbleWidget.renderPlugin("weather").favoriteItemsOnly = checked
         }
 
         ToolButton {
             id: searchButton
+            text: "Search"
             checkable: true
             checked: false
             width: 60
-            flat: true
             iconSource: main.icon( "actions/edit-find", 48 );
         }
+        Item { Layout.fillWidth: true }
     }
 
     SearchField {
@@ -109,7 +114,6 @@ Page {
 
                 width: 32
                 height: 32
-                flat: true
 
                 onClicked: stationDetails.favorite = !stationDetails.favorite
             }
@@ -178,10 +182,9 @@ Page {
         }
     }
 
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
-            mapContainer.embedMarbleWidget()
-        }
+    Component.onCompleted: {
+        mapContainer.embedMarbleWidget()
+        mainWindow.toolBar.replaceWith(toolBar)
     }
 
     Rectangle {

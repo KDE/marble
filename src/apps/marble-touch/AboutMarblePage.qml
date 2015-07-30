@@ -6,29 +6,39 @@
 //
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 
 /*
  * Page for geocaching activity.
  */
-Page {
+Item {
     id: geocachingActivityPage
     anchors.fill: parent
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
     }
 
     MarbleTouch { id: project }
 
+    Rectangle {
+        anchors.fill: parent
+        color: "white"
+    }
+
     Flickable {
         id: pageContent
         anchors.fill: parent
         contentHeight: contentColumn.height
+        clip: true
 
         Column {
             id: contentColumn
@@ -215,11 +225,8 @@ Page {
         }
     }
 
-    ScrollDecorator {
-        flickableItem: pageContent
-    }
-
     Component.onCompleted: {
         settings.changelogShown = project.version
+        mainWindow.toolBar.replaceWith(toolBar)
     }
 }

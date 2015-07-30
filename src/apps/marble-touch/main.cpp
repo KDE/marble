@@ -9,15 +9,11 @@
 // A QML-interface of Marble for the Meego operating system.
 
 #include <QApplication>
-#if QT_VERSION < 0x050000
-  #include <QtDeclarative>
-  typedef QDeclarativeView QQuickView;
-#else
-  #include <QQuickView>
-  #include <QtQml/qqml.h>
-#endif
+#include <QQmlApplicationEngine>
+#include <QtQml/qqml.h>
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
+#include "declarative/MarbleDeclarativePlugin.h"
 
 using namespace Marble;
 
@@ -29,9 +25,11 @@ int main( int argc, char *argv[] )
     app.setOrganizationDomain( "kde.org" );
 
     app.setProperty( "NoMStyle", true );
+    MarbleDeclarativePlugin plugin;
+    plugin.registerTypes("org.kde.edu.marble");
+
 
     //MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
-    /** @todo FIXME: Which compiler flag to use in detectProfiles for harmattan? */
     MarbleGlobal::Profiles profiles = MarbleGlobal::SmallScreen | MarbleGlobal::HighResolution;
 
     QStringList args = QApplication::arguments();
@@ -51,15 +49,11 @@ int main( int argc, char *argv[] )
         return 0;
     }
 
-    bool portraitMode = false;
     for ( int i = 1; i < args.count(); ++i ) {
         QString const arg = args.at( i );
 
         if ( arg == "--debug-info" ) {
             MarbleDebug::setEnabled( true );
-        }
-        else if ( arg == "--portrait" ) {
-            portraitMode = true;
         }
         else if ( arg == "--smallscreen" ) {
             profiles |= MarbleGlobal::SmallScreen;
@@ -78,23 +72,7 @@ int main( int argc, char *argv[] )
     MarbleGlobal::getInstance()->setProfiles( profiles );
 
     // Create main window based on QML.
-    QQuickView view;
-    view.setSource( QUrl( "qrc:/main.qml" ) );
-
-#ifdef __arm__
-    // Window takes up full screen on arm (mobile) devices.
-    view.showFullScreen();
-#else
-    if ( portraitMode ) {
-        view.resize( view.initialSize().height(), view.initialSize().width() );
-#if QT_VERSION < 0x050000
-        view.setTransform( QTransform().rotate( 90 ) );
-#endif
-    } else {
-        view.resize( view.initialSize().width(), view.initialSize().height() );
-    }
-    view.show();
-#endif
+    QQmlApplicationEngine engine(QUrl("qrc:/main.qml"));
 
     return app.exec();
 }

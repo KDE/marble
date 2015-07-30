@@ -6,7 +6,7 @@
 //
 // Copyright 2012 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.0
+import QtQuick 2.3
 
 Item {
     property string version: changelogModel.get(0).version

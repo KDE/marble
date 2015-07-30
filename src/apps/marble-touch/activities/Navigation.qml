@@ -6,24 +6,26 @@
 //
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import QtMobility.systeminfo 1.1
-import QtMultimediaKit 1.1
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
+import QtMultimedia 5.4
 import ".."
 
 /*
  * Page for navigation activity.
  */
-Page {
+Item {
     id: navigationActivityPage
     anchors.fill: parent
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
         ToolButton {
             iconSource: main.icon( "actions/text-speak", 48 );
@@ -31,7 +33,6 @@ Page {
             checked: !settings.voiceNavigationMuted
             onCheckedChanged: settings.voiceNavigationMuted = !checked
             width: 60
-            flat: true
         }
         ToolButton {
             iconSource: main.icon( "devices/network-wireless", 48 );
@@ -39,38 +40,25 @@ Page {
             checked: !settings.workOffline
             onCheckedChanged: settings.workOffline = !checked
             width: 60
-            flat: true
         }
-        MarbleToolIcon {
-            id: menuIcon
-            iconSource: main.icon( "actions/show-menu", 48 );
-            onClicked: {
-                if (main.components === "plasma") {
-                    pageMenu.visualParent = menuIcon
-                }
-                pageMenu.open()
-            }
-        }
-    }
 
-    Menu {
-        id: pageMenu
-        content: MarbleMenuLayout {
-            MenuItemSwitch {
-                text: "Elevation Profile"
-                checked: false
-                onCheckedChanged: {
-                    var plugins = settings.activeRenderPlugins
-                    if ( checked ) {
-                        plugins.push("elevationprofile")
-                    } else {
-                        settings.removeElementsFromArray(plugins, ["elevationprofile"])
-                    }
-                    settings.activeRenderPlugins = plugins
-                    marbleWidget.setGeoSceneProperty( "hillshading", checked )
+        ToolButton {
+            text: "Elevation Profile"
+            checked: false
+            checkable: true
+            onCheckedChanged: {
+                var plugins = settings.activeRenderPlugins
+                if ( checked ) {
+                    plugins.push("elevationprofile")
+                } else {
+                    settings.removeElementsFromArray(plugins, ["elevationprofile"])
                 }
+                settings.activeRenderPlugins = plugins
+                marbleWidget.setGeoSceneProperty( "hillshading", checked )
             }
         }
+
+        Item { Layout.fillWidth: true }
     }
 
     Rectangle {
@@ -224,26 +212,16 @@ Page {
         ]
     }
 
-    ScreenSaver {
-        id: saver
-    }
-
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
-            mapContainer.embedMarbleWidget()
-            saver.screenSaverDelayed = settings.inhibitScreensaver
-            if (!settings.navigationStartupWarningEverShown || settings.navigationStartupWarning) {
-                safetyWarningDialog.open()
-            }
-        } else if ( status === PageStatus.Deactivating ) {
-            saver.screenSaverDelayed = false
-        }
+    Component.onCompleted: {
+        mapContainer.embedMarbleWidget()
+        mainWindow.toolBar.replaceWith(toolBar)
     }
 
     Audio {
         id: playback
     }
 
+    /*
     Dialog {
         id: safetyWarningDialog
 
@@ -284,6 +262,7 @@ Page {
 
         onAccepted: settings.navigationStartupWarningEverShown = true
     }
+    */
 
     Connections { target: marbleWidget.navigation; onVoiceNavigationAnnouncementChanged: voiceAnnouncement() }
 

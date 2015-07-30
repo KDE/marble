@@ -6,11 +6,11 @@
 //
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
+import QtQuick 2.3
+import QtQuick.Dialogs 1.2
 
 FileDialog {
     id: root
-    acceptButtonText: "Save"
     nameFilters: [ "/" ]
+    selectExisting: false
 }

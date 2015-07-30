@@ -7,34 +7,29 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import QtQuick.Controls 1.0
+import QtQuick.Layouts 1.2
+import QtQuick.Window 2.2
+import org.kde.edu.marble 0.20
 import ".."
 
 /*
  * Page for friends (social, opendesktop) activity.
  */
-Page {
+Item {
     id: friendsActivityPage
-    anchors.fill: parent
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
-        }
-        MarbleToolIcon {
-            iconSource: main.icon( "places/user-identity", 48 );
-            onClicked: {
-                marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
-                if (marbleWidget.zoom < 22026 ) {
-                    marbleWidget.zoom = 86250
-                }
-            }
-        }
+    width: 600
+    height: 800
 
-        Item {}
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
+        }
     }
 
     Item {
@@ -66,9 +61,8 @@ Page {
         }
     }
 
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
-            mapContainer.embedMarbleWidget()
-        }
+    Component.onCompleted: {
+        mapContainer.embedMarbleWidget()
+        mainWindow.toolBar.replaceWith(toolBar)
     }
 }

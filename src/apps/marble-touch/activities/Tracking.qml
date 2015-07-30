@@ -7,25 +7,28 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
-import QtMobility.systeminfo 1.1
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 import ".."
 
 /*
  * Page for geocaching activity.
  */
-Page {
+Item {
     id: trackingActivityPage
     anchors.fill: parent
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
-        MarbleToolIcon {
+        ToolButton {
+            text: "My Position"
             iconSource: main.icon( "places/user-identity", 48 );
             onClicked: {
                 marbleWidget.centerOn( marbleWidget.tracking.lastKnownPosition.longitude, marbleWidget.tracking.lastKnownPosition.latitude )
@@ -36,53 +39,41 @@ Page {
         }
         ToolButton {
             id: searchButton
+            text: "Search"
             checkable: true
             width: 60
-            flat: true
             iconSource: main.icon( "actions/edit-find", 48 );
         }
-        MarbleToolIcon {
-            id: menuIcon
-            iconSource: main.icon( "actions/show-menu", 48 );
+        ToolButton {
+            text: "Save Track"
             onClicked: {
-                if (main.components === "plasma") {
-                    pageMenu.visualParent = menuIcon
-                }
-                pageMenu.open()
+                //saveTrackDialog.fileUrl = Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
+                saveTrackDialog.open()
             }
         }
+        ToolButton {
+            text: "Open Track"
+            onClicked: openTrackDialog.open()
+        }
+        ToolButton {
+            text: "Auto Center"
+            checkable: true
+            checked: false
+            onCheckedChanged: {
+                marbleWidget.tracking.autoCenter = checked
+            }
+        }
+        ToolButton {
+            text: "Auto Zoom"
+            checked: false
+            checkable: true
+            onCheckedChanged: {
+                marbleWidget.tracking.autoZoom = checked
+            }
+        }
+        Item { Layout.fillWidth: true }
     }
 
-    Menu {
-        id: pageMenu
-        content: MarbleMenuLayout {
-            MenuItem {
-                text: "Save Track"
-                onClicked: {
-                    saveTrackDialog.filename = Qt.formatDateTime(new Date(), "yyyy-MM-dd_hh.mm.ss") + ".kml"
-                    saveTrackDialog.open()
-                }
-            }
-            MenuItem {
-                text: "Open Track"
-                onClicked: openTrackDialog.open()
-            }
-            MenuItemSwitch {
-                text: "Auto Center"
-                checked: false
-                onCheckedChanged: {
-                    marbleWidget.tracking.autoCenter = checked
-                }
-            }
-            MenuItemSwitch {
-                text: "Auto Zoom"
-                checked: false
-                onCheckedChanged: {
-                    marbleWidget.tracking.autoZoom = checked
-                }
-            }
-        }
-    }
 
     SearchField {
         id: searchField
@@ -138,9 +129,7 @@ Page {
 
     FileSaveDialog {
         id: saveTrackDialog
-        anchors.fill: parent
         folder: "/home/user/MyDocs"
-        filename: ""
         nameFilters: [ "*.kml" ]
 
         onAccepted: { marbleWidget.tracking.saveTrack( folder + "/" + filename ); }
@@ -148,23 +137,14 @@ Page {
 
     FileOpenDialog {
         id: openTrackDialog
-        anchors.fill: parent
         folder: "/home/user/MyDocs"
         nameFilters: [ "*.kml", "*.gpx" ]
 
         onAccepted: { marbleWidget.tracking.openTrack( folder + "/" + filename ); }
     }
 
-    ScreenSaver {
-        id: saver
-    }
-
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
-            mapContainer.embedMarbleWidget()
-            saver.screenSaverDelayed = settings.inhibitScreensaver
-        } else if ( status === PageStatus.Deactivating ) {
-            saver.screenSaverDelayed = false
-        }
+    Component.onCompleted: {
+        mapContainer.embedMarbleWidget()
+        mainWindow.toolBar.replaceWith(toolBar)
     }
 }

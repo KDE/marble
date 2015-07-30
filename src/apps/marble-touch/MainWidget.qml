@@ -8,9 +8,8 @@
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 // Copyright 2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
-import QtQuick 1.0
-import org.kde.edu.marble 0.11
-import com.nokia.meego 1.0
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
 
 /*
  * Main widget containing the map, models for routing, search, etc.
@@ -106,7 +105,7 @@ Item {
             settings.quitLatitude = center.latitude
         }
 
-        property Search search: Search {
+        property Find search: Find {
             map: map
             // Delegate of a search result.
             /** @todo: Simplify this beast */
@@ -142,7 +141,7 @@ Item {
                     border.color: "gray"
                     radius: 10
                     // Name of the search result.
-                    Label {
+                    Text {
                         id: nameLabel
                         text: display
                         anchors.top: parent.top
@@ -170,7 +169,7 @@ Item {
                             border.width: 1
                             border.color: "gray"
                             radius: 10
-                            Label {
+                            Text {
                                 text: "Route"
                                 anchors.centerIn: parent
                                 font.pixelSize: 18

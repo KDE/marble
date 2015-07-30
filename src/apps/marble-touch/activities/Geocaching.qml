@@ -7,28 +7,30 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 import ".."
 
 /*
  * Page for geocaching activity.
  */
-Page {
+Item {
     id: geocachingActivityPage
     anchors.fill: parent
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
         ToolButton {
             id: searchButton
             checkable: true
             width: 60
-            flat: true
             iconSource: main.icon( "actions/edit-find", 48 );
         }
     }
@@ -85,9 +87,8 @@ Page {
         }
     }
 
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
+    Component.onCompleted: {
             mapContainer.embedMarbleWidget()
-        }
+            mainWindow.toolBar.replaceWith(toolBar)
     }
 }

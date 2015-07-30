@@ -16,11 +16,11 @@
 
 #include "MapThemeManager.h"
 
-#include <QGraphicsProxyWidget>
 #include <QList>
 #include <QPoint>
 #include <QStandardItemModel>
 #include <QtQml/qqml.h>
+#include "MarbleQuickItem.h"
 
 using Marble::GeoDataCoordinates; // Ouch. For signal/slot connection across different namespaces
 
@@ -29,7 +29,6 @@ namespace Marble
 // Forward declarations
 class AbstractFloatItem;
 class MarbleModel;
-class MarbleWidget;
 class RenderPlugin;
 class ViewportParams;
 }
@@ -42,15 +41,13 @@ class DeclarativeDataPlugin;
   * displayed in QML when it is the only widget. For performance reasons it would be
   * nice to avoid this.
   */
-class MarbleWidget : public QGraphicsProxyWidget
+class MarbleWidget : public Marble::MarbleQuickItem
 {
     Q_OBJECT
 
     Q_PROPERTY( Coordinate* center READ center WRITE setCenter NOTIFY visibleLatLonAltBoxChanged )
     Q_PROPERTY( int radius READ radius WRITE setRadius NOTIFY radiusChanged )
     Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY mapThemeChanged )
-    Q_PROPERTY( QString projection READ projection WRITE setProjection NOTIFY projectionChanged )
-    Q_PROPERTY( bool inputEnabled READ inputEnabled WRITE setInputEnabled )
     Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
     Q_PROPERTY( QStringList activeFloatItems READ activeFloatItems WRITE setActiveFloatItems )
     Q_PROPERTY( QStringList activeRenderPlugins READ activeRenderPlugins WRITE setActiveRenderPlugins )
@@ -65,11 +62,9 @@ class MarbleWidget : public QGraphicsProxyWidget
 
 public:
     /** Constructor */
-    explicit MarbleWidget( QGraphicsItem *parent = 0, Qt::WindowFlags flags = 0 );
+    explicit MarbleWidget( QQuickItem *parent = 0 );
 
     ~MarbleWidget();
-
-    Marble::MarbleModel *model();
 
     const Marble::ViewportParams *viewport() const;
 
@@ -105,16 +100,10 @@ Q_SIGNALS:
 
     void placemarkSelected( Placemark* placemark );
 
-    void projectionChanged();
-
 public Q_SLOTS:
     Coordinate* center();
 
     void setCenter( Coordinate* center );
-
-    void centerOn( const Marble::GeoDataLatLonBox &bbox );
-
-    void centerOn( const GeoDataCoordinates &coordinates );
 
     QList<QObject*> renderPlugins() const;
 
@@ -133,43 +122,6 @@ public Q_SLOTS:
 
     /** Activates all of the given float items and deactivates any others */
     void setActiveFloatItems( const QStringList &items );
-
-    /** Returns true if the map accepts keyboard/mouse input */
-    bool inputEnabled() const;
-
-    /** Toggle keyboard/mouse input */
-    void setInputEnabled( bool enabled );
-
-    /**
-      * Returns the currently active map theme id, if any, in the
-      * form of e.g. "earth/openstreetmap/openstreetmap.dgml"
-      */
-    QString mapThemeId() const;
-
-    /**
-      * Change the currently active map theme id. Ignored if the given
-      * map theme id is invalid (not installed).
-      * @see DeclarativeMapThemeManager
-      */
-    void setMapThemeId( const QString &mapThemeId );
-
-    /**
-      * Returns the active projection which can be either "Equirectangular",
-      * "Mercator" or "Spherical"
-      */
-    QString projection( ) const;
-
-    /**
-      * Change the active projection. Accepted values are "Equirectangular",
-      * "Mercator" and "Spherical"
-      */
-    void setProjection( const QString &projection );
-
-    /** Zoom in by a fixed amount */
-    void zoomIn();
-
-    /** Zoom out by a fixed amount */
-    void zoomOut();
 
     /**
       * Returns the screen position of the given coordinate
@@ -192,21 +144,13 @@ public Q_SLOTS:
 
     void setDataPluginDelegate( const QString &plugin, QQmlComponent* delegate );
 
-protected:
-    virtual bool event ( QEvent * event );
-
-    virtual bool sceneEvent ( QEvent * event );
-
 private Q_SLOTS:
     void updateCenterPosition();
 
     void forwardMouseClick( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
 private:
-    static void addLayer( QQmlListProperty<DeclarativeDataPlugin> *list, DeclarativeDataPlugin *layer );
-
-    /** Wrapped MarbleWidget */
-    Marble::MarbleWidget *const m_marbleWidget;
+    void addLayer( QQmlListProperty<DeclarativeDataPlugin> *list, DeclarativeDataPlugin *layer );
 
     Marble::MapThemeManager m_mapThemeManager;
 

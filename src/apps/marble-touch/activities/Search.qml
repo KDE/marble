@@ -7,36 +7,39 @@
 // Copyright 2011 Dennis Nienhüser <nienhueser@kde.org>
 // Copyright 2011 Daniel Marth <danielmarth@gmx.at>
 
-import QtQuick 1.0
-import com.nokia.meego 1.0
-import org.kde.edu.marble 0.11
+import QtQuick 2.3
+import org.kde.edu.marble 0.20
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 import ".."
 
 /*
  * Page for geocaching activity.
  */
-Page {
+Item {
     id: searchActivityPage
     anchors.fill: parent
 
     property bool horizontal: width / height > 1.20
 
-    tools: ToolBarLayout {
-        MarbleToolIcon {
-            iconSource: main.icon( "actions/go-home", 48 );
-            onClicked: main.showNavigation()
+    RowLayout {
+        id: toolBar
+        anchors.fill: parent
+        ToolButton {
+            text: "Home"
+            onClicked: activitySelection.showActivities()
         }
 
         ToolButton {
             id: minimizeButton
+            text: "Search"
             checkable: true
             checked: true
             width: 60
-            flat: true
             iconSource: main.icon( "actions/go-up", 48 );
         }
 
-        Item {}
+        Item { Layout.fillWidth: true }
     }
 
     Rectangle {
@@ -102,7 +105,7 @@ Page {
 
         ListView {
             id: searchResultListView
-            property int count: model === undefined ? 0 : model.count
+            property int count: model === null ? 0 : model.count
 
             anchors.top: searchField.bottom
             anchors.left: parent.left
@@ -114,10 +117,6 @@ Page {
             highlight: Rectangle { color: "lightgray"; radius: 5 }
             focus: true
             clip: true
-        }
-
-        ScrollDecorator {
-            flickableItem: searchResultListView
         }
     }
 
@@ -190,7 +189,6 @@ Page {
                     ToolButton  {
                         id: bookmarkButton
                         anchors.verticalCenter: parent.verticalCenter
-                        flat: true
                         height: 38
                         width: 38
                         property bool isBookmark: marbleWidget.bookmarks.isBookmark(longitude,latitude)
@@ -245,10 +243,9 @@ Page {
         }
     }
 
-    onStatusChanged: {
-        if ( status === PageStatus.Activating ) {
-            mapContainer.embedMarbleWidget()
-        }
+    Component.onCompleted: {
+        mapContainer.embedMarbleWidget()
+        mainWindow.toolBar.replaceWith(toolBar)
     }
 
     function startRouting(longitude, latitude)
