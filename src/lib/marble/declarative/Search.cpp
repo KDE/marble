@@ -84,8 +84,6 @@ void Search::updateSearchModel( QAbstractItemModel *model )
     QHash<int,QByteArray> const roles = model->roleNames();
     for ( int i=0; i<m_searchResult->rowCount(); ++i ) {
 
-        // @TODO FIXME Port to QtQuick 2
-        /*
         QQmlContext *context = new QQmlContext( qmlContext( m_placemarkDelegate ) );
         QModelIndex const index = m_searchResult->index( i );
         QHash<int,QByteArray>::const_iterator iter = roles.constBegin();
@@ -94,15 +92,13 @@ void Search::updateSearchModel( QAbstractItemModel *model )
             context->setContextProperty( iter.value(), m_searchResult->data( index, iter.key() ) );
         }
         QObject* component = m_placemarkDelegate->create( context );
-        QGraphicsItem* graphicsItem = qobject_cast<QGraphicsItem*>( component );
         QQuickItem* item = qobject_cast<QQuickItem*>( component );
-        if ( graphicsItem && item ) {
-            graphicsItem->setParentItem( m_marbleWidget );
+        if ( item ) {
+            item->setParentItem( m_marbleWidget );
             m_placemarks[i] = item;
         } else {
             delete component;
         }
-        */
     }
     updatePlacemarks();
 }

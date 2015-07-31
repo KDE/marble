@@ -121,9 +121,7 @@ QQmlListProperty<QObject> MarbleWidget::childList()
 
 QQmlListProperty<DeclarativeDataPlugin> MarbleWidget::dataLayers()
 {
-    // @TODO FIXME Port to QtQuick 2
-    // return QQmlListProperty<DeclarativeDataPlugin>( this, 0, &Marble::MarbleMap::addLayer, 0, 0, 0 );
-    return QQmlListProperty<DeclarativeDataPlugin>();
+    return QQmlListProperty<DeclarativeDataPlugin>( this, m_dataLayers );
 }
 
 void MarbleWidget::setActiveRenderPlugins( const QStringList &items )
@@ -249,8 +247,7 @@ void MarbleWidget::setDataPluginDelegate( const QString &plugin, QQmlComponent *
     foreach( Marble::RenderPlugin* renderPlugin, renderPlugins ) {
         Marble::AbstractDataPlugin* dataPlugin = qobject_cast<Marble::AbstractDataPlugin*>( renderPlugin );
         if ( dataPlugin && dataPlugin->nameId() == plugin ) {
-            // @TODO FIXME Port to QtQuick 2
-            // dataPlugin->setDelegate( delegate, this );
+            dataPlugin->setDelegate( delegate, this );
         }
     }
 }

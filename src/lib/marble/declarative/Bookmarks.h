@@ -53,7 +53,7 @@ public:
 
     BookmarksModel* model();
 
-    bool isBookmark( qreal longitude, qreal latitude ) const;
+    Q_INVOKABLE bool isBookmark( qreal longitude, qreal latitude ) const;
 
 public Q_SLOTS:
     void addBookmark( qreal longitude, qreal latitude, const QString &name, const QString &folder );

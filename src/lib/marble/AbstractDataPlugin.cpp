@@ -61,7 +61,7 @@ class AbstractDataPluginPrivate
     AbstractDataPluginModel *m_model;
     quint32 m_numberOfItems;
     QQmlComponent* m_delegate;
-    QGraphicsItem* m_delegateParent;
+    QQuickItem* m_delegateParent;
     QMap<AbstractDataPluginItem*,QQuickItem*> m_delegateInstances;
     QTimer m_updateTimer;
 };
@@ -177,7 +177,7 @@ RenderPlugin::RenderType AbstractDataPlugin::renderType() const
     return OnlineRenderType;
 }
 
-void AbstractDataPlugin::setDelegate( QQmlComponent *delegate, QGraphicsItem* parent )
+void AbstractDataPlugin::setDelegate( QQmlComponent *delegate, QQuickItem* parent )
 {
     qDeleteAll( d->m_delegateInstances.values() );
     d->m_delegateInstances.clear();
@@ -230,12 +230,9 @@ void AbstractDataPlugin::handleViewportChange( const ViewportParams *viewport )
 
             QObject* component = d->m_delegate->create( context );
             QQuickItem* newItem = qobject_cast<QQuickItem*>( component );
-            QGraphicsItem* graphicsItem = qobject_cast<QGraphicsItem*>( component );
-            if ( graphicsItem && newItem ) {
-                graphicsItem->setParentItem( d->m_delegateParent );
-            }
 
             if ( newItem ) {
+                newItem->setParentItem( d->m_delegateParent );
                 d->m_delegateInstances[item] = newItem;
             } else {
                 mDebug() << "Failed to create delegate";

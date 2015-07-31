@@ -37,9 +37,8 @@ class DeclarativeDataPlugin;
 /**
   * Wraps a Marble::MarbleWidget, providing access to important properties and methods
   *
-  * @todo FIXME: Currently stuffed in a QGraphicsProxyWidget as otherwise it is only
-  * displayed in QML when it is the only widget. For performance reasons it would be
-  * nice to avoid this.
+  * @note: This is not meant to be used anymore, please use MarbleQuickItem instead
+  *
   */
 class MarbleWidget : public Marble::MarbleQuickItem
 {
@@ -142,7 +141,7 @@ public Q_SLOTS:
 
     void downloadArea( int topTileLevel, int bottomTileLevel );
 
-    void setDataPluginDelegate( const QString &plugin, QQmlComponent* delegate );
+    void setDataPluginDelegate(const QString &plugin, QQmlComponent *delegate );
 
 private Q_SLOTS:
     void updateCenterPosition();
