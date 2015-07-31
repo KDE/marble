@@ -15,19 +15,18 @@
 #include <QHash>
 #include <QMetaType>
 #include <QString>
+#include <QXmlStreamAttributes>
 
 // Marble
 #include "GeoDataCoordinates.h"
 #include <marble_export.h>
+#include "GeoDocument.h"
 
 namespace Marble
 {
 
 class GeoDataGeometry;
 class GeoDataPlacemark;
-class OsmWayData;
-class OsmRelationData;
-class GeoWriter;
 
 /**
  * This class is used to encapsulate the osm data fields kept within a placemark's extendedData.
@@ -50,7 +49,7 @@ class GeoWriter;
  * ( these are usually newly created placemarks within the editor, or placemarks loaded from
  * ".kml" files ). Placemarks that already have it, are simply written as-is.
  */
-class MARBLE_EXPORT OsmPlacemarkData
+class MARBLE_EXPORT OsmPlacemarkData: public GeoNode
 {
 
 public:
@@ -64,6 +63,7 @@ public:
     QString user() const;
     QString timestamp() const;
     QString action() const;
+    const char* nodeType() const;
 
     void setId( qint64 id );
     void setVersion( const QString& version );
@@ -126,6 +126,18 @@ public:
      * at an entry with osmKey
      */
     static QString osmHashKey();
+
+    /**
+     * @brief fromParserAttributes is a convenience function that parses all osm-related
+     * arguments of a tag
+     * @return an OsmPlacemarkData object containing all the necessary data
+     */
+    static OsmPlacemarkData fromParserAttributes( const QXmlStreamAttributes &attributes );
+
+    /**
+     * @brief osmPlacemarkDataType used for identifying OsmPlacemarkData objects as GeoNodes
+     */
+    static const char* osmPlacemarkDataType;
 
 private:
     qint64 m_id;

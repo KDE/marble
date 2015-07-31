@@ -71,7 +71,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
         // If placemark is not in the document, add it.
         if ( !placemark->parent() ) {
             if ( parentItem.represents( osmTag_node ) ) {
-                placemark = createPOI( doc, geometry, placemark->extendedData() );
+                placemark = createPOI( doc, geometry, osmData );
             }
             else if ( parentItem.represents( osmTag_way ) ) {
                 doc->append( placemark );
@@ -96,7 +96,8 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
             parser.addDummyPlacemark( placemark );
             placemark = new GeoDataPlacemark( *placemark );
             GeoDataPolygon *polygon = new GeoDataPolygon;
-            polygon->setOuterBoundary( *polyline );
+            GeoDataLinearRing ring = GeoDataLinearRing ( *polyline );
+            polygon->setOuterBoundary( ring );
             //FIXME: Dirty hack to change placemark associated with node, for parsing purposes.
             polyline->setParent( placemark );
             placemark->setGeometry( polygon );
@@ -117,7 +118,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
         {
             // If placemark is not in the document, add it.
             if ( !placemark->parent() ) {
-                placemark = createPOI( doc, geometry, placemark->extendedData() );
+                placemark = createPOI( doc, geometry, osmData );
             }
             placemark->setVisible( true );
         }
@@ -168,17 +169,16 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
     return 0;
 }
 
-GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeometry *geometry, const GeoDataExtendedData &extendedData )
+GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeometry *geometry, const OsmPlacemarkData &osmData )
 {
     GeoDataPoint *point = dynamic_cast<GeoDataPoint *>( geometry );
 
     if ( !point ) {
         return 0;
     }
-
     GeoDataPlacemark *newPlacemark = new GeoDataPlacemark();
     newPlacemark->setGeometry( new GeoDataPoint( *point ) );
-    newPlacemark->setExtendedData( extendedData );
+    newPlacemark->setOsmData( osmData );
     point->setParent( newPlacemark );
     newPlacemark->setVisible( false );
     newPlacemark->setZoomLevel( 18 );

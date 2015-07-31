@@ -55,10 +55,8 @@ GeoNode* OsmWayTagHandler::parse( GeoParser &geoParser ) const
     qint64 id = parser.attribute( "id" ).toLongLong();
 
     // Saving osm server generated data
-    OsmPlacemarkData osmData = parser.osmAttributeData();
-    GeoDataExtendedData extendedData;
-    extendedData.addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( osmData ) ) );
-    placemark->setExtendedData( extendedData );
+    OsmPlacemarkData osmData = OsmPlacemarkData::fromParserAttributes( parser.attributes() );
+    placemark->setOsmData( osmData );
     OsmObjectManager::registerId( id );
 
     // At the beginning visibility = false. Afterwards when parsing

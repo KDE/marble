@@ -13,17 +13,16 @@
 
 // Qt
 #include <QVariant>
-#include <QFile>
 
 // Marble
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
-#include "GeoWriter.h"
 
 namespace Marble
 {
 
 const QString OsmPlacemarkData::osmDataKey = "osm_data";
+const char* OsmPlacemarkData::osmPlacemarkDataType = "OsmPlacemarkDataType";
 
 OsmPlacemarkData::OsmPlacemarkData():
     m_id( 0 )
@@ -179,6 +178,25 @@ QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator OsmPlacemarkData::
 QString OsmPlacemarkData::osmHashKey()
 {
     return osmDataKey;
+}
+
+OsmPlacemarkData OsmPlacemarkData::fromParserAttributes( const QXmlStreamAttributes &attributes )
+{
+    OsmPlacemarkData osmData;
+    osmData.setId( attributes.value( "id" ).toLongLong() );
+    osmData.setVersion( attributes.value( "version" ).toString() );
+    osmData.setChangeset( attributes.value( "changeset" ).toString() );
+    osmData.setUser( attributes.value( "user" ).toString() );
+    osmData.setUid( attributes.value( "uid" ).toString() );
+    osmData.setVisible( attributes.value( "visible" ).toString() );
+    osmData.setTimestamp( attributes.value( "timestamp" ).toString() );
+    osmData.setAction( attributes.value( "action" ).toString() );
+    return osmData;
+}
+
+const char *OsmPlacemarkData::nodeType() const
+{
+    return osmPlacemarkDataType;
 }
 
 }

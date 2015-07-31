@@ -186,6 +186,11 @@ const OsmPlacemarkData& GeoDataPlacemark::osmData() const
     return osmData;
 }
 
+void GeoDataPlacemark::setOsmData( const OsmPlacemarkData &osmData )
+{
+    extendedData().addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( osmData ) ) );
+}
+
 OsmPlacemarkData& GeoDataPlacemark::osmData()
 {
     return const_cast<OsmPlacemarkData&>( (static_cast<const GeoDataPlacemark*>(this) )->osmData() );

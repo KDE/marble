@@ -53,10 +53,8 @@ GeoNode* OsmNodeTagHandler::parse( GeoParser &geoParser ) const
     placemark->setZoomLevel( 18 ); // Not really sure it's the right thing?
 
     // Saving osm server generated data
-    OsmPlacemarkData osmData = parser.osmAttributeData();
-    GeoDataExtendedData extendedData;
-    extendedData.addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( osmData ) ) );
-    placemark->setExtendedData( extendedData );
+    OsmPlacemarkData osmData = OsmPlacemarkData::fromParserAttributes( parser.attributes() );
+    placemark->setOsmData( osmData );
     parser.addDummyPlacemark( placemark );
     OsmObjectManager::registerId( id );
 

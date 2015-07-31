@@ -47,13 +47,6 @@ public:
     bool tagNeedArea( const QString &keyValue ) const;
     void addDummyPlacemark( GeoDataPlacemark *placemark );
 
-    /**
-     * @brief osmAttributeData is a convenience function that parses all osm-related
-     * arguments of a tag
-     * @return an OsmPlacemarkData object containing all the necessary data
-     */
-    OsmPlacemarkData osmAttributeData() const;
-
     static const QColor backgroundColor;
 
 private:

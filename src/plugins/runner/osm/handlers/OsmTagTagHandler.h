@@ -17,7 +17,7 @@ namespace Marble
 class GeoDataGeometry;
 class GeoDataPlacemark;
 class GeoDataDocument;
-class GeoDataExtendedData;
+class OsmPlacemarkData;
 
 namespace osm
 {
@@ -27,7 +27,7 @@ class OsmTagTagHandler : public GeoTagHandler
 public:
     virtual GeoNode* parse( GeoParser& ) const;
 private:
-    static GeoDataPlacemark* createPOI( GeoDataDocument* doc, GeoDataGeometry* geometry, const GeoDataExtendedData &data );
+    static GeoDataPlacemark* createPOI( GeoDataDocument* doc, GeoDataGeometry* geometry, const OsmPlacemarkData &osmData );
 };
 
 }

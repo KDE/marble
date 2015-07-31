@@ -104,20 +104,6 @@ void OsmParser::addDummyPlacemark( GeoDataPlacemark *placemark )
     m_dummyPlacemarks << placemark;
 }
 
-OsmPlacemarkData OsmParser::osmAttributeData() const
-{
-    OsmPlacemarkData osmData;
-    osmData.setId( attribute( "id" ).toLongLong() );
-    osmData.setVersion( attribute( "version" ) );
-    osmData.setChangeset( attribute( "changeset" ) );
-    osmData.setUser( attribute( "user" ) );
-    osmData.setUid( attribute( "uid" ) );
-    osmData.setVisible( attribute( "visible" ) );
-    osmData.setTimestamp( attribute( "timestamp" ) );
-    osmData.setAction( attribute( "action" ) );
-    return osmData;
-}
-
 bool OsmParser::isValidRootElement()
 {
     return isValidElement(osm::osmTag_osm);

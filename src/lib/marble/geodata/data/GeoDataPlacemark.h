@@ -120,6 +120,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     OsmPlacemarkData &osmData();
     const OsmPlacemarkData &osmData() const;
 
+    void setOsmData( const OsmPlacemarkData &osmData );
     bool hasOsmData() const;
 
     /**
