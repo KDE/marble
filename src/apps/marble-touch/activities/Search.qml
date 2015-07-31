@@ -87,7 +87,7 @@ Item {
             }
 
             function searchFinished() {
-                searchField.busy = false
+                busy = false
             }
         }
 
@@ -99,6 +99,7 @@ Item {
             anchors.right: parent.right
             anchors.margins: 10
 
+            font.pointSize: 16
             text: "<p>Example search terms<ul><li>London</li><li>Baker Street, London</li><li>Baker Street 221b, London</li><li>Restaurant, London</li></ul></p>"
             visible: searchResultView.searchTerm === "" && searchResultListView.count === 0
         }
@@ -172,7 +173,8 @@ Item {
                     Label {
                         id: searchResultText
                         anchors.verticalCenter: parent.verticalCenter
-                        text: "<font size=\"-1\">" + (index+1) + ". " + display + "</font>"
+                        font.pointSize: 16
+                        text: (index+1) + ". " + name
                         width: searchResultItem.width - bookmarkButton.width - parent.spacing - 10
                         wrapMode: searchResultItem.detailed ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
                         clip: true
@@ -198,7 +200,7 @@ Item {
                             if ( isBookmark ) {
                                 marbleWidget.bookmarks.removeBookmark(longitude,latitude)
                             } else {
-                                marbleWidget.bookmarks.addBookmark(longitude,latitude, display, "Default")
+                                marbleWidget.bookmarks.addBookmark(longitude,latitude, name, "Default")
                             }
                             isBookmark = marbleWidget.bookmarks.isBookmark(longitude,latitude)
                         }

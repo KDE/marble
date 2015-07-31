@@ -68,7 +68,7 @@ Item {
         anchors.top: parent.top
         visible: searchButton.checked
         onSearch: {
-            searchField.busy = true
+            busy = true
             marbleWidget.find( term )
         }
 
@@ -77,7 +77,7 @@ Item {
         }
 
         function searchFinished() {
-            searchField.busy = false
+            busy = false
         }
     }
 

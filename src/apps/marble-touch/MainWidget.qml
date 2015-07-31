@@ -143,7 +143,7 @@ Item {
                     // Name of the search result.
                     Text {
                         id: nameLabel
-                        text: display
+                        text: name
                         anchors.top: parent.top
                         anchors.left: parent.left
                         anchors.right: parent.right
