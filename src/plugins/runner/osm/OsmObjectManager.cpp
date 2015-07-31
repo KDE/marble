@@ -57,6 +57,7 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
     if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         const GeoDataPolygon* polygon = static_cast<GeoDataPolygon*>( placemark->geometry() );
         const GeoDataLinearRing &outerBoundary = polygon->outerBoundary();
+        int index = -1;
         osmData.addTag( "type", "multipolygon" );
 
         // Outer boundary
@@ -76,7 +77,7 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
             osmNodeData.setVisible( "false" );
             outerBoundaryData.addReference( *it, osmNodeData );
         }
-        osmData.addReference( &outerBoundary, outerBoundaryData );
+        osmData.addReference( index, outerBoundaryData );
 
         // Each inner boundary
         foreach( const GeoDataLinearRing &innerRing, polygon->innerBoundaries() ) {
@@ -96,8 +97,8 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
                 osmNodeData.setVisible( "false" );
                 innerRingData.addReference( *it , osmNodeData );
             }
-
-            osmData.addReference( &innerRing, innerRingData );
+            ++index;
+            osmData.addReference( index, innerRingData );
         }
     }
 }

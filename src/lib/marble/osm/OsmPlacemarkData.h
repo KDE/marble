@@ -32,7 +32,7 @@ class GeoDataPlacemark;
  * This class is used to encapsulate the osm data fields kept within a placemark's extendedData.
  * It stores OSM server generated data: id, version, changeset, uid, visible, user, timestamp;
  * It also stores a hash map of <tags> ( key-value mappings ) and a hash map of component osm
- * placemarks @see m_ndRefs @see m_memberRefs
+ * placemarks @see m_nodeReferences @see m_memberReferences
  *
  * The usual workflow with osmData goes as follows:
  *
@@ -85,14 +85,14 @@ public:
      */
     QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesBegin() const;
     QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesEnd() const;
-    QHash< const GeoDataGeometry*, OsmPlacemarkData >::const_iterator memberReferencesBegin() const;
-    QHash< const GeoDataGeometry*, OsmPlacemarkData >::const_iterator memberReferencesEnd() const;
+    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesBegin() const;
+    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesEnd() const;
 
     /**
-     * @brief this function returns the osmData associated with a member
+     * @brief this function returns the osmData associated with a member boundary
      */
-    OsmPlacemarkData &reference( const GeoDataGeometry* geometry );
-    OsmPlacemarkData reference( const GeoDataGeometry* geometry ) const;
+    OsmPlacemarkData &reference( int key );
+    OsmPlacemarkData reference( int key ) const;
 
     /**
      * @brief this function returns the osmData assosciated with a nd
@@ -101,14 +101,15 @@ public:
     OsmPlacemarkData reference( const GeoDataCoordinates& coordinates ) const;
 
     /**
-     * @brief addRef this function inserts a GeoDataCoordinates = OsmplacemarkData
-     * mapping into the reference hash, equivalent to the osm <nd ref="@param key" >
+     * @brief addRef this function inserts a int = OsmplacemarkData
+     * mapping into the reference hash, equivalent to the osm <nd ref="@param boundary of index @key" >
      * core data element
+     * @see m_memberReferences
      */
-    void addReference( const GeoDataGeometry* key, const OsmPlacemarkData &value );
+    void addReference( int key, const OsmPlacemarkData &value );
 
     /**
-     * @brief addRef this function inserts a GeoDataGeometry=OsmplacemarkData
+     * @brief addRef this function inserts a GeoDataCoordinates = OsmplacemarkData
      * mapping into the reference hash, equivalent to the <member ref="@param key" >
      * osm core data element
      */
@@ -158,10 +159,12 @@ private:
     QHash< GeoDataCoordinates, OsmPlacemarkData > m_nodeReferences;
 
     /**
-     * @brief m_memberRefs is used to store a relations's members
-     * ( It is empty for other placemark types )
+     * @brief m_memberRefs is used to store a polygon's member boundaries
+     *  the key represends the index of the boundary within the polygon geometry:
+     *  -1 represents the outerBoundary, and 0,1,2... its innerBoundaries, in the
+     *  order provided by polygon->innerBoundaries()
      */
-    QHash< const GeoDataGeometry*, OsmPlacemarkData > m_memberReferences;
+    QHash< int, OsmPlacemarkData > m_memberReferences;
 
 };
 

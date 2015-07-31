@@ -70,16 +70,18 @@ bool OsmDocumentTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer 
         }
         else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
             const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( placemark->geometry() );
+            int index = -1;
 
             // Writing all the outerRing's nodes
             const GeoDataLinearRing &outerRing = polygon->outerBoundary();
-            const OsmPlacemarkData outerRingOsmData = osmData.reference( &outerRing );
+            const OsmPlacemarkData outerRingOsmData = osmData.reference( index );
             OsmNodeTagWriter::writeAllNodes( outerRingOsmData, writer );
             bounds.append( OsmBound( &outerRing, outerRingOsmData ) );
 
             // Writing all nodes for each innerRing
             foreach ( const GeoDataLinearRing &innerRing, polygon->innerBoundaries() ) {
-                const OsmPlacemarkData innerRingOsmData = osmData.reference( &innerRing );
+                ++index;
+                const OsmPlacemarkData innerRingOsmData = osmData.reference( index );
                 OsmNodeTagWriter::writeAllNodes( innerRingOsmData, writer );
                 bounds.append( OsmBound( &innerRing, innerRingOsmData ) );
             }

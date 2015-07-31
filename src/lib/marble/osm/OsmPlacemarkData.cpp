@@ -135,14 +135,14 @@ OsmPlacemarkData OsmPlacemarkData::reference( const GeoDataCoordinates &coordina
     return m_nodeReferences.value( coordinates );
 }
 
-OsmPlacemarkData &OsmPlacemarkData::reference( const GeoDataGeometry *geometry )
+OsmPlacemarkData &OsmPlacemarkData::reference( int key )
 {
-    return m_memberReferences[ geometry ];
+    return m_memberReferences[ key ];
 }
 
-OsmPlacemarkData OsmPlacemarkData::reference( const GeoDataGeometry *geometry ) const
+OsmPlacemarkData OsmPlacemarkData::reference( int key ) const
 {
-    return m_memberReferences.value( geometry );
+    return m_memberReferences.value( key );
 }
 
 void OsmPlacemarkData::addReference( const GeoDataCoordinates &key, const OsmPlacemarkData &value )
@@ -150,17 +150,17 @@ void OsmPlacemarkData::addReference( const GeoDataCoordinates &key, const OsmPla
     m_nodeReferences.insert( key, value );
 }
 
-void OsmPlacemarkData::addReference( const GeoDataGeometry* key, const OsmPlacemarkData &value )
+void OsmPlacemarkData::addReference( int key, const OsmPlacemarkData &value )
 {
     m_memberReferences.insert( key, value );
 }
 
-QHash< const GeoDataGeometry*, OsmPlacemarkData >::const_iterator OsmPlacemarkData::memberReferencesBegin() const
+QHash< int, OsmPlacemarkData >::const_iterator OsmPlacemarkData::memberReferencesBegin() const
 {
     return m_memberReferences.begin();
 }
 
-QHash< const GeoDataGeometry*, OsmPlacemarkData >::const_iterator OsmPlacemarkData::memberReferencesEnd() const
+QHash< int, OsmPlacemarkData >::const_iterator OsmPlacemarkData::memberReferencesEnd() const
 {
     return m_memberReferences.constEnd();
 }

@@ -32,18 +32,16 @@ void OsmRelationTagWriter::writeMultipolygon( const GeoDataPolygon& polygon,
     OsmObjectAttributeWriter::writeAttributes( osmData, writer );
     OsmTagTagWriter::writeTags( osmData, writer );
 
-    const GeoDataLinearRing &ring = polygon.outerBoundary();
-
     writer.writeStartElement( osm::osmTag_member );
-    QString memberId = QString::number( osmData.reference( &ring ).id() );
+    QString memberId = QString::number( osmData.reference( -1 ).id() );
     writer.writeAttribute( "type", "way" );
     writer.writeAttribute( "ref", memberId );
     writer.writeAttribute( "role", "outer" );
     writer.writeEndElement();
 
-    foreach ( const GeoDataLinearRing &innerRing, polygon.innerBoundaries() ) {
+    for ( int index = 0; index < polygon.innerBoundaries().size(); ++index ) {
         writer.writeStartElement( osm::osmTag_member );
-        QString memberId = QString::number( osmData.reference( &innerRing ).id() );
+        QString memberId = QString::number( osmData.reference( index ).id() );
         writer.writeAttribute( "type", "way" );
         writer.writeAttribute( "ref", memberId );
         writer.writeAttribute( "role", "inner" );
