@@ -148,10 +148,11 @@ namespace Marble
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
       ,d(new MarbleQuickItemPrivate(this))
     {
-        foreach (AbstractFloatItem *item, d->map()->floatItems())
-        {   //TODO: These are not supported in Marble Quick - need refactoring: show them only in
-            //MarbleWidget, MarbleQuickItem should not have them accessible
-            item->hide();
+        QStringList const whitelist = QStringList() << "license";
+        foreach (AbstractFloatItem *item, d->map()->floatItems()) {
+            if ( !whitelist.contains( item->nameId() ) ) {
+                item->hide();
+            }
         }
 
         connect(d->map(), SIGNAL(repaintNeeded(QRegion)), this, SLOT(update()));

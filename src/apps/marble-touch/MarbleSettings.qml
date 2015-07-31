@@ -35,7 +35,7 @@ Item {
     property bool showTrack: settings.value( "MarbleWidget", "showTrack", false )
     property string projection: settings.value( "MarbleWidget", "projection", "Spherical" )
     property variant defaultRenderPlugins: ["compass", "coordinate-grid", "progress",
-        "crosshairs", "stars", "scalebar"]
+        "crosshairs", "stars", "scalebar", "license"]
     property variant activeRenderPlugins: settings.value( "MarbleWidget", "activeRenderPlugins", defaultRenderPlugins )
     property string lastActivity: settings.value( "MarbleTouch", "lastActivity", "" )
     property bool inhibitScreensaver: settings.value( "MarbleTouch", "inhibitScreensaver", true )
