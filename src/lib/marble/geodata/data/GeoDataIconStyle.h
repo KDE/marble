@@ -36,7 +36,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
   public:
     GeoDataIconStyle();
     GeoDataIconStyle( const GeoDataIconStyle& other );
-    explicit GeoDataIconStyle( const QImage& icon,
+    explicit GeoDataIconStyle( const QString& iconPath,
                                const QPointF &hotSpot = QPointF( 0.5, 0.5 ) );
     ~GeoDataIconStyle();
 
@@ -57,6 +57,10 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
      */
     QImage scaledIcon() const;
 
+    /**
+     * @brief setIconPath Set the path to load the icon from. Any existing icon is invalidated.
+     * @param filename Path to the icon to load. Can also be a virtual file system like qrc:/
+     */
     void setIconPath( const QString& filename );
     QString iconPath() const;
 

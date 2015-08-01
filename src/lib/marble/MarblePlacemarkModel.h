@@ -64,7 +64,8 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
       DstRole,                         ///< The Daylight Saving Time
       GeometryRole,                    ///< The GeoDataGeometry geometry
       LongitudeRole,                   ///< The longitude in degree (for use in QML)
-      LatitudeRole                     ///< The latitude in degree (for use in QML)
+      LatitudeRole,                    ///< The latitude in degree (for use in QML)
+      IconPathRole                     ///< Path to the image, if known
     };
 
     /**

@@ -39,7 +39,6 @@ PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataPlacemark *placemark ) 
 {
     if ( placemark->style()->iconStyle().iconPath().isNull() ) {
         GeoDataStyle *newStyle = new GeoDataStyle( *placemark->style() );
-        newStyle->iconStyle().setIcon( QImage() );
         newStyle->iconStyle().setIconPath( MarbleDirs::path("bitmaps/redflag_22.png") );
         placemark->setStyle( newStyle );
     }

@@ -31,9 +31,9 @@ class GeoDataIconStylePrivate
     {
     }
 
-    GeoDataIconStylePrivate( const QImage& icon, const QPointF &hotSpot )
+    GeoDataIconStylePrivate( const QString& iconPath, const QPointF &hotSpot )
         : m_scale( 1.0 ),
-          m_icon( icon ),
+          m_iconPath( iconPath ),
           m_hotSpot( hotSpot ),
           m_heading( 0 )
     {
@@ -68,8 +68,8 @@ GeoDataIconStyle::GeoDataIconStyle( const GeoDataIconStyle& other ) :
 {
 }
 
-GeoDataIconStyle::GeoDataIconStyle( const QImage& icon, const QPointF &hotSpot ) :
-    d( new GeoDataIconStylePrivate( icon, hotSpot ) )
+GeoDataIconStyle::GeoDataIconStyle( const QString& iconPath, const QPointF &hotSpot ) :
+    d( new GeoDataIconStylePrivate( iconPath, hotSpot ) )
 {
 }
 

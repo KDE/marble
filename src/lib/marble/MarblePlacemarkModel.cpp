@@ -54,6 +54,7 @@ MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
     roles[DescriptionRole] = "description";
     roles[Qt::DisplayRole] = "name";
     roles[Qt::DecorationRole] = "icon";
+    roles[IconPathRole] = "iconPath";
     roles[PopularityIndexRole] = "zoomLevel";
     roles[VisualCategoryRole] = "visualCategory";
     roles[AreaRole] = "area";
@@ -123,6 +124,8 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return d->m_placemarkContainer->at( index.row() )->name();
     } else if ( role == Qt::DecorationRole ) {
           return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->style()->iconStyle().icon() );
+    } else if ( role == IconPathRole ) {
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->style()->iconStyle().iconPath() );
     } else if ( role == PopularityIndexRole ) {
         return d->m_placemarkContainer->at( index.row() )->zoomLevel();
     } else if ( role == VisualCategoryRole ) {

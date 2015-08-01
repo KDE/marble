@@ -470,7 +470,6 @@ void TourWidgetPrivate::addPlacemark()
     placemark->setVisible( true );
     placemark->setBalloonVisible( true );
     GeoDataStyle *newStyle = new GeoDataStyle( *placemark->style() );
-    newStyle->iconStyle().setIcon( QImage() );
     newStyle->iconStyle().setIconPath( MarbleDirs::path("bitmaps/redflag_22.png") );
     placemark->setStyle( newStyle );
 

@@ -196,7 +196,7 @@ void SatellitesModel::parseCatalog( const QString &id,
 
         // use special icon for moons
         if( category == "Moons" ) {
-            style->iconStyle().setIcon( QImage( ":/icons/moon.png" ) );
+            style->iconStyle().setIconPath( ":/icons/moon.png" );
         }
 
         item->placemark()->setStyle( style );

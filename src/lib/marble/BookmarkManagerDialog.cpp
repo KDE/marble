@@ -224,7 +224,6 @@ void BookmarkManagerDialogPrivate::editBookmark()
             bookmark->setDescription( dialog->description() );
             bookmark->setCoordinate( dialog->coordinates() );
             GeoDataStyle *newStyle = new GeoDataStyle( *bookmark->style() );
-            newStyle->iconStyle().setIcon( QImage() );
             newStyle->iconStyle().setIconPath( dialog->iconLink() );
             bookmark->setStyle( newStyle );
             if ( bookmark->lookAt() ) {

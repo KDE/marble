@@ -132,8 +132,8 @@ class GeoDataFeaturePrivate
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker())
     {
         GeoDataStyle *style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
-        QImage const pixmap = QImage( MarbleDirs::path( "bitmaps/poi/" + bitmap + ".png" ) );
-        style->setIconStyle( GeoDataIconStyle( pixmap ) );
+        QString const imagePath = MarbleDirs::path( "bitmaps/poi/" + bitmap + ".png" );
+        style->setIconStyle( GeoDataIconStyle( imagePath) );
         style->setLabelStyle( GeoDataLabelStyle( font, Qt::black ) );
         return style;
     }
@@ -144,8 +144,7 @@ class GeoDataFeaturePrivate
     {
         GeoDataStyle *style = createStyle( width, realWidth, color, color, true, true, Qt::SolidPattern, penStyle, capStyle, false );
         if( !bitmap.isEmpty() ) {
-            QImage const pixmap = QImage( MarbleDirs::path( "bitmaps/" + bitmap + ".png" ) );
-            style->setIconStyle( GeoDataIconStyle( pixmap ) );
+            style->setIconStyle( GeoDataIconStyle( MarbleDirs::path( "bitmaps/" + bitmap + ".png" ) ) );
         }
         return style;
     }

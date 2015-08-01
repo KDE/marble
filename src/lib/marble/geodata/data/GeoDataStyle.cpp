@@ -23,9 +23,9 @@ class GeoDataStylePrivate
     {
     }
 
-    GeoDataStylePrivate(const QImage& icon,
+    GeoDataStylePrivate(const QString& iconPath,
                         const QFont &font, const QColor &color )
-        : m_iconStyle( icon ),
+        : m_iconStyle( iconPath ),
           m_labelStyle( font, color ),
           m_lineStyle( color ),
           m_polyStyle( color ),
@@ -56,9 +56,9 @@ GeoDataStyle::GeoDataStyle( const GeoDataStyle& other )
 {
 }
 
-GeoDataStyle::GeoDataStyle( const QImage& icon,
+GeoDataStyle::GeoDataStyle( const QString& iconPath,
                             const QFont &font, const QColor &color  )
-    : d( new GeoDataStylePrivate( icon, font, color ) )
+    : d( new GeoDataStylePrivate( iconPath, font, color ) )
 {
 }
 
