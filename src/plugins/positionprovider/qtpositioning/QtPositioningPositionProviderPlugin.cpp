@@ -27,15 +27,21 @@ class QtPositioningPositionProviderPluginPrivate
 {
 public:
     QtPositioningPositionProviderPluginPrivate();
+    ~QtPositioningPositionProviderPluginPrivate();
 
-    QGeoPositionInfoSource *const m_source;
+    QGeoPositionInfoSource* m_source;
     PositionProviderStatus m_status;
 };
 
 QtPositioningPositionProviderPluginPrivate::QtPositioningPositionProviderPluginPrivate() :
-    m_source( QGeoPositionInfoSource::createDefaultSource( 0 ) ),
-    m_status( PositionProviderStatusAcquiring )
+    m_source( nullptr ),
+    m_status( PositionProviderStatusUnavailable )
 {
+}
+
+QtPositioningPositionProviderPluginPrivate::~QtPositioningPositionProviderPluginPrivate()
+{
+    delete m_source;
 }
 
 QString QtPositioningPositionProviderPlugin::name() const
@@ -135,7 +141,9 @@ QtPositioningPositionProviderPlugin::~QtPositioningPositionProviderPlugin()
 
 void QtPositioningPositionProviderPlugin::initialize()
 {
+    d->m_source = QGeoPositionInfoSource::createDefaultSource( this );
     if( d->m_source ) {
+        d->m_status = PositionProviderStatusAcquiring;
         connect( d->m_source, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(update()) );
         d->m_source->setUpdateInterval( 1000 );
         d->m_source->startUpdates();
