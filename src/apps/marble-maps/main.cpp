@@ -12,13 +12,16 @@
 #include <QQmlApplicationEngine>
 
 #include "declarative/MarbleDeclarativePlugin.h"
+#include "MarbleMaps.h"
 
 int main(int argc, char ** argv)
 {
     QApplication app(argc, argv);
 
     MarbleDeclarativePlugin declarativePlugin;
-    declarativePlugin.registerTypes("org.kde.edu.marble");
+    const char * uri = "org.kde.edu.marble";
+    declarativePlugin.registerTypes(uri);
+    qmlRegisterType<Marble::MarbleMaps>(uri, 0, 20, "MarbleMaps");
 
     QQmlApplicationEngine engine(QUrl("qrc:/MainScreen.qml"));
 

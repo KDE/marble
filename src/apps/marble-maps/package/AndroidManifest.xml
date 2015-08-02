@@ -1,13 +1,21 @@
 <?xml version="1.0"?>
-<manifest android:versionName="0.0.1" package="org.kde.marble.maps" android:installLocation="auto" xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="3">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <application android:label="Marble Maps" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:icon="@drawable/marblelogo" android:theme="@android:style/Theme.Holo.Light">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="0.0.1" package="org.kde.marble.maps" android:installLocation="auto" android:versionCode="3">
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+        <application android:label="Marble Maps" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:icon="@drawable/marblelogo" android:theme="@android:style/Theme.Holo.Light">
                 <activity android:label="Marble Maps" android:name="org.qtproject.qt5.android.bindings.QtActivity" android:screenOrientation="unspecified" android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation">
                         <intent-filter>
                                 <action android:name="android.intent.action.MAIN"/>
                                 <category android:name="android.intent.category.LAUNCHER"/>
+                        </intent-filter>
+                        <intent-filter>
+                                <action android:name="android.intent.action.VIEW"/>
+                                <category android:name="android.intent.category.DEFAULT"/>
+                                <data android:scheme="file" host="*" android:mimeType="*/*" android:pathPattern=".*\\.kml"/>
+                                <data android:scheme="file" host="*" android:mimeType="*/*" android:pathPattern=".*\\.gpx"/>
+                                <data android:scheme="file" host="*" android:mimeType="*/*" android:pathPattern=".*\\.osm"/>
                         </intent-filter>
                         <meta-data android:name="android.app.lib_name" android:value="-- %%INSERT_APP_LIB_NAME%% --"/>
                         <meta-data android:name="android.app.qt_sources_resource_id" android:resource="@array/qt_sources"/>

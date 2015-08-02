@@ -1,8 +1,14 @@
-set(marble_SRCS main.cpp)
+set(marble_SRCS main.cpp MarbleMaps.cpp)
 qt5_add_resources(marble_QRCS MarbleMaps.qrc)
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 if (ANDROID)
     set(TARGET Marble)
+
+    find_package(Qt5AndroidExtras)
+    include_directories(${Qt5AndroidExtras_INCLUDE_DIRS})
+
     add_library (${TARGET} SHARED ${marble_SRCS} ${marble_QRCS})
 else()
     set(TARGET marble-maps)
@@ -21,6 +27,7 @@ target_link_libraries (
       ${Qt5Sql_LIBRARIES}
       ${Qt5Location_LIBRARIES}
       ${Qt5Positioning_LIBRARIES}
+      ${Qt5AndroidExtras_LIBRARIES}
       ${MARBLEWIDGET}
       marbledeclarative
       astro)

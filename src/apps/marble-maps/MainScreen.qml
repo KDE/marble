@@ -46,7 +46,7 @@ ApplicationWindow {
         onPinchFinished: marbleMaps.handlePinchFinished(pinch.center)
         onPinchUpdated: marbleMaps.handlePinchUpdated(pinch.center, pinch.scale);
 
-        MarbleItem {
+        MarbleMaps {
             id: marbleMaps
 
             anchors.fill: parent
