@@ -534,6 +534,11 @@ namespace Marble
             }
         }
 
+        if ( positionProvider.isEmpty() ) {
+            model()->positionTracking()->setPositionProviderPlugin( nullptr );
+            return;
+        }
+
         QList<const PositionProviderPlugin*> plugins = model()->pluginManager()->positionProviderPlugins();
         foreach (const PositionProviderPlugin* plugin, plugins) {
             if ( plugin->nameId() == positionProvider) {
