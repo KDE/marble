@@ -67,6 +67,11 @@ ApplicationWindow {
             showBackground: false
             positionProvider: "QtPositioning"
             showPositionMarker: true
+
+            Routing {
+                anchors.fill: parent
+                marbleMap: marbleMaps.marbleMap
+            }
         }
 
         MouseArea{

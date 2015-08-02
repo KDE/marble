@@ -13,29 +13,36 @@
 
 #include <QObject>
 #include <QtQml/qqml.h>
+#include <QQuickPaintedItem>
 
 class QAbstractItemModel;
 
-class MarbleWidget;
+namespace Marble {
+
+class MarbleMap;
 class RoutingPrivate;
 
-class Routing : public QObject
+class Routing : public QQuickPaintedItem
 {
     Q_OBJECT
-    Q_PROPERTY( MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged)
+    Q_PROPERTY( MarbleMap* marbleMap READ marbleMap WRITE setMarbleMap NOTIFY marbleMapChanged)
     Q_PROPERTY( QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged )
     Q_PROPERTY( bool hasRoute READ hasRoute NOTIFY hasRouteChanged )
 
 public:
     enum RoutingProfile { Motorcar, Bicycle, Pedestrian };
 
-    explicit Routing( QObject* parent = 0 );
+    explicit Routing( QQuickItem* parent = 0 );
 
     ~Routing();
 
-    void setMap( MarbleWidget* widget );
+    // Implements QQuickPaintedItem interface
+    void paint(QPainter * painter);
 
-    MarbleWidget *map();
+public:
+    void setMarbleMap( MarbleMap* marbleMap );
+
+    MarbleMap *marbleMap();
 
     QString routingProfile() const;
 
@@ -63,7 +70,7 @@ public Q_SLOTS:
     QObject* waypointModel();
 
 Q_SIGNALS:
-    void mapChanged();
+    void marbleMapChanged();
 
     void routingProfileChanged();
 
@@ -72,5 +79,7 @@ Q_SIGNALS:
 private:
     RoutingPrivate* const d;
 };
+
+}
 
 #endif

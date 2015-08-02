@@ -11,36 +11,40 @@
 #include "Routing.h"
 
 #include "MarbleDeclarativeWidget.h"
-#include "MarbleModel.h"
+#include <MarbleMap.h>
+#include <MarbleModel.h>
 #include "MarbleDirs.h"
 #include "routing/AlternativeRoutesModel.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
 #include "routing/RoutingProfilesModel.h"
+#include <GeoPainter.h>
+#include <routing/Route.h>
 
 #include <QDebug>
+#include <QPainter>
+
+namespace Marble {
 
 class RoutingPrivate
 {
 public:
     RoutingPrivate();
 
-    MarbleWidget* m_marbleWidget;
-
+    MarbleMap* m_marbleMap;
     QMap<QString, Marble::RoutingProfile> m_profiles;
-
     QString m_routingProfile;
 };
 
 RoutingPrivate::RoutingPrivate() :
-    m_marbleWidget( 0 )
+    m_marbleMap( nullptr )
 {
     // nothing to do
 }
 
-Routing::Routing( QObject* parent) :
-    QObject( parent ), d( new RoutingPrivate )
+Routing::Routing( QQuickItem *parent) :
+    QQuickPaintedItem( parent ), d( new RoutingPrivate )
 {
     // nothing to do
 }
@@ -50,19 +54,52 @@ Routing::~Routing()
     delete d;
 }
 
-QObject* Routing::waypointModel()
+void Routing::paint(QPainter *painter)
 {
-    return d->m_marbleWidget ? d->m_marbleWidget->model()->routingManager()->routingModel() : 0;
+    if (!d->m_marbleMap) {
+        return;
+    }
+
+    QPaintDevice *paintDevice = painter->device();
+    painter->end();
+    {
+        Marble::GeoPainter geoPainter(paintDevice, d->m_marbleMap->viewport(), d->m_marbleMap->mapQuality());
+
+        RoutingManager const * const routingManager = d->m_marbleMap->model()->routingManager();
+        GeoDataLineString const waypoints = routingManager->routingModel()->route().path();
+
+        QPen standardRoutePen( routingManager->routeColorStandard() );
+        standardRoutePen.setWidth( 5 );
+        if ( routingManager->state() == RoutingManager::Downloading ) {
+            standardRoutePen.setStyle( Qt::DotLine );
+        }
+        geoPainter.setPen( standardRoutePen );
+        geoPainter.drawPolyline( waypoints );
+    }
+
+    painter->begin(paintDevice);
 }
 
-void Routing::setMap( MarbleWidget* widget )
+QObject* Routing::waypointModel()
 {
-    d->m_marbleWidget = widget;
+    return d->m_marbleMap ? d->m_marbleMap->model()->routingManager()->routingModel() : 0;
+}
 
-    if ( d->m_marbleWidget ) {
-        connect( d->m_marbleWidget->model()->routingManager(), SIGNAL(stateChanged(RoutingManager::State)),
+void Routing::setMarbleMap( MarbleMap* marbleMap )
+{
+    d->m_marbleMap = marbleMap;
+
+    if ( d->m_marbleMap ) {
+        connect(d->m_marbleMap, SIGNAL(repaintNeeded(QRegion)), this, SLOT(update()));
+        RoutingManager* routingManager = d->m_marbleMap->model()->routingManager();
+        if (routingManager->profilesModel()->rowCount() == 0) {
+            routingManager->profilesModel()->loadDefaultProfiles();
+            routingManager->readSettings();
+        }
+
+        connect( routingManager, SIGNAL(stateChanged(RoutingManager::State)),
                  this, SIGNAL(hasRouteChanged()) );
-        QList<Marble::RoutingProfile> profiles = d->m_marbleWidget->model()->routingManager()->profilesModel()->profiles();
+        QList<Marble::RoutingProfile> profiles = routingManager->profilesModel()->profiles();
         if ( profiles.size() == 4 ) {
             /** @todo FIXME: Restrictive assumptions on available plugins and certain profile loading implementation */
             d->m_profiles["Motorcar"] = profiles.at( 0 );
@@ -73,14 +110,14 @@ void Routing::setMap( MarbleWidget* widget )
         }
     }
 
-    emit mapChanged();
+    emit marbleMapChanged();
     emit routingProfileChanged();
     emit hasRouteChanged();
 }
 
-MarbleWidget *Routing::map()
+MarbleMap *Routing::marbleMap()
 {
-    return d->m_marbleWidget;
+    return d->m_marbleMap;
 }
 
 QString Routing::routingProfile() const
@@ -92,8 +129,8 @@ void Routing::setRoutingProfile( const QString & profile )
 {
     if ( d->m_routingProfile != profile ) {
         d->m_routingProfile = profile;
-        if ( d->m_marbleWidget ) {
-            d->m_marbleWidget->model()->routingManager()->routeRequest()->setRoutingProfile( d->m_profiles[profile] );
+        if ( d->m_marbleMap ) {
+            d->m_marbleMap->model()->routingManager()->routeRequest()->setRoutingProfile( d->m_profiles[profile] );
         }
         emit routingProfileChanged();
     }
@@ -101,13 +138,13 @@ void Routing::setRoutingProfile( const QString & profile )
 
 bool Routing::hasRoute() const
 {
-    return d->m_marbleWidget && d->m_marbleWidget->model()->routingManager()->routingModel()->rowCount() > 0;
+    return d->m_marbleMap && d->m_marbleMap->model()->routingManager()->routingModel()->rowCount() > 0;
 }
 
 void Routing::addVia( qreal lon, qreal lat )
 {
-    if ( d->m_marbleWidget ) {
-        Marble::RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
+    if ( d->m_marbleMap ) {
+        Marble::RouteRequest* request = d->m_marbleMap->model()->routingManager()->routeRequest();
         request->append( Marble::GeoDataCoordinates( lon, lat, 0.0, Marble::GeoDataCoordinates::Degree ) );
         updateRoute();
     }
@@ -115,11 +152,11 @@ void Routing::addVia( qreal lon, qreal lat )
 
 void Routing::setVia( int index, qreal lon, qreal lat )
 {
-    if ( index < 0 || index > 200 || !d->m_marbleWidget ) {
+    if ( index < 0 || index > 200 || !d->m_marbleMap ) {
         return;
     }
 
-    Marble::RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
+    Marble::RouteRequest* request = d->m_marbleMap->model()->routingManager()->routeRequest();
     Q_ASSERT( request );
     if ( index < request->size() ) {
         request->setPosition( index, Marble::GeoDataCoordinates( lon, lat, 0.0, Marble::GeoDataCoordinates::Degree ) );
@@ -135,41 +172,41 @@ void Routing::setVia( int index, qreal lon, qreal lat )
 
 void Routing::removeVia( int index )
 {
-    if ( index < 0 || !d->m_marbleWidget ) {
+    if ( index < 0 || !d->m_marbleMap ) {
         return;
     }
 
-    Marble::RouteRequest* request = d->m_marbleWidget->model()->routingManager()->routeRequest();
+    Marble::RouteRequest* request = d->m_marbleMap->model()->routingManager()->routeRequest();
     if ( index < request->size() ) {
-        d->m_marbleWidget->model()->routingManager()->routeRequest()->remove( index );
+        d->m_marbleMap->model()->routingManager()->routeRequest()->remove( index );
     }
 }
 
 void Routing::reverseRoute()
 {
-    if ( d->m_marbleWidget ) {
-        d->m_marbleWidget->model()->routingManager()->reverseRoute();
+    if ( d->m_marbleMap ) {
+        d->m_marbleMap->model()->routingManager()->reverseRoute();
     }
 }
 
 void Routing::clearRoute()
 {
-    if ( d->m_marbleWidget ) {
-        d->m_marbleWidget->model()->routingManager()->clearRoute();
+    if ( d->m_marbleMap ) {
+        d->m_marbleMap->model()->routingManager()->clearRoute();
     }
 }
 
 void Routing::updateRoute()
 {
-    if ( d->m_marbleWidget ) {
-        d->m_marbleWidget->model()->routingManager()->retrieveRoute();
+    if ( d->m_marbleMap ) {
+        d->m_marbleMap->model()->routingManager()->retrieveRoute();
     }
 }
 
 void Routing::openRoute( const QString &fileName )
 {
-    if ( d->m_marbleWidget ) {
-        Marble::RoutingManager * const routingManager = d->m_marbleWidget->model()->routingManager();
+    if ( d->m_marbleMap ) {
+        Marble::RoutingManager * const routingManager = d->m_marbleMap->model()->routingManager();
         /** @todo FIXME: replace the file:// prefix on QML side */
         routingManager->clearRoute();
         QString target = fileName.startsWith( QLatin1String( "file://" ) ) ? fileName.mid( 7 ) : fileName;
@@ -178,7 +215,9 @@ void Routing::openRoute( const QString &fileName )
         if ( route ) {
             const Marble::GeoDataLineString* waypoints = Marble::AlternativeRoutesModel::waypoints( route );
             if ( waypoints ) {
-                d->m_marbleWidget->centerOn( waypoints->latLonAltBox() );
+                GeoDataCoordinates const center = waypoints->latLonAltBox().center();
+                GeoDataCoordinates::Unit const inDegree = GeoDataCoordinates::Degree;
+                d->m_marbleMap->centerOn( center.longitude(inDegree), center.latitude(inDegree) );
             }
         }
     }
@@ -186,11 +225,13 @@ void Routing::openRoute( const QString &fileName )
 
 void Routing::saveRoute( const QString &fileName )
 {
-    if ( d->m_marbleWidget ) {
+    if ( d->m_marbleMap ) {
         /** @todo FIXME: replace the file:// prefix on QML side */
         QString target = fileName.startsWith( QLatin1String( "file://" ) ) ? fileName.mid( 7 ) : fileName;
-        d->m_marbleWidget->model()->routingManager()->saveRoute( target );
+        d->m_marbleMap->model()->routingManager()->saveRoute( target );
     }
+}
+
 }
 
 #include "moc_Routing.cpp"

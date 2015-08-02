@@ -13,14 +13,16 @@
 
 #include <QAbstractListModel>
 
-namespace Marble { class RouteRequest; }
-class Routing;
+namespace Marble {
+    class RouteRequest;
+    class Routing;
+}
 
 class RouteRequestModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_PROPERTY( Routing* routing READ routing WRITE setRouting NOTIFY routingChanged )
+    Q_PROPERTY( Marble::Routing* routing READ routing WRITE setRouting NOTIFY routingChanged )
     Q_PROPERTY( int count READ rowCount )
 
 public:
@@ -49,10 +51,10 @@ public:
     /** Overload of QAbstractListModel */
     QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const;
 
-    Routing *routing();
+    Marble::Routing *routing();
 
 public Q_SLOTS:
-    void setRouting( Routing *routing );
+    void setRouting( Marble::Routing *routing );
 
     void setPosition ( int index, qreal longitude, qreal latitude );
 
@@ -70,7 +72,7 @@ private Q_SLOTS:
 
 private:
     Marble::RouteRequest* m_request;
-    Routing *m_routing;
+    Marble::Routing *m_routing;
     QHash<int, QByteArray> m_roleNames;
 };
 

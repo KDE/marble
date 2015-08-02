@@ -54,7 +54,7 @@ Item {
         }
 
         property Routing routing: Routing {
-            map: map
+            marbleMap: map.marbleMap
         }
 
         // The grouped property "tracking" provides access to tracking related

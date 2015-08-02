@@ -43,13 +43,15 @@
 
 void MarbleDeclarativePlugin::registerTypes( const char *uri )
 {
+    qRegisterMetaType<Marble::MarbleMap*>("MarbleMap*");
+
     //@uri org.kde.edu.marble
     qmlRegisterType<Coordinate>( uri, 0, 20, "Coordinate" );
     qmlRegisterType<Placemark>( uri, 0, 20, "Placemark" );
     qmlRegisterType<PositionSource>( uri, 0, 20, "PositionSource" );
     qmlRegisterType<Bookmarks>( uri, 0, 20, "Bookmarks" );
     qmlRegisterType<Tracking>( uri, 0, 20, "Tracking" );
-    qmlRegisterType<Routing>( uri, 0, 20, "Routing" );
+    qmlRegisterType<Marble::Routing>( uri, 0, 20, "Routing" );
     qmlRegisterType<Navigation>( uri, 0, 20, "Navigation" );
     qmlRegisterType<Search>( uri, 0, 20, "Find" );
     qmlRegisterType<CloudSync>( uri, 0, 20, "CloudSync" );

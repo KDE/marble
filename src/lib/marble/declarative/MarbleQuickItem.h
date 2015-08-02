@@ -15,11 +15,11 @@
 #include <QQuickPaintedItem>
 #include "GeoDataPlacemark.h"
 #include "MarbleGlobal.h"
+#include <MarbleMap.h>
 
 namespace Marble
 {
     class MarbleModel;
-    class MarbleMap;
     class MarbleInputHandler;
     class MarbleQuickItemPrivate;
 
@@ -46,6 +46,7 @@ namespace Marble
         Q_PROPERTY(bool showBackground READ showBackground WRITE setShowBackground NOTIFY showBackgroundChanged)
         Q_PROPERTY(bool showPositionMarker READ showPositionMarker WRITE setShowPositionMarker NOTIFY showPositionMarkerChanged)
         Q_PROPERTY(QString positionProvider READ positionProvider WRITE setPositionProvider NOTIFY positionProviderChanged)
+        Q_PROPERTY(MarbleMap* marbleMap READ map NOTIFY marbleMapChanged)
 
     public:
         MarbleQuickItem(QQuickItem *parent = 0);
@@ -147,6 +148,7 @@ namespace Marble
         void showBackgroundChanged(bool showBackground);
         void showPositionMarkerChanged(bool showPositionMarker);
         void positionProviderChanged(const QString & positionProvider);
+        void marbleMapChanged();
 
     protected:
         QObject *getEventFilter() const;

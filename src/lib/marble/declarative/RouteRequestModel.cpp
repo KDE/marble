@@ -13,6 +13,7 @@
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
 #include "MarbleDeclarativeWidget.h"
+#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "Routing.h"
 
@@ -68,25 +69,25 @@ QVariant RouteRequestModel::data ( const QModelIndex &index, int role ) const
     return QVariant();
 }
 
-Routing *RouteRequestModel::routing()
+Marble::Routing *RouteRequestModel::routing()
 {
     return m_routing;
 }
 
-void RouteRequestModel::setRouting( Routing *routing )
+void RouteRequestModel::setRouting( Marble::Routing *routing )
 {
     if ( routing != m_routing ) {
         m_routing = routing;
         updateMap();
-        connect( m_routing, SIGNAL(mapChanged()), this, SLOT(updateMap()) );
+        connect( m_routing, SIGNAL(marbleMapChanged()), this, SLOT(updateMap()) );
         emit routingChanged();
     }
 }
 
 void RouteRequestModel::updateMap()
 {
-    if ( m_routing && m_routing->map() ) {
-        m_request = m_routing->map()->model()->routingManager()->routeRequest();
+    if ( m_routing && m_routing->marbleMap() ) {
+        m_request = m_routing->marbleMap()->model()->routingManager()->routeRequest();
 
         connect( m_request, SIGNAL(positionChanged(int,GeoDataCoordinates)),
                  this, SLOT(updateData(int)) );
