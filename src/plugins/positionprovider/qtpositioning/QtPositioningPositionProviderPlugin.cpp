@@ -120,16 +120,10 @@ GeoDataAccuracy QtPositioningPositionProviderPlugin::accuracy() const
     }
 
     const QGeoPositionInfo info = d->m_source->lastKnownPosition();
-
-    if( !info.hasAttribute( QGeoPositionInfo::HorizontalAccuracy ) ||
-        !info.hasAttribute( QGeoPositionInfo::VerticalAccuracy ) ) {
-        return GeoDataAccuracy();
-    }
-
     const qreal horizontal = info.attribute( QGeoPositionInfo::HorizontalAccuracy );
     const qreal vertical = info.attribute( QGeoPositionInfo::VerticalAccuracy );
-
-    return GeoDataAccuracy( GeoDataAccuracy::Detailed, horizontal, vertical );
+    GeoDataAccuracy::Level const level = horizontal > 0 ? GeoDataAccuracy::Detailed : GeoDataAccuracy::none;
+    return GeoDataAccuracy( level, horizontal, vertical );
 }
 
 QtPositioningPositionProviderPlugin::QtPositioningPositionProviderPlugin() :
