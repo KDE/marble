@@ -51,6 +51,10 @@ class PluginManagerPrivate
     QList<const ReverseGeocodingRunnerPlugin *> m_reverseGeocodingRunnerPlugins;
     QList<RoutingRunnerPlugin *> m_routingRunnerPlugins;
     QList<const ParseRunnerPlugin *> m_parsingRunnerPlugins;
+
+#ifdef ANDROID
+    QStringList m_pluginPaths;
+#endif
 };
 
 PluginManagerPrivate::~PluginManagerPrivate()
@@ -209,6 +213,14 @@ void PluginManagerPrivate::loadPlugins()
     foreach( const QString &fileName, pluginFileNameList ) {
         // mDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QString const path = MarbleDirs::pluginPath( fileName );
+#ifdef ANDROID
+        QFileInfo targetFile( path );
+        if ( !m_pluginPaths.contains( targetFile.canonicalFilePath() ) ) {
+            // @todo Delete the file here?
+            qDebug() << "Ignoring file " << path << " which is not among the currently installed plugins";
+            continue;
+        }
+#endif
         QPluginLoader* loader = new QPluginLoader( path );
 
         QObject * obj = loader->instance();
@@ -247,17 +259,21 @@ void PluginManagerPrivate::loadPlugins()
 #ifdef ANDROID
     void PluginManager::installPluginsFromAssets() const
     {
+        d->m_pluginPaths.clear();
         QStringList copyList = MarbleDirs::pluginEntryList(QString());
         QDir pluginHome(MarbleDirs::localPath());
         pluginHome.mkpath(MarbleDirs::pluginLocalPath());
         pluginHome.setCurrent(MarbleDirs::pluginLocalPath());
         foreach (const QString & file, copyList) {
+            QString const target = MarbleDirs::pluginLocalPath() + '/' + file;
             if (QFileInfo(MarbleDirs::pluginSystemPath() + '/' + file).isDir()) {
-                pluginHome.mkpath(MarbleDirs::pluginLocalPath() + '/' + file);
+                pluginHome.mkpath(target);
             }
-            else{
+            else {
                 QFile temporaryFile(MarbleDirs::pluginSystemPath() + '/' + file);
-                temporaryFile.copy(MarbleDirs::pluginLocalPath() + '/' + file);
+                temporaryFile.copy(target);
+                QFileInfo targetFile(target);
+                d->m_pluginPaths << targetFile.canonicalFilePath();
             }
         }
     }
