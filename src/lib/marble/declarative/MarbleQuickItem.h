@@ -50,7 +50,6 @@ namespace Marble
         Q_PROPERTY(bool positionAvailable READ positionAvailable NOTIFY positionAvailableChanged)
         Q_PROPERTY(bool positionVisible READ positionVisible NOTIFY positionVisibleChanged)
         Q_PROPERTY(MarbleMap* marbleMap READ map NOTIFY marbleMapChanged)
-        Q_PROPERTY(void viewport NOTIFY viewportChanged)
 
     public:
         MarbleQuickItem(QQuickItem *parent = 0);
