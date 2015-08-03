@@ -71,13 +71,11 @@ ApplicationWindow {
             positionProvider: suspended ? "" : "QtPositioning"
             showPositionMarker: true
 
-            onPositionVisibleChanged: {
-                if ( !positionVisible && positionAvailable ) {
-                    zoomToPositionButton.updateIndicator();
-                }
-            }
+            onPositionAvailableChanged: updateIndicator()
+            onPositionVisibleChanged: updateIndicator()
+            onViewportChanged: updateIndicator()
 
-            onViewportChanged: {
+            function updateIndicator() {
                 if ( !positionVisible && positionAvailable ) {
                     zoomToPositionButton.updateIndicator();
                 }
