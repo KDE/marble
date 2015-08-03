@@ -15,7 +15,7 @@
 using namespace Marble;
 
 
-SearchBarBackend::SearchBarBackend(QObject *parent) :
+SearchBackend::SearchBackend(QObject *parent) :
     QObject(parent),
     m_searchManager( nullptr ),
     m_marbleQuickItem( nullptr ),
@@ -30,7 +30,7 @@ SearchBarBackend::SearchBarBackend(QObject *parent) :
     m_completionModel->setPlacemarkContainer(m_completionContainer);
 }
 
-void SearchBarBackend::search(const QString &place)
+void SearchBackend::search(const QString &place)
 {
     if (m_marbleQuickItem)
     {
@@ -38,7 +38,7 @@ void SearchBarBackend::search(const QString &place)
     }
 }
 
-void SearchBarBackend::setCompletionPrefix(const QString &prefix)
+void SearchBackend::setCompletionPrefix(const QString &prefix)
 {
     if( m_completer != nullptr && m_completer->completionPrefix() != prefix ) {
         m_completionModel->removePlacemarks(QString("Completion model"), 0, m_completionModel->rowCount());
@@ -66,22 +66,22 @@ void SearchBarBackend::setCompletionPrefix(const QString &prefix)
     }
 }
 
-QObject * SearchBarBackend::marbleQuickItem()
+QObject * SearchBackend::marbleQuickItem()
 {
     return m_marbleQuickItem;
 }
 
-MarblePlacemarkModel *SearchBarBackend::completionModel()
+MarblePlacemarkModel *SearchBackend::completionModel()
 {
     return m_completionModel;
 }
 
-const QObject * SearchBarBackend::marbleQuickItem() const
+const QObject * SearchBackend::marbleQuickItem() const
 {
     return m_marbleQuickItem;
 }
 
-void SearchBarBackend::updateMap(int placemarkIndex)
+void SearchBackend::updateMap(int placemarkIndex)
 {
     QVariant data = m_placemarkModel->data(m_placemarkModel->index(placemarkIndex), MarblePlacemarkModel::ObjectPointerRole);
     GeoDataPlacemark *placemark = placemarkFromQVariant(data);
@@ -91,7 +91,7 @@ void SearchBarBackend::updateMap(int placemarkIndex)
     m_marbleQuickItem->centerOn(*placemark, true);
 }
 
-void SearchBarBackend::setMarbleQuickItem(QObject *marbleQuickItem)
+void SearchBackend::setMarbleQuickItem(QObject *marbleQuickItem)
 {
     MarbleQuickItem * item = qobject_cast<MarbleQuickItem*>(marbleQuickItem);
     if (m_marbleQuickItem == item)
@@ -107,7 +107,9 @@ void SearchBarBackend::setMarbleQuickItem(QObject *marbleQuickItem)
         m_searchManager = new SearchRunnerManager(m_marbleQuickItem->model(), this);
 
         connect(m_searchManager, SIGNAL(searchResultChanged(QAbstractItemModel*)),
-                this, SLOT(searchFinished(QAbstractItemModel*)));
+                this, SLOT(updateSearchResult(QAbstractItemModel*)));
+        connect(m_searchManager, SIGNAL(searchFinished(QString)),
+                this, SIGNAL(searchFinished(QString)));
 
         m_completer = new QCompleter();
         m_completer->setModel(m_marbleQuickItem->model()->placemarkModel());
@@ -118,13 +120,13 @@ void SearchBarBackend::setMarbleQuickItem(QObject *marbleQuickItem)
     }
 }
 
-void SearchBarBackend::searchFinished(QAbstractItemModel *result)
+void SearchBackend::updateSearchResult(QAbstractItemModel *result)
 {
     m_placemarkModel = qobject_cast<MarblePlacemarkModel*>(result);
-    emit updateSearchResults(m_placemarkModel);
+    emit searchResultChanged(m_placemarkModel);
 }
 
-GeoDataPlacemark *SearchBarBackend::placemarkFromQVariant(const QVariant &data) const
+GeoDataPlacemark *SearchBackend::placemarkFromQVariant(const QVariant &data) const
 {
     if( !data.isValid() ) {
         return nullptr;

@@ -68,7 +68,7 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
     qmlRegisterType<MapThemeModel>( uri, 0, 20, "MapThemeModel" );
     qmlRegisterType<DeclarativeDataPlugin>( uri, 0, 20, "DataLayer" );
 
-    qmlRegisterType<Marble::SearchBarBackend>(uri, 0, 20, "SearchBackend");
+    qmlRegisterType<Marble::SearchBackend>(uri, 0, 20, "SearchBackend");
     qmlRegisterType<Marble::MarbleQuickItem>(uri, 0, 20, "MarbleItem");
 
     qmlRegisterUncreatableType<Marble::MarblePlacemarkModel>(uri, 1, 0, "MarblePlacemarkModel", "MarblePlacemarkModel is not instantiable");

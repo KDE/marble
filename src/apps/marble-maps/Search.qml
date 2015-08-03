@@ -65,7 +65,7 @@ Item {
     SearchBackend {
         id: backend
         marbleQuickItem: root.marbleQuickItem
-        onUpdateSearchResults: {
+        onSearchResultChanged: {
             searchResults.model = model;
             searchResults.visible = true;
             background.visible = true;

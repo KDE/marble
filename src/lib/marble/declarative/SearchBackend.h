@@ -22,7 +22,7 @@
 namespace Marble
 {
 
-class SearchBarBackend : public QObject
+class SearchBackend : public QObject
 {
     Q_OBJECT
 
@@ -30,7 +30,7 @@ class SearchBarBackend : public QObject
     Q_PROPERTY(MarblePlacemarkModel *completionModel READ completionModel NOTIFY completionModelChanged)
 
 public:
-    SearchBarBackend(QObject *parent = 0);
+    SearchBackend(QObject *parent = 0);
     Q_INVOKABLE void search(const QString &place);
     Q_INVOKABLE void setCompletionPrefix(const QString &prefix);
     QObject *marbleQuickItem();
@@ -40,12 +40,13 @@ public:
 signals:
     void marbleQuickItemChanged(QObject *marbleQuickItem);
     void completionModelChanged(MarblePlacemarkModel *model);
-    void updateSearchResults(MarblePlacemarkModel *model);
+    void searchResultChanged(MarblePlacemarkModel *model);
+    void searchFinished(const QString &searchTerm);
 
 public slots:
     Q_INVOKABLE void updateMap(int placemarkIndex);
     void setMarbleQuickItem(QObject *marbleQuickItem);
-    void searchFinished(QAbstractItemModel *result);
+    void updateSearchResult(QAbstractItemModel *result);
 
 private:
     GeoDataPlacemark *placemarkFromQVariant(const QVariant &data) const;
