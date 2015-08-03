@@ -125,7 +125,7 @@ ApplicationWindow {
             angle = marbleMaps.angleFromPointToCurrentLocation(point);
         }
 
-        showDirection: !marbleMaps.positionVisible
+        showDirection: marbleMaps.positionAvailable && !marbleMaps.positionVisible
     }
 
     BoxedText {
@@ -136,6 +136,6 @@ ApplicationWindow {
             horizontalCenter: zoomToPositionButton.horizontalCenter
         }
 
-        visible: !marbleMaps.positionVisible
+        visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
     }
 }
