@@ -24,6 +24,9 @@ ApplicationWindow {
         id: toolBar
     }
 
+    width: 600
+    height: 400
+
     SystemPalette{
         id: palette
         colorGroup: SystemPalette.Active
@@ -41,7 +44,7 @@ ApplicationWindow {
 
         onPinchStarted: marbleMaps.handlePinchStarted(pinch.center)
         onPinchFinished: marbleMaps.handlePinchFinished(pinch.center)
-        onPinchUpdated: marbleMaps.handlePinchUpdated(pinch.center, pinch.scale)
+        onPinchUpdated: marbleMaps.handlePinchUpdated(pinch.center, pinch.scale);
 
         MarbleItem {
             id: marbleMaps
@@ -68,6 +71,18 @@ ApplicationWindow {
             positionProvider: "QtPositioning"
             showPositionMarker: true
 
+            onPositionVisibleChanged: {
+                if ( !positionVisible && positionAvailable ) {
+                    zoomToPositionButton.updateIndicator();
+                }
+            }
+
+            onViewportChanged: {
+                if ( !positionVisible && positionAvailable ) {
+                    zoomToPositionButton.updateIndicator();
+                }
+            }
+
             Routing {
                 anchors.fill: parent
                 marbleMap: marbleMaps.marbleMap
@@ -88,5 +103,39 @@ ApplicationWindow {
         id: search
         anchors.fill: parent
         marbleQuickItem: marbleMaps
+    }
+
+    PositionButton {
+        id: zoomToPositionButton
+        anchors {
+            bottom: parent.bottom
+            right: parent.right
+            bottomMargin: Screen.pixelDensity * 9
+        }
+
+        iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
+
+        onClicked: marbleMaps.centerOnCurrentPosition()
+
+        property real distance: 0
+
+        function updateIndicator() {
+            var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
+            distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
+            angle = marbleMaps.angleFromPointToCurrentLocation(point);
+        }
+
+        showDirection: !marbleMaps.positionVisible
+    }
+
+    BoxedText {
+        id: distanceIndicator
+        text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
+        anchors {
+            bottom: zoomToPositionButton.top
+            horizontalCenter: zoomToPositionButton.horizontalCenter
+        }
+
+        visible: !marbleMaps.positionVisible
     }
 }

@@ -14,6 +14,7 @@
 #include <QGeoPositionInfoSource>
 #include <QGeoPositionInfo>
 #include <QGeoCoordinate>
+#include <QTimer>
 
 #if QT_VERSION < 0x050000
 
@@ -31,11 +32,13 @@ public:
 
     QGeoPositionInfoSource* m_source;
     PositionProviderStatus m_status;
+    QTimer * m_updateChecker;
 };
 
 QtPositioningPositionProviderPluginPrivate::QtPositioningPositionProviderPluginPrivate() :
     m_source( nullptr ),
-    m_status( PositionProviderStatusUnavailable )
+    m_status( PositionProviderStatusUnavailable ),
+    m_updateChecker( new QTimer )
 {
 }
 
@@ -136,6 +139,7 @@ QtPositioningPositionProviderPlugin::QtPositioningPositionProviderPlugin() :
 
 QtPositioningPositionProviderPlugin::~QtPositioningPositionProviderPlugin()
 {
+    delete d->m_updateChecker;
     delete d;
 }
 
@@ -144,9 +148,11 @@ void QtPositioningPositionProviderPlugin::initialize()
     d->m_source = QGeoPositionInfoSource::createDefaultSource( this );
     if( d->m_source ) {
         d->m_status = PositionProviderStatusAcquiring;
+        connect( d->m_updateChecker, SIGNAL(timeout()), this, SLOT(update()) );
         connect( d->m_source, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(update()) );
         d->m_source->setUpdateInterval( 1000 );
         d->m_source->startUpdates();
+        d->m_updateChecker->start( 5000 );
     }
 }
 
@@ -214,6 +220,6 @@ void QtPositioningPositionProviderPlugin::update()
 
 } // namespace Marble
 
-Q_EXPORT_PLUGIN2( Marble::QtMobilityPositionProviderPlugin, Marble::QtMobilityPositionProviderPlugin )
+Q_EXPORT_PLUGIN2( Marble::QtPositioningPositionProviderPlugin, Marble::QtPositioningPositionProviderPlugin )
 
 #include "moc_QtPositioningPositionProviderPlugin.cpp"

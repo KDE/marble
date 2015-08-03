@@ -15,7 +15,8 @@
 #include <QQuickPaintedItem>
 #include "GeoDataPlacemark.h"
 #include "MarbleGlobal.h"
-#include <MarbleMap.h>
+#include "PositionProviderPlugin.h"
+#include "MarbleMap.h"
 
 namespace Marble
 {
@@ -46,7 +47,10 @@ namespace Marble
         Q_PROPERTY(bool showBackground READ showBackground WRITE setShowBackground NOTIFY showBackgroundChanged)
         Q_PROPERTY(bool showPositionMarker READ showPositionMarker WRITE setShowPositionMarker NOTIFY showPositionMarkerChanged)
         Q_PROPERTY(QString positionProvider READ positionProvider WRITE setPositionProvider NOTIFY positionProviderChanged)
+        Q_PROPERTY(bool positionAvailable READ positionAvailable NOTIFY positionAvailableChanged)
+        Q_PROPERTY(bool positionVisible READ positionVisible NOTIFY positionVisibleChanged)
         Q_PROPERTY(MarbleMap* marbleMap READ map NOTIFY marbleMapChanged)
+        Q_PROPERTY(void viewport NOTIFY viewportChanged)
 
     public:
         MarbleQuickItem(QQuickItem *parent = 0);
@@ -71,6 +75,7 @@ namespace Marble
         void setZoom(int zoom, FlyToMode mode = Instant);
         void centerOn(const GeoDataPlacemark& placemark, bool animated = false);
         void centerOn(const GeoDataLatLonBox& box, bool animated = false);
+        Q_INVOKABLE void centerOnCurrentPosition();
 
         void zoomIn(FlyToMode mode = Automatic);
         void zoomOut(FlyToMode mode = Automatic);
@@ -124,6 +129,10 @@ namespace Marble
         bool showBackground() const;
         bool showPositionMarker() const;
         QString positionProvider() const;
+        bool positionAvailable() const;
+        bool positionVisible();
+        Q_INVOKABLE qreal distanceFromPointToCurrentLocation(const QPoint & position) const;
+        Q_INVOKABLE qreal angleFromPointToCurrentLocation(const QPoint & position) const;
 
         MarbleModel* model();
         const MarbleModel* model() const;
@@ -148,7 +157,10 @@ namespace Marble
         void showBackgroundChanged(bool showBackground);
         void showPositionMarkerChanged(bool showPositionMarker);
         void positionProviderChanged(const QString & positionProvider);
+        void positionAvailableChanged(bool positionAvailable);
+        void positionVisibleChanged(bool positionVisible);
         void marbleMapChanged();
+        void viewportChanged();
 
     protected:
         QObject *getEventFilter() const;
@@ -156,6 +168,9 @@ namespace Marble
 
     private slots:
         void resizeMap();
+        void positionDataStatusChanged(PositionProviderStatus status);
+        void positionChanged(const GeoDataCoordinates &, GeoDataAccuracy);
+        void updatePositionVisibility();
 
     private:
         typedef QSharedPointer<MarbleQuickItemPrivate> MarbleQuickItemPrivatePtr;

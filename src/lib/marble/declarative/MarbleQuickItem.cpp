@@ -13,6 +13,7 @@
 #include <QPainter>
 #include <QPaintDevice>
 #include <QtMath>
+
 #include <MarbleModel.h>
 #include <MarbleMap.h>
 #include <ViewportParams.h>
@@ -27,6 +28,7 @@
 #include <PositionProviderPlugin.h>
 #include <PluginManager.h>
 #include <RenderPlugin.h>
+#include <MarbleMath.h>
 
 namespace Marble
 {
@@ -133,6 +135,7 @@ namespace Marble
     public:
         MarbleQuickItemPrivate(MarbleQuickItem *marble) : MarbleAbstractPresenter()
           ,m_marble(marble)
+          ,m_positionVisible(false)
           ,m_inputHandler(this, marble)
         {
             connect(this, SIGNAL(updateRequired()), m_marble, SLOT(update()));
@@ -141,6 +144,7 @@ namespace Marble
     private:
         MarbleQuickItem *m_marble;
         friend class MarbleQuickItem;
+        bool m_positionVisible;
 
         MarbleQuickInputHandler m_inputHandler;
     };
@@ -158,6 +162,8 @@ namespace Marble
         connect(d->map(), SIGNAL(repaintNeeded(QRegion)), this, SLOT(update()));
         connect(this, SIGNAL(widthChanged()), this, SLOT(resizeMap()));
         connect(this, SIGNAL(heightChanged()), this, SLOT(resizeMap()));
+        connect(d->map(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updatePositionVisibility()));
+        connect(d->map(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SIGNAL(viewportChanged()));
 
         setAcceptedMouseButtons(Qt::AllButtons);
         installEventFilter(&d->m_inputHandler);
@@ -172,6 +178,37 @@ namespace Marble
 
         d->map()->setSize(newWidth, newHeight);
         update();
+        updatePositionVisibility();
+    }
+
+    void MarbleQuickItem::positionDataStatusChanged(PositionProviderStatus status)
+        {
+            if (status == PositionProviderStatusAvailable) {
+                emit positionAvailableChanged(true);
+            }
+            else {
+                emit positionAvailableChanged(false);
+            }
+    }
+
+    void MarbleQuickItem::positionChanged(const GeoDataCoordinates &, GeoDataAccuracy)
+    {
+       updatePositionVisibility();
+    }
+
+    void MarbleQuickItem::updatePositionVisibility()
+    {
+        bool isVisible = false;
+        if ( positionAvailable() ) {
+            if ( d->map()->viewport()->viewLatLonAltBox().contains(d->model()->positionTracking()->currentLocation()) ) {
+                isVisible = true;
+            }
+        }
+
+        if ( isVisible != d->m_positionVisible ) {
+            d->m_positionVisible = isVisible;
+            emit positionVisibleChanged( isVisible );
+        }
     }
 
     void MarbleQuickItem::paint(QPainter *painter)
@@ -283,7 +320,7 @@ namespace Marble
             return this->model()->positionTracking()->positionProviderPlugin()->nameId();
         }
 
-        return "";
+        return QString();
     }
 
     MarbleModel* MarbleQuickItem::model()
@@ -306,6 +343,43 @@ namespace Marble
         return d->map();
     }
 
+    bool MarbleQuickItem::positionAvailable() const
+    {
+        return d->model()->positionTracking()->status() == PositionProviderStatusAvailable;
+    }
+
+    bool MarbleQuickItem::positionVisible()
+    {
+        return d->m_positionVisible;
+    }
+
+    qreal MarbleQuickItem::distanceFromPointToCurrentLocation(const QPoint & position) const
+    {
+        if ( positionAvailable() ) {
+            qreal lon1;
+            qreal lat1;
+            d->map()->viewport()->geoCoordinates(position.x(), position.y(), lon1, lat1, GeoDataCoordinates::Radian );
+
+            GeoDataCoordinates currentCoordinates = d->model()->positionTracking()->currentLocation();
+            qreal lon2 = currentCoordinates.longitude();
+            qreal lat2 = currentCoordinates.latitude();
+
+            return distanceSphere(lon1, lat1, lon2, lat2) * d->model()->planetRadius();
+        }
+        return 0;
+    }
+
+    qreal MarbleQuickItem::angleFromPointToCurrentLocation( const QPoint & position ) const
+    {
+        if ( positionAvailable() ) {
+            qreal x, y;
+            PositionTracking const * positionTracking = d->model()->positionTracking();
+            map()->viewport()->screenCoordinates( positionTracking->currentLocation(), x, y );
+            return atan2( y-position.y(), x-position.x() ) * RAD2DEG;
+        }
+        return 0;
+    }
+
     void MarbleQuickItem::setZoom(int newZoom, FlyToMode mode)
     {
         d->setZoom(newZoom, mode);
@@ -319,6 +393,16 @@ namespace Marble
     void MarbleQuickItem::centerOn(const GeoDataLatLonBox& box, bool animated)
     {
         d->centerOn(box, animated);
+    }
+
+    void MarbleQuickItem::centerOnCurrentPosition()
+    {
+        GeoDataCoordinates coordinates = d->model()->positionTracking()->currentLocation();
+        if ( coordinates == GeoDataCoordinates() ) {
+            return;
+        }
+
+        d->centerOn(coordinates, true);
     }
 
     void MarbleQuickItem::goHome()
@@ -526,7 +610,7 @@ namespace Marble
 
     void MarbleQuickItem::setPositionProvider(const QString &positionProvider)
     {
-        QString name = "";
+        QString name;
         if ( this->model()->positionTracking()->positionProviderPlugin() ) {
             name = this->model()->positionTracking()->positionProviderPlugin()->nameId();
             if ( name == positionProvider ) {
@@ -542,7 +626,9 @@ namespace Marble
         QList<const PositionProviderPlugin*> plugins = model()->pluginManager()->positionProviderPlugins();
         foreach (const PositionProviderPlugin* plugin, plugins) {
             if ( plugin->nameId() == positionProvider) {
-                model()->positionTracking()->setPositionProviderPlugin(plugin->newInstance());
+                PositionProviderPlugin * newPlugin = plugin->newInstance();
+                model()->positionTracking()->setPositionProviderPlugin(newPlugin);
+                connect(newPlugin, SIGNAL(statusChanged(PositionProviderStatus)), this, SLOT(positionDataStatusChanged(PositionProviderStatus)));
                 emit positionProviderChanged(positionProvider);
                 break;
             }

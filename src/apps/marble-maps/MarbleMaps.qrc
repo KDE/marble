@@ -5,7 +5,12 @@
     <file>SearchResults.qml</file>
     <file>SearchField.qml</file>
     <file>Search.qml</file>
+    <file>CircularButton.qml</file>
+    <file>PositionButton.qml</file>
+    <file>BoxedText.qml</file>
     <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
+    <file alias="gps_fixed.png">../../../data/android/drawable-xxxhdpi/gps_fixed.png</file>
+    <file alias="gps_not_fixed.png">../../../data/android/drawable-xxxhdpi/gps_not_fixed.png</file>
+    <file alias="backdrop.png">../../../data/android/drawable-xxxhdpi/backdrop.png</file>
 </qresource>
 </RCC>
-
