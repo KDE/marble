@@ -68,7 +68,7 @@ ApplicationWindow {
             showOtherPlaces: false
             showScaleBar: false
             showBackground: false
-            positionProvider: "QtPositioning"
+            positionProvider: suspended ? "" : "QtPositioning"
             showPositionMarker: true
 
             onPositionVisibleChanged: {

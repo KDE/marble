@@ -19,14 +19,21 @@ class MarbleMaps : public MarbleQuickItem
 {
     Q_OBJECT
 
+    Q_PROPERTY( bool suspended READ isSuspended NOTIFY isSuspendedChanged )
+
 public:
     MarbleMaps(QQuickItem *parent = 0);
+
+    bool isSuspended() const;
+
+Q_SIGNALS:
+    void isSuspendedChanged(bool isSuspended);
 
 private Q_SLOTS:
     void handleApplicationStateChange(Qt::ApplicationState state);
 
 private:
-    QString m_suspendedPositionProvider;
+    bool m_suspended;
 
 };
 

@@ -22,7 +22,8 @@
 namespace Marble {
 
 MarbleMaps::MarbleMaps(QQuickItem *parent) :
-    MarbleQuickItem(parent)
+    MarbleQuickItem(parent),
+    m_suspended(false)
 {
     QGuiApplication* application = qobject_cast<QGuiApplication*>(QGuiApplication::instance());
     if (application) {
@@ -48,16 +49,19 @@ MarbleMaps::MarbleMaps(QQuickItem *parent) :
 #endif
 }
 
+bool MarbleMaps::isSuspended() const
+{
+    return m_suspended;
+}
+
 void MarbleMaps::handleApplicationStateChange(Qt::ApplicationState state)
 {
     if (state == Qt::ApplicationSuspended) {
-        // Shutdown position tracking when the application is suspended
-        m_suspendedPositionProvider = positionProvider();
-        setPositionProvider(QString());
-    } else if (state == Qt::ApplicationActive && !m_suspendedPositionProvider.isEmpty()) {
-        // Restore a previously suspended position tracking plugin on application resume
-        setPositionProvider(m_suspendedPositionProvider);
-        m_suspendedPositionProvider = QString();
+        m_suspended = true;
+        emit isSuspendedChanged(m_suspended);
+    } else if (state == Qt::ApplicationActive) {
+        m_suspended = false;
+        emit isSuspendedChanged(m_suspended);
     }
 }
 
