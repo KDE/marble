@@ -158,6 +158,8 @@ void PositionMarker::initialize()
     if ( marbleModel() ) {
         connect( marbleModel()->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
                 this, SLOT(setPosition(GeoDataCoordinates)) );
+        connect( marbleModel()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
+                this, SIGNAL(repaintNeeded()) );
         m_isInitialized = true;
     }
     loadDefaultCursor();
