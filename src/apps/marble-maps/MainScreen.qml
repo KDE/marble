@@ -97,12 +97,6 @@ ApplicationWindow {
         }
     }
 
-    Search {
-        id: search
-        anchors.fill: parent
-        marbleQuickItem: marbleMaps
-    }
-
     PositionButton {
         id: zoomToPositionButton
         anchors {
@@ -135,5 +129,11 @@ ApplicationWindow {
         }
 
         visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
+    }
+
+    Search {
+        id: search
+        anchors.fill: parent
+        marbleQuickItem: marbleMaps
     }
 }
