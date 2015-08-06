@@ -24,6 +24,11 @@ Coordinate::Coordinate( qreal lon, qreal lat, qreal alt, QObject *parent ) :
     setAltitude( alt );
 }
 
+Coordinate::Coordinate(const Marble::GeoDataCoordinates &coordinates)
+{
+    setCoordinates(coordinates);
+}
+
 qreal Coordinate::longitude() const
 {
     return m_coordinate.longitude( GeoDataCoordinates::Degree );

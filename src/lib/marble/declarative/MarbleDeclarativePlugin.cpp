@@ -30,6 +30,7 @@
 #include "Placemark.h"
 #include "routing/SpeakersModel.h"
 #include "routing/VoiceNavigationModel.h"
+#include "routing/RoutingModel.h"
 #include "AbstractFloatItem.h"
 #include "RenderPlugin.h"
 #include "MarblePlacemarkModel.h"
@@ -72,6 +73,7 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
     qmlRegisterType<Marble::MarbleQuickItem>(uri, 0, 20, "MarbleItem");
 
     qmlRegisterUncreatableType<Marble::MarblePlacemarkModel>(uri, 1, 0, "MarblePlacemarkModel", "MarblePlacemarkModel is not instantiable");
+    qmlRegisterUncreatableType<Marble::RoutingModel>(uri, 0, 20, "RoutingModel", "RoutingModel is not instantiable");
     qmlRegisterUncreatableType<BookmarksModel>( uri, 0, 20, "BookmarksModel", "Do not create" );
     qmlRegisterUncreatableType<Marble::AbstractFloatItem>( uri, 0, 20, "FloatItem", "Do not create" );
     qmlRegisterUncreatableType<Marble::RenderPlugin>( uri, 0, 20, "RenderPlugin", "Do not create" );

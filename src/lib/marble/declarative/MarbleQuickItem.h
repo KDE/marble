@@ -17,6 +17,7 @@
 #include "MarbleGlobal.h"
 #include "PositionProviderPlugin.h"
 #include "MarbleMap.h"
+#include "Coordinate.h"
 
 namespace Marble
 {
@@ -50,6 +51,7 @@ namespace Marble
         Q_PROPERTY(bool positionAvailable READ positionAvailable NOTIFY positionAvailableChanged)
         Q_PROPERTY(bool positionVisible READ positionVisible NOTIFY positionVisibleChanged)
         Q_PROPERTY(MarbleMap* marbleMap READ map NOTIFY marbleMapChanged)
+        Q_PROPERTY(Coordinate *  currentPosition READ currentPosition NOTIFY currentPositionChanged)
 
     public:
         MarbleQuickItem(QQuickItem *parent = 0);
@@ -132,6 +134,7 @@ namespace Marble
         bool positionVisible();
         Q_INVOKABLE qreal distanceFromPointToCurrentLocation(const QPoint & position) const;
         Q_INVOKABLE qreal angleFromPointToCurrentLocation(const QPoint & position) const;
+        Coordinate *currentPosition() const;
 
         MarbleModel* model();
         const MarbleModel* model() const;
@@ -160,6 +163,7 @@ namespace Marble
         void positionVisibleChanged(bool positionVisible);
         void marbleMapChanged();
         void viewportChanged();
+        void currentPositionChanged(Coordinate * currentPosition);
 
     protected:
         QObject *getEventFilter() const;
@@ -170,6 +174,7 @@ namespace Marble
         void positionDataStatusChanged(PositionProviderStatus status);
         void positionChanged(const GeoDataCoordinates &, GeoDataAccuracy);
         void updatePositionVisibility();
+        void updateCurrentPosition(const GeoDataCoordinates & coordinates);
 
     private:
         typedef QSharedPointer<MarbleQuickItemPrivate> MarbleQuickItemPrivatePtr;

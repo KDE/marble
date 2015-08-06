@@ -16,7 +16,6 @@
 #include "MarbleDirs.h"
 #include "routing/AlternativeRoutesModel.h"
 #include "routing/RoutingManager.h"
-#include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
 #include "routing/RoutingProfilesModel.h"
 #include <GeoPainter.h>
@@ -99,6 +98,8 @@ void Routing::setMarbleMap( MarbleMap* marbleMap )
 
         connect( routingManager, SIGNAL(stateChanged(RoutingManager::State)),
                  this, SIGNAL(hasRouteChanged()) );
+        emit routingModelChanged();
+
         QList<Marble::RoutingProfile> profiles = routingManager->profilesModel()->profiles();
         if ( profiles.size() == 4 ) {
             /** @todo FIXME: Restrictive assumptions on available plugins and certain profile loading implementation */
@@ -141,6 +142,11 @@ bool Routing::hasRoute() const
     return d->m_marbleMap && d->m_marbleMap->model()->routingManager()->routingModel()->rowCount() > 0;
 }
 
+RoutingModel *Routing::routingModel()
+{
+    return d->m_marbleMap == 0 ? 0 : d->m_marbleMap->model()->routingManager()->routingModel();
+}
+
 void Routing::addVia( qreal lon, qreal lat )
 {
     if ( d->m_marbleMap ) {
@@ -148,6 +154,11 @@ void Routing::addVia( qreal lon, qreal lat )
         request->append( Marble::GeoDataCoordinates( lon, lat, 0.0, Marble::GeoDataCoordinates::Degree ) );
         updateRoute();
     }
+}
+
+void Routing::addVia(Coordinate *coordinate)
+{
+    addVia(coordinate->longitude(), coordinate->latitude());
 }
 
 void Routing::setVia( int index, qreal lon, qreal lat )

@@ -14,6 +14,8 @@
 #include <QObject>
 #include <QtQml/qqml.h>
 #include <QQuickPaintedItem>
+#include <Coordinate.h>
+#include <routing/RoutingModel.h>
 
 class QAbstractItemModel;
 
@@ -28,6 +30,7 @@ class Routing : public QQuickPaintedItem
     Q_PROPERTY( MarbleMap* marbleMap READ marbleMap WRITE setMarbleMap NOTIFY marbleMapChanged)
     Q_PROPERTY( QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged )
     Q_PROPERTY( bool hasRoute READ hasRoute NOTIFY hasRouteChanged )
+    Q_PROPERTY( RoutingModel* routingModel READ routingModel NOTIFY routingModelChanged)
 
 public:
     enum RoutingProfile { Motorcar, Bicycle, Pedestrian };
@@ -50,8 +53,12 @@ public:
 
     bool hasRoute() const;
 
+    RoutingModel *routingModel();
+
 public Q_SLOTS:
     void addVia( qreal lon, qreal lat );
+
+    void addVia( Coordinate * coordinate);
 
     void setVia( int index, qreal lon, qreal lat );
 
@@ -75,6 +82,8 @@ Q_SIGNALS:
     void routingProfileChanged();
 
     void hasRouteChanged();
+
+    void routingModelChanged();
 
 private:
     RoutingPrivate* const d;

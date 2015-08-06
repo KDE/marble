@@ -8,9 +8,19 @@
     <file>CircularButton.qml</file>
     <file>PositionButton.qml</file>
     <file>BoxedText.qml</file>
+    <file>NavigationSetup.qml</file>
+    <file>NavigationSetupButton.qml</file>
+    <file>RoutePlanViewer.qml</file>
     <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
     <file alias="gps_fixed.png">../../../data/android/drawable-xxxhdpi/gps_fixed.png</file>
     <file alias="gps_not_fixed.png">../../../data/android/drawable-xxxhdpi/gps_not_fixed.png</file>
     <file alias="backdrop.png">../../../data/android/drawable-xxxhdpi/backdrop.png</file>
+    <file alias="navigation.png">../../../data/android/drawable-xxxhdpi/navigation.png</file>
+    <file alias="car.png">../../../data/android/drawable-xxxhdpi/car.png</file>
+    <file alias="bike.png">../../../data/android/drawable-xxxhdpi/bike.png</file>
+    <file alias="walk.png">../../../data/android/drawable-xxxhdpi/walk.png</file>
+    <file alias="map.png">../../../data/android/drawable-xxxhdpi/map.png</file>
+    <file alias="waypoint.png">../../../data/android/drawable-xxxhdpi/waypoint.png</file>
+    <file alias="place.png">../../../data/android/drawable-xxxhdpi/place.png</file>
 </qresource>
 </RCC>

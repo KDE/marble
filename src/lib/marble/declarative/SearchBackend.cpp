@@ -11,6 +11,7 @@
 #include "SearchBackend.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleModel.h"
+#include "Coordinate.h"
 
 using namespace Marble;
 
@@ -22,7 +23,8 @@ SearchBackend::SearchBackend(QObject *parent) :
     m_placemarkModel( nullptr ),
     m_completer( nullptr ),
     m_completionModel( new MarblePlacemarkModel ),
-    m_completionContainer( new QVector<GeoDataPlacemark*>() )
+    m_completionContainer( new QVector<GeoDataPlacemark*>() ),
+    m_selectedPlacemark( )
 {
     m_model.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
     m_model.sort(0);
@@ -81,14 +83,22 @@ const QObject * SearchBackend::marbleQuickItem() const
     return m_marbleQuickItem;
 }
 
-void SearchBackend::updateMap(int placemarkIndex)
+Coordinate *SearchBackend::selectedCoordinate()
+{
+    return &m_selectedCoordinate;
+}
+
+void SearchBackend::setSelectedPlacemark(int placemarkIndex)
 {
     QVariant data = m_placemarkModel->data(m_placemarkModel->index(placemarkIndex), MarblePlacemarkModel::ObjectPointerRole);
     GeoDataPlacemark *placemark = placemarkFromQVariant(data);
     if( placemark == nullptr ) {
         return;
     }
+    m_selectedPlacemark = *placemark;
     m_marbleQuickItem->centerOn(*placemark, true);
+    m_selectedCoordinate.setCoordinates(m_selectedPlacemark.coordinate());
+    emit selectedCoordinateChanged(&m_selectedCoordinate);
 }
 
 void SearchBackend::setMarbleQuickItem(QObject *marbleQuickItem)

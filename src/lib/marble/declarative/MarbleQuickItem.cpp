@@ -29,6 +29,8 @@
 #include <PluginManager.h>
 #include <RenderPlugin.h>
 #include <MarbleMath.h>
+#include <GeoDataCoordinates.h>
+#include <Coordinate.h>
 
 namespace Marble
 {
@@ -145,6 +147,7 @@ namespace Marble
         MarbleQuickItem *m_marble;
         friend class MarbleQuickItem;
         bool m_positionVisible;
+        Coordinate m_currentPosition;
 
         MarbleQuickInputHandler m_inputHandler;
     };
@@ -209,6 +212,12 @@ namespace Marble
             d->m_positionVisible = isVisible;
             emit positionVisibleChanged( isVisible );
         }
+    }
+
+    void MarbleQuickItem::updateCurrentPosition(const GeoDataCoordinates &coordinates)
+    {
+        d->m_currentPosition.setCoordinates(coordinates);
+        emit currentPositionChanged(&d->m_currentPosition);
     }
 
     void MarbleQuickItem::paint(QPainter *painter)
@@ -378,6 +387,11 @@ namespace Marble
             return atan2( y-position.y(), x-position.x() ) * RAD2DEG;
         }
         return 0;
+    }
+
+    Coordinate * MarbleQuickItem::currentPosition() const
+    {
+        return &d->m_currentPosition;
     }
 
     void MarbleQuickItem::setZoom(int newZoom, FlyToMode mode)
@@ -629,6 +643,7 @@ namespace Marble
                 PositionProviderPlugin * newPlugin = plugin->newInstance();
                 model()->positionTracking()->setPositionProviderPlugin(newPlugin);
                 connect(newPlugin, SIGNAL(statusChanged(PositionProviderStatus)), this, SLOT(positionDataStatusChanged(PositionProviderStatus)));
+                connect(newPlugin, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)), this, SLOT(updateCurrentPosition(GeoDataCoordinates)));
                 emit positionProviderChanged(positionProvider);
                 break;
             }
