@@ -96,6 +96,7 @@ void Routing::setMarbleMap( MarbleMap* marbleMap )
             routingManager->readSettings();
         }
 
+        connect( routingManager, SIGNAL(stateChanged(RoutingManager::State)), this, SLOT(update()));
         connect( routingManager, SIGNAL(stateChanged(RoutingManager::State)),
                  this, SIGNAL(hasRouteChanged()) );
         emit routingModelChanged();
