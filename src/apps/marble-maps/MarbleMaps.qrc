@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
+    <file>FlatButton.qml</file>
     <file>Completion.qml</file>
     <file>MainScreen.qml</file>
     <file>SearchResults.qml</file>
@@ -22,5 +23,7 @@
     <file alias="map.png">../../../data/android/drawable-xxxhdpi/map.png</file>
     <file alias="waypoint.png">../../../data/android/drawable-xxxhdpi/waypoint.png</file>
     <file alias="place.png">../../../data/android/drawable-xxxhdpi/place.png</file>
+    <file alias="clear.png">../../../data/android/drawable-xxxhdpi/ic_close_black_18dp.png</file>
+    <file alias="busy_indicator.png">../../../data/android/drawable-xxxhdpi/busy_indicator.png</file>
 </qresource>
 </RCC>

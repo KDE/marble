@@ -74,14 +74,15 @@ Item {
             background.visible = true;
             searchField.focus = true;
         }
+        onSearchFinished: searchField.busy = false
     }
 
     SearchField {
         id: searchField
+        width: Math.min(700, root.width - 6 * Screen.pixelDensity)
         anchors {
             top: parent.top
             left: parent.left
-            right: parent.right
             margins: Screen.pixelDensity * 3
         }
         completionModel: backend.completionModel

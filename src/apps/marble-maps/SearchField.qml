@@ -9,6 +9,7 @@ Item {
     property alias query: field.text
 
     property alias completionModel: completion.model
+    property bool busy: false
 
     signal searchRequested(string query)
     signal completionRequested(string query)
@@ -16,6 +17,7 @@ Item {
     function search(query) {
         query = query.trim();
         if(query !== "") {
+            root.busy = true
             searchRequested(query);
             field.focus = false;
         }
@@ -35,42 +37,71 @@ Item {
 
     TextField {
         id: field
-        anchors {
-            left: parent.left
-            right: searchButton.left
-            margins: 5
-        }
+        anchors.left: parent.left
+        anchors.right: parent.right
+
         placeholderText: qsTr("Search")
         font.pointSize: 18
         textColor: palette.text
         inputMethodHints: Qt.ImhNoPredictiveText
         onAccepted: root.search(text)
         onTextChanged: root.completionRequested(text)
-    }
 
-    Button {
-        id: searchButton
-        anchors {
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-            margins: 10
-        }
-        width: height
+        BusyIndicator {
+            id: searchBusyIndicator
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: clearButton.visible ? clearButton.left : clearButton.right
+            anchors.rightMargin: 10
+            visible: running
+            height: 0.7 * field.height
+            width: height
+            running: root.busy
 
-        property string imageSource: "qrc:///search.png"
-
-        onClicked: root.search(field.text)
-
-        style: ButtonStyle {
-            background: Rectangle {
-                anchors.fill: parent
-                color: searchButton.pressed ? palette.highlight : palette.base
-                Image {
-                    anchors.fill: parent
-                    source: searchButton.imageSource
+            style: BusyIndicatorStyle {
+                indicator: Image {
+                    visible: control.running
+                    source: "busy_indicator.png"
+                    RotationAnimator on rotation {
+                        running: control.running
+                        loops: Animation.Infinite
+                        duration: 1500
+                        from: 0 ; to: 360
+                    }
                 }
             }
+        }
+
+        FlatButton {
+            id: clearButton
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: searchButton.visible ? searchButton.left : parent.right
+            anchors.rightMargin: 10
+            height: 0.7 * field.height
+            width: height
+            visible: field.text !== ""
+            imageSource: "qrc:///clear.png"
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    field.text = ""
+                    field.focus = true
+                }
+            }
+        }
+
+        FlatButton {
+            id: searchButton
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            height: 0.7 * field.height
+            width: height
+            visible: !root.busy
+            enabled: field.text !== ""
+            imageSource: "qrc:///search.png"
+
+            onClicked: root.search(field.text)
         }
     }
 
