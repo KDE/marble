@@ -67,8 +67,15 @@ void Routing::paint(QPainter *painter)
         RoutingManager const * const routingManager = d->m_marbleMap->model()->routingManager();
         GeoDataLineString const waypoints = routingManager->routingModel()->route().path();
 
-        QPen standardRoutePen( routingManager->routeColorStandard() );
-        standardRoutePen.setWidth( 5 );
+        int const dpi = qMax(paintDevice->logicalDpiX(), paintDevice->logicalDpiY());
+        QPen standardRoutePen( routingManager->routeColorStandard().darker( 200 ) );
+        qreal const width = 2.5 * MM2M * M2IN * dpi;
+        standardRoutePen.setWidthF( width );
+        geoPainter.setPen( standardRoutePen );
+        geoPainter.drawPolyline( waypoints );
+
+        standardRoutePen.setColor( routingManager->routeColorStandard() );
+        standardRoutePen.setWidthF( width - 4.0 );
         if ( routingManager->state() == RoutingManager::Downloading ) {
             standardRoutePen.setStyle( Qt::DotLine );
         }
