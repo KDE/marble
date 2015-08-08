@@ -40,10 +40,20 @@ Item {
                 color: mouseArea.pressed ? palette.highlight : root.background
             }
 
-            Text {
-                id: placemarkName
+            Image {
+                id: icon
                 anchors.left: parent.left
                 anchors.leftMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                width: height
+                height: placemarkName.height
+                source: iconPath
+                fillMode: Image.Pad
+            }
+
+            Text {
+                id: placemarkName
+                anchors.left: icon.right
                 anchors.verticalCenter: parent.verticalCenter
                 font.pointSize: 18
                 color: palette.text
