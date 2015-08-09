@@ -96,7 +96,7 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
 
     d->m_linesWidth->setRange( 0.1, 5.0 );
     d->m_linesWidth->setValue( lineStyle.width() );
-    connect( d->m_linesWidth, SIGNAL(valueChanged(double)), this, SLOT(updatePolygon()) );
+    connect( d->m_linesWidth, SIGNAL(valueChanged(double)), this, SLOT( handleChangingStyle() ) );
 
     // Adjust the "Filled"/"Not Filled" option according to its current fill.
     if ( polyStyle.fill() ) {
@@ -104,7 +104,7 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     } else {
         d->m_filledColor->setCurrentIndex( 1 );
     }
-    connect( d->m_filledColor, SIGNAL(currentIndexChanged(int)), this, SLOT(updatePolygon()) );
+    connect( d->m_filledColor, SIGNAL(currentIndexChanged(int)), this, SLOT( handleChangingStyle() ) );
 
     // Adjust the color buttons' icons to the current lines and polygon colors.
     QPixmap linesPixmap( d->m_linesColorButton->iconSize().width(),
@@ -123,14 +123,14 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     d->m_linesDialog->setCurrentColor( lineStyle.color() );
     connect( d->m_linesColorButton, SIGNAL(clicked()), d->m_linesDialog, SLOT(exec()) );
     connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLinesDialog(QColor)) );
-    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolygon()) );
+    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT( handleChangingStyle() ) );
 
     d->m_polyDialog = new QColorDialog( this );
     d->m_polyDialog->setOption( QColorDialog::ShowAlphaChannel );
     d->m_polyDialog->setCurrentColor( polyStyle.color() );
     connect( d->m_polyColorButton, SIGNAL(clicked()), d->m_polyDialog, SLOT(exec()) );
     connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolyDialog(QColor)) );
-    connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolygon()) );
+    connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT( handleChangingStyle() ) );
 
     // Setting the NodeView's delegate: mainly used for the editing the polygon's nodes
     d->m_delegate = new NodeItemDelegate( d->m_placemark, d->m_nodeView );
@@ -194,16 +194,17 @@ void EditPolygonDialog::handleItemMoving( GeoDataPlacemark *item )
     }
 }
 
-void EditPolygonDialog::updatePolygon()
+void EditPolygonDialog::handleChangingStyle()
 {
+
+    // The default style of the polygon has been changed, thus the old style URL is no longer valid
+    d->m_placemark->setStyleUrl( "" );
+
     GeoDataStyle *style = new GeoDataStyle( *d->m_placemark->style() );
-
-    d->m_placemark->setName( d->m_name->text() );
-    d->m_placemark->setDescription( d->m_formattedTextWidget->text() );
-
     style->lineStyle().setWidth( d->m_linesWidth->value() );
     // 0 corresponds to "Filled" and 1 corresponds to "Not Filled".
     style->polyStyle().setFill( !d->m_filledColor->currentIndex() );
+    style->setId( d->m_placemark->id() + "Style" );
 
 
     // Adjust the lines/polygon colors.
@@ -212,8 +213,16 @@ void EditPolygonDialog::updatePolygon()
     style->lineStyle().setColor( d->m_linesDialog->currentColor() );
     style->polyStyle().setColor( d->m_polyDialog->currentColor() );
 
-
     d->m_placemark->setStyle( style );
+
+    updatePolygon();
+}
+
+void EditPolygonDialog::updatePolygon()
+{
+    d->m_placemark->setName( d->m_name->text() );
+    d->m_placemark->setDescription( d->m_formattedTextWidget->text() );
+
     emit polygonUpdated( d->m_placemark );
 }
 

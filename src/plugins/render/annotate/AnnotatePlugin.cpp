@@ -89,15 +89,36 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     m_annotationDocument->setName( tr("Annotations") );
     m_annotationDocument->setDocumentRole( UserDocument );
 
-    GeoDataStyle style;
+    // Default polygon style
+    GeoDataStyle defaultPolygonStyle;
     GeoDataPolyStyle polyStyle;
+    GeoDataLineStyle edgeStyle;
+    GeoDataLabelStyle labelStyle;
+    QColor polygonColor = QApplication::palette().highlight().color();
+    QColor edgeColor = QApplication::palette().light().color();
+    QColor labelColor = QApplication::palette().brightText().color();
+    polygonColor.setAlpha( 80 );
+    polyStyle.setColor( polygonColor );
+    edgeStyle.setColor( edgeColor );
+    labelStyle.setColor( labelColor );
+    defaultPolygonStyle.setId( "polygon" );
+    defaultPolygonStyle.setPolyStyle( polyStyle );
+    defaultPolygonStyle.setLineStyle( edgeStyle );
+    defaultPolygonStyle.setLabelStyle( labelStyle );
+    m_annotationDocument->addStyle( defaultPolygonStyle );
 
-    QColor highlightedColor = QApplication::palette().highlight().color();
-    highlightedColor.setAlpha(80);
-    polyStyle.setColor(highlightedColor);
-    style.setId( "polygon" );
-    style.setPolyStyle( polyStyle );
-    m_annotationDocument->addStyle( style );
+
+    // Default polyline style
+    GeoDataStyle defaultPolylineStyle;
+    GeoDataLineStyle lineStyle;
+    QColor polylineColor = Qt::white;
+    lineStyle.setColor( polylineColor );
+    lineStyle.setWidth( 1 );
+    defaultPolylineStyle.setId( "polyline" );
+    defaultPolylineStyle.setLineStyle( lineStyle );
+    defaultPolylineStyle.setLabelStyle( labelStyle );
+    m_annotationDocument->addStyle( defaultPolylineStyle );
+
 }
 
 AnnotatePlugin::~AnnotatePlugin()

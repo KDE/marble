@@ -633,10 +633,17 @@ QString GeoDataFeature::styleUrl() const
     return d->m_styleUrl;
 }
 
-void GeoDataFeature::setStyleUrl( const QString &value)
+void GeoDataFeature::setStyleUrl( const QString &value )
 {
     detach();
+
     d->m_styleUrl = value;
+
+    if ( value.isEmpty() ) {
+        d->m_style = nullptr;
+        return;
+    }
+
     QString styleUrl = value;
     styleUrl.remove('#');
     GeoDataObject *object = parent();

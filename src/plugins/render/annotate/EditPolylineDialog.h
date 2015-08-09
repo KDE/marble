@@ -31,6 +31,7 @@ public:
 public slots:
     void handleAddingNode( const GeoDataCoordinates &node );
     void handleItemMoving( GeoDataPlacemark *item );
+    void handleChangingStyle();
 
 signals:
     void polylineUpdated( GeoDataFeature *feature );

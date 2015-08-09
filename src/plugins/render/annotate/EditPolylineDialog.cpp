@@ -98,7 +98,7 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
     d->m_initialLineStyle = lineStyle;
 
     d->m_linesWidth->setValue( lineStyle.width() );
-    connect( d->m_linesWidth, SIGNAL(valueChanged(double)), this, SLOT(updatePolyline()) );
+    connect( d->m_linesWidth, SIGNAL(valueChanged(double)), this, SLOT(handleChangingStyle()) );
 
     // Adjust the color button's icon to the current lines color.
     QPixmap linesPixmap( d->m_linesColorButton->iconSize().width(),
@@ -123,7 +123,7 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
     d->m_linesDialog->setCurrentColor( lineStyle.color() );
     connect( d->m_linesColorButton, SIGNAL(clicked()), d->m_linesDialog, SLOT(exec()) );
     connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLinesDialog(QColor)) );
-    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolyline()) );
+    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(handleChangingStyle()) );
 
     if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
         GeoDataLineString *lineString = static_cast<GeoDataLineString*>( placemark->geometry() );
@@ -171,19 +171,29 @@ void EditPolylineDialog::handleItemMoving( GeoDataPlacemark *item )
     }
 }
 
+void EditPolylineDialog::handleChangingStyle()
+{
+    // The default style has been changed, thus the old style URL is no longer valid
+    // The polyline is now considered to have a customStyle
+    d->m_placemark->setStyleUrl( "" );
+
+    GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
+    newStyle->lineStyle().setColor( d->m_linesDialog->currentColor() );
+    newStyle->lineStyle().setWidth( d->m_linesWidth->value() );
+    newStyle->setId( d->m_placemark->id() + "Style" );
+    d->m_placemark->setStyle( newStyle );
+
+    updatePolyline();
+}
+
 void EditPolylineDialog::updatePolyline()
 {
     d->m_placemark->setDescription( d->m_formattedTextWidget->text() );
     d->m_placemark->setName( d->m_name->text() );
 
-
-    GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
-    newStyle->lineStyle().setColor( d->m_linesDialog->currentColor() );
-    newStyle->lineStyle().setWidth( d->m_linesWidth->value() );
-    d->m_placemark->setStyle( newStyle );
-
     emit polylineUpdated( d->m_placemark );
 }
+
 
 void EditPolylineDialog::updateLinesDialog( const QColor &color )
 {
