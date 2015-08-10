@@ -115,9 +115,10 @@ if(QTONLY)
   unset(QTONLY)
 endif()
 
-if(Qt5Core_FOUND)
+option(QT5BUILD "Build for Qt5" ON)
+
+if(QT5BUILD AND Qt5Core_FOUND)
   cmake_minimum_required(VERSION 2.8.12)
-  set(QT5BUILD TRUE)
   set(QT4BUILD FALSE)
   set(MARBLEWIDGET marblewidget-qt5)
 
@@ -131,7 +132,6 @@ if(Qt5Core_FOUND)
 else()
   cmake_minimum_required(VERSION 2.8.6)
   unset(QT_MOC_EXECUTABLE) # somehow the qt5 check sneaks in moc for qt5 even if qmake points to qt4
-  set(QT5BUILD FALSE)
   set(WITH_KF5 FALSE)
   set(QT4BUILD TRUE)
   set(MARBLEWIDGET marblewidget)
