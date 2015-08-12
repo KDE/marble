@@ -31,6 +31,7 @@
   <name xml:lang="tr">Marble</name>
   <name xml:lang="uk">Marble</name>
   <name xml:lang="x-test">xxMarblexx</name>
+  <name xml:lang="zh-CN">Marble</name>
   <name xml:lang="zh-TW">地球儀_Marble</name>
   <summary>Virtual Globe</summary>
   <summary xml:lang="ast">Globu virtual</summary>
@@ -60,6 +61,7 @@
   <summary xml:lang="tr">Sanal Küre</summary>
   <summary xml:lang="uk">Віртуальний глобус</summary>
   <summary xml:lang="x-test">xxVirtual Globexx</summary>
+  <summary xml:lang="zh-CN">虚拟地球仪</summary>
   <summary xml:lang="zh-TW">虛擬地球儀</summary>
   <description>
     <p>Marble is a virtual globe and world atlas — your swiss army knife for maps.</p>
