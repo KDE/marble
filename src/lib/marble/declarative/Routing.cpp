@@ -119,6 +119,7 @@ void Routing::setWaypointDelegate(QQmlComponent *waypointDelegate)
 void Routing::updateWaypointItems()
 {
     if ( d->m_marbleMap && d->m_routeRequestModel ) {
+
         for (int i = d->m_waypointItems.keys().size(); i < d->m_routeRequestModel->rowCount(); i++ ) {
             QQmlContext * context = new QQmlContext( qmlContext( d->m_waypointDelegate ) );
             context->setContextProperty("type", QVariant::fromValue(QString("waypoint")));
@@ -132,6 +133,7 @@ void Routing::updateWaypointItems()
                 delete component;
             }
         }
+
         for (int i = d->m_waypointItems.keys().size()-1; i >= d->m_routeRequestModel->rowCount(); i--) {
             QQuickItem* item = d->m_waypointItems[i];
             item->setProperty("visible", QVariant::fromValue(false) );
@@ -154,7 +156,7 @@ void Routing::updateWaypointItems()
                     item->setX( x - item->width()/2 );
                     item->setY( y - item->height() );
                     if (iter.key() == d->m_waypointItems.keys().size()-1) {
-                            item->setProperty("type", QVariant::fromValue(QString("destination")));
+                        item->setProperty("type", QVariant::fromValue(QString("destination")));
                     }
                     else if (iter.key() > 0) {
                         item->setProperty("type", QVariant::fromValue(QString("waypoint")));
