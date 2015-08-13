@@ -394,6 +394,14 @@ namespace Marble
         return &d->m_currentPosition;
     }
 
+    QPointF MarbleQuickItem::screenCoordinatesFromCoordinate(Coordinate * coordinate) const
+    {
+        qreal x;
+        qreal y;
+        d->map()->viewport()->screenCoordinates(coordinate->coordinates(), x, y);
+        return QPointF(x, y);
+    }
+
     void MarbleQuickItem::setZoom(int newZoom, FlyToMode mode)
     {
         d->setZoom(newZoom, mode);

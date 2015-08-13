@@ -18,6 +18,7 @@
 
 #include <QMap>
 #include <QPainter>
+#include <QDebug>
 
 namespace Marble
 {
@@ -213,6 +214,18 @@ void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates, con
     placemark.setName( name );
     d->m_route.insert( index, placemark );
     emit positionAdded( index );
+}
+
+void RouteRequest::swap(int index1, int index2)
+{
+    if (index1 < 0 || index2 < 0 || index1 > d->m_route.size()-1 || index2 > d->m_route.size()-1) {
+        return;
+    }
+
+    qSwap(d->m_route[index1], d->m_route[index2]);
+
+    emit positionChanged(index1, d->m_route[index1].coordinate());
+    emit positionChanged(index2, d->m_route[index2].coordinate());
 }
 
 void RouteRequest::append( const GeoDataCoordinates &coordinates, const QString &name )

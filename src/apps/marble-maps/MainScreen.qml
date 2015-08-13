@@ -20,7 +20,13 @@ ApplicationWindow {
 
             MenuItem {
                 text: qsTr("Delete Route")
-                onTriggered: {routing.clearRoute(); navigationSettings.departureIsSet = false; instructions.visible = false;}
+                onTriggered: {routing.clearRoute(); instructions.visible = false; startRoutingButton.show = false; waypointOrderEditor.visible = false;}
+                visible: routing.hasRoute
+            }
+
+            MenuItem {
+                text: waypointOrderEditor.visible ? qsTr("Hide Route Modifier") : qsTr("Modify Route")
+                onTriggered: {waypointOrderEditor.visible = !waypointOrderEditor.visible; instructions.visible = false}
                 visible: routing.hasRoute
             }
 
@@ -99,10 +105,13 @@ ApplicationWindow {
                 }
             }
 
-            Routing {
+            RoutingManager {
                 id: routing
                 anchors.fill: parent
-                marbleMap: marbleMaps.marbleMap
+                marbleItem: marbleMaps
+                navigationSetup: navigationSettings
+                selectedPlacemark: search.searchResultPlacemark
+                routingProfile: profileChoosingMenu.selectedProfile
             }
         }
 
@@ -121,7 +130,7 @@ ApplicationWindow {
         anchors {
             bottom: parent.bottom
             right: parent.right
-            bottomMargin: startNavigationButton.height
+            bottomMargin: startRoutingButton.height
             rightMargin: 0.005 * root.width
         }
 
@@ -155,21 +164,55 @@ ApplicationWindow {
         id: search
         anchors.fill: parent
         marbleQuickItem: marbleMaps
-        onNavigationRequested: { startNavigationButton.visible = true }
+        onItemSelected: { startRoutingButton.show = true; startRoutingButton.navigation = false; }
     }
 
     CircularButton {
-        id: startNavigationButton
-        visible: false
+        id: startRoutingButton
+
+        property bool navigation: false
+        property bool show: false
+
+        visible: show || routing.hasRoute
 
         anchors {
-            top: zoomToPositionButton.bottom
-            horizontalCenter: zoomToPositionButton.horizontalCenter
+            bottom: changeProfileButton.top
+            horizontalCenter: changeProfileButton.horizontalCenter
         }
 
-        iconSource: "qrc:///navigation.png"
+        iconSource: navigation ? "qrc:///navigation.png" : "qrc:///map.png"
 
-        onClicked: { navigationSettings.visible = true; startNavigationButton.visible = false; }
+        onClicked: {
+            if (navigation) {
+                routing.addPositionAsDeparture();
+            }
+            else {
+                navigationSettings.visible = true;
+                navigation = true;
+            }
+        }
+    }
+
+    CircularButton {
+        id: changeProfileButton
+        visible: routing.hasRoute && !search.searchResultsVisible
+        anchors {
+            bottom: distanceIndicator.top
+            horizontalCenter: zoomToPositionButton.horizontalCenter
+            margins: 0.01 * root.width
+        }
+
+        iconSource: routing.profileIcon
+        onClicked: { profileChoosingMenu.focus = true; }
+    }
+
+    ProfileSelectorMenu {
+        id: profileChoosingMenu
+        visible: focus
+        anchors {
+            right: changeProfileButton.right
+            verticalCenter: changeProfileButton.verticalCenter
+        }
     }
 
     NavigationSetup {
@@ -184,53 +227,13 @@ ApplicationWindow {
             left: parent.left
             right: parent.right
         }
+    }
 
-        onRouteToDestinationRequested: {
-            if (!departureIsSet || (departureIsSet && destinationIsSet)) {
-                routing.clearRoute();
-                if (marbleMaps.positionAvailable) {
-                    departureIsSet = true;
-                    routing.addVia(marbleMaps.currentPosition);
-                }
-            }
-
-            if (departureIsSet) {
-                routing.addVia(search.searchResultCoordinates);
-                routing.updateRoute();
-                destinationIsSet = true;
-            }
-        }
-
-        onRouteThroughWaypointRequested: {
-            if (!departureIsSet || (departureIsSet && destinationIsSet) ) {
-                routing.clearRoute();
-                if (marbleMaps.positionAvailable) {
-                    departureIsSet = true;
-                    routing.addVia(marbleMaps.currentPosition);
-                }
-                departureIsSet = true;
-                destinationIsSet = false;
-            }
-
-            routing.addVia(search.searchResultCoordinates);
-            routing.updateRoute();
-
-            visible = false;
-        }
-
-        onRouteFromDepartureRequested: {
-            visible = false;
-            routing.clearRoute();
-            routing.addVia(search.searchResultCoordinates);
-            departureIsSet = true;
-            destinationIsSet = false;
-        }
-
-        onProfileSelected: {
-            visible = false;
-            routing.routingProfile = profile;
-            routing.updateRoute();
-        }
+    WaypointOrderManager {
+        id: waypointOrderEditor
+        anchors.fill: parent
+        visible: false
+        routingManager:routing
     }
 
     RoutePlanViewer{

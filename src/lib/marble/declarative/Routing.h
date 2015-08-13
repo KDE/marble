@@ -15,7 +15,9 @@
 #include <QtQml/qqml.h>
 #include <QQuickPaintedItem>
 #include <Coordinate.h>
+#include <Placemark.h>
 #include <routing/RoutingModel.h>
+#include <RouteRequestModel.h>
 
 class QAbstractItemModel;
 
@@ -31,6 +33,8 @@ class Routing : public QQuickPaintedItem
     Q_PROPERTY( QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged )
     Q_PROPERTY( bool hasRoute READ hasRoute NOTIFY hasRouteChanged )
     Q_PROPERTY( RoutingModel* routingModel READ routingModel NOTIFY routingModelChanged)
+    Q_PROPERTY( QQmlComponent* waypointDelegate READ waypointDelegate WRITE setWaypointDelegate NOTIFY waypointDelegateChanged)
+    Q_PROPERTY( RouteRequestModel* routeRequestModel READ routeRequestModel NOTIFY routeRequestModelChanged)
 
 public:
     enum RoutingProfile { Motorcar, Bicycle, Pedestrian };
@@ -55,14 +59,30 @@ public:
 
     RoutingModel *routingModel();
 
+    QQmlComponent * waypointDelegate() const;
+
+    Q_INVOKABLE int waypointCount() const;
+
+    RouteRequestModel* routeRequestModel();
+
 public Q_SLOTS:
     void addVia( qreal lon, qreal lat );
 
-    void addVia( Coordinate * coordinate);
+    void addViaAtIndex( int index, qreal lon, qreal lat );
+
+    void addViaByCoordinate( Coordinate * coordinate);
+
+    void addViaByCoordinateAtIndex( int index, Coordinate * coordinate );
+
+    void addViaByPlacemark( Placemark * placemark );
+
+    void addViaByPlacemarkAtIndex( int index, Placemark * placemark );
 
     void setVia( int index, qreal lon, qreal lat );
 
     void removeVia( int index );
+
+    void swapVias( int index1, int index2 );
 
     void reverseRoute();
 
@@ -76,6 +96,10 @@ public Q_SLOTS:
 
     QObject* waypointModel();
 
+    void setWaypointDelegate(QQmlComponent * waypointDelegate);
+
+    void updateWaypointItems();
+
 Q_SIGNALS:
     void marbleMapChanged();
 
@@ -84,6 +108,10 @@ Q_SIGNALS:
     void hasRouteChanged();
 
     void routingModelChanged();
+
+    void waypointDelegateChanged(QQmlComponent * waypointDelegate);
+
+    void routeRequestModelChanged(RouteRequestModel* routeRequestModel);
 
 private:
     RoutingPrivate* const d;

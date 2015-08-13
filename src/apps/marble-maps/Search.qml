@@ -10,8 +10,9 @@ Item {
     visible: false
 
     property var marbleQuickItem: null
-    signal navigationRequested()
-    readonly property alias searchResultCoordinates: backend.selectedCoordinate
+    signal itemSelected()
+    readonly property alias searchResultPlacemark: backend.selectedPlacemark
+    readonly property alias searchResultsVisible: searchResults.visible
 
     onVisibleChanged: {
         if( !visible ) {
@@ -50,7 +51,7 @@ Item {
         onItemSelected: {
             searchField.query = name;
             backend.setSelectedPlacemark(index);
-            root.navigationRequested();
+            root.itemSelected();
             searchResults.visible = false;
             background.visible = false;
             searchField.focus = true;

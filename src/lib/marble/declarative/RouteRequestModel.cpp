@@ -23,6 +23,7 @@ RouteRequestModel::RouteRequestModel( QObject *parent ) :
     m_routing( 0 )
 {
     QHash<int,QByteArray> roles;
+    roles[Qt::DisplayRole] = "name";
     roles[LongitudeRole] = "longitude";
     roles[LatitudeRole] = "latitude";
     m_roleNames = roles;
@@ -90,11 +91,11 @@ void RouteRequestModel::updateMap()
         m_request = m_routing->marbleMap()->model()->routingManager()->routeRequest();
 
         connect( m_request, SIGNAL(positionChanged(int,GeoDataCoordinates)),
-                 this, SLOT(updateData(int)) );
+                 this, SLOT(updateData(int)),  Qt::UniqueConnection );
         connect( m_request, SIGNAL(positionAdded(int)),
-                 this, SLOT(updateAfterAddition(int)) );
+                 this, SLOT(updateAfterAddition(int)),  Qt::UniqueConnection );
         connect( m_request, SIGNAL(positionRemoved(int)),
-                 this, SLOT(updateAfterRemoval(int)) );
+                 this, SLOT(updateAfterRemoval(int)),  Qt::UniqueConnection );
 
         emit layoutChanged();
     }

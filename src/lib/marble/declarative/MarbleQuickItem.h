@@ -135,6 +135,7 @@ namespace Marble
         Q_INVOKABLE qreal distanceFromPointToCurrentLocation(const QPoint & position) const;
         Q_INVOKABLE qreal angleFromPointToCurrentLocation(const QPoint & position) const;
         Coordinate *currentPosition() const;
+        Q_INVOKABLE QPointF screenCoordinatesFromCoordinate(Coordinate * coordinate) const;
 
         MarbleModel* model();
         const MarbleModel* model() const;

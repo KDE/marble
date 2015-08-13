@@ -60,6 +60,9 @@ public:
     /** Add the given element at the given position */
     void insert( int index, const GeoDataCoordinates &coordinates, const QString &name = QString() );
 
+    /** Swaps the given elements at the given positions*/
+    void swap( int index1, int index2 );
+
     /** Change the value of the element at the given position */
     void setPosition( int index, const GeoDataCoordinates &position, const QString &name = QString() );
 

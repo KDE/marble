@@ -34,4 +34,14 @@ QString Placemark::name() const
     return m_placemark.name();
 }
 
+void Placemark::setName(const QString & name)
+{
+    if (m_placemark.name() == name) {
+        return;
+    }
+
+    m_placemark.setName(name);
+    emit nameChanged();
+}
+
 #include "moc_Placemark.cpp"

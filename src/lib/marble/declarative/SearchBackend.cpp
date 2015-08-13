@@ -83,9 +83,9 @@ const QObject * SearchBackend::marbleQuickItem() const
     return m_marbleQuickItem;
 }
 
-Coordinate *SearchBackend::selectedCoordinate()
+Placemark *SearchBackend::selectedPlacemark()
 {
-    return &m_selectedCoordinate;
+    return &m_selectedPlacemark;
 }
 
 void SearchBackend::setSelectedPlacemark(int placemarkIndex)
@@ -95,10 +95,10 @@ void SearchBackend::setSelectedPlacemark(int placemarkIndex)
     if( placemark == nullptr ) {
         return;
     }
-    m_selectedPlacemark = *placemark;
+
+    m_selectedPlacemark.setGeoDataPlacemark(*placemark);
     m_marbleQuickItem->centerOn(*placemark, true);
-    m_selectedCoordinate.setCoordinates(m_selectedPlacemark.coordinate());
-    emit selectedCoordinateChanged(&m_selectedCoordinate);
+    emit selectedPlacemarkChanged(&m_selectedPlacemark);
 }
 
 void SearchBackend::setMarbleQuickItem(QObject *marbleQuickItem)

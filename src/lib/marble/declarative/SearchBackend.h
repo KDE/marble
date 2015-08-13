@@ -18,6 +18,7 @@
 #include "MarbleQuickItem.h"
 #include "SearchRunnerManager.h"
 #include "MarblePlacemarkModel.h"
+#include "Placemark.h"
 
 namespace Marble
 {
@@ -28,7 +29,7 @@ class SearchBackend : public QObject
 
     Q_PROPERTY(QObject *marbleQuickItem READ marbleQuickItem WRITE setMarbleQuickItem NOTIFY marbleQuickItemChanged)
     Q_PROPERTY(MarblePlacemarkModel *completionModel READ completionModel NOTIFY completionModelChanged)
-    Q_PROPERTY(Coordinate* selectedCoordinate READ selectedCoordinate NOTIFY selectedCoordinateChanged)
+    Q_PROPERTY(Placemark* selectedPlacemark READ selectedPlacemark NOTIFY selectedPlacemarkChanged)
 
 public:
     SearchBackend(QObject *parent = 0);
@@ -37,14 +38,14 @@ public:
     QObject *marbleQuickItem();
     MarblePlacemarkModel *completionModel();
     const QObject* marbleQuickItem() const;
-    Coordinate* selectedCoordinate();
+    Placemark* selectedPlacemark();
 
 signals:
     void marbleQuickItemChanged(QObject *marbleQuickItem);
     void completionModelChanged(MarblePlacemarkModel *model);
     void searchResultChanged(MarblePlacemarkModel *model);
     void searchFinished(const QString &searchTerm);
-    void selectedCoordinateChanged(Coordinate * selectedCoordinate);
+    void selectedPlacemarkChanged(Placemark * selectedPlacemark);
 
 public slots:
     Q_INVOKABLE void setSelectedPlacemark(int placemarkIndex);
@@ -60,8 +61,7 @@ private:
     QCompleter *m_completer;
     MarblePlacemarkModel *m_completionModel;
     QVector<GeoDataPlacemark*> *m_completionContainer;
-    GeoDataPlacemark m_selectedPlacemark;
-    Coordinate m_selectedCoordinate;
+    Placemark m_selectedPlacemark;
 };
 
 }

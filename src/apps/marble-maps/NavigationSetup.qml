@@ -34,7 +34,7 @@ Item {
             NavigationSetupButton {
                 imageSource: "qrc:///navigation.png"
                 text: qsTr("As destination")
-                onClicked: { routeToDestinationRequested(); typeSelector.nextScreen() }
+                onClicked: { routeToDestinationRequested();  }
             }
 
             NavigationSetupButton {
@@ -48,43 +48,6 @@ Item {
                 text: qsTr("As departure")
                 onClicked: { routeFromDepartureRequested();  }
             }
-
-            function nextScreen()
-            {
-                profileSelector.visible = true;
-                typeSelector.visible = false;
-            }
         }
-
-        RowLayout {
-            id: profileSelector
-            anchors.fill: parent
-            spacing: 0
-            visible: false
-
-            NavigationSetupButton {
-                imageSource: "qrc:///car.png"
-                text: qsTr("With car")
-                onClicked: { profileSelected("Car (fastest)"); profileSelector.previousScreen() }
-            }
-
-            NavigationSetupButton {
-                imageSource: "qrc:///bike.png"
-                text: qsTr("With bike")
-                onClicked: { profileSelected("Bicycle"); profileSelector.previousScreen() }
-            }
-
-            NavigationSetupButton {
-                imageSource: "qrc:///walk.png"
-                text: qsTr("Walking")
-                onClicked: { profileSelected("Pedestrian"); profileSelector.previousScreen() }
-            }
-
-            function previousScreen()
-            {
-                typeSelector.visible = true;
-                profileSelector.visible = false;
-            }
-        }
-   }
+    }
 }
