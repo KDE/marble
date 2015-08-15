@@ -10,7 +10,9 @@
 
 #include "TextToSpeechClient.h"
 
+#ifdef Q_OS_ANDROID
 #include <QAndroidJniObject>
+#endif
 
 TextToSpeechClient::TextToSpeechClient(QObject *parent) :
     QObject(parent)
