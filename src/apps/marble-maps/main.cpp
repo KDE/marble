@@ -10,10 +10,12 @@
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
+#include <QtQuick>
 
 #include "declarative/MarbleDeclarativePlugin.h"
 #include <MarbleGlobal.h>
 #include "MarbleMaps.h"
+#include "TextToSpeechClient.h"
 
 using namespace Marble;
 
@@ -31,7 +33,12 @@ int main(int argc, char ** argv)
     declarativePlugin.registerTypes(uri);
     qmlRegisterType<MarbleMaps>(uri, 0, 20, "MarbleMaps");
 
-    QQmlApplicationEngine engine(QUrl("qrc:/MainScreen.qml"));
+    QQmlApplicationEngine engine;
+    TextToSpeechClient * tts = new TextToSpeechClient(&engine);
+    engine.rootContext()->setContextProperty("textToSpeechClient", tts);
+    engine.load(QUrl("qrc:/MainScreen.qml"));
+    // @todo Ship translations and only fall back to english if no translations for the system locale are installed
+    tts->setLocale("en");
 
     return app.exec();
 }
