@@ -44,29 +44,50 @@ Item {
 
             delegate: Rectangle {
                 width: parent.width
-                height: text.height * 1.3
+                height: text.height * 2
                 color: touchArea.pressed || root.selectedItem == index ? palette.highlight : palette.base
 
-                Image {
+                WaypointImage {
                     id: image
-                    width: 0.9 * text.height
+                    width: parent.height
                     height: width
                     anchors {
                         verticalCenter: parent.verticalCenter
                         left: parent.left
                     }
-                    source: "qrc:///place.png"
+                    type: index === 0 ? "departure" : (index === waypointList.count-1 ? "destination" : "waypoint")
+
+                    Rectangle {
+                        color: palette.base
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                            bottom: parent.bottom
+                            bottomMargin: parent.height * 0.4
+                        }
+                        width: parent.width * 0.5
+                        height: width
+                        radius: 0.5 * height
+                        Text {
+                            id: indexText
+                            color: palette.text
+                            anchors.centerIn: parent
+                            text: index+1
+                        }
+                    }
                 }
 
                 Text {
-                   id: text
-                   anchors {
-                       left: image.right
-                       verticalCenter: parent.verticalCenter
-                       leftMargin: parent.width * 0.05
-                   }
-                   wrapMode: Text.Wrap
-                   text: name
+                    id: text
+                    anchors {
+                        left: image.right
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        leftMargin: parent.width * 0.05
+                    }
+                    wrapMode: Text.Wrap
+                    text: name
+                    font.pointSize: 18
+                    color: palette.text
                 }
 
                 MouseArea {
