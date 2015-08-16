@@ -74,59 +74,102 @@ public:
     void setTimestamp( const QString& timestamp );
     void setAction( const QString& action );
 
+
+
+
+    /**
+     * @brief addTag this function inserts a string key=value mapping,
+     * equivalent to the <tag k="@p key" v="@p value"> osm core data
+     * element
+     */
+    void addTag( const QString& key, const QString& value );
+
+    /**
+     * @brief removeTag removes the tag from the tag hash
+     */
+    void removeTag( const QString& key );
+
+    /**
+     * @brief containsTag returns true if the tag hash contains an entry with
+     * the @p key as key and @p value as value
+     */
+    bool containsTag( const QString& key, const QString& value ) const;
+
+    /**
+     * @brief containsTagKey returns true if the tag hash contains an entry with
+     * the @p key as key
+     */
+    bool containsTagKey( const QString& key ) const;
+
     /**
      * @brief iterators for the tags hash.
      */
     QHash< QString, QString >::const_iterator tagsBegin() const;
     QHash< QString, QString >::const_iterator tagsEnd() const;
 
+
+    /**
+     * @brief this function returns the osmData assosciated with a nd
+     */
+    OsmPlacemarkData &nodeReference( const GeoDataCoordinates& coordinates );
+    OsmPlacemarkData nodeReference( const GeoDataCoordinates& coordinates ) const;
+
+    /**
+     * @brief addRef this function inserts a GeoDataCoordinates = OsmPlacemarkData
+     * mapping into the reference hash, equivalent to the <member ref="@p key" >
+     * osm core data element
+     */
+    void addNodeReference( const GeoDataCoordinates& key, const OsmPlacemarkData &value );
+    void removeNodeReference( const GeoDataCoordinates& key );
+    bool containsNodeReference( const GeoDataCoordinates& key ) const;
+
+    /**
+     * @brief changeNodeReference is a convenience function that allows the quick change of
+     * a node hash entry. This is generally used to update the osm data in case
+     * nodes are being moved in the editor.
+     */
+    void changeNodeReference( const GeoDataCoordinates& oldKey, const GeoDataCoordinates &newKey );
+
     /**
      * @brief iterators for the reference hashes.
      */
     QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesBegin() const;
     QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesEnd() const;
-    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesBegin() const;
-    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesEnd() const;
+
+
 
     /**
-     * @brief this function returns the osmData associated with a member boundary
+     * @brief this function returns the osmData associated with a member boundary's index
+     * -1 represents the outer boundary of a polygon, and 0,1,2... the inner boundaries,
+     * in the order provided by polygon->innerBoundaries();
      */
-    OsmPlacemarkData &reference( int key );
-    OsmPlacemarkData reference( int key ) const;
-
-    /**
-     * @brief this function returns the osmData assosciated with a nd
-     */
-    OsmPlacemarkData &reference( const GeoDataCoordinates& coordinates );
-    OsmPlacemarkData reference( const GeoDataCoordinates& coordinates ) const;
+    OsmPlacemarkData &memberReference( int key );
+    OsmPlacemarkData memberReference( int key ) const;
 
     /**
      * @brief addRef this function inserts a int = OsmplacemarkData
-     * mapping into the reference hash, equivalent to the osm <nd ref="@param boundary of index @key" >
+     * mapping into the reference hash, equivalent to the osm <nd ref="@p boundary of index @key" >
      * core data element
      * @see m_memberReferences
      */
-    void addReference( int key, const OsmPlacemarkData &value );
+    void addMemberReference( int key, const OsmPlacemarkData &value );
+    void removeMemberReference( int key );
+    bool containsMemberReference( int key ) const;
 
-    /**
-     * @brief addRef this function inserts a GeoDataCoordinates = OsmplacemarkData
-     * mapping into the reference hash, equivalent to the <member ref="@param key" >
-     * osm core data element
-     */
-    void addReference( const GeoDataCoordinates& key, const OsmPlacemarkData &value );
-
-    /**
-     * @brief addTag this function inserts a string key=value mapping,
-     * equivalent to the <tag k="@param key" v="@param value"> osm core data
-     * element
-     */
-    void addTag( const QString& key, const QString& value );
+    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesBegin() const;
+    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesEnd() const;
 
     /**
      * @brief osmData is stored within a placemark's extended data hash
      * at an entry with osmKey
      */
     static QString osmHashKey();
+
+    /**
+     * @brief isNull returns false if the the osmData is loaded from a source
+     * or true if its just default constructed
+     */
+    bool isNull() const;
 
     /**
      * @brief fromParserAttributes is a convenience function that parses all osm-related
@@ -160,11 +203,11 @@ private:
 
     /**
      * @brief m_memberRefs is used to store a polygon's member boundaries
-     *  the key represends the index of the boundary within the polygon geometry:
+     *  the key represents the index of the boundary within the polygon geometry:
      *  -1 represents the outerBoundary, and 0,1,2... its innerBoundaries, in the
      *  order provided by polygon->innerBoundaries()
      */
-    QHash< int, OsmPlacemarkData > m_memberReferences;
+    QHash<int, OsmPlacemarkData> m_memberReferences;
 
 };
 

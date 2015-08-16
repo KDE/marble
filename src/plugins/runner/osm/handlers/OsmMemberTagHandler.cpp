@@ -154,7 +154,7 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser &geoParser ) const
                 polygon->setOuterBoundary( envelope );
 
                 // Inserting the outerBoundary's osmData in the polygon osmData's reference hash map
-                polygonOsmData.addReference( -1, lineOsmData );
+                polygonOsmData.addMemberReference( -1, lineOsmData );
             }
             // Inner poligons
             else if ( parser.attribute( "role" ) == "inner" )
@@ -162,7 +162,7 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser &geoParser ) const
                 polygon->appendInnerBoundary( GeoDataLinearRing( *line ) );
 
                 // Inserting the innerBoundary's osmData in the polygon osmData's reference hash map
-                polygonOsmData.addReference( polygon->innerBoundaries().size() - 1, lineOsmData );
+                polygonOsmData.addMemberReference( polygon->innerBoundaries().size() - 1, lineOsmData );
             }
         }
         else if (parser.attribute( "type" ) == "relation")

@@ -33,7 +33,7 @@ void OsmRelationTagWriter::writeMultipolygon( const GeoDataPolygon& polygon,
     OsmTagTagWriter::writeTags( osmData, writer );
 
     writer.writeStartElement( osm::osmTag_member );
-    QString memberId = QString::number( osmData.reference( -1 ).id() );
+    QString memberId = QString::number( osmData.memberReference( -1 ).id() );
     writer.writeAttribute( "type", "way" );
     writer.writeAttribute( "ref", memberId );
     writer.writeAttribute( "role", "outer" );
@@ -41,7 +41,7 @@ void OsmRelationTagWriter::writeMultipolygon( const GeoDataPolygon& polygon,
 
     for ( int index = 0; index < polygon.innerBoundaries().size(); ++index ) {
         writer.writeStartElement( osm::osmTag_member );
-        QString memberId = QString::number( osmData.reference( index ).id() );
+        QString memberId = QString::number( osmData.memberReference( index ).id() );
         writer.writeAttribute( "type", "way" );
         writer.writeAttribute( "ref", memberId );
         writer.writeAttribute( "role", "inner" );

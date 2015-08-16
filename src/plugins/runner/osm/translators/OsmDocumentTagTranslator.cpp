@@ -74,14 +74,14 @@ bool OsmDocumentTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer 
 
             // Writing all the outerRing's nodes
             const GeoDataLinearRing &outerRing = polygon->outerBoundary();
-            const OsmPlacemarkData outerRingOsmData = osmData.reference( index );
+            const OsmPlacemarkData outerRingOsmData = osmData.memberReference( index );
             OsmNodeTagWriter::writeAllNodes( outerRingOsmData, writer );
             bounds.append( OsmBound( &outerRing, outerRingOsmData ) );
 
             // Writing all nodes for each innerRing
             foreach ( const GeoDataLinearRing &innerRing, polygon->innerBoundaries() ) {
                 ++index;
-                const OsmPlacemarkData innerRingOsmData = osmData.reference( index );
+                const OsmPlacemarkData innerRingOsmData = osmData.memberReference( index );
                 OsmNodeTagWriter::writeAllNodes( innerRingOsmData, writer );
                 bounds.append( OsmBound( &innerRing, innerRingOsmData ) );
             }

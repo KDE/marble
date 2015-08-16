@@ -37,7 +37,7 @@ void OsmWayTagWriter::writeWay( const GeoDataLineString& lineString,
     QVector<GeoDataCoordinates>::ConstIterator const end = lineString.constEnd();
 
     for ( ; it != end; ++it ) {
-        QString ndId = QString::number( osmData.reference( *it ).id() );
+        QString ndId = QString::number( osmData.nodeReference( *it ).id() );
         writer.writeStartElement( osm::osmTag_nd );
         writer.writeAttribute( "ref", ndId );
         writer.writeEndElement();

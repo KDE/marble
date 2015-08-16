@@ -48,7 +48,7 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
             osmNdData.setId( --m_minId );
             osmNdData.setAction( "modify" );
             osmNdData.setVisible( "false" );
-            osmData.addReference( *it, osmNdData );
+            osmData.addNodeReference( *it, osmNdData );
         }
     }
 
@@ -75,9 +75,9 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
             osmNodeData.setId( --m_minId );
             osmNodeData.setAction( "modify" );
             osmNodeData.setVisible( "false" );
-            outerBoundaryData.addReference( *it, osmNodeData );
+            outerBoundaryData.addNodeReference( *it, osmNodeData );
         }
-        osmData.addReference( index, outerBoundaryData );
+        osmData.addMemberReference( index, outerBoundaryData );
 
         // Each inner boundary
         foreach( const GeoDataLinearRing &innerRing, polygon->innerBoundaries() ) {
@@ -95,10 +95,10 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
                 osmNodeData.setId( --m_minId );
                 osmNodeData.setAction( "modify" );
                 osmNodeData.setVisible( "false" );
-                innerRingData.addReference( *it , osmNodeData );
+                innerRingData.addNodeReference( *it , osmNodeData );
             }
             ++index;
-            osmData.addReference( index, innerRingData );
+            osmData.addMemberReference( index, innerRingData );
         }
     }
 }

@@ -67,7 +67,7 @@ GeoNode* OsmNdTagHandler::parse( GeoParser &geoParser ) const
             OsmPlacemarkData &wayOsmData = wayPlacemark->osmData();
 
             // Inserting the point's osmData in the line osmData's reference hash map
-            wayOsmData.addReference( coordinates, nodeOsmData );
+            wayOsmData.addNodeReference( coordinates, nodeOsmData );
         }
 
         return 0;
