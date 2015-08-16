@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document>
-        <ExtendedData>
-            <SchemaData schemaUrl="#id002f">
-                <SimpleData name="journeyTime">08.29</SimpleData>
-            </SchemaData>
-        </ExtendedData>
         <Schema id="id002f" name="Flight">
             <SimpleField name="journeyTime" type="float">
                 <displayName>The expected time(hh.mm) of journey</displayName>
             </SimpleField>
         </Schema>
+        <ExtendedData>
+            <SchemaData schemaUrl="#id002f">
+                <SimpleData name="journeyTime">08.29</SimpleData>
+            </SchemaData>
+        </ExtendedData>
     </Document>
 </kml>

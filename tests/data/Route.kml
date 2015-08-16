@@ -4,83 +4,83 @@
     <Folder>
       <name>Route Request</name>
       <Placemark>
+        <Point>
+          <coordinates>8.4245517222,49.0122964284</coordinates>
+        </Point>
         <ExtendedData>
           <Data name="routingVisited">
             <displayName>Visited</displayName>
             <value>false</value>
           </Data>
         </ExtendedData>
-        <Point>
-          <coordinates>8.4245517222,49.0122964284</coordinates>
-        </Point>
       </Placemark>
       <Placemark>
+        <Point>
+          <coordinates>8.4246332395,49.0118826393</coordinates>
+        </Point>
         <ExtendedData>
           <Data name="routingVisited">
             <value>false</value>
           </Data>
         </ExtendedData>
-        <Point>
-          <coordinates>8.4246332395,49.0118826393</coordinates>
-        </Point>
       </Placemark>
     </Folder>
     <Document>
       <name>92.1 m; 00:00 h (OSRM)</name>
       <Placemark>
         <name>Route</name>
+        <LineString>
+          <coordinates>8.4245520000,49.0122980000 8.4246650000,49.0123000000 8.4248690000,49.0122940000 8.4250750000,49.0120360000 8.4246440000,49.0118690000</coordinates>
+        </LineString>
         <ExtendedData>
           <Data name="length">
             <value>92.1322548876347</value>
           </Data>
         </ExtendedData>
-        <LineString>
-          <coordinates>8.4245520000,49.0122980000 8.4246650000,49.0123000000 8.4248690000,49.0122940000 8.4250750000,49.0120360000 8.4246440000,49.0118690000</coordinates>
-        </LineString>
       </Placemark>
       <Placemark>
         <name>Continue.</name>
+        <LineString>
+          <coordinates>8.4245520000,49.0122980000 8.4246650000,49.0123000000</coordinates>
+        </LineString>
         <ExtendedData>
           <Data name="turnType">
             <value>13</value>
           </Data>
         </ExtendedData>
-        <LineString>
-          <coordinates>8.4245520000,49.0122980000 8.4246650000,49.0123000000</coordinates>
-        </LineString>
       </Placemark>
       <Placemark>
         <name>Go straight ahead.</name>
+        <LineString>
+          <coordinates>8.4246650000,49.0123000000 8.4248690000,49.0122940000</coordinates>
+        </LineString>
         <ExtendedData>
           <Data name="turnType">
             <value>1</value>
           </Data>
         </ExtendedData>
-        <LineString>
-          <coordinates>8.4246650000,49.0123000000 8.4248690000,49.0122940000</coordinates>
-        </LineString>
       </Placemark>
       <Placemark>
         <name>Keep slightly right.</name>
+        <LineString>
+          <coordinates>8.4248690000,49.0122940000 8.4250750000,49.0120360000</coordinates>
+        </LineString>
         <ExtendedData>
           <Data name="turnType">
             <value>2</value>
           </Data>
         </ExtendedData>
-        <LineString>
-          <coordinates>8.4248690000,49.0122940000 8.4250750000,49.0120360000</coordinates>
-        </LineString>
       </Placemark>
       <Placemark>
         <name>Turn right into Haid-und-Neu-Straße.</name>
+        <LineString>
+          <coordinates>8.4250750000,49.0120360000 8.4246440000,49.0118690000</coordinates>
+        </LineString>
         <ExtendedData>
           <Data name="turnType">
             <value>3</value>
           </Data>
         </ExtendedData>
-        <LineString>
-          <coordinates>8.4250750000,49.0120360000 8.4246440000,49.0118690000</coordinates>
-        </LineString>
       </Placemark>
     </Document>
   </Document>
