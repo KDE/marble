@@ -395,6 +395,10 @@ geodata/handlers/kml/KmldelayedStartTagHandler.cpp
 geodata/handlers/kml/KmlBalloonVisibilityTagHandler.cpp
 geodata/handlers/kml/KmlCreateTagHandler.cpp
 geodata/handlers/kml/KmlDeleteTagHandler.cpp
+geodata/handlers/kml/KmlOsmPlacemarkDataTagHandler.cpp
+geodata/handlers/kml/KmlTagTagHandler.cpp
+geodata/handlers/kml/KmlMemberTagHandler.cpp
+geodata/handlers/kml/KmlNdTagHandler.cpp
 )
 
 SET ( geodata_writers_kml_SRCS
@@ -448,6 +452,7 @@ geodata/writers/kml/KmlTimeStampTagWriter.cpp
 geodata/writers/kml/KmlTourTagWriter.cpp
 geodata/writers/kml/KmlTrackWriter.cpp
 geodata/writers/kml/KmlUpdateTagWriter.cpp
+geodata/writers/kml/KmlOsmPlacemarkDataTagWriter.cpp
 )
 
 # writer and the parser sources 

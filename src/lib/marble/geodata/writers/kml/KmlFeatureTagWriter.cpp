@@ -24,6 +24,8 @@
 #include "GeoDataRegion.h"
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
+#include "KmlOsmPlacemarkDataTagWriter.h"
+#include "OsmPlacemarkData.h"
 
 namespace Marble
 {
@@ -89,15 +91,21 @@ bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer 
         writeElement( &feature->timeSpan(), writer );
     }
 
-    if( !feature->extendedData().isEmpty() ) {
-        writeElement( &feature->extendedData(), writer );
-    }
-
     if ( !feature->region().latLonAltBox().isNull() ) {
         writeElement( &feature->region(), writer );
     }
 
     bool const result = writeMid( node, writer );
+
+    if( !feature->extendedData().isEmpty() ) {
+        if ( feature->extendedData().contains( OsmPlacemarkData::osmHashKey() ) ) {
+             KmlOsmPlacemarkDataTagWriter::write( feature, writer );
+        }
+        else {
+            writeElement( &feature->extendedData(), writer );
+        }
+    }
+
     writer.writeEndElement();
     return result;
 }
