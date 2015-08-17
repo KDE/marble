@@ -17,3 +17,4 @@
 
 K_EXPORT_PLASMA_RUNNER(marble, Marble::PlasmaRunner)
 
+#include "main.moc"
