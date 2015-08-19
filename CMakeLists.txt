@@ -7,6 +7,10 @@ SET(CMAKE_COLOR_MAKEFILE ON)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+# Let CMake find the correct library dir instead of
+# relying on the obsolete LIB_SUFFIX parameter
+include(GNUInstallDirs)
+
 # Taken from KDECompilerSettings.cmake:
 # Pick sensible versions of the C and C++ standards.
 # Note that MSVC does not have equivalent flags; the features are either
@@ -193,11 +197,9 @@ set (ENABLE_TESTS FALSE CACHE BOOL "Build unit tests?")
 set (WITH_DESIGNER_PLUGIN TRUE CACHE BOOL "Build plugins for Qt Designer")
 add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget support in Qt Designer. Toggle with WITH_DESIGNER_PLUGIN=YES/NO")
 
-# TODO: this could use GNUInstallDirs or ECM, so e.g. LIB_SUFFIX is automatically set
-set(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" )
 set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
 if (QT5BUILD)
-   set(QT_PLUGINS_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/plugins)
+   set(QT_PLUGINS_DIR ${CMAKE_INSTALL_LIBDIR}/plugins)
 endif()
 
 ####################################################
@@ -223,7 +225,7 @@ elseif(APPLE)
       SET (plugin_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/plugins)
 else() # Linux / bsd etc...
       set(data_dir ${CMAKE_INSTALL_PREFIX}/share/marble/data)
-      set(plugin_dir ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/marble/plugins)
+      set(plugin_dir ${CMAKE_INSTALL_LIBDIR}/marble/plugins)
       set(CMAKE_MODULES_INSTALL_PATH ${CMAKE_INSTALL_PREFIX}/share/marble/cmake)
 endif()
 
