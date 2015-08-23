@@ -28,9 +28,9 @@ target_link_libraries (
       ${Qt5Location_LIBRARIES}
       ${Qt5Positioning_LIBRARIES}
       ${Qt5AndroidExtras_LIBRARIES}
+      astro
       ${MARBLEWIDGET}
-      marbledeclarative
-      astro)
+      marbledeclarative)
 
 FILE(GLOB QML_FILES *.qml)
 add_custom_target(marble-maps_resources ALL SOURCES ${QML_FILES} package/AndroidManifest.xml)
@@ -46,7 +46,7 @@ if (ANDROID)
     set(QT_ANDROID_SDK_ROOT $ENV{ANDROID_SDK})
     set(QT_ANDROID_NDK_ROOT $ENV{ANDROID_NDK})
     set(QT_ANDROID_APP_PATH "${ABSOLUTE_INSTALL_PATH}/libs/${ANDROID_ABI}/libMarble.so")
-    set(QT_ANDROID_APP_EXTRA_LIBS "${ABSOLUTE_INSTALL_PATH}/lib/libmarblewidget-qt5.so,${ABSOLUTE_INSTALL_PATH}/lib/libmarbledeclarative.so,${ABSOLUTE_INSTALL_PATH}/lib/libastro.so")
+    set(QT_ANDROID_APP_EXTRA_LIBS "${ABSOLUTE_INSTALL_PATH}/lib/libastro.so,${ABSOLUTE_INSTALL_PATH}/lib/libmarblewidget-qt5.so,${ABSOLUTE_INSTALL_PATH}/lib/libmarbledeclarative.so")
     set(QT_ANDROID_APP_PACKAGE_SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/package")
     set(QT_ANDROID_APP_PACKAGE_NAME "org.kde.marble.maps")
     set(QT_ANDROID_APP_NAME "Marble Maps")
