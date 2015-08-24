@@ -16,6 +16,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
 #include "HttpDownloadManager.h"
+#include "osm/OsmPresetLibrary.h"
+
 
 #include <QString>
 #include <QVector>
@@ -177,7 +179,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             placemark->setName( placemarkName );
             placemark->setDescription(description);
             placemark->setCoordinate( lon.toDouble(), lat.toDouble(), 0, GeoDataCoordinates::Degree );
-            GeoDataFeature::GeoDataVisualCategory category = GeoDataFeature::OsmVisualCategory( key + '=' + value );
+            GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::OsmVisualCategory( key + '=' + value );
             placemark->setVisualCategory( category );
             placemarks << placemark;
         }

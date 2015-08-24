@@ -20,6 +20,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataExtendedData.h"
 #include "osm/OsmPlacemarkData.h"
+#include "osm/OsmPresetLibrary.h"
 
 #include "MarbleDebug.h"
 
@@ -111,7 +112,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
     }
     else if ( parentItem.represents( osmTag_node ) ) //POI
     {
-        GeoDataFeature::GeoDataVisualCategory poiCategory = GeoDataFeature::OsmVisualCategory( key + '=' + value );
+        GeoDataFeature::GeoDataVisualCategory poiCategory = OsmPresetLibrary::OsmVisualCategory( key + '=' + value );
 
         //Placemark is an accepted POI
         if ( poiCategory )
@@ -127,7 +128,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
     if ( placemark )
     {
         GeoDataFeature::GeoDataVisualCategory category;
-        if ( ( category = GeoDataFeature::OsmVisualCategory( key + '=' + value ) ) )
+        if ( ( category = OsmPresetLibrary::OsmVisualCategory( key + '=' + value ) ) )
         {
             if( placemark->visualCategory() != GeoDataFeature::Default
              && placemark->visualCategory() != GeoDataFeature::Building )
@@ -146,7 +147,8 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
                 placemark->setVisible( true );
             }
         }
-        else if ( ( category = GeoDataFeature::OsmVisualCategory( key ) ) )
+        // If there was no preset for the key=value tag, try the generic, "unknown" one
+        else if ( ( category = OsmPresetLibrary::OsmVisualCategory( key + "=unknown" ) ) )
         {
             if( placemark->visualCategory() != GeoDataFeature::Default )
             {

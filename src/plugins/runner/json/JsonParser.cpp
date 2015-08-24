@@ -12,6 +12,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
+#include "osm/OsmPresetLibrary.h"
 
 #include "MarbleDebug.h"
 
@@ -264,7 +265,7 @@ bool JsonParser::read( QIODevice* device )
                         // Else if the geometry still doesn't have a category, try if this
                         // key-value properties match any OSM visual category
                         else if ( category == GeoDataFeature::None ) {
-                            category = GeoDataFeature::OsmVisualCategory( propertyIterator.name().toLower() + '=' + propertyIterator.value().toString().toLower() );
+                            category = OsmPresetLibrary::OsmVisualCategory( propertyIterator.name().toLower() + '=' + propertyIterator.value().toString().toLower() );
 
                             if ( category != GeoDataFeature::None ) {
                                 // Add the visual category to all the placemarks

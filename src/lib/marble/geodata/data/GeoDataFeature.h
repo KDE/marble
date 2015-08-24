@@ -73,6 +73,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     EnumFeatureId featureId() const;
     /**
      * @brief  A categorization of a placemark as defined by ...FIXME.
+     * There is an additional osm tag mapping to GeoDataVisualCategory
+     * in OsmPresetLibrary.cpp
      */
     enum GeoDataVisualCategory {
         None,
@@ -270,11 +272,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         // item and just use it to specify the array size
         LastIndex
     };
-
-    /**
-     * @brief  Convenience categorization of placemarks for Osm key=value pairs
-     */
-    static GeoDataVisualCategory OsmVisualCategory(const QString &keyValue );
 
     /**
      * @brief The name of the feature
@@ -498,6 +495,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     static QColor defaultLabelColor();
     static void setDefaultLabelColor( const QColor& color );
+
+    static GeoDataStyle* presetStyle( GeoDataVisualCategory category );
 
     virtual void detach();
 
