@@ -55,25 +55,8 @@ Item {
                         verticalCenter: parent.verticalCenter
                         left: parent.left
                     }
-                    type: index === 0 ? "departure" : (index === waypointList.count-1 ? "destination" : "waypoint")
 
-                    Rectangle {
-                        color: palette.base
-                        anchors {
-                            horizontalCenter: parent.horizontalCenter
-                            bottom: parent.bottom
-                            bottomMargin: parent.height * 0.4
-                        }
-                        width: parent.width * 0.5
-                        height: width
-                        radius: 0.5 * height
-                        Text {
-                            id: indexText
-                            color: palette.text
-                            anchors.centerIn: parent
-                            text: index+1
-                        }
-                    }
+                    type: index === 0 ? "departure" : (index === waypointList.count-1 ? "destination" : "waypoint")
                 }
 
                 Text {

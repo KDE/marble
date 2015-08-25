@@ -44,6 +44,7 @@ Item {
         routing.clearRoute();
     }
 
+
     onNavigationSetupChanged: {
         if (navigationSetup != null) {
             navigationSetup.routeToDestinationRequested.connect(addPlacemarkAsDestination);
@@ -57,8 +58,7 @@ Item {
 
         anchors.fill: parent
         marbleMap: marbleItem.marbleMap
-        waypointDelegate: WaypointImage {visible: false}
-
+        waypointDelegate: Waypoint {visible: false}
         onRoutingProfileChanged: {
             switch (routingProfile) {
             case "Car (fastest)":
@@ -75,54 +75,11 @@ Item {
         }
     }
 
-    function addPlacemarkAsDestination()
-    {
-        if ( selectedPlacemark != null ) {
-            routing.addViaByPlacemark(selectedPlacemark);
-        }
-
-        if (navigationSetup) {
-            navigationSetup.visible = false;
-        }
-
-        routing.updateRoute();
-    }
-
-    function addPlacemarkAsDeparture()
-    {
-        if ( selectedPlacemark != null ) {
-            routing.addViaByPlacemarkAtIndex(0, selectedPlacemark);
-        }
-
-        if (navigationSetup) {
-            navigationSetup.visible = false;
-        }
-
-        routing.updateRoute();
-    }
-
-    function addPlacemarkAsWaypoint()
-    {
-        if ( selectedPlacemark != null ) {
-            if ( routing.waypointCount() == 0 ) {
-                routing.addViaByPlacemark(selectedPlacemark);
-            }
-            else {
-                routing.addViaByPlacemarkAtIndex(routing.waypointCount() - 1, selectedPlacemark);
-            }
-        }
-
-        if (navigationSetup) {
-            navigationSetup.visible = false;
-        }
-
-        routing.updateRoute();
-    }
-
-    function addPositionAsDeparture()
+    function addSearchResultAsPlacemark(placemark)
     {
         if (marbleItem) {
-            routing.addViaByCoordinateAtIndex(0, marbleItem.currentPosition);
+            var index = routing.addSearchResultPlacemark(placemark);
+            routing.showMenuOfSearchResult(index);
         }
     }
 }

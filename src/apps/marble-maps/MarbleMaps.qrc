@@ -9,7 +9,6 @@
     <file>CircularButton.qml</file>
     <file>PositionButton.qml</file>
     <file>BoxedText.qml</file>
-    <file>NavigationSetup.qml</file>
     <file>NavigationSetupButton.qml</file>
     <file>RoutePlanViewer.qml</file>
     <file>WaypointImage.qml</file>
@@ -17,6 +16,8 @@
     <file>ProfileSelectorMenu.qml</file>
     <file>FloatingMenuButton.qml</file>
     <file>WaypointOrderManager.qml</file>
+    <file>CircularMenu.qml</file>
+    <file>Waypoint.qml</file>
     <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
     <file alias="gps_fixed.png">../../../data/android/drawable-xxxhdpi/gps_fixed.png</file>
     <file alias="gps_not_fixed.png">../../../data/android/drawable-xxxhdpi/gps_not_fixed.png</file>
@@ -28,14 +29,16 @@
     <file alias="map.png">../../../data/android/drawable-xxxhdpi/map.png</file>
     <file alias="waypoint.png">../../../data/android/drawable-xxxhdpi/waypoint.png</file>
     <file alias="place.png">../../../data/android/drawable-xxxhdpi/place.png</file>
-    <file alias="place_white.png">../../../data/android/drawable-xxxhdpi/place_white.png</file>
-    <file alias="place_red.png">../../../data/android/drawable-xxxhdpi/place_red.png</file>
-    <file alias="place_orange.png">../../../data/android/drawable-xxxhdpi/place_orange.png</file>
-    <file alias="place_green.png">../../../data/android/drawable-xxxhdpi/place_green.png</file>
     <file alias="up.png">../../../data/android/drawable-xxxhdpi/up.png</file>
     <file alias="down.png">../../../data/android/drawable-xxxhdpi/down.png</file>
     <file alias="delete.png">../../../data/android/drawable-xxxhdpi/delete.png</file>
+    <file alias="delete_white.png">../../../data/android/drawable-xxxhdpi/delete_white.png</file>
     <file alias="clear.png">../../../data/android/drawable-xxxhdpi/ic_close_black_18dp.png</file>
     <file alias="busy_indicator.png">../../../data/android/drawable-xxxhdpi/busy_indicator.png</file>
+    <file alias="circular_menu_backdrop.png">../../../data/android/drawable-xxxhdpi/circular_menu_backdrop.png</file>
+    <file alias="ic_place_arrival.png">../../../data/android/drawable-xxxhdpi/ic_place_arrival.png</file>
+    <file alias="ic_place_departure.png">../../../data/android/drawable-xxxhdpi/ic_place_departure.png</file>
+    <file alias="ic_place_unknown.png">../../../data/android/drawable-xxxhdpi/ic_place_unknown.png</file>
+    <file alias="ic_place_via.png">../../../data/android/drawable-xxxhdpi/ic_place_via.png</file>
 </qresource>
 </RCC>

@@ -17,10 +17,12 @@ import org.kde.edu.marble 0.20
 Item {
     id: root
 
-    // Can be 'departure', 'waypoint' and 'destination'
+    // Can be 'departure', 'waypoint', 'destination', 'searchResult'
     property alias type: image.state
 
-    width: Screen.pixelDensity * 5
+    signal clicked()
+
+    width: Screen.pixelDensity * 6
     height: width
 
     Image {
@@ -32,7 +34,7 @@ Item {
                 name: "departure"
                 PropertyChanges {
                     target: image
-                    source: "qrc:///place_green.png"
+                    source: "qrc:///ic_place_departure.png"
                 }
             },
 
@@ -40,7 +42,7 @@ Item {
                 name: "waypoint"
                 PropertyChanges {
                     target: image
-                    source: "qrc:///place_orange.png"
+                    source: "qrc:///ic_place_via.png"
                 }
             },
 
@@ -48,10 +50,24 @@ Item {
                 name: "destination"
                 PropertyChanges {
                     target: image
-                    source: "qrc:///place_red.png"
+                    source: "qrc:///ic_place_arrival.png"
+                }
+            },
+
+            State {
+                name: "searchResult"
+                PropertyChanges {
+                    target: image
+                    source: "qrc:///ic_place_unknown.png"
                 }
             }
+
         ]
 
+        MouseArea {
+            id: touchArea
+            anchors.fill: parent
+            onClicked: root.clicked()
+        }
     }
 }

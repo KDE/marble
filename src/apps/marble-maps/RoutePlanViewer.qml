@@ -17,7 +17,6 @@ import org.kde.edu.marble 0.20
 
 Item {
     id: root
-    anchors.fill: parent
 
     property var model: []
 

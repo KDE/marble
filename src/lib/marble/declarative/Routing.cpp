@@ -22,6 +22,7 @@
 #include <routing/Route.h>
 #include <declarative/RouteRequestModel.h>
 #include <ViewportParams.h>
+#include <PositionTracking.h>
 
 #include <QDebug>
 #include <QPainter>
@@ -41,6 +42,8 @@ public:
     QMap<int,QQuickItem*> m_waypointItems;
     RouteRequestModel* m_routeRequestModel;
     QObject * m_parent;
+    QVector<Placemark *> m_searchResultPlacemarks;
+    QMap<int, QQuickItem*> m_searchResultItems;
 };
 
 RoutingPrivate::RoutingPrivate(QObject *parent) :
@@ -119,15 +122,14 @@ void Routing::setWaypointDelegate(QQmlComponent *waypointDelegate)
 void Routing::updateWaypointItems()
 {
     if ( d->m_marbleMap && d->m_routeRequestModel ) {
-
         for (int i = d->m_waypointItems.keys().size(); i < d->m_routeRequestModel->rowCount(); i++ ) {
             QQmlContext * context = new QQmlContext( qmlContext( d->m_waypointDelegate ) );
-            context->setContextProperty("type", QVariant::fromValue(QString("waypoint")));
-            context->setContextProperty("visible", QVariant::fromValue(false));
             QObject * component = d->m_waypointDelegate->create(context);
             QQuickItem* item = qobject_cast<QQuickItem*>( component );
             if ( item ) {
                 item->setParentItem( this );
+                item->setProperty("index", i);
+                connect(item, SIGNAL(menuItemSelected(QVariant, QVariant, QVariant)), this, SLOT(handleSelectedMenuOption(QVariant, QVariant, QVariant)));
                 d->m_waypointItems[i] = item;
             } else {
                 delete component;
@@ -153,10 +155,13 @@ void Routing::updateWaypointItems()
             if ( item ) {
                 item->setVisible( visible );
                 if ( visible ) {
-                    item->setX( x - item->width()/2 );
-                    item->setY( y - item->height() );
-                    if (iter.key() == d->m_waypointItems.keys().size()-1) {
-                        item->setProperty("type", QVariant::fromValue(QString("destination")));
+                    item->setProperty("xPos", QVariant::fromValue(x));
+                    item->setProperty("yPos", QVariant::fromValue(y));
+                    if (iter.key() == 0 && waypointCount() == 1) {
+                        item->setProperty("type", QVariant::fromValue(QString("departure")));
+                    }
+                    else if (iter.key() == d->m_waypointItems.keys().size()-1) {
+                            item->setProperty("type", QVariant::fromValue(QString("destination")));
                     }
                     else if (iter.key() > 0) {
                         item->setProperty("type", QVariant::fromValue(QString("waypoint")));
@@ -168,6 +173,145 @@ void Routing::updateWaypointItems()
             }
             ++iter;
         }
+    }
+}
+
+int Routing::addSearchResultPlacemark(Placemark *placemark)
+{
+    if ( d->m_marbleMap ) {
+        for (int i = 0; i < d->m_searchResultItems.size(); i++) {
+            if (d->m_searchResultPlacemarks[i]->coordinate()->coordinates() == placemark->coordinate()->coordinates()) {
+                return i;
+            }
+        }
+        Placemark * newPlacemark = new Placemark(this);
+        newPlacemark->coordinate()->setCoordinates(placemark->coordinate()->coordinates());
+        newPlacemark->setName(placemark->name());
+        d->m_searchResultPlacemarks.push_back(newPlacemark);
+    }
+
+    updateSearchResultPlacemarks();
+    return d->m_searchResultPlacemarks.size()-1;
+}
+
+void Routing::showMenuOfSearchResult(int index)
+{
+    if (d->m_searchResultItems.contains(index)) {
+        QMetaObject::invokeMethod(d->m_searchResultItems[index], "openMenu");
+    }
+}
+
+void Routing::updateSearchResultPlacemarks()
+{
+    for (int i = d->m_searchResultItems.keys().size(); i < d->m_searchResultPlacemarks.size(); i++ ) {
+        QQmlContext * context = new QQmlContext( qmlContext( d->m_waypointDelegate ) );
+        QObject * component = d->m_waypointDelegate->create(context);
+        QQuickItem* item = qobject_cast<QQuickItem*>( component );
+        if ( item ) {
+            item->setParentItem( this );
+            item->setProperty("index", i);
+            item->setProperty("type", QVariant::fromValue(QString("searchResult")));
+            connect(item, SIGNAL(menuItemSelected(QVariant, QVariant, QVariant)), this, SLOT(handleSelectedMenuOption(QVariant, QVariant, QVariant)));
+            d->m_searchResultItems[i] = item;
+        } else {
+            delete component;
+        }
+    }
+
+    for (int i = d->m_searchResultItems.keys().size()-1; i >= d->m_searchResultPlacemarks.size(); i--) {
+        QQuickItem* item = d->m_searchResultItems[i];
+        item->setProperty("visible", QVariant::fromValue(false) );
+        d->m_searchResultItems.erase(d->m_searchResultItems.find(i));
+        item->deleteLater();
+    }
+
+    for (int i = 0; i < d->m_searchResultItems.keys().size() && i < d->m_searchResultPlacemarks.size(); i++) {
+        qreal x = 0;
+        qreal y = 0;
+        const qreal lon = d->m_searchResultPlacemarks[i]->coordinate()->longitude();
+        const qreal lat = d->m_searchResultPlacemarks[i]->coordinate()->latitude();
+        const bool visible = d->m_marbleMap->viewport()->screenCoordinates(lon * DEG2RAD, lat * DEG2RAD, x, y);
+
+        QQuickItem * item = d->m_searchResultItems[i];
+        if ( item ) {
+            item->setVisible( visible );
+            if ( visible ) {
+                item->setProperty("xPos", QVariant::fromValue(x));
+                item->setProperty("yPos", QVariant::fromValue(y));
+            }
+        }
+    }
+}
+
+void Routing::handleSelectedMenuOption(const QVariant &index, const QVariant &type, const QVariant &selected)
+{
+    int convertedIndex = index.toInt();
+    QString convertedType = type.toString();
+
+    if (!d->m_marbleMap || convertedIndex == -1) {
+        return ;
+    }
+
+    Placemark * placemark = nullptr;
+
+    if (convertedType == "searchResult") {
+        if (d->m_searchResultItems.keys().size() > convertedIndex) {
+            QQuickItem * item = d->m_searchResultItems[convertedIndex];
+            QMetaObject::invokeMethod(item, "closeMenu");
+
+            placemark = d->m_searchResultPlacemarks[convertedIndex];
+        }
+    }
+    else {
+        if (d->m_waypointItems.keys().size() > convertedIndex) {
+            QQuickItem * item = d->m_waypointItems[convertedIndex];
+            QMetaObject::invokeMethod(item, "closeMenu");
+
+            placemark = new Placemark();
+            placemark->setName(d->m_routeRequestModel->data(d->m_routeRequestModel->index(convertedIndex), Qt::DisplayRole).toString());
+            placemark->coordinate()->setLongitude(d->m_routeRequestModel->data(d->m_routeRequestModel->index(convertedIndex), RouteRequestModel::LongitudeRole).toReal());
+            placemark->coordinate()->setLatitude(d->m_routeRequestModel->data(d->m_routeRequestModel->index(convertedIndex), RouteRequestModel::LatitudeRole).toReal());
+        }
+    }
+
+    if (placemark) {
+        QString selectedType = selected.toString();
+
+        if (convertedType != "searchResult") {
+            removeVia(convertedIndex);
+        }
+
+        if ( selectedType == "destination" ) {
+            if (d->m_routeRequestModel->rowCount() == 0) {
+                if (d->m_marbleMap->model()->positionTracking()->status() == PositionProviderStatusAvailable)
+                {
+                    addVia(d->m_marbleMap->model()->positionTracking()->currentLocation().longitude(GeoDataCoordinates::Degree),
+                       d->m_marbleMap->model()->positionTracking()->currentLocation().latitude(GeoDataCoordinates::Degree));
+                }
+            }
+            addViaByPlacemark(placemark);
+        }
+        else if ( selectedType == "departure" ) {
+            addViaByPlacemarkAtIndex(0, placemark);
+        }
+        else if ( selectedType == "waypoint" ) {
+            addViaByPlacemarkAtIndex(waypointCount() - 1, placemark);
+        }
+        else if ( selectedType == "searchResult" ) {
+            addSearchResultPlacemark(placemark);
+        }
+
+        if (convertedType == "searchResult") {
+            d->m_searchResultPlacemarks.removeAt(convertedIndex);
+        }
+
+        updateRoute();
+        updateWaypointItems();
+        updateSearchResultPlacemarks();
+    }
+
+    if (placemark && convertedType != "searchResult") {
+        delete placemark;
     }
 }
 
@@ -190,6 +334,8 @@ void Routing::setMarbleMap( MarbleMap* marbleMap )
                  this, SIGNAL(hasRouteChanged()) );
         connect( d->m_marbleMap, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
                  this, SLOT(updateWaypointItems()) );
+        connect( d->m_marbleMap, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+                 this, SLOT(updateSearchResultPlacemarks()) );
 
         emit routingModelChanged();
 

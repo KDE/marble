@@ -17,9 +17,9 @@ import org.kde.edu.marble 0.20
 Item {
     id: root
 
-    visible: false
-
     property var marbleQuickItem: null
+    property var routingManager: null
+
     signal itemSelected()
     readonly property alias searchResultPlacemark: backend.selectedPlacemark
     readonly property alias searchResultsVisible: searchResults.visible
@@ -65,6 +65,9 @@ Item {
             searchResults.visible = false;
             background.visible = false;
             searchField.focus = true;
+            if (routingManager) {
+                routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
+            }
         }
         MouseArea{
             anchors.fill: parent

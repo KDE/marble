@@ -98,7 +98,9 @@ public Q_SLOTS:
 
     void setWaypointDelegate(QQmlComponent * waypointDelegate);
 
-    void updateWaypointItems();
+    int addSearchResultPlacemark( Placemark * placemark );
+
+    void showMenuOfSearchResult(int index);
 
 Q_SIGNALS:
     void marbleMapChanged();
@@ -113,8 +115,17 @@ Q_SIGNALS:
 
     void routeRequestModelChanged(RouteRequestModel* routeRequestModel);
 
+
+private Q_SLOTS:
+    void updateWaypointItems();
+
+    void updateSearchResultPlacemarks();
+
+    void handleSelectedMenuOption(const QVariant & index, const QVariant & type, const QVariant & selected);
+
+
 private:
-    RoutingPrivate* const d;
+    RoutingPrivate* const d;    
 };
 
 }

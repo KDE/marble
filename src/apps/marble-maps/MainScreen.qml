@@ -26,33 +26,42 @@ ApplicationWindow {
         id: menuBar
         Menu {
             title: qsTr("Marble Maps")
-            MenuItem{
-                text: qsTr("Search")
-                onTriggered: search.visible = !search.visible
-            }
 
             MenuItem {
                 text: qsTr("Delete Route")
-                onTriggered: {routing.clearRoute(); instructions.visible = false; startRoutingButton.show = false; waypointOrderEditor.visible = false;}
+                onTriggered: {
+                    routing.clearRoute();
+                    itemStack.pop(mapItem)
+                }
                 visible: routing.hasRoute
             }
 
             MenuItem {
-                text: waypointOrderEditor.visible ? qsTr("Hide Route Modifier") : qsTr("Modify Route")
-                onTriggered: {waypointOrderEditor.visible = !waypointOrderEditor.visible; instructions.visible = false}
+                text: qsTr("Modify Route")
+                onTriggered: {
+                    if (itemStack.currentItem !== waypointOrderEditor) {
+                        itemStack.push(waypointOrderEditor);
+                    }
+                }
                 visible: routing.hasRoute
             }
 
             MenuItem {
                 text: qsTr("Navigation Instructions")
-                onTriggered: {instructions.visible = true}
+                onTriggered: {
+                    if (itemStack.currentItem !== instructions) {
+                        itemStack.push(instructions)
+                    }
+                }
                 visible: routing.hasRoute && !instructions.visible
             }
 
             MenuItem {
                 text: qsTr("Show the Map")
-                onTriggered: {instructions.visible = false}
-                visible: instructions.visible
+                onTriggered: {
+                    itemStack.pop(mapItem)
+                }
+                visible: instructions.visible || waypointOrderEditor.visible
             }
         }
     }
@@ -75,184 +84,173 @@ ApplicationWindow {
         color: palette.window
     }
 
-    PinchArea {
+    StackView {
+        id: itemStack
+
         anchors.fill: parent
-        enabled: true
+        focus: true
 
-        onPinchStarted: marbleMaps.handlePinchStarted(pinch.center)
-        onPinchFinished: marbleMaps.handlePinchFinished(pinch.center)
-        onPinchUpdated: marbleMaps.handlePinchUpdated(pinch.center, pinch.scale);
+        initialItem: mapItem
 
-        MarbleMaps {
-            id: marbleMaps
+        delegate: StackViewDelegate {
+            function transitionFinished(properties)
+            {
+                properties.exitItem.visible = true
+            }
+        }
 
-            anchors.fill: parent
-            visible: true
-            focus: true
+        function updateIndicator() {
+            if ( !positionVisible && positionAvailable ) {
+                zoomToPositionButton.updateIndicator();
+            }
+        }
 
-            // Theme settings.
-            projection: MarbleItem.Mercator
-            mapThemeId: "earth/openstreetmap/openstreetmap.dgml"
+        Item {
+            id: mapItem
 
-            // Visibility of layers/plugins.
-            showFrameRate: false
-            showAtmosphere: false
-            showCompass: false
-            showClouds: false
-            showCrosshairs: false
-            showGrid: false
-            showOverviewMap: false
-            showOtherPlaces: false
-            showScaleBar: false
-            showBackground: false
-            positionProvider: suspended ? "" : "QtPositioning"
-            showPositionMarker: true
+            PinchArea {
+                anchors.fill: parent
+                enabled: true
 
-            onPositionAvailableChanged: updateIndicator()
-            onPositionVisibleChanged: updateIndicator()
-            onViewportChanged: updateIndicator()
+                onPinchStarted: marbleMaps.handlePinchStarted(pinch.center)
+                onPinchFinished: marbleMaps.handlePinchFinished(pinch.center)
+                onPinchUpdated: marbleMaps.handlePinchUpdated(pinch.center, pinch.scale);
 
-            function updateIndicator() {
-                if ( !positionVisible && positionAvailable ) {
-                    zoomToPositionButton.updateIndicator();
+                MarbleMaps {
+                    id: marbleMaps
+
+                    anchors.fill: parent
+                    visible: true
+                    focus: true
+
+                    // Theme settings.
+                    projection: MarbleItem.Mercator
+                    mapThemeId: "earth/openstreetmap/openstreetmap.dgml"
+
+                    // Visibility of layers/plugins.
+                    showFrameRate: false
+                    showAtmosphere: false
+                    showCompass: false
+                    showClouds: false
+                    showCrosshairs: false
+                    showGrid: false
+                    showOverviewMap: false
+                    showOtherPlaces: false
+                    showScaleBar: false
+                    showBackground: false
+                    positionProvider: suspended ? "" : "QtPositioning"
+                    showPositionMarker: true
+
+                    onPositionAvailableChanged: updateIndicator()
+                    onPositionVisibleChanged: updateIndicator()
+                    onViewportChanged: updateIndicator()
+
+                    function updateIndicator() {
+                        if ( !positionVisible && positionAvailable ) {
+                            zoomToPositionButton.updateIndicator();
+                        }
+                    }
+
+                    RoutingManager {
+                        id: routing
+                        anchors.fill: parent
+                        marbleItem: marbleMaps
+                        selectedPlacemark: search.searchResultPlacemark
+                        routingProfile: profileChoosingMenu.selectedProfile
+                    }
                 }
             }
 
-            RoutingManager {
-                id: routing
+            MouseArea{
                 anchors.fill: parent
-                marbleItem: marbleMaps
-                navigationSetup: navigationSettings
-                selectedPlacemark: search.searchResultPlacemark
-                routingProfile: profileChoosingMenu.selectedProfile
+                propagateComposedEvents: true
+                onPressed: {
+                    search.focus = true;
+                    mouse.accepted = false;
+                }
             }
         }
 
-        MouseArea{
+        PositionButton {
+            id: zoomToPositionButton
+            anchors {
+                bottom: parent.bottom
+                right: parent.right
+                rightMargin: 0.005 * root.width
+                bottomMargin: 0.005 * root.width
+            }
+
+            iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
+
+            onClicked: marbleMaps.centerOnCurrentPosition()
+
+            property real distance: 0
+
+            function updateIndicator() {
+                var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
+                distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
+                angle = marbleMaps.angleFromPointToCurrentLocation(point);
+            }
+
+            showDirection: marbleMaps.positionAvailable && !marbleMaps.positionVisible
+        }
+
+        BoxedText {
+            id: distanceIndicator
+            text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
+            anchors {
+                bottom: zoomToPositionButton.top
+                horizontalCenter: zoomToPositionButton.horizontalCenter
+            }
+
+            visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
+        }
+
+        CircularButton {
+            id: changeProfileButton
+            visible: routing.hasRoute && !search.searchResultsVisible
+            anchors {
+                bottom: distanceIndicator.top
+                horizontalCenter: zoomToPositionButton.horizontalCenter
+                margins: 0.01 * root.width
+            }
+
+            iconSource: routing.profileIcon
+            onClicked: {
+                profileChoosingMenu.focus = true;
+            }
+        }
+
+        ProfileSelectorMenu {
+            id: profileChoosingMenu
+            visible: focus
+            anchors {
+                right: changeProfileButton.right
+                verticalCenter: changeProfileButton.verticalCenter
+            }
+        }
+
+        Search {
+            id: search
             anchors.fill: parent
-            propagateComposedEvents: true
-            onPressed: {
-                search.focus = true;
-                mouse.accepted = false;
-            }
-        }
-    }
-
-    PositionButton {
-        id: zoomToPositionButton
-        anchors {
-            bottom: parent.bottom
-            right: parent.right
-            bottomMargin: startRoutingButton.height
-            rightMargin: 0.005 * root.width
+            marbleQuickItem: marbleMaps
+            routingManager: routing
         }
 
-        iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
-
-        onClicked: marbleMaps.centerOnCurrentPosition()
-
-        property real distance: 0
-
-        function updateIndicator() {
-            var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
-            distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
-            angle = marbleMaps.angleFromPointToCurrentLocation(point);
+        WaypointOrderManager {
+            id: waypointOrderEditor
+            visible: false
+            routingManager: routing
         }
 
-        showDirection: marbleMaps.positionAvailable && !marbleMaps.positionVisible
-    }
-
-    BoxedText {
-        id: distanceIndicator
-        text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
-        anchors {
-            bottom: zoomToPositionButton.top
-            horizontalCenter: zoomToPositionButton.horizontalCenter
+        RoutePlanViewer{
+            id: instructions
+            visible: false
+            model: routing.routingModel
         }
 
-        visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
-    }
-
-    Search {
-        id: search
-        anchors.fill: parent
-        marbleQuickItem: marbleMaps
-        onItemSelected: { startRoutingButton.show = true; startRoutingButton.navigation = false; }
-    }
-
-    CircularButton {
-        id: startRoutingButton
-
-        property bool navigation: false
-        property bool show: false
-
-        visible: show || routing.hasRoute
-
-        anchors {
-            bottom: changeProfileButton.top
-            horizontalCenter: changeProfileButton.horizontalCenter
+        Keys.onBackPressed: {
+            event.accepted = itemStack.pop();
         }
-
-        iconSource: navigation ? "qrc:///navigation.png" : "qrc:///map.png"
-
-        onClicked: {
-            if (navigation) {
-                routing.addPositionAsDeparture();
-            }
-            else {
-                navigationSettings.visible = true;
-                navigation = true;
-            }
-        }
-    }
-
-    CircularButton {
-        id: changeProfileButton
-        visible: routing.hasRoute && !search.searchResultsVisible
-        anchors {
-            bottom: distanceIndicator.top
-            horizontalCenter: zoomToPositionButton.horizontalCenter
-            margins: 0.01 * root.width
-        }
-
-        iconSource: routing.profileIcon
-        onClicked: { profileChoosingMenu.focus = true; }
-    }
-
-    ProfileSelectorMenu {
-        id: profileChoosingMenu
-        visible: focus
-        anchors {
-            right: changeProfileButton.right
-            verticalCenter: changeProfileButton.verticalCenter
-        }
-    }
-
-    NavigationSetup {
-        id: navigationSettings
-        visible: false
-        property bool departureIsSet: false
-        property bool destinationIsSet: false
-
-        height: Screen.pixelDensity * 9
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-    }
-
-    WaypointOrderManager {
-        id: waypointOrderEditor
-        anchors.fill: parent
-        visible: false
-        routingManager:routing
-    }
-
-    RoutePlanViewer{
-        id: instructions
-        visible: false
-        anchors.fill: parent
-        model: routing.routingModel
     }
 }
