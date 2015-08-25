@@ -75,7 +75,11 @@ public:
     void setAction( const QString& action );
 
 
-
+    /**
+     * @brief tagValue returns the value of the tag that has @p key as key
+     * or an empty qstring if there is no such tag
+     */
+    QString tagValue( const QString &key ) const;
 
     /**
      * @brief addTag this function inserts a string key=value mapping,
@@ -160,6 +164,17 @@ public:
     QHash< int, OsmPlacemarkData >::const_iterator memberReferencesEnd() const;
 
     /**
+     * @brief addRelation calling this makes the osm placemark a member of the relation
+     * with @p id as id, while having the role @p role
+     */
+    void addRelation( qint64 id, const QString &role );
+    void removeRelation( qint64 id );
+    bool containsRelation( qint64 id ) const;
+
+    QHash< qint64, QString >::const_iterator relationReferencesBegin() const;
+    QHash< qint64, QString >::const_iterator relationReferencesEnd() const;
+
+    /**
      * @brief osmData is stored within a placemark's extended data hash
      * at an entry with osmKey
      */
@@ -208,6 +223,14 @@ private:
      *  order provided by polygon->innerBoundaries()
      */
     QHash<int, OsmPlacemarkData> m_memberReferences;
+
+    /**
+     * @brief m_relationReferences is used to store the relations the placemark is part of
+     * and the role it has within them.
+     * Eg. an entry ( "123", "stop" ) means that the parent placemark is a member of
+     * the relation with id "123", while having the "stop" role
+     */
+    QHash<qint64, QString> m_relationReferences;
 
 };
 

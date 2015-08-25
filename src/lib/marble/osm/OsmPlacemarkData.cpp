@@ -112,6 +112,11 @@ void OsmPlacemarkData::setAction( const QString& action )
 
 
 
+QString OsmPlacemarkData::tagValue( const QString& key ) const
+{
+    return m_tags.value( key );
+}
+
 void OsmPlacemarkData::addTag( const QString& key, const QString& value )
 {
     m_tags.insert( key, value );
@@ -240,6 +245,31 @@ QHash< int, OsmPlacemarkData >::const_iterator OsmPlacemarkData::memberReference
 QHash< int, OsmPlacemarkData >::const_iterator OsmPlacemarkData::memberReferencesEnd() const
 {
     return m_memberReferences.constEnd();
+}
+
+void OsmPlacemarkData::addRelation( qint64 id, const QString &role )
+{
+    m_relationReferences.insert( id, role );
+}
+
+void OsmPlacemarkData::removeRelation( qint64 id )
+{
+    m_relationReferences.remove( id );
+}
+
+bool OsmPlacemarkData::containsRelation( qint64 id ) const
+{
+    return m_relationReferences.contains( id );
+}
+
+QHash< qint64, QString >::const_iterator OsmPlacemarkData::relationReferencesBegin() const
+{
+    return m_relationReferences.begin();
+}
+
+QHash< qint64, QString >::const_iterator OsmPlacemarkData::relationReferencesEnd() const
+{
+    return m_relationReferences.constEnd();
 }
 
 QString OsmPlacemarkData::osmHashKey()
