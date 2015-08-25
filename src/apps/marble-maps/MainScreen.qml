@@ -30,6 +30,7 @@ ApplicationWindow {
             MenuItem {
                 text: qsTr("Delete Route")
                 onTriggered: {
+                    navigationManager.marbleItem = null;
                     routing.clearRoute();
                     itemStack.pop(mapItem)
                 }
@@ -99,12 +100,6 @@ ApplicationWindow {
             }
         }
 
-        function updateIndicator() {
-            if ( !positionVisible && positionAvailable ) {
-                zoomToPositionButton.updateIndicator();
-            }
-        }
-
         Item {
             id: mapItem
 
@@ -141,9 +136,23 @@ ApplicationWindow {
                     positionProvider: suspended ? "" : "QtPositioning"
                     showPositionMarker: true
 
-                    onPositionAvailableChanged: updateIndicator()
-                    onPositionVisibleChanged: updateIndicator()
-                    onViewportChanged: updateIndicator()
+                    onPositionAvailableChanged: {
+                        updateIndicator();
+                        navigationManager.updateItem();
+                    }
+                    onPositionVisibleChanged: {
+                        updateIndicator();
+                        navigationManager.updateItem();
+                    }
+                    onVisibleLatLonAltBoxChanged: {
+                        updateIndicator();
+                        navigationManager.updateItem();
+                    }
+                    onCurrentPositionChanged: {
+                        updateIndicator();
+                        navigationManager.updateItem();
+                    }
+
 
                     function updateIndicator() {
                         if ( !positionVisible && positionAvailable ) {
@@ -221,6 +230,20 @@ ApplicationWindow {
             }
         }
 
+/*<<<<<<< HEAD
+        iconSource: navigation ? "qrc:///navigation.png" : "qrc:///map.png"
+
+        onClicked: {
+            if (navigation) {
+                routing.addPositionAsDeparture();
+                navigationManager.marbleItem = marbleMaps;
+                search.visible = false;
+                navigationManager.visible = true;
+            }
+            else {
+                navigationSettings.visible = true;
+                navigation = true;
+*/
         ProfileSelectorMenu {
             id: profileChoosingMenu
             visible: focus
@@ -228,6 +251,11 @@ ApplicationWindow {
                 right: changeProfileButton.right
                 verticalCenter: changeProfileButton.verticalCenter
             }
+        }
+
+        CircularButton {
+            id: startNavigation
+            visible:
         }
 
         Search {
@@ -247,6 +275,20 @@ ApplicationWindow {
             id: instructions
             visible: false
             model: routing.routingModel
+        }
+
+        PositionMarker {
+            id: positionMarker
+            posX: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.x : 0
+            posY: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.y : 0
+            angle: marbleMaps.angle
+            visible: navigationManager.visible
+        }
+
+        NavigationManager {
+            id: navigationManager
+            anchors.fill: parent
+            visible: false
         }
 
         Keys.onBackPressed: {

@@ -81,6 +81,7 @@ if(ANDROID)
 
    find_package(Qt5Location)
    find_package(Qt5Positioning)
+   find_package(Qt5Multimedia)
    set ( MARBLE_NO_WEBKIT TRUE )
 else()
    find_package(Qt5WebKit)

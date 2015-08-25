@@ -16,6 +16,9 @@
     <file>ProfileSelectorMenu.qml</file>
     <file>FloatingMenuButton.qml</file>
     <file>WaypointOrderManager.qml</file>
+    <file>NavigationInfoBar.qml</file>
+    <file>NavigationManager.qml</file>
+    <file>PositionMarker.qml</file>
     <file>CircularMenu.qml</file>
     <file>Waypoint.qml</file>
     <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
@@ -35,6 +38,7 @@
     <file alias="delete_white.png">../../../data/android/drawable-xxxhdpi/delete_white.png</file>
     <file alias="clear.png">../../../data/android/drawable-xxxhdpi/ic_close_black_18dp.png</file>
     <file alias="busy_indicator.png">../../../data/android/drawable-xxxhdpi/busy_indicator.png</file>
+    <file alias="navigation_blue.png">../../../data/android/drawable-xxxhdpi/navigation_blue.png</file>
     <file alias="circular_menu_backdrop.png">../../../data/android/drawable-xxxhdpi/circular_menu_backdrop.png</file>
     <file alias="ic_place_arrival.png">../../../data/android/drawable-xxxhdpi/ic_place_arrival.png</file>
     <file alias="ic_place_departure.png">../../../data/android/drawable-xxxhdpi/ic_place_departure.png</file>

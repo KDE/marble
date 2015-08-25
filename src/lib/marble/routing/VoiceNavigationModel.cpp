@@ -79,6 +79,9 @@ void VoiceNavigationModelPrivate::reset()
 
 QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
 {
+#ifdef Q_OS_ANDROID
+    return name;
+#else
     QStringList const formats = QStringList() << "ogg" << "mp3" << "wav";
     if ( m_speakerEnabled ) {
         QString const audioTemplate = "%1/%2.%3";
@@ -100,6 +103,7 @@ QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
     }
 
     return QString();
+#endif
 }
 
 QString VoiceNavigationModelPrivate::distanceAudioFile( qreal dest ) const
