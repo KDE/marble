@@ -255,7 +255,7 @@ ApplicationWindow {
 
         CircularButton {
             id: startNavigation
-            visible:
+            visible: false
         }
 
         Search {
