@@ -13,7 +13,6 @@
 #include "OsmNodeTagHandler.h"
 
 // Osm plugin
-#include "OsmObjectManager.h"
 #include "OsmElementDictionary.h"
 #include "OsmParser.h"
 
@@ -25,6 +24,8 @@
 #include "GeoDataGeometry.h"
 #include "GeoDataData.h"
 #include "osm/OsmPlacemarkData.h"
+#include "osm/OsmObjectManager.h"
+
 
 namespace Marble
 {

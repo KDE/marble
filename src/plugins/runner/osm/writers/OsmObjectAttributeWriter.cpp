@@ -9,7 +9,7 @@
 //
 
 #include "OsmObjectAttributeWriter.h"
-#include "OsmObjectManager.h"
+#include "osm/OsmObjectManager.h"
 #include "osm/OsmPlacemarkData.h"
 
 namespace Marble {

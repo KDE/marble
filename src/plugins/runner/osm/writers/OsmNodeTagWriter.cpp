@@ -17,11 +17,12 @@
 //Marble
 #include "OsmElementDictionary.h"
 #include "OsmObjectAttributeWriter.h"
-#include "OsmObjectManager.h"
 #include "OsmTagTagWriter.h"
 #include "GeoDataPoint.h"
 #include "GeoDataLineString.h"
 #include "osm/OsmPlacemarkData.h"
+#include "osm/OsmObjectManager.h"
+
 
 namespace Marble
 {

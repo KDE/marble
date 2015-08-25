@@ -22,16 +22,14 @@ qint64 OsmObjectManager::m_minId = -1;
 
 void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
 {
-    if ( placemark->hasOsmData() ) {
-        return;
-    }
-
-    // The "--m_minId" assignments mean: assigning an id lower( by 1 ) than the current lowest,
-    // and updating the current lowest id.
     OsmPlacemarkData &osmData = placemark->osmData();
-    osmData.setId( --m_minId );
-    osmData.setAction( "modify" );
-    osmData.setVisible( "true" );
+    if ( osmData.isNull() ) {
+        // The "--m_minId" assignments mean: assigning an id lower( by 1 ) than the current lowest,
+        // and updating the current lowest id.
+        osmData.setId( --m_minId );
+        osmData.setAction( "modify" );
+        osmData.setVisible( "true" );
+    }
 
     if ( !placemark->name().isEmpty() ) {
         osmData.addTag( "name", placemark->name() );

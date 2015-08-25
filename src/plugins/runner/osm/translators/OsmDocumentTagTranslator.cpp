@@ -14,7 +14,6 @@
 //Marble
 #include "OsmNodeTagWriter.h"
 #include "OsmWayTagWriter.h"
-#include "OsmObjectManager.h"
 #include "OsmElementDictionary.h"
 #include "GeoDataDocument.h"
 #include "GeoWriter.h"
@@ -25,6 +24,8 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataTypes.h"
 #include "osm/OsmPlacemarkData.h"
+#include "osm/OsmObjectManager.h"
+
 
 //Qt
 #include <QVector>

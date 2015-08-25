@@ -17,7 +17,6 @@
 #include <QVariant>
 
 // Osm plugin
-#include "OsmObjectManager.h"
 #include "OsmParser.h"
 #include "OsmElementDictionary.h"
 
@@ -27,6 +26,7 @@
 #include "GeoDataParser.h"
 #include "GeoDataPolygon.h"
 #include "osm/OsmPlacemarkData.h"
+#include "osm/OsmObjectManager.h"
 #include "GeoDataExtendedData.h"
 
 namespace Marble

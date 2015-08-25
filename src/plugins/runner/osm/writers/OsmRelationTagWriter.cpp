@@ -13,13 +13,13 @@
 
 //Marble
 #include "OsmElementDictionary.h"
-#include "OsmObjectManager.h"
 #include "OsmObjectAttributeWriter.h"
 #include "OsmTagTagWriter.h"
 #include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
 #include "osm/OsmPlacemarkData.h"
+#include "osm/OsmObjectManager.h"
 
 namespace Marble
 {

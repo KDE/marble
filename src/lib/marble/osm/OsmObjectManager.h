@@ -17,11 +17,12 @@ namespace Marble
 {
 
 class GeoDataPlacemark;
+class OsmPlacemarkData;
 
 /**
  * @brief The OsmObjectManager class is used to assign osmData to placemarks that
  * do not have them at write time. Objects with no osmData usually consist of
- * new placemarks created in the editor and placemarks loaded from KML files
+ * new placemarks created in the editor and placemarks loaded from KML files.
  */
 class OsmObjectManager
 {

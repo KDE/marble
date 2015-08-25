@@ -12,7 +12,6 @@
 #include "OsmPlacemarkTagTranslator.h"
 
 //Marble
-#include "OsmObjectManager.h"
 #include "OsmNodeTagWriter.h"
 #include "OsmWayTagWriter.h"
 #include "OsmRelationTagWriter.h"
@@ -26,6 +25,8 @@
 #include "GeoWriter.h"
 #include "GeoDataTypes.h"
 #include "osm/OsmPlacemarkData.h"
+#include "osm/OsmObjectManager.h"
+
 
 namespace Marble
 {
