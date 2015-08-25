@@ -28,11 +28,7 @@ target_link_libraries (
       ${Qt5Location_LIBRARIES}
       ${Qt5Positioning_LIBRARIES}
       ${Qt5AndroidExtras_LIBRARIES}
-<<<<<<< HEAD
-      ${Qt5Multimedia_LIBRARIES}
-=======
       astro
->>>>>>> master
       ${MARBLEWIDGET}
       marbledeclarative)
 

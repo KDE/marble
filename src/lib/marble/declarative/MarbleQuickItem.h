@@ -52,8 +52,6 @@ namespace Marble
         Q_PROPERTY(bool positionVisible READ positionVisible NOTIFY positionVisibleChanged)
         Q_PROPERTY(MarbleMap* marbleMap READ map NOTIFY marbleMapChanged)
         Q_PROPERTY(Coordinate *  currentPosition READ currentPosition NOTIFY currentPositionChanged)
-        Q_PROPERTY(qreal speed READ speed NOTIFY speedChanged)
-        Q_PROPERTY(qreal angle READ angle NOTIFY angleChanged)
 
     public:
         MarbleQuickItem(QQuickItem *parent = 0);
@@ -76,10 +74,8 @@ namespace Marble
     public slots:
         void goHome();
         void setZoom(int zoom, FlyToMode mode = Instant);
-        Q_INVOKABLE void setZoomToMaximumLevel();
         void centerOn(const GeoDataPlacemark& placemark, bool animated = false);
         void centerOn(const GeoDataLatLonBox& box, bool animated = false);
-        void centerOn(const GeoDataCoordinates& coordinate);
         Q_INVOKABLE void centerOnCurrentPosition();
 
         void zoomIn(FlyToMode mode = Automatic);
@@ -106,7 +102,7 @@ namespace Marble
         void setShowPositionMarker(bool showPositionMarker);
         void setPositionProvider(const QString & positionProvider);
 
-        // QQuickPaintedItem interface
+    // QQuickPaintedItem interface
     public:
         void paint(QPainter *painter);
 
@@ -140,8 +136,6 @@ namespace Marble
         Q_INVOKABLE qreal angleFromPointToCurrentLocation(const QPoint & position) const;
         Coordinate *currentPosition() const;
         Q_INVOKABLE QPointF screenCoordinatesFromCoordinate(Coordinate * coordinate) const;
-        qreal speed() const;
-        qreal angle() const;
 
         MarbleModel* model();
         const MarbleModel* model() const;
@@ -169,10 +163,8 @@ namespace Marble
         void positionAvailableChanged(bool positionAvailable);
         void positionVisibleChanged(bool positionVisible);
         void marbleMapChanged();
-        void visibleLatLonAltBoxChanged();
+        void viewportChanged();
         void currentPositionChanged(Coordinate * currentPosition);
-        void angleChanged();
-        void speedChanged();
 
     protected:
         QObject *getEventFilter() const;

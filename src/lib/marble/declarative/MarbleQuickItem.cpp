@@ -166,7 +166,7 @@ namespace Marble
         connect(this, SIGNAL(widthChanged()), this, SLOT(resizeMap()));
         connect(this, SIGNAL(heightChanged()), this, SLOT(resizeMap()));
         connect(d->map(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updatePositionVisibility()));
-        connect(d->map(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SIGNAL(visibleLatLonAltBoxChanged()));
+        connect(d->map(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SIGNAL(viewportChanged()));
 
         setAcceptedMouseButtons(Qt::AllButtons);
         installEventFilter(&d->m_inputHandler);
@@ -352,16 +352,6 @@ namespace Marble
         return d->map();
     }
 
-    qreal MarbleQuickItem::speed() const
-    {
-        return d->model()->positionTracking()->speed();
-    }
-
-    qreal MarbleQuickItem::angle() const
-    {
-        return d->model()->positionTracking()->direction();
-    }
-
     bool MarbleQuickItem::positionAvailable() const
     {
         return d->model()->positionTracking()->status() == PositionProviderStatusAvailable;
@@ -417,11 +407,6 @@ namespace Marble
         d->setZoom(newZoom, mode);
     }
 
-    void MarbleQuickItem::setZoomToMaximumLevel()
-    {
-        d->setZoom(d->maximumZoom());
-    }
-
     void MarbleQuickItem::centerOn(const GeoDataPlacemark& placemark, bool animated)
     {
         d->centerOn(placemark, animated);
@@ -430,13 +415,6 @@ namespace Marble
     void MarbleQuickItem::centerOn(const GeoDataLatLonBox& box, bool animated)
     {
         d->centerOn(box, animated);
-    }
-
-    void MarbleQuickItem::centerOn(const GeoDataCoordinates &coordinate)
-    {
-        GeoDataLookAt target = d->lookAt();
-        target.setCoordinates(coordinate);
-        d->flyTo(target, Automatic);
     }
 
     void MarbleQuickItem::centerOnCurrentPosition()
@@ -674,8 +652,6 @@ namespace Marble
                 model()->positionTracking()->setPositionProviderPlugin(newPlugin);
                 connect(newPlugin, SIGNAL(statusChanged(PositionProviderStatus)), this, SLOT(positionDataStatusChanged(PositionProviderStatus)));
                 connect(newPlugin, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)), this, SLOT(updateCurrentPosition(GeoDataCoordinates)));
-                connect(newPlugin, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)), this, SIGNAL(speedChanged()));
-                connect(newPlugin, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)), this, SIGNAL(angleChanged()));
                 emit positionProviderChanged(positionProvider);
                 break;
             }

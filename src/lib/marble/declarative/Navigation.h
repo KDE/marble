@@ -17,19 +17,12 @@
 class QAbstractItemModel;
 
 class MarbleWidget;
-
-namespace Marble {
-class MarbleQuickItem;
-class MarbleModel;
-}
-
 class NavigationPrivate;
 
 class Navigation : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged)
-    Q_PROPERTY(Marble::MarbleQuickItem * marbleQuickItem READ marbleQuickItem WRITE setMarbleQuickItem NOTIFY marbleQuickItemChanged)
     Q_PROPERTY(bool guidanceModeEnabled READ guidanceModeEnabled WRITE setGuidanceModeEnabled NOTIFY guidanceModeEnabledChanged)
     Q_PROPERTY(bool muted READ muted WRITE setMuted NOTIFY mutedChanged)
     Q_PROPERTY(bool soundEnabled READ soundEnabled WRITE setSoundEnabled NOTIFY soundEnabledChanged)
@@ -81,13 +74,6 @@ public:
 
     bool deviated() const;
 
-    Marble::MarbleQuickItem * marbleQuickItem() const;
-
-    Q_INVOKABLE QPointF positionOnRoute() const;
-
-public slots:
-    void setMarbleQuickItem(Marble::MarbleQuickItem * marbleQuickItem);
-
 Q_SIGNALS:
     void mapChanged();
 
@@ -112,8 +98,6 @@ Q_SIGNALS:
     void speakerChanged();
 
     void deviationChanged();
-
-    void marbleQuickItemChanged(Marble::MarbleQuickItem * marbleQuickItem);
 
 private Q_SLOTS:
     void update();
