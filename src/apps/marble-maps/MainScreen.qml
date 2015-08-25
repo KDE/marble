@@ -177,7 +177,7 @@ ApplicationWindow {
                 bottom: parent.bottom
                 right: parent.right
                 rightMargin: 0.005 * root.width
-                bottomMargin: 0.005 * root.width
+                bottomMargin: 25
             }
 
             iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
