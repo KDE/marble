@@ -37,19 +37,18 @@
       <attribute name="title">
        <string>Description</string>
       </attribute>
-      <widget class="QCheckBox" name="m_isBalloonVisible">
-       <property name="geometry">
-        <rect>
-         <x>9</x>
-         <y>131</y>
-         <width>151</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Show Balloon Popup</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="Marble::FormattedTextWidget" name="m_formattedTextWidget" native="true"/>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="m_isBalloonVisible">
+         <property name="text">
+          <string>Show Balloon Popup</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="style_color_tab">
       <attribute name="title">
@@ -390,6 +389,12 @@
    <class>Marble::PlacemarkEditHeader</class>
    <extends>QWidget</extends>
    <header>PlacemarkEditHeader.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Marble::FormattedTextWidget</class>
+   <extends>QWidget</extends>
+   <header>FormattedTextWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

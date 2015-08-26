@@ -26,6 +26,11 @@
       <attribute name="title">
        <string>Description</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="Marble::FormattedTextWidget" name="m_formattedTextWidget" native="true"/>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -530,6 +535,12 @@
    <class>Marble::PlacemarkEditHeader</class>
    <extends>QWidget</extends>
    <header>PlacemarkEditHeader.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Marble::FormattedTextWidget</class>
+   <extends>QWidget</extends>
+   <header>FormattedTextWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

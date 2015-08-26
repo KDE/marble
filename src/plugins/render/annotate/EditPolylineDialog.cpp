@@ -48,7 +48,6 @@ public:
     QString m_initialName;
     QString m_initialDescription;
     GeoDataLineStyle m_initialLineStyle;
-    FormattedTextWidget *m_formattedTextWidget;
     GeoDataLineString m_initialLineString;
     OsmPlacemarkData m_initialOsmData;
     bool m_hadInitialOsmData;
@@ -82,12 +81,6 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark,
     d ( new Private( placemark ) )
 {
     d->setupUi( this );
-
-    d->m_formattedTextWidget = new FormattedTextWidget( d->m_descriptionTab );
-
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget( d->m_formattedTextWidget );
-    d->m_descriptionTab->setLayout( layout );
 
     // There's no point showing Relations and Tags tabs if the editor was not
     // loaded from the annotate plugin ( loaded from tourWidget.. )

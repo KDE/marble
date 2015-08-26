@@ -30,7 +30,6 @@ class Q_DECL_HIDDEN EditGroundOverlayDialog::Private : public Ui::UiEditGroundOv
 public:
     GeoDataGroundOverlay *m_overlay;
     TextureLayer         *m_textureLayer;
-    FormattedTextWidget *m_formattedTextWidget;
 
     Private( GeoDataGroundOverlay *overlay, TextureLayer *textureLayer );
     ~Private();
@@ -58,12 +57,6 @@ EditGroundOverlayDialog::EditGroundOverlayDialog( GeoDataGroundOverlay *overlay,
     d( new Private( overlay, textureLayer ) )
 {
     d->setupUi( this );
-
-    d->m_formattedTextWidget = new FormattedTextWidget( d->m_descriptionTab );
-
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget( d->m_formattedTextWidget );
-    d->m_descriptionTab->setLayout( layout );
 
     d->m_header->setName( overlay->name() );
     d->m_header->setIconLink( overlay->absoluteIconFile() );

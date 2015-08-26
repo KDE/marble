@@ -53,8 +53,6 @@ public:
     QColorDialog *m_iconColorDialog;
     QColorDialog *m_labelColorDialog;
 
-    FormattedTextWidget *m_formattedTextWidget;
-
     // Used to restore if the Cancel button is pressed.
     QString m_initialDescription;
     QString m_initialName;
@@ -103,13 +101,6 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark,
     d( new Private( placemark ) )
 {
     d->setupUi( this );
-
-    d->m_formattedTextWidget = new FormattedTextWidget( d->m_descriptionTab );
-
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget( d->m_formattedTextWidget );
-    layout->addWidget( d->m_isBalloonVisible );
-    d->m_descriptionTab->setLayout( layout );
 
     // Store initial style so that it can be restored if the 'Cancel' button is pressed.
     d->m_initialStyle = *placemark->style();
