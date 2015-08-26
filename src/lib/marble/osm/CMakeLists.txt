@@ -20,4 +20,5 @@ set( osm_SRCS
 
 set( osm_UIS
     osm/OsmTagEditorWidget.ui
+    osm/OsmRelationManagerWidget.ui
 )
