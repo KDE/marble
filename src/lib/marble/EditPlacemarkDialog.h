@@ -19,6 +19,7 @@ namespace Marble {
 
 class GeoDataFeature;
 class GeoDataPlacemark;
+class OsmPlacemarkData;
 
 /**
  * @brief The EditPlacemarkDialog class deals with customizing placemarks.
@@ -28,7 +29,9 @@ class MARBLE_EXPORT EditPlacemarkDialog : public QDialog
     Q_OBJECT
 
 public:
-    EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *parent = 0 );
+    EditPlacemarkDialog( GeoDataPlacemark *placemark,
+                         const QHash<qint64,OsmPlacemarkData> *relations = 0,
+                         QWidget *parent = 0 );
     ~EditPlacemarkDialog();
 
     /**
@@ -144,6 +147,13 @@ signals:
      * @param feature The instance's placemark.
      */
     void textAnnotationUpdated( GeoDataFeature *feature );
+
+    /**
+     * @brief relationCreated signals the annotate plugin that a new relation has been
+     * created( or modified ) within the relation editor
+     * @param relation the relation's osmData
+     */
+    void relationCreated( const OsmPlacemarkData &relation );
 
 private:
     class Private;

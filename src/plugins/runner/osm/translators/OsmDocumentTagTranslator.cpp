@@ -54,10 +54,8 @@ bool OsmDocumentTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer 
         }
         GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( feature );
 
-        // If the placemark does not have osmData, it is initialized by the OsmObjectManager
-        if ( !placemark->hasOsmData() ) {
-            OsmObjectManager::initializeOsmData( placemark );
-        }
+        // If the placemark's osmData is not complete, it is initialized by the OsmObjectManager
+        OsmObjectManager::initializeOsmData( placemark );
 
         const OsmPlacemarkData osmData = placemark->osmData();
 

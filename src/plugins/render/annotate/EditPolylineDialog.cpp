@@ -24,6 +24,10 @@
 #include "NodeModel.h"
 #include "FormattedTextWidget.h"
 #include "NodeItemDelegate.h"
+#include "osm/OsmTagEditorWidget.h"
+#include "osm/OsmPresetLibrary.h"
+#include "osm/OsmPlacemarkData.h"
+#include "osm/OsmRelationManagerWidget.h"
 
 
 namespace Marble
@@ -36,6 +40,8 @@ public:
     ~Private();
 
     QColorDialog *m_linesDialog;
+    OsmTagEditorWidget *m_osmTagEditorWidget;
+    OsmRelationManagerWidget *m_osmRelationManagerWidget;
     GeoDataPlacemark *m_placemark;
 
     // Used to restore if the Cancel button is pressed.
@@ -44,6 +50,8 @@ public:
     GeoDataLineStyle m_initialLineStyle;
     FormattedTextWidget *m_formattedTextWidget;
     GeoDataLineString m_initialLineString;
+    OsmPlacemarkData m_initialOsmData;
+    bool m_hadInitialOsmData;
 
     NodeItemDelegate *m_delegate;
     NodeModel *m_nodeModel;
@@ -53,7 +61,9 @@ EditPolylineDialog::Private::Private( GeoDataPlacemark *placemark ) :
     Ui::UiEditPolylineDialog(),
     m_linesDialog( 0 ),
     m_placemark( placemark ),
-    m_nodeModel( new NodeModel )
+    m_nodeModel( new NodeModel ),
+    m_osmTagEditorWidget( 0 ),
+    m_osmRelationManagerWidget( 0 )
 {
     // nothing to do
 }
@@ -65,7 +75,9 @@ EditPolylineDialog::Private::~Private()
     delete m_delegate;
 }
 
-EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
+EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark,
+                                        const QHash<qint64, OsmPlacemarkData> *relations,
+                                        QWidget *parent ) :
     QDialog( parent ) ,
     d ( new Private( placemark ) )
 {
@@ -76,6 +88,29 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *pa
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget( d->m_formattedTextWidget );
     d->m_descriptionTab->setLayout( layout );
+
+    // There's no point showing Relations and Tags tabs if the editor was not
+    // loaded from the annotate plugin ( loaded from tourWidget.. )
+    if ( relations ) {
+        // Adding the osm tag editor widget tab
+        d->m_osmTagEditorWidget = new OsmTagEditorWidget( placemark, this );
+        d->tabWidget->addTab( d->m_osmTagEditorWidget, tr( "Tags" ) );
+        QObject::connect( d->m_osmTagEditorWidget, SIGNAL( placemarkChanged( GeoDataFeature* ) ),
+                          this, SLOT( updatePolyline() ) );
+
+        // Adding the osm relation editor widget tab
+        d->m_osmRelationManagerWidget = new OsmRelationManagerWidget( placemark, relations, this );
+        d->tabWidget->addTab( d->m_osmRelationManagerWidget, tr( "Relations" ) );
+        QObject::connect( d->m_osmRelationManagerWidget, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
+                          this, SIGNAL( relationCreated( const OsmPlacemarkData& ) ) );
+
+        adjustSize();
+    }
+
+    d->m_hadInitialOsmData = placemark->hasOsmData();
+    if ( d->m_hadInitialOsmData ) {
+        d->m_initialOsmData = placemark->osmData();
+    }
 
     // If the polygon has just been drawn, assign it a default name.
     if ( d->m_placemark->name().isNull() ) {
@@ -191,6 +226,15 @@ void EditPolylineDialog::updatePolyline()
     d->m_placemark->setDescription( d->m_formattedTextWidget->text() );
     d->m_placemark->setName( d->m_name->text() );
 
+    // If there is no custom style initialized( default #polyline url is used ) and there is a osmTag-based style
+    // available, set it
+    QString suitableTag = d->m_osmTagEditorWidget->suitableTag();
+    if ( d->m_placemark->styleUrl() == "#polyline" && !suitableTag.isEmpty() ) {
+        GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::OsmVisualCategory( suitableTag );
+        GeoDataStyle *style = GeoDataFeature::presetStyle( category );
+        d->m_placemark->setStyle( style );
+    }
+
     emit polylineUpdated( d->m_placemark );
 }
 
@@ -227,6 +271,10 @@ void EditPolylineDialog::restoreInitial( int result )
         GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
         newStyle->setLineStyle( d->m_initialLineStyle );
         d->m_placemark->setStyle( newStyle );
+    }
+
+    if( d->m_hadInitialOsmData ) {
+        d->m_placemark->setOsmData( d->m_initialOsmData );
     }
 
     emit polylineUpdated( d->m_placemark );

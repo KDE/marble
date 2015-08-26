@@ -28,6 +28,7 @@
 #include "MarbleMath.h"
 #include "MergingPolygonNodesAnimation.h"
 #include "PolylineNode.h"
+#include "osm/OsmPlacemarkData.h"
 
 
 namespace Marble {
@@ -148,6 +149,10 @@ void AreaAnnotation::move( const GeoDataCoordinates &source, const GeoDataCoordi
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     GeoDataLinearRing outerRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> innerRings = polygon->innerBoundaries();
+    OsmPlacemarkData *osmData = 0;
+    if ( placemark()->hasOsmData() ) {
+        osmData = &placemark()->osmData();
+    }
 
     polygon->outerBoundary().clear();
     polygon->innerBoundaries().clear();
@@ -167,6 +172,10 @@ void AreaAnnotation::move( const GeoDataCoordinates &source, const GeoDataCoordi
         qpos.rotateAroundAxis(rotAxis);
         qpos.getSpherical( lonRotated, latRotated );
         GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+        // Keeping the OsmPlacemarkData synchronized with the geometry
+        if ( osmData ) {
+            osmData->memberReference( -1 ).changeNodeReference( outerRing.at( i ), movedPoint );
+        }
         polygon->outerBoundary().append( movedPoint );
     }
 
@@ -177,6 +186,9 @@ void AreaAnnotation::move( const GeoDataCoordinates &source, const GeoDataCoordi
             qpos.rotateAroundAxis(rotAxis);
             qpos.getSpherical( lonRotated, latRotated );
             GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+            if ( osmData ) {
+                osmData->memberReference( i ).changeNodeReference( innerRings.at( i ).at( j ), movedPoint );
+            }
             newRing.append( movedPoint );
         }
         polygon->innerBoundaries().append( newRing );
@@ -257,6 +269,12 @@ void AreaAnnotation::deleteAllSelectedNodes()
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     GeoDataLinearRing &outerRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
+    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData initialOsmData;
+    if ( placemark()->hasOsmData() ) {
+        osmData = &placemark()->osmData();
+        initialOsmData = placemark()->osmData();
+    }
 
     // If it proves inefficient, try something different.
     GeoDataLinearRing initialOuterRing = polygon->outerBoundary();
@@ -270,7 +288,9 @@ void AreaAnnotation::deleteAllSelectedNodes()
                 setRequest( SceneGraphicsItem::RemovePolygonRequest );
                 return;
             }
-
+            if ( osmData ) {
+                osmData->memberReference( -1 ).removeNodeReference( initialOuterRing.at( i ) );
+            }
             m_outerNodesList.removeAt( i );
             outerRing.remove( i );
             --i;
@@ -281,12 +301,19 @@ void AreaAnnotation::deleteAllSelectedNodes()
         for ( int j = 0; j < innerRings.at(i).size(); ++j ) {
             if ( m_innerNodesList.at(i).at(j).isSelected() ) {
                 if ( m_innerNodesList.at(i).size() <= 3 ) {
+
+                    if ( osmData ) {
+                        osmData->removeMemberReference( i );
+                    }
                     innerRings.remove( i );
                     m_innerNodesList.removeAt( i );
                     --i;
                     break;
                 }
 
+                if ( osmData ) {
+                    osmData->memberReference( i ).removeNodeReference( initialInnerRings.at( i ).at( j ) );
+                }
                 innerRings[i].remove( j );
                 m_innerNodesList[i].removeAt( j );
                 --j;
@@ -295,6 +322,9 @@ void AreaAnnotation::deleteAllSelectedNodes()
     }
 
     if ( !isValidPolygon() ) {
+        if ( osmData ) {
+            placemark()->setOsmData( initialOsmData );
+        }
         polygon->outerBoundary() = initialOuterRing;
         polygon->innerBoundaries() = initialInnerRings;
         m_outerNodesList = initialOuterNodes;
@@ -312,6 +342,12 @@ void AreaAnnotation::deleteClickedNode()
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     GeoDataLinearRing &outerRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
+    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData initialOsmData;
+    if ( placemark()->hasOsmData() ) {
+        osmData = &placemark()->osmData();
+        initialOsmData = placemark()->osmData();
+    }
 
     // If it proves inefficient, try something different.
     GeoDataLinearRing initialOuterRing = polygon->outerBoundary();
@@ -330,20 +366,32 @@ void AreaAnnotation::deleteClickedNode()
             return;
         }
 
+        // Keep the OsmPlacemarkData synchronized with the geometrys
+        if ( osmData ) {
+            osmData->removeNodeReference( outerRing.at( i ) );
+        }
         outerRing.remove( i );
         m_outerNodesList.removeAt( i );
     } else if ( i != -1 && j != -1 ) {
         if ( m_innerNodesList.at(i).size() <= 3 ) {
+            if ( osmData ) {
+                osmData->removeMemberReference( i );
+            }
             innerRings.remove( i );
             m_innerNodesList.removeAt( i );
             return;
         }
-
+        if ( osmData ) {
+            osmData->memberReference( i ).removeNodeReference( innerRings.at( i ).at( j ) );
+        }
         innerRings[i].remove( j );
         m_innerNodesList[i].removeAt( j );
     }
 
     if ( !isValidPolygon() ) {
+        if ( osmData ) {
+            placemark()->setOsmData( initialOsmData );
+        }
         polygon->outerBoundary() = initialOuterRing;
         polygon->innerBoundaries() = initialInnerRings;
         m_outerNodesList = initialOuterNodes;
@@ -948,14 +996,25 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing &outerRing = polygon->outerBoundary();
         QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
+        OsmPlacemarkData *osmData = 0;
+        if ( placemark()->hasOsmData() ) {
+            osmData = &placemark()->osmData();
+        }
 
         const int i = m_clickedNodeIndexes.first;
         const int j = m_clickedNodeIndexes.second;
 
         if ( j == -1 ) {
+            // Keeping the osmPlacemarkData synchronized with the geometry
+            if ( osmData ) {
+                 osmData->memberReference( -1 ).changeNodeReference( outerRing.at( i ), newCoords );
+            }
             outerRing[i] = newCoords;
         } else {
             Q_ASSERT( i != -1 && j != -1 );
+            if ( osmData ) {
+                 osmData->memberReference( i ).changeNodeReference( innerRings.at( i ).at( j ), newCoords );
+            }
             innerRings[i].at(j) = newCoords;
         }
 
@@ -964,6 +1023,10 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing outerRing = polygon->outerBoundary();
         QVector<GeoDataLinearRing> innerRings = polygon->innerBoundaries();
+        OsmPlacemarkData *osmData = 0;
+        if ( placemark()->hasOsmData() ) {
+            osmData = &placemark()->osmData();
+        }
 
         Quaternion latRectAxis = Quaternion::fromEuler( 0, lon, 0);
         Quaternion latAxis = Quaternion::fromEuler( -deltaLat, 0, 0);
@@ -981,6 +1044,9 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
             qpos.rotateAroundAxis(rotAxis);
             qpos.getSpherical( lonRotated, latRotated );
             GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+            if ( osmData ) {
+                osmData->memberReference( -1 ).changeNodeReference( outerRing.at( i ), movedPoint );
+            }
             polygon->outerBoundary().append( movedPoint );
         }
 
@@ -991,6 +1057,9 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
                 qpos.rotateAroundAxis(rotAxis);
                 qpos.getSpherical( lonRotated, latRotated );
                 GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+                if ( osmData ) {
+                    osmData->memberReference( i ).changeNodeReference( innerRings.at( i ).at( j ) , movedPoint );
+                }
                 newRing.append( movedPoint );
             }
             polygon->innerBoundaries().append( newRing );
@@ -1089,6 +1158,11 @@ bool AreaAnnotation::processMergingOnPress( QMouseEvent *mouseEvent )
 
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     GeoDataLinearRing initialOuterRing = polygon->outerBoundary();
+    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData initialOsmData;
+    if ( placemark()->hasOsmData() ) {
+        osmData = &placemark()->osmData();
+    }
 
     GeoDataLinearRing &outerRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
@@ -1130,11 +1204,20 @@ bool AreaAnnotation::processMergingOnPress( QMouseEvent *mouseEvent )
                 setRequest( SceneGraphicsItem::RemovePolygonRequest );
                 return true;
             }
+            GeoDataCoordinates mergedNode = outerRing.at(m_firstMergedNode.first).interpolate( outerRing.at(outerIndex),
+                                                                                                                 0.5 );
+            // Keeping the osm data synchronized with the geometry
+            if ( osmData ) {
+                osmData->memberReference( -1 ).changeNodeReference( outerRing.at( outerIndex ), mergedNode );
+                osmData->memberReference( -1 ).removeNodeReference( outerRing.at( m_firstMergedNode.first ) );
+            }
 
-            outerRing[outerIndex] = outerRing.at(m_firstMergedNode.first).interpolate( outerRing.at(outerIndex),
-                                                                                       0.5 );
+            outerRing[outerIndex] = mergedNode;
             outerRing.remove( m_firstMergedNode.first );
             if ( !isValidPolygon() ) {
+                if ( osmData ) {
+                    placemark()->setOsmData( initialOsmData );
+                }
                 polygon->outerBoundary() = initialOuterRing;
                 m_outerNodesList[m_firstMergedNode.first].setFlag( PolylineNode::NodeIsMerged,  false );
 

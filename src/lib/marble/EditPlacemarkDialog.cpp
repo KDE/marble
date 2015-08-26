@@ -34,6 +34,10 @@
 #include "MarbleLocale.h"
 #include "AddLinkDialog.h"
 #include "FormattedTextWidget.h"
+#include "osm/OsmTagEditorWidget.h"
+#include "osm/OsmPlacemarkData.h"
+#include "osm/OsmPresetLibrary.h"
+#include "osm/OsmRelationManagerWidget.h"
 
 namespace Marble {
 
@@ -56,12 +60,17 @@ public:
     QString m_initialName;
     GeoDataCoordinates m_initialCoords;
     GeoDataStyle m_initialStyle;
+    GeoDataFeature::GeoDataVisualCategory m_initialVisualCategory;
+    OsmPlacemarkData m_initialOsmData;
     QString m_styleColorTabName;
     bool m_initialIsPlacemarkVisible;
     bool m_initialIsBaloonVisible;
     bool m_initialDescriptionIsCDATA;
+    bool m_hadInitialOsmData;
     QString m_initialId;
     Ui::ElevationWidget *m_elevationWidget;
+    OsmTagEditorWidget *m_osmTagEditorWidget;
+    OsmRelationManagerWidget *m_osmRelationManagerWidget;
     MarbleLocale::MeasureUnit m_elevationUnit;
     QString m_initialTargetId;
 
@@ -71,7 +80,9 @@ EditPlacemarkDialog::Private::Private( GeoDataPlacemark *placemark ) :
     Ui::UiEditPlacemarkDialog(),
     m_placemark( placemark ),
     m_iconColorDialog( 0 ),
-    m_labelColorDialog( 0 )
+    m_labelColorDialog( 0 ),
+    m_osmTagEditorWidget( 0 ),
+    m_osmRelationManagerWidget( 0 )
 {
     // nothing to do
 }
@@ -79,11 +90,15 @@ EditPlacemarkDialog::Private::Private( GeoDataPlacemark *placemark ) :
 EditPlacemarkDialog::Private::~Private()
 {
     delete m_elevationWidget;
+    delete m_osmTagEditorWidget;
+    delete m_osmRelationManagerWidget;
     delete m_iconColorDialog;
     delete m_labelColorDialog;
 }
 
-EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
+EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark,
+                                          const QHash<qint64, OsmPlacemarkData> *relations,
+                                          QWidget *parent ) :
     QDialog( parent ),
     d( new Private( placemark ) )
 {
@@ -99,8 +114,16 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *
     // Store initial style so that it can be restored if the 'Cancel' button is pressed.
     d->m_initialStyle = *placemark->style();
 
+    d->m_initialVisualCategory = placemark->visualCategory();
 
-    // If the placemark has just been created, assign it a default name.
+
+    d->m_hadInitialOsmData = placemark->hasOsmData();
+    if ( d->m_hadInitialOsmData ) {
+        d->m_initialOsmData = placemark->osmData();
+    }
+
+
+    // If the placemark has just been created, assign    it a default name.
     if ( placemark->name().isNull() ) {
         placemark->setName( tr("Untitled Placemark") );
     }
@@ -139,6 +162,23 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark, QWidget *
                                              0,
                                              GeoDataCoordinates::Degree );
 
+    // There's no point showing Relations and Tags tabs if the editor was not
+    // loaded from the annotate plugin ( loaded from tourWidget.. )
+    if ( relations ) {
+        // Adding the osm tag editor widget tab
+        d->m_osmTagEditorWidget = new OsmTagEditorWidget( placemark, this );
+        d->tabWidget->addTab( d->m_osmTagEditorWidget, tr( "Tags" ) );
+        QObject::connect( d->m_osmTagEditorWidget, SIGNAL( placemarkChanged( GeoDataFeature* ) ),
+                          this, SLOT( updateTextAnnotation() ) );
+
+        // Adding the osm relation editor widget tab
+        d->m_osmRelationManagerWidget = new OsmRelationManagerWidget( placemark, relations, this );
+        d->tabWidget->addTab( d->m_osmRelationManagerWidget, tr( "Relations" ) );
+        QObject::connect( d->m_osmRelationManagerWidget, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
+                          this, SIGNAL( relationCreated( const OsmPlacemarkData& ) ) );
+    }
+
+    // Adding the elevation widget tab
     d->m_elevationWidget = new Ui::ElevationWidget;
     QWidget *elevationTab = new QWidget;
     d->m_elevationWidget->setupUi( elevationTab );
@@ -301,20 +341,29 @@ void EditPlacemarkDialog::updateTextAnnotation()
     d->m_placemark->setId( d->m_header->id() );
     d->m_placemark->setTargetId( d->m_header->targetId() );
 
-    GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
 
-    QFileInfo fileInfo( d->m_header->iconLink() );
-    if ( fileInfo.exists() ) {
-        newStyle->iconStyle().setIconPath( d->m_header->iconLink() );
+    if ( !d->m_header->iconLink().isEmpty() ) {
+        QFileInfo fileInfo( d->m_header->iconLink() );
+
+        GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
+        if ( fileInfo.exists() ) {
+            newStyle->iconStyle().setIconPath( d->m_header->iconLink() );
+        }
+
+        newStyle->iconStyle().setScale( d->m_iconScale->value() );
+        newStyle->labelStyle().setScale( d->m_labelScale->value() );
+        newStyle->iconStyle().setColor( d->m_iconColorDialog->currentColor() );
+        newStyle->labelStyle().setColor( d->m_labelColorDialog->currentColor() );
+        d->m_placemark->setStyle( newStyle );
     }
-
-    newStyle->iconStyle().setScale( d->m_iconScale->value() );
-    newStyle->labelStyle().setScale( d->m_labelScale->value() );
-
-    newStyle->iconStyle().setColor( d->m_iconColorDialog->currentColor() );
-    newStyle->labelStyle().setColor( d->m_labelColorDialog->currentColor() );
-
-    d->m_placemark->setStyle( newStyle );
+    else {
+        QString suitableTag = d->m_osmTagEditorWidget->suitableTag();
+        if ( !suitableTag.isEmpty() ) {
+            GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::OsmVisualCategory( suitableTag );
+            d->m_placemark->setVisualCategory( category );
+            d->m_placemark->setStyle( 0 );
+        }
+    }
 
     emit textAnnotationUpdated( d->m_placemark );
 }
@@ -333,11 +382,11 @@ void EditPlacemarkDialog::checkFields()
         QMessageBox::warning( this,
                               tr( "ID is invalid" ),
                               tr( "Please specify a valid ID for this placemark." ) );
-    } else if ( d->m_header->iconLink().isEmpty() ) {
+    } else if ( d->m_header->iconLink().isEmpty() && d->m_placemark->visualCategory() == GeoDataFeature::None ) {
         QMessageBox::warning( this,
                               tr( "No image specified" ),
-                              tr( "Please specify an icon for this placemark." ) );
-    } else if( !QFileInfo( d->m_header->iconLink() ).exists() ) {
+                              tr( "Please specify an icon for this placemark or add a valid tag." ) );
+    } else if( !d->m_header->iconLink().isEmpty() && !QFileInfo( d->m_header->iconLink() ).exists() ) {
         QMessageBox::warning( this,
                               tr( "Invalid icon path" ),
                               tr( "Please specify a valid path for the icon file." ) );
@@ -435,12 +484,20 @@ void EditPlacemarkDialog::restoreInitial( int result )
         d->m_placemark->setCoordinate( d->m_initialCoords );
     }
 
+    if ( d->m_placemark->visualCategory() != d->m_initialVisualCategory ) {
+        d->m_placemark->setVisualCategory( d->m_initialVisualCategory );
+    }
+
     if ( *d->m_placemark->style() != d->m_initialStyle ) {
         d->m_placemark->setStyle( new GeoDataStyle( d->m_initialStyle ) );
     }
 
     if( d->m_placemark->isVisible() != d->m_initialIsPlacemarkVisible ) {
         d->m_placemark->setVisible( d->m_initialIsPlacemarkVisible );
+    }
+
+    if( d->m_hadInitialOsmData ) {
+        d->m_placemark->setOsmData( d->m_initialOsmData );
     }
 
     if( d->m_placemark->isBalloonVisible() != d->m_initialIsBaloonVisible ) {

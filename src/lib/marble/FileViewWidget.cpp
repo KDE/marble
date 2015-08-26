@@ -196,7 +196,7 @@ void FileViewWidgetPrivate::showPlacemarkDialog()
     GeoDataObject *obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject*>();
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(obj);
     if (placemark) {
-        QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog(placemark, q);
+        QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog(placemark, nullptr, q);
         dialog->setReadOnly(true);
         dialog->exec();
         delete dialog;

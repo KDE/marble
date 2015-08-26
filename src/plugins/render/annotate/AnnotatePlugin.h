@@ -38,6 +38,7 @@ class GeoDataLineString;
 class AreaAnnotation;
 class PolylineAnnotation;
 class PlacemarkTextAnnotation;
+class OsmPlacemarkData;
 
 
 /**
@@ -130,6 +131,8 @@ private slots:
     void stopEditingPolyline( int result );
     void setPolylineAvailable();
 
+    void addRelation( const OsmPlacemarkData &relationOsmData );
+
 protected:
     bool eventFilter( QObject *watched, QEvent *event );
 
@@ -187,6 +190,10 @@ private:
     QList<QActionGroup*> m_actions;
     QSortFilterProxyModel m_groundOverlayModel;
     QMap<GeoDataGroundOverlay*, SceneGraphicsItem*> m_groundOverlayFrames;
+
+    // A list of all osm relations
+    QHash<qint64, OsmPlacemarkData> m_osmRelations;
+
 
     GeoDataDocument* m_annotationDocument;
     QList<SceneGraphicsItem*> m_graphicsItems;

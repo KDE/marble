@@ -307,6 +307,7 @@ if (NOT QT_NO_DBUS)
 endif()
 
 set (marblewidget_UI
+    ${osm_UIS}
     LatLonBoxWidget.ui
     NavigationWidget.ui
     MapViewWidget.ui

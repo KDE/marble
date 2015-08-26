@@ -1062,6 +1062,7 @@ void AnnotatePlugin::showTextAnnotationRmbMenu( qreal x, qreal y )
 void AnnotatePlugin::editTextAnnotation()
 {
     QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog( m_focusItem->placemark(),
+                                                                    &m_osmRelations,
                                                                     m_marbleWidget );
     connect( dialog, SIGNAL(textAnnotationUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
@@ -1069,6 +1070,8 @@ void AnnotatePlugin::editTextAnnotation()
              dialog, SLOT(updateDialogFields()) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingTextAnnotation(int)) );
+    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
+             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
 
     dialog->setLabelColor(dynamic_cast<PlacemarkTextAnnotation*>(m_focusItem)->labelColor());
 
@@ -1098,7 +1101,7 @@ void AnnotatePlugin::addTextAnnotation()
     textAnnotation->setFocus( true );
     m_graphicsItems.append( textAnnotation );
 
-    QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog( placemark, m_marbleWidget );
+    QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog( placemark, &m_osmRelations, m_marbleWidget );
 
     connect( dialog, SIGNAL(textAnnotationUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
@@ -1106,6 +1109,8 @@ void AnnotatePlugin::addTextAnnotation()
              dialog, SLOT(updateDialogFields()) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingTextAnnotation(int)) );
+    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
+             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
 
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
@@ -1341,13 +1346,15 @@ void AnnotatePlugin::addPolygon()
     m_graphicsItems.append( polygon );
     m_marbleWidget->update();
 
-    QPointer<EditPolygonDialog> dialog = new EditPolygonDialog( m_polygonPlacemark, m_marbleWidget );
+    QPointer<EditPolygonDialog> dialog = new EditPolygonDialog( m_polygonPlacemark, &m_osmRelations, m_marbleWidget );
 
     connect( dialog, SIGNAL(polygonUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolygon(int)) );
     connect( this, SIGNAL(nodeAdded(GeoDataCoordinates)), dialog, SLOT(handleAddingNode(GeoDataCoordinates)) );
+    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
+             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
 
     // If there is another graphic item marked as 'selected' when pressing 'Add Polygon', change the focus of
     // that item.
@@ -1430,13 +1437,15 @@ void AnnotatePlugin::deleteSelectedNodes()
 
 void AnnotatePlugin::editPolygon()
 {
-    EditPolygonDialog *dialog = new EditPolygonDialog( m_focusItem->placemark(), m_marbleWidget );
+    EditPolygonDialog *dialog = new EditPolygonDialog( m_focusItem->placemark(), &m_osmRelations, m_marbleWidget );
 
     connect( dialog, SIGNAL(polygonUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolygon(int)) );
     connect( this, SIGNAL(itemMoved(GeoDataPlacemark*)), dialog, SLOT(handleItemMoving(GeoDataPlacemark*)) );
+    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
+             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
 
     disableActions( m_actions.first() );
 
@@ -1563,12 +1572,15 @@ void AnnotatePlugin::showPolylineRmbMenu( qreal x, qreal y )
 void AnnotatePlugin::editPolyline()
 {
     QPointer<EditPolylineDialog> dialog = new EditPolylineDialog( m_focusItem->placemark(),
+                                                                  &m_osmRelations,
                                                                   m_marbleWidget );
     connect( dialog, SIGNAL(polylineUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolyline(int)) );
     connect( this, SIGNAL(itemMoved(GeoDataPlacemark*)), dialog, SLOT(handleItemMoving(GeoDataPlacemark*)) );
+    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
+             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
 
     disableActions( m_actions.first() );
     dialog->show();
@@ -1593,13 +1605,15 @@ void AnnotatePlugin::addPolyline()
     m_graphicsItems.append( polyline );
     m_marbleWidget->update();
 
-    QPointer<EditPolylineDialog> dialog = new EditPolylineDialog( m_polylinePlacemark, m_marbleWidget );
+    QPointer<EditPolylineDialog> dialog = new EditPolylineDialog( m_polylinePlacemark, &m_osmRelations, m_marbleWidget );
 
     connect( dialog, SIGNAL(polylineUpdated(GeoDataFeature*)),
              m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolyline(int)) );
     connect( this, SIGNAL(nodeAdded(GeoDataCoordinates)), dialog, SLOT(handleAddingNode(GeoDataCoordinates)) );
+    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
+             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
 
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
@@ -1633,6 +1647,11 @@ void AnnotatePlugin::stopEditingPolyline( int result )
     m_editingDialogIsShown = false;
     m_drawingPolyline = false;
     m_polylinePlacemark = 0;
+}
+
+void AnnotatePlugin::addRelation( const OsmPlacemarkData &relationData )
+{
+    m_osmRelations.insert( relationData.id(), relationData );
 }
 
 void AnnotatePlugin::announceStateChanged( SceneGraphicsItem::ActionState newState )

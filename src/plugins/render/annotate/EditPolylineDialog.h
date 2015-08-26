@@ -19,13 +19,15 @@ namespace Marble {
 class GeoDataPlacemark;
 class GeoDataFeature;
 class GeoDataCoordinates;
+class OsmPlacemarkData;
 
 class EditPolylineDialog : public QDialog
 {
     Q_OBJECT
-
 public:
-    EditPolylineDialog( GeoDataPlacemark *placemark, QWidget *parent = 0 );
+    EditPolylineDialog( GeoDataPlacemark *placemark,
+                        const QHash<qint64, OsmPlacemarkData> *relations = 0,
+                        QWidget *parent = 0 );
     ~EditPolylineDialog();
 
 public slots:
@@ -35,6 +37,13 @@ public slots:
 
 signals:
     void polylineUpdated( GeoDataFeature *feature );
+
+    /**
+     * @brief relationCreated signals the annotate plugin that a new relation has been
+     * created( or modified ) within the relation editor
+     * @param relation the relation's osmData
+     */
+    void relationCreated( OsmPlacemarkData relation );
 
 private slots:
     void updatePolyline();
