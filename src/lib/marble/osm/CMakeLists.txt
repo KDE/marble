@@ -3,6 +3,8 @@ set( osm_HDRS
     OsmPresetLibrary.h
     OsmObjectManager.h
     OsmTagEditorWidget.h
+    OsmRelationEditorDialog.h
+    OsmRelationManagerWidget.h
 )
 
 set( osm_SRCS
@@ -11,6 +13,9 @@ set( osm_SRCS
     osm/OsmObjectManager.cpp
     osm/OsmTagEditorWidget.cpp
     osm/OsmTagEditorWidget_p.cpp
+    osm/OsmRelationEditorDialog.cpp
+    osm/OsmRelationManagerWidget.cpp
+    osm/OsmRelationManagerWidget_p.cpp
 )
 
 set( osm_UIS
