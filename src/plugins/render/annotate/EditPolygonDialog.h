@@ -30,7 +30,9 @@ class EditPolygonDialog : public QDialog
     Q_OBJECT
 
 public:
-    EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *parent = 0 );
+    EditPolygonDialog( GeoDataPlacemark *placemark,
+                       const QHash<qint64, OsmPlacemarkData> *relations = 0,
+                       QWidget *parent = 0 );
     ~EditPolygonDialog();
 
 public slots:
@@ -41,6 +43,13 @@ public slots:
 
 signals:
     void polygonUpdated( GeoDataFeature *feature );
+
+    /**
+     * @brief relationCreated signals the annotate plugin that a new relation has been
+     * created( or modified ) within the relation editor
+     * @param relation the relation's osmData
+     */
+    void relationCreated( const OsmPlacemarkData &relation );
 
 private slots:
     void updateLinesDialog( const QColor &color );

@@ -61,7 +61,7 @@ public Q_SLOTS:
     void update();
 
 Q_SIGNALS:
-    void relationCreated( OsmPlacemarkData relationData );
+    void relationCreated( const OsmPlacemarkData &relationData );
 
 private:
     friend class OsmRelationManagerWidgetPrivate;

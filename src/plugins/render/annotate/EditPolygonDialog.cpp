@@ -23,6 +23,10 @@
 #include "NodeModel.h"
 #include "NodeItemDelegate.h"
 #include "FormattedTextWidget.h"
+#include "osm/OsmTagEditorWidget.h"
+#include "osm/OsmPresetLibrary.h"
+#include "osm/OsmPlacemarkData.h"
+#include "osm/OsmRelationManagerWidget.h"
 
 namespace Marble {
 
@@ -41,10 +45,15 @@ public:
     QString m_initialName;
     GeoDataStyle m_initialStyle;
     GeoDataLinearRing m_initialOuterBoundary;
+    OsmPlacemarkData m_initialOsmData;
+    bool m_hadInitialOsmData;
 
     NodeModel *m_nodeModel;
     NodeItemDelegate *m_delegate;
     FormattedTextWidget *m_formattedTextWidget;
+    OsmTagEditorWidget *m_osmTagEditorWidget;
+    OsmRelationManagerWidget *m_osmRelationManagerWidget;
+
 };
 
 EditPolygonDialog::Private::Private( GeoDataPlacemark *placemark ) :
@@ -52,7 +61,9 @@ EditPolygonDialog::Private::Private( GeoDataPlacemark *placemark ) :
     m_placemark( placemark ),
     m_linesDialog( 0 ),
     m_polyDialog( 0 ),
-    m_nodeModel( new NodeModel )
+    m_nodeModel( new NodeModel ),
+    m_osmTagEditorWidget( 0 ),
+    m_osmRelationManagerWidget( 0 )
 {
     // nothing to do
 }
@@ -65,7 +76,9 @@ EditPolygonDialog::Private::~Private()
     delete m_delegate;
 }
 
-EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *parent ) :
+EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark,
+                                      const QHash<qint64, OsmPlacemarkData> *relations,
+                                      QWidget *parent ) :
     QDialog( parent ),
     d( new Private( placemark ) )
 {
@@ -76,6 +89,31 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark, QWidget *pare
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(d->m_formattedTextWidget);
     d->m_descriptionTab->setLayout(layout);
+
+    // There's no point showing Relations and Tags tabs if the editor was not
+    // loaded from the annotate plugin ( loaded from tourWidget.. )
+    if ( relations ) {
+        // Adding the osm tag editor widget tab
+        d->m_osmTagEditorWidget = new OsmTagEditorWidget( placemark, this );
+        d->tabWidget->addTab( d->m_osmTagEditorWidget, tr( "Tags" ) );
+        QObject::connect( d->m_osmTagEditorWidget, SIGNAL( placemarkChanged( GeoDataFeature* ) ),
+                          this, SLOT( updatePolygon() ) );
+
+        // Adding the osm relation editor widget tab
+        d->m_osmRelationManagerWidget = new OsmRelationManagerWidget( placemark, relations, this );
+        d->tabWidget->addTab( d->m_osmRelationManagerWidget, tr( "Relations" ) );
+        QObject::connect( d->m_osmRelationManagerWidget, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
+                          this, SIGNAL( relationCreated( const OsmPlacemarkData& ) ) );
+
+        adjustSize();
+    }
+
+
+
+    d->m_hadInitialOsmData = placemark->hasOsmData();
+    if ( d->m_hadInitialOsmData ) {
+        d->m_initialOsmData = placemark->osmData();
+    }
 
     d->m_initialStyle = *placemark->style();
 
@@ -223,6 +261,15 @@ void EditPolygonDialog::updatePolygon()
     d->m_placemark->setName( d->m_name->text() );
     d->m_placemark->setDescription( d->m_formattedTextWidget->text() );
 
+    // If there is not custom style initialized( default #polyline url is used ) and there is a osmTag-based style
+    // available, set it
+    QString suitableTag = d->m_osmTagEditorWidget->suitableTag();
+    if ( d->m_placemark->styleUrl() == "#polygon" && !suitableTag.isEmpty() ) {
+        GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::OsmVisualCategory( suitableTag );
+        GeoDataStyle *style = GeoDataFeature::presetStyle( category );
+        d->m_placemark->setStyle( style );
+    }
+
     emit polygonUpdated( d->m_placemark );
 }
 
@@ -290,6 +337,11 @@ void EditPolygonDialog::restoreInitial( int result )
     if ( *d->m_placemark->style() != d->m_initialStyle ) {
         d->m_placemark->setStyle( new GeoDataStyle( d->m_initialStyle ) );
     }
+
+    if( d->m_hadInitialOsmData ) {
+        d->m_placemark->setOsmData( d->m_initialOsmData );
+    }
+
     emit polygonUpdated( d->m_placemark );
 }
 

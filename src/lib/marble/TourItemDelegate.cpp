@@ -407,7 +407,7 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate,
         }
     }
 
-    QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog( placemark, m_widget );
+    QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog( placemark, nullptr, m_widget );
     if( create ) {
         dialog->setWindowTitle( QObject::tr( "Add Placemark to Tour" ) );
     } else {
