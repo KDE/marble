@@ -19,10 +19,26 @@
 namespace Marble
 {
 
-GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( const GeoDataFeature *feature, const GeoDataLineString* lineString )
+GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( const GeoDataFeature *feature,
+                                                      const GeoDataLineString* lineString )
         : GeoGraphicsItem( feature ),
           m_lineString( lineString )
 {
+}
+
+
+const float GeoLineStringGraphicsItem::s_outlineZValue = -0.001;
+
+void GeoLineStringGraphicsItem::createDecorations()
+{
+    if ( style() != nullptr ) {
+        if ( style()->polyStyle().outline() ) {
+            GeoLineStringGraphicsItem* outline = new GeoLineStringGraphicsItem(this->feature(), this->m_lineString);
+            outline->setZValue(this->zValue() + s_outlineZValue);
+
+            this->addDecoration(outline);
+        }
+    }
 }
 
 void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString* lineString )
@@ -41,11 +57,11 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
 
     painter->save();
 
+    QPen currentPen = painter->pen();
     if ( !style() ) {
         painter->setPen( QPen() );
     }
     else {
-        QPen currentPen = painter->pen();
 
         if ( currentPen.color() != style()->lineStyle().paintedColor() )
             currentPen.setColor( style()->lineStyle().paintedColor() );
@@ -101,7 +117,26 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
         }
     }
 
-    painter->drawPolyline( *m_lineString, feature()->name(), labelPositionFlags );
+    if ( ! ( isDecoration() && currentPen.widthF() < 2.5f ) )
+    {
+        if( style()->polyStyle().outline() &&
+            style()->lineStyle().penStyle() == Qt::SolidLine ) {
+            if ( isDecoration() ) {
+                painter->drawPolyline( *m_lineString, "", NoLabel );
+            } else {
+                if ( currentPen.widthF() > 2.5f ) {
+                    currentPen.setWidthF( currentPen.widthF() - 2.0f );
+                }
+                currentPen.setColor( style()->polyStyle().paintedColor() );
+                painter->setPen( currentPen );
+                painter->drawPolyline( *m_lineString, feature()->name(), FollowLine,
+                                        style()->labelStyle().paintedColor(),
+                                        style()->labelStyle().font());
+            }
+        } else {
+            painter->drawPolyline( *m_lineString, feature()->name(), labelPositionFlags );
+        }
+    }
 
     painter->restore();
 }

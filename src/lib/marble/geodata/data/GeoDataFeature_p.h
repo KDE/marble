@@ -137,11 +137,16 @@ class GeoDataFeaturePrivate
         return style;
     }
     
-    static GeoDataStyle* createHighwayStyle( const QString &bitmap, const QColor& color, qreal width = 1, qreal realWidth = 0.0,
-                                             Qt::PenStyle penStyle = Qt::SolidLine, 
-                                             Qt::PenCapStyle capStyle = Qt::RoundCap )
+    static GeoDataStyle* createHighwayStyle( const QString &bitmap, const QColor& color, const QColor& outlineColor,
+                                             const QFont& font = QFont("Arial"), const QColor& fontColor = Qt::black,
+                                             qreal width = 1, qreal realWidth = 0.0,
+                                             Qt::PenStyle penStyle = Qt::SolidLine,
+                                             Qt::PenCapStyle capStyle = Qt::RoundCap,
+                                             bool lineBackground = false)
     {
-        GeoDataStyle *style = createStyle( width, realWidth, color, color, true, true, Qt::SolidPattern, penStyle, capStyle, false );
+        GeoDataStyle *style = createStyle( width, realWidth, color, outlineColor, true, true,
+                                           Qt::SolidPattern, penStyle, capStyle, lineBackground, QVector< qreal >(),
+                                           font, fontColor );
         if( !bitmap.isEmpty() ) {
             style->setIconStyle( GeoDataIconStyle( MarbleDirs::path( "bitmaps/" + bitmap + ".png" ) ) );
         }
@@ -155,12 +160,12 @@ class GeoDataFeaturePrivate
         return createStyle( 1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false );
     }
     
-    static GeoDataStyle* createStyle( qreal width, qreal realWidth, const QColor& color, 
+    static GeoDataStyle* createStyle( qreal width, qreal realWidth, const QColor& color,
                                       const QColor& outlineColor, bool fill, bool outline,
-                                      Qt::BrushStyle brushStyle, Qt::PenStyle penStyle, 
+                                      Qt::BrushStyle brushStyle, Qt::PenStyle penStyle,
                                       Qt::PenCapStyle capStyle, bool lineBackground,
-                                      const QVector< qreal >& dashPattern = QVector< qreal >()
-                                    )
+                                      const QVector< qreal >& dashPattern = QVector< qreal >(),
+                                      const QFont& font = QFont("Arial"), const QColor& fontColor = Qt::black)
     {
         GeoDataStyle *style = new GeoDataStyle;
         GeoDataLineStyle lineStyle( outlineColor );
@@ -174,8 +179,10 @@ class GeoDataFeaturePrivate
         polyStyle.setOutline( outline );
         polyStyle.setFill( fill );
         polyStyle.setBrushStyle( brushStyle );
+        GeoDataLabelStyle labelStyle(font, fontColor);
         style->setLineStyle( lineStyle );
         style->setPolyStyle( polyStyle );
+        style->setLabelStyle( labelStyle );
         return style;
     }
 

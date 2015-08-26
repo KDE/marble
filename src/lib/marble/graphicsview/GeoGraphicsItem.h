@@ -130,8 +130,25 @@ class MARBLE_EXPORT GeoGraphicsItem
 
     bool isHighlighted() const;
 
+    const QList<GeoGraphicsItem*>& decorations();
+
+    bool isDecoration() const;
+
  protected:
     GeoGraphicsItemPrivate *const d;
+
+    /**
+     * Creates a new decoration for this item.
+     *
+     * Override this function to create a new type of decoration,
+     * e.g. outlines for lines or "fake 3D effect" for polygons.
+     * After a decoration was created add it to the item with
+     * addDecoration(). You can create multiple decoration for a
+     * single GeoGraphicsItem.
+     */
+    virtual void createDecorations();
+
+    void addDecoration(GeoGraphicsItem* decoration);
 
  private:
     GeoGraphicsItemPrivate *p();

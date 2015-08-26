@@ -14,6 +14,8 @@
 #include "GeoGraphicsItem.h"
 #include "marble_export.h"
 
+class QPointF;
+
 namespace Marble
 {
 
@@ -31,8 +33,12 @@ public:
     virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
 
 protected:
+    virtual void createDecorations();
+    QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport) const;
+
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
+    static const float s_decorationZValue;
 };
 
 }

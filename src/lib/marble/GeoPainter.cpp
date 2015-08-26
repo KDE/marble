@@ -14,6 +14,7 @@
 #include <QList>
 #include <QPainterPath>
 #include <QRegion>
+#include <qmath.h>
 
 #include "MarbleDebug.h"
 
@@ -31,10 +32,11 @@
 
 using namespace Marble;
 
-GeoPainterPrivate::GeoPainterPrivate( const ViewportParams *viewport, MapQuality mapQuality )
+GeoPainterPrivate::GeoPainterPrivate( GeoPainter* q, const ViewportParams *viewport, MapQuality mapQuality )
         : m_viewport( viewport ),
         m_mapQuality( mapQuality ),
-        m_x( new qreal[100] )
+        m_x( new qreal[100] ),
+        m_parent(q)
 {
 }
 
@@ -174,11 +176,36 @@ bool GeoPainterPrivate::doClip( const ViewportParams *viewport )
     return ( radius > viewport->width() / 2 || radius > viewport->height() / 2 );
 }
 
+qreal GeoPainterPrivate::normalizeAngle(qreal angle)
+{
+//     if (angle < 0.0) {
+//         angle += 360.0*(static_cast<int>(-angle/360.0) + 1);
+//     }
+//     angle /= 360.0;
+//     angle = (angle - qFloor(angle)) * 360.0;
+// 
+//     return angle;
+    angle = fmodf(angle, 360);
+    return angle < 0 ? angle + 360 : angle;
+}
+
+void GeoPainterPrivate::drawTextRotated( const QPointF &startPoint, qreal angle, const QString &text )
+{
+    QRectF textRect(startPoint, m_parent->fontMetrics().size( 0, text));
+    m_parent->save();
+        m_parent->translate(startPoint);
+        m_parent->rotate(angle);
+        m_parent->translate( -startPoint - QPointF(0.0, m_parent->fontMetrics().height()/2.0)  );
+
+        m_parent->drawText( textRect, text);
+    m_parent->restore();
+}
+
 // -------------------------------------------------------------------------------------------------
 
 GeoPainter::GeoPainter( QPaintDevice* pd, const ViewportParams *viewport, MapQuality mapQuality )
     : ClipPainter( pd, GeoPainterPrivate::doClip( viewport ) ),
-      d( new GeoPainterPrivate( viewport, mapQuality ) )
+      d( new GeoPainterPrivate( this, viewport, mapQuality ) )
 {
     const bool antialiased = mapQuality == HighQuality || mapQuality == PrintQuality;
     setRenderHint( QPainter::Antialiasing, antialiased );
@@ -485,7 +512,8 @@ void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPosition,
 
 void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                                 const QString& labelText,
-                                LabelPositionFlags labelPositionFlags )
+                                LabelPositionFlags labelPositionFlags,
+                                const QColor& labelColor,const QFont& labelFont)
 {
     // Immediately leave this method now if:
     // - the object is not visible in the viewport or if
@@ -506,7 +534,74 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
             ClipPainter::drawPolyline( *itPolygon );
         }
     }
-    else {
+    else if ( labelPositionFlags.testFlag( FollowLine ) ) {
+        const qreal maximumLabelFontSize = 20;
+        qreal fontSize = pen().widthF() * 0.45;
+        fontSize = qMin( fontSize, maximumLabelFontSize );
+        QFont font = labelFont;
+        font.setPointSizeF(fontSize);
+
+        QVector<QPointF> labelNodes;
+        foreach( QPolygonF* itPolygon, polygons ) {
+            QPainterPath path;
+            path.addPolygon(*itPolygon);
+
+            labelNodes.clear();
+            ClipPainter::drawPolyline( *itPolygon, labelNodes, labelPositionFlags );
+
+            save();
+            setPen(labelColor);
+            setFont(font);
+
+            int labelWidth = fontMetrics().width( labelText );
+            int maxNumLabels = static_cast<int>(path.length() / labelWidth);
+
+            if (fontSize >= 6.0 && maxNumLabels > 0) {
+                qreal textRelativeLength = labelWidth / path.length();
+                int numLabels = 1;
+                if (maxNumLabels > 1) {
+                    numLabels = maxNumLabels/2;
+                }
+                qreal offset = (1.0 - numLabels*textRelativeLength)/numLabels;
+                qreal startPercent = offset/2.0;
+
+                for (int k = 0; k < numLabels; ++k, startPercent += textRelativeLength + offset) {
+                    QPointF point = path.pointAtPercent(startPercent);
+
+                    if ( viewport().contains(point.toPoint()) ) {
+                        qreal angle = -path.angleAtPercent(startPercent);
+                        qreal angle2 = -path.angleAtPercent(startPercent + textRelativeLength);
+                        angle = GeoPainterPrivate::normalizeAngle(angle);
+                        bool flipped = angle > 90.0 && angle < 270.0;
+
+                        if ( qAbs(angle - angle2) < 3.0 ) {
+                            if ( flipped ) {
+                                angle += 180.0;
+                                point = path.pointAtPercent(startPercent + textRelativeLength);
+                            }
+
+                            d->drawTextRotated(point, angle, labelText);
+                        } else {
+                            for (int i = 0; i < labelText.length(); ++i) {
+                                qreal currentGlyphTextLength = fontMetrics().width(labelText.left(i)) / path.length();
+
+                                angle = -path.angleAtPercent(startPercent + currentGlyphTextLength);
+                                point = path.pointAtPercent(startPercent + currentGlyphTextLength);
+
+                                if ( flipped ) {
+                                    angle += 180.0;
+                                    point = path.pointAtPercent(startPercent + textRelativeLength - currentGlyphTextLength);
+                                }
+
+                                d->drawTextRotated(point, angle, labelText[i]);
+                            }
+                        }
+                    }
+                }
+            }
+            restore();
+        }
+    } else {
         int labelWidth = fontMetrics().width( labelText );
         int labelAscent = fontMetrics().ascent();
 

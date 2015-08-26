@@ -33,6 +33,9 @@ public:
 
 protected:
     const GeoDataLineString *m_lineString;
+    static const float s_outlineZValue;
+
+    virtual void createDecorations();
 };
 
 }

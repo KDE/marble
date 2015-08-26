@@ -96,14 +96,15 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
 
     s_visualCategories[ OsmTag( "highway", "unknown" ) ]            = GeoDataFeature::HighwayUnknown;
     s_visualCategories[ OsmTag( "highway", "steps" ) ]              = GeoDataFeature::HighwaySteps;
-    s_visualCategories[ OsmTag( "highway", "footway" ) ]            = GeoDataFeature::HighwayPedestrian;
+    s_visualCategories[ OsmTag( "highway", "footway" ) ]            = GeoDataFeature::HighwayFootway;
     s_visualCategories[ OsmTag( "highway", "path" ) ]               = GeoDataFeature::HighwayPath;
     s_visualCategories[ OsmTag( "highway", "track" ) ]              = GeoDataFeature::HighwayTrack;
     s_visualCategories[ OsmTag( "highway", "pedestrian" ) ]         = GeoDataFeature::HighwayPedestrian;
     s_visualCategories[ OsmTag( "highway", "service" ) ]            = GeoDataFeature::HighwayService;
-    s_visualCategories[ OsmTag( "highway", "living_street" ) ]      = GeoDataFeature::HighwayRoad;
-    s_visualCategories[ OsmTag( "highway", "unclassified" ) ]       = GeoDataFeature::HighwayRoad;
-    s_visualCategories[ OsmTag( "highway", "residential" ) ]        = GeoDataFeature::HighwayRoad;
+    s_visualCategories[ OsmTag( "highway", "living_street" ) ]      = GeoDataFeature::HighwayLivingStreet;
+    s_visualCategories[ OsmTag( "highway", "unclassified" ) ]       = GeoDataFeature::HighwayUnclassified;
+    s_visualCategories[ OsmTag( "highway", "residential" ) ]        = GeoDataFeature::HighwayUnclassified;
+    s_visualCategories[ OsmTag( "highway", "road" ) ]               = GeoDataFeature::HighwayRoad;
     s_visualCategories[ OsmTag( "highway", "tertiary_link" ) ]      = GeoDataFeature::HighwayTertiaryLink;
     s_visualCategories[ OsmTag( "highway", "tertiary" ) ]           = GeoDataFeature::HighwayTertiary;
     s_visualCategories[ OsmTag( "highway", "secondary_link" ) ]     = GeoDataFeature::HighwaySecondaryLink;

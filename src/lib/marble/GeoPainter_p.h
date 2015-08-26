@@ -14,6 +14,7 @@
 #include <QVector>
 
 #include "MarbleGlobal.h"
+//#include "GeoPainter.h"
 
 class QPolygonF;
 class QSizeF;
@@ -25,11 +26,12 @@ namespace Marble
 
 class ViewportParams;
 class GeoDataCoordinates;
+class GeoPainter;
 
 class GeoPainterPrivate
 {
  public:
-    GeoPainterPrivate( const ViewportParams *viewport, MapQuality mapQuality );
+    GeoPainterPrivate( GeoPainter* q, const ViewportParams *viewport, MapQuality mapQuality );
 
     ~GeoPainterPrivate();
 
@@ -45,9 +47,16 @@ class GeoPainterPrivate
 
     static bool doClip( const ViewportParams *viewport );
 
+    static qreal normalizeAngle(qreal angle);
+
+    void drawTextRotated( const QPointF &startPoint, qreal angle, const QString &text );
+
     const ViewportParams *const m_viewport;
     const MapQuality       m_mapQuality;
     qreal             *const m_x;
+
+private:
+    GeoPainter* m_parent;
 };
 
 } // namespace Marble

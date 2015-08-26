@@ -23,12 +23,13 @@ namespace Marble
 class GeoGraphicsItemPrivate
 {
  public:
-    explicit GeoGraphicsItemPrivate( const GeoDataFeature *feature )
+    explicit GeoGraphicsItemPrivate( const GeoDataFeature *feature)
         : m_zValue( 0 ),
           m_minZoomLevel( 0 ),
           m_feature( feature ),
           m_latLonAltBox(),
           m_style( 0 ),
+          m_isDecoration( false ),
           m_highlighted( false ),
           m_highlightStyle( 0 )
     {
@@ -45,6 +46,9 @@ class GeoGraphicsItemPrivate
     const GeoDataFeature *m_feature;
     GeoDataLatLonAltBox m_latLonAltBox;
     const GeoDataStyle *m_style;
+
+    bool m_isDecoration;
+    QList<GeoGraphicsItem*> m_decorations;
 
     // To highlight a placemark
     bool m_highlighted;

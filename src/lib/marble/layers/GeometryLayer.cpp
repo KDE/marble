@@ -141,7 +141,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::None]                = 0;
 
     for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseRetail; i++ )
-        s_defaultZValues[(GeoDataFeature::GeoDataVisualCategory)i] = s_defaultZValue - 16;
+        s_defaultZValues[(GeoDataFeature::GeoDataVisualCategory)i] = s_defaultZValue - 17;
 
     s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 16;
     s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 15;
@@ -152,25 +152,29 @@ void GeometryLayerPrivate::initializeDefaultValues()
 
     s_defaultZValues[GeoDataFeature::TransportParking]    = s_defaultZValue - 13;
 
-    s_defaultZValues[GeoDataFeature::HighwayTertiaryLink] = s_defaultZValue - 12;
-    s_defaultZValues[GeoDataFeature::HighwaySecondaryLink]= s_defaultZValue - 12;
-    s_defaultZValues[GeoDataFeature::HighwayPrimaryLink]  = s_defaultZValue - 12;
-    s_defaultZValues[GeoDataFeature::HighwayTrunkLink]    = s_defaultZValue - 12;
-    s_defaultZValues[GeoDataFeature::HighwayMotorwayLink] = s_defaultZValue - 12;
-
     s_defaultZValues[GeoDataFeature::HighwayUnknown]      = s_defaultZValue - 11;
     s_defaultZValues[GeoDataFeature::HighwayPath]         = s_defaultZValue - 10;
     s_defaultZValues[GeoDataFeature::HighwayTrack]        = s_defaultZValue - 9;
     s_defaultZValues[GeoDataFeature::HighwaySteps]        = s_defaultZValue - 8;
-    s_defaultZValues[GeoDataFeature::HighwayPedestrian]   = s_defaultZValue - 8;
+    s_defaultZValues[GeoDataFeature::HighwayFootway]      = s_defaultZValue - 8;
+    s_defaultZValues[GeoDataFeature::HighwayCycleway]     = s_defaultZValue - 8;
     s_defaultZValues[GeoDataFeature::HighwayService]      = s_defaultZValue - 7;
+    s_defaultZValues[GeoDataFeature::HighwayLivingStreet] = s_defaultZValue - 7;
+    s_defaultZValues[GeoDataFeature::HighwayPedestrian]   = s_defaultZValue - 6;
     s_defaultZValues[GeoDataFeature::HighwayRoad]         = s_defaultZValue - 6;
+    s_defaultZValues[GeoDataFeature::HighwayUnclassified] = s_defaultZValue - 6;
     s_defaultZValues[GeoDataFeature::HighwayTertiary]     = s_defaultZValue - 5;
     s_defaultZValues[GeoDataFeature::HighwaySecondary]    = s_defaultZValue - 4;
     s_defaultZValues[GeoDataFeature::HighwayPrimary]      = s_defaultZValue - 3;
     s_defaultZValues[GeoDataFeature::HighwayTrunk]        = s_defaultZValue - 2;
     s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
     s_defaultZValues[GeoDataFeature::RailwayRail]         = s_defaultZValue - 1;
+
+    s_defaultZValues[GeoDataFeature::HighwayTertiaryLink] = s_defaultZValues[GeoDataFeature::HighwayTertiary];
+    s_defaultZValues[GeoDataFeature::HighwaySecondaryLink]= s_defaultZValues[GeoDataFeature::HighwaySecondary];
+    s_defaultZValues[GeoDataFeature::HighwayPrimaryLink]  = s_defaultZValues[GeoDataFeature::HighwayPrimary];
+    s_defaultZValues[GeoDataFeature::HighwayTrunkLink]    = s_defaultZValues[GeoDataFeature::HighwayTrunk];
+    s_defaultZValues[GeoDataFeature::HighwayMotorwayLink] = s_defaultZValues[GeoDataFeature::HighwayMotorway];
 
     s_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 8;
@@ -182,8 +186,10 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::HighwayUnknown]      = 13;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayPath]         = 13;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTrack]        = 13;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayPedestrian]   = 14;
-    s_defaultMinZoomLevels[GeoDataFeature::HighwayService]      = 14;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayPedestrian]   = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayFootway]      = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayCycleway]     = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::HighwayService]      = 13;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayRoad]         = 13;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiaryLink] = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayTertiary]     = 10;
@@ -251,6 +257,25 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     int maxZoomLevel = qMin<int>( qMax<int>( qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 ), 1), GeometryLayerPrivate::maximumZoomLevel() );
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
+
+    switch ( painter->mapQuality() ) {
+    case Marble::MapQuality::LowQuality :
+    case Marble::MapQuality::NormalQuality :
+    case Marble::MapQuality::HighQuality :
+    case Marble::MapQuality::PrintQuality :
+        for ( int i = 0, n = items.size(); i < n; ++i ) {
+            items << items[i]->decorations();
+        }
+
+        // Needs sorting by z-value
+        qStableSort(items.begin(), items.end(), [](const GeoGraphicsItem* a, const GeoGraphicsItem* b) {
+            return a->zValue() < b->zValue();
+        });
+
+        break;
+    default:
+        break;
+    }
 
     int painted = 0;
     foreach( GeoGraphicsItem* item, items )

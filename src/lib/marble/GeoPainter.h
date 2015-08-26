@@ -308,7 +308,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 */
     void drawPolyline ( const GeoDataLineString & lineString,
                         const QString& labelText = QString(),
-                        LabelPositionFlags labelPositionFlags = LineCenter );
+                        LabelPositionFlags labelPositionFlags = LineCenter,
+                        const QColor& labelcolor = Qt::black, const QFont& labelFont = QFont("Arial"));
 
 
 /*!

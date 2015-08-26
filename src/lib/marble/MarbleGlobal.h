@@ -118,7 +118,8 @@ enum LabelPositionFlag {
     LineCenter = 0x2,
     LineEnd = 0x4,
     IgnoreXMargin = 0x8,
-    IgnoreYMargin = 0x10
+    IgnoreYMargin = 0x10,
+    FollowLine = 0x20
 };
 
 Q_DECLARE_FLAGS(LabelPositionFlags, LabelPositionFlag)
