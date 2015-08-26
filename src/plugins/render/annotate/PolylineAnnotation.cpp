@@ -26,6 +26,7 @@
 #include "GeoDataTypes.h"
 #include "ViewportParams.h"
 #include "MergingPolylineNodesAnimation.h"
+#include "osm/OsmPlacemarkData.h"
 
 
 namespace Marble
@@ -275,6 +276,10 @@ void PolylineAnnotation::move( const GeoDataCoordinates &source, const GeoDataCo
 {
     GeoDataLineString *lineString = static_cast<GeoDataLineString*>( placemark()->geometry() );
     GeoDataLineString oldLineString = *lineString;
+    OsmPlacemarkData *osmData = 0;
+    if ( placemark()->hasOsmData() ) {
+        osmData = &placemark()->osmData();
+    }
     lineString->clear();
 
     const qreal deltaLat = destination.latitude() - source.latitude();
@@ -291,7 +296,9 @@ void PolylineAnnotation::move( const GeoDataCoordinates &source, const GeoDataCo
         qpos.rotateAroundAxis(rotAxis);
         qpos.getSpherical( lonRotated, latRotated );
         GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
-
+        if ( osmData ) {
+            osmData->changeNodeReference( oldLineString.at( i ), movedPoint );
+        }
         lineString->append( movedPoint );
     }
 }
@@ -345,14 +352,19 @@ void PolylineAnnotation::deleteAllSelectedNodes()
     }
 
     GeoDataLineString *line = static_cast<GeoDataLineString*>( placemark()->geometry() );
-
+    OsmPlacemarkData *osmData = 0;
+    if ( placemark()->hasOsmData() ) {
+        osmData = &placemark()->osmData();
+    }
     for ( int i = 0; i < line->size(); ++i ) {
         if ( m_nodesList.at(i).isSelected() ) {
             if ( m_nodesList.size() <= 2 ) {
                 setRequest( SceneGraphicsItem::RemovePolylineRequest );
                 return;
             }
-
+            if ( osmData ) {
+                osmData->removeNodeReference( line->at( i ) );
+            }
             m_nodesList.removeAt( i );
             line->remove( i );
             --i;
@@ -367,9 +379,17 @@ void PolylineAnnotation::deleteClickedNode()
     }
 
     GeoDataLineString *line = static_cast<GeoDataLineString*>( placemark()->geometry() );
+    OsmPlacemarkData *osmData = 0;
+    if ( placemark()->hasOsmData() ) {
+        osmData = &placemark()->osmData();
+    }
     if ( m_nodesList.size() <= 2 ) {
         setRequest( SceneGraphicsItem::RemovePolylineRequest );
         return;
+    }
+
+    if ( osmData ) {
+        osmData->removeMemberReference( m_clickedNodeIndex );
     }
 
     m_nodesList.removeAt( m_clickedNodeIndex );
@@ -573,11 +593,24 @@ bool PolylineAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
 
     if ( m_interactingObj == InteractingNode ) {
         GeoDataLineString *line = static_cast<GeoDataLineString*>( placemark()->geometry() );
+        OsmPlacemarkData *osmData = 0;
+        if ( placemark()->hasOsmData() ) {
+            osmData = &placemark()->osmData();
+        }
+
+        // Keeping the OsmPlacemarkData synchronized with the geometry
+        if ( osmData ) {
+            osmData->changeNodeReference( line->at( m_clickedNodeIndex ), newCoords );
+        }
         line->at(m_clickedNodeIndex) = newCoords;
 
         return true;
     } else if ( m_interactingObj == InteractingPolyline ) {
         GeoDataLineString *lineString = static_cast<GeoDataLineString*>( placemark()->geometry() );
+        OsmPlacemarkData *osmData = 0;
+        if ( placemark()->hasOsmData() ) {
+            osmData = &placemark()->osmData();
+        }
         const GeoDataLineString oldLineString = *lineString;
         lineString->clear();
 
@@ -595,7 +628,9 @@ bool PolylineAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
             qpos.rotateAroundAxis(rotAxis);
             qpos.getSpherical( lonRotated, latRotated );
             GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
-
+            if ( osmData ) {
+                osmData->changeNodeReference( oldLineString.at( i ), movedPoint );
+            }
             lineString->append( movedPoint );
         }
 
