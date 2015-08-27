@@ -18,10 +18,7 @@ import org.kde.edu.marble 0.20
 Item {
     id: root
 
-    property int selectedItem: -1
     property var routingManager: null
-
-    signal edited()
 
     SystemPalette{
         id: palette
@@ -35,17 +32,12 @@ Item {
 
         ListView {
             id: waypointList
-            anchors {
-                top: parent.top
-                bottom: buttons.top
-                left: parent.left
-                right: parent.right
-            }
+            anchors.fill: parent
 
             delegate: Rectangle {
                 width: parent.width
                 height: text.height * 2
-                color: touchArea.pressed || root.selectedItem == index ? palette.highlight : palette.base
+                color: touchArea.pressed || waypointList.currentIndex === index ? palette.highlight : palette.base
 
                 WaypointImage {
                     id: image
@@ -77,57 +69,48 @@ Item {
                     id: touchArea
                     anchors.fill: parent
                     onClicked: {
-                        root.selectedItem = index;
+                        waypointList.currentIndex = index;
                     }
                 }
-            }
-        }
 
-        RowLayout {
-            id: buttons
-            height: Screen.pixelDensity * 10
-            anchors{
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-
-            spacing: 0
-            visible: true
-
-            NavigationSetupButton {
-                imageSource: "qrc:///up.png"
-                text: qsTr("Sooner")
-                onClicked: {
-                    if (routingManager && selectedItem > 0) {
-                        routingManager.swapVias(selectedItem, selectedItem-1);
-                        selectedItem--;
-                        edited();
+                NavigationSetupButton {
+                    anchors.right: upButton.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: index === waypointList.currentIndex
+                    imageSource: "qrc:///up.png"
+                    enabled: index > 0
+                    onClicked: {
+                        routingManager.swapVias(index, index-1);
+                        waypointList.currentIndex--;
                     }
                 }
-            }
 
-            NavigationSetupButton {
-                imageSource: "qrc:///down.png"
-                text: qsTr("Later")
-                onClicked: {
-                    if (routingManager && selectedItem < routingManager.waypointCount()-1) {
-                        routingManager.swapVias(selectedItem, selectedItem+1);
-                        selectedItem++;
-                        edited();
+                NavigationSetupButton {
+                    id: upButton
+                    anchors.right: deleteButton.left
+                    anchors.rightMargin: Screen.pixelDensity * 6
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: index === waypointList.currentIndex
+                    imageSource: "qrc:///down.png"
+                    width: 32
+                    enabled: index+1 < routingManager.waypointCount()
+                    onClicked: {
+                        routingManager.swapVias(index, index+1);
+                        waypointList.currentIndex++;
                     }
                 }
-            }
 
-            NavigationSetupButton {
-                imageSource: "qrc:///delete.png"
-                text: qsTr("Delete")
-                onClicked: {
-                    if (routingManager && selectedItem >= 0)
-                    {
-                        routingManager.removeVia(selectedItem);
-                        selectedItem = -1;
-                        edited();
+                NavigationSetupButton {
+                    id: deleteButton
+                    anchors.right: parent.right
+                    anchors.rightMargin: Screen.pixelDensity * 2
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: index === waypointList.currentIndex
+                    imageSource: "qrc:///delete.png"
+                    width: 32
+                    onClicked: {
+                        routingManager.removeVia(index);
+                        waypointList.currentIndex--;
                     }
                 }
             }

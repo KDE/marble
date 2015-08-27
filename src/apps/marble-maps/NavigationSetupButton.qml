@@ -16,11 +16,11 @@ import QtQuick.Layouts 1.2
 
 Item {
     id: root
-    Layout.fillWidth: true
-    Layout.fillHeight: true
+
+    width: image.width + 10
+    height: image.height + 10
 
     property alias imageSource: image.source
-    property alias text: label.text
     signal clicked()
 
     SystemPalette{
@@ -30,48 +30,27 @@ Item {
 
     Rectangle {
         id: background
-        color: touchArea.pressed ? palette.highlight : palette.button
-
         anchors.fill: parent
-        border {
-            color: palette.shadow
-            width: Screen.pixelDensity * 0.1
-        }
+        color: touchArea.pressed ? palette.button : palette.highlight
 
-        Item {
-            width: label.width
-            height: label.height * 2 + image.anchors.topMargin
+        Image {
+            id: image
+            anchors.centerIn: parent
+            anchors.margins: 10
 
-            anchors {
-                centerIn: parent
-            }
+            width: Screen.pixelDensity * 6
+            height: width
+            fillMode: Image.PreserveAspectFit
 
-            Text {
-                id: label
-                anchors {
-                    top: parent.top
-                    horizontalCenter: parent.horizontalCenter
+            MouseArea {
+                id: touchArea
+                anchors.fill: parent
+                onClicked: {
+                    if (root.enabled) {
+                        root.clicked();
+                    }
                 }
-                color: palette.text
             }
-
-            Image {
-                id: image
-                anchors {
-                    top: label.bottom
-                    horizontalCenter: label.horizontalCenter
-                    topMargin: Screen.pixelDensity * 0.5
-                }
-
-                width: label.height
-                height: label.height
-            }
-        }
-
-        MouseArea {
-            id: touchArea
-            anchors.fill: parent
-            onClicked: root.clicked();
         }
     }
 }
