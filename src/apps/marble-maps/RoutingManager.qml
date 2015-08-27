@@ -20,8 +20,16 @@ Item {
     property alias hasRoute: routing.hasRoute
     property alias routingModel: routing.routingModel
     property alias routeRequestModel: routing.routeRequestModel
-    property var navigationSetup: null
     property var selectedPlacemark: null
+
+    Routing {
+        id: routing
+
+        anchors.fill: parent
+        marbleMap: marbleItem.marbleMap
+        waypointDelegate: Waypoint {visible: false}
+        onRoutingProfileChanged: { updateRoute(); }
+    }
 
     function removeVia(index)
     {
@@ -41,24 +49,6 @@ Item {
     function clearRoute()
     {
         routing.clearRoute();
-    }
-
-
-    onNavigationSetupChanged: {
-        if (navigationSetup != null) {
-            navigationSetup.routeToDestinationRequested.connect(addPlacemarkAsDestination);
-            navigationSetup.routeFromDepartureRequested.connect(addPlacemarkAsDeparture);
-            navigationSetup.routeThroughWaypointRequested.connect(addPlacemarkAsWaypoint);
-        }
-    }
-
-    Routing {
-        id: routing
-
-        anchors.fill: parent
-        marbleMap: marbleItem.marbleMap
-        waypointDelegate: Waypoint {visible: false}
-        onRoutingProfileChanged: { updateRoute(); }
     }
 
     function addSearchResultAsPlacemark(placemark)
