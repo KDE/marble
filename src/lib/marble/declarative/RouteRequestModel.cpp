@@ -16,6 +16,7 @@
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "Routing.h"
+#include <GeoDataPlacemark.h>
 
 RouteRequestModel::RouteRequestModel( QObject *parent ) :
     QAbstractListModel( parent ),
@@ -61,7 +62,18 @@ QVariant RouteRequestModel::data ( const QModelIndex &index, int role ) const
 {
     if ( index.isValid() && m_request && index.row() >= 0 && index.row() < m_request->size() ) {
         switch ( role ) {
-        case Qt::DisplayRole: return m_request->name( index.row() );
+        case Qt::DisplayRole: {
+            Marble::GeoDataPlacemark const & placemark = (*m_request)[index.row()];
+            if (!placemark.name().isEmpty()) {
+                return placemark.name();
+            }
+
+            if (!placemark.address().isEmpty()) {
+                return placemark.address();
+            }
+
+            return placemark.coordinate().toString(Marble::GeoDataCoordinates::Decimal).trimmed();
+        }
         case LongitudeRole: return m_request->at( index.row() ).longitude( Marble::GeoDataCoordinates::Degree );
         case LatitudeRole: return m_request->at( index.row() ).latitude( Marble::GeoDataCoordinates::Degree );
         }
