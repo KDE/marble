@@ -22,7 +22,6 @@ Item {
     property alias routeRequestModel: routing.routeRequestModel
     property var navigationSetup: null
     property var selectedPlacemark: null
-    property string profileIcon: "qrc:///car.png"
 
     function removeVia(index)
     {
@@ -59,20 +58,7 @@ Item {
         anchors.fill: parent
         marbleMap: marbleItem.marbleMap
         waypointDelegate: Waypoint {visible: false}
-        onRoutingProfileChanged: {
-            switch (routingProfile) {
-            case "Car (fastest)":
-                root.profileIcon = "qrc:///car.png";
-                break;
-            case "Bicycle":
-                root.profileIcon = "qrc:///bike.png";
-                break;
-            case "Pedestrian":
-                root.profileIcon = "qrc:///walk.png";
-                break;
-            }
-            updateRoute();
-        }
+        onRoutingProfileChanged: { updateRoute(); }
     }
 
     function addSearchResultAsPlacemark(placemark)
