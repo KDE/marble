@@ -28,17 +28,6 @@ ApplicationWindow {
             title: qsTr("Marble Maps")
 
             MenuItem {
-                text: qsTr("Delete Route")
-                onTriggered: {
-                    itemStack.pop(mapItem)
-                    routing.clearRoute();
-                    navigationManager.marbleItem = null;
-                }
-
-                visible: routing.hasRoute
-            }
-
-            MenuItem {
                 text: qsTr("Modify Route")
                 onTriggered: {
                     if (itemStack.currentItem !== waypointOrderEditor) {
