@@ -10,7 +10,6 @@
     <file>PositionButton.qml</file>
     <file>BoxedText.qml</file>
     <file>NavigationSetupButton.qml</file>
-    <file>RoutePlanViewer.qml</file>
     <file>WaypointImage.qml</file>
     <file>RoutingManager.qml</file>
     <file>ProfileSelectorMenu.qml</file>

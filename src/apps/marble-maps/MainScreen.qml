@@ -38,21 +38,11 @@ ApplicationWindow {
             }
 
             MenuItem {
-                text: qsTr("Navigation Instructions")
-                onTriggered: {
-                    if (itemStack.currentItem !== instructions) {
-                        itemStack.push(instructions)
-                    }
-                }
-                visible: routing.hasRoute && !instructions.visible
-            }
-
-            MenuItem {
                 text: qsTr("Show the Map")
                 onTriggered: {
                     itemStack.pop(mapItem)
                 }
-                visible: instructions.visible || waypointOrderEditor.visible
+                visible: waypointOrderEditor.visible
             }
         }
     }
@@ -256,12 +246,6 @@ ApplicationWindow {
             id: waypointOrderEditor
             visible: false
             routingManager: routing
-        }
-
-        RoutePlanViewer{
-            id: instructions
-            visible: false
-            model: routing.routingModel
         }
 
         PositionMarker {
