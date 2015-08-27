@@ -9,7 +9,7 @@
         <file>CircularButton.qml</file>
         <file>PositionButton.qml</file>
         <file>BoxedText.qml</file>
-        <file>NavigationSetupButton.qml</file>
+        <file>ImageButton.qml</file>
         <file>WaypointImage.qml</file>
         <file>RoutingManager.qml</file>
         <file>ProfileSelectorMenu.qml</file>

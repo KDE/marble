@@ -90,7 +90,7 @@ Item {
                 }
             }
 
-            NavigationSetupButton {
+            ImageButton {
                 anchors.right: upButton.left
                 anchors.verticalCenter: parent.verticalCenter
                 visible: index === waypointList.currentIndex
@@ -102,7 +102,7 @@ Item {
                 }
             }
 
-            NavigationSetupButton {
+            ImageButton {
                 id: upButton
                 anchors.right: deleteButton.left
                 anchors.rightMargin: Screen.pixelDensity * 4
@@ -116,7 +116,7 @@ Item {
                 }
             }
 
-            NavigationSetupButton {
+            ImageButton {
                 id: deleteButton
                 anchors.right: parent.right
                 anchors.rightMargin: Screen.pixelDensity * 1
