@@ -447,6 +447,9 @@ namespace Marble
         }
 
         d->centerOn(coordinates, true);
+        if (d->zoom() < 3000) {
+            d->setZoom(3250);
+        }
     }
 
     void MarbleQuickItem::goHome()
