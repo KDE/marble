@@ -115,7 +115,7 @@ ApplicationWindow {
                         anchors.fill: parent
                         marbleItem: marbleMaps
                         selectedPlacemark: search.searchResultPlacemark
-                        routingProfile: waypointOrderEditor.routingProfile
+                        routingProfile: routeEditor.routingProfile
                     }
                 }
             }
@@ -176,8 +176,8 @@ ApplicationWindow {
 
             iconSource: "qrc:///navigation.png"
             onClicked: {
-                if (itemStack.currentItem !== waypointOrderEditor) {
-                    itemStack.push(waypointOrderEditor);
+                if (itemStack.currentItem !== routeEditor) {
+                    itemStack.push(routeEditor);
                 }
             }
         }
@@ -190,8 +190,8 @@ ApplicationWindow {
             visible: !navigationManager.visible
         }
 
-        WaypointOrderManager {
-            id: waypointOrderEditor
+        RouteEditor {
+            id: routeEditor
             visible: false
             routingManager: routing
         }

@@ -14,7 +14,7 @@
         <file>RoutingManager.qml</file>
         <file>ProfileSelectorMenu.qml</file>
         <file>FloatingMenuButton.qml</file>
-        <file>WaypointOrderManager.qml</file>
+        <file>RouteEditor.qml</file>
         <file>NavigationInfoBar.qml</file>
         <file>NavigationManager.qml</file>
         <file>PositionMarker.qml</file>
