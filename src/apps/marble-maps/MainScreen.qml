@@ -22,35 +22,6 @@ ApplicationWindow {
     title: qsTr("Marble Maps")
     visible: true
 
-    menuBar: MenuBar {
-        id: menuBar
-        Menu {
-            title: qsTr("Marble Maps")
-
-            MenuItem {
-                text: qsTr("Modify Route")
-                onTriggered: {
-                    if (itemStack.currentItem !== waypointOrderEditor) {
-                        itemStack.push(waypointOrderEditor);
-                    }
-                }
-                visible: routing.hasRoute
-            }
-
-            MenuItem {
-                text: qsTr("Show the Map")
-                onTriggered: {
-                    itemStack.pop(mapItem)
-                }
-                visible: waypointOrderEditor.visible
-            }
-        }
-    }
-
-    toolBar: ToolBar {
-        id: toolBar
-    }
-
     width: 600
     height: 400
 
@@ -144,7 +115,7 @@ ApplicationWindow {
                         anchors.fill: parent
                         marbleItem: marbleMaps
                         selectedPlacemark: search.searchResultPlacemark
-                        routingProfile: profileChoosingMenu.selectedProfile
+                        routingProfile: waypointOrderEditor.routingProfile
                     }
                 }
             }
@@ -195,7 +166,7 @@ ApplicationWindow {
         }
 
         CircularButton {
-            id: changeProfileButton
+            id: routeEditorButton
             visible: routing.hasRoute && !search.searchResultsVisible
             anchors {
                 bottom: distanceIndicator.top
@@ -203,34 +174,11 @@ ApplicationWindow {
                 margins: 0.01 * root.width
             }
 
-            iconSource: routing.profileIcon
-            onClicked: {
-                profileChoosingMenu.focus = true;
-            }
-        }
-
-        CircularButton {
-            id: startNavigation
-            visible: routing.hasRoute && !navigationManager.visible
             iconSource: "qrc:///navigation.png"
-            anchors {
-                bottom: distanceIndicator.top
-                horizontalCenter: zoomToPositionButton.horizontalCenter
-                margins: 0.01 * root.width
-            }
-
             onClicked: {
-                navigationManager.marbleItem = marbleMaps;
-                itemStack.push(navigationManager);
-            }
-        }
-
-        ProfileSelectorMenu {
-            id: profileChoosingMenu
-            visible: focus
-            anchors {
-                right: changeProfileButton.right
-                verticalCenter: changeProfileButton.verticalCenter
+                if (itemStack.currentItem !== waypointOrderEditor) {
+                    itemStack.push(waypointOrderEditor);
+                }
             }
         }
 

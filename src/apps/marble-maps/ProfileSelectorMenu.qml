@@ -6,66 +6,43 @@
 // the source code.
 //
 // Copyright 2015      Gábor Péterffy <peterffy95@gmail.com>
+// Copyright 2015      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 import QtQuick 2.3
 import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
 
 Item {
     id: root
 
-    property string selectedProfile: "Car (fastest)"
+    property string selectedProfile: qsTr("Car (fastest)")
+    height: profileGroup.current.height
 
-    height: Screen.pixelDensity * 9 //Like circular button
-    width: height * 3
-    visible: false
-
-    SystemPalette{
-        id: palette
-        colorGroup: SystemPalette.Active
-    }
-
-    Rectangle {
-        id: background
-        radius: 0.5 * root.height
-        anchors.fill: parent
-        color: palette.base
-
-        FloatingMenuButton {
-            id: firsButton
-            anchors {
-                right: secondButton.left
-                verticalCenter: parent.verticalCenter
+    RowLayout {
+        ExclusiveGroup {
+            id: profileGroup
+            onCurrentChanged: {
+                selectedProfile = current.profile;
             }
-
-            imageSource: "qrc:///walk.png"
-
-            onClicked: {selectedProfile = qsTr("Pedestrian"); root.focus = false}
         }
 
-        FloatingMenuButton {
-            id: secondButton
-            anchors {
-                right: thirdButton.left
-                verticalCenter: parent.verticalCenter
-            }
-
-            imageSource: "qrc:///bike.png"
-
-            onClicked: {selectedProfile = qsTr("Bicycle"); root.focus = false}
-        }
-
-        FloatingMenuButton {
-            id: thirdButton
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
-
+        RouteProfileRadioButton {
+            checked: true
+            exclusiveGroup: profileGroup
+            property string profile: qsTr("Car (fastest)")
             imageSource: "qrc:///car.png"
-
-            onClicked: {selectedProfile = qsTr("Car (fastest)"); root.focus = false}
+        }
+        RouteProfileRadioButton {
+            exclusiveGroup: profileGroup
+            property string profile: qsTr("Bicycle")
+            imageSource: "qrc:///bike.png"
+        }
+        RouteProfileRadioButton {
+            exclusiveGroup: profileGroup
+            property string profile: qsTr("Pedestrian")
+            imageSource: "qrc:///walk.png"
         }
     }
 }

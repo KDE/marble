@@ -1,0 +1,42 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2015      Dennis Nienhüser <nienhueser@kde.org>
+//
+
+import QtQuick 2.5
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
+import QtQuick.Window 2.2
+
+RadioButton {
+    id: root
+    property string imageSource
+
+    SystemPalette{
+        id: palette
+        colorGroup: SystemPalette.Active
+    }
+
+    style: RadioButtonStyle {
+        indicator: Rectangle {
+            color: control.checked ? palette.highlight : palette.base
+            width: image.width + Screen.pixelDensity * 2
+            height: image.height + Screen.pixelDensity * 2
+            radius: Screen.pixelDensity * 2
+
+            Image {
+                anchors.centerIn: parent
+                id: image
+                width: Screen.pixelDensity * 6
+                height: width
+                fillMode: Image.PreserveAspectFit
+                source: root.imageSource
+            }
+        }
+    }
+}
