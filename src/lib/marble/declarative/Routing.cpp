@@ -328,10 +328,13 @@ void Routing::setMarbleMap( MarbleMap* marbleMap )
         }
 
         connect( routingManager, SIGNAL(stateChanged(RoutingManager::State)), this, SLOT(update()));
+        connect( routingManager, SIGNAL(routeRetrieved(GeoDataDocument*)), this, SLOT(update()));
         connect( routingManager, SIGNAL(stateChanged(RoutingManager::State)),
                  this, SIGNAL(hasRouteChanged()) );
         connect( routingModel(), SIGNAL(currentRouteChanged()),
                  this, SIGNAL(hasRouteChanged()) );
+        connect( routingModel(), SIGNAL(currentRouteChanged()),
+                 this, SLOT(update()) );
         connect( d->m_marbleMap, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
                  this, SLOT(updateWaypointItems()) );
         connect( d->m_marbleMap, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
