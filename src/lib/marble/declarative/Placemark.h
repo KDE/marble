@@ -28,6 +28,7 @@ class Placemark : public QObject
 
     Q_PROPERTY( Coordinate* coordinate READ coordinate NOTIFY coordinateChanged )
     Q_PROPERTY( QString name WRITE setName READ name NOTIFY nameChanged )
+    Q_PROPERTY( QString address READ address NOTIFY addressChanged )
 
 public:
     /** Constructor */
@@ -38,6 +39,7 @@ public:
     Coordinate* coordinate();
 
     QString name() const;
+    QString address() const;
 
 public slots:
     void setName(const QString &name);
@@ -46,6 +48,7 @@ Q_SIGNALS:
     void coordinateChanged();
 
     void nameChanged();
+    void addressChanged();
 
 private:
     Marble::GeoDataPlacemark m_placemark;
