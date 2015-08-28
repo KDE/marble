@@ -23,7 +23,7 @@ class RouteRequestModel : public QAbstractListModel
     Q_OBJECT
 
     Q_PROPERTY( Marble::Routing* routing READ routing WRITE setRouting NOTIFY routingChanged )
-    Q_PROPERTY( int count READ rowCount )
+    Q_PROPERTY( int count READ rowCount NOTIFY rowCountChanged )
 
 public:
     enum RouteRequestModelRoles {
@@ -60,6 +60,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void routingChanged();
+    void rowCountChanged();
 
 private Q_SLOTS:
     void updateMap();

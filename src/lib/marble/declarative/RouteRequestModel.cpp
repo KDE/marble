@@ -124,6 +124,7 @@ void RouteRequestModel::updateAfterRemoval( int idx )
     beginRemoveRows( QModelIndex(), idx, idx );
     removeRow( idx );
     endRemoveRows();
+    emit rowCountChanged();
 }
 
 void RouteRequestModel::updateAfterAddition( int idx )
@@ -131,6 +132,7 @@ void RouteRequestModel::updateAfterAddition( int idx )
     beginInsertRows( QModelIndex(), idx, idx );
     insertRow( idx );
     endInsertRows();
+    emit rowCountChanged();
 }
 
 void RouteRequestModel::setPosition ( int index, qreal longitude, qreal latitude )
