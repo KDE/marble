@@ -212,6 +212,11 @@ void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates, con
     GeoDataPlacemark placemark;
     placemark.setCoordinate( coordinates );
     placemark.setName( name );
+    insert(index, placemark);
+}
+
+void RouteRequest::insert(int index, const GeoDataPlacemark &placemark)
+{
     d->m_route.insert( index, placemark );
     emit positionAdded( index );
 }
