@@ -36,6 +36,8 @@ public:
 
     void setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark );
 
+    Marble::GeoDataPlacemark placemark() const;
+
     Coordinate* coordinate();
 
     QString name() const;

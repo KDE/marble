@@ -25,6 +25,11 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit addressChanged();
 }
 
+Marble::GeoDataPlacemark Placemark::placemark() const
+{
+    return m_placemark;
+}
+
 Coordinate *Placemark::coordinate()
 {
     return &m_coordinate;

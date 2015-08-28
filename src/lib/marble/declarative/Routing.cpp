@@ -185,8 +185,7 @@ int Routing::addSearchResultPlacemark(Placemark *placemark)
             }
         }
         Placemark * newPlacemark = new Placemark(this);
-        newPlacemark->coordinate()->setCoordinates(placemark->coordinate()->coordinates());
-        newPlacemark->setName(placemark->name());
+        newPlacemark->setGeoDataPlacemark(placemark->placemark());
         d->m_searchResultPlacemarks.push_back(newPlacemark);
     }
 
@@ -445,7 +444,7 @@ void Routing::addViaByPlacemarkAtIndex(int index, Placemark *placemark)
 {
     if ( d->m_marbleMap ) {
         Marble::RouteRequest * request = d->m_marbleMap->model()->routingManager()->routeRequest();
-        request->insert(index, placemark->coordinate()->coordinates(), placemark->name());
+        request->insert(index, placemark->placemark());
         updateRoute();
     }
 }
