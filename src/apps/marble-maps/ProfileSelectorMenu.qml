@@ -18,6 +18,7 @@ Item {
     id: root
 
     property string selectedProfile: qsTr("Car (fastest)")
+    property string profileIcon: "qrc:///car.png"
     height: rowLayout.height
     width: rowLayout.width
 
@@ -26,6 +27,7 @@ Item {
         ExclusiveGroup {
             id: profileGroup
             onCurrentChanged: {
+                profileIcon = current.imageSource
                 selectedProfile = current.profile;
             }
         }

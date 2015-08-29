@@ -25,6 +25,7 @@
         <file alias="gps_not_fixed.png">../../../data/android/drawable-xxxhdpi/gps_not_fixed.png</file>
         <file alias="backdrop.png">../../../data/android/drawable-xxxhdpi/backdrop.png</file>
         <file alias="border_shadow.png">../../../data/android/drawable-xxxhdpi/border_shadow.png</file>
+        <file alias="directions.png">../../../data/android/drawable-xxxhdpi/ic_directions_black_48dp.png</file>
         <file alias="navigation.png">../../../data/android/drawable-xxxhdpi/navigation.png</file>
         <file alias="car.png">../../../data/android/drawable-xxxhdpi/car.png</file>
         <file alias="bike.png">../../../data/android/drawable-xxxhdpi/bike.png</file>

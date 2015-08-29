@@ -141,66 +141,12 @@ ApplicationWindow {
                         visible: !navigationManager.visible
                     }
 
-                    PositionButton {
-                        id: zoomToPositionButton
-                        anchors {
-                            bottom: parent.bottom
-                            right: parent.right
-                            rightMargin: 0.005 * root.width
-                            bottomMargin: 25
-                        }
-
-                        iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
-
-                        onClicked: marbleMaps.centerOnCurrentPosition()
-
-                        property real distance: 0
-
-                        function updateIndicator() {
-                            var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
-                            distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
-                            angle = marbleMaps.angleFromPointToCurrentLocation(point);
-                        }
-
-                        showDirection: marbleMaps.positionAvailable && !marbleMaps.positionVisible
-                    }
-
-                    BoxedText {
-                        id: distanceIndicator
-                        text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
-                        anchors {
-                            bottom: zoomToPositionButton.top
-                            horizontalCenter: zoomToPositionButton.horizontalCenter
-                        }
-
-                        visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
-                    }
-
-                    CircularButton {
-                        id: routeEditorButton
-                        anchors {
-                            bottom: distanceIndicator.top
-                            horizontalCenter: zoomToPositionButton.horizontalCenter
-                            margins: 0.01 * root.width
-                        }
-
-                        iconSource: "qrc:///navigation.png"
-                        onClicked: itemStack.state = itemStack.state === "routing" ? "default" : "routing"
-                    }
-
-                    PositionMarker {
-                        id: positionMarker
-                        posX: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.x : 0
-                        posY: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.y : 0
-                        angle: marbleMaps.angle
-                        visible: navigationManager.visible
-                    }
-
                     NavigationManager {
                         id: navigationManager
                         width: parent.width
                         height: parent.height
                         visible: false
+                        marbleItem: marbleMaps
                     }
 
                     BoxedText {
@@ -224,13 +170,6 @@ ApplicationWindow {
                             onTriggered: itemStack.state = ""
                         }
                     }
-                }
-
-                BorderImage {
-                    anchors.fill: dialogContainer
-                    anchors.margins: -14
-                    border { top: 14; left: 14; right: 14; bottom: 14 }
-                    source: "qrc:///border_shadow.png"
                 }
 
                 Item {
@@ -262,6 +201,98 @@ ApplicationWindow {
                         }
                     }
                 }
+
+                BoxedText {
+                    id: distanceIndicator
+                    text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
+                    anchors {
+                        bottom: zoomToPositionButton.top
+                        horizontalCenter: zoomToPositionButton.horizontalCenter
+                    }
+
+                    visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
+                }
+
+                PositionButton {
+                    id: zoomToPositionButton
+                    anchors {
+                        right: parent.right
+                        rightMargin: 0.005 * root.width
+                        bottom: routeEditorButton.top
+                        bottomMargin: 10
+                    }
+
+                    iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
+
+                    onClicked: marbleMaps.centerOnCurrentPosition()
+
+                    property real distance: 0
+
+                    function updateIndicator() {
+                        var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
+                        distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
+                        angle = marbleMaps.angleFromPointToCurrentLocation(point);
+                    }
+
+                    showDirection: marbleMaps.positionAvailable && !marbleMaps.positionVisible
+                }
+
+                CircularButton {
+                    id: routeEditorButton
+                    anchors {
+                        bottom: dialogContainer.height > 0 ? undefined : parent.bottom
+                        verticalCenter: dialogContainer.height > 0 ? dialogContainer.top : undefined
+                        horizontalCenter: zoomToPositionButton.horizontalCenter
+                        margins: 0.01 * root.width
+                        bottomMargin: 25
+                    }
+
+                    onClicked: {
+                        if (itemStack.state === "routing") {
+                            itemStack.state = "navigation"
+                        } else if (itemStack.state === "place") {
+                            placemarkDialog.addToRoute()
+                        } else {
+                            itemStack.state = "routing"
+                        }
+                    }
+                    iconSource: "qrc:///directions.png";
+
+                    states: [
+                        State {
+                            name: ""
+                            AnchorChanges { target: routeEditorButton; anchors.bottom: parent.bottom; anchors.verticalCenter: undefined; }
+                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///directions.png"; highlight: false }
+                        },
+                        State {
+                            name: "routingAction"
+                            when: itemStack.state == "routing"
+                            AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
+                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///navigation.png"; highlight: true }
+                        },
+                        State {
+                            name: "placeAction"
+                            when: itemStack.state == "place"
+                            AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
+                            PropertyChanges { target: routeEditorButton; iconSource: routeEditor.currentProfileIcon; highlight: true; }
+                        }
+                    ]
+                }
+
+                PositionMarker {
+                    id: positionMarker
+                    posX: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.x : 0
+                    posY: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.y : 0
+                    angle: marbleMaps.angle
+                    visible: navigationManager.visible
+                }
+
+                BorderImage {
+                    anchors.fill: dialogContainer
+                    anchors.margins: -14
+                    border { top: 14; left: 14; right: 14; bottom: 14 }
+                    source: "qrc:///border_shadow.png"
+                }
             }
         }
 
@@ -272,6 +303,7 @@ ApplicationWindow {
                 PropertyChanges { target: search; visible: true }
                 PropertyChanges { target: placemarkDialog; visible: false }
                 PropertyChanges { target: routeEditor; visible: false }
+                PropertyChanges { target: navigationManager; guidanceMode: false }
                 StateChangeScript { script: itemStack.pop(mapItem); }
             },
             State {
@@ -279,6 +311,7 @@ ApplicationWindow {
                 PropertyChanges { target: search; visible: true }
                 PropertyChanges { target: placemarkDialog; visible: true }
                 PropertyChanges { target: routeEditor; visible: false }
+                PropertyChanges { target: navigationManager; guidanceMode: false }
                 StateChangeScript { script: itemStack.pop(mapItem); }
             },
             State {
@@ -286,6 +319,7 @@ ApplicationWindow {
                 PropertyChanges { target: search; visible: true }
                 PropertyChanges { target: placemarkDialog; visible: false }
                 PropertyChanges { target: routeEditor; visible: true }
+                PropertyChanges { target: navigationManager; guidanceMode: false }
                 StateChangeScript { script: itemStack.pop(mapItem); }
             },
             State {
@@ -293,6 +327,7 @@ ApplicationWindow {
                 PropertyChanges { target: search; visible: false }
                 PropertyChanges { target: placemarkDialog; visible: false }
                 PropertyChanges { target: routeEditor; visible: false }
+                PropertyChanges { target: navigationManager; guidanceMode: true }
                 StateChangeScript { script: itemStack.push(navigationManager); }
             },
             State {

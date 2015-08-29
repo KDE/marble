@@ -22,6 +22,11 @@ Item {
 
     height: placemark === null ? 0 : Screen.pixelDensity * 4 + Math.max(infoLayout.height, actionsLayout.height)
 
+    function addToRoute() {
+        viaGroup.current.execute()
+        itemStack.state = "routing"
+    }
+
     SystemPalette {
         id: palette
         colorGroup: SystemPalette.Active
@@ -49,7 +54,7 @@ Item {
             wrapMode: Text.WordWrap
             elide: Text.ElideRight
             maximumLineCount: 2
-            font.pointSize: 18
+            font.pointSize: 20
         }
 
         Text {
@@ -65,11 +70,18 @@ Item {
 
     Column {
         id: actionsLayout
+        width: rowLayout.width
+        height: spacer.height + rowLayout.height
         spacing: Screen.pixelDensity * 2
         anchors {
-            top: parent.top
             right: parent.right
             margins: Screen.pixelDensity * 2
+        }
+
+        Item {
+            id: spacer
+            height: Screen.pixelDensity * 8
+            width: 1
         }
 
         Row {
@@ -86,7 +98,6 @@ Item {
                 visible: routing.routeRequestModel.count === 0
                 exclusiveGroup: viaGroup
                 imageSource: "qrc:///ic_place_departure.png"
-                property string actionText: qsTr("Route from here")
                 function execute() {
                     routing.addViaByPlacemarkAtIndex(0, placemark)
                 }
@@ -95,7 +106,6 @@ Item {
                 anchors.margins: 0
                 exclusiveGroup: viaGroup
                 imageSource: "qrc:///ic_place_via.png"
-                property string actionText: qsTr("Route via here")
                 function execute() {
                     ensureRouteHasDeparture()
                     routing.addViaByPlacemark(placemark)
@@ -105,22 +115,11 @@ Item {
                 anchors.margins: 0
                 checked: true
                 exclusiveGroup: viaGroup
-                property string actionText: qsTr("Route to here")
                 imageSource: "qrc:///ic_place_arrival.png"
                 function execute() {
                     ensureRouteHasDeparture()
                     routing.addViaByPlacemarkAtIndex(routing.waypointCount(), placemark)
                 }
-            }
-        }
-
-        Button {
-            id: routeButton
-            text: viaGroup.current.actionText
-            anchors.right: parent.right
-            onClicked: {
-                viaGroup.current.execute()
-                itemStack.state = "routing"
             }
         }
     }

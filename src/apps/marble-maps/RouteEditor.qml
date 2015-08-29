@@ -21,6 +21,7 @@ Item {
 
     property var routingManager: null
     property alias routingProfile: profileSelector.selectedProfile
+    property alias currentProfileIcon: profileSelector.profileIcon
     property alias currentIndex: waypointList.currentIndex
 
     height: visible ? Screen.pixelDensity * 4 + column.height : 0
@@ -43,6 +44,20 @@ Item {
             left: parent.left
             right: parent.right
             margins: Screen.pixelDensity * 2
+        }
+
+        Item {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+
+            height: profileSelector.height
+
+            ProfileSelectorMenu {
+                id: profileSelector
+                anchors.left: parent.left
+            }
         }
 
         ListView {
@@ -131,32 +146,6 @@ Item {
                             waypointList.currentIndex--;
                         }
                     }
-                }
-            }
-        }
-
-        Item {
-
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-
-            height: Math.max(profileSelector.height, navigationButton.height)
-
-            ProfileSelectorMenu {
-                id: profileSelector
-                anchors.left: parent.left
-            }
-
-
-            Button {
-                id: navigationButton
-                anchors.right: parent.right
-                text: qsTr("Start Navigation")
-                onClicked: {
-                    navigationManager.marbleItem = marbleMaps;
-                    itemStack.state = "navigation"
                 }
             }
         }

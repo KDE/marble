@@ -18,9 +18,22 @@ import org.kde.edu.marble 0.20
 
 Item {
     id: root
-    property alias marbleItem: navigation.marbleQuickItem
+    property var marbleItem: null
     property var tts: null
     property var snappedPositionMarkerScreenPosition: null
+    property bool guidanceMode: false
+
+    onGuidanceModeChanged: {
+        if (guidanceMode && marbleItem) {
+            navigation.marbleQuickItem = marbleItem;
+            marbleItem.setZoomToMaximumLevel();
+            marbleItem.centerOnCurrentPosition();
+        } else {
+            navigation.marbleQuickItem = null
+        }
+
+        navigation.guidanceModeEnabled = guidanceMode;
+    }
 
     Audio {
         id: audioPlayer
@@ -57,7 +70,7 @@ Item {
         id: speed
         color: palette.window
         textColor: palette.text
-        text: qsTr("%1 km/h".arg((marbleItem ? marbleItem.speed * 3.6 : 0).toFixed(0)))
+        text: qsTr("%1 km/h".arg((navigation.marbleQuickItem ? navigation.marbleQuickItem.speed * 3.6 : 0).toFixed(0)))
 
         anchors {
             bottom: totalDistance.top
@@ -68,15 +81,8 @@ Item {
 
     Navigation {
         id: navigation
+        soundEnabled: false
 
-        onMarbleQuickItemChanged: {
-            if (marbleQuickItem) {
-                marbleQuickItem.setZoomToMaximumLevel();
-                marbleQuickItem.centerOnCurrentPosition();
-                guidanceModeEnabled = true;
-                soundEnabled = false;
-            }
-        }
         onVoiceNavigationAnnouncementChanged: {
             if (!parent.visible) {
                 return "";
@@ -142,7 +148,7 @@ Item {
 
     function updateItem()
     {
-        if (marbleItem) {
+        if (navigation.marbleQuickItem) {
             root.snappedPositionMarkerScreenPosition = navigation.positionOnRoute();
         }
         else

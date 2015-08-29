@@ -32,7 +32,7 @@ RadioButton {
             Image {
                 anchors.centerIn: parent
                 id: image
-                width: Screen.pixelDensity * 6
+                width: Screen.pixelDensity * 5
                 height: width
                 fillMode: Image.PreserveAspectFit
                 source: root.imageSource
