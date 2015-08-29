@@ -59,7 +59,6 @@ Item {
         }
         visible: false
         onItemSelected: {
-            searchField.query = name;
             backend.setSelectedPlacemark(index);
             root.itemSelected();
             searchResults.visible = false;
