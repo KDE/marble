@@ -20,7 +20,7 @@
 #include <QNetworkRequest>
 
 class QNetworkReply;
-class QDomNodeList;
+class QDomNode;
 
 namespace Marble
 {
@@ -47,7 +47,7 @@ private Q_SLOTS:
     void startReverseGeocoding();
 
 private:
-    static void addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData );
+    static GeoDataExtendedData extractChildren(const QDomNode &node);
 
     QNetworkAccessManager m_manager;
 

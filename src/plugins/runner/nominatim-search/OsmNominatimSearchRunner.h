@@ -21,6 +21,7 @@
 
 class QNetworkReply;
 class QDomNodeList;
+class QDomNode;
 
 namespace Marble
 {
@@ -45,8 +46,9 @@ private Q_SLOTS:
     void startSearch();
 
 private:
-    QNetworkAccessManager m_manager;
+    static GeoDataExtendedData extractChildren(const QDomNode &node);
 
+    QNetworkAccessManager m_manager;
     QNetworkRequest m_request;
 };
 

@@ -107,19 +107,9 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         placemark.setAddress( address );
         placemark.setCoordinate( m_coordinates );
 
-        QDomNodeList details = root.elementsByTagName( "addressparts" );
-        if ( details.size() == 1 ) {
-            GeoDataExtendedData extendedData;
-            addData( details, "road", &extendedData );
-            addData( details, "house_number", &extendedData );
-            addData( details, "village", &extendedData );
-            addData( details, "city", &extendedData );
-            addData( details, "county", &extendedData );
-            addData( details, "state", &extendedData );
-            addData( details, "postcode", &extendedData );
-            addData( details, "country", &extendedData );
-            placemark.setExtendedData( extendedData );
-        }
+        QDomNode details = root.firstChildElement( "addressparts" );
+        GeoDataExtendedData extendedData = extractChildren( details );
+        placemark.setExtendedData( extendedData );
 
         emit reverseGeocodingFinished( m_coordinates, placemark );
     } else {
@@ -127,13 +117,15 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
     }
 }
 
-void OsmNominatimRunner::addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData )
+GeoDataExtendedData OsmNominatimRunner::extractChildren(const QDomNode &node)
 {
-    QDomNodeList child = node.item( 0 ).toElement().elementsByTagName( key );
-    if ( child.size() > 0 ) {
-        QString text = child.item( 0 ).toElement().text();
-        extendedData->addValue( GeoDataData( key, text ) );
+    GeoDataExtendedData data;
+    QDomNodeList nodes = node.childNodes();
+    for (int i=0, n=nodes.length(); i<n; ++i) {
+        QDomNode child = nodes.item(i);
+        data.addValue( GeoDataData( child.nodeName(), child.toElement().text() ) );
     }
+    return data;
 }
 
 } // namespace Marble

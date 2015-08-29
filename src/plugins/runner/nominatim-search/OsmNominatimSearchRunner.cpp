@@ -90,6 +90,17 @@ void OsmNominatimRunner::startSearch()
             this, SLOT(returnNoResults()));
 }
 
+GeoDataExtendedData OsmNominatimRunner::extractChildren(const QDomNode &node)
+{
+    GeoDataExtendedData data;
+    QDomNodeList nodes = node.childNodes();
+    for (int i=0, n=nodes.length(); i<n; ++i) {
+        QDomNode child = nodes.item(i);
+        data.addValue( GeoDataData( child.nodeName(), child.toElement().text() ) );
+    }
+    return data;
+}
+
 
 void OsmNominatimRunner::handleResult( QNetworkReply* reply )
 {   
@@ -112,8 +123,13 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         QString key = attributes.namedItem("class").nodeValue();
         QString value = attributes.namedItem("type").nodeValue();
 
+        GeoDataExtendedData placemarkData = extractChildren(place);
+        placemarkData.addValue( GeoDataData( "class", key ) );
+        placemarkData.addValue( GeoDataData( "type", value ) );
+
         QString name = place.firstChildElement(value).text();
         QString road = place.firstChildElement("road").text();
+        placemarkData.addValue( GeoDataData( "name", name ) );
 
         QString city = place.firstChildElement("city").text();
         if( city.isEmpty() ) {
@@ -182,6 +198,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             placemark->setCoordinate( lon.toDouble(), lat.toDouble(), 0, GeoDataCoordinates::Degree );
             GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::OsmVisualCategory( key + '=' + value );
             placemark->setVisualCategory( category );
+            placemark->setExtendedData(placemarkData);
             placemarks << placemark;
         }
     }
