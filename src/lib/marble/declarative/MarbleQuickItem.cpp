@@ -155,9 +155,10 @@ namespace Marble
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
       ,d(new MarbleQuickItemPrivate(this))
     {
-        QStringList const whitelist = QStringList() << "license";
         foreach (AbstractFloatItem *item, d->map()->floatItems()) {
-            if ( !whitelist.contains( item->nameId() ) ) {
+            if (item->nameId() == "license") {
+                item->setPosition(QPointF(5.0, -10.0));
+            } else {
                 item->hide();
             }
         }
