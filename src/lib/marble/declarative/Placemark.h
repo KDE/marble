@@ -54,8 +54,8 @@ Q_SIGNALS:
 
 private:
     Marble::GeoDataPlacemark m_placemark;
-
     Coordinate m_coordinate;
+    mutable QString m_address; // mutable to allow lazy calculation in the getter
 };
 
 QML_DECLARE_TYPE( Placemark )
