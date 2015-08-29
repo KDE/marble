@@ -189,7 +189,6 @@ ApplicationWindow {
                             bottom: parent.bottom
                         }
                         visible: false
-                        routingManager: routing
                     }
 
                     PlacemarkDialog {

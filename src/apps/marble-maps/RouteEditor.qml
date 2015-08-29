@@ -19,7 +19,6 @@ import org.kde.edu.marble 0.20
 Item {
     id: root
 
-    property var routingManager: null
     property alias routingProfile: profileSelector.selectedProfile
     property alias currentProfileIcon: profileSelector.profileIcon
     property alias currentIndex: waypointList.currentIndex
@@ -69,6 +68,7 @@ Item {
 
             height: Math.min(0.4 * Screen.height, contentHeight)
             clip: true
+            model: routing.routeRequestModel
 
             delegate: Rectangle {
                 width: parent.width
@@ -115,11 +115,10 @@ Item {
                     ImageButton {
                         id: upButton
                         anchors.verticalCenter: parent.verticalCenter
-                        visible: index === waypointList.currentIndex
+                        visible: index > 0 && index === waypointList.currentIndex
                         imageSource: "qrc:///up.png"
-                        enabled: index > 0
                         onClicked: {
-                            routingManager.swapVias(index, index-1);
+                            routing.swapVias(index, index-1);
                             waypointList.currentIndex--;
                         }
                     }
@@ -127,11 +126,10 @@ Item {
                     ImageButton {
                         id: downButton
                         anchors.verticalCenter: parent.verticalCenter
-                        visible: index === waypointList.currentIndex
+                        visible: index+1 < routing.routeRequestModel.count && index === waypointList.currentIndex
                         imageSource: "qrc:///down.png"
-                        enabled: index+1 < routingManager.waypointCount()
                         onClicked: {
-                            routingManager.swapVias(index, index+1);
+                            routing.swapVias(index, index+1);
                             waypointList.currentIndex++;
                         }
                     }
@@ -142,14 +140,12 @@ Item {
                         visible: index === waypointList.currentIndex
                         imageSource: "qrc:///delete.png"
                         onClicked: {
-                            routingManager.removeVia(index);
-                            waypointList.currentIndex--;
+                            routing.removeVia(index);
+                            waypointList.currentIndex = Math.max(0, waypointList.currentIndex-1);
                         }
                     }
                 }
             }
         }
     }
-
-    onRoutingManagerChanged: {waypointList.model = routing.routeRequestModel;}
 }
