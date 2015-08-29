@@ -327,7 +327,7 @@ void Routing::addVia( qreal lon, qreal lat )
 {
     if ( d->m_marbleMap ) {
         Marble::RouteRequest* request = d->m_marbleMap->model()->routingManager()->routeRequest();
-        request->append( Marble::GeoDataCoordinates( lon, lat, 0.0, Marble::GeoDataCoordinates::Degree ) );
+        request->addVia( Marble::GeoDataCoordinates( lon, lat, 0.0, Marble::GeoDataCoordinates::Degree ) );
         updateRoute();
     }
 }
@@ -355,7 +355,7 @@ void Routing::addViaByPlacemark(Placemark *placemark)
 {
     if ( d->m_marbleMap ) {
         Marble::RouteRequest * request = d->m_marbleMap->model()->routingManager()->routeRequest();
-        request->append(placemark->coordinate()->coordinates(), placemark->name());
+        request->addVia(placemark->placemark());
         updateRoute();
     }
 }

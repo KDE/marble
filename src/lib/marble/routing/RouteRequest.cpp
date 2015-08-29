@@ -257,9 +257,14 @@ void RouteRequest::remove( int index )
 
 void RouteRequest::addVia( const GeoDataCoordinates &position )
 {
-    int index = d->viaIndex( position );
     GeoDataPlacemark placemark;
     placemark.setCoordinate( position );
+    addVia(placemark);
+}
+
+void RouteRequest::addVia(const GeoDataPlacemark &placemark)
+{
+    int index = d->viaIndex( placemark.coordinate() );
     d->m_route.insert( index, placemark );
     emit positionAdded( index );
 }

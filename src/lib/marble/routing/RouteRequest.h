@@ -84,6 +84,7 @@ public:
       * @todo: Minimizing the distance might not always be what the user wants
       */
     void addVia( const GeoDataCoordinates &position );
+    void addVia( const GeoDataPlacemark &placemark );
 
     /** Returns a pixmap which indicates the position of the element */
     QPixmap pixmap( int index, int size=-1, int margin=2 ) const;
