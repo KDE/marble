@@ -18,6 +18,7 @@ Item {
 
     readonly property int diameter: Screen.pixelDensity * 9
     property alias iconSource: icon.source
+    property bool highlight: false
 
     signal clicked()
 
@@ -26,6 +27,10 @@ Item {
         width: root.diameter
         height: root.diameter
         radius: root.diameter / 2
+
+        property color idleColor: root.highlight ? palette.highlight : palette.button
+        property color activeColor: root.highlight ? palette.button : palette.highlight
+        color: touchHandler.pressed ? activeColor : idleColor
 
         anchors {
             horizontalCenter: root.horizontalCenter
@@ -54,7 +59,6 @@ Item {
             id: touchHandler
             anchors.fill: parent
             onClicked: root.clicked()
-            onPressedChanged: {button.color = pressed ? palette.highlight : palette.button;}
         }
 
         border {
@@ -66,8 +70,6 @@ Item {
             id: palette
             colorGroup: SystemPalette.Active
         }
-
-        color: palette.button
     }
 
     width: diameter
