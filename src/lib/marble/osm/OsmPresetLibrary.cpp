@@ -28,7 +28,7 @@ QList<OsmPresetLibrary::OsmTag> OsmPresetLibrary::s_additionalOsmTags;
 void OsmPresetLibrary::initializeOsmVisualCategories()
 {
     // Only initialize the map once
-    if( !s_additionalOsmTags.isEmpty() ) {
+    if( !s_visualCategories.isEmpty() ) {
         return;
     }
 
