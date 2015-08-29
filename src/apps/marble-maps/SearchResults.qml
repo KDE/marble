@@ -11,18 +11,17 @@
 
 import QtQuick 2.3
 import QtQuick.Controls 1.3
+import QtQuick.Window 2.2
 
 Item {
     id: root
 
     property var model: []
-
-    property color background: palette.window
-
+    property color background: palette.base
     property alias count: view.count
-
     property int delegateHeight: 0
 
+    height: Math.min(0.4 * Screen.height, view.contentHeight)
     signal itemSelected(int index, string name)
 
     SystemPalette{
@@ -39,6 +38,7 @@ Item {
     ListView {
         id: view
         anchors.fill: parent
+        clip: true
         snapMode: ListView.SnapToItem
         model: root.model
         delegate: Item {

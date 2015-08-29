@@ -27,7 +27,6 @@ Item {
     onVisibleChanged: {
         if( !visible ) {
             searchResults.visible = false;
-            background.visible = false;
             searchField.query = "";
         }
     }
@@ -37,32 +36,18 @@ Item {
         colorGroup: SystemPalette.Active
     }
 
-    Rectangle {
-        id: background
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-        visible: false
-        color: palette.window
-    }
-
     SearchResults {
         id: searchResults
         anchors {
             top: searchField.bottom
-            bottom: parent.bottom
             left: searchField.left
-            right: parent.right
         }
+        width: searchField.width
         visible: false
         onItemSelected: {
             backend.setSelectedPlacemark(index);
             root.itemSelected();
             searchResults.visible = false;
-            background.visible = false;
             searchField.focus = true;
             if (routingManager) {
                 routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
@@ -87,7 +72,6 @@ Item {
         onSearchResultChanged: {
             searchResults.model = model;
             searchResults.visible = true;
-            background.visible = true;
             searchField.focus = true;
         }
         onSearchFinished: searchField.busy = false
