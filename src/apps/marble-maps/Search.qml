@@ -79,7 +79,9 @@ Item {
 
     SearchField {
         id: searchField
-        width: Math.min(700, root.width - 6 * Screen.pixelDensity)
+        width: parent.width - 2 * anchors.margins <= Screen.pixelDensity * 70 ?
+                   parent.width - 2 * anchors.margins
+                 : Screen.pixelDensity * 50
         anchors {
             top: parent.top
             left: parent.left
