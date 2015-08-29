@@ -24,6 +24,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
 {
     m_placemark = placemark;
     m_coordinate.setCoordinates( placemark.coordinate() );
+    m_address = QString();
     emit coordinateChanged();
     emit nameChanged();
     emit addressChanged();
