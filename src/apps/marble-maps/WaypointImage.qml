@@ -58,10 +58,9 @@ Item {
                 name: "searchResult"
                 PropertyChanges {
                     target: image
-                    source: "qrc:///ic_place_unknown.png"
+                    source: "qrc:///ic_place.png"
                 }
             }
-
         ]
 
         MouseArea {

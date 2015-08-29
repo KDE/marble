@@ -21,6 +21,9 @@ Item {
 
     property var routingManager: null
     property alias routingProfile: profileSelector.selectedProfile
+    property alias currentIndex: waypointList.currentIndex
+
+    height: visible ? Screen.pixelDensity * 4 + column.height : 0
 
     SystemPalette{
         id: palette
@@ -28,133 +31,136 @@ Item {
     }
 
     Rectangle {
-        id: background
         anchors.fill: parent
         color: palette.base
     }
 
-    ProfileSelectorMenu {
-        id: profileSelector
+    Column {
+        id: column
+        spacing: Screen.pixelDensity * 2
         anchors {
             top: parent.top
             left: parent.left
             right: parent.right
             margins: Screen.pixelDensity * 2
         }
-    }
 
-    ListView {
-        id: waypointList
-        anchors {
-            top: profileSelector.bottom
-            left: parent.left
-            right: parent.right
-            bottom: navigationControls.top
-            margins: Screen.pixelDensity * 2
+        ListView {
+            id: waypointList
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+
+            height: Math.min(0.4 * Screen.height, contentHeight)
+            clip: true
+
+            delegate: Rectangle {
+                width: parent.width
+                height: Screen.pixelDensity * 2 + Math.max(text.height, image.height)
+                color: touchArea.pressed || waypointList.currentIndex === index ? palette.highlight : palette.base
+
+                WaypointImage {
+                    id: image
+                    anchors {
+                        left: parent.left
+                        verticalCenter: parent.verticalCenter
+                    }
+
+                    type: index === 0 ? "departure" : (index === waypointList.count-1 ? "destination" : "waypoint")
+                }
+
+                Text {
+                    id: text
+                    anchors {
+                        left: image.right
+                        right: buttonsRow.left
+                        leftMargin: parent.width * 0.05
+                        verticalCenter: parent.verticalCenter
+                    }
+                    elide: Text.ElideMiddle
+                    text: name
+                    font.pointSize: 18
+                    color: palette.text
+                }
+
+                MouseArea {
+                    id: touchArea
+                    anchors.fill: parent
+                    onClicked: {
+                        waypointList.currentIndex = index === waypointList.currentIndex ? -1 : index;
+                    }
+                }
+
+                Row {
+                    id: buttonsRow
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    ImageButton {
+                        id: upButton
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: index === waypointList.currentIndex
+                        imageSource: "qrc:///up.png"
+                        enabled: index > 0
+                        onClicked: {
+                            routingManager.swapVias(index, index-1);
+                            waypointList.currentIndex--;
+                        }
+                    }
+
+                    ImageButton {
+                        id: downButton
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: index === waypointList.currentIndex
+                        imageSource: "qrc:///down.png"
+                        enabled: index+1 < routingManager.waypointCount()
+                        onClicked: {
+                            routingManager.swapVias(index, index+1);
+                            waypointList.currentIndex++;
+                        }
+                    }
+
+                    ImageButton {
+                        id: deleteButton
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: index === waypointList.currentIndex
+                        imageSource: "qrc:///delete.png"
+                        onClicked: {
+                            routingManager.removeVia(index);
+                            waypointList.currentIndex--;
+                        }
+                    }
+                }
+            }
         }
 
-        delegate: Rectangle {
-            width: parent.width
-            height: Screen.pixelDensity * 2 + Math.max(text.height, image.height)
-            color: touchArea.pressed || waypointList.currentIndex === index ? palette.highlight : palette.base
+        Item {
 
-            WaypointImage {
-                id: image
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    left: parent.left
-                }
-
-                type: index === 0 ? "departure" : (index === waypointList.count-1 ? "destination" : "waypoint")
+            anchors {
+                left: parent.left
+                right: parent.right
             }
 
-            Text {
-                id: text
-                anchors {
-                    left: image.right
-                    right: parent.right
-                    verticalCenter: parent.verticalCenter
-                    leftMargin: parent.width * 0.05
-                }
-                wrapMode: Text.Wrap
-                text: name
-                font.pointSize: 18
-                color: palette.text
+            height: Math.max(profileSelector.height, navigationButton.height)
+
+            ProfileSelectorMenu {
+                id: profileSelector
+                anchors.left: parent.left
             }
 
-            MouseArea {
-                id: touchArea
-                anchors.fill: parent
-                onClicked: {
-                    waypointList.currentIndex = index;
-                }
-            }
 
-            ImageButton {
-                anchors.right: upButton.left
-                anchors.verticalCenter: parent.verticalCenter
-                visible: index === waypointList.currentIndex
-                imageSource: "qrc:///up.png"
-                enabled: index > 0
-                onClicked: {
-                    routingManager.swapVias(index, index-1);
-                    waypointList.currentIndex--;
-                }
-            }
-
-            ImageButton {
-                id: upButton
-                anchors.right: deleteButton.left
-                anchors.rightMargin: Screen.pixelDensity * 4
-                anchors.verticalCenter: parent.verticalCenter
-                visible: index === waypointList.currentIndex
-                imageSource: "qrc:///down.png"
-                enabled: index+1 < routingManager.waypointCount()
-                onClicked: {
-                    routingManager.swapVias(index, index+1);
-                    waypointList.currentIndex++;
-                }
-            }
-
-            ImageButton {
-                id: deleteButton
+            Button {
+                id: navigationButton
                 anchors.right: parent.right
-                anchors.rightMargin: Screen.pixelDensity * 1
-                anchors.verticalCenter: parent.verticalCenter
-                visible: index === waypointList.currentIndex
-                imageSource: "qrc:///delete.png"
+                text: qsTr("Start Navigation")
                 onClicked: {
-                    routingManager.removeVia(index);
-                    waypointList.currentIndex--;
+                    navigationManager.marbleItem = marbleMaps;
+                    itemStack.state = "navigation"
                 }
-            }
-        }
-    }
-
-    Item {
-        id: navigationControls
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-            margins: Screen.pixelDensity * 2
-        }
-        height: navigationButton.height
-
-        Button {
-            id: navigationButton
-            text: "Start Navigation"
-            onClicked: {
-                itemStack.pop();
-                navigationManager.marbleItem = marbleMaps;
-                itemStack.push(navigationManager);
             }
         }
     }
 
     onRoutingManagerChanged: {waypointList.model = routing.routeRequestModel;}
-
-    Keys.onBackPressed: {
-        event.accepted = itemStack.pop();
-    }
 }

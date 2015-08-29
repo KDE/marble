@@ -20,15 +20,8 @@ Item {
     property alias type: image.type
     property int xPos: 0
     property int yPos: 0
-    property alias menuObjectsCount: menu.menuObjectsCount
-    property alias showAsDestination: menu.showAsDestination
-    property alias showAsDeparture: menu.showAsDeparture
-    property alias showAsWaypoint: menu.showAsWaypoint
-    property alias showAsPlacemark: menu.showAsPlacemark
+    property var placemark: null
     property int index: -1
-
-    signal clicked(var index, var type)
-    signal menuItemSelected(var index, var type, var selection)
 
     width: Screen.pixelDensity * 15
     height: width
@@ -38,11 +31,17 @@ Item {
     WaypointImage {
         id: image
         onClicked: {
-            if (menu.visible) {
-                menu.visible = false;
-            }
-            else {
-                openMenu();
+            if (type == "searchResult") {
+                if (placemarkDialog.placemark === placemark) {
+                    placemarkDialog.placemark = null
+                    itemStack.state = ""
+                } else {
+                    placemarkDialog.placemark = placemark
+                    itemStack.state = "place"
+                }
+            } else {
+                routeEditor.currentIndex = index
+                itemStack.state = "routing"
             }
         }
         anchors {
@@ -52,73 +51,5 @@ Item {
 
         x: 0.5 * parent.width - 0.5 * width
         y: 0.5 * parent.height - height
-    }
-
-    CircularMenu {
-        id: menu
-        visible: false
-        anchors {
-            centerIn: parent
-        }
-        onSelected: {
-            menuItemSelected(index, image.type, newType);
-            visible = false;
-        }
-    }
-
-    function openMenu()
-    {
-        menuObjectsCount = 4;
-        if (type == "searchResult") {
-            showAsPlacemark = false;
-            if (waypointCount() < 2) {
-                showAsWaypoint = false;
-                menuObjectsCount--;
-            }
-            else {
-                showAsWaypoint = true;
-            }
-            showAsDestination = true;
-            showAsDeparture = true;
-        }
-        else {
-            if (type == "destination") {
-                showAsDestination = false;
-                showAsDeparture = true;
-                if (waypointCount() < 3) {
-                    showAsWaypoint = false;
-                    menuObjectsCount--;
-                }
-                else {
-                    showAsWaypoint = true;
-                }
-                showAsPlacemark = true;
-            }
-            else if (type == "departure") {
-                showAsDestination = true;
-                showAsDeparture = false;
-                if (waypointCount() < 3) {
-                    showAsWaypoint = false;
-                    menuObjectsCount--;
-                }
-                else {
-                    showAsWaypoint = true;
-                }
-                showAsPlacemark = true;
-            }
-            else if (type == "waypoint") {
-                showAsDestination = true;
-                showAsDeparture = true;
-                showAsWaypoint = false;
-                showAsPlacemark = true;
-            }
-        }
-        menu.organizeMenu();
-        menu.visible = true;
-    }
-
-    function closeMenu()
-    {
-        menu.visible = false;
     }
 }

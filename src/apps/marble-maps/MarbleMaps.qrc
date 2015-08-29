@@ -12,18 +12,19 @@
         <file>ImageButton.qml</file>
         <file>WaypointImage.qml</file>
         <file>RoutingManager.qml</file>
+        <file>PlacemarkDialog.qml</file>
         <file>ProfileSelectorMenu.qml</file>
         <file>FloatingMenuButton.qml</file>
         <file>RouteEditor.qml</file>
         <file>NavigationInfoBar.qml</file>
         <file>NavigationManager.qml</file>
         <file>PositionMarker.qml</file>
-        <file>CircularMenu.qml</file>
         <file>Waypoint.qml</file>
         <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
         <file alias="gps_fixed.png">../../../data/android/drawable-xxxhdpi/gps_fixed.png</file>
         <file alias="gps_not_fixed.png">../../../data/android/drawable-xxxhdpi/gps_not_fixed.png</file>
         <file alias="backdrop.png">../../../data/android/drawable-xxxhdpi/backdrop.png</file>
+        <file alias="border_shadow.png">../../../data/android/drawable-xxxhdpi/border_shadow.png</file>
         <file alias="navigation.png">../../../data/android/drawable-xxxhdpi/navigation.png</file>
         <file alias="car.png">../../../data/android/drawable-xxxhdpi/car.png</file>
         <file alias="bike.png">../../../data/android/drawable-xxxhdpi/bike.png</file>
@@ -38,6 +39,7 @@
         <file alias="busy_indicator.png">../../../data/android/drawable-xxxhdpi/busy_indicator.png</file>
         <file alias="navigation_blue.png">../../../data/android/drawable-xxxhdpi/navigation_blue.png</file>
         <file alias="circular_menu_backdrop.png">../../../data/android/drawable-xxxhdpi/circular_menu_backdrop.png</file>
+        <file alias="ic_place.png">../../../data/android/drawable-xxxhdpi/ic_place.png</file>
         <file alias="ic_place_arrival.png">../../../data/android/drawable-xxxhdpi/ic_place_arrival.png</file>
         <file alias="ic_place_departure.png">../../../data/android/drawable-xxxhdpi/ic_place_departure.png</file>
         <file alias="ic_place_unknown.png">../../../data/android/drawable-xxxhdpi/ic_place_unknown.png</file>

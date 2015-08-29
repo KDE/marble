@@ -18,9 +18,11 @@ Item {
     id: root
 
     property string selectedProfile: qsTr("Car (fastest)")
-    height: profileGroup.current.height
+    height: rowLayout.height
+    width: rowLayout.width
 
     RowLayout {
+        id: rowLayout
         ExclusiveGroup {
             id: profileGroup
             onCurrentChanged: {

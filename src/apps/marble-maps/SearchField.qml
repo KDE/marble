@@ -98,6 +98,8 @@ Item {
                 onClicked: {
                     field.text = ""
                     field.focus = true
+                    placemarkDialog.placemark = null
+                    itemStack.state = ""
                 }
             }
         }

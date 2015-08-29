@@ -68,7 +68,10 @@ Item {
             if (routingManager) {
                 routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
             }
+            placemarkDialog.placemark = backend.selectedPlacemark;
+            itemStack.state = "place"
         }
+
         MouseArea{
             anchors.fill: parent
             propagateComposedEvents: true

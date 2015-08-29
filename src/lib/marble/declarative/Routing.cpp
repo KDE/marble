@@ -129,7 +129,6 @@ void Routing::updateWaypointItems()
             if ( item ) {
                 item->setParentItem( this );
                 item->setProperty("index", i);
-                connect(item, SIGNAL(menuItemSelected(QVariant, QVariant, QVariant)), this, SLOT(handleSelectedMenuOption(QVariant, QVariant, QVariant)));
                 d->m_waypointItems[i] = item;
             } else {
                 delete component;
@@ -193,13 +192,6 @@ int Routing::addSearchResultPlacemark(Placemark *placemark)
     return d->m_searchResultPlacemarks.size()-1;
 }
 
-void Routing::showMenuOfSearchResult(int index)
-{
-    if (d->m_searchResultItems.contains(index)) {
-        QMetaObject::invokeMethod(d->m_searchResultItems[index], "openMenu");
-    }
-}
-
 void Routing::updateSearchResultPlacemarks()
 {
     for (int i = d->m_searchResultItems.keys().size(); i < d->m_searchResultPlacemarks.size(); i++ ) {
@@ -210,7 +202,7 @@ void Routing::updateSearchResultPlacemarks()
             item->setParentItem( this );
             item->setProperty("index", i);
             item->setProperty("type", QVariant::fromValue(QString("searchResult")));
-            connect(item, SIGNAL(menuItemSelected(QVariant, QVariant, QVariant)), this, SLOT(handleSelectedMenuOption(QVariant, QVariant, QVariant)));
+            item->setProperty("placemark", QVariant::fromValue(d->m_searchResultPlacemarks[i]));
             d->m_searchResultItems[i] = item;
         } else {
             delete component;
@@ -239,78 +231,6 @@ void Routing::updateSearchResultPlacemarks()
                 item->setProperty("yPos", QVariant::fromValue(y));
             }
         }
-    }
-}
-
-void Routing::handleSelectedMenuOption(const QVariant &index, const QVariant &type, const QVariant &selected)
-{
-    int convertedIndex = index.toInt();
-    QString convertedType = type.toString();
-
-    if (!d->m_marbleMap || convertedIndex == -1) {
-        return ;
-    }
-
-    Placemark * placemark = nullptr;
-
-    if (convertedType == "searchResult") {
-        if (d->m_searchResultItems.keys().size() > convertedIndex) {
-            QQuickItem * item = d->m_searchResultItems[convertedIndex];
-            QMetaObject::invokeMethod(item, "closeMenu");
-
-            placemark = d->m_searchResultPlacemarks[convertedIndex];
-        }
-    }
-    else {
-        if (d->m_waypointItems.keys().size() > convertedIndex) {
-            QQuickItem * item = d->m_waypointItems[convertedIndex];
-            QMetaObject::invokeMethod(item, "closeMenu");
-
-            placemark = new Placemark();
-            placemark->setName(d->m_routeRequestModel->data(d->m_routeRequestModel->index(convertedIndex), Qt::DisplayRole).toString());
-            placemark->coordinate()->setLongitude(d->m_routeRequestModel->data(d->m_routeRequestModel->index(convertedIndex), RouteRequestModel::LongitudeRole).toReal());
-            placemark->coordinate()->setLatitude(d->m_routeRequestModel->data(d->m_routeRequestModel->index(convertedIndex), RouteRequestModel::LatitudeRole).toReal());
-        }
-    }
-
-    if (placemark) {
-        QString selectedType = selected.toString();
-
-        if (convertedType != "searchResult") {
-            removeVia(convertedIndex);
-        }
-
-        if ( selectedType == "destination" ) {
-            if (d->m_routeRequestModel->rowCount() == 0) {
-                if (d->m_marbleMap->model()->positionTracking()->status() == PositionProviderStatusAvailable)
-                {
-                    addVia(d->m_marbleMap->model()->positionTracking()->currentLocation().longitude(GeoDataCoordinates::Degree),
-                       d->m_marbleMap->model()->positionTracking()->currentLocation().latitude(GeoDataCoordinates::Degree));
-                }
-            }
-            addViaByPlacemark(placemark);
-        }
-        else if ( selectedType == "departure" ) {
-            addViaByPlacemarkAtIndex(0, placemark);
-        }
-        else if ( selectedType == "waypoint" ) {
-            addViaByPlacemarkAtIndex(waypointCount() - 1, placemark);
-        }
-        else if ( selectedType == "searchResult" ) {
-            addSearchResultPlacemark(placemark);
-        }
-
-        if (convertedType == "searchResult") {
-            d->m_searchResultPlacemarks.removeAt(convertedIndex);
-        }
-
-        updateRoute();
-        updateWaypointItems();
-        updateSearchResultPlacemarks();
-    }
-
-    if (placemark && convertedType != "searchResult") {
-        delete placemark;
     }
 }
 

@@ -12,50 +12,20 @@ import QtQuick 2.3
 
 import org.kde.edu.marble 0.20
 
-Item {
+Routing {
     id: root
 
     property var marbleItem: null
-    property alias routingProfile: routing.routingProfile
-    property alias hasRoute: routing.hasRoute
-    property alias routingModel: routing.routingModel
-    property alias routeRequestModel: routing.routeRequestModel
     property var selectedPlacemark: null
 
-    Routing {
-        id: routing
-
-        anchors.fill: parent
-        marbleMap: marbleItem.marbleMap
-        waypointDelegate: Waypoint {visible: false}
-        onRoutingProfileChanged: { updateRoute(); }
-    }
-
-    function removeVia(index)
-    {
-        routing.removeVia(index);
-    }
-
-    function waypointCount()
-    {
-        return routing.waypointCount();
-    }
-
-    function swapVias(index1, index2)
-    {
-        routing.swapVias(index1, index2);
-    }
-
-    function clearRoute()
-    {
-        routing.clearRoute();
-    }
+    marbleMap: marbleItem.marbleMap
+    waypointDelegate: Waypoint {visible: false}
+    onRoutingProfileChanged: { updateRoute(); }
 
     function addSearchResultAsPlacemark(placemark)
     {
         if (marbleItem) {
-            var index = routing.addSearchResultPlacemark(placemark);
-            routing.showMenuOfSearchResult(index);
+            root.addSearchResultPlacemark(placemark);
         }
     }
 }

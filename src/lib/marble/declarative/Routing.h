@@ -100,8 +100,6 @@ public Q_SLOTS:
 
     int addSearchResultPlacemark( Placemark * placemark );
 
-    void showMenuOfSearchResult(int index);
-
 Q_SIGNALS:
     void marbleMapChanged();
 
@@ -120,9 +118,6 @@ private Q_SLOTS:
     void updateWaypointItems();
 
     void updateSearchResultPlacemarks();
-
-    void handleSelectedMenuOption(const QVariant & index, const QVariant & type, const QVariant & selected);
-
 
 private:
     RoutingPrivate* const d;    

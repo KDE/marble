@@ -65,7 +65,13 @@ ApplicationWindow {
                 MarbleMaps {
                     id: marbleMaps
 
-                    anchors.fill: parent
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        bottom: dialogContainer.top
+                    }
+
                     visible: true
                     focus: true
 
@@ -117,102 +123,197 @@ ApplicationWindow {
                         selectedPlacemark: search.searchResultPlacemark
                         routingProfile: routeEditor.routingProfile
                     }
+
+                    MouseArea{
+                        anchors.fill: parent
+                        propagateComposedEvents: true
+                        onPressed: {
+                            search.focus = true;
+                            mouse.accepted = false;
+                        }
+                    }
+
+                    Search {
+                        id: search
+                        anchors.fill: parent
+                        marbleQuickItem: marbleMaps
+                        routingManager: routing
+                        visible: !navigationManager.visible
+                    }
+
+                    PositionButton {
+                        id: zoomToPositionButton
+                        anchors {
+                            bottom: parent.bottom
+                            right: parent.right
+                            rightMargin: 0.005 * root.width
+                            bottomMargin: 25
+                        }
+
+                        iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
+
+                        onClicked: marbleMaps.centerOnCurrentPosition()
+
+                        property real distance: 0
+
+                        function updateIndicator() {
+                            var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
+                            distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
+                            angle = marbleMaps.angleFromPointToCurrentLocation(point);
+                        }
+
+                        showDirection: marbleMaps.positionAvailable && !marbleMaps.positionVisible
+                    }
+
+                    BoxedText {
+                        id: distanceIndicator
+                        text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
+                        anchors {
+                            bottom: zoomToPositionButton.top
+                            horizontalCenter: zoomToPositionButton.horizontalCenter
+                        }
+
+                        visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
+                    }
+
+                    CircularButton {
+                        id: routeEditorButton
+                        anchors {
+                            bottom: distanceIndicator.top
+                            horizontalCenter: zoomToPositionButton.horizontalCenter
+                            margins: 0.01 * root.width
+                        }
+
+                        iconSource: "qrc:///navigation.png"
+                        onClicked: itemStack.state = itemStack.state === "routing" ? "default" : "routing"
+                    }
+
+                    PositionMarker {
+                        id: positionMarker
+                        posX: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.x : 0
+                        posY: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.y : 0
+                        angle: marbleMaps.angle
+                        visible: navigationManager.visible
+                    }
+
+                    NavigationManager {
+                        id: navigationManager
+                        width: parent.width
+                        height: parent.height
+                        visible: false
+                    }
+
+                    BoxedText {
+                        id: quitHelper
+                        visible: false
+                        text: qsTr("Press again to close.")
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: Screen.pixelDensity * 5
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        onVisibleChanged: {
+                            if (visible) {
+                                quitTimer.restart()
+                            }
+                        }
+
+                        Timer {
+                            id: quitTimer
+                            interval: 3000;
+                            running: false;
+                            repeat: false
+                            onTriggered: itemStack.state = ""
+                        }
+                    }
+                }
+
+                BorderImage {
+                    anchors.fill: dialogContainer
+                    anchors.margins: -14
+                    border { top: 14; left: 14; right: 14; bottom: 14 }
+                    source: "qrc:///border_shadow.png"
+                }
+
+                Item {
+                    id: dialogContainer
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+                    height: routeEditor.visible ? routeEditor.height : (placemarkDialog.visible ? placemarkDialog.height : 0)
+
+                    RouteEditor {
+                        id: routeEditor
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            bottom: parent.bottom
+                        }
+                        visible: false
+                        routingManager: routing
+                    }
+
+                    PlacemarkDialog {
+                        id: placemarkDialog
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            bottom: parent.bottom
+                        }
+                    }
                 }
             }
-
-            MouseArea{
-                anchors.fill: parent
-                propagateComposedEvents: true
-                onPressed: {
-                    search.focus = true;
-                    mouse.accepted = false;
-                }
-            }
         }
 
-        PositionButton {
-            id: zoomToPositionButton
-            anchors {
-                bottom: parent.bottom
-                right: parent.right
-                rightMargin: 0.005 * root.width
-                bottomMargin: 25
-            }
-
-            iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
-
-            onClicked: marbleMaps.centerOnCurrentPosition()
-
-            property real distance: 0
-
-            function updateIndicator() {
-                var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
-                distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
-                angle = marbleMaps.angleFromPointToCurrentLocation(point);
-            }
-
-            showDirection: marbleMaps.positionAvailable && !marbleMaps.positionVisible
-        }
-
-        BoxedText {
-            id: distanceIndicator
-            text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
-            anchors {
-                bottom: zoomToPositionButton.top
-                horizontalCenter: zoomToPositionButton.horizontalCenter
+        states: [
+            State {
+                name: ""
+                PropertyChanges { target: quitHelper; visible: false }
+                PropertyChanges { target: search; visible: true }
+                PropertyChanges { target: placemarkDialog; visible: false }
+                PropertyChanges { target: routeEditor; visible: false }
+                StateChangeScript { script: itemStack.pop(mapItem); }
+            },
+            State {
+                name: "place"
+                PropertyChanges { target: search; visible: true }
+                PropertyChanges { target: placemarkDialog; visible: true }
+                PropertyChanges { target: routeEditor; visible: false }
+                StateChangeScript { script: itemStack.pop(mapItem); }
+            },
+            State {
+                name: "routing"
+                PropertyChanges { target: search; visible: true }
+                PropertyChanges { target: placemarkDialog; visible: false }
+                PropertyChanges { target: routeEditor; visible: true }
+                StateChangeScript { script: itemStack.pop(mapItem); }
+            },
+            State {
+                name: "navigation"
+                PropertyChanges { target: search; visible: false }
+                PropertyChanges { target: placemarkDialog; visible: false }
+                PropertyChanges { target: routeEditor; visible: false }
+                StateChangeScript { script: itemStack.push(navigationManager); }
+            },
+            State {
+                name: "aboutToQuit"
+                PropertyChanges { target: quitHelper; visible: true }
             }
 
-            visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
-        }
-
-        CircularButton {
-            id: routeEditorButton
-            visible: routing.hasRoute && !search.searchResultsVisible
-            anchors {
-                bottom: distanceIndicator.top
-                horizontalCenter: zoomToPositionButton.horizontalCenter
-                margins: 0.01 * root.width
-            }
-
-            iconSource: "qrc:///navigation.png"
-            onClicked: {
-                if (itemStack.currentItem !== routeEditor) {
-                    itemStack.push(routeEditor);
-                }
-            }
-        }
-
-        Search {
-            id: search
-            anchors.fill: parent
-            marbleQuickItem: marbleMaps
-            routingManager: routing
-            visible: !navigationManager.visible
-        }
-
-        RouteEditor {
-            id: routeEditor
-            visible: false
-            routingManager: routing
-        }
-
-        PositionMarker {
-            id: positionMarker
-            posX: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.x : 0
-            posY: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.y : 0
-            angle: marbleMaps.angle
-            visible: navigationManager.visible
-        }
-
-        NavigationManager {
-            id: navigationManager
-            width: parent.width
-            height: parent.height
-            visible: false
-        }
+        ]
 
         Keys.onBackPressed: {
-            event.accepted = itemStack.pop();
+            if (itemStack.state === "aboutToQuit") {
+                event.accepted = false // we will quit
+            }
+            else if (itemStack.state === "") {
+                itemStack.state = "aboutToQuit"
+                event.accepted = true
+            }
+            else {
+                itemStack.state = ""
+                event.accepted = true
+            }
         }
     }
 }

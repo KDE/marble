@@ -25,9 +25,9 @@ RadioButton {
     style: RadioButtonStyle {
         indicator: Rectangle {
             color: control.checked ? palette.highlight : palette.base
-            width: image.width + Screen.pixelDensity * 2
-            height: image.height + Screen.pixelDensity * 2
-            radius: Screen.pixelDensity * 2
+            width: image.width
+            height: image.height + Screen.pixelDensity * 1
+            radius: Screen.pixelDensity * 1
 
             Image {
                 anchors.centerIn: parent
