@@ -172,6 +172,13 @@ ApplicationWindow {
                     }
                 }
 
+                BorderImage {
+                    anchors.fill: dialogContainer
+                    anchors.margins: -14
+                    border { top: 14; left: 14; right: 14; bottom: 14 }
+                    source: "qrc:///border_shadow.png"
+                }
+
                 Item {
                     id: dialogContainer
                     anchors {
@@ -284,13 +291,6 @@ ApplicationWindow {
                     posY: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.y : 0
                     angle: marbleMaps.angle
                     visible: navigationManager.visible
-                }
-
-                BorderImage {
-                    anchors.fill: dialogContainer
-                    anchors.margins: -14
-                    border { top: 14; left: 14; right: 14; bottom: 14 }
-                    source: "qrc:///border_shadow.png"
                 }
             }
         }
