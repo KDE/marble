@@ -46,6 +46,7 @@ Item {
             right: actionsLayout.left
             margins: Screen.pixelDensity * 2
         }
+        height: nameLabel.height + (addressLabel.text == "" ? 0 : addressLabel.height)
 
         Text {
             id: nameLabel
@@ -75,12 +76,12 @@ Item {
         spacing: Screen.pixelDensity * 2
         anchors {
             right: parent.right
-            margins: Screen.pixelDensity * 2
+            rightMargin: Screen.pixelDensity * 2
         }
 
         Item {
             id: spacer
-            height: Screen.pixelDensity * 8
+            height: Screen.pixelDensity * 5
             width: 1
         }
 

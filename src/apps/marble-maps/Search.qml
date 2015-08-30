@@ -43,6 +43,8 @@ Item {
             left: searchField.left
         }
         width: searchField.width
+        height: delegateHeight * Math.min(10,count)
+
         visible: false
         onItemSelected: {
             backend.setSelectedPlacemark(index);

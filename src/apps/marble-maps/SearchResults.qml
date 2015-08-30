@@ -21,7 +21,6 @@ Item {
     property alias count: view.count
     property int delegateHeight: 0
 
-    height: Math.min(0.4 * Screen.height, view.contentHeight)
     signal itemSelected(int index, string name)
 
     SystemPalette{
@@ -66,6 +65,7 @@ Item {
                 id: placemarkName
                 anchors.left: icon.right
                 anchors.right: parent.right
+                anchors.rightMargin: 10
                 anchors.verticalCenter: parent.verticalCenter
                 font.pointSize: 18
                 color: palette.text
