@@ -248,7 +248,7 @@ ApplicationWindow {
 
                     onClicked: {
                         if (itemStack.state === "routing") {
-                            itemStack.state = "navigation"
+                            itemStack.state = "default"
                         } else if (itemStack.state === "place") {
                             placemarkDialog.addToRoute()
                         } else {
@@ -267,7 +267,7 @@ ApplicationWindow {
                             name: "routingAction"
                             when: itemStack.state == "routing"
                             AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
-                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///navigation.png"; highlight: true }
+                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///directions.png"; highlight: false }
                         },
                         State {
                             name: "placeAction"
