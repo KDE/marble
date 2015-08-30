@@ -100,6 +100,10 @@ public Q_SLOTS:
 
     int addSearchResultPlacemark( Placemark * placemark );
 
+    void clearSearchResultPlacemarks();
+
+    void removeSearchResultPlacemark(Placemark* placemark);
+
 Q_SIGNALS:
     void marbleMapChanged();
 

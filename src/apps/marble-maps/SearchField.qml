@@ -96,10 +96,11 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    field.text = ""
-                    field.focus = true
-                    placemarkDialog.placemark = null
-                    itemStack.state = ""
+                    field.text = "";
+                    field.focus = true;
+                    placemarkDialog.placemark = null;
+                    itemStack.state = "";
+                    routing.clearSearchResultPlacemarks();
                 }
             }
         }

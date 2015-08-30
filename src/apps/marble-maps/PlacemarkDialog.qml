@@ -99,7 +99,9 @@ Item {
                 exclusiveGroup: viaGroup
                 imageSource: "qrc:///ic_place_departure.png"
                 function execute() {
-                    routing.addViaByPlacemarkAtIndex(0, placemark)
+                    routing.addViaByPlacemarkAtIndex(0, placemark);
+                    routing.removeSearchResultPlacemark(placemark);
+                    placemark = null;
                 }
             }
             RouteProfileRadioButton {
@@ -109,6 +111,8 @@ Item {
                 function execute() {
                     ensureRouteHasDeparture()
                     routing.addViaByPlacemark(placemark)
+                    routing.removeSearchResultPlacemark(placemark);
+                    placemark = null;
                 }
             }
             RouteProfileRadioButton {
@@ -119,6 +123,8 @@ Item {
                 function execute() {
                     ensureRouteHasDeparture()
                     routing.addViaByPlacemarkAtIndex(routing.waypointCount(), placemark)
+                    routing.removeSearchResultPlacemark(placemark);
+                    placemark = null;
                 }
             }
         }
