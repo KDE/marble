@@ -65,10 +65,12 @@ Item {
             Text {
                 id: placemarkName
                 anchors.left: icon.right
+                anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 font.pointSize: 18
                 color: palette.text
                 text: name
+                elide: Text.ElideMiddle
             }
 
             MouseArea {
