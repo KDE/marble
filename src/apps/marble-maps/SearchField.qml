@@ -27,6 +27,7 @@ Item {
     signal completionRequested(string query)
 
     function search(query) {
+        routing.clearSearchResultPlacemarks();
         query = query.trim();
         if(query !== "") {
             root.busy = true
