@@ -135,7 +135,9 @@ Item {
 
     function ensureRouteHasDeparture() {
         if (routing.routeRequestModel.count === 0) {
-            routing.addViaByCoordinate(marbleMaps.currentPosition)
+            if (marbleMaps.positionAvailable) {
+                routing.addViaByCoordinate(marbleMaps.currentPosition)
+            }
         }
     }
 }
