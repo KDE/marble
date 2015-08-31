@@ -45,6 +45,7 @@
         <file alias="ic_place_departure.png">../../../data/android/drawable-xxxhdpi/ic_place_departure.png</file>
         <file alias="ic_place_unknown.png">../../../data/android/drawable-xxxhdpi/ic_place_unknown.png</file>
         <file alias="ic_place_via.png">../../../data/android/drawable-xxxhdpi/ic_place_via.png</file>
+        <file alias="add.png">../../../data/android/drawable-xxxhdpi/ic_add_black_48dp.png</file>
         <file>RouteProfileRadioButton.qml</file>
     </qresource>
 </RCC>

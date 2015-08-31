@@ -268,19 +268,19 @@ ApplicationWindow {
                         State {
                             name: ""
                             AnchorChanges { target: routeEditorButton; anchors.bottom: parent.bottom; anchors.verticalCenter: undefined; }
-                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///directions.png"; highlight: false }
+                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///directions.png"; }
                         },
                         State {
                             name: "routingAction"
                             when: itemStack.state == "routing"
                             AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
-                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///directions.png"; highlight: false }
+                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///directions.png"; }
                         },
                         State {
                             name: "placeAction"
                             when: itemStack.state == "place"
                             AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
-                            PropertyChanges { target: routeEditorButton; iconSource: routeEditor.currentProfileIcon; highlight: true; }
+                            PropertyChanges { target: routeEditorButton; iconSource: placemarkDialog.actionIconSource }
                         }
                     ]
                 }

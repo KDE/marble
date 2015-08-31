@@ -19,6 +19,7 @@ Item {
     id: root
 
     property var placemark: null
+    property string actionIconSource: viaGroup.current === addDestinationButton ? routeEditor.currentProfileIcon : "qrc:///add.png"
 
     height: placemark === null ? 0 : Screen.pixelDensity * 4 + Math.max(infoLayout.height, actionsLayout.height)
 
@@ -117,6 +118,7 @@ Item {
                 }
             }
             RouteProfileRadioButton {
+                id: addDestinationButton
                 anchors.margins: 0
                 checked: true
                 exclusiveGroup: viaGroup
