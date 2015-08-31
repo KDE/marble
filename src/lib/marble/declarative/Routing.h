@@ -102,8 +102,6 @@ public Q_SLOTS:
 
     void clearSearchResultPlacemarks();
 
-    void removeSearchResultPlacemark(Placemark* placemark);
-
 Q_SIGNALS:
     void marbleMapChanged();
 

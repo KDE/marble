@@ -113,7 +113,7 @@ Item {
                 function execute() {
                     ensureRouteHasDeparture()
                     routing.addViaByPlacemark(placemark)
-                    routing.removeSearchResultPlacemark(placemark);
+                    routing.clearSearchResultPlacemarks();
                     placemark = null;
                 }
             }
@@ -126,7 +126,7 @@ Item {
                 function execute() {
                     ensureRouteHasDeparture()
                     routing.addViaByPlacemarkAtIndex(routing.waypointCount(), placemark)
-                    routing.removeSearchResultPlacemark(placemark);
+                    routing.clearSearchResultPlacemarks();
                     placemark = null;
                 }
             }

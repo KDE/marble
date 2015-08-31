@@ -205,20 +205,6 @@ void Routing::clearSearchResultPlacemarks()
     d->m_searchResultItems.clear();
 }
 
-void Routing::removeSearchResultPlacemark(Placemark *placemark)
-{
-    Q_ASSERT(d->m_searchResultPlacemarks.size() == d->m_searchResultItems.size());
-    for (int i=0, n=d->m_searchResultPlacemarks.size(); i<n; ++i) {
-        if (d->m_searchResultPlacemarks[i] == placemark) {
-            d->m_searchResultPlacemarks[i]->deleteLater();
-            d->m_searchResultPlacemarks.remove(i);
-            d->m_searchResultItems[i]->deleteLater();
-            d->m_searchResultItems.remove(i);
-            return;
-        }
-    }
-}
-
 void Routing::updateSearchResultPlacemarks()
 {
     for (int i = d->m_searchResultItems.keys().size(); i < d->m_searchResultPlacemarks.size(); i++ ) {
