@@ -32,7 +32,7 @@ void FpsLayer::paint( QPainter *painter ) const
 
     const QPoint fpsLabelPos( 10, 20 );
 
-    painter->setFont( QFont( "Sans Serif", 10 ) );
+    painter->setFont( QFont( QStringLiteral( "Sans Serif" ), 10 ) );
 
     painter->setPen( Qt::black );
     painter->setBrush( Qt::black );

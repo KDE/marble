@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-QFont FoursquareItem::s_font = QFont( "Sans Serif", 8 );
+QFont FoursquareItem::s_font = QFont( QStringLiteral( "Sans Serif" ), 8 );
 
 FoursquareItem::FoursquareItem(QObject* parent)
     : AbstractDataPluginItem( parent ),

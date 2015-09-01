@@ -47,9 +47,9 @@ class AbstractFloatItemPrivate
 
 QPen         AbstractFloatItemPrivate::s_pen = QPen( Qt::black );
 #ifdef Q_OS_MACX
-    QFont AbstractFloatItemPrivate::s_font = QFont( "Sans Serif", 10 );
+    QFont AbstractFloatItemPrivate::s_font = QFont( QStringLiteral("Sans Serif"), 10 );
 #else
-    QFont AbstractFloatItemPrivate::s_font = QFont( "Sans Serif", 8 );
+    QFont AbstractFloatItemPrivate::s_font = QFont( QStringLiteral("Sans Serif"), 8 );
 #endif
 
 AbstractFloatItem::AbstractFloatItem( const MarbleModel *marbleModel, const QPointF &point, const QSizeF &size )

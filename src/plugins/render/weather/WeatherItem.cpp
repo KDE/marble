@@ -316,9 +316,9 @@ class WeatherItemPrivate
 
 // FIXME: Fonts to be defined globally
 #ifdef Q_OS_MACX
-    QFont WeatherItemPrivate::s_font = QFont( "Sans Serif", 10 );
+    QFont WeatherItemPrivate::s_font = QFont( QStringLiteral( "Sans Serif" ), 10 );
 #else
-    QFont WeatherItemPrivate::s_font = QFont( "Sans Serif", 8 );
+    QFont WeatherItemPrivate::s_font = QFont( QStringLiteral( "Sans Serif" ), 8 );
 #endif
 
 WeatherItem::WeatherItem(QObject *parent )

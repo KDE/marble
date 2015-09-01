@@ -129,8 +129,8 @@ void WorldClock::init()
     }
 
     //Font sizes will change before painting
-    m_timeFont     = QFont( "Helvetica", 12, QFont::Bold);
-    m_locationFont = QFont( "Helvetica", 12, QFont::Bold);
+    m_timeFont     = QFont( QStringLiteral( "Helvetica" ), 12, QFont::Bold);
+    m_locationFont = QFont( QStringLiteral( "Helvetica" ), 12, QFont::Bold);
     m_points = QHash<QString, QPoint>();
     m_lastRect = QRect(0,0,0,0);
     m_showDate = cg.readEntry("showdate", false);
@@ -299,7 +299,7 @@ void WorldClock::recalculateFonts( )
 
 QFont WorldClock::calculateFont(const QString &text, const QRect &boundingBox)
 {
-    QFont resultFont( "Helvetica", 3, QFont::Bold);
+    QFont resultFont( QStringLiteral( "Helvetica" ), 3, QFont::Bold);
      
     int unscaled = 0; // Avoid infinite loops, bug 189633
     QRect lastBox;

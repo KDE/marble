@@ -21,7 +21,7 @@ namespace Marble
 {
 
 // That's the font we will use to paint.
-QFont OpenCachingItem::s_font = QFont( "Sans Serif", 8 );
+QFont OpenCachingItem::s_font = QFont( QStringLiteral( "Sans Serif" ), 8 );
 QPixmap OpenCachingItem::s_icon = QPixmap( "/usr/share/icons/oxygen/32x32/status/folder-open.png" );
 
 OpenCachingItem::OpenCachingItem( const OpenCachingCache& cache, QObject *parent )

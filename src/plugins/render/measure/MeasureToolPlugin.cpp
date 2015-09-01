@@ -42,9 +42,9 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
       m_measureLineString( GeoDataLineString( Tessellate ) ),
       m_mark( ":/mark.png" ),
 #ifdef Q_OS_MACX
-      m_font_regular( QFont( "Sans Serif", 10, 50, false ) ),
+      m_font_regular( QFont( QStringLiteral( "Sans Serif" ), 10, 50, false ) ),
 #else
-      m_font_regular( QFont( "Sans Serif",  8, 50, false ) ),
+      m_font_regular( QFont( QStringLiteral( "Sans Serif" ),  8, 50, false ) ),
 #endif
       m_fontascent( QFontMetrics( m_font_regular ).ascent() ),
       m_pen( Qt::red ),

@@ -601,7 +601,7 @@ void TestGeoDataCopy::copyIconStyle()
 
 void TestGeoDataCopy::copyLabelStyle()
 {
-    QFont testFont(QFont("Sans Serif").family(), 12, 10, false);
+    QFont testFont(QFont(QStringLiteral("Sans Serif")).family(), 12, 10, false);
     GeoDataLabelStyle label(testFont, Qt::red);
     label.setScale(2.0);
 

@@ -575,7 +575,7 @@ void TestEquality::tourTest()
     labelStyle.setColor( Qt::blue );
     labelStyle.setScale( 1.0 );
     labelStyle.setAlignment( GeoDataLabelStyle::Center );
-    labelStyle.setFont( QFont( "Helvetica", 10 ) );
+    labelStyle.setFont( QFont( QStringLiteral( "Helvetica" ), 10 ) );
 
     GeoDataLineStyle lineStyle;
     QVector< qreal > pattern( 5, 6.2 );
@@ -1305,12 +1305,12 @@ void TestEquality::labelStyleTest()
     labelStyle1.setColor( Qt::blue );
     labelStyle1.setScale( 1.0 );
     labelStyle1.setAlignment( GeoDataLabelStyle::Center );
-    labelStyle1.setFont( QFont( "Helvetica", 10 ) );
+    labelStyle1.setFont( QFont( QStringLiteral( "Helvetica" ), 10 ) );
 
     labelStyle2.setColor( Qt::blue );
     labelStyle2.setScale( 1.0 );
     labelStyle2.setAlignment( GeoDataLabelStyle::Center );
-    labelStyle2.setFont( QFont( "Helvetica", 10 ) );
+    labelStyle2.setFont( QFont( QStringLiteral( "Helvetica" ), 10 ) );
 
     QCOMPARE( labelStyle1, labelStyle1 );
     QCOMPARE( labelStyle2, labelStyle2 );
@@ -1318,7 +1318,7 @@ void TestEquality::labelStyleTest()
     QVERIFY( labelStyle1 == labelStyle2);
 
     labelStyle2.setAlignment( GeoDataLabelStyle::Corner );
-    labelStyle2.setFont( QFont( "Helvetica [Cronyx]", 12 ) );
+    labelStyle2.setFont( QFont( QStringLiteral( "Helvetica [Cronyx]" ), 12 ) );
 
     QCOMPARE( labelStyle1, labelStyle1 );
     QCOMPARE( labelStyle2, labelStyle2 );
@@ -1344,7 +1344,7 @@ void TestEquality::styleTest()
     labelStyle.setColor( Qt::blue );
     labelStyle.setScale( 1.0 );
     labelStyle.setAlignment( GeoDataLabelStyle::Center );
-    labelStyle.setFont( QFont( "Helvetica", 10 ) );
+    labelStyle.setFont( QFont( QStringLiteral( "Helvetica" ), 10 ) );
 
     GeoDataLineStyle lineStyle;
     QVector< qreal > pattern( 5, 6.2 );

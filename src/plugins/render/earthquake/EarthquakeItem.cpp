@@ -20,7 +20,7 @@ namespace Marble
 {
 
 // That's the font we will use to paint.
-const QFont EarthquakeItem::s_font = QFont( "Sans Serif", 8, QFont::Bold );
+const QFont EarthquakeItem::s_font = QFont( QStringLiteral( "Sans Serif" ), 8, QFont::Bold );
 
 EarthquakeItem::EarthquakeItem( QObject *parent )
     : AbstractDataPluginItem( parent ), m_magnitude( 0.0 ), m_depth( 0.0 )

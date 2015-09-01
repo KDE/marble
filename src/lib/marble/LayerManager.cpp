@@ -178,7 +178,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         painter->save();
         painter->setBackgroundMode( Qt::OpaqueMode );
         painter->setBackground( Qt::gray );
-        painter->setFont( QFont( "Sans Serif", 10, QFont::Bold ) );
+        painter->setFont( QFont( QStringLiteral("Sans Serif"), 10, QFont::Bold ) );
 
         int i=0;
         int const lineHeight = painter->fontMetrics().height();
