@@ -48,7 +48,7 @@ if(WIN32)
 elseif(APPLE)
   INSTALL(TARGETS astro LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 else()
-  INSTALL(TARGETS astro LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX})
+  INSTALL(TARGETS astro LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 
 ########### install files ###############
