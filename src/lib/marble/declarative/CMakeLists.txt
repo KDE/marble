@@ -57,4 +57,4 @@ set_target_properties( marbledeclarative PROPERTIES
     SKIP_BUILD_RPATH TRUE
     BUILD_WITH_INSTALL_RPATH TRUE
 )
-install( TARGETS marbledeclarative LIBRARY DESTINATION lib${LIB_SUFFIX} )
+install( TARGETS marbledeclarative LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} )
