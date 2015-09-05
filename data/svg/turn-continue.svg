@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -9,121 +7,80 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64"
-   height="64"
-   id="svg4076"
+   fill="#000000"
+   height="48"
+   viewBox="0 0 24 24"
+   width="48"
+   id="svg3103"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="turn-continue.svg">
-  <defs
-     id="defs4078">
-    <filter
-       color-interpolation-filters="sRGB"
-       id="filter6061"
-       inkscape:label="Drop shadow"
-       width="1.5"
-       height="1.5"
-       x="-0.25"
-       y="-0.25">
-      <feGaussianBlur
-         id="feGaussianBlur6063"
-         in="SourceAlpha"
-         stdDeviation="1,000000"
-         result="blur" />
-      <feColorMatrix
-         id="feColorMatrix6065"
-         result="bluralpha"
-         type="matrix"
-         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0,500000 0 " />
-      <feOffset
-         id="feOffset6067"
-         in="bluralpha"
-         dx="1,500000"
-         dy="1,500000"
-         result="offsetBlur" />
-      <feMerge
-         id="feMerge6069"
-         result="fbSourceGraphic">
-        <feMergeNode
-           id="feMergeNode6071"
-           in="offsetBlur" />
-        <feMergeNode
-           id="feMergeNode6073"
-           in="SourceGraphic" />
-      </feMerge>
-      <feColorMatrix
-         result="fbSourceGraphicAlpha"
-         in="fbSourceGraphic"
-         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
-         id="feColorMatrix5010" />
-      <feGaussianBlur
-         id="feGaussianBlur5012"
-         in="fbSourceGraphicAlpha"
-         stdDeviation="0.500000"
-         result="blur" />
-      <feColorMatrix
-         id="feColorMatrix5014"
-         result="bluralpha"
-         type="matrix"
-         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.500000 0 " />
-      <feOffset
-         id="feOffset5016"
-         in="bluralpha"
-         dx="1.000000"
-         dy="1.000000"
-         result="offsetBlur" />
-      <feMerge
-         id="feMerge5018">
-        <feMergeNode
-           id="feMergeNode5020"
-           in="offsetBlur" />
-        <feMergeNode
-           id="feMergeNode5022"
-           in="fbSourceGraphic" />
-      </feMerge>
-    </filter>
-  </defs>
+   inkscape:version="0.91 r"
+   sodipodi:docname="ic_turn-continue.svg"
+   inkscape:export-filename="/home/tackat/TURN/final/192/ic_turn-continue.png"
+   inkscape:export-xdpi="360"
+   inkscape:export-ydpi="360">
   <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
+     pagecolor="#dfdfdf"
      bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.9664271"
-     inkscape:cx="-18.179561"
-     inkscape:cy="-1.3137596"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:window-width="1600"
+     inkscape:window-height="845"
+     id="namedview3109"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1021"
-     inkscape:window-x="-4"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:zoom="5.6568545"
+     inkscape:cx="-28.204047"
+     inkscape:cy="13.659414"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3103"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <metadata
-     id="metadata4081">
+     id="metadata3113">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(0,-988.3622)">
-    <path
-       inkscape:connector-curvature="0"
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#eeeeec;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter6061);enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 13.515626,1047.5966 4.96875,0 0,-15.5625 5.999999,0 c 0,0 -8.484369,-6.9063 -8.484369,-6.9063 0,0 -6.2666206,5.3262 -8.4843806,6.9063 l 6.0000006,0 0,15.5625 z"
-       id="rect5009-2"
-       sodipodi:nodetypes="cccccccc"
-       transform="matrix(2,0,0,2,-4e-7,-1052.3622)" />
-  </g>
+  <defs
+     id="defs3111" />
+  <rect
+     style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
+     id="rect5271"
+     width="24"
+     height="24"
+     x="-24"
+     y="-1.6829257e-15"
+     inkscape:export-xdpi="270"
+     inkscape:export-ydpi="270"
+     transform="scale(-1,1)" />
+  <path
+     style="fill:none"
+     inkscape:connector-curvature="0"
+     d="m 22.559842,3.249554 24,0 0,24 -24,0 z"
+     id="path3107" />
+  <path
+     style="fill:#00438a;stroke:#ffffff;stroke-width:0.78750002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 9.9083759,15.080701 c 0,-3.47193 -0.00335,-6.3126 -0.00735,-6.3126 -0.0041,0 -0.2223622,0.02228 -0.4851006,0.04951 C 8.2007938,8.94355 6.8485461,9.1538575 5.6023305,9.410719 5.3614909,9.460364 5.155315,9.497669 5.1441598,9.493637 5.1330088,9.489637 6.6709995,7.93839 8.5619245,6.0464997 l 3.4380455,-3.4398015 3.438058,3.4398 c 1.890932,1.8918903 3.428948,3.4431013 3.417814,3.4471373 -0.01113,0.004 -0.217295,-0.033275 -0.458135,-0.082918 -1.246215,-0.2568615 -2.598463,-0.467169 -3.813594,-0.5931085 -0.262738,-0.027225 -0.481033,-0.04951 -0.4851,-0.04951 -0.0041,0 -0.0074,2.84067 -0.0074,6.3126 l 0,6.312599 -2.0916,0 -2.0915986,0 0,-6.312598 z"
+     id="path6281-9"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="270"
+     inkscape:export-ydpi="270" />
+  <path
+     style="fill:#00438a;stroke-width:0.2625;stroke-miterlimit:4;stroke-dasharray:none;stroke:#ffffff;stroke-opacity:1;stroke-linejoin:round;stroke-linecap:round"
+     d="m 9.9083759,15.080701 c 0,-3.47193 -0.00335,-6.3126 -0.00735,-6.3126 -0.0041,0 -0.2223621,0.02228 -0.4851004,0.04951 C 8.2007939,8.94355 6.8485463,9.1538575 5.6023306,9.410719 5.361491,9.460364 5.1553151,9.497669 5.1441599,9.493637 5.1330089,9.489637 6.6709997,7.93839 8.5619247,6.0464998 l 3.4380453,-3.4398015 3.438058,3.4398 c 1.890932,1.8918902 3.428948,3.4431012 3.417814,3.4471372 -0.01113,0.004 -0.217295,-0.033275 -0.458135,-0.082918 -1.246215,-0.2568615 -2.598463,-0.467169 -3.813594,-0.5931085 -0.262738,-0.027225 -0.481033,-0.04951 -0.4851,-0.04951 -0.0041,0 -0.0074,2.84067 -0.0074,6.3126 l 0,6.3126 -2.0916,0 -2.0915986,0 0,-6.312599 z"
+     id="path6281"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="270"
+     inkscape:export-ydpi="270" />
 </svg>
