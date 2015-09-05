@@ -233,7 +233,7 @@ elseif(ANDROID)
       set(data_dir "${CMAKE_INSTALL_PREFIX}/assets/data")
 else() # Linux / bsd etc...
       set(data_dir ${CMAKE_INSTALL_PREFIX}/share/marble/data)
-      set(plugin_dir ${CMAKE_INSTALL_LIBDIR}/marble/plugins)
+      set(plugin_dir ${CMAKE_INSTALL_FULL_LIBDIR}/marble/plugins)
       set(CMAKE_MODULES_INSTALL_PATH ${CMAKE_INSTALL_PREFIX}/share/marble/cmake)
 endif()
 
