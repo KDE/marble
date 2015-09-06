@@ -70,10 +70,6 @@ public Q_SLOTS:
 
     void addViaAtIndex( int index, qreal lon, qreal lat );
 
-    void addViaByCoordinate( Coordinate * coordinate);
-
-    void addViaByCoordinateAtIndex( int index, Coordinate * coordinate );
-
     void addViaByPlacemark( Placemark * placemark );
 
     void addViaByPlacemarkAtIndex( int index, Placemark * placemark );

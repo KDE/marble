@@ -354,16 +354,6 @@ void Routing::addViaAtIndex(int index, qreal lon, qreal lat)
     }
 }
 
-void Routing::addViaByCoordinate(Coordinate *coordinate)
-{
-    addVia(coordinate->longitude(), coordinate->latitude());
-}
-
-void Routing::addViaByCoordinateAtIndex(int index, Coordinate *coordinate)
-{
-    addViaAtIndex(index, coordinate->longitude(), coordinate->latitude());
-}
-
 void Routing::addViaByPlacemark(Placemark *placemark)
 {
     if ( d->m_marbleMap ) {
