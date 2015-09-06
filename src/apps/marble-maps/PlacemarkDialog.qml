@@ -136,7 +136,7 @@ Item {
     function ensureRouteHasDeparture() {
         if (routing.routeRequestModel.count === 0) {
             if (marbleMaps.positionAvailable) {
-                routing.addViaByCoordinate(marbleMaps.currentPosition)
+                routing.addViaByPlacemark(marbleMaps.currentPosition)
             }
         }
     }

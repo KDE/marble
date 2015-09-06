@@ -30,7 +30,6 @@
 #include <RenderPlugin.h>
 #include <MarbleMath.h>
 #include <GeoDataCoordinates.h>
-#include <Coordinate.h>
 
 namespace Marble
 {
@@ -140,6 +139,7 @@ namespace Marble
           ,m_positionVisible(false)
           ,m_inputHandler(this, marble)
         {
+            m_currentPosition.setName(tr("Current Location"));
             connect(this, SIGNAL(updateRequired()), m_marble, SLOT(update()));
         }
 
@@ -147,7 +147,7 @@ namespace Marble
         MarbleQuickItem *m_marble;
         friend class MarbleQuickItem;
         bool m_positionVisible;
-        Coordinate m_currentPosition;
+        Placemark m_currentPosition;
 
         MarbleQuickInputHandler m_inputHandler;
     };
@@ -217,7 +217,7 @@ namespace Marble
 
     void MarbleQuickItem::updateCurrentPosition(const GeoDataCoordinates &coordinates)
     {
-        d->m_currentPosition.setCoordinates(coordinates);
+        d->m_currentPosition.coordinate()->setCoordinates(coordinates);
         emit currentPositionChanged(&d->m_currentPosition);
     }
 
@@ -400,7 +400,7 @@ namespace Marble
         return 0;
     }
 
-    Coordinate * MarbleQuickItem::currentPosition() const
+    Placemark * MarbleQuickItem::currentPosition() const
     {
         return &d->m_currentPosition;
     }

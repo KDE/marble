@@ -17,7 +17,7 @@
 #include "MarbleGlobal.h"
 #include "PositionProviderPlugin.h"
 #include "MarbleMap.h"
-#include "Coordinate.h"
+#include "Placemark.h"
 
 namespace Marble
 {
@@ -51,7 +51,7 @@ namespace Marble
         Q_PROPERTY(bool positionAvailable READ positionAvailable NOTIFY positionAvailableChanged)
         Q_PROPERTY(bool positionVisible READ positionVisible NOTIFY positionVisibleChanged)
         Q_PROPERTY(MarbleMap* marbleMap READ map NOTIFY marbleMapChanged)
-        Q_PROPERTY(Coordinate *  currentPosition READ currentPosition NOTIFY currentPositionChanged)
+        Q_PROPERTY(Placemark*  currentPosition READ currentPosition NOTIFY currentPositionChanged)
         Q_PROPERTY(qreal speed READ speed NOTIFY speedChanged)
         Q_PROPERTY(qreal angle READ angle NOTIFY angleChanged)
 
@@ -138,7 +138,7 @@ namespace Marble
         bool positionVisible();
         Q_INVOKABLE qreal distanceFromPointToCurrentLocation(const QPoint & position) const;
         Q_INVOKABLE qreal angleFromPointToCurrentLocation(const QPoint & position) const;
-        Coordinate *currentPosition() const;
+        Placemark* currentPosition() const;
         Q_INVOKABLE QPointF screenCoordinatesFromCoordinate(Coordinate * coordinate) const;
         qreal speed() const;
         qreal angle() const;
@@ -170,7 +170,7 @@ namespace Marble
         void positionVisibleChanged(bool positionVisible);
         void marbleMapChanged();
         void visibleLatLonAltBoxChanged();
-        void currentPositionChanged(Coordinate * currentPosition);
+        void currentPositionChanged(Placemark* currentPosition);
         void angleChanged();
         void speedChanged();
 
