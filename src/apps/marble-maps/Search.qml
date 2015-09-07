@@ -92,5 +92,6 @@ Item {
         completionModel: backend.completionModel
         onSearchRequested: backend.search(query)
         onCompletionRequested: backend.setCompletionPrefix(query)
+        onCleared: searchResults.visible = false
     }
 }

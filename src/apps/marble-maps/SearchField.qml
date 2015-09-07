@@ -25,6 +25,7 @@ Item {
 
     signal searchRequested(string query)
     signal completionRequested(string query)
+    signal cleared()
 
     function search(query) {
         routing.clearSearchResultPlacemarks();
@@ -102,6 +103,7 @@ Item {
                     placemarkDialog.placemark = null;
                     itemStack.state = "";
                     routing.clearSearchResultPlacemarks();
+                    cleared();
                 }
             }
         }
