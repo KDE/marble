@@ -110,7 +110,12 @@ Item {
                     id: touchArea
                     anchors.fill: parent
                     onClicked: {
-                        waypointList.currentIndex = index === waypointList.currentIndex ? -1 : index;
+                        if (index === waypointList.currentIndex) {
+                            waypointList.currentIndex =  -1
+                        } else {
+                            waypointList.currentIndex =  index
+                            marbleMaps.centerOn(longitude, latitude)
+                        }
                     }
                 }
 

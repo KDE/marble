@@ -440,6 +440,11 @@ namespace Marble
         d->flyTo(target, Automatic);
     }
 
+    void MarbleQuickItem::centerOn(qreal longitude, qreal latitude)
+    {
+        d->centerOn(longitude, latitude);
+    }
+
     void MarbleQuickItem::centerOnCurrentPosition()
     {
         GeoDataCoordinates coordinates = d->model()->positionTracking()->currentLocation();

@@ -80,6 +80,7 @@ namespace Marble
         void centerOn(const GeoDataPlacemark& placemark, bool animated = false);
         void centerOn(const GeoDataLatLonBox& box, bool animated = false);
         void centerOn(const GeoDataCoordinates& coordinate);
+        void centerOn(qreal longitude, qreal latitude);
         Q_INVOKABLE void centerOnCurrentPosition();
 
         void zoomIn(FlyToMode mode = Automatic);
