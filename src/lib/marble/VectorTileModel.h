@@ -28,6 +28,7 @@ class GeoDataDocument;
 class GeoDataLatLonBox;
 class GeoDataTreeModel;
 class GeoSceneVectorTile;
+class GeoDataObject;
 class TileLoader;
 
 class TileRunner : public QObject, public QRunnable
@@ -58,6 +59,8 @@ public:
 
     QString name() const;
 
+    void removeTile(GeoDataDocument* document);
+
 public Q_SLOTS:
     void updateTile( const TileId &id, GeoDataDocument *document );
 
@@ -65,6 +68,11 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void tileCompleted( const TileId &tileId );
+    void tileAdded(GeoDataDocument *document);
+    void tileRemoved(GeoDataDocument *document);
+
+private Q_SLOTS:
+    void cleanupTile(GeoDataObject* feature);
 
 private:
     void setViewport( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
@@ -76,13 +84,13 @@ private:
     struct CacheDocument
     {
         /** The CacheDocument takes ownership of doc */
-        CacheDocument( GeoDataDocument *doc, GeoDataTreeModel *model );
+        CacheDocument( GeoDataDocument *doc, VectorTileModel* vectorTileModel );
 
         /** Remove the document from the tree and delete the document */
         ~CacheDocument();
 
         GeoDataDocument *const m_document;
-        GeoDataTreeModel *const m_treeModel;
+        VectorTileModel *m_vectorTileModel;
 
     private:
         Q_DISABLE_COPY( CacheDocument )
@@ -94,6 +102,8 @@ private:
     QThreadPool *const m_threadPool;
     int m_tileZoomLevel;
     QCache<TileId, CacheDocument> m_documents;
+    QList<TileId> m_pendingDocuments;
+    QList<GeoDataDocument*> m_garbageQueue;
 };
 
 }
