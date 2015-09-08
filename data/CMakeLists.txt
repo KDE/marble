@@ -21,6 +21,10 @@ FILE (GLOB BITMAP_POI_FILES bitmaps/poi/*.png)
 install (FILES ${BITMAP_POI_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps/poi)
 
+FILE (GLOB BITMAP_OSMPATTERN_FILES bitmaps/osmcarto/patterns/*.png)
+install (FILES ${BITMAP_OSMPATTERN_FILES}
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps/osmcarto/patterns)
+
 FILE (GLOB BITMAP_STAR_FILES bitmaps/stars/*.png)
 install (FILES ${BITMAP_STAR_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps/stars)
