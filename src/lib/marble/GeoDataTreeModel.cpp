@@ -837,6 +837,10 @@ int GeoDataTreeModel::removeFeature( const GeoDataFeature *feature )
 {
     if ( feature && ( feature!=d->m_rootDocument ) )  {
 
+        if (!feature->parent()) {
+            return -1;
+        }
+
         //We check to see we are not removing the
         //top level element m_rootDocument
 
