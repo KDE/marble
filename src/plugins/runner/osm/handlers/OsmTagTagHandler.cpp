@@ -104,7 +104,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
             placemark->setGeometry( polygon );
             doc->append( placemark );
         }
-        if ( key == "building" && value == "yes" && placemark->visualCategory() == GeoDataFeature::Default )
+        if ( placemark->visualCategory() == GeoDataFeature::Default && key == "building" && OsmPresetLibrary::buildingValues().contains(value) )
         {
             placemark->setVisualCategory( GeoDataFeature::Building );
             placemark->setVisible( true );

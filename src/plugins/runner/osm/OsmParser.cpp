@@ -12,6 +12,7 @@
 
 #include "OsmParser.h"
 #include "OsmElementDictionary.h"
+#include "osm/OsmPresetLibrary.h"
 #include "osm/OsmPlacemarkData.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -31,7 +32,11 @@ OsmParser::OsmParser()
     m_areaTags.insert( "natural=wood" );
     m_areaTags.insert( "area=yes" );
     m_areaTags.insert( "waterway=riverbank" );
-    m_areaTags.insert( "building=yes" );
+
+    foreach(const QString &value, OsmPresetLibrary::buildingValues() ) {
+        m_areaTags.insert( QString("building=%1").arg(value) );
+    }
+
     m_areaTags.insert( "amenity=parking" );
     m_areaTags.insert( "leisure=park" );
 

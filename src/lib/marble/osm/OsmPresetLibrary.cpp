@@ -185,8 +185,9 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "place", "village" ) ]              = GeoDataFeature::MediumCity;
 
     // Default for buildings
-    s_visualCategories[ OsmTag( "building", "yes" ) ]               = GeoDataFeature::Building;
-
+    foreach(const QString &value, buildingValues() ) {
+        s_visualCategories[ OsmTag( "building", value ) ]           = GeoDataFeature::Building;
+    }
 }
 
 void OsmPresetLibrary::initializeAdditionalOsmTags()
@@ -376,6 +377,24 @@ QList<OsmPresetLibrary::OsmTag>::const_iterator OsmPresetLibrary::additionalTags
 {
     initializeAdditionalOsmTags();
     return s_additionalOsmTags.end();
+}
+
+QStringList OsmPresetLibrary::buildingValues()
+{
+    // from https://taginfo.openstreetmap.org/keys/building#values
+    static QStringList osmBuildingValues = QStringList()
+        << "yes" << "house" << "residential" << "garage" << "apartments"
+        << "hut" << "industrial" << "detached" << "roof" << "garages"
+        << "commercial" << "terrace" << "shed" << "school" << "retail"
+        << "farm_auxiliary" << "church" << "greenhouse" << "barn"
+        << "service" << "manufacture" << "construction" << "cabin"
+        << "farm" << "warehouse" << "House" << "office"
+        << "civic" << "Residential" << "hangar" << "public" << "university"
+        << "hospital" << "chapel" << "hotel" << "train_station" << "dormitory"
+        << "kindergarten" << "stable" << "storage_tank" << "shop" << "college"
+        << "supermarket" << "factory" << "bungalow" << "tower" << "silo"
+        << "storage" << "station" << "education" << "carport";
+    return osmBuildingValues;
 }
 
 }

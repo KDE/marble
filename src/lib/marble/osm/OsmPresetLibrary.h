@@ -61,6 +61,8 @@ public:
     static QList<OsmTag>::const_iterator additionalTagsBegin();
     static QList<OsmTag>::const_iterator additionalTagsEnd();
 
+    static QStringList buildingValues();
+
 private:
     static void initializeOsmVisualCategories();
     static void initializeAdditionalOsmTags();
