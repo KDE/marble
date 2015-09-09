@@ -152,20 +152,22 @@ class GeoDataFeaturePrivate
         }
         return style;
     }
-    
+
     static GeoDataStyle* createWayStyle( const QColor& color, const QColor& outlineColor, 
                                          bool fill = true, bool outline = true,
-                                         Qt::BrushStyle brushStyle = Qt::SolidPattern )
+                                         Qt::BrushStyle brushStyle = Qt::SolidPattern,
+                                         const QString& texturePath = QString())
     {
-        return createStyle( 1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false );
+        return createStyle( 1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), QFont("Arial"), Qt::black, texturePath );
     }
-    
+
     static GeoDataStyle* createStyle( qreal width, qreal realWidth, const QColor& color,
                                       const QColor& outlineColor, bool fill, bool outline,
                                       Qt::BrushStyle brushStyle, Qt::PenStyle penStyle,
                                       Qt::PenCapStyle capStyle, bool lineBackground,
                                       const QVector< qreal >& dashPattern = QVector< qreal >(),
-                                      const QFont& font = QFont("Arial"), const QColor& fontColor = Qt::black)
+                                      const QFont& font = QFont("Arial"), const QColor& fontColor = Qt::black,
+                                      const QString& texturePath = QString())
     {
         GeoDataStyle *style = new GeoDataStyle;
         GeoDataLineStyle lineStyle( outlineColor );
@@ -179,6 +181,7 @@ class GeoDataFeaturePrivate
         polyStyle.setOutline( outline );
         polyStyle.setFill( fill );
         polyStyle.setBrushStyle( brushStyle );
+        polyStyle.setTexturePath( texturePath );
         GeoDataLabelStyle labelStyle(font, fontColor);
         style->setLineStyle( lineStyle );
         style->setPolyStyle( polyStyle );

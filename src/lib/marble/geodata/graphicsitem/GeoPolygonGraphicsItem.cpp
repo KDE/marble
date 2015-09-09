@@ -15,6 +15,7 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "GeoDataStyle.h"
+#include "MarbleDirs.h"
 
 #include <QVector2D>
 #include <QtCore/qmath.h>
@@ -176,7 +177,25 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
             if ( isBuildingFrame ) {
                 painter->setBrush( style()->polyStyle().paintedColor().darker(150) );
             } else if ( painter->brush().color() != style()->polyStyle().paintedColor() ) {
-                painter->setBrush( style()->polyStyle().paintedColor() );
+                QImage textureImage = style()->polyStyle().textureImage();
+                if( !textureImage.isNull()){
+                    GeoDataCoordinates coords = m_polygon->latLonAltBox().center();
+                    qreal x, y;
+                    viewport->screenCoordinates(coords, x, y);
+                    QImage image( textureImage.size(), QImage::Format_ARGB32_Premultiplied );
+                    image.fill(style()->polyStyle().paintedColor());
+                    QPainter imagePainter(&image);
+                    imagePainter.drawImage(0, 0, textureImage);
+                    imagePainter.end();
+
+                    QBrush brush;
+                    brush.setTextureImage(image);
+                    QTransform transform;
+                    brush.setTransform(transform.translate(x,y));
+                    painter->setBrush(brush);
+                } else {
+                    painter->setBrush( style()->polyStyle().paintedColor() );
+                }
             }
         }
     }

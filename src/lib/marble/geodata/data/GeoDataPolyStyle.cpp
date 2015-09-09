@@ -10,10 +10,11 @@
 
 
 #include "GeoDataPolyStyle.h"
-
 #include "GeoDataTypes.h"
+#include "MarbleDirs.h"
 
 #include <QDataStream>
+#include <QImage>
 
 namespace Marble
 {
@@ -38,6 +39,8 @@ class GeoDataPolyStylePrivate
     Qt::BrushStyle m_brushStyle;
     /// The value of colorIndex will be maped to a color for brush
     quint8 m_colorIndex;
+    QString m_texturePath;
+    QImage m_textureImage;
 };
 
 GeoDataPolyStyle::GeoDataPolyStyle()
@@ -127,6 +130,18 @@ void GeoDataPolyStyle::setColorIndex( quint8 colorIndex )
 quint8 GeoDataPolyStyle::colorIndex() const
 {
     return d->m_colorIndex;
+}
+
+void GeoDataPolyStyle::setTexturePath( const QString& texturePath ){
+    d->m_texturePath = texturePath;
+}
+
+QString GeoDataPolyStyle::texturePath() const {
+    return d->m_texturePath;
+}
+
+QImage GeoDataPolyStyle::textureImage() const {
+    return QImage(MarbleDirs::path(d->m_texturePath));
 }
 
 void GeoDataPolyStyle::pack( QDataStream& stream ) const

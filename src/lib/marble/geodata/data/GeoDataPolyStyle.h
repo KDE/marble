@@ -101,6 +101,12 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
      */
     quint8 colorIndex() const;
 
+    void setTexturePath( const QString &path );
+
+    QString texturePath() const;
+
+    QImage textureImage() const;
+
     /**
      * @brief  Serialize the style to a stream.
      * @param  stream  the stream
