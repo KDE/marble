@@ -448,6 +448,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::NaturalWood]              = GeoDataFeaturePrivate::createWayStyle( "#8DC46C", "#8DC46C", true, true, Qt::SolidPattern, "bitmaps/osmcarto/patterns/forest.png" );
 
     s_defaultStyle[GeoDataFeature::LeisurePark]              = GeoDataFeaturePrivate::createWayStyle( "#CDF6CA", "#CDF6CA" );
+    s_defaultStyle[GeoDataFeature::LeisurePlayground]        = GeoDataFeaturePrivate::createWayStyle( "#CCFFF1", "#BDFFED" );
 
     s_defaultStyle[GeoDataFeature::LanduseAllotments]        = GeoDataFeaturePrivate::createWayStyle( "#E4C6AA", "#E4C6AA", true, true, Qt::SolidPattern, "bitmaps/osmcarto/patterns/allotments.png" );
     s_defaultStyle[GeoDataFeature::LanduseBasin]             = GeoDataFeaturePrivate::createWayStyle( QColor(0xB5, 0xD0, 0xD0, 0x80 ), QColor( 0xB5, 0xD0, 0xD0 ) );

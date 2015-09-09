@@ -237,8 +237,10 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         ReligionJewish,
         ReligionShinto,
         ReligionSikh,
+
         // OpenStreetMap category Leisure
         LeisurePark,
+        LeisurePlayground,
 
         LanduseAllotments,
         LanduseBasin,

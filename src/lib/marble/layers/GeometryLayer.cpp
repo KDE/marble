@@ -149,6 +149,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     //Landuse
 
     s_defaultZValues[GeoDataFeature::LeisurePark]         = s_defaultZValue - 14;
+    s_defaultZValues[GeoDataFeature::LeisurePlayground]   = s_defaultZValue - 14;
 
     s_defaultZValues[GeoDataFeature::TransportParking]    = s_defaultZValue - 13;
 
@@ -207,6 +208,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
         s_defaultMinZoomLevels[i] = 15;
 
     s_defaultMinZoomLevels[GeoDataFeature::LeisurePark]         = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::LeisurePlayground]   = 11;
     s_defaultMinZoomLevels[GeoDataFeature::LanduseAllotments]   = 11;
     s_defaultMinZoomLevels[GeoDataFeature::LanduseBasin]        = 11;
     s_defaultMinZoomLevels[GeoDataFeature::LanduseCemetery]     = 11;
