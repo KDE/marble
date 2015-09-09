@@ -28,6 +28,7 @@ class GeoDataPlacemark;
 class GeoDataPoint;
 class GeoDataPolygon;
 class OsmPlacemarkData;
+class GeoDataDocument;
 
 class OsmParser : public GeoParser
 {
@@ -49,9 +50,13 @@ public:
 
     static const QColor backgroundColor;
 
+    void adjustStyles(GeoDataDocument* document);
+
 private:
     virtual bool isValidElement(const QString& tagName) const;
     virtual bool isValidRootElement();
+    bool isHighway(const GeoDataPlacemark *placemark) const;
+    void calculateHighwayWidth(GeoDataPlacemark *placemark) const;
 
     virtual GeoDocument* createDocument() const;
 

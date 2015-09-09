@@ -47,6 +47,7 @@ void OsmRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
     GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
+    parser.adjustStyles(doc);
     doc->setDocumentRole( role );
     doc->setFileName( fileName );
 

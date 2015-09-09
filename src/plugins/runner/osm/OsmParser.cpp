@@ -17,6 +17,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
+#include "GeoDataTypes.h"
+#include "GeoDataStyle.h"
 
 namespace Marble {
 
@@ -109,9 +111,44 @@ void OsmParser::addDummyPlacemark( GeoDataPlacemark *placemark )
     m_dummyPlacemarks << placemark;
 }
 
+void OsmParser::adjustStyles(GeoDataDocument* document)
+{
+    for (int i=0, n=document->size(); i<n; ++i) {
+        GeoDataFeature* feature = document->child(i);
+        if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+            GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(feature);
+            if (isHighway(placemark)) {
+                calculateHighwayWidth(placemark);
+            }
+        }
+    }
+}
+
 bool OsmParser::isValidRootElement()
 {
     return isValidElement(osm::osmTag_osm);
+}
+
+bool OsmParser::isHighway(const GeoDataPlacemark *placemark) const
+{
+    return placemark->visualCategory() >= GeoDataFeature::HighwaySteps &&
+           placemark->visualCategory() <= GeoDataFeature::HighwayMotorway;
+}
+
+void OsmParser::calculateHighwayWidth(GeoDataPlacemark *placemark) const
+{
+    OsmPlacemarkData const & data = placemark->osmData();
+    bool const isOneWay = data.containsTag("oneway", "yes") || data.containsTag("oneway", "-1");
+    int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
+    double const laneWidth = 3.0;
+    double const margins = placemark->visualCategory() == GeoDataFeature::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
+    double const physicalWidth = margins + lanes * laneWidth;
+
+    GeoDataLineStyle lineStyle = placemark->style()->lineStyle();
+    lineStyle.setPhysicalWidth(physicalWidth);
+    GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+    style->setLineStyle(lineStyle);
+    placemark->setStyle(style);
 }
 
 bool OsmParser::isValidElement(const QString& tagName) const
