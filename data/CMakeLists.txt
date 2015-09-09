@@ -157,6 +157,11 @@ install (FILES
 maps/earth/hillshading/0/0/0.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/hillshading/0/0)
 
+OPTION(EXPERIMENTAL_VECTOR_TILING "Install a map theme using OSM vector tiles (experimental)")
+if(EXPERIMENTAL_VECTOR_TILING)
+    install (DIRECTORY maps/earth/vectorosm DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth)
+endif()
+
 install (FILES
 maps/earth/temp-july/temp-july.jpg
 maps/earth/temp-july/temp-july-preview.png
