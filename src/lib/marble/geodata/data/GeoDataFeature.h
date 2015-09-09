@@ -137,6 +137,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         
         NaturalWater,
         NaturalWood,
+        NaturalBeach,
 
         // OpenStreetMap highways
         HighwaySteps,

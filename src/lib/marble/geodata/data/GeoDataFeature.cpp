@@ -446,6 +446,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
                                                                                                    QFont("Arial"), QColor("#B5D0D0").darker(150));
     s_defaultStyle[GeoDataFeature::NaturalWood]              = GeoDataFeaturePrivate::createWayStyle( "#8DC46C", "#8DC46C", true, true, Qt::SolidPattern, "bitmaps/osmcarto/patterns/forest.png" );
+    s_defaultStyle[GeoDataFeature::NaturalBeach]             = GeoDataFeaturePrivate::createWayStyle( "#FFF1BA", "#FFF1BA", true, true, Qt::SolidPattern, "bitmaps/osmcarto/patterns/beach.png" );
 
     s_defaultStyle[GeoDataFeature::LeisurePark]              = GeoDataFeaturePrivate::createWayStyle( "#CDF6CA", "#CDF6CA" );
     s_defaultStyle[GeoDataFeature::LeisurePlayground]        = GeoDataFeaturePrivate::createWayStyle( "#CCFFF1", "#BDFFED" );
