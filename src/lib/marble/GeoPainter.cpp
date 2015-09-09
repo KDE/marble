@@ -770,7 +770,8 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
     }
 
 
-    QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries(); 
+    QRectF const viewportRect(QPointF(0.0,0.0), d->m_viewport->size());
+    QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries();
     foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
         QVector<QPolygonF*> innerPolygons;
         d->m_viewport->screenCoordinates( itInnerBoundary, innerPolygons );
@@ -783,7 +784,9 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
 
         foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
             foreach( QPolygonF* itInnerPolygon, innerPolygons ) {
-                *itOuterPolygon = itOuterPolygon->subtracted( *itInnerPolygon );
+                if (viewportRect.intersects(itInnerPolygon->boundingRect())) {
+                    *itOuterPolygon = itOuterPolygon->subtracted( *itInnerPolygon );
+                }
             }
         }
         qDeleteAll( innerPolygons );    
