@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="100%"
+   height="100%"
+   viewBox="0 0 16 16"
+   id="svg2"
+   inkscape:version="0.91 r"
+   sodipodi:docname="courthouse-16.svg">
+  <sodipodi:namedview
+     pagecolor="#dadada"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="845"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="14.75"
+     inkscape:cx="8"
+     inkscape:cy="8"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6" />
+  <rect
+     width="16"
+     height="16"
+     x="0"
+     y="0"
+     id="canvas"
+     style="visibility:hidden;fill:none;stroke:none" />
+  <path
+     inkscape:connector-curvature="0"
+     d="M 8,1 C 7,1 7,2 7,2 L 3.25,3 3.25,4 1,9 c 0,1 0.792008,2 2.5,2 C 5.207992,11 6,10 6,9 L 3.75,4 7,4 7,14 3,14 2,15 14,15 13,14 9,14 9,4 12.25,4 10,9 c 0,1 0.77294,2 2.5,2 1.72706,0 2.5,-1 2.5,-2 L 12.75,4 12.75,3 9,2 C 9,2 9,1 8,1 Z M 3.5,5 5.25,9 1.75,9 Z m 9,0 1.75,4 -3.5,0 z"
+     id="courthouse-8"
+     style="fill:#734a08;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round" />
+  <path
+     inkscape:connector-curvature="0"
+     d="M 8,1 C 7,1 7,2 7,2 L 3.25,3 3.25,4 1,9 c 0,1 0.792008,2 2.5,2 C 5.207992,11 6,10 6,9 L 3.75,4 7,4 7,14 3,14 2,15 14,15 13,14 9,14 9,4 12.25,4 10,9 c 0,1 0.77294,2 2.5,2 1.72706,0 2.5,-1 2.5,-2 L 12.75,4 12.75,3 9,2 C 9,2 9,1 8,1 Z M 3.5,5 5.25,9 1.75,9 Z m 9,0 1.75,4 -3.5,0 z"
+     id="courthouse"
+     style="fill:#734a08;fill-opacity:1" />
+</svg>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="100%"
+   height="100%"
+   viewBox="0 0 16 16"
+   id="svg2"
+   inkscape:version="0.91 r"
+   sodipodi:docname="caravan_park.16.svg">
+  <sodipodi:namedview
+     pagecolor="#dadada"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="706"
+     inkscape:window-height="480"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="14.75"
+     inkscape:cx="8"
+     inkscape:cy="8"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6" />
+  <rect
+     width="16"
+     height="16"
+     x="0"
+     y="0"
+     id="canvas"
+     style="visibility:hidden;fill:none;stroke:none" />
+  <path
+     inkscape:connector-curvature="0"
+     d="M 3,3 C 2,3 1,4 1,5 l 0,4 c 0,1 1,2 2,2 l 1.0625,0 C 4.295616,9.860792 5.291877,9 6.5,9 7.708123,9 8.704384,9.860792 8.9375,11 L 15,11 c 0,0 0,-1 -1,-1 l -1.5,0 0,-5 c 0,-0.9606645 -1.024338,-2 -2,-2 z M 3.84375,5 C 3.9375,4.984375 4,5 4,5 L 6,5 C 6,5 7,5 7,6 7,7 6,7 6,7 L 4,7 C 4,7 3,7 3,6 3,5.25 3.5625,5.046875 3.84375,5 Z M 9,5 9.5,5 c 0,0 1,0 1,1 0,1 -1,1 -1,1 L 9,7 C 9,7 8,7 8,6 8,5 9,5 9,5 Z M 6.5,10 C 5.671573,10 5,10.671573 5,11.5 5,12.328427 5.671573,13 6.5,13 7.328427,13 8,12.328427 8,11.5 8,10.671573 7.328427,10 6.5,10 Z"
+     id="caravan-9"
+     style="fill:#0092da;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round" />
+  <path
+     inkscape:connector-curvature="0"
+     d="M 3,3 C 2,3 1,4 1,5 l 0,4 c 0,1 1,2 2,2 l 1.0625,0 C 4.295616,9.860792 5.291877,9 6.5,9 7.708123,9 8.704384,9.860792 8.9375,11 L 15,11 c 0,0 0,-1 -1,-1 l -1.5,0 0,-5 c 0,-0.9606645 -1.024338,-2 -2,-2 z M 3.84375,5 C 3.9375,4.984375 4,5 4,5 L 6,5 C 6,5 7,5 7,6 7,7 6,7 6,7 L 4,7 C 4,7 3,7 3,6 3,5.25 3.5625,5.046875 3.84375,5 Z M 9,5 9.5,5 c 0,0 1,0 1,1 0,1 -1,1 -1,1 L 9,7 C 9,7 8,7 8,6 8,5 9,5 9,5 Z M 6.5,10 C 5.671573,10 5,10.671573 5,11.5 5,12.328427 5.671573,13 6.5,13 7.328427,13 8,12.328427 8,11.5 8,10.671573 7.328427,10 6.5,10 Z"
+     id="caravan"
+     style="fill:#0092da;fill-opacity:1;stroke:none" />
+</svg>

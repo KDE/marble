@@ -131,8 +131,9 @@ class GeoDataFeaturePrivate
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker())
     {
         GeoDataStyle *style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
-        QString const imagePath = MarbleDirs::path( "bitmaps/poi/" + bitmap + ".png" );
+        QString const imagePath = MarbleDirs::path( "bitmaps/osmcarto/symbols/48/" + bitmap + ".png" );
         style->setIconStyle( GeoDataIconStyle( imagePath) );
+        style->iconStyle().setScale(0.67);
         style->setLabelStyle( GeoDataLabelStyle( font, Qt::black ) );
         return style;
     }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="100%"
+   height="100%"
+   viewBox="0 0 16 16"
+   id="svg2"
+   inkscape:version="0.91 r"
+   sodipodi:docname="water_park.16.svg">
+  <sodipodi:namedview
+     pagecolor="#dadada"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="706"
+     inkscape:window-height="480"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="14.75"
+     inkscape:cx="8"
+     inkscape:cy="8"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6" />
+  <rect
+     width="16"
+     height="16"
+     x="0"
+     y="0"
+     id="canvas"
+     style="visibility:hidden;fill:none;stroke:none" />
+  <path
+     inkscape:connector-curvature="0"
+     d="M 9.28125,2.9062497 C 9.1873095,2.9137208 9.0966058,2.9442243 9,2.9999997 l -3.03125,1.625 c -0.38453,0.182 -0.53485,0.75215 -0.28125,1.09375 l 0.8125,1.28125 -3.5,2 0.03125,0.625 c 0,0 0.4679074,-0.375 0.96875,-0.375 0.4737861,0 1.4232286,0.75 2,0.75 0.5033641,0 1.4961991,-0.75 2,-0.75 0.5243377,0 1.4756623,0.75 2,0.75 l 0.34375,0 -2.84375,-4.5 2.09375,-1.09375 C 10.041742,4.1476014 10.186529,3.6980778 10,3.3749997 9.8279386,3.0769806 9.5630716,2.8838364 9.28125,2.9062497 Z M 11,5.4999997 c -0.82843,0 -1.5,0.6716 -1.5,1.5 0,0.8284 0.67157,1.5 1.5,1.5 0.82843,0 1.5,-0.6716 1.5,-1.5 0,-0.8284 -0.67157,-1.5 -1.5,-1.5 z M 4,10.75 c -0.533898,0 -1.492285,0.75 -2,0.75 L 2,13 c 0.537184,0 1.525424,-0.75 2,-0.75 0.504237,0 1.466102,0.75 2,0.75 0.475502,0 1.492285,-0.75 2,-0.75 0.504237,0 1.52173,0.75 2,0.75 0.504237,0 1.525424,-0.75 2,-0.75 0.474576,0 1.495763,0.75 2,0.75 l 0,-1.5 c -0.415254,0 -1.466102,-0.779661 -2,-0.75 -0.47827,0 -1.465278,0.75 -2,0.75 -0.444915,0 -1.495763,-0.75 -2,-0.75 -0.504237,0 -1.554097,0.75 -2,0.75 -0.475502,0 -1.466102,-0.75 -2,-0.75 z"
+     id="swimming-8"
+     style="fill:#734a08;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round" />
+  <path
+     inkscape:connector-curvature="0"
+     d="M 9.28125,2.90625 C 9.1873095,2.9137211 9.0966058,2.9442246 9,3 L 5.96875,4.625 C 5.58422,4.807 5.4339,5.37715 5.6875,5.71875 L 6.5,7 3,9 3.03125,9.625 C 3.03125,9.625 3.4991574,9.25 4,9.25 4.4737861,9.25 5.4232286,10 6,10 6.5033641,10 7.4961991,9.25 8,9.25 8.5243377,9.25 9.4756623,10 10,10 L 10.34375,10 7.5,5.5 9.59375,4.40625 C 10.041742,4.1476017 10.186529,3.6980781 10,3.375 9.8279386,3.0769809 9.5630716,2.8838367 9.28125,2.90625 Z M 11,5.5 C 10.17157,5.5 9.5,6.1716 9.5,7 9.5,7.8284 10.17157,8.5 11,8.5 11.82843,8.5 12.5,7.8284 12.5,7 12.5,6.1716 11.82843,5.5 11,5.5 Z m -7,5.25 c -0.533898,0 -1.492285,0.75 -2,0.75 L 2,13 c 0.537184,0 1.525424,-0.75 2,-0.75 0.504237,0 1.466102,0.75 2,0.75 0.475502,0 1.492285,-0.75 2,-0.75 0.504237,0 1.52173,0.75 2,0.75 0.504237,0 1.525424,-0.75 2,-0.75 0.474576,0 1.495763,0.75 2,0.75 l 0,-1.5 c -0.415254,0 -1.466102,-0.779661 -2,-0.75 -0.47827,0 -1.465278,0.75 -2,0.75 -0.444915,0 -1.495763,-0.75 -2,-0.75 -0.504237,0 -1.554097,0.75 -2,0.75 -0.475502,0 -1.466102,-0.75 -2,-0.75 z"
+     id="swimming"
+     style="fill:#734a08;fill-opacity:1" />
+</svg>
