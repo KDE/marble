@@ -132,16 +132,26 @@ quint8 GeoDataPolyStyle::colorIndex() const
     return d->m_colorIndex;
 }
 
-void GeoDataPolyStyle::setTexturePath( const QString& texturePath ){
+void GeoDataPolyStyle::setTexturePath( const QString& texturePath )
+{
     d->m_texturePath = texturePath;
+    d->m_textureImage = QImage();
 }
 
-QString GeoDataPolyStyle::texturePath() const {
+QString GeoDataPolyStyle::texturePath() const
+{
     return d->m_texturePath;
 }
 
-QImage GeoDataPolyStyle::textureImage() const {
-    return QImage(MarbleDirs::path(d->m_texturePath));
+QImage GeoDataPolyStyle::textureImage() const
+{
+    if ( !d->m_textureImage.isNull() ) {
+        return d->m_textureImage;
+    } else if ( !d->m_texturePath.isEmpty() ) {
+        d->m_textureImage = QImage( resolvePath( d->m_texturePath ) );
+    }
+
+    return d->m_textureImage;
 }
 
 void GeoDataPolyStyle::pack( QDataStream& stream ) const
