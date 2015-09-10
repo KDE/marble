@@ -237,7 +237,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::LanduseRetail]       = 11;
 
     s_defaultMinZoomLevels[GeoDataFeature::RailwayRail]         = 6;
-    s_defaultMinZoomLevels[GeoDataFeature::RailwayTram]         = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::RailwayTram]         = 14;
     s_defaultMinZoomLevels[GeoDataFeature::RailwayLightRail]    = 12;
     s_defaultMinZoomLevels[GeoDataFeature::RailwayAbandoned]    = 10;
     s_defaultMinZoomLevels[GeoDataFeature::RailwaySubway]       = 13;

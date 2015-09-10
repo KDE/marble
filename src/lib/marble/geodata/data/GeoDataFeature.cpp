@@ -543,7 +543,8 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
 
     s_defaultStyle[GeoDataFeature::RailwayRail]              = GeoDataFeaturePrivate::createStyle( 2, 5, "#706E70", "#EEEEEE", true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, true,
                                                                                                    QVector< qreal >() << 2 << 3 );
-    s_defaultStyle[GeoDataFeature::RailwayTram]              = GeoDataFeaturePrivate::createStyle( 1, 4, "#706E70", "#706E70", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
+    // FIXME: the tram is currently being rendered as a polygon.
+    s_defaultStyle[GeoDataFeature::RailwayTram]              = GeoDataFeaturePrivate::createStyle( 2, 5, Qt::transparent, Qt::transparent, false, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
     s_defaultStyle[GeoDataFeature::RailwayLightRail]         = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
     s_defaultStyle[GeoDataFeature::RailwayAbandoned]         = GeoDataFeaturePrivate::createStyle( 2, 5, Qt::transparent, "#706E70", false, false, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false );
     s_defaultStyle[GeoDataFeature::RailwaySubway]            = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
