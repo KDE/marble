@@ -141,6 +141,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         // OpenStreetMap highways
         HighwaySteps,
+
+        HighwayTrafficSignals,
+
         HighwayUnknown,
         HighwayPath,
         HighwayFootway,
@@ -189,13 +192,29 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         FoodRestaurant,
 
         // OpenStreetMap category Health
+        HealthDentist,
         HealthDoctors,
         HealthHospital,
         HealthPharmacy,
+        HealthVeterinary,
 
         // OpenStreetMap category Money
         MoneyAtm,
         MoneyBank,
+
+        AmenityBench,
+        AmenityCourtHouse,
+        AmenityFireStation,
+        AmenityHuntingStand,
+        AmenityPolice,
+        AmenityPostBox,
+        AmenityPostOffice,
+        AmenityPrison,
+        AmenityRecycling,
+        AmenityTelephone,
+        AmenityToilets,
+        AmenityTownHall,
+        AmenityWasteBasket,
 
         // OpenStreetMap category Shopping
         ShopBeverages,

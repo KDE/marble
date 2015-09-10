@@ -55,10 +55,29 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "car_sharing" ) ]        = GeoDataFeature::TransportCarShare;
     s_visualCategories[ OsmTag( "amenity", "fuel" ) ]               = GeoDataFeature::TransportFuel;
     s_visualCategories[ OsmTag( "amenity", "parking" ) ]            = GeoDataFeature::TransportParking;
+    s_visualCategories[ OsmTag( "amenity", "atm" ) ]                = GeoDataFeature::MoneyAtm;
     s_visualCategories[ OsmTag( "amenity", "bank" ) ]               = GeoDataFeature::MoneyBank;
+
+    s_visualCategories[ OsmTag( "amenity", "bench" ) ]              = GeoDataFeature::AmenityBench;
+    s_visualCategories[ OsmTag( "amenity", "courthouse" ) ]         = GeoDataFeature::AmenityCourtHouse;
+    s_visualCategories[ OsmTag( "amenity", "firestation" ) ]        = GeoDataFeature::AmenityFireStation;
+    s_visualCategories[ OsmTag( "amenity", "hunting_stand" ) ]      = GeoDataFeature::AmenityHuntingStand;
+    s_visualCategories[ OsmTag( "amenity", "police" ) ]             = GeoDataFeature::AmenityPolice;
+    s_visualCategories[ OsmTag( "amenity", "post_box" ) ]           = GeoDataFeature::AmenityPostBox;
+    s_visualCategories[ OsmTag( "amenity", "post_office" ) ]        = GeoDataFeature::AmenityPostOffice;
+    s_visualCategories[ OsmTag( "amenity", "prison" ) ]             = GeoDataFeature::AmenityPrison;
+    s_visualCategories[ OsmTag( "amenity", "recycling" ) ]          = GeoDataFeature::AmenityRecycling;
+    s_visualCategories[ OsmTag( "amenity", "telephone" ) ]          = GeoDataFeature::AmenityTelephone;
+    s_visualCategories[ OsmTag( "amenity", "toilets" ) ]            = GeoDataFeature::AmenityToilets;
+    s_visualCategories[ OsmTag( "amenity", "townhall" ) ]           = GeoDataFeature::AmenityTownHall;
+    s_visualCategories[ OsmTag( "amenity", "waste_basket" ) ]       = GeoDataFeature::AmenityWasteBasket;
+
+    s_visualCategories[ OsmTag( "amenity", "dentist" ) ]            = GeoDataFeature::HealthDentist;
     s_visualCategories[ OsmTag( "amenity", "pharmacy" ) ]           = GeoDataFeature::HealthPharmacy;
     s_visualCategories[ OsmTag( "amenity", "hospital" ) ]           = GeoDataFeature::HealthHospital;
     s_visualCategories[ OsmTag( "amenity", "doctors" ) ]            = GeoDataFeature::HealthDoctors;
+    s_visualCategories[ OsmTag( "amenity", "veterinary" ) ]         = GeoDataFeature::HealthVeterinary;
+
     s_visualCategories[ OsmTag( "amenity", "cinema" ) ]             = GeoDataFeature::TouristCinema;
     s_visualCategories[ OsmTag( "amenity", "theatre" ) ]            = GeoDataFeature::TouristTheatre;
     s_visualCategories[ OsmTag( "amenity", "place_of_worship" ) ]   = GeoDataFeature::ReligionPlaceOfWorship;
@@ -132,6 +151,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "historic", "fort" ) ]              = GeoDataFeature::TouristCastle;
     s_visualCategories[ OsmTag( "historic", "monument" ) ]          = GeoDataFeature::TouristMonument;
     s_visualCategories[ OsmTag( "historic", "ruins" ) ]             = GeoDataFeature::TouristRuin;
+
+    s_visualCategories[ OsmTag( "highway", "traffic_signals" ) ]    = GeoDataFeature::HighwayTrafficSignals;
 
     s_visualCategories[ OsmTag( "highway", "unknown" ) ]            = GeoDataFeature::HighwayUnknown;
     s_visualCategories[ OsmTag( "highway", "steps" ) ]              = GeoDataFeature::HighwaySteps;
