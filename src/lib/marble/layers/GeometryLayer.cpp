@@ -150,6 +150,10 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::NaturalGlacier]      = s_defaultZValue - 10;
     s_defaultZValues[GeoDataFeature::NaturalScrub]        = s_defaultZValue - 13;
 
+    //Military
+
+    s_defaultZValues[GeoDataFeature::MilitaryDangerArea]  = s_defaultZValue - 10;
+
     //Landuse
 
     s_defaultZValues[GeoDataFeature::LeisurePark]         = s_defaultZValue - 14;
@@ -215,6 +219,8 @@ void GeometryLayerPrivate::initializeDefaultValues()
     //FIXME: Bad, better to expand this
     for(int i = GeoDataFeature::AccomodationCamping; i <= GeoDataFeature::ReligionSikh; i++)
         s_defaultMinZoomLevels[i] = 15;
+
+    s_defaultMinZoomLevels[GeoDataFeature::MilitaryDangerArea]  = 11;
 
     s_defaultMinZoomLevels[GeoDataFeature::LeisurePark]         = 11;
     s_defaultMinZoomLevels[GeoDataFeature::LeisurePlayground]   = 11;

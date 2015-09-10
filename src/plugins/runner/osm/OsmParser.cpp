@@ -47,6 +47,8 @@ OsmParser::OsmParser()
     m_areaTags.insert( "leisure=park" );
     m_areaTags.insert( "leisure=playground" );
 
+    m_areaTags.insert( "military=danger_area" );
+
     m_areaTags.insert( "landuse=allotments" );
     m_areaTags.insert( "landuse=basin" );
     m_areaTags.insert( "landuse=brownfield" );

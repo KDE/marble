@@ -121,6 +121,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AirPort,
         Observatory,
 
+        // Military
+        MilitaryDangerArea,
+
         // Runners
         Wikipedia,
         OsmSite,
