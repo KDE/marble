@@ -145,11 +145,10 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         NaturalGlacier,
         NaturalScrub,
 
-        // OpenStreetMap highways
-        HighwaySteps,
-
         HighwayTrafficSignals,
 
+        // OpenStreetMap highways
+        HighwaySteps,
         HighwayUnknown,
         HighwayPath,
         HighwayFootway,
