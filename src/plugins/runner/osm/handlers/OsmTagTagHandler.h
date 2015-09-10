@@ -28,6 +28,7 @@ public:
     virtual GeoNode* parse( GeoParser& ) const;
 private:
     static GeoDataPlacemark* createPOI( GeoDataDocument* doc, GeoDataGeometry* geometry, const OsmPlacemarkData &osmData );
+    void appendIfNeeded(GeoDataDocument* document, GeoDataPlacemark* placemark) const;
 };
 
 }

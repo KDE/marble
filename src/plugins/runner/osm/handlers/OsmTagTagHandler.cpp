@@ -75,7 +75,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
                 placemark = createPOI( doc, geometry, osmData );
             }
             else if ( parentItem.represents( osmTag_way ) ) {
-                doc->append( placemark );
+                appendIfNeeded(doc, placemark);
             }
             else {
                 return 0;
@@ -83,6 +83,10 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
         }
         placemark->setName( value );
         return 0;
+    }
+
+    if ( key == "highway" && parentItem.represents( osmTag_way ) ) {
+        appendIfNeeded(doc, placemark);
     }
 
     // Ways or relations can represent closed areas such as buildings
@@ -186,6 +190,17 @@ GeoDataPlacemark* OsmTagTagHandler::createPOI( GeoDataDocument* doc, GeoDataGeom
     newPlacemark->setZoomLevel( 18 );
     doc->append( newPlacemark );
     return newPlacemark;
+}
+
+void OsmTagTagHandler::appendIfNeeded(GeoDataDocument *document, GeoDataPlacemark *placemark) const
+{
+    for (int i=0, n=document->size(); i<n; ++i) {
+        if (document->child(i) == placemark) {
+            return;
+        }
+    }
+
+    document->append(placemark);
 }
 
 }
