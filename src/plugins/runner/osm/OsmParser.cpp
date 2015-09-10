@@ -33,6 +33,7 @@ OsmParser::OsmParser()
     m_areaTags.insert( "landuse=forest" );
     m_areaTags.insert( "natural=wood" );
     m_areaTags.insert( "natural=beach" );
+    m_areaTags.insert( "natural=wetland" );
     m_areaTags.insert( "area=yes" );
     m_areaTags.insert( "waterway=riverbank" );
 
