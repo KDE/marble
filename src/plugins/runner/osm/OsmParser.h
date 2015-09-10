@@ -15,6 +15,7 @@
 
 #include "GeoParser.h"
 #include "GeoDataCoordinates.h"
+#include "MarbleDirs.h"
 
 #include <QColor>
 #include <QList>
