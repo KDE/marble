@@ -220,6 +220,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "leisure", "park" ) ]               = GeoDataFeature::LeisurePark;
     s_visualCategories[ OsmTag( "leisure", "playground" ) ]         = GeoDataFeature::LeisurePlayground;
     s_visualCategories[ OsmTag( "leisure", "pitch" ) ]              = GeoDataFeature::LeisurePitch;
+    s_visualCategories[ OsmTag( "leisure", "sports_centre" ) ]      = GeoDataFeature::LeisureSportsCentre;
+    s_visualCategories[ OsmTag( "leisure", "stadium" ) ]            = GeoDataFeature::LeisureStadium;
 
     s_visualCategories[ OsmTag( "railway", "rail" ) ]               = GeoDataFeature::RailwayRail;
     s_visualCategories[ OsmTag( "railway", "tram" ) ]               = GeoDataFeature::RailwayTram;

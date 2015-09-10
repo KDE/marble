@@ -529,26 +529,28 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::LeisurePark]              = GeoDataFeaturePrivate::createWayStyle( "#CDF6CA", "#CDF6CA", true, false );
     s_defaultStyle[GeoDataFeature::LeisurePlayground]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/playground.16", amenityColor, "#CCFFF1", "#BDFFED" );
     s_defaultStyle[GeoDataFeature::LeisurePitch]             = GeoDataFeaturePrivate::createWayStyle( "#8ad3af", QColor("#8ad3af").darker(150), true, true );
+    s_defaultStyle[GeoDataFeature::LeisureSportsCentre]      = GeoDataFeaturePrivate::createWayStyle( "#3c9", QColor("#3c9").darker(150), true, true );
+    s_defaultStyle[GeoDataFeature::LeisureStadium]           = GeoDataFeaturePrivate::createWayStyle( "#3c9", QColor("#3c9").darker(150), true, true );
 
     s_defaultStyle[GeoDataFeature::LanduseAllotments]        = GeoDataFeaturePrivate::createWayStyle( "#E4C6AA", "#E4C6AA", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/allotments.png") );
     s_defaultStyle[GeoDataFeature::LanduseBasin]             = GeoDataFeaturePrivate::createWayStyle( QColor(0xB5, 0xD0, 0xD0, 0x80 ), QColor( 0xB5, 0xD0, 0xD0 ) );
-    s_defaultStyle[GeoDataFeature::LanduseCemetery]          = GeoDataFeaturePrivate::createWayStyle( "#A9C9AE", "#A9C9AE", true, false );
-    s_defaultStyle[GeoDataFeature::LanduseCommercial]        = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
-    s_defaultStyle[GeoDataFeature::LanduseConstruction]      = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
-    s_defaultStyle[GeoDataFeature::LanduseFarmland]          = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
-    s_defaultStyle[GeoDataFeature::LanduseFarmyard]          = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
-    s_defaultStyle[GeoDataFeature::LanduseGarages]           = GeoDataFeaturePrivate::createWayStyle( "#E0DDCD", "#E0DDCD", true, false );
-    s_defaultStyle[GeoDataFeature::LanduseGrass]             = GeoDataFeaturePrivate::createWayStyle( "#A8C8A5", "#A8C8A5", true, false );
-    s_defaultStyle[GeoDataFeature::LanduseIndustrial]        = GeoDataFeaturePrivate::createWayStyle( "#DED0D5", "#DED0D5", true, false );
-    s_defaultStyle[GeoDataFeature::LanduseLandfill]          = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
-    s_defaultStyle[GeoDataFeature::LanduseMeadow]            = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
+    s_defaultStyle[GeoDataFeature::LanduseCemetery]          = GeoDataFeaturePrivate::createWayStyle( "#A9C9AE", "#A9C9AE", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseCommercial]        = GeoDataFeaturePrivate::createWayStyle( "#F2DAD9", "#D1B2B0", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseConstruction]      = GeoDataFeaturePrivate::createWayStyle( "#b6b592", "#b6b592", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseFarmland]          = GeoDataFeaturePrivate::createWayStyle( "#EDDDC9", "#C8B69E", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseFarmyard]          = GeoDataFeaturePrivate::createWayStyle( "#EFD6B5", "#D1B48C", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseGarages]           = GeoDataFeaturePrivate::createWayStyle( "#E0DDCD", "#E0DDCD", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseGrass]             = GeoDataFeaturePrivate::createWayStyle( "#A8C8A5", "#A8C8A5", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseIndustrial]        = GeoDataFeaturePrivate::createWayStyle( "#DED0D5", "#DED0D5", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseLandfill]          = GeoDataFeaturePrivate::createWayStyle( "#b6b592", "#b6b592", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseMeadow]            = GeoDataFeaturePrivate::createWayStyle( "#cdebb0", "#cdebb0", true, true );
     s_defaultStyle[GeoDataFeature::LanduseMilitary]          = GeoDataFeaturePrivate::createWayStyle( "#F3D8D2", "#F3D8D2", true, true, Qt::BDiagPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/military_red_hatch.png") );
     s_defaultStyle[GeoDataFeature::LanduseQuarry]            = GeoDataFeaturePrivate::createWayStyle( "#C4C2C2", "#C4C2C2", true, true, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/quarry.png") );
     s_defaultStyle[GeoDataFeature::LanduseRailway]           = GeoDataFeaturePrivate::createWayStyle( "#DED0D5", "#DED0D5", true, false );
     s_defaultStyle[GeoDataFeature::LanduseReservoir]         = GeoDataFeaturePrivate::createWayStyle( "#B5D0D0", "#B5D0D0", true, false );
     s_defaultStyle[GeoDataFeature::LanduseResidential]       = GeoDataFeaturePrivate::createWayStyle( "#DCDCDC", "#DCDCDC", true, false );
-    s_defaultStyle[GeoDataFeature::LanduseRetail]            = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, false, false );
-    s_defaultStyle[GeoDataFeature::LanduseOrchard]            = GeoDataFeaturePrivate::createWayStyle( "#AEDFA3," "#AEDFA3", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/orchard.png");
+    s_defaultStyle[GeoDataFeature::LanduseRetail]            = GeoDataFeaturePrivate::createWayStyle( "#FFD6D1", "#D99C95", false, false );
+    s_defaultStyle[GeoDataFeature::LanduseOrchard]           = GeoDataFeaturePrivate::createWayStyle( "#AEDFA3," "#AEDFA3", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/orchard.png");
 
     s_defaultStyle[GeoDataFeature::MilitaryDangerArea]       = GeoDataFeaturePrivate::createWayStyle( "#FFC0CB", "#FFC0CB", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/danger.png") );
 
