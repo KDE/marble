@@ -52,6 +52,8 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 
     void addLandDocument( const GeoDataDocument *landDocument );
 
+    int textureLayerCount() const;
+
     /**
      * @brief Adds texture sublayer, taking ownership of the object's memory
      *        Does nothing if a texture with the same source directory was already

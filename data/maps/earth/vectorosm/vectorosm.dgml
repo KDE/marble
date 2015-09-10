@@ -15,13 +15,13 @@
         <discrete> false </discrete>
       </zoom>
     </head>
-    <map bgcolor="#000000">
-      <canvas/>
-      <target/>
+    <map bgcolor="#dadada">
+        <canvas/>
+        <target/>
       <layer name="openstreetmap" backend="texture">
         <!-- OpenStreetMap mapnik rendered tiles expire after seven days
                      or 604800 seconds -->
-        <texture name="mapnik_data" expire="604800">
+        <texture name="dennis" expire="604800">
           <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
           <tileSize width="256" height="256"/>
           <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="19" mode="OpenStreetMap"/>
@@ -108,6 +108,11 @@
         </property>
       </group>
       <group name="Texture Layers">
+        <property name="dennis">
+          <value>true</value>
+          <available>true</available>
+        </property>
+
         <property name="hillshading">
           <value>false</value>
           <available>true</available>
@@ -115,6 +120,10 @@
       </group>
     </settings>
     <legend>
+
+    <section name="hilly" checkable="true" connect="dennis" spacing="12">
+        <heading>OSM Bitmap Tiles</heading>
+    </section>
 
     <section name="Tours">
         <heading>Explore the Earth</heading>

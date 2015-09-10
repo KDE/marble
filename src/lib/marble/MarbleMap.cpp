@@ -799,8 +799,9 @@ void MarbleMapPrivate::updateMapTheme()
 
     q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
 
+    m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
+
     if ( !m_model->mapTheme()->map()->hasTextureLayers() ) {
-        m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
         m_layerManager.addLayer( &m_groundLayer );
     }
 
@@ -988,6 +989,12 @@ void MarbleMap::setPropertyValue( const QString& name, bool value )
     }
     else {
         mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+    }
+    if (d->m_textureLayer.textureLayerCount() == 0) {
+        d->m_layerManager.addLayer( &d->m_groundLayer );
+    }
+    else {
+        d->m_layerManager.removeLayer( &d->m_groundLayer );
     }
 }
 

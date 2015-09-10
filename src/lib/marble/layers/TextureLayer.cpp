@@ -280,6 +280,11 @@ void TextureLayer::addLandDocument( const GeoDataDocument *landDocument )
     }
 }
 
+int TextureLayer::textureLayerCount() const
+{
+    return d->m_layerDecorator.textureLayersSize();
+}
+
 bool TextureLayer::showSunShading() const
 {
     return d->m_layerDecorator.showSunShading();
