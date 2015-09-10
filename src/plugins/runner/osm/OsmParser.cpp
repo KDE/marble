@@ -70,6 +70,7 @@ OsmParser::OsmParser()
     m_areaTags.insert( "landuse=reservoir" );
     m_areaTags.insert( "landuse=residential" );
     m_areaTags.insert( "landuse=retail" );
+    m_areaTags.insert( "landuse=orchard" );
 }
 
 OsmParser::~OsmParser()
