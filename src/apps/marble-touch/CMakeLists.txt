@@ -33,8 +33,3 @@ target_link_libraries (
     ${MARBLEWIDGET}
     marbledeclarative
 )
-
-install( TARGETS marble-touch RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
-if(APPS_INSTALL_DIR)
-  install(PROGRAMS marble-touch.desktop DESTINATION ${APPS_INSTALL_DIR})
-endif(APPS_INSTALL_DIR)
