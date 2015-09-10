@@ -127,9 +127,9 @@ QVector<GeoDataFeature::GeoDataVisualCategory> sortedVisualCategories()
         << GeoDataFeature::HealthHospital
         << GeoDataFeature::HealthPharmacy
         << GeoDataFeature::MoneyBank
-        << GeoDataFeature::ShoppingBeverages
-        << GeoDataFeature::ShoppingHifi
-        << GeoDataFeature::ShoppingSupermarket
+        << GeoDataFeature::ShopBeverages
+        << GeoDataFeature::ShopHifi
+        << GeoDataFeature::ShopSupermarket
         << GeoDataFeature::TouristAttraction
         << GeoDataFeature::TouristCastle
         << GeoDataFeature::TouristCinema

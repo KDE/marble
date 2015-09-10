@@ -69,9 +69,9 @@ void GeoPolygonGraphicsItem::createDecorations()
            case GeoDataFeature::HealthPharmacy:
            case GeoDataFeature::MoneyAtm:
            case GeoDataFeature::MoneyBank:
-           case GeoDataFeature::ShoppingBeverages:
-           case GeoDataFeature::ShoppingHifi:
-           case GeoDataFeature::ShoppingSupermarket:
+           case GeoDataFeature::ShopBeverages:
+           case GeoDataFeature::ShopHifi:
+           case GeoDataFeature::ShopSupermarket:
            //case GeoDataFeature::TouristAttraction:
            //case GeoDataFeature::TouristCastle:
            case GeoDataFeature::TouristCinema:

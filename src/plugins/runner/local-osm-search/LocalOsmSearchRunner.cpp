@@ -52,9 +52,9 @@ LocalOsmSearchRunner::LocalOsmSearchRunner( const QStringList &databaseFiles, QO
         m_categoryMap[OsmPlacemark::HealthPharmacy] = GeoDataFeature::HealthPharmacy;
         m_categoryMap[OsmPlacemark::MoneyAtm] = GeoDataFeature::MoneyAtm;
         m_categoryMap[OsmPlacemark::MoneyBank] = GeoDataFeature::MoneyBank;
-        m_categoryMap[OsmPlacemark::ShoppingBeverages] = GeoDataFeature::ShoppingBeverages;
-        m_categoryMap[OsmPlacemark::ShoppingHifi] = GeoDataFeature::ShoppingHifi;
-        m_categoryMap[OsmPlacemark::ShoppingSupermarket] = GeoDataFeature::ShoppingSupermarket;
+        m_categoryMap[OsmPlacemark::ShoppingBeverages] = GeoDataFeature::ShopBeverages;
+        m_categoryMap[OsmPlacemark::ShoppingHifi] = GeoDataFeature::ShopHifi;
+        m_categoryMap[OsmPlacemark::ShoppingSupermarket] = GeoDataFeature::ShopSupermarket;
         m_categoryMap[OsmPlacemark::TouristAttraction] = GeoDataFeature::TouristAttraction;
         m_categoryMap[OsmPlacemark::TouristCastle] = GeoDataFeature::TouristCastle;
         m_categoryMap[OsmPlacemark::TouristCinema] = GeoDataFeature::TouristCinema;

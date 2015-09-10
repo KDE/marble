@@ -199,6 +199,7 @@ QImage GeoDataIconStyle::scaledIcon() const
     else {
        iconSize *= scale();
     }
+    if (icon().isNull()) return icon();
     return icon().scaled( iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation ) ;
 }
 
