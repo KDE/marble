@@ -57,6 +57,7 @@ private:
     virtual bool isValidRootElement();
     bool isHighway(const GeoDataPlacemark *placemark) const;
     void calculateHighwayWidth(GeoDataPlacemark *placemark) const;
+    void adjustGraveyardPattern(GeoDataPlacemark *placemark) const;
 
     virtual GeoDocument* createDocument() const;
 
