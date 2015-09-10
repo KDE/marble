@@ -185,6 +185,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "natural", "wood" ) ]               = GeoDataFeature::NaturalWood;
     s_visualCategories[ OsmTag( "natural", "beach" ) ]              = GeoDataFeature::NaturalBeach;
     s_visualCategories[ OsmTag( "natural", "wetland" ) ]            = GeoDataFeature::NaturalWetland;
+    s_visualCategories[ OsmTag( "natural", "glacier" ) ]            = GeoDataFeature::NaturalGlacier;
 
     s_visualCategories[ OsmTag( "landuse", "forest" ) ]             = GeoDataFeature::NaturalWood;
     s_visualCategories[ OsmTag( "landuse", "allotments" ) ]         = GeoDataFeature::LanduseAllotments;
