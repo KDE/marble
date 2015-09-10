@@ -21,7 +21,9 @@ FILE (GLOB BITMAP_POI_FILES bitmaps/poi/*.png)
 install (FILES ${BITMAP_POI_FILES}
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps/poi)
 
-install (DIRECTORY bitmaps/osmcarto DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps)
+install (DIRECTORY bitmaps/osmcarto
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps
+PATTERN "LICENSE.txt" EXCLUDE)
 
 FILE (GLOB BITMAP_STAR_FILES bitmaps/stars/*.png)
 install (FILES ${BITMAP_STAR_FILES}
