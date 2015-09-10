@@ -34,11 +34,15 @@ public:
 
 protected:
     virtual void createDecorations();
-    QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport) const;
+
+private:
+    QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding=0) const;
+    double extractBuildingHeight(double defaultValue) const;
 
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
     static const float s_decorationZValue;
+    double m_buildingHeight;
 };
 
 }

@@ -13,9 +13,12 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
 #include "GeoPainter.h"
+#include "GeoDataTypes.h"
+#include "GeoDataPlacemark.h"
 #include "ViewportParams.h"
 #include "GeoDataStyle.h"
 #include "MarbleDirs.h"
+#include "OsmPlacemarkData.h"
 
 #include <QVector2D>
 #include <QtCore/qmath.h>
@@ -26,14 +29,16 @@ namespace Marble
 GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataPolygon* polygon )
         : GeoGraphicsItem( feature ),
           m_polygon( polygon ),
-          m_ring( 0 )
+          m_ring( 0 ),
+          m_buildingHeight(0.0)
 {
 }
 
 GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataLinearRing* ring )
         : GeoGraphicsItem( feature ),
           m_polygon( 0 ),
-          m_ring( ring )
+          m_ring( ring ),
+          m_buildingHeight(0.0)
 {
 }
 
@@ -48,69 +53,78 @@ void GeoPolygonGraphicsItem::createDecorations()
     GeoPolygonGraphicsItem *fake3D;
 
     switch ( feature()->visualCategory() ) {
-        case GeoDataFeature::Building:
+    case GeoDataFeature::Building:
         //case GeoDataFeature::AccomodationCamping:
-           case GeoDataFeature::AccomodationHostel:
-           case GeoDataFeature::AccomodationHotel:
-           case GeoDataFeature::AccomodationMotel:
-           case GeoDataFeature::AccomodationYouthHostel:
-           case GeoDataFeature::AmenityLibrary:
-           case GeoDataFeature::EducationCollege:
-           case GeoDataFeature::EducationSchool:
-           case GeoDataFeature::EducationUniversity:
-           case GeoDataFeature::FoodBar:
-           case GeoDataFeature::FoodBiergarten:
-           case GeoDataFeature::FoodCafe:
-           case GeoDataFeature::FoodFastFood:
-           case GeoDataFeature::FoodPub:
-           case GeoDataFeature::FoodRestaurant:
-           case GeoDataFeature::HealthDoctors:
-           case GeoDataFeature::HealthHospital:
-           case GeoDataFeature::HealthPharmacy:
-           case GeoDataFeature::MoneyAtm:
-           case GeoDataFeature::MoneyBank:
-           case GeoDataFeature::ShopBeverages:
-           case GeoDataFeature::ShopHifi:
-           case GeoDataFeature::ShopSupermarket:
-           //case GeoDataFeature::TouristAttraction:
-           //case GeoDataFeature::TouristCastle:
-           case GeoDataFeature::TouristCinema:
-           //case GeoDataFeature::TouristMonument:
-           case GeoDataFeature::TouristMuseum:
-           //case GeoDataFeature::TouristRuin:
-           case GeoDataFeature::TouristTheatre:
-           //case GeoDataFeature::TouristThemePark:
-           //case GeoDataFeature::TouristViewPoint:
-           //case GeoDataFeature::TouristZoo:
-           case GeoDataFeature::ReligionPlaceOfWorship:
-           case GeoDataFeature::ReligionBahai:
-           case GeoDataFeature::ReligionBuddhist:
-           case GeoDataFeature::ReligionChristian:
-           case GeoDataFeature::ReligionHindu:
-           case GeoDataFeature::ReligionJain:
-           case GeoDataFeature::ReligionJewish:
-           case GeoDataFeature::ReligionShinto:
-           case GeoDataFeature::ReligionSikh:
-            fake3D = new GeoPolygonGraphicsItem( feature(), m_polygon );
-            fake3D->setZValue(this->zValue() + s_decorationZValue);
-            break;
+    case GeoDataFeature::AccomodationHostel:
+    case GeoDataFeature::AccomodationHotel:
+    case GeoDataFeature::AccomodationMotel:
+    case GeoDataFeature::AccomodationYouthHostel:
+    case GeoDataFeature::AmenityLibrary:
+    case GeoDataFeature::EducationCollege:
+    case GeoDataFeature::EducationSchool:
+    case GeoDataFeature::EducationUniversity:
+    case GeoDataFeature::FoodBar:
+    case GeoDataFeature::FoodBiergarten:
+    case GeoDataFeature::FoodCafe:
+    case GeoDataFeature::FoodFastFood:
+    case GeoDataFeature::FoodPub:
+    case GeoDataFeature::FoodRestaurant:
+    case GeoDataFeature::HealthDoctors:
+    case GeoDataFeature::HealthHospital:
+    case GeoDataFeature::HealthPharmacy:
+    case GeoDataFeature::MoneyAtm:
+    case GeoDataFeature::MoneyBank:
+    case GeoDataFeature::ShopBeverages:
+    case GeoDataFeature::ShopHifi:
+    case GeoDataFeature::ShopSupermarket:
+        //case GeoDataFeature::TouristAttraction:
+        //case GeoDataFeature::TouristCastle:
+    case GeoDataFeature::TouristCinema:
+        //case GeoDataFeature::TouristMonument:
+    case GeoDataFeature::TouristMuseum:
+        //case GeoDataFeature::TouristRuin:
+    case GeoDataFeature::TouristTheatre:
+        //case GeoDataFeature::TouristThemePark:
+        //case GeoDataFeature::TouristViewPoint:
+        //case GeoDataFeature::TouristZoo:
+    case GeoDataFeature::ReligionPlaceOfWorship:
+    case GeoDataFeature::ReligionBahai:
+    case GeoDataFeature::ReligionBuddhist:
+    case GeoDataFeature::ReligionChristian:
+    case GeoDataFeature::ReligionHindu:
+    case GeoDataFeature::ReligionJain:
+    case GeoDataFeature::ReligionJewish:
+    case GeoDataFeature::ReligionShinto:
+    case GeoDataFeature::ReligionSikh:
+    {
+        fake3D = new GeoPolygonGraphicsItem( feature(), m_polygon );
+        fake3D->setZValue(this->zValue() + s_decorationZValue);
+        double const height = extractBuildingHeight(8.0);
+        m_buildingHeight = qBound(1.0, height, 1000.0);
+        fake3D->m_buildingHeight = m_buildingHeight;
+        Q_ASSERT(m_buildingHeight > 0.0);
+    }
+        break;
 
-        default:
-            fake3D = nullptr;
-            break;
+    default:
+        fake3D = nullptr;
+        break;
     }
 
     this->addDecoration(fake3D);
 }
 
-QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const ViewportParams *viewport) const
+QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding) const
 {
     qreal const cameraFactor = 0.5 * tan(0.5 * 110 * DEG2RAD);
-    qreal const buildingHeightMeter = 8.0;
-    qreal const buildingFactor = buildingHeightMeter / EARTH_RADIUS;
+    Q_ASSERT(m_buildingHeight > 0.0);
+    qreal const buildingFactor = m_buildingHeight / EARTH_RADIUS;
 
     qreal const cameraHeightPixel = viewport->width() * cameraFactor;
-    qreal const buildingHeightPixel = viewport->radius() * buildingFactor;
+    qreal buildingHeightPixel = viewport->radius() * buildingFactor;
+    if (isCameraAboveBuilding) {
+        *isCameraAboveBuilding = cameraHeightPixel > buildingHeightPixel;
+    }
 
     qreal const offsetX = point.x() - viewport->width() / 2.0;
     qreal const alpha1 = atan2(offsetX, cameraHeightPixel);
@@ -123,6 +137,22 @@ QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const Viewp
     qreal const shiftY = 2 * (cameraHeightPixel-buildingHeightPixel) * sin(0.5*(beta2-beta1));
 
     return QPointF(shiftX, shiftY);
+}
+
+double GeoPolygonGraphicsItem::extractBuildingHeight(double defaultValue) const
+{
+    if (feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature());
+        if (placemark->osmData().containsTagKey("height")) {
+            /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
+            QString const heightValue = placemark->osmData().tagValue("height").replace(" meters", QString()).replace(" m", QString());
+            bool extracted = false;
+            double height = heightValue.toDouble(&extracted);
+            return extracted ? height : defaultValue;
+        }
+    }
+
+    return defaultValue;
 }
 
 const GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
@@ -200,9 +230,13 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
         }
     }
 
-    QPointF offsetAtCorner = buildingOffset(QPointF(0, 0), viewport);
-    qreal maxOffset = qMax( qAbs( offsetAtCorner.x() ), qAbs( offsetAtCorner.y() ) );
-    bool drawAccurate3D = maxOffset > 5.0;
+    bool drawAccurate3D = false;
+    bool isCameraAboveBuilding = false;
+    if (isBuildingFrame || isBuildingRoof) {
+        QPointF offsetAtCorner = buildingOffset(QPointF(0, 0), viewport, &isCameraAboveBuilding);
+        qreal maxOffset = qMax( qAbs( offsetAtCorner.x() ), qAbs( offsetAtCorner.y() ) );
+        drawAccurate3D = maxOffset > 5.0;
+    }
 
     if ( isBuildingFrame ) {
         QVector<QPolygonF*> polygons;
@@ -215,7 +249,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
             if (polygon->isEmpty()) {
                 continue;
             }
-            if ( drawAccurate3D ) {
+            if ( drawAccurate3D && isCameraAboveBuilding ) {
                 int const size = polygon->size();
                 QPointF & a = (*polygon)[0];
                 QPointF shiftA = a + buildingOffset(a, viewport);
@@ -233,6 +267,10 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
         }
         qDeleteAll(polygons);
     } else if (isBuildingRoof) {
+        if (!isCameraAboveBuilding) {
+            return; // do not render roof if we look inside the building
+        }
+
         QVector<QPolygonF*> polygons;
         if (m_polygon) {
             viewport->screenCoordinates(m_polygon->outerBoundary(), polygons);
@@ -253,8 +291,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
             }
         }
         qDeleteAll(polygons);
-    }
-    else {
+    } else {
         if ( m_polygon ) {
             painter->drawPolygon( *m_polygon );
         } else if ( m_ring ) {
