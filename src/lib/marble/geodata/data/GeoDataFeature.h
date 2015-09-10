@@ -224,6 +224,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AmenityTownHall,
         AmenityWasteBasket,
         AmenityDrinkingWater,
+        AmenityGraveyard,
 
         // OpenStreetMap category Shopping
         ShopBeverages,

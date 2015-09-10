@@ -140,6 +140,9 @@ void GeometryLayerPrivate::initializeDefaultValues()
 
     s_defaultZValues[GeoDataFeature::None]                = 0;
 
+    //Amenity
+    s_defaultZValues[GeoDataFeature::AmenityGraveyard]    = s_defaultZValue - 12;
+
     //Landuse
 
     for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseRetail; i++ )
@@ -224,6 +227,8 @@ void GeometryLayerPrivate::initializeDefaultValues()
     //FIXME: Bad, better to expand this
     for(int i = GeoDataFeature::AccomodationCamping; i <= GeoDataFeature::ReligionSikh; i++)
         s_defaultMinZoomLevels[i] = 15;
+
+    s_defaultMinZoomLevels[GeoDataFeature::AmenityGraveyard]    = 14;
 
     s_defaultMinZoomLevels[GeoDataFeature::MilitaryDangerArea]  = 11;
 

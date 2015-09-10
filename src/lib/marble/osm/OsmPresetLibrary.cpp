@@ -74,6 +74,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "townhall" ) ]           = GeoDataFeature::AmenityTownHall;
     s_visualCategories[ OsmTag( "amenity", "waste_basket" ) ]       = GeoDataFeature::AmenityWasteBasket;
     s_visualCategories[ OsmTag( "amenity", "drinking_water" ) ]     = GeoDataFeature::AmenityDrinkingWater;
+    s_visualCategories[ OsmTag( "amenity", "graveyard" ) ]          = GeoDataFeature::AmenityGraveyard;
 
     s_visualCategories[ OsmTag( "amenity", "dentist" ) ]            = GeoDataFeature::HealthDentist;
     s_visualCategories[ OsmTag( "amenity", "pharmacy" ) ]           = GeoDataFeature::HealthPharmacy;

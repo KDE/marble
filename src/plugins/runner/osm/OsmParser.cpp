@@ -43,6 +43,7 @@ OsmParser::OsmParser()
         m_areaTags.insert( QString("building=%1").arg(value) );
     }
 
+    m_areaTags.insert( "amenity=graveyard" );
     m_areaTags.insert( "amenity=parking" );
     m_areaTags.insert( "leisure=park" );
     m_areaTags.insert( "leisure=playground" );
@@ -129,6 +130,9 @@ void OsmParser::adjustStyles(GeoDataDocument* document)
             if (isHighway(placemark)) {
                 calculateHighwayWidth(placemark);
             }
+            else if( placemark->visualCategory() == GeoDataFeature::AmenityGraveyard ){
+                adjustGraveyardPattern( placemark );
+            }
         }
     }
 }
@@ -158,6 +162,21 @@ void OsmParser::calculateHighwayWidth(GeoDataPlacemark *placemark) const
     GeoDataStyle* style = new GeoDataStyle(*placemark->style());
     style->setLineStyle(lineStyle);
     placemark->setStyle(style);
+}
+
+void OsmParser::adjustGraveyardPattern(GeoDataPlacemark *placemark) const
+{
+    OsmPlacemarkData const & data = placemark->osmData();
+    if( data.containsTag("religion","jewish") ){
+        GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
+        polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
+    } else if( data.containsTag("religion","christian") ){
+        GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
+        polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
+    } else if( data.containsTag("religion","INT-generic") ){
+        GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
+        polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
+    }
 }
 
 bool OsmParser::isValidElement(const QString& tagName) const

@@ -520,6 +520,9 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::NaturalWater]             = GeoDataFeaturePrivate::createStyle( 2, 10, "#B5D0D0", "#B5D0D0", true, false,
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
                                                                                                    QFont("Arial"), QColor("#B5D0D0").darker(150));
+
+    s_defaultStyle[GeoDataFeature::AmenityGraveyard]         = GeoDataFeaturePrivate::createWayStyle( "#AACBAF", "#AACBAF", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png") );
+
     s_defaultStyle[GeoDataFeature::NaturalWood]              = GeoDataFeaturePrivate::createWayStyle( "#8DC46C", "#8DC46C", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/forest.png") );
     s_defaultStyle[GeoDataFeature::NaturalBeach]             = GeoDataFeaturePrivate::createWayStyle( "#FFF1BA", "#FFF1BA", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/beach.png") );
     s_defaultStyle[GeoDataFeature::NaturalWetland]           = GeoDataFeaturePrivate::createWayStyle( "#DDECEC", "#DDECEC", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/wetland.png") );
