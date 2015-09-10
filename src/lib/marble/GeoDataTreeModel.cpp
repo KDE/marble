@@ -369,6 +369,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
              || object->nodeType() == GeoDataTypes::GeoDataDocumentType
              || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+            if (feature->style()->iconStyle().icon().isNull()) return QImage();
             return QVariant(feature->style()->iconStyle().icon().scaled( QSize(16,16), Qt::KeepAspectRatio, Qt::SmoothTransformation ));
 	    }
     } else if ( role == Qt::ToolTipRole
