@@ -129,6 +129,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "shop", "toys" ) ]                  = GeoDataFeature::ShopToys;
     s_visualCategories[ OsmTag( "shop", "travel_agency" ) ]         = GeoDataFeature::ShopTravelAgency;
 
+    s_visualCategories[ OsmTag( "man_made", "pier" ) ]               = GeoDataFeature::ManmadePier;
 
     s_visualCategories[ OsmTag( "religion", "" ) ]                  = GeoDataFeature::ReligionPlaceOfWorship;
     s_visualCategories[ OsmTag( "religion", "bahai" ) ]             = GeoDataFeature::ReligionBahai;
@@ -181,6 +182,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "highway", "motorway" ) ]           = GeoDataFeature::HighwayMotorway;
 
     s_visualCategories[ OsmTag( "natural", "water" ) ]              = GeoDataFeature::NaturalWater;
+    s_visualCategories[ OsmTag( "natural", "bay" ) ]              = GeoDataFeature::NaturalWater;
+    s_visualCategories[ OsmTag( "natural", "coastline" ) ]              = GeoDataFeature::NaturalWater;
     s_visualCategories[ OsmTag( "waterway", "stream" ) ]            = GeoDataFeature::NaturalWater;
     s_visualCategories[ OsmTag( "waterway", "river" ) ]             = GeoDataFeature::NaturalWater;
     s_visualCategories[ OsmTag( "waterway", "riverbank" ) ]         = GeoDataFeature::NaturalWater;
@@ -475,7 +478,7 @@ QStringList OsmPresetLibrary::buildingValues()
         << "hospital" << "chapel" << "hotel" << "train_station" << "dormitory"
         << "kindergarten" << "stable" << "storage_tank" << "shop" << "college"
         << "supermarket" << "factory" << "bungalow" << "tower" << "silo"
-        << "storage" << "station" << "education" << "carport";
+        << "storage" << "station" << "education" << "carport" << "houseboat";
     return osmBuildingValues;
 }
 

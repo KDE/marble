@@ -268,6 +268,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         ShopToys,
         ShopTravelAgency,
 
+        ManmadePier,
+
 
         // OpenStreetMap category Tourist
         TouristAttraction,

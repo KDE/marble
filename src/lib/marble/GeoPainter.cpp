@@ -209,6 +209,7 @@ GeoPainter::GeoPainter( QPaintDevice* pd, const ViewportParams *viewport, MapQua
 {
     const bool antialiased = mapQuality == HighQuality || mapQuality == PrintQuality;
     setRenderHint( QPainter::Antialiasing, antialiased );
+    ClipPainter::setScreenClip(false);
 }
 
 
