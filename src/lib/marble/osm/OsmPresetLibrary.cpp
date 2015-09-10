@@ -216,6 +216,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "landuse", "residential" ) ]        = GeoDataFeature::LanduseResidential;
     s_visualCategories[ OsmTag( "landuse", "retail" ) ]             = GeoDataFeature::LanduseRetail;
     s_visualCategories[ OsmTag( "landuse", "orchard" ) ]            = GeoDataFeature::LanduseOrchard;
+    s_visualCategories[ OsmTag( "landuse", "vineyard" ) ]           = GeoDataFeature::LanduseVineyard;
 
     s_visualCategories[ OsmTag( "leisure", "park" ) ]               = GeoDataFeature::LeisurePark;
     s_visualCategories[ OsmTag( "leisure", "playground" ) ]         = GeoDataFeature::LeisurePlayground;

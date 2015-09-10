@@ -146,6 +146,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
         s_defaultZValues[(GeoDataFeature::GeoDataVisualCategory)i] = s_defaultZValue - 17;
 
     s_defaultZValues[GeoDataFeature::LanduseOrchard]      = s_defaultZValue - 17;
+    s_defaultZValues[GeoDataFeature::LanduseVineyard]     = s_defaultZValue - 17;
 
     s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 16;
     s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 15;
@@ -247,6 +248,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::LanduseResidential]  = 11;
     s_defaultMinZoomLevels[GeoDataFeature::LanduseRetail]       = 11;
     s_defaultMinZoomLevels[GeoDataFeature::LanduseOrchard]      = 14;
+    s_defaultMinZoomLevels[GeoDataFeature::LanduseVineyard]     = 14;
 
     s_defaultMinZoomLevels[GeoDataFeature::RailwayRail]         = 6;
     s_defaultMinZoomLevels[GeoDataFeature::RailwayTram]         = 14;

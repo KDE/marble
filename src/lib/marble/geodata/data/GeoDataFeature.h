@@ -335,6 +335,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         LanduseResidential,
         LanduseRetail,
         LanduseOrchard,
+        LanduseVineyard,
 
         RailwayRail,
         RailwayTram,

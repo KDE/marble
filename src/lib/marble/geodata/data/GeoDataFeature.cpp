@@ -551,6 +551,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::LanduseResidential]       = GeoDataFeaturePrivate::createWayStyle( "#DCDCDC", "#DCDCDC", true, false );
     s_defaultStyle[GeoDataFeature::LanduseRetail]            = GeoDataFeaturePrivate::createWayStyle( "#FFD6D1", "#D99C95", false, false );
     s_defaultStyle[GeoDataFeature::LanduseOrchard]           = GeoDataFeaturePrivate::createWayStyle( "#AEDFA3", "#AEDFA3", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/orchard.png") );
+    s_defaultStyle[GeoDataFeature::LanduseVineyard]          = GeoDataFeaturePrivate::createWayStyle( "#AEDFA3", "#AEDFA3", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/vineyard.png") );
 
     s_defaultStyle[GeoDataFeature::MilitaryDangerArea]       = GeoDataFeaturePrivate::createWayStyle( "#FFC0CB", "#FFC0CB", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/danger.png") );
 
