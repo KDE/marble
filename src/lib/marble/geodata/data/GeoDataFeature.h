@@ -140,6 +140,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         NaturalBeach,
         NaturalWetland,
         NaturalGlacier,
+        NaturalScrub,
 
         // OpenStreetMap highways
         HighwaySteps,

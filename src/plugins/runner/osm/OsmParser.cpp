@@ -35,6 +35,7 @@ OsmParser::OsmParser()
     m_areaTags.insert( "natural=beach" );
     m_areaTags.insert( "natural=wetland" );
     m_areaTags.insert( "natural=glacier" );
+    m_areaTags.insert( "natural=scrub" );
     m_areaTags.insert( "area=yes" );
     m_areaTags.insert( "waterway=riverbank" );
 

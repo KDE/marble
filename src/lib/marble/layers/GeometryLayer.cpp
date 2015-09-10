@@ -148,6 +148,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::NaturalBeach]        = s_defaultZValue - 13;
     s_defaultZValues[GeoDataFeature::NaturalWetland]      = s_defaultZValue - 13;
     s_defaultZValues[GeoDataFeature::NaturalGlacier]      = s_defaultZValue - 10;
+    s_defaultZValues[GeoDataFeature::NaturalScrub]        = s_defaultZValue - 13;
 
     //Landuse
 
@@ -186,6 +187,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::NaturalBeach]        = 10;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWetland]      = 10;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalGlacier]      = 8;
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalScrub]        = 10;
     s_defaultMinZoomLevels[GeoDataFeature::Building]            = 15;
 
         // OpenStreetMap highways
