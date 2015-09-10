@@ -496,12 +496,12 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
 
     s_defaultStyle[GeoDataFeature::HighwayTrafficSignals]    = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/traffic_light" );
 
-    s_defaultStyle[GeoDataFeature::HighwayUnknown]           = GeoDataFeaturePrivate::createHighwayStyle( "highway_unknown", "#808080", QColor("#808080").darker(150));
-    s_defaultStyle[GeoDataFeature::HighwayPath]              = GeoDataFeaturePrivate::createHighwayStyle( "highway_path", "#ECECEC", "#F49B8C", QFont("Arial"), "000000", 1.0, 2, Qt::DotLine, Qt::RoundCap, true);
-    s_defaultStyle[GeoDataFeature::HighwayTrack]             = GeoDataFeaturePrivate::createHighwayStyle( "highway_track", "#ECECEC", "#A27F38", QFont("Arial"), "000000", 1.0, 2, Qt::DashDotLine, Qt::RoundCap, true );
-    s_defaultStyle[GeoDataFeature::HighwayPedestrian]        = GeoDataFeaturePrivate::createHighwayStyle( "highway_pedestrian", "#EBEBEB", QColor("#EBEBEB").darker(150), QFont("Arial"), "000000", 1.5, 9);
-    s_defaultStyle[GeoDataFeature::HighwayFootway]           = GeoDataFeaturePrivate::createHighwayStyle( "highway_footway", "#ECECEC", "#F49B8C", QFont("Arial"), "000000", 1.0, 2, Qt::DotLine, Qt::RoundCap, true);
-    s_defaultStyle[GeoDataFeature::HighwayCycleway]          = GeoDataFeaturePrivate::createHighwayStyle( "highway_cycleway", "#ECECEC", "#4B5CAD", QFont("Arial"), "000000", 1.0, 2, Qt::DotLine, Qt::RoundCap, true);
+    s_defaultStyle[GeoDataFeature::HighwayUnknown]           = GeoDataFeaturePrivate::createHighwayStyle( "highway_unknown", "#808080", QColor("#808080").darker(150), QFont("Arial"), "000000", 0.0, 1.0);
+    s_defaultStyle[GeoDataFeature::HighwayPath]              = GeoDataFeaturePrivate::createHighwayStyle( "highway_path", "#ECECEC", "#F49B8C", QFont("Arial"), "000000", 0.0, 1.0, Qt::DotLine, Qt::SquareCap, true);
+    s_defaultStyle[GeoDataFeature::HighwayTrack]             = GeoDataFeaturePrivate::createHighwayStyle( "highway_track", "#ECECEC", "#A27F38", QFont("Arial"), "000000", 0.0, 1.0, Qt::DashLine, Qt::SquareCap, true );
+    s_defaultStyle[GeoDataFeature::HighwayPedestrian]        = GeoDataFeaturePrivate::createHighwayStyle( "highway_pedestrian", "#EBEBEB", QColor("#EBEBEB").darker(150), QFont("Arial"), "000000", 0.0, 2.0);
+    s_defaultStyle[GeoDataFeature::HighwayFootway]           = GeoDataFeaturePrivate::createHighwayStyle( "highway_footway", "#ECECEC", "#F49B8C", QFont("Arial"), "000000", 0.0, 2.0, Qt::DotLine, Qt::SquareCap, true);
+    s_defaultStyle[GeoDataFeature::HighwayCycleway]          = GeoDataFeaturePrivate::createHighwayStyle( "highway_cycleway", "#ECECEC", "#4B5CAD", QFont("Arial"), "000000", 0.0, 2.0, Qt::DotLine, Qt::SquareCap, true);
     s_defaultStyle[GeoDataFeature::HighwayService]           = GeoDataFeaturePrivate::createHighwayStyle( "highway_service", "#FEFEFE", QColor("#FEFEFE").darker(150), QFont("Arial"), "000000", 1.0, 6 );
     s_defaultStyle[GeoDataFeature::HighwayLivingStreet]      = GeoDataFeaturePrivate::createHighwayStyle( "highway_living_street", "#CCCCCC", QColor("#CCCCCC").darker(150), QFont("Arial"), "000000", 1.5, 6 );
     s_defaultStyle[GeoDataFeature::HighwayRoad]              = GeoDataFeaturePrivate::createHighwayStyle( "highway_road", "#DCDCDC", QColor("#DCDCDC").darker(150), QFont("Arial"), "000000", 1.5, 6 );

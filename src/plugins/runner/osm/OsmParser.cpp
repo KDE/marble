@@ -150,6 +150,11 @@ bool OsmParser::isHighway(const GeoDataPlacemark *placemark) const
 
 void OsmParser::calculateHighwayWidth(GeoDataPlacemark *placemark) const
 {
+    if (placemark->visualCategory() >= GeoDataFeature::HighwaySteps &&
+        placemark->visualCategory() <= GeoDataFeature::HighwayService) {
+        return;
+    }
+
     OsmPlacemarkData const & data = placemark->osmData();
     bool const isOneWay = data.containsTag("oneway", "yes") || data.containsTag("oneway", "-1");
     int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
