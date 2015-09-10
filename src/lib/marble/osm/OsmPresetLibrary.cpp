@@ -202,6 +202,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "landuse", "construction" ) ]       = GeoDataFeature::LanduseConstruction;
     s_visualCategories[ OsmTag( "landuse", "farm" ) ]               = GeoDataFeature::LanduseFarmland;
     s_visualCategories[ OsmTag( "landuse", "farmland" ) ]           = GeoDataFeature::LanduseFarmland;
+    s_visualCategories[ OsmTag( "landuse", "greenhouse_horticulture" ) ] = GeoDataFeature::LanduseFarmland;
     s_visualCategories[ OsmTag( "landuse", "farmyard" ) ]           = GeoDataFeature::LanduseFarmland;
     s_visualCategories[ OsmTag( "landuse", "garages" ) ]            = GeoDataFeature::LanduseGarages;
     s_visualCategories[ OsmTag( "landuse", "greenfield" ) ]         = GeoDataFeature::LanduseConstruction;
@@ -212,17 +213,21 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "landuse", "orchard" ) ]            = GeoDataFeature::LanduseFarmland;
     s_visualCategories[ OsmTag( "landuse", "quarry" ) ]             = GeoDataFeature::LanduseQuarry;
     s_visualCategories[ OsmTag( "landuse", "railway" ) ]            = GeoDataFeature::LanduseRailway;
+    s_visualCategories[ OsmTag( "landuse", "recreation_ground" ) ]  = GeoDataFeature::LeisurePark;
     s_visualCategories[ OsmTag( "landuse", "reservoir" ) ]          = GeoDataFeature::LanduseReservoir;
     s_visualCategories[ OsmTag( "landuse", "residential" ) ]        = GeoDataFeature::LanduseResidential;
     s_visualCategories[ OsmTag( "landuse", "retail" ) ]             = GeoDataFeature::LanduseRetail;
     s_visualCategories[ OsmTag( "landuse", "orchard" ) ]            = GeoDataFeature::LanduseOrchard;
     s_visualCategories[ OsmTag( "landuse", "vineyard" ) ]           = GeoDataFeature::LanduseVineyard;
+    s_visualCategories[ OsmTag( "landuse", "village_green" ) ]      = GeoDataFeature::LanduseGrass;
 
+    s_visualCategories[ OsmTag( "leisure", "garden" ) ]             = GeoDataFeature::LanduseGrass;
     s_visualCategories[ OsmTag( "leisure", "park" ) ]               = GeoDataFeature::LeisurePark;
     s_visualCategories[ OsmTag( "leisure", "playground" ) ]         = GeoDataFeature::LeisurePlayground;
     s_visualCategories[ OsmTag( "leisure", "pitch" ) ]              = GeoDataFeature::LeisurePitch;
     s_visualCategories[ OsmTag( "leisure", "sports_centre" ) ]      = GeoDataFeature::LeisureSportsCentre;
     s_visualCategories[ OsmTag( "leisure", "stadium" ) ]            = GeoDataFeature::LeisureStadium;
+    s_visualCategories[ OsmTag( "leisure", "track" ) ]              = GeoDataFeature::LeisureTrack;
 
     s_visualCategories[ OsmTag( "railway", "rail" ) ]               = GeoDataFeature::RailwayRail;
     s_visualCategories[ OsmTag( "railway", "tram" ) ]               = GeoDataFeature::RailwayTram;

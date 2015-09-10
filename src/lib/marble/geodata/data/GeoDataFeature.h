@@ -315,6 +315,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         LeisurePitch,
         LeisureSportsCentre,
         LeisureStadium,
+        LeisureTrack,
 
         LanduseAllotments,
         LanduseBasin,
