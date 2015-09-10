@@ -396,6 +396,8 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::MoneyAtm]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/atm.16", amenityColor );
     s_defaultStyle[GeoDataFeature::MoneyBank]                = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/bank.16", amenityColor );
 
+    s_defaultStyle[GeoDataFeature::AmenityCommunityCentre]   = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/community_centre-14", amenityColor );
+    s_defaultStyle[GeoDataFeature::AmenityNightClub]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/nightclub.18", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityBench]             = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/bench.16", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityCourtHouse]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/courthouse-16", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityFireStation]       = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/firestation.16", amenityColor );
@@ -409,6 +411,8 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::AmenityToilets]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/toilets.16", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityTownHall]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/town_hall.16", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityWasteBasket]       = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/waste_basket.10", amenityColor );
+
+    s_defaultStyle[GeoDataFeature::AmenityDrinkingWater]     = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/drinking_water.16", amenityColor );
 
     s_defaultStyle[GeoDataFeature::ShopBeverages]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/beverages-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopHifi]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/hifi-14", shopColor );
@@ -462,6 +466,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::TouristViewPoint]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/viewpoint.16", amenityColor );
     s_defaultStyle[GeoDataFeature::TouristZoo]               = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor, Qt::transparent );
     s_defaultStyle[GeoDataFeature::TransportAerodrome]       = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "airdrome/aerodrome", airTransportColor );
+    s_defaultStyle[GeoDataFeature::TransportHelipad]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "airdrome/helipad", airTransportColor );
     s_defaultStyle[GeoDataFeature::TransportAirportTerminal] = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), airTransportColor );
     s_defaultStyle[GeoDataFeature::TransportBusStation]      = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/bus_stop.12", transportationColor );
     s_defaultStyle[GeoDataFeature::TransportBusStop]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/bus_stop.12", transportationColor );
@@ -470,9 +475,11 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::TransportParking]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/parking", transportationColor, "#F6EEB6", QColor( "#F6EEB6" ).darker() );
     s_defaultStyle[GeoDataFeature::TransportTrainStation]    = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), transportationColor );
     s_defaultStyle[GeoDataFeature::TransportTramStop]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), transportationColor );
-    s_defaultStyle[GeoDataFeature::TransportRentalBicycle]   = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/rental_ bicycle.16", transportationColor );
+    s_defaultStyle[GeoDataFeature::TransportRentalBicycle]   = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/rental_bicycle.16", transportationColor );
     s_defaultStyle[GeoDataFeature::TransportRentalCar]       = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/rental_car.16", transportationColor );
     s_defaultStyle[GeoDataFeature::TransportTaxiRank]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/taxi.16", transportationColor );
+    s_defaultStyle[GeoDataFeature::TransportBicycleParking]  = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/bicycle_parking.16", transportationColor );
+    s_defaultStyle[GeoDataFeature::TransportMotorcycleParking] = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/motorcycle_parking.16", transportationColor );
     s_defaultStyle[GeoDataFeature::ReligionPlaceOfWorship]   = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "black/place_of_worship.16" );
     s_defaultStyle[GeoDataFeature::ReligionBahai]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString() );
     s_defaultStyle[GeoDataFeature::ReligionBuddhist]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "black/buddhist.16" );
@@ -520,7 +527,8 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::NaturalScrub]             = GeoDataFeaturePrivate::createWayStyle( "#B5E3B5", "#B5E3B5", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/scrub.png") );
 
     s_defaultStyle[GeoDataFeature::LeisurePark]              = GeoDataFeaturePrivate::createWayStyle( "#CDF6CA", "#CDF6CA", true, false );
-    s_defaultStyle[GeoDataFeature::LeisurePlayground]        = GeoDataFeaturePrivate::createWayStyle( "#CCFFF1", "#BDFFED" );
+    s_defaultStyle[GeoDataFeature::LeisurePlayground]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/playground.16", amenityColor, "#CCFFF1", "#BDFFED" );
+    s_defaultStyle[GeoDataFeature::LeisurePitch]             = GeoDataFeaturePrivate::createWayStyle( "#8ad3af", QColor("#8ad3af").darker(150), true, true );
 
     s_defaultStyle[GeoDataFeature::LanduseAllotments]        = GeoDataFeaturePrivate::createWayStyle( "#E4C6AA", "#E4C6AA", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/allotments.png") );
     s_defaultStyle[GeoDataFeature::LanduseBasin]             = GeoDataFeaturePrivate::createWayStyle( QColor(0xB5, 0xD0, 0xD0, 0x80 ), QColor( 0xB5, 0xD0, 0xD0 ) );

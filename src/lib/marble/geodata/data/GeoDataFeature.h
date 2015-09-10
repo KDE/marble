@@ -205,6 +205,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         MoneyAtm,
         MoneyBank,
 
+        AmenityCommunityCentre,
+        AmenityNightClub,
         AmenityBench,
         AmenityCourtHouse,
         AmenityFireStation,
@@ -218,6 +220,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AmenityToilets,
         AmenityTownHall,
         AmenityWasteBasket,
+        AmenityDrinkingWater,
 
         // OpenStreetMap category Shopping
         ShopBeverages,
@@ -277,6 +280,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         // OpenStreetMap category Transport
         TransportAerodrome,
+        TransportHelipad,
         TransportAirportTerminal,
         TransportBusStation,
         TransportBusStop,
@@ -288,6 +292,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         TransportTaxiRank,
         TransportTrainStation,
         TransportTramStop,
+        TransportBicycleParking,
+        TransportMotorcycleParking,
 
         // OpenStreetMap category religion
         ReligionPlaceOfWorship,
@@ -303,6 +309,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         // OpenStreetMap category Leisure
         LeisurePark,
         LeisurePlayground,
+        LeisurePitch,
 
         LanduseAllotments,
         LanduseBasin,

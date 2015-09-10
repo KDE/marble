@@ -58,6 +58,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "atm" ) ]                = GeoDataFeature::MoneyAtm;
     s_visualCategories[ OsmTag( "amenity", "bank" ) ]               = GeoDataFeature::MoneyBank;
 
+    s_visualCategories[ OsmTag( "amenity", "community_centre" ) ]   = GeoDataFeature::AmenityCommunityCentre;
+    s_visualCategories[ OsmTag( "amenity", "nightclub" ) ]          = GeoDataFeature::AmenityNightClub;
     s_visualCategories[ OsmTag( "amenity", "bench" ) ]              = GeoDataFeature::AmenityBench;
     s_visualCategories[ OsmTag( "amenity", "courthouse" ) ]         = GeoDataFeature::AmenityCourtHouse;
     s_visualCategories[ OsmTag( "amenity", "firestation" ) ]        = GeoDataFeature::AmenityFireStation;
@@ -71,6 +73,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "toilets" ) ]            = GeoDataFeature::AmenityToilets;
     s_visualCategories[ OsmTag( "amenity", "townhall" ) ]           = GeoDataFeature::AmenityTownHall;
     s_visualCategories[ OsmTag( "amenity", "waste_basket" ) ]       = GeoDataFeature::AmenityWasteBasket;
+    s_visualCategories[ OsmTag( "amenity", "drinking_water" ) ]     = GeoDataFeature::AmenityDrinkingWater;
 
     s_visualCategories[ OsmTag( "amenity", "dentist" ) ]            = GeoDataFeature::HealthDentist;
     s_visualCategories[ OsmTag( "amenity", "pharmacy" ) ]           = GeoDataFeature::HealthPharmacy;
@@ -212,8 +215,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "landuse", "retail" ) ]             = GeoDataFeature::LanduseRetail;
 
     s_visualCategories[ OsmTag( "leisure", "park" ) ]               = GeoDataFeature::LeisurePark;
-    s_visualCategories[ OsmTag( "leisure", "pitch" ) ]              = GeoDataFeature::LeisurePark;
     s_visualCategories[ OsmTag( "leisure", "playground" ) ]         = GeoDataFeature::LeisurePlayground;
+    s_visualCategories[ OsmTag( "leisure", "pitch" ) ]              = GeoDataFeature::LeisurePitch;
 
     s_visualCategories[ OsmTag( "railway", "rail" ) ]               = GeoDataFeature::RailwayRail;
     s_visualCategories[ OsmTag( "railway", "tram" ) ]               = GeoDataFeature::RailwayTram;
@@ -228,19 +231,22 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "railway", "funicular" ) ]          = GeoDataFeature::RailwayFunicular;
     s_visualCategories[ OsmTag( "railway", "station" ) ]            = GeoDataFeature::TransportTrainStation;
 
-    s_visualCategories[ OsmTag( "transport", "aerodrome" ) ]        = GeoDataFeature::TransportAerodrome;
+    s_visualCategories[ OsmTag( "aeroway", "aerodrome" ) ]          = GeoDataFeature::TransportAerodrome;
+    s_visualCategories[ OsmTag( "aeroway", "helipad" ) ]            = GeoDataFeature::TransportHelipad;
     s_visualCategories[ OsmTag( "transport", "airpor_terminal" ) ]  = GeoDataFeature::TransportAirportTerminal;
     s_visualCategories[ OsmTag( "transport", "bus_station" ) ]      = GeoDataFeature::TransportBusStation;
     s_visualCategories[ OsmTag( "highway", "bus_stop" ) ]           = GeoDataFeature::TransportBusStop;
     s_visualCategories[ OsmTag( "transport", "car_share" ) ]        = GeoDataFeature::TransportCarShare;
     s_visualCategories[ OsmTag( "transport", "fuel" ) ]             = GeoDataFeature::TransportFuel;
     s_visualCategories[ OsmTag( "transport", "parking" ) ]          = GeoDataFeature::TransportParking;
-    s_visualCategories[ OsmTag( "transport", "rental_bicycle" ) ]   = GeoDataFeature::TransportRentalBicycle;
-    s_visualCategories[ OsmTag( "transport", "rental_car" ) ]       = GeoDataFeature::TransportRentalCar;
+    s_visualCategories[ OsmTag( "amenity", "bicycle_rental" ) ]     = GeoDataFeature::TransportRentalBicycle;
+    s_visualCategories[ OsmTag( "amenity", "car_rental" ) ]         = GeoDataFeature::TransportRentalCar;
     s_visualCategories[ OsmTag( "transport", "taxi_rank" ) ]        = GeoDataFeature::TransportTaxiRank;
     s_visualCategories[ OsmTag( "transport", "train_station" ) ]    = GeoDataFeature::TransportTrainStation;
     s_visualCategories[ OsmTag( "transport", "tram_stop" ) ]        = GeoDataFeature::TransportTramStop;
-    s_visualCategories[ OsmTag( "transport", "bus_stop" ) ]           = GeoDataFeature::TransportBusStop;
+    s_visualCategories[ OsmTag( "transport", "bus_stop" ) ]         = GeoDataFeature::TransportBusStop;
+    s_visualCategories[ OsmTag( "amenity", "bicycle_parking" ) ]    = GeoDataFeature::TransportBicycleParking;
+    s_visualCategories[ OsmTag( "amenity", "motorcycle_parking" ) ] = GeoDataFeature::TransportMotorcycleParking;
 
     s_visualCategories[ OsmTag( "place", "city" ) ]                 = GeoDataFeature::LargeCity;
     s_visualCategories[ OsmTag( "place", "hamlet" ) ]               = GeoDataFeature::SmallCity;
