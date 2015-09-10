@@ -70,6 +70,7 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
     qmlRegisterType<DeclarativeDataPlugin>( uri, 0, 20, "DataLayer" );
 
     qmlRegisterType<Marble::SearchBackend>(uri, 0, 20, "SearchBackend");
+    qRegisterMetaType<Marble::MarblePlacemarkModel*>("MarblePlacemarkModel*");
     qmlRegisterType<Marble::MarbleQuickItem>(uri, 0, 20, "MarbleItem");
 
     qmlRegisterUncreatableType<Marble::MarblePlacemarkModel>(uri, 1, 0, "MarblePlacemarkModel", "MarblePlacemarkModel is not instantiable");
