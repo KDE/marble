@@ -172,16 +172,19 @@ void OsmParser::calculateHighwayWidth(GeoDataPlacemark *placemark) const
 void OsmParser::adjustGraveyardPattern(GeoDataPlacemark *placemark) const
 {
     OsmPlacemarkData const & data = placemark->osmData();
+    GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
     if( data.containsTag("religion","jewish") ){
-        GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
         polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
     } else if( data.containsTag("religion","christian") ){
-        GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
         polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
     } else if( data.containsTag("religion","INT-generic") ){
-        GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
         polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
+    } else {
+        return;
     }
+    GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+    style->setPolyStyle(polyStyle);
+    placemark->setStyle(style);
 }
 
 bool OsmParser::isValidElement(const QString& tagName) const
