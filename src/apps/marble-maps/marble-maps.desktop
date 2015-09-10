@@ -4,6 +4,7 @@ TryExec=marble-maps
 Exec=marble-maps %F
 Name=Marble Maps
 GenericName=OpenStreetMap Navigation
+Comment=Find your way
 Icon=marble
 Terminal=false
 Categories=Qt;KDE;Education;Geography;
