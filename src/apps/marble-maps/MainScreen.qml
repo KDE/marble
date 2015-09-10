@@ -77,7 +77,7 @@ ApplicationWindow {
 
                     // Theme settings.
                     projection: MarbleItem.Mercator
-                    mapThemeId: "earth/openstreetmap/openstreetmap.dgml"
+                    mapThemeId: "earth/vectorosm/vectorosm.dgml"
 
                     // Visibility of layers/plugins.
                     showFrameRate: false

@@ -268,6 +268,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
         qDeleteAll(polygons);
     } else if (isBuildingRoof) {
         if (!isCameraAboveBuilding) {
+            painter->restore();
             return; // do not render roof if we look inside the building
         }
 
