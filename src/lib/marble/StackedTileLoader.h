@@ -74,7 +74,7 @@ class StackedTileLoader : public QObject
 
         int tileRowCount( int level ) const;
 
-        GeoSceneTextureTile::Projection tileProjection() const;
+        GeoSceneTextureTileDataset::Projection tileProjection() const;
 
         QSize tileSize() const;
 

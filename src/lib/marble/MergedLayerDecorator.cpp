@@ -24,7 +24,7 @@
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
 #include "GeoDataGroundOverlay.h"
-#include "GeoSceneTextureTile.h"
+#include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneVectorTile.h"
 #include "ImageF.h"
 #include "StackedTile.h"
@@ -54,12 +54,12 @@ public:
     void paintTileId( QImage *tileImage, const TileId &id ) const;
 
     void detectMaxTileLevel();
-    QVector<const GeoSceneTextureTile *> findRelevantTextureLayers( const TileId &stackedTileId ) const;
+    QVector<const GeoSceneTextureTileDataset *> findRelevantTextureLayers( const TileId &stackedTileId ) const;
 
     TileLoader *const m_tileLoader;
     const SunLocator *const m_sunLocator;
     BlendingFactory m_blendingFactory;
-    QVector<const GeoSceneTextureTile *> m_textureLayers;
+    QVector<const GeoSceneTextureTileDataset *> m_textureLayers;
     QList<const GeoDataGroundOverlay *> m_groundOverlays;
     int m_maxTileLevel;
     QString m_themeId;
@@ -96,7 +96,7 @@ MergedLayerDecorator::~MergedLayerDecorator()
     delete d;
 }
 
-void MergedLayerDecorator::setTextureLayers( const QVector<const GeoSceneTextureTile *> &textureLayers )
+void MergedLayerDecorator::setTextureLayers( const QVector<const GeoSceneTextureTileDataset *> &textureLayers )
 {
     mDebug() << Q_FUNC_INFO;
 
@@ -305,10 +305,10 @@ void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, con
 
 StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId )
 {
-    const QVector<const GeoSceneTextureTile *> textureLayers = d->findRelevantTextureLayers( stackedTileId );
+    const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers( stackedTileId );
     QVector<QSharedPointer<TextureTile> > tiles;
 
-    foreach ( const GeoSceneTextureTile *layer, textureLayers ) {
+    foreach ( const GeoSceneTextureTileDataset *layer, textureLayers ) {
         const TileId tileId( layer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
 
@@ -320,7 +320,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId )
             mDebug() << Q_FUNC_INFO << "could not find blending" << layer->blending();
         }
 
-        const GeoSceneTextureTile *const textureLayer = static_cast<const GeoSceneTextureTile *>( layer );
+        const GeoSceneTextureTileDataset *const textureLayer = static_cast<const GeoSceneTextureTileDataset *>( layer );
         const QImage tileImage = d->m_tileLoader->loadTileImage( textureLayer, tileId, DownloadBrowse );
 
         QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, blending ) );
@@ -338,8 +338,8 @@ RenderState MergedLayerDecorator::renderState( const TileId &stackedTileId ) con
     RenderState state( nameTemplate.arg( stackedTileId.zoomLevel() )
                        .arg( stackedTileId.x() )
                        .arg( stackedTileId.y() ) );
-    const QVector<const GeoSceneTextureTile *> textureLayers = d->findRelevantTextureLayers( stackedTileId );
-    foreach ( const GeoSceneTextureTile *layer, textureLayers ) {
+    const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers( stackedTileId );
+    foreach ( const GeoSceneTextureTileDataset *layer, textureLayers ) {
         const TileId tileId( layer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
         RenderStatus tileStatus = Complete;
@@ -382,9 +382,9 @@ StackedTile *MergedLayerDecorator::updateTile( const StackedTile &stackedTile, c
 
 void MergedLayerDecorator::downloadStackedTile( const TileId &id, DownloadUsage usage )
 {
-    const QVector<const GeoSceneTextureTile *> textureLayers = d->findRelevantTextureLayers( id );
+    const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers( id );
 
-    foreach ( const GeoSceneTextureTile *textureLayer, textureLayers ) {
+    foreach ( const GeoSceneTextureTileDataset *textureLayer, textureLayers ) {
         if ( TileLoader::tileStatus( textureLayer, id ) != TileLoader::Available || usage == DownloadBrowse ) {
             d->m_tileLoader->downloadTile( textureLayer, id, usage );
         }
@@ -569,11 +569,11 @@ void MergedLayerDecorator::Private::detectMaxTileLevel()
     m_maxTileLevel = TileLoader::maximumTileLevel( *m_textureLayers.at( 0 ) );
 }
 
-QVector<const GeoSceneTextureTile *> MergedLayerDecorator::Private::findRelevantTextureLayers( const TileId &stackedTileId ) const
+QVector<const GeoSceneTextureTileDataset *> MergedLayerDecorator::Private::findRelevantTextureLayers( const TileId &stackedTileId ) const
 {
-    QVector<const GeoSceneTextureTile *> result;
+    QVector<const GeoSceneTextureTileDataset *> result;
 
-    foreach ( const GeoSceneTextureTile *candidate, m_textureLayers ) {
+    foreach ( const GeoSceneTextureTileDataset *candidate, m_textureLayers ) {
         Q_ASSERT( candidate );
         // check, if layer provides tiles for the current level
         if ( !candidate->hasMaximumTileLevel() ||

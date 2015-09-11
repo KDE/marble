@@ -20,7 +20,7 @@
 #include <QVector>
 #include <QList>
 
-#include "GeoSceneTextureTile.h"
+#include "GeoSceneTextureTileDataset.h"
 #include "RenderState.h"
 
 class QImage;
@@ -42,7 +42,7 @@ class MergedLayerDecorator
     MergedLayerDecorator( TileLoader * const tileLoader, const SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
-    void setTextureLayers( const QVector<const GeoSceneTextureTile *> &textureLayers );
+    void setTextureLayers( const QVector<const GeoSceneTextureTileDataset *> &textureLayers );
     void updateGroundOverlays( const QList<const GeoDataGroundOverlay *> &groundOverlays );
 
     int textureLayersSize() const;
@@ -57,7 +57,7 @@ class MergedLayerDecorator
 
     int tileRowCount( int level ) const;
 
-    GeoSceneTextureTile::Projection tileProjection() const;
+    GeoSceneTextureTileDataset::Projection tileProjection() const;
 
     QSize tileSize() const;
 

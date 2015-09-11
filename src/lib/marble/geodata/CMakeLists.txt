@@ -83,7 +83,7 @@ SET ( geodata_scene_SRCS
         geodata/scene/GeoSceneGroup.cpp
         geodata/scene/GeoSceneZoom.cpp
         geodata/scene/GeoSceneLegend.cpp
-        geodata/scene/GeoSceneTextureTile.cpp
+        geodata/scene/GeoSceneTextureTileDataset.cpp
         geodata/scene/GeoSceneAbstractDataset.cpp
         geodata/scene/GeoSceneItem.cpp
         geodata/scene/GeoSceneLicense.cpp

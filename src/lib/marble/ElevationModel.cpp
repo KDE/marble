@@ -13,7 +13,7 @@
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneDocument.h"
-#include "GeoSceneTextureTile.h"
+#include "GeoSceneTextureTileDataset.h"
 #include "HttpDownloadManager.h"
 #include "Tile.h"
 #include "TileLoader.h"
@@ -53,7 +53,7 @@ public:
         const GeoSceneLayer *sceneLayer = map->layer( head->theme() );
         Q_ASSERT( sceneLayer );
 
-        m_textureLayer = dynamic_cast<GeoSceneTextureTile*>( sceneLayer->datasets().first() );
+        m_textureLayer = dynamic_cast<GeoSceneTextureTileDataset*>( sceneLayer->datasets().first() );
         Q_ASSERT( m_textureLayer );
     }
 
@@ -67,7 +67,7 @@ public:
     ElevationModel *q;
 
     TileLoader m_tileLoader;
-    const GeoSceneTextureTile *m_textureLayer;
+    const GeoSceneTextureTileDataset *m_textureLayer;
     QCache<TileId, const QImage> m_cache;
 };
 

@@ -13,27 +13,27 @@
 */
 
 
-#include "GeoSceneTextureTile.h"
+#include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneTypes.h"
 
 namespace Marble
 {
 
-GeoSceneTextureTile::GeoSceneTextureTile( const QString& name )
+GeoSceneTextureTileDataset::GeoSceneTextureTileDataset( const QString& name )
     : GeoSceneTileDataset( name ){
 }
 
-const char* GeoSceneTextureTile::nodeType() const
+const char* GeoSceneTextureTileDataset::nodeType() const
 {
     return GeoSceneTypes::GeoSceneTextureTileType;
 }
 
-GeoDataLatLonBox GeoSceneTextureTile::latLonBox() const
+GeoDataLatLonBox GeoSceneTextureTileDataset::latLonBox() const
 {
     return m_latLonBox;
 }
 
-void GeoSceneTextureTile::setLatLonBox( const GeoDataLatLonBox &box )
+void GeoSceneTextureTileDataset::setLatLonBox( const GeoDataLatLonBox &box )
 {
     m_latLonBox = box;
 }

@@ -25,7 +25,7 @@
 #include <QMetaType>
 #include <QImage>
 
-#include "GeoSceneTextureTile.h"
+#include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneTileDataset.h"
 #include "GeoSceneVectorTile.h"
 #include "GeoDataContainer.h"
@@ -53,7 +53,7 @@ TileLoader::TileLoader(HttpDownloadManager * const downloadManager, const Plugin
 // If the tile image file is locally available:
 //     - if not expired: create ImageTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
-QImage TileLoader::loadTileImage( GeoSceneTextureTile const *textureLayer, TileId const & tileId, DownloadUsage const usage )
+QImage TileLoader::loadTileImage( GeoSceneTextureTileDataset const *textureLayer, TileId const & tileId, DownloadUsage const usage )
 {
     QString const fileName = tileFileName( textureLayer, tileId );
 
@@ -242,7 +242,7 @@ void TileLoader::triggerDownload( GeoSceneTileDataset const *textureLayer, TileI
     emit downloadTile( sourceUrl, destFileName, idStr, usage );
 }
 
-QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTile * textureLayer, TileId const & id )
+QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTileDataset * textureLayer, TileId const & id )
 {
     mDebug() << Q_FUNC_INFO << id;
 

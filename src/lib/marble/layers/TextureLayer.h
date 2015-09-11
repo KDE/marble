@@ -30,7 +30,7 @@ namespace Marble
 class GeoPainter;
 class GeoDataDocument;
 class GeoSceneGroup;
-class GeoSceneTextureTile;
+class GeoSceneTextureTileDataset;
 class HttpDownloadManager;
 class SunLocator;
 class ViewportParams;
@@ -60,7 +60,7 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
      *        added with this method.
      * @return returned string is the key for the texture that can be later used to remove it
      */
-    QString addTextureLayer(GeoSceneTextureTile *texture);
+    QString addTextureLayer(GeoSceneTextureTileDataset *texture);
 
     /**
      * @brief Removes texture sublayer identified by a key.
@@ -115,7 +115,7 @@ public Q_SLOTS:
 
     void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTextureTile *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
+    void setMapTheme( const QVector<const GeoSceneTextureTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
 
     void setVolatileCacheLimit( quint64 kilobytes );
 

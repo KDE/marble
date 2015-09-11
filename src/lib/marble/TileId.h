@@ -18,7 +18,7 @@
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonBox.h"
-#include "GeoSceneTextureTile.h"
+#include "GeoSceneTextureTileDataset.h"
 
 namespace Marble
 {

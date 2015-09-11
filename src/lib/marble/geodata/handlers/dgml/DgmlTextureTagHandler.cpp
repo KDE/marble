@@ -30,7 +30,7 @@
 #include "DgmlAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneTextureTile.h"
+#include "GeoSceneTextureTileDataset.h"
 
 namespace Marble
 {
@@ -60,7 +60,7 @@ GeoNode* DgmlTextureTagHandler::parse(GeoParser& parser) const
     if ( parentItem.represents(dgmlTag_Layer)
         && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_texture ) {
 
-        texture = new GeoSceneTextureTile( name );
+        texture = new GeoSceneTextureTileDataset( name );
         texture->setExpire( expire );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
     }

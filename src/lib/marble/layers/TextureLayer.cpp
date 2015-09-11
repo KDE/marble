@@ -73,12 +73,12 @@ public:
     int m_tileZoomLevel;
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
-    QVector<const GeoSceneTextureTile *> m_textures;
+    QVector<const GeoSceneTextureTileDataset *> m_textures;
     const GeoSceneGroup *m_textureLayerSettings;
     QString m_runtimeTrace;
     QSortFilterProxyModel m_groundOverlayModel;
     QList<const GeoDataGroundOverlay *> m_groundOverlayCache;
-    QMap<QString, GeoSceneTextureTile *> m_customTextures;
+    QMap<QString, GeoSceneTextureTileDataset *> m_customTextures;
     // For scheduling repaints
     QTimer           m_repaintTimer;
     RenderState m_renderState;
@@ -133,9 +133,9 @@ void TextureLayer::Private::requestDelayedRepaint()
 
 void TextureLayer::Private::updateTextureLayers()
 {
-    QVector<GeoSceneTextureTile const *> result;
+    QVector<GeoSceneTextureTileDataset const *> result;
 
-    foreach ( const GeoSceneTextureTile *candidate, m_textures ) {
+    foreach ( const GeoSceneTextureTileDataset *candidate, m_textures ) {
         bool enabled = true;
         if ( m_textureLayerSettings ) {
             const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
@@ -229,7 +229,7 @@ void TextureLayer::Private::updateGroundOverlays()
 
 void TextureLayer::Private::addCustomTextures()
 {
-    foreach (GeoSceneTextureTile *t, m_customTextures)
+    foreach (GeoSceneTextureTileDataset *t, m_customTextures)
     {
         m_textures.append(t);
     }
@@ -463,7 +463,7 @@ void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
     d->m_layerDecorator.downloadStackedTile( stackedTileId, DownloadBulk );
 }
 
-void TextureLayer::setMapTheme( const QVector<const GeoSceneTextureTile *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
+void TextureLayer::setMapTheme( const QVector<const GeoSceneTextureTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
 {
     delete d->m_texcolorizer;
     d->m_texcolorizer = 0;
@@ -547,7 +547,7 @@ RenderState TextureLayer::renderState() const
     return d->m_renderState;
 }
 
-QString TextureLayer::addTextureLayer(GeoSceneTextureTile* texture)
+QString TextureLayer::addTextureLayer(GeoSceneTextureTileDataset* texture)
 {
     if (!texture)
         return QString(); //Not a sane call
@@ -566,7 +566,7 @@ void TextureLayer::removeTextureLayer(const QString &key)
 {
     if (d->m_customTextures.contains(key))
     {
-        GeoSceneTextureTile *texture = d->m_customTextures.value(key);
+        GeoSceneTextureTileDataset *texture = d->m_customTextures.value(key);
         d->m_customTextures.remove(key);
         d->m_textures.remove(d->m_textures.indexOf(texture));
         delete texture;

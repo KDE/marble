@@ -33,7 +33,7 @@
 #include "GeoSceneParser.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneTileDataset.h"
-#include "GeoSceneTextureTile.h"
+#include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneZoom.h"
 #include "GeoSceneSettings.h"
@@ -549,7 +549,7 @@ GeoSceneDocument *MapThemeManager::createMapThemeFromOverlay( const GeoDataPhoto
     GeoSceneLayer * layer = new GeoSceneLayer( "photo" );
     layer->setBackend("texture");
 
-    GeoSceneTextureTile * texture = new GeoSceneTextureTile( "map" );
+    GeoSceneTextureTileDataset * texture = new GeoSceneTextureTileDataset( "map" );
     texture->setExpire(std::numeric_limits<int>::max());
 
     QString fileName = overlayData->absoluteIconFile();

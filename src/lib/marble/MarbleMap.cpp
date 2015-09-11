@@ -816,14 +816,14 @@ void MarbleMapPrivate::updateMapTheme()
 
         // textures will contain texture layers and
         // vectorTiles vectortile layers
-        QVector<const GeoSceneTextureTile *> textures;
+        QVector<const GeoSceneTextureTileDataset *> textures;
         QVector<const GeoSceneVectorTile *> vectorTiles;
 
         foreach( GeoSceneLayer* layer, m_model->mapTheme()->map()->layers() ){
             if ( layer->backend() == dgml::dgmlValue_texture ){
 
                 foreach ( const GeoSceneAbstractDataset *pos, layer->datasets() ) {
-                    const GeoSceneTextureTile *const texture = dynamic_cast<GeoSceneTextureTile const *>( pos );
+                    const GeoSceneTextureTileDataset *const texture = dynamic_cast<GeoSceneTextureTileDataset const *>( pos );
                     if ( !texture )
                         continue;
 
@@ -949,7 +949,7 @@ void MarbleMapPrivate::updateMapTheme()
             m_layerManager.addLayer( &m_vectorTileLayer );
     }
     else {
-        m_textureLayer.setMapTheme( QVector<const GeoSceneTextureTile *>(), 0, "", "" );
+        m_textureLayer.setMapTheme( QVector<const GeoSceneTextureTileDataset *>(), 0, "", "" );
         m_vectorTileLayer.setMapTheme( QVector<const GeoSceneVectorTile *>(), 0 );
     }
 
@@ -1261,7 +1261,7 @@ RenderState MarbleMap::renderState() const
     return d->m_layerManager.renderState();
 }
 
-QString MarbleMap::addTextureLayer(GeoSceneTextureTile *texture)
+QString MarbleMap::addTextureLayer(GeoSceneTextureTileDataset *texture)
 {
     return textureLayer()->addTextureLayer(texture);
 }
