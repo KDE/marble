@@ -39,10 +39,14 @@ endif(WIN32)
 
 
 SET_TARGET_PROPERTIES(astro PROPERTIES
-  VERSION ${GENERIC_LIB_VERSION}
-  SOVERSION ${GENERIC_LIB_SOVERSION}
-  DEFINE_SYMBOL MAKE_ASTRO_LIB            # needed for astrolib_export.h
+    DEFINE_SYMBOL MAKE_ASTRO_LIB            # needed for astrolib_export.h
   )
+if(NOT ANDROID)
+  SET_TARGET_PROPERTIES(astro PROPERTIES
+    VERSION ${GENERIC_LIB_VERSION}
+    SOVERSION ${GENERIC_LIB_SOVERSION}
+  )
+endif()
 
 # choose the correct target install library path
 if(WIN32)

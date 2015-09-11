@@ -420,11 +420,15 @@ if(WIN32)
   TARGET_LINK_LIBRARIES(${MARBLEWIDGET} ws2_32 imm32 winmm)
 endif(WIN32)
 
+if(NOT ANDROID)
+  set_target_properties(${MARBLEWIDGET}  PROPERTIES
+                                    VERSION ${GENERIC_LIB_VERSION}
+                                    SOVERSION ${GENERIC_LIB_SOVERSION})
+endif()
 
 set_target_properties(${MARBLEWIDGET}  PROPERTIES
-                                    VERSION ${GENERIC_LIB_VERSION}
-                                    SOVERSION ${GENERIC_LIB_SOVERSION}
                                     COMPILE_FLAGS "-DKML_LAZY_IMP")
+
 # needed for marble_export.h
 set_target_properties(${MARBLEWIDGET} PROPERTIES
   DEFINE_SYMBOL MAKE_MARBLE_LIB
