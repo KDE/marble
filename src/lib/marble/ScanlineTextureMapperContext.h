@@ -15,7 +15,7 @@
 #include <QSize>
 #include <QImage>
 
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 #include "MarbleMath.h"
 #include "MathHelper.h"
 
@@ -73,7 +73,7 @@ private:
 
 private:
     StackedTileLoader *const m_tileLoader;
-    GeoSceneTiled::Projection const m_textureProjection;
+    GeoSceneTileDataset::Projection const m_textureProjection;
     /// size of the tiles of of the current texture layer
     QSize const m_tileSize;
 
@@ -125,9 +125,9 @@ inline qreal ScanlineTextureMapperContext::rad2PixelX( const qreal lon ) const
 inline qreal ScanlineTextureMapperContext::rad2PixelY( const qreal lat ) const
 {
     switch ( m_textureProjection ) {
-    case GeoSceneTiled::Equirectangular:
+    case GeoSceneTileDataset::Equirectangular:
         return -lat * m_normGlobalHeight;
-    case GeoSceneTiled::Mercator:
+    case GeoSceneTileDataset::Mercator:
         if ( fabs( lat ) < 1.4835 ) {
             // We develop the inverse Gudermannian into a MacLaurin Series:
             // In spite of the many elements needed to get decent 

@@ -101,7 +101,7 @@ void MergedLayerDecorator::setTextureLayers( const QVector<const GeoSceneTexture
     mDebug() << Q_FUNC_INFO;
 
     if ( textureLayers.count() > 0 ) {
-        const GeoSceneTiled *const firstTexture = textureLayers.at( 0 );
+        const GeoSceneTileDataset *const firstTexture = textureLayers.at( 0 );
         d->m_levelZeroColumns = firstTexture->levelZeroColumns();
         d->m_levelZeroRows = firstTexture->levelZeroRows();
         d->m_blendingFactory.setLevelZeroLayout( d->m_levelZeroColumns, d->m_levelZeroRows );
@@ -147,7 +147,7 @@ int MergedLayerDecorator::tileRowCount( int level ) const
     return TileLoaderHelper::levelToRow( levelZeroRows, level );
 }
 
-GeoSceneTiled::Projection MergedLayerDecorator::tileProjection() const
+GeoSceneTileDataset::Projection MergedLayerDecorator::tileProjection() const
 {
     Q_ASSERT( !d->m_textureLayers.isEmpty() );
 
@@ -253,7 +253,7 @@ void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, con
 
              qreal lat = 0;
 
-             if (m_textureLayers.at( 0 )->projection() ==  GeoSceneTiled::Mercator) {
+             if (m_textureLayers.at( 0 )->projection() ==  GeoSceneTileDataset::Mercator) {
                   lat = gd(2 * (latPixelPosition - y) * pixel2Rad );
              }
              else {

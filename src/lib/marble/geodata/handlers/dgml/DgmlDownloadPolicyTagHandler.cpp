@@ -20,7 +20,7 @@ Copyright 2009, 2010  Jens-Michael Hoffmann <jmho@c-xx.com>
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
@@ -70,7 +70,7 @@ GeoNode* DgmlDownloadPolicyTagHandler::parse( GeoParser& parser ) const
         return 0;
     }
 
-    parentItem.nodeAs<GeoSceneTiled>()->addDownloadPolicy( usage, maximumConnections );
+    parentItem.nodeAs<GeoSceneTileDataset>()->addDownloadPolicy( usage, maximumConnections );
     return 0;
 }
 

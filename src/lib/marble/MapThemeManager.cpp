@@ -32,7 +32,7 @@
 #include "GeoSceneIcon.h"
 #include "GeoSceneParser.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 #include "GeoSceneTextureTile.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneZoom.h"
@@ -563,7 +563,7 @@ GeoSceneDocument *MapThemeManager::createMapThemeFromOverlay( const GeoDataPhoto
     texture->setSourceDir( sourceDir );
     texture->setFileFormat( extension );
     texture->setInstallMap( fileName );
-    texture->setProjection(GeoSceneTiled::Equirectangular);
+    texture->setProjection(GeoSceneTileDataset::Equirectangular);
 
     layer->addDataset(texture);
 

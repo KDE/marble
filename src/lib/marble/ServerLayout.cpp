@@ -11,7 +11,7 @@
 // Own
 #include "ServerLayout.h"
 
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 #include "MarbleGlobal.h"
 #include "TileId.h"
 
@@ -24,7 +24,7 @@
 namespace Marble
 {
 
-ServerLayout::ServerLayout( GeoSceneTiled *textureLayer )
+ServerLayout::ServerLayout( GeoSceneTileDataset *textureLayer )
     : m_textureLayer( textureLayer )
 {
 }
@@ -33,7 +33,7 @@ ServerLayout::~ServerLayout()
 {
 }
 
-MarbleServerLayout::MarbleServerLayout( GeoSceneTiled *textureLayer )
+MarbleServerLayout::MarbleServerLayout( GeoSceneTileDataset *textureLayer )
     : ServerLayout( textureLayer )
 {
 }
@@ -60,7 +60,7 @@ QString MarbleServerLayout::name() const
 }
 
 
-OsmServerLayout::OsmServerLayout( GeoSceneTiled *textureLayer )
+OsmServerLayout::OsmServerLayout( GeoSceneTileDataset *textureLayer )
     : ServerLayout( textureLayer )
 {
 }
@@ -85,7 +85,7 @@ QString OsmServerLayout::name() const
 }
 
 
-CustomServerLayout::CustomServerLayout( GeoSceneTiled *texture )
+CustomServerLayout::CustomServerLayout( GeoSceneTileDataset *texture )
     : ServerLayout( texture )
 {
 }
@@ -111,7 +111,7 @@ QString CustomServerLayout::name() const
 }
 
 
-WmsServerLayout::WmsServerLayout( GeoSceneTiled *texture )
+WmsServerLayout::WmsServerLayout( GeoSceneTileDataset *texture )
     : ServerLayout( texture )
 {
 }
@@ -164,9 +164,9 @@ QString WmsServerLayout::name() const
 QString WmsServerLayout::epsgCode() const
 {
     switch ( m_textureLayer->projection() ) {
-        case GeoSceneTiled::Equirectangular:
+        case GeoSceneTileDataset::Equirectangular:
             return "EPSG:4326";
-        case GeoSceneTiled::Mercator:
+        case GeoSceneTileDataset::Mercator:
             return "EPSG:3785";
     }
 
@@ -174,7 +174,7 @@ QString WmsServerLayout::epsgCode() const
     return QString();
 }
 
-QuadTreeServerLayout::QuadTreeServerLayout( GeoSceneTiled *textureLayer )
+QuadTreeServerLayout::QuadTreeServerLayout( GeoSceneTileDataset *textureLayer )
     : ServerLayout( textureLayer )
 {
 }
@@ -212,7 +212,7 @@ QString QuadTreeServerLayout::encodeQuadTree( const Marble::TileId &id )
     return tileNum;
 }
 
-TmsServerLayout::TmsServerLayout(GeoSceneTiled *textureLayer )
+TmsServerLayout::TmsServerLayout(GeoSceneTileDataset *textureLayer )
     : ServerLayout( textureLayer )
 {
 }

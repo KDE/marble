@@ -39,7 +39,7 @@ class MARBLE_EXPORT TileId
     bool operator==( TileId const& rhs ) const;
     bool operator<( TileId const& rhs ) const;
 
-    GeoDataLatLonBox toLatLonBox( const GeoSceneTiled *textureLayer ) const;
+    GeoDataLatLonBox toLatLonBox( const GeoSceneTileDataset *textureLayer ) const;
     static TileId fromCoordinates( const GeoDataCoordinates& coords, int popularity );
 
  private:

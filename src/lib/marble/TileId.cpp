@@ -33,7 +33,7 @@ TileId::TileId()
 {
 }
 
-GeoDataLatLonBox TileId::toLatLonBox( const GeoSceneTiled *textureLayer ) const
+GeoDataLatLonBox TileId::toLatLonBox( const GeoSceneTileDataset *textureLayer ) const
 {
 
     qreal radius = ( 1 << zoomLevel() ) * textureLayer->levelZeroColumns() / 2.0;
@@ -46,11 +46,11 @@ GeoDataLatLonBox TileId::toLatLonBox( const GeoSceneTiled *textureLayer ) const
     qreal latBottom = 0;
 
     switch ( textureLayer->projection() ) {
-    case GeoSceneTiled::Equirectangular:
+    case GeoSceneTileDataset::Equirectangular:
         latTop = ( radius - y() ) / radius *  M_PI / 2.0;
         latBottom = ( radius - y() - 1 ) / radius *  M_PI / 2.0;
         break;
-    case GeoSceneTiled::Mercator:
+    case GeoSceneTileDataset::Mercator:
         latTop = atan( sinh( ( radius - y() ) / radius * M_PI ) );
         latBottom = atan( sinh( ( radius - y() - 1 ) / radius * M_PI ) );
         break;

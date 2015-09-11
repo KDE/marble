@@ -32,7 +32,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 
 namespace Marble
 {
@@ -94,7 +94,7 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
 #endif
     }
 
-    parentItem.nodeAs<GeoSceneTiled>()->addDownloadUrl( url );
+    parentItem.nodeAs<GeoSceneTileDataset>()->addDownloadUrl( url );
     return 0;
 }
 

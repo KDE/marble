@@ -28,7 +28,7 @@
 #include <QObject>
 #include <QSize>
 
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 #include "TileId.h"
 #include "RenderState.h"
 

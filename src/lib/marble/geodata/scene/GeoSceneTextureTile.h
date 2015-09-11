@@ -15,13 +15,13 @@
 #ifndef MARBLE_GEOSCENETEXTURETILE_H
 #define MARBLE_GEOSCENETEXTURETILE_H
 
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 #include "GeoDataLatLonBox.h"
 
 namespace Marble
 {
 
-class GeoSceneTextureTile : public GeoSceneTiled
+class GeoSceneTextureTile : public GeoSceneTileDataset
 {
  public:
 

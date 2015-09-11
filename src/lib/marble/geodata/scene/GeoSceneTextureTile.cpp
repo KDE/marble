@@ -20,7 +20,7 @@ namespace Marble
 {
 
 GeoSceneTextureTile::GeoSceneTextureTile( const QString& name )
-    : GeoSceneTiled( name ){
+    : GeoSceneTileDataset( name ){
 }
 
 const char* GeoSceneTextureTile::nodeType() const

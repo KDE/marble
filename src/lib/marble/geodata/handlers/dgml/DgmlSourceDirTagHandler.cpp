@@ -24,7 +24,7 @@
 #include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 
 namespace Marble
 {
@@ -42,7 +42,7 @@ GeoNode* DgmlSourceDirTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_Vectortile) ) {
-        GeoSceneTiled *texture = parentItem.nodeAs<GeoSceneTiled>();
+        GeoSceneTileDataset *texture = parentItem.nodeAs<GeoSceneTileDataset>();
         texture->setSourceDir( parser.readElementText().trimmed() );
         texture->setFileFormat(format);
     }

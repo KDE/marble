@@ -15,7 +15,7 @@
 #include <QObject>
 
 #include "MarbleGlobal.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 
 #include <QSize>
 
@@ -80,7 +80,7 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 
     QSize tileSize() const;
 
-    GeoSceneTiled::Projection tileProjection() const;
+    GeoSceneTileDataset::Projection tileProjection() const;
 
     int tileColumnCount( int level ) const;
     int tileRowCount( int level ) const;

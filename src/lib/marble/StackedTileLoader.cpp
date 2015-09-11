@@ -77,7 +77,7 @@ int StackedTileLoader::tileRowCount( int level ) const
     return d->m_layerDecorator->tileRowCount( level );
 }
 
-GeoSceneTiled::Projection StackedTileLoader::tileProjection() const
+GeoSceneTileDataset::Projection StackedTileLoader::tileProjection() const
 {
     return d->m_layerDecorator->tileProjection();
 }

@@ -50,7 +50,7 @@ GeoNode* DgmlTextureTagHandler::parse(GeoParser& parser) const
     if ( !expireStr.isEmpty() )
         expire = expireStr.toInt();
 
-    GeoSceneTiled *texture = 0;
+    GeoSceneTileDataset *texture = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

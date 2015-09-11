@@ -12,7 +12,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 
 namespace Marble
 {
@@ -34,7 +34,7 @@ GeoNode* DgmlTileSizeTagHandler::parse( GeoParser& parser ) const
     int height = parser.attribute(dgmlAttr_height).toInt();
     QSize const size( width, height );
     if ( !size.isEmpty() ) {
-        parentItem.nodeAs<GeoSceneTiled>()->setTileSize( size );
+        parentItem.nodeAs<GeoSceneTileDataset>()->setTileSize( size );
     }
 
     return 0;

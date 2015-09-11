@@ -78,7 +78,7 @@ void VectorTileLayer::Private::updateTextureLayers()
     m_activeTexmappers.clear();
 
     foreach ( VectorTileModel *candidate, m_texmappers ) {
-        // Check if the GeoSceneTiled is a TextureTile or VectorTile.
+        // Check if the GeoSceneTileDataset is a TextureTile or VectorTile.
         // Only VectorTiles have to be used.
         bool enabled = true;
         if ( m_textureLayerSettings ) {

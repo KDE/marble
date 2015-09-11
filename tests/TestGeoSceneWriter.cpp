@@ -20,7 +20,7 @@
 #include "GeoSceneIcon.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 #include "GeoSceneGeodata.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneProperty.h"
@@ -216,10 +216,10 @@ void TestGeoSceneWriter::writeHeadTag()
     zoom->setMaximum( 500 );
     zoom->setDiscrete( true );
     
-    GeoSceneTiled* texture = new GeoSceneTiled( "map" );
+    GeoSceneTileDataset* texture = new GeoSceneTileDataset( "map" );
     texture->setSourceDir( "earth/testmap" );
     texture->setFileFormat( "png" );
-    texture->setProjection( GeoSceneTiled::Equirectangular );
+    texture->setProjection( GeoSceneTileDataset::Equirectangular );
     texture->addDownloadUrl( QUrl( "http://download.kde.org/marble/map/{x}/{y}/{zoomLevel}" ) );
     texture->addDownloadUrl( QUrl( "http://download.google.com/marble/map/{x}/{y}/{zoomLevel}" ) );
     texture->addDownloadPolicy( DownloadBrowse, 20 );

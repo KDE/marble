@@ -29,7 +29,7 @@
  */
 
 /* In order to make Marble able to manage vector tiles,
- * now there is GeoSceneTiled and then GeoSceneTiled
+ * now there is GeoSceneTileDataset and then GeoSceneTextureTile
  * (for the tag <texture> in dgml) or GeoSceneVectorTile
  * (for <vectortile>) are created, which inherit from this class */
 
@@ -40,14 +40,14 @@ class DownloadPolicy;
 class ServerLayout;
 class TileId;
 
-class GEODATA_EXPORT GeoSceneTiled : public GeoSceneAbstractDataset
+class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
 {
  public:
     enum StorageLayout { Marble, OpenStreetMap, TileMapService };
     enum Projection { Equirectangular, Mercator };
 
-    explicit GeoSceneTiled( const QString& name );
-    ~GeoSceneTiled();
+    explicit GeoSceneTileDataset( const QString& name );
+    ~GeoSceneTileDataset();
     virtual const char* nodeType() const;
 
     QString sourceDir() const;
@@ -103,7 +103,7 @@ class GEODATA_EXPORT GeoSceneTiled : public GeoSceneAbstractDataset
     void addDownloadPolicy( const DownloadUsage usage, const int maximumConnections );
 
  private:
-    Q_DISABLE_COPY( GeoSceneTiled )
+    Q_DISABLE_COPY( GeoSceneTileDataset )
     QStringList hostNames() const;
 
     QString m_sourceDir;
@@ -126,17 +126,17 @@ class GEODATA_EXPORT GeoSceneTiled : public GeoSceneAbstractDataset
     QList<const DownloadPolicy *> m_downloadPolicies;
 };
 
-inline bool GeoSceneTiled::hasMaximumTileLevel() const
+inline bool GeoSceneTileDataset::hasMaximumTileLevel() const
 {
     return m_maximumTileLevel != -1;
 }
 
-inline QString GeoSceneTiled::blending() const
+inline QString GeoSceneTileDataset::blending() const
 {
     return m_blending;
 }
 
-inline void GeoSceneTiled::setBlending( const QString &name )
+inline void GeoSceneTileDataset::setBlending( const QString &name )
 {
     m_blending = name;
 }

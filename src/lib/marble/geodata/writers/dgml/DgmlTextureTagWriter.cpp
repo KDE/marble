@@ -12,7 +12,7 @@
 
 #include "GeoSceneTypes.h"
 #include "GeoWriter.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 #include "DownloadPolicy.h"
 #include "DgmlElementDictionary.h"
 #include "ServerLayout.h"
@@ -20,12 +20,12 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerTexture( GeoTagWriter::QualifiedName( GeoSceneTypes::GeoSceneTiledType, dgml::dgmlTag_nameSpace20 ),
+static GeoTagWriterRegistrar s_writerTexture( GeoTagWriter::QualifiedName( GeoSceneTypes::GeoSceneTileDatasetType, dgml::dgmlTag_nameSpace20 ),
                                                new DgmlTextureTagWriter() );
 
 bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
-    const GeoSceneTiled *texture = static_cast<const GeoSceneTiled*>( node );
+    const GeoSceneTileDataset *texture = static_cast<const GeoSceneTileDataset*>( node );
     writer.writeStartElement( dgml::dgmlTag_Texture );
     writer.writeAttribute( "name", texture->name() );
     writer.writeAttribute( "expire", QString::number( texture->expire() ) );
@@ -91,9 +91,9 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     }
     
     writer.writeStartElement( dgml::dgmlTag_Projection );
-    if( texture->projection() == GeoSceneTiled::Mercator ) {
+    if( texture->projection() == GeoSceneTileDataset::Mercator ) {
         writer.writeAttribute( "name", "Mercator" );
-    } else if ( texture->projection() == GeoSceneTiled::Equirectangular ) {
+    } else if ( texture->projection() == GeoSceneTileDataset::Equirectangular ) {
         writer.writeAttribute( "name", "Equirectangular" );        
     }
     writer.writeEndElement();

@@ -21,7 +21,7 @@
 #include "GeoSceneZoom.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneTiled.h"
+#include "GeoSceneTileDataset.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneGeodata.h"
@@ -788,7 +788,7 @@ GeoSceneDocument* MapWizard::createDocument()
     zoom->setMaximum( 3500 );
     zoom->setDiscrete( false );
     
-    GeoSceneTiled *texture = new GeoSceneTiled( "map" );
+    GeoSceneTileDataset *texture = new GeoSceneTileDataset( "map" );
     texture->setExpire( 31536000 );
     texture->setSourceDir( "earth/" + document->head()->theme() ); 
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
@@ -808,7 +808,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new WmsServerLayout( texture ) );
-        texture->setProjection( GeoSceneTiled::Equirectangular );
+        texture->setProjection( GeoSceneTileDataset::Equirectangular );
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
@@ -822,7 +822,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new CustomServerLayout( texture ) );
-        texture->setProjection( GeoSceneTiled::Mercator );
+        texture->setProjection( GeoSceneTileDataset::Mercator );
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
@@ -832,7 +832,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setFileFormat( d->format.toUpper() );
         texture->setInstallMap( document->head()->theme() + '.' + d->format );
         texture->setServerLayout( new MarbleServerLayout( texture ) );
-        texture->setProjection( GeoSceneTiled::Equirectangular );
+        texture->setProjection( GeoSceneTileDataset::Equirectangular );
         int imageWidth = QImage( image ).width();
         int tileSize = c_defaultTileSize;
         
