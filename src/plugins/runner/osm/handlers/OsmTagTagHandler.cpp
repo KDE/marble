@@ -85,7 +85,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
         return 0;
     }
 
-    if ( key == "highway" && parentItem.represents( osmTag_way ) ) {
+    if ( (key == "highway" || key == "railway") && parentItem.represents( osmTag_way ) ) {
         appendIfNeeded(doc, placemark);
     }
 
