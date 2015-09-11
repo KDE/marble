@@ -64,8 +64,7 @@ GeoNode* OsmMemberTagHandler::parse( GeoParser &geoParser ) const
             // With the id we get the way geometry
             GeoDataLineString *line =  parser.way( id );
             if ( !line ) {
-                mDebug()<< QString( "Malformed relation %1: No way with id %2 exists" )
-                             .arg( QString::number( polygonOsmData.id() ) ).arg( id );
+                // The file does not contain all ways referenced in the relation
                 return 0;
             }
 
