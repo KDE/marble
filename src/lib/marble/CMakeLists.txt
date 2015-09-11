@@ -42,7 +42,7 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
-if(NOT ANDROID)
+if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
     set(GENERIC_LIB_VERSION "0.21.80")
     set(GENERIC_LIB_SOVERSION "22")
 endif()
@@ -420,7 +420,7 @@ if(WIN32)
   TARGET_LINK_LIBRARIES(${MARBLEWIDGET} ws2_32 imm32 winmm)
 endif(WIN32)
 
-if(NOT ANDROID)
+if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
   set_target_properties(${MARBLEWIDGET}  PROPERTIES
                                     VERSION ${GENERIC_LIB_VERSION}
                                     SOVERSION ${GENERIC_LIB_SOVERSION})

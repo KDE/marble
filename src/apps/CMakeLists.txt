@@ -1,4 +1,4 @@
-if (NOT ANDROID)
+if (NOT CMAKE_SYSTEM_NAME STREQUAL Android)
     add_subdirectory(marble-ui)
     add_subdirectory(marble-qt)
     add_subdirectory(marble-mobile)

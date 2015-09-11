@@ -3,7 +3,7 @@ qt5_add_resources(marble_QRCS MarbleMaps.qrc)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-if (ANDROID)
+if (CMAKE_SYSTEM_NAME STREQUAL Android)
     set(TARGET Marble)
 
     find_package(Qt5AndroidExtras)
@@ -36,7 +36,7 @@ target_link_libraries (
 FILE(GLOB QML_FILES *.qml)
 add_custom_target(marble-maps_resources ALL SOURCES ${QML_FILES} package/AndroidManifest.xml)
 
-if (ANDROID)
+if (CMAKE_SYSTEM_NAME STREQUAL Android)
     install(DIRECTORY "../../../data/android/" DESTINATION "${CMAKE_INSTALL_PREFIX}/res")
     set(ABSOLUTE_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}")
     if(NOT IS_ABSOLUTE "${ABSOLUTE_INSTALL_PATH}")
@@ -55,7 +55,7 @@ if (ANDROID)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/deploy-marble-maps.json DESTINATION "${CMAKE_INSTALL_PREFIX}/share")
     install(TARGETS ${TARGET} LIBRARY DESTINATION libs/${ANDROID_ABI})
 else()
-    if(ANDROID OR MARBLE_INSTALL_ANDROID_APPS)
+    if(CMAKE_SYSTEM_NAME STREQUAL Android OR MARBLE_INSTALL_ANDROID_APPS)
         if(APPS_INSTALL_DIR)
             install(PROGRAMS org.kde.marble.maps.desktop DESTINATION ${APPS_INSTALL_DIR})
         endif(APPS_INSTALL_DIR)
