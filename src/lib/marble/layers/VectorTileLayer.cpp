@@ -20,7 +20,7 @@
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
 #include "GeoSceneTypes.h"
-#include "GeoSceneVectorTile.h"
+#include "GeoSceneVectorTileDataset.h"
 #include "MarbleDebug.h"
 #include "TileLoader.h"
 #include "ViewportParams.h"
@@ -141,13 +141,13 @@ void VectorTileLayer::reset()
     }
 }
 
-void VectorTileLayer::setMapTheme( const QVector<const GeoSceneVectorTile *> &textures, const GeoSceneGroup *textureLayerSettings )
+void VectorTileLayer::setMapTheme( const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings )
 {
     qDeleteAll( d->m_texmappers );
     d->m_texmappers.clear();
     d->m_activeTexmappers.clear();
 
-    foreach ( const GeoSceneVectorTile *layer, textures ) {
+    foreach ( const GeoSceneVectorTileDataset *layer, textures ) {
         d->m_texmappers << new VectorTileModel( &d->m_loader, layer, d->m_treeModel, &d->m_threadPool );
     }
 

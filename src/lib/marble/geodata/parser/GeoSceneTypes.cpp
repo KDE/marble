@@ -32,7 +32,7 @@ const char* GeoSceneSettingsType = "GeoSceneSettings";
 const char* GeoSceneTextureTileType = "GeoSceneTextureTileDataset";
 const char* GeoSceneTileDatasetType = "GeoSceneTileDataset";
 const char* GeoSceneVectorType = "GeoSceneVector";
-const char* GeoSceneVectorTileType = "GeoSceneVectorTile";
+const char* GeoSceneVectorTileType = "GeoSceneVectorTileDataset";
 const char* GeoSceneXmlDataSourceType = "GeoSceneXmlDataSource";
 const char* GeoSceneZoomType = "GeoSceneZoom";
 }

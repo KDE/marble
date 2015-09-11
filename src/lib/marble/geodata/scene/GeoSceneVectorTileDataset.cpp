@@ -12,17 +12,17 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-#include "GeoSceneVectorTile.h"
+#include "GeoSceneVectorTileDataset.h"
 #include "GeoSceneTypes.h"
 
 namespace Marble
 {
 
-GeoSceneVectorTile::GeoSceneVectorTile( const QString& name )
+GeoSceneVectorTileDataset::GeoSceneVectorTileDataset( const QString& name )
     : GeoSceneTileDataset( name ){
 }
 
-const char* GeoSceneVectorTile::nodeType() const
+const char* GeoSceneVectorTileDataset::nodeType() const
 {
     return GeoSceneTypes::GeoSceneVectorTileType;
 }

@@ -15,7 +15,7 @@
 #include "GeoDataLatLonBox.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
-#include "GeoSceneVectorTile.h"
+#include "GeoSceneVectorTileDataset.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MathHelper.h"
@@ -27,7 +27,7 @@
 
 using namespace Marble;
 
-TileRunner::TileRunner( TileLoader *loader, const GeoSceneVectorTile *texture, const TileId &id ) :
+TileRunner::TileRunner( TileLoader *loader, const GeoSceneVectorTileDataset *texture, const TileId &id ) :
     m_loader( loader ),
     m_texture( texture ),
     m_id( id )
@@ -53,7 +53,7 @@ VectorTileModel::CacheDocument::~CacheDocument()
     m_vectorTileModel->removeTile(m_document);
 }
 
-VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTile *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool ) :
+VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool ) :
     m_loader( loader ),
     m_layer( layer ),
     m_treeModel( treeModel ),

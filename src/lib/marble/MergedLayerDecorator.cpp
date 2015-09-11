@@ -25,7 +25,7 @@
 #include "MarbleDebug.h"
 #include "GeoDataGroundOverlay.h"
 #include "GeoSceneTextureTileDataset.h"
-#include "GeoSceneVectorTile.h"
+#include "GeoSceneVectorTileDataset.h"
 #include "ImageF.h"
 #include "StackedTile.h"
 #include "TileLoaderHelper.h"

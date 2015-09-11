@@ -27,7 +27,7 @@
 
 #include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneTileDataset.h"
-#include "GeoSceneVectorTile.h"
+#include "GeoSceneVectorTileDataset.h"
 #include "GeoDataContainer.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
@@ -88,7 +88,7 @@ QImage TileLoader::loadTileImage( GeoSceneTextureTileDataset const *textureLayer
 }
 
 
-GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTile const *textureLayer, TileId const & tileId, DownloadUsage const usage )
+GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTileDataset const *textureLayer, TileId const & tileId, DownloadUsage const usage )
 {
     // FIXME: textureLayer->fileFormat() could be used in the future for use just that parser, instead of all available parsers
 

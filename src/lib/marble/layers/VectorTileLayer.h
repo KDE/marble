@@ -35,7 +35,7 @@ namespace Marble
 
 class GeoPainter;
 class GeoSceneGroup;
-class GeoSceneVectorTile;
+class GeoSceneVectorTileDataset;
 class HttpDownloadManager;
 class SunLocator;
 class TileLoader;
@@ -61,7 +61,7 @@ class VectorTileLayer : public QObject, public LayerInterface
                  const QString &renderPos = QLatin1String("NONE"),
                  GeoSceneLayer *layer = 0 );
 
-    void setMapTheme( const QVector<const GeoSceneVectorTile *> &textures, const GeoSceneGroup *textureLayerSettings );
+    void setMapTheme( const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings );
 
     void reset();
 

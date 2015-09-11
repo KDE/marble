@@ -50,7 +50,7 @@
 #include "GeoScenePalette.h"
 #include "GeoSceneSettings.h"
 #include "GeoSceneVector.h"
-#include "GeoSceneVectorTile.h"
+#include "GeoSceneVectorTileDataset.h"
 #include "GeoSceneZoom.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
@@ -817,7 +817,7 @@ void MarbleMapPrivate::updateMapTheme()
         // textures will contain texture layers and
         // vectorTiles vectortile layers
         QVector<const GeoSceneTextureTileDataset *> textures;
-        QVector<const GeoSceneVectorTile *> vectorTiles;
+        QVector<const GeoSceneVectorTileDataset *> vectorTiles;
 
         foreach( GeoSceneLayer* layer, m_model->mapTheme()->map()->layers() ){
             if ( layer->backend() == dgml::dgmlValue_texture ){
@@ -869,7 +869,7 @@ void MarbleMapPrivate::updateMapTheme()
             else if ( layer->backend() == dgml::dgmlValue_vectortile ){
 
                 foreach ( const GeoSceneAbstractDataset *pos, layer->datasets() ) {
-                    const GeoSceneVectorTile *const vectorTile = dynamic_cast<GeoSceneVectorTile const *>( pos );
+                    const GeoSceneVectorTileDataset *const vectorTile = dynamic_cast<GeoSceneVectorTileDataset const *>( pos );
                     if ( !vectorTile )
                         continue;
 
@@ -950,7 +950,7 @@ void MarbleMapPrivate::updateMapTheme()
     }
     else {
         m_textureLayer.setMapTheme( QVector<const GeoSceneTextureTileDataset *>(), 0, "", "" );
-        m_vectorTileLayer.setMapTheme( QVector<const GeoSceneVectorTile *>(), 0 );
+        m_vectorTileLayer.setMapTheme( QVector<const GeoSceneVectorTileDataset *>(), 0 );
     }
 
     // earth

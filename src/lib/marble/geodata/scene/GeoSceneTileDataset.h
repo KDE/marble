@@ -30,7 +30,7 @@
 
 /* In order to make Marble able to manage vector tiles,
  * now there is GeoSceneTileDataset and then GeoSceneTextureTileDataset
- * (for the tag <texture> in dgml) or GeoSceneVectorTile
+ * (for the tag <texture> in dgml) or GeoSceneVectorTileDataset
  * (for <vectortile>) are created, which inherit from this class */
 
 namespace Marble

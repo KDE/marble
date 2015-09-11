@@ -21,7 +21,7 @@
 #include "DgmlAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneLayer.h"
-#include "GeoSceneVectorTile.h"
+#include "GeoSceneVectorTileDataset.h"
 
 namespace Marble
 {
@@ -51,7 +51,7 @@ GeoNode* DgmlVectortileTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.represents( dgmlTag_Layer )
         && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile ) {
 
-        texture = new GeoSceneVectorTile( name );
+        texture = new GeoSceneVectorTileDataset( name );
         texture->setExpire( expire );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
     }
