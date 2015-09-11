@@ -195,6 +195,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "natural", "wetland" ) ]            = GeoDataFeature::NaturalWetland;
     s_visualCategories[ OsmTag( "natural", "glacier" ) ]            = GeoDataFeature::NaturalGlacier;
     s_visualCategories[ OsmTag( "natural", "scrub" ) ]              = GeoDataFeature::NaturalScrub;
+    s_visualCategories[ OsmTag( "natural", "cliff" ) ]              = GeoDataFeature::NaturalCliff;
 
     s_visualCategories[ OsmTag( "military", "danger_area" ) ]       = GeoDataFeature::MilitaryDangerArea;
 

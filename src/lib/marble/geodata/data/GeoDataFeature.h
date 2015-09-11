@@ -144,6 +144,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         NaturalWetland,
         NaturalGlacier,
         NaturalScrub,
+        NaturalCliff,
 
         HighwayTrafficSignals,
 
