@@ -42,8 +42,10 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
-set(GENERIC_LIB_VERSION "0.21.80")
-set(GENERIC_LIB_SOVERSION "22")
+if(NOT ANDROID)
+    set(GENERIC_LIB_VERSION "0.21.80")
+    set(GENERIC_LIB_SOVERSION "22")
+endif()
 
 # link_directories (${QT_LIBRARY_DIR})
 ########### next target ###############
