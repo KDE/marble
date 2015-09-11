@@ -178,13 +178,6 @@ bool GeoPainterPrivate::doClip( const ViewportParams *viewport )
 
 qreal GeoPainterPrivate::normalizeAngle(qreal angle)
 {
-//     if (angle < 0.0) {
-//         angle += 360.0*(static_cast<int>(-angle/360.0) + 1);
-//     }
-//     angle /= 360.0;
-//     angle = (angle - qFloor(angle)) * 360.0;
-// 
-//     return angle;
     angle = fmodf(angle, 360);
     return angle < 0 ? angle + 360 : angle;
 }
@@ -543,7 +536,11 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
         font.setPointSizeF(fontSize);
 
         QVector<QPointF> labelNodes;
+        QRectF viewportRect = QRectF(QPointF(0, 0), d->m_viewport->size());
         foreach( QPolygonF* itPolygon, polygons ) {
+            if (!itPolygon->boundingRect().intersects(viewportRect)) {
+                return;
+            }
             QPainterPath path;
             path.addPolygon(*itPolygon);
 
@@ -573,10 +570,11 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                         qreal angle = -path.angleAtPercent(startPercent);
                         qreal angle2 = -path.angleAtPercent(startPercent + textRelativeLength);
                         angle = GeoPainterPrivate::normalizeAngle(angle);
-                        bool flipped = angle > 90.0 && angle < 270.0;
+                        angle2 = GeoPainterPrivate::normalizeAngle(angle2);
+                        bool upsideDown = angle > 90.0 && angle < 270.0;
 
                         if ( qAbs(angle - angle2) < 3.0 ) {
-                            if ( flipped ) {
+                            if ( upsideDown ) {
                                 angle += 180.0;
                                 point = path.pointAtPercent(startPercent + textRelativeLength);
                             }
@@ -589,7 +587,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                                 angle = -path.angleAtPercent(startPercent + currentGlyphTextLength);
                                 point = path.pointAtPercent(startPercent + currentGlyphTextLength);
 
-                                if ( flipped ) {
+                                if ( upsideDown ) {
                                     angle += 180.0;
                                     point = path.pointAtPercent(startPercent + textRelativeLength - currentGlyphTextLength);
                                 }

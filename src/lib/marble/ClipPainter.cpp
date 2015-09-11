@@ -136,9 +136,8 @@ bool ClipPainter::hasScreenClip() const
 void ClipPainter::drawPolygon ( const QPolygonF & polygon,
                                 Qt::FillRule fillRule )
 {
-    d->initClipRect();
-
     if ( d->m_doClip ) {	
+        d->initClipRect();
         QVector<QPolygonF> clippedPolyObjects;
 
         d->clipPolyObject( polygon, clippedPolyObjects, true );
@@ -165,9 +164,8 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
 
 void ClipPainter::drawPolyline( const QPolygonF & polygon )
 {
-    d->initClipRect();
-
     if ( d->m_doClip ) {
+        d->initClipRect();
         QVector<QPolygonF> clippedPolyObjects;
 
         d->clipPolyObject( polygon, clippedPolyObjects, false );
@@ -196,10 +194,8 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
 void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& labelNodes,
                                 LabelPositionFlags positionFlags)
 {
-    d->initClipRect();
-
     if ( d->m_doClip ) {
- 
+        d->initClipRect();
         QVector<QPolygonF> clippedPolyObjects;
 
         d->clipPolyObject( polygon, clippedPolyObjects, false );
