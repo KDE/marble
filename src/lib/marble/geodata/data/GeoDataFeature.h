@@ -342,6 +342,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         LanduseVineyard,
 
         RailwayRail,
+        RailwayNarrowGauge,
         RailwayTram,
         RailwayLightRail,
         RailwayAbandoned,

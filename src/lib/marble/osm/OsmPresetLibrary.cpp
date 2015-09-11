@@ -236,6 +236,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "leisure", "track" ) ]              = GeoDataFeature::LeisureTrack;
 
     s_visualCategories[ OsmTag( "railway", "rail" ) ]               = GeoDataFeature::RailwayRail;
+    s_visualCategories[ OsmTag( "railway", "narrow_gauge" ) ]       = GeoDataFeature::RailwayNarrowGauge;
     s_visualCategories[ OsmTag( "railway", "tram" ) ]               = GeoDataFeature::RailwayTram;
     s_visualCategories[ OsmTag( "railway", "light_rail" ) ]         = GeoDataFeature::RailwayLightRail;
     s_visualCategories[ OsmTag( "railway", "preserved" ) ]          = GeoDataFeature::RailwayPreserved;
