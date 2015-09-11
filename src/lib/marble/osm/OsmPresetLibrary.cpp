@@ -141,6 +141,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "religion", "shinto" ) ]            = GeoDataFeature::ReligionShinto;
     s_visualCategories[ OsmTag( "religion", "sikh" ) ]              = GeoDataFeature::ReligionSikh;
 
+    s_visualCategories[ OsmTag( "historic", "memorial" ) ]          = GeoDataFeature::TouristAttraction;
     s_visualCategories[ OsmTag( "tourism", "attraction" ) ]         = GeoDataFeature::TouristAttraction;
     s_visualCategories[ OsmTag( "tourism", "camp_site" ) ]          = GeoDataFeature::AccomodationCamping;
     s_visualCategories[ OsmTag( "tourism", "hostel" ) ]             = GeoDataFeature::AccomodationHostel;
@@ -225,6 +226,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "landuse", "vineyard" ) ]           = GeoDataFeature::LanduseVineyard;
     s_visualCategories[ OsmTag( "landuse", "village_green" ) ]      = GeoDataFeature::LanduseGrass;
 
+    s_visualCategories[ OsmTag( "leisure", "common" ) ]             = GeoDataFeature::LanduseGrass;
     s_visualCategories[ OsmTag( "leisure", "garden" ) ]             = GeoDataFeature::LanduseGrass;
     s_visualCategories[ OsmTag( "leisure", "park" ) ]               = GeoDataFeature::LeisurePark;
     s_visualCategories[ OsmTag( "leisure", "playground" ) ]         = GeoDataFeature::LeisurePlayground;
@@ -262,6 +264,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "transport", "bus_stop" ) ]         = GeoDataFeature::TransportBusStop;
     s_visualCategories[ OsmTag( "amenity", "bicycle_parking" ) ]    = GeoDataFeature::TransportBicycleParking;
     s_visualCategories[ OsmTag( "amenity", "motorcycle_parking" ) ] = GeoDataFeature::TransportMotorcycleParking;
+    s_visualCategories[ OsmTag( "railway", "subway_entrance" ) ]    = GeoDataFeature::TransportSubwayEntrance;
 
     s_visualCategories[ OsmTag( "place", "city" ) ]                 = GeoDataFeature::LargeCity;
     s_visualCategories[ OsmTag( "place", "hamlet" ) ]               = GeoDataFeature::SmallCity;
@@ -289,7 +292,6 @@ void OsmPresetLibrary::initializeAdditionalOsmTags()
     s_additionalOsmTags << OsmTag( "barrier", "fence" );
     s_additionalOsmTags << OsmTag( "barrier", "wall" );
     s_additionalOsmTags << OsmTag( "barrier", "gate" );
-    s_additionalOsmTags << OsmTag( "amenity", "toilets" );
 
 
 
@@ -399,7 +401,6 @@ void OsmPresetLibrary::initializeAdditionalOsmTags()
     s_additionalOsmTags << OsmTag( "email", "" );
     s_additionalOsmTags << OsmTag( "fee", "" );
     s_additionalOsmTags << OsmTag( "destination", "" );
-    s_additionalOsmTags << OsmTag( "drinking_water", "yes" );
     s_additionalOsmTags << OsmTag( "indoor", "yes" );
 
 

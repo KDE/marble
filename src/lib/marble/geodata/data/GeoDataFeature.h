@@ -299,6 +299,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         TransportTramStop,
         TransportBicycleParking,
         TransportMotorcycleParking,
+        TransportSubwayEntrance,
 
         // OpenStreetMap category religion
         ReligionPlaceOfWorship,

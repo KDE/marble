@@ -165,8 +165,11 @@ void GeometryLayerPrivate::initializeDefaultValues()
     //Leisure
 
     s_defaultZValues[GeoDataFeature::LeisurePark]         = s_defaultZValue - 14;
-    s_defaultZValues[GeoDataFeature::LeisurePlayground]   = s_defaultZValue - 13.5;
-    s_defaultZValues[GeoDataFeature::LeisurePitch]        = s_defaultZValue - 13.5;
+    s_defaultZValues[GeoDataFeature::LeisurePlayground]   = s_defaultZValue - 13;
+    s_defaultZValues[GeoDataFeature::LeisurePitch]        = s_defaultZValue - 13;
+    s_defaultZValues[GeoDataFeature::LeisureSportsCentre] = s_defaultZValue - 13;
+    s_defaultZValues[GeoDataFeature::LeisureStadium]      = s_defaultZValue - 13;
+    s_defaultZValues[GeoDataFeature::LeisureTrack]        = s_defaultZValue - 13;
 
     s_defaultZValues[GeoDataFeature::TransportParking]    = s_defaultZValue - 13;
 
