@@ -376,7 +376,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::AccomodationHotel]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/hotel.16", transportationColor );
     s_defaultStyle[GeoDataFeature::AccomodationMotel]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/motel.16", transportationColor );
     s_defaultStyle[GeoDataFeature::AccomodationYouthHostel]  = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/hostel.16", transportationColor );
-    s_defaultStyle[GeoDataFeature::AmenityLibrary]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor );
+    s_defaultStyle[GeoDataFeature::AmenityLibrary]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/library.20", amenityColor );
     s_defaultStyle[GeoDataFeature::EducationCollege]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor );
     s_defaultStyle[GeoDataFeature::EducationSchool]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor );
     s_defaultStyle[GeoDataFeature::EducationUniversity]      = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor );
@@ -413,6 +413,8 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::AmenityWasteBasket]       = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/waste_basket.10", amenityColor );
 
     s_defaultStyle[GeoDataFeature::AmenityDrinkingWater]     = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/drinking_water.16", amenityColor );
+
+    s_defaultStyle[GeoDataFeature::NaturalPeak]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/peak", amenityColor );
 
     s_defaultStyle[GeoDataFeature::ShopBeverages]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/beverages-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopHifi]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/hifi-14", shopColor );

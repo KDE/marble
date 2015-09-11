@@ -86,6 +86,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "theatre" ) ]            = GeoDataFeature::TouristTheatre;
     s_visualCategories[ OsmTag( "amenity", "place_of_worship" ) ]   = GeoDataFeature::ReligionPlaceOfWorship;
 
+    s_visualCategories[ OsmTag( "natural", "peak" ) ]               = GeoDataFeature::NaturalPeak;
+
     //FIXME: alcohol != beverages
     s_visualCategories[ OsmTag( "shop", "beverages" ) ]             = GeoDataFeature::ShopBeverages;
     s_visualCategories[ OsmTag( "shop", "hifi" ) ]                  = GeoDataFeature::ShopHifi;

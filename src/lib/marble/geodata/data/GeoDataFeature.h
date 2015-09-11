@@ -226,6 +226,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AmenityDrinkingWater,
         AmenityGraveyard,
 
+        NaturalPeak,
+
         // OpenStreetMap category Shopping
         ShopBeverages,
         ShopHifi,
