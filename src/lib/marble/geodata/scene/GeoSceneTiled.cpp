@@ -34,6 +34,7 @@ GeoSceneTiled::GeoSceneTiled( const QString& name )
       m_serverLayout( new MarbleServerLayout( this ) ),
       m_levelZeroColumns( defaultLevelZeroColumns ),
       m_levelZeroRows( defaultLevelZeroRows ),
+      m_minimumTileLevel(0),
       m_maximumTileLevel( -1 ),
       m_projection( Equirectangular ),
       m_blending(),
@@ -122,6 +123,16 @@ int GeoSceneTiled::maximumTileLevel() const
 void GeoSceneTiled::setMaximumTileLevel( const int maximumTileLevel )
 {
     m_maximumTileLevel = maximumTileLevel;
+}
+
+int GeoSceneTiled::minimumTileLevel() const
+{
+    return m_minimumTileLevel;
+}
+
+void GeoSceneTiled::setMinimumTileLevel(int level)
+{
+    m_minimumTileLevel = level;
 }
 
 QVector<QUrl> GeoSceneTiled::downloadUrls() const

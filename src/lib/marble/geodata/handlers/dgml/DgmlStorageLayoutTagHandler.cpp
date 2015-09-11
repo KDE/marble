@@ -54,6 +54,13 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         levelZeroRows = levelZeroRowsStr.toInt();
     }
 
+    // Attribute minimumTileLevel
+    int minimumTileLevel = 0;
+    const QString minimumTileLevelStr = parser.attribute( dgmlAttr_minimumTileLevel ).trimmed();
+    if ( !minimumTileLevelStr.isEmpty() ) {
+        minimumTileLevel = minimumTileLevelStr.toInt();
+    }
+
     // Attribute maximumTileLevel
     int maximumTileLevel = -1;
     const QString maximumTileLevelStr = parser.attribute( dgmlAttr_maximumTileLevel ).trimmed();
@@ -93,6 +100,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
 
         texture->setLevelZeroColumns( levelZeroColumns );
         texture->setLevelZeroRows( levelZeroRows );
+        texture->setMinimumTileLevel( minimumTileLevel );
         texture->setMaximumTileLevel( maximumTileLevel );
         texture->setStorageLayout( storageLayout );
         texture->setServerLayout( serverLayout );

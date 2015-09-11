@@ -231,6 +231,11 @@ QString TileLoader::tileFileName( GeoSceneTiled const * textureLayer, TileId con
 
 void TileLoader::triggerDownload( GeoSceneTiled const *textureLayer, TileId const &id, DownloadUsage const usage )
 {
+    if (id.zoomLevel() > 0 && id.zoomLevel() != qBound(textureLayer->minimumTileLevel(), id.zoomLevel(), textureLayer->maximumTileLevel())) {
+        // Download only level 0 tiles and tiles between minimum and maximum tile level
+        return;
+    }
+
     QUrl const sourceUrl = textureLayer->downloadUrl( id );
     QString const destFileName = textureLayer->relativeTileFileName( id );
     QString const idStr = QString( "%1:%2:%3:%4" ).arg( textureLayer->sourceDir() ).arg( id.zoomLevel() ).arg( id.x() ).arg( id.y() );
@@ -241,7 +246,11 @@ QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTile * textureLaye
 {
     mDebug() << Q_FUNC_INFO << id;
 
+    int const minimumLevel = textureLayer->minimumTileLevel();
     for ( int level = qMax<int>( 0, id.zoomLevel() - 1 ); level >= 0; --level ) {
+        if (level > 0 && level < minimumLevel) {
+            continue;
+        }
         int const deltaLevel = id.zoomLevel() - level;
 
         TileId const replacementTileId( id.mapThemeIdHash(), level,

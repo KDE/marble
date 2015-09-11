@@ -51,6 +51,7 @@ const char* dgmlAttr_labelColor       = "labelColor";
 const char* dgmlAttr_levelZeroColumns = "levelZeroColumns";
 const char* dgmlAttr_levelZeroRows    = "levelZeroRows";
 const char* dgmlAttr_maximumConnections = "maximumConnections";
+const char* dgmlAttr_minimumTileLevel = "minimumTileLevel";
 const char* dgmlAttr_maximumTileLevel = "maximumTileLevel";
 const char* dgmlAttr_mode             = "mode";
 const char* dgmlAttr_name             = "name";

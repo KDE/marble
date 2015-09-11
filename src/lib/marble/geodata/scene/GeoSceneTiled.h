@@ -71,6 +71,9 @@ class GEODATA_EXPORT GeoSceneTiled : public GeoSceneAbstractDataset
     bool hasMaximumTileLevel() const;
     int maximumTileLevel() const;
     void setMaximumTileLevel( const int );
+
+    int minimumTileLevel() const;
+    void setMinimumTileLevel(int level);
     
     QVector<QUrl> downloadUrls() const;
 
@@ -109,6 +112,7 @@ class GEODATA_EXPORT GeoSceneTiled : public GeoSceneAbstractDataset
     const ServerLayout *m_serverLayout;
     int m_levelZeroColumns;
     int m_levelZeroRows;
+    int m_minimumTileLevel;
     int m_maximumTileLevel;
     mutable QSize m_tileSize;
     Projection m_projection;
