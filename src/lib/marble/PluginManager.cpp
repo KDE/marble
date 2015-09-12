@@ -52,7 +52,7 @@ class PluginManagerPrivate
     QList<RoutingRunnerPlugin *> m_routingRunnerPlugins;
     QList<const ParseRunnerPlugin *> m_parsingRunnerPlugins;
 
-#ifdef ANDROID
+#ifdef Q_OS_ANDROID
     QStringList m_pluginPaths;
 #endif
 };
@@ -66,7 +66,7 @@ PluginManager::PluginManager( QObject *parent ) : QObject( parent ),
     d( new PluginManagerPrivate() )
 {
     //Checking assets:/plugins for uninstalled plugins
-#ifdef ANDROID
+#ifdef Q_OS_ANDROID
         installPluginsFromAssets();
 #endif
 }
@@ -213,7 +213,7 @@ void PluginManagerPrivate::loadPlugins()
     foreach( const QString &fileName, pluginFileNameList ) {
         // mDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QString const path = MarbleDirs::pluginPath( fileName );
-#ifdef ANDROID
+#ifdef Q_OS_ANDROID
         QFileInfo targetFile( path );
         if ( !m_pluginPaths.contains( targetFile.canonicalFilePath() ) ) {
             // @todo Delete the file here?
@@ -256,7 +256,7 @@ void PluginManagerPrivate::loadPlugins()
     mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
 }
 
-#ifdef ANDROID
+#ifdef Q_OS_ANDROID
     void PluginManager::installPluginsFromAssets() const
     {
         d->m_pluginPaths.clear();

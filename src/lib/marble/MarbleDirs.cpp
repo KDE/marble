@@ -149,7 +149,7 @@ QString MarbleDirs::systemPath()
     }
 #endif   // mac bundle
 
-#ifdef ANDROID
+#ifdef Q_OS_ANDROID
     systempath = "assets:/data";
     return systempath;
 #endif
@@ -207,7 +207,7 @@ QString MarbleDirs::pluginSystemPath()
 if ( !runTimeMarblePluginPath.isEmpty() )
     return runTimeMarblePluginPath;
 
-#ifdef ANDROID
+#ifdef Q_OS_ANDROID
     return "assets:/plugins";
 #endif
 

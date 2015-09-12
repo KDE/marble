@@ -151,7 +151,7 @@ Q_SIGNALS:
  private:
     Q_DISABLE_COPY( PluginManager )
 
-#ifdef ANDROID
+#ifdef Q_OS_ANDROID
     void installPluginsFromAssets() const;
 #endif
 
