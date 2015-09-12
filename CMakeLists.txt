@@ -50,6 +50,8 @@ option(MOBILE "Create a Marble version optimized for handheld devices")
 # Specific options for building with Qt 4 vs 5
 
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
+   add_definitions(-DANDROID)
+
    # Minimum Qt version
    set(QT_REQUIRED_VERSION 5.3.0)
 
