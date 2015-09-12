@@ -99,6 +99,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "shop", "supermarket" ) ]           = GeoDataFeature::ShopSupermarket;
     s_visualCategories[ OsmTag( "shop", "alcohol" ) ]               = GeoDataFeature::ShopAlcohol;
     s_visualCategories[ OsmTag( "shop", "bakery" ) ]                = GeoDataFeature::ShopBakery;
+    s_visualCategories[ OsmTag( "shop", "butcher" ) ]               = GeoDataFeature::ShopButcher;
     s_visualCategories[ OsmTag( "shop", "confectionery" ) ]         = GeoDataFeature::ShopConfectionery;
     s_visualCategories[ OsmTag( "shop", "convenience" ) ]           = GeoDataFeature::ShopConvenience;
     s_visualCategories[ OsmTag( "shop", "greengrocer" ) ]           = GeoDataFeature::ShopGreengrocer;
@@ -144,6 +145,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "religion", "bahai" ) ]             = GeoDataFeature::ReligionBahai;
     s_visualCategories[ OsmTag( "religion", "buddhist" ) ]          = GeoDataFeature::ReligionBuddhist;
     s_visualCategories[ OsmTag( "religion", "christian" ) ]         = GeoDataFeature::ReligionChristian;
+    s_visualCategories[ OsmTag( "religion", "muslim" ) ]            = GeoDataFeature::ReligionMuslim;
     s_visualCategories[ OsmTag( "religion", "hindu" ) ]             = GeoDataFeature::ReligionHindu;
     s_visualCategories[ OsmTag( "religion", "jain" ) ]              = GeoDataFeature::ReligionJain;
     s_visualCategories[ OsmTag( "religion", "jewish" ) ]            = GeoDataFeature::ReligionJewish;

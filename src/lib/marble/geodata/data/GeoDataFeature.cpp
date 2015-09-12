@@ -425,11 +425,12 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::ShopSupermarket]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_supermarket", shopColor );
     s_defaultStyle[GeoDataFeature::ShopAlcohol]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_alcohol.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopBakery]               = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_bakery.16", shopColor );
+    s_defaultStyle[GeoDataFeature::ShopButcher]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/butcher-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopConfectionery]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/confectionery.14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopConvenience]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_convenience", shopColor );
     s_defaultStyle[GeoDataFeature::ShopGreengrocer]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/greengrocer-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopSeafood]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/seafood-14", shopColor );
-    s_defaultStyle[GeoDataFeature::ShopKiosk]                = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/newsagent-14", shopColor );
+    s_defaultStyle[GeoDataFeature::ShopKiosk]                = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/kiosk-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopClothes]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_clothes.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopFashion]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_clothes.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopJewelry]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_jewelry.16", shopColor );
@@ -496,6 +497,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::ReligionBahai]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString() );
     s_defaultStyle[GeoDataFeature::ReligionBuddhist]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "black/buddhist.16" );
     s_defaultStyle[GeoDataFeature::ReligionChristian]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "black/christian.16" );
+    s_defaultStyle[GeoDataFeature::ReligionMuslim]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "black/muslim.16" );
     s_defaultStyle[GeoDataFeature::ReligionHindu]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "black/hinduist.16" );
     s_defaultStyle[GeoDataFeature::ReligionJain]             = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString() );
     s_defaultStyle[GeoDataFeature::ReligionJewish]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "black/jewish.16" );
