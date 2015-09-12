@@ -46,8 +46,14 @@ OsmParser::OsmParser()
 
     m_areaTags.insert( "amenity=graveyard" );
     m_areaTags.insert( "amenity=parking" );
-    m_areaTags.insert( "leisure=park" );
+    m_areaTags.insert( "leisure=common" );
+    m_areaTags.insert( "leisure=garden" );
     m_areaTags.insert( "leisure=playground" );
+    m_areaTags.insert( "leisure=pitch" );
+    m_areaTags.insert( "leisure=park" );
+    m_areaTags.insert( "leisure=sportscentre" );
+    m_areaTags.insert( "leisure=stadium" );
+    m_areaTags.insert( "leisure=track" );
 
     m_areaTags.insert( "military=danger_area" );
 

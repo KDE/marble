@@ -180,6 +180,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AccomodationHotel,
         AccomodationMotel,
         AccomodationYouthHostel,
+        AccomodationGuestHouse,
 
         // OpenStreetMap category Amenity
         AmenityLibrary,
@@ -208,6 +209,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         MoneyAtm,
         MoneyBank,
 
+        AmenityArchaeologicalSite,
+        AmenityEmergencyPhone,
+        AmenityWaterPark,
         AmenityCommunityCentre,
         AmenityNightClub,
         AmenityBench,
@@ -272,12 +276,15 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         ShopTravelAgency,
 
         ManmadePier,
+        ManmadeWaterTower,
+        ManmadeWindMill,
 
 
         // OpenStreetMap category Tourist
         TouristAttraction,
         TouristCastle,
         TouristCinema,
+        TouristInformation,
         TouristMonument,
         TouristMuseum,
         TouristRuin,

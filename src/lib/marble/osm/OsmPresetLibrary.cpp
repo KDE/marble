@@ -58,11 +58,15 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "atm" ) ]                = GeoDataFeature::MoneyAtm;
     s_visualCategories[ OsmTag( "amenity", "bank" ) ]               = GeoDataFeature::MoneyBank;
 
+    s_visualCategories[ OsmTag( "historic", "archaeological_site" ) ] = GeoDataFeature::AmenityArchaeologicalSite;
+    s_visualCategories[ OsmTag( "emergency", "phone" ) ]            = GeoDataFeature::AmenityEmergencyPhone;
+    s_visualCategories[ OsmTag( "leisure", "water_park" ) ]         = GeoDataFeature::AmenityWaterPark;
+
     s_visualCategories[ OsmTag( "amenity", "community_centre" ) ]   = GeoDataFeature::AmenityCommunityCentre;
     s_visualCategories[ OsmTag( "amenity", "nightclub" ) ]          = GeoDataFeature::AmenityNightClub;
     s_visualCategories[ OsmTag( "amenity", "bench" ) ]              = GeoDataFeature::AmenityBench;
     s_visualCategories[ OsmTag( "amenity", "courthouse" ) ]         = GeoDataFeature::AmenityCourtHouse;
-    s_visualCategories[ OsmTag( "amenity", "firestation" ) ]        = GeoDataFeature::AmenityFireStation;
+    s_visualCategories[ OsmTag( "amenity", "fire_station" ) ]       = GeoDataFeature::AmenityFireStation;
     s_visualCategories[ OsmTag( "amenity", "hunting_stand" ) ]      = GeoDataFeature::AmenityHuntingStand;
     s_visualCategories[ OsmTag( "amenity", "police" ) ]             = GeoDataFeature::AmenityPolice;
     s_visualCategories[ OsmTag( "amenity", "post_box" ) ]           = GeoDataFeature::AmenityPostBox;
@@ -83,6 +87,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "veterinary" ) ]         = GeoDataFeature::HealthVeterinary;
 
     s_visualCategories[ OsmTag( "amenity", "cinema" ) ]             = GeoDataFeature::TouristCinema;
+    s_visualCategories[ OsmTag( "tourism", "information" ) ]        = GeoDataFeature::TouristInformation;
     s_visualCategories[ OsmTag( "amenity", "theatre" ) ]            = GeoDataFeature::TouristTheatre;
     s_visualCategories[ OsmTag( "amenity", "place_of_worship" ) ]   = GeoDataFeature::ReligionPlaceOfWorship;
 
@@ -131,7 +136,9 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "shop", "toys" ) ]                  = GeoDataFeature::ShopToys;
     s_visualCategories[ OsmTag( "shop", "travel_agency" ) ]         = GeoDataFeature::ShopTravelAgency;
 
-    s_visualCategories[ OsmTag( "man_made", "pier" ) ]               = GeoDataFeature::ManmadePier;
+    s_visualCategories[ OsmTag( "man_made", "pier" ) ]              = GeoDataFeature::ManmadePier;
+    s_visualCategories[ OsmTag( "man_made", "water_park" ) ]        = GeoDataFeature::ManmadeWaterTower;
+    s_visualCategories[ OsmTag( "man_made", "windmill" ) ]          = GeoDataFeature::ManmadeWindMill;
 
     s_visualCategories[ OsmTag( "religion", "" ) ]                  = GeoDataFeature::ReligionPlaceOfWorship;
     s_visualCategories[ OsmTag( "religion", "bahai" ) ]             = GeoDataFeature::ReligionBahai;
@@ -149,6 +156,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "tourism", "hostel" ) ]             = GeoDataFeature::AccomodationHostel;
     s_visualCategories[ OsmTag( "tourism", "hotel" ) ]              = GeoDataFeature::AccomodationHotel;
     s_visualCategories[ OsmTag( "tourism", "motel" ) ]              = GeoDataFeature::AccomodationMotel;
+    s_visualCategories[ OsmTag( "tourism", "guest_house" ) ]        = GeoDataFeature::AccomodationGuestHouse;
     s_visualCategories[ OsmTag( "tourism", "museum" ) ]             = GeoDataFeature::TouristMuseum;
     s_visualCategories[ OsmTag( "tourism", "theme_park" ) ]         = GeoDataFeature::TouristThemePark;
     s_visualCategories[ OsmTag( "tourism", "viewpoint" ) ]          = GeoDataFeature::TouristViewPoint;
@@ -251,6 +259,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "railway", "monorail" ) ]           = GeoDataFeature::RailwayMonorail;
     s_visualCategories[ OsmTag( "railway", "funicular" ) ]          = GeoDataFeature::RailwayFunicular;
     s_visualCategories[ OsmTag( "railway", "station" ) ]            = GeoDataFeature::TransportTrainStation;
+    s_visualCategories[ OsmTag( "railway", "halt" ) ]               = GeoDataFeature::TransportTrainStation;
 
     s_visualCategories[ OsmTag( "aeroway", "aerodrome" ) ]          = GeoDataFeature::TransportAerodrome;
     s_visualCategories[ OsmTag( "aeroway", "helipad" ) ]            = GeoDataFeature::TransportHelipad;

@@ -74,16 +74,18 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     const bool isLatValid = minLat() <= lat && lat <= maxLat();
 
-    if ( lat > maxLat() ) {
-        GeoDataCoordinates approxCoords( geopoint );
-        approxCoords.setLatitude( maxLat() );
-        approxCoords.geoCoordinates( lon, lat );
-    }
+    if (!isLatValid) {
+        if ( lat > maxLat() ) {
+            GeoDataCoordinates approxCoords( geopoint );
+            approxCoords.setLatitude( maxLat() );
+            approxCoords.geoCoordinates( lon, lat );
+        }
 
-    if ( lat < minLat() ) {
-        GeoDataCoordinates approxCoords( geopoint );
-        approxCoords.setLatitude( minLat() );
-        approxCoords.geoCoordinates( lon, lat );
+        if ( lat < minLat() ) {
+            GeoDataCoordinates approxCoords( geopoint );
+            approxCoords.setLatitude( minLat() );
+            approxCoords.geoCoordinates( lon, lat );
+        }
     }
 
     // Convenience variables
