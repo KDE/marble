@@ -122,6 +122,8 @@ public:
 
     void setDocument( QString key );
 
+    void updateTileLevel();
+
     MarbleMap *const q;
 
     // The model we are showing.
@@ -203,7 +205,9 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
                       &m_geometryLayer, SLOT(handleHighlight(qreal,qreal,GeoDataCoordinates::Unit)) );
 
     QObject::connect( &m_textureLayer, SIGNAL(tileLevelChanged(int)),
-                      parent, SIGNAL(tileLevelChanged(int)) );
+                      parent, SLOT(updateTileLevel()) );
+    QObject::connect( &m_vectorTileLayer, SIGNAL(tileLevelChanged(int)),
+                      parent, SLOT(updateTileLevel()) );
     QObject::connect( &m_textureLayer, SIGNAL(repaintNeeded()),
                       parent, SIGNAL(repaintNeeded()) );
 
@@ -399,7 +403,7 @@ int MarbleMap::preferredRadiusFloor( int radius )
 
 int MarbleMap::tileZoomLevel() const
 {
-    return d->m_textureLayer.tileZoomLevel();
+    return qMax(d->m_textureLayer.tileZoomLevel(), d->m_vectorTileLayer.tileZoomLevel());
 }
 
 
@@ -733,6 +737,11 @@ void MarbleMapPrivate::setDocument( QString key )
             }
         }
     }
+}
+
+void MarbleMapPrivate::updateTileLevel()
+{
+    emit q->tileLevelChanged(q->tileZoomLevel());
 }
 
 // Used to be paintEvent()

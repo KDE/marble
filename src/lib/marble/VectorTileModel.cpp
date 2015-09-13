@@ -159,6 +159,11 @@ void VectorTileModel::removeTile(GeoDataDocument *document)
     emit tileRemoved(document);
 }
 
+int VectorTileModel::tileZoomLevel() const
+{
+    return m_tileZoomLevel;
+}
+
 void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
 {
     if ( m_tileZoomLevel != id.zoomLevel() ) {

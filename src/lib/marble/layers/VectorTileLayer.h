@@ -56,6 +56,11 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     RenderState renderState() const;
 
+    int tileZoomLevel() const;
+
+Q_SIGNALS:
+    void tileLevelChanged(int tileLevel);
+
  public Q_SLOTS:
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = QLatin1String("NONE"),

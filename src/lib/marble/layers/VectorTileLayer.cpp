@@ -120,6 +120,15 @@ RenderState VectorTileLayer::renderState() const
     return RenderState( "Vector Tiles" );
 }
 
+int VectorTileLayer::tileZoomLevel() const
+{
+    int level = 0;
+    foreach(const auto *mapper, d->m_activeTexmappers ) {
+        level = qMax(level, mapper->tileZoomLevel());
+    }
+    return level;
+}
+
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
                               const QString &renderPos, GeoSceneLayer *layer )
 {
@@ -127,8 +136,14 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
+    int const oldLevel = tileZoomLevel();
+    int level = 0;
     foreach ( VectorTileModel *mapper, d->m_activeTexmappers ) {
         mapper->setViewport( viewport->viewLatLonAltBox(), viewport->radius() );
+        level = qMax(level, mapper->tileZoomLevel());
+    }
+    if (oldLevel != level) {
+        emit tileLevelChanged(level);
     }
 
     return true;

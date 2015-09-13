@@ -61,6 +61,8 @@ public:
 
     void removeTile(GeoDataDocument* document);
 
+    int tileZoomLevel() const;
+
 public Q_SLOTS:
     void updateTile( const TileId &id, GeoDataDocument *document );
 
