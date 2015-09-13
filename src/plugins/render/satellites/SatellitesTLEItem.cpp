@@ -19,7 +19,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataTrack.h"
 
-#include "sgp4/sgp4ext.h"
+#include <sgp4ext.h>
 
 #include <QFile>
 #include <QDateTime>

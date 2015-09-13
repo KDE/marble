@@ -18,8 +18,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 
-#include "sgp4/sgp4io.h"
 #include <planetarySats.h>
+#include <sgp4io.h>
 
 #include <locale.h>
 

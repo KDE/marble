@@ -16,7 +16,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataTrack.h"
 
-#include "sgp4/sgp4unit.h"
+#include <sgp4unit.h>
 
 class QColor;
 

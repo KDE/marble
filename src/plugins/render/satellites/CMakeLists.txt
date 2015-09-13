@@ -2,6 +2,7 @@ PROJECT(SatellitesPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib/astro
+ ${CMAKE_SOURCE_DIR}/src/3rdparty/sgp4
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
@@ -9,11 +10,6 @@ INCLUDE_DIRECTORIES(
 if( QT4BUILD )
   INCLUDE(${QT_USE_FILE})
 endif()
-
-set( sgp4_SRCS
- sgp4/sgp4ext.cpp
- sgp4/sgp4unit.cpp
- sgp4/sgp4io.cpp )
 
 set( satellites_SRCS
  TrackerPluginModel.cpp
@@ -37,4 +33,4 @@ marble_add_plugin( SatellitesPlugin
  ${satellites_SRCS}
  ${sgp4_SRCS} )
 
-target_link_libraries( SatellitesPlugin astro )
+target_link_libraries( SatellitesPlugin astro sgp4 )
