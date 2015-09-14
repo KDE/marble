@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+// Copyright 2011      Thibaut Gridel <tgridel@free.fr>
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 // Copyright 2014      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
