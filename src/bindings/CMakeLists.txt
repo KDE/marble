@@ -1,3 +1,8 @@
+if(EXPERIMENTAL_PYTHON_BINDINGS)
+  MESSAGE(WARNING "Marble's Python bindings lack a maintainer and therefore had to be disabled. Do you need them? Please contact us at https://marble.kde.org/support.php")
+  return()
+endif()
+
 set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
 find_package(ECM QUIET)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
