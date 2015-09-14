@@ -137,7 +137,8 @@ void OsmParser::adjustStyles(GeoDataDocument* document)
             if (isHighway(placemark)) {
                 calculateHighwayWidth(placemark);
             }
-            else if( placemark->visualCategory() == GeoDataFeature::AmenityGraveyard ){
+            else if( placemark->visualCategory() == GeoDataFeature::AmenityGraveyard ||
+                     placemark->visualCategory() == GeoDataFeature::LanduseCemetery ){
                 adjustGraveyardPattern( placemark );
             }
         }

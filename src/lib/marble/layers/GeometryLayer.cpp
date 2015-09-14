@@ -145,11 +145,8 @@ void GeometryLayerPrivate::initializeDefaultValues()
 
     //Landuse
 
-    for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseRetail; i++ )
+    for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseVineyard; i++ )
         s_defaultZValues[(GeoDataFeature::GeoDataVisualCategory)i] = s_defaultZValue - 17;
-
-    s_defaultZValues[GeoDataFeature::LanduseOrchard]      = s_defaultZValue - 17;
-    s_defaultZValues[GeoDataFeature::LanduseVineyard]     = s_defaultZValue - 17;
 
     s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 16;
     s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 15;
