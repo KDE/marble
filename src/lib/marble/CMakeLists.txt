@@ -302,7 +302,7 @@ else()
         )
 endif()
 
-if (NOT QT_NO_DBUS)
+if (NOT QT_NO_DBUS AND NOT CMAKE_SYSTEM_NAME STREQUAL Android)
     LIST(APPEND marblewidget_SRCS
         MarbleDBusInterface.cpp
         )
