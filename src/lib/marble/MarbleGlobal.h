@@ -16,7 +16,6 @@
 #include <math.h>
 
 #include <QString>
-#include <QColor>
 
 #include "marble_export.h"
 #include "MarbleColors.h"

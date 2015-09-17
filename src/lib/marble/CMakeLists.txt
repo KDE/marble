@@ -391,6 +391,7 @@ else()
     ${Qt5Core_LIBRARIES}
     ${Qt5Xml_LIBRARIES}
     ${Qt5Widgets_LIBRARIES}
+    ${Qt5Gui_LIBRARIES}
     ${Qt5WebKitWidgets_LIBRARIES}
     ${Qt5Svg_LIBRARIES}
     ${Qt5Script_LIBRARIES}
