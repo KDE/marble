@@ -42,7 +42,7 @@ namespace Marble
 
 const int REPAINT_SCHEDULING_INTERVAL = 1000;
 
-class TextureLayer::Private
+class Q_DECL_HIDDEN TextureLayer::Private
 {
 public:
     Private( HttpDownloadManager *downloadManager,

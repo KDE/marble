@@ -54,7 +54,7 @@ namespace
 namespace Marble
 {
 
-class MapThemeManager::Private
+class Q_DECL_HIDDEN MapThemeManager::Private
 {
 public:
     Private( MapThemeManager *parent );

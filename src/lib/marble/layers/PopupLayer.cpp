@@ -23,7 +23,7 @@
 namespace Marble
 {
 
-class PopupLayer::Private
+class Q_DECL_HIDDEN PopupLayer::Private
 {
 public:
     Private( MarbleWidget *marbleWidget, PopupLayer *q );

@@ -15,7 +15,7 @@
 namespace Marble
 {
 
-class ParseRunnerPlugin::Private
+class Q_DECL_HIDDEN ParseRunnerPlugin::Private
 {
 public:
     Private();

@@ -15,7 +15,7 @@
 namespace Marble
 {
 
-class RoutingRunnerPlugin::Private
+class Q_DECL_HIDDEN RoutingRunnerPlugin::Private
 {
 public:
     QStringList m_supportedCelestialBodies;

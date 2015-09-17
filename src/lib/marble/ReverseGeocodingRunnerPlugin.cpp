@@ -15,7 +15,7 @@
 namespace Marble
 {
 
-class ReverseGeocodingRunnerPlugin::Private
+class Q_DECL_HIDDEN ReverseGeocodingRunnerPlugin::Private
 {
 public:
     QStringList m_supportedCelestialBodies;

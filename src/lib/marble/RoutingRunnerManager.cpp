@@ -33,7 +33,7 @@ namespace Marble
 
 class MarbleModel;
 
-class RoutingRunnerManager::Private
+class Q_DECL_HIDDEN RoutingRunnerManager::Private
 {
 public:
     Private( RoutingRunnerManager *parent, const MarbleModel *marbleModel );

@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-class BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
+class Q_DECL_HIDDEN BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
 {
  public:
     Private( BillboardGraphicsItem *parent ) :

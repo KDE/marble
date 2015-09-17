@@ -28,7 +28,7 @@ using namespace Marble;
 // Time before a failed download job is requeued in ms
 const quint32 requeueTime = 60000;
 
-class HttpDownloadManager::Private
+class Q_DECL_HIDDEN HttpDownloadManager::Private
 {
   public:
     Private( HttpDownloadManager* parent, StoragePolicy *policy );

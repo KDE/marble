@@ -21,7 +21,7 @@
 
 namespace Marble {
 
-class AddLinkDialog::Private : public Ui::UiAddLinkDialog
+class Q_DECL_HIDDEN AddLinkDialog::Private : public Ui::UiAddLinkDialog
 {
 public:
     Private();

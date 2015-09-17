@@ -21,7 +21,7 @@
 
 namespace Marble {
 
-class AlternativeRoutesModel::Private
+class Q_DECL_HIDDEN AlternativeRoutesModel::Private
 {
 public:
     Private();

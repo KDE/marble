@@ -41,7 +41,7 @@ namespace Marble
 
 class MarbleModel;
 
-class SearchRunnerManager::Private
+class Q_DECL_HIDDEN SearchRunnerManager::Private
 {
 public:
     Private( SearchRunnerManager *parent, const MarbleModel *marbleModel );

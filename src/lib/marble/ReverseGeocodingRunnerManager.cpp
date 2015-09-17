@@ -30,7 +30,7 @@ namespace Marble
 
 class MarbleModel;
 
-class ReverseGeocodingRunnerManager::Private
+class Q_DECL_HIDDEN ReverseGeocodingRunnerManager::Private
 {
 public:
     Private( ReverseGeocodingRunnerManager *parent, const MarbleModel *marbleModel );

@@ -50,7 +50,7 @@ using namespace Marble;
 namespace Marble
 {
 
-class MapViewWidget::Private {
+class Q_DECL_HIDDEN MapViewWidget::Private {
  public:
     Private( MapViewWidget *parent )
         : q( parent ),

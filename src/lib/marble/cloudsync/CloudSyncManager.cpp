@@ -15,7 +15,7 @@
 namespace Marble
 {
 
-class CloudSyncManager::Private {
+class Q_DECL_HIDDEN CloudSyncManager::Private {
 
 public:
     Private();

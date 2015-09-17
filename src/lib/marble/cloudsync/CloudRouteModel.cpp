@@ -22,7 +22,7 @@
 
 namespace Marble {
 
-class CloudRouteModel::Private {
+class Q_DECL_HIDDEN CloudRouteModel::Private {
 
 public:
     Private();

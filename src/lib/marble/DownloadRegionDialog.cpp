@@ -52,7 +52,7 @@ int const minimumRouteOffset = 0;
 int const maximumRouteOffset = 10000;
 int averageTileSize = 13; //The average size of a tile in kilobytes
 
-class DownloadRegionDialog::Private
+class Q_DECL_HIDDEN DownloadRegionDialog::Private
 {
 public:
     Private( MarbleWidget *const widget, QDialog * const dialog );

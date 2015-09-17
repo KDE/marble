@@ -26,7 +26,7 @@
 namespace Marble
 {
 
-class RoutingProfilesWidget::Private
+class Q_DECL_HIDDEN RoutingProfilesWidget::Private
 {
  public:
     Private( MarbleModel *marbleModel, RoutingProfilesWidget *parent );

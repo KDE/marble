@@ -31,7 +31,7 @@
 
 namespace Marble{
 
-class FormattedTextWidget::Private : public Ui::FormattedTextWidget
+class Q_DECL_HIDDEN FormattedTextWidget::Private : public Ui::FormattedTextWidget
 {
 public:
     Private();

@@ -39,7 +39,7 @@ namespace Marble
 /**
  * Private class for RouteSyncManager.
  */
-class RouteSyncManager::Private {
+class Q_DECL_HIDDEN RouteSyncManager::Private {
 public:
     Private( CloudSyncManager *cloudSyncManager );
 

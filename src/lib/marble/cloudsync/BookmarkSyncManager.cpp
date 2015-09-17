@@ -55,7 +55,7 @@ public:
     GeoDataPlacemark m_placemarkB;
 };
 
-class BookmarkSyncManager::Private
+class Q_DECL_HIDDEN BookmarkSyncManager::Private
 {
 public:
     Private( BookmarkSyncManager* parent, CloudSyncManager *cloudSyncManager );

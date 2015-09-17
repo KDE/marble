@@ -29,7 +29,7 @@ namespace Marble
 
 class MarbleModel;
 
-class ParsingRunnerManager::Private
+class Q_DECL_HIDDEN ParsingRunnerManager::Private
 {
 public:
     Private( ParsingRunnerManager *parent, const PluginManager *pluginManager );

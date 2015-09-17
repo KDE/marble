@@ -58,7 +58,7 @@ private:
     MarbleWidget* m_marbleWidget;
 };
 
-class MapThemeDownloadDialog::Private : public Ui::MapThemeDownloadDialog
+class Q_DECL_HIDDEN MapThemeDownloadDialog::Private : public Ui::MapThemeDownloadDialog
 {
 public:
     Private() :

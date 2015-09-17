@@ -24,7 +24,7 @@
 
 using namespace Marble;
 
-class MarblePlacemarkModel::Private
+class Q_DECL_HIDDEN MarblePlacemarkModel::Private
 {
 
  public:

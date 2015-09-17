@@ -16,7 +16,7 @@
 namespace Marble
 {
 
-class RenderPluginModel::Private
+class Q_DECL_HIDDEN RenderPluginModel::Private
 {
 public:
     Private();

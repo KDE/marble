@@ -15,7 +15,7 @@
 namespace Marble
 {
 
-class SearchRunnerPlugin::Private
+class Q_DECL_HIDDEN SearchRunnerPlugin::Private
 {
 public:
     QStringList m_supportedCelestialBodies;

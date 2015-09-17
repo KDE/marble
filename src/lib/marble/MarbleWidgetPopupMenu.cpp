@@ -55,7 +55,7 @@
 namespace Marble {
 /* TRANSLATOR Marble::MarbleWidgetPopupMenu */
 
-class MarbleWidgetPopupMenu::Private {
+class Q_DECL_HIDDEN MarbleWidgetPopupMenu::Private {
 public:
     const MarbleModel    *const m_model;
     MarbleWidget   *const m_widget;

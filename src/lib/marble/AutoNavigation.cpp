@@ -29,7 +29,7 @@
 
 namespace Marble {
 
-class AutoNavigation::Private
+class Q_DECL_HIDDEN AutoNavigation::Private
 {
 public:
 

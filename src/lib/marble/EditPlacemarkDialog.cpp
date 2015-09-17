@@ -41,7 +41,7 @@
 
 namespace Marble {
 
-class EditPlacemarkDialog::Private : public Ui::UiEditPlacemarkDialog
+class Q_DECL_HIDDEN EditPlacemarkDialog::Private : public Ui::UiEditPlacemarkDialog
 {
 public:
     Private( GeoDataPlacemark *placemark );

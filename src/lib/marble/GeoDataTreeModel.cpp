@@ -41,7 +41,7 @@
 
 using namespace Marble;
 
-class GeoDataTreeModel::Private {
+class Q_DECL_HIDDEN GeoDataTreeModel::Private {
  public:
     Private( QAbstractItemModel* model );
     ~Private();

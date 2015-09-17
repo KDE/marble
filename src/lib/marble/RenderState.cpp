@@ -14,7 +14,7 @@
 
 namespace Marble {
 
-class RenderState::Private
+class Q_DECL_HIDDEN RenderState::Private
 {
 public:
     QString m_name;
