@@ -10,7 +10,7 @@
 namespace Marble
 {
 
-class MarbleDBusInterface::Private
+class Q_DECL_HIDDEN MarbleDBusInterface::Private
 {
 public:
     Private( MarbleWidget* widget );

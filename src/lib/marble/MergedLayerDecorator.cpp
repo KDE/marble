@@ -40,7 +40,7 @@
 
 using namespace Marble;
 
-class MergedLayerDecorator::Private
+class Q_DECL_HIDDEN MergedLayerDecorator::Private
 {
 public:
     Private( TileLoader *tileLoader, const SunLocator *sunLocator );

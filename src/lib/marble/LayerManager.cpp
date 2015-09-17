@@ -29,7 +29,7 @@
 namespace Marble
 {
 
-class LayerManager::Private
+class Q_DECL_HIDDEN LayerManager::Private
 {
  public:
     Private( const MarbleModel* model, LayerManager *parent );

@@ -17,7 +17,7 @@
 
 namespace Marble {
 
-class CloudRoutesDialog::Private : public Ui::CloudRoutesDialog {
+class Q_DECL_HIDDEN CloudRoutesDialog::Private : public Ui::CloudRoutesDialog {
     public:
         explicit Private( CloudRouteModel *model );
         CloudRouteModel *m_model;

@@ -29,7 +29,7 @@
 namespace Marble
 {
 
-class VectorTileLayer::Private
+class Q_DECL_HIDDEN VectorTileLayer::Private
 {
 public:
     Private(HttpDownloadManager *downloadManager,

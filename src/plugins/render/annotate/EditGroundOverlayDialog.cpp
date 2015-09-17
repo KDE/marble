@@ -24,7 +24,7 @@
 namespace Marble
 {
 
-class EditGroundOverlayDialog::Private : public Ui::UiEditGroundOverlayDialog
+class Q_DECL_HIDDEN EditGroundOverlayDialog::Private : public Ui::UiEditGroundOverlayDialog
 {
 
 public:

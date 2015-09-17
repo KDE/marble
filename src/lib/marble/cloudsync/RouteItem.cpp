@@ -12,7 +12,7 @@
 
 namespace Marble {
 
-class RouteItem::Private {
+class Q_DECL_HIDDEN RouteItem::Private {
 
 public:
     QString m_identifier;
