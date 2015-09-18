@@ -459,25 +459,25 @@ GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::OsmVisualCategory( const
 QMap<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator OsmPresetLibrary::begin()
 {
     initializeOsmVisualCategories();
-    return s_visualCategories.begin();
+    return s_visualCategories.constBegin();
 }
 
 QMap<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator OsmPresetLibrary::end()
 {
     initializeOsmVisualCategories();
-    return s_visualCategories.end();
+    return s_visualCategories.constEnd();
 }
 
 QList<OsmPresetLibrary::OsmTag>::const_iterator OsmPresetLibrary::additionalTagsBegin()
 {
     initializeAdditionalOsmTags();
-    return s_additionalOsmTags.begin();
+    return s_additionalOsmTags.constBegin();
 }
 
 QList<OsmPresetLibrary::OsmTag>::const_iterator OsmPresetLibrary::additionalTagsEnd()
 {
     initializeAdditionalOsmTags();
-    return s_additionalOsmTags.end();
+    return s_additionalOsmTags.constEnd();
 }
 
 QStringList OsmPresetLibrary::buildingValues()
