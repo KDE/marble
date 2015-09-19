@@ -76,7 +76,7 @@ class TileLoader: public QObject
       */
     static TileStatus tileStatus( GeoSceneTileDataset const *tileData, const TileId &tileId );
 
- public Q_SLOTS:
+ private Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
     void updateTile( QString const & fileName, QString const & idStr );
 
