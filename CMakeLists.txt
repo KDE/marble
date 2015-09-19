@@ -177,7 +177,7 @@ set (WITH_DESIGNER_PLUGIN TRUE CACHE BOOL "Build plugins for Qt Designer")
 add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget support in Qt Designer. Toggle with WITH_DESIGNER_PLUGIN=YES/NO")
 
 set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
-if (QT5BUILD)
+if (QT5BUILD AND NOT QT_PLUGINS_DIR)
    set(QT_PLUGINS_DIR ${CMAKE_INSTALL_LIBDIR}/plugins)
 endif()
 
