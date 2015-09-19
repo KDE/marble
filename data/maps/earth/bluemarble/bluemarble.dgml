@@ -38,6 +38,7 @@
                 <texture name="bluemarble_data"><!-- type="texture"-->
                     <sourcedir format="JPG"> earth/bluemarble </sourcedir>
                     <installmap> bluemarble.jpg </installmap>
+                    <storageLayout maximumTileLevel="7"/>
                 </texture>
                 <texture name="clouds_data" expire="10800"><!-- type="texture"-->
                     <sourcedir format="JPG"> earth/clouds </sourcedir>
