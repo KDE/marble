@@ -1,6 +1,9 @@
 PROJECT( MarbleDeclarativePlugin )
 
 macro_optional_find_package(Qt5Positioning)
+if(Qt5Positioning_LIBRARIES)
+    add_definitions(-DHAVE_QT5_POSITIONING)
+endif(Qt5Positioning_LIBRARIES)
 
 INCLUDE_DIRECTORIES(
     ${CMAKE_CURRENT_SOURCE_DIR}

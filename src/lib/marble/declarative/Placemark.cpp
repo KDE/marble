@@ -10,9 +10,10 @@
 
 #include "Placemark.h"
 
+#ifdef HAVE_QT5_POSITIONING
 #include <GeoDataExtendedData.h>
 #include <QGeoAddress>
-#include <QLocale>
+#endif // HAVE_QT5_POSITIONING
 
 Placemark::Placemark(QObject *parent ) :
     QObject( parent )
@@ -48,6 +49,7 @@ QString Placemark::name() const
 QString Placemark::address() const
 {
     if (m_address.isEmpty()) {
+#ifdef HAVE_QT5_POSITIONING
         QGeoAddress address;
         Marble::GeoDataExtendedData data = m_placemark.extendedData();
         address.setCountry(data.value("country").value().toString());
@@ -86,6 +88,9 @@ QString Placemark::address() const
 
         QString const addressString = address.text().replace("<br/>", ", ");
         m_address = addressString.isEmpty() ? m_placemark.address() : addressString;
+#else // HAVE_QT5_POSITIONING
+        m_address = m_placemark.address();
+#endif // HAVE_QT5_POSITIONING
     }
 
     return m_address;
