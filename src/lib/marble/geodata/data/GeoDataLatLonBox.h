@@ -103,6 +103,14 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     void setBoundaries( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
+     * @brief Changes the differences between the boundaries and the center by the given factor, keeping the center unchanged
+     * @param verticalFactor Vertical scale factor (affects north and south boundaries)
+     * @param horizontalFactor Horizontal scale factor (affects west and east boundaries)
+     */
+    void scale(qreal verticalFactor, qreal horizontalFactor) const;
+    GeoDataLatLonBox scaled(qreal verticalFactor, qreal horizontalFactor) const;
+
+    /**
      * @brief Get the width of the longitude interval
      * @return the angle covered by the longitude range.
      */

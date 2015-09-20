@@ -60,6 +60,8 @@ private slots:
     void testPack();
     void testContainerBox_data();
     void testContainerBox();
+    void testScale_data();
+    void testScale();
 };
 
 void TestGeoDataLatLonAltBox::testDefaultConstruction()
@@ -578,6 +580,46 @@ void TestGeoDataLatLonAltBox::testContainerBox() {
     QCOMPARE(box.east(), qMax(qMax(lon1, lon2), lon3));
     QCOMPARE(box.south(), qMin(qMin(lat1, lat2), lat3));
     QCOMPARE(box.west(), qMin(qMin(lon1, lon2), lon3));
+}
+
+void TestGeoDataLatLonAltBox::testScale_data()
+{
+    QTest::addColumn<GeoDataLatLonBox>( "box" );
+    QTest::addColumn<qreal>( "verticalScale" );
+    QTest::addColumn<qreal>( "horizontalScale" );
+    QTest::addColumn<GeoDataLatLonBox>( "expected" );
+
+    QTest::newRow( "void" ) << GeoDataLatLonBox( 0.5, 0.4, 0.3, 0.2 )
+                            << qreal(1.0)
+                            << qreal(1.0)
+                            << GeoDataLatLonBox( 0.5, 0.4, 0.3, 0.2 );
+    QTest::newRow( "simple vertical" ) << GeoDataLatLonBox( 0.5, 0.4, 0.3, 0.2 )
+                                       << qreal(1.5)
+                                       << qreal(1.0)
+                                       << GeoDataLatLonBox( 0.525, 0.375, 0.3, 0.2 );
+    QTest::newRow( "simple horizontal" ) << GeoDataLatLonBox( 0.7, 0.6, 0.3, 0.2 )
+                                         << qreal(1.0)
+                                         << qreal(2.0)
+                                         << GeoDataLatLonBox( 0.7, 0.6, 0.35, 0.15 );
+    QTest::newRow( "crosses dateline" )  << GeoDataLatLonBox( 20.0,   0.0, -170.0, 170.0, GeoDataCoordinates::Degree )
+                                         << qreal(2.0)
+                                         << qreal(2.0)
+                                         << GeoDataLatLonBox( 30.0, -10.0, -160.0, 160.0, GeoDataCoordinates::Degree );
+}
+
+void TestGeoDataLatLonAltBox::testScale()
+{
+    QFETCH(GeoDataLatLonBox, box);
+    QFETCH(qreal, verticalScale);
+    QFETCH(qreal, horizontalScale);
+    QFETCH(GeoDataLatLonBox, expected);
+    GeoDataLatLonBox const scaled = box.scaled(verticalScale, horizontalScale);
+    QCOMPARE(scaled.west(), expected.west());
+    QCOMPARE(scaled.north(), expected.north());
+    QCOMPARE(scaled.south(), expected.south());
+    QCOMPARE(scaled.east(), expected.east());
+    QCOMPARE(scaled.rotation(), expected.rotation());
+    QCOMPARE(scaled.center(), expected.center());
 }
 
 QTEST_MAIN(TestGeoDataLatLonAltBox)

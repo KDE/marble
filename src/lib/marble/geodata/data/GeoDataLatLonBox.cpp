@@ -235,6 +235,24 @@ void GeoDataLatLonBox::setBoundaries( qreal north, qreal south, qreal east, qrea
     }
 }
 
+void GeoDataLatLonBox::scale(qreal verticalFactor, qreal horizontalFactor) const
+{
+    GeoDataCoordinates const middle = center();
+    qreal const deltaY = 0.5 * height() * verticalFactor;
+    qreal const deltaX = 0.5 * width() * horizontalFactor;
+    d->m_north = GeoDataCoordinates::normalizeLat(middle.latitude() + deltaY);
+    d->m_south = GeoDataCoordinates::normalizeLat(middle.latitude() - deltaY);
+    d->m_east = GeoDataCoordinates::normalizeLon(middle.longitude() + deltaX);
+    d->m_west = GeoDataCoordinates::normalizeLon(middle.longitude() - deltaX);
+}
+
+GeoDataLatLonBox GeoDataLatLonBox::scaled(qreal verticalFactor, qreal horizontalFactor) const
+{
+    GeoDataLatLonBox result = *this;
+    result.scale(verticalFactor, horizontalFactor);
+    return result;
+}
+
 qreal GeoDataLatLonBox::width( GeoDataCoordinates::Unit unit ) const
 {
     return GeoDataLatLonBox::width( d->m_east, d->m_west, unit );
