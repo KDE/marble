@@ -129,6 +129,16 @@ int VectorTileLayer::tileZoomLevel() const
     return level;
 }
 
+QString VectorTileLayer::runtimeTrace() const
+{
+    int tiles = 0;
+    foreach(const auto *mapper, d->m_activeTexmappers ) {
+        tiles += mapper->cachedDocuments();
+    }
+    int const layers = d->m_activeTexmappers.size();
+    return QString("Vector Tiles: %1 tiles in %2 layers").arg(tiles).arg(layers);
+}
+
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
                               const QString &renderPos, GeoSceneLayer *layer )
 {

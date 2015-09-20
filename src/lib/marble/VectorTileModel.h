@@ -63,6 +63,8 @@ public:
 
     int tileZoomLevel() const;
 
+    int cachedDocuments() const;
+
 public Q_SLOTS:
     void updateTile( const TileId &id, GeoDataDocument *document );
 

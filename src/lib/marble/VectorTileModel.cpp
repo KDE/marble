@@ -164,6 +164,11 @@ int VectorTileModel::tileZoomLevel() const
     return m_tileZoomLevel;
 }
 
+int VectorTileModel::cachedDocuments() const
+{
+    return m_documents.size();
+}
+
 void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
 {
     if ( m_tileZoomLevel != id.zoomLevel() ) {

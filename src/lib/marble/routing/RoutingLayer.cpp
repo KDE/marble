@@ -778,6 +778,11 @@ bool RoutingLayer::isInteractive() const
     return d->m_isInteractive;
 }
 
+QString RoutingLayer::runtimeTrace() const
+{
+    return QString("Routing Layer");
+}
+
 } // namespace Marble
 
 #include "moc_RoutingLayer.cpp"

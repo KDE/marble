@@ -58,6 +58,8 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     int tileZoomLevel() const;
 
+    QString runtimeTrace() const;
+
 Q_SIGNALS:
     void tileLevelChanged(int tileLevel);
 

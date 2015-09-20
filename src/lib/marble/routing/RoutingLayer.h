@@ -89,6 +89,8 @@ public:
      */
     bool isInteractive() const;
 
+    QString runtimeTrace() const;
+
 Q_SIGNALS:
     /**
       * A placemark was selected (clicked) by the user. The index belongs to
