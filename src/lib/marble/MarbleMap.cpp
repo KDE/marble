@@ -320,9 +320,13 @@ MapQuality MarbleMap::mapQuality() const
 
 void MarbleMap::setViewContext( ViewContext viewContext )
 {
-    const MapQuality oldQuality = d->m_viewParams.mapQuality();
+    if (d->m_viewParams.viewContext() == viewContext) {
+        return;
+    }
 
+    const MapQuality oldQuality = d->m_viewParams.mapQuality();
     d->m_viewParams.setViewContext( viewContext );
+    emit viewContextChanged(viewContext);
 
     if ( d->m_viewParams.mapQuality() != oldQuality ) {
         // Update texture map during the repaint that follows:

@@ -197,6 +197,8 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SIGNAL(tileLevelChanged(int)) );
     m_widget->connect( map(),   SIGNAL(framesPerSecond(qreal)),
                        m_widget, SIGNAL(framesPerSecond(qreal)) );
+    m_widget->connect( map(),   SIGNAL(viewContextChanged(ViewContext)),
+                       m_widget, SLOT(setViewContext(ViewContext)) );
 
     m_widget->connect( map(),   SIGNAL(pluginSettingsChanged()),
                        m_widget, SIGNAL(pluginSettingsChanged()) );
@@ -1031,10 +1033,10 @@ ViewContext MarbleWidget::viewContext() const
 
 void MarbleWidget::setViewContext( ViewContext viewContext )
 {   //TODO - move to MarbleAbstractPresenter as soon as RoutingLayer is ported there, replace with pImpl call
+    d->m_routingLayer->setViewContext( viewContext );
     if ( d->map()->viewContext() != viewContext ) {
         const MapQuality oldQuality = d->map()->mapQuality();
         d->map()->setViewContext( viewContext );
-        d->m_routingLayer->setViewContext( viewContext );
 
         if ( d->map()->mapQuality() != oldQuality )
             update();

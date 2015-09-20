@@ -709,6 +709,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void highlightedPlacemarksChanged( qreal, qreal, GeoDataCoordinates::Unit );
 
+    void viewContextChanged(ViewContext viewContext);
+
  protected:
 
     /**
