@@ -43,7 +43,7 @@ int main ( int argc, char *argv[] )
                           ControlView::applicationVersion(),
                           i18n( "A World Atlas." ),
                           KAboutLicense::LGPL_V2,
-                          i18n( "(c) 2007-%1" ).arg( 2015 ),
+                          i18n( "(c) 2007-%1", "2015" ),
                           QString(),
                           "http://marble.kde.org/" );
 
