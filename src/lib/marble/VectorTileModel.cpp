@@ -41,9 +41,10 @@ void TileRunner::run()
     emit documentLoaded( m_id, document );
 }
 
-VectorTileModel::CacheDocument::CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel) :
+VectorTileModel::CacheDocument::CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel, const GeoDataLatLonBox &boundingBox) :
     m_document( doc ),
-    m_vectorTileModel(vectorTileModel)
+    m_vectorTileModel(vectorTileModel),
+    m_boundingBox(boundingBox)
 {
     // nothing to do
 }
@@ -147,6 +148,22 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
         // During testing discovered that this code above does not request the "corner" tiles
 
     }
+
+    removeTilesOutOfView(bbox);
+}
+
+void VectorTileModel::removeTilesOutOfView(const GeoDataLatLonBox &boundingBox)
+{
+    GeoDataLatLonBox const extendedViewport = boundingBox.scaled(2.0, 2.0);
+    for (auto iter = m_documents.begin(); iter != m_documents.end();) {
+        bool const isOutOfView = !extendedViewport.contains(iter.value()->m_boundingBox);
+        if (isOutOfView) {
+            iter = m_documents.erase(iter);
+        }
+        else {
+            ++iter;
+        }
+    }
 }
 
 QString VectorTileModel::name() const
@@ -178,7 +195,13 @@ void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
 
     document->setName(QString("%1/%2/%3").arg(id.zoomLevel()).arg(id.x()).arg(id.y()));
     m_garbageQueue << document;
-    m_documents.insert( id, new CacheDocument( document, this ) );
+    if (m_documents.contains(id)) {
+        auto const document = m_documents.take(id);
+        m_treeModel->removeFeature(document->m_document);
+    }
+
+    GeoDataLatLonBox const boundingBox = id.toLatLonBox(m_layer);
+    m_documents[id] = QSharedPointer<CacheDocument>(new CacheDocument(document, this, boundingBox));
     emit tileAdded(document);
     m_pendingDocuments.removeAll(id);
 }

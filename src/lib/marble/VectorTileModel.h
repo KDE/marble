@@ -15,7 +15,7 @@
 #include <QObject>
 #include <QRunnable>
 
-#include <QCache>
+#include <QMap>
 
 #include "TileId.h"
 
@@ -79,6 +79,7 @@ private Q_SLOTS:
     void cleanupTile(GeoDataObject* feature);
 
 private:
+    void removeTilesOutOfView(const GeoDataLatLonBox &boundingBox);
     void setViewport( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
 
     static unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
@@ -88,13 +89,14 @@ private:
     struct CacheDocument
     {
         /** The CacheDocument takes ownership of doc */
-        CacheDocument( GeoDataDocument *doc, VectorTileModel* vectorTileModel );
+        CacheDocument(GeoDataDocument *doc, VectorTileModel* vectorTileModel, const GeoDataLatLonBox &boundingBox);
 
         /** Remove the document from the tree and delete the document */
         ~CacheDocument();
 
         GeoDataDocument *const m_document;
         VectorTileModel *m_vectorTileModel;
+        GeoDataLatLonBox m_boundingBox;
 
     private:
         Q_DISABLE_COPY( CacheDocument )
@@ -105,7 +107,7 @@ private:
     GeoDataTreeModel *const m_treeModel;
     QThreadPool *const m_threadPool;
     int m_tileZoomLevel;
-    QCache<TileId, CacheDocument> m_documents;
+    QMap<TileId, QSharedPointer<CacheDocument> > m_documents;
     QList<TileId> m_pendingDocuments;
     QList<GeoDataDocument*> m_garbageQueue;
 };
