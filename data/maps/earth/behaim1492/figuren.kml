@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://earth.google.com/kml/2.0"> <Document>
+
+<Placemark>
+	<name>Herrscher koenig vor zelt</name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Japan. There is a royal tent. The island Cipengu has a King and language of its own (ER). Braunes Zelt mit Herrscher (UK). Ein Schriftzug darunter berichtet von einem besonderen Koenig, der Abgoettern anbeten soll. </FONT>]]></description> 
+	<CountryNameCode>AQ</CountryNameCode>
+    <role>P</role> 
+	<Point>
+		<coordinates>-127.37163,24.03067,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Herrscher</name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Miniatur roter Koenig (UK). Die Miniatur zeigt eine sitzende Person in rotem Gewand, die auf dem Kopf eine goldene Krone traegt (NH).</FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>31.86551,51.15350,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Herrscher_König (Japan)</name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Japan. There is a royal tent. The island Cipengu has a King and language of its own (ER). Braunes Zelt mit Herrscher (UK). Ein Schriftzug darunter berichtet von einem besonderen Koenig, der Abgoettern anbeten soll.</FONT> ]]></description> 
+	<CountryNameCode>03</CountryNameCode>
+    <role>P</role>   
+	<Point>
+		<coordinates>-127.56591,23.16920,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>tierkreiszeichen_zwilling</name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Tierkreiszeichen Zwilling (UK). Zwei hell kolorierte Figuren im Laufschritt (DK)- </FONT> ]]></description> 
+	<CountryNameCode>04</CountryNameCode>
+    <role>P</role>   
+	<Point>
+		<coordinates>-135.44425,19.56385,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Fabelwesen</name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Fabelwesen mit menschlichem Oberkoerper und Flosse (DK)</FONT> ]]></description> 
+	<CountryNameCode>05</CountryNameCode>
+    <role>P</role>   
+	<Point>
+		<coordinates>-148.12971,4.27454,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Goldene Sonne </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Goldene Sonne mit gewellten Strahlen, die zum Ende hin spitz zulaufen. Farbreste lassen Augen, Nase und Mund erahnen. (DK)</FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-99.99173,36.05495,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Tierzeichen_seetier </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Aal? (DK) </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-83.54152,-40.67375,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Herrschaftzeichen </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Portugiesische Flagge: innerhalb roten, mit sieben goldenen Kastellen belegten Schildrandes mit innen fuenf Schildchen </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-55.90057,43.71794,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Schiff_Karavalle</name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Schiff mit weissem, vom Wind aufgebauschtem Segel, Bugwellen</FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-34.86941,47.39005,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Sternzeichen Jungfrau </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Sternzeichen Jungfrau: sitzend in einem roten Gewand mit einem Buendel Kornaehren in der rechten Hand </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-41.87980,10.93604,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Meerestier mit Kuhkopf</name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>senkrecht Meerestier mit Kuhkopf (UK). Mischung aus Kuh und Wal (DK) </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-53.16318,-16.97197,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Menschenzeichen </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die Miniatur zeigt eine sitzende Person in graublauem Gewand und einer roten Krone auf dem Kopf (NH). Gruener sitzender Herrscher (UK). Ravenstein behauptet, dass auf der blau-weiß gestreiften Flagge ueber der Figur Ioh.M/ Tratz zu lesen gewesen sein soll und dies auf "Johny Groat's House" verweise und die Figur auf die christlichen Missionare aus Iona verweise (DK).</FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-12.56971,61.67788,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Herrscher </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2> Schlecht erkennbarer Herrscher in einer roten Zeltarchitektur (DK).</FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-18.91244,31.16601,0</coordinates>
+	</Point>
+</Placemark><Placemark>
+	<name>Landtier_Strauss </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2> Die Zeichnung zeigt einen laufenden Straussenvogel in weiss-rosa-grauem Federkleid (NH). Bei dem gezeichneten Straussenvogel handelt es sich um einen Topos, wie er auf einigen kartographischen Darstellungen der Zeit zu finden ist.</FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-12.03558,30.69865,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Herrscher König </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Das Bild zeigt einen ungekleideten, dunkelhaeutigen Herrscher in einem weiss-roten Zelt auf einer blauen Unterlage sitzend. Links vom Zelt sind drei ebenfalls unbekleidete Personen mit dunkler Hautfarbe gezeichnet, ihre Beinhaltung koennte einen Tanz andeuten (NH). Koenig Barbacin </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-26.05636,12.07106,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Landtier_Elefanten </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Zu sehen ist eine Elefantenherde, drei Tiere sind deutlich erkennbar. Die Koerper der Dickhaeuter sind Grau und Braun gezeichnet, deutlich heben sich davon die weissen Stosszaehne ab (NH). </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-16.97624,21.81883,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Herrscher König </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Ein dunkelhaeutiger Herrscher sitzt in einem Zelt zu einer kleinen Gruppe Farbiger nach rechts gewendet, wobei eine der nur schemenhaft erkennbaren Personen im Hintergrund einen Speer traegt (NH). Die hintere Figur wirkt monsterhaft riesig (DK). </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-8.02965,8.19865,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Landtier_Echse </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Das Bild zeigt eine blaugruene Echse, die mit einer braunen Schlange kaempft (NH)</FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>-20.91541,15.27580,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Wappen_Deutscher_Orden</name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Das Wappen zeigt ein schwarzes Kreuz auf weissem Grund (NH). </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>20.47925,53.39895,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Fahne_Osteuropa </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die Fahne zeigt einen nach heraldisch links offenen Halbmond und drei goldene Sterne auf dunkelblauem Grund (NH). </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>26.15433,45.78767,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Schiff_Karavelle </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Schiff mit einem Mast, zwei rote Kreuze auf weissem Segel. Weisse Bugwellen. Fahrtrichtung Kueste (UK). Die Miniatur zeigt eine Karavelle und illustriert hoechstwahrscheinlich die zweite Entdeckungsfahrt 1485/86 von Diogo Cao. Fuer diese Annahme sprechen auch die in unmittelbarer Naehe eingezeichneten portugiesischen Wappenfahnen. Sie markieren Standorte, wo Cao Steinmonumente als Ausdruck der portugiesischen Entdeckung und Inbesitznahme errichten liess (NH). </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates>11.59943,-28.72271,0</coordinates>
+	</Point>
+</Placemark>
+<Placemark>
+	<name>Heiligenfigur </name>
+	<Snippet maxLines="0"></Snippet>
+	<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Sitzende Heiligenfigur, rot gekleidet und mit einem langen Stock in der rechten Hand. Vielleicht markiert der Heilige den Ort Sinop. Dann waere er als der Heilige Christophorus identifizierbar (DK). </FONT> ]]></description> 
+    <role>P</role>   
+	<Point>
+		<coordinates> 35.10091,43.78471,0</coordinates>
+	</Point>
+</Placemark>
+</Document> </kml>

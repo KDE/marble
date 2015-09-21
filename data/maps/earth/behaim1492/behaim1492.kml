@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://earth.google.com/kml/2.0"> <Document>
+
+<Placemark>
+				<name>NÖRDLICHE POLKAPPE</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Das Polargebiet war zu Behaims Zeit nahezu unbekannt.
+Seine Darstellung als Inselgruppe entspringt der Phantasie.
+Das nördliche Eismeer wird als "gefroren mer" bezeichnet. </FONT>]]></description> 
+				<role>S</role> 
+				<Point>
+				<coordinates>0.00000,90.00000,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>SKANDINAVIEN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die nördliche Halbinsel beginnt hinter dem "wilden lappland" und enthält im Osten "groenland".
+Das heutige Norwegen und Schweden teilen sich eine viel zu kleine Insel im "mer von alemagna".
+Bei deren Westzipfel ist die Sageninsel Thule zu erkennen.
+Der König von Dänemark sitzt auf seiner Halbinsel.</FONT> ]]></description> 
+				<role>S</role>  
+				<Point>
+				<coordinates>36.20147,71.37392,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>SÜDLICHE POLKAPPE</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Statt eines Kartenbildes der noch unbekannten Antarktis zeigt der Globus den Nürnberger Reichsadler mit Jungfrauenkopf, die Wappen der Patrizier Gabriel Nützel, Paulus Volckamer, Nikolaus Groland und Georg Holzschuher sowie einen langen Text zur Entstehung des Globus. </FONT>]]></description> 
+				<role>S</role> 
+				<Point>
+				<coordinates>0.00000,-90.00000,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>ISLAND, BRITISCHE INSELN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die Isländer sollen ihre Hunde teuer verkaufen, ihre Kinder aber kostenlos an Piraten weggeben.
+In Irland ist St. Patricks Fegefeuer, der angebliche Eingang zur Hölle erwähnt. 
+England liegt am "engelis mere" (Nordsee).</FONT> ]]></description> 
+				 <role>S</role>  
+				<Point>
+				<coordinates>-17.53566,58.50430,0</coordinates> 
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>DEUTSCHLAND</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die größten mitteleuropäischen Flüsse sind erkennbar. An Ortsbezeichnungen sind unter anderem "friesland", "sachsen", "dering" (Thüringen) "beiern" und "basel" zu entziffern.
+Außerdem werden die Wappen des Herzogtums Braunschweig, Sachsen, Mainz, Bayern undNürnberg gezeigt.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>12.00676,49.43369,0</coordinates>
+				</Point>
+				</Placemark>
+	<Placemark>
+				<name>GROSSFÜRSTENTUM MOSKAU</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[  <FONT FACE="Comic Sans MS" SIZE=+2>Der Großfürst von Moskau führt Krieg gegen die Tataren. Soboltzki, der Khan der Tataren, sitzt an der Mündung des Don ins Asowsche Meer.
+Auf dem Weg dorthin erinnert eine Säule an Alexander den Großen: "bis an di seul ist der gros Allexander komen vnd nit ferner gegen mitternacht".
+Nördlich von Moskau liegt das Großfürstentum "gros nogart" (Novgorod), das sich bereits unter Moskauer Herrschaft befindet.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>61.05763,58.59177,0</coordinates> 
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>SIBIRIEN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Der riesige Norden des asiatischen Kontinents ist Raum von Mythen und Legenden. Bevölkert wird er vor allem von den "tartaren", einer Sammelbezeichnung für Mongolen und Turkvölker.
+Sie waren den Europäern seit dem großen Eroberungszug Dschingis Khans im 13. Jahrhundert bekannt.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>135.72338,56.51084,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>MONGOLEI</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Das Land, von dem aus Dschingis Khan im 13. Jahrhundert ein Weltreich vom Pazifik bis zum Rand Europas erobert hatte, ist vor allem von Tieren bevölkert: zwei aufrecht kämpfende Bären, darunter ein Dromedar und eine Raubkatze.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-179.00956,49.43369,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>CHINA</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>China besteht aus zwei Reichen: dem nördlichen Cathaia und dem südlichen Mangi. Im Landesinneren ist auch die Bezeichnung "thebet" (Tibet) zu lesen. Der Name "India", der hier und an vielen anderen Stellen vorkommt, bezeichnet ganz Südostasien. Aus alten Handelsbeziehungen kennen die Europäer Gewürze und Heilpflanzen aus China.
+Wichtigste Wissensquelle über China sind die Reiseberichte von Marco Polo.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>175.24860,32.74229,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>JAVA MINOR</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Das "kleinere" Java kann mit der gleichnamigen indonesischen Insel gleichgesetzt werden, die Inselgeographie entspringt aber nur dem Wissen aus Erzählungen.
+Nach Marco Polo besaß Java acht Königreiche, deren Herrscher auf dem Globus vor ihren Zelten sitzen. Es heißt, dort lebten Menschen mit Schwänzen, dort wachse der beste Kampfer und es gebe Einhörner und Menschenfresser. </FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>178.85394,-40.56631,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>INSELWELT SÜDOSTASIENS</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Marco Polo schreibt von 12 700 Inseln, bewohnt von wunderlichen Völkern, voll von Gewürzen und Edelsteinen.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-163.11935,10.57612,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>JAPAN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Cipangu (Japan) ist erstmals auf einem erhaltenen Globus dargestellt. Es war eines der Traumziele europäischer Seefahrer. Nach Marco Polo ist es die reichste Insel Ostasiens. Man soll hier Gold, Edelsteine und Gewürze finden.
+Der König Japans sitzt vor seinem Zelt. Seine Untertanen sprechen fremde Sprachen und beten Abgötter an.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-125.06297,17.11915,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>SENEGAMBIA</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Der hellhäutige "Könik Burburrum von Genea" sitzt begleitet von zwei Wächtern vor seinem Zelt. Rechts daneben ist eine Elefantenherde zu sehen. 
+Östlich des Kap Verde sitzt der schwarze "Konig Barbarin von Gambia" vor seinem Zelt.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-21.44279,14.98265,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>INNER-GUINEA</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>"Konick Organe" sitzt in seinem Zelt, umgeben von vier Untertanen.
+Weiter südlich hält König Mormelli Hof. Über ihn heißt es:
+"konick Mormelli bei dessen konick wechst daß golt, dz der konick von Portogal lest holen".</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-7.95615,14.98265,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>ZENTRALAFRIKA</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>König Furfur sitzt in seinem Zelt auf einem grünen Kissen.
+Von ihm beziehen die Portugiesen seit 1485 den (Malguetta-)Pfeffer, vermerkt  Behaim auf dem Globus.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>13.27531,14.84912,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>SÜDWESTLICHES AFRIKA</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Richtig heißt es  auf Behaims Globus: "in disser gegent ist somer als wir winter haben". Das Gebiet des heutigen Namibia wird im Norden durch die Mondberge begrenzt. 
+Im Inneren des Landes liegen zwei Männer auf dem Rücken und schützen sich mit Fischschwänzen vor der Sonne. Fabelwesen wie solche "Schattenfüßler" glaubte man im Mittelalter am Rand der Welt anzutreffen.
+</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>17.94890,-19.33486,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>SANSIBAR</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die kleine Insel vor der Küste des heutigen Tansania hat auf Behaims Globus eine ganzandere  geografische Lage und Größe.
+Zu sehen ist ein Priester, der zwei Kinder unterrichtet.
+Auf der Insel sollen Riesen, exotische Pflanzen und Tiere zu finden sein.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>85.15726,-39.60338,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>KARAVELLE</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Von Indien nach Madagaskar gelangen Schiffe in zwanzig Tagen. Für den Rückweg reichen jedoch drei Monate kaum aus, schreibt Marco Polo.
+Das aufgewühlte Meer deutet auf die starken Meeresströmungen hin, die für dieses Phänomen verantwortlich sind. Die Karavelle ist vereinfacht dargestellt. Es fehlen vor allem die charakteristischen Dreieckssegel am vorderen und hinteren Mast.
+Im Schiff sitzen möglicherweise Thomaspilger auf dem Weg nach Madagaskar.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>107.05637,-26.45056,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>IBERISCHE HALBINSEL</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[  <FONT FACE="Comic Sans MS" SIZE=+2>Bis auf die Südostecke Spaniens entspricht der Küstenverlauf den geografischen Gegebenheiten. Erkennbar sind die Herrscherwappen von Portugal, Aragon und Kastilien. Über  Granada weht noch der muslimische Halbmond.
+Beim Pilgerziel Santiago ist der Heilige Jakobus dargestellt.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-18.62983,41.31650,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>ÖSTLICHER MITTELMEERRAUM</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die zahlreichen verschiedenen Herrschaftswappen dokumentieren die brisante politische Situation in diesem Raum. 
+Bei Konstantinopel ist sowohl der Löwe von San Marco (Wappen Venedigs) als auch der Halbmond des Osmanischen Reichs zu sehen. Westlich vom Nildelta ist der Mamelucken-Sultan zu erkennen, der über Ägypten, Arabien und Syrien regiert.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>14.15207,35.60804,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>ROTES MEER</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Im rot gefärbten Meer liegen viele unbezeichnete Inseln.
+Am Übergang zum "Sinus arabicus" sitzt die biblische Königin von Saba.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>40.39094,13.04128,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>SOKOTRA</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die heute jemenitische Insel Sokotra vor dem Golf von Aden wird von einem Bischof beherrscht, dem auch die beiden nördlich benachbarten, nach Geschlechtern getrennten Inseln unterstehen.
+Einmal im Jahr dürfen die Männer der Insel Masculina die Fraueninsel (Feminea) besuchen, um Nachwuchs zu zeugen.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>73.39349,8.92609,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>AZOREN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Auf den Azoren weht das portugiesische Wappenbanner. Behaims Schwiegervater regierte auf der Insel Faial. Rechts neben die Inseln wurde von späterer Hand Behaims Todesdatum auf den Globus geschrieben. Dabei irrte sich der Verfasser um ein Jahr: Behaim ist nicht 1506, sondern 1507 gestorben.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-56.46556,38.36971,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>KAPVERDISCHE INSELN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Zu den Kapverdischen Inseln oder "insule fortunate" vemerkt Behaim, dass sie 1472 entdeckt worden seien. Er knüpft damit an die sagenumwobene „Insel der Glückseligen“, nach der seit der Antike gesucht wurde.
+Südlich der Kapverden schwimmen zwei fischschwänzige Meerweibchen im Atlantik.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-48.15988,15.36821,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>ANGAMAN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[  <FONT FACE="Comic Sans MS" SIZE=+2>Anguana oder Angaman steht für die indischen Andamanen. Wie Neucuram (Nikobaren) werden auch diese Inseln von Behaim massiv vergrößert und vage im indonesischen Archipel platziert.
+Nach Marco Polo gibt es auf Angaman Kannibalen mit Hundeköpfen, die Abgötter anbeten.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-166.47027,-32.39258,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>ANTILIA</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[  <FONT FACE="Comic Sans MS" SIZE=+2>Um die mythische Insel Antilia rankt sich die Sage von sieben Bischöfen, die samt ihrem Volk beim Einfall der „Sarazenen“ (Araber) im 8. Jahrhundert von der iberischen Halbinsel hierher geflohen sein sollen.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-70.67842,22.33972,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>ARMENIEN, IRAK, IRAN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>In Armenien steht der Berg Ararat mit der gestrandeten Arche Noah auf seinem Gipfel.
+In Mesopotamien (Irak) ist die Stadt Babylon eingezeichnet, die zu Behaims Zeit schon längst in Ruinen lag.
+Östlich vom Persischen Golf wird an eine Schlacht Alexanders gegen den Perserkönig Dareios erinnert.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>60.51594,35.35901,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>CIAMBA</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Auf seiner Rückreise von China machte Marco Polo im heutigen Annam (Vietnam) Station. Er berichtet über ein fruchtbares, gewürzreiches Land.
+Behaim erwähnt Seen, in denen man Perlen fischt, und das "bisam thier", das hier beheimatet ist.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>173.08270,5.98215,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>JAVA MAJOR</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[  <FONT FACE="Comic Sans MS" SIZE=+2>Das "größere" Java könnte eine Bezeichnung für das indonesische Borneo sein.
+Im Zentrum der Insel ist ein Pfefferwald zu sehen.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-164.88465,-18.98817,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>Monte NIGRO, KAP LETO</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die beiden südlichsten Punkte der afrikanischen Küste, die laut Wappen schon unter portugiesischerHerrschaft stehen, sind mit Monte Nigro und Kap Leto bezeichnet.
+Behaim bezieht sich vermutlich auf den Seefahrer Diego Cao und gibt in der Beischrift das Jahr 1485 an. Am Kreuzkap im heutigen Namibia wurde im 19. Jahrhundert tatsächlich eine Wappensäule des portugiesischen Seefahrers gefunden.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>24.41545,-36.59916,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>KAP VERDE</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Aus den gefährlichen Strömungen um Afrikas Wetsspitze tauchen Meeresungeheuer auf. Bis hierhin und nicht weiter soll Herkules gekommen sein. Erst den Portugiesen sei es gelungen, dieses Hindernis zu überwinden.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-32.74521,12.34231,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>KREBS</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Das Tierkreiszeichen markiert den nördlichen Wendekreis (Wendekreis des Krebses). Die Bestimmung der geographischen Breite wurde im 15. Jahrhundert laufend verfeinert.
+Martin Behaim selbst hat ein Astrolabium aus Messing entwickelt.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-107.68328,35.08170,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>MADAGASKAR</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Hier soll sich das Grab des heiligen Thomas befinden. Vor einem Priester ist eine knieende Person zu erkennen.
+Marco Polo schreibt von heftigen Strömungen zwischen Madagaskar und Indien. </FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>81.26331,-25.94204,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>MADEIRA,KANARISCHE INSELN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Madeira, unter Heinrich dem Seefahrer von den Portugiesen in Besitz genommen, diente diesen im 15. Jahrhundert vor allem als Zuckerrohrplantage.
+Die Kanarischen Inseln stehen hingegen unter spanischer Herrschaft.</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-38.18031,25.13363,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>MAROKKO</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Zwischen Mittelmeerküste und Atlasgebirge sind mehrere Herrscher vor ihren Zelten zu sehen, dazwischen ein Vogel Strauß.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>-20.25698,33.20090,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>NEUCURAM</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Die indischen Nikobaren erscheinen in Übergröße mitten im indonesischen Archipel.
+Hier vermutet Behaim vor allem Edelsteine: Rubin, Smaragd, Topas und Saphir.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>178.13265,-24.48904,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>PENTAN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Mit Pentan ist möglicherweise Bintan, Hauptinsel des indonesischen Riau-Archipels im Südosten von Singapur, gemeint. Marco Polo schreibt über große Wälder und einen wunderbaren Geruch, den die Insel verströme.
+Martin Behaim vermerkt: "hie geht alles nacket".</FONT>]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>167.03102,-28.28647,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>SEILAN</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Das heutige Sri Lanka (Ceylon) taucht auf dem Behaim-Globus noch ein zweites Mal unter dem Namen "Taprobane" auf. Zu Behaims Zeit wusste man nicht, dass es sich um ein und dieselbe
+Insel handelt.
+In Seilan sollen Perlen und Edelsteine, darunter der schönste Rubin der Welt zu finden sein.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>140.25802,-29.68854,0</coordinates>
+				</Point>
+	</Placemark>
+	<Placemark>
+				<name>TAPROBANE</name>
+				<snippet></snippet>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[ <FONT FACE="Comic Sans MS" SIZE=+2>Mit diesem Namen bezeichnete man seit dem Alexanderfeldzug das heutige Sri Lanka, von dem man allerdings nur ganz vage Vorstellungen hatte. Auf Taprobane soll es Gold, Kampfer, Pfeffer und Aloe geben.</FONT> ]]></description> 
+				 <role>S</role> 
+				<Point>
+				<coordinates>94.79066,6.09781,0</coordinates>
+				</Point>
+	</Placemark>
+	 <!--<Placemark>
+    <name>The Pentagon</name>
+	<role>S</role> 
+	<styleUrl>#m_ylw-pushpin</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>
+             -23.17391,35.55543,0
+            -28.64869,26.4753,0
+            -27.31338,21.26760,0
+            -32.78816,12.45454,0
+            -21.30448,2.84030,0
+            2.46407,0.57027,0
+			 21.69256,-36.68492,0
+			  </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+         </Polygon>
+  </Placemark>-->
+</Document> </kml>

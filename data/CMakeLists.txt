@@ -108,6 +108,10 @@ maps/earth/plain/plain.dgml
 maps/earth/plain/plain-preview.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/plain)
 
+install (DIRECTORY maps/earth/behaim1492
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth
+)
+
 install (FILES
 maps/earth/openstreetmap/openstreetmap.dgml
 maps/earth/openstreetmap/openstreetmap-preview.png

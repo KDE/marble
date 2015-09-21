@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+        <head>
+            <name>Behaim Globe 1492</name>
+            <target>earth</target>
+            <theme>behaim1492</theme>
+            <icon pixmap="behaim1492-preview.png"/>
+
+            <!-- describes whether the map theme item will be hidden (e.g.
+                for a clouds layer): -->
+            <visible> true </visible>
+
+            <!-- The description allows for rich text of course: -->
+            <description><![CDATA[<p> Martin Behaim's <i>Erdapfel</i> is the oldest existent globe of the Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-SA.</i></p>]]></description>
+
+            <zoom>
+                <minimum>   900  </minimum>
+                <maximum>  2000  </maximum>
+
+                <!-- describes whether you can zoom trough the levels
+                    continuously -->
+                <discrete> false </discrete>
+            </zoom>
+        </head>
+
+            <!-- Now we create the layer structure that gets handled by the
+    layer management class -->
+
+        <map bgcolor="#000000" labelColor="#ffffff">
+            <canvas/>
+            <!-- In this place one could e.g. insert a sky plugin -->
+            <target/>
+
+            <!-- This layer creates the elevation model -->
+            <layer name="behaim1492" backend="texture">
+                <texture name="behaim1492_data"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/behaim1492 </sourcedir>
+                    <installmap> behaim1492.jpg </installmap>
+                    <storageLayout maximumTileLevel="4"/>
+                </texture>
+		<texture name="ghillany"> type="texture"
+                    <sourcedir format="JPG"> earth/behaim1492/ghillany </sourcedir>
+                    <installmap> ghillany.jpg </installmap>
+                    <storageLayout maximumTileLevel="4"/>
+                </texture>
+		<texture name="ravenstein"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/behaim1492/ravenstein </sourcedir>
+                    <installmap> ravenstein.jpg </installmap>
+                    <storageLayout maximumTileLevel="4"/>
+                </texture>
+	    </layer>
+            <layer name="naturalearth" backend="geodata">
+                <geodata name="coast" property="coastlines">
+                    <sourcefile> naturalearth/ne_50m_land.pn2 </sourcefile>
+                    <pen color="#ffff00" width="1.5"/>
+                </geodata>
+                <geodata name="lake" property="coastlines">
+                    <sourcefile> naturalearth/ne_50m_lakes.pn2 </sourcefile>
+                    <pen color="#ffff00" width="1.5"/>
+                </geodata>
+            </layer>
+
+            <layer name="standardplaces" backend="geodata">
+		<geodata name="behaimplaces">
+                    <sourcefile format="KML">maps/earth/behaim1492/behaim1492.kml</sourcefile>
+                </geodata>
+		<geodata name="figuren">
+                    <sourcefile format="KML">maps/earth/behaim1492/figuren.kml</sourcefile>
+                </geodata>
+		<geodata name="texte">
+                    <sourcefile format="KML">maps/earth/behaim1492/texte.kml</sourcefile>
+		</geodata>
+            </layer>
+        </map>
+
+        <settings>
+		
+			<group name="Places">
+                <property name="places">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="cities">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+				<property name="otherplaces">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+				<property name="terrain">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+			</group>
+			
+			<group name="Surface">
+                <property name="landingsites">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+                <property name="craters">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+                <property name="maria">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+                <property name="terrain">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+            </group>
+			
+-            <group name="Boundaries">
+                <property name="borders">
+                    <value>false</value>
+                    <available>false</available>
+                </property>
+                <property name="international-boundaries">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+                <property name="state-boundaries">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+            </group>
+
+            <group name="Water Bodies">
+                <property name="coastlines">
+                    <available>true</available>
+                    <value>false</value>
+                </property>
+             </group>
+
+           <group name="Texture Layers">
+               <property name="ghillany">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+                 <property name="ravenstein">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+				 <property name="behaim2011">
+                    <value>false</value>
+                    <available>true</available>
+                </property>
+            </group>
+
+            <property name="coordinate-grid">
+                <value>false</value>
+                <available>true</available>
+            </property>
+            <property name="overviewmap">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="compass">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="scalebar">
+                <value>true</value>
+                <available>true</available>
+            </property>
+        </settings>
+
+        <!-- At last we define some legend properties -->
+
+        <legend>
+            <section name="populatedplaces" checkable="false" spacing="12">
+                <heading>Places (in German)</heading>
+            </section>        
+            <section name="cities" checkable="true" connect="cities" spacing="12">
+                <heading>Behaim Places</heading>
+           </section>
+	    <section name="otherplaces" checkable="true"  connect="otherplaces" spacing="12">
+                <heading>Texts and illustrations</heading>
+            </section>
+            <section name="facsimile" checkable="false" spacing="12">
+                <heading>Facsimile drawings</heading>
+            </section>        
+	    <section name="ravenstein" checkable="true"  connect="ravenstein" spacing="12">
+                <heading>Ravenstein (1908)</heading>
+            </section>
+			<section name="ghillany" checkable="true"  connect="ghillany" spacing="12">
+                <heading>Ghillany (1853)</heading>
+            </section>
+            <section name="reference lines" checkable="false" spacing="12">
+                <heading>Reference lines</heading>
+            </section> 
+	    <section name="coastlines" checkable="true" connect="coastlines" spacing="12">
+                <heading>Accurate Coastline</heading>
+            </section>
+            <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
+                <heading>Coordinate Grid</heading>
+            </section>
+        </legend>
+    </document>
+</dgml>
