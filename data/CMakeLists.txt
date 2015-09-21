@@ -112,50 +112,9 @@ install (DIRECTORY maps/earth/behaim1492
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth
 )
 
-install (FILES
-maps/earth/openstreetmap/openstreetmap.dgml
-maps/earth/openstreetmap/openstreetmap-preview.png
-maps/earth/openstreetmap/legend.html
-maps/earth/openstreetmap/tour.kml
-"maps/earth/openstreetmap/Alcatraz.jpg"
-"maps/earth/openstreetmap/Brasilia.jpg"
-"maps/earth/openstreetmap/Church of the Holy Sepulchre.jpg"
-"maps/earth/openstreetmap/Death Valley.jpg"
-"maps/earth/openstreetmap/Desert breath.jpg"
-"maps/earth/openstreetmap/Disneyland.jpg"
-"maps/earth/openstreetmap/Dunnottar Castle.jpg"
-"maps/earth/openstreetmap/Eiffel Tower.jpg"
-"maps/earth/openstreetmap/Kheops Pyramid.jpg"
-"maps/earth/openstreetmap/Klyuchevskaya Sopka.jpg"
-"maps/earth/openstreetmap/Maree Man.jpg"
-"maps/earth/openstreetmap/Moscow Kremlin.jpg"
-"maps/earth/openstreetmap/Nazca Lines.jpg"
-"maps/earth/openstreetmap/Palace Het Loo.jpg"
-"maps/earth/openstreetmap/Palm Jebel Ali.png"
-"maps/earth/openstreetmap/Palm Jumeirah.jpg"
-"maps/earth/openstreetmap/Russell Square.jpg"
-"maps/earth/openstreetmap/Santorini.jpg"
-"maps/earth/openstreetmap/Shuttle Landing Facility.jpg"
-"maps/earth/openstreetmap/Sofievka.jpg"
-"maps/earth/openstreetmap/Spiral Jetty.png"
-"maps/earth/openstreetmap/Stonehenge.jpg"
-"maps/earth/openstreetmap/St Peter's Basilica.jpg"
-"maps/earth/openstreetmap/Sydney Opera House.jpg"
-"maps/earth/openstreetmap/Taj Mahal.jpg"
-"maps/earth/openstreetmap/Taranaki.jpg"
-"maps/earth/openstreetmap/The Great Wall of China.jpg"
-"maps/earth/openstreetmap/The World.jpg"
-"maps/earth/openstreetmap/Vesuvius.jpg"
-DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap)
-
-FILE(GLOB OSM_LEGEND_ICONS maps/earth/openstreetmap/legend/*.png)
-install (FILES ${OSM_LEGEND_ICONS} DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/legend)
-FILE(GLOB OSM_LEGEND_ICONS maps/earth/openstreetmap/legend/mapicons/*.png)
-install (FILES ${OSM_LEGEND_ICONS} DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/legend/mapicons)
-
-install (FILES
-maps/earth/openstreetmap/0/0/0.png
-DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/0/0)
+install (DIRECTORY maps/earth/openstreetmap
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth
+)
 
 install (FILES
 maps/earth/hillshading/0/0/0.png
