@@ -34,6 +34,7 @@ namespace Marble
 
         Q_PROPERTY(int mapWidth READ mapWidth WRITE setMapWidth NOTIFY mapWidthChanged)
         Q_PROPERTY(int mapHeight READ mapHeight WRITE setMapHeight NOTIFY mapHeightChanged)
+        Q_PROPERTY(int zoom READ zoom WRITE setZoom NOTIFY zoomChanged)
         Q_PROPERTY(bool showFrameRate READ showFrameRate WRITE setShowFrameRate NOTIFY showFrameRateChanged)
         Q_PROPERTY(Projection projection READ projection WRITE setProjection NOTIFY projectionChanged)
         Q_PROPERTY(QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY mapThemeIdChanged)
@@ -54,6 +55,7 @@ namespace Marble
         Q_PROPERTY(Placemark*  currentPosition READ currentPosition NOTIFY currentPositionChanged)
         Q_PROPERTY(qreal speed READ speed NOTIFY speedChanged)
         Q_PROPERTY(qreal angle READ angle NOTIFY angleChanged)
+        Q_PROPERTY(bool inertialGlobeRotation READ inertialGlobeRotation WRITE setInertialGlobeRotation NOTIFY inertialGlobeRotationChanged)
 
     public:
         MarbleQuickItem(QQuickItem *parent = 0);
@@ -107,7 +109,8 @@ namespace Marble
         void setShowPositionMarker(bool showPositionMarker);
         void setPositionProvider(const QString & positionProvider);
 
-        // QQuickPaintedItem interface
+        void setInertialGlobeRotation(bool inertialGlobeRotation);
+
     public:
         void paint(QPainter *painter);
 
@@ -150,6 +153,8 @@ namespace Marble
         MarbleMap* map();
         const MarbleMap* map() const;
 
+        bool inertialGlobeRotation() const;
+
     signals:
         void mapWidthChanged(int mapWidth);
         void mapHeightChanged(int mapHeight);
@@ -174,6 +179,8 @@ namespace Marble
         void currentPositionChanged(Placemark* currentPosition);
         void angleChanged();
         void speedChanged();
+        void zoomChanged();
+        void inertialGlobeRotationChanged(bool inertialGlobeRotation);
 
     protected:
         QObject *getEventFilter() const;

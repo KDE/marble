@@ -168,6 +168,7 @@ namespace Marble
         connect(this, SIGNAL(heightChanged()), this, SLOT(resizeMap()));
         connect(d->map(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updatePositionVisibility()));
         connect(d->map(), SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SIGNAL(visibleLatLonAltBoxChanged()));
+        connect(d->map(), SIGNAL(radiusChanged(int)), this, SIGNAL(zoomChanged()));
 
         setAcceptedMouseButtons(Qt::AllButtons);
         installEventFilter(&d->m_inputHandler);
@@ -351,6 +352,11 @@ namespace Marble
     const MarbleMap* MarbleQuickItem::map() const
     {
         return d->map();
+    }
+
+    bool MarbleQuickItem::inertialGlobeRotation() const
+    {
+        return d->m_inputHandler.inertialEarthRotationEnabled();
     }
 
     qreal MarbleQuickItem::speed() const
@@ -689,6 +695,16 @@ namespace Marble
                 break;
             }
         }
+    }
+
+    void MarbleQuickItem::setInertialGlobeRotation(bool inertialGlobeRotation)
+    {
+        if (inertialGlobeRotation == d->m_inputHandler.inertialEarthRotationEnabled()) {
+            return;
+        }
+
+        d->m_inputHandler.setInertialEarthRotationEnabled(inertialGlobeRotation);
+        emit inertialGlobeRotationChanged(inertialGlobeRotation);
     }
 
     QObject *MarbleQuickItem::getEventFilter() const
