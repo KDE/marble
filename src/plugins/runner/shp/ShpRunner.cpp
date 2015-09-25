@@ -179,8 +179,6 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
                         else {
                             poly->appendInnerBoundary( ring );
                         }
-                        // TODO: outer boundary per SHP spec is for the clockwise ring
-                        // and inner holes are anticlockwise
                     }
                     if ( polygonCount > 1 ) {
                         placemark->setGeometry( multigeom );
