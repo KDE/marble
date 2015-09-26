@@ -231,7 +231,7 @@ QStringList RenderPlugin::settingKeys() const
 bool RenderPlugin::setSetting( const QString & key, const QVariant & value )
 {
     QHash< QString, QVariant> settings = this->settings();
-    if( settings.contains( key ) && settings.value( key ).type() == value.type() )
+    if( settings.contains( key ) )
     {
         settings [ key ] = value;
         setSettings( settings );
