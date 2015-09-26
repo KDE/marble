@@ -707,6 +707,15 @@ namespace Marble
         emit inertialGlobeRotationChanged(inertialGlobeRotation);
     }
 
+    void MarbleQuickItem::setPluginSetting(const QString &pluginId, const QString &key, const QString &value)
+    {
+        foreach (RenderPlugin* plugin, d->map()->renderPlugins()) {
+            if (plugin->nameId() == pluginId) {
+                plugin->setSetting(key, value);
+            }
+        }
+    }
+
     QObject *MarbleQuickItem::getEventFilter() const
     {   //We would want to install the same event filter for abstract layer QuickItems such as PinchArea
         return &d->m_inputHandler;

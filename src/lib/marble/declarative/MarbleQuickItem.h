@@ -111,6 +111,8 @@ namespace Marble
 
         void setInertialGlobeRotation(bool inertialGlobeRotation);
 
+        void setPluginSetting(const QString &plugin, const QString &key, const QString &value);
+
     public:
         void paint(QPainter *painter);
 
