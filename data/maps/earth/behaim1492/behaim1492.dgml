@@ -13,6 +13,7 @@
 
             <!-- The description allows for rich text of course: -->
             <description><![CDATA[<p> Martin Behaim's <i>Erdapfel</i> is the oldest existent globe of the Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-SA.</i></p>]]></description>
+            <license short="Germanisches Nationalmuseum, CC-BY-SA 3.0">Source: Germanisches Nationalmuseum, Nuremberg, License: Creative Commons Attribution-ShareAlike 3.0 Unported (CC-BY-SA 3.0).</license>
 
             <zoom>
                 <minimum>   900  </minimum>
