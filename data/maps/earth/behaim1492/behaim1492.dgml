@@ -54,11 +54,11 @@
             <layer name="naturalearth" backend="geodata">
                 <geodata name="coast" property="coastlines">
                     <sourcefile> naturalearth/ne_50m_land.pn2 </sourcefile>
-                    <pen color="#ffff00" width="1.5"/>
+                    <pen color="#c0c0c6" width="1.5"/>
                 </geodata>
                 <geodata name="lake" property="coastlines">
                     <sourcefile> naturalearth/ne_50m_lakes.pn2 </sourcefile>
-                    <pen color="#ffff00" width="1.5"/>
+                    <pen color="#c0c0c6" width="1.5"/>
                 </geodata>
             </layer>
 
