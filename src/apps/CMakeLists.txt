@@ -9,5 +9,6 @@ if (NOT CMAKE_SYSTEM_NAME STREQUAL Android)
 endif()
 
 if(QT5BUILD)
+    add_subdirectory(behaim)
     add_subdirectory(marble-maps)
 endif()

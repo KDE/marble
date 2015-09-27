@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>MainScreen.qml</file>
+        <file>Legend.qml</file>
+    </qresource>
+</RCC>
