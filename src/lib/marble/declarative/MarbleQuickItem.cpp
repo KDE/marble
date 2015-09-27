@@ -716,6 +716,16 @@ namespace Marble
         }
     }
 
+    void MarbleQuickItem::setPropertyEnabled(const QString &property, bool enabled)
+    {
+        d->map()->setPropertyValue(property, enabled);
+    }
+
+    bool MarbleQuickItem::isPropertyEnabled(const QString &property) const
+    {
+        return d->map()->propertyValue(property);
+    }
+
     QObject *MarbleQuickItem::getEventFilter() const
     {   //We would want to install the same event filter for abstract layer QuickItems such as PinchArea
         return &d->m_inputHandler;

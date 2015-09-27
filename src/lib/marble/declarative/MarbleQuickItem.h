@@ -113,6 +113,9 @@ namespace Marble
 
         void setPluginSetting(const QString &plugin, const QString &key, const QString &value);
 
+        void setPropertyEnabled(const QString &property, bool enabled);
+        bool isPropertyEnabled(const QString &property) const;
+
     public:
         void paint(QPainter *painter);
 
