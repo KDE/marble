@@ -4,6 +4,7 @@ TryExec=marble
 Exec=marble %F
 Name=KDE Marble
 Name[ca]=Marble del KDE
+Name[cs]=KDE Marble
 Name[de]=KDE-Marble
 Name[en_GB]=KDE Marble
 Name[es]=KDE Marble
