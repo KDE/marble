@@ -255,6 +255,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "railway", "preserved" ) ]          = GeoDataFeature::RailwayPreserved;
     s_visualCategories[ OsmTag( "railway", "abandoned" ) ]          = GeoDataFeature::RailwayAbandoned;
     s_visualCategories[ OsmTag( "railway", "disused" ) ]            = GeoDataFeature::RailwayAbandoned;
+    s_visualCategories[ OsmTag( "railway", "razed" ) ]              = GeoDataFeature::RailwayAbandoned;
     s_visualCategories[ OsmTag( "railway", "subway" ) ]             = GeoDataFeature::RailwaySubway;
     s_visualCategories[ OsmTag( "railway", "miniature" ) ]          = GeoDataFeature::RailwayMiniature;
     s_visualCategories[ OsmTag( "railway", "construction" ) ]       = GeoDataFeature::RailwayConstruction;
