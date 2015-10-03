@@ -154,7 +154,7 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
 
 void VectorTileModel::removeTilesOutOfView(const GeoDataLatLonBox &boundingBox)
 {
-    GeoDataLatLonBox const extendedViewport = boundingBox.scaled(2.0, 2.0);
+    GeoDataLatLonBox const extendedViewport = boundingBox.scaled(3.0, 3.0);
     for (auto iter = m_documents.begin(); iter != m_documents.end();) {
         bool const isOutOfView = !extendedViewport.contains(iter.value()->m_boundingBox);
         if (isOutOfView) {
@@ -218,7 +218,6 @@ void VectorTileModel::setViewport( int tileZoomLevel,
     for ( unsigned int x = minTileX; x <= maxTileX; ++x ) {
         for ( unsigned int y = minTileY; y <= maxTileY; ++y ) {
            const TileId tileId = TileId( 0, tileZoomLevel, x, y );
-
            if ( !m_documents.contains( tileId ) && !m_pendingDocuments.contains( tileId ) ) {
                m_pendingDocuments << tileId;
                TileRunner *job = new TileRunner( m_loader, m_layer, tileId );
