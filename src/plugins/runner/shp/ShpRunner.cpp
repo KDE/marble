@@ -34,18 +34,20 @@ ShpRunner::~ShpRunner()
 {
 }
 
-void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
+GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
     QFileInfo fileinfo( fileName );
     if( fileinfo.suffix().compare( "shp", Qt::CaseInsensitive ) != 0 ) {
-        emit parsingFinished( 0 );
-        return;
+        error = QString("File %1 does not have a shp suffix").arg(fileName);
+        mDebug() << error;
+        return nullptr;
     }
 
     SHPHandle handle = SHPOpen( fileName.toStdString().c_str(), "rb" );
     if ( !handle ) {
-        emit parsingFinished( 0 );
-        return;
+        error = QString("Failed to read %1").arg(fileName);
+        mDebug() << error;
+        return nullptr;
     }
     int entities;
     int shapeType;
@@ -213,10 +215,10 @@ void ShpRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
 
     if ( document->size() ) {
         document->setFileName( fileName );
-        emit parsingFinished( document );
+        return document;
     } else {
         delete document;
-        emit parsingFinished( 0 );
+        return nullptr;
     }
 }
 

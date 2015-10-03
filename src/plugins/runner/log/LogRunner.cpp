@@ -29,13 +29,13 @@ LogRunner::~LogRunner()
 {
 }
 
-void LogRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
+GeoDataDocument *LogRunner::parseFile(const QString &fileName, DocumentRole role, QString &errorString)
 {
     QFile file( fileName );
     if ( !file.exists() ) {
-        qWarning( "File does not exist!" );
-        emit parsingFinished( 0 );
-        return;
+        errorString = QString("File %1 does not exist").arg(fileName);
+        mDebug() << errorString;
+        return nullptr;
     }
 
     file.open( QIODevice::ReadOnly );
@@ -91,12 +91,11 @@ void LogRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     if ( track->size() == 0 || error ) {
         delete document;
         document = 0;
-        emit parsingFinished( 0 );
-        return;
+        return nullptr;
     }
 
     document->setFileName( fileName );
-    emit parsingFinished( document );
+    return document;
 }
 
 }

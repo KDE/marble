@@ -110,6 +110,8 @@ public:
      */
     void run();
 
+    void cancelParsing();
+
 Q_SIGNALS:
     void finished( ParsingTask *task );
 
@@ -117,6 +119,7 @@ private:
     ParsingRunner *const m_runner;
     QString m_fileName;
     DocumentRole m_role;
+    ParsingRunnerManager* m_manager;
 };
 
 }

@@ -21,7 +21,7 @@ class KmlRunner : public ParsingRunner
 public:
     explicit KmlRunner(QObject *parent = 0);
     ~KmlRunner();
-    virtual void parseFile( const QString &fileName, DocumentRole role );
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
 };
 
 }

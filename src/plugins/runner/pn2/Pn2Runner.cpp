@@ -114,19 +114,20 @@ bool Pn2Runner::importPolygon( QDataStream &stream, GeoDataLineString* linestrin
     return error;
 }
 
-void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
+GeoDataDocument *Pn2Runner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
     QFileInfo fileinfo( fileName );
     if( fileinfo.suffix().compare( "pn2", Qt::CaseInsensitive ) != 0 ) {
-        emit parsingFinished( 0 );
-        return;
+        error = QString("File %1 does not have a pn2 suffix").arg(fileName);
+        mDebug() << error;
+        return nullptr;
     }
 
     QFile  file( fileName );
     if ( !file.exists() ) {
-        qWarning( "File does not exist!" );
-        emit parsingFinished( 0 );
-        return;
+        error = QString("File %1 does not exist").arg(fileName);
+        mDebug() << error;
+        return nullptr;
     }
 
     file.open( QIODevice::ReadOnly );
@@ -135,16 +136,18 @@ void Pn2Runner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     m_stream >> m_fileHeaderVersion >> m_fileHeaderPolygons >> m_isMapColorField;
 
     switch( m_fileHeaderVersion ) {
-        case 1: parseForVersion1( fileName, role );
+        case 1: return parseForVersion1( fileName, role );
                 break;
-        case 2: parseForVersion2( fileName, role );
+        case 2: return parseForVersion2( fileName, role );
                 break;
         default: qDebug() << "File can't be parsed. We don't have parser for file header version:" << m_fileHeaderVersion;
                 break;
     }
+
+    return nullptr;
 }
 
-void Pn2Runner::parseForVersion1(const QString& fileName, DocumentRole role)
+GeoDataDocument* Pn2Runner::parseForVersion1(const QString& fileName, DocumentRole role)
 {
     GeoDataDocument *document = new GeoDataDocument();
     document->setDocumentRole( role );
@@ -232,15 +235,13 @@ void Pn2Runner::parseForVersion1(const QString& fileName, DocumentRole role)
     if ( error ) {
         delete document;
         document = 0;
-        emit parsingFinished( 0, "Errors occurred while parsing the .pn2 file!" );
-        return;
+        return nullptr;
     }
     document->setFileName( fileName );
-
-    emit parsingFinished( document );
+    return document;
 }
 
-void Pn2Runner::parseForVersion2( const QString &fileName, DocumentRole role )
+GeoDataDocument* Pn2Runner::parseForVersion2( const QString &fileName, DocumentRole role )
 {
     GeoDataDocument *document = new GeoDataDocument();
     document->setDocumentRole( role );
@@ -396,12 +397,10 @@ void Pn2Runner::parseForVersion2( const QString &fileName, DocumentRole role )
     if ( error ) {
         delete document;
         document = 0;
-        emit parsingFinished( 0, "Errors occurred while parsing the .pn2 file!" );
-        return;
+        return nullptr;
     }
     document->setFileName( fileName );
-
-    emit parsingFinished( document );
+    return document;
 }
 
 }

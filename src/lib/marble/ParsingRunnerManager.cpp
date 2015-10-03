@@ -36,7 +36,6 @@ public:
 
     ~Private();
 
-    void addParsingResult( GeoDataDocument *document, const QString &error = QString() );
     void cleanupParsingTask( ParsingTask *task );
 
     ParsingRunnerManager *const q;
@@ -55,16 +54,8 @@ ParsingRunnerManager::Private::Private( ParsingRunnerManager *parent, const Plug
 
 ParsingRunnerManager::Private::~Private()
 {
-    // nothing to do
-}
-
-void ParsingRunnerManager::Private::addParsingResult( GeoDataDocument *document, const QString &error )
-{
-    if ( document || !error.isEmpty() ) {
-        if (document) {
-            m_fileResult = document;
-        }
-        emit q->parsingFinished( document, error );
+    foreach(ParsingTask* task, m_parsingTasks) {
+        task->cancelParsing();
     }
 }
 
@@ -131,6 +122,16 @@ GeoDataDocument *ParsingRunnerManager::openFile( const QString &fileName, Docume
     parseFile( fileName, role);
     localEventLoop.exec();
     return d->m_fileResult;
+}
+
+void ParsingRunnerManager::addParsingResult(GeoDataDocument *document, const QString &error)
+{
+    if ( document || !error.isEmpty() ) {
+        if (document) {
+            d->m_fileResult = document;
+        }
+        emit parsingFinished( document, error );
+    }
 }
 
 }

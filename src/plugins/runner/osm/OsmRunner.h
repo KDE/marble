@@ -21,7 +21,7 @@ class OsmRunner : public ParsingRunner
 public:
     explicit OsmRunner(QObject *parent = 0);
     ~OsmRunner();
-    virtual void parseFile( const QString &fileName, DocumentRole role );
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
 };
 
 }

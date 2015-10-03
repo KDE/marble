@@ -21,7 +21,7 @@ class PntRunner : public ParsingRunner
 public:
     explicit PntRunner(QObject *parent = 0);
     ~PntRunner();
-    virtual void parseFile( const QString &fileName, DocumentRole role );
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
 };
 
 }

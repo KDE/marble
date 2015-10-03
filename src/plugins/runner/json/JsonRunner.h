@@ -22,7 +22,7 @@ class JsonRunner : public ParsingRunner
 public:
     explicit JsonRunner(QObject *parent = 0);
     ~JsonRunner();
-    virtual void parseFile( const QString &fileName, DocumentRole role );
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
 };
 
 }

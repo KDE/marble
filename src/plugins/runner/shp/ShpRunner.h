@@ -21,7 +21,7 @@ class ShpRunner : public ParsingRunner
 public:
     explicit ShpRunner(QObject *parent = 0);
     ~ShpRunner();
-    virtual void parseFile( const QString &fileName, DocumentRole role );
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
 };
 
 }

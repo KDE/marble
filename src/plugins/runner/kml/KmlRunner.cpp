@@ -33,7 +33,7 @@ KmlRunner::~KmlRunner()
 {
 }
 
-void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
+GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
     QString kmlFileName = fileName;
     QString kmzPath;
@@ -48,18 +48,18 @@ void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
             kmzPath = kmzHandler.kmzPath();
             kmzFiles = kmzHandler.kmzFiles();
         } else {
-            qWarning() << "File " << fileName << " is not a valid .kmz file";
-            emit parsingFinished( 0 );
-            return;
+            error = QString("File %1 is not a valid .kmz file").arg(fileName);
+            mDebug() << error;
+            return nullptr;
         }
     }
 #endif
 
     QFile  file( kmlFileName );
     if ( !file.exists() ) {
-        qWarning() << "File" << kmlFileName << "does not exist!";
-        emit parsingFinished( 0 );
-        return;
+        error = QString("File %1 does not exist").arg(fileName);
+        mDebug() << error;
+        return nullptr;
     }
 
     // Open file in right mode
@@ -68,8 +68,9 @@ void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     KmlParser parser;
 
     if ( !parser.read( &file ) ) {
-        emit parsingFinished( 0, parser.errorString() );
-        return;
+        error = parser.errorString();
+        mDebug() << error;
+        return nullptr;
     }
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
@@ -80,7 +81,7 @@ void KmlRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     doc->setFiles( kmzPath, kmzFiles );
 
     file.close();
-    emit parsingFinished( doc );
+    return doc;
 }
 
 }

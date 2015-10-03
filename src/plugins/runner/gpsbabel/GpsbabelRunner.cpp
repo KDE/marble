@@ -11,6 +11,7 @@
 
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
+#include "MarbleDebug.h"
 
 #include <QFile>
 #include <QProcess>
@@ -27,13 +28,13 @@ GpsbabelRunner::GpsbabelRunner( QObject *parent ) :
 {
 }
 
-void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role )
+GeoDataDocument *GpsbabelRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
     // Check and see if the file exists
     if ( !QFileInfo( fileName ).exists() ) {
-        qWarning( "File does not exist!" );
-        emit parsingFinished( 0 );
-        return;
+        error = QString("File %1 does not exist").arg(fileName);
+        mDebug() << error;
+        return nullptr;
     }
 
     // Inspect the filename suffix
@@ -50,9 +51,9 @@ void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role )
     fileTypes["csv"]      = "csv";
     QString const inputFileType = fileTypes[fileSuffix];
     if ( inputFileType.isEmpty() ) {
-        qWarning( "File type is not supported !" );
-        emit parsingFinished( 0 );
-        return;
+        error = QString("Unsupported file extension for").arg(fileName);
+        mDebug() << error;
+        return nullptr;
     }
 
     // Set up temporary file to hold output KML from gpsbabel executable
@@ -66,20 +67,24 @@ void GpsbabelRunner::parseFile( const QString &fileName, DocumentRole role )
     command += tempKmlFile.fileName();
 
     // Execute gpsbabel to parse the input file
-    if ( QProcess::execute( command ) == 0 ) {
+    int const exitStatus = QProcess::execute( command );
+    if ( exitStatus == 0 ) {
         kmlFile.open( QIODevice::ReadWrite );
         GeoDataParser parser( GeoData_KML );
         parser.read( &kmlFile );
         GeoDataDocument *document = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
         if ( !document ) {
-            emit parsingFinished( 0, "Unable to open " + fileName );
-            return;
+            error = parser.errorString();
+            mDebug() << error;
+            return nullptr;
         }
 
         document->setDocumentRole( role );
-        emit parsingFinished( document );
+        return document;
     } else {
-        emit parsingFinished( 0, "GPSBabel failed to parse the input file." );
+        error = QString("Gpsbabel returned error code %1").arg(exitStatus);
+        mDebug() << error;
+        return nullptr;
     }
 }
 

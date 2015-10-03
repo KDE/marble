@@ -36,19 +36,20 @@ PntRunner::~PntRunner()
 {
 }
 
-void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
+GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role, QString &errorString)
 {
     QFileInfo fileinfo( fileName );
     if( fileinfo.suffix().compare( "pnt", Qt::CaseInsensitive ) != 0 ) {
-        emit parsingFinished( 0 );
-        return;
+        errorString = QString("File %1 does not have a pnt suffix").arg(fileName);
+        mDebug() << errorString;
+        return nullptr;
     }
 
     QFile  file( fileName );
     if ( !file.exists() ) {
-        qWarning( "File does not exist!" );
-        emit parsingFinished( 0 );
-        return;
+        errorString = QString("File %1 does not exist").arg(fileName);
+        mDebug() << errorString;
+        return nullptr;
     }
 
     file.open( QIODevice::ReadOnly );
@@ -199,11 +200,10 @@ void PntRunner::parseFile( const QString &fileName, DocumentRole role = UnknownD
     if ( document->size() == 0 || error ) {
         delete document;
         document = 0;
-        emit parsingFinished( 0 );
-        return;
+        return nullptr;
     }
     document->setFileName( fileName );
-    emit parsingFinished( document );
+    return document;
 }
 
 }

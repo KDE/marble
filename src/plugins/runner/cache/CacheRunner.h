@@ -21,7 +21,7 @@ class CacheRunner : public ParsingRunner
 public:
     explicit CacheRunner(QObject *parent = 0);
     ~CacheRunner();
-    virtual void parseFile( const QString &fileName, DocumentRole role );
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
 
 };
 

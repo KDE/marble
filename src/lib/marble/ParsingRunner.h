@@ -28,20 +28,11 @@ public:
     explicit ParsingRunner( QObject *parent = 0 );
 
     /**
-      * Start a file parsing. Called by MarbleRunnerManager, runners
-      * are expected to return the result via the parsingFinished signal.
+      * Start a file parsing.
       * If implemented in a plugin, make sure to include Parsing in the
       * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
       */
-    virtual void parseFile( const QString &fileName, DocumentRole role ) = 0;
-
-Q_SIGNALS:
-    /**
-     * File parsing is finished, result in the given document object.
-     * The signal should be emitted with null document and error description in case of fault.
-     * To be emitted by runners after a @see parseFile call.
-     */
-    void parsingFinished( GeoDataDocument* document, const QString& error = QString() );
+    virtual GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) = 0;
 };
 
 }

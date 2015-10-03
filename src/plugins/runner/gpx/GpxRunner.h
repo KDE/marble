@@ -21,7 +21,7 @@ class GpxRunner : public ParsingRunner
 public:
     explicit GpxRunner(QObject *parent = 0);
     ~GpxRunner();
-    virtual void parseFile( const QString &fileName, DocumentRole role );
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
 
 };
 

@@ -12,6 +12,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
+#include "MarbleDebug.h"
 
 #include <QFile>
 #include <QDataStream>
@@ -30,13 +31,13 @@ CacheRunner::~CacheRunner()
 {
 }
 
-void CacheRunner::parseFile( const QString &fileName, DocumentRole role = UnknownDocument )
+GeoDataDocument* CacheRunner::parseFile( const QString &fileName, DocumentRole role, QString& error )
 {
     QFile file( fileName );
     if ( !file.exists() ) {
-        qWarning( "File does not exist!" );
-        emit parsingFinished( 0 );
-        return;
+        error = QString("File %1 does not exist").arg(fileName);
+        mDebug() << error;
+        return nullptr;
     }
 
     file.open( QIODevice::ReadOnly );
@@ -46,17 +47,16 @@ void CacheRunner::parseFile( const QString &fileName, DocumentRole role = Unknow
     quint32 magic;
     in >> magic;
     if ( magic != MarbleMagicNumber ) {
-        emit parsingFinished( 0 );
-        return;
+        return nullptr;
     }
 
     // Read the version
     qint32 version;
     in >> version;
     if ( version < 015 ) {
-        qDebug( "Bad Cache file - too old!" );
-        emit parsingFinished( 0 );
-        return;
+        error = QString("Bad cache file %1: Version %2 is too old, need 15 or later").arg(fileName).arg(version);
+        mDebug() << error;
+        return nullptr;
     }
     /*
       if (version > 002) {
@@ -109,7 +109,7 @@ void CacheRunner::parseFile( const QString &fileName, DocumentRole role = Unknow
     document->setFileName( fileName );
 
     file.close();
-    emit parsingFinished( document );
+    return document;
 }
 
 }
