@@ -110,9 +110,8 @@ public:
      */
     void run();
 
-    void cancelParsing();
-
 Q_SIGNALS:
+    void parsed(GeoDataDocument* document, const QString &error);
     void finished( ParsingTask *task );
 
 private:

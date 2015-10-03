@@ -88,23 +88,15 @@ ParsingTask::ParsingTask( ParsingRunner *runner, ParsingRunnerManager *manager, 
     m_role( role ),
     m_manager(manager)
 {
-    // nothing to do
+    connect(this, SIGNAL(parsed(GeoDataDocument*,QString)), m_manager, SLOT(addParsingResult(GeoDataDocument*,QString)));
 }
 
 void ParsingTask::run()
 {
     QString error;
     GeoDataDocument* document = m_runner->parseFile( m_fileName, m_role, error );
-    if (m_manager) {
-        m_manager->addParsingResult(document, error);
-        emit finished( this );
-    }
-}
-
-void ParsingTask::cancelParsing()
-{
-    // Keep the thread running, but ignore it's result once it finishes
-    m_manager = nullptr;
+    emit parsed(document, error);
+    emit finished( this );
 }
 
 }

@@ -52,9 +52,6 @@ public:
     void parseFile( const QString &fileName, DocumentRole role = UserDocument );
     GeoDataDocument *openFile( const QString &fileName, DocumentRole role = UserDocument, int timeout = 30000 );
 
-public Q_SLOTS:
-    void addParsingResult( GeoDataDocument *document, const QString &error = QString() );
-
 Q_SIGNALS:
     /**
      * The file was parsed and potential error message
@@ -68,6 +65,7 @@ Q_SIGNALS:
 
 private:
     Q_PRIVATE_SLOT( d, void cleanupParsingTask( ParsingTask *task ) )
+    Q_PRIVATE_SLOT( d, void addParsingResult( GeoDataDocument *document, const QString &error ) )
 
     class Private;
     friend class Private;
