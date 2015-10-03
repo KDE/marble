@@ -106,7 +106,7 @@ class MarbleModelPrivate
           m_routingManager( 0 ),
           m_legend( 0 ),
           m_workOffline( false ),
-          m_elevationModel( &m_downloadManager )
+          m_elevationModel( &m_downloadManager, &m_pluginManager )
     {
         m_descendantProxy.setSourceModel( &m_treeModel );
 

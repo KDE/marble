@@ -21,6 +21,7 @@
 #include "MarbleDebug.h"
 #include "MapThemeManager.h"
 #include "TileId.h"
+#include "PluginManager.h"
 
 #include <QLabel>
 #include <qmath.h>
@@ -31,9 +32,9 @@ namespace Marble
 class ElevationModelPrivate
 {
 public:
-    ElevationModelPrivate( ElevationModel *_q, HttpDownloadManager *downloadManager )
+    ElevationModelPrivate( ElevationModel *_q, HttpDownloadManager *downloadManager, PluginManager* pluginManager )
         : q( _q ),
-          m_tileLoader( downloadManager, 0 ),
+          m_tileLoader( downloadManager, pluginManager ),
           m_textureLayer( 0 )
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
@@ -71,9 +72,9 @@ public:
     QCache<TileId, const QImage> m_cache;
 };
 
-ElevationModel::ElevationModel( HttpDownloadManager *downloadManager, QObject *parent ) :
+ElevationModel::ElevationModel( HttpDownloadManager *downloadManager, PluginManager* pluginManager, QObject *parent ) :
     QObject( parent ),
-    d( new ElevationModelPrivate( this, downloadManager ) )
+    d( new ElevationModelPrivate( this, downloadManager, pluginManager ) )
 {
     connect( &d->m_tileLoader, SIGNAL(tileCompleted(TileId,QImage)),
              this, SLOT(tileCompleted(TileId,QImage)) );

@@ -46,6 +46,7 @@ class Q_DECL_HIDDEN TextureLayer::Private
 {
 public:
     Private( HttpDownloadManager *downloadManager,
+             PluginManager* pluginManager,
              const SunLocator *sunLocator,
              QAbstractItemModel *groundOverlayModel,
              TextureLayer *parent );
@@ -85,12 +86,13 @@ public:
 };
 
 TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
+                                PluginManager* pluginManager,
                                 const SunLocator *sunLocator,
                                 QAbstractItemModel *groundOverlayModel,
                                 TextureLayer *parent )
     : m_parent( parent )
     , m_sunLocator( sunLocator )
-    , m_loader( downloadManager, 0 )
+    , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
     , m_tileLoader( &m_layerDecorator )
     , m_centerCoordinates()
@@ -236,10 +238,11 @@ void TextureLayer::Private::addCustomTextures()
 }
 
 TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
+                            PluginManager* pluginManager,
                             const SunLocator *sunLocator,
                             QAbstractItemModel *groundOverlayModel )
     : QObject()
-    , d( new Private( downloadManager, sunLocator, groundOverlayModel, this ) )
+    , d( new Private( downloadManager, pluginManager, sunLocator, groundOverlayModel, this ) )
 {
     connect( &d->m_loader, SIGNAL(tileCompleted(TileId,QImage)),
              this, SLOT(updateTile(TileId,QImage)) );

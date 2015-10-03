@@ -40,6 +40,7 @@ class GeoDataDocument;
 class GeoSceneTileDataset;
 class GeoSceneTextureTileDataset;
 class GeoSceneVectorTileDataset;
+class ParsingRunnerManager;
 
 class TileLoader: public QObject
 {
@@ -53,6 +54,7 @@ class TileLoader: public QObject
     };
 
     explicit TileLoader(HttpDownloadManager * const, const PluginManager * );
+    ~TileLoader();
 
     QImage loadTileImage( GeoSceneTextureTileDataset const *textureData, TileId const & tileId, DownloadUsage const );
     GeoDataDocument* loadTileVectorData( GeoSceneVectorTileDataset const *vectorData, TileId const & tileId, DownloadUsage const usage );
@@ -76,6 +78,7 @@ class TileLoader: public QObject
 
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
+    void updateTile( QString const & fileName, QString const & idStr );
 
  Q_SIGNALS:
     void downloadTile( QUrl const & sourceUrl, QString const & destinationFileName,
@@ -83,15 +86,16 @@ class TileLoader: public QObject
 
     void tileCompleted( TileId const & tileId, QImage const & tileImage );
 
-    void tileCompleted( TileId const & tileId, GeoDataDocument * document, QString const & format );
+    void tileCompleted( TileId const & tileId, GeoDataDocument * document );
 
  private:
     static QString tileFileName( GeoSceneTileDataset const * tileData, TileId const & );
     void triggerDownload( GeoSceneTileDataset const *tileData, TileId const &, DownloadUsage const );
     static QImage scaledLowerLevelTile( GeoSceneTextureTileDataset const * textureData, TileId const & );
+    GeoDataDocument* openVectorFile(const QString &filename) const;
 
     // For vectorTile parsing
-    const PluginManager * m_pluginManager;
+    PluginManager const * m_pluginManager;
 };
 
 }

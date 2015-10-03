@@ -74,6 +74,7 @@ Q_SIGNALS:
 
  private:
     Q_PRIVATE_SLOT( d, void updateTextureLayers() )
+    Q_PRIVATE_SLOT( d, void updateTile(const TileId &tileId, GeoDataDocument* document) )
 
 
  private:

@@ -34,6 +34,7 @@ class GeoSceneTextureTileDataset;
 class HttpDownloadManager;
 class SunLocator;
 class ViewportParams;
+class PluginManager;
 
 class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 {
@@ -41,6 +42,7 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 
  public:
     TextureLayer( HttpDownloadManager *downloadManager,
+                  PluginManager* pluginManager,
                   const SunLocator *sunLocator,
                   QAbstractItemModel *groundOverlayModel );
 

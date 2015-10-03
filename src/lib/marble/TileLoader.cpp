@@ -27,13 +27,16 @@
 
 #include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneTileDataset.h"
+#include "GeoSceneTypes.h"
 #include "GeoSceneVectorTileDataset.h"
+#include "GeoDataDocument.h"
 #include "GeoDataContainer.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "ParsingRunnerManager.h"
 #include "TileLoaderHelper.h"
+#include "ParseRunnerPlugin.h"
+#include "ParsingRunner.h"
 
 Q_DECLARE_METATYPE( Marble::DownloadUsage )
 
@@ -41,13 +44,20 @@ namespace Marble
 {
 
 TileLoader::TileLoader(HttpDownloadManager * const downloadManager, const PluginManager *pluginManager) :
-      m_pluginManager( pluginManager )
+    m_pluginManager(pluginManager)
 {
     qRegisterMetaType<DownloadUsage>( "DownloadUsage" );
     connect( this, SIGNAL(downloadTile(QUrl,QString,QString,DownloadUsage)),
              downloadManager, SLOT(addJob(QUrl,QString,QString,DownloadUsage)));
+    connect( downloadManager, SIGNAL(downloadComplete(QString,QString)),
+             SLOT(updateTile(QString,QString)));
     connect( downloadManager, SIGNAL(downloadComplete(QByteArray,QString)),
              SLOT(updateTile(QByteArray,QString)));
+}
+
+TileLoader::~TileLoader()
+{
+    // nothing to do
 }
 
 // If the tile image file is locally available:
@@ -110,10 +120,8 @@ GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTileDataset const
         if ( file.exists() ) {
 
             // File is ready, so parse and return the vector data in any case
-            ParsingRunnerManager man( m_pluginManager );
-            GeoDataDocument* document = man.openFile( fileName );
-
-            if (document){
+            GeoDataDocument* document = openVectorFile(fileName);
+            if (document) {
                 return document;
             }
         }
@@ -206,20 +214,43 @@ TileLoader::TileStatus TileLoader::tileStatus( GeoSceneTileDataset const *tileDa
 void TileLoader::updateTile( QByteArray const & data, QString const & idStr )
 {
     QStringList const components = idStr.split( ':', QString::SkipEmptyParts );
-    Q_ASSERT( components.size() == 4 );
+    Q_ASSERT( components.size() == 5 );
 
-    QString const sourceDir = components[ 0 ];
-    int const zoomLevel = components[ 1 ].toInt();
-    int const tileX = components[ 2 ].toInt();
-    int const tileY = components[ 3 ].toInt();
+    QString const origin = components[0];
+    QString const sourceDir = components[ 1 ];
+    int const zoomLevel = components[ 2 ].toInt();
+    int const tileX = components[ 3 ].toInt();
+    int const tileY = components[ 4 ].toInt();
 
     TileId const id = TileId( sourceDir, zoomLevel, tileX, tileY );
 
-    QImage const tileImage = QImage::fromData( data );
-    if ( tileImage.isNull() )
-        return;
+    if (origin == GeoSceneTypes::GeoSceneTextureTileType) {
+        QImage const tileImage = QImage::fromData( data );
+        if ( tileImage.isNull() )
+            return;
 
-    emit tileCompleted( id, tileImage );
+        emit tileCompleted( id, tileImage );
+    }
+}
+
+void TileLoader::updateTile(const QString &fileName, const QString &idStr)
+{
+    QStringList const components = idStr.split( ':', QString::SkipEmptyParts );
+    Q_ASSERT( components.size() == 5 );
+
+    QString const origin = components[0];
+    QString const sourceDir = components[ 1 ];
+    int const zoomLevel = components[ 2 ].toInt();
+    int const tileX = components[ 3 ].toInt();
+    int const tileY = components[ 4 ].toInt();
+
+    TileId const id = TileId( sourceDir, zoomLevel, tileX, tileY );
+    if (origin == GeoSceneTypes::GeoSceneVectorTileType) {
+        GeoDataDocument* document = openVectorFile(MarbleDirs::path(fileName));
+        if (document) {
+            emit tileCompleted(id,  document);
+        }
+    }
 }
 
 QString TileLoader::tileFileName( GeoSceneTileDataset const * tileData, TileId const & tileId )
@@ -238,7 +269,7 @@ void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId co
 
     QUrl const sourceUrl = tileData->downloadUrl( id );
     QString const destFileName = tileData->relativeTileFileName( id );
-    QString const idStr = QString( "%1:%2:%3:%4" ).arg( tileData->sourceDir() ).arg( id.zoomLevel() ).arg( id.x() ).arg( id.y() );
+    QString const idStr = QString( "%1:%2:%3:%4:%5" ).arg( tileData->nodeType()).arg( tileData->sourceDir() ).arg( id.zoomLevel() ).arg( id.x() ).arg( id.y() );
     emit downloadTile( sourceUrl, destFileName, idStr, usage );
 }
 
@@ -284,6 +315,31 @@ QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTileDataset * text
 
     Q_ASSERT_X( false, "scaled image", "level zero image missing" ); // not reached
     return QImage();
+}
+
+GeoDataDocument *TileLoader::openVectorFile(const QString &fileName) const
+{
+    QList<const ParseRunnerPlugin*> plugins = m_pluginManager->parsingRunnerPlugins();
+    const QFileInfo fileInfo( fileName );
+    const QString suffix = fileInfo.suffix().toLower();
+    const QString completeSuffix = fileInfo.completeSuffix().toLower();
+
+    foreach( const ParseRunnerPlugin *plugin, plugins ) {
+        QStringList const extensions = plugin->fileExtensions();
+        if ( extensions.contains( suffix ) || extensions.contains( completeSuffix ) ) {
+            ParsingRunner* runner = plugin->newRunner();
+            QString error;
+            GeoDataDocument* document = runner->parseFile(fileName, UserDocument, error);
+            if (!document && !error.isEmpty()) {
+                mDebug() << QString("Failed to open vector tile %1: %2").arg(fileName).arg(error);
+            }
+            delete runner;
+            return document;
+        }
+    }
+
+    mDebug() << "Unable to open vector tile " << fileName << ": No suitable plugin registered to parse this file format";
+    return nullptr;
 }
 
 }

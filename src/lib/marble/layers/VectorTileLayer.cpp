@@ -25,6 +25,7 @@
 #include "TileLoader.h"
 #include "ViewportParams.h"
 #include "GeoDataLatLonAltBox.h"
+#include "HttpDownloadManager.h"
 
 namespace Marble
 {
@@ -39,6 +40,7 @@ public:
 
     ~Private();
 
+    void updateTile(const TileId &tileId, GeoDataDocument* document);
     void updateTextureLayers();
 
 public:
@@ -73,6 +75,13 @@ VectorTileLayer::Private::~Private()
     qDeleteAll( m_activeTexmappers );
 }
 
+void VectorTileLayer::Private::updateTile(const TileId &tileId, GeoDataDocument* document)
+{
+    foreach ( VectorTileModel *mapper, m_activeTexmappers ) {
+        mapper->updateTile(tileId, document);
+    }
+}
+
 void VectorTileLayer::Private::updateTextureLayers()
 {
     m_activeTexmappers.clear();
@@ -103,6 +112,8 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 {
     qRegisterMetaType<TileId>( "TileId" );
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
+
+    connect(&d->m_loader, SIGNAL(tileCompleted(TileId, GeoDataDocument*)), this, SLOT(updateTile(TileId, GeoDataDocument*)));
 }
 
 VectorTileLayer::~VectorTileLayer()
