@@ -46,7 +46,7 @@ const float GeoPolygonGraphicsItem::s_decorationZValue = -0.001;
 
 void GeoPolygonGraphicsItem::createDecorations()
 {
-    if (isDecoration()) {
+    if (isDecoration() || (!m_polygon && !m_ring )) {
         return;
     }
 
@@ -97,7 +97,7 @@ void GeoPolygonGraphicsItem::createDecorations()
     case GeoDataFeature::ReligionShinto:
     case GeoDataFeature::ReligionSikh:
     {
-        fake3D = new GeoPolygonGraphicsItem( feature(), m_polygon );
+        fake3D = m_polygon ? new GeoPolygonGraphicsItem( feature(), m_polygon ) : new GeoPolygonGraphicsItem( feature(), m_ring );
         fake3D->setZValue(this->zValue() + s_decorationZValue);
         double const height = extractBuildingHeight(8.0);
         m_buildingHeight = qBound(1.0, height, 1000.0);
@@ -214,7 +214,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
             } else if ( painter->brush().color() != style()->polyStyle().paintedColor() ) {
                 QImage textureImage = style()->polyStyle().textureImage();
                 if( !textureImage.isNull()){
-                    GeoDataCoordinates coords = m_polygon->latLonAltBox().center();
+                    GeoDataCoordinates coords = latLonAltBox().center();
                     qreal x, y;
                     viewport->screenCoordinates(coords, x, y);
                     QImage image( textureImage.size(), QImage::Format_ARGB32_Premultiplied );
