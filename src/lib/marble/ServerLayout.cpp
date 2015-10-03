@@ -92,6 +92,8 @@ CustomServerLayout::CustomServerLayout( GeoSceneTileDataset *texture )
 
 QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
+    const GeoDataLatLonBox bbox = id.toLatLonBox( m_textureLayer );
+
 #if QT_VERSION < 0x050000
     QString urlStr = prototypeUrl.toString();
 #else
@@ -101,6 +103,10 @@ QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id
     urlStr.replace( "{zoomLevel}", QString::number( id.zoomLevel() ) );
     urlStr.replace( "{x}", QString::number( id.x() ) );
     urlStr.replace( "{y}", QString::number( id.y() ) );
+    urlStr.replace( "{west}", QString::number( bbox.west( GeoDataCoordinates::Degree ), 'f', 12 ) );
+    urlStr.replace( "{south}", QString::number( bbox.south( GeoDataCoordinates::Degree ), 'f', 12 ) );
+    urlStr.replace( "{east}", QString::number( bbox.east( GeoDataCoordinates::Degree ), 'f', 12 ) );
+    urlStr.replace( "{north}", QString::number( bbox.north( GeoDataCoordinates::Degree ), 'f', 12 ) );
 
     return QUrl( urlStr );
 }
