@@ -35,7 +35,12 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setOsmData(m_osmData);
     placemark->setCoordinate(m_coordinates);
 
-    placemark->setName(m_osmData.tagValue("name"));
+    if ((category == GeoDataFeature::TransportCarShare || category == GeoDataFeature::MoneyAtm)
+            && m_osmData.containsTagKey("operator")) {
+        placemark->setName(m_osmData.tagValue("operator"));
+    } else {
+        placemark->setName(m_osmData.tagValue("name"));
+    }
     placemark->setZoomLevel( 18 );
     placemark->setVisualCategory(category);
     placemark->setStyle( 0 );
